@@ -42,7 +42,7 @@ function statusEffect(effect:Extract<Effect,{kind:'status'}>):string{
     weakened:`causa ${amountText} a menos de dano`,
   };
   const cap=def.cap;
-  return `Aplica ${def.name} em ${targets[effect.target??'enemyWeak']} por ${duration}: ${mechanics[effect.status]??def.description}.${amount>cap?' O efeito é limitado ao teto do estado ('+${percent(cap)}).':''}`;
+  return `Aplica ${def.name} em ${targets[effect.target??'enemyWeak']} por ${duration}: ${mechanics[effect.status]??def.description}.${amount>cap?` O efeito é limitado ao teto do estado (${percent(cap)}).`:''}`;
 }
 export function describeEffects(effects:Effect[],defaultTarget:Target):string[]{
   return effects.map(effect=>{
