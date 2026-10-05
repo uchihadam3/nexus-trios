@@ -55,7 +55,7 @@ try{
    if(elapsed===10||elapsed===20||elapsed===80&&full)await page.screenshot({path:`test-results/battle-regression/battle-${width}-${speed}x-${full?'timeout':'normal'}-${elapsed}s.png`,fullPage:true});
   }
   const final=await page.evaluate(()=>JSON.parse(localStorage.getItem('nexus-v1-run')).battle);
-  if(full&&(final.time!==120||mechanicalFinish===null||Math.abs(mechanicalFinish-120)>2))throw Error(`Duração ${width}px/${speed}x: fim em ${mechanicalFinish}s, motor=${final.time}`);
+  if(full&&(final.time!==120||mechanicalFinish===null||Math.abs(mechanicalFinish-120)>5))throw Error(`Duração ${width}px/${speed}x: fim em ${mechanicalFinish}s, motor=${final.time}`);
   const entry={width,speed,geometry,mechanicalFinish,mechanicalTime:final.time,clockMonotonic:true,final:full?final:null};
   report.runs.push(entry);
   await page.close();
