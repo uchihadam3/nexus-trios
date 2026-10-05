@@ -33,6 +33,9 @@ const imagePortraits:Record<string,string>={
   megumi:'/assets/portraits/megumi.jpg',yuji:'/assets/portraits/yuji.jpg',muzan:'/assets/portraits/muzan.jpg',inosuke:'/assets/portraits/inosuke.jpg',
   zenitsu:'/assets/portraits/zenitsu.jpeg',nezuko:'/assets/portraits/nezuko.jpg',tanjiro:'/assets/portraits/tanjiro.webp',sakura:'/assets/portraits/sakura.jpg',
   itachi:'/assets/portraits/itachi.jpg',kakashi:'/assets/portraits/kakashi.jpg',frieza:'/assets/portraits/frieza.jpeg',piccolo:'/assets/portraits/piccolo.jpg',gohan:'/assets/portraits/gohan.jpg',
+  blackpanther:'/assets/portraits/blackpanther.webp',scarletwitch:'/assets/portraits/scarletwitch.webp',vision:'/assets/portraits/vision.webp',antman:'/assets/portraits/antman.webp',
+  captainmarvel:'/assets/portraits/captainmarvel.webp',daredevil:'/assets/portraits/daredevil.webp',punisher:'/assets/portraits/punisher.webp',ghostrider:'/assets/portraits/ghostrider.webp',
+  blade:'/assets/portraits/blade.webp',moonknight:'/assets/portraits/moonknight.webp',storm:'/assets/portraits/storm.webp',
 };
 function character(e:Entry):Character {
   const {attack,visual,basicEffects, ...rest}=e;
