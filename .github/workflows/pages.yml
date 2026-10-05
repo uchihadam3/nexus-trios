@@ -26,6 +26,14 @@ jobs:
       - run: npm run lint
       - run: npm run typecheck
       - run: npm run build
+      - run: npx playwright install --with-deps chromium
+      - run: node scripts/battle-regression-browser.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: battle-regression-mobile
+          path: test-results/battle-regression
+          if-no-files-found: ignore
       - uses: actions/configure-pages@v5
         with:
           enablement: true
