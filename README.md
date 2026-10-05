@@ -2,6 +2,8 @@
 
 Jogo de batalhas automáticas em português, feito para celular e computador. Monte um trio, combine habilidades e enfrente dez confrontos em uma campanha.
 
+**Jogar na web:** https://uchihadam3.github.io/nexus-trios/
+
 ## Conteúdo do jogo
 
 - Elenco com 100 personagens e três habilidades por personagem.
