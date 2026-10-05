@@ -12,6 +12,12 @@ try{
  async function run(width,speed,full){
   const page=await browser.newPage({viewport:{width,height:844}});
   page.on('pageerror',error=>report.errors.push(`${width}/${speed}x: ${error.message}`));
+  await page.addInitScript(()=>{
+   for(const key of ['run','settings']){
+    const fixture=sessionStorage.getItem(`nexus-test-${key}`);
+    if(fixture){localStorage.setItem(`nexus-v1-${key}`,fixture);sessionStorage.removeItem(`nexus-test-${key}`);}
+   }
+  });
   await page.goto('http://127.0.0.1:5173',{waitUntil:'networkidle'});
   await page.evaluate(async speed=>{
    const {createBattle}=await import('/src/engine/battle.ts');
@@ -21,8 +27,8 @@ try{
    encounters[0]={...encounters[0],team:enemy,power:0,scale:1};
    const battle=createBattle(team,enemy,seed);
    for(const fighter of battle.fighters){fighter.maxHp=1e8;fighter.hp=fighter.side==='enemy'?8e7:1e8;}
-   localStorage.setItem('nexus-v1-run',JSON.stringify({seed,team,encounters,index:0,stage:'battle',draft:{...newDraft(seed),team},battle,recorded:false}));
-   localStorage.setItem('nexus-v1-settings',JSON.stringify({volume:0,musicVolume:0,effectsVolume:0,effects:true,speed,numbers:true,reducedMotion:false,auto:false,explanations:'normal'}));
+   sessionStorage.setItem('nexus-test-run',JSON.stringify({seed,team,encounters,index:0,stage:'battle',draft:{...newDraft(seed),team},battle,recorded:false}));
+   sessionStorage.setItem('nexus-test-settings',JSON.stringify({volume:0,musicVolume:0,effectsVolume:0,effects:true,speed,numbers:true,reducedMotion:false,auto:false,explanations:'normal'}));
   },speed);
   await page.reload({waitUntil:'networkidle'});
   await page.getByRole('button',{name:'Continuar jornada',exact:true}).click();
