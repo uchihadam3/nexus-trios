@@ -1,15 +1,36 @@
 import { describe,it,expect } from 'vitest';
 import { characters,byId } from '../src/data/characters';
 import { createBattle,stepBattle,simulate,applyEffects,resolve,updateDominion,intensity,targets } from '../src/engine/battle';
-import { generateCampaign,newDraft,pickDraft,skipDraft } from '../src/engine/campaign';
+import { generateCampaign,newDraft,pickDraft,skipDraft,validateCampaignUniqueness } from '../src/engine/campaign';
 import { shuffle } from '../src/engine/random';
 import type { Effect,Target } from '../src/engine/types';
 const player=['goku','pikachu','captain'],enemy=['vegeta','raven','hulk'];
 describe('Catálogo e seleção',()=>{
  it('100 fichas válidas com exatamente 3 habilidades e Flash mais rápido',()=>{expect(characters).toHaveLength(100);expect(new Set(characters.map(c=>c.id)).size).toBe(100);for(const c of characters){expect(c.skills).toHaveLength(3);expect(c.hp).toBeGreaterThan(0);for(const s of c.skills){expect(s.charge.length).toBeGreaterThan(0);expect(s.effects.length).toBeGreaterThan(0);}}expect([...characters].sort((a,b)=>a.interval-b.interval)[0].id).toBe('flash');});
  it('três pulos, sem repetição imediata e sem duplicar integrantes',()=>{let d=newDraft(124);for(let i=0;i<3;i++){const old=d.candidates;d=skipDraft(d);expect(d.skips).toBe(2-i);expect(d.candidates.some(x=>old.includes(x))).toBe(false);}expect(skipDraft(d)).toEqual(d);for(let i=0;i<3;i++){d=pickDraft(d,d.candidates[0]);expect(d.candidates.some(x=>d.team.includes(x))).toBe(false);}expect(new Set(d.team).size).toBe(3);expect(d.candidates).toHaveLength(0);});
- it('gera campanha determinística, progressiva e independente do jogador',()=>{const a=generateCampaign(765);expect(a).toEqual(generateCampaign(765));expect(a).toHaveLength(10);expect(a[9].scale).toBeGreaterThan(a[0].scale);expect(a[8].power).toBeGreaterThan(a[0].power);for(const e of a)expect(new Set(e.team).size).toBe(3);});
+ it('gera campanha determinística, progressiva e independente do jogador',()=>{const a=generateCampaign(765,player);expect(a).toEqual(generateCampaign(765,player));expect(a).toHaveLength(10);expect(a[9].scale).toBeGreaterThan(a[0].scale);expect(a[8].power).toBeGreaterThan(a[0].power);expect(validateCampaignUniqueness({team:player,encounters:a}).valid).toBe(true);for(const e of a)expect(new Set(e.team).size).toBe(3);});
 });
+ it('gera mil jornadas determinísticas sem repetir jogador nem inimigos, em várias seeds e trios',()=>{
+  const presets=[['batman','pikachu','gojo'],['goku','vegeta','naruto'],['superman','thor','hulk'],['light','spiderman','raven']];
+  const rng={rng:0x91a4};
+  for(let seed=1;seed<=1000;seed++){
+   const team=seed%5===0?shuffle(characters.map(c=>c.id),rng).slice(0,3):presets[seed%presets.length];
+   const first=generateCampaign(seed,team),second=generateCampaign(seed,team);
+   expect(first).toEqual(second);
+   const audit=validateCampaignUniqueness({team,encounters:first});
+   expect(audit).toEqual({valid:true,errors:[]});
+   const enemies=first.flatMap(e=>e.team);
+   expect(enemies).toHaveLength(30);
+   expect(new Set(enemies).size).toBe(30);
+   for(const id of team)expect(enemies).not.toContain(id);
+   for(const encounter of first)expect(new Set(encounter.team).size).toBe(3);
+  }
+ });
+ it('audita explicitamente uma repetição entre encontros como inválida',()=>{
+  const encounters=generateCampaign(44,player).map(e=>({...e,team:[...e.team]}));
+  encounters[1].team[0]=encounters[0].team[0];
+  expect(validateCampaignUniqueness({team:player,encounters}).valid).toBe(false);
+ });
 describe('Motor independente',()=>{
  it('seleciona pelo contexto da habilidade sem depender da posição dos personagens',()=>{
   const original=createBattle(['light','pikachu','wolverine'],['flash','hulk','batman'],0x8321);

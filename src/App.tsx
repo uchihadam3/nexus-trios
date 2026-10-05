@@ -42,8 +42,8 @@ export default function App(){
   const requestNew=()=>{if(run&&(run.stage!=='result'||run.battle?.winner==='player'&&run.index<9))setConfirmNew(true);else startNew();};
   const startBattle=(index:number)=>{
     const current=runRef.current;if(!current)return;
-    const team=current.draft.team,encounter=current.encounters[index];
-    const next={...current,team,index,stage:'battle' as const,recorded:false,battle:createBattle(team,encounter.team,current.seed+index*7919,encounter.scale)};
+    const team=current.draft.team,encounters=current.stage==='draft'?generateCampaign(current.seed,team):current.encounters,encounter=encounters[index];
+    const next={...current,team,encounters,index,stage:'battle' as const,recorded:false,battle:createBattle(team,encounter.team,current.seed+index*7919,encounter.scale)};
     direction.current=null;setPresentation(null);changeRun(next);setPaused(false);navigate('game');
     if(index===0)setProfile(p=>{const n={...p,journeys:p.journeys+1};save('profile',n);return n;});
   };
