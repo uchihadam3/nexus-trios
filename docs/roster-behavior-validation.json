@@ -1,0 +1,484 @@
+{
+  "samplesPerCharacter": 12,
+  "groupSummary": {
+    "redesigned": {
+      "count": 21,
+      "passed": 21,
+      "failed": []
+    },
+    "adjusted": {
+      "count": 31,
+      "passed": 31,
+      "failed": []
+    },
+    "excellent": {
+      "count": 24,
+      "passed": 24,
+      "failed": []
+    }
+  },
+  "characters": {
+    "gohan": {
+      "sequence": "habilidade 3 (Despertar) emitiu efeito de damage/status",
+      "trials": 12,
+      "passes": 12,
+      "status": "comprovada"
+    },
+    "piccolo": {
+      "sequence": "cast inimigo → leitura marca e enfraquece a ameaça",
+      "trials": 12,
+      "passes": 12,
+      "status": "comprovada"
+    },
+    "frieza": {
+      "sequence": "habilidade 2 (Raio mortal) emitiu efeito de damage/status",
+      "trials": 12,
+      "passes": 12,
+      "status": "comprovada"
+    },
+    "kakashi": {
+      "sequence": "habilidade 3 (Cópia perfeita) emitiu efeito de damage/interrupt/status",
+      "trials": 12,
+      "passes": 12,
+      "status": "comprovada"
+    },
+    "itachi": {
+      "sequence": "habilidade 3 (Susanoo) emitiu efeito de damage/status",
+      "trials": 12,
+      "passes": 12,
+      "status": "comprovada"
+    },
+    "sakura": {
+      "sequence": "aliado ferido → Byakugou cura e regenera o trio",
+      "trials": 12,
+      "passes": 12,
+      "status": "comprovada"
+    },
+    "tanjiro": {
+      "sequence": "habilidade 3 (Hinokami Kagura) emitiu efeito de damage/interrupt",
+      "trials": 12,
+      "passes": 12,
+      "status": "comprovada"
+    },
+    "nezuko": {
+      "sequence": "habilidade 2 (Explosão de sangue) emitiu efeito de damage/status",
+      "trials": 12,
+      "passes": 12,
+      "status": "comprovada"
+    },
+    "zenitsu": {
+      "sequence": "habilidade 3 (Seis dobras) emitiu efeito de status/damage",
+      "trials": 12,
+      "passes": 12,
+      "status": "comprovada"
+    },
+    "inosuke": {
+      "sequence": "cast inimigo → instinto atrasa e confunde a ameaça",
+      "trials": 12,
+      "passes": 12,
+      "status": "comprovada"
+    },
+    "muzan": {
+      "sequence": "ação → chicotes atingem e marcam os três inimigos",
+      "trials": 12,
+      "passes": 12,
+      "status": "comprovada"
+    },
+    "yuji": {
+      "sequence": "alvo vulnerável → Black Flash aplica a segunda onda",
+      "trials": 12,
+      "passes": 12,
+      "status": "comprovada"
+    },
+    "megumi": {
+      "sequence": "habilidade 3 (Jardim das sombras) emitiu efeito de damage/status",
+      "trials": 12,
+      "passes": 12,
+      "status": "comprovada"
+    },
+    "nobara": {
+      "sequence": "habilidade 3 (Grampo de cabelo) emitiu efeito de damage/status",
+      "trials": 12,
+      "passes": 12,
+      "status": "comprovada"
+    },
+    "sukuna": {
+      "sequence": "habilidade 3 (Santuário maligno) emitiu efeito de damage",
+      "trials": 12,
+      "passes": 12,
+      "status": "comprovada"
+    },
+    "ichigo": {
+      "sequence": "habilidade 2 (Máscara Hollow) emitiu efeito de status",
+      "trials": 12,
+      "passes": 12,
+      "status": "comprovada"
+    },
+    "rukia": {
+      "sequence": "habilidade 3 (Hakka no Togame) emitiu efeito de damage/status",
+      "trials": 12,
+      "passes": 12,
+      "status": "comprovada"
+    },
+    "aizen": {
+      "sequence": "habilidade 3 (Plano revelado) emitiu efeito de damage/status",
+      "trials": 12,
+      "passes": 12,
+      "status": "comprovada"
+    },
+    "kenpachi": {
+      "sequence": "habilidade 3 (Retirar o limitador) emitiu efeito de damage/status",
+      "trials": 12,
+      "passes": 12,
+      "status": "comprovada"
+    },
+    "eren": {
+      "sequence": "Condição baixa → endurecimento protege Eren",
+      "trials": 12,
+      "passes": 12,
+      "status": "comprovada"
+    },
+    "mikasa": {
+      "sequence": "habilidade 3 (Proteção decisiva) emitiu efeito de status/damage",
+      "trials": 12,
+      "passes": 12,
+      "status": "comprovada"
+    },
+    "levi": {
+      "sequence": "habilidade 3 (Execução relâmpago) emitiu efeito de damage",
+      "trials": 12,
+      "passes": 12,
+      "status": "comprovada"
+    },
+    "gon": {
+      "sequence": "habilidade 3 (Jajanken: Papel) emitiu efeito de damage/status",
+      "trials": 12,
+      "passes": 12,
+      "status": "comprovada"
+    },
+    "killua": {
+      "sequence": "habilidade 2 (Palma relâmpago) emitiu efeito de damage/interrupt/status",
+      "trials": 12,
+      "passes": 12,
+      "status": "comprovada"
+    },
+    "hisoka": {
+      "sequence": "habilidade 3 (Armadilha elástica) emitiu efeito de damage/status",
+      "trials": 12,
+      "passes": 12,
+      "status": "comprovada"
+    },
+    "kurapika": {
+      "sequence": "habilidade 3 (Olhos escarlates) emitiu efeito de status/damage",
+      "trials": 12,
+      "passes": 12,
+      "status": "comprovada"
+    },
+    "edward": {
+      "sequence": "habilidade 3 (Transmutação rápida) emitiu efeito de damage",
+      "trials": 12,
+      "passes": 12,
+      "status": "comprovada"
+    },
+    "alphonse": {
+      "sequence": "habilidade 3 (Barreira transmutada) emitiu efeito de shield/status",
+      "trials": 12,
+      "passes": 12,
+      "status": "comprovada"
+    },
+    "roy": {
+      "sequence": "habilidade 1 (Estalo de ignição) emitiu efeito de damage/status",
+      "trials": 12,
+      "passes": 12,
+      "status": "comprovada"
+    },
+    "guts": {
+      "sequence": "habilidade 3 (Último esforço) emitiu efeito de damage/status",
+      "trials": 12,
+      "passes": 12,
+      "status": "comprovada"
+    },
+    "griffith": {
+      "sequence": "aliado ameaçado → comando acelera/reposiciona o trio",
+      "trials": 12,
+      "passes": 12,
+      "status": "comprovada"
+    },
+    "jotaro": {
+      "sequence": "habilidade 3 (The World: instante) emitiu efeito de damage",
+      "trials": 12,
+      "passes": 12,
+      "status": "comprovada"
+    },
+    "dio": {
+      "sequence": "habilidade 3 (O Mundo) emitiu efeito de damage",
+      "trials": 12,
+      "passes": 12,
+      "status": "comprovada"
+    },
+    "giorno": {
+      "sequence": "aliado ferido → Vida criada cura e regenera",
+      "trials": 12,
+      "passes": 12,
+      "status": "comprovada"
+    },
+    "denji": {
+      "sequence": "habilidade 2 (Puxar a corda) emitiu efeito de damage/status/heal",
+      "trials": 12,
+      "passes": 12,
+      "status": "comprovada"
+    },
+    "power": {
+      "sequence": "Domínio em desvantagem → Prêmio de sangue explode e confunde",
+      "trials": 12,
+      "passes": 12,
+      "status": "comprovada"
+    },
+    "makima": {
+      "sequence": "habilidade 3 (Controle total) emitiu efeito de status/damage",
+      "trials": 12,
+      "passes": 12,
+      "status": "comprovada"
+    },
+    "frieren": {
+      "sequence": "preparação inimiga → magia carregada atrasa e atinge o conjurador",
+      "trials": 12,
+      "passes": 12,
+      "status": "comprovada"
+    },
+    "anya": {
+      "sequence": "habilidade 3 (Plano secreto) emitiu efeito de interrupt/status",
+      "trials": 12,
+      "passes": 12,
+      "status": "comprovada"
+    },
+    "loid": {
+      "sequence": "preparação inimiga → neutralização cancela o cast",
+      "trials": 12,
+      "passes": 12,
+      "status": "comprovada"
+    },
+    "yor": {
+      "sequence": "habilidade 2 (Investida elegante) emitiu efeito de damage/status",
+      "trials": 12,
+      "passes": 12,
+      "status": "comprovada"
+    },
+    "jinwoo": {
+      "sequence": "habilidade 3 (Exército das sombras) emitiu efeito de damage/status",
+      "trials": 12,
+      "passes": 12,
+      "status": "comprovada"
+    },
+    "kaneki": {
+      "sequence": "habilidade 3 (Centípede) emitiu efeito de damage/status",
+      "trials": 12,
+      "passes": 12,
+      "status": "comprovada"
+    },
+    "yugi": {
+      "sequence": "preparar duelo → Mago Negro → invocação final (ordem obrigatória)",
+      "trials": 12,
+      "passes": 12,
+      "status": "comprovada",
+      "note": ""
+    },
+    "kaiba": {
+      "sequence": "pressão direta → Dragão Branco → Ultimate Burst (ordem obrigatória)",
+      "trials": 12,
+      "passes": 12,
+      "status": "comprovada",
+      "note": ""
+    },
+    "blackpanther": {
+      "sequence": "recebe impacto → armazena energia cinética → descarrega e zera o estoque",
+      "trials": 12,
+      "passes": 12,
+      "status": "comprovada",
+      "note": ""
+    },
+    "scarletwitch": {
+      "sequence": "habilidade 3 (Distorção do caos) emitiu efeito de damage/status",
+      "trials": 12,
+      "passes": 12,
+      "status": "comprovada"
+    },
+    "vision": {
+      "sequence": "faseia → reduz o impacto recebido → volta sólido e usa raio solar",
+      "trials": 12,
+      "passes": 12,
+      "status": "comprovada",
+      "note": ""
+    },
+    "antman": {
+      "sequence": "inimigo ferido → formigas aceleram/reposicionam o trio",
+      "trials": 12,
+      "passes": 12,
+      "status": "comprovada"
+    },
+    "captainmarvel": {
+      "sequence": "absorve impacto → armazena energia → explosão binária a libera",
+      "trials": 12,
+      "passes": 12,
+      "status": "comprovada",
+      "note": ""
+    },
+    "daredevil": {
+      "sequence": "habilidade 1 (Radar sensorial) emitiu efeito de status",
+      "trials": 12,
+      "passes": 12,
+      "status": "comprovada"
+    },
+    "punisher": {
+      "sequence": "habilidade 3 (Alvo confirmado) emitiu efeito de damage",
+      "trials": 12,
+      "passes": 12,
+      "status": "comprovada"
+    },
+    "ghostrider": {
+      "sequence": "habilidade 3 (Penance Stare) emitiu efeito de damage/status",
+      "trials": 12,
+      "passes": 12,
+      "status": "comprovada"
+    },
+    "blade": {
+      "sequence": "habilidade 1 (Rastreio vampírico) emitiu efeito de status",
+      "trials": 12,
+      "passes": 12,
+      "status": "comprovada"
+    },
+    "moonknight": {
+      "sequence": "habilidade 3 (Julgamento de Khonshu) emitiu efeito de damage/status",
+      "trials": 12,
+      "passes": 12,
+      "status": "comprovada"
+    },
+    "storm": {
+      "sequence": "habilidade 3 (Olho da tempestade) emitiu efeito de damage/status",
+      "trials": 12,
+      "passes": 12,
+      "status": "comprovada"
+    },
+    "cyclops": {
+      "sequence": "habilidade 3 (Feixe concentrado) emitiu efeito de damage/interrupt",
+      "trials": 12,
+      "passes": 12,
+      "status": "comprovada"
+    },
+    "jeangrey": {
+      "sequence": "habilidade 3 (Fênix desperta) emitiu efeito de damage/status",
+      "trials": 12,
+      "passes": 12,
+      "status": "comprovada"
+    },
+    "rogue": {
+      "sequence": "habilidade 3 (Memória emprestada) emitiu efeito de damage/heal/status",
+      "trials": 12,
+      "passes": 12,
+      "status": "comprovada"
+    },
+    "gambit": {
+      "sequence": "habilidade 3 (Bastão cinético) emitiu efeito de damage/status",
+      "trials": 12,
+      "passes": 12,
+      "status": "comprovada"
+    },
+    "professorx": {
+      "sequence": "coordenação do trio: 6/6; interrupção mental: 6/6; dano básico configurado em 20",
+      "trials": 12,
+      "passes": 12,
+      "status": "comprovada"
+    },
+    "venom": {
+      "sequence": "habilidade 2 (Mordida predatória) emitiu efeito de heal/status",
+      "trials": 12,
+      "passes": 12,
+      "status": "comprovada"
+    },
+    "carnage": {
+      "sequence": "habilidade 1 (Lâminas vivas) emitiu efeito de damage/status",
+      "trials": 12,
+      "passes": 12,
+      "status": "comprovada"
+    },
+    "doctordoom": {
+      "sequence": "armadura tecnológica → ritual místico → contingência (ordem obrigatória)",
+      "trials": 12,
+      "passes": 12,
+      "status": "comprovada",
+      "note": ""
+    },
+    "loki": {
+      "sequence": "habilidade 2 (Troca de lugar) emitiu efeito de status",
+      "trials": 12,
+      "passes": 12,
+      "status": "comprovada"
+    },
+    "ultron": {
+      "sequence": "habilidade 3 (Evolução autônoma) emitiu efeito de damage/interrupt",
+      "trials": 12,
+      "passes": 12,
+      "status": "comprovada"
+    },
+    "greengoblin": {
+      "sequence": "habilidade 3 (Prancha armadilhada) emitiu efeito de damage/status",
+      "trials": 12,
+      "passes": 12,
+      "status": "comprovada"
+    },
+    "silversurfer": {
+      "sequence": "impacto recebido → transmutação vira proteção e mobilidade",
+      "trials": 12,
+      "passes": 12,
+      "status": "comprovada"
+    },
+    "galactus": {
+      "sequence": "habilidade 3 (Devoração cósmica) emitiu efeito de damage/status",
+      "trials": 12,
+      "passes": 12,
+      "status": "comprovada"
+    },
+    "starlord": {
+      "sequence": "habilidade 3 (Dança de distração) emitiu efeito de damage/status",
+      "trials": 12,
+      "passes": 12,
+      "status": "comprovada"
+    },
+    "groot": {
+      "sequence": "habilidade 3 (Muralha de galhos) emitiu efeito de damage/status",
+      "trials": 12,
+      "passes": 12,
+      "status": "comprovada"
+    },
+    "rocket": {
+      "sequence": "habilidade 3 (Arsenal pesado) emitiu efeito de damage/status",
+      "trials": 12,
+      "passes": 12,
+      "status": "comprovada"
+    },
+    "aquaman": {
+      "sequence": "habilidade 3 (Comando dos mares) emitiu efeito de damage/status",
+      "trials": 12,
+      "passes": 12,
+      "status": "comprovada"
+    },
+    "greenlantern": {
+      "sequence": "escudo do aliado ameaçado: 4/4; prisão que cancela preparação: 4/4; arma ofensiva contra abertura: 4/4",
+      "trials": 12,
+      "passes": 12,
+      "status": "comprovada"
+    },
+    "cyborg": {
+      "sequence": "habilidade 3 (Adaptação de sistema) emitiu efeito de interrupt/damage",
+      "trials": 12,
+      "passes": 12,
+      "status": "comprovada"
+    },
+    "shazam": {
+      "sequence": "habilidade 3 (Sabedoria de Salomão) emitiu efeito de interrupt/damage",
+      "trials": 12,
+      "passes": 12,
+      "status": "comprovada"
+    }
+  }
+}

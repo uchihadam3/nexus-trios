@@ -1,0 +1,826 @@
+[
+  {
+    "a": [
+      "goku",
+      "pikachu",
+      "captain"
+    ],
+    "b": [
+      "vegeta",
+      "raven",
+      "hulk"
+    ],
+    "seed": 42,
+    "state": {
+      "version": 1,
+      "seed": 42,
+      "rng": 3276632674,
+      "time": 74.60000000000004,
+      "fighters": [
+        {
+          "uid": "player-0",
+          "characterId": "goku",
+          "side": "player",
+          "slot": 0,
+          "hp": 0,
+          "maxHp": 1100,
+          "action": 0,
+          "skills": [
+            {
+              "charge": 100,
+              "cooldown": 0,
+              "executing": 0
+            },
+            {
+              "charge": 86.36760000000024,
+              "cooldown": 0,
+              "executing": 0
+            },
+            {
+              "charge": 79.10000000000025,
+              "cooldown": 0,
+              "executing": 0
+            }
+          ],
+          "statuses": [],
+          "shields": [],
+          "cast": null,
+          "investigation": {},
+          "traitTimer": 0,
+          "stats": {
+            "damage": 644.084,
+            "healing": 0,
+            "protection": 0,
+            "interrupts": 0,
+            "skills": 1,
+            "kills": 0
+          }
+        },
+        {
+          "uid": "player-1",
+          "characterId": "pikachu",
+          "side": "player",
+          "slot": 1,
+          "hp": 116.16,
+          "maxHp": 760,
+          "action": 0.004622624496984251,
+          "skills": [
+            {
+              "charge": 84.40000000000003,
+              "cooldown": 0,
+              "executing": 0
+            },
+            {
+              "charge": 1.6,
+              "cooldown": 0,
+              "executing": 0
+            },
+            {
+              "charge": 12,
+              "cooldown": 0,
+              "executing": 0
+            }
+          ],
+          "statuses": [
+            {
+              "id": "haste",
+              "remaining": 3.8000000000000105,
+              "intensity": 0.3,
+              "source": "player-1"
+            }
+          ],
+          "shields": [],
+          "cast": null,
+          "investigation": {},
+          "traitTimer": 3.500000000000003,
+          "stats": {
+            "damage": 2230.6064000000006,
+            "healing": 0,
+            "protection": 0,
+            "interrupts": 4,
+            "skills": 16,
+            "kills": 3
+          }
+        },
+        {
+          "uid": "player-2",
+          "characterId": "captain",
+          "side": "player",
+          "slot": 2,
+          "hp": 0,
+          "maxHp": 1210,
+          "action": 0,
+          "skills": [
+            {
+              "charge": 84.44999999999999,
+              "cooldown": 0,
+              "executing": 0
+            },
+            {
+              "charge": 56.6000000000002,
+              "cooldown": 0,
+              "executing": 0
+            },
+            {
+              "charge": 26.500000000000032,
+              "cooldown": 0,
+              "executing": 0
+            }
+          ],
+          "statuses": [],
+          "shields": [],
+          "cast": null,
+          "investigation": {},
+          "traitTimer": 0,
+          "stats": {
+            "damage": 1502.1695999999997,
+            "healing": 300,
+            "protection": 460,
+            "interrupts": 0,
+            "skills": 8,
+            "kills": 0
+          }
+        },
+        {
+          "uid": "enemy-0",
+          "characterId": "vegeta",
+          "side": "enemy",
+          "slot": 0,
+          "hp": 0,
+          "maxHp": 1040,
+          "action": 0,
+          "skills": [
+            {
+              "charge": 98.23759999999947,
+              "cooldown": 0,
+              "executing": 0
+            },
+            {
+              "charge": 84.09999999999958,
+              "cooldown": 0,
+              "executing": 0
+            },
+            {
+              "charge": 48.816015999999955,
+              "cooldown": 0,
+              "executing": 0
+            }
+          ],
+          "statuses": [],
+          "shields": [],
+          "cast": null,
+          "investigation": {},
+          "traitTimer": 0.6999999999999984,
+          "stats": {
+            "damage": 234.22000000000003,
+            "healing": 0,
+            "protection": 0,
+            "interrupts": 0,
+            "skills": 0,
+            "kills": 0
+          }
+        },
+        {
+          "uid": "enemy-1",
+          "characterId": "raven",
+          "side": "enemy",
+          "slot": 1,
+          "hp": 0,
+          "maxHp": 870,
+          "action": 0,
+          "skills": [
+            {
+              "charge": 64.40000000000009,
+              "cooldown": 0,
+              "executing": 0
+            },
+            {
+              "charge": 96.61984000000041,
+              "cooldown": 0,
+              "executing": 0
+            },
+            {
+              "charge": 38.59999999999989,
+              "cooldown": 0,
+              "executing": 0
+            }
+          ],
+          "statuses": [],
+          "shields": [],
+          "cast": null,
+          "investigation": {},
+          "traitTimer": 0,
+          "stats": {
+            "damage": 818.5,
+            "healing": 469.5,
+            "protection": 690,
+            "interrupts": 1,
+            "skills": 5,
+            "kills": 0
+          }
+        },
+        {
+          "uid": "enemy-2",
+          "characterId": "hulk",
+          "side": "enemy",
+          "slot": 2,
+          "hp": 0,
+          "maxHp": 1550,
+          "action": 0,
+          "skills": [
+            {
+              "charge": 27.79999999999999,
+              "cooldown": 0,
+              "executing": 0
+            },
+            {
+              "charge": 75.19999999999999,
+              "cooldown": 0,
+              "executing": 0
+            },
+            {
+              "charge": 95.42719999999983,
+              "cooldown": 0,
+              "executing": 0
+            }
+          ],
+          "statuses": [],
+          "shields": [],
+          "cast": null,
+          "investigation": {},
+          "traitTimer": 0,
+          "stats": {
+            "damage": 2201.1199999999994,
+            "healing": 447.3599999999999,
+            "protection": 0,
+            "interrupts": 0,
+            "skills": 6,
+            "kills": 2
+          }
+        }
+      ],
+      "dominion": 13.54148892570107,
+      "momentum": 0.7393836625431756,
+      "winner": "player",
+      "reason": "Incapacitação da equipe",
+      "finished": true,
+      "turns": 0,
+      "lastLead": "player"
+    }
+  },
+  {
+    "a": [
+      "light",
+      "wolverine",
+      "pikachu"
+    ],
+    "b": [
+      "gojo",
+      "thanos",
+      "batman"
+    ],
+    "seed": 13,
+    "state": {
+      "version": 1,
+      "seed": 13,
+      "rng": 2509403425,
+      "time": 56.600000000000534,
+      "fighters": [
+        {
+          "uid": "player-0",
+          "characterId": "light",
+          "side": "player",
+          "slot": 0,
+          "hp": 0,
+          "maxHp": 700,
+          "action": 0,
+          "skills": [
+            {
+              "charge": 72.4,
+              "cooldown": 0,
+              "executing": 0
+            },
+            {
+              "charge": 63.400000000000134,
+              "cooldown": 0,
+              "executing": 0
+            },
+            {
+              "charge": 100,
+              "cooldown": 0,
+              "executing": 0
+            }
+          ],
+          "statuses": [],
+          "shields": [],
+          "cast": null,
+          "investigation": {
+            "enemy-0": 86,
+            "enemy-2": 66,
+            "enemy-1": 10
+          },
+          "traitTimer": 0,
+          "stats": {
+            "damage": 123.12,
+            "healing": 0,
+            "protection": 0,
+            "interrupts": 0,
+            "skills": 3,
+            "kills": 0
+          }
+        },
+        {
+          "uid": "player-1",
+          "characterId": "wolverine",
+          "side": "player",
+          "slot": 1,
+          "hp": 1250,
+          "maxHp": 1250,
+          "action": 0.00048145823698431123,
+          "skills": [
+            {
+              "charge": 0,
+              "cooldown": 3,
+              "executing": 0.7
+            },
+            {
+              "charge": 10.799999999999994,
+              "cooldown": 0,
+              "executing": 0
+            },
+            {
+              "charge": 100,
+              "cooldown": 0,
+              "executing": 0
+            }
+          ],
+          "statuses": [
+            {
+              "id": "haste",
+              "remaining": 3.10000000000001,
+              "intensity": 0.3,
+              "source": "player-2"
+            }
+          ],
+          "shields": [],
+          "cast": null,
+          "investigation": {},
+          "traitTimer": 0.6000000000000001,
+          "stats": {
+            "damage": 1672.02,
+            "healing": 0,
+            "protection": 639.2,
+            "interrupts": 0,
+            "skills": 7,
+            "kills": 2
+          }
+        },
+        {
+          "uid": "player-2",
+          "characterId": "pikachu",
+          "side": "player",
+          "slot": 2,
+          "hp": 324,
+          "maxHp": 760,
+          "action": 0.23791752747393868,
+          "skills": [
+            {
+              "charge": 55.8,
+              "cooldown": 0,
+              "executing": 0
+            },
+            {
+              "charge": 4.3999999999999995,
+              "cooldown": 0,
+              "executing": 0
+            },
+            {
+              "charge": 12,
+              "cooldown": 0,
+              "executing": 0
+            }
+          ],
+          "statuses": [
+            {
+              "id": "haste",
+              "remaining": 3.10000000000001,
+              "intensity": 0.3,
+              "source": "player-2"
+            }
+          ],
+          "shields": [
+            {
+              "amount": 162,
+              "remaining": 1.7000000000000193,
+              "source": "player-1"
+            }
+          ],
+          "cast": null,
+          "investigation": {},
+          "traitTimer": 0,
+          "stats": {
+            "damage": 1764.86,
+            "healing": 0,
+            "protection": 0,
+            "interrupts": 3,
+            "skills": 11,
+            "kills": 1
+          }
+        },
+        {
+          "uid": "enemy-0",
+          "characterId": "gojo",
+          "side": "enemy",
+          "slot": 0,
+          "hp": 0,
+          "maxHp": 960,
+          "action": 0,
+          "skills": [
+            {
+              "charge": 99.54999999999968,
+              "cooldown": 0,
+              "executing": 0
+            },
+            {
+              "charge": 81.29999999999974,
+              "cooldown": 0,
+              "executing": 0
+            },
+            {
+              "charge": 61.54000000000028,
+              "cooldown": 0,
+              "executing": 0
+            }
+          ],
+          "statuses": [],
+          "shields": [],
+          "cast": null,
+          "investigation": {},
+          "traitTimer": 3.20000000000001,
+          "stats": {
+            "damage": 120,
+            "healing": 0,
+            "protection": 150,
+            "interrupts": 0,
+            "skills": 0,
+            "kills": 0
+          }
+        },
+        {
+          "uid": "enemy-1",
+          "characterId": "thanos",
+          "side": "enemy",
+          "slot": 1,
+          "hp": 0,
+          "maxHp": 1650,
+          "action": 0,
+          "skills": [
+            {
+              "charge": 46.299999999999976,
+              "cooldown": 0,
+              "executing": 0
+            },
+            {
+              "charge": 60.89999999999978,
+              "cooldown": 0,
+              "executing": 0
+            },
+            {
+              "charge": 3.079999999999999,
+              "cooldown": 0,
+              "executing": 0
+            }
+          ],
+          "statuses": [],
+          "shields": [],
+          "cast": null,
+          "investigation": {},
+          "traitTimer": 0.10000000000001169,
+          "stats": {
+            "damage": 747.2,
+            "healing": 0,
+            "protection": 175.97,
+            "interrupts": 0,
+            "skills": 2,
+            "kills": 1
+          }
+        },
+        {
+          "uid": "enemy-2",
+          "characterId": "batman",
+          "side": "enemy",
+          "slot": 2,
+          "hp": 0,
+          "maxHp": 950,
+          "action": 0,
+          "skills": [
+            {
+              "charge": 24,
+              "cooldown": 0,
+              "executing": 0
+            },
+            {
+              "charge": 83.09999999999957,
+              "cooldown": 0,
+              "executing": 0
+            },
+            {
+              "charge": 0,
+              "cooldown": 4.30000000000002,
+              "executing": 0
+            }
+          ],
+          "statuses": [],
+          "shields": [],
+          "cast": null,
+          "investigation": {},
+          "traitTimer": 0,
+          "stats": {
+            "damage": 268.8,
+            "healing": 0,
+            "protection": 260,
+            "interrupts": 0,
+            "skills": 2,
+            "kills": 0
+          }
+        }
+      ],
+      "dominion": 52.0810769361601,
+      "momentum": 5.93195412914256,
+      "winner": "player",
+      "reason": "Incapacitação da equipe",
+      "finished": true,
+      "turns": 0,
+      "lastLead": "player"
+    }
+  },
+  {
+    "a": [
+      "flash",
+      "strange",
+      "superman"
+    ],
+    "b": [
+      "magneto",
+      "sasuke",
+      "naruto"
+    ],
+    "seed": 88,
+    "state": {
+      "version": 1,
+      "seed": 88,
+      "rng": 193474382,
+      "time": 66.10000000000052,
+      "fighters": [
+        {
+          "uid": "player-0",
+          "characterId": "flash",
+          "side": "player",
+          "slot": 0,
+          "hp": 0,
+          "maxHp": 780,
+          "action": 0,
+          "skills": [
+            {
+              "charge": 36,
+              "cooldown": 0,
+              "executing": 0
+            },
+            {
+              "charge": 43.80000000000008,
+              "cooldown": 0,
+              "executing": 0
+            },
+            {
+              "charge": 28.99999999999998,
+              "cooldown": 0,
+              "executing": 0
+            }
+          ],
+          "statuses": [],
+          "shields": [],
+          "cast": null,
+          "investigation": {},
+          "traitTimer": 2.1999999999999984,
+          "stats": {
+            "damage": 709.9899999999999,
+            "healing": 0,
+            "protection": 0,
+            "interrupts": 0,
+            "skills": 3,
+            "kills": 1
+          }
+        },
+        {
+          "uid": "player-1",
+          "characterId": "strange",
+          "side": "player",
+          "slot": 1,
+          "hp": 0,
+          "maxHp": 880,
+          "action": 0,
+          "skills": [
+            {
+              "charge": 68.29999999999968,
+              "cooldown": 0,
+              "executing": 0
+            },
+            {
+              "charge": 84.29999999999988,
+              "cooldown": 0,
+              "executing": 0
+            },
+            {
+              "charge": 64.34999999999981,
+              "cooldown": 0,
+              "executing": 0
+            }
+          ],
+          "statuses": [],
+          "shields": [],
+          "cast": null,
+          "investigation": {},
+          "traitTimer": 0,
+          "stats": {
+            "damage": 556.6,
+            "healing": 0,
+            "protection": 482.29999999999995,
+            "interrupts": 2,
+            "skills": 5,
+            "kills": 0
+          }
+        },
+        {
+          "uid": "player-2",
+          "characterId": "superman",
+          "side": "player",
+          "slot": 2,
+          "hp": 1367.5,
+          "maxHp": 1440,
+          "action": 0.5909090909090892,
+          "skills": [
+            {
+              "charge": 25.199999999999974,
+              "cooldown": 0,
+              "executing": 0
+            },
+            {
+              "charge": 98.4480000000001,
+              "cooldown": 0,
+              "executing": 0
+            },
+            {
+              "charge": 0,
+              "cooldown": 3,
+              "executing": 0.7
+            }
+          ],
+          "statuses": [
+            {
+              "id": "strengthened",
+              "remaining": 9.40000000000002,
+              "intensity": 0.3600000000000001,
+              "source": "player-2"
+            }
+          ],
+          "shields": [],
+          "cast": null,
+          "investigation": {},
+          "traitTimer": 0,
+          "stats": {
+            "damage": 1995.5099999999945,
+            "healing": 0,
+            "protection": 851.1,
+            "interrupts": 0,
+            "skills": 8,
+            "kills": 2
+          }
+        },
+        {
+          "uid": "enemy-0",
+          "characterId": "magneto",
+          "side": "enemy",
+          "slot": 0,
+          "hp": 0,
+          "maxHp": 1050,
+          "action": 0,
+          "skills": [
+            {
+              "charge": 80.10000000000026,
+              "cooldown": 0,
+              "executing": 0
+            },
+            {
+              "charge": 53.39999999999985,
+              "cooldown": 0,
+              "executing": 0
+            },
+            {
+              "charge": 71.5,
+              "cooldown": 0,
+              "executing": 0
+            }
+          ],
+          "statuses": [],
+          "shields": [],
+          "cast": null,
+          "investigation": {},
+          "traitTimer": 3.1999999999999993,
+          "stats": {
+            "damage": 124,
+            "healing": 0,
+            "protection": 30,
+            "interrupts": 0,
+            "skills": 0,
+            "kills": 0
+          }
+        },
+        {
+          "uid": "enemy-1",
+          "characterId": "sasuke",
+          "side": "enemy",
+          "slot": 1,
+          "hp": 0,
+          "maxHp": 930,
+          "action": 0,
+          "skills": [
+            {
+              "charge": 26.900000000000023,
+              "cooldown": 0,
+              "executing": 0
+            },
+            {
+              "charge": 19.799999999999983,
+              "cooldown": 0,
+              "executing": 0
+            },
+            {
+              "charge": 31.800000000000015,
+              "cooldown": 0,
+              "executing": 0
+            }
+          ],
+          "statuses": [],
+          "shields": [],
+          "cast": null,
+          "investigation": {},
+          "traitTimer": 0,
+          "stats": {
+            "damage": 452,
+            "healing": 0,
+            "protection": 0,
+            "interrupts": 1,
+            "skills": 3,
+            "kills": 1
+          }
+        },
+        {
+          "uid": "enemy-2",
+          "characterId": "naruto",
+          "side": "enemy",
+          "slot": 2,
+          "hp": 0,
+          "maxHp": 1080,
+          "action": 0,
+          "skills": [
+            {
+              "charge": 8,
+              "cooldown": 0,
+              "executing": 0
+            },
+            {
+              "charge": 0,
+              "cooldown": 0.2999999999999985,
+              "executing": 0
+            },
+            {
+              "charge": 32.79999999999995,
+              "cooldown": 0,
+              "executing": 0
+            }
+          ],
+          "statuses": [],
+          "shields": [],
+          "cast": null,
+          "investigation": {},
+          "traitTimer": 0,
+          "stats": {
+            "damage": 1105.9,
+            "healing": 151.5,
+            "protection": 940.760000000001,
+            "interrupts": 0,
+            "skills": 10,
+            "kills": 1
+          }
+        }
+      ],
+      "dominion": 27.481236193966755,
+      "momentum": 0.07093526804082739,
+      "winner": "player",
+      "reason": "Incapacitação da equipe",
+      "finished": true,
+      "turns": 0,
+      "lastLead": "player"
+    }
+  }
+]

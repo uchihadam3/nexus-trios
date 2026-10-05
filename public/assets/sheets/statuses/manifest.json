@@ -1,0 +1,374 @@
+{
+  "category": "statuses",
+  "sourceSheet": "assets/ai-source/statuses.png",
+  "sourceResolution": [
+    1261,
+    1247
+  ],
+  "format": "PNG RGBA",
+  "resolution": [
+    680,
+    680
+  ],
+  "columns": 4,
+  "rows": 4,
+  "cell": [
+    160,
+    160
+  ],
+  "gutter": 8,
+  "margin": 8,
+  "count": 14,
+  "items": [
+    {
+      "id": "exposed",
+      "name": "Exposto",
+      "path": "/assets/statuses/exposed.png",
+      "row": 0,
+      "column": 0,
+      "cell": {
+        "x": 8,
+        "y": 8,
+        "width": 160,
+        "height": 160
+      },
+      "sourceCrop": {
+        "x": 1,
+        "y": 0,
+        "width": 312,
+        "height": 312
+      },
+      "crop": {
+        "x": 24,
+        "y": 24,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "paralyzed",
+      "name": "Paralisado",
+      "path": "/assets/statuses/paralyzed.png",
+      "row": 0,
+      "column": 1,
+      "cell": {
+        "x": 176,
+        "y": 8,
+        "width": 160,
+        "height": 160
+      },
+      "sourceCrop": {
+        "x": 316,
+        "y": 0,
+        "width": 312,
+        "height": 312
+      },
+      "crop": {
+        "x": 192,
+        "y": 24,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "protected",
+      "name": "Protegido",
+      "path": "/assets/statuses/protected.png",
+      "row": 0,
+      "column": 2,
+      "cell": {
+        "x": 344,
+        "y": 8,
+        "width": 160,
+        "height": 160
+      },
+      "sourceCrop": {
+        "x": 632,
+        "y": 0,
+        "width": 312,
+        "height": 312
+      },
+      "crop": {
+        "x": 360,
+        "y": 24,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "marked",
+      "name": "Marcado",
+      "path": "/assets/statuses/marked.png",
+      "row": 0,
+      "column": 3,
+      "cell": {
+        "x": 512,
+        "y": 8,
+        "width": 160,
+        "height": 160
+      },
+      "sourceCrop": {
+        "x": 947,
+        "y": 0,
+        "width": 312,
+        "height": 312
+      },
+      "crop": {
+        "x": 528,
+        "y": 24,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "slow",
+      "name": "Lento",
+      "path": "/assets/statuses/slow.png",
+      "row": 1,
+      "column": 0,
+      "cell": {
+        "x": 8,
+        "y": 176,
+        "width": 160,
+        "height": 160
+      },
+      "sourceCrop": {
+        "x": 1,
+        "y": 312,
+        "width": 312,
+        "height": 312
+      },
+      "crop": {
+        "x": 24,
+        "y": 192,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "haste",
+      "name": "Acelerado",
+      "path": "/assets/statuses/haste.png",
+      "row": 1,
+      "column": 1,
+      "cell": {
+        "x": 176,
+        "y": 176,
+        "width": 160,
+        "height": 160
+      },
+      "sourceCrop": {
+        "x": 316,
+        "y": 312,
+        "width": 312,
+        "height": 312
+      },
+      "crop": {
+        "x": 192,
+        "y": 192,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "confused",
+      "name": "Confuso",
+      "path": "/assets/statuses/confused.png",
+      "row": 1,
+      "column": 2,
+      "cell": {
+        "x": 344,
+        "y": 176,
+        "width": 160,
+        "height": 160
+      },
+      "sourceCrop": {
+        "x": 632,
+        "y": 312,
+        "width": 312,
+        "height": 312
+      },
+      "crop": {
+        "x": 360,
+        "y": 192,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "rooted",
+      "name": "Preso",
+      "path": "/assets/statuses/rooted.png",
+      "row": 1,
+      "column": 3,
+      "cell": {
+        "x": 512,
+        "y": 176,
+        "width": 160,
+        "height": 160
+      },
+      "sourceCrop": {
+        "x": 947,
+        "y": 312,
+        "width": 312,
+        "height": 312
+      },
+      "crop": {
+        "x": 528,
+        "y": 192,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "regen",
+      "name": "Regeneração",
+      "path": "/assets/statuses/regen.png",
+      "row": 2,
+      "column": 0,
+      "cell": {
+        "x": 8,
+        "y": 344,
+        "width": 160,
+        "height": 160
+      },
+      "sourceCrop": {
+        "x": 2,
+        "y": 624,
+        "width": 311,
+        "height": 311
+      },
+      "crop": {
+        "x": 24,
+        "y": 360,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "burning",
+      "name": "Queimando",
+      "path": "/assets/statuses/burning.png",
+      "row": 2,
+      "column": 1,
+      "cell": {
+        "x": 176,
+        "y": 344,
+        "width": 160,
+        "height": 160
+      },
+      "sourceCrop": {
+        "x": 317,
+        "y": 624,
+        "width": 311,
+        "height": 311
+      },
+      "crop": {
+        "x": 192,
+        "y": 360,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "electric",
+      "name": "Eletrificado",
+      "path": "/assets/statuses/electric.png",
+      "row": 2,
+      "column": 2,
+      "cell": {
+        "x": 344,
+        "y": 344,
+        "width": 160,
+        "height": 160
+      },
+      "sourceCrop": {
+        "x": 632,
+        "y": 624,
+        "width": 311,
+        "height": 311
+      },
+      "crop": {
+        "x": 360,
+        "y": 360,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "silenced",
+      "name": "Silenciado",
+      "path": "/assets/statuses/silenced.png",
+      "row": 2,
+      "column": 3,
+      "cell": {
+        "x": 512,
+        "y": 344,
+        "width": 160,
+        "height": 160
+      },
+      "sourceCrop": {
+        "x": 948,
+        "y": 624,
+        "width": 311,
+        "height": 311
+      },
+      "crop": {
+        "x": 528,
+        "y": 360,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "strengthened",
+      "name": "Fortalecido",
+      "path": "/assets/statuses/strengthened.png",
+      "row": 3,
+      "column": 0,
+      "cell": {
+        "x": 8,
+        "y": 512,
+        "width": 160,
+        "height": 160
+      },
+      "sourceCrop": {
+        "x": 1,
+        "y": 935,
+        "width": 312,
+        "height": 312
+      },
+      "crop": {
+        "x": 24,
+        "y": 528,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "weakened",
+      "name": "Enfraquecido",
+      "path": "/assets/statuses/weakened.png",
+      "row": 3,
+      "column": 1,
+      "cell": {
+        "x": 176,
+        "y": 512,
+        "width": 160,
+        "height": 160
+      },
+      "sourceCrop": {
+        "x": 316,
+        "y": 935,
+        "width": 312,
+        "height": 312
+      },
+      "crop": {
+        "x": 192,
+        "y": 528,
+        "width": 128,
+        "height": 128
+      }
+    }
+  ]
+}

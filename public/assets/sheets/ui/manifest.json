@@ -1,0 +1,424 @@
+{
+  "category": "ui",
+  "sourceSheet": "assets/ai-source/ui.png",
+  "sourceResolution": [
+    1284,
+    1225
+  ],
+  "format": "PNG RGBA",
+  "resolution": [
+    680,
+    680
+  ],
+  "columns": 4,
+  "rows": 4,
+  "cell": [
+    160,
+    160
+  ],
+  "gutter": 8,
+  "margin": 8,
+  "count": 16,
+  "items": [
+    {
+      "id": "ready",
+      "name": "Habilidade pronta",
+      "path": "/assets/ui/ready.png",
+      "row": 0,
+      "column": 0,
+      "cell": {
+        "x": 8,
+        "y": 8,
+        "width": 160,
+        "height": 160
+      },
+      "sourceCrop": {
+        "x": 7,
+        "y": 0,
+        "width": 306,
+        "height": 306
+      },
+      "crop": {
+        "x": 24,
+        "y": 24,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "cooldown",
+      "name": "Cooldown",
+      "path": "/assets/ui/cooldown.png",
+      "row": 0,
+      "column": 1,
+      "cell": {
+        "x": 176,
+        "y": 8,
+        "width": 160,
+        "height": 160
+      },
+      "sourceCrop": {
+        "x": 328,
+        "y": 0,
+        "width": 306,
+        "height": 306
+      },
+      "crop": {
+        "x": 192,
+        "y": 24,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "charging",
+      "name": "Carregando",
+      "path": "/assets/ui/charging.png",
+      "row": 0,
+      "column": 2,
+      "cell": {
+        "x": 344,
+        "y": 8,
+        "width": 160,
+        "height": 160
+      },
+      "sourceCrop": {
+        "x": 649,
+        "y": 0,
+        "width": 306,
+        "height": 306
+      },
+      "crop": {
+        "x": 360,
+        "y": 24,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "preparing",
+      "name": "Preparando",
+      "path": "/assets/ui/preparing.png",
+      "row": 0,
+      "column": 3,
+      "cell": {
+        "x": 512,
+        "y": 8,
+        "width": 160,
+        "height": 160
+      },
+      "sourceCrop": {
+        "x": 970,
+        "y": 0,
+        "width": 306,
+        "height": 306
+      },
+      "crop": {
+        "x": 528,
+        "y": 24,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "executing",
+      "name": "Executando",
+      "path": "/assets/ui/executing.png",
+      "row": 1,
+      "column": 0,
+      "cell": {
+        "x": 8,
+        "y": 176,
+        "width": 160,
+        "height": 160
+      },
+      "sourceCrop": {
+        "x": 7,
+        "y": 306,
+        "width": 306,
+        "height": 306
+      },
+      "crop": {
+        "x": 24,
+        "y": 192,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "buff",
+      "name": "Buff",
+      "path": "/assets/ui/buff.png",
+      "row": 1,
+      "column": 1,
+      "cell": {
+        "x": 176,
+        "y": 176,
+        "width": 160,
+        "height": 160
+      },
+      "sourceCrop": {
+        "x": 328,
+        "y": 306,
+        "width": 306,
+        "height": 306
+      },
+      "crop": {
+        "x": 192,
+        "y": 192,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "debuff",
+      "name": "Debuff",
+      "path": "/assets/ui/debuff.png",
+      "row": 1,
+      "column": 2,
+      "cell": {
+        "x": 344,
+        "y": 176,
+        "width": 160,
+        "height": 160
+      },
+      "sourceCrop": {
+        "x": 649,
+        "y": 306,
+        "width": 306,
+        "height": 306
+      },
+      "crop": {
+        "x": 360,
+        "y": 192,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "tempo-up",
+      "name": "Ação acelerada",
+      "path": "/assets/ui/tempo-up.png",
+      "row": 1,
+      "column": 3,
+      "cell": {
+        "x": 512,
+        "y": 176,
+        "width": 160,
+        "height": 160
+      },
+      "sourceCrop": {
+        "x": 970,
+        "y": 306,
+        "width": 306,
+        "height": 306
+      },
+      "crop": {
+        "x": 528,
+        "y": 192,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "tempo-down",
+      "name": "Ação atrasada",
+      "path": "/assets/ui/tempo-down.png",
+      "row": 2,
+      "column": 0,
+      "cell": {
+        "x": 8,
+        "y": 344,
+        "width": 160,
+        "height": 160
+      },
+      "sourceCrop": {
+        "x": 7,
+        "y": 612,
+        "width": 307,
+        "height": 307
+      },
+      "crop": {
+        "x": 24,
+        "y": 360,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "interrupt",
+      "name": "Interrupção",
+      "path": "/assets/ui/interrupt.png",
+      "row": 2,
+      "column": 1,
+      "cell": {
+        "x": 176,
+        "y": 344,
+        "width": 160,
+        "height": 160
+      },
+      "sourceCrop": {
+        "x": 328,
+        "y": 612,
+        "width": 307,
+        "height": 307
+      },
+      "crop": {
+        "x": 192,
+        "y": 360,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "history",
+      "name": "Histórico",
+      "path": "/assets/ui/history.png",
+      "row": 2,
+      "column": 2,
+      "cell": {
+        "x": 344,
+        "y": 344,
+        "width": 160,
+        "height": 160
+      },
+      "sourceCrop": {
+        "x": 649,
+        "y": 612,
+        "width": 307,
+        "height": 307
+      },
+      "crop": {
+        "x": 360,
+        "y": 360,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "inspect",
+      "name": "Inspeção",
+      "path": "/assets/ui/inspect.png",
+      "row": 2,
+      "column": 3,
+      "cell": {
+        "x": 512,
+        "y": 344,
+        "width": 160,
+        "height": 160
+      },
+      "sourceCrop": {
+        "x": 970,
+        "y": 612,
+        "width": 307,
+        "height": 307
+      },
+      "crop": {
+        "x": 528,
+        "y": 360,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "help",
+      "name": "Ajuda",
+      "path": "/assets/ui/help.png",
+      "row": 3,
+      "column": 0,
+      "cell": {
+        "x": 8,
+        "y": 512,
+        "width": 160,
+        "height": 160
+      },
+      "sourceCrop": {
+        "x": 7,
+        "y": 919,
+        "width": 306,
+        "height": 306
+      },
+      "crop": {
+        "x": 24,
+        "y": 528,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "domain",
+      "name": "Domínio",
+      "path": "/assets/ui/domain.png",
+      "row": 3,
+      "column": 1,
+      "cell": {
+        "x": 176,
+        "y": 512,
+        "width": 160,
+        "height": 160
+      },
+      "sourceCrop": {
+        "x": 328,
+        "y": 919,
+        "width": 306,
+        "height": 306
+      },
+      "crop": {
+        "x": 192,
+        "y": 528,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "victory",
+      "name": "Vitória",
+      "path": "/assets/ui/victory.png",
+      "row": 3,
+      "column": 2,
+      "cell": {
+        "x": 344,
+        "y": 512,
+        "width": 160,
+        "height": 160
+      },
+      "sourceCrop": {
+        "x": 649,
+        "y": 919,
+        "width": 306,
+        "height": 306
+      },
+      "crop": {
+        "x": 360,
+        "y": 528,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "defeat",
+      "name": "Derrota",
+      "path": "/assets/ui/defeat.png",
+      "row": 3,
+      "column": 3,
+      "cell": {
+        "x": 512,
+        "y": 512,
+        "width": 160,
+        "height": 160
+      },
+      "sourceCrop": {
+        "x": 970,
+        "y": 919,
+        "width": 306,
+        "height": 306
+      },
+      "crop": {
+        "x": 528,
+        "y": 528,
+        "width": 128,
+        "height": 128
+      }
+    }
+  ]
+}

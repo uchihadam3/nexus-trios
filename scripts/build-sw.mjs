@@ -1,0 +1,11 @@
+import { readdirSync,readFileSync,writeFileSync } from 'node:fs';
+import { createHash } from 'node:crypto';
+const walk=(dir)=>readdirSync(dir,{withFileTypes:true}).flatMap(e=>e.isDirectory()?walk(`${dir}/${e.name}`):[`${dir}/${e.name}`]);
+const files=walk('dist').filter(f=>!f.endsWith('/sw.js'));
+const version=createHash('sha256').update(files.map(f=>readFileSync(f)).join('')).digest('hex').slice(0,12);
+const assets=files.map(f=>f.replace('dist',''));
+writeFileSync('dist/sw.js',`const CACHE='nexus-${version}';const ASSETS=${JSON.stringify(assets)};
+self.addEventListener('install',event=>{event.waitUntil((async()=>{const cache=await caches.open(CACHE);await Promise.all(ASSETS.map(async path=>{const response=await fetch(path,{credentials:'same-origin'});if(response.ok&&!response.redirected)await cache.put(path,response);}));await self.skipWaiting();})());});
+self.addEventListener('activate',event=>{event.waitUntil((async()=>{for(const key of await caches.keys())if(key.startsWith('nexus-')&&key!==CACHE)await caches.delete(key);await self.clients.claim();})());});
+self.addEventListener('fetch',event=>{const url=new URL(event.request.url);if(event.request.method!=='GET'||url.origin!==self.location.origin)return;if(event.request.mode==='navigate'){event.respondWith(fetch(event.request).catch(async()=>await caches.match('/index.html')||Response.error()));return;}if(!ASSETS.includes(url.pathname))return;event.respondWith(caches.match(event.request).then(cached=>cached||fetch(event.request)));});
+`);

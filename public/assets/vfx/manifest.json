@@ -1,0 +1,106 @@
+{
+  "seed": "deterministic-20261004",
+  "frameSize": [
+    96,
+    96
+  ],
+  "columns": 4,
+  "rows": 3,
+  "fps": 20,
+  "families": {
+    "impact": {
+      "file": "impact.webp",
+      "frames": 12,
+      "loop": false
+    },
+    "energy": {
+      "file": "energy.webp",
+      "frames": 12,
+      "loop": false
+    },
+    "electric": {
+      "file": "electric.webp",
+      "frames": 12,
+      "loop": false
+    },
+    "fire": {
+      "file": "fire.webp",
+      "frames": 12,
+      "loop": false
+    },
+    "grand": {
+      "file": "grand.webp",
+      "frames": 12,
+      "loop": false
+    },
+    "slash": {
+      "file": "slash.webp",
+      "frames": 12,
+      "loop": false
+    },
+    "magic": {
+      "file": "magic.webp",
+      "frames": 12,
+      "loop": true
+    },
+    "dark": {
+      "file": "dark.webp",
+      "frames": 12,
+      "loop": true
+    },
+    "psychic": {
+      "file": "psychic.webp",
+      "frames": 12,
+      "loop": true
+    },
+    "shield": {
+      "file": "shield.webp",
+      "frames": 12,
+      "loop": true
+    },
+    "heal": {
+      "file": "heal.webp",
+      "frames": 12,
+      "loop": false
+    },
+    "regen": {
+      "file": "regen.webp",
+      "frames": 12,
+      "loop": true
+    },
+    "prison": {
+      "file": "prison.webp",
+      "frames": 12,
+      "loop": false
+    },
+    "interrupt": {
+      "file": "interrupt.webp",
+      "frames": 12,
+      "loop": false
+    },
+    "ko": {
+      "file": "ko.webp",
+      "frames": 12,
+      "loop": false
+    },
+    "buff": {
+      "file": "buff.webp",
+      "frames": 12,
+      "loop": false
+    },
+    "debuff": {
+      "file": "debuff.webp",
+      "frames": 12,
+      "loop": false
+    }
+  },
+  "arena": {
+    "file": "arena.webp",
+    "size": [
+      768,
+      1056
+    ],
+    "containsText": false,
+    "containsFigures": false
+  }
+}

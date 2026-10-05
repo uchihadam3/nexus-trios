@@ -1,0 +1,22 @@
+// Presentation seconds at 1×. Combat always retains its fixed 100 ms simulation step.
+export const PRESENTATION = {
+  gameRate: 0.86,
+  normalSeconds: 2.0,
+  skillSeconds: 3.0,
+  grandSeconds: 4.4,
+  preparationSeconds: 2.05,
+  interruptSeconds: 2.35,
+  knockoutSeconds: 2.45,
+  turnaroundSeconds: 2.65,
+  impactAt: 0.48,
+  criticalCondition: 0.25,
+  nearAction: 0.82,
+  grandPreparation: 2.5,
+  ambientParticles: 9,
+  impactParticles: 7,
+  particleLimit: 16,
+  maxConnections: 3,
+  vfxIntensity: 0.8,
+  renderIntervalMs: 40,
+  audio: { master: 65, music: 45, effects: 70, bpm: 108, bars: 64, musicSeconds: 142.2, duck: 0.32, maxActiveCues: 12, minorGap: 0.16, majorGap: 0.08 },
+} as const;
