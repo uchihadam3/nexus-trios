@@ -14,6 +14,14 @@ export function fallbackPoint(uid:string):Anchor{const [side,slot]=uid.split('-'
 const lerp=(a:number,b:number,t:number)=>a+(b-a)*t;
 const familiesWithTravel=new Set(['energy','electric','fire','slash','magic','psychic','dark']);
 
+export function isAreaBeat(beat:Beat|null,battle:Battle):boolean {
+  if(!beat)return false;
+  const source=battle.fighters.find(f=>f.uid===beat.event.source);
+  if(profileFor(source?.characterId??'',beat.event.skill)?.area)return true;
+  const direct=beat.events.filter(e=>e.source===beat.event.source&&e.target&&['damage','status','heal','shield'].includes(e.kind));
+  return new Set(direct.map(e=>e.target)).size>1;
+}
+
 /** Places generated family atlases and lets skill data choose a distinct staging motif. */
 export function BattleEffects({battle,beat,anchors,enabled,reduced}:{battle:Battle;beat:Beat|null;anchors:Anchors;enabled:boolean;reduced:boolean}){
   const point=(uid:string)=>anchors[uid]??fallbackPoint(uid);
@@ -34,8 +42,7 @@ export function BattleEffects({battle,beat,anchors,enabled,reduced}:{battle:Batt
   const projectile={x:lerp(p1.x,p2.x,flight),y:lerp(p1.y,p2.y,flight)};
   const dx=p2.x-p1.x,dy=(p2.y-p1.y)*1.28;
   const beamStyle={'--beam-angle':`${Math.atan2(dy,dx)*180/Math.PI}deg`,'--beam-length':`${Math.hypot(dx,dy)*flight}%`,'--beam-mid-x':`${p1.x+dx*flight/2}%`,'--beam-mid-y':`${p1.y+(p2.y-p1.y)*flight/2}%`} as CSSProperties;
-  const affected=beat?.events.filter(e=>e.target&&e.target!==e.source&&['damage','status','shield','heal','interrupt','block'].includes(e.kind))??[];
-  const area=!!profile?.area||new Set(affected.map(e=>e.target)).size>=3;
+  const area=isAreaBeat(beat,battle);
   const scale=profile?.scale??(beat?.grand?1.42:1);
   const connections=(beat?.impacted?beat.events:[]).filter(e=>['synergy','shield','heal','block'].includes(e.kind)&&e.target&&e.source!==e.target&&e.source.split('-')[0]===e.target.split('-')[0]).filter((e,i,a)=>a.findIndex(x=>x.source===e.source&&x.target===e.target)===i).slice(0,P.maxConnections);
   const statuses=(beat?.impacted?beat.events:[]).filter(e=>e.kind==='status'&&e.target).slice(0,3);
