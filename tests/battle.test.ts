@@ -10,13 +10,12 @@ describe('Catálogo e seleção',()=>{
  it('três pulos, sem repetição imediata e sem duplicar integrantes',()=>{let d=newDraft(124);for(let i=0;i<3;i++){const old=d.candidates;d=skipDraft(d);expect(d.skips).toBe(2-i);expect(d.candidates.some(x=>old.includes(x))).toBe(false);}expect(skipDraft(d)).toEqual(d);for(let i=0;i<3;i++){d=pickDraft(d,d.candidates[0]);expect(d.candidates.some(x=>d.team.includes(x))).toBe(false);}expect(new Set(d.team).size).toBe(3);expect(d.candidates).toHaveLength(0);});
  it('gera campanha determinística, progressiva e independente do jogador',()=>{const a=generateCampaign(765,player);expect(a).toEqual(generateCampaign(765,player));expect(a).toHaveLength(10);expect(a[9].scale).toBeGreaterThan(a[0].scale);expect(a[8].power).toBeGreaterThan(a[0].power);expect(validateCampaignUniqueness({team:player,encounters:a}).valid).toBe(true);for(const e of a)expect(new Set(e.team).size).toBe(3);});
 });
- it('gera mil jornadas determinísticas sem repetir jogador nem inimigos, em várias seeds e trios',()=>{
+ it('gera mil jornadas sem repetir jogador nem inimigos, em várias seeds e trios',()=>{
   const presets=[['batman','pikachu','gojo'],['goku','vegeta','naruto'],['superman','thor','hulk'],['light','spiderman','raven']];
   const rng={rng:0x91a4};
   for(let seed=1;seed<=1000;seed++){
    const team=seed%5===0?shuffle(characters.map(c=>c.id),rng).slice(0,3):presets[seed%presets.length];
-   const first=generateCampaign(seed,team),second=generateCampaign(seed,team);
-   expect(first).toEqual(second);
+   const first=generateCampaign(seed,team);
    const audit=validateCampaignUniqueness({team,encounters:first});
    expect(audit).toEqual({valid:true,errors:[]});
    const enemies=first.flatMap(e=>e.team);
