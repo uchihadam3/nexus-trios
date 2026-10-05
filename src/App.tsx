@@ -67,20 +67,20 @@ export default function App(){
       const current=runRef.current;if(!current||current.stage!=='battle'||!current.battle)return;
       if(!direction.current||direction.current.battle!==current.battle){direction.current=createDirection(current.battle);lastAudio.current=current.battle.nextEvent-1;lastDominionSound.current=current.battle.dominion;}
       const d=direction.current;
-      advanceDirection(d,elapsed*settings.speed,cue=>{
+      advanceDirection(d,elapsed,cue=>{
         if(cue.phase==='impact'&&d.active){
           const special=d.active.events.find(e=>e.kind==='ko')??d.active.events.find(e=>e.kind==='interrupt')??d.active.events.find(e=>e.kind==='block')??d.active.events.find(e=>e.kind==='turn');
           if(special)battleAudio.sound(special.kind==='interrupt'?(special.label.includes('atrasada')?'interrupt':'shatter'):special.kind==='block'?'block':special.kind==='ko'?'ko':'turn',4);
           else battleAudio.cue(cue);
         }else battleAudio.cue(cue);
-      });
-      const fighters=d.visible.fighters,critical=fighters.filter(f=>f.hp>0&&f.hp/f.maxHp<.34).length,casts=fighters.filter(f=>f.hp>0&&f.cast).length;
-      battleAudio.setMood({heat:Math.min(1,.15+critical*.13+casts*.17+Math.abs(d.visible.dominion)/150),pressure:d.visible.dominion/100,time:d.visible.time/120});
+      },settings.speed);
+      const fighters=d.battle.fighters,critical=fighters.filter(f=>f.hp>0&&f.hp/f.maxHp<.34).length,casts=fighters.filter(f=>f.hp>0&&f.cast).length;
+      battleAudio.setMood({heat:Math.min(1,.15+critical*.13+casts*.17+Math.abs(d.battle.dominion)/150),pressure:d.visible.dominion/100,time:d.battle.time/120});
       if(Math.abs(d.visible.dominion-lastDominionSound.current)>=20){battleAudio.sound('dominion',2);lastDominionSound.current=d.visible.dominion;}
       const ready=d.signals.find(e=>e.id>lastAudio.current&&e.kind==='ready');
       if(ready)battleAudio.sound('ready',1);
       if(d.signals.length)lastAudio.current=Math.max(lastAudio.current,...d.signals.map(e=>e.id));
-      setPresentation({battle:d.visible,beat:d.active?{...d.active}:null});
+      setPresentation({battle:d.battle,beat:d.active?{...d.active}:null});
       let next={...current,battle:d.battle};
       if(d.complete){
         next={...next,stage:'result',recorded:true};
