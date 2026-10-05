@@ -1,5 +1,20 @@
 import { hz,noise,tone } from './synth';
-export type Sound='action'|'physical'|'energy'|'electric'|'fire'|'magic'|'dark'|'psychic'|'slash'|'prison'|'impact'|'block'|'shield'|'heal'|'regen'|'buff'|'debuff'|'interrupt'|'ready'|'prepare'|'shatter'|'ko'|'dominion'|'turn'|'victory'|'defeat';
+export type Sound='action'|'physical'|'energy'|'electric'|'fire'|'magic'|'dark'|'psychic'|'slash'|'prison'|'impact'|'block'|'shield'|'heal'|'regen'|'buff'|'debuff'|'interrupt'|'ready'|'prepare'|'shatter'|'ko'|'dominion'|'turn'|'victory'|'defeat'|'energy-shot'|'energy-charge'|'electric-charge'|'fire-cast'|'magic-cast'|'grand-charge'|'grand-impact';
+export interface CueAsset {file:string;duration:number}
+const cue=(file:string,duration:number):CueAsset=>({file,duration});
+export const CUE_ASSETS:Record<Sound,CueAsset>={
+  action:cue('physical-light',.42),physical:cue('physical-heavy',.78),impact:cue('physical-heavy',.78),
+  energy:cue('energy-impact',.78),electric:cue('electric-hit',.48),fire:cue('fire-impact',.72),
+  magic:cue('magic-impact',.75),psychic:cue('magic-impact',.75),dark:cue('magic-impact',.75),
+  slash:cue('slash-heavy',.61),prison:cue('shield-hit',.55),block:cue('shield-hit',.55),shield:cue('shield-on',.68),
+  heal:cue('heal',.86),regen:cue('regen',.72),buff:cue('shield-on',.68),debuff:cue('interrupt',.38),
+  interrupt:cue('interrupt',.38),ready:cue('energy-charge',.95),prepare:cue('energy-charge',.95),
+  shatter:cue('shatter',.68),ko:cue('ko',1.05),dominion:cue('domain-turn',.82),turn:cue('domain-turn',.82),
+  victory:cue('victory',1.45),defeat:cue('defeat',1.25),
+  'energy-shot':cue('energy-shot',.58),'energy-charge':cue('energy-charge',.95),
+  'electric-charge':cue('electric-charge',.52),'fire-cast':cue('fire-cast',.72),
+  'magic-cast':cue('magic-cast',.95),'grand-charge':cue('grand-charge',1.25),'grand-impact':cue('grand-impact',1.18),
+};
 export function synthCue(ctx:BaseAudioContext,out:AudioNode,sound:Sound,time:number,power=1){
   const note=(f:number,d:number,g:number,type:OscillatorType='sine',end?:number,offset=0)=>tone(ctx,out,time+offset,f,d,g*power,type,end);
   const air=(d:number,g:number,f:number,offset=0)=>noise(ctx,out,time+offset,d,g*power,f);

@@ -1,0 +1,258 @@
+{
+  "sampleRate": 24000,
+  "channels": 1,
+  "encoding": "pcm_s16le",
+  "variants": 4,
+  "sounds": {
+    "physical-light": {
+      "file": "physical-light.wav",
+      "duration": 0.42,
+      "variantOffsets": [
+        0.0,
+        0.53,
+        1.06,
+        1.59
+      ]
+    },
+    "physical-heavy": {
+      "file": "physical-heavy.wav",
+      "duration": 0.78,
+      "variantOffsets": [
+        0.0,
+        0.89,
+        1.78,
+        2.67
+      ]
+    },
+    "energy-charge": {
+      "file": "energy-charge.wav",
+      "duration": 0.95,
+      "variantOffsets": [
+        0.0,
+        1.06,
+        2.12,
+        3.18
+      ]
+    },
+    "energy-shot": {
+      "file": "energy-shot.wav",
+      "duration": 0.58,
+      "variantOffsets": [
+        0.0,
+        0.69,
+        1.38,
+        2.07
+      ]
+    },
+    "energy-impact": {
+      "file": "energy-impact.wav",
+      "duration": 0.78,
+      "variantOffsets": [
+        0.0,
+        0.89,
+        1.78,
+        2.67
+      ]
+    },
+    "electric-charge": {
+      "file": "electric-charge.wav",
+      "duration": 0.52,
+      "variantOffsets": [
+        0.0,
+        0.63,
+        1.26,
+        1.89
+      ]
+    },
+    "electric-hit": {
+      "file": "electric-hit.wav",
+      "duration": 0.48,
+      "variantOffsets": [
+        0.0,
+        0.59,
+        1.18,
+        1.77
+      ]
+    },
+    "fire-cast": {
+      "file": "fire-cast.wav",
+      "duration": 0.72,
+      "variantOffsets": [
+        0.0,
+        0.83,
+        1.66,
+        2.49
+      ]
+    },
+    "fire-impact": {
+      "file": "fire-impact.wav",
+      "duration": 0.72,
+      "variantOffsets": [
+        0.0,
+        0.83,
+        1.66,
+        2.49
+      ]
+    },
+    "magic-cast": {
+      "file": "magic-cast.wav",
+      "duration": 0.95,
+      "variantOffsets": [
+        0.0,
+        1.06,
+        2.12,
+        3.18
+      ]
+    },
+    "magic-impact": {
+      "file": "magic-impact.wav",
+      "duration": 0.75,
+      "variantOffsets": [
+        0.0,
+        0.86,
+        1.72,
+        2.58
+      ]
+    },
+    "slash-fast": {
+      "file": "slash-fast.wav",
+      "duration": 0.36,
+      "variantOffsets": [
+        0.0,
+        0.47,
+        0.94,
+        1.41
+      ]
+    },
+    "slash-heavy": {
+      "file": "slash-heavy.wav",
+      "duration": 0.61,
+      "variantOffsets": [
+        0.0,
+        0.72,
+        1.44,
+        2.16
+      ]
+    },
+    "shield-on": {
+      "file": "shield-on.wav",
+      "duration": 0.68,
+      "variantOffsets": [
+        0.0,
+        0.79,
+        1.58,
+        2.37
+      ]
+    },
+    "shield-hit": {
+      "file": "shield-hit.wav",
+      "duration": 0.55,
+      "variantOffsets": [
+        0.0,
+        0.66,
+        1.32,
+        1.98
+      ]
+    },
+    "heal": {
+      "file": "heal.wav",
+      "duration": 0.86,
+      "variantOffsets": [
+        0.0,
+        0.97,
+        1.94,
+        2.91
+      ]
+    },
+    "regen": {
+      "file": "regen.wav",
+      "duration": 0.72,
+      "variantOffsets": [
+        0.0,
+        0.83,
+        1.66,
+        2.49
+      ]
+    },
+    "interrupt": {
+      "file": "interrupt.wav",
+      "duration": 0.38,
+      "variantOffsets": [
+        0.0,
+        0.49,
+        0.98,
+        1.47
+      ]
+    },
+    "shatter": {
+      "file": "shatter.wav",
+      "duration": 0.68,
+      "variantOffsets": [
+        0.0,
+        0.79,
+        1.58,
+        2.37
+      ]
+    },
+    "ko": {
+      "file": "ko.wav",
+      "duration": 1.05,
+      "variantOffsets": [
+        0.0,
+        1.16,
+        2.32,
+        3.48
+      ]
+    },
+    "grand-charge": {
+      "file": "grand-charge.wav",
+      "duration": 1.25,
+      "variantOffsets": [
+        0.0,
+        1.36,
+        2.72,
+        4.08
+      ]
+    },
+    "grand-impact": {
+      "file": "grand-impact.wav",
+      "duration": 1.18,
+      "variantOffsets": [
+        0.0,
+        1.29,
+        2.58,
+        3.87
+      ]
+    },
+    "domain-turn": {
+      "file": "domain-turn.wav",
+      "duration": 0.82,
+      "variantOffsets": [
+        0.0,
+        0.93,
+        1.86,
+        2.79
+      ]
+    },
+    "victory": {
+      "file": "victory.wav",
+      "duration": 1.45,
+      "variantOffsets": [
+        0.0,
+        1.56,
+        3.12,
+        4.68
+      ]
+    },
+    "defeat": {
+      "file": "defeat.wav",
+      "duration": 1.25,
+      "variantOffsets": [
+        0.0,
+        1.36,
+        2.72,
+        4.08
+      ]
+    }
+  }
+}

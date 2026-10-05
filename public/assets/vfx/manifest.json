@@ -1,97 +1,247 @@
 {
-  "seed": "deterministic-20261004",
-  "frameSize": [
-    96,
-    96
-  ],
+  "seed": 20261005,
+  "fps": 24,
   "columns": 4,
-  "rows": 3,
-  "fps": 20,
+  "rows": 4,
+  "supersampling": 2,
   "families": {
-    "impact": {
-      "file": "impact.webp",
-      "frames": 12,
-      "loop": false
+    "physical": {
+      "file": "physical.webp",
+      "frames": 16,
+      "fps": 24,
+      "frameSize": [
+        128,
+        128
+      ],
+      "columns": 4,
+      "rows": 4,
+      "loop": false,
+      "alpha": true,
+      "bytes": 139160
     },
     "energy": {
       "file": "energy.webp",
-      "frames": 12,
-      "loop": false
+      "frames": 16,
+      "fps": 24,
+      "frameSize": [
+        256,
+        256
+      ],
+      "columns": 4,
+      "rows": 4,
+      "loop": false,
+      "alpha": true,
+      "bytes": 430820
     },
     "electric": {
       "file": "electric.webp",
-      "frames": 12,
-      "loop": false
+      "frames": 16,
+      "fps": 24,
+      "frameSize": [
+        256,
+        256
+      ],
+      "columns": 4,
+      "rows": 4,
+      "loop": false,
+      "alpha": true,
+      "bytes": 299994
     },
     "fire": {
       "file": "fire.webp",
-      "frames": 12,
-      "loop": false
+      "frames": 16,
+      "fps": 24,
+      "frameSize": [
+        256,
+        256
+      ],
+      "columns": 4,
+      "rows": 4,
+      "loop": false,
+      "alpha": true,
+      "bytes": 427084
     },
     "grand": {
       "file": "grand.webp",
-      "frames": 12,
-      "loop": false
+      "frames": 16,
+      "fps": 24,
+      "frameSize": [
+        384,
+        384
+      ],
+      "columns": 4,
+      "rows": 4,
+      "loop": false,
+      "alpha": true,
+      "bytes": 776660
     },
     "slash": {
       "file": "slash.webp",
-      "frames": 12,
-      "loop": false
+      "frames": 16,
+      "fps": 24,
+      "frameSize": [
+        128,
+        128
+      ],
+      "columns": 4,
+      "rows": 4,
+      "loop": false,
+      "alpha": true,
+      "bytes": 64132
     },
     "magic": {
       "file": "magic.webp",
-      "frames": 12,
-      "loop": true
+      "frames": 16,
+      "fps": 24,
+      "frameSize": [
+        256,
+        256
+      ],
+      "columns": 4,
+      "rows": 4,
+      "loop": true,
+      "alpha": true,
+      "bytes": 355780
     },
     "dark": {
       "file": "dark.webp",
-      "frames": 12,
-      "loop": true
+      "frames": 16,
+      "fps": 24,
+      "frameSize": [
+        256,
+        256
+      ],
+      "columns": 4,
+      "rows": 4,
+      "loop": true,
+      "alpha": true,
+      "bytes": 522618
     },
     "psychic": {
       "file": "psychic.webp",
-      "frames": 12,
-      "loop": true
+      "frames": 16,
+      "fps": 24,
+      "frameSize": [
+        128,
+        128
+      ],
+      "columns": 4,
+      "rows": 4,
+      "loop": true,
+      "alpha": true,
+      "bytes": 218600
     },
     "shield": {
       "file": "shield.webp",
-      "frames": 12,
-      "loop": true
+      "frames": 16,
+      "fps": 24,
+      "frameSize": [
+        128,
+        128
+      ],
+      "columns": 4,
+      "rows": 4,
+      "loop": true,
+      "alpha": true,
+      "bytes": 124180
     },
     "heal": {
       "file": "heal.webp",
-      "frames": 12,
-      "loop": false
+      "frames": 16,
+      "fps": 24,
+      "frameSize": [
+        128,
+        128
+      ],
+      "columns": 4,
+      "rows": 4,
+      "loop": false,
+      "alpha": true,
+      "bytes": 139618
     },
     "regen": {
       "file": "regen.webp",
-      "frames": 12,
-      "loop": true
+      "frames": 16,
+      "fps": 24,
+      "frameSize": [
+        128,
+        128
+      ],
+      "columns": 4,
+      "rows": 4,
+      "loop": true,
+      "alpha": true,
+      "bytes": 145004
     },
     "prison": {
       "file": "prison.webp",
-      "frames": 12,
-      "loop": false
+      "frames": 16,
+      "fps": 24,
+      "frameSize": [
+        128,
+        128
+      ],
+      "columns": 4,
+      "rows": 4,
+      "loop": false,
+      "alpha": true,
+      "bytes": 129136
     },
     "interrupt": {
       "file": "interrupt.webp",
-      "frames": 12,
-      "loop": false
+      "frames": 16,
+      "fps": 24,
+      "frameSize": [
+        128,
+        128
+      ],
+      "columns": 4,
+      "rows": 4,
+      "loop": false,
+      "alpha": true,
+      "bytes": 155762
     },
     "ko": {
       "file": "ko.webp",
-      "frames": 12,
-      "loop": false
+      "frames": 16,
+      "fps": 24,
+      "frameSize": [
+        256,
+        256
+      ],
+      "columns": 4,
+      "rows": 4,
+      "loop": false,
+      "alpha": true,
+      "bytes": 448202
     },
     "buff": {
       "file": "buff.webp",
-      "frames": 12,
-      "loop": false
+      "frames": 16,
+      "fps": 24,
+      "frameSize": [
+        128,
+        128
+      ],
+      "columns": 4,
+      "rows": 4,
+      "loop": false,
+      "alpha": true,
+      "bytes": 125462
     },
     "debuff": {
       "file": "debuff.webp",
-      "frames": 12,
-      "loop": false
+      "frames": 16,
+      "fps": 24,
+      "frameSize": [
+        128,
+        128
+      ],
+      "columns": 4,
+      "rows": 4,
+      "loop": false,
+      "alpha": true,
+      "bytes": 175572
     }
   },
   "arena": {

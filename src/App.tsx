@@ -16,7 +16,8 @@ import { createDirection,advanceDirection,type Direction,type Beat } from './pre
 import { PRESENTATION as P } from './presentation/config';
 import type { Battle } from './engine/types';
 const DebugScreen=lazy(()=>import('./screens/DebugScreen').then(m=>({default:m.DebugScreen})));
-type Screen='home'|'game'|'characters'|'help'|'settings'|'debug';
+const VfxLabScreen=lazy(()=>import('./screens/VfxLabScreen').then(m=>({default:m.VfxLabScreen})));
+type Screen='home'|'game'|'characters'|'help'|'settings'|'debug'|'vfx';
 interface InstallEvent extends Event {prompt:()=>Promise<void>;userChoice:Promise<{outcome:string}>}
 function InfoDialog({title,children,onClose}:{title:string;children:React.ReactNode;onClose:()=>void}){
   const ref=useRef<HTMLDialogElement>(null);useEffect(()=>{const el=ref.current;el?.showModal();return()=>el?.close();},[]);
@@ -70,7 +71,7 @@ export default function App(){
         if(cue.phase==='impact'&&d.active){
           const special=d.active.events.find(e=>e.kind==='ko')??d.active.events.find(e=>e.kind==='interrupt')??d.active.events.find(e=>e.kind==='block')??d.active.events.find(e=>e.kind==='turn');
           if(special)battleAudio.sound(special.kind==='interrupt'?(special.label.includes('atrasada')?'interrupt':'shatter'):special.kind==='block'?'block':special.kind==='ko'?'ko':'turn',4);
-          else {battleAudio.cue(cue);if(cue.family!=='physical'&&!cue.grand&&d.active.events.some(e=>e.kind==='damage'))battleAudio.sound('impact',3);}
+          else battleAudio.cue(cue);
         }else battleAudio.cue(cue);
       });
       const fighters=d.visible.fighters,critical=fighters.filter(f=>f.hp>0&&f.hp/f.maxHp<.34).length,casts=fighters.filter(f=>f.hp>0&&f.cast).length;
@@ -112,9 +113,10 @@ export default function App(){
       {screen==='game'&&run?.stage==='battle'&&run.battle&&<BattleScreen battle={presentation&&direction.current?.battle===run.battle?presentation.battle:run.battle} beat={presentation&&direction.current?.battle===run.battle?presentation.beat:null} index={run.index} name={run.encounters[run.index].name} settings={settings} paused={paused||!!details} onPause={()=>setPaused(!paused)} onAbandon={()=>setConfirmAbandon(true)} onSettings={changeSettings}/>}
       {screen==='game'&&run?.stage==='result'&&<ResultScreen run={run} onNext={()=>startBattle(run.index+1)} onRestart={requestNew} onAbandon={()=>setConfirmAbandon(true)} onHome={()=>navigate('home')} auto={settings.auto} onAuto={auto=>changeSettings({...settings,auto})}/>}
       {screen==='debug'&&import.meta.env.DEV&&<Suspense fallback={<p>Carregando laboratório…</p>}><DebugScreen/></Suspense>}
+      {screen==='vfx'&&<Suspense fallback={<p>Carregando galeria audiovisual…</p>}><VfxLabScreen/></Suspense>}
       {!storageAvailable&&<p role="alert" className="storage-warning">Não foi possível salvar neste navegador. Sua sessão continua, mas pode não ser recuperada ao fechar.</p>}
     </main>
-    <footer className="site-footer"><span><Layers size={13}/> DIFERENTES UNIVERSOS. NOVAS CONEXÕES.</span><span>NEXUS <i/> MVP 1.0</span></footer>
+    <footer className="site-footer"><span><Layers size={13}/> DIFERENTES UNIVERSOS. NOVAS CONEXÕES.</span><button className="footer-lab" onClick={()=>navigate('vfx')}>Galeria de efeitos</button><span>NEXUS <i/> MVP 1.0</span></footer>
     {details&&<CharacterModal character={byId[details]} onClose={()=>setDetails(null)}/>}
     {confirmNew&&<InfoDialog title="Começar uma nova campanha?" onClose={()=>setConfirmNew(false)}><p>O progresso desta campanha será descartado. Vitórias e recordes já registrados ficam salvos.</p><div className="result-actions"><button className="danger" onClick={startNew}>Descartar e começar outra <ArrowUpRight size={18}/></button><button className="secondary" onClick={()=>setConfirmNew(false)}>Continuar campanha</button></div></InfoDialog>}
     {confirmAbandon&&<InfoDialog title="Desistir desta campanha?" onClose={()=>setConfirmAbandon(false)}><p>O progresso desta campanha será descartado e uma nova seleção de trio começará. Vitórias e recordes já registrados ficam salvos.</p><div className="result-actions"><button className="danger" onClick={startNew}>Desistir e começar outra <ArrowUpRight size={18}/></button><button className="secondary" onClick={()=>setConfirmAbandon(false)}>Continuar campanha</button></div></InfoDialog>}
