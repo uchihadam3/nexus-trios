@@ -38,20 +38,20 @@ try{
   const geometry=await page.evaluate(()=>({overflow:document.documentElement.scrollWidth>innerWidth,fighters:document.querySelectorAll('[data-fighter]').length,portraits:[...document.querySelectorAll('.fighter-portrait')].map(x=>Math.round(x.getBoundingClientRect().width))}));
   if(geometry.overflow||geometry.fighters!==6||Math.min(...geometry.portraits)<70)throw Error(`Layout ${width}px: ${JSON.stringify(geometry)}`);
   await page.clock.install();
-  const initialTime=await page.evaluate(()=>JSON.parse(localStorage.getItem('nexus-v1-run')).battle.time);
-  let lastTime=initialTime,mechanicalFinish=null;
+  const baseline=await page.evaluate(()=>({time:JSON.parse(localStorage.getItem('nexus-v1-run')).battle.time,performance:performance.now()}));
+  let lastTime=baseline.time,mechanicalFinish=null;
   const total=full?125:22;
   for(let elapsed=1;elapsed<=total;elapsed++){
    await page.clock.runFor(1000);
    const state=await page.evaluate(()=>{
     const run=JSON.parse(localStorage.getItem('nexus-v1-run'));
     const clock=document.querySelector('.battle-clock strong')?.textContent??null;
-    return {time:run.battle.time,finished:run.battle.finished,clock};
+    return {time:run.battle.time,finished:run.battle.finished,clock,performance:performance.now()};
    });
    if(state.time+1e-6<lastTime)throw Error(`Relógio retrocedeu ${width}px/${speed}x: ${lastTime} → ${state.time}`);
-   if(state.time-initialTime>elapsed+1.2)throw Error(`Simulação acelerou em ${width}px/${speed}x: ${state.time}s em ${elapsed}s reais simulados`);
+   if(state.time-baseline.time>(state.performance-baseline.performance)/1000+1.2)throw Error(`Simulação acelerou em ${width}px/${speed}x: ${state.time}s em ${elapsed}s reais simulados`);
    lastTime=state.time;
-   if(state.finished&&mechanicalFinish===null)mechanicalFinish=elapsed+initialTime;
+   if(state.finished&&mechanicalFinish===null)mechanicalFinish=baseline.time+(state.performance-baseline.performance)/1000;
    if(elapsed===10||elapsed===20||elapsed===80&&full)await page.screenshot({path:`test-results/battle-regression/battle-${width}-${speed}x-${elapsed}s.png`,fullPage:true});
   }
   const final=await page.evaluate(()=>JSON.parse(localStorage.getItem('nexus-v1-run')).battle);
