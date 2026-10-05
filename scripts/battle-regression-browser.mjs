@@ -19,20 +19,21 @@ try{
    }
   });
   await page.goto('http://127.0.0.1:5173',{waitUntil:'networkidle'});
-  await page.evaluate(async speed=>{
+  await page.evaluate(async ({speed,full})=>{
    const {createBattle}=await import('/src/engine/battle.ts');
    const {generateCampaign,newDraft}=await import('/src/engine/campaign.ts');
    const team=['goku','pikachu','captain'],enemy=['vegeta','raven','hulk'],seed=451;
    const encounters=generateCampaign(seed,team);
    encounters[0]={...encounters[0],team:enemy,power:0,scale:1};
    const battle=createBattle(team,enemy,seed);
-   for(const fighter of battle.fighters){fighter.maxHp=1e8;fighter.hp=fighter.side==='enemy'?8e7:1e8;}
+   if(full)for(const fighter of battle.fighters){fighter.maxHp=1e8;fighter.hp=fighter.side==='enemy'?8e7:1e8;}
    sessionStorage.setItem('nexus-test-run',JSON.stringify({seed,team,encounters,index:0,stage:'battle',draft:{...newDraft(seed),team},battle,recorded:false}));
    sessionStorage.setItem('nexus-test-settings',JSON.stringify({volume:0,musicVolume:0,effectsVolume:0,effects:true,speed,numbers:true,reducedMotion:false,auto:false,explanations:'normal'}));
-  },speed);
+  },{speed,full});
   await page.reload({waitUntil:'networkidle'});
   await page.getByRole('button',{name:'Continuar jornada',exact:true}).click();
   await page.getByRole('button',{name:'Continuar',exact:true}).click();
+  await page.getByRole('button',{name:'Entendi',exact:true}).click();
   await page.getByRole('button',{name:`Velocidade ${speed} vezes`}).waitFor();
   const geometry=await page.evaluate(()=>({overflow:document.documentElement.scrollWidth>innerWidth,fighters:document.querySelectorAll('[data-fighter]').length,portraits:[...document.querySelectorAll('.fighter-portrait')].map(x=>Math.round(x.getBoundingClientRect().width))}));
   if(geometry.overflow||geometry.fighters!==6||Math.min(...geometry.portraits)<70)throw Error(`Layout ${width}px: ${JSON.stringify(geometry)}`);
@@ -50,7 +51,7 @@ try{
    if(state.time>elapsed+1.2)throw Error(`Simulação acelerou em ${width}px/${speed}x: ${state.time}s em ${elapsed}s reais simulados`);
    lastTime=state.time;
    if(state.finished&&mechanicalFinish===null)mechanicalFinish=elapsed;
-   if(elapsed===20||elapsed===80&&full)await page.screenshot({path:`test-results/battle-regression/battle-${width}-${speed}x-${elapsed}s.png`,fullPage:true});
+   if(elapsed===10||elapsed===20||elapsed===80&&full)await page.screenshot({path:`test-results/battle-regression/battle-${width}-${speed}x-${elapsed}s.png`,fullPage:true});
   }
   const final=await page.evaluate(()=>JSON.parse(localStorage.getItem('nexus-v1-run')).battle);
   if(full&&(final.time!==120||mechanicalFinish===null||Math.abs(mechanicalFinish-120)>2))throw Error(`Duração ${width}px/${speed}x: fim em ${mechanicalFinish}s, motor=${final.time}`);
