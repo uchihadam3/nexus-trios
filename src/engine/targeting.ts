@@ -119,14 +119,16 @@ function rate(b:Battle,actor:Fighter,candidate:Fighter,rule:Target,intent:Target
   return {score,reasons};
 }
 
-export function chooseTarget(b:Battle,actor:Fighter,candidates:Fighter[],rule:Target,intent:TargetIntent,effects:Effect[]=[]):Fighter[] {
+export function chooseTarget(b:Battle,actor:Fighter,candidates:Fighter[],rule:Target,intent:TargetIntent,effects:Effect[]=[],record=true):Fighter[] {
   if(!candidates.length)return [];
   const ranked=candidates.map(candidate=>({candidate,...rate(b,actor,candidate,rule,intent,effects)}))
     .sort((a,z)=>z.score-a.score||a.candidate.characterId.localeCompare(z.candidate.characterId));
   const best=ranked[0];
-  b.targetMemory??={};
-  b.targetMemory[actor.uid]={target:best.candidate.uid,time:b.time};
-  const decision:TargetDecision={time:b.time,actor:actor.uid,intent,target:best.candidate.uid,score:best.score,reasons:best.reasons};
-  b.targetLog??=[];b.targetLog.push(decision);if(b.targetLog.length>120)b.targetLog.shift();
+  if(record){
+    b.targetMemory??={};
+    b.targetMemory[actor.uid]={target:best.candidate.uid,time:b.time};
+    const decision:TargetDecision={time:b.time,actor:actor.uid,intent,target:best.candidate.uid,score:best.score,reasons:best.reasons};
+    b.targetLog??=[];b.targetLog.push(decision);if(b.targetLog.length>120)b.targetLog.shift();
+  }
   return [best.candidate];
 }
