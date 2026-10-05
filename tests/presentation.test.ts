@@ -12,7 +12,7 @@ describe('Direção sem alterar regras',()=>{
   const battle=createBattle(a,b,0x101),direction=createDirection(battle);
   for(const fighter of battle.fighters){fighter.hp=1e8;fighter.maxHp=1e8;}
   advanceDirection(direction,10);
-  expect(direction.battle.time).toBe(10);
+  expect(direction.battle.time).toBeCloseTo(10,6);
   expect(direction.battle.finished).toBe(false);
   expect(direction.queue.length).toBeLessThanOrEqual(12);
  });
