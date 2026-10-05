@@ -24,7 +24,7 @@ export function createBattle(player:string[],enemy:string[],seed=Date.now(),enem
   });
   return b;
 }
-export function targets(b:Battle,actor:Fighter,rule:Target,effects:Effect[]=[]):Fighter[] {
+export function targets(b:Battle,actor:Fighter,rule:Target,effects:Effect[]=[],record=true):Fighter[] {
   const allies=friendly(b,actor).sort((a,z)=>a.characterId.localeCompare(z.characterId)),enemies=hostile(b,actor).sort((a,z)=>a.characterId.localeCompare(z.characterId));
   if(rule==='self')return alive(actor)?[actor]:[];
   if(rule==='allAllies')return allies;
@@ -32,10 +32,10 @@ export function targets(b:Battle,actor:Fighter,rule:Target,effects:Effect[]=[]):
   const intent=inferTargetIntent(actor,rule,effects);
   if(rule==='enemyCast'){
     const casting=enemies.filter(x=>x.cast);
-    if(casting.length)return chooseTarget(b,actor,casting,rule,intent,effects);
+    if(casting.length)return chooseTarget(b,actor,casting,rule,intent,effects,record);
     if(intent==='interrupt')return [];
   }
-  return chooseTarget(b,actor,rule==='allyWeak'?allies:enemies,rule,intent,effects);
+  return chooseTarget(b,actor,rule==='allyWeak'?allies:enemies,rule,intent,effects,record);
 }
 function gain(b:Battle,f:Fighter,topic:Topic,amount:number,source?:Fighter){
   if(!alive(f))return;
@@ -161,6 +161,58 @@ function appropriate(b:Battle,f:Fighter,s:Skill){
   if(s.condition==='storedEnergy')return (f.storedEnergy??0)>0;
   return true;
 }
+function skillValue(b:Battle,f:Fighter,s:Skill,selected:Fighter[]):{score:number;reasons:string[]} {
+  let value=0;const reasons:string[]=[];
+  const add=(label:string,n:number)=>{if(n>0.05){value+=n;reasons.push(`${label} +${n.toFixed(1)}`);}};
+  for(const effect of s.effects){
+    const list=(effect.target?targets(b,f,effect.target,[effect],false):selected).filter(alive);
+    if(effect.kind==='damage'||effect.kind==='deathnote'||effect.kind==='release'){
+      const raw=effect.kind==='release'?(f.storedEnergy??0)*effect.multiplier:effect.value;
+      for(const target of list){
+        const ready=effect.kind!=='deathnote'||(f.investigation[target.uid]??0)>=100;
+        const shields=target.shields.reduce((n,x)=>n+x.amount,0),amount=ready?Math.min(target.hp+shields,raw):0;
+        add('dano útil',amount/target.maxHp*65);
+        if(amount>=target.hp+shields&&amount>0)add('incapacitação provável',18);
+        if(effect.kind==='deathnote'&&ready)add('sentença preparada',byId[target.characterId].deathNoteCompatible?40:10);
+      }
+    }else if(effect.kind==='heal'){
+      for(const target of list){const used=Math.min(target.maxHp-target.hp,effect.value);add('cura necessária',used/target.maxHp*48);if(target.hp/target.maxHp<.3&&used>0)add('aliado crítico',8);}
+    }else if(effect.kind==='shield'){
+      for(const target of list){const existing=target.shields.reduce((n,x)=>n+x.amount,0);const need=target.maxHp*(1-target.hp/target.maxHp)+target.maxHp*.12-existing;const used=Math.max(0,Math.min(effect.value,need));add('proteção preventiva',used/target.maxHp*26);}
+    }else if(effect.kind==='interrupt'){
+      for(const target of list)if(target.cast)add('interromper preparação',22+Math.max(0,target.cast.elapsed/target.cast.duration)*12);
+    }else if(effect.kind==='status'){
+      for(const target of list){const existing=target.statuses.find(x=>x.id===effect.status)?.intensity??0;const weight=effect.status==='paralyzed'?1:effect.status==='rooted'?.7:effect.status==='silenced'?.65:effect.status==='slow'?.4:['exposed','marked','electric','burning'].includes(effect.status)?.35:effect.status==='protected'?.5:0;add('efeito de estado',Math.max(0,effect.value-existing)*weight*24);}
+    }else if(effect.kind==='investigate'){
+      for(const target of list){const progress=f.investigation[target.uid]??0;const compatible=byId[target.characterId].deathNoteCompatible;add('investigação',effect.value/100*(compatible?14:3)*(1-progress/100));}
+    }else if(effect.kind==='charge'){
+      add('carga de habilidades',Math.max(0,100-f.skills.reduce((n,x)=>n+x.charge,0))/300*12);
+    }else if(effect.kind==='shift'){
+      add('controle de ritmo',Math.abs(effect.value)*12);
+    }else if(effect.kind==='store'){
+      add('energia armazenada',Math.max(0,effect.cap-f.storedEnergy)/Math.max(1,effect.cap)*Math.min(18,effect.value/8));
+    }
+  }
+  const cost=s.preparation*3+s.cooldown*.08;
+  value=Math.max(0,value-cost)+s.priority*.08;
+  if(cost>0)reasons.push(`custo tático -${cost.toFixed(1)}`);
+  return {score:value,reasons};
+}
+function decideSkill(b:Battle,f:Fighter):number|null {
+  const c=byId[f.characterId],intelligence=c.intelligence??50;
+  const candidates=c.skills.map((s,i)=>({s,i,state:f.skills[i]}))
+    .filter(({s,state})=>state.charge>=100&&state.cooldown<=0&&appropriate(b,f,s))
+    .map(({s,i,state})=>{const selected=targets(b,f,s.target,s.effects,false);const result=skillValue(b,f,s,selected);return {s,i,state,selected,...result};})
+    .sort((a,z)=>z.score-a.score||a.i-z.i);
+  if(!candidates.length)return null;
+  const best=candidates[0],threshold=8+intelligence*.14,waitLimit=.45+intelligence*.023;
+  if(best.state.readySince==null)best.state.readySince=b.time;
+  const shouldWait=best.score<threshold&&b.time-best.state.readySince<waitLimit;
+  b.decisionLog??=[];
+  b.decisionLog.push({time:b.time,actor:f.uid,intelligence,candidates:candidates.map(x=>({skill:x.s.name,score:x.score,target:x.selected[0]?.uid,reasons:x.reasons})),chosen:shouldWait?'aguardar':best.s.name});
+  if(b.decisionLog.length>120)b.decisionLog.shift();
+  return shouldWait?null:best.i;
+}
 function execute(b:Battle,f:Fighter,index:number,selected:Fighter[]){
   const s=byId[f.characterId].skills[index],eventStart=b.nextEvent;
   emit(b,{kind:'skill',source:f.uid,target:selected[0]?.uid,skill:index,label:s.name,visual:s.icon});
@@ -225,9 +277,9 @@ export function stepBattle(b:Battle,observe?:(snapshot:Battle)=>void):Battle {
       continue;
     }
     if(!intensity(f,'silenced')){
-      const ready=c.skills.map((s,i)=>({s,i})).filter(({s,i})=>f.skills[i].charge>=100&&f.skills[i].cooldown<=0&&appropriate(b,f,s)).sort((a,z)=>z.s.priority-a.s.priority)[0];
-      if(ready){
-        const {s,i}=ready,list=targets(b,f,s.target,s.effects);
+      const selectedSkill=decideSkill(b,f);
+      if(selectedSkill!==null){
+        const i=selectedSkill,s=c.skills[i],list=targets(b,f,s.target,s.effects);
         if(s.preparation>0){f.cast={skill:i,elapsed:0,duration:s.preparation,targets:list.map(x=>x.uid)};emit(b,{kind:'cast',source:f.uid,target:list[0]?.uid,skill:i,label:s.name,visual:s.icon});for(const opponent of hostile(b,f))trigger(b,opponent,'enemyCast',f);}
         else execute(b,f,i,list);
         resolve(b);observe?.(b);if(b.finished)break;
