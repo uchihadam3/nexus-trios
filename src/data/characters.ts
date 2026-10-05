@@ -1,5 +1,6 @@
 import type { Character, Effect, Skill, Target, Trait, Visual, ChargeRule } from '../engine/types';
 import { expandedCharacters } from './expanded-roster';
+import { intelligenceFor } from './intelligence';
 
 const damage=(value:number,target?:Target):Effect=>({kind:'damage',value,target});
 const heal=(value:number,target:Target='self'):Effect=>({kind:'heal',value,target});
@@ -140,5 +141,5 @@ export const characters:Character[] = [
   skill('Joia do Tempo','wave','Retarda todos e reduz preparações pela metade.','Preparações inimigas + tempo',[charge('enemyCast',22),charge('time',3)],[status('slow',.4,8,'allEnemies'),{kind:'interrupt',mode:'reduce',value:.5,target:'allEnemies'}],{target:'allEnemies'}),
   skill('Equilíbrio','psychic','Causa 240 de dano a todos e enfraquece por 9 s.','Tempo sobrevivido',[charge('survived',2.8)],[damage(240,'allEnemies'),status('weakened',.25,9,'allEnemies')],{preparation:4.5,target:'allEnemies',cooldown:14})]}),
   ...expandedCharacters.map(c=>imagePortraits[c.id]?{...c,portrait:imagePortraits[c.id]}:c),
-];
+] .map(c=>({...c,intelligence:intelligenceFor(c.id,c.tags)}));
 export const byId:Record<string,Character> = Object.fromEntries(characters.map(c=>[c.id,c]));
