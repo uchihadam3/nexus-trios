@@ -38,7 +38,8 @@ try{
   const geometry=await page.evaluate(()=>({overflow:document.documentElement.scrollWidth>innerWidth,fighters:document.querySelectorAll('[data-fighter]').length,portraits:[...document.querySelectorAll('.fighter-portrait')].map(x=>Math.round(x.getBoundingClientRect().width))}));
   if(geometry.overflow||geometry.fighters!==6||Math.min(...geometry.portraits)<70)throw Error(`Layout ${width}px: ${JSON.stringify(geometry)}`);
   await page.clock.install();
-  let lastTime=0,mechanicalFinish=null;
+  const initialTime=await page.evaluate(()=>JSON.parse(localStorage.getItem('nexus-v1-run')).battle.time);
+  let lastTime=initialTime,mechanicalFinish=null;
   const total=full?125:22;
   for(let elapsed=1;elapsed<=total;elapsed++){
    await page.clock.runFor(1000);
@@ -48,9 +49,9 @@ try{
     return {time:run.battle.time,finished:run.battle.finished,clock};
    });
    if(state.time+1e-6<lastTime)throw Error(`Relógio retrocedeu ${width}px/${speed}x: ${lastTime} → ${state.time}`);
-   if(state.time>elapsed+1.2)throw Error(`Simulação acelerou em ${width}px/${speed}x: ${state.time}s em ${elapsed}s reais simulados`);
+   if(state.time-initialTime>elapsed+1.2)throw Error(`Simulação acelerou em ${width}px/${speed}x: ${state.time}s em ${elapsed}s reais simulados`);
    lastTime=state.time;
-   if(state.finished&&mechanicalFinish===null)mechanicalFinish=elapsed;
+   if(state.finished&&mechanicalFinish===null)mechanicalFinish=elapsed+initialTime;
    if(elapsed===10||elapsed===20||elapsed===80&&full)await page.screenshot({path:`test-results/battle-regression/battle-${width}-${speed}x-${elapsed}s.png`,fullPage:true});
   }
   const final=await page.evaluate(()=>JSON.parse(localStorage.getItem('nexus-v1-run')).battle);
