@@ -56,6 +56,17 @@ describe('Motor independente',()=>{
   expect(pick(original,light.uid,'investigated',[{kind:'investigate',value:1}])).toBe('batman');
   expect(original.targetLog?.some(d=>d.actor===pika.uid&&d.reasons.some(r=>r.includes('preparação ativa')))).toBe(true);
  });
+ it('pontua habilidades prontas com motivos e Inteligência do personagem',()=>{
+  const battle=createBattle(player,enemy,0xabc);
+  for(const fighter of battle.fighters)fighter.skills.forEach(state=>{state.charge=100;state.readySince=0;});
+  for(let i=0;i<40&&!battle.decisionLog?.length;i++)stepBattle(battle);
+  expect(battle.decisionLog?.length).toBeGreaterThan(0);
+  const decision=battle.decisionLog![0],character=byId[battle.fighters.find(f=>f.uid===decision.actor)!.characterId];
+  expect(decision.intelligence).toBe(character.intelligence);
+  expect(decision.candidates.length).toBeGreaterThan(0);
+  expect(decision.candidates[0].score).toBeGreaterThanOrEqual(decision.candidates.at(-1)!.score);
+  expect(decision.candidates[0].reasons.length).toBeGreaterThan(0);
+ });
  it('intenção de cura escolhe necessidade real e nunca apenas o primeiro aliado',()=>{
   const battle=createBattle(['wolverine','light','pikachu'],enemy,0x55),wolverine=battle.fighters[0],light=battle.fighters[1];
   light.hp=light.maxHp*.28;
