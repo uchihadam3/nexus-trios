@@ -63,7 +63,7 @@ export default function App(){
     if(screen!=='game'||paused||details||confirmNew||confirmAbandon)return;
     let previous=performance.now();
     const timer=window.setInterval(()=>{
-      const now=performance.now(),elapsed=Math.max(0,Math.min(.25,(now-previous)/1000));previous=now;
+      const now=performance.now(),elapsed=Math.max(0,(now-previous)/1000);previous=now;
       const current=runRef.current;if(!current||current.stage!=='battle'||!current.battle)return;
       if(!direction.current||direction.current.battle!==current.battle){direction.current=createDirection(current.battle);lastAudio.current=current.battle.nextEvent-1;lastDominionSound.current=current.battle.dominion;}
       const d=direction.current;
