@@ -42,7 +42,7 @@ export function generateCampaign(seed:number,playerTeam:string[]=[]):Encounter[]
   if(uniquePlayer.length!==playerTeam.length||playerTeam.some(id=>!byId[id]))throw new Error('O trio do jogador contém IDs repetidos ou inválidos.');
   if(playerTeam.length!==0&&playerTeam.length!==3)throw new Error('A campanha só pode ser gerada após a escolha de exatamente três personagens.');
   const eligible=characters.map(c=>c.id).filter(id=>!uniquePlayer.includes(id));
-  if(eligible.length<uniquePlayer.length+30)throw new Error('Elenco insuficiente: são necessários três personagens do jogador e trinta inimigos únicos.');
+  if(eligible.length<30)throw new Error('Elenco insuficiente: são necessários três personagens do jogador e trinta inimigos únicos.');
   const rng={rng:seed>>>0};
   // Reserve the final trio first so the early encounters cannot consume a planned boss.
   const boss=selectBoss(eligible,rng);
@@ -61,8 +61,10 @@ export function generateCampaign(seed:number,playerTeam:string[]=[]):Encounter[]
     team.forEach(id=>used.add(id));
   }
   encounters.push({team:boss,name:names[9],power:teamPower(boss),scale:scales[9]});
-  const result=validateCampaignUniqueness({team:uniquePlayer,encounters});
-  if(!result.valid)throw new Error(`Campanha gerada com violações: ${result.errors.join('; ')}`);
+  if(uniquePlayer.length===3){
+    const result=validateCampaignUniqueness({team:uniquePlayer,encounters});
+    if(!result.valid)throw new Error(`Campanha gerada com violações: ${result.errors.join('; ')}`);
+  }else if(new Set(encounters.flatMap(encounter=>encounter.team)).size!==30)throw new Error('Campanha provisória gerada com personagens repetidos.');
   return encounters;
 }
 export function validateCampaignUniqueness(run:{team:string[];encounters:Encounter[]}):{valid:boolean;errors:string[]}{
