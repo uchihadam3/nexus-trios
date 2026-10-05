@@ -1,6 +1,6 @@
 // Presentation seconds at 1×. Combat always retains its fixed 100 ms simulation step.
 export const PRESENTATION = {
-  gameRate: 0.86,
+  gameRate: 1,
   normalSeconds: 2.0,
   skillSeconds: 3.0,
   grandSeconds: 4.4,
