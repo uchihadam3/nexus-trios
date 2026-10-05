@@ -72,10 +72,10 @@ describe('Arte local e composição',()=>{
     expect(pngs.every(png=>png.subarray(0,8).equals(Buffer.from([137,80,78,71,13,10,26,10])))).toBe(true);
     expect(pngs.every(png=>png.readUInt32BE(16)===128&&png.readUInt32BE(20)===128&&png[25]===6)).toBe(true);
     expect(manifest.skills.every(skill=>skill.sheet.startsWith('/assets/sheets/skills/pages/')&&skill.crop.width===128&&skill.crop.height===128)).toBe(true);
-    const sheetManifest=JSON.parse(readFileSync(new URL('assets/sheets/skills/manifest.json',root),'utf8')) as {count:number;pages:{sourceSheet:string;resolution:number[];columns:number;rows:number;cell:number[];icons:unknown[]}[]};
+    const sheetManifest=JSON.parse(readFileSync(new URL('assets/sheets/skills/manifest.json',root),'utf8')) as {count:number;pages:{sourceSheet:string;sheet:string;resolution:number[];columns:number;rows:number;cell:number[];icons:unknown[]}[]};
     expect(sheetManifest.count).toBe(300);
     expect(sheetManifest.pages).toHaveLength(100);
-    expect(sheetManifest.pages.every(page=>page.resolution[0]===512&&page.resolution[1]===176&&page.columns===3&&page.rows===1&&page.cell[0]===160&&page.cell[1]===160&&page.icons.length===3&&existsSync(new URL(`../${page.sourceSheet}`,root)))).toBe(true);
+    expect(sheetManifest.pages.every(page=>page.resolution[0]===512&&page.resolution[1]===176&&page.columns===3&&page.rows===1&&page.cell[0]===160&&page.cell[1]===160&&page.icons.length===3&&existsSync(new URL(page.sourceSheet.slice(1),root)))).toBe(true);
   });
   it('mantém ícones universais próprios para todos os 14 estados e remove glifos emoji antigos',()=>{
     expect(Object.keys(statuses)).toHaveLength(14);
@@ -86,7 +86,7 @@ describe('Arte local e composição',()=>{
     const ui=JSON.parse(readFileSync(new URL('assets/sheets/ui/manifest.json',root),'utf8')) as {count:number;sourceSheet:string;resolution:number[];columns:number;rows:number;cell:number[];items:{id:string;name:string;path:string;row:number;column:number;crop:{width:number;height:number}}[]};
     expect(states).toMatchObject({count:14,resolution:[680,680],columns:4,rows:4,cell:[160,160]});
     expect(ui).toMatchObject({count:16,resolution:[680,680],columns:4,rows:4,cell:[160,160]});
-    for(const manifest of [states,ui])expect(existsSync(new URL(`../${manifest.sourceSheet}`,root))).toBe(true);
+    for(const manifest of [states,ui])expect(existsSync(new URL(manifest.sourceSheet.slice(1),root))).toBe(true);
     expect(states.items.map(item=>item.name)).toEqual(Object.values(statuses).map(status=>status.name));
     expect(states.items.every((item,index)=>item.row===Math.floor(index/4)&&item.column===index%4)).toBe(true);
     expect(ui.items.map(item=>item.name)).toEqual(['Habilidade pronta','Cooldown','Carregando','Preparando','Executando','Buff','Debuff','Ação acelerada','Ação atrasada','Interrupção','Histórico','Inspeção','Ajuda','Domínio','Vitória','Derrota']);

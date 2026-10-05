@@ -110,7 +110,7 @@ def main() -> None:
         page_path.parent.mkdir(parents=True, exist_ok=True)
         output.save(page_path)
         assert_transparent(page_path)
-        skill_pages.append({"character": character, "sourceSheet": str(source_path.relative_to(ROOT)),
+        skill_pages.append({"character": character, "sourceSheet": f"/assets/sheets/skills/pages/{character}.png",
                             "sourceResolution": list(source.size), "sheet": f"/assets/sheets/skills/pages/{character}.png",
                             "category": "skills", "format": "PNG RGBA", "resolution": [fw, fh],
                             "columns": 3, "rows": 1, "cell": [CELL, CELL], "gutter": GUTTER,
@@ -161,7 +161,7 @@ def main() -> None:
                             "sourceCrop": source_crop, "crop": {"x": x, "y": y, "width": ICON, "height": ICON}})
         output.save(output_sheet)
         assert_transparent(output_sheet)
-        sheet_manifest = {"category": category, "sourceSheet": str(source_path.relative_to(ROOT)),
+        sheet_manifest = {"category": category, "sourceSheet": "/" + str(output_sheet.relative_to(PUBLIC)).replace("\\", "/"),
                           "sourceResolution": list(source.size), "format": "PNG RGBA",
                           "resolution": [fw, fh], "columns": columns, "rows": rows,
                           "cell": [CELL, CELL], "gutter": GUTTER, "margin": MARGIN,
