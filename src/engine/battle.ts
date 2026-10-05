@@ -161,8 +161,8 @@ function appropriate(b:Battle,f:Fighter,s:Skill){
   if(s.condition==='storedEnergy')return (f.storedEnergy??0)>0;
   return true;
 }
-function skillValue(b:Battle,f:Fighter,s:Skill,selected:Fighter[]):{score:number;reasons:string[]} {
-  let value=0;const reasons:string[]=[];
+function skillValue(b:Battle,f:Fighter,s:Skill,selected:Fighter[],intelligence:number):{score:number;reasons:string[]} {
+  let value=0;const reasons:string[]=[],tacticalFactor=.65+intelligence/120;
   const add=(label:string,n:number)=>{if(n>0.05){value+=n;reasons.push(`${label} +${n.toFixed(1)}`);}};
   for(const effect of s.effects){
     const list=(effect.target?targets(b,f,effect.target,[effect],false):selected).filter(alive);
@@ -176,15 +176,15 @@ function skillValue(b:Battle,f:Fighter,s:Skill,selected:Fighter[]):{score:number
         if(effect.kind==='deathnote'&&ready)add('sentença preparada',byId[target.characterId].deathNoteCompatible?40:10);
       }
     }else if(effect.kind==='heal'){
-      for(const target of list){const used=Math.min(target.maxHp-target.hp,effect.value);add('cura necessária',used/target.maxHp*48);if(target.hp/target.maxHp<.3&&used>0)add('aliado crítico',8);}
+      for(const target of list){const used=Math.min(target.maxHp-target.hp,effect.value);add('cura necessária',used/target.maxHp*48*tacticalFactor);if(target.hp/target.maxHp<.3&&used>0)add('aliado crítico',8*tacticalFactor);}
     }else if(effect.kind==='shield'){
-      for(const target of list){const existing=target.shields.reduce((n,x)=>n+x.amount,0);const need=target.maxHp*(1-target.hp/target.maxHp)+target.maxHp*.12-existing;const used=Math.max(0,Math.min(effect.value,need));add('proteção preventiva',used/target.maxHp*26);}
+      for(const target of list){const existing=target.shields.reduce((n,x)=>n+x.amount,0);const need=target.maxHp*(1-target.hp/target.maxHp)+target.maxHp*.12-existing;const used=Math.max(0,Math.min(effect.value,need));add('proteção preventiva',used/target.maxHp*26*tacticalFactor);}
     }else if(effect.kind==='interrupt'){
-      for(const target of list)if(target.cast)add('interromper preparação',22+Math.max(0,target.cast.elapsed/target.cast.duration)*12);
+      for(const target of list)if(target.cast)add('interromper preparação',(22+Math.max(0,target.cast.elapsed/target.cast.duration)*12)*tacticalFactor);
     }else if(effect.kind==='status'){
-      for(const target of list){const existing=target.statuses.find(x=>x.id===effect.status)?.intensity??0;const weight=effect.status==='paralyzed'?1:effect.status==='rooted'?.7:effect.status==='silenced'?.65:effect.status==='slow'?.4:['exposed','marked','electric','burning'].includes(effect.status)?.35:effect.status==='protected'?.5:0;add('efeito de estado',Math.max(0,effect.value-existing)*weight*24);}
+      for(const target of list){const existing=target.statuses.find(x=>x.id===effect.status)?.intensity??0;const weight=effect.status==='paralyzed'?1:effect.status==='rooted'?.7:effect.status==='silenced'?.65:effect.status==='slow'?.4:['exposed','marked','electric','burning'].includes(effect.status)?.35:effect.status==='protected'?.5:0;add('efeito de estado',Math.max(0,effect.value-existing)*weight*24*tacticalFactor);}
     }else if(effect.kind==='investigate'){
-      for(const target of list){const progress=f.investigation[target.uid]??0;const compatible=byId[target.characterId].deathNoteCompatible;add('investigação',effect.value/100*(compatible?14:3)*(1-progress/100));}
+      for(const target of list){const progress=f.investigation[target.uid]??0;const compatible=byId[target.characterId].deathNoteCompatible;add('investigação',effect.value/100*(compatible?14:3)*(1-progress/100)*tacticalFactor);}
     }else if(effect.kind==='charge'){
       add('carga de habilidades',Math.max(0,100-f.skills.reduce((n,x)=>n+x.charge,0))/300*12);
     }else if(effect.kind==='shift'){
@@ -202,16 +202,14 @@ function decideSkill(b:Battle,f:Fighter):number|null {
   const c=byId[f.characterId],intelligence=c.intelligence??50;
   const candidates=c.skills.map((s,i)=>({s,i,state:f.skills[i]}))
     .filter(({s,state})=>state.charge>=100&&state.cooldown<=0&&appropriate(b,f,s))
-    .map(({s,i,state})=>{const selected=targets(b,f,s.target,s.effects,false);const result=skillValue(b,f,s,selected);return {s,i,state,selected,...result};})
+    .map(({s,i,state})=>{const selected=targets(b,f,s.target,s.effects,false);const result=skillValue(b,f,s,selected,intelligence);return {s,i,state,selected,...result};})
     .sort((a,z)=>z.score-a.score||a.i-z.i);
   if(!candidates.length)return null;
-  const best=candidates[0],threshold=8+intelligence*.14,waitLimit=.45+intelligence*.023;
-  if(best.state.readySince==null)best.state.readySince=b.time;
-  const shouldWait=best.score<threshold&&b.time-best.state.readySince<waitLimit;
+  const best=candidates[0];
   b.decisionLog??=[];
-  b.decisionLog.push({time:b.time,actor:f.uid,intelligence,candidates:candidates.map(x=>({skill:x.s.name,score:x.score,target:x.selected[0]?.uid,reasons:x.reasons})),chosen:shouldWait?'aguardar':best.s.name});
+  b.decisionLog.push({time:b.time,actor:f.uid,intelligence,candidates:candidates.map(x=>({skill:x.s.name,score:x.score,target:x.selected[0]?.uid,reasons:x.reasons})),chosen:best.s.name});
   if(b.decisionLog.length>120)b.decisionLog.shift();
-  return shouldWait?null:best.i;
+  return best.i;
 }
 function execute(b:Battle,f:Fighter,index:number,selected:Fighter[]){
   const s=byId[f.characterId].skills[index],eventStart=b.nextEvent;
