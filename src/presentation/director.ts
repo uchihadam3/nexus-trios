@@ -4,8 +4,8 @@ import type { Battle, BattleEvent } from '../engine/types';
 import { PRESENTATION as P } from './config';
 
 export type Family='physical'|'energy'|'electric'|'fire'|'magic'|'dark'|'psychic'|'slash'|'prison'|'shield'|'heal'|'regen'|'buff'|'debuff'|'interrupt'|'ko'|'turn'|'grand';
-export interface Beat {event:BattleEvent;events:BattleEvent[];before:Battle;after:Battle;duration:number;family:Family;grand:boolean;elapsed:number;impacted:boolean}
-export interface Direction {battle:Battle;visible:Battle;queue:Beat[];active:Beat|null;idle:number;simIdle:number;complete:boolean;serial:number;signals:BattleEvent[]}
+export interface Beat {event:BattleEvent;events:BattleEvent[];duration:number;family:Family;grand:boolean;elapsed:number;impacted:boolean}
+export interface Direction {battle:Battle;visible:Battle;queue:Beat[];active:Beat|null;simIdle:number;complete:boolean;serial:number;signals:BattleEvent[]}
 export interface Cue {event:BattleEvent;family:Family;phase:'start'|'impact';grand:boolean}
 export function familyOf(event:BattleEvent,battle:Battle):Family {
   if(event.kind==='ko'||event.kind==='turn'||event.kind==='interrupt')return event.kind;
@@ -36,51 +36,70 @@ function duration(event:BattleEvent,grand:boolean){
   return grand?P.grandSeconds:event.kind==='skill'?P.skillSeconds:P.normalSeconds;
 }
 export function createDirection(battle:Battle):Direction {
-  return {battle,visible:structuredClone(battle),queue:[],active:null,idle:0,simIdle:0,complete:false,serial:0,signals:[]};
+  // The engine owns all mechanical state. The presentation never stores fighter snapshots.
+  return {battle,visible:battle,queue:[],active:null,simIdle:0,complete:false,serial:0,signals:[]};
 }
-// The director requests at most one combat tick at a time. Its bounded queue contains
-// only snapshots from that tick, so effects never trail behind a running simulation.
-function priority(event:BattleEvent){return event.kind==='ko'?5:event.kind==='interrupt'||event.kind==='turn'?4:event.kind==='skill'||event.kind==='cast'?3:event.kind==='basic'?1:0;}
+function makeBeat(event:BattleEvent,events:BattleEvent[],battle:Battle):Beat {
+  const actor=battle.fighters.find(f=>f.uid===event.source);
+  const prep=actor&&event.skill!==undefined?byId[actor.characterId].skills[event.skill].preparation:0;
+  const grand=event.kind==='skill'&&prep>=P.grandPreparation;
+  return {event,events,duration:duration(event,grand),family:familyOf(event,battle),grand,elapsed:0,impacted:false};
+}
 function enqueue(d:Direction,beat:Beat){
-  if(d.queue.length<12){d.queue.push(beat);return;}
-  const replace=d.queue.findIndex(item=>item.event.kind==='basic');
-  if(priority(beat.event)>1&&replace>=0){const old=d.queue[replace];beat.before=old.before;beat.events=[...old.events,...beat.events];d.queue[replace]=beat;return;}
-  const last=d.queue[d.queue.length-1];
-  if(last){last.after=beat.after;last.events.push(...beat.events);if(priority(beat.event)>priority(last.event)){last.event=beat.event;last.family=beat.family;last.grand=beat.grand;last.duration=beat.duration;}}
-  else d.signals.push(...beat.events);
+  // Basic attacks are visual feedback. When busy, the authoritative engine still
+  // applies each action exactly once; we only omit its optional animation.
+  if(beat.event.kind==='basic'&&(d.active||d.queue.length))return;
+  if(d.queue.length>=12){
+    if(beat.event.kind==='cast')return;
+    const stale=d.queue.findIndex(item=>item.event.kind==='basic'||item.event.kind==='cast');
+    if(stale>=0)d.queue.splice(stale,1);
+  }
+  d.queue.push(beat);
 }
-/** Simulation time is independent from the bounded visual queue. Speed scales both clocks. */
-export function advanceDirection(d:Direction,seconds:number,onCue?:(cue:Cue)=>void):void {
+function collect(d:Direction,events:BattleEvent[]){
+  if(!events.length)return;
+  d.signals.push(...events);
+  // stepBattle observes after each action. Events following its principal action
+  // belong to that action; periodic effects are handled individually.
+  const principal=focus(events);
+  if(principal&&['basic','skill','cast'].includes(principal.kind)){
+    enqueue(d,makeBeat(principal,events.filter(e=>e.id>=principal.id),d.battle));
+  }else{
+    for(const event of events.filter(e=>['interrupt','ko','turn'].includes(e.kind)))
+      enqueue(d,makeBeat(event,[event],d.battle));
+  }
+}
+/** The engine advances on real time; visualSpeed changes only animations. */
+export function advanceDirection(d:Direction,seconds:number,onCue?:(cue:Cue)=>void,visualSpeed=1):void {
   const elapsed=Math.max(0,seconds);d.signals=[];
   if(!d.battle.finished){
     d.simIdle+=elapsed*P.gameRate;
     while(d.simIdle>=STEP-1e-8&&!d.battle.finished){
       d.simIdle=Math.max(0,d.simIdle-STEP);
-      let previous=structuredClone(d.battle),lastId=d.battle.nextEvent-1;
+      let lastId=d.battle.nextEvent-1;
       stepBattle(d.battle,current=>{
-        const events=current.events.filter(e=>e.id>lastId);lastId=current.nextEvent-1;
-        const next=structuredClone(current),event=focus(events);
-        if(event){
-          const actor=current.fighters.find(f=>f.uid===event.source);
-          const prep=actor&&event.skill!==undefined?byId[actor.characterId].skills[event.skill].preparation:0;
-          const grand=event.kind==='skill'&&prep>=P.grandPreparation;
-          enqueue(d,{event,events,before:previous,after:next,duration:duration(event,grand),family:familyOf(event,current),grand,elapsed:0,impacted:false});
-        }else if(d.queue.length){const tail=d.queue[d.queue.length-1];tail.after=next;tail.events.push(...events);}
-        else {d.signals.push(...events);}
-        previous=next;
+        const events=current.events.filter(e=>e.id>lastId);
+        lastId=current.nextEvent-1;
+        collect(d,events);
       });
     }
   }
-  let budget=elapsed;
+  // A growing visual backlog shortens playback, without changing the battle clock.
+  let budget=elapsed*Math.max(1,visualSpeed)*(1+Math.min(8,d.queue.length)*1.5);
   while(budget>1e-8&&!d.complete){
-    if(d.active){
-      const beat=d.active,take=Math.min(budget,beat.duration-beat.elapsed);beat.elapsed+=take;budget-=take;
-      if(!beat.impacted&&beat.elapsed>=beat.duration*P.impactAt){beat.impacted=true;d.visible=beat.after;d.signals.push(...beat.events);onCue?.({event:beat.event,family:beat.family,phase:'impact',grand:beat.grand});}
-      if(beat.elapsed>=beat.duration-1e-8){d.visible=beat.after;d.active=null;}
-      continue;
+    if(!d.active){
+      if(!d.queue.length){if(d.battle.finished)d.complete=true;break;}
+      d.active=d.queue.shift()!;d.serial++;
+      onCue?.({event:d.active.event,family:d.active.family,phase:'start',grand:d.active.grand});
     }
-    if(d.queue.length){d.active=d.queue.shift()!;d.visible=d.active.before;d.serial++;onCue?.({event:d.active.event,family:d.active.family,phase:'start',grand:d.active.grand});continue;}
-    if(d.battle.finished){d.visible=structuredClone(d.battle);d.complete=true;break;}
-    break;
+    const beat=d.active,take=Math.min(budget,beat.duration-beat.elapsed);
+    beat.elapsed+=take;budget-=take;
+    if(!beat.impacted&&beat.elapsed>=beat.duration*P.impactAt){
+      beat.impacted=true;
+      onCue?.({event:beat.event,family:beat.family,phase:'impact',grand:beat.grand});
+    }
+    if(beat.elapsed>=beat.duration-1e-8)d.active=null;
   }
+  d.visible=d.battle;
+  if(d.battle.finished&&!d.active&&!d.queue.length)d.complete=true;
 }
