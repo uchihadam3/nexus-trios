@@ -52,6 +52,8 @@
 .arena-scenery:before{opacity:.47}.arena-sigil{width:clamp(64px,12vw,92px);height:auto;font-size:0;color:#d7eee02c;stroke:currentColor;stroke-width:1.1;opacity:.7;filter:drop-shadow(0 0 14px #a7e8dc24)}.arena-sigil-core{fill:#b9e8df12;stroke:#c8fff244;stroke-width:1.6}
 
 /* Generated VFX atlases are the primary combat silhouettes; CSS supplies restrained staging accents. */
+.vfx-lab-demo .effect-sprite{animation-iteration-count:infinite;animation-fill-mode:none}
+.vfx-family-card .effect-sprite,.mini-vfx .effect-sprite{animation:none!important;opacity:.94;background-position:66.667% 33.333%}
 .utility-svg{pointer-events:none}.beam-ribbon{position:absolute;z-index:2;left:var(--beam-mid-x);top:var(--beam-mid-y);width:var(--beam-length);height:clamp(13px,4.4vw,34px);transform:translate(-50%,-50%) rotate(var(--beam-angle));transform-origin:center;background:linear-gradient(180deg,transparent 0%,color-mix(in srgb,var(--fx-color) 28%,transparent) 23%,#fff 47%,var(--fx-color) 54%,color-mix(in srgb,var(--fx-color) 30%,transparent) 78%,transparent 100%);filter:drop-shadow(0 0 8px var(--fx-color));opacity:.9;pointer-events:none;animation:beam-form .52s ease-out both}
 .beam-ribbon:before,.beam-ribbon:after{content:"";position:absolute;inset:-90% 0;background:linear-gradient(90deg,transparent,color-mix(in srgb,var(--fx-color) 42%,transparent),transparent);filter:blur(7px)}.beam-ribbon:after{inset:34% 0;background:linear-gradient(90deg,transparent,#fff,transparent);filter:blur(1px);opacity:.75}
 .beam-heat-vision{height:clamp(7px,2vw,15px);box-shadow:0 0 8px #ff575d}.beam-heat-vision:before{height:230%;top:-65%;background:linear-gradient(90deg,transparent,#ff4553a3,transparent)}
