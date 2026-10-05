@@ -2,6 +2,7 @@ import { createServer } from 'vite';
 import { chromium } from '@playwright/test';
 import { mkdirSync,writeFileSync } from 'node:fs';
 
+process.env.VITE_DEPLOY_BASE='/';
 const server=await createServer({server:{host:'127.0.0.1',port:5173,strictPort:true}});
 await server.listen();
 const browser=await chromium.launch({headless:true,args:['--no-sandbox']});
