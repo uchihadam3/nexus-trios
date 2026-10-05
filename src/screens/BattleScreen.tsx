@@ -12,6 +12,7 @@ import { byId } from '../data/characters';
 import { statuses } from '../data/statuses';
 
 type BattleNotice={id:string;actor:string;title:string;detail:string};
+const chargeLabels:Record<string,string>={action:'Ação',dealt:'Dano causado',received:'Dano recebido',allyHurt:'Aliado ferido',enemyHurt:'Rival ferido',interrupt:'Interrupção',status:'Efeito aplicado',protected:'Proteção útil',enemyCast:'Preparação rival',survived:'Tempo sobrevivido',losing:'Desvantagem',winning:'Vantagem',trait:'Traço ativado',synergy:'Sinergia do trio'};
 
 export function BattleScreen({battle,beat,index,name,settings,paused,onPause,onAbandon,onSettings}:{battle:Battle;beat:Beat|null;index:number;name:string;settings:Settings;paused:boolean;onPause:()=>void;onAbandon:()=>void;onSettings:(s:Settings)=>void}){
   const arena=useRef<HTMLDivElement>(null),[anchors,setAnchors]=useState<Anchors>({}),[mixer,setMixer]=useState(false),[historyOpen,setHistoryOpen]=useState(false),[inspect,setInspect]=useState<InspectTarget|null>(null),[notices,setNotices]=useState<BattleNotice[]>([]),[tutorial,setTutorial]=useState(()=>{try{return index===0&&!localStorage.getItem('nexus-battle-guide-v1')}catch{return false}});
@@ -45,12 +46,12 @@ export function BattleScreen({battle,beat,index,name,settings,paused,onPause,onA
     if(!beat?.impacted)return;
     const charges=beat.events.filter(event=>event.kind==='charge');
     if(beat.event.kind!=='skill'&&!charges.length)return;
-    const labels:Record<string,string>={action:'Ação',dealt:'Dano causado',received:'Dano recebido',allyHurt:'Aliado ferido',enemyHurt:'Rival ferido',interrupt:'Interrupção',status:'Efeito aplicado',protected:'Proteção útil',enemyCast:'Preparação rival',survived:'Tempo sobrevivido',losing:'Desvantagem',winning:'Vantagem',trait:'Traço ativado',synergy:'Sinergia do trio'};
     const effects=beat.events.filter(event=>['damage','heal','shield','block','status','interrupt','ko'].includes(event.kind));
     const detail=charges.length
-      ?charges.slice(0,2).map(event=>`+${Math.round(event.value??0)}% carga · ${labels[event.label]??event.label}`).join('  /  ')
-      :effects.slice(0,2).map(event=>event.kind==='damage'?`−${Math.round(event.value??0)} condição`:event.kind==='heal'?`+${Math.round(event.value??0)} recuperação`:event.kind==='status'?'Efeito aplicado':event.kind==='interrupt'?'Habilidade interrompida':event.kind==='ko'?'Nocaute':event.kind==='block'||event.kind==='shield'?'Proteção aplicada':event.label).join('  /  ')||'Habilidade executada';
-    const notice={id:String(beat.event.id),actor:sourceName(beat.event.source),title:beat.event.label,detail};
+      ?charges.slice(0,2).map(event=>`+${Math.round(event.value??0)}% carga · ${chargeLabels[event.label]??event.label}`).join('  /  ')
+      :effects.slice(0,2).map(event=>event.kind==='damage'?`−${Math.round(event.value??0)} condição`:event.kind==='heal'?`+${Math.round(event.value??0)} recuperação`:event.kind==='status'?`Efeito aplicado`:event.kind==='interrupt'?'Habilidade interrompida':event.kind==='ko'?'Nocaute':event.kind==='block'||event.kind==='shield'?'Proteção aplicada':event.label).join('  /  ')||'Habilidade executada';
+    const title=charges.length&&!['skill','cast'].includes(beat.event.kind)?'Carga de habilidade':beat.event.label;
+    const notice={id:String(beat.event.id),actor:sourceName(beat.event.source),title,detail};
     setNotices(current=>[...current.slice(-1),notice]);
     window.setTimeout(()=>setNotices(current=>current.filter(item=>item.id!==notice.id)),3600);
   },[beat?.event.id,beat?.impacted]);
