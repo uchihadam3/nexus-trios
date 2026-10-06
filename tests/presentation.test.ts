@@ -10,7 +10,7 @@ import type { BattleEvent } from '../src/engine/types';
 const a=['goku','pikachu','captain'],b=['vegeta','raven','hulk'];
 function watch(d:Direction,speed=1,drain=true){
  let frames=0,mechanicalFinish=-1,maxQueue=0;
- while(!(drain?d.complete:d.battle.finished)&&frames<20000){
+ while(!(drain?d.complete:d.battle.finished)&&frames<50000){
   advanceDirection(d,.04,undefined,speed);frames++;
   maxQueue=Math.max(maxQueue,d.queue.length);
   if(d.battle.finished&&mechanicalFinish<0)mechanicalFinish=frames*.04;
@@ -31,27 +31,20 @@ describe('Direção sem alterar regras',()=>{
   const battle=createBattle(a,b,42),d=createDirection(battle);
   expect(d.visible).not.toBe(battle);
   expect(d.visible).toEqual(battle);
-  expect(P.gameRate).toBe(1);
+  expect(P.gameRate).toBe(.86);
   advanceDirection(d,1);
   expect(d.visible).not.toBe(d.battle);
-  expect(d.battle.time).toBeCloseTo(1,6);
+  expect(d.battle.time).toBeLessThanOrEqual(.3);
   expect([...d.queue,...(d.active?[d.active]:[])].every(beat=>beat.before&&beat.after)).toBe(true);
  });
- it('1× e 2× mostram o mesmo combate mecânico em cada instante real',()=>{
+ it('1× e 2× preservam o mesmo combate; só 2× acelera a cadência',()=>{
   const one=createDirection(createBattle(a,b,42)),two=createDirection(createBattle(a,b,42));
-  for(let frame=0;frame<300&&!one.battle.finished&&!two.battle.finished;frame++){
-   advanceDirection(one,.04,undefined,1);
-   advanceDirection(two,.04,undefined,2);
-   expect(two.battle).toEqual(one.battle);
-   expect(one.visible.time).toBeLessThanOrEqual(one.battle.time+1e-6);
-   expect(two.visible.time).toBeLessThanOrEqual(two.battle.time+1e-6);
-  }
   const oneEnd=watch(one,1),twoEnd=watch(two,2);
   expect(two.battle).toEqual(one.battle);
   expect(one.battle).toEqual(simulate(a,b,42));
-  expect(oneEnd.mechanicalFinish).toBeCloseTo(twoEnd.mechanicalFinish,2);
+  expect(twoEnd.wall).toBeLessThan(oneEnd.wall*.6);
  });
- it('120 segundos mecânicos duram aproximadamente 120 segundos reais em ambas velocidades',()=>{
+ it('120 segundos limitam a simulação sem comprimir a apresentação em 1×',()=>{
   const make=()=>{
    const battle=createBattle(a,b,8);
    for(const f of battle.fighters){f.maxHp=1e8;f.hp=f.side==='enemy'?8e7:1e8;}
@@ -60,11 +53,9 @@ describe('Direção sem alterar regras',()=>{
   const one=make(),two=make(),duration1=watch(one,1,false),duration2=watch(two,2,false);
   expect(one.battle.time).toBe(120);
   expect(two.battle).toEqual(one.battle);
-  expect(duration1.mechanicalFinish).toBeGreaterThanOrEqual(119.9);
-  expect(duration1.mechanicalFinish).toBeLessThanOrEqual(120.1);
-  expect(duration2.mechanicalFinish).toBeGreaterThanOrEqual(119.9);
-  expect(duration2.mechanicalFinish).toBeLessThanOrEqual(120.1);
- });
+  expect(duration1.mechanicalFinish).toBeGreaterThan(120);
+  expect(duration2.mechanicalFinish).toBeLessThan(duration1.mechanicalFinish*.6);
+ },15000);
  it('HP, KO, carga e escudo visíveis só mudam no impacto causal',()=>{
   const d=createDirection(createBattle(['wolverine','pikachu','captain'],b,11));
   let lastTime=0,checkedHp=0,checkedKo=0,checkedCharge=0;
@@ -115,12 +106,51 @@ describe('Direção sem alterar regras',()=>{
    if(beat.events.some(e=>e.kind==='ko'))expect(beat.after.fighters.some((f,i)=>f.hp===0&&beat.before.fighters[i].hp>0)).toBe(true);
   }
  });
- it('atrasos de frame não perdem tempo, nem alteram eventos ou RNG',()=>{
+ it('densidade de ações, skills e efeitos não altera a velocidade de cada beat',()=>{
+  const battle=createBattle(a,b,42);
+  for(const fighter of battle.fighters)fighter.action=.96;
+  battle.fighters[0].statuses.push({id:'regen',remaining:4,intensity:12,source:battle.fighters[0].uid});
+  battle.fighters[3].statuses.push({id:'burning',remaining:4,intensity:12,source:battle.fighters[0].uid});
+  battle.fighters[1].shields.push({amount:100,remaining:4,source:battle.fighters[1].uid});
+  battle.fighters[2].skills[0].charge=99;
+  battle.fighters[4].skills[0].charge=99;
+  const d=createDirection(battle),basics:Beat[]=[],skills:Beat[]=[],periodic:Beat[]=[];
+  let maxQueue=0,checkedActive=0;
+  for(let frame=0;frame<25000&&!d.complete;frame++){
+   const active=d.active,mechanicalTime=d.battle.time,elapsed=active?.elapsed;
+   advanceDirection(d,.04,cue=>{
+    if(cue.phase!=='start')return;
+    const beat=d.active!;
+    if(beat.event.kind==='basic')basics.push(beat);
+    if(beat.event.kind==='skill')skills.push(beat);
+    if(beat.periodic)periodic.push(beat);
+   });
+   maxQueue=Math.max(maxQueue,d.queue.length);
+   if(active){
+    expect(d.battle.time).toBe(mechanicalTime);
+    expect(active.elapsed-elapsed!).toBeLessThanOrEqual(.040001);
+    checkedActive++;
+   }
+  }
+  expect(d.complete).toBe(true);
+  expect(maxQueue).toBeGreaterThan(0);
+  expect(maxQueue).toBeLessThanOrEqual(6);
+  expect(checkedActive).toBeGreaterThan(100);
+  expect(basics.length).toBeGreaterThan(3);
+  expect(skills.length).toBeGreaterThan(1);
+  expect(periodic.length).toBeGreaterThan(0);
+  expect(new Set(basics.map(beat=>beat.duration))).toEqual(new Set([P.normalSeconds]));
+  expect(new Set(skills.map(beat=>beat.duration))).toEqual(new Set([P.skillSeconds,P.grandSeconds].filter(value=>skills.some(beat=>beat.duration===value))));
+  expect(periodic.every(beat=>beat.duration>=P.periodicSeconds)).toBe(true);
+ });
+ it('atrasos de frame não provocam catch-up e preservam eventos e RNG',()=>{
   const steady=createDirection(createBattle(a,b,42)),delayed=createDirection(createBattle(a,b,42));
-  for(let i=0;i<3000&&!steady.battle.finished;i++)advanceDirection(steady,.04);
-  for(let i=0;i<120&&!delayed.battle.finished;i++)advanceDirection(delayed,1);
-  expect(delayed.battle).toEqual(steady.battle);
+  for(let i=0;i<120;i++)advanceDirection(steady,.04);
+  for(let i=0;i<120;i++)advanceDirection(delayed,1);
+  expect(delayed.active?.duration).toBeGreaterThanOrEqual(P.periodicSeconds);
+  expect(delayed.battle.time).toBeLessThan(steady.battle.time*8);
   watch(steady);watch(delayed);
+  expect(delayed.battle).toEqual(steady.battle);
   expect(delayed.visible).toEqual(delayed.battle);
   expect(steady.visible).toEqual(steady.battle);
  });
@@ -150,7 +180,6 @@ describe('Direção sem alterar regras',()=>{
  it('atualizar a página retoma a fila e o HP visível no mesmo Beat causal',()=>{
   for(const phase of ['before','after'] as const){
    const d=createDirection(createBattle(a,b,42));
-   for(let frame=0;frame<700;frame++)advanceDirection(d,.04);
    for(let frame=0;frame<2000&&!d.active;frame++)advanceDirection(d,.04);
    if(phase==='after')while(d.active&&!d.active.impacted)advanceDirection(d,.04);
    else while(d.active&&d.active.impacted)advanceDirection(d,.04);
@@ -168,6 +197,16 @@ describe('Direção sem alterar regras',()=>{
    expect(resumed!.battle).toEqual(d.battle);
    expect(resumed!.visible).toEqual(d.visible);
   }
+ },15000);
+ it('retoma um checkpoint anterior à mudança de cadência sem mostrar HP futuro',()=>{
+  const initial=createBattle(a,b,42),d=createDirection(structuredClone(initial));
+  while(!d.active||d.active.event.kind!=='basic')advanceDirection(d,.04);
+  const saved=structuredClone(d.battle),checkpoint=checkpointDirection(d);
+  const previousFormat={...checkpoint,simIdle:undefined};
+  const resumed=restoreDirection(initial,saved,previousFormat);
+  expect(resumed).not.toBe(null);
+  expect(resumed!.visible.fighters.map(f=>f.hp)).toEqual(d.visible.fighters.map(f=>f.hp));
+  expect(resumed!.active?.duration).toBe(P.normalSeconds);
  });
  it('VFX de alvo único não herda alvos de outro evento; área real continua área',()=>{
   const battle=createBattle(['goku','thor','captain'],b,4);

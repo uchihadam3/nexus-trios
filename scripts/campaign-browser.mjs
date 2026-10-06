@@ -23,11 +23,11 @@ await page.evaluate(async()=>{
 await page.reload({waitUntil:'networkidle'});
 await page.getByRole('button',{name:'Continuar jornada',exact:true}).click();
 await page.getByRole('button',{name:'Entrar na arena'}).click();
-for(let i=0;i<45;i++){
-  await page.clock.runFor(65000);
+for(let second=1;second<=3600;second++){
+  for(let frame=0;frame<25;frame++)await page.clock.runFor(40);
   const state=await page.evaluate(()=>{const run=JSON.parse(localStorage.getItem('nexus-v1-run'));return {index:run.index,stage:run.stage,winner:run.battle?.winner,summaries:run.summaries?.length??0};});
   if(state.stage==='result'&&state.winner==='enemy')throw Error(`Campanha perdeu no encontro ${state.index+1}: ${JSON.stringify(state)}`);
-  if(i%5===0)console.log(`Progresso da campanha: encontro ${state.index+1}, ${state.summaries} resumos`);
+  if(second%300===0)console.log(`Progresso da campanha: encontro ${state.index+1}, ${state.summaries} resumos`);
   if(await page.getByRole('heading',{name:'A conexão perfeita.'}).count())break;
 }
 if(!await page.getByRole('heading',{name:'A conexão perfeita.'}).count())throw Error('Campanha de 10 batalhas não concluída');

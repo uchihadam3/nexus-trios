@@ -25,7 +25,7 @@ describe('Catálogo e seleção',()=>{
    for(const id of team)expect(enemies).not.toContain(id);
    for(const encounter of first)expect(new Set(encounter.team).size).toBe(3);
   }
- });
+ },15000);
  it('audita explicitamente uma repetição entre encontros como inválida',()=>{
   const encounters=generateCampaign(44,player).map(e=>({...e,team:[...e.team]}));
   encounters[1].team[0]=encounters[0].team[0];

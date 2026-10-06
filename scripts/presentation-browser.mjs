@@ -47,7 +47,7 @@ try{
   await page.evaluate(async(speed)=>{const {createBattle}=await import('/src/engine/battle.ts');const run=JSON.parse(localStorage.getItem('nexus-v1-run'));run.battle=createBattle(run.team,run.encounters[0].team,run.seed);run.stage='battle';run.recorded=false;sessionStorage.setItem('nexus-test-run',JSON.stringify(run));const s=JSON.parse(localStorage.getItem('nexus-v1-settings'));s.speed=speed;s.volume=0;sessionStorage.setItem('nexus-test-settings',JSON.stringify(s));},speed);
   await page.reload({waitUntil:'networkidle'});await page.getByRole('button',{name:'Continuar jornada',exact:true}).click();await page.getByRole('button',{name:'Continuar',exact:true}).click();
   let elapsed=0,states=new Set();
-  while(elapsed<900000){await page.clock.runFor(10000);elapsed+=10000;for(const c of await page.locator('.ability').evaluateAll(els=>els.map(e=>e.className)))states.add(c);if(await page.locator('.result-screen').count())break;}
+  while(elapsed<900000){await page.clock.runFor(40);elapsed+=40;if(elapsed%1000!==0)continue;for(const c of await page.locator('.ability').evaluateAll(els=>els.map(e=>e.className)))states.add(c);if(await page.locator('.result-screen').count())break;}
   if(!await page.locator('.result-screen').count()){console.log(await page.evaluate(()=>({clock:document.querySelector('.battle-clock')?.textContent,paused:!!document.querySelector('.paused-banner'),run:JSON.parse(localStorage.getItem('nexus-v1-run')),now:performance.now()})));throw Error('Batalha não terminou');}
   const result=await page.evaluate(()=>JSON.parse(localStorage.getItem('nexus-v1-run')).battle);results.push(result);
   report[`battle${speed}x`]={elapsedSampleSeconds:elapsed/1000,time:result.time,winner:result.winner,reason:result.reason,states:[...states]};
