@@ -13,20 +13,23 @@ from scipy.ndimage import gaussian_filter, map_coordinates
 
 ROOT = Path(__file__).resolve().parents[2]
 OUT = ROOT / "public/assets/vfx"
-COLS = ROWS = 4
-FRAMES = 16
-FPS = 24
+COLS, ROWS = 3, 4
+FRAMES = 12
+FPS = 20
 SCALE = 2
 FAMILIES = {
-    "physical": ((255, 225, 177), 128), "energy": ((139, 224, 255), 256),
-    "electric": ((255, 239, 142), 256), "fire": ((255, 119, 56), 256),
-    "grand": ((255, 213, 119), 384), "slash": ((218, 239, 255), 128),
-    "magic": ((193, 151, 255), 256), "dark": ((174, 99, 239), 256),
-    "psychic": ((255, 156, 215), 128), "shield": ((142, 222, 255), 128),
-    "heal": ((139, 255, 193), 128), "regen": ((174, 250, 152), 128),
-    "prison": ((159, 225, 243), 128), "interrupt": ((255, 175, 138), 128),
-    "ko": ((255, 128, 118), 256), "buff": ((233, 250, 155), 128),
-    "debuff": ((221, 147, 217), 128),
+    "physical_light": ((255, 225, 177), 96, "physical"),
+    "physical_heavy": ((255, 204, 150), 128, "grand"),
+    "slash": ((218, 239, 255), 128, "slash"),
+    "projectile": ((255, 225, 177), 96, "energy"),
+    "energy_orb": ((139, 224, 255), 128, "energy"),
+    "electric": ((255, 239, 142), 128, "electric"),
+    "fire": ((255, 119, 56), 128, "fire"),
+    "magic_psychic": ((193, 151, 255), 128, "magic"),
+    "dark": ((174, 99, 239), 128, "dark"),
+    "control": ((159, 225, 243), 128, "prison"),
+    "shield": ((142, 222, 255), 128, "shield"),
+    "heal_buff": ((139, 255, 193), 128, "heal"),
 }
 
 
@@ -234,21 +237,42 @@ def arena() -> Image.Image:
     img.alpha_composite(overlay);return img
 
 
+def beam_sheet() -> Image.Image:
+    """A short transparent, looping beam texture; rotation/scale are done by CSS."""
+    w,h=256,32
+    sheet=Image.new("RGBA",(w,h*4),(0,0,0,0))
+    for i in range(4):
+        y,x=np.mgrid[0:h,0:w];rng=np.random.default_rng(100+i)
+        ripple=np.sin(x*.14+i*1.5+np.sin(x*.037)*2)*.5+.5
+        streak=gaussian_filter(rng.random((h,w)).astype(np.float32),sigma=(1.4,7))
+        streak=(streak-streak.min())/(streak.max()-streak.min()+1e-6)
+        edge=np.exp(-((y-(h-1)/2)/9)**4)
+        core=np.exp(-((y-(h-1)/2)/2.8)**2)
+        alpha=np.uint8(np.clip((edge*(.45+.22*ripple+.14*streak)+core*.3)*255,0,242))
+        rgb=np.stack((np.uint8(119+125*core),np.uint8(184+70*core),np.uint8(224+31*core)),axis=-1)
+        sheet.paste(Image.fromarray(np.dstack((rgb,alpha)),"RGBA"),(0,h*i))
+    return sheet
+
+
 def main() -> None:
     OUT.mkdir(parents=True,exist_ok=True)
     manifest={"seed":20261005,"fps":FPS,"columns":COLS,"rows":ROWS,"supersampling":SCALE,"families":{}}
-    for family,(color,size) in FAMILIES.items():
+    for family,(color,size,shape) in FAMILIES.items():
         sheet=Image.new("RGBA",(size*COLS,size*ROWS),(0,0,0,0))
-        for i in range(FRAMES): sheet.alpha_composite(frame(family,i,size,color),((i%COLS)*size,(i//COLS)*size))
+        for i in range(FRAMES): sheet.alpha_composite(frame(shape,i,size,color),((i%COLS)*size,(i//COLS)*size))
         path=OUT/f"{family}.webp"
-        encoded=BytesIO();sheet.save(encoded,"WEBP",quality=74 if family=="grand" else 84,method=5)
+        encoded=BytesIO();sheet.save(encoded,"WEBP",quality=78,method=5)
         payload=encoded.getvalue()
         if not payload: raise RuntimeError(f"empty generated atlas: {family}")
         path.write_bytes(payload)
         if path.stat().st_size != len(payload): raise RuntimeError(f"short atlas write: {family}")
-        manifest["families"][family]={"file":path.name,"frames":FRAMES,"fps":FPS,"frameSize":[size,size],"columns":COLS,"rows":ROWS,"loop":family in {"magic","dark","psychic","shield","regen"},"alpha":True,"bytes":path.stat().st_size}
+        manifest["families"][family]={"file":path.name,"frames":FRAMES,"fps":FPS,"frameSize":[size,size],"columns":COLS,"rows":ROWS,"alpha":True,"bytes":path.stat().st_size}
+    beam_sheet().save(OUT/"beam.webp","WEBP",quality=82,method=5)
+    manifest["beam"]={"file":"beam.webp","frameSize":[256,32],"frames":4,"bytes":(OUT/"beam.webp").stat().st_size}
     arena().save(OUT/"arena.webp","WEBP",quality=86,method=5)
     manifest["arena"]={"file":"arena.webp","size":[768,1056],"containsText":False,"containsFigures":False}
+    for stale in OUT.glob("*.webp"):
+        if stale.name not in {"arena.webp","beam.webp",*(f"{family}.webp" for family in FAMILIES)}: stale.unlink()
     (OUT/"manifest.json").write_text(json.dumps(manifest,indent=2)+"\n")
     print(f"generated {len(FAMILIES)} layered atlases ({FRAMES} frames each) and arena in {OUT}")
 

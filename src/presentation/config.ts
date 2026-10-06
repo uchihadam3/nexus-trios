@@ -15,11 +15,6 @@ export const PRESENTATION = {
   criticalCondition: 0.25,
   nearAction: 0.82,
   grandPreparation: 2.5,
-  ambientParticles: 9,
-  impactParticles: 7,
-  particleLimit: 16,
-  maxConnections: 3,
-  vfxIntensity: 0.8,
   renderIntervalMs: 40,
-  audio: { master: 65, music: 45, effects: 70, bpm: 108, bars: 64, musicSeconds: 142.2, duck: 0.32, maxActiveCues: 12, minorGap: 0.16, majorGap: 0.08 },
+  audio: { master: 65, music: 45, effects: 70, bpm: 108, bars: 64, musicSeconds: 142.2, duck: 0.32, maxActiveCues: 7, minorGap: 0.16, majorGap: 0.08 },
 } as const;

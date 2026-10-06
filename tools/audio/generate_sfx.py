@@ -12,9 +12,9 @@ from scipy.signal import butter, sosfilt
 
 ROOT=Path(__file__).resolve().parents[2]
 OUT=ROOT/"public/assets/audio/sfx"
-RATE=24000
-VARIANTS=4
-LENGTHS={"physical-light":.42,"physical-heavy":.78,"energy-charge":.95,"energy-shot":.58,"energy-impact":.78,"electric-charge":.52,"electric-hit":.48,"fire-cast":.72,"fire-impact":.72,"magic-cast":.95,"magic-impact":.75,"slash-fast":.36,"slash-heavy":.61,"shield-on":.68,"shield-hit":.55,"heal":.86,"regen":.72,"interrupt":.38,"shatter":.68,"ko":1.05,"grand-charge":1.25,"grand-impact":1.18,"domain-turn":.82,"victory":1.45,"defeat":1.25}
+RATE=22050
+VARIANTS=3
+LENGTHS={"physical-light":.28,"physical-heavy":.46,"slash":.38,"projectile":.3,"energy-charge":.55,"energy-shot":.36,"energy-impact":.48,"electric":.4,"fire":.48,"magic":.5,"dark-control":.5,"shield":.45,"heal-buff":.58,"interrupt":.3,"ko":.65,"grand":.76,"victory":1.05,"defeat":.95}
 
 
 def env(n:int,attack:float=.02,decay:float=.35,curve:float=2.0)->np.ndarray:
@@ -39,15 +39,15 @@ def cue(name:str,variant:int)->np.ndarray:
     dur=LENGTHS[name];n=round(RATE*dur);rng=np.random.default_rng(20261005+sum(map(ord,name))*31+variant*7919)
     t=np.arange(n)/RATE;mix=np.zeros(n,np.float64)
     seed=variant*.41
-    if name.startswith("physical") or name in {"energy-impact","fire-impact","magic-impact","shield-hit","grand-impact","ko"}:
-        heavy=name in {"physical-heavy","energy-impact","fire-impact","magic-impact","shield-hit","grand-impact","ko"}
+    if name.startswith("physical") or name in {"energy-impact","grand","ko"}:
+        heavy=name!="physical-light"
         # Low sub impact + woody mid-body + broadband contact/crackle + short resonant tail.
         sub=tone(n,82+variant*5,38+variant*3,seed)*env(n,.008,dur*.48,1.15)
         body=tone(n,205+variant*17,71+variant*7,seed,.7)*env(n,.012,dur*.26,1.35)
         crack=filtered_noise(rng,n,420,7800)*env(n,.002,.075,1.8)
         tail=filtered_noise(rng,n,800,4200)*np.exp(-t*(8 if heavy else 13))
         mix+=sub*(.72 if heavy else .43)+body*(.42 if heavy else .25)+crack*(.16 if heavy else .12)+tail*.07
-        if name=="grand-impact": mix+=tone(n,54,29,.3)*env(n,.015,dur*.85,.7)*.45
+        if name=="grand": mix+=tone(n,54,29,.3)*env(n,.015,dur*.85,.7)*.45
     elif "electric" in name:
         # Several stochastic crackles with snapping transient and a short rounded body.
         noise=filtered_noise(rng,n,1050,10000)
@@ -65,13 +65,13 @@ def cue(name:str,variant:int)->np.ndarray:
         air=filtered_noise(rng,n,900,6800)*env(n,.12 if charge else .008,.27,1.2)
         low=tone(n,64,38,seed,.5)*env(n,.025,dur*.55,.9)
         mix+=sweep*env(n,.07,dur*.7,.9)*.27+over*env(n,.09,dur*.36,1.2)*.10+air*.12+low*.24
-    elif name.startswith("fire"):
+    elif name=="fire":
         roar=filtered_noise(rng,n,95,1700)
         hiss=filtered_noise(rng,n,2400,10000)
         pulse=(.65+.35*np.sin(2*np.pi*(7+variant)*t+seed))
         low=tone(n,92,43,seed,.55)*env(n,.02,dur*.6,.9)
         mix+=roar*env(n,.025,dur*.62,.8)*pulse*.3+hiss*env(n,.08,dur*.4,1)*.12+low*.3
-    elif name.startswith("magic") or name=="domain-turn":
+    elif name in {"magic","dark-control"}:
         reverse=np.clip((t/dur)**1.8,0,1) if name.endswith("cast") else np.exp(-t*5)
         layers=[]
         for k,interval in enumerate((1,1.25,1.5,2)):
@@ -80,22 +80,22 @@ def cue(name:str,variant:int)->np.ndarray:
         shimmer=filtered_noise(rng,n,3000,10000)*env(n,.08,dur*.5,1)
         impact=tone(n,410,165,seed,.8)*env(n,.012,dur*.35,1.4)
         mix+=sum(layers)*reverse+shimmer*.12+impact*.12
-    elif name.startswith("slash"):
+    elif name=="slash":
         whoosh=filtered_noise(rng,n,850,7000)
         slice_tone=tone(n,1150+variant*120,260,seed,2.8)
         contact=filtered_noise(rng,n,1800,11000)*env(n,.01,.08,2)
         mix+=whoosh*env(n,.015,dur*.2,1.8)*.32+slice_tone*env(n,.012,.09,1.6)*.17+contact*.13
-    elif name.startswith("shield"):
+    elif name=="shield":
         ring=tone(n,390+variant*11,640+variant*17,seed,.65)
         overtone=tone(n,810+variant*23,490,seed+1,.8)
         hit=filtered_noise(rng,n,500,6200)*env(n,.003,.07,2)
         mix+=ring*env(n,.035,dur*.55,.75)*.24+overtone*env(n,.06,dur*.36,1)*.14+hit*.12
-    elif name in {"heal","regen"}:
+    elif name=="heal-buff":
         shimmer=filtered_noise(rng,n,2000,10500)
         bed=sum(tone(n,220*k,220*k+40,seed+k,.5)*(.15/k) for k in (1,2,3,4))
         rise=np.clip(t/dur,0,1)**1.4
         mix+=bed*rise*.28+shimmer*env(n,.1,dur*.5,.7)*.14
-    elif name in {"interrupt","shatter"}:
+    elif name=="interrupt":
         crack=filtered_noise(rng,n,700,11000)*env(n,.001,.11,2)
         body=tone(n,510,115,seed,2)*env(n,.003,.17,1.5)
         chips=filtered_noise(rng,n,2600,10000)*np.exp(-t*13)
@@ -109,10 +109,13 @@ def cue(name:str,variant:int)->np.ndarray:
             freq=440*2**((midi-69)/12);segment=np.arange(ln)/RATE
             mix[at:]+=np.sin(2*np.pi*freq*segment)*np.exp(-segment*(2.1 if name=="victory" else 2.8))*.11
         mix+=filtered_noise(rng,n,1600,6000)*env(n,.09,.4,1.2)*.04
+    elif name=="projectile":
+        mix+=filtered_noise(rng,n,500,4800)*env(n,.006,.13,1.7)*.18
+        mix+=tone(n,340,100,seed,1.6)*env(n,.008,.18,1.3)*.27
     else:
         mix+=tone(n,180,370,seed,1)*env(n,.02,dur*.5,1)*.22
     # Very subtle deterministic pitch/texture variation and peak normalization.
-    mix+=filtered_noise(rng,n,80,12000)*env(n,.003,.18,1.2)*.018
+    mix+=filtered_noise(rng,n,80,8600)*env(n,.003,.12,1.2)*.009
     peak=max(float(np.max(np.abs(mix))),1e-8)
     return (mix/peak*.78).clip(-1,1)
 
@@ -121,14 +124,16 @@ def main()->None:
     OUT.mkdir(parents=True,exist_ok=True);manifest={"sampleRate":RATE,"channels":1,"encoding":"pcm_s16le","variants":VARIANTS,"sounds":{}}
     for name in LENGTHS:
         clips=[cue(name,variant) for variant in range(VARIANTS)]
-        gap=np.zeros(round(RATE*.11),dtype=np.float64)
-        offsets=[round(i*(LENGTHS[name]+.11),3) for i in range(VARIANTS)]
+        gap=np.zeros(round(RATE*.06),dtype=np.float64)
+        offsets=[round(i*(LENGTHS[name]+.06),3) for i in range(VARIANTS)]
         samples=np.concatenate([clip if i==VARIANTS-1 else np.concatenate((clip,gap)) for i,clip in enumerate(clips)])
         path=OUT/f"{name}.wav"
         with wave.open(str(path),"wb") as out:
             out.setnchannels(1);out.setsampwidth(2);out.setframerate(RATE);out.writeframes((samples*32767).astype("<i2").tobytes())
         manifest["sounds"][name]={"file":path.name,"duration":LENGTHS[name],"variantOffsets":offsets}
     (OUT/"manifest.json").write_text(json.dumps(manifest,indent=2)+"\n")
+    for stale in OUT.glob("*.wav"):
+        if stale.stem not in LENGTHS: stale.unlink()
     total=sum(p.stat().st_size for p in OUT.glob("*.wav"))
     print(f"generated {len(LENGTHS)} cue families × {VARIANTS} WAV variations ({total/1024:.0f} KiB)")
 

@@ -1,57 +1,55 @@
 import { describe,expect,it } from 'vitest';
-import { readFileSync,statSync } from 'node:fs';
+import { readFileSync,statSync,readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
-import { CUE_ASSETS } from '../src/audio/cues';
-import { VFX_PRESETS,profileFor } from '../src/presentation/vfxProfiles';
-import { byId,characters } from '../src/data/characters';
+import { CUE_ASSETS,CUE_FILES } from '../src/audio/cues';
+import { VFX_FAMILIES,atlasFor,profileFor } from '../src/presentation/vfxProfiles';
+import { characters } from '../src/data/characters';
 
 const root=process.cwd();
-const vfx=JSON.parse(readFileSync(resolve(root,'public/assets/vfx/manifest.json'),'utf8')) as {columns:number;rows:number;families:Record<string,{file:string;frames:number;frameSize:[number,number];alpha:boolean;bytes:number}>};
+const vfx=JSON.parse(readFileSync(resolve(root,'public/assets/vfx/manifest.json'),'utf8')) as {columns:number;rows:number;families:Record<string,{file:string;frames:number;frameSize:[number,number];alpha:boolean;bytes:number}>;beam:{file:string;bytes:number}};
 const sfx=JSON.parse(readFileSync(resolve(root,'public/assets/audio/sfx/manifest.json'),'utf8')) as {sampleRate:number;variants:number;sounds:Record<string,{file:string;duration:number;variantOffsets:number[]}>};
 
-describe('presentation audiovisual assets',()=>{
-  it('publishes all visual families as transparent, normalized 4×4 atlases',()=>{
-    expect(vfx.columns).toBe(4);expect(vfx.rows).toBe(4);expect(Object.keys(vfx.families).length).toBeGreaterThanOrEqual(17);
+describe('compact reusable audiovisual library',()=>{
+  it('ships only transparent 3×4 atlases, a prerendered beam and arena within budget',()=>{
+    expect(vfx.columns).toBe(3);expect(vfx.rows).toBe(4);
+    expect(Object.keys(vfx.families).sort()).toEqual([...new Set(Object.keys(VFX_FAMILIES).map(f=>atlasFor(f as keyof typeof VFX_FAMILIES)))].sort());
+    let bytes=vfx.beam.bytes+statSync(resolve(root,'public/assets/vfx/arena.webp')).size;
+    let decoded=0;
     for(const [family,atlas] of Object.entries(vfx.families)){
-      expect(atlas.frames,`${family} frame count`).toBe(16);expect(atlas.alpha,`${family} alpha`).toBe(true);
-      expect(atlas.frameSize[0]).toBe(atlas.frameSize[1]);expect(statSync(resolve(root,'public/assets/vfx',atlas.file)).size).toBe(atlas.bytes);
+      expect(atlas.frames,family).toBe(12);expect(atlas.alpha,family).toBe(true);
+      expect(atlas.frameSize).toEqual([VFX_FAMILIES[family as keyof typeof VFX_FAMILIES].size,VFX_FAMILIES[family as keyof typeof VFX_FAMILIES].size]);
+      expect(statSync(resolve(root,'public/assets/vfx',atlas.file)).size).toBe(atlas.bytes);
+      bytes+=atlas.bytes;decoded+=atlas.frameSize[0]*atlas.frameSize[1]*12*4;
     }
-    expect(vfx.families.energy.frameSize[0]).toBeGreaterThanOrEqual(256);
-    expect(vfx.families.grand.frameSize[0]).toBeGreaterThanOrEqual(384);
+    expect(statSync(resolve(root,'public/assets/vfx',vfx.beam.file)).size).toBe(vfx.beam.bytes);
+    expect(bytes).toBeLessThan(2_000_000);expect(decoded).toBeLessThan(14_000_000);
+    expect(readdirSync(resolve(root,'public/assets/vfx')).filter(x=>x.endsWith('.webp')).length).toBe(14);
   });
-
-  it('stages the iconic abilities through distinct family and motif combinations',()=>{
-    const expected=['kamehameha','final-flash','rasengan','chidori','death-note','gear-fifth','serious-punch','heat-vision','web-cast','mjolnir-storm','sling-ring-portal','thousand-blows','magnetic-prison','azarath-shadow'];
-    for(const id of expected)expect(Object.values(VFX_PRESETS).some(p=>p.id===id),id).toBe(true);
-    expect(profileFor('goku',0)?.motif).toBe('beam');expect(profileFor('naruto',1)?.motif).toBe('spiral');
-    expect(profileFor('sasuke',0)?.motif).toBe('branching');expect(profileFor('light',2)?.travel).toBe(false);
-    expect(profileFor('pikachu',0)?.family).toBe('electric');expect(profileFor('saitama',2)?.motif).toBe('punch');
-    expect(profileFor('spiderman',0)?.motif).toBe('web');expect(profileFor('thor',1)?.area).toBe(true);
-    expect(profileFor('strange',2)?.motif).toBe('portal');expect(profileFor('flash',0)?.motif).toBe('speed');
-    expect(profileFor('magneto',0)?.motif).toBe('magnetic');expect(profileFor('raven',2)?.family).toBe('dark');
-    expect(new Set(Object.values(VFX_PRESETS).map(p=>p.motif)).size).toBeGreaterThanOrEqual(10);
-    expect(Object.keys(VFX_PRESETS).length).toBeGreaterThanOrEqual(50);
-    for(const [key,preset] of Object.entries(VFX_PRESETS)){
-      const [character,index]=key.split(':');
-      expect(byId[character]?.skills[Number(index)],key).toBeDefined();
-      expect(vfx.families[preset.family??'physical'],key).toBeDefined();
+  it('maps every basic and skill through shared families without per-character presets',()=>{
+    for(const character of characters){
+      const basic=profileFor(character.id);
+      expect(basic,`${character.id} basic`).toBeDefined();expect(VFX_FAMILIES[basic!.family]).toBeDefined();
+      character.skills.forEach((skill,index)=>{
+        const p=profileFor(character.id,index);
+        expect(p,`${character.id}: ${skill.name}`).toBeDefined();expect(VFX_FAMILIES[p!.family]).toBeDefined();
+        expect(p!.area,skill.name).toBe(skill.target==='allEnemies'||skill.target==='allAllies'||skill.effects.some(e=>e.target==='allEnemies'||e.target==='allAllies'));
+      });
     }
-    for(const character of characters)character.skills.forEach((skill,index)=>{
-      const p=profileFor(character.id,index);
-      expect(p,`${character.id}: ${skill.name}`).toBeDefined();
-      expect(vfx.families[p!.family??'physical'],`${character.id}: ${skill.name}`).toBeDefined();
-      expect(!!p!.area,skill.name).toBe(skill.target==='allEnemies'||skill.target==='allAllies'||skill.effects.some(effect=>effect.target==='allEnemies'||effect.target==='allAllies')||VFX_PRESETS[`${character.id}:${index}`]?.area===true);
-    });
+    expect(profileFor('goku',0)?.family).toBe('energy_beam');
+    expect(profileFor('pikachu',0)?.family).toBe('electric');
+    expect(profileFor('spiderman',0)?.family).toBe('control');
   });
-
-  it('generates playable four-variation WAV banks for every Web Audio cue',()=>{
-    expect(sfx.sampleRate).toBe(24000);expect(sfx.variants).toBe(4);
-    const names=new Set(Object.values(sfx.sounds).map(x=>x.file));
-    for(const asset of Object.values(CUE_ASSETS))expect(names.has(`${asset.file}.wav`),asset.file).toBe(true);
+  it('keeps three deterministic, decoded-ahead WAV variants within budget',()=>{
+    expect(sfx.sampleRate).toBe(22050);expect(sfx.variants).toBe(3);
+    expect(Object.keys(sfx.sounds).sort()).toEqual(CUE_FILES.sort());
+    let bytes=0;
+    for(const asset of Object.values(CUE_ASSETS))expect(sfx.sounds[asset.file]).toBeDefined();
     for(const [name,cue] of Object.entries(sfx.sounds)){
-      const data=readFileSync(resolve(root,'public/assets/audio/sfx',cue.file));
+      const data=readFileSync(resolve(root,'public/assets/audio/sfx',cue.file));bytes+=data.length;
       expect(data.subarray(0,4).toString('ascii'),name).toBe('RIFF');expect(data.subarray(8,12).toString('ascii'),name).toBe('WAVE');
-      expect(cue.variantOffsets).toHaveLength(4);expect(data.length).toBeGreaterThan(Math.round(cue.duration*24000*2));
+      expect(cue.variantOffsets).toHaveLength(3);expect(data.length).toBeGreaterThan(Math.round(cue.duration*22050*2));
     }
+    expect(bytes).toBeLessThan(2_000_000);
+    expect(readdirSync(resolve(root,'public/assets/audio/sfx')).filter(x=>x.endsWith('.wav')).length).toBe(18);
   });
 });

@@ -1,7 +1,6 @@
 import { createRequire } from 'node:module';
 import { writeFileSync,mkdirSync } from 'node:fs';
 import { createServer } from 'vite';
-process.env.PLAYWRIGHT_BROWSERS_PATH??='/tmp/nexus-browsers';
 const {chromium}=createRequire(import.meta.url)('@playwright/test');
 const server=await createServer({server:{host:'127.0.0.1',port:5173,strictPort:true}});await server.listen();
 const browser=await chromium.launch({headless:true,args:['--no-sandbox']});
@@ -54,19 +53,19 @@ try{
  }
  if(JSON.stringify(results[0])!==JSON.stringify(results[1]))throw Error('Resultado mudou entre velocidades');
  report.checks.push('batalhas completas via interface em 1× e 2× com resultados idênticos');
- // Render the original score and each cue through the browser audio engine.
+ // Render the original score and decode every offline SFX bank in the browser.
  report.synthesis=await page.evaluate(async()=>{
- const {scoreStep,sixteenth,SCORE}=await import('/src/audio/score.ts');const {synthCue}=await import('/src/audio/cues.ts');const {AUDIO_ASSETS}=await import('/src/lib/audio.ts');
+ const {scoreStep,sixteenth,SCORE}=await import('/src/audio/score.ts');const {CUE_FILES}=await import('/src/audio/cues.ts');const {AUDIO_ASSETS}=await import('/src/lib/audio.ts');
   const length=SCORE.bars*16*sixteenth,ctx=new OfflineAudioContext(1,Math.ceil((length+2)*22050),22050);
   const out=ctx.createGain();out.gain.value=.4;out.connect(ctx.destination);for(let step=0;step<SCORE.bars*16;step++)scoreStep(ctx,out,step,step*sixteenth);
   const buffer=(await ctx.startRendering()).getChannelData(0);let peak=0,sum=0;for(const sample of buffer){peak=Math.max(peak,Math.abs(sample));sum+=sample*sample;}
- const sounds=['action','physical','energy','electric','fire','magic','dark','psychic','slash','prison','impact','block','shield','heal','regen','buff','debuff','interrupt','ready','prepare','shatter','ko','dominion','turn','victory','defeat'];
-  const cues=[];for(const sound of sounds){const c=new OfflineAudioContext(1,44100,22050);synthCue(c,c.destination,sound,0);const data=(await c.startRendering()).getChannelData(0);let energy=0,peak=0;for(const v of data){energy+=v*v;peak=Math.max(peak,Math.abs(v));}cues.push({sound,rms:Math.sqrt(energy/data.length),peak});}
+  const cues=[];const cueDecoder=new OfflineAudioContext(1,128,22050);
+  for(const sound of CUE_FILES){const buffer=await cueDecoder.decodeAudioData(await (await fetch(`/assets/audio/sfx/${sound}.wav`)).arrayBuffer()),data=buffer.getChannelData(0);let energy=0,peak=0;for(const v of data){energy+=v*v;peak=Math.max(peak,Math.abs(v));}cues.push({sound,rms:Math.sqrt(energy/data.length),peak});}
   const decoder=new OfflineAudioContext(1,128,22050),stems=[];for(const path of AUDIO_ASSETS.battleStems){const decoded=await decoder.decodeAudioData(await (await fetch(path)).arrayBuffer()),samples=decoded.getChannelData(0);let energy=0,peak=0;for(const sample of samples){energy+=sample*sample;peak=Math.max(peak,Math.abs(sample));}stems.push({path,seconds:decoded.duration,rms:Math.sqrt(energy/samples.length),peak});}
   return {loopSeconds:length,peak,rms:Math.sqrt(sum/buffer.length),cues,stems};
  });
  if(report.synthesis.rms<.01||report.synthesis.peak>=1||report.synthesis.cues.some(s=>s.rms<=0||s.peak>=1)||report.synthesis.stems.length!==4||report.synthesis.stems.some(s=>s.seconds<140||s.rms<=0||s.peak>=1))throw Error('Música em camadas ou efeitos silenciosos, curtos ou saturados');
- report.checks.push('tema original de 2m22 em quatro camadas e 26 efeitos renderizados sem clipping');
+ report.checks.push('tema original de 2m22 em quatro camadas e 18 bancos SFX decodificados sem clipping');
  if(errors.length)throw Error(errors.join('\n'));report.ok=true;
  writeFileSync('test-results/presentation-browser-report.json',JSON.stringify(report,null,2));console.log(JSON.stringify(report));
 }finally{await browser.close();await server.close();}

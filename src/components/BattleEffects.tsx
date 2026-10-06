@@ -1,4 +1,4 @@
-import type { CSSProperties } from 'react';
+import { useLayoutEffect,useRef,useState,type CSSProperties } from 'react';
 import type { Battle } from '../engine/types';
 import type { Beat } from '../presentation/director';
 import { PRESENTATION as P } from '../presentation/config';
@@ -6,14 +6,11 @@ import { byId } from '../data/characters';
 import { SkillIcon } from './Icon';
 import { ArrowDown,HeartPulse,ShieldCheck,Sparkles,Zap } from 'lucide-react';
 import { statuses as statusCatalog } from '../data/statuses';
-import { profileFor } from '../presentation/vfxProfiles';
+import { atlasFor,profileFor,type VfxFamily } from '../presentation/vfxProfiles';
 
 export interface Anchor {x:number;y:number}
 export type Anchors=Record<string,Anchor>;
 export function fallbackPoint(uid:string):Anchor{const [side,slot]=uid.split('-');return {x:17+Number(slot)*33,y:side==='enemy'?16:76};}
-const lerp=(a:number,b:number,t:number)=>a+(b-a)*t;
-const familiesWithTravel=new Set(['energy','electric','fire','slash','magic','psychic','dark']);
-
 export function isAreaBeat(beat:Beat|null,battle:Battle):boolean {
   if(!beat||!['basic','skill'].includes(beat.event.kind))return false;
   const source=battle.fighters.find(f=>f.uid===beat.event.source);
@@ -21,52 +18,37 @@ export function isAreaBeat(beat:Beat|null,battle:Battle):boolean {
   const direct=beat.events.filter(e=>e.source===beat.event.source&&e.target&&['damage','status','heal','shield'].includes(e.kind));
   return new Set(direct.map(e=>e.target)).size>1;
 }
+const legacyFamily:Record<string,VfxFamily>={physical:'physical_light',energy:'energy_orb',electric:'electric',fire:'fire',magic:'magic_psychic',psychic:'magic_psychic',dark:'dark',slash:'slash',prison:'control',shield:'shield',heal:'heal_buff',regen:'heal_buff',buff:'heal_buff',debuff:'control',interrupt:'physical_heavy',ko:'physical_heavy',grand:'physical_heavy',turn:'magic_psychic'};
 
-/** Places generated family atlases and lets skill data choose a distinct staging motif. */
+/** At most three atlas/beam nodes during an action. CSS animates transform, opacity and sheet position. */
 export function BattleEffects({battle,beat,anchors,enabled,reduced}:{battle:Battle;beat:Beat|null;anchors:Anchors;enabled:boolean;reduced:boolean}){
+  const root=useRef<HTMLDivElement>(null),[size,setSize]=useState({w:0,h:0});
+  useLayoutEffect(()=>{const element=root.current;if(!element)return;const observer=new ResizeObserver(([entry])=>setSize({w:entry.contentRect.width,h:entry.contentRect.height}));observer.observe(element);return ()=>observer.disconnect();},[]);
   const point=(uid:string)=>anchors[uid]??fallbackPoint(uid);
-  const casts=battle.fighters.filter(f=>f.cast&&f.hp>0);
   const source=beat?battle.fighters.find(f=>f.uid===beat.event.source):null;
   const character=source?byId[source.characterId]:null;
   const profile=profileFor(source?.characterId??'',beat?.event.skill);
-  const color=character?.color??'#d2f276';
+  const family=profile?.family??legacyFamily[beat?.family??'physical'];
   const p1=beat&&beat.event.kind!=='turn'?point(beat.event.source):{x:50,y:50};
   const p2=beat?.event.target?point(beat.event.target):p1;
-  const progress=beat?beat.elapsed/beat.duration:0;
-  const flight=Math.min(1,Math.max(0,(progress-.06)/(P.impactAt-.06)));
-  const landed=beat?.impacted??false;
-  const family=profile?.family??beat?.family??'physical';
-  const atlasFamily=family==='grand'?'grand':family==='turn'?'energy':family==='physical'?'physical':family;
-  const effectAnchor=beat?.event.kind==='cast'?p1:p2;
-  const travel=!!beat&&beat.event.kind!=='cast'&&(profile?.travel??familiesWithTravel.has(family));
-  const projectile={x:lerp(p1.x,p2.x,flight),y:lerp(p1.y,p2.y,flight)};
-  const dx=p2.x-p1.x,dy=(p2.y-p1.y)*1.28;
-  const beamStyle={'--beam-angle':`${Math.atan2(dy,dx)*180/Math.PI}deg`,'--beam-length':`${Math.hypot(dx,dy)*flight}%`,'--beam-mid-x':`${p1.x+dx*flight/2}%`,'--beam-mid-y':`${p1.y+(p2.y-p1.y)*flight/2}%`} as CSSProperties;
-  const area=isAreaBeat(beat,battle);
-  const scale=profile?.scale??(beat?.grand?1.42:1);
-  const connections=(beat?.impacted?beat.events:[]).filter(e=>['synergy','shield','heal','block'].includes(e.kind)&&e.target&&e.source!==e.target&&e.source.split('-')[0]===e.target.split('-')[0]).filter((e,i,a)=>a.findIndex(x=>x.source===e.source&&x.target===e.target)===i).slice(0,P.maxConnections);
-  const statuses=(beat?.impacted?beat.events:[]).filter(e=>e.kind==='status'&&e.target).slice(0,3);
+  const area=isAreaBeat(beat,battle),landed=beat?.impacted??false;
+  const travel=!!beat&&beat.event.kind!=='cast'&&beat.event.kind!=='turn'&&profile?.travel&&!!beat.event.target;
+  const beam=travel&&family==='energy_beam';
+  const scale=(profile?.scale??1)*(beat?.grand?1.26:1);
+  const dx=(p2.x-p1.x)*size.w/100,dy=(p2.y-p1.y)*size.h/100;
+  const beamStyle={left:`${p1.x}%`,top:`${p1.y}%`,'--beam-length':`${Math.hypot(dx,dy)}px`,'--beam-angle':`${Math.atan2(dy,dx)}rad`,'--beam-duration':`${Math.max(.12,(beat?.duration??1)*P.impactAt)}s`} as CSSProperties;
   const outcomes=(beat?.impacted?beat.events:[]).filter(e=>e.target===beat?.event.target&&['damage','status','interrupt','shield','block','heal'].includes(e.kind)).slice(0,3);
   const outcome=(event:typeof outcomes[number])=>event.kind==='damage'?{label:'Dano',icon:Zap}:event.kind==='interrupt'?{label:'Interrompido',icon:ArrowDown}:event.kind==='status'?{label:event.status?statusCatalog[event.status].name:'Efeito',icon:Sparkles}:event.kind==='heal'?{label:'Recuperação',icon:HeartPulse}:{label:'Protegido',icon:ShieldCheck};
-  const style={'--fx-color':color,'--fx-strength':P.vfxIntensity,'--fx-scale':scale} as CSSProperties;
-  const sprite=(anchor:Anchor,extra:string,key:string,duration?:number)=><div key={key} className={`effect-sprite sprite-${atlasFamily} ${extra}`} style={{left:`${anchor.x}%`,top:`${anchor.y}%`,'--sprite-image':`url(/assets/vfx/${atlasFamily}.webp)`,...(duration?{'--travel-duration':`${duration}s`}:{}),...(beat&&extra.includes('sprite-impact')?{animationDuration:`${Math.max(.09,Math.min(1.9,beat.duration*(1-P.impactAt)))}s`}:{}),...(beat&&extra.includes('sprite-charge')?{animationDuration:`${beat.duration}s`}:{})} as CSSProperties}/>;
-  return <div className={`battle-effects directed-effects family-${family} motif-${profile?.motif??'default'} ${beat?.grand?'grand-event':''} ${reduced?'reduced':''}`} aria-hidden="true" style={style}>
-    {enabled&&<svg className="direction-svg utility-svg" viewBox="0 0 100 100" preserveAspectRatio="none">
-      {casts.map(f=>{const a=point(f.uid),t=point(f.cast!.targets[0]??f.uid);return <g key={f.uid} className="threat-line"><path d={`M${a.x} ${a.y} Q50 50 ${t.x} ${t.y}`}/><ellipse cx={a.x} cy={a.y} rx="8" ry="5"/><path className="target-cross" d={`M${t.x-3} ${t.y}h6 M${t.x} ${t.y-2}v4`}/></g>;})}
-      {connections.map(e=>{const a=point(e.source),t=point(e.target!);const q=Math.min(1,Math.max(0,(progress-P.impactAt)/.7));const pulse={x:lerp(a.x,t.x,q),y:lerp(a.y,t.y,q)};return <g key={e.id} className={`connection connection-${e.kind}`}><path d={`M${a.x} ${a.y} Q50 ${a.y<50?43:57} ${t.x} ${t.y}`}/>{!reduced&&<ellipse className="connection-pulse" cx={pulse.x} cy={pulse.y} rx="1.1" ry=".7"/>}<ellipse cx={t.x} cy={t.y} rx="3.5" ry="2.2"/></g>;})}
-    </svg>}
+  const style={'--fx-color':character?.color??'#d2f276','--fx-scale':scale} as CSSProperties;
+  const sprite=(anchor:Anchor,kind:'charge'|'travel'|'impact',key:string,extra='')=><div key={key} className={`effect-sprite sprite-${kind} ${extra}`} style={{left:`${anchor.x}%`,top:`${anchor.y}%`,'--sprite-image':`url(/assets/vfx/${atlasFor(family)}.webp)`,'--move-x':`${p2.x-p1.x}cqw`,'--move-y':`${p2.y-p1.y}cqh`,'--travel-duration':`${Math.max(.14,(beat?.duration??1)*P.impactAt)}s`,'--impact-duration':`${reduced?.18:Math.min(.55,Math.max(.25,(beat?.duration??1)*(1-P.impactAt)))}s`} as CSSProperties}/>;
+  return <div ref={root} className={`battle-effects directed-effects ${beat?.grand?'grand-event':''} ${reduced?'reduced':''}`} aria-hidden="true" style={style}>
     {enabled&&beat&&beat.event.kind!=='turn'&&<>
-      {area&&<div key={`area-${beat.event.id}`} className={`area-vfx area-${family}`} style={{'--area-alpha':landed?.72:.28} as CSSProperties}/>}
-      {beat.event.kind==='cast'&&sprite(effectAnchor,'sprite-cast sprite-charge',`charge-${beat.event.id}`)}
-      {travel&&!landed&&!reduced&&progress>.08&&progress<P.impactAt&&sprite(projectile,`sprite-travel motif-travel-${profile?.motif??family}`,`travel-${beat.event.id}`,beat.duration*P.impactAt)}
-      {travel&&!landed&&['beam','heat-vision'].includes(profile?.motif??'')&&<div className={`beam-ribbon beam-${profile?.motif}`} style={beamStyle}/>}
-      {landed&&sprite(effectAnchor,`sprite-landed sprite-impact ${area?'sprite-area-impact':''}`,`impact-${beat.event.id}`)}
-      {landed&&profile?.motif==='portal'&&sprite(p1,'sprite-landed portal-exit',`portal-${beat.event.id}`)}
-      {landed&&['shield','buff'].includes(family)&&<div className="card-aura card-guard" style={{left:`${p2.x}%`,top:`${p2.y}%`}}/>}
-      {landed&&family==='heal'&&<div className="card-aura card-heal" style={{left:`${p2.x}%`,top:`${p2.y}%`}}/>}
-      {landed&&family==='electric'&&<div className="card-aura card-electric" style={{left:`${p2.x}%`,top:`${p2.y}%`}}/>}
+      {!landed&&(beat.event.kind==='cast'||beat.event.kind==='skill')&&sprite(p1,'charge',`charge-${beat.event.id}`)}
+      {travel&&!landed&&!reduced&&sprite(p1,'travel',`travel-${beat.event.id}`,beam?'sprite-beam-travel':'')}
+      {beam&&!landed&&!reduced&&size.w>0&&<div className="fx-beam" style={beamStyle}/>}
+      {landed&&sprite(beat.event.kind==='cast'?p1:p2,'impact',`impact-${beat.event.id}`,`${area?'sprite-area-impact':''} ${beat.grand?'sprite-grand-impact':''}`)}
+      {landed&&(area||beat.grand)&&!reduced&&sprite({x:50,y:50},'impact',`accent-${beat.event.id}`,'sprite-accent')}
     </>}
-    {enabled&&beat?.impacted&&statuses.map(e=>{const t=point(e.target!);return sprite(t,`sprite-status status-${e.status}`,`status-${e.id}`,78);})}
     {beat&&!beat.periodic&&!['basic','ready','status'].includes(beat.event.kind)&&<div className={`action-title ${landed?'landed':''} ${beat.grand?'title-grand':''}`} key={beat.event.id}><span className="title-rule"/><SkillIcon type={beat.event.visual??'impact'} size={20} characterId={source?.characterId} skillId={source&&beat.event.skill!==undefined?character?.skills[beat.event.skill]?.id:undefined}/><div><small>{beat.event.kind==='turn'?(beat.event.source.startsWith('player')?'SEU TRIO':'RIVAIS'):character?.name??'NEXUS'}</small><strong>{beat.event.kind==='turn'?'VIRADA DE DOMÍNIO':beat.event.label}</strong>{outcomes.length>0&&<span className="action-outcomes">{outcomes.map(e=>{const x=outcome(e),Icon=x.icon;return <i key={e.id}><Icon size={12}/>{x.label}</i>;})}</span>}</div><span className="title-rule"/></div>}
   </div>;
 }
