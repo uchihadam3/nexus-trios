@@ -3,6 +3,7 @@ import { readFileSync,statSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { CUE_ASSETS } from '../src/audio/cues';
 import { VFX_PRESETS,profileFor } from '../src/presentation/vfxProfiles';
+import { byId,characters } from '../src/data/characters';
 
 const root=process.cwd();
 const vfx=JSON.parse(readFileSync(resolve(root,'public/assets/vfx/manifest.json'),'utf8')) as {columns:number;rows:number;families:Record<string,{file:string;frames:number;frameSize:[number,number];alpha:boolean;bytes:number}>};
@@ -29,6 +30,18 @@ describe('presentation audiovisual assets',()=>{
     expect(profileFor('strange',2)?.motif).toBe('portal');expect(profileFor('flash',0)?.motif).toBe('speed');
     expect(profileFor('magneto',0)?.motif).toBe('magnetic');expect(profileFor('raven',2)?.family).toBe('dark');
     expect(new Set(Object.values(VFX_PRESETS).map(p=>p.motif)).size).toBeGreaterThanOrEqual(10);
+    expect(Object.keys(VFX_PRESETS).length).toBeGreaterThanOrEqual(50);
+    for(const [key,preset] of Object.entries(VFX_PRESETS)){
+      const [character,index]=key.split(':');
+      expect(byId[character]?.skills[Number(index)],key).toBeDefined();
+      expect(vfx.families[preset.family??'physical'],key).toBeDefined();
+    }
+    for(const character of characters)character.skills.forEach((skill,index)=>{
+      const p=profileFor(character.id,index);
+      expect(p,`${character.id}: ${skill.name}`).toBeDefined();
+      expect(vfx.families[p!.family??'physical'],`${character.id}: ${skill.name}`).toBeDefined();
+      expect(!!p!.area,skill.name).toBe(skill.target==='allEnemies'||skill.target==='allAllies'||skill.effects.some(effect=>effect.target==='allEnemies'||effect.target==='allAllies')||VFX_PRESETS[`${character.id}:${index}`]?.area===true);
+    });
   });
 
   it('generates playable four-variation WAV banks for every Web Audio cue',()=>{

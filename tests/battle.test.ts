@@ -1,6 +1,7 @@
 import { describe,it,expect } from 'vitest';
 import { characters,byId } from '../src/data/characters';
 import { createBattle,stepBattle,simulate,applyEffects,resolve,updateDominion,intensity,targets } from '../src/engine/battle';
+import { chooseTarget } from '../src/engine/targeting';
 import { generateCampaign,newDraft,pickDraft,skipDraft,validateCampaignUniqueness } from '../src/engine/campaign';
 import { shuffle } from '../src/engine/random';
 import type { Effect,Target } from '../src/engine/types';
@@ -66,6 +67,17 @@ describe('Motor independente',()=>{
   expect(decision.candidates.length).toBeGreaterThan(0);
   expect(decision.candidates[0].score).toBeGreaterThanOrEqual(decision.candidates.at(-1)!.score);
   expect(decision.candidates[0].reasons.length).toBeGreaterThan(0);
+ });
+ it('Inteligência muda a leitura de ameaças e finalizações ao escolher o alvo',()=>{
+  const battle=createBattle(['batman','hulk','pikachu'],['goku','vegeta','raven'],73),target=battle.fighters[3];
+  target.cast={skill:0,elapsed:2.5,duration:3,targets:['player-0']};
+  const reasons=(actor:typeof battle.fighters[number])=>{
+   chooseTarget(battle,actor,[target],'enemyCast','interrupt',[{kind:'interrupt',mode:'cancel',value:1}]);
+   return battle.targetLog!.at(-1)!.reasons;
+  };
+  const threat=(lines:string[])=>Number(lines.find(line=>line.startsWith('preparação ativa'))!.split('+').at(-1));
+  expect(byId.batman.intelligence).toBeGreaterThan(byId.hulk.intelligence!);
+  expect(threat(reasons(battle.fighters[0]))).toBeGreaterThan(threat(reasons(battle.fighters[1])));
  });
  it('intenção de cura escolhe necessidade real e nunca apenas o primeiro aliado',()=>{
   const battle=createBattle(['wolverine','light','pikachu'],enemy,0x55),wolverine=battle.fighters[0],light=battle.fighters[1];

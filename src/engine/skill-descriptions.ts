@@ -20,7 +20,7 @@ export function describeCharge(rules:Skill['charge']):string{
   if(!rules.length)return 'não carrega';
   return rules.map(rule=>`+${n(rule.amount)} ${topicLabels[rule.on]}`).join('; ');
 }
-function statusEffect(effect:Extract<Effect,{kind:'status'}>):string{
+function statusEffect(effect:Extract<Effect,{kind:'status'}>,defaultTarget:Target):string{
   const def=statuses[effect.status],amount=effect.value,duration=seconds(effect.duration);
   const amountText=effect.status==='burning'||effect.status==='regen'
     ?`${n(amount)} de Condição por segundo`
@@ -42,7 +42,7 @@ function statusEffect(effect:Extract<Effect,{kind:'status'}>):string{
     weakened:`causa ${amountText} a menos de dano`,
   };
   const cap=def.cap;
-  return `Aplica ${def.name} em ${targets[effect.target??'enemyWeak']} por ${duration}: ${mechanics[effect.status]??def.description}.${amount>cap?` O efeito é limitado ao teto do estado (${percent(cap)}).`:''}`;
+  return `Aplica ${def.name} em ${targets[effect.target??defaultTarget]} por ${duration}: ${mechanics[effect.status]??def.description}.${amount>cap?` O efeito é limitado ao teto do estado (${percent(cap)}).`:''}`;
 }
 export function describeEffects(effects:Effect[],defaultTarget:Target):string[]{
   return effects.map(effect=>{
@@ -51,7 +51,7 @@ export function describeEffects(effects:Effect[],defaultTarget:Target):string[]{
       case 'damage':return `Causa ${n(effect.value)} de dano base a ${target}.`;
       case 'heal':return `Recupera ${n(effect.value)} de Condição de ${target}.`;
       case 'shield':return `Concede ${n(effect.value)} de Escudo a ${target}, por até 10 s; o Escudo total não passa de 55% da Condição máxima.`;
-      case 'status':return statusEffect(effect);
+      case 'status':return statusEffect(effect,defaultTarget);
       case 'interrupt':
         if(effect.mode==='cancel')return `Cancela a preparação de ${target}; o alvo fica com 25 de carga e 2 s de recarga.`;
         if(effect.mode==='delay')return `Atrasa em ${seconds(effect.value)} a preparação em andamento de ${target}, até o limite de 2 s.`;

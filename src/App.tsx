@@ -15,6 +15,7 @@ import { battleAudio } from './lib/audio';
 import { createDirection,restoreDirection,checkpointDirection,advanceDirection,type Direction,type Beat } from './presentation/director';
 import { PRESENTATION as P } from './presentation/config';
 import type { Battle } from './engine/types';
+import { addSynergies,summarizeBattle } from './engine/run-summary';
 const DebugScreen=lazy(()=>import('./screens/DebugScreen').then(m=>({default:m.DebugScreen})));
 const VfxLabScreen=lazy(()=>import('./screens/VfxLabScreen').then(m=>({default:m.VfxLabScreen})));
 type Screen='home'|'game'|'characters'|'help'|'settings'|'debug'|'vfx';
@@ -46,13 +47,13 @@ export default function App(){
   const navigate=(next:Screen)=>{if(next!=='game')setPaused(true);setScreen(next);setMenu(false);window.scrollTo(0,0);};
   const startNew=()=>{
     const seed=crypto.getRandomValues(new Uint32Array(1))[0];
-    changeRun({seed,team:[],encounters:generateCampaign(seed),index:0,stage:'draft',draft:newDraft(seed),battle:null,recorded:false});setPaused(false);setConfirmNew(false);setConfirmAbandon(false);navigate('game');
+    changeRun({seed,team:[],encounters:generateCampaign(seed),index:0,stage:'draft',draft:newDraft(seed),battle:null,recorded:false,summaries:[]});setPaused(false);setConfirmNew(false);setConfirmAbandon(false);navigate('game');
   };
   const requestNew=()=>{if(run&&(run.stage!=='result'||run.battle?.winner==='player'&&run.index<9))setConfirmNew(true);else startNew();};
   const startBattle=(index:number)=>{
     const current=runRef.current;if(!current)return;
     const team=current.draft.team,encounters=current.stage==='draft'?generateCampaign(current.seed,team):current.encounters,encounter=encounters[index];
-    const next={...current,team,encounters,index,stage:'battle' as const,recorded:false,presentation:undefined,battle:createBattle(team,encounter.team,current.seed+index*7919,encounter.scale)};
+    const next={...current,team,encounters,index,stage:'battle' as const,recorded:false,presentation:undefined,battleSynergies:[],battle:createBattle(team,encounter.team,current.seed+index*7919,encounter.scale)};
     direction.current=null;setPresentation(null);changeRun(next);setPaused(false);navigate('game');
     if(index===0)setProfile(p=>{const n={...p,journeys:p.journeys+1};save('profile',n);return n;});
   };
@@ -90,9 +91,10 @@ export default function App(){
       if(ready)battleAudio.sound('ready',1);
       if(d.signals.length)lastAudio.current=Math.max(lastAudio.current,...d.signals.map(e=>e.id));
       setPresentation({battle:d.visible,beat:d.active?{...d.active}:null});
-      let next={...current,battle:d.battle,presentation:checkpointDirection(d)};
+      const battleSynergies=d.signals.length?addSynergies(current.battleSynergies??[],d.signals):current.battleSynergies??[];
+      let next={...current,battle:d.battle,presentation:checkpointDirection(d),battleSynergies};
       if(d.complete){
-        next={...next,stage:'result',recorded:true};
+        next={...next,stage:'result',recorded:true,summaries:current.recorded?current.summaries:[...(current.summaries??[]).filter(s=>s.index!==current.index),summarizeBattle(current.index,d.battle,battleSynergies)]};
         if(!current.recorded){const won=current.battle.winner==='player';setProfile(p=>{const n={...p,best:Math.max(p.best,current.index+(won?1:0)),wins:p.wins+(won?1:0),victories:p.victories+(won&&current.index===9?1:0)};save('profile',n);return n;});battleAudio.sound(won?'victory':'defeat',5);}
         save('run',next);
       }
@@ -103,7 +105,7 @@ export default function App(){
   },[screen,paused,details,confirmNew,confirmAbandon,settings.speed,settings.volume]);
   useEffect(()=>{
     if(screen!=='game'||!settings.auto||run?.stage!=='result'||run.index>=9||run.battle?.winner!=='player')return;
-    const id=window.setTimeout(()=>{const current=runRef.current;if(!current)return;const index=current.index+1,encounter=current.encounters[index];const next={...current,index,stage:'battle' as const,recorded:false,presentation:undefined,battle:createBattle(current.team,encounter.team,current.seed+index*7919,encounter.scale)};runRef.current=next;setRun(next);save('run',next);setPaused(false);},4500);
+    const id=window.setTimeout(()=>{const current=runRef.current;if(!current)return;const index=current.index+1,encounter=current.encounters[index];const next={...current,index,stage:'battle' as const,recorded:false,presentation:undefined,battleSynergies:[],battle:createBattle(current.team,encounter.team,current.seed+index*7919,encounter.scale)};runRef.current=next;setRun(next);save('run',next);setPaused(false);},4500);
     return()=>clearTimeout(id);
   },[screen,settings.auto,run?.stage,run?.index,run?.battle?.winner]);
   useEffect(()=>{battleAudio.configure(settings);},[settings]);

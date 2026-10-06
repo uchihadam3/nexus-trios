@@ -4,10 +4,9 @@ import { byId } from '../data/characters';
 import { statuses } from '../data/statuses';
 import { SkillIcon } from './Icon';
 import { StatusBadge } from './StatusBadge';
+import { describeSkill,describeSkillUse } from '../engine/skill-descriptions';
 
 export type InspectTarget={kind:'fighter';fighter:Fighter}|{kind:'skill';fighter:Fighter;index:number}|{kind:'status';fighter:Fighter;status:Status};
-const topicText:Record<string,string>={time:'Passagem do tempo',action:'Quando age',dealt:'Ao causar dano',received:'Ao receber dano',allyHurt:'Quando um aliado se fere',enemyHurt:'Quando um inimigo se fere',interrupt:'Ao interromper',status:'Ao aplicar um efeito',protected:'Ao proteger alguém',enemyCast:'Quando um rival prepara habilidade',survived:'Por sobreviver',losing:'Quando o trio está em desvantagem',winning:'Quando o trio está à frente'};
-function chargeLines(skill:{charge:{on:string;amount:number}[]}){return skill.charge.map(rule=>topicText[rule.on]??'Durante o combate');}
 export function BattleInspector({target,battle,onClose,onSelect}:{target:InspectTarget;battle:Battle;onClose:()=>void;onSelect:(target:InspectTarget)=>void}){
   const f=battle.fighters.find(fighter=>fighter.uid===target.fighter.uid)??target.fighter,c=byId[f.characterId],health=Math.max(0,Math.round(f.hp));
   const skillIndex=target.kind==='skill'?target.index:-1,skill=skillIndex>=0?c.skills[skillIndex]:undefined;
@@ -21,9 +20,9 @@ export function BattleInspector({target,battle,onClose,onSelect}:{target:Inspect
       <div className="inspector-meta"><span><Clock3 size={13}/>{liveStatus.remaining.toLocaleString('pt-BR',{maximumFractionDigits:1})} s restantes</span><span><Sparkles size={13}/>Aplicado por {sourceName(liveStatus.source)}</span></div>
     </>:skill?<>
       <div className="inspector-title"><SkillIcon type={skill.icon} characterId={c.id} skillId={skill.id} size={31}/><div><small>{c.name.toLocaleUpperCase('pt-BR')}</small><h3>{skill.name}</h3></div></div>
-      <p>{skill.description}</p>
+      <p>{describeSkill(skill)}</p>
       <div className="inspector-meta"><span><HeartPulse size={13}/>{Math.round(f.skills[skillIndex].charge)}% · {f.skills[skillIndex].cooldown>0?`recarga ${f.skills[skillIndex].cooldown.toFixed(1)} s`:f.cast?.skill===skillIndex?'em preparação':f.skills[skillIndex].charge>=100?'pronta':'carregando'}</span><span><Clock3 size={13}/>{skill.cooldown>0?`${skill.cooldown} s de recarga`:'Sem recarga'}</span></div>
-      <div className="charge-explanation"><strong>Carrega com</strong>{chargeLines(skill).join(' · ')}</div>
+      <div className="charge-explanation">{describeSkillUse(skill)}</div>
     </>:<>
       <div className="inspector-title"><span className="inspector-avatar" style={{'--character':c.color} as React.CSSProperties}>{c.symbol}</span><div><small>{c.universe}</small><h3>{c.name}</h3></div></div>
       <div className="inspector-meta"><span><HeartPulse size={13}/>{health} de {f.maxHp} Condição</span><span><Clock3 size={13}/>{Math.max(0,100-f.action*100).toFixed(0)}% até agir</span></div>

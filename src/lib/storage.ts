@@ -3,8 +3,9 @@ import type { Draft, Encounter } from '../engine/campaign';
 import { byId } from '../data/characters';
 import { PRESENTATION as P } from '../presentation/config';
 import type { PresentationCheckpoint } from '../presentation/director';
+import type { RunBattleSummary,RunSynergyEvent } from '../engine/run-summary';
 export interface Settings {volume:number;musicVolume:number;effectsVolume:number;effects:boolean;speed:1|2;numbers:boolean;reducedMotion:boolean;auto:boolean;explanations:'normal'|'detailed'|'off'}
-export interface Run {seed:number;team:string[];encounters:Encounter[];index:number;stage:'draft'|'battle'|'result';draft:Draft;battle:Battle|null;recorded:boolean;presentation?:PresentationCheckpoint}
+export interface Run {seed:number;team:string[];encounters:Encounter[];index:number;stage:'draft'|'battle'|'result';draft:Draft;battle:Battle|null;recorded:boolean;presentation?:PresentationCheckpoint;summaries?:RunBattleSummary[];battleSynergies?:RunSynergyEvent[]}
 export interface Profile {journeys:number;victories:number;best:number;wins:number}
 export const defaults:Settings={volume:P.audio.master,musicVolume:P.audio.music,effectsVolume:P.audio.effects,effects:true,speed:1,numbers:false,reducedMotion:typeof matchMedia!=='undefined'&&matchMedia('(prefers-reduced-motion: reduce)').matches,auto:false,explanations:'normal'};
 const prefix='nexus-v1-';

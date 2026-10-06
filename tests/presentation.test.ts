@@ -4,6 +4,8 @@ import { createDirection,restoreDirection,checkpointDirection,advanceDirection,t
 import { isAreaBeat } from '../src/components/BattleEffects';
 import { PRESENTATION as P } from '../src/presentation/config';
 import { DOMINION as D } from '../src/engine/dominion-config';
+import { describeSkill,describeSkillUse } from '../src/engine/skill-descriptions';
+import { byId } from '../src/data/characters';
 import type { BattleEvent } from '../src/engine/types';
 const a=['goku','pikachu','captain'],b=['vegeta','raven','hulk'];
 function watch(d:Direction,speed=1,drain=true){
@@ -17,6 +19,14 @@ function watch(d:Direction,speed=1,drain=true){
  return {wall:frames*.04,mechanicalFinish,maxQueue};
 }
 describe('Direção sem alterar regras',()=>{
+ it('explica a regra real da habilidade, incluindo alvo, números, carga e preparação',()=>{
+  const expansion=byId.gojo.skills[2];
+  expect(describeSkill(expansion)).toContain('todos os inimigos');
+  expect(describeSkill(expansion)).toContain('150');
+  expect(describeSkillUse(expansion)).toContain('+3,4 por segundo');
+  expect(describeSkillUse(expansion)).toContain('Preparação: 5 s');
+  expect(describeSkillUse(expansion)).toContain('Recarga: 14 s');
+ });
  it('separa estado mecânico e visível em snapshots causais',()=>{
   const battle=createBattle(a,b,42),d=createDirection(battle);
   expect(d.visible).not.toBe(battle);

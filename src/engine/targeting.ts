@@ -50,6 +50,7 @@ function forecastTargets(b:Battle,ally:Fighter){
 
 function rate(b:Battle,actor:Fighter,candidate:Fighter,rule:Target,intent:TargetIntent,effects:Effect[]){
   const c=byId[candidate.characterId],ratio=clamp(candidate.hp/candidate.maxHp),missing=1-ratio;
+  const intelligence=byId[actor.characterId].intelligence??50,foresight=.55+intelligence/200;
   const expected=effectDamage(effects);
   let score=0;const reasons:string[]=[];
   const add=(name:string,value:number)=>{if(Math.abs(value)>0.01){score+=value;reasons.push(`${name} ${value>0?'+':''}${value.toFixed(1)}`);}};
@@ -74,14 +75,14 @@ function rate(b:Battle,actor:Fighter,candidate:Fighter,rule:Target,intent:Target
       if(threatened)add('o reforço ajuda sob ameaça',1.2);
     }else add('necessidade da equipe',missing*3);
   }else{
-    add('ameaça ao trio',threat(candidate)*(intent==='interrupt'?0.45:0.85));
+    add('ameaça ao trio',threat(candidate)*(intent==='interrupt'?0.45:0.85)*foresight);
     add('vulnerabilidade',status(candidate,'exposed')*4+status(candidate,'marked')*3+status(candidate,'electric')*1.2);
     if(rule==='enemyWeak')add('condição baixa',(1-ratio)*2.4);
     if(rule==='enemyStrong')add('poder estimado',c.power/100*2.5);
     if(rule==='investigated')add('informação reunida',(actor.investigation[candidate.uid]??0)/100*18);
     if(intent==='finisher'||intent==='offense'){
       const shields=candidate.shields.reduce((n,s)=>n+s.amount,0);
-      if(expected>0&&candidate.hp+shields<=expected)add('impacto pode incapacitar',TARGETING.killThreatBonus);
+      if(expected>0&&candidate.hp+shields<=expected)add('impacto pode incapacitar',TARGETING.killThreatBonus*foresight);
       else if(ratio<.25)add('alvo perto de cair',1.7);
     }
     if(intent==='interrupt'){
@@ -89,7 +90,7 @@ function rate(b:Battle,actor:Fighter,candidate:Fighter,rule:Target,intent:Target
         const progress=clamp(candidate.cast.elapsed/Math.max(.1,candidate.cast.duration));
         const skill=byId[candidate.characterId].skills[candidate.cast.skill];
         const castValue=skill.effects.reduce((n,e)=>n+(e.kind==='damage'?e.value:e.kind==='deathnote'?candidate.maxHp*.7:0),0);
-        add('preparação ativa',9+progress*TARGETING.imminentCastBonus+clamp(castValue/candidate.maxHp)*3);
+        add('preparação ativa',(9+progress*TARGETING.imminentCastBonus+clamp(castValue/candidate.maxHp)*3)*foresight);
       }
       if(controlStatuses.has('paralyzed')&&status(candidate,'paralyzed')>0)add('já interrompido',-2.4);
     }
@@ -115,7 +116,7 @@ function rate(b:Battle,actor:Fighter,candidate:Fighter,rule:Target,intent:Target
     add('foco mantido',continuity);
   }
   // Tiny seeded variation breaks exact ties without depending on fighter array or slot order.
-  score+=stableNoise(b.seed,b.nextEvent,actor.characterId,candidate.characterId,intent);
+  score+=stableNoise(b.seed,b.nextEvent,actor.characterId,candidate.characterId,intent)*(4-3.8*intelligence/100);
   return {score,reasons};
 }
 

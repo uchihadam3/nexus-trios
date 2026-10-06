@@ -5,12 +5,12 @@ import { SkillIcon } from '../components/Icon';
 import type { Profile, Run } from '../lib/storage';
 interface Props {profile:Profile;run:Run|null;onPlay:()=>void;onContinue:()=>void;onAbandon:()=>void;onNavigate:(s:'characters'|'help'|'settings')=>void;onInstall:()=>void}
 export function Home({profile,run,onPlay,onContinue,onAbandon,onNavigate,onInstall}:Props){
-  const hasRun=run&&(run.stage==='draft'||run.stage==='battle'||(run.battle?.winner==='player'&&run.index<9));
+  const hasRun=!!run,terminal=run?.stage==='result'&&(run.battle?.winner!=='player'||run.index===9);
   return <>
     <section className="home-hero">
       <div className="hero-copy"><div className="hero-kicker"><span className="live-dot"/> UNIVERSOS DIFERENTES. UM SÓ DESTINO.</div><h1>TRÊS LENDAS.<br/><span>UMA CONEXÃO.</span></h1><p>O poder está na combinação.<br/>Monte seu trio e conquiste dez confrontos<br className="desktop-break"/> em batalhas totalmente automáticas.</p>
-        <button className="primary hero-cta" onClick={hasRun?onContinue:onPlay}>{hasRun?'Continuar jornada':'Montar meu trio'}<ArrowUpRight size={22}/></button>
-        {hasRun&&<button className="abandon-campaign" onClick={onAbandon}>Desistir desta campanha e começar outra</button>}
+        <button className="primary hero-cta" onClick={hasRun?onContinue:onPlay}>{terminal?'Ver conclusão':hasRun?'Continuar jornada':'Montar meu trio'}<ArrowUpRight size={22}/></button>
+        {hasRun&&!terminal&&<button className="abandon-campaign" onClick={onAbandon}>Desistir desta campanha e começar outra</button>}
         <div className="hero-footnote"><span>3 escolhas</span><i/> <span>10 confrontos</span><i/><span>Infinitas combinações</span></div>
       </div>
       <div className="hero-art" aria-label="Goku, Pikachu e Gojo: descubra sua combinação"><div className="orbital orbital-one"/><div className="orbital orbital-two"/><span className="art-coordinate">NXS / CONEXÃO 001</span>
