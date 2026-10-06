@@ -14,14 +14,14 @@ import { statuses } from '../data/statuses';
 type BattleNotice={id:string;actor:string;title:string;detail:string};
 const chargeLabels:Record<string,string>={action:'Ação',dealt:'Dano causado',received:'Dano recebido',allyHurt:'Aliado ferido',enemyHurt:'Rival ferido',interrupt:'Interrupção',status:'Efeito aplicado',protected:'Proteção útil',enemyCast:'Preparação rival',survived:'Tempo sobrevivido',losing:'Desvantagem',winning:'Vantagem',trait:'Traço ativado',synergy:'Sinergia do trio'};
 
-export function BattleScreen({battle,beat,index,name,settings,paused,onPause,onAbandon,onSettings}:{battle:Battle;beat:Beat|null;index:number;name:string;settings:Settings;paused:boolean;onPause:()=>void;onAbandon:()=>void;onSettings:(s:Settings)=>void}){
+export function BattleScreen({battle,clockTime,beat,index,name,settings,paused,onPause,onAbandon,onSettings}:{battle:Battle;clockTime:number;beat:Beat|null;index:number;name:string;settings:Settings;paused:boolean;onPause:()=>void;onAbandon:()=>void;onSettings:(s:Settings)=>void}){
   const arena=useRef<HTMLDivElement>(null),[anchors,setAnchors]=useState<Anchors>({}),[mixer,setMixer]=useState(false),[historyOpen,setHistoryOpen]=useState(false),[inspect,setInspect]=useState<InspectTarget|null>(null),[notices,setNotices]=useState<BattleNotice[]>([]),[tutorial,setTutorial]=useState(()=>{try{return index===0&&!localStorage.getItem('nexus-battle-guide-v1')}catch{return false}});
   useLayoutEffect(()=>{
     const el=arena.current;if(!el)return;
     const measure=()=>{const box=el.getBoundingClientRect(),next:Anchors={};el.querySelectorAll<HTMLElement>('[data-portrait],[data-ability]').forEach(node=>{const rect=node.getBoundingClientRect(),key=node.dataset.portrait??node.dataset.ability!;next[key]={x:100*(rect.x+rect.width/2-box.x)/box.width,y:100*(rect.y+rect.height/2-box.y)/box.height};});setAnchors(next);};
     measure();const observer=new ResizeObserver(measure);observer.observe(el);return()=>observer.disconnect();
   },[battle.seed]);
-  const remaining=Math.max(0,120-Math.floor(battle.time)),lead=battle.dominion>3?'player':battle.dominion< -3?'enemy':'neutral';
+  const remaining=Math.max(0,120-Math.floor(clockTime)),lead=battle.dominion>3?'player':battle.dominion< -3?'enemy':'neutral';
   const label=lead==='player'?'Seu trio está à frente':lead==='enemy'?'Rivais estão à frente':'Disputa equilibrada';
   const position=50-Math.min(48,Math.max(-48,battle.dominion*.48));
   const turn=beat?.impacted&&beat.events.some(e=>e.kind==='turn');

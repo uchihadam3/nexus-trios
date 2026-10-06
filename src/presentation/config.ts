@@ -5,6 +5,7 @@ export const PRESENTATION = {
   skillSeconds: 3.0,
   grandSeconds: 4.4,
   preparationSeconds: 2.05,
+  periodicSeconds: 0.7,
   interruptSeconds: 2.35,
   knockoutSeconds: 2.45,
   turnaroundSeconds: 2.65,

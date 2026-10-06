@@ -15,7 +15,7 @@ const lerp=(a:number,b:number,t:number)=>a+(b-a)*t;
 const familiesWithTravel=new Set(['energy','electric','fire','slash','magic','psychic','dark']);
 
 export function isAreaBeat(beat:Beat|null,battle:Battle):boolean {
-  if(!beat)return false;
+  if(!beat||!['basic','skill'].includes(beat.event.kind))return false;
   const source=battle.fighters.find(f=>f.uid===beat.event.source);
   if(profileFor(source?.characterId??'',beat.event.skill)?.area)return true;
   const direct=beat.events.filter(e=>e.source===beat.event.source&&e.target&&['damage','status','heal','shield'].includes(e.kind));

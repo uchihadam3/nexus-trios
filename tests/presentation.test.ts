@@ -6,25 +6,26 @@ import { PRESENTATION as P } from '../src/presentation/config';
 import { DOMINION as D } from '../src/engine/dominion-config';
 import type { BattleEvent } from '../src/engine/types';
 const a=['goku','pikachu','captain'],b=['vegeta','raven','hulk'];
-function watch(d:Direction,speed=1){
+function watch(d:Direction,speed=1,drain=true){
  let frames=0,mechanicalFinish=-1,maxQueue=0;
- while(!d.complete&&frames<6000){
+ while(!(drain?d.complete:d.battle.finished)&&frames<20000){
   advanceDirection(d,.04,undefined,speed);frames++;
   maxQueue=Math.max(maxQueue,d.queue.length);
   if(d.battle.finished&&mechanicalFinish<0)mechanicalFinish=frames*.04;
  }
- expect(d.complete).toBe(true);
+ expect(drain?d.complete:d.battle.finished).toBe(true);
  return {wall:frames*.04,mechanicalFinish,maxQueue};
 }
 describe('Direção sem alterar regras',()=>{
- it('mantém um único estado mecânico e uma fila de eventos',()=>{
+ it('separa estado mecânico e visível em snapshots causais',()=>{
   const battle=createBattle(a,b,42),d=createDirection(battle);
-  expect(d.visible).toBe(battle);
+  expect(d.visible).not.toBe(battle);
+  expect(d.visible).toEqual(battle);
   expect(P.gameRate).toBe(1);
   advanceDirection(d,1);
-  expect(d.visible).toBe(d.battle);
+  expect(d.visible).not.toBe(d.battle);
   expect(d.battle.time).toBeCloseTo(1,6);
-  expect(d.queue.every(beat=>!('before' in beat)&&!('after' in beat))).toBe(true);
+  expect([...d.queue,...(d.active?[d.active]:[])].every(beat=>beat.before&&beat.after)).toBe(true);
  });
  it('1× e 2× mostram o mesmo combate mecânico em cada instante real',()=>{
   const one=createDirection(createBattle(a,b,42)),two=createDirection(createBattle(a,b,42));
@@ -32,8 +33,8 @@ describe('Direção sem alterar regras',()=>{
    advanceDirection(one,.04,undefined,1);
    advanceDirection(two,.04,undefined,2);
    expect(two.battle).toEqual(one.battle);
-   expect(one.visible).toBe(one.battle);
-   expect(two.visible).toBe(two.battle);
+   expect(one.visible.time).toBeLessThanOrEqual(one.battle.time+1e-6);
+   expect(two.visible.time).toBeLessThanOrEqual(two.battle.time+1e-6);
   }
   const oneEnd=watch(one,1),twoEnd=watch(two,2);
   expect(two.battle).toEqual(one.battle);
@@ -46,7 +47,7 @@ describe('Direção sem alterar regras',()=>{
    for(const f of battle.fighters){f.maxHp=1e8;f.hp=f.side==='enemy'?8e7:1e8;}
    return createDirection(battle);
   };
-  const one=make(),two=make(),duration1=watch(one,1),duration2=watch(two,2);
+  const one=make(),two=make(),duration1=watch(one,1,false),duration2=watch(two,2,false);
   expect(one.battle.time).toBe(120);
   expect(two.battle).toEqual(one.battle);
   expect(duration1.mechanicalFinish).toBeGreaterThanOrEqual(119.9);
@@ -54,45 +55,70 @@ describe('Direção sem alterar regras',()=>{
   expect(duration2.mechanicalFinish).toBeGreaterThanOrEqual(119.9);
   expect(duration2.mechanicalFinish).toBeLessThanOrEqual(120.1);
  });
- it('tempo, HP e carga seguem eventos mecânicos sem snapshots reversos',()=>{
+ it('HP, KO, carga e escudo visíveis só mudam no impacto causal',()=>{
   const d=createDirection(createBattle(['wolverine','pikachu','captain'],b,11));
-  let lastTime=0,lastHp=d.battle.fighters.map(f=>f.hp),lastCharges=d.battle.fighters.map(f=>f.skills.map(s=>s.charge));
-  for(let frame=0;frame<5000&&!d.complete;frame++){
-   advanceDirection(d,.04,undefined,frame%200<100?1:2);
-   expect(d.visible).toBe(d.battle);
-   expect(d.visible.time).toBeGreaterThanOrEqual(lastTime);
-   for(let i=0;i<d.battle.fighters.length;i++){
-    const fighter=d.battle.fighters[i],hpDelta=fighter.hp-lastHp[i];
-    const healing=d.signals.filter(e=>e.kind==='heal'&&e.target===fighter.uid).reduce((n,e)=>n+(e.value??0),0);
-    if(hpDelta>1e-5)expect(healing).toBeGreaterThanOrEqual(hpDelta-1e-5);
-    for(let skill=0;skill<3;skill++)if(fighter.skills[skill].charge<lastCharges[i][skill]-1e-5){
-     expect(d.signals.some(e=>e.kind==='skill'&&e.source===fighter.uid&&e.skill===skill||e.kind==='interrupt'&&e.target===fighter.uid)).toBe(true);
+  let lastTime=0,checkedHp=0,checkedKo=0,checkedCharge=0;
+  for(let frame=0;frame<20000&&!d.complete;frame++){
+   advanceDirection(d,.04,cue=>{
+    const beat=d.active!;
+    if(cue.phase==='start'){
+     expect(d.visible).toEqual(beat.before);
+     expect(beat.before.time).toBeGreaterThanOrEqual(lastTime-1e-6);
+     for(let i=0;i<6;i++)if(beat.before.fighters[i].hp!==beat.after.fighters[i].hp){
+      expect(d.visible.fighters[i].hp).toBe(beat.before.fighters[i].hp);checkedHp++;
+      if(beat.after.fighters[i].hp===0){expect(d.visible.fighters[i].hp).toBeGreaterThan(0);checkedKo++;}
+     }
+    }else{
+     expect(d.visible).toEqual(beat.after);
+     if(beat.events.some(e=>e.kind==='ready'||e.kind==='charge'))checkedCharge++;
     }
-   }
-   lastTime=d.visible.time;lastHp=d.battle.fighters.map(f=>f.hp);lastCharges=d.battle.fighters.map(f=>f.skills.map(s=>s.charge));
+   },frame%200<100?1:2);
+   expect(d.visible.time).toBeGreaterThanOrEqual(lastTime-1e-6);
+   lastTime=d.visible.time;
   }
   expect(d.complete).toBe(true);
+  expect(checkedHp).toBeGreaterThan(0);
+  expect(checkedKo).toBeGreaterThan(0);
+  expect(checkedCharge).toBeGreaterThan(0);
  });
- it('apresenta cada evento importante uma vez e mantém cada Beat em sua própria ação',()=>{
-  const d=createDirection(createBattle(a,b,42)),starts:Beat[]=[],impacts:number[]=[];
-  for(let frame=0;frame<5000&&!d.complete;frame++)advanceDirection(d,.04,cue=>{
-   if(cue.phase==='start')starts.push({...d.active!,events:[...d.active!.events]});
-   else impacts.push(cue.event.id);
-  },frame%100<50?1:2);
+ it('não descarta básicos nem skills e preserva ordem das consequências',()=>{
+  const d=createDirection(createBattle(a,b,42)),starts:Beat[]=[],impacts:number[]=[],actions:number[]=[];
+  let lastId=0;
+  for(let frame=0;frame<20000&&!d.complete;frame++){
+   advanceDirection(d,.04,cue=>{
+    if(cue.phase==='start')starts.push({...d.active!,events:[...d.active!.events]});
+    else impacts.push(cue.event.id);
+   },frame%100<50?1:2);
+   const fresh=d.battle.events.filter(e=>e.id>lastId);
+   actions.push(...fresh.filter(e=>e.kind==='basic'||e.kind==='skill'||e.kind==='cast').map(e=>e.id));
+   lastId=d.battle.nextEvent-1;
+  }
   const ids=starts.map(beat=>beat.event.id);
+  expect(starts.filter(beat=>['basic','skill','cast'].includes(beat.event.kind)).map(beat=>beat.event.id)).toEqual(actions);
   expect(new Set(ids).size).toBe(ids.length);
+  expect(ids).toEqual([...ids].sort((x,y)=>x-y));
   expect(new Set(impacts).size).toBe(impacts.length);
   expect(impacts).toEqual(ids);
   for(const beat of starts){
-   expect(beat.events.every(e=>e.time===beat.event.time&&e.id>=beat.event.id)).toBe(true);
+   expect(beat.events.map(e=>e.id)).toEqual([...beat.events.map(e=>e.id)].sort((x,y)=>x-y));
    expect(beat.events.filter(e=>['basic','skill','cast'].includes(e.kind))).toHaveLength(['basic','skill','cast'].includes(beat.event.kind)?1:0);
+   if(beat.events.some(e=>e.kind==='ko'))expect(beat.after.fighters.some((f,i)=>f.hp===0&&beat.before.fighters[i].hp>0)).toBe(true);
   }
+ });
+ it('atrasos de frame não perdem tempo, nem alteram eventos ou RNG',()=>{
+  const steady=createDirection(createBattle(a,b,42)),delayed=createDirection(createBattle(a,b,42));
+  for(let i=0;i<3000&&!steady.battle.finished;i++)advanceDirection(steady,.04);
+  for(let i=0;i<120&&!delayed.battle.finished;i++)advanceDirection(delayed,1);
+  expect(delayed.battle).toEqual(steady.battle);
+  watch(steady);watch(delayed);
+  expect(delayed.visible).toEqual(delayed.battle);
+  expect(steady.visible).toEqual(steady.battle);
  });
  it('VFX de alvo único não herda alvos de outro evento; área real continua área',()=>{
   const battle=createBattle(['goku','thor','captain'],b,4);
   const single:BattleEvent={id:1,time:1,kind:'skill',source:'player-0',target:'enemy-0',skill:0,label:'Kamehameha',visual:'beam'};
   const damage=(id:number,source:string,target:string):BattleEvent=>({id,time:1,kind:'damage',source,target,label:'Impacto',value:30});
-  const beat=(event:BattleEvent,events:BattleEvent[]):Beat=>({event,events,duration:1,family:'energy',grand:false,elapsed:0,impacted:false});
+  const beat=(event:BattleEvent,events:BattleEvent[]):Beat=>({event,events,before:battle,after:battle,duration:1,family:'energy',grand:false,elapsed:0,impacted:false});
   expect(isAreaBeat(beat(single,[single,damage(2,'player-0','enemy-0'),damage(3,'enemy-1','enemy-2')]),battle)).toBe(false);
   expect(isAreaBeat(beat(single,[single,damage(2,'player-0','enemy-0'),damage(3,'player-0','enemy-1')]),battle)).toBe(true);
   const area={...single,id:4,source:'player-1',skill:1};

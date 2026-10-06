@@ -38,7 +38,7 @@ export function FighterCard({fighter:f,battle,beat,onInspect,numbers,threatened,
       {threatened&&<span className="target-brackets"/>}{broken&&<span className="broken-flash">×</span>}
       {tempo&&<span className={`tempo-mark ${tempo.value!>0?'advanced':'delayed'}`} aria-label={tempo.label}><AuxIcon id={tempo.value!>0?'tempo-up':'tempo-down'} size={20}/></span>}
       {f.hp<=0&&<span className="ko-mark"><Skull size={30}/></span>}
-      {numbers&&hit&&<span key={hit.id} className="damage-number">−{Math.round(hit.value??0)}</span>}
+      {numbers&&hit&&<span key={hit.id} className="damage-number">−{Math.round(beat!.events.filter(e=>e.kind==='damage'&&e.target===f.uid).reduce((total,e)=>total+(e.value??0),0))}</span>}
       {(helped||supporting)&&<span className="help-mark">{(helped??supporting)?.kind==='heal'?<HeartPulse size={17}/>:(helped??supporting)?.kind==='synergy'?<Flame size={17}/>:<Shield size={17}/>}</span>}
     </button>
     {tempo&&<span className="tempo-reason">{tempo.label}</span>}

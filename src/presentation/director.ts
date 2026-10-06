@@ -4,7 +4,7 @@ import type { Battle, BattleEvent } from '../engine/types';
 import { PRESENTATION as P } from './config';
 
 export type Family='physical'|'energy'|'electric'|'fire'|'magic'|'dark'|'psychic'|'slash'|'prison'|'shield'|'heal'|'regen'|'buff'|'debuff'|'interrupt'|'ko'|'turn'|'grand';
-export interface Beat {event:BattleEvent;events:BattleEvent[];duration:number;family:Family;grand:boolean;elapsed:number;impacted:boolean}
+export interface Beat {event:BattleEvent;events:BattleEvent[];before:Battle;after:Battle;duration:number;family:Family;grand:boolean;elapsed:number;impacted:boolean;periodic?:boolean}
 export interface Direction {battle:Battle;visible:Battle;queue:Beat[];active:Beat|null;simIdle:number;complete:boolean;serial:number;signals:BattleEvent[]}
 export interface Cue {event:BattleEvent;family:Family;phase:'start'|'impact';grand:boolean}
 export function familyOf(event:BattleEvent,battle:Battle):Family {
@@ -36,38 +36,39 @@ function duration(event:BattleEvent,grand:boolean){
   return grand?P.grandSeconds:event.kind==='skill'?P.skillSeconds:P.normalSeconds;
 }
 export function createDirection(battle:Battle):Direction {
-  // The engine owns all mechanical state. The presentation never stores fighter snapshots.
-  return {battle,visible:battle,queue:[],active:null,simIdle:0,complete:false,serial:0,signals:[]};
+  return {battle,visible:structuredClone(battle),queue:[],active:null,simIdle:0,complete:false,serial:0,signals:[]};
 }
-function makeBeat(event:BattleEvent,events:BattleEvent[],battle:Battle):Beat {
-  const actor=battle.fighters.find(f=>f.uid===event.source);
+function makeBeat(event:BattleEvent,events:BattleEvent[],before:Battle,after:Battle,periodic=false):Beat {
+  const actor=after.fighters.find(f=>f.uid===event.source);
   const prep=actor&&event.skill!==undefined?byId[actor.characterId].skills[event.skill].preparation:0;
   const grand=event.kind==='skill'&&prep>=P.grandPreparation;
-  return {event,events,duration:duration(event,grand),family:familyOf(event,battle),grand,elapsed:0,impacted:false};
+  return {event,events,before,after,duration:periodic?P.periodicSeconds:duration(event,grand),family:familyOf(event,after),grand,elapsed:0,impacted:false,periodic};
 }
-function enqueue(d:Direction,beat:Beat){
-  // Basic attacks are visual feedback. When busy, the authoritative engine still
-  // applies each action exactly once; we only omit its optional animation.
-  if(beat.event.kind==='basic'&&(d.active||d.queue.length))return;
-  if(d.queue.length>=12){
-    if(beat.event.kind==='cast')return;
-    const stale=d.queue.findIndex(item=>item.event.kind==='basic'||item.event.kind==='cast');
-    if(stale>=0)d.queue.splice(stale,1);
-  }
-  d.queue.push(beat);
-}
-function collect(d:Direction,events:BattleEvent[]){
+function collect(d:Direction,events:BattleEvent[],before:Battle,after:Battle){
   if(!events.length)return;
-  d.signals.push(...events);
-  // stepBattle observes after each action. Events following its principal action
-  // belong to that action; periodic effects are handled individually.
+  // Every observer callback is a chronological boundary: one action and its
+  // consequences, or one periodic tick. Never merge across an action boundary.
   const principal=focus(events);
   if(principal&&['basic','skill','cast'].includes(principal.kind)){
-    enqueue(d,makeBeat(principal,events.filter(e=>e.id>=principal.id),d.battle));
-  }else{
-    for(const event of events.filter(e=>['interrupt','ko','turn'].includes(e.kind)))
-      enqueue(d,makeBeat(event,[event],d.battle));
+    d.queue.push(makeBeat(principal,events,before,after));
+    return;
   }
+  const change=events.find(e=>e.kind==='damage'||e.kind==='heal');
+  if(change){
+    const burning=change.kind==='damage'&&before.fighters.find(f=>f.uid===change.target)?.statuses.some(s=>s.id==='burning');
+    const event={...change,label:burning?'Queimadura':change.kind==='heal'?'Regeneração':'Efeito contínuo',status:burning?'burning' as const:change.kind==='heal'?'regen' as const:undefined};
+    const last=d.queue[d.queue.length-1];
+    // Adjacent periodic ticks may share an impact, but never swallow an action,
+    // a knockout, or more than one second of mechanical time.
+    if(last?.periodic&&!events.some(e=>e.kind==='ko'||e.kind==='interrupt'||e.kind==='turn')&&
+       last.event.source===event.source&&last.event.target===event.target&&last.event.kind===event.kind&&
+       after.time-last.before.time<=1.01){
+      last.events.push(...events);last.after=after;
+    }else d.queue.push(makeBeat(event,events,before,after,true));
+    return;
+  }
+  const important=events.find(e=>e.kind==='interrupt'||e.kind==='ko'||e.kind==='turn'||e.kind==='ready'||e.kind==='status'||e.kind==='shield');
+  if(important)d.queue.push(makeBeat(important,events,before,after,important.kind==='ready'||important.kind==='status'));
 }
 /** The engine advances on real time; visualSpeed changes only animations. */
 export function advanceDirection(d:Direction,seconds:number,onCue?:(cue:Cue)=>void,visualSpeed=1):void {
@@ -76,30 +77,34 @@ export function advanceDirection(d:Direction,seconds:number,onCue?:(cue:Cue)=>vo
     d.simIdle+=elapsed*P.gameRate;
     while(d.simIdle>=STEP-1e-8&&!d.battle.finished){
       d.simIdle=Math.max(0,d.simIdle-STEP);
-      let lastId=d.battle.nextEvent-1;
+      let previous=structuredClone(d.battle),lastId=d.battle.nextEvent-1;
       stepBattle(d.battle,current=>{
         const events=current.events.filter(e=>e.id>lastId);
         lastId=current.nextEvent-1;
-        collect(d,events);
+        const after=structuredClone(current);
+        collect(d,events,previous,after);
+        previous=after;
       });
     }
   }
-  // A growing visual backlog shortens playback, without changing the battle clock.
-  let budget=elapsed*Math.max(1,visualSpeed)*(1+Math.min(8,d.queue.length)*1.5);
+  let budget=elapsed*Math.max(1,visualSpeed);
   while(budget>1e-8&&!d.complete){
     if(!d.active){
       if(!d.queue.length){if(d.battle.finished)d.complete=true;break;}
       d.active=d.queue.shift()!;d.serial++;
+      d.visible=d.active.before;
       onCue?.({event:d.active.event,family:d.active.family,phase:'start',grand:d.active.grand});
     }
     const beat=d.active,take=Math.min(budget,beat.duration-beat.elapsed);
     beat.elapsed+=take;budget-=take;
     if(!beat.impacted&&beat.elapsed>=beat.duration*P.impactAt){
       beat.impacted=true;
+      d.visible=beat.after;
+      d.signals.push(...beat.events);
       onCue?.({event:beat.event,family:beat.family,phase:'impact',grand:beat.grand});
     }
     if(beat.elapsed>=beat.duration-1e-8)d.active=null;
   }
-  d.visible=d.battle;
+  if(!d.active&&!d.queue.length)d.visible=structuredClone(d.battle);
   if(d.battle.finished&&!d.active&&!d.queue.length)d.complete=true;
 }
