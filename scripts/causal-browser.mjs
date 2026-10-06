@@ -26,7 +26,7 @@ try{
  await page.reload({waitUntil:'networkidle'});
  await page.getByRole('button',{name:'Continuar jornada',exact:true}).click();
  await page.getByRole('button',{name:'Continuar',exact:true}).click();
- await page.getByRole('button',{name:'Entendi',exact:true}).click();
+ await page.getByRole('button',{name:'Pular guia',exact:true}).last().click();
  await page.clock.install();
  const read=()=>page.evaluate(()=>({
   hp:[...document.querySelectorAll('[data-fighter]')].map(f=>Number(f.querySelector('[role=progressbar]')?.getAttribute('aria-valuenow'))),

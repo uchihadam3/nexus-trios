@@ -23,8 +23,8 @@ describe('Direção sem alterar regras',()=>{
   const expansion=byId.gojo.skills[2];
   expect(describeSkill(expansion)).toContain('todos os inimigos');
   expect(describeSkill(expansion)).toContain('150');
-  expect(describeSkillUse(expansion)).toContain('+3,4 por segundo');
-  expect(describeSkillUse(expansion)).toContain('Preparação: 5 s');
+  expect(describeSkillUse(expansion)).toContain('+3,4% por segundo');
+  expect(describeSkillUse(expansion)).toContain('Preparo: 5 s');
   expect(describeSkillUse(expansion)).toContain('Recarga: 14 s');
  });
  it('separa estado mecânico e visível em snapshots causais',()=>{

@@ -100,7 +100,7 @@ export default function App(){
       let next={...current,battle:d.battle,presentation:checkpointDirection(d),battleSynergies};
       if(d.complete){
         next={...next,stage:'result',recorded:true,summaries:current.recorded?current.summaries:[...(current.summaries??[]).filter(s=>s.index!==current.index),summarizeBattle(current.index,d.battle,battleSynergies)]};
-        if(!current.recorded){const won=current.battle.winner==='player';setProfile(p=>{const n={...p,best:Math.max(p.best,current.index+(won?1:0)),wins:p.wins+(won?1:0),victories:p.victories+(won&&current.index===9?1:0)};save('profile',n);return n;});battleAudio.sound(won?'victory':'defeat',5);}
+        if(!current.recorded){const won=current.battle.winner==='player';setProfile(p=>{const n={...p,best:Math.max(p.best,current.index+(won?1:0)),wins:p.wins+(won?1:0),victories:p.victories+(won&&current.index===9?1:0),champion:won&&current.index===9?[...current.team]:p.champion};save('profile',n);return n;});battleAudio.sound(won?'victory':'defeat',5);}
         save('run',next);
       }
       runRef.current=next;setRun(next);
@@ -132,10 +132,10 @@ export default function App(){
       {screen==='vfx'&&<Suspense fallback={<p>Carregando galeria audiovisual…</p>}><VfxLabScreen/></Suspense>}
       {!storageAvailable&&<p role="alert" className="storage-warning">Não foi possível salvar neste navegador. Sua sessão continua, mas pode não ser recuperada ao fechar.</p>}
     </main>
-    <footer className="site-footer"><span><Layers size={13}/> DIFERENTES UNIVERSOS. NOVAS CONEXÕES.</span><button className="footer-lab" onClick={()=>navigate('vfx')}>Galeria de efeitos</button><span>NEXUS <i/> MVP 1.0</span></footer>
+    <footer className="site-footer"><span><Layers size={13}/> DIFERENTES UNIVERSOS. NOVAS CONEXÕES.</span><button className="footer-lab" onClick={()=>navigate('vfx')}>Galeria de efeitos</button><span>NEXUS <i/> DUELO DE TRIOS</span></footer>
     {details&&<CharacterModal character={byId[details]} onClose={()=>setDetails(null)}/>}
-    {confirmNew&&<InfoDialog title="Começar uma nova campanha?" onClose={()=>setConfirmNew(false)}><p>O progresso desta campanha será descartado. Vitórias e recordes já registrados ficam salvos.</p><div className="result-actions"><button className="danger" onClick={startNew}>Descartar e começar outra <ArrowUpRight size={18}/></button><button className="secondary" onClick={()=>setConfirmNew(false)}>Continuar campanha</button></div></InfoDialog>}
-    {confirmAbandon&&<InfoDialog title="Desistir desta campanha?" onClose={()=>setConfirmAbandon(false)}><p>O progresso desta campanha será descartado e uma nova seleção de trio começará. Vitórias e recordes já registrados ficam salvos.</p><div className="result-actions"><button className="danger" onClick={startNew}>Desistir e começar outra <ArrowUpRight size={18}/></button><button className="secondary" onClick={()=>setConfirmAbandon(false)}>Continuar campanha</button></div></InfoDialog>}
+    {confirmNew&&<InfoDialog title="Começar uma nova jornada?" onClose={()=>setConfirmNew(false)}><p>O progresso desta jornada será descartado. Vitórias e recordes já registrados ficam salvos.</p><div className="result-actions"><button className="danger" onClick={startNew}>Descartar e começar outra <ArrowUpRight size={18}/></button><button className="secondary" onClick={()=>setConfirmNew(false)}>Continuar jornada</button></div></InfoDialog>}
+    {confirmAbandon&&<InfoDialog title="Desistir desta jornada?" onClose={()=>setConfirmAbandon(false)}><p>O progresso desta jornada será descartado e uma nova seleção de trio começará. Vitórias e recordes já registrados ficam salvos.</p><div className="result-actions"><button className="danger" onClick={startNew}>Desistir e começar outra <ArrowUpRight size={18}/></button><button className="secondary" onClick={()=>setConfirmAbandon(false)}>Continuar jornada</button></div></InfoDialog>}
     {installHelp&&<InfoDialog title={installed?'O NEXUS já está instalado.':'Leve seu trio com você.'} onClose={()=>setInstallHelp(false)}><p>{installed?'Abra o jogo pela tela inicial do seu dispositivo.':'No Chrome ou Edge, use o menu do navegador e escolha “Instalar aplicativo”. No iPhone ou iPad, use Compartilhar → Adicionar à Tela de Início.'}</p><p>Abra o jogo uma vez com conexão para salvar os arquivos. O progresso fica neste navegador. A disponibilidade de instalação depende do navegador.</p><button className="primary" onClick={()=>setInstallHelp(false)}>Entendi</button></InfoDialog>}
   </div>;
 }

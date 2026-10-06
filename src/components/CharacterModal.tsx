@@ -1,19 +1,25 @@
 import { useEffect,useRef } from 'react';
-import { X, Activity, Timer, Info } from 'lucide-react';
+import { X,Activity,Timer,Info,Brain } from 'lucide-react';
 import type { Character } from '../engine/types';
 import { Portrait } from './Portrait';
 import { SkillIcon } from './Icon';
-import { describeSkill,describeSkillUse,describeTrait } from '../engine/skill-descriptions';
+import { presentEffect,presentSkill,presentTrait,targetNames } from '../engine/skill-descriptions';
+
+export function intelligenceLabel(value:number){
+  return value>=95?'Excepcional':value>=80?'Muito inteligente':value>=60?'Esperto':value>=40?'Comum':'Impulsivo';
+}
 export function CharacterModal({character:c,onClose}:{character:Character;onClose:()=>void}){
-  const ref=useRef<HTMLDialogElement>(null);
+  const ref=useRef<HTMLDialogElement>(null),trait=presentTrait(c.trait);
   useEffect(()=>{ref.current?.showModal();return()=>ref.current?.close();},[]);
-  return <dialog ref={ref} className="character-modal" onCancel={onClose} onClick={e=>{if(e.target===e.currentTarget)onClose();}}><div className="modal-inner">
+  const intelligence=c.intelligence??50;
+  return <dialog ref={ref} className="character-modal" onCancel={onClose} onClick={e=>{if(e.target===e.currentTarget)onClose();}}><div className="modal-inner character-sheet">
     <button className="icon-button modal-close" aria-label="Fechar detalhes" onClick={onClose}><X size={20}/></button>
-    <div className="modal-character" style={{'--character':c.color} as React.CSSProperties}><Portrait character={c}/><div><span className="eyebrow">{c.universe}</span><h2>{c.name}</h2><p>{c.idea}</p><span className="mini-label">RETRATO PROVISÓRIO</span></div></div>
-    <div className="character-stats"><span><Activity size={16}/> {c.hp} Condição</span><span><Timer size={16}/> Ação a cada {c.interval.toLocaleString('pt-BR')} s</span><span>Inteligência: {c.intelligence??50}</span></div>
-    <div className="trait"><span className="eyebrow">TRAÇO PERMANENTE</span><h3>{c.trait.name}</h3><p>{describeTrait(c.trait)}</p></div>
-    <div className="detail-skills">{c.skills.map(s=><article key={s.id}><span className="skill-static"><SkillIcon type={s.icon} characterId={c.id} skillId={s.id}/></span><div><h3>{s.name}</h3><p>{describeSkill(s)}</p><small>{describeSkillUse(s)}</small>{s.description&&<small className="skill-flavor">{s.description}</small>}</div></article>)}</div>
+    <div className="modal-character" style={{'--character':c.color} as React.CSSProperties}><Portrait character={c}/><div><span className="eyebrow">{c.universe}</span><h2>{c.name}</h2><p>{c.idea}</p></div></div>
+    <div className="character-stats"><span><Activity size={16}/> {c.hp} Vida</span><span><Timer size={16}/> Ataca a cada {c.interval.toLocaleString('pt-BR')} s</span><span><Brain size={16}/> Inteligência {intelligence}/100 · {intelligenceLabel(intelligence)}</span></div>
+    {c.id==='light'&&<div className="vulnerability"><Info size={17}/><p><strong>Como funciona a investigação</strong><br/>Ao chegar a 100 Investigação em um inimigo, Light descobre se ele é vulnerável ou imune à Death Note. A descoberta fica visível na batalha.</p></div>}
+    <div className="sheet-section trait"><span className="eyebrow">TRAÇO</span><h3>{c.trait.name}</h3><div className="effect-chips">{trait.effects.map((effect,i)=><span key={i}>{effect}</span>)}</div><small>Ativa {trait.trigger} · {trait.frequency}</small></div>
+    <div className="sheet-section"><span className="eyebrow">ATAQUE BÁSICO · {targetNames[c.basic.target]}</span><div className="effect-chips">{c.basic.effects.map((effect,i)=><span key={i}>{presentEffect(effect,c.basic.target)}</span>)}</div></div>
+    <div className="detail-skills">{c.skills.map((s,i)=>{const p=presentSkill(s);return <article key={s.id}><span className="skill-static"><SkillIcon type={s.icon} characterId={c.id} skillId={s.id}/></span><div><span className="eyebrow">HABILIDADE {i+1}</span><h3>{s.name}</h3><div className="effect-chips">{p.effects.map((effect,j)=><span key={j}>{effect}</span>)}</div><div className="sheet-detail"><b>Alvo</b> {p.target}</div><div className="sheet-detail"><b>Carga</b> {p.charge.join(' · ')}</div><div className="sheet-detail"><b>Usa quando</b> {p.useWhen}</div><div className="sheet-detail"><b>Preparo</b> {p.preparation} <b>Recarga</b> {p.cooldown}</div></div></article>;})}</div>
     <div className="vulnerability"><Info size={17}/><p><strong>Ponto de atenção</strong><br/>{c.vulnerability}</p></div>
-    <small className="compatibility">Death Note: {c.deathNoteCompatible?'compatível com a sentença':'investigação se converte em Exposto'}. Regra ficcional deste jogo.</small>
   </div></dialog>;
 }

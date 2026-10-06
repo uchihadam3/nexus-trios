@@ -24,7 +24,7 @@ try{
   },effects);
   await page.reload({waitUntil:'networkidle'});
   await page.getByRole('button',{name:'Continuar jornada',exact:true}).click();await page.getByRole('button',{name:'Continuar',exact:true}).click();
-  const tutorial=page.getByRole('button',{name:'Entendi',exact:true});if(await tutorial.isVisible())await tutorial.click();
+  const tutorial=page.getByRole('button',{name:'Pular guia',exact:true}).last();if(await tutorial.isVisible())await tutorial.click();
   await page.locator('.battle-screen').waitFor();
   const metrics=await page.evaluate(async duration=>{
    const frames=[],seen=new Set(),kinds=new Set(),longTasks=[];let previous=performance.now(),maxNodes=0,impactFrames=[];

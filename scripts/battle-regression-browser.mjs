@@ -33,7 +33,7 @@ try{
   await page.reload({waitUntil:'networkidle'});
   await page.getByRole('button',{name:'Continuar jornada',exact:true}).click();
   await page.getByRole('button',{name:'Continuar',exact:true}).click();
-  await page.getByRole('button',{name:'Entendi',exact:true}).click();
+  await page.getByRole('button',{name:'Pular guia',exact:true}).last().click();
   await page.getByRole('button',{name:`Velocidade ${speed} vezes`}).waitFor();
   if(await page.locator('.battle-clock').count())throw Error('Cronômetro ainda aparece na batalha');
   const geometry=await page.evaluate(()=>({overflow:document.documentElement.scrollWidth>innerWidth,fighters:document.querySelectorAll('[data-fighter]').length,portraits:[...document.querySelectorAll('.fighter-portrait')].map(x=>Math.round(x.getBoundingClientRect().width))}));
