@@ -13,6 +13,7 @@ export function FighterCard({fighter:f,battle,beat,onInspect,numbers,threatened,
   const c=byId[f.characterId],shield=f.shields.reduce((n,s)=>n+s.amount,0);
   const source=beat?.event.source===f.uid,impacted=beat?.impacted??false;
   const hit=impacted?beat?.events.find(e=>e.target===f.uid&&e.kind==='damage'):undefined;
+  const healed=impacted?beat?.events.find(e=>e.target===f.uid&&e.kind==='heal'):undefined;
   const helped=impacted?beat?.events.find(e=>e.target===f.uid&&['shield','block','heal','synergy'].includes(e.kind)):undefined;
   const supporting=impacted?beat?.events.find(e=>e.source===f.uid&&e.target!==f.uid&&['block','shield','heal','synergy'].includes(e.kind)):undefined;
   const broken=impacted?beat?.events.find(e=>e.target===f.uid&&e.kind==='interrupt'):undefined;
@@ -39,6 +40,7 @@ export function FighterCard({fighter:f,battle,beat,onInspect,numbers,threatened,
       {tempo&&<span className={`tempo-mark ${tempo.value!>0?'advanced':'delayed'}`} aria-label={tempo.label}><AuxIcon id={tempo.value!>0?'tempo-up':'tempo-down'} size={20}/></span>}
       {f.hp<=0&&<span className="ko-mark"><Skull size={30}/></span>}
       {numbers&&hit&&<span key={hit.id} className="damage-number">−{Math.round(beat!.events.filter(e=>e.kind==='damage'&&e.target===f.uid).reduce((total,e)=>total+(e.value??0),0))}</span>}
+      {numbers&&healed&&!hit&&<span key={healed.id} className="damage-number heal-number">+{Number(beat!.events.filter(e=>e.kind==='heal'&&e.target===f.uid).reduce((total,e)=>total+(e.value??0),0).toFixed(1))}</span>}
       {(helped||supporting)&&<span className="help-mark">{(helped??supporting)?.kind==='heal'?<HeartPulse size={17}/>:(helped??supporting)?.kind==='synergy'?<Flame size={17}/>:<Shield size={17}/>}</span>}
     </button>
     {tempo&&<span className="tempo-reason">{tempo.label}</span>}

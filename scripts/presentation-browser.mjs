@@ -32,7 +32,12 @@ try{
  await page.getByRole('button',{name:'Pausar',exact:true}).click();
  await page.getByRole('button',{name:'Ajustar música e efeitos'}).click();await page.getByLabel('Música',{exact:true}).fill('31');await page.getByLabel('Efeitos',{exact:true}).fill('57');
  await page.getByRole('button',{name:'Ajustar música e efeitos'}).click();
- for(const width of [320,360,390,1280]){await page.setViewportSize({width,height:width>600?1000:844});await page.waitForTimeout(100);const geometry=await page.evaluate(()=>({overflow:document.documentElement.scrollWidth>innerWidth,portraits:[...document.querySelectorAll('.fighter-portrait')].map(e=>e.getBoundingClientRect().width),fighters:document.querySelectorAll('[data-fighter]').length,meters:document.querySelectorAll('[role=meter]').length}));if(geometry.overflow||Math.min(...geometry.portraits)<75||geometry.fighters!==6||geometry.meters!==1)throw Error(`Layout inválido ${width}: ${JSON.stringify(geometry)}`);await page.screenshot({path:`test-results/presentation-${width}.png`,fullPage:true});}
+ for(const width of [320,360,390,1280]){
+  await page.setViewportSize({width,height:width>600?1000:844});await page.waitForTimeout(100);
+  const geometry=await page.evaluate(()=>({overflow:document.documentElement.scrollWidth>innerWidth,portraits:[...document.querySelectorAll('.fighter-portrait')].map(e=>e.getBoundingClientRect().width),fighters:document.querySelectorAll('[data-fighter]').length,meters:document.querySelectorAll('[role=meter]').length,offenders:[...document.querySelectorAll('*')].filter(e=>e.getBoundingClientRect().right>innerWidth+1).slice(0,8).map(e=>({tag:e.tagName,cls:e.className?.baseVal??e.className,right:e.getBoundingClientRect().right}))}));
+  await page.screenshot({path:`test-results/presentation-${width}.png`,fullPage:true});
+  if(geometry.overflow||Math.min(...geometry.portraits)<75||geometry.fighters!==6||geometry.meters!==1)throw Error(`Layout inválido ${width}: ${JSON.stringify(geometry)}`);
+ }
  await page.reload({waitUntil:'networkidle'});const settings=await page.evaluate(()=>JSON.parse(localStorage.getItem('nexus-v1-settings')));if(settings.musicVolume!==31||settings.effectsVolume!==57)throw Error('Mixer não persistiu');
  report.checks.push('autoplay bloqueado antes de gesto','música inicia após gesto, pausa e retoma sem reiniciar','mixer persiste','320/360/390/1280 sem overflow e seis retratos >=76 px','barra única');
  // Complete the same seeded battle via the actual UI at both presentation speeds.

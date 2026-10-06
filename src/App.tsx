@@ -12,7 +12,7 @@ import { generateCampaign,newDraft,pickDraft,skipDraft } from './engine/campaign
 import { defaults,loadProfile,loadRun,loadSettings,resetStorage,save,storageAvailable } from './lib/storage';
 import type { Run,Settings } from './lib/storage';
 import { battleAudio } from './lib/audio';
-import { createDirection,advanceDirection,type Direction,type Beat } from './presentation/director';
+import { createDirection,restoreDirection,checkpointDirection,advanceDirection,type Direction,type Beat } from './presentation/director';
 import { PRESENTATION as P } from './presentation/config';
 import type { Battle } from './engine/types';
 const DebugScreen=lazy(()=>import('./screens/DebugScreen').then(m=>({default:m.DebugScreen})));
@@ -33,6 +33,15 @@ export default function App(){
   const [presentation,setPresentation]=useState<{battle:Battle;beat:Beat|null}|null>(null);
   const lastAudio=useRef(0),lastDominionSound=useRef(0);
   const changeRun=(next:Run|null)=>{runRef.current=next;setRun(next);save('run',next);};
+  const directionFor=(current:Run)=>{
+    const battle=current.battle!;
+    if(current.presentation&&current.team.length===3){
+      const initial=createBattle(current.team,current.encounters[current.index].team,current.seed+current.index*7919,current.encounters[current.index].scale);
+      const restored=restoreDirection(initial,battle,current.presentation);
+      if(restored)return restored;
+    }
+    return createDirection(battle);
+  };
   const changeSettings=(next:Settings)=>{battleAudio.configure(next);setSettings(next);save('settings',next);};
   const navigate=(next:Screen)=>{if(next!=='game')setPaused(true);setScreen(next);setMenu(false);window.scrollTo(0,0);};
   const startNew=()=>{
@@ -43,7 +52,7 @@ export default function App(){
   const startBattle=(index:number)=>{
     const current=runRef.current;if(!current)return;
     const team=current.draft.team,encounters=current.stage==='draft'?generateCampaign(current.seed,team):current.encounters,encounter=encounters[index];
-    const next={...current,team,encounters,index,stage:'battle' as const,recorded:false,battle:createBattle(team,encounter.team,current.seed+index*7919,encounter.scale)};
+    const next={...current,team,encounters,index,stage:'battle' as const,recorded:false,presentation:undefined,battle:createBattle(team,encounter.team,current.seed+index*7919,encounter.scale)};
     direction.current=null;setPresentation(null);changeRun(next);setPaused(false);navigate('game');
     if(index===0)setProfile(p=>{const n={...p,journeys:p.journeys+1};save('profile',n);return n;});
   };
@@ -65,7 +74,7 @@ export default function App(){
     const timer=window.setInterval(()=>{
       const now=performance.now(),elapsed=Math.max(0,(now-previous)/1000);previous=now;
       const current=runRef.current;if(!current||current.stage!=='battle'||!current.battle)return;
-      if(!direction.current||direction.current.battle!==current.battle){direction.current=createDirection(current.battle);lastAudio.current=current.battle.nextEvent-1;lastDominionSound.current=current.battle.dominion;}
+      if(!direction.current||direction.current.battle!==current.battle){direction.current=directionFor(current);lastAudio.current=current.battle.nextEvent-1;lastDominionSound.current=current.battle.dominion;}
       const d=direction.current;
       advanceDirection(d,elapsed,cue=>{
         if(cue.phase==='impact'&&d.active){
@@ -75,13 +84,13 @@ export default function App(){
         }else battleAudio.cue(cue);
       },settings.speed);
       const fighters=d.visible.fighters,critical=fighters.filter(f=>f.hp>0&&f.hp/f.maxHp<.34).length,casts=fighters.filter(f=>f.hp>0&&f.cast).length;
-      battleAudio.setMood({heat:Math.min(1,.15+critical*.13+casts*.17+Math.abs(d.visible.dominion)/150),pressure:d.visible.dominion/100,time:d.battle.time/120});
+      battleAudio.setMood({heat:Math.min(1,.15+critical*.13+casts*.17+Math.abs(d.visible.dominion)/150),pressure:d.visible.dominion/100,time:d.visible.time/120});
       if(Math.abs(d.visible.dominion-lastDominionSound.current)>=20){battleAudio.sound('dominion',2);lastDominionSound.current=d.visible.dominion;}
       const ready=d.signals.find(e=>e.id>lastAudio.current&&e.kind==='ready');
       if(ready)battleAudio.sound('ready',1);
       if(d.signals.length)lastAudio.current=Math.max(lastAudio.current,...d.signals.map(e=>e.id));
       setPresentation({battle:d.visible,beat:d.active?{...d.active}:null});
-      let next={...current,battle:d.battle};
+      let next={...current,battle:d.battle,presentation:checkpointDirection(d)};
       if(d.complete){
         next={...next,stage:'result',recorded:true};
         if(!current.recorded){const won=current.battle.winner==='player';setProfile(p=>{const n={...p,best:Math.max(p.best,current.index+(won?1:0)),wins:p.wins+(won?1:0),victories:p.victories+(won&&current.index===9?1:0)};save('profile',n);return n;});battleAudio.sound(won?'victory':'defeat',5);}
@@ -94,7 +103,7 @@ export default function App(){
   },[screen,paused,details,confirmNew,confirmAbandon,settings.speed,settings.volume]);
   useEffect(()=>{
     if(screen!=='game'||!settings.auto||run?.stage!=='result'||run.index>=9||run.battle?.winner!=='player')return;
-    const id=window.setTimeout(()=>{const current=runRef.current;if(!current)return;const index=current.index+1,encounter=current.encounters[index];const next={...current,index,stage:'battle' as const,recorded:false,battle:createBattle(current.team,encounter.team,current.seed+index*7919,encounter.scale)};runRef.current=next;setRun(next);save('run',next);setPaused(false);},4500);
+    const id=window.setTimeout(()=>{const current=runRef.current;if(!current)return;const index=current.index+1,encounter=current.encounters[index];const next={...current,index,stage:'battle' as const,recorded:false,presentation:undefined,battle:createBattle(current.team,encounter.team,current.seed+index*7919,encounter.scale)};runRef.current=next;setRun(next);save('run',next);setPaused(false);},4500);
     return()=>clearTimeout(id);
   },[screen,settings.auto,run?.stage,run?.index,run?.battle?.winner]);
   useEffect(()=>{battleAudio.configure(settings);},[settings]);
@@ -105,12 +114,12 @@ export default function App(){
     <header className="site-header"><button className="brand" onClick={()=>navigate('home')} aria-label="Nexus início"><span className="brand-mark">N</span><span>NEXUS<small>DUELO DE TRIOS</small></span></button><nav aria-label="Navegação principal" className={menu?'open':''}><button className={screen==='home'?'active':''} onClick={()=>navigate('home')}>Início</button><button className={screen==='characters'?'active':''} onClick={()=>navigate('characters')}>Personagens <span>{characters.length}</span></button><button className={screen==='help'?'active':''} onClick={()=>navigate('help')}>Como jogar</button><button className={screen==='settings'?'active':''} onClick={()=>navigate('settings')}>Configurações</button></nav><div className="header-right"><span className="local-badge"><ShieldCheck size={13}/> PROGRESSO LOCAL</span><button className="icon-button menu-toggle" aria-label="Abrir menu" aria-expanded={menu} onClick={()=>setMenu(!menu)}>{menu?<X size={20}/>:<Menu size={20}/>}</button></div></header>
     <main className={screen==='game'&&run?.stage==='battle'?'main battle-main':'main'}>
       {screen!=='home'&&<button className="back-button" onClick={()=>navigate('home')}><ArrowLeft size={15}/>Voltar ao início</button>}
-      {screen==='home'&&<Home profile={profile} run={run} onPlay={requestNew} onContinue={()=>{navigate('game');setPaused(run?.stage==='battle');}} onAbandon={()=>setConfirmAbandon(true)} onNavigate={navigate} onInstall={()=>void install()}/>}
+      {screen==='home'&&<Home profile={profile} run={run} onPlay={requestNew} onContinue={()=>{if(run?.stage==='battle'&&run.battle){direction.current=directionFor(run);setPresentation({battle:direction.current.visible,beat:direction.current.active});}navigate('game');setPaused(run?.stage==='battle');}} onAbandon={()=>setConfirmAbandon(true)} onNavigate={navigate} onInstall={()=>void install()}/>}
       {screen==='characters'&&<CharactersScreen onDetails={setDetails}/>}
       {screen==='help'&&<HelpScreen onPlay={requestNew}/>}
       {screen==='settings'&&<SettingsScreen settings={settings} onChange={changeSettings} onReset={reset}/>}
       {screen==='game'&&run?.stage==='draft'&&<DraftScreen draft={run.draft} onPick={id=>changeRun({...run,draft:pickDraft(run.draft,id)})} onSkip={()=>changeRun({...run,draft:skipDraft(run.draft)})} onDetails={setDetails} onStart={()=>startBattle(0)} onAbandon={()=>setConfirmAbandon(true)}/>}
-      {screen==='game'&&run?.stage==='battle'&&run.battle&&<BattleScreen battle={presentation&&direction.current?.battle===run.battle?presentation.battle:run.battle} clockTime={run.battle.time} beat={presentation&&direction.current?.battle===run.battle?presentation.beat:null} index={run.index} name={run.encounters[run.index].name} settings={settings} paused={paused||!!details} onPause={()=>setPaused(!paused)} onAbandon={()=>setConfirmAbandon(true)} onSettings={changeSettings}/>}
+      {screen==='game'&&run?.stage==='battle'&&run.battle&&<BattleScreen battle={presentation&&direction.current?.battle===run.battle?presentation.battle:run.battle} clockTime={presentation&&direction.current?.battle===run.battle?presentation.battle.time:run.battle.time} beat={presentation&&direction.current?.battle===run.battle?presentation.beat:null} index={run.index} name={run.encounters[run.index].name} settings={settings} paused={paused||!!details} onPause={()=>setPaused(!paused)} onAbandon={()=>setConfirmAbandon(true)} onSettings={changeSettings}/>}
       {screen==='game'&&run?.stage==='result'&&<ResultScreen run={run} onNext={()=>startBattle(run.index+1)} onRestart={requestNew} onAbandon={()=>setConfirmAbandon(true)} onHome={()=>navigate('home')} auto={settings.auto} onAuto={auto=>changeSettings({...settings,auto})}/>}
       {screen==='debug'&&import.meta.env.DEV&&<Suspense fallback={<p>Carregando laboratório…</p>}><DebugScreen/></Suspense>}
       {screen==='vfx'&&<Suspense fallback={<p>Carregando galeria audiovisual…</p>}><VfxLabScreen/></Suspense>}

@@ -1,4 +1,4 @@
-import { useEffect,useLayoutEffect,useRef,useState } from 'react';
+import { useLayoutEffect,useRef,useState } from 'react';
 import { Pause,Play,FastForward,VolumeX,Volume2,AudioLines,Check,LogOut } from 'lucide-react';
 import { AuxIcon } from '../components/Icon';
 import type { Battle } from '../engine/types';
@@ -11,11 +11,8 @@ import { BattleInspector,type InspectTarget } from '../components/BattleInspecto
 import { byId } from '../data/characters';
 import { statuses } from '../data/statuses';
 
-type BattleNotice={id:string;actor:string;title:string;detail:string};
-const chargeLabels:Record<string,string>={action:'Ação',dealt:'Dano causado',received:'Dano recebido',allyHurt:'Aliado ferido',enemyHurt:'Rival ferido',interrupt:'Interrupção',status:'Efeito aplicado',protected:'Proteção útil',enemyCast:'Preparação rival',survived:'Tempo sobrevivido',losing:'Desvantagem',winning:'Vantagem',trait:'Traço ativado',synergy:'Sinergia do trio'};
-
 export function BattleScreen({battle,clockTime,beat,index,name,settings,paused,onPause,onAbandon,onSettings}:{battle:Battle;clockTime:number;beat:Beat|null;index:number;name:string;settings:Settings;paused:boolean;onPause:()=>void;onAbandon:()=>void;onSettings:(s:Settings)=>void}){
-  const arena=useRef<HTMLDivElement>(null),[anchors,setAnchors]=useState<Anchors>({}),[mixer,setMixer]=useState(false),[historyOpen,setHistoryOpen]=useState(false),[inspect,setInspect]=useState<InspectTarget|null>(null),[notices,setNotices]=useState<BattleNotice[]>([]),[tutorial,setTutorial]=useState(()=>{try{return index===0&&!localStorage.getItem('nexus-battle-guide-v1')}catch{return false}});
+  const arena=useRef<HTMLDivElement>(null),[anchors,setAnchors]=useState<Anchors>({}),[mixer,setMixer]=useState(false),[historyOpen,setHistoryOpen]=useState(false),[inspect,setInspect]=useState<InspectTarget|null>(null),[tutorial,setTutorial]=useState(()=>{try{return index===0&&!localStorage.getItem('nexus-battle-guide-v1')}catch{return false}});
   useLayoutEffect(()=>{
     const el=arena.current;if(!el)return;
     const measure=()=>{const box=el.getBoundingClientRect(),next:Anchors={};el.querySelectorAll<HTMLElement>('[data-portrait],[data-ability]').forEach(node=>{const rect=node.getBoundingClientRect(),key=node.dataset.portrait??node.dataset.ability!;next[key]={x:100*(rect.x+rect.width/2-box.x)/box.width,y:100*(rect.y+rect.height/2-box.y)/box.height};});setAnchors(next);};
@@ -42,19 +39,6 @@ export function BattleScreen({battle,clockTime,beat,index,name,settings,paused,o
     if(event.kind==='turn')return 'O Domínio mudou de lado';
     return `${from}: ${event.label}`;
   };
-  useEffect(()=>{
-    if(!beat?.impacted)return;
-    const charges=beat.events.filter(event=>event.kind==='charge');
-    if(beat.event.kind!=='skill'&&!charges.length)return;
-    const effects=beat.events.filter(event=>['damage','heal','shield','block','status','interrupt','ko'].includes(event.kind));
-    const detail=charges.length
-      ?charges.slice(0,2).map(event=>`+${Math.round(event.value??0)}% carga · ${chargeLabels[event.label]??event.label}`).join('  /  ')
-      :effects.slice(0,2).map(event=>event.kind==='damage'?`−${Math.round(event.value??0)} condição`:event.kind==='heal'?`+${Math.round(event.value??0)} recuperação`:event.kind==='status'?`Efeito aplicado`:event.kind==='interrupt'?'Habilidade interrompida':event.kind==='ko'?'Nocaute':event.kind==='block'||event.kind==='shield'?'Proteção aplicada':event.label).join('  /  ')||'Habilidade executada';
-    const title=charges.length&&!['skill','cast'].includes(beat.event.kind)?'Carga de habilidade':beat.event.label;
-    const notice={id:String(beat.event.id),actor:sourceName(beat.event.source),title,detail};
-    setNotices(current=>[...current.slice(-1),notice]);
-    window.setTimeout(()=>setNotices(current=>current.filter(item=>item.id!==notice.id)),3600);
-  },[beat?.event.id,beat?.impacted]);
   const closeTutorial=()=>{try{localStorage.setItem('nexus-battle-guide-v1','1')}catch{setTutorial(false)}setTutorial(false)};
   return <section className={`battle-screen lead-${lead} ${turn?'dominion-turn':''} ${paused?'presentation-paused':''}`} style={{'--motion-scale':1/settings.speed,'--lead-strength':Math.min(.45,Math.abs(battle.dominion)/160)} as React.CSSProperties}>
     <header className="battle-header"><div><span className="eyebrow">CONFRONTO {String(index+1).padStart(2,'0')} <span className="muted">/ 10</span></span><h2>{name}</h2></div><div className={`battle-clock ${remaining<=20?'time-critical':''}`}><span>TEMPO DE JOGO</span><strong>{Math.floor(remaining/60)}:{String(remaining%60).padStart(2,'0')}</strong></div></header>
@@ -65,7 +49,6 @@ export function BattleScreen({battle,clockTime,beat,index,name,settings,paused,o
       <div className="arena-gap"><span className="arena-coordinate">NEXUS / ARENA 01</span><span className="arena-coordinate">CONEXÃO ATIVA</span></div>
       <div className="arena-team player-team">{battle.fighters.filter(f=>f.side==='player').map(f=><FighterCard key={f.uid} fighter={f} battle={battle} beat={beat} onInspect={setInspect} numbers={settings.numbers} threatened={threats.has(f.uid)} explanations={settings.explanations}/>)}</div>
       <BattleEffects battle={battle} beat={beat} anchors={anchors} enabled={settings.effects} reduced={settings.reducedMotion}/>
-      {notices.length>0&&<div className="battle-notice-stack" role="log" aria-live="polite" aria-label="Acontecimentos recentes da batalha">{notices.map(notice=><article className="battle-notice" key={notice.id}><small>{notice.actor}</small><strong>{notice.title}</strong><span>{notice.detail}</span></article>)}</div>}
       {paused&&<div className="paused-banner"><Pause size={16}/> BATALHA PAUSADA</div>}
     </div>
     <footer className="battle-controls"><button className="secondary compact" onClick={onPause}>{paused?<Play size={17}/>:<Pause size={17}/>} {paused?'Continuar':'Pausar'}</button><button className={`secondary compact ${settings.speed===2?'selected':''}`} aria-label={`Velocidade ${settings.speed} vezes`} onClick={()=>onSettings({...settings,speed:settings.speed===1?2:1})}><FastForward size={17}/>{settings.speed}×</button><button className={`icon-button history-button ${historyOpen?'selected':''}`} aria-label="Histórico da batalha" aria-expanded={historyOpen} onClick={()=>setHistoryOpen(!historyOpen)}><AuxIcon id="history" size={22}/></button><button className="icon-button sound-button" aria-label={settings.volume?'Silenciar':'Ativar som'} onClick={()=>onSettings({...settings,volume:settings.volume?0:P.audio.master})}>{settings.volume?<Volume2 size={18}/>:<VolumeX size={18}/>}</button><button className={`icon-button mixer-button ${mixer?'selected':''}`} aria-label="Ajustar música e efeitos" aria-expanded={mixer} onClick={()=>setMixer(!mixer)}><AudioLines size={18}/></button><label className="auto-label"><input type="checkbox" checked={settings.auto} onChange={e=>onSettings({...settings,auto:e.target.checked})}/>Sequência auto</label><button className="danger compact abandon-battle" onClick={onAbandon}><LogOut size={15}/>Desistir</button></footer>

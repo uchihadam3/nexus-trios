@@ -1,6 +1,6 @@
 import { describe,it,expect } from 'vitest';
 import { createBattle,simulate,applyEffects,updateDominion } from '../src/engine/battle';
-import { createDirection,advanceDirection,type Direction,type Beat } from '../src/presentation/director';
+import { createDirection,restoreDirection,checkpointDirection,advanceDirection,type Direction,type Beat } from '../src/presentation/director';
 import { isAreaBeat } from '../src/components/BattleEffects';
 import { PRESENTATION as P } from '../src/presentation/config';
 import { DOMINION as D } from '../src/engine/dominion-config';
@@ -113,6 +113,51 @@ describe('Direção sem alterar regras',()=>{
   watch(steady);watch(delayed);
   expect(delayed.visible).toEqual(delayed.battle);
   expect(steady.visible).toEqual(steady.battle);
+ });
+ it('cada quadro desenha início e impacto antes de avançar para outra ação',()=>{
+  const d=createDirection(createBattle(a,b,42));
+  let starts=0,impacts=0,previousId=0;
+  for(let frame=0;frame<20000&&!d.complete;frame++){
+   const cues:('start'|'impact')[]=[];
+   advanceDirection(d,frame%5===0?1:.04,cue=>{
+    cues.push(cue.phase);
+    if(cue.phase==='start'){
+     expect(starts).toBe(impacts);
+     expect(cue.event.id).toBeGreaterThan(previousId);
+     previousId=cue.event.id;starts++;
+     expect(d.visible).toEqual(d.active!.before);
+    }else{
+     expect(starts).toBe(impacts+1);impacts++;
+     expect(d.visible).toEqual(d.active!.after);
+    }
+   },2);
+   expect(cues.length).toBeLessThanOrEqual(1);
+  }
+  expect(d.complete).toBe(true);
+  expect(starts).toBe(impacts);
+  expect(starts).toBeGreaterThan(50);
+ });
+ it('atualizar a página retoma a fila e o HP visível no mesmo Beat causal',()=>{
+  for(const phase of ['before','after'] as const){
+   const d=createDirection(createBattle(a,b,42));
+   for(let frame=0;frame<700;frame++)advanceDirection(d,.04);
+   for(let frame=0;frame<2000&&!d.active;frame++)advanceDirection(d,.04);
+   if(phase==='after')while(d.active&&!d.active.impacted)advanceDirection(d,.04);
+   else while(d.active&&d.active.impacted)advanceDirection(d,.04);
+   expect(d.active).not.toBe(null);
+   const saved=JSON.parse(JSON.stringify(d.battle));
+   const checkpoint=JSON.parse(JSON.stringify(checkpointDirection(d)));
+   const resumed=restoreDirection(createBattle(a,b,42),saved,checkpoint);
+   expect(resumed).not.toBe(null);
+   expect(resumed!.visible).toEqual(d.visible);
+   expect(resumed!.active?.event.id).toBe(d.active?.event.id);
+   expect(resumed!.active?.elapsed).toBe(d.active?.elapsed);
+   expect(resumed!.queue.map(beat=>beat.event.id)).toEqual(d.queue.map(beat=>beat.event.id));
+   while(!d.complete){advanceDirection(d,.04);advanceDirection(resumed!,.04);}
+   expect(resumed!.complete).toBe(true);
+   expect(resumed!.battle).toEqual(d.battle);
+   expect(resumed!.visible).toEqual(d.visible);
+  }
  });
  it('VFX de alvo único não herda alvos de outro evento; área real continua área',()=>{
   const battle=createBattle(['goku','thor','captain'],b,4);
