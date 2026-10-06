@@ -101,8 +101,7 @@ function rate(b:Battle,actor:Fighter,candidate:Fighter,rule:Target,intent:Target
       if(candidate.cast)add('interromperia um plano ativo',3.2);
     }
     if(intent==='investigate'){
-      const information=c.deathNoteCompatible?4.8:1.5;
-      add(c.deathNoteCompatible?'alvo compatível com o plano':'informação útil',information);
+      add('informação ainda desconhecida',actor.discovered?.[candidate.uid]?0:4.8);
       add('investigação incompleta',Math.max(0,1-(actor.investigation[candidate.uid]??0)/100)*4.8);
       add('importância do alvo',threat(candidate)*.65);
     }

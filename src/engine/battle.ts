@@ -11,6 +11,7 @@ export const alive=(f:Fighter)=>f.hp>0;
 export const intensity=(f:Fighter,id:StatusId)=>f.statuses.find(s=>s.id===id)?.intensity??0;
 const friendly=(b:Battle,f:Fighter)=>b.fighters.filter(x=>x.side===f.side&&alive(x));
 const hostile=(b:Battle,f:Fighter)=>b.fighters.filter(x=>x.side!==f.side&&alive(x));
+const negativeStatuses=new Set<StatusId>(['exposed','marked','slow','rooted','paralyzed','confused','burning','electric','silenced','weakened']);
 const sign=(f:Fighter)=>f.side==='player'?1:-1;
 const pressure=(b:Battle,side:Side,points:number)=>{b.momentum=clamp(b.momentum+(side==='player'?1:-1)*points,-D.maxScore,D.maxScore);};
 export function emit(b:Battle,e:Omit<BattleEvent,'id'|'time'>){b.events.push({...e,id:b.nextEvent++,time:b.time});if(b.events.length>180)b.events.shift();}
@@ -20,7 +21,7 @@ export function createBattle(player:string[],enemy:string[],seed=Date.now(),enem
   const b:Battle={version:1,seed,rng:seed>>>0,time:0,fighters:[],dominion:0,momentum:0,events:[],nextEvent:1,winner:null,reason:'',finished:false,turns:0,lastLead:null};
   for(const side of ['player','enemy'] as Side[]) (side==='player'?player:enemy).forEach((id,slot)=>{
     const c=byId[id], maxHp=Math.round(c.hp*(side==='enemy'?enemyScale:1));
-    b.fighters.push({uid:`${side}-${slot}`,characterId:id,side,slot,hp:maxHp,maxHp,action:random(b)*.12,skills:c.skills.map(()=>({charge:0,cooldown:0,executing:0,uses:0})),statuses:[],shields:[],cast:null,investigation:{},traitTimer:0,storedEnergy:0,stats:{damage:0,healing:0,protection:0,interrupts:0,skills:0,kills:0}});
+    b.fighters.push({uid:`${side}-${slot}`,characterId:id,side,slot,hp:maxHp,maxHp,action:random(b)*.12,skills:c.skills.map(()=>({charge:0,cooldown:0,executing:0,uses:0})),statuses:[],shields:[],cast:null,investigation:{},discovered:{},traitTimer:0,storedEnergy:0,stats:{damage:0,healing:0,protection:0,interrupts:0,skills:0,kills:0}});
   });
   return b;
 }
@@ -29,6 +30,25 @@ export function targets(b:Battle,actor:Fighter,rule:Target,effects:Effect[]=[],r
   if(rule==='self')return alive(actor)?[actor]:[];
   if(rule==='allAllies')return allies;
   if(rule==='allEnemies')return enemies;
+  if(actor.characterId==='light'&&rule==='enemyWeak'&&effects.some(effect=>effect.kind==='investigate')){
+    const unknown=enemies.filter(x=>!actor.discovered?.[x.uid]);
+    if(unknown.length)return chooseTarget(b,actor,unknown,rule,'investigate',effects,record);
+  }
+  if(actor.characterId==='light'&&rule==='investigated'){
+    const isInvestigation=effects.some(effect=>effect.kind==='investigate');
+    const isDeathNote=effects.some(effect=>effect.kind==='deathnote');
+    if(isInvestigation){
+      const unknown=enemies.filter(x=>!actor.discovered?.[x.uid]);
+      if(unknown.length)return chooseTarget(b,actor,unknown,rule,'investigate',effects,record);
+      return chooseTarget(b,actor,enemies,rule,'investigate',effects,record);
+    }
+    if(isDeathNote){
+      const vulnerable=enemies.filter(x=>actor.discovered?.[x.uid]==='vulnerable'&&(actor.investigation[x.uid]??0)>=100);
+      if(vulnerable.length)return chooseTarget(b,actor,vulnerable,rule,'finisher',effects,record);
+      if(enemies.every(x=>actor.discovered?.[x.uid]==='immune'))return chooseTarget(b,actor,enemies.filter(x=>(actor.investigation[x.uid]??0)>=100),rule,'finisher',effects,record);
+      return [];
+    }
+  }
   const intent=inferTargetIntent(actor,rule,effects);
   if(rule==='enemyCast'){
     const casting=enemies.filter(x=>x.cast);
@@ -118,8 +138,9 @@ export function applyEffects(b:Battle,source:Fighter,selected:Fighter[],effects:
           emit(b,{kind:'status',source:source.uid,target:target.uid,label:def.name,status:effect.status});
           if(target.side!==source.side){const weight=effect.status==='paralyzed'?1:effect.status==='rooted'?.65:effect.status==='slow'?.35:effect.status==='silenced'?.55:['exposed','marked','electric','burning'].includes(effect.status)?.3:0;if(weight)pressure(b,source.side,D.event.statusApplied*weight);}
           // Status events only charge observers; they cannot recursively execute other traits.
-          for(const f of friendly(b,source))gain(b,f,'status',1,source);
-          if(target.side!==source.side){for(const f of friendly(b,source)){const t=byId[f.characterId].trait;if(t.on==='status'&&f.traitTimer<=0){f.traitTimer=Math.max(t.cooldown,STEP);applyEffects(b,f,targets(b,f,t.target),t.effects);}}}
+          const negative=target.side!==source.side&&negativeStatuses.has(effect.status);
+          for(const f of friendly(b,source)){gain(b,f,'status',1,source);if(negative)gain(b,f,'negativeStatus',1,source);}
+          if(target.side!==source.side){for(const f of friendly(b,source)){const t=byId[f.characterId].trait;if((t.on==='status'||negative&&t.on==='negativeStatus')&&f.traitTimer<=0){f.traitTimer=Math.max(t.cooldown,STEP);applyEffects(b,f,targets(b,f,t.target),t.effects);}}}
           break;
         }
         case 'interrupt':{
@@ -132,12 +153,12 @@ export function applyEffects(b:Battle,source:Fighter,selected:Fighter[],effects:
           emit(b,{kind:'interrupt',source:source.uid,target:target.uid,label:effect.mode==='cancel'?'Interrompido!':'Preparação atrasada',visual:'bolt'});
           trigger(b,source,'interrupt',source);break;
         }
-        case 'investigate':{const before=source.investigation[target.uid]??0,after=Math.min(100,before+effect.value);source.investigation[target.uid]=after;const quarters=Math.floor(after/25)-Math.floor(before/25);if(quarters>0)pressure(b,source.side,quarters*D.event.investigationQuarter+(after===100?D.event.investigationComplete:0));break;}
+        case 'investigate':{const before=source.investigation[target.uid]??0,after=Math.min(100,before+effect.value);source.investigation[target.uid]=after;const quarters=Math.floor(after/25)-Math.floor(before/25);if(quarters>0)pressure(b,source.side,quarters*D.event.investigationQuarter+(after===100?D.event.investigationComplete:0));if(after===100&&!source.discovered?.[target.uid]){source.discovered??={};source.discovered[target.uid]=byId[target.characterId].deathNoteCompatible?'vulnerable':'immune';emit(b,{kind:'discovery',source:source.uid,target:target.uid,label:source.discovered[target.uid]==='vulnerable'?'Vulnerável à Death Note':'Imune à execução'});}break;}
         case 'deathnote':{
           if((source.investigation[target.uid]??0)<100)break;
           if(byId[target.characterId].deathNoteCompatible){const value=target.hp;target.hp=0;target.cast=null;target.shields=[];target.statuses=[];source.stats.damage+=value;source.stats.kills++;pressure(b,source.side,D.event.deathNote);emit(b,{kind:'ko',source:source.uid,target:target.uid,label:'Sentença concluída',value});}
           else applyEffects(b,source,[target],[{kind:'status',status:'exposed',value:.55,duration:14},{kind:'damage',value:110}]);
-          source.investigation[target.uid]=0;break;
+          break;
         }
         case 'charge':target.skills.forEach((s,i)=>{if(s.cooldown<=0&&target.cast?.skill!==i){const before=s.charge;s.charge=Math.min(100,s.charge+effect.value);if(before<100&&s.charge>=100)emit(b,{kind:'ready',source:target.uid,skill:i,label:byId[target.characterId].skills[i].name,visual:byId[target.characterId].skills[i].icon});if(s.charge>before){emit(b,{kind:'charge',source:source.uid,target:target.uid,skill:i,label:source.uid===target.uid?'trait':'synergy',value:s.charge-before});if(source.uid!==target.uid){pressure(b,source.side,D.event.synergyCharge*clamp((s.charge-before)/25));emit(b,{kind:'synergy',source:source.uid,target:target.uid,skill:i,label:'Carga recebida',value:s.charge-before});}}}});break;
         case 'shift':{
@@ -156,7 +177,7 @@ function appropriate(b:Battle,f:Fighter,s:Skill){
   if(s.condition==='injured')return targets(b,f,s.target,s.effects).some(x=>x.hp/x.maxHp<.78);
   if(s.condition==='enemyCast')return hostile(b,f).some(x=>x.cast);
   if(s.condition==='threatened')return friendly(b,f).some(x=>x.hp/x.maxHp<.85)||hostile(b,f).some(x=>x.cast);
-  if(s.condition==='investigated')return hostile(b,f).some(x=>(f.investigation[x.uid]??0)>=100);
+  if(s.condition==='investigated')return targets(b,f,s.target,s.effects,false).some(x=>(f.investigation[x.uid]??0)>=100);
   if(s.condition==='vulnerable')return hostile(b,f).some(x=>x.statuses.some(z=>['exposed','marked','paralyzed','electric','burning'].includes(z.id)));
   if(s.condition==='storedEnergy')return (f.storedEnergy??0)>0;
   return true;
@@ -173,7 +194,7 @@ function skillValue(b:Battle,f:Fighter,s:Skill,selected:Fighter[],intelligence:n
         const shields=target.shields.reduce((n,x)=>n+x.amount,0),amount=ready?Math.min(target.hp+shields,raw):0;
         add('dano útil',amount/target.maxHp*65);
         if(amount>=target.hp+shields&&amount>0)add('incapacitação provável',18);
-        if(effect.kind==='deathnote'&&ready)add('sentença preparada',byId[target.characterId].deathNoteCompatible?40:10);
+        if(effect.kind==='deathnote'&&ready)add('sentença preparada',f.discovered?.[target.uid]==='vulnerable'?40:10);
       }
     }else if(effect.kind==='heal'){
       for(const target of list){const used=Math.min(target.maxHp-target.hp,effect.value);add('cura necessária',used/target.maxHp*48*tacticalFactor);if(target.hp/target.maxHp<.3&&used>0)add('aliado crítico',8*tacticalFactor);}
@@ -184,7 +205,7 @@ function skillValue(b:Battle,f:Fighter,s:Skill,selected:Fighter[],intelligence:n
     }else if(effect.kind==='status'){
       for(const target of list){const existing=target.statuses.find(x=>x.id===effect.status)?.intensity??0;const weight=effect.status==='paralyzed'?1:effect.status==='rooted'?.7:effect.status==='silenced'?.65:effect.status==='slow'?.4:['exposed','marked','electric','burning'].includes(effect.status)?.35:effect.status==='protected'?.5:0;add('efeito de estado',Math.max(0,effect.value-existing)*weight*24*tacticalFactor);}
     }else if(effect.kind==='investigate'){
-      for(const target of list){const progress=f.investigation[target.uid]??0;const compatible=byId[target.characterId].deathNoteCompatible;add('investigação',effect.value/100*(compatible?14:3)*(1-progress/100)*tacticalFactor);}
+      for(const target of list){const progress=f.investigation[target.uid]??0;add('investigação',effect.value/100*14*(1-progress/100)*tacticalFactor);}
     }else if(effect.kind==='charge'){
       add('carga de habilidades',Math.max(0,100-f.skills.reduce((n,x)=>n+x.charge,0))/300*12);
     }else if(effect.kind==='shift'){
