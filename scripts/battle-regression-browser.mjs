@@ -69,7 +69,9 @@ try{
   }
   const final=await page.evaluate(()=>JSON.parse(localStorage.getItem('nexus-v1-run')).battle);
   if(full&&(resultTime===null||mechanicalFinish===null||!final.winner||final.reason!=='Incapacitação da equipe'))throw Error(`Batalha inteira ${width}px/${speed}x: apresentação=${resultTime}s, motor=${final.time}s`);
-  if(full&&width===390&&speed===1&&(basicDurations.length<3||basicDurations.some(duration=>duration<1.6)||basicConfigured.some(duration=>duration!==2)))throw Error(`Básicos comprimidos em 1×: ${JSON.stringify({basicDurations,basicConfigured})}`);
+  // Polling begins after the beat may have started, so sampled durations are
+  // diagnostic only. The trace below checks the complete start-to-finish span.
+  if(full&&width===390&&speed===1&&(basicDurations.length<3||basicConfigured.some(duration=>duration!==2)))throw Error(`Básicos inválidos em 1×: ${JSON.stringify({basicDurations,basicConfigured})}`);
   const traces=await page.evaluate(()=>window.__nexusBeatTrace??[]);
   if(full&&(traces.length<15||traces.some(t=>t.speed!==speed||t.realFinish===null||t.realImpact===null||t.kind==='basic'&&t.duration!==2)))throw Error(`Rastro visual inválido: ${scenario}/${speed}x`);
   const main=traces.filter(t=>['basic','skill','cast'].includes(t.kind));
