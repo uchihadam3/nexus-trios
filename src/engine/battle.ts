@@ -235,20 +235,12 @@ export function updateDominion(b:Battle){
   if(leader)b.lastLead=leader;
 }
 export function resolve(b:Battle){
-  const players=b.fighters.filter(f=>f.side==='player'), enemies=b.fighters.filter(f=>f.side==='enemy');
-  const p=players.filter(alive).length,e=enemies.filter(alive).length;
-  if(!p||!e){b.finished=true;b.winner=p?'player':e?'enemy':(random(b)<.5?'player':'enemy');b.reason='Incapacitação da equipe';return;}
-  if(b.time<120-1e-7)return;
-  b.time=120;b.finished=true;
-  if(Math.abs(b.dominion)>.7){b.winner=b.dominion>0?'player':'enemy';b.reason='Vantagem de Domínio';return;}
-  const hp=players.reduce((n,f)=>n+f.hp,0)-enemies.reduce((n,f)=>n+f.hp,0);
-  if(Math.abs(hp)>.01){b.winner=hp>0?'player':'enemy';b.reason='Desempate por Condição total';}
-  else if(p!==e){b.winner=p>e?'player':'enemy';b.reason='Desempate por integrantes ativos';}
-  else {const utility=players.reduce((n,f)=>n+f.stats.interrupts+f.stats.protection/100,0)-enemies.reduce((n,f)=>n+f.stats.interrupts+f.stats.protection/100,0);if(Math.abs(utility)>.001){b.winner=utility>0?'player':'enemy';b.reason='Desempate por controle e proteção úteis';}else{b.winner=random(b)<.5?'player':'enemy';b.reason='Empate absoluto · sorteio com semente da batalha';}}
+  const p=b.fighters.some(f=>f.side==='player'&&alive(f)),e=b.fighters.some(f=>f.side==='enemy'&&alive(f));
+  if(!p||!e){b.finished=true;b.winner=p?'player':e?'enemy':null;b.reason='Incapacitação da equipe';}
 }
 export function stepBattle(b:Battle,observe?:(snapshot:Battle)=>void):Battle {
   if(b.finished)return b;
-  b.time=Math.min(120,b.time+STEP);b.momentum*=Math.exp(-Math.LN2*STEP/D.memoryHalfLifeSeconds);
+  b.time+=STEP;b.momentum*=Math.exp(-Math.LN2*STEP/D.memoryHalfLifeSeconds);
   for(const f of b.fighters){
     if(!alive(f))continue;
     f.traitTimer=Math.max(0,f.traitTimer-STEP);
@@ -258,6 +250,7 @@ export function stepBattle(b:Battle,observe?:(snapshot:Battle)=>void):Battle {
       if(s.id==='regen')healing(b,origin,f,s.intensity*STEP);
       s.remaining-=STEP;
     }
+    resolve(b);if(b.finished){observe?.(b);return b;}
     f.statuses=f.statuses.filter(s=>s.remaining>0);f.shields.forEach(s=>s.remaining-=STEP);f.shields=f.shields.filter(s=>s.remaining>0&&s.amount>0);
     f.skills.forEach(s=>{s.cooldown=Math.max(0,s.cooldown-STEP);s.executing=Math.max(0,s.executing-STEP);});
     trigger(b,f,'time',undefined,STEP);gain(b,f,'survived',STEP);

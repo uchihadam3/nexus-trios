@@ -11,14 +11,14 @@ import { BattleInspector,type InspectTarget } from '../components/BattleInspecto
 import { byId } from '../data/characters';
 import { statuses } from '../data/statuses';
 
-export function BattleScreen({battle,clockTime,beat,index,name,settings,paused,onPause,onAbandon,onSettings}:{battle:Battle;clockTime:number;beat:Beat|null;index:number;name:string;settings:Settings;paused:boolean;onPause:()=>void;onAbandon:()=>void;onSettings:(s:Settings)=>void}){
+export function BattleScreen({battle,beat,index,name,settings,paused,onPause,onAbandon,onSettings}:{battle:Battle;beat:Beat|null;index:number;name:string;settings:Settings;paused:boolean;onPause:()=>void;onAbandon:()=>void;onSettings:(s:Settings)=>void}){
   const arena=useRef<HTMLDivElement>(null),[anchors,setAnchors]=useState<Anchors>({}),[mixer,setMixer]=useState(false),[historyOpen,setHistoryOpen]=useState(false),[inspect,setInspect]=useState<InspectTarget|null>(null),[tutorial,setTutorial]=useState(()=>{try{return index===0&&!localStorage.getItem('nexus-battle-guide-v1')}catch{return false}});
   useLayoutEffect(()=>{
     const el=arena.current;if(!el)return;
     const measure=()=>{const box=el.getBoundingClientRect(),next:Anchors={};el.querySelectorAll<HTMLElement>('[data-portrait],[data-ability]').forEach(node=>{const rect=node.getBoundingClientRect(),key=node.dataset.portrait??node.dataset.ability!;next[key]={x:100*(rect.x+rect.width/2-box.x)/box.width,y:100*(rect.y+rect.height/2-box.y)/box.height};});setAnchors(next);};
     measure();const observer=new ResizeObserver(measure);observer.observe(el);return()=>observer.disconnect();
   },[battle.seed]);
-  const remaining=Math.max(0,120-Math.floor(clockTime)),lead=battle.dominion>3?'player':battle.dominion< -3?'enemy':'neutral';
+  const lead=battle.dominion>3?'player':battle.dominion< -3?'enemy':'neutral';
   const label=lead==='player'?'Seu trio está à frente':lead==='enemy'?'Rivais estão à frente':'Disputa equilibrada';
   const position=50-Math.min(48,Math.max(-48,battle.dominion*.48));
   const turn=beat?.impacted&&beat.events.some(e=>e.kind==='turn');
@@ -41,7 +41,7 @@ export function BattleScreen({battle,clockTime,beat,index,name,settings,paused,o
   };
   const closeTutorial=()=>{try{localStorage.setItem('nexus-battle-guide-v1','1')}catch{setTutorial(false)}setTutorial(false)};
   return <section className={`battle-screen lead-${lead} ${turn?'dominion-turn':''} ${paused?'presentation-paused':''}`} data-beat-id={beat?.event.id} data-beat-kind={beat?.event.kind} data-beat-duration={beat?.duration} style={{'--motion-scale':1/settings.speed,'--lead-strength':Math.min(.45,Math.abs(battle.dominion)/160)} as React.CSSProperties}>
-    <header className="battle-header"><div><span className="eyebrow">CONFRONTO {String(index+1).padStart(2,'0')} <span className="muted">/ 10</span></span><h2>{name}</h2></div><div className={`battle-clock ${remaining<=20?'time-critical':''}`}><span>TEMPO DE JOGO</span><strong>{Math.floor(remaining/60)}:{String(remaining%60).padStart(2,'0')}</strong></div></header>
+    <header className="battle-header"><div><span className="eyebrow">CONFRONTO {String(index+1).padStart(2,'0')} <span className="muted">/ 10</span></span><h2>{name}</h2></div><span className="battle-objective">ATÉ O ÚLTIMO TRIO</span></header>
     <div className="dominion"><div className="dominion-labels"><span>RIVAIS</span><strong>DOMÍNIO</strong><span>SEU TRIO</span></div><div className="dominion-track" role="meter" aria-label="Domínio: negativo rivais, positivo seu trio" aria-valuenow={Math.round(battle.dominion)} aria-valuemin={-100} aria-valuemax={100}><span className="dominion-rivals" style={{width:`${position}%`}}/><span className="dominion-player" style={{width:`${100-position}%`}}/><span className="dominion-center"/><span className="dominion-glow" style={{left:`${position}%`}}/><span className="dominion-front" style={{left:`${position}%`}}/></div><small>{turn?'VIRADA DE DOMÍNIO':label}</small></div>
     <div ref={arena} className={`arena ${paused?'is-paused':''} ${settings.effects?'':'effects-off'}`}>
       <div className="arena-scenery" aria-hidden="true"><div className="arena-grid"/><div className="arena-haze"/><div className="arena-orbit orbit-outer"/><div className="arena-orbit orbit-inner"/><div className="arena-axis"/><svg className="arena-sigil" viewBox="0 0 96 96"><circle cx="48" cy="48" r="34"/><circle cx="48" cy="48" r="23"/><path d="M48 8v15m0 50v15M8 48h15m50 0h15M20 20l11 11m34 34 11 11M76 20 65 31M31 65 20 76M33 18l5 19 10 11 10-11 5-19M33 78l5-19 10-11 10 11 5 19"/><path className="arena-sigil-core" d="m48 36 12 12-12 12-12-12 12-12Z"/></svg>{settings.effects&&!settings.reducedMotion&&Array.from({length:P.ambientParticles},(_,i)=><i className="ambient-particle" key={i} style={{left:`${8+(i*37)%85}%`,top:`${25+(i*13)%50}%`,animationDelay:`-${i*1.7}s`,animationDuration:`${8+i%4}s`}}/>)}</div>

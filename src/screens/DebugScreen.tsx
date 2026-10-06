@@ -32,7 +32,7 @@ export function DebugScreen(){
     </section>}
     <div className="debug-teams">{([left,right] as string[][]).map((team,side)=><div key={side}><h3>{side?'Rivais':'Seu trio'}</h3>{team.map((id,i)=><select aria-label={`Equipe ${side} posição ${i}`} key={i} value={id} onChange={e=>{const next=[...team];next[i]=e.target.value;(side?setRight:setLeft)(next);}}>{characters.map(c=><option value={c.id} key={c.id}>{c.name}</option>)}</select>)}</div>)}</div>
     <label>Semente <input type="number" value={seed} onChange={e=>setSeed(Number(e.target.value))}/></label>
-    <div className="debug-actions"><button className="primary" onClick={()=>run(true)}>Simular 120 s instantaneamente</button><button className="secondary" onClick={()=>run(false)}>Iniciar / reiniciar</button><button className="secondary" disabled={!result||result.finished} onClick={()=>{if(result){const b=structuredClone(result);for(let i=0;i<100;i++)stepBattle(b);setResult(b);}}}>Avançar 10 s</button></div>
+    <div className="debug-actions"><button className="primary" onClick={()=>run(true)}>Simular até a eliminação</button><button className="secondary" onClick={()=>run(false)}>Iniciar / reiniciar</button><button className="secondary" disabled={!result||result.finished} onClick={()=>{if(result){const b=structuredClone(result);for(let i=0;i<100;i++)stepBattle(b);setResult(b);}}}>Avançar 10 s</button></div>
     {error&&<p role="alert">{error}</p>}
     {result&&<><h2>{result.finished?`${result.winner}: ${result.reason}`:`${result.time.toFixed(1)} s · em andamento`}</h2><p>Domínio: {result.dominion.toFixed(2)} · Eventos: {result.nextEvent-1}</p><pre>{log}</pre></>}
   </section>;

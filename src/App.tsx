@@ -12,7 +12,7 @@ import { generateCampaign,newDraft,pickDraft,skipDraft } from './engine/campaign
 import { defaults,loadProfile,loadRun,loadSettings,resetStorage,save,storageAvailable } from './lib/storage';
 import type { Run,Settings } from './lib/storage';
 import { battleAudio } from './lib/audio';
-import { createDirection,restoreDirection,checkpointDirection,advanceDirection,type Direction,type Beat } from './presentation/director';
+import { createDirection,restoreDirection,checkpointDirection,advanceDirection,type Direction,type Beat,type BeatTrace } from './presentation/director';
 import { PRESENTATION as P } from './presentation/config';
 import type { Battle } from './engine/types';
 import { addSynergies,summarizeBattle } from './engine/run-summary';
@@ -73,7 +73,8 @@ export default function App(){
     if(screen!=='game'||paused||details||confirmNew||confirmAbandon)return;
     let previous=performance.now();
     const timer=window.setInterval(()=>{
-      const now=performance.now(),elapsed=Math.max(0,Math.min(.25,(now-previous)/1000));previous=now;
+      const now=performance.now(),elapsed=Math.max(0,Math.min(P.renderIntervalMs/1000,(now-previous)/1000));previous=now;
+      if(import.meta.env.DEV){const debugWindow=window as Window & {__nexusFrames?:{count:number;visualSeconds:number;lastElapsed:number}};const frames=debugWindow.__nexusFrames??{count:0,visualSeconds:0,lastElapsed:0};frames.count++;frames.visualSeconds+=elapsed;frames.lastElapsed=elapsed;debugWindow.__nexusFrames=frames;}
       const current=runRef.current;if(!current||current.stage!=='battle'||!current.battle)return;
       if(!direction.current||direction.current.battle!==current.battle){direction.current=directionFor(current);lastAudio.current=current.battle.nextEvent-1;lastDominionSound.current=current.battle.dominion;}
       const d=direction.current;
@@ -83,9 +84,13 @@ export default function App(){
           if(special)battleAudio.sound(special.kind==='interrupt'?(special.label.includes('atrasada')?'interrupt':'shatter'):special.kind==='block'?'block':special.kind==='ko'?'ko':'turn',4);
           else battleAudio.cue(cue);
         }else battleAudio.cue(cue);
-      },settings.speed);
+      },settings.speed,import.meta.env.DEV?trace=>{
+        const devWindow=window as Window & {__nexusBeatTrace?:BeatTrace[]};
+        const history=devWindow.__nexusBeatTrace??=[];
+        history.push(trace);if(history.length>2000)history.shift();
+      }:undefined);
       const fighters=d.visible.fighters,critical=fighters.filter(f=>f.hp>0&&f.hp/f.maxHp<.34).length,casts=fighters.filter(f=>f.hp>0&&f.cast).length;
-      battleAudio.setMood({heat:Math.min(1,.15+critical*.13+casts*.17+Math.abs(d.visible.dominion)/150),pressure:d.visible.dominion/100,time:d.visible.time/120});
+      battleAudio.setMood({heat:Math.min(1,.15+critical*.13+casts*.17+Math.abs(d.visible.dominion)/150),pressure:d.visible.dominion/100,time:Math.min(1,d.visible.time/120)});
       if(Math.abs(d.visible.dominion-lastDominionSound.current)>=20){battleAudio.sound('dominion',2);lastDominionSound.current=d.visible.dominion;}
       const ready=d.signals.find(e=>e.id>lastAudio.current&&e.kind==='ready');
       if(ready)battleAudio.sound('ready',1);
@@ -121,7 +126,7 @@ export default function App(){
       {screen==='help'&&<HelpScreen onPlay={requestNew}/>}
       {screen==='settings'&&<SettingsScreen settings={settings} onChange={changeSettings} onReset={reset}/>}
       {screen==='game'&&run?.stage==='draft'&&<DraftScreen draft={run.draft} onPick={id=>changeRun({...run,draft:pickDraft(run.draft,id)})} onSkip={()=>changeRun({...run,draft:skipDraft(run.draft)})} onDetails={setDetails} onStart={()=>startBattle(0)} onAbandon={()=>setConfirmAbandon(true)}/>}
-      {screen==='game'&&run?.stage==='battle'&&run.battle&&<BattleScreen battle={presentation&&direction.current?.battle===run.battle?presentation.battle:run.battle} clockTime={presentation&&direction.current?.battle===run.battle?presentation.battle.time:run.battle.time} beat={presentation&&direction.current?.battle===run.battle?presentation.beat:null} index={run.index} name={run.encounters[run.index].name} settings={settings} paused={paused||!!details} onPause={()=>setPaused(!paused)} onAbandon={()=>setConfirmAbandon(true)} onSettings={changeSettings}/>}
+      {screen==='game'&&run?.stage==='battle'&&run.battle&&<BattleScreen battle={presentation&&direction.current?.battle===run.battle?presentation.battle:run.battle} beat={presentation&&direction.current?.battle===run.battle?presentation.beat:null} index={run.index} name={run.encounters[run.index].name} settings={settings} paused={paused||!!details} onPause={()=>setPaused(!paused)} onAbandon={()=>setConfirmAbandon(true)} onSettings={changeSettings}/>}
       {screen==='game'&&run?.stage==='result'&&<ResultScreen run={run} onNext={()=>startBattle(run.index+1)} onRestart={requestNew} onAbandon={()=>setConfirmAbandon(true)} onHome={()=>navigate('home')} auto={settings.auto} onAuto={auto=>changeSettings({...settings,auto})}/>}
       {screen==='debug'&&import.meta.env.DEV&&<Suspense fallback={<p>Carregando laboratório…</p>}><DebugScreen/></Suspense>}
       {screen==='vfx'&&<Suspense fallback={<p>Carregando galeria audiovisual…</p>}><VfxLabScreen/></Suspense>}
