@@ -1,0 +1,48 @@
+name: Regressão de batalha no navegador
+
+# A regressão de verdade, fora do caminho do deploy.
+#
+# Ela joga seis batalhas inteiras num Chromium — 360, 390, 430 e 1280 px, em 1×
+# e 2× — e cobra o que nenhum teste de unidade alcança: que o resultado
+# mecânico não mude com a largura da tela nem com a velocidade, que 2× acelere
+# de fato a apresentação, que nada vaze da viewport, que a página não dispare
+# erro. Quatro dessas batalhas rodam até 600 segundos de relógio real.
+#
+# Ela estava dentro do workflow de publicação e levava a publicação junto: de
+# trinta a sessenta minutos por push. Agora roda aqui, a cada push, no seu
+# próprio grupo. Continua obrigatória e continua vermelha quando quebra — só
+# não segura mais o site.
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+# Só a última versão interessa: se dois pushes chegam juntos, o anterior pode
+# morrer. Ao contrário do deploy, nada se perde — o run novo cobre o código novo.
+concurrency:
+  group: battle-regression-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  regression:
+    runs-on: ubuntu-latest
+    # Teto duro. Sem ele, um travamento no navegador fica pendurado até o
+    # limite de seis horas do GitHub, e foi assim que um run ficou meia hora
+    # sem ninguém perceber.
+    timeout-minutes: 75
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: node scripts/battle-regression-browser.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: battle-regression-mobile
+          path: test-results/battle-regression
+          if-no-files-found: ignore

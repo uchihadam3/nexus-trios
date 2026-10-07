@@ -7,23 +7,30 @@ permissions:
   contents: read
   pages: write
   id-token: write
-# Deploy se enfileira; não se cancela.
+# O deploy não espera a regressão de navegador.
+#
+# A regressão joga seis batalhas inteiras num Chromium, quatro delas com até
+# 600 segundos de relógio real. Enquanto ela estava dentro deste workflow, cada
+# publicação levava de trinta a sessenta minutos — e como o GitHub só guarda um
+# run pendente por grupo, um terceiro push cancelava o segundo. O site ficava
+# parado enquanto o repositório andava.
+#
+# Tudo que roda aqui agora leva menos de um minuto: testes, lint, typecheck e
+# build. A regressão continua rodando a cada push, em `regression.yml`, e uma
+# falha dela continua aparecendo vermelha — ela só não segura mais o site.
+#
+# E deploy se enfileira em vez de se cancelar.
 #
 # Com `cancel-in-progress: true`, cada push novo matava o deploy anterior no
-# meio. O pipeline aqui roda uma regressão de batalha em navegador antes de
-# publicar e leva vários minutos, então uma sequência de pushes deixava o site
-# parado no último commit que conseguiu terminar — enquanto o repositório já
-# estava bem à frente. Foi exatamente o que aconteceu: cinco commits
-# publicados, zero no ar.
-#
-# `false` faz a fila esperar em vez de cancelar. Um push a mais custa alguns
-# minutos de espera; um deploy cancelado custa a versão inteira.
+# meio: cinco commits publicados, zero no ar. `false` faz a fila esperar. Com o
+# pipeline curto, a espera é de segundos.
 concurrency:
   group: github-pages
   cancel-in-progress: false
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     env:
       VITE_DEPLOY_BASE: /nexus-trios/
     steps:
@@ -37,14 +44,6 @@ jobs:
       - run: npm run lint
       - run: npm run typecheck
       - run: npm run build
-      - run: npx playwright install --with-deps chromium
-      - run: node scripts/battle-regression-browser.mjs
-      - uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: battle-regression-mobile
-          path: test-results/battle-regression
-          if-no-files-found: ignore
       - uses: actions/configure-pages@v5
         with:
           enablement: true
@@ -56,6 +55,7 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     needs: build
     steps:
       - id: deployment
