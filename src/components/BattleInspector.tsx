@@ -3,6 +3,7 @@ import type { Battle,Fighter,Status } from '../engine/types';
 import { byId } from '../data/characters';
 import { statuses } from '../data/statuses';
 import { SkillIcon } from './Icon';
+import { EfeitosAgrupados } from './EfeitosAgrupados';
 import { StatusBadge } from './StatusBadge';
 import { presentSkill,presentStatus,presentTrait } from '../engine/skill-descriptions';
 
@@ -20,7 +21,7 @@ export function BattleInspector({target,battle,onClose,onSelect}:{target:Inspect
       <div className="inspector-meta"><span><Clock3 size={13}/>{liveStatus.remaining.toLocaleString('pt-BR',{maximumFractionDigits:1})} s restantes</span><span><Sparkles size={13}/>Aplicado por {sourceName(liveStatus.source)}</span></div>
     </>:skill?<>
       <div className="inspector-title"><SkillIcon type={skill.icon} characterId={c.id} skillId={skill.id} size={31}/><div><small>{c.name.toLocaleUpperCase('pt-BR')}</small><h3>{skill.name}</h3></div></div>
-      <div className="effect-chips">{presentation!.effects.map((effect,i)=><span key={i}>{effect}</span>)}</div>
+      <EfeitosAgrupados grupos={presentation!.grupos}/>
       <div className="inspector-meta"><span><HeartPulse size={13}/>{Math.round(f.skills[skillIndex].charge)}% · {f.skills[skillIndex].cooldown>0?`Resfriamento ${f.skills[skillIndex].cooldown.toFixed(1)} s`:f.cast?.skill===skillIndex?'Em Preparo':f.skills[skillIndex].charge>=100?'Pronta':'Carregando'}</span><span><Clock3 size={13}/>Preparo {presentation!.preparation} · Resfriamento {presentation!.cooldown}</span></div>
       <div className="charge-explanation"><b>Carga</b> {presentation!.charge.join(' · ')}<br/><b>Usa quando</b> {presentation!.useWhen}</div>
     </>:<>

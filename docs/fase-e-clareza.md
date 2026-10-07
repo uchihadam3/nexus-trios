@@ -153,3 +153,35 @@ coisa, em qualquer um dos 250, o teste cai.
 npx tsx scripts/auditar-clareza.ts   # a auditoria, sobre os 250
 npx vitest run tests/clareza.test.ts # o contrato, no CI
 ```
+
+## Ficha agrupada por alvo
+
+A FASE E fez cada linha dizer em quem cai. Isso resolveu a dúvida, mas criou
+repetição: uma habilidade com três efeitos no próprio personagem dizia "em si
+próprio" três vezes, e ainda tinha a linha "Alvo" embaixo. Medido nas 750:
+
+| | lista plana | agrupada |
+| --- | --- | --- |
+| alvo repetido na mesma ficha | 213 | 0 |
+| linha "Alvo" repetindo um cabeçalho | 334 | 0 |
+| maior linha | 128 caracteres | 100 |
+| texto total | — | 22% menos |
+
+Agora o alvo é um cabeçalho, dito uma vez, e as linhas embaixo herdam ele.
+Cada linha é desenhada em peças — o nome forte, o que faz normal, como acumula
+em itálico, a duração numa etiqueta à direita — por `EfeitosAgrupados`, o
+mesmo componente na ficha e no inspetor da batalha.
+
+Duas decisões que não são óbvias:
+
+- **Guardar e liberar energia e o Death Note ficam fora dos grupos.** Eles
+  dizem o alvo dentro da própria frase, e `store` herdaria o alvo da
+  habilidade: "Guarda 40 de energia" sob "No inimigo mais ferido" mentiria.
+- **"no inimigo em Preparo"** em vez de "no inimigo que está preparando uma
+  habilidade". Preparo é a palavra que o jogo já ensina; a forma longa
+  quebrava em duas linhas no celular.
+
+A ficha nem sempre ficou mais baixa. O Shazam cresceu, porque a Força de
+Hércules cai em três alvos diferentes, e agora isso aparece em três blocos em
+vez de quatro linhas misturadas. Esconder isso para economizar altura seria
+voltar ao problema original.

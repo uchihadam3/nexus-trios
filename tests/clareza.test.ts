@@ -62,7 +62,13 @@ describe('clareza da escrita pública', () => {
     for (const [id, def] of queSomam) {
       const p = presentStatus(id as keyof typeof statuses, 0.03);
       expect(p.accumulation, `${id} não explica que soma`).toBeTruthy();
-      expect(p.accumulation).toMatch(/soma a cada aplica/i);
+      /*
+       * O sentido, não a frase exata. O que não pode faltar é o jogador saber
+       * que **cada** aplicação soma — "soma até 80%" lê como se o Status
+       * fosse até 80% e pronto. A redação encurtou quando a ficha passou a
+       * agrupar por alvo; a exigência é a mesma.
+       */
+      expect(p.accumulation).toMatch(/soma (por|a cada) aplica/i);
       /* O teto aparece como número, não como palavra vaga. */
       expect(p.accumulation).toMatch(/\d/);
       expect(def.cap).toBeGreaterThan(0);

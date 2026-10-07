@@ -13,7 +13,13 @@ const secs=(v:number)=>`${n(v)} s`;
  */
 export const targetNamesEm:Record<Target,string>={
   enemyWeak:'no inimigo mais ferido',enemyStrong:'no inimigo mais forte',
-  enemyCast:'no inimigo que está preparando uma habilidade',
+  /*
+   * "Preparo" é a palavra que o jogo já ensina — está na ficha de toda
+   * habilidade, no anel dourado da batalha e no guia. Como cabeçalho, "no
+   * inimigo que está preparando uma habilidade" quebrava em duas linhas no
+   * celular para dizer a mesma coisa.
+   */
+  enemyCast:'no inimigo em Preparo',
   investigated:'no inimigo mais investigado',allyWeak:'no aliado mais ferido',
   self:'em si próprio',allEnemies:'em todos os inimigos',allAllies:'em todo o trio',
   randomEnemy:'em um inimigo sorteado',
@@ -33,7 +39,7 @@ export const targetNamesEm:Record<Target,string>={
  */
 export const targetNames:Record<Target,string>={
   enemyWeak:'inimigo mais ferido',enemyStrong:'inimigo mais forte',
-  enemyCast:'inimigo preparando uma habilidade',
+  enemyCast:'inimigo em Preparo',
   investigated:'inimigo mais investigado',allyWeak:'aliado mais ferido',
   self:'o próprio personagem',allEnemies:'todos os inimigos',allAllies:'todo o trio',
   randomEnemy:'um inimigo sorteado',
@@ -67,9 +73,14 @@ export interface StatusPresentation {name:string;tone:'positivo'|'negativo';summ
 const acumulacaoDe=(id:StatusId):string=>{
   const def=statuses[id];
   if(def.stack!=='add')return '';
-  if(id==='regen')return `soma a cada aplicação, até ${n(def.cap)} de Vida por segundo`;
-  if(id==='burning')return `soma a cada aplicação, até ${n(def.cap)} de Vida por segundo`;
-  return `soma a cada aplicação, até ${pct(def.cap)}`;
+  /*
+   * "por aplicação" é a parte que não pode cair.
+   *
+   * "soma até 80%" lê como se o Status fosse até 80% e pronto. O que acontece
+   * é que **cada** aplicação soma, e 80% é onde a soma para.
+   */
+  if(id==='regen'||id==='burning')return `soma por aplicação até ${n(def.cap)} de Vida por segundo`;
+  return `soma por aplicação até ${pct(def.cap)}`;
 };
 
 export function presentStatus(id:StatusId,value:number):StatusPresentation {
@@ -86,7 +97,76 @@ export function presentStatus(id:StatusId,value:number):StatusPresentation {
   return {name:statuses[id].name,tone:positiveStatuses.has(id)?'positivo':'negativo',summary:summary[id],
     value:['regen','burning'].includes(id)?number:percent,accumulation:acumulacaoDe(id)};
 }
-export interface SkillPresentation {summary:string;target:string;effects:string[];charge:string[];useWhen:string;preparation:string;cooldown:string;
+/*
+ * Os efeitos de uma habilidade, reunidos por em quem caem.
+ *
+ * O que motivou isto foi medido, não achado: nos 250 personagens, 357 das 750
+ * habilidades mostram 3 linhas ou mais, e **220 linhas repetem um alvo que a
+ * própria ficha já tinha dito**. O Manto da Kurama dizia "em si próprio" duas
+ * vezes e "Alvo: o próprio personagem" numa terceira, na mesma caixa.
+ *
+ * Dizer o alvo uma vez, como cabeçalho, resolve a repetição sem esconder nada
+ * — e o que some é só o que estava sobrando.
+ *
+ * `titulo` vazio marca o grupo dos efeitos que se explicam sozinhos; ver
+ * `agruparEfeitos`.
+ */
+export interface GrupoDeEfeitos {titulo:string;linhas:LinhaDeEfeito[]}
+
+/*
+ * Guardar energia, liberá-la e o Death Note não entram em grupo nenhum.
+ *
+ * Eles descrevem o alvo dentro da própria frase ("dividido entre inimigos
+ * vivos", "elimina o alvo vulnerável"). Pior: `store` normalmente não declara
+ * alvo, então herdaria o da habilidade — e um "Guarda 40 de energia" sob o
+ * cabeçalho "No inimigo mais ferido" estaria simplesmente mentindo.
+ */
+const seExplicaSozinho=new Set<Effect['kind']>(['store','release','deathnote']);
+const maiuscula=(t:string):string=>t.charAt(0).toUpperCase()+t.slice(1);
+
+/*
+ * As peças de uma linha agrupada.
+ *
+ * Só o Status tem mais de uma: nome, o que faz, como acumula, quanto dura. O
+ * resto é uma frase só, e fica assim.
+ */
+export function partesDoEfeito(effect:Effect,defaultTarget:Target):string[]{
+  if(effect.kind!=='status')return [presentEffect(effect,defaultTarget,'agrupado')];
+  const p=presentStatus(effect.status,effect.value);
+  return [statuses[effect.status].name,p.summary,...(p.accumulation?[p.accumulation]:[]),secs(effect.duration)];
+}
+const linhaDe=(effect:Effect,defaultTarget:Target):LinhaDeEfeito=>{
+  const partes=partesDoEfeito(effect,defaultTarget);
+  return {texto:partes.join(' · '),partes};
+};
+
+export function agruparEfeitos(effects:Effect[],defaultTarget:Target):GrupoDeEfeitos[]{
+  const ordem:Target[]=[],porAlvo=new Map<Target,LinhaDeEfeito[]>(),sozinhos:LinhaDeEfeito[]=[];
+  for(const effect of effects){
+    if(seExplicaSozinho.has(effect.kind)){sozinhos.push(linhaDe(effect,defaultTarget));continue;}
+    const alvo=effect.target??defaultTarget;
+    if(!porAlvo.has(alvo)){porAlvo.set(alvo,[]);ordem.push(alvo);}
+    porAlvo.get(alvo)!.push(linhaDe(effect,defaultTarget));
+  }
+  const grupos=ordem.map(alvo=>({titulo:maiuscula(targetNamesEm[alvo]),linhas:porAlvo.get(alvo)!}));
+  return sozinhos.length>0?[...grupos,{titulo:'',linhas:sozinhos}]:grupos;
+}
+
+/*
+ * Uma linha da ficha, quebrada nas suas peças.
+ *
+ * `texto` é a frase inteira — é o que os testes leem e o que serve a qualquer
+ * lugar que só queira texto. `partes` é a mesma coisa separada, para a tela
+ * poder dar peso diferente a cada pedaço: o nome do Status forte, o detalhe
+ * normal, a duração discreta. Uma frase de 150 caracteres toda no mesmo tom é
+ * o que fazia a ficha parecer um parágrafo de contrato.
+ *
+ * As duas nascem da mesma lista, então não existe o risco clássico de uma
+ * concordar e a outra não.
+ */
+export interface LinhaDeEfeito {texto:string;partes:string[]}
+
+export interface SkillPresentation {summary:string;target:string;effects:string[];grupos:GrupoDeEfeitos[];charge:string[];useWhen:string;preparation:string;cooldown:string;
   /*
    * Se a linha "Alvo" ainda tem o que dizer.
    *
@@ -108,9 +188,18 @@ export interface TraitPresentation {summary:string;trigger:string;frequency:stri
  * todo o trio" no rodapé, e cabia ao jogador deduzir que o rodapé valia para a
  * cura e não para o dano. Com alvos misturados, cada linha diz o seu.
  */
-export function presentEffect(effect:Effect,defaultTarget:Target,sempre=false):string {
+/*
+ * `modo` decide quem carrega o alvo: a linha ou o cabeçalho.
+ *
+ * - `auto`: a linha nomeia o alvo só quando ele difere do alvo da habilidade.
+ * - `sempre`: a linha nomeia sempre (habilidade de alvos misturados, numa
+ *   lista plana, onde o rodapé não dá conta).
+ * - `agrupado`: a linha **nunca** nomeia, porque o cabeçalho do grupo já diz.
+ */
+export type ModoDeAlvo='auto'|'sempre'|'agrupado';
+export function presentEffect(effect:Effect,defaultTarget:Target,modo:ModoDeAlvo='auto'):string {
   const alvoReal=effect.target??defaultTarget;
-  const target=sempre||(effect.target&&effect.target!==defaultTarget)?` → ${targetNames[alvoReal]}`:'';
+  const target=modo==='agrupado'?'':modo==='sempre'||(effect.target&&effect.target!==defaultTarget)?` → ${targetNames[alvoReal]}`:'';
   switch(effect.kind){
     case 'damage':return `${n(effect.value)} de dano${target}`;
     case 'heal':return `+${n(effect.value)} de Vida${target}`;
@@ -139,6 +228,18 @@ export function presentEffect(effect:Effect,defaultTarget:Target,sempre=false):s
        * Um buff e um debuff só se distinguem por em quem caem. Essa é a
        * informação que não pode faltar.
        */
+      /*
+       * Agrupada, a linha perde o verbo e o alvo e fica com o essencial:
+       * "Exposto · Recebe +12% de dano · soma por aplicação até 65% · 5 s".
+       *
+       * Isso responde de lado uma dúvida que a forma antiga criava. Lendo
+       * "Aplica Exposto ... Causa +5% de dano" numa habilidade e "+12%" em
+       * outra, a leitura natural é que o Status tem um valor fixo e aquele
+       * número é outra coisa. Com o número colado no nome do Status, fica
+       * claro que **cada habilidade aplica a sua própria dose** — e o teto diz
+       * até onde as doses somam.
+       */
+      if(modo==='agrupado')return [statuses[effect.status].name,p.summary,...(p.accumulation?[p.accumulation]:[]),secs(effect.duration)].join(' · ');
       const emQuem=targetNamesEm[effect.target??defaultTarget];
       return `Aplica ${statuses[effect.status].name} ${emQuem} · ${p.summary}${acumula} · ${secs(effect.duration)}`;
     }
@@ -152,10 +253,10 @@ export function presentEffect(effect:Effect,defaultTarget:Target,sempre=false):s
   }
 }
 export function presentSkill(skill:Skill):SkillPresentation {
-  const seExplicaSozinho=new Set<Effect['kind']>(['store','release','deathnote']);
   /* Alvos misturados: mais de um destino entre os efeitos da mesma habilidade. */
   const misto=new Set(skill.effects.map(e=>e.target??skill.target)).size>1;
-  const effects=skill.effects.map(effect=>presentEffect(effect,skill.target,misto&&effect.kind!=='status'&&!seExplicaSozinho.has(effect.kind)));
+  const effects=skill.effects.map(effect=>presentEffect(effect,skill.target,
+    misto&&effect.kind!=='status'&&!seExplicaSozinho.has(effect.kind)?'sempre':'auto'));
   const use:Record<Skill['condition'],string>={
     /*
      * Sem repetir o alvo.
@@ -184,10 +285,16 @@ export function presentSkill(skill:Skill):SkillPresentation {
    * dentro da própria frase ("dividido entre inimigos vivos", "o alvo
    * vulnerável").
    */
-  const seExplica=seExplicaSozinho;
-  const seApresenta=(e:Effect)=>e.kind==='status'||seExplica.has(e.kind)||misto||(e.target!==undefined&&e.target!==skill.target);
-  return {summary:effects[0]??'Sem efeito',target:targetNames[skill.target],effects,
-    mostrarAlvo:skill.effects.length===0||!skill.effects.every(seApresenta),
+  const seApresenta=(e:Effect)=>e.kind==='status'||seExplicaSozinho.has(e.kind)||misto||(e.target!==undefined&&e.target!==skill.target);
+  const grupos=agruparEfeitos(skill.effects,skill.target);
+  /*
+   * Com os grupos na tela, "Alvo" só tem o que dizer quando nenhum cabeçalho
+   * apareceu: habilidade sem efeito, ou feita apenas de efeitos que se
+   * explicam sozinhos. Fora disso, repetiria o primeiro cabeçalho.
+   */
+  const temCabecalho=grupos.some(g=>g.titulo!=='');
+  return {summary:effects[0]??'Sem efeito',target:targetNames[skill.target],effects,grupos,
+    mostrarAlvo:!temCabecalho&&(skill.effects.length===0||!skill.effects.every(seApresenta)),
     charge:cargasLegiveis(skill.charge),useWhen:use[skill.condition],
     preparation:skill.preparation>0?secs(skill.preparation):'instantâneo',cooldown:secs(skill.cooldown)};
 }
