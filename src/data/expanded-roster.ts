@@ -681,9 +681,88 @@ function makeSkill(c:Row,index:number,m:Move,hook?:IdentityHook):Skill{
   const topicName:Record<Topic,string>={time:'tempo',action:'ataque básico',dealt:'dano causado',received:'dano recebido',allyHurt:'aliado ferido',enemyHurt:'inimigo ferido',interrupt:'interrupção',status:'qualquer Status',negativeStatus:'Status negativo',protected:'dano bloqueado',enemyCast:'Preparo inimigo',survived:'enquanto luta',losing:'atrás na Vantagem',winning:'à frente na Vantagem'};
   return {id:idDaHabilidade,name,icon:m.icon,description:m.description,chargeText:m.on==='time'?'Tempo':`${topicName[m.on]} + tempo`,charge:somarCargas(rules),effects,target:m.target??'enemyWeak',condition:m.condition??'always',requiresSkills:m.requiresSkills,preparation:m.prep??0,cooldown:m.cool??6,priority:m.priority??1};
 }
+/*
+ * FASE D · a calibragem dos 250, feita por família.
+ *
+ * A medição de 6.000 lutas (`scripts/calibrar.ts`) mostrou que o desequilíbrio
+ * não era de personagem, era de arquétipo: as famílias variavam de 11% a 77% de
+ * vitória. A correlação entre dano médio entregue e vitória, por estilo, é de
+ * 0,62 — dano é o fator dominante, e as famílias de controle, engano e apoio
+ * próprio simplesmente não pagavam aluguel pela vaga que ocupavam no trio.
+ *
+ * O número abaixo multiplica o **dano** de cada família, e só o dano. Nada do
+ * que define a identidade muda: o `evader` continua esquivando, o `controller`
+ * continua prendendo, o `tempest` continua cobrindo o campo. O que muda é que
+ * esquivar deixa de custar a luta, e cobrir o campo deixa de ganhá-la sozinho.
+ *
+ * A direção foi clara que calibrar não é achatar. Por isso a escala é parcial —
+ * ela empurra as pontas para dentro, não todas para o meio. As famílias que já
+ * estavam perto de 50% não são tocadas.
+ *
+ * Primeira rodada de calibragem. Os valores vêm da medição, e a medição é
+ * refeita a cada mudança.
+ */
+const calibragemDeDano:Partial<Record<Style,number>>={
+ /* Abaixo da curva: entregavam pouco demais para justificar a vaga. */
+ evader:1.9, saboteur:1.45, limit:1.45, chronos:1.4, controller:1.4,
+ trickster:1.35, gamble:1.3, observer:1.2, tactician:1.2, support:1.2, warden:1.15,
+ /* Acima da curva: cobriam o campo e decidiam a luta sozinhas. */
+ tempest:.72, aura:.78, siege:.85, counter:.88, duelist:.88,
+ reaper:.9, juggernaut:.9, swarm:.9, predator:.9,
+};
+
+/** Aplica a calibragem da família ao dano, preservando todo o resto. */
+const calibrarDano=(efeitos:readonly Effect[],fator:number):Effect[]=>
+  fator===1?[...efeitos]:efeitos.map(e=>e.kind==='damage'?{...e,value:Math.round(e.value*fator)}:e);
+
+/*
+ * O piso de dano das famílias de utilidade.
+ *
+ * Multiplicar o dano delas por 1,9 moveu quase nada, e a medição explicou por
+ * quê: o `evader` entregava 490 de dano porque **duas das três habilidades não
+ * causam dano nenhum**. Uma delas protege, a outra confunde. Multiplicar zero
+ * continua zero.
+ *
+ * Numa luta que termina quando um lado perde a Vida, uma habilidade sem dano
+ * ocupa uma das três vagas e não paga aluguel por ela. O trio vira, na prática,
+ * dois contra três.
+ *
+ * O piso resolve isso sem desmanchar a identidade: a habilidade continua
+ * protegendo, prendendo ou confundindo — ela só passa a doer um pouco também.
+ * O valor acompanha o ataque do personagem, então um rato pequeno continua
+ * batendo como rato pequeno.
+ */
+const FAMILIAS_DE_UTILIDADE:ReadonlySet<Style>=new Set<Style>([
+ 'evader','saboteur','limit','chronos','controller','trickster','gamble',
+ 'observer','tactician','support','warden','jester','martyr','alchemy',
+]);
+
+const pisoDeDano=(efeitos:readonly Effect[],estilo:Style,ataque:number,indice:number):Effect[]=>{
+  if(!FAMILIAS_DE_UTILIDADE.has(estilo))return [...efeitos];
+  if(efeitos.some(e=>e.kind==='damage'||e.kind==='release'))return [...efeitos];
+  /* A terceira habilidade é a mais cara, então carrega o piso mais alto. */
+  const escala=[2.6,3.2,4.4][indice]??3;
+  return [damage(Math.round(ataque*escala)),...efeitos];
+};
+
+/*
+ * A `aura` é o único caso em que a sustentação também entra na conta.
+ *
+ * Ela ganhava com 920 de dano e 1.668 de cura mais proteção — o dobro de
+ * qualquer outra família. Mexer só no dano dela não resolveria nada.
+ */
+const calibrarSustento=(efeitos:readonly Effect[],estilo:Style):Effect[]=>
+  estilo!=='aura'?[...efeitos]
+  :efeitos.map(e=>e.kind==='heal'||e.kind==='shield'?{...e,value:Math.round(e.value*.8)}:e);
+
 export const expandedCharacters:Character[]=rows.map(c=>{
   const kit=adjustedKit(c),adjustment=identityAdjustments[c.id],hook=adjustment?.hook===false?undefined:hookFor(c);
-  return {id:c.id,name:c.name,universe:c.universe,portrait:`/assets/portraits/placeholder-${c.id}.svg`,color:c.color,symbol:c.symbol,idea:c.idea,vulnerability:c.vulnerability,hp:c.hp,interval:c.interval,deathNoteCompatible:c.deathNoteCompatible??false,power:c.power,tags:c.tags,basic:{name:'Ataque básico',effects:fundirEfeitos([damage(c.attack),...(hook?[hook.effect]:[]),...(kit.basic??[])]),visual:'impact',target:'enemyWeak'},trait:{name:kit.trait,description:kit.traitText,on:kit.traitOn,effects:fundirEfeitos(kit.traitEffects),target:kit.traitTarget,cooldown:kit.traitCool},skills:[makeSkill(c,0,kit.moves[0],hook),makeSkill(c,1,kit.moves[1],hook),makeSkill(c,2,kit.moves[2],hook)]};
+  return {id:c.id,name:c.name,universe:c.universe,portrait:`/assets/portraits/placeholder-${c.id}.svg`,color:c.color,symbol:c.symbol,idea:c.idea,vulnerability:c.vulnerability,hp:c.hp,interval:c.interval,deathNoteCompatible:c.deathNoteCompatible??false,power:c.power,tags:c.tags,basic:{name:'Ataque básico',effects:fundirEfeitos([damage(c.attack),...(hook?[hook.effect]:[]),...(kit.basic??[])]),visual:'impact',target:'enemyWeak'},trait:{name:kit.trait,description:kit.traitText,on:kit.traitOn,effects:fundirEfeitos(kit.traitEffects),target:kit.traitTarget,cooldown:kit.traitCool},skills:[0,1,2].map(i=>{
+    const s=makeSkill(c,i as 0|1|2,kit.moves[i as 0|1|2],hook);
+    const fator=calibragemDeDano[c.style]??1;
+    const comPiso=pisoDeDano(s.effects,c.style,c.attack,i);
+    return {...s,effects:calibrarSustento(calibrarDano(comPiso,fator),c.style)};
+  }) as [Skill,Skill,Skill]};
 });
 export const rosterDesignQuestions:Record<string,string>=Object.fromEntries(rows.map(c=>[c.id,c.question]));
 export const expandedRosterNames=rows.map(c=>c.name);

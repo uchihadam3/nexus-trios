@@ -1,7 +1,7 @@
 import { byId } from '../data/characters';
 import { statuses } from '../data/statuses';
 import { random,shuffle } from './random';
-import { DOMINION as D } from './dominion-config';
+import { DOMINION as D, fracaoPorAlvo} from './dominion-config';
 import type { Battle, BattleEvent, Effect, Fighter, Side, Skill, StatusId, Target, Topic } from './types';
 import { chooseTarget, inferTargetIntent } from './targeting';
 
@@ -136,10 +136,18 @@ export function applyEffects(b:Battle,source:Fighter,selected:Fighter[],effects:
       for(const target of targetsAlive)damage(b,source,target,share);
       continue;
     }
+    /*
+     * Quantos alvos vivos este efeito vai alcançar.
+     *
+     * Precisa ser contado **antes** do laço: se o primeiro alvo cair no
+     * próprio golpe, os seguintes não podem receber uma fração diferente.
+     */
+    const vivosNoAlvo=list.filter(alive).length;
+    const fracao=fracaoPorAlvo(vivosNoAlvo);
     for(const target of list){
       if(!alive(target))continue;
       switch(effect.kind){
-        case 'damage':damage(b,source,target,effect.value);break;
+        case 'damage':damage(b,source,target,effect.value*fracao);break;
         case 'heal':healing(b,source,target,effect.value);break;
         case 'shield':{
           const existing=target.shields.reduce((n,s)=>n+s.amount,0);
