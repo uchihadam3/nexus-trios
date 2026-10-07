@@ -1,0 +1,45 @@
+name: Regras do banco (Postgres)
+
+# As migrações do Supabase rodando num Postgres de verdade, a cada push.
+#
+# A regra "até 3 trios diferentes por conta" vive no banco, porque só lá dá
+# para garantir que duas partidas chegando juntas não abram uma quarta vaga.
+# Teste de unidade não alcança isso; um banco descartável alcança. Sem este
+# job, os testes de tests/top3.sql.test.ts são pulados no CI — e pulado não é
+# aprovado.
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: banco-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  top3:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_HOST_AUTH_METHOD: trust
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd "pg_isready -U postgres"
+          --health-interval 2s --health-timeout 5s --health-retries 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      # A função do servidor roda em Deno, não em Node: o typecheck do
+      # projeto não a enxerga. Sem isto, ela só seria conferida ao publicar.
+      - run: npx -y deno@2 check supabase/functions/ranked-api/index.ts
+      - run: npx vitest run tests/top3.sql.test.ts
+        env:
+          NEXUS_PG_URL: postgres://postgres@localhost:5432/postgres

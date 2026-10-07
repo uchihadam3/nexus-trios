@@ -39,3 +39,44 @@
 .ranking-convite p{margin:0;line-height:1.55;color:#d8e7dc}
 .ranking-convite button{min-height:44px}
 .ranking-tabs+*{margin-top:12px}
+
+/*
+ * FASE K · os seus 3 melhores trios.
+ *
+ * A caixa fica acima do ranking do período, porque é a pergunta que o jogador
+ * traz para a tela: "estou lá? o que preciso para entrar?".
+ */
+.meus-tres{display:grid;gap:8px;margin:12px 0 4px;padding:14px;border:1px solid #d6dda066;border-radius:12px;background:linear-gradient(160deg,#25392c,#152930)}
+.meus-tres ol{list-style:none;margin:0;padding:0;display:grid;gap:6px;counter-reset:meus}
+.meus-tres li{counter-increment:meus}
+.meus-tres li button{width:100%;display:grid;grid-template-columns:22px 1fr auto auto;align-items:center;gap:10px;padding:8px 10px;min-height:44px;border:1px solid #9abdab40;border-radius:9px;background:#13272d;color:#e2eee4;text-align:left}
+.meus-tres li button::before{content:counter(meus);font-weight:800;color:#d6dda0}
+.meus-tres li button>span{font-size:12px;color:#a8c5b4}
+.meus-tres li button>b{color:#e8d797}
+.meus-tres p{margin:0;color:#c8d8cc;font-size:13px}
+.meus-tres small{color:#d6dda0;font-size:12px}
+
+/* "MEUS RECORDES": o histórico é para ler, não para tocar. */
+.historico-linha{display:grid;grid-template-columns:minmax(110px,1fr) auto 44px 96px;align-items:center;gap:10px;padding:10px 13px;border:1px solid #9abdab40;border-radius:11px;background:#13272d;color:#e2eee4}
+.historico-quando{font-size:12px;color:#a8c5b4}
+.historico-linha b{color:#e8d797;text-align:right}
+@media(max-width:560px){
+  .historico-linha{grid-template-columns:1fr auto;row-gap:6px}
+  .historico-linha .ranking-trio{grid-column:1;grid-row:2}
+  .historico-linha>span:nth-of-type(2){grid-column:2;grid-row:1;text-align:right;font-size:12px;color:#a8c5b4}
+  .historico-linha b{grid-column:2;grid-row:2}
+}
+
+/* O que a partida fez com o Top 3, na tela de resultado. */
+.result-objectives .top3-aviso{width:100%;display:grid;gap:4px;padding:10px 12px;border-radius:9px;background:#12202a;border:1px solid #9abdab40}
+.result-objectives .top3-aviso.destaque{background:#294534;border-color:#d6dda0}
+.result-objectives .top3-aviso b{font-size:12px;letter-spacing:.08em;color:#e8d797}
+.result-objectives .top3-aviso span{padding:0;background:none;font-size:13px}
+/*
+ * Na caixa "Meus 3", o trio fica na mesma linha do número e da pontuação.
+ * A regra do celular que joga `.ranking-trio` para a segunda linha, na
+ * primeira coluna, é das linhas do ranking; aqui ela espremia os três
+ * retratos na coluna de 22px do número.
+ */
+.meus-tres li button .ranking-trio{grid-column:2;grid-row:1;display:flex;gap:4px;min-width:0}
+.meus-tres li button .ranking-trio>*{width:34px;height:34px;flex:0 0 34px;border-radius:8px;overflow:hidden}

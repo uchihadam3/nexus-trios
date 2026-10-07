@@ -5,6 +5,7 @@ import { Portrait } from '../components/Portrait';
 import { AuxIcon } from '../components/Icon';
 import { summarizeBattle,summarizeRun } from '../engine/run-summary';
 import { RaioXDoTrio } from '../components/RaioXDoTrio';
+import { mensagemDoTop3,type ResultadoTop3 } from '../lib/top3';
 
 export function ResultScreen({run,onNext,onRestart,onAbandon,onHome,onProgress,onRanking,onRetry,auto,onAuto}:{run:Run;onNext:()=>void;onRestart:()=>void;onAbandon:()=>void;onHome:()=>void;onProgress?:()=>void;onRanking?:()=>void;onRetry?:()=>void;auto:boolean;onAuto:(v:boolean)=>void}){
   const b=run.battle!,won=b.winner==='player',champion=won&&run.index===9;
@@ -36,7 +37,7 @@ export function ResultScreen({run,onNext,onRestart,onAbandon,onHome,onProgress,o
       <h2>Conexões e aprendizados</h2><div className="journey-lessons">{journey.topSynergy&&<p><b>{nameFor(journey.topSynergy.source)} ajudou {nameFor(journey.topSynergy.target)}</b> a deixar habilidades prontas {journey.topSynergy.count} vezes.</p>}{journey.lessons.filter(line=>!journey.topSynergy||!line.startsWith('A ligação mais frequente')).slice(0,2).map(line=><p key={line}>{line}</p>)}</div>
       <h2>A trilha que seu trio percorreu</h2><ol className="journey-battles">{journey.battles.map(item=><li key={item.index} className={item.won?'won':'lost'}><span>{String(item.index+1).padStart(2,'0')}</span><div><strong>{item.won?'VITÓRIA':'DERROTA'}</strong><small>{item.survivors} do trio permaneceram na luta</small></div><div className="journey-opponents">{item.enemies.map(id=><Portrait key={id} character={byId[id]}/>)}</div></li>)}</ol>
     </section>}
-    {run.ranked&&<div className="result-objectives" role="status"><strong>JORNADA RANQUEADA · {run.ranked.mode==='daily'?'DIÁRIO':'SEMANAL'}</strong>{run.ranked.status==='verified'?<><span>Pontuação validada: {(run.ranked.score??0).toLocaleString('pt-BR')}</span><span>Posição: diário #{run.ranked.daily??'—'} · semanal #{run.ranked.weekly??'—'} · temporada #{run.ranked.season??'—'}</span></>:run.ranked.status==='failed'?<><span>Validação pendente: {run.ranked.error}. Seu progresso local continua salvo.</span>{onRetry&&<button className="secondary" onClick={onRetry}>Tentar validar novamente</button>}</>:run.ranked.status==='playing'&&won&&run.index<9?<span>O resultado será enviado ao fim da jornada.</span>:<span>Validando o replay no servidor…</span>}{onRanking&&<button className="text-button" onClick={onRanking}>Abrir ranking →</button>}</div>}
+    {run.ranked&&<div className="result-objectives" role="status"><strong>JORNADA RANQUEADA · {run.ranked.mode==='daily'?'DIÁRIO':'SEMANAL'}</strong>{run.ranked.status==='verified'?<><span>Pontuação validada: {(run.ranked.score??0).toLocaleString('pt-BR')}</span><span>Posição: diário #{run.ranked.daily??'—'} · semanal #{run.ranked.weekly??'—'} · temporada #{run.ranked.season??'—'}</span>{run.ranked.top3?.periodo&&<AvisoTop3 resultado={run.ranked.top3.periodo}/>}</>:run.ranked.status==='failed'?<><span>Validação pendente: {run.ranked.error}. Seu progresso local continua salvo.</span>{onRetry&&<button className="secondary" onClick={onRetry}>Tentar validar novamente</button>}</>:run.ranked.status==='playing'&&won&&run.index<9?<span>O resultado será enviado ao fim da jornada.</span>:<span>Validando o replay no servidor…</span>}{onRanking&&<button className="text-button" onClick={onRanking}>Abrir ranking →</button>}</div>}
     {/*
       * O caminho para as conquistas sai daqui.
       *
@@ -47,4 +48,14 @@ export function ResultScreen({run,onNext,onRestart,onAbandon,onHome,onProgress,o
     <div className="result-actions">{won&&!champion?<><button className="primary" onClick={onNext}>Próxima batalha <ArrowRight size={19}/></button><button className="danger" onClick={onAbandon}>Desistir da jornada</button></>:<button className="primary" onClick={onRestart}>Montar outro trio <RotateCcw size={19}/></button>}<button className="secondary" onClick={onHome}><Home size={17}/>Início</button></div>
     {won&&!champion&&<label className="auto-label result-auto"><input type="checkbox" checked={auto} onChange={e=>onAuto(e.target.checked)}/>{auto?'Próxima batalha em instantes · desmarque para parar':'Avançar automaticamente entre batalhas'}</label>}
   </section>;
+}
+
+/*
+ * O que esta partida fez com os seus 3 melhores trios do período — "NOVO TOP
+ * 3", "Para entrar: supere 1.300". Só aparece quando o servidor já manda a
+ * resposta da FASE K; com a função anterior, a tela fica como era.
+ */
+function AvisoTop3({resultado}:{resultado:ResultadoTop3}){
+  const m=mensagemDoTop3(resultado);
+  return <div className={`top3-aviso${m.destaque?' destaque':''}`}><b>{m.titulo}</b>{m.linhas.map(l=><span key={l}>{l}</span>)}</div>;
 }

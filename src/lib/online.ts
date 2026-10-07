@@ -62,4 +62,10 @@ export async function onlineCall<T>(action:string,body:Record<string,unknown>={}
 }
 
 export interface PublicRun {position:number;id:string;handle:string;score:number;progress:number;team:string[];date:string;seed:number;engineVersion:string;balanceVersion:string;highlights:{survivors?:number;turns?:number}}
-export interface Leaderboard {mode:'daily'|'weekly'|'season';period:string;entries:PublicRun[];mine:PublicRun|null;details:PublicRun|null}
+/*
+ * `meus` só vem da função publicada com a FASE K. A versão anterior não manda,
+ * e a tela precisa funcionar com as duas: o jogo vai ao ar antes da função.
+ */
+export interface MeusTop3 {entries:PublicRun[];vagas:number;precisaSuperar:number|null}
+export interface Leaderboard {mode:'daily'|'weekly'|'season';period:string;entries:PublicRun[];mine:PublicRun|null;details:PublicRun|null;meus?:MeusTop3}
+export interface PartidaDoHistorico {id:string;mode:'daily'|'weekly';period:string;score:number;progress:number;team:string[];date:string}

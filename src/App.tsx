@@ -11,6 +11,7 @@ import { CharacterModal } from './components/CharacterModal';
 import { byId,characters } from './data/characters';
 import { createBattle } from './engine/battle';
 import { generateCampaign,newDraft,pickDraft,skipDraft } from './engine/campaign';
+import type { ResultadoTop3 } from './lib/top3';
 import { defaults,loadProfile,loadRun,loadSettings,resetStorage,save,storageAvailable } from './lib/storage';
 import type { Run,Settings } from './lib/storage';
 import { battleAudio } from './lib/audio';
@@ -188,8 +189,8 @@ export default function App(){
     submission.current=true;const id=run.ranked.id;
     if(run.ranked.status!=='validating')changeRun({...run,ranked:{...run.ranked,status:'validating'}});
     void (async()=>{
-      try{const digest=await runDigest(id,run.team,run.seed,(run.summaries??[]).map(s=>s.won));const result=await onlineCall<{score:number;daily:number|null;weekly:number|null;season:number|null}>('submit',{runId:id,digest});
-        const latest=runRef.current;if(latest?.ranked?.id===id)changeRun({...latest,ranked:{...latest.ranked,status:'verified',score:result.score,daily:result.daily,weekly:result.weekly,season:result.season,error:undefined}});
+      try{const digest=await runDigest(id,run.team,run.seed,(run.summaries??[]).map(s=>s.won));const result=await onlineCall<{score:number;daily:number|null;weekly:number|null;season:number|null;top3?:{periodo?:ResultadoTop3;temporada?:ResultadoTop3}}>('submit',{runId:id,digest});
+        const latest=runRef.current;if(latest?.ranked?.id===id)changeRun({...latest,ranked:{...latest.ranked,status:'verified',score:result.score,daily:result.daily,weekly:result.weekly,season:result.season,top3:result.top3,error:undefined}});
       }catch(error){const latest=runRef.current;if(latest?.ranked?.id===id)changeRun({...latest,ranked:{...latest.ranked,status:'failed',error:error instanceof Error?error.message:'Falha na validação.'}});}
       finally{submission.current=false;}
     })();
