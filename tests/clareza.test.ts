@@ -15,7 +15,7 @@ import { describe, expect, it } from 'vitest';
 
 import { characters } from '../src/data/characters';
 import { statuses } from '../src/data/statuses';
-import { cargasLegiveis, describeCharge, presentSkill, presentStatus, presentTrait } from '../src/engine/skill-descriptions';
+import { cargasLegiveis, describeCharge, presentSkill, presentStatus, presentTrait, targetNames, targetNamesEm } from '../src/engine/skill-descriptions';
 
 /** Toda linha que o jogador lê na ficha: traço, básico e as três habilidades. */
 const linhasDaFicha = (): { quem: string; onde: string; linha: string }[] =>
@@ -145,6 +145,57 @@ describe('clareza da escrita pública', () => {
       }
     }
     expect(repetidas).toEqual([]);
+  });
+
+
+  /*
+   * A linha "Alvo" só aparece quando ainda tem o que dizer.
+   *
+   * O jogador apontou a redundância numa ficha: "Aplica Fortalecido em si
+   * próprio" e, logo abaixo, "Alvo: o próprio personagem". Na mesma habilidade
+   * o dano ia para um inimigo, então o rodapé não era só eco — contradizia, e
+   * quem lesse rápido concluiria que a habilidade inteira caía nela.
+   */
+  it('não repete o alvo quando cada efeito já diz o seu', () => {
+    const ecos: string[] = [];
+    for (const c of characters) {
+      for (const s of c.skills) {
+        const p = presentSkill(s);
+        if (!p.mostrarAlvo) continue;
+        /* Se a linha "Alvo" aparece, ao menos um efeito depende dela. */
+        const dependem = s.effects.filter((e) => e.kind !== 'status'
+          && (e.target === undefined || e.target === s.target));
+        if (dependem.length === 0) ecos.push(`${c.name} · ${s.name}: ${p.effects.join(' | ')} → Alvo ${p.target}`);
+      }
+    }
+    expect(ecos).toEqual([]);
+  });
+
+  /*
+   * E quando a habilidade acerta lados diferentes, cada linha diz o seu, para
+   * ninguém precisar deduzir a quais o rodapé se aplicava.
+   */
+  it('habilidade de alvos misturados nomeia o alvo em cada linha', () => {
+    const faltando: string[] = [];
+    for (const c of characters) {
+      for (const s of c.skills) {
+        const alvos = new Set(s.effects.map((e) => e.target ?? s.target));
+        if (alvos.size <= 1) continue;
+        const p = presentSkill(s);
+        expect(p.mostrarAlvo, `${c.name} · ${s.name} ainda mostra Alvo`).toBe(false);
+        p.effects.forEach((linha, i) => {
+          const e = s.effects[i]!;
+          /* Guardar/liberar energia e a Death Note se explicam na própria frase. */
+          if (['store', 'release', 'deathnote'].includes(e.kind)) return;
+          /* Status diz "em si próprio"; os demais dizem "→ o próprio personagem". */
+          const alvo = e.kind === 'status'
+            ? targetNamesEm[e.target ?? s.target]
+            : targetNames[e.target ?? s.target];
+          if (!linha.includes(alvo)) faltando.push(`${c.name} · ${s.name}: "${linha}" devia citar ${alvo}`);
+        });
+      }
+    }
+    expect(faltando).toEqual([]);
   });
 
   it('não repete a mesma fonte de Carga na mesma habilidade', () => {

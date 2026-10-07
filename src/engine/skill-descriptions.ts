@@ -86,10 +86,31 @@ export function presentStatus(id:StatusId,value:number):StatusPresentation {
   return {name:statuses[id].name,tone:positiveStatuses.has(id)?'positivo':'negativo',summary:summary[id],
     value:['regen','burning'].includes(id)?number:percent,accumulation:acumulacaoDe(id)};
 }
-export interface SkillPresentation {summary:string;target:string;effects:string[];charge:string[];useWhen:string;preparation:string;cooldown:string}
+export interface SkillPresentation {summary:string;target:string;effects:string[];charge:string[];useWhen:string;preparation:string;cooldown:string;
+  /*
+   * Se a linha "Alvo" ainda tem o que dizer.
+   *
+   * Quando toda linha de efeito já nomeia em quem ela cai — "181 de dano → o
+   * inimigo mais ferido", "Aplica Fortalecido em si próprio" — a linha "Alvo"
+   * logo abaixo repete, e numa habilidade de alvos mistos chega a contradizer:
+   * a ficha da Sakura mostrava dano num inimigo e, embaixo, "Alvo: o próprio
+   * personagem". Quem lê rápido conclui que a habilidade inteira é nela.
+   */
+  mostrarAlvo:boolean}
 export interface TraitPresentation {summary:string;trigger:string;frequency:string;effects:string[]}
-export function presentEffect(effect:Effect,defaultTarget:Target):string {
-  const target=effect.target&&effect.target!==defaultTarget?` → ${targetNames[effect.target]}`:'';
+/*
+ * `sempre` liga quando a habilidade tem alvos misturados.
+ *
+ * Normalmente uma linha só nomeia o alvo quando ele difere do alvo da
+ * habilidade — o resto fica para a linha "Alvo", embaixo. Isso quebra quando a
+ * mesma habilidade acerta lados diferentes: o Byakugou da Sakura dava
+ * "306 de dano → inimigo mais ferido" e "+130 de Vida" sem alvo, com "Alvo:
+ * todo o trio" no rodapé, e cabia ao jogador deduzir que o rodapé valia para a
+ * cura e não para o dano. Com alvos misturados, cada linha diz o seu.
+ */
+export function presentEffect(effect:Effect,defaultTarget:Target,sempre=false):string {
+  const alvoReal=effect.target??defaultTarget;
+  const target=sempre||(effect.target&&effect.target!==defaultTarget)?` → ${targetNames[alvoReal]}`:'';
   switch(effect.kind){
     case 'damage':return `${n(effect.value)} de dano${target}`;
     case 'heal':return `+${n(effect.value)} de Vida${target}`;
@@ -131,7 +152,10 @@ export function presentEffect(effect:Effect,defaultTarget:Target):string {
   }
 }
 export function presentSkill(skill:Skill):SkillPresentation {
-  const effects=skill.effects.map(effect=>presentEffect(effect,skill.target));
+  const seExplicaSozinho=new Set<Effect['kind']>(['store','release','deathnote']);
+  /* Alvos misturados: mais de um destino entre os efeitos da mesma habilidade. */
+  const misto=new Set(skill.effects.map(e=>e.target??skill.target)).size>1;
+  const effects=skill.effects.map(effect=>presentEffect(effect,skill.target,misto&&effect.kind!=='status'&&!seExplicaSozinho.has(effect.kind)));
   const use:Record<Skill['condition'],string>={
     /*
      * Sem repetir o alvo.
@@ -149,7 +173,21 @@ export function presentSkill(skill:Skill):SkillPresentation {
     vulnerable:'um inimigo estiver vulnerável ou sob controle',
     storedEnergy:'houver energia guardada',
   };
+  /*
+   * Um efeito "se apresenta" quando a própria linha dele já diz o alvo: todo
+   * Status diz desde a FASE E, e os demais dizem quando miram algo diferente
+   * do alvo da habilidade. Se todos se apresentam, "Alvo" vira eco.
+   */
+  /*
+   * `store`, `release` e `deathnote` nunca precisam da linha "Alvo": guardar
+   * energia só pode ser consigo mesmo, e as outras duas já nomeiam quem recebe
+   * dentro da própria frase ("dividido entre inimigos vivos", "o alvo
+   * vulnerável").
+   */
+  const seExplica=seExplicaSozinho;
+  const seApresenta=(e:Effect)=>e.kind==='status'||seExplica.has(e.kind)||misto||(e.target!==undefined&&e.target!==skill.target);
   return {summary:effects[0]??'Sem efeito',target:targetNames[skill.target],effects,
+    mostrarAlvo:skill.effects.length===0||!skill.effects.every(seApresenta),
     charge:cargasLegiveis(skill.charge),useWhen:use[skill.condition],
     preparation:skill.preparation>0?secs(skill.preparation):'instantâneo',cooldown:secs(skill.cooldown)};
 }
