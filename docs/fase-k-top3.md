@@ -83,14 +83,20 @@ FASE K revoga tudo isso. O banco de teste (`tests/sql/supabase-stub.sql`)
 agora imita essas permissões padrão, e um teste cobra que o TRUNCATE foi
 fechado.
 
-**Função: ainda é a anterior.** O empacotador do Supabase recusa a função,
-porque o código do jogo importa sem extensão (`./expanded-roster`).
-`scripts/publicar-funcao.sh` junta tudo com esbuild num arquivo só. Esse
-pacote foi testado num Deno local: carrega, aceita o jogo publicado com o
-cabeçalho `x-client-info`, exige login e recusa outras origens. A publicação
-em si foi bloqueada pela proteção do ambiente de trabalho contra deploy em
-produção e espera a autorização do dono do projeto.
+**Função: publicada** com `scripts/publicar-funcao.sh`. O empacotador do
+Supabase recusava a função porque o código do jogo importa sem extensão
+(`./expanded-roster`). O script junta tudo com esbuild num arquivo só, e esse
+pacote foi rodado num Deno local antes de subir.
 
-Enquanto isso, tudo funciona como antes. A função anterior não usa a tabela
-nova, e o jogo publicado entende as duas versões. O script, depois de
-publicar, reaplica a regra às partidas validadas no meio-tempo.
+**Verificado em produção** (`scripts/testar-top3.ts`), com uma conta de teste
+apagada no fim:
+
+- três trios diferentes: `novo`, com as vagas caindo de 2 para 1 e para 0;
+- um quarto trio melhor: `entrou`, tirando o pior;
+- um trio repetido: `manteve`, sem criar segunda entrada;
+- a conta aparece 3 vezes no ranking do dia e tem 3 entradas na temporada;
+  o histórico traz as 5 jornadas;
+- **a pontuação do servidor é igual à calculada pelo jogo**: o bônus
+  escondido de 12.000 por objetivo acabou;
+- na tela, com o servidor de verdade, aparecem a caixa "Meus 3 melhores
+  trios", as 3 linhas marcadas e o histórico.
