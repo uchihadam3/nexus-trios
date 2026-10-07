@@ -11,7 +11,7 @@
   ],
   "gutter": 8,
   "margin": 8,
-  "count": 660,
+  "count": 750,
   "pages": [
     {
       "character": "aizen",
@@ -21634,6 +21634,2766 @@
           "name": "Drag\u00e3o das Trevas",
           "path": "/assets/skills/hiei/dragao-das-trevas.png",
           "sheet": "/assets/sheets/skills/pages/hiei.png",
+          "row": 0,
+          "column": 2,
+          "cell": {
+            "x": 344,
+            "y": 8,
+            "width": 160,
+            "height": 160
+          },
+          "sourceCrop": {
+            "x": 0,
+            "y": 0,
+            "width": 160,
+            "height": 160
+          },
+          "placeholder": true
+        }
+      ],
+      "placeholder": true
+    },
+    {
+      "character": "patolino",
+      "sourceSheet": "/assets/sheets/skills/pages/patolino.png",
+      "sheet": "/assets/sheets/skills/pages/patolino.png",
+      "sourceResolution": [
+        512,
+        176
+      ],
+      "category": "skills",
+      "format": "PNG RGBA",
+      "resolution": [
+        512,
+        176
+      ],
+      "columns": 3,
+      "rows": 1,
+      "cell": [
+        160,
+        160
+      ],
+      "gutter": 8,
+      "margin": 8,
+      "icons": [
+        {
+          "id": "exijo-atencao",
+          "character": "patolino",
+          "name": "Exijo aten\u00e7\u00e3o",
+          "path": "/assets/skills/patolino/exijo-atencao.png",
+          "sheet": "/assets/sheets/skills/pages/patolino.png",
+          "row": 0,
+          "column": 0,
+          "cell": {
+            "x": 8,
+            "y": 8,
+            "width": 160,
+            "height": 160
+          },
+          "sourceCrop": {
+            "x": 0,
+            "y": 0,
+            "width": 160,
+            "height": 160
+          },
+          "placeholder": true
+        },
+        {
+          "id": "bico-afiado",
+          "character": "patolino",
+          "name": "Bico afiado",
+          "path": "/assets/skills/patolino/bico-afiado.png",
+          "sheet": "/assets/sheets/skills/pages/patolino.png",
+          "row": 0,
+          "column": 1,
+          "cell": {
+            "x": 176,
+            "y": 8,
+            "width": 160,
+            "height": 160
+          },
+          "sourceCrop": {
+            "x": 0,
+            "y": 0,
+            "width": 160,
+            "height": 160
+          },
+          "placeholder": true
+        },
+        {
+          "id": "desastre-anunciado",
+          "character": "patolino",
+          "name": "Desastre anunciado",
+          "path": "/assets/skills/patolino/desastre-anunciado.png",
+          "sheet": "/assets/sheets/skills/pages/patolino.png",
+          "row": 0,
+          "column": 2,
+          "cell": {
+            "x": 344,
+            "y": 8,
+            "width": 160,
+            "height": 160
+          },
+          "sourceCrop": {
+            "x": 0,
+            "y": 0,
+            "width": 160,
+            "height": 160
+          },
+          "placeholder": true
+        }
+      ],
+      "placeholder": true
+    },
+    {
+      "character": "taz",
+      "sourceSheet": "/assets/sheets/skills/pages/taz.png",
+      "sheet": "/assets/sheets/skills/pages/taz.png",
+      "sourceResolution": [
+        512,
+        176
+      ],
+      "category": "skills",
+      "format": "PNG RGBA",
+      "resolution": [
+        512,
+        176
+      ],
+      "columns": 3,
+      "rows": 1,
+      "cell": [
+        160,
+        160
+      ],
+      "gutter": 8,
+      "margin": 8,
+      "icons": [
+        {
+          "id": "redemoinho",
+          "character": "taz",
+          "name": "Redemoinho",
+          "path": "/assets/skills/taz/redemoinho.png",
+          "sheet": "/assets/sheets/skills/pages/taz.png",
+          "row": 0,
+          "column": 0,
+          "cell": {
+            "x": 8,
+            "y": 8,
+            "width": 160,
+            "height": 160
+          },
+          "sourceCrop": {
+            "x": 0,
+            "y": 0,
+            "width": 160,
+            "height": 160
+          },
+          "placeholder": true
+        },
+        {
+          "id": "mastigar",
+          "character": "taz",
+          "name": "Mastigar",
+          "path": "/assets/skills/taz/mastigar.png",
+          "sheet": "/assets/sheets/skills/pages/taz.png",
+          "row": 0,
+          "column": 1,
+          "cell": {
+            "x": 176,
+            "y": 8,
+            "width": 160,
+            "height": 160
+          },
+          "sourceCrop": {
+            "x": 0,
+            "y": 0,
+            "width": 160,
+            "height": 160
+          },
+          "placeholder": true
+        },
+        {
+          "id": "fome-sem-fim",
+          "character": "taz",
+          "name": "Fome sem fim",
+          "path": "/assets/skills/taz/fome-sem-fim.png",
+          "sheet": "/assets/sheets/skills/pages/taz.png",
+          "row": 0,
+          "column": 2,
+          "cell": {
+            "x": 344,
+            "y": 8,
+            "width": 160,
+            "height": 160
+          },
+          "sourceCrop": {
+            "x": 0,
+            "y": 0,
+            "width": 160,
+            "height": 160
+          },
+          "placeholder": true
+        }
+      ],
+      "placeholder": true
+    },
+    {
+      "character": "coiote",
+      "sourceSheet": "/assets/sheets/skills/pages/coiote.png",
+      "sheet": "/assets/sheets/skills/pages/coiote.png",
+      "sourceResolution": [
+        512,
+        176
+      ],
+      "category": "skills",
+      "format": "PNG RGBA",
+      "resolution": [
+        512,
+        176
+      ],
+      "columns": 3,
+      "rows": 1,
+      "cell": [
+        160,
+        160
+      ],
+      "gutter": 8,
+      "margin": 8,
+      "icons": [
+        {
+          "id": "encomenda-acme",
+          "character": "coiote",
+          "name": "Encomenda ACME",
+          "path": "/assets/skills/coiote/encomenda-acme.png",
+          "sheet": "/assets/sheets/skills/pages/coiote.png",
+          "row": 0,
+          "column": 0,
+          "cell": {
+            "x": 8,
+            "y": 8,
+            "width": 160,
+            "height": 160
+          },
+          "sourceCrop": {
+            "x": 0,
+            "y": 0,
+            "width": 160,
+            "height": 160
+          },
+          "placeholder": true
+        },
+        {
+          "id": "armadilha-montada",
+          "character": "coiote",
+          "name": "Armadilha montada",
+          "path": "/assets/skills/coiote/armadilha-montada.png",
+          "sheet": "/assets/sheets/skills/pages/coiote.png",
+          "row": 0,
+          "column": 1,
+          "cell": {
+            "x": 176,
+            "y": 8,
+            "width": 160,
+            "height": 160
+          },
+          "sourceCrop": {
+            "x": 0,
+            "y": 0,
+            "width": 160,
+            "height": 160
+          },
+          "placeholder": true
+        },
+        {
+          "id": "plano-infalivel",
+          "character": "coiote",
+          "name": "Plano infal\u00edvel",
+          "path": "/assets/skills/coiote/plano-infalivel.png",
+          "sheet": "/assets/sheets/skills/pages/coiote.png",
+          "row": 0,
+          "column": 2,
+          "cell": {
+            "x": 344,
+            "y": 8,
+            "width": 160,
+            "height": 160
+          },
+          "sourceCrop": {
+            "x": 0,
+            "y": 0,
+            "width": 160,
+            "height": 160
+          },
+          "placeholder": true
+        }
+      ],
+      "placeholder": true
+    },
+    {
+      "character": "papaleguas",
+      "sourceSheet": "/assets/sheets/skills/pages/papaleguas.png",
+      "sheet": "/assets/sheets/skills/pages/papaleguas.png",
+      "sourceResolution": [
+        512,
+        176
+      ],
+      "category": "skills",
+      "format": "PNG RGBA",
+      "resolution": [
+        512,
+        176
+      ],
+      "columns": 3,
+      "rows": 1,
+      "cell": [
+        160,
+        160
+      ],
+      "gutter": 8,
+      "margin": 8,
+      "icons": [
+        {
+          "id": "bip-bip",
+          "character": "papaleguas",
+          "name": "Bip-bip",
+          "path": "/assets/skills/papaleguas/bip-bip.png",
+          "sheet": "/assets/sheets/skills/pages/papaleguas.png",
+          "row": 0,
+          "column": 0,
+          "cell": {
+            "x": 8,
+            "y": 8,
+            "width": 160,
+            "height": 160
+          },
+          "sourceCrop": {
+            "x": 0,
+            "y": 0,
+            "width": 160,
+            "height": 160
+          },
+          "placeholder": true
+        },
+        {
+          "id": "poeira-na-pista",
+          "character": "papaleguas",
+          "name": "Poeira na pista",
+          "path": "/assets/skills/papaleguas/poeira-na-pista.png",
+          "sheet": "/assets/sheets/skills/pages/papaleguas.png",
+          "row": 0,
+          "column": 1,
+          "cell": {
+            "x": 176,
+            "y": 8,
+            "width": 160,
+            "height": 160
+          },
+          "sourceCrop": {
+            "x": 0,
+            "y": 0,
+            "width": 160,
+            "height": 160
+          },
+          "placeholder": true
+        },
+        {
+          "id": "velocidade-impossivel",
+          "character": "papaleguas",
+          "name": "Velocidade imposs\u00edvel",
+          "path": "/assets/skills/papaleguas/velocidade-impossivel.png",
+          "sheet": "/assets/sheets/skills/pages/papaleguas.png",
+          "row": 0,
+          "column": 2,
+          "cell": {
+            "x": 344,
+            "y": 8,
+            "width": 160,
+            "height": 160
+          },
+          "sourceCrop": {
+            "x": 0,
+            "y": 0,
+            "width": 160,
+            "height": 160
+          },
+          "placeholder": true
+        }
+      ],
+      "placeholder": true
+    },
+    {
+      "character": "marvin",
+      "sourceSheet": "/assets/sheets/skills/pages/marvin.png",
+      "sheet": "/assets/sheets/skills/pages/marvin.png",
+      "sourceResolution": [
+        512,
+        176
+      ],
+      "category": "skills",
+      "format": "PNG RGBA",
+      "resolution": [
+        512,
+        176
+      ],
+      "columns": 3,
+      "rows": 1,
+      "cell": [
+        160,
+        160
+      ],
+      "gutter": 8,
+      "margin": 8,
+      "icons": [
+        {
+          "id": "modulador-illudium",
+          "character": "marvin",
+          "name": "Modulador Illudium",
+          "path": "/assets/skills/marvin/modulador-illudium.png",
+          "sheet": "/assets/sheets/skills/pages/marvin.png",
+          "row": 0,
+          "column": 0,
+          "cell": {
+            "x": 8,
+            "y": 8,
+            "width": 160,
+            "height": 160
+          },
+          "sourceCrop": {
+            "x": 0,
+            "y": 0,
+            "width": 160,
+            "height": 160
+          },
+          "placeholder": true
+        },
+        {
+          "id": "mira-marciana",
+          "character": "marvin",
+          "name": "Mira marciana",
+          "path": "/assets/skills/marvin/mira-marciana.png",
+          "sheet": "/assets/sheets/skills/pages/marvin.png",
+          "row": 0,
+          "column": 1,
+          "cell": {
+            "x": 176,
+            "y": 8,
+            "width": 160,
+            "height": 160
+          },
+          "sourceCrop": {
+            "x": 0,
+            "y": 0,
+            "width": 160,
+            "height": 160
+          },
+          "placeholder": true
+        },
+        {
+          "id": "desintegracao",
+          "character": "marvin",
+          "name": "Desintegra\u00e7\u00e3o",
+          "path": "/assets/skills/marvin/desintegracao.png",
+          "sheet": "/assets/sheets/skills/pages/marvin.png",
+          "row": 0,
+          "column": 2,
+          "cell": {
+            "x": 344,
+            "y": 8,
+            "width": 160,
+            "height": 160
+          },
+          "sourceCrop": {
+            "x": 0,
+            "y": 0,
+            "width": 160,
+            "height": 160
+          },
+          "placeholder": true
+        }
+      ],
+      "placeholder": true
+    },
+    {
+      "character": "tom",
+      "sourceSheet": "/assets/sheets/skills/pages/tom.png",
+      "sheet": "/assets/sheets/skills/pages/tom.png",
+      "sourceResolution": [
+        512,
+        176
+      ],
+      "category": "skills",
+      "format": "PNG RGBA",
+      "resolution": [
+        512,
+        176
+      ],
+      "columns": 3,
+      "rows": 1,
+      "cell": [
+        160,
+        160
+      ],
+      "gutter": 8,
+      "margin": 8,
+      "icons": [
+        {
+          "id": "emboscada",
+          "character": "tom",
+          "name": "Emboscada",
+          "path": "/assets/skills/tom/emboscada.png",
+          "sheet": "/assets/sheets/skills/pages/tom.png",
+          "row": 0,
+          "column": 0,
+          "cell": {
+            "x": 8,
+            "y": 8,
+            "width": 160,
+            "height": 160
+          },
+          "sourceCrop": {
+            "x": 0,
+            "y": 0,
+            "width": 160,
+            "height": 160
+          },
+          "placeholder": true
+        },
+        {
+          "id": "perseguicao",
+          "character": "tom",
+          "name": "Persegui\u00e7\u00e3o",
+          "path": "/assets/skills/tom/perseguicao.png",
+          "sheet": "/assets/sheets/skills/pages/tom.png",
+          "row": 0,
+          "column": 1,
+          "cell": {
+            "x": 176,
+            "y": 8,
+            "width": 160,
+            "height": 160
+          },
+          "sourceCrop": {
+            "x": 0,
+            "y": 0,
+            "width": 160,
+            "height": 160
+          },
+          "placeholder": true
+        },
+        {
+          "id": "pata-certeira",
+          "character": "tom",
+          "name": "Pata certeira",
+          "path": "/assets/skills/tom/pata-certeira.png",
+          "sheet": "/assets/sheets/skills/pages/tom.png",
+          "row": 0,
+          "column": 2,
+          "cell": {
+            "x": 344,
+            "y": 8,
+            "width": 160,
+            "height": 160
+          },
+          "sourceCrop": {
+            "x": 0,
+            "y": 0,
+            "width": 160,
+            "height": 160
+          },
+          "placeholder": true
+        }
+      ],
+      "placeholder": true
+    },
+    {
+      "character": "jerry",
+      "sourceSheet": "/assets/sheets/skills/pages/jerry.png",
+      "sheet": "/assets/sheets/skills/pages/jerry.png",
+      "sourceResolution": [
+        512,
+        176
+      ],
+      "category": "skills",
+      "format": "PNG RGBA",
+      "resolution": [
+        512,
+        176
+      ],
+      "columns": 3,
+      "rows": 1,
+      "cell": [
+        160,
+        160
+      ],
+      "gutter": 8,
+      "margin": 8,
+      "icons": [
+        {
+          "id": "ratoeira-invertida",
+          "character": "jerry",
+          "name": "Ratoeira invertida",
+          "path": "/assets/skills/jerry/ratoeira-invertida.png",
+          "sheet": "/assets/sheets/skills/pages/jerry.png",
+          "row": 0,
+          "column": 0,
+          "cell": {
+            "x": 8,
+            "y": 8,
+            "width": 160,
+            "height": 160
+          },
+          "sourceCrop": {
+            "x": 0,
+            "y": 0,
+            "width": 160,
+            "height": 160
+          },
+          "placeholder": true
+        },
+        {
+          "id": "esconderijo",
+          "character": "jerry",
+          "name": "Esconderijo",
+          "path": "/assets/skills/jerry/esconderijo.png",
+          "sheet": "/assets/sheets/skills/pages/jerry.png",
+          "row": 0,
+          "column": 1,
+          "cell": {
+            "x": 176,
+            "y": 8,
+            "width": 160,
+            "height": 160
+          },
+          "sourceCrop": {
+            "x": 0,
+            "y": 0,
+            "width": 160,
+            "height": 160
+          },
+          "placeholder": true
+        },
+        {
+          "id": "martelada",
+          "character": "jerry",
+          "name": "Martelada",
+          "path": "/assets/skills/jerry/martelada.png",
+          "sheet": "/assets/sheets/skills/pages/jerry.png",
+          "row": 0,
+          "column": 2,
+          "cell": {
+            "x": 344,
+            "y": 8,
+            "width": 160,
+            "height": 160
+          },
+          "sourceCrop": {
+            "x": 0,
+            "y": 0,
+            "width": 160,
+            "height": 160
+          },
+          "placeholder": true
+        }
+      ],
+      "placeholder": true
+    },
+    {
+      "character": "pantera",
+      "sourceSheet": "/assets/sheets/skills/pages/pantera.png",
+      "sheet": "/assets/sheets/skills/pages/pantera.png",
+      "sourceResolution": [
+        512,
+        176
+      ],
+      "category": "skills",
+      "format": "PNG RGBA",
+      "resolution": [
+        512,
+        176
+      ],
+      "columns": 3,
+      "rows": 1,
+      "cell": [
+        160,
+        160
+      ],
+      "gutter": 8,
+      "margin": 8,
+      "icons": [
+        {
+          "id": "passo-silencioso",
+          "character": "pantera",
+          "name": "Passo silencioso",
+          "path": "/assets/skills/pantera/passo-silencioso.png",
+          "sheet": "/assets/sheets/skills/pages/pantera.png",
+          "row": 0,
+          "column": 0,
+          "cell": {
+            "x": 8,
+            "y": 8,
+            "width": 160,
+            "height": 160
+          },
+          "sourceCrop": {
+            "x": 0,
+            "y": 0,
+            "width": 160,
+            "height": 160
+          },
+          "placeholder": true
+        },
+        {
+          "id": "troca-discreta",
+          "character": "pantera",
+          "name": "Troca discreta",
+          "path": "/assets/skills/pantera/troca-discreta.png",
+          "sheet": "/assets/sheets/skills/pages/pantera.png",
+          "row": 0,
+          "column": 1,
+          "cell": {
+            "x": 176,
+            "y": 8,
+            "width": 160,
+            "height": 160
+          },
+          "sourceCrop": {
+            "x": 0,
+            "y": 0,
+            "width": 160,
+            "height": 160
+          },
+          "placeholder": true
+        },
+        {
+          "id": "sumico",
+          "character": "pantera",
+          "name": "Sumi\u00e7o",
+          "path": "/assets/skills/pantera/sumico.png",
+          "sheet": "/assets/sheets/skills/pages/pantera.png",
+          "row": 0,
+          "column": 2,
+          "cell": {
+            "x": 344,
+            "y": 8,
+            "width": 160,
+            "height": 160
+          },
+          "sourceCrop": {
+            "x": 0,
+            "y": 0,
+            "width": 160,
+            "height": 160
+          },
+          "placeholder": true
+        }
+      ],
+      "placeholder": true
+    },
+    {
+      "character": "shredder",
+      "sourceSheet": "/assets/sheets/skills/pages/shredder.png",
+      "sheet": "/assets/sheets/skills/pages/shredder.png",
+      "sourceResolution": [
+        512,
+        176
+      ],
+      "category": "skills",
+      "format": "PNG RGBA",
+      "resolution": [
+        512,
+        176
+      ],
+      "columns": 3,
+      "rows": 1,
+      "cell": [
+        160,
+        160
+      ],
+      "gutter": 8,
+      "margin": 8,
+      "icons": [
+        {
+          "id": "garras-de-aco",
+          "character": "shredder",
+          "name": "Garras de a\u00e7o",
+          "path": "/assets/skills/shredder/garras-de-aco.png",
+          "sheet": "/assets/sheets/skills/pages/shredder.png",
+          "row": 0,
+          "column": 0,
+          "cell": {
+            "x": 8,
+            "y": 8,
+            "width": 160,
+            "height": 160
+          },
+          "sourceCrop": {
+            "x": 0,
+            "y": 0,
+            "width": 160,
+            "height": 160
+          },
+          "placeholder": true
+        },
+        {
+          "id": "investida-do-cla",
+          "character": "shredder",
+          "name": "Investida do Cl\u00e3",
+          "path": "/assets/skills/shredder/investida-do-cla.png",
+          "sheet": "/assets/sheets/skills/pages/shredder.png",
+          "row": 0,
+          "column": 1,
+          "cell": {
+            "x": 176,
+            "y": 8,
+            "width": 160,
+            "height": 160
+          },
+          "sourceCrop": {
+            "x": 0,
+            "y": 0,
+            "width": 160,
+            "height": 160
+          },
+          "placeholder": true
+        },
+        {
+          "id": "golpe-do-mestre",
+          "character": "shredder",
+          "name": "Golpe do mestre",
+          "path": "/assets/skills/shredder/golpe-do-mestre.png",
+          "sheet": "/assets/sheets/skills/pages/shredder.png",
+          "row": 0,
+          "column": 2,
+          "cell": {
+            "x": 344,
+            "y": 8,
+            "width": 160,
+            "height": 160
+          },
+          "sourceCrop": {
+            "x": 0,
+            "y": 0,
+            "width": 160,
+            "height": 160
+          },
+          "placeholder": true
+        }
+      ],
+      "placeholder": true
+    },
+    {
+      "character": "splinter",
+      "sourceSheet": "/assets/sheets/skills/pages/splinter.png",
+      "sheet": "/assets/sheets/skills/pages/splinter.png",
+      "sourceResolution": [
+        512,
+        176
+      ],
+      "category": "skills",
+      "format": "PNG RGBA",
+      "resolution": [
+        512,
+        176
+      ],
+      "columns": 3,
+      "rows": 1,
+      "cell": [
+        160,
+        160
+      ],
+      "gutter": 8,
+      "margin": 8,
+      "icons": [
+        {
+          "id": "postura-do-rato",
+          "character": "splinter",
+          "name": "Postura do rato",
+          "path": "/assets/skills/splinter/postura-do-rato.png",
+          "sheet": "/assets/sheets/skills/pages/splinter.png",
+          "row": 0,
+          "column": 0,
+          "cell": {
+            "x": 8,
+            "y": 8,
+            "width": 160,
+            "height": 160
+          },
+          "sourceCrop": {
+            "x": 0,
+            "y": 0,
+            "width": 160,
+            "height": 160
+          },
+          "placeholder": true
+        },
+        {
+          "id": "redirecionar",
+          "character": "splinter",
+          "name": "Redirecionar",
+          "path": "/assets/skills/splinter/redirecionar.png",
+          "sheet": "/assets/sheets/skills/pages/splinter.png",
+          "row": 0,
+          "column": 1,
+          "cell": {
+            "x": 176,
+            "y": 8,
+            "width": 160,
+            "height": 160
+          },
+          "sourceCrop": {
+            "x": 0,
+            "y": 0,
+            "width": 160,
+            "height": 160
+          },
+          "placeholder": true
+        },
+        {
+          "id": "licao-final",
+          "character": "splinter",
+          "name": "Li\u00e7\u00e3o final",
+          "path": "/assets/skills/splinter/licao-final.png",
+          "sheet": "/assets/sheets/skills/pages/splinter.png",
+          "row": 0,
+          "column": 2,
+          "cell": {
+            "x": 344,
+            "y": 8,
+            "width": 160,
+            "height": 160
+          },
+          "sourceCrop": {
+            "x": 0,
+            "y": 0,
+            "width": 160,
+            "height": 160
+          },
+          "placeholder": true
+        }
+      ],
+      "placeholder": true
+    },
+    {
+      "character": "krang",
+      "sourceSheet": "/assets/sheets/skills/pages/krang.png",
+      "sheet": "/assets/sheets/skills/pages/krang.png",
+      "sourceResolution": [
+        512,
+        176
+      ],
+      "category": "skills",
+      "format": "PNG RGBA",
+      "resolution": [
+        512,
+        176
+      ],
+      "columns": 3,
+      "rows": 1,
+      "cell": [
+        160,
+        160
+      ],
+      "gutter": 8,
+      "margin": 8,
+      "icons": [
+        {
+          "id": "androide-de-combate",
+          "character": "krang",
+          "name": "Andr\u00f3ide de combate",
+          "path": "/assets/skills/krang/androide-de-combate.png",
+          "sheet": "/assets/sheets/skills/pages/krang.png",
+          "row": 0,
+          "column": 0,
+          "cell": {
+            "x": 8,
+            "y": 8,
+            "width": 160,
+            "height": 160
+          },
+          "sourceCrop": {
+            "x": 0,
+            "y": 0,
+            "width": 160,
+            "height": 160
+          },
+          "placeholder": true
+        },
+        {
+          "id": "comando-remoto",
+          "character": "krang",
+          "name": "Comando remoto",
+          "path": "/assets/skills/krang/comando-remoto.png",
+          "sheet": "/assets/sheets/skills/pages/krang.png",
+          "row": 0,
+          "column": 1,
+          "cell": {
+            "x": 176,
+            "y": 8,
+            "width": 160,
+            "height": 160
+          },
+          "sourceCrop": {
+            "x": 0,
+            "y": 0,
+            "width": 160,
+            "height": 160
+          },
+          "placeholder": true
+        },
+        {
+          "id": "dimensao-x",
+          "character": "krang",
+          "name": "Dimens\u00e3o X",
+          "path": "/assets/skills/krang/dimensao-x.png",
+          "sheet": "/assets/sheets/skills/pages/krang.png",
+          "row": 0,
+          "column": 2,
+          "cell": {
+            "x": 344,
+            "y": 8,
+            "width": 160,
+            "height": 160
+          },
+          "sourceCrop": {
+            "x": 0,
+            "y": 0,
+            "width": 160,
+            "height": 160
+          },
+          "placeholder": true
+        }
+      ],
+      "placeholder": true
+    },
+    {
+      "character": "caseyjones",
+      "sourceSheet": "/assets/sheets/skills/pages/caseyjones.png",
+      "sheet": "/assets/sheets/skills/pages/caseyjones.png",
+      "sourceResolution": [
+        512,
+        176
+      ],
+      "category": "skills",
+      "format": "PNG RGBA",
+      "resolution": [
+        512,
+        176
+      ],
+      "columns": 3,
+      "rows": 1,
+      "cell": [
+        160,
+        160
+      ],
+      "gutter": 8,
+      "margin": 8,
+      "icons": [
+        {
+          "id": "taco-de-hoquei",
+          "character": "caseyjones",
+          "name": "Taco de h\u00f3quei",
+          "path": "/assets/skills/caseyjones/taco-de-hoquei.png",
+          "sheet": "/assets/sheets/skills/pages/caseyjones.png",
+          "row": 0,
+          "column": 0,
+          "cell": {
+            "x": 8,
+            "y": 8,
+            "width": 160,
+            "height": 160
+          },
+          "sourceCrop": {
+            "x": 0,
+            "y": 0,
+            "width": 160,
+            "height": 160
+          },
+          "placeholder": true
+        },
+        {
+          "id": "sequencia-bruta",
+          "character": "caseyjones",
+          "name": "Sequ\u00eancia bruta",
+          "path": "/assets/skills/caseyjones/sequencia-bruta.png",
+          "sheet": "/assets/sheets/skills/pages/caseyjones.png",
+          "row": 0,
+          "column": 1,
+          "cell": {
+            "x": 176,
+            "y": 8,
+            "width": 160,
+            "height": 160
+          },
+          "sourceCrop": {
+            "x": 0,
+            "y": 0,
+            "width": 160,
+            "height": 160
+          },
+          "placeholder": true
+        },
+        {
+          "id": "goooool",
+          "character": "caseyjones",
+          "name": "Goooool!",
+          "path": "/assets/skills/caseyjones/goooool.png",
+          "sheet": "/assets/sheets/skills/pages/caseyjones.png",
+          "row": 0,
+          "column": 2,
+          "cell": {
+            "x": 344,
+            "y": 8,
+            "width": 160,
+            "height": 160
+          },
+          "sourceCrop": {
+            "x": 0,
+            "y": 0,
+            "width": 160,
+            "height": 160
+          },
+          "placeholder": true
+        }
+      ],
+      "placeholder": true
+    },
+    {
+      "character": "bebop",
+      "sourceSheet": "/assets/sheets/skills/pages/bebop.png",
+      "sheet": "/assets/sheets/skills/pages/bebop.png",
+      "sourceResolution": [
+        512,
+        176
+      ],
+      "category": "skills",
+      "format": "PNG RGBA",
+      "resolution": [
+        512,
+        176
+      ],
+      "columns": 3,
+      "rows": 1,
+      "cell": [
+        160,
+        160
+      ],
+      "gutter": 8,
+      "margin": 8,
+      "icons": [
+        {
+          "id": "investida-de-javali",
+          "character": "bebop",
+          "name": "Investida de javali",
+          "path": "/assets/skills/bebop/investida-de-javali.png",
+          "sheet": "/assets/sheets/skills/pages/bebop.png",
+          "row": 0,
+          "column": 0,
+          "cell": {
+            "x": 8,
+            "y": 8,
+            "width": 160,
+            "height": 160
+          },
+          "sourceCrop": {
+            "x": 0,
+            "y": 0,
+            "width": 160,
+            "height": 160
+          },
+          "placeholder": true
+        },
+        {
+          "id": "pancada",
+          "character": "bebop",
+          "name": "Pancada",
+          "path": "/assets/skills/bebop/pancada.png",
+          "sheet": "/assets/sheets/skills/pages/bebop.png",
+          "row": 0,
+          "column": 1,
+          "cell": {
+            "x": 176,
+            "y": 8,
+            "width": 160,
+            "height": 160
+          },
+          "sourceCrop": {
+            "x": 0,
+            "y": 0,
+            "width": 160,
+            "height": 160
+          },
+          "placeholder": true
+        },
+        {
+          "id": "atropelo",
+          "character": "bebop",
+          "name": "Atropelo",
+          "path": "/assets/skills/bebop/atropelo.png",
+          "sheet": "/assets/sheets/skills/pages/bebop.png",
+          "row": 0,
+          "column": 2,
+          "cell": {
+            "x": 344,
+            "y": 8,
+            "width": 160,
+            "height": 160
+          },
+          "sourceCrop": {
+            "x": 0,
+            "y": 0,
+            "width": 160,
+            "height": 160
+          },
+          "placeholder": true
+        }
+      ],
+      "placeholder": true
+    },
+    {
+      "character": "skeletor",
+      "sourceSheet": "/assets/sheets/skills/pages/skeletor.png",
+      "sheet": "/assets/sheets/skills/pages/skeletor.png",
+      "sourceResolution": [
+        512,
+        176
+      ],
+      "category": "skills",
+      "format": "PNG RGBA",
+      "resolution": [
+        512,
+        176
+      ],
+      "columns": 3,
+      "rows": 1,
+      "cell": [
+        160,
+        160
+      ],
+      "gutter": 8,
+      "margin": 8,
+      "icons": [
+        {
+          "id": "cajado-da-caveira",
+          "character": "skeletor",
+          "name": "Cajado da Caveira",
+          "path": "/assets/skills/skeletor/cajado-da-caveira.png",
+          "sheet": "/assets/sheets/skills/pages/skeletor.png",
+          "row": 0,
+          "column": 0,
+          "cell": {
+            "x": 8,
+            "y": 8,
+            "width": 160,
+            "height": 160
+          },
+          "sourceCrop": {
+            "x": 0,
+            "y": 0,
+            "width": 160,
+            "height": 160
+          },
+          "placeholder": true
+        },
+        {
+          "id": "maldicao",
+          "character": "skeletor",
+          "name": "Maldi\u00e7\u00e3o",
+          "path": "/assets/skills/skeletor/maldicao.png",
+          "sheet": "/assets/sheets/skills/pages/skeletor.png",
+          "row": 0,
+          "column": 1,
+          "cell": {
+            "x": 176,
+            "y": 8,
+            "width": 160,
+            "height": 160
+          },
+          "sourceCrop": {
+            "x": 0,
+            "y": 0,
+            "width": 160,
+            "height": 160
+          },
+          "placeholder": true
+        },
+        {
+          "id": "dominio-de-snake-mountain",
+          "character": "skeletor",
+          "name": "Dom\u00ednio de Snake Mountain",
+          "path": "/assets/skills/skeletor/dominio-de-snake-mountain.png",
+          "sheet": "/assets/sheets/skills/pages/skeletor.png",
+          "row": 0,
+          "column": 2,
+          "cell": {
+            "x": 344,
+            "y": 8,
+            "width": 160,
+            "height": 160
+          },
+          "sourceCrop": {
+            "x": 0,
+            "y": 0,
+            "width": 160,
+            "height": 160
+          },
+          "placeholder": true
+        }
+      ],
+      "placeholder": true
+    },
+    {
+      "character": "shera",
+      "sourceSheet": "/assets/sheets/skills/pages/shera.png",
+      "sheet": "/assets/sheets/skills/pages/shera.png",
+      "sourceResolution": [
+        512,
+        176
+      ],
+      "category": "skills",
+      "format": "PNG RGBA",
+      "resolution": [
+        512,
+        176
+      ],
+      "columns": 3,
+      "rows": 1,
+      "cell": [
+        160,
+        160
+      ],
+      "gutter": 8,
+      "margin": 8,
+      "icons": [
+        {
+          "id": "espada-protetora",
+          "character": "shera",
+          "name": "Espada Protetora",
+          "path": "/assets/skills/shera/espada-protetora.png",
+          "sheet": "/assets/sheets/skills/pages/shera.png",
+          "row": 0,
+          "column": 0,
+          "cell": {
+            "x": 8,
+            "y": 8,
+            "width": 160,
+            "height": 160
+          },
+          "sourceCrop": {
+            "x": 0,
+            "y": 0,
+            "width": 160,
+            "height": 160
+          },
+          "placeholder": true
+        },
+        {
+          "id": "pela-honra-de-grayskull",
+          "character": "shera",
+          "name": "Pela honra de Grayskull",
+          "path": "/assets/skills/shera/pela-honra-de-grayskull.png",
+          "sheet": "/assets/sheets/skills/pages/shera.png",
+          "row": 0,
+          "column": 1,
+          "cell": {
+            "x": 176,
+            "y": 8,
+            "width": 160,
+            "height": 160
+          },
+          "sourceCrop": {
+            "x": 0,
+            "y": 0,
+            "width": 160,
+            "height": 160
+          },
+          "placeholder": true
+        },
+        {
+          "id": "golpe-da-princesa",
+          "character": "shera",
+          "name": "Golpe da Princesa",
+          "path": "/assets/skills/shera/golpe-da-princesa.png",
+          "sheet": "/assets/sheets/skills/pages/shera.png",
+          "row": 0,
+          "column": 2,
+          "cell": {
+            "x": 344,
+            "y": 8,
+            "width": 160,
+            "height": 160
+          },
+          "sourceCrop": {
+            "x": 0,
+            "y": 0,
+            "width": 160,
+            "height": 160
+          },
+          "placeholder": true
+        }
+      ],
+      "placeholder": true
+    },
+    {
+      "character": "liono",
+      "sourceSheet": "/assets/sheets/skills/pages/liono.png",
+      "sheet": "/assets/sheets/skills/pages/liono.png",
+      "sourceResolution": [
+        512,
+        176
+      ],
+      "category": "skills",
+      "format": "PNG RGBA",
+      "resolution": [
+        512,
+        176
+      ],
+      "columns": 3,
+      "rows": 1,
+      "cell": [
+        160,
+        160
+      ],
+      "gutter": 8,
+      "margin": 8,
+      "icons": [
+        {
+          "id": "espada-de-augurio",
+          "character": "liono",
+          "name": "Espada de Aug\u00fario",
+          "path": "/assets/skills/liono/espada-de-augurio.png",
+          "sheet": "/assets/sheets/skills/pages/liono.png",
+          "row": 0,
+          "column": 0,
+          "cell": {
+            "x": 8,
+            "y": 8,
+            "width": 160,
+            "height": 160
+          },
+          "sourceCrop": {
+            "x": 0,
+            "y": 0,
+            "width": 160,
+            "height": 160
+          },
+          "placeholder": true
+        },
+        {
+          "id": "visao-alem-do-alcance",
+          "character": "liono",
+          "name": "Vis\u00e3o al\u00e9m do alcance",
+          "path": "/assets/skills/liono/visao-alem-do-alcance.png",
+          "sheet": "/assets/sheets/skills/pages/liono.png",
+          "row": 0,
+          "column": 1,
+          "cell": {
+            "x": 176,
+            "y": 8,
+            "width": 160,
+            "height": 160
+          },
+          "sourceCrop": {
+            "x": 0,
+            "y": 0,
+            "width": 160,
+            "height": 160
+          },
+          "placeholder": true
+        },
+        {
+          "id": "thunder-thunder",
+          "character": "liono",
+          "name": "Thunder, Thunder!",
+          "path": "/assets/skills/liono/thunder-thunder.png",
+          "sheet": "/assets/sheets/skills/pages/liono.png",
+          "row": 0,
+          "column": 2,
+          "cell": {
+            "x": 344,
+            "y": 8,
+            "width": 160,
+            "height": 160
+          },
+          "sourceCrop": {
+            "x": 0,
+            "y": 0,
+            "width": 160,
+            "height": 160
+          },
+          "placeholder": true
+        }
+      ],
+      "placeholder": true
+    },
+    {
+      "character": "cheetara",
+      "sourceSheet": "/assets/sheets/skills/pages/cheetara.png",
+      "sheet": "/assets/sheets/skills/pages/cheetara.png",
+      "sourceResolution": [
+        512,
+        176
+      ],
+      "category": "skills",
+      "format": "PNG RGBA",
+      "resolution": [
+        512,
+        176
+      ],
+      "columns": 3,
+      "rows": 1,
+      "cell": [
+        160,
+        160
+      ],
+      "gutter": 8,
+      "margin": 8,
+      "icons": [
+        {
+          "id": "bastao-giratorio",
+          "character": "cheetara",
+          "name": "Bast\u00e3o girat\u00f3rio",
+          "path": "/assets/skills/cheetara/bastao-giratorio.png",
+          "sheet": "/assets/sheets/skills/pages/cheetara.png",
+          "row": 0,
+          "column": 0,
+          "cell": {
+            "x": 8,
+            "y": 8,
+            "width": 160,
+            "height": 160
+          },
+          "sourceCrop": {
+            "x": 0,
+            "y": 0,
+            "width": 160,
+            "height": 160
+          },
+          "placeholder": true
+        },
+        {
+          "id": "corrida-felina",
+          "character": "cheetara",
+          "name": "Corrida felina",
+          "path": "/assets/skills/cheetara/corrida-felina.png",
+          "sheet": "/assets/sheets/skills/pages/cheetara.png",
+          "row": 0,
+          "column": 1,
+          "cell": {
+            "x": 176,
+            "y": 8,
+            "width": 160,
+            "height": 160
+          },
+          "sourceCrop": {
+            "x": 0,
+            "y": 0,
+            "width": 160,
+            "height": 160
+          },
+          "placeholder": true
+        },
+        {
+          "id": "golpe-certeiro",
+          "character": "cheetara",
+          "name": "Golpe certeiro",
+          "path": "/assets/skills/cheetara/golpe-certeiro.png",
+          "sheet": "/assets/sheets/skills/pages/cheetara.png",
+          "row": 0,
+          "column": 2,
+          "cell": {
+            "x": 344,
+            "y": 8,
+            "width": 160,
+            "height": 160
+          },
+          "sourceCrop": {
+            "x": 0,
+            "y": 0,
+            "width": 160,
+            "height": 160
+          },
+          "placeholder": true
+        }
+      ],
+      "placeholder": true
+    },
+    {
+      "character": "mummra",
+      "sourceSheet": "/assets/sheets/skills/pages/mummra.png",
+      "sheet": "/assets/sheets/skills/pages/mummra.png",
+      "sourceResolution": [
+        512,
+        176
+      ],
+      "category": "skills",
+      "format": "PNG RGBA",
+      "resolution": [
+        512,
+        176
+      ],
+      "columns": 3,
+      "rows": 1,
+      "cell": [
+        160,
+        160
+      ],
+      "gutter": 8,
+      "margin": 8,
+      "icons": [
+        {
+          "id": "antigos-espiritos",
+          "character": "mummra",
+          "name": "Antigos Esp\u00edritos",
+          "path": "/assets/skills/mummra/antigos-espiritos.png",
+          "sheet": "/assets/sheets/skills/pages/mummra.png",
+          "row": 0,
+          "column": 0,
+          "cell": {
+            "x": 8,
+            "y": 8,
+            "width": 160,
+            "height": 160
+          },
+          "sourceCrop": {
+            "x": 0,
+            "y": 0,
+            "width": 160,
+            "height": 160
+          },
+          "placeholder": true
+        },
+        {
+          "id": "forma-desperta",
+          "character": "mummra",
+          "name": "Forma desperta",
+          "path": "/assets/skills/mummra/forma-desperta.png",
+          "sheet": "/assets/sheets/skills/pages/mummra.png",
+          "row": 0,
+          "column": 1,
+          "cell": {
+            "x": 176,
+            "y": 8,
+            "width": 160,
+            "height": 160
+          },
+          "sourceCrop": {
+            "x": 0,
+            "y": 0,
+            "width": 160,
+            "height": 160
+          },
+          "placeholder": true
+        },
+        {
+          "id": "retorno-ao-sarcofago",
+          "character": "mummra",
+          "name": "Retorno ao sarc\u00f3fago",
+          "path": "/assets/skills/mummra/retorno-ao-sarcofago.png",
+          "sheet": "/assets/sheets/skills/pages/mummra.png",
+          "row": 0,
+          "column": 2,
+          "cell": {
+            "x": 344,
+            "y": 8,
+            "width": 160,
+            "height": 160
+          },
+          "sourceCrop": {
+            "x": 0,
+            "y": 0,
+            "width": 160,
+            "height": 160
+          },
+          "placeholder": true
+        }
+      ],
+      "placeholder": true
+    },
+    {
+      "character": "homer",
+      "sourceSheet": "/assets/sheets/skills/pages/homer.png",
+      "sheet": "/assets/sheets/skills/pages/homer.png",
+      "sourceResolution": [
+        512,
+        176
+      ],
+      "category": "skills",
+      "format": "PNG RGBA",
+      "resolution": [
+        512,
+        176
+      ],
+      "columns": 3,
+      "rows": 1,
+      "cell": [
+        160,
+        160
+      ],
+      "gutter": 8,
+      "margin": 8,
+      "icons": [
+        {
+          "id": "barriga-de-aco",
+          "character": "homer",
+          "name": "Barriga de a\u00e7o",
+          "path": "/assets/skills/homer/barriga-de-aco.png",
+          "sheet": "/assets/sheets/skills/pages/homer.png",
+          "row": 0,
+          "column": 0,
+          "cell": {
+            "x": 8,
+            "y": 8,
+            "width": 160,
+            "height": 160
+          },
+          "sourceCrop": {
+            "x": 0,
+            "y": 0,
+            "width": 160,
+            "height": 160
+          },
+          "placeholder": true
+        },
+        {
+          "id": "rosquinha",
+          "character": "homer",
+          "name": "Rosquinha",
+          "path": "/assets/skills/homer/rosquinha.png",
+          "sheet": "/assets/sheets/skills/pages/homer.png",
+          "row": 0,
+          "column": 1,
+          "cell": {
+            "x": 176,
+            "y": 8,
+            "width": 160,
+            "height": 160
+          },
+          "sourceCrop": {
+            "x": 0,
+            "y": 0,
+            "width": 160,
+            "height": 160
+          },
+          "placeholder": true
+        },
+        {
+          "id": "d-oh",
+          "character": "homer",
+          "name": "D-oh!",
+          "path": "/assets/skills/homer/d-oh.png",
+          "sheet": "/assets/sheets/skills/pages/homer.png",
+          "row": 0,
+          "column": 2,
+          "cell": {
+            "x": 344,
+            "y": 8,
+            "width": 160,
+            "height": 160
+          },
+          "sourceCrop": {
+            "x": 0,
+            "y": 0,
+            "width": 160,
+            "height": 160
+          },
+          "placeholder": true
+        }
+      ],
+      "placeholder": true
+    },
+    {
+      "character": "bart",
+      "sourceSheet": "/assets/sheets/skills/pages/bart.png",
+      "sheet": "/assets/sheets/skills/pages/bart.png",
+      "sourceResolution": [
+        512,
+        176
+      ],
+      "category": "skills",
+      "format": "PNG RGBA",
+      "resolution": [
+        512,
+        176
+      ],
+      "columns": 3,
+      "rows": 1,
+      "cell": [
+        160,
+        160
+      ],
+      "gutter": 8,
+      "margin": 8,
+      "icons": [
+        {
+          "id": "estilingue",
+          "character": "bart",
+          "name": "Estilingue",
+          "path": "/assets/skills/bart/estilingue.png",
+          "sheet": "/assets/sheets/skills/pages/bart.png",
+          "row": 0,
+          "column": 0,
+          "cell": {
+            "x": 8,
+            "y": 8,
+            "width": 160,
+            "height": 160
+          },
+          "sourceCrop": {
+            "x": 0,
+            "y": 0,
+            "width": 160,
+            "height": 160
+          },
+          "placeholder": true
+        },
+        {
+          "id": "provocacao",
+          "character": "bart",
+          "name": "Provoca\u00e7\u00e3o",
+          "path": "/assets/skills/bart/provocacao.png",
+          "sheet": "/assets/sheets/skills/pages/bart.png",
+          "row": 0,
+          "column": 1,
+          "cell": {
+            "x": 176,
+            "y": 8,
+            "width": 160,
+            "height": 160
+          },
+          "sourceCrop": {
+            "x": 0,
+            "y": 0,
+            "width": 160,
+            "height": 160
+          },
+          "placeholder": true
+        },
+        {
+          "id": "travessura-maxima",
+          "character": "bart",
+          "name": "Travessura m\u00e1xima",
+          "path": "/assets/skills/bart/travessura-maxima.png",
+          "sheet": "/assets/sheets/skills/pages/bart.png",
+          "row": 0,
+          "column": 2,
+          "cell": {
+            "x": 344,
+            "y": 8,
+            "width": 160,
+            "height": 160
+          },
+          "sourceCrop": {
+            "x": 0,
+            "y": 0,
+            "width": 160,
+            "height": 160
+          },
+          "placeholder": true
+        }
+      ],
+      "placeholder": true
+    },
+    {
+      "character": "peter",
+      "sourceSheet": "/assets/sheets/skills/pages/peter.png",
+      "sheet": "/assets/sheets/skills/pages/peter.png",
+      "sourceResolution": [
+        512,
+        176
+      ],
+      "category": "skills",
+      "format": "PNG RGBA",
+      "resolution": [
+        512,
+        176
+      ],
+      "columns": 3,
+      "rows": 1,
+      "cell": [
+        160,
+        160
+      ],
+      "gutter": 8,
+      "margin": 8,
+      "icons": [
+        {
+          "id": "briga-com-o-galo",
+          "character": "peter",
+          "name": "Briga com o galo",
+          "path": "/assets/skills/peter/briga-com-o-galo.png",
+          "sheet": "/assets/sheets/skills/pages/peter.png",
+          "row": 0,
+          "column": 0,
+          "cell": {
+            "x": 8,
+            "y": 8,
+            "width": 160,
+            "height": 160
+          },
+          "sourceCrop": {
+            "x": 0,
+            "y": 0,
+            "width": 160,
+            "height": 160
+          },
+          "placeholder": true
+        },
+        {
+          "id": "ideia-terrivel",
+          "character": "peter",
+          "name": "Ideia terr\u00edvel",
+          "path": "/assets/skills/peter/ideia-terrivel.png",
+          "sheet": "/assets/sheets/skills/pages/peter.png",
+          "row": 0,
+          "column": 1,
+          "cell": {
+            "x": 176,
+            "y": 8,
+            "width": 160,
+            "height": 160
+          },
+          "sourceCrop": {
+            "x": 0,
+            "y": 0,
+            "width": 160,
+            "height": 160
+          },
+          "placeholder": true
+        },
+        {
+          "id": "nhe-he-he",
+          "character": "peter",
+          "name": "Nh\u00e9-h\u00e9-h\u00e9",
+          "path": "/assets/skills/peter/nhe-he-he.png",
+          "sheet": "/assets/sheets/skills/pages/peter.png",
+          "row": 0,
+          "column": 2,
+          "cell": {
+            "x": 344,
+            "y": 8,
+            "width": 160,
+            "height": 160
+          },
+          "sourceCrop": {
+            "x": 0,
+            "y": 0,
+            "width": 160,
+            "height": 160
+          },
+          "placeholder": true
+        }
+      ],
+      "placeholder": true
+    },
+    {
+      "character": "stewie",
+      "sourceSheet": "/assets/sheets/skills/pages/stewie.png",
+      "sheet": "/assets/sheets/skills/pages/stewie.png",
+      "sourceResolution": [
+        512,
+        176
+      ],
+      "category": "skills",
+      "format": "PNG RGBA",
+      "resolution": [
+        512,
+        176
+      ],
+      "columns": 3,
+      "rows": 1,
+      "cell": [
+        160,
+        160
+      ],
+      "gutter": 8,
+      "margin": 8,
+      "icons": [
+        {
+          "id": "raio-de-controle",
+          "character": "stewie",
+          "name": "Raio de controle",
+          "path": "/assets/skills/stewie/raio-de-controle.png",
+          "sheet": "/assets/sheets/skills/pages/stewie.png",
+          "row": 0,
+          "column": 0,
+          "cell": {
+            "x": 8,
+            "y": 8,
+            "width": 160,
+            "height": 160
+          },
+          "sourceCrop": {
+            "x": 0,
+            "y": 0,
+            "width": 160,
+            "height": 160
+          },
+          "placeholder": true
+        },
+        {
+          "id": "plano-mirabolante",
+          "character": "stewie",
+          "name": "Plano mirabolante",
+          "path": "/assets/skills/stewie/plano-mirabolante.png",
+          "sheet": "/assets/sheets/skills/pages/stewie.png",
+          "row": 0,
+          "column": 1,
+          "cell": {
+            "x": 176,
+            "y": 8,
+            "width": 160,
+            "height": 160
+          },
+          "sourceCrop": {
+            "x": 0,
+            "y": 0,
+            "width": 160,
+            "height": 160
+          },
+          "placeholder": true
+        },
+        {
+          "id": "dominacao-mundial",
+          "character": "stewie",
+          "name": "Domina\u00e7\u00e3o mundial",
+          "path": "/assets/skills/stewie/dominacao-mundial.png",
+          "sheet": "/assets/sheets/skills/pages/stewie.png",
+          "row": 0,
+          "column": 2,
+          "cell": {
+            "x": 344,
+            "y": 8,
+            "width": 160,
+            "height": 160
+          },
+          "sourceCrop": {
+            "x": 0,
+            "y": 0,
+            "width": 160,
+            "height": 160
+          },
+          "placeholder": true
+        }
+      ],
+      "placeholder": true
+    },
+    {
+      "character": "cartman",
+      "sourceSheet": "/assets/sheets/skills/pages/cartman.png",
+      "sheet": "/assets/sheets/skills/pages/cartman.png",
+      "sourceResolution": [
+        512,
+        176
+      ],
+      "category": "skills",
+      "format": "PNG RGBA",
+      "resolution": [
+        512,
+        176
+      ],
+      "columns": 3,
+      "rows": 1,
+      "cell": [
+        160,
+        160
+      ],
+      "gutter": 8,
+      "margin": 8,
+      "icons": [
+        {
+          "id": "respeitem-minha-autoridade",
+          "character": "cartman",
+          "name": "Respeitem minha autoridade",
+          "path": "/assets/skills/cartman/respeitem-minha-autoridade.png",
+          "sheet": "/assets/sheets/skills/pages/cartman.png",
+          "row": 0,
+          "column": 0,
+          "cell": {
+            "x": 8,
+            "y": 8,
+            "width": 160,
+            "height": 160
+          },
+          "sourceCrop": {
+            "x": 0,
+            "y": 0,
+            "width": 160,
+            "height": 160
+          },
+          "placeholder": true
+        },
+        {
+          "id": "chantagem",
+          "character": "cartman",
+          "name": "Chantagem",
+          "path": "/assets/skills/cartman/chantagem.png",
+          "sheet": "/assets/sheets/skills/pages/cartman.png",
+          "row": 0,
+          "column": 1,
+          "cell": {
+            "x": 176,
+            "y": 8,
+            "width": 160,
+            "height": 160
+          },
+          "sourceCrop": {
+            "x": 0,
+            "y": 0,
+            "width": 160,
+            "height": 160
+          },
+          "placeholder": true
+        },
+        {
+          "id": "plano-egoista",
+          "character": "cartman",
+          "name": "Plano ego\u00edsta",
+          "path": "/assets/skills/cartman/plano-egoista.png",
+          "sheet": "/assets/sheets/skills/pages/cartman.png",
+          "row": 0,
+          "column": 2,
+          "cell": {
+            "x": 344,
+            "y": 8,
+            "width": 160,
+            "height": 160
+          },
+          "sourceCrop": {
+            "x": 0,
+            "y": 0,
+            "width": 160,
+            "height": 160
+          },
+          "placeholder": true
+        }
+      ],
+      "placeholder": true
+    },
+    {
+      "character": "billcipher",
+      "sourceSheet": "/assets/sheets/skills/pages/billcipher.png",
+      "sheet": "/assets/sheets/skills/pages/billcipher.png",
+      "sourceResolution": [
+        512,
+        176
+      ],
+      "category": "skills",
+      "format": "PNG RGBA",
+      "resolution": [
+        512,
+        176
+      ],
+      "columns": 3,
+      "rows": 1,
+      "cell": [
+        160,
+        160
+      ],
+      "gutter": 8,
+      "margin": 8,
+      "icons": [
+        {
+          "id": "acordo",
+          "character": "billcipher",
+          "name": "Acordo",
+          "path": "/assets/skills/billcipher/acordo.png",
+          "sheet": "/assets/sheets/skills/pages/billcipher.png",
+          "row": 0,
+          "column": 0,
+          "cell": {
+            "x": 8,
+            "y": 8,
+            "width": 160,
+            "height": 160
+          },
+          "sourceCrop": {
+            "x": 0,
+            "y": 0,
+            "width": 160,
+            "height": 160
+          },
+          "placeholder": true
+        },
+        {
+          "id": "realidade-invertida",
+          "character": "billcipher",
+          "name": "Realidade invertida",
+          "path": "/assets/skills/billcipher/realidade-invertida.png",
+          "sheet": "/assets/sheets/skills/pages/billcipher.png",
+          "row": 0,
+          "column": 1,
+          "cell": {
+            "x": 176,
+            "y": 8,
+            "width": 160,
+            "height": 160
+          },
+          "sourceCrop": {
+            "x": 0,
+            "y": 0,
+            "width": 160,
+            "height": 160
+          },
+          "placeholder": true
+        },
+        {
+          "id": "olho-que-tudo-ve",
+          "character": "billcipher",
+          "name": "Olho que tudo v\u00ea",
+          "path": "/assets/skills/billcipher/olho-que-tudo-ve.png",
+          "sheet": "/assets/sheets/skills/pages/billcipher.png",
+          "row": 0,
+          "column": 2,
+          "cell": {
+            "x": 344,
+            "y": 8,
+            "width": 160,
+            "height": 160
+          },
+          "sourceCrop": {
+            "x": 0,
+            "y": 0,
+            "width": 160,
+            "height": 160
+          },
+          "placeholder": true
+        }
+      ],
+      "placeholder": true
+    },
+    {
+      "character": "plankton",
+      "sourceSheet": "/assets/sheets/skills/pages/plankton.png",
+      "sheet": "/assets/sheets/skills/pages/plankton.png",
+      "sourceResolution": [
+        512,
+        176
+      ],
+      "category": "skills",
+      "format": "PNG RGBA",
+      "resolution": [
+        512,
+        176
+      ],
+      "columns": 3,
+      "rows": 1,
+      "cell": [
+        160,
+        160
+      ],
+      "gutter": 8,
+      "margin": 8,
+      "icons": [
+        {
+          "id": "exercito-de-clones",
+          "character": "plankton",
+          "name": "Ex\u00e9rcito de clones",
+          "path": "/assets/skills/plankton/exercito-de-clones.png",
+          "sheet": "/assets/sheets/skills/pages/plankton.png",
+          "row": 0,
+          "column": 0,
+          "cell": {
+            "x": 8,
+            "y": 8,
+            "width": 160,
+            "height": 160
+          },
+          "sourceCrop": {
+            "x": 0,
+            "y": 0,
+            "width": 160,
+            "height": 160
+          },
+          "placeholder": true
+        },
+        {
+          "id": "plano-z",
+          "character": "plankton",
+          "name": "Plano Z",
+          "path": "/assets/skills/plankton/plano-z.png",
+          "sheet": "/assets/sheets/skills/pages/plankton.png",
+          "row": 0,
+          "column": 1,
+          "cell": {
+            "x": 176,
+            "y": 8,
+            "width": 160,
+            "height": 160
+          },
+          "sourceCrop": {
+            "x": 0,
+            "y": 0,
+            "width": 160,
+            "height": 160
+          },
+          "placeholder": true
+        },
+        {
+          "id": "roubar-a-formula",
+          "character": "plankton",
+          "name": "Roubar a f\u00f3rmula",
+          "path": "/assets/skills/plankton/roubar-a-formula.png",
+          "sheet": "/assets/sheets/skills/pages/plankton.png",
+          "row": 0,
+          "column": 2,
+          "cell": {
+            "x": 344,
+            "y": 8,
+            "width": 160,
+            "height": 160
+          },
+          "sourceCrop": {
+            "x": 0,
+            "y": 0,
+            "width": 160,
+            "height": 160
+          },
+          "placeholder": true
+        }
+      ],
+      "placeholder": true
+    },
+    {
+      "character": "mojojojo",
+      "sourceSheet": "/assets/sheets/skills/pages/mojojojo.png",
+      "sheet": "/assets/sheets/skills/pages/mojojojo.png",
+      "sourceResolution": [
+        512,
+        176
+      ],
+      "category": "skills",
+      "format": "PNG RGBA",
+      "resolution": [
+        512,
+        176
+      ],
+      "columns": 3,
+      "rows": 1,
+      "cell": [
+        160,
+        160
+      ],
+      "gutter": 8,
+      "margin": 8,
+      "icons": [
+        {
+          "id": "robo-gigante",
+          "character": "mojojojo",
+          "name": "Rob\u00f4 gigante",
+          "path": "/assets/skills/mojojojo/robo-gigante.png",
+          "sheet": "/assets/sheets/skills/pages/mojojojo.png",
+          "row": 0,
+          "column": 0,
+          "cell": {
+            "x": 8,
+            "y": 8,
+            "width": 160,
+            "height": 160
+          },
+          "sourceCrop": {
+            "x": 0,
+            "y": 0,
+            "width": 160,
+            "height": 160
+          },
+          "placeholder": true
+        },
+        {
+          "id": "raio-adaptador",
+          "character": "mojojojo",
+          "name": "Raio adaptador",
+          "path": "/assets/skills/mojojojo/raio-adaptador.png",
+          "sheet": "/assets/sheets/skills/pages/mojojojo.png",
+          "row": 0,
+          "column": 1,
+          "cell": {
+            "x": 176,
+            "y": 8,
+            "width": 160,
+            "height": 160
+          },
+          "sourceCrop": {
+            "x": 0,
+            "y": 0,
+            "width": 160,
+            "height": 160
+          },
+          "placeholder": true
+        },
+        {
+          "id": "discurso-interminavel",
+          "character": "mojojojo",
+          "name": "Discurso intermin\u00e1vel",
+          "path": "/assets/skills/mojojojo/discurso-interminavel.png",
+          "sheet": "/assets/sheets/skills/pages/mojojojo.png",
+          "row": 0,
+          "column": 2,
+          "cell": {
+            "x": 344,
+            "y": 8,
+            "width": 160,
+            "height": 160
+          },
+          "sourceCrop": {
+            "x": 0,
+            "y": 0,
+            "width": 160,
+            "height": 160
+          },
+          "placeholder": true
+        }
+      ],
+      "placeholder": true
+    },
+    {
+      "character": "capitaoplaneta",
+      "sourceSheet": "/assets/sheets/skills/pages/capitaoplaneta.png",
+      "sheet": "/assets/sheets/skills/pages/capitaoplaneta.png",
+      "sourceResolution": [
+        512,
+        176
+      ],
+      "category": "skills",
+      "format": "PNG RGBA",
+      "resolution": [
+        512,
+        176
+      ],
+      "columns": 3,
+      "rows": 1,
+      "cell": [
+        160,
+        160
+      ],
+      "gutter": 8,
+      "margin": 8,
+      "icons": [
+        {
+          "id": "poder-dos-aneis",
+          "character": "capitaoplaneta",
+          "name": "Poder dos An\u00e9is",
+          "path": "/assets/skills/capitaoplaneta/poder-dos-aneis.png",
+          "sheet": "/assets/sheets/skills/pages/capitaoplaneta.png",
+          "row": 0,
+          "column": 0,
+          "cell": {
+            "x": 8,
+            "y": 8,
+            "width": 160,
+            "height": 160
+          },
+          "sourceCrop": {
+            "x": 0,
+            "y": 0,
+            "width": 160,
+            "height": 160
+          },
+          "placeholder": true
+        },
+        {
+          "id": "forca-da-natureza",
+          "character": "capitaoplaneta",
+          "name": "For\u00e7a da natureza",
+          "path": "/assets/skills/capitaoplaneta/forca-da-natureza.png",
+          "sheet": "/assets/sheets/skills/pages/capitaoplaneta.png",
+          "row": 0,
+          "column": 1,
+          "cell": {
+            "x": 176,
+            "y": 8,
+            "width": 160,
+            "height": 160
+          },
+          "sourceCrop": {
+            "x": 0,
+            "y": 0,
+            "width": 160,
+            "height": 160
+          },
+          "placeholder": true
+        },
+        {
+          "id": "o-poder-e-de-voces",
+          "character": "capitaoplaneta",
+          "name": "O poder \u00e9 de voc\u00eas",
+          "path": "/assets/skills/capitaoplaneta/o-poder-e-de-voces.png",
+          "sheet": "/assets/sheets/skills/pages/capitaoplaneta.png",
+          "row": 0,
+          "column": 2,
+          "cell": {
+            "x": 344,
+            "y": 8,
+            "width": 160,
+            "height": 160
+          },
+          "sourceCrop": {
+            "x": 0,
+            "y": 0,
+            "width": 160,
+            "height": 160
+          },
+          "placeholder": true
+        }
+      ],
+      "placeholder": true
+    },
+    {
+      "character": "bugiganga",
+      "sourceSheet": "/assets/sheets/skills/pages/bugiganga.png",
+      "sheet": "/assets/sheets/skills/pages/bugiganga.png",
+      "sourceResolution": [
+        512,
+        176
+      ],
+      "category": "skills",
+      "format": "PNG RGBA",
+      "resolution": [
+        512,
+        176
+      ],
+      "columns": 3,
+      "rows": 1,
+      "cell": [
+        160,
+        160
+      ],
+      "gutter": 8,
+      "margin": 8,
+      "icons": [
+        {
+          "id": "braco-extensivel",
+          "character": "bugiganga",
+          "name": "Bra\u00e7o extens\u00edvel",
+          "path": "/assets/skills/bugiganga/braco-extensivel.png",
+          "sheet": "/assets/sheets/skills/pages/bugiganga.png",
+          "row": 0,
+          "column": 0,
+          "cell": {
+            "x": 8,
+            "y": 8,
+            "width": 160,
+            "height": 160
+          },
+          "sourceCrop": {
+            "x": 0,
+            "y": 0,
+            "width": 160,
+            "height": 160
+          },
+          "placeholder": true
+        },
+        {
+          "id": "helicoptero-de-chapeu",
+          "character": "bugiganga",
+          "name": "Helic\u00f3ptero de chap\u00e9u",
+          "path": "/assets/skills/bugiganga/helicoptero-de-chapeu.png",
+          "sheet": "/assets/sheets/skills/pages/bugiganga.png",
+          "row": 0,
+          "column": 1,
+          "cell": {
+            "x": 176,
+            "y": 8,
+            "width": 160,
+            "height": 160
+          },
+          "sourceCrop": {
+            "x": 0,
+            "y": 0,
+            "width": 160,
+            "height": 160
+          },
+          "placeholder": true
+        },
+        {
+          "id": "vai-bugiganga",
+          "character": "bugiganga",
+          "name": "Vai, Bugiganga!",
+          "path": "/assets/skills/bugiganga/vai-bugiganga.png",
+          "sheet": "/assets/sheets/skills/pages/bugiganga.png",
+          "row": 0,
+          "column": 2,
+          "cell": {
+            "x": 344,
+            "y": 8,
+            "width": 160,
+            "height": 160
+          },
+          "sourceCrop": {
+            "x": 0,
+            "y": 0,
+            "width": 160,
+            "height": 160
+          },
+          "placeholder": true
+        }
+      ],
+      "placeholder": true
+    },
+    {
+      "character": "dannyphantom",
+      "sourceSheet": "/assets/sheets/skills/pages/dannyphantom.png",
+      "sheet": "/assets/sheets/skills/pages/dannyphantom.png",
+      "sourceResolution": [
+        512,
+        176
+      ],
+      "category": "skills",
+      "format": "PNG RGBA",
+      "resolution": [
+        512,
+        176
+      ],
+      "columns": 3,
+      "rows": 1,
+      "cell": [
+        160,
+        160
+      ],
+      "gutter": 8,
+      "margin": 8,
+      "icons": [
+        {
+          "id": "forma-fantasma",
+          "character": "dannyphantom",
+          "name": "Forma fantasma",
+          "path": "/assets/skills/dannyphantom/forma-fantasma.png",
+          "sheet": "/assets/sheets/skills/pages/dannyphantom.png",
+          "row": 0,
+          "column": 0,
+          "cell": {
+            "x": 8,
+            "y": 8,
+            "width": 160,
+            "height": 160
+          },
+          "sourceCrop": {
+            "x": 0,
+            "y": 0,
+            "width": 160,
+            "height": 160
+          },
+          "placeholder": true
+        },
+        {
+          "id": "intangibilidade",
+          "character": "dannyphantom",
+          "name": "Intangibilidade",
+          "path": "/assets/skills/dannyphantom/intangibilidade.png",
+          "sheet": "/assets/sheets/skills/pages/dannyphantom.png",
+          "row": 0,
+          "column": 1,
+          "cell": {
+            "x": 176,
+            "y": 8,
+            "width": 160,
+            "height": 160
+          },
+          "sourceCrop": {
+            "x": 0,
+            "y": 0,
+            "width": 160,
+            "height": 160
+          },
+          "placeholder": true
+        },
+        {
+          "id": "lamento-fantasma",
+          "character": "dannyphantom",
+          "name": "Lamento fantasma",
+          "path": "/assets/skills/dannyphantom/lamento-fantasma.png",
+          "sheet": "/assets/sheets/skills/pages/dannyphantom.png",
+          "row": 0,
+          "column": 2,
+          "cell": {
+            "x": 344,
+            "y": 8,
+            "width": 160,
+            "height": 160
+          },
+          "sourceCrop": {
+            "x": 0,
+            "y": 0,
+            "width": 160,
+            "height": 160
+          },
+          "placeholder": true
+        }
+      ],
+      "placeholder": true
+    },
+    {
+      "character": "coragem",
+      "sourceSheet": "/assets/sheets/skills/pages/coragem.png",
+      "sheet": "/assets/sheets/skills/pages/coragem.png",
+      "sourceResolution": [
+        512,
+        176
+      ],
+      "category": "skills",
+      "format": "PNG RGBA",
+      "resolution": [
+        512,
+        176
+      ],
+      "columns": 3,
+      "rows": 1,
+      "cell": [
+        160,
+        160
+      ],
+      "gutter": 8,
+      "margin": 8,
+      "icons": [
+        {
+          "id": "grito-de-pavor",
+          "character": "coragem",
+          "name": "Grito de pavor",
+          "path": "/assets/skills/coragem/grito-de-pavor.png",
+          "sheet": "/assets/sheets/skills/pages/coragem.png",
+          "row": 0,
+          "column": 0,
+          "cell": {
+            "x": 8,
+            "y": 8,
+            "width": 160,
+            "height": 160
+          },
+          "sourceCrop": {
+            "x": 0,
+            "y": 0,
+            "width": 160,
+            "height": 160
+          },
+          "placeholder": true
+        },
+        {
+          "id": "correr-para-o-perigo",
+          "character": "coragem",
+          "name": "Correr para o perigo",
+          "path": "/assets/skills/coragem/correr-para-o-perigo.png",
+          "sheet": "/assets/sheets/skills/pages/coragem.png",
+          "row": 0,
+          "column": 1,
+          "cell": {
+            "x": 176,
+            "y": 8,
+            "width": 160,
+            "height": 160
+          },
+          "sourceCrop": {
+            "x": 0,
+            "y": 0,
+            "width": 160,
+            "height": 160
+          },
+          "placeholder": true
+        },
+        {
+          "id": "salvar-mesmo-assim",
+          "character": "coragem",
+          "name": "Salvar mesmo assim",
+          "path": "/assets/skills/coragem/salvar-mesmo-assim.png",
+          "sheet": "/assets/sheets/skills/pages/coragem.png",
           "row": 0,
           "column": 2,
           "cell": {

@@ -4,7 +4,7 @@ import {expandedCharacters,rosterDesignQuestions,rosterIdentityReviewGroups} fro
 import type {Effect} from '../src/engine/types';
 
 /** O tamanho atual do catálogo. Sobe a cada lote até 250. */
-const TOTAL=220;
+const TOTAL=250;
 
 describe('catálogo competitivo de personagens',()=>{
   /*
@@ -127,5 +127,30 @@ describe('identidade visual do catálogo',()=>{
 
   it('toda cor é um hexadecimal de seis dígitos',()=>{
     for(const c of characters)expect(c.color,`${c.name}`).toMatch(/^#[0-9a-f]{6}$/i);
+  });
+});
+
+/*
+ * O contrato final do roster: exatamente 250.
+ *
+ * É o número que a direção fixou, e ele vale como contrato e não como meta.
+ * Qualquer personagem a mais ou a menos falha aqui antes de chegar ao jogo.
+ */
+describe('o catálogo fechado',()=>{
+  it('tem exatamente 250 personagens, sem id, nome ou cor repetidos',()=>{
+    expect(characters).toHaveLength(250);
+    expect(new Set(characters.map(c=>c.id)).size).toBe(250);
+    expect(new Set(characters.map(c=>c.name.toLocaleLowerCase())).size).toBe(250);
+    expect(new Set(characters.map(c=>c.color.toLowerCase())).size).toBe(250);
+  });
+
+  it('nenhum personagem foi substituído ou removido da lista aprovada',()=>{
+    /* Âncoras: os três que a direção nomeou por escrito, e os limites. */
+    const ids=new Set(characters.map(c=>c.id));
+    for(const id of ['goku','saitama','storm','cloud','subzero','aiolia','hellboy','patolino','coragem'])
+      expect(ids.has(id),`${id} sumiu do catálogo`).toBe(true);
+    /* E os que a direção excluiu desta versão. */
+    for(const id of ['rengoku','gyutaro','akaza'])
+      expect(ids.has(id),`${id} não deveria estar nesta versão`).toBe(false);
   });
 });
