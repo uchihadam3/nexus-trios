@@ -1,0 +1,276 @@
+{
+  "personagens": 250,
+  "sementesPorPersonagem": 20,
+  "paresComparados": 31125,
+  "limiteDeSemelhanca": 0.08,
+  "paresProximos": [],
+  "maisProximos": [
+    {
+      "a": "Aquaman",
+      "b": "Eric Cartman",
+      "distancia": 0.0822
+    },
+    {
+      "a": "Jin Kazama",
+      "b": "Iroh",
+      "distancia": 0.0845
+    },
+    {
+      "a": "Tifa Lockhart",
+      "b": "Chun-Li",
+      "distancia": 0.0851
+    },
+    {
+      "a": "Samus Aran",
+      "b": "Buzz Lightyear",
+      "distancia": 0.0939
+    },
+    {
+      "a": "Shaka de Virgem",
+      "b": "Bill Cipher",
+      "distancia": 0.0943
+    },
+    {
+      "a": "Cloud Strife",
+      "b": "Yusuke Urameshi",
+      "distancia": 0.1024
+    },
+    {
+      "a": "Jin Kazama",
+      "b": "Garou",
+      "distancia": 0.1061
+    },
+    {
+      "a": "Kurapika",
+      "b": "Makima",
+      "distancia": 0.1067
+    },
+    {
+      "a": "Kazuya Mishima",
+      "b": "Seiya",
+      "distancia": 0.1148
+    },
+    {
+      "a": "Cloud Strife",
+      "b": "Popeye",
+      "distancia": 0.115
+    },
+    {
+      "a": "Kakashi Hatake",
+      "b": "Lex Luthor",
+      "distancia": 0.1166
+    },
+    {
+      "a": "Ken Kaneki",
+      "b": "Venom",
+      "distancia": 0.1167
+    },
+    {
+      "a": "Popeye",
+      "b": "Homer Simpson",
+      "distancia": 0.122
+    },
+    {
+      "a": "Arlequina",
+      "b": "Peter Griffin",
+      "distancia": 0.122
+    },
+    {
+      "a": "Ganondorf",
+      "b": "Eric Cartman",
+      "distancia": 0.126
+    }
+  ],
+  "habilidadesMortas": [
+    {
+      "personagem": "Jean Grey",
+      "habilidade": "Fênix desperta",
+      "usos": 0,
+      "porLuta": 0
+    }
+  ],
+  "habilidadesRaras": [
+    {
+      "personagem": "Gojo",
+      "habilidade": "Vazio Infinito",
+      "usos": 1,
+      "porLuta": 0.05
+    },
+    {
+      "personagem": "Light Yagami",
+      "habilidade": "Death Note",
+      "usos": 1,
+      "porLuta": 0.05
+    },
+    {
+      "personagem": "Doutor Destino",
+      "habilidade": "Plano de contingência",
+      "usos": 1,
+      "porLuta": 0.05
+    },
+    {
+      "personagem": "Saga de Gêmeos",
+      "habilidade": "Outra Dimensão",
+      "usos": 1,
+      "porLuta": 0.05
+    },
+    {
+      "personagem": "Rick Sanchez",
+      "habilidade": "Pistola de portal",
+      "usos": 1,
+      "porLuta": 0.05
+    },
+    {
+      "personagem": "Rick Sanchez",
+      "habilidade": "Invenção improvisada",
+      "usos": 1,
+      "porLuta": 0.05
+    },
+    {
+      "personagem": "Rick Sanchez",
+      "habilidade": "Plano B",
+      "usos": 1,
+      "porLuta": 0.05
+    },
+    {
+      "personagem": "Saitama",
+      "habilidade": "Soco sério",
+      "usos": 2,
+      "porLuta": 0.1
+    },
+    {
+      "personagem": "Giorno Giovanna",
+      "habilidade": "Reflexo de dano",
+      "usos": 2,
+      "porLuta": 0.1
+    },
+    {
+      "personagem": "Leon S. Kennedy",
+      "habilidade": "Mira firme",
+      "usos": 2,
+      "porLuta": 0.1
+    },
+    {
+      "personagem": "Agente 47",
+      "habilidade": "Disfarce",
+      "usos": 2,
+      "porLuta": 0.1
+    },
+    {
+      "personagem": "Gordon Freeman",
+      "habilidade": "Zero-point",
+      "usos": 2,
+      "porLuta": 0.1
+    },
+    {
+      "personagem": "Pain",
+      "habilidade": "Caminho Deva",
+      "usos": 2,
+      "porLuta": 0.1
+    },
+    {
+      "personagem": "Constantine",
+      "habilidade": "Blefe infernal",
+      "usos": 2,
+      "porLuta": 0.1
+    },
+    {
+      "personagem": "Gojo",
+      "habilidade": "Vermelho",
+      "usos": 3,
+      "porLuta": 0.15
+    },
+    {
+      "personagem": "Thanos",
+      "habilidade": "Equilíbrio",
+      "usos": 3,
+      "porLuta": 0.15
+    },
+    {
+      "personagem": "Griffith",
+      "habilidade": "Destino ascendente",
+      "usos": 3,
+      "porLuta": 0.15
+    },
+    {
+      "personagem": "Frieren",
+      "habilidade": "Análise de mana",
+      "usos": 3,
+      "porLuta": 0.15
+    },
+    {
+      "personagem": "Frieren",
+      "habilidade": "Magia preparada",
+      "usos": 3,
+      "porLuta": 0.15
+    },
+    {
+      "personagem": "Feiticeira Escarlate",
+      "habilidade": "Distorção do caos",
+      "usos": 3,
+      "porLuta": 0.15
+    },
+    {
+      "personagem": "Visão",
+      "habilidade": "Computação sintética",
+      "usos": 3,
+      "porLuta": 0.15
+    },
+    {
+      "personagem": "Ciclope",
+      "habilidade": "Rajada de contenção",
+      "usos": 3,
+      "porLuta": 0.15
+    },
+    {
+      "personagem": "Doutor Destino",
+      "habilidade": "Ritual latveriano",
+      "usos": 3,
+      "porLuta": 0.15
+    },
+    {
+      "personagem": "Ultron",
+      "habilidade": "Evolução autônoma",
+      "usos": 3,
+      "porLuta": 0.15
+    },
+    {
+      "personagem": "Mega Man",
+      "habilidade": "Carga máxima",
+      "usos": 3,
+      "porLuta": 0.15
+    },
+    {
+      "personagem": "Minato Namikaze",
+      "habilidade": "Marca voadora",
+      "usos": 3,
+      "porLuta": 0.15
+    },
+    {
+      "personagem": "Yusuke Urameshi",
+      "habilidade": "Shotgun",
+      "usos": 3,
+      "porLuta": 0.15
+    },
+    {
+      "personagem": "Constantine",
+      "habilidade": "Pacto",
+      "usos": 3,
+      "porLuta": 0.15
+    },
+    {
+      "personagem": "Patolino",
+      "habilidade": "Exijo atenção",
+      "usos": 3,
+      "porLuta": 0.15
+    },
+    {
+      "personagem": "Bill Cipher",
+      "habilidade": "Acordo",
+      "usos": 3,
+      "porLuta": 0.15
+    }
+  ],
+  "tracosMortos": [],
+  "controlePerpetuo": []
+}

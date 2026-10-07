@@ -57,6 +57,21 @@ export function targets(b:Battle,actor:Fighter,rule:Target,effects:Effect[]=[],r
   }
   return chooseTarget(b,actor,rule==='allyWeak'?allies:enemies,rule,intent,effects,record);
 }
+/*
+ * `gain` dá Carga. `trigger` dá Carga **e** dispara o traço.
+ *
+ * Quatro tópicos passavam só pelo `gain`: enemyHurt, winning, losing e
+ * survived. O tipo `Topic` permite declarar um traço em qualquer um deles, e a
+ * ficha mostrava o texto normalmente — mas o traço nunca acontecia. Catorze
+ * personagens tinham traço morto por isso, entre eles o "Anjo sem coração" do
+ * Sephiroth, o "Glory Kill" do Doom Slayer e o "Presença dominante" do
+ * Aquaman, que é dos 100 originais.
+ *
+ * Agora os quatro passam pelo `trigger`. O `traitTimer` já limita a
+ * frequência, e todos os traços afetados têm recarga de um segundo ou mais —
+ * então `survived`, `winning` e `losing`, que ocorrem a cada passo, não viram
+ * disparo a cada passo.
+ */
 function gain(b:Battle,f:Fighter,topic:Topic,amount:number,source?:Fighter){
   if(!alive(f))return;
   byId[f.characterId].skills.forEach((s,i)=>{
@@ -98,7 +113,7 @@ function damage(b:Battle,source:Fighter,target:Fighter,raw:number){
     if(beforeProtection>=hpBefore&&target.hp>0&&blocked>0)pressure(b,target.side,D.event.clutchSave);
     trigger(b,source,'dealt',source,dealt/100);
     trigger(b,target,'received',source,dealt/100);
-    for(const f of b.fighters){if(f.side===target.side&&f.uid!==target.uid)trigger(b,f,'allyHurt',target,dealt/100);if(f.side!==target.side)gain(b,f,'enemyHurt',dealt/100,source);}
+    for(const f of b.fighters){if(f.side===target.side&&f.uid!==target.uid)trigger(b,f,'allyHurt',target,dealt/100);if(f.side!==target.side)trigger(b,f,'enemyHurt',source,dealt/100);}
   }
   if(beforeProtection>target.maxHp*D.event.criticalThreshold/100&&alive(target)&&target.hp/target.maxHp<=D.event.criticalThreshold/100)pressure(b,source.side,D.event.criticalCrossing);
   if(!alive(target)){
@@ -274,8 +289,8 @@ export function stepBattle(b:Battle,observe?:(snapshot:Battle)=>void):Battle {
     resolve(b);if(b.finished){observe?.(b);return b;}
     f.statuses=f.statuses.filter(s=>s.remaining>0);f.shields.forEach(s=>s.remaining-=STEP);f.shields=f.shields.filter(s=>s.remaining>0&&s.amount>0);
     f.skills.forEach(s=>{s.cooldown=Math.max(0,s.cooldown-STEP);s.executing=Math.max(0,s.executing-STEP);});
-    trigger(b,f,'time',undefined,STEP);gain(b,f,'survived',STEP);
-    if(b.dominion*sign(f)<-3)gain(b,f,'losing',STEP);else if(b.dominion*sign(f)>3)gain(b,f,'winning',STEP);
+    trigger(b,f,'time',undefined,STEP);trigger(b,f,'survived',undefined,STEP);
+    if(b.dominion*sign(f)<-3)trigger(b,f,'losing',undefined,STEP);else if(b.dominion*sign(f)>3)trigger(b,f,'winning',undefined,STEP);
   }
   observe?.(b);
   for(const f of shuffle(b.fighters,b)){
