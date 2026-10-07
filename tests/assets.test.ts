@@ -86,8 +86,14 @@ describe('Arte local e composição',()=>{
     expect(sheetManifest.count).toBe(characters.length*3);
     expect(sheetManifest.pages).toHaveLength(characters.length);
     expect(sheetManifest.pages.every(page=>page.resolution[0]===512&&page.resolution[1]===176&&page.columns===3&&page.rows===1&&page.cell[0]===160&&page.cell[1]===160&&page.icons.length===3&&existsSync(new URL(page.sourceSheet.slice(1),root)))).toBe(true);
-    expect(sheetManifest.pages.slice(100).every(page=>!('placeholder' in page)&&'artMethod' in page)).toBe(true);
-    expect(manifest.skills.slice(300).every(skill=>!('placeholder' in skill)&&'artMethod' in skill)).toBe(true);
+    const expanded=manifest.skills.slice(300) as (typeof manifest.skills[number]&{artMethod:string})[];
+    expect(expanded.filter(skill=>skill.artMethod==='AI sheet')).toHaveLength(447);
+    expect(expanded.filter(skill=>skill.artMethod==='object illustration')).toHaveLength(3);
+    expect(expanded.every(skill=>!('placeholder' in skill)&&['AI sheet','object illustration'].includes(skill.artMethod))).toBe(true);
+    expect(sheetManifest.pages.slice(100).every(page=>!('placeholder' in page))).toBe(true);
+    for(const character of characters.slice(100).filter(character=>character.id!=='mario')){
+      expect(existsSync(new URL(`../assets/ai-source/skills/${character.id}.png`,root)),character.id).toBe(true);
+    }
   });
   it('mantém ícones universais próprios para todos os 14 estados e remove glifos emoji antigos',()=>{
     expect(Object.keys(statuses)).toHaveLength(14);

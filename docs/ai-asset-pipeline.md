@@ -2,7 +2,9 @@
 
 ## Exportação
 
-Execute `npm run assets:expanded` para reconstruir as 450 imagens dos 150 personagens adicionados. O script `scripts/create-expanded-skill-art.py` usa primeiro a folha de IA transparente em `assets/ai-source/skills/<personagem>.png`; nos outros casos cria uma composição exclusiva por habilidade a partir da arte detalhada do catálogo original, combinando o nome, os efeitos e a paleta do personagem. As 300 imagens originais ficam intactas. O resultado inclui ícones PNG RGBA de 128 × 128, folhas e manifestos atualizados. Pillow é necessário.
+Execute `npm run assets:expanded` para reconstruir as 450 imagens dos 150 personagens adicionados. Cada um dos 149 personagens com fonte de IA tem uma folha transparente exclusiva em `assets/ai-source/skills/<personagem>.png`, com três ilustrações próprias; as três habilidades de Mario usam ilustrações originais de objetos feitas no script. Se faltar uma folha, o build falha em vez de reaproveitar imagens de outro personagem. As 300 imagens dos personagens originais ficam intactas. O resultado inclui ícones PNG RGBA de 128 × 128, folhas e manifestos atualizados. Pillow é necessário.
+
+`scripts/split-skill-grid.py <imagem> <personagem-1> ...` recorta uma folha gerada com três colunas e uma linha por personagem em fontes separadas de 768 × 256 pixels.
 
 `npm run assets:pack` é o empacotador integral para quando as 250 folhas fonte de IA estiverem disponíveis; ele exige uma folha fonte para cada personagem. As fontes já recebidas dos personagens novos são mantidas fora de `public/`.
 

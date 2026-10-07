@@ -9216,10 +9216,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "tiro-de-flanco",
@@ -9242,12 +9242,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "cqc-decisivo",
@@ -9270,12 +9270,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "modo-lamina",
@@ -9300,10 +9300,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 724,
+        "height": 724
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "corte-em-sequencia",
@@ -9326,12 +9326,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 724,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 724,
+        "height": 724
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "zandatsu",
@@ -9354,12 +9354,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 1448,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 724,
+        "height": 724
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "mira-firme",
@@ -9384,10 +9384,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "tiro-na-cabeca",
@@ -9410,12 +9410,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "faca-de-combate",
@@ -9438,12 +9438,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "kit-de-primeiros-socorros",
@@ -9468,10 +9468,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 724,
+        "height": 724
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "cobertura-tatica",
@@ -9494,12 +9494,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 724,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 724,
+        "height": 724
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "resistencia-adquirida",
@@ -9522,12 +9522,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 1448,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 724,
+        "height": 724
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "deslocamento",
@@ -9552,10 +9552,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 724,
+        "height": 724
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "golpe-cruzado",
@@ -9578,12 +9578,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 724,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 724,
+        "height": 724
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "supremacia",
@@ -9606,12 +9606,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 1448,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 724,
+        "height": 724
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "arco-recurvo",
@@ -9636,10 +9636,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 724,
+        "height": 724
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "armadilha-de-cabo",
@@ -9662,12 +9662,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 724,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 724,
+        "height": 724
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "tiro-perfeito",
@@ -9690,12 +9690,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 1448,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 724,
+        "height": 724
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "multidao",
@@ -9720,10 +9720,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 724,
+        "height": 724
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "lamina-oculta",
@@ -9746,12 +9746,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 724,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 724,
+        "height": 724
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "execucao-em-cadeia",
@@ -9774,12 +9774,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 1448,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 724,
+        "height": 724
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "spin-dash",
@@ -9888,10 +9888,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 724,
+        "height": 724
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "chaos-control",
@@ -9914,12 +9914,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 724,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 724,
+        "height": 724
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "lanca-das-esmeraldas",
@@ -9942,12 +9942,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 1448,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 724,
+        "height": 724
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "mega-buster",
@@ -9972,10 +9972,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 724,
+        "height": 724
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "arma-adquirida",
@@ -9998,12 +9998,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 724,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 724,
+        "height": 724
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "carga-maxima",
@@ -10026,12 +10026,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 1448,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 724,
+        "height": 724
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "z-saber",
@@ -10056,10 +10056,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 724,
+        "height": 724
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "raikousen",
@@ -10082,12 +10082,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 724,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 724,
+        "height": 724
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "sequencia-final",
@@ -10110,12 +10110,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 1448,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 724,
+        "height": 724
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "pulo-certeiro",
@@ -10224,10 +10224,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "sopro-flamejante",
@@ -10250,12 +10250,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "tremor-do-rei",
@@ -10278,12 +10278,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "hadouken",
@@ -10392,10 +10392,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 724,
+        "height": 724
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "spinning-bird-kick",
@@ -10418,12 +10418,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 724,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 724,
+        "height": 724
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "kikosho",
@@ -10446,12 +10446,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 1448,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 724,
+        "height": 724
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "gou-hadouken",
@@ -10476,10 +10476,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 724,
+        "height": 724
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "ashura-senku",
@@ -10502,12 +10502,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 724,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 724,
+        "height": 724
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "shun-goku-satsu",
@@ -10530,12 +10530,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 1448,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 724,
+        "height": 724
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "corrente-em-chamas",
@@ -10644,10 +10644,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "clone-congelado",
@@ -10670,12 +10670,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "inverno-absoluto",
@@ -10698,12 +10698,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "chute-voador",
@@ -10728,10 +10728,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "bola-de-fogo",
@@ -10754,12 +10754,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "dragao-flamejante",
@@ -10782,12 +10782,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "raio-celeste",
@@ -10812,10 +10812,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "barreira-eletrica",
@@ -10838,12 +10838,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "trovao-dos-deuses",
@@ -10866,12 +10866,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "postura-mishima",
@@ -10896,10 +10896,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "contra-ataque",
@@ -10922,12 +10922,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "gene-do-diabo",
@@ -10950,12 +10950,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "pisao-demoniaco",
@@ -10980,10 +10980,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "raio-do-diabo",
@@ -11006,12 +11006,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "forma-devil",
@@ -11034,12 +11034,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "chave-espada",
@@ -11064,10 +11064,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "cura",
@@ -11090,12 +11090,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "forma-final",
@@ -11118,12 +11118,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "lamina-virtuosa",
@@ -11148,10 +11148,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "apoio-do-pod",
@@ -11174,12 +11174,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "modo-berserk",
@@ -11202,12 +11202,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "deflexao",
@@ -11232,10 +11232,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "mikiri",
@@ -11258,12 +11258,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "golpe-mortal",
@@ -11286,12 +11286,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "lamina-protetica",
@@ -11316,10 +11316,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "danca-aquatica",
@@ -11342,12 +11342,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "flor-escarlate",
@@ -11370,12 +11370,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "disfarce",
@@ -11400,10 +11400,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "garrote",
@@ -11426,12 +11426,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "tiro-planejado",
@@ -11454,12 +11454,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "ceifadora-de-almas",
@@ -11484,10 +11484,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "erguer-os-mortos",
@@ -11510,12 +11510,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "praga-da-carne",
@@ -11538,12 +11538,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "sinal-de-quen",
@@ -11568,10 +11568,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "sinal-de-igni",
@@ -11594,12 +11594,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "sinal-de-axii",
@@ -11622,12 +11622,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "cortador-de-plasma",
@@ -11652,10 +11652,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "estase",
@@ -11678,12 +11678,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "desmembramento",
@@ -11706,12 +11706,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "pe-de-cabra",
@@ -11736,10 +11736,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "manipulador-gravitacional",
@@ -11762,12 +11762,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "zero-point",
@@ -11790,12 +11790,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "lamina-do-dragao",
@@ -11820,10 +11820,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "arte-do-vento",
@@ -11846,12 +11846,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "izuna-otoshi",
@@ -11874,12 +11874,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "grande-faca",
@@ -11904,10 +11904,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "presenca-opressiva",
@@ -11930,12 +11930,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "sentenca",
@@ -11958,12 +11958,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "inalar",
@@ -11988,10 +11988,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "copia-de-poder",
@@ -12014,12 +12014,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "super-inalacao",
@@ -12042,12 +12042,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "soco-giratorio",
@@ -12072,10 +12072,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "barril-arremessado",
@@ -12098,12 +12098,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "batida-do-gorila",
@@ -12126,12 +12126,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "chicote-vampire-killer",
@@ -12156,10 +12156,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "agua-benta",
@@ -12182,12 +12182,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "cruz-arremessada",
@@ -12210,12 +12210,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "adaga-do-tempo",
@@ -12240,10 +12240,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "rebobinar",
@@ -12266,12 +12266,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "tempestade-de-areia",
@@ -12294,12 +12294,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "espada-alucard",
@@ -12324,10 +12324,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "forma-de-nevoa",
@@ -12350,12 +12350,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "ataque-da-alma",
@@ -12378,12 +12378,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "meteoro-de-pegaso",
@@ -12408,10 +12408,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "cosmo-ardente",
@@ -12434,12 +12434,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "cometa-de-pegaso",
@@ -12462,12 +12462,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "raio-de-doce",
@@ -12492,10 +12492,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "absorcao",
@@ -12518,12 +12518,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "regeneracao-total",
@@ -12546,12 +12546,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "kienzan",
@@ -12576,10 +12576,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "taiyoken",
@@ -12602,12 +12602,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "kamehameha",
@@ -12630,12 +12630,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "escudo-do-dragao",
@@ -12660,10 +12660,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "colera-do-dragao",
@@ -12686,12 +12686,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "ultimo-dragao",
@@ -12714,12 +12714,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "po-de-diamante",
@@ -12744,10 +12744,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "execucao-aurora",
@@ -12770,12 +12770,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "zero-absoluto",
@@ -12798,12 +12798,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "corrente-nebular",
@@ -12828,10 +12828,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "tempestade-nebular",
@@ -12854,12 +12854,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "corrente-de-defesa",
@@ -12882,12 +12882,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "ave-fenix",
@@ -12912,10 +12912,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "golpe-fantasma",
@@ -12938,12 +12938,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "renascimento",
@@ -12966,12 +12966,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "explosao-galactica",
@@ -12996,10 +12996,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "outra-dimensao",
@@ -13022,12 +13022,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "sata-imperial",
@@ -13050,12 +13050,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "tesouro-do-ceu",
@@ -13080,10 +13080,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "todo-poderoso",
@@ -13106,12 +13106,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "rendicao-dos-seis-mundos",
@@ -13134,12 +13134,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "relampago-de-plasma",
@@ -13164,10 +13164,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "velocidade-da-luz",
@@ -13190,12 +13190,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "rugido-do-leao",
@@ -13218,12 +13218,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "po-de-diamante",
@@ -13248,10 +13248,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "circulo-polar",
@@ -13274,12 +13274,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "execucao-aurora",
@@ -13302,12 +13302,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "elisios",
@@ -13332,10 +13332,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "sono-eterno",
@@ -13358,12 +13358,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "juizo-dos-mortos",
@@ -13386,12 +13386,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "susanoo-perfeito",
@@ -13500,10 +13500,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "shinra-tensei",
@@ -13526,12 +13526,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "chibaku-tensei",
@@ -13554,12 +13554,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "hiraishin",
@@ -13584,10 +13584,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "rasengan",
@@ -13610,12 +13610,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "marca-voadora",
@@ -13638,12 +13638,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "defesa-absoluta",
@@ -13668,10 +13668,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "caixao-de-areia",
@@ -13694,12 +13694,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "funeral-do-deserto",
@@ -13722,12 +13722,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "espada-do-futuro",
@@ -13752,10 +13752,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "burning-attack",
@@ -13778,12 +13778,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "corte-final",
@@ -13806,12 +13806,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "absorcao",
@@ -13836,10 +13836,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "kamehameha-solar",
@@ -13862,12 +13862,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "forma-perfeita",
@@ -13890,12 +13890,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "eraser-cannon",
@@ -13920,10 +13920,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "furia-lendaria",
@@ -13946,12 +13946,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "gigantic-roar",
@@ -13974,12 +13974,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "hakai",
@@ -14004,10 +14004,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "esfera-da-destruicao",
@@ -14030,12 +14030,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "ira-do-deus",
@@ -14058,12 +14058,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "psiquico",
@@ -14172,10 +14172,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "garra-de-dragao",
@@ -14198,12 +14198,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "explosao-de-fogo",
@@ -14226,12 +14226,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "fluxo-de-agua",
@@ -14256,10 +14256,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "contra-fluxo",
@@ -14282,12 +14282,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "cacador-de-herois",
@@ -14310,12 +14310,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "canhao-incinerador",
@@ -14340,10 +14340,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "rajada-de-misseis",
@@ -14366,12 +14366,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "sobrecarga",
@@ -14394,12 +14394,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "soco-espiritual",
@@ -14424,10 +14424,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "reigun",
@@ -14450,12 +14450,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "shotgun",
@@ -14478,12 +14478,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "espada-de-fogo",
@@ -14508,10 +14508,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "jagan",
@@ -14534,12 +14534,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "dragao-das-trevas",
@@ -14562,12 +14562,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "tiara-lunar",
@@ -14592,10 +14592,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "cura-lunar",
@@ -14618,12 +14618,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "cristal-de-prata",
@@ -14646,12 +14646,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "gas-do-riso",
@@ -14676,10 +14676,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "carta-marcada",
@@ -14702,12 +14702,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "piada-final",
@@ -14730,12 +14730,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "marreta",
@@ -14760,10 +14760,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "pirueta",
@@ -14786,12 +14786,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "surpresa-explosiva",
@@ -14814,12 +14814,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "feixe-omega",
@@ -14844,10 +14844,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "punho-do-tirano",
@@ -14870,12 +14870,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "equacao-anti-vida",
@@ -14898,12 +14898,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "armadura-de-guerra",
@@ -14928,10 +14928,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "kryptonita",
@@ -14954,12 +14954,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "plano-calculado",
@@ -14982,12 +14982,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "correntes-necroplasmicas",
@@ -15012,10 +15012,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "capa-viva",
@@ -15038,12 +15038,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "fogo-do-inferno",
@@ -15066,12 +15066,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "soco-supersonico",
@@ -15096,10 +15096,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "investida-orbital",
@@ -15122,12 +15122,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "levantar-de-novo",
@@ -15150,12 +15150,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "golpe-viltrumita",
@@ -15180,10 +15180,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "voo-de-impacto",
@@ -15206,12 +15206,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "sem-piedade",
@@ -15234,12 +15234,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "katanas-gemeas",
@@ -15264,10 +15264,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "formacao",
@@ -15290,12 +15290,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "investida-do-lider",
@@ -15318,12 +15318,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "sais-gemeos",
@@ -15348,10 +15348,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "investida-furiosa",
@@ -15374,12 +15374,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "sem-recuo",
@@ -15402,12 +15402,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "bastao-bo",
@@ -15432,10 +15432,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "dispositivo-tatico",
@@ -15458,12 +15458,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "campo-de-contencao",
@@ -15486,12 +15486,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "nunchakus",
@@ -15516,10 +15516,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "giro-maluco",
@@ -15542,12 +15542,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "festa-surpresa",
@@ -15570,12 +15570,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "pacto",
@@ -15600,10 +15600,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "exorcismo",
@@ -15626,12 +15626,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "blefe-infernal",
@@ -15654,12 +15654,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "mao-da-perdicao",
@@ -15684,10 +15684,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "teimosia",
@@ -15710,12 +15710,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "pancada-final",
@@ -15738,12 +15738,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "risada-irritante",
@@ -15768,10 +15768,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "bicada",
@@ -15794,12 +15794,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "confusao-total",
@@ -15822,12 +15822,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "buraco-de-coelho",
@@ -15852,10 +15852,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "disfarce",
@@ -15878,12 +15878,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "que-tal-doutor",
@@ -15906,12 +15906,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "quatro-bracos",
@@ -15936,10 +15936,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "chama",
@@ -15962,12 +15962,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "xlr8",
@@ -15990,12 +15990,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "rajada-de-ar",
@@ -16104,10 +16104,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "postura-serena",
@@ -16130,12 +16130,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "corte-decisivo",
@@ -16158,12 +16158,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "espada-do-poder",
@@ -16188,10 +16188,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "eu-tenho-a-forca",
@@ -16214,12 +16214,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "golpe-de-grayskull",
@@ -16242,12 +16242,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "soco-de-marinheiro",
@@ -16272,10 +16272,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "lata-de-espinafre",
@@ -16298,12 +16298,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "furacao-de-socos",
@@ -16326,12 +16326,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "escudo-de-energon",
@@ -16440,10 +16440,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "sanduiche-gigante",
@@ -16466,12 +16466,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "correria",
@@ -16494,12 +16494,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "absorver",
@@ -16524,10 +16524,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "espremer",
@@ -16550,12 +16550,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "karate-de-sandy",
@@ -16578,12 +16578,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "tropeco",
@@ -16608,10 +16608,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "biscoito-scooby",
@@ -16634,12 +16634,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "sorte-de-cachorro",
@@ -16662,12 +16662,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "pistola-de-portal",
@@ -16692,10 +16692,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "invencao-improvisada",
@@ -16718,12 +16718,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "plano-b",
@@ -16746,12 +16746,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "espada-de-sangue",
@@ -16776,10 +16776,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "punho-heroico",
@@ -16802,12 +16802,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "matematico",
@@ -16830,12 +16830,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "canhao-de-fusao",
@@ -16860,10 +16860,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "dominio-decepticon",
@@ -16886,12 +16886,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "rendicao",
@@ -16914,12 +16914,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "soco-relampago",
@@ -16944,10 +16944,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "sequencia-furiosa",
@@ -16970,12 +16970,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "explosao-verde",
@@ -16998,12 +16998,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "chapeu-de-feiticeiro",
@@ -17028,10 +17028,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "vassouras-encantadas",
@@ -17054,12 +17054,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "alegria-contagiante",
@@ -17082,12 +17082,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "ataque-de-furia",
@@ -17112,10 +17112,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "grito-indignado",
@@ -17138,12 +17138,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "explosao-de-raiva",
@@ -17166,12 +17166,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "tropecao",
@@ -17196,10 +17196,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "ai-ai-ai",
@@ -17222,12 +17222,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "acidente-feliz",
@@ -17250,12 +17250,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "quatro-bracos",
@@ -17280,10 +17280,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "mordida",
@@ -17306,12 +17306,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "experimento-626",
@@ -17334,12 +17334,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "laser-do-braco",
@@ -17364,10 +17364,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "modo-de-combate",
@@ -17390,12 +17390,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "ao-infinito",
@@ -17418,12 +17418,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "corda-puxada",
@@ -17448,10 +17448,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "plano-do-xerife",
@@ -17474,12 +17474,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "todos-juntos",
@@ -17502,12 +17502,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "forca-bruta",
@@ -17532,10 +17532,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "segurar-o-impacto",
@@ -17558,12 +17558,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "golpe-do-incrivel",
@@ -17586,12 +17586,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "alcance-elastico",
@@ -17616,10 +17616,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "escudo-flexivel",
@@ -17642,12 +17642,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "resgate",
@@ -17670,12 +17670,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "rampa-de-gelo",
@@ -17700,10 +17700,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "parede-congelada",
@@ -17726,12 +17726,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "onde-esta-meu-uniforme",
@@ -17754,12 +17754,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "dobra-de-fogo",
@@ -17784,10 +17784,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "dobra-de-terra",
@@ -17810,12 +17810,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "estado-avatar",
@@ -17838,12 +17838,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "chicote-de-fogo",
@@ -17952,10 +17952,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "relampago",
@@ -17978,12 +17978,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "precisao-cruel",
@@ -18006,12 +18006,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "visao-sismica",
@@ -18036,10 +18036,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "prisao-de-terra",
@@ -18062,12 +18062,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "metal-dobrado",
@@ -18090,12 +18090,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "respiracao-de-fogo",
@@ -18120,10 +18120,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "redirecionar",
@@ -18146,12 +18146,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "dragao-do-oeste",
@@ -18174,12 +18174,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "exijo-atencao",
@@ -18204,10 +18204,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "bico-afiado",
@@ -18230,12 +18230,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "desastre-anunciado",
@@ -18258,12 +18258,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "redemoinho",
@@ -18288,10 +18288,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "mastigar",
@@ -18314,12 +18314,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "fome-sem-fim",
@@ -18342,12 +18342,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "encomenda-acme",
@@ -18372,10 +18372,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "armadilha-montada",
@@ -18398,12 +18398,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "plano-infalivel",
@@ -18426,12 +18426,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "bip-bip",
@@ -18456,10 +18456,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "poeira-na-pista",
@@ -18482,12 +18482,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "velocidade-impossivel",
@@ -18510,12 +18510,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "modulador-illudium",
@@ -18540,10 +18540,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "mira-marciana",
@@ -18566,12 +18566,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "desintegracao",
@@ -18594,12 +18594,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "emboscada",
@@ -18624,10 +18624,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "perseguicao",
@@ -18650,12 +18650,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "pata-certeira",
@@ -18678,12 +18678,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "ratoeira-invertida",
@@ -18708,10 +18708,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "esconderijo",
@@ -18734,12 +18734,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "martelada",
@@ -18762,12 +18762,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "passo-silencioso",
@@ -18792,10 +18792,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "troca-discreta",
@@ -18818,12 +18818,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "sumico",
@@ -18846,12 +18846,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "garras-de-aco",
@@ -18876,10 +18876,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "investida-do-cla",
@@ -18902,12 +18902,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "golpe-do-mestre",
@@ -18930,12 +18930,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "postura-do-rato",
@@ -18960,10 +18960,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "redirecionar",
@@ -18986,12 +18986,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "licao-final",
@@ -19014,12 +19014,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "androide-de-combate",
@@ -19044,10 +19044,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "comando-remoto",
@@ -19070,12 +19070,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "dimensao-x",
@@ -19098,12 +19098,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "taco-de-hoquei",
@@ -19128,10 +19128,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "sequencia-bruta",
@@ -19154,12 +19154,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "goooool",
@@ -19182,12 +19182,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "investida-de-javali",
@@ -19212,10 +19212,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "pancada",
@@ -19238,12 +19238,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "atropelo",
@@ -19266,12 +19266,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "cajado-da-caveira",
@@ -19296,10 +19296,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "maldicao",
@@ -19322,12 +19322,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "dominio-de-snake-mountain",
@@ -19350,12 +19350,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "espada-protetora",
@@ -19380,10 +19380,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "pela-honra-de-grayskull",
@@ -19406,12 +19406,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "golpe-da-princesa",
@@ -19434,12 +19434,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "espada-de-augurio",
@@ -19464,10 +19464,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "visao-alem-do-alcance",
@@ -19490,12 +19490,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "thunder-thunder",
@@ -19518,12 +19518,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "bastao-giratorio",
@@ -19548,10 +19548,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "corrida-felina",
@@ -19574,12 +19574,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "golpe-certeiro",
@@ -19602,12 +19602,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "antigos-espiritos",
@@ -19632,10 +19632,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "forma-desperta",
@@ -19658,12 +19658,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "retorno-ao-sarcofago",
@@ -19686,12 +19686,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "barriga-de-aco",
@@ -19716,10 +19716,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "rosquinha",
@@ -19742,12 +19742,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "d-oh",
@@ -19770,12 +19770,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "estilingue",
@@ -19800,10 +19800,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "provocacao",
@@ -19826,12 +19826,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "travessura-maxima",
@@ -19854,12 +19854,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "briga-com-o-galo",
@@ -19884,10 +19884,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "ideia-terrivel",
@@ -19910,12 +19910,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "nhe-he-he",
@@ -19938,12 +19938,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "raio-de-controle",
@@ -19968,10 +19968,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "plano-mirabolante",
@@ -19994,12 +19994,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "dominacao-mundial",
@@ -20022,12 +20022,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "respeitem-minha-autoridade",
@@ -20052,10 +20052,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "chantagem",
@@ -20078,12 +20078,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "plano-egoista",
@@ -20106,12 +20106,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "acordo",
@@ -20136,10 +20136,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "realidade-invertida",
@@ -20162,12 +20162,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "olho-que-tudo-ve",
@@ -20190,12 +20190,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "exercito-de-clones",
@@ -20220,10 +20220,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "plano-z",
@@ -20246,12 +20246,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "roubar-a-formula",
@@ -20274,12 +20274,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "robo-gigante",
@@ -20304,10 +20304,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "raio-adaptador",
@@ -20330,12 +20330,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "discurso-interminavel",
@@ -20358,12 +20358,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "poder-dos-aneis",
@@ -20388,10 +20388,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "forca-da-natureza",
@@ -20414,12 +20414,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "o-poder-e-de-voces",
@@ -20442,12 +20442,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "braco-extensivel",
@@ -20472,10 +20472,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "helicoptero-de-chapeu",
@@ -20498,12 +20498,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "vai-bugiganga",
@@ -20526,12 +20526,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "forma-fantasma",
@@ -20556,10 +20556,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "intangibilidade",
@@ -20582,12 +20582,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "lamento-fantasma",
@@ -20610,12 +20610,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "grito-de-pavor",
@@ -20640,10 +20640,10 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "correr-para-o-perigo",
@@ -20666,12 +20666,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 256,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     },
     {
       "id": "salvar-mesmo-assim",
@@ -20694,12 +20694,12 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 0,
+        "x": 512,
         "y": 0,
-        "width": 160,
-        "height": 160
+        "width": 256,
+        "height": 256
       },
-      "artMethod": "remixed combat art"
+      "artMethod": "AI sheet"
     }
   ]
 }

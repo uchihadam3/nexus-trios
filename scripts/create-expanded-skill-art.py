@@ -1,24 +1,18 @@
 #!/usr/bin/env python3
-"""Build transparent, per-skill art for the 150 expanded characters.
+"""Build original, transparent skill art for the 150 expanded characters.
 
-AI source strips in assets/ai-source/skills take precedence. Remaining art
-remixes the original detailed icons by move, effect and character palette.
+Each character requires its own AI source strip, except Mario's three original
+object illustrations. Missing sources fail the build rather than reusing art.
 The original 100 character sheets are never touched.
 """
 from __future__ import annotations
 
-import colorsys
-import hashlib
 import json
 import math
-import random
-import re
 import subprocess
-import unicodedata
-from functools import lru_cache
 from pathlib import Path
 
-from PIL import Image, ImageDraw, ImageFilter, ImageEnhance, ImageChops
+from PIL import Image, ImageDraw, ImageFilter
 
 ROOT = Path(__file__).resolve().parents[1]
 PUBLIC = ROOT / "public/assets"
@@ -34,117 +28,6 @@ def roster() -> list[dict]:
     result = subprocess.run(['node', '--import', 'tsx', '--input-type=module', '-e', code],
                             cwd=ROOT, check=True, capture_output=True, text=True)
     return json.loads(result.stdout)
-
-
-MOTIFS = [
-    ('sword', r'espada|lamina|lâmina|katana|corte|blade|slash|yamato|masamune|faca|sabre|omnislash|zandatsu|golpe giratorio'),
-    ('fist', r'soco|punho|punch|soco|boxe|cqc|chute|combo|marreta|impacto|golpe|fúria|furia'),
-    ('gun', r'tiro|arma|pistola|rifle|canhao|canhão|blaster|missil|míssil|bullet|bala|disparo|muni'),
-    ('arrow', r'flecha|arco|arrow|dardo|lança|lanca|spear|tridente'),
-    ('shield', r'escudo|prote|barreira|defesa|guarda|blindag|armadura|muralha'),
-    ('flame', r'fogo|chama|inferno|incendi|brasas|flame|fire|queima|caos'),
-    ('lightning', r'raio|relamp|relâmp|trov|electric|eletric|choque|thunder|tempest'),
-    ('ice', r'gelo|neve|frio|congel|ice|frost|cristal'),
-    ('eye', r'olho|mira|visão|visao|investig|analis|observ|leitura|mental|hipno'),
-    ('portal', r'portal|dimens|tempo|magia|selo|runa|dominio|domínio|ritual|invoc|feiti'),
-    ('chain', r'corrente|pris|amarra|teia|rede|captur|gancho|ancor|âncor|laço|laco'),
-    ('wing', r'asa|voo|voar|pena|anjo|angel|fênix|fenix|levita'),
-    ('skull', r'morte|veneno|tox|death|devor|sangue|necros|sentenca|sentença'),
-    ('heart', r'cura|curar|vida|regen|restaur|recuper|resgat|cuidado'),
-    ('flower', r'flor|raiz|planta|nature|árvore|arvore|espinho|vinha'),
-    ('crown', r'rei|rainha|trono|imper|deus|deusa|juizo|juízo|suprem'),
-    ('wave', r'onda|mar|água|agua|oceano|tsunami|vibra|sônico|sonico|som'),
-    ('book', r'livro|nota|carta|escrit|grimor|plano|estrateg'),
-    ('claw', r'garra|mord|dente|predat|fera|lobo|dragão|dragao'),
-    ('star', r'luz|estrela|solar|sol|raio de luz|brilho|sagrad'),
-]
-
-
-def motif_for(skill: dict) -> str:
-    words = f"{skill['name']} {skill['description']}".lower()
-    for motif, pattern in MOTIFS:
-        if re.search(pattern, words):
-            return motif
-    return {'beam': 'star', 'bolt': 'lightning', 'slash': 'sword',
-            'web': 'chain', 'shield': 'shield', 'wave': 'wave',
-            'psychic': 'portal', 'impact': 'fist'}.get(skill['icon'], 'star')
-
-
-def palette(base: str, motif: str) -> tuple[tuple[int, int, int], tuple[int, int, int]]:
-    r, g, b = (int(base[i:i+2], 16) for i in (1, 3, 5))
-    h, _, _ = colorsys.rgb_to_hsv(r/255, g/255, b/255)
-    favored = {'flame': .055, 'lightning': .55, 'ice': .54, 'heart': .37,
-               'flower': .33, 'skull': .78, 'shield': .47, 'star': .13,
-               'sword': .59, 'gun': .58, 'wave': .52}
-    h = (h * .48 + favored.get(motif, h) * .52) % 1
-    def rgb(hue: float, saturation: float, value: float):
-        return tuple(round(v * 255) for v in colorsys.hsv_to_rgb(hue % 1, saturation, value))
-    return rgb(h, .72, .93), rgb(h+.085, .43, 1)
-
-
-def words(value: str) -> set[str]:
-    plain=unicodedata.normalize('NFD',value.lower())
-    plain=''.join(ch for ch in plain if unicodedata.category(ch)!='Mn')
-    return {x for x in re.findall(r'[a-z]{4,}',plain) if x not in
-            {'para','sobre','quando','depois','antes','todos','todas','mais','tira','alvo','campo','trio','proprio','propria'}}
-
-
-def art_path(owner: dict, skill: dict) -> str:
-    plain=unicodedata.normalize('NFD',skill['id'].lower())
-    plain=''.join(ch for ch in plain if unicodedata.category(ch)!='Mn')
-    slug=re.sub(r'-+', '-', re.sub(r'[^a-z0-9-]+','-',plain)).strip('-')
-    return f"/assets/skills/{owner['id']}/{slug}.png"
-
-
-@lru_cache(maxsize=300)
-def original_icon(path: str) -> Image.Image:
-    return Image.open(PUBLIC/path.removeprefix('/assets/')).convert('RGBA')
-
-
-def remix(character: dict, skill: dict, index: int, originals: list[tuple[dict,dict]], used: dict[str,int]) -> Image.Image:
-    """Paint a new composition with an existing detailed combat texture as its core."""
-    motif=motif_for(skill);c,accent=palette(character['color'],motif)
-    seed=int.from_bytes(hashlib.sha256(f"{character['id']}:{skill['id']}".encode()).digest()[:8],'big')
-    rng=random.Random(seed);terms=words(skill['name']);all_terms=words(skill['name']+' '+skill['description'])
-    kinds={e['kind'] for e in skill['effects']}
-    statuses={e.get('status') for e in skill['effects'] if e['kind']=='status'}
-    def score(item: tuple[dict,dict]) -> float:
-        owner,other=item;path=art_path(owner,other)
-        other_terms=words(other['name']+' '+other['description'])
-        other_statuses={e.get('status') for e in other['effects'] if e['kind']=='status'}
-        return (20*(motif_for(other)==motif)+12*(other['icon']==skill['icon'])+
-                14*len(terms&words(other['name']))+3*len(all_terms&other_terms)+
-                6*len(statuses&other_statuses)+2*len(kinds&{e['kind'] for e in other['effects']})-
-                16*used.get(path,0)+rng.random()*1.2)
-    owner,match=max(originals,key=score)
-    path=art_path(owner,match);used[path]=used.get(path,0)+1
-    source=original_icon(path).copy()
-    tinted=Image.blend(source.convert('RGB'),Image.new('RGB',source.size,c),.12)
-    tinted=ImageEnhance.Contrast(tinted).enhance(1.12)
-    alpha=source.getchannel('A')
-    falloff=Image.new('L',source.size);fd=ImageDraw.Draw(falloff)
-    for y in range(SIZE):
-        for x in range(SIZE):
-            radius=math.hypot(x-63.5,y-63.5)
-            value=255 if radius<51 else round(255*max(0,min(1,(71-radius)/20)))
-            fd.point((x,y),fill=value)
-    tinted.putalpha(ImageChops.multiply(alpha,falloff))
-    scaled=tinted.resize((112,112),Image.Resampling.LANCZOS)
-    scaled=scaled.rotate(rng.randrange(-17,18),Image.Resampling.BICUBIC,expand=False)
-    art=Image.new('RGBA',(SIZE,SIZE));art.alpha_composite(scaled,(8,8))
-    glow=Image.new('RGBA',(SIZE,SIZE),(*c,0))
-    glow.putalpha(art.getchannel('A').filter(ImageFilter.GaussianBlur(5)).point(lambda n:int(n*.18) if n>25 else 0))
-    canvas=Image.new('RGBA',(SIZE,SIZE));canvas.alpha_composite(glow)
-    d=ImageDraw.Draw(canvas)
-    for j in range(2):
-        radius=rng.randrange(45,62);a=rng.randrange(0,360)
-        d.arc((64-radius,64-radius,64+radius,64+radius),a,a+rng.randrange(28,74),fill=(*accent,145),width=2)
-    for _ in range(9):
-        a=rng.random()*math.tau;r=rng.randrange(43,62)
-        x,y=64+r*math.cos(a),64+r*math.sin(a)
-        size=rng.choice((1,1,2));d.ellipse((x-size,y-size,x+size,y+size),fill=(*accent,rng.randrange(130,210)))
-    canvas.alpha_composite(art)
-    return canvas
 
 
 def jumping_flower_star(index: int) -> Image.Image:
@@ -205,19 +88,19 @@ def main() -> None:
     icons=json.loads(icon_path.read_text());sheets=json.loads(sheet_path.read_text())
     original={p['character'] for p in sheets['pages'] if not p.get('placeholder') and p['character'] in {c['id'] for c in characters[:100]}}
     assert len(original)==100, 'The original 100 AI sheets must remain intact.'
-    originals=[(c,s) for c in characters[:100] for s in c['skills']]
-    used:dict[str,int]={}
     skill_records={(item['character'],item['id']):item for item in icons['skills']}
     pages={page['character']:page for page in sheets['pages']}
     ai=0
     for c in characters[100:]:
         source=SOURCES/f"{c['id']}.png"
+        if not source.exists() and c['id']!='mario':
+            raise FileNotFoundError(f'Missing original AI art for {c["name"]}: {source}')
         source_size=Image.open(source).size if source.exists() else None
         if source_size: ai+=1
         sheet=Image.new('RGBA',(512,176))
         records=[]
         for col,skill in enumerate(c['skills']):
-            art=from_source(source,col) if source.exists() else jumping_flower_star(col) if c['id']=='mario' else remix(c,skill,col,originals,used)
+            art=from_source(source,col) if source.exists() else jumping_flower_star(col)
             assert art.getchannel('A').getpixel((0,0))==0
             target=PUBLIC/'skills'/c['id']/f"{skill['id']}.png"
             target.parent.mkdir(parents=True,exist_ok=True);art.save(target,optimize=True)
@@ -229,7 +112,7 @@ def main() -> None:
                     'crop':{'x':x,'y':MARGIN+(CELL-SIZE)//2,'width':SIZE,'height':SIZE},
                     'cell':{'x':MARGIN+col*(CELL+GUTTER),'y':MARGIN,'width':CELL,'height':CELL},
                     'sourceCrop':{'x':round(col*source_size[0]/3),'y':0,'width':round(source_size[0]/3),'height':source_size[1]} if source_size else {'x':0,'y':0,'width':CELL,'height':CELL},
-                    'artMethod':'AI sheet' if source.exists() else 'object illustration' if c['id']=='mario' else 'remixed combat art'}
+                    'artMethod':'AI sheet' if source.exists() else 'object illustration'}
             records.append(record);skill_records[(c['id'],skill['id'])]=record
         sheet_target=PUBLIC/'sheets/skills/pages'/f"{c['id']}.png"
         sheet.save(sheet_target,optimize=True)
@@ -238,7 +121,7 @@ def main() -> None:
                         'sourceResolution':list(source_size) if source_size else [512,176],
                         'category':'skills','format':'PNG RGBA','resolution':[512,176],
                         'columns':3,'rows':1,'cell':[CELL,CELL],'gutter':GUTTER,'margin':MARGIN,
-                        'icons':records,'artMethod':'AI sheet' if source.exists() else 'object illustration' if c['id']=='mario' else 'remixed combat art'}
+                        'icons':records,'artMethod':'AI sheet' if source.exists() else 'object illustration'}
     icons['skills']=[skill_records[(c['id'],s['id'])] for c in characters for s in c['skills']]
     icons['count']=len(icons['skills'])
     sheets['pages']=[pages[c['id']] for c in characters]
@@ -247,7 +130,8 @@ def main() -> None:
     icon_path.write_text(json.dumps(icons,ensure_ascii=False,indent=2)+'\n')
     sheet_path.write_text(json.dumps(sheets,ensure_ascii=False,indent=2)+'\n')
     objects=int(not (SOURCES/'mario.png').exists())
-    print(f'Built 150 character sheets / 450 distinct icons ({ai} new AI sheets, {objects} object sheet, {150-ai-objects} remixed sheets).')
+    assert ai==149 and objects==1
+    print(f'Built 150 character sheets / 450 original icons ({ai} AI sheets, {objects} illustrated object sheet).')
 
 
 if __name__=='__main__': main()
