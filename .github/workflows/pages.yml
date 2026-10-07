@@ -7,9 +7,20 @@ permissions:
   contents: read
   pages: write
   id-token: write
+# Deploy se enfileira; não se cancela.
+#
+# Com `cancel-in-progress: true`, cada push novo matava o deploy anterior no
+# meio. O pipeline aqui roda uma regressão de batalha em navegador antes de
+# publicar e leva vários minutos, então uma sequência de pushes deixava o site
+# parado no último commit que conseguiu terminar — enquanto o repositório já
+# estava bem à frente. Foi exatamente o que aconteceu: cinco commits
+# publicados, zero no ar.
+#
+# `false` faz a fila esperar em vez de cancelar. Um push a mais custa alguns
+# minutos de espera; um deploy cancelado custa a versão inteira.
 concurrency:
   group: github-pages
-  cancel-in-progress: true
+  cancel-in-progress: false
 jobs:
   build:
     runs-on: ubuntu-latest

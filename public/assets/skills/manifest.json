@@ -1,5 +1,5 @@
 {
-  "count": 480,
+  "count": 570,
   "skills": [
     {
       "id": "hipnose-completa",
@@ -10792,6 +10792,1356 @@
       "name": "Rendi\u00e7\u00e3o dos Seis Mundos",
       "path": "/assets/skills/shaka/rendicao-dos-seis-mundos.png",
       "sheet": "/assets/sheets/skills/pages/shaka.png",
+      "row": 0,
+      "column": 2,
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "relampago-de-plasma",
+      "character": "aiolia",
+      "name": "Rel\u00e2mpago de Plasma",
+      "path": "/assets/skills/aiolia/relampago-de-plasma.png",
+      "sheet": "/assets/sheets/skills/pages/aiolia.png",
+      "row": 0,
+      "column": 0,
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "velocidade-da-luz",
+      "character": "aiolia",
+      "name": "Velocidade da Luz",
+      "path": "/assets/skills/aiolia/velocidade-da-luz.png",
+      "sheet": "/assets/sheets/skills/pages/aiolia.png",
+      "row": 0,
+      "column": 1,
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "rugido-do-leao",
+      "character": "aiolia",
+      "name": "Rugido do Le\u00e3o",
+      "path": "/assets/skills/aiolia/rugido-do-leao.png",
+      "sheet": "/assets/sheets/skills/pages/aiolia.png",
+      "row": 0,
+      "column": 2,
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "po-de-diamante",
+      "character": "camus",
+      "name": "P\u00f3 de Diamante",
+      "path": "/assets/skills/camus/po-de-diamante.png",
+      "sheet": "/assets/sheets/skills/pages/camus.png",
+      "row": 0,
+      "column": 0,
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "circulo-polar",
+      "character": "camus",
+      "name": "C\u00edrculo Polar",
+      "path": "/assets/skills/camus/circulo-polar.png",
+      "sheet": "/assets/sheets/skills/pages/camus.png",
+      "row": 0,
+      "column": 1,
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "execucao-aurora",
+      "character": "camus",
+      "name": "Execu\u00e7\u00e3o Aurora",
+      "path": "/assets/skills/camus/execucao-aurora.png",
+      "sheet": "/assets/sheets/skills/pages/camus.png",
+      "row": 0,
+      "column": 2,
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "elisios",
+      "character": "hadescz",
+      "name": "El\u00edsios",
+      "path": "/assets/skills/hadescz/elisios.png",
+      "sheet": "/assets/sheets/skills/pages/hadescz.png",
+      "row": 0,
+      "column": 0,
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "sono-eterno",
+      "character": "hadescz",
+      "name": "Sono eterno",
+      "path": "/assets/skills/hadescz/sono-eterno.png",
+      "sheet": "/assets/sheets/skills/pages/hadescz.png",
+      "row": 0,
+      "column": 1,
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "juizo-dos-mortos",
+      "character": "hadescz",
+      "name": "Ju\u00edzo dos mortos",
+      "path": "/assets/skills/hadescz/juizo-dos-mortos.png",
+      "sheet": "/assets/sheets/skills/pages/hadescz.png",
+      "row": 0,
+      "column": 2,
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "susanoo-perfeito",
+      "character": "madara",
+      "name": "Susanoo Perfeito",
+      "path": "/assets/skills/madara/susanoo-perfeito.png",
+      "sheet": "/assets/sheets/skills/pages/madara.png",
+      "row": 0,
+      "column": 0,
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "meteoro",
+      "character": "madara",
+      "name": "Meteoro",
+      "path": "/assets/skills/madara/meteoro.png",
+      "sheet": "/assets/sheets/skills/pages/madara.png",
+      "row": 0,
+      "column": 1,
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "mugen-tsukuyomi",
+      "character": "madara",
+      "name": "Mugen Tsukuyomi",
+      "path": "/assets/skills/madara/mugen-tsukuyomi.png",
+      "sheet": "/assets/sheets/skills/pages/madara.png",
+      "row": 0,
+      "column": 2,
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "caminho-deva",
+      "character": "pain",
+      "name": "Caminho Deva",
+      "path": "/assets/skills/pain/caminho-deva.png",
+      "sheet": "/assets/sheets/skills/pages/pain.png",
+      "row": 0,
+      "column": 0,
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "shinra-tensei",
+      "character": "pain",
+      "name": "Shinra Tensei",
+      "path": "/assets/skills/pain/shinra-tensei.png",
+      "sheet": "/assets/sheets/skills/pages/pain.png",
+      "row": 0,
+      "column": 1,
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "chibaku-tensei",
+      "character": "pain",
+      "name": "Chibaku Tensei",
+      "path": "/assets/skills/pain/chibaku-tensei.png",
+      "sheet": "/assets/sheets/skills/pages/pain.png",
+      "row": 0,
+      "column": 2,
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "hiraishin",
+      "character": "minato",
+      "name": "Hiraishin",
+      "path": "/assets/skills/minato/hiraishin.png",
+      "sheet": "/assets/sheets/skills/pages/minato.png",
+      "row": 0,
+      "column": 0,
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "rasengan",
+      "character": "minato",
+      "name": "Rasengan",
+      "path": "/assets/skills/minato/rasengan.png",
+      "sheet": "/assets/sheets/skills/pages/minato.png",
+      "row": 0,
+      "column": 1,
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "marca-voadora",
+      "character": "minato",
+      "name": "Marca voadora",
+      "path": "/assets/skills/minato/marca-voadora.png",
+      "sheet": "/assets/sheets/skills/pages/minato.png",
+      "row": 0,
+      "column": 2,
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "defesa-absoluta",
+      "character": "gaara",
+      "name": "Defesa absoluta",
+      "path": "/assets/skills/gaara/defesa-absoluta.png",
+      "sheet": "/assets/sheets/skills/pages/gaara.png",
+      "row": 0,
+      "column": 0,
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "caixao-de-areia",
+      "character": "gaara",
+      "name": "Caix\u00e3o de areia",
+      "path": "/assets/skills/gaara/caixao-de-areia.png",
+      "sheet": "/assets/sheets/skills/pages/gaara.png",
+      "row": 0,
+      "column": 1,
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "funeral-do-deserto",
+      "character": "gaara",
+      "name": "Funeral do deserto",
+      "path": "/assets/skills/gaara/funeral-do-deserto.png",
+      "sheet": "/assets/sheets/skills/pages/gaara.png",
+      "row": 0,
+      "column": 2,
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "espada-do-futuro",
+      "character": "trunks",
+      "name": "Espada do futuro",
+      "path": "/assets/skills/trunks/espada-do-futuro.png",
+      "sheet": "/assets/sheets/skills/pages/trunks.png",
+      "row": 0,
+      "column": 0,
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "burning-attack",
+      "character": "trunks",
+      "name": "Burning Attack",
+      "path": "/assets/skills/trunks/burning-attack.png",
+      "sheet": "/assets/sheets/skills/pages/trunks.png",
+      "row": 0,
+      "column": 1,
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "corte-final",
+      "character": "trunks",
+      "name": "Corte final",
+      "path": "/assets/skills/trunks/corte-final.png",
+      "sheet": "/assets/sheets/skills/pages/trunks.png",
+      "row": 0,
+      "column": 2,
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "absorcao",
+      "character": "cell",
+      "name": "Absor\u00e7\u00e3o",
+      "path": "/assets/skills/cell/absorcao.png",
+      "sheet": "/assets/sheets/skills/pages/cell.png",
+      "row": 0,
+      "column": 0,
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "kamehameha-solar",
+      "character": "cell",
+      "name": "Kamehameha solar",
+      "path": "/assets/skills/cell/kamehameha-solar.png",
+      "sheet": "/assets/sheets/skills/pages/cell.png",
+      "row": 0,
+      "column": 1,
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "forma-perfeita",
+      "character": "cell",
+      "name": "Forma perfeita",
+      "path": "/assets/skills/cell/forma-perfeita.png",
+      "sheet": "/assets/sheets/skills/pages/cell.png",
+      "row": 0,
+      "column": 2,
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "eraser-cannon",
+      "character": "broly",
+      "name": "Eraser Cannon",
+      "path": "/assets/skills/broly/eraser-cannon.png",
+      "sheet": "/assets/sheets/skills/pages/broly.png",
+      "row": 0,
+      "column": 0,
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "furia-lendaria",
+      "character": "broly",
+      "name": "F\u00faria lend\u00e1ria",
+      "path": "/assets/skills/broly/furia-lendaria.png",
+      "sheet": "/assets/sheets/skills/pages/broly.png",
+      "row": 0,
+      "column": 1,
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "gigantic-roar",
+      "character": "broly",
+      "name": "Gigantic Roar",
+      "path": "/assets/skills/broly/gigantic-roar.png",
+      "sheet": "/assets/sheets/skills/pages/broly.png",
+      "row": 0,
+      "column": 2,
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "hakai",
+      "character": "beerus",
+      "name": "Hakai",
+      "path": "/assets/skills/beerus/hakai.png",
+      "sheet": "/assets/sheets/skills/pages/beerus.png",
+      "row": 0,
+      "column": 0,
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "esfera-da-destruicao",
+      "character": "beerus",
+      "name": "Esfera da destrui\u00e7\u00e3o",
+      "path": "/assets/skills/beerus/esfera-da-destruicao.png",
+      "sheet": "/assets/sheets/skills/pages/beerus.png",
+      "row": 0,
+      "column": 1,
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "ira-do-deus",
+      "character": "beerus",
+      "name": "Ira do deus",
+      "path": "/assets/skills/beerus/ira-do-deus.png",
+      "sheet": "/assets/sheets/skills/pages/beerus.png",
+      "row": 0,
+      "column": 2,
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "psiquico",
+      "character": "mewtwo",
+      "name": "Ps\u00edquico",
+      "path": "/assets/skills/mewtwo/psiquico.png",
+      "sheet": "/assets/sheets/skills/pages/mewtwo.png",
+      "row": 0,
+      "column": 0,
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "barreira",
+      "character": "mewtwo",
+      "name": "Barreira",
+      "path": "/assets/skills/mewtwo/barreira.png",
+      "sheet": "/assets/sheets/skills/pages/mewtwo.png",
+      "row": 0,
+      "column": 1,
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "tempestade-mental",
+      "character": "mewtwo",
+      "name": "Tempestade mental",
+      "path": "/assets/skills/mewtwo/tempestade-mental.png",
+      "sheet": "/assets/sheets/skills/pages/mewtwo.png",
+      "row": 0,
+      "column": 2,
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "lanca-chamas",
+      "character": "charizard",
+      "name": "Lan\u00e7a-chamas",
+      "path": "/assets/skills/charizard/lanca-chamas.png",
+      "sheet": "/assets/sheets/skills/pages/charizard.png",
+      "row": 0,
+      "column": 0,
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "garra-de-dragao",
+      "character": "charizard",
+      "name": "Garra de drag\u00e3o",
+      "path": "/assets/skills/charizard/garra-de-dragao.png",
+      "sheet": "/assets/sheets/skills/pages/charizard.png",
+      "row": 0,
+      "column": 1,
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "explosao-de-fogo",
+      "character": "charizard",
+      "name": "Explos\u00e3o de fogo",
+      "path": "/assets/skills/charizard/explosao-de-fogo.png",
+      "sheet": "/assets/sheets/skills/pages/charizard.png",
+      "row": 0,
+      "column": 2,
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "fluxo-de-agua",
+      "character": "garou",
+      "name": "Fluxo de \u00e1gua",
+      "path": "/assets/skills/garou/fluxo-de-agua.png",
+      "sheet": "/assets/sheets/skills/pages/garou.png",
+      "row": 0,
+      "column": 0,
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "contra-fluxo",
+      "character": "garou",
+      "name": "Contra-fluxo",
+      "path": "/assets/skills/garou/contra-fluxo.png",
+      "sheet": "/assets/sheets/skills/pages/garou.png",
+      "row": 0,
+      "column": 1,
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "cacador-de-herois",
+      "character": "garou",
+      "name": "Ca\u00e7ador de her\u00f3is",
+      "path": "/assets/skills/garou/cacador-de-herois.png",
+      "sheet": "/assets/sheets/skills/pages/garou.png",
+      "row": 0,
+      "column": 2,
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "canhao-incinerador",
+      "character": "genos",
+      "name": "Canh\u00e3o incinerador",
+      "path": "/assets/skills/genos/canhao-incinerador.png",
+      "sheet": "/assets/sheets/skills/pages/genos.png",
+      "row": 0,
+      "column": 0,
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "rajada-de-misseis",
+      "character": "genos",
+      "name": "Rajada de m\u00edsseis",
+      "path": "/assets/skills/genos/rajada-de-misseis.png",
+      "sheet": "/assets/sheets/skills/pages/genos.png",
+      "row": 0,
+      "column": 1,
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "sobrecarga",
+      "character": "genos",
+      "name": "Sobrecarga",
+      "path": "/assets/skills/genos/sobrecarga.png",
+      "sheet": "/assets/sheets/skills/pages/genos.png",
+      "row": 0,
+      "column": 2,
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "soco-espiritual",
+      "character": "yusuke",
+      "name": "Soco espiritual",
+      "path": "/assets/skills/yusuke/soco-espiritual.png",
+      "sheet": "/assets/sheets/skills/pages/yusuke.png",
+      "row": 0,
+      "column": 0,
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "reigun",
+      "character": "yusuke",
+      "name": "Reigun",
+      "path": "/assets/skills/yusuke/reigun.png",
+      "sheet": "/assets/sheets/skills/pages/yusuke.png",
+      "row": 0,
+      "column": 1,
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "shotgun",
+      "character": "yusuke",
+      "name": "Shotgun",
+      "path": "/assets/skills/yusuke/shotgun.png",
+      "sheet": "/assets/sheets/skills/pages/yusuke.png",
+      "row": 0,
+      "column": 2,
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "espada-de-fogo",
+      "character": "hiei",
+      "name": "Espada de fogo",
+      "path": "/assets/skills/hiei/espada-de-fogo.png",
+      "sheet": "/assets/sheets/skills/pages/hiei.png",
+      "row": 0,
+      "column": 0,
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "jagan",
+      "character": "hiei",
+      "name": "Jagan",
+      "path": "/assets/skills/hiei/jagan.png",
+      "sheet": "/assets/sheets/skills/pages/hiei.png",
+      "row": 0,
+      "column": 1,
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "dragao-das-trevas",
+      "character": "hiei",
+      "name": "Drag\u00e3o das Trevas",
+      "path": "/assets/skills/hiei/dragao-das-trevas.png",
+      "sheet": "/assets/sheets/skills/pages/hiei.png",
+      "row": 0,
+      "column": 2,
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "tiara-lunar",
+      "character": "sailormoon",
+      "name": "Tiara lunar",
+      "path": "/assets/skills/sailormoon/tiara-lunar.png",
+      "sheet": "/assets/sheets/skills/pages/sailormoon.png",
+      "row": 0,
+      "column": 0,
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "cura-lunar",
+      "character": "sailormoon",
+      "name": "Cura lunar",
+      "path": "/assets/skills/sailormoon/cura-lunar.png",
+      "sheet": "/assets/sheets/skills/pages/sailormoon.png",
+      "row": 0,
+      "column": 1,
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "cristal-de-prata",
+      "character": "sailormoon",
+      "name": "Cristal de Prata",
+      "path": "/assets/skills/sailormoon/cristal-de-prata.png",
+      "sheet": "/assets/sheets/skills/pages/sailormoon.png",
+      "row": 0,
+      "column": 2,
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "gas-do-riso",
+      "character": "coringa",
+      "name": "G\u00e1s do riso",
+      "path": "/assets/skills/coringa/gas-do-riso.png",
+      "sheet": "/assets/sheets/skills/pages/coringa.png",
+      "row": 0,
+      "column": 0,
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "carta-marcada",
+      "character": "coringa",
+      "name": "Carta marcada",
+      "path": "/assets/skills/coringa/carta-marcada.png",
+      "sheet": "/assets/sheets/skills/pages/coringa.png",
+      "row": 0,
+      "column": 1,
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "piada-final",
+      "character": "coringa",
+      "name": "Piada final",
+      "path": "/assets/skills/coringa/piada-final.png",
+      "sheet": "/assets/sheets/skills/pages/coringa.png",
+      "row": 0,
+      "column": 2,
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "marreta",
+      "character": "arlequina",
+      "name": "Marreta",
+      "path": "/assets/skills/arlequina/marreta.png",
+      "sheet": "/assets/sheets/skills/pages/arlequina.png",
+      "row": 0,
+      "column": 0,
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "pirueta",
+      "character": "arlequina",
+      "name": "Pirueta",
+      "path": "/assets/skills/arlequina/pirueta.png",
+      "sheet": "/assets/sheets/skills/pages/arlequina.png",
+      "row": 0,
+      "column": 1,
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "surpresa-explosiva",
+      "character": "arlequina",
+      "name": "Surpresa explosiva",
+      "path": "/assets/skills/arlequina/surpresa-explosiva.png",
+      "sheet": "/assets/sheets/skills/pages/arlequina.png",
+      "row": 0,
+      "column": 2,
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "feixe-omega",
+      "character": "darkseid",
+      "name": "Feixe \u00d4mega",
+      "path": "/assets/skills/darkseid/feixe-omega.png",
+      "sheet": "/assets/sheets/skills/pages/darkseid.png",
+      "row": 0,
+      "column": 0,
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "punho-do-tirano",
+      "character": "darkseid",
+      "name": "Punho do tirano",
+      "path": "/assets/skills/darkseid/punho-do-tirano.png",
+      "sheet": "/assets/sheets/skills/pages/darkseid.png",
+      "row": 0,
+      "column": 1,
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "equacao-anti-vida",
+      "character": "darkseid",
+      "name": "Equa\u00e7\u00e3o Anti-Vida",
+      "path": "/assets/skills/darkseid/equacao-anti-vida.png",
+      "sheet": "/assets/sheets/skills/pages/darkseid.png",
+      "row": 0,
+      "column": 2,
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "armadura-de-guerra",
+      "character": "lexluthor",
+      "name": "Armadura de guerra",
+      "path": "/assets/skills/lexluthor/armadura-de-guerra.png",
+      "sheet": "/assets/sheets/skills/pages/lexluthor.png",
+      "row": 0,
+      "column": 0,
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "kryptonita",
+      "character": "lexluthor",
+      "name": "Kryptonita",
+      "path": "/assets/skills/lexluthor/kryptonita.png",
+      "sheet": "/assets/sheets/skills/pages/lexluthor.png",
+      "row": 0,
+      "column": 1,
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "plano-calculado",
+      "character": "lexluthor",
+      "name": "Plano calculado",
+      "path": "/assets/skills/lexluthor/plano-calculado.png",
+      "sheet": "/assets/sheets/skills/pages/lexluthor.png",
+      "row": 0,
+      "column": 2,
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "correntes-necroplasmicas",
+      "character": "spawn",
+      "name": "Correntes necropl\u00e1smicas",
+      "path": "/assets/skills/spawn/correntes-necroplasmicas.png",
+      "sheet": "/assets/sheets/skills/pages/spawn.png",
+      "row": 0,
+      "column": 0,
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "capa-viva",
+      "character": "spawn",
+      "name": "Capa viva",
+      "path": "/assets/skills/spawn/capa-viva.png",
+      "sheet": "/assets/sheets/skills/pages/spawn.png",
+      "row": 0,
+      "column": 1,
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "fogo-do-inferno",
+      "character": "spawn",
+      "name": "Fogo do inferno",
+      "path": "/assets/skills/spawn/fogo-do-inferno.png",
+      "sheet": "/assets/sheets/skills/pages/spawn.png",
+      "row": 0,
+      "column": 2,
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "soco-supersonico",
+      "character": "invencivel",
+      "name": "Soco supers\u00f4nico",
+      "path": "/assets/skills/invencivel/soco-supersonico.png",
+      "sheet": "/assets/sheets/skills/pages/invencivel.png",
+      "row": 0,
+      "column": 0,
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "investida-orbital",
+      "character": "invencivel",
+      "name": "Investida orbital",
+      "path": "/assets/skills/invencivel/investida-orbital.png",
+      "sheet": "/assets/sheets/skills/pages/invencivel.png",
+      "row": 0,
+      "column": 1,
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "levantar-de-novo",
+      "character": "invencivel",
+      "name": "Levantar de novo",
+      "path": "/assets/skills/invencivel/levantar-de-novo.png",
+      "sheet": "/assets/sheets/skills/pages/invencivel.png",
+      "row": 0,
+      "column": 2,
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "golpe-viltrumita",
+      "character": "omniman",
+      "name": "Golpe viltrumita",
+      "path": "/assets/skills/omniman/golpe-viltrumita.png",
+      "sheet": "/assets/sheets/skills/pages/omniman.png",
+      "row": 0,
+      "column": 0,
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "voo-de-impacto",
+      "character": "omniman",
+      "name": "Voo de impacto",
+      "path": "/assets/skills/omniman/voo-de-impacto.png",
+      "sheet": "/assets/sheets/skills/pages/omniman.png",
+      "row": 0,
+      "column": 1,
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "sem-piedade",
+      "character": "omniman",
+      "name": "Sem piedade",
+      "path": "/assets/skills/omniman/sem-piedade.png",
+      "sheet": "/assets/sheets/skills/pages/omniman.png",
+      "row": 0,
+      "column": 2,
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "katanas-gemeas",
+      "character": "leonardo",
+      "name": "Katanas g\u00eameas",
+      "path": "/assets/skills/leonardo/katanas-gemeas.png",
+      "sheet": "/assets/sheets/skills/pages/leonardo.png",
+      "row": 0,
+      "column": 0,
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "formacao",
+      "character": "leonardo",
+      "name": "Forma\u00e7\u00e3o",
+      "path": "/assets/skills/leonardo/formacao.png",
+      "sheet": "/assets/sheets/skills/pages/leonardo.png",
+      "row": 0,
+      "column": 1,
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "investida-do-lider",
+      "character": "leonardo",
+      "name": "Investida do l\u00edder",
+      "path": "/assets/skills/leonardo/investida-do-lider.png",
+      "sheet": "/assets/sheets/skills/pages/leonardo.png",
+      "row": 0,
+      "column": 2,
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "sais-gemeos",
+      "character": "raphael",
+      "name": "Sais g\u00eameos",
+      "path": "/assets/skills/raphael/sais-gemeos.png",
+      "sheet": "/assets/sheets/skills/pages/raphael.png",
+      "row": 0,
+      "column": 0,
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "investida-furiosa",
+      "character": "raphael",
+      "name": "Investida furiosa",
+      "path": "/assets/skills/raphael/investida-furiosa.png",
+      "sheet": "/assets/sheets/skills/pages/raphael.png",
+      "row": 0,
+      "column": 1,
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "sem-recuo",
+      "character": "raphael",
+      "name": "Sem recuo",
+      "path": "/assets/skills/raphael/sem-recuo.png",
+      "sheet": "/assets/sheets/skills/pages/raphael.png",
+      "row": 0,
+      "column": 2,
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "bastao-bo",
+      "character": "donatello",
+      "name": "Bast\u00e3o bo",
+      "path": "/assets/skills/donatello/bastao-bo.png",
+      "sheet": "/assets/sheets/skills/pages/donatello.png",
+      "row": 0,
+      "column": 0,
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "dispositivo-tatico",
+      "character": "donatello",
+      "name": "Dispositivo t\u00e1tico",
+      "path": "/assets/skills/donatello/dispositivo-tatico.png",
+      "sheet": "/assets/sheets/skills/pages/donatello.png",
+      "row": 0,
+      "column": 1,
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "campo-de-contencao",
+      "character": "donatello",
+      "name": "Campo de conten\u00e7\u00e3o",
+      "path": "/assets/skills/donatello/campo-de-contencao.png",
+      "sheet": "/assets/sheets/skills/pages/donatello.png",
+      "row": 0,
+      "column": 2,
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "nunchakus",
+      "character": "michelangelo",
+      "name": "Nunchakus",
+      "path": "/assets/skills/michelangelo/nunchakus.png",
+      "sheet": "/assets/sheets/skills/pages/michelangelo.png",
+      "row": 0,
+      "column": 0,
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "giro-maluco",
+      "character": "michelangelo",
+      "name": "Giro maluco",
+      "path": "/assets/skills/michelangelo/giro-maluco.png",
+      "sheet": "/assets/sheets/skills/pages/michelangelo.png",
+      "row": 0,
+      "column": 1,
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "festa-surpresa",
+      "character": "michelangelo",
+      "name": "Festa surpresa",
+      "path": "/assets/skills/michelangelo/festa-surpresa.png",
+      "sheet": "/assets/sheets/skills/pages/michelangelo.png",
+      "row": 0,
+      "column": 2,
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "pacto",
+      "character": "constantine",
+      "name": "Pacto",
+      "path": "/assets/skills/constantine/pacto.png",
+      "sheet": "/assets/sheets/skills/pages/constantine.png",
+      "row": 0,
+      "column": 0,
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "exorcismo",
+      "character": "constantine",
+      "name": "Exorcismo",
+      "path": "/assets/skills/constantine/exorcismo.png",
+      "sheet": "/assets/sheets/skills/pages/constantine.png",
+      "row": 0,
+      "column": 1,
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "blefe-infernal",
+      "character": "constantine",
+      "name": "Blefe infernal",
+      "path": "/assets/skills/constantine/blefe-infernal.png",
+      "sheet": "/assets/sheets/skills/pages/constantine.png",
       "row": 0,
       "column": 2,
       "crop": {
