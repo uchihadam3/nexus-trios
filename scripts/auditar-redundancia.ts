@@ -10,15 +10,16 @@
  *      só, e mostrar dois é ruído.
  */
 import { characters } from '../src/data/characters';
+import { chaveDaCombinacao, combinacoesIntencionais } from '../src/data/expanded-roster';
 
 type Achado = { personagem: string; habilidade: string; tipo: string; detalhe: string };
 const achados: Achado[] = [];
 
 for (const c of characters) {
-  const partes: { nome: string; efeitos: typeof c.basic.effects; carga?: { on: string }[] }[] = [
-    { nome: 'ataque básico', efeitos: c.basic.effects },
-    { nome: c.trait.name, efeitos: c.trait.effects },
-    ...c.skills.map((s) => ({ nome: s.name, efeitos: s.effects, carga: s.charge })),
+  const partes: { nome: string; id: string; efeitos: typeof c.basic.effects; carga?: { on: string }[] }[] = [
+    { nome: 'ataque básico', id: 'basico', efeitos: c.basic.effects },
+    { nome: c.trait.name, id: 'traco', efeitos: c.trait.effects },
+    ...c.skills.map((s) => ({ nome: s.name, id: s.id, efeitos: s.effects, carga: s.charge })),
   ];
 
   for (const parte of partes) {
@@ -28,8 +29,18 @@ for (const c of characters) {
       const chave = `${e.status}:${e.target ?? 'padrão'}`;
       porStatus.set(chave, [...(porStatus.get(chave) ?? []), e.value]);
     }
+    /*
+     * Repetição declarada não é achado.
+     *
+     * O registro em `combinacoesIntencionais` existe para o dia em que duas
+     * aplicações do mesmo Status no mesmo alvo precisarem coexistir por
+     * fonte, tempo ou duração diferentes. O que não estiver escrito lá
+     * continua sendo defeito.
+     */
+    const permitidos = combinacoesIntencionais[chaveDaCombinacao(c.id, parte.id)] ?? [];
     for (const [chave, valores] of porStatus) {
       if (valores.length < 2) continue;
+      if (permitidos.includes(chave.split(':')[0] as (typeof permitidos)[number])) continue;
       achados.push({
         personagem: c.name, habilidade: parte.nome, tipo: 'Status repetido',
         detalhe: `${chave} ×${String(valores.length)} (${valores.map((v) => v.toFixed(2)).join(', ')})`,

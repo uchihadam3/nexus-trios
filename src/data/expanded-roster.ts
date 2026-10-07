@@ -297,10 +297,10 @@ const somarCargas=(rules:readonly ChargeRule[]):ChargeRule[]=>{
  * muda decisão nenhuma. Agora sobra uma linha só, com a maior intensidade e a
  * maior duração — que é o que o combate já fazia na prática.
  */
-const fundirEfeitos=(effects:readonly Effect[]):Effect[]=>{
+export const fundirEfeitos=(effects:readonly Effect[],intencionais:readonly StatusId[]=[]):Effect[]=>{
   const saida:Effect[]=[];
   for(const e of effects){
-    if(e.kind!=='status'){saida.push(e);continue;}
+    if(e.kind!=='status'||intencionais.includes(e.status)){saida.push(e);continue;}
     const i=saida.findIndex(o=>o.kind==='status'&&o.status===e.status&&(o.target??'')===(e.target??''));
     const anterior=i>=0?saida[i]:undefined;
     if(anterior===undefined||anterior.kind!=='status'){saida.push(e);continue;}
@@ -309,15 +309,36 @@ const fundirEfeitos=(effects:readonly Effect[]):Effect[]=>{
   return saida;
 };
 
+/*
+ * O registro das repetições que são de propósito.
+ *
+ * A fusão acima resolve o caso comum — o hook da tag colidindo com o kit do
+ * estilo — e alvos diferentes nunca foram fundidos. Falta o caso que ainda
+ * não existe e vai existir: duas aplicações do **mesmo** Status no **mesmo**
+ * alvo que precisam coexistir porque vêm de fontes, tempos ou durações
+ * deliberadamente diferentes. Fundir essas seria apagar desenho em silêncio.
+ *
+ * Então elas ficam declaradas aqui, por habilidade, e não acontecem por
+ * acidente: o auditor e o teste de regressão leem este mesmo mapa e só
+ * perdoam o que estiver escrito nele. Enquanto o mapa estiver vazio, toda
+ * repetição continua sendo defeito.
+ */
+export const combinacoesIntencionais:Record<string,readonly StatusId[]>={};
+
+/** A chave que o registro usa, e que o auditor e o teste repetem. */
+export const chaveDaCombinacao=(personagem:string,habilidade:string):string=>`${personagem}/${habilidade}`;
+
 function makeSkill(c:Row,index:number,m:Move,hook?:IdentityHook):Skill{
   const name=c.moves[index];
   const rules:ChargeRule[]=[charge(m.on,m.rate),...(m.extraCharge??[])];
   const extra=[1.8,2.4,2.5][index];
   if(m.on!=='time')rules.push(charge('time',extra));
   if(index===1&&hook)rules.push(charge(hook.on,hook.amount));
-  const effects=fundirEfeitos(index===1&&hook?[...m.effects,hook.effect]:m.effects);
+  const idDaHabilidade=name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+  const intencionais=combinacoesIntencionais[chaveDaCombinacao(c.id,idDaHabilidade)]??[];
+  const effects=fundirEfeitos(index===1&&hook?[...m.effects,hook.effect]:m.effects,intencionais);
   const topicName:Record<Topic,string>={time:'tempo',action:'ataque básico',dealt:'dano causado',received:'dano recebido',allyHurt:'aliado ferido',enemyHurt:'inimigo ferido',interrupt:'interrupção',status:'qualquer Status',negativeStatus:'Status negativo',protected:'dano bloqueado',enemyCast:'Preparo inimigo',survived:'enquanto luta',losing:'atrás na Vantagem',winning:'à frente na Vantagem'};
-  return {id:name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,''),name,icon:m.icon,description:m.description,chargeText:m.on==='time'?'Tempo':`${topicName[m.on]} + tempo`,charge:somarCargas(rules),effects,target:m.target??'enemyWeak',condition:m.condition??'always',requiresSkills:m.requiresSkills,preparation:m.prep??0,cooldown:m.cool??6,priority:m.priority??1};
+  return {id:idDaHabilidade,name,icon:m.icon,description:m.description,chargeText:m.on==='time'?'Tempo':`${topicName[m.on]} + tempo`,charge:somarCargas(rules),effects,target:m.target??'enemyWeak',condition:m.condition??'always',requiresSkills:m.requiresSkills,preparation:m.prep??0,cooldown:m.cool??6,priority:m.priority??1};
 }
 export const expandedCharacters:Character[]=rows.map(c=>{
   const kit=adjustedKit(c),adjustment=identityAdjustments[c.id],hook=adjustment?.hook===false?undefined:hookFor(c);
