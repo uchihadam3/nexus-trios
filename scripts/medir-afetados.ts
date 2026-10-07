@@ -39,7 +39,7 @@ for (let i = 0; i < AMOSTRA; i += 1) {
 }
 const media = soma / AMOSTRA;
 console.log(`média geral: ${(media * 100).toFixed(1)}% · ${String(N)} lutas por personagem medido\n`);
-for (const id of ['sakura', 'piccolo', 'ichigo', 'edward', 'itachi', 'zenitsu']) {
+for (const id of (process.env.IDS ?? 'sakura,piccolo').split(',')) {
   if (!characters.some((c) => c.id === id)) continue;
   const m = medir(id);
   const d = (m.taxa - media) * 100;

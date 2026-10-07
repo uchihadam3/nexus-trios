@@ -11,6 +11,8 @@
  * mandava — e fazia. A pergunta que faltava era se o dado mandava o que a
  * ficha dizia.
  */
+import { readFileSync } from 'node:fs';
+
 import { describe, expect, it } from 'vitest';
 
 import { characters } from '../src/data/characters';
@@ -175,5 +177,36 @@ describe('a ficha e o combate concordam', () => {
       }
     }
     expect(feridos.slice(0, 5)).toEqual([]);
+  });
+  /*
+   * Energia guardada que nunca é solta.
+   *
+   * O Gambit mostrava "Guarda 12 de energia (até 420)" e não tinha nenhuma
+   * habilidade que a liberasse. Ele terminava as lutas com 110 de energia
+   * parada, em média, e a ficha prometia um pagamento que não existia — ainda
+   * mais estranho porque a ideia escrita dele é "carrega objetos e escolhe
+   * quando arriscar uma detonação". O desenho estava claro; só não foi ligado.
+   */
+  it('quem guarda energia tem como soltá-la', () => {
+    const temEfeito = (c: Character, kind: Effect['kind']) =>
+      partesDe(c).some(({ effects }) => effects.some((e) => e.kind === kind));
+    const presos = characters.filter((c) => temEfeito(c, 'store') && !temEfeito(c, 'release'));
+    expect(presos.map((c) => c.name)).toEqual([]);
+    /* E ninguém solta o que nunca guardou. */
+    const vazios = characters.filter((c) => temEfeito(c, 'release') && !temEfeito(c, 'store'));
+    expect(vazios.map((c) => c.name)).toEqual([]);
+  });
+
+  /*
+   * Todo termo próprio do jogo que aparece numa ficha precisa estar explicado
+   * no Como Jogar. "Investigação" aparecia em quatro fichas e em lugar nenhum
+   * do guia; "energia guardada", em trinta.
+   */
+  it('todo termo da ficha está explicado no Como Jogar', () => {
+    const guia = readFileSync('src/screens/Auxiliary.tsx', 'utf8');
+    const termos = ['Carga', 'Preparo', 'Resfriamento', 'Escudo', 'Vida', 'Vantagem',
+      'Investigação', 'energia guardada', 'Interrupção'];
+    const ausentes = termos.filter((t) => !new RegExp(`\\['${t}'|${t}`, 'i').test(guia));
+    expect(ausentes).toEqual([]);
   });
 });
