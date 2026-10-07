@@ -34,10 +34,32 @@ async function session(){
   if(!sessao||sessao.user.is_anonymous===true)throw new Error('Entre na sua conta para jogar a Jornada Ranqueada.');
   return sessao;
 }
+/*
+ * A chamada vai por `fetch`, e não por `client.functions.invoke`, de propósito.
+ *
+ * `invoke` acrescenta o cabeçalho `x-client-info`, e a função publicada só
+ * autoriza `authorization`, `apikey` e `content-type`. O navegador pergunta
+ * antes (o pré-voo do CORS), recebe "não", e a chamada nem sai: o jogador via
+ * "Failed to send a request to the Edge Function", em inglês, em toda
+ * ranqueada e em todo ranking. Pela linha de comando funcionava, porque lá não
+ * existe CORS — só apareceu testando no navegador.
+ *
+ * Mandar exatamente os três cabeçalhos autorizados funciona com a função que
+ * está no ar hoje e com qualquer versão futura dela.
+ */
 export async function onlineCall<T>(action:string,body:Record<string,unknown>={}):Promise<T>{
-  await session();const {data,error}=await client!.functions.invoke('ranked-api',{body:{action,...body}});
-  if(error){let message=error.message;try{const response=error.context as Response;const detail=await response.json() as {error?:string};message=detail.error??message;}catch{/* Network failures have no JSON body. */}throw new Error(message);}
-  if(data?.error)throw new Error(data.error);return data as T;
+  const sessao=await session();
+  let resposta:Response;
+  try{
+    resposta=await fetch(`${url}/functions/v1/ranked-api`,{method:'POST',
+      headers:{authorization:`Bearer ${sessao.access_token}`,apikey:key!,'content-type':'application/json'},
+      body:JSON.stringify({action,...body})});
+  }catch{throw new Error('Sem conexão com o servidor. Confira a internet e tente de novo.');}
+  let dados:unknown=null;try{dados=await resposta.json();}catch{/* Corpo vazio ou não-JSON. */}
+  const erro=(dados as {error?:unknown}|null)?.error;
+  if(!resposta.ok||typeof erro==='string')throw new Error(typeof erro==='string'?erro:'O servidor não respondeu como esperado. Tente de novo em instantes.');
+  return dados as T;
 }
+
 export interface PublicRun {position:number;id:string;handle:string;score:number;progress:number;team:string[];date:string;seed:number;engineVersion:string;balanceVersion:string;highlights:{survivors?:number;turns?:number}}
 export interface Leaderboard {mode:'daily'|'weekly'|'season';period:string;entries:PublicRun[];mine:PublicRun|null;details:PublicRun|null}

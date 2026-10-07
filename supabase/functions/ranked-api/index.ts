@@ -9,7 +9,7 @@ const url=Deno.env.get('SUPABASE_URL')!,secret=Deno.env.get('SUPABASE_SECRET_KEY
 const admin=createClient(url,secret,{auth:{persistSession:false,autoRefreshToken:false}});
 const authClient=createClient(url,publishable,{auth:{persistSession:false,autoRefreshToken:false}});
 const allowed=new Set(['https://uchihadam3.github.io','http://localhost:5173','http://127.0.0.1:5173']);
-const json=(data:unknown,status=200,origin='')=>new Response(JSON.stringify(data),{status,headers:{'content-type':'application/json','cache-control':'no-store','access-control-allow-origin':allowed.has(origin)?origin:'https://uchihadam3.github.io','access-control-allow-headers':'authorization, apikey, content-type','access-control-allow-methods':'POST, OPTIONS'}});
+const json=(data:unknown,status=200,origin='')=>new Response(JSON.stringify(data),{status,headers:{'content-type':'application/json','cache-control':'no-store','access-control-allow-origin':allowed.has(origin)?origin:'https://uchihadam3.github.io','access-control-allow-headers':'authorization, apikey, content-type, x-client-info','access-control-allow-methods':'POST, OPTIONS'}});
 const fail=(message:string,status=400,origin='')=>json({error:message},status,origin);
 const iso=(date:Date)=>date.toISOString().slice(0,10);
 const period=(mode:Mode)=>{const date=new Date();if(mode==='weekly')date.setUTCDate(date.getUTCDate()-(date.getUTCDay()+6)%7);return iso(date)};
@@ -39,7 +39,7 @@ async function board(userId:string,mode:'daily'|'weekly'|'season',detailId?:stri
 Deno.serve(async (request:Request)=>{
   const origin=request.headers.get('origin')??'';
   if(origin&&!allowed.has(origin))return fail('Origem não permitida.',403,origin);
-  if(request.method==='OPTIONS')return new Response(null,{status:204,headers:{'access-control-allow-origin':allowed.has(origin)?origin:'https://uchihadam3.github.io','access-control-allow-headers':'authorization, apikey, content-type','access-control-allow-methods':'POST, OPTIONS'}});
+  if(request.method==='OPTIONS')return new Response(null,{status:204,headers:{'access-control-allow-origin':allowed.has(origin)?origin:'https://uchihadam3.github.io','access-control-allow-headers':'authorization, apikey, content-type, x-client-info','access-control-allow-methods':'POST, OPTIONS'}});
   if(request.method!=='POST')return fail('Método inválido.',405,origin);
   const bearer=request.headers.get('authorization')??'',token=bearer.startsWith('Bearer ')?bearer.slice(7):'';
   if(!token)return fail('Autenticação necessária.',401,origin);
