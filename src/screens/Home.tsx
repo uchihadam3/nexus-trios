@@ -1,5 +1,5 @@
 import { ArrowUpRight,ArrowRight,Trophy,CircleHelp,Settings2,Download,ChevronRight,Users,Swords,Flag,Star } from 'lucide-react';
-import { byId } from '../data/characters';
+import { byId,characters } from '../data/characters';
 import { Portrait } from '../components/Portrait';
 import type { Profile, Run } from '../lib/storage';
 
@@ -29,7 +29,7 @@ export function Home({profile,run,onPlay,onContinue,onAbandon,onNavigate,onInsta
       <div className="journey-bottom"><span>{profile.journeys} jornadas · {profile.victories} trios campeões</span><button className="text-button" onClick={onPlay}>Nova jornada <ArrowRight size={15}/></button></div>
     </div>
     {enemies&&<div className="hub-encounter"><div><span className="eyebrow">RIVAIS DO PRÓXIMO CONFRONTO</span><h2>{run?.encounters[current].name}</h2><p>Entre na arena para descobrir como seu trio responde.</p></div><div className="hub-rivals">{enemies.map(id=><span key={id}><Portrait character={byId[id]}/><small>{byId[id].name}</small></span>)}</div></div>}
-    <div className="hub-links"><button onClick={()=>onNavigate('characters')}><Users size={20}/><span><b>Personagens</b><small>Conheça os 100 lutadores</small></span><ChevronRight size={17}/></button><button onClick={()=>onNavigate('help')}><CircleHelp size={20}/><span><b>Como jogar</b><small>Aprenda a ler a batalha</small></span><ChevronRight size={17}/></button><button onClick={()=>onNavigate('settings')}><Settings2 size={20}/><span><b>Configurações</b><small>Áudio, visual e jogo</small></span><ChevronRight size={17}/></button><button onClick={onInstall}><Download size={20}/><span><b>Instalar</b><small>Leve seu trio com você</small></span><ChevronRight size={17}/></button></div>
+    <div className="hub-links"><button onClick={()=>onNavigate('characters')}><Users size={20}/><span><b>Personagens</b><small>Conheça os {characters.length} lutadores</small></span><ChevronRight size={17}/></button><button onClick={()=>onNavigate('help')}><CircleHelp size={20}/><span><b>Como jogar</b><small>Aprenda a ler a batalha</small></span><ChevronRight size={17}/></button><button onClick={()=>onNavigate('settings')}><Settings2 size={20}/><span><b>Configurações</b><small>Áudio, visual e jogo</small></span><ChevronRight size={17}/></button><button onClick={onInstall}><Download size={20}/><span><b>Instalar</b><small>Leve seu trio com você</small></span><ChevronRight size={17}/></button></div>
     <p className="hub-rule"><Swords size={17}/> A vitória acontece quando o trio rival inteiro sai da luta.</p>
   </section>;
 }

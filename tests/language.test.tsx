@@ -23,7 +23,17 @@ describe('linguagem pública e o catálogo inteiro',()=>{
         expect(html,c.id).toContain(s.name);
         expect(p.effects,c.id).toHaveLength(s.effects.length);
         expect(p.effects.every(x=>x.length>5),c.id).toBe(true);
-        expect(p.charge,c.id).toHaveLength(s.charge.length);
+        /*
+         * Uma linha por regra deixou de valer quando a ficha passou a somar as
+         * fontes que o jogador lê como a mesma coisa (`time` e `survived` são
+         * ambas "por segundo"). O que precisa valer é mais forte: agregar pode
+         * juntar linhas, nunca perder Carga.
+         */
+        expect(p.charge.length,c.id).toBeGreaterThan(0);
+        expect(p.charge.length,c.id).toBeLessThanOrEqual(s.charge.length);
+        const somaNaFicha=p.charge.reduce((t,linha)=>t+Number(/\+([\d,]+)%/.exec(linha)![1]!.replace(',','.')),0);
+        const somaNosDados=s.charge.reduce((t,r)=>t+r.amount,0);
+        expect(somaNaFicha,c.id).toBeCloseTo(somaNosDados,1);
         expect(p.charge.every(x=>x.includes('%')),c.id).toBe(true);
         expect(p.target.length,c.id).toBeGreaterThan(4);
         expect(p.useWhen.length,c.id).toBeGreaterThan(10);

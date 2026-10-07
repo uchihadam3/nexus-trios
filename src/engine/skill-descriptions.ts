@@ -19,7 +19,29 @@ export const topicNames:Record<Topic,string>={
   winning:'por segundo enquanto seu trio estiver à frente na Vantagem',
 };
 export const positiveStatuses=new Set<StatusId>(['protected','haste','regen','strengthened']);
-export interface StatusPresentation {name:string;tone:'positivo'|'negativo';summary:string;value:string}
+export interface StatusPresentation {name:string;tone:'positivo'|'negativo';summary:string;value:string;
+  /** Vazio quando o Status apenas renova; descreve o acúmulo quando ele soma. */
+  accumulation:string}
+
+/*
+ * Cinco dos quatorze Status **somam** em vez de renovar, e a ficha não dizia.
+ *
+ * O caso que denunciou foi o Fortalecido. A ficha mostrava "Causa +3% de dano",
+ * que lê como o efeito inteiro — e a conclusão natural de quem lê é que o buff
+ * é fraco. Medido no combate, o He-Man chega a +68% de dano numa luta, porque
+ * cada aplicação soma até o teto de +80%.
+ *
+ * O número nunca esteve errado. O que faltava era dizer que ele é **por
+ * aplicação** e até onde vai.
+ */
+const acumulacaoDe=(id:StatusId):string=>{
+  const def=statuses[id];
+  if(def.stack!=='add')return '';
+  if(id==='regen')return `soma a cada aplicação, até ${n(def.cap)} de Vida por segundo`;
+  if(id==='burning')return `soma a cada aplicação, até ${n(def.cap)} de Vida por segundo`;
+  return `soma a cada aplicação, até ${pct(def.cap)}`;
+};
+
 export function presentStatus(id:StatusId,value:number):StatusPresentation {
   const amount=Math.min(value,statuses[id].cap),percent=pct(amount),number=n(amount);
   const summary:Record<StatusId,string>={
@@ -31,7 +53,8 @@ export function presentStatus(id:StatusId,value:number):StatusPresentation {
     regen:`Recupera ${number} de Vida por segundo`,burning:`Perde ${number} de Vida por segundo`,
     silenced:'Não começa novas habilidades',strengthened:`Causa +${percent} de dano`,weakened:`Causa ${percent} menos dano`,
   };
-  return {name:statuses[id].name,tone:positiveStatuses.has(id)?'positivo':'negativo',summary:summary[id],value:['regen','burning'].includes(id)?number:percent};
+  return {name:statuses[id].name,tone:positiveStatuses.has(id)?'positivo':'negativo',summary:summary[id],
+    value:['regen','burning'].includes(id)?number:percent,accumulation:acumulacaoDe(id)};
 }
 export interface SkillPresentation {summary:string;target:string;effects:string[];charge:string[];useWhen:string;preparation:string;cooldown:string}
 export interface TraitPresentation {summary:string;trigger:string;frequency:string;effects:string[]}
@@ -41,7 +64,21 @@ export function presentEffect(effect:Effect,defaultTarget:Target):string {
     case 'damage':return `${n(effect.value)} de dano${target}`;
     case 'heal':return `+${n(effect.value)} de Vida${target}`;
     case 'shield':return `+${n(effect.value)} Escudo por até 10 s${target}`;
-    case 'status':return `${statuses[effect.status].name} · ${presentStatus(effect.status,effect.value).summary} · ${secs(effect.duration)}${target}`;
+    /*
+     * "Aplica <Status>", sempre.
+     *
+     * A regra está escrita por extenso no documento da direção: *"Não deixar
+     * 'Lento' solto como se fosse ataque."* Era exatamente o que acontecia — a
+     * ficha abria com o nome do Status, e quem lê rápido entende que a
+     * habilidade **é** aquilo, não que ela aplica aquilo.
+     *
+     * A ordem segue a regra: ação → resultado → acúmulo → duração → alvo.
+     */
+    case 'status':{
+      const p=presentStatus(effect.status,effect.value);
+      const acumula=p.accumulation?` · ${p.accumulation}`:'';
+      return `Aplica ${statuses[effect.status].name} · ${p.summary}${acumula} · ${secs(effect.duration)}${target}`;
+    }
     case 'interrupt':return effect.mode==='cancel'?`Interrompe o Preparo${target}`:effect.mode==='delay'?`Atrasa o Preparo em ${secs(effect.value)}${target}`:`Reduz ${pct(effect.value)} do Preparo${target}`;
     case 'shift':return `${effect.value>=0?'Adianta':'Atrasa'} ${pct(Math.abs(effect.value))} do próximo ataque${target}`;
     case 'investigate':return `+${n(effect.value)} Investigação${target}`;
@@ -63,14 +100,34 @@ export function presentSkill(skill:Skill):SkillPresentation {
     storedEnergy:'houver energia guardada',
   };
   return {summary:effects[0]??'Sem efeito',target:targetNames[skill.target],effects,
-    charge:skill.charge.map(rule=>`+${n(rule.amount)}% ${topicNames[rule.on]}`),useWhen:use[skill.condition],
+    charge:cargasLegiveis(skill.charge),useWhen:use[skill.condition],
     preparation:skill.preparation>0?secs(skill.preparation):'instantâneo',cooldown:secs(skill.cooldown)};
 }
 export function presentTrait(trait:Trait):TraitPresentation {
   const effects=trait.effects.map(effect=>presentEffect(effect,trait.target));
   return {summary:effects[0]??'Sem efeito',trigger:topicNames[trait.on],frequency:trait.cooldown>0?`Pode ativar 1 vez a cada ${secs(trait.cooldown)}`:'Sem espera entre ativações',effects};
 }
-export function describeCharge(rules:Skill['charge']):string{return rules.map(rule=>`+${n(rule.amount)}% ${topicNames[rule.on]}`).join('; ')||'Sem Carga';}
+/*
+ * Agregar fontes iguais de Carga, e pôr o gotejamento por último.
+ *
+ * Dois defeitos de leitura. O primeiro: o motor dispara `time` e `survived` no
+ * mesmo passo, sem condição nenhuma — são a mesma fonte. Mas a ficha mostrava
+ * "+3% por segundo enquanto estiver na luta; +2,5% por segundo": duas linhas
+ * para uma coisa, e a primeira sugerindo uma condição que não existe (estar na
+ * luta não é condição, é o estado normal). Agora soma: "+5,5% por segundo".
+ *
+ * O segundo: em 166 habilidades o "+2% por segundo" vinha antes da fonte que
+ * caracteriza a habilidade. Quem compara duas fichas lia o gotejamento primeiro
+ * toda vez. Ele vai para o fim; o que define a habilidade vem na frente.
+ */
+const topicoVisivel=(t:Topic):Topic=>t==='survived'?'time':t;
+const ordemDaFonte=(t:Topic):number=>t==='time'||t==='survived'?2:t==='losing'||t==='winning'?1:0;
+export function cargasLegiveis(rules:Skill['charge']):string[]{
+  const somadas=new Map<Topic,number>();
+  for(const r of rules){const chave=topicoVisivel(r.on);somadas.set(chave,(somadas.get(chave)??0)+r.amount);}
+  return [...somadas].sort((a,b)=>ordemDaFonte(a[0])-ordemDaFonte(b[0])).map(([t,soma])=>`+${n(soma)}% ${topicNames[t]}`);
+}
+export function describeCharge(rules:Skill['charge']):string{return cargasLegiveis(rules).join('; ')||'Sem Carga';}
 export function describeEffects(effects:Effect[],target:Target):string[]{return effects.map(effect=>presentEffect(effect,target));}
 export function describeSkill(skill:Skill):string{return `${targetNames[skill.target]}: ${presentSkill(skill).effects.join('; ')}`;}
 export function describeSkillUse(skill:Skill):string{const p=presentSkill(skill);return `Carga: ${p.charge.join('; ')}. Usa quando: ${p.useWhen}. Preparo: ${p.preparation}. Recarga: ${p.cooldown}.`;}
