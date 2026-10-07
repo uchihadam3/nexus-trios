@@ -132,8 +132,21 @@ end $$;
 alter table public.leaderboard_entries enable row level security;
 create policy leaderboard_read_self on public.leaderboard_entries
   for select to authenticated using ((select auth.uid()) = player_id);
+-- O Supabase dá a `anon` e `authenticated` *todos* os privilégios em toda
+-- tabela nova de `public` — inclusive TRUNCATE, que não passa por RLS. Revogar
+-- só INSERT/UPDATE/DELETE, como a primeira migração fez, deixa o resto.
+-- Aqui começa do zero e devolve só a leitura da própria linha.
+revoke all on public.leaderboard_entries from anon, authenticated;
 grant select on public.leaderboard_entries to authenticated;
-revoke insert, update, delete on public.leaderboard_entries from anon, authenticated;
+
+-- E fecha a mesma porta nas tabelas da primeira migração: lá, `anon` e
+-- `authenticated` ficaram com TRUNCATE, REFERENCES e TRIGGER. A API do
+-- navegador não oferece nenhum dos três, então não havia como usar; mas
+-- privilégio que ninguém precisa não fica concedido.
+revoke truncate, references, trigger on
+  public.players, public.ranked_challenges, public.ranked_runs,
+  public.player_achievements, public.character_mastery, public.daily_weekly_progress
+  from anon, authenticated;
 
 -- Só o servidor registra. Ninguém de fora chama estas funções.
 revoke all on function public.registrar_no_top3(uuid, text, text, text[], uuid, integer, smallint, timestamptz) from public, anon, authenticated;

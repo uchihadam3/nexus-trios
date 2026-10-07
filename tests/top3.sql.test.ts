@@ -164,6 +164,25 @@ describe.skipIf(!ADMIN)('Top 3 por conta, no Postgres', () => {
     expect(await ativas(j, 'daily', '2026-10-11')).toEqual([{ canonical_team: 'goku|pikachu|storm', score: 990 }]);
   });
 
+  /*
+   * O Supabase concede tudo a `anon` e `authenticated` em tabela nova —
+   * inclusive TRUNCATE, que passa por cima de RLS. O stub imita isso; este
+   * teste garante que a migração tira.
+   */
+  it('nem visitante nem jogador apagam a tabela inteira', async () => {
+    for (const papel of ['anon', 'authenticated']) {
+      const c = await db.connect();
+      try {
+        await c.query('begin'); await c.query(`set local role ${papel}`);
+        await expect(c.query('truncate public.leaderboard_entries')).rejects.toMatchObject({ code: '42501' });
+        await c.query('rollback');
+        await c.query('begin'); await c.query(`set local role ${papel}`);
+        await expect(c.query('truncate public.ranked_runs cascade')).rejects.toMatchObject({ code: '42501' });
+        await c.query('rollback');
+      } finally { c.release(); }
+    }
+  });
+
   /* "service_role fora do frontend": o navegador não consegue nem chamar. */
   it('um jogador logado não registra nem escreve direto', async () => {
     const j = await conta(), run = await partida(j, A, 1);

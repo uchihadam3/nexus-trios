@@ -66,9 +66,31 @@ servidor, que o typecheck do projeto não enxerga.
 publicada antes desta fase), não aparece caixa nem aviso, e "Meus recordes"
 mostra o que mostrava. Conferido no navegador simulando as duas respostas.
 
-## O que falta para ligar
+## Estado no Supabase (2026-10-07)
 
-Aplicar a migração e republicar `ranked-api` no projeto Supabase. Isso pede
-acesso de administrador ao projeto, que este ambiente não tem. A
-republicação também tira o bônus escondido de 12.000 pontos por objetivo
-(ver `docs/fase-i-contas.md`).
+**Banco: aplicado.** A migração rodou primeiro como ensaio no banco de
+produção (Postgres 17), dentro de uma transação desfeita no fim, e depois de
+verdade, registrada em `supabase_migrations.schema_migrations` como
+`20261008000000 top3_por_conta`. Conferido depois de aplicar: `anon` não tem
+nada na tabela nova; `authenticated` só lê; só o `service_role` registra.
+
+**As permissões padrão do Supabase.** Todo objeto novo em `public` nasce com
+*todos* os privilégios para `anon` e `authenticated`, inclusive TRUNCATE, que
+não passa por RLS. A primeira migração só revogou INSERT/UPDATE/DELETE, e as
+tabelas dela ficaram com TRUNCATE, REFERENCES e TRIGGER. A API do navegador
+não oferece nenhum dos três, então não havia como usar, mas a migração da
+FASE K revoga tudo isso. O banco de teste (`tests/sql/supabase-stub.sql`)
+agora imita essas permissões padrão, e um teste cobra que o TRUNCATE foi
+fechado.
+
+**Função: ainda é a anterior.** O empacotador do Supabase recusa a função,
+porque o código do jogo importa sem extensão (`./expanded-roster`).
+`scripts/publicar-funcao.sh` junta tudo com esbuild num arquivo só. Esse
+pacote foi testado num Deno local: carrega, aceita o jogo publicado com o
+cabeçalho `x-client-info`, exige login e recusa outras origens. A publicação
+em si foi bloqueada pela proteção do ambiente de trabalho contra deploy em
+produção e espera a autorização do dono do projeto.
+
+Enquanto isso, tudo funciona como antes. A função anterior não usa a tabela
+nova, e o jogo publicado entende as duas versões. O script, depois de
+publicar, reaplica a regra às partidas validadas no meio-tempo.
