@@ -7,6 +7,8 @@ import type { Beat } from '../presentation/director';
 import { PRESENTATION as P } from '../presentation/config';
 import { FighterCard } from '../components/FighterCard';
 import { BattleEffects,type Anchors } from '../components/BattleEffects';
+import { CombatConnections } from '../components/CombatConnections';
+import { combatLinks } from '../presentation/combat-links';
 import { BattleInspector,type InspectTarget } from '../components/BattleInspector';
 import { byId } from '../data/characters';
 import { statuses } from '../data/statuses';
@@ -23,20 +25,24 @@ export function BattleScreen({battle,beat,index,name,settings,paused,onPause,onA
   const position=50-Math.min(48,Math.max(-48,battle.dominion*.48));
   const turn=beat?.impacted&&beat.events.some(e=>e.kind==='turn');
   const threats=new Set(battle.fighters.flatMap(f=>f.cast?.targets??[]));
+  const links=combatLinks(beat,battle);
+  const actionTargets=new Set(links.map(link=>link.target));
+  const actionSources=new Set(links.map(link=>link.source));
   if(beat&&!beat.impacted&&beat.event.target)threats.add(beat.event.target);
-  const recent=battle.events.filter(e=>['skill','interrupt','ko','block','heal','shield','discovery','turn'].includes(e.kind)&&(!['block','shield'].includes(e.kind)||(e.value??0)>=40)).slice(-7).reverse();
+  const recent=battle.events.filter(e=>['damage','heal','shield','status','interrupt','ko','block','discovery','turn','synergy'].includes(e.kind)&&(!['block','shield'].includes(e.kind)||(e.value??0)>=20)).slice(-12).reverse();
   const sourceName=(uid:string)=>{const f=battle.fighters.find(x=>x.uid===uid);return f?byId[f.characterId].name:'Equipe'};
   const historyText=(event:Battle['events'][number])=>{
     const from=sourceName(event.source),to=event.target?sourceName(event.target):'';
     if(event.kind==='skill'||event.kind==='cast')return `${from}: ${event.label}${to?` → ${to}`:''}`;
     if(event.kind==='interrupt')return `${from} ${event.label.toLocaleLowerCase('pt-BR')}${to?` de ${to}`:''}`;
     if(event.kind==='ko')return `${to||from} saiu da luta`;
-    if(event.kind==='block')return `${to||from} bloqueou ${Math.round(event.value??0)} de dano`;
-    if(event.kind==='shield')return `${to||from} ganhou ${Math.round(event.value??0)} de Escudo`;
-    if(event.kind==='heal')return `${from} recuperou ${Math.round(event.value??0)} de Vida de ${to}`;
+    if(event.kind==='damage')return `${from} acertou ${to} por ${Math.round(event.value??0)}`;
+    if(event.kind==='block')return `${from} protegeu ${to}: ${Math.round(event.value??0)} bloqueado`;
+    if(event.kind==='shield')return `${from} deu ${Math.round(event.value??0)} de Escudo a ${to}`;
+    if(event.kind==='heal')return `${from} curou ${to} em ${Math.round(event.value??0)}`;
     if(event.kind==='discovery')return `${from} descobriu: ${to} é ${event.label.toLocaleLowerCase('pt-BR')}`;
     if(event.kind==='status')return `${from} aplicou ${event.status?statuses[event.status].name:event.label} em ${to}`;
-    if(event.kind==='synergy')return `${from} ajudou ${to}: ${event.label}`;
+    if(event.kind==='synergy')return `${from} ajudou ${to} a carregar uma habilidade`;
     if(event.kind==='tempo')return `${from} alterou o ritmo de ${to}`;
     if(event.kind==='turn')return 'VIRADA! A Vantagem mudou de lado';
     return `${from}: ${event.label}`;
@@ -48,9 +54,10 @@ export function BattleScreen({battle,beat,index,name,settings,paused,onPause,onA
     <div className="dominion"><div className="dominion-labels"><span>RIVAIS</span><strong>VANTAGEM</strong><span>SEU TRIO</span></div><div className="dominion-track" role="meter" aria-label="Vantagem: negativo rivais, positivo seu trio" aria-valuenow={Math.round(battle.dominion)} aria-valuemin={-100} aria-valuemax={100}><span className="dominion-rivals" style={{width:`${position}%`}}/><span className="dominion-player" style={{width:`${100-position}%`}}/><span className="dominion-center"/><span className="dominion-glow" style={{left:`${position}%`}}/><span className="dominion-front" style={{left:`${position}%`}}/></div><small>{turn?'VIRADA!':label}</small></div>
     <div ref={arena} className={`arena ${paused?'is-paused':''} ${settings.effects?'':'effects-off'}`}>
       <div className="arena-scenery" aria-hidden="true"><div className="arena-grid"/><div className="arena-orbit orbit-outer"/><div className="arena-orbit orbit-inner"/><div className="arena-axis"/><svg className="arena-sigil" viewBox="0 0 96 96"><circle cx="48" cy="48" r="34"/><circle cx="48" cy="48" r="23"/><path d="M48 8v15m0 50v15M8 48h15m50 0h15M20 20l11 11m34 34 11 11M76 20 65 31M31 65 20 76M33 18l5 19 10 11 10-11 5-19M33 78l5-19 10-11 10 11 5 19"/><path className="arena-sigil-core" d="m48 36 12 12-12 12-12-12 12-12Z"/></svg></div>
-      <div className="arena-team enemy-team">{battle.fighters.filter(f=>f.side==='enemy').map(f=><FighterCard key={f.uid} fighter={f} battle={battle} beat={beat} onInspect={setInspect} numbers={settings.numbers} threatened={threats.has(f.uid)}/>)}</div>
+      <div className="arena-team enemy-team">{battle.fighters.filter(f=>f.side==='enemy').map(f=><FighterCard key={f.uid} fighter={f} battle={battle} beat={beat} onInspect={setInspect} numbers={settings.numbers} threatened={threats.has(f.uid)} linkedSource={actionSources.has(f.uid)} linkedTarget={actionTargets.has(f.uid)}/>)}</div>
       <div className="arena-gap" aria-hidden="true"/>
-      <div className="arena-team player-team">{battle.fighters.filter(f=>f.side==='player').map(f=><FighterCard key={f.uid} fighter={f} battle={battle} beat={beat} onInspect={setInspect} numbers={settings.numbers} threatened={threats.has(f.uid)}/>)}</div>
+      <div className="arena-team player-team">{battle.fighters.filter(f=>f.side==='player').map(f=><FighterCard key={f.uid} fighter={f} battle={battle} beat={beat} onInspect={setInspect} numbers={settings.numbers} threatened={threats.has(f.uid)} linkedSource={actionSources.has(f.uid)} linkedTarget={actionTargets.has(f.uid)}/>)}</div>
+      <CombatConnections battle={battle} beat={beat} anchors={anchors} reduced={settings.reducedMotion}/>
       <BattleEffects battle={battle} beat={beat} anchors={anchors} enabled={settings.effects} reduced={settings.reducedMotion}/>
       {paused&&<div className="paused-banner"><Pause size={16}/> BATALHA PAUSADA</div>}
     </div>

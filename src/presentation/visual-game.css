@@ -1,0 +1,115 @@
+/* Combat layers: scenery 0, units 2, target marks 3, connections 4,
+   skill art 5, impact feedback 6, and the rare grand callout 7. */
+.battle-screen .arena{position:relative;padding:18px 11px 18px;background:#0b151b;border-color:#64928569;box-shadow:inset 0 0 50px #09231f,0 18px 42px #0005}
+.battle-screen .arena-scenery{z-index:0;background:radial-gradient(ellipse at 50% 50%,#266e7159,transparent 59%),linear-gradient(180deg,#3320296e,#111d27 45%,#13382e7a)}
+.battle-screen .arena-scenery:before{opacity:.32}
+.battle-screen .arena-team{position:relative;z-index:auto;gap:9px}
+.battle-screen .arena-gap{height:clamp(112px,17vw,165px)}
+.battle-screen .arena-gap:before,.battle-screen .arena-gap:after{content:'';position:absolute;left:2%;right:2%;top:50%;height:1px;background:linear-gradient(90deg,transparent,#8ed3c966,transparent);transform:rotate(7deg)}
+.battle-screen .arena-gap:after{transform:rotate(-7deg)}
+.battle-screen .fighter{position:relative;z-index:2;min-width:0;padding:8px 8px 5px;border-radius:18px 18px 12px 12px;background:linear-gradient(160deg,#1b3b3bde,#101d25dc 56%,#0e1820eb);border-color:#9bcec351;box-shadow:inset 0 1px #ffffff20,0 10px 23px #0007;transition:border-color .18s,box-shadow .18s,opacity .3s,transform .18s}
+.battle-screen .enemy-team .fighter{background:linear-gradient(160deg,#472c3dd9,#1c1e2bdf 56%,#151620ef);border-color:#e6a4aa55}
+.battle-screen .fighter-head{opacity:.65}
+.battle-screen .fighter-portrait{width:min(100%,108px);height:auto;aspect-ratio:1;margin:4px auto 6px}
+.battle-screen .fighter-name{font-size:clamp(9px,1.3vw,12px);font-weight:800;color:#f1f6ec;line-height:1.15;min-height:1.2em;text-shadow:0 2px 5px #000b}
+.battle-screen .condition-bar{height:8px;border-radius:7px;overflow:hidden}
+.battle-screen .condition-meta{font-size:8px;letter-spacing:.15px;min-height:13px}
+.battle-screen .skill-row{gap:3px;margin-top:5px}
+.battle-screen .ability{width:clamp(27px,3.2vw,35px);height:clamp(29px,3.3vw,36px)}
+.battle-screen .status-row{margin-top:5px}
+.battle-screen .link-source{z-index:6!important;border-color:var(--character)!important;box-shadow:0 0 0 2px color-mix(in srgb,var(--character) 55%,transparent),0 0 26px color-mix(in srgb,var(--character) 55%,transparent),inset 0 1px #ffffff55;transform:translateY(-5px)}
+.battle-screen .link-source .portrait-halo{opacity:.9;animation:source-aura .65s ease-in-out infinite alternate}
+.battle-screen .link-target{border-color:#f8e4ac!important;box-shadow:0 0 0 2px #f9e2a984,0 0 22px #f4d99878;z-index:6}
+.battle-screen .link-target .target-brackets,.battle-screen .link-target .fighter-portrait:after{content:'';position:absolute;inset:4px;border:2px solid #f8dd96;border-radius:14px;clip-path:polygon(0 0,27% 0,27% 7%,7% 7%,7% 27%,0 27%,0 0,100% 0,100% 27%,93% 27%,93% 7%,73% 7%,73% 0,100% 0,100% 100%,73% 100%,73% 93%,93% 93%,93% 73%,100% 73%,100% 100%,0 100%,0 73%,7% 73%,7% 93%,27% 93%,27% 100%,0 100%)}
+.battle-screen .link-target.taking-hit .fighter-portrait{animation:portrait-hit calc(.35s * var(--motion-scale)) ease-out}
+.battle-screen .receiving-help.link-target{border-color:#a9f8c3!important;box-shadow:0 0 0 2px #99f2bf7a,0 0 26px #79d6b277}
+.battle-screen .acting.basic-physical .fighter-portrait,.battle-screen .acting.basic-slash .fighter-portrait{animation:basic-lunge calc(.8s * var(--motion-scale)) ease-out both}
+.battle-screen .acting.basic-slash .portrait-halo{background:conic-gradient(from 20deg,transparent 0 35%,#f1e6d999 40% 46%,transparent 50%)}
+.battle-screen .cast-broken .preparation-ring{animation:cast-shatter .4s ease-out both;stroke:#ff9c87}
+.battle-screen .cast-broken .cast-label{color:#ffb4a2}
+.battle-screen .incapacitated{opacity:.54;filter:grayscale(1)}
+.battle-screen .newly-out{animation:unit-out .6s ease-out}
+.battle-screen .ko-mark:after{font-size:9px;bottom:8px;letter-spacing:.6px;background:#161b1ce0;padding:3px 4px;border-radius:3px}
+.combat-connections{position:absolute;inset:0;z-index:4;pointer-events:none;--link-time:.5s}
+.combat-paths{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.combat-path{--path-color:#f1d197}
+.path-heal,.path-buff,.path-support{--path-color:#8df0bb}
+.path-shield{--path-color:#91e9f1}
+.path-debuff,.path-interrupt{--path-color:#e9a5d5}
+.combat-path-halo,.combat-path-stroke{fill:none;vector-effect:non-scaling-stroke;stroke-linecap:round;stroke-linejoin:round}
+.combat-path-halo{stroke:var(--path-color);stroke-width:8;opacity:.14}
+.combat-path-stroke{stroke:var(--path-color);stroke-width:2.6;stroke-dasharray:4 2;opacity:.9}
+.combat-target-node{fill:var(--path-color);opacity:.92;stroke:#fff9;stroke-width:.5}
+.combat-tracer{fill:#fff;stroke:var(--path-color);stroke-width:1;filter:drop-shadow(0 0 3px var(--path-color))}
+.combat-connections.winding .combat-path-stroke{stroke-dasharray:100;stroke-dashoffset:100;animation:draw-link var(--link-time) ease-in-out forwards}
+.combat-connections.winding .combat-path-halo{animation:link-fade var(--link-time) ease-in both}
+.combat-connections.landed .combat-path{opacity:.5}
+.combat-connections.landed .combat-target-node{animation:target-pop .35s ease-out both}
+.combat-connections.still .combat-path-stroke{stroke-dasharray:4 2;stroke-dashoffset:0;animation:none}
+.combat-connections.still .combat-tracer{display:none}
+.combat-caption{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:grid;justify-items:center;gap:3px;width:max-content;max-width:83%;min-width:145px;padding:8px 11px;border:1px solid color-mix(in srgb,var(--caption-color,#f4d493) 55%,transparent);border-radius:8px;background:#0b151de8;box-shadow:0 6px 23px #000b;text-align:center;color:#f8f5e9}
+.combat-caption small{font-size:8px;font-weight:900;letter-spacing:2px;color:#e6d298}
+.combat-caption strong{font-size:clamp(11px,1.5vw,15px);line-height:1.2;text-wrap:balance}
+.combat-caption strong span{color:#e5cc88;padding:0 2px}
+.combat-caption em{font-size:9px;font-style:normal;color:#b8d2c7}
+.caption-heal,.caption-buff,.caption-support{--caption-color:#8df0bb}
+.caption-shield{--caption-color:#91e9f1}
+.caption-interrupt,.caption-debuff{--caption-color:#e9a5d5}
+.caption-heal small,.caption-buff small,.caption-support small{color:#b4f1c6}
+.caption-interrupt small,.caption-debuff small{color:#efb9dc}
+.battle-screen .battle-effects{z-index:5}
+.battle-screen .action-title{z-index:7;top:54%;width:min(74%,420px)}
+.combat-feedback{position:absolute;left:50%;top:9px;transform:translateX(-50%);z-index:6;display:flex;flex-direction:column;align-items:center;gap:2px;pointer-events:none}
+.combat-feedback:empty{display:none}
+.combat-feedback .damage-number{position:relative;left:auto;top:auto;display:flex;align-items:center;justify-content:center;gap:3px;transform:none;white-space:nowrap;background:none;border:0;padding:0;font-size:25px;font-weight:950;line-height:1;color:#fff4de;text-shadow:0 2px 2px #101316,0 0 12px #ff7a59;animation:feedback-rise calc(.85s * var(--motion-scale)) ease-out both}
+.combat-feedback .heal-number{color:#bbffd5;text-shadow:0 2px 1px #102a1f,0 1px 12px #7af4ac}
+.combat-feedback .shield-number{font-size:13px;color:#b9f8ff;text-shadow:0 1px 8px #50cade}
+.battle-screen .status-pop{display:flex;align-items:center;gap:3px;top:5px;border:1px solid #c9d8dc88;background:#16232af0;font-size:9px;animation:feedback-rise .7s ease-out both}
+.battle-screen .cast-broken .interrupt-label{z-index:7;left:3px;right:3px;bottom:calc(100% - 6px);padding:4px;border:1px solid #ffab9d;border-radius:5px;background:#4b1d25ed;color:#fff0e9;font-size:10px;font-weight:950;letter-spacing:.4px;box-shadow:0 3px 12px #0009}
+.battle-screen .player-team .cast-broken .interrupt-label{top:-20px;bottom:auto}
+.battle-screen .status-pop img{width:17px;height:17px}
+.ability-assisted .ability{animation:assisted-pulse .55s ease-out both;border-color:#a7f4c2}
+.ability-ready-label{position:absolute;z-index:6;left:50%;bottom:100%;transform:translateX(-50%);padding:2px 4px;border-radius:3px;background:#dcffa6;color:#172819;font-size:8px;font-weight:900;letter-spacing:.2px;white-space:nowrap;animation:ready-arrive .6s ease-out both;pointer-events:none}
+.battle-screen .ability.ready:after{content:'PRONTA';position:absolute;z-index:4;left:0;right:0;bottom:0;padding:1px 0;border-radius:0 0 5px 5px;background:#dbffac;color:#14211b;font-size:6px;font-weight:950;line-height:1;text-align:center;pointer-events:none}
+.advantage-active{opacity:1;filter:drop-shadow(0 0 5px #bbefa5)}
+.battle-screen .dominion{padding:13px 16px 12px;border-radius:14px;background:linear-gradient(105deg,#57324372,#132633 49%,#28554b83);border-color:#a4cbbe55}
+.battle-screen .dominion-labels>span{padding:4px 6px;border-radius:4px;transition:background .3s,color .3s}
+.battle-screen.lead-enemy .dominion-labels>span:first-child{background:#df788832;color:#ffd6df;font-weight:900}
+.battle-screen.lead-player .dominion-labels>span:last-child{background:#5dccab38;color:#cbffe0;font-weight:900}
+.battle-screen.dominion-turn .dominion{animation:advantage-turn .8s ease-out}
+.battle-screen.dominion-turn .dominion small{font-size:13px}
+@keyframes draw-link{to{stroke-dashoffset:0}}
+@keyframes link-fade{0%{opacity:0}35%{opacity:.23}100%{opacity:.13}}
+@keyframes target-pop{0%{opacity:.2;r:1}50%{opacity:1;r:3}100%{opacity:.8;r:2.1}}
+@keyframes source-aura{to{opacity:.4;transform:scale(1.1)}}
+@keyframes basic-lunge{0%{transform:translateY(0)}32%{transform:translateY(7px) scale(1.12)}62%{transform:translateY(-2px) scale(1.04)}100%{transform:translateY(0)}}
+@keyframes cast-shatter{to{opacity:0;transform:rotate(-90deg) scale(1.35)}}
+@keyframes unit-out{30%{transform:scale(1.06)}100%{transform:scale(1)}}
+@keyframes feedback-rise{0%{opacity:.5;translate:0 10px;scale:.8}10%{opacity:1;translate:0 0;scale:1.08}80%{opacity:1;translate:0 -11px;scale:1}100%{opacity:0;translate:0 -23px;scale:.94}}
+@keyframes assisted-pulse{50%{transform:scale(1.14);box-shadow:0 0 15px #9bffd0}}
+@keyframes ready-arrive{0%{opacity:0;translate:0 5px;scale:.8}25%,85%{opacity:1;translate:0 0;scale:1}100%{opacity:0;translate:0 -6px;scale:1}}
+@keyframes advantage-turn{40%{box-shadow:0 0 32px var(--side)}}
+@media(max-width:600px){
+  .battle-screen .arena{padding:12px 5px 14px}
+  .battle-screen .arena-team{gap:5px}
+  .battle-screen .arena-gap{height:126px}
+  .battle-screen .fighter{padding:5px 3px 4px;border-radius:12px}
+  .battle-screen .fighter-portrait{width:min(100%,90px);padding:5px;margin:3px auto 5px}
+  .battle-screen .fighter-name{font-size:10px;line-height:1.1;margin:0 -1px 5px;min-height:22px;display:grid;place-items:center}
+  .battle-screen .condition-meta{font-size:8px;min-height:12px;margin-top:3px}
+  .battle-screen .ability{width:clamp(24px,7.4vw,30px);height:clamp(26px,7.7vw,32px)}
+  .battle-screen .ability .skill-icon-art{width:24px;height:24px}
+  .battle-screen .status-row{margin-top:4px}
+  .combat-caption{padding:7px 8px;max-width:86%;min-width:120px}
+  .combat-caption small{font-size:7px;letter-spacing:1.1px}
+  .combat-caption strong{font-size:11px}
+  .combat-caption em{font-size:8px}
+  .combat-feedback{top:8px}
+  .combat-feedback .damage-number{font-size:19px}
+  .combat-feedback .shield-number{font-size:11px}
+  .battle-screen .status-pop{font-size:8px;max-width:115px}
+  .battle-screen .action-title{top:62%;max-width:78%}
+}
+@media(max-width:390px){.battle-screen .arena-gap{height:116px}.battle-screen .fighter-portrait{width:min(100%,82px)}.battle-screen .fighter-name{font-size:9px}.combat-feedback .damage-number{font-size:18px}}
+.reduce-motion .combat-connections *,.reduce-motion .link-source .portrait-halo{animation:none!important;transition:none!important}
+@media(prefers-reduced-motion:reduce){.combat-connections *,.link-source .portrait-halo{animation:none!important;transition:none!important}}

@@ -32,12 +32,13 @@ export function BattleEffects({battle,beat,anchors,enabled,reduced}:{battle:Batt
   const p1=beat&&beat.event.kind!=='turn'?point(beat.event.source):{x:50,y:50};
   const p2=beat?.event.target?point(beat.event.target):p1;
   const area=isAreaBeat(beat,battle),landed=beat?.impacted??false;
-  const travel=!!beat&&beat.event.kind!=='cast'&&beat.event.kind!=='turn'&&profile?.travel&&!!beat.event.target;
+  const travel=!!beat&&beat.event.kind!=='cast'&&beat.event.kind!=='turn'&&!!beat.event.target&&(!!profile?.travel||beat.event.kind==='basic'&&['energy','electric','fire','magic','psychic','dark'].includes(beat.family));
   const beam=travel&&family==='energy_beam';
   const scale=(profile?.scale??1)*(beat?.grand?1.26:1);
   const dx=(p2.x-p1.x)*size.w/100,dy=(p2.y-p1.y)*size.h/100;
   const beamStyle={left:`${p1.x}%`,top:`${p1.y}%`,'--beam-length':`${Math.hypot(dx,dy)}px`,'--beam-angle':`${Math.atan2(dy,dx)}rad`,'--beam-duration':`${Math.max(.12,(beat?.duration??1)*P.impactAt)}s`} as CSSProperties;
   const outcomes=(beat?.impacted?beat.events:[]).filter(e=>e.target===beat?.event.target&&['damage','status','interrupt','shield','block','heal'].includes(e.kind)).slice(0,3);
+  const impactedTargets=[...new Set((beat?.events??[]).filter(e=>e.target&&['damage','status','interrupt','shield','heal','ko'].includes(e.kind)).map(e=>e.target!))].slice(0,3);
   const outcome=(event:typeof outcomes[number])=>event.kind==='damage'?{label:'Dano',icon:Zap}:event.kind==='interrupt'?{label:'Interrompido',icon:ArrowDown}:event.kind==='status'?{label:event.status?statusCatalog[event.status].name:'Efeito',icon:Sparkles}:event.kind==='heal'?{label:'Recuperação',icon:HeartPulse}:{label:'Protegido',icon:ShieldCheck};
   const style={'--fx-color':character?.color??'#d2f276','--fx-scale':scale} as CSSProperties;
   const sprite=(anchor:Anchor,kind:'charge'|'travel'|'impact',key:string,extra='')=><div key={key} className={`effect-sprite sprite-${kind} ${extra}`} style={{left:`${anchor.x}%`,top:`${anchor.y}%`,'--sprite-image':`url(/assets/vfx/${atlasFor(family)}.webp)`,'--move-x':`${p2.x-p1.x}cqw`,'--move-y':`${p2.y-p1.y}cqh`,'--travel-duration':`${Math.max(.14,(beat?.duration??1)*P.impactAt)}s`,'--impact-duration':`${reduced?.18:Math.min(.55,Math.max(.25,(beat?.duration??1)*(1-P.impactAt)))}s`} as CSSProperties}/>;
@@ -46,9 +47,9 @@ export function BattleEffects({battle,beat,anchors,enabled,reduced}:{battle:Batt
       {!landed&&(beat.event.kind==='cast'||beat.event.kind==='skill')&&sprite(p1,'charge',`charge-${beat.event.id}`)}
       {travel&&!landed&&!reduced&&sprite(p1,'travel',`travel-${beat.event.id}`,beam?'sprite-beam-travel':'')}
       {beam&&!landed&&!reduced&&size.w>0&&<div className="fx-beam" style={beamStyle}/>}
-      {landed&&sprite(beat.event.kind==='cast'?p1:p2,'impact',`impact-${beat.event.id}`,`${area?'sprite-area-impact':''} ${beat.grand?'sprite-grand-impact':''}`)}
-      {landed&&(area||beat.grand)&&!reduced&&sprite({x:50,y:50},'impact',`accent-${beat.event.id}`,'sprite-accent')}
+      {landed&&(impactedTargets.length?impactedTargets:[beat.event.kind==='cast'?beat.event.source:beat.event.target??beat.event.source]).map((uid,i)=>sprite(point(uid),'impact',`impact-${beat.event.id}-${uid}`,`${area&&i===0?'sprite-area-impact':''} ${beat.grand&&i===0?'sprite-grand-impact':''}`))}
+      {landed&&beat.grand&&!area&&!reduced&&sprite({x:50,y:50},'impact',`accent-${beat.event.id}`,'sprite-accent')}
     </>}
-    {beat&&!beat.periodic&&['skill','cast','turn'].includes(beat.event.kind)&&<div className={`action-title ${landed?'landed':''} ${beat.grand?'title-grand':''}`} key={beat.event.id}><SkillIcon type={beat.event.visual??'impact'} size={20} characterId={source?.characterId} skillId={source&&beat.event.skill!==undefined?character?.skills[beat.event.skill]?.id:undefined}/><div><small>{beat.event.kind==='turn'?(beat.event.source.startsWith('player')?'SEU TRIO':'RIVAIS'):character?.name??'NEXUS'}</small><strong>{beat.event.kind==='turn'?'VIRADA!':beat.event.label}</strong>{outcomes.length>0&&<span className="action-outcomes">{outcomes.slice(0,2).map(e=>{const x=outcome(e),Icon=x.icon;return <i key={e.id}><Icon size={12}/>{x.label}</i>;})}</span>}</div></div>}
+    {beat&&!beat.periodic&&(beat.grand||beat.event.kind==='turn')&&<div className={`action-title ${landed?'landed':''} ${beat.grand?'title-grand':''}`} key={beat.event.id}><SkillIcon type={beat.event.visual??'impact'} size={20} characterId={source?.characterId} skillId={source&&beat.event.skill!==undefined?character?.skills[beat.event.skill]?.id:undefined}/><div><small>{beat.event.kind==='turn'?(beat.event.source.startsWith('player')?'SEU TRIO':'RIVAIS'):character?.name??'NEXUS'}</small><strong>{beat.event.kind==='turn'?'VIRADA!':beat.event.label}</strong>{outcomes.length>0&&<span className="action-outcomes">{outcomes.slice(0,2).map(e=>{const x=outcome(e),Icon=x.icon;return <i key={e.id}><Icon size={12}/>{x.label}</i>;})}</span>}</div></div>}
   </div>;
 }
