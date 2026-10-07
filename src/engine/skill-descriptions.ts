@@ -4,6 +4,20 @@ import type { Effect, Skill, Target, Topic, Trait, StatusId } from './types';
 const n=(v:number)=>Number(v.toFixed(1)).toLocaleString('pt-BR');
 const pct=(v:number)=>`${Math.round(v*100)}%`;
 const secs=(v:number)=>`${n(v)} s`;
+/*
+ * Em quem o Status cai, dito junto com o verbo.
+ *
+ * `targetNames` é substantivo solto, para a linha "Alvo: ...". Colado num
+ * "em", viraria "em o próprio personagem". Esta é a forma preposicionada, para
+ * a frase ficar inteira: "Aplica Fortalecido em si próprio".
+ */
+export const targetNamesEm:Record<Target,string>={
+  enemyWeak:'no inimigo mais fácil de derrubar',enemyStrong:'na maior ameaça',
+  enemyCast:'no inimigo que está preparando uma habilidade',
+  investigated:'no inimigo com mais Investigação',allyWeak:'no aliado em maior risco',
+  self:'em si próprio',allEnemies:'em todos os inimigos',allAllies:'em todo o trio',
+  randomEnemy:'em um inimigo aleatório',
+};
 export const targetNames:Record<Target,string>={
   enemyWeak:'inimigo mais fácil de derrubar',enemyStrong:'maior ameaça',enemyCast:'inimigo preparando uma habilidade',
   investigated:'inimigo com mais Investigação',allyWeak:'aliado em maior risco',self:'o próprio personagem',
@@ -18,7 +32,8 @@ export const topicNames:Record<Topic,string>={
   survived:'por segundo enquanto estiver na luta',losing:'por segundo enquanto seu trio estiver atrás na Vantagem',
   winning:'por segundo enquanto seu trio estiver à frente na Vantagem',
 };
-export const positiveStatuses=new Set<StatusId>(['protected','haste','regen','strengthened']);
+/* Derivado de `statuses`, nunca repetido: ver a nota de tom em data/statuses.ts. */
+export const positiveStatuses=new Set<StatusId>((Object.keys(statuses) as StatusId[]).filter(id=>statuses[id].tone==='positivo'));
 export interface StatusPresentation {name:string;tone:'positivo'|'negativo';summary:string;value:string;
   /** Vazio quando o Status apenas renova; descreve o acúmulo quando ele soma. */
   accumulation:string}
@@ -77,7 +92,19 @@ export function presentEffect(effect:Effect,defaultTarget:Target):string {
     case 'status':{
       const p=presentStatus(effect.status,effect.value);
       const acumula=p.accumulation?` · ${p.accumulation}`:'';
-      return `Aplica ${statuses[effect.status].name} · ${p.summary}${acumula} · ${secs(effect.duration)}${target}`;
+      /*
+       * Em quem, sempre — e junto do verbo.
+       *
+       * O alvo só aparecia quando era **diferente** do alvo da habilidade, o
+       * que significa que ele sumia justamente nos casos mais comuns: um buff
+       * que o personagem põe em si mesmo não dizia em quem. E quando aparecia,
+       * vinha no fim da linha, depois da duração, longe do verbo que o rege.
+       *
+       * Um buff e um debuff só se distinguem por em quem caem. Essa é a
+       * informação que não pode faltar.
+       */
+      const emQuem=targetNamesEm[effect.target??defaultTarget];
+      return `Aplica ${statuses[effect.status].name} ${emQuem} · ${p.summary}${acumula} · ${secs(effect.duration)}`;
     }
     case 'interrupt':return effect.mode==='cancel'?`Interrompe o Preparo${target}`:effect.mode==='delay'?`Atrasa o Preparo em ${secs(effect.value)}${target}`:`Reduz ${pct(effect.value)} do Preparo${target}`;
     case 'shift':return `${effect.value>=0?'Adianta':'Atrasa'} ${pct(Math.abs(effect.value))} do próximo ataque${target}`;
@@ -105,7 +132,7 @@ export function presentSkill(skill:Skill):SkillPresentation {
 }
 export function presentTrait(trait:Trait):TraitPresentation {
   const effects=trait.effects.map(effect=>presentEffect(effect,trait.target));
-  return {summary:effects[0]??'Sem efeito',trigger:topicNames[trait.on],frequency:trait.cooldown>0?`Pode ativar 1 vez a cada ${secs(trait.cooldown)}`:'Sem espera entre ativações',effects};
+  return {summary:effects[0]??'Sem efeito',trigger:topicNames[trait.on],frequency:trait.cooldown>0?`Resfriamento ${secs(trait.cooldown)}`:'Sem resfriamento',effects};
 }
 /*
  * Agregar fontes iguais de Carga, e pôr o gotejamento por último.
@@ -130,5 +157,5 @@ export function cargasLegiveis(rules:Skill['charge']):string[]{
 export function describeCharge(rules:Skill['charge']):string{return cargasLegiveis(rules).join('; ')||'Sem Carga';}
 export function describeEffects(effects:Effect[],target:Target):string[]{return effects.map(effect=>presentEffect(effect,target));}
 export function describeSkill(skill:Skill):string{return `${targetNames[skill.target]}: ${presentSkill(skill).effects.join('; ')}`;}
-export function describeSkillUse(skill:Skill):string{const p=presentSkill(skill);return `Carga: ${p.charge.join('; ')}. Usa quando: ${p.useWhen}. Preparo: ${p.preparation}. Recarga: ${p.cooldown}.`;}
+export function describeSkillUse(skill:Skill):string{const p=presentSkill(skill);return `Carga: ${p.charge.join('; ')}. Usa quando: ${p.useWhen}. Preparo: ${p.preparation}. Resfriamento: ${p.cooldown}.`;}
 export function describeTrait(trait:Trait):string{const p=presentTrait(trait);return `${p.effects.join('; ')}. Ativa ${p.trigger}. ${p.frequency}.`;}

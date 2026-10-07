@@ -11,7 +11,8 @@ export const alive=(f:Fighter)=>f.hp>0;
 export const intensity=(f:Fighter,id:StatusId)=>f.statuses.find(s=>s.id===id)?.intensity??0;
 const friendly=(b:Battle,f:Fighter)=>b.fighters.filter(x=>x.side===f.side&&alive(x));
 const hostile=(b:Battle,f:Fighter)=>b.fighters.filter(x=>x.side!==f.side&&alive(x));
-const negativeStatuses=new Set<StatusId>(['exposed','marked','slow','rooted','paralyzed','confused','burning','electric','silenced','weakened']);
+/* Derivado de `statuses`, nunca repetido: ver a nota de tom em data/statuses.ts. */
+export const negativeStatuses=new Set<StatusId>((Object.keys(statuses) as StatusId[]).filter(id=>statuses[id].tone==='negativo'));
 const sign=(f:Fighter)=>f.side==='player'?1:-1;
 const pressure=(b:Battle,side:Side,points:number)=>{b.momentum=clamp(b.momentum+(side==='player'?1:-1)*points,-D.maxScore,D.maxScore);};
 export function emit(b:Battle,e:Omit<BattleEvent,'id'|'time'>){b.events.push({...e,id:b.nextEvent++,time:b.time});if(b.events.length>180)b.events.shift();}

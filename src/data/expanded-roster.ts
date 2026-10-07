@@ -638,11 +638,22 @@ const somarCargas=(rules:readonly ChargeRule[]):ChargeRule[]=>{
  * muda decisão nenhuma. Agora sobra uma linha só, com a maior intensidade e a
  * maior duração — que é o que o combate já fazia na prática.
  */
-export const fundirEfeitos=(effects:readonly Effect[],intencionais:readonly StatusId[]=[]):Effect[]=>{
+export const fundirEfeitos=(effects:readonly Effect[],intencionais:readonly StatusId[]=[],alvoPadrao?:Target):Effect[]=>{
+  /*
+   * O alvo precisa ser resolvido antes de comparar.
+   *
+   * A primeira versão comparava `(o.target??'')===(e.target??'')`, o alvo cru.
+   * Quatro habilidades escapavam porque um dos efeitos dizia `allEnemies` e o
+   * outro não dizia nada — herdando `allEnemies` da própria habilidade. Como
+   * `'' !== 'allEnemies'`, os dois não fundiam; em combate acertavam
+   * exatamente as mesmas pessoas, e a ficha mostrava duas linhas onde o motor
+   * executava uma.
+   */
+  const alvoDe=(e:Effect):string=>e.target??alvoPadrao??'';
   const saida:Effect[]=[];
   for(const e of effects){
     if(e.kind!=='status'||intencionais.includes(e.status)){saida.push(e);continue;}
-    const i=saida.findIndex(o=>o.kind==='status'&&o.status===e.status&&(o.target??'')===(e.target??''));
+    const i=saida.findIndex(o=>o.kind==='status'&&o.status===e.status&&alvoDe(o)===alvoDe(e));
     const anterior=i>=0?saida[i]:undefined;
     if(anterior===undefined||anterior.kind!=='status'){saida.push(e);continue;}
     saida[i]={...anterior,value:Math.max(anterior.value,e.value),duration:Math.max(anterior.duration,e.duration)};
@@ -677,7 +688,7 @@ function makeSkill(c:Row,index:number,m:Move,hook?:IdentityHook):Skill{
   if(index===1&&hook)rules.push(charge(hook.on,hook.amount));
   const idDaHabilidade=name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
   const intencionais=combinacoesIntencionais[chaveDaCombinacao(c.id,idDaHabilidade)]??[];
-  const effects=fundirEfeitos(index===1&&hook?[...m.effects,hook.effect]:m.effects,intencionais);
+  const effects=fundirEfeitos(index===1&&hook?[...m.effects,hook.effect]:m.effects,intencionais,m.target??'enemyWeak');
   const topicName:Record<Topic,string>={time:'tempo',action:'ataque básico',dealt:'dano causado',received:'dano recebido',allyHurt:'aliado ferido',enemyHurt:'inimigo ferido',interrupt:'interrupção',status:'qualquer Status',negativeStatus:'Status negativo',protected:'dano bloqueado',enemyCast:'Preparo inimigo',survived:'enquanto luta',losing:'atrás na Vantagem',winning:'à frente na Vantagem'};
   return {id:idDaHabilidade,name,icon:m.icon,description:m.description,chargeText:m.on==='time'?'Tempo':`${topicName[m.on]} + tempo`,charge:somarCargas(rules),effects,target:m.target??'enemyWeak',condition:m.condition??'always',requiresSkills:m.requiresSkills,preparation:m.prep??0,cooldown:m.cool??6,priority:m.priority??1};
 }
@@ -757,7 +768,7 @@ const calibrarSustento=(efeitos:readonly Effect[],estilo:Style):Effect[]=>
 
 export const expandedCharacters:Character[]=rows.map(c=>{
   const kit=adjustedKit(c),adjustment=identityAdjustments[c.id],hook=adjustment?.hook===false?undefined:hookFor(c);
-  return {id:c.id,name:c.name,universe:c.universe,portrait:`/assets/portraits/placeholder-${c.id}.svg`,color:c.color,symbol:c.symbol,idea:c.idea,vulnerability:c.vulnerability,hp:c.hp,interval:c.interval,deathNoteCompatible:c.deathNoteCompatible??false,power:c.power,tags:c.tags,basic:{name:'Ataque básico',effects:fundirEfeitos([damage(c.attack),...(hook?[hook.effect]:[]),...(kit.basic??[])]),visual:'impact',target:'enemyWeak'},trait:{name:kit.trait,description:kit.traitText,on:kit.traitOn,effects:fundirEfeitos(kit.traitEffects),target:kit.traitTarget,cooldown:kit.traitCool},skills:[0,1,2].map(i=>{
+  return {id:c.id,name:c.name,universe:c.universe,portrait:`/assets/portraits/placeholder-${c.id}.svg`,color:c.color,symbol:c.symbol,idea:c.idea,vulnerability:c.vulnerability,hp:c.hp,interval:c.interval,deathNoteCompatible:c.deathNoteCompatible??false,power:c.power,tags:c.tags,basic:{name:'Ataque básico',effects:fundirEfeitos([damage(c.attack),...(hook?[hook.effect]:[]),...(kit.basic??[])],[],'enemyWeak'),visual:'impact',target:'enemyWeak'},trait:{name:kit.trait,description:kit.traitText,on:kit.traitOn,effects:fundirEfeitos(kit.traitEffects,[],kit.traitTarget),target:kit.traitTarget,cooldown:kit.traitCool},skills:[0,1,2].map(i=>{
     const s=makeSkill(c,i as 0|1|2,kit.moves[i as 0|1|2],hook);
     const fator=calibragemDeDano[c.style]??1;
     const comPiso=pisoDeDano(s.effects,c.style,c.attack,i);

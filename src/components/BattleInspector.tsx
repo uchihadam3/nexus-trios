@@ -21,7 +21,7 @@ export function BattleInspector({target,battle,onClose,onSelect}:{target:Inspect
     </>:skill?<>
       <div className="inspector-title"><SkillIcon type={skill.icon} characterId={c.id} skillId={skill.id} size={31}/><div><small>{c.name.toLocaleUpperCase('pt-BR')}</small><h3>{skill.name}</h3></div></div>
       <div className="effect-chips">{presentation!.effects.map((effect,i)=><span key={i}>{effect}</span>)}</div>
-      <div className="inspector-meta"><span><HeartPulse size={13}/>{Math.round(f.skills[skillIndex].charge)}% · {f.skills[skillIndex].cooldown>0?`Recarga ${f.skills[skillIndex].cooldown.toFixed(1)} s`:f.cast?.skill===skillIndex?'Em Preparo':f.skills[skillIndex].charge>=100?'Pronta':'Carregando'}</span><span><Clock3 size={13}/>Preparo {presentation!.preparation} · Recarga {presentation!.cooldown}</span></div>
+      <div className="inspector-meta"><span><HeartPulse size={13}/>{Math.round(f.skills[skillIndex].charge)}% · {f.skills[skillIndex].cooldown>0?`Resfriamento ${f.skills[skillIndex].cooldown.toFixed(1)} s`:f.cast?.skill===skillIndex?'Em Preparo':f.skills[skillIndex].charge>=100?'Pronta':'Carregando'}</span><span><Clock3 size={13}/>Preparo {presentation!.preparation} · Resfriamento {presentation!.cooldown}</span></div>
       <div className="charge-explanation"><b>Carga</b> {presentation!.charge.join(' · ')}<br/><b>Usa quando</b> {presentation!.useWhen}</div>
     </>:<>
       <div className="inspector-title"><span className="inspector-avatar" style={{'--character':c.color} as React.CSSProperties}>{c.symbol}</span><div><small>{c.universe}</small><h3>{c.name}</h3></div></div>
