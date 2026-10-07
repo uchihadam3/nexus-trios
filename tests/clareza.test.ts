@@ -129,6 +129,24 @@ describe('clareza da escrita pública', () => {
     expect(foraDeOrdem).toEqual([]);
   });
 
+
+  /*
+   * "Agregar fontes iguais. Remover repetição." vale para o alvo também.
+   *
+   * "Alvo: inimigo mais ferido" e "Usa quando: ficar pronta, contra inimigo
+   * mais ferido" apareciam em linhas vizinhas da mesma ficha.
+   */
+  it('não repete o alvo na linha de quando usar', () => {
+    const repetidas: string[] = [];
+    for (const c of characters) {
+      for (const s of c.skills) {
+        const p = presentSkill(s);
+        if (p.useWhen.includes(p.target)) repetidas.push(`${c.name} · ${s.name}: "${p.target}" / "${p.useWhen}"`);
+      }
+    }
+    expect(repetidas).toEqual([]);
+  });
+
   it('não repete a mesma fonte de Carga na mesma habilidade', () => {
     for (const c of characters) {
       for (const s of c.skills) {

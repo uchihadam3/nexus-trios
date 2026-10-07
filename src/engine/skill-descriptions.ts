@@ -12,16 +12,31 @@ const secs=(v:number)=>`${n(v)} s`;
  * a frase ficar inteira: "Aplica Fortalecido em si próprio".
  */
 export const targetNamesEm:Record<Target,string>={
-  enemyWeak:'no inimigo mais fácil de derrubar',enemyStrong:'na maior ameaça',
+  enemyWeak:'no inimigo mais ferido',enemyStrong:'no inimigo mais forte',
   enemyCast:'no inimigo que está preparando uma habilidade',
-  investigated:'no inimigo com mais Investigação',allyWeak:'no aliado em maior risco',
+  investigated:'no inimigo mais investigado',allyWeak:'no aliado mais ferido',
   self:'em si próprio',allEnemies:'em todos os inimigos',allAllies:'em todo o trio',
-  randomEnemy:'em um inimigo aleatório',
+  randomEnemy:'em um inimigo sorteado',
 };
+/*
+ * O alvo dito pelo que ele é, não por uma metáfora.
+ *
+ * "inimigo mais fácil de derrubar" soa a julgamento e não explica nada: fácil
+ * por quê? Pouca Vida? Pouca Armadura? Pouco poder? A regra do motor é uma só
+ * — `enemyWeak` pontua `(1 - Vida restante / Vida máxima)`, quer dizer, prefere
+ * quem está mais ferido. Então é isso que a ficha diz.
+ *
+ * "maior ameaça" era pior, porque estava errado. O motor soma ameaça em
+ * **todo** alvo inimigo; o que distingue `enemyStrong` é o poder do
+ * personagem. Quem lia "maior ameaça" esperava que a habilidade perseguisse
+ * quem estivesse prestes a agir, e ela persegue o mais forte.
+ */
 export const targetNames:Record<Target,string>={
-  enemyWeak:'inimigo mais fácil de derrubar',enemyStrong:'maior ameaça',enemyCast:'inimigo preparando uma habilidade',
-  investigated:'inimigo com mais Investigação',allyWeak:'aliado em maior risco',self:'o próprio personagem',
-  allEnemies:'todos os inimigos',allAllies:'todo o trio',randomEnemy:'inimigo aleatório',
+  enemyWeak:'inimigo mais ferido',enemyStrong:'inimigo mais forte',
+  enemyCast:'inimigo preparando uma habilidade',
+  investigated:'inimigo mais investigado',allyWeak:'aliado mais ferido',
+  self:'o próprio personagem',allEnemies:'todos os inimigos',allAllies:'todo o trio',
+  randomEnemy:'um inimigo sorteado',
 };
 export const topicNames:Record<Topic,string>={
   time:'por segundo',action:'ao atacar',dealt:'a cada 100 de dano causado',received:'a cada 100 de dano recebido',
@@ -118,7 +133,15 @@ export function presentEffect(effect:Effect,defaultTarget:Target):string {
 export function presentSkill(skill:Skill):SkillPresentation {
   const effects=skill.effects.map(effect=>presentEffect(effect,skill.target));
   const use:Record<Skill['condition'],string>={
-    always:skill.target==='self'||skill.target==='allAllies'?'ficar pronta':`ficar pronta, contra ${targetNames[skill.target]}`,
+    /*
+     * Sem repetir o alvo.
+     *
+     * A ficha mostra "Alvo" e "Usa quando" uma embaixo da outra, e isto dizia
+     * "Alvo: inimigo mais ferido · Usa quando: ficar pronta, contra inimigo
+     * mais ferido". A mesma informação, duas vezes, em duas linhas vizinhas. A
+     * linha do Alvo já respondeu contra quem.
+     */
+    always:'ficar pronta',
     injured:'o alvo estiver com menos de 78% de Vida',
     enemyCast:'um inimigo estiver preparando uma habilidade',
     threatened:'um aliado tiver menos de 85% de Vida ou um inimigo começar o Preparo',

@@ -92,6 +92,39 @@ lembra da string, e o jogo passa a mentir sem nenhum teste reclamar. Os três
 agora vêm dos dados: `characters.length`, `characters.length*3`,
 `Object.keys(statuses).length`.
 
+## 6 · O alvo descrito por metáfora, e um deles errado
+
+"Aplica Exposto no **inimigo mais fácil de derrubar**." Fácil por quê? Pouca
+Vida? Pouca Armadura? Pouco poder? A frase soa a julgamento e não responde.
+
+A regra do motor é uma só: `enemyWeak` pontua `(1 - Vida restante / Vida
+máxima)`, quer dizer, prefere quem está **mais ferido**. Então é isso que a
+ficha passou a dizer.
+
+O vizinho estava pior, porque estava errado. `enemyStrong` se chamava "maior
+ameaça", mas o motor soma ameaça em **todo** alvo inimigo; o que distingue
+`enemyStrong` é o poder do personagem. Quem lia "maior ameaça" esperava uma
+habilidade que persegue quem está prestes a agir, e ela persegue o mais forte.
+
+| antes | agora | o que o motor faz |
+|---|---|---|
+| inimigo mais fácil de derrubar | inimigo mais ferido | menor proporção de Vida |
+| maior ameaça | inimigo mais forte | maior poder do personagem |
+| aliado em maior risco | aliado mais ferido | maior Vida faltando |
+| inimigo aleatório | um inimigo sorteado | sorteio |
+
+## 7 · O alvo dito duas vezes seguidas
+
+A ficha mostra "Alvo" e "Usa quando" uma embaixo da outra, e saía assim:
+
+```
+Alvo: inimigo mais ferido
+Usa quando: ficar pronta, contra inimigo mais ferido
+```
+
+A linha do Alvo já respondeu contra quem. Agora a segunda diz só "ficar
+pronta".
+
 ## O que a auditoria **não** achou
 
 As strings proibidas — "alvo válido", "efeito aplicado", "recarga interna",
