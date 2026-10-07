@@ -61,12 +61,12 @@ Cada personagem novo participou de 12 batalhas headless com sementes e trios var
 
 | Personagem | Habilidade | Usos / 12 | Usos médios por luta |
 |---|---|---:|---:|
-| Gohan | Potencial latente | 8 | 0.67 |
+| Gohan | Potencial latente | 9 | 0.75 |
 | Gohan | Masenko | 17 | 1.42 |
 | Gohan | Despertar | 5 | 0.42 |
 | Piccolo | Leitura tática | 7 | 0.58 |
 | Piccolo | Braço estendido | 20 | 1.67 |
-| Piccolo | Regeneração namekiana | 8 | 0.67 |
+| Piccolo | Regeneração namekiana | 9 | 0.75 |
 | Frieza | Crueldade calculada | 6 | 0.50 |
 | Frieza | Raio mortal | 5 | 0.42 |
 | Frieza | Forma final | 11 | 0.92 |
@@ -79,9 +79,9 @@ Cada personagem novo participou de 12 batalhas headless com sementes e trios var
 | Sakura Haruno | Controle de chakra | 11 | 0.92 |
 | Sakura Haruno | Força monstruosa | 23 | 1.92 |
 | Sakura Haruno | Byakugou | 21 | 1.75 |
-| Tanjiro Kamado | Olfato aguçado | 16 | 1.33 |
-| Tanjiro Kamado | Respiração da Água | 21 | 1.75 |
-| Tanjiro Kamado | Hinokami Kagura | 22 | 1.83 |
+| Tanjiro Kamado | Olfato aguçado | 17 | 1.42 |
+| Tanjiro Kamado | Respiração da Água | 23 | 1.92 |
+| Tanjiro Kamado | Hinokami Kagura | 24 | 2.00 |
 | Nezuko Kamado | Sangue demoníaco | 10 | 0.83 |
 | Nezuko Kamado | Explosão de sangue | 21 | 1.75 |
 | Nezuko Kamado | Forma desperta | 6 | 0.50 |
@@ -109,7 +109,7 @@ Cada personagem novo participou de 12 batalhas headless com sementes e trios var
 | Ichigo Kurosaki | Getsuga Tensho | 10 | 0.83 |
 | Ichigo Kurosaki | Máscara Hollow | 20 | 1.67 |
 | Ichigo Kurosaki | Bankai | 6 | 0.50 |
-| Rukia Kuchiki | Sode no Shirayuki | 13 | 1.08 |
+| Rukia Kuchiki | Sode no Shirayuki | 12 | 1.00 |
 | Rukia Kuchiki | Círculo de gelo | 20 | 1.67 |
 | Rukia Kuchiki | Hakka no Togame | 18 | 1.50 |
 | Sosuke Aizen | Hipnose completa | 8 | 0.67 |
@@ -121,30 +121,30 @@ Cada personagem novo participou de 12 batalhas headless com sementes e trios var
 | Eren Yeager | Punho titânico | 10 | 0.83 |
 | Eren Yeager |  endurecer | 15 | 1.25 |
 | Eren Yeager | Rugido da fundação | 8 | 0.67 |
-| Mikasa Ackerman | Equipamento de manobra | 19 | 1.58 |
+| Mikasa Ackerman | Equipamento de manobra | 20 | 1.67 |
 | Mikasa Ackerman | Corte cruzado | 17 | 1.42 |
 | Mikasa Ackerman | Proteção decisiva | 13 | 1.08 |
 | Levi Ackerman | Leitura de abertura | 13 | 1.08 |
 | Levi Ackerman | Giro cortante | 11 | 0.92 |
 | Levi Ackerman | Execução relâmpago | 11 | 0.92 |
-| Gon Freecss | Jajanken: Pedra | 11 | 0.92 |
-| Gon Freecss | Jajanken: Tesoura | 11 | 0.92 |
-| Gon Freecss | Jajanken: Papel | 6 | 0.50 |
-| Killua Zoldyck | Ritmo elétrico | 25 | 2.08 |
+| Gon Freecss | Jajanken: Pedra | 12 | 1.00 |
+| Gon Freecss | Jajanken: Tesoura | 12 | 1.00 |
+| Gon Freecss | Jajanken: Papel | 7 | 0.58 |
+| Killua Zoldyck | Ritmo elétrico | 24 | 2.00 |
 | Killua Zoldyck | Palma relâmpago | 12 | 1.00 |
 | Killua Zoldyck | Velocidade divina | 16 | 1.33 |
 | Hisoka Morow | Bungee Gum | 8 | 0.67 |
 | Hisoka Morow | Textura surpresa | 8 | 0.67 |
 | Hisoka Morow | Armadilha elástica | 13 | 1.08 |
 | Kurapika | Corrente de captura | 13 | 1.08 |
-| Kurapika | Corrente de julgamento | 14 | 1.17 |
+| Kurapika | Corrente de julgamento | 13 | 1.08 |
 | Kurapika | Olhos escarlates | 18 | 1.50 |
-| Edward Elric | Lança de pedra | 18 | 1.50 |
-| Edward Elric | Muralha alquímica | 18 | 1.50 |
+| Edward Elric | Lança de pedra | 16 | 1.33 |
+| Edward Elric | Muralha alquímica | 16 | 1.33 |
 | Edward Elric | Transmutação rápida | 11 | 0.92 |
-| Alphonse Elric | Armadura de aço | 24 | 2.00 |
-| Alphonse Elric | Círculo protetor | 33 | 2.75 |
-| Alphonse Elric | Barreira transmutada | 26 | 2.17 |
+| Alphonse Elric | Armadura de aço | 25 | 2.08 |
+| Alphonse Elric | Círculo protetor | 34 | 2.83 |
+| Alphonse Elric | Barreira transmutada | 27 | 2.25 |
 | Roy Mustang | Estalo de ignição | 11 | 0.92 |
 | Roy Mustang | Chuva de fogo | 17 | 1.42 |
 | Roy Mustang | Campo incendiado | 10 | 0.83 |
@@ -157,21 +157,21 @@ Cada personagem novo participou de 12 batalhas headless com sementes e trios var
 | Jotaro Kujo | Star Platinum | 6 | 0.50 |
 | Jotaro Kujo | Precisão absoluta | 8 | 0.67 |
 | Jotaro Kujo | The World: instante | 4 | 0.33 |
-| Dio Brando | Muda | 6 | 0.50 |
+| Dio Brando | Muda | 5 | 0.42 |
 | Dio Brando | Facas voadoras | 7 | 0.58 |
 | Dio Brando | O Mundo | 5 | 0.42 |
-| Giorno Giovanna | Vida criada | 14 | 1.17 |
+| Giorno Giovanna | Vida criada | 12 | 1.00 |
 | Giorno Giovanna | Reflexo de dano | 2 | 0.17 |
-| Giorno Giovanna | Experiência dourada | 14 | 1.17 |
-| Denji | Serra motosserra | 17 | 1.42 |
+| Giorno Giovanna | Experiência dourada | 12 | 1.00 |
+| Denji | Serra motosserra | 18 | 1.50 |
 | Denji | Puxar a corda | 20 | 1.67 |
-| Denji | Frenesi de sangue | 13 | 1.08 |
+| Denji | Frenesi de sangue | 14 | 1.17 |
 | Power | Lança de sangue | 14 | 1.17 |
 | Power | Martelo sanguíneo | 18 | 1.50 |
 | Power | Prêmio de sangue | 14 | 1.17 |
 | Makima | Olhar de comando | 8 | 0.67 |
-| Makima | Corrente de obediência | 11 | 0.92 |
-| Makima | Controle total | 12 | 1.00 |
+| Makima | Corrente de obediência | 10 | 0.83 |
+| Makima | Controle total | 11 | 0.92 |
 | Frieren | Análise de mana | 4 | 0.33 |
 | Frieren | Zoltraak | 11 | 0.92 |
 | Frieren | Magia preparada | 4 | 0.33 |
@@ -185,11 +185,11 @@ Cada personagem novo participou de 12 batalhas headless com sementes e trios var
 | Yor Forger | Investida elegante | 18 | 1.50 |
 | Yor Forger | Jardim noturno | 18 | 1.50 |
 | Sung Jinwoo | Extração de sombra | 6 | 0.50 |
-| Sung Jinwoo | Comando: avancem | 17 | 1.42 |
-| Sung Jinwoo | Exército das sombras | 12 | 1.00 |
-| Ken Kaneki | Kagune | 16 | 1.33 |
-| Ken Kaneki | Fome crescente | 19 | 1.58 |
-| Ken Kaneki | Centípede | 10 | 0.83 |
+| Sung Jinwoo | Comando: avancem | 16 | 1.33 |
+| Sung Jinwoo | Exército das sombras | 11 | 0.92 |
+| Ken Kaneki | Kagune | 14 | 1.17 |
+| Ken Kaneki | Fome crescente | 17 | 1.42 |
+| Ken Kaneki | Centípede | 8 | 0.67 |
 | Yugi Muto | Preparar o duelo | 9 | 0.75 |
 | Yugi Muto | Chamado do Mago | 7 | 0.58 |
 | Yugi Muto | Jogada perfeita | 3 | 0.25 |
@@ -205,27 +205,27 @@ Cada personagem novo participou de 12 batalhas headless com sementes e trios var
 | Vision | Faseamento | 11 | 0.92 |
 | Vision | Raio solar | 7 | 0.58 |
 | Vision | Computação sintética | 2 | 0.17 |
-| Ant-Man | Encolhimento | 19 | 1.58 |
-| Ant-Man | Formigas auxiliares | 18 | 1.50 |
-| Ant-Man | Aumento surpresa | 15 | 1.25 |
+| Ant-Man | Encolhimento | 20 | 1.67 |
+| Ant-Man | Formigas auxiliares | 19 | 1.58 |
+| Ant-Man | Aumento surpresa | 16 | 1.33 |
 | Captain Marvel | Absorção cósmica | 9 | 0.75 |
 | Captain Marvel | Rajada binária | 14 | 1.17 |
 | Captain Marvel | Explosão binária | 10 | 0.83 |
 | Daredevil | Radar sensorial | 4 | 0.33 |
 | Daredevil | Bastões em cruz | 21 | 1.75 |
 | Daredevil | Contra-ataque cego | 23 | 1.92 |
-| Punisher | Mira fria | 8 | 0.67 |
+| Punisher | Mira fria | 10 | 0.83 |
 | Punisher | Rajada controlada | 16 | 1.33 |
 | Punisher | Alvo confirmado | 20 | 1.67 |
 | Ghost Rider | Corrente infernal | 14 | 1.17 |
 | Ghost Rider | Olhar de penitência | 23 | 1.92 |
 | Ghost Rider | Penance Stare | 16 | 1.33 |
-| Blade | Rastreio vampírico | 22 | 1.83 |
+| Blade | Rastreio vampírico | 21 | 1.75 |
 | Blade | Lâmina de prata | 17 | 1.42 |
 | Blade | Caçada noturna | 19 | 1.58 |
-| Moon Knight | Manto lunar | 11 | 0.92 |
-| Moon Knight | Crescente de prata | 17 | 1.42 |
-| Moon Knight | Julgamento de Khonshu | 7 | 0.58 |
+| Moon Knight | Manto lunar | 12 | 1.00 |
+| Moon Knight | Crescente de prata | 18 | 1.50 |
+| Moon Knight | Julgamento de Khonshu | 8 | 0.67 |
 | Storm | Rajada de vento | 15 | 1.25 |
 | Storm | Relâmpago em cadeia | 20 | 1.67 |
 | Storm | Olho da tempestade | 8 | 0.67 |
@@ -236,15 +236,15 @@ Cada personagem novo participou de 12 batalhas headless com sementes e trios var
 | Jean Grey | Rajada telecinética | 5 | 0.42 |
 | Jean Grey | Fênix desperta | 0 | 0.00 |
 | Rogue | Toque absorvente | 16 | 1.33 |
-| Rogue | Força roubada | 12 | 1.00 |
-| Rogue | Memória emprestada | 10 | 0.83 |
+| Rogue | Força roubada | 11 | 0.92 |
+| Rogue | Memória emprestada | 11 | 0.92 |
 | Gambit | Carta carregada | 11 | 0.92 |
 | Gambit | Baralho explosivo | 13 | 1.08 |
 | Gambit | Bastão cinético | 10 | 0.83 |
 | Professor Xavier | Coordenação mental | 8 | 0.67 |
 | Professor Xavier | Escudo psíquico | 3 | 0.25 |
 | Professor Xavier | Paralisia mental | 5 | 0.42 |
-| Venom | Tentáculos simbiontes | 14 | 1.17 |
+| Venom | Tentáculos simbiontes | 13 | 1.08 |
 | Venom | Mordida predatória | 14 | 1.17 |
 | Venom | Simbionte faminto | 9 | 0.75 |
 | Carnage | Lâminas vivas | 9 | 0.75 |
@@ -253,7 +253,7 @@ Cada personagem novo participou de 12 batalhas headless com sementes e trios var
 | Doctor Doom | Armadura de Doom | 2 | 0.17 |
 | Doctor Doom | Ritual latveriano | 2 | 0.17 |
 | Doctor Doom | Plano de contingência | 2 | 0.17 |
-| Loki | Duplicata ilusória | 7 | 0.58 |
+| Loki | Duplicata ilusória | 9 | 0.75 |
 | Loki | Troca de lugar | 5 | 0.42 |
 | Loki | Engano perfeito | 14 | 1.17 |
 | Ultron | Análise preditiva | 12 | 1.00 |
@@ -268,7 +268,7 @@ Cada personagem novo participou de 12 batalhas headless com sementes e trios var
 | Galactus | Dreno planetário | 6 | 0.50 |
 | Galactus | Rajada do Poder Cósmico | 10 | 0.83 |
 | Galactus | Devoração cósmica | 6 | 0.50 |
-| Star-Lord | Rajada elementar | 20 | 1.67 |
+| Star-Lord | Rajada elementar | 21 | 1.75 |
 | Star-Lord | Plano improvisado | 20 | 1.67 |
 | Star-Lord | Dança de distração | 7 | 0.58 |
 | Groot | Raízes de captura | 10 | 0.83 |
@@ -281,7 +281,7 @@ Cada personagem novo participou de 12 batalhas headless com sementes e trios var
 | Aquaman | Maré puxante | 23 | 1.92 |
 | Aquaman | Comando dos mares | 4 | 0.33 |
 | Green Lantern | Escudo de vontade | 6 | 0.50 |
-| Green Lantern | Punho esmeralda | 2 | 0.17 |
+| Green Lantern | Punho esmeralda | 3 | 0.25 |
 | Green Lantern | Construto adaptável | 11 | 0.92 |
 | Cyborg | Varredura tática | 10 | 0.83 |
 | Cyborg | Canhão sônico | 12 | 1.00 |
@@ -295,11 +295,11 @@ Cada personagem novo participou de 12 batalhas headless com sementes e trios var
 | Tifa Lockhart | Golpe de abertura | 14 | 1.17 |
 | Tifa Lockhart | Chuva de socos | 18 | 1.50 |
 | Tifa Lockhart | Explosão final | 14 | 1.17 |
-| Sephiroth | Lâmina Masamune | 8 | 0.67 |
+| Sephiroth | Lâmina Masamune | 9 | 0.75 |
 | Sephiroth | Corte sombrio | 8 | 0.67 |
 | Sephiroth | Heartless Angel | 8 | 0.67 |
 | Kratos | Lâminas do Caos | 10 | 0.83 |
-| Kratos | Fúria espartana | 14 | 1.17 |
+| Kratos | Fúria espartana | 15 | 1.25 |
 | Kratos | Ira dos deuses | 9 | 0.75 |
 | Link | Espada Mestra | 14 | 1.17 |
 | Link | Escudo Hyliano | 10 | 0.83 |
@@ -307,13 +307,13 @@ Cada personagem novo participou de 12 batalhas headless com sementes e trios var
 | Zelda | Selo da Luz | 17 | 1.42 |
 | Zelda | Barreira sagrada | 40 | 3.33 |
 | Zelda | Flecha de Luz | 5 | 0.42 |
-| Ganondorf | Punho sombrio | 6 | 0.50 |
-| Ganondorf | Poder da Tríade | 14 | 1.17 |
-| Ganondorf | Juízo do Rei | 1 | 0.08 |
+| Ganondorf | Punho sombrio | 7 | 0.58 |
+| Ganondorf | Poder da Tríade | 15 | 1.25 |
+| Ganondorf | Juízo do Rei | 2 | 0.17 |
 | Samus Aran | Trava de mira | 8 | 0.67 |
 | Samus Aran | Míssil de contenção | 5 | 0.42 |
 | Samus Aran | Charge Beam | 12 | 1.00 |
-| Dante | Rebellion | 12 | 1.00 |
+| Dante | Rebellion | 11 | 0.92 |
 | Dante | Ebony e Ivory | 12 | 1.00 |
 | Dante | Devil Trigger | 3 | 0.25 |
 | Vergil | Yamato | 7 | 0.58 |
@@ -322,8 +322,8 @@ Cada personagem novo participou de 12 batalhas headless com sementes e trios var
 | Bayonetta | Dança da bruxa | 1 | 0.08 |
 | Bayonetta | Witch Time | 2 | 0.17 |
 | Bayonetta | Invocação infernal | 1 | 0.08 |
-| Master Chief | Escudo de energia | 13 | 1.08 |
-| Master Chief | Fogo de supressão | 9 | 0.75 |
+| Master Chief | Escudo de energia | 14 | 1.17 |
+| Master Chief | Fogo de supressão | 8 | 0.67 |
 | Master Chief | Posição firme | 6 | 0.50 |
 | Doom Slayer | Avanço brutal | 12 | 1.00 |
 | Doom Slayer | Blindagem de combate | 20 | 1.67 |
@@ -334,12 +334,12 @@ Cada personagem novo participou de 12 batalhas headless com sementes e trios var
 | Raiden | Modo lâmina | 6 | 0.50 |
 | Raiden | Corte em sequência | 14 | 1.17 |
 | Raiden | Zandatsu | 14 | 1.17 |
-| Leon S. Kennedy | Mira firme | 12 | 1.00 |
+| Leon S. Kennedy | Mira firme | 11 | 0.92 |
 | Leon S. Kennedy | Tiro na cabeça | 19 | 1.58 |
 | Leon S. Kennedy | Faca de combate | 22 | 1.83 |
-| Jill Valentine | Kit de primeiros socorros | 22 | 1.83 |
-| Jill Valentine | Cobertura tática | 20 | 1.67 |
-| Jill Valentine | Resistência adquirida | 19 | 1.58 |
+| Jill Valentine | Kit de primeiros socorros | 24 | 2.00 |
+| Jill Valentine | Cobertura tática | 21 | 1.75 |
+| Jill Valentine | Resistência adquirida | 21 | 1.75 |
 | Albert Wesker | Deslocamento | 11 | 0.92 |
 | Albert Wesker | Golpe cruzado | 10 | 0.83 |
 | Albert Wesker | Supremacia | 9 | 0.75 |
@@ -352,37 +352,37 @@ Cada personagem novo participou de 12 batalhas headless com sementes e trios var
 | Sonic | Spin Dash | 21 | 1.75 |
 | Sonic | Homing Attack | 19 | 1.58 |
 | Sonic | Super Sonic | 13 | 1.08 |
-| Shadow | Chaos Spear | 8 | 0.67 |
-| Shadow | Chaos Control | 13 | 1.08 |
+| Shadow | Chaos Spear | 7 | 0.58 |
+| Shadow | Chaos Control | 12 | 1.00 |
 | Shadow | Lança das Esmeraldas | 5 | 0.42 |
-| Mega Man | Mega Buster | 11 | 0.92 |
-| Mega Man | Arma adquirida | 16 | 1.33 |
-| Mega Man | Carga máxima | 2 | 0.17 |
+| Mega Man | Mega Buster | 12 | 1.00 |
+| Mega Man | Arma adquirida | 17 | 1.42 |
+| Mega Man | Carga máxima | 3 | 0.25 |
 | Zero | Z-Saber | 6 | 0.50 |
 | Zero | Raikousen | 19 | 1.58 |
 | Zero | Sequência final | 15 | 1.25 |
 | Mario | Pulo certeiro | 13 | 1.08 |
 | Mario | Flor de fogo | 10 | 0.83 |
 | Mario | Estrela invencível | 8 | 0.67 |
-| Bowser | Investida de casco | 16 | 1.33 |
-| Bowser | Sopro flamejante | 17 | 1.42 |
-| Bowser | Tremor do rei | 14 | 1.17 |
+| Bowser | Investida de casco | 15 | 1.25 |
+| Bowser | Sopro flamejante | 15 | 1.25 |
+| Bowser | Tremor do rei | 12 | 1.00 |
 | Ryu | Hadouken | 12 | 1.00 |
 | Ryu | Shoryuken | 15 | 1.25 |
 | Ryu | Shinku Hadouken | 12 | 1.00 |
 | Chun-Li | Hyakuretsukyaku | 17 | 1.42 |
-| Chun-Li | Spinning Bird Kick | 13 | 1.08 |
+| Chun-Li | Spinning Bird Kick | 12 | 1.00 |
 | Chun-Li | Kikosho | 11 | 0.92 |
 | Akuma | Gou Hadouken | 11 | 0.92 |
 | Akuma | Ashura Senku | 10 | 0.83 |
 | Akuma | Shun Goku Satsu | 8 | 0.67 |
-| Scorpion | Corrente em chamas | 6 | 0.50 |
-| Scorpion | Teleporte infernal | 24 | 2.00 |
-| Scorpion | Toasty! | 23 | 1.92 |
+| Scorpion | Corrente em chamas | 5 | 0.42 |
+| Scorpion | Teleporte infernal | 23 | 1.92 |
+| Scorpion | Toasty! | 22 | 1.83 |
 
 Habilidades sem uso: 1 (Jean Grey: Fênix desperta)
 
-Habilidades raras (<0,25 uso por luta): 13 (Giorno Giovanna: Reflexo de dano; Seto Kaiba: Ultimate Burst; Scarlet Witch: Distorção do caos; Vision: Computação sintética; Doctor Doom: Armadura de Doom; Doctor Doom: Ritual latveriano; Doctor Doom: Plano de contingência; Green Lantern: Punho esmeralda; Ganondorf: Juízo do Rei; Bayonetta: Dança da bruxa; Bayonetta: Witch Time; Bayonetta: Invocação infernal; Mega Man: Carga máxima)
+Habilidades raras (<0,25 uso por luta): 11 (Giorno Giovanna: Reflexo de dano; Seto Kaiba: Ultimate Burst; Scarlet Witch: Distorção do caos; Vision: Computação sintética; Doctor Doom: Armadura de Doom; Doctor Doom: Ritual latveriano; Doctor Doom: Plano de contingência; Ganondorf: Juízo do Rei; Bayonetta: Dança da bruxa; Bayonetta: Witch Time; Bayonetta: Invocação infernal)
 
 ## Notas de arquitetura e limites da auditoria
 
@@ -445,7 +445,7 @@ A simulação usa 12 sementes por personagem e serve para encontrar gatilhos est
 - Tags: human, copy-sight, copy, tactician
 - Death Note: compatível
 1. **Sharingan** — Lê o adversário e marca sua ameaça. Carga: Preparo inimigo + tempo (enemyCast 9 + time 1.8); alvo enemyStrong; uso always; prep 0s; recarga 5s.
-2. **Raikiri** — Responde a uma preparação ativa. Carga: Preparo inimigo + tempo (enemyCast 15 + time 2.4 + enemyCast 11); alvo enemyCast; uso enemyCast; prep 0s; recarga 6s.
+2. **Raikiri** — Responde a uma preparação ativa. Carga: Preparo inimigo + tempo (enemyCast 26 + time 2.4); alvo enemyCast; uso enemyCast; prep 0s; recarga 6s.
 3. **Cópia perfeita** — Cópia perfeita devolve a técnica observada com atraso. Carga: Preparo inimigo + tempo (enemyCast 15 + time 2.5); alvo enemyCast; uso enemyCast; prep 0.8s; recarga 8s.
 
 ### Itachi Uchiha (Naruto)
@@ -487,7 +487,7 @@ A simulação usa 12 sementes por personagem e serve para encontrar gatilhos est
 - Tags: human, breath-reading, swordsman, precision
 - Death Note: compatível
 1. **Olfato aguçado** — Marca o alvo antes da sequência. Carga: ataque básico + tempo (action 12 + time 1.8); alvo enemyWeak; uso always; prep 0s; recarga 5s.
-2. **Respiração da Água** — Atinge com precisão quem já abriu a guarda. Carga: dano causado + tempo (dealt 11 + time 2.4 + dealt 9); alvo enemyWeak; uso vulnerable; prep 0s; recarga 5s.
+2. **Respiração da Água** — Atinge com precisão quem já abriu a guarda. Carga: dano causado + tempo (dealt 20 + time 2.4); alvo enemyWeak; uso vulnerable; prep 0s; recarga 5s.
 3. **Hinokami Kagura** — Interrompe e pune uma abertura. Carga: qualquer Status + tempo (status 18 + time 2.5); alvo enemyWeak; uso vulnerable; prep 1.3s; recarga 9s.
 
 ### Nezuko Kamado (Demon Slayer)
@@ -599,7 +599,7 @@ A simulação usa 12 sementes por personagem e serve para encontrar gatilhos est
 - Tags: curse, execution, control
 - Death Note: compatível
 1. **Desmantelar** — Marca uma abertura no alvo ferido. Carga: dano causado + tempo (dealt 8 + time 1.8); alvo enemyWeak; uso always; prep 0s; recarga 4s.
-2. **Cleave** — Aproveita uma vulnerabilidade existente. Carga: inimigo ferido + tempo (enemyHurt 11 + time 2.4 + enemyHurt 8); alvo enemyWeak; uso vulnerable; prep 0.9s; recarga 6s.
+2. **Cleave** — Aproveita uma vulnerabilidade existente. Carga: inimigo ferido + tempo (enemyHurt 19 + time 2.4); alvo enemyWeak; uso vulnerable; prep 0.9s; recarga 6s.
 3. **Santuário maligno** — Finaliza um alvo já exposto ou marcado. Carga: qualquer Status + tempo (status 15 + time 2.5); alvo enemyWeak; uso vulnerable; prep 2s; recarga 10s.
 
 ### Ichigo Kurosaki (Bleach)
@@ -683,7 +683,7 @@ A simulação usa 12 sementes por personagem e serve para encontrar gatilhos est
 - Tags: human, ackerman, speedster, assassin
 - Death Note: compatível
 1. **Equipamento de manobra** — Golpe rápido que já prepara o seguinte. Carga: ataque básico + tempo (action 14 + time 1.8); alvo enemyWeak; uso always; prep 0s; recarga 3s.
-2. **Corte cruzado** — Chega antes do próximo golpe contra um aliado. Carga: aliado ferido + tempo (allyHurt 12 + time 2.4 + allyHurt 8); alvo allyWeak; uso threatened; prep 0s; recarga 6s.
+2. **Corte cruzado** — Chega antes do próximo golpe contra um aliado. Carga: aliado ferido + tempo (allyHurt 20 + time 2.4); alvo allyWeak; uso threatened; prep 0s; recarga 6s.
 3. **Proteção decisiva** — Dispara uma resposta rápida e brevemente paralisa o alvo. Carga: ataque básico + tempo (action 10 + time 2.5); alvo enemyWeak; uso always; prep 0.5s; recarga 8s.
 
 ### Levi Ackerman (Attack on Titan)
@@ -809,7 +809,7 @@ A simulação usa 12 sementes por personagem e serve para encontrar gatilhos est
 - Tags: human, berserker, survivor
 - Death Note: compatível
 1. **Matadora de Dragões** — Devolve pressão depois de sofrer dano. Carga: dano recebido + tempo (received 9 + time 1.8); alvo enemyWeak; uso always; prep 0s; recarga 5s.
-2. **Armadura Berserker** — Regenera quando sua Vida cai. Carga: dano recebido + tempo (received 11 + time 2.4 + received 8); alvo self; uso injured; prep 0s; recarga 8s.
+2. **Armadura Berserker** — Regenera quando sua Vida cai. Carga: dano recebido + tempo (received 19 + time 2.4); alvo self; uso injured; prep 0s; recarga 8s.
 3. **Último esforço** — Último esforço avança mesmo sob risco de interrupção. Carga: atrás na Vantagem + tempo (losing 5 + time 2.5); alvo enemyStrong; uso always; prep 2.1s; recarga 10s.
 
 ### Griffith (Berserk)
@@ -879,7 +879,7 @@ A simulação usa 12 sementes por personagem e serve para encontrar gatilhos est
 - Tags: hybrid, aggression, regen
 - Death Note: compatível
 1. **Serra motosserra** — Mantém a troca de golpes. Carga: dano causado + tempo (dealt 11 + time 1.8); alvo enemyWeak; uso always; prep 0s; recarga 4s.
-2. **Puxar a corda** — Puxar a corda mantém a serra ativa quando é atingido. Carga: dano recebido + tempo (received 13 + time 2.4 + received 8); alvo enemyWeak; uso always; prep 0s; recarga 6s.
+2. **Puxar a corda** — Puxar a corda mantém a serra ativa quando é atingido. Carga: dano recebido + tempo (received 21 + time 2.4); alvo enemyWeak; uso always; prep 0s; recarga 6s.
 3. **Frenesi de sangue** — Intervém quando um aliado é ferido. Carga: aliado ferido + tempo (allyHurt 10 + time 2.5); alvo enemyStrong; uso always; prep 1.2s; recarga 9s.
 
 ### Power (Chainsaw Man)
@@ -991,7 +991,7 @@ A simulação usa 12 sementes por personagem e serve para encontrar gatilhos est
 - Tags: ghoul, regen, berserker
 - Death Note: compatível
 1. **Kagune** — Devolve pressão depois de sofrer dano. Carga: dano recebido + tempo (received 9 + time 1.8); alvo enemyWeak; uso always; prep 0s; recarga 5s.
-2. **Fome crescente** — Regenera quando sua Vida cai. Carga: dano recebido + tempo (received 11 + time 2.4 + received 9); alvo self; uso injured; prep 0s; recarga 8s.
+2. **Fome crescente** — Regenera quando sua Vida cai. Carga: dano recebido + tempo (received 20 + time 2.4); alvo self; uso injured; prep 0s; recarga 8s.
 3. **Centípede** — Centípede converte fome e desvantagem em violência regenerativa. Carga: atrás na Vantagem + tempo (losing 5 + time 2.5); alvo enemyWeak; uso always; prep 1.8s; recarga 10s.
 
 ### Yugi Muto (Yu-Gi-Oh!)
@@ -1159,7 +1159,7 @@ A simulação usa 12 sementes por personagem e serve para encontrar gatilhos est
 - Tags: human, lunar, mystic, chaos
 - Death Note: compatível
 1. **Manto lunar** — Confunde um adversário escolhido ao acaso. Carga: Tempo (time 4); alvo randomEnemy; uso always; prep 0s; recarga 5s.
-2. **Crescente de prata** — Responde de forma explosiva à pressão. Carga: dano recebido + tempo (received 10 + time 2.4 + received 8); alvo enemyWeak; uso always; prep 0s; recarga 6s.
+2. **Crescente de prata** — Responde de forma explosiva à pressão. Carga: dano recebido + tempo (received 18 + time 2.4); alvo enemyWeak; uso always; prep 0s; recarga 6s.
 3. **Julgamento de Khonshu** — Julgamento de Khonshu mistura punição ampla e risco próprio. Carga: atrás na Vantagem + tempo (losing 5 + time 2.5); alvo allEnemies; uso always; prep 1.8s; recarga 9s.
 
 ### Storm (Marvel)
@@ -1173,7 +1173,7 @@ A simulação usa 12 sementes por personagem e serve para encontrar gatilhos est
 - Tags: mutant, weather, control
 - Death Note: compatível
 1. **Rajada de vento** — Rajada de vento desacelera o campo antes do relâmpago. Carga: Tempo (time 5); alvo allEnemies; uso always; prep 0s; recarga 5s.
-2. **Relâmpago em cadeia** — Espalha a condição elemental pelo campo. Carga: inimigo ferido + tempo (enemyHurt 10 + time 2.4 + time 4); alvo allEnemies; uso always; prep 0s; recarga 7s.
+2. **Relâmpago em cadeia** — Espalha a condição elemental pelo campo. Carga: inimigo ferido + tempo (enemyHurt 10 + time 6.4); alvo allEnemies; uso always; prep 0s; recarga 7s.
 3. **Olho da tempestade** — Olho da tempestade converge vento e eletricidade. Carga: qualquer Status + tempo (status 14 + time 2.5); alvo allEnemies; uso vulnerable; prep 1.7s; recarga 9s.
 
 ### Cyclops (Marvel)
@@ -1201,7 +1201,7 @@ A simulação usa 12 sementes por personagem e serve para encontrar gatilhos est
 - Tags: mutant, telekinetic, psychic, protector
 - Death Note: compatível
 1. **Escudo mental** — Escudo mental protege todos os aliados ameaçados. Carga: aliado ferido + tempo (allyHurt 12 + time 1.8); alvo allAllies; uso threatened; prep 0s; recarga 6s.
-2. **Rajada telecinética** — Ergue uma defesa mental quando um aliado está ameaçado. Carga: aliado ferido + tempo (allyHurt 10 + time 2.4 + allyHurt 8); alvo allyWeak; uso threatened; prep 0s; recarga 7s.
+2. **Rajada telecinética** — Ergue uma defesa mental quando um aliado está ameaçado. Carga: aliado ferido + tempo (allyHurt 18 + time 2.4); alvo allyWeak; uso threatened; prep 0s; recarga 7s.
 3. **Fênix desperta** — Fênix desperta libera poder amplo quando o trio perde terreno. Carga: atrás na Vantagem + tempo (losing 5 + time 2.5); alvo allEnemies; uso enemyCast; prep 2.2s; recarga 9s.
 
 ### Rogue (Marvel)
@@ -1229,7 +1229,7 @@ A simulação usa 12 sementes por personagem e serve para encontrar gatilhos est
 - Tags: mutant, charge, gambler
 - Death Note: compatível
 1. **Carta carregada** — Carta carregada prepara o alvo com energia cinética. Carga: ataque básico + tempo (action 12 + time 1.8); alvo enemyWeak; uso always; prep 0s; recarga 5s.
-2. **Baralho explosivo** — Responde de forma explosiva à pressão. Carga: dano recebido + tempo (received 10 + time 2.4 + received 8); alvo enemyWeak; uso always; prep 0s; recarga 6s.
+2. **Baralho explosivo** — Responde de forma explosiva à pressão. Carga: dano recebido + tempo (received 18 + time 2.4); alvo enemyWeak; uso always; prep 0s; recarga 6s.
 3. **Bastão cinético** — Bastão cinético aproveita a explosão das cartas. Carga: dano causado + tempo (dealt 13 + time 2.5); alvo allEnemies; uso always; prep 1.3s; recarga 9s.
 
 ### Professor Xavier (Marvel)
@@ -1257,7 +1257,7 @@ A simulação usa 12 sementes por personagem e serve para encontrar gatilhos est
 - Tags: symbiote, regen, hunter
 - Death Note: compatível
 1. **Tentáculos simbiontes** — Devolve pressão depois de sofrer dano. Carga: dano recebido + tempo (received 9 + time 1.8); alvo enemyWeak; uso always; prep 0s; recarga 5s.
-2. **Mordida predatória** — Mordida predatória restaura o simbionte quando ferido. Carga: dano recebido + tempo (received 12 + time 2.4 + received 8); alvo self; uso injured; prep 0s; recarga 8s.
+2. **Mordida predatória** — Mordida predatória restaura o simbionte quando ferido. Carga: dano recebido + tempo (received 20 + time 2.4); alvo self; uso injured; prep 0s; recarga 8s.
 3. **Simbionte faminto** — Entra em frenesi quando o time perde terreno. Carga: atrás na Vantagem + tempo (losing 4.2 + time 2.5); alvo enemyWeak; uso always; prep 1.7s; recarga 10s.
 
 ### Carnage (Marvel)
@@ -1299,7 +1299,7 @@ A simulação usa 12 sementes por personagem e serve para encontrar gatilhos est
 - Tags: asgardian, deception, illusion, trickster
 - Death Note: compatível
 1. **Duplicata ilusória** — Desorienta e reduz a força de uma ameaça. Carga: Tempo (time 4.4); alvo enemyStrong; uso always; prep 0s; recarga 5s.
-2. **Troca de lugar** — Troca de lugar faz a preparação inimiga perder o alvo. Carga: Preparo inimigo + tempo (enemyCast 14 + time 2.4 + enemyCast 8); alvo enemyCast; uso enemyCast; prep 0s; recarga 7s.
+2. **Troca de lugar** — Troca de lugar faz a preparação inimiga perder o alvo. Carga: Preparo inimigo + tempo (enemyCast 22 + time 2.4); alvo enemyCast; uso enemyCast; prep 0s; recarga 7s.
 3. **Engano perfeito** — Ataca quando a confusão criou uma abertura. Carga: qualquer Status + tempo (status 15 + time 2.5); alvo enemyWeak; uso vulnerable; prep 1s; recarga 8s.
 
 ### Ultron (Marvel)
@@ -1327,7 +1327,7 @@ A simulação usa 12 sementes por personagem e serve para encontrar gatilhos est
 - Tags: human, tech, trap
 - Death Note: compatível
 1. **Bomba abóbora** — Prende uma ameaça antes que ela avance. Carga: Tempo (time 4.1); alvo enemyStrong; uso always; prep 0s; recarga 5s.
-2. **Gás do medo** — Detona a armadilha durante uma preparação. Carga: Preparo inimigo + tempo (enemyCast 13 + time 2.4 + enemyCast 7); alvo enemyCast; uso enemyCast; prep 0s; recarga 7s.
+2. **Gás do medo** — Detona a armadilha durante uma preparação. Carga: Preparo inimigo + tempo (enemyCast 20 + time 2.4); alvo enemyCast; uso enemyCast; prep 0s; recarga 7s.
 3. **Prancha armadilhada** — Pune o alvo preso, marcado ou exposto. Carga: qualquer Status + tempo (status 15 + time 2.5); alvo enemyWeak; uso vulnerable; prep 1.3s; recarga 9s.
 
 ### Silver Surfer (Marvel)
@@ -1383,7 +1383,7 @@ A simulação usa 12 sementes por personagem e serve para encontrar gatilhos est
 - Tags: flora, protector, growth
 - Death Note: incompatível
 1. **Raízes de captura** — Protege o aliado em maior risco. Carga: dano bloqueado + tempo (protected 12 + time 1.8); alvo allyWeak; uso threatened; prep 0s; recarga 5s.
-2. **Eu sou Groot** — Recupera e protege um aliado ferido. Carga: aliado ferido + tempo (allyHurt 12 + time 2.4 + allyHurt 7); alvo allyWeak; uso injured; prep 0s; recarga 6s.
+2. **Eu sou Groot** — Recupera e protege um aliado ferido. Carga: aliado ferido + tempo (allyHurt 19 + time 2.4); alvo allyWeak; uso injured; prep 0s; recarga 6s.
 3. **Muralha de galhos** — Transforma defesa útil em contra-ataque. Carga: dano bloqueado + tempo (protected 16 + time 2.5); alvo enemyStrong; uso always; prep 1.2s; recarga 8s.
 
 ### Rocket Raccoon (Marvel)
@@ -1495,7 +1495,7 @@ A simulação usa 12 sementes por personagem e serve para encontrar gatilhos est
 - Tags: human, swordsman, execution
 - Death Note: compatível
 1. **Lâmina Masamune** — Pune quem já está ferido e reduz o que ele devolve. Carga: inimigo ferido + tempo (enemyHurt 10 + time 1.8); alvo enemyWeak; uso always; prep 0s; recarga 4.5s.
-2. **Corte sombrio** — Aprofunda o corte na abertura existente. Carga: dano causado + tempo (dealt 12 + time 2.4 + dealt 8); alvo enemyWeak; uso vulnerable; prep 0s; recarga 5.5s.
+2. **Corte sombrio** — Aprofunda o corte na abertura existente. Carga: dano causado + tempo (dealt 20 + time 2.4); alvo enemyWeak; uso vulnerable; prep 0s; recarga 5.5s.
 3. **Heartless Angel** — Heartless Angel reduz o campo inteiro à beira da queda. Carga: inimigo ferido + tempo (enemyHurt 16 + time 2.5); alvo allEnemies; uso vulnerable; prep 2.6s; recarga 14s.
 
 ### Kratos (God of War)
@@ -1565,7 +1565,7 @@ A simulação usa 12 sementes por personagem e serve para encontrar gatilhos est
 - Tags: human, tech, sensor
 - Death Note: compatível
 1. **Trava de mira** — Trava a mira na ameaça principal. Carga: Tempo (time 6); alvo enemyStrong; uso always; prep 0s; recarga 6s.
-2. **Míssil de contenção** — Míssil de contenção atrasa a preparação enquanto a carga sobe. Carga: Preparo inimigo + tempo (enemyCast 13 + time 2.4 + enemyCast 7); alvo enemyCast; uso enemyCast; prep 0s; recarga 5s.
+2. **Míssil de contenção** — Míssil de contenção atrasa a preparação enquanto a carga sobe. Carga: Preparo inimigo + tempo (enemyCast 20 + time 2.4); alvo enemyCast; uso enemyCast; prep 0s; recarga 5s.
 3. **Charge Beam** — Disparo carregado: dano enorme, preparo longo e exposto. Carga: qualquer Status + tempo (status 15 + time 2.5); alvo enemyStrong; uso vulnerable; prep 2.6s; recarga 13s.
 
 ### Dante (Devil May Cry)
@@ -1593,7 +1593,7 @@ A simulação usa 12 sementes por personagem e serve para encontrar gatilhos est
 - Tags: hybrid, precision, swordsman
 - Death Note: compatível
 1. **Yamato** — Marca o alvo antes da sequência. Carga: ataque básico + tempo (action 12 + time 1.8); alvo enemyWeak; uso always; prep 0s; recarga 5s.
-2. **Corte dimensional** — Atinge com precisão quem já abriu a guarda. Carga: dano causado + tempo (dealt 11 + time 2.4 + dealt 8); alvo enemyWeak; uso vulnerable; prep 0s; recarga 5s.
+2. **Corte dimensional** — Atinge com precisão quem já abriu a guarda. Carga: dano causado + tempo (dealt 19 + time 2.4); alvo enemyWeak; uso vulnerable; prep 0s; recarga 5s.
 3. **Judgement Cut End** — Judgement Cut End corta o campo inteiro num instante só. Carga: qualquer Status + tempo (status 17 + time 2.5); alvo allEnemies; uso vulnerable; prep 1.6s; recarga 13s.
 
 ### Bayonetta (Bayonetta)
@@ -1607,7 +1607,7 @@ A simulação usa 12 sementes por personagem e serve para encontrar gatilhos est
 - Tags: witch, time, trickster
 - Death Note: compatível
 1. **Dança da bruxa** — Adianta a própria ação para abrir uma janela. Carga: Tempo (time 3.7); alvo self; uso always; prep 0s; recarga 6s.
-2. **Witch Time** — Witch Time desacelera o campo e acelera a bruxa. Carga: Preparo inimigo + tempo (enemyCast 12 + time 2.4 + enemyCast 8); alvo allEnemies; uso enemyCast; prep 0s; recarga 7s.
+2. **Witch Time** — Witch Time desacelera o campo e acelera a bruxa. Carga: Preparo inimigo + tempo (enemyCast 20 + time 2.4); alvo allEnemies; uso enemyCast; prep 0s; recarga 7s.
 3. **Invocação infernal** — Gasta sua janela rara quando o time domina. Carga: à frente na Vantagem + tempo (winning 6 + time 2.5); alvo allEnemies; uso always; prep 2.2s; recarga 11s.
 
 ### Master Chief (Halo)
@@ -1635,7 +1635,7 @@ A simulação usa 12 sementes por personagem e serve para encontrar gatilhos est
 - Tags: human, juggernaut, survivor
 - Death Note: compatível
 1. **Avanço brutal** — Avanço brutal cura ao atravessar o golpe. Carga: dano recebido + tempo (received 10 + time 1.8); alvo enemyWeak; uso always; prep 0s; recarga 5s.
-2. **Blindagem de combate** — Quanto mais apanha, mais pesado fica. Carga: dano recebido + tempo (received 12 + time 2.4 + received 8); alvo self; uso injured; prep 0s; recarga 6s.
+2. **Blindagem de combate** — Quanto mais apanha, mais pesado fica. Carga: dano recebido + tempo (received 20 + time 2.4); alvo self; uso injured; prep 0s; recarga 6s.
 3. **Onda sísmica** — Impacto sísmico que para o campo por um instante. Carga: enquanto luta + tempo (survived 3 + time 2.5); alvo allEnemies; uso always; prep 2.4s; recarga 13s.
 
 ### Solid Snake (Metal Gear)
@@ -1845,7 +1845,7 @@ A simulação usa 12 sementes por personagem e serve para encontrar gatilhos est
 - Tags: human, combo, speedster
 - Death Note: compatível
 1. **Hyakuretsukyaku** — Abre a sequência e deixa a guarda do alvo aberta. Carga: ataque básico + tempo (action 10 + time 1.8); alvo enemyWeak; uso always; prep 0s; recarga 3.5s.
-2. **Spinning Bird Kick** — Encadeia no alvo já aberto e acelera o próprio ritmo. Carga: dano causado + tempo (dealt 10 + time 2.4 + dealt 8); alvo enemyWeak; uso vulnerable; prep 0s; recarga 5s.
+2. **Spinning Bird Kick** — Encadeia no alvo já aberto e acelera o próprio ritmo. Carga: dano causado + tempo (dealt 18 + time 2.4); alvo enemyWeak; uso vulnerable; prep 0s; recarga 5s.
 3. **Kikosho** — Fecha a cadeia com um impacto que tira o alvo do ritmo. Carga: dano causado + tempo (dealt 16 + time 2.5); alvo enemyWeak; uso vulnerable; prep 1s; recarga 9s.
 
 ### Akuma (Street Fighter)

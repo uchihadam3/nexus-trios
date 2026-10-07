@@ -276,19 +276,52 @@ const identityHooks:Record<string,IdentityHook>={
  animal:{on:'action',amount:7,effect:{kind:'shift',value:.035,target:'self'}},adapt:{on:'protected',amount:8,effect:{kind:'charge',value:3}},execution:{on:'enemyHurt',amount:8,effect:status('marked',.06,6)},berserker:{on:'received',amount:8,effect:status('strengthened',.035,5,'self')},
 };
 function hookFor(c:Row):IdentityHook|undefined{return c.tags.map(tag=>identityHooks[tag]).find(Boolean);}
+/*
+ * Soma as fontes de Carga do mesmo tópico em vez de empilhá-las.
+ *
+ * O jogador nunca viu "+12% ao causar dano" e "+8% ao causar dano" como duas
+ * coisas: para ele sempre foi +20%. Mostrar duas linhas era a mesma informação
+ * dita duas vezes, e foi um dos pontos que a direção listou por escrito.
+ */
+const somarCargas=(rules:readonly ChargeRule[]):ChargeRule[]=>{
+  const total=new Map<Topic,number>();
+  for(const r of rules)total.set(r.on,(total.get(r.on)??0)+r.amount);
+  return [...total].map(([on,amount])=>({on,amount}));
+};
+
+/*
+ * Funde Status iguais, mantendo o mais forte.
+ *
+ * Uma habilidade que aplicava "Lento 20% por 6 s" e "Lento 5% por 4 s" estava
+ * prometendo duas coisas e entregando uma: o menor é dominado pelo maior e não
+ * muda decisão nenhuma. Agora sobra uma linha só, com a maior intensidade e a
+ * maior duração — que é o que o combate já fazia na prática.
+ */
+const fundirEfeitos=(effects:readonly Effect[]):Effect[]=>{
+  const saida:Effect[]=[];
+  for(const e of effects){
+    if(e.kind!=='status'){saida.push(e);continue;}
+    const i=saida.findIndex(o=>o.kind==='status'&&o.status===e.status&&(o.target??'')===(e.target??''));
+    const anterior=i>=0?saida[i]:undefined;
+    if(anterior===undefined||anterior.kind!=='status'){saida.push(e);continue;}
+    saida[i]={...anterior,value:Math.max(anterior.value,e.value),duration:Math.max(anterior.duration,e.duration)};
+  }
+  return saida;
+};
+
 function makeSkill(c:Row,index:number,m:Move,hook?:IdentityHook):Skill{
   const name=c.moves[index];
   const rules:ChargeRule[]=[charge(m.on,m.rate),...(m.extraCharge??[])];
   const extra=[1.8,2.4,2.5][index];
   if(m.on!=='time')rules.push(charge('time',extra));
   if(index===1&&hook)rules.push(charge(hook.on,hook.amount));
-  const effects=index===1&&hook?[...m.effects,hook.effect]:m.effects;
+  const effects=fundirEfeitos(index===1&&hook?[...m.effects,hook.effect]:m.effects);
   const topicName:Record<Topic,string>={time:'tempo',action:'ataque básico',dealt:'dano causado',received:'dano recebido',allyHurt:'aliado ferido',enemyHurt:'inimigo ferido',interrupt:'interrupção',status:'qualquer Status',negativeStatus:'Status negativo',protected:'dano bloqueado',enemyCast:'Preparo inimigo',survived:'enquanto luta',losing:'atrás na Vantagem',winning:'à frente na Vantagem'};
-  return {id:name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,''),name,icon:m.icon,description:m.description,chargeText:m.on==='time'?'Tempo':`${topicName[m.on]} + tempo`,charge:rules,effects,target:m.target??'enemyWeak',condition:m.condition??'always',requiresSkills:m.requiresSkills,preparation:m.prep??0,cooldown:m.cool??6,priority:m.priority??1};
+  return {id:name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,''),name,icon:m.icon,description:m.description,chargeText:m.on==='time'?'Tempo':`${topicName[m.on]} + tempo`,charge:somarCargas(rules),effects,target:m.target??'enemyWeak',condition:m.condition??'always',requiresSkills:m.requiresSkills,preparation:m.prep??0,cooldown:m.cool??6,priority:m.priority??1};
 }
 export const expandedCharacters:Character[]=rows.map(c=>{
   const kit=adjustedKit(c),adjustment=identityAdjustments[c.id],hook=adjustment?.hook===false?undefined:hookFor(c);
-  return {id:c.id,name:c.name,universe:c.universe,portrait:`/assets/portraits/placeholder-${c.id}.svg`,color:c.color,symbol:c.symbol,idea:c.idea,vulnerability:c.vulnerability,hp:c.hp,interval:c.interval,deathNoteCompatible:c.deathNoteCompatible??false,power:c.power,tags:c.tags,basic:{name:'Ataque básico',effects:[damage(c.attack),...(hook?[hook.effect]:[]),...(kit.basic??[])],visual:'impact',target:'enemyWeak'},trait:{name:kit.trait,description:kit.traitText,on:kit.traitOn,effects:kit.traitEffects,target:kit.traitTarget,cooldown:kit.traitCool},skills:[makeSkill(c,0,kit.moves[0],hook),makeSkill(c,1,kit.moves[1],hook),makeSkill(c,2,kit.moves[2],hook)]};
+  return {id:c.id,name:c.name,universe:c.universe,portrait:`/assets/portraits/placeholder-${c.id}.svg`,color:c.color,symbol:c.symbol,idea:c.idea,vulnerability:c.vulnerability,hp:c.hp,interval:c.interval,deathNoteCompatible:c.deathNoteCompatible??false,power:c.power,tags:c.tags,basic:{name:'Ataque básico',effects:fundirEfeitos([damage(c.attack),...(hook?[hook.effect]:[]),...(kit.basic??[])]),visual:'impact',target:'enemyWeak'},trait:{name:kit.trait,description:kit.traitText,on:kit.traitOn,effects:fundirEfeitos(kit.traitEffects),target:kit.traitTarget,cooldown:kit.traitCool},skills:[makeSkill(c,0,kit.moves[0],hook),makeSkill(c,1,kit.moves[1],hook),makeSkill(c,2,kit.moves[2],hook)]};
 });
 export const rosterDesignQuestions:Record<string,string>=Object.fromEntries(rows.map(c=>[c.id,c.question]));
 export const expandedRosterNames=rows.map(c=>c.name);

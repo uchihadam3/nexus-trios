@@ -7,8 +7,8 @@
     {
       "character": "Gohan",
       "skill": "Potencial latente",
-      "averageUsesPerFight": 0.67,
-      "uses": 8,
+      "averageUsesPerFight": 0.75,
+      "uses": 9,
       "fights": 12
     },
     {
@@ -42,8 +42,8 @@
     {
       "character": "Piccolo",
       "skill": "Regeneração namekiana",
-      "averageUsesPerFight": 0.67,
-      "uses": 8,
+      "averageUsesPerFight": 0.75,
+      "uses": 9,
       "fights": 12
     },
     {
@@ -133,22 +133,22 @@
     {
       "character": "Tanjiro Kamado",
       "skill": "Olfato aguçado",
-      "averageUsesPerFight": 1.33,
-      "uses": 16,
+      "averageUsesPerFight": 1.42,
+      "uses": 17,
       "fights": 12
     },
     {
       "character": "Tanjiro Kamado",
       "skill": "Respiração da Água",
-      "averageUsesPerFight": 1.75,
-      "uses": 21,
+      "averageUsesPerFight": 1.92,
+      "uses": 23,
       "fights": 12
     },
     {
       "character": "Tanjiro Kamado",
       "skill": "Hinokami Kagura",
-      "averageUsesPerFight": 1.83,
-      "uses": 22,
+      "averageUsesPerFight": 2,
+      "uses": 24,
       "fights": 12
     },
     {
@@ -343,8 +343,8 @@
     {
       "character": "Rukia Kuchiki",
       "skill": "Sode no Shirayuki",
-      "averageUsesPerFight": 1.08,
-      "uses": 13,
+      "averageUsesPerFight": 1,
+      "uses": 12,
       "fights": 12
     },
     {
@@ -427,8 +427,8 @@
     {
       "character": "Mikasa Ackerman",
       "skill": "Equipamento de manobra",
-      "averageUsesPerFight": 1.58,
-      "uses": 19,
+      "averageUsesPerFight": 1.67,
+      "uses": 20,
       "fights": 12
     },
     {
@@ -469,29 +469,29 @@
     {
       "character": "Gon Freecss",
       "skill": "Jajanken: Pedra",
-      "averageUsesPerFight": 0.92,
-      "uses": 11,
+      "averageUsesPerFight": 1,
+      "uses": 12,
       "fights": 12
     },
     {
       "character": "Gon Freecss",
       "skill": "Jajanken: Tesoura",
-      "averageUsesPerFight": 0.92,
-      "uses": 11,
+      "averageUsesPerFight": 1,
+      "uses": 12,
       "fights": 12
     },
     {
       "character": "Gon Freecss",
       "skill": "Jajanken: Papel",
-      "averageUsesPerFight": 0.5,
-      "uses": 6,
+      "averageUsesPerFight": 0.58,
+      "uses": 7,
       "fights": 12
     },
     {
       "character": "Killua Zoldyck",
       "skill": "Ritmo elétrico",
-      "averageUsesPerFight": 2.08,
-      "uses": 25,
+      "averageUsesPerFight": 2,
+      "uses": 24,
       "fights": 12
     },
     {
@@ -539,8 +539,8 @@
     {
       "character": "Kurapika",
       "skill": "Corrente de julgamento",
-      "averageUsesPerFight": 1.17,
-      "uses": 14,
+      "averageUsesPerFight": 1.08,
+      "uses": 13,
       "fights": 12
     },
     {
@@ -553,15 +553,15 @@
     {
       "character": "Edward Elric",
       "skill": "Lança de pedra",
-      "averageUsesPerFight": 1.5,
-      "uses": 18,
+      "averageUsesPerFight": 1.33,
+      "uses": 16,
       "fights": 12
     },
     {
       "character": "Edward Elric",
       "skill": "Muralha alquímica",
-      "averageUsesPerFight": 1.5,
-      "uses": 18,
+      "averageUsesPerFight": 1.33,
+      "uses": 16,
       "fights": 12
     },
     {
@@ -574,22 +574,22 @@
     {
       "character": "Alphonse Elric",
       "skill": "Armadura de aço",
-      "averageUsesPerFight": 2,
-      "uses": 24,
+      "averageUsesPerFight": 2.08,
+      "uses": 25,
       "fights": 12
     },
     {
       "character": "Alphonse Elric",
       "skill": "Círculo protetor",
-      "averageUsesPerFight": 2.75,
-      "uses": 33,
+      "averageUsesPerFight": 2.83,
+      "uses": 34,
       "fights": 12
     },
     {
       "character": "Alphonse Elric",
       "skill": "Barreira transmutada",
-      "averageUsesPerFight": 2.17,
-      "uses": 26,
+      "averageUsesPerFight": 2.25,
+      "uses": 27,
       "fights": 12
     },
     {
@@ -679,8 +679,8 @@
     {
       "character": "Dio Brando",
       "skill": "Muda",
-      "averageUsesPerFight": 0.5,
-      "uses": 6,
+      "averageUsesPerFight": 0.42,
+      "uses": 5,
       "fights": 12
     },
     {
@@ -700,8 +700,8 @@
     {
       "character": "Giorno Giovanna",
       "skill": "Vida criada",
-      "averageUsesPerFight": 1.17,
-      "uses": 14,
+      "averageUsesPerFight": 1,
+      "uses": 12,
       "fights": 12
     },
     {
@@ -714,15 +714,15 @@
     {
       "character": "Giorno Giovanna",
       "skill": "Experiência dourada",
-      "averageUsesPerFight": 1.17,
-      "uses": 14,
+      "averageUsesPerFight": 1,
+      "uses": 12,
       "fights": 12
     },
     {
       "character": "Denji",
       "skill": "Serra motosserra",
-      "averageUsesPerFight": 1.42,
-      "uses": 17,
+      "averageUsesPerFight": 1.5,
+      "uses": 18,
       "fights": 12
     },
     {
@@ -735,8 +735,8 @@
     {
       "character": "Denji",
       "skill": "Frenesi de sangue",
-      "averageUsesPerFight": 1.08,
-      "uses": 13,
+      "averageUsesPerFight": 1.17,
+      "uses": 14,
       "fights": 12
     },
     {
@@ -770,15 +770,15 @@
     {
       "character": "Makima",
       "skill": "Corrente de obediência",
-      "averageUsesPerFight": 0.92,
-      "uses": 11,
+      "averageUsesPerFight": 0.83,
+      "uses": 10,
       "fights": 12
     },
     {
       "character": "Makima",
       "skill": "Controle total",
-      "averageUsesPerFight": 1,
-      "uses": 12,
+      "averageUsesPerFight": 0.92,
+      "uses": 11,
       "fights": 12
     },
     {
@@ -875,36 +875,36 @@
     {
       "character": "Sung Jinwoo",
       "skill": "Comando: avancem",
-      "averageUsesPerFight": 1.42,
-      "uses": 17,
-      "fights": 12
-    },
-    {
-      "character": "Sung Jinwoo",
-      "skill": "Exército das sombras",
-      "averageUsesPerFight": 1,
-      "uses": 12,
-      "fights": 12
-    },
-    {
-      "character": "Ken Kaneki",
-      "skill": "Kagune",
       "averageUsesPerFight": 1.33,
       "uses": 16,
       "fights": 12
     },
     {
+      "character": "Sung Jinwoo",
+      "skill": "Exército das sombras",
+      "averageUsesPerFight": 0.92,
+      "uses": 11,
+      "fights": 12
+    },
+    {
+      "character": "Ken Kaneki",
+      "skill": "Kagune",
+      "averageUsesPerFight": 1.17,
+      "uses": 14,
+      "fights": 12
+    },
+    {
       "character": "Ken Kaneki",
       "skill": "Fome crescente",
-      "averageUsesPerFight": 1.58,
-      "uses": 19,
+      "averageUsesPerFight": 1.42,
+      "uses": 17,
       "fights": 12
     },
     {
       "character": "Ken Kaneki",
       "skill": "Centípede",
-      "averageUsesPerFight": 0.83,
-      "uses": 10,
+      "averageUsesPerFight": 0.67,
+      "uses": 8,
       "fights": 12
     },
     {
@@ -1015,22 +1015,22 @@
     {
       "character": "Ant-Man",
       "skill": "Encolhimento",
+      "averageUsesPerFight": 1.67,
+      "uses": 20,
+      "fights": 12
+    },
+    {
+      "character": "Ant-Man",
+      "skill": "Formigas auxiliares",
       "averageUsesPerFight": 1.58,
       "uses": 19,
       "fights": 12
     },
     {
       "character": "Ant-Man",
-      "skill": "Formigas auxiliares",
-      "averageUsesPerFight": 1.5,
-      "uses": 18,
-      "fights": 12
-    },
-    {
-      "character": "Ant-Man",
       "skill": "Aumento surpresa",
-      "averageUsesPerFight": 1.25,
-      "uses": 15,
+      "averageUsesPerFight": 1.33,
+      "uses": 16,
       "fights": 12
     },
     {
@@ -1078,8 +1078,8 @@
     {
       "character": "Punisher",
       "skill": "Mira fria",
-      "averageUsesPerFight": 0.67,
-      "uses": 8,
+      "averageUsesPerFight": 0.83,
+      "uses": 10,
       "fights": 12
     },
     {
@@ -1120,8 +1120,8 @@
     {
       "character": "Blade",
       "skill": "Rastreio vampírico",
-      "averageUsesPerFight": 1.83,
-      "uses": 22,
+      "averageUsesPerFight": 1.75,
+      "uses": 21,
       "fights": 12
     },
     {
@@ -1141,22 +1141,22 @@
     {
       "character": "Moon Knight",
       "skill": "Manto lunar",
-      "averageUsesPerFight": 0.92,
-      "uses": 11,
+      "averageUsesPerFight": 1,
+      "uses": 12,
       "fights": 12
     },
     {
       "character": "Moon Knight",
       "skill": "Crescente de prata",
-      "averageUsesPerFight": 1.42,
-      "uses": 17,
+      "averageUsesPerFight": 1.5,
+      "uses": 18,
       "fights": 12
     },
     {
       "character": "Moon Knight",
       "skill": "Julgamento de Khonshu",
-      "averageUsesPerFight": 0.58,
-      "uses": 7,
+      "averageUsesPerFight": 0.67,
+      "uses": 8,
       "fights": 12
     },
     {
@@ -1232,15 +1232,15 @@
     {
       "character": "Rogue",
       "skill": "Força roubada",
-      "averageUsesPerFight": 1,
-      "uses": 12,
+      "averageUsesPerFight": 0.92,
+      "uses": 11,
       "fights": 12
     },
     {
       "character": "Rogue",
       "skill": "Memória emprestada",
-      "averageUsesPerFight": 0.83,
-      "uses": 10,
+      "averageUsesPerFight": 0.92,
+      "uses": 11,
       "fights": 12
     },
     {
@@ -1288,8 +1288,8 @@
     {
       "character": "Venom",
       "skill": "Tentáculos simbiontes",
-      "averageUsesPerFight": 1.17,
-      "uses": 14,
+      "averageUsesPerFight": 1.08,
+      "uses": 13,
       "fights": 12
     },
     {
@@ -1351,8 +1351,8 @@
     {
       "character": "Loki",
       "skill": "Duplicata ilusória",
-      "averageUsesPerFight": 0.58,
-      "uses": 7,
+      "averageUsesPerFight": 0.75,
+      "uses": 9,
       "fights": 12
     },
     {
@@ -1456,8 +1456,8 @@
     {
       "character": "Star-Lord",
       "skill": "Rajada elementar",
-      "averageUsesPerFight": 1.67,
-      "uses": 20,
+      "averageUsesPerFight": 1.75,
+      "uses": 21,
       "fights": 12
     },
     {
@@ -1547,8 +1547,8 @@
     {
       "character": "Green Lantern",
       "skill": "Punho esmeralda",
-      "averageUsesPerFight": 0.17,
-      "uses": 2,
+      "averageUsesPerFight": 0.25,
+      "uses": 3,
       "fights": 12
     },
     {
@@ -1645,8 +1645,8 @@
     {
       "character": "Sephiroth",
       "skill": "Lâmina Masamune",
-      "averageUsesPerFight": 0.67,
-      "uses": 8,
+      "averageUsesPerFight": 0.75,
+      "uses": 9,
       "fights": 12
     },
     {
@@ -1673,8 +1673,8 @@
     {
       "character": "Kratos",
       "skill": "Fúria espartana",
-      "averageUsesPerFight": 1.17,
-      "uses": 14,
+      "averageUsesPerFight": 1.25,
+      "uses": 15,
       "fights": 12
     },
     {
@@ -1729,22 +1729,22 @@
     {
       "character": "Ganondorf",
       "skill": "Punho sombrio",
-      "averageUsesPerFight": 0.5,
-      "uses": 6,
+      "averageUsesPerFight": 0.58,
+      "uses": 7,
       "fights": 12
     },
     {
       "character": "Ganondorf",
       "skill": "Poder da Tríade",
-      "averageUsesPerFight": 1.17,
-      "uses": 14,
+      "averageUsesPerFight": 1.25,
+      "uses": 15,
       "fights": 12
     },
     {
       "character": "Ganondorf",
       "skill": "Juízo do Rei",
-      "averageUsesPerFight": 0.08,
-      "uses": 1,
+      "averageUsesPerFight": 0.17,
+      "uses": 2,
       "fights": 12
     },
     {
@@ -1771,8 +1771,8 @@
     {
       "character": "Dante",
       "skill": "Rebellion",
-      "averageUsesPerFight": 1,
-      "uses": 12,
+      "averageUsesPerFight": 0.92,
+      "uses": 11,
       "fights": 12
     },
     {
@@ -1834,15 +1834,15 @@
     {
       "character": "Master Chief",
       "skill": "Escudo de energia",
-      "averageUsesPerFight": 1.08,
-      "uses": 13,
+      "averageUsesPerFight": 1.17,
+      "uses": 14,
       "fights": 12
     },
     {
       "character": "Master Chief",
       "skill": "Fogo de supressão",
-      "averageUsesPerFight": 0.75,
-      "uses": 9,
+      "averageUsesPerFight": 0.67,
+      "uses": 8,
       "fights": 12
     },
     {
@@ -1918,8 +1918,8 @@
     {
       "character": "Leon S. Kennedy",
       "skill": "Mira firme",
-      "averageUsesPerFight": 1,
-      "uses": 12,
+      "averageUsesPerFight": 0.92,
+      "uses": 11,
       "fights": 12
     },
     {
@@ -1939,22 +1939,22 @@
     {
       "character": "Jill Valentine",
       "skill": "Kit de primeiros socorros",
-      "averageUsesPerFight": 1.83,
-      "uses": 22,
+      "averageUsesPerFight": 2,
+      "uses": 24,
       "fights": 12
     },
     {
       "character": "Jill Valentine",
       "skill": "Cobertura tática",
-      "averageUsesPerFight": 1.67,
-      "uses": 20,
+      "averageUsesPerFight": 1.75,
+      "uses": 21,
       "fights": 12
     },
     {
       "character": "Jill Valentine",
       "skill": "Resistência adquirida",
-      "averageUsesPerFight": 1.58,
-      "uses": 19,
+      "averageUsesPerFight": 1.75,
+      "uses": 21,
       "fights": 12
     },
     {
@@ -2044,15 +2044,15 @@
     {
       "character": "Shadow",
       "skill": "Chaos Spear",
-      "averageUsesPerFight": 0.67,
-      "uses": 8,
+      "averageUsesPerFight": 0.58,
+      "uses": 7,
       "fights": 12
     },
     {
       "character": "Shadow",
       "skill": "Chaos Control",
-      "averageUsesPerFight": 1.08,
-      "uses": 13,
+      "averageUsesPerFight": 1,
+      "uses": 12,
       "fights": 12
     },
     {
@@ -2065,22 +2065,22 @@
     {
       "character": "Mega Man",
       "skill": "Mega Buster",
-      "averageUsesPerFight": 0.92,
-      "uses": 11,
+      "averageUsesPerFight": 1,
+      "uses": 12,
       "fights": 12
     },
     {
       "character": "Mega Man",
       "skill": "Arma adquirida",
-      "averageUsesPerFight": 1.33,
-      "uses": 16,
+      "averageUsesPerFight": 1.42,
+      "uses": 17,
       "fights": 12
     },
     {
       "character": "Mega Man",
       "skill": "Carga máxima",
-      "averageUsesPerFight": 0.17,
-      "uses": 2,
+      "averageUsesPerFight": 0.25,
+      "uses": 3,
       "fights": 12
     },
     {
@@ -2128,22 +2128,22 @@
     {
       "character": "Bowser",
       "skill": "Investida de casco",
-      "averageUsesPerFight": 1.33,
-      "uses": 16,
+      "averageUsesPerFight": 1.25,
+      "uses": 15,
       "fights": 12
     },
     {
       "character": "Bowser",
       "skill": "Sopro flamejante",
-      "averageUsesPerFight": 1.42,
-      "uses": 17,
+      "averageUsesPerFight": 1.25,
+      "uses": 15,
       "fights": 12
     },
     {
       "character": "Bowser",
       "skill": "Tremor do rei",
-      "averageUsesPerFight": 1.17,
-      "uses": 14,
+      "averageUsesPerFight": 1,
+      "uses": 12,
       "fights": 12
     },
     {
@@ -2177,8 +2177,8 @@
     {
       "character": "Chun-Li",
       "skill": "Spinning Bird Kick",
-      "averageUsesPerFight": 1.08,
-      "uses": 13,
+      "averageUsesPerFight": 1,
+      "uses": 12,
       "fights": 12
     },
     {
@@ -2212,22 +2212,22 @@
     {
       "character": "Scorpion",
       "skill": "Corrente em chamas",
-      "averageUsesPerFight": 0.5,
-      "uses": 6,
+      "averageUsesPerFight": 0.42,
+      "uses": 5,
       "fights": 12
     },
     {
       "character": "Scorpion",
       "skill": "Teleporte infernal",
-      "averageUsesPerFight": 2,
-      "uses": 24,
+      "averageUsesPerFight": 1.92,
+      "uses": 23,
       "fights": 12
     },
     {
       "character": "Scorpion",
       "skill": "Toasty!",
-      "averageUsesPerFight": 1.92,
-      "uses": 23,
+      "averageUsesPerFight": 1.83,
+      "uses": 22,
       "fights": 12
     }
   ],
@@ -2291,17 +2291,10 @@
       "fights": 12
     },
     {
-      "character": "Green Lantern",
-      "skill": "Punho esmeralda",
-      "averageUsesPerFight": 0.17,
-      "uses": 2,
-      "fights": 12
-    },
-    {
       "character": "Ganondorf",
       "skill": "Juízo do Rei",
-      "averageUsesPerFight": 0.08,
-      "uses": 1,
+      "averageUsesPerFight": 0.17,
+      "uses": 2,
       "fights": 12
     },
     {
@@ -2323,13 +2316,6 @@
       "skill": "Invocação infernal",
       "averageUsesPerFight": 0.08,
       "uses": 1,
-      "fights": 12
-    },
-    {
-      "character": "Mega Man",
-      "skill": "Carga máxima",
-      "averageUsesPerFight": 0.17,
-      "uses": 2,
       "fights": 12
     }
   ]
