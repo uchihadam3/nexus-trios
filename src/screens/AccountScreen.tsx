@@ -21,9 +21,9 @@ import type { Profile } from '../lib/storage';
 
 type Modo = 'entrar' | 'criar' | 'recuperar';
 
-export function AccountScreen({ autenticacao, conta, profile, conectado, aoMudarPerfil }:
+export function AccountScreen({ autenticacao, conta, profile, conectado, google = false, aoMudarPerfil }:
 { autenticacao: Autenticacao; conta: Conta | null; profile: Profile; conectado: boolean;
-  aoMudarPerfil: (p: Profile) => void }) {
+  google?: boolean; aoMudarPerfil: (p: Profile) => void }) {
   const [modo, setModo] = useState<Modo>('entrar');
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
@@ -158,7 +158,8 @@ export function AccountScreen({ autenticacao, conta, profile, conectado, aoMudar
         onClick={() => void executar(() => autenticacao.enviarRecuperacao(email), 'Se existe conta com esse e-mail, o link de recuperação já foi enviado.')}>
         <Mail size={17} /> Enviar link de recuperação</button>}
 
-      {modo !== 'recuperar' && <>
+      {/* O Google aparece só quando existe de verdade. Ver "onlineConfigured". */}
+      {google && modo !== 'recuperar' && <>
         <div className="account-ou"><span>ou</span></div>
         <button className="secondary" disabled={!conectado || ocupado}
           onClick={() => void executar(() => autenticacao.entrarComGoogle(), 'Abrindo o Google…')}>

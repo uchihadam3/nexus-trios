@@ -22,7 +22,7 @@ import { acumularFeitos,fecharFeitos,feitosVazios } from './engine/maestria';
 import { acumularRaioX,raioXVazio } from './engine/raio-x';
 import {battleDelta,emptyProgress,emptyTally,recordProgress,tallyEvents} from './engine/progression';
 import {runDigest} from './engine/ranked';
-import {client,onlineCall,onlineConfigured} from './lib/online';
+import {client,googleConfigured,onlineCall,onlineConfigured} from './lib/online';
 import {criarAutenticacao,type Conta} from './lib/auth';
 import {AccountScreen} from './screens/AccountScreen';
 const DebugScreen=lazy(()=>import('./screens/DebugScreen').then(m=>({default:m.DebugScreen})));
@@ -221,7 +221,7 @@ export default function App(){
       {screen==='characters'&&<CharactersScreen onDetails={setDetails}/>}
       {screen==='progress'&&<ProgressScreen profile={profile}/>}
       {screen==='ranking'&&onlineConfigured&&<RankingScreen handle={profile.publicHandle}/>}
-      {screen==='conta'&&<AccountScreen autenticacao={autenticacao} conta={conta} profile={profile} conectado={onlineConfigured} aoMudarPerfil={p=>{save('profile',p);setProfile(p);}}/>}
+      {screen==='conta'&&<AccountScreen autenticacao={autenticacao} conta={conta} profile={profile} conectado={onlineConfigured} google={googleConfigured} aoMudarPerfil={p=>{save('profile',p);setProfile(p);}}/>}
       {screen==='help'&&<HelpScreen onPlay={requestNew}/>}
       {screen==='settings'&&<><SettingsScreen settings={settings} onChange={changeSettings} onReset={reset}/>{onlineConfigured&&<section className="ranked-settings"><h2>Nome no ranking</h2><p>{profile.publicHandle??'Ainda não escolhido'} · você pode alterar o nome público a cada 30 dias.</p><button className="secondary" onClick={()=>{setPendingMode(null);setDraftHandle(profile.publicHandle??'');setNameDialog(true);}}>Editar nome público</button></section>}</>}
       {screen==='game'&&run?.stage==='draft'&&<DraftScreen draft={run.draft} onPick={id=>changeRun({...run,draft:pickDraft(run.draft,id)})} onSkip={()=>changeRun({...run,draft:skipDraft(run.draft)})} onDetails={setDetails} onStart={()=>void startBattle(0)} onAbandon={()=>setConfirmAbandon(true)}/>}

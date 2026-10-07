@@ -3,6 +3,15 @@ import {createClient} from '@supabase/supabase-js';
 const url=import.meta.env.VITE_SUPABASE_URL as string|undefined,key=import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY as string|undefined;
 export const onlineConfigured=!!url&&!!key&&import.meta.env.VITE_RANKED_ENABLED==='true';
 /*
+ * Entrar com e-mail e entrar com Google não ficam prontos juntos.
+ *
+ * O Supabase já nasce aceitando e-mail e senha; o Google não, porque depende
+ * de credenciais emitidas pelo dono do projeto no Google Cloud. Sem esta
+ * separação, ligar o ranqueado colocava na tela um botão do Google que leva a
+ * um erro — e um botão que falha é pior do que um botão que não existe.
+ */
+export const googleConfigured=onlineConfigured&&import.meta.env.VITE_GOOGLE_ENABLED==='true';
+/*
  * `detectSessionInUrl` ligado, porque agora existe volta do Google.
  *
  * O OAuth devolve o jogador com o token no fragmento da URL. Com a detecção

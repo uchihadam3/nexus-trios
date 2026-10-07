@@ -62,12 +62,27 @@ joga o formulário para fora da tela.
 
 ---
 
+## Duas chaves separadas, de propósito
+
+`VITE_RANKED_ENABLED` liga a conta por **e-mail**. `VITE_GOOGLE_ENABLED` liga
+o botão do **Google**. Elas são separadas porque não ficam prontas juntas: o
+Supabase já nasce aceitando e-mail e senha, enquanto o Google depende de
+credenciais emitidas no Google Cloud pelo dono do projeto. Sem a separação,
+ligar o ranqueado colocava na tela um botão do Google que leva a erro — e um
+botão que falha é pior do que um botão que não existe.
+
+Quem não quiser mexer no Google nunca precisa: entrar por e-mail é um caminho
+completo, com recuperação de senha, e o jogador nem vê que o Google existia.
+
 ## O que só você pode fazer (eu não tenho acesso)
 
-Nada disto está feito. Enquanto não estiver, a tela de Conta mostra *"A conta
-online ainda não foi conectada neste build"* e o jogo casual segue normal.
+Enquanto nada disto for feito, a tela de Conta mostra *"A conta online ainda
+não foi conectada neste build"* e o jogo casual segue normal.
 
-**1. Ligar o provedor Google no Supabase.**
+**Nenhum dos passos do Google (1) é obrigatório.** O mínimo para ter conta e
+ranking online são os passos 3 e 4.
+
+**1. Ligar o provedor Google no Supabase.** *Opcional.*
 Painel do projeto → *Authentication* → *Providers* → *Google* → ligar, e colar
 o Client ID e o Client Secret de um projeto do Google Cloud (*APIs & Services*
 → *Credentials* → *OAuth client ID* → tipo *Web application*). No Google
@@ -90,9 +105,9 @@ seguro e mais chato (o jogador só entra depois de abrir o e-mail); a tela já
 avisa quando é o caso. Desligado, entra na hora.
 
 **4. Ligar a conta online no build.**
-Trocar `VITE_RANKED_ENABLED=false` para `true` em `.env.production`. Só faça
-isso **depois** dos passos 1 a 3, senão a tela oferece um login que não
-funciona.
+Trocar `VITE_RANKED_ENABLED=false` para `true` em `.env.production`. Se tiver
+feito o passo 1, trocar também `VITE_GOOGLE_ENABLED` para `true`; se não
+tiver, deixar `false` e o botão do Google simplesmente não aparece.
 
 **5. Testar o caminho do Google uma vez**, no celular, pelo endereço
 publicado. É o único pedaço que não consigo verificar daqui: a rede deste
