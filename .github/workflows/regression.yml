@@ -37,7 +37,12 @@ jobs:
         with:
           node-version: 22
           cache: npm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
       - run: npm ci
+      - run: python -m pip install Pillow==12.3.0
+      - run: npm run assets:expanded
       - run: npx playwright install --with-deps chromium
       - run: node scripts/battle-regression-browser.mjs
       - uses: actions/upload-artifact@v4

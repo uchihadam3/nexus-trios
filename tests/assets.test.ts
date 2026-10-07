@@ -86,6 +86,8 @@ describe('Arte local e composição',()=>{
     expect(sheetManifest.count).toBe(characters.length*3);
     expect(sheetManifest.pages).toHaveLength(characters.length);
     expect(sheetManifest.pages.every(page=>page.resolution[0]===512&&page.resolution[1]===176&&page.columns===3&&page.rows===1&&page.cell[0]===160&&page.cell[1]===160&&page.icons.length===3&&existsSync(new URL(page.sourceSheet.slice(1),root)))).toBe(true);
+    expect(sheetManifest.pages.slice(100).every(page=>!('placeholder' in page)&&'artMethod' in page)).toBe(true);
+    expect(manifest.skills.slice(300).every(skill=>!('placeholder' in skill)&&'artMethod' in skill)).toBe(true);
   });
   it('mantém ícones universais próprios para todos os 14 estados e remove glifos emoji antigos',()=>{
     expect(Object.keys(statuses)).toHaveLength(14);

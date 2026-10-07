@@ -14,6 +14,7 @@
     "validate:identity": "node --import tsx scripts/validate-roster-identity.ts",
     "typecheck": "tsc -b --pretty false",
     "assets:pack": "python scripts/pack-ai-assets.py",
+    "assets:expanded": "python scripts/create-expanded-skill-art.py",
     "vfx:generate": "python tools/vfx/generate_vfx.py",
     "sfx:generate": "python tools/audio/generate_sfx.py",
     "audiovisual:generate": "npm run vfx:generate && npm run sfx:generate"

@@ -4,3 +4,6 @@ test-results/
 *.tar.gz
 *.zip
 *.tsbuildinfo
+__pycache__/
+public/assets/skills/*/*.png
+public/assets/sheets/skills/pages/*.png
