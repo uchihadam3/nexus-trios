@@ -72,3 +72,17 @@
 .raio-x-pressao{margin:14px 0 0;padding-top:13px;border-top:1px solid #3b4f3b;font-size:11px;color:#c9dcc4}
 .raio-x-pressao b{color:#d9efb0}
 @media(max-width:560px){.raio-x{padding:15px}.raio-x-par{flex-direction:column;gap:10px}.raio-x-duo{gap:9px}}
+/* FASE H · conquistas por categoria, e a lista de Maestria por feitos. */
+.conquista-filtros{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 14px}
+.conquista-filtros button{border:1px solid #4a5f46;background:#1e2a21;color:#c3d6bd;border-radius:999px;padding:5px 11px;font-size:10px;font-weight:650}
+.conquista-filtros button.active{border-color:#b8e282;background:#324a29;color:#f2ffd5}
+.achievement-grid article.secreta strong{color:#9aa8b6;letter-spacing:2px}
+.achievement-grid article.secreta span{font-style:italic;color:#8c9aa8}
+.mastery-card ol li.next{border-color:#b8e282;background:#2c3f27}
+.mastery-card ol li span{display:block;margin-top:4px;font-size:10px;color:#a9c29c}
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:9px}
+.stat-grid article{padding:13px;border:1px solid #3d5240;border-radius:10px;background:#1e2a21;text-align:left}
+.stat-grid strong{display:block;font-size:21px;color:#e6f4da;letter-spacing:-.5px}
+.stat-grid small{display:block;margin-top:3px;font-size:10px;color:#9db19b;line-height:1.35}
+.result-progress-link{display:inline-flex;align-items:center;gap:7px;margin:0 auto 18px;font-size:11px}
+@media(max-width:560px){.stat-grid{grid-template-columns:repeat(2,1fr)}.conquista-filtros button{font-size:9px;padding:4px 9px}}

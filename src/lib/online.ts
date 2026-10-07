@@ -15,5 +15,5 @@ export async function onlineCall<T>(action:string,body:Record<string,unknown>={}
   if(error){let message=error.message;try{const response=error.context as Response;const detail=await response.json() as {error?:string};message=detail.error??message;}catch{/* Network failures have no JSON body. */}throw new Error(message);}
   if(data?.error)throw new Error(data.error);return data as T;
 }
-export interface PublicRun {position:number;id:string;handle:string;score:number;progress:number;team:string[];objectives:number;date:string;seed:number;engineVersion:string;balanceVersion:string;highlights:{survivors?:number;turns?:number}}
+export interface PublicRun {position:number;id:string;handle:string;score:number;progress:number;team:string[];date:string;seed:number;engineVersion:string;balanceVersion:string;highlights:{survivors?:number;turns?:number}}
 export interface Leaderboard {mode:'daily'|'weekly'|'season';period:string;entries:PublicRun[];mine:PublicRun|null;details:PublicRun|null}

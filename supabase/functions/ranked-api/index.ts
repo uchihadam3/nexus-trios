@@ -26,13 +26,13 @@ function validHandle(value:unknown){if(typeof value!=='string')return null;const
 }
 async function profile(userId:string){const {data,error}=await admin.from('players').select('id,handle,nexus_level,xp,renamed_at').eq('id',userId).maybeSingle();if(error)throw error;return data;}
 async function board(userId:string,mode:'daily'|'weekly'|'season',detailId?:string){
-  let query=admin.from('ranked_runs').select('id,player_id,score,encounters_cleared,objectives_completed,team_ids,finished_at,seed,summary,engine_version,balance_version,period_key').eq('verified',true).eq('balance_version',BALANCE_VERSION).order('score',{ascending:false}).order('finished_at',{ascending:true}).limit(1000);
+  let query=admin.from('ranked_runs').select('id,player_id,score,encounters_cleared,team_ids,finished_at,seed,summary,engine_version,balance_version,period_key').eq('verified',true).eq('balance_version',BALANCE_VERSION).order('score',{ascending:false}).order('finished_at',{ascending:true}).limit(1000);
   if(mode!=='season')query=query.eq('mode',mode).eq('period_key',period(mode));
   const {data,error}=await query;if(error)throw error;
   const unique=new Set<string>(),best=(data??[]).filter(row=>{if(unique.has(row.player_id))return false;unique.add(row.player_id);return true;});
   const ids=best.map(r=>r.player_id),names=ids.length?(await admin.from('players').select('id,handle').in('id',ids)).data??[]:[];
   const handleOf=new Map(names.map(x=>[x.id,x.handle]));
-  const entries=best.map((r,index)=>({position:index+1,id:r.id,handle:handleOf.get(r.player_id)??'Jogador',score:r.score,progress:r.encounters_cleared,team:r.team_ids,objectives:r.objectives_completed,date:r.finished_at,seed:r.seed,engineVersion:r.engine_version,balanceVersion:r.balance_version,highlights:r.summary?.highlights??{}}));
+  const entries=best.map((r,index)=>({position:index+1,id:r.id,handle:handleOf.get(r.player_id)??'Jogador',score:r.score,progress:r.encounters_cleared,team:r.team_ids,date:r.finished_at,seed:r.seed,engineVersion:r.engine_version,balanceVersion:r.balance_version,highlights:r.summary?.highlights??{}}));
   return {mode,period:mode==='season'?BALANCE_VERSION:period(mode),entries:entries.slice(0,50),mine:entries.find(x=>best[x.position-1].player_id===userId)??null,details:detailId?(entries.find(x=>x.id===detailId)??null):null};
 }
 
@@ -85,12 +85,12 @@ Deno.serve(async (request:Request)=>{
       if(run.engine_version!==ENGINE_VERSION||run.roster_fingerprint!==rosterFingerprint()||run.balance_version!==BALANCE_VERSION)return fail('Versão do motor não reconhecida.',409,origin);
       const verified=replayRanked(run.team_ids,run.seed),digest=await runDigest(run.id,run.team_ids,run.seed,verified.summaries.map(s=>s.won));
       if(digest!==input.digest)return fail('Replay não corresponde ao desafio registrado.',422,origin);
-      const {data:saved,error:saveError}=await admin.from('ranked_runs').update({verified:true,finished_at:new Date().toISOString(),encounters_cleared:verified.encountersCleared,score:verified.score,objectives_completed:verified.objectivesCompleted,summary:{highlights:verified.highlights,outcomes:verified.summaries.map(s=>s.won)},digest}).eq('id',run.id).eq('verified',false).select('id').maybeSingle();
+      const {data:saved,error:saveError}=await admin.from('ranked_runs').update({verified:true,finished_at:new Date().toISOString(),encounters_cleared:verified.encountersCleared,score:verified.score,summary:{highlights:verified.highlights,outcomes:verified.summaries.map(s=>s.won)},digest}).eq('id',run.id).eq('verified',false).select('id').maybeSingle();
       if(saveError)throw saveError;if(!saved)return fail('Jornada já enviada.',409,origin);
       const player=await profile(user.id),xp=(player?.xp??0)+30+verified.encountersCleared*30+(verified.encountersCleared===10?250:0);
       await admin.from('players').update({xp,nexus_level:Math.floor(Math.sqrt(xp/100))+1,updated_at:new Date().toISOString()}).eq('id',user.id);
       const daily=await board(user.id,'daily'),weekly=await board(user.id,'weekly'),season=await board(user.id,'season');
-      return json({verified:true,score:verified.score,progress:verified.encountersCleared,objectives:verified.objectivesCompleted,daily:daily.mine?.position??null,weekly:weekly.mine?.position??null,season:season.mine?.position??null},200,origin);
+      return json({verified:true,score:verified.score,progress:verified.encountersCleared,daily:daily.mine?.position??null,weekly:weekly.mine?.position??null,season:season.mine?.position??null},200,origin);
     }
     if(input.action==='leaderboard'){
       const mode=input.mode==='weekly'?'weekly':input.mode==='season'?'season':'daily';

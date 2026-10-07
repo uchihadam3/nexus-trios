@@ -18,8 +18,9 @@ import { createDirection,restoreDirection,checkpointDirection,advanceDirection,t
 import { PRESENTATION as P } from './presentation/config';
 import type { Battle } from './engine/types';
 import { addSynergies,summarizeBattle } from './engine/run-summary';
+import { acumularFeitos,fecharFeitos,feitosVazios } from './engine/maestria';
 import { acumularRaioX,raioXVazio } from './engine/raio-x';
-import {advanceObjectives,battleDelta,emptyProgress,emptyTally,journeyObjectives,recordProgress,tallyEvents} from './engine/progression';
+import {battleDelta,emptyProgress,emptyTally,recordProgress,tallyEvents} from './engine/progression';
 import {runDigest} from './engine/ranked';
 import {onlineCall,onlineConfigured} from './lib/online';
 const DebugScreen=lazy(()=>import('./screens/DebugScreen').then(m=>({default:m.DebugScreen})));
@@ -85,7 +86,7 @@ export default function App(){
     const team=current.draft.team,encounters=current.ranked?current.encounters:current.stage==='draft'?generateCampaign(current.seed,team):current.encounters,encounter=encounters[index];
     let ranked=current.ranked;
     if(index===0&&ranked){setOnlineBusy(true);try{const result=await onlineCall<{run:{id:string;seed:number}}> ('start',{mode:ranked.mode,team});if(result.run.seed!==current.seed)throw new Error('O desafio mudou; inicie outra Jornada Ranqueada.');ranked={...ranked,id:result.run.id,status:'playing'};}catch(error){setOnlineNotice(error instanceof Error?error.message:'Jornada Ranqueada indisponível.');return;}finally{setOnlineBusy(false);}}
-    const next={...current,team,encounters,index,stage:'battle' as const,recorded:false,presentation:undefined,battleSynergies:[],raioX:raioXVazio(),objectives:index===0?journeyObjectives(team,current.seed):current.objectives,telemetry:emptyTally(),ranked,battle:createBattle(team,encounter.team,current.seed+index*7919,encounter.scale)};
+    const next={...current,team,encounters,index,stage:'battle' as const,recorded:false,presentation:undefined,battleSynergies:[],raioX:raioXVazio(),feitos:feitosVazios(),maiorAtraso:0,telemetry:emptyTally(),ranked,battle:createBattle(team,encounter.team,current.seed+index*7919,encounter.scale)};
     direction.current=null;setPresentation(null);changeRun(next);setPaused(false);navigate('game');
     if(index===0)setProfile(p=>{const n={...p,journeys:p.journeys+1};save('profile',n);return n;});
   };
@@ -137,13 +138,37 @@ export default function App(){
        * cada quadro chegam uma vez só, o que torna a contagem exata.
        */
       const raioX=d.signals.length?acumularRaioX(current.raioX??raioXVazio(),d.signals,d.battle):current.raioX??raioXVazio();
+      const feitos=d.signals.length?acumularFeitos(current.feitos??feitosVazios(),d.signals,d.battle):current.feitos??feitosVazios();
+      /* O quanto o trio chegou a ficar atrás: no fim da luta essa informação já não existe. */
+      const maiorAtraso=Math.max(current.maiorAtraso??0,-d.battle.dominion);
       const telemetry=d.signals.length?tallyEvents(current.telemetry??emptyTally(),d.signals):current.telemetry??emptyTally();
-      let next={...current,battle:d.battle,presentation:checkpointDirection(d),battleSynergies,raioX,telemetry};
+      let next={...current,battle:d.battle,presentation:checkpointDirection(d),battleSynergies,raioX,feitos,maiorAtraso,telemetry};
       if(d.complete){
         const summary=summarizeBattle(current.index,d.battle,battleSynergies);
-        const updatedObjectives=advanceObjectives(current.objectives??[],battleDelta(summary,d.battle,telemetry,profile.progress.seen,current.team));
-        next={...next,stage:'result',recorded:true,objectives:updatedObjectives,summaries:current.recorded?current.summaries:[...(current.summaries??[]).filter(s=>s.index!==current.index),summary]};
-        if(!current.recorded){const won=d.battle.winner==='player',champion=won&&current.index===9;setProfile(p=>{const delta=battleDelta(summary,d.battle,telemetry,p.progress.seen,current.team),progress=recordProgress(p.progress,delta,d.battle,current.team,!won||champion,champion);progress.xp+=(updatedObjectives.reduce((n,o)=>n+(o.progress>=o.target?o.reward:0),0)-(current.objectives??[]).reduce((n,o)=>n+(o.progress>=o.target?o.reward:0),0));const n={...p,best:Math.max(p.best,current.index+(won?1:0)),wins:p.wins+(won?1:0),victories:p.victories+Number(champion),champion:champion?[...current.team]:p.champion,progress};save('profile',n);return n;});battleAudio.sound(won?'victory':'defeat',5);}
+        next={...next,stage:'result',recorded:true,summaries:current.recorded?current.summaries:[...(current.summaries??[]).filter(s=>s.index!==current.index),summary]};
+        if(!current.recorded){
+          const won=d.battle.winner==='player',champion=won&&current.index===9;
+          /*
+           * Tudo que a progressão precisa saber sobre esta batalha, reunido
+           * num lugar só. As conquistas são de momento, então dependem do
+           * estado final da luta, dos feitos de cada lutador e das ligações
+           * que o Raio-X registrou — nada disso sobrevive ao fim da batalha se
+           * não for recolhido aqui.
+           */
+          const fechamento={
+            delta:battleDelta(summary,d.battle,telemetry,profile.progress.seen,current.team),
+            battle:d.battle,team:current.team,
+            feitos:fecharFeitos(feitos,d.battle,maiorAtraso>=8),
+            raioX,maiorAtraso:Math.round(maiorAtraso),indice:current.index,
+            jornada:current.summaries??[],
+            jornadaTerminou:!won||champion,campeao:champion,
+          };
+          setProfile(p=>{
+            const progress=recordProgress(p.progress,fechamento);
+            const n={...p,best:Math.max(p.best,current.index+(won?1:0)),wins:p.wins+(won?1:0),victories:p.victories+Number(champion),champion:champion?[...current.team]:p.champion,progress};
+            save('profile',n);return n;
+          });
+          battleAudio.sound(won?'victory':'defeat',5);}
         save('run',next);
       }
       runRef.current=next;setRun(next);
@@ -153,7 +178,7 @@ export default function App(){
   },[screen,paused,details,confirmNew,confirmAbandon,settings.speed,settings.volume]);
   useEffect(()=>{
     if(screen!=='game'||!settings.auto||run?.stage!=='result'||run.index>=9||run.battle?.winner!=='player')return;
-    const id=window.setTimeout(()=>{const current=runRef.current;if(!current)return;const index=current.index+1,encounter=current.encounters[index];const next={...current,index,stage:'battle' as const,recorded:false,presentation:undefined,battleSynergies:[],raioX:raioXVazio(),telemetry:emptyTally(),battle:createBattle(current.team,encounter.team,current.seed+index*7919,encounter.scale)};runRef.current=next;setRun(next);save('run',next);setPaused(false);},4500);
+    const id=window.setTimeout(()=>{const current=runRef.current;if(!current)return;const index=current.index+1,encounter=current.encounters[index];const next={...current,index,stage:'battle' as const,recorded:false,presentation:undefined,battleSynergies:[],raioX:raioXVazio(),feitos:feitosVazios(),maiorAtraso:0,telemetry:emptyTally(),battle:createBattle(current.team,encounter.team,current.seed+index*7919,encounter.scale)};runRef.current=next;setRun(next);save('run',next);setPaused(false);},4500);
     return()=>clearTimeout(id);
   },[screen,settings.auto,run?.stage,run?.index,run?.battle?.winner]);
   useEffect(()=>{
@@ -177,12 +202,12 @@ export default function App(){
       {screen!=='home'&&<button className="back-button" onClick={()=>navigate('home')}><ArrowLeft size={15}/>Voltar ao início</button>}
       {screen==='home'&&<Home profile={profile} run={run} onPlay={requestNew} onRanked={requestRanked} onContinue={()=>{if(run?.stage==='battle'&&run.battle){direction.current=directionFor(run);setPresentation({battle:direction.current.visible,beat:direction.current.active});}navigate('game');setPaused(run?.stage==='battle');}} onAbandon={()=>setConfirmAbandon(true)} onNavigate={navigate} onInstall={()=>void install()}/>}
       {screen==='characters'&&<CharactersScreen onDetails={setDetails}/>}
-      {screen==='progress'&&<ProgressScreen profile={profile} run={run}/>}
+      {screen==='progress'&&<ProgressScreen profile={profile}/>}
       {screen==='ranking'&&onlineConfigured&&<RankingScreen handle={profile.publicHandle}/>}
       {screen==='help'&&<HelpScreen onPlay={requestNew}/>}
       {screen==='settings'&&<><SettingsScreen settings={settings} onChange={changeSettings} onReset={reset}/>{onlineConfigured&&<section className="ranked-settings"><h2>Nome no ranking</h2><p>{profile.publicHandle??'Ainda não escolhido'} · você pode alterar o nome público a cada 30 dias.</p><button className="secondary" onClick={()=>{setPendingMode(null);setDraftHandle(profile.publicHandle??'');setNameDialog(true);}}>Editar nome público</button></section>}</>}
       {screen==='game'&&run?.stage==='draft'&&<DraftScreen draft={run.draft} onPick={id=>changeRun({...run,draft:pickDraft(run.draft,id)})} onSkip={()=>changeRun({...run,draft:skipDraft(run.draft)})} onDetails={setDetails} onStart={()=>void startBattle(0)} onAbandon={()=>setConfirmAbandon(true)}/>}
-      {screen==='game'&&run?.stage==='battle'&&run.battle&&<BattleScreen battle={presentation&&direction.current?.battle===run.battle?presentation.battle:run.battle} beat={presentation&&direction.current?.battle===run.battle?presentation.beat:null} index={run.index} name={run.encounters[run.index].name} settings={settings} paused={paused||!!details} objectives={run.objectives} telemetry={run.telemetry} onPause={()=>setPaused(!paused)} onAbandon={()=>setConfirmAbandon(true)} onSettings={changeSettings}/>}
+      {screen==='game'&&run?.stage==='battle'&&run.battle&&<BattleScreen battle={presentation&&direction.current?.battle===run.battle?presentation.battle:run.battle} beat={presentation&&direction.current?.battle===run.battle?presentation.beat:null} index={run.index} name={run.encounters[run.index].name} settings={settings} paused={paused||!!details}  onPause={()=>setPaused(!paused)} onAbandon={()=>setConfirmAbandon(true)} onSettings={changeSettings}/>}
       {screen==='game'&&run?.stage==='result'&&<ResultScreen run={run} onNext={()=>void startBattle(run.index+1)} onRestart={requestNew} onAbandon={()=>setConfirmAbandon(true)} onHome={()=>navigate('home')} onProgress={()=>navigate('progress')} onRanking={()=>navigate('ranking')} onRetry={()=>{if(run.ranked)changeRun({...run,ranked:{...run.ranked,status:'validating'}});}} auto={settings.auto} onAuto={auto=>changeSettings({...settings,auto})}/>}
       {screen==='debug'&&import.meta.env.DEV&&<Suspense fallback={<p>Carregando laboratório…</p>}><DebugScreen/></Suspense>}
       {screen==='vfx'&&<Suspense fallback={<p>Carregando galeria audiovisual…</p>}><VfxLabScreen/></Suspense>}

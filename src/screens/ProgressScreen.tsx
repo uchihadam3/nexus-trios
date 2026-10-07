@@ -1,24 +1,138 @@
-import {useState} from 'react';
-import {Award,CalendarDays,ChartNoAxesCombined,Search,Sparkles,Trophy} from 'lucide-react';
-import {characters} from '../data/characters';
-import {Portrait} from '../components/Portrait';
-import {achievements,masteryChallenges,nexusLevel,type Objective} from '../engine/progression';
-import type {Profile,Run} from '../lib/storage';
+/*
+ * FASE H · a tela de Progresso.
+ *
+ * Três abas, não quatro: os Objetivos saíram. A razão está escrita em
+ * `engine/progression.ts`, e o resumo é que diários e semanais são um
+ * calendário num jogo que se abre quando dá vontade, e os de jornada sumiam
+ * sem deixar rastro.
+ *
+ * O que ficou é o que vale guardar: 52 conquistas de momento, a Maestria dos
+ * 250, e os números da sua história. Nenhum deles altera um atributo de
+ * personagem — é prestígio, como o documento exige.
+ */
+import { useState } from 'react';
+import { Award, ChartNoAxesCombined, Search, Sparkles, Trophy } from 'lucide-react';
 
-const tabs=['Objetivos','Conquistas','Maestria','Estatísticas'] as const;
-function ObjectiveList({title,items}:{title:string;items:Objective[]}){return <section className="progress-panel"><h2>{title}</h2><div className="objective-list">{items.map(o=><article key={o.id} className={o.progress>=o.target?'complete':''}><div><strong>{o.label}</strong><small>{o.difficulty} · +{o.reward} XP</small></div><div className="objective-meter"><span>{Math.min(o.progress,o.target).toLocaleString('pt-BR')} / {o.target.toLocaleString('pt-BR')}</span><i style={{width:`${100*Math.min(o.progress/o.target,1)}%`}}/></div></article>)}</div></section>}
-export function ProgressScreen({profile,run}:{profile:Profile;run:Run|null}){
-  const [tab,setTab]=useState<(typeof tabs)[number]>('Objetivos'),[query,setQuery]=useState(''),[selected,setSelected]=useState('goku');
-  const p=profile.progress,level=nexusLevel(p.xp),next=(level*level)*100,progress=Math.min(100,100*(p.xp-((level-1)**2*100))/(next-((level-1)**2*100)));
-  const matching=characters.filter(c=>`${c.name} ${c.universe}`.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').includes(query.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'')));
-  const chosen=matching.find(c=>c.id===selected)??matching[0],mastery=chosen&&p.mastery[chosen.id];
-  return <section className="progress-screen"><div className="screen-title"><span className="eyebrow"><Sparkles size={14}/> PROGRESSO NEXUS</span><h1>Cada trio deixa uma história.</h1><p>Objetivos e Maestria são locais e continuam disponíveis sem conexão.</p></div>
-    <div className="progress-overview"><div><small>NÍVEL NEXUS</small><strong>{level}</strong><span>{p.title}</span></div><div className="progress-xp"><strong>{p.xp.toLocaleString('pt-BR')} XP</strong><div><i style={{width:`${progress}%`}}/></div><small>Próximo nível: {next.toLocaleString('pt-BR')} XP</small></div><div><small>PERSONAGENS EXPERIMENTADOS</small><strong>{p.seen.length}<span> / {characters.length}</span></strong><span>{Math.round(100*p.seen.length/characters.length)}% do elenco</span></div></div>
-    <nav className="progress-tabs" aria-label="Seções do progresso">{tabs.map(label=><button key={label} className={tab===label?'active':''} onClick={()=>setTab(label)}>{label}</button>)}</nav>
-    {tab==='Objetivos'&&<ObjectiveList title="Nesta Jornada" items={run?.objectives??[]}/>}
-    {tab==='Objetivos'&&<div className="progress-columns"><ObjectiveList title="Hoje" items={p.daily.items}/><ObjectiveList title="Esta semana" items={p.weekly.items}/></div>}
-    {tab==='Conquistas'&&<section className="progress-panel"><h2><Award size={21}/> Conquistas · {p.unlocked.length} / {achievements.length}</h2><div className="achievement-grid">{achievements.map(a=>{const value=p.stats[a.metric],won=p.unlocked.includes(a.id);return <article key={a.id} className={won?'unlocked':''}><small>{a.category}</small><strong>{a.name}</strong><span>{won?'Conquistada':`${Math.min(value,a.target).toLocaleString('pt-BR')} / ${a.target.toLocaleString('pt-BR')}`}</span></article>})}</div></section>}
-    {tab==='Maestria'&&<section className="progress-panel"><h2><Trophy size={21}/> Maestria de personagem</h2><label className="search"><Search size={18}/><input aria-label="Buscar maestria" placeholder={`Buscar entre ${characters.length} lutadores…`} value={query} onChange={e=>setQuery(e.target.value)}/></label><div className="mastery-layout"><div className="mastery-list">{matching.slice(0,40).map(c=><button key={c.id} className={chosen?.id===c.id?'active':''} onClick={()=>setSelected(c.id)}><Portrait character={c}/><span>{c.name}</span><small>{p.mastery[c.id]?.level??0} / III</small></button>)}{matching.length>40&&<small>Refine a busca para ver mais personagens.</small>}</div>{chosen?<article className="mastery-card"><Portrait character={chosen}/><div><span className="eyebrow">{chosen.universe}</span><h3>{chosen.name}</h3><strong>MAESTRIA {mastery?.level??0} / III</strong></div><ol>{masteryChallenges(chosen.id).map((text,i)=><li key={text} className={(mastery?.level??0)>i?'complete':''}>{text}<span>{i===0?`${Math.min(mastery?.skills[0]??0,1)} / 1`:i===1?`${Math.min(mastery?.skills[2]??0,2)} / 2`:`${mastery?.journeys??0} Jornada · ${mastery?.skills[2]??0} usos`}</span></li>)}</ol></article>:<p>Nenhum personagem encontrado.</p>}</div></section>}
-    {tab==='Estatísticas'&&<section className="progress-panel"><h2><ChartNoAxesCombined size={21}/> Sua trajetória</h2><div className="progress-stats">{[['Jornadas',profile.journeys],['Confrontos vencidos',p.stats.wins],['Recorde',`${profile.best}/10`],['Trios campeões',profile.victories],['Personagens dominados',Object.values(p.mastery).filter(x=>x.level===3).length],['Dano causado',p.stats.damage],['Vida curada',p.stats.healing],['Dano bloqueado',p.stats.protection],['Interrupções',p.stats.interrupts],['Viradas',p.stats.turns],['Conexões',p.stats.synergies]].map(([label,value])=><div key={label}><span>{label}</span><strong>{typeof value==='number'?value.toLocaleString('pt-BR'):value}</strong></div>)}</div><p className="progress-period"><CalendarDays size={16}/> Metas diárias reiniciam em UTC; semanais às segundas em UTC.</p></section>}
+import { characters } from '../data/characters';
+import { Portrait } from '../components/Portrait';
+import { conquistas, categorias, type Categoria } from '../engine/conquistas';
+import { desafiosDe, grauAlcancado } from '../engine/maestria';
+import { dominados, nexusLevel } from '../engine/progression';
+import type { Profile } from '../lib/storage';
+
+const abas = ['Conquistas', 'Maestria', 'Estatísticas'] as const;
+const ROMANOS = ['—', 'I', 'II', 'III'] as const;
+
+const semAcento = (t: string) => t.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+
+export function ProgressScreen({ profile }: { profile: Profile }) {
+  const [aba, setAba] = useState<(typeof abas)[number]>('Conquistas');
+  const [busca, setBusca] = useState('');
+  const [escolhido, setEscolhido] = useState('goku');
+  const [categoria, setCategoria] = useState<Categoria | 'Todas'>('Todas');
+
+  const p = profile.progress;
+  const nivel = nexusLevel(p.xp);
+  const proximo = nivel * nivel * 100, anterior = (nivel - 1) ** 2 * 100;
+  const avanco = Math.min(100, 100 * (p.xp - anterior) / Math.max(1, proximo - anterior));
+  const mestres = dominados(p);
+
+  const encontrados = characters.filter((c) => semAcento(`${c.name} ${c.universe}`).includes(semAcento(busca)));
+  const atual = encontrados.find((c) => c.id === escolhido) ?? encontrados[0];
+  const feitos = atual ? p.mastery[atual.id] ?? {} : {};
+  const grau = atual ? grauAlcancado(atual.id, feitos) : 0;
+
+  const visiveis = conquistas.filter((c) => categoria === 'Todas' || c.categoria === categoria);
+
+  return <section className="progress-screen">
+    <div className="screen-title">
+      <span className="eyebrow"><Sparkles size={14} /> PROGRESSO NEXUS</span>
+      <h1>Cada trio deixa uma história.</h1>
+      <p>Conquistas e Maestria ficam neste dispositivo e continuam disponíveis sem conexão.</p>
+    </div>
+
+    <div className="progress-overview">
+      <div><small>NÍVEL NEXUS</small><strong>{nivel}</strong><span>{p.title}</span></div>
+      <div className="progress-xp">
+        <strong>{p.xp.toLocaleString('pt-BR')} XP</strong>
+        <div><i style={{ width: `${String(avanco)}%` }} /></div>
+        <small>Próximo nível: {proximo.toLocaleString('pt-BR')} XP</small>
+      </div>
+      <div><small>LUTADORES EXPERIMENTADOS</small><strong>{p.seen.length}<span> / {characters.length}</span></strong>
+        <span>{Math.round(100 * p.seen.length / characters.length)}% do elenco</span></div>
+      <div><small>LUTADORES DOMINADOS</small><strong>{mestres}<span> / {characters.length}</span></strong>
+        <span>Maestria III</span></div>
+    </div>
+
+    <nav className="progress-tabs" aria-label="Seções do progresso">
+      {abas.map((x) => <button key={x} className={aba === x ? 'active' : ''} onClick={() => setAba(x)}>{x}</button>)}
+    </nav>
+
+    {aba === 'Conquistas' && <section className="progress-panel">
+      <h2><Award size={21} /> Conquistas · {p.unlocked.length} / {conquistas.length}</h2>
+      <div className="conquista-filtros">
+        <button className={categoria === 'Todas' ? 'active' : ''} onClick={() => setCategoria('Todas')}>Todas</button>
+        {categorias.map((c) => <button key={c} className={categoria === c ? 'active' : ''} onClick={() => setCategoria(c)}>{c}</button>)}
+      </div>
+      <div className="achievement-grid">{visiveis.map((c) => {
+        const temos = p.unlocked.includes(c.id);
+        /*
+         * Segredo só revela a dica depois de conquistado. Antes disso, a carta
+         * diz que existe — esconder a existência seria esconder o jogo.
+         */
+        const oculta = c.secreta && !temos;
+        return <article key={c.id} className={`${temos ? 'unlocked' : ''} ${oculta ? 'secreta' : ''}`}>
+          <small>{c.categoria}</small>
+          <strong>{oculta ? '???' : c.nome}</strong>
+          <span>{oculta ? 'Segredo · descubra jogando' : c.dica}</span>
+        </article>;
+      })}</div>
+    </section>}
+
+    {aba === 'Maestria' && <section className="progress-panel">
+      <h2><Trophy size={21} /> Maestria · {mestres} dominados</h2>
+      <label className="search"><Search size={18} />
+        <input aria-label="Buscar maestria" placeholder={`Buscar entre ${String(characters.length)} lutadores…`}
+          value={busca} onChange={(e) => setBusca(e.target.value)} /></label>
+      <div className="mastery-layout">
+        <div className="mastery-list">
+          {encontrados.slice(0, 40).map((c) => <button key={c.id} className={atual?.id === c.id ? 'active' : ''} onClick={() => setEscolhido(c.id)}>
+            <Portrait character={c} /><span>{c.name}</span>
+            <small>{ROMANOS[grauAlcancado(c.id, p.mastery[c.id] ?? {})]} / III</small>
+          </button>)}
+          {encontrados.length > 40 && <small>Refine a busca para ver mais lutadores.</small>}
+        </div>
+        {atual ? <article className="mastery-card">
+          <Portrait character={atual} />
+          <div><span className="eyebrow">{atual.universe}</span><h3>{atual.name}</h3>
+            <strong>MAESTRIA {ROMANOS[grau]} / III</strong></div>
+          <ol>{desafiosDe(atual.id).map((d, i) => {
+            const feito = feitos[d.feito] ?? 0;
+            const completo = feito >= d.meta;
+            return <li key={d.grau} className={completo ? 'done' : i === grau ? 'next' : ''}>
+              <b>{d.grau}</b> {d.titulo}
+              <span>{Math.min(feito, d.meta).toLocaleString('pt-BR')} / {d.meta.toLocaleString('pt-BR')}</span>
+            </li>;
+          })}</ol>
+        </article> : <p>Nenhum lutador encontrado.</p>}
+      </div>
+    </section>}
+
+    {aba === 'Estatísticas' && <section className="progress-panel">
+      <h2><ChartNoAxesCombined size={21} /> A sua história</h2>
+      <div className="stat-grid">
+        {([
+          ['Jornadas', p.stats.journeys], ['Jornadas vencidas', p.stats.champions],
+          ['Confrontos', p.stats.battles], ['Confrontos vencidos', p.stats.wins],
+          ['Vitórias com os três de pé', p.stats.perfect], ['Inimigos derrubados', p.stats.kos],
+          ['Dano causado', p.stats.damage], ['Vida devolvida', p.stats.healing],
+          ['Dano bloqueado', p.stats.protection], ['Preparos interrompidos', p.stats.interrupts],
+          ['Status aplicados', p.stats.statuses], ['Conexões de Carga', p.stats.synergies],
+          ['Recorde da trilha', profile.best], ['Habilidades vistas', p.stats.skills],
+        ] as const).map(([rotulo, valor]) => <article key={rotulo}>
+          <strong>{Math.round(valor).toLocaleString('pt-BR')}</strong><small>{rotulo}</small>
+        </article>)}
+      </div>
+    </section>}
   </section>;
 }
