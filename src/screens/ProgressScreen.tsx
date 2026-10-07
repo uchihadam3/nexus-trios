@@ -15,7 +15,7 @@ import { Award, ChartNoAxesCombined, Search, Sparkles, Trophy } from 'lucide-rea
 
 import { characters } from '../data/characters';
 import { Portrait } from '../components/Portrait';
-import { conquistas, categorias, type Categoria } from '../engine/conquistas';
+import { conquistas, categorias } from '../engine/conquistas';
 import { desafiosDe, grauAlcancado } from '../engine/maestria';
 import { dominados, nexusLevel } from '../engine/progression';
 import type { Profile } from '../lib/storage';
@@ -29,7 +29,6 @@ export function ProgressScreen({ profile }: { profile: Profile }) {
   const [aba, setAba] = useState<(typeof abas)[number]>('Conquistas');
   const [busca, setBusca] = useState('');
   const [escolhido, setEscolhido] = useState('goku');
-  const [categoria, setCategoria] = useState<Categoria | 'Todas'>('Todas');
 
   const p = profile.progress;
   const nivel = nexusLevel(p.xp);
@@ -42,7 +41,18 @@ export function ProgressScreen({ profile }: { profile: Profile }) {
   const feitos = atual ? p.mastery[atual.id] ?? {} : {};
   const grau = atual ? grauAlcancado(atual.id, feitos) : 0;
 
-  const visiveis = conquistas.filter((c) => categoria === 'Todas' || c.categoria === categoria);
+  /*
+   * Agrupadas por categoria, em seções que abrem e fecham.
+   *
+   * As 52 numa lista só davam treze mil pixels de altura no celular, e o
+   * filtro por categoria só trocava uma lista longa por outra. Fechadas, as
+   * dez categorias cabem numa tela: o jogador vê quanto falta em cada uma e
+   * abre a que interessa.
+   */
+  const porCategoria = categorias.map((cat) => {
+    const itens = conquistas.filter((c) => c.categoria === cat);
+    return { cat, itens, feitas: itens.filter((c) => p.unlocked.includes(c.id)).length };
+  });
 
   return <section className="progress-screen">
     <div className="screen-title">
@@ -70,23 +80,28 @@ export function ProgressScreen({ profile }: { profile: Profile }) {
 
     {aba === 'Conquistas' && <section className="progress-panel">
       <h2><Award size={21} /> Conquistas · {p.unlocked.length} / {conquistas.length}</h2>
-      <div className="conquista-filtros">
-        <button className={categoria === 'Todas' ? 'active' : ''} onClick={() => setCategoria('Todas')}>Todas</button>
-        {categorias.map((c) => <button key={c} className={categoria === c ? 'active' : ''} onClick={() => setCategoria(c)}>{c}</button>)}
-      </div>
-      <div className="achievement-grid">{visiveis.map((c) => {
-        const temos = p.unlocked.includes(c.id);
-        /*
-         * Segredo só revela a dica depois de conquistado. Antes disso, a carta
-         * diz que existe — esconder a existência seria esconder o jogo.
-         */
-        const oculta = c.secreta && !temos;
-        return <article key={c.id} className={`${temos ? 'unlocked' : ''} ${oculta ? 'secreta' : ''}`}>
-          <small>{c.categoria}</small>
-          <strong>{oculta ? '???' : c.nome}</strong>
-          <span>{oculta ? 'Segredo · descubra jogando' : c.dica}</span>
-        </article>;
-      })}</div>
+      <div className="conquista-secoes">{porCategoria.map(({ cat, itens, feitas }, i) => (
+        <details key={cat} className="conquista-secao" open={i === 0}>
+          <summary>
+            <span className="conquista-nome">{cat}</span>
+            <span className="conquista-conta">{feitas} / {itens.length}</span>
+            <i className="conquista-barra"><b style={{ width: `${String(100 * feitas / itens.length)}%` }} /></i>
+          </summary>
+          <div className="achievement-grid">{itens.map((c) => {
+            const temos = p.unlocked.includes(c.id);
+            /*
+             * Segredo só revela a dica depois de conquistado. Antes disso, a
+             * carta diz que existe — esconder a existência seria esconder o
+             * jogo.
+             */
+            const oculta = c.secreta && !temos;
+            return <article key={c.id} className={`${temos ? 'unlocked' : ''} ${oculta ? 'secreta' : ''}`}>
+              <strong>{oculta ? '???' : c.nome}</strong>
+              <span>{oculta ? 'Segredo · descubra jogando' : c.dica}</span>
+            </article>;
+          })}</div>
+        </details>
+      ))}</div>
     </section>}
 
     {aba === 'Maestria' && <section className="progress-panel">
