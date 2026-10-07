@@ -1,0 +1,16 @@
+import { chromium } from 'playwright';
+const b = await chromium.launch();
+const p = await b.newPage({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, isMobile: true });
+const erros = []; p.on('pageerror', e => erros.push(String(e)));
+await p.goto('http://localhost:4320/conta-probe.html', { waitUntil: 'networkidle' });
+await p.waitForTimeout(1200);
+await p.screenshot({ path: './prints/conta-migracao.png', fullPage: true });
+console.log('cartão presente:', await p.locator('.account-migracao').count() === 1);
+console.log('texto:', (await p.locator('.account-migracao p').first().innerText()).replace(/\s+/g, ' '));
+console.log('rola lateral:', await p.evaluate(() => document.documentElement.scrollWidth > innerWidth + 1));
+await p.locator('.account-migracao button.secondary').click(); await p.waitForTimeout(500);
+console.log('após recusar — some:', await p.locator('.account-migracao').count() === 0);
+console.log('aviso:', await p.locator('.account-aviso').first().innerText());
+await p.screenshot({ path: './prints/conta-logado.png', fullPage: true });
+console.log('erros:', erros.length ? erros : 'nenhum');
+await b.close();

@@ -1,4 +1,4 @@
-import { lazy,Suspense,useEffect,useRef,useState } from 'react';
+import {lazy,Suspense,useEffect,useRef,useState,useMemo} from 'react';
 import { ArrowLeft,ArrowUpRight,Layers,Menu,X,ShieldCheck } from 'lucide-react';
 import { Home } from './screens/Home';
 import { DraftScreen } from './screens/DraftScreen';
@@ -22,10 +22,12 @@ import { acumularFeitos,fecharFeitos,feitosVazios } from './engine/maestria';
 import { acumularRaioX,raioXVazio } from './engine/raio-x';
 import {battleDelta,emptyProgress,emptyTally,recordProgress,tallyEvents} from './engine/progression';
 import {runDigest} from './engine/ranked';
-import {onlineCall,onlineConfigured} from './lib/online';
+import {client,onlineCall,onlineConfigured} from './lib/online';
+import {criarAutenticacao,type Conta} from './lib/auth';
+import {AccountScreen} from './screens/AccountScreen';
 const DebugScreen=lazy(()=>import('./screens/DebugScreen').then(m=>({default:m.DebugScreen})));
 const VfxLabScreen=lazy(()=>import('./screens/VfxLabScreen').then(m=>({default:m.VfxLabScreen})));
-type Screen='home'|'game'|'characters'|'progress'|'ranking'|'help'|'settings'|'debug'|'vfx';
+type Screen='home'|'game'|'characters'|'progress'|'ranking'|'conta'|'help'|'settings'|'debug'|'vfx';
 interface InstallEvent extends Event {prompt:()=>Promise<void>;userChoice:Promise<{outcome:string}>}
 function InfoDialog({title,children,onClose}:{title:string;children:React.ReactNode;onClose:()=>void}){
   const ref=useRef<HTMLDialogElement>(null);useEffect(()=>{const el=ref.current;el?.showModal();return()=>el?.close();},[]);
@@ -195,15 +197,31 @@ export default function App(){
   useEffect(()=>{battleAudio.configure(settings);},[settings]);
   useEffect(()=>{battleAudio.setBattle(screen==='game'&&run?.stage==='battle'&&!paused&&!details&&!confirmNew&&!confirmAbandon);return()=>battleAudio.setBattle(false);},[screen,run?.stage,paused,details,confirmNew,confirmAbandon]);
   const install=async()=>{if(installEvent){await installEvent.prompt();const choice=await installEvent.userChoice;setInstallEvent(null);if(choice.outcome!=='accepted')setInstallHelp(true);}else setInstallHelp(true);};
+  /*
+   * A conta vive fora do React: o Supabase mantém a sessão no armazenamento
+   * dele e avisa por evento. Aqui só se espelha o que ele diz, incluindo a
+   * sessão que expirou — nesse caso o jogador volta a ser convidado e o jogo
+   * casual segue igual.
+   */
+  const autenticacao=useMemo(()=>criarAutenticacao(client),[]);
+  const [conta,setConta]=useState<Conta|null>(null);
+  useEffect(()=>{
+    let vivo=true;
+    void autenticacao.conta().then((c:Conta|null)=>{if(vivo)setConta(c);});
+    const parar=autenticacao.observar((c:Conta|null)=>{setConta(c);});
+    return ()=>{vivo=false;parar();};
+  },[autenticacao]);
+
   const reset=()=>{resetStorage();setSettings(defaults);setProfile({journeys:0,victories:0,best:0,wins:0,progress:emptyProgress()});setRun(null);runRef.current=null;navigate('home');};
   return <div onPointerDownCapture={()=>void battleAudio.unlock()} onKeyDownCapture={e=>{if(e.key==='Enter'||e.key===' ')void battleAudio.unlock();}} className={`app ${settings.reducedMotion?'reduce-motion':''}`}>
     <header className="site-header"><button className="brand" onClick={()=>navigate('home')} aria-label="Nexus início"><span className="brand-mark">N</span><span>NEXUS<small>DUELO DE TRIOS</small></span></button><nav aria-label="Navegação principal" className={menu?'open':''}><button className={screen==='home'?'active':''} onClick={()=>navigate('home')}>Início</button><button className={screen==='characters'?'active':''} onClick={()=>navigate('characters')}>Personagens <span>{characters.length}</span></button><button className={screen==='progress'?'active':''} onClick={()=>navigate('progress')}>Progresso</button>{onlineConfigured&&<button className={screen==='ranking'?'active':''} onClick={()=>navigate('ranking')}>Ranking</button>}<button className={screen==='help'?'active':''} onClick={()=>navigate('help')}>Como jogar</button><button className={screen==='settings'?'active':''} onClick={()=>navigate('settings')}>Configurações</button></nav><div className="header-right"><span className="local-badge"><ShieldCheck size={13}/> {profile.publicHandle??'PROGRESSO LOCAL'}</span><button className="icon-button menu-toggle" aria-label="Abrir menu" aria-expanded={menu} onClick={()=>setMenu(!menu)}>{menu?<X size={20}/>:<Menu size={20}/>}</button></div></header>
     <main key={`${screen}-${screen==='game'?run?.stage??'idle':'page'}`} className={screen==='game'&&run?.stage==='battle'?'main battle-main screen-enter':'main screen-enter'}>
       {screen!=='home'&&<button className="back-button" onClick={()=>navigate('home')}><ArrowLeft size={15}/>Voltar ao início</button>}
-      {screen==='home'&&<Home profile={profile} run={run} onPlay={requestNew} onRanked={requestRanked} onContinue={()=>{if(run?.stage==='battle'&&run.battle){direction.current=directionFor(run);setPresentation({battle:direction.current.visible,beat:direction.current.active});}navigate('game');setPaused(run?.stage==='battle');}} onAbandon={()=>setConfirmAbandon(true)} onNavigate={navigate} onInstall={()=>void install()}/>}
+      {screen==='home'&&<Home profile={profile} run={run} conta={conta!==null&&conta.origem!=='convidado'} onPlay={requestNew} onRanked={requestRanked} onContinue={()=>{if(run?.stage==='battle'&&run.battle){direction.current=directionFor(run);setPresentation({battle:direction.current.visible,beat:direction.current.active});}navigate('game');setPaused(run?.stage==='battle');}} onAbandon={()=>setConfirmAbandon(true)} onNavigate={navigate} onInstall={()=>void install()}/>}
       {screen==='characters'&&<CharactersScreen onDetails={setDetails}/>}
       {screen==='progress'&&<ProgressScreen profile={profile}/>}
       {screen==='ranking'&&onlineConfigured&&<RankingScreen handle={profile.publicHandle}/>}
+      {screen==='conta'&&<AccountScreen autenticacao={autenticacao} conta={conta} profile={profile} conectado={onlineConfigured} aoMudarPerfil={p=>{save('profile',p);setProfile(p);}}/>}
       {screen==='help'&&<HelpScreen onPlay={requestNew}/>}
       {screen==='settings'&&<><SettingsScreen settings={settings} onChange={changeSettings} onReset={reset}/>{onlineConfigured&&<section className="ranked-settings"><h2>Nome no ranking</h2><p>{profile.publicHandle??'Ainda não escolhido'} · você pode alterar o nome público a cada 30 dias.</p><button className="secondary" onClick={()=>{setPendingMode(null);setDraftHandle(profile.publicHandle??'');setNameDialog(true);}}>Editar nome público</button></section>}</>}
       {screen==='game'&&run?.stage==='draft'&&<DraftScreen draft={run.draft} onPick={id=>changeRun({...run,draft:pickDraft(run.draft,id)})} onSkip={()=>changeRun({...run,draft:skipDraft(run.draft)})} onDetails={setDetails} onStart={()=>void startBattle(0)} onAbandon={()=>setConfirmAbandon(true)}/>}

@@ -95,3 +95,41 @@
 .stat-grid small{display:block;margin-top:3px;font-size:10px;color:#9db19b;line-height:1.35}
 .result-progress-link{display:inline-flex;align-items:center;gap:7px;margin:0 auto 18px;font-size:11px}
 @media(max-width:560px){.stat-grid{grid-template-columns:repeat(2,1fr)}.conquista-filtros button{font-size:9px;padding:4px 9px}}
+/* FASE I · a tela de Conta. */
+.account-screen{max-width:520px;margin:0 auto;padding-bottom:40px;text-align:left}
+.account-progresso{padding:13px 15px;border:1px solid #4a6146;border-radius:11px;background:#1e2a21;font-size:11px;line-height:1.55;color:#cfe0c8;margin:0 0 14px}
+.account-progresso b{color:#dcf2c6}
+.account-formulario,.account-cartao{display:grid;gap:12px;padding:18px;border:1px solid #3d5240;border-radius:13px;background:#1b2720}
+.account-abas{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:4px}
+/* 44px é o mínimo que um dedo acerta sem errar a aba vizinha; o tamanho da
+   fonte some antes da área de toque. */
+.account-abas button{flex:1;min-width:92px;min-height:44px;border:1px solid #4a5f46;background:#1e2a21;color:#c3d6bd;border-radius:9px;padding:8px 6px;font-size:11px;font-weight:650}
+.account-abas button.active{border-color:#b8e282;background:#324a29;color:#f2ffd5}
+.account-formulario label{display:grid;gap:5px}
+.account-formulario label>span{font-size:10px;letter-spacing:.6px;color:#9db19b;text-transform:uppercase}
+/* 16px na fonte do campo, porque abaixo disso o iPhone dá zoom sozinho ao
+   focar e joga o formulário para fora da tela. */
+.account-formulario input{width:100%;min-height:44px;padding:11px 12px;border:1px solid #4a5f46;border-radius:9px;background:#161f1a;color:#e4f1dc;font-size:16px}
+.account-formulario input:focus{outline:none;border-color:#b8e282}
+.account-formulario input:disabled{opacity:.5}
+.campo-erro{color:#e0a98e;font-size:10px}
+.account-ou{display:flex;align-items:center;gap:10px;color:#7f9280;font-size:10px}
+.account-ou::before,.account-ou::after{content:'';flex:1;height:1px;background:#3b4f3b}
+.account-identidade{display:grid;gap:3px}
+.account-identidade strong{font-size:19px;color:#e8f5de}
+.account-identidade small{font-size:11px;color:#9db19b;word-break:break-all}
+.account-privacidade{font-size:11px;line-height:1.5;color:#a9bda4;margin:0}
+.account-aviso{margin:14px 0 0;padding:11px 13px;border-radius:10px;font-size:11px;line-height:1.5}
+.account-aviso.erro{border:1px solid #8a5a45;background:#2e2019;color:#f0cdbb}
+.account-aviso.ok{border:1px solid #58744a;background:#223020;color:#d9ecc6}
+
+/* FASE I · a oferta de levar o progresso do convidado para a conta. */
+.account-migracao{display:flex;flex-direction:column;gap:.75rem;padding:1rem;border-radius:16px;
+  border:1px solid color-mix(in srgb,var(--accent) 45%,transparent);
+  background:linear-gradient(160deg,color-mix(in srgb,var(--accent) 12%,transparent),transparent)}
+.account-migracao p{margin:0;line-height:1.5}
+.account-migracao small{opacity:.65}
+/* Lado a lado sobra; empilhado no celular as duas saídas ficam do mesmo tamanho,
+   para nenhuma parecer a resposta "certa". */
+.account-migracao-acoes{display:flex;gap:.6rem;flex-wrap:wrap}
+.account-migracao-acoes button{flex:1 1 10rem;justify-content:center}

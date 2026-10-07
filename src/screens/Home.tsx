@@ -1,11 +1,11 @@
-import { ArrowUpRight,ArrowRight,Trophy,CircleHelp,Settings2,Download,ChevronRight,Users,Swords,Flag,Star,Award,Globe2 } from 'lucide-react';
+import { ArrowUpRight,ArrowRight,Trophy,CircleHelp,Settings2,Download,ChevronRight,Users,Swords,Flag,Star,Award,Globe2,ShieldCheck } from 'lucide-react';
 import { byId,characters } from '../data/characters';
 import { Portrait } from '../components/Portrait';
 import type { Profile, Run } from '../lib/storage';
 import {onlineConfigured} from '../lib/online';
 
-interface Props {profile:Profile;run:Run|null;onPlay:()=>void;onRanked:(mode:'daily'|'weekly')=>void;onContinue:()=>void;onAbandon:()=>void;onNavigate:(s:'characters'|'progress'|'ranking'|'help'|'settings')=>void;onInstall:()=>void}
-export function Home({profile,run,onPlay,onRanked,onContinue,onAbandon,onNavigate,onInstall}:Props){
+interface Props {profile:Profile;run:Run|null;conta:boolean;onPlay:()=>void;onRanked:(mode:'daily'|'weekly')=>void;onContinue:()=>void;onAbandon:()=>void;onNavigate:(s:'characters'|'progress'|'ranking'|'conta'|'help'|'settings')=>void;onInstall:()=>void}
+export function Home({profile,run,conta,onPlay,onRanked,onContinue,onAbandon,onNavigate,onInstall}:Props){
   const terminal=run?.stage==='result'&&(run.battle?.winner!=='player'||run.index===9);
   const wonCurrent=run?.stage==='result'&&run.battle?.winner==='player';
   const champion=terminal&&wonCurrent;
@@ -31,7 +31,7 @@ export function Home({profile,run,onPlay,onRanked,onContinue,onAbandon,onNavigat
       <div className="journey-bottom"><span>{profile.journeys} jornadas · {profile.victories} trios campeões</span><button className="text-button" onClick={onPlay}>Nova jornada <ArrowRight size={15}/></button></div>
     </div>
     {enemies&&<div className="hub-encounter"><div><span className="eyebrow">RIVAIS DO PRÓXIMO CONFRONTO</span><h2>{run?.encounters[current].name}</h2><p>Entre na arena para descobrir como seu trio responde.</p></div><div className="hub-rivals">{enemies.map(id=><span key={id}><Portrait character={byId[id]}/><small>{byId[id].name}</small></span>)}</div></div>}
-    <div className="hub-links"><button onClick={()=>onNavigate('characters')}><Users size={20}/><span><b>Personagens</b><small>Conheça os {characters.length} lutadores</small></span><ChevronRight size={17}/></button><button onClick={()=>onNavigate('progress')}><Award size={20}/><span><b>Progresso</b><small>Conquistas, Maestria e sua história</small></span><ChevronRight size={17}/></button><button onClick={()=>onNavigate('help')}><CircleHelp size={20}/><span><b>Como jogar</b><small>Aprenda a ler a batalha</small></span><ChevronRight size={17}/></button><button onClick={()=>onNavigate('settings')}><Settings2 size={20}/><span><b>Configurações</b><small>Áudio, visual e jogo</small></span><ChevronRight size={17}/></button><button onClick={onInstall}><Download size={20}/><span><b>Instalar</b><small>Leve seu trio com você</small></span><ChevronRight size={17}/></button></div>
+    <div className="hub-links"><button onClick={()=>onNavigate('characters')}><Users size={20}/><span><b>Personagens</b><small>Conheça os {characters.length} lutadores</small></span><ChevronRight size={17}/></button><button onClick={()=>onNavigate('progress')}><Award size={20}/><span><b>Progresso</b><small>Conquistas, Maestria e sua história</small></span><ChevronRight size={17}/></button><button onClick={()=>onNavigate('help')}><CircleHelp size={20}/><span><b>Como jogar</b><small>Aprenda a ler a batalha</small></span><ChevronRight size={17}/></button><button onClick={()=>onNavigate('conta')}><ShieldCheck size={20}/><span><b>Conta</b><small>{conta?'Entrou · joga ranqueada':'Opcional · só para o ranking'}</small></span><ChevronRight size={17}/></button><button onClick={()=>onNavigate('settings')}><Settings2 size={20}/><span><b>Configurações</b><small>Áudio, visual e jogo</small></span><ChevronRight size={17}/></button><button onClick={onInstall}><Download size={20}/><span><b>Instalar</b><small>Leve seu trio com você</small></span><ChevronRight size={17}/></button></div>
     <p className="hub-rule"><Swords size={17}/> A vitória acontece quando o trio rival inteiro sai da luta.</p>
   </section>;
 }
