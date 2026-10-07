@@ -49,3 +49,26 @@
 @media(max-width:430px){.game-hub{padding-top:14px}.hub-hero{padding:18px;gap:17px}.hub-hero h1{font-size:29px}.hub-hero p{font-size:12px}.hub-team .portrait{height:97px}.hub-team strong{font-size:9px}.hub-progress{padding:14px}.hub-links button{padding:10px;gap:6px}.hub-links b{font-size:10px}.hub-links small{font-size:8px}.help-group{padding:13px}.help-group .status-legend>div{grid-template-columns:1fr}.character-sheet{padding:16px}.modal-character .portrait{width:87px;height:108px}.modal-character{gap:12px}.modal-character h2{font-size:21px}.modal-character p{font-size:11px}.character-sheet .character-stats span{font-size:10px}.sheet-detail{font-size:11px}.effect-chips span{font-size:11px}.character-sheet .sheet-section small{font-size:11px}.character-sheet .vulnerability p{font-size:11px}}
 .settings-group{font-size:15px;letter-spacing:1px;text-transform:uppercase;color:#d5efbd;margin:24px 0 8px;padding-bottom:8px;border-bottom:1px solid #59714b}.settings-list .review-tutorial{margin:15px 0 5px}
 .identity-chips{display:flex;gap:6px;flex-wrap:wrap;margin:14px 0 2px}.identity-chips span{border:1px solid #8bb26a66;border-radius:999px;padding:5px 11px;color:#dcf2c6;background:#2c3e2970;font-size:10px;font-weight:650;cursor:help}
+/* FASE G · Raio-X do trio: três pares, dois retratos cada, nada de parede de texto. */
+.raio-x{max-width:760px;margin:0 auto 26px;padding:20px;border:1px solid #445a42;border-radius:14px;background:#1a241d;text-align:left}
+.raio-x-head{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin-bottom:14px}
+.raio-x-head h2{margin:0;font-size:18px;color:#e2f1d8}
+.raio-x-head small{flex:1 0 100%;color:#9db19b;font-size:10px}
+.raio-x-par{display:flex;gap:14px;align-items:flex-start;padding:13px;border:1px solid #3b4f3b;border-left-width:3px;border-radius:10px;background:#1e2a21;margin-bottom:9px}
+.raio-x-par.otima{border-left-color:#b8e282}.raio-x-par.boa{border-left-color:#7fae63}
+.raio-x-par.pouca{border-left-color:#5c6f58}.raio-x-par.neutra{border-left-color:#4b5a66}.raio-x-par.conflito{border-left-color:#d08a74}
+.raio-x-duo{display:flex;gap:6px;flex-shrink:0}
+.raio-x-rosto{width:52px;text-align:center}
+.raio-x-rosto .portrait{height:52px;border:1px solid color-mix(in srgb,var(--character),transparent 55%);border-radius:8px;overflow:hidden}
+.raio-x-rosto span{display:block;margin-top:4px;font-size:8px;color:#b9cbb6;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.raio-x-corpo{flex:1;min-width:0}
+.raio-x-selo{display:inline-block;font-size:9px;font-weight:700;letter-spacing:.5px;color:#d9ecc6;background:#2d4029;border:1px solid #58744a;border-radius:999px;padding:3px 9px;margin-bottom:7px}
+.raio-x-par.neutra .raio-x-selo{background:#283340;border-color:#4b5a66;color:#c6d6e4}
+.raio-x-par.conflito .raio-x-selo{background:#40291f;border-color:#8a5a45;color:#f0cdbb}
+.raio-x-corpo p{display:flex;align-items:center;gap:5px;flex-wrap:wrap;margin:4px 0;font-size:11px;line-height:1.45;color:#dbe9d6}
+.raio-x-corpo p b{color:#c3e59a}
+.raio-x-corpo p.raio-x-vazio{color:#a8b9a6}
+.raio-x-corpo small{display:block;margin-top:6px;font-size:10px;color:#95a894}
+.raio-x-pressao{margin:14px 0 0;padding-top:13px;border-top:1px solid #3b4f3b;font-size:11px;color:#c9dcc4}
+.raio-x-pressao b{color:#d9efb0}
+@media(max-width:560px){.raio-x{padding:15px}.raio-x-par{flex-direction:column;gap:10px}.raio-x-duo{gap:9px}}

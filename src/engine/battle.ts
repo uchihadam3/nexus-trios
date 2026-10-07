@@ -159,7 +159,16 @@ export function applyEffects(b:Battle,source:Fighter,selected:Fighter[],effects:
           const def=statuses[effect.status],existing=target.statuses.find(s=>s.id===effect.status);
           if(existing){existing.remaining=Math.max(existing.remaining,effect.duration);existing.duration=Math.max(existing.duration??0,effect.duration);existing.intensity=Math.min(def.cap,def.stack==='add'?existing.intensity+effect.value:Math.max(existing.intensity,effect.value));existing.source=source.uid;}
           else target.statuses.push({id:effect.status,remaining:effect.duration,duration:effect.duration,intensity:Math.min(def.cap,effect.value),source:source.uid});
-          emit(b,{kind:'status',source:source.uid,target:target.uid,label:def.name,status:effect.status});
+          /*
+           * A duração vai no evento para o Raio-X não precisar adivinhá-la.
+           *
+           * A análise causal do pós-batalha pergunta coisas como "o Exposto que
+           * A aplicou ainda estava de pé quando B bateu?". Sem a duração no
+           * evento, a única saída seria uma janela de tempo arbitrária — ou
+           * seja, inventar causalidade, que é exatamente o que a direção
+           * proibiu. Com ela, a resposta é exata.
+           */
+          emit(b,{kind:'status',source:source.uid,target:target.uid,label:def.name,status:effect.status,value:effect.duration});
           if(target.side!==source.side){const weight=effect.status==='paralyzed'?1:effect.status==='rooted'?.65:effect.status==='slow'?.35:effect.status==='silenced'?.55:['exposed','marked','electric','burning'].includes(effect.status)?.3:0;if(weight)pressure(b,source.side,D.event.statusApplied*weight);}
           // Status events only charge observers; they cannot recursively execute other traits.
           const negative=target.side!==source.side&&negativeStatuses.has(effect.status);

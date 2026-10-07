@@ -240,7 +240,11 @@ describe('as telas não guardam números de roster escritos à mão', () => {
   });
 
   it('não usa "estado" onde o jogo diz "Status"', () => {
-    const padrao = /['`"][^'`"]*\b(estado|estados)\b[^'`"]*['`"]/gi;
+    /*
+     * Só texto de uma linha: a primeira versão atravessava quebras de linha e
+     * acusava `{ estado, battle }` — nome de variável, não texto de tela.
+     */
+    const padrao = /['`"][^'`"\n]*\b(estado|estados)\b[^'`"\n]*['`"]/gi;
     const presos = fontes.flatMap(({ f, texto }) => [...texto.matchAll(padrao)].map((m) => `${f}: ${m[0]}`));
     expect(presos).toEqual([]);
   });

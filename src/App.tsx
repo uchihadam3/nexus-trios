@@ -18,6 +18,7 @@ import { createDirection,restoreDirection,checkpointDirection,advanceDirection,t
 import { PRESENTATION as P } from './presentation/config';
 import type { Battle } from './engine/types';
 import { addSynergies,summarizeBattle } from './engine/run-summary';
+import { acumularRaioX,raioXVazio } from './engine/raio-x';
 import {advanceObjectives,battleDelta,emptyProgress,emptyTally,journeyObjectives,recordProgress,tallyEvents} from './engine/progression';
 import {runDigest} from './engine/ranked';
 import {onlineCall,onlineConfigured} from './lib/online';
@@ -84,7 +85,7 @@ export default function App(){
     const team=current.draft.team,encounters=current.ranked?current.encounters:current.stage==='draft'?generateCampaign(current.seed,team):current.encounters,encounter=encounters[index];
     let ranked=current.ranked;
     if(index===0&&ranked){setOnlineBusy(true);try{const result=await onlineCall<{run:{id:string;seed:number}}> ('start',{mode:ranked.mode,team});if(result.run.seed!==current.seed)throw new Error('O desafio mudou; inicie outra Jornada Ranqueada.');ranked={...ranked,id:result.run.id,status:'playing'};}catch(error){setOnlineNotice(error instanceof Error?error.message:'Jornada Ranqueada indisponível.');return;}finally{setOnlineBusy(false);}}
-    const next={...current,team,encounters,index,stage:'battle' as const,recorded:false,presentation:undefined,battleSynergies:[],objectives:index===0?journeyObjectives(team,current.seed):current.objectives,telemetry:emptyTally(),ranked,battle:createBattle(team,encounter.team,current.seed+index*7919,encounter.scale)};
+    const next={...current,team,encounters,index,stage:'battle' as const,recorded:false,presentation:undefined,battleSynergies:[],raioX:raioXVazio(),objectives:index===0?journeyObjectives(team,current.seed):current.objectives,telemetry:emptyTally(),ranked,battle:createBattle(team,encounter.team,current.seed+index*7919,encounter.scale)};
     direction.current=null;setPresentation(null);changeRun(next);setPaused(false);navigate('game');
     if(index===0)setProfile(p=>{const n={...p,journeys:p.journeys+1};save('profile',n);return n;});
   };
@@ -128,8 +129,16 @@ export default function App(){
       if(d.signals.length)lastAudio.current=Math.max(lastAudio.current,...d.signals.map(e=>e.id));
       setPresentation({battle:d.visible,beat:d.active?{...d.active}:null});
       const battleSynergies=d.signals.length?addSynergies(current.battleSynergies??[],d.signals):current.battleSynergies??[];
+      /*
+       * O Raio-X acumula durante a luta, não no fim.
+       *
+       * `battle.events` guarda só os 180 últimos eventos, então uma leitura
+       * feita depois do fim já teria perdido o começo da batalha. Os sinais de
+       * cada quadro chegam uma vez só, o que torna a contagem exata.
+       */
+      const raioX=d.signals.length?acumularRaioX(current.raioX??raioXVazio(),d.signals,d.battle):current.raioX??raioXVazio();
       const telemetry=d.signals.length?tallyEvents(current.telemetry??emptyTally(),d.signals):current.telemetry??emptyTally();
-      let next={...current,battle:d.battle,presentation:checkpointDirection(d),battleSynergies,telemetry};
+      let next={...current,battle:d.battle,presentation:checkpointDirection(d),battleSynergies,raioX,telemetry};
       if(d.complete){
         const summary=summarizeBattle(current.index,d.battle,battleSynergies);
         const updatedObjectives=advanceObjectives(current.objectives??[],battleDelta(summary,d.battle,telemetry,profile.progress.seen,current.team));
@@ -144,7 +153,7 @@ export default function App(){
   },[screen,paused,details,confirmNew,confirmAbandon,settings.speed,settings.volume]);
   useEffect(()=>{
     if(screen!=='game'||!settings.auto||run?.stage!=='result'||run.index>=9||run.battle?.winner!=='player')return;
-    const id=window.setTimeout(()=>{const current=runRef.current;if(!current)return;const index=current.index+1,encounter=current.encounters[index];const next={...current,index,stage:'battle' as const,recorded:false,presentation:undefined,battleSynergies:[],telemetry:emptyTally(),battle:createBattle(current.team,encounter.team,current.seed+index*7919,encounter.scale)};runRef.current=next;setRun(next);save('run',next);setPaused(false);},4500);
+    const id=window.setTimeout(()=>{const current=runRef.current;if(!current)return;const index=current.index+1,encounter=current.encounters[index];const next={...current,index,stage:'battle' as const,recorded:false,presentation:undefined,battleSynergies:[],raioX:raioXVazio(),telemetry:emptyTally(),battle:createBattle(current.team,encounter.team,current.seed+index*7919,encounter.scale)};runRef.current=next;setRun(next);save('run',next);setPaused(false);},4500);
     return()=>clearTimeout(id);
   },[screen,settings.auto,run?.stage,run?.index,run?.battle?.winner]);
   useEffect(()=>{
