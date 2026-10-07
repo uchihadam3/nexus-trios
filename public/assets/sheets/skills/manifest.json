@@ -12158,8 +12158,8 @@
       "sourceSheet": "/assets/sheets/skills/pages/raidenmgr.png",
       "sheet": "/assets/sheets/skills/pages/raidenmgr.png",
       "sourceResolution": [
-        2172,
-        724
+        768,
+        256
       ],
       "category": "skills",
       "format": "PNG RGBA",
@@ -12199,8 +12199,8 @@
           "sourceCrop": {
             "x": 0,
             "y": 0,
-            "width": 724,
-            "height": 724
+            "width": 256,
+            "height": 256
           },
           "artMethod": "AI sheet"
         },
@@ -12225,10 +12225,10 @@
             "height": 160
           },
           "sourceCrop": {
-            "x": 724,
+            "x": 256,
             "y": 0,
-            "width": 724,
-            "height": 724
+            "width": 256,
+            "height": 256
           },
           "artMethod": "AI sheet"
         },
@@ -12253,10 +12253,10 @@
             "height": 160
           },
           "sourceCrop": {
-            "x": 1448,
+            "x": 512,
             "y": 0,
-            "width": 724,
-            "height": 724
+            "width": 256,
+            "height": 256
           },
           "artMethod": "AI sheet"
         }
@@ -12378,8 +12378,8 @@
       "sourceSheet": "/assets/sheets/skills/pages/jill.png",
       "sheet": "/assets/sheets/skills/pages/jill.png",
       "sourceResolution": [
-        2172,
-        724
+        768,
+        256
       ],
       "category": "skills",
       "format": "PNG RGBA",
@@ -12419,8 +12419,8 @@
           "sourceCrop": {
             "x": 0,
             "y": 0,
-            "width": 724,
-            "height": 724
+            "width": 256,
+            "height": 256
           },
           "artMethod": "AI sheet"
         },
@@ -12445,10 +12445,10 @@
             "height": 160
           },
           "sourceCrop": {
-            "x": 724,
+            "x": 256,
             "y": 0,
-            "width": 724,
-            "height": 724
+            "width": 256,
+            "height": 256
           },
           "artMethod": "AI sheet"
         },
@@ -12473,10 +12473,10 @@
             "height": 160
           },
           "sourceCrop": {
-            "x": 1448,
+            "x": 512,
             "y": 0,
-            "width": 724,
-            "height": 724
+            "width": 256,
+            "height": 256
           },
           "artMethod": "AI sheet"
         }
@@ -12488,8 +12488,8 @@
       "sourceSheet": "/assets/sheets/skills/pages/wesker.png",
       "sheet": "/assets/sheets/skills/pages/wesker.png",
       "sourceResolution": [
-        2172,
-        724
+        768,
+        256
       ],
       "category": "skills",
       "format": "PNG RGBA",
@@ -12529,8 +12529,8 @@
           "sourceCrop": {
             "x": 0,
             "y": 0,
-            "width": 724,
-            "height": 724
+            "width": 256,
+            "height": 256
           },
           "artMethod": "AI sheet"
         },
@@ -12555,10 +12555,10 @@
             "height": 160
           },
           "sourceCrop": {
-            "x": 724,
+            "x": 256,
             "y": 0,
-            "width": 724,
-            "height": 724
+            "width": 256,
+            "height": 256
           },
           "artMethod": "AI sheet"
         },
@@ -12583,10 +12583,10 @@
             "height": 160
           },
           "sourceCrop": {
-            "x": 1448,
+            "x": 512,
             "y": 0,
-            "width": 724,
-            "height": 724
+            "width": 256,
+            "height": 256
           },
           "artMethod": "AI sheet"
         }
@@ -12598,8 +12598,8 @@
       "sourceSheet": "/assets/sheets/skills/pages/lara.png",
       "sheet": "/assets/sheets/skills/pages/lara.png",
       "sourceResolution": [
-        2172,
-        724
+        768,
+        256
       ],
       "category": "skills",
       "format": "PNG RGBA",
@@ -12639,8 +12639,8 @@
           "sourceCrop": {
             "x": 0,
             "y": 0,
-            "width": 724,
-            "height": 724
+            "width": 256,
+            "height": 256
           },
           "artMethod": "AI sheet"
         },
@@ -12665,10 +12665,10 @@
             "height": 160
           },
           "sourceCrop": {
-            "x": 724,
+            "x": 256,
             "y": 0,
-            "width": 724,
-            "height": 724
+            "width": 256,
+            "height": 256
           },
           "artMethod": "AI sheet"
         },
@@ -12693,10 +12693,10 @@
             "height": 160
           },
           "sourceCrop": {
-            "x": 1448,
+            "x": 512,
             "y": 0,
-            "width": 724,
-            "height": 724
+            "width": 256,
+            "height": 256
           },
           "artMethod": "AI sheet"
         }
@@ -12708,8 +12708,8 @@
       "sourceSheet": "/assets/sheets/skills/pages/ezio.png",
       "sheet": "/assets/sheets/skills/pages/ezio.png",
       "sourceResolution": [
-        2172,
-        724
+        768,
+        256
       ],
       "category": "skills",
       "format": "PNG RGBA",
@@ -12749,8 +12749,8 @@
           "sourceCrop": {
             "x": 0,
             "y": 0,
-            "width": 724,
-            "height": 724
+            "width": 256,
+            "height": 256
           },
           "artMethod": "AI sheet"
         },
@@ -12775,10 +12775,10 @@
             "height": 160
           },
           "sourceCrop": {
-            "x": 724,
+            "x": 256,
             "y": 0,
-            "width": 724,
-            "height": 724
+            "width": 256,
+            "height": 256
           },
           "artMethod": "AI sheet"
         },
@@ -12803,10 +12803,10 @@
             "height": 160
           },
           "sourceCrop": {
-            "x": 1448,
+            "x": 512,
             "y": 0,
-            "width": 724,
-            "height": 724
+            "width": 256,
+            "height": 256
           },
           "artMethod": "AI sheet"
         }
@@ -12928,8 +12928,8 @@
       "sourceSheet": "/assets/sheets/skills/pages/shadowhh.png",
       "sheet": "/assets/sheets/skills/pages/shadowhh.png",
       "sourceResolution": [
-        2172,
-        724
+        768,
+        256
       ],
       "category": "skills",
       "format": "PNG RGBA",
@@ -12969,8 +12969,8 @@
           "sourceCrop": {
             "x": 0,
             "y": 0,
-            "width": 724,
-            "height": 724
+            "width": 256,
+            "height": 256
           },
           "artMethod": "AI sheet"
         },
@@ -12995,10 +12995,10 @@
             "height": 160
           },
           "sourceCrop": {
-            "x": 724,
+            "x": 256,
             "y": 0,
-            "width": 724,
-            "height": 724
+            "width": 256,
+            "height": 256
           },
           "artMethod": "AI sheet"
         },
@@ -13023,10 +13023,10 @@
             "height": 160
           },
           "sourceCrop": {
-            "x": 1448,
+            "x": 512,
             "y": 0,
-            "width": 724,
-            "height": 724
+            "width": 256,
+            "height": 256
           },
           "artMethod": "AI sheet"
         }
@@ -13038,8 +13038,8 @@
       "sourceSheet": "/assets/sheets/skills/pages/megaman.png",
       "sheet": "/assets/sheets/skills/pages/megaman.png",
       "sourceResolution": [
-        2172,
-        724
+        768,
+        256
       ],
       "category": "skills",
       "format": "PNG RGBA",
@@ -13079,8 +13079,8 @@
           "sourceCrop": {
             "x": 0,
             "y": 0,
-            "width": 724,
-            "height": 724
+            "width": 256,
+            "height": 256
           },
           "artMethod": "AI sheet"
         },
@@ -13105,10 +13105,10 @@
             "height": 160
           },
           "sourceCrop": {
-            "x": 724,
+            "x": 256,
             "y": 0,
-            "width": 724,
-            "height": 724
+            "width": 256,
+            "height": 256
           },
           "artMethod": "AI sheet"
         },
@@ -13133,10 +13133,10 @@
             "height": 160
           },
           "sourceCrop": {
-            "x": 1448,
+            "x": 512,
             "y": 0,
-            "width": 724,
-            "height": 724
+            "width": 256,
+            "height": 256
           },
           "artMethod": "AI sheet"
         }
@@ -13148,8 +13148,8 @@
       "sourceSheet": "/assets/sheets/skills/pages/zeromm.png",
       "sheet": "/assets/sheets/skills/pages/zeromm.png",
       "sourceResolution": [
-        2172,
-        724
+        768,
+        256
       ],
       "category": "skills",
       "format": "PNG RGBA",
@@ -13189,8 +13189,8 @@
           "sourceCrop": {
             "x": 0,
             "y": 0,
-            "width": 724,
-            "height": 724
+            "width": 256,
+            "height": 256
           },
           "artMethod": "AI sheet"
         },
@@ -13215,10 +13215,10 @@
             "height": 160
           },
           "sourceCrop": {
-            "x": 724,
+            "x": 256,
             "y": 0,
-            "width": 724,
-            "height": 724
+            "width": 256,
+            "height": 256
           },
           "artMethod": "AI sheet"
         },
@@ -13243,10 +13243,10 @@
             "height": 160
           },
           "sourceCrop": {
-            "x": 1448,
+            "x": 512,
             "y": 0,
-            "width": 724,
-            "height": 724
+            "width": 256,
+            "height": 256
           },
           "artMethod": "AI sheet"
         }
@@ -13588,8 +13588,8 @@
       "sourceSheet": "/assets/sheets/skills/pages/chunli.png",
       "sheet": "/assets/sheets/skills/pages/chunli.png",
       "sourceResolution": [
-        2172,
-        724
+        768,
+        256
       ],
       "category": "skills",
       "format": "PNG RGBA",
@@ -13629,8 +13629,8 @@
           "sourceCrop": {
             "x": 0,
             "y": 0,
-            "width": 724,
-            "height": 724
+            "width": 256,
+            "height": 256
           },
           "artMethod": "AI sheet"
         },
@@ -13655,10 +13655,10 @@
             "height": 160
           },
           "sourceCrop": {
-            "x": 724,
+            "x": 256,
             "y": 0,
-            "width": 724,
-            "height": 724
+            "width": 256,
+            "height": 256
           },
           "artMethod": "AI sheet"
         },
@@ -13683,10 +13683,10 @@
             "height": 160
           },
           "sourceCrop": {
-            "x": 1448,
+            "x": 512,
             "y": 0,
-            "width": 724,
-            "height": 724
+            "width": 256,
+            "height": 256
           },
           "artMethod": "AI sheet"
         }
@@ -13698,8 +13698,8 @@
       "sourceSheet": "/assets/sheets/skills/pages/akuma.png",
       "sheet": "/assets/sheets/skills/pages/akuma.png",
       "sourceResolution": [
-        2172,
-        724
+        768,
+        256
       ],
       "category": "skills",
       "format": "PNG RGBA",
@@ -13739,8 +13739,8 @@
           "sourceCrop": {
             "x": 0,
             "y": 0,
-            "width": 724,
-            "height": 724
+            "width": 256,
+            "height": 256
           },
           "artMethod": "AI sheet"
         },
@@ -13765,10 +13765,10 @@
             "height": 160
           },
           "sourceCrop": {
-            "x": 724,
+            "x": 256,
             "y": 0,
-            "width": 724,
-            "height": 724
+            "width": 256,
+            "height": 256
           },
           "artMethod": "AI sheet"
         },
@@ -13793,10 +13793,10 @@
             "height": 160
           },
           "sourceCrop": {
-            "x": 1448,
+            "x": 512,
             "y": 0,
-            "width": 724,
-            "height": 724
+            "width": 256,
+            "height": 256
           },
           "artMethod": "AI sheet"
         }
@@ -36414,8 +36414,8 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 724,
-        "height": 724
+        "width": 256,
+        "height": 256
       },
       "artMethod": "AI sheet"
     },
@@ -36440,10 +36440,10 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 724,
+        "x": 256,
         "y": 0,
-        "width": 724,
-        "height": 724
+        "width": 256,
+        "height": 256
       },
       "artMethod": "AI sheet"
     },
@@ -36468,10 +36468,10 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 1448,
+        "x": 512,
         "y": 0,
-        "width": 724,
-        "height": 724
+        "width": 256,
+        "height": 256
       },
       "artMethod": "AI sheet"
     },
@@ -36582,8 +36582,8 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 724,
-        "height": 724
+        "width": 256,
+        "height": 256
       },
       "artMethod": "AI sheet"
     },
@@ -36608,10 +36608,10 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 724,
+        "x": 256,
         "y": 0,
-        "width": 724,
-        "height": 724
+        "width": 256,
+        "height": 256
       },
       "artMethod": "AI sheet"
     },
@@ -36636,10 +36636,10 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 1448,
+        "x": 512,
         "y": 0,
-        "width": 724,
-        "height": 724
+        "width": 256,
+        "height": 256
       },
       "artMethod": "AI sheet"
     },
@@ -36666,8 +36666,8 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 724,
-        "height": 724
+        "width": 256,
+        "height": 256
       },
       "artMethod": "AI sheet"
     },
@@ -36692,10 +36692,10 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 724,
+        "x": 256,
         "y": 0,
-        "width": 724,
-        "height": 724
+        "width": 256,
+        "height": 256
       },
       "artMethod": "AI sheet"
     },
@@ -36720,10 +36720,10 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 1448,
+        "x": 512,
         "y": 0,
-        "width": 724,
-        "height": 724
+        "width": 256,
+        "height": 256
       },
       "artMethod": "AI sheet"
     },
@@ -36750,8 +36750,8 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 724,
-        "height": 724
+        "width": 256,
+        "height": 256
       },
       "artMethod": "AI sheet"
     },
@@ -36776,10 +36776,10 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 724,
+        "x": 256,
         "y": 0,
-        "width": 724,
-        "height": 724
+        "width": 256,
+        "height": 256
       },
       "artMethod": "AI sheet"
     },
@@ -36804,10 +36804,10 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 1448,
+        "x": 512,
         "y": 0,
-        "width": 724,
-        "height": 724
+        "width": 256,
+        "height": 256
       },
       "artMethod": "AI sheet"
     },
@@ -36834,8 +36834,8 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 724,
-        "height": 724
+        "width": 256,
+        "height": 256
       },
       "artMethod": "AI sheet"
     },
@@ -36860,10 +36860,10 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 724,
+        "x": 256,
         "y": 0,
-        "width": 724,
-        "height": 724
+        "width": 256,
+        "height": 256
       },
       "artMethod": "AI sheet"
     },
@@ -36888,10 +36888,10 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 1448,
+        "x": 512,
         "y": 0,
-        "width": 724,
-        "height": 724
+        "width": 256,
+        "height": 256
       },
       "artMethod": "AI sheet"
     },
@@ -37002,8 +37002,8 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 724,
-        "height": 724
+        "width": 256,
+        "height": 256
       },
       "artMethod": "AI sheet"
     },
@@ -37028,10 +37028,10 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 724,
+        "x": 256,
         "y": 0,
-        "width": 724,
-        "height": 724
+        "width": 256,
+        "height": 256
       },
       "artMethod": "AI sheet"
     },
@@ -37056,10 +37056,10 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 1448,
+        "x": 512,
         "y": 0,
-        "width": 724,
-        "height": 724
+        "width": 256,
+        "height": 256
       },
       "artMethod": "AI sheet"
     },
@@ -37086,8 +37086,8 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 724,
-        "height": 724
+        "width": 256,
+        "height": 256
       },
       "artMethod": "AI sheet"
     },
@@ -37112,10 +37112,10 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 724,
+        "x": 256,
         "y": 0,
-        "width": 724,
-        "height": 724
+        "width": 256,
+        "height": 256
       },
       "artMethod": "AI sheet"
     },
@@ -37140,10 +37140,10 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 1448,
+        "x": 512,
         "y": 0,
-        "width": 724,
-        "height": 724
+        "width": 256,
+        "height": 256
       },
       "artMethod": "AI sheet"
     },
@@ -37170,8 +37170,8 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 724,
-        "height": 724
+        "width": 256,
+        "height": 256
       },
       "artMethod": "AI sheet"
     },
@@ -37196,10 +37196,10 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 724,
+        "x": 256,
         "y": 0,
-        "width": 724,
-        "height": 724
+        "width": 256,
+        "height": 256
       },
       "artMethod": "AI sheet"
     },
@@ -37224,10 +37224,10 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 1448,
+        "x": 512,
         "y": 0,
-        "width": 724,
-        "height": 724
+        "width": 256,
+        "height": 256
       },
       "artMethod": "AI sheet"
     },
@@ -37506,8 +37506,8 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 724,
-        "height": 724
+        "width": 256,
+        "height": 256
       },
       "artMethod": "AI sheet"
     },
@@ -37532,10 +37532,10 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 724,
+        "x": 256,
         "y": 0,
-        "width": 724,
-        "height": 724
+        "width": 256,
+        "height": 256
       },
       "artMethod": "AI sheet"
     },
@@ -37560,10 +37560,10 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 1448,
+        "x": 512,
         "y": 0,
-        "width": 724,
-        "height": 724
+        "width": 256,
+        "height": 256
       },
       "artMethod": "AI sheet"
     },
@@ -37590,8 +37590,8 @@
       "sourceCrop": {
         "x": 0,
         "y": 0,
-        "width": 724,
-        "height": 724
+        "width": 256,
+        "height": 256
       },
       "artMethod": "AI sheet"
     },
@@ -37616,10 +37616,10 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 724,
+        "x": 256,
         "y": 0,
-        "width": 724,
-        "height": 724
+        "width": 256,
+        "height": 256
       },
       "artMethod": "AI sheet"
     },
@@ -37644,10 +37644,10 @@
         "height": 160
       },
       "sourceCrop": {
-        "x": 1448,
+        "x": 512,
         "y": 0,
-        "width": 724,
-        "height": 724
+        "width": 256,
+        "height": 256
       },
       "artMethod": "AI sheet"
     },
