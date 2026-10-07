@@ -4,7 +4,7 @@ import {expandedCharacters,rosterDesignQuestions,rosterIdentityReviewGroups} fro
 import type {Effect} from '../src/engine/types';
 
 /** O tamanho atual do catálogo. Sobe a cada lote até 250. */
-const TOTAL=190;
+const TOTAL=220;
 
 describe('catálogo competitivo de personagens',()=>{
   /*
@@ -104,5 +104,28 @@ describe('catálogo competitivo de personagens',()=>{
      * chegar ao jogo.
      */
     expect(new Set(fingerprints).size).toBe(TOTAL-24);
+  });
+});
+
+/*
+ * A cor é identidade, não decoração.
+ *
+ * Ela pinta o gradiente do retrato, a borda do card, o anel do lutador na
+ * arena e o realce da ficha. Dois personagens com a mesma cor viram o mesmo
+ * personagem para quem está olhando de relance — e foi o que aconteceu: vinte
+ * personagens dos lotes 3 e 4 dividiam oito cores entre si, até os ícones
+ * placeholder saírem byte a byte idênticos e o teste de arte acusar.
+ */
+describe('identidade visual do catálogo',()=>{
+  it('nenhum par de personagens divide a mesma cor',()=>{
+    const porCor=new Map<string,string[]>();
+    for(const c of characters)porCor.set(c.color,[...(porCor.get(c.color)??[]),c.name]);
+    const repetidas=[...porCor].filter(([,nomes])=>nomes.length>1)
+      .map(([cor,nomes])=>`${cor}: ${nomes.join(', ')}`);
+    expect(repetidas,`cores repetidas:\n${repetidas.join('\n')}`).toHaveLength(0);
+  });
+
+  it('toda cor é um hexadecimal de seis dígitos',()=>{
+    for(const c of characters)expect(c.color,`${c.name}`).toMatch(/^#[0-9a-f]{6}$/i);
   });
 });

@@ -55,12 +55,17 @@ def glifo(visual: str, base: str, semente: int) -> Image.Image:
     porque dois ícones idênticos no catálogo são dois ícones que o jogador não
     consegue distinguir.
     """
-    img = Image.new("RGBA", (ICON, ICON), (0, 0, 0, 0))
+    # O desenho nasce maior e gira: duas habilidades do mesmo personagem com o
+    # mesmo Visual dependiam só do `giro`, e quando ele coincidia os dois PNGs
+    # saíam byte a byte iguais. A rotação garante o que a variação de geometria
+    # só tornava provável.
+    escala = 2
+    img = Image.new("RGBA", (ICON * escala, ICON * escala), (0, 0, 0, 0))
     d = ImageDraw.Draw(img)
     c, fraco, forte = cor(base, 235), cor(base, 90), (255, 255, 255, 225)
-    m = ICON // 2
-    giro = (semente % 12) - 6
-    dx, dy = (semente % 5) - 2, ((semente // 5) % 5) - 2
+    m = ICON
+    giro = (semente % 13) - 6
+    dx, dy = ((semente // 13) % 7) - 3, ((semente // 91) % 7) - 3
     m += dx
 
     if visual == "beam":
@@ -94,7 +99,9 @@ def glifo(visual: str, base: str, semente: int) -> Image.Image:
             d.line([m + math.cos(a) * r1, m + math.sin(a) * r1,
                     m + math.cos(a) * r2, m + math.sin(a) * r2], fill=c, width=9)
         d.ellipse([m - 18, m - 18, m + 18, m + 18], fill=forte)
-    return img
+    angulo = (semente % 360) * 0.0 + ((semente // 7) % 24) * 15
+    img = img.rotate(angulo, resample=Image.Resampling.BICUBIC, expand=False)
+    return img.resize((ICON, ICON), Image.Resampling.LANCZOS)
 
 
 def main() -> None:
@@ -116,7 +123,12 @@ def main() -> None:
         destino.mkdir(parents=True, exist_ok=True)
 
         for col, s in enumerate(c["skills"]):
-            semente = (sum(ord(ch) * (k + 3) for k, ch in enumerate(c["id"])) * 7 + col * 31) % 2048
+            # FNV-1a: soma ponderada colidia entre ids diferentes, e dois
+            # ícones byte a byte iguais reprovam no teste de unicidade de arte.
+            h = 2166136261
+            for ch in f'{c["id"]}:{col}:{c["color"]}':
+                h = ((h ^ ord(ch)) * 16777619) & 0xFFFFFFFF
+            semente = h % 100003
             arte = glifo(s["icon"], c["color"], semente)
             x = MARGIN + col * (CELL + GUTTER) + (CELL - ICON) // 2
             folha.paste(arte, (x, MARGIN + (CELL - ICON) // 2), arte)
