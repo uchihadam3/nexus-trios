@@ -22,3 +22,20 @@
 .ranked-callout-actions{display:flex;align-items:center;flex-wrap:wrap;gap:.65rem;justify-content:flex-end;min-width:16rem}
 .ranked-settings{margin:2rem 0;padding:1.2rem 1.5rem;border:1px solid rgba(160,195,220,.25);border-radius:14px;background:#132033}.ranked-settings h2{margin:0 0 .4rem}.ranked-settings p{color:#b5c8d6}
 @media(max-width:680px){.ranked-callout{flex-direction:column;align-items:stretch;padding:1.3rem}.ranked-callout-actions{justify-content:flex-start;min-width:0}}
+
+/*
+ * No celular em pé, as quatro abas do ranking em duas linhas.
+ *
+ * Elas rolavam para o lado, e nada avisava: a quarta, "Meus recordes", ficava
+ * cortada na borda e quem não arrastasse nunca sabia que ela existia.
+ */
+@media(max-width:560px){
+  .ranking-tabs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));overflow:visible}
+  .ranking-tabs button{min-width:0;min-height:44px;white-space:nowrap;padding-inline:8px;font-size:clamp(12px,3.7vw,15px)}
+}
+
+/* O convite para entrar, no lugar do ranking, para quem ainda não tem conta. */
+.ranking-convite{display:grid;gap:14px;justify-items:start;margin-top:12px;padding:20px;border:1px solid #b8e28255;border-radius:12px;background:linear-gradient(160deg,#22361f,#172b31)}
+.ranking-convite p{margin:0;line-height:1.55;color:#d8e7dc}
+.ranking-convite button{min-height:44px}
+.ranking-tabs+*{margin-top:12px}

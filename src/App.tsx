@@ -220,7 +220,7 @@ export default function App(){
       {screen==='home'&&<Home profile={profile} run={run} conta={conta!==null&&conta.origem!=='convidado'} onPlay={requestNew} onRanked={requestRanked} onContinue={()=>{if(run?.stage==='battle'&&run.battle){direction.current=directionFor(run);setPresentation({battle:direction.current.visible,beat:direction.current.active});}navigate('game');setPaused(run?.stage==='battle');}} onAbandon={()=>setConfirmAbandon(true)} onNavigate={navigate} onInstall={()=>void install()}/>}
       {screen==='characters'&&<CharactersScreen onDetails={setDetails}/>}
       {screen==='progress'&&<ProgressScreen profile={profile}/>}
-      {screen==='ranking'&&onlineConfigured&&<RankingScreen handle={profile.publicHandle}/>}
+      {screen==='ranking'&&onlineConfigured&&<RankingScreen handle={profile.publicHandle} conta={conta!==null&&conta.origem!=='convidado'} onConta={()=>navigate('conta')}/>}
       {screen==='conta'&&<AccountScreen autenticacao={autenticacao} conta={conta} profile={profile} conectado={onlineConfigured} google={googleConfigured} aoMudarPerfil={p=>{save('profile',p);setProfile(p);}}/>}
       {screen==='help'&&<HelpScreen onPlay={requestNew}/>}
       {screen==='settings'&&<><SettingsScreen settings={settings} onChange={changeSettings} onReset={reset}/>{onlineConfigured&&<section className="ranked-settings"><h2>Nome no ranking</h2><p>{profile.publicHandle??'Ainda não escolhido'} · você pode alterar o nome público a cada 30 dias.</p><button className="secondary" onClick={()=>{setPendingMode(null);setDraftHandle(profile.publicHandle??'');setNameDialog(true);}}>Editar nome público</button></section>}</>}
