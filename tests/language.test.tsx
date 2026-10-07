@@ -7,9 +7,9 @@ import { CharacterModal } from '../src/components/CharacterModal';
 import { FighterCard } from '../src/components/FighterCard';
 import { applyEffects,createBattle,targets } from '../src/engine/battle';
 
-describe('linguagem pública e 100 fichas',()=>{
+describe('linguagem pública e o catálogo inteiro',()=>{
   it('renderiza todas as fichas com as três habilidades e dados reais',()=>{
-    expect(characters).toHaveLength(100);
+    expect(characters.length).toBeGreaterThanOrEqual(130);
     for(const c of characters){
       const html=renderToStaticMarkup(<CharacterModal character={c} onClose={()=>{}}/>);
       expect(html,c.id).toContain(c.name);

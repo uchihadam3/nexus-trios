@@ -3,13 +3,23 @@ import {characters} from '../src/data/characters';
 import {expandedCharacters,rosterDesignQuestions,rosterIdentityReviewGroups} from '../src/data/expanded-roster';
 import type {Effect} from '../src/engine/types';
 
+/** O tamanho atual do catálogo. Sobe a cada lote até 250. */
+const TOTAL=130;
+
 describe('catálogo competitivo de personagens',()=>{
-  it('contém cem identidades únicas: 24 preservadas e 76 novas (prioridade até Shazam)',()=>{
-    expect(characters).toHaveLength(100);
-    expect(expandedCharacters).toHaveLength(76);
-    expect(new Set(characters.map(c=>c.id)).size).toBe(100);
-    expect(new Set(characters.map(c=>c.name.toLocaleLowerCase())).size).toBe(100);
-    expect(Object.keys(rosterDesignQuestions)).toHaveLength(76);
+  /*
+   * O tamanho do catálogo é um contrato, e fica declarado num lugar só.
+   *
+   * O alvo final é 250. A cada lote da expansão este número sobe junto com o
+   * roster, e as outras asserções abaixo são derivadas dele — elas cobram
+   * unicidade, não um total escrito à mão em cinco arquivos.
+   */
+  it(`contém ${String(TOTAL)} identidades únicas, 24 preservadas e o restante vindo da expansão`,()=>{
+    expect(characters).toHaveLength(TOTAL);
+    expect(expandedCharacters).toHaveLength(TOTAL-24);
+    expect(new Set(characters.map(c=>c.id)).size).toBe(TOTAL);
+    expect(new Set(characters.map(c=>c.name.toLocaleLowerCase())).size).toBe(TOTAL);
+    expect(Object.keys(rosterDesignQuestions)).toHaveLength(TOTAL-24);
   });
   it('cada ficha tem ação, traço, três habilidades alcançáveis e compatibilidade explícita',()=>{
     for(const c of characters){
@@ -34,10 +44,7 @@ describe('catálogo competitivo de personagens',()=>{
   });
   it('registra uma revisão humana para cada personagem novo, em exatamente um grupo',()=>{
     const groups=Object.values(rosterIdentityReviewGroups).flat();
-    expect(rosterIdentityReviewGroups.excellent).toHaveLength(24);
-    expect(rosterIdentityReviewGroups.smallAdjustments).toHaveLength(31);
-    expect(rosterIdentityReviewGroups.redesigned).toHaveLength(21);
-    expect(new Set(groups).size).toBe(76);
+    expect(new Set(groups).size).toBe(TOTAL-24);
     expect(new Set(groups)).toEqual(new Set(expandedCharacters.map(c=>c.id)));
   });
   it('implementa as identidades redesenhadas com condições e efeitos legíveis no motor',()=>{
@@ -88,6 +95,14 @@ describe('catálogo competitivo de personagens',()=>{
   });
   it('não repete exatamente a assinatura de mecânicas entre os kits novos',()=>{
     const fingerprints=expandedCharacters.map(c=>JSON.stringify({basic:c.basic.effects.slice(1).map(e=>e.kind==='status'?`s:${e.status}`:e.kind).sort(),skills:c.skills.map(s=>({charge:s.charge.map(r=>r.on).sort(),target:s.target,condition:s.condition,preparation:s.preparation>0,effects:s.effects.map(e=>e.kind==='status'?`s:${e.status}`:e.kind).sort()}))}));
-    expect(new Set(fingerprints).size).toBe(76);
+    /*
+     * O guarda anti-clone.
+     *
+     * Dois personagens com a mesma assinatura de mecânicas são a mesma ficha
+     * com outro nome. É a regra que a direção escreveu por extenso: 250 não
+     * podem ser 250 skins. Qualquer lote novo que colida aqui falha antes de
+     * chegar ao jogo.
+     */
+    expect(new Set(fingerprints).size).toBe(TOTAL-24);
   });
 });

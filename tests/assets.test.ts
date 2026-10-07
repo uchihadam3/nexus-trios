@@ -64,7 +64,7 @@ describe('Arte local e composição',()=>{
       expect(existsSync(new URL(skill.path.slice(1),root)),skill.path).toBe(true);
       expect(skill.path).toBe(skillArtPath(skill.character,skill.id));
     }
-    expect(manifest.count).toBe(300);
+    expect(manifest.count).toBe(characters.length*3);
     expect(manifest.skills.every(skill=>skill.path.startsWith(`/assets/skills/${skill.character}/`))).toBe(true);
     const pngs=manifest.skills.map(skill=>readFileSync(new URL(skill.path.slice(1),root)));
     const pngHash=pngs.map(file=>createHash('sha256').update(file).digest('hex'));
@@ -73,8 +73,8 @@ describe('Arte local e composição',()=>{
     expect(pngs.every(png=>png.readUInt32BE(16)===128&&png.readUInt32BE(20)===128&&png[25]===6)).toBe(true);
     expect(manifest.skills.every(skill=>skill.sheet.startsWith('/assets/sheets/skills/pages/')&&skill.crop.width===128&&skill.crop.height===128)).toBe(true);
     const sheetManifest=JSON.parse(readFileSync(new URL('assets/sheets/skills/manifest.json',root),'utf8')) as {count:number;pages:{sourceSheet:string;sheet:string;resolution:number[];columns:number;rows:number;cell:number[];icons:unknown[]}[]};
-    expect(sheetManifest.count).toBe(300);
-    expect(sheetManifest.pages).toHaveLength(100);
+    expect(sheetManifest.count).toBe(characters.length*3);
+    expect(sheetManifest.pages).toHaveLength(characters.length);
     expect(sheetManifest.pages.every(page=>page.resolution[0]===512&&page.resolution[1]===176&&page.columns===3&&page.rows===1&&page.cell[0]===160&&page.cell[1]===160&&page.icons.length===3&&existsSync(new URL(page.sourceSheet.slice(1),root)))).toBe(true);
   });
   it('mantém ícones universais próprios para todos os 14 estados e remove glifos emoji antigos',()=>{
