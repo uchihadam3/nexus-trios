@@ -35,7 +35,7 @@ try{
     await page.getByRole('button',{name:'Fechar detalhes'}).click();
     await page.getByRole('button',{name:'Voltar ao início'}).click();
     await page.getByRole('button',{name:'Montar meu trio'}).click();
-    await page.getByRole('button',{name:/Escolher/}).first().waitFor();
+    await page.getByRole('button',{name:/Adicionar ao trio/}).first().waitFor();
     await check('draft');
     await page.evaluate(async()=>{
       const {createBattle}=await import('/src/engine/battle.ts');
