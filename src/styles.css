@@ -21,12 +21,12 @@
 /* Keep the face prominent when user-supplied full-body art fills a portrait card. */
 .portrait img[data-portrait="pikachu"]{object-fit:contain}
 .portrait img[data-portrait="captain"]{object-position:50% 8%;transform:scale(1.38);transform-origin:50% 8%}
-.portrait img[data-portrait="flash"]{object-position:50% 4%;transform:scale(1.65);transform-origin:50% 4%}
-.portrait img[data-portrait="hulk"]{object-position:50% 10%;transform:scale(1.5);transform-origin:50% 10%}
-.portrait img[data-portrait="thor"]{object-position:50% 8%;transform:scale(1.7);transform-origin:50% 8%}
-.portrait img[data-portrait="wonderwoman"]{object-position:50% 8%;transform:scale(1.55);transform-origin:50% 8%}
-.portrait img[data-portrait="spiderman"]{object-position:50% 12%;transform:scale(1.55);transform-origin:50% 12%}
-.portrait img[data-portrait="magneto"]{object-position:50% 8%;transform:scale(1.45);transform-origin:50% 8%}
+.portrait img[data-portrait="flash"]{object-position:50% 30%;transform:scale(1.14);transform-origin:50% 30%}
+.portrait img[data-portrait="hulk"]{object-position:46% 28%;transform:scale(1.12);transform-origin:46% 28%}
+.portrait img[data-portrait="thor"]{object-position:37% 42%;transform:scale(1.08);transform-origin:37% 42%}
+.portrait img[data-portrait="wonderwoman"]{object-position:50% 20%;transform:scale(1.1);transform-origin:50% 20%}
+.portrait img[data-portrait="spiderman"]{object-position:50% 42%;transform:scale(1.08);transform-origin:50% 42%}
+.portrait img[data-portrait="magneto"]{object-position:50% 25%;transform:scale(1.1);transform-origin:50% 25%}
 .portrait img[data-portrait="strange"]{object-position:50% 12%;transform:scale(1.35);transform-origin:50% 12%}
 .portrait img[data-portrait="thanos"]{object-position:50% 12%;transform:scale(1.5);transform-origin:50% 12%}
 .abandon-campaign{display:flex;align-items:center;min-height:44px;margin-top:9px;padding:8px 0;background:none;color:#d5a394;font-size:11px;text-decoration:underline;text-decoration-color:#d5a39455;text-underline-offset:4px}.abandon-campaign:hover{color:#f0c0b1;text-decoration-color:currentColor}@media(max-width:600px){.abandon-campaign{width:100%;justify-content:center;margin-top:6px;padding:10px}}.draft-abandon{display:flex;align-items:center;justify-content:center;gap:8px;min-height:44px;margin:14px auto 0;padding:10px 14px;background:none;color:#d5a394;font-size:11px}.draft-abandon:hover{color:#f0c0b1}.abandon-battle{min-height:35px;padding:8px 10px;font-size:10px;gap:6px}

@@ -35,7 +35,7 @@ describe('Arte local e composição',()=>{
   it('usa os 20 retratos recém-enviados para os personagens correspondentes',()=>{
     const portraits:Record<string,string>={
       killua:'/assets/portraits/killua.png',gon:'/assets/portraits/gon.jpg',levi:'/assets/portraits/levi.jpeg',hisoka:'/assets/portraits/hisoka.webp',
-      mikasa:'/assets/portraits/mikasa.png',eren:'/assets/portraits/eren.webp',kenpachi:'/assets/portraits/kenpachi.png',aizen:'/assets/portraits/aizen.webp',
+      mikasa:'/assets/portraits/mikasa.png',eren:'/assets/portraits/eren.webp',kenpachi:'/assets/portraits/kenpachi.jpg',aizen:'/assets/portraits/aizen.webp',
       rukia:'/assets/portraits/rukia.jpg',ichigo:'/assets/portraits/ichigo.png',sukuna:'/assets/portraits/sukuna.jpg',nobara:'/assets/portraits/nobara.webp',
       megumi:'/assets/portraits/megumi.jpg',yuji:'/assets/portraits/yuji.jpg',muzan:'/assets/portraits/muzan.jpg',inosuke:'/assets/portraits/inosuke.jpg',
       zenitsu:'/assets/portraits/zenitsu.jpeg',nezuko:'/assets/portraits/nezuko.jpg',tanjiro:'/assets/portraits/tanjiro.webp',sakura:'/assets/portraits/sakura.jpg',
@@ -52,6 +52,16 @@ describe('Arte local e composição',()=>{
       expect(characters.find(character=>character.id===id)?.portrait,`retrato de ${id}`).toBe(path);
       expect(existsSync(new URL(path.slice(1),root)),path).toBe(true);
       expect(existsSync(new URL(`assets/portraits/placeholder-${id}.svg`,root)),`placeholder de ${id}`).toBe(false);
+    }
+  });
+  it('exibe as nove substituições de retratos recebidas',()=>{
+    const ids=['greengoblin','venom','kenpachi','magneto','wonderwoman','thor','flash','hulk','spiderman'];
+    for(const id of ids){
+      const path=characters.find(character=>character.id===id)?.portrait;
+      expect(path,`retrato de ${id}`).toBe(`/assets/portraits/${id}.jpg`);
+      const bytes=readFileSync(new URL(path!.slice(1),root));
+      expect(bytes.subarray(0,3),id).toEqual(Buffer.from([0xff,0xd8,0xff]));
+      expect(bytes.length,id).toBeGreaterThan(200_000);
     }
   });
   it('mantém os ícones de habilidade existentes válidos no catálogo expandido',()=>{
