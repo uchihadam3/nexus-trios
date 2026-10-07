@@ -58,9 +58,9 @@
 .raio-x-par.otima{border-left-color:#b8e282}.raio-x-par.boa{border-left-color:#7fae63}
 .raio-x-par.pouca{border-left-color:#5c6f58}.raio-x-par.neutra{border-left-color:#4b5a66}.raio-x-par.conflito{border-left-color:#d08a74}
 .raio-x-duo{display:flex;gap:6px;flex-shrink:0}
-.raio-x-rosto{width:52px;text-align:center}
-.raio-x-rosto .portrait{height:52px;border:1px solid color-mix(in srgb,var(--character),transparent 55%);border-radius:8px;overflow:hidden}
-.raio-x-rosto span{display:block;margin-top:4px;font-size:8px;color:#b9cbb6;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.raio-x-rosto{width:62px;text-align:center}
+.raio-x-rosto .portrait{height:62px;border:1px solid color-mix(in srgb,var(--character),transparent 55%);border-radius:8px;overflow:hidden}
+.raio-x-rosto span{display:block;margin-top:4px;font-size:9px;color:#b9cbb6;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .raio-x-corpo{flex:1;min-width:0}
 .raio-x-selo{display:inline-block;font-size:9px;font-weight:700;letter-spacing:.5px;color:#d9ecc6;background:#2d4029;border:1px solid #58744a;border-radius:999px;padding:3px 9px;margin-bottom:7px}
 .raio-x-par.neutra .raio-x-selo{background:#283340;border-color:#4b5a66;color:#c6d6e4}
