@@ -21,7 +21,7 @@ export function CombatConnections({battle,beat,anchors,reduced}:{battle:Battle;b
       {links.map(link=>{const a=point(link.source),b=point(link.target),midX=(a.x+b.x)/2,midY=(a.y+b.y)/2+(a.y>b.y?-4:4),path=`M ${a.x} ${a.y} Q ${midX} ${midY} ${b.x} ${b.y}`;
         return <g key={link.id} className={`combat-path path-${link.kind}`} data-link={`${link.source}:${link.target}:${link.kind}`}>
           <path d={path} pathLength="100" className="combat-path-halo"/><path d={path} pathLength="100" className="combat-path-stroke"/>
-          {!reduced&&active&&<circle r="1.25" className="combat-tracer"><animateMotion dur={`${Math.max(.15,beat.duration*.48)}s`} path={path} fill="freeze"/></circle>}
+          {!reduced&&active&&<circle r="2.2" className="combat-tracer"><animateMotion dur={`${Math.max(.15,beat.duration*.48)}s`} path={path} fill="freeze"/></circle>}
           <circle cx={b.x} cy={b.y} r="2.1" className="combat-target-node"/>
         </g>;
       })}

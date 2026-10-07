@@ -23,7 +23,8 @@
 .battle-screen .link-target .target-brackets,.battle-screen .link-target .fighter-portrait:after{content:'';position:absolute;inset:4px;border:2px solid #f8dd96;border-radius:14px;clip-path:polygon(0 0,27% 0,27% 7%,7% 7%,7% 27%,0 27%,0 0,100% 0,100% 27%,93% 27%,93% 7%,73% 7%,73% 0,100% 0,100% 100%,73% 100%,73% 93%,93% 93%,93% 73%,100% 73%,100% 100%,0 100%,0 73%,7% 73%,7% 93%,27% 93%,27% 100%,0 100%)}
 .battle-screen .link-target.taking-hit .fighter-portrait{animation:portrait-hit calc(.35s * var(--motion-scale)) ease-out}
 .battle-screen .receiving-help.link-target{border-color:#a9f8c3!important;box-shadow:0 0 0 2px #99f2bf7a,0 0 26px #79d6b277}
-.battle-screen .acting.basic-physical .fighter-portrait,.battle-screen .acting.basic-slash .fighter-portrait{animation:basic-lunge calc(.8s * var(--motion-scale)) ease-out both}
+.battle-screen .player-team .acting.basic-physical .fighter-portrait,.battle-screen .player-team .acting.basic-slash .fighter-portrait{--lunge:-1;animation:basic-lunge calc(.85s * var(--motion-scale)) cubic-bezier(.2,.75,.2,1) both}
+.battle-screen .enemy-team .acting.basic-physical .fighter-portrait,.battle-screen .enemy-team .acting.basic-slash .fighter-portrait{--lunge:1;animation:basic-lunge calc(.85s * var(--motion-scale)) cubic-bezier(.2,.75,.2,1) both}
 .battle-screen .acting.basic-slash .portrait-halo{background:conic-gradient(from 20deg,transparent 0 35%,#f1e6d999 40% 46%,transparent 50%)}
 .battle-screen .cast-broken .preparation-ring{animation:cast-shatter .4s ease-out both;stroke:#ff9c87}
 .battle-screen .cast-broken .cast-label{color:#ffb4a2}
@@ -37,10 +38,10 @@
 .path-shield{--path-color:#91e9f1}
 .path-debuff,.path-interrupt{--path-color:#e9a5d5}
 .combat-path-halo,.combat-path-stroke{fill:none;vector-effect:non-scaling-stroke;stroke-linecap:round;stroke-linejoin:round}
-.combat-path-halo{stroke:var(--path-color);stroke-width:8;opacity:.14}
-.combat-path-stroke{stroke:var(--path-color);stroke-width:2.6;stroke-dasharray:4 2;opacity:.9}
+.combat-path-halo{stroke:var(--path-color);stroke-width:16;opacity:.22}
+.combat-path-stroke{stroke:var(--path-color);stroke-width:4;stroke-dasharray:4 2;opacity:1;filter:drop-shadow(0 0 4px var(--path-color))}
 .combat-target-node{fill:var(--path-color);opacity:.92;stroke:#fff9;stroke-width:.5}
-.combat-tracer{fill:#fff;stroke:var(--path-color);stroke-width:1;filter:drop-shadow(0 0 3px var(--path-color))}
+.combat-tracer{fill:#fff;stroke:var(--path-color);stroke-width:1.5;filter:drop-shadow(0 0 7px var(--path-color))}
 .combat-connections.winding .combat-path-stroke{stroke-dasharray:100;stroke-dashoffset:100;animation:draw-link var(--link-time) ease-in-out forwards}
 .combat-connections.winding .combat-path-halo{animation:link-fade var(--link-time) ease-in both}
 .combat-connections.landed .combat-path{opacity:.5}
@@ -82,7 +83,7 @@
 @keyframes link-fade{0%{opacity:0}35%{opacity:.23}100%{opacity:.13}}
 @keyframes target-pop{0%{opacity:.2;r:1}50%{opacity:1;r:3}100%{opacity:.8;r:2.1}}
 @keyframes source-aura{to{opacity:.4;transform:scale(1.1)}}
-@keyframes basic-lunge{0%{transform:translateY(0)}32%{transform:translateY(7px) scale(1.12)}62%{transform:translateY(-2px) scale(1.04)}100%{transform:translateY(0)}}
+@keyframes basic-lunge{0%{transform:translateY(0) scale(1)}18%{transform:translateY(calc(8px * var(--lunge))) scale(1.04)}48%{transform:translateY(calc(28px * var(--lunge))) scale(1.13)}72%{transform:translateY(calc(11px * var(--lunge))) scale(1.06)}100%{transform:translateY(0) scale(1)}}
 @keyframes cast-shatter{to{opacity:0;transform:rotate(-90deg) scale(1.35)}}
 @keyframes unit-out{30%{transform:scale(1.06)}100%{transform:scale(1)}}
 @keyframes feedback-rise{0%{opacity:.5;translate:0 10px;scale:.8}10%{opacity:1;translate:0 0;scale:1.08}80%{opacity:1;translate:0 -11px;scale:1}100%{opacity:0;translate:0 -23px;scale:.94}}
