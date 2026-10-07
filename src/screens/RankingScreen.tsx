@@ -1,0 +1,17 @@
+import {useEffect,useState} from 'react';
+import {Trophy,WifiOff} from 'lucide-react';
+import {byId} from '../data/characters';
+import {Portrait} from '../components/Portrait';
+import {onlineCall,onlineConfigured,type Leaderboard,type PublicRun} from '../lib/online';
+
+const modes=[['daily','HOJE'],['weekly','SEMANA'],['season','TEMPORADA'],['mine','MEUS RECORDES']] as const;
+export function RankingScreen({handle}:{handle?:string}){
+  const [mode,setMode]=useState<(typeof modes)[number][0]>('daily'),[board,setBoard]=useState<Leaderboard|null>(null),[loading,setLoading]=useState(false),[error,setError]=useState(''),[selected,setSelected]=useState<PublicRun|null>(null);
+  useEffect(()=>{if(!onlineConfigured)return;let active=true;setLoading(true);setError('');void onlineCall<Leaderboard>('leaderboard',{mode:mode==='mine'?'season':mode}).then(result=>{if(active){setBoard(result);setLoading(false);}}).catch(e=>{if(active){setError(e instanceof Error?e.message:'Ranking indisponível.');setLoading(false);}});return()=>{active=false};},[mode]);
+  const rows=mode==='mine'?(board?.mine?[board.mine]:[]):board?.entries??[];
+  return <section className="ranking-screen"><div className="screen-title"><span className="eyebrow"><Trophy size={14}/> RESULTADOS VERIFICADOS</span><h1>Ranking Nexus.</h1><p>Jornadas Ranqueadas têm desafio compartilhado. O servidor reproduz cada luta antes de publicar a pontuação.</p></div>
+    <div className="ranking-tabs">{modes.map(([value,label])=><button key={value} className={mode===value?'active':''} onClick={()=>{setMode(value);setSelected(null);}}>{label}</button>)}</div>
+    {!onlineConfigured?<p className="ranking-notice"><WifiOff size={18}/> Ranking ainda não foi conectado ao servidor. Jornada Casual e Progresso continuam offline.</p>:error?<p role="alert" className="ranking-notice"><WifiOff size={18}/>{error}</p>:loading?<p className="ranking-notice">Carregando resultados verificados…</p>:<><p className="ranking-context">{mode==='daily'?'Desafio de hoje':mode==='weekly'?'Desafio da semana':mode==='season'?'Melhores resultados desta temporada':'Seu melhor resultado da temporada'} · {board?.period} {handle&&`· ${handle}`}</p><div className="ranking-list">{rows.map(row=><button key={row.id} onClick={()=>setSelected(row)} className={board?.mine?.id===row.id?'mine':''}><strong>#{row.position}</strong><span className="ranking-name">{row.handle}</span><div className="ranking-trio">{row.team.map(id=>byId[id]&&<Portrait key={id} character={byId[id]}/>)}</div><span>{row.progress}/10 · {row.objectives} objetivos</span><b>{row.score.toLocaleString('pt-BR')}</b></button>)}{!rows.length&&<p className="ranking-empty">Ainda não há resultado validado nesta aba.</p>}</div></>}
+    {selected&&<div className="ranking-detail"><button onClick={()=>setSelected(null)} aria-label="Fechar detalhes">×</button><h2>#{selected.position} · {selected.handle}</h2><div className="ranking-detail-trio">{selected.team.map(id=>byId[id]&&<div key={id}><Portrait character={byId[id]}/><span>{byId[id].name}</span></div>)}</div><p><strong>{selected.score.toLocaleString('pt-BR')}</strong> pontos · {selected.progress}/10 confrontos · {selected.objectives} objetivos</p><small>Desafio {selected.seed} · {new Date(selected.date).toLocaleDateString('pt-BR')} · {selected.engineVersion} · {selected.balanceVersion}</small><p>{selected.highlights.survivors??0} sobreviventes no último duelo · {selected.highlights.turns??0} viradas</p></div>}
+  </section>;
+}

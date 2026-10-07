@@ -1,10 +1,11 @@
-import { ArrowUpRight,ArrowRight,Trophy,CircleHelp,Settings2,Download,ChevronRight,Users,Swords,Flag,Star } from 'lucide-react';
+import { ArrowUpRight,ArrowRight,Trophy,CircleHelp,Settings2,Download,ChevronRight,Users,Swords,Flag,Star,Award,Globe2 } from 'lucide-react';
 import { byId,characters } from '../data/characters';
 import { Portrait } from '../components/Portrait';
 import type { Profile, Run } from '../lib/storage';
+import {onlineConfigured} from '../lib/online';
 
-interface Props {profile:Profile;run:Run|null;onPlay:()=>void;onContinue:()=>void;onAbandon:()=>void;onNavigate:(s:'characters'|'help'|'settings')=>void;onInstall:()=>void}
-export function Home({profile,run,onPlay,onContinue,onAbandon,onNavigate,onInstall}:Props){
+interface Props {profile:Profile;run:Run|null;onPlay:()=>void;onRanked:(mode:'daily'|'weekly')=>void;onContinue:()=>void;onAbandon:()=>void;onNavigate:(s:'characters'|'progress'|'ranking'|'help'|'settings')=>void;onInstall:()=>void}
+export function Home({profile,run,onPlay,onRanked,onContinue,onAbandon,onNavigate,onInstall}:Props){
   const terminal=run?.stage==='result'&&(run.battle?.winner!=='player'||run.index===9);
   const wonCurrent=run?.stage==='result'&&run.battle?.winner==='player';
   const champion=terminal&&wonCurrent;
@@ -23,13 +24,14 @@ export function Home({profile,run,onPlay,onContinue,onAbandon,onNavigate,onInsta
       </div>
       <div className="hub-team"><span className="eyebrow">{terminal?champion?'TRIO CAMPEÃO':'TRIO DA JORNADA':run?.team.length?'TRIO EM CAMPO':profile.champion?.length?'ÚLTIMO TRIO CAMPEÃO':'TRIO PARA COMEÇAR'}</span><div>{trio.map((id,i)=>{const c=byId[id];return <span key={id} className={`hub-unit hub-unit-${i}`} style={{'--character':c.color} as React.CSSProperties}><Portrait character={c}/><strong>{c.name}</strong></span>})}</div><small>{terminal?champion?'Dez confrontos vencidos juntos.':`Chegou ao confronto ${(run?.index??0)+1} desta jornada.`:run?.team.length?'Seu time segue junto até o fim da jornada.':'A escolha do seu trio começa no Draft.'}</small></div>
     </div>
+    {onlineConfigured&&<section className="ranked-callout" aria-label="Jornada Ranqueada"><div><span className="eyebrow"><Globe2 size={14}/> ARENA ONLINE</span><h2>Jornada Ranqueada</h2><p>O mesmo desafio para todos. Monte seu trio e compare seu resultado validado no ranking.</p></div><div className="ranked-callout-actions"><button className="primary" onClick={()=>onRanked('daily')}>Desafio diário <ArrowRight size={16}/></button><button className="secondary" onClick={()=>onRanked('weekly')}>Desafio semanal</button><button className="text-button" onClick={()=>onNavigate('ranking')}>Ver ranking →</button></div></section>}
     <div className="hub-progress"><div className="section-heading"><div><span className="eyebrow"><Flag size={13}/> TRILHA DA JORNADA</span><h2>{run?`${completed} de 10 confrontos vencidos`:'Dez passos até o título'}</h2></div><span className="record">RECORDE <strong>{profile.best}<small>/10</small></strong></span></div>
       <div className="milestones game-trail" aria-label="Progresso de dez confrontos">{Array.from({length:10},(_,i)=>{const done=run?i<completed:i<profile.best,active=i===current&&!terminal;return <div className={`${done?'complete':''} ${active?'next':''} ${i===9?'final':''}`} key={i} aria-label={`Confronto ${i+1}${done?', vencido':active?', próximo':''}`}><span>{i===9?<Trophy size={18}/>:String(i+1).padStart(2,'0')}</span></div>;})}</div>
       <div className="trail-callout"><span>{run?terminal?'JORNADA ENCERRADA':run.stage==='draft'?'PREPARE O TRIO':'PRÓXIMO NÓ DESBLOQUEADO':'PRIMEIRO PASSO'}</span><strong>{run&&!terminal?run.encounters[current]?.name:run&&terminal?`${completed} vitórias conquistadas`:'Monte seu trio para ativar a primeira luta'}</strong></div>
       <div className="journey-bottom"><span>{profile.journeys} jornadas · {profile.victories} trios campeões</span><button className="text-button" onClick={onPlay}>Nova jornada <ArrowRight size={15}/></button></div>
     </div>
     {enemies&&<div className="hub-encounter"><div><span className="eyebrow">RIVAIS DO PRÓXIMO CONFRONTO</span><h2>{run?.encounters[current].name}</h2><p>Entre na arena para descobrir como seu trio responde.</p></div><div className="hub-rivals">{enemies.map(id=><span key={id}><Portrait character={byId[id]}/><small>{byId[id].name}</small></span>)}</div></div>}
-    <div className="hub-links"><button onClick={()=>onNavigate('characters')}><Users size={20}/><span><b>Personagens</b><small>Conheça os {characters.length} lutadores</small></span><ChevronRight size={17}/></button><button onClick={()=>onNavigate('help')}><CircleHelp size={20}/><span><b>Como jogar</b><small>Aprenda a ler a batalha</small></span><ChevronRight size={17}/></button><button onClick={()=>onNavigate('settings')}><Settings2 size={20}/><span><b>Configurações</b><small>Áudio, visual e jogo</small></span><ChevronRight size={17}/></button><button onClick={onInstall}><Download size={20}/><span><b>Instalar</b><small>Leve seu trio com você</small></span><ChevronRight size={17}/></button></div>
+    <div className="hub-links"><button onClick={()=>onNavigate('characters')}><Users size={20}/><span><b>Personagens</b><small>Conheça os {characters.length} lutadores</small></span><ChevronRight size={17}/></button><button onClick={()=>onNavigate('progress')}><Award size={20}/><span><b>Progresso</b><small>Objetivos, conquistas e maestria</small></span><ChevronRight size={17}/></button><button onClick={()=>onNavigate('help')}><CircleHelp size={20}/><span><b>Como jogar</b><small>Aprenda a ler a batalha</small></span><ChevronRight size={17}/></button><button onClick={()=>onNavigate('settings')}><Settings2 size={20}/><span><b>Configurações</b><small>Áudio, visual e jogo</small></span><ChevronRight size={17}/></button><button onClick={onInstall}><Download size={20}/><span><b>Instalar</b><small>Leve seu trio com você</small></span><ChevronRight size={17}/></button></div>
     <p className="hub-rule"><Swords size={17}/> A vitória acontece quando o trio rival inteiro sai da luta.</p>
   </section>;
 }

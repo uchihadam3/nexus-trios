@@ -1,9 +1,9 @@
 import { characters, byId } from '../data/characters';
 import { random, shuffle } from './random';
 export interface Encounter {team:string[];name:string;power:number;scale:number}
-export interface Draft {team:string[];candidates:string[];skips:number;rng:number}
-export function candidates(draft:Draft,exclude:string[]=[]):string[]{return shuffle(characters.filter(c=>!draft.team.includes(c.id)&&!exclude.includes(c.id)).map(c=>c.id),draft).slice(0,3);}
-export function newDraft(seed:number):Draft{const d={team:[],candidates:[],skips:3,rng:seed>>>0};return {...d,candidates:candidates(d)};}
+export interface Draft {team:string[];candidates:string[];skips:number;rng:number;banned?:string[]}
+export function candidates(draft:Draft,exclude:string[]=[]):string[]{return shuffle(characters.filter(c=>!draft.team.includes(c.id)&&!draft.banned?.includes(c.id)&&!exclude.includes(c.id)).map(c=>c.id),draft).slice(0,3);}
+export function newDraft(seed:number,banned:string[]=[]):Draft{const d={team:[],candidates:[],skips:3,rng:seed>>>0,banned};return {...d,candidates:candidates(d)};}
 export function skipDraft(d:Draft):Draft{if(d.skips<=0)return d;const next={...d,skips:d.skips-1};next.candidates=candidates(next,d.candidates);return next;}
 export function pickDraft(d:Draft,id:string):Draft{if(d.team.length>=3||!d.candidates.includes(id)||d.team.includes(id))return d;const next={...d,team:[...d.team,id]};next.candidates=next.team.length<3?candidates(next):[];return next;}
 export function synergy(team:string[]):number{

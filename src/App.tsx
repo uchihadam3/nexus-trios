@@ -4,6 +4,8 @@ import { Home } from './screens/Home';
 import { DraftScreen } from './screens/DraftScreen';
 import { BattleScreen } from './screens/BattleScreen';
 import { ResultScreen } from './screens/ResultScreen';
+import { ProgressScreen } from './screens/ProgressScreen';
+import { RankingScreen } from './screens/RankingScreen';
 import { CharactersScreen,HelpScreen,SettingsScreen } from './screens/Auxiliary';
 import { CharacterModal } from './components/CharacterModal';
 import { byId,characters } from './data/characters';
@@ -16,9 +18,12 @@ import { createDirection,restoreDirection,checkpointDirection,advanceDirection,t
 import { PRESENTATION as P } from './presentation/config';
 import type { Battle } from './engine/types';
 import { addSynergies,summarizeBattle } from './engine/run-summary';
+import {advanceObjectives,battleDelta,emptyProgress,emptyTally,journeyObjectives,recordProgress,tallyEvents} from './engine/progression';
+import {runDigest} from './engine/ranked';
+import {onlineCall,onlineConfigured} from './lib/online';
 const DebugScreen=lazy(()=>import('./screens/DebugScreen').then(m=>({default:m.DebugScreen})));
 const VfxLabScreen=lazy(()=>import('./screens/VfxLabScreen').then(m=>({default:m.VfxLabScreen})));
-type Screen='home'|'game'|'characters'|'help'|'settings'|'debug'|'vfx';
+type Screen='home'|'game'|'characters'|'progress'|'ranking'|'help'|'settings'|'debug'|'vfx';
 interface InstallEvent extends Event {prompt:()=>Promise<void>;userChoice:Promise<{outcome:string}>}
 function InfoDialog({title,children,onClose}:{title:string;children:React.ReactNode;onClose:()=>void}){
   const ref=useRef<HTMLDialogElement>(null);useEffect(()=>{const el=ref.current;el?.showModal();return()=>el?.close();},[]);
@@ -28,6 +33,8 @@ export default function App(){
   const [screen,setScreen]=useState<Screen>(import.meta.env.DEV&&location.hash==='#debug'?'debug':'home');
   const [settings,setSettings]=useState(loadSettings),[profile,setProfile]=useState(loadProfile),[run,setRun]=useState<Run|null>(loadRun);
   const [paused,setPaused]=useState(false),[details,setDetails]=useState<string|null>(null),[menu,setMenu]=useState(false),[installHelp,setInstallHelp]=useState(false),[confirmNew,setConfirmNew]=useState(false),[confirmAbandon,setConfirmAbandon]=useState(false);
+  const [onlineNotice,setOnlineNotice]=useState(''),[nameDialog,setNameDialog]=useState(false),[draftHandle,setDraftHandle]=useState(''),[pendingMode,setPendingMode]=useState<'daily'|'weekly'|null>(null),[onlineBusy,setOnlineBusy]=useState(false);
+  const submission=useRef(false);
   const [installEvent,setInstallEvent]=useState<InstallEvent|null>(null),[installed,setInstalled]=useState(()=>matchMedia('(display-mode: standalone)').matches);
   const runRef=useRef(run),lastSave=useRef(0);runRef.current=run;
   const direction=useRef<Direction|null>(null);
@@ -45,15 +52,39 @@ export default function App(){
   };
   const changeSettings=(next:Settings)=>{battleAudio.configure(next);setSettings(next);save('settings',next);};
   const navigate=(next:Screen)=>{if(next!=='game')setPaused(true);setScreen(next);setMenu(false);window.scrollTo(0,0);};
+  const prepareRanked=async(mode:'daily'|'weekly')=>{
+    const response=await onlineCall<{challenge:{seed:number};banned:string[]}>('challenge',{mode});
+    const seed=response.challenge.seed;
+    changeRun({seed,team:[],encounters:generateCampaign(seed),index:0,stage:'draft',draft:newDraft(seed,response.banned),battle:null,recorded:false,summaries:[],ranked:{mode,status:'draft'}});
+    setConfirmNew(false);setConfirmAbandon(false);setPendingMode(null);setPaused(false);navigate('game');
+  };
+  const beginRanked=async(mode:'daily'|'weekly')=>{
+    if(!onlineConfigured){setOnlineNotice('Ranking online ainda não está conectado. A Jornada Casual funciona sem internet.');return;}
+    setOnlineBusy(true);
+    try{
+      const response=await onlineCall<{profile:{handle:string}|null}>('profile');
+      if(!response.profile){setPendingMode(mode);setNameDialog(true);}else{setProfile(p=>{const n={...p,publicHandle:response.profile!.handle};save('profile',n);return n;});await prepareRanked(mode);}
+    }catch(error){setOnlineNotice(error instanceof Error?error.message:'Não foi possível abrir o desafio online.');}
+    finally{setOnlineBusy(false);}
+  };
+  const saveHandle=async()=>{
+    setOnlineBusy(true);
+    try{const response=await onlineCall<{profile:{handle:string}}> ('profile',{handle:draftHandle});setProfile(p=>{const n={...p,publicHandle:response.profile.handle};save('profile',n);return n;});setNameDialog(false);if(pendingMode)await prepareRanked(pendingMode);}
+    catch(error){setOnlineNotice(error instanceof Error?error.message:'Não foi possível salvar o nome.');}
+    finally{setOnlineBusy(false);}
+  };
   const startNew=()=>{
     const seed=crypto.getRandomValues(new Uint32Array(1))[0];
-    changeRun({seed,team:[],encounters:generateCampaign(seed),index:0,stage:'draft',draft:newDraft(seed),battle:null,recorded:false,summaries:[]});setPaused(false);setConfirmNew(false);setConfirmAbandon(false);navigate('game');
+    changeRun({seed,team:[],encounters:generateCampaign(seed),index:0,stage:'draft',draft:newDraft(seed),battle:null,recorded:false,summaries:[]});setPendingMode(null);setPaused(false);setConfirmNew(false);setConfirmAbandon(false);navigate('game');
   };
-  const requestNew=()=>{if(run&&(run.stage!=='result'||run.battle?.winner==='player'&&run.index<9))setConfirmNew(true);else startNew();};
-  const startBattle=(index:number)=>{
+  const requestNew=()=>{setPendingMode(null);if(run&&(run.stage!=='result'||run.battle?.winner==='player'&&run.index<9))setConfirmNew(true);else startNew();};
+  const requestRanked=(mode:'daily'|'weekly')=>{setPendingMode(mode);if(run&&(run.stage!=='result'||run.battle?.winner==='player'&&run.index<9))setConfirmNew(true);else void beginRanked(mode);};
+  const startBattle=async(index:number)=>{
     const current=runRef.current;if(!current)return;
-    const team=current.draft.team,encounters=current.stage==='draft'?generateCampaign(current.seed,team):current.encounters,encounter=encounters[index];
-    const next={...current,team,encounters,index,stage:'battle' as const,recorded:false,presentation:undefined,battleSynergies:[],battle:createBattle(team,encounter.team,current.seed+index*7919,encounter.scale)};
+    const team=current.draft.team,encounters=current.ranked?current.encounters:current.stage==='draft'?generateCampaign(current.seed,team):current.encounters,encounter=encounters[index];
+    let ranked=current.ranked;
+    if(index===0&&ranked){setOnlineBusy(true);try{const result=await onlineCall<{run:{id:string;seed:number}}> ('start',{mode:ranked.mode,team});if(result.run.seed!==current.seed)throw new Error('O desafio mudou; inicie outra Jornada Ranqueada.');ranked={...ranked,id:result.run.id,status:'playing'};}catch(error){setOnlineNotice(error instanceof Error?error.message:'Jornada Ranqueada indisponível.');return;}finally{setOnlineBusy(false);}}
+    const next={...current,team,encounters,index,stage:'battle' as const,recorded:false,presentation:undefined,battleSynergies:[],objectives:index===0?journeyObjectives(team,current.seed):current.objectives,telemetry:emptyTally(),ranked,battle:createBattle(team,encounter.team,current.seed+index*7919,encounter.scale)};
     direction.current=null;setPresentation(null);changeRun(next);setPaused(false);navigate('game');
     if(index===0)setProfile(p=>{const n={...p,journeys:p.journeys+1};save('profile',n);return n;});
   };
@@ -97,10 +128,13 @@ export default function App(){
       if(d.signals.length)lastAudio.current=Math.max(lastAudio.current,...d.signals.map(e=>e.id));
       setPresentation({battle:d.visible,beat:d.active?{...d.active}:null});
       const battleSynergies=d.signals.length?addSynergies(current.battleSynergies??[],d.signals):current.battleSynergies??[];
-      let next={...current,battle:d.battle,presentation:checkpointDirection(d),battleSynergies};
+      const telemetry=d.signals.length?tallyEvents(current.telemetry??emptyTally(),d.signals):current.telemetry??emptyTally();
+      let next={...current,battle:d.battle,presentation:checkpointDirection(d),battleSynergies,telemetry};
       if(d.complete){
-        next={...next,stage:'result',recorded:true,summaries:current.recorded?current.summaries:[...(current.summaries??[]).filter(s=>s.index!==current.index),summarizeBattle(current.index,d.battle,battleSynergies)]};
-        if(!current.recorded){const won=current.battle.winner==='player';setProfile(p=>{const n={...p,best:Math.max(p.best,current.index+(won?1:0)),wins:p.wins+(won?1:0),victories:p.victories+(won&&current.index===9?1:0),champion:won&&current.index===9?[...current.team]:p.champion};save('profile',n);return n;});battleAudio.sound(won?'victory':'defeat',5);}
+        const summary=summarizeBattle(current.index,d.battle,battleSynergies);
+        const updatedObjectives=advanceObjectives(current.objectives??[],battleDelta(summary,d.battle,telemetry,profile.progress.seen,current.team));
+        next={...next,stage:'result',recorded:true,objectives:updatedObjectives,summaries:current.recorded?current.summaries:[...(current.summaries??[]).filter(s=>s.index!==current.index),summary]};
+        if(!current.recorded){const won=d.battle.winner==='player',champion=won&&current.index===9;setProfile(p=>{const delta=battleDelta(summary,d.battle,telemetry,p.progress.seen,current.team),progress=recordProgress(p.progress,delta,d.battle,current.team,!won||champion,champion);progress.xp+=(updatedObjectives.reduce((n,o)=>n+(o.progress>=o.target?o.reward:0),0)-(current.objectives??[]).reduce((n,o)=>n+(o.progress>=o.target?o.reward:0),0));const n={...p,best:Math.max(p.best,current.index+(won?1:0)),wins:p.wins+(won?1:0),victories:p.victories+Number(champion),champion:champion?[...current.team]:p.champion,progress};save('profile',n);return n;});battleAudio.sound(won?'victory':'defeat',5);}
         save('run',next);
       }
       runRef.current=next;setRun(next);
@@ -110,31 +144,46 @@ export default function App(){
   },[screen,paused,details,confirmNew,confirmAbandon,settings.speed,settings.volume]);
   useEffect(()=>{
     if(screen!=='game'||!settings.auto||run?.stage!=='result'||run.index>=9||run.battle?.winner!=='player')return;
-    const id=window.setTimeout(()=>{const current=runRef.current;if(!current)return;const index=current.index+1,encounter=current.encounters[index];const next={...current,index,stage:'battle' as const,recorded:false,presentation:undefined,battleSynergies:[],battle:createBattle(current.team,encounter.team,current.seed+index*7919,encounter.scale)};runRef.current=next;setRun(next);save('run',next);setPaused(false);},4500);
+    const id=window.setTimeout(()=>{const current=runRef.current;if(!current)return;const index=current.index+1,encounter=current.encounters[index];const next={...current,index,stage:'battle' as const,recorded:false,presentation:undefined,battleSynergies:[],telemetry:emptyTally(),battle:createBattle(current.team,encounter.team,current.seed+index*7919,encounter.scale)};runRef.current=next;setRun(next);save('run',next);setPaused(false);},4500);
     return()=>clearTimeout(id);
   },[screen,settings.auto,run?.stage,run?.index,run?.battle?.winner]);
+  useEffect(()=>{
+    if(!run?.ranked?.id||run.stage!=='result'||run.battle?.winner==='player'&&run.index<9||!['playing','validating'].includes(run.ranked.status)||submission.current)return;
+    submission.current=true;const id=run.ranked.id;
+    if(run.ranked.status!=='validating')changeRun({...run,ranked:{...run.ranked,status:'validating'}});
+    void (async()=>{
+      try{const digest=await runDigest(id,run.team,run.seed,(run.summaries??[]).map(s=>s.won));const result=await onlineCall<{score:number;daily:number|null;weekly:number|null;season:number|null}>('submit',{runId:id,digest});
+        const latest=runRef.current;if(latest?.ranked?.id===id)changeRun({...latest,ranked:{...latest.ranked,status:'verified',score:result.score,daily:result.daily,weekly:result.weekly,season:result.season,error:undefined}});
+      }catch(error){const latest=runRef.current;if(latest?.ranked?.id===id)changeRun({...latest,ranked:{...latest.ranked,status:'failed',error:error instanceof Error?error.message:'Falha na validação.'}});}
+      finally{submission.current=false;}
+    })();
+  },[run?.stage,run?.index,run?.battle?.winner,run?.ranked?.status,run?.ranked?.id]);
   useEffect(()=>{battleAudio.configure(settings);},[settings]);
   useEffect(()=>{battleAudio.setBattle(screen==='game'&&run?.stage==='battle'&&!paused&&!details&&!confirmNew&&!confirmAbandon);return()=>battleAudio.setBattle(false);},[screen,run?.stage,paused,details,confirmNew,confirmAbandon]);
   const install=async()=>{if(installEvent){await installEvent.prompt();const choice=await installEvent.userChoice;setInstallEvent(null);if(choice.outcome!=='accepted')setInstallHelp(true);}else setInstallHelp(true);};
-  const reset=()=>{resetStorage();setSettings(defaults);setProfile({journeys:0,victories:0,best:0,wins:0});setRun(null);runRef.current=null;navigate('home');};
+  const reset=()=>{resetStorage();setSettings(defaults);setProfile({journeys:0,victories:0,best:0,wins:0,progress:emptyProgress()});setRun(null);runRef.current=null;navigate('home');};
   return <div onPointerDownCapture={()=>void battleAudio.unlock()} onKeyDownCapture={e=>{if(e.key==='Enter'||e.key===' ')void battleAudio.unlock();}} className={`app ${settings.reducedMotion?'reduce-motion':''}`}>
-    <header className="site-header"><button className="brand" onClick={()=>navigate('home')} aria-label="Nexus início"><span className="brand-mark">N</span><span>NEXUS<small>DUELO DE TRIOS</small></span></button><nav aria-label="Navegação principal" className={menu?'open':''}><button className={screen==='home'?'active':''} onClick={()=>navigate('home')}>Início</button><button className={screen==='characters'?'active':''} onClick={()=>navigate('characters')}>Personagens <span>{characters.length}</span></button><button className={screen==='help'?'active':''} onClick={()=>navigate('help')}>Como jogar</button><button className={screen==='settings'?'active':''} onClick={()=>navigate('settings')}>Configurações</button></nav><div className="header-right"><span className="local-badge"><ShieldCheck size={13}/> PROGRESSO LOCAL</span><button className="icon-button menu-toggle" aria-label="Abrir menu" aria-expanded={menu} onClick={()=>setMenu(!menu)}>{menu?<X size={20}/>:<Menu size={20}/>}</button></div></header>
+    <header className="site-header"><button className="brand" onClick={()=>navigate('home')} aria-label="Nexus início"><span className="brand-mark">N</span><span>NEXUS<small>DUELO DE TRIOS</small></span></button><nav aria-label="Navegação principal" className={menu?'open':''}><button className={screen==='home'?'active':''} onClick={()=>navigate('home')}>Início</button><button className={screen==='characters'?'active':''} onClick={()=>navigate('characters')}>Personagens <span>{characters.length}</span></button><button className={screen==='progress'?'active':''} onClick={()=>navigate('progress')}>Progresso</button>{onlineConfigured&&<button className={screen==='ranking'?'active':''} onClick={()=>navigate('ranking')}>Ranking</button>}<button className={screen==='help'?'active':''} onClick={()=>navigate('help')}>Como jogar</button><button className={screen==='settings'?'active':''} onClick={()=>navigate('settings')}>Configurações</button></nav><div className="header-right"><span className="local-badge"><ShieldCheck size={13}/> {profile.publicHandle??'PROGRESSO LOCAL'}</span><button className="icon-button menu-toggle" aria-label="Abrir menu" aria-expanded={menu} onClick={()=>setMenu(!menu)}>{menu?<X size={20}/>:<Menu size={20}/>}</button></div></header>
     <main key={`${screen}-${screen==='game'?run?.stage??'idle':'page'}`} className={screen==='game'&&run?.stage==='battle'?'main battle-main screen-enter':'main screen-enter'}>
       {screen!=='home'&&<button className="back-button" onClick={()=>navigate('home')}><ArrowLeft size={15}/>Voltar ao início</button>}
-      {screen==='home'&&<Home profile={profile} run={run} onPlay={requestNew} onContinue={()=>{if(run?.stage==='battle'&&run.battle){direction.current=directionFor(run);setPresentation({battle:direction.current.visible,beat:direction.current.active});}navigate('game');setPaused(run?.stage==='battle');}} onAbandon={()=>setConfirmAbandon(true)} onNavigate={navigate} onInstall={()=>void install()}/>}
+      {screen==='home'&&<Home profile={profile} run={run} onPlay={requestNew} onRanked={requestRanked} onContinue={()=>{if(run?.stage==='battle'&&run.battle){direction.current=directionFor(run);setPresentation({battle:direction.current.visible,beat:direction.current.active});}navigate('game');setPaused(run?.stage==='battle');}} onAbandon={()=>setConfirmAbandon(true)} onNavigate={navigate} onInstall={()=>void install()}/>}
       {screen==='characters'&&<CharactersScreen onDetails={setDetails}/>}
+      {screen==='progress'&&<ProgressScreen profile={profile} run={run}/>}
+      {screen==='ranking'&&onlineConfigured&&<RankingScreen handle={profile.publicHandle}/>}
       {screen==='help'&&<HelpScreen onPlay={requestNew}/>}
-      {screen==='settings'&&<SettingsScreen settings={settings} onChange={changeSettings} onReset={reset}/>}
-      {screen==='game'&&run?.stage==='draft'&&<DraftScreen draft={run.draft} onPick={id=>changeRun({...run,draft:pickDraft(run.draft,id)})} onSkip={()=>changeRun({...run,draft:skipDraft(run.draft)})} onDetails={setDetails} onStart={()=>startBattle(0)} onAbandon={()=>setConfirmAbandon(true)}/>}
-      {screen==='game'&&run?.stage==='battle'&&run.battle&&<BattleScreen battle={presentation&&direction.current?.battle===run.battle?presentation.battle:run.battle} beat={presentation&&direction.current?.battle===run.battle?presentation.beat:null} index={run.index} name={run.encounters[run.index].name} settings={settings} paused={paused||!!details} onPause={()=>setPaused(!paused)} onAbandon={()=>setConfirmAbandon(true)} onSettings={changeSettings}/>}
-      {screen==='game'&&run?.stage==='result'&&<ResultScreen run={run} onNext={()=>startBattle(run.index+1)} onRestart={requestNew} onAbandon={()=>setConfirmAbandon(true)} onHome={()=>navigate('home')} auto={settings.auto} onAuto={auto=>changeSettings({...settings,auto})}/>}
+      {screen==='settings'&&<><SettingsScreen settings={settings} onChange={changeSettings} onReset={reset}/>{onlineConfigured&&<section className="ranked-settings"><h2>Nome no ranking</h2><p>{profile.publicHandle??'Ainda não escolhido'} · você pode alterar o nome público a cada 30 dias.</p><button className="secondary" onClick={()=>{setPendingMode(null);setDraftHandle(profile.publicHandle??'');setNameDialog(true);}}>Editar nome público</button></section>}</>}
+      {screen==='game'&&run?.stage==='draft'&&<DraftScreen draft={run.draft} onPick={id=>changeRun({...run,draft:pickDraft(run.draft,id)})} onSkip={()=>changeRun({...run,draft:skipDraft(run.draft)})} onDetails={setDetails} onStart={()=>void startBattle(0)} onAbandon={()=>setConfirmAbandon(true)}/>}
+      {screen==='game'&&run?.stage==='battle'&&run.battle&&<BattleScreen battle={presentation&&direction.current?.battle===run.battle?presentation.battle:run.battle} beat={presentation&&direction.current?.battle===run.battle?presentation.beat:null} index={run.index} name={run.encounters[run.index].name} settings={settings} paused={paused||!!details} objectives={run.objectives} telemetry={run.telemetry} onPause={()=>setPaused(!paused)} onAbandon={()=>setConfirmAbandon(true)} onSettings={changeSettings}/>}
+      {screen==='game'&&run?.stage==='result'&&<ResultScreen run={run} onNext={()=>void startBattle(run.index+1)} onRestart={requestNew} onAbandon={()=>setConfirmAbandon(true)} onHome={()=>navigate('home')} onProgress={()=>navigate('progress')} onRanking={()=>navigate('ranking')} onRetry={()=>{if(run.ranked)changeRun({...run,ranked:{...run.ranked,status:'validating'}});}} auto={settings.auto} onAuto={auto=>changeSettings({...settings,auto})}/>}
       {screen==='debug'&&import.meta.env.DEV&&<Suspense fallback={<p>Carregando laboratório…</p>}><DebugScreen/></Suspense>}
       {screen==='vfx'&&<Suspense fallback={<p>Carregando galeria audiovisual…</p>}><VfxLabScreen/></Suspense>}
       {!storageAvailable&&<p role="alert" className="storage-warning">Não foi possível salvar neste navegador. Sua sessão continua, mas pode não ser recuperada ao fechar.</p>}
     </main>
     <footer className="site-footer"><span><Layers size={13}/> DIFERENTES UNIVERSOS. NOVAS CONEXÕES.</span><button className="footer-lab" onClick={()=>navigate('vfx')}>Galeria de efeitos</button><span>NEXUS <i/> DUELO DE TRIOS</span></footer>
     {details&&<CharacterModal character={byId[details]} onClose={()=>setDetails(null)}/>}
-    {confirmNew&&<InfoDialog title="Começar uma nova jornada?" onClose={()=>setConfirmNew(false)}><p>O progresso desta jornada será descartado. Vitórias e recordes já registrados ficam salvos.</p><div className="result-actions"><button className="danger" onClick={startNew}>Descartar e começar outra <ArrowUpRight size={18}/></button><button className="secondary" onClick={()=>setConfirmNew(false)}>Continuar jornada</button></div></InfoDialog>}
+    {confirmNew&&<InfoDialog title="Começar uma nova jornada?" onClose={()=>setConfirmNew(false)}><p>O progresso desta jornada será descartado. Vitórias e recordes já registrados ficam salvos.</p><div className="result-actions"><button className="danger" onClick={()=>pendingMode?void beginRanked(pendingMode):startNew()}>Descartar e começar outra <ArrowUpRight size={18}/></button><button className="secondary" onClick={()=>setConfirmNew(false)}>Continuar jornada</button></div></InfoDialog>}
+    {nameDialog&&<InfoDialog title="Como você quer aparecer no ranking?" onClose={()=>setNameDialog(false)}><p>Escolha um nome público de 3 a 16 caracteres. Ele aparece com seu trio e sua pontuação.</p><input className="handle-input" aria-label="Nome público" maxLength={16} value={draftHandle} onChange={e=>setDraftHandle(e.target.value)} placeholder="Seu nome no Nexus"/><p>Prévia: <strong>{draftHandle.trim()||'Seu nome'}</strong></p><button className="primary" disabled={onlineBusy} onClick={()=>void saveHandle()}>Confirmar nome</button></InfoDialog>}
+    {onlineNotice&&<InfoDialog title="Conexão do ranking" onClose={()=>setOnlineNotice('')}><p role="alert">{onlineNotice}</p><button className="primary" onClick={()=>setOnlineNotice('')}>Entendi</button></InfoDialog>}
     {confirmAbandon&&<InfoDialog title="Desistir desta jornada?" onClose={()=>setConfirmAbandon(false)}><p>O progresso desta jornada será descartado e uma nova seleção de trio começará. Vitórias e recordes já registrados ficam salvos.</p><div className="result-actions"><button className="danger" onClick={startNew}>Desistir e começar outra <ArrowUpRight size={18}/></button><button className="secondary" onClick={()=>setConfirmAbandon(false)}>Continuar jornada</button></div></InfoDialog>}
     {installHelp&&<InfoDialog title={installed?'O NEXUS já está instalado.':'Leve seu trio com você.'} onClose={()=>setInstallHelp(false)}><p>{installed?'Abra o jogo pela tela inicial do seu dispositivo.':'No Chrome ou Edge, use o menu do navegador e escolha “Instalar aplicativo”. No iPhone ou iPad, use Compartilhar → Adicionar à Tela de Início.'}</p><p>Abra o jogo uma vez com conexão para salvar os arquivos. O progresso fica neste navegador. A disponibilidade de instalação depende do navegador.</p><button className="primary" onClick={()=>setInstallHelp(false)}>Entendi</button></InfoDialog>}
   </div>;
