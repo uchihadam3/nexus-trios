@@ -185,7 +185,12 @@ describe('conquistas', () => {
 
     const nunca = conquistas.filter((c) => !alcancadas.has(c.id)).map((c) => `${c.nome} — ${c.dica}`);
     expect(nunca).toEqual([]);
-  });
+    /*
+     * Centenas de lutas levam mais que os 5 s padrão do Vitest. Aqui rodou em
+     * 2,8 s e no runner do CI estourou — a cobertura é o ponto deste teste,
+     * então quem cede é o relógio, não o número de cenários.
+     */
+  }, 60000);
 
   it('não entrega duas vezes a mesma conquista', () => {
     const r = jogar(['sakura', 'pikachu', 'storm'], ['vegeta', 'raven', 'hulk'], 7);
