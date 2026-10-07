@@ -4,7 +4,7 @@ import {expandedCharacters,rosterDesignQuestions,rosterIdentityReviewGroups} fro
 import type {Effect} from '../src/engine/types';
 
 /** O tamanho atual do catálogo. Sobe a cada lote até 250. */
-const TOTAL=130;
+const TOTAL=160;
 
 describe('catálogo competitivo de personagens',()=>{
   /*

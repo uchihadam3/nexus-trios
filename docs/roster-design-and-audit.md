@@ -5,384 +5,476 @@ O catálogo manteve os 24 kits originais e acrescentou 76 fichas. A ordem seguiu
 ## Variedade de padrões mecânicos
 
 transform: 4 (Gohan, Ichigo Kurosaki, Gon Freecss, Dante)
-guardian: 4 (Piccolo, Alphonse Elric, Groot, Green Lantern)
-finisher: 3 (Frieza, Levi Ackerman, Seto Kaiba)
-observer: 4 (Kakashi Hatake, Loid Forger, Black Panther, Rogue)
-psychic: 3 (Itachi Uchiha, Anya Forger, Jean Grey)
-support: 5 (Sakura Haruno, Giorno Giovanna, Professor Xavier, Star-Lord, Jill Valentine)
-precision: 6 (Tanjiro Kamado, Yor Forger, Daredevil, Cyclops, Vergil, Leon S. Kennedy)
-revenant: 5 (Nezuko Kamado, Muzan Kibutsuji, Guts, Ken Kaneki, Venom)
-speed: 5 (Zenitsu Agatsuma, Mikasa Ackerman, Killua Zoldyck, Albert Wesker, Sonic)
-gamble: 5 (Inosuke Hashibira, Power, Moon Knight, Gambit, Rocket Raccoon)
-duelist: 4 (Yuji Itadori, Denji, Mario, Ryu)
-summoner: 2 (Megumi Fushiguro, Sung Jinwoo)
-trapper: 4 (Nobara Kugisaki, Hisoka Morow, Green Goblin, Scorpion)
-predator: 4 (Ryomen Sukuna, Punisher, Blade, Carnage)
-elemental: 5 (Rukia Kuchiki, Roy Mustang, Ghost Rider, Storm, Silver Surfer)
-trickster: 4 (Sosuke Aizen, Ant-Man, Loki, Ezio Auditore)
-surge: 4 (Kenpachi Zaraki, Captain Marvel, Shazam, Kratos)
+guardian: 5 (Piccolo, Alphonse Elric, Groot, Lanterna Verde, Shiryu)
+finisher: 3 (Freeza, Levi Ackerman, Seto Kaiba)
+observer: 4 (Kakashi Hatake, Loid Forger, Pantera Negra, Vampira)
+psychic: 4 (Itachi Uchiha, Anya Forger, Jean Grey, Shaka de Virgem)
+support: 6 (Sakura Haruno, Giorno Giovanna, Professor Xavier, Senhor das Estrelas, Jill Valentine, Sora)
+precision: 8 (Tanjiro Kamado, Yor Forger, Demolidor, Ciclope, Vergil, Leon S. Kennedy, 2B, Kuririn)
+revenant: 8 (Nezuko Kamado, Muzan Kibutsuji, Guts, Ken Kaneki, Venom, Malenia, Alucard, Ikki)
+speed: 6 (Zenitsu Agatsuma, Mikasa Ackerman, Killua Zoldyck, Albert Wesker, Sonic, Ryu Hayabusa)
+gamble: 5 (Inosuke Hashibira, Power, Cavaleiro da Lua, Gambit, Rocket Raccoon)
+duelist: 5 (Yuji Itadori, Denji, Mario, Ryu, Liu Kang)
+summoner: 3 (Megumi Fushiguro, Sung Jinwoo, Arthas)
+trapper: 5 (Nobara Kugisaki, Hisoka Morow, Duende Verde, Scorpion, Gordon Freeman)
+predator: 4 (Ryomen Sukuna, Justiceiro, Blade, Carnificina)
+elemental: 7 (Rukia Kuchiki, Roy Mustang, Motoqueiro Fantasma, Tempestade, Surfista Prateado, Sub-Zero, Hyoga)
+trickster: 5 (Sosuke Aizen, Homem-Formiga, Loki, Ezio Auditore, Saga de Gêmeos)
+surge: 6 (Kenpachi Zaraki, Capitã Marvel, Shazam, Kratos, Kazuya Mishima, Seiya)
 dominion: 4 (Eren Yeager, Galactus, Aquaman, Ganondorf)
-controller: 3 (Kurapika, Makima, Scarlet Witch)
-alchemy: 3 (Edward Elric, Link, Mega Man)
-tactician: 7 (Griffith, Frieren, Yugi Muto, Vision, Doctor Doom, Ultron, Cyborg)
-chronos: 4 (Jotaro Kujo, Dio Brando, Bayonetta, Shadow)
+controller: 4 (Kurapika, Makima, Feiticeira Escarlate, Isaac Clarke)
+alchemy: 4 (Edward Elric, Link, Mega Man, Geralt de Rívia)
+tactician: 7 (Griffith, Frieren, Yugi Muto, Visão, Doutor Destino, Ultron, Ciborgue)
+chronos: 5 (Jotaro Kujo, Dio Brando, Bayonetta, Shadow, Príncipe da Pérsia)
 limit: 1 (Cloud Strife)
 bruiser: 2 (Tifa Lockhart, Chun-Li)
 reaper: 2 (Sephiroth, Akuma)
-warden: 1 (Zelda)
+warden: 3 (Zelda, Simon Belmont, Shun)
 sniper: 2 (Samus Aran, Lara Croft)
 vanguard: 1 (Master Chief)
-juggernaut: 2 (Doom Slayer, Bowser)
-saboteur: 1 (Solid Snake)
-tempest: 2 (Raiden, Zero)
+juggernaut: 4 (Doom Slayer, Bowser, Cabeça de Pirâmide, Donkey Kong)
+saboteur: 2 (Solid Snake, Agente 47)
+tempest: 3 (Raiden (Metal Gear), Zero, Raiden (Mortal Kombat))
+counter: 2 (Jin Kazama, Sekiro)
+devourer: 2 (Kirby, Majin Boo)
 
 Contagem aproximada de comportamentos no catálogo todo (categorias podem se sobrepor):
 
-- início explosivo: 20
-- crescimento: 16
-- controle: 57
-- interrupção: 47
-- proteção: 56
-- cura: 21
-- regeneração: 15
-- preparação: 43
-- execução: 44
-- manipulação: 10
-- invocação: 3
+- início explosivo: 21
+- crescimento: 17
+- controle: 69
+- interrupção: 54
+- proteção: 68
+- cura: 30
+- regeneração: 19
+- preparação: 49
+- execução: 61
+- manipulação: 13
+- invocação: 4
 - transformação: 3
-- velocidade: 16
-- suporte: 64
+- velocidade: 19
+- suporte: 78
 
-Auditoria estrutural de similaridade: 106/106 fichas novas têm assinaturas distintas nos gatilhos de carga, alvos, condições, preparação e famílias de efeitos; 0 clones exatos por essa comparação. Isso detecta configurações iguais, não substitui avaliação humana da fantasia temática.
+Auditoria estrutural de similaridade: 136/136 fichas novas têm assinaturas distintas nos gatilhos de carga, alvos, condições, preparação e famílias de efeitos; 0 clones exatos por essa comparação. Isso detecta configurações iguais, não substitui avaliação humana da fantasia temática.
 
 ## Uso de habilidades em simulação
 
-Cada personagem novo participou de 12 batalhas headless com sementes e trios variados (1272 batalhas concluídas; 0 crashes). Usos médios por luta = quantidade observada dividida pelo número de batalhas. Pode passar de 100%: 16 usos em 12 batalhas = 1,33 uso por luta (133%), não 133% de chance.
+Cada personagem novo participou de 12 batalhas headless com sementes e trios variados (1632 batalhas concluídas; 0 crashes). Usos médios por luta = quantidade observada dividida pelo número de batalhas. Pode passar de 100%: 16 usos em 12 batalhas = 1,33 uso por luta (133%), não 133% de chance.
 
 | Personagem | Habilidade | Usos / 12 | Usos médios por luta |
 |---|---|---:|---:|
-| Gohan | Potencial latente | 9 | 0.75 |
-| Gohan | Masenko | 17 | 1.42 |
-| Gohan | Despertar | 5 | 0.42 |
-| Piccolo | Leitura tática | 7 | 0.58 |
+| Gohan | Potencial latente | 8 | 0.67 |
+| Gohan | Masenko | 15 | 1.25 |
+| Gohan | Despertar | 6 | 0.50 |
+| Piccolo | Leitura tática | 9 | 0.75 |
 | Piccolo | Braço estendido | 20 | 1.67 |
 | Piccolo | Regeneração namekiana | 9 | 0.75 |
-| Frieza | Crueldade calculada | 6 | 0.50 |
-| Frieza | Raio mortal | 5 | 0.42 |
-| Frieza | Forma final | 11 | 0.92 |
-| Kakashi Hatake | Sharingan | 6 | 0.50 |
-| Kakashi Hatake | Raikiri | 9 | 0.75 |
-| Kakashi Hatake | Cópia perfeita | 6 | 0.50 |
-| Itachi Uchiha | Tsukuyomi | 10 | 0.83 |
-| Itachi Uchiha | Amaterasu | 12 | 1.00 |
-| Itachi Uchiha | Susanoo | 11 | 0.92 |
+| Freeza | Crueldade calculada | 8 | 0.67 |
+| Freeza | Raio mortal | 7 | 0.58 |
+| Freeza | Forma final | 9 | 0.75 |
+| Kakashi Hatake | Sharingan | 4 | 0.33 |
+| Kakashi Hatake | Raikiri | 10 | 0.83 |
+| Kakashi Hatake | Cópia perfeita | 4 | 0.33 |
+| Itachi Uchiha | Tsukuyomi | 5 | 0.42 |
+| Itachi Uchiha | Amaterasu | 9 | 0.75 |
+| Itachi Uchiha | Susanoo | 8 | 0.67 |
 | Sakura Haruno | Controle de chakra | 11 | 0.92 |
-| Sakura Haruno | Força monstruosa | 23 | 1.92 |
-| Sakura Haruno | Byakugou | 21 | 1.75 |
-| Tanjiro Kamado | Olfato aguçado | 17 | 1.42 |
-| Tanjiro Kamado | Respiração da Água | 23 | 1.92 |
-| Tanjiro Kamado | Hinokami Kagura | 24 | 2.00 |
+| Sakura Haruno | Força monstruosa | 20 | 1.67 |
+| Sakura Haruno | Byakugou | 19 | 1.58 |
+| Tanjiro Kamado | Olfato aguçado | 12 | 1.00 |
+| Tanjiro Kamado | Respiração da Água | 18 | 1.50 |
+| Tanjiro Kamado | Hinokami Kagura | 19 | 1.58 |
 | Nezuko Kamado | Sangue demoníaco | 10 | 0.83 |
-| Nezuko Kamado | Explosão de sangue | 21 | 1.75 |
-| Nezuko Kamado | Forma desperta | 6 | 0.50 |
-| Zenitsu Agatsuma | Audição aguçada | 23 | 1.92 |
-| Zenitsu Agatsuma | Primeira postura | 14 | 1.17 |
-| Zenitsu Agatsuma | Seis dobras | 16 | 1.33 |
-| Inosuke Hashibira | Percepção espacial | 5 | 0.42 |
-| Inosuke Hashibira | Presas rasgantes | 11 | 0.92 |
-| Inosuke Hashibira | Investida imprevisível | 10 | 0.83 |
-| Muzan Kibutsuji | Chicotes de carne | 9 | 0.75 |
-| Muzan Kibutsuji | Sangue corruptor | 22 | 1.83 |
-| Muzan Kibutsuji | Adaptação demoníaca | 15 | 1.25 |
-| Yuji Itadori | Punho divergente | 14 | 1.17 |
-| Yuji Itadori | Black Flash | 12 | 1.00 |
-| Yuji Itadori | Vontade indomável | 11 | 0.92 |
-| Megumi Fushiguro | Cão divino | 16 | 1.33 |
+| Nezuko Kamado | Explosão de sangue | 19 | 1.58 |
+| Nezuko Kamado | Forma desperta | 4 | 0.33 |
+| Zenitsu Agatsuma | Audição aguçada | 24 | 2.00 |
+| Zenitsu Agatsuma | Primeira postura | 18 | 1.50 |
+| Zenitsu Agatsuma | Seis dobras | 18 | 1.50 |
+| Inosuke Hashibira | Percepção espacial | 6 | 0.50 |
+| Inosuke Hashibira | Presas rasgantes | 16 | 1.33 |
+| Inosuke Hashibira | Investida imprevisível | 12 | 1.00 |
+| Muzan Kibutsuji | Chicotes de carne | 14 | 1.17 |
+| Muzan Kibutsuji | Sangue corruptor | 28 | 2.33 |
+| Muzan Kibutsuji | Adaptação demoníaca | 14 | 1.17 |
+| Yuji Itadori | Punho divergente | 16 | 1.33 |
+| Yuji Itadori | Black Flash | 15 | 1.25 |
+| Yuji Itadori | Vontade indomável | 10 | 0.83 |
+| Megumi Fushiguro | Cão divino | 14 | 1.17 |
 | Megumi Fushiguro | Nue | 27 | 2.25 |
-| Megumi Fushiguro | Jardim das sombras | 20 | 1.67 |
-| Nobara Kugisaki | Pregos amaldiçoados | 14 | 1.17 |
-| Nobara Kugisaki | Ressonância | 8 | 0.67 |
+| Megumi Fushiguro | Jardim das sombras | 23 | 1.92 |
+| Nobara Kugisaki | Pregos amaldiçoados | 15 | 1.25 |
+| Nobara Kugisaki | Ressonância | 11 | 0.92 |
 | Nobara Kugisaki | Grampo de cabelo | 15 | 1.25 |
 | Ryomen Sukuna | Desmantelar | 4 | 0.33 |
-| Ryomen Sukuna | Cleave | 14 | 1.17 |
-| Ryomen Sukuna | Santuário maligno | 9 | 0.75 |
-| Ichigo Kurosaki | Getsuga Tensho | 10 | 0.83 |
-| Ichigo Kurosaki | Máscara Hollow | 20 | 1.67 |
-| Ichigo Kurosaki | Bankai | 6 | 0.50 |
-| Rukia Kuchiki | Sode no Shirayuki | 12 | 1.00 |
-| Rukia Kuchiki | Círculo de gelo | 20 | 1.67 |
-| Rukia Kuchiki | Hakka no Togame | 18 | 1.50 |
-| Sosuke Aizen | Hipnose completa | 8 | 0.67 |
-| Sosuke Aizen | Hadō 90 | 11 | 0.92 |
-| Sosuke Aizen | Plano revelado | 18 | 1.50 |
-| Kenpachi Zaraki | Instinto de batalha | 11 | 0.92 |
+| Ryomen Sukuna | Cleave | 9 | 0.75 |
+| Ryomen Sukuna | Santuário maligno | 10 | 0.83 |
+| Ichigo Kurosaki | Getsuga Tensho | 6 | 0.50 |
+| Ichigo Kurosaki | Máscara Hollow | 17 | 1.42 |
+| Ichigo Kurosaki | Bankai | 2 | 0.17 |
+| Rukia Kuchiki | Sode no Shirayuki | 9 | 0.75 |
+| Rukia Kuchiki | Círculo de gelo | 18 | 1.50 |
+| Rukia Kuchiki | Hakka no Togame | 15 | 1.25 |
+| Sosuke Aizen | Hipnose completa | 7 | 0.58 |
+| Sosuke Aizen | Hadō 90 | 9 | 0.75 |
+| Sosuke Aizen | Plano revelado | 14 | 1.17 |
+| Kenpachi Zaraki | Instinto de batalha | 12 | 1.00 |
 | Kenpachi Zaraki | Corte selvagem | 19 | 1.58 |
-| Kenpachi Zaraki | Retirar o limitador | 9 | 0.75 |
+| Kenpachi Zaraki | Retirar o limitador | 12 | 1.00 |
 | Eren Yeager | Punho titânico | 10 | 0.83 |
-| Eren Yeager |  endurecer | 15 | 1.25 |
-| Eren Yeager | Rugido da fundação | 8 | 0.67 |
-| Mikasa Ackerman | Equipamento de manobra | 20 | 1.67 |
+| Eren Yeager |  endurecer | 11 | 0.92 |
+| Eren Yeager | Rugido da fundação | 6 | 0.50 |
+| Mikasa Ackerman | Equipamento de manobra | 22 | 1.83 |
 | Mikasa Ackerman | Corte cruzado | 17 | 1.42 |
-| Mikasa Ackerman | Proteção decisiva | 13 | 1.08 |
+| Mikasa Ackerman | Proteção decisiva | 14 | 1.17 |
 | Levi Ackerman | Leitura de abertura | 13 | 1.08 |
 | Levi Ackerman | Giro cortante | 11 | 0.92 |
-| Levi Ackerman | Execução relâmpago | 11 | 0.92 |
-| Gon Freecss | Jajanken: Pedra | 12 | 1.00 |
-| Gon Freecss | Jajanken: Tesoura | 12 | 1.00 |
-| Gon Freecss | Jajanken: Papel | 7 | 0.58 |
-| Killua Zoldyck | Ritmo elétrico | 24 | 2.00 |
+| Levi Ackerman | Execução relâmpago | 9 | 0.75 |
+| Gon Freecss | Jajanken: Pedra | 9 | 0.75 |
+| Gon Freecss | Jajanken: Tesoura | 10 | 0.83 |
+| Gon Freecss | Jajanken: Papel | 5 | 0.42 |
+| Killua Zoldyck | Ritmo elétrico | 22 | 1.83 |
 | Killua Zoldyck | Palma relâmpago | 12 | 1.00 |
-| Killua Zoldyck | Velocidade divina | 16 | 1.33 |
+| Killua Zoldyck | Velocidade divina | 15 | 1.25 |
 | Hisoka Morow | Bungee Gum | 8 | 0.67 |
-| Hisoka Morow | Textura surpresa | 8 | 0.67 |
-| Hisoka Morow | Armadilha elástica | 13 | 1.08 |
-| Kurapika | Corrente de captura | 13 | 1.08 |
-| Kurapika | Corrente de julgamento | 13 | 1.08 |
-| Kurapika | Olhos escarlates | 18 | 1.50 |
-| Edward Elric | Lança de pedra | 16 | 1.33 |
+| Hisoka Morow | Textura surpresa | 7 | 0.58 |
+| Hisoka Morow | Armadilha elástica | 12 | 1.00 |
+| Kurapika | Corrente de captura | 14 | 1.17 |
+| Kurapika | Corrente de julgamento | 11 | 0.92 |
+| Kurapika | Olhos escarlates | 17 | 1.42 |
+| Edward Elric | Lança de pedra | 15 | 1.25 |
 | Edward Elric | Muralha alquímica | 16 | 1.33 |
-| Edward Elric | Transmutação rápida | 11 | 0.92 |
-| Alphonse Elric | Armadura de aço | 25 | 2.08 |
-| Alphonse Elric | Círculo protetor | 34 | 2.83 |
-| Alphonse Elric | Barreira transmutada | 27 | 2.25 |
-| Roy Mustang | Estalo de ignição | 11 | 0.92 |
-| Roy Mustang | Chuva de fogo | 17 | 1.42 |
-| Roy Mustang | Campo incendiado | 10 | 0.83 |
-| Guts | Matadora de Dragões | 11 | 0.92 |
-| Guts | Armadura Berserker | 16 | 1.33 |
+| Edward Elric | Transmutação rápida | 10 | 0.83 |
+| Alphonse Elric | Armadura de aço | 23 | 1.92 |
+| Alphonse Elric | Círculo protetor | 36 | 3.00 |
+| Alphonse Elric | Barreira transmutada | 26 | 2.17 |
+| Roy Mustang | Estalo de ignição | 12 | 1.00 |
+| Roy Mustang | Chuva de fogo | 16 | 1.33 |
+| Roy Mustang | Campo incendiado | 11 | 0.92 |
+| Guts | Matadora de Dragões | 12 | 1.00 |
+| Guts | Armadura Berserker | 14 | 1.17 |
 | Guts | Último esforço | 5 | 0.42 |
-| Griffith | Visão de falcão | 11 | 0.92 |
-| Griffith | Comando da Banda | 11 | 0.92 |
-| Griffith | Destino ascendente | 6 | 0.50 |
-| Jotaro Kujo | Star Platinum | 6 | 0.50 |
+| Griffith | Visão de falcão | 9 | 0.75 |
+| Griffith | Comando da Banda | 13 | 1.08 |
+| Griffith | Destino ascendente | 3 | 0.25 |
+| Jotaro Kujo | Star Platinum | 4 | 0.33 |
 | Jotaro Kujo | Precisão absoluta | 8 | 0.67 |
 | Jotaro Kujo | The World: instante | 4 | 0.33 |
-| Dio Brando | Muda | 5 | 0.42 |
-| Dio Brando | Facas voadoras | 7 | 0.58 |
-| Dio Brando | O Mundo | 5 | 0.42 |
-| Giorno Giovanna | Vida criada | 12 | 1.00 |
+| Dio Brando | Muda | 3 | 0.25 |
+| Dio Brando | Facas voadoras | 5 | 0.42 |
+| Dio Brando | O Mundo | 3 | 0.25 |
+| Giorno Giovanna | Vida criada | 14 | 1.17 |
 | Giorno Giovanna | Reflexo de dano | 2 | 0.17 |
 | Giorno Giovanna | Experiência dourada | 12 | 1.00 |
-| Denji | Serra motosserra | 18 | 1.50 |
-| Denji | Puxar a corda | 20 | 1.67 |
+| Denji | Serra motosserra | 21 | 1.75 |
+| Denji | Puxar a corda | 21 | 1.75 |
 | Denji | Frenesi de sangue | 14 | 1.17 |
 | Power | Lança de sangue | 14 | 1.17 |
-| Power | Martelo sanguíneo | 18 | 1.50 |
-| Power | Prêmio de sangue | 14 | 1.17 |
-| Makima | Olhar de comando | 8 | 0.67 |
-| Makima | Corrente de obediência | 10 | 0.83 |
-| Makima | Controle total | 11 | 0.92 |
-| Frieren | Análise de mana | 4 | 0.33 |
-| Frieren | Zoltraak | 11 | 0.92 |
-| Frieren | Magia preparada | 4 | 0.33 |
+| Power | Martelo sanguíneo | 19 | 1.58 |
+| Power | Prêmio de sangue | 11 | 0.92 |
+| Makima | Olhar de comando | 9 | 0.75 |
+| Makima | Corrente de obediência | 11 | 0.92 |
+| Makima | Controle total | 12 | 1.00 |
+| Frieren | Análise de mana | 0 | 0.00 |
+| Frieren | Zoltraak | 10 | 0.83 |
+| Frieren | Magia preparada | 2 | 0.17 |
 | Anya Forger | Leitura mental | 13 | 1.08 |
-| Anya Forger | Alerta urgente | 22 | 1.83 |
-| Anya Forger | Plano secreto | 9 | 0.75 |
-| Loid Forger | Identidade falsa | 9 | 0.75 |
-| Loid Forger | Neutralização silenciosa | 11 | 0.92 |
-| Loid Forger | Plano de fuga | 18 | 1.50 |
-| Yor Forger | Agulhas de espinho | 12 | 1.00 |
-| Yor Forger | Investida elegante | 18 | 1.50 |
+| Anya Forger | Alerta urgente | 20 | 1.67 |
+| Anya Forger | Plano secreto | 6 | 0.50 |
+| Loid Forger | Identidade falsa | 11 | 0.92 |
+| Loid Forger | Neutralização silenciosa | 10 | 0.83 |
+| Loid Forger | Plano de fuga | 22 | 1.83 |
+| Yor Forger | Agulhas de espinho | 13 | 1.08 |
+| Yor Forger | Investida elegante | 17 | 1.42 |
 | Yor Forger | Jardim noturno | 18 | 1.50 |
-| Sung Jinwoo | Extração de sombra | 6 | 0.50 |
-| Sung Jinwoo | Comando: avancem | 16 | 1.33 |
-| Sung Jinwoo | Exército das sombras | 11 | 0.92 |
-| Ken Kaneki | Kagune | 14 | 1.17 |
-| Ken Kaneki | Fome crescente | 17 | 1.42 |
-| Ken Kaneki | Centípede | 8 | 0.67 |
-| Yugi Muto | Preparar o duelo | 9 | 0.75 |
-| Yugi Muto | Chamado do Mago | 7 | 0.58 |
-| Yugi Muto | Jogada perfeita | 3 | 0.25 |
-| Seto Kaiba | Explosão de rajada | 8 | 0.67 |
-| Seto Kaiba | Dragão Branco | 6 | 0.50 |
-| Seto Kaiba | Ultimate Burst | 1 | 0.08 |
-| Black Panther | Hábito cinético | 16 | 1.33 |
-| Black Panther | Garras de vibranium | 9 | 0.75 |
-| Black Panther | Descarga real | 14 | 1.17 |
-| Scarlet Witch | Hex de probabilidade | 7 | 0.58 |
-| Scarlet Witch | Telecinese | 6 | 0.50 |
-| Scarlet Witch | Distorção do caos | 2 | 0.17 |
-| Vision | Faseamento | 11 | 0.92 |
-| Vision | Raio solar | 7 | 0.58 |
-| Vision | Computação sintética | 2 | 0.17 |
-| Ant-Man | Encolhimento | 20 | 1.67 |
-| Ant-Man | Formigas auxiliares | 19 | 1.58 |
-| Ant-Man | Aumento surpresa | 16 | 1.33 |
-| Captain Marvel | Absorção cósmica | 9 | 0.75 |
-| Captain Marvel | Rajada binária | 14 | 1.17 |
-| Captain Marvel | Explosão binária | 10 | 0.83 |
-| Daredevil | Radar sensorial | 4 | 0.33 |
-| Daredevil | Bastões em cruz | 21 | 1.75 |
-| Daredevil | Contra-ataque cego | 23 | 1.92 |
-| Punisher | Mira fria | 10 | 0.83 |
-| Punisher | Rajada controlada | 16 | 1.33 |
-| Punisher | Alvo confirmado | 20 | 1.67 |
-| Ghost Rider | Corrente infernal | 14 | 1.17 |
-| Ghost Rider | Olhar de penitência | 23 | 1.92 |
-| Ghost Rider | Penance Stare | 16 | 1.33 |
-| Blade | Rastreio vampírico | 21 | 1.75 |
-| Blade | Lâmina de prata | 17 | 1.42 |
-| Blade | Caçada noturna | 19 | 1.58 |
-| Moon Knight | Manto lunar | 12 | 1.00 |
-| Moon Knight | Crescente de prata | 18 | 1.50 |
-| Moon Knight | Julgamento de Khonshu | 8 | 0.67 |
-| Storm | Rajada de vento | 15 | 1.25 |
-| Storm | Relâmpago em cadeia | 20 | 1.67 |
-| Storm | Olho da tempestade | 8 | 0.67 |
-| Cyclops | Rajada de contenção | 14 | 1.17 |
-| Cyclops | Ricochete óptico | 23 | 1.92 |
-| Cyclops | Feixe concentrado | 25 | 2.08 |
+| Sung Jinwoo | Extração de sombra | 2 | 0.17 |
+| Sung Jinwoo | Comando: avancem | 11 | 0.92 |
+| Sung Jinwoo | Exército das sombras | 10 | 0.83 |
+| Ken Kaneki | Kagune | 11 | 0.92 |
+| Ken Kaneki | Fome crescente | 14 | 1.17 |
+| Ken Kaneki | Centípede | 9 | 0.75 |
+| Yugi Muto | Preparar o duelo | 7 | 0.58 |
+| Yugi Muto | Chamado do Mago | 5 | 0.42 |
+| Yugi Muto | Jogada perfeita | 4 | 0.33 |
+| Seto Kaiba | Explosão de rajada | 10 | 0.83 |
+| Seto Kaiba | Dragão Branco | 7 | 0.58 |
+| Seto Kaiba | Ultimate Burst | 3 | 0.25 |
+| Pantera Negra | Hábito cinético | 15 | 1.25 |
+| Pantera Negra | Garras de vibranium | 10 | 0.83 |
+| Pantera Negra | Descarga real | 12 | 1.00 |
+| Feiticeira Escarlate | Hex de probabilidade | 8 | 0.67 |
+| Feiticeira Escarlate | Telecinese | 10 | 0.83 |
+| Feiticeira Escarlate | Distorção do caos | 3 | 0.25 |
+| Visão | Faseamento | 13 | 1.08 |
+| Visão | Raio solar | 8 | 0.67 |
+| Visão | Computação sintética | 1 | 0.08 |
+| Homem-Formiga | Encolhimento | 16 | 1.33 |
+| Homem-Formiga | Formigas auxiliares | 12 | 1.00 |
+| Homem-Formiga | Aumento surpresa | 15 | 1.25 |
+| Capitã Marvel | Absorção cósmica | 12 | 1.00 |
+| Capitã Marvel | Rajada binária | 16 | 1.33 |
+| Capitã Marvel | Explosão binária | 11 | 0.92 |
+| Demolidor | Radar sensorial | 8 | 0.67 |
+| Demolidor | Bastões em cruz | 20 | 1.67 |
+| Demolidor | Contra-ataque cego | 23 | 1.92 |
+| Justiceiro | Mira fria | 9 | 0.75 |
+| Justiceiro | Rajada controlada | 16 | 1.33 |
+| Justiceiro | Alvo confirmado | 19 | 1.58 |
+| Motoqueiro Fantasma | Corrente infernal | 14 | 1.17 |
+| Motoqueiro Fantasma | Olhar de penitência | 19 | 1.58 |
+| Motoqueiro Fantasma | Penance Stare | 12 | 1.00 |
+| Blade | Rastreio vampírico | 22 | 1.83 |
+| Blade | Lâmina de prata | 19 | 1.58 |
+| Blade | Caçada noturna | 20 | 1.67 |
+| Cavaleiro da Lua | Manto lunar | 7 | 0.58 |
+| Cavaleiro da Lua | Crescente de prata | 14 | 1.17 |
+| Cavaleiro da Lua | Julgamento de Khonshu | 7 | 0.58 |
+| Tempestade | Rajada de vento | 11 | 0.92 |
+| Tempestade | Relâmpago em cadeia | 17 | 1.42 |
+| Tempestade | Olho da tempestade | 8 | 0.67 |
+| Ciclope | Rajada de contenção | 11 | 0.92 |
+| Ciclope | Ricochete óptico | 19 | 1.58 |
+| Ciclope | Feixe concentrado | 21 | 1.75 |
 | Jean Grey | Escudo mental | 5 | 0.42 |
 | Jean Grey | Rajada telecinética | 5 | 0.42 |
-| Jean Grey | Fênix desperta | 0 | 0.00 |
-| Rogue | Toque absorvente | 16 | 1.33 |
-| Rogue | Força roubada | 11 | 0.92 |
-| Rogue | Memória emprestada | 11 | 0.92 |
-| Gambit | Carta carregada | 11 | 0.92 |
-| Gambit | Baralho explosivo | 13 | 1.08 |
-| Gambit | Bastão cinético | 10 | 0.83 |
-| Professor Xavier | Coordenação mental | 8 | 0.67 |
-| Professor Xavier | Escudo psíquico | 3 | 0.25 |
-| Professor Xavier | Paralisia mental | 5 | 0.42 |
-| Venom | Tentáculos simbiontes | 13 | 1.08 |
-| Venom | Mordida predatória | 14 | 1.17 |
-| Venom | Simbionte faminto | 9 | 0.75 |
-| Carnage | Lâminas vivas | 9 | 0.75 |
-| Carnage | Ferida aberta | 18 | 1.50 |
-| Carnage | Carnificina total | 17 | 1.42 |
-| Doctor Doom | Armadura de Doom | 2 | 0.17 |
-| Doctor Doom | Ritual latveriano | 2 | 0.17 |
-| Doctor Doom | Plano de contingência | 2 | 0.17 |
-| Loki | Duplicata ilusória | 9 | 0.75 |
-| Loki | Troca de lugar | 5 | 0.42 |
-| Loki | Engano perfeito | 14 | 1.17 |
-| Ultron | Análise preditiva | 12 | 1.00 |
-| Ultron | Drones de defesa | 19 | 1.58 |
-| Ultron | Evolução autônoma | 7 | 0.58 |
-| Green Goblin | Bomba abóbora | 10 | 0.83 |
-| Green Goblin | Gás do medo | 10 | 0.83 |
-| Green Goblin | Prancha armadilhada | 15 | 1.25 |
-| Silver Surfer | Rajada cósmica | 10 | 0.83 |
-| Silver Surfer | Transmutação estelar | 14 | 1.17 |
-| Silver Surfer | Surfe dimensional | 9 | 0.75 |
-| Galactus | Dreno planetário | 6 | 0.50 |
+| Jean Grey | Fênix desperta | 1 | 0.08 |
+| Vampira | Toque absorvente | 16 | 1.33 |
+| Vampira | Força roubada | 10 | 0.83 |
+| Vampira | Memória emprestada | 13 | 1.08 |
+| Gambit | Carta carregada | 20 | 1.67 |
+| Gambit | Baralho explosivo | 14 | 1.17 |
+| Gambit | Bastão cinético | 15 | 1.25 |
+| Professor Xavier | Coordenação mental | 11 | 0.92 |
+| Professor Xavier | Escudo psíquico | 7 | 0.58 |
+| Professor Xavier | Paralisia mental | 10 | 0.83 |
+| Venom | Tentáculos simbiontes | 16 | 1.33 |
+| Venom | Mordida predatória | 16 | 1.33 |
+| Venom | Simbionte faminto | 10 | 0.83 |
+| Carnificina | Lâminas vivas | 8 | 0.67 |
+| Carnificina | Ferida aberta | 18 | 1.50 |
+| Carnificina | Carnificina total | 20 | 1.67 |
+| Doutor Destino | Armadura de Doom | 3 | 0.25 |
+| Doutor Destino | Ritual latveriano | 2 | 0.17 |
+| Doutor Destino | Plano de contingência | 0 | 0.00 |
+| Loki | Duplicata ilusória | 6 | 0.50 |
+| Loki | Troca de lugar | 4 | 0.33 |
+| Loki | Engano perfeito | 8 | 0.67 |
+| Ultron | Análise preditiva | 7 | 0.58 |
+| Ultron | Drones de defesa | 12 | 1.00 |
+| Ultron | Evolução autônoma | 3 | 0.25 |
+| Duende Verde | Bomba abóbora | 12 | 1.00 |
+| Duende Verde | Gás do medo | 9 | 0.75 |
+| Duende Verde | Prancha armadilhada | 14 | 1.17 |
+| Surfista Prateado | Rajada cósmica | 7 | 0.58 |
+| Surfista Prateado | Transmutação estelar | 12 | 1.00 |
+| Surfista Prateado | Surfe dimensional | 7 | 0.58 |
+| Galactus | Dreno planetário | 9 | 0.75 |
 | Galactus | Rajada do Poder Cósmico | 10 | 0.83 |
 | Galactus | Devoração cósmica | 6 | 0.50 |
-| Star-Lord | Rajada elementar | 21 | 1.75 |
-| Star-Lord | Plano improvisado | 20 | 1.67 |
-| Star-Lord | Dança de distração | 7 | 0.58 |
-| Groot | Raízes de captura | 10 | 0.83 |
-| Groot | Eu sou Groot | 24 | 2.00 |
-| Groot | Muralha de galhos | 14 | 1.17 |
-| Rocket Raccoon | Armadilha explosiva | 12 | 1.00 |
+| Senhor das Estrelas | Rajada elementar | 16 | 1.33 |
+| Senhor das Estrelas | Plano improvisado | 16 | 1.33 |
+| Senhor das Estrelas | Dança de distração | 7 | 0.58 |
+| Groot | Raízes de captura | 8 | 0.67 |
+| Groot | Eu sou Groot | 20 | 1.67 |
+| Groot | Muralha de galhos | 10 | 0.83 |
+| Rocket Raccoon | Armadilha explosiva | 7 | 0.58 |
 | Rocket Raccoon | Míssil caseiro | 12 | 1.00 |
-| Rocket Raccoon | Arsenal pesado | 7 | 0.58 |
+| Rocket Raccoon | Arsenal pesado | 4 | 0.33 |
 | Aquaman | Tridente real | 9 | 0.75 |
-| Aquaman | Maré puxante | 23 | 1.92 |
+| Aquaman | Maré puxante | 22 | 1.83 |
 | Aquaman | Comando dos mares | 4 | 0.33 |
-| Green Lantern | Escudo de vontade | 6 | 0.50 |
-| Green Lantern | Punho esmeralda | 3 | 0.25 |
-| Green Lantern | Construto adaptável | 11 | 0.92 |
-| Cyborg | Varredura tática | 10 | 0.83 |
-| Cyborg | Canhão sônico | 12 | 1.00 |
-| Cyborg | Adaptação de sistema | 17 | 1.42 |
+| Lanterna Verde | Escudo de vontade | 8 | 0.67 |
+| Lanterna Verde | Punho esmeralda | 5 | 0.42 |
+| Lanterna Verde | Construto adaptável | 10 | 0.83 |
+| Ciborgue | Varredura tática | 11 | 0.92 |
+| Ciborgue | Canhão sônico | 11 | 0.92 |
+| Ciborgue | Adaptação de sistema | 15 | 1.25 |
 | Shazam | Raio mágico | 9 | 0.75 |
-| Shazam | Força de Hércules | 28 | 2.33 |
+| Shazam | Força de Hércules | 25 | 2.08 |
 | Shazam | Sabedoria de Salomão | 5 | 0.42 |
-| Cloud Strife | Golpe ascendente | 8 | 0.67 |
-| Cloud Strife | Postura de guarda | 11 | 0.92 |
-| Cloud Strife | Omnislash | 7 | 0.58 |
-| Tifa Lockhart | Golpe de abertura | 14 | 1.17 |
-| Tifa Lockhart | Chuva de socos | 18 | 1.50 |
-| Tifa Lockhart | Explosão final | 14 | 1.17 |
-| Sephiroth | Lâmina Masamune | 9 | 0.75 |
-| Sephiroth | Corte sombrio | 8 | 0.67 |
-| Sephiroth | Heartless Angel | 8 | 0.67 |
-| Kratos | Lâminas do Caos | 10 | 0.83 |
+| Cloud Strife | Golpe ascendente | 7 | 0.58 |
+| Cloud Strife | Postura de guarda | 15 | 1.25 |
+| Cloud Strife | Omnislash | 3 | 0.25 |
+| Tifa Lockhart | Golpe de abertura | 12 | 1.00 |
+| Tifa Lockhart | Chuva de socos | 17 | 1.42 |
+| Tifa Lockhart | Explosão final | 10 | 0.83 |
+| Sephiroth | Lâmina Masamune | 7 | 0.58 |
+| Sephiroth | Corte sombrio | 6 | 0.50 |
+| Sephiroth | Heartless Angel | 6 | 0.50 |
+| Kratos | Lâminas do Caos | 11 | 0.92 |
 | Kratos | Fúria espartana | 15 | 1.25 |
-| Kratos | Ira dos deuses | 9 | 0.75 |
-| Link | Espada Mestra | 14 | 1.17 |
-| Link | Escudo Hyliano | 10 | 0.83 |
+| Kratos | Ira dos deuses | 11 | 0.92 |
+| Link | Espada Mestra | 18 | 1.50 |
+| Link | Escudo Hyliano | 14 | 1.17 |
 | Link | Golpe giratório | 8 | 0.67 |
-| Zelda | Selo da Luz | 17 | 1.42 |
-| Zelda | Barreira sagrada | 40 | 3.33 |
-| Zelda | Flecha de Luz | 5 | 0.42 |
+| Zelda | Selo da Luz | 8 | 0.67 |
+| Zelda | Barreira sagrada | 25 | 2.08 |
+| Zelda | Flecha de Luz | 2 | 0.17 |
 | Ganondorf | Punho sombrio | 7 | 0.58 |
-| Ganondorf | Poder da Tríade | 15 | 1.25 |
-| Ganondorf | Juízo do Rei | 2 | 0.17 |
-| Samus Aran | Trava de mira | 8 | 0.67 |
-| Samus Aran | Míssil de contenção | 5 | 0.42 |
-| Samus Aran | Charge Beam | 12 | 1.00 |
-| Dante | Rebellion | 11 | 0.92 |
-| Dante | Ebony e Ivory | 12 | 1.00 |
-| Dante | Devil Trigger | 3 | 0.25 |
-| Vergil | Yamato | 7 | 0.58 |
+| Ganondorf | Poder da Tríade | 16 | 1.33 |
+| Ganondorf | Juízo do Rei | 8 | 0.67 |
+| Samus Aran | Trava de mira | 9 | 0.75 |
+| Samus Aran | Míssil de contenção | 2 | 0.17 |
+| Samus Aran | Charge Beam | 13 | 1.08 |
+| Dante | Rebellion | 12 | 1.00 |
+| Dante | Ebony e Ivory | 11 | 0.92 |
+| Dante | Devil Trigger | 5 | 0.42 |
+| Vergil | Yamato | 6 | 0.50 |
 | Vergil | Corte dimensional | 10 | 0.83 |
-| Vergil | Judgement Cut End | 9 | 0.75 |
-| Bayonetta | Dança da bruxa | 1 | 0.08 |
-| Bayonetta | Witch Time | 2 | 0.17 |
-| Bayonetta | Invocação infernal | 1 | 0.08 |
-| Master Chief | Escudo de energia | 14 | 1.17 |
-| Master Chief | Fogo de supressão | 8 | 0.67 |
-| Master Chief | Posição firme | 6 | 0.50 |
-| Doom Slayer | Avanço brutal | 12 | 1.00 |
-| Doom Slayer | Blindagem de combate | 20 | 1.67 |
-| Doom Slayer | Onda sísmica | 6 | 0.50 |
+| Vergil | Judgement Cut End | 10 | 0.83 |
+| Bayonetta | Dança da bruxa | 3 | 0.25 |
+| Bayonetta | Witch Time | 4 | 0.33 |
+| Bayonetta | Invocação infernal | 3 | 0.25 |
+| Master Chief | Escudo de energia | 13 | 1.08 |
+| Master Chief | Fogo de supressão | 11 | 0.92 |
+| Master Chief | Posição firme | 7 | 0.58 |
+| Doom Slayer | Avanço brutal | 13 | 1.08 |
+| Doom Slayer | Blindagem de combate | 22 | 1.83 |
+| Doom Slayer | Onda sísmica | 11 | 0.92 |
 | Solid Snake | Camuflagem | 3 | 0.25 |
-| Solid Snake | Tiro de flanco | 14 | 1.17 |
-| Solid Snake | CQC decisivo | 3 | 0.25 |
-| Raiden | Modo lâmina | 6 | 0.50 |
-| Raiden | Corte em sequência | 14 | 1.17 |
-| Raiden | Zandatsu | 14 | 1.17 |
-| Leon S. Kennedy | Mira firme | 11 | 0.92 |
-| Leon S. Kennedy | Tiro na cabeça | 19 | 1.58 |
-| Leon S. Kennedy | Faca de combate | 22 | 1.83 |
-| Jill Valentine | Kit de primeiros socorros | 24 | 2.00 |
-| Jill Valentine | Cobertura tática | 21 | 1.75 |
-| Jill Valentine | Resistência adquirida | 21 | 1.75 |
-| Albert Wesker | Deslocamento | 11 | 0.92 |
-| Albert Wesker | Golpe cruzado | 10 | 0.83 |
-| Albert Wesker | Supremacia | 9 | 0.75 |
-| Lara Croft | Arco recurvo | 11 | 0.92 |
-| Lara Croft | Armadilha de cabo | 12 | 1.00 |
-| Lara Croft | Tiro perfeito | 12 | 1.00 |
-| Ezio Auditore | Multidão | 9 | 0.75 |
-| Ezio Auditore | Lâmina oculta | 9 | 0.75 |
-| Ezio Auditore | Execução em cadeia | 21 | 1.75 |
-| Sonic | Spin Dash | 21 | 1.75 |
-| Sonic | Homing Attack | 19 | 1.58 |
-| Sonic | Super Sonic | 13 | 1.08 |
-| Shadow | Chaos Spear | 7 | 0.58 |
-| Shadow | Chaos Control | 12 | 1.00 |
-| Shadow | Lança das Esmeraldas | 5 | 0.42 |
-| Mega Man | Mega Buster | 12 | 1.00 |
-| Mega Man | Arma adquirida | 17 | 1.42 |
-| Mega Man | Carga máxima | 3 | 0.25 |
-| Zero | Z-Saber | 6 | 0.50 |
-| Zero | Raikousen | 19 | 1.58 |
-| Zero | Sequência final | 15 | 1.25 |
+| Solid Snake | Tiro de flanco | 10 | 0.83 |
+| Solid Snake | CQC decisivo | 2 | 0.17 |
+| Raiden (Metal Gear) | Modo lâmina | 8 | 0.67 |
+| Raiden (Metal Gear) | Corte em sequência | 17 | 1.42 |
+| Raiden (Metal Gear) | Zandatsu | 19 | 1.58 |
+| Leon S. Kennedy | Mira firme | 9 | 0.75 |
+| Leon S. Kennedy | Tiro na cabeça | 13 | 1.08 |
+| Leon S. Kennedy | Faca de combate | 16 | 1.33 |
+| Jill Valentine | Kit de primeiros socorros | 22 | 1.83 |
+| Jill Valentine | Cobertura tática | 19 | 1.58 |
+| Jill Valentine | Resistência adquirida | 22 | 1.83 |
+| Albert Wesker | Deslocamento | 8 | 0.67 |
+| Albert Wesker | Golpe cruzado | 11 | 0.92 |
+| Albert Wesker | Supremacia | 6 | 0.50 |
+| Lara Croft | Arco recurvo | 10 | 0.83 |
+| Lara Croft | Armadilha de cabo | 13 | 1.08 |
+| Lara Croft | Tiro perfeito | 14 | 1.17 |
+| Ezio Auditore | Multidão | 13 | 1.08 |
+| Ezio Auditore | Lâmina oculta | 10 | 0.83 |
+| Ezio Auditore | Execução em cadeia | 22 | 1.83 |
+| Sonic | Spin Dash | 19 | 1.58 |
+| Sonic | Homing Attack | 16 | 1.33 |
+| Sonic | Super Sonic | 16 | 1.33 |
+| Shadow | Chaos Spear | 5 | 0.42 |
+| Shadow | Chaos Control | 11 | 0.92 |
+| Shadow | Lança das Esmeraldas | 4 | 0.33 |
+| Mega Man | Mega Buster | 16 | 1.33 |
+| Mega Man | Arma adquirida | 25 | 2.08 |
+| Mega Man | Carga máxima | 5 | 0.42 |
+| Zero | Z-Saber | 8 | 0.67 |
+| Zero | Raikousen | 21 | 1.75 |
+| Zero | Sequência final | 17 | 1.42 |
 | Mario | Pulo certeiro | 13 | 1.08 |
-| Mario | Flor de fogo | 10 | 0.83 |
-| Mario | Estrela invencível | 8 | 0.67 |
-| Bowser | Investida de casco | 15 | 1.25 |
-| Bowser | Sopro flamejante | 15 | 1.25 |
+| Mario | Flor de fogo | 13 | 1.08 |
+| Mario | Estrela invencível | 10 | 0.83 |
+| Bowser | Investida de casco | 14 | 1.17 |
+| Bowser | Sopro flamejante | 21 | 1.75 |
 | Bowser | Tremor do rei | 12 | 1.00 |
 | Ryu | Hadouken | 12 | 1.00 |
 | Ryu | Shoryuken | 15 | 1.25 |
-| Ryu | Shinku Hadouken | 12 | 1.00 |
-| Chun-Li | Hyakuretsukyaku | 17 | 1.42 |
+| Ryu | Shinku Hadouken | 11 | 0.92 |
+| Chun-Li | Hyakuretsukyaku | 15 | 1.25 |
 | Chun-Li | Spinning Bird Kick | 12 | 1.00 |
-| Chun-Li | Kikosho | 11 | 0.92 |
-| Akuma | Gou Hadouken | 11 | 0.92 |
-| Akuma | Ashura Senku | 10 | 0.83 |
-| Akuma | Shun Goku Satsu | 8 | 0.67 |
-| Scorpion | Corrente em chamas | 5 | 0.42 |
-| Scorpion | Teleporte infernal | 23 | 1.92 |
+| Chun-Li | Kikosho | 10 | 0.83 |
+| Akuma | Gou Hadouken | 12 | 1.00 |
+| Akuma | Ashura Senku | 11 | 0.92 |
+| Akuma | Shun Goku Satsu | 9 | 0.75 |
+| Scorpion | Corrente em chamas | 10 | 0.83 |
+| Scorpion | Teleporte infernal | 25 | 2.08 |
 | Scorpion | Toasty! | 22 | 1.83 |
+| Sub-Zero | Lança de gelo | 15 | 1.25 |
+| Sub-Zero | Clone congelado | 23 | 1.92 |
+| Sub-Zero | Inverno absoluto | 19 | 1.58 |
+| Liu Kang | Chute voador | 15 | 1.25 |
+| Liu Kang | Bola de fogo | 19 | 1.58 |
+| Liu Kang | Dragão flamejante | 12 | 1.00 |
+| Raiden (Mortal Kombat) | Raio celeste | 6 | 0.50 |
+| Raiden (Mortal Kombat) | Barreira elétrica | 6 | 0.50 |
+| Raiden (Mortal Kombat) | Trovão dos deuses | 15 | 1.25 |
+| Jin Kazama | Postura Mishima | 8 | 0.67 |
+| Jin Kazama | Contra-ataque | 14 | 1.17 |
+| Jin Kazama | Gene do Diabo | 5 | 0.42 |
+| Kazuya Mishima | Pisão demoníaco | 10 | 0.83 |
+| Kazuya Mishima | Raio do diabo | 20 | 1.67 |
+| Kazuya Mishima | Forma Devil | 11 | 0.92 |
+| Sora | Chave-espada | 25 | 2.08 |
+| Sora | Cura | 19 | 1.58 |
+| Sora | Forma final | 21 | 1.75 |
+| 2B | Lâmina virtuosa | 15 | 1.25 |
+| 2B | Apoio do Pod | 21 | 1.75 |
+| 2B | Modo berserk | 22 | 1.83 |
+| Sekiro | Deflexão | 9 | 0.75 |
+| Sekiro | Mikiri | 14 | 1.17 |
+| Sekiro | Golpe mortal | 12 | 1.00 |
+| Malenia | Lâmina protética | 10 | 0.83 |
+| Malenia | Dança aquática | 16 | 1.33 |
+| Malenia | Flor escarlate | 3 | 0.25 |
+| Agente 47 | Disfarce | 1 | 0.08 |
+| Agente 47 | Garrote | 14 | 1.17 |
+| Agente 47 | Tiro planejado | 10 | 0.83 |
+| Arthas | Ceifadora de Almas | 3 | 0.25 |
+| Arthas | Erguer os mortos | 13 | 1.08 |
+| Arthas | Praga da Carne | 9 | 0.75 |
+| Geralt de Rívia | Sinal de Quen | 1 | 0.08 |
+| Geralt de Rívia | Sinal de Igni | 9 | 0.75 |
+| Geralt de Rívia | Sinal de Axii | 11 | 0.92 |
+| Isaac Clarke | Cortador de plasma | 8 | 0.67 |
+| Isaac Clarke | Estase | 7 | 0.58 |
+| Isaac Clarke | Desmembramento | 13 | 1.08 |
+| Gordon Freeman | Pé de cabra | 7 | 0.58 |
+| Gordon Freeman | Manipulador gravitacional | 9 | 0.75 |
+| Gordon Freeman | Zero-point | 0 | 0.00 |
+| Ryu Hayabusa | Lâmina do Dragão | 10 | 0.83 |
+| Ryu Hayabusa | Arte do Vento | 11 | 0.92 |
+| Ryu Hayabusa | Izuna Otoshi | 9 | 0.75 |
+| Cabeça de Pirâmide | Grande Faca | 13 | 1.08 |
+| Cabeça de Pirâmide | Presença opressiva | 19 | 1.58 |
+| Cabeça de Pirâmide | Sentença | 9 | 0.75 |
+| Kirby | Inalar | 10 | 0.83 |
+| Kirby | Cópia de poder | 25 | 2.08 |
+| Kirby | Super inalação | 10 | 0.83 |
+| Donkey Kong | Soco giratório | 14 | 1.17 |
+| Donkey Kong | Barril arremessado | 18 | 1.50 |
+| Donkey Kong | Batida do gorila | 10 | 0.83 |
+| Simon Belmont | Chicote Vampire Killer | 10 | 0.83 |
+| Simon Belmont | Água benta | 17 | 1.42 |
+| Simon Belmont | Cruz arremessada | 5 | 0.42 |
+| Príncipe da Pérsia | Adaga do Tempo | 7 | 0.58 |
+| Príncipe da Pérsia | Rebobinar | 13 | 1.08 |
+| Príncipe da Pérsia | Tempestade de areia | 6 | 0.50 |
+| Alucard | Espada Alucard | 11 | 0.92 |
+| Alucard | Forma de névoa | 15 | 1.25 |
+| Alucard | Ataque da alma | 8 | 0.67 |
+| Seiya | Meteoro de Pégaso | 10 | 0.83 |
+| Seiya | Cosmo ardente | 19 | 1.58 |
+| Seiya | Cometa de Pégaso | 9 | 0.75 |
+| Majin Boo | Raio de doce | 11 | 0.92 |
+| Majin Boo | Absorção | 14 | 1.17 |
+| Majin Boo | Regeneração total | 9 | 0.75 |
+| Kuririn | Kienzan | 2 | 0.17 |
+| Kuririn | Taiyoken | 14 | 1.17 |
+| Kuririn | Kamehameha | 24 | 2.00 |
+| Shiryu | Escudo do Dragão | 7 | 0.58 |
+| Shiryu | Cólera do Dragão | 18 | 1.50 |
+| Shiryu | Último Dragão | 9 | 0.75 |
+| Hyoga | Pó de Diamante | 8 | 0.67 |
+| Hyoga | Execução Aurora | 18 | 1.50 |
+| Hyoga | Zero Absoluto | 7 | 0.58 |
+| Shun | Corrente Nebular | 16 | 1.33 |
+| Shun | Tempestade Nebular | 28 | 2.33 |
+| Shun | Corrente de defesa | 10 | 0.83 |
+| Ikki | Ave Fênix | 25 | 2.08 |
+| Ikki | Golpe Fantasma | 29 | 2.42 |
+| Ikki | Renascimento | 19 | 1.58 |
+| Saga de Gêmeos | Explosão Galáctica | 5 | 0.42 |
+| Saga de Gêmeos | Outra Dimensão | 7 | 0.58 |
+| Saga de Gêmeos | Satã Imperial | 11 | 0.92 |
+| Shaka de Virgem | Tesouro do Céu | 8 | 0.67 |
+| Shaka de Virgem | Todo-poderoso | 22 | 1.83 |
+| Shaka de Virgem | Rendição dos Seis Mundos | 12 | 1.00 |
 
-Habilidades sem uso: 1 (Jean Grey: Fênix desperta)
+Habilidades sem uso: 3 (Frieren: Análise de mana; Doutor Destino: Plano de contingência; Gordon Freeman: Zero-point)
 
-Habilidades raras (<0,25 uso por luta): 11 (Giorno Giovanna: Reflexo de dano; Seto Kaiba: Ultimate Burst; Scarlet Witch: Distorção do caos; Vision: Computação sintética; Doctor Doom: Armadura de Doom; Doctor Doom: Ritual latveriano; Doctor Doom: Plano de contingência; Ganondorf: Juízo do Rei; Bayonetta: Dança da bruxa; Bayonetta: Witch Time; Bayonetta: Invocação infernal)
+Habilidades raras (<0,25 uso por luta): 13 (Ichigo Kurosaki: Bankai; Giorno Giovanna: Reflexo de dano; Frieren: Magia preparada; Sung Jinwoo: Extração de sombra; Visão: Computação sintética; Jean Grey: Fênix desperta; Doutor Destino: Ritual latveriano; Zelda: Flecha de Luz; Samus Aran: Míssil de contenção; Solid Snake: CQC decisivo; Agente 47: Disfarce; Geralt de Rívia: Sinal de Quen; Kuririn: Kienzan)
 
 ## Notas de arquitetura e limites da auditoria
 
@@ -420,7 +512,7 @@ A simulação usa 12 sementes por personagem e serve para encontrar gatilhos est
 2. **Braço estendido** — Estica o braço para interceptar uma ameaça. Carga: aliado ferido + tempo (allyHurt 12 + time 2.4); alvo allyWeak; uso threatened; prep 0s; recarga 6s.
 3. **Regeneração namekiana** — Regenera depois de comprar tempo para a equipe. Carga: dano bloqueado + tempo (protected 15 + time 2.5); alvo self; uso injured; prep 1.2s; recarga 8s.
 
-### Frieza (Dragon Ball)
+### Freeza (Dragon Ball)
 
 - Ideia: Pressiona o alvo fraco e converte vantagem em execução.
 - Pergunta estratégica: Consigo abrir uma vulnerabilidade antes da finalização?
@@ -1022,7 +1114,7 @@ A simulação usa 12 sementes por personagem e serve para encontrar gatilhos est
 2. **Dragão Branco** — O Dragão Branco aparece como grande ameaça individual. Carga: dano causado + tempo (dealt 14 + time 2.4); alvo enemyStrong; uso vulnerable; prep 1.1s; recarga 7s.
 3. **Ultimate Burst** — Ultimate Burst consome a janela de vantagem para uma explosão. Carga: à frente na Vantagem + tempo (winning 6 + time 2.5); alvo allEnemies; uso vulnerable; prep 2.8s; recarga 13s.
 
-### Black Panther (Marvel)
+### Pantera Negra (Marvel)
 
 - Ideia: Lê o perigo e devolve parte da força recebida.
 - Pergunta estratégica: A equipe consegue atrair ataques sem perder o controle da luta?
@@ -1036,7 +1128,7 @@ A simulação usa 12 sementes por personagem e serve para encontrar gatilhos est
 2. **Garras de vibranium** — Garras de vibranium prendem a abertura. Carga: dano causado + tempo (dealt 14 + time 2.4); alvo enemyWeak; uso enemyCast; prep 0s; recarga 6s.
 3. **Descarga real** — Descarga real devolve ao alvo a energia cinética armazenada. Carga: dano recebido + tempo (received 14 + time 2.5); alvo enemyWeak; uso storedEnergy; prep 1.7s; recarga 10s.
 
-### Scarlet Witch (Marvel)
+### Feiticeira Escarlate (Marvel)
 
 - Ideia: Distorce estados e amplia uma alteração depois de preparar.
 - Pergunta estratégica: Que estado no campo ela pode transformar em uma vantagem decisiva?
@@ -1050,7 +1142,7 @@ A simulação usa 12 sementes por personagem e serve para encontrar gatilhos est
 2. **Telecinese** — Enfraquece uma preparação em andamento. Carga: Preparo inimigo + tempo (enemyCast 16 + time 2.4 + status 7); alvo enemyCast; uso enemyCast; prep 0s; recarga 7s.
 3. **Distorção do caos** — Distorção do caos altera o campo quando Wanda perde controle. Carga: atrás na Vantagem + tempo (losing 5 + time 2.5); alvo allEnemies; uso vulnerable; prep 2.2s; recarga 9s.
 
-### Vision (Marvel)
+### Visão (Marvel)
 
 - Ideia: Analisa o alvo e alterna densidade para negar ataques.
 - Pergunta estratégica: Quando vale absorver impacto e quando voltar à ofensiva?
@@ -1064,7 +1156,7 @@ A simulação usa 12 sementes por personagem e serve para encontrar gatilhos est
 2. **Raio solar** — Raio solar exige que Vision volte sólido diante de uma abertura. Carga: dano recebido + tempo (received 10 + time 2.4); alvo enemyStrong; uso vulnerable; prep 0s; recarga 8s.
 3. **Computação sintética** — Computação sintética escolhe o instante seguro para agir. Carga: dano bloqueado + tempo (protected 15 + time 2.5); alvo enemyCast; uso enemyCast; prep 1.4s; recarga 9s.
 
-### Ant-Man (Marvel)
+### Homem-Formiga (Marvel)
 
 - Ideia: Muda escala para escapar, distrair e atacar pontos frágeis.
 - Pergunta estratégica: É melhor evitar a ameaça ou criar confusão nela?
@@ -1078,7 +1170,7 @@ A simulação usa 12 sementes por personagem e serve para encontrar gatilhos est
 2. **Formigas auxiliares** — Formigas auxiliares reposicionam e aceleram o trio. Carga: inimigo ferido + tempo (enemyHurt 13 + time 2.4); alvo allAllies; uso enemyCast; prep 0s; recarga 7s.
 3. **Aumento surpresa** — Aumento surpresa interrompe a abertura do adversário. Carga: aliado ferido + tempo (allyHurt 12 + time 2.5); alvo enemyWeak; uso vulnerable; prep 1s; recarga 9s.
 
-### Captain Marvel (Marvel)
+### Capitã Marvel (Marvel)
 
 - Ideia: Acumula energia de impactos e libera uma descarga crescente.
 - Pergunta estratégica: Pode transformar a pressão que recebe em um pico de poder?
@@ -1092,7 +1184,7 @@ A simulação usa 12 sementes por personagem e serve para encontrar gatilhos est
 2. **Rajada binária** — Rajada binária descarrega no alvo prioritário. Carga: dano causado + tempo (dealt 14 + time 2.4); alvo enemyStrong; uso always; prep 0s; recarga 4s.
 3. **Explosão binária** — Explosão binária libera a energia armazenada sobre o trio adversário. Carga: dano recebido + tempo (received 15 + time 2.5); alvo allEnemies; uso storedEnergy; prep 1.8s; recarga 11s.
 
-### Daredevil (Marvel)
+### Demolidor (Marvel)
 
 - Ideia: Lê o movimento adversário e interrompe com precisão.
 - Pergunta estratégica: Qual ameaça pode ser vencida por leitura em vez de força?
@@ -1106,7 +1198,7 @@ A simulação usa 12 sementes por personagem e serve para encontrar gatilhos est
 2. **Bastões em cruz** — Atinge com precisão quem já abriu a guarda. Carga: dano causado + tempo (dealt 11 + time 2.4 + enemyCast 9); alvo enemyWeak; uso vulnerable; prep 0s; recarga 5s.
 3. **Contra-ataque cego** — Interrompe e pune uma abertura. Carga: qualquer Status + tempo (status 18 + time 2.5); alvo enemyWeak; uso vulnerable; prep 1.3s; recarga 9s.
 
-### Punisher (Marvel)
+### Justiceiro (Marvel)
 
 - Ideia: Marca o alvo prioritário e aplica pressão consistente à distância.
 - Pergunta estratégica: Qual ameaça precisa ser removida antes que seu plano avance?
@@ -1120,7 +1212,7 @@ A simulação usa 12 sementes por personagem e serve para encontrar gatilhos est
 2. **Rajada controlada** — Aproveita uma vulnerabilidade existente. Carga: inimigo ferido + tempo (enemyHurt 11 + time 2.4 + dealt 8); alvo enemyWeak; uso vulnerable; prep 0.9s; recarga 6s.
 3. **Alvo confirmado** — Alvo confirmado dispara apenas quando a abertura existe. Carga: qualquer Status + tempo (status 15 + time 2.5); alvo enemyWeak; uso vulnerable; prep 1.8s; recarga 10s.
 
-### Ghost Rider (Marvel)
+### Motoqueiro Fantasma (Marvel)
 
 - Ideia: Queima e acorrenta o inimigo que mais deve responder por seus atos.
 - Pergunta estratégica: Quem vale prender para que as queimaduras continuem acumulando?
@@ -1148,7 +1240,7 @@ A simulação usa 12 sementes por personagem e serve para encontrar gatilhos est
 2. **Lâmina de prata** — Aproveita uma vulnerabilidade existente. Carga: inimigo ferido + tempo (enemyHurt 11 + time 2.4 + dealt 9); alvo enemyWeak; uso vulnerable; prep 0.9s; recarga 6s.
 3. **Caçada noturna** — Finaliza um alvo já exposto ou marcado. Carga: qualquer Status + tempo (status 15 + time 2.5); alvo enemyWeak; uso vulnerable; prep 2s; recarga 10s.
 
-### Moon Knight (Marvel)
+### Cavaleiro da Lua (Marvel)
 
 - Ideia: Alterna entre proteção rígida e ataques de risco imprevisíveis.
 - Pergunta estratégica: Qual personalidade deve conduzir a próxima troca?
@@ -1162,7 +1254,7 @@ A simulação usa 12 sementes por personagem e serve para encontrar gatilhos est
 2. **Crescente de prata** — Responde de forma explosiva à pressão. Carga: dano recebido + tempo (received 18 + time 2.4); alvo enemyWeak; uso always; prep 0s; recarga 6s.
 3. **Julgamento de Khonshu** — Julgamento de Khonshu mistura punição ampla e risco próprio. Carga: atrás na Vantagem + tempo (losing 5 + time 2.5); alvo allEnemies; uso always; prep 1.8s; recarga 9s.
 
-### Storm (Marvel)
+### Tempestade (Marvel)
 
 - Ideia: Controla clima e ritmo do campo em vez de focar num único alvo.
 - Pergunta estratégica: Qual situação da luta prepara a tempestade mais útil?
@@ -1176,7 +1268,7 @@ A simulação usa 12 sementes por personagem e serve para encontrar gatilhos est
 2. **Relâmpago em cadeia** — Espalha a condição elemental pelo campo. Carga: inimigo ferido + tempo (enemyHurt 10 + time 6.4); alvo allEnemies; uso always; prep 0s; recarga 7s.
 3. **Olho da tempestade** — Olho da tempestade converge vento e eletricidade. Carga: qualquer Status + tempo (status 14 + time 2.5); alvo allEnemies; uso vulnerable; prep 1.7s; recarga 9s.
 
-### Cyclops (Marvel)
+### Ciclope (Marvel)
 
 - Ideia: Mantém mira e constrói linhas de fogo cada vez mais precisas.
 - Pergunta estratégica: Pode manter a linha de tiro limpa sem expor aliados?
@@ -1204,7 +1296,7 @@ A simulação usa 12 sementes por personagem e serve para encontrar gatilhos est
 2. **Rajada telecinética** — Ergue uma defesa mental quando um aliado está ameaçado. Carga: aliado ferido + tempo (allyHurt 18 + time 2.4); alvo allyWeak; uso threatened; prep 0s; recarga 7s.
 3. **Fênix desperta** — Fênix desperta libera poder amplo quando o trio perde terreno. Carga: atrás na Vantagem + tempo (losing 5 + time 2.5); alvo allEnemies; uso enemyCast; prep 2.2s; recarga 9s.
 
-### Rogue (Marvel)
+### Vampira (Marvel)
 
 - Ideia: Rouba impulso do alvo e converte proximidade em resistência.
 - Pergunta estratégica: Quem tem o recurso mais valioso para Rogue absorver?
@@ -1260,7 +1352,7 @@ A simulação usa 12 sementes por personagem e serve para encontrar gatilhos est
 2. **Mordida predatória** — Mordida predatória restaura o simbionte quando ferido. Carga: dano recebido + tempo (received 20 + time 2.4); alvo self; uso injured; prep 0s; recarga 8s.
 3. **Simbionte faminto** — Entra em frenesi quando o time perde terreno. Carga: atrás na Vantagem + tempo (losing 4.2 + time 2.5); alvo enemyWeak; uso always; prep 1.7s; recarga 10s.
 
-### Carnage (Marvel)
+### Carnificina (Marvel)
 
 - Ideia: Aplica feridas persistentes e acelera em meio ao caos.
 - Pergunta estratégica: O time consegue aguentar seu dano ao longo do tempo?
@@ -1274,7 +1366,7 @@ A simulação usa 12 sementes por personagem e serve para encontrar gatilhos est
 2. **Ferida aberta** — Aproveita uma vulnerabilidade existente. Carga: inimigo ferido + tempo (enemyHurt 11 + time 2.4 + received 8); alvo enemyWeak; uso vulnerable; prep 0.9s; recarga 6s.
 3. **Carnificina total** — Finaliza um alvo já exposto ou marcado. Carga: qualquer Status + tempo (status 15 + time 2.5); alvo enemyWeak; uso vulnerable; prep 2s; recarga 10s.
 
-### Doctor Doom (Marvel)
+### Doutor Destino (Marvel)
 
 - Ideia: Combina defesa tecnológica com magia de preparação.
 - Pergunta estratégica: O trio pode proteger Doom até a magia e tecnologia convergirem?
@@ -1316,7 +1408,7 @@ A simulação usa 12 sementes por personagem e serve para encontrar gatilhos est
 2. **Drones de defesa** — Converte uma defesa bem-sucedida em plano coletivo. Carga: dano bloqueado + tempo (protected 14 + time 2.4 + status 7); alvo allAllies; uso always; prep 0s; recarga 8s.
 3. **Evolução autônoma** — Evolução autônoma ajusta-se à técnica que acabou de observar. Carga: Preparo inimigo + tempo (enemyCast 14 + time 2.5); alvo enemyCast; uso enemyCast; prep 1.3s; recarga 9s.
 
-### Green Goblin (Marvel)
+### Duende Verde (Marvel)
 
 - Ideia: Arma o campo e força inimigos a escolher entre riscos.
 - Pergunta estratégica: Qual preparação adversária pode ser punida por uma armadilha?
@@ -1330,7 +1422,7 @@ A simulação usa 12 sementes por personagem e serve para encontrar gatilhos est
 2. **Gás do medo** — Detona a armadilha durante uma preparação. Carga: Preparo inimigo + tempo (enemyCast 20 + time 2.4); alvo enemyCast; uso enemyCast; prep 0s; recarga 7s.
 3. **Prancha armadilhada** — Pune o alvo preso, marcado ou exposto. Carga: qualquer Status + tempo (status 15 + time 2.5); alvo enemyWeak; uso vulnerable; prep 1.3s; recarga 9s.
 
-### Silver Surfer (Marvel)
+### Surfista Prateado (Marvel)
 
 - Ideia: Redireciona energia e atravessa ameaças com velocidade cósmica.
 - Pergunta estratégica: Que dano recebido pode ser convertido em mobilidade e resposta?
@@ -1358,7 +1450,7 @@ A simulação usa 12 sementes por personagem e serve para encontrar gatilhos est
 2. **Rajada do Poder Cósmico** — Recupera terreno quando a equipe perde Vantagem. Carga: atrás na Vantagem + tempo (losing 7 + time 2.4 + winning 5); alvo allEnemies; uso always; prep 0s; recarga 8s.
 3. **Devoração cósmica** — Amplia a vantagem quando o controle foi conquistado. Carga: à frente na Vantagem + tempo (winning 5 + time 2.5); alvo allEnemies; uso always; prep 2.5s; recarga 12s.
 
-### Star-Lord (Marvel)
+### Senhor das Estrelas (Marvel)
 
 - Ideia: Improvisa suporte, ritmo e fogo concentrado conforme a equipe precisa.
 - Pergunta estratégica: A equipe precisa de pressão, reposicionamento ou reforço neste instante?
@@ -1414,7 +1506,7 @@ A simulação usa 12 sementes por personagem e serve para encontrar gatilhos est
 2. **Maré puxante** — Recupera terreno quando a equipe perde Vantagem. Carga: atrás na Vantagem + tempo (losing 7 + time 2.4 + status 7); alvo allEnemies; uso always; prep 0s; recarga 8s.
 3. **Comando dos mares** — Amplia a vantagem quando o controle foi conquistado. Carga: à frente na Vantagem + tempo (winning 5 + time 2.5); alvo allEnemies; uso always; prep 2.5s; recarga 12s.
 
-### Green Lantern (DC)
+### Lanterna Verde (DC)
 
 - Ideia: Converte vontade em defesa ou ferramenta ofensiva conforme a ameaça.
 - Pergunta estratégica: Qual forma da vontade é mais necessária para este confronto?
@@ -1428,7 +1520,7 @@ A simulação usa 12 sementes por personagem e serve para encontrar gatilhos est
 2. **Punho esmeralda** — Prisão de energia encerra uma preparação inimiga. Carga: Preparo inimigo + tempo (enemyCast 14 + time 2.4); alvo enemyCast; uso enemyCast; prep 0s; recarga 6s.
 3. **Construto adaptável** — Forma uma arma ofensiva quando surge uma abertura. Carga: qualquer Status + tempo (status 14 + time 2.5); alvo enemyWeak; uso vulnerable; prep 1.5s; recarga 10s.
 
-### Cyborg (DC)
+### Ciborgue (DC)
 
 - Ideia: Escaneia vulnerabilidades e dispara uma resposta tecnológica.
 - Pergunta estratégica: Que padrão precisa ser escaneado para abrir uma fraqueza?
@@ -1652,7 +1744,7 @@ A simulação usa 12 sementes por personagem e serve para encontrar gatilhos est
 2. **Tiro de flanco** — Ataca pelo flanco que o silêncio abriu. Carga: qualquer Status + tempo (status 12 + time 2.4); alvo enemyWeak; uso vulnerable; prep 0s; recarga 5s.
 3. **CQC decisivo** — Cancela o plano inimigo e sai antes da resposta. Carga: Preparo inimigo + tempo (enemyCast 16 + time 2.5); alvo enemyCast; uso enemyCast; prep 0.9s; recarga 10s.
 
-### Raiden (Metal Gear Rising)
+### Raiden (Metal Gear) (Metal Gear Rising)
 
 - Ideia: Corta em sequência e deixa o campo todo eletrificado.
 - Pergunta estratégica: Vale espalhar a corrente ou concentrar no alvo?
@@ -1875,3 +1967,423 @@ A simulação usa 12 sementes por personagem e serve para encontrar gatilhos est
 1. **Corrente em chamas** — Prende uma ameaça antes que ela avance. Carga: Tempo (time 4.1); alvo enemyStrong; uso always; prep 0s; recarga 5s.
 2. **Teleporte infernal** — Teleporte infernal alcança o alvo já preso. Carga: qualquer Status + tempo (status 12 + time 2.4 + received 8); alvo enemyStrong; uso vulnerable; prep 0s; recarga 7s.
 3. **Toasty!** — Pune o alvo preso, marcado ou exposto. Carga: qualquer Status + tempo (status 15 + time 2.5); alvo enemyWeak; uso vulnerable; prep 1.3s; recarga 9s.
+
+### Sub-Zero (Mortal Kombat)
+
+- Ideia: Congela a ação do alvo e ataca o que não pode reagir.
+- Pergunta estratégica: Quem eu preciso parar para o trio resolver a luta?
+- Estimativa inicial: poder 85/100; Condição 1100; intervalo de ação 3.4s.
+- Traço: Afinidade elemental — Status aplicados ajudam a carregar sua próxima técnica. (status, recarga 1s)
+- Ação principal: Ataque básico — alvo enemyWeak; damage 58, slow 0.07
+- Vulnerabilidade: Depois do congelamento, a janela fecha rápido.
+- Tags: human, ice, control
+- Death Note: compatível
+1. **Lança de gelo** — Aplica dano persistente ao alvo vulnerável. Carga: Tempo (time 4.6); alvo enemyWeak; uso always; prep 0s; recarga 5s.
+2. **Clone congelado** — O clone congelado prende quem encosta nele. Carga: ataque básico + tempo (action 12 + time 2.4 + enemyHurt 8); alvo enemyWeak; uso always; prep 0s; recarga 7s.
+3. **Inverno absoluto** — Inverno absoluto castiga o alvo que não pode se mover. Carga: qualquer Status + tempo (status 15 + time 2.5); alvo enemyWeak; uso vulnerable; prep 1.4s; recarga 11s.
+
+### Liu Kang (Mortal Kombat)
+
+- Ideia: Pressão limpa de artes marciais com fogo no fim.
+- Pergunta estratégica: Mantenho a sequência ou guardo para a abertura?
+- Estimativa inicial: poder 84/100; Condição 1120; intervalo de ação 2.9s.
+- Traço: Troca de golpes — Dano causado acelera sua resposta seguinte. (dealt, recarga 1s)
+- Ação principal: Ataque básico — alvo enemyWeak; damage 61, burning 3
+- Vulnerabilidade: Pouca resposta quando é obrigado a defender.
+- Tags: human, duelist, fire
+- Death Note: compatível
+1. **Chute voador** — Mantém a troca de golpes. Carga: dano causado + tempo (dealt 11 + time 1.8); alvo enemyWeak; uso always; prep 0s; recarga 4s.
+2. **Bola de fogo** — Contra-ataca quem o atingiu. Carga: dano recebido + tempo (received 10 + time 2.4 + status 9); alvo enemyWeak; uso always; prep 0s; recarga 6s.
+3. **Dragão flamejante** — O dragão flamejante atravessa o alvo de ponta a ponta. Carga: dano causado + tempo (dealt 15 + time 2.5); alvo enemyWeak; uso always; prep 1.6s; recarga 11s.
+
+### Raiden (Mortal Kombat) (Mortal Kombat)
+
+- Ideia: Protege o trio e pune quem tenta agir sob a tempestade.
+- Pergunta estratégica: Qual aliado precisa atravessar o próximo golpe?
+- Estimativa inicial: poder 87/100; Condição 1240; intervalo de ação 3.9s.
+- Traço: Proteção divina — A tempestade cobre o aliado mais exposto. (allyHurt, recarga 2.6s)
+- Ação principal: Ataque básico — alvo enemyWeak; damage 56, electric 0.06
+- Vulnerabilidade: Divide-se entre proteger e atacar, e faz as duas por metade.
+- Tags: lightning, protector, tactician
+- Death Note: incompatível
+1. **Raio celeste** — Descarga ampla que mantém o campo carregado. Carga: ataque básico + tempo (action 11 + time 1.8); alvo allEnemies; uso always; prep 0s; recarga 5s.
+2. **Barreira elétrica** — A barreira elétrica cobre o trio inteiro. Carga: aliado ferido + tempo (allyHurt 12 + time 2.4 + interrupt 10); alvo allAllies; uso threatened; prep 0s; recarga 4.5s.
+3. **Trovão dos deuses** — Tempestade fecha o circuito em todos de uma vez. Carga: qualquer Status + tempo (status 15 + time 2.5); alvo allEnemies; uso vulnerable; prep 1.7s; recarga 11s.
+
+### Jin Kazama (Tekken)
+
+- Ideia: Quer que o inimigo ataque: é aí que ele ganha a troca.
+- Pergunta estratégica: Consigo provocar o golpe que quero aparar?
+- Estimativa inicial: poder 86/100; Condição 1150; intervalo de ação 3.2s.
+- Traço: Leitura de guarda — Aparar o golpe devolve parte dele e abre o agressor. (received, recarga 2s)
+- Ação principal: Ataque básico — alvo enemyWeak; damage 62, exposed 0.05
+- Vulnerabilidade: Contra quem não ataca, não tem o que responder.
+- Tags: human, counter, duelist
+- Death Note: compatível
+1. **Postura Mishima** — Assume a postura e espera o golpe chegar. Carga: dano recebido + tempo (received 11 + time 1.8); alvo self; uso always; prep 0s; recarga 5s.
+2. **Contra-ataque** — Responde no instante do impacto e tira o agressor do ritmo. Carga: dano recebido + tempo (received 21 + time 2.4); alvo enemyStrong; uso threatened; prep 0s; recarga 6s.
+3. **Gene do Diabo** — O Gene do Diabo responde ao castigo com castigo maior. Carga: dano recebido + tempo (received 14 + time 2.5); alvo enemyStrong; uso enemyCast; prep 1.2s; recarga 12s.
+
+### Kazuya Mishima (Tekken)
+
+- Ideia: A violência recebida vira violência devolvida, em dobro.
+- Pergunta estratégica: Vale deixá-lo apanhar para a resposta valer a pena?
+- Estimativa inicial: poder 87/100; Condição 1190; intervalo de ação 3.4s.
+- Traço: Ímpeto crescente — A pressão recebida fortalece sua próxima janela de poder. (received, recarga 3s)
+- Ação principal: Ataque básico — alvo enemyWeak; damage 70, strengthened 0.035
+- Vulnerabilidade: Precisa sofrer para escalar, e isso tem preço.
+- Tags: human, berserker, duelist
+- Death Note: compatível
+1. **Pisão demoníaco** — Responde ao dano com um golpe mais forte. Carga: dano recebido + tempo (received 9 + time 1.8); alvo enemyWeak; uso always; prep 0.6s; recarga 5s.
+2. **Raio do diabo** — Acelera o próprio ritmo depois de agir. Carga: ataque básico + tempo (action 13 + time 2.4 + received 8); alvo enemyWeak; uso always; prep 0s; recarga 4s.
+3. **Forma Devil** — A forma Devil cobra tudo que foi feito com ele. Carga: dano recebido + tempo (received 13 + time 2.5); alvo enemyStrong; uso always; prep 1.7s; recarga 12s.
+
+### Sora (Kingdom Hearts)
+
+- Ideia: Luta melhor quando o trio está junto e inteiro.
+- Pergunta estratégica: Quem eu levanto primeiro para o grupo voltar a pressionar?
+- Estimativa inicial: poder 84/100; Condição 1080; intervalo de ação 3.2s.
+- Traço: Laços — Aliado ferido devolve ânimo e recurso ao grupo. (allyHurt, recarga 2.4s)
+- Ação principal: Ataque básico — alvo enemyWeak; damage 55, charge 2
+- Vulnerabilidade: Sozinho, é só uma chave-espada comum.
+- Tags: human, support, magic
+- Death Note: compatível
+1. **Chave-espada** — Recupera um aliado que realmente precisa. Carga: aliado ferido + tempo (allyHurt 13 + time 1.8); alvo allyWeak; uso injured; prep 0s; recarga 6s.
+2. **Cura** — Acelera o trio depois de uma defesa útil. Carga: dano bloqueado + tempo (protected 15 + time 2.4 + allyHurt 6); alvo allAllies; uso always; prep 0s; recarga 8s.
+3. **Forma final** — A forma final levanta o trio inteiro de uma vez. Carga: aliado ferido + tempo (allyHurt 14 + time 2.5); alvo allAllies; uso always; prep 1.3s; recarga 12s.
+
+### 2B (NieR: Automata)
+
+- Ideia: Precisão de androide, com o Pod cobrindo o que falta.
+- Pergunta estratégica: Abro a guarda agora ou espero o Pod preparar o terreno?
+- Estimativa inicial: poder 86/100; Condição 1060; intervalo de ação 3s.
+- Traço: Golpe calculado — Acertar um alvo vulnerável melhora sua próxima ação. (dealt, recarga 1s)
+- Ação principal: Ataque básico — alvo enemyWeak; damage 60, weakened 0.05
+- Vulnerabilidade: Sequências longas a deixam exposta.
+- Tags: artificial, precision, swordsman
+- Death Note: incompatível
+1. **Lâmina virtuosa** — Marca o alvo antes da sequência. Carga: ataque básico + tempo (action 12 + time 1.8); alvo enemyWeak; uso always; prep 0s; recarga 5s.
+2. **Apoio do Pod** — O Pod cobre o campo enquanto ela fecha a distância. Carga: dano causado + tempo (dealt 12 + time 2.4 + status 7); alvo allEnemies; uso vulnerable; prep 0s; recarga 5s.
+3. **Modo berserk** — Interrompe e pune uma abertura. Carga: qualquer Status + tempo (status 18 + time 2.5); alvo enemyWeak; uso vulnerable; prep 1.3s; recarga 9s.
+
+### Sekiro (Sekiro)
+
+- Ideia: Apara tudo até a guarda do inimigo simplesmente ceder.
+- Pergunta estratégica: Aguento mais uma troca para quebrar a postura dele?
+- Estimativa inicial: poder 88/100; Condição 980; intervalo de ação 2.8s.
+- Traço: Postura — Aparar não defende: desgasta a guarda de quem bateu. (received, recarga 1.6s)
+- Ação principal: Ataque básico — alvo enemyWeak; damage 57, exposed 0.05
+- Vulnerabilidade: Errar o tempo custa caro e ele não tem Vida de sobra.
+- Tags: human, counter, assassin
+- Death Note: compatível
+1. **Deflexão** — Assume a postura e espera o golpe chegar. Carga: dano recebido + tempo (received 11 + time 1.8); alvo self; uso always; prep 0s; recarga 5s.
+2. **Mikiri** — Responde no instante do impacto e tira o agressor do ritmo. Carga: dano recebido + tempo (received 21 + time 2.4); alvo enemyStrong; uso threatened; prep 0s; recarga 6s.
+3. **Golpe mortal** — Golpe mortal entra no instante em que a guarda cede. Carga: dano recebido + tempo (received 16 + time 2.5); alvo enemyStrong; uso vulnerable; prep 0.7s; recarga 12s.
+
+### Malenia (Elden Ring)
+
+- Ideia: Cada acerto a cura: quanto mais luta, mais inteira fica.
+- Pergunta estratégica: O trio tem dano concentrado para passar da recuperação?
+- Estimativa inicial: poder 90/100; Condição 1210; intervalo de ação 3.1s.
+- Traço: Lâmina de Miquella — Cada acerto devolve Vida — ela se cura lutando. (dealt, recarga 1.4s)
+- Ação principal: Ataque básico — alvo enemyWeak; damage 67, heal 10
+- Vulnerabilidade: Interrompida no meio da dança, perde tudo que ganharia.
+- Tags: human, regen, swordsman
+- Death Note: compatível
+1. **Lâmina protética** — Devolve pressão depois de sofrer dano. Carga: dano recebido + tempo (received 9 + time 1.8); alvo enemyWeak; uso always; prep 0s; recarga 5s.
+2. **Dança aquática** — A dança aquática atinge todos e devolve o que tirou. Carga: dano causado + tempo (dealt 13 + time 2.4 + received 8); alvo allEnemies; uso injured; prep 0s; recarga 8s.
+3. **Flor escarlate** — Entra em frenesi quando o time perde terreno. Carga: atrás na Vantagem + tempo (losing 4.2 + time 2.5); alvo enemyWeak; uso always; prep 1.7s; recarga 10s.
+
+### Agente 47 (Hitman)
+
+- Ideia: Fica invisível no plano inimigo até o alvo certo aparecer.
+- Pergunta estratégica: Quem é o alvo que resolve a luta se cair agora?
+- Estimativa inicial: poder 86/100; Condição 1000; intervalo de ação 3.5s.
+- Traço: Infiltração — Observar uma preparação inimiga rouba parte do ritmo dela. (enemyCast, recarga 2s)
+- Ação principal: Ataque básico — alvo enemyWeak; damage 54, exposed 0.06
+- Vulnerabilidade: Descoberto, não tem como sustentar um confronto aberto.
+- Tags: human, assassin, saboteur
+- Death Note: compatível
+1. **Disfarce** — Corta a comunicação da ameaça que ia agir. Carga: Preparo inimigo + tempo (enemyCast 11 + time 1.8); alvo enemyCast; uso always; prep 0s; recarga 5s.
+2. **Garrote** — Ataca pelo flanco que o silêncio abriu. Carga: qualquer Status + tempo (status 12 + time 2.4 + dealt 9); alvo enemyWeak; uso vulnerable; prep 0s; recarga 5s.
+3. **Tiro planejado** — O tiro planejado só existe depois de todo o resto. Carga: qualquer Status + tempo (status 16 + time 2.5); alvo enemyWeak; uso vulnerable; prep 1.6s; recarga 13s.
+
+### Arthas (Warcraft)
+
+- Ideia: O que cai do lado dele volta para lutar do lado dele.
+- Pergunta estratégica: Consigo garantir a primeira queda para a escalada começar?
+- Estimativa inicial: poder 89/100; Condição 1300; intervalo de ação 4.2s.
+- Traço: Rei Lich — Cada inimigo ferido alimenta a praga que ele carrega. (enemyHurt, recarga 2s)
+- Ação principal: Ataque básico — alvo enemyWeak; damage 66, burning 2.5
+- Vulnerabilidade: Começo lento enquanto não há mortos para erguer.
+- Tags: undead, summoner, ice
+- Death Note: incompatível
+1. **Ceifadora de Almas** — Envia uma presença temporária para marcar a ameaça. Carga: Tempo (time 4); alvo enemyStrong; uso always; prep 0s; recarga 5s.
+2. **Erguer os mortos** — A presença auxiliar absorve parte da pressão. Carga: aliado ferido + tempo (allyHurt 10 + time 2.4 + received 8); alvo allyWeak; uso threatened; prep 0s; recarga 7s.
+3. **Praga da Carne** — A Praga da Carne toma o campo e devolve o que tomou. Carga: inimigo ferido + tempo (enemyHurt 15 + time 2.5); alvo allEnemies; uso always; prep 2.1s; recarga 13s.
+
+### Geralt de Rívia (The Witcher)
+
+- Ideia: Tem o sinal certo para o problema que está na mesa.
+- Pergunta estratégica: A situação pede Quen, Igni ou Axii agora?
+- Estimativa inicial: poder 86/100; Condição 1140; intervalo de ação 3.4s.
+- Traço: Sinais — Bloquear carrega o próximo sinal. (protected, recarga 1.8s)
+- Ação principal: Ataque básico — alvo enemyWeak; damage 61, charge 3
+- Vulnerabilidade: Precisa escolher certo: o sinal errado é um turno perdido.
+- Tags: human, adapt, swordsman
+- Death Note: compatível
+1. **Sinal de Quen** — Quen absorve o próximo golpe inteiro. Carga: dano bloqueado + tempo (protected 11 + time 1.8); alvo self; uso threatened; prep 0s; recarga 5s.
+2. **Sinal de Igni** — Igni abre o campo com fogo. Carga: ataque básico + tempo (action 12 + time 2.4 + protected 8); alvo allEnemies; uso threatened; prep 0s; recarga 7s.
+3. **Sinal de Axii** — Axii vira a cabeça da maior ameaça contra ela mesma. Carga: qualquer Status + tempo (status 14 + time 2.5); alvo enemyStrong; uso vulnerable; prep 1.1s; recarga 11s.
+
+### Isaac Clarke (Dead Space)
+
+- Ideia: Para o alvo no ar e desmonta peça por peça.
+- Pergunta estratégica: Vale gastar a estase agora ou guardar para a ameaça maior?
+- Estimativa inicial: poder 84/100; Condição 1090; intervalo de ação 3.6s.
+- Traço: Estase — O que ele mira anda mais devagar que o resto do campo. (action, recarga 2.6s)
+- Ação principal: Ataque básico — alvo enemyWeak; damage 57, weakened 0.05
+- Vulnerabilidade: Sem estase, é um engenheiro com uma ferramenta.
+- Tags: human, tech, control
+- Death Note: compatível
+1. **Cortador de plasma** — Retarda a ameaça mais perigosa. Carga: Tempo (time 4.2); alvo enemyStrong; uso always; prep 0s; recarga 5s.
+2. **Estase** — Enfraquece uma preparação em andamento. Carga: Preparo inimigo + tempo (enemyCast 23 + time 2.4); alvo enemyCast; uso enemyCast; prep 0s; recarga 7s.
+3. **Desmembramento** — O desmembramento tira a ameaça por partes. Carga: qualquer Status + tempo (status 15 + time 2.5); alvo enemyWeak; uso vulnerable; prep 1.5s; recarga 11s.
+
+### Gordon Freeman (Half-Life)
+
+- Ideia: Pega o campo e usa o campo como arma.
+- Pergunta estratégica: O que está por perto que eu possa virar contra eles?
+- Estimativa inicial: poder 83/100; Condição 1070; intervalo de ação 3.5s.
+- Traço: Manipulador gravitacional — O que estava solto no campo vira projétil. (action, recarga 2.4s)
+- Ação principal: Ataque básico — alvo enemyWeak; damage 56, weakened 0.05
+- Vulnerabilidade: Depende do que o ambiente oferece.
+- Tags: human, tech, trap
+- Death Note: compatível
+1. **Pé de cabra** — Prende uma ameaça antes que ela avance. Carga: Tempo (time 4.1); alvo enemyStrong; uso always; prep 0s; recarga 5s.
+2. **Manipulador gravitacional** — O manipulador arranca a ameaça da posição e a devolve no chão. Carga: ataque básico + tempo (action 12 + time 2.4 + enemyCast 7); alvo enemyStrong; uso enemyCast; prep 0s; recarga 7s.
+3. **Zero-point** — Zero-point varre o campo com tudo que estava por perto. Carga: dano bloqueado + tempo (protected 14 + time 2.5); alvo allEnemies; uso vulnerable; prep 1.5s; recarga 11s.
+
+### Ryu Hayabusa (Ninja Gaiden)
+
+- Ideia: Chega antes de o inimigo decidir o que fazer.
+- Pergunta estratégica: A velocidade compensa a Vida que ele não tem?
+- Estimativa inicial: poder 87/100; Condição 960; intervalo de ação 2.3s.
+- Traço: Arte do Dragão — Cada ação encurta a distância e afia a próxima. (action, recarga 1.3s)
+- Ação principal: Ataque básico — alvo enemyWeak; damage 50, shift 0.04
+- Vulnerabilidade: Frágil se for forçado a parar e trocar golpes.
+- Tags: human, speedster, assassin
+- Death Note: compatível
+1. **Lâmina do Dragão** — Golpe rápido que já prepara o seguinte. Carga: ataque básico + tempo (action 14 + time 1.8); alvo enemyWeak; uso always; prep 0s; recarga 3s.
+2. **Arte do Vento** — Arte do Vento atinge tudo que estiver no caminho. Carga: dano causado + tempo (dealt 12 + time 2.4 + action 8); alvo allEnemies; uso threatened; prep 0s; recarga 6s.
+3. **Izuna Otoshi** — Izuna Otoshi leva o alvo para o alto e volta com ele. Carga: dano causado + tempo (dealt 16 + time 2.5); alvo enemyWeak; uso vulnerable; prep 1.1s; recarga 11s.
+
+### Cabeça de Pirâmide (Silent Hill)
+
+- Ideia: Não corre atrás: chega, e o medo chega antes.
+- Pergunta estratégica: O trio aguenta a pressão até ele alcançar alguém?
+- Estimativa inicial: poder 88/100; Condição 1520; intervalo de ação 5.1s.
+- Traço: Presença opressiva — Só estar em campo já tira a coragem de quem olha. (time, recarga 4.5s)
+- Ação principal: Ataque básico — alvo enemyWeak; damage 83, burning 2.5
+- Vulnerabilidade: Lento o bastante para ser lido e contornado.
+- Tags: undead, juggernaut, control
+- Death Note: incompatível
+1. **Grande Faca** — Avança por cima do golpe e prende quem está na frente. Carga: dano recebido + tempo (received 10 + time 1.8); alvo enemyWeak; uso always; prep 0s; recarga 5s.
+2. **Presença opressiva** — Quanto mais apanha, mais pesado fica. Carga: dano recebido + tempo (received 20 + time 2.4); alvo self; uso injured; prep 0s; recarga 6s.
+3. **Sentença** — A Grande Faca desce devagar, e não há como negociar. Carga: enquanto luta + tempo (survived 3 + time 2.5); alvo enemyWeak; uso always; prep 3s; recarga 15s.
+
+### Kirby (Kirby)
+
+- Ideia: Engole a habilidade do inimigo e usa contra ele.
+- Pergunta estratégica: Qual técnica inimiga vale mais na minha boca?
+- Estimativa inicial: poder 83/100; Condição 1150; intervalo de ação 3.3s.
+- Traço: Apetite — Ferir um inimigo toma parte do que ele estava guardando. (dealt, recarga 1.8s)
+- Ação principal: Ataque básico — alvo enemyWeak; damage 48, charge 3
+- Vulnerabilidade: Sem nada para copiar, é uma bola rosa inofensiva.
+- Tags: alien, devour, copy
+- Death Note: incompatível
+1. **Inalar** — Inalar engole a técnica no meio da preparação. Carga: Preparo inimigo + tempo (enemyCast 11 + time 1.8); alvo enemyCast; uso enemyCast; prep 0s; recarga 5s.
+2. **Cópia de poder** — Converte o que tomou em força própria. Carga: dano causado + tempo (dealt 20 + time 2.4); alvo self; uso always; prep 0s; recarga 6s.
+3. **Super inalação** — Devora a abertura e sai da troca mais inteiro do que entrou. Carga: inimigo ferido + tempo (enemyHurt 15 + time 2.5); alvo enemyWeak; uso vulnerable; prep 1.6s; recarga 11s.
+
+### Donkey Kong (Donkey Kong)
+
+- Ideia: Força bruta sem plano B, e raramente precisa de um.
+- Pergunta estratégica: Dá para segurá-lo antes que ele chegue perto?
+- Estimativa inicial: poder 85/100; Condição 1480; intervalo de ação 4.6s.
+- Traço: Massa imparável — O dano recebido vira placa em vez de recuo. (received, recarga 2s)
+- Ação principal: Ataque básico — alvo enemyWeak; damage 78, shift 0.035
+- Vulnerabilidade: Previsível: cada investida é anunciada.
+- Tags: animal, juggernaut, brawler
+- Death Note: incompatível
+1. **Soco giratório** — Avança por cima do golpe e prende quem está na frente. Carga: dano recebido + tempo (received 10 + time 1.8); alvo enemyWeak; uso always; prep 0s; recarga 5s.
+2. **Barril arremessado** — O barril arremessado acerta quem estiver na linha. Carga: ataque básico + tempo (action 19 + time 2.4); alvo allEnemies; uso injured; prep 0s; recarga 6s.
+3. **Batida do gorila** — Impacto sísmico que para o campo por um instante. Carga: enquanto luta + tempo (survived 3 + time 2.5); alvo allEnemies; uso always; prep 2.4s; recarga 13s.
+
+### Simon Belmont (Castlevania)
+
+- Ideia: Controla a distância com o chicote e sela o que se aproxima.
+- Pergunta estratégica: Consigo manter a ameaça longe o tempo suficiente?
+- Estimativa inicial: poder 84/100; Condição 1120; intervalo de ação 3.6s.
+- Traço: Selo vigilante — Status negativo no campo reforça o selo e prende o alvo. (negativeStatus, recarga 3s)
+- Ação principal: Ataque básico — alvo enemyWeak; damage 59, weakened 0.055
+- Vulnerabilidade: De perto, o chicote perde a razão de existir.
+- Tags: human, vampire-hunter, trap
+- Death Note: compatível
+1. **Chicote Vampire Killer** — Prende a maior ameaça no lugar. Carga: ataque básico + tempo (action 12 + time 1.8); alvo enemyStrong; uso always; prep 0s; recarga 5s.
+2. **Água benta** — A água benta nega o terreno a quem se aproxima. Carga: inimigo ferido + tempo (enemyHurt 12 + time 2.4 + dealt 9); alvo allEnemies; uso always; prep 0s; recarga 6s.
+3. **Cruz arremessada** — Fecha o selo sobre a preparação inimiga e a silencia. Carga: Preparo inimigo + tempo (enemyCast 14 + time 2.5); alvo enemyCast; uso enemyCast; prep 1.1s; recarga 10s.
+
+### Príncipe da Pérsia (Prince of Persia)
+
+- Ideia: Desfaz o erro que acabou de cometer.
+- Pergunta estratégica: Este momento vale gastar uma areia do tempo?
+- Estimativa inicial: poder 85/100; Condição 1020; intervalo de ação 2.9s.
+- Traço: Areias do Tempo — O erro recente pode ser desfeito — uma vez. (received, recarga 2.6s)
+- Ação principal: Ataque básico — alvo enemyWeak; damage 54, shift -0.04
+- Vulnerabilidade: As areias acabam, e aí ele é só um acrobata.
+- Tags: human, time, speedster
+- Death Note: compatível
+1. **Adaga do Tempo** — Adianta a própria ação para abrir uma janela. Carga: Tempo (time 3.7); alvo self; uso always; prep 0s; recarga 6s.
+2. **Rebobinar** — Rebobinar devolve o que o último golpe tirou. Carga: dano recebido + tempo (received 13 + time 2.4 + enemyCast 8); alvo self; uso injured; prep 0s; recarga 7s.
+3. **Tempestade de areia** — Gasta sua janela rara quando o time domina. Carga: à frente na Vantagem + tempo (winning 6 + time 2.5); alvo allEnemies; uso always; prep 2.2s; recarga 11s.
+
+### Alucard (Castlevania)
+
+- Ideia: Drena o que acerta e devolve em forma de resistência.
+- Pergunta estratégica: Consigo manter o acerto constante para a drenagem valer?
+- Estimativa inicial: poder 87/100; Condição 1160; intervalo de ação 3.3s.
+- Traço: Sede contida — Cada acerto devolve parte do que foi tirado. (dealt, recarga 1.4s)
+- Ação principal: Ataque básico — alvo enemyWeak; damage 63, heal 9
+- Vulnerabilidade: Sem acertar, não se sustenta.
+- Tags: vampire, regen, swordsman
+- Death Note: incompatível
+1. **Espada Alucard** — Devolve pressão depois de sofrer dano. Carga: dano recebido + tempo (received 9 + time 1.8); alvo enemyWeak; uso always; prep 0s; recarga 5s.
+2. **Forma de névoa** — A forma de névoa atravessa o golpe em vez de aparar. Carga: dano recebido + tempo (received 12 + time 2.4 + dealt 8); alvo self; uso injured; prep 0s; recarga 8s.
+3. **Ataque da alma** — Entra em frenesi quando o time perde terreno. Carga: atrás na Vantagem + tempo (losing 4.2 + time 2.5); alvo enemyWeak; uso always; prep 1.7s; recarga 10s.
+
+### Seiya (Cavaleiros do Zodíaco)
+
+- Ideia: O mesmo golpe nunca funciona duas vezes nele.
+- Pergunta estratégica: A luta vai durar o bastante para o Cosmo dele subir?
+- Estimativa inicial: poder 85/100; Condição 1090; intervalo de ação 3.2s.
+- Traço: Ímpeto crescente — A pressão recebida fortalece sua próxima janela de poder. (received, recarga 3s)
+- Ação principal: Ataque básico — alvo enemyWeak; damage 56, strengthened 0.025
+- Vulnerabilidade: Começa abaixo de quase todo mundo.
+- Tags: human, growth, cosmic
+- Death Note: compatível
+1. **Meteoro de Pégaso** — Responde ao dano com um golpe mais forte. Carga: dano recebido + tempo (received 9 + time 1.8); alvo enemyWeak; uso always; prep 0.6s; recarga 5s.
+2. **Cosmo ardente** — Acelera o próprio ritmo depois de agir. Carga: ataque básico + tempo (action 13 + time 2.4 + allyHurt 5); alvo enemyWeak; uso always; prep 0s; recarga 4s.
+3. **Cometa de Pégaso** — O Cometa de Pégaso sai mais forte a cada vez que ele levanta. Carga: dano recebido + tempo (received 12 + time 2.5); alvo enemyStrong; uso always; prep 1.8s; recarga 11s.
+
+### Majin Boo (Dragon Ball)
+
+- Ideia: Toma o que o inimigo tem e se recompõe do que sobra.
+- Pergunta estratégica: O trio tem dano suficiente para passar da regeneração?
+- Estimativa inicial: poder 89/100; Condição 1420; intervalo de ação 4s.
+- Traço: Regeneração total — O que é arrancado volta, e volta inteiro. (received, recarga 1.8s)
+- Ação principal: Ataque básico — alvo enemyWeak; damage 69, charge 3
+- Vulnerabilidade: Burst concentrado nega a recuperação dele.
+- Tags: demon, devour, regen
+- Death Note: incompatível
+1. **Raio de doce** — O raio de doce tira o alvo da luta por um instante. Carga: ataque básico + tempo (action 11 + time 1.8); alvo enemyWeak; uso always; prep 0s; recarga 5s.
+2. **Absorção** — Converte o que tomou em força própria. Carga: dano causado + tempo (dealt 20 + time 2.4); alvo self; uso always; prep 0s; recarga 6s.
+3. **Regeneração total** — Devora a abertura e sai da troca mais inteiro do que entrou. Carga: inimigo ferido + tempo (enemyHurt 15 + time 2.5); alvo enemyWeak; uso vulnerable; prep 1.6s; recarga 11s.
+
+### Kuririn (Dragon Ball)
+
+- Ideia: Não é o mais forte: é o que corta no lugar certo.
+- Pergunta estratégica: Qual ameaça eu cego ou corto antes que ela decida a luta?
+- Estimativa inicial: poder 79/100; Condição 900; intervalo de ação 3.1s.
+- Traço: Leitura do mais fraco — Quem conhece o próprio tamanho enxerga a abertura antes. (enemyCast, recarga 2.2s)
+- Ação principal: Ataque básico — alvo enemyWeak; damage 47, marked 0.06
+- Vulnerabilidade: Pouca Vida e pouca resposta a pressão direta.
+- Tags: human, precision, tactician
+- Death Note: compatível
+1. **Kienzan** — Kienzan corta sem perguntar quanto o alvo é mais forte. Carga: Preparo inimigo + tempo (enemyCast 12 + time 1.8); alvo enemyStrong; uso always; prep 0s; recarga 5s.
+2. **Taiyoken** — Taiyoken cega o campo inteiro por um instante. Carga: ataque básico + tempo (action 12 + time 2.4 + enemyCast 7); alvo allEnemies; uso vulnerable; prep 0s; recarga 5s.
+3. **Kamehameha** — Interrompe e pune uma abertura. Carga: qualquer Status + tempo (status 18 + time 2.5); alvo enemyWeak; uso vulnerable; prep 1.3s; recarga 9s.
+
+### Shiryu (Cavaleiros do Zodíaco)
+
+- Ideia: O escudo não cede, e é atrás dele que o trio age.
+- Pergunta estratégica: A equipe sabe aproveitar o espaço que ele segura?
+- Estimativa inicial: poder 84/100; Condição 1340; intervalo de ação 4.1s.
+- Traço: Guarda instintiva — Quando um aliado sofre pressão, cria proteção para quem mais precisa. (allyHurt, recarga 4s)
+- Ação principal: Ataque básico — alvo enemyWeak; damage 58, shield 14
+- Vulnerabilidade: Segura bem, mas demora a ameaçar.
+- Tags: human, protector, dragon
+- Death Note: compatível
+1. **Escudo do Dragão** — Protege o aliado em maior risco. Carga: dano bloqueado + tempo (protected 12 + time 1.8); alvo allyWeak; uso threatened; prep 0s; recarga 5s.
+2. **Cólera do Dragão** — Recupera e protege um aliado ferido. Carga: aliado ferido + tempo (allyHurt 12 + time 2.4 + protected 9); alvo allyWeak; uso injured; prep 0s; recarga 6s.
+3. **Último Dragão** — O Último Dragão abre mão da defesa para abrir o campo. Carga: dano bloqueado + tempo (protected 15 + time 2.5); alvo allEnemies; uso always; prep 1.6s; recarga 12s.
+
+### Hyoga (Cavaleiros do Zodíaco)
+
+- Ideia: Baixa a temperatura do campo até ninguém conseguir agir.
+- Pergunta estratégica: Congelo a ameaça principal ou espalho o frio?
+- Estimativa inicial: poder 85/100; Condição 1070; intervalo de ação 3.7s.
+- Traço: Cosmo congelante — O frio se acumula no campo em vez de passar. (time, recarga 4s)
+- Ação principal: Ataque básico — alvo enemyWeak; damage 55, slow 0.07
+- Vulnerabilidade: Hesita, e a hesitação dele custa tempo.
+- Tags: human, ice, control
+- Death Note: compatível
+1. **Pó de Diamante** — Aplica dano persistente ao alvo vulnerável. Carga: Tempo (time 4.6); alvo enemyWeak; uso always; prep 0s; recarga 5s.
+2. **Execução Aurora** — Execução Aurora prende o alvo já lento. Carga: qualquer Status + tempo (status 12 + time 2.4 + enemyHurt 8); alvo enemyStrong; uso vulnerable; prep 0s; recarga 7s.
+3. **Zero Absoluto** — Zero Absoluto para o campo inteiro no lugar. Carga: Tempo (time 5); alvo allEnemies; uso vulnerable; prep 2.3s; recarga 13s.
+
+### Shun (Cavaleiros do Zodíaco)
+
+- Ideia: Prende sem ferir, e protege sem atacar.
+- Pergunta estratégica: Qual ameaça vale prender para o trio respirar?
+- Estimativa inicial: poder 84/100; Condição 1130; intervalo de ação 3.8s.
+- Traço: Selo vigilante — Status negativo no campo reforça o selo e prende o alvo. (negativeStatus, recarga 3s)
+- Ação principal: Ataque básico — alvo enemyWeak; damage 49, shield 14
+- Vulnerabilidade: Evita o golpe final, e às vezes é dele que o time precisa.
+- Tags: human, protector, trap
+- Death Note: compatível
+1. **Corrente Nebular** — A Corrente Nebular alcança todos sem ferir nenhum. Carga: ataque básico + tempo (action 12 + time 1.8); alvo allEnemies; uso always; prep 0s; recarga 5s.
+2. **Tempestade Nebular** — Converte o selo em barreira para o trio. Carga: Status negativo + tempo (negativeStatus 11 + time 2.4 + protected 9); alvo allAllies; uso always; prep 0s; recarga 6s.
+3. **Corrente de defesa** — Fecha o selo sobre a preparação inimiga e a silencia. Carga: Preparo inimigo + tempo (enemyCast 14 + time 2.5); alvo enemyCast; uso enemyCast; prep 1.1s; recarga 10s.
+
+### Ikki (Cavaleiros do Zodíaco)
+
+- Ideia: Cai, levanta, e volta mais difícil de matar do que antes.
+- Pergunta estratégica: Dá para derrubá-lo de vez ou ele vai voltar?
+- Estimativa inicial: poder 87/100; Condição 1250; intervalo de ação 3.6s.
+- Traço: Renascer das cinzas — Quanto mais perto do fim, mais rápido ele se refaz. (received, recarga 2.2s)
+- Ação principal: Ataque básico — alvo enemyWeak; damage 66, heal 10
+- Vulnerabilidade: Ignora o trio e luta a própria luta.
+- Tags: human, regen, illusion
+- Death Note: compatível
+1. **Ave Fênix** — Devolve pressão depois de sofrer dano. Carga: dano recebido + tempo (received 9 + time 1.8); alvo enemyWeak; uso always; prep 0s; recarga 5s.
+2. **Golpe Fantasma** — Golpe Fantasma põe a ilusão na cabeça de todos. Carga: dano recebido + tempo (received 20 + time 2.4); alvo allEnemies; uso injured; prep 0s; recarga 8s.
+3. **Renascimento** — Ave Fênix volta da queda mais inteiro do que caiu. Carga: atrás na Vantagem + tempo (losing 5 + time 2.5); alvo enemyStrong; uso always; prep 1.9s; recarga 12s.
+
+### Saga de Gêmeos (Cavaleiros do Zodíaco)
+
+- Ideia: Duas vontades no mesmo corpo, e o inimigo nunca sabe qual veio.
+- Pergunta estratégica: O adversário já confia no padrão que está vendo?
+- Estimativa inicial: poder 90/100; Condição 1180; intervalo de ação 3.8s.
+- Traço: Duas vontades — A troca de personalidade muda o que o inimigo deveria esperar. (action, recarga 2.2s)
+- Ação principal: Ataque básico — alvo enemyWeak; damage 64, confused 0.07
+- Vulnerabilidade: A troca de personalidade também o atrapalha.
+- Tags: human, illusion, trickster
+- Death Note: compatível
+1. **Explosão Galáctica** — Desorienta e reduz a força de uma ameaça. Carga: Tempo (time 4.4); alvo enemyStrong; uso always; prep 0s; recarga 5s.
+2. **Outra Dimensão** — Outra Dimensão tira a ameaça do campo no meio do gesto. Carga: Preparo inimigo + tempo (enemyCast 22 + time 2.4); alvo enemyCast; uso enemyCast; prep 0s; recarga 7s.
+3. **Satã Imperial** — Ataca quando a confusão criou uma abertura. Carga: qualquer Status + tempo (status 15 + time 2.5); alvo enemyWeak; uso vulnerable; prep 1s; recarga 8s.
+
+### Shaka de Virgem (Cavaleiros do Zodíaco)
+
+- Ideia: Tira os sentidos do inimigo até ele não poder mais agir.
+- Pergunta estratégica: Vale gastar a janela rara para calar a maior ameaça?
+- Estimativa inicial: poder 91/100; Condição 1060; intervalo de ação 4.4s.
+- Traço: Tesouro do Céu — Um sentido de cada vez some de quem está diante dele. (status, recarga 3s)
+- Ação principal: Ataque básico — alvo enemyWeak; damage 48, confused 0.06
+- Vulnerabilidade: Entre as janelas, quase não ameaça ninguém.
+- Tags: human, psychic, mental
+- Death Note: compatível
+1. **Tesouro do Céu** — Lê ou perturba a mente da maior ameaça. Carga: Tempo (time 4.5); alvo enemyStrong; uso always; prep 0s; recarga 6s.
+2. **Todo-poderoso** — Ergue uma defesa mental quando um aliado está ameaçado. Carga: aliado ferido + tempo (allyHurt 10 + time 2.4 + status 8); alvo allyWeak; uso threatened; prep 0s; recarga 7s.
+3. **Rendição dos Seis Mundos** — A Rendição dos Seis Mundos tira tudo que permitia agir. Carga: qualquer Status + tempo (status 16 + time 2.5); alvo allEnemies; uso vulnerable; prep 2.6s; recarga 15s.
