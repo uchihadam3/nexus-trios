@@ -20,4 +20,8 @@ Os originais estão em `assets/ai-source/portraits/overrides/{id}.webp`; os card
 | 13 | Raiden | `raidenmk` |
 | 14 | Jin Kazama | `jin` |
 
-Pendentes por bloqueio da geração: Salsicha, Pernalonga, Samurai Jack, Pica-Pau, Geralt de Rívia, Mario e Bowser. Os retratos atuais desses personagens continuam em uso até que haja uma solução gerada. Nenhuma imagem de internet foi usada.
+Os 14 retratos acima foram aprovados pelo usuário e publicados no jogo.
+
+Samurai Jack: novo retrato aprovado pelo usuário e publicado no jogo; visualização em `samurai-jack-pending.jpg`.
+
+Pendentes por bloqueio da geração: Salsicha, Pernalonga, Pica-Pau, Geralt de Rívia, Mario e Bowser. Os retratos atuais desses personagens continuam em uso. Nenhuma imagem de internet foi usada.
