@@ -1,0 +1,61 @@
+/* Tela inicial (remake): logo vivo, trio em medalhões, recorde grande, botão JOGAR, menu de botões-ícone. */
+.home-v2>*{position:relative;z-index:1}
+.home-v2{position:relative;isolation:isolate;display:grid;gap:16px;width:min(560px,100%);margin:0 auto;padding:6px 16px 22px;color:#eef5e8;text-align:center}
+.home-v2::before{content:'';position:absolute;inset:-40px -40vw 0;z-index:0;pointer-events:none;background:radial-gradient(ellipse at 50% 8%,#c8f56022,transparent 55%),radial-gradient(ellipse at 15% 85%,#8fd3ff12,transparent 45%),radial-gradient(ellipse at 90% 70%,#ffb86b10,transparent 45%)}
+
+.hv-logo{position:relative;display:grid;place-items:center;height:96px;margin-top:4px}
+.hv-raios{width:330px;height:330px;left:50%;top:50%;translate:-50% -50%;opacity:.45}
+.hv-faiscas{width:300px;height:220px;left:50%;top:50%;translate:-50% -50%;opacity:.7}
+.hv-logo h1{position:relative;margin:0;display:grid;line-height:1}
+.hv-logo h1 span{font-size:clamp(46px,15vw,72px);font-weight:900;letter-spacing:6px;background:linear-gradient(180deg,#fff 20%,#c8f560 95%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 18px #c8f56055);animation:hv-logo .9s cubic-bezier(.2,1.4,.4,1) both}
+.hv-logo h1 small{margin-top:4px;font-size:11px;font-weight:800;letter-spacing:6px;color:#b9cdb4;animation:hv-sobe .6s .3s ease both}
+@keyframes hv-logo{from{opacity:0;scale:.6;letter-spacing:22px}to{opacity:1;scale:1;letter-spacing:6px}}
+@keyframes hv-sobe{from{opacity:0;translate:0 10px}to{opacity:1;translate:0 0}}
+
+.hv-trio{position:relative;display:flex;justify-content:center;align-items:flex-end;gap:10px;padding-top:4px}
+.hv-medalhao{position:relative;display:grid;justify-items:center;gap:6px;width:31%;max-width:150px;animation:hv-sobe .6s calc(.25s + var(--i)*.12s) cubic-bezier(.2,1.3,.4,1) both}
+.hv-medalhao .portrait{width:100%;aspect-ratio:1;height:auto;border-radius:50%;overflow:hidden;box-shadow:0 0 0 3px #0c140f,0 0 0 5px color-mix(in srgb,var(--character),transparent 25%),0 12px 30px #000a,0 0 30px color-mix(in srgb,var(--character),transparent 60%);animation:hv-flutua 4.5s calc(var(--i)*-1.4s) ease-in-out infinite}
+.hv-medalhao.m1{width:36%;max-width:170px;z-index:1}
+.hv-medalhao b{font-size:12.5px;font-weight:800;color:#fff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.hv-trio>small{position:absolute;left:50%;bottom:-18px;translate:-50% 0;font-size:9.5px;font-weight:800;letter-spacing:2px;color:#8fa38c;white-space:nowrap}
+@keyframes hv-flutua{50%{translate:0 -6px}}
+
+.hv-recorde{display:inline-flex;align-items:baseline;justify-content:center;gap:8px;justify-self:center;margin-top:14px;padding:8px 18px;border-radius:99px;background:linear-gradient(180deg,#ffd36b22,#ffd36b0a);box-shadow:inset 0 0 0 1px #ffd36b55,0 0 24px #ffd36b22;color:#ffd36b}
+.hv-recorde svg{align-self:center}
+.hv-recorde span{font-size:10.5px;font-weight:850;letter-spacing:2px;white-space:nowrap}
+.hv-recorde strong{font-size:24px;font-weight:900;color:#fff;font-variant-numeric:tabular-nums}
+.hv-recorde em{font-style:normal;font-size:12px;color:#d9c48a}
+
+.hv-jogar{display:grid;gap:10px}
+.hv-cta{position:relative;overflow:hidden;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:14px;width:100%;min-height:76px;padding:12px 20px;border:0;border-radius:22px;cursor:pointer;font:inherit;text-align:left;color:#0c140f;background:linear-gradient(180deg,#e2ff8a,#b6e85a 60%,#94cc3c);box-shadow:0 10px 30px #b6e85a55,inset 0 -5px 0 #0003,inset 0 2px 0 #fff8;transition:transform .12s,box-shadow .12s;animation:hv-cta 2.6s 1.2s ease-in-out infinite}
+.hv-cta:active{transform:translateY(3px) scale(.985);box-shadow:0 4px 14px #b6e85a55,inset 0 -2px 0 #0003}
+.hv-cta>span{display:grid;justify-items:start;text-align:left;position:relative;z-index:1}
+.hv-cta>svg{position:relative;z-index:1;flex:none}
+.hv-cta b{font-size:24px;font-weight:900;letter-spacing:2px}
+.hv-cta small{font-size:12.5px;font-weight:700;opacity:.75}
+.hv-brilho{grid-area:1/1/2/4;position:absolute;inset:0;opacity:.6;mix-blend-mode:overlay}
+@keyframes hv-cta{50%{box-shadow:0 10px 38px #b6e85a88,inset 0 -5px 0 #0003,inset 0 2px 0 #fff8}}
+.hv-trilha{display:flex;justify-content:center;gap:5px}
+.hv-trilha i{width:22px;height:6px;border-radius:99px;background:#ffffff1c}
+.hv-trilha i.ok{background:#b6e85a;box-shadow:0 0 8px #b6e85a88}
+.hv-trilha i.agora{background:#fff;animation:hv-pisca 1.2s ease-in-out infinite}
+@keyframes hv-pisca{50%{opacity:.35}}
+.hv-secundarias{display:flex;justify-content:center;gap:10px}
+.hv-desistir{display:inline-flex;align-items:center;gap:5px;color:#d99b92;font-size:12.5px}
+
+.hv-ranqueada{display:grid;gap:8px;padding:12px;border-radius:20px;background:linear-gradient(180deg,#8fd3ff14,#8fd3ff06);box-shadow:inset 0 0 0 1px #8fd3ff3a}
+.hv-rotulo{display:inline-flex;align-items:center;justify-content:center;gap:6px;font-size:10px;font-weight:850;letter-spacing:1.8px;color:#8fd3ff}
+.hv-ranqueada>div{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.hv-ranqueada button,.hv-menu button{position:relative;display:grid;justify-items:center;gap:3px;padding:12px 6px 10px;border:0;border-radius:16px;cursor:pointer;font:inherit;color:#eef5e8;background:#101a16;box-shadow:inset 0 0 0 1px #ffffff14,0 4px 0 #050907;transition:transform .12s,box-shadow .12s,background .15s}
+.hv-ranqueada button:active,.hv-menu button:active{transform:translateY(3px);box-shadow:inset 0 0 0 1px #ffffff14,0 1px 0 #050907}
+.hv-ranqueada button svg{color:#8fd3ff}
+.hv-ranqueada b,.hv-menu b{font-size:13px;font-weight:800}
+.hv-ranqueada small,.hv-menu small{font-size:10.5px;color:#93a790}
+
+.hv-menu{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.hv-menu button svg{display:grid;place-items:center;width:42px;height:42px;padding:9px;border-radius:14px;color:var(--tile);background:color-mix(in srgb,var(--tile),#101a16 85%);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--tile),transparent 60%)}
+.hv-menu button:hover{background:#14211b}
+.hv-numeros{display:flex;justify-content:center;flex-wrap:wrap;gap:6px 16px;margin:0;font-size:12px;color:#8fa38c}
+.hv-numeros b{color:#dfe9db}
+@media (min-width:760px){.home-v2{width:min(820px,100%);gap:20px;padding-top:18px}.hv-logo{height:120px}.hv-medalhao{max-width:130px}.hv-medalhao.m1{max-width:158px}.hv-jogar,.hv-recorde{width:min(560px,100%);justify-self:center}.hv-menu{grid-template-columns:repeat(6,1fr)}.hv-ranqueada{width:min(560px,100%);justify-self:center}}
+@media (prefers-reduced-motion:reduce){.hv-logo h1 span,.hv-logo h1 small,.hv-medalhao,.hv-medalhao .portrait,.hv-cta,.hv-trilha i.agora{animation:none}}

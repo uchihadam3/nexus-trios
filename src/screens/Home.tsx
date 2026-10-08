@@ -1,37 +1,86 @@
-import { ArrowUpRight,ArrowRight,Trophy,CircleHelp,Settings2,Download,ChevronRight,Users,Swords,Flag,Star,Globe2,ShieldCheck } from 'lucide-react';
+import type { CSSProperties } from 'react';
+import { ArrowRight,Trophy,CircleHelp,Settings2,Download,Users,Crown,Globe2,ShieldCheck,Play,Calendar,CalendarDays,LogOut } from 'lucide-react';
 import { byId,characters } from '../data/characters';
 import { Portrait } from '../components/Portrait';
 import type { Profile, Run } from '../lib/storage';
 import {onlineConfigured} from '../lib/online';
+import { formatarPontos,pontosDaJornada } from '../engine/pontos';
 
+/*
+ * A tela inicial (remake).
+ *
+ * Tela de jogo, não página: o logo vivo, o trio em medalhões, o recorde de
+ * pontos grande — o objetivo do jogo — e um botão JOGAR que não tem como
+ * passar despercebido. Com uma jornada em andamento, o botão vira "Continuar"
+ * e mostra a luta e os pontos de agora. O resto do jogo fica num painel de
+ * botões-ícone, como o menu de um jogo.
+ */
 interface Props {profile:Profile;run:Run|null;conta:boolean;onPlay:()=>void;onRanked:(mode:'daily'|'weekly')=>void;onContinue:()=>void;onAbandon:()=>void;onNavigate:(s:'characters'|'ranking'|'conta'|'help'|'settings')=>void;onInstall:()=>void}
+
+const Fx=({nome,cor,ms,className}:{nome:string;cor:string;ms:number;className:string})=>
+  <span aria-hidden className={`uifx uifx-laco ${className}`} style={{'--uifx-img':`url(/assets/ui/fx/${nome}.webp)`,'--uifx-cor':cor,'--uifx-dur':`${ms}ms`} as CSSProperties}/>;
+
 export function Home({profile,run,conta,onPlay,onRanked,onContinue,onAbandon,onNavigate,onInstall}:Props){
   const terminal=run?.stage==='result'&&(run.battle?.winner!=='player'||run.index===9);
   const wonCurrent=run?.stage==='result'&&run.battle?.winner==='player';
-  const champion=terminal&&wonCurrent;
   const completed=run?run.index+(wonCurrent?1:0):0;
-  const current=run?Math.min(9,completed):0;
-  const enemies=run&&!terminal?run.encounters[current]?.team:undefined;
+  const emAndamento=!!run&&!terminal;
   const trio=run?.team.length?run.team:profile.champion?.length?profile.champion:['goku','pikachu','gojo'];
-  return <section className="game-hub">
-    <div className="hub-hero">
-      <div className="hub-copy"><span className="eyebrow"><Star size={13}/> {terminal?champion?'TRIO CAMPEÃO':'JORNADA ENCERRADA':run?'JORNADA EM ANDAMENTO':'SUA PRÓXIMA JORNADA'}</span>
-        <h1>{run?terminal?champion?'Dez vitórias. Seu trio é campeão.':`Sua jornada terminou no confronto ${run.index+1}.`:`Confronto ${current+1} de 10`:'Monte seu trio. Escreva a próxima vitória.'}</h1>
-        <p>{run?run.stage==='draft'?'Escolha seus três personagens. Cada escolha muda a equipe.':terminal?champion?'Reviva o último duelo e veja como seu trio conquistou o título.':'Veja o resultado e monte um novo trio para tentar de novo.':`Próximo desafio: ${run.encounters[current]?.name}`:'Dez confrontos. Um trio. Cada ação mostra quem ajudou, quem atacou e quem virou a luta.'}</p>
-        <button className="primary hero-cta" onClick={run?onContinue:onPlay}>{terminal?champion?'Ver título':'Ver resultado':run?'Continuar jornada':'Montar meu trio'}<ArrowUpRight size={20}/></button>
-        {run&&!terminal&&<button className="abandon-campaign" onClick={onAbandon}>Desistir desta jornada</button>}
-        <div className="hub-hero-stats"><span><b>{(profile.recordePontos??0).toLocaleString('pt-BR')}</b> recorde de pontos</span><span><b>{profile.victories}</b> trios campeões</span><span><b>{profile.journeys}</b> jornadas</span></div>
+  const pontosAgora=run?pontosDaJornada((run.summaries??[]).map(s=>({pontos:s.score,won:s.won}))):0;
+  const recorde=profile.recordePontos??0;
+  const rotuloDoTrio=emAndamento&&run?.team.length?'SEU TRIO EM CAMPO':profile.champion?.length?'ÚLTIMO TRIO CAMPEÃO':'MONTE UM TRIO COMO ESTE';
+
+  return <section className="home-v2">
+    <header className="hv-logo">
+      <Fx nome="raios" cor="#c8f560" ms={5200} className="hv-raios"/>
+      <Fx nome="faiscas" cor="#c8f560" ms={4200} className="hv-faiscas"/>
+      <h1><span>NEXUS</span><small>DUELO DE TRIOS</small></h1>
+    </header>
+
+    <div className="hv-trio" aria-label={rotuloDoTrio}>
+      {trio.map((id,i)=>{const c=byId[id];return <span key={id} className={`hv-medalhao m${i}`} style={{'--character':c.color,'--i':i} as CSSProperties}>
+        <Portrait character={c}/><b>{c.name}</b></span>;})}
+      <small>{rotuloDoTrio}</small>
+    </div>
+
+    <div className="hv-recorde">
+      <Crown size={18}/><span>SEU RECORDE</span><strong>{formatarPontos(recorde)}</strong><em>pontos</em>
+    </div>
+
+    <div className="hv-jogar">
+      {emAndamento?<button className="hv-cta" onClick={onContinue}>
+          <Fx nome="brilho" cor="#ffffff" ms={2600} className="hv-brilho"/>
+          <Play size={26} fill="currentColor"/><span><b>CONTINUAR</b><small>{run!.stage==='draft'?'Escolha seu trio':`Luta ${Math.min(10,completed+1)} de 10 · ${formatarPontos(pontosAgora)} pontos`}</small></span><ArrowRight size={22}/>
+        </button>
+        :<button className="hv-cta" onClick={run?onContinue:onPlay}>
+          <Fx nome="brilho" cor="#ffffff" ms={2600} className="hv-brilho"/>
+          <Play size={26} fill="currentColor"/><span><b>{run?'VER RESULTADO':'JOGAR'}</b><small>{run?`${formatarPontos(pontosAgora)} pontos nesta jornada`:'10 lutas · máximo de pontos'}</small></span><ArrowRight size={22}/>
+        </button>}
+      {emAndamento&&<div className="hv-trilha" aria-label={`${completed} de 10 lutas vencidas`}>{Array.from({length:10},(_,i)=><i key={i} className={i<completed?'ok':i===completed?'agora':''}/>)}</div>}
+      {(emAndamento||terminal)&&<div className="hv-secundarias">
+        {terminal&&<button className="secondary" onClick={onPlay}><Play size={15}/>Nova jornada</button>}
+        {emAndamento&&<button className="text-button hv-desistir" onClick={onAbandon}><LogOut size={14}/>Desistir desta jornada</button>}
+      </div>}
+    </div>
+
+    {onlineConfigured&&<section className="hv-ranqueada" aria-label="Jornada Ranqueada">
+      <span className="hv-rotulo"><Globe2 size={14}/>RANQUEADA · o mesmo desafio para todos</span>
+      <div>
+        <button onClick={()=>onRanked('daily')}><Calendar size={20}/><b>Diária</b><small>muda todo dia</small></button>
+        <button onClick={()=>onRanked('weekly')}><CalendarDays size={20}/><b>Semanal</b><small>a semana toda</small></button>
+        <button onClick={()=>onNavigate('ranking')}><Trophy size={20}/><b>Ranking</b><small>quem fez mais</small></button>
       </div>
-      <div className="hub-team"><span className="eyebrow">{terminal?champion?'TRIO CAMPEÃO':'TRIO DA JORNADA':run?.team.length?'TRIO EM CAMPO':profile.champion?.length?'ÚLTIMO TRIO CAMPEÃO':'TRIO PARA COMEÇAR'}</span><div>{trio.map((id,i)=>{const c=byId[id];return <span key={id} className={`hub-unit hub-unit-${i}`} style={{'--character':c.color} as React.CSSProperties}><Portrait character={c}/><strong>{c.name}</strong></span>})}</div><small>{terminal?champion?'Dez confrontos vencidos juntos.':`Chegou ao confronto ${(run?.index??0)+1} desta jornada.`:run?.team.length?'Seu time segue junto até o fim da jornada.':'A escolha do seu trio começa no Draft.'}</small></div>
-    </div>
-    {onlineConfigured&&<section className="ranked-callout" aria-label="Jornada Ranqueada"><div><span className="eyebrow"><Globe2 size={14}/> ARENA ONLINE</span><h2>Jornada Ranqueada</h2><p>O mesmo desafio para todos. Monte seu trio e compare seu resultado validado no ranking.</p></div><div className="ranked-callout-actions"><button className="primary" onClick={()=>onRanked('daily')}>Desafio diário <ArrowRight size={16}/></button><button className="secondary" onClick={()=>onRanked('weekly')}>Desafio semanal</button><button className="text-button" onClick={()=>onNavigate('ranking')}>Ver ranking →</button></div></section>}
-    <div className="hub-progress"><div className="section-heading"><div><span className="eyebrow"><Flag size={13}/> TRILHA DA JORNADA</span><h2>{run?`${completed} de 10 confrontos vencidos`:'Dez passos até o título'}</h2></div><span className="record">RECORDE <strong>{profile.best}<small>/10</small></strong></span></div>
-      <div className="milestones game-trail" aria-label="Progresso de dez confrontos">{Array.from({length:10},(_,i)=>{const done=run?i<completed:i<profile.best,active=i===current&&!terminal;return <div className={`${done?'complete':''} ${active?'next':''} ${i===9?'final':''}`} key={i} aria-label={`Confronto ${i+1}${done?', vencido':active?', próximo':''}`}><span>{i===9?<Trophy size={18}/>:String(i+1).padStart(2,'0')}</span></div>;})}</div>
-      <div className="trail-callout"><span>{run?terminal?'JORNADA ENCERRADA':run.stage==='draft'?'PREPARE O TRIO':'PRÓXIMO NÓ DESBLOQUEADO':'PRIMEIRO PASSO'}</span><strong>{run&&!terminal?run.encounters[current]?.name:run&&terminal?`${completed} vitórias conquistadas`:'Monte seu trio para ativar a primeira luta'}</strong></div>
-      <div className="journey-bottom"><span>{profile.journeys} jornadas · {profile.victories} trios campeões</span><button className="text-button" onClick={onPlay}>Nova jornada <ArrowRight size={15}/></button></div>
-    </div>
-    {enemies&&<div className="hub-encounter"><div><span className="eyebrow">RIVAIS DO PRÓXIMO CONFRONTO</span><h2>{run?.encounters[current].name}</h2><p>Entre na arena para descobrir como seu trio responde.</p></div><div className="hub-rivals">{enemies.map(id=><span key={id}><Portrait character={byId[id]}/><small>{byId[id].name}</small></span>)}</div></div>}
-    <div className="hub-links"><button onClick={()=>onNavigate('characters')}><Users size={20}/><span><b>Personagens</b><small>Conheça os {characters.length} lutadores</small></span><ChevronRight size={17}/></button><button onClick={()=>onNavigate('help')}><CircleHelp size={20}/><span><b>Como jogar</b><small>Aprenda a ler a batalha</small></span><ChevronRight size={17}/></button><button onClick={()=>onNavigate('conta')}><ShieldCheck size={20}/><span><b>Conta</b><small>{conta?'Entrou · joga ranqueada':'Opcional · só para o ranking'}</small></span><ChevronRight size={17}/></button><button onClick={()=>onNavigate('settings')}><Settings2 size={20}/><span><b>Configurações</b><small>Áudio, visual e jogo</small></span><ChevronRight size={17}/></button><button onClick={onInstall}><Download size={20}/><span><b>Instalar</b><small>Leve seu trio com você</small></span><ChevronRight size={17}/></button></div>
-    <p className="hub-rule"><Swords size={17}/> A vitória acontece quando o trio rival inteiro sai da luta.</p>
+    </section>}
+
+    <nav className="hv-menu" aria-label="Menu do jogo">
+      <button onClick={()=>onNavigate('characters')} style={{'--tile':'#ffb86b'} as CSSProperties}><Users size={22}/><b>Personagens</b><small>{characters.length} lutadores</small></button>
+      {!onlineConfigured&&<button onClick={()=>onNavigate('ranking')} style={{'--tile':'#ffd36b'} as CSSProperties}><Trophy size={22}/><b>Ranking</b><small>os melhores</small></button>}
+      <button onClick={()=>onNavigate('help')} style={{'--tile':'#8fd3ff'} as CSSProperties}><CircleHelp size={22}/><b>Como jogar</b><small>em 1 minuto</small></button>
+      <button onClick={()=>onNavigate('settings')} style={{'--tile':'#c3a2ff'} as CSSProperties}><Settings2 size={22}/><b>Ajustes</b><small>som e visual</small></button>
+      <button onClick={()=>onNavigate('conta')} style={{'--tile':'#86e3a8'} as CSSProperties}><ShieldCheck size={22}/><b>Conta</b><small>{conta?'conectada':'para o ranking'}</small></button>
+      <button onClick={onInstall} style={{'--tile':'#ff9a8a'} as CSSProperties}><Download size={22}/><b>Instalar</b><small>no celular</small></button>
+    </nav>
+
+    <p className="hv-numeros"><span><b>{profile.journeys}</b> jornadas</span><span><b>{profile.victories}</b> {profile.victories===1?'trio campeão':'trios campeões'}</span><span><b>{profile.best}</b>/10 melhor campanha</span></p>
   </section>;
 }
