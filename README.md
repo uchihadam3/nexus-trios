@@ -36,6 +36,8 @@ npm run preview
 
 As folhas e os manifestos de recorte estão em `public/assets/sheets/`. Retratos, habilidades, estados e ícones de interface usados pelo jogo ficam em `public/assets/` e são carregados pela interface da batalha.
 
+As origens dos retratos pesquisados estão em [docs/portrait-image-sources.md](docs/portrait-image-sources.md).
+
 ## Estrutura
 
 - `src/data/`: elenco, habilidades e estados.
