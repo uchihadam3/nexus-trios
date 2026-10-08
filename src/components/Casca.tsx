@@ -61,7 +61,10 @@ function somDoBotao(el:HTMLElement):Sound|null{
   if(el instanceof HTMLInputElement)return el.type==='checkbox'?'ui-alternar':null;
   const nome=el.getAttribute('aria-label')??'';
   if(/^Fechar/.test(nome)||el.matches('.modal-close,.id-card-close,.id-card-ok,.gs-veu'))return 'ui-fechar';
-  if(el.matches('.primary,.hv-cta,.dv-escolher,.dv-arena,.rs-cta,.gs-cta'))return 'ui-confirma';
+  // os dois momentos que mais importam na escolha do trio têm som próprio
+  if(el.matches('.dv-arena'))return 'ui-arena';
+  if(el.matches('.dv-escolher'))return 'ui-escolher';
+  if(el.matches('.primary,.hv-cta,.rs-cta,.gs-cta'))return 'ui-confirma';
   if(el.matches('.termo,.id-chip,.gs-menu,.rv-carta,.dv-retrato,[aria-haspopup]'))return 'ui-abrir';
   return 'ui-clique';
 }

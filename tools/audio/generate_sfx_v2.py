@@ -648,54 +648,115 @@ def toque(rng, v):
 # Curtos, secos e afinados na mesma tonalidade (ré): tocar botões em sequência
 # soa como parte do jogo, não como cliques soltos.
 
+def _plink(midi, seg=0.25, queda=0.08, harm=6, brilho=1.0):
+    """Nota de sintetizador limpa: harmônicos que somem do agudo para o grave
+    (o "plin" macio de menu de jogo moderno — sem sino, sem vidro)."""
+    n = n_de(seg)
+    t = np.arange(n) / SR
+    f = 440.0 * 2 ** ((midi - 69) / 12)
+    x = np.zeros(n)
+    for h in range(1, harm + 1):
+        if f * h > SR * 0.45:
+            break
+        x += np.sin(2 * math.pi * f * h * t) / h ** (1.6 - 0.4 * brilho) * np.exp(-t / (queda / h ** 0.6))
+    return x * np.minimum(1, t / 0.002)
+
+
+def _baque_menu(n, f0=110, f1=55, queda=0.07):
+    """O peso por baixo de um botão importante: seno curto que desce (sente mais do que ouve)."""
+    t = np.arange(n) / SR
+    return np.sin(2 * math.pi * np.cumsum(f1 + (f0 - f1) * np.exp(-t / 0.03)) / SR) * np.exp(-t / queda)
+
+
+# notas no tom da música (mi menor): mi, sol, si, ré
+_MI5, _SOL5, _SI5, _RE6, _MI6, _SOL6, _SI6 = 76, 79, 83, 86, 88, 91, 95
+
+
 def ui_clique(rng, v):
-    """Toque comum: um "tic" de madeira clara com uma pontinha de vidro afinada."""
-    n = n_de(0.09)
-    x = estalo(rng, n, 2500, 7000, 0.004) * 0.25
-    x += modal(n, nota(rng.choice([86, 88, 90])), rng=rng, **VIDRO) * env(n, 0.0005, 0.025) * 0.35
-    x += seno(varre(nota(62), nota(57), n, 1.0), n) * env(n, 0.0005, 0.018) * 0.3
+    """Toque comum: um "tic" macio de sintetizador, curtinho e afinado."""
+    n = n_de(0.12)
+    x = np.zeros(n)
+    poe(x, _plink(rng.choice([_MI6, _SOL6]), 0.12, 0.035, 4) * 0.5, 0)
+    poe(x, passa(ruido(rng, n_de(0.01)), 3000, 9000, 2) * env(n_de(0.01), 0.0003, 0.002) * 0.12, 0)
+    return x
+
+
+def ui_abrir(rng, v):
+    """Abre um cartão ou ficha: duas notas subindo rápidas (si → mi) com um sopro leve."""
+    n = n_de(0.34)
+    x = np.zeros(n)
+    poe(x, _plink(_SI5, 0.2, 0.06, 5) * 0.4, 0)
+    poe(x, _plink(_MI6, 0.28, 0.09, 5) * 0.45, 0.055)
+    w = n_de(0.22)
+    poe(x, assobio(rng, w, 1500, 6000, 0.9, 0.45) * sobe_e_some(w, 0.5, 1.6) * 0.12, 0)
+    return reverb(x, 0.3, 0.16, 9000)
+
+
+def ui_fechar(rng, v):
+    """Fecha: as mesmas duas notas descendo (mi → si), mais macias."""
+    n = n_de(0.28)
+    x = np.zeros(n)
+    poe(x, _plink(_MI6, 0.16, 0.05, 4) * 0.32, 0)
+    poe(x, _plink(_SI5, 0.22, 0.07, 4) * 0.34, 0.05)
+    return reverb(x, 0.25, 0.12, 8000)
+
+
+def ui_alternar(rng, v):
+    """Interruptor: um clique de encaixe e uma nota curta (sobe quando liga)."""
+    n = n_de(0.16)
+    x = np.zeros(n)
+    poe(x, passa(ruido(rng, n_de(0.012)), 1500, 6000, 2) * env(n_de(0.012), 0.0003, 0.003) * 0.25, 0)
+    poe(x, _plink(_SOL6, 0.12, 0.04, 4) * 0.35, 0.02)
     return x
 
 
 def ui_confirma(rng, v):
-    """Botão principal: duas notas subindo (ré → lá) com brilho e um "whoomp" grave por baixo."""
-    n = n_de(0.42)
+    """Botão principal: arpejo rápido mi–si–mi subindo, com peso por baixo e um brilho que fica no ar."""
+    n = n_de(0.6)
     x = np.zeros(n)
-    raiz = 74 + rng.choice([0, 2])
-    poe(x, modal(n_de(0.3), nota(raiz), rng=rng, **SINO) * env(n_de(0.3), 0.001, 0.12) * 0.22, 0)
-    poe(x, modal(n_de(0.36), nota(raiz + 7), rng=rng, **SINO) * env(n_de(0.36), 0.001, 0.16) * 0.24, 0.06)
-    poe(x, modal(n_de(0.3), nota(raiz + 19), rng=rng, **CRISTAL) * env(n_de(0.3), 0.001, 0.1) * 0.08, 0.06)
-    m = n_de(0.22)
-    poe(x, seno(varre(nota(38), nota(45), m, 0.7), m) * sobe_e_some(m, 0.25, 2.0) * 0.35, 0)
-    return reverb(x, 0.35, 0.22, 9000)
+    for k, m in enumerate((_MI5, _SI5, _MI6)):
+        poe(x, _plink(m, 0.45, 0.14 + 0.05 * k, 6, 1.2) * (0.32 + 0.06 * k), k * 0.045)
+    poe(x, _plink(_SI6, 0.4, 0.12, 3) * 0.08, 0.12)
+    poe(x, _baque_menu(n_de(0.2), 120, 60, 0.06) * 0.35, 0)
+    return reverb(x, 0.4, 0.22, 9000)
 
 
-def ui_abrir(rng, v):
-    """Abre um cartão ou menu: sopro de ar subindo e três grãos de brilho."""
-    n = n_de(0.32)
-    x = assobio(rng, n, 900, 4200, 0.8, 0.5) * sobe_e_some(n, 0.55, 1.6) * 0.32
-    x += graos(rng, n, 3, 0.08, 0.22, 3500, 7000, 0.01, 0.4) * 0.35
-    x += seno(varre(nota(69), nota(81), n, 0.7), n) * env(n, 0.01, 0.1) * 0.08
-    return reverb(x, 0.3, 0.2, 9000)
-
-
-def ui_fechar(rng, v):
-    """Fecha: o mesmo sopro descendo, mais curto, e um toque grave de encaixe."""
-    n = n_de(0.24)
-    x = assobio(rng, n, 3200, 700, 1.2, 0.5) * sobe_e_some(n, 0.3, 1.8) * 0.26
-    x += seno(varre(nota(62), nota(50), n, 1.0), n) * env(n, 0.001, 0.05) * 0.25
-    return x
-
-
-def ui_alternar(rng, v):
-    """Interruptor: dois cliques mecânicos bem próximos (liga) com um bipe curto afinado."""
-    n = n_de(0.14)
+def ui_escolher(rng, v):
+    """Escolheu o personagem (travou no trio): um acorde de sintetizador que estala,
+    o peso de um soco por baixo, um sopro e faíscas subindo — o "selecionado!" dos jogos de luta."""
+    n = n_de(0.8)
     x = np.zeros(n)
-    poe(x, estalo(rng, n_de(0.03), 1800, 6000, 0.003) * 0.4, 0)
-    poe(x, estalo(rng, n_de(0.03), 2400, 8000, 0.003) * 0.3, 0.035)
-    m = n_de(0.08)
-    poe(x, seno(nota(81 + rng.choice([0, 5])), m) * env(m, 0.001, 0.03) * 0.16, 0.035)
-    return x
+    acorde = sum(_plink(m, 0.6, 0.22, 8, 1.4) for m in (_MI5, _SOL5, _SI5)) / 3
+    poe(x, satura(acorde * 1.8, 1.6) * 0.42, 0.01)
+    poe(x, _plink(_MI6, 0.5, 0.2, 6, 1.3) * 0.22, 0.01)
+    poe(x, _baque_menu(n_de(0.3), 150, 50, 0.09) * 0.6, 0)
+    poe(x, passa(ruido(rng, n_de(0.03)), 1500, 7000, 2) * env(n_de(0.03), 0.0003, 0.008) * 0.35, 0)
+    w = n_de(0.18)
+    poe(x, assobio(rng, w, 800, 5000, 1.3, 0.45) * sobe_e_some(w, 0.85, 1.5) * 0.18, 0)
+    for k, m in enumerate((_SI6, _MI6 + 12)):                                    # duas faíscas subindo
+        poe(x, _plink(m, 0.18, 0.05, 3) * 0.1, 0.09 + 0.06 * k)
+    return reverb(x, 0.45, 0.24, 9000)
+
+
+def ui_arena(rng, v):
+    """Entrar na arena: a energia sobe (vento e um tom subindo), estoura num impacto
+    grande com um acorde de mi poderoso e um brilho metálico — o "LUTEM!"."""
+    n = n_de(1.6)
+    x = np.zeros(n)
+    sobe = n_de(0.42)
+    poe(x, assobio(rng, sobe, 300, 7000, 0.7, 0.5) * np.linspace(0, 1, sobe) ** 2 * 0.4, 0)
+    poe(x, seno(varre(nota(52), nota(76), sobe, 0.8), sobe) * np.linspace(0, 1, sobe) ** 2 * 0.1, 0)
+    em = 0.42
+    m = n_de(1.1)
+    t = np.arange(m) / SR
+    boom = np.sin(2 * math.pi * np.cumsum(38 + 90 * np.exp(-t / 0.06)) / SR) * np.exp(-t / 0.45)
+    poe(x, satura(boom * 1.4, 1.5) * 0.6, em)
+    poe(x, passa(rosa(rng, m), 60, 2500, 2) * env(m, 0.001, 0.2) * 0.35, em)
+    acorde = sum(_plink(mm, 1.0, 0.5, 9, 1.4) for mm in (52, 59, 64, 71))  # mi3, si3, mi4, si4
+    poe(x, satura(acorde * 0.9, 2.2) * 0.32, em)
+    poe(x, _plink(_MI6, 0.9, 0.4, 6, 1.3) * 0.16, em + 0.01)
+    poe(x, passa(ruido(rng, n_de(0.6)), 5000, 12000, 2) * env(n_de(0.6), 0.002, 0.18) * 0.18, em)   # o brilho do prato
+    return reverb(x, 0.6, 0.28, 8000)
 
 
 # =================================================================== registro
@@ -728,6 +789,7 @@ SONS = {
     # interface
     "ui-clique": (ui_clique, "toque num botão"), "ui-confirma": (ui_confirma, "botão principal"),
     "ui-abrir": (ui_abrir, "abrir cartão ou menu"), "ui-fechar": (ui_fechar, "fechar"), "ui-alternar": (ui_alternar, "interruptor"),
+    "ui-escolher": (ui_escolher, "personagem escolhido"), "ui-arena": (ui_arena, "entrar na arena"),
 }
 
 # Volume final de cada som (dB de RMS alvo), pela prioridade da mixagem do adendo:
@@ -743,6 +805,7 @@ ALVO_DB = {
     "cura": -24, "escudo": -23, "bloqueio": -19, "reforco": -24, "enfraquecer": -24, "purificar": -25, "dreno": -23,
     "carga-pequena": -24, "carga-grande": -19, "pronto": -24, "preparo": -25, "toque": -26,
     "ui-clique": -27, "ui-confirma": -23, "ui-abrir": -27, "ui-fechar": -28, "ui-alternar": -28,
+    "ui-escolher": -21, "ui-arena": -18,
 }
 
 
