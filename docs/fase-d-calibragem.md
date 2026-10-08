@@ -176,6 +176,19 @@ Note com Preparo 3 s (era 5,5) e Carga 7%/s (era 4). Medido com 400 lutas:
 **28,2%**. Carga mais rápida não sobe mais: com 700 de Vida ele cai por volta
 dos 20 s, e esse é o preço que a direção escolheu.
 
+**Quem é imune à Death Note.** A regra do caderno: só mata **humano** de quem
+se sabe o **nome verdadeiro**. Revisada com o dono do jogo, personagem por
+personagem. Imunes: deuses, demônios, mortos-vivos, alienígenas, máquinas,
+brinquedos, animais, e quem não tem nome próprio (Pikachu, Agente 47, Cabeça
+de Pirâmide, Doom Slayer). Metade humano conta como humano — tem nome humano
+de verdade (Ravena é Rachel Roth, Invencível é Mark Grayson). Entraram como
+imunes os shinigamis de Bleach, Nezuko, Muzan, Sukuna, Hiei, Power, Dio,
+Freeza, Piccolo, Surfista Prateado, Lion-O, Cheetara, Loki, Frieren, Rocket,
+Splinter, Mojo Jojo, Coragem e as quatro Tartarugas; passaram a vulneráveis
+Mario, Genos e Ciborgue (humanos, cérebro humano), Ravena e Invencível.
+Ficou **89 imunes e 161 vulneráveis** (eram 69 e 181). Com mais imunes, o
+Light mediu **25,3%**.
+
 **O Professor Xavier** está no fator máximo e ficou em 23% a 28%. Subiu de
 17%, mas segue embaixo: o kit dele é coordenar o trio, e a medição não vê esse
 valor. Também é decisão de design.

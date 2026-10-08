@@ -151,7 +151,8 @@ fase tem seu documento em `docs/`, com a medição que sustenta o que está aqui
   desvio entre personagens de 13,7 para 8,6 pontos e a amplitude entre
   famílias de 51,3 para 24,8. O Light ganhou a regra decidida pelo dono do
   jogo (um alvo de cada vez, Death Note com 70 de Investigação, imune uma vez
-  só) e foi de 8% para 28%, com a Vida de 700 mantida. Fica aberto o
+  só) e foi de 8% para 25%, com a Vida de 700 mantida; a lista de imunes à
+  Death Note foi revista (89 imunes, 161 vulneráveis). Fica aberto o
   **Professor Xavier** (23% a 28%): o valor dele é coordenar, e a medição não
   vê isso.
 - **Limpeza do banco**: a coluna `objectives_completed` e a tabela
