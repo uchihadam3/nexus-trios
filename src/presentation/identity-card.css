@@ -46,3 +46,6 @@
 .termo-medal b{font-size:26px;font-weight:850;color:#10170f}
 .termo-extra{margin:12px 0 0;padding:10px 12px;border-radius:12px;background:#ffffff08;border:1px solid #ffffff12;font-size:13px;line-height:1.45;color:#cfdcc9}
 .termo-card{padding-bottom:16px}
+/* identidade que o candidato traz e o trio ainda não tem */
+.id-chips .id-chip.novo{border-color:var(--id-cor);background:color-mix(in srgb,var(--id-cor),#141c18 70%);color:#fff;box-shadow:0 0 12px color-mix(in srgb,var(--id-cor),transparent 55%)}
+.id-chips .id-chip.novo::before{content:'+';font-weight:900;color:var(--id-cor);margin-right:-2px}

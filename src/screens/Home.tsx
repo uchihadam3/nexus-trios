@@ -48,11 +48,11 @@ export function Home({profile,run,conta,onPlay,onRanked,onContinue,onAbandon,onN
     </div>
 
     <div className="hv-jogar">
-      {emAndamento?<button className="hv-cta" onClick={onContinue}>
+      {emAndamento?<button className="hv-cta" onClick={onContinue} aria-label="Continuar jornada">
           <Fx nome="brilho" cor="#ffffff" ms={2600} className="hv-brilho"/>
           <Play size={26} fill="currentColor"/><span><b>CONTINUAR</b><small>{run!.stage==='draft'?'Escolha seu trio':`Luta ${Math.min(10,completed+1)} de 10 · ${formatarPontos(pontosAgora)} pontos`}</small></span><ArrowRight size={22}/>
         </button>
-        :<button className="hv-cta" onClick={run?onContinue:onPlay}>
+        :<button className="hv-cta" onClick={run?onContinue:onPlay} aria-label={run?'Ver resultado':'Montar meu trio'}>
           <Fx nome="brilho" cor="#ffffff" ms={2600} className="hv-brilho"/>
           <Play size={26} fill="currentColor"/><span><b>{run?'VER RESULTADO':'JOGAR'}</b><small>{run?`${formatarPontos(pontosAgora)} pontos nesta jornada`:'10 lutas · máximo de pontos'}</small></span><ArrowRight size={22}/>
         </button>}

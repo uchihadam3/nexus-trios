@@ -1,7 +1,7 @@
 /* Tela inicial (remake): logo vivo, trio em medalhões, recorde grande, botão JOGAR, menu de botões-ícone. */
 .home-v2>*{position:relative;z-index:1}
 .home-v2{position:relative;isolation:isolate;display:grid;gap:16px;width:min(560px,100%);margin:0 auto;padding:6px 16px 22px;color:#eef5e8;text-align:center}
-.home-v2::before{content:'';position:absolute;inset:-40px -40vw 0;z-index:0;pointer-events:none;background:radial-gradient(ellipse at 50% 8%,#c8f56022,transparent 55%),radial-gradient(ellipse at 15% 85%,#8fd3ff12,transparent 45%),radial-gradient(ellipse at 90% 70%,#ffb86b10,transparent 45%)}
+.home-v2::before{content:'';position:absolute;inset:-40px 0 0;z-index:0;pointer-events:none;background:radial-gradient(ellipse 70% 420px at 50% 6%,#c8f56022,transparent 100%),radial-gradient(ellipse 50% 300px at 15% 85%,#8fd3ff12,transparent 100%),radial-gradient(ellipse 50% 300px at 90% 70%,#ffb86b10,transparent 100%)}
 
 .hv-logo{position:relative;display:grid;place-items:center;height:96px;margin-top:4px}
 .hv-raios{width:330px;height:330px;left:50%;top:50%;translate:-50% -50%;opacity:.45}

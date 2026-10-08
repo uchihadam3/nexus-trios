@@ -1,6 +1,6 @@
-import { useState } from 'react';
-import { ArrowRight,Shuffle,Plus,Check,Info,LogOut,Sparkles } from 'lucide-react';
-import type { Draft } from '../engine/campaign';
+import type { CSSProperties } from 'react';
+import { ArrowRight,Dices,Info,LogOut,Sparkles,Swords,TriangleAlert } from 'lucide-react';
+import type { Draft,Encounter } from '../engine/campaign';
 import { byId } from '../data/characters';
 import { Portrait } from '../components/Portrait';
 import { SkillIcon } from '../components/Icon';
@@ -10,23 +10,54 @@ import { IdentityChips } from '../components/IdentityChips';
 import { ComTermos } from '../components/Termos';
 import { draftConnection } from '../presentation/draft-connections';
 
-export function DraftScreen({draft,onPick,onSkip,onDetails,onStart,onAbandon}:{draft:Draft;onPick:(id:string)=>void;onSkip:()=>void;onDetails:(id:string)=>void;onStart:()=>void;onAbandon:()=>void}){
-  const [focused,setFocused]=useState('');
+/*
+ * A escolha do trio (remake).
+ *
+ * No topo, os três espaços do trio como medalhões: o da vez pulsa, e o
+ * retrato entra com um estouro quando a escolha acontece. Embaixo, três
+ * cartas de candidato — retrato grande, as etiquetas (as que trazem algo novo
+ * para o trio brilham), a conexão com quem já foi escolhido, o traço numa
+ * linha, as habilidades e um botão ESCOLHER na cor do personagem. A barra de
+ * baixo fica sempre à mão: trocar as opções, ou, com o trio completo, entrar
+ * na arena.
+ */
+export function DraftScreen({draft,primeiroRival,onPick,onSkip,onDetails,onStart,onAbandon}:{draft:Draft;primeiroRival?:Encounter;onPick:(id:string)=>void;onSkip:()=>void;onDetails:(id:string)=>void;onStart:()=>void;onAbandon:()=>void}){
   const full=draft.team.length===3,team=draft.team.map(id=>byId[id]);
-  const identidadesDoMeuTrio=identidadesDoTrio(team),lacunas=lacunasDoTrio(team),candidates=full?draft.team:draft.candidates;
-  const spotlight=byId[candidates.includes(focused)?focused:candidates[0]];
-  const connection=spotlight&&!full?draftConnection(spotlight,team):null;
-  const novidades=spotlight&&!full?oQueAdiciona(spotlight,team):[];
-  return <section className="draft-screen">
-    <div className="screen-title draft-intro"><span className="eyebrow">DRAFT · FORME SEU TRIO</span><h1>{full?'Trio completo. Arena liberada.':'Cada escolha muda a luta.'}</h1><p>{full?'Veja a combinação que você construiu e entre no primeiro confronto.':`Escolha ${draft.team.length+1} de 3. Compare funções, veja conexões reais e monte sua equipe.`}</p></div>
-    <div className="draft-progress" aria-label={`Escolha ${Math.min(3,draft.team.length+1)} de 3`}>{Array.from({length:3},(_,i)=><div key={i} className={i<draft.team.length?'done':i===draft.team.length&&!full?'active':''}><span>{i<draft.team.length?<Check size={13}/>:i+1}</span><small>{i<draft.team.length?'ESCOLHIDO':i===draft.team.length&&!full?'ESCOLHA AGORA':'EM SEGUIDA'}</small></div>)}</div>
-    <div className="team-slots draft-team">{Array.from({length:3},(_,i)=>{const c=team[i];return <div className={`team-slot ${c?'filled':''}`} key={i} style={c?{'--character':c.color} as React.CSSProperties:undefined}>{c?<><Portrait character={c} className="tiny"/><span>{c.name}</span><Check size={16}/></>:<><Plus size={20}/><span>Espaço {i+1}</span></>}</div>;})}</div>
-    {spotlight&&!full&&<div className="draft-spotlight" style={{'--character':spotlight.color} as React.CSSProperties}><div className="draft-spotlight-art"><Portrait character={spotlight}/></div><div><span className="eyebrow">SE ENTRAR NO TRIO</span><h2>{spotlight.name}</h2><IdentityChips ids={identidadesDe(spotlight)} trio={identidadesDoMeuTrio}/><p>{connection?<><Sparkles size={15}/> <b>BOA CONEXÃO</b> · {connection}</>:<>{novidades.length>0?<>Seu trio ganha {novidades.map(x=>`+ ${x}`).join(' ')}. </>:<>Reforça o que o trio já faz. </>}{spotlight.vulnerability}</>}</p></div></div>}
-    {team.length>0&&<div className="team-kit"><strong>Seu trio já consegue</strong><IdentityChips ids={identidadesDoMeuTrio} trio={identidadesDoMeuTrio} marca="✓ "/>{lacunas.length>0&&<small>{lacunas.join(' · ')}.</small>}</div>}
-    <div className="candidate-grid">{candidates.map((id,i)=>{const c=byId[id],trait=presentTrait(c.trait);return <article className={`candidate-card ${spotlight.id===id?'spotlighted':''}`} key={id} onPointerEnter={()=>setFocused(id)} onFocusCapture={()=>setFocused(id)} onPointerDown={()=>setFocused(id)} style={{'--character':c.color,'--candidate-order':i} as React.CSSProperties}>
-      <button className="candidate-art" onClick={()=>onDetails(id)} aria-label={`Detalhes de ${c.name}`}><Portrait character={c}/><span className="candidate-universe">{c.universe}</span><span className="detail-dot"><Info size={17}/></span></button>
-      <div className="candidate-body"><span className="candidate-index">OPÇÃO {i+1}</span><h2>{c.name}</h2><IdentityChips ids={identidadesDe(c)} trio={team.length?identidadesDoMeuTrio:undefined}/><p>{c.idea}</p><small className="candidate-trait"><b>{c.trait.name}</b> · <ComTermos texto={trait.summary}/> · {trait.trigger}</small><small className="candidate-warning">{c.vulnerability}</small><div className="candidate-skills">{c.skills.map(s=><span title={s.name} key={s.id}><SkillIcon type={s.icon} characterId={c.id} skillId={s.id}/></span>)}<button className="text-button" onClick={()=>onDetails(id)}>Ver ficha <ArrowRight size={14}/></button></div>{!full&&<button className="choose-button" onClick={()=>onPick(id)}>Adicionar ao trio <Plus size={17}/></button>}</div>
-    </article>;})}</div>
-    <div className="draft-actions">{full?<button className="primary" onClick={onStart}>Entrar na arena <ArrowRight size={20}/></button>:<><button className="secondary" onClick={onSkip} disabled={draft.skips===0}><Shuffle size={17}/> Trocar candidatos <span className="count-badge">{draft.skips} pulos</span></button><p>Os três pulos são compartilhados entre todas as escolhas.</p></>}<button className="draft-abandon" onClick={onAbandon}><LogOut size={15}/>Desistir da jornada</button></div>
+  const doTrio=identidadesDoTrio(team),lacunas=lacunasDoTrio(team);
+  const vez=draft.team.length;
+
+  return <section className={`draft-v2 ${full?'completo':''}`}>
+    <header className="dv-topo">
+      <span className="dv-rotulo">{full?'TRIO COMPLETO':`ESCOLHA ${vez+1} DE 3`}</span>
+      <h1>{full?'Pronto para a arena':'Monte seu trio'}</h1>
+      <div className="dv-espacos">{[0,1,2].map(i=>{const c=team[i];return <div key={c?.id??`vazio-${i}`} className={`dv-espaco ${c?'cheio':''} ${i===vez&&!full?'vez':''}`} style={c?{'--character':c.color} as CSSProperties:undefined}>
+        {c?<><Portrait character={c}/><b>{c.name}</b></>:<><span>?</span><b>{i===vez?'escolha agora':`espaço ${i+1}`}</b></>}
+      </div>;})}</div>
+      {team.length>0&&<div className="dv-trio-faz"><IdentityChips ids={doTrio} trio={doTrio}/>{lacunas.length>0&&!full&&<small><TriangleAlert size={13}/>{lacunas.join(' · ')}</small>}</div>}
+    </header>
+
+    {!full&&<div className="dv-cartas" key={draft.candidates.join('-')}>{draft.candidates.map((id,i)=>{
+      const c=byId[id],trait=presentTrait(c.trait),novas=oQueAdiciona(c,team),conexao=draftConnection(c,team);
+      return <article key={id} className="dv-carta candidate-card" style={{'--character':c.color,'--i':i} as CSSProperties}>
+        <button className="dv-retrato" onClick={()=>onDetails(id)} aria-label={`Ficha de ${c.name}`}>
+          <Portrait character={c}/><span className="dv-universo">{c.universe}</span><span className="dv-info"><Info size={16}/></span>
+          <h2>{c.name}</h2>
+        </button>
+        <div className="dv-corpo">
+          <IdentityChips ids={identidadesDe(c)} trio={team.length?doTrio:undefined} novas={team.length?novas:undefined}/>
+          {conexao&&<p className="dv-conexao"><Sparkles size={14}/>{conexao}</p>}
+          <p className="dv-traco"><b>{c.trait.name}</b> <ComTermos texto={trait.summary}/></p>
+          <div className="dv-habilidades">{c.skills.map(s=><span key={s.id} title={s.name}><SkillIcon type={s.icon} characterId={c.id} skillId={s.id} size={30}/></span>)}<button className="text-button" onClick={()=>onDetails(id)}>Ficha</button></div>
+          <button className="dv-escolher choose-button" onClick={()=>onPick(id)} aria-label="Escolher" title={`Adicionar ${c.name} ao trio`}>ESCOLHER</button>
+        </div>
+      </article>;})}</div>}
+
+    {full&&primeiroRival&&<div className="dv-rival"><span><Swords size={15}/>PRIMEIRA LUTA</span><b>{primeiroRival.name}</b><div>{primeiroRival.team.map(id=><span key={id} style={{'--character':byId[id].color} as CSSProperties}><Portrait character={byId[id]}/><small>{byId[id].name}</small></span>)}</div></div>}
+
+    <footer className="dv-barra">
+      {full?<button className="dv-arena" onClick={onStart} aria-label="Entrar na arena"><span>ENTRAR NA ARENA</span><ArrowRight size={22}/></button>
+        :<button className="secondary dv-trocar" onClick={onSkip} disabled={draft.skips===0} aria-label="Trocar candidatos"><Dices size={19}/><span>Trocar opções</span><b>{draft.skips}</b></button>}
+      <button className="secondary dv-sair" onClick={onAbandon} aria-label="Desistir da jornada" title="Desistir da jornada"><LogOut size={18}/></button>
+    </footer>
   </section>;
 }

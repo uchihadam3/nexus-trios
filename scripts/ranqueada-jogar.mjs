@@ -37,7 +37,7 @@ console.log('▶ início · botões:', await botoes());
 await p.getByRole('button', { name: /Desafio diário/ }).first().click(); await p.waitForTimeout(3500);
 console.log('▶ montar o trio');
 for (let i = 0; i < 3; i++) {
-  await p.getByRole('button', { name: /Adicionar ao trio/ }).first().click(); await p.waitForTimeout(700);
+  await p.getByRole('button', { name: 'Escolher', exact: true }).first().click(); await p.waitForTimeout(700);
 }
 await p.screenshot({ path: `${SAIDA}/rank-1.png` });
 console.log('   botões:', await botoes());

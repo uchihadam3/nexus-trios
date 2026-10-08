@@ -51,10 +51,11 @@ function CartaoDaIdentidade({inicial,trio,onClose}:{inicial:Identidade;trio?:rea
 }
 
 /** Linha de etiquetas tocáveis. `trio` mostra no cartão se o trio já tem aquela identidade. */
-export function IdentityChips({ids,trio,marca}:{ids:readonly Identidade[];trio?:readonly Identidade[];marca?:string}){
+/** `novas`: identidades que o trio ainda não tem — brilham, porque são o que este lutador acrescenta. */
+export function IdentityChips({ids,trio,marca,novas}:{ids:readonly Identidade[];trio?:readonly Identidade[];marca?:string;novas?:readonly Identidade[]}){
   const [aberta,setAberta]=useState<Identidade|null>(null);
   return <div className="role-chips id-chips">
-    {ids.map(x=><button type="button" key={x} className="id-chip" style={{'--id-cor':corDaIdentidade(x)} as CSSProperties} aria-label={`${x}: o que é?`}
+    {ids.map(x=><button type="button" key={x} className={`id-chip ${novas?.includes(x)?'novo':''}`} style={{'--id-cor':corDaIdentidade(x)} as CSSProperties} aria-label={`${x}: o que é?`}
       onClick={e=>{e.stopPropagation();setAberta(x);}}>{marca}{x}<i aria-hidden>?</i></button>)}
     {aberta&&createPortal(<CartaoDaIdentidade inicial={aberta} trio={trio} onClose={()=>setAberta(null)}/>,document.body)}
   </div>;
