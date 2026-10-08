@@ -87,10 +87,17 @@ export function presentStatus(id:StatusId,value:number):StatusPresentation {
   const amount=Math.min(value,statuses[id].cap),percent=pct(amount),number=n(amount);
   const summary:Record<StatusId,string>={
     exposed:`Recebe +${percent} de dano`,marked:`Recebe +${percent} de dano e vira alvo preferencial`,
-    slow:`Ataca e prepara habilidades ${percent} mais devagar`,rooted:`Ataca e prepara habilidades ${percent} mais devagar; acumula separadamente com Lento`,
+    /*
+     * Lento, Preso e Acelerado mexem em duas coisas de quem os recebe: o
+     * tempo até o próximo ataque básico e a velocidade do Preparo. "Ataca e
+     * prepara habilidades 7% mais devagar", sem sujeito, logo abaixo do nome
+     * da habilidade, lia como se fosse a habilidade que atacava e preparava.
+     * Nomear as duas coisas que mudam tira a dúvida.
+     */
+    slow:`Ataque básico e Preparo ficam ${percent} mais lentos`,rooted:`Ataque básico e Preparo ficam ${percent} mais lentos · vale junto com Lento`,
     electric:`Recebe +${percent} de dano`,paralyzed:'Não ataca nem avança o Preparo',
     protected:`Recebe ${percent} menos dano${amount>=.3?'; Preparo não pode ser interrompido':''}`,
-    haste:`Ataca e prepara habilidades ${percent} mais rápido`,confused:'25% de chance do ataque básico atingir a si mesmo',
+    haste:`Ataque básico e Preparo ficam ${percent} mais rápidos`,confused:'25% de chance do ataque básico atingir a si mesmo',
     regen:`Recupera ${number} de Vida por segundo`,burning:`Perde ${number} de Vida por segundo`,
     silenced:'Não começa novas habilidades',strengthened:`Causa +${percent} de dano`,weakened:`Causa ${percent} menos dano`,
   };
