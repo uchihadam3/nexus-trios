@@ -1,7 +1,7 @@
 import { useEffect,useState } from 'react';
 import { HeartPulse,Shield } from 'lucide-react';
 import type { Battle } from '../engine/types';
-import type { Beat } from '../presentation/director';
+import { etapaDoEvento,type Beat } from '../presentation/director';
 import { fallbackPoint,type Anchors } from './BattleEffects';
 
 /*
@@ -16,14 +16,17 @@ interface Numero {id:string;uid:string;tipo:'dano'|'cura'|'escudo'|'bloqueio';va
 
 export function FloatingNumbers({battle,beat,anchors,medal,enabled}:{battle:Battle;beat:Beat|null;anchors:Anchors;medal:number;enabled:boolean}){
   const [numeros,setNumeros]=useState<Numero[]>([]);
-  const chave=beat?.impacted?beat.event.id:null;
+  /* um efeito por vez: os números de cada etapa do impacto nascem na etapa deles */
+  const etapa=beat?.impacted?(beat.etapa??3):0;
+  const chave=beat?.impacted?`${beat.event.id}-${etapa}`:null;
   useEffect(()=>{
     if(chave===null||!beat||!enabled)return;
-    const soma=(uid:string,kind:string)=>beat.events.filter(e=>e.kind===kind&&e.target===uid).reduce((t,e)=>t+(e.value??0),0);
+    const desta=beat.events.filter(e=>etapaDoEvento(beat,e)===etapa);
+    const soma=(uid:string,kind:string)=>desta.filter(e=>e.kind===kind&&e.target===uid).reduce((t,e)=>t+(e.value??0),0);
     const novos:Numero[]=[];
     for(const f of battle.fighters){
       const dano=soma(f.uid,'damage'),cura=soma(f.uid,'heal'),bloqueio=soma(f.uid,'block');
-      const escudo=beat.events.find(e=>e.target===f.uid&&e.kind==='shield'&&e.label==='Escudo');
+      const escudo=desta.find(e=>e.target===f.uid&&e.kind==='shield'&&e.label==='Escudo');
       if(dano>0)novos.push({id:`${chave}-${f.uid}-d`,uid:f.uid,tipo:'dano',valor:dano,forte:dano>=f.maxHp*.16});
       if(cura>0)novos.push({id:`${chave}-${f.uid}-c`,uid:f.uid,tipo:'cura',valor:cura,forte:cura>=f.maxHp*.16});
       if(escudo)novos.push({id:`${chave}-${f.uid}-e`,uid:f.uid,tipo:'escudo',valor:escudo.value??0,forte:false});

@@ -1,7 +1,7 @@
 import { useEffect,useRef,useState } from 'react';
 import { Shield,HeartPulse,Skull } from 'lucide-react';
 import type { Battle,Fighter,Status } from '../engine/types';
-import type { Beat } from '../presentation/director';
+import { revelado,type Beat } from '../presentation/director';
 import { PRESENTATION as P } from '../presentation/config';
 import { byId } from '../data/characters';
 import { statuses } from '../data/statuses';
@@ -71,14 +71,14 @@ function LinhaDeStatus({tipo,lista,fighter,onInspect}:{tipo:'buffs'|'debuffs';li
 export function ArenaUnit({fighter:f,battle,beat,onInspect,numbers,threatened,linkedSource=false,linkedTarget=false,atuacao}:{fighter:Fighter;battle:Battle;beat:Beat|null;onInspect:(target:InspectTarget)=>void;numbers:boolean;threatened:boolean;linkedSource?:boolean;linkedTarget?:boolean;atuacao?:UnitActing}){
   const c=byId[f.characterId],shield=f.shields.reduce((n,s)=>n+s.amount,0);
   const source=beat?.event.source===f.uid,impacted=beat?.impacted??false;
-  const hit=impacted?beat?.events.find(e=>e.target===f.uid&&e.kind==='damage'):undefined;
-  const shielded=impacted?beat?.events.find(e=>e.target===f.uid&&e.kind==='shield'&&e.label==='Escudo'):undefined;
-  const blocked=impacted?beat?.events.find(e=>e.target===f.uid&&e.kind==='block'&&(e.value??0)>=40):undefined;
-  const applied=impacted?beat?.events.find(e=>e.target===f.uid&&e.kind==='status'):undefined;
-  const discovered=impacted?beat?.events.find(e=>e.target===f.uid&&e.kind==='discovery'):undefined;
-  const knocked=impacted?beat?.events.find(e=>e.target===f.uid&&e.kind==='ko'):undefined;
-  const broken=impacted?beat?.events.find(e=>e.target===f.uid&&e.kind==='interrupt'):undefined;
-  const tempo=impacted?beat?.events.find(e=>e.target===f.uid&&e.kind==='tempo'):undefined;
+  const hit=impacted?beat?.events.find(e=>revelado(beat,e)&&e.target===f.uid&&e.kind==='damage'):undefined;
+  const shielded=impacted?beat?.events.find(e=>revelado(beat,e)&&e.target===f.uid&&e.kind==='shield'&&e.label==='Escudo'):undefined;
+  const blocked=impacted?beat?.events.find(e=>revelado(beat,e)&&e.target===f.uid&&e.kind==='block'&&(e.value??0)>=40):undefined;
+  const applied=impacted?beat?.events.find(e=>revelado(beat,e)&&e.target===f.uid&&e.kind==='status'):undefined;
+  const discovered=impacted?beat?.events.find(e=>revelado(beat,e)&&e.target===f.uid&&e.kind==='discovery'):undefined;
+  const knocked=impacted?beat?.events.find(e=>revelado(beat,e)&&e.target===f.uid&&e.kind==='ko'):undefined;
+  const broken=impacted?beat?.events.find(e=>revelado(beat,e)&&e.target===f.uid&&e.kind==='interrupt'):undefined;
+  const tempo=impacted?beat?.events.find(e=>revelado(beat,e)&&e.target===f.uid&&e.kind==='tempo'):undefined;
   const acting=source&&['basic','skill'].includes(beat?.event.kind??'');
   const preparing=!!f.cast||(source&&beat?.event.kind==='cast');
   const out=f.hp<=0,critical=!out&&f.hp/f.maxHp<=P.criticalCondition;
@@ -138,7 +138,7 @@ export function ArenaUnit({fighter:f,battle,beat,onInspect,numbers,threatened,li
     <div className="unit-skills" aria-label={`Habilidades de ${c.name}`}>{c.skills.map((s,i)=>{
       const st=f.skills[i],casting=f.cast?.skill===i,focused=source&&beat?.event.skill===i;
       const ready=impacted&&beat?.events.some(e=>e.source===f.uid&&e.kind==='ready'&&e.skill===i);
-      const assisted=impacted&&beat?.events.some(e=>e.target===f.uid&&e.source!==f.uid&&e.kind==='charge'&&e.skill===i);
+      const assisted=impacted&&beat?.events.some(e=>revelado(beat,e)&&e.target===f.uid&&e.source!==f.uid&&e.kind==='charge'&&e.skill===i);
       const mode=out?'empty':casting?'preparing':focused?(impacted?'executing':'ready'):st.cooldown>0?'cooldown':st.charge>=100?'ready':st.charge>0?'charging':'empty';
       const fill=casting?100*(f.cast!.elapsed/f.cast!.duration):st.cooldown>0?100*(1-st.cooldown/Math.max(1,s.cooldown)):st.charge;
       const label={empty:'vazia',charging:'carregando',ready:'pronta',preparing:'preparando',executing:'executando',cooldown:'em recarga'}[mode];

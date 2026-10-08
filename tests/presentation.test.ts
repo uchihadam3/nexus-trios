@@ -1,6 +1,6 @@
 import { describe,it,expect } from 'vitest';
 import { createBattle,simulate,applyEffects,updateDominion } from '../src/engine/battle';
-import { createDirection,restoreDirection,checkpointDirection,advanceDirection,type Direction,type Beat } from '../src/presentation/director';
+import { createDirection,restoreDirection,checkpointDirection,advanceDirection,visivelNaEtapa,duracaoBase,type Direction,type Beat } from '../src/presentation/director';
 import { isAreaBeat } from '../src/components/BattleEffects';
 import { PRESENTATION as P } from '../src/presentation/config';
 import { DOMINION as D } from '../src/engine/dominion-config';
@@ -72,7 +72,8 @@ describe('Direção sem alterar regras',()=>{
       if(beat.after.fighters[i].hp===0){expect(d.visible.fighters[i].hp).toBeGreaterThan(0);checkedKo++;}
      }
     }else{
-     expect(d.visible).toEqual(beat.after);
+     /* um efeito por vez: no impacto a tela mostra a primeira etapa */
+     expect(d.visible).toEqual(visivelNaEtapa(beat,beat.etapa!));
      if(beat.events.some(e=>e.kind==='ready'||e.kind==='charge'))checkedCharge++;
     }
    },frame%200<100?1:2);
@@ -108,6 +109,24 @@ describe('Direção sem alterar regras',()=>{
    if(beat.events.some(e=>e.kind==='ko'))expect(beat.after.fighters.some((f,i)=>f.hp===0&&beat.before.fighters[i].hp>0)).toBe(true);
   }
  });
+ it('um efeito por vez: golpe no rival, depois o efeito no rival, depois o apoio ao próprio trio',()=>{
+  let vistos=0;
+  for(const semente of [3,7,11,19,23]){
+   const d=createDirection(createBattle(['vision','sakura','cell'],['goku','vegeta','hulk'],semente));
+   for(let frame=0;frame<20000&&!d.complete;frame++){
+    advanceDirection(d,.04);
+    const beat=d.active;
+    if(!beat||!beat.impacted||(beat.etapas?.length??1)<2)continue;
+    const lado=beat.after.fighters.find(f=>f.uid===beat.event.source)!.side;
+    if(beat.etapa===beat.etapas![0]){
+     // na primeira etapa, nada do próprio trio mudou ainda
+     for(let i=0;i<6;i++){const f=d.visible.fighters[i]!;if(f.side===lado)expect(f.hp).toBe(beat.before.fighters[i]!.hp);}
+    }
+    if(beat.etapa===beat.etapas!.at(-1)){expect(d.visible).toEqual(beat.after);vistos++;}
+   }
+  }
+  expect(vistos).toBeGreaterThan(0);
+ });
  it('densidade de ações, skills e efeitos não altera a velocidade de cada beat',()=>{
   const battle=createBattle(a,b,42);
   for(const fighter of battle.fighters)fighter.action=.96;
@@ -141,8 +160,9 @@ describe('Direção sem alterar regras',()=>{
   expect(basics.length).toBeGreaterThan(3);
   expect(skills.length).toBeGreaterThan(1);
   expect(periodic.length).toBeGreaterThan(0);
-  expect(new Set(basics.map(beat=>beat.duration))).toEqual(new Set([P.normalSeconds]));
-  expect(new Set(skills.map(beat=>beat.duration))).toEqual(new Set([P.skillSeconds,P.grandSeconds].filter(value=>skills.some(beat=>beat.duration===value))));
+  /* o ritmo base é fixo; só as etapas do impacto (um efeito por vez) somam tempo */
+  expect(new Set(basics.map(duracaoBase))).toEqual(new Set([P.normalSeconds]));
+  expect(new Set(skills.map(duracaoBase))).toEqual(new Set([P.skillSeconds,P.grandSeconds].filter(value=>skills.some(beat=>duracaoBase(beat)===value))));
   expect(periodic.every(beat=>beat.duration>=P.periodicSeconds)).toBe(true);
  });
  it('agrega dano e cura periódicos de alvos distintos sem criar turnos de pronta/status',()=>{
@@ -183,7 +203,7 @@ describe('Direção sem alterar regras',()=>{
      expect(d.visible).toEqual(d.active!.before);
     }else{
      expect(starts).toBe(impacts+1);impacts++;
-     expect(d.visible).toEqual(d.active!.after);
+     expect(d.visible).toEqual(visivelNaEtapa(d.active!,d.active!.etapa!));
     }
    },2);
    if(finishing){expect(d.active).toBe(null);finishes++;}
@@ -223,7 +243,7 @@ describe('Direção sem alterar regras',()=>{
   const resumed=restoreDirection(initial,saved,previousFormat);
   expect(resumed).not.toBe(null);
   expect(resumed!.visible.fighters.map(f=>f.hp)).toEqual(d.visible.fighters.map(f=>f.hp));
-  expect(resumed!.active?.duration).toBe(P.normalSeconds);
+  expect(duracaoBase(resumed!.active!)).toBe(P.normalSeconds);
  });
  it('reconstrói uma batalha salva na cadência anterior',()=>{
   const initial=createBattle(a,b,42),d=createDirection(structuredClone(initial));

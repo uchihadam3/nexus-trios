@@ -4,7 +4,13 @@ import type { Battle, BattleEvent } from '../engine/types';
 import { PRESENTATION as P } from './config';
 
 export type Family='physical'|'energy'|'electric'|'fire'|'magic'|'dark'|'psychic'|'slash'|'prison'|'shield'|'heal'|'regen'|'buff'|'debuff'|'interrupt'|'ko'|'turn'|'grand';
-export interface Beat {event:BattleEvent;events:BattleEvent[];before:Battle;after:Battle;duration:number;family:Family;grand:boolean;elapsed:number;impacted:boolean;periodic?:boolean;trace?:BeatTrace}
+export interface Beat {event:BattleEvent;events:BattleEvent[];before:Battle;after:Battle;duration:number;family:Family;grand:boolean;elapsed:number;impacted:boolean;periodic?:boolean;trace?:BeatTrace;
+  /** Etapa do impacto já mostrada (0 = antes do impacto). Ver `etapaDoEvento`. */
+  etapa?:number;
+  /** As etapas que este beat tem, em ordem (1 golpe, 2 efeito no rival, 3 efeito no próprio trio). */
+  etapas?:number[];
+  /** Duração sem as etapas (o ritmo fixo da ação). */
+  base?:number}
 export interface Direction {battle:Battle;visible:Battle;queue:Beat[];active:Beat|null;simIdle:number;complete:boolean;serial:number;signals:BattleEvent[]}
 export interface PresentationCheckpoint {version?:2;battleTime:number;nextEvent:number;rng:number;visibleNextEvent:number;activeEventId:number|null;activeElapsed:number;impacted:boolean;serial:number;simIdle?:number}
 export interface Cue {event:BattleEvent;family:Family;phase:'start'|'impact';grand:boolean}
@@ -38,6 +44,59 @@ function duration(event:BattleEvent,grand:boolean){
   if(event.kind==='tempo')return P.tempoSeconds;
   return grand?P.grandSeconds:event.kind==='skill'?P.skillSeconds:P.normalSeconds;
 }
+/*
+ * Um efeito por vez.
+ *
+ * Pedido do jogador: quando uma habilidade bate, faz um Status ruim no rival e
+ * um bom no próprio trio, tudo aparecia no mesmo instante e ficava difícil de
+ * entender. O impacto agora se mostra em até três etapas:
+ *   1 · o golpe — dano, bloqueio, interrupção, nocaute;
+ *   2 · o efeito no rival — Status negativo, atraso;
+ *   3 · o efeito no próprio trio — cura, Escudo, Status positivo, Carga.
+ * Etapas vazias são puladas: um ataque simples continua com o mesmo ritmo.
+ * O motor não muda nada — é só a ordem em que a tela revela o que já aconteceu.
+ */
+export const INTERVALO_DA_ETAPA=.34;
+export function etapaDoEvento(beat:Pick<Beat,'event'|'after'>,e:BattleEvent):1|2|3{
+  const lado=beat.after.fighters.find(f=>f.uid===beat.event.source)?.side;
+  const alvo=beat.after.fighters.find(f=>f.uid===(e.target??e.source));
+  const rival=!!alvo&&!!lado&&alvo.side!==lado;
+  if(e.kind==='status'||e.kind==='tempo')return rival?2:3;
+  if(e.kind==='heal'||e.kind==='shield'||e.kind==='charge'||e.kind==='synergy'||e.kind==='ready')return rival?1:3;
+  return 1;
+}
+/** O evento já pode aparecer na tela? */
+export function revelado(beat:Beat|null|undefined,e:BattleEvent):boolean{
+  if(!beat?.impacted)return false;
+  return etapaDoEvento(beat,e)<=(beat.etapa??3);
+}
+/* O que a tela mostra numa etapa: o estado de depois, com o que ainda não foi revelado voltando ao de antes. */
+export function visivelNaEtapa(beat:Beat,etapa:number):Battle{
+  const ultima=beat.etapas?.at(-1)??1;
+  if(etapa>=ultima)return beat.after;
+  const v=structuredClone(beat.after),lado=beat.after.fighters.find(f=>f.uid===beat.event.source)?.side;
+  v.fighters.forEach((f,i)=>{
+    const antes=beat.before.fighters[i];if(!antes)return;
+    const rival=f.side!==lado;
+    if(!rival&&etapa<3){f.hp=antes.hp;f.shields=structuredClone(antes.shields);f.statuses=structuredClone(antes.statuses);f.skills=f.skills.map((s,k)=>({...s,charge:antes.skills[k]?.charge??s.charge}));}
+    if(rival&&etapa<2)f.statuses=structuredClone(antes.statuses);
+  });
+  return v;
+}
+/** A duração do golpe sem o tempo das etapas: o ritmo de cada ação continua fixo. */
+export const duracaoBase=(beat:Beat)=>beat.base??beat.duration;
+/** Em que etapa o impacto está, pelo tempo já passado do beat. */
+function etapaNoTempo(beat:Beat):number{
+  const etapas=beat.etapas??[1],impacto=duracaoBase(beat)*P.impactAt;
+  let i=0;while(i<etapas.length-1&&beat.elapsed>=impacto+INTERVALO_DA_ETAPA*(i+1)-1e-8)i++;
+  return etapas[i]!;
+}
+function etapasDe(beat:Beat):number[]{
+  if(!['basic','skill'].includes(beat.event.kind))return [1];
+  const presentes=new Set<number>(beat.events.map(e=>etapaDoEvento(beat,e)));presentes.add(1);
+  return [1,2,3].filter(x=>presentes.has(x));
+}
+
 export function createDirection(battle:Battle):Direction {
   return {battle,visible:structuredClone(battle),queue:[],active:null,simIdle:0,complete:false,serial:0,signals:[]};
 }
@@ -47,7 +106,10 @@ function makeBeat(event:BattleEvent,events:BattleEvent[],before:Battle,after:Bat
   const grand=event.kind==='skill'&&prep>=P.grandPreparation;
   const auxiliary=event.kind==='ready'||event.kind==='status';
   const seconds=previous?(periodic?.55:auxiliary?.5:duration(event,grand)):periodic?P.periodicSeconds:duration(event,grand);
-  return {event,events,before,after,duration:seconds,family:familyOf(event,after),grand,elapsed:0,impacted:false,periodic};
+  const beat:Beat={event,events,before,after,duration:seconds,family:familyOf(event,after),grand,elapsed:0,impacted:false,periodic,etapa:0,base:seconds};
+  beat.etapas=etapasDe(beat);
+  beat.duration+=INTERVALO_DA_ETAPA*(beat.etapas.length-1);
+  return beat;
 }
 function collect(d:Direction,events:BattleEvent[],before:Battle,after:Battle,legacy=false,previous=false){
   if(!events.length)return;
@@ -113,7 +175,8 @@ export function restoreDirection(initial:Battle,saved:Battle,checkpoint:Presenta
     d.active=d.queue[index];d.queue=d.queue.slice(index+1);
     d.active.elapsed=Math.min(d.active.duration,Math.max(0,checkpoint.activeElapsed));
     d.active.impacted=checkpoint.impacted;
-    d.visible=d.active.impacted?d.active.after:d.active.before;
+    if(d.active.impacted)d.active.etapa=etapaNoTempo(d.active);
+    d.visible=d.active.impacted?visivelNaEtapa(d.active,d.active.etapa!):d.active.before;
   }else{
     const pending=d.queue.findIndex(beat=>beat.after.nextEvent>checkpoint.visibleNextEvent);
     const completed=pending<0?d.queue.length:pending;
@@ -131,14 +194,22 @@ export function advanceDirection(d:Direction,seconds:number,onCue?:(cue:Cue)=>vo
   const elapsed=Math.min(P.renderIntervalMs/1000,Math.max(0,seconds))*speed;d.signals=[];
   if(d.complete||elapsed===0)return;
   if(d.active){
-    const beat=d.active,limit=beat.impacted?beat.duration:beat.duration*P.impactAt;
+    const beat=d.active;
+    const impacto=duracaoBase(beat)*P.impactAt;
+    const limit=beat.impacted?beat.duration:impacto;
     beat.elapsed=Math.min(limit,beat.elapsed+elapsed);
+    const etapas=beat.etapas??[1];
     if(!beat.impacted&&beat.elapsed>=limit-1e-8){
-      beat.impacted=true;
+      beat.impacted=true;beat.etapa=etapas[0];
       if(beat.trace)beat.trace.realImpact=performance.now();
-      d.visible=beat.after;
-      d.signals.push(...beat.events);
+      d.visible=visivelNaEtapa(beat,beat.etapa!);
+      d.signals.push(...beat.events.filter(e=>etapaDoEvento(beat,e)<=beat.etapa!));
       onCue?.({event:beat.event,family:beat.family,phase:'impact',grand:beat.grand});
+    }else if(beat.impacted&&(beat.etapa??3)<etapas.at(-1)!&&beat.elapsed>=impacto+INTERVALO_DA_ETAPA*(etapas.indexOf(beat.etapa!)+1)-1e-8){
+      /* a próxima etapa do impacto: um efeito por vez */
+      const anterior=beat.etapa!;beat.etapa=etapas[etapas.indexOf(anterior)+1];
+      d.visible=visivelNaEtapa(beat,beat.etapa!);
+      d.signals.push(...beat.events.filter(e=>{const x=etapaDoEvento(beat,e);return x>anterior&&x<=beat.etapa!;}));
     }else if(beat.impacted&&beat.elapsed>=beat.duration-1e-8){
       if(beat.trace){beat.trace.realFinish=performance.now();onTrace?.(beat.trace);}
       d.active=null;
@@ -160,7 +231,7 @@ export function advanceDirection(d:Direction,seconds:number,onCue?:(cue:Cue)=>vo
     if(onTrace){
       const fighter=d.active.before.fighters.find(f=>f.uid===d.active!.event.source);
       const intensity=(id:string)=>fighter?.statuses.find(s=>s.id===id)?.intensity??0;
-      d.active.trace={eventId:d.active.event.id,kind:d.active.event.kind,duration:d.active.duration,realStart:performance.now(),realImpact:null,realFinish:null,speed,queueLength:d.queue.length,battleTime:d.active.before.time,source:d.active.event.source,haste:intensity('haste'),slow:intensity('slow'),rooted:intensity('rooted'),shifts:d.active.events.filter(e=>e.kind==='tempo').map(e=>({target:e.target??'',value:e.value??0}))};
+      d.active.trace={eventId:d.active.event.id,kind:d.active.event.kind,duration:duracaoBase(d.active),realStart:performance.now(),realImpact:null,realFinish:null,speed,queueLength:d.queue.length,battleTime:d.active.before.time,source:d.active.event.source,haste:intensity('haste'),slow:intensity('slow'),rooted:intensity('rooted'),shifts:d.active.events.filter(e=>e.kind==='tempo').map(e=>({target:e.target??'',value:e.value??0}))};
     }
     d.visible=d.active.before;
     onCue?.({event:d.active.event,family:d.active.family,phase:'start',grand:d.active.grand});
