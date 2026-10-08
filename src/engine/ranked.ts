@@ -4,7 +4,8 @@ import {generateCampaign} from './campaign';
 import {emptyTally,tallyEvents} from './progression';
 import {summarizeBattle,type RunBattleSummary} from './run-summary';
 
-export const ENGINE_VERSION='nexus-250.3';
+/* 250.4: Preparo mínimo de 0,5 s (leve), efeitos repetidos somados, condições alcançáveis. */
+export const ENGINE_VERSION='nexus-250.4';
 export const BALANCE_VERSION='season-1';
 export const rosterFingerprint=()=>{
   const data=characters.map(c=>[c.id,c.hp,c.interval,c.basic,c.trait,c.skills]);

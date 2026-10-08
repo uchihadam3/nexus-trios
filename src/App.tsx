@@ -23,7 +23,7 @@ import { addSynergies,summarizeBattle } from './engine/run-summary';
 import { acumularFeitos,fecharFeitos,feitosVazios } from './engine/maestria';
 import { acumularRaioX,raioXVazio } from './engine/raio-x';
 import {battleDelta,emptyProgress,emptyTally,recordProgress,tallyEvents} from './engine/progression';
-import {runDigest} from './engine/ranked';
+import {runDigest,ENGINE_VERSION,rosterFingerprint } from './engine/ranked';
 import {carregarCliente,googleConfigured,haSessaoOuRetorno,onlineCall,onlineConfigured} from './lib/online';
 import {criarAutenticacaoPreguicosa,type Conta} from './lib/auth';
 import {AccountScreen} from './screens/AccountScreen';
@@ -59,8 +59,19 @@ export default function App(){
   const changeSettings=(next:Settings)=>{battleAudio.configure(next);setSettings(next);save('settings',next);};
   const navigate=(next:Screen)=>{if(next!=='game')setPaused(true);setScreen(next);setMenu(false);window.scrollTo(0,0);};
   const prepareRanked=async(mode:'daily'|'weekly')=>{
-    const response=await onlineCall<{challenge:{seed:number};banned:string[]}>('challenge',{mode});
-    const seed=response.challenge.seed;
+    const response=await onlineCall<{challenge:{seed:number;engine_version?:string;roster_fingerprint?:string};banned:string[]}>('challenge',{mode});
+    /*
+     * O servidor refaz as 10 lutas com a cópia do motor que ele tem. Se as
+     * regras do jogo mudaram e o servidor ainda não foi atualizado, o
+     * resultado não bateria e a jornada inteira terminaria "não validada".
+     * Melhor avisar antes de começar.
+     */
+    const c=response.challenge;
+    if((c.engine_version&&c.engine_version!==ENGINE_VERSION)||(c.roster_fingerprint&&c.roster_fingerprint!==rosterFingerprint())){
+      setOnlineNotice('O ranking está sendo atualizado para as regras novas do jogo. Enquanto isso, jogue a Jornada normal — o ranqueado volta assim que o servidor for atualizado.');
+      return;
+    }
+    const seed=c.seed;
     changeRun({seed,team:[],encounters:generateCampaign(seed),index:0,stage:'draft',draft:newDraft(seed,response.banned),battle:null,recorded:false,summaries:[],ranked:{mode,status:'draft'}});
     setConfirmNew(false);setConfirmAbandon(false);setPendingMode(null);setPaused(false);navigate('game');
   };
