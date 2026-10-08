@@ -36,7 +36,8 @@ describe('ficha agrupada por alvo', () => {
 
   it('nenhuma linha agrupada repete o alvo do cabeçalho', () => {
     for (const { c, s, p } of todas) for (const g of p.grupos) for (const l of g.linhas) {
-      expect(l.texto, `${c.name} · ${s.name}`).not.toMatch(/^Aplica /);
+      /* "Aplica Lento" sim; "Aplica Lento no inimigo mais ferido" não — o alvo está no cabeçalho. */
+      expect(l.texto, `${c.name} · ${s.name}`).not.toMatch(/^Aplica \S+ (em|no|nos|na) /);
       expect(l.texto, `${c.name} · ${s.name}`).not.toContain(' → ');
     }
   });
@@ -96,7 +97,7 @@ describe('ficha agrupada por alvo', () => {
   it('o valor do Status vem logo depois do nome dele', () => {
     const [g] = agruparEfeitos([{ kind: 'status', status: 'exposed', value: 0.12, duration: 5 }], 'enemyWeak');
     const [nome, oQueFaz] = g.linhas[0].partes;
-    expect(nome).toBe('Exposto');
+    expect(nome).toBe('Aplica Exposto');
     expect(oQueFaz).toContain('12%');
   });
 });

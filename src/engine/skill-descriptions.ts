@@ -88,21 +88,21 @@ export function presentStatus(id:StatusId,value:number):StatusPresentation {
   const summary:Record<StatusId,string>={
     exposed:`Recebe +${percent} de dano`,marked:`Recebe +${percent} de dano e vira alvo preferencial`,
     /*
-     * Lento, Preso e Acelerado: "fica X% mais lento", no estilo do Exposto
-     * ("Recebe +16% de dano") — o verbo descreve quem recebeu o Status, e o
-     * cabeçalho do grupo diz quem é.
+     * Lento, Preso e Acelerado: "7% mais lento para agir" — agir é dar o
+     * próximo golpe e preparar habilidades, sem usar a palavra "ataque". Na ficha a
+     * linha começa com "Aplica Lento", que já diz que a habilidade põe um
+     * efeito no alvo — e não que ela própria ataca ou age.
      *
      * Duas redações caíram antes desta. "Ataca e prepara habilidades 7% mais
      * devagar", sem sujeito, lia como se a habilidade atacasse. "Ataque básico
-     * e Preparo ficam 7% mais lentos" ainda tinha a palavra "ataque" e fazia
-     * a mesma confusão numa habilidade que não causa dano nenhum. O que "mais
-     * lento" quer dizer — o próximo golpe e o Preparo demoram mais — fica na
-     * legenda do Status, com o sujeito escrito.
+     * e Preparo ficam 7% mais lentos" ainda tinha "ataque" e fazia a mesma
+     * confusão numa habilidade sem dano nenhum. O que "mais lento" quer dizer
+     * — o próximo golpe e o Preparo demoram mais — fica na legenda do Status.
      */
-    slow:`Fica ${percent} mais lento`,rooted:`Fica ${percent} mais lento · vale junto com Lento`,
+    slow:`${percent} mais lento para agir`,rooted:`${percent} mais lento para agir · vale junto com Lento`,
     electric:`Recebe +${percent} de dano`,paralyzed:'Não ataca nem avança o Preparo',
     protected:`Recebe ${percent} menos dano${amount>=.3?'; Preparo não pode ser interrompido':''}`,
-    haste:`Fica ${percent} mais rápido`,confused:'25% de chance do ataque básico atingir a si mesmo',
+    haste:`${percent} mais rápido para agir`,confused:'25% de chance do ataque básico atingir a si mesmo',
     regen:`Recupera ${number} de Vida por segundo`,burning:`Perde ${number} de Vida por segundo`,
     silenced:'Não começa novas habilidades',strengthened:`Causa +${percent} de dano`,weakened:`Causa ${percent} menos dano`,
   };
@@ -145,7 +145,12 @@ const maiuscula=(t:string):string=>t.charAt(0).toUpperCase()+t.slice(1);
 export function partesDoEfeito(effect:Effect,defaultTarget:Target):string[]{
   if(effect.kind!=='status')return [presentEffect(effect,defaultTarget,'agrupado')];
   const p=presentStatus(effect.status,effect.value);
-  return [statuses[effect.status].name,p.summary,...(p.accumulation?[p.accumulation]:[]),secs(effect.duration)];
+  /*
+   * "Aplica <Status>", como pediu o jogador e como o documento da direção
+   * manda: sem o verbo, "Lento · 7% mais lento" lia como se a habilidade
+   * fosse lenta. O alvo continua no cabeçalho do grupo, então não se repete.
+   */
+  return [`Aplica ${statuses[effect.status].name}`,p.summary,...(p.accumulation?[p.accumulation]:[]),secs(effect.duration)];
 }
 const linhaDe=(effect:Effect,defaultTarget:Target):LinhaDeEfeito=>{
   const partes=partesDoEfeito(effect,defaultTarget);
@@ -251,7 +256,7 @@ export function presentEffect(effect:Effect,defaultTarget:Target,modo:ModoDeAlvo
        * claro que **cada habilidade aplica a sua própria dose** — e o teto diz
        * até onde as doses somam.
        */
-      if(modo==='agrupado')return [statuses[effect.status].name,p.summary,...(p.accumulation?[p.accumulation]:[]),secs(effect.duration)].join(' · ');
+      if(modo==='agrupado')return [`Aplica ${statuses[effect.status].name}`,p.summary,...(p.accumulation?[p.accumulation]:[]),secs(effect.duration)].join(' · ');
       const emQuem=targetNamesEm[effect.target??defaultTarget];
       return `Aplica ${statuses[effect.status].name} ${emQuem} · ${p.summary}${acumula} · ${secs(effect.duration)}`;
     }
