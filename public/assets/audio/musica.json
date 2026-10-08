@@ -1,0 +1,43 @@
+{
+ "bpm": 84,
+ "compassos": 64,
+ "segundos": 182.857,
+ "secoes": [
+  {
+   "nome": "A",
+   "inicio": 0.0
+  },
+  {
+   "nome": "B",
+   "inicio": 45.714
+  },
+  {
+   "nome": "C",
+   "inicio": 91.429
+  },
+  {
+   "nome": "A2",
+   "inicio": 137.143
+  }
+ ],
+ "camadas": {
+  "musica-base": {
+   "arquivo": "musica-base.ogg",
+   "segundos": 182.857,
+   "bytes": 1510877,
+   "rmsDb": -17.0
+  },
+  "musica-pulso": {
+   "arquivo": "musica-pulso.ogg",
+   "segundos": 182.857,
+   "bytes": 1545520,
+   "rmsDb": -32.2
+  },
+  "musica-tema": {
+   "arquivo": "musica-tema.ogg",
+   "segundos": 182.857,
+   "bytes": 727782,
+   "rmsDb": -25.5
+  }
+ }
+}

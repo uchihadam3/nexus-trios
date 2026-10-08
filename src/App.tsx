@@ -14,6 +14,7 @@ import { generateCampaign,newDraft,pickDraft,skipDraft } from './engine/campaign
 import type { ResultadoTop3 } from './lib/top3';
 import { defaults,loadProfile,loadRun,loadSettings,resetStorage,save,storageAvailable } from './lib/storage';
 import type { Run,Settings } from './lib/storage';
+import { PRIORIDADE } from './audio/cues';
 import { battleAudio } from './lib/audio';
 import { createDirection,restoreDirection,checkpointDirection,advanceDirection,type Direction,type Beat,type BeatTrace } from './presentation/director';
 import { PRESENTATION as P } from './presentation/config';
@@ -117,9 +118,10 @@ export default function App(){
       advanceDirection(d,elapsed,cue=>{
         if(cue.phase==='impact'&&d.active){
           const special=d.active.events.find(e=>e.kind==='ko')??d.active.events.find(e=>e.kind==='interrupt')??d.active.events.find(e=>e.kind==='block')??d.active.events.find(e=>e.kind==='turn');
-          if(special)battleAudio.sound(special.kind==='interrupt'?(special.label.includes('atrasada')?'interrupt':'shatter'):special.kind==='block'?'block':special.kind==='ko'?'ko':'turn',4);
-          else battleAudio.cue(cue);
-        }else battleAudio.cue(cue);
+          // eventos que pedem som próprio: interrupção, bloqueio, nocaute, virada; o golpe do beat toca junto
+          if(special){const pan=0,chave=special.id;battleAudio.sound(special.kind==='interrupt'?'interrupcao':special.kind==='block'?'bloqueio':special.kind==='ko'?'nocaute':'virada',special.kind==='block'?PRIORIDADE.apoio:PRIORIDADE.importante,pan,chave);if(special.kind!=='turn')battleAudio.cue(cue,d.visible);}
+          else battleAudio.cue(cue,d.visible);
+        }else battleAudio.cue(cue,d.visible);
       },settings.speed,import.meta.env.DEV?trace=>{
         const devWindow=window as Window & {__nexusBeatTrace?:BeatTrace[]};
         const history=devWindow.__nexusBeatTrace??=[];
@@ -127,9 +129,9 @@ export default function App(){
       }:undefined);
       const fighters=d.visible.fighters,critical=fighters.filter(f=>f.hp>0&&f.hp/f.maxHp<.34).length,casts=fighters.filter(f=>f.hp>0&&f.cast).length;
       battleAudio.setMood({heat:Math.min(1,.15+critical*.13+casts*.17+Math.abs(d.visible.dominion)/150),pressure:d.visible.dominion/100,time:Math.min(1,d.visible.time/120)});
-      if(Math.abs(d.visible.dominion-lastDominionSound.current)>=20){battleAudio.sound('dominion',2);lastDominionSound.current=d.visible.dominion;}
+      if(Math.abs(d.visible.dominion-lastDominionSound.current)>=20){battleAudio.sound('toque',PRIORIDADE.interface);lastDominionSound.current=d.visible.dominion;}
       const ready=d.signals.find(e=>e.id>lastAudio.current&&e.kind==='ready');
-      if(ready)battleAudio.sound('ready',1);
+      if(ready)battleAudio.sound('pronto',PRIORIDADE.interface,0,ready.id);
       if(d.signals.length)lastAudio.current=Math.max(lastAudio.current,...d.signals.map(e=>e.id));
       setPresentation({battle:d.visible,beat:d.active?{...d.active}:null});
       const battleSynergies=d.signals.length?addSynergies(current.battleSynergies??[],d.signals):current.battleSynergies??[];
@@ -171,7 +173,7 @@ export default function App(){
             const n={...p,best:Math.max(p.best,current.index+(won?1:0)),wins:p.wins+(won?1:0),victories:p.victories+Number(champion),champion:champion?[...current.team]:p.champion,progress};
             save('profile',n);return n;
           });
-          battleAudio.sound(won?'victory':'defeat',5);}
+          battleAudio.sound(won?'vitoria':'derrota',PRIORIDADE.grand);}
         save('run',next);
       }
       runRef.current=next;setRun(next);
@@ -196,7 +198,7 @@ export default function App(){
     })();
   },[run?.stage,run?.index,run?.battle?.winner,run?.ranked?.status,run?.ranked?.id]);
   useEffect(()=>{battleAudio.configure(settings);},[settings]);
-  useEffect(()=>{battleAudio.setBattle(screen==='game'&&run?.stage==='battle'&&!paused&&!details&&!confirmNew&&!confirmAbandon);return()=>battleAudio.setBattle(false);},[screen,run?.stage,paused,details,confirmNew,confirmAbandon]);
+  useEffect(()=>{battleAudio.setBattle(screen==='game'&&run?.stage==='battle'&&!paused&&!details&&!confirmNew&&!confirmAbandon,run?`${run.seed}-${run.index}`:undefined);return()=>battleAudio.setBattle(false);},[screen,run?.stage,run?.seed,run?.index,paused,details,confirmNew,confirmAbandon]);
   const install=async()=>{if(installEvent){await installEvent.prompt();const choice=await installEvent.userChoice;setInstallEvent(null);if(choice.outcome!=='accepted')setInstallHelp(true);}else setInstallHelp(true);};
   /*
    * A conta vive fora do React: o Supabase mantém a sessão no armazenamento

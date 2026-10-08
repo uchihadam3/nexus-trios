@@ -1,18 +1,64 @@
-/** Reusable offline banks; every file holds three deterministic takes. */
-export type Sound='action'|'physical'|'energy'|'electric'|'fire'|'magic'|'dark'|'psychic'|'slash'|'prison'|'impact'|'block'|'shield'|'heal'|'regen'|'buff'|'debuff'|'interrupt'|'ready'|'prepare'|'shatter'|'ko'|'dominion'|'turn'|'victory'|'defeat'|'energy-shot'|'energy-charge'|'electric-charge'|'fire-cast'|'magic-cast'|'grand-charge'|'grand-impact';
-export interface CueAsset {file:string;duration:number}
-const cue=(file:string,duration:number):CueAsset=>({file,duration});
-export const CUE_ASSETS:Record<Sound,CueAsset>={
-  action:cue('physical-light',.28),physical:cue('physical-heavy',.46),impact:cue('physical-heavy',.46),
-  energy:cue('energy-impact',.48),electric:cue('electric',.4),fire:cue('fire',.48),
-  magic:cue('magic',.5),psychic:cue('magic',.5),dark:cue('dark-control',.5),
-  slash:cue('slash',.38),prison:cue('dark-control',.5),block:cue('shield',.45),shield:cue('shield',.45),
-  heal:cue('heal-buff',.58),regen:cue('heal-buff',.58),buff:cue('heal-buff',.58),debuff:cue('dark-control',.5),
-  interrupt:cue('interrupt',.3),ready:cue('energy-charge',.55),prepare:cue('energy-charge',.55),
-  shatter:cue('interrupt',.3),ko:cue('ko',.65),dominion:cue('magic',.5),turn:cue('magic',.5),
-  victory:cue('victory',1.05),defeat:cue('defeat',.95),
-  'energy-shot':cue('energy-shot',.36),'energy-charge':cue('energy-charge',.55),
-  'electric-charge':cue('electric',.4),'fire-cast':cue('fire',.48),
-  'magic-cast':cue('magic',.5),'grand-charge':cue('energy-charge',.55),'grand-impact':cue('grand',.76),
+/*
+ * A biblioteca de efeitos sonoros (adendo, parte 6).
+ *
+ * Os sons são gerados em Python (tools/audio/generate_sfx_v2.py): cada arquivo
+ * MP3 guarda 4 versões do mesmo som; public/assets/audio/sfx/manifest.json diz
+ * onde cada versão começa e quanto dura. Aqui ficam só os nomes e a ligação de
+ * cada família de efeito visual (src/presentation/vfxProfiles.ts) com o som que
+ * combina com ela: o que toca na saída (o disparo, o feixe, a carga) e o que
+ * toca no impacto.
+ */
+import type { VfxFamily } from '../presentation/vfxProfiles';
+
+export const SONS = [
+  'soco-leve', 'soco-pesado', 'esmagar', 'gancho', 'multi-golpe', 'terremoto', 'onda-choque',
+  'corte', 'corte-pesado', 'estocada', 'corte-giratorio', 'lamina-energia',
+  'disparo', 'tiro', 'saraivada', 'missil', 'explosao', 'carga-pequena', 'carga-grande', 'feixe', 'impacto-energia',
+  'raio', 'fogo', 'gelo', 'vento', 'agua', 'terra', 'veneno',
+  'psiquico', 'sombra', 'luz', 'portal', 'maldicao', 'prisao', 'selo', 'distorcao',
+  'cura', 'escudo', 'bloqueio', 'reforco', 'enfraquecer', 'purificar', 'dreno',
+  'interrupcao', 'pronto', 'preparo', 'grand-carga', 'grand-impacto', 'nocaute', 'vitoria', 'derrota', 'virada',
+  'transformacao', 'toque',
+] as const;
+export type Sound = typeof SONS[number];
+
+/*
+ * Prioridade da mixagem, do adendo: grand > impacto importante > interrupção >
+ * ataque básico > buff/debuff > interface. Quando há som demais ao mesmo tempo,
+ * o de prioridade menor é o que sai.
+ */
+export const PRIORIDADE = { grand: 5, importante: 4, habilidade: 3, basico: 2, apoio: 1.5, interface: 1 } as const;
+
+interface SomDaFamilia {
+  /** Toca quando o golpe sai (disparo, feixe, lâmina), sincronizado com a viagem. */
+  saida?: Sound;
+  /** Toca no começo do Preparo de uma habilidade desta família. */
+  preparo?: Sound;
+  impacto: Sound;
+}
+
+export const SOM_DA_FAMILIA: Record<VfxFamily, SomDaFamilia> = {
+  soco: { impacto: 'soco-leve' }, golpe_pesado: { impacto: 'soco-pesado' }, esmagar: { impacto: 'esmagar' },
+  gancho: { impacto: 'gancho' }, terremoto: { impacto: 'terremoto' }, onda_de_choque: { impacto: 'onda-choque' },
+  rajada_de_golpes: { impacto: 'multi-golpe' },
+  corte: { impacto: 'corte' }, corte_diagonal: { impacto: 'corte' }, corte_cruzado: { impacto: 'corte-pesado' },
+  estocada: { impacto: 'estocada' }, corte_giratorio: { impacto: 'corte-giratorio' },
+  corte_de_energia: { saida: 'lamina-energia', impacto: 'corte-pesado' },
+  tiro: { saida: 'tiro', impacto: 'soco-leve' }, saraivada: { saida: 'saraivada', impacto: 'multi-golpe' },
+  missil: { saida: 'missil', impacto: 'explosao' }, esfera: { saida: 'disparo', impacto: 'impacto-energia' },
+  esfera_carregada: { preparo: 'carga-grande', saida: 'disparo', impacto: 'explosao' },
+  feixe: { saida: 'feixe', impacto: 'impacto-energia' }, feixe_pesado: { preparo: 'carga-grande', saida: 'feixe', impacto: 'explosao' },
+  explosao: { impacto: 'explosao' }, onda_de_energia: { saida: 'lamina-energia', impacto: 'onda-choque' },
+  fogo: { impacto: 'fogo' }, gelo: { impacto: 'gelo' }, raio: { impacto: 'raio' }, vento: { impacto: 'vento' },
+  agua: { impacto: 'agua' }, terra: { impacto: 'terra' }, veneno: { impacto: 'veneno' }, sombra: { impacto: 'sombra' },
+  luz: { impacto: 'luz' }, selo: { impacto: 'selo' }, prisao: { impacto: 'prisao' }, distorcao: { impacto: 'distorcao' },
+  portal: { impacto: 'portal' }, telecinese: { impacto: 'psiquico' }, maldicao: { impacto: 'maldicao' },
+  cura: { impacto: 'cura' }, escudo: { impacto: 'escudo' }, reforco: { impacto: 'reforco' }, dreno: { saida: 'dreno', impacto: 'enfraquecer' },
+  execucao: { preparo: 'grand-carga', impacto: 'grand-impacto' },
 };
-export const CUE_FILES=[...new Set(Object.values(CUE_ASSETS).map(asset=>asset.file)),'projectile'];
+
+/* Famílias de apoio entram com prioridade de apoio na mixagem. */
+export const FAMILIAS_DE_APOIO = new Set<VfxFamily>(['cura', 'escudo', 'reforco', 'selo', 'maldicao', 'distorcao', 'portal']);
+
+export interface SomManifesto { arquivo: string; versoes: number[]; duracoes: number[]; bytes: number; descricao: string }
+export interface Manifesto { taxa: number; versoes: number; sons: Record<Sound, SomManifesto> }

@@ -1,13 +1,14 @@
 import { describe,expect,it } from 'vitest';
 import { readFileSync,readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
-import { CUE_ASSETS,CUE_FILES } from '../src/audio/cues';
+import { SOM_DA_FAMILIA,SONS,type Manifesto } from '../src/audio/cues';
 import { FAMILIAS,VFX_FAMILIES,folhasUsadas,hsl,profileFor } from '../src/presentation/vfxProfiles';
 import { characters } from '../src/data/characters';
 
 const root=process.cwd();
 const familias=JSON.parse(readFileSync(resolve(root,'public/assets/vfx/familias/manifest.json'),'utf8')) as Record<string,{quadros:number;grade:[number,number];tamanho:[number,number];laco:boolean;bytes:number}>;
-const sfx=JSON.parse(readFileSync(resolve(root,'public/assets/audio/sfx/manifest.json'),'utf8')) as {sampleRate:number;variants:number;sounds:Record<string,{file:string;duration:number;variantOffsets:number[]}>};
+const sfx=JSON.parse(readFileSync(resolve(root,'public/assets/audio/sfx/manifest.json'),'utf8')) as Manifesto;
+const musica=JSON.parse(readFileSync(resolve(root,'public/assets/audio/musica.json'),'utf8')) as {bpm:number;compassos:number;segundos:number;secoes:{nome:string;inicio:number}[];camadas:Record<string,{arquivo:string;bytes:number;rmsDb:number}>};
 
 describe('compact reusable audiovisual library',()=>{
   it('ships the Python-drawn family sheets: 3×4, transparent WebP, all used, within budget',()=>{
@@ -58,17 +59,33 @@ describe('compact reusable audiovisual library',()=>{
     // a mesma família muda de cor com o personagem
     expect(profileFor('vegeta',0)?.family).toBe('feixe_pesado');expect(profileFor('vegeta',0)?.color).not.toBe(profileFor('goku',0)?.color);
   });
-  it('keeps three deterministic, decoded-ahead WAV variants within budget',()=>{
-    expect(sfx.sampleRate).toBe(22050);expect(sfx.variants).toBe(3);
-    expect(Object.keys(sfx.sounds).sort()).toEqual(CUE_FILES.sort());
-    let bytes=0;
-    for(const asset of Object.values(CUE_ASSETS))expect(sfx.sounds[asset.file]).toBeDefined();
-    for(const [name,cue] of Object.entries(sfx.sounds)){
-      const data=readFileSync(resolve(root,'public/assets/audio/sfx',cue.file));bytes+=data.length;
-      expect(data.subarray(0,4).toString('ascii'),name).toBe('RIFF');expect(data.subarray(8,12).toString('ascii'),name).toBe('WAVE');
-      expect(cue.variantOffsets).toHaveLength(3);expect(data.length).toBeGreaterThan(Math.round(cue.duration*22050*2));
+  it('has a sound family for every visual family, with 4 MP3 versions per sound, within budget',()=>{
+    expect(sfx.versoes).toBe(4);
+    expect(Object.keys(sfx.sons).sort()).toEqual([...SONS].sort());
+    for(const familia of FAMILIAS){
+      const som=SOM_DA_FAMILIA[familia];expect(som,familia).toBeDefined();
+      for(const nome of [som.impacto,som.saida,som.preparo].filter(Boolean))expect(sfx.sons[nome!],`${familia} → ${nome}`).toBeDefined();
     }
-    expect(bytes).toBeLessThan(2_000_000);
-    expect(readdirSync(resolve(root,'public/assets/audio/sfx')).filter(x=>x.endsWith('.wav')).length).toBe(18);
+    let bytes=0;
+    for(const [nome,som] of Object.entries(sfx.sons)){
+      const data=readFileSync(resolve(root,'public/assets/audio/sfx',som.arquivo));bytes+=data.length;
+      // MP3: cabeçalho ID3 ou quadro de sincronia
+      expect(data.subarray(0,3).toString('ascii')==='ID3'||(data[0]===0xff&&(data[1]!&0xe0)===0xe0),nome).toBe(true);
+      expect(som.versoes,nome).toHaveLength(4);expect(som.duracoes,nome).toHaveLength(4);
+      for(let v=1;v<4;v++)expect(som.versoes[v]!,nome).toBeGreaterThan(som.versoes[v-1]!+som.duracoes[v-1]!);
+      expect(som.descricao.length,nome).toBeGreaterThan(3);
+    }
+    expect(bytes).toBeLessThan(2_300_000);
+    expect(readdirSync(resolve(root,'public/assets/audio/sfx')).filter(x=>x.endsWith('.wav'))).toEqual([]);
+  });
+  it('keeps the background music in three looping layers of the same piece',()=>{
+    expect(Object.keys(musica.camadas).sort()).toEqual(['musica-base','musica-pulso','musica-tema']);
+    expect(musica.segundos).toBeCloseTo(musica.compassos*4*60/musica.bpm,1);
+    expect(musica.secoes.map(x=>x.nome)).toEqual(["A","B","C","A2"]);
+    let bytes=0;
+    for(const camada of Object.values(musica.camadas)){const data=readFileSync(resolve(root,'public/assets/audio',camada.arquivo));bytes+=data.length;expect(data.subarray(0,4).toString('ascii')).toBe('OggS');}
+    expect(bytes).toBeLessThan(4_200_000);
+    // a base é a mais presente; pulso e tema ficam por baixo
+    expect(musica.camadas['musica-base']!.rmsDb).toBeGreaterThan(musica.camadas['musica-tema']!.rmsDb);
   });
 });

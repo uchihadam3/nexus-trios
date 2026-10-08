@@ -1,170 +1,924 @@
 {
-  "sampleRate": 22050,
-  "channels": 1,
-  "encoding": "pcm_s16le",
-  "variants": 3,
-  "sounds": {
-    "physical-light": {
-      "file": "physical-light.wav",
-      "duration": 0.28,
-      "variantOffsets": [
-        0.0,
-        0.34,
-        0.68
-      ]
-    },
-    "physical-heavy": {
-      "file": "physical-heavy.wav",
-      "duration": 0.46,
-      "variantOffsets": [
-        0.0,
-        0.52,
-        1.04
-      ]
-    },
-    "slash": {
-      "file": "slash.wav",
-      "duration": 0.38,
-      "variantOffsets": [
-        0.0,
-        0.44,
-        0.88
-      ]
-    },
-    "projectile": {
-      "file": "projectile.wav",
-      "duration": 0.3,
-      "variantOffsets": [
-        0.0,
-        0.36,
-        0.72
-      ]
-    },
-    "energy-charge": {
-      "file": "energy-charge.wav",
-      "duration": 0.55,
-      "variantOffsets": [
-        0.0,
-        0.61,
-        1.22
-      ]
-    },
-    "energy-shot": {
-      "file": "energy-shot.wav",
-      "duration": 0.36,
-      "variantOffsets": [
-        0.0,
-        0.42,
-        0.84
-      ]
-    },
-    "energy-impact": {
-      "file": "energy-impact.wav",
-      "duration": 0.48,
-      "variantOffsets": [
-        0.0,
-        0.54,
-        1.08
-      ]
-    },
-    "electric": {
-      "file": "electric.wav",
-      "duration": 0.4,
-      "variantOffsets": [
-        0.0,
-        0.46,
-        0.92
-      ]
-    },
-    "fire": {
-      "file": "fire.wav",
-      "duration": 0.48,
-      "variantOffsets": [
-        0.0,
-        0.54,
-        1.08
-      ]
-    },
-    "magic": {
-      "file": "magic.wav",
-      "duration": 0.5,
-      "variantOffsets": [
-        0.0,
-        0.56,
-        1.12
-      ]
-    },
-    "dark-control": {
-      "file": "dark-control.wav",
-      "duration": 0.5,
-      "variantOffsets": [
-        0.0,
-        0.56,
-        1.12
-      ]
-    },
-    "shield": {
-      "file": "shield.wav",
-      "duration": 0.45,
-      "variantOffsets": [
-        0.0,
-        0.51,
-        1.02
-      ]
-    },
-    "heal-buff": {
-      "file": "heal-buff.wav",
-      "duration": 0.58,
-      "variantOffsets": [
-        0.0,
-        0.64,
-        1.28
-      ]
-    },
-    "interrupt": {
-      "file": "interrupt.wav",
-      "duration": 0.3,
-      "variantOffsets": [
-        0.0,
-        0.36,
-        0.72
-      ]
-    },
-    "ko": {
-      "file": "ko.wav",
-      "duration": 0.65,
-      "variantOffsets": [
-        0.0,
-        0.71,
-        1.42
-      ]
-    },
-    "grand": {
-      "file": "grand.wav",
-      "duration": 0.76,
-      "variantOffsets": [
-        0.0,
-        0.82,
-        1.64
-      ]
-    },
-    "victory": {
-      "file": "victory.wav",
-      "duration": 1.05,
-      "variantOffsets": [
-        0.0,
-        1.11,
-        2.22
-      ]
-    },
-    "defeat": {
-      "file": "defeat.wav",
-      "duration": 0.95,
-      "variantOffsets": [
-        0.0,
-        1.01,
-        2.02
-      ]
-    }
+ "taxa": 44100,
+ "versoes": 4,
+ "sons": {
+  "agua": {
+   "arquivo": "agua.mp3",
+   "descricao": "água",
+   "versoes": [
+    0.0,
+    0.88,
+    1.789,
+    2.6419
+   ],
+   "duracoes": [
+    0.8,
+    0.829,
+    0.7729,
+    0.8122
+   ],
+   "bytes": 32943
+  },
+  "bloqueio": {
+   "arquivo": "bloqueio.mp3",
+   "descricao": "bloqueio",
+   "versoes": [
+    0.0,
+    0.63,
+    1.2799,
+    1.8913
+   ],
+   "duracoes": [
+    0.55,
+    0.5699,
+    0.5314,
+    0.5584
+   ],
+   "bytes": 22129
+  },
+  "carga-grande": {
+   "arquivo": "carga-grande.mp3",
+   "descricao": "carga grande",
+   "versoes": [
+    0.0,
+    1.38,
+    2.8071,
+    4.1432
+   ],
+   "duracoes": [
+    1.3,
+    1.3471,
+    1.256,
+    1.3198
+   ],
+   "bytes": 41172
+  },
+  "carga-pequena": {
+   "arquivo": "carga-pequena.mp3",
+   "descricao": "carga pequena",
+   "versoes": [
+    0.0,
+    0.68,
+    1.3817,
+    2.0415
+   ],
+   "duracoes": [
+    0.6,
+    0.6217,
+    0.5797,
+    0.6091
+   ],
+   "bytes": 25444
+  },
+  "corte": {
+   "arquivo": "corte.mp3",
+   "descricao": "corte",
+   "versoes": [
+    0.0,
+    0.58,
+    1.1781,
+    1.7412
+   ],
+   "duracoes": [
+    0.5,
+    0.5181,
+    0.4831,
+    0.5076
+   ],
+   "bytes": 22716
+  },
+  "corte-giratorio": {
+   "arquivo": "corte-giratorio.mp3",
+   "descricao": "corte giratório",
+   "versoes": [
+    0.0,
+    0.83,
+    1.6872,
+    2.4918
+   ],
+   "duracoes": [
+    0.75,
+    0.7772,
+    0.7246,
+    0.7614
+   ],
+   "bytes": 33468
+  },
+  "corte-pesado": {
+   "arquivo": "corte-pesado.mp3",
+   "descricao": "corte pesado",
+   "versoes": [
+    0.0,
+    0.78,
+    1.5854,
+    2.3417
+   ],
+   "duracoes": [
+    0.7,
+    0.7254,
+    0.6763,
+    0.7107
+   ],
+   "bytes": 27424
+  },
+  "cura": {
+   "arquivo": "cura.mp3",
+   "descricao": "cura",
+   "versoes": [
+    0.0,
+    1.18,
+    2.3999,
+    3.5427
+   ],
+   "duracoes": [
+    1.1,
+    1.1399,
+    1.0628,
+    1.1167
+   ],
+   "bytes": 46828
+  },
+  "derrota": {
+   "arquivo": "derrota.mp3",
+   "descricao": "derrota",
+   "versoes": [
+    0.0,
+    1.68,
+    3.418,
+    5.0439
+   ],
+   "duracoes": [
+    1.6,
+    1.658,
+    1.5459,
+    1.6244
+   ],
+   "bytes": 38128
+  },
+  "disparo": {
+   "arquivo": "disparo.mp3",
+   "descricao": "disparo de energia",
+   "versoes": [
+    0.0,
+    0.4,
+    0.8116,
+    1.2007
+   ],
+   "duracoes": [
+    0.32,
+    0.3316,
+    0.3092,
+    0.3249
+   ],
+   "bytes": 14398
+  },
+  "distorcao": {
+   "arquivo": "distorcao.mp3",
+   "descricao": "distorção",
+   "versoes": [
+    0.0,
+    0.93,
+    1.8908,
+    2.7921
+   ],
+   "duracoes": [
+    0.85,
+    0.8808,
+    0.8212,
+    0.8629
+   ],
+   "bytes": 40898
+  },
+  "dreno": {
+   "arquivo": "dreno.mp3",
+   "descricao": "dreno",
+   "versoes": [
+    0.0,
+    0.98,
+    1.9926,
+    2.9422
+   ],
+   "duracoes": [
+    0.9,
+    0.9326,
+    0.8695,
+    0.9137
+   ],
+   "bytes": 34761
+  },
+  "enfraquecer": {
+   "arquivo": "enfraquecer.mp3",
+   "descricao": "debuff",
+   "versoes": [
+    0.0,
+    0.98,
+    1.9926,
+    2.9422
+   ],
+   "duracoes": [
+    0.9,
+    0.9326,
+    0.8695,
+    0.9137
+   ],
+   "bytes": 24603
+  },
+  "escudo": {
+   "arquivo": "escudo.mp3",
+   "descricao": "Escudo",
+   "versoes": [
+    0.0,
+    0.93,
+    1.8908,
+    2.7921
+   ],
+   "duracoes": [
+    0.85,
+    0.8808,
+    0.8212,
+    0.8629
+   ],
+   "bytes": 42084
+  },
+  "esmagar": {
+   "arquivo": "esmagar.mp3",
+   "descricao": "esmagar",
+   "versoes": [
+    0.0,
+    0.88,
+    1.789,
+    2.6419
+   ],
+   "duracoes": [
+    0.8,
+    0.829,
+    0.7729,
+    0.8122
+   ],
+   "bytes": 35644
+  },
+  "estocada": {
+   "arquivo": "estocada.mp3",
+   "descricao": "perfuração",
+   "versoes": [
+    0.0,
+    0.5,
+    1.0152,
+    1.501
+   ],
+   "duracoes": [
+    0.42,
+    0.4352,
+    0.4058,
+    0.4264
+   ],
+   "bytes": 18748
+  },
+  "explosao": {
+   "arquivo": "explosao.mp3",
+   "descricao": "explosão",
+   "versoes": [
+    0.0,
+    1.18,
+    2.3999,
+    3.5427
+   ],
+   "duracoes": [
+    1.1,
+    1.1399,
+    1.0628,
+    1.1167
+   ],
+   "bytes": 51052
+  },
+  "feixe": {
+   "arquivo": "feixe.mp3",
+   "descricao": "feixe",
+   "versoes": [
+    0.0,
+    1.08,
+    2.1963,
+    3.2424
+   ],
+   "duracoes": [
+    1.0,
+    1.0363,
+    0.9662,
+    1.0152
+   ],
+   "bytes": 40846
+  },
+  "fogo": {
+   "arquivo": "fogo.mp3",
+   "descricao": "fogo",
+   "versoes": [
+    0.0,
+    0.93,
+    1.8908,
+    2.7921
+   ],
+   "duracoes": [
+    0.85,
+    0.8808,
+    0.8212,
+    0.8629
+   ],
+   "bytes": 53797
+  },
+  "gancho": {
+   "arquivo": "gancho.mp3",
+   "descricao": "golpe para cima",
+   "versoes": [
+    0.0,
+    0.58,
+    1.1781,
+    1.7412
+   ],
+   "duracoes": [
+    0.5,
+    0.5181,
+    0.4831,
+    0.5076
+   ],
+   "bytes": 21496
+  },
+  "gelo": {
+   "arquivo": "gelo.mp3",
+   "descricao": "gelo",
+   "versoes": [
+    0.0,
+    0.98,
+    1.9926,
+    2.9422
+   ],
+   "duracoes": [
+    0.9,
+    0.9326,
+    0.8695,
+    0.9137
+   ],
+   "bytes": 46961
+  },
+  "grand-carga": {
+   "arquivo": "grand-carga.mp3",
+   "descricao": "grande habilidade carregando",
+   "versoes": [
+    0.0,
+    1.68,
+    3.418,
+    5.0439
+   ],
+   "duracoes": [
+    1.6,
+    1.658,
+    1.5459,
+    1.6244
+   ],
+   "bytes": 50395
+  },
+  "grand-impacto": {
+   "arquivo": "grand-impacto.mp3",
+   "descricao": "grande habilidade",
+   "versoes": [
+    0.0,
+    2.18,
+    4.4361,
+    6.5451
+   ],
+   "duracoes": [
+    2.1,
+    2.1761,
+    2.029,
+    2.132
+   ],
+   "bytes": 84429
+  },
+  "impacto-energia": {
+   "arquivo": "impacto-energia.mp3",
+   "descricao": "impacto de energia",
+   "versoes": [
+    0.0,
+    0.78,
+    1.5854,
+    2.3417
+   ],
+   "duracoes": [
+    0.7,
+    0.7254,
+    0.6763,
+    0.7107
+   ],
+   "bytes": 28083
+  },
+  "interrupcao": {
+   "arquivo": "interrupcao.mp3",
+   "descricao": "interrupção",
+   "versoes": [
+    0.0,
+    0.88,
+    1.789,
+    2.6419
+   ],
+   "duracoes": [
+    0.8,
+    0.829,
+    0.7729,
+    0.8122
+   ],
+   "bytes": 32390
+  },
+  "lamina-energia": {
+   "arquivo": "lamina-energia.mp3",
+   "descricao": "lâmina de energia",
+   "versoes": [
+    0.0,
+    0.73,
+    1.4836,
+    2.1916
+   ],
+   "duracoes": [
+    0.65,
+    0.6736,
+    0.628,
+    0.6599
+   ],
+   "bytes": 29358
+  },
+  "luz": {
+   "arquivo": "luz.mp3",
+   "descricao": "luz sagrada",
+   "versoes": [
+    0.0,
+    1.28,
+    2.6035,
+    3.8429
+   ],
+   "duracoes": [
+    1.2,
+    1.2435,
+    1.1594,
+    1.2183
+   ],
+   "bytes": 52104
+  },
+  "maldicao": {
+   "arquivo": "maldicao.mp3",
+   "descricao": "maldição",
+   "versoes": [
+    0.0,
+    1.08,
+    2.1963,
+    3.2424
+   ],
+   "duracoes": [
+    1.0,
+    1.0363,
+    0.9662,
+    1.0152
+   ],
+   "bytes": 38984
+  },
+  "missil": {
+   "arquivo": "missil.mp3",
+   "descricao": "míssil",
+   "versoes": [
+    0.0,
+    0.83,
+    1.6872,
+    2.4918
+   ],
+   "duracoes": [
+    0.75,
+    0.7772,
+    0.7246,
+    0.7614
+   ],
+   "bytes": 31417
+  },
+  "multi-golpe": {
+   "arquivo": "multi-golpe.mp3",
+   "descricao": "rajada de golpes",
+   "versoes": [
+    0.0,
+    0.88,
+    1.789,
+    2.6419
+   ],
+   "duracoes": [
+    0.8,
+    0.829,
+    0.7729,
+    0.8122
+   ],
+   "bytes": 33807
+  },
+  "nocaute": {
+   "arquivo": "nocaute.mp3",
+   "descricao": "nocaute",
+   "versoes": [
+    0.0,
+    1.18,
+    2.3999,
+    3.5427
+   ],
+   "duracoes": [
+    1.1,
+    1.1399,
+    1.0628,
+    1.1167
+   ],
+   "bytes": 41852
+  },
+  "onda-choque": {
+   "arquivo": "onda-choque.mp3",
+   "descricao": "onda de choque",
+   "versoes": [
+    0.0,
+    0.98,
+    1.9926,
+    2.9422
+   ],
+   "duracoes": [
+    0.9,
+    0.9326,
+    0.8695,
+    0.9137
+   ],
+   "bytes": 34939
+  },
+  "portal": {
+   "arquivo": "portal.mp3",
+   "descricao": "portal",
+   "versoes": [
+    0.0,
+    1.08,
+    2.1963,
+    3.2424
+   ],
+   "duracoes": [
+    1.0,
+    1.0363,
+    0.9662,
+    1.0152
+   ],
+   "bytes": 35669
+  },
+  "preparo": {
+   "arquivo": "preparo.mp3",
+   "descricao": "início do preparo",
+   "versoes": [
+    0.0,
+    0.78,
+    1.5854,
+    2.3417
+   ],
+   "duracoes": [
+    0.7,
+    0.7254,
+    0.6763,
+    0.7107
+   ],
+   "bytes": 25308
+  },
+  "prisao": {
+   "arquivo": "prisao.mp3",
+   "descricao": "prisão/correntes",
+   "versoes": [
+    0.0,
+    0.93,
+    1.8908,
+    2.7921
+   ],
+   "duracoes": [
+    0.85,
+    0.8808,
+    0.8212,
+    0.8629
+   ],
+   "bytes": 37201
+  },
+  "pronto": {
+   "arquivo": "pronto.mp3",
+   "descricao": "habilidade pronta",
+   "versoes": [
+    0.0,
+    0.63,
+    1.2799,
+    1.8913
+   ],
+   "duracoes": [
+    0.55,
+    0.5699,
+    0.5314,
+    0.5584
+   ],
+   "bytes": 17692
+  },
+  "psiquico": {
+   "arquivo": "psiquico.mp3",
+   "descricao": "psíquico",
+   "versoes": [
+    0.0,
+    0.98,
+    1.9926,
+    2.9422
+   ],
+   "duracoes": [
+    0.9,
+    0.9326,
+    0.8695,
+    0.9137
+   ],
+   "bytes": 32707
+  },
+  "purificar": {
+   "arquivo": "purificar.mp3",
+   "descricao": "purificar",
+   "versoes": [
+    0.0,
+    0.88,
+    1.789,
+    2.6419
+   ],
+   "duracoes": [
+    0.8,
+    0.829,
+    0.7729,
+    0.8122
+   ],
+   "bytes": 39584
+  },
+  "raio": {
+   "arquivo": "raio.mp3",
+   "descricao": "raio",
+   "versoes": [
+    0.0,
+    0.68,
+    1.3817,
+    2.0415
+   ],
+   "duracoes": [
+    0.6,
+    0.6217,
+    0.5797,
+    0.6091
+   ],
+   "bytes": 41326
+  },
+  "reforco": {
+   "arquivo": "reforco.mp3",
+   "descricao": "reforço",
+   "versoes": [
+    0.0,
+    1.08,
+    2.1963,
+    3.2424
+   ],
+   "duracoes": [
+    1.0,
+    1.0363,
+    0.9662,
+    1.0152
+   ],
+   "bytes": 43517
+  },
+  "saraivada": {
+   "arquivo": "saraivada.mp3",
+   "descricao": "rajada de tiros",
+   "versoes": [
+    0.0,
+    0.5828,
+    1.2814,
+    1.8386
+   ],
+   "duracoes": [
+    0.5028,
+    0.6186,
+    0.4772,
+    0.6012
+   ],
+   "bytes": 26349
+  },
+  "selo": {
+   "arquivo": "selo.mp3",
+   "descricao": "selo",
+   "versoes": [
+    0.0,
+    1.18,
+    2.3999,
+    3.5427
+   ],
+   "duracoes": [
+    1.1,
+    1.1399,
+    1.0628,
+    1.1167
+   ],
+   "bytes": 40067
+  },
+  "soco-leve": {
+   "arquivo": "soco-leve.mp3",
+   "descricao": "soco leve",
+   "versoes": [
+    0.0,
+    0.4,
+    0.8116,
+    1.2007
+   ],
+   "duracoes": [
+    0.32,
+    0.3316,
+    0.3092,
+    0.3249
+   ],
+   "bytes": 13328
+  },
+  "soco-pesado": {
+   "arquivo": "soco-pesado.mp3",
+   "descricao": "golpe pesado",
+   "versoes": [
+    0.0,
+    0.63,
+    1.2799,
+    1.8913
+   ],
+   "duracoes": [
+    0.55,
+    0.5699,
+    0.5314,
+    0.5584
+   ],
+   "bytes": 21641
+  },
+  "sombra": {
+   "arquivo": "sombra.mp3",
+   "descricao": "sombra",
+   "versoes": [
+    0.0,
+    1.08,
+    2.1963,
+    3.2424
+   ],
+   "duracoes": [
+    1.0,
+    1.0363,
+    0.9662,
+    1.0152
+   ],
+   "bytes": 33472
+  },
+  "terra": {
+   "arquivo": "terra.mp3",
+   "descricao": "terra",
+   "versoes": [
+    0.0,
+    0.98,
+    1.9926,
+    2.9422
+   ],
+   "duracoes": [
+    0.9,
+    0.9326,
+    0.8695,
+    0.9137
+   ],
+   "bytes": 42485
+  },
+  "terremoto": {
+   "arquivo": "terremoto.mp3",
+   "descricao": "golpe no chão",
+   "versoes": [
+    0.0,
+    1.38,
+    2.8071,
+    4.1432
+   ],
+   "duracoes": [
+    1.3,
+    1.3471,
+    1.256,
+    1.3198
+   ],
+   "bytes": 55423
+  },
+  "tiro": {
+   "arquivo": "tiro.mp3",
+   "descricao": "tiro",
+   "versoes": [
+    0.0,
+    0.53,
+    1.0763,
+    1.5911
+   ],
+   "duracoes": [
+    0.45,
+    0.4663,
+    0.4348,
+    0.4568
+   ],
+   "bytes": 19219
+  },
+  "toque": {
+   "arquivo": "toque.mp3",
+   "descricao": "toque de interface",
+   "versoes": [
+    0.0,
+    0.2,
+    0.4043,
+    0.6003
+   ],
+   "duracoes": [
+    0.12,
+    0.1243,
+    0.1159,
+    0.1218
+   ],
+   "bytes": 7371
+  },
+  "transformacao": {
+   "arquivo": "transformacao.mp3",
+   "descricao": "transformação",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 46189
+  },
+  "veneno": {
+   "arquivo": "veneno.mp3",
+   "descricao": "veneno",
+   "versoes": [
+    0.0,
+    0.98,
+    1.9926,
+    2.9422
+   ],
+   "duracoes": [
+    0.9,
+    0.9326,
+    0.8695,
+    0.9137
+   ],
+   "bytes": 37935
+  },
+  "vento": {
+   "arquivo": "vento.mp3",
+   "descricao": "vento",
+   "versoes": [
+    0.0,
+    1.08,
+    2.1963,
+    3.2424
+   ],
+   "duracoes": [
+    1.0,
+    1.0363,
+    0.9662,
+    1.0152
+   ],
+   "bytes": 40002
+  },
+  "virada": {
+   "arquivo": "virada.mp3",
+   "descricao": "virada",
+   "versoes": [
+    0.0,
+    0.98,
+    1.9926,
+    2.9422
+   ],
+   "duracoes": [
+    0.9,
+    0.9326,
+    0.8695,
+    0.9137
+   ],
+   "bytes": 36566
+  },
+  "vitoria": {
+   "arquivo": "vitoria.mp3",
+   "descricao": "vitória",
+   "versoes": [
+    0.0,
+    1.88,
+    3.8253,
+    5.6444
+   ],
+   "duracoes": [
+    1.8,
+    1.8653,
+    1.7391,
+    1.8274
+   ],
+   "bytes": 58374
   }
+ }
 }

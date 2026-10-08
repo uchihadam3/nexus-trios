@@ -1,12 +1,34 @@
 import type { Settings } from './storage';
 import { PRESENTATION as P } from '../presentation/config';
 import { scoreStep,sixteenth,SCORE } from '../audio/score';
-import { CUE_ASSETS,CUE_FILES,type Sound } from '../audio/cues';
+import { FAMILIAS_DE_APOIO,PRIORIDADE,SOM_DA_FAMILIA,SONS,type Manifesto,type Sound } from '../audio/cues';
 import type { Cue } from '../presentation/director';
+import type { Battle } from '../engine/types';
+import { profileFor } from '../presentation/vfxProfiles';
 
-// A local loop file can replace synthesis without changing the battle interface.
-// Replace this list with final licensed stems later; the Web Audio mixer remains the same.
-export const AUDIO_ASSETS={battleLoop:null as string|null,battleStems:['/assets/audio/harmony.ogg','/assets/audio/rhythm.ogg','/assets/audio/pulse.ogg','/assets/audio/lead.ogg'] as const};
+/*
+ * O som da batalha (adendo, parte 6).
+ *
+ * Efeitos: a biblioteca em MP3 (4 versões por som), decodificada antes de
+ * precisar — no impacto só se lê do cache. Cada ação toca o som da família do
+ * efeito visual dela: a saída (disparo, feixe, lâmina) no instante em que o
+ * golpe sai, e o impacto no instante do contato.
+ *
+ * Mixagem: no máximo 5 sons ao mesmo tempo; quando passa disso, o de menor
+ * prioridade sai (grand > nocaute/interrupção > habilidade > básico > apoio >
+ * interface). A música abaixa nos momentos grandes. Um compressor no fim
+ * segura os picos. Cada som vem do lado de quem age (estéreo leve, nunca
+ * extremo), e varia de versão, de tom e de volume — de forma determinística,
+ * pelo número do evento, para o replay soar igual.
+ *
+ * Música: três camadas do mesmo trecho de ~3 min (base, pulso, tema), em laço.
+ * A base toca sempre; o pulso e o tema sobem com a intensidade da luta. Cada
+ * luta começa numa seção diferente.
+ */
+const SFX='/assets/audio/sfx/';
+export const AUDIO_ASSETS={battleLoop:null as string|null,battleStems:['/assets/audio/musica-base.ogg','/assets/audio/musica-pulso.ogg','/assets/audio/musica-tema.ogg'] as const};
+const SECOES=[0,45.714,91.429,137.143];
+const MAX_VOZES=5;
 export interface MusicMood {heat:number;pressure:number;time:number}
 class BattleAudio {
   private ctx:AudioContext|null=null;
@@ -14,37 +36,38 @@ class BattleAudio {
   private music:GainNode|null=null;
   private effects:GainNode|null=null;
   private bus:GainNode|null=null;
-  private loop:HTMLAudioElement|null=null;
-  private stemBuffers:AudioBuffer[]|null=null;
-  private stemLoading:Promise<AudioBuffer[]>|null=null;
+  private stemBuffers:(AudioBuffer|null)[]=[];
+  private stemLoading:Promise<void>|null=null;
   private stemSources:AudioBufferSourceNode[]=[];
   private stemGains:GainNode[]=[];
   private startToken=0;
   private lastMoodChange=0;
   private musicStartedAt=0;
   private musicOffset=0;
+  private luta:string|undefined;
   private mood:MusicMood={heat:.25,pressure:0,time:0};
   private timer:ReturnType<typeof setInterval>|null=null;
   private step=0;
   private next=0;
   private running=false;
   private active=false;
-  private settings:Pick<Settings,'volume'|'musicVolume'|'effectsVolume'>={volume:P.audio.master,musicVolume:P.audio.music,effectsVolume:P.audio.effects};
-  private lastCue=-100;
-  private lastPriority=0;
+  private settings:Pick<Settings,'volume'|'musicVolume'|'effectsVolume'>&{speed?:number}={volume:P.audio.master,musicVolume:P.audio.music,effectsVolume:P.audio.effects};
+  private manifest:Manifesto|null=null;
+  private manifestLoading:Promise<Manifesto|null>|null=null;
+  private buffers=new Map<Sound,AudioBuffer>();
+  private loading=new Map<Sound,Promise<AudioBuffer|null>>();
   private recent=new Map<Sound,number>();
-  private cueBuffers=new Map<string,AudioBuffer>();
-  private cueLoading=new Map<string,Promise<AudioBuffer|null>>();
-  private cueVariants=new Map<string,number>();
-  private activeCues:{source:AudioBufferSourceNode;priority:number}[]=[];
+  private vozes:{source:AudioBufferSourceNode;prioridade:number;fim:number}[]=[];
+  /* Posição horizontal de cada lutador (0–100), para o estéreo. */
+  private posicoes:Record<string,number>={};
   async unlock(){
     try{
       if(!this.ctx){
         this.ctx=new AudioContext();const ctx=this.ctx;
         this.master=ctx.createGain();this.music=ctx.createGain();this.effects=ctx.createGain();
-        const compressor=ctx.createDynamicsCompressor();compressor.threshold.value=-12;compressor.knee.value=12;compressor.ratio.value=4;compressor.attack.value=.012;compressor.release.value=.18;
-        this.music.connect(this.master);this.effects.connect(this.master);this.master.connect(compressor);compressor.connect(ctx.destination);
-        if(AUDIO_ASSETS.battleLoop){this.loop=new Audio(AUDIO_ASSETS.battleLoop);this.loop.loop=true;ctx.createMediaElementSource(this.loop).connect(this.music);}
+        // compressor no fim: segura picos de vários sons juntos sem esmagar a dinâmica
+        const limiter=ctx.createDynamicsCompressor();limiter.threshold.value=-10;limiter.knee.value=6;limiter.ratio.value=12;limiter.attack.value=.003;limiter.release.value=.25;
+        this.music.connect(this.master);this.effects.connect(this.master);this.master.connect(limiter);limiter.connect(ctx.destination);
         this.apply();
       }
       if(this.ctx.state==='suspended')await this.ctx.resume();
@@ -54,110 +77,157 @@ class BattleAudio {
     }catch{return false;}
   }
   configure(settings:Settings){this.settings=settings;this.apply();}
-  private apply(){if(!this.ctx)return;const t=this.ctx.currentTime;this.master?.gain.setTargetAtTime(this.settings.volume/100,t,.06);this.music?.gain.setTargetAtTime(this.settings.musicVolume/100*.75,t,.08);this.effects?.gain.setTargetAtTime(this.settings.effectsVolume/100,t,.04);}
-  setBattle(active:boolean){this.active=active;if(active){this.start();void this.preloadCues();}else this.stop();}
+  private apply(){if(!this.ctx)return;const t=this.ctx.currentTime;this.master?.gain.setTargetAtTime(this.settings.volume/100,t,.06);this.music?.gain.setTargetAtTime(this.musicLevel(),t,.08);this.effects?.gain.setTargetAtTime(this.settings.effectsVolume/100,t,.04);}
+  /* Música de fundo: fica um degrau abaixo dos efeitos, para nunca atrapalhar. */
+  private musicLevel(){return this.settings.musicVolume/100*.62;}
+  /** Onde cada lutador está na tela (x em %), para o som vir do lado certo. */
+  setPositions(anchors:Record<string,{x:number;y:number}>){this.posicoes=Object.fromEntries(Object.entries(anchors).filter(([k])=>/^(player|enemy)-\d$/.test(k)).map(([k,a])=>[k,a.x]));}
+  private pan(uid?:string){if(!uid)return 0;const x=this.posicoes[uid]??(17+(Number(uid.split('-')[1])||0)*33);return Math.max(-.45,Math.min(.45,(x-50)/50*.5));}
+  /** Liga/desliga a música da luta. `luta` identifica a luta: numa luta nova a música começa numa seção sorteada; na mesma luta (depois de uma pausa) continua de onde parou. */
+  setBattle(active:boolean,luta?:string){
+    this.active=active;
+    if(active){if(luta!==undefined&&luta!==this.luta){this.luta=luta;this.musicOffset=SECOES[Math.floor(Math.random()*SECOES.length)]!;}this.start();void this.preloadCues();}
+    else this.stop();
+  }
   setMood(mood:MusicMood){
     this.mood={heat:Math.max(0,Math.min(1,mood.heat)),pressure:Math.max(-1,Math.min(1,mood.pressure)),time:Math.max(0,Math.min(1,mood.time))};
     if(!this.ctx||!this.stemGains.length)return;
     const at=this.ctx.currentTime;if(at-this.lastMoodChange<.7)return;this.lastMoodChange=at;
     const levels=this.stemLevels();
-    this.stemGains.forEach((gain,index)=>gain.gain.setTargetAtTime(levels[index],at,.65));
+    this.stemGains.forEach((gain,index)=>gain.gain.setTargetAtTime(levels[index],at,1.2));
   }
+  /* base sempre; pulso sobe com a intensidade; tema só quando a luta esquenta ou se arrasta */
   private stemLevels(){
     const {heat,time}=this.mood;
-    return [.77,.17+heat*.2,.26+heat*.24,.04+heat*.27+Math.max(0,time-.55)*.08];
+    return [.9,.25+heat*.75,Math.min(.85,Math.max(0,heat-.4)*1.6+Math.max(0,time-.55)*.6)];
   }
   private start(){
     if(this.running||!this.ctx||this.ctx.state!=='running'||!this.music)return;
-    this.running=true;const token=++this.startToken;this.bus=this.ctx.createGain();this.bus.gain.setValueAtTime(0,this.ctx.currentTime);this.bus.gain.linearRampToValueAtTime(1,this.ctx.currentTime+1.15);this.bus.connect(this.music);
-    if(this.loop){void this.loop.play().catch(()=>undefined);return;}
-    if(AUDIO_ASSETS.battleStems.length){void this.playStems(token);return;}
-    this.startScore();
+    this.running=true;const token=++this.startToken;this.bus=this.ctx.createGain();this.bus.gain.setValueAtTime(0,this.ctx.currentTime);this.bus.gain.linearRampToValueAtTime(1,this.ctx.currentTime+2.4);this.bus.connect(this.music);
+    void this.playStems(token);
   }
-  private async loadStems(){
-    if(this.stemBuffers)return this.stemBuffers;
+  private loadStems(){
+    const ctx=this.ctx;if(!ctx)return Promise.resolve();
     if(!this.stemLoading){
-      const ctx=this.ctx;if(!ctx)throw new Error('Áudio bloqueado pelo navegador');
-      this.stemLoading=Promise.all(AUDIO_ASSETS.battleStems.map(async path=>{const response=await fetch(path);if(!response.ok)throw new Error(`Não foi possível carregar ${path}`);return ctx.decodeAudioData(await response.arrayBuffer());})).then(buffers=>this.stemBuffers=buffers).finally(()=>{this.stemLoading=null;});
+      this.stemBuffers=AUDIO_ASSETS.battleStems.map(()=>null);
+      // a base primeiro: a música começa assim que ela chega; as outras camadas entram depois
+      this.stemLoading=AUDIO_ASSETS.battleStems.reduce<Promise<void>>((anterior,path,index)=>anterior.then(async()=>{
+        try{const r=await fetch(path);if(!r.ok)return;this.stemBuffers[index]=await ctx.decodeAudioData(await r.arrayBuffer());this.attachStem(index);}catch{/* fica sem esta camada */}
+      }),Promise.resolve());
     }
     return this.stemLoading;
   }
+  private attachStem(index:number){
+    const ctx=this.ctx,bus=this.bus,buffer=this.stemBuffers[index];
+    if(!ctx||!bus||!buffer||!this.running||this.stemSources[index])return;
+    if(index===0)this.musicStartedAt=ctx.currentTime+.05;
+    const base=this.stemBuffers[0];if(!base)return;
+    const source=ctx.createBufferSource(),gain=ctx.createGain();source.buffer=buffer;source.loop=true;
+    const posicao=(this.musicOffset+Math.max(0,ctx.currentTime+.05-this.musicStartedAt))%buffer.duration;
+    gain.gain.setValueAtTime(0,ctx.currentTime);gain.gain.linearRampToValueAtTime(this.stemLevels()[index],ctx.currentTime+(index===0?.05:2));
+    source.connect(gain);gain.connect(bus);source.onended=()=>{source.disconnect();gain.disconnect();};
+    source.start(ctx.currentTime+.05,posicao);this.stemSources[index]=source;this.stemGains[index]=gain;
+  }
   private async playStems(token:number){
-    try{
-      const buffers=await this.loadStems(),ctx=this.ctx,bus=this.bus;
-      if(!ctx||!bus||!this.running||token!==this.startToken)return;
-      const levels=this.stemLevels(),startAt=ctx.currentTime+.09;this.musicStartedAt=startAt;
-      this.stemSources=[];this.stemGains=[];
-      buffers.forEach((buffer,index)=>{
-        const source=ctx.createBufferSource(),gain=ctx.createGain();source.buffer=buffer;source.loop=true;gain.gain.setValueAtTime(levels[index],startAt);source.connect(gain);gain.connect(bus);source.onended=()=>{source.disconnect();gain.disconnect();};source.start(startAt,this.musicOffset%buffer.duration);this.stemSources.push(source);this.stemGains.push(gain);
-      });
-    }catch{
-      if(token!==this.startToken||!this.running)return;
-      this.startScore();
-    }
+    await this.loadStems();
+    if(token!==this.startToken||!this.running)return;
+    this.stemBuffers.forEach((_,i)=>this.attachStem(i));
+    if(!this.stemBuffers[0])this.startScore();
   }
   private startScore(){if(!this.ctx||!this.running||this.timer)return;this.next=this.ctx.currentTime+.035;this.schedule();this.timer=setInterval(()=>this.schedule(),40);}
-  private async loadCue(file:string):Promise<AudioBuffer|null>{
-    const cached=this.cueBuffers.get(file);if(cached)return cached;
-    const pending=this.cueLoading.get(file);if(pending)return pending;
-    const ctx=this.ctx;if(!ctx)return null;
-    const request=fetch(`/assets/audio/sfx/${file}.wav`).then(r=>{if(!r.ok)throw new Error(`SFX ${file} indisponível`);return r.arrayBuffer();}).then(data=>ctx.decodeAudioData(data)).then(buffer=>{this.cueBuffers.set(file,buffer);return buffer;}).catch(()=>null).finally(()=>this.cueLoading.delete(file));
-    this.cueLoading.set(file,request);return request;
-  }
-  private async preloadCues(){
-    // Decode ahead of presentation. sound() reads only this cache, never fetches at impact.
-    const common=['physical-light','physical-heavy','energy-charge','energy-shot','energy-impact','electric','magic','shield','grand'];
-    await Promise.all(common.map(file=>this.loadCue(file)));
-    await Promise.all(CUE_FILES.filter(file=>!common.includes(file)).map(file=>this.loadCue(file)));
-  }
   private schedule(){
     if(!this.ctx||!this.bus||!this.running)return;
     if(this.next<this.ctx.currentTime-.2)this.next=this.ctx.currentTime+.02;
     while(this.next<this.ctx.currentTime+.14){scoreStep(this.ctx,this.bus,this.step,this.next);this.next+=sixteenth;this.step=(this.step+1)%(SCORE.bars*16);}
   }
   private stop(){
-    this.running=false;this.startToken++;if(this.timer){clearInterval(this.timer);this.timer=null;}this.loop?.pause();
-    if(this.ctx&&this.stemSources.length&&this.stemBuffers?.[0])this.musicOffset=(this.musicOffset+Math.max(0,this.ctx.currentTime-this.musicStartedAt))%this.stemBuffers[0].duration;
-    if(this.ctx)for(const source of this.stemSources){try{source.stop(this.ctx.currentTime+.22);}catch{ /* Already stopped by the previous battle. */ }}
+    // guarda onde a música estava, para continuar dali depois de uma pausa
+    if(this.running)this.musicOffset=this.posicaoDaMusica();
+    this.running=false;this.startToken++;if(this.timer){clearInterval(this.timer);this.timer=null;}
+    if(this.ctx)for(const source of this.stemSources){try{source?.stop(this.ctx.currentTime+.4);}catch{ /* já parado */ }}
     this.stemSources=[];this.stemGains=[];
-    if(this.ctx&&this.bus){const bus=this.bus;bus.gain.cancelScheduledValues(this.ctx.currentTime);bus.gain.setTargetAtTime(0,this.ctx.currentTime,.055);setTimeout(()=>bus.disconnect(),400);this.bus=null;}
+    if(this.ctx&&this.bus){const bus=this.bus;bus.gain.cancelScheduledValues(this.ctx.currentTime);bus.gain.setTargetAtTime(0,this.ctx.currentTime,.12);setTimeout(()=>bus.disconnect(),700);this.bus=null;}
   }
-  sound(sound:Sound,priority=1,pan=0){
+  private async loadManifest(){
+    if(this.manifest)return this.manifest;
+    this.manifestLoading??=fetch(`${SFX}manifest.json`).then(r=>r.ok?r.json() as Promise<Manifesto>:null).then(m=>this.manifest=m).catch(()=>null);
+    return this.manifestLoading;
+  }
+  private async loadCue(som:Sound):Promise<AudioBuffer|null>{
+    const cached=this.buffers.get(som);if(cached)return cached;
+    const pending=this.loading.get(som);if(pending)return pending;
+    const ctx=this.ctx;if(!ctx)return null;
+    const request=this.loadManifest().then(m=>{const info=m?.sons[som];if(!info)throw new Error(som);return fetch(SFX+info.arquivo);})
+      .then(r=>{if(!r.ok)throw new Error(som);return r.arrayBuffer();}).then(data=>ctx.decodeAudioData(data))
+      .then(buffer=>{this.buffers.set(som,buffer);return buffer;}).catch(()=>null).finally(()=>this.loading.delete(som));
+    this.loading.set(som,request);return request;
+  }
+  private async preloadCues(){
+    // os mais comuns primeiro; o resto em seguida. No impacto, só se lê do cache.
+    const comuns:Sound[]=['soco-leve','soco-pesado','corte','disparo','impacto-energia','preparo','pronto','nocaute','interrupcao','grand-carga','grand-impacto'];
+    await Promise.all(comuns.map(s=>this.loadCue(s)));
+    await Promise.all(SONS.filter(s=>!comuns.includes(s)).map(s=>this.loadCue(s)));
+  }
+  /**
+   * Toca um som. `chave` escolhe a versão e a variação (o mesmo evento soa
+   * igual no replay); `atraso` em segundos de apresentação (já dividido pela
+   * velocidade da luta aqui).
+   */
+  sound(som:Sound,prioridade:number=PRIORIDADE.basico,pan=0,chave=0,atraso=0){
     const ctx=this.ctx;if(!ctx||ctx.state!=='running'||!this.effects||this.settings.volume===0||this.settings.effectsVolume===0)return;
-    const asset=CUE_ASSETS[sound],buffer=this.cueBuffers.get(asset.file);
-    if(!buffer)return;
-    const now=ctx.currentTime,gap=priority>=3?P.audio.majorGap:P.audio.minorGap;
-    if(now-(this.recent.get(sound)??-100)<(priority>=3?.22:.6))return;
-    if(now-this.lastCue<gap&&priority<=this.lastPriority)return;
-    if(this.activeCues.length>=P.audio.maxActiveCues){
-      const lowest=this.activeCues.reduce((a,b)=>a.priority<=b.priority?a:b);
-      if(lowest.priority>=priority)return;
-      lowest.source.stop();this.activeCues=this.activeCues.filter(c=>c!==lowest);
+    const buffer=this.buffers.get(som),info=this.manifest?.sons[som];
+    if(!buffer||!info)return;
+    const quando=ctx.currentTime+.006+Math.max(0,atraso)/Math.max(.25,this.settings.speed??1);
+    // o mesmo som duas vezes em 70 ms vira um só
+    if(quando-(this.recent.get(som)??-100)<.07)return;
+    this.vozes=this.vozes.filter(v=>v.fim>ctx.currentTime);
+    if(this.vozes.length>=MAX_VOZES){
+      const menor=this.vozes.reduce((a,b)=>a.prioridade<=b.prioridade?a:b);
+      if(menor.prioridade>=prioridade)return;
+      try{menor.source.stop();}catch{/* */}this.vozes=this.vozes.filter(v=>v!==menor);
     }
-    this.lastCue=now;this.lastPriority=priority;this.recent.set(sound,now);
-    const panner=ctx.createStereoPanner();panner.pan.value=Math.max(-.6,Math.min(.6,pan));panner.connect(this.effects);
-    const index=this.cueVariants.get(asset.file)??0;this.cueVariants.set(asset.file,(index+1)%3);
-    const source=ctx.createBufferSource(),volume=ctx.createGain();source.buffer=buffer;
-    source.playbackRate.value=[.985,1,1.012][index];volume.gain.value=priority>=4?.72:priority===2?.55:.38;
-    source.connect(volume);volume.connect(panner);
-    const active={source,priority};this.activeCues.push(active);
-    source.onended=()=>{this.activeCues=this.activeCues.filter(c=>c!==active);source.disconnect();volume.disconnect();panner.disconnect();};
-    source.start(now+.006,index*(asset.duration+.06),asset.duration);
-    if(priority>=4&&['ko','grand-impact'].includes(sound)&&this.music){const gain=this.music.gain;gain.cancelScheduledValues(now);gain.setTargetAtTime(this.settings.musicVolume/100*.75*P.audio.duck,now,.06);gain.setTargetAtTime(this.settings.musicVolume/100*.75,now+.55,.25);}
+    this.recent.set(som,quando);
+    const n=info.versoes.length,v=Math.abs(chave)%n,offset=info.versoes[v],dur=info.duracoes[v];
+    const source=ctx.createBufferSource(),volume=ctx.createGain(),panner=ctx.createStereoPanner();
+    source.buffer=buffer;
+    // variação leve e determinística: tom ±1,5%, volume ±1,5 dB
+    source.playbackRate.value=1+(((chave*7)%5)-2)*.0075;
+    const ganhoDaPrioridade=prioridade>=5?1:prioridade>=4?.92:prioridade>=3?.84:prioridade>=2?.74:prioridade>=1.5?.62:.5;
+    volume.gain.value=ganhoDaPrioridade*10**((((chave*3)%3)-1)*1.5/20);
+    panner.pan.value=Math.max(-.45,Math.min(.45,pan));
+    source.connect(volume);volume.connect(panner);panner.connect(this.effects);
+    const voz={source,prioridade,fim:quando+dur/source.playbackRate.value};this.vozes.push(voz);
+    source.onended=()=>{this.vozes=this.vozes.filter(x=>x!==voz);source.disconnect();volume.disconnect();panner.disconnect();};
+    source.start(quando,offset,dur);
+    // a música abaixa nos momentos grandes e volta devagar
+    if(prioridade>=4&&this.music){const g=this.music.gain,alvo=this.musicLevel();g.cancelScheduledValues(quando);g.setTargetAtTime(alvo*P.audio.duck,quando,.05);g.setTargetAtTime(alvo,quando+Math.min(1.2,dur),.35);}
   }
-  async preview(sound:Sound){if(await this.unlock()){await this.loadCue(CUE_ASSETS[sound].file);this.sound(sound,2);}}
-  cue(cue:Cue){
-    const {event,family,grand,phase}=cue,pan=((Number(event.source.split('-')[1])||0)-1)*.38;
+  /** Ouve um som (ou uma sequência: preparo, saída, impacto) na galeria. */
+  async preview(sons:Sound|Sound[]){
+    const lista=Array.isArray(sons)?sons:[sons];
+    if(!await this.unlock())return;
+    await this.loadManifest();await Promise.all(lista.map(s=>this.loadCue(s)));
+    let atraso=0;
+    for(const [i,s] of lista.entries()){this.sound(s,PRIORIDADE.habilidade,0,i,atraso);atraso+=Math.min(.7,this.manifest?.sons[s]?.duracoes[0]??.4)*.8;}
+  }
+  /** Som de uma deixa do diretor: a saída do golpe e o impacto, pela família do efeito. */
+  cue(cue:Cue,battle?:Battle){
+    const {event,grand,phase}=cue,fonte=battle?.fighters.find(f=>f.uid===event.source);
+    const perfil=fonte&&['basic','skill','cast'].includes(event.kind)?profileFor(fonte.characterId,event.skill):undefined;
+    const som=perfil?SOM_DA_FAMILIA[perfil.family]:undefined;
+    const panFonte=this.pan(event.source),panAlvo=this.pan(event.target??event.source),chave=event.id;
+    const apoio=perfil?FAMILIAS_DE_APOIO.has(perfil.family):false;
     if(phase==='start'){
-      if(event.kind==='cast'){const charge:Sound=grand?'grand-charge':family==='electric'?'electric-charge':family==='fire'?'fire-cast':['magic','psychic','dark'].includes(family)?'magic-cast':'energy-charge';this.sound(charge,3,pan);}
-      else if(event.kind==='basic')this.sound('action',1,pan);
-      else if(event.kind==='skill'){const charge:Sound=grand?'grand-charge':family==='energy'?'energy-shot':family==='electric'?'electric-charge':family==='fire'?'fire-cast':['magic','psychic','dark'].includes(family)?'magic-cast':'action';this.sound(charge,2,pan);}
+      if(event.kind==='cast'){this.sound(grand?'grand-carga':som?.preparo??'preparo',grand?PRIORIDADE.grand:PRIORIDADE.habilidade,panFonte,chave);return;}
+      // a saída toca quando o golpe deixa quem age (a viagem começa a ~58% do tempo até o impacto)
+      if(som?.saida&&perfil?.travel)this.sound(som.saida,event.kind==='skill'?PRIORIDADE.habilidade:PRIORIDADE.basico,panFonte,chave,P.impactAt*(event.kind==='skill'?P.skillSeconds:P.normalSeconds)*.55);
       return;
     }
-    if(event.kind==='cast')return;
-    const sound:Sound=event.kind==='interrupt'?'shatter':grand?'grand-impact':family==='grand'?'grand-impact':family==='physical'?'physical':family;
-    this.sound(sound,grand||['ko','turn','interrupt'].includes(event.kind)?4:2,pan);
+    if(event.kind==='cast'||event.kind==='turn')return;
+    if(grand){this.sound('grand-impacto',PRIORIDADE.grand,panAlvo,chave);if(som)this.sound(som.impacto,PRIORIDADE.importante,panAlvo,chave+1);return;}
+    if(som)this.sound(som.impacto,apoio?PRIORIDADE.apoio:event.kind==='skill'?PRIORIDADE.habilidade:PRIORIDADE.basico,panAlvo,chave);
   }
-  get status(){const trackSeconds=this.running&&this.ctx&&this.musicStartedAt?(this.musicOffset+Math.max(0,this.ctx.currentTime-this.musicStartedAt))%(this.stemBuffers?.[0]?.duration??Number.POSITIVE_INFINITY):this.musicOffset;return {state:this.ctx?.state??'locked',musicRunning:this.running,mode:this.stemSources.length?'stems':this.loop?'file':'synth',stemsPlaying:this.stemSources.length,musicSeconds:this.stemBuffers?.[0]?.duration??0,trackSeconds,activeCues:this.activeCues.length,loadedCues:this.cueBuffers.size,step:this.step};}
+  private posicaoDaMusica(){const base=this.stemBuffers[0];return this.running&&this.ctx&&this.musicStartedAt&&base&&this.stemSources[0]?(this.musicOffset+Math.max(0,this.ctx.currentTime-this.musicStartedAt))%base.duration:this.musicOffset;}
+  get status(){const base=this.stemBuffers[0];const trackSeconds=this.posicaoDaMusica();return {state:this.ctx?.state??'locked',musicRunning:this.running,mode:this.stemSources.length?'stems':'synth',stemsPlaying:this.stemSources.filter(Boolean).length,musicSeconds:base?.duration??0,trackSeconds,activeCues:this.vozes.length,loadedCues:this.buffers.size,step:this.step};}
 }
 export const battleAudio=new BattleAudio();

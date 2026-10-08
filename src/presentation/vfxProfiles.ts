@@ -52,62 +52,61 @@ export interface Familia {
   cor: string;
   tinta: Tinta;
   /** Som da biblioteca que acompanha (a parte 6 refaz a biblioteca inteira). */
-  som: 'action' | 'physical' | 'energy' | 'electric' | 'fire' | 'magic' | 'dark' | 'psychic' | 'slash' | 'prison' | 'shield' | 'heal' | 'buff' | 'debuff' | 'energy-shot' | 'impact';
 }
 
 const f = (x: Familia) => x;
 
 export const VFX_FAMILIES = {
   // ---------------------------------------------------------------- físico
-  soco: f({ nome: 'Soco', grupo: 'físico', impacto: 'soco', escala: 1.5, tempo: 0.55, cor: '#ffd9a8', tinta: 'personagem', som: 'action' }),
-  golpe_pesado: f({ nome: 'Golpe pesado', grupo: 'físico', impacto: 'golpe_pesado', escala: 1.9, tempo: 0.7, cor: '#ffc28a', tinta: 'personagem', som: 'physical' }),
-  esmagar: f({ nome: 'Esmagar', grupo: 'físico', impacto: 'esmagar', escala: 2.0, tempo: 0.75, cor: '#ffc28a', tinta: 'personagem', som: 'physical' }),
-  gancho: f({ nome: 'Gancho', grupo: 'físico', impacto: 'gancho', escala: 1.8, tempo: 0.65, cor: '#ffd9a8', tinta: 'personagem', som: 'physical' }),
-  terremoto: f({ nome: 'Terremoto', grupo: 'físico', impacto: 'terremoto', escala: 2.3, tempo: 0.8, cor: '#e8b77c', tinta: 'personagem', som: 'impact' }),
-  onda_de_choque: f({ nome: 'Onda de choque', grupo: 'físico', impacto: 'onda_de_choque', escala: 2.1, tempo: 0.7, cor: '#cfe6ff', tinta: 'personagem', som: 'impact' }),
-  rajada_de_golpes: f({ nome: 'Rajada de golpes', grupo: 'físico', impacto: 'rajada_de_golpes', escala: 1.8, tempo: 0.85, cor: '#ffd9a8', tinta: 'personagem', som: 'action' }),
+  soco: f({ nome: 'Soco', grupo: 'físico', impacto: 'soco', escala: 1.5, tempo: 0.55, cor: '#ffd9a8', tinta: 'personagem' }),
+  golpe_pesado: f({ nome: 'Golpe pesado', grupo: 'físico', impacto: 'golpe_pesado', escala: 1.9, tempo: 0.7, cor: '#ffc28a', tinta: 'personagem' }),
+  esmagar: f({ nome: 'Esmagar', grupo: 'físico', impacto: 'esmagar', escala: 2.0, tempo: 0.75, cor: '#ffc28a', tinta: 'personagem' }),
+  gancho: f({ nome: 'Gancho', grupo: 'físico', impacto: 'gancho', escala: 1.8, tempo: 0.65, cor: '#ffd9a8', tinta: 'personagem' }),
+  terremoto: f({ nome: 'Terremoto', grupo: 'físico', impacto: 'terremoto', escala: 2.3, tempo: 0.8, cor: '#e8b77c', tinta: 'personagem' }),
+  onda_de_choque: f({ nome: 'Onda de choque', grupo: 'físico', impacto: 'onda_de_choque', escala: 2.1, tempo: 0.7, cor: '#cfe6ff', tinta: 'personagem' }),
+  rajada_de_golpes: f({ nome: 'Rajada de golpes', grupo: 'físico', impacto: 'rajada_de_golpes', escala: 1.8, tempo: 0.85, cor: '#ffd9a8', tinta: 'personagem' }),
   // ---------------------------------------------------------------- cortes
-  corte: f({ nome: 'Corte', grupo: 'corte', acento: 'soco', impacto: 'corte', escala: 2.25, tempo: 0.75, giro: -10, cor: '#dff1ff', tinta: 'personagem', som: 'slash' }),
-  corte_diagonal: f({ nome: 'Corte diagonal', grupo: 'corte', acento: 'soco', impacto: 'corte', escala: 2.25, tempo: 0.75, giro: -42, cor: '#dff1ff', tinta: 'personagem', som: 'slash' }),
-  corte_cruzado: f({ nome: 'Corte cruzado', grupo: 'corte', acento: 'soco', impacto: 'corte_cruzado', escala: 2.25, tempo: 0.75, cor: '#dff1ff', tinta: 'personagem', som: 'slash' }),
-  estocada: f({ nome: 'Perfuração', grupo: 'corte', acento: 'soco', impacto: 'estocada', aponta: true, escala: 2.25, tempo: 0.75, cor: '#e6f4ff', tinta: 'personagem', som: 'slash' }),
-  corte_giratorio: f({ nome: 'Corte giratório', grupo: 'corte', acento: 'soco', impacto: 'corte_giratorio', escala: 2.35, tempo: 0.75, cor: '#dff1ff', tinta: 'personagem', som: 'slash' }),
-  corte_de_energia: f({ nome: 'Lâmina de energia', grupo: 'corte', viagem: 'crescente', impacto: 'corte_de_energia', aponta: true, escala: 2.0, tempo: 0.6, cor: '#9fe0ff', tinta: 'personagem', som: 'slash' }),
+  corte: f({ nome: 'Corte', grupo: 'corte', acento: 'soco', impacto: 'corte', escala: 2.25, tempo: 0.75, giro: -10, cor: '#dff1ff', tinta: 'personagem' }),
+  corte_diagonal: f({ nome: 'Corte diagonal', grupo: 'corte', acento: 'soco', impacto: 'corte', escala: 2.25, tempo: 0.75, giro: -42, cor: '#dff1ff', tinta: 'personagem' }),
+  corte_cruzado: f({ nome: 'Corte cruzado', grupo: 'corte', acento: 'soco', impacto: 'corte_cruzado', escala: 2.25, tempo: 0.75, cor: '#dff1ff', tinta: 'personagem' }),
+  estocada: f({ nome: 'Perfuração', grupo: 'corte', acento: 'soco', impacto: 'estocada', aponta: true, escala: 2.25, tempo: 0.75, cor: '#e6f4ff', tinta: 'personagem' }),
+  corte_giratorio: f({ nome: 'Corte giratório', grupo: 'corte', acento: 'soco', impacto: 'corte_giratorio', escala: 2.35, tempo: 0.75, cor: '#dff1ff', tinta: 'personagem' }),
+  corte_de_energia: f({ nome: 'Lâmina de energia', grupo: 'corte', viagem: 'crescente', impacto: 'corte_de_energia', aponta: true, escala: 2.0, tempo: 0.6, cor: '#9fe0ff', tinta: 'personagem' }),
   // ---------------------------------------------------------------- projéteis
-  tiro: f({ nome: 'Tiro', grupo: 'projétil', viagem: 'tiro', impacto: 'soco', escala: 1.2, tempo: 0.45, cor: '#ffe0a0', tinta: 'personagem', som: 'energy-shot' }),
-  saraivada: f({ nome: 'Rajada de tiros', grupo: 'projétil', viagem: 'saraivada', impacto: 'rajada_de_golpes', escala: 1.6, tempo: 0.75, cor: '#ffe0a0', tinta: 'personagem', som: 'energy-shot' }),
-  missil: f({ nome: 'Míssil', grupo: 'projétil', viagem: 'missil', impacto: 'explosao', escala: 2.1, tempo: 0.75, cor: '#ffb070', tinta: 'personagem', som: 'fire' }),
-  esfera: f({ nome: 'Esfera de energia', grupo: 'projétil', viagem: 'orbe', impacto: 'pulso_de_energia', escala: 1.8, tempo: 0.65, cor: '#8fd8ff', tinta: 'personagem', som: 'energy' }),
-  esfera_carregada: f({ nome: 'Esfera carregada', grupo: 'projétil', preparo: 'carga', viagem: 'orbe', impacto: 'explosao', escala: 2.2, tempo: 0.8, cor: '#8fd8ff', tinta: 'personagem', som: 'energy' }),
+  tiro: f({ nome: 'Tiro', grupo: 'projétil', viagem: 'tiro', impacto: 'soco', escala: 1.2, tempo: 0.45, cor: '#ffe0a0', tinta: 'personagem' }),
+  saraivada: f({ nome: 'Rajada de tiros', grupo: 'projétil', viagem: 'saraivada', impacto: 'rajada_de_golpes', escala: 1.6, tempo: 0.75, cor: '#ffe0a0', tinta: 'personagem' }),
+  missil: f({ nome: 'Míssil', grupo: 'projétil', viagem: 'missil', impacto: 'explosao', escala: 2.1, tempo: 0.75, cor: '#ffb070', tinta: 'personagem' }),
+  esfera: f({ nome: 'Esfera de energia', grupo: 'projétil', viagem: 'orbe', impacto: 'pulso_de_energia', escala: 1.8, tempo: 0.65, cor: '#8fd8ff', tinta: 'personagem' }),
+  esfera_carregada: f({ nome: 'Esfera carregada', grupo: 'projétil', preparo: 'carga', viagem: 'orbe', impacto: 'explosao', escala: 2.2, tempo: 0.8, cor: '#8fd8ff', tinta: 'personagem' }),
   // ---------------------------------------------------------------- energia
-  feixe: f({ nome: 'Feixe', grupo: 'energia', faixa: 'feixe', impacto: 'soco', escala: 1.8, tempo: 0.55, cor: '#8fd8ff', tinta: 'personagem', som: 'energy' }),
-  feixe_pesado: f({ nome: 'Feixe pesado', grupo: 'energia', preparo: 'carga', faixa: 'feixe_pesado', impacto: 'explosao', escala: 2.2, tempo: 0.8, cor: '#8fd8ff', tinta: 'personagem', som: 'energy' }),
-  explosao: f({ nome: 'Explosão', grupo: 'energia', impacto: 'explosao', escala: 2.2, tempo: 0.8, cor: '#ffb070', tinta: 'personagem', som: 'fire' }),
-  onda_de_energia: f({ nome: 'Onda de energia', grupo: 'energia', viagem: 'crescente', impacto: 'onda_de_choque', escala: 2.0, tempo: 0.65, cor: '#a8e6ff', tinta: 'personagem', som: 'energy' }),
+  feixe: f({ nome: 'Feixe', grupo: 'energia', faixa: 'feixe', impacto: 'soco', escala: 1.8, tempo: 0.55, cor: '#8fd8ff', tinta: 'personagem' }),
+  feixe_pesado: f({ nome: 'Feixe pesado', grupo: 'energia', preparo: 'carga', faixa: 'feixe_pesado', impacto: 'explosao', escala: 2.2, tempo: 0.8, cor: '#8fd8ff', tinta: 'personagem' }),
+  explosao: f({ nome: 'Explosão', grupo: 'energia', impacto: 'explosao', escala: 2.2, tempo: 0.8, cor: '#ffb070', tinta: 'personagem' }),
+  onda_de_energia: f({ nome: 'Onda de energia', grupo: 'energia', viagem: 'crescente', impacto: 'onda_de_choque', escala: 2.0, tempo: 0.65, cor: '#a8e6ff', tinta: 'personagem' }),
   // ---------------------------------------------------------------- elementos
-  fogo: f({ nome: 'Fogo', grupo: 'elemento', viagem: 'bola_de_fogo', impacto: 'fogo', escala: 2.0, tempo: 0.85, cor: '#ff7a2e', tinta: 'elemento', som: 'fire' }),
-  gelo: f({ nome: 'Gelo', grupo: 'elemento', viagem: 'estilhaco', impacto: 'gelo', escala: 1.9, tempo: 0.8, cor: '#8fe6ff', tinta: 'elemento', som: 'magic' }),
-  raio: f({ nome: 'Raio', grupo: 'elemento', faixa: 'raio_faixa', impacto: 'raio', acento: 'soco', escala: 1.9, tempo: 0.65, cor: '#ffe76a', tinta: 'elemento', som: 'electric' }),
-  vento: f({ nome: 'Vento', grupo: 'elemento', viagem: 'crescente', impacto: 'vento', escala: 2.0, tempo: 0.8, cor: '#bff5e4', tinta: 'elemento', som: 'magic' }),
-  agua: f({ nome: 'Água', grupo: 'elemento', viagem: 'orbe', impacto: 'agua', escala: 2.0, tempo: 0.8, cor: '#4fb4ff', tinta: 'elemento', som: 'magic' }),
-  terra: f({ nome: 'Terra', grupo: 'elemento', viagem: 'rocha', impacto: 'terra', escala: 2.0, tempo: 0.85, cor: '#d6a86a', tinta: 'elemento', som: 'physical' }),
-  veneno: f({ nome: 'Veneno', grupo: 'elemento', viagem: 'orbe', impacto: 'veneno', escala: 1.9, tempo: 0.85, cor: '#9be84a', tinta: 'elemento', som: 'debuff' }),
-  sombra: f({ nome: 'Sombra', grupo: 'elemento', viagem: 'orbe', impacto: 'sombra', escala: 2.0, tempo: 0.85, cor: '#9a5cff', tinta: 'elemento', som: 'dark' }),
-  luz: f({ nome: 'Luz', grupo: 'elemento', impacto: 'luz', escala: 2.0, tempo: 0.85, cor: '#ffe9a3', tinta: 'elemento', som: 'magic' }),
+  fogo: f({ nome: 'Fogo', grupo: 'elemento', viagem: 'bola_de_fogo', impacto: 'fogo', escala: 2.0, tempo: 0.85, cor: '#ff7a2e', tinta: 'elemento' }),
+  gelo: f({ nome: 'Gelo', grupo: 'elemento', viagem: 'estilhaco', impacto: 'gelo', escala: 1.9, tempo: 0.8, cor: '#8fe6ff', tinta: 'elemento' }),
+  raio: f({ nome: 'Raio', grupo: 'elemento', faixa: 'raio_faixa', impacto: 'raio', acento: 'soco', escala: 1.9, tempo: 0.65, cor: '#ffe76a', tinta: 'elemento' }),
+  vento: f({ nome: 'Vento', grupo: 'elemento', viagem: 'crescente', impacto: 'vento', escala: 2.0, tempo: 0.8, cor: '#bff5e4', tinta: 'elemento' }),
+  agua: f({ nome: 'Água', grupo: 'elemento', viagem: 'orbe', impacto: 'agua', escala: 2.0, tempo: 0.8, cor: '#4fb4ff', tinta: 'elemento' }),
+  terra: f({ nome: 'Terra', grupo: 'elemento', viagem: 'rocha', impacto: 'terra', escala: 2.0, tempo: 0.85, cor: '#d6a86a', tinta: 'elemento' }),
+  veneno: f({ nome: 'Veneno', grupo: 'elemento', viagem: 'orbe', impacto: 'veneno', escala: 1.9, tempo: 0.85, cor: '#9be84a', tinta: 'elemento' }),
+  sombra: f({ nome: 'Sombra', grupo: 'elemento', viagem: 'orbe', impacto: 'sombra', escala: 2.0, tempo: 0.85, cor: '#9a5cff', tinta: 'elemento' }),
+  luz: f({ nome: 'Luz', grupo: 'elemento', impacto: 'luz', escala: 2.0, tempo: 0.85, cor: '#ffe9a3', tinta: 'elemento' }),
   // ---------------------------------------------------------------- magia e psíquico
-  selo: f({ nome: 'Selo', grupo: 'magia', impacto: 'selo', escala: 2.0, tempo: 0.85, cor: '#c7a2ff', tinta: 'personagem', som: 'magic' }),
-  prisao: f({ nome: 'Prisão', grupo: 'magia', impacto: 'prisao', escala: 1.8, tempo: 0.9, cor: '#9fe1f3', tinta: 'personagem', som: 'prison' }),
-  distorcao: f({ nome: 'Distorção', grupo: 'magia', impacto: 'distorcao', escala: 1.9, tempo: 0.8, cor: '#d18cff', tinta: 'personagem', som: 'psychic' }),
-  portal: f({ nome: 'Portal', grupo: 'magia', preparo: 'portal', impacto: 'portal', escala: 1.8, tempo: 0.8, cor: '#8f9dff', tinta: 'personagem', som: 'magic' }),
-  telecinese: f({ nome: 'Telecinese', grupo: 'magia', impacto: 'telecinese', escala: 2.0, tempo: 0.85, cor: '#d6a2ff', tinta: 'personagem', som: 'psychic' }),
-  maldicao: f({ nome: 'Maldição', grupo: 'magia', impacto: 'maldicao', escala: 1.9, tempo: 0.9, cor: '#b45cff', tinta: 'elemento', som: 'debuff' }),
+  selo: f({ nome: 'Selo', grupo: 'magia', impacto: 'selo', escala: 2.0, tempo: 0.85, cor: '#c7a2ff', tinta: 'personagem' }),
+  prisao: f({ nome: 'Prisão', grupo: 'magia', impacto: 'prisao', escala: 1.8, tempo: 0.9, cor: '#9fe1f3', tinta: 'personagem' }),
+  distorcao: f({ nome: 'Distorção', grupo: 'magia', impacto: 'distorcao', escala: 1.9, tempo: 0.8, cor: '#d18cff', tinta: 'personagem' }),
+  portal: f({ nome: 'Portal', grupo: 'magia', preparo: 'portal', impacto: 'portal', escala: 1.8, tempo: 0.8, cor: '#8f9dff', tinta: 'personagem' }),
+  telecinese: f({ nome: 'Telecinese', grupo: 'magia', impacto: 'telecinese', escala: 2.0, tempo: 0.85, cor: '#d6a2ff', tinta: 'personagem' }),
+  maldicao: f({ nome: 'Maldição', grupo: 'magia', impacto: 'maldicao', escala: 1.9, tempo: 0.9, cor: '#b45cff', tinta: 'elemento' }),
   // ---------------------------------------------------------------- apoio
-  cura: f({ nome: 'Cura', grupo: 'apoio', impacto: 'cura', escala: 1.8, tempo: 0.9, cor: '#7dffb0', tinta: 'fixa', som: 'heal' }),
-  escudo: f({ nome: 'Escudo', grupo: 'apoio', impacto: 'escudo', escala: 1.7, tempo: 0.9, cor: '#8edeff', tinta: 'fixa', som: 'shield' }),
-  reforco: f({ nome: 'Reforço', grupo: 'apoio', impacto: 'reforco', escala: 1.8, tempo: 0.9, cor: '#ffd36b', tinta: 'elemento', som: 'buff' }),
-  dreno: f({ nome: 'Dreno', grupo: 'apoio', faixa: 'dreno', impacto: 'maldicao', escala: 1.6, tempo: 0.8, cor: '#ff6d8a', tinta: 'elemento', som: 'dark' }),
+  cura: f({ nome: 'Cura', grupo: 'apoio', impacto: 'cura', escala: 1.8, tempo: 0.9, cor: '#7dffb0', tinta: 'fixa' }),
+  escudo: f({ nome: 'Escudo', grupo: 'apoio', impacto: 'escudo', escala: 1.7, tempo: 0.9, cor: '#8edeff', tinta: 'fixa' }),
+  reforco: f({ nome: 'Reforço', grupo: 'apoio', impacto: 'reforco', escala: 1.8, tempo: 0.9, cor: '#ffd36b', tinta: 'elemento' }),
+  dreno: f({ nome: 'Dreno', grupo: 'apoio', faixa: 'dreno', impacto: 'maldicao', escala: 1.6, tempo: 0.8, cor: '#ff6d8a', tinta: 'elemento' }),
   // ---------------------------------------------------------------- especial
-  execucao: f({ nome: 'Execução', grupo: 'especial', impacto: 'execucao', escala: 2.3, tempo: 0.9, cor: '#e24a5a', tinta: 'fixa', som: 'dark' }),
+  execucao: f({ nome: 'Execução', grupo: 'especial', impacto: 'execucao', escala: 2.3, tempo: 0.9, cor: '#e24a5a', tinta: 'fixa' }),
 } as const satisfies Record<string, Familia>;
 
 export type VfxFamily = keyof typeof VFX_FAMILIES;
