@@ -4,7 +4,7 @@ import { characters } from '../src/data/characters';
 import { presentSkill,presentTrait,presentStatus,topicNames,positiveStatuses } from '../src/engine/skill-descriptions';
 import { statuses } from '../src/data/statuses';
 import { CharacterModal } from '../src/components/CharacterModal';
-import { FighterCard } from '../src/components/FighterCard';
+import { ArenaUnit } from '../src/components/ArenaUnit';
 import { applyEffects,createBattle,targets } from '../src/engine/battle';
 
 describe('linguagem pública e o catálogo inteiro',()=>{
@@ -69,7 +69,7 @@ describe('linguagem pública e o catálogo inteiro',()=>{
   });
   it('não cria caixas flutuantes de Carga no lutador',()=>{
     const b=createBattle(['light','pikachu','captain'],['goku','batman','thanos'],17),f=b.fighters[0];
-    const html=renderToStaticMarkup(<FighterCard fighter={f} battle={b} beat={{event:{id:1,time:0,kind:'basic',source:f.uid,label:'Ataque básico'},events:[{id:2,time:0,kind:'charge',source:f.uid,target:f.uid,skill:0,label:'status',value:7}],before:b,after:b,duration:2,impacted:true,impactTime:1,grand:false,periodic:false,family:'physical'} as never} onInspect={()=>{}} numbers threatened={false}/>);
+    const html=renderToStaticMarkup(<ArenaUnit fighter={f} battle={b} beat={{event:{id:1,time:0,kind:'basic',source:f.uid,label:'Ataque básico'},events:[{id:2,time:0,kind:'charge',source:f.uid,target:f.uid,skill:0,label:'status',value:7}],before:b,after:b,duration:2,impacted:true,impactTime:1,grand:false,periodic:false,family:'physical'} as never} onInspect={()=>{}} numbers threatened={false}/>);
     expect(html).not.toContain('charge-reason');
     expect(html).not.toContain('+7%');
   });

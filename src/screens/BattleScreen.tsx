@@ -1,11 +1,11 @@
 import { useLayoutEffect,useRef,useState } from 'react';
-import { Pause,Play,FastForward,VolumeX,Volume2,AudioLines,Check,LogOut } from 'lucide-react';
+import { Pause,Play,FastForward,VolumeX,Volume2,SlidersHorizontal,Check,LogOut,ChevronLeft,ScrollText } from 'lucide-react';
 import { AuxIcon } from '../components/Icon';
 import type { Battle } from '../engine/types';
 import type { Settings } from '../lib/storage';
 import type { Beat } from '../presentation/director';
 import { PRESENTATION as P } from '../presentation/config';
-import { FighterCard } from '../components/FighterCard';
+import { ArenaUnit } from '../components/ArenaUnit';
 import { BattleEffects,type Anchors } from '../components/BattleEffects';
 import { CombatConnections } from '../components/CombatConnections';
 import { combatLinks } from '../presentation/combat-links';
@@ -13,7 +13,7 @@ import { BattleInspector,type InspectTarget } from '../components/BattleInspecto
 import { byId } from '../data/characters';
 import { statuses } from '../data/statuses';
 
-export function BattleScreen({battle,beat,index,name,settings,paused,onPause,onAbandon,onSettings}:{battle:Battle;beat:Beat|null;index:number;name:string;settings:Settings;paused:boolean;onPause:()=>void;onAbandon:()=>void;onSettings:(s:Settings)=>void}){
+export function BattleScreen({battle,beat,index,name,settings,paused,onPause,onAbandon,onSettings,onExit}:{battle:Battle;beat:Beat|null;index:number;name:string;settings:Settings;paused:boolean;onPause:()=>void;onAbandon:()=>void;onSettings:(s:Settings)=>void;onExit?:()=>void}){
   const arena=useRef<HTMLDivElement>(null),[anchors,setAnchors]=useState<Anchors>({}),[mixer,setMixer]=useState(false),[historyOpen,setHistoryOpen]=useState(false),[inspect,setInspect]=useState<InspectTarget|null>(null),[tutorial,setTutorial]=useState(()=>{try{return index===0&&!localStorage.getItem('nexus-battle-guide-v1')?0:-1}catch{return -1}});
   useLayoutEffect(()=>{
     const el=arena.current;if(!el)return;
@@ -48,23 +48,41 @@ export function BattleScreen({battle,beat,index,name,settings,paused,onPause,onA
     return `${from}: ${event.label}`;
   };
   const closeTutorial=()=>{try{localStorage.setItem('nexus-battle-guide-v1','1')}catch{setTutorial(-1)}setTutorial(-1)};
-  const tutorialSteps=[['Círculo = próximo ataque básico.','Ele enche, o personagem ataca e começa de novo.'],['Três ícones = habilidades.','Cada uma ganha Carga. Com 100%, fica pronta.'],['PREPARANDO = ainda dá tempo de interromper.','O golpe só acontece quando o Preparo termina.'],['Ícones pequenos = Status.','Toque para ver o efeito e quanto tempo resta.'],['Vantagem mostra quem controla a luta.','Ela ajuda algumas habilidades, mas não decide a vitória.']];
-  return <section className={`battle-screen lead-${lead} ${turn?'dominion-turn':''} ${paused?'presentation-paused':''}`} data-beat-id={beat?.event.id} data-beat-kind={beat?.event.kind} data-beat-duration={beat?.duration} style={{'--motion-scale':1/settings.speed,'--lead-strength':Math.min(.45,Math.abs(battle.dominion)/160)} as React.CSSProperties}>
-    <header className="battle-header"><div><span className="eyebrow">CONFRONTO {String(index+1).padStart(2,'0')} <span className="muted">/ 10</span></span><h2>{name}</h2></div><span className="battle-objective">ATÉ O ÚLTIMO TRIO</span></header>
-    <div className="dominion"><div className="dominion-labels"><span>RIVAIS</span><strong>VANTAGEM</strong><span>SEU TRIO</span></div><div className="dominion-track" role="meter" aria-label="Vantagem: negativo rivais, positivo seu trio" aria-valuenow={Math.round(battle.dominion)} aria-valuemin={-100} aria-valuemax={100}><span className="dominion-rivals" style={{width:`${position}%`}}/><span className="dominion-player" style={{width:`${100-position}%`}}/><span className="dominion-center"/><span className="dominion-glow" style={{left:`${position}%`}}/><span className="dominion-front" style={{left:`${position}%`}}/></div><small>{turn?'VIRADA!':label}</small></div>
+  const tutorialSteps=[['Círculo = próximo ataque básico.','Ele enche, o personagem ataca e começa de novo.'],['Três ícones = habilidades.','Cada uma ganha Carga. Com 100%, fica pronta.'],['PREPARANDO = ainda dá tempo de interromper.','O golpe só acontece quando o Preparo termina.'],['Linha de cima = buffs. Linha de baixo = debuffs.','Toque num Status para ver quanto ele vale e quanto tempo resta.'],['Vantagem mostra quem controla a luta.','Ela ajuda algumas habilidades, mas não decide a vitória.']];
+  const unit=(f:Battle['fighters'][number])=><ArenaUnit key={f.uid} fighter={f} battle={battle} beat={beat} onInspect={setInspect} numbers={settings.numbers} threatened={threats.has(f.uid)} linkedSource={actionSources.has(f.uid)} linkedTarget={actionTargets.has(f.uid)}/>;
+  return <section className={`battle-screen arena-v2 lead-${lead} ${turn?'dominion-turn':''} ${paused?'presentation-paused':''}`} data-beat-id={beat?.event.id} data-beat-kind={beat?.event.kind} data-beat-duration={beat?.duration} style={{'--motion-scale':1/settings.speed,'--lead-strength':Math.min(.45,Math.abs(battle.dominion)/160),'--front':`${position}%`} as React.CSSProperties}>
+    <header className="arena-hud">
+      {onExit&&<button className="hud-button hud-exit" onClick={onExit} aria-label="Voltar ao início (a batalha fica pausada)"><ChevronLeft size={22}/></button>}
+      <div className="hud-round" title={name}><small>CONFRONTO</small><b>{String(index+1).padStart(2,'0')}<i>/10</i></b></div>
+      <div className="hud-advantage">
+        <div className="hud-advantage-labels"><span>RIVAIS</span><strong>{turn?'VIRADA!':label}</strong><span>SEU TRIO</span></div>
+        <div className="hud-advantage-track" role="meter" aria-label="Vantagem: negativo rivais, positivo seu trio" aria-valuenow={Math.round(battle.dominion)} aria-valuemin={-100} aria-valuemax={100}>
+          <span className="hud-advantage-rivals" style={{width:`${position}%`}}/><span className="hud-advantage-allies" style={{width:`${100-position}%`}}/>
+          <span className="hud-advantage-mid" aria-hidden="true"/><span className="hud-advantage-front" aria-hidden="true"/>
+        </div>
+      </div>
+      <button className={`hud-button history-button ${historyOpen?'selected':''}`} aria-label="Histórico da batalha" aria-expanded={historyOpen} onClick={()=>setHistoryOpen(!historyOpen)}><ScrollText size={20}/></button>
+    </header>
     <div ref={arena} className={`arena ${paused?'is-paused':''} ${settings.effects?'':'effects-off'}`}>
-      <div className="arena-scenery" aria-hidden="true"><div className="arena-grid"/><div className="arena-orbit orbit-outer"/><div className="arena-orbit orbit-inner"/><div className="arena-axis"/><svg className="arena-sigil" viewBox="0 0 96 96"><circle cx="48" cy="48" r="34"/><circle cx="48" cy="48" r="23"/><path d="M48 8v15m0 50v15M8 48h15m50 0h15M20 20l11 11m34 34 11 11M76 20 65 31M31 65 20 76M33 18l5 19 10 11 10-11 5-19M33 78l5-19 10-11 10 11 5 19"/><path className="arena-sigil-core" d="m48 36 12 12-12 12-12-12 12-12Z"/></svg></div>
-      <div className="arena-team enemy-team">{battle.fighters.filter(f=>f.side==='enemy').map(f=><FighterCard key={f.uid} fighter={f} battle={battle} beat={beat} onInspect={setInspect} numbers={settings.numbers} threatened={threats.has(f.uid)} linkedSource={actionSources.has(f.uid)} linkedTarget={actionTargets.has(f.uid)}/>)}</div>
-      <div className="arena-gap" aria-hidden="true"/>
-      <div className="arena-team player-team">{battle.fighters.filter(f=>f.side==='player').map(f=><FighterCard key={f.uid} fighter={f} battle={battle} beat={beat} onInspect={setInspect} numbers={settings.numbers} threatened={threats.has(f.uid)} linkedSource={actionSources.has(f.uid)} linkedTarget={actionTargets.has(f.uid)}/>)}</div>
+      <div className="arena-floor" aria-hidden="true"><span className="floor-glow floor-rivals"/><span className="floor-glow floor-allies"/><span className="floor-ring ring-outer"/><span className="floor-ring ring-inner"/><span className="floor-lines"/></div>
+      <div className="team team-rivals">{battle.fighters.filter(f=>f.side==='enemy').map(unit)}</div>
+      <div className="arena-center"><span className="arena-versus" aria-hidden="true">VS</span><span className="arena-encounter">{name}</span>
+        {settings.explanations!=='off'&&<div className="battle-hint"><span><i className="legend-circle"/>Próximo ataque</span><span><i className="legend-ready"/>Pronta</span><span><i className="legend-cast"/>Preparo</span></div>}
+      </div>
+      <div className="team team-allies">{battle.fighters.filter(f=>f.side==='player').map(unit)}</div>
       <CombatConnections battle={battle} beat={beat} anchors={anchors} reduced={settings.reducedMotion}/>
       <BattleEffects battle={battle} beat={beat} anchors={anchors} enabled={settings.effects} reduced={settings.reducedMotion}/>
       {paused&&<div className="paused-banner"><Pause size={16}/> BATALHA PAUSADA</div>}
     </div>
-    <footer className="battle-controls"><button className="secondary compact" onClick={onPause}>{paused?<Play size={17}/>:<Pause size={17}/>} {paused?'Continuar':'Pausar'}</button><button className={`secondary compact ${settings.speed===2?'selected':''}`} aria-label={`Velocidade ${settings.speed} vezes`} onClick={()=>onSettings({...settings,speed:settings.speed===1?2:1})}><FastForward size={17}/>{settings.speed}×</button><button className={`icon-button history-button ${historyOpen?'selected':''}`} aria-label="Histórico da batalha" aria-expanded={historyOpen} onClick={()=>setHistoryOpen(!historyOpen)}><AuxIcon id="history" size={22}/></button><button className="icon-button sound-button" aria-label={settings.volume?'Silenciar':'Ativar som'} onClick={()=>onSettings({...settings,volume:settings.volume?0:P.audio.master})}>{settings.volume?<Volume2 size={18}/>:<VolumeX size={18}/>}</button><button className={`icon-button mixer-button ${mixer?'selected':''}`} aria-label="Ajustar música e efeitos" aria-expanded={mixer} onClick={()=>setMixer(!mixer)}><AudioLines size={18}/></button><label className="auto-label"><input type="checkbox" checked={settings.auto} onChange={e=>onSettings({...settings,auto:e.target.checked})}/>Sequência auto</label><button className="danger compact abandon-battle" onClick={onAbandon}><LogOut size={15}/>Desistir</button></footer>
+    <footer className="arena-controls">
+      <button className={`control-main ${paused?'is-paused':''}`} onClick={onPause}>{paused?<Play size={18}/>:<Pause size={18}/>}<span>{paused?'Continuar':'Pausar'}</span></button>
+      <button className={`control ${settings.speed===2?'selected':''}`} aria-label={`Velocidade ${settings.speed} vezes`} onClick={()=>onSettings({...settings,speed:settings.speed===1?2:1})}><FastForward size={18}/><b>{settings.speed}×</b></button>
+      <button className="control sound-button" aria-label={settings.volume?'Silenciar':'Ativar som'} onClick={()=>onSettings({...settings,volume:settings.volume?0:P.audio.master})}>{settings.volume?<Volume2 size={19}/>:<VolumeX size={19}/>}</button>
+      <button className={`control mixer-button ${mixer?'selected':''}`} aria-label="Ajustes da batalha" aria-expanded={mixer} onClick={()=>setMixer(!mixer)}><SlidersHorizontal size={18}/></button>
+      <button className="control control-danger abandon-battle" onClick={onAbandon} aria-label="Desistir da jornada"><LogOut size={17}/><span>Desistir</span></button>
+    </footer>
     {historyOpen&&<aside className="battle-history"><div><strong><AuxIcon id="history" size={18}/> Momentos importantes</strong><button aria-label="Fechar histórico" onClick={()=>setHistoryOpen(false)}>×</button></div>{recent.length?recent.map(e=><p key={e.id}>{historyText(e)}</p>):<p>A luta ainda não teve momentos decisivos.</p>}</aside>}
-    {mixer&&<div className="battle-mixer">{(['musicVolume','effectsVolume'] as const).map(key=><label key={key}>{key==='musicVolume'?'Música':'Efeitos'}<input type="range" min="0" max="100" value={settings[key]} onChange={e=>onSettings({...settings,[key]:Number(e.target.value)})}/></label>)}</div>}
-    {settings.explanations!=='off'&&<div className="battle-hint"><span><i className="legend-circle"/>Próximo ataque</span><span><i className="legend-ready"/>Habilidade pronta</span><span><i className="legend-cast"/>Preparo</span>{settings.explanations==='detailed'&&<span>Toque em uma habilidade ou Status para entender.</span>}</div>}
+    {mixer&&<div className="battle-mixer">{(['musicVolume','effectsVolume'] as const).map(key=><label key={key}>{key==='musicVolume'?'Música':'Efeitos'}<input type="range" min="0" max="100" value={settings[key]} onChange={e=>onSettings({...settings,[key]:Number(e.target.value)})}/></label>)}<label className="auto-label"><input type="checkbox" checked={settings.auto} onChange={e=>onSettings({...settings,auto:e.target.checked})}/>Próximo confronto automático</label></div>}
     {inspect&&<BattleInspector target={inspect} battle={battle} onClose={()=>setInspect(null)} onSelect={setInspect}/>}
     {tutorial>=0&&<div className="battle-tutorial"><div><span><AuxIcon id="help" size={20}/> GUIA {tutorial+1}/5</span><button onClick={closeTutorial} aria-label="Pular guia"><Check size={17}/></button></div><p><b>{tutorialSteps[tutorial][0]}</b></p><p>{tutorialSteps[tutorial][1]}</p><button className="secondary" onClick={()=>tutorial===4?closeTutorial():setTutorial(tutorial+1)}>{tutorial===4?'Pronto. Assistir meu trio':'Entendi'}</button><button className="text-button" onClick={closeTutorial}>Pular guia</button></div>}
   </section>;

@@ -7,10 +7,12 @@ import { defaults } from './lib/storage';
 import './styles.css';
 import './presentation/battle.css';
 import './presentation/visual-game.css';
+import './presentation/arena.css';
 
 const params=new URLSearchParams(location.search),scenario=params.get('scenario')??'basic',phase=params.get('phase')??'windup';
 localStorage.setItem('nexus-battle-guide-v1','1');
-const battle=createBattle(['sakura','gojo','naruto'],['goku','vegeta','hulk'],99);
+/* `nomes`: os nomes mais longos do elenco, para ver se a arena aguenta. */
+const battle=scenario==='nomes'?createBattle(['coragem','raidenmk','capitaoplaneta'],['dannyphantom','lexluthor','sailormoon'],99):createBattle(['sakura','gojo','naruto'],['goku','vegeta','hulk'],99);
 const [sakura,gojo,naruto,goku,vegeta,hulk]=battle.fighters;
 let source=sakura,target=goku,effects:Effect[]=[{kind:'damage',value:190}],selected=[goku],visual:Visual='impact';
 if(scenario==='heal'){source=sakura;target=naruto;target.hp-=240;effects=[{kind:'heal',value:170}];selected=[target];visual='shield';}
@@ -28,6 +30,18 @@ if(scenario==='acumulo'){
   applyEffects(battle,gojo,[goku],[{kind:'status',status:'slow',value:.22,duration:6}]);
   applyEffects(battle,naruto,[sakura],[{kind:'status',status:'haste',value:.2,duration:6}]);
   source=gojo;target=goku;effects=[{kind:'status',status:'exposed',value:.20,duration:8}];selected=[target];visual='psychic';
+}
+if(scenario==='estados'||scenario==='nomes'){
+  /* Todos os estados difíceis de uma vez: Preparo, fora da luta, Vida baixa
+   * com Escudo, muitos Status, habilidade pronta, em recarga e quase atacando. */
+  goku.cast={skill:0,elapsed:1.2,duration:3,targets:[sakura.uid]};
+  vegeta.hp=0;
+  hulk.hp=Math.round(hulk.maxHp*.18);hulk.shields=[{amount:220,remaining:6}] as typeof hulk.shields;
+  applyEffects(battle,gojo,[sakura],[{kind:'status',status:'haste',value:.2,duration:6},{kind:'status',status:'regen',value:8,duration:6},{kind:'status',status:'protected',value:.2,duration:6},{kind:'status',status:'strengthened',value:.1,duration:6},{kind:'status',status:'strengthened',value:.1,duration:6}]);
+  applyEffects(battle,goku,[sakura],[{kind:'status',status:'slow',value:.2,duration:6},{kind:'status',status:'exposed',value:.2,duration:6},{kind:'status',status:'burning',value:6,duration:6},{kind:'status',status:'marked',value:.1,duration:6},{kind:'status',status:'weakened',value:.1,duration:6},{kind:'status',status:'silenced',value:1,duration:3}]);
+  naruto.skills[0].charge=100;naruto.skills[1].cooldown=4;naruto.skills[2].charge=55;
+  gojo.action=.93;
+  source=gojo;target=goku;effects=[{kind:'damage',value:120}];selected=[target];visual='psychic';
 }
 const before=structuredClone(battle),kind=scenario==='basic'||scenario==='energy'?'basic':'skill';
 const event:BattleEvent={id:1000,time:0,kind,source:source.uid,target:target.uid,skill:kind==='skill'?0:undefined,label:kind==='basic'?'Ataque básico':scenario,visual};

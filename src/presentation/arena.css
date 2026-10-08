@@ -1,0 +1,301 @@
+/*
+ * A arena da batalha (adendo, parte 1).
+ *
+ * A batalha ocupa a tela inteira e nunca rola: dois times frente a frente,
+ * um palco livre no meio para as trajetórias, e cada lutador como uma
+ * unidade de pé no chão — medalhão virado para o centro, informação para fora.
+ *
+ * Feito primeiro para o celular em pé (360–430 px). Com a tela deitada, ou no
+ * computador, os times ficam lado a lado: o seu à esquerda, os rivais à
+ * direita, como numa luta de videogame.
+ *
+ * Tudo aqui vive sob `.arena-v2`, com especificidade maior que as regras
+ * antigas do cartão, para que nenhuma delas vaze para a arena nova.
+ */
+
+/* ---------- O palco ocupa a tela ---------- */
+.app.in-battle .site-header,.app.in-battle .site-footer,.app.in-battle .battle-main>.back-button{display:none}
+.app.in-battle .battle-main{width:100%;max-width:none;margin:0;padding:0}
+
+.battle-screen.arena-v2{
+  --ally:#5fd8bd;--ally-deep:#1f8f7c;--rival:#f27d90;--rival-deep:#a33652;--gold:#f4d47e;--ink:#eef5f0;--muted:#a9bab3;
+  --medal:clamp(72px,min(25vw,11.5dvh),132px);
+  --skill:clamp(31px,min(9.6vw,5dvh),46px);
+  --status:clamp(17px,min(5vw,2.5dvh),22px);
+  position:fixed;inset:0;z-index:5;width:100%;max-width:none;height:100dvh;margin:0;
+  display:grid;grid-template-rows:auto minmax(0,1fr) auto;
+  padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+  overflow:hidden;color:var(--ink);
+  background:
+    radial-gradient(120% 55% at 50% 0%,#5a223a55,transparent 60%),
+    radial-gradient(120% 55% at 50% 100%,#14584c66,transparent 60%),
+    linear-gradient(180deg,#0d1018 0%,#091016 45%,#071311 100%);
+}
+
+/* ---------- Barra de cima ---------- */
+.arena-v2 .arena-hud{position:relative;z-index:8;display:grid;grid-template-columns:auto auto minmax(0,1fr) auto;align-items:center;gap:8px;padding:8px 10px 6px;background:linear-gradient(180deg,#05080cee,#05080c00)}
+.arena-v2 .hud-exit{grid-column:1}.arena-v2 .hud-round{grid-column:2}.arena-v2 .hud-advantage{grid-column:3}.arena-v2 .history-button{grid-column:4}
+.arena-v2 .hud-button{width:44px;height:44px;display:grid;place-items:center;padding:0;border-radius:13px;border:1px solid #ffffff1c;background:#ffffff0b;color:#dfe9e3;box-shadow:inset 0 1px #ffffff14}
+.arena-v2 .hud-button.selected{background:#f4d47e22;border-color:#f4d47e88;color:#ffe9b0}
+.arena-v2 .hud-round{display:grid;justify-items:center;line-height:1;min-width:46px}
+.arena-v2 .hud-round small{font-size:7.5px;font-weight:800;letter-spacing:1.6px;color:#c7dc8f}
+.arena-v2 .hud-round b{margin-top:3px;font-size:19px;font-weight:900;letter-spacing:.5px;font-variant-numeric:tabular-nums}
+.arena-v2 .hud-round i{font-style:normal;font-size:10px;color:#7f948b;margin-left:1px}
+.arena-v2 .hud-advantage{min-width:0;width:100%;max-width:640px;justify-self:center;display:grid;gap:5px}
+.arena-v2 .hud-advantage-labels{display:flex;align-items:center;justify-content:space-between;gap:6px;font-size:7.5px;font-weight:800;letter-spacing:1.3px;line-height:1}
+.arena-v2 .hud-advantage-labels span{white-space:nowrap;flex:0 0 auto}
+.arena-v2 .hud-advantage-labels span:first-child{color:var(--rival)}
+.arena-v2 .hud-advantage-labels span:last-child{color:var(--ally)}
+.arena-v2 .hud-advantage-labels strong{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:9.5px;letter-spacing:.3px;font-weight:750;color:#e9efe9}
+.arena-v2.lead-player .hud-advantage-labels strong{color:#b9ffe9}
+.arena-v2.lead-enemy .hud-advantage-labels strong{color:#ffc6cf}
+.arena-v2 .hud-advantage-track{position:relative;display:flex;height:9px;border-radius:99px;background:#0b1117;box-shadow:inset 0 1px 3px #000c,0 0 0 1px #ffffff14;overflow:visible}
+.arena-v2 .hud-advantage-rivals,.arena-v2 .hud-advantage-allies{display:block;height:100%;transition:width .55s cubic-bezier(.2,.75,.2,1)}
+.arena-v2 .hud-advantage-rivals{border-radius:99px 0 0 99px;background:linear-gradient(90deg,#6c2142,#f27d90)}
+.arena-v2 .hud-advantage-allies{border-radius:0 99px 99px 0;background:linear-gradient(90deg,#4fd1b4,#1c7f6d)}
+.arena-v2 .hud-advantage-mid{position:absolute;left:50%;top:-3px;width:2px;height:15px;transform:translateX(-50%);background:#ffffff70;border-radius:2px}
+.arena-v2 .hud-advantage-front{position:absolute;left:var(--front);top:50%;width:15px;height:15px;transform:translate(-50%,-50%) rotate(45deg);border-radius:3px;background:#fffbe9;box-shadow:0 0 0 2px #0b1117,0 0 12px 2px #fff5c299;transition:left .55s cubic-bezier(.2,.75,.2,1)}
+.arena-v2.dominion-turn .hud-advantage-front{animation:hud-front-surge .8s ease-out 2}
+@keyframes hud-front-surge{50%{box-shadow:0 0 0 2px #0b1117,0 0 22px 7px #fff5c2cc;transform:translate(-50%,-50%) rotate(45deg) scale(1.35)}}
+
+/* ---------- A arena ---------- */
+.battle-screen.arena-v2 .arena{position:relative;z-index:1;min-height:0;display:grid;grid-template-rows:auto minmax(28px,1fr) auto;padding:4px 8px;margin:0;border:0;border-radius:0;background:none;box-shadow:none;overflow:visible;isolation:isolate}
+.arena-v2 .arena-floor{position:absolute;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
+.arena-v2 .floor-glow{position:absolute;left:-10%;right:-10%;height:46%;filter:blur(2px)}
+.arena-v2 .floor-rivals{top:0;background:radial-gradient(60% 70% at 50% 85%,#f27d901f,transparent 70%)}
+.arena-v2 .floor-allies{bottom:0;background:radial-gradient(60% 70% at 50% 15%,#5fd8bd24,transparent 70%)}
+.arena-v2 .floor-ring{position:absolute;left:50%;top:50%;border-radius:50%;transform:translate(-50%,-50%);border:1px solid #cfe9df1f}
+.arena-v2 .ring-outer{width:min(118%,640px);aspect-ratio:2.4;box-shadow:inset 0 0 40px #5fd8bd0d}
+.arena-v2 .ring-inner{width:min(62%,330px);aspect-ratio:2.4;border-color:#f4d47e26;background:radial-gradient(closest-side,#f4d47e0d,transparent)}
+.arena-v2 .floor-lines{position:absolute;inset:0;background:
+  linear-gradient(90deg,transparent 49.8%,#ffffff0d 50%,transparent 50.2%),
+  repeating-linear-gradient(0deg,transparent 0 46px,#ffffff06 46px 47px);
+  mask-image:radial-gradient(70% 45% at 50% 50%,#000 30%,transparent 75%);-webkit-mask-image:radial-gradient(70% 45% at 50% 50%,#000 30%,transparent 75%)}
+.arena-v2 .arena-center{position:relative;z-index:0;min-height:0;display:grid;place-content:center;justify-items:center;gap:2px;pointer-events:none}
+.arena-v2 .arena-versus{font-size:clamp(22px,7vw,40px);font-weight:950;letter-spacing:4px;line-height:1;color:#ffffff0a;-webkit-text-stroke:1px #f4d47e3d;text-shadow:0 0 24px #f4d47e26}
+.arena-v2 .arena-encounter{max-width:80vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:8.5px;font-weight:800;letter-spacing:2.4px;text-transform:uppercase;color:#a9bab366}
+.battle-screen.arena-v2 .battle-hint{position:static;display:flex;gap:10px;margin-top:6px;padding:0;border:0;background:none;font-size:8.5px;color:#a9bab399}
+.arena-v2 .battle-hint span{display:flex;align-items:center;gap:4px}
+
+/* ---------- Times e formação ---------- */
+.arena-v2 .team{position:relative;z-index:2;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(4px,2vw,16px);max-width:780px;width:100%;margin:0 auto}
+.arena-v2 .team-rivals{align-items:end}
+.arena-v2 .team-allies{align-items:start}
+/* O do meio dá um passo à frente: os dois times formam um arco, não uma fila. */
+.arena-v2 .team-rivals .unit[data-slot="1"]{transform:translateY(9px)}
+.arena-v2 .team-allies .unit[data-slot="1"]{transform:translateY(-9px)}
+
+/* ---------- A unidade ---------- */
+.arena-v2 .unit{--team:var(--ally);--team-deep:var(--ally-deep);position:relative;min-width:0;display:flex;flex-direction:column;align-items:center;gap:3px;transition:transform .35s cubic-bezier(.2,.75,.2,1),opacity .4s,filter .4s}
+.arena-v2 .unit.side-enemy{--team:var(--rival);--team-deep:var(--rival-deep)}
+/* Medalhão sempre do lado do centro. */
+.arena-v2 .side-player .unit-medal{order:1}.arena-v2 .side-player .unit-name{order:2}.arena-v2 .side-player .unit-vitals{order:3}.arena-v2 .side-player .unit-skills{order:4}.arena-v2 .side-player .unit-statuses{order:5}
+.arena-v2 .side-enemy .unit-statuses{order:1}.arena-v2 .side-enemy .unit-skills{order:2}.arena-v2 .side-enemy .unit-name{order:3}.arena-v2 .side-enemy .unit-vitals{order:4}.arena-v2 .side-enemy .unit-medal{order:5}
+
+/* Medalhão */
+.arena-v2 .unit-medal{position:relative;flex:0 0 auto;width:var(--medal);height:var(--medal);margin:5px 0}
+.arena-v2 .unit-pedestal{position:absolute;left:-14%;right:-14%;bottom:-17%;height:34%;border-radius:50%;background:radial-gradient(closest-side,color-mix(in srgb,var(--team) 42%,transparent),color-mix(in srgb,var(--team) 10%,transparent) 62%,transparent);opacity:.75;pointer-events:none}
+.arena-v2 .unit .fighter-portrait{position:absolute;inset:0;width:100%;height:100%;margin:0;padding:0;border:0;border-radius:50%;background:none;box-shadow:none;cursor:pointer;display:block}
+.arena-v2 .medal-aura{position:absolute;inset:-6%;border-radius:50%;background:radial-gradient(closest-side,color-mix(in srgb,var(--character) 55%,transparent),transparent 75%);opacity:.18;transition:opacity .3s}
+.arena-v2 .medal-frame{position:absolute;inset:8%;border-radius:50%;overflow:hidden;background:#0b1218;box-shadow:0 0 0 2px #070b0f,0 0 0 3.5px color-mix(in srgb,var(--team) 70%,#ffffff 0%),0 8px 18px #000a,inset 0 0 0 1px #ffffff22}
+.arena-v2 .medal-frame .portrait{width:100%;height:100%;border:0;border-radius:50%;box-shadow:none}
+.arena-v2 .medal-frame .portrait img{width:100%;height:100%;object-fit:cover;object-position:50% 22%;display:block}
+.arena-v2 .medal-frame:after{content:'';position:absolute;inset:0;border-radius:50%;background:linear-gradient(160deg,#ffffff26,transparent 38%,transparent 70%,#00000059);pointer-events:none}
+/* Círculo do ataque básico: enche e o lutador ataca. */
+.arena-v2 .attack-ring{position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg);fill:none;overflow:visible;pointer-events:none}
+.arena-v2 .attack-ring-track{stroke:#ffffff17;stroke-width:4}
+.arena-v2 .attack-ring-ticks{stroke:#ffffff2e;stroke-width:6.5}
+.arena-v2 .attack-ring-fill{stroke:var(--team);stroke-width:4.2;stroke-linecap:round;filter:drop-shadow(0 0 3px color-mix(in srgb,var(--team) 70%,transparent));transition:stroke-dasharray .1s linear}
+.arena-v2 .is-near .attack-ring-fill{stroke:#fff6d6;stroke-width:5;filter:drop-shadow(0 0 5px var(--team)) drop-shadow(0 0 2px #fff)}
+.arena-v2 .is-near .medal-aura{opacity:.42}
+.arena-v2 .prep-ring{position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg);fill:none;stroke:var(--gold);stroke-width:3.4;stroke-linecap:round;filter:drop-shadow(0 0 4px #f4d47e99);pointer-events:none}
+.arena-v2 .unit-flag{position:absolute;right:1%;top:1%;z-index:3;width:21px;height:21px;display:grid;place-items:center;border-radius:50%;background:#0b1218;border:1.5px solid var(--team);color:var(--team);box-shadow:0 2px 6px #000a}
+.arena-v2 .flag-critical{border-color:#ff6b6b;color:#ff8f8f;animation:flag-beat 1s ease-in-out infinite}
+.arena-v2 .flag-shield{border-color:#a9d6ff;color:#cfe8ff}
+.arena-v2 .flag-advantage{border-color:var(--gold);color:var(--gold)}
+@keyframes flag-beat{50%{transform:scale(1.15)}}
+.arena-v2 .unit-brackets{position:absolute;inset:-5%;border-radius:50%;border:2px dashed #f6d98bcc;animation:brackets-spin 6s linear infinite;pointer-events:none}
+@keyframes brackets-spin{to{transform:rotate(360deg)}}
+.arena-v2 .unit-break{position:absolute;inset:0;display:grid;place-items:center;font-size:calc(var(--medal) * .6);font-weight:300;color:#ff8f7c;text-shadow:0 0 12px #ff5a46;animation:break-pop .45s ease-out both;pointer-events:none}
+@keyframes break-pop{from{transform:scale(1.6);opacity:0}40%{opacity:1}to{transform:scale(1);opacity:0}}
+.arena-v2 .unit-tempo{position:absolute;left:-4%;top:4%;z-index:3;width:22px;height:22px;display:grid;place-items:center;border-radius:50%;background:#172b22;border:1.5px solid #b6e886;color:#d6ffaa}
+.arena-v2 .unit-tempo.delayed{background:#321d26;border-color:#ef969b;color:#ffb3b8}
+.arena-v2 .unit-tempo-reason{position:absolute;left:50%;bottom:4%;transform:translateX(-50%);z-index:5;white-space:nowrap;padding:2px 7px;border-radius:99px;background:#0c1a12e6;border:1px solid #b6e88677;font-size:9px;font-weight:800;color:#e6ffc4;pointer-events:none}
+.arena-v2 .unit-ko{position:absolute;inset:8%;z-index:2;display:grid;place-content:center;justify-items:center;gap:2px;border-radius:50%;background:#05080bc4;color:#dfe6e8}
+.arena-v2 .unit-ko b{font-size:9px;letter-spacing:1.5px}
+/* Preparo e interrupção aparecem do lado do centro, onde o olho está. */
+.arena-v2 .unit-cast,.arena-v2 .unit-interrupt{position:absolute;left:50%;z-index:6;transform:translateX(-50%);display:flex;align-items:center;gap:4px;max-width:calc(var(--medal) + 46px);padding:4px 8px;border-radius:99px;font-size:9.5px;font-weight:850;letter-spacing:.2px;white-space:nowrap;box-shadow:0 4px 12px #000b}
+.arena-v2 .unit-cast span{overflow:hidden;text-overflow:ellipsis}
+.arena-v2 .unit-cast{background:linear-gradient(180deg,#3a2f12f2,#231c0bf2);border:1px solid #f4d47eaa;color:#ffeeb8}
+.arena-v2 .unit-interrupt{background:#4b1d25f2;border:1px solid #ffab9d;color:#fff0e9;animation:break-pop-label .5s ease-out both}
+@keyframes break-pop-label{from{transform:translateX(-50%) scale(1.25)}to{transform:translateX(-50%) scale(1)}}
+.arena-v2 .side-enemy .unit-cast,.arena-v2 .side-enemy .unit-interrupt{top:calc(100% + 4px)}
+.arena-v2 .side-player .unit-cast,.arena-v2 .side-player .unit-interrupt{bottom:calc(100% + 4px)}
+
+/* Nome e Vida */
+.arena-v2 .unit-name{width:100%;min-width:0;display:flex;justify-content:center}
+.arena-v2 .unit .fighter-name{display:block;max-width:100%;min-height:0;margin:0;padding:0;background:none;border:0;color:#f4f8f3;font-size:clamp(10.5px,3vw,13px);font-weight:820;line-height:1.12;letter-spacing:.15px;white-space:normal;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow-wrap:anywhere;text-wrap:balance;text-shadow:0 1px 4px #000c;text-align:center}
+.arena-v2 .unit-vitals{width:min(100%,calc(var(--medal) + 30px));display:grid;gap:2px}
+.arena-v2 .unit-bar{position:relative;height:8px;border-radius:99px;background:#0a1015;box-shadow:inset 0 1px 2px #000,0 0 0 1px #ffffff1f;overflow:hidden}
+.arena-v2 .unit-bar-hp{position:absolute;left:0;top:0;bottom:0;border-radius:99px;background:linear-gradient(90deg,var(--team-deep),var(--team));box-shadow:inset 0 1px #ffffff55;transition:width .45s cubic-bezier(.2,.75,.2,1)}
+.arena-v2 .unit-bar:after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent 0 calc(20% - 1px),#0a101599 calc(20% - 1px) 20%);pointer-events:none}
+.arena-v2 .unit-bar-shield{position:absolute;top:0;bottom:0;background:repeating-linear-gradient(-45deg,#e8f6ff 0 3px,#a9d3ff 3px 6px);box-shadow:0 0 6px #bfe2ff;transition:width .35s,left .45s}
+.arena-v2 .is-critical .unit-bar-hp{background:linear-gradient(90deg,#8a1f2a,#ff6a6a);animation:hp-critical 1s ease-in-out infinite}
+@keyframes hp-critical{50%{filter:brightness(1.4)}}
+.arena-v2 .unit-meta{display:flex;justify-content:space-between;align-items:center;gap:4px;font-size:8.5px;font-weight:700;letter-spacing:.6px;color:var(--muted);line-height:1}
+.arena-v2 .unit-meta span{display:flex;align-items:center;gap:2px}
+.arena-v2 .unit-meta b{font-size:10px;color:#e8efe9;font-variant-numeric:tabular-nums;letter-spacing:0}
+.arena-v2 .is-critical .unit-meta span{color:#ff9a9a}
+.arena-v2 .unit .light-knowledge{margin:1px 0 0;font-size:8px;font-weight:800;text-align:center;color:#ffe2a7}
+.arena-v2 .unit .light-knowledge.immune{color:#cfd5e2}
+
+/* Habilidades: maiores, com o estado lido de longe. */
+.arena-v2 .unit-skills{display:grid;grid-template-columns:repeat(3,var(--skill));gap:clamp(3px,1vw,6px)}
+.arena-v2 .unit .ability-wrap{position:relative;min-width:0;display:block}
+.arena-v2 .unit .ability{position:relative;width:var(--skill);height:var(--skill);margin:0;padding:0;display:grid;place-items:center;border-radius:11px;border:1px solid #ffffff26;background:linear-gradient(180deg,#16212a,#0b1218);box-shadow:inset 0 1px #ffffff12,0 3px 8px #0009;overflow:hidden;transition:transform .2s,border-color .2s,box-shadow .2s}
+.arena-v2 .unit .ability .skill-icon-art{position:relative;z-index:1;width:82%;height:82%;filter:drop-shadow(0 1px 2px #000a)}
+.arena-v2 .unit .ability-fill{position:absolute;left:0;right:0;bottom:0;z-index:0;background:linear-gradient(0deg,color-mix(in srgb,var(--team) 46%,transparent),color-mix(in srgb,var(--team) 12%,transparent));transition:height .2s linear}
+.arena-v2 .unit .ability-meter{position:absolute;inset:0;z-index:2;width:100%;height:100%;fill:none;stroke:var(--team);stroke-width:2.4;stroke-linecap:round;opacity:.9;pointer-events:none}
+.arena-v2 .unit .ability.empty .skill-icon-art{opacity:.9;filter:grayscale(.1) drop-shadow(0 1px 2px #000a)}
+.arena-v2 .unit .ability.empty .ability-meter{opacity:0}
+.arena-v2 .unit .ability.charging .skill-icon-art{opacity:1}
+.arena-v2 .unit .ability.ready{border-color:var(--gold);box-shadow:0 0 0 1px #f4d47e88,0 0 14px #f4d47e66,inset 0 0 10px #f4d47e33}
+.arena-v2 .unit .ability.ready .ability-meter{stroke:var(--gold)}
+.arena-v2 .unit .ability.ready .skill-icon-art{animation:ability-ready 1.4s ease-in-out infinite}
+@keyframes ability-ready{50%{transform:scale(1.08)}}
+.arena-v2 .unit .ability.ready:after{content:'';position:absolute;z-index:3;right:3px;top:3px;left:auto;bottom:auto;width:7px;height:7px;padding:0;border-radius:50%;background:var(--gold);box-shadow:0 0 6px var(--gold)}
+.arena-v2 .unit .ability.preparing{border-color:#fff0af;box-shadow:0 0 0 2px #f4d47e99,0 0 16px #f4d47e88;animation:ability-prep .7s ease-in-out infinite alternate}
+.arena-v2 .unit .ability.preparing .ability-meter{stroke:#fff0af}
+@keyframes ability-prep{to{box-shadow:0 0 0 2px #f4d47e,0 0 22px #f4d47ecc}}
+.arena-v2 .unit .ability.executing{transform:scale(1.14);border-color:#fff;box-shadow:0 0 0 2px var(--team),0 0 20px var(--team)}
+.arena-v2 .unit .ability.cooldown .skill-icon-art{opacity:.38;filter:grayscale(1)}
+.arena-v2 .unit .ability.cooldown .ability-meter{stroke:#8da59c;opacity:.6}
+.arena-v2 .unit .ability-lock{position:absolute;z-index:3;right:2px;bottom:2px;width:13px!important;height:13px!important;padding:1px;border-radius:50%;background:#0b1218;color:#b8c6c0}
+.arena-v2 .unit .ability-assisted .ability{animation:ability-assist .55s ease-out both}
+@keyframes ability-assist{0%{box-shadow:0 0 0 3px #a7f4c2,0 0 20px #a7f4c2}100%{box-shadow:none}}
+
+/* Status: buffs numa linha, debuffs em outra. */
+.arena-v2 .unit-statuses{display:grid;gap:3px;justify-items:center;width:100%}
+.arena-v2 .status-line{position:relative;display:flex;align-items:center;justify-content:center;gap:3px;height:calc(var(--status) + 6px);min-width:0;max-width:100%;padding:0 5px 0 13px;border-radius:99px}
+.arena-v2 .status-line:before{position:absolute;left:4px;top:50%;transform:translateY(-50%);font-size:7px;line-height:1}
+.arena-v2 .status-line.buffs{background:#5fd8bd14;box-shadow:inset 0 0 0 1px #5fd8bd36}
+.arena-v2 .status-line.buffs:before{content:'▲';color:var(--ally)}
+.arena-v2 .status-line.debuffs{background:#f27d9014;box-shadow:inset 0 0 0 1px #f27d9036}
+.arena-v2 .status-line.debuffs:before{content:'▼';color:var(--rival)}
+.arena-v2 .status-line.is-empty{display:none}
+.arena-v2 .unit .status-badge{position:relative;flex:0 0 var(--status);width:var(--status);height:var(--status);margin:0;padding:0;display:grid;place-items:center;border-radius:7px;border:0;background:#0b1218;box-shadow:inset 0 0 0 1px #ffffff1f}
+.arena-v2 .unit .status-badge .status-icon-art{width:76%;height:76%}
+.arena-v2 .unit .status-badge .status-duration{position:absolute;inset:-2px;width:calc(100% + 4px);height:calc(100% + 4px);transform:rotate(-90deg);fill:none;stroke-width:1.6;opacity:.95}
+.arena-v2 .unit .status-badge.positive .status-duration{stroke:var(--ally)}
+.arena-v2 .unit .status-badge.negative .status-duration{stroke:var(--rival)}
+.arena-v2 .unit .status-badge .status-tone{display:none}
+.arena-v2 .status-more{height:var(--status);min-width:var(--status);margin:0;padding:0 4px;border-radius:7px;border:0;background:#ffffff14;color:#e4ece6;font-size:9px;font-weight:850}
+
+/* Estados de combate (a atuação completa é a parte 2). */
+.arena-v2 .is-source .medal-aura{opacity:.85;animation:aura-breath .65s ease-in-out infinite alternate}
+@keyframes aura-breath{to{transform:scale(1.08)}}
+.arena-v2 .is-source .medal-frame{box-shadow:0 0 0 2px #070b0f,0 0 0 3.5px var(--character),0 0 22px var(--character),inset 0 0 0 1px #ffffff33}
+.arena-v2 .is-target .medal-frame{box-shadow:0 0 0 2px #070b0f,0 0 0 3.5px #f8dd96,0 0 20px #f4d47e99,inset 0 0 0 1px #ffffff33}
+.arena-v2 .is-helped.is-target .medal-frame{box-shadow:0 0 0 2px #070b0f,0 0 0 3.5px #a9f8c3,0 0 20px #79d6b2aa}
+.arena-v2 .is-hit .medal-frame{animation:portrait-hit calc(.35s * var(--motion-scale,1)) ease-out}
+.arena-v2 .is-acting.basic-physical .unit-medal,.arena-v2 .is-acting.basic-slash .unit-medal{animation:unit-lunge calc(.85s * var(--motion-scale,1)) cubic-bezier(.2,.75,.2,1) both}
+.arena-v2 .side-enemy{--lunge:1}.arena-v2 .side-player{--lunge:-1}
+@keyframes unit-lunge{0%{transform:none}35%{transform:translateY(calc(var(--lunge) * 18px)) scale(1.06)}60%{transform:translateY(calc(var(--lunge) * 10px))}100%{transform:none}}
+.arena-v2 .unit.is-out{opacity:.5;filter:grayscale(1)}
+.arena-v2 .unit.is-out .attack-ring,.arena-v2 .unit.is-out .medal-aura,.arena-v2 .unit.is-out .unit-pedestal{opacity:0}
+.arena-v2 .is-newly-out{animation:unit-fall .6s ease-out}
+@keyframes unit-fall{0%{filter:none;opacity:1}30%{transform:scale(1.06)}100%{opacity:.5}}
+.arena-v2 .is-casting .medal-aura{opacity:.5;background:radial-gradient(closest-side,#f4d47e88,transparent 75%)}
+
+/* Números e avisos sobre o medalhão */
+.arena-v2 .unit .combat-feedback{top:4%;z-index:7}
+.arena-v2 .unit .status-pop,.arena-v2 .unit .discovery-pop{z-index:8;top:auto;bottom:-6px;max-width:calc(var(--medal) + 40px)}
+
+/* ---------- Controles ---------- */
+.arena-v2 .arena-controls{position:relative;z-index:8;display:grid;grid-template-columns:minmax(0,1.55fr) repeat(3,minmax(0,1fr)) minmax(0,1.3fr);gap:6px;padding:6px 10px 8px;background:linear-gradient(0deg,#05080cee,#05080c00)}
+.arena-v2 .arena-controls button{width:100%;height:46px;min-width:0;margin:0;display:flex;align-items:center;justify-content:center;gap:6px;padding:0 6px;border-radius:13px;border:1px solid #ffffff1c;background:#ffffff0b;color:#e3ece6;font-size:12.5px;font-weight:800;box-shadow:inset 0 1px #ffffff14}
+.arena-v2 .arena-controls button.selected{background:#f4d47e22;border-color:#f4d47e88;color:#ffe9b0}
+.arena-v2 .arena-controls .control-main{background:linear-gradient(180deg,#2a7f6e,#1a5a4e);border-color:#5fd8bd88;color:#f0fff9}
+.arena-v2 .arena-controls .control-main.is-paused{background:linear-gradient(180deg,#b8963a,#7d6322);border-color:#f4d47e;color:#fff8e1}
+.arena-v2 .arena-controls .control-danger{background:#3a1820;border-color:#f27d9055;color:#ffc3cc}
+.arena-v2 .arena-controls b{font-size:12px}
+.battle-screen.arena-v2 .battle-history,.battle-screen.arena-v2 .battle-mixer{position:absolute;z-index:20;left:10px;right:10px;bottom:calc(62px + env(safe-area-inset-bottom));margin:0 auto;max-width:380px}
+.battle-screen.arena-v2 .battle-history{top:auto;max-height:46dvh}
+.battle-screen.arena-v2 .battle-mixer{display:grid;gap:12px;padding:14px 16px;border-radius:14px;border:1px solid #ffffff22;background:#0c1418f5;box-shadow:0 12px 30px #000b}
+.battle-screen.arena-v2 .battle-mixer label{display:grid;gap:6px;font-size:12px;font-weight:700;color:#dfe9e3}
+.battle-screen.arena-v2 .battle-mixer .auto-label{display:flex;flex-direction:row;align-items:center;justify-content:flex-start;gap:12px;min-height:44px;margin:0;padding:0;text-align:left;font-size:13px}
+.battle-screen.arena-v2 .battle-mixer .auto-label input{flex:0 0 auto;width:22px;height:22px;margin:0;accent-color:#5fd8bd;appearance:auto;-webkit-appearance:checkbox}
+.battle-screen.arena-v2 .paused-banner{position:absolute;z-index:9;left:50%;top:50%;transform:translate(-50%,-50%)}
+
+@media(max-width:374px){
+  .arena-v2 .hud-advantage-labels{font-size:6.5px;letter-spacing:.8px;gap:4px}
+  .arena-v2 .hud-advantage-labels strong{font-size:8.5px}
+  .arena-v2 .arena-controls .control-danger span{display:none}
+  .arena-v2 .arena-controls{grid-template-columns:minmax(0,1.7fr) repeat(4,minmax(0,1fr))}
+  .arena-v2 .status-line{padding-left:11px}
+}
+
+/* ---------- Tela deitada e computador: lado a lado ---------- */
+@media (orientation:landscape) and (min-aspect-ratio:13/10){
+  .battle-screen.arena-v2{--medal:clamp(60px,min(19dvh,11vw),170px);--skill:clamp(28px,min(8dvh,3.4vw),48px);--status:clamp(16px,min(4.6dvh,1.7vw),22px)}
+  .arena-v2 .arena-hud{padding:6px 12px 4px}
+  .battle-screen.arena-v2 .arena{grid-template-columns:minmax(0,1fr) minmax(110px,.55fr) minmax(0,1fr);grid-template-rows:minmax(0,1fr);padding:2px 12px;max-width:1500px;width:100%;margin:0 auto}
+  .arena-v2 .team{grid-template-columns:minmax(0,1fr);grid-template-rows:repeat(3,minmax(0,1fr));gap:clamp(2px,1.2dvh,14px);align-content:center;max-width:none;height:100%}
+  .arena-v2 .team-allies{grid-column:1;grid-row:1}
+  .arena-v2 .arena-center{grid-column:2;grid-row:1}
+  .arena-v2 .team-rivals{grid-column:3;grid-row:1}
+  .arena-v2 .team-rivals .unit[data-slot="1"]{transform:translateX(-12px)}
+  .arena-v2 .team-allies .unit[data-slot="1"]{transform:translateX(12px)}
+  /* Unidade deitada: medalhão para o centro, informação para fora. */
+  .arena-v2 .team{grid-template-rows:repeat(3,auto);gap:clamp(4px,2.6dvh,30px)}
+  .arena-v2 .team-allies{justify-items:end}.arena-v2 .team-rivals{justify-items:start}
+  .arena-v2 .unit{display:grid;align-items:center;column-gap:clamp(8px,1.2vw,18px);row-gap:3px;grid-template-rows:auto auto auto;min-height:0;width:100%;max-width:calc(var(--medal) + 330px)}
+  .arena-v2 .side-enemy.unit{grid-template-columns:var(--medal) minmax(0,1fr);grid-template-areas:"medal name" "medal vitals" "medal kit";justify-items:start}
+  .arena-v2 .side-player.unit{grid-template-columns:minmax(0,1fr) var(--medal);grid-template-areas:"name medal" "vitals medal" "kit medal";justify-items:end}
+  .arena-v2 .unit .unit-medal{grid-area:medal;margin:2px 0}
+  .arena-v2 .unit .unit-name{grid-area:name;width:auto;max-width:100%}
+  .arena-v2 .unit .unit-vitals{grid-area:vitals;width:min(100%,250px)}
+  .arena-v2 .unit .unit-skills,.arena-v2 .unit .unit-statuses{grid-area:kit;align-self:center}
+  /* Habilidades e Status lado a lado, para caber em pouca altura. */
+  .arena-v2 .side-enemy .unit-statuses{margin-left:calc(var(--skill) * 3 + 20px)}
+  .arena-v2 .side-player .unit-statuses{margin-right:calc(var(--skill) * 3 + 20px)}
+  .arena-v2 .unit .unit-statuses{width:auto}
+  .arena-v2 .side-enemy .unit-statuses{justify-items:start}.arena-v2 .side-player .unit-statuses{justify-items:end}
+  .arena-v2 .unit .fighter-name{font-size:clamp(11px,1.15vw,15px)}
+  .arena-v2 .side-enemy .unit-cast,.arena-v2 .side-enemy .unit-interrupt{top:50%;left:auto;right:calc(100% + 6px);transform:translateY(-50%)}
+  .arena-v2 .side-player .unit-cast,.arena-v2 .side-player .unit-interrupt{top:50%;bottom:auto;left:calc(100% + 6px);transform:translateY(-50%)}
+  .arena-v2 .side-enemy{--lunge-x:-1}.arena-v2 .side-player{--lunge-x:1}
+  .arena-v2 .is-acting.basic-physical .unit-medal,.arena-v2 .is-acting.basic-slash .unit-medal{animation-name:unit-lunge-x}
+  .arena-v2 .arena-versus{font-size:clamp(26px,5dvh,46px)}
+  .battle-screen.arena-v2 .arena{grid-template-columns:minmax(0,1fr) minmax(150px,.7fr) minmax(0,1fr)}
+  .arena-v2 .combat-caption{min-width:0;max-width:min(19vw,300px);padding:6px 9px}
+  .arena-v2 .combat-caption strong{font-size:clamp(10px,1.3vw,14px)}
+  .arena-v2 .unit .fighter-name{-webkit-line-clamp:1;white-space:nowrap;display:block;text-overflow:ellipsis}
+  .arena-v2 .arena-controls{grid-template-columns:minmax(0,1.6fr) repeat(3,minmax(0,1fr)) minmax(0,1.3fr);max-width:620px;width:100%;margin:0 auto;padding:4px 12px 6px}
+  .arena-v2 .arena-controls button{height:44px}
+}
+@keyframes unit-lunge-x{0%{transform:none}35%{transform:translateX(calc(var(--lunge-x) * 22px)) scale(1.06)}60%{transform:translateX(calc(var(--lunge-x) * 12px))}100%{transform:none}}
+
+/* Celular deitado: a altura é pouca; HUD e controles mais finos. */
+@media (orientation:landscape) and (max-height:500px){
+  .arena-v2 .arena-hud{grid-template-columns:auto auto minmax(0,1fr) auto;padding:4px 10px 2px}
+  .arena-v2 .hud-button{width:40px;height:40px}
+  .arena-v2 .hud-round small{display:none}
+  .arena-v2 .arena-encounter,.battle-screen.arena-v2 .battle-hint{display:none}
+  .arena-v2 .arena-controls{padding:2px 12px 4px}
+  .arena-v2 .arena-controls button{height:40px}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .arena-v2 .unit-brackets,.arena-v2 .is-source .medal-aura,.arena-v2 .unit .ability.ready .skill-icon-art,.arena-v2 .unit .ability.preparing,.arena-v2 .flag-critical,.arena-v2 .is-critical .unit-bar-hp{animation:none!important}
+}
+.reduce-motion .arena-v2 .unit-brackets,.reduce-motion .arena-v2 .is-source .medal-aura{animation:none!important}
+
+/*
+ * Pausar congela a luta, não a interface. A regra geral
+ * `.presentation-paused *` também congelava a entrada do inspetor, que abria
+ * com opacidade zero e ficava invisível — tocar numa habilidade com a batalha
+ * pausada parecia não fazer nada.
+ */
+.presentation-paused :is(.battle-inspector,.battle-history,.battle-mixer,.battle-tutorial,.paused-banner,.arena-hud,.arena-controls),
+.presentation-paused :is(.battle-inspector,.battle-history,.battle-mixer,.battle-tutorial,.paused-banner,.arena-hud,.arena-controls) *{animation-play-state:running!important}
