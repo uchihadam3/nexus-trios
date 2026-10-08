@@ -15,6 +15,8 @@ from PIL import Image, ImageFilter, ImageOps
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCES = ROOT / 'assets/ai-source/portraits/grids'
+OVERRIDES = ROOT / 'assets/ai-source/portraits/overrides'
+REQUIRED_OVERRIDES = {'rick'}
 DESTINATION = ROOT / 'public/assets/portraits/expanded'
 APPROVALS = ROOT / 'src/data/expanded-portrait-approvals.json'
 
@@ -91,7 +93,11 @@ def main() -> None:
                     top += 55  # The upper action portraits extend below the grid midpoint.
                 right = round((column+1) * image.width / 2) - 6
                 bottom = round((row+1) * image.height / 2) - 6
-                art = image.crop((left, top, right, bottom)).convert('RGBA')
+                override = OVERRIDES / f"{character['id']}.webp"
+                if character['id'] in REQUIRED_OVERRIDES and not override.exists():
+                    raise FileNotFoundError(f'Missing corrected portrait: {override}')
+                art = (Image.open(override).convert('RGBA') if override.exists()
+                       else image.crop((left, top, right, bottom)).convert('RGBA'))
                 if character['id'] in {'kirby', 'donkeykong', 'finn'}:
                     art = keep_main_silhouette(art)
                 if art.getchannel('A').getextrema()[0] != 0:
