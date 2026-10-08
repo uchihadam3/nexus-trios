@@ -4,11 +4,12 @@ import { resolve } from 'node:path';
 import { SOM_DA_FAMILIA,TODOS_OS_SONS,type Manifesto } from '../src/audio/cues';
 import { FAMILIAS,VFX_FAMILIES,folhasUsadas,hsl,profileFor } from '../src/presentation/vfxProfiles';
 import { characters } from '../src/data/characters';
+import { LACO_DA_MUSICA,posicaoNoLaco } from '../src/lib/audio';
 
 const root=process.cwd();
 const familias=JSON.parse(readFileSync(resolve(root,'public/assets/vfx/familias/manifest.json'),'utf8')) as Record<string,{quadros:number;grade:[number,number];tamanho:[number,number];laco:boolean;bytes:number}>;
 const sfx=JSON.parse(readFileSync(resolve(root,'public/assets/audio/sfx/manifest.json'),'utf8')) as Manifesto;
-const musica=JSON.parse(readFileSync(resolve(root,'public/assets/audio/musica.json'),'utf8')) as {bpm:number;compassos:number;segundos:number;secoes:{nome:string;inicio:number}[];camadas:Record<string,{arquivo:string;bytes:number;rmsDb:number}>};
+const musica=JSON.parse(readFileSync(resolve(root,'public/assets/audio/musica.json'),'utf8')) as {bpm:number;compassos:number;segundos:number;secoes:{nome:string;inicio:number}[];laco:{inicio:number;fim:number};camadas:Record<string,{arquivo:string;bytes:number;rmsDb:number}>};
 
 describe('compact reusable audiovisual library',()=>{
   it('ships the Python-drawn family sheets: 3×4, transparent WebP, all used, within budget',()=>{
@@ -84,10 +85,18 @@ describe('compact reusable audiovisual library',()=>{
     expect(bytes).toBeLessThan(8_500_000);
     expect(readdirSync(resolve(root,'public/assets/audio/sfx')).filter(x=>x.endsWith('.wav'))).toEqual([]);
   });
+  it('a música começa na Intro e, depois do fim, volta ao Encontro',()=>{
+    expect(posicaoNoLaco(0,10,146)).toBeCloseTo(10);
+    expect(posicaoNoLaco(0,146.5,146)).toBeCloseTo(LACO_DA_MUSICA+.5,3);
+    expect(posicaoNoLaco(100,100,146)).toBeGreaterThanOrEqual(LACO_DA_MUSICA);
+  });
   it('keeps the background music in three looping layers of the same piece',()=>{
     expect(Object.keys(musica.camadas).sort()).toEqual(['musica-base','musica-pulso','musica-tema']);
     expect(musica.segundos).toBeCloseTo(musica.compassos*4*60/musica.bpm,1);
-    expect(musica.secoes.map(x=>x.nome)).toEqual(["A","B","C","A2"]);
+    // a música de batalha cresce em fases e faz laço a partir do Encontro (nunca volta à Intro)
+    expect(musica.secoes.map(x=>x.nome)).toEqual(['Intro','Encontro','Choque','Ponte','Clímax','Virada']);
+    expect(musica.segundos).toBeGreaterThan(120);expect(musica.segundos).toBeLessThan(160);
+    expect(musica.laco.inicio).toBeCloseTo(LACO_DA_MUSICA,2);expect(musica.secoes[1]!.inicio).toBeCloseTo(LACO_DA_MUSICA,2);
     let bytes=0;
     for(const camada of Object.values(musica.camadas)){const data=readFileSync(resolve(root,'public/assets/audio',camada.arquivo));bytes+=data.length;expect(data.subarray(0,4).toString('ascii')).toBe('OggS');}
     expect(bytes).toBeLessThan(4_200_000);

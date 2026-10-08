@@ -27,7 +27,17 @@ import { profileFor } from '../presentation/vfxProfiles';
  */
 const SFX='/assets/audio/sfx/';
 export const AUDIO_ASSETS={battleLoop:null as string|null,battleStems:['/assets/audio/musica-base.ogg','/assets/audio/musica-pulso.ogg','/assets/audio/musica-tema.ogg'] as const};
-const SECOES=[0,45.714,91.429,137.143];
+/*
+ * A música de batalha (tools/audio/generate_music_v3.py): Intro, Encontro,
+ * Choque, Ponte, Clímax e Virada, ~2 min 26 s. Toda luta nova começa na Intro;
+ * se a luta passar do fim, a música volta ao Encontro (o laço), nunca à Intro.
+ */
+export const LACO_DA_MUSICA=13.913;
+/** Posição na música depois de `t` segundos tocando, a partir de `inicio`, respeitando o laço. */
+export function posicaoNoLaco(inicio:number,t:number,duracao:number){
+  const p=inicio+t;if(p<duracao)return p;
+  const volta=duracao-LACO_DA_MUSICA;return LACO_DA_MUSICA+((p-LACO_DA_MUSICA)%volta);
+}
 const MAX_VOZES=5;
 export interface MusicMood {heat:number;pressure:number;time:number}
 class BattleAudio {
@@ -86,7 +96,7 @@ class BattleAudio {
   /** Liga/desliga a música da luta. `luta` identifica a luta: numa luta nova a música começa numa seção sorteada; na mesma luta (depois de uma pausa) continua de onde parou. */
   setBattle(active:boolean,luta?:string){
     this.active=active;
-    if(active){if(luta!==undefined&&luta!==this.luta){this.luta=luta;this.musicOffset=SECOES[Math.floor(Math.random()*SECOES.length)]!;}this.start();void this.preloadCues();}
+    if(active){if(luta!==undefined&&luta!==this.luta){this.luta=luta;this.musicOffset=0;}this.start();void this.preloadCues();}
     else this.stop();
   }
   setMood(mood:MusicMood){
@@ -96,10 +106,15 @@ class BattleAudio {
     const levels=this.stemLevels();
     this.stemGains.forEach((gain,index)=>gain.gain.setTargetAtTime(levels[index],at,1.2));
   }
-  /* base sempre; pulso sobe com a intensidade; tema só quando a luta esquenta ou se arrasta */
+  /*
+   * A música já cresce sozinha (cada fase é mais cheia que a anterior); por cima,
+   * as camadas sobem com a luta: a base sempre inteira, o pulso (pratos,
+   * percussão, guitarras) e o tema (melodia, coro) ganham força quando a luta
+   * esquenta ou se arrasta.
+   */
   private stemLevels(){
     const {heat,time}=this.mood;
-    return [.9,.25+heat*.75,Math.min(.85,Math.max(0,heat-.4)*1.6+Math.max(0,time-.55)*.6)];
+    return [.95,Math.min(1,.5+heat*.5+time*.15),Math.min(1,.55+heat*.45+time*.2)];
   }
   private start(){
     if(this.running||!this.ctx||this.ctx.state!=='running'||!this.music)return;
@@ -122,8 +137,8 @@ class BattleAudio {
     if(!ctx||!bus||!buffer||!this.running||this.stemSources[index])return;
     if(index===0)this.musicStartedAt=ctx.currentTime+.05;
     const base=this.stemBuffers[0];if(!base)return;
-    const source=ctx.createBufferSource(),gain=ctx.createGain();source.buffer=buffer;source.loop=true;
-    const posicao=(this.musicOffset+Math.max(0,ctx.currentTime+.05-this.musicStartedAt))%buffer.duration;
+    const source=ctx.createBufferSource(),gain=ctx.createGain();source.buffer=buffer;source.loop=true;source.loopStart=Math.min(LACO_DA_MUSICA,buffer.duration-1);source.loopEnd=buffer.duration;
+    const posicao=posicaoNoLaco(this.musicOffset,Math.max(0,ctx.currentTime+.05-this.musicStartedAt),buffer.duration);
     gain.gain.setValueAtTime(0,ctx.currentTime);gain.gain.linearRampToValueAtTime(this.stemLevels()[index],ctx.currentTime+(index===0?.05:2));
     source.connect(gain);gain.connect(bus);source.onended=()=>{source.disconnect();gain.disconnect();};
     source.start(ctx.currentTime+.05,posicao);this.stemSources[index]=source;this.stemGains[index]=gain;
@@ -239,7 +254,7 @@ class BattleAudio {
     if(grand){this.sound('grand-impacto',PRIORIDADE.grand,panAlvo,chave);if(som)this.sound(som.impacto,PRIORIDADE.importante,panAlvo,chave+1);return;}
     if(som)this.sound(som.impacto,apoio?PRIORIDADE.apoio:event.kind==='skill'?PRIORIDADE.habilidade:PRIORIDADE.basico,panAlvo,chave);
   }
-  private posicaoDaMusica(){const base=this.stemBuffers[0];return this.running&&this.ctx&&this.musicStartedAt&&base&&this.stemSources[0]?(this.musicOffset+Math.max(0,this.ctx.currentTime-this.musicStartedAt))%base.duration:this.musicOffset;}
+  private posicaoDaMusica(){const base=this.stemBuffers[0];return this.running&&this.ctx&&this.musicStartedAt&&base&&this.stemSources[0]?posicaoNoLaco(this.musicOffset,Math.max(0,this.ctx.currentTime-this.musicStartedAt),base.duration):this.musicOffset;}
   get status(){const base=this.stemBuffers[0];const trackSeconds=this.posicaoDaMusica();return {state:this.ctx?.state??'locked',musicRunning:this.running,mode:this.stemSources.length?'stems':'synth',stemsPlaying:this.stemSources.filter(Boolean).length,musicSeconds:base?.duration??0,trackSeconds,activeCues:this.vozes.length,loadedCues:this.buffers.size,step:this.step};}
 }
 export const battleAudio=new BattleAudio();

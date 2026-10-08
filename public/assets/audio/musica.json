@@ -1,43 +1,55 @@
 {
- "bpm": 84,
- "compassos": 64,
- "segundos": 182.857,
+ "bpm": 138,
+ "compassos": 84,
+ "segundos": 146.087,
  "secoes": [
   {
-   "nome": "A",
+   "nome": "Intro",
    "inicio": 0.0
   },
   {
-   "nome": "B",
-   "inicio": 45.714
+   "nome": "Encontro",
+   "inicio": 13.913
   },
   {
-   "nome": "C",
-   "inicio": 91.429
+   "nome": "Choque",
+   "inicio": 41.739
   },
   {
-   "nome": "A2",
-   "inicio": 137.143
+   "nome": "Ponte",
+   "inicio": 69.565
+  },
+  {
+   "nome": "Clímax",
+   "inicio": 83.478
+  },
+  {
+   "nome": "Virada",
+   "inicio": 125.217
   }
  ],
+ "laco": {
+  "inicio": 13.913,
+  "fim": 146.087
+ },
  "camadas": {
   "musica-base": {
    "arquivo": "musica-base.ogg",
-   "segundos": 182.857,
-   "bytes": 1510877,
-   "rmsDb": -17.0
+   "segundos": 146.087,
+   "bytes": 1175970,
+   "rmsDb": -20.6
   },
   "musica-pulso": {
    "arquivo": "musica-pulso.ogg",
-   "segundos": 182.857,
-   "bytes": 1545520,
-   "rmsDb": -32.2
+   "segundos": 146.087,
+   "bytes": 944717,
+   "rmsDb": -25.1
   },
   "musica-tema": {
    "arquivo": "musica-tema.ogg",
-   "segundos": 182.857,
-   "bytes": 727782,
-   "rmsDb": -25.5
+   "segundos": 146.087,
+   "bytes": 866522,
+   "rmsDb": -21.8
   }
  }
 }
