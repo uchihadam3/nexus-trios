@@ -661,7 +661,7 @@ def main():
 def escreve_mp3(destino, y, sr=SR):
     """A mesma camada em MP3: o iPhone/Safari nem sempre decodifica Ogg Vorbis, e
     sem a camada base o jogo cairia na música sintetizada antiga."""
-    with sf.SoundFile(destino, "w", sr, 2, format="MP3", subtype="MPEG_LAYER_III", compression_level=0.55) as arq:
+    with sf.SoundFile(destino, "w", sr, 2, format="MP3", subtype="MPEG_LAYER_III", compression_level=0.62) as arq:
         for i in range(0, len(y), sr):
             arq.write(y[i:i + sr])
 

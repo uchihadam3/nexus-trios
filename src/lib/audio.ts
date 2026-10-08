@@ -34,7 +34,7 @@ export const AUDIO_ASSETS={battleLoop:null as string|null,battleStems:['/assets/
  */
 /** O navegador decodifica Ogg Vorbis? (o Safari do iPhone, muitas vezes, não). */
 export function tocaOgg(){try{return typeof Audio!=='undefined'&&new Audio().canPlayType('audio/ogg; codecs="vorbis"')!=='';}catch{return false;}}
-export const LACO_DA_MUSICA=13.913;
+export const LACO_DA_MUSICA=12.308;
 /** Posição na música depois de `t` segundos tocando, a partir de `inicio`, respeitando o laço. */
 export function posicaoNoLaco(inicio:number,t:number,duracao:number){
   const p=inicio+t;if(p<duracao)return p;

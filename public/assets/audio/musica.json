@@ -1,7 +1,7 @@
 {
- "bpm": 138,
+ "bpm": 156,
  "compassos": 84,
- "segundos": 146.087,
+ "segundos": 129.231,
  "secoes": [
   {
    "nome": "Intro",
@@ -9,50 +9,51 @@
   },
   {
    "nome": "Encontro",
-   "inicio": 13.913
+   "inicio": 12.308
   },
   {
    "nome": "Choque",
-   "inicio": 41.739
+   "inicio": 36.923
   },
   {
    "nome": "Ponte",
-   "inicio": 69.565
+   "inicio": 61.538
   },
   {
    "nome": "Clímax",
-   "inicio": 83.478
+   "inicio": 73.846
   },
   {
    "nome": "Virada",
-   "inicio": 125.217
+   "inicio": 110.769
   }
  ],
+ "estilo": "anime arcade (v4)",
  "laco": {
-  "inicio": 13.913,
-  "fim": 146.087
+  "inicio": 12.308,
+  "fim": 129.231
  },
  "camadas": {
   "musica-base": {
    "arquivo": "musica-base.ogg",
-   "segundos": 146.087,
-   "bytes": 1175970,
-   "rmsDb": -20.6,
-   "mp3": "musica-base.mp3"
+   "mp3": "musica-base.mp3",
+   "segundos": 129.231,
+   "bytes": 1287737,
+   "rmsDb": -22.0
   },
   "musica-pulso": {
    "arquivo": "musica-pulso.ogg",
-   "segundos": 146.087,
-   "bytes": 944717,
-   "rmsDb": -25.1,
-   "mp3": "musica-pulso.mp3"
+   "mp3": "musica-pulso.mp3",
+   "segundos": 129.231,
+   "bytes": 1084647,
+   "rmsDb": -25.5
   },
   "musica-tema": {
    "arquivo": "musica-tema.ogg",
-   "segundos": 146.087,
-   "bytes": 866522,
-   "rmsDb": -21.8,
-   "mp3": "musica-tema.mp3"
+   "mp3": "musica-tema.mp3",
+   "segundos": 129.231,
+   "bytes": 1472080,
+   "rmsDb": -24.0
   }
  }
 }
