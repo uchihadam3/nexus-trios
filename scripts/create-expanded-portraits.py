@@ -11,7 +11,7 @@ import hashlib
 import subprocess
 from pathlib import Path
 
-from PIL import Image, ImageOps
+from PIL import Image, ImageFilter, ImageOps
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCES = ROOT / 'assets/ai-source/portraits/grids'
@@ -25,6 +25,39 @@ def roster() -> list[dict[str, str]]:
     result = subprocess.run(['node', '--import', 'tsx', '--input-type=module', '-e', command],
                             cwd=ROOT, check=True, capture_output=True, text=True)
     return json.loads(result.stdout)
+
+
+def keep_main_silhouette(art: Image.Image) -> Image.Image:
+    """Discard isolated generation specks around the two small mascots."""
+    alpha = art.getchannel('A')
+    width, height = art.size
+    pixels = alpha.tobytes()
+    seen = bytearray(len(pixels))
+    largest: list[int] = []
+    for start, value in enumerate(pixels):
+        if value < 24 or seen[start]:
+            continue
+        component, pending = [], [start]
+        seen[start] = 1
+        while pending:
+            index = pending.pop()
+            component.append(index)
+            x, y = index % width, index // width
+            neighbors = (index-1 if x else -1, index+1 if x+1<width else -1,
+                         index-width if y else -1, index+width if y+1<height else -1)
+            for next_index in neighbors:
+                if next_index >= 0 and not seen[next_index] and pixels[next_index] >= 24:
+                    seen[next_index] = 1
+                    pending.append(next_index)
+        if len(component) > len(largest):
+            largest = component
+    mask_bytes = bytearray(len(pixels))
+    for index in largest:
+        mask_bytes[index] = 255
+    mask = Image.frombytes('L', art.size, bytes(mask_bytes)).filter(ImageFilter.MaxFilter(3))
+    alpha.paste(0, (0, 0, width, height), ImageOps.invert(mask))
+    art.putalpha(alpha)
+    return art
 
 
 def main() -> None:
@@ -54,9 +87,13 @@ def main() -> None:
                 if character['id'] == 'picapau':
                     left += 24  # Keep Hellboy's fist outside this neighboring portrait.
                 top = round(row * image.height / 2) + 6
+                if group == 11 and row == 1:
+                    top += 55  # The upper action portraits extend below the grid midpoint.
                 right = round((column+1) * image.width / 2) - 6
                 bottom = round((row+1) * image.height / 2) - 6
                 art = image.crop((left, top, right, bottom)).convert('RGBA')
+                if character['id'] in {'kirby', 'donkeykong'}:
+                    art = keep_main_silhouette(art)
                 if art.getchannel('A').getextrema()[0] != 0:
                     raise ValueError(f'Grid must have true transparency: {source}')
                 bounds = art.getbbox()
