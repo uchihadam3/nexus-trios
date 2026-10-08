@@ -197,10 +197,6 @@
 .arena-v2 .is-source .medal-frame{box-shadow:0 0 0 2px #070b0f,0 0 0 3.5px var(--character),0 0 22px var(--character),inset 0 0 0 1px #ffffff33}
 .arena-v2 .is-target .medal-frame{box-shadow:0 0 0 2px #070b0f,0 0 0 3.5px #f8dd96,0 0 20px #f4d47e99,inset 0 0 0 1px #ffffff33}
 .arena-v2 .is-helped.is-target .medal-frame{box-shadow:0 0 0 2px #070b0f,0 0 0 3.5px #a9f8c3,0 0 20px #79d6b2aa}
-.arena-v2 .is-hit .medal-frame{animation:portrait-hit calc(.35s * var(--motion-scale,1)) ease-out}
-.arena-v2 .is-acting.basic-physical .unit-medal,.arena-v2 .is-acting.basic-slash .unit-medal{animation:unit-lunge calc(.85s * var(--motion-scale,1)) cubic-bezier(.2,.75,.2,1) both}
-.arena-v2 .side-enemy{--lunge:1}.arena-v2 .side-player{--lunge:-1}
-@keyframes unit-lunge{0%{transform:none}35%{transform:translateY(calc(var(--lunge) * 18px)) scale(1.06)}60%{transform:translateY(calc(var(--lunge) * 10px))}100%{transform:none}}
 .arena-v2 .unit.is-out{opacity:.5;filter:grayscale(1)}
 .arena-v2 .unit.is-out .attack-ring,.arena-v2 .unit.is-out .medal-aura,.arena-v2 .unit.is-out .unit-pedestal{opacity:0}
 .arena-v2 .is-newly-out{animation:unit-fall .6s ease-out}
@@ -264,8 +260,6 @@
   .arena-v2 .unit .fighter-name{font-size:clamp(11px,1.15vw,15px)}
   .arena-v2 .side-enemy .unit-cast,.arena-v2 .side-enemy .unit-interrupt{top:50%;left:auto;right:calc(100% + 6px);transform:translateY(-50%)}
   .arena-v2 .side-player .unit-cast,.arena-v2 .side-player .unit-interrupt{top:50%;bottom:auto;left:calc(100% + 6px);transform:translateY(-50%)}
-  .arena-v2 .side-enemy{--lunge-x:-1}.arena-v2 .side-player{--lunge-x:1}
-  .arena-v2 .is-acting.basic-physical .unit-medal,.arena-v2 .is-acting.basic-slash .unit-medal{animation-name:unit-lunge-x}
   .arena-v2 .arena-versus{font-size:clamp(26px,5dvh,46px)}
   .battle-screen.arena-v2 .arena{grid-template-columns:minmax(0,1fr) minmax(150px,.7fr) minmax(0,1fr)}
   .arena-v2 .combat-caption{min-width:0;max-width:min(19vw,300px);padding:6px 9px}
@@ -274,7 +268,6 @@
   .arena-v2 .arena-controls{grid-template-columns:minmax(0,1.6fr) repeat(3,minmax(0,1fr)) minmax(0,1.3fr);max-width:620px;width:100%;margin:0 auto;padding:4px 12px 6px}
   .arena-v2 .arena-controls button{height:44px}
 }
-@keyframes unit-lunge-x{0%{transform:none}35%{transform:translateX(calc(var(--lunge-x) * 22px)) scale(1.06)}60%{transform:translateX(calc(var(--lunge-x) * 12px))}100%{transform:none}}
 
 /* Celular deitado: a altura é pouca; HUD e controles mais finos. */
 @media (orientation:landscape) and (max-height:500px){

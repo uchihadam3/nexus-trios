@@ -4,10 +4,31 @@
  * ao início e continua. Mede se algo rola, vaza ou fica pequeno demais.
  * Uso: node scripts/arena-batalha-real.mjs <url> [largura] [altura] [prefixo]
  */
+import { createHash, X509Certificate } from 'node:crypto';
+import { existsSync, readFileSync } from 'node:fs';
 import { chromium } from 'playwright';
+const PACOTE = '/root/.ccr/ca-bundle.crt';
 const [URL_JOGO = 'http://localhost:4335/', W = '390', H = '844', prefixo = 'real'] = process.argv.slice(2);
 const SAIDA = process.env.SAIDA ?? './prints';
-const b = await chromium.launch();
+/*
+ * Para o site publicado, dentro de um ambiente com proxy: o Chromium completo
+ * (não o headless shell) lê o repositório de certificados do sistema, e o
+ * proxy vem de HTTPS_PROXY. Localhost dispensa os dois.
+ */
+const remoto = !/localhost|127\.0\.0\.1/.test(URL_JOGO);
+/*
+ * O proxy do ambiente reassina o TLS com as próprias autoridades. Em vez de
+ * desligar a verificação, o Chromium confia só nelas: as chaves das
+ * autoridades da Anthropic que estão em /root/.ccr/ca-bundle.crt.
+ */
+const confiarNoProxy = () => {
+  if (!existsSync(PACOTE)) return [];
+  const pems = readFileSync(PACOTE, 'utf8').match(/-----BEGIN CERTIFICATE-----[\s\S]+?-----END CERTIFICATE-----/g) ?? [];
+  const chaves = pems.map((pem) => new X509Certificate(pem)).filter((c) => /Anthropic/.test(c.subject))
+    .map((c) => createHash('sha256').update(c.publicKey.export({ type: 'spki', format: 'der' })).digest('base64'));
+  return chaves.length ? [`--ignore-certificate-errors-spki-list=${chaves.join(',')}`] : [];
+};
+const b = await chromium.launch(remoto && process.env.HTTPS_PROXY ? { proxy: { server: process.env.HTTPS_PROXY }, args: confiarNoProxy() } : {});
 const p = await b.newPage({ viewport: { width: Number(W), height: Number(H) }, deviceScaleFactor: 2, isMobile: Number(W) < 1000, hasTouch: Number(W) < 1000 });
 const erros = []; p.on('pageerror', (e) => erros.push(String(e).slice(0, 160)));
 await p.goto(URL_JOGO, { waitUntil: 'networkidle' });

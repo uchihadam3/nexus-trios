@@ -1,0 +1,78 @@
+/*
+ * Atuação (adendo, parte 2): liga as curvas simuladas (acting-motion.css,
+ * gerado por tools/vfx/generate_motion.py) e os efeitos desenhados em Python
+ * (public/assets/vfx/acting, de tools/vfx/generate_acting.py) a quem age e a
+ * quem recebe.
+ *
+ * Quem age: o medalhão faz o movimento do estilo, no tempo do beat, e o
+ * efeito de quem age aparece no momento certo (rastro durante o avanço,
+ * clarão no disparo, onda no chão na batida). Esses efeitos são máscaras
+ * brancas tingidas com a cor do personagem, com o núcleo claro por cima.
+ * Quem recebe: a reação começa no impacto e dura o resto do beat.
+ */
+.arena-v2 .unit{--beat-s:2s}
+.arena-v2 .unit.actor{z-index:6}
+.arena-v2 .unit.reactor{z-index:5}
+.arena-v2 .unit .unit-medal{will-change:transform}
+
+/* ---- quem age: o movimento ---- */
+.arena-v2 .act-melee.act-a .unit-medal{animation:act-melee-a calc(var(--beat-s) * var(--motion-scale,1)) linear both}
+.arena-v2 .act-melee.act-b .unit-medal{animation:act-melee-b calc(var(--beat-s) * var(--motion-scale,1)) linear both}
+.arena-v2 .act-interrupt.act-a .unit-medal{animation:act-interrupt-a calc(var(--beat-s) * var(--motion-scale,1)) linear both}
+.arena-v2 .act-interrupt.act-b .unit-medal{animation:act-interrupt-b calc(var(--beat-s) * var(--motion-scale,1)) linear both}
+.arena-v2 .act-ranged.act-a .unit-medal{animation:act-ranged-a calc(var(--beat-s) * var(--motion-scale,1)) linear both}
+.arena-v2 .act-ranged.act-b .unit-medal{animation:act-ranged-b calc(var(--beat-s) * var(--motion-scale,1)) linear both}
+.arena-v2 .act-area.act-a .unit-medal{animation:act-area-a calc(var(--beat-s) * var(--motion-scale,1)) linear both}
+.arena-v2 .act-area.act-b .unit-medal{animation:act-area-b calc(var(--beat-s) * var(--motion-scale,1)) linear both}
+.arena-v2 .act-support.act-a .unit-medal{animation:act-support-a calc(var(--beat-s) * var(--motion-scale,1)) linear both}
+.arena-v2 .act-support.act-b .unit-medal{animation:act-support-b calc(var(--beat-s) * var(--motion-scale,1)) linear both}
+.arena-v2 .act-curse.act-a .unit-medal{animation:act-curse-a calc(var(--beat-s) * var(--motion-scale,1)) linear both}
+.arena-v2 .act-curse.act-b .unit-medal{animation:act-curse-b calc(var(--beat-s) * var(--motion-scale,1)) linear both}
+.arena-v2 .act-cast.act-a .unit-medal{animation:act-cast-a calc(var(--beat-s) * var(--motion-scale,1)) linear both}
+.arena-v2 .act-cast.act-b .unit-medal{animation:act-cast-b calc(var(--beat-s) * var(--motion-scale,1)) linear both}
+
+/* ---- quem recebe: a reação (começa no impacto) ---- */
+.arena-v2 .react-hit .unit-medal{animation:react-hit calc(var(--beat-s) * .52 * var(--motion-scale,1)) linear both}
+.arena-v2 .react-hit-heavy .unit-medal{animation:react-hit-heavy calc(var(--beat-s) * .52 * var(--motion-scale,1)) linear both}
+.arena-v2 .react-heal .unit-medal{animation:react-heal calc(var(--beat-s) * .52 * var(--motion-scale,1)) linear both}
+.arena-v2 .react-buff .unit-medal{animation:react-buff calc(var(--beat-s) * .52 * var(--motion-scale,1)) linear both}
+.arena-v2 .react-shield .unit-medal{animation:react-shield calc(var(--beat-s) * .52 * var(--motion-scale,1)) linear both}
+.arena-v2 .react-curse .unit-medal{animation:react-curse calc(var(--beat-s) * .52 * var(--motion-scale,1)) linear both}
+.arena-v2 .react-broken .unit-medal{animation:react-broken calc(var(--beat-s) * .52 * var(--motion-scale,1)) linear both}
+.arena-v2 .react-fall .unit-medal{animation:react-fall calc(var(--beat-s) * .52 * var(--motion-scale,1)) linear both}
+/* Clarão no golpe: o retrato fica branco por um instante. */
+.arena-v2 .react-hit .medal-frame:before,.arena-v2 .react-hit-heavy .medal-frame:before{content:'';position:absolute;inset:0;z-index:2;border-radius:50%;background:#fff;mix-blend-mode:soft-light;animation:hit-flash calc(var(--beat-s) * .2 * var(--motion-scale,1)) ease-out both;pointer-events:none}
+@keyframes hit-flash{0%{opacity:.95}100%{opacity:0}}
+
+/* ---- os efeitos desenhados em Python ----
+ * Cada folha tem 12 quadros (3 × 4). A imagem, a duração e o atraso vêm de
+ * variáveis, para a camada tingida e o núcleo claro andarem juntos. */
+.arena-v2 .unit-fx{--fx-dur:1s;--fx-delay:0s;position:absolute;left:50%;top:50%;z-index:4;width:200%;height:200%;pointer-events:none;opacity:0;transform:translate(-50%,-50%)}
+.arena-v2 .unit-fx:after{content:none}
+/* Reações: a folha com as próprias cores. */
+.arena-v2 .reactor .unit-fx{opacity:1;background:var(--fx-sheet) 0 0/300% 400% no-repeat;animation:fx12-bg calc(var(--fx-dur) * var(--motion-scale,1)) steps(1,end) both}
+.arena-v2 .react-hit .unit-fx{--fx-sheet:url('/assets/vfx/acting/hit_spark.webp');--fx-dur:calc(var(--beat-s) * .42);width:165%;height:165%}
+.arena-v2 .react-hit-heavy .unit-fx{--fx-sheet:url('/assets/vfx/acting/hit_heavy.webp');--fx-dur:calc(var(--beat-s) * .5)}
+.arena-v2 .react-heal .unit-fx{--fx-sheet:url('/assets/vfx/acting/heal_rise.webp');--fx-dur:calc(var(--beat-s) * .52)}
+.arena-v2 .react-shield .unit-fx{--fx-sheet:url('/assets/vfx/acting/shield_bubble.webp');--fx-dur:calc(var(--beat-s) * .52);width:150%;height:150%}
+.arena-v2 .react-buff .unit-fx{--fx-sheet:url('/assets/vfx/acting/buff_rise.webp');--fx-dur:calc(var(--beat-s) * .5);width:170%;height:170%}
+.arena-v2 .react-curse .unit-fx{--fx-sheet:url('/assets/vfx/acting/curse_mist.webp');--fx-dur:calc(var(--beat-s) * .5);width:150%;height:150%}
+.arena-v2 .react-broken .unit-fx{--fx-sheet:url('/assets/vfx/acting/prep_shatter.webp');--fx-dur:calc(var(--beat-s) * .45);width:150%;height:150%}
+.arena-v2 .react-fall .unit-fx{--fx-sheet:url('/assets/vfx/acting/ko_dust.webp');--fx-dur:calc(var(--beat-s) * .52);top:72%}
+/* Quem age: máscara branca tingida com a cor do personagem, e o núcleo claro por cima. */
+.arena-v2 .actor .unit-fx{opacity:1;background-color:var(--character);-webkit-mask:var(--fx-sheet) 0 0/300% 400% no-repeat;mask:var(--fx-sheet) 0 0/300% 400% no-repeat;animation:fx12-mask calc(var(--fx-dur) * var(--motion-scale,1)) steps(1,end) calc(var(--fx-delay) * var(--motion-scale,1)) both}
+.arena-v2 .actor .unit-fx:after{content:'';position:absolute;inset:0;background:var(--fx-sheet) 0 0/300% 400% no-repeat;opacity:.6;mix-blend-mode:screen;animation:fx12-bg calc(var(--fx-dur) * var(--motion-scale,1)) steps(1,end) calc(var(--fx-delay) * var(--motion-scale,1)) both}
+.arena-v2 .act-melee .unit-fx,.arena-v2 .act-interrupt .unit-fx{--fx-sheet:url('/assets/vfx/acting/dash_trail.webp');--fx-dur:calc(var(--beat-s) * .34);--fx-delay:calc(var(--beat-s) * .14);transform:translate(-50%,-50%) rotate(var(--act-angle,0deg))}
+.arena-v2 .act-ranged .unit-fx{--fx-sheet:url('/assets/vfx/acting/muzzle_flash.webp');--fx-dur:calc(var(--beat-s) * .3);--fx-delay:calc(var(--beat-s) * .42);transform:translate(-50%,-50%) rotate(var(--act-angle,0deg)) translateX(28%)}
+.arena-v2 .act-area .unit-fx{--fx-sheet:url('/assets/vfx/acting/area_slam.webp');--fx-dur:calc(var(--beat-s) * .46);--fx-delay:calc(var(--beat-s) * .44);width:280%;height:280%;top:62%}
+.arena-v2 .act-support .unit-fx,.arena-v2 .act-curse .unit-fx{--fx-sheet:url('/assets/vfx/acting/support_pulse.webp');--fx-dur:calc(var(--beat-s) * .55);--fx-delay:calc(var(--beat-s) * .14);width:180%;height:180%}
+.arena-v2 .act-cast .unit-fx{--fx-sheet:url('/assets/vfx/acting/cast_aura.webp');width:150%;height:150%}
+.arena-v2 .act-cast .unit-fx,.arena-v2 .act-cast .unit-fx:after{animation-duration:calc(.6s * var(--motion-scale,1));animation-iteration-count:infinite;animation-delay:0s}
+
+/* ---- menos movimento: fonte e alvo continuam claros, sem viagem nem tremor ---- */
+@media(prefers-reduced-motion:reduce){
+  .arena-v2 .unit.actor .unit-medal,.arena-v2 .unit.reactor .unit-medal{animation:none!important}
+  .arena-v2 .act-melee .unit-fx,.arena-v2 .act-interrupt .unit-fx,.arena-v2 .act-ranged .unit-fx{display:none}
+}
+.reduce-motion .arena-v2 .unit.actor .unit-medal,.reduce-motion .arena-v2 .unit.reactor .unit-medal{animation:none!important}
+.reduce-motion .arena-v2 .act-melee .unit-fx,.reduce-motion .arena-v2 .act-interrupt .unit-fx,.reduce-motion .arena-v2 .act-ranged .unit-fx{display:none}

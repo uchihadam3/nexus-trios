@@ -8,6 +8,7 @@ import { Portrait } from './Portrait';
 import { AuxIcon,SkillIcon } from './Icon';
 import { StatusBadge } from './StatusBadge';
 import type { InspectTarget } from './BattleInspector';
+import type { UnitActing } from '../presentation/acting';
 
 /*
  * Um lutador na arena.
@@ -30,7 +31,7 @@ function LinhaDeStatus({tipo,lista,fighter,onInspect}:{tipo:'buffs'|'debuffs';li
   </div>;
 }
 
-export function ArenaUnit({fighter:f,battle,beat,onInspect,numbers,threatened,linkedSource=false,linkedTarget=false}:{fighter:Fighter;battle:Battle;beat:Beat|null;onInspect:(target:InspectTarget)=>void;numbers:boolean;threatened:boolean;linkedSource?:boolean;linkedTarget?:boolean}){
+export function ArenaUnit({fighter:f,battle,beat,onInspect,numbers,threatened,linkedSource=false,linkedTarget=false,atuacao}:{fighter:Fighter;battle:Battle;beat:Beat|null;onInspect:(target:InspectTarget)=>void;numbers:boolean;threatened:boolean;linkedSource?:boolean;linkedTarget?:boolean;atuacao?:UnitActing}){
   const c=byId[f.characterId],shield=f.shields.reduce((n,s)=>n+s.amount,0);
   const source=beat?.event.source===f.uid,impacted=beat?.impacted??false;
   const hit=impacted?beat?.events.find(e=>e.target===f.uid&&e.kind==='damage'):undefined;
@@ -61,8 +62,12 @@ export function ArenaUnit({fighter:f,battle,beat,onInspect,numbers,threatened,li
     (shielded||blocked)&&'is-helped',linkedSource&&'is-source',linkedTarget&&'is-target',knocked&&'is-newly-out',
     broken&&'is-broken',threatened&&'is-threatened',ring>=P.nearAction&&'is-near',tempo&&'is-tempo',
   ].filter(Boolean).join(' ');
-  return <article className={`unit side-${f.side} ${marcas}`} data-fighter={f.uid} data-slot={f.slot} data-combat-role={linkedSource&&linkedTarget?'both':linkedSource?'source':linkedTarget?'target':'idle'} style={{'--character':c.color} as React.CSSProperties}>
+  /* A atuação deste beat: estilo de quem age, reação de quem recebe, e para onde. */
+  const atua=atuacao?[atuacao.act&&`actor act-${atuacao.act} act-${atuacao.parity}`,atuacao.react&&`reactor react-${atuacao.react}`].filter(Boolean).join(' '):'';
+  const atuaStyle:Record<string,string>=atuacao?{'--act-dx':`${atuacao.dx.toFixed(1)}px`,'--act-dy':`${atuacao.dy.toFixed(1)}px`,'--act-ux':atuacao.ux.toFixed(3),'--act-uy':atuacao.uy.toFixed(3),'--beat-s':`${atuacao.seconds}s`,'--act-angle':`${(Math.atan2(atuacao.uy,atuacao.ux)*180/Math.PI).toFixed(1)}deg`}:{};
+  return <article className={`unit side-${f.side} ${marcas} ${atua}`} data-fighter={f.uid} data-slot={f.slot} data-combat-role={linkedSource&&linkedTarget?'both':linkedSource?'source':linkedTarget?'target':'idle'} style={{'--character':c.color,...atuaStyle} as React.CSSProperties}>
     <div className="unit-medal">
+      <span className="unit-fx" aria-hidden="true"/>
       <span className="unit-pedestal" aria-hidden="true"/>
       <button className="fighter-portrait" data-portrait={f.uid} onClick={()=>onInspect({kind:'fighter',fighter:f})} aria-label={`Inspecionar ${c.name}, ${Math.ceil(f.hp)} de Vida`}>
         <span className="medal-aura" aria-hidden="true"/>

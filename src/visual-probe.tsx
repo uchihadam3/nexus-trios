@@ -1,4 +1,6 @@
+import { useEffect,useState } from 'react';
 import { createRoot } from 'react-dom/client';
+import { PRESENTATION } from './presentation/config';
 import { BattleScreen } from './screens/BattleScreen';
 import { applyEffects,createBattle } from './engine/battle';
 import type { BattleEvent,Effect,Visual } from './engine/types';
@@ -8,6 +10,8 @@ import './styles.css';
 import './presentation/battle.css';
 import './presentation/visual-game.css';
 import './presentation/arena.css';
+import './presentation/acting-motion.css';
+import './presentation/acting.css';
 
 const params=new URLSearchParams(location.search),scenario=params.get('scenario')??'basic',phase=params.get('phase')??'windup';
 localStorage.setItem('nexus-battle-guide-v1','1');
@@ -49,4 +53,17 @@ applyEffects(battle,source,selected,effects);
 const events=[event,...battle.events],after=structuredClone(battle),impacted=phase==='impact';
 const beat:Beat={event,events,before,after,duration:2,elapsed:impacted?1.1:.35,impacted,family:visual==='impact'?'physical':visual==='psychic'?'psychic':visual==='bolt'?'electric':visual==='shield'?'shield':'buff',grand:false};
 const settings={...defaults,volume:0,musicVolume:0,effectsVolume:0,numbers:true,explanations:'off' as const};
-createRoot(document.getElementById('root')!).render(<div className="app"><main className="main battle-main"><BattleScreen battle={impacted?after:before} beat={beat} index={0} name="Prova visual de combate" settings={settings} paused={false} onPause={()=>{}} onAbandon={()=>{}} onSettings={()=>{}}/></main></div>);
+/*
+ * `?play=1`: a ação corre em tempo real e em laço — preparação, impacto no
+ * momento certo, fim — para conferir o movimento, não só um quadro parado.
+ * A duração segue o tipo da ação, como no jogo.
+ */
+const play=params.get('play')==='1';
+const durationFor=kind==='basic'?PRESENTATION.normalSeconds:PRESENTATION.skillSeconds;
+function Play(){
+  const [clock,setClock]=useState({id:1000,t:0});
+  useEffect(()=>{let frame=0,start=performance.now(),id=1000;const tick=(now:number)=>{let t=(now-start)/1000;if(t>durationFor+.5){start=now;t=0;id+=1;}setClock({id,t});frame=requestAnimationFrame(tick);};frame=requestAnimationFrame(tick);return ()=>cancelAnimationFrame(frame);},[]);
+  const hit=clock.t>=durationFor*PRESENTATION.impactAt,live:Beat={...beat,event:{...event,id:clock.id},duration:durationFor,elapsed:Math.min(clock.t,durationFor),impacted:hit};
+  return <BattleScreen battle={hit?after:before} beat={clock.t<=durationFor?live:null} index={0} name="Prova visual de combate" settings={settings} paused={false} onPause={()=>{}} onAbandon={()=>{}} onSettings={()=>{}}/>;
+}
+createRoot(document.getElementById('root')!).render(<div className="app"><main className="main battle-main">{play?<Play/>:<BattleScreen battle={impacted?after:before} beat={beat} index={0} name="Prova visual de combate" settings={settings} paused={false} onPause={()=>{}} onAbandon={()=>{}} onSettings={()=>{}}/>}</main></div>);

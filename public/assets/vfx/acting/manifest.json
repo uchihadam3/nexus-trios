@@ -1,0 +1,132 @@
+{
+ "hit_spark": {
+  "descricao": "reação: golpe",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": 160,
+  "bytes": 94464
+ },
+ "hit_heavy": {
+  "descricao": "reação: golpe pesado",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": 160,
+  "bytes": 134592
+ },
+ "heal_rise": {
+  "descricao": "reação: cura",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": 160,
+  "bytes": 104320
+ },
+ "shield_bubble": {
+  "descricao": "reação: escudo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": 160,
+  "bytes": 158432
+ },
+ "buff_rise": {
+  "descricao": "reação: buff",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": 160,
+  "bytes": 66368
+ },
+ "curse_mist": {
+  "descricao": "reação: debuff",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": 160,
+  "bytes": 114832
+ },
+ "prep_shatter": {
+  "descricao": "reação: preparo interrompido",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": 160,
+  "bytes": 89812
+ },
+ "ko_dust": {
+  "descricao": "reação: nocaute",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": 160,
+  "bytes": 48734
+ },
+ "dash_trail": {
+  "descricao": "age: rastro do avanço (+x)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": 160,
+  "bytes": 67842
+ },
+ "muzzle_flash": {
+  "descricao": "age: clarão do disparo (+x)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": 160,
+  "bytes": 36082
+ },
+ "cast_aura": {
+  "descricao": "age: aura do preparo (laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": 160,
+  "bytes": 103422
+ },
+ "area_slam": {
+  "descricao": "age: onda de choque no chão",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": 160,
+  "bytes": 51824
+ },
+ "support_pulse": {
+  "descricao": "age: pulso de apoio",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": 160,
+  "bytes": 94034
+ }
+}

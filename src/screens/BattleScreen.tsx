@@ -6,7 +6,8 @@ import type { Settings } from '../lib/storage';
 import type { Beat } from '../presentation/director';
 import { PRESENTATION as P } from '../presentation/config';
 import { ArenaUnit } from '../components/ArenaUnit';
-import { BattleEffects,type Anchors } from '../components/BattleEffects';
+import { BattleEffects,isAreaBeat,type Anchors } from '../components/BattleEffects';
+import { atuacao } from '../presentation/acting';
 import { CombatConnections } from '../components/CombatConnections';
 import { combatLinks } from '../presentation/combat-links';
 import { BattleInspector,type InspectTarget } from '../components/BattleInspector';
@@ -14,10 +15,10 @@ import { byId } from '../data/characters';
 import { statuses } from '../data/statuses';
 
 export function BattleScreen({battle,beat,index,name,settings,paused,onPause,onAbandon,onSettings,onExit}:{battle:Battle;beat:Beat|null;index:number;name:string;settings:Settings;paused:boolean;onPause:()=>void;onAbandon:()=>void;onSettings:(s:Settings)=>void;onExit?:()=>void}){
-  const arena=useRef<HTMLDivElement>(null),[anchors,setAnchors]=useState<Anchors>({}),[mixer,setMixer]=useState(false),[historyOpen,setHistoryOpen]=useState(false),[inspect,setInspect]=useState<InspectTarget|null>(null),[tutorial,setTutorial]=useState(()=>{try{return index===0&&!localStorage.getItem('nexus-battle-guide-v1')?0:-1}catch{return -1}});
+  const arena=useRef<HTMLDivElement>(null),[anchors,setAnchors]=useState<Anchors>({}),[box,setBox]=useState({w:0,h:0,medal:80}),[mixer,setMixer]=useState(false),[historyOpen,setHistoryOpen]=useState(false),[inspect,setInspect]=useState<InspectTarget|null>(null),[tutorial,setTutorial]=useState(()=>{try{return index===0&&!localStorage.getItem('nexus-battle-guide-v1')?0:-1}catch{return -1}});
   useLayoutEffect(()=>{
     const el=arena.current;if(!el)return;
-    const measure=()=>{const box=el.getBoundingClientRect(),next:Anchors={};el.querySelectorAll<HTMLElement>('[data-portrait],[data-ability]').forEach(node=>{const rect=node.getBoundingClientRect(),key=node.dataset.portrait??node.dataset.ability!;next[key]={x:100*(rect.x+rect.width/2-box.x)/box.width,y:100*(rect.y+rect.height/2-box.y)/box.height};});setAnchors(next);};
+    const measure=()=>{const box=el.getBoundingClientRect(),next:Anchors={};el.querySelectorAll<HTMLElement>('[data-portrait],[data-ability]').forEach(node=>{const rect=node.getBoundingClientRect(),key=node.dataset.portrait??node.dataset.ability!;next[key]={x:100*(rect.x+rect.width/2-box.x)/box.width,y:100*(rect.y+rect.height/2-box.y)/box.height};});setAnchors(next);setBox({w:box.width,h:box.height,medal:el.querySelector('.unit-medal')?.getBoundingClientRect().width??80});};
     measure();const observer=new ResizeObserver(measure);observer.observe(el);return()=>observer.disconnect();
   },[battle.seed]);
   const lead=battle.dominion>3?'player':battle.dominion< -3?'enemy':'neutral';
@@ -49,7 +50,8 @@ export function BattleScreen({battle,beat,index,name,settings,paused,onPause,onA
   };
   const closeTutorial=()=>{try{localStorage.setItem('nexus-battle-guide-v1','1')}catch{setTutorial(-1)}setTutorial(-1)};
   const tutorialSteps=[['Círculo = próximo ataque básico.','Ele enche, o personagem ataca e começa de novo.'],['Três ícones = habilidades.','Cada uma ganha Carga. Com 100%, fica pronta.'],['PREPARANDO = ainda dá tempo de interromper.','O golpe só acontece quando o Preparo termina.'],['Linha de cima = buffs. Linha de baixo = debuffs.','Toque num Status para ver quanto ele vale e quanto tempo resta.'],['Vantagem mostra quem controla a luta.','Ela ajuda algumas habilidades, mas não decide a vitória.']];
-  const unit=(f:Battle['fighters'][number])=><ArenaUnit key={f.uid} fighter={f} battle={battle} beat={beat} onInspect={setInspect} numbers={settings.numbers} threatened={threats.has(f.uid)} linkedSource={actionSources.has(f.uid)} linkedTarget={actionTargets.has(f.uid)}/>;
+  const papeis=atuacao(beat,battle,{anchors,...box},isAreaBeat(beat,battle));
+  const unit=(f:Battle['fighters'][number])=><ArenaUnit key={f.uid} fighter={f} battle={battle} beat={beat} onInspect={setInspect} numbers={settings.numbers} threatened={threats.has(f.uid)} linkedSource={actionSources.has(f.uid)} linkedTarget={actionTargets.has(f.uid)} atuacao={papeis[f.uid]}/>;
   return <section className={`battle-screen arena-v2 lead-${lead} ${turn?'dominion-turn':''} ${paused?'presentation-paused':''}`} data-beat-id={beat?.event.id} data-beat-kind={beat?.event.kind} data-beat-duration={beat?.duration} style={{'--motion-scale':1/settings.speed,'--lead-strength':Math.min(.45,Math.abs(battle.dominion)/160),'--front':`${position}%`} as React.CSSProperties}>
     <header className="arena-hud">
       {onExit&&<button className="hud-button hud-exit" onClick={onExit} aria-label="Voltar ao início (a batalha fica pausada)"><ChevronLeft size={22}/></button>}
