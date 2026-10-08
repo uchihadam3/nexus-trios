@@ -32,6 +32,8 @@ export const AUDIO_ASSETS={battleLoop:null as string|null,battleStems:['/assets/
  * Choque, Ponte, Clímax e Virada, ~2 min 26 s. Toda luta nova começa na Intro;
  * se a luta passar do fim, a música volta ao Encontro (o laço), nunca à Intro.
  */
+/** O navegador decodifica Ogg Vorbis? (o Safari do iPhone, muitas vezes, não). */
+export function tocaOgg(){try{return typeof Audio!=='undefined'&&new Audio().canPlayType('audio/ogg; codecs="vorbis"')!=='';}catch{return false;}}
 export const LACO_DA_MUSICA=13.913;
 /** Posição na música depois de `t` segundos tocando, a partir de `inicio`, respeitando o laço. */
 export function posicaoNoLaco(inicio:number,t:number,duracao:number){
@@ -127,7 +129,11 @@ class BattleAudio {
       this.stemBuffers=AUDIO_ASSETS.battleStems.map(()=>null);
       // a base primeiro: a música começa assim que ela chega; as outras camadas entram depois
       this.stemLoading=AUDIO_ASSETS.battleStems.reduce<Promise<void>>((anterior,path,index)=>anterior.then(async()=>{
-        try{const r=await fetch(path);if(!r.ok)return;this.stemBuffers[index]=await ctx.decodeAudioData(await r.arrayBuffer());this.attachStem(index);}catch{/* fica sem esta camada */}
+        // OGG onde o navegador toca OGG; senão (iPhone/Safari) o MP3. Se o OGG não decodificar, tenta o MP3.
+        const mp3=path.replace(/\.ogg$/,'.mp3'),ordem=tocaOgg()?[path,mp3]:[mp3];
+        for(const arquivo of ordem){
+          try{const r=await fetch(arquivo);if(!r.ok)continue;this.stemBuffers[index]=await ctx.decodeAudioData(await r.arrayBuffer());this.attachStem(index);return;}catch{/* tenta o próximo formato */}
+        }
       }),Promise.resolve());
     }
     return this.stemLoading;

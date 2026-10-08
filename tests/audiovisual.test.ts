@@ -9,7 +9,7 @@ import { LACO_DA_MUSICA,posicaoNoLaco } from '../src/lib/audio';
 const root=process.cwd();
 const familias=JSON.parse(readFileSync(resolve(root,'public/assets/vfx/familias/manifest.json'),'utf8')) as Record<string,{quadros:number;grade:[number,number];tamanho:[number,number];laco:boolean;bytes:number}>;
 const sfx=JSON.parse(readFileSync(resolve(root,'public/assets/audio/sfx/manifest.json'),'utf8')) as Manifesto;
-const musica=JSON.parse(readFileSync(resolve(root,'public/assets/audio/musica.json'),'utf8')) as {bpm:number;compassos:number;segundos:number;secoes:{nome:string;inicio:number}[];laco:{inicio:number;fim:number};camadas:Record<string,{arquivo:string;bytes:number;rmsDb:number}>};
+const musica=JSON.parse(readFileSync(resolve(root,'public/assets/audio/musica.json'),'utf8')) as {bpm:number;compassos:number;segundos:number;secoes:{nome:string;inicio:number}[];laco:{inicio:number;fim:number};camadas:Record<string,{arquivo:string;mp3?:string;bytes:number;rmsDb:number}>};
 
 describe('compact reusable audiovisual library',()=>{
   it('ships the Python-drawn family sheets: 3×4, transparent WebP, all used, within budget',()=>{
@@ -99,6 +99,8 @@ describe('compact reusable audiovisual library',()=>{
     expect(musica.laco.inicio).toBeCloseTo(LACO_DA_MUSICA,2);expect(musica.secoes[1]!.inicio).toBeCloseTo(LACO_DA_MUSICA,2);
     let bytes=0;
     for(const camada of Object.values(musica.camadas)){const data=readFileSync(resolve(root,'public/assets/audio',camada.arquivo));bytes+=data.length;expect(data.subarray(0,4).toString('ascii')).toBe('OggS');}
+    // a mesma camada em MP3 para quem não decodifica Ogg (iPhone/Safari): sem ela, tocaria a música sintetizada antiga
+    for(const camada of Object.values(musica.camadas)){const mp3=readFileSync(resolve(root,'public/assets/audio',camada.arquivo.replace(/\.ogg$/,'.mp3')));const cab=mp3.subarray(0,3);expect(cab.toString('ascii')==='ID3'||(cab[0]===0xff&&(cab[1]!&0xe0)===0xe0)).toBe(true);expect(mp3.length).toBeLessThan(1_800_000);}
     expect(bytes).toBeLessThan(4_200_000);
     // a base é a mais presente; pulso e tema ficam por baixo
     expect(musica.camadas['musica-base']!.rmsDb).toBeGreaterThan(musica.camadas['musica-tema']!.rmsDb);

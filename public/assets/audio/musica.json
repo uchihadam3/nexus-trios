@@ -37,19 +37,22 @@
    "arquivo": "musica-base.ogg",
    "segundos": 146.087,
    "bytes": 1175970,
-   "rmsDb": -20.6
+   "rmsDb": -20.6,
+   "mp3": "musica-base.mp3"
   },
   "musica-pulso": {
    "arquivo": "musica-pulso.ogg",
    "segundos": 146.087,
    "bytes": 944717,
-   "rmsDb": -25.1
+   "rmsDb": -25.1,
+   "mp3": "musica-pulso.mp3"
   },
   "musica-tema": {
    "arquivo": "musica-tema.ogg",
    "segundos": 146.087,
    "bytes": 866522,
-   "rmsDb": -21.8
+   "rmsDb": -21.8,
+   "mp3": "musica-tema.mp3"
   }
  }
 }

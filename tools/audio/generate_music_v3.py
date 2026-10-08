@@ -32,7 +32,7 @@ Encontro (não à Intro). Três camadas que o jogo mistura pela intensidade:
 Todos os instrumentos são sintetizados aqui (serras com polyBLEP, filtros,
 ruído), nada é amostrado. Determinístico: a mesma semente gera o mesmo som.
 
-Uso: python3 tools/audio/generate_music_v3.py   (gera public/assets/audio/musica-*.ogg)
+Uso: python3 tools/audio/generate_music_v3.py   (gera public/assets/audio/musica-*.ogg e .mp3)
 """
 from __future__ import annotations
 
@@ -647,14 +647,23 @@ def main():
         with sf.SoundFile(destino, "w", SR, 2, format="OGG", subtype="VORBIS", compression_level=0.92) as arq:
             for i in range(0, len(y), SR):
                 arq.write(y[i:i + SR])
+        escreve_mp3(OUT / f"{nome}.mp3", y)
         rms = 20 * math.log10(float(np.sqrt(np.mean(x ** 2))) + 1e-9)
-        info[nome] = {"arquivo": destino.name, "segundos": round(N / SR, 3), "bytes": destino.stat().st_size, "rmsDb": round(rms, 1)}
+        info[nome] = {"arquivo": destino.name, "mp3": f"{nome}.mp3", "segundos": round(N / SR, 3), "bytes": destino.stat().st_size, "rmsDb": round(rms, 1)}
         print(f"{nome:14s} {destino.stat().st_size / 1024:7.1f} KB  rms {rms:6.1f} dB")
     secoes = [{"nome": s, "inicio": round(i * BAR, 3)} for s, i in SECOES]
     (OUT / "musica.json").write_text(json.dumps({
         "bpm": BPM, "compassos": BARS, "segundos": round(N / SR, 3), "secoes": secoes,
         "laco": {"inicio": round(LACO * BAR, 3), "fim": round(N / SR, 3)}, "camadas": info,
     }, indent=1, ensure_ascii=False) + "\n")
+
+
+def escreve_mp3(destino, y, sr=SR):
+    """A mesma camada em MP3: o iPhone/Safari nem sempre decodifica Ogg Vorbis, e
+    sem a camada base o jogo cairia na música sintetizada antiga."""
+    with sf.SoundFile(destino, "w", sr, 2, format="MP3", subtype="MPEG_LAYER_III", compression_level=0.55) as arq:
+        for i in range(0, len(y), sr):
+            arq.write(y[i:i + sr])
 
 
 if __name__ == "__main__":
