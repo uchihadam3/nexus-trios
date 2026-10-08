@@ -51,6 +51,8 @@ def main() -> None:
             for slot, character in selected:
                 column, row = slot % 2, slot // 2
                 left = round(column * image.width / 2) + 6
+                if character['id'] == 'picapau':
+                    left += 24  # Keep Hellboy's fist outside this neighboring portrait.
                 top = round(row * image.height / 2) + 6
                 right = round((column+1) * image.width / 2) - 6
                 bottom = round((row+1) * image.height / 2) - 6
