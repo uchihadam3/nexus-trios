@@ -77,27 +77,35 @@ def main() -> None:
         if not selected:
             continue
         source = SOURCES / f'{group:03d}.webp'
-        if not source.exists():
+        if not source.exists() and any(not (OVERRIDES / f"{c['id']}.png").exists()
+                                       and not (OVERRIDES / f"{c['id']}.webp").exists()
+                                       for _, c in selected):
             raise FileNotFoundError(f'Missing four-character portrait grid: {source}')
-        with Image.open(source) as image:
-            image.load()
-            if image.width < 900 or image.height < 900:
-                raise ValueError(f'Portrait grid too small: {source} {image.size}')
+        image = Image.open(source) if source.exists() else None
+        try:
+            if image is not None:
+                image.load()
+                if image.width < 900 or image.height < 900:
+                    raise ValueError(f'Portrait grid too small: {source} {image.size}')
             for slot, character in selected:
                 column, row = slot % 2, slot // 2
-                left = round(column * image.width / 2) + 6
-                if character['id'] == 'picapau':
-                    left += 24  # Keep Hellboy's fist outside this neighboring portrait.
-                top = round(row * image.height / 2) + 6
-                if group == 11 and row == 1:
-                    top += 55  # The upper action portraits extend below the grid midpoint.
-                right = round((column+1) * image.width / 2) - 6
-                bottom = round((row+1) * image.height / 2) - 6
-                override = OVERRIDES / f"{character['id']}.webp"
-                if character['id'] in REQUIRED_OVERRIDES and not override.exists():
+                override = next((p for p in (OVERRIDES / f"{character['id']}.webp",
+                                              OVERRIDES / f"{character['id']}.png") if p.exists()), None)
+                if character['id'] in REQUIRED_OVERRIDES and override is None:
                     raise FileNotFoundError(f'Missing corrected portrait: {override}')
-                art = (Image.open(override).convert('RGBA') if override.exists()
-                       else image.crop((left, top, right, bottom)).convert('RGBA'))
+                if override is not None:
+                    art = Image.open(override).convert('RGBA')
+                else:
+                    assert image is not None
+                    left = round(column * image.width / 2) + 6
+                    if character['id'] == 'picapau':
+                        left += 24  # Keep Hellboy's fist outside this neighboring portrait.
+                    top = round(row * image.height / 2) + 6
+                    if group == 11 and row == 1:
+                        top += 55  # The upper action portraits extend below the grid midpoint.
+                    right = round((column+1) * image.width / 2) - 6
+                    bottom = round((row+1) * image.height / 2) - 6
+                    art = image.crop((left, top, right, bottom)).convert('RGBA')
                 if character['id'] in {'kirby', 'donkeykong', 'finn'}:
                     art = keep_main_silhouette(art)
                 if art.getchannel('A').getextrema()[0] != 0:
@@ -113,6 +121,9 @@ def main() -> None:
                     raise ValueError(f'Duplicate portrait: {character["id"]}')
                 digests.add(digest)
                 canvas.save(DESTINATION / f"{character['id']}.webp", format='WEBP', quality=88, method=3)
+        finally:
+            if image is not None:
+                image.close()
     assert len(digests) == len(approved)
     print(f'Built {len(approved)} reviewed portraits; {150-len(approved)} await correction.')
 

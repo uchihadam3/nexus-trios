@@ -23,7 +23,7 @@ describe('Arte local e composição',()=>{
     const approved=new Set(approvedPortraits);
     const expanded=characters.slice(100);
     expect(approved.size).toBe(approvedPortraits.length);
-    expect(expanded.filter(character=>approved.has(character.id))).toHaveLength(116);
+    expect(expanded.filter(character=>approved.has(character.id))).toHaveLength(approved.size);
     expect(existsSync(new URL('../assets/ai-source/portraits/overrides/rick.webp',root))).toBe(true);
     for(const character of expanded){
       const reviewed=approved.has(character.id);
