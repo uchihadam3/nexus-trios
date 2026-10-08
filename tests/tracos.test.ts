@@ -28,3 +28,22 @@ describe('texto de quando o traço ativa', () => {
     expect(presentTrait(byId.donald.trait).quando).toBe('Ao receber dano · no máximo 1 vez a cada 3 s');
   });
 });
+
+/*
+ * Ponto fraco de verdade (pedido do jogador): cada um diz contra o quê o
+ * personagem perde e por quê, com algo dele (Vida, golpe, traço), sem frase
+ * genérica repetida.
+ */
+import { fraquezas } from '../src/data/fraquezas';
+describe('pontos fracos', () => {
+  it('todos têm um ponto fraco próprio, com o contra-quê e o porquê', () => {
+    const textos = characters.map((c) => c.vulnerability);
+    expect(new Set(textos).size).toBeGreaterThanOrEqual(characters.length - 4);
+    for (const c of characters) {
+      expect(c.vulnerability, c.id).toBe(fraquezas[c.id]);
+      expect(c.vulnerability, c.id).toMatch(/^(Contra|Em luta longa|Depende do momento|Precisa apanhar)[^:]*: .{40,}/);
+      expect(c.vulnerability.length, c.id).toBeLessThanOrEqual(240);
+    }
+    expect(byId.donald.vulnerability).not.toMatch(/perde o controle/i);
+  });
+});

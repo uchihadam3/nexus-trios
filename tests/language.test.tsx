@@ -13,7 +13,7 @@ describe('linguagem pública e o catálogo inteiro',()=>{
     for(const c of characters){
       const html=renderToStaticMarkup(<CharacterModal character={c} onClose={()=>{}}/>);
       expect(html,c.id).toContain(c.name);
-      expect(html,c.id).toContain('Ponto de atenção');
+      expect(html,c.id).toContain('Ponto fraco');
       expect(html,c.id).not.toMatch(/NaN|undefined|RETRATO PROVISÓRIO|compatível com a sentença|Condição de uso|Recarga interna|alvo válido|efeito aplicado|MVP 1\.0/);
       expect(presentTrait(c.trait).effects,c.id).toHaveLength(c.trait.effects.length);
       expect(c.vulnerability.trim().length,c.id).toBeGreaterThan(12);

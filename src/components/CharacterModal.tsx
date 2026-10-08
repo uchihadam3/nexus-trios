@@ -31,6 +31,6 @@ export function CharacterModal({character:c,onClose}:{character:Character;onClos
     <div className="sheet-section trait"><span className="eyebrow">TRAÇO</span><h3>{c.trait.name}</h3><div className="effect-chips">{trait.effects.map((effect,i)=><span key={i}>{effect}</span>)}</div><small>{trait.quando}</small></div>
     <div className="sheet-section"><span className="eyebrow">ATAQUE BÁSICO · {targetNames[c.basic.target]}</span><div className="effect-chips">{c.basic.effects.map((effect,i)=><span key={i}>{presentEffect(effect,c.basic.target)}</span>)}</div></div>
     <div className="detail-skills">{c.skills.map((s,i)=>{const p=presentSkill(s);return <article key={s.id}><span className="skill-static"><SkillIcon type={s.icon} characterId={c.id} skillId={s.id}/></span><div><span className="eyebrow">HABILIDADE {i+1}</span><h3>{s.name}</h3><EfeitosAgrupados grupos={p.grupos}/>{p.mostrarAlvo&&<div className="sheet-detail"><b>Alvo</b> {p.target}</div>}<div className="sheet-detail"><b>Carga</b> {p.charge.join(' · ')}</div><div className="sheet-detail"><b>Usa quando</b> {p.useWhen}</div><div className="sheet-detail"><b>Preparo</b> {p.preparation} <b>Resfriamento</b> {p.cooldown}</div></div></article>;})}</div>
-    <div className="vulnerability"><Info size={17}/><p><strong>Ponto de atenção</strong><br/>{c.vulnerability}</p></div>
+    <div className="vulnerability"><Info size={17}/><p><strong>Ponto fraco</strong><br/>{c.vulnerability}</p></div>
   </div></dialog>;
 }

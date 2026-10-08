@@ -1,3 +1,4 @@
+import { fraquezas } from './fraquezas';
 import type { Character, Effect, Skill, Target, Trait, Visual, ChargeRule } from '../engine/types';
 import { expandedCharacters } from './expanded-roster';
 import { intelligenceFor } from './intelligence';
@@ -143,5 +144,7 @@ export const characters:Character[] = [
   skill('Equilíbrio','psychic','Causa 240 de dano a todos e enfraquece por 9 s.','Tempo em luta + dano causado',[charge('survived',2.8),charge('dealt',7)],[damage(240,'allEnemies'),status('weakened',.25,9,'allEnemies')],{preparation:4.5,target:'allEnemies',cooldown:14})]}),
   ...expandedCharacters.map(c=>imagePortraits[c.id]?{...c,portrait:imagePortraits[c.id]}:c),
 ] .map(alinharEfeitos)
- .map(c=>({...c,intelligence:intelligenceFor(c.id,c.tags)}));
+ .map(c=>({...c,intelligence:intelligenceFor(c.id,c.tags),
+   /* Ponto fraco medido (scripts/escrever-fraquezas.ts): contra o quê ele é ruim e por quê. */
+   vulnerability:fraquezas[c.id]??c.vulnerability}));
 export const byId:Record<string,Character> = Object.fromEntries(characters.map(c=>[c.id,c]));
