@@ -22,6 +22,8 @@ Os originais estão em `assets/ai-source/portraits/overrides/{id}.webp`; os card
 
 Os 14 retratos acima foram aprovados pelo usuário e publicados no jogo.
 
-Samurai Jack: novo retrato gerado, visualização em `samurai-jack-pending.jpg`, aguardando avaliação; o retrato atual ainda está em uso.
+Samurai Jack: novo retrato aprovado pelo usuário e publicado no jogo; visualização em `samurai-jack-pending.jpg`.
 
-Pendentes por bloqueio da geração: Salsicha, Pernalonga, Pica-Pau, Geralt de Rívia, Mario e Bowser. Os retratos atuais desses personagens continuam em uso. Nenhuma imagem de internet foi usada.
+Salsicha, Pica-Pau e Geralt de Rívia: três novas versões recortadas de folhas 2 × 2, visualização em `three-corrected-pending.jpg`, aguardando avaliação. Os retratos atuais desses três continuam em uso. Os recortes foram inspecionados para evitar partes de personagens vizinhos.
+
+Ainda sem novo retrato por recusa da ferramenta de geração: Pernalonga, Mario e Bowser. Seus retratos atuais continuam em uso. Nenhuma imagem de internet foi usada.
