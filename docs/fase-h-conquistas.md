@@ -29,9 +29,9 @@ era que mesmo controlados eles eram contadores.
 **O que a remoção mexeu no ranqueado:** a qualidade de uma jornada ranqueada
 somava 12.000 pontos por objetivo cumprido, até 36.000. Esse componente saiu.
 A pontuação agora é o que a jornada mostrou: confrontos vencidos, Vida restante
-e lutadores de pé. A coluna `objectives_completed` continua no banco, agora
-sem uso e aceitando nulo — dá para removê-la numa migração quando for
-conveniente.
+e lutadores de pé. A coluna `objectives_completed` ficou sem uso e sai na
+migração `20261009000000_limpeza_objetivos.sql`, junto com a tabela
+`daily_weekly_progress`.
 
 ## As conquistas, refeitas
 

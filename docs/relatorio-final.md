@@ -155,9 +155,9 @@ fase tem seu documento em `docs/`, com a medição que sustenta o que está aqui
   Death Note foi revista (89 imunes, 161 vulneráveis). Fica aberto o
   **Professor Xavier** (23% a 28%): o valor dele é coordenar, e a medição não
   vê isso.
-- **Limpeza do banco**: a coluna `objectives_completed` e a tabela
-  `daily_weekly_progress` não são mais usadas e podem sair numa migração
-  futura.
+- **Limpeza do banco**: pronta em `20261009000000_limpeza_objetivos.sql`
+  (remove `objectives_completed` e `daily_weekly_progress`), testada no
+  Postgres local; sobe junto com o balanceamento.
 - **Arte dos personagens**: o dono do projeto está fornecendo. Em paralelo a
   esta fase entraram 110 retratos originais revisados (`27d1cbb`), gerados a
   partir de folhas de arte por `npm run assets:portraits`. Os outros 40
