@@ -183,6 +183,66 @@ describe.skipIf(!ADMIN)('Top 3 por conta, no Postgres', () => {
     }
   });
 
+  /*
+   * FASE L · ranking paginado. A posição vem do banco, com o desempate do
+   * resto do jogo, e a conta sempre se encontra — mesmo fora da página.
+   */
+  describe('ranking paginado', () => {
+    const P = '2026-11-01';
+    type Linha = { posicao: string; total: string; player_id: string; score: number };
+    const pagina = async (jogador: string, offset: number, limite: number) =>
+      (await db.query('select * from public.ranking_pagina($1, $2, $3, $4, $5)', ['daily', P, jogador, offset, limite])).rows as Linha[];
+    let contas: string[] = [];
+    beforeAll(async () => {
+      contas = [];
+      for (let i = 0; i < 7; i++) {
+        const j = await conta(); contas.push(j);
+        await registrar(j, [`x${i}`, `y${i}`, `z${i}`], 1000 - i * 100, 'daily', P);
+      }
+      /* Empate: a oitava conta faz o mesmo que a terceira, mas chega depois. */
+      const j = await conta(); contas.push(j);
+      await registrar(j, ['e1', 'e2', 'e3'], 800, 'daily', P);
+    });
+
+    it('numera do maior para o menor, e no empate quem chegou antes fica na frente', async () => {
+      const r = await pagina(contas[0], 0, 10);
+      expect(r.map((x) => x.score)).toEqual([1000, 900, 800, 800, 700, 600, 500, 400]);
+      expect(r.map((x) => Number(x.posicao))).toEqual([1, 2, 3, 4, 5, 6, 7, 8]);
+      expect(r[2].player_id).toBe(contas[2]);
+      expect(r[3].player_id).toBe(contas[7]);
+      expect(Number(r[0].total)).toBe(8);
+    });
+
+    it('devolve só a página pedida', async () => {
+      const r = await pagina(contas[0], 3, 2);
+      /* A página 4–5 e, além dela, a linha da própria conta (posição 1). */
+      expect(r.map((x) => Number(x.posicao))).toEqual([1, 4, 5]);
+    });
+
+    it('a conta se encontra mesmo longe da página', async () => {
+      const r = await pagina(contas[6], 0, 2);
+      /* Oitava: o empate de 800 entrou na frente dela. */
+      expect(r.map((x) => Number(x.posicao))).toEqual([1, 2, 8]);
+      expect(r.at(-1)!.player_id).toBe(contas[6]);
+    });
+
+    it('não devolve mais que 100 por página, peça o que pedir', async () => {
+      const j = await conta();
+      for (let i = 0; i < 3; i++) await registrar(j, [`p${i}`, `q${i}`, `r${i}`], 5, 'season', 'grande');
+      const r = (await db.query('select * from public.ranking_pagina($1, $2, $3, 0, 100000)', ['season', 'grande', randomUUID()])).rows;
+      expect(r.length).toBeLessThanOrEqual(100);
+    });
+
+    it('só o servidor consulta', async () => {
+      const c = await db.connect();
+      try {
+        await c.query('begin'); await c.query('set local role authenticated');
+        await expect(c.query('select * from public.ranking_pagina($1, $2, $3, 0, 10)', ['daily', P, contas[0]])).rejects.toMatchObject({ code: '42501' });
+        await c.query('rollback');
+      } finally { c.release(); }
+    });
+  });
+
   /* "service_role fora do frontend": o navegador não consegue nem chamar. */
   it('um jogador logado não registra nem escreve direto', async () => {
     const j = await conta(), run = await partida(j, A, 1);
@@ -211,7 +271,9 @@ describe.skipIf(!ADMIN)('Top 3 · partidas que já existiam', () => {
     const c = new pg.Client({ connectionString: urlDo(banco) }); await c.connect();
     try {
       await c.query(sql('tests/sql/supabase-stub.sql'));
-      for (const m of migracoes.filter((x) => !x.includes('top3'))) await c.query(sql(`supabase/migrations/${m}`));
+      /* Só as migrações anteriores à do Top 3: as posteriores dependem dela. */
+      const top3 = migracoes.findIndex((x) => x.includes('top3'));
+      for (const m of migracoes.slice(0, top3)) await c.query(sql(`supabase/migrations/${m}`));
       const j = randomUUID();
       await c.query('insert into auth.users(id) values ($1)', [j]);
       await c.query(`insert into public.players(id, handle) values ($1, 'Antigo')`, [j]);
@@ -221,7 +283,7 @@ describe.skipIf(!ADMIN)('Top 3 · partidas que já existiam', () => {
       for (const [i, [t, s]] of historico.entries()) await c.query(`insert into public.ranked_runs(player_id, challenge_id, mode, period_key, seed, engine_version,
           balance_version, roster_fingerprint, team_ids, finished_at, encounters_cleared, score, verified)
         values ($1, $2, 'daily', '2026-10-07', 1, 't', 'season-1', 'x', $3, now() + make_interval(secs => $4), 2, $5, true)`, [j, ch, t, i, s]);
-      await c.query(sql(`supabase/migrations/${migracoes.find((x) => x.includes('top3'))}`));
+      for (const m of migracoes.slice(top3)) await c.query(sql(`supabase/migrations/${m}`));
       for (const escopo of ['daily', 'season']) {
         const r = (await c.query(`select canonical_team, score from public.leaderboard_entries where scope = $1 order by score desc`, [escopo])).rows;
         /* a|b|c aparece uma vez só, com 700 (o melhor dos dois); g|h|i (300) ficou de fora. */

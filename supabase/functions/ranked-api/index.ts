@@ -35,22 +35,31 @@ async function profile(userId:string){const {data,error}=await admin.from('playe
  */
 type Escopo='daily'|'weekly'|'season';
 const chaveDo=(escopo:Escopo)=>escopo==='season'?BALANCE_VERSION:period(escopo);
-async function board(userId:string,mode:Escopo,detailId?:string){
+/*
+ * Uma página do ranking, mais as entradas da própria conta onde quer que
+ * estejam — numeradas pelo banco (`ranking_pagina`). Antes, a função buscava
+ * até 1.000 linhas e numerava aqui: caro com muitos jogadores, e quem ficasse
+ * depois da milésima não aparecia nem para si mesmo.
+ */
+const POR_PAGINA=50;
+type LinhaDoRanking={posicao:number;total:number;player_id:string;run_id:string;score:number;encounters_cleared:number;team_ids:string[];achieved_at:string};
+async function board(userId:string,mode:Escopo,detailId?:string,pagina=0){
   const key=chaveDo(mode);
-  const {data,error}=await admin.from('leaderboard_entries').select('player_id,run_id,score,encounters_cleared,team_ids,achieved_at').eq('scope',mode).eq('period_key',key).order('score',{ascending:false}).order('achieved_at',{ascending:true}).limit(1000);
+  const {data,error}=await admin.rpc('ranking_pagina',{p_scope:mode,p_period:key,p_player:userId,p_offset:pagina*POR_PAGINA,p_limit:POR_PAGINA});
   if(error)throw error;
-  const rows=data??[];
+  const rows=(data??[]) as LinhaDoRanking[],total=Number(rows[0]?.total??0);
   const ids=[...new Set(rows.map(r=>r.player_id))],names=ids.length?(await admin.from('players').select('id,handle').in('id',ids)).data??[]:[];
   const handleOf=new Map(names.map(x=>[x.id,x.handle]));
-  const visiveis=rows.filter((r,i)=>i<50||r.player_id===userId||r.run_id===detailId);
-  const runIds=[...new Set(visiveis.map(r=>r.run_id))];
+  const runIds=[...new Set(rows.map(r=>r.run_id))];
   const runs=runIds.length?(await admin.from('ranked_runs').select('id,seed,summary,engine_version,balance_version').in('id',runIds)).data??[]:[];
   const runOf=new Map(runs.map(r=>[r.id,r]));
-  const publico=(r:typeof rows[number],index:number)=>{const run=runOf.get(r.run_id);return {position:index+1,id:r.run_id,handle:handleOf.get(r.player_id)??'Jogador',score:r.score,progress:r.encounters_cleared,team:r.team_ids,date:r.achieved_at,seed:run?.seed??0,engineVersion:run?.engine_version??ENGINE_VERSION,balanceVersion:run?.balance_version??BALANCE_VERSION,highlights:run?.summary?.highlights??{}};};
-  const todos=rows.map(publico),meus=todos.filter((_,i)=>rows[i].player_id===userId);
-  return {mode,period:key,entries:todos.slice(0,50),mine:meus[0]??null,
+  const publico=(r:LinhaDoRanking)=>{const run=runOf.get(r.run_id);return {position:Number(r.posicao),id:r.run_id,handle:handleOf.get(r.player_id)??'Jogador',score:r.score,progress:r.encounters_cleared,team:r.team_ids,date:r.achieved_at,seed:run?.seed??0,engineVersion:run?.engine_version??ENGINE_VERSION,balanceVersion:run?.balance_version??BALANCE_VERSION,highlights:run?.summary?.highlights??{}};};
+  const inicio=pagina*POR_PAGINA,daPagina=rows.filter(r=>Number(r.posicao)>inicio&&Number(r.posicao)<=inicio+POR_PAGINA).map(publico);
+  const meus=rows.filter(r=>r.player_id===userId).map(publico);
+  return {mode,period:key,entries:daPagina,mine:meus[0]??null,
     meus:{entries:meus,vagas:Math.max(0,3-meus.length),precisaSuperar:meus.length>=3?Math.min(...meus.map(m=>m.score)):null},
-    details:detailId?(todos.find(x=>x.id===detailId)??null):null};
+    details:detailId?([...daPagina,...meus].find(x=>x.id===detailId)??null):null,
+    pagina,total,temMais:inicio+POR_PAGINA<total};
 }
 
 Deno.serve(async (request:Request)=>{
@@ -128,7 +137,8 @@ Deno.serve(async (request:Request)=>{
     }
     if(input.action==='leaderboard'){
       const mode=input.mode==='weekly'?'weekly':input.mode==='season'?'season':'daily';
-      return json(await board(user.id,mode,typeof input.detailId==='string'?input.detailId:undefined),200,origin);
+      const pagina=typeof input.pagina==='number'&&Number.isInteger(input.pagina)&&input.pagina>=0&&input.pagina<10000?input.pagina:0;
+      return json(await board(user.id,mode,typeof input.detailId==='string'?input.detailId:undefined,pagina),200,origin);
     }
     return fail('Ação desconhecida.',404,origin);
   }catch(error){console.error('ranked-api',input.action,error instanceof Error?error.message:String(error));return fail('Serviço temporariamente indisponível.',503,origin);}

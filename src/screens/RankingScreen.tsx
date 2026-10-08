@@ -15,7 +15,7 @@ const modes=[['daily','HOJE'],['weekly','SEMANA'],['season','TEMPORADA'],['mine'
  * jogar quando ele só queria olhar, e não oferecia como entrar.
  */
 export function RankingScreen({handle,conta,onConta}:{handle?:string;conta:boolean;onConta:()=>void}){
-  const [mode,setMode]=useState<(typeof modes)[number][0]>('daily'),[board,setBoard]=useState<Leaderboard|null>(null),[historico,setHistorico]=useState<PartidaDoHistorico[]|null>(null),[loading,setLoading]=useState(false),[error,setError]=useState(''),[selected,setSelected]=useState<PublicRun|null>(null);
+  const [mode,setMode]=useState<(typeof modes)[number][0]>('daily'),[board,setBoard]=useState<Leaderboard|null>(null),[historico,setHistorico]=useState<PartidaDoHistorico[]|null>(null),[loading,setLoading]=useState(false),[maisCarregando,setMaisCarregando]=useState(false),[error,setError]=useState(''),[selected,setSelected]=useState<PublicRun|null>(null);
   useEffect(()=>{if(!onlineConfigured||!conta)return;let active=true;setLoading(true);setError('');setHistorico(null);
     /*
      * "Meus recordes" é o histórico completo, que só a função da FASE K
@@ -27,6 +27,17 @@ export function RankingScreen({handle,conta,onConta}:{handle?:string;conta:boole
       :onlineCall<Leaderboard>('leaderboard',{mode}).then(b=>{if(active)setBoard(b);});
     void pedido.then(()=>{if(active)setLoading(false);}).catch(e=>{if(active){setError(e instanceof Error?e.message:'Ranking indisponível.');setLoading(false);}});
     return()=>{active=false};},[mode,conta]);
+  /*
+   * "Ver mais": a próxima página entra no fim da lista. Linhas repetidas (a
+   * própria conta pode vir em duas páginas) são descartadas pelo id.
+   */
+  const verMais=async()=>{
+    if(!board||mode==='mine')return;setMaisCarregando(true);
+    try{const prox=await onlineCall<Leaderboard>('leaderboard',{mode,pagina:(board.pagina??0)+1});
+      setBoard(atual=>atual&&{...prox,entries:[...atual.entries,...prox.entries.filter(e=>!atual.entries.some(x=>x.id===e.id))]});}
+    catch(e){setError(e instanceof Error?e.message:'Ranking indisponível.');}
+    finally{setMaisCarregando(false);}
+  };
   const rows=mode==='mine'?(board?.mine?[board.mine]:[]):board?.entries??[];
   /* A mesma conta pode aparecer até 3 vezes no ranking: todas as suas linhas ficam marcadas. */
   const minhas=new Set([...(board?.meus?.entries??[]).map(m=>m.id),...(board?.mine?[board.mine.id]:[])]);
@@ -34,7 +45,8 @@ export function RankingScreen({handle,conta,onConta}:{handle?:string;conta:boole
     <div className="ranking-tabs">{modes.map(([value,label])=><button key={value} className={mode===value?'active':''} onClick={()=>{setMode(value);setSelected(null);}}>{label}</button>)}</div>
     {!onlineConfigured?<p className="ranking-notice"><WifiOff size={18}/> Ranking ainda não foi conectado ao servidor. Jornada Casual e Progresso continuam offline.</p>:!conta?<div className="ranking-convite"><p>O ranking é de quem joga a Jornada Ranqueada. <b>Entre ou crie sua conta</b> para ver as posições e colocar seu trio na disputa.</p><button className="primary" onClick={onConta}><LogIn size={17}/> Entrar ou criar conta</button></div>:error?<p role="alert" className="ranking-notice"><WifiOff size={18}/>{error}</p>:loading?<p className="ranking-notice">Carregando resultados verificados…</p>:historico?<Historico partidas={historico}/>:<>
       {mode!=='mine'&&board?.meus&&<MeusTres meus={board.meus} onSelect={setSelected}/>}
-      <p className="ranking-context">{mode==='daily'?'Desafio de hoje':mode==='weekly'?'Desafio da semana':mode==='season'?'Melhores resultados desta temporada':'Seu melhor resultado da temporada'} · {board?.period} {handle&&`· ${handle}`}</p><div className="ranking-list">{rows.map(row=><button key={row.id} onClick={()=>setSelected(row)} className={minhas.has(row.id)?'mine':''}><strong>#{row.position}</strong><span className="ranking-name">{row.handle}</span><div className="ranking-trio">{row.team.map(id=>byId[id]&&<Portrait key={id} character={byId[id]}/>)}</div><span>{row.progress}/10 · {row.highlights.survivors??0} de pé</span><b>{row.score.toLocaleString('pt-BR')}</b></button>)}{!rows.length&&<p className="ranking-empty">Ainda não há resultado validado nesta aba.</p>}</div></>}
+      <p className="ranking-context">{mode==='daily'?'Desafio de hoje':mode==='weekly'?'Desafio da semana':mode==='season'?'Melhores resultados desta temporada':'Seu melhor resultado da temporada'} · {board?.period} {handle&&`· ${handle}`}</p><div className="ranking-list">{rows.map(row=><button key={row.id} onClick={()=>setSelected(row)} className={minhas.has(row.id)?'mine':''}><strong>#{row.position}</strong><span className="ranking-name">{row.handle}</span><div className="ranking-trio">{row.team.map(id=>byId[id]&&<Portrait key={id} character={byId[id]}/>)}</div><span>{row.progress}/10 · {row.highlights.survivors??0} de pé</span><b>{row.score.toLocaleString('pt-BR')}</b></button>)}{!rows.length&&<p className="ranking-empty">Ainda não há resultado validado nesta aba.</p>}</div>
+      {mode!=='mine'&&board?.temMais&&<button className="secondary ranking-mais" disabled={maisCarregando} onClick={()=>void verMais()}>{maisCarregando?'Carregando…':`Ver mais · ${rows.length} de ${pontos(board.total??rows.length)}`}</button>}</>}
     {selected&&<div className="ranking-detail"><button onClick={()=>setSelected(null)} aria-label="Fechar detalhes">×</button><h2>#{selected.position} · {selected.handle}</h2><div className="ranking-detail-trio">{selected.team.map(id=>byId[id]&&<div key={id}><Portrait character={byId[id]}/><span>{byId[id].name}</span></div>)}</div><p><strong>{selected.score.toLocaleString('pt-BR')}</strong> pontos · {selected.progress}/10 confrontos · {selected.highlights.survivors??0} lutadores de pé</p><small>Desafio {selected.seed} · {new Date(selected.date).toLocaleDateString('pt-BR')} · {selected.engineVersion} · {selected.balanceVersion}</small><p>{selected.highlights.survivors??0} sobreviventes no último duelo · {selected.highlights.turns??0} viradas</p></div>}
   </section>;
 }
