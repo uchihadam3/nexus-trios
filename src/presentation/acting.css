@@ -36,6 +36,7 @@
 .arena-v2 .react-hit-heavy .unit-medal{animation:react-hit-heavy calc(var(--beat-s) * .52 * var(--motion-scale,1)) linear both}
 .arena-v2 .react-heal .unit-medal{animation:react-heal calc(var(--beat-s) * .52 * var(--motion-scale,1)) linear both}
 .arena-v2 .react-buff .unit-medal{animation:react-buff calc(var(--beat-s) * .52 * var(--motion-scale,1)) linear both}
+.arena-v2 .react-block .unit-medal{animation:react-hit calc(var(--beat-s) * .45 * var(--motion-scale,1)) linear both}
 .arena-v2 .react-shield .unit-medal{animation:react-shield calc(var(--beat-s) * .52 * var(--motion-scale,1)) linear both}
 .arena-v2 .react-curse .unit-medal{animation:react-curse calc(var(--beat-s) * .52 * var(--motion-scale,1)) linear both}
 .arena-v2 .react-broken .unit-medal{animation:react-broken calc(var(--beat-s) * .52 * var(--motion-scale,1)) linear both}
@@ -54,6 +55,7 @@
 .arena-v2 .react-hit .unit-fx{--fx-sheet:url('/assets/vfx/acting/hit_spark.webp');--fx-dur:calc(var(--beat-s) * .42);width:165%;height:165%}
 .arena-v2 .react-hit-heavy .unit-fx{--fx-sheet:url('/assets/vfx/acting/hit_heavy.webp');--fx-dur:calc(var(--beat-s) * .5)}
 .arena-v2 .react-heal .unit-fx{--fx-sheet:url('/assets/vfx/acting/heal_rise.webp');--fx-dur:calc(var(--beat-s) * .52)}
+.arena-v2 .react-block .unit-fx{--fx-sheet:url('/assets/vfx/acting/block_shield.webp');--fx-dur:calc(var(--beat-s) * .5);width:150%;height:150%}
 .arena-v2 .react-shield .unit-fx{--fx-sheet:url('/assets/vfx/acting/shield_bubble.webp');--fx-dur:calc(var(--beat-s) * .52);width:150%;height:150%}
 .arena-v2 .react-buff .unit-fx{--fx-sheet:url('/assets/vfx/acting/buff_rise.webp');--fx-dur:calc(var(--beat-s) * .5);width:170%;height:170%}
 .arena-v2 .react-curse .unit-fx{--fx-sheet:url('/assets/vfx/acting/curse_mist.webp');--fx-dur:calc(var(--beat-s) * .5);width:150%;height:150%}
@@ -76,3 +78,10 @@
 }
 .reduce-motion .arena-v2 .unit.actor .unit-medal,.reduce-motion .arena-v2 .unit.reactor .unit-medal{animation:none!important}
 .reduce-motion .arena-v2 .act-melee .unit-fx,.reduce-motion .arena-v2 .act-interrupt .unit-fx,.reduce-motion .arena-v2 .act-ranged .unit-fx{display:none}
+
+/* Enquanto tem Escudo: a cúpula de favo fica em volta do lutador, respirando
+ * devagar (um quadro calmo da folha da reação). Some quando a reação toca. */
+.arena-v2 .unit-escudo{position:absolute;left:50%;top:50%;z-index:3;width:150%;height:150%;pointer-events:none;transform:translate(-50%,-50%);background:url('/assets/vfx/acting/shield_bubble.webp') 100% 66.667%/300% 400% no-repeat;opacity:.6;animation:escudo-respira 2.6s ease-in-out infinite}
+.arena-v2 .react-shield .unit-escudo,.arena-v2 .react-block .unit-escudo{opacity:0;animation:none}
+@keyframes escudo-respira{0%,100%{opacity:.5;transform:translate(-50%,-50%) scale(1)}50%{opacity:.72;transform:translate(-50%,-50%) scale(1.025)}}
+@media (prefers-reduced-motion:reduce){.arena-v2 .unit-escudo{animation:none}}

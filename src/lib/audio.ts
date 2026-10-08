@@ -183,7 +183,7 @@ class BattleAudio {
     const sons=new Set<Sound>();
     for(const id of personagens)for(const i of [undefined,0,1,2]){
       const p=profileFor(id,i);const s=p?SOM_DA_FAMILIA[p.family]:undefined;
-      if(s){sons.add(s.impacto);if(s.saida)sons.add(s.saida);if(s.preparo)sons.add(s.preparo);}
+      if(s){sons.add(s.impacto);if(s.saida)sons.add(s.saida);if(s.preparo)sons.add(s.preparo);if(s.antes)sons.add(s.antes);}
     }
     await Promise.all([...sons].map(s=>this.loadCue(s)));
   }
@@ -247,7 +247,11 @@ class BattleAudio {
     if(phase==='start'){
       if(event.kind==='cast'){this.sound(grand?'grand-carga':som?.preparo??'preparo',grand?PRIORIDADE.grand:PRIORIDADE.habilidade,panFonte,chave);return;}
       // a saída toca quando o golpe deixa quem age (a viagem começa a ~58% do tempo até o impacto)
-      if(som?.saida&&perfil?.travel)this.sound(som.saida,event.kind==='skill'?PRIORIDADE.habilidade:PRIORIDADE.basico,panFonte,chave,P.impactAt*(event.kind==='skill'?P.skillSeconds:P.normalSeconds)*.55);
+      const ate=P.impactAt*(event.kind==='skill'?P.skillSeconds:P.normalSeconds),sai=ate*.55,prio=event.kind==='skill'?PRIORIDADE.habilidade:PRIORIDADE.basico;
+      const voa=!!(som?.saida&&perfil?.travel);
+      // o "antes" (carga, giro, marreta subindo) termina no instante em que o golpe sai ou chega
+      if(som?.antes){const fim=voa?sai:ate,d=this.manifest?.sons[som.antes]?.duracoes[0]??.8;this.sound(som.antes,prio,panFonte,chave+2,Math.max(0,fim-d));}
+      if(voa)this.sound(som!.saida!,prio,panFonte,chave,sai);
       return;
     }
     if(event.kind==='cast'||event.kind==='turn')return;

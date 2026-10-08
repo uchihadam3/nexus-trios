@@ -42,31 +42,161 @@ def nota(midi: float) -> float:
 
 
 # =================================================================== FÍSICO
+
+# ---- blocos de luta realistas (substituem as versões antigas) ----
+def _tapa(rng, n, lo=1200, hi=5200, queda=0.012):
+    """O "smack" do contato: ruído branco numa banda média-aguda, ataque instantâneo, some em ~20 ms."""
+    return passa(ruido(rng, n), lo, hi, 2) * env(n, 0.0003, queda)
+
+
+def _carne(rng, n, queda=0.045, sat=2.2):
+    """O corpo carnudo do soco: ruído na banda 250–900 Hz, levemente saturado."""
+    return satura(passa(ruido(rng, n), 250, 900, 2) * env(n, 0.0008, queda), sat)
+
+
+def _baque_seco(rng, n, f=85, queda=0.09):
+    """Peso do golpe SEM o tom descendo (que soa como bumbo): seno fixo curto + ruído grave."""
+    t = np.arange(n) / SR
+    corpo = np.sin(2 * math.pi * f * t) * np.exp(-t / queda)
+    grave = passa(ruido(rng, n), 40, 280, 2) * env(n, 0.001, queda * 0.8)
+    # harmônicos que o alto-falante de celular toca
+    return satura(corpo * 0.5 + grave * 2.2, 1.6)
+
+
+def _pano(rng, n, g=0.12):
+    """Rastro de roupa/ar depois do golpe."""
+    return passa(ruido(rng, n), 2500, 8000, 2) * env(n, 0.004, 0.06) * g
+
+
 def soco_leve(rng, v):
-    n = n_de(0.32)
-    x = baque(n, rng.uniform(95, 120), rng.uniform(50, 62), 0.07, 0.25) * 0.9
-    x += estalo(rng, n, 1200, 5500, 0.010) * 0.55
-    x += passa(rosa(rng, n), 350, 2200, 2) * env(n, 0.001, 0.035) * 0.9          # o "tapa" do contato
-    return reverb(x, 0.25, 0.12)
+    n = n_de(0.28)
+    x = _baque_seco(rng, n, rng.uniform(95, 115), 0.06) * 0.75
+    x += _carne(rng, n, 0.035) * 0.9
+    x += _tapa(rng, n, 1400, 5500, 0.009) * 1.1
+    x += _pano(rng, n)
+    return reverb(x, 0.2, 0.08, 6000)
 
 
 def soco_pesado(rng, v):
-    n = n_de(0.55)
-    x = baque(n, rng.uniform(70, 85), rng.uniform(36, 44), 0.16, 0.3) * 1.1
-    crunch = satura(passa(ruido(rng, n), 300, 2200, 2) * env(n, 0.001, 0.06), 2.5) * 0.9
-    x += crunch + estalo(rng, n, 900, 4500, 0.014) * 0.5
-    x += graos(rng, n, 10, 0.03, 0.22, 1500, 6000, 0.004) * 0.18                 # lascas
-    return reverb(x, 0.4, 0.2)
+    n = n_de(0.5)
+    x = _baque_seco(rng, n, rng.uniform(70, 85), 0.13) * 1.1
+    x += _carne(rng, n, 0.07, 3.0) * 1.1
+    x += _tapa(rng, n, 1000, 4500, 0.014) * 1.0
+    # estalo de "osso" curto logo depois do contato
+    poe(x, passa(ruido(rng, n_de(0.03)), 2500, 7000, 2) * env(n_de(0.03), 0.0003, 0.004) * 0.6, 0.006)
+    x += _pano(rng, n, 0.16)
+    return reverb(x, 0.3, 0.12, 5000)
 
 
 def esmagar(rng, v):
     n = n_de(0.8)
-    x = baque(n, 62, 30, 0.28, 0.35) * 1.2
-    x += satura(passa(ruido(rng, n), 250, 1600, 2) * env(n, 0.002, 0.09), 3) * 0.95
-    x += graos(rng, n, 26, 0.04, 0.5, 700, 4500, 0.006) * 0.3                     # entulho caindo
-    x += passa(rosa(rng, n), 60, 300, 2) * env(n, 0.01, 0.25) * 0.35               # chão tremendo
-    return reverb(x, 0.6, 0.25, 4500)
+    x = _baque_seco(rng, n, 60, 0.25) * 1.3
+    x += _carne(rng, n, 0.12, 3.5) * 1.2
+    x += _tapa(rng, n, 800, 3500, 0.02)
+    x += graos(rng, n, 26, 0.03, 0.45, 700, 4500, 0.006) * 0.35                   # entulho caindo
+    x += passa(rosa(rng, n), 50, 250, 2) * env(n, 0.01, 0.25) * 0.4               # chão tremendo
+    return reverb(x, 0.55, 0.22, 4000)
 
+
+def multi_golpe(rng, v):
+    n = n_de(0.8)
+    x = np.zeros(n)
+    t = 0.0
+    for k in range(rng.integers(5, 7)):
+        m = n_de(0.12)
+        g = _baque_seco(rng, m, rng.uniform(100, 130), 0.04) * 0.6 + _carne(rng, m, 0.025) * 0.8 + _tapa(rng, m, 1500, 6000, 0.007)
+        poe(x, g, t, rng.uniform(0.6, 1.0) * (1.15 if k == 0 else 1))
+        t += rng.uniform(0.065, 0.095)
+    poe(x, soco_leve(rng, v)[: n_de(0.28)], t, 1.1)                               # o último fecha
+    return reverb(x, 0.25, 0.1)
+
+
+def _placa_de_metal(rng, n, grave=180, agudo=4200, quantos=34, queda=0.22):
+    """Um escudo de metal batido: muitos modos inarmônicos curtos (placa), não um sino.
+
+    Os parciais são densos e espalhados sem razão harmônica, os agudos morrem
+    muito antes dos graves, e o conjunto todo é abafado (a mão segura o escudo),
+    então soa como "tonc/clank" e não como "plim".
+    """
+    t = np.arange(n) / SR
+    x = np.zeros(n)
+    for _ in range(quantos):
+        f = math.exp(rng.uniform(math.log(grave), math.log(agudo)))
+        q = queda * (grave / f) ** 0.55 * rng.uniform(0.6, 1.2)
+        x += np.sin(2 * math.pi * f * t + rng.uniform(0, 6.28)) * np.exp(-t / q) * (f / grave) ** -0.35
+    return x / quantos ** 0.5 * np.exp(-t / (queda * 1.4))
+
+
+def bloqueio(rng, v):
+    """O golpe bate no escudo: estalo, clangor abafado de metal e o baque de quem segura."""
+    n = n_de(0.5)
+    x = _placa_de_metal(rng, n, rng.uniform(170, 220), 4500, 70, 0.1) * 0.6
+    x += _tapa(rng, n, 1800, 8000, 0.006) * 1.0
+    x += _baque_seco(rng, n, 120, 0.05) * 0.55
+    x += satura(passa(ruido(rng, n), 600, 2500, 2) * env(n, 0.0005, 0.03), 2) * 0.35  # o "tonc" do contato
+    return reverb(x, 0.35, 0.15, 6000)
+
+
+def escudo(rng, v):
+    """O escudo se ergue: um sopro grave que fecha, energia correndo e um encaixe metálico curto."""
+    n = n_de(0.8)
+    x = assobio(rng, n, 300, 2500, 0.8, 0.5) * sobe_e_some(n, 0.35, 1.3) * 0.35
+    zum = passa(satura(seno(varre(70, 110, n, 0.7), n), 2.5), None, 600, 2) * env(n, 0.04, 0.25) * 0.22
+    x += zum
+    poe(x, _placa_de_metal(rng, n_de(0.4), 220, 3500, 50, 0.08) * 0.45 + _baque_seco(rng, n_de(0.4), 110, 0.05) * 0.4, 0.22)
+    return reverb(x, 0.45, 0.2, 6000)
+
+
+def _lamina_curta(rng, n, f0):
+    """O "shing" do fio: parciais altos de metal que morrem rápido (não ficam tocando)."""
+    t = np.arange(n) / SR
+    x = np.zeros(n)
+    for k in range(10):
+        f = f0 * rng.uniform(0.7, 2.6)
+        x += np.sin(2 * math.pi * f * t + rng.uniform(0, 6)) * np.exp(-t / rng.uniform(0.025, 0.07))
+    return x / 10 ** 0.5
+
+
+def corte(rng, v):
+    n = n_de(0.42)
+    x = np.zeros(n)
+    w = assobio(rng, n_de(0.12), 1200, 7000, 1.4, 0.4) * sobe_e_some(n_de(0.12), 0.8, 1.3)
+    poe(x, w, 0.0, 0.8)
+    corte_ = passa(ruido(rng, n_de(0.12)), 2500, 9000, 2) * env(n_de(0.12), 0.0005, 0.025) * 0.9   # o fio passando
+    poe(x, corte_ + _carne(rng, n_de(0.12), 0.02) * 0.4, 0.1)
+    poe(x, _lamina_curta(rng, n_de(0.2), rng.uniform(2600, 3400)) * 0.2, 0.1)
+    return reverb(x, 0.25, 0.12, 7000)
+
+
+def corte_pesado(rng, v):
+    n = n_de(0.62)
+    x = np.zeros(n)
+    w = assobio(rng, n_de(0.2), 400, 4000, 1.3, 0.5) * sobe_e_some(n_de(0.2), 0.8, 1.6)
+    poe(x, w, 0.0, 1.0)
+    poe(x, _baque_seco(rng, n_de(0.3), 90, 0.08) * 0.8 + _carne(rng, n_de(0.3), 0.05, 2.6), 0.18)
+    poe(x, passa(ruido(rng, n_de(0.15)), 2000, 8000, 2) * env(n_de(0.15), 0.0005, 0.035) * 0.9, 0.18)
+    poe(x, _lamina_curta(rng, n_de(0.25), rng.uniform(1800, 2400)) * 0.25, 0.18)
+    return reverb(x, 0.4, 0.18, 5500)
+
+
+def estocada(rng, v):
+    n = n_de(0.4)
+    x = np.zeros(n)
+    w = assobio(rng, n_de(0.09), 1500, 6500, 2.0, 0.35) * sobe_e_some(n_de(0.09), 0.9, 1.2)
+    poe(x, w, 0.0, 0.7)
+    poe(x, _carne(rng, n_de(0.2), 0.04, 2.5) + _tapa(rng, n_de(0.2), 1500, 6000, 0.01) * 0.8, 0.08)
+    poe(x, _lamina_curta(rng, n_de(0.15), 3200) * 0.15, 0.08)
+    return reverb(x, 0.22, 0.1)
+
+
+def corte_giratorio(rng, v):
+    n = n_de(0.7)
+    t = np.arange(n) / SR
+    voltas = rng.uniform(3.5, 4.5)
+    x = assobio(rng, n, 800, 4500, 1.0, 0.45) * (0.3 + 0.7 * np.sin(math.pi * voltas * t / (n / SR)) ** 2)
+    x *= sobe_e_some(n, 0.55, 1.2)
+    poe(x, corte(rng, v)[n_de(0.08):] * 0.9, 0.4)
+    return reverb(x, 0.3, 0.15)
 
 def gancho(rng, v):
     n = n_de(0.5)
@@ -76,19 +206,6 @@ def gancho(rng, v):
     golpe = soco_pesado(rng, v)[: n - n_de(0.12)]
     poe(x, golpe, 0.12, 0.9)
     return x
-
-
-def multi_golpe(rng, v):
-    n = n_de(0.8)
-    x = np.zeros(n)
-    t = 0.0
-    for k in range(rng.integers(5, 7)):
-        g = baque(n_de(0.12), rng.uniform(100, 140), rng.uniform(55, 70), 0.04, 0.2) * 0.75
-        g += estalo(rng, n_de(0.12), 1500, 6000, 0.008) * 0.5 + passa(rosa(rng, n_de(0.12)), 400, 2200, 2) * env(n_de(0.12), 0.001, 0.025) * 0.8
-        poe(x, g, t, rng.uniform(0.6, 1.0) * (1.15 if k == 0 else 1))
-        t += rng.uniform(0.07, 0.1)
-    poe(x, soco_leve(rng, v)[: n_de(0.3)], t, 1.0)                                 # o último fecha
-    return reverb(x, 0.3, 0.15)
 
 
 def terremoto(rng, v):
@@ -113,47 +230,6 @@ def onda_choque(rng, v):
 # =================================================================== CORTES
 def _lamina(rng, n, f0, brilho=1.0):
     return modal(n, f0, rng=rng, desafina=0.01, **METAL) * env(n, 0.001, 0.25) * 0.25 * brilho
-
-
-def corte(rng, v):
-    n = n_de(0.5)
-    x = np.zeros(n)
-    w = assobio(rng, n_de(0.14), 900, 5200, 1.3, 0.4) * sobe_e_some(n_de(0.14), 0.75, 1.4)
-    poe(x, w, 0.0, 0.85)
-    poe(x, estalo(rng, n_de(0.1), 2500, 9000, 0.006), 0.12, 0.6)
-    poe(x, _lamina(rng, n_de(0.36), rng.uniform(1800, 2600)), 0.12)
-    return reverb(x, 0.3, 0.18)
-
-
-def corte_pesado(rng, v):
-    n = n_de(0.7)
-    x = np.zeros(n)
-    w = assobio(rng, n_de(0.22), 350, 3200, 1.3, 0.5) * sobe_e_some(n_de(0.22), 0.8, 1.6)
-    poe(x, w, 0.0, 1.0)
-    poe(x, baque(n_de(0.3), 85, 40, 0.1, 0.2), 0.2, 0.8)
-    poe(x, _lamina(rng, n_de(0.5), rng.uniform(1100, 1500), 1.4), 0.2)
-    poe(x, estalo(rng, n_de(0.1), 1500, 7000, 0.01), 0.2, 0.6)
-    return reverb(x, 0.45, 0.22)
-
-
-def estocada(rng, v):
-    n = n_de(0.42)
-    x = np.zeros(n)
-    w = assobio(rng, n_de(0.09), 1500, 6000, 2.0, 0.35) * sobe_e_some(n_de(0.09), 0.9, 1.2)
-    poe(x, w, 0.0, 0.7)
-    poe(x, baque(n_de(0.2), 140, 70, 0.04, 0.4), 0.08, 0.7)
-    poe(x, modal(n_de(0.25), rng.uniform(3000, 3800), rng=rng, **METAL) * env(n_de(0.25), 0.001, 0.08) * 0.22, 0.08)
-    return reverb(x, 0.25, 0.15)
-
-
-def corte_giratorio(rng, v):
-    n = n_de(0.75)
-    t = np.arange(n) / SR
-    voltas = rng.uniform(3.5, 4.5)
-    x = assobio(rng, n, 700, 3800, 1.0, 0.45) * (0.35 + 0.65 * np.sin(math.pi * voltas * t / (n / SR)) ** 2)   # a lâmina passando várias vezes
-    x *= sobe_e_some(n, 0.55, 1.2)
-    poe(x, _lamina(rng, n_de(0.3), 2200), 0.42)
-    return reverb(x, 0.35, 0.2)
 
 
 def lamina_energia(rng, v):
@@ -428,23 +504,6 @@ def cura(rng, v):
         poe(x, modal(n_de(0.8), nota(raiz + iv), rng=rng, **SINO) * env(n_de(0.8), 0.008, 0.35) * 0.1, k * 0.06)
     x += passa(rosa(rng, n), 3000, 11000, 2) * sobe_e_some(n, 0.3, 1.2) * 0.1
     return reverb(x, 0.85, 0.45, 9000)
-
-
-def escudo(rng, v):
-    n = n_de(0.85)
-    x = passa(rosa(rng, n), 1500, 9000, 2) * sobe_e_some(n, 0.2, 1.4) * 0.25
-    x += modal(n, rng.uniform(900, 1100), rng=rng, **VIDRO) * env(n, 0.03, 0.35) * 0.22
-    f = varre(nota(rng.uniform(60, 62)), nota(rng.uniform(72, 74)), n, 2.0)
-    x += seno(f, n) * sobe_e_some(n, 0.18, 1.4) * 0.15
-    return reverb(x, 0.6, 0.35)
-
-
-def bloqueio(rng, v):
-    n = n_de(0.55)
-    x = baque(n, 160, 80, 0.06, 0.4) * 0.6
-    x += modal(n, rng.uniform(700, 900), rng=rng, desafina=0.01, **VIDRO) * env(n, 0.0005, 0.2) * 0.35
-    x += estalo(rng, n, 2000, 9000, 0.008) * 0.5
-    return reverb(x, 0.45, 0.25)
 
 
 def reforco(rng, v):

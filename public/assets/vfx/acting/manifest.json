@@ -30,14 +30,24 @@
   "bytes": 104320
  },
  "shield_bubble": {
-  "descricao": "reação: escudo",
+  "descricao": "reação: recebe escudo (brasão e cúpula de favo)",
   "quadros": 12,
   "grade": [
    3,
    4
   ],
   "tamanho": 160,
-  "bytes": 158432
+  "bytes": 166946
+ },
+ "block_shield": {
+  "descricao": "reação: bloqueio no escudo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": 160,
+  "bytes": 57840
  },
  "buff_rise": {
   "descricao": "reação: buff",

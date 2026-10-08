@@ -56,6 +56,91 @@ def bonk(T, t, rng):
     return G, H
 
 
+
+def _malho(cx, cy, ang, comp=0.78, cab=(0.27, 0.52), achata=1.0):
+    """Marreta de desenho: cabo saindo da mão (cx, cy) na direção `ang` e a cabeça
+    de madeira atravessada na ponta. `achata` < 1 amassa a cabeça contra o alvo."""
+    c, s = math.cos(ang), math.sin(ang)
+    nx, ny = -s, c
+    hx, hy = cx + c * comp, cy + s * comp
+    esp, larg = cab[0] * achata, cab[1] * (2 - achata) ** 0.6
+    cabo = [(cx + nx * 0.035, cy + ny * 0.035), (hx + nx * 0.03, hy + ny * 0.03), (hx - nx * 0.03, hy - ny * 0.03),
+            (cx - nx * 0.035, cy - ny * 0.035)]
+    def ret(a0, a1, w):
+        return [(hx + c * a0 + nx * w, hy + s * a0 + ny * w), (hx + c * a1 + nx * w, hy + s * a1 + ny * w),
+                (hx + c * a1 - nx * w, hy + s * a1 - ny * w), (hx + c * a0 - nx * w, hy + s * a0 - ny * w)]
+    cabeca = ret(-esp / 2, esp / 2, larg / 2)
+    # as duas cintas de ferro perto das pontas da cabeça
+    cintas = [(hx + nx * larg * k - c * esp / 2, hy + ny * larg * k - s * esp / 2, hx + nx * larg * k + c * esp / 2,
+               hy + ny * larg * k + s * esp / 2, 1) for k in (-0.36, 0.36)]
+    return cabo, cabeca, cintas, (hx + c * esp / 2, hy + s * esp / 2)
+
+
+def marretada(T, t, rng):
+    """Marretada de desenho animado: a marreta de madeira desce em arco (com rastro),
+    bate, a cabeça amassa, um estouro em estrela sai do contato e estrelinhas giram."""
+    G, H = vazio(T)
+    mx, my = -0.6, 0.36
+    a0, a1 = -1.62, -0.5
+    bate = 0.24
+    if t < bate:
+        u = rel(t, 0, bate) ** 2.2                            # acelera ao descer
+        ang = a0 + (a1 - a0) * u
+        achata = 1.0
+    else:
+        u = rel(t, bate, 0.5)
+        ang = a1 - 0.22 * math.sin(math.pi * min(1, u * 1.4)) * (1 - u)     # quica um pouco para cima
+        achata = 1 - 0.32 * math.exp(-rel(t, bate, 1) * 9)
+    some_ = apaga(t, 0.5, 0.72)
+    cabo, cabeca, cintas, ponta = _malho(mx, my, ang, achata=achata)
+    corpo = T.polys([(cabeca, 1.0)], 0.004)
+    borda = corpo * (1 - smooth(T.blur(corpo, 0.025), 0.78, 0.97))
+    pau = T.polys([(cabo, 1.0)], 0.004)
+    aros = T.lines(cintas, 0.022, 0.002) * corpo
+    # rastro: cópias fantasmas nos ângulos anteriores, só enquanto desce
+    rastro = T.zero()
+    if 0.05 < t < bate + 0.08:
+        for k in range(1, 5):
+            ua = max(0.0, rel(t - 0.025 * k, 0, bate)) ** 2.2
+            _, cab_k, _, _ = _malho(mx, my, a0 + (a1 - a0) * ua)
+            rastro += T.polys([(cab_k, 1.0)], 0.02) * (0.5 / k)
+    marreta = (corpo * 0.55 + borda * 1.5 + pau * 0.7 - aros * 0.35).clip(0, None) * some_
+    G += marreta + T.glow(rastro, 0.4, 0.8, 0.03) * 0.6
+    H += corpo * 0.75 * some_ + pau * 0.5 * some_ + rastro * 0.15
+    if t >= bate:
+        tt = rel(t, bate, 1)
+        cx, cy = ponta[0] * 0.3, ponta[1] * 0.3 + 0.05
+        s_ = back(rel(t, bate, bate + 0.16), 2.4)
+        sub = np.random.default_rng(57)
+        raios = [sub.uniform(0.55, 0.85) for _ in range(9)]
+        pts = []
+        for k in range(18):
+            a = TAU * k / 18 + 0.15
+            r = (raios[k // 2] if k % 2 == 0 else 0.3) * s_ * (0.75 + 0.25 * tt)
+            pts.append((cx + math.cos(a) * r, cy + math.sin(a) * r * 0.82))
+        estouro = T.polys([(pts, 1.0)], 0.005)
+        anel_e = estouro * (1 - smooth(T.blur(estouro, 0.03), 0.8, 0.97))
+        ev = apaga(t, 0.42, 0.62)
+        clarao = T.gauss(cx, cy, 0.14) * some(t, bate, bate + 0.25) * 3.2
+        chao = T.ring(0.15 + 0.7 * ease_out(tt, 2.4), 0.04 * (1 - tt) + 0.008, cx=cx, cy=cy + 0.2, squash=3.4) * (1 - tt) ** 1.3 * 1.6
+        acao = []
+        for k in range(12):
+            a = TAU * k / 12 + 0.26
+            r0 = 0.62 * s_ + 0.06
+            acao.append((cx + math.cos(a) * r0, cy + math.sin(a) * r0, cx + math.cos(a) * (r0 + 0.2), cy + math.sin(a) * (r0 + 0.2), 1))
+        linhas = T.lines(acao, 0.016, 0.002) * pulso(t, bate + 0.02, 0.55)
+        # estrelinhas girando em volta da "cabeça" de quem levou
+        est = []
+        sai = back(rel(t, 0.4, 0.62))
+        for k in range(5):
+            a = TAU * k / 5 + t * TAU * 1.4
+            est.append((estrela(math.cos(a) * 0.38, -0.5 + math.sin(a) * 0.1, 0.075 * sai * (0.75 + 0.35 * (math.sin(a) > 0)), a * 2), 1.0))
+        estrelas = T.polys(est, 0.003) * apaga(t, 0.85, 1) * (t > 0.4)
+        G += (estouro * 0.45 + anel_e * 1.5) * ev + clarao + chao + linhas * 1.1 + T.glow(estrelas, 1.3, 1, 0.02)
+        H += (estouro * 0.9 + anel_e * 0.4) * ev + clarao + linhas * 0.4 + estrelas * 0.9
+    return G, H
+
+
 def pow_cartoon(T, t, rng):
     """POW!: balão de estouro em zigue-zague que estala, com contorno e linhas de ação."""
     G, H = vazio(T)
@@ -320,6 +405,7 @@ REGISTRO = [
     ("bonk", bonk, GRANDE, "pancada de desenho com estrelinhas", False),
     ("pow_cartoon", pow_cartoon, GRANDE, "balão POW de quadrinho", False),
     ("martelo", martelo, GRANDE, "martelada no chão", False),
+    ("marretada", marretada, GRANDE, "marreta de desenho batendo", False),
     ("investida", investida, GRANDE, "investida com linhas de velocidade", False),
     ("punho_gigante", punho_gigante, GRANDE, "silhueta de punho gigante", False),
     ("soco_serio", soco_serio, GRANDE, "sopro gigante para a frente", False),

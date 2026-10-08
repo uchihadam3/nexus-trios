@@ -212,28 +212,120 @@ def heal_rise(t, rng):
     return E
 
 
+def _brasao(cx, cy, larg, alt, pontos=28):
+    """Contorno de um escudo heráldico: topo reto com cantos, laterais que descem
+    e se fecham numa ponta embaixo (o desenho que todo mundo lê como "escudo")."""
+    pts = [(cx - larg, cy - alt * 0.62), (cx - larg * 0.55, cy - alt * 0.7), (cx, cy - alt * 0.6),
+           (cx + larg * 0.55, cy - alt * 0.7), (cx + larg, cy - alt * 0.62)]
+    for k in range(pontos + 1):
+        u = k / pontos
+        x = larg * (1 - u ** 2.2)
+        y = -alt * 0.62 + (alt * 1.62) * u
+        pts.append((cx + x * (1 - 0.15 * u), cy + y))
+    for k in range(pontos, -1, -1):
+        u = k / pontos
+        x = larg * (1 - u ** 2.2)
+        y = -alt * 0.62 + (alt * 1.62) * u
+        pts.append((cx - x * (1 - 0.15 * u), cy + y))
+    return pts
+
+
+def _escudo_desenhado(cx, cy, esc, brilho=1.0):
+    """O escudo inteiro em luz: placa translúcida, borda grossa, friso interno, a cruz e o umbo no meio."""
+    fora = polys([(_brasao(cx, cy, 0.46 * esc, 0.5 * esc), 1.0)])
+    dentro = polys([(_brasao(cx, cy + 0.02 * esc, 0.37 * esc, 0.41 * esc), 1.0)])
+    friso = polys([(_brasao(cx, cy + 0.03 * esc, 0.33 * esc, 0.37 * esc), 1.0)])
+    fora, dentro, friso = (gaussian_filter(a, 1.2) for a in (fora, dentro, friso))
+    borda = fora - dentro
+    linha = dentro - friso
+    cruz = strokes([(cx, cy - 0.3 * esc, cx, cy + 0.42 * esc, 1), (cx - 0.3 * esc, cy - 0.06 * esc, cx + 0.3 * esc, cy - 0.06 * esc, 1)],
+                   0.045 * esc, 0.006) * friso
+    umbo = gauss(cx, cy - 0.06 * esc, 0.07 * esc)
+    reflexo = np.exp(-(((U - cx) + (V - cy) * 0.6 + 0.12 * esc) / (0.05 * esc)) ** 2) * friso * 0.5
+    return (friso * 0.28 + borda * 1.5 + linha * 0.8 + cruz * 0.7 + umbo * 1.2 + reflexo) * brilho
+
+
+def _favo(escala=7.0, curva=0.8):
+    """Favo de mel (a barreira de energia dos jogos), curvado como cúpula: as células
+    encolhem perto da borda para parecer uma esfera vista de frente."""
+    r = np.clip(RAD / curva, 0, 0.999)
+    z = np.sqrt(1 - r ** 2)
+    k = np.arcsin(r) / np.maximum(r, 1e-4)
+    px, py = U * k * escala / curva, V * k * escala / curva
+    sx, sy = 1.0, math.sqrt(3)
+    ax, ay = np.mod(px, sx) - sx / 2, np.mod(py, sy) - sy / 2
+    bx, by = np.mod(px - sx / 2, sx) - sx / 2, np.mod(py - sy / 2, sy) - sy / 2
+    usa_a = ax * ax + ay * ay < bx * bx + by * by
+    gx, gy = np.where(usa_a, ax, bx), np.where(usa_a, ay, by)
+    d = np.maximum(np.abs(gx) * 0.5 + np.abs(gy) * (math.sqrt(3) / 2), np.abs(gx))
+    aresta = np.exp(-((0.5 - d) / 0.045) ** 2)
+    # cada célula tem um id para cintilar em tempos diferentes
+    cid = np.floor(px - gx + 0.5) * 7.13 + np.floor(py - gy + 0.5) * 3.71
+    return aresta, z, cid
+
+
 def shield_bubble(t, rng):
-    B, B2 = (0.45, 0.78, 1.0), (0.85, 0.95, 1.0)
-    form = ease_out(min(1, t / 0.35), 2)
-    out = 1 - smooth(np.array(t), 0.65, 1.0)
-    Rb = 0.8
-    r = RAD
-    inside = r < Rb
-    z = np.sqrt(np.clip(1 - (r / Rb) ** 2, 0, 1))
-    rim = np.exp(-((r - Rb * 0.985) / 0.035) ** 2) * 1.6 + np.where(inside, (1 - z) ** 3 * 0.9, 0)
-    # grade hexagonal projetada na esfera
-    q = 7.5
-    su, sv = U / (Rb * (0.35 + 0.65 * z + 1e-3)), V / (Rb * (0.35 + 0.65 * z + 1e-3))
-    grade = np.zeros_like(U)
-    for a in (0.0, math.pi / 3, 2 * math.pi / 3):
-        pr = (su * math.cos(a) + sv * math.sin(a)) * q * 0.5
-        grade = np.maximum(grade, np.exp(-((pr - np.round(pr)) / 0.05) ** 2))
-    hexes = np.where(inside, grade, 0) * (0.18 + 0.6 * (1 - z))
-    wipe = smooth(-V, -0.95 + 2.0 * form - 0.1, -0.95 + 2.0 * form + 0.1) if form < 1 else 1.0
-    wipe = 1 - wipe if isinstance(wipe, np.ndarray) else wipe
-    ripple = ring(0.2 + 0.7 * ((t * 1.6) % 1.0), 0.03) * np.where(inside, 1, 0) * 0.9
-    E = tint((rim + hexes * 1.1 + ripple) * wipe * out, B) + tint(np.exp(-((r - Rb) / 0.012) ** 2) * wipe * out * 0.9, B2)
-    E += tint(gauss(0, -0.55, 0.12) * 0.6 * out * form, B2)    # reflexo
+    """Recebe escudo: o brasão aparece na frente, abre e vira uma cúpula de favo que
+    fecha de baixo para cima em volta do personagem, segura cintilando e some."""
+    B, B2 = (0.42, 0.76, 1.0), (0.86, 0.96, 1.0)
+    E = np.zeros((R, R, 3), np.float32)
+    # 1) o brasão: pula para a frente e depois se abre (fica maior e transparente)
+    surge = ease_out(min(1, t / 0.18), 2.5)
+    abre = smooth(np.array(t), 0.22, 0.45)
+    esc = 0.75 + 0.25 * surge + 0.9 * float(abre)
+    brasao = _escudo_desenhado(0, 0.05, esc, (1 - float(abre)) * surge)
+    E += tint(brasao, B) + tint(brasao * 0.45, B2)
+    # 2) a cúpula de favo fechando de baixo para cima
+    Rb = 0.82
+    dentro = smooth(Rb - RAD, -0.01, 0.02)
+    aresta, z, cid = _favo(6.5, Rb)
+    sobe = ease_out(float(np.clip((t - 0.22) / 0.3, 0, 1)), 2)
+    frente = 0.95 - 1.95 * sobe
+    revela = smooth(V, frente - 0.05, frente + 0.05)
+    linha_frente = np.exp(-((V - frente) / 0.03) ** 2) * dentro * (0 < sobe < 1)
+    sai = 1 - float(smooth(np.array(t), 0.72, 1.0))
+    cint = 0.55 + 0.45 * np.sin(cid + t * 18)
+    favo = aresta * dentro * (0.25 + 0.9 * (1 - z) ** 1.5) * cint
+    borda = np.exp(-((RAD - Rb) / 0.03) ** 2) * 1.5 + dentro * (1 - z) ** 4 * 0.8
+    brilho_passa = np.exp(-((U + V * 0.4 - (-1.4 + 2.8 * float(np.clip((t - 0.45) / 0.35, 0, 1)))) / 0.12) ** 2) * aresta * dentro
+    cupula = (favo + borda + brilho_passa * 1.2) * revela * sai + linha_frente * 1.4 * sai
+    E += tint(cupula, B) + tint(np.exp(-((RAD - Rb) / 0.012) ** 2) * revela * sai * 0.9 + brilho_passa * revela * sai * 0.5, B2)
+    E += tint(gauss(-0.3, -0.5, 0.1) * 0.5 * sai * sobe, B2)                      # reflexo da cúpula
+    return E
+
+
+def block_shield(t, rng):
+    """Bloqueio: o escudo levanta na frente num tranco, o golpe bate na face dele
+    (clarão, faíscas raspando para os lados), o escudo treme e baixa."""
+    B, B2, Q = (0.45, 0.78, 1.0), (0.9, 0.97, 1.0), (1.0, 0.85, 0.55)
+    E = np.zeros((R, R, 3), np.float32)
+    sobe = ease_out(min(1, t / 0.12), 3)
+    bate = 0.14
+    treme = 0.03 * math.sin(t * 90) * math.exp(-max(0.0, t - bate) * 9) * (t > bate)
+    recua = 0.05 * math.exp(-max(0.0, t - bate) * 7) * (t > bate)
+    sai = 1 - float(smooth(np.array(t), 0.6, 0.9))
+    cx, cy = treme + recua * 0.3, 0.08 + (1 - sobe) * 0.35
+    esc = 1.05 + 0.08 * (t > bate) * math.exp(-max(0.0, t - bate) * 8)
+    E += tint(_escudo_desenhado(cx, cy, esc, sobe * sai * 1.2), B) + tint(_escudo_desenhado(cx, cy, esc, sobe * sai * 0.4), B2)
+    if t >= bate:
+        tt = (t - bate) / (1 - bate)
+        flash = gauss(cx - 0.05, cy - 0.08, 0.1) * math.exp(-tt * 8) * 3.0
+        onda = ring(0.08 + 0.5 * ease_out(tt, 2), 0.03, cy=cy - 0.08) * (1 - tt) ** 2 * 1.4
+        E += tint(flash + onda, B2) + tint(flash * 0.5, Q)
+        sub = np.random.default_rng(77)
+        linhas = []
+        for _ in range(26):
+            lado = sub.choice((-1, 1))
+            a = (math.pi if lado < 0 else 0) + sub.uniform(-0.75, 0.55) * lado
+            v0 = sub.uniform(0.6, 1.4)
+            d = v0 * ease_out(min(1, tt * 2.2), 2)
+            x = cx - 0.05 + math.cos(a) * d * 0.7
+            y = cy - 0.08 + math.sin(a) * d * 0.55 + 0.4 * tt * tt
+            cauda = 0.05 + 0.12 * (1 - tt)
+            w = max(0.0, 1 - tt * 1.6)
+            linhas.append((x - math.cos(a) * cauda, y - math.sin(a) * cauda, x, y, w))
+        fa = tapered(linhas, 0.022)
+        E += tint(glow(fa, 1.2, 0.8, 0.012), Q) + tint(fa * 0.6, B2)
     return E
 
 
@@ -401,7 +493,8 @@ EFEITOS = {
     "hit_spark": (lambda t, r: hit_spark(t, r), "reação: golpe"),
     "hit_heavy": (lambda t, r: hit_spark(t, r, heavy=True), "reação: golpe pesado"),
     "heal_rise": (heal_rise, "reação: cura"),
-    "shield_bubble": (shield_bubble, "reação: escudo"),
+    "shield_bubble": (shield_bubble, "reação: recebe escudo (brasão e cúpula de favo)"),
+    "block_shield": (block_shield, "reação: bloqueio no escudo"),
     "buff_rise": (buff_rise, "reação: buff"),
     "curse_mist": (curse_mist, "reação: debuff"),
     "prep_shatter": (prep_shatter, "reação: preparo interrompido"),

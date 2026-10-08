@@ -177,17 +177,17 @@
    "descricao": "bloqueio",
    "versoes": [
     0.0,
-    0.63,
-    1.2799,
-    1.8913
+    0.58,
+    1.1781,
+    1.7412
    ],
    "duracoes": [
-    0.55,
-    0.5699,
-    0.5314,
-    0.5584
+    0.5,
+    0.5181,
+    0.4831,
+    0.5076
    ],
-   "bytes": 22129
+   "bytes": 18866
   },
   "bolhas": {
    "arquivo": "bolhas.mp3",
@@ -228,17 +228,17 @@
    "descricao": "família bonk",
    "versoes": [
     0.0,
-    0.88,
-    1.789,
-    2.6419
+    0.7554,
+    1.5976,
+    2.4386
    ],
    "duracoes": [
-    0.8,
-    0.829,
-    0.7729,
-    0.8122
+    0.6754,
+    0.7621,
+    0.761,
+    0.7569
    ],
-   "bytes": 32088
+   "bytes": 23841
   },
   "buraco-negro": {
    "arquivo": "buraco-negro.mp3",
@@ -398,17 +398,34 @@
    "descricao": "família chidori",
    "versoes": [
     0.0,
-    1.28,
-    2.6035,
-    3.8429
+    1.03,
+    2.0944,
+    3.0923
    ],
    "duracoes": [
-    1.2,
-    1.2435,
-    1.1594,
-    1.2183
+    0.95,
+    0.9844,
+    0.9179,
+    0.9644
    ],
-   "bytes": 52669
+   "bytes": 55169
+  },
+  "chidori-carga": {
+   "arquivo": "chidori-carga.mp3",
+   "descricao": "faíscas do Chidori",
+   "versoes": [
+    0.0,
+    0.98,
+    1.9926,
+    2.9422
+   ],
+   "duracoes": [
+    0.9,
+    0.9326,
+    0.8695,
+    0.9137
+   ],
+   "bytes": 65314
   },
   "chute-giratorio": {
    "arquivo": "chute-giratorio.mp3",
@@ -534,38 +551,21 @@
    "descricao": "corte",
    "versoes": [
     0.0,
-    0.58,
-    1.1781,
-    1.7412
+    0.5,
+    1.0152,
+    1.501
    ],
    "duracoes": [
-    0.5,
-    0.5181,
-    0.4831,
-    0.5076
+    0.42,
+    0.4352,
+    0.4058,
+    0.4264
    ],
-   "bytes": 22716
+   "bytes": 20195
   },
   "corte-giratorio": {
    "arquivo": "corte-giratorio.mp3",
    "descricao": "corte giratório",
-   "versoes": [
-    0.0,
-    0.83,
-    1.6872,
-    2.4918
-   ],
-   "duracoes": [
-    0.75,
-    0.7772,
-    0.7246,
-    0.7614
-   ],
-   "bytes": 33468
-  },
-  "corte-pesado": {
-   "arquivo": "corte-pesado.mp3",
-   "descricao": "corte pesado",
    "versoes": [
     0.0,
     0.78,
@@ -578,7 +578,24 @@
     0.6763,
     0.7107
    ],
-   "bytes": 27424
+   "bytes": 31699
+  },
+  "corte-pesado": {
+   "arquivo": "corte-pesado.mp3",
+   "descricao": "corte pesado",
+   "versoes": [
+    0.0,
+    0.7,
+    1.4225,
+    2.1015
+   ],
+   "duracoes": [
+    0.62,
+    0.6425,
+    0.599,
+    0.6294
+   ],
+   "bytes": 25294
   },
   "corte-vertical": {
    "arquivo": "corte-vertical.mp3",
@@ -874,34 +891,34 @@
    "descricao": "Escudo",
    "versoes": [
     0.0,
-    0.93,
-    1.8908,
-    2.7921
+    0.88,
+    1.789,
+    2.6419
    ],
    "duracoes": [
-    0.85,
-    0.8808,
-    0.8212,
-    0.8629
+    0.8,
+    0.829,
+    0.7729,
+    0.8122
    ],
-   "bytes": 42084
+   "bytes": 27396
   },
   "escudo-fisico": {
    "arquivo": "escudo-fisico.mp3",
    "descricao": "família escudo fisico",
    "versoes": [
     0.0,
-    0.93,
-    1.8897,
-    2.7919
+    0.8034,
+    1.631,
+    2.4159
    ],
    "duracoes": [
-    0.85,
-    0.8797,
-    0.8222,
-    0.8625
+    0.7234,
+    0.7476,
+    0.7049,
+    0.7399
    ],
-   "bytes": 31173
+   "bytes": 25926
   },
   "escudo-tech": {
    "arquivo": "escudo-tech.mp3",
@@ -925,17 +942,34 @@
    "descricao": "família esfera espiral",
    "versoes": [
     0.0,
-    1.08,
-    2.1963,
-    3.2424
+    1.18,
+    2.3999,
+    3.5427
    ],
    "duracoes": [
-    1.0,
-    1.0363,
-    0.9662,
-    1.0152
+    1.1,
+    1.1399,
+    1.0628,
+    1.1167
    ],
-   "bytes": 43915
+   "bytes": 45656
+  },
+  "esfera-espiral-carga": {
+   "arquivo": "esfera-espiral-carga.mp3",
+   "descricao": "a esfera girando",
+   "versoes": [
+    0.0,
+    0.98,
+    1.9926,
+    2.9422
+   ],
+   "duracoes": [
+    0.9,
+    0.9326,
+    0.8695,
+    0.9137
+   ],
+   "bytes": 43422
   },
   "esmagar": {
    "arquivo": "esmagar.mp3",
@@ -952,7 +986,7 @@
     0.7729,
     0.8122
    ],
-   "bytes": 35644
+   "bytes": 35771
   },
   "espadao": {
    "arquivo": "espadao.mp3",
@@ -1044,17 +1078,17 @@
    "descricao": "perfuração",
    "versoes": [
     0.0,
-    0.5,
-    1.0152,
-    1.501
+    0.48,
+    0.9745,
+    1.441
    ],
    "duracoes": [
-    0.42,
-    0.4352,
-    0.4058,
-    0.4264
+    0.4,
+    0.4145,
+    0.3865,
+    0.4061
    ],
-   "bytes": 18748
+   "bytes": 18228
   },
   "estrela-invencivel": {
    "arquivo": "estrela-invencivel.mp3",
@@ -1292,7 +1326,7 @@
     0.4831,
     0.5076
    ],
-   "bytes": 21496
+   "bytes": 20524
   },
   "garras": {
    "arquivo": "garras.mp3",
@@ -1462,7 +1496,7 @@
     0.9662,
     1.0152
    ],
-   "bytes": 39332
+   "bytes": 42046
   },
   "impacto-energia": {
    "arquivo": "impacto-energia.mp3",
@@ -1554,17 +1588,51 @@
    "descricao": "família kamehameha",
    "versoes": [
     0.0,
-    1.58,
-    3.2144,
-    4.7437
+    1.38,
+    2.8071,
+    4.1432
    ],
    "duracoes": [
-    1.5,
-    1.5544,
-    1.4493,
-    1.5228
+    1.3,
+    1.3471,
+    1.256,
+    1.3198
    ],
-   "bytes": 56766
+   "bytes": 51302
+  },
+  "kamehameha-carga": {
+   "arquivo": "kamehameha-carga.mp3",
+   "descricao": "carga do Kamehameha",
+   "versoes": [
+    0.0,
+    0.93,
+    1.8908,
+    2.7921
+   ],
+   "duracoes": [
+    0.85,
+    0.8808,
+    0.8212,
+    0.8629
+   ],
+   "bytes": 40099
+  },
+  "kamehameha-feixe": {
+   "arquivo": "kamehameha-feixe.mp3",
+   "descricao": "o feixe saindo",
+   "versoes": [
+    0.0,
+    1.08,
+    2.1963,
+    3.2424
+   ],
+   "duracoes": [
+    1.0,
+    1.0363,
+    0.9662,
+    1.0152
+   ],
+   "bytes": 40820
   },
   "labareda": {
    "arquivo": "labareda.mp3",
@@ -1804,22 +1872,56 @@
    ],
    "bytes": 26169
   },
+  "marretada": {
+   "arquivo": "marretada.mp3",
+   "descricao": "família marretada",
+   "versoes": [
+    0.0,
+    1.23,
+    2.4395,
+    3.5038
+   ],
+   "duracoes": [
+    1.15,
+    1.1295,
+    0.9843,
+    1.1675
+   ],
+   "bytes": 41208
+  },
+  "marretada-giro": {
+   "arquivo": "marretada-giro.mp3",
+   "descricao": "a marreta subindo",
+   "versoes": [
+    0.0,
+    0.83,
+    1.6872,
+    2.4918
+   ],
+   "duracoes": [
+    0.75,
+    0.7772,
+    0.7246,
+    0.7614
+   ],
+   "bytes": 22950
+  },
   "martelo": {
    "arquivo": "martelo.mp3",
    "descricao": "família martelo",
    "versoes": [
     0.0,
-    1.08,
-    2.1537,
-    3.1622
+    1.04,
+    2.1137,
+    3.1222
    ],
    "duracoes": [
-    1.0,
+    0.96,
     0.9937,
     0.9285,
     0.9741
    ],
-   "bytes": 40199
+   "bytes": 39464
   },
   "medo": {
    "arquivo": "medo.mp3",
@@ -1938,7 +2040,7 @@
     0.7729,
     0.8122
    ],
-   "bytes": 33807
+   "bytes": 35090
   },
   "nevasca": {
    "arquivo": "nevasca.mp3",
@@ -2574,34 +2676,34 @@
    "descricao": "soco leve",
    "versoes": [
     0.0,
-    0.4,
-    0.8116,
-    1.2007
+    0.36,
+    0.7301,
+    1.0807
    ],
    "duracoes": [
-    0.32,
-    0.3316,
-    0.3092,
-    0.3249
+    0.28,
+    0.2901,
+    0.2705,
+    0.2843
    ],
-   "bytes": 13328
+   "bytes": 13675
   },
   "soco-pesado": {
    "arquivo": "soco-pesado.mp3",
    "descricao": "golpe pesado",
    "versoes": [
     0.0,
-    0.63,
-    1.2799,
-    1.8913
+    0.58,
+    1.1781,
+    1.7412
    ],
    "duracoes": [
-    0.55,
-    0.5699,
-    0.5314,
-    0.5584
+    0.5,
+    0.5181,
+    0.4831,
+    0.5076
    ],
-   "bytes": 21641
+   "bytes": 19265
   },
   "soco-serio": {
    "arquivo": "soco-serio.mp3",

@@ -375,7 +375,7 @@
    192
   ],
   "laco": false,
-  "bytes": 103046
+  "bytes": 90854
  },
  "chute_giratorio": {
   "descricao": "chute giratório baixo",
@@ -1005,7 +1005,7 @@
    192
   ],
   "laco": false,
-  "bytes": 88122
+  "bytes": 79454
  },
  "exposto": {
   "descricao": "guarda trincando",
@@ -1538,6 +1538,20 @@
   ],
   "laco": false,
   "bytes": 58624
+ },
+ "marretada": {
+  "descricao": "marreta de desenho batendo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 68182
  },
  "martelo": {
   "descricao": "martelada no chão",

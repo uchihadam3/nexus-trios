@@ -27,7 +27,21 @@ export const SONS = [
 const NOVAS = Object.keys(FAMILIAS_NOVAS) as FamiliaNova[];
 export const SONS_DAS_NOVAS = NOVAS.map(SOM_DA_NOVA);
 export type Sound = typeof SONS[number] | (string & { readonly __somNovo?: never });
-export const TODOS_OS_SONS: Sound[] = [...SONS, ...SONS_DAS_NOVAS, 'cravar', 'ricochete'];
+/*
+ * Os golpes famosos têm um som que vem ANTES do contato: a mão do Chidori
+ * acendendo, o Rasengan girando, o "ka-me-ha-me" juntando energia, a marreta
+ * subindo. Ele começa com o golpe e termina quando o golpe sai (se voa) ou
+ * chega (se é corpo a corpo); o impacto fica só com o estouro.
+ */
+const ANTES_DA_NOVA: Partial<Record<FamiliaNova, { antes: Sound; saida?: Sound }>> = {
+  chidori: { antes: 'chidori-carga' },
+  esfera_espiral: { antes: 'esfera-espiral-carga' },
+  kamehameha: { antes: 'kamehameha-carga', saida: 'kamehameha-feixe' },
+  marretada: { antes: 'marretada-giro' },
+};
+const SONS_DE_ANTES = [...new Set(Object.values(ANTES_DA_NOVA).flatMap((x) => [x!.antes, ...(x!.saida ? [x!.saida] : [])]))];
+
+export const TODOS_OS_SONS: Sound[] = [...SONS, ...SONS_DAS_NOVAS, ...SONS_DE_ANTES, 'cravar', 'ricochete'];
 
 /*
  * Prioridade da mixagem, do adendo: grand > impacto importante > interrupção >
@@ -42,6 +56,8 @@ interface SomDaFamilia {
   /** Toca no começo do Preparo de uma habilidade desta família. */
   preparo?: Sound;
   impacto: Sound;
+  /** Toca antes do contato e termina quando o golpe sai (ou chega, se não voa). */
+  antes?: Sound;
 }
 
 export const SOM_DA_FAMILIA: Record<VfxFamily, SomDaFamilia> = {
@@ -67,9 +83,10 @@ export const SOM_DA_FAMILIA: Record<VfxFamily, SomDaFamilia> = {
     // a saída (o que voa ou o feixe) usa a biblioteca; o impacto é o som da própria família
     const saida: Sound | undefined = x.faixa === 'laser' ? 'feixe' : x.faixa ? 'feixe' : x.viagem === 'flecha' ? SOM_DA_NOVA('flecha')
       : x.viagem === 'disco' ? SOM_DA_NOVA('disco') : x.viagem === 'bola_ki' ? 'disparo' : x.viagem ? 'disparo' : undefined;
-    const preparo: Sound | undefined = x.preparo ? 'carga-grande' : undefined;
+    const extra = ANTES_DA_NOVA[k];
+    const preparo: Sound | undefined = extra?.antes ?? (x.preparo ? 'carga-grande' : undefined);
     const impacto = k === 'flecha' ? 'cravar' : k === 'disco' ? 'ricochete' : SOM_DA_NOVA(k);
-    return [k, { saida, preparo, impacto }];
+    return [k, { saida: extra?.saida ?? saida, preparo, impacto, antes: extra?.antes }];
   })) as Record<FamiliaNova, SomDaFamilia>,
 };
 

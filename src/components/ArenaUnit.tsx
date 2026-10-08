@@ -102,6 +102,7 @@ export function ArenaUnit({fighter:f,battle,beat,onInspect,numbers,threatened,li
   return <article className={`unit side-${f.side} ${marcas} ${atua}`} data-fighter={f.uid} data-slot={f.slot} data-combat-role={linkedSource&&linkedTarget?'both':linkedSource?'source':linkedTarget?'target':'idle'} style={{'--character':c.color,...atuaStyle} as React.CSSProperties}>
     <div className="unit-medal">
       <span className="unit-fx" aria-hidden="true"/>
+      {shield>0&&!out&&<span className="unit-escudo" aria-hidden="true"/>}
       <span className="unit-pedestal" aria-hidden="true"/>
       <button className="fighter-portrait" data-portrait={f.uid} onClick={()=>onInspect({kind:'fighter',fighter:f})} aria-label={`Inspecionar ${c.name}, ${Math.ceil(f.hp)} de Vida`}>
         <span className="medal-aura" aria-hidden="true"/>

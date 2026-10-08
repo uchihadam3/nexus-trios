@@ -38,7 +38,7 @@ export function VfxLabScreen(){
       <fieldset><legend>Cor</legend><button className={cor===null?'active':''} onClick={()=>{setCor(null);replay()}}>Da família</button>{CORES.map(c=><button key={c} aria-label={`Cor ${c}`} className={`vfx-swatch ${cor===c?'active':''}`} style={{background:c}} onClick={()=>{setCor(c);replay()}}/>)}</fieldset>
       <label>Escala <strong>{escala.toFixed(1)}×</strong><input type="range" min=".6" max="1.6" step=".1" value={escala} onChange={e=>{setEscala(Number(e.target.value));replay()}}/></label>
       <button className="primary vfx-replay" onClick={replay}><Play size={16}/>Reproduzir</button>
-      <button className="primary vfx-replay" onClick={()=>void battleAudio.preview([SOM_DA_FAMILIA[chave].preparo,SOM_DA_FAMILIA[chave].saida,SOM_DA_FAMILIA[chave].impacto].filter((x):x is Sound=>!!x))}><Volume2 size={16}/>Ouvir SFX</button>
+      <button className="primary vfx-replay" onClick={()=>void battleAudio.preview([SOM_DA_FAMILIA[chave].antes,SOM_DA_FAMILIA[chave].saida,SOM_DA_FAMILIA[chave].impacto].filter((x):x is Sound=>!!x))}><Volume2 size={16}/>Ouvir SFX</button>
       <p className="vfx-profile-note">{nomeDaFolha} · 12 quadros · {manifest&&nomeDaFolha&&manifest[nomeDaFolha]?`${manifest[nomeDaFolha].tamanho.join(' × ')} px · ${kb(manifest[nomeDaFolha].bytes)} KB`:'…'}</p>
     </div><div className="vfx-lab-demo battle-effects" style={{'--fx-cor':tinta} as CSSProperties}>
       {nomeDaFolha&&<span key={`${chave}-${fase}-${toca}-${tinta}`} className={`fxl ${classe}`} style={{'--fx-img':`url(${folha(nomeDaFolha)})`,...demo} as CSSProperties}/>}

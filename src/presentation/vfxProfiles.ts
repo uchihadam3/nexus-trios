@@ -23,7 +23,7 @@
 import { byId } from '../data/characters';
 import type { Character, Effect, Skill, Target, Visual } from '../engine/types';
 import { FAMILIAS_NOVAS, NOVAS_DE_BASICO, NOVAS_NO_ALVO, type FamiliaNova } from './vfx-familias-novas';
-import { FAMILIA_DA_HABILIDADE } from './vfx-atribuicao';
+import { FAMILIA_DA_HABILIDADE, FAMILIA_DO_BASICO } from './vfx-atribuicao';
 
 export type Grupo = 'físico' | 'corte' | 'projétil' | 'energia' | 'elemento' | 'magia' | 'apoio' | 'especial';
 
@@ -368,6 +368,8 @@ const ehArea = (target: Target, effects: Effect[]) => target === 'allEnemies' ||
 /** Família de uma habilidade (ou do básico, sem índice). */
 export function familiaDe(c: Character, skillIndex?: number): VfxFamily {
   if (skillIndex === undefined) {
+    const proprio = FAMILIA_DO_BASICO[c.id];
+    if (proprio) return proprio;
     return basicoDe(c, c.skills.map((_, i) => familiaPelaRegra(c, i)), c.skills.map((_, i) => familiaDe(c, i)));
   }
   return FAMILIA_DA_HABILIDADE[`${c.id}:${skillIndex}`] ?? familiaPelaRegra(c, skillIndex);

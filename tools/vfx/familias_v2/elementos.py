@@ -216,26 +216,55 @@ def raio_em_cadeia(T, t, rng):
     return G, H
 
 
+def _raio_ramificado(T, sub, x0, y0, ang, comp, largura, ramos=2, peso=1.0):
+    """Um raio com galhos: o tronco quebrado e um ou dois galhos saindo do meio, mais finos."""
+    x1, y1 = x0 + math.cos(ang) * comp, y0 + math.sin(ang) * comp
+    pts = jagged(sub, x0, y0, x1, y1, 4, 0.2)
+    a = T.polyline(pts, largura, peso).copy()
+    for _ in range(ramos):
+        k = sub.integers(len(pts) // 4, max(len(pts) // 4 + 1, len(pts) * 3 // 4))
+        bx, by = pts[k]
+        b = ang + sub.choice((-1, 1)) * sub.uniform(0.4, 0.9)
+        c = comp * sub.uniform(0.25, 0.45)
+        a += T.polyline(jagged(sub, bx, by, bx + math.cos(b) * c, by + math.sin(b) * c, 3, 0.22), largura * 0.6, peso * 0.7)
+    return a
+
+
 def chidori(T, t, rng):
-    """Chidori: uma bola de raios na mão que estala e grita, riscos para trás, e a estocada no alvo."""
+    """Chidori: uma bola de raios densa na mão, estalando para todos os lados (o "canto
+    de mil pássaros"), um rastro elétrico grosso da investida, e no contato a descarga
+    atravessa o alvo: clarão, raios explodindo em volta e arcos estalando no corpo."""
     G, H = vazio(T)
-    sub = np.random.default_rng(int(t * 997) + 491)
-    cx = -0.35 + 0.35 * ease_in(rel(t, 0.1, 0.35), 2)
-    bola = T.gauss(cx, 0, 0.1) * 2.4
-    raios = T.zero()
-    for _ in range(9):
-        a = sub.uniform(0, TAU)
-        r = sub.uniform(0.25, 0.5)
-        raios += T.polyline(jagged(sub, cx, 0, cx + math.cos(a) * r, math.sin(a) * r, 4, 0.35), 0.01, 1)
-    rastro = T.zero()
-    for _ in range(6):
-        y = sub.uniform(-0.15, 0.15)
-        rastro += T.polyline(jagged(sub, cx - 0.1, y * 0.3, cx - 0.9, y, 4, 0.2), 0.008, 0.7)
-    tt = rel(t, 0.35, 1)
-    golpe = (T.gauss(0, 0, 0.18) * 2.5 + T.ring(0.1 + 0.6 * ease_out(tt, 2), 0.025) * (1 - tt) * 1.6) * (t > 0.35) * some(t, 0.35, 1, 1.2)
-    env = apaga(t, 0.6, 1)
-    G += (bola + T.glow(raios + rastro, 1.5, 1.6, 0.02)) * env + golpe
-    H += (bola + raios + rastro * 0.6) * env + golpe
+    sub = np.random.default_rng(int(t * 997) + 491)        # raios novos a cada quadro: ele cintila
+    bate = 0.32
+    cx = -0.5 + 0.5 * ease_in(rel(t, 0.0, bate), 2.2)
+    pisca = sub.uniform(0.8, 1.2)
+    env = apaga(t, 0.62, 1)
+    if t < bate + 0.06:
+        bola = T.gauss(cx, 0, 0.075) * 2.8 * pisca + T.gauss(cx, 0, 0.16) * 0.9
+        coroa = T.zero()
+        for _ in range(16):
+            coroa += _raio_ramificado(T, sub, cx, 0, sub.uniform(0, TAU), sub.uniform(0.12, 0.34), 0.008, 1, sub.uniform(0.6, 1))
+        for _ in range(3):                                   # alguns arcos longos que chicoteiam
+            coroa += _raio_ramificado(T, sub, cx, 0, sub.uniform(0, TAU), sub.uniform(0.4, 0.62), 0.007, 2, 0.8)
+        rastro = T.zero()
+        for _ in range(5):
+            y = sub.uniform(-0.12, 0.12)
+            rastro += T.polyline(jagged(sub, cx - 0.06, y * 0.4, cx - 0.95, y + sub.uniform(-0.1, 0.1), 5, 0.12), 0.012, 0.8)
+        G += bola + T.glow(coroa + rastro, 1.5, 1.8, 0.022)
+        H += bola + coroa + rastro * 0.6
+    if t >= bate:
+        tt = rel(t, bate, 1)
+        clarao = T.gauss(0, 0, 0.16) * some(t, bate, bate + 0.3, 1.2) * 3.2
+        anel = T.ring(0.1 + 0.65 * ease_out(tt, 2.2), 0.03) * (1 - tt) ** 1.3 * 1.6
+        estouro = T.zero()
+        n = int(9 * (1 - tt) ** 1.5 + 2)
+        for _ in range(n):                                    # a descarga saindo do alvo para todos os lados
+            estouro += _raio_ramificado(T, sub, sub.uniform(-0.05, 0.05), sub.uniform(-0.05, 0.05), sub.uniform(0, TAU),
+                                        sub.uniform(0.25, 0.75) * (0.6 + 0.6 * ease_out(min(1, tt * 3), 2)), 0.009, 2, 1.0)
+        atravessa = T.polyline(jagged(sub, -0.1, 0, 0.95, sub.uniform(-0.15, 0.15), 5, 0.08), 0.018, 1) * some(t, bate, bate + 0.25)
+        G += clarao + anel + T.glow(estouro + atravessa, 1.6, 1.8, 0.022) * env
+        H += clarao + (estouro + atravessa) * env
     return G, H
 
 

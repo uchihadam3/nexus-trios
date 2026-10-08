@@ -61,16 +61,6 @@ def chute_giratorio(rng, v):
     return x
 
 
-def bonk(rng, v):
-    n = n_de(0.8)
-    x = baque(n, 180, 90, 0.05, 0.4) * 0.6
-    t = np.arange(n) / SR
-    mola = np.sin(2 * math.pi * (300 + 120 * np.sin(2 * math.pi * 9 * t)) * t) * env(n, 0.005, 0.35) * 0.3
-    x += mola
-    for k in range(3):
-        poe(x, _brilho(rng, 0.25, nota(91 + 4 * k), 0.12, SINO), 0.18 + k * 0.1)
-    return reverb(x, 0.25, 0.15)
-
 
 def pow_cartoon(rng, v):
     x = _z(0.6)
@@ -79,13 +69,6 @@ def pow_cartoon(rng, v):
     poe(x, _tom(nota(74), nota(86), 0.18, 0.12, 0.2), 0.05)
     return reverb(x, 0.3, 0.15)
 
-
-def martelo(rng, v):
-    x = _z(1.0)
-    poe(x, _whoosh(rng, 0.15, 1800, 300, 0.5), 0)
-    poe(x, B.esmagar(rng, v), 0.13, 0.8)
-    poe(x, modal(n_de(0.8), rng.uniform(380, 460), rng=rng, **METAL) * env(n_de(0.8), 0.001, 0.4) * 0.35, 0.13)
-    return x
 
 
 def investida(rng, v):
@@ -198,14 +181,6 @@ def corte_vertical(rng, v):
     poe(x, baque(n_de(0.2), 140, 70, 0.04, 0.2) * 0.4, 0.12)
     return x
 
-
-def iaido(rng, v):
-    x = _z(1.0)
-    n = n_de(0.08)
-    poe(x, passa(ruido(rng, n), 4000, 12000, 2) * env(n, 0.0003, 0.01) * 0.9, 0)
-    poe(x, modal(n_de(0.5), rng.uniform(3000, 3600), rng=rng, **METAL) * env(n_de(0.5), 0.001, 0.3) * 0.2, 0)
-    poe(x, B.corte_pesado(rng, v), 0.38, 0.9)
-    return x
 
 
 def mil_cortes(rng, v):
@@ -425,16 +400,6 @@ def hadouken(rng, v):
     return x
 
 
-def kamehameha(rng, v):
-    x = _z(1.5)
-    n = n_de(1.2)
-    t = np.arange(n) / SR
-    zumbido = satura(seno(varre(90, 140, n, 0.6), n), 3) * env(n, 0.02, 0.6, segura=0.5) * 0.4
-    zumbido += assobio(rng, n, 400, 3000, 0.8, 0.6) * env(n, 0.02, 0.6, segura=0.5) * 0.7 * (0.8 + 0.2 * np.sin(2 * math.pi * 11 * t))
-    poe(x, zumbido, 0)
-    poe(x, B.explosao(rng, v)[: n_de(0.6)] * 0.8, 0.85)
-    return reverb(x, 0.6, 0.25)
-
 
 def canhao_de_energia(rng, v):
     x = _z(1.3)
@@ -443,14 +408,6 @@ def canhao_de_energia(rng, v):
     poe(x, B.explosao(rng, v)[: n_de(0.5)] * 0.7, 0.8)
     return x
 
-
-def esfera_espiral(rng, v):
-    n = n_de(1.0)
-    t = np.arange(n) / SR
-    x = assobio(rng, n, 1200, 2600, 1.0, 0.3) * (0.6 + 0.4 * np.sin(2 * math.pi * 26 * t)) * env(n, 0.02, 0.5, segura=0.3) * 0.8
-    x += seno(varre(nota(64), nota(76), n, 0.5), n) * env(n, 0.02, 0.5) * 0.15
-    poe(x, B.impacto_energia(rng, v)[: n_de(0.5)] * 0.8, 0.35)
-    return reverb(x, 0.4, 0.2)
 
 
 def buraco_negro(rng, v):
@@ -653,19 +610,6 @@ def raio_em_cadeia(rng, v):
         poe(x, _tom(nota(84 + 3 * k), nota(80 + 3 * k), 0.15, 0.08, 0.12), k * 0.13 + 0.05)
     return x
 
-
-def chidori(rng, v):
-    n = n_de(1.2)
-    t = np.arange(n) / SR
-    # o canto de mil pássaros: muitos piados agudos rápidos sobre o chiado elétrico
-    x = passa(ruido(rng, n), 2500, 9000, 2) * env(n, 0.01, 0.5, segura=0.3) * 0.35
-    for k in range(40):
-        f = rng.uniform(2500, 4200)
-        m = n_de(0.03)
-        poe(x, seno(varre(f, f * 1.4, m), m) * env(m, 0.001, 0.01) * 0.12, rng.uniform(0, 0.8))
-    x += satura(seno(120 + 0 * t, n), 6) * env(n, 0.01, 0.5) * 0.1
-    poe(x, B.soco_pesado(rng, v)[: n_de(0.4)] * 0.8, 0.42)
-    return reverb(x, 0.4, 0.2)
 
 
 def tsunami(rng, v):
@@ -1048,13 +992,6 @@ def barreira_magica(rng, v):
     return reverb(x, 0.7, 0.35)
 
 
-def escudo_fisico(rng, v):
-    x = _z(0.9)
-    poe(x, B.bloqueio(rng, v) * 0.8, 0.2)
-    poe(x, modal(n_de(0.6), rng.uniform(600, 800), rng=rng, **METAL) * env(n_de(0.6), 0.001, 0.3) * 0.35, 0.22)
-    poe(x, _whoosh(rng, 0.2, 500, 2000, 0.6, g=0.3), 0)
-    return x
-
 
 def armadura(rng, v):
     x = _z(1.1)
@@ -1163,6 +1100,238 @@ def estrela_invencivel(rng, v):
     return reverb(x, 0.4, 0.2)
 
 
+
+# ================================================================== golpes icônicos (sons de verdade)
+def _faiscas(rng, n, taxa0, taxa1, lo=1500, hi=11000, forca=1.0):
+    """Estalos de arco elétrico: impulsos em tempos aleatórios, com força de cauda longa
+    (a maioria fraca, de vez em quando um estalo bem forte), como faísca de verdade."""
+    x = np.zeros(n)
+    dur = n / SR
+    t = 0.0
+    while True:
+        taxa = taxa0 + (taxa1 - taxa0) * (t / dur)
+        t += rng.exponential(1 / max(taxa, 1.0))
+        if t >= dur:
+            break
+        i = int(t * SR)
+        m = min(n - i, max(8, int(rng.uniform(0.0002, 0.0025) * SR)))
+        a = min(1.0, 0.05 + rng.pareto(2.2) * 0.25) * rng.choice((-1.0, 1.0)) * forca
+        x[i:i + m] += a * rng.standard_normal(m) * np.exp(-np.arange(m) / (m * 0.3))
+    return passa(x, lo, hi, 2)
+
+
+def _zumbido_de_arco(rng, n, f=118.0):
+    """O zumbido do arco: dente-de-serra áspero que acende e apaga (cintila) o tempo todo."""
+    t = np.arange(n) / SR
+    deriva = passa(ruido(rng, n), None, 12, 1)
+    deriva /= np.abs(deriva).max() + 1e-9
+    fase = 2 * math.pi * np.cumsum(f * (1 + 0.04 * deriva)) / SR
+    serra = sum(np.sin(k * fase) / k for k in range(1, 18))
+    cint = passa(ruido(rng, n), None, 40, 2)
+    cint = np.clip(cint / (np.abs(cint).max() + 1e-9) * 1.8 + 0.35, 0, 1)
+    return passa(satura(serra * cint * 1.4, 3.5), 150, 7000, 2) * (0.8 + 0.2 * np.sin(2 * math.pi * 7 * t))
+
+
+def _piados(rng, n, quantos, inicio=0.0, fim=1.0, lo=2600, hi=5200, g=0.1):
+    """O "canto de mil pássaros": guinchos agudos e curtos, com vibrato rápido e FM áspera."""
+    x = np.zeros(n)
+    for _ in range(quantos):
+        f = rng.uniform(lo, hi)
+        m = n_de(rng.uniform(0.02, 0.06))
+        tt = np.arange(m) / SR
+        freq = f * (1 + 0.25 * tt / tt[-1]) * (1 + 0.04 * np.sin(2 * math.pi * rng.uniform(60, 120) * tt))
+        s = np.sin(2 * math.pi * np.cumsum(freq) / SR)
+        poe(x, satura(s, 2.5) * env(m, 0.002, m / SR * 0.5) * g * rng.uniform(0.5, 1.0), rng.uniform(inicio, fim) * n / SR)
+    return x
+
+
+def chidori_carga(rng, v):
+    """Antes do golpe: a mão acende, as faíscas e os piados vão engrossando até a investida."""
+    n = n_de(0.9)
+    sobe = np.linspace(0, 1, n) ** 1.3
+    x = _faiscas(rng, n, 150, 1400) * (0.35 + 0.65 * sobe) * 0.9
+    x += _zumbido_de_arco(rng, n, 120) * sobe * 0.28
+    x += _piados(rng, n, 70, 0.1, 1.0, g=0.08) * (0.3 + 0.7 * sobe)
+    poe(x, assobio(rng, n_de(0.25), 300, 3000, 1.3, 0.5) * sobe_e_some(n_de(0.25), 0.9, 1.2) * 0.6, 0.65)   # a investida
+    return reverb(x, 0.3, 0.15)
+
+
+def chidori(rng, v):
+    """O impacto: descarga num estouro de faíscas, o "tzzak" caindo de tom, o soco, e o chiado morrendo."""
+    x = _z(0.95)
+    n = n_de(0.95)
+    descarga = _faiscas(rng, n_de(0.12), 4000, 2500, 800, 12000, 1.6)
+    poe(x, descarga, 0)
+    zap = satura(seno(varre(3200, 180, n_de(0.16), 1.6), n_de(0.16)), 4) * env(n_de(0.16), 0.0005, 0.08) * 0.45
+    poe(x, passa(zap, 150, 9000, 2), 0)
+    poe(x, B.soco_pesado(rng, v)[: n_de(0.35)] * 0.7, 0.005)
+    resto = np.linspace(1, 0, n) ** 2
+    x += _faiscas(rng, n, 900, 30, forca=0.7) * resto * 0.8
+    x += _zumbido_de_arco(rng, n, 112) * env(n, 0.002, 0.25) * 0.3
+    x += _piados(rng, n, 25, 0.0, 0.5, g=0.06) * resto
+    return reverb(x, 0.35, 0.18)
+
+
+def _giro(rng, n, rot0, rot1, centro=1500.0):
+    """Vento girando numa esfera: três faixas de ar que sobem e descem defasadas
+    no ritmo da rotação, então o som "roda" (o whirr do Rasengan)."""
+    rot = varre(rot0, rot1, n, 0.8)
+    fase = 2 * math.pi * np.cumsum(rot) / SR
+    a = passa(rosa(rng, n), centro * 0.6, centro * 1.5, 2)
+    b = passa(rosa(rng, n), centro * 1.6, centro * 3.6, 2) * 0.7
+    c = passa(rosa(rng, n), 180, 650, 2) * 0.9
+    return a * (0.5 + 0.5 * np.sin(fase)) + b * (0.5 + 0.5 * np.sin(fase + 2.1)) + c * (0.55 + 0.45 * np.sin(fase + 4.2))
+
+
+def esfera_espiral_carga(rng, v):
+    """Antes do golpe: a esfera se forma na mão girando cada vez mais rápido, com um assobio subindo."""
+    n = n_de(0.9)
+    sobe = np.linspace(0, 1, n) ** 1.2
+    x = _giro(rng, n, 6, 34) * (0.25 + 0.75 * sobe) * 1.3
+    giro = seno(varre(260, 820, n, 0.9), n)
+    x += (giro + 0.3 * seno(varre(520, 1640, n, 0.9), n)) * sobe ** 1.5 * 0.08
+    x += satura(seno(varre(70, 95, n), n), 2.5) * sobe * 0.12
+    return reverb(x, 0.35, 0.15)
+
+
+def esfera_espiral(rng, v):
+    """O impacto: a esfera "fura" o alvo moendo (o ar raspando em espiral) e explode para fora."""
+    x = _z(1.1)
+    m = n_de(0.38)
+    moer = _giro(rng, m, 38, 52, 1200) * 1.4
+    moer += satura(passa(ruido(rng, m), 300, 3000, 2) * (0.5 + 0.5 * np.sin(2 * math.pi * 46 * np.arange(m) / SR)), 3) * 0.4
+    moer *= env(m, 0.002, 0.3, segura=0.6)
+    poe(x, moer, 0)
+    poe(x, B.soco_pesado(rng, v)[: n_de(0.3)] * 0.6, 0)
+    m = n_de(0.75)
+    estouro = passa(rosa(rng, m), 40, 3500, 2) * env(m, 0.002, 0.3) * 1.1
+    estouro += satura(seno(varre(85, 38, m, 1.5), m), 3) * env(m, 0.002, 0.25) * 0.6
+    estouro += assobio(rng, m, 2500, 300, 1.4, 0.5) * env(m, 0.005, 0.35) * 0.5     # o ar sendo jogado para fora
+    estouro += graos(rng, m, 22, 0.05, 0.6, 600, 4000, 0.006) * 0.3
+    poe(x, estouro, 0.3)
+    return reverb(x, 0.5, 0.22, 5000)
+
+
+def kamehameha_carga(rng, v):
+    """Ka-me-ha-me...: a energia junta nas mãos, um zumbido que sobe com brilho pulsando cada vez mais rápido."""
+    n = n_de(0.85)
+    t = np.arange(n) / SR
+    sobe = np.linspace(0, 1, n) ** 1.4
+    pulso = 0.6 + 0.4 * np.sin(2 * math.pi * np.cumsum(varre(5, 22, n)) / SR)
+    x = satura(seno(varre(110, 230, n, 0.8), n), 2.5) * sobe * 0.25
+    x += (seno(varre(440, 1100, n, 0.8), n) + 0.5 * seno(varre(660, 1650, n, 0.8), n)) * sobe ** 1.6 * pulso * 0.06
+    x += assobio(rng, n, 3000, 600, 0.7, 0.5) * sobe * 0.45                    # o ar sendo puxado para as mãos
+    x += _faiscas(rng, n, 30, 300, 3000, 11000, 0.5) * sobe * 0.5
+    x *= 0.85 + 0.15 * np.sin(2 * math.pi * 3 * t)
+    return reverb(x, 0.45, 0.2)
+
+
+def kamehameha_feixe(rng, v):
+    """...HA!: o feixe sai rugindo. Um estouro, depois um rugido grosso e contínuo até chegar."""
+    n = n_de(1.0)
+    t = np.arange(n) / SR
+    corpo = env(n, 0.004, 0.5, segura=0.55)
+    ronco = passa(rosa(rng, n), 40, 900, 2) * 1.4 + passa(ruido(rng, n), 900, 6000, 2) * 0.35
+    ronco *= 0.85 + 0.15 * np.sin(2 * math.pi * 17 * t + 2 * np.sin(2 * math.pi * 3 * t))
+    x = ronco * corpo
+    x += satura(seno(np.full(n, 62.0) * (1 + 0.02 * np.sin(2 * math.pi * 5 * t)), n), 3.5) * corpo * 0.35
+    x += seno(varre(1200, 900, n), n) * corpo * 0.04
+    m = n_de(0.15)
+    poe(x, satura(passa(ruido(rng, m), 200, 5000, 2) * env(m, 0.0005, 0.05), 3) * 0.9, 0)    # o "HA!"
+    return reverb(x, 0.5, 0.2, 5000)
+
+
+def kamehameha(rng, v):
+    """O feixe chega: explosão de energia com o ar fervendo depois."""
+    x = _z(1.3)
+    poe(x, B.explosao(rng, v) * 0.95, 0)
+    n = n_de(0.9)
+    poe(x, _faiscas(rng, n, 400, 20, 2000, 10000, 0.5) * np.linspace(1, 0, n) * 0.5, 0.05)
+    poe(x, passa(rosa(rng, n), 60, 1200, 2) * env(n, 0.002, 0.45) * 0.6, 0)
+    return reverb(x, 0.6, 0.25)
+
+
+def _madeira_oca(rng, n, f0):
+    """Pancada em madeira oca (o malho de desenho): poucos modos da madeira, curtos, com o corpo ressoando."""
+    t = np.arange(n) / SR
+    x = np.zeros(n)
+    for r, q, g in ((1.0, 0.11, 1.0), (2.63, 0.05, 0.55), (4.1, 0.03, 0.35), (5.9, 0.02, 0.22), (8.3, 0.012, 0.15)):
+        x += np.sin(2 * math.pi * f0 * r * rng.uniform(0.985, 1.015) * t) * np.exp(-t / q) * g
+    return x + passa(ruido(rng, n), 800, 5000, 2) * env(n, 0.0003, 0.008) * 0.8
+
+
+def marretada_giro(rng, v):
+    """Antes do golpe: a marreta sobe (apito de desenho subindo) e desce num "fuuum" pesado."""
+    x = _z(0.75)
+    n = n_de(0.38)
+    t = np.arange(n) / SR
+    apito = np.sin(2 * math.pi * np.cumsum(varre(500, 1500, n, 1.1) * (1 + 0.012 * np.sin(2 * math.pi * 7 * t))) / SR)
+    poe(x, apito * env(n, 0.03, 0.3, segura=0.6) * 0.18, 0)
+    poe(x, _whoosh(rng, 0.32, 1600, 220, 0.75, 1.5, 1.0), 0.4)
+    return reverb(x, 0.25, 0.1)
+
+
+def marretada(rng, v):
+    """A marretada de desenho: BONK oco de madeira, o peso, o achatamento e a mola "doing" no fim."""
+    x = _z(1.15)
+    n = n_de(0.5)
+    poe(x, _madeira_oca(rng, n, rng.uniform(150, 175)) * 0.75, 0)
+    poe(x, B.esmagar(rng, v)[: n_de(0.6)] * 0.65, 0)
+    m = n_de(0.08)
+    poe(x, satura(passa(ruido(rng, m), 300, 1800, 2) * env(m, 0.001, 0.03), 3) * 0.5, 0.005)        # o "esmagou"
+    m = n_de(0.62)
+    tt = np.arange(m) / SR
+    f = 190 * (1 + 0.18 * np.sin(2 * math.pi * 16 * tt) * np.exp(-tt / 0.35))
+    doing = np.sin(2 * math.pi * np.cumsum(f) / SR) + 0.35 * np.sin(4 * math.pi * np.cumsum(f) / SR)
+    poe(x, doing * env(m, 0.004, 0.3) * 0.22, 0.12)
+    for k in range(3):                                                                              # passarinhos tontos
+        m = n_de(0.09)
+        tt = np.arange(m) / SR
+        piu = np.sin(2 * math.pi * np.cumsum(varre(2600, 3600, m, 0.6) * (1 + 0.06 * np.sin(2 * math.pi * 45 * tt))) / SR)
+        poe(x, piu * env(m, 0.004, 0.04) * 0.06, 0.5 + k * 0.13)
+    return reverb(x, 0.3, 0.14)
+
+
+def bonk(rng, v):
+    """Pancada de desenho na cabeça: "bonk" de madeira leve e a mola balançando."""
+    x = _z(0.8)
+    poe(x, _madeira_oca(rng, n_de(0.35), rng.uniform(260, 300)) * 0.7, 0)
+    poe(x, B.soco_leve(rng, v) * 0.6, 0)
+    m = n_de(0.5)
+    tt = np.arange(m) / SR
+    f = 300 * (1 + 0.15 * np.sin(2 * math.pi * 13 * tt) * np.exp(-tt / 0.25))
+    poe(x, np.sin(2 * math.pi * np.cumsum(f) / SR) * env(m, 0.004, 0.25) * 0.2, 0.06)
+    return reverb(x, 0.25, 0.12)
+
+
+def martelo(rng, v):
+    """Martelo de guerra: o ar pesado, a pancada que esmaga e o clangor curto da cabeça de metal."""
+    x = _z(1.0)
+    poe(x, _whoosh(rng, 0.15, 1800, 300, 0.5), 0)
+    poe(x, B.esmagar(rng, v), 0.13, 0.85)
+    poe(x, B._placa_de_metal(rng, n_de(0.5), 120, 3000, 60, 0.12) * 0.45, 0.13)
+    return x
+
+
+def escudo_fisico(rng, v):
+    """Ergue o escudo de mão: o ar do braço, o escudo encaixando com um "tonc" metálico abafado."""
+    x = _z(0.9)
+    poe(x, _whoosh(rng, 0.2, 500, 2000, 0.6, g=0.3), 0)
+    poe(x, B.bloqueio(rng, v) * 0.9, 0.2)
+    poe(x, passa(rosa(rng, n_de(0.3)), 80, 400, 2) * env(n_de(0.3), 0.002, 0.08) * 0.4, 0.2)
+    return x
+
+
+def iaido(rng, v):
+    """Saque rápido: a lâmina deslizando na bainha, o "shing" curto e o corte."""
+    x = _z(1.0)
+    n = n_de(0.18)
+    poe(x, passa(ruido(rng, n), 3000, 10000, 2) * sobe_e_some(n, 0.8, 1.5) * 0.4, 0)
+    poe(x, B._lamina_curta(rng, n_de(0.3), rng.uniform(2800, 3400)) * 0.3, 0.17)
+    poe(x, B.corte_pesado(rng, v), 0.38, 0.9)
+    return x
+
+
 SONS_NOVOS = {
     nome.replace("_", "-"): (fn, "família " + nome.replace("_", " "))
     for nome, fn in list(globals().items())
@@ -1174,4 +1343,9 @@ _BAIXO = {"cura-em-area", "regeneracao", "grito-de-guerra", "velocidade", "escud
           "encanto", "runas", "lua", "petalas", "regeneracao", "confusao", "estrela-invencivel", "disco", "flecha"}
 _ALTO = {"soco-serio", "supernova", "kamehameha", "canhao-de-energia", "foguete", "tempestade", "punho-gigante", "pisao",
          "martelo", "espadao", "buraco-negro", "tsunami", "transformacao-v2", "dragao", "susanoo", "dominio"}
+_ANTES = {"chidori-carga": "faíscas do Chidori", "esfera-espiral-carga": "a esfera girando", "kamehameha-carga": "carga do Kamehameha",
+          "kamehameha-feixe": "o feixe saindo", "marretada-giro": "a marreta subindo"}
+for _k, _d in _ANTES.items():
+    SONS_NOVOS[_k] = (SONS_NOVOS[_k][0], _d)
+_ALTO |= {"marretada", "kamehameha-feixe"}
 ALVO_NOVO = {k: (-23 if k in _BAIXO else -15 if k in _ALTO else -18) for k in SONS_NOVOS}

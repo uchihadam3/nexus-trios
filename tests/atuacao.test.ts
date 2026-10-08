@@ -58,6 +58,12 @@ describe('atuação', () => {
     expect(atuacao(esc, esc.after, medida, false)['player-0']?.react).toBe('shield');
   });
 
+  it('bloqueio: o golpe que bate no escudo mostra o escudo levando a pancada, não um golpe comum', () => {
+    const b = beat('basic', 3, [0], [{ kind: 'damage', value: 80 }], 'physical', true);
+    b.events.push({ id: 8, time: 0, kind: 'block', source: b.event.source, target: b.event.target, label: 'Bloqueio' });
+    expect(atuacao(b, b.after, medida, false)['player-0']?.react).toBe('block');
+  });
+
   it('debuff sem dano: quem lança amaldiçoa, o alvo ganha a névoa', () => {
     const x = beat('skill', 1, [3], [{ kind: 'status', status: 'exposed', value: 0.2, duration: 6 }], 'debuff', true);
     const a = atuacao(x, x.after, medida, false);

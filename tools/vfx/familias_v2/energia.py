@@ -19,7 +19,8 @@ def explosao_ki(T, t, rng):
     env = apaga(t, 0.4, 0.9)
     anel = T.ring(0.3 + 0.7 * ease_out(rel(t, 0.05, 1), 2), 0.035, cy=0.45, squash=3) * (1 - t) ** 1.2 * 1.5
     fa = faiscas(T, rng, t, 26, 1.0, 0.035, cone=(-math.pi + 0.3, -0.3), gravidade=0.5, cy=0.3)
-    flash = T.gauss(0, 0.1, 0.4) * some(t, 0, 0.18) * 3.2
+    # clarão redondo e contido (um sigma largo batia na borda do quadro e virava um quadrado)
+    flash = T.gauss(0, 0.1, 0.22) * some(t, 0, 0.18) * 3.0 * smooth(0.95 - T.RAD, 0, 0.3)
     G += (domo * 1.0 + casca * 1.5) * env + anel + T.glow(fa, 1, 1.2, 0.02) + flash
     H += (domo * 0.9 + casca) * env * (1 - rel(t, 0.2, 0.8)) + flash + fa * 0.6
     return G, H

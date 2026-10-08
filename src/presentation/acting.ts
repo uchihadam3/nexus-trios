@@ -16,7 +16,7 @@ import { combatLinks } from './combat-links';
 import { profileFor } from './vfxProfiles';
 
 export type ActStyle = 'melee' | 'ranged' | 'area' | 'support' | 'curse' | 'cast' | 'interrupt';
-export type ReactStyle = 'hit' | 'hit-heavy' | 'heal' | 'shield' | 'buff' | 'curse' | 'broken' | 'fall';
+export type ReactStyle = 'hit' | 'hit-heavy' | 'block' | 'heal' | 'shield' | 'buff' | 'curse' | 'broken' | 'fall';
 
 export interface UnitActing {
   /** Quem age: o estilo do movimento e o vetor até o alvo principal, em px. */
@@ -59,13 +59,15 @@ function reacaoDoAlvo(beat: Beat, battle: Battle, uid: string): ReactStyle | und
   if (!sobre.length) return undefined;
   if (sobre.some((e) => e.kind === 'ko')) return 'fall';
   if (sobre.some((e) => e.kind === 'interrupt')) return 'broken';
+  // o golpe bateu no escudo: o escudo aparece na frente e leva a pancada
+  if (sobre.some((e) => e.kind === 'block')) return 'block';
   const dano = sobre.filter((e) => e.kind === 'damage').reduce((t, e) => t + (e.value ?? 0), 0);
   if (dano > 0) {
     const alvo = battle.fighters.find((f) => f.uid === uid);
     return beat.grand || (alvo && dano >= alvo.maxHp * 0.16) ? 'hit-heavy' : 'hit';
   }
   if (sobre.some((e) => e.kind === 'heal')) return 'heal';
-  if (sobre.some((e) => e.kind === 'shield' || e.kind === 'block')) return 'shield';
+  if (sobre.some((e) => e.kind === 'shield')) return 'shield';
   const origem = battle.fighters.find((f) => f.uid === beat.event.source)?.side;
   const lado = battle.fighters.find((f) => f.uid === uid)?.side;
   if (sobre.some((e) => e.kind === 'status')) return origem === lado ? 'buff' : 'curse';
