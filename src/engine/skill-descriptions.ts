@@ -214,7 +214,13 @@ export interface SkillPresentation {summary:string;target:string;effects:string[
    * personagem". Quem lê rápido conclui que a habilidade inteira é nela.
    */
   mostrarAlvo:boolean}
-export interface TraitPresentation {summary:string;trigger:string;frequency:string;effects:string[]}
+export interface TraitPresentation {summary:string;
+  /** A frase inteira de quando ativa: "A cada 2 s", "Ao receber dano · no máximo 1 vez a cada 3 s". */
+  quando:string;
+  /** A mesma frase, começando em minúscula (para "… · ativa …"). */
+  trigger:string;
+  /** O limite de frequência, quando existe (eventos); vazio nos traços de tempo. */
+  frequency:string;effects:string[]}
 /*
  * `sempre` liga quando a habilidade tem alvos misturados.
  *
@@ -335,9 +341,47 @@ export function presentSkill(skill:Skill):SkillPresentation {
     charge:cargasLegiveis(skill.charge),useWhen:use[skill.condition],
     preparation:skill.preparation>0?secs(skill.preparation):'instantâneo',cooldown:secs(skill.cooldown)};
 }
+/*
+ * Quando um traço ativa, dito do jeito que acontece no motor.
+ *
+ * O texto antigo juntava "Ativa por segundo · Resfriamento 2 s" — duas
+ * informações para uma coisa só: um traço de tempo dispara e espera o
+ * resfriamento, então ele simplesmente ativa a cada 2 s. E dizia "a cada 100 de
+ * dano recebido" para traços que, no motor, ativam a cada golpe recebido de
+ * qualquer tamanho (o valor do dano só pesa na energia armazenada). Agora:
+ *
+ * - tempo: "A cada 2 s" — o resfriamento é o próprio intervalo;
+ * - à frente/atrás na Vantagem: "A cada 1 s enquanto seu trio está à frente";
+ * - evento (golpe, Preparo, Status…): "Ao receber dano", e o resfriamento vira
+ *   o limite que de fato importa — "no máximo 1 vez a cada 3 s" —, porque sem
+ *   ele o traço ativaria a cada golpe.
+ */
+const QUANDO_EVENTO:Partial<Record<Topic,string>>={
+  action:'Ao atacar',dealt:'Ao causar dano',received:'Ao receber dano',
+  allyHurt:'Quando um aliado recebe dano',enemyHurt:'Quando um inimigo recebe dano',
+  interrupt:'Ao interromper um Preparo',status:'Quando seu trio aplica um Status',
+  negativeStatus:'Quando seu trio aplica um Status negativo em um inimigo',
+  protected:'Quando o Escudo ou a Proteção dele bloqueia dano',enemyCast:'Quando um inimigo começa um Preparo',
+};
+const PASSO_DO_MOTOR=.1;
+const DANO_PROPORCIONAL=new Set<Topic>(['dealt','received','allyHurt','enemyHurt','protected']);
+export function quandoAtiva(trait:Trait):{quando:string;limite:string}{
+  const intervalo=secs(Math.max(trait.cooldown,PASSO_DO_MOTOR));
+  if(trait.on==='time'||trait.on==='survived')return {quando:`A cada ${intervalo}`,limite:''};
+  if(trait.on==='winning')return {quando:`A cada ${intervalo} enquanto seu trio está à frente na Vantagem`,limite:''};
+  if(trait.on==='losing')return {quando:`A cada ${intervalo} enquanto seu trio está atrás na Vantagem`,limite:''};
+  const limite=trait.cooldown>=.5?`no máximo 1 vez a cada ${secs(trait.cooldown)}`:'';
+  const base=QUANDO_EVENTO[trait.on]??`Ao ${topicNames[trait.on]}`;
+  return {quando:limite?`${base} · ${limite}`:base,limite};
+}
 export function presentTrait(trait:Trait):TraitPresentation {
-  const effects=trait.effects.map(effect=>presentEffect(effect,trait.target));
-  return {summary:effects[0]??'Sem efeito',trigger:topicNames[trait.on],frequency:trait.cooldown>0?`Resfriamento ${secs(trait.cooldown)}`:'Sem resfriamento',effects};
+  const effects=trait.effects.map(effect=>{
+    const texto=presentEffect(effect,trait.target);
+    // só a energia armazenada cresce com o tamanho do golpe
+    return effect.kind==='store'&&DANO_PROPORCIONAL.has(trait.on)?`${texto}, a cada 100 de dano`:texto;
+  });
+  const {quando,limite}=quandoAtiva(trait);
+  return {summary:effects[0]??'Sem efeito',quando,trigger:quando.charAt(0).toLowerCase()+quando.slice(1),frequency:limite,effects};
 }
 /*
  * Agregar fontes iguais de Carga, e pôr o gotejamento por último.
@@ -363,4 +407,4 @@ export function describeCharge(rules:Skill['charge']):string{return cargasLegive
 export function describeEffects(effects:Effect[],target:Target):string[]{return effects.map(effect=>presentEffect(effect,target));}
 export function describeSkill(skill:Skill):string{return `${targetNames[skill.target]}: ${presentSkill(skill).effects.join('; ')}`;}
 export function describeSkillUse(skill:Skill):string{const p=presentSkill(skill);return `Carga: ${p.charge.join('; ')}. Usa quando: ${p.useWhen}. Preparo: ${p.preparation}. Resfriamento: ${p.cooldown}.`;}
-export function describeTrait(trait:Trait):string{const p=presentTrait(trait);return `${p.effects.join('; ')}. Ativa ${p.trigger}. ${p.frequency}.`;}
+export function describeTrait(trait:Trait):string{const p=presentTrait(trait);return `${p.effects.join('; ')}. ${p.quando}.`;}

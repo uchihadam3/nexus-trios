@@ -29,7 +29,7 @@ export function BattleInspector({target,battle,onClose,onSelect}:{target:Inspect
     </>:<>
       <div className="inspector-title"><span className="inspector-avatar" style={{'--character':c.color} as React.CSSProperties}>{c.symbol}</span><div><small>{c.universe}</small><h3>{c.name}</h3></div></div>
       <div className="inspector-meta"><span><HeartPulse size={13}/>{health} de {f.maxHp} Vida</span><span><Clock3 size={13}/>{Math.max(0,100-f.action*100).toFixed(0)}% até o ataque básico</span></div>
-      <p><strong>{c.trait.name}.</strong> {presentTrait(c.trait).effects.join(' · ')}. Ativa {presentTrait(c.trait).trigger}.</p>
+      <p><strong>{c.trait.name}.</strong> {presentTrait(c.trait).effects.join(' · ')}. {presentTrait(c.trait).quando}.</p>
       <div className="inspector-skills">{c.skills.map((s,i)=><button key={s.id} onClick={()=>onSelect({kind:'skill',fighter:f,index:i})}><SkillIcon type={s.icon} characterId={c.id} skillId={s.id} size={19}/><span>{s.name}</span><small>{Math.round(f.skills[i].charge)}%</small></button>)}</div>
       {/*
         * Os Status do lutador com o valor de agora e o tempo que falta. A
