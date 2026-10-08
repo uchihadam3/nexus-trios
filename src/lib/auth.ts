@@ -207,3 +207,36 @@ export function criarAutenticacao(client: SupabaseClient | null): Autenticacao {
     },
   };
 }
+
+/*
+ * A mesma camada de conta, com o Supabase baixado só no primeiro uso.
+ *
+ * Qualquer ação (`conta`, `entrar`, `sair`...) busca o cliente e repassa.
+ * `observar` não busca: só se registra, e passa a ouvir quando o cliente
+ * chegar, por quem quer que o tenha pedido. Assim o jogo pode se inscrever
+ * para saber da conta na abertura sem, por isso, baixar o Supabase.
+ */
+export function criarAutenticacaoPreguicosa(carregar: () => Promise<SupabaseClient | null>): Autenticacao {
+  type Ouvinte = Parameters<Autenticacao['observar']>[0];
+  const ouvintes = new Set<Ouvinte>(), paradas = new Map<Ouvinte, () => void>();
+  let instancia: Autenticacao | null = null, pedido: Promise<Autenticacao> | null = null;
+  const obter = () => pedido ??= carregar().then((client) => {
+    instancia = criarAutenticacao(client);
+    for (const o of ouvintes) if (!paradas.has(o)) paradas.set(o, instancia.observar(o));
+    return instancia;
+  });
+  return {
+    conta: async () => (await obter()).conta(),
+    criarConta: async (email, senha, handle) => (await obter()).criarConta(email, senha, handle),
+    entrar: async (email, senha) => (await obter()).entrar(email, senha),
+    entrarComGoogle: async () => (await obter()).entrarComGoogle(),
+    sair: async () => (await obter()).sair(),
+    enviarRecuperacao: async (email) => (await obter()).enviarRecuperacao(email),
+    definirNovaSenha: async (senha) => (await obter()).definirNovaSenha(senha),
+    observar: (aviso) => {
+      ouvintes.add(aviso);
+      if (instancia && !paradas.has(aviso)) paradas.set(aviso, instancia.observar(aviso));
+      return () => { ouvintes.delete(aviso); paradas.get(aviso)?.(); paradas.delete(aviso); };
+    },
+  };
+}

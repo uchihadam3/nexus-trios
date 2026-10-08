@@ -18,7 +18,14 @@ const [email, senha, nome] = process.argv.slice(2);
 const sb = createClient(env.VITE_SUPABASE_URL, env.VITE_SUPABASE_PUBLISHABLE_KEY, { auth: { persistSession: false } });
 let falhas = 0;
 const confere = (ok: boolean, texto: string) => { console.log(`   ${ok ? '✓' : '✗'} ${texto}`); if (!ok) falhas++; };
-const chamar = async (body: Record<string, unknown>): Promise<Record<string, any>> => {
+/* O que este teste lê das respostas da função; o resto é ignorado. */
+interface Resposta {
+  challenge: { seed: number }; run: { id: string; seed: number }; score: number;
+  top3?: { periodo?: { situacao: string; vagas: number; removido?: number; recorde?: number } };
+  entries: { handle: string }[]; meus?: { entries: unknown[]; vagas: number; precisaSuperar: number | null };
+  runs: unknown[];
+}
+const chamar = async (body: Record<string, unknown>): Promise<Resposta> => {
   const { data: { session } } = await sb.auth.getSession();
   const r = await fetch(`${env.VITE_SUPABASE_URL}/functions/v1/ranked-api`, { method: 'POST',
     headers: { authorization: `Bearer ${session!.access_token}`, apikey: env.VITE_SUPABASE_PUBLISHABLE_KEY, 'content-type': 'application/json' }, body: JSON.stringify(body) });
@@ -66,7 +73,7 @@ confere(rep.top3?.situacao === 'manteve' && rep.top3?.recorde === candidatos[2].
 
 console.log('▶ ranking e histórico');
 const lb = await chamar({ action: 'leaderboard', mode: 'daily' });
-const minhas = lb.entries.filter((e: any) => e.handle === nome);
+const minhas = lb.entries.filter((e) => e.handle === nome);
 confere(minhas.length === 3, `${minhas.length} linhas desta conta no ranking de hoje`);
 confere(lb.meus?.entries.length === 3 && lb.meus?.vagas === 0 && lb.meus?.precisaSuperar === candidatos[1].score, `caixa "Meus 3": vagas ${lb.meus?.vagas}, precisa superar ${lb.meus?.precisaSuperar}`);
 const hist = await chamar({ action: 'historico' });

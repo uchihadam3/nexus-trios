@@ -1,4 +1,4 @@
-import {createClient} from '@supabase/supabase-js';
+import type {SupabaseClient} from '@supabase/supabase-js';
 
 const url=import.meta.env.VITE_SUPABASE_URL as string|undefined,key=import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY as string|undefined;
 export const onlineConfigured=!!url&&!!key&&import.meta.env.VITE_RANKED_ENABLED==='true';
@@ -18,7 +18,28 @@ export const googleConfigured=onlineConfigured&&import.meta.env.VITE_GOOGLE_ENAB
  * desligada — como estava — esse fragmento era ignorado e a volta do Google
  * simplesmente não logava ninguém.
  */
-export const client=onlineConfigured?createClient(url!,key!,{auth:{autoRefreshToken:true,persistSession:true,detectSessionInUrl:true}}):null;
+/*
+ * O Supabase só é baixado quando faz falta.
+ *
+ * Ele é quase metade do JavaScript do jogo, e quem joga o modo casual nunca
+ * abre conta nem ranking. Medido num celular simulado (processador 4× mais
+ * lento, 4G), carregar tudo de cara custava ~1,5 s até o jogo ficar tocável.
+ * Agora ele vem num pedaço separado, buscado na primeira vez que alguém abre
+ * Conta ou Ranking, joga uma ranqueada — ou logo na abertura, se já existe
+ * uma sessão guardada ou o jogador está voltando de um link do Supabase
+ * (Google, recuperação de senha), que precisam ser lidos da URL na hora.
+ */
+let carregando:Promise<SupabaseClient|null>|null=null;
+export const carregarCliente=():Promise<SupabaseClient|null>=>carregando??=onlineConfigured
+  ?import('@supabase/supabase-js').then(({createClient})=>createClient(url!,key!,{auth:{autoRefreshToken:true,persistSession:true,detectSessionInUrl:true}}))
+  :Promise.resolve(null);
+/* A chave em que o supabase-js guarda a sessão: `sb-<projeto>-auth-token`. */
+const chaveDaSessao=url?`sb-${new URL(url).hostname.split('.')[0]}-auth-token`:'';
+export function haSessaoOuRetorno():boolean{
+  if(!onlineConfigured)return false;
+  try{if(localStorage.getItem(chaveDaSessao))return true;}catch{/* Sem armazenamento, sem sessão guardada. */}
+  return /access_token|refresh_token|error_description|[?&]code=/.test(location.hash+location.search);
+}
 
 /*
  * Ranqueado exige conta.
@@ -28,6 +49,7 @@ export const client=onlineConfigured?createClient(url!,key!,{auth:{autoRefreshTo
  * guest. Online/Ranqueado exige conta."* Jogar continua livre; publicar, não.
  */
 async function session(){
+  const client=await carregarCliente();
   if(!client)throw new Error('Ranking online ainda não está conectado.');
   const current=await client.auth.getSession();if(current.error)throw new Error(current.error.message);
   const sessao=current.data.session;

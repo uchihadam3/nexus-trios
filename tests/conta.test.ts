@@ -12,8 +12,11 @@
 import { describe, expect, it, vi } from 'vitest';
 import type { SupabaseClient } from '@supabase/supabase-js';
 
+import { readFileSync, readdirSync, statSync } from 'node:fs';
+import { join } from 'node:path';
+
 import {
-  criarAutenticacao, enderecoDeVolta, validarEmail, validarHandle, validarSenha,
+  criarAutenticacao, criarAutenticacaoPreguicosa, enderecoDeVolta, validarEmail, validarHandle, validarSenha,
 } from '../src/lib/auth';
 
 /** Um Supabase de mentira: registra o que foi chamado e devolve o que mandarem. */
@@ -194,5 +197,67 @@ describe('cadastro', () => {
     const chamada = chamadas.find((c) => c.metodo === 'signUp');
     const corpo = chamada!.args[0] as { options: { data: { handle: string } } };
     expect(corpo.options.data.handle).toBe('Jogador_01');
+  });
+});
+
+/*
+ * O Supabase é quase metade do JavaScript do jogo. Quem só joga casual não
+ * deveria baixá-lo — e quem se inscreveu para saber da conta não pode perder
+ * o aviso por ele ter chegado depois.
+ */
+describe('Supabase sob demanda', () => {
+  it('só busca o cliente quando alguém usa a conta', async () => {
+    const { client } = falso();
+    const carregar = vi.fn(() => Promise.resolve(client));
+    const a = criarAutenticacaoPreguicosa(carregar);
+    const parar = a.observar(() => undefined);
+    expect(carregar).not.toHaveBeenCalled();
+    await a.conta();
+    await a.entrar('a@b.com', 'senhaboa1');
+    expect(carregar).toHaveBeenCalledTimes(1);
+    parar();
+  });
+
+  it('quem se inscreveu antes passa a ouvir quando o cliente chega', async () => {
+    const { client } = falso();
+    const a = criarAutenticacaoPreguicosa(() => Promise.resolve(client));
+    a.observar(() => undefined);
+    expect(client.auth.onAuthStateChange).not.toHaveBeenCalled();
+    await a.conta();
+    expect(client.auth.onAuthStateChange).toHaveBeenCalledTimes(1);
+    /* E quem se inscreve depois também, uma vez só. */
+    a.observar(() => undefined);
+    expect(client.auth.onAuthStateChange).toHaveBeenCalledTimes(2);
+  });
+
+  it('quem desistiu antes do cliente chegar não é inscrito', async () => {
+    const { client } = falso();
+    const a = criarAutenticacaoPreguicosa(() => Promise.resolve(client));
+    const parar = a.observar(() => undefined);
+    parar();
+    await a.conta();
+    expect(client.auth.onAuthStateChange).not.toHaveBeenCalled();
+  });
+
+  it('sem servidor configurado continua respondendo sem quebrar', async () => {
+    const a = criarAutenticacaoPreguicosa(() => Promise.resolve(null));
+    expect(await a.conta()).toBeNull();
+    expect((await a.entrar('a@b.com', 'senhaboa1')).ok).toBe(false);
+  });
+
+  /*
+   * A trava: um `import { ... } from '@supabase/supabase-js'` comum em
+   * qualquer arquivo do jogo puxaria a biblioteca inteira de volta para o
+   * pacote principal. Só `import type` (que some na compilação) e o
+   * `import()` dinâmico de lib/online.ts podem existir.
+   */
+  it('nenhum arquivo do jogo importa o Supabase diretamente', () => {
+    const arquivos = (dir: string): string[] => readdirSync(dir).flatMap((n) => {
+      const c = join(dir, n);
+      return statSync(c).isDirectory() ? arquivos(c) : /\.tsx?$/.test(n) ? [c] : [];
+    });
+    const culpados = arquivos('src').filter((f) =>
+      /^\s*import\s+(?!type\b)[^;]*from\s+['"]@supabase\//m.test(readFileSync(f, 'utf8')));
+    expect(culpados).toEqual([]);
   });
 });

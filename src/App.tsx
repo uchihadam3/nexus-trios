@@ -23,8 +23,8 @@ import { acumularFeitos,fecharFeitos,feitosVazios } from './engine/maestria';
 import { acumularRaioX,raioXVazio } from './engine/raio-x';
 import {battleDelta,emptyProgress,emptyTally,recordProgress,tallyEvents} from './engine/progression';
 import {runDigest} from './engine/ranked';
-import {client,googleConfigured,onlineCall,onlineConfigured} from './lib/online';
-import {criarAutenticacao,type Conta} from './lib/auth';
+import {carregarCliente,googleConfigured,haSessaoOuRetorno,onlineCall,onlineConfigured} from './lib/online';
+import {criarAutenticacaoPreguicosa,type Conta} from './lib/auth';
 import {AccountScreen} from './screens/AccountScreen';
 const DebugScreen=lazy(()=>import('./screens/DebugScreen').then(m=>({default:m.DebugScreen})));
 const VfxLabScreen=lazy(()=>import('./screens/VfxLabScreen').then(m=>({default:m.VfxLabScreen})));
@@ -204,11 +204,12 @@ export default function App(){
    * sessão que expirou — nesse caso o jogador volta a ser convidado e o jogo
    * casual segue igual.
    */
-  const autenticacao=useMemo(()=>criarAutenticacao(client),[]);
+  const autenticacao=useMemo(()=>criarAutenticacaoPreguicosa(carregarCliente),[]);
   const [conta,setConta]=useState<Conta|null>(null);
   useEffect(()=>{
     let vivo=true;
-    void autenticacao.conta().then((c:Conta|null)=>{if(vivo)setConta(c);});
+    /* Sem sessão guardada nem volta de link, não há conta a descobrir: o Supabase fica para quando for usado. */
+    if(haSessaoOuRetorno())void autenticacao.conta().then((c:Conta|null)=>{if(vivo)setConta(c);});
     const parar=autenticacao.observar((c:Conta|null)=>{setConta(c);});
     return ()=>{vivo=false;parar();};
   },[autenticacao]);
