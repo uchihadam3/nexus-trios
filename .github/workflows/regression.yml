@@ -51,3 +51,33 @@ jobs:
           name: battle-regression-mobile
           path: test-results/battle-regression
           if-no-files-found: ignore
+  # FASE L · todas as telas no celular, em 360, 390 e 430 px. Falha se alguma
+  # rolar para o lado, tiver algo vazando da tela ou disparar erro.
+  celular:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: npm ci
+      - run: python -m pip install Pillow==12.3.0
+      - run: npm run assets:expanded
+      - run: npx playwright install --with-deps chromium
+      - run: npm run build
+      - run: |
+          npx vite preview --port 5173 --strictPort &
+          for i in $(seq 1 30); do curl -sf http://localhost:5173/nexus-trios/ > /dev/null && break; sleep 1; done
+          mkdir -p test-results/varredura
+          SAIDA=test-results/varredura node scripts/varredura-celular.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: varredura-celular
+          path: test-results/varredura
+          if-no-files-found: ignore

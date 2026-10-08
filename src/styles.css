@@ -162,3 +162,64 @@
   .grupo-alvo{font-size:10px}
   .efeito-duracao{font-size:11px}
 }
+
+/*
+ * FASE L · alvos de toque no celular.
+ *
+ * A varredura de todas as telas em 360, 390 e 430 px mediu os botões que um
+ * dedo erra: "Adicionar ao trio" com 33 px de altura, "Ver ficha" com 14,
+ * "Ver ranking →" com 12, o menu com 38, "Voltar ao início" com 27. O mínimo
+ * que um dedo acerta sem pegar o vizinho é 44 px. Só em tela estreita ou de
+ * toque: no computador, com mouse, o desenho continua o mesmo.
+ */
+@media (max-width:680px),(pointer:coarse){
+  .menu-toggle{width:44px;height:44px}
+  .site-header .brand{min-height:44px}
+  .back-button,.text-button,.footer-lab{min-height:44px;display:inline-flex;align-items:center}
+  .choose-button{min-height:44px}
+  .progress-tabs button,.help-demo-tabs button{min-height:44px}
+  .segmented button{min-width:44px;min-height:44px}
+  .setting-row input[type=range]{min-height:44px}
+  .roster-filters select{min-height:44px}
+  /*
+   * A busca ganha a linha inteira. Dividindo espaço com os dois filtros, o
+   * campo ficava com 68 px e mostrava "Buscar perso…" — e num jogo de 250
+   * personagens, buscar é o jeito principal de achar alguém. O campo também
+   * passa a ocupar a caixa toda: tocar na borda dela agora acerta o campo.
+   */
+  .roster-filters{flex-wrap:wrap}
+  .roster-filters .search{flex:1 1 100%;min-height:44px;padding-block:0}
+  .roster-filters .search input{align-self:stretch;min-height:42px;font-size:16px}
+  .roster-filters select{flex:1 1 0;min-width:0}
+  /* Regras mais específicas da folha de estilo ganhavam destas; daí o seletor mais longo. */
+  .modal-inner .modal-close{width:44px;height:44px}
+  html .settings-list .segmented button,html .setting-row .segmented button{min-width:44px;flex:0 0 auto}
+  html .showcase-copy .secondary{min-height:44px}
+  /*
+   * "Ver ficha" no cartão do Draft chegava a 6 px de letra em telas estreitas
+   * — ilegível, além de pequeno demais para o dedo. 12 px é o mínimo que se lê.
+   */
+  .candidate-skills .text-button{min-width:44px;min-height:44px;font-size:12px;justify-content:center}
+  .candidate-skills .text-button svg{width:14px}
+  /*
+   * Texto que é informação não fica abaixo de 11 px no celular. A medição
+   * achou as etiquetas de identidade dos personagens — o que a FASE F fez para
+   * ajudar a montar o trio — em 9 px; "Ver ficha →" em 10; o universo no
+   * cartão em 6; o rodapé em 6 e 7. O "DUELO DE TRIOS" do logo fica: é
+   * desenho de marca, não texto para ler.
+   */
+  html .role-chips span{font-size:11px;padding:4px 8px}
+  html .roster-card small,html .roster-card .mini-label{font-size:11px}
+  /*
+   * No cartão da lista, com duas colunas numa tela de 360 px, cada etiqueta
+   * em 11 px ocupava uma linha sozinha e o cartão dobrava de altura — muita
+   * rolagem para 250 personagens. Aqui elas viram texto corrido, "Controle ·
+   * Proteção · Suporte", com a mesma letra legível. Na ficha continuam
+   * etiquetas.
+   */
+  html .roster-card .role-chips{display:block;margin:8px 0;line-height:1.35}
+  html .roster-card .role-chips span{display:inline;border:0;background:none;padding:0;min-height:0;line-height:1.35;font-size:11px;color:#cfe3b8}
+  html .roster-card .role-chips span:not(:last-child)::after{content:' · ';color:#7f9a70}
+  html .site-footer,html .site-footer span,html .site-footer .footer-lab{font-size:11px}
+  html .site-footer .footer-lab{white-space:nowrap;min-width:44px}
+}
