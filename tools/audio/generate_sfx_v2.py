@@ -585,6 +585,60 @@ def toque(rng, v):
     return modal(n, rng.uniform(1700, 2100), rng=rng, **VIDRO) * env(n, 0.0005, 0.03) * 0.4
 
 
+# =================================================================== interface (remake das telas)
+# Curtos, secos e afinados na mesma tonalidade (ré): tocar botões em sequência
+# soa como parte do jogo, não como cliques soltos.
+
+def ui_clique(rng, v):
+    """Toque comum: um "tic" de madeira clara com uma pontinha de vidro afinada."""
+    n = n_de(0.09)
+    x = estalo(rng, n, 2500, 7000, 0.004) * 0.25
+    x += modal(n, nota(rng.choice([86, 88, 90])), rng=rng, **VIDRO) * env(n, 0.0005, 0.025) * 0.35
+    x += seno(varre(nota(62), nota(57), n, 1.0), n) * env(n, 0.0005, 0.018) * 0.3
+    return x
+
+
+def ui_confirma(rng, v):
+    """Botão principal: duas notas subindo (ré → lá) com brilho e um "whoomp" grave por baixo."""
+    n = n_de(0.42)
+    x = np.zeros(n)
+    raiz = 74 + rng.choice([0, 2])
+    poe(x, modal(n_de(0.3), nota(raiz), rng=rng, **SINO) * env(n_de(0.3), 0.001, 0.12) * 0.22, 0)
+    poe(x, modal(n_de(0.36), nota(raiz + 7), rng=rng, **SINO) * env(n_de(0.36), 0.001, 0.16) * 0.24, 0.06)
+    poe(x, modal(n_de(0.3), nota(raiz + 19), rng=rng, **CRISTAL) * env(n_de(0.3), 0.001, 0.1) * 0.08, 0.06)
+    m = n_de(0.22)
+    poe(x, seno(varre(nota(38), nota(45), m, 0.7), m) * sobe_e_some(m, 0.25, 2.0) * 0.35, 0)
+    return reverb(x, 0.35, 0.22, 9000)
+
+
+def ui_abrir(rng, v):
+    """Abre um cartão ou menu: sopro de ar subindo e três grãos de brilho."""
+    n = n_de(0.32)
+    x = assobio(rng, n, 900, 4200, 0.8, 0.5) * sobe_e_some(n, 0.55, 1.6) * 0.32
+    x += graos(rng, n, 3, 0.08, 0.22, 3500, 7000, 0.01, 0.4) * 0.35
+    x += seno(varre(nota(69), nota(81), n, 0.7), n) * env(n, 0.01, 0.1) * 0.08
+    return reverb(x, 0.3, 0.2, 9000)
+
+
+def ui_fechar(rng, v):
+    """Fecha: o mesmo sopro descendo, mais curto, e um toque grave de encaixe."""
+    n = n_de(0.24)
+    x = assobio(rng, n, 3200, 700, 1.2, 0.5) * sobe_e_some(n, 0.3, 1.8) * 0.26
+    x += seno(varre(nota(62), nota(50), n, 1.0), n) * env(n, 0.001, 0.05) * 0.25
+    return x
+
+
+def ui_alternar(rng, v):
+    """Interruptor: dois cliques mecânicos bem próximos (liga) com um bipe curto afinado."""
+    n = n_de(0.14)
+    x = np.zeros(n)
+    poe(x, estalo(rng, n_de(0.03), 1800, 6000, 0.003) * 0.4, 0)
+    poe(x, estalo(rng, n_de(0.03), 2400, 8000, 0.003) * 0.3, 0.035)
+    m = n_de(0.08)
+    poe(x, seno(nota(81 + rng.choice([0, 5])), m) * env(m, 0.001, 0.03) * 0.16, 0.035)
+    return x
+
+
 # =================================================================== registro
 SONS = {
     # físico
@@ -612,6 +666,9 @@ SONS = {
     "grand-carga": (grand_carga, "grande habilidade carregando"), "grand-impacto": (grand_impacto, "grande habilidade"),
     "nocaute": (nocaute, "nocaute"), "vitoria": (vitoria, "vitória"), "derrota": (derrota, "derrota"), "virada": (virada, "virada"),
     "transformacao": (transformacao, "transformação"), "toque": (toque, "toque de interface"),
+    # interface
+    "ui-clique": (ui_clique, "toque num botão"), "ui-confirma": (ui_confirma, "botão principal"),
+    "ui-abrir": (ui_abrir, "abrir cartão ou menu"), "ui-fechar": (ui_fechar, "fechar"), "ui-alternar": (ui_alternar, "interruptor"),
 }
 
 # Volume final de cada som (dB de RMS alvo), pela prioridade da mixagem do adendo:
@@ -626,6 +683,7 @@ ALVO_DB = {
     "psiquico": -23, "sombra": -19, "luz": -23, "portal": -23, "maldicao": -23, "prisao": -19, "selo": -24, "distorcao": -23,
     "cura": -24, "escudo": -23, "bloqueio": -19, "reforco": -24, "enfraquecer": -24, "purificar": -25, "dreno": -23,
     "carga-pequena": -24, "carga-grande": -19, "pronto": -24, "preparo": -25, "toque": -26,
+    "ui-clique": -27, "ui-confirma": -23, "ui-abrir": -27, "ui-fechar": -28, "ui-alternar": -28,
 }
 
 

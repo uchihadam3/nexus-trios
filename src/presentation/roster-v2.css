@@ -9,7 +9,7 @@
 .rv-busca button{border:0;background:#ffffff14;color:#fff;width:28px;height:28px;border-radius:50%;font-size:18px;line-height:1;cursor:pointer}
 .rv-filtro{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin:0 -14px;padding:2px 14px;-webkit-mask:linear-gradient(90deg,transparent,#000 14px,#000 calc(100% - 14px),transparent);mask:linear-gradient(90deg,transparent,#000 14px,#000 calc(100% - 14px),transparent)}
 .rv-filtro::-webkit-scrollbar{display:none}
-.rv-filtro button{flex:none;min-height:34px;padding:0 13px;border:0;border-radius:99px;cursor:pointer;font:inherit;font-size:12.5px;font-weight:800;white-space:nowrap;color:color-mix(in srgb,var(--id-cor,#cfdcc9),#fff 40%);background:color-mix(in srgb,var(--id-cor,#5b6b58),#111915 82%);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--id-cor,#9fb39b),transparent 65%);transition:transform .12s,background .15s}
+.rv-filtro button{flex:none;min-height:44px;padding:0 13px;border:0;border-radius:99px;cursor:pointer;font:inherit;font-size:12.5px;font-weight:800;white-space:nowrap;color:color-mix(in srgb,var(--id-cor,#cfdcc9),#fff 40%);background:color-mix(in srgb,var(--id-cor,#5b6b58),#111915 82%);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--id-cor,#9fb39b),transparent 65%);transition:transform .12s,background .15s}
 .rv-filtro button:active{transform:scale(.95)}
 .rv-filtro button.ativo{color:#0c140f;background:var(--id-cor,#eef5e8);box-shadow:0 0 14px color-mix(in srgb,var(--id-cor,#eef5e8),transparent 55%)}
 .rv-universos button{--id-cor:#9fb39b}

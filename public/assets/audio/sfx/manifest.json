@@ -852,6 +852,91 @@
    ],
    "bytes": 46189
   },
+  "ui-abrir": {
+   "arquivo": "ui-abrir.mp3",
+   "descricao": "abrir cartão ou menu",
+   "versoes": [
+    0.0,
+    0.4,
+    0.8116,
+    1.2007
+   ],
+   "duracoes": [
+    0.32,
+    0.3316,
+    0.3092,
+    0.3249
+   ],
+   "bytes": 16157
+  },
+  "ui-alternar": {
+   "arquivo": "ui-alternar.mp3",
+   "descricao": "interruptor",
+   "versoes": [
+    0.0,
+    0.22,
+    0.4451,
+    0.6603
+   ],
+   "duracoes": [
+    0.14,
+    0.1451,
+    0.1353,
+    0.1421
+   ],
+   "bytes": 7893
+  },
+  "ui-clique": {
+   "arquivo": "ui-clique.mp3",
+   "descricao": "toque num botão",
+   "versoes": [
+    0.0,
+    0.17,
+    0.3432,
+    0.5102
+   ],
+   "duracoes": [
+    0.09,
+    0.0932,
+    0.0869,
+    0.0914
+   ],
+   "bytes": 6067
+  },
+  "ui-confirma": {
+   "arquivo": "ui-confirma.mp3",
+   "descricao": "botão principal",
+   "versoes": [
+    0.0,
+    0.5,
+    1.0152,
+    1.501
+   ],
+   "duracoes": [
+    0.42,
+    0.4352,
+    0.4058,
+    0.4264
+   ],
+   "bytes": 16481
+  },
+  "ui-fechar": {
+   "arquivo": "ui-fechar.mp3",
+   "descricao": "fechar",
+   "versoes": [
+    0.0,
+    0.32,
+    0.6487,
+    0.9606
+   ],
+   "duracoes": [
+    0.24,
+    0.2487,
+    0.2319,
+    0.2437
+   ],
+   "bytes": 10653
+  },
   "veneno": {
    "arquivo": "veneno.mp3",
    "descricao": "veneno",

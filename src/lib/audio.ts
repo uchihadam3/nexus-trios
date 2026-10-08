@@ -164,7 +164,7 @@ class BattleAudio {
   }
   private async preloadCues(){
     // os mais comuns primeiro; o resto em seguida. No impacto, só se lê do cache.
-    const comuns:Sound[]=['soco-leve','soco-pesado','corte','disparo','impacto-energia','preparo','pronto','nocaute','interrupcao','grand-carga','grand-impacto'];
+    const comuns:Sound[]=['ui-clique','ui-confirma','ui-abrir','ui-fechar','soco-leve','soco-pesado','corte','disparo','impacto-energia','preparo','pronto','nocaute','interrupcao','grand-carga','grand-impacto'];
     await Promise.all(comuns.map(s=>this.loadCue(s)));
     await Promise.all(SONS.filter(s=>!comuns.includes(s)).map(s=>this.loadCue(s)));
   }

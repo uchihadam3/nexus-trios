@@ -21,7 +21,6 @@ const TELAS = [
   ['inicio', async () => {}],
   ['personagens', irPeloMenu(/^Personagens/)],
   ['ficha', async (p) => { await irPeloMenu(/^Personagens/)(p); await p.locator('.roster-card').first().click(); }],
-  ['progresso', irPeloMenu(/^Progresso$/)],
   ['ranking', irPeloMenu(/^Ranking$/)],
   ['como-jogar', irPeloMenu(/^Como jogar$/)],
   ['configuracoes', irPeloMenu(/^Configurações$/)],

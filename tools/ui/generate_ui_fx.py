@@ -11,6 +11,9 @@ Folhas:
   recorde    — estouro grande de recorde, com estrela de 8 pontas (uma vez)
   faiscas    — poeira de luz subindo, para fundos de destaque (laço)
   brilho     — faixa de luz atravessando um botão (laço, folha larga)
+  anel       — anel de runas girando com três nós orbitando (laço), o medalhão das telas
+  pulso      — ondas suaves saindo do centro (laço), o que está selecionado ou ligado
+  toque      — estouro curto no ponto do toque (uma vez), todo botão do jogo
 
 Uso: python3 tools/ui/generate_ui_fx.py [nomes...]
      (gera public/assets/ui/fx/*.webp e manifest.json)
@@ -116,12 +119,60 @@ def brilho(T: Tela, t: float, rng):
     return G, G * 0.9
 
 
+def anel(T: Tela, t: float, rng):
+    """Anel de runas: aro duplo tracejado girando em sentidos opostos e três nós em órbita."""
+    g1 = t * 2 * math.pi / 12  # 12 traços: 1/12 de volta por laço emenda perfeito
+    tracos = (np.cos((T.ANG - g1) * 12) > 0.15).astype(np.float32)
+    aro1 = T.ring(0.78, 0.022) * (0.35 + 0.65 * tracos)
+    g2 = -t * 2 * math.pi / 24
+    marcas = np.abs(np.cos((T.ANG - g2) * 12)) ** 30
+    aro2 = T.ring(0.62, 0.012) * 0.5 + T.ring(0.66, 0.05) * marcas * 0.9
+    nos = T.zero()
+    for k in range(3):
+        a = t * 2 * math.pi / 3 + k * 2 * math.pi / 3
+        nos += T.gauss(math.cos(a) * 0.78, math.sin(a) * 0.78, 0.045) * 1.2
+        for j in range(1, 6):  # rastro
+            aa = a - j * 0.07
+            nos += T.gauss(math.cos(aa) * 0.78, math.sin(aa) * 0.78, 0.03) * (0.5 - j * 0.08)
+    halo = T.ring(0.72, 0.16) * 0.18
+    G = aro1 * 0.8 + aro2 + nos + halo
+    H = nos * 0.9 + aro1 * 0.25
+    return G, H
+
+
+def pulso(T: Tela, t: float, rng):
+    """Três ondas suaves saindo do centro, defasadas de 1/3: o laço não tem emenda."""
+    G = T.zero()
+    for k in range(3):
+        tt = (t + k / 3) % 1.0
+        G += T.ring(0.28 + 0.62 * ease_out(tt, 1.6), 0.03 + 0.05 * tt) * (1 - tt) ** 1.3
+    G += T.gauss(0, 0, 0.3) * 0.25
+    return G, G * 0.5
+
+
+def toque(T: Tela, t: float, rng):
+    """Toque: um anel rápido, quatro lascas em cruz e um clarão que some em seguida."""
+    clarao = T.gauss(0, 0, 0.16 + 0.12 * t) * apaga(t, 0.0, 0.45) * 1.3
+    anel_ = T.ring(0.12 + 0.75 * ease_out(t, 3.0), 0.05 * (1 - t) + 0.012) * apaga(t, 0.05, 1.0)
+    lascas = T.zero()
+    for k in range(8):
+        a = k * math.pi / 4 + 0.39
+        d = 0.2 + 0.65 * ease_out(t, 2.4)
+        tam = 0.03 if k % 2 else 0.045
+        lascas += T.gauss(math.cos(a) * d, math.sin(a) * d, tam) * (1 - t) ** 1.2
+    G = clarao + anel_ + lascas
+    return G, clarao * 0.9 + lascas * 0.6
+
+
 FOLHAS = {
     "raios": (raios, GRANDE, True, "raios de vitória girando"),
     "pontos": (pontos, GRANDE, False, "estouro de pontos"),
     "recorde": (recorde, GRANDE, False, "estouro de recorde"),
     "faiscas": (faiscas_laco, GRANDE, True, "poeira de luz subindo"),
     "brilho": (brilho, LARGA, True, "brilho atravessando o botão"),
+    "anel": (anel, GRANDE, True, "anel de runas do medalhão das telas"),
+    "pulso": (pulso, GRANDE, True, "ondas do que está selecionado"),
+    "toque": (toque, Tela(128), False, "estouro do toque nos botões"),
 }
 
 
@@ -138,7 +189,8 @@ def renderiza(nome: str) -> Image.Image:
 
 def main(argv):
     OUT.mkdir(parents=True, exist_ok=True)
-    manifesto = {}
+    arquivo = OUT / "manifest.json"
+    manifesto = json.loads(arquivo.read_text()) if arquivo.exists() else {}
     for nome in argv or FOLHAS:
         _, T, laco, descricao = FOLHAS[nome]
         destino = OUT / f"{nome}.webp"

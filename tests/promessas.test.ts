@@ -203,7 +203,8 @@ describe('a ficha e o combate concordam', () => {
    * do guia; "energia guardada", em trinta.
    */
   it('todo termo da ficha está explicado no Como Jogar', () => {
-    const guia = readFileSync('src/screens/Auxiliary.tsx', 'utf8');
+    /* O Como Jogar mostra as regras próprias dele e o glossário inteiro (aba Regras). */
+    const guia = readFileSync('src/screens/ComoJogar.tsx', 'utf8') + readFileSync('src/presentation/glossario.ts', 'utf8');
     const termos = ['Carga', 'Preparo', 'Resfriamento', 'Escudo', 'Vida', 'Vantagem',
       'Investigação', 'energia guardada', 'Interrupção'];
     const ausentes = termos.filter((t) => !new RegExp(`\\['${t}'|${t}`, 'i').test(guia));

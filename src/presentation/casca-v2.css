@@ -1,0 +1,83 @@
+/*
+ * A casca do jogo (remake): barra de cima, menu em painel de botões, topo das
+ * telas com medalhão e o estouro de luz do toque. Veja src/components/Casca.tsx.
+ */
+.gs-barra{position:sticky;top:0;z-index:40;display:flex;align-items:center;gap:10px;height:62px;padding:0 max(14px,calc((100% - 1300px)/2));box-shadow:0 1px 0 #c8f5601a,0 12px 28px #00000059}
+/* o desfoque fica num pseudo-elemento: backdrop-filter na barra viraria o bloco de referência do menu fixo */
+.gs-barra::before{content:'';position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,#0a100cf2,#0b120ed9);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+.gs-barra::after{content:'';position:absolute;left:0;right:0;bottom:-1px;height:1px;background:linear-gradient(90deg,transparent,#c8f56066 30%,#ffd36b55 70%,transparent);opacity:.8;pointer-events:none}
+.gs-voltar,.gs-menu{flex:none;display:grid;place-items:center;width:44px;height:44px;border-radius:14px;border:0;cursor:pointer;color:#eaf6dc;background:linear-gradient(160deg,#1f2b22,#121a14);box-shadow:inset 0 0 0 1px #c8f56030,inset 0 1px 0 #ffffff14,0 4px 12px #0007;transition:transform .12s,box-shadow .2s}
+.gs-voltar:hover,.gs-menu:hover{box-shadow:inset 0 0 0 1px #c8f56088,0 0 18px #c8f56033}
+.gs-voltar:active,.gs-menu:active{transform:scale(.9)}
+.gs-voltar svg{animation:gs-volta 2.6s ease-in-out infinite}
+@keyframes gs-volta{0%,70%,100%{transform:none}80%{transform:translateX(-3px)}90%{transform:translateX(1px)}}
+.gs-marca{display:flex;align-items:center;gap:8px;min-height:44px;padding:0 4px;border:0;background:none;cursor:pointer;color:#f3f7ec;text-align:left}
+.gs-marca b{font-size:31px;font-weight:900;font-style:italic;line-height:1;color:#c8f560;transform:skew(-9deg);text-shadow:0 0 14px #c8f56088,0 0 2px #c8f560;animation:gs-marca 3.2s ease-in-out infinite}
+@keyframes gs-marca{0%,100%{text-shadow:0 0 10px #c8f56066,0 0 2px #c8f560}50%{text-shadow:0 0 22px #c8f560aa,0 0 3px #e9ffb0}}
+.gs-marca span{display:flex;flex-direction:column;font-size:16px;font-weight:900;letter-spacing:3px;line-height:1}
+.gs-marca small{font-size:7px;letter-spacing:2.4px;color:#9aa69c;font-weight:700;margin-top:4px}
+.gs-recorde{margin-left:auto;display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 12px 0 10px;border-radius:99px;color:#ffe39a;background:linear-gradient(180deg,#3a2e12,#21190a);box-shadow:inset 0 0 0 1px #ffd36b55,0 0 14px #ffd36b22;white-space:nowrap}
+.gs-recorde svg{color:#ffd36b;filter:drop-shadow(0 0 4px #ffd36b)}
+.gs-recorde b{font-size:13.5px;font-weight:900;font-variant-numeric:tabular-nums;letter-spacing:.3px}
+.gs-recorde small{display:none;font-size:11px;color:#c9bf9a;font-weight:700;max-width:120px;overflow:hidden;text-overflow:ellipsis}
+.gs-nav{display:none}
+.gs-veu{position:fixed;inset:62px 0 0;z-index:-1;border:0;background:#030604b8;-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);animation:gs-veu .2s both;cursor:default}
+@keyframes gs-veu{from{opacity:0}}
+.gs-nav.aberto{display:block;position:fixed;top:62px;left:0;right:0;z-index:2;padding:14px 14px 18px;background:linear-gradient(180deg,#0d150fee,#0b120ef7);box-shadow:0 24px 40px #000a,inset 0 -1px 0 #c8f56026;animation:gs-desce .26s cubic-bezier(.2,.9,.3,1.2) both}
+@keyframes gs-desce{from{transform:translateY(-14px);opacity:0}}
+.gs-nav-grade{display:grid;grid-template-columns:1fr 1fr;gap:10px;max-width:520px;margin:0 auto}
+.gs-nav-grade button{position:relative;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:10px;min-height:64px;padding:10px 12px;border:0;border-radius:16px;cursor:pointer;text-align:left;color:#f2f7ec;background:linear-gradient(160deg,color-mix(in srgb,var(--tile),#0f1712 84%),#0e1511);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--tile),transparent 66%),inset 0 1px 0 #ffffff12;animation:gs-tile .32s calc(var(--k)*45ms) cubic-bezier(.2,.9,.3,1.3) both;transition:transform .12s}
+@keyframes gs-tile{from{transform:translateY(10px) scale(.94);opacity:0}}
+.gs-nav-grade button:active{transform:scale(.95)}
+.gs-nav-grade button svg{width:38px;height:38px;padding:8px;border-radius:12px;color:var(--tile);background:color-mix(in srgb,var(--tile),transparent 84%);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--tile),transparent 60%)}
+.gs-nav-grade b{font-size:14px;font-weight:850}
+.gs-nav-grade small{font-size:11px;font-weight:900;color:var(--tile);padding:2px 7px;border-radius:99px;background:color-mix(in srgb,var(--tile),transparent 84%)}
+.gs-nav-grade button.ativo{box-shadow:inset 0 0 0 2px var(--tile),0 0 22px color-mix(in srgb,var(--tile),transparent 62%)}
+.gs-nav-grade button.ativo::after{content:'';position:absolute;top:8px;right:8px;width:7px;height:7px;border-radius:50%;background:var(--tile);box-shadow:0 0 8px var(--tile)}
+@media (min-width:900px){
+  .gs-barra{height:68px;gap:14px}
+  .gs-menu,.gs-veu{display:none}
+  .gs-nav,.gs-nav.aberto{display:block;position:static;padding:0;background:none;box-shadow:none;animation:none;margin-left:12px}
+  .gs-nav-grade{display:flex;gap:6px;max-width:none}
+  .gs-nav-grade button{min-height:44px;grid-template-columns:auto auto auto;gap:7px;padding:0 13px;border-radius:99px;animation:none;background:transparent;box-shadow:none;color:#b9c4b6}
+  .gs-nav-grade button:hover{color:#fff;background:color-mix(in srgb,var(--tile),transparent 88%)}
+  .gs-nav-grade button svg{width:18px;height:18px;padding:0;background:none;box-shadow:none}
+  .gs-nav-grade b{font-size:13px;font-weight:800}
+  .gs-nav-grade button.ativo{color:#fff;background:color-mix(in srgb,var(--tile),transparent 84%);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--tile),transparent 50%)}
+  .gs-nav-grade button.ativo::after{top:auto;bottom:-3px;left:50%;right:auto;transform:translateX(-50%);width:22px;height:3px;border-radius:3px}
+  .gs-recorde small{display:inline}
+}
+@media (max-width:380px){.gs-voltar+.gs-marca span{display:none}.gs-recorde{padding:0 10px 0 8px}}
+.app.in-battle .gs-barra{display:none}
+
+/* topo das telas */
+.gs-topo{display:flex;align-items:center;gap:18px;margin:20px 0 16px 8px}
+.gs-medalhao{position:relative;flex:none;display:grid;place-items:center;width:64px;height:64px;border-radius:50%;color:#fff;background:radial-gradient(circle at 35% 30%,color-mix(in srgb,var(--tela),#fff 30%),var(--tela) 45%,color-mix(in srgb,var(--tela),#000 55%));box-shadow:0 0 0 3px #0c120e,0 0 0 4px color-mix(in srgb,var(--tela),transparent 40%),0 0 26px color-mix(in srgb,var(--tela),transparent 55%);animation:gs-medalhao .5s cubic-bezier(.2,.9,.3,1.4) both}
+.gs-medalhao>svg{position:relative;z-index:1;width:30px;height:30px;color:#0b120d;filter:drop-shadow(0 1px 0 #ffffff66)}
+@keyframes gs-medalhao{from{transform:scale(.4) rotate(-30deg);opacity:0}}
+.gs-anel{inset:-22px;z-index:0}
+.gs-topo>div{min-width:0}
+.gs-rotulo{display:block;font-size:10.5px;font-weight:900;letter-spacing:2.4px;color:var(--tela)}
+.gs-topo h1{margin:2px 0 0;font-size:clamp(24px,7vw,34px);line-height:1.05;font-weight:900;letter-spacing:-.6px;color:#f4f8ee}
+.gs-topo p{margin:5px 0 0;font-size:13px;line-height:1.45;color:#a9b5a6}
+
+/* estouro do toque */
+.gs-toque{position:fixed;z-index:9999;width:96px;height:96px;margin:-48px 0 0 -48px}
+
+/* sem rodapé: o espaço de baixo fica para o polegar */
+.app>.main{padding-bottom:28px}
+
+/* avisos (Nova jornada, Desistir, Nome, Instalar…) */
+.info-dialog.gs-aviso{width:min(440px,calc(100% - 28px));padding:26px 18px 18px;border:0;border-radius:24px;text-align:center;color:#eef5e8;background:radial-gradient(ellipse at 50% 0%,color-mix(in srgb,var(--tela),transparent 80%),transparent 65%),linear-gradient(180deg,#18221b,#0d1410);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--tela),transparent 60%),0 30px 60px #000c;animation:gs-aviso .34s cubic-bezier(.2,.9,.3,1.3) both}
+@keyframes gs-aviso{from{transform:scale(.86) translateY(16px);opacity:0}}
+.info-dialog.gs-aviso::backdrop{background:#030604cc;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.gs-aviso-medalhao{margin:6px auto 14px;width:70px;height:70px}
+.info-dialog.gs-aviso h2{margin:0 0 8px;font-size:23px;font-weight:900;letter-spacing:-.4px;color:#fff;line-height:1.15}
+.info-dialog.gs-aviso p{margin:8px 0;font-size:14px;line-height:1.5;color:#b9c6b5}
+.info-dialog.gs-aviso p b{color:#fff}
+.info-dialog.gs-aviso .modal-close{position:absolute;top:10px;right:10px;width:44px;height:44px;border:0;border-radius:14px;background:#ffffff10}
+.info-dialog.gs-aviso .result-actions{display:grid;gap:8px;margin-top:14px}
+.info-dialog.gs-aviso .result-actions>*,.info-dialog.gs-aviso>.primary{width:100%;min-height:52px;border-radius:15px;font-size:15px;font-weight:900;margin-top:10px}
+.info-dialog.gs-aviso .result-actions>*{margin-top:0}
+.info-dialog.gs-aviso .danger{color:#fff;background:linear-gradient(180deg,#ff8a7a,#d9473a);box-shadow:0 6px 18px #d9473a55}
+.info-dialog.gs-aviso .handle-input{width:100%;min-height:52px;margin:8px 0;padding:12px 14px;border:0;border-radius:14px;font-size:17px;text-align:center;color:#fff;background:#0a0f0c;box-shadow:inset 0 0 0 1.5px color-mix(in srgb,var(--tela),transparent 50%)}

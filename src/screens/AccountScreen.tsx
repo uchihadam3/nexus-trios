@@ -1,5 +1,6 @@
 /*
- * FASE I · a tela de Conta.
+ * FASE I · a tela de Conta (remake visual: medalhão, vantagens em peças,
+ * abas e campos de jogo; a lógica é a mesma).
  *
  * O documento pede criar conta, entrar, Google, sair, recuperar senha e ver a
  * sessão — e acrescenta duas regras que mandam no desenho desta tela:
@@ -11,8 +12,9 @@
  * conta; e por isso ela diz, antes de qualquer coisa, que o progresso é deste
  * aparelho e continua aqui com ou sem conta.
  */
-import { useEffect, useState } from 'react';
-import { KeyRound, LogIn, LogOut, Mail, ShieldCheck, UserPlus } from 'lucide-react';
+import { useEffect, useState, type CSSProperties } from 'react';
+import { BadgeCheck, KeyRound, LogIn, LogOut, Mail, ShieldCheck, Smartphone, Swords, Trophy, UserPlus } from 'lucide-react';
+import { TelaTopo } from '../components/Casca';
 
 import type { Autenticacao, Conta } from '../lib/auth';
 import { validarHandle } from '../lib/auth';
@@ -54,16 +56,15 @@ export function AccountScreen({ autenticacao, conta, profile, conectado, google 
   const problemaNoHandle = modo === 'criar' && handle.length > 0 ? validarHandle(handle) : null;
   const resumo = resumoDoProgresso(profile);
 
-  return <section className="account-screen">
-    <div className="screen-title">
-      <span className="eyebrow"><ShieldCheck size={14} /> CONTA NEXUS</span>
-      <h1>{logado ? 'Sua conta' : 'Entrar é opcional.'}</h1>
-      <p>
-        {logado
-          ? 'Com conta você pode jogar a Jornada Ranqueada e aparecer no ranking.'
-          : 'Jogar funciona sem conta. A conta serve para a Jornada Ranqueada e para colocar seus pontos no ranking.'}
-      </p>
-    </div>
+  return <section className="account-screen conta-v2">
+    <TelaTopo icone={<ShieldCheck />} cor="#86e3a8" rotulo="CONTA NEXUS" titulo={logado ? 'Sua conta' : 'Entre na disputa'}>
+      <p>{logado ? 'Pronto para a Jornada Ranqueada.' : 'Opcional: jogar funciona sem conta.'}</p>
+    </TelaTopo>
+    {!logado && <div className="ct-vantagens">
+      <span style={{ '--tile': '#ffd36b' } as CSSProperties}><Trophy size={20} /><b>Ranking</b><small>seu trio no placar</small></span>
+      <span style={{ '--tile': '#8fd3ff' } as CSSProperties}><Swords size={20} /><b>Ranqueada</b><small>o mesmo desafio para todos</small></span>
+      <span style={{ '--tile': '#c3a2ff' } as CSSProperties}><BadgeCheck size={20} /><b>Nome público</b><small>sem mostrar o e-mail</small></span>
+    </div>}
 
     {/*
       * O aviso sobre o progresso vem antes dos campos, de propósito.
@@ -73,8 +74,7 @@ export function AccountScreen({ autenticacao, conta, profile, conectado, google 
       * conquistou está neste aparelho e vai continuar aqui.
       */}
     <p className="account-progresso">
-      Seu recorde de pontos e suas jornadas ficam <b>neste aparelho</b> e continuam aqui, com conta ou sem.
-      Entrar não apaga nada.
+      <Smartphone size={18} /><span>Seu recorde e suas jornadas ficam <b>neste aparelho</b>, com conta ou sem. Entrar não apaga nada.</span>
     </p>
 
     {!conectado && <p className="account-aviso erro">

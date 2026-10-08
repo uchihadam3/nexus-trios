@@ -29,10 +29,10 @@ function CartaoDoTermo({termo,onClose}:{termo:Termo;onClose:()=>void}){
 }
 
 /** Um termo do glossário, tocável. */
-export function TermoBotao({termo,children}:{termo:Termo;children?:ReactNode}){
+export function TermoBotao({termo,children,className='termo'}:{termo:Termo;children?:ReactNode;className?:string}){
   const [aberto,setAberto]=useState(false);
   return <>
-    <button type="button" className="termo" style={{'--termo-cor':termo.cor} as CSSProperties} onClick={e=>{e.stopPropagation();setAberto(true);}} aria-label={`${termo.nome}: o que é?`}>{children??termo.nome}</button>
+    <button type="button" className={className} style={{'--termo-cor':termo.cor} as CSSProperties} onClick={e=>{e.stopPropagation();setAberto(true);}} aria-label={`${termo.nome}: o que é?`}>{children??termo.nome}</button>
     {aberto&&createPortal(<CartaoDoTermo termo={termo} onClose={()=>setAberto(false)}/>,document.body)}
   </>;
 }

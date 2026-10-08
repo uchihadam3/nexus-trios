@@ -19,7 +19,7 @@ for (const nome of ['Naruto', 'Mulher-Maravilha', 'Ciclope', 'Shazam']) {
     await p.getByRole('button', { name: /^Personagens/ }).first().click();
   });
   await p.waitForTimeout(500);
-  await p.getByPlaceholder('Buscar personagem…').fill(nome); await p.waitForTimeout(400);
+  await p.getByLabel('Buscar personagem').fill(nome); await p.waitForTimeout(400);
   await p.locator('.roster-card').first().click(); await p.waitForTimeout(700);
   const artigos = p.locator('.fv-habilidade');
   const n = await artigos.count();

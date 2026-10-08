@@ -12,5 +12,47 @@
   ],
   "laco": true,
   "bytes": 140736
+ },
+ "anel": {
+  "descricao": "anel de runas do medalhão das telas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   256,
+   256
+  ],
+  "laco": true,
+  "bytes": 159650
+ },
+ "pulso": {
+  "descricao": "ondas do que está selecionado",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   256,
+   256
+  ],
+  "laco": true,
+  "bytes": 181578
+ },
+ "toque": {
+  "descricao": "estouro do toque nos botões",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   128,
+   128
+  ],
+  "laco": false,
+  "bytes": 31032
  }
 }

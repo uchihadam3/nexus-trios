@@ -19,6 +19,7 @@ export const SONS = [
   'cura', 'escudo', 'bloqueio', 'reforco', 'enfraquecer', 'purificar', 'dreno',
   'interrupcao', 'pronto', 'preparo', 'grand-carga', 'grand-impacto', 'nocaute', 'vitoria', 'derrota', 'virada',
   'transformacao', 'toque',
+  'ui-clique', 'ui-confirma', 'ui-abrir', 'ui-fechar', 'ui-alternar',
 ] as const;
 export type Sound = typeof SONS[number];
 

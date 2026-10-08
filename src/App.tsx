@@ -1,12 +1,15 @@
 import {lazy,Suspense,useEffect,useRef,useState,useMemo} from 'react';
-import { ArrowLeft,ArrowUpRight,Layers,Menu,X,ShieldCheck } from 'lucide-react';
+import { ArrowUpRight,Download,Flag,RotateCcw,UserPen,WifiOff,X } from 'lucide-react';
 import { Home } from './screens/Home';
 import { DraftScreen } from './screens/DraftScreen';
 import { BattleScreen } from './screens/BattleScreen';
 import { ResultScreen } from './screens/ResultScreen';
 import { RankingScreen } from './screens/RankingScreen';
-import { CharactersScreen,HelpScreen,SettingsScreen } from './screens/Auxiliary';
+import { CharactersScreen } from './screens/Auxiliary';
+import { HelpScreen } from './screens/ComoJogar';
+import { SettingsScreen } from './screens/Ajustes';
 import { CharacterModal } from './components/CharacterModal';
+import { Cabecalho,ToqueGlobal } from './components/Casca';
 import { byId,characters } from './data/characters';
 import { createBattle } from './engine/battle';
 import { generateCampaign,newDraft,pickDraft,skipDraft } from './engine/campaign';
@@ -30,9 +33,10 @@ const DebugScreen=lazy(()=>import('./screens/DebugScreen').then(m=>({default:m.D
 const VfxLabScreen=lazy(()=>import('./screens/VfxLabScreen').then(m=>({default:m.VfxLabScreen})));
 type Screen='home'|'game'|'characters'|'ranking'|'conta'|'help'|'settings'|'debug'|'vfx';
 interface InstallEvent extends Event {prompt:()=>Promise<void>;userChoice:Promise<{outcome:string}>}
-function InfoDialog({title,children,onClose}:{title:string;children:React.ReactNode;onClose:()=>void}){
+/* Os avisos do jogo (remake): medalhão com o anel de runas na cor do assunto, título grande, botões grandes. */
+function InfoDialog({title,children,onClose,icone,cor='#c8f560'}:{title:string;children:React.ReactNode;onClose:()=>void;icone?:React.ReactNode;cor?:string}){
   const ref=useRef<HTMLDialogElement>(null);useEffect(()=>{const el=ref.current;el?.showModal();return()=>el?.close();},[]);
-  return <dialog className="info-dialog" ref={ref} onCancel={onClose}><button className="icon-button modal-close" onClick={onClose} aria-label="Fechar"><X size={20}/></button><h2>{title}</h2>{children}</dialog>;
+  return <dialog className="info-dialog gs-aviso" ref={ref} onCancel={onClose} style={{'--tela':cor} as React.CSSProperties}><button className="icon-button modal-close" onClick={onClose} aria-label="Fechar"><X size={20}/></button>{icone&&<span className="gs-medalhao gs-aviso-medalhao"><span aria-hidden className="uifx uifx-laco gs-anel" style={{'--uifx-img':'url(/assets/ui/fx/anel.webp)','--uifx-cor':cor,'--uifx-dur':'4800ms'} as React.CSSProperties}/>{icone}</span>}<h2>{title}</h2>{children}</dialog>;
 }
 export default function App(){
   const [screen,setScreen]=useState<Screen>(import.meta.env.DEV&&location.hash==='#debug'?'debug':'home');
@@ -212,15 +216,15 @@ export default function App(){
 
   const reset=()=>{resetStorage();setSettings(defaults);setProfile({journeys:0,victories:0,best:0,wins:0,recordePontos:0});setRun(null);runRef.current=null;navigate('home');};
   return <div onPointerDownCapture={()=>void battleAudio.unlock()} onKeyDownCapture={e=>{if(e.key==='Enter'||e.key===' ')void battleAudio.unlock();}} className={`app ${settings.reducedMotion?'reduce-motion':''} ${screen==='game'&&run?.stage==='battle'?'in-battle':''}`}>
-    <header className="site-header"><button className="brand" onClick={()=>navigate('home')} aria-label="Nexus início"><span className="brand-mark">N</span><span>NEXUS<small>DUELO DE TRIOS</small></span></button><nav aria-label="Navegação principal" className={menu?'open':''}><button className={screen==='home'?'active':''} onClick={()=>navigate('home')}>Início</button><button className={screen==='characters'?'active':''} onClick={()=>navigate('characters')}>Personagens <span>{characters.length}</span></button>{onlineConfigured&&<button className={screen==='ranking'?'active':''} onClick={()=>navigate('ranking')}>Ranking</button>}<button className={screen==='help'?'active':''} onClick={()=>navigate('help')}>Como jogar</button><button className={screen==='settings'?'active':''} onClick={()=>navigate('settings')}>Configurações</button></nav><div className="header-right"><span className="local-badge"><ShieldCheck size={13}/> {profile.publicHandle??'PROGRESSO LOCAL'}</span><button className="icon-button menu-toggle" aria-label="Abrir menu" aria-expanded={menu} onClick={()=>setMenu(!menu)}>{menu?<X size={20}/>:<Menu size={20}/>}</button></div></header>
+    <ToqueGlobal/>
+    <Cabecalho tela={screen} menu={menu} onMenu={setMenu} onNavigate={navigate} recorde={profile.recordePontos??0} apelido={profile.publicHandle} online={onlineConfigured} total={characters.length}/>
     <main key={`${screen}-${screen==='game'?run?.stage??'idle':'page'}`} className={screen==='game'&&run?.stage==='battle'?'main battle-main screen-enter':'main screen-enter'}>
-      {screen!=='home'&&<button className="back-button" onClick={()=>navigate('home')}><ArrowLeft size={15}/>Voltar ao início</button>}
       {screen==='home'&&<Home profile={profile} run={run} conta={conta!==null&&conta.origem!=='convidado'} onPlay={requestNew} onRanked={requestRanked} onContinue={()=>{if(run?.stage==='battle'&&run.battle){direction.current=directionFor(run);setPresentation({battle:direction.current.visible,beat:direction.current.active});}navigate('game');setPaused(run?.stage==='battle');}} onAbandon={()=>setConfirmAbandon(true)} onNavigate={navigate} onInstall={()=>void install()}/>}
       {screen==='characters'&&<CharactersScreen onDetails={setDetails}/>}
-      {screen==='ranking'&&onlineConfigured&&<RankingScreen handle={profile.publicHandle} conta={conta!==null&&conta.origem!=='convidado'} onConta={()=>navigate('conta')}/>}
+      {screen==='ranking'&&<RankingScreen handle={profile.publicHandle} conta={conta!==null&&conta.origem!=='convidado'} onConta={()=>navigate('conta')}/>}
       {screen==='conta'&&<AccountScreen autenticacao={autenticacao} conta={conta} profile={profile} conectado={onlineConfigured} google={googleConfigured} aoMudarPerfil={p=>{save('profile',p);setProfile(p);}}/>}
       {screen==='help'&&<HelpScreen onPlay={requestNew}/>}
-      {screen==='settings'&&<><SettingsScreen settings={settings} onChange={changeSettings} onReset={reset}/>{onlineConfigured&&<section className="ranked-settings"><h2>Nome no ranking</h2><p>{profile.publicHandle??'Ainda não escolhido'} · você pode alterar o nome público a cada 30 dias.</p><button className="secondary" onClick={()=>{setPendingMode(null);setDraftHandle(profile.publicHandle??'');setNameDialog(true);}}>Editar nome público</button></section>}</>}
+      {screen==='settings'&&<SettingsScreen settings={settings} onChange={changeSettings} onReset={reset} onGaleria={()=>navigate('vfx')} ranking={onlineConfigured?{nome:profile.publicHandle,onEditar:()=>{setPendingMode(null);setDraftHandle(profile.publicHandle??'');setNameDialog(true);}}:undefined}/>}
       {screen==='game'&&run?.stage==='draft'&&<DraftScreen draft={run.draft} primeiroRival={run.encounters[0]} onPick={id=>changeRun({...run,draft:pickDraft(run.draft,id)})} onSkip={()=>changeRun({...run,draft:skipDraft(run.draft)})} onDetails={setDetails} onStart={()=>void startBattle(0)} onAbandon={()=>setConfirmAbandon(true)}/>}
       {screen==='game'&&run?.stage==='battle'&&run.battle&&<BattleScreen battle={presentation&&direction.current?.battle===run.battle?presentation.battle:run.battle} beat={presentation&&direction.current?.battle===run.battle?presentation.beat:null} index={run.index} name={run.encounters[run.index].name} settings={settings} paused={paused||!!details}  onPause={()=>setPaused(!paused)} onAbandon={()=>setConfirmAbandon(true)} onSettings={changeSettings} onExit={()=>{setPaused(true);navigate('home');}}/>}
       {screen==='game'&&run?.stage==='result'&&<ResultScreen run={run} onNext={()=>void startBattle(run.index+1)} onRestart={requestNew} onAbandon={()=>setConfirmAbandon(true)} onHome={()=>navigate('home')} onRanking={()=>navigate('ranking')} onRetry={()=>{if(run.ranked)changeRun({...run,ranked:{...run.ranked,status:'validating'}});}} auto={settings.auto} onAuto={auto=>changeSettings({...settings,auto})}/>}
@@ -228,12 +232,11 @@ export default function App(){
       {screen==='vfx'&&<Suspense fallback={<p>Carregando galeria audiovisual…</p>}><VfxLabScreen/></Suspense>}
       {!storageAvailable&&<p role="alert" className="storage-warning">Não foi possível salvar neste navegador. Sua sessão continua, mas pode não ser recuperada ao fechar.</p>}
     </main>
-    <footer className="site-footer"><span><Layers size={13}/> DIFERENTES UNIVERSOS. NOVAS CONEXÕES.</span><button className="footer-lab" onClick={()=>navigate('vfx')}>Galeria de efeitos</button><span>NEXUS <i/> DUELO DE TRIOS</span></footer>
     {details&&<CharacterModal character={byId[details]} onClose={()=>setDetails(null)}/>}
-    {confirmNew&&<InfoDialog title="Começar uma nova jornada?" onClose={()=>setConfirmNew(false)}><p>O progresso desta jornada será descartado. Vitórias e recordes já registrados ficam salvos.</p><div className="result-actions"><button className="danger" onClick={()=>pendingMode?void beginRanked(pendingMode):startNew()}>Descartar e começar outra <ArrowUpRight size={18}/></button><button className="secondary" onClick={()=>setConfirmNew(false)}>Continuar jornada</button></div></InfoDialog>}
-    {nameDialog&&<InfoDialog title="Como você quer aparecer no ranking?" onClose={()=>setNameDialog(false)}><p>Escolha um nome público de 3 a 16 caracteres. Ele aparece com seu trio e sua pontuação.</p><input className="handle-input" aria-label="Nome público" maxLength={16} value={draftHandle} onChange={e=>setDraftHandle(e.target.value)} placeholder="Seu nome no Nexus"/><p>Prévia: <strong>{draftHandle.trim()||'Seu nome'}</strong></p><button className="primary" disabled={onlineBusy} onClick={()=>void saveHandle()}>Confirmar nome</button></InfoDialog>}
-    {onlineNotice&&<InfoDialog title="Conexão do ranking" onClose={()=>setOnlineNotice('')}><p role="alert">{onlineNotice}</p><button className="primary" onClick={()=>setOnlineNotice('')}>Entendi</button></InfoDialog>}
-    {confirmAbandon&&<InfoDialog title="Desistir desta jornada?" onClose={()=>setConfirmAbandon(false)}><p>O progresso desta jornada será descartado e uma nova seleção de trio começará. Vitórias e recordes já registrados ficam salvos.</p><div className="result-actions"><button className="danger" onClick={startNew}>Desistir e começar outra <ArrowUpRight size={18}/></button><button className="secondary" onClick={()=>setConfirmAbandon(false)}>Continuar jornada</button></div></InfoDialog>}
-    {installHelp&&<InfoDialog title={installed?'O NEXUS já está instalado.':'Leve seu trio com você.'} onClose={()=>setInstallHelp(false)}><p>{installed?'Abra o jogo pela tela inicial do seu dispositivo.':'No Chrome ou Edge, use o menu do navegador e escolha “Instalar aplicativo”. No iPhone ou iPad, use Compartilhar → Adicionar à Tela de Início.'}</p><p>Abra o jogo uma vez com conexão para salvar os arquivos. O progresso fica neste navegador. A disponibilidade de instalação depende do navegador.</p><button className="primary" onClick={()=>setInstallHelp(false)}>Entendi</button></InfoDialog>}
+    {confirmNew&&<InfoDialog title="Começar uma nova jornada?" icone={<RotateCcw/>} cor="#ffb86b" onClose={()=>setConfirmNew(false)}><p>A jornada de agora some. <b>Seu recorde fica salvo.</b></p><div className="result-actions"><button className="danger" onClick={()=>pendingMode?void beginRanked(pendingMode):startNew()}>Descartar e começar outra <ArrowUpRight size={18}/></button><button className="secondary" onClick={()=>setConfirmNew(false)}>Continuar jornada</button></div></InfoDialog>}
+    {nameDialog&&<InfoDialog title="Seu nome no ranking" icone={<UserPen/>} cor="#86e3a8" onClose={()=>setNameDialog(false)}><p>De 3 a 16 letras. Aparece junto do seu trio e dos seus pontos.</p><input className="handle-input" aria-label="Nome público" maxLength={16} value={draftHandle} onChange={e=>setDraftHandle(e.target.value)} placeholder="Seu nome no Nexus"/><p>Prévia: <strong>{draftHandle.trim()||'Seu nome'}</strong></p><button className="primary" disabled={onlineBusy} onClick={()=>void saveHandle()}>Confirmar nome</button></InfoDialog>}
+    {onlineNotice&&<InfoDialog title="Conexão do ranking" icone={<WifiOff/>} cor="#ff9a8a" onClose={()=>setOnlineNotice('')}><p role="alert">{onlineNotice}</p><button className="primary" onClick={()=>setOnlineNotice('')}>Entendi</button></InfoDialog>}
+    {confirmAbandon&&<InfoDialog title="Desistir desta jornada?" icone={<Flag/>} cor="#ff7a6b" onClose={()=>setConfirmAbandon(false)}><p>A jornada de agora some e você monta um trio novo. <b>Seu recorde fica salvo.</b></p><div className="result-actions"><button className="danger" onClick={startNew}>Desistir e começar outra <ArrowUpRight size={18}/></button><button className="secondary" onClick={()=>setConfirmAbandon(false)}>Continuar jornada</button></div></InfoDialog>}
+    {installHelp&&<InfoDialog title={installed?'O NEXUS já está instalado':'Leve seu trio no bolso'} icone={<Download/>} cor="#8fd3ff" onClose={()=>setInstallHelp(false)}><p>{installed?'Abra o jogo pelo ícone na tela inicial do aparelho.':<><b>Android:</b> menu do navegador → “Instalar aplicativo”.<br/><b>iPhone:</b> Compartilhar → “Adicionar à Tela de Início”.</>}</p><p>O progresso fica neste aparelho e o jogo abre mesmo sem internet.</p><button className="primary" onClick={()=>setInstallHelp(false)}>Entendi</button></InfoDialog>}
   </div>;
 }
