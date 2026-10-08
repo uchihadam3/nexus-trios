@@ -51,9 +51,6 @@ export function ArenaUnit({fighter:f,battle,beat,onInspect,numbers,threatened,li
   const advantageSide=battle.dominion>3?'player':battle.dominion< -3?'enemy':null;
   const advantageRule=advantageSide===f.side?'winning':advantageSide?'losing':null;
   const advantageActive=!!advantageRule&&c.skills.some(skill=>skill.charge.some(rule=>rule.on===advantageRule));
-  const damage=impacted?beat?.events.filter(e=>e.kind==='damage'&&e.target===f.uid).reduce((total,e)=>total+(e.value??0),0)??0:0;
-  const healing=impacted?beat?.events.filter(e=>e.kind==='heal'&&e.target===f.uid).reduce((total,e)=>total+(e.value??0),0)??0:0;
-  const blockValue=impacted?beat?.events.filter(e=>e.kind==='block'&&e.target===f.uid).reduce((total,e)=>total+(e.value??0),0)??0:0;
   const basicStyle=source&&beat?.event.kind==='basic'?`basic-${beat.family}`:'';
   const buffs=f.statuses.filter(s=>statuses[s.id].tone!=='negativo'),debuffs=f.statuses.filter(s=>statuses[s.id].tone==='negativo');
   const hpPct=Math.max(0,Math.min(100,100*f.hp/f.maxHp)),shieldPct=Math.min(100-hpPct,100*shield/f.maxHp);
@@ -82,12 +79,6 @@ export function ArenaUnit({fighter:f,battle,beat,onInspect,numbers,threatened,li
         {broken&&<span className="unit-break" aria-hidden="true">×</span>}
         {tempo&&<span className={`unit-tempo ${tempo.value!>0?'advanced':'delayed'}`} aria-label={tempo.label}><AuxIcon id={tempo.value!>0?'tempo-up':'tempo-down'} size={18}/></span>}
         {out&&<span className="unit-ko" aria-label="Fora da luta"><Skull size={26}/><b>FORA</b></span>}
-        {impacted&&<span className="combat-feedback" key={beat?.event.id}>
-          {numbers&&damage>0&&<span className="damage-number">−{Math.round(damage)}</span>}
-          {numbers&&healing>0&&<span className="damage-number heal-number"><HeartPulse size={13}/>+{Math.round(healing)}</span>}
-          {numbers&&shielded&&<span className="damage-number shield-number"><Shield size={12}/>+{Math.round(shielded.value??0)}</span>}
-          {numbers&&blockValue>0&&<span className="damage-number shield-number"><Shield size={12}/>{Math.round(blockValue)} bloqueado</span>}
-        </span>}
         {applied&&<span key={applied.id} className="status-pop">{applied.status&&<img src={`/assets/statuses/${applied.status}.png`} alt=""/>}{applied.label}</span>}
         {discovered&&<span key={discovered.id} className="discovery-pop">{discovered.label}</span>}
       </button>

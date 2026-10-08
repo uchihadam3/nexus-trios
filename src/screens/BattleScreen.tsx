@@ -7,6 +7,7 @@ import type { Beat } from '../presentation/director';
 import { PRESENTATION as P } from '../presentation/config';
 import { ArenaUnit } from '../components/ArenaUnit';
 import { BattleEffects,isAreaBeat,type Anchors } from '../components/BattleEffects';
+import { FloatingNumbers } from '../components/FloatingNumbers';
 import { atuacao } from '../presentation/acting';
 import { CombatConnections } from '../components/CombatConnections';
 import { combatLinks } from '../presentation/combat-links';
@@ -74,6 +75,7 @@ export function BattleScreen({battle,beat,index,name,settings,paused,onPause,onA
       <div className="team team-allies">{battle.fighters.filter(f=>f.side==='player').map(unit)}</div>
       <CombatConnections battle={battle} beat={beat} anchors={anchors} reduced={settings.reducedMotion}/>
       <BattleEffects battle={battle} beat={beat} anchors={anchors} enabled={settings.effects} reduced={settings.reducedMotion} medal={box.medal}/>
+      <FloatingNumbers battle={battle} beat={beat} anchors={anchors} medal={box.medal} enabled={settings.numbers}/>
       {paused&&<div className="paused-banner"><Pause size={16}/> BATALHA PAUSADA</div>}
     </div>
     <footer className="arena-controls">

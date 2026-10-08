@@ -292,3 +292,35 @@
  */
 .presentation-paused :is(.battle-inspector,.battle-history,.battle-mixer,.battle-tutorial,.paused-banner,.arena-hud,.arena-controls),
 .presentation-paused :is(.battle-inspector,.battle-history,.battle-mixer,.battle-tutorial,.paused-banner,.arena-hud,.arena-controls) *{animation-play-state:running!important}
+
+/*
+ * Números flutuantes (pedido do jogador): dano vermelho, cura verde, Escudo
+ * azul-claro, com contorno escuro para ler em cima de qualquer retrato e de
+ * qualquer efeito. Ficam uns 1,8 s; vários se empilham sem se cobrir.
+ */
+.arena-v2 .floating-layer{position:absolute;inset:0;z-index:9;pointer-events:none}
+.arena-v2 .floating-numbers{position:absolute;display:flex;flex-direction:column-reverse;align-items:center;gap:1px;transform:translate(-50%,-100%);pointer-events:none}
+.arena-v2 .float-number{display:flex;align-items:center;gap:3px;white-space:nowrap;font-size:clamp(22px,6.4vw,32px);font-weight:950;line-height:1;letter-spacing:-.5px;font-variant-numeric:tabular-nums;
+  -webkit-text-stroke:5px #12060a;paint-order:stroke fill;text-shadow:0 3px 6px #000c;
+  animation:float-number calc(1.8s * var(--motion-scale,1)) cubic-bezier(.2,.7,.3,1) both}
+.arena-v2 .float-number svg{stroke-width:3;filter:drop-shadow(0 1px 1px #000)}
+.arena-v2 .float-dano{color:#ff4f5e}
+.arena-v2 .float-dano.float-strong{font-size:clamp(28px,8.4vw,42px);color:#ff3346}
+.arena-v2 .float-cura{color:#52f08e;-webkit-text-stroke-color:#04210f}
+.arena-v2 .float-cura.float-strong{font-size:clamp(26px,7.6vw,38px)}
+.arena-v2 .float-escudo,.arena-v2 .float-bloqueio{font-size:clamp(15px,4.2vw,21px);color:#8fe6ff;-webkit-text-stroke:4px #041a24}
+@keyframes float-number{
+  0%{opacity:0;transform:translateY(14px) scale(.55)}
+  8%{opacity:1;transform:translateY(0) scale(1.22)}
+  16%{transform:translateY(-2px) scale(1)}
+  78%{opacity:1;transform:translateY(-14px) scale(1)}
+  100%{opacity:0;transform:translateY(-26px) scale(.96)}
+}
+@media(orientation:landscape) and (min-aspect-ratio:13/10){
+  .arena-v2 .float-number{font-size:clamp(20px,3.4vh + 6px,30px)}
+  .arena-v2 .float-dano.float-strong{font-size:clamp(24px,4.6vh + 8px,38px)}
+  .arena-v2 .float-escudo,.arena-v2 .float-bloqueio{font-size:clamp(13px,2.4vh + 4px,19px)}
+}
+.reduce-motion .arena-v2 .float-number{animation-name:float-number-calmo}
+@media(prefers-reduced-motion:reduce){.arena-v2 .float-number{animation-name:float-number-calmo}}
+@keyframes float-number-calmo{0%{opacity:0}6%{opacity:1}85%{opacity:1}100%{opacity:0}}
