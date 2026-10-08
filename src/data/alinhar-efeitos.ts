@@ -63,11 +63,36 @@ const alinhar = (effects: readonly Effect[], alvoDaParte: Target): Effect[] => e
   return saida;
 });
 
+/*
+ * 3 · o mesmo efeito duas vezes vira um só.
+ *
+ * Uma rodada antiga de balanceamento reforçou algumas habilidades somando um
+ * efeito pequeno ao lado do grande, em vez de aumentar o número: a Rosquinha
+ * do Homer mostrava "Guarda 150 de energia" e logo abaixo "Guarda 12 de
+ * energia". Eram 11 casos em 250 personagens (energia, Escudo, cura, ritmo e
+ * um dano). Para esses tipos, somar dá o mesmo resultado na luta — energia e
+ * cura somam, o Escudo tem o mesmo teto, o ritmo é limitado do mesmo jeito —
+ * e a ficha passa a mostrar uma linha só, com o total.
+ */
+const SOMAVEIS = new Set<Effect['kind']>(['damage', 'heal', 'shield', 'store', 'shift']);
+const chave = (e: Effect, alvo: Target) => [e.kind, e.target ?? alvo, e.kind === 'store' ? e.cap : '', 'value' in e ? Math.sign(e.value) : ''].join('|');
+const juntarRepetidos = (effects: readonly Effect[], alvoDaParte: Target): Effect[] => {
+  const saida: Effect[] = [];
+  for (const e of effects) {
+    const igual = SOMAVEIS.has(e.kind) ? saida.findIndex((x) => chave(x, alvoDaParte) === chave(e, alvoDaParte)) : -1;
+    const anterior = saida[igual];
+    if (anterior && 'value' in anterior && 'value' in e) saida[igual] = { ...anterior, value: Math.round((anterior.value + e.value) * 1000) / 1000 } as Effect;
+    else saida.push(e);
+  }
+  return saida;
+};
+const arrumar = (effects: readonly Effect[], alvo: Target) => juntarRepetidos(alinhar(effects, alvo), alvo);
+
 /** Aplica o alinhamento ao traço, ao ataque básico e às três habilidades. */
 export const alinharEfeitos = (c: Character): Character => ({
   ...c,
-  trait: { ...c.trait, effects: alinhar(c.trait.effects, c.trait.target) },
-  basic: { ...c.basic, effects: alinhar(c.basic.effects, c.basic.target) },
+  trait: { ...c.trait, effects: arrumar(c.trait.effects, c.trait.target) },
+  basic: { ...c.basic, effects: arrumar(c.basic.effects, c.basic.target) },
   /* O tipo guarda exatamente três habilidades, então a tupla é remontada como tupla. */
-  skills: c.skills.map((s) => ({ ...s, effects: alinhar(s.effects, s.target) })) as [Skill, Skill, Skill],
+  skills: c.skills.map((s) => ({ ...s, effects: arrumar(s.effects, s.target) })) as [Skill, Skill, Skill],
 });

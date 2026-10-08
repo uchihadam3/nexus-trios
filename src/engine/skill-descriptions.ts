@@ -124,7 +124,7 @@ export function presentStatus(id:StatusId,value:number):StatusPresentation {
     protected:`Recebe ${percent} menos dano${amount>=.3?'; Preparo não pode ser interrompido':''}`,
     haste:`${percent} mais rápido para agir`,confused:'25% de chance do ataque básico atingir a si mesmo',
     regen:`Recupera ${number} de Vida por segundo`,burning:`Perde ${number} de Vida por segundo`,
-    silenced:'Não começa novas habilidades',strengthened:`Causa +${percent} de dano`,weakened:`Causa ${percent} menos dano`,
+    silenced:'Não começa novas habilidades',strengthened:`+${percent} de dano`,weakened:`−${percent} de dano`,
   };
   return {name:statuses[id].name,tone:positiveStatuses.has(id)?'positivo':'negativo',summary:summary[id],
     value:['regen','burning'].includes(id)?number:percent,accumulation:acumulacaoDe(id)};

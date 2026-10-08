@@ -126,3 +126,53 @@ export const lacunasDoTrio = (trio: readonly (Character | string)[]): string[] =
   const tem = new Set(identidadesDoTrio(trio));
   return LACUNAS.filter((l) => !l.cobertaPor.some((x) => tem.has(x))).map((l) => l.texto);
 };
+
+/*
+ * O guia de cada identidade, para quem toca na etiqueta.
+ *
+ * O jogador vê "Especialista" ou "Controle" no Draft e nem sempre sabe o que
+ * aquilo faz. Tocar na etiqueta abre um cartão curto: o que é, o que você vê
+ * acontecer na luta, com o que combina no trio e o que atrapalha.
+ */
+export interface GuiaDaIdentidade {
+  /** O que você vê acontecer na luta, em duas frases curtas. */
+  naLuta: readonly [string, string];
+  /** Identidades que, no mesmo trio, deixam esta mais forte. */
+  combina: readonly Identidade[];
+  /** O que atrapalha quem tem esta identidade. */
+  cuidado: string;
+}
+
+export const guiaDaIdentidade: Record<Identidade, GuiaDaIdentidade> = {
+  'Pressão': { naLuta: ['Ataca o tempo todo, sem esperar Carga encher.', 'O dano dele soma devagar e não para.'], combina: ['Buff', 'Ritmo'], cuidado: 'Tanques e Escudos seguram esse dano constante.' },
+  'Explosão': { naLuta: ['Junta força e solta um golpe enorme de uma vez.', 'Um acerto bem dado tira boa parte da Vida do alvo.'], combina: ['Carga', 'Debuff'], cuidado: 'Se o golpe grande for cortado ou bater num Escudo, perde a vez.' },
+  'Finalização': { naLuta: ['Fica mais perigoso quando o inimigo está ferido.', 'Tira da luta quem já está com pouca Vida.'], combina: ['Pressão', 'Área'], cuidado: 'Cura e Regeneração tiram os inimigos da zona de perigo.' },
+  'Área': { naLuta: ['Um golpe acerta vários inimigos ao mesmo tempo.', 'Machuca o trio rival inteiro de uma vez.'], combina: ['Finalização', 'Dano contínuo'], cuidado: 'Contra um Tanque só, o dano espalhado rende menos.' },
+  'Dano contínuo': { naLuta: ['Deixa o inimigo Queimando ou envenenado.', 'O alvo continua perdendo Vida depois do golpe.'], combina: ['Área', 'Controle'], cuidado: 'Cura e Regeneração compensam esse dano que vem aos poucos.' },
+  'Tanque': { naLuta: ['Tem muita Vida ou se protege muito bem.', 'Fica de pé enquanto os aliados atacam.'], combina: ['Cura', 'Contra-ataque'], cuidado: 'Dano contínuo e Exposto fazem ele cair aos poucos.' },
+  'Sobrevivência': { naLuta: ['Costuma terminar a luta ainda de pé.', 'Escapa de quedas que derrubariam outros.'], combina: ['Virada', 'Pressão'], cuidado: 'Explosões rápidas no começo pegam antes dele se firmar.' },
+  'Proteção': { naLuta: ['Coloca Escudo nos aliados.', 'O trio recebe menos dano enquanto ele estiver na luta.'], combina: ['Preparação', 'Explosão'], cuidado: 'Se ele cair primeiro, o trio fica sem defesa.' },
+  'Cura': { naLuta: ['Devolve Vida a quem está ferido.', 'Mantém os aliados de pé por mais tempo.'], combina: ['Tanque', 'Pressão'], cuidado: 'Explosão e Finalização derrubam antes da cura chegar.' },
+  'Regeneração': { naLuta: ['Recupera a própria Vida aos poucos, sozinho.', 'Quanto mais longa a luta, mais isso rende.'], combina: ['Tanque', 'Contra-ataque'], cuidado: 'Controle e golpes grandes derrubam antes da recuperação somar.' },
+  'Controle': { naLuta: ['Prende, paralisa, silencia ou confunde o inimigo.', 'Quem está controlado perde a vez de agir.'], combina: ['Explosão', 'Dano contínuo'], cuidado: 'O controle dura poucos segundos: sem aliados que causem dano, o inimigo volta inteiro.' },
+  'Interrupção': { naLuta: ['Corta a habilidade inimiga enquanto ela é preparada.', 'O golpe grande do rival não sai.'], combina: ['Pressão', 'Controle'], cuidado: 'Contra quem ataca rápido, sem Preparo, não tem o que cortar.' },
+  'Ritmo': { naLuta: ['Deixa o próprio trio mais rápido ou o rival mais lento.', 'Seu lado age mais vezes no mesmo tempo.'], combina: ['Pressão', 'Área'], cuidado: 'Agir mais vezes rende pouco se o trio não tiver quem cause dano; Controle para tudo.' },
+  'Suporte': { naLuta: ['Ajuda o trio de várias formas ao mesmo tempo.', 'Cura, protege ou reforça conforme a luta pede.'], combina: ['Explosão', 'Pressão'], cuidado: 'Bate pouco: precisa de aliados que causem o dano.' },
+  'Carga': { naLuta: ['Enche a Carga dos aliados.', 'As habilidades do trio saem antes e mais vezes.'], combina: ['Explosão', 'Preparação'], cuidado: 'Se o trio não tiver habilidades fortes, a Carga extra rende pouco.' },
+  'Buff': { naLuta: ['Dá Status bons aos aliados: Fortalecido, Acelerado…', 'Os aliados batem mais forte ou mais rápido.'], combina: ['Pressão', 'Área'], cuidado: 'Se o aliado reforçado cair, o reforço cai junto; Enfraquecido do rival anula parte dele.' },
+  'Debuff': { naLuta: ['Deixa o inimigo Exposto, Enfraquecido ou Lento.', 'O rival bate menos e apanha mais.'], combina: ['Explosão', 'Finalização'], cuidado: 'Os Status duram poucos segundos: o trio precisa bater enquanto eles valem.' },
+  'Virada': { naLuta: ['Fica mais forte quando o trio está perdendo.', 'Costuma vencer lutas que pareciam perdidas.'], combina: ['Tanque', 'Sobrevivência'], cuidado: 'Se cair cedo, não sobra tempo para a virada.' },
+  'Preparação': { naLuta: ['Anuncia o golpe antes: aparece o Preparo.', 'Quando sai, o golpe é muito forte.'], combina: ['Proteção', 'Controle'], cuidado: 'Interrupção corta o golpe no meio do Preparo.' },
+  'Transformação': { naLuta: ['Muda de forma ou fica mais forte no meio da luta.', 'O começo é mais fraco; o final é o melhor momento.'], combina: ['Tanque', 'Proteção'], cuidado: 'Explosão no começo derruba antes da transformação.' },
+  'Contra-ataque': { naLuta: ['Cada golpe que recebe carrega as habilidades dele.', 'Quanto mais apanha, mais rápido revida.'], combina: ['Tanque', 'Regeneração'], cuidado: 'Controle e dano contínuo machucam sem dar Carga a ele.' },
+  'Especialista': { naLuta: ['Espera a situação certa para agir.', 'Quando ela aparece, decide a luta.'], combina: ['Suporte', 'Carga'], cuidado: 'Se a situação não aparecer, ele faz pouco.' },
+};
+
+/** Quantos lutadores têm cada identidade. */
+export const quantosTem = (x: Identidade) => Object.values(identidadesPorPersonagem).filter((ids) => ids.includes(x)).length;
+/** Alguns lutadores com a identidade, para o cartão. */
+export const exemplosDe = (x: Identidade, n = 4) => {
+  // espalhados pela lista, para mostrar universos diferentes
+  const todos = Object.entries(identidadesPorPersonagem).filter(([, ids]) => ids.includes(x)).map(([id]) => id);
+  return todos.length <= n ? todos : Array.from({ length: n }, (_, i) => todos[Math.floor((i * todos.length) / n)]!);
+};

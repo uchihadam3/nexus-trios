@@ -45,7 +45,9 @@ describe('linguagem pública e o catálogo inteiro',()=>{
   it('explica cada Status, com valor e tom, sem esconder efeitos duplicados',()=>{
     for(const [id,def] of Object.entries(statuses)){
       const p=presentStatus(id as keyof typeof statuses,def.cap);
-      expect(p.summary.length,id).toBeGreaterThanOrEqual(18);
+      // Fortalecido e Enfraquecido dizem só o número ("+18% de dano"), sem o verbo "Causa" que parecia um ataque
+      if(id==='strengthened'||id==='weakened')expect(p.summary,id).toMatch(/^[+−]\d+% de dano$/);
+      else expect(p.summary.length,id).toBeGreaterThanOrEqual(18);
       expect(p.tone,id).toBe(positiveStatuses.has(id as keyof typeof statuses)?'positivo':'negativo');
     }
     expect(presentStatus('marked',.15).summary).toContain('alvo preferencial');

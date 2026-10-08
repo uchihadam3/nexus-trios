@@ -78,7 +78,7 @@ const rows:Row[] = [
 {id:'silversurfer',name:'Surfista Prateado',universe:'Marvel',color:'#bdd5df',symbol:'S',idea:'Redireciona energia e atravessa ameaças com velocidade cósmica.',question:'Que dano recebido pode ser convertido em mobilidade e resposta?',vulnerability:'Habilidades cósmicas exigem carga e preparação.',hp:1180,interval:3.1,attack:63,power:92,tags:['cosmic','energy','speedster'],style:'elemental',moves:['Rajada cósmica','Transmutação estelar','Surfe dimensional'],deathNoteCompatible:true},
 {id:'galactus',name:'Galactus',universe:'Marvel',color:'#bd8391',symbol:'G',idea:'Ameaça lenta cuja fome cresce até dominar o campo.',question:'O trio consegue interromper a conversão de energia antes da fome completar?',vulnerability:'Extremamente lento, telegráfico e vulnerável a interrupções.',hp:1800,interval:6.4,attack:94,power:98,tags:['cosmic','giant','charge','finisher'],style:'dominion',moves:['Dreno planetário','Rajada do Poder Cósmico','Devoração cósmica'],deathNoteCompatible:false},
 {id:'starlord',name:'Senhor das Estrelas',universe:'Marvel',color:'#b89974',symbol:'S',idea:'Improvisa suporte, ritmo e fogo concentrado conforme a equipe precisa.',question:'A equipe precisa de pressão, reposicionamento ou reforço neste instante?',vulnerability:'Bom em várias situações, sem um grande pico individual.',hp:1000,interval:3.0,attack:50,power:80,tags:['human','leader','ranged'],style:'support',moves:['Rajada elementar','Plano improvisado','Dança de distração'],deathNoteCompatible:true},
-{id:'groot',name:'Groot',universe:'Marvel',color:'#96aa7c',symbol:'G',idea:'Cresce ao proteger e cria cobertura viva para o trio.',question:'Pode usar a defesa de Groot para dar tempo a um aliado frágil?',vulnerability:'Lento e pouco eficiente sem aliados para proteger.',hp:1480,interval:4.9,attack:54,power:82,tags:['flora','protector','growth'],style:'guardian',moves:['Raízes de captura','Eu sou Groot','Muralha de galhos'],deathNoteCompatible:false},
+{id:'groot',name:'Groot',universe:'Marvel',color:'#96aa7c',symbol:'G',idea:'Cresce ao proteger e cria cobertura viva para o trio.',question:'Pode usar a defesa de Groot para dar tempo a um aliado frágil?',vulnerability:'Lento e pouco eficiente sem aliados para proteger.',hp:1480,interval:4.9,attack:54,power:82,tags:['flora','protector','growth'],style:'guardian',moves:['Muralha de galhos','Eu sou Groot','Raízes de captura'],deathNoteCompatible:false},
 {id:'rocket',name:'Rocket Raccoon',universe:'Marvel',color:'#bd896e',symbol:'R',idea:'Constrói um arsenal improvisado que pune agrupamentos e preparações.',question:'Qual gadget resolve a ameaça sem desperdiçar munição?',vulnerability:'Pequena Vida e preparação vulnerável.',hp:820,interval:3.0,attack:47,power:81,tags:['alien','tech','gadget'],style:'gamble',moves:['Armadilha explosiva','Míssil caseiro','Arsenal pesado'],deathNoteCompatible:true},
 {id:'aquaman',name:'Aquaman',universe:'DC',color:'#78aaa5',symbol:'A',idea:'Controla o ritmo como uma maré e fortalece aliados sob pressão.',question:'Qual aliado precisa de corrente favorável neste momento?',vulnerability:'Suas ferramentas de equipe perdem valor em vantagem clara.',hp:1230,interval:3.9,attack:65,power:84,tags:['atlantean','control','leader'],style:'dominion',moves:['Tridente real','Maré puxante','Comando dos mares'],deathNoteCompatible:true},
 {id:'greenlantern',name:'Lanterna Verde',universe:'DC',color:'#87b98a',symbol:'G',idea:'Converte vontade em defesa ou ferramenta ofensiva conforme a ameaça.',question:'Qual forma da vontade é mais necessária para este confronto?',vulnerability:'Construtos grandes exigem carga e podem ser interrompidos.',hp:1150,interval:3.8,attack:56,power:88,tags:['cosmic','construct','protector'],style:'guardian',moves:['Escudo de vontade','Punho esmeralda','Construto adaptável'],deathNoteCompatible:true},
@@ -246,7 +246,9 @@ const heal=(value:number,target:Target='self'):Effect=>({kind:'heal',value,targe
 const shield=(value:number,target:Target='allyWeak'):Effect=>({kind:'shield',value,target});
 const status=(id:StatusId,value:number,duration:number,target?:Target):Effect=>({kind:'status',status:id,value,duration,target});
 const charge=(on:Topic,amount:number):ChargeRule=>({on,amount});
-type Move={icon:Visual;on:Topic;rate:number;extraCharge?:ChargeRule[];requiresSkills?:number[];effects:Effect[];target?:Target;condition?:Skill['condition'];prep?:number;cool?:number;priority?:number;description:string};
+type Move={icon:Visual;on:Topic;rate:number;extraCharge?:ChargeRule[];requiresSkills?:number[];effects:Effect[];target?:Target;condition?:Skill['condition'];prep?:number;cool?:number;priority?:number;description:string;
+  /** Cura pura: fica fora do piso de dano das famílias de utilidade (uma "Cura" que machuca não faz sentido). */
+  semPiso?:boolean};
 type Kit={trait:string;traitText:string;traitOn:Topic;traitEffects:Effect[];traitTarget:Target;traitCool:number;basic?:Effect[];moves:[Move,Move,Move]};
 type KitAdjustment={trait?:Partial<Pick<Kit,'trait'|'traitText'|'traitOn'|'traitEffects'|'traitTarget'|'traitCool'>>;basic?:Effect[];moves?:Partial<Record<0|1|2,Partial<Move>>>;hook?:false};
 const kits:Record<Style,Kit>={
@@ -427,7 +429,10 @@ const identityAdjustments:Record<string,KitAdjustment>={
  /* E os que pediam regra própria pela fantasia, não por colisão. */
  jin:{moves:{2:{on:'received',rate:14,target:'enemyStrong',effects:[damage(420),status('exposed',.2,7),status('strengthened',.14,8,'self')],prep:1.2,cool:12,description:'O Gene do Diabo responde ao castigo com castigo maior.'}}},
  sekiro:{trait:{trait:'Postura',traitText:'Aparar não defende: desgasta a guarda de quem bateu.',traitOn:'received',traitEffects:[status('weakened',.1,6,'enemyStrong'),status('exposed',.1,6,'enemyStrong')],traitTarget:'enemyStrong',traitCool:1.6},moves:{2:{on:'received',rate:16,target:'enemyStrong',condition:'vulnerable',effects:[damage(520),{kind:'interrupt',mode:'cancel',value:1}],prep:.7,cool:12,description:'Golpe mortal entra no instante em que a guarda cede.'}}},
- sora:{trait:{trait:'Laços',traitText:'Aliado ferido devolve ânimo e recurso ao grupo.',traitOn:'allyHurt',traitEffects:[heal(26,'allyWeak'),{kind:'charge',value:3,target:'allAllies'}],traitTarget:'allyWeak',traitCool:2.4},moves:{2:{on:'allyHurt',rate:14,target:'allAllies',effects:[heal(150,'allAllies'),status('haste',.2,7,'allAllies'),status('strengthened',.14,7,'allAllies')],prep:1.3,cool:12,description:'A forma final levanta o trio inteiro de uma vez.'}}},
+ sora:{trait:{trait:'Laços',traitText:'Aliado ferido devolve ânimo e recurso ao grupo.',traitOn:'allyHurt',traitEffects:[heal(26,'allyWeak'),{kind:'charge',value:3,target:'allAllies'}],traitTarget:'allyWeak',traitCool:2.4},moves:{
+  /* "Cura" causava 211 de dano e não curava ninguém. Agora cura de verdade o aliado mais ferido. */
+  1:{target:'allyWeak',condition:'injured',effects:[heal(230,'allyWeak'),status('regen',12,6,'allyWeak'),status('haste',.18,6,'allyWeak')],description:'A magia de cura levanta o aliado que mais precisa.',semPiso:true},
+  2:{on:'allyHurt',rate:14,target:'allAllies',effects:[heal(150,'allAllies'),status('haste',.2,7,'allAllies'),status('strengthened',.14,7,'allAllies')],prep:1.3,cool:12,description:'A forma final levanta o trio inteiro de uma vez.'}}},
  arthas:{trait:{trait:'Rei Lich',traitText:'Cada inimigo ferido alimenta a praga que ele carrega.',traitOn:'enemyHurt',traitEffects:[heal(20,'self'),status('weakened',.08,7)],traitTarget:'enemyWeak',traitCool:2},moves:{2:{on:'enemyHurt',rate:15,target:'allEnemies',effects:[damage(355,'allEnemies'),status('slow',.2,7,'allEnemies'),heal(140,'self')],prep:2.1,cool:13,description:'A Praga da Carne toma o campo e devolve o que tomou.'}}},
  geralt:{trait:{trait:'Sinais',traitText:'Bloquear carrega o próximo sinal.',traitOn:'protected',traitEffects:[{kind:'charge',value:6},shield(24,'self')],traitTarget:'self',traitCool:1.8},moves:{0:{on:'received',rate:12,target:'self',condition:'threatened',effects:[shield(185,'self'),status('protected',.2,6,'self')],description:'Quen absorve o próximo golpe inteiro.'},1:{on:'action',rate:12,target:'allEnemies',effects:[damage(175,'allEnemies'),status('burning',9,6,'allEnemies')],description:'Igni abre o campo com fogo.'},2:{on:'status',rate:14,target:'enemyStrong',condition:'vulnerable',effects:[status('confused',.4,7),status('silenced',.2,5),damage(200)],prep:1.1,cool:11,description:'Axii vira a cabeça da maior ameaça contra ela mesma.'}}},
  pyramidhead:{trait:{trait:'Presença opressiva',traitText:'Só estar em campo já tira a coragem de quem olha.',traitOn:'time',traitEffects:[status('weakened',.07,6,'allEnemies')],traitTarget:'allEnemies',traitCool:4.5},moves:{2:{on:'survived',rate:3,target:'enemyWeak',effects:[damage(540),status('silenced',.22,5)],prep:3,cool:15,description:'A Grande Faca desce devagar, e não há como negociar.'}}},
@@ -683,13 +688,32 @@ export const combinacoesIntencionais:Record<string,readonly StatusId[]>={};
 /** A chave que o registro usa, e que o auditor e o teste repetem. */
 export const chaveDaCombinacao=(personagem:string,habilidade:string):string=>`${personagem}/${habilidade}`;
 
+/*
+ * Nomes que prometiam outra coisa.
+ *
+ * O "Escudo psíquico" do Professor X não protegia ninguém — atrasa e confunde
+ * quem está preparando um golpe. A "Respiração de fogo" do Iroh não tinha
+ * fogo: protege e acelera ele mesmo. O nome mostrado muda para o que a
+ * habilidade faz; o identificador (e o ícone desenhado para ela) continua o
+ * do nome original.
+ */
+const NOME_MOSTRADO:Record<string,Partial<Record<0|1|2,string>>>={
+  professorx:{1:'Bloqueio mental'},
+  mikasa:{2:'Golpe decisivo'},
+  scorpion:{0:'Venha cá!'},
+  shun:{2:'Corrente interceptadora'},
+  lexluthor:{0:'Canhões da armadura'},
+  toph:{1:'Muralha de terra'},
+  iroh:{0:'Chá de jasmim'},
+};
 function makeSkill(c:Row,index:number,m:Move,hook?:IdentityHook):Skill{
-  const name=c.moves[index];
+  const name=NOME_MOSTRADO[c.id]?.[index as 0|1|2]??c.moves[index];
+  const nomeOriginal=c.moves[index];
   const rules:ChargeRule[]=[charge(m.on,m.rate),...(m.extraCharge??[])];
   const extra=[1.8,2.4,2.5][index];
   if(m.on!=='time')rules.push(charge('time',extra));
   if(index===1&&hook)rules.push(charge(hook.on,hook.amount));
-  const idDaHabilidade=name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+  const idDaHabilidade=nomeOriginal.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
   const intencionais=combinacoesIntencionais[chaveDaCombinacao(c.id,idDaHabilidade)]??[];
   const effects=fundirEfeitos(index===1&&hook?[...m.effects,hook.effect]:m.effects,intencionais,m.target??'enemyWeak');
   const topicName:Record<Topic,string>={time:'tempo',action:'ataque básico',dealt:'dano causado',received:'dano recebido',allyHurt:'aliado ferido',enemyHurt:'inimigo ferido',interrupt:'interrupção',status:'qualquer Status',negativeStatus:'Status negativo',protected:'dano bloqueado',enemyCast:'Preparo inimigo',survived:'enquanto luta',losing:'atrás na Vantagem',winning:'à frente na Vantagem'};
@@ -774,7 +798,7 @@ export const expandedCharacters:Character[]=rows.map(c=>{
   return {id:c.id,name:c.name,universe:c.universe,portrait:approvedPortraitIds.has(c.id)?`/assets/portraits/expanded/${c.id}.webp`:`/assets/portraits/placeholder-${c.id}.svg`,color:c.color,symbol:c.symbol,idea:c.idea,vulnerability:c.vulnerability,hp:c.hp,interval:c.interval,deathNoteCompatible:c.deathNoteCompatible??false,power:c.power,tags:c.tags,basic:{name:'Ataque básico',effects:fundirEfeitos([damage(c.attack),...(hook?[hook.effect]:[]),...(kit.basic??[])],[],'enemyWeak'),visual:'impact',target:'enemyWeak'},trait:{name:kit.trait,description:kit.traitText,on:kit.traitOn,effects:fundirEfeitos(kit.traitEffects,[],kit.traitTarget),target:kit.traitTarget,cooldown:kit.traitCool},skills:[0,1,2].map(i=>{
     const s=makeSkill(c,i as 0|1|2,kit.moves[i as 0|1|2],hook);
     const fator=calibragemDeDano[c.style]??1;
-    const comPiso=pisoDeDano(s.effects,c.style,c.attack,i);
+    const comPiso=kit.moves[i as 0|1|2].semPiso?[...s.effects]:pisoDeDano(s.effects,c.style,c.attack,i);
     return {...s,effects:calibrarSustento(calibrarDano(comPiso,fator),c.style)};
   }) as [Skill,Skill,Skill]};
 });
