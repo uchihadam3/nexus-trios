@@ -13,5 +13,7 @@ import './presentation/ui-fx.css';
 import './presentation/result-v2.css';
 import './presentation/home-v2.css';
 import './presentation/draft-v2.css';
+import './presentation/roster-v2.css';
+import './presentation/ficha-v2.css';
 createRoot(document.getElementById('root')!).render(<App/>);
 if(import.meta.env.PROD&&'serviceWorker' in navigator)window.addEventListener('load',()=>{void navigator.serviceWorker.register(`${import.meta.env.BASE_URL}sw.js`).catch(()=>undefined);});

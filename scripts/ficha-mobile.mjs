@@ -21,7 +21,7 @@ for (const nome of ['Naruto', 'Mulher-Maravilha', 'Ciclope', 'Shazam']) {
   await p.waitForTimeout(500);
   await p.getByPlaceholder('Buscar personagem…').fill(nome); await p.waitForTimeout(400);
   await p.locator('.roster-card').first().click(); await p.waitForTimeout(700);
-  const artigos = p.locator('.detail-skills article');
+  const artigos = p.locator('.fv-habilidade');
   const n = await artigos.count();
   const slug = nome.toLowerCase().replace(/[^a-z]/g, '');
   for (let i = 0; i < n; i++) {
@@ -29,9 +29,9 @@ for (const nome of ['Naruto', 'Mulher-Maravilha', 'Ciclope', 'Shazam']) {
     await artigos.nth(i).screenshot({ path: `${SAIDA}/${prefixo}-${slug}-${i}.png` });
   }
   const m = await p.evaluate(() => ({
-    altura: Math.round([...document.querySelectorAll('.detail-skills article')].reduce((s, a) => s + a.getBoundingClientRect().height, 0)),
+    altura: Math.round([...document.querySelectorAll('.fv-habilidade')].reduce((s, a) => s + a.getBoundingClientRect().height, 0)),
     rolaLateral: document.documentElement.scrollWidth > innerWidth + 1,
-    vazando: [...document.querySelectorAll('.detail-skills *')].filter((e) => e.getBoundingClientRect().right > innerWidth + 1).length,
+    vazando: [...document.querySelectorAll('.fv-habilidades *')].filter((e) => e.getBoundingClientRect().right > innerWidth + 1).length,
   }));
   console.log(`${nome.padEnd(17)} altura das 3 habilidades: ${m.altura}px · rola lateral: ${m.rolaLateral} · vazando: ${m.vazando}`);
   await p.keyboard.press('Escape'); await p.waitForTimeout(300);

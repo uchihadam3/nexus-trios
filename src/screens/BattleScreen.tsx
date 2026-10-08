@@ -4,6 +4,7 @@ import { AuxIcon } from '../components/Icon';
 import type { Battle } from '../engine/types';
 import type { Settings } from '../lib/storage';
 import type { Beat } from '../presentation/director';
+import { duracaoBase } from '../presentation/director';
 import { PRESENTATION as P } from '../presentation/config';
 import { ArenaUnit } from '../components/ArenaUnit';
 import { BattleEffects,isAreaBeat,type Anchors } from '../components/BattleEffects';
@@ -74,7 +75,7 @@ export function BattleScreen({battle,beat,index,name,settings,paused,onPause,onA
   const tutorialSteps=[['Círculo = próximo ataque básico.','Ele enche, o personagem ataca e começa de novo.'],['Três ícones = habilidades.','Cada uma ganha Carga. Com 100%, fica pronta.'],['PREPARANDO = ainda dá tempo de interromper.','O golpe só acontece quando o Preparo termina.'],['Linha de cima = buffs. Linha de baixo = debuffs.','Toque num Status para ver quanto ele vale e quanto tempo resta.'],['Vantagem mostra quem controla a luta.','Ela ajuda algumas habilidades, mas não decide a vitória.']];
   const papeis=atuacao(beat,battle,{anchors,...box},isAreaBeat(beat,battle));
   const unit=(f:Battle['fighters'][number])=><ArenaUnit key={f.uid} fighter={f} battle={battle} beat={beat} onInspect={setInspect} numbers={settings.numbers} threatened={threats.has(f.uid)} linkedSource={actionSources.has(f.uid)} linkedTarget={actionTargets.has(f.uid)} atuacao={papeis[f.uid]}/>;
-  return <section className={`battle-screen arena-v2 lead-${lead} ${turn?'dominion-turn':''} ${paused?'presentation-paused':''}`} data-beat-id={beat?.event.id} data-beat-kind={beat?.event.kind} data-beat-duration={beat?.duration} style={{'--motion-scale':1/settings.speed,'--lead-strength':Math.min(.45,Math.abs(battle.dominion)/160),'--front':`${position}%`} as React.CSSProperties}>
+  return <section className={`battle-screen arena-v2 lead-${lead} ${turn?'dominion-turn':''} ${paused?'presentation-paused':''}`} data-beat-id={beat?.event.id} data-beat-kind={beat?.event.kind} data-beat-duration={beat?duracaoBase(beat):undefined} data-beat-etapas={beat?.etapas?.length} style={{'--motion-scale':1/settings.speed,'--lead-strength':Math.min(.45,Math.abs(battle.dominion)/160),'--front':`${position}%`} as React.CSSProperties}>
     <header className="arena-hud">
       {onExit&&<button className="hud-button hud-exit" onClick={onExit} aria-label="Voltar ao início (a batalha fica pausada)"><ChevronLeft size={22}/></button>}
       <div className="hud-round" title={name}><small>CONFRONTO</small><b>{String(index+1).padStart(2,'0')}<i>/10</i></b></div>

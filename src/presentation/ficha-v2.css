@@ -1,0 +1,47 @@
+/* Ficha do lutador (remake). */
+.ficha-v2 .character-sheet{display:grid;gap:12px;padding:18px 16px 20px;background:radial-gradient(ellipse 90% 260px at 30% 0%,color-mix(in srgb,var(--character),transparent 80%),transparent 100%),linear-gradient(180deg,#121b16,#0d1411)}
+.fv-hero{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:center;padding-right:40px}
+.fv-retrato{width:104px;height:104px;border-radius:26px;overflow:hidden;box-shadow:0 0 0 3px #0c140f,0 0 0 5px color-mix(in srgb,var(--character),transparent 25%),0 0 30px color-mix(in srgb,var(--character),transparent 55%);animation:fv-retrato .5s cubic-bezier(.2,1.5,.4,1) both}
+.fv-retrato .portrait{width:100%;height:100%}
+@keyframes fv-retrato{from{scale:.6;opacity:0;rotate:-8deg}to{scale:1;opacity:1;rotate:0deg}}
+.fv-universo{font-size:10.5px;font-weight:850;letter-spacing:2px;color:color-mix(in srgb,var(--character),#fff 30%)}
+.fv-titulo h2{margin:2px 0 4px;font-size:clamp(24px,7vw,32px);line-height:1;font-weight:900;letter-spacing:-.5px}
+.fv-titulo p{margin:0;font-size:13px;line-height:1.4;color:#b9c9b5}
+.fv-atributos{display:grid;gap:7px}
+.fv-atributo{display:grid;grid-template-columns:auto auto 1fr;grid-template-areas:'icone nome valor' 'barra barra barra';align-items:center;gap:4px 8px}
+.fv-attr-icone{grid-area:icone;display:grid;place-items:center;width:24px;height:24px;border-radius:8px;color:var(--attr);background:color-mix(in srgb,var(--attr),#0d1411 82%)}
+.fv-attr-nome{grid-area:nome;font-size:12.5px;font-weight:800;color:#dfe9db}
+.fv-atributo b{grid-area:valor;justify-self:end;font-size:12.5px;color:#b9c9b5;font-weight:700}
+.fv-atributo i{grid-area:barra;height:8px;border-radius:99px;background:#ffffff12;overflow:hidden}
+.fv-atributo em{display:block;height:100%;width:var(--fill);border-radius:99px;background:linear-gradient(90deg,color-mix(in srgb,var(--attr),#000 25%),var(--attr));box-shadow:0 0 10px color-mix(in srgb,var(--attr),transparent 50%);animation:fv-barra .8s .15s cubic-bezier(.2,1,.3,1) both}
+@keyframes fv-barra{from{width:0}}
+.fv-selo{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:850;letter-spacing:1.8px;color:#9fb39b}
+.fv-traco,.fv-basico,.fv-habilidade,.fv-fraco,.fv-aviso{border-radius:18px;padding:12px 14px}
+.fv-traco{background:linear-gradient(160deg,#ffd36b1f,#ffd36b08);box-shadow:inset 0 0 0 1px #ffd36b55}
+.fv-traco .fv-selo{color:#ffd36b}
+.fv-traco h3{margin:4px 0 6px;font-size:18px}
+.fv-traco small{color:#d9c48a}
+.fv-basico{background:#101915;box-shadow:inset 0 0 0 1px #ffffff12}
+.fv-habilidades{display:grid;gap:10px;min-width:0}
+.fv-habilidade{display:grid;gap:8px;background:#101915;box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--character),transparent 70%)}
+.fv-habilidade>header{display:flex;align-items:center;gap:12px}
+.fv-icone{display:grid;place-items:center;width:60px;height:60px;border-radius:16px;background:#0a100c;box-shadow:inset 0 0 0 1px #ffffff1a,0 0 16px color-mix(in srgb,var(--character),transparent 70%)}
+.fv-habilidade h3{margin:2px 0 0;font-size:18px}
+.fv-regras{display:grid;gap:6px;padding-top:6px;border-top:1px solid #ffffff10}
+.fv-regra{display:grid;grid-template-columns:auto auto 1fr;gap:6px;align-items:start;font-size:12.5px;line-height:1.4;color:#c9d7c4}
+.fv-regra svg{margin-top:2px;color:#b8e282}
+.fv-regra b{color:#b8e282}
+.fv-pilulas{display:flex;flex-wrap:wrap;gap:6px}
+.fv-pilulas>span{display:inline-flex;align-items:center;gap:5px;padding:5px 10px;border-radius:99px;background:#0a100c;box-shadow:inset 0 0 0 1px #ffffff14;font-size:12px;color:#cfdcc9}
+.fv-pilulas>span b{color:#fff}
+.fv-fraco{display:flex;gap:10px;align-items:flex-start;background:#2a12101f;background:linear-gradient(160deg,#ff8a7a1c,#ff8a7a08);box-shadow:inset 0 0 0 1px #ff8a7a55;color:#f3c9c0}
+.fv-fraco svg{flex:none;color:#ff8a7a;margin-top:2px}
+.fv-fraco p{margin:0;font-size:13px;line-height:1.45}
+.fv-fraco strong{color:#ffb3a8}
+.fv-aviso{display:flex;gap:10px;background:#8fd3ff12;box-shadow:inset 0 0 0 1px #8fd3ff44}
+@media (prefers-reduced-motion:reduce){.fv-retrato,.fv-atributo em{animation:none}}
+
+.fv-chips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}
+.fv-chips>span{display:inline-block;padding:6px 10px;border-radius:10px;background:#0a100c;box-shadow:inset 0 0 0 1px #ffffff14;font-size:13px;line-height:1.35;color:#e4f1dc}
+.fv-traco,.fv-basico,.fv-habilidade{min-width:0;overflow-wrap:anywhere}
+.ficha-v2 .character-sheet{overflow-x:hidden}

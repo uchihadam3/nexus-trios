@@ -1,28 +1,44 @@
-import { useState } from 'react';
-import { Search,ArrowUpRight,Users,Zap,Swords,Orbit,RotateCcw,Eye,Shield,HeartPulse,Volume2,SlidersHorizontal,Gamepad2,CircleHelp,ChevronRight } from 'lucide-react';
+import { useEffect,useRef,useState } from 'react';
+import { Search,ArrowUpRight,Users,Zap,Swords,Orbit,RotateCcw,Eye,Shield,HeartPulse,Volume2,SlidersHorizontal,Gamepad2,CircleHelp } from 'lucide-react';
 import { characters,byId } from '../data/characters';
 import { Portrait } from '../components/Portrait';
 import { SkillIcon } from '../components/Icon';
 import { StatusBadge } from '../components/StatusBadge';
 import { statuses } from '../data/statuses';
 import { presentStatus,positiveStatuses } from '../engine/skill-descriptions';
-import { IdentityChips } from '../components/IdentityChips';
+import { corDaIdentidade } from '../components/IdentityChips';
 import { identidadesDe,ordemDasIdentidades,type Identidade } from '../presentation/identities';
 import type { Settings } from '../lib/storage';
 
+/*
+ * Os lutadores (remake): uma coleção de cartas.
+ *
+ * Busca no topo, filtros como fileiras de chips que deslizam (universo e
+ * função), e a grade de cartas: retrato, nome, universo e as etiquetas em
+ * cor. Mais cartas entram sozinhas conforme a rolagem chega ao fim — sem
+ * botão de "ver mais". Tocar numa carta abre a ficha.
+ */
 export function CharactersScreen({onDetails}:{onDetails:(id:string)=>void}){
-  const [query,setQuery]=useState(''),[universe,setUniverse]=useState('Todos'),[role,setRole]=useState<Identidade|'Todas'>('Todas'),[focused,setFocused]=useState(''),[visibleCount,setVisibleCount]=useState(24);
-  const filtered=characters.filter(c=>(universe==='Todos'||c.universe===universe)&&(role==='Todas'||identidadesDe(c).includes(role))&&`${c.name} ${c.universe}`.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').includes(query.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'')));
-  const featured=filtered.find(c=>c.id===focused)??filtered[0];
-  const update=()=>setVisibleCount(24);
-  return <section className="roster-screen"><div className="screen-title"><span className="eyebrow">{characters.length} PERSONAGENS · INFINITAS COMBINAÇÕES</span><h1>Encontre quem muda sua luta.</h1><p>Explore funções e habilidades. Toque em um lutador para ver a ficha.</p></div>
-    <div className="roster-filters"><label className="search"><Search size={18}/><input aria-label="Buscar personagem" placeholder="Buscar personagem…" value={query} onChange={e=>{setQuery(e.target.value);update();}}/></label><select value={universe} onChange={e=>{setUniverse(e.target.value);update();}} aria-label="Filtrar universo">{['Todos',...new Set(characters.map(c=>c.universe))].map(u=><option key={u}>{u}</option>)}</select><select value={role} onChange={e=>{setRole(e.target.value as Identidade|'Todas');update();}} aria-label="Filtrar função">{['Todas',...ordemDasIdentidades].map(u=><option key={u}>{u}</option>)}</select></div>
-    {featured&&<div className="roster-showcase" style={{'--character':featured.color} as React.CSSProperties}><div className="showcase-portrait"><Portrait character={featured}/></div><div className="showcase-copy"><span className="eyebrow">LUTADOR EM DESTAQUE · {featured.universe}</span><h2>{featured.name}</h2><p>{featured.idea}</p><IdentityChips ids={identidadesDe(featured)}/><div className="showcase-skills">{featured.skills.map(s=><span key={s.id} title={s.name}><SkillIcon type={s.icon} characterId={featured.id} skillId={s.id}/><small>{s.name}</small></span>)}</div><button className="secondary" onClick={()=>onDetails(featured.id)}>Abrir ficha <ArrowUpRight size={16}/></button></div></div>}
-    {filtered.length>1&&<div className="roster-picks"><small>TOQUE PARA DESTACAR</small><div>{filtered.slice(0,6).map(c=><button key={c.id} className={featured?.id===c.id?'active':''} onClick={()=>setFocused(c.id)} aria-label={`Destacar ${c.name}`}><Portrait character={c}/><span>{c.name}</span></button>)}</div></div>}
-    <div className="roster-count"><strong>{filtered.length}</strong> lutadores encontrados <span>· toque numa carta para abrir sua ficha</span></div>
-    <div className="roster-grid">{filtered.slice(0,visibleCount).map(c=><button className={`roster-card ${featured?.id===c.id?'spotlighted':''}`} key={c.id} onPointerEnter={()=>setFocused(c.id)} onFocus={()=>setFocused(c.id)} onClick={()=>onDetails(c.id)} style={{'--character':c.color} as React.CSSProperties}><Portrait character={c}/><span className="roster-arrow"><ArrowUpRight size={17}/></span><div><span className="mini-label">{c.universe}</span><h3>{c.name}</h3><p>{c.idea}</p><div className="role-chips">{identidadesDe(c).map(x=><span key={x}>{x}</span>)}</div><div className="roster-skills">{c.skills.map(s=><SkillIcon key={s.id} type={s.icon} size={17} characterId={c.id} skillId={s.id}/>)}</div><small>Ver ficha →</small></div></button>)}</div>
-    {filtered.length>visibleCount&&<button className="secondary roster-more" onClick={()=>setVisibleCount(n=>n+24)}>Ver mais lutadores <ChevronRight size={17}/></button>}
-    {!filtered.length&&<p className="empty-state">Nenhum personagem encontrado. Experimente outro nome, universo ou função.</p>}
+  const [query,setQuery]=useState(''),[universe,setUniverse]=useState('Todos'),[role,setRole]=useState<Identidade|'Todas'>('Todas'),[visibleCount,setVisibleCount]=useState(30);
+  const sem=(t:string)=>t.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+  const filtered=characters.filter(c=>(universe==='Todos'||c.universe===universe)&&(role==='Todas'||identidadesDe(c).includes(role))&&sem(`${c.name} ${c.universe}`).includes(sem(query)));
+  const universos=['Todos',...[...new Set(characters.map(c=>c.universe))].sort((a,b)=>characters.filter(c=>c.universe===b).length-characters.filter(c=>c.universe===a).length)];
+  const fim=useRef<HTMLDivElement>(null);
+  useEffect(()=>{const el=fim.current;if(!el||typeof IntersectionObserver==='undefined')return;const o=new IntersectionObserver(es=>{if(es.some(e=>e.isIntersecting))setVisibleCount(n=>n+30);},{rootMargin:'400px'});o.observe(el);return()=>o.disconnect();},[filtered.length]);
+  const muda=(f:()=>void)=>{f();setVisibleCount(30);};
+  return <section className="roster-v2">
+    <header className="rv-topo"><span className="rv-rotulo">COLEÇÃO</span><h1>{characters.length} lutadores</h1></header>
+    <label className="rv-busca"><Search size={18}/><input aria-label="Buscar personagem" placeholder="Buscar por nome ou universo…" value={query} onChange={e=>muda(()=>setQuery(e.target.value))}/>{query&&<button aria-label="Limpar busca" onClick={()=>muda(()=>setQuery(''))}>×</button>}</label>
+    <div className="rv-filtro" aria-label="Filtrar por função">{(['Todas',...ordemDasIdentidades] as const).map(x=><button key={x} className={role===x?'ativo':''} style={x==='Todas'?undefined:{'--id-cor':corDaIdentidade(x)} as React.CSSProperties} onClick={()=>muda(()=>setRole(x))}>{x}</button>)}</div>
+    <div className="rv-filtro rv-universos" aria-label="Filtrar por universo">{universos.map(u=><button key={u} className={universe===u?'ativo':''} onClick={()=>muda(()=>setUniverse(u))}>{u}</button>)}</div>
+    <p className="rv-conta"><b>{filtered.length}</b> {filtered.length===1?'lutador':'lutadores'}{(role!=='Todas'||universe!=='Todos'||query)&&<button className="text-button" onClick={()=>muda(()=>{setRole('Todas');setUniverse('Todos');setQuery('');})}>limpar filtros</button>}</p>
+    <div className="rv-grade">{filtered.slice(0,visibleCount).map((c,i)=><button className="rv-carta roster-card" key={c.id} onClick={()=>onDetails(c.id)} style={{'--character':c.color,'--i':i%30} as React.CSSProperties}>
+      <Portrait character={c}/>
+      <span className="rv-universo">{c.universe}</span>
+      <span className="rv-nome"><b>{c.name}</b><span className="rv-tags">{identidadesDe(c).map(x=><i key={x} style={{'--id-cor':corDaIdentidade(x)} as React.CSSProperties}>{x}</i>)}</span></span>
+    </button>)}</div>
+    <div ref={fim} aria-hidden/>
+    {!filtered.length&&<p className="empty-state">Nenhum lutador com esse nome, universo ou função.</p>}
   </section>;
 }
 
