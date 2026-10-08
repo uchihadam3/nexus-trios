@@ -1,0 +1,98 @@
+/* Tela de resultado (remake): o placar de pontos no centro, pouca rolagem, botão grande embaixo. */
+.result-v2{--res-cor:#b8f07a;position:relative;display:grid;gap:14px;width:min(720px,100%);margin:0 auto;padding:10px 14px 18px;color:#eef5e8}
+.result-v2::before{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(ellipse at 50% -10%,color-mix(in srgb,var(--res-cor),transparent 78%),transparent 60%),radial-gradient(ellipse at 50% 120%,color-mix(in srgb,var(--res-cor),transparent 88%),transparent 55%)}
+
+.rs-topo{display:grid;grid-template-columns:auto 1fr;grid-template-areas:'medalha titulo' 'trio trio';align-items:center;column-gap:16px;row-gap:12px}
+.rs-medalha{grid-area:medalha;position:relative;width:82px;height:82px;display:grid;place-items:center}
+.rs-icone{position:relative;z-index:2;display:grid;place-items:center;width:76px;height:76px;border-radius:24px;rotate:45deg;background:radial-gradient(circle at 35% 30%,color-mix(in srgb,var(--res-cor),#fff 30%),color-mix(in srgb,var(--res-cor),#0b120d 55%));box-shadow:0 0 0 3px #0c140f,0 0 0 5px color-mix(in srgb,var(--res-cor),transparent 35%),0 0 34px color-mix(in srgb,var(--res-cor),transparent 40%);color:#0d150f;animation:rs-medalha .7s cubic-bezier(.2,1.6,.4,1) both}
+.rs-icone svg{rotate:-45deg}
+@keyframes rs-medalha{from{scale:.3;opacity:0;rotate:-90deg}to{scale:1;opacity:1;rotate:45deg}}
+.rs-raios{inset:-120%;z-index:1;opacity:.85}
+.rs-faiscas{inset:-60%;z-index:0;opacity:.7}
+.rs-titulo{grid-area:titulo;min-width:0}
+.rs-confronto{display:block;font-size:11px;font-weight:850;letter-spacing:2.5px;color:var(--res-cor)}
+.rs-titulo h1{margin:2px 0 0;font-size:clamp(36px,11vw,60px);line-height:.95;letter-spacing:-1.5px;font-weight:900;text-shadow:0 0 24px color-mix(in srgb,var(--res-cor),transparent 55%);animation:rs-titulo .6s .15s cubic-bezier(.2,1.4,.4,1) both}
+@keyframes rs-titulo{from{opacity:0;translate:0 14px;scale:.9}to{opacity:1;translate:0 0;scale:1}}
+.rs-trio{grid-area:trio;display:flex;justify-content:center;gap:12px}
+.rs-trio>span{position:relative;width:60px;height:60px;border-radius:50%;overflow:visible;animation:rs-sobe .45s calc(.3s + var(--i,0)*.08s) ease both}
+.rs-trio>span .portrait{width:60px;height:60px;border-radius:50%;overflow:hidden;box-shadow:0 0 0 2px #0c140f,0 0 0 4px color-mix(in srgb,var(--character),transparent 30%)}
+.rs-trio>span.caiu .portrait{filter:grayscale(1) brightness(.55)}
+.rs-trio>span.mvp .portrait{box-shadow:0 0 0 2px #0c140f,0 0 0 4px #ffd36b,0 0 18px #ffd36b88}
+.rs-mvp{position:absolute;left:50%;bottom:-8px;translate:-50% 0;display:inline-flex;align-items:center;gap:2px;padding:2px 6px;border-radius:99px;background:#ffd36b;color:#1b1406;font-size:9px;font-weight:900;letter-spacing:.5px;white-space:nowrap}
+@keyframes rs-sobe{from{opacity:0;translate:0 10px}to{opacity:1;translate:0 0}}
+
+.rs-placar{position:relative;display:grid;justify-items:center;gap:6px;padding:18px 14px 14px;border-radius:22px;text-align:center;background:linear-gradient(170deg,color-mix(in srgb,var(--res-cor),#121a15 88%),#0f1612);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--res-cor),transparent 62%),0 18px 40px #0007}
+.rs-rotulo{font-size:10.5px;font-weight:850;letter-spacing:2.2px;color:color-mix(in srgb,var(--res-cor),#fff 35%)}
+.rs-desta{font-size:clamp(38px,12vw,62px);line-height:1;font-weight:900;letter-spacing:-1px;font-variant-numeric:tabular-nums;color:var(--res-cor);text-shadow:0 0 22px color-mix(in srgb,var(--res-cor),transparent 50%)}
+.rs-parcelas{list-style:none;margin:4px 0 6px;padding:0;display:flex;flex-wrap:wrap;justify-content:center;gap:6px}
+.rs-parcelas li{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border-radius:99px;background:#ffffff0c;box-shadow:inset 0 0 0 1px #ffffff18;font-size:12.5px;opacity:0}
+.rs-parcelas li svg{color:var(--res-cor)}
+.rs-parcelas li b{font-variant-numeric:tabular-nums;color:#fff}
+.rs-parcelas li.entra{animation:rs-parcela .45s calc(var(--i)*.26s) cubic-bezier(.2,1.5,.4,1) both}
+@keyframes rs-parcela{from{opacity:0;scale:.6;translate:0 8px}to{opacity:1;scale:1;translate:0 0}}
+.rs-sem{margin:0;font-size:14px;color:#f3c9c0}
+.rs-total{position:relative;display:grid;justify-items:center;gap:2px;width:100%;padding:12px 10px;border-radius:16px;background:#0a110d;box-shadow:inset 0 0 0 1px #ffffff14}
+.rs-total strong{font-size:clamp(32px,10vw,50px);line-height:1;font-weight:900;font-variant-numeric:tabular-nums;color:#fff;transition:text-shadow .4s}
+.rs-total.subiu strong{text-shadow:0 0 26px color-mix(in srgb,var(--res-cor),transparent 35%)}
+.rs-total small{font-size:12px;color:#a9bba6}
+.rs-estouro{width:260px;height:260px;left:50%;top:50%;translate:-50% -50%}
+.rs-recorde{position:relative;display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border-radius:99px;background:#ffffff08;box-shadow:inset 0 0 0 1px #ffffff14;font-size:12.5px;color:#c5d4c1}
+.rs-recorde b{color:#fff;font-variant-numeric:tabular-nums}
+.rs-recorde.novo{background:#ffd36b;color:#1b1406;box-shadow:0 0 24px #ffd36b88;animation:rs-recorde .6s cubic-bezier(.2,1.7,.4,1) both}
+.rs-recorde.novo b{color:#1b1406;letter-spacing:1px}
+.rs-recorde.novo span{opacity:.75}
+.rs-estouro-recorde{width:300px;height:300px;left:50%;top:50%;translate:-50% -50%}
+@keyframes rs-recorde{from{scale:.4;opacity:0}to{scale:1;opacity:1}}
+
+.rs-trilha{list-style:none;margin:0;padding:0;display:flex;justify-content:space-between;gap:4px;position:relative}
+.rs-trilha::before{content:'';position:absolute;left:12px;right:12px;top:50%;height:2px;background:#ffffff18}
+.rs-trilha li{position:relative;display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:#101813;box-shadow:inset 0 0 0 1.5px #ffffff26;font-size:11px;font-weight:800;color:#8fa38c}
+.rs-trilha li.ganhou{background:color-mix(in srgb,var(--res-cor),#101813 35%);color:#0c140f;box-shadow:0 0 10px color-mix(in srgb,var(--res-cor),transparent 50%)}
+.rs-trilha li.perdeu{background:#5a2420;color:#ffc9c2;box-shadow:inset 0 0 0 1.5px #ff8a7a}
+.rs-trilha li.agora{scale:1.22;box-shadow:0 0 0 3px #0c140f,0 0 0 5px var(--res-cor),0 0 16px var(--res-cor)}
+.rs-trilha li.proxima{box-shadow:inset 0 0 0 1.5px var(--res-cor);color:var(--res-cor);animation:rs-pisca 1.4s ease-in-out infinite}
+@keyframes rs-pisca{50%{box-shadow:inset 0 0 0 1.5px var(--res-cor),0 0 12px var(--res-cor)}}
+
+.rs-ajudas h2{margin:0 0 8px;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#a9bba6}
+.rs-ajudas>div{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:8px}
+.rs-ajuda{display:grid;grid-template-columns:auto 1fr;grid-template-areas:'dupla numero' 'texto texto';align-items:center;gap:6px 12px;padding:10px 12px;border-radius:16px;background:#111a15;box-shadow:inset 0 0 0 1px #ffffff12;animation:rs-sobe .4s ease both}
+.rs-dupla{grid-area:dupla;display:flex;align-items:center;gap:4px;color:#8fa38c}
+.rs-dupla>span{width:38px;height:38px;border-radius:50%;overflow:hidden;box-shadow:0 0 0 2px color-mix(in srgb,var(--character),transparent 35%)}
+.rs-dupla .portrait{width:38px;height:38px}
+.rs-ajuda-numero{grid-area:numero;display:flex;align-items:baseline;justify-content:flex-end;gap:6px;min-width:0}
+.rs-ajuda-numero b{font-size:22px;font-weight:900;color:#fff;font-variant-numeric:tabular-nums}
+.rs-ajuda-numero small{font-size:11px;color:#a9bba6;white-space:nowrap}
+.rs-ajuda p{grid-area:texto;margin:0;font-size:13px;line-height:1.35;color:#cfdcc9}
+.rs-ajuda p b{color:#fff}
+.rs-ajuda.tipo-carga .rs-ajuda-numero b{color:#b8e282}
+.rs-ajuda.tipo-cura .rs-ajuda-numero b{color:#86e3a8}
+.rs-ajuda.tipo-escudo .rs-ajuda-numero b,.rs-ajuda.tipo-pressao .rs-ajuda-numero b{color:#8fd3ff}
+.rs-ajuda.tipo-controle .rs-ajuda-numero b,.rs-ajuda.tipo-preparo-protegido .rs-ajuda-numero b{color:#c3a2ff}
+.rs-ajuda.tipo-finalizacao .rs-ajuda-numero b,.rs-ajuda.tipo-alvo-preparado .rs-ajuda-numero b{color:#ff9a76}
+
+.rs-ranqueada{display:grid;gap:4px;padding:12px 14px;border-radius:16px;background:#101a16;box-shadow:inset 0 0 0 1px #8fd3ff44;font-size:13px}
+.rs-ranqueada strong{font-size:11px;letter-spacing:2px;color:#8fd3ff}
+
+
+
+.rs-cta{position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;gap:10px;min-height:56px;border:0;border-radius:16px;cursor:pointer;font:inherit;font-size:18px;font-weight:900;letter-spacing:.3px;color:#0c140f;background:linear-gradient(180deg,color-mix(in srgb,var(--res-cor),#fff 25%),var(--res-cor));box-shadow:0 8px 24px color-mix(in srgb,var(--res-cor),transparent 60%),inset 0 -3px 0 #0003;transition:transform .12s}
+.rs-cta:active{transform:scale(.97)}
+.rs-cta>span,.rs-cta>svg{position:relative;z-index:1}
+.rs-brilho{inset:0;opacity:.55;mix-blend-mode:overlay}
+.rs-desistir{color:#f3b3aa}
+.rs-auto{justify-content:center;font-size:12px}
+.result-v2.derrota .rs-icone{color:#2a0f0c}
+@media (min-width:760px){.result-v2{gap:18px;padding-top:22px}.rs-topo{grid-template-columns:auto 1fr auto;grid-template-areas:'medalha titulo trio'}}
+@media (prefers-reduced-motion:reduce){.rs-icone,.rs-titulo h1,.rs-trio>span,.rs-ajuda,.rs-recorde.novo,.rs-trilha li.proxima{animation:none}.rs-parcelas li{opacity:1}}
+
+.rs-proximo{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 12px;border-radius:16px;background:#160f10;box-shadow:inset 0 0 0 1px #ff8a7a33}
+.rs-proximo>span{display:grid;font-size:10px;font-weight:850;letter-spacing:1.8px;color:#ff9a8a}
+.rs-proximo>span b{font-size:15px;letter-spacing:0;color:#fff}
+.rs-proximo>div{display:flex;gap:4px}
+.rs-proximo .portrait{width:36px;height:36px;border-radius:50%;overflow:hidden;box-shadow:0 0 0 1.5px #ff8a7a88}
+.rs-ver-ranking{justify-self:center;display:inline-flex;align-items:center;gap:6px}
+.rs-acoes{position:sticky;bottom:0;z-index:5;display:flex;gap:8px;margin:0 -14px;padding:14px 14px calc(10px + env(safe-area-inset-bottom));background:linear-gradient(180deg,transparent,#0a100cf2 30%)}
+.rs-acoes .rs-cta{flex:1}
+.rs-icone-botao{flex:0 0 56px;min-height:56px;display:grid;place-items:center;padding:0;border-radius:16px}
+/* rodapé do site no celular: sem textos um em cima do outro */
+@media (max-width:640px){.site-footer{flex-wrap:wrap;justify-content:center;gap:10px 16px;text-align:center}.site-footer>span:first-child{flex-basis:100%}}

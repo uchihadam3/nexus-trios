@@ -172,21 +172,36 @@ export function acumularRaioX(estado: EstadoRaioX, eventos: readonly BattleEvent
 
 export type Classificacao = 'ÓTIMA CONEXÃO' | 'BOA CONEXÃO' | 'POUCA CONEXÃO' | 'INDEPENDENTES' | 'CONFLITO';
 
-export interface Direcao { de: string; para: string; elos: Elo[]; frase: string | null }
+export interface Direcao { de: string; para: string; elos: Elo[]; frase: string | null; destaque: Destaque | null; tipo: TipoDeElo | null }
 export interface Par { a: string; b: string; classificacao: Classificacao; aParaB: Direcao; bParaA: Direcao; total: number }
 
-/** Como cada tipo de elo se conta para o jogador, no singular e no plural. */
-const FRASES: Record<TipoDeElo, (vezes: number, valor: number, outro: string) => string> = {
-  'carga': (n, v, o) => `encheu a Carga de ${o} ${n} ${n === 1 ? 'vez' : 'vezes'} (${Math.round(v)}% no total)`,
-  'cura': (_n, v, o) => `devolveu ${Math.round(v)} de Vida a ${o}`,
-  'escudo': (_n, v, o) => `deu ${Math.round(v)} de Escudo a ${o}`,
-  'aceleracao': (n, _v, o) => `acelerou ${o} ${n} ${n === 1 ? 'vez' : 'vezes'}`,
-  'reforco': (n, _v, o) => `reforçou ${o} ${n} ${n === 1 ? 'vez' : 'vezes'}`,
-  'preparo-protegido': (n, _v, o) => `protegeu ${n} ${n === 1 ? 'Preparo' : 'Preparos'} de ${o}`,
-  'alvo-preparado': (n, _v, o) => `abriu o alvo e ${o} bateu ${n} ${n === 1 ? 'vez' : 'vezes'}`,
-  'finalizacao': (n, _v, o) => `abriu o alvo e ${o} derrubou ${n} ${n === 1 ? 'inimigo' : 'inimigos'}`,
-  'controle': (n, _v, o) => `travou ${n} ${n === 1 ? 'Preparo inimigo' : 'Preparos inimigos'} e deu tempo a ${o}`,
-  'conflito': (n, _v, o) => `atrapalhou ${o} ${n} ${n === 1 ? 'vez' : 'vezes'}`,
+/*
+ * Como cada ajuda se conta para o jogador.
+ *
+ * A primeira versão contava eventos: "encheu a Carga de Coragem 233 vezes
+ * (148% no total)". Os 233 eram pedacinhos de Carga de um traço que dispara a
+ * cada poucos décimos de segundo — um número que não diz nada a quem joga. O
+ * que importa é o efeito: 148% de Carga são uma habilidade e meia a mais.
+ * Cada ajuda tem agora um número em destaque e uma frase curta.
+ */
+export interface Destaque { numero: string; rotulo: string }
+const n0 = (x: number) => Math.round(x).toLocaleString('pt-BR');
+const habilidades = (pct: number) => {
+  const h = pct / 100;
+  const arred = Math.round(h * 2) / 2;
+  return `${arred.toLocaleString('pt-BR')} ${arred === 1 ? 'habilidade' : 'habilidades'} a mais`;
+};
+const FRASES: Record<TipoDeElo, (n: number, v: number, o: string) => { frase: string; destaque: Destaque }> = {
+  'carga': (_n, v, o) => ({ frase: v < 95 ? `encheu ${Math.round(v)}% de uma habilidade de ${o}` : `fez ${o} usar ${habilidades(v)}`, destaque: { numero: `+${n0(v)}%`, rotulo: 'de Carga' } }),
+  'cura': (_n, v, o) => ({ frase: `curou ${o}`, destaque: { numero: `+${n0(v)}`, rotulo: 'de Vida' } }),
+  'escudo': (_n, v, o) => ({ frase: `protegeu ${o} com Escudo`, destaque: { numero: n0(v), rotulo: 'de Escudo' } }),
+  'aceleracao': (n, _v, o) => ({ frase: `deixou ${o} mais rápido`, destaque: { numero: `${n}×`, rotulo: 'Acelerado' } }),
+  'reforco': (n, _v, o) => ({ frase: `deixou ${o} mais forte`, destaque: { numero: `${n}×`, rotulo: 'reforçado' } }),
+  'preparo-protegido': (n, _v, o) => ({ frase: `segurou o rival enquanto ${o} preparava`, destaque: { numero: `${n}`, rotulo: n === 1 ? 'Preparo salvo' : 'Preparos salvos' } }),
+  'alvo-preparado': (n, _v, o) => ({ frase: `deixou o alvo vulnerável para ${o}`, destaque: { numero: `${n}`, rotulo: n === 1 ? 'golpe a mais forte' : 'golpes mais fortes' } }),
+  'finalizacao': (n, _v, o) => ({ frase: `deixou o alvo vulnerável e ${o} derrubou`, destaque: { numero: `${n}`, rotulo: n === 1 ? 'rival derrubado' : 'rivais derrubados' } }),
+  'controle': (n, _v, o) => ({ frase: `travou golpes rivais e deu tempo a ${o}`, destaque: { numero: `${n}`, rotulo: n === 1 ? 'golpe travado' : 'golpes travados' } }),
+  'conflito': (n, _v, o) => ({ frase: `atrapalhou ${o}`, destaque: { numero: `${n}×`, rotulo: 'atrapalhou' } }),
 };
 
 /* Quanto cada elo pesa na classificação: ajudar a derrubar vale mais que um empurrão. */
@@ -219,10 +234,8 @@ const direcao = (elos: Elo[], de: string, para: string, battle: Battle): Direcao
   const meus = elos.filter((e) => e.de === de && e.para === para && e.tipo !== 'conflito')
     .sort((a, b) => b.vezes * PESO[b.tipo] - a.vezes * PESO[a.tipo]);
   const principal = meus[0];
-  return {
-    de, para, elos: meus,
-    frase: principal ? FRASES[principal.tipo](principal.vezes, principal.valor, nomeDe(para, battle)) : null,
-  };
+  const lido = principal ? FRASES[principal.tipo](principal.vezes, principal.valor, nomeDe(para, battle)) : null;
+  return { de, para, elos: meus, frase: lido?.frase ?? null, destaque: lido?.destaque ?? null, tipo: principal?.tipo ?? null };
 };
 
 /**

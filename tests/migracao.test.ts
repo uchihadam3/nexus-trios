@@ -13,7 +13,6 @@ import {
   marcarReivindicado, resumoDoProgresso,
 } from '../src/lib/migracao';
 import { loadProfile, type Profile } from '../src/lib/storage';
-import { emptyProgress } from '../src/engine/progression';
 
 /* O ambiente de teste não tem navegador; um localStorage de mentira basta. */
 const memoria = new Map<string, string>();
@@ -29,11 +28,8 @@ beforeEach(() => {
   } as Storage;
 });
 
-const novato = (): Profile => ({ journeys: 0, victories: 0, best: 0, wins: 0, progress: emptyProgress() });
-const veterano = (): Profile => ({
-  journeys: 12, victories: 4, best: 880, wins: 31,
-  progress: { ...emptyProgress(), unlocked: ['primeiro-sangue', 'trio-intacto'], mastery: { goku: { grau: 2, feitos: {} } } },
-} as Profile);
+const novato = (): Profile => ({ journeys: 0, victories: 0, best: 0, wins: 0, recordePontos: 0 });
+const veterano = (): Profile => ({ journeys: 12, victories: 4, best: 8, wins: 31, recordePontos: 7_042_000 });
 
 const conta = (over: Partial<Conta> = {}): Conta =>
   ({ id: 'u1', email: 'a@b.com', handle: 'Jogador_01', origem: 'email', ...over });
@@ -46,7 +42,7 @@ describe('quando vale a pena perguntar', () => {
 
   it('pergunta a quem tem horas em jogo', () => {
     const r = resumoDoProgresso(veterano());
-    expect(r).toMatchObject({ jornadas: 12, conquistas: 2, personagens: 1, vale: true });
+    expect(r).toMatchObject({ jornadas: 12, recorde: 7_042_000, vale: true });
     expect(deveOferecer(conta(), veterano())).toBe(true);
   });
 
@@ -78,7 +74,7 @@ describe('as duas respostas preservam tudo', () => {
     expect(depois.victories).toBe(antes.victories);
     expect(depois.best).toBe(antes.best);
     expect(depois.wins).toBe(antes.wins);
-    expect(depois.progress).toEqual(antes.progress);
+    expect(depois.recordePontos).toBe(antes.recordePontos);
   };
 
   it('aceitar mantém o progresso e carimba o nome público', () => {
@@ -104,7 +100,7 @@ describe('as duas respostas preservam tudo', () => {
     manterSeparado(veterano(), conta({ id: 'u2' }));
     /* O perfil no armazenamento continua lá, inteiro: quem salva é a tela. */
     expect(loadProfile().journeys).toBe(12);
-    expect(loadProfile().progress.unlocked).toHaveLength(2);
+    expect(loadProfile().recordePontos).toBe(7_042_000);
   });
 });
 

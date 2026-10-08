@@ -1,0 +1,16 @@
+{
+ "raios": {
+  "descricao": "raios de vitória girando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   256,
+   256
+  ],
+  "laco": true,
+  "bytes": 140736
+ }
+}

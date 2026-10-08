@@ -9,15 +9,11 @@ import { createRoot } from 'react-dom/client';
 
 import { AccountScreen } from './screens/AccountScreen';
 import type { Autenticacao, Conta } from './lib/auth';
-import { emptyProgress } from './engine/progression';
 import type { Profile } from './lib/storage';
 import './styles.css';
 
 const conta: Conta = { id: 'probe', email: 'voce@exemplo.com', handle: 'Uchihadam', origem: 'google' };
-const perfil: Profile = {
-  journeys: 12, victories: 4, best: 880, wins: 31,
-  progress: { ...emptyProgress(), unlocked: ['a', 'b', 'c', 'd', 'e'], mastery: { goku: { grau: 2, feitos: {} }, sakura: { grau: 1, feitos: {} } } },
-} as Profile;
+const perfil: Profile = { journeys: 12, victories: 4, best: 8, wins: 31, recordePontos: 7_042_000 };
 
 const nada = () => Promise.resolve({ ok: true });
 const autenticacao: Autenticacao = {

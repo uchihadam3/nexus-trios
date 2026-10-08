@@ -297,7 +297,7 @@ export function updateDominion(b:Battle){
   const approach=1-Math.exp(-STEP/D.responseSeconds);
   b.dominion=clamp(b.dominion+(target-b.dominion)*approach,-D.maxScore,D.maxScore);
   const leader=b.dominion>5?'player':b.dominion< -5?'enemy':null;
-  if(leader&&b.lastLead&&leader!==b.lastLead){b.turns++;emit(b,{kind:'turn',source:`${leader}-0`,label:'O Domínio virou'});}
+  if(leader&&b.lastLead&&leader!==b.lastLead){b.turns++;if(leader==='player')b.viradasDoTrio=(b.viradasDoTrio??0)+1;emit(b,{kind:'turn',source:`${leader}-0`,label:'O Domínio virou'});}
   if(leader)b.lastLead=leader;
 }
 export function resolve(b:Battle){

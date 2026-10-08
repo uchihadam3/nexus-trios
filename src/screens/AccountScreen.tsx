@@ -61,7 +61,7 @@ export function AccountScreen({ autenticacao, conta, profile, conectado, google 
       <p>
         {logado
           ? 'Com conta você pode jogar a Jornada Ranqueada e aparecer no ranking.'
-          : 'Jogar, colecionar lutadores, conquistas e Maestria funciona sem conta. A conta serve para a Jornada Ranqueada e para o ranking.'}
+          : 'Jogar funciona sem conta. A conta serve para a Jornada Ranqueada e para colocar seus pontos no ranking.'}
       </p>
     </div>
 
@@ -73,7 +73,7 @@ export function AccountScreen({ autenticacao, conta, profile, conectado, google 
       * conquistou está neste aparelho e vai continuar aqui.
       */}
     <p className="account-progresso">
-      Suas conquistas, Maestria e recordes ficam <b>neste aparelho</b> e continuam aqui, com conta ou sem.
+      Seu recorde de pontos e suas jornadas ficam <b>neste aparelho</b> e continuam aqui, com conta ou sem.
       Entrar não apaga nada.
     </p>
 
@@ -91,9 +91,8 @@ export function AccountScreen({ autenticacao, conta, profile, conectado, google 
     {logado && oferta && <div className="account-migracao">
       <span className="eyebrow">PROGRESSO DESTE APARELHO</span>
       <p>
-        Você já jogou aqui sem conta: <b>{resumo.jornadas} {resumo.jornadas === 1 ? 'jornada' : 'jornadas'}</b>,
-        {' '}<b>{resumo.conquistas} {resumo.conquistas === 1 ? 'conquista' : 'conquistas'}</b>
-        {resumo.personagens > 0 && <> e Maestria em <b>{resumo.personagens} {resumo.personagens === 1 ? 'lutador' : 'lutadores'}</b></>}.
+        Você já jogou aqui sem conta: <b>{resumo.jornadas} {resumo.jornadas === 1 ? 'jornada' : 'jornadas'}</b>
+        {resumo.recorde > 0 && <> e um recorde de <b>{resumo.recorde.toLocaleString('pt-BR')} pontos</b></>}.
         {' '}Quer que esse progresso passe a contar como seu, nesta conta?
       </p>
       <div className="account-migracao-acoes">

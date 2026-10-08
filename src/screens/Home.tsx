@@ -1,10 +1,10 @@
-import { ArrowUpRight,ArrowRight,Trophy,CircleHelp,Settings2,Download,ChevronRight,Users,Swords,Flag,Star,Award,Globe2,ShieldCheck } from 'lucide-react';
+import { ArrowUpRight,ArrowRight,Trophy,CircleHelp,Settings2,Download,ChevronRight,Users,Swords,Flag,Star,Globe2,ShieldCheck } from 'lucide-react';
 import { byId,characters } from '../data/characters';
 import { Portrait } from '../components/Portrait';
 import type { Profile, Run } from '../lib/storage';
 import {onlineConfigured} from '../lib/online';
 
-interface Props {profile:Profile;run:Run|null;conta:boolean;onPlay:()=>void;onRanked:(mode:'daily'|'weekly')=>void;onContinue:()=>void;onAbandon:()=>void;onNavigate:(s:'characters'|'progress'|'ranking'|'conta'|'help'|'settings')=>void;onInstall:()=>void}
+interface Props {profile:Profile;run:Run|null;conta:boolean;onPlay:()=>void;onRanked:(mode:'daily'|'weekly')=>void;onContinue:()=>void;onAbandon:()=>void;onNavigate:(s:'characters'|'ranking'|'conta'|'help'|'settings')=>void;onInstall:()=>void}
 export function Home({profile,run,conta,onPlay,onRanked,onContinue,onAbandon,onNavigate,onInstall}:Props){
   const terminal=run?.stage==='result'&&(run.battle?.winner!=='player'||run.index===9);
   const wonCurrent=run?.stage==='result'&&run.battle?.winner==='player';
@@ -20,7 +20,7 @@ export function Home({profile,run,conta,onPlay,onRanked,onContinue,onAbandon,onN
         <p>{run?run.stage==='draft'?'Escolha seus três personagens. Cada escolha muda a equipe.':terminal?champion?'Reviva o último duelo e veja como seu trio conquistou o título.':'Veja o resultado e monte um novo trio para tentar de novo.':`Próximo desafio: ${run.encounters[current]?.name}`:'Dez confrontos. Um trio. Cada ação mostra quem ajudou, quem atacou e quem virou a luta.'}</p>
         <button className="primary hero-cta" onClick={run?onContinue:onPlay}>{terminal?champion?'Ver título':'Ver resultado':run?'Continuar jornada':'Montar meu trio'}<ArrowUpRight size={20}/></button>
         {run&&!terminal&&<button className="abandon-campaign" onClick={onAbandon}>Desistir desta jornada</button>}
-        <div className="hub-hero-stats"><span><b>{profile.best}<small>/10</small></b> recorde</span><span><b>{profile.victories}</b> trios campeões</span><span><b>{profile.journeys}</b> jornadas</span></div>
+        <div className="hub-hero-stats"><span><b>{(profile.recordePontos??0).toLocaleString('pt-BR')}</b> recorde de pontos</span><span><b>{profile.victories}</b> trios campeões</span><span><b>{profile.journeys}</b> jornadas</span></div>
       </div>
       <div className="hub-team"><span className="eyebrow">{terminal?champion?'TRIO CAMPEÃO':'TRIO DA JORNADA':run?.team.length?'TRIO EM CAMPO':profile.champion?.length?'ÚLTIMO TRIO CAMPEÃO':'TRIO PARA COMEÇAR'}</span><div>{trio.map((id,i)=>{const c=byId[id];return <span key={id} className={`hub-unit hub-unit-${i}`} style={{'--character':c.color} as React.CSSProperties}><Portrait character={c}/><strong>{c.name}</strong></span>})}</div><small>{terminal?champion?'Dez confrontos vencidos juntos.':`Chegou ao confronto ${(run?.index??0)+1} desta jornada.`:run?.team.length?'Seu time segue junto até o fim da jornada.':'A escolha do seu trio começa no Draft.'}</small></div>
     </div>
@@ -31,7 +31,7 @@ export function Home({profile,run,conta,onPlay,onRanked,onContinue,onAbandon,onN
       <div className="journey-bottom"><span>{profile.journeys} jornadas · {profile.victories} trios campeões</span><button className="text-button" onClick={onPlay}>Nova jornada <ArrowRight size={15}/></button></div>
     </div>
     {enemies&&<div className="hub-encounter"><div><span className="eyebrow">RIVAIS DO PRÓXIMO CONFRONTO</span><h2>{run?.encounters[current].name}</h2><p>Entre na arena para descobrir como seu trio responde.</p></div><div className="hub-rivals">{enemies.map(id=><span key={id}><Portrait character={byId[id]}/><small>{byId[id].name}</small></span>)}</div></div>}
-    <div className="hub-links"><button onClick={()=>onNavigate('characters')}><Users size={20}/><span><b>Personagens</b><small>Conheça os {characters.length} lutadores</small></span><ChevronRight size={17}/></button><button onClick={()=>onNavigate('progress')}><Award size={20}/><span><b>Progresso</b><small>Conquistas, Maestria e sua história</small></span><ChevronRight size={17}/></button><button onClick={()=>onNavigate('help')}><CircleHelp size={20}/><span><b>Como jogar</b><small>Aprenda a ler a batalha</small></span><ChevronRight size={17}/></button><button onClick={()=>onNavigate('conta')}><ShieldCheck size={20}/><span><b>Conta</b><small>{conta?'Entrou · joga ranqueada':'Opcional · só para o ranking'}</small></span><ChevronRight size={17}/></button><button onClick={()=>onNavigate('settings')}><Settings2 size={20}/><span><b>Configurações</b><small>Áudio, visual e jogo</small></span><ChevronRight size={17}/></button><button onClick={onInstall}><Download size={20}/><span><b>Instalar</b><small>Leve seu trio com você</small></span><ChevronRight size={17}/></button></div>
+    <div className="hub-links"><button onClick={()=>onNavigate('characters')}><Users size={20}/><span><b>Personagens</b><small>Conheça os {characters.length} lutadores</small></span><ChevronRight size={17}/></button><button onClick={()=>onNavigate('help')}><CircleHelp size={20}/><span><b>Como jogar</b><small>Aprenda a ler a batalha</small></span><ChevronRight size={17}/></button><button onClick={()=>onNavigate('conta')}><ShieldCheck size={20}/><span><b>Conta</b><small>{conta?'Entrou · joga ranqueada':'Opcional · só para o ranking'}</small></span><ChevronRight size={17}/></button><button onClick={()=>onNavigate('settings')}><Settings2 size={20}/><span><b>Configurações</b><small>Áudio, visual e jogo</small></span><ChevronRight size={17}/></button><button onClick={onInstall}><Download size={20}/><span><b>Instalar</b><small>Leve seu trio com você</small></span><ChevronRight size={17}/></button></div>
     <p className="hub-rule"><Swords size={17}/> A vitória acontece quando o trio rival inteiro sai da luta.</p>
   </section>;
 }

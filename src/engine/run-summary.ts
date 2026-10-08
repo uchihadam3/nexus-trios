@@ -1,8 +1,14 @@
 import type { Battle, BattleEvent, Fighter } from './types';
+import { pontosDaJornada, pontosDaLuta, type PontosDaLuta } from './pontos';
 
 export interface RunSynergyEvent {source:string;target:string;count:number;charge:number}
 export interface RunBattleSummary {
-  index:number;won:boolean;time:number;reason:string;score:number;survivors:number;turns:number;
+  index:number;won:boolean;time:number;reason:string;
+  /** Os pontos desta luta — os mesmos do ranking (src/engine/pontos.ts). */
+  score:number;pontos?:PontosDaLuta;
+  /** O recorde do jogador antes desta luta, para a tela saber se ele foi batido. */
+  recordeAntes?:number;
+  survivors:number;turns:number;
   enemies:string[];fighters:{characterId:string;damage:number;healing:number;protection:number;interrupts:number;kills:number;hp:number}[];
   synergies:RunSynergyEvent[];
 }
@@ -21,13 +27,12 @@ export function addSynergies(existing:RunSynergyEvent[],events:BattleEvent[]):Ru
 export function summarizeBattle(index:number,battle:Battle,synergies:RunSynergyEvent[]=[]):RunBattleSummary {
   const players=battle.fighters.filter(f=>f.side==='player'),enemies=battle.fighters.filter(f=>f.side==='enemy');
   const survivors=players.filter(f=>f.hp>0).length;
-  const remaining=players.reduce((sum,f)=>sum+f.hp/f.maxHp,0)/3;
-  const score=(battle.winner==='player'?1000:0)+survivors*120+Math.round(remaining*240)+Math.round(Math.max(0,battle.dominion)*2);
+  const pontos=pontosDaLuta(battle),score=pontos.total;
   const fighters=players.map((f:Fighter)=>({characterId:f.characterId,...f.stats,hp:Math.round(f.hp)}));
-  return {index,won:battle.winner==='player',time:battle.time,reason:battle.reason,score,survivors,turns:battle.turns,enemies:enemies.map(f=>f.characterId),fighters,synergies:synergies.map(x=>({...x}))};
+  return {index,won:battle.winner==='player',time:battle.time,reason:battle.reason,score,pontos,survivors,turns:battle.turns,enemies:enemies.map(f=>f.characterId),fighters,synergies:synergies.map(x=>({...x}))};
 }
 export function summarizeRun(battles:RunBattleSummary[]):RunSummary {
-  const won=battles.filter(b=>b.won).length,score=battles.reduce((n,b)=>n+b.score,0);
+  const won=battles.filter(b=>b.won).length,score=pontosDaJornada(battles.map(b=>({pontos:b.score,won:b.won})));
   const totals={damage:0,healing:0,protection:0,interrupts:0,kills:0};
   const connections=new Map<string,RunSynergyEvent>();
   for(const battle of battles){

@@ -35,6 +35,8 @@ export interface SkillDecision {time:number;actor:string;intelligence:number;can
 export interface Battle {
   version:1;seed:number;rng:number;time:number;fighters:Fighter[];dominion:number;momentum:number;events:BattleEvent[];nextEvent:number;
   winner:Side|null;reason:string;finished:boolean;turns:number;lastLead:Side|null;
+  /** Viradas a favor do trio do jogador (as que contam pontos, como no ranking). */
+  viradasDoTrio?:number;
   /** Optional for backward compatibility with battles saved by earlier builds. */
   targetMemory?:Record<string,{target:string;time:number}>;
   targetLog?:TargetDecision[];

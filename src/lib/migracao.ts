@@ -25,8 +25,7 @@ const CHAVE = 'nexus-v1-contas-reivindicadas';
 export interface ResumoDoProgresso {
   jornadas: number;
   vitorias: number;
-  conquistas: number;
-  personagens: number;
+  recorde: number;
   /** Se vale a pena interromper o jogador para falar disso. */
   vale: boolean;
 }
@@ -34,14 +33,13 @@ export interface ResumoDoProgresso {
 /**
  * Nem todo progresso merece um aviso. Quem abriu o jogo, perdeu a primeira
  * luta e foi criar conta não precisa de uma caixa perguntando o que fazer com
- * o nada. O corte é ter concluído alguma jornada ou ter conquistado algo.
+ * o nada. O corte é ter jogado alguma jornada ou ter um recorde de pontos.
  */
 export const resumoDoProgresso = (p: Profile): ResumoDoProgresso => {
-  const conquistas = p.progress.unlocked.length;
-  const personagens = Object.keys(p.progress.mastery).length;
+  const recorde = p.recordePontos ?? 0;
   return {
-    jornadas: p.journeys, vitorias: p.victories, conquistas, personagens,
-    vale: p.journeys > 0 || conquistas > 0 || p.wins > 0,
+    jornadas: p.journeys, vitorias: p.victories, recorde,
+    vale: p.journeys > 0 || recorde > 0 || p.wins > 0,
   };
 };
 

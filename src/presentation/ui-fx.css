@@ -1,0 +1,10 @@
+/*
+ * Animações de interface desenhadas em Python (tools/ui/generate_ui_fx.py).
+ * Mesmo formato das famílias de efeito da batalha: folha 3×4, máscara tingida
+ * com a cor do momento + núcleo claro somado por cima. Usa as keyframes
+ * fx12-mask / fx12-bg (acting-motion.css).
+ */
+.uifx{position:absolute;pointer-events:none;background-color:var(--uifx-cor,#fff);-webkit-mask:var(--uifx-img) 0 0/300% 400% no-repeat;mask:var(--uifx-img) 0 0/300% 400% no-repeat;animation:fx12-mask var(--uifx-dur,900ms) steps(1,end) both}
+.uifx::after{content:'';position:absolute;inset:0;background:var(--uifx-img) 0 0/300% 400% no-repeat;mix-blend-mode:screen;opacity:.75;animation:fx12-bg var(--uifx-dur,900ms) steps(1,end) both}
+.uifx-laco,.uifx-laco::after{animation-iteration-count:infinite}
+@media (prefers-reduced-motion:reduce){.uifx{animation:none;opacity:.5}.uifx::after{animation:none}.uifx:not(.uifx-laco){display:none}}
