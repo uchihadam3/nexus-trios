@@ -1,4 +1,4 @@
-import { existsSync,readFileSync } from 'node:fs';
+import { existsSync,readFileSync,readdirSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { describe,it,expect } from 'vitest';
 import { characters } from '../src/data/characters';
@@ -37,51 +37,22 @@ describe('Arte local e composição',()=>{
       }
     }
   });
-  it('usa os 20 retratos originais enviados para os personagens correspondentes',()=>{
-    const portraits:Record<string,string>={
-      kaiba:'/assets/portraits/kaiba.webp',yugi:'/assets/portraits/yugi.jpg',kaneki:'/assets/portraits/kaneki.webp',jinwoo:'/assets/portraits/jinwoo.jpg',
-      yor:'/assets/portraits/yor.png',loid:'/assets/portraits/loid.webp',anya:'/assets/portraits/anya.jpg',frieren:'/assets/portraits/frieren.webp',
-      makima:'/assets/portraits/makima.jpg',power:'/assets/portraits/power.jpg',denji:'/assets/portraits/denji.jpg',giorno:'/assets/portraits/giorno.jpg',
-      dio:'/assets/portraits/dio.webp',jotaro:'/assets/portraits/jotaro.webp',guts:'/assets/portraits/guts.jpg',griffith:'/assets/portraits/griffith.jpg',
-      roy:'/assets/portraits/roy.png',alphonse:'/assets/portraits/alphonse.jpg',edward:'/assets/portraits/edward.webp',kurapika:'/assets/portraits/kurapika.webp',
-    };
-    for(const [id,path] of Object.entries(portraits)){
-      expect(characters.find(character=>character.id===id)?.portrait,`retrato de ${id}`).toBe(path);
-      expect(existsSync(new URL(path.slice(1),root)),path).toBe(true);
-      expect(existsSync(new URL(`assets/portraits/placeholder-${id}.svg`,root)),`placeholder de ${id}`).toBe(false);
+  it('usa retratos revisados em WebP para o primeiro elenco e mantém alternativas válidas',()=>{
+    const source=new URL('../assets/portraits/source/',root);
+    const reviewed=new Set(readdirSync(source).filter(name=>name.endsWith('.webp')).map(name=>name.slice(0,-5)));
+    expect(reviewed.size).toBe(56);
+    for(const character of characters.slice(0,100)){
+      const path=character.portrait;
+      expect(path,character.id).not.toContain('placeholder');
+      const bytes=readFileSync(new URL(path.slice(1),root));
+      expect(bytes.length,character.id).toBeGreaterThan(4_000);
+      if(reviewed.has(character.id)){
+        expect(path,character.id).toBe(`/assets/portraits/${character.id}.webp`);
+        expect(bytes.toString('ascii',0,4),character.id).toBe('RIFF');
+        expect(bytes.toString('ascii',8,12),character.id).toBe('WEBP');
+      }
     }
-  });
-  it('usa os 20 retratos recém-enviados para os personagens correspondentes',()=>{
-    const portraits:Record<string,string>={
-      killua:'/assets/portraits/killua.png',gon:'/assets/portraits/gon.jpg',levi:'/assets/portraits/levi.jpeg',hisoka:'/assets/portraits/hisoka.webp',
-      mikasa:'/assets/portraits/mikasa.png',eren:'/assets/portraits/eren.webp',kenpachi:'/assets/portraits/kenpachi.jpg',aizen:'/assets/portraits/aizen.webp',
-      rukia:'/assets/portraits/rukia.jpg',ichigo:'/assets/portraits/ichigo.png',sukuna:'/assets/portraits/sukuna.jpg',nobara:'/assets/portraits/nobara.webp',
-      megumi:'/assets/portraits/megumi.jpg',yuji:'/assets/portraits/yuji.jpg',muzan:'/assets/portraits/muzan.jpg',inosuke:'/assets/portraits/inosuke.jpg',
-      zenitsu:'/assets/portraits/zenitsu.jpeg',nezuko:'/assets/portraits/nezuko.jpg',tanjiro:'/assets/portraits/tanjiro.webp',sakura:'/assets/portraits/sakura.jpg',
-    };
-    for(const [id,path] of Object.entries(portraits)){
-      expect(characters.find(character=>character.id===id)?.portrait,`retrato de ${id}`).toBe(path);
-      expect(existsSync(new URL(path.slice(1),root)),path).toBe(true);
-      expect(existsSync(new URL(`assets/portraits/placeholder-${id}.svg`,root)),`placeholder de ${id}`).toBe(false);
-    }
-  });
-  it('usa os cinco retratos de Naruto e Dragon Ball enviados depois',()=>{
-    const portraits:Record<string,string>={itachi:'/assets/portraits/itachi.jpg',kakashi:'/assets/portraits/kakashi.jpg',frieza:'/assets/portraits/frieza.jpeg',piccolo:'/assets/portraits/piccolo.jpg',gohan:'/assets/portraits/gohan.jpg'};
-    for(const [id,path] of Object.entries(portraits)){
-      expect(characters.find(character=>character.id===id)?.portrait,`retrato de ${id}`).toBe(path);
-      expect(existsSync(new URL(path.slice(1),root)),path).toBe(true);
-      expect(existsSync(new URL(`assets/portraits/placeholder-${id}.svg`,root)),`placeholder de ${id}`).toBe(false);
-    }
-  });
-  it('exibe as nove substituições de retratos recebidas',()=>{
-    const ids=['greengoblin','venom','kenpachi','magneto','wonderwoman','thor','flash','hulk','spiderman'];
-    for(const id of ids){
-      const path=characters.find(character=>character.id===id)?.portrait;
-      expect(path,`retrato de ${id}`).toBe(`/assets/portraits/${id}.jpg`);
-      const bytes=readFileSync(new URL(path!.slice(1),root));
-      expect(bytes.subarray(0,3),id).toEqual(Buffer.from([0xff,0xd8,0xff]));
-      expect(bytes.length,id).toBeGreaterThan(200_000);
-    }
+    for(const id of ['megumi','eren','killua'])expect(reviewed.has(id)).toBe(true);
   });
   it('mantém os ícones de habilidade existentes válidos no catálogo expandido',()=>{
     const manifest=JSON.parse(readFileSync(new URL('assets/skills/manifest.json',root),'utf8')) as {count:number;skills:{id:string;character:string;path:string;sheet:string;row:number;column:number;crop:{x:number;y:number;width:number;height:number}}[]};
