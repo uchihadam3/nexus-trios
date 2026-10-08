@@ -92,7 +92,7 @@ def main() -> None:
                 right = round((column+1) * image.width / 2) - 6
                 bottom = round((row+1) * image.height / 2) - 6
                 art = image.crop((left, top, right, bottom)).convert('RGBA')
-                if character['id'] in {'kirby', 'donkeykong'}:
+                if character['id'] in {'kirby', 'donkeykong', 'finn'}:
                     art = keep_main_silhouette(art)
                 if art.getchannel('A').getextrema()[0] != 0:
                     raise ValueError(f'Grid must have true transparency: {source}')

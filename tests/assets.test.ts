@@ -23,7 +23,7 @@ describe('Arte local e composição',()=>{
     const approved=new Set(approvedPortraits);
     const expanded=characters.slice(100);
     expect(approved.size).toBe(approvedPortraits.length);
-    expect(expanded.filter(character=>approved.has(character.id))).toHaveLength(116);
+    expect(expanded.filter(character=>approved.has(character.id))).toHaveLength(115);
     for(const character of expanded){
       const reviewed=approved.has(character.id);
       expect(character.portrait).toBe(reviewed
