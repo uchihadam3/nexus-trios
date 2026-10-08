@@ -86,8 +86,11 @@ class BattleAudio {
         const brilho=ctx.createBiquadFilter();brilho.type='highshelf';brilho.frequency.value=5000;brilho.gain.value=2;
         this.music.connect(grave);grave.connect(medio);medio.connect(brilho);brilho.connect(this.master);this.effects.connect(this.master);this.master.connect(limiter);limiter.connect(ctx.destination);
         this.apply();
+        // quando o navegador libera ou volta o áudio (outro toque, voltar ao app), a música retoma sozinha
+        ctx.onstatechange=()=>{if(ctx.state==='running'&&this.active)this.start();};
+        document.addEventListener('visibilitychange',()=>{if(!document.hidden&&ctx.state!=='running')void ctx.resume().catch(()=>undefined);});
       }
-      if(this.ctx.state==='suspended')await this.ctx.resume();
+      if(this.ctx.state!=='running')await Promise.race([this.ctx.resume().catch(()=>undefined),new Promise(r=>setTimeout(r,400))]);
       if(this.active)this.start();
       void this.preloadCues();
       return this.ctx.state==='running';

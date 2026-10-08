@@ -215,7 +215,7 @@ export default function App(){
   },[autenticacao]);
 
   const reset=()=>{resetStorage();setSettings(defaults);setProfile({journeys:0,victories:0,best:0,wins:0,recordePontos:0});setRun(null);runRef.current=null;navigate('home');};
-  return <div onPointerDownCapture={()=>void battleAudio.unlock()} onKeyDownCapture={e=>{if(e.key==='Enter'||e.key===' ')void battleAudio.unlock();}} className={`app ${settings.reducedMotion?'reduce-motion':''} ${screen==='game'&&run?.stage==='battle'?'in-battle':''}`}>
+  return <div onPointerDownCapture={()=>void battleAudio.unlock()} onPointerUpCapture={()=>void battleAudio.unlock()} onTouchEndCapture={()=>void battleAudio.unlock()} onClickCapture={()=>void battleAudio.unlock()} onKeyDownCapture={e=>{if(e.key==='Enter'||e.key===' ')void battleAudio.unlock();}} className={`app ${settings.reducedMotion?'reduce-motion':''} ${screen==='game'&&run?.stage==='battle'?'in-battle':''}`}>
     <ToqueGlobal/>
     <Cabecalho tela={screen} menu={menu} onMenu={setMenu} onNavigate={navigate} recorde={profile.recordePontos??0} apelido={profile.publicHandle} online={onlineConfigured} total={characters.length}/>
     <main key={`${screen}-${screen==='game'?run?.stage??'idle':'page'}`} className={screen==='game'&&run?.stage==='battle'?'main battle-main screen-enter':'main screen-enter'}>

@@ -196,3 +196,8 @@
 .rk-cartao-numeros b{font-size:18px;font-weight:900;color:#fff}
 .rk-cartao-numeros small{font-size:11px;color:#8f9c8c}
 .rk-cartao-rodape{font-size:10.5px;color:#6f7c6c}
+
+/* Ajustes: botão de testar o som e o aviso do que aconteceu */
+.aj-testar{display:flex;flex-direction:column;gap:8px;margin-top:6px}
+.aj-testar button{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;border-radius:12px;border:1px solid rgba(200,245,96,.45);background:rgba(200,245,96,.1);color:#e9ffc4;font-weight:800;font-size:15px}
+.aj-testar p{margin:0;font-size:13px;line-height:1.4;color:#c9d4c0}

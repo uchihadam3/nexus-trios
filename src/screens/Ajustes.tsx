@@ -1,7 +1,8 @@
 import { useState,type CSSProperties,type ReactNode } from 'react';
-import { Volume2,Music2,Zap,Sparkles,Hash,Wind,Gauge,Repeat,CircleHelp,Eye,Clapperboard,UserPen,RotateCcw,Settings2,Check } from 'lucide-react';
+import { Volume2,Volume1,Music2,Zap,Sparkles,Hash,Wind,Gauge,Repeat,CircleHelp,Eye,Clapperboard,UserPen,RotateCcw,Settings2,Check } from 'lucide-react';
 import type { Settings } from '../lib/storage';
 import { TelaTopo } from '../components/Casca';
+import { battleAudio } from '../lib/audio';
 
 /*
  * Ajustes (remake): um painel de jogo, sem parágrafo.
@@ -37,6 +38,21 @@ function Escolha<T extends string|number>({nome,icone,opcoes,valor,onChange,cor}
   </div>;
 }
 
+/* Toca um golpe e diz se o som está liberado: o jeito de conferir no próprio celular. */
+function TestarSom({settings:s}:{settings:Settings}){
+  const [aviso,setAviso]=useState('');
+  const testar=async()=>{
+    setAviso('Tocando…');
+    await battleAudio.preview(['soco-pesado','bloqueio']);
+    const estado=battleAudio.status.state;
+    setAviso(s.volume===0?'O Volume está no zero: arraste a barra para a direita.'
+      :estado!=='running'?'O navegador ainda não liberou o som. Toque no botão de novo.'
+      :s.effectsVolume===0?'Os Efeitos sonoros estão no zero.'
+      :'Som liberado. Se não ouviu nada, aumente o volume de mídia do celular (botão lateral) e tire o modo silencioso.');
+  };
+  return <div className="aj-testar"><button type="button" onClick={()=>void testar()}><Volume1 size={18}/>Testar som</button>{aviso&&<p role="status">{aviso}</p>}</div>;
+}
+
 export function SettingsScreen({settings:s,onChange,onReset,onGaleria,ranking}:{settings:Settings;onChange:(s:Settings)=>void;onReset:()=>void;onGaleria:()=>void;ranking?:{nome?:string;onEditar:()=>void}}){
   const [confirm,setConfirm]=useState(false),[revisto,setRevisto]=useState(false);
   const muda=<K extends keyof Settings>(k:K,v:Settings[K])=>onChange({...s,[k]:v});
@@ -48,6 +64,7 @@ export function SettingsScreen({settings:s,onChange,onReset,onGaleria,ranking}:{
       <Barra icone={<Volume2 size={18}/>} nome="Volume" valor={s.volume} onChange={v=>muda('volume',v)} cor="#c8f560"/>
       <Barra icone={<Music2 size={18}/>} nome="Música de batalha" valor={s.musicVolume} onChange={v=>muda('musicVolume',v)} cor="#8fd3ff"/>
       <Barra icone={<Zap size={18}/>} nome="Efeitos sonoros" valor={s.effectsVolume} onChange={v=>muda('effectsVolume',v)} cor="#ffb86b"/>
+      <TestarSom settings={s}/>
     </div>
 
     <div className="aj-painel">
