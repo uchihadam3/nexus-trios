@@ -1101,6 +1101,29 @@ def estrela_invencivel(rng, v):
 
 
 
+def _tilim(rng, seg=0.06, lo=2200, hi=7000):
+    """Um elo batendo no outro: poucos parciais altos e inarmônicos, bem curtos."""
+    n = n_de(seg)
+    t = np.arange(n) / SR
+    x = np.zeros(n)
+    for _ in range(5):
+        x += np.sin(2 * math.pi * rng.uniform(lo, hi) * t + rng.uniform(0, 6)) * np.exp(-t / rng.uniform(0.008, 0.025))
+    return x / 5 ** 0.5 + passa(ruido(rng, n), 3000, 9000, 2) * env(n, 0.0002, 0.003) * 0.6
+
+
+def corrente(rng, v):
+    """Corrente: o chacoalhar dos elos voando, o "zip" passando, e o aperto em volta do alvo."""
+    x = _z(1.1)
+    voa = n_de(0.5)
+    poe(x, assobio(rng, voa, 600, 3500, 1.2, 0.5) * sobe_e_some(voa, 0.7, 1.4) * 0.35, 0)
+    for _ in range(46):                                                        # elos chacoalhando no voo
+        poe(x, _tilim(rng) * rng.uniform(0.08, 0.22), rng.uniform(0.0, 0.5) ** 0.8)
+    for _ in range(28):                                                        # enrolando e apertando
+        poe(x, _tilim(rng, 0.08, 1500, 5000) * rng.uniform(0.15, 0.32), 0.5 + rng.uniform(0, 0.16))
+    poe(x, B._placa_de_metal(rng, n_de(0.3), 300, 4000, 30, 0.06) * 0.35 + B._baque_seco(rng, n_de(0.3), 110, 0.05) * 0.5, 0.62)
+    return reverb(x, 0.3, 0.14)
+
+
 # ================================================================== golpes icônicos (sons de verdade)
 def _faiscas(rng, n, taxa0, taxa1, lo=1500, hi=11000, forca=1.0):
     """Estalos de arco elétrico: impulsos em tempos aleatórios, com força de cauda longa

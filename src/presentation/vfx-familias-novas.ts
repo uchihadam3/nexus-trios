@@ -18,6 +18,7 @@ export const FAMILIAS_NOVAS = {
   bonk: n({ nome: 'Pancada de desenho', grupo: 'físico', impacto: 'bonk', escala: 1.9, tempo: 0.85, cor: '#ffe28a', tinta: 'elemento' }),
   pow_cartoon: n({ nome: 'POW!', grupo: 'físico', impacto: 'pow_cartoon', escala: 1.8, tempo: 0.7, cor: '#ffe066', tinta: 'elemento' }),
   martelo: n({ nome: 'Martelada', grupo: 'físico', impacto: 'martelo', escala: 2.2, tempo: 0.8, cor: '#ffd9a8' }),
+  corrente: n({ nome: 'Corrente', grupo: 'físico', impacto: 'corrente', escala: 2.1, tempo: 0.9, cor: '#d8e4f0' }),
   marretada: n({ nome: 'Marretada de desenho', grupo: 'físico', impacto: 'marretada', escala: 2.2, tempo: 0.9, cor: '#ffcf8a', tinta: 'elemento' }),
   investida: n({ nome: 'Investida', grupo: 'físico', impacto: 'investida', escala: 2.1, tempo: 0.7, cor: '#ffc28a' }),
   punho_gigante: n({ nome: 'Punho gigante', grupo: 'físico', impacto: 'punho_gigante', escala: 2.2, tempo: 0.8, cor: '#ffc28a' }),
@@ -155,6 +156,6 @@ export const NOVAS_NO_ALVO = new Set<FamiliaNova>(['olho', 'hipnose', 'relogio',
   'gravidade', 'cosmico', 'tempestade', 'raio_divino', 'chuva_de_meteoros', 'lua', 'marca', 'silencio', 'medo', 'exposto', 'lentidao', 'enfraquecimento']);
 
 /** Bons para o ataque básico do personagem (quando ele já usa a família numa habilidade). */
-export const NOVAS_DE_BASICO = new Set<FamiliaNova>(['garras', 'chicote', 'bastao', 'mordida', 'tentaculos', 'florete', 'lamina_de_fogo',
+export const NOVAS_DE_BASICO = new Set<FamiliaNova>(['garras', 'chicote', 'corrente', 'bastao', 'mordida', 'tentaculos', 'florete', 'lamina_de_fogo',
   'lamina_eletrica', 'lamina_sombria', 'lamina_de_agua', 'motosserra', 'espadao', 'foice', 'iaido', 'chute_voador', 'bonk', 'pow_cartoon',
   'flecha', 'facas', 'espingarda']);

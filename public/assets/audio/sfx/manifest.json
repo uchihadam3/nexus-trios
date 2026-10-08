@@ -546,6 +546,23 @@
    ],
    "bytes": 37496
   },
+  "corrente": {
+   "arquivo": "corrente.mp3",
+   "descricao": "família corrente",
+   "versoes": [
+    0.0,
+    1.18,
+    2.3999,
+    3.5427
+   ],
+   "duracoes": [
+    1.1,
+    1.1399,
+    1.0628,
+    1.1167
+   ],
+   "bytes": 51183
+  },
   "corte": {
    "arquivo": "corte.mp3",
    "descricao": "corte",

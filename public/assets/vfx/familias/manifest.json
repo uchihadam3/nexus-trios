@@ -489,6 +489,20 @@
   "laco": false,
   "bytes": 27884
  },
+ "corrente": {
+  "descricao": "corrente que voa e se enrola no alvo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 57600
+ },
  "corte": {
   "descricao": "corte em arco",
   "quadros": 12,

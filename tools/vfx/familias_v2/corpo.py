@@ -281,6 +281,71 @@ def chicote(T, t, rng):
     return G, H
 
 
+
+def _elo(cx, cy, ang, face, tam=1.4, n=14):
+    """Um elo de corrente: de frente é um anel oval; de lado, um traço curto."""
+    c, s_ = math.cos(ang), math.sin(ang)
+    a, b = 0.048 * tam, (0.027 if face else 0.006) * tam
+    return [(cx + c * a * math.cos(2 * math.pi * k / n) - s_ * b * math.sin(2 * math.pi * k / n),
+             cy + s_ * a * math.cos(2 * math.pi * k / n) + c * b * math.sin(2 * math.pi * k / n)) for k in range(n + 1)]
+
+
+def corrente(T, t, rng):
+    """Corrente: os elos voam ondulando da esquerda, a ponta pesada passa pelo alvo,
+    a corrente se enrola em volta dele (elos de trás mais escuros) e aperta num clarão."""
+    G, H = vazio(T)
+    # o caminho: reta ondulada até o alvo e depois a espiral achatada em volta dele
+    reta = []
+    for k in range(40):
+        u = k / 39
+        reta.append((-1.0 + 0.6 * u, -0.12 * (1 - u) + 0.08 * math.sin(u * 7 + t * 9) * (1 - u)))
+    aperta = 1 - 0.18 * ease_out(rel(t, 0.55, 0.7), 2)
+    voltas = []
+    for k in range(70):
+        th = math.pi + k / 69 * 1.7 * TAU
+        voltas.append((0.4 * aperta * math.cos(th), 0.17 * aperta * math.sin(th) + 0.1 - 0.16 * k / 69, math.sin(th)))
+    caminho = [(x, y, 1.0) for x, y in reta] + voltas
+    comp = [0.0]
+    for (x0, y0, _), (x1, y1, _) in zip(caminho, caminho[1:]):
+        comp.append(comp[-1] + math.hypot(x1 - x0, y1 - y0))
+    mostra = comp[-1] * ease_out(rel(t, 0, 0.5), 1.5)
+    frente, tras = [], []
+    passo, d, i, k = 0.085, 0.0, 0, 0
+    while d <= mostra and i < len(caminho) - 1:
+        while i < len(caminho) - 1 and comp[i + 1] < d:
+            i += 1
+        if i >= len(caminho) - 1:
+            break
+        (x0, y0, z0), (x1, y1, z1) = caminho[i], caminho[i + 1]
+        f = (d - comp[i]) / max(comp[i + 1] - comp[i], 1e-6)
+        x, y, z = x0 + (x1 - x0) * f, y0 + (y1 - y0) * f, z0 + (z1 - z0) * f
+        elo = (_elo(x, y, math.atan2(y1 - y0, x1 - x0), k % 2 == 0), 1.0)
+        (frente if z > -0.2 or i < len(reta) else tras).append(elo)
+        d += passo
+        k += 1
+    env = apaga(t, 0.72, 1)
+    def desenha(elos, larg):
+        a = T.zero()
+        for pts, w in elos:
+            a += T.polyline(pts, larg, w)
+        return a
+    luz_frente = desenha(frente, 0.018) * env
+    luz_tras = desenha(tras, 0.011) * env * 0.4
+    # a ponta pesada (o peso da corrente) na frente de tudo
+    if frente:
+        px, py = frente[-1][0][0]
+        ponta = T.polys([(estrela(px, py, 0.07, t * 6, 3, 0.5), 1.0)], 0.004) * env
+    else:
+        ponta = T.zero()
+    tt = rel(t, 0.55, 1)
+    clarao = (T.gauss(0, 0.05, 0.1) * 2.0 + T.flare(0, 0.05, 0.8, 0.2) * 1.1) * some(t, 0.55, 0.85)
+    aro = T.ring(0.42 * aperta + 0.2 * ease_out(tt, 2), 0.02, cy=0.05, squash=2.6) * (1 - tt) ** 1.5 * 1.3 * (t > 0.55)
+    fa = faiscas(T, rng, t, 16, 0.6, 0.03, inicio=0.55)
+    G += T.glow(luz_frente + ponta, 1.3, 0.9, 0.012) + luz_tras + clarao + aro + T.glow(fa, 1, 1.1, 0.02)
+    H += luz_frente * 0.7 + ponta + clarao + fa * 0.6
+    return G, H
+
+
 def garras(T, t, rng):
     """Garras: três rasgos paralelos em diagonal, um logo depois do outro."""
     G, H = vazio(T)
@@ -410,6 +475,7 @@ REGISTRO = [
     ("punho_gigante", punho_gigante, GRANDE, "silhueta de punho gigante", False),
     ("soco_serio", soco_serio, GRANDE, "sopro gigante para a frente", False),
     ("faisca_negra", faisca_negra, GRANDE, "faísca negra (raios grossos)", False),
+    ("corrente", corrente, GRANDE, "corrente que voa e se enrola no alvo", False),
     ("chicote", chicote, GRANDE, "chicote estalando", False),
     ("garras", garras, GRANDE, "três rasgos de garra", False),
     ("mordida", mordida, GRANDE, "dentes fechando", False),
