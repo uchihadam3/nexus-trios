@@ -162,6 +162,16 @@ class BattleAudio {
       .then(buffer=>{this.buffers.set(som,buffer);return buffer;}).catch(()=>null).finally(()=>this.loading.delete(som));
     this.loading.set(som,request);return request;
   }
+  /** Os sons da luta que vai começar (as famílias dos seis lutadores), antes do primeiro golpe. */
+  async precarregarLuta(personagens:string[]){
+    await this.loadManifest();
+    const sons=new Set<Sound>();
+    for(const id of personagens)for(const i of [undefined,0,1,2]){
+      const p=profileFor(id,i);const s=p?SOM_DA_FAMILIA[p.family]:undefined;
+      if(s){sons.add(s.impacto);if(s.saida)sons.add(s.saida);if(s.preparo)sons.add(s.preparo);}
+    }
+    await Promise.all([...sons].map(s=>this.loadCue(s)));
+  }
   private async preloadCues(){
     // os mais comuns primeiro; o resto em seguida. No impacto, só se lê do cache.
     const comuns:Sound[]=['ui-clique','ui-confirma','ui-abrir','ui-fechar','soco-leve','soco-pesado','corte','disparo','impacto-energia','preparo','pronto','nocaute','interrupcao','grand-carga','grand-impacto'];
@@ -176,7 +186,9 @@ class BattleAudio {
   sound(som:Sound,prioridade:number=PRIORIDADE.basico,pan=0,chave=0,atraso=0){
     const ctx=this.ctx;if(!ctx||ctx.state!=='running'||!this.effects||this.settings.volume===0||this.settings.effectsVolume===0)return;
     const buffer=this.buffers.get(som),info=this.manifest?.sons[som];
-    if(!buffer||!info)return;
+    // som que ainda não chegou: pede agora, para a próxima vez
+    if(!buffer){if(info)void this.loadCue(som);return;}
+    if(!info)return;
     const quando=ctx.currentTime+.006+Math.max(0,atraso)/Math.max(.25,this.settings.speed??1);
     // o mesmo som duas vezes em 70 ms vira um só
     if(quando-(this.recent.get(som)??-100)<.07)return;

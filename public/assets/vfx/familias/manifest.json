@@ -1,4 +1,18 @@
 {
+ "acido": {
+  "descricao": "respingo de ácido",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 27580
+ },
  "agua": {
   "descricao": "respingo de água",
   "quadros": 12,
@@ -12,6 +26,132 @@
   ],
   "laco": false,
   "bytes": 39798
+ },
+ "areia": {
+  "descricao": "casulo de areia",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 99266
+ },
+ "armadura": {
+  "descricao": "placas de armadura",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 17238
+ },
+ "asa_negra": {
+  "descricao": "asa e penas negras",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 33500
+ },
+ "atracao": {
+  "descricao": "tudo puxado para um ponto",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 96158
+ },
+ "bala_de_canhao": {
+  "descricao": "bala de canhão em viagem (+x)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 6982
+ },
+ "barreira_magica": {
+  "descricao": "cúpula de runas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 70042
+ },
+ "bastao": {
+  "descricao": "golpe de bastão",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 45154
+ },
+ "bencao": {
+  "descricao": "penas e halo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 56000
+ },
+ "bloco_de_gelo": {
+  "descricao": "bloco de gelo prendendo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 28502
  },
  "bola_de_fogo": {
   "descricao": "bola de fogo em viagem (+x)",
@@ -27,6 +167,90 @@
   "laco": true,
   "bytes": 52078
  },
+ "bola_ki": {
+  "descricao": "bola de ki em viagem (+x)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 43590
+ },
+ "bolhas": {
+  "descricao": "bolhas subindo e estourando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 47106
+ },
+ "bomba": {
+  "descricao": "bomba com pavio em viagem (+x)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 38340
+ },
+ "bonk": {
+  "descricao": "pancada de desenho com estrelinhas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 49348
+ },
+ "buraco_negro": {
+  "descricao": "buraco negro sugando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 51608
+ },
+ "canhao_de_energia": {
+  "descricao": "canhão de energia (faixa)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   512,
+   96
+  ],
+  "laco": true,
+  "bytes": 26642
+ },
  "carga": {
   "descricao": "preparo: energia convergindo",
   "quadros": 12,
@@ -40,6 +264,76 @@
   ],
   "laco": true,
   "bytes": 56690
+ },
+ "carga_ki": {
+  "descricao": "preparo: ki estalando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 41132
+ },
+ "cartas_explosivas": {
+  "descricao": "cartas que estouram",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 40574
+ },
+ "cartas_voando": {
+  "descricao": "cartas girando em viagem (+x)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 31100
+ },
+ "caveira": {
+  "descricao": "caveira de luz",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 63584
+ },
+ "chama_negra": {
+  "descricao": "chama negra lenta",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 39064
  },
  "chegada": {
   "descricao": "apoio chegando ao aliado",
@@ -55,6 +349,104 @@
   "laco": false,
   "bytes": 53020
  },
+ "chicote": {
+  "descricao": "chicote estalando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 51818
+ },
+ "chidori": {
+  "descricao": "mil pássaros",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 103046
+ },
+ "chute_giratorio": {
+  "descricao": "chute giratório baixo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 46596
+ },
+ "chute_voador": {
+  "descricao": "chute voador (diagonal)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 66136
+ },
+ "chuva_de_meteoros": {
+  "descricao": "meteoros caindo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 41274
+ },
+ "clarao_solar": {
+  "descricao": "clarão que cega",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 87366
+ },
+ "clones": {
+  "descricao": "silhuetas em leque",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 43174
+ },
  "cometa": {
   "descricao": "luz que corre pela linha de ação (+x)",
   "quadros": 12,
@@ -68,6 +460,34 @@
   ],
   "laco": true,
   "bytes": 27776
+ },
+ "confete": {
+  "descricao": "estouro de festa",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 57050
+ },
+ "confusao": {
+  "descricao": "interrogações girando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 27884
  },
  "corte": {
   "descricao": "corte em arco",
@@ -125,6 +545,48 @@
   "laco": false,
   "bytes": 40488
  },
+ "corte_vertical": {
+  "descricao": "corte vertical",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 50218
+ },
+ "cosmico": {
+  "descricao": "galáxia girando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 152864
+ },
+ "cravar": {
+  "descricao": "flecha cravando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 34178
+ },
  "crescente": {
   "descricao": "onda em meia-lua em viagem (+x)",
   "quadros": 12,
@@ -153,6 +615,48 @@
   "laco": false,
   "bytes": 63294
  },
+ "cura_em_area": {
+  "descricao": "cura em área com cruzes",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 57618
+ },
+ "desintegrar": {
+  "descricao": "desintegração em grãos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 73436
+ },
+ "disco": {
+  "descricao": "disco girando em viagem (+x)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 14102
+ },
  "distorcao": {
   "descricao": "distorção",
   "quadros": 12,
@@ -166,6 +670,34 @@
   ],
   "laco": false,
   "bytes": 158706
+ },
+ "dominio": {
+  "descricao": "domínio de céu infinito",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 75780
+ },
+ "dragao": {
+  "descricao": "dragão serpenteando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 55672
  },
  "dreno": {
   "descricao": "transferência de energia (faixa)",
@@ -181,6 +713,48 @@
   "laco": true,
   "bytes": 149188
  },
+ "encanto": {
+  "descricao": "estrelas de encanto",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 42484
+ },
+ "enfraquecer": {
+  "descricao": "setas para baixo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 59182
+ },
+ "enxame": {
+  "descricao": "enxame zumbindo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 40408
+ },
  "escudo": {
   "descricao": "cúpula de escudo",
   "quadros": 12,
@@ -195,6 +769,48 @@
   "laco": false,
   "bytes": 74492
  },
+ "escudo_fisico": {
+  "descricao": "brasão de escudo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 46296
+ },
+ "escudo_tech": {
+  "descricao": "parede de painéis hexagonais",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 48668
+ },
+ "esfera_espiral": {
+  "descricao": "esfera em espiral moendo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 57198
+ },
  "esmagar": {
   "descricao": "esmagar de cima",
   "quadros": 12,
@@ -208,6 +824,76 @@
   ],
   "laco": false,
   "bytes": 48634
+ },
+ "espadao": {
+  "descricao": "espadão que racha o chão",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 68472
+ },
+ "espingarda": {
+  "descricao": "nove impactos espalhados",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 41374
+ },
+ "espinho_de_gelo": {
+  "descricao": "lanças de gelo do chão",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 37272
+ },
+ "espinhos_de_terra": {
+  "descricao": "pontas de pedra em linha",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 45002
+ },
+ "esticar": {
+  "descricao": "braço elástico",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 43776
  },
  "estilhaco": {
   "descricao": "lança de gelo em viagem (+x)",
@@ -237,6 +923,20 @@
   "laco": false,
   "bytes": 41052
  },
+ "estrela_invencivel": {
+  "descricao": "estrela invencível",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 42732
+ },
  "execucao": {
   "descricao": "execução",
   "quadros": 12,
@@ -265,6 +965,90 @@
   "laco": false,
   "bytes": 88696
  },
+ "explosao_cartoon": {
+  "descricao": "explosão de desenho animado",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 64476
+ },
+ "explosao_grande": {
+  "descricao": "explosão em cogumelo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 144346
+ },
+ "explosao_ki": {
+  "descricao": "explosão de ki em domo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 88122
+ },
+ "exposto": {
+  "descricao": "guarda trincando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 27396
+ },
+ "facas_voando": {
+  "descricao": "facas em viagem (+x)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 7578
+ },
+ "faisca_negra": {
+  "descricao": "faísca negra (raios grossos)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 140690
+ },
  "feixe": {
   "descricao": "feixe fino (faixa)",
   "quadros": 12,
@@ -278,6 +1062,20 @@
   ],
   "laco": true,
   "bytes": 132384
+ },
+ "feixe_ki": {
+  "descricao": "feixe de ki com hélice (faixa)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   512,
+   96
+  ],
+  "laco": true,
+  "bytes": 141660
  },
  "feixe_pesado": {
   "descricao": "feixe largo (faixa)",
@@ -293,6 +1091,62 @@
   "laco": true,
   "bytes": 128658
  },
+ "fenda": {
+  "descricao": "rasgo dimensional",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 43936
+ },
+ "fenix": {
+  "descricao": "asas de fogo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 61000
+ },
+ "flecha": {
+  "descricao": "flecha em viagem (+x)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 6360
+ },
+ "florete": {
+  "descricao": "estocadas finas em sequência",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 43898
+ },
  "fogo": {
   "descricao": "chamas",
   "quadros": 12,
@@ -307,6 +1161,34 @@
   "laco": false,
   "bytes": 55738
  },
+ "foguete": {
+  "descricao": "foguete em viagem (+x)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 20324
+ },
+ "foice": {
+  "descricao": "foice em meia-lua",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 45696
+ },
  "gancho": {
   "descricao": "golpe para cima",
   "quadros": 12,
@@ -320,6 +1202,34 @@
   ],
   "laco": false,
   "bytes": 49868
+ },
+ "garras": {
+  "descricao": "três rasgos de garra",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 69646
+ },
+ "gas": {
+  "descricao": "nuvem de gás",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 108932
  },
  "gelo": {
   "descricao": "cristais de gelo",
@@ -349,6 +1259,244 @@
   "laco": false,
   "bytes": 104664
  },
+ "gravidade": {
+  "descricao": "pressão de gravidade",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 101176
+ },
+ "grito_de_guerra": {
+  "descricao": "estandarte de raios e divisas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 116754
+ },
+ "hipnose": {
+  "descricao": "espiral hipnótica",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 73684
+ },
+ "iaido": {
+  "descricao": "saque rápido com clarão atrasado",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 37002
+ },
+ "investida": {
+  "descricao": "investida com linhas de velocidade",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 55146
+ },
+ "invocacao": {
+  "descricao": "silhueta invocada",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 54134
+ },
+ "jato_dagua": {
+  "descricao": "jato d'água (faixa)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   512,
+   96
+  ],
+  "laco": true,
+  "bytes": 226474
+ },
+ "labareda": {
+  "descricao": "coluna de fogo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 71108
+ },
+ "lamina_de_agua": {
+  "descricao": "fita de água em espiral",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 78590
+ },
+ "lamina_de_fogo": {
+  "descricao": "lâmina de fogo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 43062
+ },
+ "lamina_eletrica": {
+  "descricao": "lâmina elétrica",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 42734
+ },
+ "lamina_sombria": {
+  "descricao": "lâmina sombria",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 36704
+ },
+ "lanche": {
+  "descricao": "mordida, vapor e coração",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 24090
+ },
+ "laser": {
+  "descricao": "laser fino (faixa)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   512,
+   96
+  ],
+  "laco": true,
+  "bytes": 10286
+ },
+ "lentidao": {
+  "descricao": "ampulheta",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 44346
+ },
+ "lua": {
+  "descricao": "meia-lua acesa",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 96900
+ },
+ "lua_vermelha": {
+  "descricao": "lua com olho",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 54256
+ },
  "luz": {
   "descricao": "pilar de luz",
   "quadros": 12,
@@ -376,6 +1524,76 @@
   ],
   "laco": false,
   "bytes": 83844
+ },
+ "marca": {
+  "descricao": "alvo travando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 58624
+ },
+ "martelo": {
+  "descricao": "martelada no chão",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 52824
+ },
+ "medo": {
+  "descricao": "olhos na sombra",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 83840
+ },
+ "metal": {
+  "descricao": "chapas de metal fechando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 58058
+ },
+ "mil_cortes": {
+  "descricao": "mil cortes e X final",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 84656
  },
  "mira": {
   "descricao": "mira no alvo (laço)",
@@ -405,6 +1623,62 @@
   "laco": true,
   "bytes": 17664
  },
+ "mordida": {
+  "descricao": "dentes fechando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 64612
+ },
+ "motosserra": {
+  "descricao": "dentes de serra girando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 92264
+ },
+ "nevasca": {
+  "descricao": "flocos em redemoinho",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 80962
+ },
+ "olho": {
+  "descricao": "olho gigante se abrindo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 47270
+ },
  "onda_de_choque": {
   "descricao": "onda de choque",
   "quadros": 12,
@@ -433,6 +1707,76 @@
   "laco": true,
   "bytes": 58050
  },
+ "pentagrama": {
+  "descricao": "pentagrama infernal",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 44270
+ },
+ "petalas": {
+  "descricao": "flor e pétalas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 33480
+ },
+ "pilar": {
+  "descricao": "pilar de energia subindo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 44548
+ },
+ "pisao": {
+  "descricao": "pisão com rachaduras",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 81428
+ },
+ "plasma": {
+  "descricao": "esfera de plasma",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 74736
+ },
  "portal": {
   "descricao": "portal",
   "quadros": 12,
@@ -446,6 +1790,20 @@
   ],
   "laco": false,
   "bytes": 45712
+ },
+ "pow_cartoon": {
+  "descricao": "balão POW de quadrinho",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 129142
  },
  "prisao": {
   "descricao": "prisão de barras",
@@ -475,6 +1833,76 @@
   "laco": false,
   "bytes": 97726
  },
+ "pulso_emp": {
+  "descricao": "pulso eletromagnético",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 91250
+ },
+ "punho_gigante": {
+  "descricao": "silhueta de punho gigante",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 78934
+ },
+ "purificar_onda": {
+  "descricao": "onda que lava",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 60826
+ },
+ "queimadura": {
+  "descricao": "ponto queimando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 39894
+ },
+ "radiacao": {
+  "descricao": "radiação pulsando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 85794
+ },
  "raio": {
   "descricao": "descarga elétrica",
   "quadros": 12,
@@ -489,6 +1917,34 @@
   "laco": false,
   "bytes": 121504
  },
+ "raio_divino": {
+  "descricao": "feixe do céu",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 28964
+ },
+ "raio_em_cadeia": {
+  "descricao": "raio pulando em cadeia",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 51232
+ },
  "raio_faixa": {
   "descricao": "raio entre dois pontos (faixa)",
   "quadros": 12,
@@ -502,6 +1958,20 @@
   ],
   "laco": true,
   "bytes": 130246
+ },
+ "rajada_de_ar": {
+  "descricao": "arcos de vento",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 31612
  },
  "rajada_de_golpes": {
   "descricao": "vários golpes",
@@ -531,6 +2001,76 @@
   "laco": false,
   "bytes": 80974
  },
+ "regeneracao": {
+  "descricao": "folhas subindo em espiral",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 56320
+ },
+ "relogio": {
+  "descricao": "mostrador de relógio",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 66486
+ },
+ "repulsao": {
+  "descricao": "estouro para fora",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 117304
+ },
+ "resgate": {
+  "descricao": "mergulho de resgate",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 46072
+ },
+ "ricochete": {
+  "descricao": "estalo de ricochete",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 69510
+ },
  "rocha": {
   "descricao": "pedra em viagem (+x)",
   "quadros": 12,
@@ -544,6 +2084,48 @@
   ],
   "laco": true,
   "bytes": 18958
+ },
+ "rugido": {
+  "descricao": "ondas de som em cone",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 46664
+ },
+ "runas": {
+  "descricao": "círculo de runas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 50360
+ },
+ "sangue": {
+  "descricao": "respingo de sangue",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 30012
  },
  "saraivada": {
   "descricao": "rajada múltipla em viagem (+x)",
@@ -559,6 +2141,20 @@
   "laco": true,
   "bytes": 18816
  },
+ "sarcofago": {
+  "descricao": "caixa negra fechando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 51490
+ },
  "selo": {
   "descricao": "círculo mágico",
   "quadros": 12,
@@ -572,6 +2168,20 @@
   ],
   "laco": false,
   "bytes": 86410
+ },
+ "silencio": {
+  "descricao": "som cortado",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 37090
  },
  "soco": {
   "descricao": "impacto leve",
@@ -587,6 +2197,20 @@
   "laco": false,
   "bytes": 54368
  },
+ "soco_serio": {
+  "descricao": "sopro gigante para a frente",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 125132
+ },
  "sombra": {
   "descricao": "tentáculos de sombra",
   "quadros": 12,
@@ -601,6 +2225,90 @@
   "laco": false,
   "bytes": 97720
  },
+ "sopro_de_fogo": {
+  "descricao": "jato de fogo em cone",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 97552
+ },
+ "sorte": {
+  "descricao": "dados rolando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 29444
+ },
+ "supernova": {
+  "descricao": "sol que explode",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 184744
+ },
+ "susanoo": {
+  "descricao": "guerreiro espectral",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 83572
+ },
+ "teia_bola": {
+  "descricao": "bola de teia em viagem (+x)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 23046
+ },
+ "teia_rede": {
+  "descricao": "rede de teia",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 146458
+ },
  "telecinese": {
   "descricao": "telecinese",
   "quadros": 12,
@@ -614,6 +2322,48 @@
   ],
   "laco": false,
   "bytes": 70468
+ },
+ "teleporte": {
+  "descricao": "implode e reaparece",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 37032
+ },
+ "tempestade": {
+  "descricao": "nuvem e raios de cima",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 31074
+ },
+ "tentaculos": {
+  "descricao": "tentáculos chicoteando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 60374
  },
  "terra": {
   "descricao": "pedras rompendo o chão",
@@ -657,6 +2407,76 @@
   "laco": true,
   "bytes": 7284
  },
+ "tiro_preciso": {
+  "descricao": "mira travando e tiro",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 40450
+ },
+ "tornado": {
+  "descricao": "funil de tornado",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 37490
+ },
+ "transformacao": {
+  "descricao": "aura de transformação",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 119654
+ },
+ "tsunami": {
+  "descricao": "onda gigante",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 48600
+ },
+ "velocidade": {
+  "descricao": "linhas de vento e asinhas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 29406
+ },
  "veneno": {
   "descricao": "nuvem tóxica",
   "quadros": 12,
@@ -684,5 +2504,19 @@
   ],
   "laco": false,
   "bytes": 53370
+ },
+ "vinhas": {
+  "descricao": "vinhas enrolando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 65596
  }
 }

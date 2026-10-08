@@ -714,7 +714,15 @@ def versao(nome: str, v: int) -> np.ndarray:
     return x.astype(np.float32)
 
 
+def _registra_novos():
+    """As famílias novas de efeito (tools/audio/sfx_familias.py), uma receita por família."""
+    import sfx_familias
+    SONS.update(sfx_familias.SONS_NOVOS)
+    ALVO_DB.update(sfx_familias.ALVO_NOVO)
+
+
 def main(argv):
+    _registra_novos()
     OUT.mkdir(parents=True, exist_ok=True)
     caminho = OUT / "manifest.json"
     manifesto = json.loads(caminho.read_text()) if caminho.exists() and argv else {}

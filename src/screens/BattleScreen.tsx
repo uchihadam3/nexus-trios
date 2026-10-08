@@ -1,4 +1,5 @@
-import { useCallback,useLayoutEffect,useRef,useState } from 'react';
+import { useCallback,useEffect,useLayoutEffect,useRef,useState } from 'react';
+import { battleAudio } from '../lib/audio';
 import { Pause,Play,FastForward,VolumeX,Volume2,SlidersHorizontal,Check,LogOut,ChevronLeft,ScrollText } from 'lucide-react';
 import { AuxIcon } from '../components/Icon';
 import type { Battle } from '../engine/types';
@@ -18,6 +19,9 @@ import { statuses } from '../data/statuses';
 
 export function BattleScreen({battle,beat,index,name,settings,paused,onPause,onAbandon,onSettings,onExit}:{battle:Battle;beat:Beat|null;index:number;name:string;settings:Settings;paused:boolean;onPause:()=>void;onAbandon:()=>void;onSettings:(s:Settings)=>void;onExit?:()=>void}){
   const arena=useRef<HTMLDivElement>(null),[anchors,setAnchors]=useState<Anchors>({}),[box,setBox]=useState({w:0,h:0,medal:80}),[mixer,setMixer]=useState(false),[historyOpen,setHistoryOpen]=useState(false),[inspect,setInspect]=useState<InspectTarget|null>(null),[tutorial,setTutorial]=useState(()=>{try{return index===0&&!localStorage.getItem('nexus-battle-guide-v1')?0:-1}catch{return -1}});
+  /* Os sons dos seis lutadores chegam antes do primeiro golpe. */
+  const elenco=battle.fighters.map(f=>f.characterId).join(',');
+  useEffect(()=>{void battleAudio.precarregarLuta(elenco.split(','));},[elenco]);
   /*
    * Onde cada medalhão e cada habilidade estão, em % da arena — é para onde
    * apontam efeitos, linhas, mira e números. Medido pela posição de layout

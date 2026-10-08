@@ -1,7 +1,7 @@
 import { describe,expect,it } from 'vitest';
 import { readFileSync,readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
-import { SOM_DA_FAMILIA,SONS,type Manifesto } from '../src/audio/cues';
+import { SOM_DA_FAMILIA,TODOS_OS_SONS,type Manifesto } from '../src/audio/cues';
 import { FAMILIAS,VFX_FAMILIES,folhasUsadas,hsl,profileFor } from '../src/presentation/vfxProfiles';
 import { characters } from '../src/data/characters';
 
@@ -21,16 +21,18 @@ describe('compact reusable audiovisual library',()=>{
       expect(data.length,nome).toBe(f.bytes);
       expect(data.subarray(0,4).toString('ascii')).toBe('RIFF');expect(data.subarray(8,12).toString('ascii')).toBe('WEBP');
       expect(data.subarray(12,16).toString('ascii'),`${nome} tem alfa (VP8X)`).toBe('VP8X');
-      expect(f.bytes,`${nome} pequeno o bastante para celular`).toBeLessThan(160_000);
+      // as faixas (512 × 96) são as maiores; o resto fica bem abaixo
+      expect(f.bytes,`${nome} pequeno o bastante para celular`).toBeLessThan(f.tamanho[0]>200?240_000:200_000);
       bytes+=f.bytes;decodificado+=f.tamanho[0]*f.tamanho[1]*12*4;
     }
-    expect(bytes).toBeLessThan(3_500_000);
+    // só as folhas das famílias da luta são baixadas; o total é o catálogo inteiro
+    expect(bytes).toBeLessThan(14_000_000);
     // nenhuma folha decodificada passa de ~4,5 MB na memória (a maior é a faixa de 512 × 96 × 12)
     expect(decodificado/Object.keys(familias).length).toBeLessThan(2_000_000);
     expect(readdirSync(resolve(root,'public/assets/vfx')).filter(x=>x.endsWith('.webp'))).toEqual(['arena.webp']);
   });
-  it('maps every basic and skill to one of 30–45 shared families, all of them used, none dominating',()=>{
-    expect(FAMILIAS.length).toBeGreaterThanOrEqual(30);expect(FAMILIAS.length).toBeLessThanOrEqual(45);
+  it('maps every basic and skill to one of the 150–180 shared families, all of them used, none dominating',()=>{
+    expect(FAMILIAS.length).toBeGreaterThanOrEqual(150);expect(FAMILIAS.length).toBeLessThanOrEqual(180);
     const uso=new Map<string,number>();let total=0;
     for(const character of characters){
       for(const index of [undefined,0,1,2] as const){
@@ -47,21 +49,24 @@ describe('compact reusable audiovisual library',()=>{
     for(const [f,n] of uso)expect(n/total,`${f} não domina`).toBeLessThan(.16);
   });
   it('gives the famous skills the effect and colour people recognise',()=>{
-    expect(profileFor('goku',0)?.family).toBe('feixe_pesado');
+    expect(profileFor('goku',0)?.family).toBe('kamehameha');
     const [h]=hsl(profileFor('goku',0)!.color);expect(h).toBeGreaterThan(185);expect(h).toBeLessThan(215);
-    expect(profileFor('superman',0)?.family).toBe('feixe');expect(hsl(profileFor('superman',0)!.color)[0]).toBeLessThan(15);
+    expect(profileFor('superman',0)?.family).toBe('laser');expect(hsl(profileFor('superman',0)!.color)[0]).toBeLessThan(15);
     expect(profileFor('pikachu',0)?.family).toBe('raio');
-    expect(profileFor('spiderman',0)?.family).toBe('prisao');
+    expect(profileFor('spiderman',0)?.family).toBe('teia');
     expect(profileFor('light',2)?.family).toBe('execucao');
-    expect(profileFor('naruto',1)?.family).toBe('esfera_carregada');
+    expect(profileFor('naruto',1)?.family).toBe('esfera_espiral');
+    expect(profileFor('gojo',0)?.family).toBe('atracao');expect(profileFor('gojo',1)?.family).toBe('repulsao');expect(profileFor('gojo',2)?.family).toBe('dominio');
+    expect(profileFor('beerus',0)?.family).toBe('desintegrar');expect(profileFor('sasuke',0)?.family).toBe('chidori');
+    expect(profileFor('saitama',2)?.family).toBe('soco_serio');expect(profileFor('itachi',2)?.family).toBe('susanoo');
     expect(profileFor('ichigo',0)?.family).toBe('corte_de_energia');
-    expect(profileFor('charizard',0)?.family).toBe('fogo');
+    expect(profileFor('charizard',0)?.family).toBe('sopro_de_fogo');
     // a mesma família muda de cor com o personagem
-    expect(profileFor('vegeta',0)?.family).toBe('feixe_pesado');expect(profileFor('vegeta',0)?.color).not.toBe(profileFor('goku',0)?.color);
+    expect(profileFor('vegeta',0)?.family).toBe('kamehameha');expect(profileFor('vegeta',0)?.color).not.toBe(profileFor('goku',0)?.color);
   });
   it('has a sound family for every visual family, with 4 MP3 versions per sound, within budget',()=>{
     expect(sfx.versoes).toBe(4);
-    expect(Object.keys(sfx.sons).sort()).toEqual([...SONS].sort());
+    expect(Object.keys(sfx.sons).sort()).toEqual([...new Set(TODOS_OS_SONS)].sort());
     for(const familia of FAMILIAS){
       const som=SOM_DA_FAMILIA[familia];expect(som,familia).toBeDefined();
       for(const nome of [som.impacto,som.saida,som.preparo].filter(Boolean))expect(sfx.sons[nome!],`${familia} → ${nome}`).toBeDefined();
@@ -75,7 +80,8 @@ describe('compact reusable audiovisual library',()=>{
       for(let v=1;v<4;v++)expect(som.versoes[v]!,nome).toBeGreaterThan(som.versoes[v-1]!+som.duracoes[v-1]!);
       expect(som.descricao.length,nome).toBeGreaterThan(3);
     }
-    expect(bytes).toBeLessThan(2_300_000);
+    // a luta baixa só os sons das famílias dos seis lutadores (precarregarLuta)
+    expect(bytes).toBeLessThan(8_500_000);
     expect(readdirSync(resolve(root,'public/assets/audio/sfx')).filter(x=>x.endsWith('.wav'))).toEqual([]);
   });
   it('keeps the background music in three looping layers of the same piece',()=>{

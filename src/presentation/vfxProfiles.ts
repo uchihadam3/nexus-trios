@@ -6,7 +6,7 @@
  *
  *   FAMÍLIA + VARIANTE + COR + ESCALA + DIREÇÃO + INTENSIDADE + TEMPO + CAMADAS
  *
- * - 40 famílias, cada uma montada a partir das folhas desenhadas em Python
+ * - 163 famílias (41 originais + 122 novas), cada uma montada a partir das folhas desenhadas em Python
  *   (tools/vfx/generate_families.py → public/assets/vfx/familias);
  * - cada família diz que CAMADAS usa: preparo em quem age, viagem (um
  *   projétil que voa) ou faixa (um feixe esticado de quem age até o alvo),
@@ -22,6 +22,8 @@
  */
 import { byId } from '../data/characters';
 import type { Character, Effect, Skill, Target, Visual } from '../engine/types';
+import { FAMILIAS_NOVAS, NOVAS_DE_BASICO, NOVAS_NO_ALVO, type FamiliaNova } from './vfx-familias-novas';
+import { FAMILIA_DA_HABILIDADE } from './vfx-atribuicao';
 
 export type Grupo = 'físico' | 'corte' | 'projétil' | 'energia' | 'elemento' | 'magia' | 'apoio' | 'especial';
 
@@ -56,7 +58,7 @@ export interface Familia {
 
 const f = (x: Familia) => x;
 
-export const VFX_FAMILIES = {
+const ORIGINAIS = {
   // ---------------------------------------------------------------- físico
   soco: f({ nome: 'Soco', grupo: 'físico', impacto: 'soco', escala: 1.5, tempo: 0.55, cor: '#ffd9a8', tinta: 'personagem' }),
   golpe_pesado: f({ nome: 'Golpe pesado', grupo: 'físico', impacto: 'golpe_pesado', escala: 1.9, tempo: 0.7, cor: '#ffc28a', tinta: 'personagem' }),
@@ -108,6 +110,9 @@ export const VFX_FAMILIES = {
   // ---------------------------------------------------------------- especial
   execucao: f({ nome: 'Execução', grupo: 'especial', impacto: 'execucao', escala: 2.3, tempo: 0.9, cor: '#e24a5a', tinta: 'fixa' }),
 } as const satisfies Record<string, Familia>;
+
+/* As 41 originais e as 122 novas (vfx-familias-novas.ts). */
+export const VFX_FAMILIES = { ...ORIGINAIS, ...FAMILIAS_NOVAS };
 
 export type VfxFamily = keyof typeof VFX_FAMILIES;
 export const FAMILIAS = Object.keys(VFX_FAMILIES) as VfxFamily[];
@@ -229,7 +234,7 @@ const COR_ICONICA: Record<string, string> = {
 
 export function corDoEfeito(k: VfxFamily, personagem: Character, chave: string, nome: string): string {
   const fam = familia(k);
-  const escura = k === 'sombra' || k === 'execucao';
+  const escura = ['sombra', 'execucao', 'lamina_sombria', 'chama_negra', 'foice', 'asa_negra', 'buraco_negro', 'caveira', 'medo'].includes(k);
   const iconica = COR_ICONICA[`${personagem.id}:${chave}`];
   if (iconica) return legivel(iconica, escura);
   const doNome = COR_DO_NOME.find(([re]) => re.test(normaliza(nome)))?.[1];
@@ -331,7 +336,10 @@ function porIcone(s: Ficha): VfxFamily {
 const FISICOS: VfxFamily[] = ['soco', 'golpe_pesado', 'esmagar', 'gancho', 'rajada_de_golpes', 'estocada', 'corte', 'corte_diagonal', 'corte_cruzado', 'corte_giratorio'];
 const JEITOS_DE_BATER: VfxFamily[] = ['soco', 'gancho', 'rajada_de_golpes', 'soco', 'golpe_pesado'];
 
-function basicoDe(c: Character, familias: VfxFamily[]): VfxFamily {
+function basicoDe(c: Character, familias: VfxFamily[], escolhidas: VfxFamily[] = []): VfxFamily {
+  // quem tem uma família de identidade (garras, chicote, lâmina de fogo…) bate com ela também
+  const propria = escolhidas.find((x) => NOVAS_DE_BASICO.has(x as FamiliaNova));
+  if (propria) return propria;
   const v = c.basic.visual;
   const elemento = familias.find((x) => ELEMENTOS.includes(x));
   // quem tem um elemento de verdade (duas habilidades ou mais) bate com ele
@@ -360,8 +368,13 @@ const ehArea = (target: Target, effects: Effect[]) => target === 'allEnemies' ||
 /** Família de uma habilidade (ou do básico, sem índice). */
 export function familiaDe(c: Character, skillIndex?: number): VfxFamily {
   if (skillIndex === undefined) {
-    return basicoDe(c, c.skills.map((_, i) => familiaDe(c, i)));
+    return basicoDe(c, c.skills.map((_, i) => familiaPelaRegra(c, i)), c.skills.map((_, i) => familiaDe(c, i)));
   }
+  return FAMILIA_DA_HABILIDADE[`${c.id}:${skillIndex}`] ?? familiaPelaRegra(c, skillIndex);
+}
+
+/** A família pela regra (palavra do nome, efeito, ícone), sem a escolha da tabela. */
+function familiaPelaRegra(c: Character, skillIndex: number): VfxFamily {
   const s = c.skills[skillIndex];
   const efeito = porEfeito(s);
   const palavra = pelaPalavra(s.name);
@@ -382,7 +395,7 @@ export function familiaDe(c: Character, skillIndex?: number): VfxFamily {
 }
 
 /* Estas acontecem no alvo, sem nada voando até ele. */
-const NO_ALVO = new Set<VfxFamily>(['distorcao', 'maldicao', 'selo', 'telecinese', 'prisao', 'portal', 'luz']);
+const NO_ALVO = new Set<VfxFamily>(['distorcao', 'maldicao', 'selo', 'telecinese', 'prisao', 'portal', 'luz', ...NOVAS_NO_ALVO]);
 
 export function profileFor(characterId: string, skillIndex?: number): VfxProfile | undefined {
   const c = byId[characterId];

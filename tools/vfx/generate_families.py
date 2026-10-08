@@ -1195,6 +1195,9 @@ def _registro_base():
     registra("cometa", cometa, PEQUENA, "luz que corre pela linha de ação (+x)", laco=True)
     registra("mira", mira, PEQUENA, "mira no alvo (laço)", laco=True)
     registra("chegada", chegada, PEQUENA, "apoio chegando ao aliado")
+    # as famílias novas (tools/vfx/familias_v2)
+    from familias_v2 import registra_todas
+    registra_todas(registra)
 
 
 def renderiza(nome):

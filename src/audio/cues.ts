@@ -9,6 +9,7 @@
  * toca no impacto.
  */
 import type { VfxFamily } from '../presentation/vfxProfiles';
+import { FAMILIAS_NOVAS, SOM_DA_NOVA, type FamiliaNova } from '../presentation/vfx-familias-novas';
 
 export const SONS = [
   'soco-leve', 'soco-pesado', 'esmagar', 'gancho', 'multi-golpe', 'terremoto', 'onda-choque',
@@ -21,7 +22,12 @@ export const SONS = [
   'transformacao', 'toque',
   'ui-clique', 'ui-confirma', 'ui-abrir', 'ui-fechar', 'ui-alternar',
 ] as const;
-export type Sound = typeof SONS[number];
+
+/* Um som próprio para cada família nova de efeito (tools/audio/sfx_familias.py). */
+const NOVAS = Object.keys(FAMILIAS_NOVAS) as FamiliaNova[];
+export const SONS_DAS_NOVAS = NOVAS.map(SOM_DA_NOVA);
+export type Sound = typeof SONS[number] | (string & { readonly __somNovo?: never });
+export const TODOS_OS_SONS: Sound[] = [...SONS, ...SONS_DAS_NOVAS, 'cravar', 'ricochete'];
 
 /*
  * Prioridade da mixagem, do adendo: grand > impacto importante > interrupção >
@@ -56,10 +62,20 @@ export const SOM_DA_FAMILIA: Record<VfxFamily, SomDaFamilia> = {
   portal: { impacto: 'portal' }, telecinese: { impacto: 'psiquico' }, maldicao: { impacto: 'maldicao' },
   cura: { impacto: 'cura' }, escudo: { impacto: 'escudo' }, reforco: { impacto: 'reforco' }, dreno: { saida: 'dreno', impacto: 'enfraquecer' },
   execucao: { preparo: 'grand-carga', impacto: 'grand-impacto' },
+  ...Object.fromEntries(NOVAS.map((k) => {
+    const x = FAMILIAS_NOVAS[k] as { viagem?: string; faixa?: string; preparo?: string };
+    // a saída (o que voa ou o feixe) usa a biblioteca; o impacto é o som da própria família
+    const saida: Sound | undefined = x.faixa === 'laser' ? 'feixe' : x.faixa ? 'feixe' : x.viagem === 'flecha' ? SOM_DA_NOVA('flecha')
+      : x.viagem === 'disco' ? SOM_DA_NOVA('disco') : x.viagem === 'bola_ki' ? 'disparo' : x.viagem ? 'disparo' : undefined;
+    const preparo: Sound | undefined = x.preparo ? 'carga-grande' : undefined;
+    const impacto = k === 'flecha' ? 'cravar' : k === 'disco' ? 'ricochete' : SOM_DA_NOVA(k);
+    return [k, { saida, preparo, impacto }];
+  })) as Record<FamiliaNova, SomDaFamilia>,
 };
 
 /* Famílias de apoio entram com prioridade de apoio na mixagem. */
-export const FAMILIAS_DE_APOIO = new Set<VfxFamily>(['cura', 'escudo', 'reforco', 'selo', 'maldicao', 'distorcao', 'portal']);
+export const FAMILIAS_DE_APOIO = new Set<VfxFamily>(['cura', 'escudo', 'reforco', 'selo', 'maldicao', 'distorcao', 'portal',
+  ...NOVAS.filter((k) => FAMILIAS_NOVAS[k].grupo === 'apoio')]);
 
 export interface SomManifesto { arquivo: string; versoes: number[]; duracoes: number[]; bytes: number; descricao: string }
 export interface Manifesto { taxa: number; versoes: number; sons: Record<Sound, SomManifesto> }
