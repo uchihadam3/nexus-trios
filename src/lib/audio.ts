@@ -75,8 +75,6 @@ class BattleAudio {
   async unlock(){
     try{
       if(!this.ctx){
-        // iPhone: sem isto, a chave do silencioso cala o áudio do jogo (Safari 17+ entende como mídia, igual vídeo)
-        try{const sessao=(navigator as Navigator&{audioSession?:{type:string}}).audioSession;if(sessao)sessao.type='playback';}catch{/* navegador sem audioSession */}
         this.ctx=new AudioContext();const ctx=this.ctx;
         this.master=ctx.createGain();this.music=ctx.createGain();this.effects=ctx.createGain();
         // compressor no fim: segura picos de vários sons juntos sem esmagar a dinâmica
