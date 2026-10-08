@@ -109,3 +109,71 @@ Status, não na força — mas isso precisa da sua decisão, não da minha.
 - **Nenhum personagem foi nerfado ou buffado individualmente nesta fase**,
   porque os dados não sustentam decisão individual. Para isso, rode
   `SEMENTES=100 npx tsx scripts/calibrar.ts`.
+
+## Segunda rodada · fechar as pontas
+
+Medição de partida (25.000 lutas, 100 por personagem): média 50,5%, desvio de
+13,7 pontos entre personagens, amplitude de 51,3 pontos entre famílias. Oito
+personagens acima de dois desvios (Azula, Toph, Jill, Garou e Sr. Incrível
+passavam de 80%) e oito abaixo (Xavier e Light em 17%).
+
+**1 · Família, de novo, onde o intervalo não deixa dúvida.** counter, reaper,
+tempest e siege desceram; evader, chronos, limit, saboteur, controller e
+tactician subiram. O efeito foi pequeno — counter de 67,0% para 65,4% — e a
+razão é instrutiva: o fator da família só toca as habilidades, e boa parte do
+dano dessas famílias vem do ataque básico e da Passiva.
+
+**2 · O piso do piso.** O piso de dano das famílias de utilidade era calculado
+pelo ataque do personagem, e some em quem quase não ataca: o Xavier tem ataque
+8 e causava 25, 31 e 42 de dano nas habilidades. Agora o piso usa pelo menos
+40 de referência e também sobe o dano que já existe abaixo dele.
+
+**3 · Calibragem individual por medição repetida** (`scripts/calibrar-individual.ts`,
+tabela em `src/data/calibragem-individual.ts`). Um fator por personagem que
+multiplica dano (básico, habilidades e Passiva), cura e Escudo, e a Vida pela
+raiz. O ritmo — intervalo do básico, Carga, Preparo, Recarga — não muda. O
+script mede os 250 com 200 lutas cada, mexe só em quem está fora de 38% a 62%,
+empurra para dentro da faixa e não para o meio, e repete quatro vezes. Mede
+todos a cada rodada, porque mexer num muda as lutas dos outros.
+
+| | antes | depois |
+|---|---:|---:|
+| desvio entre personagens | 13,7 | **8,6** (9,0 com sementes novas) |
+| amplitude entre famílias | 51,3 | **24,0** |
+| acima de dois desvios | 8 | **0** com sementes novas |
+| mais forte | 85% | 68% |
+
+A conferência com sementes que não serviram para escolher nada dá o mesmo
+quadro: o ajuste não decorou as lutas em que foi medido.
+
+**As âncoras.** Na primeira tentativa deixei Saitama e Tempestade de fora, e
+os dois caíram para 36% e 37% — os vizinhos subiram e eles ficaram. É nerf por
+tabela, que a direção proibiu para o Saitama. Agora os dois só podem subir.
+Medidos com 400 lutas: **Saitama 52,3%** (fator 1,12) e **Tempestade 41,0%**,
+sem ajuste. Ela media 45% antes; os intervalos se sobrepõem, então nada
+confirma que ela tenha caído, e nada pede nerf.
+
+**Anya Forger** causava 82 de dano numa luta inteira e ganhava 7%. Recebeu o
+mesmo piso de dano das famílias de utilidade (`pisosIndividuais`) e o fator
+por cima: 44%.
+
+**O que um número não resolve: Light Yagami.** 8% a 10%. Testei Carga mais
+rápida, Investigação maior, Preparo menor e mais Vida, juntos: no máximo 19%.
+A causa é a regra dele: o Light investiga primeiro os inimigos que ainda não
+conhece, espalha a investigação pelos três antes de focar um, e só 181 dos 250
+podem ser eliminados pela Death Note. Mudar isso é redesenhar o personagem,
+e isso é decisão da direção — ele ficou de fora da tabela.
+
+**O Professor Xavier** está no fator máximo e ficou em 25% a 30%. Subiu de
+17%, mas segue embaixo: o kit dele é coordenar o trio, e a medição não vê esse
+valor. Também é decisão de design.
+
+**Efeitos colaterais medidos e tratados.** As identidades e as metas de
+Maestria saem de lutas medidas, então foram geradas de novo
+(`medir-identidades`, `derivar-identidades`, `gerar-maestria`). A conquista
+"Sem pressa" pedia 60 segundos com os três vivos — em 4.000 lutas sorteadas a
+vitória mais longa com os três vivos durou 55, antes e depois desta rodada;
+ela só acontecia num trio escolhido a dedo. Passou a pedir 45, o percentil 97
+dessas vitórias. As vitórias atropeladas (três vivos) caíram de 854 para 540
+em 4.000 lutas, e as viradas de 30 pontos subiram de 4,4% para 6,8% das
+vitórias: as lutas ficaram mais disputadas.

@@ -41,6 +41,15 @@ import { createBattle, stepBattle } from '../src/engine/battle';
  */
 const SEMENTES = Number(process.env.SEMENTES ?? 24);
 
+/*
+ * Conferir fora da amostra. Um ajuste escolhido olhando as sementes 1 a 100
+ * pode estar só decorando essas lutas; `SEMENTE_BASE=1000` mede com outras.
+ * `SOMENTE=id,id` mede só esses personagens (contra o mesmo sorteio de
+ * sempre) e não regrava o arquivo da calibragem.
+ */
+const SEMENTE_BASE = Number(process.env.SEMENTE_BASE ?? 0);
+const SOMENTE = process.env.SOMENTE ? new Set(process.env.SOMENTE.split(',')) : null;
+
 /* ---------------------------------------------------------------------------
  * A nota estrutural: o que a ficha promete.
  * ------------------------------------------------------------------------- */
@@ -119,12 +128,14 @@ interface Medida {
 const medidas: Medida[] = [];
 
 for (const [indice, c] of characters.entries()) {
+  if (SOMENTE && !SOMENTE.has(c.id)) continue;
   let vitorias = 0, dano = 0, cura = 0, protecao = 0, abates = 0, vivo = 0;
   for (let s = 0; s < SEMENTES; s += 1) {
     const outros = characters.filter((o) => o.id !== c.id);
     /* A mesma regra de sorteio para todos: o que varia é quem está medindo. */
-    const pega = (n: number) => outros[(s * 37 + n * 61 + indice) % outros.length]!.id;
-    const b = createBattle([c.id, pega(1), pega(2)], [pega(3), pega(4), pega(5)], s + 1);
+    const k = s + SEMENTE_BASE;
+    const pega = (n: number) => outros[(k * 37 + n * 61 + indice) % outros.length]!.id;
+    const b = createBattle([c.id, pega(1), pega(2)], [pega(3), pega(4), pega(5)], k + 1);
     const eu = b.fighters[0]!;
     for (let passo = 0; passo < 4200 && !b.finished; passo += 1) stepBattle(b);
     if (b.winner === 'player') vitorias += 1;
@@ -151,7 +162,7 @@ const desvio = Math.sqrt(taxas.reduce((a, t) => a + (t - media) ** 2, 0) / taxas
 const acimaDaCurva = medidas.filter((m) => m.taxa > media + desvio * 2);
 const abaixoDaCurva = medidas.filter((m) => m.taxa < media - desvio * 2);
 
-writeFileSync('docs/calibragem-250.json', `${JSON.stringify({
+if (!SOMENTE && SEMENTE_BASE === 0) writeFileSync('docs/calibragem-250.json', `${JSON.stringify({
   sementesPorPersonagem: SEMENTES, media, desvio, medidas,
   acimaDaCurva: acimaDaCurva.map((m) => m.nome), abaixoDaCurva: abaixoDaCurva.map((m) => m.nome),
 }, null, 2)}\n`);
@@ -182,7 +193,8 @@ console.log('Acima de ±10, conclusões sobre um personagem isolado são sorteio
 
 console.log('\n=== as duas âncoras que a direção nomeou ===');
 for (const id of ['saitama', 'storm']) {
-  const m = medidas.find((x) => x.id === id)!;
+  const m = medidas.find((x) => x.id === id);
+  if (!m) continue;
   const posicao = medidas.indexOf(m) + 1;
   console.log(`${m.nome}: ${(m.taxa * 100).toFixed(1)}% de vitória · posição ${String(posicao)} de ${String(medidas.length)} · ${((m.taxa - media) / desvio).toFixed(2)} desvios da média`);
   console.log(linha(m));

@@ -128,9 +128,14 @@ export const conquistas: readonly Conquista[] = [
     aconteceu: (c) => c.time.every((id) => !c.vistos.includes(id)) },
   { id: 'e-mesmo-mundo', nome: 'Gente de casa', categoria: 'Experimentação', dica: 'Vença com os três do mesmo universo.',
     aconteceu: (c) => c.venceu && universos(c) === 1 },
-  /* Pedia um maior golpe de até 150, e nem o trio de menor ataque fica abaixo de 312. */
-  { id: 'e-sem-pressa', nome: 'Sem pressa', categoria: 'Experimentação', dica: 'Vença com os três vivos uma luta que passou de 60 segundos.',
-    aconteceu: (c) => c.venceu && c.battle.time > 60 && meuTrio(c).every((f) => f.hp > 0) },
+  /*
+   * Pedia um maior golpe de até 150, e nem o trio de menor ataque fica abaixo de 312.
+   * Depois pediu 60 segundos — e em 4.000 lutas sorteadas a vitória mais longa
+   * com os três vivos durou 55. Só um trio escolhido a dedo chegava lá. 45 é o
+   * percentil 97 dessas vitórias, antes e depois da calibragem individual.
+   */
+  { id: 'e-sem-pressa', nome: 'Sem pressa', categoria: 'Experimentação', dica: 'Vença com os três vivos uma luta que passou de 45 segundos.',
+    aconteceu: (c) => c.venceu && c.battle.time > 45 && meuTrio(c).every((f) => f.hp > 0) },
 
   /* ---- Vantagem ---- */
   { id: 'v-virada', nome: 'Virou o jogo', categoria: 'Vantagem', dica: 'Vença depois de ficar 30 pontos atrás na Vantagem.',

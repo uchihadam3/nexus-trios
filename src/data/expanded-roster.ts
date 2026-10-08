@@ -715,15 +715,30 @@ function makeSkill(c:Row,index:number,m:Move,hook?:IdentityHook):Skill{
  *
  * Primeira rodada de calibragem. Os valores vêm da medição, e a medição é
  * refeita a cada mudança.
+ *
+ * Segunda rodada (25.000 lutas, 100 por personagem): a amplitude entre famílias
+ * caiu de 63,9 para 51,3 pontos, mas as pontas continuavam fora com intervalos
+ * que não se tocam — counter 67,0% ±4,1, reaper 66,6%, tempest 65,8%, siege
+ * 64,5% em cima; evader 28,7% ±5,1, chronos 37,4%, limit 39,5%, saboteur
+ * 40,4%, controller 41,6%, tactician 42,2% embaixo. Só essas foram mexidas.
  */
 const calibragemDeDano:Partial<Record<Style,number>>={
  /* Abaixo da curva: entregavam pouco demais para justificar a vaga. */
- evader:1.9, saboteur:1.45, limit:1.45, chronos:1.4, controller:1.4,
- trickster:1.35, gamble:1.3, observer:1.2, tactician:1.2, support:1.2, warden:1.15,
+ evader:2.2, saboteur:1.7, limit:1.65, chronos:1.65, controller:1.6,
+ trickster:1.35, gamble:1.3, observer:1.2, tactician:1.4, support:1.2, warden:1.15,
  /* Acima da curva: cobriam o campo e decidiam a luta sozinhas. */
- tempest:.72, aura:.78, siege:.85, counter:.88, duelist:.88,
- reaper:.9, juggernaut:.9, swarm:.9, predator:.9,
+ tempest:.62, aura:.78, siege:.74, counter:.72, duelist:.88,
+ reaper:.74, juggernaut:.9, swarm:.9, predator:.9,
 };
+
+/*
+ * A Vida do `evader`.
+ *
+ * Dano não bastou: Jerry e Pernalonga sobreviviam a 17% e 20% das lutas, com
+ * 820 e 900 de Vida. Quem morre cedo não chega a esquivar. A esquiva continua
+ * sendo a defesa; a Vida só dá tempo de ela acontecer.
+ */
+const calibragemDeVida:Partial<Record<Style,number>>={evader:1.2};
 
 /** Aplica a calibragem da família ao dano, preservando todo o resto. */
 const calibrarDano=(efeitos:readonly Effect[],fator:number):Effect[]=>
@@ -751,12 +766,28 @@ const FAMILIAS_DE_UTILIDADE:ReadonlySet<Style>=new Set<Style>([
  'observer','tactician','support','warden','jester','martyr','alchemy',
 ]);
 
+/*
+ * O piso também precisa de um piso.
+ *
+ * Calculado só pelo ataque, ele some em quem quase não ataca: o Professor
+ * Xavier tem ataque 8, e as habilidades dele causavam 25, 31 e 42 de dano numa
+ * luta inteira. Ele ganhava 17% das lutas. O ataque continua decidindo o
+ * básico; para o piso das habilidades vale pelo menos este.
+ */
+const ATAQUE_MINIMO_DO_PISO=40;
+
 const pisoDeDano=(efeitos:readonly Effect[],estilo:Style,ataque:number,indice:number):Effect[]=>{
   if(!FAMILIAS_DE_UTILIDADE.has(estilo))return [...efeitos];
-  if(efeitos.some(e=>e.kind==='damage'||e.kind==='release'))return [...efeitos];
+  if(efeitos.some(e=>e.kind==='release'))return [...efeitos];
   /* A terceira habilidade é a mais cara, então carrega o piso mais alto. */
   const escala=[2.6,3.2,4.4][indice]??3;
-  return [damage(Math.round(ataque*escala)),...efeitos];
+  const piso=Math.round(Math.max(ataque,ATAQUE_MINIMO_DO_PISO)*escala);
+  const total=efeitos.reduce((soma,e)=>soma+(e.kind==='damage'?e.value:0),0);
+  if(!efeitos.some(e=>e.kind==='damage'))return [damage(piso),...efeitos];
+  /* Já causa dano: só sobe o que estiver abaixo do piso. */
+  if(total>=piso)return [...efeitos];
+  const fator=piso/total;
+  return efeitos.map(e=>e.kind==='damage'?{...e,value:Math.round(e.value*fator)}:e);
 };
 
 /*
@@ -771,7 +802,7 @@ const calibrarSustento=(efeitos:readonly Effect[],estilo:Style):Effect[]=>
 
 export const expandedCharacters:Character[]=rows.map(c=>{
   const kit=adjustedKit(c),adjustment=identityAdjustments[c.id],hook=adjustment?.hook===false?undefined:hookFor(c);
-  return {id:c.id,name:c.name,universe:c.universe,portrait:approvedPortraitIds.has(c.id)?`/assets/portraits/expanded/${c.id}.webp`:`/assets/portraits/placeholder-${c.id}.svg`,color:c.color,symbol:c.symbol,idea:c.idea,vulnerability:c.vulnerability,hp:c.hp,interval:c.interval,deathNoteCompatible:c.deathNoteCompatible??false,power:c.power,tags:c.tags,basic:{name:'Ataque básico',effects:fundirEfeitos([damage(c.attack),...(hook?[hook.effect]:[]),...(kit.basic??[])],[],'enemyWeak'),visual:'impact',target:'enemyWeak'},trait:{name:kit.trait,description:kit.traitText,on:kit.traitOn,effects:fundirEfeitos(kit.traitEffects,[],kit.traitTarget),target:kit.traitTarget,cooldown:kit.traitCool},skills:[0,1,2].map(i=>{
+  return {id:c.id,name:c.name,universe:c.universe,portrait:approvedPortraitIds.has(c.id)?`/assets/portraits/expanded/${c.id}.webp`:`/assets/portraits/placeholder-${c.id}.svg`,color:c.color,symbol:c.symbol,idea:c.idea,vulnerability:c.vulnerability,hp:Math.round(c.hp*(calibragemDeVida[c.style]??1)/10)*10,interval:c.interval,deathNoteCompatible:c.deathNoteCompatible??false,power:c.power,tags:c.tags,basic:{name:'Ataque básico',effects:fundirEfeitos([damage(c.attack),...(hook?[hook.effect]:[]),...(kit.basic??[])],[],'enemyWeak'),visual:'impact',target:'enemyWeak'},trait:{name:kit.trait,description:kit.traitText,on:kit.traitOn,effects:fundirEfeitos(kit.traitEffects,[],kit.traitTarget),target:kit.traitTarget,cooldown:kit.traitCool},skills:[0,1,2].map(i=>{
     const s=makeSkill(c,i as 0|1|2,kit.moves[i as 0|1|2],hook);
     const fator=calibragemDeDano[c.style]??1;
     const comPiso=pisoDeDano(s.effects,c.style,c.attack,i);

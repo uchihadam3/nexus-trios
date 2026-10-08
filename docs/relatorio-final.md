@@ -147,9 +147,12 @@ fase tem seu documento em `docs/`, com a medição que sustenta o que está aqui
 
 - **Google Login** (item 19): falta a credencial do Google, que só o dono do
   projeto cria.
-- **Balanceamento**, sem urgência: Saitama morre em 77% das lutas; Sakura
-  (61,5%) e Edward (57,5%) ficaram acima da curva depois da correção dos
-  efeitos; Piccolo segue fraco (26%), o que já era assim antes.
+- **Balanceamento**: a segunda rodada (`docs/fase-d-calibragem.md`) levou o
+  desvio entre personagens de 13,7 para 8,6 pontos e a amplitude entre
+  famílias de 51,3 para 24,0. Ficam abertos dois casos de design, não de
+  número: **Light Yagami** (8% a 10%; a Death Note espalha a investigação e
+  não alcança 69 dos 250) e **Professor Xavier** (25% a 30%; o valor dele é
+  coordenar, e a medição não vê isso).
 - **Limpeza do banco**: a coluna `objectives_completed` e a tabela
   `daily_weekly_progress` não são mais usadas e podem sair numa migração
   futura.
