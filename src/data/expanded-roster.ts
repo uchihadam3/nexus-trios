@@ -1,4 +1,7 @@
 import type { Character, ChargeRule, Effect, Skill, StatusId, Target, Topic, Visual } from '../engine/types';
+import approvedPortraits from './expanded-portrait-approvals.json';
+
+const approvedPortraitIds = new Set<string>(approvedPortraits);
 
 type Style = 'surge'|'guardian'|'predator'|'observer'|'controller'|'support'|'precision'|'revenant'|'speed'|'gamble'|'elemental'|'duelist'|'trapper'|'transform'|'trickster'|'summoner'|'chronos'|'tactician'|'psychic'|'alchemy'|'finisher'|'dominion'|'limit'|'bruiser'|'reaper'|'warden'|'sniper'|'vanguard'|'juggernaut'|'saboteur'|'tempest'|'counter'|'devourer'|'swarm'|'martyr'|'siege'|'evader'|'jester'|'inventor'|'aura';
 type Row = {id:string;name:string;universe:string;color:string;symbol:string;idea:string;question:string;vulnerability:string;hp:number;interval:number;attack:number;power:number;tags:string[];style:Style;moves:[string,string,string];deathNoteCompatible?:boolean};
@@ -768,7 +771,7 @@ const calibrarSustento=(efeitos:readonly Effect[],estilo:Style):Effect[]=>
 
 export const expandedCharacters:Character[]=rows.map(c=>{
   const kit=adjustedKit(c),adjustment=identityAdjustments[c.id],hook=adjustment?.hook===false?undefined:hookFor(c);
-  return {id:c.id,name:c.name,universe:c.universe,portrait:`/assets/portraits/placeholder-${c.id}.svg`,color:c.color,symbol:c.symbol,idea:c.idea,vulnerability:c.vulnerability,hp:c.hp,interval:c.interval,deathNoteCompatible:c.deathNoteCompatible??false,power:c.power,tags:c.tags,basic:{name:'Ataque básico',effects:fundirEfeitos([damage(c.attack),...(hook?[hook.effect]:[]),...(kit.basic??[])],[],'enemyWeak'),visual:'impact',target:'enemyWeak'},trait:{name:kit.trait,description:kit.traitText,on:kit.traitOn,effects:fundirEfeitos(kit.traitEffects,[],kit.traitTarget),target:kit.traitTarget,cooldown:kit.traitCool},skills:[0,1,2].map(i=>{
+  return {id:c.id,name:c.name,universe:c.universe,portrait:approvedPortraitIds.has(c.id)?`/assets/portraits/expanded/${c.id}.webp`:`/assets/portraits/placeholder-${c.id}.svg`,color:c.color,symbol:c.symbol,idea:c.idea,vulnerability:c.vulnerability,hp:c.hp,interval:c.interval,deathNoteCompatible:c.deathNoteCompatible??false,power:c.power,tags:c.tags,basic:{name:'Ataque básico',effects:fundirEfeitos([damage(c.attack),...(hook?[hook.effect]:[]),...(kit.basic??[])],[],'enemyWeak'),visual:'impact',target:'enemyWeak'},trait:{name:kit.trait,description:kit.traitText,on:kit.traitOn,effects:fundirEfeitos(kit.traitEffects,[],kit.traitTarget),target:kit.traitTarget,cooldown:kit.traitCool},skills:[0,1,2].map(i=>{
     const s=makeSkill(c,i as 0|1|2,kit.moves[i as 0|1|2],hook);
     const fator=calibragemDeDano[c.style]??1;
     const comPiso=pisoDeDano(s.effects,c.style,c.attack,i);

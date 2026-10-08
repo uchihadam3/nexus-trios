@@ -7,6 +7,7 @@ import { createBattle } from '../src/engine/battle';
 import type { BattleEvent } from '../src/engine/types';
 import { statuses } from '../src/data/statuses';
 import { skillArtPath } from '../src/data/skill-art';
+import approvedPortraits from '../src/data/expanded-portrait-approvals.json';
 
 const root=new URL('../public/',import.meta.url);
 describe('Arte local e composição',()=>{
@@ -17,6 +18,23 @@ describe('Arte local e composição',()=>{
     }
     expect(characters.every(character=>character.portrait.startsWith('/assets/portraits/'))).toBe(true);
     expect(new Set(characters.map(character=>character.portrait)).size).toBe(characters.length);
+  });
+  it('usa somente retratos revisados dos quadros originais para a expansão',()=>{
+    const approved=new Set(approvedPortraits);
+    const expanded=characters.slice(100);
+    expect(approved.size).toBe(approvedPortraits.length);
+    expect(expanded.filter(character=>approved.has(character.id))).toHaveLength(110);
+    for(const character of expanded){
+      const reviewed=approved.has(character.id);
+      expect(character.portrait).toBe(reviewed
+        ?`/assets/portraits/expanded/${character.id}.webp`
+        :`/assets/portraits/placeholder-${character.id}.svg`);
+      if(reviewed){
+        const file=readFileSync(new URL(character.portrait.slice(1),root));
+        expect(file.toString('ascii',0,4)).toBe('RIFF');
+        expect(file.toString('ascii',8,12)).toBe('WEBP');
+      }
+    }
   });
   it('usa os 20 retratos originais enviados para os personagens correspondentes',()=>{
     const portraits:Record<string,string>={
