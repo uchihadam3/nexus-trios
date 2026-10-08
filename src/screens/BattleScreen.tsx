@@ -1,4 +1,4 @@
-import { useLayoutEffect,useRef,useState } from 'react';
+import { useCallback,useLayoutEffect,useRef,useState } from 'react';
 import { Pause,Play,FastForward,VolumeX,Volume2,SlidersHorizontal,Check,LogOut,ChevronLeft,ScrollText } from 'lucide-react';
 import { AuxIcon } from '../components/Icon';
 import type { Battle } from '../engine/types';
@@ -17,11 +17,32 @@ import { statuses } from '../data/statuses';
 
 export function BattleScreen({battle,beat,index,name,settings,paused,onPause,onAbandon,onSettings,onExit}:{battle:Battle;beat:Beat|null;index:number;name:string;settings:Settings;paused:boolean;onPause:()=>void;onAbandon:()=>void;onSettings:(s:Settings)=>void;onExit?:()=>void}){
   const arena=useRef<HTMLDivElement>(null),[anchors,setAnchors]=useState<Anchors>({}),[box,setBox]=useState({w:0,h:0,medal:80}),[mixer,setMixer]=useState(false),[historyOpen,setHistoryOpen]=useState(false),[inspect,setInspect]=useState<InspectTarget|null>(null),[tutorial,setTutorial]=useState(()=>{try{return index===0&&!localStorage.getItem('nexus-battle-guide-v1')?0:-1}catch{return -1}});
+  /*
+   * Onde cada medalhão e cada habilidade estão, em % da arena — é para onde
+   * apontam efeitos, linhas, mira e números. Medido pela posição de layout
+   * (offsetLeft/offsetTop), que ignora as animações: um medalhão no meio do
+   * avanço não muda o ponto de mira. E medido de novo sempre que um lutador
+   * muda de tamanho (uma linha de Status aparece, o rótulo de preparo entra)
+   * e a cada ação, para nunca mirar onde o medalhão estava antes.
+   */
+  const measure=useCallback(()=>{
+    const el=arena.current;if(!el)return;
+    const w=el.clientWidth,h=el.clientHeight;if(!w||!h)return;
+    const local=(node:HTMLElement)=>{let x=0,y=0,n:HTMLElement|null=node;while(n&&n!==el){x+=n.offsetLeft;y+=n.offsetTop;n=n.offsetParent as HTMLElement|null;}return n===el?{x,y}:null;};
+    const next:Anchors={};
+    el.querySelectorAll<HTMLElement>('[data-portrait],[data-ability]').forEach(node=>{const p=local(node);if(!p)return;const key=node.dataset.portrait??node.dataset.ability!;next[key]={x:100*(p.x+node.offsetWidth/2)/w,y:100*(p.y+node.offsetHeight/2)/h};});
+    const medal=el.querySelector<HTMLElement>('.unit-medal')?.offsetWidth??80;
+    setAnchors(prev=>{const a=Object.keys(next);return a.length===Object.keys(prev).length&&a.every(k=>prev[k]&&Math.abs(prev[k].x-next[k].x)<.05&&Math.abs(prev[k].y-next[k].y)<.05)?prev:next;});
+    setBox(prev=>prev.w===w&&prev.h===h&&prev.medal===medal?prev:{w,h,medal});
+  },[]);
   useLayoutEffect(()=>{
     const el=arena.current;if(!el)return;
-    const measure=()=>{const box=el.getBoundingClientRect(),next:Anchors={};el.querySelectorAll<HTMLElement>('[data-portrait],[data-ability]').forEach(node=>{const rect=node.getBoundingClientRect(),key=node.dataset.portrait??node.dataset.ability!;next[key]={x:100*(rect.x+rect.width/2-box.x)/box.width,y:100*(rect.y+rect.height/2-box.y)/box.height};});setAnchors(next);setBox({w:box.width,h:box.height,medal:el.querySelector('.unit-medal')?.getBoundingClientRect().width??80});};
-    measure();const observer=new ResizeObserver(measure);observer.observe(el);return()=>observer.disconnect();
-  },[battle.seed]);
+    measure();
+    const observer=new ResizeObserver(()=>measure());observer.observe(el);
+    el.querySelectorAll('.unit').forEach(u=>observer.observe(u));
+    return()=>observer.disconnect();
+  },[battle.seed,measure]);
+  useLayoutEffect(()=>{measure();},[beat?.event.id,beat?.impacted,measure]);
   const lead=battle.dominion>3?'player':battle.dominion< -3?'enemy':'neutral';
   const label=lead==='player'?'Seu trio está à frente':lead==='enemy'?'Rivais estão à frente':'Disputa equilibrada';
   const position=50-Math.min(48,Math.max(-48,battle.dominion*.48));
