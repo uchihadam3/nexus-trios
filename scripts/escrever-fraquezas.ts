@@ -48,7 +48,7 @@ const danoDe = (s: Skill) => s.effects.reduce((t, e) => t + (e.kind === 'damage'
 const CONDICAO: Record<string, string> = {
   injured: 'o alvo já estiver ferido', enemyCast: 'um inimigo estiver em Preparo',
   threatened: 'o trio estiver sob ameaça', investigated: 'houver um alvo investigado por completo',
-  vulnerable: 'um inimigo estiver vulnerável ou sob controle', storedEnergy: 'houver energia guardada',
+  vulnerable: 'um inimigo estiver Exposto, Marcado, Paralisado, Eletrificado ou Queimando', storedEnergy: 'houver energia guardada',
 };
 
 /* Quanto ele vence a menos contra rivais com esta identidade (em pontos). */

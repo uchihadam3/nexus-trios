@@ -162,15 +162,29 @@ const maiuscula=(t:string):string=>t.charAt(0).toUpperCase()+t.slice(1);
  * Só o Status tem mais de uma: nome, o que faz, como acumula, quanto dura. O
  * resto é uma frase só, e fica assim.
  */
+/*
+ * Na ficha a linha do Status fica só com o nome, o número e o tempo:
+ * "Aplica Fortalecido · +18% de dano · 7 s". O que o Status faz e como ele
+ * soma estão no cartão que abre ao tocar no nome (src/presentation/glossario.ts).
+ * Confuso, Paralisado e Silenciado não têm número: a linha é só o nome.
+ */
+export function valorCurto(id:StatusId,value:number):string[]{
+  const v=presentStatus(id,value).value;
+  const curto:Partial<Record<StatusId,string>>={
+    exposed:`+${v} de dano recebido`,marked:`+${v} de dano recebido`,electric:`+${v} de dano recebido`,
+    protected:`−${v} de dano recebido`,slow:`${v} mais lento`,rooted:`${v} mais lento`,haste:`${v} mais rápido`,
+    regen:`+${v} Vida/s`,burning:`−${v} Vida/s`,strengthened:`+${v} de dano`,weakened:`−${v} de dano`,
+  };
+  return curto[id]?[curto[id]!]:[];
+}
 export function partesDoEfeito(effect:Effect,defaultTarget:Target):string[]{
   if(effect.kind!=='status')return [presentEffect(effect,defaultTarget,'agrupado')];
-  const p=presentStatus(effect.status,effect.value);
   /*
    * "Aplica <Status>", como pediu o jogador e como o documento da direção
    * manda: sem o verbo, "Lento · 7% mais lento" lia como se a habilidade
    * fosse lenta. O alvo continua no cabeçalho do grupo, então não se repete.
    */
-  return [`Aplica ${statuses[effect.status].name}`,p.summary,...(p.accumulation?[p.accumulation]:[]),secs(effect.duration)];
+  return [`Aplica ${statuses[effect.status].name}`,...valorCurto(effect.status,effect.value),secs(effect.duration)];
 }
 const linhaDe=(effect:Effect,defaultTarget:Target):LinhaDeEfeito=>{
   const partes=partesDoEfeito(effect,defaultTarget);
@@ -258,8 +272,6 @@ export function presentEffect(effect:Effect,defaultTarget:Target,modo:ModoDeAlvo
      * A ordem segue a regra: ação → resultado → acúmulo → duração → alvo.
      */
     case 'status':{
-      const p=presentStatus(effect.status,effect.value);
-      const acumula=p.accumulation?` · ${p.accumulation}`:'';
       /*
        * Em quem, sempre — e junto do verbo.
        *
@@ -282,9 +294,14 @@ export function presentEffect(effect:Effect,defaultTarget:Target,modo:ModoDeAlvo
        * claro que **cada habilidade aplica a sua própria dose** — e o teto diz
        * até onde as doses somam.
        */
-      if(modo==='agrupado')return [`Aplica ${statuses[effect.status].name}`,p.summary,...(p.accumulation?[p.accumulation]:[]),secs(effect.duration)].join(' · ');
+      /*
+       * Na ficha agrupada a linha fica só com o nome, o número e o tempo:
+       * "Aplica Fortalecido · +18% de dano · 7 s". O que o Status faz e como
+       * ele soma estão no cartão que abre ao tocar no nome (glossário).
+       */
+      if(modo==='agrupado')return [`Aplica ${statuses[effect.status].name}`,...valorCurto(effect.status,effect.value),secs(effect.duration)].join(' · ');
       const emQuem=targetNamesEm[effect.target??defaultTarget];
-      return `Aplica ${statuses[effect.status].name} ${emQuem} · ${p.summary}${acumula} · ${secs(effect.duration)}`;
+      return [`Aplica ${statuses[effect.status].name} ${emQuem}`,...valorCurto(effect.status,effect.value),secs(effect.duration)].join(' · ');
     }
     case 'interrupt':return effect.mode==='cancel'?`Interrompe o Preparo${target}`:effect.mode==='delay'?`Atrasa o Preparo em ${secs(effect.value)}${target}`:`Reduz ${pct(effect.value)} do Preparo${target}`;
     case 'shift':return `${effect.value>=0?'Adianta':'Atrasa'} ${pct(Math.abs(effect.value))} do próximo ataque${target}`;
@@ -314,7 +331,7 @@ export function presentSkill(skill:Skill):SkillPresentation {
     enemyCast:'um inimigo estiver preparando uma habilidade',
     threatened:'um aliado tiver menos de 85% de Vida ou um inimigo começar o Preparo',
     investigated:'houver um alvo conhecido com 100 Investigação',
-    vulnerable:'um inimigo estiver vulnerável ou sob controle',
+    vulnerable:'um inimigo estiver Exposto, Marcado, Paralisado, Eletrificado ou Queimando',
     storedEnergy:'houver energia guardada',
   };
   /*

@@ -1,0 +1,94 @@
+/*
+ * O glossário do jogo: cada termo que aparece nas fichas e na batalha, com o
+ * que ele quer dizer em uma ou duas frases.
+ *
+ * A ficha mostrava a explicação na frente de cada efeito — "Aplica Confuso ·
+ * 25% de chance do ataque básico atingir a si mesmo" — e com três ou quatro
+ * efeitos por habilidade o cartão virava um parágrafo. Agora o cartão mostra
+ * só o termo e o número; tocar no termo abre a explicação.
+ */
+import type { StatusId } from '../engine/types';
+import { statuses } from '../data/statuses';
+
+export interface Termo {
+  id: string;
+  nome: string;
+  /** Cor do ponto e da borda do cartão. */
+  cor: string;
+  /** "Bom para quem recebe", "Ruim para quem recebe", ou uma categoria. */
+  rotulo: string;
+  /** O que faz, em linguagem de jogo. */
+  texto: string;
+  /** Uma linha a mais, quando ajuda (como acumula, um exemplo). */
+  extra?: string;
+  /** Formas como o termo aparece no texto (além do nome). */
+  formas?: string[];
+}
+
+const pct = (x: number) => `${Math.round(x * 100)}%`;
+
+/* O que cada Status faz, dito para quem nunca viu o jogo. */
+const FAZ: Record<StatusId, string> = {
+  exposed: 'Recebe mais dano de todo mundo enquanto durar.',
+  marked: 'Fica na mira do trio rival: recebe mais dano.',
+  electric: 'O corpo carregado de eletricidade recebe mais dano.',
+  paralyzed: 'Não ataca e o Preparo para de avançar. Perde a vez enquanto durar.',
+  protected: 'Recebe menos dano. Com 30% ou mais, o Preparo também não pode ser interrompido.',
+  slow: 'Demora mais para dar o próximo golpe e para preparar habilidades.',
+  rooted: 'Preso no lugar: demora mais para agir. Soma com Lento.',
+  haste: 'Dá o próximo golpe e prepara habilidades mais rápido.',
+  confused: 'A cada ataque básico, 1 chance em 4 de acertar a si mesmo.',
+  regen: 'Recupera Vida sozinho, a cada segundo.',
+  burning: 'Perde Vida sozinho, a cada segundo, mesmo sem apanhar.',
+  silenced: 'Não começa habilidades novas. O ataque básico continua.',
+  strengthened: 'Causa mais dano em tudo: ataque básico e habilidades.',
+  weakened: 'Causa menos dano em tudo.',
+};
+
+const acumula = (id: StatusId) => {
+  const s = statuses[id];
+  if (s.stack !== 'add') return 'Aplicar de novo renova o tempo; não soma.';
+  const teto = id === 'regen' || id === 'burning' ? `${s.cap} de Vida por segundo` : pct(s.cap);
+  return `Cada aplicação soma com a anterior, até ${teto}.`;
+};
+
+const doStatus = (id: StatusId): Termo => ({
+  id, nome: statuses[id].name, cor: statuses[id].color,
+  rotulo: statuses[id].tone === 'positivo' ? 'STATUS BOM · para quem recebe' : 'STATUS RUIM · para quem recebe',
+  texto: FAZ[id], extra: acumula(id),
+});
+
+const MECANICAS: Termo[] = [
+  { id: 'escudo', nome: 'Escudo', cor: '#8fd3ff', rotulo: 'PROTEÇÃO', texto: 'Uma camada que absorve o dano antes da Vida. Some quando acaba ou depois de 10 s.', extra: 'Escudos somados não passam de 55% da Vida máxima.' },
+  { id: 'energia', nome: 'Energia guardada', cor: '#ffd36b', rotulo: 'RECURSO', formas: ['energia guardada', 'energia'], texto: 'Um estoque que vai enchendo e não faz nada sozinho. Quando o personagem usa a habilidade que "Libera energia", solta tudo de uma vez como dano — e o estoque volta a zero.', extra: 'Quanto mais tempo guardando, maior o golpe.' },
+  { id: 'carga', nome: 'Carga', cor: '#b8e282', rotulo: 'COMO AS HABILIDADES ENCHEM', texto: 'Cada habilidade tem uma barra de Carga. Cheia, a habilidade fica pronta. O que enche está escrito ao lado: atacar, apanhar, o tempo passando…' },
+  { id: 'preparo', nome: 'Preparo', cor: '#f4d47e', rotulo: 'TEMPO ATÉ SAIR', texto: 'Quanto a habilidade demora para sair depois de começar. Durante o Preparo, o inimigo pode interromper. "Instantâneo" sai na hora.' },
+  { id: 'resfriamento', nome: 'Resfriamento', cor: '#9fc3e0', rotulo: 'DESCANSO', texto: 'Depois de usada, a habilidade descansa esse tempo antes de voltar a encher a Carga.' },
+  { id: 'usa-quando', nome: 'Usa quando', cor: '#c3a2ff', rotulo: 'CONDIÇÃO', texto: 'Mesmo pronta, a habilidade espera esta situação para sair.' },
+  { id: 'proximo-ataque', nome: 'próximo ataque', cor: '#d2f66b', rotulo: 'RITMO', formas: ['próximo ataque'], texto: 'Mexe na vez de agir. Adiantar faz o próximo golpe sair antes; atrasar faz o alvo esperar mais.' },
+  { id: 'interrompe', nome: 'Interrupção', cor: '#ff9a76', rotulo: 'CORTAR O GOLPE', formas: ['Interrompe o Preparo', 'Atrasa o Preparo', 'do Preparo'], texto: 'Age em quem está preparando uma habilidade: cancela o golpe, ou empurra para mais tarde, ou encurta o que já foi preparado.' },
+];
+
+export const GLOSSARIO: Termo[] = [...(Object.keys(statuses) as StatusId[]).map(doStatus), ...MECANICAS];
+export const termoPorId = Object.fromEntries(GLOSSARIO.map((t) => [t.id, t])) as Record<string, Termo>;
+
+/* Com maiúscula, como na ficha: "lento" numa frase comum não é o Status Lento. Todas as formas, as mais longas primeiro, para "Energia guardada" ganhar de "energia". */
+const FORMAS = GLOSSARIO.flatMap((t) => [t.nome, ...(t.formas ?? [])].map((f) => ({ f, t })))
+  .sort((a, b) => b.f.length - a.f.length);
+const escapa = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+const PADRAO = new RegExp(`(?<![\\p{L}])(${FORMAS.map((x) => escapa(x.f)).join('|')})(?![\\p{L}])`, 'gu');
+
+/** Divide um texto em pedaços, marcando os que são termos do glossário. */
+export function acharTermos(texto: string): (string | { texto: string; termo: Termo })[] {
+  const saida: (string | { texto: string; termo: Termo })[] = [];
+  let i = 0;
+  for (const m of texto.matchAll(PADRAO)) {
+    const achado = FORMAS.find((x) => x.f === m[0]);
+    if (!achado || m.index === undefined) continue;
+    if (m.index > i) saida.push(texto.slice(i, m.index));
+    saida.push({ texto: m[0], termo: achado.t });
+    i = m.index + m[0].length;
+  }
+  if (i < texto.length) saida.push(texto.slice(i));
+  return saida;
+}

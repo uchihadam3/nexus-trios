@@ -10,6 +10,7 @@
  * acumula e quanto dura discretos. É a diferença entre ler e escanear.
  */
 import type { GrupoDeEfeitos } from '../engine/skill-descriptions';
+import { ComTermos } from './Termos';
 
 /* "12 s", "7,5 s". É a duração, e vai para a direita, como etiqueta. */
 const ehDuracao = (t: string): boolean => /^\d[\d.,]* s$/.test(t);
@@ -24,10 +25,10 @@ export function EfeitosAgrupados({ grupos }: { grupos: GrupoDeEfeitos[] }) {
           const [nome, ...resto] = linha.partes;
           const duracao = resto.length > 0 && ehDuracao(resto[resto.length - 1]) ? resto[resto.length - 1] : null;
           const meio = duracao ? resto.slice(0, -1) : resto;
-          return <li key={j} title={linha.texto}>
+          return <li key={j}>
             <span className="efeito-corpo">
-              <b>{nome}</b>
-              {meio.map((parte, k) => <span key={k} className={ehAcumulo(parte) ? 'efeito-acumulo' : 'efeito-detalhe'}>{parte}</span>)}
+              <b><ComTermos texto={nome}/></b>
+              {meio.map((parte, k) => <span key={k} className={ehAcumulo(parte) ? 'efeito-acumulo' : 'efeito-detalhe'}><ComTermos texto={parte}/></span>)}
             </span>
             {duracao && <span className="efeito-duracao">{duracao}</span>}
           </li>;

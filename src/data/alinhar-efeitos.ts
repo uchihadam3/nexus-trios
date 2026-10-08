@@ -88,11 +88,32 @@ const juntarRepetidos = (effects: readonly Effect[], alvoDaParte: Target): Effec
 };
 const arrumar = (effects: readonly Effect[], alvo: Target) => juntarRepetidos(alinhar(effects, alvo), alvo);
 
+/*
+ * 4 · condição que o próprio personagem consegue criar.
+ *
+ * "Usa quando um inimigo estiver vulnerável" exige alguém Exposto, Marcado,
+ * Paralisado, Eletrificado ou Queimando. Quatro personagens tinham essa
+ * condição sem aplicar nenhum desses Status — a Forma perfeita do Cell ficava
+ * pronta e parada até ele cair, esperando um aliado que talvez nem existisse.
+ * Para eles a condição sai; o Preparo que a habilidade já tem continua sendo
+ * o custo do golpe.
+ */
+const DEIXA_VULNERAVEL = new Set(['exposed', 'marked', 'paralyzed', 'electric', 'burning']);
+const condicaoAlcancavel = (c: Character): Character => {
+  const todos = [...c.trait.effects, ...c.basic.effects, ...c.skills.flatMap((s) => s.effects)];
+  const cria = todos.some((e) => e.kind === 'status' && DEIXA_VULNERAVEL.has(e.status));
+  if (cria) return c;
+  return { ...c, skills: c.skills.map((s) => (s.condition === 'vulnerable' ? { ...s, condition: 'always' as const, preparation: Math.max(s.preparation, 1.2) } : s)) as [Skill, Skill, Skill] };
+};
+
 /** Aplica o alinhamento ao traço, ao ataque básico e às três habilidades. */
-export const alinharEfeitos = (c: Character): Character => ({
+export const alinharEfeitos = (c0: Character): Character => {
+  const c = condicaoAlcancavel(c0);
+  return {
   ...c,
   trait: { ...c.trait, effects: arrumar(c.trait.effects, c.trait.target) },
   basic: { ...c.basic, effects: arrumar(c.basic.effects, c.basic.target) },
   /* O tipo guarda exatamente três habilidades, então a tupla é remontada como tupla. */
   skills: c.skills.map((s) => ({ ...s, effects: arrumar(s.effects, s.target) })) as [Skill, Skill, Skill],
-});
+  };
+};
