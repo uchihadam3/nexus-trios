@@ -1,0 +1,88 @@
+/*
+ * Camadas das famílias de efeito (adendo, parte 3).
+ *
+ * Cada camada é uma folha 3 × 4 em tons neutros (tools/vfx/generate_families.py).
+ * A cor vem de --fx-cor: a folha serve de máscara para um fundo dessa cor, e
+ * o próprio cinza da folha entra por cima em "screen" — o núcleo estoura para
+ * claro e a borda fica na cor do personagem. As keyframes fx12-mask e fx12-bg
+ * (acting-motion.css) trocam os doze quadros.
+ */
+.battle-effects .fxl{
+  --fx-img:none;--ang:0deg;--flip:1;--dur:.6s;--delay:0s;
+  position:absolute;z-index:4;pointer-events:none;
+  background-color:var(--fx-cor,#cfe6ff);
+  -webkit-mask:var(--fx-img) 0 0/300% 400% no-repeat;mask:var(--fx-img) 0 0/300% 400% no-repeat;
+  transform:translate(-50%,-50%) rotate(var(--ang)) scaleX(var(--flip));
+  will-change:transform,opacity;
+}
+.battle-effects .fxl:after{
+  content:'';position:absolute;inset:0;
+  background:var(--fx-img) 0 0/300% 400% no-repeat;mix-blend-mode:screen;opacity:1;
+}
+
+/* Impacto: uma passada pelos doze quadros, no tempo do beat. */
+.battle-effects .fxl-impacto{z-index:5;animation:fx12-mask calc(var(--dur) * var(--motion-scale,1)) steps(1,end) calc(var(--delay) * var(--motion-scale,1)) both}
+.battle-effects .fxl-impacto:after{animation:fx12-bg calc(var(--dur) * var(--motion-scale,1)) steps(1,end) calc(var(--delay) * var(--motion-scale,1)) both}
+
+/* O acento fica por baixo do impacto principal. */
+.battle-effects .fxl-acento{z-index:4}
+
+/* Laços: projétil, feixe e preparo trocam quadro sem parar. */
+.battle-effects .fxl-laco{animation:fx12-mask calc(.6s * var(--motion-scale,1)) steps(1,end) infinite}
+.battle-effects .fxl-laco:after{animation:fx12-bg calc(.6s * var(--motion-scale,1)) steps(1,end) infinite}
+
+/* Viagem: sai de quem age e chega no alvo exatamente no impacto, apontado para ele. */
+.battle-effects .fxl-voo{
+  z-index:6;opacity:0;
+  animation:fx12-mask calc(.6s * var(--motion-scale,1)) steps(1,end) infinite,fx-voo calc(var(--voo) * var(--motion-scale,1)) cubic-bezier(.45,0,.85,.6) calc(var(--voo-delay) * var(--motion-scale,1)) both;
+}
+@keyframes fx-voo{
+  0%{opacity:0;transform:translate(-50%,-50%) rotate(var(--ang)) scale(.55)}
+  12%{opacity:1}
+  100%{opacity:1;transform:translate(calc(-50% + var(--dx)),calc(-50% + var(--dy))) rotate(var(--ang)) scale(1)}
+}
+
+/* Faixa: presa em quem age, cresce até o alvo, segura e some. */
+.battle-effects .fxl-faixa{
+  z-index:3;transform-origin:0 50%;opacity:0;
+  animation:fx12-mask calc(.6s * var(--motion-scale,1)) steps(1,end) infinite,fx-faixa calc(var(--faixa) * var(--motion-scale,1)) linear calc(var(--faixa-delay) * var(--motion-scale,1)) both;
+}
+@keyframes fx-faixa{
+  0%{opacity:0;transform:translateY(-50%) rotate(var(--ang)) scaleX(.02) scaleY(.4)}
+  8%{opacity:1}
+  22%{transform:translateY(-50%) rotate(var(--ang)) scaleX(1) scaleY(1.12)}
+  30%{transform:translateY(-50%) rotate(var(--ang)) scaleX(1) scaleY(1)}
+  62%{opacity:1;transform:translateY(-50%) rotate(var(--ang)) scaleX(1) scaleY(.9)}
+  100%{opacity:0;transform:translateY(-50%) rotate(var(--ang)) scaleX(1) scaleY(.15)}
+}
+
+/* Preparo: cresce devagar em quem prepara. */
+.battle-effects .fxl-laco:not(.fxl-voo):not(.fxl-faixa){z-index:3;opacity:.9}
+
+/* Menos movimento: nada voa nem cresce; o impacto aparece num quadro só, curto. */
+.battle-effects .fxl-parado,.battle-effects .fxl-parado:after{animation:fx-parado .5s ease-out both!important;-webkit-mask-position:50% 33.333%;mask-position:50% 33.333%;background-position:50% 33.333%}
+.battle-effects .fxl-parado:after{background-position:50% 33.333%}
+@keyframes fx-parado{0%{opacity:.95}100%{opacity:0}}
+@media(prefers-reduced-motion:reduce){
+  .battle-effects .fxl-voo,.battle-effects .fxl-faixa{display:none}
+}
+
+/* Galeria (tela de inspeção): o impacto em laço dentro de cada cartão. */
+.vfx-family-card .battle-effects{position:relative;height:96px;margin-bottom:8px;overflow:hidden;background:radial-gradient(ellipse,#1d2a30,#0b1014 72%);border-radius:7px}
+.battle-effects .fxl-galeria{left:50%;top:50%;width:96px;height:96px;animation:fx12-mask 1.3s steps(1,end) infinite}
+.battle-effects .fxl-galeria:after{animation:fx12-bg 1.3s steps(1,end) infinite}
+.vfx-lab-demo.battle-effects{container-type:normal}
+.vfx-group-title{margin:22px 0 10px;color:#c9d8cc;font-size:12px;letter-spacing:1.6px;text-transform:uppercase}
+.vfx-swatch{width:26px;height:26px;padding:0!important;border-radius:50%!important}
+.vfx-swatch.active{outline:2px solid #fff;outline-offset:2px}
+
+/*
+ * Com as famílias ligadas, o impacto colorido da família já desenha o golpe,
+ * a cura, o Escudo e o Status em cada alvo; a folha genérica da reação
+ * (parte 2) só repetiria por cima, num tom que não é o do personagem.
+ * Ficam o tremor, o empurrão e o clarão do retrato — e as folhas do preparo
+ * quebrado e do nocaute, que nenhuma família desenha.
+ */
+.arena:not(.effects-off) .reactor:not(.react-broken):not(.react-fall) .unit-fx{display:none}
+/* Na galeria a demonstração repete sozinha. */
+.vfx-lab-demo .fxl-impacto,.vfx-lab-demo .fxl-impacto:after,.vfx-lab-demo .fxl-voo,.vfx-lab-demo .fxl-faixa{animation-iteration-count:infinite}

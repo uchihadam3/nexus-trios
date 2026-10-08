@@ -255,26 +255,20 @@ def beam_sheet() -> Image.Image:
 
 
 def main() -> None:
+    """Hoje só a textura neutra da arena sai daqui.
+
+    Os efeitos de combate passaram para tools/vfx/generate_families.py
+    (adendo, parte 3): 46 folhas neutras tingidas pelo jogo, no lugar dos
+    treze atlas coloridos que este arquivo gerava. As funções antigas ficam
+    como referência do primeiro conjunto.
+    """
     OUT.mkdir(parents=True,exist_ok=True)
-    manifest={"seed":20261005,"fps":FPS,"columns":COLS,"rows":ROWS,"supersampling":SCALE,"families":{}}
-    for family,(color,size,shape) in FAMILIES.items():
-        sheet=Image.new("RGBA",(size*COLS,size*ROWS),(0,0,0,0))
-        for i in range(FRAMES): sheet.alpha_composite(frame(shape,i,size,color),((i%COLS)*size,(i//COLS)*size))
-        path=OUT/f"{family}.webp"
-        encoded=BytesIO();sheet.save(encoded,"WEBP",quality=78,method=5)
-        payload=encoded.getvalue()
-        if not payload: raise RuntimeError(f"empty generated atlas: {family}")
-        path.write_bytes(payload)
-        if path.stat().st_size != len(payload): raise RuntimeError(f"short atlas write: {family}")
-        manifest["families"][family]={"file":path.name,"frames":FRAMES,"fps":FPS,"frameSize":[size,size],"columns":COLS,"rows":ROWS,"alpha":True,"bytes":path.stat().st_size}
-    beam_sheet().save(OUT/"beam.webp","WEBP",quality=82,method=5)
-    manifest["beam"]={"file":"beam.webp","frameSize":[256,32],"frames":4,"bytes":(OUT/"beam.webp").stat().st_size}
     arena().save(OUT/"arena.webp","WEBP",quality=86,method=5)
-    manifest["arena"]={"file":"arena.webp","size":[768,1056],"containsText":False,"containsFigures":False}
+    manifest={"arena":{"file":"arena.webp","size":[768,1056],"containsText":False,"containsFigures":False}}
     for stale in OUT.glob("*.webp"):
-        if stale.name not in {"arena.webp","beam.webp",*(f"{family}.webp" for family in FAMILIES)}: stale.unlink()
+        if stale.name!="arena.webp": stale.unlink()
     (OUT/"manifest.json").write_text(json.dumps(manifest,indent=2)+"\n")
-    print(f"generated {len(FAMILIES)} layered atlases ({FRAMES} frames each) and arena in {OUT}")
+    print(f"generated arena in {OUT}")
 
 
 if __name__=="__main__": main()

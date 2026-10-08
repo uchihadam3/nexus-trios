@@ -73,7 +73,7 @@ export function BattleScreen({battle,beat,index,name,settings,paused,onPause,onA
       </div>
       <div className="team team-allies">{battle.fighters.filter(f=>f.side==='player').map(unit)}</div>
       <CombatConnections battle={battle} beat={beat} anchors={anchors} reduced={settings.reducedMotion}/>
-      <BattleEffects battle={battle} beat={beat} anchors={anchors} enabled={settings.effects} reduced={settings.reducedMotion}/>
+      <BattleEffects battle={battle} beat={beat} anchors={anchors} enabled={settings.effects} reduced={settings.reducedMotion} medal={box.medal}/>
       {paused&&<div className="paused-banner"><Pause size={16}/> BATALHA PAUSADA</div>}
     </div>
     <footer className="arena-controls">

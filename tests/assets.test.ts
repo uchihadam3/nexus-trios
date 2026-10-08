@@ -106,7 +106,7 @@ describe('Arte local e composição',()=>{
     }
   });
   it('inclui as faixas originais, arena e atlas reutilizáveis no build offline',()=>{
-    for(const file of ['assets/audio/harmony.ogg','assets/audio/rhythm.ogg','assets/audio/pulse.ogg','assets/audio/lead.ogg','assets/vfx/arena.webp','assets/vfx/fire.webp','assets/vfx/physical_heavy.webp','assets/vfx/beam.webp'])expect(existsSync(new URL(file,root)),file).toBe(true);
+    for(const file of ['assets/audio/harmony.ogg','assets/audio/rhythm.ogg','assets/audio/pulse.ogg','assets/audio/lead.ogg','assets/vfx/arena.webp','assets/vfx/familias/fogo.webp','assets/vfx/familias/golpe_pesado.webp','assets/vfx/familias/feixe_pesado.webp'])expect(existsSync(new URL(file,root)),file).toBe(true);
   });
   it('identifica queimadura como efeito de fogo',()=>{
     const battle=createBattle(['sasuke','goku','gojo'],['pikachu','hulk','raven'],42);

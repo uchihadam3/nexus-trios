@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { PRESENTATION } from './presentation/config';
 import { BattleScreen } from './screens/BattleScreen';
 import { applyEffects,createBattle } from './engine/battle';
+import { byId } from './data/characters';
 import type { BattleEvent,Effect,Visual } from './engine/types';
 import type { Beat } from './presentation/director';
 import { defaults } from './lib/storage';
@@ -12,11 +13,22 @@ import './presentation/visual-game.css';
 import './presentation/arena.css';
 import './presentation/acting-motion.css';
 import './presentation/acting.css';
+import './presentation/vfx-families.css';
 
 const params=new URLSearchParams(location.search),scenario=params.get('scenario')??'basic',phase=params.get('phase')??'windup';
 localStorage.setItem('nexus-battle-guide-v1','1');
+/*
+ * `?hab=goku:0` (ou `goku:b` para o básico): a habilidade de verdade de
+ * qualquer personagem, com os efeitos da ficha — para fotografar cada família
+ * de efeito (adendo, parte 3) na arena, com a cor do personagem.
+ */
+const hab=params.get('hab');
+const [habId,habSlot]=(hab??'').split(':');
+const habIndex=habSlot===undefined||habSlot==='b'?undefined:Number(habSlot);
+const rivais=['goku','vegeta','hulk'].filter(x=>x!==habId).concat(['thor']).slice(0,3);
 /* `nomes`: os nomes mais longos do elenco, para ver se a arena aguenta. */
-const battle=scenario==='nomes'?createBattle(['coragem','raidenmk','capitaoplaneta'],['dannyphantom','lexluthor','sailormoon'],99):createBattle(['sakura','gojo','naruto'],['goku','vegeta','hulk'],99);
+const aliados=['sakura','naruto','gojo'].filter(x=>x!==habId).slice(0,2);
+const battle=hab?createBattle([habId,...aliados],rivais,99):scenario==='nomes'?createBattle(['coragem','raidenmk','capitaoplaneta'],['dannyphantom','lexluthor','sailormoon'],99):createBattle(['sakura','gojo','naruto'],['goku','vegeta','hulk'],99);
 const [sakura,gojo,naruto,goku,vegeta,hulk]=battle.fighters;
 let source=sakura,target=goku,effects:Effect[]=[{kind:'damage',value:190}],selected=[goku],visual:Visual='impact';
 if(scenario==='heal'){source=sakura;target=naruto;target.hp-=240;effects=[{kind:'heal',value:170}];selected=[target];visual='shield';}
@@ -47,8 +59,21 @@ if(scenario==='estados'||scenario==='nomes'){
   gojo.action=.93;
   source=gojo;target=goku;effects=[{kind:'damage',value:120}];selected=[target];visual='psychic';
 }
-const before=structuredClone(battle),kind=scenario==='basic'||scenario==='energy'?'basic':'skill';
-const event:BattleEvent={id:1000,time:0,kind,source:source.uid,target:target.uid,skill:kind==='skill'?0:undefined,label:kind==='basic'?'Ataque básico':scenario,visual};
+let label:string=scenario,skillIndex:number|undefined=0;
+if(hab){
+  const c=byId[habId],ficha=habIndex===undefined?{effects:c.basic.effects,target:c.basic.target,name:c.basic.name,visual:c.basic.visual}:{...c.skills[habIndex],visual:c.skills[habIndex].icon};
+  const [eu,amigo1,amigo2,r1,r2,r3]=battle.fighters;
+  source=eu;label=ficha.name;skillIndex=habIndex;visual=ficha.visual;
+  const ajuda=ficha.target==='self'||ficha.target==='allyWeak'||ficha.target==='allAllies';
+  selected=ficha.target==='allEnemies'?[r1,r2,r3]:ficha.target==='allAllies'?[eu,amigo1,amigo2]:ficha.target==='self'?[eu]:ajuda?[amigo1]:[r2];
+  target=selected[0];
+  amigo1.hp-=200;
+  effects=ficha.effects.filter(e=>e.kind!=='deathnote'&&e.kind!=='investigate').map(e=>({...e,target:undefined}) as Effect);
+  if(ficha.effects.some(e=>e.kind==='deathnote'))effects=[{kind:'damage',value:r2.hp}];
+  if(!effects.length)effects=[{kind:'damage',value:60}];
+}
+const before=structuredClone(battle),kind=hab?(habIndex===undefined?'basic':'skill'):scenario==='basic'||scenario==='energy'?'basic':'skill';
+const event:BattleEvent={id:1000,time:0,kind,source:source.uid,target:target.uid,skill:kind==='skill'?(hab?skillIndex:0):undefined,label:kind==='basic'?'Ataque básico':label,visual};
 applyEffects(battle,source,selected,effects);
 const events=[event,...battle.events],after=structuredClone(battle),impacted=phase==='impact';
 const beat:Beat={event,events,before,after,duration:2,elapsed:impacted?1.1:.35,impacted,family:visual==='impact'?'physical':visual==='psychic'?'psychic':visual==='bolt'?'electric':visual==='shield'?'shield':'buff',grand:false};
