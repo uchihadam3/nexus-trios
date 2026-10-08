@@ -106,9 +106,33 @@ const condicaoAlcancavel = (c: Character): Character => {
   return { ...c, skills: c.skills.map((s) => (s.condition === 'vulnerable' ? { ...s, condition: 'always' as const, preparation: Math.max(s.preparation, 1.2) } : s)) as [Skill, Skill, Skill] };
 };
 
+/*
+ * 5 · habilidade que quase nunca enchia.
+ *
+ * Medido em 2.000 lutas, só com quem ficou vivo 30 s ou mais: seis
+ * habilidades não saíam em mais da metade das lutas, porque a Carga delas vem
+ * de algo que o próprio personagem quase não faz — a Carga máxima do Mega Man
+ * enche ao bloquear dano, e ele não tem Escudo. Os cinco personagens venciam
+ * de 32% a 41%. Um pouco mais de Carga pelo tempo faz a habilidade aparecer.
+ */
+const CARGA_EXTRA_POR_TEMPO: Record<string, Partial<Record<0 | 1 | 2, number>>> = {
+  vision: { 1: 1.2, 2: 1.4 }, gordon: { 2: 1.2 }, megaman: { 2: 1.2 }, inosuke: { 0: 1.2 }, vegeta: { 1: 1.2 }, aquaman: { 2: 1 },
+};
+const cargaQueEnche = (c: Character): Character => {
+  const extra = CARGA_EXTRA_POR_TEMPO[c.id];
+  if (!extra) return c;
+  return { ...c, skills: c.skills.map((s, i) => {
+    const mais = extra[i as 0 | 1 | 2];
+    if (!mais) return s;
+    const temTempo = s.charge.some((r) => r.on === 'time');
+    const charge = temTempo ? s.charge.map((r) => (r.on === 'time' ? { ...r, amount: Math.round((r.amount + mais) * 10) / 10 } : r)) : [...s.charge, { on: 'time' as const, amount: mais }];
+    return { ...s, charge };
+  }) as [Skill, Skill, Skill] };
+};
+
 /** Aplica o alinhamento ao traço, ao ataque básico e às três habilidades. */
 export const alinharEfeitos = (c0: Character): Character => {
-  const c = condicaoAlcancavel(c0);
+  const c = cargaQueEnche(condicaoAlcancavel(c0));
   return {
   ...c,
   trait: { ...c.trait, effects: arrumar(c.trait.effects, c.trait.target) },
