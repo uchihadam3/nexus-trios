@@ -1,5 +1,21 @@
 # Origens dos retratos pesquisados
 
+## Primeiros 100 personagens: sete artes aprovadas
+
+Na galeria numerada mostrada ao usuário, foram aprovados apenas 2, 3, 14, 15, 16, 33 e 43. Os outros 37 candidatos foram recusados e os retratos existentes desses personagens devem permanecer. As fontes originais destes sete retratos ficam em `assets/portraits/approved-sources/` e o enquadramento para as cartas é reconstruído por `tools/portraits/optimize_approved_portraits.py`.
+
+| Número | Personagem | Arte consultada |
+| ---: | --- | --- |
+| 2 | Wolverine | [Arte](https://t.ctcdn.com.br/WYdueKdBXCk_D7eXjrAnDl3bdb4%3D/900x675/smart/i11240.jpeg) |
+| 3 | Batman | [PNGaaa](https://www.pngaaa.com/detail/2034431) |
+| 14 | Feiticeira Escarlate | [Arte](https://aiptcomics.com/wp-content/uploads/2022/09/ScarletWitch_2023-min-1.jpg) |
+| 15 | Visão | [Marvel](https://www.marvel.com/articles/comics/every-major-ai-marvel-universe-list) |
+| 16 | Homem-Formiga | [Marvel](https://terrigen-cdn-dev.marvel.com/content/prod/1x/010ant_com_crd_01.jpg) |
+| 33 | Carnificina | [Arte](https://shop.thirdeyecomics.com/cdn/shop/files/marvel-comic-books-eddie-brock-carnage-1-mark-bagley-foil-variant-75960621053400161-prh-75960621053400161-42894465630460_1200x1200_crop_center.jpg?v=1762982914) |
+| 43 | Ciborgue | [Arte](https://cdn.mos.cms.futurecdn.net/ZXqtCxVHB2nFCBB9Kigjxc-1920-80.jpg) |
+
+## Retratos da expansão
+
 Os 22 retratos abaixo foram selecionados em 8 de outubro de 2026, recortados para o enquadramento da interface e guardados como WebP transparente em `assets/ai-source/portraits/overrides/`. Os endereços registram a imagem consultada e sua página de contexto. Personagens e artes pertencem aos respectivos titulares; a presença de uma imagem em um catálogo de PNG não substitui a licença do titular.
 
 | Personagem | Página de origem | Arquivo consultado |
