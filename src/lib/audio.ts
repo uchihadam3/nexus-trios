@@ -75,11 +75,18 @@ class BattleAudio {
   async unlock(){
     try{
       if(!this.ctx){
+        // iPhone: sem isto, a chave do silencioso cala o áudio do jogo (Safari 17+ entende como mídia, igual vídeo)
+        try{const sessao=(navigator as Navigator&{audioSession?:{type:string}}).audioSession;if(sessao)sessao.type='playback';}catch{/* navegador sem audioSession */}
         this.ctx=new AudioContext();const ctx=this.ctx;
         this.master=ctx.createGain();this.music=ctx.createGain();this.effects=ctx.createGain();
         // compressor no fim: segura picos de vários sons juntos sem esmagar a dinâmica
         const limiter=ctx.createDynamicsCompressor();limiter.threshold.value=-10;limiter.knee.value=6;limiter.ratio.value=12;limiter.attack.value=.003;limiter.release.value=.25;
-        this.music.connect(this.master);this.effects.connect(this.master);this.master.connect(limiter);limiter.connect(ctx.destination);
+        // equalizador da música para alto-falante de celular: quase 70% da energia dela fica abaixo
+        // de 300 Hz, que o celular não toca; tira um pouco do grave e traz o corpo para o médio
+        const grave=ctx.createBiquadFilter();grave.type='lowshelf';grave.frequency.value=140;grave.gain.value=-5;
+        const medio=ctx.createBiquadFilter();medio.type='peaking';medio.frequency.value=1800;medio.Q.value=.7;medio.gain.value=5;
+        const brilho=ctx.createBiquadFilter();brilho.type='highshelf';brilho.frequency.value=5000;brilho.gain.value=2;
+        this.music.connect(grave);grave.connect(medio);medio.connect(brilho);brilho.connect(this.master);this.effects.connect(this.master);this.master.connect(limiter);limiter.connect(ctx.destination);
         this.apply();
       }
       if(this.ctx.state==='suspended')await this.ctx.resume();
@@ -90,8 +97,8 @@ class BattleAudio {
   }
   configure(settings:Settings){this.settings=settings;this.apply();}
   private apply(){if(!this.ctx)return;const t=this.ctx.currentTime;this.master?.gain.setTargetAtTime(this.settings.volume/100,t,.06);this.music?.gain.setTargetAtTime(this.musicLevel(),t,.08);this.effects?.gain.setTargetAtTime(this.settings.effectsVolume/100,t,.04);}
-  /* Música de fundo: fica um degrau abaixo dos efeitos, para nunca atrapalhar. */
-  private musicLevel(){return this.settings.musicVolume/100*.62;}
+  /* Música de fundo: logo abaixo dos golpes (medido no alcance do alto-falante do celular), presente sem atrapalhar. */
+  private musicLevel(){return this.settings.musicVolume/100;}
   /** Onde cada lutador está na tela (x em %), para o som vir do lado certo. */
   setPositions(anchors:Record<string,{x:number;y:number}>){this.posicoes=Object.fromEntries(Object.entries(anchors).filter(([k])=>/^(player|enemy)-\d$/.test(k)).map(([k,a])=>[k,a.x]));}
   private pan(uid?:string){if(!uid)return 0;const x=this.posicoes[uid]??(17+(Number(uid.split('-')[1])||0)*33);return Math.max(-.45,Math.min(.45,(x-50)/50*.5));}
