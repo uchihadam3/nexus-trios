@@ -324,3 +324,8 @@
 .reduce-motion .arena-v2 .float-number{animation-name:float-number-calmo}
 @media(prefers-reduced-motion:reduce){.arena-v2 .float-number{animation-name:float-number-calmo}}
 @keyframes float-number-calmo{0%{opacity:0}6%{opacity:1}85%{opacity:1}100%{opacity:0}}
+/* Nome da habilidade que está saindo (com ou sem Preparo). */
+.unit-skill-name{background:linear-gradient(180deg,color-mix(in srgb,var(--character,#9fe0b0),#10180f 62%),color-mix(in srgb,var(--character,#9fe0b0),#0b100b 80%));border-color:color-mix(in srgb,var(--character,#9fe0b0),#fff 20%);color:#fff;animation:skill-name-in .9s cubic-bezier(.2,1.4,.4,1) both}
+.unit-skill-name .skill-icon-art{border-radius:4px;flex:none}
+@keyframes skill-name-in{0%{opacity:0;scale:.6}35%{opacity:1;scale:1.12}55%{scale:1}100%{opacity:1;scale:1}}
+@media (prefers-reduced-motion:reduce){.unit-skill-name{animation:none}}

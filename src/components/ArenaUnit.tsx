@@ -84,6 +84,8 @@ export function ArenaUnit({fighter:f,battle,beat,onInspect,numbers,threatened,li
       </button>
       {(out||advantageActive||critical||shield>0)&&<span className={`unit-flag ${out?'flag-out':advantageActive?'flag-advantage':critical?'flag-critical':'flag-shield'}`} aria-hidden="true">{out?<Skull size={12}/>:advantageActive?<AuxIcon id="domain" size={13}/>:critical?<HeartPulse size={12}/>:<Shield size={12}/>}</span>}
       {preparing&&<div className="unit-cast"><AuxIcon id="preparing" size={13}/><span>{f.cast?c.skills[f.cast.skill].name:beat?.event.label}</span></div>}
+      {/* a habilidade saindo, com ou sem Preparo: o nome aparece enquanto o golpe acontece */}
+      {!preparing&&source&&beat?.event.kind==='skill'&&beat.event.skill!==undefined&&c.skills[beat.event.skill]&&<div key={beat.event.id} className="unit-cast unit-skill-name" style={{"--character":c.color} as React.CSSProperties}><SkillIcon type={c.skills[beat.event.skill].icon} size={15} characterId={c.id} skillId={c.skills[beat.event.skill].id}/><span>{c.skills[beat.event.skill].name}</span></div>}
       {broken&&<div className="unit-interrupt"><AuxIcon id="interrupt" size={13}/>{broken.label.includes('atrasada')?'ATRASADO':'INTERROMPIDO'}</div>}
       {tempo&&<span className="unit-tempo-reason">{tempo.label}</span>}
     </div>
