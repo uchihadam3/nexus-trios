@@ -44,6 +44,19 @@ const medir = () => p.evaluate(() => {
   const fora = [...document.querySelectorAll('.arena-v2 .unit, .arena-v2 .arena-controls button, .arena-v2 .arena-hud > *')].filter(vis).filter((e) => { const q = e.getBoundingClientRect(); return q.left < -1 || q.right > innerWidth + 1 || q.top < -1 || q.bottom > innerHeight + 1; }).map((e) => e.className);
   return { rola: document.documentElement.scrollHeight > innerHeight + 1 || document.documentElement.scrollWidth > innerWidth + 1, arena: `${Math.round(r.width)}×${Math.round(r.height)}`, fora, medalhoes: [...document.querySelectorAll('.fighter-portrait')].map((e) => Math.round(e.getBoundingClientRect().width)) };
 });
+/* Atuação: durante alguns segundos, alguém age e o medalhão dele se move de verdade? */
+const atuacao = await p.evaluate(async () => {
+  const visto = { acoes: new Set(), reacoes: new Set(), movendo: 0, amostras: 0 };
+  const fim = performance.now() + 7000;
+  while (performance.now() < fim) {
+    for (const u of document.querySelectorAll('.unit.actor')) { u.classList.forEach((c) => c.startsWith('act-') && c.length > 5 && visto.acoes.add(c)); const t = getComputedStyle(u.querySelector('.unit-medal')).transform; visto.amostras += 1; if (t && t !== 'none' && t !== 'matrix(1, 0, 0, 1, 0, 0)') visto.movendo += 1; }
+    for (const u of document.querySelectorAll('.unit.reactor')) u.classList.forEach((c) => c.startsWith('react-') && visto.reacoes.add(c));
+    await new Promise((r) => setTimeout(r, 60));
+  }
+  const folhas = performance.getEntriesByType('resource').filter((e) => e.name.includes('/vfx/acting/')).map((e) => `${e.name.split('/').pop()}:${e.responseStatus ?? '?'}`);
+  return { acoes: [...visto.acoes], reacoes: [...visto.reacoes], medalhaoEmMovimento: `${visto.movendo}/${visto.amostras}`, folhas };
+});
+console.log('atuação', JSON.stringify(atuacao));
 for (const [n, espera] of [['inicio', 600], ['meio', 9000], ['depois', 9000]]) {
   await p.waitForTimeout(espera);
   await p.screenshot({ path: `${SAIDA}/${prefixo}-${n}.png` });
