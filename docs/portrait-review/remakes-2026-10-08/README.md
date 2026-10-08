@@ -24,6 +24,6 @@ Os 14 retratos acima foram aprovados pelo usuário e publicados no jogo.
 
 Samurai Jack: novo retrato aprovado pelo usuário e publicado no jogo; visualização em `samurai-jack-pending.jpg`.
 
-Salsicha, Pica-Pau e Geralt de Rívia: três novas versões recortadas de folhas 2 × 2, visualização em `three-corrected-pending.jpg`, aguardando avaliação. Os retratos atuais desses três continuam em uso. Os recortes foram inspecionados para evitar partes de personagens vizinhos.
+Salsicha e Geralt de Rívia: novas versões aprovadas pelo usuário e publicadas no jogo. A prévia histórica `three-corrected-pending.jpg` também mostra a proposta do Pica-Pau que o usuário rejeitou. Essa proposta foi removida; o retrato atual do Pica-Pau continua em uso até uma refação fiel ao desenho de 1972.
 
-Ainda sem novo retrato por recusa da ferramenta de geração: Pernalonga, Mario e Bowser. Seus retratos atuais continuam em uso. Nenhuma imagem de internet foi usada.
+Ainda sem novo retrato aprovado: Pica-Pau, Pernalonga, Mario e Bowser. Seus retratos atuais continuam em uso. Nenhuma imagem de internet foi usada.
