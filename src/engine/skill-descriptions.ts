@@ -1,5 +1,6 @@
 import { statuses } from '../data/statuses';
 import type { Effect, Skill, Target, Topic, Trait, StatusId } from './types';
+import { INVESTIGACAO_PARA_DEATH_NOTE } from './death-note';
 
 const n=(v:number)=>Number(v.toFixed(1)).toLocaleString('pt-BR');
 const pct=(v:number)=>`${Math.round(v*100)}%`;
@@ -283,7 +284,7 @@ export function presentEffect(effect:Effect,defaultTarget:Target,modo:ModoDeAlvo
     case 'interrupt':return effect.mode==='cancel'?`Interrompe o Preparo${target}`:effect.mode==='delay'?`Atrasa o Preparo em ${secs(effect.value)}${target}`:`Reduz ${pct(effect.value)} do Preparo${target}`;
     case 'shift':return `${effect.value>=0?'Adianta':'Atrasa'} ${pct(Math.abs(effect.value))} do próximo ataque${target}`;
     case 'investigate':return `+${n(effect.value)} Investigação${target}`;
-    case 'deathnote':return 'Com 100 Investigação: elimina o alvo vulnerável; contra imune, 110 de dano e Exposto +55% por 14 s';
+    case 'deathnote':return `Com ${String(INVESTIGACAO_PARA_DEATH_NOTE)} Investigação: elimina o alvo vulnerável; contra imune, 110 de dano e Exposto +55% por 14 s, uma vez só, e a investigação passa para outro inimigo`;
     case 'charge':return `+${n(effect.value)}% de Carga para habilidades${target}`;
     case 'store':return `Guarda ${n(effect.value)} de energia (até ${n(effect.cap)})`;
     case 'release':return `Libera energia guardada ×${n(effect.multiplier)} como dano, dividido entre inimigos vivos`;
@@ -307,7 +308,7 @@ export function presentSkill(skill:Skill):SkillPresentation {
     injured:'o alvo estiver com menos de 78% de Vida',
     enemyCast:'um inimigo estiver preparando uma habilidade',
     threatened:'um aliado tiver menos de 85% de Vida ou um inimigo começar o Preparo',
-    investigated:'houver um alvo conhecido com 100 Investigação',
+    investigated:`houver um alvo conhecido com ${String(INVESTIGACAO_PARA_DEATH_NOTE)} Investigação`,
     vulnerable:'um inimigo estiver vulnerável ou sob controle',
     storedEnergy:'houver energia guardada',
   };

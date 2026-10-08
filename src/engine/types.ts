@@ -25,7 +25,7 @@ export interface Fighter {
   uid:string;characterId:string;side:Side;slot:number;hp:number;maxHp:number;action:number;
   skills:SkillState[];statuses:Status[];shields:Shield[];
   cast:null|{skill:number;elapsed:number;duration:number;targets:string[]};
-  investigation:Record<string,number>;discovered?:Record<string,'vulnerable'|'immune'>;traitTimer:number;
+  investigation:Record<string,number>;discovered?:Record<string,'vulnerable'|'immune'>;/** Imunes em que o Light já usou a Death Note: não usa de novo. */notaUsada?:Record<string,true>;traitTimer:number;
   storedEnergy:number;
   stats:{damage:number;healing:number;protection:number;interrupts:number;skills:number;kills:number};
 }

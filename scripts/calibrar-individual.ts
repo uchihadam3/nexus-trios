@@ -37,7 +37,12 @@ const MENOR = 0.55, MAIOR = 1.9;
  */
 const SO_SOBEM = new Set(['saitama', 'storm']);
 
-/* Problema de mecânica, não de número: medido e deixado como está (relatório). */
+/*
+ * O Light fica fora. O fator mexe na Vida, e no máximo levava a dele a 1.240:
+ * a medição passava a chamá-lo de "Tanque", e a ficha diz "Pouca Vida". O
+ * que o segura é a regra da Death Note, e ela foi corrigida na mecânica
+ * (`battle.ts`: um alvo de cada vez; no imune, uma vez só).
+ */
 const FORA = new Set(['light']);
 
 const base = new Map(personagensSemAjusteIndividual.map((c) => [c.id, structuredClone(c)]));

@@ -138,10 +138,10 @@ todos a cada rodada, porque mexer num muda as lutas dos outros.
 
 | | antes | depois |
 |---|---:|---:|
-| desvio entre personagens | 13,7 | **8,6** (9,0 com sementes novas) |
-| amplitude entre famílias | 51,3 | **24,0** |
-| acima de dois desvios | 8 | **0** com sementes novas |
-| mais forte | 85% | 68% |
+| desvio entre personagens | 13,7 | **8,8** (8,8 com sementes novas) |
+| amplitude entre famílias | 51,3 | **24,8** |
+| mais forte | 85% | 70% |
+| mais fraco | 14% | 23% (Xavier) |
 
 A conferência com sementes que não serviram para escolher nada dá o mesmo
 quadro: o ajuste não decorou as lutas em que foi medido.
@@ -157,14 +157,26 @@ confirma que ela tenha caído, e nada pede nerf.
 mesmo piso de dano das famílias de utilidade (`pisosIndividuais`) e o fator
 por cima: 44%.
 
-**O que um número não resolve: Light Yagami.** 8% a 10%. Testei Carga mais
-rápida, Investigação maior, Preparo menor e mais Vida, juntos: no máximo 19%.
-A causa é a regra dele: o Light investiga primeiro os inimigos que ainda não
-conhece, espalha a investigação pelos três antes de focar um, e só 181 dos 250
-podem ser eliminados pela Death Note. Mudar isso é redesenhar o personagem,
-e isso é decisão da direção — ele ficou de fora da tabela.
+**Light Yagami: a regra, decidida pelo dono do jogo.** Ele ganhava 8%. A
+causa não era número: o Light investigava primeiro os inimigos que ainda não
+conhecia, espalhava a investigação pelos três, e a primeira descoberta só
+saía aos 17 s — ele morria aos 20. Nenhuma combinação de Carga, Preparo e
+Vida passava de 19%. A regra agora (`battle.ts`, `death-note.ts`):
 
-**O Professor Xavier** está no fator máximo e ficou em 25% a 30%. Subiu de
+- investiga **um inimigo de cada vez**, até o fim;
+- com **70 de Investigação** descobre se o alvo é vulnerável ou imune (era 100);
+- no **vulnerável**, a Death Note elimina;
+- no **imune**, causa dano e deixa Exposto **uma vez só**; ele passa a saber,
+  não usa mais nele, e começa a investigar outro.
+
+A Vida continua 700 — "Pouca Vida" é o personagem. O fator da calibragem não
+entra nele, porque levava a Vida a 1.240 e a medição passava a chamá-lo de
+"Tanque". Além da regra: Investigação 40 (era 32) com Carga 8%/s, e a Death
+Note com Preparo 3 s (era 5,5) e Carga 7%/s (era 4). Medido com 400 lutas:
+**28,2%**. Carga mais rápida não sobe mais: com 700 de Vida ele cai por volta
+dos 20 s, e esse é o preço que a direção escolheu.
+
+**O Professor Xavier** está no fator máximo e ficou em 23% a 28%. Subiu de
 17%, mas segue embaixo: o kit dele é coordenar o trio, e a medição não vê esse
 valor. Também é decisão de design.
 

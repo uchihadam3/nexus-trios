@@ -4,6 +4,7 @@ import { random,shuffle } from './random';
 import { DOMINION as D, fracaoPorAlvo} from './dominion-config';
 import type { Battle, BattleEvent, Effect, Fighter, Side, Skill, StatusId, Target, Topic } from './types';
 import { chooseTarget, inferTargetIntent } from './targeting';
+import { INVESTIGACAO_PARA_DEATH_NOTE } from './death-note';
 
 export const STEP=.1;
 const clamp=(n:number,lo=0,hi=1)=>Math.min(hi,Math.max(lo,n));
@@ -31,22 +32,35 @@ export function targets(b:Battle,actor:Fighter,rule:Target,effects:Effect[]=[],r
   if(rule==='self')return alive(actor)?[actor]:[];
   if(rule==='allAllies')return allies;
   if(rule==='allEnemies')return enemies;
-  if(actor.characterId==='light'&&rule==='enemyWeak'&&effects.some(effect=>effect.kind==='investigate')){
+  /*
+   * O Light investiga um inimigo de cada vez, até o fim. Espalhar a
+   * investigação pelos três — o que ele fazia — deixava a Death Note para
+   * depois de a luta acabar: ele ganhava 8% das lutas.
+   */
+  const emInvestigacao=()=>{
     const unknown=enemies.filter(x=>!actor.discovered?.[x.uid]);
-    if(unknown.length)return chooseTarget(b,actor,unknown,rule,'investigate',effects,record);
+    const foco=[...unknown].sort((a,z)=>(actor.investigation[z.uid]??0)-(actor.investigation[a.uid]??0)||a.uid.localeCompare(z.uid))[0];
+    return foco&&(actor.investigation[foco.uid]??0)>0?[foco]:unknown;
+  };
+  if(actor.characterId==='light'&&rule==='enemyWeak'&&effects.some(effect=>effect.kind==='investigate')){
+    const alvos=emInvestigacao();
+    if(alvos.length)return chooseTarget(b,actor,alvos,rule,'investigate',effects,record);
   }
   if(actor.characterId==='light'&&rule==='investigated'){
     const isInvestigation=effects.some(effect=>effect.kind==='investigate');
     const isDeathNote=effects.some(effect=>effect.kind==='deathnote');
     if(isInvestigation){
-      const unknown=enemies.filter(x=>!actor.discovered?.[x.uid]);
-      if(unknown.length)return chooseTarget(b,actor,unknown,rule,'investigate',effects,record);
+      const alvos=emInvestigacao();
+      if(alvos.length)return chooseTarget(b,actor,alvos,rule,'investigate',effects,record);
       return chooseTarget(b,actor,enemies,rule,'investigate',effects,record);
     }
     if(isDeathNote){
-      const vulnerable=enemies.filter(x=>actor.discovered?.[x.uid]==='vulnerable'&&(actor.investigation[x.uid]??0)>=100);
+      /* Vulnerável e investigado: a Death Note elimina. */
+      const vulnerable=enemies.filter(x=>actor.discovered?.[x.uid]==='vulnerable'&&(actor.investigation[x.uid]??0)>=INVESTIGACAO_PARA_DEATH_NOTE);
       if(vulnerable.length)return chooseTarget(b,actor,vulnerable,rule,'finisher',effects,record);
-      if(enemies.every(x=>actor.discovered?.[x.uid]==='immune'))return chooseTarget(b,actor,enemies.filter(x=>(actor.investigation[x.uid]??0)>=100),rule,'finisher',effects,record);
+      /* Imune: uma vez só — dano e Exposto. Depois ele sabe, e não gasta mais nele. */
+      const imunes=enemies.filter(x=>actor.discovered?.[x.uid]==='immune'&&(actor.investigation[x.uid]??0)>=INVESTIGACAO_PARA_DEATH_NOTE&&!actor.notaUsada?.[x.uid]);
+      if(imunes.length)return chooseTarget(b,actor,imunes,rule,'finisher',effects,record);
       return [];
     }
   }
@@ -186,11 +200,11 @@ export function applyEffects(b:Battle,source:Fighter,selected:Fighter[],effects:
           emit(b,{kind:'interrupt',source:source.uid,target:target.uid,label:effect.mode==='cancel'?'Interrompido!':'Preparação atrasada',visual:'bolt'});
           trigger(b,source,'interrupt',source);break;
         }
-        case 'investigate':{const before=source.investigation[target.uid]??0,after=Math.min(100,before+effect.value);source.investigation[target.uid]=after;const quarters=Math.floor(after/25)-Math.floor(before/25);if(quarters>0)pressure(b,source.side,quarters*D.event.investigationQuarter+(after===100?D.event.investigationComplete:0));if(after===100&&!source.discovered?.[target.uid]){source.discovered??={};source.discovered[target.uid]=byId[target.characterId].deathNoteCompatible?'vulnerable':'immune';emit(b,{kind:'discovery',source:source.uid,target:target.uid,label:source.discovered[target.uid]==='vulnerable'?'Vulnerável à Death Note':'Imune à execução'});}break;}
+        case 'investigate':{const before=source.investigation[target.uid]??0,after=Math.min(100,before+effect.value);source.investigation[target.uid]=after;const quarters=Math.floor(after/25)-Math.floor(before/25);if(quarters>0)pressure(b,source.side,quarters*D.event.investigationQuarter+(after===100?D.event.investigationComplete:0));if(after>=INVESTIGACAO_PARA_DEATH_NOTE&&!source.discovered?.[target.uid]){source.discovered??={};source.discovered[target.uid]=byId[target.characterId].deathNoteCompatible?'vulnerable':'immune';emit(b,{kind:'discovery',source:source.uid,target:target.uid,label:source.discovered[target.uid]==='vulnerable'?'Vulnerável à Death Note':'Imune à execução'});}break;}
         case 'deathnote':{
-          if((source.investigation[target.uid]??0)<100)break;
+          if((source.investigation[target.uid]??0)<INVESTIGACAO_PARA_DEATH_NOTE)break;
           if(byId[target.characterId].deathNoteCompatible){const value=target.hp;target.hp=0;target.cast=null;target.shields=[];target.statuses=[];source.stats.damage+=value;source.stats.kills++;pressure(b,source.side,D.event.deathNote);emit(b,{kind:'ko',source:source.uid,target:target.uid,label:'Sentença concluída',value});}
-          else applyEffects(b,source,[target],[{kind:'status',status:'exposed',value:.55,duration:14},{kind:'damage',value:110}]);
+          else{source.notaUsada??={};source.notaUsada[target.uid]=true;applyEffects(b,source,[target],[{kind:'status',status:'exposed',value:.55,duration:14},{kind:'damage',value:110}]);}
           break;
         }
         case 'charge':target.skills.forEach((s,i)=>{if(s.cooldown<=0&&target.cast?.skill!==i){const before=s.charge;s.charge=Math.min(100,s.charge+effect.value);if(before<100&&s.charge>=100)emit(b,{kind:'ready',source:target.uid,skill:i,label:byId[target.characterId].skills[i].name,visual:byId[target.characterId].skills[i].icon});if(s.charge>before){emit(b,{kind:'charge',source:source.uid,target:target.uid,skill:i,label:source.uid===target.uid?'trait':'synergy',value:s.charge-before});if(source.uid!==target.uid){pressure(b,source.side,D.event.synergyCharge*clamp((s.charge-before)/25));emit(b,{kind:'synergy',source:source.uid,target:target.uid,skill:i,label:'Carga recebida',value:s.charge-before});}}}});break;
@@ -210,7 +224,7 @@ function appropriate(b:Battle,f:Fighter,s:Skill){
   if(s.condition==='injured')return targets(b,f,s.target,s.effects).some(x=>x.hp/x.maxHp<.78);
   if(s.condition==='enemyCast')return hostile(b,f).some(x=>x.cast);
   if(s.condition==='threatened')return friendly(b,f).some(x=>x.hp/x.maxHp<.85)||hostile(b,f).some(x=>x.cast);
-  if(s.condition==='investigated')return targets(b,f,s.target,s.effects,false).some(x=>(f.investigation[x.uid]??0)>=100);
+  if(s.condition==='investigated')return targets(b,f,s.target,s.effects,false).some(x=>(f.investigation[x.uid]??0)>=INVESTIGACAO_PARA_DEATH_NOTE);
   if(s.condition==='vulnerable')return hostile(b,f).some(x=>x.statuses.some(z=>['exposed','marked','paralyzed','electric','burning'].includes(z.id)));
   if(s.condition==='storedEnergy')return (f.storedEnergy??0)>0;
   return true;
@@ -223,7 +237,7 @@ function skillValue(b:Battle,f:Fighter,s:Skill,selected:Fighter[],intelligence:n
     if(effect.kind==='damage'||effect.kind==='deathnote'||effect.kind==='release'){
       const raw=effect.kind==='release'?(f.storedEnergy??0)*effect.multiplier:effect.value;
       for(const target of list){
-        const ready=effect.kind!=='deathnote'||(f.investigation[target.uid]??0)>=100;
+        const ready=effect.kind!=='deathnote'||(f.investigation[target.uid]??0)>=INVESTIGACAO_PARA_DEATH_NOTE;
         const shields=target.shields.reduce((n,x)=>n+x.amount,0),amount=ready?Math.min(target.hp+shields,raw):0;
         add('dano útil',amount/target.maxHp*65);
         if(amount>=target.hp+shields&&amount>0)add('incapacitação provável',18);

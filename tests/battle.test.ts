@@ -93,20 +93,24 @@ describe('Motor independente',()=>{
  it('atribui proteção somente ao dano realmente absorvido',()=>{const b=createBattle(player,enemy,2),source=b.fighters[0],target=b.fighters[1],attacker=b.fighters[3];applyEffects(b,source,[target],[{kind:'shield',value:300}]);applyEffects(b,attacker,[target],[{kind:'damage',value:100}]);expect(target.hp).toBe(target.maxHp);expect(source.stats.protection).toBe(100);});
  it('interrompe, atrasa, reduz e respeita proteção da preparação',()=>{const b=createBattle(player,enemy,2),a=b.fighters[0],t=b.fighters[3];t.cast={skill:0,elapsed:2,duration:4,targets:[a.uid]};applyEffects(b,a,[t],[{kind:'interrupt',mode:'delay',value:1}]);expect(t.cast?.elapsed).toBe(1);applyEffects(b,a,[t],[{kind:'interrupt',mode:'reduce',value:.5}]);expect(t.cast?.elapsed).toBe(.5);applyEffects(b,t,[t],[{kind:'status',status:'protected',value:.5,duration:5}]);applyEffects(b,a,[t],[{kind:'interrupt',mode:'cancel',value:1}]);expect(t.cast).not.toBe(null);t.statuses=[];applyEffects(b,a,[t],[{kind:'interrupt',mode:'cancel',value:1}]);expect(t.cast).toBe(null);expect(t.skills[0].charge).toBe(25);expect(a.stats.interrupts).toBe(3);});
  it('Death Note revela o alvo ao investigar, elimina vulneráveis e expõe imunes sem esquecer a descoberta',()=>{const b=createBattle(['light','pikachu','captain'],['batman','goku','thanos'],1),light=b.fighters[0],human=b.fighters[3],alien=b.fighters[4];applyEffects(b,light,[human],[{kind:'deathnote',value:100}]);expect(human.hp).toBe(human.maxHp);expect(light.discovered?.[human.uid]).toBeUndefined();applyEffects(b,light,[human],[{kind:'investigate',value:100}]);expect(light.discovered?.[human.uid]).toBe('vulnerable');expect(b.events.some(e=>e.kind==='discovery'&&e.target===human.uid)).toBe(true);applyEffects(b,light,[human],[{kind:'deathnote',value:100}]);expect(human.hp).toBe(0);applyEffects(b,light,[alien],[{kind:'investigate',value:100}]);expect(light.discovered?.[alien.uid]).toBe('immune');applyEffects(b,light,[alien],[{kind:'deathnote',value:100}]);expect(alien.hp).toBeGreaterThan(0);expect(intensity(alien,'exposed')).toBe(.55);expect(light.investigation[alien.uid]).toBe(100);});
- it('Light investiga desconhecidos, espera uma vulnerabilidade conhecida e só então usa a execução',()=>{
+ it('Light investiga um de cada vez; no imune usa a execução uma vez só e passa para outro',()=>{
   const b=createBattle(['light','pikachu','captain'],['batman','goku','thanos'],21),light=b.fighters[0],[batman,goku,thanos]=b.fighters.slice(3);
   const investigate=byId.light.skills.find(s=>s.effects.some(e=>e.kind==='investigate'))!;
   const note=byId.light.skills.find(s=>s.effects.some(e=>e.kind==='deathnote'))!;
   applyEffects(b,light,[goku],[{kind:'investigate',value:100}]);
   expect(light.discovered?.[goku.uid]).toBe('immune');
   expect(targets(b,light,investigate.target,investigate.effects)[0]?.uid).not.toBe(goku.uid);
+  /* Imune descoberto: a execução vira dano e Exposto, uma vez. */
+  expect(targets(b,light,note.target,note.effects)[0]?.uid).toBe(goku.uid);
+  applyEffects(b,light,[goku],note.effects);
+  expect(goku.hp).toBeGreaterThan(0);
   expect(targets(b,light,note.target,note.effects)).toEqual([]);
   applyEffects(b,light,[batman],[{kind:'investigate',value:100}]);
   expect(targets(b,light,note.target,note.effects)[0]?.uid).toBe(batman.uid);
   batman.hp=0;
   expect(targets(b,light,note.target,note.effects)).toEqual([]);
   applyEffects(b,light,[thanos],[{kind:'investigate',value:100}]);
-  expect([goku.uid,thanos.uid]).toContain(targets(b,light,note.target,note.effects)[0]?.uid);
+  expect(targets(b,light,note.target,note.effects)[0]?.uid).toBe(thanos.uid);
  });
  it('a Carga do Light responde a Status negativo no inimigo, não a benefício aliado',()=>{
   const b=createBattle(['light','pikachu','captain'],enemy,29),light=b.fighters[0],ally=b.fighters[1],foe=b.fighters[3];
