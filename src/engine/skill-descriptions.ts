@@ -83,6 +83,26 @@ const acumulacaoDe=(id:StatusId):string=>{
   return `soma por aplicação até ${pct(def.cap)}`;
 };
 
+/*
+ * O valor de um Status agora, já somado — o que o jogador vê ao tocar nele na
+ * batalha. "Aplicou 10% de Exposto, outro aplicou mais 20%: tocando, tem que
+ * aparecer 30%." Paralisado, Silenciado e Confuso não têm intensidade que
+ * importe: ou estão, ou não estão.
+ */
+const SEM_VALOR=new Set<StatusId>(['paralyzed','confused','silenced']);
+const deVida=(id:StatusId)=>id==='regen'||id==='burning';
+export function valorAtualDoStatus(id:StatusId,intensidade:number):string|null{
+  if(SEM_VALOR.has(id))return null;
+  const v=Math.min(intensidade,statuses[id].cap);
+  return deVida(id)?`${n(v)} de Vida/s`:pct(v);
+}
+/* Até onde as aplicações somam — só para os Status que somam. */
+export function tetoDoStatus(id:StatusId):string|null{
+  const def=statuses[id];
+  if(def.stack!=='add')return null;
+  return deVida(id)?`${n(def.cap)} de Vida/s`:pct(def.cap);
+}
+
 export function presentStatus(id:StatusId,value:number):StatusPresentation {
   const amount=Math.min(value,statuses[id].cap),percent=pct(amount),number=n(amount);
   const summary:Record<StatusId,string>={

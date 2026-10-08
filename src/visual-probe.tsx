@@ -22,6 +22,13 @@ if(scenario==='aoe'){source=gojo;target=goku;effects=[{kind:'damage',value:180}]
 if(scenario==='synergy'){source=naruto;target=sakura;effects=[{kind:'charge',value:28}];selected=[target];visual='wave';}
 if(scenario==='ko'){source=sakura;target=goku;target.hp=80;effects=[{kind:'damage',value:190}];selected=[target];}
 if(scenario==='energy'){source=gojo;target=goku;effects=[{kind:'damage',value:155}];selected=[target];visual='psychic';}
+if(scenario==='acumulo'){
+  /* O exemplo do jogador: 10% de Exposto, depois mais 20%, dá 30%. */
+  applyEffects(battle,sakura,[goku],[{kind:'status',status:'exposed',value:.10,duration:8}]);
+  applyEffects(battle,gojo,[goku],[{kind:'status',status:'slow',value:.22,duration:6}]);
+  applyEffects(battle,naruto,[sakura],[{kind:'status',status:'haste',value:.2,duration:6}]);
+  source=gojo;target=goku;effects=[{kind:'status',status:'exposed',value:.20,duration:8}];selected=[target];visual='psychic';
+}
 const before=structuredClone(battle),kind=scenario==='basic'||scenario==='energy'?'basic':'skill';
 const event:BattleEvent={id:1000,time:0,kind,source:source.uid,target:target.uid,skill:kind==='skill'?0:undefined,label:kind==='basic'?'Ataque básico':scenario,visual};
 applyEffects(battle,source,selected,effects);

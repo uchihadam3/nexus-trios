@@ -166,3 +166,16 @@
   .ability,.fighter-name{position:relative}
   .ability::before,.fighter-name::before{content:'';position:absolute;left:0;right:0;top:50%;height:44px;transform:translateY(-50%)}
 }
+
+/*
+ * O valor de agora de cada Status: em destaque no detalhe, e na lista de
+ * Status do lutador — "Exposto · 30% · 4,2 s".
+ */
+.inspector-valor{display:flex;align-items:baseline;gap:8px;margin:10px 0 2px}
+.inspector-valor b{font-size:26px;font-weight:800;color:#f4f8e8;font-variant-numeric:tabular-nums}
+.inspector-valor span{font-size:12px;color:#a9bfb0}
+.inspector-statuses{display:grid;gap:6px;margin-top:12px}
+.inspector-statuses .inspector-status{display:grid;grid-template-columns:auto 1fr auto auto;align-items:center;gap:10px;min-height:44px;padding:6px 12px;border:1px solid #9abdab33;border-radius:10px;background:#12232a;color:#e2eee4;text-align:left}
+.inspector-statuses .inspector-status>span{font-weight:650;font-size:13px}
+.inspector-statuses .inspector-status>b{font-size:14px;color:#f1e3a2;font-variant-numeric:tabular-nums}
+.inspector-statuses .inspector-status>small{font-size:12px;color:#a9bfb0;font-variant-numeric:tabular-nums}
