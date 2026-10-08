@@ -32,22 +32,9 @@
 .battle-screen .newly-out{animation:unit-out .6s ease-out}
 .battle-screen .ko-mark:after{font-size:9px;bottom:8px;letter-spacing:.6px;background:#161b1ce0;padding:3px 4px;border-radius:3px}
 .combat-connections{position:absolute;inset:0;z-index:4;pointer-events:none;--link-time:.5s}
-.combat-paths{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
-.combat-path{--path-color:#f1d197}
 .path-heal,.path-buff,.path-support{--path-color:#8df0bb}
 .path-shield{--path-color:#91e9f1}
 .path-debuff,.path-interrupt{--path-color:#e9a5d5}
-.combat-path-halo,.combat-path-stroke{fill:none;vector-effect:non-scaling-stroke;stroke-linecap:round;stroke-linejoin:round}
-.combat-path-halo{stroke:var(--path-color);stroke-width:16;opacity:.22}
-.combat-path-stroke{stroke:var(--path-color);stroke-width:4;stroke-dasharray:4 2;opacity:1;filter:drop-shadow(0 0 4px var(--path-color))}
-.combat-target-node{fill:var(--path-color);opacity:.92;stroke:#fff9;stroke-width:.5}
-.combat-tracer{fill:#fff;stroke:var(--path-color);stroke-width:1.5;filter:drop-shadow(0 0 7px var(--path-color))}
-.combat-connections.winding .combat-path-stroke{stroke-dasharray:100;stroke-dashoffset:100;animation:draw-link var(--link-time) ease-in-out forwards}
-.combat-connections.winding .combat-path-halo{animation:link-fade var(--link-time) ease-in both}
-.combat-connections.landed .combat-path{opacity:.5}
-.combat-connections.landed .combat-target-node{animation:target-pop .35s ease-out both}
-.combat-connections.still .combat-path-stroke{stroke-dasharray:4 2;stroke-dashoffset:0;animation:none}
-.combat-connections.still .combat-tracer{display:none}
 .combat-caption{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:grid;justify-items:center;gap:3px;width:max-content;max-width:83%;min-width:145px;padding:8px 11px;border:1px solid color-mix(in srgb,var(--caption-color,#f4d493) 55%,transparent);border-radius:8px;background:#0b151de8;box-shadow:0 6px 23px #000b;text-align:center;color:#f8f5e9}
 .combat-caption small{font-size:8px;font-weight:900;letter-spacing:2px;color:#e6d298}
 .combat-caption strong{font-size:clamp(11px,1.5vw,15px);line-height:1.2;text-wrap:balance}

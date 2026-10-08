@@ -41,6 +41,34 @@
   "laco": true,
   "bytes": 56690
  },
+ "chegada": {
+  "descricao": "apoio chegando ao aliado",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   128,
+   128
+  ],
+  "laco": false,
+  "bytes": 53020
+ },
+ "cometa": {
+  "descricao": "luz que corre pela linha de ação (+x)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   128,
+   128
+  ],
+  "laco": true,
+  "bytes": 27776
+ },
  "corte": {
   "descricao": "corte em arco",
   "quadros": 12,
@@ -348,6 +376,20 @@
   ],
   "laco": false,
   "bytes": 83844
+ },
+ "mira": {
+  "descricao": "mira no alvo (laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   128,
+   128
+  ],
+  "laco": true,
+  "bytes": 58114
  },
  "missil": {
   "descricao": "míssil em viagem (+x)",

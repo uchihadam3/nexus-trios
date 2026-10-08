@@ -73,7 +73,7 @@ export function BattleScreen({battle,beat,index,name,settings,paused,onPause,onA
         {settings.explanations!=='off'&&<div className="battle-hint"><span><i className="legend-circle"/>Próximo ataque</span><span><i className="legend-ready"/>Pronta</span><span><i className="legend-cast"/>Preparo</span></div>}
       </div>
       <div className="team team-allies">{battle.fighters.filter(f=>f.side==='player').map(unit)}</div>
-      <CombatConnections battle={battle} beat={beat} anchors={anchors} reduced={settings.reducedMotion}/>
+      <CombatConnections battle={battle} beat={beat} anchors={anchors} reduced={settings.reducedMotion} medal={box.medal}/>
       <BattleEffects battle={battle} beat={beat} anchors={anchors} enabled={settings.effects} reduced={settings.reducedMotion} medal={box.medal}/>
       <FloatingNumbers battle={battle} beat={beat} anchors={anchors} medal={box.medal} enabled={settings.numbers}/>
       {paused&&<div className="paused-banner"><Pause size={16}/> BATALHA PAUSADA</div>}

@@ -86,3 +86,43 @@
 .arena:not(.effects-off) .reactor:not(.react-broken):not(.react-fall) .unit-fx{display:none}
 /* Na galeria a demonstração repete sozinha. */
 .vfx-lab-demo .fxl-impacto,.vfx-lab-demo .fxl-impacto:after,.vfx-lab-demo .fxl-voo,.vfx-lab-demo .fxl-faixa{animation-iteration-count:infinite}
+
+/*
+ * Linha de ação (quem vai atacar quem): fina, curva, na cor do efeito.
+ * Antes do golpe ela se desenha, a mira fecha no alvo e o cometa corre duas
+ * vezes; some antes do golpe. Depois do golpe, o apoio a um aliado: a linha
+ * se desenha, o cometa corre uma vez e o aliado brilha. --janela é o tempo
+ * até o golpe; tudo multiplicado por --motion-scale (velocidade da luta).
+ */
+.combat-connections{position:absolute;inset:0;z-index:4;pointer-events:none}
+.combat-paths{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.combat-paths path{fill:none;stroke:var(--cor);stroke-linecap:round;vector-effect:non-scaling-stroke}
+.combat-paths .link-fio{stroke-width:1.7px;stroke-dasharray:100;stroke-dashoffset:100}
+.combat-paths .link-halo{stroke-width:7px;opacity:.38;stroke-dasharray:100;stroke-dashoffset:100}
+.link-antes{opacity:0;animation:link-vida calc(var(--janela) * var(--motion-scale,1)) linear both}
+.link-antes .link-fio,.link-antes .link-halo{animation:link-desenha calc(var(--janela) * .32 * var(--motion-scale,1)) cubic-bezier(.3,.6,.4,1) both}
+@keyframes link-vida{0%{opacity:0}8%{opacity:1}80%{opacity:1}94%,100%{opacity:0}}
+@keyframes link-desenha{to{stroke-dashoffset:0}}
+.link-depois{opacity:0;animation:link-apoio calc(1s * var(--motion-scale,1)) linear calc(var(--atraso) * var(--motion-scale,1)) both}
+.link-depois .link-fio,.link-depois .link-halo{animation:link-desenha calc(.28s * var(--motion-scale,1)) cubic-bezier(.3,.6,.4,1) calc(var(--atraso) * var(--motion-scale,1)) both}
+@keyframes link-apoio{0%{opacity:0}6%{opacity:1}60%{opacity:1}100%{opacity:0}}
+
+/* As folhas desenhadas em Python, tingidas como os efeitos de combate. */
+.link-cometa,.link-mira,.link-chegada{position:absolute;left:0;top:0;background-color:var(--cor);-webkit-mask:var(--fx-img) 0 0/300% 400% no-repeat;mask:var(--fx-img) 0 0/300% 400% no-repeat;pointer-events:none}
+.link-cometa:after,.link-mira:after,.link-chegada:after{content:'';position:absolute;inset:0;background:var(--fx-img) 0 0/300% 400% no-repeat;mix-blend-mode:screen}
+.link-cometa{z-index:2;offset-rotate:auto;offset-anchor:72% 50%;offset-distance:0%;opacity:0;
+  animation:fx12-mask calc(.5s * var(--motion-scale,1)) steps(1,end) infinite,cometa-corre calc(var(--janela) * .3 * var(--motion-scale,1)) cubic-bezier(.4,0,.6,1) calc(var(--janela) * .22 * var(--motion-scale,1)) 2 both}
+.link-cometa:after{animation:fx12-bg calc(.5s * var(--motion-scale,1)) steps(1,end) infinite}
+.link-cometa.cometa-depois{animation:fx12-mask calc(.5s * var(--motion-scale,1)) steps(1,end) infinite,cometa-corre calc(.36s * var(--motion-scale,1)) cubic-bezier(.4,0,.6,1) calc(var(--atraso) * var(--motion-scale,1)) 1 both}
+@keyframes cometa-corre{0%{offset-distance:0%;opacity:0}12%{opacity:1}85%{opacity:1}100%{offset-distance:100%;opacity:0}}
+.link-mira{z-index:1;opacity:0;transform:translate(-50%,-50%);
+  animation:fx12-mask calc(1.2s * var(--motion-scale,1)) steps(1,end) infinite,mira-fecha calc(var(--janela) * var(--motion-scale,1)) ease-out both}
+.link-mira:after{animation:fx12-bg calc(1.2s * var(--motion-scale,1)) steps(1,end) infinite}
+@keyframes mira-fecha{0%,14%{opacity:0;transform:translate(-50%,-50%) scale(1.35) rotate(-20deg)}32%{opacity:.95;transform:translate(-50%,-50%) scale(1) rotate(0)}82%{opacity:.95;transform:translate(-50%,-50%) scale(.94)}96%,100%{opacity:0;transform:translate(-50%,-50%) scale(.86)}}
+.link-chegada{z-index:3;transform:translate(-50%,-50%);animation:fx12-mask calc(.8s * var(--motion-scale,1)) steps(1,end) calc(var(--atraso) * var(--motion-scale,1)) both}
+.link-chegada:after{animation:fx12-bg calc(.8s * var(--motion-scale,1)) steps(1,end) calc(var(--atraso) * var(--motion-scale,1)) both}
+
+/* Menos movimento: a linha aparece inteira e quieta, sem cometa, e some no tempo certo. */
+.combat-connections.still .link-fio,.combat-connections.still .link-halo{animation:none;stroke-dashoffset:0}
+.combat-connections.still .link-mira{animation:mira-fecha calc(var(--janela) * var(--motion-scale,1)) linear both}
+.link-beat{position:absolute;inset:0}

@@ -114,11 +114,14 @@ export type VfxFamily = keyof typeof VFX_FAMILIES;
 export const FAMILIAS = Object.keys(VFX_FAMILIES) as VfxFamily[];
 export const familia = (k: VfxFamily): Familia => VFX_FAMILIES[k];
 
-/** Todas as folhas que alguma família usa. */
-export const folhasUsadas = (): string[] => [...new Set(FAMILIAS.flatMap((k) => {
+/** Folhas da linha de ação (quem vai atacar quem): a luz que corre, a mira no alvo, o apoio chegando. */
+export const FOLHAS_DA_LINHA = ['cometa', 'mira', 'chegada'] as const;
+
+/** Todas as folhas que o jogo usa. */
+export const folhasUsadas = (): string[] => [...new Set([...FAMILIAS.flatMap((k) => {
   const x = familia(k);
   return [x.impacto, x.viagem, x.faixa, x.preparo, x.acento].filter((s): s is string => !!s);
-}))].sort();
+}), ...FOLHAS_DA_LINHA])].sort();
 
 export const folha = (nome: string) => `/assets/vfx/familias/${nome}.webp`;
 

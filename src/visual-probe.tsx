@@ -60,6 +60,7 @@ if(scenario==='estados'||scenario==='nomes'){
   source=gojo;target=goku;effects=[{kind:'damage',value:120}];selected=[target];visual='psychic';
 }
 let label:string=scenario,skillIndex:number|undefined=0;
+let porAlvo:((e:Effect)=>typeof selected)|null=null;
 if(hab){
   const c=byId[habId],ficha=habIndex===undefined?{effects:c.basic.effects,target:c.basic.target,name:c.basic.name,visual:c.basic.visual}:{...c.skills[habIndex],visual:c.skills[habIndex].icon};
   const [eu,amigo1,amigo2,r1,r2,r3]=battle.fighters;
@@ -68,13 +69,14 @@ if(hab){
   selected=ficha.target==='allEnemies'?[r1,r2,r3]:ficha.target==='allAllies'?[eu,amigo1,amigo2]:ficha.target==='self'?[eu]:ajuda?[amigo1]:[r2];
   target=selected[0];
   amigo1.hp-=200;
-  effects=ficha.effects.filter(e=>e.kind!=='deathnote'&&e.kind!=='investigate').map(e=>({...e,target:undefined}) as Effect);
+  effects=ficha.effects.filter(e=>e.kind!=='deathnote'&&e.kind!=='investigate');
+  porAlvo=(e:Effect)=>e.target==='allAllies'?[eu,amigo1,amigo2]:e.target==='allyWeak'?[amigo1]:e.target==='self'?[eu]:e.target==='allEnemies'?[r1,r2,r3]:e.target&&e.target.startsWith('enemy')||e.target==='randomEnemy'?[r2]:selected;
   if(ficha.effects.some(e=>e.kind==='deathnote'))effects=[{kind:'damage',value:r2.hp}];
   if(!effects.length)effects=[{kind:'damage',value:60}];
 }
 const before=structuredClone(battle),kind=hab?(habIndex===undefined?'basic':'skill'):scenario==='basic'||scenario==='energy'?'basic':'skill';
 const event:BattleEvent={id:1000,time:0,kind,source:source.uid,target:target.uid,skill:kind==='skill'?(hab?skillIndex:0):undefined,label:kind==='basic'?'Ataque básico':label,visual};
-applyEffects(battle,source,selected,effects);
+if(porAlvo){const alvoDe=porAlvo;for(const e of effects)applyEffects(battle,source,alvoDe(e),[{...e,target:undefined} as Effect]);}else applyEffects(battle,source,selected,effects);
 const events=[event,...battle.events],after=structuredClone(battle),impacted=phase==='impact';
 const beat:Beat={event,events,before,after,duration:2,elapsed:impacted?1.1:.35,impacted,family:visual==='impact'?'physical':visual==='psychic'?'psychic':visual==='bolt'?'electric':visual==='shield'?'shield':'buff',grand:false};
 const settings={...defaults,volume:0,musicVolume:0,effectsVolume:0,numbers:true,explanations:'off' as const};

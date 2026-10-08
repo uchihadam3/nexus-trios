@@ -1076,6 +1076,66 @@ def execucao(T, t, rng):
     return G, H
 
 
+# =================================================================== LINHA DE AÇÃO (quem vai atacar quem)
+PEQUENA = Tela(128)
+
+
+def cometa(T, t, rng):
+    """A luz que corre pela linha de ação: cabeça brilhante, cauda que se desfaz, centelhas soltas (aponta +x)."""
+    G, H = vazio(T)
+    tremula = 1 + 0.08 * math.sin(TAU * t * 3)
+    cabeca = T.gauss(0.42, 0, 0.07 * tremula, 0.05 * tremula) * 2.8
+    cauda = T.polys([([(-0.95, 0), (0.36, -0.07), (0.46, 0), (0.36, 0.07)], 1)], blur=0.02)
+    cauda *= smooth(T.U, -0.95, 0.3)
+    estrela = T.flare(0.42, 0, 0.55, TAU * t / 6, thin=0.012) * 1.1
+    pts = []
+    for i in range(18):
+        fase = (rng.uniform(0, 1) + t) % 1.0
+        pts.append((0.35 - 1.2 * fase, rng.normal(0, 0.06) * (0.4 + fase), (1 - fase) ** 1.5 * rng.uniform(0.4, 1)))
+    centelhas = T.splats(pts, 0.012)
+    G += cabeca + T.glow(cauda, 0.8, 1.2, 0.04) + estrela + centelhas
+    H += cabeca * 1.3 + cauda * 0.35 + estrela * 0.8 + centelhas * 0.6
+    return G, H
+
+
+def mira(T, t, rng):
+    """Mira no alvo (laço): anel fino girando, quatro colchetes que respiram e marcas de leitura."""
+    G, H = vazio(T)
+    respira = 0.5 + 0.5 * math.sin(TAU * t)
+    anel = T.ring(0.64, 0.012) * (0.6 + 0.4 * respira)
+    marcas = []
+    for k in range(36):
+        a = TAU * k / 36 + TAU * t / 3
+        r1, r2 = (0.69, 0.75) if k % 3 == 0 else (0.70, 0.72)
+        marcas.append((math.cos(a) * r1, math.sin(a) * r1, math.cos(a) * r2, math.sin(a) * r2, 1 if k % 3 == 0 else 0.5))
+    tique = T.lines(marcas, 0.009, 0.002)
+    colch = T.zero()
+    d = 0.53 - 0.05 * respira
+    for k in range(4):
+        a0 = TAU * k / 4 + math.pi / 4 - TAU * t / 6
+        colch += T.arc_band(d, 0.022, a0 - 0.32, a0 + 0.32, taper=0.0)
+    G += T.glow(anel + tique + colch * 1.4, 1.2, 1.0, 0.015)
+    H += colch * 0.9 + tique * 0.5 + anel * 0.3
+    return G, H
+
+
+def chegada(T, t, rng):
+    """O apoio chegou: anel que abre, luz que sobe do chão e centelhas subindo."""
+    G, H = vazio(T)
+    anel = T.ring(0.2 + 0.65 * ease_out(t, 2.5), 0.03 + 0.03 * (1 - t)) * (1 - t) ** 1.3 * 1.6
+    chao = T.ring(0.25 + 0.5 * ease_out(t, 2), 0.04, cy=0.5, squash=3.2) * (1 - t) ** 1.5
+    clarao = T.gauss(0, 0.05, 0.22) * some(t, 0, 0.45) * 1.8
+    pts = []
+    for i in range(26):
+        x = rng.uniform(-0.55, 0.55)
+        sobe = ease_out(t, 1.6) * rng.uniform(0.5, 1.1)
+        pts.append((x, 0.45 - sobe, (1 - t) ** 1.2 * rng.uniform(0.4, 1)))
+    cent = T.splats(pts, 0.01)
+    G += anel + chao + clarao + cent * 1.2
+    H += anel * 0.5 + clarao + cent * 0.7
+    return G, H
+
+
 # =================================================================== registro
 # nome → (função, tela, em laço?, descrição)
 FOLHAS: dict = {}
@@ -1132,6 +1192,9 @@ def _registro_base():
     registra("escudo", escudo, GRANDE, "cúpula de escudo")
     registra("reforco", reforco, GRANDE, "reforço")
     registra("execucao", execucao, GRANDE, "execução")
+    registra("cometa", cometa, PEQUENA, "luz que corre pela linha de ação (+x)", laco=True)
+    registra("mira", mira, PEQUENA, "mira no alvo (laço)", laco=True)
+    registra("chegada", chegada, PEQUENA, "apoio chegando ao aliado")
 
 
 def renderiza(nome):
