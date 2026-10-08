@@ -18,7 +18,7 @@
     "vfx:generate": "python tools/vfx/generate_vfx.py",
     "sfx:generate": "python tools/audio/generate_sfx.py",
     "audiovisual:generate": "npm run vfx:generate && npm run sfx:generate",
-    "assets:portraits": "python scripts/create-expanded-portraits.py"
+    "assets:portraits": "python tools/portraits/optimize_portraits.py && python scripts/create-expanded-portraits.py"
   },
   "dependencies": {
     "@supabase/supabase-js": "2.117.2",
