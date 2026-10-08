@@ -52,7 +52,7 @@ export function targets(b:Battle,actor:Fighter,rule:Target,effects:Effect[]=[],r
   }
   const intent=inferTargetIntent(actor,rule,effects);
   if(rule==='enemyCast'){
-    const casting=enemies.filter(x=>x.cast);
+    const casting=enemies.filter(interrompivel);
     if(casting.length)return chooseTarget(b,actor,casting,rule,intent,effects,record);
     if(intent==='interrupt')return [];
   }
@@ -73,6 +73,18 @@ export function targets(b:Battle,actor:Fighter,rule:Target,effects:Effect[]=[],r
  * então `survived`, `winning` e `losing`, que ocorrem a cada passo, não viram
  * disparo a cada passo.
  */
+/*
+ * O Preparo leve.
+ *
+ * Toda habilidade tem Preparo (pedido do jogador: o nome aparece antes do
+ * golpe). As que eram instantâneas ganharam 0,5 s — e esse Preparo é leve: não
+ * pode ser interrompido e não conta como "inimigo em Preparo", nem para a
+ * condição nem para a Carga de quem vive de cortar golpes. Só os Preparos de
+ * verdade (todos acima de 0,5 s, como antes) são alvo de interrupção.
+ */
+export const PREPARO_LEVE=.5;
+const interrompivel=(x:Fighter)=>!!x.cast&&x.cast.duration>PREPARO_LEVE+1e-6;
+
 function gain(b:Battle,f:Fighter,topic:Topic,amount:number,source?:Fighter){
   if(!alive(f))return;
   byId[f.characterId].skills.forEach((s,i)=>{
@@ -177,7 +189,7 @@ export function applyEffects(b:Battle,source:Fighter,selected:Fighter[],effects:
           break;
         }
         case 'interrupt':{
-          if(!target.cast)break;
+          if(!target.cast||!interrompivel(target))break;
           if(intensity(target,'protected')>=.3){emit(b,{kind:'shield',source:target.uid,target:target.uid,label:'Preparação protegida',visual:'shield'});break;}
           if(effect.mode==='cancel'){const i=target.cast.skill;target.cast=null;target.skills[i].charge=25;target.skills[i].cooldown=2;}
           else if(effect.mode==='delay')target.cast.elapsed=Math.max(-2,target.cast.elapsed-effect.value);
@@ -208,8 +220,8 @@ export function applyEffects(b:Battle,source:Fighter,selected:Fighter[],effects:
 function appropriate(b:Battle,f:Fighter,s:Skill){
   if(s.requiresSkills?.some(index=>(f.skills[index]?.uses??0)<1))return false;
   if(s.condition==='injured')return targets(b,f,s.target,s.effects).some(x=>x.hp/x.maxHp<.78);
-  if(s.condition==='enemyCast')return hostile(b,f).some(x=>x.cast);
-  if(s.condition==='threatened')return friendly(b,f).some(x=>x.hp/x.maxHp<.85)||hostile(b,f).some(x=>x.cast);
+  if(s.condition==='enemyCast')return hostile(b,f).some(interrompivel);
+  if(s.condition==='threatened')return friendly(b,f).some(x=>x.hp/x.maxHp<.85)||hostile(b,f).some(interrompivel);
   if(s.condition==='investigated')return targets(b,f,s.target,s.effects,false).some(x=>(f.investigation[x.uid]??0)>=100);
   if(s.condition==='vulnerable')return hostile(b,f).some(x=>x.statuses.some(z=>['exposed','marked','paralyzed','electric','burning'].includes(z.id)));
   if(s.condition==='storedEnergy')return (f.storedEnergy??0)>0;
@@ -234,7 +246,7 @@ function skillValue(b:Battle,f:Fighter,s:Skill,selected:Fighter[],intelligence:n
     }else if(effect.kind==='shield'){
       for(const target of list){const existing=target.shields.reduce((n,x)=>n+x.amount,0);const need=target.maxHp*(1-target.hp/target.maxHp)+target.maxHp*.12-existing;const used=Math.max(0,Math.min(effect.value,need));add('proteção preventiva',used/target.maxHp*26*tacticalFactor);}
     }else if(effect.kind==='interrupt'){
-      for(const target of list)if(target.cast)add('interromper preparação',(22+Math.max(0,target.cast.elapsed/target.cast.duration)*12)*tacticalFactor);
+      for(const target of list)if(target.cast&&interrompivel(target))add('interromper preparação',(22+Math.max(0,target.cast.elapsed/target.cast.duration)*12)*tacticalFactor);
     }else if(effect.kind==='status'){
       for(const target of list){const existing=target.statuses.find(x=>x.id===effect.status)?.intensity??0;const weight=effect.status==='paralyzed'?1:effect.status==='rooted'?.7:effect.status==='silenced'?.65:effect.status==='slow'?.4:['exposed','marked','electric','burning'].includes(effect.status)?.35:effect.status==='protected'?.5:0;add('efeito de estado',Math.max(0,effect.value-existing)*weight*24*tacticalFactor);}
     }else if(effect.kind==='investigate'){
@@ -325,7 +337,7 @@ export function stepBattle(b:Battle,observe?:(snapshot:Battle)=>void):Battle {
       const selectedSkill=decideSkill(b,f);
       if(selectedSkill!==null){
         const i=selectedSkill,s=c.skills[i],list=targets(b,f,s.target,s.effects);
-        if(s.preparation>0){f.cast={skill:i,elapsed:0,duration:s.preparation,targets:list.map(x=>x.uid)};emit(b,{kind:'cast',source:f.uid,target:list[0]?.uid,skill:i,label:s.name,visual:s.icon});for(const opponent of hostile(b,f))trigger(b,opponent,'enemyCast',f);}
+        if(s.preparation>0){f.cast={skill:i,elapsed:0,duration:s.preparation,targets:list.map(x=>x.uid)};emit(b,{kind:'cast',source:f.uid,target:list[0]?.uid,skill:i,label:s.name,visual:s.icon});if(s.preparation>PREPARO_LEVE)for(const opponent of hostile(b,f))trigger(b,opponent,'enemyCast',f);}
         else execute(b,f,i,list);
         resolve(b);observe?.(b);if(b.finished)break;
         continue;

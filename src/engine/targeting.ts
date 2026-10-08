@@ -86,7 +86,7 @@ function rate(b:Battle,actor:Fighter,candidate:Fighter,rule:Target,intent:Target
       else if(ratio<.25)add('alvo perto de cair',1.7);
     }
     if(intent==='interrupt'){
-      if(candidate.cast){
+      if(candidate.cast&&candidate.cast.duration>.5+1e-6){
         const progress=clamp(candidate.cast.elapsed/Math.max(.1,candidate.cast.duration));
         const skill=byId[candidate.characterId].skills[candidate.cast.skill];
         const castValue=skill.effects.reduce((n,e)=>n+(e.kind==='damage'?e.value:e.kind==='deathnote'?candidate.maxHp*.7:0),0);
@@ -98,7 +98,7 @@ function rate(b:Battle,actor:Fighter,candidate:Fighter,rule:Target,intent:Target
       add('ameaça que vale controlar',threat(candidate)*.7);
       const control=status(candidate,'paralyzed')+status(candidate,'rooted')+status(candidate,'slow')+status(candidate,'silenced');
       add('ainda não está controlado',Math.max(0,1.2-control)*3.1);
-      if(candidate.cast)add('interromperia um plano ativo',3.2);
+      if(candidate.cast&&candidate.cast.duration>.5+1e-6)add('interromperia um plano ativo',3.2);
     }
     if(intent==='investigate'){
       add('informação ainda desconhecida',actor.discovered?.[candidate.uid]?0:4.8);

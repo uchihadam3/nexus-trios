@@ -1,3 +1,4 @@
+import { useEffect,useRef,useState } from 'react';
 import { Shield,HeartPulse,Skull } from 'lucide-react';
 import type { Battle,Fighter,Status } from '../engine/types';
 import type { Beat } from '../presentation/director';
@@ -23,10 +24,46 @@ import type { UnitActing } from '../presentation/acting';
 /* Quantos Status cabem numa linha antes de virar "+N". */
 const POR_LINHA=4;
 
+/*
+ * A vida de um Status na arena (adendo, parte 4).
+ *
+ * Entrada: o nome curto aparece no medalhão (status-pop) e o ícone chega na
+ * linha com um brilho — depois fica só o ícone (a animação roda uma vez, quando
+ * o ícone nasce).
+ * Renovação: um pulso discreto no anel, no máximo um a cada 1,5 s, para que um
+ * Status reaplicado a cada golpe não vire pisca-pisca.
+ * Saída: se o tempo acabou, some num fade; se saiu antes da hora (dissipado),
+ * o ícone se parte num anel. O ícone que sai fica 0,6 s na tela para isso.
+ */
+type Saindo={s:Status;modo:'expirou'|'dissipado';chave:number};
 function LinhaDeStatus({tipo,lista,fighter,onInspect}:{tipo:'buffs'|'debuffs';lista:Status[];fighter:Fighter;onInspect:(t:InspectTarget)=>void}){
   const visiveis=lista.slice(0,POR_LINHA),resto=lista.length-visiveis.length;
-  return <div className={`status-line ${tipo} ${lista.length?'':'is-empty'}`} aria-label={tipo==='buffs'?'Efeitos que ajudam':'Efeitos que atrapalham'}>
-    {visiveis.map(s=><StatusBadge key={s.id} status={s} onClick={()=>onInspect({kind:'status',fighter,status:s})}/>)}
+  const antes=useRef(new Map<string,Status>()),pulsos=useRef(new Map<string,{n:number;em:number}>());
+  const [saindo,setSaindo]=useState<Saindo[]>([]);
+  const vivo=fighter.hp>0;
+  const agora=performance.now();
+  for(const s of lista){
+    const velho=antes.current.get(s.id),p=pulsos.current.get(s.id)??{n:0,em:0};
+    if(velho&&(s.remaining>velho.remaining+.4||s.intensity>velho.intensity+1e-6)&&agora-p.em>1500)pulsos.current.set(s.id,{n:p.n+1,em:agora});
+  }
+  useEffect(()=>{
+    const atuais=new Set(lista.map(s=>s.id)),novos:Saindo[]=[];
+    if(vivo)for(const velho of antes.current.values())if(!atuais.has(velho.id))novos.push({s:velho,modo:velho.remaining>.35?'dissipado':'expirou',chave:performance.now()+Math.random()});
+    antes.current=new Map(lista.map(s=>[s.id,{...s}]));
+    if(novos.length){
+      setSaindo(x=>[...x.filter(y=>!atuais.has(y.s.id)),...novos]);
+      const t=setTimeout(()=>setSaindo(x=>x.filter(y=>!novos.includes(y))),650);
+      return ()=>clearTimeout(t);
+    }
+    return undefined;
+  },[lista,vivo]);
+  const temAlgo=lista.length>0||saindo.length>0;
+  return <div className={`status-line ${tipo} ${temAlgo?'':'is-empty'}`} aria-label={tipo==='buffs'?'Efeitos que ajudam':'Efeitos que atrapalham'}>
+    {visiveis.map(s=>{const pulso=pulsos.current.get(s.id)?.n??0;return <span key={s.id} className="status-vida">
+      <StatusBadge status={s} onClick={()=>onInspect({kind:'status',fighter,status:s})}/>
+      {pulso>0&&<span key={pulso} className="status-renovado" aria-hidden/>}
+    </span>;})}
+    {saindo.filter(x=>!lista.some(s=>s.id===x.s.id)).map(x=><span key={x.chave} className={`status-vida status-saindo ${x.modo}`} aria-hidden><StatusBadge status={x.s}/></span>)}
     {resto>0&&<button className="status-more" onClick={()=>onInspect({kind:'fighter',fighter})} aria-label={`Mais ${resto} efeitos`}>+{resto}</button>}
   </div>;
 }

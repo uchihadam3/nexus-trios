@@ -130,9 +130,22 @@ const cargaQueEnche = (c: Character): Character => {
   }) as [Skill, Skill, Skill] };
 };
 
+/*
+ * 6 · toda habilidade tem Preparo.
+ *
+ * Pedido do jogador: o nome da habilidade aparece no Preparo, e uma habilidade
+ * instantânea passava rápido demais para ser lida. As que não tinham Preparo
+ * passam a ter 0,5 s — pouco o bastante para quase não mudar a luta, e o
+ * suficiente para o nome aparecer antes do golpe.
+ */
+const PREPARO_MINIMO = 0.5;
+const comPreparo = (c: Character): Character => ({
+  ...c, skills: c.skills.map((s) => (s.preparation < PREPARO_MINIMO ? { ...s, preparation: PREPARO_MINIMO } : s)) as [Skill, Skill, Skill],
+});
+
 /** Aplica o alinhamento ao traço, ao ataque básico e às três habilidades. */
 export const alinharEfeitos = (c0: Character): Character => {
-  const c = cargaQueEnche(condicaoAlcancavel(c0));
+  const c = comPreparo(cargaQueEnche(condicaoAlcancavel(c0)));
   return {
   ...c,
   trait: { ...c.trait, effects: arrumar(c.trait.effects, c.trait.target) },

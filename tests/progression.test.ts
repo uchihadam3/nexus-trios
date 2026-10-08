@@ -153,7 +153,7 @@ describe('conquistas', () => {
      * em menos de 25 segundos, virar um placar de 45 pontos — e para essas o
      * que importa é a quantidade de lutas diferentes.
      */
-    for (let s = 1; s <= 60; s += 1) {
+    for (let s = 1; s <= 100; s += 1) {
       const pega = (n: number) => characters[(s * 71 + n * 43) % characters.length]!.id;
       const time = [pega(1), pega(2), pega(3)], inimigos = [pega(4), pega(5), pega(6)];
       if (new Set([...time, ...inimigos]).size < 6) continue;

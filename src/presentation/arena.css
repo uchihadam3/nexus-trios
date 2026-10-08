@@ -329,3 +329,21 @@
 .unit-skill-name .skill-icon-art{border-radius:4px;flex:none}
 @keyframes skill-name-in{0%{opacity:0;scale:.6}35%{opacity:1;scale:1.12}55%{scale:1}100%{opacity:1;scale:1}}
 @media (prefers-reduced-motion:reduce){.unit-skill-name{animation:none}}
+
+/* Adendo P4 · a vida de um Status: chega com o nome, renova sem pisca-pisca, sai com fade ou se parte. */
+.status-vida{position:relative;display:inline-grid;place-items:center;flex:0 0 auto}
+.status-vida>.status-badge{animation:status-chega .5s cubic-bezier(.2,1.5,.4,1) both}
+.status-line.buffs .status-vida{--tom:var(--ally,#5fd8bd)}
+.status-line.debuffs .status-vida{--tom:var(--rival,#f27d90)}
+@keyframes status-chega{0%{opacity:0;scale:2.1;box-shadow:0 0 0 0 var(--tom),0 0 18px var(--tom)}55%{opacity:1;scale:.9}100%{opacity:1;scale:1;box-shadow:inset 0 0 0 1px #ffffff1f}}
+.status-renovado{position:absolute;inset:-3px;border-radius:9px;pointer-events:none;box-shadow:0 0 0 2px var(--tom);animation:status-renova .55s ease-out both}
+@keyframes status-renova{from{opacity:.95;scale:.8}to{opacity:0;scale:1.45}}
+.status-saindo{pointer-events:none}
+.status-saindo>.status-badge{animation:none}
+.status-saindo.expirou>.status-badge{animation:status-expira .55s ease forwards}
+@keyframes status-expira{to{opacity:0;scale:.6}}
+.status-saindo.dissipado>.status-badge{animation:status-dissipa .55s cubic-bezier(.3,.7,.4,1) forwards}
+.status-saindo.dissipado::after{content:'';position:absolute;inset:-2px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 10px var(--tom);animation:status-anel .55s ease-out forwards;pointer-events:none}
+@keyframes status-dissipa{0%{opacity:1;scale:1}30%{opacity:1;scale:1.25;filter:brightness(2)}100%{opacity:0;scale:.3;rotate:25deg}}
+@keyframes status-anel{from{opacity:1;scale:.5}to{opacity:0;scale:2}}
+@media (prefers-reduced-motion:reduce){.status-vida>.status-badge,.status-renovado,.status-saindo.dissipado::after{animation:none}.status-saindo>.status-badge{animation:status-expira .4s linear forwards!important}}
