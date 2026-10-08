@@ -202,7 +202,7 @@ const rows:Row[] = [
 {id:'woody',name:'Woody',universe:'Toy Story',color:'#cfae7a',symbol:'W',idea:'Organiza o trio e faz cada um render mais.',question:'Qual aliado precisa de espaço para brilhar?',vulnerability:'Sozinho, quase não ameaça.',hp:1050,interval:3.6,attack:47,power:83,tags:['artificial','leader','tactician'],style:'tactician',moves:['Corda puxada','Plano do xerife','Todos juntos'],deathNoteCompatible:false},
 {id:'srincrivel',name:'Sr. Incrível',universe:'Os Incríveis',color:'#c47f72',symbol:'I',idea:'Para o golpe com o corpo e devolve na mesma troca.',question:'O trio aproveita o espaço que ele segura?',vulnerability:'Lento para alcançar quem não quer ser alcançado.',hp:1470,interval:4.2,attack:74,power:87,tags:['human','juggernaut','protector'],style:'juggernaut',moves:['Força bruta','Segurar o impacto','Golpe do Incrível'],deathNoteCompatible:true},
 {id:'mulherelastica',name:'Mulher-Elástica',universe:'Os Incríveis',color:'#c98fa4',symbol:'E',idea:'Alcança quem precisa de ajuda antes de o golpe chegar.',question:'Quem está prestes a cair e ainda dá para alcançar?',vulnerability:'Espalha-se demais e não sustenta pressão.',hp:1180,interval:3.4,attack:52,power:85,tags:['human','protector','adapt'],style:'guardian',moves:['Alcance elástico','Escudo flexível','Resgate'],deathNoteCompatible:true},
-{id:'frozone',name:'Frozone',universe:'Os Incríveis',color:'#7fb6d9',symbol:'F',idea:'Congela o chão e o campo deixa de ser do inimigo.',question:'Prendo a ameaça principal ou travo todo mundo?',vulnerability:'Precisa de umidade: sem recurso, não entrega.',hp:1110,interval:3.4,attack:56,power:85,tags:['human','ice','control'],style:'elemental',moves:['Rampa de gelo','Parede congelada','Onde está meu uniforme'],deathNoteCompatible:true},
+{id:'frozone',name:'Gelado',universe:'Os Incríveis',color:'#7fb6d9',symbol:'F',idea:'Congela o chão e o campo deixa de ser do inimigo.',question:'Prendo a ameaça principal ou travo todo mundo?',vulnerability:'Precisa de umidade: sem recurso, não entrega.',hp:1110,interval:3.4,attack:56,power:85,tags:['human','ice','control'],style:'elemental',moves:['Rampa de gelo','Parede congelada','Onde está meu uniforme'],deathNoteCompatible:true},
 {id:'korra',name:'Korra',universe:'A Lenda de Korra',color:'#9ab4c9',symbol:'K',idea:'Avatar que resolve primeiro na porrada e pensa depois.',question:'A agressão dela compensa o risco que ela corre?',vulnerability:'Impulsiva: entra sem cobertura.',hp:1250,interval:3.0,attack:67,power:88,tags:['human','berserker','adapt'],style:'tempest',moves:['Dobra de fogo','Dobra de terra','Estado Avatar'],deathNoteCompatible:true},
 {id:'zuko',name:'Zuko',universe:'Avatar',color:'#c98f7a',symbol:'Z',idea:'Fogo constante que não deixa o alvo se recompor.',question:'Mantenho a pressão ou guardo para o relâmpago?',vulnerability:'Luta consigo mesmo tanto quanto com o inimigo.',hp:1140,interval:3.1,attack:62,power:85,tags:['human','fire','duelist'],style:'duelist',moves:['Chicote de fogo','Redirecionar relâmpago','Dois espadachins'],deathNoteCompatible:true},
 {id:'azula',name:'Azula',universe:'Avatar',color:'#7fbfd4',symbol:'A',idea:'Fogo azul e precisão: ela mira onde dói mais.',question:'Quem já está ferido o bastante para a execução?',vulnerability:'Perfeccionista: desmorona quando o plano falha.',hp:1050,interval:3.2,attack:70,power:89,tags:['human','execution','lightning'],style:'reaper',moves:['Fogo azul','Relâmpago','Precisão cruel'],deathNoteCompatible:true},
@@ -705,6 +705,11 @@ const NOME_MOSTRADO:Record<string,Partial<Record<0|1|2,string>>>={
   lexluthor:{0:'Canhões da armadura'},
   toph:{1:'Muralha de terra'},
   iroh:{0:'Chá de jasmim'},
+  /* bordões: como ficaram na dublagem brasileira, não traduzidos do inglês */
+  pernalonga:{2:'O que é que há, velhinho?'},
+  buzz:{2:'Ao infinito e além!'},
+  frozone:{2:'Cadê meu supertraje?'},
+  bugiganga:{2:'Vai, vai, Bugiganga!'},
 };
 function makeSkill(c:Row,index:number,m:Move,hook?:IdentityHook):Skill{
   const name=NOME_MOSTRADO[c.id]?.[index as 0|1|2]??c.moves[index];

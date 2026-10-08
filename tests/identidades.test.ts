@@ -23,13 +23,21 @@ import {
 const todas = characters.map((c) => ({ c, ids: identidadesDe(c) }));
 
 describe('identidades públicas', () => {
-  it('cobre os 250, com 2 a 4 cada', () => {
+  /*
+   * Poucas e de verdade: de 1 a 3 etiquetas, e 4 só para a exceção. Com quatro
+   * em quase todo mundo a carta dizia "faz de tudo".
+   */
+  it('cobre os 250, com 1 a 3 cada (4 só como exceção)', () => {
     expect(Object.keys(identidadesPorPersonagem)).toHaveLength(250);
     for (const { c, ids } of todas) {
-      expect(ids.length, `${c.name}: ${ids.join(', ')}`).toBeGreaterThanOrEqual(2);
+      expect(ids.length, `${c.name}: ${ids.join(', ')}`).toBeGreaterThanOrEqual(1);
       expect(ids.length, `${c.name}: ${ids.join(', ')}`).toBeLessThanOrEqual(4);
       expect(new Set(ids).size, `${c.name} repete identidade`).toBe(ids.length);
     }
+    const quatro = todas.filter(({ ids }) => ids.length === 4).length;
+    expect(quatro / todas.length, `${String(quatro)} personagens com 4 etiquetas`).toBeLessThanOrEqual(0.08);
+    const media = todas.reduce((n, { ids }) => n + ids.length, 0) / todas.length;
+    expect(media).toBeLessThanOrEqual(3);
   });
 
   it('só usa termos da taxonomia, e cada um tem explicação', () => {
@@ -74,9 +82,10 @@ describe('identidades públicas', () => {
       const chave = [...ids].sort().join(' · ');
       combinacoes.set(chave, [...(combinacoes.get(chave) ?? []), c.name]);
     }
-    expect(combinacoes.size).toBeGreaterThan(150);
+    expect(combinacoes.size).toBeGreaterThan(140);
+    /* Com etiqueta única para quem é bom numa coisa só, a mesma etiqueta solitária se repete mais — até 12. */
     const maior = [...combinacoes.values()].sort((a, b) => b.length - a.length)[0]!;
-    expect(maior.length, `combinação repetida demais: ${maior.join(', ')}`).toBeLessThanOrEqual(8);
+    expect(maior.length, `combinação repetida demais: ${maior.join(', ')}`).toBeLessThanOrEqual(12);
   });
 
   /*
@@ -114,7 +123,7 @@ describe('identidades públicas', () => {
   /* As quatro âncoras escritas no documento da direção. */
   it.each([
     ['saitama', ['Explosão', 'Finalização', 'Sobrevivência']],
-    ['storm', ['Área', 'Controle', 'Debuff', 'Ritmo']],
+    ['storm', ['Área', 'Controle', 'Ritmo']],
     ['wolverine', ['Pressão', 'Regeneração', 'Sobrevivência']],
     ['professorx', ['Suporte', 'Controle', 'Ritmo']],
   ])('%s tem as identidades que a direção nomeou', (id, esperadas) => {

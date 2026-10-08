@@ -166,7 +166,7 @@ tabela.set('cargaDadaReal', medidas.filter((m) => comCarga.has(m.id)).map((m) =>
  */
 const overrides: Record<string, readonly Identidade[]> = {
   saitama: ['Explosão', 'Finalização', 'Sobrevivência'],
-  storm: ['Área', 'Controle', 'Debuff', 'Ritmo'],
+  storm: ['Área', 'Controle', 'Ritmo'],
   wolverine: ['Pressão', 'Regeneração', 'Sobrevivência'],
   professorx: ['Suporte', 'Controle', 'Ritmo'],
 };
@@ -207,18 +207,31 @@ const porTermo = new Map<Identidade, number>();
 
 for (const c of characters) {
   const notas = candidatos.get(c.id)!;
-  let escolhidas = [...notas]
-    .sort((a, b) => b[1] * raridade(b[0]) - a[1] * raridade(a[0]))
-    .slice(0, 4).map(([id]) => id);
+  /*
+   * Poucas etiquetas, e só as de verdade.
+   *
+   * Com quatro por personagem (210 dos 250 tinham quatro) a carta dizia "faz
+   * de tudo" e deixava de dizer no que ele é bom. Agora cada etiqueta a mais
+   * precisa de evidência mais forte: a primeira sempre entra; a segunda só
+   * se ele estiver entre os 15% melhores do elenco naquilo; a terceira, entre
+   * os 10%; a quarta só para quem é excepcional (3%).
+   */
+  const PISO_DA_POSICAO = [0, 0.85, 0.9, 0.97];
+  const ordenadas = [...notas].sort((a, b) => b[1] * raridade(b[0]) - a[1] * raridade(a[0]));
+  let escolhidas: Identidade[] = [];
+  for (const [id, nota] of ordenadas) {
+    if (escolhidas.length >= PISO_DA_POSICAO.length) break;
+    if (nota >= PISO_DA_POSICAO[escolhidas.length]!) escolhidas.push(id);
+  }
 
   /*
-   * O piso de duas.
+   * O piso de uma.
    *
-   * Quem não passou em nada fica com as duas evidências mais fortes que tem,
-   * mesmo abaixo do corte: dizer "este personagem é sobretudo isto" continua
-   * sendo verdade relativa, e deixar a carta sem etiqueta nenhuma seria pior.
+   * Quem não passou em nada fica com a evidência mais forte que tem, mesmo
+   * abaixo do corte: dizer "este personagem é sobretudo isto" continua sendo
+   * verdade relativa, e deixar a carta sem etiqueta nenhuma seria pior.
    */
-  if (escolhidas.length < 2) {
+  if (escolhidas.length < 1) {
     const m = porId.get(c.id)!;
     const fallback: [Identidade, number][] = [
       ['Pressão', percentil('dano', m.dano as number)],
@@ -229,7 +242,7 @@ for (const c of characters) {
     ];
     for (const [id] of fallback.sort((a, b) => b[1] - a[1])) {
       if (!escolhidas.includes(id)) escolhidas.push(id);
-      if (escolhidas.length === 2) break;
+      if (escolhidas.length === 1) break;
     }
   }
 
