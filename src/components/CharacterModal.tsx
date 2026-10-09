@@ -69,7 +69,6 @@ export function CharacterModal({character:c,onClose}:{character:Character;onClos
 
     <div className="fv-habilidades">{c.skills.map((s,i)=>{const p=presentSkill(s);return <article key={s.id} className="fv-habilidade">
       <header><span className="fv-icone"><SkillIcon type={s.icon} characterId={c.id} skillId={s.id} size={52}/></span><div><span className="fv-selo">HABILIDADE {i+1}</span><h3>{s.name}</h3></div></header>
-      {p.requisito&&<div className="skill-requisito"><Hourglass size={14}/><span>{p.requisito}</span></div>}
       <EfeitosAgrupados grupos={p.grupos}/>
       {p.mostrarAlvo&&<div className="fv-regra"><Target size={13}/><b>Alvo</b> {p.target}</div>}
       <div className="fv-regras">
