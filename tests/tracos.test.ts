@@ -60,6 +60,6 @@ describe('traço próprio de cada um', () => {
     expect(byId.charizard!.trait).toMatchObject({ name: 'Blaze', on: 'losing' });
     expect(byId.jeangrey!.trait.effects[0]).toMatchObject({ kind: 'heal' });
     expect(byId.snake!.trait.effects[0]).toMatchObject({ kind: 'status', status: 'evasion' });
-    expect(byId.iroh!.trait).toMatchObject({ target: 'allAllies' });
+    expect(byId.iroh!.trait.effects[0]).toMatchObject({ kind: 'heal', target: 'allAllies' });
   });
 });
