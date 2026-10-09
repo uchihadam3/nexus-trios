@@ -176,9 +176,9 @@ function trigger(b:Battle,f:Fighter,topic:Topic,source?:Fighter,amount=1){
  * dos rivais os buffs que mais ajudam primeiro. `value` é quantos Status saem.
  */
 export const ORDEM_DA_PURIFICACAO:StatusId[]=['paralyzed','frozen','sleep','silenced','rooted','provoked','confused','blind','poison','bleed','cursed','slow','burning','exposed','marked','electric','weakened'];
-export const ORDEM_DA_DISSIPACAO:StatusId[]=['barrier','protected','reflect','vampirism','strengthened','haste','thorns','regen'];
+export const ORDEM_DA_DISSIPACAO:StatusId[]=['evasion','barrier','protected','reflect','vampirism','strengthened','haste','thorns','regen'];
 const PESO_DO_DEBUFF:Partial<Record<StatusId,number>>={paralyzed:1,frozen:.9,sleep:.8,silenced:.65,rooted:.7,provoked:.5,confused:.45,blind:.45,poison:.4,bleed:.4,cursed:.4,slow:.4};
-const PESO_DO_BUFF:Partial<Record<StatusId,number>>={barrier:.5,protected:.5,reflect:.45,vampirism:.45,strengthened:.4,haste:.4,thorns:.3,regen:.3};
+const PESO_DO_BUFF:Partial<Record<StatusId,number>>={evasion:.5,barrier:.5,protected:.5,reflect:.45,vampirism:.45,strengthened:.4,haste:.4,thorns:.3,regen:.3};
 function quaisSaem(alvo:Fighter,ordem:StatusId[],n:number):StatusId[]{
   const tem=new Set(alvo.statuses.map(s=>s.id));
   return [...ordem.filter(id=>tem.has(id)),...[...tem].filter(id=>!ordem.includes(id)&&ordem!==ORDEM_DA_DISSIPACAO&&negativeStatuses.has(id))].slice(0,Math.max(0,Math.round(n)));
@@ -219,6 +219,10 @@ function damage(b:Battle,source:Fighter,target:Fighter,raw:number,direto=true,la
   target.shields=target.shields.filter(s=>s.amount>.01);
   if(protection>0){const owner=b.fighters.find(f=>f.uid===target.statuses.find(s=>s.id==='protected')?.source);if(owner){owner.stats.protection+=beforeProtection*protection;pressure(b,owner.side,D.event.usefulProtectionPerFullCondition*clamp(beforeProtection*protection/target.maxHp));emit(b,{kind:'block',source:owner.uid,target:target.uid,attacker:source.uid,label:'Proteção',value:beforeProtection*protection,visual:'shield'});trigger(b,owner,'protected',owner,beforeProtection*protection/100);}}
   const hpBefore=target.hp;
+  // Última resistência: o golpe que derrubaria deixa com 1 de Vida, uma vez por luta
+  const resiste=byId[target.characterId].ultimaResistencia;
+  let resistiu=false;
+  if(resiste&&!target.resistiu&&amount>=hpBefore&&hpBefore>1){amount=hpBefore-1;target.resistiu=true;resistiu=true;}
   const dealt=Math.min(hpBefore,amount);target.hp=Math.max(0,hpBefore-dealt);source.stats.damage+=dealt;
   if(dealt>.01){
     // Dormindo: o golpe direto acorda
@@ -237,6 +241,13 @@ function damage(b:Battle,source:Fighter,target:Fighter,raw:number,direto=true,la
     devolve(b,target,source,beforeProtection*Math.min(intensity(target,'reflect'),statuses.reflect.cap),'Refletido');
     devolve(b,target,source,Math.min(intensity(target,'thorns'),statuses.thorns.cap),'Espinhos');
   }
+  if(resistiu&&resiste){
+    const atual=target.statuses.find(s=>s.id==='protected');
+    if(atual){atual.intensity=Math.max(atual.intensity,resiste.protegido);atual.remaining=Math.max(atual.remaining,resiste.duracao);}
+    else target.statuses.push({id:'protected',remaining:resiste.duracao,duration:resiste.duracao,intensity:resiste.protegido,source:target.uid});
+    pressure(b,target.side,D.event.clutchSave);
+    emit(b,{kind:'resist',source:target.uid,target:target.uid,label:'Última resistência',value:1});
+  }
   if(beforeProtection>target.maxHp*D.event.criticalThreshold/100&&alive(target)&&target.hp/target.maxHp<=D.event.criticalThreshold/100)pressure(b,source.side,D.event.criticalCrossing);
   if(!alive(target)){
     pressure(b,source.side,D.event.knockout);target.cast=null;target.action=0;target.statuses=[];target.shields=[];source.stats.kills++;
@@ -253,6 +264,21 @@ function healing(b:Battle,source:Fighter,target:Fighter,value:number,label='Recu
 }
 export function applyEffects(b:Battle,source:Fighter,selected:Fighter[],effects:Effect[],scale=1){
   const danoAntes=source.stats.damage;
+  /*
+   * Esquiva: o rival com Esquiva rola uma vez por golpe; se escapou, nada do
+   * que é contra ele entra (dano, debuff, interrupção) — o golpe passou longe.
+   */
+  const decidido=new Map<string,boolean>();
+  const escapou=(alvo:Fighter)=>{
+    if(alvo.side===source.side||!alive(alvo))return false;
+    if(!decidido.has(alvo.uid)){
+      const chance=Math.min(intensity(alvo,'evasion'),statuses.evasion.cap);
+      const sim=chance>0&&random(b)<chance;
+      decidido.set(alvo.uid,sim);
+      if(sim)emit(b,{kind:'miss',source:source.uid,target:alvo.uid,label:'Esquivou'});
+    }
+    return decidido.get(alvo.uid)!;
+  };
   for(const effect of effects){
     // Roubo de vida: cura quem age em parte do dano que esta habilidade causou
     if(effect.kind==='lifesteal'){healing(b,source,source,(source.stats.damage-danoAntes)*effect.value,'Roubo de vida');continue;}
@@ -278,6 +304,7 @@ export function applyEffects(b:Battle,source:Fighter,selected:Fighter[],effects:
         continue;
       }
       if(!alive(target))continue;
+      if(['damage','status','interrupt','dispel','shift','release'].includes(effect.kind)&&target.side!==source.side&&escapou(target))continue;
       switch(effect.kind){
         case 'damage':damage(b,source,target,effect.value*fracao);break;
         case 'cleanse':if(target.side===source.side)tiraStatus(b,source,target,'cleanse',effect.value);break;
@@ -390,7 +417,7 @@ function skillValue(b:Battle,f:Fighter,s:Skill,selected:Fighter[],intelligence:n
       const folego=f.hp/f.maxHp;
       for(const target of list){if(quemProvocou(b,target)?.uid===f.uid)continue;add('provocar',(6+fragil*18)*folego*tacticalFactor);}
     }else if(effect.kind==='status'){
-      for(const target of list){const existing=target.statuses.find(x=>x.id===effect.status)?.intensity??0;const weight=effect.status==='paralyzed'?1:effect.status==='rooted'?.7:effect.status==='silenced'?.65:effect.status==='slow'?.4:['exposed','marked','electric','burning'].includes(effect.status)?.35:effect.status==='protected'?.5:effect.status==='vampirism'||effect.status==='reflect'?.45:effect.status==='frozen'?.9:effect.status==='sleep'?.75:effect.status==='barrier'?.5:['blind','cursed'].includes(effect.status)?.4:effect.status==='poison'||effect.status==='bleed'?.012:effect.status==='thorns'?.02:0;add('efeito de estado',Math.max(0,effect.value-existing)*weight*24*tacticalFactor);}
+      for(const target of list){const existing=target.statuses.find(x=>x.id===effect.status)?.intensity??0;const weight=effect.status==='paralyzed'?1:effect.status==='rooted'?.7:effect.status==='silenced'?.65:effect.status==='slow'?.4:['exposed','marked','electric','burning'].includes(effect.status)?.35:effect.status==='protected'?.5:effect.status==='vampirism'||effect.status==='reflect'?.45:effect.status==='frozen'?.9:effect.status==='sleep'?.75:effect.status==='barrier'?.5:effect.status==='evasion'?.45:['blind','cursed'].includes(effect.status)?.4:effect.status==='poison'||effect.status==='bleed'?.012:effect.status==='thorns'?.02:0;add('efeito de estado',Math.max(0,effect.value-existing)*weight*24*tacticalFactor);}
     }else if(effect.kind==='cleanse'||effect.kind==='dispel'){
       // vale o quanto atrapalhava (ou ajudava) o que vai sair
       const ordem=effect.kind==='cleanse'?ORDEM_DA_PURIFICACAO:ORDEM_DA_DISSIPACAO,peso=effect.kind==='cleanse'?PESO_DO_DEBUFF:PESO_DO_BUFF;

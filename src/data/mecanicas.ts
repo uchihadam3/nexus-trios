@@ -131,6 +131,16 @@ export const GANHA_STATUS: Record<string, GanhaStatus[]> = {
   jeangrey: [{ habilidade: 1, status: 'barrier', valor: 1, duracao: 8, alvo: 'allAllies' }], // escudo mental
   greenlantern: [{ habilidade: 0, status: 'barrier', valor: 1, duracao: 8, alvo: 'allyWeak' }], // escudo de vontade
   raidenmk: [{ habilidade: 1, status: 'barrier', valor: 1, duracao: 8, alvo: 'allAllies', troca: 'electric' }], // barreira elétrica
+  // Esquiva: chance de escapar do golpe inteiro (parte 6) — onde havia Protegido de "fugir", a Esquiva entra no lugar
+  pikachu: [{ habilidade: 2, status: 'evasion', valor: 0.35, duracao: 6, alvo: 'self' }], // Agilidade
+  killua: [{ habilidade: 0, status: 'evasion', valor: 0.3, duracao: 5, alvo: 'self' }], // o ritmo elétrico deixa rastro
+  flash: [{ habilidade: 0, status: 'evasion', valor: 0.35, duracao: 5, alvo: 'self' }], // rápido demais para acertar
+  papaleguas: [{ habilidade: 2, status: 'evasion', valor: 0.45, duracao: 6, alvo: 'self', troca: 'protected' }], // bip-bip
+  jerry: [{ habilidade: 0, status: 'evasion', valor: 0.4, duracao: 6, alvo: 'self', troca: 'protected' }], // nunca onde deveria
+  pernalonga: [{ habilidade: 0, status: 'evasion', valor: 0.4, duracao: 6, alvo: 'self', troca: 'protected' }], // o buraco de coelho
+  loki: [{ habilidade: 0, status: 'evasion', valor: 0.35, duracao: 6, alvo: 'self', troca: 'weakened' }], // a duplicata leva o golpe
+  sekiro: [{ habilidade: 0, status: 'evasion', valor: 0.4, duracao: 5, alvo: 'self', troca: 'protected' }], // Deflexão
+  minato: [{ habilidade: 0, status: 'evasion', valor: 0.3, duracao: 5, alvo: 'self' }], // o Hiraishin já está em outro lugar
   alphonse: [{ habilidade: 2, status: 'barrier', valor: 1, duracao: 8, alvo: 'allAllies' }], // barreira transmutada
 };
 
@@ -207,6 +217,16 @@ const miudo = (limite: number) => (e: Effect) => e.kind === 'status' && !POR_SEG
 const negativo = (s: StatusId) => !['protected', 'haste', 'regen', 'strengthened', 'vampirism', 'reflect', 'thorns', 'barrier'].includes(s);
 export const LIMITE_DO_MIUDO = { basico: 0.08, habilidade: 0.065 };
 
+/** Última resistência: uma vez por luta, o golpe fatal deixa com 1 de Vida e Protegido por um instante. */
+export const ULTIMA_RESISTENCIA: Record<string, { protegido: number; duracao: number }> = {
+  naruto: { protegido: 0.5, duracao: 2.5 }, // "Nunca desistir"
+  vegeta: { protegido: 0.5, duracao: 2.5 }, // "Não vou cair"
+  guts: { protegido: 0.5, duracao: 3 }, // sobrevive ao impossível
+  saitama: { protegido: 0.5, duracao: 2 }, // "Ainda aqui"
+  invencivel: { protegido: 0.5, duracao: 2.5 }, // "Levantar de novo"
+  coragem: { protegido: 0.6, duracao: 2.5 }, // morre de medo, mas não cai
+};
+
 export function aplicaMecanicas(c0: Character): Character {
   const c: Character = {
     ...c0,
@@ -216,11 +236,12 @@ export function aplicaMecanicas(c0: Character): Character {
       return effects.length ? { ...s, effects } : s;
     }) as Character['skills'],
   };
-  const renascer = RENASCER[c.id], mudancas = mudancasDe(c.id);
-  if (!renascer && !mudancas.size) return c;
+  const renascer = RENASCER[c.id], mudancas = mudancasDe(c.id), ultimaResistencia = ULTIMA_RESISTENCIA[c.id];
+  if (!renascer && !ultimaResistencia && !mudancas.size) return c;
   return {
     ...c,
     ...(renascer ? { renascer } : {}),
+    ...(ultimaResistencia ? { ultimaResistencia } : {}),
     skills: c.skills.map((s, i) => {
       const fs = mudancas.get(i);
       return fs ? { ...s, effects: fs.reduce((e, f) => f(e), [...s.effects]) } : s;

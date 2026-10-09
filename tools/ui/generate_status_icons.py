@@ -29,7 +29,7 @@ CORES = {
     "strengthened": "#ffd166", "weakened": "#b8a2d6", "provoked": "#ff7048",
     "vampirism": "#ff4f6e", "reflect": "#8fd8ff", "thorns": "#9fd65e",
     "poison": "#8fd14f", "bleed": "#e8455a", "cursed": "#a874e8", "frozen": "#9fe3ff", "sleep": "#b9b8ff",
-    "blind": "#e3dcb2", "barrier": "#f5e39a",
+    "blind": "#e3dcb2", "barrier": "#f5e39a", "evasion": "#c8f7ff",
 }
 
 
@@ -321,13 +321,22 @@ def cupula(d):
     poly(d, [(-0.3, -0.04), (0.0, -0.08), (0.3, -0.04), (0.0, 0.0)], 0)
 
 
+def vulto(d):
+    """Esquiva: um corpo (cabeça e tronco) com duas cópias ficando para trás, e riscos de vento."""
+    for dx, a in ((0.42, 80), (0.2, 150), (-0.1, 255)):
+        circ(d, dx, -0.36, 0.22, a)
+        poly(d, [(dx - 0.27, 0.78), (dx - 0.24, -0.04), (dx + 0.24, -0.04), (dx + 0.27, 0.78)], a)
+    for y in (-0.5, 0.15, 0.6):
+        linha(d, [(-0.9, y), (-0.52, y)], 0.1)
+
+
 SIMBOLOS = {
     "burning": chama, "confused": espiral, "electric": raio, "exposed": escudo_rachado,
     "haste": setas, "marked": mira, "paralyzed": pausa, "protected": escudo,
     "regen": coracao_mais, "rooted": cadeado, "silenced": balao_riscado, "slow": ampulheta,
     "strengthened": espada, "weakened": lambda d: espada(d, quebrada=True, invertida=True),
     "provoked": raiva, "vampirism": presas, "reflect": espelho, "thorns": espinhos_icone,
-    "poison": frasco, "bleed": gotas, "cursed": coracao_partido, "frozen": floco, "sleep": zz, "blind": olho_riscado, "barrier": cupula,
+    "poison": frasco, "bleed": gotas, "cursed": coracao_partido, "frozen": floco, "sleep": zz, "blind": olho_riscado, "barrier": cupula, "evasion": vulto,
 }
 
 
@@ -376,7 +385,7 @@ NOMES = {
     "electric": "Eletrificado", "silenced": "Silenciado", "strengthened": "Fortalecido", "weakened": "Enfraquecido",
     "provoked": "Provocado", "vampirism": "Vampirismo", "reflect": "Refletir", "thorns": "Espinhos",
     "poison": "Envenenado", "bleed": "Sangrando", "cursed": "Amaldiçoado", "frozen": "Congelado", "sleep": "Dormindo",
-    "blind": "Cego", "barrier": "Barreira",
+    "blind": "Cego", "barrier": "Barreira", "evasion": "Esquiva",
 }
 
 

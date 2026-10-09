@@ -144,6 +144,8 @@
 .arena-v2 .unit-zz b{font-size:16px;margin-left:1px}.arena-v2 .unit-zz i{font-style:normal;font-size:19px;margin-left:1px}
 @keyframes zz-sobe{0%{transform:translateY(4px);opacity:.3}50%{opacity:1}100%{transform:translateY(-8px);opacity:.3}}
 .arena-v2 .unit .errou-pop{color:#e9eef2;border-color:#ffffff55;background:#22282ced;font-style:italic}
+.arena-v2 .unit .esquivou-pop{color:#e6fbff;border-color:#c8f7ff88;background:#14262bed;font-style:italic}
+.arena-v2 .unit .resistiu-pop{color:#fff1c4;border-color:#ffd36bcc;background:#2c2208ed;font-weight:900}
 .arena-v2 .unit .anulou-pop{color:#fff3c4;border-color:#f5e39a99;background:#2a2410ed}
 @media (prefers-reduced-motion:reduce){.arena-v2 .unit-zz{animation:none}}
 .arena-v2 .unit .purifica-pop{color:#e8fbff;border-color:#bfefff99;background:#10262ced}

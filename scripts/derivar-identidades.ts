@@ -150,6 +150,8 @@ const avaliar = (c: Character): Map<Identidade, number> => {
   if (temEfeito(c, ({ e }) => e.kind === 'cleanse')) notas.set('Purificar', 1);
   if (temEfeito(c, ({ e }) => e.kind === 'dispel')) notas.set('Dissipar', 1);
   const TAG_DO_STATUS: [StatusId, Identidade][] = [['poison', 'Veneno'], ['bleed', 'Sangramento'], ['cursed', 'Maldição'], ['frozen', 'Congelar'], ['sleep', 'Sono'], ['blind', 'Cegueira'], ['barrier', 'Barreira']];
+  if (temEfeito(c, ({ e }) => e.kind === 'status' && e.status === 'evasion')) notas.set('Esquiva', 1);
+  if (c.ultimaResistencia) notas.set('Última resistência', 1);
   for (const [s, tag] of TAG_DO_STATUS) if (temEfeito(c, ({ e }) => e.kind === 'status' && e.status === s)) notas.set(tag, 1);
   return notas;
 };

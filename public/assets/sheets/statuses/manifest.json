@@ -14,7 +14,7 @@
   ],
   "gutter": 8,
   "margin": 8,
-  "count": 25,
+  "count": 26,
   "items": [
     {
       "id": "exposed",
@@ -486,6 +486,25 @@
       },
       "crop": {
         "x": 24,
+        "y": 1032,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "evasion",
+      "name": "Esquiva",
+      "path": "/assets/statuses/evasion.png",
+      "row": 6,
+      "column": 1,
+      "cell": {
+        "x": 176,
+        "y": 1016,
+        "width": 160,
+        "height": 160
+      },
+      "crop": {
+        "x": 192,
         "y": 1032,
         "width": 128,
         "height": 128

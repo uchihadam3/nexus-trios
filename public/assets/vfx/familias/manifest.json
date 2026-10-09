@@ -951,6 +951,20 @@
   "laco": false,
   "bytes": 45002
  },
+ "esquiva": {
+  "descricao": "vultos que escapam para os lados e riscos de vento",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 74172
+ },
  "esticar": {
   "descricao": "braço elástico",
   "quadros": 12,
@@ -2616,6 +2630,20 @@
   ],
   "laco": false,
   "bytes": 48600
+ },
+ "ultima_resistencia": {
+  "descricao": "pulso dourado, chão rachando e coluna de luz",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 93424
  },
  "vampirismo": {
   "descricao": "gotas de sangue em espiral e pulso de coração",

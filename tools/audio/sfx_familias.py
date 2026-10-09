@@ -1397,6 +1397,31 @@ def provocar(rng, v):
 
 
 # ================================================================== refletir, espinhos, vampirismo
+def esquiva(rng, v):
+    """Esquiva: dois sopros rápidos cruzando (o golpe e o vulto) e um passo leve no chão."""
+    x = _z(0.6)
+    for k, (a, b) in enumerate(((1200, 4200), (3800, 900))):
+        n = n_de(0.22)
+        poe(x, assobio(rng, n, a, b, 0.8, 0.6) * sobe_e_some(n, 0.3, 1.0) * 0.28, 0.06 * k)
+    poe(x, baque(n_de(0.06), 400, 260, 0.03, 0.5) * 0.12, 0.2)
+    return reverb(x, 0.3, 0.15, 10000)
+
+
+def ultima_resistencia(rng, v):
+    """Última resistência: o coração quase para, bate forte duas vezes, e um acorde grave sobe
+    junto com um brado — ele continua de pé."""
+    x = _z(1.8)
+    batida = seno(varre(nota(38), nota(31), n_de(0.25), 1.5), n_de(0.25)) * env(n_de(0.25), 0.003, 0.12) * 0.6
+    poe(x, batida, 0.0)
+    poe(x, batida * 1.1, 0.42)
+    n = n_de(1.1)
+    t = np.arange(n) / SR
+    acorde = sum(seno(varre(nota(m), nota(m + 5), n, 2.2) * (1 + 0.004 * np.sin(2 * math.pi * 5 * t)), n) / (1 + 0.4 * k) for k, m in enumerate((43, 50, 55, 62)))
+    poe(x, satura(acorde * 0.5, 1.6) * env(n, 0.08, 0.6, segura=0.2) * 0.2, 0.45)
+    poe(x, modal(n_de(1.0), nota(79), rng=rng, **SINO) * env(n_de(1.0), 0.004, 0.6) * 0.12, 0.5)
+    return reverb(x, 0.8, 0.38, 8000)
+
+
 def sono(rng, v):
     """Sono: uma caixinha de música desce três notas devagar e um sopro morno embala."""
     x = _z(1.6)
@@ -1527,7 +1552,7 @@ SONS_NOVOS = {
 _BAIXO = {"brasas-renascendo", "cura-em-area", "regeneracao", "grito-de-guerra", "velocidade", "escudo-tech", "barreira-magica", "armadura", "resgate",
           "bencao", "lanche", "purificacao", "enfraquecimento", "lentidao", "marca", "silencio", "medo", "exposto", "hipnose",
           "encanto", "runas", "lua", "petalas", "regeneracao", "confusao", "estrela-invencivel", "disco", "flecha"}
-_ALTO = {"sono", "cegueira", "errou", "barreira-anula", "dissipar", "reflexo", "espinhos", "vampirismo", "provocar", "renascer", "ressurreicao", "soco-serio", "supernova", "kamehameha", "canhao-de-energia", "foguete", "tempestade", "punho-gigante", "pisao",
+_ALTO = {"esquiva", "ultima-resistencia", "sono", "cegueira", "errou", "barreira-anula", "dissipar", "reflexo", "espinhos", "vampirismo", "provocar", "renascer", "ressurreicao", "soco-serio", "supernova", "kamehameha", "canhao-de-energia", "foguete", "tempestade", "punho-gigante", "pisao",
          "martelo", "espadao", "buraco-negro", "tsunami", "transformacao-v2", "dragao", "susanoo", "dominio"}
 _ANTES = {"chidori-carga": "faíscas do Chidori", "esfera-espiral-carga": "a esfera girando", "kamehameha-carga": "carga do Kamehameha",
           "kamehameha-feixe": "o feixe saindo", "marretada-giro": "a marreta subindo"}
