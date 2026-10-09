@@ -22,7 +22,7 @@ export const LIGACOES = ['carga-golpe', 'abre-vulneravel', 'abre-ferido', 'cuida
 export type Ligacao = (typeof LIGACOES)[number];
 
 const PARA_ALIADOS: Target[] = ['allAllies', 'allyWeak'];
-const PARA_RIVAIS: Target[] = ['enemyWeak', 'enemyStrong', 'enemyCast', 'investigated', 'allEnemies', 'randomEnemy'];
+const PARA_RIVAIS: Target[] = ['enemyWeak', 'enemyStrong', 'enemyCast', 'investigated', 'leastInvestigated', 'allEnemies', 'randomEnemy'];
 const ABRE: StatusId[] = ['exposed', 'marked', 'paralyzed', 'electric', 'burning'];
 const PRENDE: StatusId[] = ['paralyzed', 'frozen', 'sleep', 'rooted', 'slow', 'confused', 'silenced', 'weakened', 'blind'];
 const REFORCO: StatusId[] = ['strengthened', 'haste', 'protected', 'regen'];

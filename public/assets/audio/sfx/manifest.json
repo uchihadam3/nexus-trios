@@ -36,6 +36,23 @@
    ],
    "bytes": 32943
   },
+  "agua-benta": {
+   "arquivo": "agua-benta.mp3",
+   "descricao": "família agua benta",
+   "versoes": [
+    0.0,
+    1.98,
+    4.0289,
+    5.9446
+   ],
+   "duracoes": [
+    1.9,
+    1.9689,
+    1.8357,
+    1.9289
+   ],
+   "bytes": 84979
+  },
   "areia": {
    "arquivo": "areia.mp3",
    "descricao": "família areia",
@@ -699,6 +716,23 @@
    ],
    "bytes": 22222
   },
+  "corvos": {
+   "arquivo": "corvos.mp3",
+   "descricao": "família corvos",
+   "versoes": [
+    0.0,
+    1.88,
+    3.8253,
+    5.6444
+   ],
+   "duracoes": [
+    1.8,
+    1.8653,
+    1.7391,
+    1.8274
+   ],
+   "bytes": 64739
+  },
   "cosmico": {
    "arquivo": "cosmico.mp3",
    "descricao": "família cosmico",
@@ -766,6 +800,23 @@
     1.5228
    ],
    "bytes": 55680
+  },
+  "death-note": {
+   "arquivo": "death-note.mp3",
+   "descricao": "família death note",
+   "versoes": [
+    0.0,
+    2.28,
+    4.6398,
+    6.8454
+   ],
+   "duracoes": [
+    2.2,
+    2.2798,
+    2.1256,
+    2.2335
+   ],
+   "bytes": 91480
   },
   "derrota": {
    "arquivo": "derrota.mp3",
@@ -1209,6 +1260,23 @@
    ],
    "bytes": 24302
   },
+  "estado-avatar": {
+   "arquivo": "estado-avatar.mp3",
+   "descricao": "família estado avatar",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 73143
+  },
   "esticar": {
    "arquivo": "esticar.mp3",
    "descricao": "família esticar",
@@ -1515,6 +1583,40 @@
    ],
    "bytes": 46495
   },
+  "gatling": {
+   "arquivo": "gatling.mp3",
+   "descricao": "família gatling",
+   "versoes": [
+    0.0,
+    1.68,
+    3.418,
+    5.0439
+   ],
+   "duracoes": [
+    1.6,
+    1.658,
+    1.5459,
+    1.6244
+   ],
+   "bytes": 67665
+  },
+  "gear-fifth": {
+   "arquivo": "gear-fifth.mp3",
+   "descricao": "família gear fifth",
+   "versoes": [
+    0.0,
+    1.98,
+    4.0289,
+    5.9446
+   ],
+   "duracoes": [
+    1.9,
+    1.9689,
+    1.8357,
+    1.9289
+   ],
+   "bytes": 55608
+  },
   "gelo": {
    "arquivo": "gelo.mp3",
    "descricao": "gelo",
@@ -1667,6 +1769,23 @@
     0.7107
    ],
    "bytes": 28083
+  },
+  "instinto": {
+   "arquivo": "instinto.mp3",
+   "descricao": "família instinto",
+   "versoes": [
+    0.0,
+    1.88,
+    3.8253,
+    5.6444
+   ],
+   "duracoes": [
+    1.8,
+    1.8653,
+    1.7391,
+    1.8274
+   ],
+   "bytes": 87178
   },
   "interrupcao": {
    "arquivo": "interrupcao.mp3",
@@ -1905,6 +2024,23 @@
     0.9137
    ],
    "bytes": 49440
+  },
+  "kaioken": {
+   "arquivo": "kaioken.mp3",
+   "descricao": "família kaioken",
+   "versoes": [
+    0.0,
+    1.88,
+    3.8253,
+    5.6444
+   ],
+   "duracoes": [
+    1.8,
+    1.8653,
+    1.7391,
+    1.8274
+   ],
+   "bytes": 78603
   },
   "kamehameha": {
    "arquivo": "kamehameha.mp3",
@@ -2178,6 +2314,23 @@
    ],
    "bytes": 38984
   },
+  "manto-kurama": {
+   "arquivo": "manto-kurama.mp3",
+   "descricao": "família manto kurama",
+   "versoes": [
+    0.0,
+    1.8481,
+    3.7778,
+    5.5944
+   ],
+   "duracoes": [
+    1.7681,
+    1.8496,
+    1.7367,
+    1.7881
+   ],
+   "bytes": 76304
+  },
   "marca": {
    "arquivo": "marca.mp3",
    "descricao": "família marca",
@@ -2347,6 +2500,23 @@
     0.9137
    ],
    "bytes": 47432
+  },
+  "muda": {
+   "arquivo": "muda.mp3",
+   "descricao": "família muda",
+   "versoes": [
+    0.0,
+    1.6417,
+    3.2635,
+    4.8894
+   ],
+   "duracoes": [
+    1.5617,
+    1.5419,
+    1.5459,
+    1.528
+   ],
+   "bytes": 65145
   },
   "multi-golpe": {
    "arquivo": "multi-golpe.mp3",
@@ -2653,6 +2823,23 @@
     0.8122
    ],
    "bytes": 68377
+  },
+  "punho-divergente": {
+   "arquivo": "punho-divergente.mp3",
+   "descricao": "família punho divergente",
+   "versoes": [
+    0.0,
+    1.58,
+    3.2144,
+    4.7437
+   ],
+   "duracoes": [
+    1.5,
+    1.5544,
+    1.4493,
+    1.5228
+   ],
+   "bytes": 58256
   },
   "punho-gigante": {
    "arquivo": "punho-gigante.mp3",
@@ -3062,6 +3249,40 @@
    ],
    "bytes": 40067
   },
+  "shoryuken": {
+   "arquivo": "shoryuken.mp3",
+   "descricao": "família shoryuken",
+   "versoes": [
+    0.0,
+    1.2909,
+    2.6615,
+    3.9449
+   ],
+   "duracoes": [
+    1.2109,
+    1.2906,
+    1.2034,
+    1.29
+   ],
+   "bytes": 52277
+  },
+  "shun-goku-satsu": {
+   "arquivo": "shun-goku-satsu.mp3",
+   "descricao": "família shun goku satsu",
+   "versoes": [
+    0.0,
+    2.28,
+    4.6398,
+    6.8454
+   ],
+   "duracoes": [
+    2.2,
+    2.2798,
+    2.1256,
+    2.2335
+   ],
+   "bytes": 73439
+  },
   "silencio": {
    "arquivo": "silencio.mp3",
    "descricao": "família silencio",
@@ -3198,6 +3419,23 @@
    ],
    "bytes": 45997
   },
+  "spin-dash": {
+   "arquivo": "spin-dash.mp3",
+   "descricao": "família spin dash",
+   "versoes": [
+    0.0,
+    1.676,
+    3.3857,
+    4.9875
+   ],
+   "duracoes": [
+    1.596,
+    1.6298,
+    1.5217,
+    1.5237
+   ],
+   "bytes": 47230
+  },
   "supernova": {
    "arquivo": "supernova.mp3",
    "descricao": "família supernova",
@@ -3282,6 +3520,23 @@
     1.6244
    ],
    "bytes": 80095
+  },
+  "tenho-a-forca": {
+   "arquivo": "tenho-a-forca.mp3",
+   "descricao": "família tenho a forca",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 85691
   },
   "tentaculos": {
    "arquivo": "tentaculos.mp3",

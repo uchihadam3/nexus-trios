@@ -1721,6 +1721,243 @@ def inv_androide(rng, v):
     return reverb(x, 0.45, 0.2, 7000)
 
 
+# ================================================================== golpes de assinatura
+def death_note(rng, v):
+    """Death Note: a caneta risca o papel em três linhas, a folha vira, o monitor de batimento
+    apita duas vezes e vira um apito contínuo; a última batida do coração some."""
+    x = _z(2.2)
+    for linha in range(3):
+        for k in range(9):
+            n = n_de(rng.uniform(0.03, 0.06))
+            risco = passa(ruido(rng, n), 2500, 9000, 2) * env(n, 0.004, n / SR * 0.6) * rng.uniform(0.08, 0.16)
+            poe(x, risco, 0.04 + 0.22 * linha + k * 0.022)
+    n = n_de(0.25)
+    poe(x, passa(rosa(rng, n), 800, 6000, 2) * sobe_e_some(n, 0.4, 1.2) * 0.15, 0.72)
+    for t0 in (0.92, 1.12):
+        n = n_de(0.09)
+        poe(x, seno(np.full(n, 988.0), n) * env(n, 0.003, 0.06, segura=0.03) * 0.16, t0)
+        poe(x, baque(n_de(0.2), 70, 45, 0.08, 0.2) * 0.35, t0)
+    n = n_de(0.9)
+    poe(x, seno(np.full(n, 988.0), n) * env(n, 0.005, 0.5, segura=0.4) * 0.13, 1.4)
+    return reverb(x, 0.4, 0.18, 7000)
+
+
+def shoryuken(rng, v):
+    """Shoryuken: o soco sobe com um sopro que vai do grave ao agudo, chama girando, a pancada
+    no meio da subida e o fogo que continua para o alto."""
+    x = _z(1.3)
+    poe(x, _whoosh(rng, 0.38, 200, 5000, 0.75, g=0.7), 0)
+    poe(x, B.fogo(rng, v)[: n_de(0.7)] * 0.55, 0.05)
+    poe(x, _tom(nota(52), nota(76), 0.4, 0.3, 0.08), 0.05)
+    poe(x, B.soco_pesado(rng, v) * 1.15, 0.28)
+    poe(x, estalo(rng, n_de(0.08), 2000, 9000, 0.006) * 0.5, 0.28)
+    return reverb(x, 0.45, 0.2, 7000)
+
+
+def punho_divergente(rng, v):
+    """Punho divergente: o soco seco, um instante de silêncio que puxa o ar (o eco atrasado
+    chegando), e o segundo impacto, grave, com estalos de energia."""
+    x = _z(1.5)
+    poe(x, B.soco_leve(rng, v) * 0.9, 0.0)
+    n = n_de(0.32)
+    poe(x, passa(rosa(rng, n), 300, 3000, 2) * np.linspace(0, 1, n) ** 2.2 * 0.25, 0.28)
+    poe(x, B.soco_pesado(rng, v) * 1.0, 0.62)
+    poe(x, baque(n_de(0.6), 70, 30, 0.3, 0.6) * 0.8, 0.62)
+    poe(x, _faiscas(rng, n_de(0.45), 160, 20, 1200, 9000, 0.9) * 0.5, 0.63)
+    return reverb(x, 0.55, 0.25, 6000)
+
+
+def agua_benta(rng, v):
+    """Água benta: o frasco gira no ar, o vidro estilhaça, a chama sagrada acende num sopro e um
+    acorde de coro fica no ar."""
+    x = _z(1.9)
+    poe(x, _whoosh(rng, 0.3, 800, 2500, 0.6, g=0.3), 0)
+    poe(x, modal(n_de(0.7), nota(91), rng=rng, **VIDRO) * env(n_de(0.7), 0.001, 0.25) * 0.25, 0.3)
+    poe(x, graos(rng, n_de(0.4), 25, 0.0, 0.3, 3000, 11000, 0.004) * 0.45, 0.3)
+    poe(x, passa(ruido(rng, n_de(0.1)), 2000, 9000, 2) * env(n_de(0.1), 0.001, 0.03) * 0.5, 0.3)
+    poe(x, B.fogo(rng, v) * 0.6, 0.4)
+    m = n_de(1.2)
+    coro = sum(seno(np.full(m, nota(mm)) * (1 + 0.004 * np.sin(2 * math.pi * (4.5 + k) * np.arange(m) / SR)), m) for k, mm in enumerate((64, 68, 71, 76)))
+    poe(x, coro * env(m, 0.25, 0.6) * 0.05, 0.5)
+    return reverb(x, 0.8, 0.35, 8000)
+
+
+def kaioken(rng, v):
+    """Kaioken: um estouro grave, a aura vermelha ruge como uma fornalha e o som sobe de tom
+    enquanto o corpo aguenta o poder."""
+    x = _z(1.8)
+    poe(x, baque(n_de(0.6), 90, 32, 0.3, 0.7) * 0.9, 0)
+    n = n_de(1.4)
+    t = np.arange(n) / SR
+    fornalha = passa(rosa(rng, n), 60, 900, 2) * (1 + 0.35 * np.sin(2 * math.pi * 13 * t)) * sobe_e_some(n, 0.25, 1.1)
+    poe(x, satura(fornalha * 1.6, 2.5) * 0.45, 0.05)
+    poe(x, B.fogo(rng, v) * 0.5, 0.1)
+    poe(x, satura(sum(seno(varre(nota(40), nota(47), n, 1.2) * h, n) / h for h in (1, 2, 3)), 2) * sobe_e_some(n, 0.4, 1.2) * 0.12, 0.05)
+    poe(x, graos(rng, n_de(1.0), 40, 0.1, 0.9, 1500, 8000, 0.003) * 0.25, 0.2)
+    return reverb(x, 0.5, 0.22, 6000)
+
+
+def instinto(rng, v):
+    """Instinto Superior: um brilho cristalino calmo e contínuo, dois sopros curtos de esquiva
+    e um "tim" fino e limpo no fim."""
+    x = _z(1.8)
+    m = n_de(1.5)
+    tt = np.arange(m) / SR
+    brilho = sum(seno(np.full(m, nota(mm)) * (1 + 0.003 * np.sin(2 * math.pi * 3.1 * tt + k)), m) for k, mm in enumerate((76, 83, 88, 95)))
+    poe(x, brilho * env(m, 0.3, 0.6, segura=0.4) * 0.035, 0)
+    poe(x, passa(rosa(rng, m), 3000, 9000, 2) * env(m, 0.3, 0.6, segura=0.4) * 0.04, 0)
+    for t0, (a, b) in ((0.35, (1500, 5000)), (0.62, (4800, 1300))):
+        n = n_de(0.2)
+        poe(x, assobio(rng, n, a, b, 0.8, 0.6) * sobe_e_some(n, 0.3, 1.0) * 0.3, t0)
+    poe(x, modal(n_de(1.0), nota(100), rng=rng, **CRISTAL) * env(n_de(1.0), 0.001, 0.5) * 0.14, 1.05)
+    return reverb(x, 0.85, 0.4, 11000)
+
+
+def _boing(seg, f0, g=0.2):
+    n = n_de(seg)
+    t = np.arange(n) / SR
+    f = f0 * (1 + 0.5 * np.exp(-t * 6) * np.sin(2 * math.pi * 9 * t))
+    return seno(f, n) * env(n, 0.003, seg * 0.5) * g
+
+
+def gear_fifth(rng, v):
+    """Gear Fifth: o tambor da libertação (dum-dum-dum… dum), molas de borracha que pulam e um
+    brilho alegre de sol por cima."""
+    x = _z(1.9)
+    for t0, f in ((0.0, 80), (0.18, 80), (0.36, 80), (0.62, 66)):
+        poe(x, baque(n_de(0.35), f * 1.6, f, 0.16, 0.5) * 0.85, t0)
+        poe(x, passa(ruido(rng, n_de(0.05)), 300, 2500, 2) * env(n_de(0.05), 0.001, 0.015) * 0.25, t0)
+    for k, t0 in enumerate((0.25, 0.5, 0.8, 1.0)):
+        poe(x, _boing(0.35, nota(60 + 5 * (k % 2)), 0.14), t0)
+    m = n_de(1.0)
+    poe(x, sum(seno(np.full(m, nota(mm)), m) for mm in (72, 76, 79, 84)) * env(m, 0.2, 0.5) * 0.04, 0.8)
+    return reverb(x, 0.45, 0.2, 8000)
+
+
+def corvos(rng, v):
+    """Ilusão de corvos: um tom grave de ilusão, a revoada (dezenas de batidas de asas) e
+    grasnados roucos que se espalham."""
+    x = _z(1.8)
+    n = n_de(1.2)
+    poe(x, satura(seno(varre(nota(38), nota(34), n, 1.0), n), 1.5) * sobe_e_some(n, 0.3, 1.3) * 0.15, 0)
+    for _ in range(46):
+        m = n_de(0.05)
+        poe(x, passa(ruido(rng, m), 300, 2500, 2) * env(m, 0.004, 0.02) * rng.uniform(0.08, 0.2), 0.15 + rng.uniform(0, 0.9) ** 1.3)
+    for k in range(4):
+        m = n_de(0.22)
+        f = varre(nota(rng.uniform(64, 70)), nota(rng.uniform(57, 61)), m, 1.0)
+        grasna = satura(sum(seno(f * h, m) / h for h in range(1, 9)) * (1 + 0.8 * np.sin(2 * math.pi * 55 * np.arange(m) / SR)), 3.0)
+        poe(x, passa(grasna, 500, 3500, 2) * env(m, 0.01, 0.1) * 0.12, 0.25 + 0.22 * k + rng.uniform(0, 0.06))
+    return reverb(x, 0.6, 0.3, 6000)
+
+
+def shun_goku_satsu(rng, v):
+    """Shun Goku Satsu: o mundo some num zumbido grave, quinze golpes abafados em sequência no
+    escuro e o gongo pesado quando o 天 acende."""
+    x = _z(2.2)
+    n = n_de(1.4)
+    poe(x, passa(rosa(rng, n), 30, 200, 2) * sobe_e_some(n, 0.5, 1.0) * 0.4, 0)
+    for k in range(15):
+        golpe = B.soco_pesado(rng, v) if k % 3 == 0 else B.soco_leve(rng, v)
+        poe(x, passa(golpe, None, 2500, 2) * rng.uniform(0.55, 0.85), 0.05 + 0.055 * k)
+    poe(x, modal(n_de(1.6), nota(36), rng=rng, **SINO) * env(n_de(1.6), 0.002, 1.0) * 0.45, 1.3)
+    poe(x, baque(n_de(0.6), 70, 30, 0.35, 0.5) * 0.6, 1.3)
+    return reverb(x, 0.9, 0.35, 4000)
+
+
+def spin_dash(rng, v):
+    """Spin Dash: o giro acelera num zunido que sobe, solta com um sopro, bate no alvo e
+    deixa cair anéis que tilintam."""
+    x = _z(1.6)
+    n = n_de(0.45)
+    t = np.arange(n) / SR
+    f = varre(180, 900, n, 1.6)
+    zunido = sum(np.sin(k * 2 * math.pi * np.cumsum(f) / SR) / k for k in range(1, 7)) * (0.6 + 0.4 * np.sin(2 * math.pi * 35 * t))
+    poe(x, passa(zunido, 150, 5000, 2) * sobe_e_some(n, 0.9, 1.0) * 0.18, 0)
+    poe(x, _whoosh(rng, 0.2, 800, 4500, 0.6, g=0.5), 0.38)
+    poe(x, B.soco_pesado(rng, v) * 0.95, 0.52)
+    for k in range(6):
+        m = n_de(0.35)
+        poe(x, (seno(np.full(m, nota(88)), m) + seno(np.full(m, nota(95)), m) * 0.7) * env(m, 0.002, 0.15) * 0.05, 0.62 + 0.09 * k + rng.uniform(0, 0.03))
+    return reverb(x, 0.4, 0.18, 9000)
+
+
+def gatling(rng, v):
+    """Gatling: braços de borracha esticando (estalo elástico) e socando rápido, um atrás do
+    outro, sem parar."""
+    x = _z(1.6)
+    t = 0.04
+    k = 0
+    while t < 0.66:
+        poe(x, _boing(0.08, nota(rng.uniform(62, 70)), 0.05), t)
+        poe(x, B.soco_leve(rng, v) * rng.uniform(0.5, 0.75), t + 0.03)
+        t += max(0.024, 0.05 - 0.0015 * k)
+        k += 1
+    poe(x, B.soco_pesado(rng, v) * 1.0, 0.72)
+    return reverb(x, 0.35, 0.16, 7000)
+
+
+def manto_kurama(rng, v):
+    """Manto da Kurama: o chakra acende como uma fogueira grande, a raposa rosna por baixo e
+    um zumbido quente sustenta a aura."""
+    x = _z(1.9)
+    poe(x, baque(n_de(0.5), 100, 40, 0.25, 0.6) * 0.7, 0)
+    poe(x, B.fogo(rng, v) * 0.7, 0.05)
+    poe(x, _rosnado(rng, 0.9, 52, 0.3), 0.25)
+    n = n_de(1.3)
+    zum = satura(sum(seno(np.full(n, nota(45)) * h * (1 + 0.006 * np.sin(2 * math.pi * 5 * np.arange(n) / SR)), n) / h for h in (1, 2, 3, 4)), 1.8)
+    poe(x, zum * env(n, 0.2, 0.6, segura=0.3) * 0.1, 0.15)
+    return reverb(x, 0.55, 0.25, 6000)
+
+
+def estado_avatar(rng, v):
+    """Estado Avatar: o vento começa a girar em volta, um acorde grave e solene sobe e os quatro
+    elementos soam um por um (fogo, água, terra, ar)."""
+    x = _z(2.0)
+    n = n_de(1.6)
+    t = np.arange(n) / SR
+    vento = assobio(rng, n, 500, 2500, 1.0, 0.5) * (0.6 + 0.4 * np.sin(2 * math.pi * 2.5 * t)) * sobe_e_some(n, 0.5, 1.0)
+    poe(x, vento * 0.3, 0)
+    poe(x, satura(sum(seno(varre(nota(m), nota(m + 2), n, 1.5), n) for m in (38, 45, 50, 57)), 1.4) * env(n, 0.4, 0.7, segura=0.3) * 0.08, 0.1)
+    poe(x, B.fogo(rng, v)[: n_de(0.3)] * 0.4, 0.5)
+    m = n_de(0.15)
+    poe(x, seno(varre(900, 1900, m, 1.0), m) * env(m, 0.001, 0.05) * 0.2, 0.75)
+    poe(x, baque(n_de(0.3), 120, 60, 0.1, 0.6) * 0.5, 0.95)
+    poe(x, _whoosh(rng, 0.25, 1500, 4000, 0.5, g=0.4), 1.15)
+    return reverb(x, 0.75, 0.32, 8000)
+
+
+def tenho_a_forca(rng, v):
+    """Eu tenho a força: a espada sai da bainha com um canto de metal, trovões caem na lâmina,
+    o poder sobe num acorde de metais e explode."""
+    x = _z(2.0)
+    poe(x, modal(n_de(0.9), nota(84), rng=rng, **METAL) * env(n_de(0.9), 0.002, 0.45) * 0.2, 0)
+    poe(x, _whoosh(rng, 0.2, 2000, 7000, 0.6, g=0.3), 0)
+    for k, t0 in enumerate((0.35, 0.5, 0.62)):
+        poe(x, B.raio(rng, v) * (0.6 + 0.15 * k), t0)
+    n = n_de(0.9)
+    acorde = satura(sum(sum(seno(varre(nota(m), nota(m + 12), n, 3.0) * h, n) / h for h in (1, 2, 3)) for m in (48, 52, 55)), 2.0)
+    poe(x, acorde * env(n, 0.2, 0.3, segura=0.3) * 0.08, 0.6)
+    poe(x, B.explosao(rng, v) * 0.7, 1.1)
+    return reverb(x, 0.8, 0.32, 7000)
+
+
+def muda(rng, v):
+    """MUDA MUDA: a rajada do The World, mais rápida e mais aguda que a do Star Platinum, com um
+    brilho dourado de metal e o soco final."""
+    x = _z(1.6)
+    t = 0.04
+    k = 0
+    while t < 0.62:
+        poe(x, passa(B.soco_leve(rng, v), 120, None, 2) * rng.uniform(0.45, 0.7), t)
+        poe(x, _whoosh(rng, 0.05, 1500, 5000, 0.8, g=0.12), max(0.0, t - 0.03))
+        t += max(0.02, 0.05 - 0.002 * k)
+        k += 1
+    poe(x, modal(n_de(0.6), nota(86), rng=rng, **METAL) * env(n_de(0.6), 0.001, 0.3) * 0.12, 0.7)
+    poe(x, B.soco_pesado(rng, v) * 1.15, 0.72)
+    return reverb(x, 0.4, 0.2, 8000)
+
+
 SONS_NOVOS = {
     nome.replace("_", "-"): (fn, "família " + nome.replace("_", " "))
     for nome, fn in list(globals().items())
@@ -1737,5 +1974,6 @@ _ANTES = {"chidori-carga": "faíscas do Chidori", "esfera-espiral-carga": "a esf
 for _k, _d in _ANTES.items():
     SONS_NOVOS[_k] = (SONS_NOVOS[_k][0], _d)
 _ALTO |= {"marretada", "kamehameha-feixe"}
+_ALTO |= {"death-note", "shoryuken", "punho-divergente", "agua-benta", "kaioken", "gear-fifth", "corvos", "shun-goku-satsu", "spin-dash", "gatling", "manto-kurama", "estado-avatar", "tenho-a-forca", "muda"}
 _ALTO |= {"inv-cao", "inv-sombras", "inv-mago", "inv-dragao", "inv-gomorrah", "inv-ora", "inv-feras", "inv-vassouras", "inv-clones", "inv-androide"}
 ALVO_NOVO = {k: (-23 if k in _BAIXO else -15 if k in _ALTO else -18) for k in SONS_NOVOS}

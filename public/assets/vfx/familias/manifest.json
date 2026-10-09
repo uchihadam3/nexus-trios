@@ -27,6 +27,20 @@
   "laco": false,
   "bytes": 39798
  },
+ "agua_benta": {
+  "descricao": "Água benta: o frasco quebra em chamas sagradas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 36000
+ },
  "areia": {
   "descricao": "casulo de areia",
   "quadros": 12,
@@ -615,6 +629,20 @@
   "laco": false,
   "bytes": 50218
  },
+ "corvos": {
+  "descricao": "Ilusão de corvos: revoada que sai do corpo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 71088
+ },
  "cosmico": {
   "descricao": "galáxia girando",
   "quadros": 12,
@@ -684,6 +712,20 @@
   ],
   "laco": false,
   "bytes": 57618
+ },
+ "death_note": {
+  "descricao": "Death Note: o nome escrito e o coração que para",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 54228
  },
  "desintegrar": {
   "descricao": "desintegração em grãos",
@@ -978,6 +1020,20 @@
   ],
   "laco": false,
   "bytes": 74172
+ },
+ "estado_avatar": {
+  "descricao": "Estado Avatar: olhos acesos, vento e quatro orbes",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 83470
  },
  "esticar": {
   "descricao": "braço elástico",
@@ -1329,6 +1385,34 @@
   "laco": false,
   "bytes": 108932
  },
+ "gatling": {
+  "descricao": "Gatling: braços de borracha martelando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 52280
+ },
+ "gear_fifth": {
+  "descricao": "Gear Fifth: nuvens, raios e anéis de borracha",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 112244
+ },
  "gelo": {
   "descricao": "cristais de gelo",
   "quadros": 12,
@@ -1412,6 +1496,20 @@
   ],
   "laco": false,
   "bytes": 37002
+ },
+ "instinto": {
+  "descricao": "Instinto Superior: aura prateada e vultos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 89532
  },
  "inv_androide": {
   "descricao": "Androide de combate: soco-foguete",
@@ -1595,6 +1693,20 @@
   "laco": true,
   "bytes": 226474
  },
+ "kaioken": {
+  "descricao": "Kaioken: aura de fogo carmesim",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 87790
+ },
  "labareda": {
   "descricao": "coluna de fogo",
   "quadros": 12,
@@ -1762,6 +1874,20 @@
   ],
   "laco": false,
   "bytes": 83844
+ },
+ "manto_kurama": {
+  "descricao": "Manto da Kurama: chamas, orelhas e nove caudas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 78298
  },
  "marca": {
   "descricao": "alvo travando",
@@ -2112,6 +2238,20 @@
   ],
   "laco": false,
   "bytes": 91250
+ },
+ "punho_divergente": {
+  "descricao": "Punho divergente: o soco e o impacto atrasado",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 58912
  },
  "punho_gigante": {
   "descricao": "silhueta de punho gigante",
@@ -2477,6 +2617,34 @@
   "laco": false,
   "bytes": 86410
  },
+ "shoryuken": {
+  "descricao": "Shoryuken: o soco que sobe em espiral",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 49856
+ },
+ "shun_goku_satsu": {
+  "descricao": "Shun Goku Satsu: golpes no escuro e o 天",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 51396
+ },
  "silencio": {
   "descricao": "som cortado",
   "quadros": 12,
@@ -2575,6 +2743,20 @@
   "laco": false,
   "bytes": 29444
  },
+ "spin_dash": {
+  "descricao": "Spin Dash: bola azul girando e anéis",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 56814
+ },
  "supernova": {
   "descricao": "sol que explode",
   "quadros": 12,
@@ -2672,6 +2854,20 @@
   ],
   "laco": false,
   "bytes": 31074
+ },
+ "tenho_a_forca": {
+  "descricao": "Eu tenho a força: raios na espada erguida",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 51662
  },
  "tentaculos": {
   "descricao": "tentáculos chicoteando",

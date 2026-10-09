@@ -60,7 +60,7 @@ describe('compact reusable audiovisual library',()=>{
     expect(profileFor('superman',0)?.family).toBe('laser');expect(hsl(profileFor('superman',0)!.color)[0]).toBeLessThan(15);
     expect(profileFor('pikachu',0)?.family).toBe('raio');
     expect(profileFor('spiderman',0)?.family).toBe('teia');
-    expect(profileFor('light',2)?.family).toBe('execucao');
+    expect(profileFor('light',2)?.family).toBe('death_note');
     expect(profileFor('naruto',1)?.family).toBe('esfera_espiral');
     expect(profileFor('gojo',0)?.family).toBe('atracao');expect(profileFor('gojo',1)?.family).toBe('repulsao');expect(profileFor('gojo',2)?.family).toBe('dominio');
     expect(profileFor('beerus',0)?.family).toBe('desintegrar');expect(profileFor('sasuke',0)?.family).toBe('chidori');
@@ -88,7 +88,7 @@ describe('compact reusable audiovisual library',()=>{
     }
     // a luta baixa só os sons das famílias dos seis lutadores (precarregarLuta)
     // as mecânicas novas (reviver, provocar, refletir, status novos…) trazem sons próprios; a luta continua baixando só os dos seis lutadores
-    expect(bytes).toBeLessThan(10_000_000);
+    expect(bytes).toBeLessThan(12_000_000);
     expect(readdirSync(resolve(root,'public/assets/audio/sfx')).filter(x=>x.endsWith('.wav'))).toEqual([]);
   });
   it('a música começa na Intro e, depois do fim, volta ao Encontro',()=>{

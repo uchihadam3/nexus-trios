@@ -2297,10 +2297,10 @@
       }
     },
     {
-      "id": "amaterasu",
+      "id": "ilusao-de-corvos",
       "character": "itachi",
-      "name": "Amaterasu",
-      "path": "/assets/skills/itachi/amaterasu.png",
+      "name": "Ilusão de corvos",
+      "path": "/assets/skills/itachi/ilusao-de-corvos.png",
       "sheet": "/assets/sheets/skills/pages/itachi.png",
       "row": 0,
       "column": 1,
@@ -6590,10 +6590,10 @@
       }
     },
     {
-      "id": "rajada-telecinetica",
+      "id": "muralha-telecinetica",
       "character": "jeangrey",
-      "name": "Rajada telecinética",
-      "path": "/assets/skills/jeangrey/rajada-telecinetica.png",
+      "name": "Muralha telecinética",
+      "path": "/assets/skills/jeangrey/muralha-telecinetica.png",
       "sheet": "/assets/sheets/skills/pages/jeangrey.png",
       "row": 0,
       "column": 1,
@@ -13842,10 +13842,10 @@
       "artMethod": "AI sheet"
     },
     {
-      "id": "kamehameha-solar",
+      "id": "regeneracao-celular",
       "character": "cell",
-      "name": "Kamehameha solar",
-      "path": "/assets/skills/cell/kamehameha-solar.png",
+      "name": "Regeneração celular",
+      "path": "/assets/skills/cell/regeneracao-celular.png",
       "sheet": "/assets/sheets/skills/pages/cell.png",
       "row": 0,
       "column": 1,

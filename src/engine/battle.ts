@@ -53,6 +53,18 @@ export function targets(b:Battle,actor:Fighter,rule:Target,effects:Effect[]=[],r
     }
   }
   /*
+   * Tudo conforme o plano (pedido do jogador): despistar. A marca e o
+   * Enfraquecido vão no rival MENOS investigado, para o trio inteiro focar
+   * nele enquanto o Light investiga o outro com calma até a Death Note.
+   */
+  if(rule==='leastInvestigated'){
+    const vivos=enemies.filter(alive);
+    if(!vivos.length)return [];
+    const menor=Math.min(...vivos.map(x=>actor.investigation[x.uid]??0));
+    const despiste=vivos.filter(x=>(actor.investigation[x.uid]??0)===menor);
+    return chooseTarget(b,actor,despiste,'enemyWeak',inferTargetIntent(actor,'enemyWeak',effects),effects,record);
+  }
+  /*
    * Marcar com cabeça (pedido do jogador): a marca vai no rival que o trio
    * derruba mais rápido (menos Vida + Escudo), quem já está marcado fica por
    * último, e no empate vai no mais perigoso. Marcar o rival errado é jogar a

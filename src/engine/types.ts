@@ -2,7 +2,7 @@ export type Side = 'player' | 'enemy';
 export type StatusId = 'exposed' | 'paralyzed' | 'protected' | 'marked' | 'slow' | 'haste' | 'confused' | 'rooted' | 'regen' | 'burning' | 'electric' | 'silenced' | 'strengthened' | 'weakened' | 'provoked' | 'vampirism' | 'reflect' | 'thorns' | 'poison' | 'bleed' | 'cursed' | 'frozen' | 'sleep' | 'blind' | 'barrier' | 'evasion' | 'bomb' | 'summon';
 export type Topic = 'time' | 'action' | 'dealt' | 'received' | 'allyHurt' | 'enemyHurt' | 'interrupt' | 'status' | 'negativeStatus' | 'protected' | 'enemyCast' | 'survived' | 'losing' | 'winning';
 /** `allyFallen`: o aliado caído que ainda pode ser levantado (Reviver). */
-export type Target = 'enemyWeak' | 'enemyStrong' | 'enemyCast' | 'investigated' | 'allyWeak' | 'self' | 'allEnemies' | 'allAllies' | 'randomEnemy' | 'allyFallen';
+export type Target = 'enemyWeak' | 'enemyStrong' | 'enemyCast' | 'investigated' | 'allyWeak' | 'self' | 'allEnemies' | 'allAllies' | 'randomEnemy' | 'allyFallen' | 'leastInvestigated';
 export type TargetIntent = 'offense'|'finisher'|'interrupt'|'control'|'heal'|'protect'|'buff'|'investigate';
 export type Visual = 'beam' | 'bolt' | 'slash' | 'web' | 'shield' | 'wave' | 'psychic' | 'impact';
 /** `revive`: levanta um aliado caído com `value` (fração) da Vida — uma vez por luta para quem levanta, e cada lutador só volta uma vez. */

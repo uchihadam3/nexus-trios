@@ -22,7 +22,7 @@ export const targetNamesEm:Record<Target,string>={
   enemyCast:'no inimigo em Preparo',
   investigated:'no inimigo mais investigado',allyWeak:'no aliado mais ferido',allyFallen:'no aliado caído',
   self:'em si próprio',allEnemies:'em todos os inimigos',allAllies:'em todo o trio',
-  randomEnemy:'em um inimigo sorteado',
+  randomEnemy:'em um inimigo sorteado',leastInvestigated:'no inimigo menos investigado',
 };
 /*
  * O alvo dito pelo que ele é, não por uma metáfora.
@@ -42,7 +42,7 @@ export const targetNames:Record<Target,string>={
   enemyCast:'inimigo em Preparo',
   investigated:'inimigo mais investigado',allyWeak:'aliado mais ferido',allyFallen:'aliado caído',
   self:'o próprio personagem',allEnemies:'todos os inimigos',allAllies:'todo o trio',
-  randomEnemy:'um inimigo sorteado',
+  randomEnemy:'um inimigo sorteado',leastInvestigated:'inimigo menos investigado',
 };
 export const topicNames:Record<Topic,string>={
   time:'por segundo',action:'ao atacar',dealt:'a cada 100 de dano causado',received:'a cada 100 de dano recebido',
