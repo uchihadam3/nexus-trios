@@ -5,10 +5,12 @@ import { PRESENTATION as P } from './config';
 
 export type Family='physical'|'energy'|'electric'|'fire'|'magic'|'dark'|'psychic'|'slash'|'prison'|'shield'|'heal'|'regen'|'buff'|'debuff'|'interrupt'|'ko'|'turn'|'grand';
 export interface Beat {event:BattleEvent;events:BattleEvent[];before:Battle;after:Battle;duration:number;family:Family;grand:boolean;elapsed:number;impacted:boolean;periodic?:boolean;trace?:BeatTrace;
-  /** Etapa do impacto já mostrada (0 = antes do impacto). Ver `etapaDoEvento`. */
+  /** Passo da cadeia já mostrado (1, 2, 3…; 0 = antes do impacto). Ver `etapaDoEvento`. */
   etapa?:number;
-  /** As etapas que este beat tem, em ordem (1 golpe, 2 efeito no rival, 3 efeito no próprio trio). */
+  /** Os números dos passos deste beat (1…n). */
   etapas?:number[];
+  /** A cadeia de efeitos deste beat, na ordem em que aparece. */
+  passos?:Passo[];
   /** Duração sem as etapas (o ritmo fixo da ação). */
   base?:number}
 export interface Direction {battle:Battle;visible:Battle;queue:Beat[];active:Beat|null;simIdle:number;complete:boolean;serial:number;signals:BattleEvent[]}
@@ -45,56 +47,140 @@ function duration(event:BattleEvent,grand:boolean){
   return grand?P.grandSeconds:event.kind==='skill'?P.skillSeconds:P.normalSeconds;
 }
 /*
- * Um efeito por vez.
+ * A cadeia de efeitos, um passo por vez.
  *
- * Pedido do jogador: quando uma habilidade bate, faz um Status ruim no rival e
- * um bom no próprio trio, tudo aparecia no mesmo instante e ficava difícil de
- * entender. O impacto agora se mostra em até três etapas:
- *   1 · o golpe — dano, bloqueio, interrupção, nocaute;
- *   2 · o efeito no rival — Status negativo, atraso;
- *   3 · o efeito no próprio trio — cura, Escudo, Status positivo, Carga.
- * Etapas vazias são puladas: um ataque simples continua com o mesmo ritmo.
- * O motor não muda nada — é só a ordem em que a tela revela o que já aconteceu.
+ * Pedido do jogador: quando um golpe acontece, cada coisa tem que aparecer na
+ * hora certa — o dano; se o alvo tem uma reação ao sofrer dano, ela dispara e
+ * mostra o efeito dela; depois o debuff no rival; depois o buff no próprio
+ * trio; e se isso faz um aliado reagir, a reação dele vem em seguida. Nada ao
+ * mesmo tempo.
+ *
+ * O motor já registra os eventos na ordem em que as coisas acontecem (a reação
+ * de quem sofre dano é emitida logo depois do dano). Aqui essa lista vira
+ * passos:
+ *   golpe   · dano, bloqueio, interrupção e nocaute de quem age (em todos os
+ *             alvos de uma vez — um golpe em área cai junto);
+ *   reacao  · tudo o que outro lutador causa no meio da ação é o traço dele
+ *             disparando (um passo por reação, com o nome do traço);
+ *   rival   · Status negativo e atraso que quem age põe no rival;
+ *   aliado  · cura, Escudo, Status positivo e Carga de quem age no próprio trio.
+ * O golpe vem sempre primeiro; o resto segue a ordem real do motor. Carga,
+ * sinergia e "pronto" vão no passo que os causou. O motor não muda nada (nem
+ * um evento a mais: a mira da IA usa o contador de eventos como semente) — é
+ * só a ordem e o tempo em que a tela revela o que já aconteceu.
  */
-export const INTERVALO_DA_ETAPA=.34;
-export function etapaDoEvento(beat:Pick<Beat,'event'|'after'>,e:BattleEvent):1|2|3{
-  const lado=beat.after.fighters.find(f=>f.uid===beat.event.source)?.side;
-  const alvo=beat.after.fighters.find(f=>f.uid===(e.target??e.source));
-  const rival=!!alvo&&!!lado&&alvo.side!==lado;
-  if(e.kind==='status'||e.kind==='tempo')return rival?2:3;
-  if(e.kind==='heal'||e.kind==='shield'||e.kind==='charge'||e.kind==='synergy'||e.kind==='ready')return rival?1:3;
-  return 1;
+export type ClasseDoPasso='golpe'|'reacao'|'rival'|'aliado';
+export interface Passo {classe:ClasseDoPasso;/** quem age neste passo */quem:string;/** nome do traço, numa reação */rotulo?:string;eventos:number[];/** segundos depois do impacto */em:number}
+/** Quanto cada passo fica na tela antes do próximo (o tempo de ler o que aconteceu). */
+export const TEMPO_DO_PASSO:Record<ClasseDoPasso,number>={golpe:.42,reacao:.58,rival:.4,aliado:.4};
+/** O máximo que a cadeia inteira pode alongar um golpe (lutas com muitas reações não arrastam). */
+const CADEIA_MAXIMA=2.6;
+/** Mantido para quem ainda mede pelo intervalo antigo. */
+export const INTERVALO_DA_ETAPA=TEMPO_DO_PASSO.rival;
+const CONTABIL=new Set<BattleEvent['kind']>(['charge','synergy','ready','discovery','basic','skill','cast','turn']);
+const DO_GOLPE=new Set<BattleEvent['kind']>(['damage','block','interrupt','ko']);
+function montaPassos(beat:Pick<Beat,'event'|'events'|'after'>):Passo[]{
+  const ator=beat.event.source,lado=beat.after.fighters.find(f=>f.uid===ator)?.side;
+  const ladoDe=(uid?:string)=>beat.after.fighters.find(f=>f.uid===uid)?.side;
+  if(!['basic','skill'].includes(beat.event.kind)||!lado)return [{classe:'golpe',quem:ator,eventos:beat.events.map(e=>e.id),em:0}];
+  const passos:Passo[]=[],doAtor=new Map<ClasseDoPasso,Passo>(),soltos:number[]=[];
+  let atual:Passo|null=null;
+  for(const e of beat.events){
+    // contabilidade (Carga, "pronto", sinergia) e ajustes nulos vão no passo que os causou
+    if(CONTABIL.has(e.kind)||(e.kind==='tempo'&&Math.abs(e.value??0)<.005)){if(atual)atual.eventos.push(e.id);else soltos.push(e.id);continue;}
+    const dono=e.kind==='block'?(e.attacker??ator):e.source;
+    if(dono===ator){
+      const classe:ClasseDoPasso=DO_GOLPE.has(e.kind)?'golpe':ladoDe(e.target??e.source)!==lado?'rival':'aliado';
+      let passo=doAtor.get(classe);
+      if(!passo){passo={classe,quem:ator,eventos:[],em:0};doAtor.set(classe,passo);passos.push(passo);}
+      passo.eventos.push(e.id);atual=passo;
+    }else{
+      if(!(atual?.classe==='reacao'&&atual.quem===dono)){
+        const f=beat.after.fighters.find(x=>x.uid===dono);
+        atual={classe:'reacao',quem:dono,rotulo:f?byId[f.characterId].trait.name:undefined,eventos:[],em:0};passos.push(atual);
+      }
+      atual.eventos.push(e.id);
+    }
+  }
+  /*
+   * A ordem de quem age é sempre golpe → rival → aliado (o pedido: dano,
+   * depois o debuff, depois o buff). Cada reação anda junto do passo que a
+   * causou, logo depois dele; reações de antes do primeiro passo de quem age
+   * (um traço que dispara ao agir) vêm logo depois do golpe.
+   */
+  const ORDEM:Record<ClasseDoPasso,number>={golpe:0,rival:1,aliado:2,reacao:9};
+  const blocos:Passo[][]=[];let antes:Passo[]=[];
+  for(const x of passos){
+    if(x.classe==='reacao'){if(blocos.length)blocos.at(-1)!.push(x);else antes.push(x);}
+    else blocos.push([x]);
+  }
+  blocos.sort((a,b)=>ORDEM[a[0]!.classe]-ORDEM[b[0]!.classe]);
+  if(blocos.length){blocos[0]!.splice(1,0,...antes);antes=[];}
+  passos.length=0;passos.push(...blocos.flat(),...antes);
+  if(!passos.length)passos.push({classe:'golpe',quem:ator,eventos:[],em:0});
+  passos[0]!.eventos.unshift(...soltos);
+  // o tempo de cada passo depois do impacto, comprimido se a cadeia ficar longa
+  const intervalos=passos.slice(0,-1).map(x=>TEMPO_DO_PASSO[x.classe]);
+  const total=intervalos.reduce((a,b)=>a+b,0),escala=total>CADEIA_MAXIMA?CADEIA_MAXIMA/total:1;
+  let t=0;passos.forEach((x,k)=>{x.em=t;t+=(intervalos[k]??0)*escala;});
+  return passos;
 }
+/** Em que passo (1, 2, 3…) o evento aparece. Eventos fora da lista do beat aparecem no primeiro. */
+export function etapaDoEvento(beat:Pick<Beat,'event'|'after'>&{passos?:Passo[]},e:BattleEvent):number{
+  const k=beat.passos?.findIndex(x=>x.eventos.includes(e.id))??-1;
+  return k<0?1:k+1;
+}
+/** O passo que está na tela agora. */
+export const passoAtual=(beat:Beat|null|undefined):Passo|undefined=>beat?.impacted&&beat.etapa?beat.passos?.[beat.etapa-1]:undefined;
 /** O evento já pode aparecer na tela? */
 export function revelado(beat:Beat|null|undefined,e:BattleEvent):boolean{
   if(!beat?.impacted)return false;
-  return etapaDoEvento(beat,e)<=(beat.etapa??3);
+  return etapaDoEvento(beat,e)<=(beat.etapa??99);
 }
-/* O que a tela mostra numa etapa: o estado de depois, com o que ainda não foi revelado voltando ao de antes. */
+/*
+ * O que a tela mostra num passo: o estado de antes com só o que já foi
+ * revelado aplicado por cima — a Vida desce no dano, sobe na cura da reação,
+ * o Escudo entra e é gasto, cada Status aparece no seu passo. No último passo
+ * é exatamente o estado de depois.
+ */
 export function visivelNaEtapa(beat:Beat,etapa:number):Battle{
   const ultima=beat.etapas?.at(-1)??1;
   if(etapa>=ultima)return beat.after;
-  const v=structuredClone(beat.after),lado=beat.after.fighters.find(f=>f.uid===beat.event.source)?.side;
+  const v=structuredClone(beat.after);
+  const vistos=beat.events.filter(e=>etapaDoEvento(beat,e)<=etapa);
   v.fighters.forEach((f,i)=>{
     const antes=beat.before.fighters[i];if(!antes)return;
-    const rival=f.side!==lado;
-    if(!rival&&etapa<3){f.hp=antes.hp;f.shields=structuredClone(antes.shields);f.statuses=structuredClone(antes.statuses);f.skills=f.skills.map((s,k)=>({...s,charge:antes.skills[k]?.charge??s.charge}));}
-    if(rival&&etapa<2)f.statuses=structuredClone(antes.statuses);
+    const meus=vistos.filter(e=>e.target===f.uid);
+    if(meus.some(e=>e.kind==='ko'))f.hp=0;
+    else{
+      const delta=meus.reduce((t,e)=>t+(e.kind==='heal'?e.value??0:e.kind==='damage'?-(e.value??0):0),0);
+      f.hp=Math.max(0,Math.min(f.maxHp,antes.hp+delta));
+    }
+    const escudos=structuredClone(antes.shields);
+    for(const e of meus){
+      if(e.kind==='shield'&&e.label==='Escudo')escudos.push({amount:e.value??0,remaining:10,source:e.source});
+      if(e.kind==='block'&&e.label==='Bloqueio'){let resta=e.value??0;for(const s of escudos){if(s.source!==e.source)continue;const usado=Math.min(s.amount,resta);s.amount-=usado;resta-=usado;}}
+    }
+    f.shields=escudos.filter(s=>s.amount>.01);
+    const statuses=structuredClone(antes.statuses);
+    for(const e of meus)if(e.kind==='status'&&e.status){
+      const novo=f.statuses.find(s=>s.id===e.status);const k=statuses.findIndex(s=>s.id===e.status);
+      if(novo){if(k>=0)statuses[k]=structuredClone(novo);else statuses.push(structuredClone(novo));}
+    }
+    f.statuses=statuses;
+    const cargaVista=vistos.some(e=>(e.kind==='charge'&&e.target===f.uid)||(e.kind==='ready'&&e.source===f.uid));
+    if(!cargaVista)f.skills=f.skills.map((s,k)=>({...s,charge:antes.skills[k]?.charge??s.charge}));
+    if(!meus.some(e=>e.kind==='interrupt'||e.kind==='ko'))f.cast=structuredClone(antes.cast);
   });
   return v;
 }
-/** A duração do golpe sem o tempo das etapas: o ritmo de cada ação continua fixo. */
+/** A duração do golpe sem o tempo da cadeia: o ritmo de cada ação continua fixo. */
 export const duracaoBase=(beat:Beat)=>beat.base??beat.duration;
-/** Em que etapa o impacto está, pelo tempo já passado do beat. */
+/** Em que passo o impacto está, pelo tempo já passado do beat. */
 function etapaNoTempo(beat:Beat):number{
-  const etapas=beat.etapas??[1],impacto=duracaoBase(beat)*P.impactAt;
-  let i=0;while(i<etapas.length-1&&beat.elapsed>=impacto+INTERVALO_DA_ETAPA*(i+1)-1e-8)i++;
-  return etapas[i]!;
-}
-function etapasDe(beat:Beat):number[]{
-  if(!['basic','skill'].includes(beat.event.kind))return [1];
-  const presentes=new Set<number>(beat.events.map(e=>etapaDoEvento(beat,e)));presentes.add(1);
-  return [1,2,3].filter(x=>presentes.has(x));
+  const passos=beat.passos??[],impacto=duracaoBase(beat)*P.impactAt;
+  let i=0;while(i<passos.length-1&&beat.elapsed>=impacto+passos[i+1]!.em-1e-8)i++;
+  return i+1;
 }
 
 export function createDirection(battle:Battle):Direction {
@@ -107,8 +193,10 @@ function makeBeat(event:BattleEvent,events:BattleEvent[],before:Battle,after:Bat
   const auxiliary=event.kind==='ready'||event.kind==='status';
   const seconds=previous?(periodic?.55:auxiliary?.5:duration(event,grand)):periodic?P.periodicSeconds:duration(event,grand);
   const beat:Beat={event,events,before,after,duration:seconds,family:familyOf(event,after),grand,elapsed:0,impacted:false,periodic,etapa:0,base:seconds};
-  beat.etapas=etapasDe(beat);
-  beat.duration+=INTERVALO_DA_ETAPA*(beat.etapas.length-1);
+  beat.passos=montaPassos(beat);
+  beat.etapas=beat.passos.map((_,k)=>k+1);
+  const ultimo=beat.passos.at(-1)!;
+  beat.duration+=ultimo.em;
   return beat;
 }
 function collect(d:Direction,events:BattleEvent[],before:Battle,after:Battle,legacy=false,previous=false){
@@ -205,9 +293,9 @@ export function advanceDirection(d:Direction,seconds:number,onCue?:(cue:Cue)=>vo
       d.visible=visivelNaEtapa(beat,beat.etapa!);
       d.signals.push(...beat.events.filter(e=>etapaDoEvento(beat,e)<=beat.etapa!));
       onCue?.({event:beat.event,family:beat.family,phase:'impact',grand:beat.grand});
-    }else if(beat.impacted&&(beat.etapa??3)<etapas.at(-1)!&&beat.elapsed>=impacto+INTERVALO_DA_ETAPA*(etapas.indexOf(beat.etapa!)+1)-1e-8){
-      /* a próxima etapa do impacto: um efeito por vez */
-      const anterior=beat.etapa!;beat.etapa=etapas[etapas.indexOf(anterior)+1];
+    }else if(beat.impacted&&(beat.etapa??1)<etapas.at(-1)!&&beat.elapsed>=impacto+(beat.passos?.[beat.etapa!]?.em??0)-1e-8){
+      /* o próximo passo da cadeia: um efeito por vez, cada um na sua hora */
+      const anterior=beat.etapa!;beat.etapa=anterior+1;
       d.visible=visivelNaEtapa(beat,beat.etapa!);
       d.signals.push(...beat.events.filter(e=>{const x=etapaDoEvento(beat,e);return x>anterior&&x<=beat.etapa!;}));
     }else if(beat.impacted&&beat.elapsed>=beat.duration-1e-8){

@@ -2467,6 +2467,23 @@
    ],
    "bytes": 31536
   },
+  "reacao": {
+   "arquivo": "reacao.mp3",
+   "descricao": "traço disparou (reação)",
+   "versoes": [
+    0.0,
+    0.63,
+    1.2799,
+    1.8913
+   ],
+   "duracoes": [
+    0.55,
+    0.5699,
+    0.5314,
+    0.5584
+   ],
+   "bytes": 23872
+  },
   "reforco": {
    "arquivo": "reforco.mp3",
    "descricao": "reforço",

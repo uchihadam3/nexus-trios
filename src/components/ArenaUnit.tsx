@@ -1,7 +1,7 @@
 import { useEffect,useRef,useState } from 'react';
-import { Shield,HeartPulse,Skull } from 'lucide-react';
+import { Shield,HeartPulse,Skull,Zap } from 'lucide-react';
 import type { Battle,Fighter,Status } from '../engine/types';
-import { revelado,type Beat } from '../presentation/director';
+import { passoAtual,revelado,type Beat } from '../presentation/director';
 import { PRESENTATION as P } from '../presentation/config';
 import { byId } from '../data/characters';
 import { statuses } from '../data/statuses';
@@ -74,7 +74,10 @@ export function ArenaUnit({fighter:f,battle,beat,onInspect,numbers,threatened,li
   const hit=impacted?beat?.events.find(e=>revelado(beat,e)&&e.target===f.uid&&e.kind==='damage'):undefined;
   const shielded=impacted?beat?.events.find(e=>revelado(beat,e)&&e.target===f.uid&&e.kind==='shield'&&e.label==='Escudo'):undefined;
   const blocked=impacted?beat?.events.find(e=>revelado(beat,e)&&e.target===f.uid&&e.kind==='block'&&(e.value??0)>=40):undefined;
-  const applied=impacted?beat?.events.find(e=>revelado(beat,e)&&e.target===f.uid&&e.kind==='status'):undefined;
+  // o Status mais recente já revelado (cada passo da cadeia mostra o seu)
+  const applied=impacted&&beat?[...beat.events].reverse().find(e=>revelado(beat,e)&&e.target===f.uid&&e.kind==='status'):undefined;
+  // este lutador está reagindo agora (o traço dele disparou no meio da ação de outro)
+  const passo=passoAtual(beat),reagindo=passo?.classe==='reacao'&&passo.quem===f.uid?passo:undefined;
   const discovered=impacted?beat?.events.find(e=>revelado(beat,e)&&e.target===f.uid&&e.kind==='discovery'):undefined;
   const knocked=impacted?beat?.events.find(e=>revelado(beat,e)&&e.target===f.uid&&e.kind==='ko'):undefined;
   const broken=impacted?beat?.events.find(e=>revelado(beat,e)&&e.target===f.uid&&e.kind==='interrupt'):undefined;
@@ -94,7 +97,7 @@ export function ArenaUnit({fighter:f,battle,beat,onInspect,numbers,threatened,li
   const marcas=[
     out&&'is-out',preparing&&'is-casting',hit&&'is-hit',acting&&'is-acting',basicStyle,critical&&'is-critical',
     (shielded||blocked)&&'is-helped',linkedSource&&'is-source',linkedTarget&&'is-target',knocked&&'is-newly-out',
-    broken&&'is-broken',threatened&&'is-threatened',ring>=P.nearAction&&'is-near',tempo&&'is-tempo',
+    broken&&'is-broken',threatened&&'is-threatened',ring>=P.nearAction&&'is-near',tempo&&'is-tempo',reagindo&&'is-reacting',
   ].filter(Boolean).join(' ');
   /* A atuação deste beat: estilo de quem age, reação de quem recebe, e para onde. */
   const atua=atuacao?[atuacao.act&&`actor act-${atuacao.act} act-${atuacao.parity}`,atuacao.react&&`reactor react-${atuacao.react}`].filter(Boolean).join(' '):'';
@@ -117,6 +120,8 @@ export function ArenaUnit({fighter:f,battle,beat,onInspect,numbers,threatened,li
         {broken&&<span className="unit-break" aria-hidden="true">×</span>}
         {tempo&&<span className={`unit-tempo ${tempo.value!>0?'advanced':'delayed'}`} aria-label={tempo.label}><AuxIcon id={tempo.value!>0?'tempo-up':'tempo-down'} size={18}/></span>}
         {out&&<span className="unit-ko" aria-label="Fora da luta"><Skull size={26}/><b>FORA</b></span>}
+        {reagindo&&<span key={`r${reagindo.eventos[0]??0}`} className="reacao-pop"><Zap size={11} strokeWidth={3}/>{reagindo.rotulo??'Reação'}</span>}
+        {reagindo&&<span key={`a${reagindo.eventos[0]??0}`} className="reacao-anel" aria-hidden="true"/>}
         {applied&&<span key={applied.id} className="status-pop">{applied.status&&<img src={`/assets/statuses/${applied.status}.png`} alt=""/>}{applied.label}</span>}
         {discovered&&<span key={discovered.id} className="discovery-pop">{discovered.label}</span>}
       </button>

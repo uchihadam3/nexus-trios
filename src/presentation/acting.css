@@ -85,3 +85,15 @@
 .arena-v2 .react-shield .unit-escudo,.arena-v2 .react-block .unit-escudo{opacity:0;animation:none}
 @keyframes escudo-respira{0%,100%{opacity:.5;transform:translate(-50%,-50%) scale(1)}50%{opacity:.72;transform:translate(-50%,-50%) scale(1.025)}}
 @media (prefers-reduced-motion:reduce){.arena-v2 .unit-escudo{animation:none}}
+
+/* Reação: o traço de quem sofre (ou de um aliado) dispara no meio da ação de
+ * outro. O retrato acende na cor do personagem, um anel de energia abre e o
+ * nome do traço sobe acima dele — um passo da cadeia, na sua hora. */
+.arena-v2 .unit.is-reacting .medal-frame{animation:reage-brilho calc(.6s * var(--motion-scale,1)) ease-out both}
+@keyframes reage-brilho{0%{box-shadow:0 0 0 0 var(--character),0 0 0 0 #fff0;filter:brightness(1)}25%{box-shadow:0 0 0 3px var(--character),0 0 22px 6px var(--character);filter:brightness(1.35)}100%{box-shadow:0 0 0 2px color-mix(in srgb,var(--character) 70%,transparent),0 0 12px 2px color-mix(in srgb,var(--character) 45%,transparent);filter:brightness(1.05)}}
+.arena-v2 .unit .reacao-anel{position:absolute;inset:-6%;z-index:5;border-radius:50%;border:3px solid var(--character);pointer-events:none;opacity:0;animation:reage-anel calc(.55s * var(--motion-scale,1)) ease-out both}
+@keyframes reage-anel{0%{opacity:.95;transform:scale(.85)}100%{opacity:0;transform:scale(1.45)}}
+.arena-v2 .unit .reacao-pop{position:absolute;z-index:9;left:50%;top:-16px;display:flex;align-items:center;gap:3px;max-width:calc(var(--medal,80px) + 60px);padding:3px 8px 3px 6px;border-radius:999px;border:1px solid color-mix(in srgb,var(--character) 80%,#fff);background:linear-gradient(180deg,color-mix(in srgb,var(--character) 55%,#101820),#101820f0);color:#fff;font-size:10px;font-weight:900;letter-spacing:.2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;pointer-events:none;box-shadow:0 0 12px color-mix(in srgb,var(--character) 60%,transparent);transform:translateX(-50%);animation:reage-pop calc(.9s * var(--motion-scale,1)) cubic-bezier(.2,1.4,.4,1) both}
+.arena-v2 .unit .reacao-pop svg{flex:none;color:#ffe066}
+@keyframes reage-pop{0%{opacity:0;transform:translate(-50%,8px) scale(.6)}30%{opacity:1;transform:translate(-50%,0) scale(1.08)}45%{transform:translate(-50%,0) scale(1)}85%{opacity:1}100%{opacity:.85;transform:translate(-50%,-4px)}}
+@media (prefers-reduced-motion:reduce){.arena-v2 .unit .reacao-anel{display:none}.arena-v2 .unit .reacao-pop{animation:none}}

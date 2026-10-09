@@ -20,7 +20,7 @@ export const SONS = [
   'cura', 'escudo', 'bloqueio', 'reforco', 'enfraquecer', 'purificar', 'dreno',
   'interrupcao', 'pronto', 'preparo', 'grand-carga', 'grand-impacto', 'nocaute', 'vitoria', 'derrota', 'virada',
   'transformacao', 'toque',
-  'ui-clique', 'ui-confirma', 'ui-abrir', 'ui-fechar', 'ui-alternar', 'ui-escolher', 'ui-arena',
+  'ui-clique', 'ui-confirma', 'ui-abrir', 'ui-fechar', 'ui-alternar', 'ui-escolher', 'ui-arena', 'reacao',
 ] as const;
 
 /* Um som próprio para cada família nova de efeito (tools/audio/sfx_familias.py). */

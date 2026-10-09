@@ -16,7 +16,7 @@ import { generateCampaign,newDraft,pickDraft,skipDraft } from './engine/campaign
 import type { ResultadoTop3 } from './lib/top3';
 import { defaults,loadProfile,loadRun,loadSettings,resetStorage,save,storageAvailable } from './lib/storage';
 import type { Run,Settings } from './lib/storage';
-import { PRIORIDADE } from './audio/cues';
+import { PRIORIDADE,type Sound } from './audio/cues';
 import { battleAudio } from './lib/audio';
 import { createDirection,restoreDirection,checkpointDirection,advanceDirection,type Direction,type Beat,type BeatTrace } from './presentation/director';
 import { PRESENTATION as P } from './presentation/config';
@@ -48,7 +48,7 @@ export default function App(){
   const runRef=useRef(run),lastSave=useRef(0);runRef.current=run;
   const direction=useRef<Direction|null>(null);
   const [presentation,setPresentation]=useState<{battle:Battle;beat:Beat|null}|null>(null);
-  const lastAudio=useRef(0),lastDominionSound=useRef(0);
+  const lastAudio=useRef(0),lastDominionSound=useRef(0),passoTocado=useRef({beat:-1,passo:1});
   const changeRun=(next:Run|null)=>{runRef.current=next;setRun(next);save('run',next);};
   const directionFor=(current:Run)=>{
     const battle=current.battle!;
@@ -144,6 +144,18 @@ export default function App(){
       const fighters=d.visible.fighters,critical=fighters.filter(f=>f.hp>0&&f.hp/f.maxHp<.34).length,casts=fighters.filter(f=>f.hp>0&&f.cast).length;
       battleAudio.setMood({heat:Math.min(1,.15+critical*.13+casts*.17+Math.abs(d.visible.dominion)/150),pressure:d.visible.dominion/100,time:Math.min(1,d.visible.time/120)});
       if(Math.abs(d.visible.dominion-lastDominionSound.current)>=20){battleAudio.sound('toque',PRIORIDADE.interface);lastDominionSound.current=d.visible.dominion;}
+      // cada passo da cadeia (depois do golpe) tem o seu som: reação, debuff, buff, cura, escudo
+      const ativo=d.active;
+      if(ativo?.impacted&&ativo.passos&&ativo.etapa){
+        const visto=passoTocado.current.beat===ativo.event.id?passoTocado.current.passo:1;
+        for(let k=Math.max(2,visto+1);k<=ativo.etapa;k++){
+          const passo=ativo.passos[k-1];if(!passo)continue;
+          const eventos=ativo.events.filter(e=>passo.eventos.includes(e.id));
+          const som:Sound=passo.classe==='reacao'?'reacao':passo.classe==='rival'?'enfraquecer':eventos.some(e=>e.kind==='heal')?'cura':eventos.some(e=>e.kind==='shield')?'escudo':'reforco';
+          battleAudio.sound(som,passo.classe==='reacao'?PRIORIDADE.habilidade:PRIORIDADE.apoio,0,ativo.event.id*10+k);
+        }
+        passoTocado.current={beat:ativo.event.id,passo:ativo.etapa};
+      }
       const ready=d.signals.find(e=>e.id>lastAudio.current&&e.kind==='ready');
       if(ready)battleAudio.sound('pronto',PRIORIDADE.interface,0,ready.id);
       if(d.signals.length)lastAudio.current=Math.max(lastAudio.current,...d.signals.map(e=>e.id));

@@ -127,6 +127,40 @@ describe('Direção sem alterar regras',()=>{
   }
   expect(vistos).toBeGreaterThan(0);
  });
+ it('cadeia em ordem: golpe primeiro, a reação de quem sofre na hora dela, depois debuff e buff',()=>{
+  let reacoes=0,cadeias=0;
+  const ORDEM={golpe:0,rival:1,aliado:2} as const;
+  for(const [a,b,semente] of [[['goku','sasuke','captain'],['vegeta','naruto','hulk'],5],[['sakura','gojo','naruto'],['goku','vegeta','hulk'],9],[['vision','sakura','cell'],['goku','vegeta','hulk'],3]] as const){
+   const d=createDirection(createBattle([...a],[...b],semente)),vistos=new Set<number>();
+   for(let frame=0;frame<30000&&!d.complete;frame++){
+    advanceDirection(d,.04);
+    const beat=d.active;
+    if(!beat?.passos||!['basic','skill'].includes(beat.event.kind))continue;
+    if(!vistos.has(beat.event.id)){
+     vistos.add(beat.event.id);
+     const proprios=beat.passos.filter(x=>x.classe!=='reacao');
+     // de quem age: golpe → rival → aliado, e o golpe abre a cadeia
+     expect(proprios.map(x=>ORDEM[x.classe as keyof typeof ORDEM])).toEqual([...proprios.map(x=>ORDEM[x.classe as keyof typeof ORDEM])].sort());
+     if(beat.passos.some(x=>x.classe==='golpe'))expect(beat.passos[0]!.classe).toBe('golpe');
+     // cada passo depois do anterior, e todo evento em exatamente um passo
+     beat.passos.forEach((x,k)=>{if(k)expect(x.em).toBeGreaterThan(beat.passos![k-1]!.em);});
+     const todos=beat.passos.flatMap(x=>x.eventos);expect(new Set(todos).size).toBe(todos.length);expect(todos.sort()).toEqual(beat.events.map(e=>e.id).sort());
+     for(const x of beat.passos.filter(x=>x.classe==='reacao')){reacoes++;expect(x.quem).not.toBe(beat.event.source);expect(x.rotulo).toBeTruthy();}
+     if(beat.passos.length>=3)cadeias++;
+    }
+    // na tela: um Status da reação só aparece quando o passo dela chega
+    if(beat.impacted&&beat.etapa!==undefined)for(const [k,x] of beat.passos.entries()){
+     if(x.classe!=='reacao'||k+1<=beat.etapa)continue;
+     for(const e of beat.events.filter(e=>x.eventos.includes(e.id)&&e.kind==='status'&&e.target)){
+      const antes=beat.before.fighters.find(f=>f.uid===e.target)!.statuses.find(s=>s.id===e.status);
+      const agora=d.visible.fighters.find(f=>f.uid===e.target)!.statuses.find(s=>s.id===e.status);
+      expect(agora?.remaining).toBe(antes?.remaining);
+     }
+    }
+   }
+  }
+  expect(reacoes).toBeGreaterThan(0);expect(cadeias).toBeGreaterThan(0);
+ });
  it('densidade de ações, skills e efeitos não altera a velocidade de cada beat',()=>{
   const battle=createBattle(a,b,42);
   for(const fighter of battle.fighters)fighter.action=.96;

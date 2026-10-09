@@ -60,7 +60,7 @@ export function CombatConnections({battle,beat,anchors,reduced,medal=80}:{battle
   const W=Math.max(.3,beat.duration*(preparo?1:P.impactAt));
   const antes=!beat.impacted||preparo?principais.map(l=>linha(l,ofensiva?(corDoEfeito??'#ffd9a8'):(corDoEfeito??COR_DE_APOIO[l.kind]))):[];
   /* as linhas de apoio entram na etapa do efeito no próprio trio */
-  const apos=beat.impacted&&!preparo&&(beat.etapa??3)>=(beat.etapas?.includes(3)?3:1)?depois.map(l=>linha(l,COR_DE_APOIO[l.kind])):[];
+  const apos=beat.impacted&&!preparo&&(beat.etapa??99)>=Math.max(1,(beat.passos?.findIndex(x=>x.classe==='aliado')??-1)+1)?depois.map(l=>linha(l,COR_DE_APOIO[l.kind])):[];
   const img=(nome:string)=>`url(${folha(nome)})`;
   const cometa=(l:Linha,classe:string,extra:Record<string,string>={})=><span key={`c-${l.id}`} className={`link-cometa ${classe}`} style={{'--cor':l.cor,'--fx-img':img('cometa'),offsetPath:`path('${l.d}')`,width:Math.round(medal*.95),height:Math.round(medal*.95),...extra} as CSSProperties}/>;
   return <div ref={root} className={`combat-connections ${reduced?'still':''}`} aria-hidden="true" style={{'--janela':`${W}s`} as CSSProperties}><div className="link-beat" key={beat.event.id}>
