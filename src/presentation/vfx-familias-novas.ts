@@ -135,6 +135,9 @@ export const FAMILIAS_NOVAS = {
   resgate: n({ nome: 'Resgate', grupo: 'apoio', impacto: 'resgate', escala: 1.9, tempo: 0.9, cor: '#8edeff', tinta: 'elemento' }),
   bencao: n({ nome: 'Bênção', grupo: 'apoio', impacto: 'bencao', escala: 2.0, tempo: 0.95, cor: '#ffe9a3', tinta: 'fixa' }),
   lanche: n({ nome: 'Lanche', grupo: 'apoio', impacto: 'lanche', escala: 1.8, tempo: 0.95, cor: '#ffcf8a', tinta: 'fixa' }),
+  ressurreicao: n({ nome: 'Ressurreição', grupo: 'apoio', impacto: 'ressurreicao', escala: 2.4, tempo: 1.0, cor: '#ffe08a', tinta: 'fixa' }),
+  renascer: n({ nome: 'Renascer', grupo: 'elemento', impacto: 'renascer', escala: 2.5, tempo: 1.0, cor: '#ff9a3a', tinta: 'fixa' }),
+  brasas_renascendo: n({ nome: 'Renascendo', grupo: 'elemento', impacto: 'brasas_renascendo', escala: 1.9, tempo: 1.0, cor: '#ff8a3a', tinta: 'fixa' }),
   purificacao: n({ nome: 'Purificação', grupo: 'apoio', impacto: 'purificar_onda', escala: 1.9, tempo: 0.95, cor: '#e8fbff', tinta: 'fixa' }),
   enfraquecimento: n({ nome: 'Enfraquecimento', grupo: 'apoio', impacto: 'enfraquecer', escala: 1.9, tempo: 0.95, cor: '#b3a2c9', tinta: 'fixa' }),
   lentidao: n({ nome: 'Lentidão', grupo: 'apoio', impacto: 'lentidao', escala: 1.9, tempo: 0.95, cor: '#9fc3e0', tinta: 'fixa' }),
@@ -151,7 +154,7 @@ export type FamiliaNova = keyof typeof FAMILIAS_NOVAS;
 export const SOM_DA_NOVA = (k: FamiliaNova): string => (k === 'transformacao' ? 'transformacao-v2' : k.replace(/_/g, '-'));
 
 /** Estas acontecem no alvo, sem nada voando até ele. */
-export const NOVAS_NO_ALVO = new Set<FamiliaNova>(['olho', 'hipnose', 'relogio', 'runas', 'sarcofago', 'encanto', 'caveira', 'clones',
+export const NOVAS_NO_ALVO = new Set<FamiliaNova>(['ressurreicao', 'renascer', 'brasas_renascendo', 'olho', 'hipnose', 'relogio', 'runas', 'sarcofago', 'encanto', 'caveira', 'clones',
   'teleporte', 'fenda', 'sorte', 'confusao', 'pentagrama', 'invocacao', 'lua_vermelha', 'susanoo', 'dominio', 'desintegrar', 'buraco_negro',
   'gravidade', 'cosmico', 'tempestade', 'raio_divino', 'chuva_de_meteoros', 'lua', 'marca', 'silencio', 'medo', 'exposto', 'lentidao', 'enfraquecimento']);
 

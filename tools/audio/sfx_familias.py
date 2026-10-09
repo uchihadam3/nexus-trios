@@ -1355,16 +1355,64 @@ def iaido(rng, v):
     return x
 
 
+
+# ================================================================== reviver e renascer
+def ressurreicao(rng, v):
+    """Reviver: o ar se abre (descida de luz), um coro sobe, sinos em cascata e um brilho
+    com batida de coração no instante em que o aliado se levanta."""
+    x = _z(2.0)
+    n = n_de(0.55)
+    poe(x, assobio(rng, n, 6000, 1800, 0.9, 0.35) * sobe_e_some(n, 0.8, 1.2) * 0.35, 0)
+    m = n_de(1.5)
+    tt = np.arange(m) / SR
+    coro = sum(seno(np.full(m, nota(mm)) * (1 + 0.004 * np.sin(2 * math.pi * (4.3 + 0.6 * k) * tt)), m) for k, mm in enumerate((67, 72, 76, 79)))
+    poe(x, coro * env(m, 0.45, 0.9) * 0.06, 0.15)
+    for k, mm in enumerate((79, 84, 88, 91, 96)):
+        poe(x, modal(n_de(1.1), nota(mm), rng=rng, **SINO) * env(n_de(1.1), 0.005, 0.7) * 0.11, 0.35 + k * 0.07)
+    batida = seno(varre(nota(40), nota(33), n_de(0.25), 1.5), n_de(0.25)) * env(n_de(0.25), 0.003, 0.12) * 0.5
+    poe(x, batida, 0.62)
+    poe(x, batida * 0.7, 0.82)
+    poe(x, _brilho(rng, 0.9, nota(100), 0.12, CRISTAL), 0.62)
+    return reverb(x, 0.9, 0.42, 9000)
+
+
+def renascer(rng, v):
+    """Renascer: brasas estalando que se juntam, o fogo sobe num rugido, a fênix grita e as asas batem."""
+    x = _z(2.0)
+    for k in range(16):
+        poe(x, estalo(rng, n_de(0.03), 1500, 7000, 0.004) * (0.2 + 0.03 * k), 0.02 * k + rng.uniform(0, 0.02))
+    poe(x, _whoosh(rng, 0.5, 200, 3000, 0.9, 1.6, 0.8), 0.1)
+    poe(x, B.fogo(rng, v), 0.45, 1.0)
+    n = n_de(0.75)
+    t = np.arange(n) / SR
+    grito = seno(varre(nota(82), nota(92), n, 0.35) * (1 + 0.025 * np.sin(2 * math.pi * 8 * t)), n) * env(n, 0.04, 0.45) * 0.24
+    grito += seno(varre(nota(89), nota(99), n, 0.35), n) * env(n, 0.04, 0.35) * 0.09
+    poe(x, grito, 0.55)
+    for k in range(2):
+        poe(x, _whoosh(rng, 0.28, 180, 1400, 0.4, 1.2, 0.7), 0.75 + k * 0.32)
+    poe(x, passa(rosa(rng, n_de(0.6)), 40, 220, 2) * env(n_de(0.6), 0.01, 0.35) * 0.5, 0.45)
+    return reverb(x, 0.7, 0.32, 6000)
+
+
+def brasas_renascendo(rng, v):
+    """Renascendo: estalos fracos de brasa e um sopro baixo, à espera."""
+    x = _z(1.0)
+    for k in range(9):
+        poe(x, estalo(rng, n_de(0.025), 1200, 6000, 0.004) * rng.uniform(0.08, 0.18), rng.uniform(0, 0.9))
+    n = n_de(1.0)
+    x += passa(rosa(rng, n), 80, 500, 2) * sobe_e_some(n, 0.5, 1.0) * 0.08
+    return reverb(x, 0.4, 0.2, 5000)
+
 SONS_NOVOS = {
     nome.replace("_", "-"): (fn, "família " + nome.replace("_", " "))
     for nome, fn in list(globals().items())
     if callable(fn) and not nome.startswith("_") and fn.__module__ == __name__ and nome not in ("nota",)
 }
 # volume pela prioridade: habilidades no nível dos golpes; apoio e status mais baixos
-_BAIXO = {"cura-em-area", "regeneracao", "grito-de-guerra", "velocidade", "escudo-tech", "barreira-magica", "armadura", "resgate",
+_BAIXO = {"brasas-renascendo", "cura-em-area", "regeneracao", "grito-de-guerra", "velocidade", "escudo-tech", "barreira-magica", "armadura", "resgate",
           "bencao", "lanche", "purificacao", "enfraquecimento", "lentidao", "marca", "silencio", "medo", "exposto", "hipnose",
           "encanto", "runas", "lua", "petalas", "regeneracao", "confusao", "estrela-invencivel", "disco", "flecha"}
-_ALTO = {"soco-serio", "supernova", "kamehameha", "canhao-de-energia", "foguete", "tempestade", "punho-gigante", "pisao",
+_ALTO = {"renascer", "ressurreicao", "soco-serio", "supernova", "kamehameha", "canhao-de-energia", "foguete", "tempestade", "punho-gigante", "pisao",
          "martelo", "espadao", "buraco-negro", "tsunami", "transformacao-v2", "dragao", "susanoo", "dominio"}
 _ANTES = {"chidori-carga": "faíscas do Chidori", "esfera-espiral-carga": "a esfera girando", "kamehameha-carga": "carga do Kamehameha",
           "kamehameha-feixe": "o feixe saindo", "marretada-giro": "a marreta subindo"}
