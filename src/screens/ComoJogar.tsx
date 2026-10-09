@@ -43,7 +43,7 @@ const BASE:Termo[]=[
   {id:'trio',nome:'Trio',cor:'#c8f560',rotulo:'COMEÇO',texto:'Você escolhe 3 lutadores. Eles lutam sozinhos: seu trabalho é montar um trio que funcione junto.'},
   {id:'jornada',nome:'Jornada',cor:'#ffd36b',rotulo:'OBJETIVO',texto:'10 lutas seguidas. Cada luta soma pontos pelo que o trio fez: dano, nocautes, cura e proteção, habilidades, Status, ritmo, Carga e manter o trio vivo — com o peso certo para cada personagem, para todo estilo de jogo pontuar parecido. A vitória vale 25 mil a mais. Uma derrota encerra a jornada, mas os pontos dela ficam.'},
   {id:'vida',nome:'Vida',cor:'#86e3a8',rotulo:'SOBREVIVER',texto:'Quando chega a zero, o lutador sai da luta. A Vida que sobra no fim vale pontos.'},
-  {id:'basico',nome:'Ataque básico',cor:'#ff9a76',rotulo:'RITMO',texto:'O golpe de sempre. O círculo em volta do retrato mostra quanto falta para o próximo.'},
+  {id:'basico',nome:'Ataque básico',cor:'#ff9a76',rotulo:'RITMO',texto:'O golpe de sempre, com o nome e o jeito de cada lutador: uns quicam no segundo rival, uns pegam dois, uns curam o aliado, roubam Carga ou fecham um combo no 3º golpe. O círculo em volta do retrato mostra quanto falta para o próximo.'},
   {id:'vantagem',nome:'Vantagem',cor:'#8fd3ff',rotulo:'QUEM DOMINA',texto:'A barra do topo mostra quem está controlando a luta. Algumas habilidades reagem a ela; virar o jogo dá pontos.'},
   {id:'investigacao',nome:'Investigação',cor:'#f4d47e',rotulo:'ESTUDAR O RIVAL',texto:'Alguns lutadores estudam um inimigo por vez. Ao chegar a 100, abrem uma habilidade que só funciona contra quem foi estudado.'},
   {id:'inteligencia',nome:'Inteligência',cor:'#c3a2ff',rotulo:'DECISÕES',texto:'De 0 a 100: quanto melhor, mais o lutador escolhe o alvo e a hora certa sozinho.'},
