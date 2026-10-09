@@ -76,7 +76,9 @@ function rate(b:Battle,actor:Fighter,candidate:Fighter,rule:Target,intent:Target
     }else add('necessidade da equipe',missing*3);
   }else{
     add('ameaça ao trio',threat(candidate)*(intent==='interrupt'?0.45:0.85)*foresight);
-    add('vulnerabilidade',status(candidate,'exposed')*4+status(candidate,'marked')*3+status(candidate,'electric')*1.2);
+    add('vulnerabilidade',status(candidate,'exposed')*4+status(candidate,'electric')*1.2);
+    // Marcado: o trio rival inteiro mira nele
+    if(intent!=='interrupt')add('marcado',status(candidate,'marked')>0?8+status(candidate,'marked')*10:0);
     if(rule==='enemyWeak')add('condição baixa',(1-ratio)*2.4);
     if(rule==='enemyStrong')add('poder estimado',c.power/100*2.5);
     if(rule==='investigated')add('informação reunida',(actor.investigation[candidate.uid]??0)/100*18);

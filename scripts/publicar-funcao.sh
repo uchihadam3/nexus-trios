@@ -28,11 +28,11 @@ npx esbuild "$RAIZ/supabase/functions/ranked-api/index.ts" --bundle --format=esm
 printf 'project_id = "nexus-trios"\n' > "$B/supabase/config.toml"
 npx -y supabase@2 functions deploy ranked-api --project-ref "$REF" --use-api --workdir "$B"
 
-# Só as jornadas da versão atual do motor (ENGINE_VERSION): cada versão tem o
-# seu ranking (as chaves levam "@versão"), igual à função.
-EV="$(grep -oP "ENGINE_VERSION='\K[^']+" "$RAIZ/src/engine/ranked.ts")"
-[[ "$EV" =~ ^[A-Za-z0-9_.-]+$ ]] || { echo "ENGINE_VERSION não encontrada" >&2; exit 1; }
-SQL="do \$\$ declare r record; d date; begin for r in select * from public.ranked_runs where verified and engine_version = '$EV' order by finished_at loop d := (r.finished_at at time zone 'America/Sao_Paulo')::date; perform public.registrar_no_top3(r.player_id, 'daily', d::text || '@$EV', r.team_ids, r.id, r.score, r.encounters_cleared, r.finished_at); perform public.registrar_no_top3(r.player_id, 'weekly', (d - (extract(isodow from d)::int - 1))::text || '@$EV', r.team_ids, r.id, r.score, r.encounters_cleared, r.finished_at); perform public.registrar_no_top3(r.player_id, 'season', 'geral@$EV', r.team_ids, r.id, r.score, r.encounters_cleared, r.finished_at); end loop; end \$\$; select count(*) as entradas from public.leaderboard_entries;"
+# Só as jornadas da época atual do ranking (EPOCA_DO_RANKING) em diante: cada
+# época tem o seu ranking (as chaves levam "@época"), igual à função.
+EV="$(grep -oP "EPOCA_DO_RANKING='\K[^']+" "$RAIZ/src/engine/ranked.ts")"
+[[ "$EV" =~ ^[A-Za-z0-9_.-]+$ ]] || { echo "EPOCA_DO_RANKING não encontrada" >&2; exit 1; }
+SQL="do \$\$ declare r record; d date; begin for r in select * from public.ranked_runs where verified and engine_version >= '$EV' order by finished_at loop d := (r.finished_at at time zone 'America/Sao_Paulo')::date; perform public.registrar_no_top3(r.player_id, 'daily', d::text || '@$EV', r.team_ids, r.id, r.score, r.encounters_cleared, r.finished_at); perform public.registrar_no_top3(r.player_id, 'weekly', (d - (extract(isodow from d)::int - 1))::text || '@$EV', r.team_ids, r.id, r.score, r.encounters_cleared, r.finished_at); perform public.registrar_no_top3(r.player_id, 'season', 'geral@$EV', r.team_ids, r.id, r.score, r.encounters_cleared, r.finished_at); end loop; end \$\$; select count(*) as entradas from public.leaderboard_entries;"
 jq -n --arg q "$SQL" '{query: $q}' | curl -sS --fail -X POST "https://api.supabase.com/v1/projects/$REF/database/query" \
   -H "Authorization: Bearer $SUPABASE_ACCESS_TOKEN" -H "Content-Type: application/json" --data-binary @-
 echo

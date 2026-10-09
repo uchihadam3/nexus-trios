@@ -35,11 +35,11 @@ export function forcaDoTrio(team:readonly string[]):number{return team.reduce((n
  * forte entre DIFICULDADE.triosDoChefe trios — nunca um trio fixo. ESCALAS é
  * a Vida dos rivais (×), que só sobe quando o trio mais forte não basta.
  */
-export const TRIOS_DA_LUTA=[1,1,1,1,1,1,1,5,48];
-export const DIFICULDADE={triosDoChefe:293};
+export const TRIOS_DA_LUTA=[1,1,1,1,1,2,4,18,41];
+export const DIFICULDADE={triosDoChefe:133};
 /** Sinergia máxima do rival da luta i: SINERGIA_MAXIMA × (i+1)/10 (o chefe não tem teto). */
 export const SINERGIA_MAXIMA=0.3;
-export const ESCALAS=[.74,.84,.85,.86,.95,.95,1,1,1,1];
+export const ESCALAS=[.82,.84,.86,.9,.94,1,1,1,1,1];
 const names=['Primeiro encontro','Novos rivais','O ritmo aumenta','Entre universos','Ponto de ruptura','Pressão crescente','Sem recuar','A última barreira','À altura das lendas','O confronto final'];
 const chave=(t:readonly string[])=>[...t].sort().join('|');
 /* `count` trios diferentes sorteados de `ids` (três índices ao acaso; rápido mesmo para milhares de trios). */

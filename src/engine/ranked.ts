@@ -8,8 +8,15 @@ import {summarizeBattle,type RunBattleSummary} from './run-summary';
  * 250.5: pontos por desempenho (src/engine/pontos.ts), e a luta perdida também pontua.
  * 250.6: rivais escolhidos pela força medida e pela sinergia, chefe sem trio fixo (src/engine/campaign.ts).
  * 250.7: dificuldade calibrada para quem escolhe bem; luta com tempo máximo (decidida pela Vida).
- *        Cada versão tem o seu ranking: a 250.7 começa com Hoje, Semana e Geral vazios. */
-export const ENGINE_VERSION='nexus-250.7';
+ *        Cada época tem o seu ranking: a 250.7 começou com Hoje, Semana e Geral vazios.
+ * 250.8: Marcado (alvo + atravessa escudo) e Eletrificado (choque que atrasa) deixam de só dar dano extra. */
+export const ENGINE_VERSION='nexus-250.8';
+/*
+ * A época do ranking: Hoje, Semana e Geral guardam as jornadas de uma época.
+ * Muda só quando o jogador quer zerar o ranking (não a cada versão do motor):
+ * ajustes pequenos de regra continuam no mesmo ranking.
+ */
+export const EPOCA_DO_RANKING='nexus-250.7';
 /* Temporada 2: a escala dos pontos mudou (dezenas de milhares por luta, não milhões); a temporada nova não mistura as duas. */
 export const BALANCE_VERSION='season-2';
 export const rosterFingerprint=()=>{

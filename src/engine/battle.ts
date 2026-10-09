@@ -1,5 +1,5 @@
 import { byId } from '../data/characters';
-import { statuses } from '../data/statuses';
+import { CHOQUE_DO_ELETRIFICADO, statuses } from '../data/statuses';
 import { random,shuffle } from './random';
 import { DOMINION as D, fracaoPorAlvo} from './dominion-config';
 import type { Battle, BattleEvent, Effect, Fighter, Side, Skill, StatusId, Target, Topic } from './types';
@@ -109,19 +109,28 @@ function trigger(b:Battle,f:Fighter,topic:Topic,source?:Fighter,amount=1){
     applyEffects(b,f,targets(b,f,t.target,t.effects),t.effects,amount);
   }
 }
+/*
+ * Cada Status de "apanhar mais" faz uma coisa diferente (pedido do jogador:
+ * três Status que só davam dano extra não faziam sentido):
+ *   Exposto      — recebe mais dano (o único que aumenta o dano);
+ *   Marcado      — os golpes nele atravessam escudo (e os rivais miram nele, targeting.ts);
+ *   Eletrificado — choque: cada golpe recebido atrasa a próxima ação dele.
+ */
 function damage(b:Battle,source:Fighter,target:Fighter,raw:number){
   if(!alive(target))return;
   const outgoing=raw*(1+intensity(source,'strengthened'))*(1-intensity(source,'weakened'));
-  const beforeProtection=outgoing*(1+intensity(target,'exposed')+intensity(target,'marked')+intensity(target,'electric'));
+  const beforeProtection=outgoing*(1+intensity(target,'exposed'));
   const protection=intensity(target,'protected');
   let amount=beforeProtection*(1-protection),blocked=beforeProtection-amount;
-  for(const s of target.shields){const used=Math.min(s.amount,amount);s.amount-=used;amount-=used;blocked+=used;const owner=b.fighters.find(f=>f.uid===s.source);if(owner&&used>0){owner.stats.protection+=used;pressure(b,owner.side,D.event.usefulProtectionPerFullCondition*clamp(used/target.maxHp));emit(b,{kind:'block',source:owner.uid,target:target.uid,attacker:source.uid,label:'Bloqueio',value:used,visual:'shield'});trigger(b,owner,'protected',owner,used/100);}}
+  const atravessaEscudo=intensity(target,'marked')>0;
+  if(!atravessaEscudo)for(const s of target.shields){const used=Math.min(s.amount,amount);s.amount-=used;amount-=used;blocked+=used;const owner=b.fighters.find(f=>f.uid===s.source);if(owner&&used>0){owner.stats.protection+=used;pressure(b,owner.side,D.event.usefulProtectionPerFullCondition*clamp(used/target.maxHp));emit(b,{kind:'block',source:owner.uid,target:target.uid,attacker:source.uid,label:'Bloqueio',value:used,visual:'shield'});trigger(b,owner,'protected',owner,used/100);}}
   target.shields=target.shields.filter(s=>s.amount>.01);
   if(protection>0){const owner=b.fighters.find(f=>f.uid===target.statuses.find(s=>s.id==='protected')?.source);if(owner){owner.stats.protection+=beforeProtection*protection;pressure(b,owner.side,D.event.usefulProtectionPerFullCondition*clamp(beforeProtection*protection/target.maxHp));emit(b,{kind:'block',source:owner.uid,target:target.uid,attacker:source.uid,label:'Proteção',value:beforeProtection*protection,visual:'shield'});trigger(b,owner,'protected',owner,beforeProtection*protection/100);}}
   const hpBefore=target.hp;
   const dealt=Math.min(hpBefore,amount);target.hp=Math.max(0,hpBefore-dealt);source.stats.damage+=dealt;
   if(dealt>.01){
     emit(b,{kind:'damage',source:source.uid,target:target.uid,label:'Impacto',value:dealt});
+    const choque=intensity(target,'electric');if(choque>0&&target.hp>0)target.action=Math.max(0,target.action-choque*CHOQUE_DO_ELETRIFICADO);
     pressure(b,source.side,D.event.damagePerFullCondition*clamp(dealt/target.maxHp));
     if(beforeProtection>=hpBefore&&target.hp>0&&blocked>0)pressure(b,target.side,D.event.clutchSave);
     trigger(b,source,'dealt',source,dealt/100);

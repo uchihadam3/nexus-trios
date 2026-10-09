@@ -30,8 +30,8 @@ const pct = (x: number) => `${Math.round(x * 100)}%`;
 /* O que cada Status faz, dito para quem nunca viu o jogo. */
 const FAZ: Record<StatusId, string> = {
   exposed: 'Recebe mais dano de todo mundo enquanto durar.',
-  marked: 'Fica na mira do trio rival: recebe mais dano.',
-  electric: 'O corpo carregado de eletricidade recebe mais dano.',
+  marked: 'Fica na mira do trio rival: todos miram nele, e os golpes nele atravessam escudo. Não aumenta o dano.',
+  electric: 'Choque: cada golpe que ele recebe empurra a próxima ação dele para trás. Não aumenta o dano.',
   paralyzed: 'Não ataca e o Preparo para de avançar. Perde a vez enquanto durar.',
   protected: 'Recebe menos dano. Com 30% ou mais, o Preparo também não pode ser interrompido.',
   slow: 'Demora mais para dar o próximo golpe e para preparar habilidades.',

@@ -1,7 +1,7 @@
 import {createClient} from 'npm:@supabase/supabase-js@2.117.2';
 import {characters} from '../../../src/data/characters.ts';
 import {generateCampaign} from '../../../src/engine/campaign.ts';
-import {BALANCE_VERSION,ENGINE_VERSION,replayRanked,rosterFingerprint,runDigest} from '../../../src/engine/ranked.ts';
+import {BALANCE_VERSION,ENGINE_VERSION,EPOCA_DO_RANKING,replayRanked,rosterFingerprint,runDigest} from '../../../src/engine/ranked.ts';
 
 declare const Deno:{env:{get:(name:string)=>string|undefined};serve:(handler:(request:Request)=>Response|Promise<Response>)=>unknown};
 type Mode='daily'|'weekly';
@@ -27,7 +27,7 @@ type Modo=Mode|'free';
  * e a versão nova começa com o ranking vazio. GERAL fica para sempre dentro
  * da versão.
  */
-const EPOCA=ENGINE_VERSION;
+const EPOCA=EPOCA_DO_RANKING;
 const CHAVE_GERAL=`geral@${EPOCA}`;
 const url=Deno.env.get('SUPABASE_URL')!,secret=Deno.env.get('SUPABASE_SECRET_KEY')??Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!,publishable=Deno.env.get('SUPABASE_PUBLISHABLE_KEY')??Deno.env.get('SUPABASE_ANON_KEY')!;
 const admin=createClient(url,secret,{auth:{persistSession:false,autoRefreshToken:false}});

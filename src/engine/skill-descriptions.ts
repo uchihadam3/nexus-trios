@@ -1,4 +1,4 @@
-import { statuses } from '../data/statuses';
+import { CHOQUE_DO_ELETRIFICADO, statuses } from '../data/statuses';
 import type { Effect, Skill, Target, Topic, Trait, StatusId } from './types';
 
 const n=(v:number)=>Number(v.toFixed(1)).toLocaleString('pt-BR');
@@ -171,7 +171,7 @@ const maiuscula=(t:string):string=>t.charAt(0).toUpperCase()+t.slice(1);
 export function valorCurto(id:StatusId,value:number):string[]{
   const v=presentStatus(id,value).value;
   const curto:Partial<Record<StatusId,string>>={
-    exposed:`+${v} de dano recebido`,marked:`+${v} de dano recebido`,electric:`+${v} de dano recebido`,
+    exposed:`+${v} de dano recebido`,marked:'na mira · atravessa escudo',electric:`choque: −${Math.round(value*CHOQUE_DO_ELETRIFICADO*100)}% da barra por golpe`,
     protected:`−${v} de dano recebido`,slow:`${v} mais lento`,rooted:`${v} mais lento`,haste:`${v} mais rápido`,
     regen:`+${v} Vida/s`,burning:`−${v} Vida/s`,strengthened:`+${v} de dano`,weakened:`−${v} de dano`,
   };
