@@ -94,10 +94,15 @@ export function BattleEffects({battle,beat,anchors,enabled,reduced,medal=80}:{ba
         if(fam.acento&&i===0&&!reduced)nodes.push(camada(fam.acento,{left:`${p.x}%`,top:`${p.y}%`,width:t*.62,height:t*.62,'--ang':`${direcao}deg`,'--dur':s(Math.max(.35,dur*.6))},'fxl-impacto fxl-acento',`ac-${id}-${uid}`));
         nodes.push(camada(fam.impacto,{left:`${p.x}%`,top:`${p.y}%`,width:t,height:t,'--ang':`${giro}deg`,'--flip':espelho,'--dur':s(dur),'--delay':s(area?i*.07:0)},`fxl-impacto ${reduced?'fxl-parado':''}`,`imp-${id}-${uid}`));
       });
-      // quem foi levantado por um aliado: a luz da ressurreição por cima do resto (a do renascer já é o próprio beat)
-      for(const e of beat.events)if(e.kind==='revive'&&e.target&&e.source!==e.target){
-        const p=point(e.target),volta=familia('ressurreicao'),t=Math.min(medal*volta.escala,Math.min(size.w,size.h)*.92);
-        nodes.push(camada(volta.impacto,{left:`${p.x}%`,top:`${p.y}%`,width:t,height:t,'--ang':'0deg','--flip':1,'--dur':s(Math.max(.6,dur*1.1)),'--delay':s(.12)},`fxl-impacto ${reduced?'fxl-parado':''}`,`rev-${id}-${e.target}`));
+      // efeitos que contam a mecânica por cima da família do golpe: quem foi levantado por um
+      // aliado (a do renascer já é o próprio beat) e quem foi Provocado
+      const sobre=(alvo:string,nome:VfxFamily,chaveDoNo:string,atraso:number)=>{
+        const p=point(alvo),f=familia(nome),t=Math.min(medal*f.escala,Math.min(size.w,size.h)*.92);
+        nodes.push(camada(f.impacto,{left:`${p.x}%`,top:`${p.y}%`,width:t,height:t,'--fx-cor':f.cor,'--ang':'0deg','--flip':1,'--dur':s(Math.max(.6,dur*1.1)),'--delay':s(atraso)},`fxl-impacto fxl-sobre ${reduced?'fxl-parado':''}`,chaveDoNo));
+      };
+      for(const e of beat.events){
+        if(e.kind==='revive'&&e.target&&e.source!==e.target)sobre(e.target,'ressurreicao',`rev-${id}-${e.target}`,.12);
+        if(e.kind==='status'&&e.status==='provoked'&&e.target)sobre(e.target,'provocar',`prov-${id}-${e.target}`,.08);
       }
     }
   }

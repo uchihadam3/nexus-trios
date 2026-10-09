@@ -1,10 +1,6 @@
 {
   "category": "statuses",
   "sourceSheet": "/assets/sheets/statuses.png",
-  "sourceResolution": [
-    1261,
-    1247
-  ],
   "format": "PNG RGBA",
   "resolution": [
     680,
@@ -18,7 +14,7 @@
   ],
   "gutter": 8,
   "margin": 8,
-  "count": 14,
+  "count": 15,
   "items": [
     {
       "id": "exposed",
@@ -31,12 +27,6 @@
         "y": 8,
         "width": 160,
         "height": 160
-      },
-      "sourceCrop": {
-        "x": 1,
-        "y": 0,
-        "width": 312,
-        "height": 312
       },
       "crop": {
         "x": 24,
@@ -57,12 +47,6 @@
         "width": 160,
         "height": 160
       },
-      "sourceCrop": {
-        "x": 316,
-        "y": 0,
-        "width": 312,
-        "height": 312
-      },
       "crop": {
         "x": 192,
         "y": 24,
@@ -81,12 +65,6 @@
         "y": 8,
         "width": 160,
         "height": 160
-      },
-      "sourceCrop": {
-        "x": 632,
-        "y": 0,
-        "width": 312,
-        "height": 312
       },
       "crop": {
         "x": 360,
@@ -107,12 +85,6 @@
         "width": 160,
         "height": 160
       },
-      "sourceCrop": {
-        "x": 947,
-        "y": 0,
-        "width": 312,
-        "height": 312
-      },
       "crop": {
         "x": 528,
         "y": 24,
@@ -131,12 +103,6 @@
         "y": 176,
         "width": 160,
         "height": 160
-      },
-      "sourceCrop": {
-        "x": 1,
-        "y": 312,
-        "width": 312,
-        "height": 312
       },
       "crop": {
         "x": 24,
@@ -157,12 +123,6 @@
         "width": 160,
         "height": 160
       },
-      "sourceCrop": {
-        "x": 316,
-        "y": 312,
-        "width": 312,
-        "height": 312
-      },
       "crop": {
         "x": 192,
         "y": 192,
@@ -181,12 +141,6 @@
         "y": 176,
         "width": 160,
         "height": 160
-      },
-      "sourceCrop": {
-        "x": 632,
-        "y": 312,
-        "width": 312,
-        "height": 312
       },
       "crop": {
         "x": 360,
@@ -207,12 +161,6 @@
         "width": 160,
         "height": 160
       },
-      "sourceCrop": {
-        "x": 947,
-        "y": 312,
-        "width": 312,
-        "height": 312
-      },
       "crop": {
         "x": 528,
         "y": 192,
@@ -231,12 +179,6 @@
         "y": 344,
         "width": 160,
         "height": 160
-      },
-      "sourceCrop": {
-        "x": 2,
-        "y": 624,
-        "width": 311,
-        "height": 311
       },
       "crop": {
         "x": 24,
@@ -257,12 +199,6 @@
         "width": 160,
         "height": 160
       },
-      "sourceCrop": {
-        "x": 317,
-        "y": 624,
-        "width": 311,
-        "height": 311
-      },
       "crop": {
         "x": 192,
         "y": 360,
@@ -281,12 +217,6 @@
         "y": 344,
         "width": 160,
         "height": 160
-      },
-      "sourceCrop": {
-        "x": 632,
-        "y": 624,
-        "width": 311,
-        "height": 311
       },
       "crop": {
         "x": 360,
@@ -307,12 +237,6 @@
         "width": 160,
         "height": 160
       },
-      "sourceCrop": {
-        "x": 948,
-        "y": 624,
-        "width": 311,
-        "height": 311
-      },
       "crop": {
         "x": 528,
         "y": 360,
@@ -331,12 +255,6 @@
         "y": 512,
         "width": 160,
         "height": 160
-      },
-      "sourceCrop": {
-        "x": 1,
-        "y": 935,
-        "width": 312,
-        "height": 312
       },
       "crop": {
         "x": 24,
@@ -357,14 +275,27 @@
         "width": 160,
         "height": 160
       },
-      "sourceCrop": {
-        "x": 316,
-        "y": 935,
-        "width": 312,
-        "height": 312
-      },
       "crop": {
         "x": 192,
+        "y": 528,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "provoked",
+      "name": "Provocado",
+      "path": "/assets/statuses/provoked.png",
+      "row": 3,
+      "column": 2,
+      "cell": {
+        "x": 344,
+        "y": 512,
+        "width": 160,
+        "height": 160
+      },
+      "crop": {
+        "x": 360,
         "y": 528,
         "width": 128,
         "height": 128

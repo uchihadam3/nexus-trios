@@ -1861,6 +1861,20 @@
   "laco": false,
   "bytes": 53638
  },
+ "provocar": {
+  "descricao": "marca de raiva sobre o rival provocado, anéis se fechando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 75352
+ },
  "pulso_de_energia": {
   "descricao": "pulso de energia",
   "quadros": 12,

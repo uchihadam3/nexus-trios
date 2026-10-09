@@ -21,7 +21,7 @@ export function BattleInspector({target,battle,onClose,onSelect}:{target:Inspect
       <div className="inspector-title"><StatusBadge status={liveStatus}/><div><small>STATUS {presentStatus(liveStatus.id,liveStatus.intensity).tone.toLocaleUpperCase('pt-BR')} · {c.name.toLocaleUpperCase('pt-BR')}</small><h3>{statuses[liveStatus.id].name}</h3></div></div>
       {/* O valor de agora, já com tudo o que foi somado, em destaque — e até onde pode chegar. */}
       {valorAtualDoStatus(liveStatus.id,liveStatus.intensity)&&<div className="inspector-valor"><b>{valorAtualDoStatus(liveStatus.id,liveStatus.intensity)}</b><span>{tetoDoStatus(liveStatus.id)?`agora · as aplicações somam até ${tetoDoStatus(liveStatus.id)}`:'agora'}</span></div>}
-      <p>{presentStatus(liveStatus.id,liveStatus.intensity).summary}. <TermoBotao termo={termoPorId[liveStatus.id]!}>O que é?</TermoBotao></p>
+      <p>{presentStatus(liveStatus.id,liveStatus.intensity).summary}{liveStatus.id==='provoked'&&(()=>{const quem=battle.fighters.find(x=>x.uid===liveStatus.source);return quem?` (${byId[quem.characterId].name})`:'';})()}. <TermoBotao termo={termoPorId[liveStatus.id]!}>O que é?</TermoBotao></p>
       <div className="inspector-meta"><span><Clock3 size={13}/>{liveStatus.remaining.toLocaleString('pt-BR',{maximumFractionDigits:1})} s restantes</span><span><Sparkles size={13}/>Aplicado por {sourceName(liveStatus.source)}</span></div>
     </>:skill?<>
       <div className="inspector-title"><SkillIcon type={skill.icon} characterId={c.id} skillId={skill.id} size={31}/><div><small>{c.name.toLocaleUpperCase('pt-BR')}</small><h3>{skill.name}</h3></div></div>
