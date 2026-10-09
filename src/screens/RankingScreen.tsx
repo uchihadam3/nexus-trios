@@ -84,7 +84,7 @@ export function Placar({mode,onMode,estado,handle,onConta,onMais,maisCarregando=
       </button>)}</div>}
       <div className="ranking-list rk-lista">{resto.map((row,i)=><button key={row.id} onClick={()=>setSelected(row)} className={minhas.has(row.id)?'mine':''} style={{'--i':Math.min(i,12)} as CSSProperties}>
         <span className="rk-pos">{row.position}</span>
-        <span className="rk-quem"><b>{row.handle}</b><small>{row.progress}/10 · {row.highlights.survivors??0} de pé</small></span>
+        <span className="rk-quem"><b>{row.handle}</b><small>{row.progress}/10{row.highlights.semBaixas!==undefined&&<> · {row.highlights.semBaixas} sem baixas</>}</small></span>
         <Trio team={row.team} tamanho="mini"/>
         <strong>{pontos(row.score)}</strong>
       </button>)}{!rows.length&&<p className="rk-vazio">Ainda não há resultado validado nesta aba. O primeiro lugar está livre!</p>}</div>
@@ -98,7 +98,7 @@ export function Placar({mode,onMode,estado,handle,onConta,onMais,maisCarregando=
         <h2>{selected.handle}</h2>
         <div className="rk-cartao-trio">{selected.team.map(id=>byId[id]&&<div key={id} style={{'--character':byId[id].color} as CSSProperties}><Portrait character={byId[id]}/><span>{byId[id].name}</span></div>)}</div>
         <strong className="rk-cartao-pontos">{pontos(selected.score)}<small>pontos</small></strong>
-        <div className="rk-cartao-numeros"><span><b>{selected.progress}/10</b><small>lutas</small></span><span><b>{selected.highlights.survivors??0}</b><small>de pé no fim</small></span><span><b>{selected.highlights.turns??0}</b><small>viradas</small></span></div>
+        <div className="rk-cartao-numeros"><span><b>{selected.progress}/10</b><small>lutas</small></span><span><b>{selected.highlights.semBaixas??'—'}</b><small>lutas sem baixas</small></span><span><b>{selected.highlights.turns??0}</b><small>viradas</small></span></div>
         <small className="rk-cartao-rodape">Desafio {selected.seed} · {new Date(selected.date).toLocaleDateString('pt-BR')} · {selected.engineVersion}</small>
       </div>
     </div>}

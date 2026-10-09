@@ -46,5 +46,7 @@ export function replayRanked(team:string[],seed:number,livre=false){
     if(!summary.won)break;
   }
   const cleared=summaries.filter(s=>s.won).length;
-  return {seed,team,encountersCleared:cleared,score,summaries,highlights:{survivors:summaries.at(-1)?.survivors??0,turns:summaries.reduce((n,s)=>n+s.turns,0)}};
+  return {seed,team,encountersCleared:cleared,score,summaries,highlights:{survivors:summaries.at(-1)?.survivors??0,turns:summaries.reduce((n,s)=>n+s.turns,0),
+    // lutas vencidas sem perder ninguém do trio (o "de pé no fim" da luta perdida era quase sempre 0)
+    semBaixas:summaries.filter(s=>s.won&&s.survivors===3).length}};
 }
