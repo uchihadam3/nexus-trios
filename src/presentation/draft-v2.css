@@ -122,3 +122,8 @@
 .dv-porque li.alerta svg{color:#ffb86b}
 .dv-porque-licao{margin:0;font-size:12px;line-height:1.45;color:#9fb09a}
 .dv-porque .dv-escolher{width:100%}
+/* Os rivais saem quando o trio fica pronto: enquanto isso, a prévia avisa e o botão espera. */
+.dv-rival-sorteando b{opacity:.75;animation:dv-sorteia 1s ease-in-out infinite alternate}
+@keyframes dv-sorteia{from{opacity:.45}to{opacity:.9}}
+.dv-arena:disabled{filter:saturate(.4) brightness(.8);cursor:progress}
+@media (prefers-reduced-motion:reduce){.dv-rival-sorteando b{animation:none}}

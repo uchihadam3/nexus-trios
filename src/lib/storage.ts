@@ -11,7 +11,9 @@ export interface Settings {volume:number;musicVolume:number;effectsVolume:number
 export interface RankedRun {top3?:{periodo?:ResultadoTop3;temporada?:ResultadoTop3};/** `free`: a Jornada normal, que vale só o ranking da Temporada */mode:'daily'|'weekly'|'free';id?:string;status:'draft'|'playing'|'validating'|'verified'|'failed';score?:number;daily?:number|null;weekly?:number|null;season?:number|null;error?:string}
 export interface Run {seed:number;team:string[];encounters:Encounter[];index:number;stage:'draft'|'battle'|'result';draft:Draft;battle:Battle|null;recorded:boolean;presentation?:PresentationCheckpoint;summaries?:RunBattleSummary[];battleSynergies?:RunSynergyEvent[];raioX?:EstadoRaioX;telemetry?:ReturnType<typeof emptyTally>;ranked?:RankedRun;
   /** As Dicas de trio ficaram ligadas em algum momento da escolha: cada luta desta jornada custa −25 mil. */
-  dicas?:boolean}
+  dicas?:boolean;
+  /** Os rivais já foram sorteados com o trio pronto (e a seed do servidor, se houver): a prévia mostra exatamente quem vem. */
+  preparado?:boolean}
 /** O que o aparelho guarda do jogador: jornadas, vitórias e o recorde de pontos (o objetivo do jogo). */
 export interface Profile {journeys:number;victories:number;best:number;wins:number;champion?:string[];publicHandle?:string;recordePontos?:number;/** a escala dos pontos em que o recorde foi feito (2 = a conta por desempenho) */escalaDosPontos?:number}
 export const defaults:Settings={volume:P.audio.master,musicVolume:P.audio.music,effectsVolume:P.audio.effects,effects:true,speed:1,numbers:true,visualFeedbackVersion:2,reducedMotion:typeof matchMedia!=='undefined'&&matchMedia('(prefers-reduced-motion: reduce)').matches,auto:false,explanations:'normal',dicasDoTrio:false};

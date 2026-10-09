@@ -79,6 +79,7 @@ export function DraftScreen({draft,primeiroRival,dicas,usouDicas,onDicas,onPick,
         </div>
       </article>;})}</div>}
 
+    {full&&!primeiroRival&&<div className="dv-rival dv-rival-sorteando" role="status"><span><Swords size={15}/>PRIMEIRA LUTA</span><b>Sorteando os rivais…</b></div>}
     {full&&primeiroRival&&<div className="dv-rival"><span><Swords size={15}/>PRIMEIRA LUTA</span><b>{primeiroRival.name}</b><div>{primeiroRival.team.map(id=><span key={id} style={{'--character':byId[id].color} as CSSProperties}><Portrait character={byId[id]}/><small>{byId[id].name}</small></span>)}</div></div>}
 
     {porque&&createPortal(<div className="dv-porque-fundo" onClick={()=>setPorque(null)}><div className="dv-porque" role="dialog" aria-modal="true" aria-label={`Por que ${byId[porque.id].name}`} style={{'--character':byId[porque.id].color,'--nivel':NIVEL(porque.encaixe).cor} as CSSProperties} onClick={e=>e.stopPropagation()}>
@@ -91,7 +92,7 @@ export function DraftScreen({draft,primeiroRival,dicas,usouDicas,onDicas,onPick,
     </div></div>,document.body)}
 
     <footer className="dv-barra">
-      {full?<button className="dv-arena" onClick={onStart} aria-label="Entrar na arena"><span>ENTRAR NA ARENA</span><ArrowRight size={22}/></button>
+      {full?<button className="dv-arena" onClick={onStart} disabled={!primeiroRival} aria-label="Entrar na arena"><span>ENTRAR NA ARENA</span><ArrowRight size={22}/></button>
         :<button className="secondary dv-trocar" onClick={onSkip} disabled={draft.skips===0} aria-label="Trocar candidatos"><Dices size={19}/><span>Trocar opções</span><b>{draft.skips}</b></button>}
       <button className="secondary dv-sair" onClick={onAbandon} aria-label="Desistir da jornada" title="Desistir da jornada"><LogOut size={18}/></button>
     </footer>

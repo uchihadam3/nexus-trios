@@ -95,10 +95,39 @@ export default function App(){
     changeRun({seed,team:[],encounters:generateCampaign(seed),index:0,stage:'draft',draft:newDraft(seed),battle:null,recorded:false,summaries:[]});setPaused(false);setConfirmNew(false);setConfirmAbandon(false);navigate('game');
   };
   const requestNew=()=>{if(run&&(run.stage!=='result'||run.battle?.winner==='player'&&run.index<9))setConfirmNew(true);else void startNew();};
+  /*
+   * Os rivais da jornada saem assim que o trio fica pronto, não ao entrar na
+   * arena: assim a "Primeira luta" mostrada na escolha é exatamente a luta que
+   * vem. Eles dependem do trio (ninguém repete) e, com a conta conectada, da
+   * seed que o servidor do ranking sorteia — por isso a jornada é aberta no
+   * servidor aqui. Antes, a prévia saía de um sorteio sem o trio e a arena
+   * sorteava de novo: o jogador via um trio rival e enfrentava outro.
+   */
+  const preparando=useRef<Run['draft']|null>(null);
+  const preparaRivais=async(r:Run)=>{
+    if(preparando.current===r.draft)return;preparando.current=r.draft;
+    const team=r.draft.team;let seed=r.seed,ranked=r.ranked;
+    if(!ranked&&contaConectada()){
+      setOnlineBusy(true);
+      try{
+        const result=await Promise.race([onlineCall<{run:{id:string;seed:number}}>('start',{mode:'free',team}),new Promise<never>((_,falha)=>setTimeout(()=>falha(new Error('O servidor demorou.')),8000))]);
+        seed=result.run.seed;ranked={mode:'free',id:result.run.id,status:'playing'};
+      }catch(error){console.warn('Jornada fora do ranking:',error instanceof Error?error.message:error);}
+      finally{setOnlineBusy(false);}
+    }
+    const atual=runRef.current;
+    if(!atual||atual.stage!=='draft'||atual.draft.team.join()!==team.join())return;
+    changeRun({...atual,seed,team,encounters:generateCampaign(seed,team),ranked,preparado:true});
+  };
+  useEffect(()=>{
+    if(run?.stage==='draft'&&run.draft.team.length===3&&!run.preparado&&!(run.ranked&&run.ranked.mode!=='free'))void preparaRivais(run);
+  });
   const startBattle=async(index:number)=>{
     const current=runRef.current;if(!current)return;
+    // os rivais ainda estão sendo sorteados (a prévia mostra "Sorteando os rivais…")
+    if(index===0&&current.stage==='draft'&&!current.preparado&&!(current.ranked&&current.ranked.mode!=='free'))return;
     const team=current.draft.team;
-    let ranked=current.ranked,seed=current.seed,encounters=current.ranked?current.encounters:current.stage==='draft'?generateCampaign(current.seed,team):current.encounters;
+    let ranked=current.ranked,seed=current.seed,encounters=current.ranked||current.preparado?current.encounters:current.stage==='draft'?generateCampaign(current.seed,team):current.encounters;
     /*
      * Toda jornada vale o ranking (Hoje, Semana e Geral). Com a conta
      * conectada, o servidor abre a jornada e sorteia os rivais (a seed); no
@@ -106,7 +135,7 @@ export default function App(){
      * ou com o servidor fora, a jornada segue normal, só fora do ranking —
      * jogar nunca fica bloqueado por isso.
      */
-    if(index===0&&!ranked&&current.stage==='draft'&&contaConectada()){
+    if(index===0&&!ranked&&!current.preparado&&current.stage==='draft'&&contaConectada()){
       setOnlineBusy(true);
       try{
         const result=await Promise.race([onlineCall<{run:{id:string;seed:number}}>('start',{mode:'free',team}),new Promise<never>((_,falha)=>setTimeout(()=>falha(new Error('O servidor demorou.')),8000))]);
@@ -281,7 +310,7 @@ export default function App(){
       {screen==='conta'&&<AccountScreen autenticacao={autenticacao} conta={conta} profile={profile} conectado={onlineConfigured} google={googleConfigured} aoMudarPerfil={p=>{save('profile',p);setProfile(p);}}/>}
       {screen==='help'&&<HelpScreen onPlay={requestNew}/>}
       {screen==='settings'&&<SettingsScreen settings={settings} onChange={changeSettings} onReset={reset} onGaleria={()=>navigate('vfx')} ranking={onlineConfigured?{nome:profile.publicHandle,onEditar:()=>{setPendingStart(false);setDraftHandle(profile.publicHandle??'');setNameDialog(true);}}:undefined}/>}
-      {screen==='game'&&run?.stage==='draft'&&<DraftScreen draft={run.draft} primeiroRival={run.encounters[0]} dicas={settings.dicasDoTrio} usouDicas={run.dicas===true} onDicas={ligar=>changeSettings({...settings,dicasDoTrio:ligar})} onPick={id=>changeRun({...run,draft:pickDraft(run.draft,id)})} onSkip={()=>changeRun({...run,draft:skipDraft(run.draft)})} onDetails={setDetails} onStart={()=>void startBattle(0)} onAbandon={()=>setConfirmAbandon(true)}/>}
+      {screen==='game'&&run?.stage==='draft'&&<DraftScreen draft={run.draft} primeiroRival={run.preparado||run.ranked&&run.ranked.mode!=='free'?run.encounters[0]:undefined} dicas={settings.dicasDoTrio} usouDicas={run.dicas===true} onDicas={ligar=>changeSettings({...settings,dicasDoTrio:ligar})} onPick={id=>changeRun({...run,draft:pickDraft(run.draft,id)})} onSkip={()=>changeRun({...run,draft:skipDraft(run.draft)})} onDetails={setDetails} onStart={()=>void startBattle(0)} onAbandon={()=>setConfirmAbandon(true)}/>}
       {screen==='game'&&run?.stage==='battle'&&run.battle&&<BattleScreen battle={presentation&&direction.current?.battle===run.battle?presentation.battle:run.battle} beat={presentation&&direction.current?.battle===run.battle?presentation.beat:null} index={run.index} name={run.encounters[run.index].name} settings={settings} paused={paused||!!details}  onPause={()=>setPaused(!paused)} onAbandon={()=>setConfirmAbandon(true)} onSettings={changeSettings} onExit={()=>{setPaused(true);navigate('home');}}/>}
       {screen==='game'&&run?.stage==='result'&&<ResultScreen run={run} onNext={()=>void startBattle(run.index+1)} onRestart={requestNew} onAbandon={()=>setConfirmAbandon(true)} onHome={()=>navigate('home')} onRanking={()=>navigate('ranking')} onRetry={()=>{if(run.ranked)changeRun({...run,ranked:{...run.ranked,status:'validating'}});}} auto={settings.auto} onAuto={auto=>changeSettings({...settings,auto})}/>}
       {screen==='debug'&&import.meta.env.DEV&&<Suspense fallback={<p>Carregando laboratório…</p>}><DebugScreen/></Suspense>}
