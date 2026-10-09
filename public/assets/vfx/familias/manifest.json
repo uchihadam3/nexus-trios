@@ -517,6 +517,20 @@
   "laco": false,
   "bytes": 27884
  },
+ "copia": {
+  "descricao": "linhas de leitura, vírgulas girando e a forma copiada piscando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 57104
+ },
  "corrente": {
   "descricao": "corrente que voa e se enrola no alvo",
   "quadros": 12,

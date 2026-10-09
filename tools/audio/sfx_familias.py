@@ -1397,6 +1397,20 @@ def provocar(rng, v):
 
 
 # ================================================================== refletir, espinhos, vampirismo
+def copia(rng, v):
+    """Copiar: um bipe de leitura que sobe em escada, um giro metálico e o acorde da técnica que
+    agora é dele."""
+    x = _z(1.1)
+    for k in range(5):
+        n = n_de(0.06)
+        poe(x, seno(np.full(n, nota(76 + 3 * k)), n) * env(n, 0.002, 0.03) * 0.12, 0.05 * k)
+    n = n_de(0.45)
+    poe(x, assobio(rng, n, 600, 2400, 0.7, 0.5) * sobe_e_some(n, 0.6, 1.0) * 0.18, 0.22)
+    m = n_de(0.7)
+    poe(x, sum(seno(np.full(m, nota(mm)), m) for mm in (67, 74, 79)) * env(m, 0.01, 0.35) * 0.08, 0.5)
+    return reverb(x, 0.6, 0.3, 9000)
+
+
 def esquiva(rng, v):
     """Esquiva: dois sopros rápidos cruzando (o golpe e o vulto) e um passo leve no chão."""
     x = _z(0.6)
@@ -1552,7 +1566,7 @@ SONS_NOVOS = {
 _BAIXO = {"brasas-renascendo", "cura-em-area", "regeneracao", "grito-de-guerra", "velocidade", "escudo-tech", "barreira-magica", "armadura", "resgate",
           "bencao", "lanche", "purificacao", "enfraquecimento", "lentidao", "marca", "silencio", "medo", "exposto", "hipnose",
           "encanto", "runas", "lua", "petalas", "regeneracao", "confusao", "estrela-invencivel", "disco", "flecha"}
-_ALTO = {"esquiva", "ultima-resistencia", "sono", "cegueira", "errou", "barreira-anula", "dissipar", "reflexo", "espinhos", "vampirismo", "provocar", "renascer", "ressurreicao", "soco-serio", "supernova", "kamehameha", "canhao-de-energia", "foguete", "tempestade", "punho-gigante", "pisao",
+_ALTO = {"copia", "esquiva", "ultima-resistencia", "sono", "cegueira", "errou", "barreira-anula", "dissipar", "reflexo", "espinhos", "vampirismo", "provocar", "renascer", "ressurreicao", "soco-serio", "supernova", "kamehameha", "canhao-de-energia", "foguete", "tempestade", "punho-gigante", "pisao",
          "martelo", "espadao", "buraco-negro", "tsunami", "transformacao-v2", "dragao", "susanoo", "dominio"}
 _ANTES = {"chidori-carga": "faíscas do Chidori", "esfera-espiral-carga": "a esfera girando", "kamehameha-carga": "carga do Kamehameha",
           "kamehameha-feixe": "o feixe saindo", "marretada-giro": "a marreta subindo"}

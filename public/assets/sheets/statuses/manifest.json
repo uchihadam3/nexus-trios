@@ -14,7 +14,7 @@
   ],
   "gutter": 8,
   "margin": 8,
-  "count": 26,
+  "count": 27,
   "items": [
     {
       "id": "exposed",
@@ -505,6 +505,25 @@
       },
       "crop": {
         "x": 192,
+        "y": 1032,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "bomb",
+      "name": "Marca explosiva",
+      "path": "/assets/statuses/bomb.png",
+      "row": 6,
+      "column": 2,
+      "cell": {
+        "x": 344,
+        "y": 1016,
+        "width": 160,
+        "height": 160
+      },
+      "crop": {
+        "x": 360,
         "y": 1032,
         "width": 128,
         "height": 128

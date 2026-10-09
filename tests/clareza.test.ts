@@ -192,7 +192,7 @@ describe('clareza da escrita pública', () => {
         p.effects.forEach((linha, i) => {
           const e = s.effects[i]!;
           /* Guardar/liberar energia, a Death Note, reviver e roubo de vida se explicam na própria frase. */
-          if (['store', 'release', 'deathnote', 'revive', 'lifesteal'].includes(e.kind)) return;
+          if (['store', 'release', 'deathnote', 'revive', 'lifesteal', 'copy'].includes(e.kind)) return;
           /* Status diz "em si próprio"; os demais dizem "→ o próprio personagem". */
           const alvo = e.kind === 'status'
             ? targetNamesEm[e.target ?? s.target]

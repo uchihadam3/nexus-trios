@@ -141,6 +141,12 @@ export const GANHA_STATUS: Record<string, GanhaStatus[]> = {
   loki: [{ habilidade: 0, status: 'evasion', valor: 0.35, duracao: 6, alvo: 'self', troca: 'weakened' }], // a duplicata leva o golpe
   sekiro: [{ habilidade: 0, status: 'evasion', valor: 0.4, duracao: 5, alvo: 'self', troca: 'protected' }], // Deflexão
   minato: [{ habilidade: 0, status: 'evasion', valor: 0.3, duracao: 5, alvo: 'self' }], // o Hiraishin já está em outro lugar
+  // Marca explosiva (parte 7): bomba-relógio que explode no fim do tempo
+  gambit: [{ habilidade: 0, status: 'bomb', valor: 110, duracao: 3, troca: 'burning' }], // a carta carregada de energia cinética
+  rocket: [{ habilidade: 0, status: 'bomb', valor: 130, duracao: 3, troca: 'marked' }], // armadilha explosiva
+  coiote: [{ habilidade: 0, status: 'bomb', valor: 150, duracao: 4, troca: 'marked' }], // a encomenda ACME tinha uma bomba
+  arlequina: [{ habilidade: 2, status: 'bomb', valor: 90, duracao: 3, alvo: 'allEnemies', troca: 'exposed' }], // surpresa explosiva
+  donatello: [{ habilidade: 1, status: 'bomb', valor: 100, duracao: 3 }], // o dispositivo tático é uma bomba
   alphonse: [{ habilidade: 2, status: 'barrier', valor: 1, duracao: 8, alvo: 'allAllies' }], // barreira transmutada
 };
 
@@ -168,10 +174,14 @@ export const TIRA_STATUS: Record<string, TiraStatus> = {
  * Ajustes pedidos pelo jogador, número a número. Ficam aqui (e não nas regras
  * de estilo de expanded-roster.ts) para ninguém mais ser mexido junto.
  */
-type Ajuste = { habilidade: number; muda: (e: Effect) => Effect };
+type Ajuste = { habilidade: number; muda?: (e: Effect) => Effect; soma?: Effect[] };
 const valor = (kind: Effect['kind'], status: StatusId | undefined, f: (e: Effect) => Effect) => (e: Effect) =>
   e.kind === kind && (!status || (e.kind === 'status' && e.status === status)) ? f(e) : e;
 export const PEDIDOS_DO_JOGADOR: Record<string, Ajuste[]> = {
+  goku: [
+    // Kaioken: além do Acelerado 35% por 9 s, Fortalecido 20% por 9 s
+    { habilidade: 1, soma: [{ kind: 'status', status: 'strengthened', value: 0.2, duration: 9, target: 'self' }] },
+  ],
   professorx: [
     { habilidade: 0, muda: valor('charge', undefined, (e) => ({ ...e, value: 10 } as Effect)) }, // Coordenação mental: Carga 5 → 10
     { habilidade: 0, muda: valor('status', 'haste', (e) => ({ ...e, value: 0.1 } as Effect)) }, // Acelerado 8% → 10%
@@ -194,7 +204,9 @@ const mudancasDe = (id: string): Map<number, Mudanca[]> => {
   ]);
   // o roubo de vida vem depois do dano: cura pelo que a habilidade causou
   if (roubo) poe(roubo.habilidade, (e) => [...e.filter(semStatus(roubo.troca)), { kind: 'lifesteal', value: roubo.fracao }]);
-  for (const a of PEDIDOS_DO_JOGADOR[id] ?? []) poe(a.habilidade, (e) => e.map(a.muda));
+  for (const a of PEDIDOS_DO_JOGADOR[id] ?? []) poe(a.habilidade, (e) => [...(a.muda ? e.map(a.muda) : e), ...(a.soma ?? [])]);
+  const copiar = COPIAR[id];
+  if (copiar) poe(copiar.habilidade, (e) => [...e.filter(semStatus(copiar.troca)), { kind: 'copy', value: copiar.fracao }]);
   const tira = TIRA_STATUS[id];
   if (tira) poe(tira.habilidade, (e) => [...e.filter(semStatus(tira.troca)), { kind: tira.tipo, value: tira.quantos, target: tira.alvo }]);
   for (const g of GANHA_STATUS[id] ?? []) poe(g.habilidade, (e) => [
@@ -216,6 +228,14 @@ const POR_SEGUNDO = new Set<StatusId>(['burning', 'poison', 'bleed']);
 const miudo = (limite: number) => (e: Effect) => e.kind === 'status' && !POR_SEGUNDO.has(e.status) && negativo(e.status) && e.value <= limite;
 const negativo = (s: StatusId) => !['protected', 'haste', 'regen', 'strengthened', 'vampirism', 'reflect', 'thorns', 'barrier'].includes(s);
 export const LIMITE_DO_MIUDO = { basico: 0.08, habilidade: 0.065 };
+
+/** Copiar habilidade (parte 7): a habilidade também usa a última habilidade de um rival, com esta fração da força. */
+export const COPIAR: Record<string, { habilidade: number; fracao: number; troca?: StatusId }> = {
+  kakashi: { habilidade: 2, fracao: 0.8, troca: 'marked' }, // o Sharingan copia a técnica
+  kirby: { habilidade: 1, fracao: 0.7 }, // Cópia de poder
+  rogue: { habilidade: 2, fracao: 0.7 }, // Memória emprestada: usa o poder de quem tocou
+  megaman: { habilidade: 1, fracao: 0.6 }, // Arma adquirida do chefe
+};
 
 /** Última resistência: uma vez por luta, o golpe fatal deixa com 1 de Vida e Protegido por um instante. */
 export const ULTIMA_RESISTENCIA: Record<string, { protegido: number; duracao: number }> = {

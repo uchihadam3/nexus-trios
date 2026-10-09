@@ -249,6 +249,9 @@ function collect(d:Direction,events:BattleEvent[],before:Battle,after:Battle,leg
   // fora de uma ação, Status e Escudo só nascem de um traço disparando sozinho: ganha um momento próprio
   const traco=!previous&&!legacy?events.find(e=>e.kind==='status'||(e.kind==='shield'&&e.label==='Escudo')):undefined;
   if(traco){d.queue.push(makeBeat(traco,events,before,after,false,false,true));return;}
+  // a Marca explosiva estourando é um momento próprio, não um "efeito contínuo"
+  const bum=events.find(e=>e.kind==='damage'&&e.label==='Explosão');
+  if(bum&&!previous&&!legacy){d.queue.push(makeBeat(bum,events,before,after));return;}
   const change=events.find(e=>e.kind==='damage'||e.kind==='heal');
   if(change){
     const burning=change.kind==='damage'&&change.label!=='Veneno'&&before.fighters.find(f=>f.uid===change.target)?.statuses.some(s=>s.id==='burning');

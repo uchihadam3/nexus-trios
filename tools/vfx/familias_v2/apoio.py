@@ -656,6 +656,32 @@ def ultima_resistencia(T, t, rng):
     return G, H
 
 
+def copia(T, t, rng):
+    """Copiar: linhas de leitura varrem o corpo de cima a baixo, três vírgulas giram como um
+    Sharingan e a forma copiada pisca em negativo antes de assentar."""
+    G, H = vazio(T)
+    env = apaga(t, 0.7, 1)
+    varre = -0.9 + 1.8 * ease_in(rel(t, 0.0, 0.45), 1.2)
+    linhas = 0
+    for k in range(6):
+        y = varre - 0.06 * k
+        linhas = linhas + smooth(0.012 - np.abs(T.V - y), 0, 0.01) * smooth(0.7 - np.abs(T.U), 0, 0.1) * (1 - 0.13 * k)
+    linhas = linhas * pulso(t, 0.0, 0.55) * 1.4
+    gira = t * 9.0
+    virgulas = []
+    for k in range(3):
+        a = gira + k * TAU / 3
+        x, y = 0.36 * math.cos(a), 0.36 * math.sin(a)
+        virgulas.append(([(x + 0.08 * math.cos(a + 1.8), y + 0.08 * math.sin(a + 1.8)), (x + 0.11 * math.cos(a), y + 0.11 * math.sin(a)),
+                          (x + 0.08 * math.cos(a - 1.2), y + 0.08 * math.sin(a - 1.2)), (x - 0.16 * math.cos(a + 0.6), y - 0.16 * math.sin(a + 0.6))], janela(t, 0.25, 0.35)))
+    anel = T.ring(0.36, 0.03) * janela(t, 0.25, 0.35) + T.ring(0.12, 0.05) * janela(t, 0.3, 0.4)
+    pisca = T.gauss(0, 0, 0.3, 0.3) * (pulso(t, 0.45, 0.55) + pulso(t, 0.6, 0.7))
+    V = T.polys(virgulas, 0.004)
+    G += (linhas + V * 1.4 + anel * 1.2 + pisca * 1.3) * env
+    H += (linhas * 0.8 + V * 0.6 + anel * 0.5 + pisca) * env
+    return G, H
+
+
 def renascer(T, t, rng):
     """Renascer: brasas giram e se juntam no corpo caído, sobem numa coluna de fogo e um par de
     asas de chama se abre para o alto, soltando penas de brasa."""
@@ -712,6 +738,7 @@ def brasas_renascendo(T, t, rng):
 REGISTRO = [
     ("ressurreicao", ressurreicao, GRANDE, "feixe de luz que levanta o aliado caído", False),
     ("renascer", renascer, GRANDE, "asas de fogo: renasce das cinzas", False),
+    ("copia", copia, GRANDE, "linhas de leitura, vírgulas girando e a forma copiada piscando", False),
     ("esquiva", esquiva, GRANDE, "vultos que escapam para os lados e riscos de vento", False),
     ("ultima_resistencia", ultima_resistencia, GRANDE, "pulso dourado, chão rachando e coluna de luz", False),
     ("sono", sono, GRANDE, "névoa lilás e três Z subindo", False),

@@ -597,6 +597,23 @@
    ],
    "bytes": 37496
   },
+  "copia": {
+   "arquivo": "copia.mp3",
+   "descricao": "família copia",
+   "versoes": [
+    0.0,
+    1.18,
+    2.3999,
+    3.5427
+   ],
+   "duracoes": [
+    1.1,
+    1.1399,
+    1.0628,
+    1.1167
+   ],
+   "bytes": 40656
+  },
   "corrente": {
    "arquivo": "corrente.mp3",
    "descricao": "família corrente",

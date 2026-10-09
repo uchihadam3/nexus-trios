@@ -30,7 +30,7 @@ const pct = (x: number) => `${Math.round(x * 100)}%`;
 /* O que cada Status faz, dito para quem nunca viu o jogo. */
 const FAZ: Record<StatusId, string> = {
   exposed: 'Recebe mais dano de todo mundo enquanto durar.',
-  marked: 'Fica na mira do trio rival: todos miram nele, e os golpes nele atravessam escudo. Não aumenta o dano.',
+  marked: 'Fica na mira do trio rival: todos miram nele. Não aumenta o dano e não passa pelo Escudo — serve para o trio inteiro focar no mesmo alvo. Quem marca escolhe o rival que cai mais rápido.',
   electric: 'Choque: cada golpe que ele recebe empurra a próxima ação dele para trás. Não aumenta o dano.',
   paralyzed: 'Não ataca e o Preparo para de avançar. Perde a vez enquanto durar.',
   protected: 'Recebe menos dano. Com 30% ou mais, o Preparo também não pode ser interrompido.',
@@ -52,6 +52,7 @@ const FAZ: Record<StatusId, string> = {
   frozen: 'Preso no gelo: não age. O próximo golpe direto quebra o gelo e entra mais forte.',
   sleep: 'Dorme: não age. Acorda quando o sono acaba ou quando leva um golpe direto (Queimadura e Veneno não acordam).',
   blind: 'Pode errar o ataque básico: o golpe passa longe e não faz nada.',
+  bomb: 'Uma bomba-relógio grudada no rival: quando o tempo acaba, explode com o dano guardado. Aplicar de novo soma o dano. Purificar desarma.',
   evasion: 'A cada golpe de um rival, uma chance de escapar dele inteiro: nem dano, nem debuff entram. Golpes em todos também podem ser esquivados.',
   barrier: 'Anula os próximos debuffs que um rival tentar pôr nele. Cada debuff anulado gasta uma.',
   provoked: 'Só consegue mirar em quem provocou. Golpes em todos continuam iguais; se quem provocou cair, acaba na hora.',
@@ -78,6 +79,7 @@ const MECANICAS: Termo[] = [
   { id: 'resfriamento', nome: 'Resfriamento', cor: '#9fc3e0', rotulo: 'DESCANSO', texto: 'Depois de usada, a habilidade descansa esse tempo antes de voltar a encher a Carga.' },
   { id: 'usa-quando', nome: 'Usa quando', cor: '#c3a2ff', rotulo: 'CONDIÇÃO', texto: 'Mesmo pronta, a habilidade espera esta situação para sair.' },
   { id: 'proximo-ataque', nome: 'próximo ataque', cor: '#d2f66b', rotulo: 'RITMO', formas: ['próximo ataque'], texto: 'Mexe na vez de agir. Adiantar faz o próximo golpe sair antes; atrasar faz o alvo esperar mais.' },
+  { id: 'copiar', nome: 'Copiar', cor: '#ff5a5a', rotulo: 'USA A DO RIVAL', formas: ['Copia a última habilidade'], texto: 'Copia a última habilidade usada por um rival e a usa do lado de quem copiou, com parte da força (dano, cura e Escudo menores; os Status iguais).', extra: 'Death Note, reviver e a própria cópia não se copiam.' },
   { id: 'ultima-resistencia', nome: 'Última resistência', cor: '#ffd36b', rotulo: 'NÃO CAI NA PRIMEIRA', formas: ['Última resistência'], texto: 'Uma vez por luta, o golpe que derrubaria o personagem o deixa com 1 de Vida e Protegido por alguns segundos.', extra: 'A Death Note não respeita: execução não tem resistência.' },
   { id: 'purificar', nome: 'Purificar', cor: '#bfefff', rotulo: 'TIRA DEBUFFS', formas: ['Purifica', 'Purificado'], texto: 'Tira debuffs de um aliado, os que mais atrapalham primeiro: Paralisado, Silenciado, Preso, Provocado, Confuso, Lento… O número diz quantos saem.', extra: 'Só tira o que já está lá: não protege contra o próximo.' },
   { id: 'dissipar', nome: 'Dissipar', cor: '#c3a6ff', rotulo: 'TIRA BUFFS', formas: ['Dissipa', 'Dissipado'], texto: 'Tira buffs de um rival, os que mais ajudam primeiro: Protegido, Refletir, Vampirismo, Fortalecido, Acelerado… O número diz quantos saem.', extra: 'Não quebra Escudo: o Escudo é outra coisa.' },

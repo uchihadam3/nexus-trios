@@ -29,7 +29,7 @@ CORES = {
     "strengthened": "#ffd166", "weakened": "#b8a2d6", "provoked": "#ff7048",
     "vampirism": "#ff4f6e", "reflect": "#8fd8ff", "thorns": "#9fd65e",
     "poison": "#8fd14f", "bleed": "#e8455a", "cursed": "#a874e8", "frozen": "#9fe3ff", "sleep": "#b9b8ff",
-    "blind": "#e3dcb2", "barrier": "#f5e39a", "evasion": "#c8f7ff",
+    "blind": "#e3dcb2", "barrier": "#f5e39a", "evasion": "#c8f7ff", "bomb": "#ff9d3c",
 }
 
 
@@ -330,13 +330,24 @@ def vulto(d):
         linha(d, [(-0.9, y), (-0.52, y)], 0.1)
 
 
+def bomba(d):
+    """Marca explosiva: bomba redonda com pavio aceso."""
+    circ(d, -0.08, 0.2, 0.62)
+    circ(d, -0.28, 0.0, 0.14, 0)
+    poly(d, [(0.18, -0.38), (0.4, -0.6), (0.52, -0.48), (0.3, -0.26)])
+    linha(d, [(0.46, -0.54), (0.62, -0.78)], 0.08)
+    for k in range(6):
+        a = k * math.pi / 3
+        linha(d, [(0.7 + 0.08 * math.cos(a), -0.86 + 0.08 * math.sin(a)), (0.7 + 0.2 * math.cos(a), -0.86 + 0.2 * math.sin(a))], 0.07)
+
+
 SIMBOLOS = {
     "burning": chama, "confused": espiral, "electric": raio, "exposed": escudo_rachado,
     "haste": setas, "marked": mira, "paralyzed": pausa, "protected": escudo,
     "regen": coracao_mais, "rooted": cadeado, "silenced": balao_riscado, "slow": ampulheta,
     "strengthened": espada, "weakened": lambda d: espada(d, quebrada=True, invertida=True),
     "provoked": raiva, "vampirism": presas, "reflect": espelho, "thorns": espinhos_icone,
-    "poison": frasco, "bleed": gotas, "cursed": coracao_partido, "frozen": floco, "sleep": zz, "blind": olho_riscado, "barrier": cupula, "evasion": vulto,
+    "poison": frasco, "bleed": gotas, "cursed": coracao_partido, "frozen": floco, "sleep": zz, "blind": olho_riscado, "barrier": cupula, "evasion": vulto, "bomb": bomba,
 }
 
 
@@ -385,7 +396,7 @@ NOMES = {
     "electric": "Eletrificado", "silenced": "Silenciado", "strengthened": "Fortalecido", "weakened": "Enfraquecido",
     "provoked": "Provocado", "vampirism": "Vampirismo", "reflect": "Refletir", "thorns": "Espinhos",
     "poison": "Envenenado", "bleed": "Sangrando", "cursed": "Amaldiçoado", "frozen": "Congelado", "sleep": "Dormindo",
-    "blind": "Cego", "barrier": "Barreira", "evasion": "Esquiva",
+    "blind": "Cego", "barrier": "Barreira", "evasion": "Esquiva", "bomb": "Marca explosiva",
 }
 
 

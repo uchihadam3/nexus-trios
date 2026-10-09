@@ -16,7 +16,7 @@ export const statuses: Record<StatusId,{name:string;color:string;stack:'refresh'
   exposed:{name:'Exposto',color:'#ff9475',stack:'add',cap:.65,tone:'negativo',description:'Recebe mais dano.'},
   paralyzed:{name:'Paralisado',color:'#f5d36c',stack:'refresh',cap:1,tone:'negativo',description:'Não age nem avança preparações.'},
   protected:{name:'Protegido',color:'#81dccc',stack:'refresh',cap:.7,tone:'positivo',description:'Reduz dano e resiste a interrupções.'},
-  marked:{name:'Marcado',color:'#fd939b',stack:'refresh',cap:.4,tone:'negativo',description:'Os rivais miram nele, e os golpes nele atravessam escudo.'},
+  marked:{name:'Marcado',color:'#fd939b',stack:'refresh',cap:.4,tone:'negativo',description:'Os rivais miram nele: o trio inteiro foca no marcado.'},
   slow:{name:'Lento',color:'#9da4c9',stack:'refresh',cap:.65,tone:'negativo',description:'Quem tem Lento demora mais para dar o próximo golpe e para preparar as habilidades.'},
   haste:{name:'Acelerado',color:'#d2f66b',stack:'refresh',cap:.8,tone:'positivo',description:'Quem tem Acelerado dá o próximo golpe e prepara as habilidades mais rápido.'},
   confused:{name:'Confuso',color:'#dba0fa',stack:'refresh',cap:1,tone:'negativo',description:'Pode errar a ação normal e atingir a si mesmo.'},
@@ -39,4 +39,5 @@ export const statuses: Record<StatusId,{name:string;color:string;stack:'refresh'
   blind:{name:'Cego',color:'#d8d2b0',stack:'refresh',cap:.6,tone:'negativo',description:'Pode errar o ataque básico.'},
   barrier:{name:'Barreira',color:'#f5e7a1',stack:'add',cap:3,tone:'positivo',description:'Anula os próximos debuffs que receberia.'},
   evasion:{name:'Esquiva',color:'#c8f7ff',stack:'refresh',cap:.6,tone:'positivo',description:'Chance de escapar do golpe inteiro de um rival: dano e debuffs.'},
+  bomb:{name:'Marca explosiva',color:'#ff9d3c',stack:'add',cap:400,tone:'negativo',description:'Explode quando o tempo acaba e causa o dano guardado. Aplicar de novo soma.'},
 };

@@ -58,11 +58,12 @@ describe('Eletrificado', () => {
 });
 
 describe('Marcado', () => {
-  it('não promete dano extra: diz que vira alvo e atravessa o Escudo', async () => {
+  it('não promete dano extra nem atravessar Escudo: só vira o alvo do trio', async () => {
     const { presentStatus } = await import('../src/engine/skill-descriptions');
     const texto = presentStatus('marked', 0.18).summary;
     expect(texto).not.toMatch(/\+\d+% de dano/);
-    expect(texto).toMatch(/atravessam o Escudo/);
+    expect(texto).not.toMatch(/Escudo/);
+    expect(texto).toMatch(/alvo preferencial/);
     expect(valorAtualDoStatus('marked', 0.18)).toBeNull();
   });
 });

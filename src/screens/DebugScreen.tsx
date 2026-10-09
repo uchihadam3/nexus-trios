@@ -8,7 +8,7 @@ import { statuses } from '../data/statuses';
 
 type AtlasTab='skills'|'statuses'|'ui'|'portraits';
 const uiNames:Record<string,string>={ready:'Pronta',cooldown:'Cooldown',charging:'Carregando',preparing:'Preparando',executing:'Executando',buff:'Buff',debuff:'Debuff','tempo-up':'Ação acelerada','tempo-down':'Ação atrasada',interrupt:'Interrupção',history:'Histórico',inspect:'Inspeção',help:'Ajuda',domain:'Domínio',victory:'Vitória',defeat:'Derrota'};
-const statusNames:Record<string,string>={exposed:'Exposto',paralyzed:'Paralisado',protected:'Protegido',marked:'Marcado',slow:'Lento',haste:'Acelerado',confused:'Confuso',rooted:'Preso',regen:'Regeneração',burning:'Queimando',electric:'Eletrificado',silenced:'Silenciado',strengthened:'Fortalecido',weakened:'Enfraquecido',provoked:'Provocado',vampirism:'Vampirismo',reflect:'Refletir',thorns:'Espinhos',poison:'Envenenado',bleed:'Sangrando',cursed:'Amaldiçoado',frozen:'Congelado',sleep:'Dormindo',blind:'Cego',barrier:'Barreira',evasion:'Esquiva'};
+const statusNames:Record<string,string>={exposed:'Exposto',paralyzed:'Paralisado',protected:'Protegido',marked:'Marcado',slow:'Lento',haste:'Acelerado',confused:'Confuso',rooted:'Preso',regen:'Regeneração',burning:'Queimando',electric:'Eletrificado',silenced:'Silenciado',strengthened:'Fortalecido',weakened:'Enfraquecido',provoked:'Provocado',vampirism:'Vampirismo',reflect:'Refletir',thorns:'Espinhos',poison:'Envenenado',bleed:'Sangrando',cursed:'Amaldiçoado',frozen:'Congelado',sleep:'Dormindo',blind:'Cego',barrier:'Barreira',evasion:'Esquiva',bomb:'Marca explosiva'};
 export function DebugScreen(){
   const [left,setLeft]=useState(['light','pikachu','wolverine']);
   const [right,setRight]=useState(['thanos','gojo','superman']);

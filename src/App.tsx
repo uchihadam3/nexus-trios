@@ -212,6 +212,10 @@ export default function App(){
           // parte 5: errou, a Barreira anulou, e o som de cada Status novo ao entrar
           const errou=d.active.events.find(e=>e.kind==='miss');
           if(errou)battleAudio.sound(errou.label==='Esquivou'?'esquiva':'errou',PRIORIDADE.importante,0,errou.id,0);
+          const copiou=d.active.events.find(e=>e.kind==='copy');
+          if(copiou)battleAudio.sound('copia',PRIORIDADE.importante,0,copiou.id,0);
+          const bum=d.active.events.find(e=>e.kind==='damage'&&e.label==='Explosão');
+          if(bum)battleAudio.sound('explosao',PRIORIDADE.importante,0,bum.id,0);
           const anulou=d.active.events.find(e=>e.kind==='resist');
           if(anulou)battleAudio.sound(anulou.label==='Última resistência'?'ultima-resistencia':'barreira-anula',PRIORIDADE.importante,0,anulou.id,.08);
           const SOM_DO_STATUS:Record<string,string>={poison:'veneno',bleed:'sangue',cursed:'maldicao',frozen:'bloco-de-gelo',sleep:'sono',blind:'cegueira',barrier:'barreira-magica'};

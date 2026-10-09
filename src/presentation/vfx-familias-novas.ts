@@ -137,6 +137,7 @@ export const FAMILIAS_NOVAS = {
   lanche: n({ nome: 'Lanche', grupo: 'apoio', impacto: 'lanche', escala: 1.8, tempo: 0.95, cor: '#ffcf8a', tinta: 'fixa' }),
   ressurreicao: n({ nome: 'Ressurreição', grupo: 'apoio', impacto: 'ressurreicao', escala: 2.4, tempo: 1.0, cor: '#ffe08a', tinta: 'fixa' }),
   renascer: n({ nome: 'Renascer', grupo: 'elemento', impacto: 'renascer', escala: 2.5, tempo: 1.0, cor: '#ff9a3a', tinta: 'fixa' }),
+  copia: n({ nome: 'Copiar', grupo: 'apoio', impacto: 'copia', escala: 1.9, tempo: 1.0, cor: '#ff5a5a', tinta: 'fixa' }),
   esquiva: n({ nome: 'Esquiva', grupo: 'apoio', impacto: 'esquiva', escala: 1.8, tempo: 1.0, cor: '#c8f7ff', tinta: 'fixa' }),
   ultima_resistencia: n({ nome: 'Última resistência', grupo: 'apoio', impacto: 'ultima_resistencia', escala: 2.2, tempo: 1.0, cor: '#ffd36b', tinta: 'fixa' }),
   sono: n({ nome: 'Sono', grupo: 'apoio', impacto: 'sono', escala: 1.8, tempo: 1.0, cor: '#b9b8ff', tinta: 'fixa' }),
@@ -163,7 +164,7 @@ export type FamiliaNova = keyof typeof FAMILIAS_NOVAS;
 export const SOM_DA_NOVA = (k: FamiliaNova): string => (k === 'transformacao' ? 'transformacao-v2' : k.replace(/_/g, '-'));
 
 /** Estas acontecem no alvo, sem nada voando até ele. */
-export const NOVAS_NO_ALVO = new Set<FamiliaNova>(['ressurreicao', 'renascer', 'brasas_renascendo', 'provocar', 'esquiva', 'ultima_resistencia', 'sono', 'cegueira', 'dissipar', 'reflexo', 'espinhos', 'vampirismo', 'olho', 'hipnose', 'relogio', 'runas', 'sarcofago', 'encanto', 'caveira', 'clones',
+export const NOVAS_NO_ALVO = new Set<FamiliaNova>(['ressurreicao', 'renascer', 'brasas_renascendo', 'provocar', 'copia', 'esquiva', 'ultima_resistencia', 'sono', 'cegueira', 'dissipar', 'reflexo', 'espinhos', 'vampirismo', 'olho', 'hipnose', 'relogio', 'runas', 'sarcofago', 'encanto', 'caveira', 'clones',
   'teleporte', 'fenda', 'sorte', 'confusao', 'pentagrama', 'invocacao', 'lua_vermelha', 'susanoo', 'dominio', 'desintegrar', 'buraco_negro',
   'gravidade', 'cosmico', 'tempestade', 'raio_divino', 'chuva_de_meteoros', 'lua', 'marca', 'silencio', 'medo', 'exposto', 'lentidao', 'enfraquecimento']);
 

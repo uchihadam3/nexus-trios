@@ -29,7 +29,7 @@ export type Identidade =
   | 'Tanque' | 'Sobrevivência' | 'Proteção' | 'Cura' | 'Regeneração'
   | 'Controle' | 'Interrupção' | 'Ritmo' | 'Suporte' | 'Carga'
   | 'Buff' | 'Debuff' | 'Virada' | 'Preparação' | 'Transformação'
-  | 'Contra-ataque' | 'Especialista' | 'Reviver' | 'Renascer' | 'Provocar' | 'Roubo de vida' | 'Refletir' | 'Espinhos' | 'Purificar' | 'Dissipar' | 'Veneno' | 'Sangramento' | 'Maldição' | 'Congelar' | 'Sono' | 'Cegueira' | 'Barreira' | 'Esquiva' | 'Última resistência';
+  | 'Contra-ataque' | 'Especialista' | 'Reviver' | 'Renascer' | 'Provocar' | 'Roubo de vida' | 'Refletir' | 'Espinhos' | 'Purificar' | 'Dissipar' | 'Veneno' | 'Sangramento' | 'Maldição' | 'Congelar' | 'Sono' | 'Cegueira' | 'Barreira' | 'Esquiva' | 'Última resistência' | 'Marca explosiva' | 'Copiar';
 
 /*
  * A taxonomia da direção tinha 23 termos. Este arquivo tem 22.
@@ -72,6 +72,8 @@ export const explicacaoDaIdentidade: Record<Identidade, string> = {
   'Congelar': 'Congela: o rival não age, e o golpe que quebra o gelo entra mais forte.',
   'Sono': 'Faz dormir: o rival não age até acordar com um golpe.',
   'Cegueira': 'Cega: o rival erra parte dos ataques básicos.',
+  'Marca explosiva': 'Gruda bombas-relógio nos rivais: quando o tempo acaba, explodem (e somam).',
+  'Copiar': 'Copia a última habilidade usada por um rival e a usa contra o trio dele.',
   'Esquiva': 'Escapa de golpes: com Esquiva, parte dos golpes dos rivais passa longe (dano e debuff).',
   'Última resistência': 'Uma vez por luta, o golpe que o derrubaria o deixa de pé com 1 de Vida.',
   'Barreira': 'Põe Barreira no trio: o próximo debuff de um rival não entra.',
@@ -86,7 +88,7 @@ export const explicacaoDaIdentidade: Record<Identidade, string> = {
 
 /** A ordem em que as identidades aparecem, quando o personagem tem várias. */
 export const ordemDasIdentidades: readonly Identidade[] = [
-  'Pressão', 'Explosão', 'Área', 'Dano contínuo', 'Finalização',
+  'Copiar', 'Marca explosiva', 'Pressão', 'Explosão', 'Área', 'Dano contínuo', 'Finalização',
   'Congelar', 'Sono', 'Cegueira', 'Controle', 'Interrupção', 'Veneno', 'Sangramento', 'Maldição', 'Debuff', 'Dissipar', 'Ritmo',
   'Reviver', 'Purificar', 'Barreira', 'Cura', 'Proteção', 'Buff', 'Carga', 'Suporte',
   'Esquiva', 'Última resistência', 'Provocar', 'Refletir', 'Espinhos', 'Roubo de vida', 'Renascer', 'Tanque', 'Regeneração', 'Sobrevivência',
@@ -97,7 +99,7 @@ export const ordemDasIdentidades: readonly Identidade[] = [
 export const familiaDaIdentidade: Record<Identidade, 'ataque' | 'atrapalha' | 'ajuda' | 'aguenta' | 'jeito'> = {
   'Pressão': 'ataque', 'Explosão': 'ataque', 'Área': 'ataque', 'Dano contínuo': 'ataque', 'Finalização': 'ataque',
   'Controle': 'atrapalha', 'Interrupção': 'atrapalha', 'Debuff': 'atrapalha', 'Ritmo': 'atrapalha',
-  'Reviver': 'ajuda', 'Purificar': 'ajuda', 'Dissipar': 'atrapalha', 'Barreira': 'ajuda', 'Esquiva': 'aguenta', 'Última resistência': 'aguenta', 'Veneno': 'atrapalha', 'Sangramento': 'atrapalha', 'Maldição': 'atrapalha', 'Congelar': 'atrapalha', 'Sono': 'atrapalha', 'Cegueira': 'atrapalha', 'Renascer': 'aguenta', 'Provocar': 'aguenta', 'Refletir': 'aguenta', 'Espinhos': 'aguenta', 'Roubo de vida': 'aguenta', 'Cura': 'ajuda', 'Proteção': 'ajuda', 'Buff': 'ajuda', 'Carga': 'ajuda', 'Suporte': 'ajuda',
+  'Reviver': 'ajuda', 'Purificar': 'ajuda', 'Dissipar': 'atrapalha', 'Barreira': 'ajuda', 'Esquiva': 'aguenta', 'Marca explosiva': 'ataque', 'Copiar': 'ataque', 'Última resistência': 'aguenta', 'Veneno': 'atrapalha', 'Sangramento': 'atrapalha', 'Maldição': 'atrapalha', 'Congelar': 'atrapalha', 'Sono': 'atrapalha', 'Cegueira': 'atrapalha', 'Renascer': 'aguenta', 'Provocar': 'aguenta', 'Refletir': 'aguenta', 'Espinhos': 'aguenta', 'Roubo de vida': 'aguenta', 'Cura': 'ajuda', 'Proteção': 'ajuda', 'Buff': 'ajuda', 'Carga': 'ajuda', 'Suporte': 'ajuda',
   'Tanque': 'aguenta', 'Regeneração': 'aguenta', 'Sobrevivência': 'aguenta',
   'Transformação': 'jeito', 'Contra-ataque': 'jeito', 'Preparação': 'jeito', 'Virada': 'jeito', 'Especialista': 'jeito',
 };
@@ -189,6 +191,8 @@ export const guiaDaIdentidade: Record<Identidade, GuiaDaIdentidade> = {
   'Congelar': { naLuta: ['O rival fica preso no gelo e não age.', 'O golpe que quebra o gelo entra mais forte: guarde o golpe grande para ele.'], combina: ['Explosão', 'Finalização'], cuidado: 'Qualquer golpe direto quebra o gelo: golpes fracos desperdiçam o bônus.' },
   'Sono': { naLuta: ['O rival dorme e não age até acordar.', 'Dura mais que o gelo, mas qualquer golpe direto acorda.'], combina: ['Dano contínuo', 'Preparação'], cuidado: 'Bater em quem dorme acorda: Queimadura e Veneno não acordam.' },
   'Cegueira': { naLuta: ['O rival erra parte dos ataques básicos.', 'Atrapalha quem vive de golpe básico rápido.'], combina: ['Tanque', 'Provocar'], cuidado: 'Não atrapalha as habilidades.' },
+  'Marca explosiva': { naLuta: ['Gruda uma bomba-relógio no rival: quando o tempo acaba, explode com o dano guardado.', 'Várias marcas no mesmo rival somam numa explosão maior.'], combina: ['Controle', 'Provocar'], cuidado: 'Purificar desarma a bomba antes de explodir.' },
+  'Copiar': { naLuta: ['Copia a última habilidade usada por um rival e a usa do lado dele, com parte da força.', 'Contra rivais de golpe grande, devolve o golpe grande.'], combina: ['Interrupção', 'Controle'], cuidado: 'Precisa que um rival use uma habilidade antes: no começo da luta, não tem o que copiar.' },
   'Esquiva': { naLuta: ['Com Esquiva, parte dos golpes dos rivais passa longe: nem dano, nem debuff entram.', 'Vale contra golpes em todos também.'], combina: ['Provocar', 'Pressão'], cuidado: 'É sorte: um golpe grande que acerta dói igual. Dissipar tira a Esquiva.' },
   'Última resistência': { naLuta: ['O golpe que o derrubaria o deixa com 1 de Vida e Protegido por um instante.', 'Uma vez por luta.'], combina: ['Cura', 'Regeneração'], cuidado: 'Com 1 de Vida, qualquer coisa derruba: precisa de cura logo. A Death Note não respeita.' },
   'Barreira': { naLuta: ['O próximo debuff de um rival não entra no aliado.', 'Cada debuff anulado gasta uma Barreira.'], combina: ['Tanque', 'Controle'], cuidado: 'Não segura dano: só Status.' },

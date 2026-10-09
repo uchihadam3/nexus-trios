@@ -108,3 +108,26 @@ describe('debuff miúdo saiu e cada um tem a sua marca', () => {
     }
   });
 });
+
+describe('Marcado (regra nova)', () => {
+  it('não passa pelo Escudo', () => {
+    const b = createBattle(['goku', 'naruto', 'sakura'], ['vegeta', 'hulk', 'thor'], 31);
+    const goku = quem(b, 'goku'), vegeta = quem(b, 'vegeta');
+    vegeta.statuses.push(st('marked', 0.2, 8, goku.uid));
+    vegeta.shields.push({ amount: 500, remaining: 9, source: vegeta.uid });
+    const vida = vegeta.hp;
+    applyEffects(b, goku, [vegeta], [{ kind: 'damage', value: 100 }]);
+    expect(vegeta.hp).toBe(vida);
+    expect(vegeta.shields[0]!.amount).toBeLessThan(500);
+  });
+
+  it('quem marca escolhe o rival que cai mais rápido e evita quem já está marcado', async () => {
+    const { targets } = await import('../src/engine/battle');
+    const b = createBattle(['goku', 'naruto', 'sakura'], ['vegeta', 'hulk', 'thor'], 31);
+    const goku = quem(b, 'goku'), hulk = quem(b, 'hulk'), thor = quem(b, 'thor');
+    hulk.hp = 200;
+    expect(targets(b, goku, 'enemyStrong', [{ kind: 'status', status: 'marked', value: 0.2, duration: 8 }]).map((f) => f.uid)).toEqual([hulk.uid]);
+    hulk.statuses.push(st('marked', 0.2, 8, goku.uid)); thor.hp = 400;
+    expect(targets(b, goku, 'enemyStrong', [{ kind: 'status', status: 'marked', value: 0.2, duration: 8 }]).map((f) => f.uid)).toEqual([thor.uid]);
+  });
+});

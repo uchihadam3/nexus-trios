@@ -52,6 +52,20 @@ export function targets(b:Battle,actor:Fighter,rule:Target,effects:Effect[]=[],r
       return [];
     }
   }
+  /*
+   * Marcar com cabeça (pedido do jogador): a marca vai no rival que o trio
+   * derruba mais rápido (menos Vida + Escudo), quem já está marcado fica por
+   * último, e no empate vai no mais perigoso. Marcar o rival errado é jogar a
+   * marca fora: o trio inteiro vai mirar nele.
+   */
+  const marcaComCabeca=rule!=='allyWeak'&&rule!=='enemyCast'&&rule!=='randomEnemy'&&effects.some(e=>e.kind==='status'&&e.status==='marked');
+  if(marcaComCabeca){
+    const vivos=enemies.filter(alive);
+    if(vivos.length){
+      const custo=(x:Fighter)=>x.hp+x.shields.reduce((n,s)=>n+s.amount,0)+(intensity(x,'marked')>0?10000:0)-byId[x.characterId].power*.01;
+      return [vivos.reduce((a,z)=>custo(z)<custo(a)?z:a)];
+    }
+  }
   // Provocado: todo golpe de um alvo vai em quem provocou, enquanto ele estiver de pé
   const provocador=rule!=='allyWeak'&&rule!=='enemyCast'?quemProvocou(b,actor):undefined;
   if(provocador)return [provocador];
@@ -154,7 +168,7 @@ function trigger(b:Battle,f:Fighter,topic:Topic,source?:Fighter,amount=1){
  * Cada Status de "apanhar mais" faz uma coisa diferente (pedido do jogador:
  * três Status que só davam dano extra não faziam sentido):
  *   Exposto      — recebe mais dano (o único que aumenta o dano);
- *   Marcado      — os golpes nele atravessam escudo (e os rivais miram nele, targeting.ts);
+ *   Marcado      — só marca: os rivais miram nele (targeting.ts); quem marca escolhe o alvo (marcaComCabeca);
  *   Eletrificado — choque: cada golpe recebido atrasa a próxima ação dele.
  */
 /*
@@ -175,9 +189,9 @@ function trigger(b:Battle,f:Fighter,topic:Topic,source?:Fighter,amount=1){
  * está travado volta a agir antes de quem só está mais lento). Dissipar tira
  * dos rivais os buffs que mais ajudam primeiro. `value` é quantos Status saem.
  */
-export const ORDEM_DA_PURIFICACAO:StatusId[]=['paralyzed','frozen','sleep','silenced','rooted','provoked','confused','blind','poison','bleed','cursed','slow','burning','exposed','marked','electric','weakened'];
+export const ORDEM_DA_PURIFICACAO:StatusId[]=['paralyzed','frozen','sleep','bomb','silenced','rooted','provoked','confused','blind','poison','bleed','cursed','slow','burning','exposed','marked','electric','weakened'];
 export const ORDEM_DA_DISSIPACAO:StatusId[]=['evasion','barrier','protected','reflect','vampirism','strengthened','haste','thorns','regen'];
-const PESO_DO_DEBUFF:Partial<Record<StatusId,number>>={paralyzed:1,frozen:.9,sleep:.8,silenced:.65,rooted:.7,provoked:.5,confused:.45,blind:.45,poison:.4,bleed:.4,cursed:.4,slow:.4};
+const PESO_DO_DEBUFF:Partial<Record<StatusId,number>>={bomb:.8,paralyzed:1,frozen:.9,sleep:.8,silenced:.65,rooted:.7,provoked:.5,confused:.45,blind:.45,poison:.4,bleed:.4,cursed:.4,slow:.4};
 const PESO_DO_BUFF:Partial<Record<StatusId,number>>={evasion:.5,barrier:.5,protected:.5,reflect:.45,vampirism:.45,strengthened:.4,haste:.4,thorns:.3,regen:.3};
 function quaisSaem(alvo:Fighter,ordem:StatusId[],n:number):StatusId[]{
   const tem=new Set(alvo.statuses.map(s=>s.id));
@@ -190,6 +204,31 @@ function tiraStatus(b:Battle,source:Fighter,alvo:Fighter,kind:'cleanse'|'dispel'
   if(kind==='cleanse')source.stats.buffs=(source.stats.buffs??0)+saem.length*3;else source.stats.debuffs=(source.stats.debuffs??0)+saem.length*3;
   pressure(b,source.side,D.event.statusApplied*.4*saem.length);
   emit(b,{kind,source:source.uid,target:alvo.uid,label:kind==='cleanse'?'Purificado':'Dissipado',value:saem.length,removidos:saem});
+}
+/*
+ * Copiar habilidade: pega a última habilidade que um rival usou e a usa do
+ * lado de quem copiou, com `fracao` da força (dano, cura e Escudo; os Status
+ * vêm iguais). Execução, reviver, investigação, guardar energia e a própria
+ * cópia não se copiam.
+ */
+const NAO_SE_COPIA=new Set<Effect['kind']>(['deathnote','investigate','revive','copy','store','release','lifesteal']);
+export function ultimaHabilidadeRival(b:Battle,f:Fighter):{quem:Fighter;skill:Skill}|undefined{
+  for(let i=b.events.length-1;i>=0;i--){
+    const e=b.events[i]!;
+    if(e.kind!=='skill'||e.skill===undefined)continue;
+    const quem=b.fighters.find(x=>x.uid===e.source);
+    if(!quem||quem.side===f.side)continue;
+    const skill=byId[quem.characterId].skills[e.skill];
+    if(skill&&!skill.effects.some(x=>x.kind==='copy'))return {quem,skill};
+  }
+  return undefined;
+}
+function copia(b:Battle,f:Fighter,fracao:number){
+  const achou=ultimaHabilidadeRival(b,f);if(!achou)return;
+  const effs=achou.skill.effects.filter(e=>!NAO_SE_COPIA.has(e.kind)).map(e=>(e.kind==='damage'||e.kind==='heal'||e.kind==='shield')?{...e,value:e.value*fracao}:e) as Effect[];
+  if(!effs.length)return;
+  emit(b,{kind:'copy',source:f.uid,target:achou.quem.uid,label:`Copiou ${achou.skill.name}`,visual:achou.skill.icon});
+  applyEffects(b,f,targets(b,f,achou.skill.target,effs),effs);
 }
 /* Sangramento: agir abre a ferida — cada ataque básico ou habilidade custa Vida. */
 function sangra(b:Battle,f:Fighter){
@@ -214,7 +253,8 @@ function damage(b:Battle,source:Fighter,target:Fighter,raw:number,direto=true,la
   const beforeProtection=interno?outgoing:outgoing*(1+intensity(target,'exposed'))*(1+gelo);
   const protection=interno?0:intensity(target,'protected');
   let amount=beforeProtection*(1-protection),blocked=beforeProtection-amount;
-  const atravessaEscudo=interno||intensity(target,'marked')>0;
+  // só o que é por dentro (Veneno, Sangramento) passa pelo Escudo; Marcado não atravessa mais (pedido do jogador)
+  const atravessaEscudo=interno;
   if(!atravessaEscudo)for(const s of target.shields){const used=Math.min(s.amount,amount);s.amount-=used;amount-=used;blocked+=used;const owner=b.fighters.find(f=>f.uid===s.source);if(owner&&used>0){owner.stats.protection+=used;pressure(b,owner.side,D.event.usefulProtectionPerFullCondition*clamp(used/target.maxHp));emit(b,{kind:'block',source:owner.uid,target:target.uid,attacker:source.uid,label:'Bloqueio',value:used,visual:'shield'});trigger(b,owner,'protected',owner,used/100);}}
   target.shields=target.shields.filter(s=>s.amount>.01);
   if(protection>0){const owner=b.fighters.find(f=>f.uid===target.statuses.find(s=>s.id==='protected')?.source);if(owner){owner.stats.protection+=beforeProtection*protection;pressure(b,owner.side,D.event.usefulProtectionPerFullCondition*clamp(beforeProtection*protection/target.maxHp));emit(b,{kind:'block',source:owner.uid,target:target.uid,attacker:source.uid,label:'Proteção',value:beforeProtection*protection,visual:'shield'});trigger(b,owner,'protected',owner,beforeProtection*protection/100);}}
@@ -281,6 +321,7 @@ export function applyEffects(b:Battle,source:Fighter,selected:Fighter[],effects:
   };
   for(const effect of effects){
     // Roubo de vida: cura quem age em parte do dano que esta habilidade causou
+    if(effect.kind==='copy'){copia(b,source,effect.value);continue;}
     if(effect.kind==='lifesteal'){healing(b,source,source,(source.stats.damage-danoAntes)*effect.value,'Roubo de vida');continue;}
     const list=effect.target?targets(b,source,effect.target,[effect]):selected;
     if(effect.kind==='release'){
@@ -417,7 +458,7 @@ function skillValue(b:Battle,f:Fighter,s:Skill,selected:Fighter[],intelligence:n
       const folego=f.hp/f.maxHp;
       for(const target of list){if(quemProvocou(b,target)?.uid===f.uid)continue;add('provocar',(6+fragil*18)*folego*tacticalFactor);}
     }else if(effect.kind==='status'){
-      for(const target of list){const existing=target.statuses.find(x=>x.id===effect.status)?.intensity??0;const weight=effect.status==='paralyzed'?1:effect.status==='rooted'?.7:effect.status==='silenced'?.65:effect.status==='slow'?.4:['exposed','marked','electric','burning'].includes(effect.status)?.35:effect.status==='protected'?.5:effect.status==='vampirism'||effect.status==='reflect'?.45:effect.status==='frozen'?.9:effect.status==='sleep'?.75:effect.status==='barrier'?.5:effect.status==='evasion'?.45:['blind','cursed'].includes(effect.status)?.4:effect.status==='poison'||effect.status==='bleed'?.012:effect.status==='thorns'?.02:0;add('efeito de estado',Math.max(0,effect.value-existing)*weight*24*tacticalFactor);}
+      for(const target of list){const existing=target.statuses.find(x=>x.id===effect.status)?.intensity??0;const weight=effect.status==='paralyzed'?1:effect.status==='rooted'?.7:effect.status==='silenced'?.65:effect.status==='slow'?.4:['exposed','marked','electric','burning'].includes(effect.status)?.35:effect.status==='protected'?.5:effect.status==='vampirism'||effect.status==='reflect'?.45:effect.status==='frozen'?.9:effect.status==='sleep'?.75:effect.status==='barrier'?.5:effect.status==='evasion'?.45:['blind','cursed'].includes(effect.status)?.4:effect.status==='poison'||effect.status==='bleed'?.012:effect.status==='bomb'?.0025:effect.status==='thorns'?.02:0;add('efeito de estado',Math.max(0,effect.value-existing)*weight*24*tacticalFactor);}
     }else if(effect.kind==='cleanse'||effect.kind==='dispel'){
       // vale o quanto atrapalhava (ou ajudava) o que vai sair
       const ordem=effect.kind==='cleanse'?ORDEM_DA_PURIFICACAO:ORDEM_DA_DISSIPACAO,peso=effect.kind==='cleanse'?PESO_DO_DEBUFF:PESO_DO_BUFF;
@@ -425,6 +466,8 @@ function skillValue(b:Battle,f:Fighter,s:Skill,selected:Fighter[],intelligence:n
         if((effect.kind==='cleanse')!==(target.side===f.side))continue;
         add(effect.kind==='cleanse'?'purificar':'dissipar',quaisSaem(target,ordem,effect.value).reduce((n,id)=>n+(peso[id]??.3),0)*24*tacticalFactor);
       }
+    }else if(effect.kind==='copy'){
+      if(ultimaHabilidadeRival(b,f))add('copiar habilidade',30*effect.value*tacticalFactor);
     }else if(effect.kind==='lifesteal'){
       // vale mais quanto mais ferido quem rouba está
       add('roubo de vida',effect.value*(1-f.hp/f.maxHp)*40*tacticalFactor);
@@ -461,7 +504,7 @@ function execute(b:Battle,f:Fighter,index:number,selected:Fighter[]){
   emit(b,{kind:'skill',source:f.uid,target:selected[0]?.uid,skill:index,label:s.name,visual:s.icon});
   applyEffects(b,f,selected,s.effects);
   sangra(b,f);
-  const effective=b.events.some(e=>e.id>=eventStart&&(['damage','heal','block','interrupt','ko','synergy','revive','cleanse','dispel'].includes(e.kind)||e.kind==='status'&&e.target!==f.uid));
+  const effective=b.events.some(e=>e.id>=eventStart&&(['damage','heal','block','interrupt','ko','synergy','revive','cleanse','dispel','copy'].includes(e.kind)||e.kind==='status'&&e.target!==f.uid));
   if(effective)pressure(b,f.side,s.preparation>=2.5?D.event.grandSkill:D.event.successfulSkill);
   f.stats.skills++;
   f.skills[index].uses=(f.skills[index].uses??0)+1;
@@ -510,6 +553,8 @@ export function stepBattle(b:Battle,observe?:(snapshot:Battle)=>void):Battle {
       const origin=b.fighters.find(x=>x.uid===s.source)??f;
       if(s.id==='burning')damage(b,origin,f,s.intensity*STEP,false);
       if(s.id==='poison')damage(b,origin,f,s.intensity*STEP,false,'Veneno');
+      // Marca explosiva: quando o tempo acaba, explode com o dano guardado
+      if(s.id==='bomb'&&s.remaining-STEP<=1e-6){s.remaining=0;damage(b,origin,f,Math.min(s.intensity,statuses.bomb.cap),false,'Explosão');if(!alive(f))break;}
       if(s.id==='regen')healing(b,origin,f,s.intensity*STEP);
       s.remaining-=STEP;
     }
