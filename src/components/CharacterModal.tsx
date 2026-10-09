@@ -81,7 +81,7 @@ export function CharacterModal({character:c,onClose}:{character:Character;onClos
     {/* curto: contra o quê ele perde, e por quê em poucas palavras */}
     <section className="fv-fraco" aria-label="Ponto fraco">
       <span className="fv-selo"><TriangleAlert size={13}/>PONTO FRACO</span>
-      <ul>{pontoFraco(c.vulnerability).map(x=>{const Icone=ICONE_DA_FRAQUEZA[x.tipo];return <li key={x.contra}>
+      <ul>{pontoFraco(c.vulnerability,c).map(x=>{const Icone=ICONE_DA_FRAQUEZA[x.tipo];return <li key={x.contra}>
         <span className="fv-fraco-contra"><Icone size={15} strokeWidth={2.4}/>{x.contra}</span>
         <span className="fv-fraco-motivo">{x.motivo}</span>
       </li>;})}</ul>

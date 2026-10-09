@@ -70,14 +70,40 @@ function ajustaRegeneracao(c:Character):Character{
   const skills=c.skills.map(s=>({...s,effects:s.effects.map(ef)})) as Character['skills'],trait={...c.trait,effects:c.trait.effects.map(ef)};
   return {...c,skills,trait,basic:{...c.basic,effects:c.basic.effects.map(ef)}};
 }
-function ajustaForca(c:Character):Character{
+/*
+ * O ajuste de força (src/data/ajuste-de-forca.ts) sem mudar quem o personagem é.
+ *
+ * Antes, o multiplicador ia inteiro para a Vida de todo mundo: o Light (700 de
+ * Vida, um estrategista) chegou a 1.792 e a Anya a 1.965 — viraram tanques.
+ * Pedido do jogador: "um personagem que não é tanque não pode ganhar vida, ele
+ * vira tanque; um tanque pode". Então:
+ * E também: "se o tanque perder muita vida, deixa de ser tanque". A Vida pode
+ * mudar em todos, mas pouco, sem o personagem virar outra coisa:
+ *   - tanque (identidade Tanque, ou entre os 25% com mais Vida de base): a
+ *     Vida sobe até 20% e desce no máximo 15%;
+ *   - os outros: sobe no máximo 10%, desce no máximo 15%, e nunca passa da
+ *     Vida de tanque.
+ * O resto da força vai para o que ele produz (dano, cura, escudo, energia
+ * guardada). A força de um lutador cresce com Vida × produção, então o
+ * produto continua o mesmo: Vida × produção = m².
+ */
+export const VIDA_DO_AJUSTE={tanque:{sobe:.2,desce:.15},outros:{sobe:.1,desce:.15}};
+export const PRODUCAO_MAXIMA_DO_AJUSTE=3.5;
+export function partesDoAjuste(m:number,tanque:boolean,teto=Infinity){
+  const limite=tanque?VIDA_DO_AJUSTE.tanque:VIDA_DO_AJUSTE.outros;
+  const vida=Math.max(1-limite.desce,Math.min(1+limite.sobe,teto,m));
+  return {vida,producao:Math.max(.35,Math.min(PRODUCAO_MAXIMA_DO_AJUSTE,m*m/vida))};
+}
+function ajustaForca(c:Character,tanque:boolean,vidaDeTanque:number):Character{
   const m=AJUSTE_DE_FORCA[c.id]??1,ritmo=AJUSTE_DE_RITMO[c.id]??1;
   if(m===1&&ritmo===1)return c;
-  const ef=(e:Effect):Effect=>e.kind==='damage'||e.kind==='heal'||e.kind==='shield'?{...e,value:Math.round(e.value*m)}:e.kind==='store'?{...e,value:Math.round(e.value*m),cap:Math.round(e.cap*m)}:e;
-  return {...c,hp:Math.round(c.hp*m),interval:Math.round(c.interval*ritmo*100)/100,basic:{...c.basic,effects:c.basic.effects.map(ef)},trait:{...c.trait,effects:c.trait.effects.map(ef)},
+  // quem não é tanque não chega à Vida de tanque
+  const {vida,producao:p}=partesDoAjuste(m,tanque,tanque?Infinity:Math.max(1,(vidaDeTanque-1)/c.hp));
+  const ef=(e:Effect):Effect=>e.kind==='damage'||e.kind==='heal'||e.kind==='shield'?{...e,value:Math.round(e.value*p)}:e.kind==='store'?{...e,value:Math.round(e.value*p),cap:Math.round(e.cap*p)}:e;
+  return {...c,hp:Math.round(c.hp*vida),interval:Math.round(c.interval*ritmo*100)/100,basic:{...c.basic,effects:c.basic.effects.map(ef)},trait:{...c.trait,effects:c.trait.effects.map(ef)},
     skills:c.skills.map(s=>({...s,effects:s.effects.map(ef)})) as Character['skills']};
 }
-export const characters:Character[] = [
+const deBase:Character[] = [
  character({id:'goku',name:'Goku',universe:'Dragon Ball',color:'#f7a25e',symbol:'G',idea:'Quanto mais luta, mais forte fica.',vulnerability:'Grandes preparações expostas a interrupções.',hp:1100,interval:3.8,attack:66,visual:'beam',power:87,tags:['growth','burst'],trait:trait('Além do limite','Cada ação aumenta seu poder em 3%, até 80%.','action',[status('strengthened',.03,120)],'self',0),skills:[
   skill('Kamehameha','beam','Prepara uma onda de 310 de dano.','Tempo + ações', [charge('time',3),charge('action',10)],[damage(310)],{preparation:3,cooldown:5}),
   skill('Kaioken','impact','Acelera suas ações em 35% por 9 s.','Dano recebido', [charge('received',14),charge('time',2)],[status('haste',.35,9,'self')]),
@@ -102,10 +128,10 @@ export const characters:Character[] = [
   skill('Azul','wave','Causa 145 de dano e deixa o alvo lento.','Tempo',timed(5.5),[damage(145),status('slow',.4,7)]),
   skill('Vermelho','beam','Causa 250 de dano e reduz a preparação pela metade.','Dano evitado + tempo',[charge('protected',18),charge('time',3)],[damage(250),interrupt('reduce',.5)],{preparation:1.5}),
   skill('Vazio Infinito','psychic','Paralisa todos por 3 s e causa 150 de dano a cada um.','Tempo + Preparo inimigo',[charge('time',3.4),charge('enemyCast',10)],[status('paralyzed',1,3,'allEnemies'),damage(150,'allEnemies')],{id:'expansão-de-domínio',preparation:5,cooldown:14,target:'allEnemies'})]}),
- character({id:'light',name:'Light Yagami',universe:'Death Note',color:'#dc9393',symbol:'L',idea:'Informação vira execução.',vulnerability:'Pouca Vida. A Death Note tem Preparo longo e pode ser interrompida.',hp:700,interval:4.4,attack:18,visual:'psychic',basicEffects:[{kind:'investigate',value:10}],power:79,tags:['plan','exploit'],deathNoteCompatible:true,trait:trait('Mente calculista','Status negativo aplicado por aliados alimenta a investigação.','negativeStatus',[{kind:'investigate',value:7}],'investigated',2),skills:[
-  skill('Investigação','psychic','Obtém 32 de Investigação sobre um alvo.','Tempo + Status negativo',[charge('time',6),charge('negativeStatus',10)],[{kind:'investigate',value:32}],{target:'investigated',cooldown:1}),
+ character({id:'light',name:'Light Yagami',universe:'Death Note',color:'#dc9393',symbol:'L',idea:'Informação vira execução.',vulnerability:'Pouca Vida. A Death Note tem Preparo longo e pode ser interrompida.',hp:700,interval:4.4,attack:18,visual:'psychic',basicEffects:[{kind:'investigate',value:20}],power:79,tags:['plan','exploit'],deathNoteCompatible:true,trait:trait('Mente calculista','Status negativo aplicado por aliados alimenta a investigação.','negativeStatus',[{kind:'investigate',value:15}],'investigated',2),skills:[
+  skill('Investigação','psychic','Obtém 50 de Investigação sobre um alvo.','Tempo + Status negativo',[charge('time',6),charge('negativeStatus',10)],[{kind:'investigate',value:50}],{target:'investigated',cooldown:1}),
   skill('Tudo conforme o plano','psychic','Marca e enfraquece o alvo investigado.','Ações + preparações inimigas',[charge('action',15),charge('enemyCast',20),charge('time',2)],[status('marked',.15,12),status('weakened',.2,12)],{target:'investigated'}),
-  skill('Death Note','psychic','Investiga até descobrir se o alvo pode ser eliminado.','Tempo + Status negativo',[charge('time',4),charge('negativeStatus',8)],[{kind:'deathnote',value:100}],{condition:'investigated',target:'investigated',preparation:5.5,cooldown:15,priority:4})]}),
+  skill('Death Note','psychic','Investiga até descobrir se o alvo pode ser eliminado.','Tempo + Status negativo',[charge('time',6),charge('negativeStatus',12)],[{kind:'deathnote',value:100}],{condition:'investigated',target:'investigated',preparation:5.5,cooldown:15,priority:4})]}),
  character({id:'pikachu',name:'Pikachu',universe:'Pokémon',color:'#eddb76',symbol:'ϟ',idea:'Interrompe planos com eletricidade.',vulnerability:'Pouca Vida contra explosões de dano.',hp:760,interval:2.1,attack:40,visual:'bolt',power:78,tags:['control','tempo'],trait:trait('Estática','Quem o atinge pode ficar eletrificado.','received',[status('electric',.12,6)],'enemyStrong',5),skills:[
   skill('Choque do Trovão','bolt','Causa 145 de dano e eletrifica.','Ações',[charge('action',25),charge('time',2)],[damage(145),status('electric',.15,9)]),
   skill('Onda de Choque','bolt','Cancela uma preparação e paralisa por 1,4 s.','Preparação inimiga + tempo',[charge('enemyCast',45),charge('time',4)],[interrupt(),status('paralyzed',1,1.4)],{target:'enemyCast',condition:'enemyCast',priority:6}),
@@ -175,8 +201,17 @@ export const characters:Character[] = [
   skill('Joia do Tempo','wave','Retarda todos e reduz preparações pela metade.','Preparações inimigas + tempo',[charge('enemyCast',22),charge('time',3)],[status('slow',.4,8,'allEnemies'),{kind:'interrupt',mode:'reduce',value:.5,target:'allEnemies'}],{target:'allEnemies'}),
   skill('Equilíbrio','psychic','Causa 240 de dano a todos e enfraquece por 9 s.','Tempo em luta + dano causado',[charge('survived',2.8),charge('dealt',7)],[damage(240,'allEnemies'),status('weakened',.25,9,'allEnemies')],{preparation:4.5,target:'allEnemies',cooldown:14})]}),
   ...expandedCharacters.map(c=>imagePortraits[c.id]?{...c,portrait:imagePortraits[c.id]}:c),
-] .map(alinharEfeitos).map(ajustaForca).map(ajustaRegeneracao)
+] .map(alinharEfeitos)
  .map(c=>({...c,intelligence:intelligenceFor(c.id,c.tags),
    /* Ponto fraco medido (scripts/escrever-fraquezas.ts): contra o quê ele é ruim e por quê. */
    vulnerability:fraquezas[c.id]??c.vulnerability}));
+/*
+ * Quem é tanque: os 25% com mais Vida de base, mais os que o jogo mostra como
+ * Tanque. A lista é fixa (não lê as etiquetas medidas): se dependesse delas,
+ * medir as etiquetas de novo mudaria a Vida de alguém sem ninguém mexer nele.
+ */
+const VIDA_DE_TANQUE=(()=>{const v=deBase.map(c=>c.hp).sort((a,b)=>a-b);return v[Math.floor(v.length*.75)]!;})();
+const TANQUES_DE_IDENTIDADE=new Set(['piccolo','eren','kaneki','vision','venom','bowser','kirby','donkeykong','ikki','gaara','bobesponja','bebop','mummra','homer']);
+export const TANQUES:ReadonlySet<string>=new Set(deBase.filter(c=>TANQUES_DE_IDENTIDADE.has(c.id)||c.hp>=VIDA_DE_TANQUE).map(c=>c.id));
+export const characters:Character[]=deBase.map(c=>ajustaForca(c,TANQUES.has(c.id),VIDA_DE_TANQUE)).map(ajustaRegeneracao);
 export const byId:Record<string,Character> = Object.fromEntries(characters.map(c=>[c.id,c]));

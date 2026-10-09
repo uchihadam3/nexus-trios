@@ -109,7 +109,7 @@ export function dicasDoDraft(candidatos: string[], time: string[], fora: string[
     const motivos = motivosDe(id, time);
     // um candidato que encaixa mal começa pelo aviso, mesmo tendo alguma combinação
     if (time.length && encaixe < 35) motivos.unshift({ texto: `Encaixa pouco: há opções bem melhores para este trio`, tom: 'alerta', ordem: 99 });
-    const fraco = pontoFraco(byId[id]!.vulnerability)[0];
+    const fraco = pontoFraco(byId[id]!.vulnerability, byId[id])[0];
     const detalhe = fraco ? [...motivos, { texto: `Cuidado: fraco contra ${fraco.contra.toLowerCase()} — ${fraco.motivo.charAt(0).toLowerCase()}${fraco.motivo.slice(1)}`, tom: 'alerta' as const, ordem: 0 }] : motivos;
     const limpa = (l: typeof motivos) => l.map(({ texto, tom }) => ({ texto, tom }));
     return { id, nota: nota(id), encaixe, curtos: limpa(motivos.slice(0, 2)), detalhe: limpa(detalhe) };

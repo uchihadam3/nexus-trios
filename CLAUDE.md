@@ -20,6 +20,17 @@ deixa essa medida velha, e as dicas passam a errar.
 
 `tests/forca-atualizada.test.ts` falha enquanto a medida não for refeita.
 
+4. Conte ao jogador a posição de força de quem mudou, antes e depois (pedido
+   dele): guarde a medida antiga antes de medir
+   (`git show HEAD:src/data/forca-dos-rivais.ts > /tmp/forca-antes.ts`) e rode
+   `npx tsx scripts/comparar-forca.ts /tmp/forca-antes.ts <ids>`.
+
+Vida no equilíbrio: pode mudar em todos, mas pouco, sem o personagem virar
+outra coisa (`partesDoAjuste` em src/data/characters.ts): tanque sobe até 20% e
+desce no máximo 15% (continua tanque); os outros sobem no máximo 10%, descem no
+máximo 15% e nunca chegam à Vida de tanque. O resto vai para dano/cura/escudo
+ou para o próprio kit.
+
 ## Antes de publicar
 
 ```

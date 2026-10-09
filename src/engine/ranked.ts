@@ -9,7 +9,7 @@ import {summarizeBattle,type RunBattleSummary} from './run-summary';
  * 250.7: dificuldade calibrada para quem escolhe bem; luta com tempo máximo (decidida pela Vida).
  *        Cada época tem o seu ranking: a 250.7 começou com Hoje, Semana e Geral vazios.
  * 250.8: Marcado (alvo + atravessa escudo) e Eletrificado (choque que atrasa) deixam de só dar dano extra. */
-export const ENGINE_VERSION='nexus-250.9';
+export const ENGINE_VERSION='nexus-251.0';
 /*
  * A época do ranking: Hoje, Semana e Geral guardam as jornadas de uma época.
  * Muda só quando o jogador quer zerar o ranking (não a cada versão do motor):

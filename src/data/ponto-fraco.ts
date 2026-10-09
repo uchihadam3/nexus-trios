@@ -42,19 +42,25 @@ const CONDICAO: [RegExp, string][] = [
 
 const numero = (s: string) => s.replace(/,0\b/, '');
 
-function motivoDe(tipo: TipoDeFraqueza, texto: string): string {
+/** Os números de agora do personagem (a Vida e o ritmo podem ter mudado no equilíbrio; o texto guardado não). */
+export interface NumerosDoPersonagem { hp: number; interval: number }
+const decimal = (n: number) => numero(String(Math.round(n * 100) / 100).replace('.', ','));
+
+function motivoDe(tipo: TipoDeFraqueza, texto: string, c?: NumerosDoPersonagem): string {
   switch (tipo) {
     case 'interrupcao': {
       const m = /^(.+?) leva ([\d,]+) s de Preparo/.exec(texto);
       return m ? `${m[1]} demora ${numero(m[2]!)} s para sair` : 'Golpe principal demora a sair';
     }
     case 'explosao': {
+      if (c) return `Só ${Math.round(c.hp).toLocaleString('pt-BR')} de Vida`;
       const m = /só ([\d.]+) de Vida/.exec(texto);
       return m ? `Só ${m[1]} de Vida` : 'Pouca Vida';
     }
     case 'area': return 'Sofre junto com o trio todo';
     case 'cura': return 'Bate em um alvo só';
     case 'rapidos': {
+      if (c) return `Ataca só a cada ${decimal(c.interval)} s`;
       const m = /a cada ([\d,]+) s/.exec(texto);
       return m ? `Ataca só a cada ${numero(m[1]!)} s` : 'Ataca devagar';
     }
@@ -75,7 +81,7 @@ function motivoDe(tipo: TipoDeFraqueza, texto: string): string {
 }
 
 /** As fraquezas de um personagem, curtas (no máximo duas, a mais forte primeiro). */
-export function pontoFraco(texto: string): Fraqueza[] {
+export function pontoFraco(texto: string, c?: NumerosDoPersonagem): Fraqueza[] {
   const partes: { cab: string; corpo: string }[] = [];
   let m: RegExpExecArray | null;
   const achados: { cab: string; ini: number; fim: number }[] = [];
@@ -88,7 +94,7 @@ export function pontoFraco(texto: string): Fraqueza[] {
     if (!def) continue;
     const [, tipo, contra] = def;
     if (lista.some((x) => x.contra === contra)) continue;
-    lista.push({ tipo, contra, motivo: motivoDe(tipo, corpo) });
+    lista.push({ tipo, contra, motivo: motivoDe(tipo, corpo, c) });
   }
   if (!lista.length && texto.trim()) {
     // texto antigo, sem os cabeçalhos medidos: a primeira frase, curta
