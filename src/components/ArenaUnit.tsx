@@ -89,6 +89,7 @@ export function ArenaUnit({fighter:f,battle,beat,onInspect,numbers,threatened,li
   const out=f.hp<=0,critical=!out&&f.hp/f.maxHp<=P.criticalCondition;
   // caiu, mas vai renascer: fica em brasas em vez de "fora"
   const renascendo=out&&(f.renascendo??0)>0;
+  const limpo=impacted?[...(beat?.events??[])].reverse().find(e=>revelado(beat!,e)&&e.target===f.uid&&(e.kind==='cleanse'||e.kind==='dispel')):undefined;
   const levantou=impacted?beat?.events.find(e=>revelado(beat,e)&&e.target===f.uid&&e.kind==='revive'):undefined;
   const ring=acting&&!impacted?1:f.action;
   const light=battle.fighters.find(actor=>actor.side!==f.side&&actor.characterId==='light');
@@ -129,6 +130,7 @@ export function ArenaUnit({fighter:f,battle,beat,onInspect,numbers,threatened,li
           ?<span className="unit-ko unit-renasce" aria-label={`Renascendo em ${Math.ceil(f.renascendo??0)} segundos`}><Flame size={24}/><b>RENASCE</b></span>
           :<span className="unit-ko" aria-label="Fora da luta"><Skull size={26}/><b>FORA</b></span>)}
         {levantou&&<span key={levantou.id} className="discovery-pop revive-pop">{levantou.label}</span>}
+        {limpo&&!levantou&&<span key={`l${limpo.id}`} className={`discovery-pop ${limpo.kind==='cleanse'?'purifica-pop':'dissipa-pop'}`}>{limpo.label}{(limpo.removidos?.length??0)>0&&<> · {limpo.removidos!.map(id=>statuses[id].name).join(', ')}</>}</span>}
         {reagindo&&<span key={`r${reagindo.eventos[0]??0}`} className="reacao-pop"><Zap size={11} strokeWidth={3}/>{reagindo.rotulo??'Reação'}</span>}
         {reagindo&&<span key={`a${reagindo.eventos[0]??0}`} className="reacao-anel" aria-hidden="true"/>}
         {applied&&<span key={applied.id} className="status-pop">{applied.status&&<img src={`/assets/statuses/${applied.status}.png`} alt=""/>}{applied.label}</span>}

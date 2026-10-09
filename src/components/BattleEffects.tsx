@@ -58,7 +58,7 @@ export function BattleEffects({battle,beat,anchors,enabled,reduced,medal=80}:{ba
   const vai=!!beat&&!reduced&&kind!=='cast'&&!!alvoPrincipal&&alvoPrincipal!==beat.event.source&&!!perfil?.travel&&dist>medal*.6;
 
   /* Alvos que recebem impacto: quem levou dano, cura, Escudo ou Status deste beat (até três). */
-  const alvos=beat?[...new Set(beat.events.filter(e=>e.target&&['damage','status','interrupt','shield','heal','ko','block','revive'].includes(e.kind)).map(e=>e.target!))].slice(0,3):[];
+  const alvos=beat?[...new Set(beat.events.filter(e=>e.target&&['damage','status','interrupt','shield','heal','ko','block','revive','cleanse','dispel'].includes(e.kind)).map(e=>e.target!))].slice(0,3):[];
   if(beat&&landed&&!alvos.length&&kind!=='turn'&&kind!=='cast')alvos.push(alvoPrincipal??beat.event.source);
 
   const camada=(nome:string,estilo:Record<string,string|number>,classe:string,key:string)=><span key={key} className={`fxl ${classe}`} style={{'--fx-img':`url(${folha(nome)})`,...estilo} as CSSProperties}/>;
@@ -104,6 +104,8 @@ export function BattleEffects({battle,beat,anchors,enabled,reduced,medal=80}:{ba
       for(const e of beat.events){
         if(!revelado(beat,e))continue;
         if(e.kind==='revive'&&e.target&&e.source!==e.target)sobre(e.target,'ressurreicao',`rev-${id}-${e.target}`,.12);
+        if(e.kind==='cleanse'&&e.target)sobre(e.target,'purificacao',`pur-${id}-${e.id}`,.06);
+        if(e.kind==='dispel'&&e.target)sobre(e.target,'dissipar',`dis-${id}-${e.id}`,.06);
         if(e.kind==='status'&&e.status==='provoked'&&e.target)sobre(e.target,'provocar',`prov-${id}-${e.target}`,.08);
         // o golpe devolvido: o espelho ou os espinhos aparecem em quem devolveu
         if(e.kind==='damage'&&e.label==='Refletido')sobre(e.source,'reflexo',`refl-${id}-${e.id}`,0);

@@ -22,6 +22,8 @@ export interface BeatTrace {eventId:number;kind:BattleEvent['kind'];duration:num
 export function familyOf(event:BattleEvent,battle:Battle):Family {
   if(event.kind==='ko'||event.kind==='turn'||event.kind==='interrupt')return event.kind;
   if(event.kind==='heal'||event.kind==='revive')return 'heal';
+  if(event.kind==='cleanse')return 'buff';
+  if(event.kind==='dispel')return 'debuff';
   if(event.kind==='shield'||event.kind==='block')return 'shield';
   if(event.status){if(event.status==='regen')return 'regen';if(event.status==='burning')return 'fire';if(['haste','strengthened','protected'].includes(event.status))return 'buff';if(['rooted','paralyzed'].includes(event.status))return 'prison';return 'debuff';}
   const f=battle.fighters.find(f=>f.uid===event.source),c=f?byId[f.characterId]:null;
@@ -191,11 +193,16 @@ export function visivelNaEtapa(beat:Beat,etapa:number):Battle{
     }
     f.shields=escudos.filter(s=>s.amount>.01);
     const statuses=structuredClone(antes.statuses);
-    for(const e of meus)if(e.kind==='status'&&e.status){
-      const novo=f.statuses.find(s=>s.id===e.status);const k=statuses.findIndex(s=>s.id===e.status);
-      if(novo){if(k>=0)statuses[k]=structuredClone(novo);else statuses.push(structuredClone(novo));}
+    let vistos2=statuses;
+    for(const e of meus){
+      if(e.kind==='status'&&e.status){
+        const novo=f.statuses.find(s=>s.id===e.status);const k=vistos2.findIndex(s=>s.id===e.status);
+        if(novo){if(k>=0)vistos2[k]=structuredClone(novo);else vistos2.push(structuredClone(novo));}
+      }
+      // Purificar/Dissipar: os Status somem no passo em que saíram
+      if((e.kind==='cleanse'||e.kind==='dispel')&&e.removidos)vistos2=vistos2.filter(s=>!e.removidos!.includes(s.id));
     }
-    f.statuses=statuses;
+    f.statuses=vistos2;
     const cargaVista=vistos.some(e=>(e.kind==='charge'&&e.target===f.uid)||(e.kind==='ready'&&e.source===f.uid));
     if(!cargaVista)f.skills=f.skills.map((s,k)=>({...s,charge:antes.skills[k]?.charge??s.charge}));
     if(!meus.some(e=>e.kind==='interrupt'||e.kind==='ko'))f.cast=structuredClone(antes.cast);

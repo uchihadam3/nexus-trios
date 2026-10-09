@@ -137,6 +137,7 @@ export const FAMILIAS_NOVAS = {
   lanche: n({ nome: 'Lanche', grupo: 'apoio', impacto: 'lanche', escala: 1.8, tempo: 0.95, cor: '#ffcf8a', tinta: 'fixa' }),
   ressurreicao: n({ nome: 'Ressurreição', grupo: 'apoio', impacto: 'ressurreicao', escala: 2.4, tempo: 1.0, cor: '#ffe08a', tinta: 'fixa' }),
   renascer: n({ nome: 'Renascer', grupo: 'elemento', impacto: 'renascer', escala: 2.5, tempo: 1.0, cor: '#ff9a3a', tinta: 'fixa' }),
+  dissipar: n({ nome: 'Dissipar', grupo: 'apoio', impacto: 'dissipar', escala: 1.9, tempo: 1.0, cor: '#c3a6ff', tinta: 'fixa' }),
   reflexo: n({ nome: 'Reflexo', grupo: 'apoio', impacto: 'reflexo', escala: 1.8, tempo: 1.0, cor: '#9fdcff', tinta: 'fixa' }),
   espinhos: n({ nome: 'Espinhos', grupo: 'apoio', impacto: 'espinhos', escala: 1.8, tempo: 1.0, cor: '#a6d36a', tinta: 'fixa' }),
   vampirismo: n({ nome: 'Vampirismo', grupo: 'apoio', impacto: 'vampirismo', escala: 1.8, tempo: 1.0, cor: '#ff4f6e', tinta: 'fixa' }),
@@ -158,7 +159,7 @@ export type FamiliaNova = keyof typeof FAMILIAS_NOVAS;
 export const SOM_DA_NOVA = (k: FamiliaNova): string => (k === 'transformacao' ? 'transformacao-v2' : k.replace(/_/g, '-'));
 
 /** Estas acontecem no alvo, sem nada voando até ele. */
-export const NOVAS_NO_ALVO = new Set<FamiliaNova>(['ressurreicao', 'renascer', 'brasas_renascendo', 'provocar', 'reflexo', 'espinhos', 'vampirismo', 'olho', 'hipnose', 'relogio', 'runas', 'sarcofago', 'encanto', 'caveira', 'clones',
+export const NOVAS_NO_ALVO = new Set<FamiliaNova>(['ressurreicao', 'renascer', 'brasas_renascendo', 'provocar', 'dissipar', 'reflexo', 'espinhos', 'vampirismo', 'olho', 'hipnose', 'relogio', 'runas', 'sarcofago', 'encanto', 'caveira', 'clones',
   'teleporte', 'fenda', 'sorte', 'confusao', 'pentagrama', 'invocacao', 'lua_vermelha', 'susanoo', 'dominio', 'desintegrar', 'buraco_negro',
   'gravidade', 'cosmico', 'tempestade', 'raio_divino', 'chuva_de_meteoros', 'lua', 'marca', 'silencio', 'medo', 'exposto', 'lentidao', 'enfraquecimento']);
 

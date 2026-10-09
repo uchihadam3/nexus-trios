@@ -784,6 +784,23 @@
    ],
    "bytes": 14398
   },
+  "dissipar": {
+   "arquivo": "dissipar.mp3",
+   "descricao": "família dissipar",
+   "versoes": [
+    0.0,
+    1.28,
+    2.6035,
+    3.8429
+   ],
+   "duracoes": [
+    1.2,
+    1.2435,
+    1.1594,
+    1.2183
+   ],
+   "bytes": 51100
+  },
   "distorcao": {
    "arquivo": "distorcao.mp3",
    "descricao": "distorção",

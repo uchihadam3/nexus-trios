@@ -168,6 +168,29 @@ function trigger(b:Battle,f:Fighter,topic:Topic,source?:Fighter,amount=1){
  *   Espinhos (em quem apanha): quem bate leva um dano fixo por golpe.
  * O Roubo de vida é da habilidade (`lifesteal`, em applyEffects).
  */
+/*
+ * Purificar e Dissipar.
+ *
+ * Purificar tira dos aliados os debuffs que mais atrapalham primeiro (quem
+ * está travado volta a agir antes de quem só está mais lento). Dissipar tira
+ * dos rivais os buffs que mais ajudam primeiro. `value` é quantos Status saem.
+ */
+export const ORDEM_DA_PURIFICACAO:StatusId[]=['paralyzed','silenced','rooted','provoked','confused','slow','burning','exposed','marked','electric','weakened'];
+export const ORDEM_DA_DISSIPACAO:StatusId[]=['protected','reflect','vampirism','strengthened','haste','thorns','regen'];
+const PESO_DO_DEBUFF:Partial<Record<StatusId,number>>={paralyzed:1,silenced:.65,rooted:.7,provoked:.5,confused:.45,slow:.4};
+const PESO_DO_BUFF:Partial<Record<StatusId,number>>={protected:.5,reflect:.45,vampirism:.45,strengthened:.4,haste:.4,thorns:.3,regen:.3};
+function quaisSaem(alvo:Fighter,ordem:StatusId[],n:number):StatusId[]{
+  const tem=new Set(alvo.statuses.map(s=>s.id));
+  return [...ordem.filter(id=>tem.has(id)),...[...tem].filter(id=>!ordem.includes(id)&&ordem!==ORDEM_DA_DISSIPACAO&&negativeStatuses.has(id))].slice(0,Math.max(0,Math.round(n)));
+}
+function tiraStatus(b:Battle,source:Fighter,alvo:Fighter,kind:'cleanse'|'dispel',n:number){
+  const ordem=kind==='cleanse'?ORDEM_DA_PURIFICACAO:ORDEM_DA_DISSIPACAO;
+  const saem=quaisSaem(alvo,ordem,n);if(!saem.length)return;
+  alvo.statuses=alvo.statuses.filter(s=>!saem.includes(s.id));
+  if(kind==='cleanse')source.stats.buffs=(source.stats.buffs??0)+saem.length*3;else source.stats.debuffs=(source.stats.debuffs??0)+saem.length*3;
+  pressure(b,source.side,D.event.statusApplied*.4*saem.length);
+  emit(b,{kind,source:source.uid,target:alvo.uid,label:kind==='cleanse'?'Purificado':'Dissipado',value:saem.length,removidos:saem});
+}
 function devolve(b:Battle,dono:Fighter,agressor:Fighter,valor:number,label:'Refletido'|'Espinhos'){
   if(valor<=.01||!alive(agressor))return;
   damage(b,dono,agressor,valor,false,label);
@@ -243,6 +266,8 @@ export function applyEffects(b:Battle,source:Fighter,selected:Fighter[],effects:
       if(!alive(target))continue;
       switch(effect.kind){
         case 'damage':damage(b,source,target,effect.value*fracao);break;
+        case 'cleanse':if(target.side===source.side)tiraStatus(b,source,target,'cleanse',effect.value);break;
+        case 'dispel':if(target.side!==source.side)tiraStatus(b,source,target,'dispel',effect.value);break;
         case 'heal':healing(b,source,target,effect.value);break;
         case 'shield':{
           const existing=target.shields.reduce((n,s)=>n+s.amount,0);
@@ -306,7 +331,7 @@ export function applyEffects(b:Battle,source:Fighter,selected:Fighter[],effects:
  * memória na luta, e olhar não pode mudar a luta.
  */
 export function condicaoAtendida(b:Battle,f:Fighter,s:Skill):boolean{
-  if(s.condition==='always'&&!s.requiresSkills?.length)return true;
+  if(s.condition==='always'&&!s.requiresSkills?.length&&!temReviver(s))return true;
   const copia=structuredClone(b),eu=copia.fighters.find(x=>x.uid===f.uid);
   return !!eu&&appropriate(copia,eu,s);
 }
@@ -349,6 +374,13 @@ function skillValue(b:Battle,f:Fighter,s:Skill,selected:Fighter[],intelligence:n
       for(const target of list){if(quemProvocou(b,target)?.uid===f.uid)continue;add('provocar',(6+fragil*18)*folego*tacticalFactor);}
     }else if(effect.kind==='status'){
       for(const target of list){const existing=target.statuses.find(x=>x.id===effect.status)?.intensity??0;const weight=effect.status==='paralyzed'?1:effect.status==='rooted'?.7:effect.status==='silenced'?.65:effect.status==='slow'?.4:['exposed','marked','electric','burning'].includes(effect.status)?.35:effect.status==='protected'?.5:effect.status==='vampirism'||effect.status==='reflect'?.45:effect.status==='thorns'?.02:0;add('efeito de estado',Math.max(0,effect.value-existing)*weight*24*tacticalFactor);}
+    }else if(effect.kind==='cleanse'||effect.kind==='dispel'){
+      // vale o quanto atrapalhava (ou ajudava) o que vai sair
+      const ordem=effect.kind==='cleanse'?ORDEM_DA_PURIFICACAO:ORDEM_DA_DISSIPACAO,peso=effect.kind==='cleanse'?PESO_DO_DEBUFF:PESO_DO_BUFF;
+      for(const target of list){
+        if((effect.kind==='cleanse')!==(target.side===f.side))continue;
+        add(effect.kind==='cleanse'?'purificar':'dissipar',quaisSaem(target,ordem,effect.value).reduce((n,id)=>n+(peso[id]??.3),0)*24*tacticalFactor);
+      }
     }else if(effect.kind==='lifesteal'){
       // vale mais quanto mais ferido quem rouba está
       add('roubo de vida',effect.value*(1-f.hp/f.maxHp)*40*tacticalFactor);
@@ -384,7 +416,7 @@ function execute(b:Battle,f:Fighter,index:number,selected:Fighter[]){
   const s=byId[f.characterId].skills[index],eventStart=b.nextEvent;
   emit(b,{kind:'skill',source:f.uid,target:selected[0]?.uid,skill:index,label:s.name,visual:s.icon});
   applyEffects(b,f,selected,s.effects);
-  const effective=b.events.some(e=>e.id>=eventStart&&(['damage','heal','block','interrupt','ko','synergy','revive'].includes(e.kind)||e.kind==='status'&&e.target!==f.uid));
+  const effective=b.events.some(e=>e.id>=eventStart&&(['damage','heal','block','interrupt','ko','synergy','revive','cleanse','dispel'].includes(e.kind)||e.kind==='status'&&e.target!==f.uid));
   if(effective)pressure(b,f.side,s.preparation>=2.5?D.event.grandSkill:D.event.successfulSkill);
   f.stats.skills++;
   f.skills[index].uses=(f.skills[index].uses??0)+1;

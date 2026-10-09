@@ -534,6 +534,45 @@ def vampirismo(T, t, rng):
     return G, H
 
 
+def dissipar(T, t, rng):
+    """Dissipar: o anel de proteção em volta do rival aparece, racha em arcos, os pedaços se
+    afastam girando e a energia que ele tinha se desfaz em fagulhas para fora."""
+    G, H = vazio(T)
+    env = apaga(t, 0.65, 1)
+    aparece = janela(t, 0.0, 0.12)
+    racha = rel(t, 0.18, 0.7)
+    abre = ease_out(racha, 2)
+    arcos = []
+    for k in range(6):
+        a0 = k / 6 * TAU + 0.12
+        meio = a0 + TAU / 12
+        r = 0.55 + 0.16 * abre
+        gira = 0.6 * abre * (1 if k % 2 else -1)
+        ox, oy = 0.1 * abre * math.cos(meio), 0.1 * abre * math.sin(meio)
+        larg = 0.07 * (1 - 0.5 * abre)
+        arcos.append((_arco(ox, oy, r, a0 + 0.06 + gira, a0 + TAU / 6 - 0.06 + gira, larg, 16), 1.0 - 0.6 * abre))
+    # runas: pequenos losangos no anel que piscam e apagam quando ele racha
+    runas = []
+    for k in range(6):
+        a = k / 6 * TAU + 0.12 + TAU / 12
+        x, y = 0.55 * math.cos(a), 0.55 * math.sin(a)
+        rr = 0.05
+        runas.append(([(x, y - rr), (x + rr * 0.7, y), (x, y + rr), (x - rr * 0.7, y)], (1 - racha) * aparece))
+    fagulhas = []
+    sub = np.random.default_rng(419)
+    for k in range(22):
+        a = sub.uniform(0, TAU)
+        d = 0.3 + 0.5 * ease_out(rel(t, 0.2, 0.85), 1.6) * sub.uniform(0.6, 1.0)
+        x, y = d * math.cos(a), d * math.sin(a)
+        rr = 0.018
+        fagulhas.append(([(x, y - rr), (x + rr, y), (x, y + rr), (x - rr, y)], pulso(t, 0.2, 0.9)))
+    flash = T.gauss(0, 0, 0.3, 0.3) * pulso(t, 0.16, 0.34) * 1.1
+    A = T.polys(arcos, 0.004) * aparece
+    G += (A * 1.5 + T.polys(runas, 0.003) * 1.4 + T.polys(fagulhas, 0.004) * 1.4 + flash) * env
+    H += (A * 0.7 + T.polys(runas, 0.003) * 1.0 + T.polys(fagulhas, 0.004) * 0.8 + flash) * env
+    return G, H
+
+
 def renascer(T, t, rng):
     """Renascer: brasas giram e se juntam no corpo caído, sobem numa coluna de fogo e um par de
     asas de chama se abre para o alto, soltando penas de brasa."""
@@ -590,6 +629,7 @@ def brasas_renascendo(T, t, rng):
 REGISTRO = [
     ("ressurreicao", ressurreicao, GRANDE, "feixe de luz que levanta o aliado caído", False),
     ("renascer", renascer, GRANDE, "asas de fogo: renasce das cinzas", False),
+    ("dissipar", dissipar, GRANDE, "anel de proteção do rival que racha e se desfaz", False),
     ("reflexo", reflexo, GRANDE, "escudo de espelho hexagonal que devolve o golpe", False),
     ("espinhos", espinhos, GRANDE, "pontas que brotam do corpo e recolhem", False),
     ("vampirismo", vampirismo, GRANDE, "gotas de sangue em espiral e pulso de coração", False),

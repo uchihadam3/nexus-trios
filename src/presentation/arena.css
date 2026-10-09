@@ -137,6 +137,8 @@
 @keyframes renasce-respira{0%,100%{box-shadow:0 0 0 1px #ff8a3a55,0 0 10px #ff6a1a44}50%{box-shadow:0 0 0 2px #ffb05a99,0 0 22px #ff7a2a88}}
 .arena-v2 .unit.is-renascendo .unit-flag.flag-out{background:#3a1606;border-color:#ff9a4a;color:#ffc27a}
 .arena-v2 .unit.is-renascendo .unit-meta span:first-child{color:#ffc27a}
+.arena-v2 .unit .purifica-pop{color:#e8fbff;border-color:#bfefff99;background:#10262ced}
+.arena-v2 .unit .dissipa-pop{color:#e6d6ff;border-color:#b79cff99;background:#1d1530ed}
 .arena-v2 .unit .revive-pop{color:#fff1b8;border-color:#ffd56a99;background:#2e2410ed}
 .arena-v2 .unit.is-revived .medal-frame{animation:revive-brilho .9s ease-out both}
 @keyframes revive-brilho{from{filter:brightness(2.2) saturate(.4)}to{filter:none}}

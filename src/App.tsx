@@ -209,6 +209,8 @@ export default function App(){
           if(provocou)battleAudio.sound('provocar',PRIORIDADE.importante,0,provocou.id,.05);
           // golpe devolvido e vida roubada: o som da mecânica, um pouco depois do golpe
           const mecanica=d.active.events.find(e=>e.kind==='damage'&&(e.label==='Refletido'||e.label==='Espinhos'))??d.active.events.find(e=>e.kind==='heal'&&(e.label==='Vampirismo'||e.label==='Roubo de vida'));
+          const limpeza=d.active.events.find(e=>e.kind==='cleanse'||e.kind==='dispel');
+          if(limpeza)battleAudio.sound(limpeza.kind==='cleanse'?'purificacao':'dissipar',PRIORIDADE.importante,0,limpeza.id,.1);
           if(mecanica)battleAudio.sound(mecanica.label==='Refletido'?'reflexo':mecanica.label==='Espinhos'?'espinhos':'vampirismo',PRIORIDADE.importante,0,mecanica.id,.14);
           const special=d.active.events.find(e=>e.kind==='ko')??d.active.events.find(e=>e.kind==='interrupt')??d.active.events.find(e=>e.kind==='block')??d.active.events.find(e=>e.kind==='turn');
           // eventos que pedem som próprio: interrupção, bloqueio, nocaute, virada; o golpe do beat toca junto

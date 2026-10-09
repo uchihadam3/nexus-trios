@@ -29,7 +29,7 @@ export type Identidade =
   | 'Tanque' | 'Sobrevivência' | 'Proteção' | 'Cura' | 'Regeneração'
   | 'Controle' | 'Interrupção' | 'Ritmo' | 'Suporte' | 'Carga'
   | 'Buff' | 'Debuff' | 'Virada' | 'Preparação' | 'Transformação'
-  | 'Contra-ataque' | 'Especialista' | 'Reviver' | 'Renascer' | 'Provocar' | 'Roubo de vida' | 'Refletir' | 'Espinhos';
+  | 'Contra-ataque' | 'Especialista' | 'Reviver' | 'Renascer' | 'Provocar' | 'Roubo de vida' | 'Refletir' | 'Espinhos' | 'Purificar' | 'Dissipar';
 
 /*
  * A taxonomia da direção tinha 23 termos. Este arquivo tem 22.
@@ -66,6 +66,8 @@ export const explicacaoDaIdentidade: Record<Identidade, string> = {
   'Contra-ataque': 'Apanhar é o que carrega as habilidades dele.',
   'Especialista': 'Só age na situação certa, e aí resolve.',
   'Reviver': 'Levanta um aliado que caiu, uma vez por luta.',
+  'Purificar': 'Tira os debuffs do trio: quem estava travado volta a agir.',
+  'Dissipar': 'Tira os buffs dos rivais: Protegido, Fortalecido, Refletir e companhia somem.',
   'Roubo de vida': 'Os golpes dele curam: parte do dano que causa volta como Vida.',
   'Refletir': 'Devolve parte de cada golpe recebido para quem bateu.',
   'Espinhos': 'Quem bate se fere: cada golpe recebido devolve um dano fixo.',
@@ -76,8 +78,8 @@ export const explicacaoDaIdentidade: Record<Identidade, string> = {
 /** A ordem em que as identidades aparecem, quando o personagem tem várias. */
 export const ordemDasIdentidades: readonly Identidade[] = [
   'Pressão', 'Explosão', 'Área', 'Dano contínuo', 'Finalização',
-  'Controle', 'Interrupção', 'Debuff', 'Ritmo',
-  'Reviver', 'Cura', 'Proteção', 'Buff', 'Carga', 'Suporte',
+  'Controle', 'Interrupção', 'Debuff', 'Dissipar', 'Ritmo',
+  'Reviver', 'Purificar', 'Cura', 'Proteção', 'Buff', 'Carga', 'Suporte',
   'Provocar', 'Refletir', 'Espinhos', 'Roubo de vida', 'Renascer', 'Tanque', 'Regeneração', 'Sobrevivência',
   'Transformação', 'Contra-ataque', 'Preparação', 'Virada', 'Especialista',
 ];
@@ -86,7 +88,7 @@ export const ordemDasIdentidades: readonly Identidade[] = [
 export const familiaDaIdentidade: Record<Identidade, 'ataque' | 'atrapalha' | 'ajuda' | 'aguenta' | 'jeito'> = {
   'Pressão': 'ataque', 'Explosão': 'ataque', 'Área': 'ataque', 'Dano contínuo': 'ataque', 'Finalização': 'ataque',
   'Controle': 'atrapalha', 'Interrupção': 'atrapalha', 'Debuff': 'atrapalha', 'Ritmo': 'atrapalha',
-  'Reviver': 'ajuda', 'Renascer': 'aguenta', 'Provocar': 'aguenta', 'Refletir': 'aguenta', 'Espinhos': 'aguenta', 'Roubo de vida': 'aguenta', 'Cura': 'ajuda', 'Proteção': 'ajuda', 'Buff': 'ajuda', 'Carga': 'ajuda', 'Suporte': 'ajuda',
+  'Reviver': 'ajuda', 'Purificar': 'ajuda', 'Dissipar': 'atrapalha', 'Renascer': 'aguenta', 'Provocar': 'aguenta', 'Refletir': 'aguenta', 'Espinhos': 'aguenta', 'Roubo de vida': 'aguenta', 'Cura': 'ajuda', 'Proteção': 'ajuda', 'Buff': 'ajuda', 'Carga': 'ajuda', 'Suporte': 'ajuda',
   'Tanque': 'aguenta', 'Regeneração': 'aguenta', 'Sobrevivência': 'aguenta',
   'Transformação': 'jeito', 'Contra-ataque': 'jeito', 'Preparação': 'jeito', 'Virada': 'jeito', 'Especialista': 'jeito',
 };
@@ -172,6 +174,8 @@ export const guiaDaIdentidade: Record<Identidade, GuiaDaIdentidade> = {
   'Transformação': { naLuta: ['Muda de forma ou fica mais forte no meio da luta.', 'O começo é mais fraco; o final é o melhor momento.'], combina: ['Tanque', 'Proteção'], cuidado: 'Explosão no começo derruba antes da transformação.' },
   'Contra-ataque': { naLuta: ['Cada golpe que recebe carrega as habilidades dele.', 'Quanto mais apanha, mais rápido revida.'], combina: ['Tanque', 'Regeneração'], cuidado: 'Controle e dano contínuo machucam sem dar Carga a ele.' },
   'Especialista': { naLuta: ['Espera a situação certa para agir.', 'Quando ela aparece, decide a luta.'], combina: ['Suporte', 'Carga'], cuidado: 'Se a situação não aparecer, ele faz pouco.' },
+  'Purificar': { naLuta: ['Tira os debuffs do trio, os que mais atrapalham primeiro: Paralisado, Silenciado, Preso…', 'Quem estava travado volta a agir na hora.'], combina: ['Tanque', 'Provocar'], cuidado: 'Só tira o que já está lá: contra rivais que não põem debuff, vale pouco.' },
+  'Dissipar': { naLuta: ['Tira os buffs dos rivais, os que mais ajudam primeiro: Protegido, Refletir, Vampirismo, Fortalecido…', 'Desmonta a defesa antes do golpe grande do trio.'], combina: ['Explosão', 'Finalização'], cuidado: 'Não quebra Escudo: contra quem só se protege com Escudo, vale pouco.' },
   'Roubo de vida': { naLuta: ['Os golpes curam quem bate: parte do dano volta como Vida.', 'Quanto mais ele acerta, mais tempo fica de pé.'], combina: ['Buff', 'Provocar'], cuidado: 'Se não acerta, não se cura: Lento, Paralisado e Enfraquecido cortam a cura junto com o dano.' },
   'Refletir': { naLuta: ['Cada golpe recebido volta em parte para quem bateu, mesmo se o Escudo segurar.', 'Pune golpes grandes: quanto mais forte o golpe, mais volta.'], combina: ['Provocar', 'Tanque'], cuidado: 'Dura pouco: golpes em todos e Queimadura passam sem voltar.' },
   'Espinhos': { naLuta: ['Quem bate leva um dano fixo a cada golpe.', 'Pune quem bate muitas vezes: golpes rápidos e em área se machucam mais.'], combina: ['Provocar', 'Proteção'], cuidado: 'Um golpe grande e raro quase não sente os espinhos.' },
