@@ -72,6 +72,8 @@
 
 .rs-ranqueada{display:grid;gap:4px;padding:12px 14px;border-radius:16px;background:#101a16;box-shadow:inset 0 0 0 1px #8fd3ff44;font-size:13px}
 .rs-ranqueada strong{font-size:11px;letter-spacing:2px;color:#8fd3ff}
+.rs-ranqueada.fora{box-shadow:inset 0 0 0 1px #ffb86b55}
+.rs-ranqueada.fora strong{color:#ffb86b}
 
 
 

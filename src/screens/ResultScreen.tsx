@@ -140,13 +140,13 @@ export function ResultScreen({run,onNext,onRestart,onAbandon,onHome,onRanking,on
 
     {run.ranked&&fimDaJornada&&<div className="rs-ranqueada" role="status"><strong>RANKING</strong>
       {run.ranked.status==='verified'?<><span>Pontuação validada: <b>{formatarPontos(run.ranked.score??0)}</b></span><span>Posição: hoje #{run.ranked.daily??'—'} · semana #{run.ranked.weekly??'—'} · geral #{run.ranked.season??'—'}</span>{(run.ranked.top3?.temporada??run.ranked.top3?.periodo)&&<AvisoTop3 resultado={(run.ranked.top3?.temporada??run.ranked.top3?.periodo)!}/>}</>
-        :run.ranked.status==='failed'?<><span>Validação pendente: {run.ranked.error}</span>{onRetry&&<button className="secondary" onClick={onRetry}>Tentar validar de novo</button>}</>
+        :run.ranked.status==='failed'?<><span>{/vers[aã]o/i.test(run.ranked.error??'')?'Esta jornada começou numa versão antiga do jogo e não pode entrar no ranking. Atualize o jogo e jogue de novo.':`Validação pendente: ${run.ranked.error}`}</span>{onRetry&&<button className="secondary" onClick={onRetry}>Tentar validar de novo</button>}</>
         :<span>Validando no servidor…</span>}
       {onRanking&&<button className="text-button" onClick={onRanking}>Ver ranking →</button>}</div>}
 
     {proximo&&<div className="rs-proximo"><span>PRÓXIMA LUTA<b>{proximo.name}</b></span><div>{proximo.team.map(id=><Portrait key={id} character={byId[id]} className="tiny"/>)}</div></div>}
     {won&&!champion&&<label className="auto-label rs-auto"><input type="checkbox" checked={auto} onChange={e=>onAuto(e.target.checked)}/>{auto?'Próxima luta em instantes':'Avançar sozinho entre as lutas'}</label>}
-    {fimDaJornada&&onRanking&&!run.ranked&&<button className="secondary rs-ver-ranking" onClick={onRanking}><Trophy size={16}/>Ver o ranking</button>}
+    {fimDaJornada&&!run.ranked&&<div className="rs-ranqueada fora" role="status"><strong>FORA DO RANKING</strong><span>Esta jornada foi jogada sem a conta conectada (ou sem internet ao começar), então não foi para o ranking. Entre na sua conta antes de jogar para as próximas valerem.</span>{onRanking&&<button className="text-button" onClick={onRanking}>Ver o ranking →</button>}</div>}
 
     <footer className="rs-acoes">
       {won&&!champion?<button className="rs-cta" onClick={onNext}><Fx nome="brilho" cor="#ffffff" ms={2600} laco className="rs-brilho"/><span>Próxima luta</span><ArrowRight size={20}/></button>

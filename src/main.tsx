@@ -18,4 +18,18 @@ import './presentation/ficha-v2.css';
 import './presentation/casca-v2.css';
 import './presentation/telas-v2.css';
 createRoot(document.getElementById('root')!).render(<App/>);
-if(import.meta.env.PROD&&'serviceWorker' in navigator)window.addEventListener('load',()=>{void navigator.serviceWorker.register(`${import.meta.env.BASE_URL}sw.js`).catch(()=>undefined);});
+/*
+ * Versão nova do jogo. O service worker novo assume na hora (skipWaiting), mas
+ * a aba aberta continua rodando o código velho até recarregar — e uma jornada
+ * jogada nele não entra no ranking (o servidor só aceita a versão atual). Ao
+ * voltar para a aba, o jogo procura atualização; quando a versão nova assume,
+ * o App mostra "Nova versão · Atualizar".
+ */
+if(import.meta.env.PROD&&'serviceWorker' in navigator)window.addEventListener('load',()=>{
+  const tinha=!!navigator.serviceWorker.controller;
+  navigator.serviceWorker.addEventListener('controllerchange',()=>{if(tinha)window.dispatchEvent(new Event('nexus:versao-nova'));});
+  void navigator.serviceWorker.register(`${import.meta.env.BASE_URL}sw.js`).then(reg=>{
+    document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')void reg.update().catch(()=>undefined);});
+    setInterval(()=>void reg.update().catch(()=>undefined),30*60*1000);
+  }).catch(()=>undefined);
+});

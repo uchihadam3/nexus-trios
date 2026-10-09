@@ -81,3 +81,9 @@
 .info-dialog.gs-aviso .result-actions>*{margin-top:0}
 .info-dialog.gs-aviso .danger{color:#fff;background:linear-gradient(180deg,#ff8a7a,#d9473a);box-shadow:0 6px 18px #d9473a55}
 .info-dialog.gs-aviso .handle-input{width:100%;min-height:52px;margin:8px 0;padding:12px 14px;border:0;border-radius:14px;font-size:17px;text-align:center;color:#fff;background:#0a0f0c;box-shadow:inset 0 0 0 1.5px color-mix(in srgb,var(--tela),transparent 50%)}
+
+/* "Nova versão do jogo · Atualizar" (App.tsx): por cima de tudo, no topo, sem cobrir o conteúdo por muito */
+.versao-nova{position:fixed;z-index:80;left:50%;top:calc(env(safe-area-inset-top) + 10px);transform:translateX(-50%);width:min(440px,calc(100vw - 32px));display:flex;align-items:center;gap:10px;padding:10px 10px 10px 14px;border-radius:16px;background:#14201a;box-shadow:inset 0 0 0 1px #c8f56066,0 12px 28px #000a}
+.versao-nova span{display:grid;gap:2px;flex:1;min-width:0;font-size:13px}
+.versao-nova small{color:#b9c8b4;font-size:12px}
+.versao-nova button{display:inline-flex;align-items:center;gap:6px;min-height:42px;padding:0 14px;flex:none}
