@@ -147,8 +147,9 @@ export default function App(){
       // cada passo da cadeia (depois do golpe) tem o seu som: reação, debuff, buff, cura, escudo
       const ativo=d.active;
       if(ativo?.impacted&&ativo.passos&&ativo.etapa){
-        const visto=passoTocado.current.beat===ativo.event.id?passoTocado.current.passo:1;
-        for(let k=Math.max(2,visto+1);k<=ativo.etapa;k++){
+        const visto=passoTocado.current.beat===ativo.event.id?passoTocado.current.passo:0;
+        // o primeiro passo já tem o som do golpe; um traço sozinho começa direto na reação
+        for(let k=Math.max(ativo.passos[0]?.classe==='reacao'?1:2,visto+1);k<=ativo.etapa;k++){
           const passo=ativo.passos[k-1];if(!passo)continue;
           const eventos=ativo.events.filter(e=>passo.eventos.includes(e.id));
           const som:Sound=passo.classe==='reacao'?'reacao':passo.classe==='rival'?'enfraquecer':eventos.some(e=>e.kind==='heal')?'cura':eventos.some(e=>e.kind==='shield')?'escudo':'reforco';

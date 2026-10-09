@@ -1,5 +1,5 @@
 import { useEffect,useRef,type CSSProperties } from 'react';
-import { X,HeartPulse,Gauge,Brain,Info,Sparkles,Swords,TriangleAlert,Zap,Hourglass,Snowflake,Target } from 'lucide-react';
+import { X,HeartPulse,Gauge,Brain,Info,Sparkles,Swords,TriangleAlert,Zap,Hourglass,Snowflake,Target,Scissors,Bomb,Users,ShieldPlus,FastForward,Flame,Lock,Mountain,Clock,type LucideIcon } from 'lucide-react';
 import type { Character } from '../engine/types';
 import { characters } from '../data/characters';
 import { Portrait } from './Portrait';
@@ -10,6 +10,9 @@ import { identidadesDe } from '../presentation/identities';
 import { IdentityChips } from './IdentityChips';
 import { ComTermos,TermoBotao } from './Termos';
 import { termoPorId } from '../presentation/glossario';
+import { pontoFraco,type TipoDeFraqueza } from '../data/ponto-fraco';
+
+const ICONE_DA_FRAQUEZA:Record<TipoDeFraqueza,LucideIcon>={interrupcao:Scissors,explosao:Bomb,area:Users,cura:ShieldPlus,rapidos:FastForward,continuo:Flame,controle:Lock,tanques:Mountain,longa:Hourglass,momento:Clock,apanhar:Bomb};
 
 export function intelligenceLabel(value:number){
   return value>=95?'Excepcional':value>=80?'Muito inteligente':value>=60?'Esperto':value>=40?'Comum':'Impulsivo';
@@ -75,6 +78,13 @@ export function CharacterModal({character:c,onClose}:{character:Character;onClos
       </div>
     </article>;})}</div>
 
-    <div className="fv-fraco"><TriangleAlert size={18}/><p><strong>Ponto fraco</strong><br/>{c.vulnerability}</p></div>
+    {/* curto: contra o quê ele perde, e por quê em poucas palavras */}
+    <section className="fv-fraco" aria-label="Ponto fraco">
+      <span className="fv-selo"><TriangleAlert size={13}/>PONTO FRACO</span>
+      <ul>{pontoFraco(c.vulnerability).map(x=>{const Icone=ICONE_DA_FRAQUEZA[x.tipo];return <li key={x.contra}>
+        <span className="fv-fraco-contra"><Icone size={15} strokeWidth={2.4}/>{x.contra}</span>
+        <span className="fv-fraco-motivo">{x.motivo}</span>
+      </li>;})}</ul>
+    </section>
   </div></dialog>;
 }

@@ -11,6 +11,8 @@ export interface Beat {event:BattleEvent;events:BattleEvent[];before:Battle;afte
   etapas?:number[];
   /** A cadeia de efeitos deste beat, na ordem em que aparece. */
   passos?:Passo[];
+  /** Um traço disparou sozinho, fora da ação de alguém (fica com um passo de reação). */
+  traco?:boolean;
   /** Duração sem as etapas (o ritmo fixo da ação). */
   base?:number}
 export interface Direction {battle:Battle;visible:Battle;queue:Beat[];active:Beat|null;simIdle:number;complete:boolean;serial:number;signals:BattleEvent[]}
@@ -75,30 +77,43 @@ export interface Passo {classe:ClasseDoPasso;/** quem age neste passo */quem:str
 export const TEMPO_DO_PASSO:Record<ClasseDoPasso,number>={golpe:.42,reacao:.58,rival:.4,aliado:.4};
 /** O máximo que a cadeia inteira pode alongar um golpe (lutas com muitas reações não arrastam). */
 const CADEIA_MAXIMA=2.6;
+/** Quanto dura um traço que dispara sozinho (o nome aparece, o efeito entra, a luta segue). */
+const TEMPO_DO_TRACO=1.3;
 /** Mantido para quem ainda mede pelo intervalo antigo. */
 export const INTERVALO_DA_ETAPA=TEMPO_DO_PASSO.rival;
 const CONTABIL=new Set<BattleEvent['kind']>(['charge','synergy','ready','discovery','basic','skill','cast','turn']);
 const DO_GOLPE=new Set<BattleEvent['kind']>(['damage','block','interrupt','ko']);
-function montaPassos(beat:Pick<Beat,'event'|'events'|'after'>):Passo[]{
+function montaPassos(beat:Pick<Beat,'event'|'events'|'after'|'traco'>):Passo[]{
   const ator=beat.event.source,lado=beat.after.fighters.find(f=>f.uid===ator)?.side;
   const ladoDe=(uid?:string)=>beat.after.fighters.find(f=>f.uid===uid)?.side;
+  if(beat.traco){const f=beat.after.fighters.find(x=>x.uid===ator);return [{classe:'reacao',quem:ator,rotulo:f?byId[f.characterId].trait.name:undefined,eventos:beat.events.map(e=>e.id),em:0}];}
   if(!['basic','skill'].includes(beat.event.kind)||!lado)return [{classe:'golpe',quem:ator,eventos:beat.events.map(e=>e.id),em:0}];
+  const tracoDe=(uid:string)=>{const f=beat.after.fighters.find(x=>x.uid===uid);return f?byId[f.characterId].trait.name:undefined;};
+  // o que a própria ação (habilidade ou básico) faz: o resto que sai de quem age é o traço dele
+  const lutador=beat.after.fighters.find(f=>f.uid===ator),ficha=lutador?byId[lutador.characterId]:undefined;
+  const efeitos=beat.event.kind==='skill'&&beat.event.skill!==undefined?ficha?.skills[beat.event.skill]?.effects??[]:ficha?.basic.effects??[];
+  const explicado=(e:BattleEvent)=>e.kind==='status'?efeitos.some(x=>x.kind==='status'&&x.status===e.status)||efeitos.some(x=>x.kind==='deathnote')
+    :e.kind==='heal'?efeitos.some(x=>x.kind==='heal'||x.kind==='release')
+    :e.kind==='shield'?efeitos.some(x=>x.kind==='shield')||e.label!=='Escudo'
+    :e.kind==='tempo'?efeitos.some(x=>x.kind==='shift'):true;
   const passos:Passo[]=[],doAtor=new Map<ClasseDoPasso,Passo>(),soltos:number[]=[];
   let atual:Passo|null=null;
   for(const e of beat.events){
     // contabilidade (Carga, "pronto", sinergia) e ajustes nulos vão no passo que os causou
     if(CONTABIL.has(e.kind)||(e.kind==='tempo'&&Math.abs(e.value??0)<.005)){if(atual)atual.eventos.push(e.id);else soltos.push(e.id);continue;}
     const dono=e.kind==='block'?(e.attacker??ator):e.source;
+    if(dono===ator&&!DO_GOLPE.has(e.kind)&&!explicado(e)){
+      // o próprio traço de quem age disparou (ao agir, ao causar dano…): vira um passo com o nome dele
+      if(!(atual?.classe==='reacao'&&atual.quem===ator)){atual={classe:'reacao',quem:ator,rotulo:tracoDe(ator),eventos:[],em:0};passos.push(atual);}
+      atual.eventos.push(e.id);continue;
+    }
     if(dono===ator){
       const classe:ClasseDoPasso=DO_GOLPE.has(e.kind)?'golpe':ladoDe(e.target??e.source)!==lado?'rival':'aliado';
       let passo=doAtor.get(classe);
       if(!passo){passo={classe,quem:ator,eventos:[],em:0};doAtor.set(classe,passo);passos.push(passo);}
       passo.eventos.push(e.id);atual=passo;
     }else{
-      if(!(atual?.classe==='reacao'&&atual.quem===dono)){
-        const f=beat.after.fighters.find(x=>x.uid===dono);
-        atual={classe:'reacao',quem:dono,rotulo:f?byId[f.characterId].trait.name:undefined,eventos:[],em:0};passos.push(atual);
-      }
+      if(!(atual?.classe==='reacao'&&atual.quem===dono)){atual={classe:'reacao',quem:dono,rotulo:tracoDe(dono),eventos:[],em:0};passos.push(atual);}
       atual.eventos.push(e.id);
     }
   }
@@ -186,13 +201,13 @@ function etapaNoTempo(beat:Beat):number{
 export function createDirection(battle:Battle):Direction {
   return {battle,visible:structuredClone(battle),queue:[],active:null,simIdle:0,complete:false,serial:0,signals:[]};
 }
-function makeBeat(event:BattleEvent,events:BattleEvent[],before:Battle,after:Battle,periodic=false,previous=false):Beat {
+function makeBeat(event:BattleEvent,events:BattleEvent[],before:Battle,after:Battle,periodic=false,previous=false,traco=false):Beat {
   const actor=after.fighters.find(f=>f.uid===event.source);
   const prep=actor&&event.skill!==undefined?byId[actor.characterId].skills[event.skill].preparation:0;
   const grand=event.kind==='skill'&&prep>=P.grandPreparation;
   const auxiliary=event.kind==='ready'||event.kind==='status';
-  const seconds=previous?(periodic?.55:auxiliary?.5:duration(event,grand)):periodic?P.periodicSeconds:duration(event,grand);
-  const beat:Beat={event,events,before,after,duration:seconds,family:familyOf(event,after),grand,elapsed:0,impacted:false,periodic,etapa:0,base:seconds};
+  const seconds=traco?TEMPO_DO_TRACO:previous?(periodic?.55:auxiliary?.5:duration(event,grand)):periodic?P.periodicSeconds:duration(event,grand);
+  const beat:Beat={event,events,before,after,duration:seconds,family:familyOf(event,after),grand,elapsed:0,impacted:false,periodic,etapa:0,base:seconds,traco};
   beat.passos=montaPassos(beat);
   beat.etapas=beat.passos.map((_,k)=>k+1);
   const ultimo=beat.passos.at(-1)!;
@@ -209,6 +224,9 @@ function collect(d:Direction,events:BattleEvent[],before:Battle,after:Battle,leg
     return;
   }
   if(principal&&!previous){d.queue.push(makeBeat(principal,events,before,after));return;}
+  // fora de uma ação, Status e Escudo só nascem de um traço disparando sozinho: ganha um momento próprio
+  const traco=!previous&&!legacy?events.find(e=>e.kind==='status'||(e.kind==='shield'&&e.label==='Escudo')):undefined;
+  if(traco){d.queue.push(makeBeat(traco,events,before,after,false,false,true));return;}
   const change=events.find(e=>e.kind==='damage'||e.kind==='heal');
   if(change){
     const burning=change.kind==='damage'&&before.fighters.find(f=>f.uid===change.target)?.statuses.some(s=>s.id==='burning');

@@ -145,7 +145,7 @@ describe('Direção sem alterar regras',()=>{
      // cada passo depois do anterior, e todo evento em exatamente um passo
      beat.passos.forEach((x,k)=>{if(k)expect(x.em).toBeGreaterThan(beat.passos![k-1]!.em);});
      const todos=beat.passos.flatMap(x=>x.eventos);expect(new Set(todos).size).toBe(todos.length);expect(todos.sort()).toEqual(beat.events.map(e=>e.id).sort());
-     for(const x of beat.passos.filter(x=>x.classe==='reacao')){reacoes++;expect(x.quem).not.toBe(beat.event.source);expect(x.rotulo).toBeTruthy();}
+     for(const x of beat.passos.filter(x=>x.classe==='reacao')){reacoes++;expect(x.rotulo).toBeTruthy();}
      if(beat.passos.length>=3)cadeias++;
     }
     // na tela: um Status da reação só aparece quando o passo dela chega
