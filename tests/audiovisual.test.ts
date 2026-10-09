@@ -48,7 +48,8 @@ describe('compact reusable audiovisual library',()=>{
     }
     // não são de habilidade: as brasas aparecem no lutador caído (ArenaUnit) e a marca de
     // Provocado por cima de quem recebe o Status, seja qual for o golpe (BattleEffects)
-    const SO_NA_ARENA=new Set(['brasas_renascendo','provocar']);
+    // e o espelho, os espinhos e as gotas de sangue sobre quem devolve o golpe ou rouba a Vida
+    const SO_NA_ARENA=new Set(['brasas_renascendo','provocar','reflexo','espinhos','vampirismo']);
     for(const f of FAMILIAS)if(!SO_NA_ARENA.has(f))expect(uso.get(f)??0,`${f} usada`).toBeGreaterThan(0);
     for(const [f,n] of uso)expect(n/total,`${f} não domina`).toBeLessThan(.16);
   });

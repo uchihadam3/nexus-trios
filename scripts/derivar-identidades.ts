@@ -144,6 +144,9 @@ const avaliar = (c: Character): Map<Identidade, number> => {
   if (temEfeito(c, ({ e }) => e.kind === 'revive')) notas.set('Reviver', 1);
   if (c.renascer) notas.set('Renascer', 1);
   if (temEfeito(c, ({ e }) => e.kind === 'status' && e.status === 'provoked')) notas.set('Provocar', 1);
+  if (temEfeito(c, ({ e }) => e.kind === 'lifesteal' || (e.kind === 'status' && e.status === 'vampirism'))) notas.set('Roubo de vida', 1);
+  if (temEfeito(c, ({ e }) => e.kind === 'status' && e.status === 'reflect')) notas.set('Refletir', 1);
+  if (temEfeito(c, ({ e }) => e.kind === 'status' && e.status === 'thorns')) notas.set('Espinhos', 1);
   return notas;
 };
 

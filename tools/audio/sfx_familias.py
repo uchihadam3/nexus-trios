@@ -1396,6 +1396,48 @@ def provocar(rng, v):
     return reverb(x, 0.5, 0.3, 7000)
 
 
+# ================================================================== refletir, espinhos, vampirismo
+def reflexo(rng, v):
+    """Refletir: o golpe bate num espelho (tinido de vidro com brilho) e volta num assobio que sobe."""
+    x = _z(1.1)
+    poe(x, modal(n_de(0.8), nota(86), rng=rng, **VIDRO) * env(n_de(0.8), 0.001, 0.4) * 0.2, 0.0)
+    poe(x, modal(n_de(0.6), nota(93), rng=rng, **CRISTAL) * env(n_de(0.6), 0.001, 0.3) * 0.1, 0.01)
+    poe(x, baque(n_de(0.12), 260, 140, 0.05, 0.6) * 0.3, 0.0)
+    n = n_de(0.35)
+    volta = seno(varre(nota(70), nota(96), n, 1.6), n) * env(n, 0.02, 0.18) * 0.12
+    poe(x, volta + assobio(rng, n, 2500, 9000, 0.7, 0.5) * sobe_e_some(n, 0.3, 0.9) * 0.12, 0.06)
+    return reverb(x, 0.6, 0.3, 10000)
+
+
+def espinhos(rng, v):
+    """Espinhos: madeira estalando enquanto as pontas brotam, e furadas curtas e secas."""
+    x = _z(0.9)
+    for k in range(7):
+        poe(x, estalo(rng, n_de(0.025), 900, 5000, 0.004) * (0.4 - 0.03 * k), 0.012 * k + rng.uniform(0, 0.008))
+    for k in range(3):
+        n = n_de(0.09)
+        fura = passa(ruido(rng, n), 1800, 7000) * env(n, 0.001, 0.025) * 0.35
+        fura += seno(varre(nota(76), nota(64), n, 2), n) * env(n, 0.001, 0.03) * 0.12
+        poe(x, fura, 0.07 + 0.06 * k)
+    poe(x, baque(n_de(0.16), 180, 90, 0.06, 0.5) * 0.25, 0.05)
+    return reverb(x, 0.35, 0.18, 8000)
+
+
+def vampirismo(rng, v):
+    """Vampirismo: uma sucção úmida que puxa para dentro, um gole grave e duas batidas de coração."""
+    x = _z(1.3)
+    n = n_de(0.45)
+    puxa = passa(rosa(rng, n), 300, 1800) * sobe_e_some(n, 0.75, 1.5) * 0.3
+    puxa *= 1 + 0.5 * np.sin(2 * math.pi * 18 * np.arange(n) / SR)
+    poe(x, puxa, 0.0)
+    gole = seno(varre(nota(48), nota(40), n_de(0.18), 1.4), n_de(0.18)) * env(n_de(0.18), 0.01, 0.08) * 0.35
+    poe(x, gole, 0.36)
+    batida = seno(varre(nota(40), nota(33), n_de(0.22), 1.5), n_de(0.22)) * env(n_de(0.22), 0.003, 0.1) * 0.5
+    poe(x, batida, 0.55)
+    poe(x, batida * 0.7, 0.75)
+    return reverb(x, 0.55, 0.3, 6000)
+
+
 def renascer(rng, v):
     """Renascer: brasas estalando que se juntam, o fogo sobe num rugido, a fênix grita e as asas batem."""
     x = _z(2.0)
@@ -1432,7 +1474,7 @@ SONS_NOVOS = {
 _BAIXO = {"brasas-renascendo", "cura-em-area", "regeneracao", "grito-de-guerra", "velocidade", "escudo-tech", "barreira-magica", "armadura", "resgate",
           "bencao", "lanche", "purificacao", "enfraquecimento", "lentidao", "marca", "silencio", "medo", "exposto", "hipnose",
           "encanto", "runas", "lua", "petalas", "regeneracao", "confusao", "estrela-invencivel", "disco", "flecha"}
-_ALTO = {"provocar", "renascer", "ressurreicao", "soco-serio", "supernova", "kamehameha", "canhao-de-energia", "foguete", "tempestade", "punho-gigante", "pisao",
+_ALTO = {"reflexo", "espinhos", "vampirismo", "provocar", "renascer", "ressurreicao", "soco-serio", "supernova", "kamehameha", "canhao-de-energia", "foguete", "tempestade", "punho-gigante", "pisao",
          "martelo", "espadao", "buraco-negro", "tsunami", "transformacao-v2", "dragao", "susanoo", "dominio"}
 _ANTES = {"chidori-carga": "faíscas do Chidori", "esfera-espiral-carga": "a esfera girando", "kamehameha-carga": "carga do Kamehameha",
           "kamehameha-feixe": "o feixe saindo", "marretada-giro": "a marreta subindo"}

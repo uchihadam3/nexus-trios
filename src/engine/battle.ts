@@ -157,9 +157,26 @@ function trigger(b:Battle,f:Fighter,topic:Topic,source?:Fighter,amount=1){
  *   Marcado      — os golpes nele atravessam escudo (e os rivais miram nele, targeting.ts);
  *   Eletrificado — choque: cada golpe recebido atrasa a próxima ação dele.
  */
-function damage(b:Battle,source:Fighter,target:Fighter,raw:number){
+/*
+ * Roubo de vida, Vampirismo, Refletir e Espinhos.
+ *
+ * `direto`: o golpe veio de um ataque ou habilidade. Queimadura e o próprio
+ * dano devolvido não são diretos — senão dois lutadores com Refletir
+ * devolveriam o golpe um para o outro para sempre.
+ *   Vampirismo (Status em quem bate): cura parte do dano que causa.
+ *   Refletir (em quem apanha): devolve parte do golpe, antes do Escudo.
+ *   Espinhos (em quem apanha): quem bate leva um dano fixo por golpe.
+ * O Roubo de vida é da habilidade (`lifesteal`, em applyEffects).
+ */
+function devolve(b:Battle,dono:Fighter,agressor:Fighter,valor:number,label:'Refletido'|'Espinhos'){
+  if(valor<=.01||!alive(agressor))return;
+  damage(b,dono,agressor,valor,false,label);
+}
+function damage(b:Battle,source:Fighter,target:Fighter,raw:number,direto=true,label='Impacto'){
   if(!alive(target))return;
-  const outgoing=raw*(1+intensity(source,'strengthened'))*(1-intensity(source,'weakened'));
+  // o golpe devolvido é o próprio golpe (ou o espinho fixo): Fortalecido e Enfraquecido de quem devolve não mexem nele
+  const devolvido=label==='Refletido'||label==='Espinhos';
+  const outgoing=devolvido?raw:raw*(1+intensity(source,'strengthened'))*(1-intensity(source,'weakened'));
   const beforeProtection=outgoing*(1+intensity(target,'exposed'));
   const protection=intensity(target,'protected');
   let amount=beforeProtection*(1-protection),blocked=beforeProtection-amount;
@@ -170,13 +187,19 @@ function damage(b:Battle,source:Fighter,target:Fighter,raw:number){
   const hpBefore=target.hp;
   const dealt=Math.min(hpBefore,amount);target.hp=Math.max(0,hpBefore-dealt);source.stats.damage+=dealt;
   if(dealt>.01){
-    emit(b,{kind:'damage',source:source.uid,target:target.uid,label:'Impacto',value:dealt});
+    emit(b,{kind:'damage',source:source.uid,target:target.uid,label,value:dealt});
     const choque=intensity(target,'electric');if(choque>0&&target.hp>0)target.action=Math.max(0,target.action-choque*CHOQUE_DO_ELETRIFICADO);
     pressure(b,source.side,D.event.damagePerFullCondition*clamp(dealt/target.maxHp));
     if(beforeProtection>=hpBefore&&target.hp>0&&blocked>0)pressure(b,target.side,D.event.clutchSave);
     trigger(b,source,'dealt',source,dealt/100);
     trigger(b,target,'received',source,dealt/100);
     for(const f of b.fighters){if(f.side===target.side&&f.uid!==target.uid)trigger(b,f,'allyHurt',target,dealt/100);if(f.side!==target.side)trigger(b,f,'enemyHurt',source,dealt/100);}
+    const vampiro=direto&&source.side!==target.side?intensity(source,'vampirism'):0;
+    if(vampiro>0&&alive(source))healing(b,source,source,dealt*Math.min(vampiro,statuses.vampirism.cap),'Vampirismo');
+  }
+  if(direto&&source.side!==target.side){
+    devolve(b,target,source,beforeProtection*Math.min(intensity(target,'reflect'),statuses.reflect.cap),'Refletido');
+    devolve(b,target,source,Math.min(intensity(target,'thorns'),statuses.thorns.cap),'Espinhos');
   }
   if(beforeProtection>target.maxHp*D.event.criticalThreshold/100&&alive(target)&&target.hp/target.maxHp<=D.event.criticalThreshold/100)pressure(b,source.side,D.event.criticalCrossing);
   if(!alive(target)){
@@ -186,13 +209,16 @@ function damage(b:Battle,source:Fighter,target:Fighter,raw:number){
     if(renascer&&!target.voltou)target.renascendo=renascer.atraso;
   }
 }
-function healing(b:Battle,source:Fighter,target:Fighter,value:number){
+function healing(b:Battle,source:Fighter,target:Fighter,value:number,label='Recuperação'){
   if(!alive(target))return;
   const used=Math.min(target.maxHp-target.hp,value);target.hp+=used;source.stats.healing+=used;
-  if(used>.01){pressure(b,source.side,D.event.usefulHealingPerFullCondition*clamp(used/target.maxHp));emit(b,{kind:'heal',source:source.uid,target:target.uid,label:'Recuperação',value:used});}
+  if(used>.01){pressure(b,source.side,D.event.usefulHealingPerFullCondition*clamp(used/target.maxHp));emit(b,{kind:'heal',source:source.uid,target:target.uid,label,value:used});}
 }
 export function applyEffects(b:Battle,source:Fighter,selected:Fighter[],effects:Effect[],scale=1){
+  const danoAntes=source.stats.damage;
   for(const effect of effects){
+    // Roubo de vida: cura quem age em parte do dano que esta habilidade causou
+    if(effect.kind==='lifesteal'){healing(b,source,source,(source.stats.damage-danoAntes)*effect.value,'Roubo de vida');continue;}
     const list=effect.target?targets(b,source,effect.target,[effect]):selected;
     if(effect.kind==='release'){
       const total=(source.storedEnergy??0)*effect.multiplier;
@@ -322,7 +348,10 @@ function skillValue(b:Battle,f:Fighter,s:Skill,selected:Fighter[],intelligence:n
       const folego=f.hp/f.maxHp;
       for(const target of list){if(quemProvocou(b,target)?.uid===f.uid)continue;add('provocar',(6+fragil*18)*folego*tacticalFactor);}
     }else if(effect.kind==='status'){
-      for(const target of list){const existing=target.statuses.find(x=>x.id===effect.status)?.intensity??0;const weight=effect.status==='paralyzed'?1:effect.status==='rooted'?.7:effect.status==='silenced'?.65:effect.status==='slow'?.4:['exposed','marked','electric','burning'].includes(effect.status)?.35:effect.status==='protected'?.5:0;add('efeito de estado',Math.max(0,effect.value-existing)*weight*24*tacticalFactor);}
+      for(const target of list){const existing=target.statuses.find(x=>x.id===effect.status)?.intensity??0;const weight=effect.status==='paralyzed'?1:effect.status==='rooted'?.7:effect.status==='silenced'?.65:effect.status==='slow'?.4:['exposed','marked','electric','burning'].includes(effect.status)?.35:effect.status==='protected'?.5:effect.status==='vampirism'||effect.status==='reflect'?.45:effect.status==='thorns'?.02:0;add('efeito de estado',Math.max(0,effect.value-existing)*weight*24*tacticalFactor);}
+    }else if(effect.kind==='lifesteal'){
+      // vale mais quanto mais ferido quem rouba está
+      add('roubo de vida',effect.value*(1-f.hp/f.maxHp)*40*tacticalFactor);
     }else if(effect.kind==='investigate'){
       for(const target of list){const progress=f.investigation[target.uid]??0;add('investigação',effect.value/100*14*(1-progress/100)*tacticalFactor);}
     }else if(effect.kind==='charge'){
@@ -402,7 +431,7 @@ export function stepBattle(b:Battle,observe?:(snapshot:Battle)=>void):Battle {
     f.traitTimer=Math.max(0,f.traitTimer-STEP);
     for(const s of [...f.statuses]){
       const origin=b.fighters.find(x=>x.uid===s.source)??f;
-      if(s.id==='burning')damage(b,origin,f,s.intensity*STEP);
+      if(s.id==='burning')damage(b,origin,f,s.intensity*STEP,false);
       if(s.id==='regen')healing(b,origin,f,s.intensity*STEP);
       s.remaining-=STEP;
     }

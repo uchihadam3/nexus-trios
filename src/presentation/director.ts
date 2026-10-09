@@ -83,6 +83,9 @@ const TEMPO_DO_TRACO=1.3;
 export const INTERVALO_DA_ETAPA=TEMPO_DO_PASSO.rival;
 const CONTABIL=new Set<BattleEvent['kind']>(['charge','synergy','ready','discovery','basic','skill','cast','turn']);
 const DO_GOLPE=new Set<BattleEvent['kind']>(['damage','block','interrupt','ko']);
+/* Reações que vêm de uma mecânica, não do traço: o passo leva o nome dela. */
+export const ROTULO_DA_MECANICA:Record<string,string>={Refletido:'Refletir',Espinhos:'Espinhos',Vampirismo:'Vampirismo'};
+const ehDaMecanica=(e:BattleEvent)=>(e.kind==='damage'||e.kind==='heal')&&e.label in ROTULO_DA_MECANICA;
 function montaPassos(beat:Pick<Beat,'event'|'events'|'after'|'traco'>):Passo[]{
   const ator=beat.event.source,lado=beat.after.fighters.find(f=>f.uid===ator)?.side;
   const ladoDe=(uid?:string)=>beat.after.fighters.find(f=>f.uid===uid)?.side;
@@ -93,7 +96,7 @@ function montaPassos(beat:Pick<Beat,'event'|'events'|'after'|'traco'>):Passo[]{
   const lutador=beat.after.fighters.find(f=>f.uid===ator),ficha=lutador?byId[lutador.characterId]:undefined;
   const efeitos=beat.event.kind==='skill'&&beat.event.skill!==undefined?ficha?.skills[beat.event.skill]?.effects??[]:ficha?.basic.effects??[];
   const explicado=(e:BattleEvent)=>e.kind==='status'?efeitos.some(x=>x.kind==='status'&&x.status===e.status)||efeitos.some(x=>x.kind==='deathnote')
-    :e.kind==='heal'?efeitos.some(x=>x.kind==='heal'||x.kind==='release')
+    :e.kind==='heal'?efeitos.some(x=>x.kind==='heal'||x.kind==='release')||(e.label==='Roubo de vida'&&efeitos.some(x=>x.kind==='lifesteal'))
     :e.kind==='shield'?efeitos.some(x=>x.kind==='shield')||e.label!=='Escudo'
     :e.kind==='tempo'?efeitos.some(x=>x.kind==='shift'):true;
   const passos:Passo[]=[],doAtor=new Map<ClasseDoPasso,Passo>(),soltos:number[]=[];
@@ -102,6 +105,12 @@ function montaPassos(beat:Pick<Beat,'event'|'events'|'after'|'traco'>):Passo[]{
     // contabilidade (Carga, "pronto", sinergia) e ajustes nulos vão no passo que os causou
     if(CONTABIL.has(e.kind)||(e.kind==='tempo'&&Math.abs(e.value??0)<.005)){if(atual)atual.eventos.push(e.id);else soltos.push(e.id);continue;}
     const dono=e.kind==='block'?(e.attacker??ator):e.source;
+    // Refletir, Espinhos e Vampirismo: um passo de reação com o nome da mecânica
+    if(ehDaMecanica(e)){
+      const rotulo=ROTULO_DA_MECANICA[e.label]!;
+      if(!(atual?.classe==='reacao'&&atual.quem===dono&&atual.rotulo===rotulo)){atual={classe:'reacao',quem:dono,rotulo,eventos:[],em:0};passos.push(atual);}
+      atual.eventos.push(e.id);continue;
+    }
     if(dono===ator&&!DO_GOLPE.has(e.kind)&&!explicado(e)){
       // o próprio traço de quem age disparou (ao agir, ao causar dano…): vira um passo com o nome dele
       if(!(atual?.classe==='reacao'&&atual.quem===ator)){atual={classe:'reacao',quem:ator,rotulo:tracoDe(ator),eventos:[],em:0};passos.push(atual);}

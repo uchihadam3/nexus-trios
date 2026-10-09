@@ -59,6 +59,9 @@ if(scenario==='estados'||scenario==='nomes'){
   gojo.action=.93;
   source=gojo;target=goku;effects=[{kind:'damage',value:120}];selected=[target];visual='psychic';
 }
+/* Refletir + Espinhos (o golpe volta) e Vampirismo (o golpe cura). */
+if(scenario==='refletir'){goku.statuses.push({id:'reflect',remaining:6,duration:6,intensity:.35,source:goku.uid},{id:'thorns',remaining:6,duration:6,intensity:16,source:goku.uid});source=sakura;target=goku;effects=[{kind:'damage',value:190}];selected=[goku];}
+if(scenario==='vampiro'){sakura.hp-=300;sakura.statuses.push({id:'vampirism',remaining:8,duration:8,intensity:.3,source:sakura.uid});source=sakura;target=goku;effects=[{kind:'damage',value:220}];selected=[goku];}
 /* Reviver e Renascer: em brasas esperando, e a volta sozinho. */
 if(scenario==='renascendo'){vegeta.hp=0;vegeta.renascendo=1.6;source=sakura;target=goku;}
 const renasce=scenario==='renasce';

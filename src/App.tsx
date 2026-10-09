@@ -207,6 +207,9 @@ export default function App(){
           // provocou: o brado por cima do golpe
           const provocou=d.active.events.find(e=>e.kind==='status'&&e.status==='provoked');
           if(provocou)battleAudio.sound('provocar',PRIORIDADE.importante,0,provocou.id,.05);
+          // golpe devolvido e vida roubada: o som da mecânica, um pouco depois do golpe
+          const mecanica=d.active.events.find(e=>e.kind==='damage'&&(e.label==='Refletido'||e.label==='Espinhos'))??d.active.events.find(e=>e.kind==='heal'&&(e.label==='Vampirismo'||e.label==='Roubo de vida'));
+          if(mecanica)battleAudio.sound(mecanica.label==='Refletido'?'reflexo':mecanica.label==='Espinhos'?'espinhos':'vampirismo',PRIORIDADE.importante,0,mecanica.id,.14);
           const special=d.active.events.find(e=>e.kind==='ko')??d.active.events.find(e=>e.kind==='interrupt')??d.active.events.find(e=>e.kind==='block')??d.active.events.find(e=>e.kind==='turn');
           // eventos que pedem som próprio: interrupção, bloqueio, nocaute, virada; o golpe do beat toca junto
           if(special){const pan=0,chave=special.id;battleAudio.sound(special.kind==='interrupt'?'interrupcao':special.kind==='block'?'bloqueio':special.kind==='ko'?'nocaute':'virada',special.kind==='block'?PRIORIDADE.apoio:PRIORIDADE.importante,pan,chave);if(special.kind!=='turn')battleAudio.cue(cue,d.visible);}
