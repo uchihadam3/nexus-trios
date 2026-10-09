@@ -89,7 +89,8 @@ export function ArenaUnit({fighter:f,battle,beat,onInspect,numbers,threatened,li
   const out=f.hp<=0,critical=!out&&f.hp/f.maxHp<=P.criticalCondition;
   // caiu, mas vai renascer: fica em brasas em vez de "fora"
   const renascendo=out&&(f.renascendo??0)>0;
-  const errou=impacted?beat?.events.find(e=>revelado(beat,e)&&e.source===f.uid&&e.kind==='miss'):undefined;
+  // Errou (Cego) aparece em quem bateu; Esquivou aparece em quem escapou
+  const errou=impacted?beat?.events.find(e=>revelado(beat,e)&&e.kind==='miss'&&(e.label==='Esquivou'?e.target===f.uid:e.source===f.uid)):undefined;
   const anulou=impacted?beat?.events.find(e=>revelado(beat,e)&&e.target===f.uid&&e.kind==='resist'):undefined;
   const congelado=!out&&f.statuses.some(s=>s.id==='frozen'),dormindo=!out&&f.statuses.some(s=>s.id==='sleep');
   const limpo=impacted?[...(beat?.events??[])].reverse().find(e=>revelado(beat!,e)&&e.target===f.uid&&(e.kind==='cleanse'||e.kind==='dispel')):undefined;
@@ -134,8 +135,8 @@ export function ArenaUnit({fighter:f,battle,beat,onInspect,numbers,threatened,li
           :<span className="unit-ko" aria-label="Fora da luta"><Skull size={26}/><b>FORA</b></span>)}
         {levantou&&<span key={levantou.id} className="discovery-pop revive-pop">{levantou.label}</span>}
         {dormindo&&<span className="unit-zz" aria-hidden="true">z<b>z</b><i>z</i></span>}
-        {errou&&<span key={`e${errou.id}`} className="discovery-pop errou-pop">Errou!</span>}
-        {anulou&&<span key={`a${anulou.id}`} className="discovery-pop anulou-pop">Barreira · anulou {anulou.status?statuses[anulou.status].name:'o debuff'}</span>}
+        {errou&&<span key={`e${errou.id}`} className={`discovery-pop ${errou.label==='Esquivou'?'esquivou-pop':'errou-pop'}`}>{errou.label==='Esquivou'?'Esquivou!':'Errou!'}</span>}
+        {anulou&&<span key={`a${anulou.id}`} className={`discovery-pop ${anulou.label==='Última resistência'?'resistiu-pop':'anulou-pop'}`}>{anulou.label==='Última resistência'?'Última resistência!':<>Barreira · anulou {anulou.status?statuses[anulou.status].name:'o debuff'}</>}</span>}
         {limpo&&!levantou&&<span key={`l${limpo.id}`} className={`discovery-pop ${limpo.kind==='cleanse'?'purifica-pop':'dissipa-pop'}`}>{limpo.label}{(limpo.removidos?.length??0)>0&&<> · {limpo.removidos!.map(id=>statuses[id].name).join(', ')}</>}</span>}
         {reagindo&&<span key={`r${reagindo.eventos[0]??0}`} className="reacao-pop"><Zap size={11} strokeWidth={3}/>{reagindo.rotulo??'Reação'}</span>}
         {reagindo&&<span key={`a${reagindo.eventos[0]??0}`} className="reacao-anel" aria-hidden="true"/>}

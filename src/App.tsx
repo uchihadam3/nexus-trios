@@ -211,9 +211,9 @@ export default function App(){
           const mecanica=d.active.events.find(e=>e.kind==='damage'&&(e.label==='Refletido'||e.label==='Espinhos'))??d.active.events.find(e=>e.kind==='heal'&&(e.label==='Vampirismo'||e.label==='Roubo de vida'));
           // parte 5: errou, a Barreira anulou, e o som de cada Status novo ao entrar
           const errou=d.active.events.find(e=>e.kind==='miss');
-          if(errou)battleAudio.sound('errou',PRIORIDADE.importante,0,errou.id,0);
+          if(errou)battleAudio.sound(errou.label==='Esquivou'?'esquiva':'errou',PRIORIDADE.importante,0,errou.id,0);
           const anulou=d.active.events.find(e=>e.kind==='resist');
-          if(anulou)battleAudio.sound('barreira-anula',PRIORIDADE.importante,0,anulou.id,.08);
+          if(anulou)battleAudio.sound(anulou.label==='Última resistência'?'ultima-resistencia':'barreira-anula',PRIORIDADE.importante,0,anulou.id,.08);
           const SOM_DO_STATUS:Record<string,string>={poison:'veneno',bleed:'sangue',cursed:'maldicao',frozen:'bloco-de-gelo',sleep:'sono',blind:'cegueira',barrier:'barreira-magica'};
           const novo=d.active.events.find(e=>e.kind==='status'&&e.status&&SOM_DO_STATUS[e.status]);
           if(novo?.status)battleAudio.sound(SOM_DO_STATUS[novo.status]!,PRIORIDADE.apoio,0,novo.id,.12);

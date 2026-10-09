@@ -143,6 +143,7 @@ export function presentStatus(id:StatusId,value:number):StatusPresentation {
     cursed:`Recebe ${percent} menos cura e Escudo`,frozen:`Não age; o próximo golpe quebra o gelo com +${percent} de dano`,
     sleep:'Não age até acordar; qualquer golpe acorda',blind:`${percent} de chance de errar o ataque básico`,
     barrier:`Anula ${amount>=2?`os próximos ${number} debuffs`:'o próximo debuff'}`,
+    evasion:`${percent} de chance de escapar de cada golpe de rival`,
   };
   return {name:statuses[id].name,tone:positiveStatuses.has(id)?'positivo':'negativo',summary:summary[id],
     value:['regen','burning','thorns','poison','bleed','barrier'].includes(id)?number:percent,accumulation:acumulacaoDe(id)};
@@ -194,7 +195,7 @@ export function valorCurto(id:StatusId,value:number):string[]{
     regen:`+${v} Vida/s`,burning:`−${v} Vida/s`,strengthened:`+${v} de dano`,weakened:`−${v} de dano`,
     vampirism:`cura ${v} do dano causado`,reflect:`devolve ${v} do dano`,thorns:`${v} de dano em quem bate`,
     poison:`−${v} Vida/s`,bleed:`−${v} Vida por ação`,cursed:`−${v} de cura recebida`,frozen:`+${v} no golpe que quebra`,
-    blind:`${v} de chance de errar`,barrier:`anula ${v} debuff${value>=2?'s':''}`,
+    blind:`${v} de chance de errar`,evasion:`${v} de chance de escapar`,barrier:`anula ${v} debuff${value>=2?'s':''}`,
   };
   return curto[id]?[curto[id]!]:[];
 }
@@ -418,6 +419,10 @@ export function quandoAtiva(trait:Trait):{quando:string;limite:string}{
   const limite=trait.cooldown>=.5?`no máximo 1 vez a cada ${secs(trait.cooldown)}`:'';
   const base=QUANDO_EVENTO[trait.on]??`Ao ${topicNames[trait.on]}`;
   return {quando:limite?`${base} · ${limite}`:base,limite};
+}
+/** Última resistência (na ficha, fora do traço): o golpe fatal o deixa de pé uma vez. */
+export function textoDaResistencia(r:{protegido:number;duracao:number}):string{
+  return `Última resistência: o golpe que o derrubaria o deixa com 1 de Vida e Protegido ${pct(r.protegido)} por ${r.duracao.toLocaleString('pt-BR')} s · 1 vez por luta`;
 }
 /** Renascer (na ficha do personagem, fora do traço): o que acontece quando ele cai. */
 export function textoDoRenascer(r:{vida:number;atraso:number}):string{

@@ -52,6 +52,7 @@ const FAZ: Record<StatusId, string> = {
   frozen: 'Preso no gelo: não age. O próximo golpe direto quebra o gelo e entra mais forte.',
   sleep: 'Dorme: não age. Acorda quando o sono acaba ou quando leva um golpe direto (Queimadura e Veneno não acordam).',
   blind: 'Pode errar o ataque básico: o golpe passa longe e não faz nada.',
+  evasion: 'A cada golpe de um rival, uma chance de escapar dele inteiro: nem dano, nem debuff entram. Golpes em todos também podem ser esquivados.',
   barrier: 'Anula os próximos debuffs que um rival tentar pôr nele. Cada debuff anulado gasta uma.',
   provoked: 'Só consegue mirar em quem provocou. Golpes em todos continuam iguais; se quem provocou cair, acaba na hora.',
 };
@@ -77,6 +78,7 @@ const MECANICAS: Termo[] = [
   { id: 'resfriamento', nome: 'Resfriamento', cor: '#9fc3e0', rotulo: 'DESCANSO', texto: 'Depois de usada, a habilidade descansa esse tempo antes de voltar a encher a Carga.' },
   { id: 'usa-quando', nome: 'Usa quando', cor: '#c3a2ff', rotulo: 'CONDIÇÃO', texto: 'Mesmo pronta, a habilidade espera esta situação para sair.' },
   { id: 'proximo-ataque', nome: 'próximo ataque', cor: '#d2f66b', rotulo: 'RITMO', formas: ['próximo ataque'], texto: 'Mexe na vez de agir. Adiantar faz o próximo golpe sair antes; atrasar faz o alvo esperar mais.' },
+  { id: 'ultima-resistencia', nome: 'Última resistência', cor: '#ffd36b', rotulo: 'NÃO CAI NA PRIMEIRA', formas: ['Última resistência'], texto: 'Uma vez por luta, o golpe que derrubaria o personagem o deixa com 1 de Vida e Protegido por alguns segundos.', extra: 'A Death Note não respeita: execução não tem resistência.' },
   { id: 'purificar', nome: 'Purificar', cor: '#bfefff', rotulo: 'TIRA DEBUFFS', formas: ['Purifica', 'Purificado'], texto: 'Tira debuffs de um aliado, os que mais atrapalham primeiro: Paralisado, Silenciado, Preso, Provocado, Confuso, Lento… O número diz quantos saem.', extra: 'Só tira o que já está lá: não protege contra o próximo.' },
   { id: 'dissipar', nome: 'Dissipar', cor: '#c3a6ff', rotulo: 'TIRA BUFFS', formas: ['Dissipa', 'Dissipado'], texto: 'Tira buffs de um rival, os que mais ajudam primeiro: Protegido, Refletir, Vampirismo, Fortalecido, Acelerado… O número diz quantos saem.', extra: 'Não quebra Escudo: o Escudo é outra coisa.' },
   { id: 'roubo-de-vida', nome: 'Roubo de vida', cor: '#ff4f6e', rotulo: 'O GOLPE CURA', formas: ['Roubo de vida'], texto: 'A habilidade cura quem a usa em parte do dano que ela mesma causou. Se o golpe for bloqueado ou errar o alvo, cura menos.', extra: 'O Vampirismo é parecido, mas é um Status: enquanto dura, todo golpe cura.' },

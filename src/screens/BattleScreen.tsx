@@ -64,7 +64,8 @@ export function BattleScreen({battle,beat,index,name,settings,paused,onPause,onA
     if(event.kind==='skill'||event.kind==='cast')return `${from}: ${event.label}${to?` → ${to}`:''}`;
     if(event.kind==='interrupt')return `${from} ${event.label.toLocaleLowerCase('pt-BR')}${to?` de ${to}`:''}`;
     if(event.kind==='ko')return `${to||from} saiu da luta`;
-    if(event.kind==='miss')return `${from} errou o golpe em ${to}`;
+    if(event.kind==='miss')return event.label==='Esquivou'?`${to} esquivou do golpe de ${from}`:`${from} errou o golpe em ${to}`;
+    if(event.kind==='resist'&&event.label==='Última resistência')return `${to||from} ficou de pé com 1 de Vida: Última resistência`;
     if(event.kind==='resist')return `A Barreira de ${to||from} anulou ${event.status?statuses[event.status].name:'o debuff'}`;
     if(event.kind==='cleanse'||event.kind==='dispel'){const nomes=(event.removidos??[]).map(id=>statuses[id].name).join(', ');return `${from} ${event.kind==='cleanse'?'purificou':'dissipou'} ${to}: ${nomes}`;}
     if(event.kind==='revive')return event.source===event.target?`${from} renasceu com ${Math.round(event.value??0)} de Vida`:`${from} levantou ${to} com ${Math.round(event.value??0)} de Vida`;

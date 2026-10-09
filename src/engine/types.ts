@@ -1,5 +1,5 @@
 export type Side = 'player' | 'enemy';
-export type StatusId = 'exposed' | 'paralyzed' | 'protected' | 'marked' | 'slow' | 'haste' | 'confused' | 'rooted' | 'regen' | 'burning' | 'electric' | 'silenced' | 'strengthened' | 'weakened' | 'provoked' | 'vampirism' | 'reflect' | 'thorns' | 'poison' | 'bleed' | 'cursed' | 'frozen' | 'sleep' | 'blind' | 'barrier';
+export type StatusId = 'exposed' | 'paralyzed' | 'protected' | 'marked' | 'slow' | 'haste' | 'confused' | 'rooted' | 'regen' | 'burning' | 'electric' | 'silenced' | 'strengthened' | 'weakened' | 'provoked' | 'vampirism' | 'reflect' | 'thorns' | 'poison' | 'bleed' | 'cursed' | 'frozen' | 'sleep' | 'blind' | 'barrier' | 'evasion';
 export type Topic = 'time' | 'action' | 'dealt' | 'received' | 'allyHurt' | 'enemyHurt' | 'interrupt' | 'status' | 'negativeStatus' | 'protected' | 'enemyCast' | 'survived' | 'losing' | 'winning';
 /** `allyFallen`: o aliado caído que ainda pode ser levantado (Reviver). */
 export type Target = 'enemyWeak' | 'enemyStrong' | 'enemyCast' | 'investigated' | 'allyWeak' | 'self' | 'allEnemies' | 'allAllies' | 'randomEnemy' | 'allyFallen';
@@ -21,6 +21,8 @@ export interface Character {
   trait:Trait; skills:[Skill,Skill,Skill]; tags:string[]; power:number; deathNoteCompatible:boolean;
   /** Renascer: ao cair, volta sozinho com `vida` (fração) da Vida depois de `atraso` segundos — uma vez por luta. A Death Note impede. */
   renascer?:{vida:number;atraso:number};
+  /** Última resistência: uma vez por luta, o golpe fatal o deixa com 1 de Vida e Protegido. */
+  ultimaResistencia?:{protegido:number;duracao:number};
 }
 export interface Status {id:StatusId;remaining:number;intensity:number;source:string;duration?:number}
 export interface Shield {amount:number;remaining:number;source:string}
@@ -32,7 +34,7 @@ export interface Fighter {
   investigation:Record<string,number>;discovered?:Record<string,'vulnerable'|'immune'>;traitTimer:number;
   storedEnergy:number;
   /** Renascer: segundos até voltar (enquanto caído). */
-  renascendo?:number;
+  renascendo?:number;resistiu?:boolean;
   /** Já voltou uma vez (renasceu ou foi levantado): não volta de novo. */
   voltou?:boolean;
   /** Já levantou um aliado nesta luta (Reviver é uma vez por luta). */

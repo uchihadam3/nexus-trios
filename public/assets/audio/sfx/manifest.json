@@ -1175,6 +1175,23 @@
    ],
    "bytes": 42932
   },
+  "esquiva": {
+   "arquivo": "esquiva.mp3",
+   "descricao": "família esquiva",
+   "versoes": [
+    0.0,
+    0.68,
+    1.3817,
+    2.0415
+   ],
+   "duracoes": [
+    0.6,
+    0.6217,
+    0.5797,
+    0.6091
+   ],
+   "bytes": 24302
+  },
   "esticar": {
    "arquivo": "esticar.mp3",
    "descricao": "família esticar",
@@ -3367,6 +3384,23 @@
     0.2843
    ],
    "bytes": 10226
+  },
+  "ultima-resistencia": {
+   "arquivo": "ultima-resistencia.mp3",
+   "descricao": "família ultima resistencia",
+   "versoes": [
+    0.0,
+    1.88,
+    3.8253,
+    5.6444
+   ],
+   "duracoes": [
+    1.8,
+    1.8653,
+    1.7391,
+    1.8274
+   ],
+   "bytes": 49788
   },
   "vampirismo": {
    "arquivo": "vampirismo.mp3",

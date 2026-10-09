@@ -614,6 +614,48 @@ def cegueira(T, t, rng):
     return G, H
 
 
+def esquiva(T, t, rng):
+    """Esquiva: o golpe atravessa um vulto — duas cópias fantasmas do contorno deslizam para os
+    lados e somem, com riscos de vento cruzando o meio."""
+    G, H = vazio(T)
+    env = apaga(t, 0.5, 1)
+    sai = ease_out(rel(t, 0.0, 0.6), 2)
+    vultos = 0
+    for k, lado in enumerate((-1, 1)):
+        dx = lado * 0.42 * sai
+        vultos = vultos + T.ring(0.42, 0.05, cx=dx, cy=0.0) * (0.8 - 0.25 * k) * (1 - sai * 0.8)
+        vultos = vultos + T.gauss(dx, 0.0, 0.3, 0.36) * 0.35 * (1 - sai)
+    riscos = []
+    for k in range(5):
+        y = -0.36 + 0.18 * k
+        x0 = -0.9 + 1.6 * ease_out(rel(t, 0.03 * k, 0.4 + 0.03 * k), 2)
+        riscos.append((lamina(x0 - 0.35, y, x0, y + 0.02, 0.022), pulso(t, 0.03 * k, 0.55)))
+    G += (vultos * 1.2 + T.polys(riscos, 0.004) * 1.4) * env
+    H += (vultos * 0.5 + T.polys(riscos, 0.004) * 0.9) * env
+    return G, H
+
+
+def ultima_resistencia(T, t, rng):
+    """Última resistência: o corpo devia cair, mas um pulso dourado explode de dentro, o chão racha
+    em volta e uma coluna de luz segura ele de pé."""
+    G, H = vazio(T)
+    env = apaga(t, 0.65, 1)
+    pulso_ = pulso(t, 0.0, 0.3)
+    nucleo = T.gauss(0, 0.0, 0.26, 0.3) * pulso_ * 2.2
+    anel = T.ring(0.15 + 0.75 * ease_out(rel(t, 0.02, 0.5), 2), 0.05) * pulso(t, 0.02, 0.6) * 1.4
+    coluna = smooth(0.14 - np.abs(T.U), 0, 0.1) * smooth(T.V + 1.0, 0, 0.3) * smooth(0.45 - T.V, 0, 0.1) * janela(t, 0.08, 0.2) * (1 - rel(t, 0.5, 0.9)) * 1.2
+    rachas = []
+    sub = np.random.default_rng(271)
+    for k in range(9):
+        a = k / 9 * TAU + sub.uniform(-0.2, 0.2)
+        comp = 0.25 + 0.4 * ease_out(rel(t, 0.05, 0.35), 2)
+        x0, y0 = 0.18 * math.cos(a), 0.4 + 0.06 * math.sin(a)
+        rachas.append((lamina(x0, y0, x0 + comp * math.cos(a), y0 + comp * 0.3 * math.sin(a), 0.02), janela(t, 0.05, 0.12)))
+    G += (nucleo + anel + coluna + T.polys(rachas, 0.003) * 1.2) * env
+    H += (nucleo * 1.2 + anel * 0.6 + coluna * 0.8 + T.polys(rachas, 0.003) * 0.5) * env
+    return G, H
+
+
 def renascer(T, t, rng):
     """Renascer: brasas giram e se juntam no corpo caído, sobem numa coluna de fogo e um par de
     asas de chama se abre para o alto, soltando penas de brasa."""
@@ -670,6 +712,8 @@ def brasas_renascendo(T, t, rng):
 REGISTRO = [
     ("ressurreicao", ressurreicao, GRANDE, "feixe de luz que levanta o aliado caído", False),
     ("renascer", renascer, GRANDE, "asas de fogo: renasce das cinzas", False),
+    ("esquiva", esquiva, GRANDE, "vultos que escapam para os lados e riscos de vento", False),
+    ("ultima_resistencia", ultima_resistencia, GRANDE, "pulso dourado, chão rachando e coluna de luz", False),
     ("sono", sono, GRANDE, "névoa lilás e três Z subindo", False),
     ("cegueira", cegueira, GRANDE, "clarão que ofusca, com véu", False),
     ("dissipar", dissipar, GRANDE, "anel de proteção do rival que racha e se desfaz", False),

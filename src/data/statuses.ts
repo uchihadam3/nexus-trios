@@ -38,4 +38,5 @@ export const statuses: Record<StatusId,{name:string;color:string;stack:'refresh'
   sleep:{name:'Dormindo',color:'#b7b6f2',stack:'refresh',cap:1,tone:'negativo',description:'Não age até o sono acabar ou até levar um golpe.'},
   blind:{name:'Cego',color:'#d8d2b0',stack:'refresh',cap:.6,tone:'negativo',description:'Pode errar o ataque básico.'},
   barrier:{name:'Barreira',color:'#f5e7a1',stack:'add',cap:3,tone:'positivo',description:'Anula os próximos debuffs que receberia.'},
+  evasion:{name:'Esquiva',color:'#c8f7ff',stack:'refresh',cap:.6,tone:'positivo',description:'Chance de escapar do golpe inteiro de um rival: dano e debuffs.'},
 };
