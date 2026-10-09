@@ -22,8 +22,8 @@ describe('pontos', () => {
         if (b.winner !== 'player') break;
       }
       expect(pontosDaJornada(lutas)).toBe(oficial.score);
-      // a luta perdida também pontua (o que o trio fez nela), e cada luta cabe na escala de milhares
-      for (const l of lutas) { expect(l.pontos).toBeGreaterThan(0); expect(l.pontos).toBeLessThan(40_000); }
+      // a luta perdida também pontua (o que o trio fez nela), e cada luta cabe na escala de dezenas de milhares
+      for (const l of lutas) { expect(l.pontos).toBeGreaterThan(0); expect(l.pontos).toBeLessThan(400_000); }
       conferidas += lutas.length;
     }
     expect(conferidas).toBeGreaterThan(5);

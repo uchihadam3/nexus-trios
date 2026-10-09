@@ -35,7 +35,7 @@ function Cena({i}:{i:number}){
   if(i===3)return <div className="demo-art demo-shield"><Shield size={58}/><div><span>ESCUDO</span><strong>180 bloqueado</strong><i/></div></div>;
   if(i===4)return <div className="demo-art demo-status"><Portrait character={byId.vegeta}/><span>→</span><StatusBadge status={{id:'exposed',remaining:8,duration:8,intensity:.22,source:''}}/><strong>EXPOSTO</strong></div>;
   // a escala de uma luta (src/engine/pontos.ts): o que o trio fez vale, até na derrota
-  return <div className="cj-pontos"><span><b>~1.000</b><small>derrota feia</small></span><span><b>~10.000</b><small>vitória boa</small></span><span><b>15.000+</b><small>luta incrível</small></span></div>;
+  return <div className="cj-pontos"><span><b>~10 mil</b><small>derrota feia</small></span><span><b>~100 mil</b><small>vitória boa</small></span><span><b>150 mil+</b><small>luta incrível</small></span></div>;
 }
 
 /* Regras do jogo que não estão no glossário da ficha. */

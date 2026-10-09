@@ -7,7 +7,7 @@ import {summarizeBattle,type RunBattleSummary} from './run-summary';
 /* 250.4: Preparo mínimo de 0,5 s (leve), efeitos repetidos somados, condições alcançáveis.
  * 250.5: pontos por desempenho (src/engine/pontos.ts), e a luta perdida também pontua. */
 export const ENGINE_VERSION='nexus-250.5';
-/* Temporada 2: a escala dos pontos mudou (milhares por luta, não milhões); a temporada nova não mistura as duas. */
+/* Temporada 2: a escala dos pontos mudou (dezenas de milhares por luta, não milhões); a temporada nova não mistura as duas. */
 export const BALANCE_VERSION='season-2';
 export const rosterFingerprint=()=>{
   const data=characters.map(c=>[c.id,c.hp,c.interval,c.basic,c.trait,c.skills]);

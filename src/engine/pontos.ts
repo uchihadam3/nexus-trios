@@ -13,8 +13,8 @@
  *              e a rapidez (vencer depressa vale mais);
  *   viradas  · virar o Domínio a seu favor.
  * Tudo multiplicado pela altura da jornada (a luta 10 vale ×1,45).
- * A escala é a pedida: derrota feia ~1.000–2.000; vitória ruim ~5.000–6.000;
- * vitória razoável ~8.000–10.000; luta incrível 15.000+.
+ * A escala é a pedida: derrota feia ~10 mil; vitória ruim ~60 mil;
+ * vitória razoável ~100 mil; luta incrível 150–180 mil.
  * A jornada é a soma das lutas (a derrota encerra, mas os pontos dela ficam).
  * O servidor (src/engine/ranked.ts, replayRanked) usa exatamente esta conta.
  */
@@ -35,17 +35,17 @@ export interface PontosDaLuta {
 }
 
 export const PONTOS = {
-  porDano: 0.4,
-  porNocaute: 250,
-  porApoio: 0.35,
-  porInterrupcao: 250,
-  porHabilidade: 45,
-  porVirada: 120,
-  viradasMaximo: 480,
-  vitoria: 700,
-  vidaMaxima: 4_500,
-  porSobrevivente: 550,
-  rapidezMaxima: 4_000,
+  porDano: 4,
+  porNocaute: 2_500,
+  porApoio: 3.5,
+  porInterrupcao: 2_500,
+  porHabilidade: 450,
+  porVirada: 1_200,
+  viradasMaximo: 4_800,
+  vitoria: 7_000,
+  vidaMaxima: 45_000,
+  porSobrevivente: 5_500,
+  rapidezMaxima: 40_000,
   /** Vencer até este tempo de luta vale a rapidez inteira; depois cai até zero. */
   rapidoAte: 18,
   lentoDe: 45,
