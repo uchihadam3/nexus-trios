@@ -227,6 +227,16 @@ export function applyEffects(b:Battle,source:Fighter,selected:Fighter[],effects:
     }
   }
 }
+/**
+ * A regra de uso da habilidade está cumprida agora? Para a tela mostrar
+ * "pronta, esperando a regra de uso". Roda numa cópia: a escolha de alvo grava
+ * memória na luta, e olhar não pode mudar a luta.
+ */
+export function condicaoAtendida(b:Battle,f:Fighter,s:Skill):boolean{
+  if(s.condition==='always'&&!s.requiresSkills?.length)return true;
+  const copia=structuredClone(b),eu=copia.fighters.find(x=>x.uid===f.uid);
+  return !!eu&&appropriate(copia,eu,s);
+}
 function appropriate(b:Battle,f:Fighter,s:Skill){
   if(s.requiresSkills?.some(index=>(f.skills[index]?.uses??0)<1))return false;
   if(s.condition==='injured')return targets(b,f,s.target,s.effects).some(x=>x.hp/x.maxHp<.78);

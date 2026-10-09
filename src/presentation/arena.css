@@ -348,3 +348,6 @@
 @keyframes status-dissipa{0%{opacity:1;scale:1}30%{opacity:1;scale:1.25;filter:brightness(2)}100%{opacity:0;scale:.3;rotate:25deg}}
 @keyframes status-anel{from{opacity:1;scale:.5}to{opacity:0;scale:2}}
 @media (prefers-reduced-motion:reduce){.status-vida>.status-badge,.status-renovado,.status-saindo.dissipado::after{animation:none}.status-saindo>.status-badge{animation:status-expira .4s linear forwards!important}}
+/* Pronta, mas esperando a regra de uso: ampulheta no canto e brilho mais calmo. */
+.arena-v2 .ability.ready.is-waiting{filter:saturate(.75);box-shadow:0 0 0 1.5px #f4d47e88}
+.arena-v2 .ability-espera{position:absolute;right:-3px;top:-3px;z-index:3;display:grid;place-items:center;width:15px;height:15px;border-radius:50%;background:#2c2410;border:1px solid #f4d47e;color:#ffe9a8}

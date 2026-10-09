@@ -1,5 +1,6 @@
 import { useEffect,useRef,useState } from 'react';
-import { Shield,HeartPulse,Skull,Zap } from 'lucide-react';
+import { Hourglass,Shield,HeartPulse,Skull,Zap } from 'lucide-react';
+import { condicaoAtendida } from '../engine/battle';
 import type { Battle,Fighter,Status } from '../engine/types';
 import { passoAtual,revelado,type Beat } from '../presentation/director';
 import { PRESENTATION as P } from '../presentation/config';
@@ -147,13 +148,16 @@ export function ArenaUnit({fighter:f,battle,beat,onInspect,numbers,threatened,li
       const assisted=impacted&&beat?.events.some(e=>revelado(beat,e)&&e.target===f.uid&&e.source!==f.uid&&e.kind==='charge'&&e.skill===i);
       const mode=out?'empty':casting?'preparing':focused?(impacted?'executing':'ready'):st.cooldown>0?'cooldown':st.charge>=100?'ready':st.charge>0?'charging':'empty';
       const fill=casting?100*(f.cast!.elapsed/f.cast!.duration):st.cooldown>0?100*(1-st.cooldown/Math.max(1,s.cooldown)):st.charge;
-      const label={empty:'vazia',charging:'carregando',ready:'pronta',preparing:'preparando',executing:'executando',cooldown:'em recarga'}[mode];
+      // carregada, mas a regra de uso ainda não está cumprida: espera (ampulheta)
+      const espera=mode==='ready'&&!focused&&s.condition!=='always'&&!condicaoAtendida(battle,f,s);
+      const label=espera?'pronta, esperando a regra de uso':{empty:'vazia',charging:'carregando',ready:'pronta',preparing:'preparando',executing:'executando',cooldown:'em recarga'}[mode];
       return <div className={`ability-wrap ${assisted?'ability-assisted':''} ${ready?'just-ready':''}`} key={s.id}>
-        <button data-ability={`${f.uid}-${i}`} className={`ability ${mode}`} onClick={()=>onInspect({kind:'skill',fighter:f,index:i})} aria-label={`${s.name}: ${label}. Toque para explicar`} title={`${s.name} · ${label}`}>
+        <button data-ability={`${f.uid}-${i}`} className={`ability ${mode} ${espera?'is-waiting':''}`} onClick={()=>onInspect({kind:'skill',fighter:f,index:i})} aria-label={`${s.name}: ${label}. Toque para explicar`} title={`${s.name} · ${label}`}>
           <span className="ability-fill" style={{height:`${Math.max(0,Math.min(100,fill))}%`}}/>
           <SkillIcon type={s.icon} size={20} characterId={c.id} skillId={s.id}/>
           <svg className="ability-meter" viewBox="0 0 40 40" aria-hidden="true"><rect x="2" y="2" width="36" height="36" rx="10" pathLength="100" strokeDasharray={`${Math.max(0,Math.min(100,fill))} 100`}/></svg>
           {mode==='cooldown'&&<AuxIcon id="cooldown" size={12} className="ability-lock"/>}
+          {espera&&<span className="ability-espera" aria-hidden="true"><Hourglass size={10} strokeWidth={2.6}/></span>}
         </button>
       </div>;
     })}</div>

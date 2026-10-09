@@ -223,3 +223,7 @@
   html .site-footer,html .site-footer span,html .site-footer .footer-lab{font-size:11px}
   html .site-footer .footer-lab{white-space:nowrap;min-width:44px}
 }
+
+/* A regra de uso da habilidade ("Só usa quando…"): em destaque, logo abaixo do nome. */
+.skill-requisito{display:flex;align-items:flex-start;gap:7px;margin:8px 0 6px;padding:7px 10px;border-radius:10px;background:#2c2410e6;border:1px solid #f4d47e66;color:#ffe9a8;font-size:12px;font-weight:700;line-height:1.35}
+.skill-requisito svg{flex:none;margin-top:1px;color:#f4d47e}

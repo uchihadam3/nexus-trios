@@ -222,7 +222,9 @@ export function agruparEfeitos(effects:Effect[],defaultTarget:Target):GrupoDeEfe
  */
 export interface LinhaDeEfeito {texto:string;partes:string[]}
 
-export interface SkillPresentation {summary:string;target:string;effects:string[];grupos:GrupoDeEfeitos[];charge:string[];useWhen:string;preparation:string;cooldown:string;
+export interface SkillPresentation {summary:string;target:string;effects:string[];grupos:GrupoDeEfeitos[];charge:string[];useWhen:string;
+  /** A regra que a habilidade espera para sair, quando tem uma ("Só usa quando…"). */
+  requisito?:string;preparation:string;cooldown:string;
   /*
    * Se a linha "Alvo" ainda tem o que dizer.
    *
@@ -361,6 +363,7 @@ export function presentSkill(skill:Skill):SkillPresentation {
   return {summary:effects[0]??'Sem efeito',target:targetNames[skill.target],effects,grupos,
     mostrarAlvo:!temCabecalho&&(skill.effects.length===0||!skill.effects.every(seApresenta)),
     charge:cargasLegiveis(skill.charge),useWhen:use[skill.condition],
+    ...(skill.condition!=='always'?{requisito:`Só usa quando ${use[skill.condition]}`}:{}),
     preparation:skill.preparation>0?secs(skill.preparation):'instantâneo',cooldown:secs(skill.cooldown)};
 }
 /*

@@ -1,4 +1,5 @@
-import { X,HeartPulse,Clock3,Sparkles } from 'lucide-react';
+import { X,HeartPulse,Clock3,Sparkles,Hourglass } from 'lucide-react';
+import { condicaoAtendida } from '../engine/battle';
 import type { Battle,Fighter,Status } from '../engine/types';
 import { byId } from '../data/characters';
 import { statuses } from '../data/statuses';
@@ -25,8 +26,9 @@ export function BattleInspector({target,battle,onClose,onSelect}:{target:Inspect
       <div className="inspector-meta"><span><Clock3 size={13}/>{liveStatus.remaining.toLocaleString('pt-BR',{maximumFractionDigits:1})} s restantes</span><span><Sparkles size={13}/>Aplicado por {sourceName(liveStatus.source)}</span></div>
     </>:skill?<>
       <div className="inspector-title"><SkillIcon type={skill.icon} characterId={c.id} skillId={skill.id} size={31}/><div><small>{c.name.toLocaleUpperCase('pt-BR')}</small><h3>{skill.name}</h3></div></div>
+      {presentation!.requisito&&<div className="skill-requisito"><Hourglass size={14}/><span>{presentation!.requisito}</span></div>}
       <EfeitosAgrupados grupos={presentation!.grupos}/>
-      <div className="inspector-meta"><span><HeartPulse size={13}/>{Math.round(f.skills[skillIndex].charge)}% · {f.skills[skillIndex].cooldown>0?`Resfriamento ${f.skills[skillIndex].cooldown.toFixed(1)} s`:f.cast?.skill===skillIndex?'Em Preparo':f.skills[skillIndex].charge>=100?'Pronta':'Carregando'}</span><span><Clock3 size={13}/>Preparo {presentation!.preparation} · Resfriamento {presentation!.cooldown}</span></div>
+      <div className="inspector-meta"><span><HeartPulse size={13}/>{Math.round(f.skills[skillIndex].charge)}% · {f.skills[skillIndex].cooldown>0?`Resfriamento ${f.skills[skillIndex].cooldown.toFixed(1)} s`:f.cast?.skill===skillIndex?'Em Preparo':f.skills[skillIndex].charge>=100?(condicaoAtendida(battle,f,skill)?'Pronta':'Pronta · esperando a regra de uso'):'Carregando'}</span><span><Clock3 size={13}/>Preparo {presentation!.preparation} · Resfriamento {presentation!.cooldown}</span></div>
       <div className="charge-explanation"><b><TermoBotao termo={termoPorId.carga!}/></b> {presentation!.charge.join(' · ')}<br/><b><TermoBotao termo={termoPorId['usa-quando']!}/></b> {presentation!.useWhen}</div>
     </>:<>
       <div className="inspector-title"><span className="inspector-avatar" style={{'--character':c.color} as React.CSSProperties}>{c.symbol}</span><div><small>{c.universe}</small><h3>{c.name}</h3></div></div>
