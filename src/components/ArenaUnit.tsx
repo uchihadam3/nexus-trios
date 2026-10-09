@@ -1,9 +1,10 @@
 import { useEffect,useRef,useState } from 'react';
-import { Hourglass,Shield,HeartPulse,Skull,Zap } from 'lucide-react';
+import { Flame,Hourglass,Shield,HeartPulse,Skull,Zap } from 'lucide-react';
 import { condicaoAtendida } from '../engine/battle';
 import type { Battle,Fighter,Status } from '../engine/types';
 import { passoAtual,revelado,type Beat } from '../presentation/director';
 import { PRESENTATION as P } from '../presentation/config';
+import { folha } from '../presentation/vfxProfiles';
 import { byId } from '../data/characters';
 import { statuses } from '../data/statuses';
 import { Portrait } from './Portrait';
@@ -86,6 +87,9 @@ export function ArenaUnit({fighter:f,battle,beat,onInspect,numbers,threatened,li
   const acting=source&&['basic','skill'].includes(beat?.event.kind??'');
   const preparing=!!f.cast||(source&&beat?.event.kind==='cast');
   const out=f.hp<=0,critical=!out&&f.hp/f.maxHp<=P.criticalCondition;
+  // caiu, mas vai renascer: fica em brasas em vez de "fora"
+  const renascendo=out&&(f.renascendo??0)>0;
+  const levantou=impacted?beat?.events.find(e=>revelado(beat,e)&&e.target===f.uid&&e.kind==='revive'):undefined;
   const ring=acting&&!impacted?1:f.action;
   const light=battle.fighters.find(actor=>actor.side!==f.side&&actor.characterId==='light');
   const knowledge=light?.discovered?.[f.uid];
@@ -96,7 +100,7 @@ export function ArenaUnit({fighter:f,battle,beat,onInspect,numbers,threatened,li
   const buffs=f.statuses.filter(s=>statuses[s.id].tone!=='negativo'),debuffs=f.statuses.filter(s=>statuses[s.id].tone==='negativo');
   const hpPct=Math.max(0,Math.min(100,100*f.hp/f.maxHp)),shieldPct=Math.min(100-hpPct,100*shield/f.maxHp);
   const marcas=[
-    out&&'is-out',preparing&&'is-casting',hit&&'is-hit',acting&&'is-acting',basicStyle,critical&&'is-critical',
+    out&&'is-out',renascendo&&'is-renascendo',levantou&&'is-revived',preparing&&'is-casting',hit&&'is-hit',acting&&'is-acting',basicStyle,critical&&'is-critical',
     (shielded||blocked)&&'is-helped',linkedSource&&'is-source',linkedTarget&&'is-target',knocked&&'is-newly-out',
     broken&&'is-broken',threatened&&'is-threatened',ring>=P.nearAction&&'is-near',tempo&&'is-tempo',reagindo&&'is-reacting',
   ].filter(Boolean).join(' ');
@@ -120,13 +124,17 @@ export function ArenaUnit({fighter:f,battle,beat,onInspect,numbers,threatened,li
         {threatened&&<span className="unit-brackets" aria-hidden="true"/>}
         {broken&&<span className="unit-break" aria-hidden="true">×</span>}
         {tempo&&<span className={`unit-tempo ${tempo.value!>0?'advanced':'delayed'}`} aria-label={tempo.label}><AuxIcon id={tempo.value!>0?'tempo-up':'tempo-down'} size={18}/></span>}
-        {out&&<span className="unit-ko" aria-label="Fora da luta"><Skull size={26}/><b>FORA</b></span>}
+        {renascendo&&<span className="unit-brasas" aria-hidden="true" style={{'--fx-img':`url(${folha('brasas_renascendo')})`} as React.CSSProperties}/>}
+        {out&&(renascendo
+          ?<span className="unit-ko unit-renasce" aria-label={`Renascendo em ${Math.ceil(f.renascendo??0)} segundos`}><Flame size={24}/><b>RENASCE</b></span>
+          :<span className="unit-ko" aria-label="Fora da luta"><Skull size={26}/><b>FORA</b></span>)}
+        {levantou&&<span key={levantou.id} className="discovery-pop revive-pop">{levantou.label}</span>}
         {reagindo&&<span key={`r${reagindo.eventos[0]??0}`} className="reacao-pop"><Zap size={11} strokeWidth={3}/>{reagindo.rotulo??'Reação'}</span>}
         {reagindo&&<span key={`a${reagindo.eventos[0]??0}`} className="reacao-anel" aria-hidden="true"/>}
         {applied&&<span key={applied.id} className="status-pop">{applied.status&&<img src={`/assets/statuses/${applied.status}.png`} alt=""/>}{applied.label}</span>}
         {discovered&&<span key={discovered.id} className="discovery-pop">{discovered.label}</span>}
       </button>
-      {(out||advantageActive||critical||shield>0)&&<span className={`unit-flag ${out?'flag-out':advantageActive?'flag-advantage':critical?'flag-critical':'flag-shield'}`} aria-hidden="true">{out?<Skull size={12}/>:advantageActive?<AuxIcon id="domain" size={13}/>:critical?<HeartPulse size={12}/>:<Shield size={12}/>}</span>}
+      {(out||advantageActive||critical||shield>0)&&<span className={`unit-flag ${out?'flag-out':advantageActive?'flag-advantage':critical?'flag-critical':'flag-shield'}`} aria-hidden="true">{renascendo?<Flame size={12}/>:out?<Skull size={12}/>:advantageActive?<AuxIcon id="domain" size={13}/>:critical?<HeartPulse size={12}/>:<Shield size={12}/>}</span>}
       {preparing&&<div className="unit-cast"><AuxIcon id="preparing" size={13}/><span>{f.cast?c.skills[f.cast.skill].name:beat?.event.label}</span></div>}
       {/* a habilidade saindo, com ou sem Preparo: o nome aparece enquanto o golpe acontece */}
       {!preparing&&source&&beat?.event.kind==='skill'&&beat.event.skill!==undefined&&c.skills[beat.event.skill]&&<div key={beat.event.id} className="unit-cast unit-skill-name" style={{"--character":c.color} as React.CSSProperties}><SkillIcon type={c.skills[beat.event.skill].icon} size={15} characterId={c.id} skillId={c.skills[beat.event.skill].id}/><span>{c.skills[beat.event.skill].name}</span></div>}
@@ -139,7 +147,7 @@ export function ArenaUnit({fighter:f,battle,beat,onInspect,numbers,threatened,li
         <span className="unit-bar-hp" style={{width:`${hpPct}%`}}/>
         {shieldPct>0&&<span className="unit-bar-shield" style={{left:`${hpPct}%`,width:`${shieldPct}%`}}/>}
       </div>
-      <div className="unit-meta"><span>{out?'FORA DA LUTA':critical?'VIDA BAIXA':shield>0?<><Shield size={9}/>{Math.ceil(shield)}</>:'VIDA'}</span>{numbers&&!out&&<b>{Math.ceil(f.hp)}</b>}</div>
+      <div className="unit-meta"><span>{renascendo?'RENASCENDO':out?'FORA DA LUTA':critical?'VIDA BAIXA':shield>0?<><Shield size={9}/>{Math.ceil(shield)}</>:'VIDA'}</span>{numbers&&!out&&<b>{Math.ceil(f.hp)}</b>}</div>
       {knowledge&&<span className={`light-knowledge ${knowledge}`}>{knowledge==='vulnerable'?'Vulnerável à Death Note':'Imune à execução'}</span>}
     </div>
     <div className="unit-skills" aria-label={`Habilidades de ${c.name}`}>{c.skills.map((s,i)=>{

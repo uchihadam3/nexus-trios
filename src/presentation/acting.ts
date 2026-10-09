@@ -57,6 +57,7 @@ function reacaoDoAlvo(beat: Beat, battle: Battle, uid: string): ReactStyle | und
   if (!beat.impacted) return undefined;
   const sobre = beat.events.filter((e) => e.target === uid);
   if (!sobre.length) return undefined;
+  if (sobre.some((e) => e.kind === 'revive')) return 'heal';
   if (sobre.some((e) => e.kind === 'ko')) return 'fall';
   if (sobre.some((e) => e.kind === 'interrupt')) return 'broken';
   // o golpe bateu no escudo: o escudo aparece na frente e leva a pancada

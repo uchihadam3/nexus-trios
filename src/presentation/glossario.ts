@@ -66,6 +66,8 @@ const MECANICAS: Termo[] = [
   { id: 'resfriamento', nome: 'Resfriamento', cor: '#9fc3e0', rotulo: 'DESCANSO', texto: 'Depois de usada, a habilidade descansa esse tempo antes de voltar a encher a Carga.' },
   { id: 'usa-quando', nome: 'Usa quando', cor: '#c3a2ff', rotulo: 'CONDIÇÃO', texto: 'Mesmo pronta, a habilidade espera esta situação para sair.' },
   { id: 'proximo-ataque', nome: 'próximo ataque', cor: '#d2f66b', rotulo: 'RITMO', formas: ['próximo ataque'], texto: 'Mexe na vez de agir. Adiantar faz o próximo golpe sair antes; atrasar faz o alvo esperar mais.' },
+  { id: 'reviver', nome: 'Reviver', cor: '#ffe08a', rotulo: 'LEVANTAR QUEM CAIU', formas: ['Levanta um aliado caído', 'aliado caído'], texto: 'Levanta um aliado que caiu, com parte da Vida. Quem levanta só faz isso uma vez por luta, e cada lutador só volta uma vez.', extra: 'Tem Preparo: interromper quem vai reviver deixa o aliado no chão.' },
+  { id: 'renascer', nome: 'Renascer', cor: '#ff9a3a', rotulo: 'VOLTA SOZINHO', formas: ['Renasce', 'Renascer'], texto: 'Quando cai, fica em brasas por um instante e volta sozinho com parte da Vida. Uma vez por luta.', extra: 'A Death Note impede: quem é executado não renasce.' },
   { id: 'interrompe', nome: 'Interrupção', cor: '#ff9a76', rotulo: 'CORTAR O GOLPE', formas: ['Interrompe o Preparo', 'Atrasa o Preparo', 'do Preparo'], texto: 'Age em quem está preparando uma habilidade: cancela o golpe, ou empurra para mais tarde, ou encurta o que já foi preparado.' },
 ];
 

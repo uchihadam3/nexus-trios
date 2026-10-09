@@ -240,6 +240,23 @@
    ],
    "bytes": 23841
   },
+  "brasas-renascendo": {
+   "arquivo": "brasas-renascendo.mp3",
+   "descricao": "família brasas renascendo",
+   "versoes": [
+    0.0,
+    1.08,
+    2.1963,
+    3.2424
+   ],
+   "duracoes": [
+    1.0,
+    1.0363,
+    0.9662,
+    1.0152
+   ],
+   "bytes": 40775
+  },
   "buraco-negro": {
    "arquivo": "buraco-negro.mp3",
    "descricao": "família buraco negro",
@@ -2535,6 +2552,23 @@
    ],
    "bytes": 60235
   },
+  "renascer": {
+   "arquivo": "renascer.mp3",
+   "descricao": "família renascer",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 99870
+  },
   "repulsao": {
    "arquivo": "repulsao.mp3",
    "descricao": "família repulsao",
@@ -2568,6 +2602,23 @@
     1.1167
    ],
    "bytes": 37599
+  },
+  "ressurreicao": {
+   "arquivo": "ressurreicao.mp3",
+   "descricao": "família ressurreicao",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 84200
   },
   "ricochete": {
    "arquivo": "ricochete.mp3",

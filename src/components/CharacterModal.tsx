@@ -5,7 +5,7 @@ import { characters } from '../data/characters';
 import { Portrait } from './Portrait';
 import { SkillIcon } from './Icon';
 import { EfeitosAgrupados } from './EfeitosAgrupados';
-import { presentEffect,presentSkill,presentTrait,targetNames } from '../engine/skill-descriptions';
+import { presentEffect,presentSkill,presentTrait,targetNames,textoDoRenascer } from '../engine/skill-descriptions';
 import { identidadesDe } from '../presentation/identities';
 import { IdentityChips } from './IdentityChips';
 import { ComTermos,TermoBotao } from './Termos';
@@ -58,7 +58,7 @@ export function CharacterModal({character:c,onClose}:{character:Character;onClos
     <section className="fv-traco">
       <span className="fv-selo"><Sparkles size={13}/>TRAÇO · SEMPRE ATIVO</span>
       <h3>{c.trait.name}</h3>
-      <div className="fv-chips">{trait.effects.map((effect,i)=><span key={i}><ComTermos texto={effect}/></span>)}</div>
+      <div className="fv-chips">{trait.effects.map((effect,i)=><span key={i}><ComTermos texto={effect}/></span>)}{c.renascer&&<span className="fv-renasce"><ComTermos texto={textoDoRenascer(c.renascer)}/></span>}</div>
       <small>{trait.quando}</small>
     </section>
 
