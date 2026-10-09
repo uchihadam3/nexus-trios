@@ -1,6 +1,6 @@
 import { useLayoutEffect,useRef,useState,type CSSProperties,type ReactElement } from 'react';
 import type { Battle } from '../engine/types';
-import { revelado,type Beat } from '../presentation/director';
+import { ROTULO_DA_MECANICA,revelado,type Beat } from '../presentation/director';
 import { PRESENTATION as P } from '../presentation/config';
 import { byId } from '../data/characters';
 import { SkillIcon } from './Icon';
@@ -17,7 +17,8 @@ export function isAreaBeat(beat:Beat|null,battle:Battle):boolean {
   if(!beat||!['basic','skill'].includes(beat.event.kind))return false;
   const source=battle.fighters.find(f=>f.uid===beat.event.source);
   if(profileFor(source?.characterId??'',beat.event.skill)?.area)return true;
-  const direct=beat.events.filter(e=>e.source===beat.event.source&&e.target&&['damage','status','heal','shield'].includes(e.kind));
+  // o que a mecânica faz depois do golpe (o quique, a cura do golpe, a guarda) não torna o golpe uma área
+  const direct=beat.events.filter(e=>e.source===beat.event.source&&e.target&&e.target!==beat.event.source&&['damage','status','heal','shield'].includes(e.kind)&&!(e.label in ROTULO_DA_MECANICA));
   return new Set(direct.map(e=>e.target)).size>1;
 }
 

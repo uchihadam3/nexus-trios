@@ -17,7 +17,7 @@ const medida: Medida = {
 };
 
 function beat(kind: BattleEvent['kind'], fonte: number, alvos: number[], efeitos: Effect[], family: Family, impacted: boolean): Beat {
-  const b = createBattle(['sakura', 'gojo', 'naruto'], ['goku', 'vegeta', 'hulk'], 99);
+  const b = createBattle(['sakura', 'frieren', 'naruto'], ['goku', 'vegeta', 'hulk'], 99);
   const before = structuredClone(b);
   const source = b.fighters[fonte]!, targets = alvos.map((i) => b.fighters[i]!);
   applyEffects(b, source, targets, efeitos);
@@ -41,7 +41,7 @@ describe('atuação', () => {
     expect(b['enemy-0']!.uy).toBeLessThan(-0.99);
   });
 
-  it('à distância: só se inclina; quem recebe muito dano reage pesado', () => {
+  it('à distância (o feitiço da Frieren): só se inclina; quem recebe muito dano reage pesado', () => {
     const x = beat('basic', 1, [4], [{ kind: 'damage', value: 400 }], 'energy', true);
     const a = atuacao(x, x.after, medida, false);
     expect(a['player-1']?.act).toBe('ranged');

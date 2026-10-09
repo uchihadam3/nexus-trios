@@ -13,6 +13,7 @@
 import type { Battle } from '../engine/types';
 import type { Beat } from './director';
 import { combatLinks } from './combat-links';
+import { distanciaDoGolpe } from './distancia';
 import { profileFor } from './vfxProfiles';
 
 export type ActStyle = 'melee' | 'ranged' | 'area' | 'support' | 'curse' | 'cast' | 'interrupt';
@@ -49,6 +50,9 @@ function estiloDeQuemAge(beat: Beat, battle: Battle, area: boolean): ActStyle | 
   if (area) return 'area';
   const source = battle.fighters.find((f) => f.uid === event.source);
   const profile = profileFor(source?.characterId ?? '', event.skill);
+  // o efeito que aparece decide: lâmina e soco vão até o alvo, tiro e magia ficam de longe
+  const distancia = profile && distanciaDoGolpe(source?.characterId ?? '', event.kind === 'skill' ? event.skill : undefined, profile.family);
+  if (distancia) return distancia === 'perto' ? 'melee' : 'ranged';
   if (profile?.travel || VIAJAM.has(beat.family)) return 'ranged';
   return 'melee';
 }
