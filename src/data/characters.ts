@@ -3,6 +3,7 @@ import type { Character, Effect, Skill, Target, Trait, Visual, ChargeRule } from
 import { expandedCharacters } from './expanded-roster';
 import { intelligenceFor } from './intelligence';
 import { alinharEfeitos } from './alinhar-efeitos';
+import { FATOR_DA_REGENERACAO,valorDaRegeneracao } from './regeneracao';
 import { AJUSTE_DE_FORCA, AJUSTE_DE_RITMO } from './ajuste-de-forca';
 
 const damage=(value:number,target?:Target):Effect=>({kind:'damage',value,target});
@@ -56,6 +57,19 @@ const timed=(n:number)=>[charge('time',n)];
  * entre ações). Não muda o estilo do kit. Os textos das
  * fichas saem destes números.
  */
+/*
+ * A Regeneração não soma (src/data/statuses.ts): o número escrito é o que
+ * cura. O fator de cada personagem (src/data/regeneracao.ts) mantém a cura
+ * que ele tinha quando somava; ninguém fica abaixo do mínimo.
+ */
+/** Os valores de Regeneração antes do fator, na ordem habilidades → traço → ataque básico (para scripts/equilibrar-regeneracao.ts). */
+export const regeneracaoDeOrigem=new Map<string,number[]>();
+function ajustaRegeneracao(c:Character):Character{
+  const f=FATOR_DA_REGENERACAO[c.id]??1;
+  const ef=(e:Effect):Effect=>{if(e.kind!=='status'||e.status!=='regen')return e;regeneracaoDeOrigem.set(c.id,[...regeneracaoDeOrigem.get(c.id)??[],e.value]);return {...e,value:valorDaRegeneracao(e.value,f)};};
+  const skills=c.skills.map(s=>({...s,effects:s.effects.map(ef)})) as Character['skills'],trait={...c.trait,effects:c.trait.effects.map(ef)};
+  return {...c,skills,trait,basic:{...c.basic,effects:c.basic.effects.map(ef)}};
+}
 function ajustaForca(c:Character):Character{
   const m=AJUSTE_DE_FORCA[c.id]??1,ritmo=AJUSTE_DE_RITMO[c.id]??1;
   if(m===1&&ritmo===1)return c;
@@ -161,7 +175,7 @@ export const characters:Character[] = [
   skill('Joia do Tempo','wave','Retarda todos e reduz preparações pela metade.','Preparações inimigas + tempo',[charge('enemyCast',22),charge('time',3)],[status('slow',.4,8,'allEnemies'),{kind:'interrupt',mode:'reduce',value:.5,target:'allEnemies'}],{target:'allEnemies'}),
   skill('Equilíbrio','psychic','Causa 240 de dano a todos e enfraquece por 9 s.','Tempo em luta + dano causado',[charge('survived',2.8),charge('dealt',7)],[damage(240,'allEnemies'),status('weakened',.25,9,'allEnemies')],{preparation:4.5,target:'allEnemies',cooldown:14})]}),
   ...expandedCharacters.map(c=>imagePortraits[c.id]?{...c,portrait:imagePortraits[c.id]}:c),
-] .map(alinharEfeitos).map(ajustaForca)
+] .map(alinharEfeitos).map(ajustaForca).map(ajustaRegeneracao)
  .map(c=>({...c,intelligence:intelligenceFor(c.id,c.tags),
    /* Ponto fraco medido (scripts/escrever-fraquezas.ts): contra o quê ele é ruim e por quê. */
    vulnerability:fraquezas[c.id]??c.vulnerability}));

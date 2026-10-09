@@ -21,7 +21,7 @@ export const statuses: Record<StatusId,{name:string;color:string;stack:'refresh'
   haste:{name:'Acelerado',color:'#d2f66b',stack:'refresh',cap:.8,tone:'positivo',description:'Quem tem Acelerado dá o próximo golpe e prepara as habilidades mais rápido.'},
   confused:{name:'Confuso',color:'#dba0fa',stack:'refresh',cap:1,tone:'negativo',description:'Pode errar a ação normal e atingir a si mesmo.'},
   rooted:{name:'Preso',color:'#e0e2e6',stack:'refresh',cap:.65,tone:'negativo',description:'Quem tem Preso demora mais para dar o próximo golpe e para preparar as habilidades. Vale junto com Lento: quem tem os dois fica ainda mais lento.'},
-  regen:{name:'Regeneração',color:'#a1e992',stack:'add',cap:25,tone:'positivo',description:'Recupera Vida por segundo.'},
+  regen:{name:'Regeneração',color:'#a1e992',stack:'refresh',cap:25,tone:'positivo',description:'Recupera Vida por segundo. Não soma: vale a mais forte.'},
   burning:{name:'Queimando',color:'#fb986e',stack:'add',cap:30,tone:'negativo',description:'Perde Vida por segundo.'},
   electric:{name:'Eletrificado',color:'#f9df7c',stack:'add',cap:.35,tone:'negativo',description:'Choque: cada golpe recebido atrasa a próxima ação.'},
   silenced:{name:'Silenciado',color:'#b6a3d7',stack:'refresh',cap:1,tone:'negativo',description:'Não inicia habilidades; preparações em andamento continuam.'},

@@ -82,8 +82,9 @@
 .arena-v2 .team-rivals{align-items:end}
 .arena-v2 .team-allies{align-items:start}
 /* O do meio dá um passo à frente: os dois times formam um arco, não uma fila. */
-.arena-v2 .team-rivals .unit[data-slot="1"]{transform:translateY(9px)}
-.arena-v2 .team-allies .unit[data-slot="1"]{transform:translateY(-9px)}
+/* top/left, não transform: a medida da mira (offsetTop/offsetLeft, BattleScreen) enxerga este deslocamento; com transform, a mira do lutador do meio ficava 9 px fora do centro */
+.arena-v2 .team-rivals .unit[data-slot="1"]{top:9px}
+.arena-v2 .team-allies .unit[data-slot="1"]{top:-9px}
 
 /* ---------- A unidade ---------- */
 .arena-v2 .unit{--team:var(--ally);--team-deep:var(--ally-deep);position:relative;min-width:0;display:flex;flex-direction:column;align-items:center;gap:3px;transition:transform .35s cubic-bezier(.2,.75,.2,1),opacity .4s,filter .4s}
@@ -240,8 +241,8 @@
   .arena-v2 .team-allies{grid-column:1;grid-row:1}
   .arena-v2 .arena-center{grid-column:2;grid-row:1}
   .arena-v2 .team-rivals{grid-column:3;grid-row:1}
-  .arena-v2 .team-rivals .unit[data-slot="1"]{transform:translateX(-12px)}
-  .arena-v2 .team-allies .unit[data-slot="1"]{transform:translateX(12px)}
+  .arena-v2 .team-rivals .unit[data-slot="1"]{top:0;left:-12px}
+  .arena-v2 .team-allies .unit[data-slot="1"]{top:0;left:12px}
   /* Unidade deitada: medalhão para o centro, informação para fora. */
   .arena-v2 .team{grid-template-rows:repeat(3,auto);gap:clamp(4px,2.6dvh,30px)}
   .arena-v2 .team-allies{justify-items:end}.arena-v2 .team-rivals{justify-items:start}

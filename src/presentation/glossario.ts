@@ -47,7 +47,7 @@ const FAZ: Record<StatusId, string> = {
 
 const acumula = (id: StatusId) => {
   const s = statuses[id];
-  if (s.stack !== 'add') return 'Aplicar de novo renova o tempo; não soma.';
+  if (s.stack !== 'add') return 'Aplicar de novo renova o tempo e fica o mais forte; não soma.';
   const teto = id === 'regen' || id === 'burning' ? `${s.cap} de Vida por segundo` : pct(s.cap);
   return `Cada aplicação soma com a anterior, até ${teto}.`;
 };

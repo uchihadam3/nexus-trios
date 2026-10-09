@@ -70,6 +70,7 @@ const MUTUO: Record<string, (a: string, b: string) => string> = {
   'cuida-fragil': (a, b) => `${a} e ${b} se curam e se protegem`,
   'carga-golpe': (a, b) => `${a} e ${b} enchem a Carga um do outro`,
   'abre-vulneravel': (a, b) => `${a} e ${b} abrem os rivais um para o outro`,
+  'protege-vinganca': (a, b) => `${a} e ${b} se seguram de pé e crescem apanhando`,
 };
 
 function motivosDe(c: string, time: string[]): (Motivo & { ordem: number })[] {
@@ -79,7 +80,7 @@ function motivosDe(c: string, time: string[]): (Motivo & { ordem: number })[] {
     const ida = combinacoes(c, m), volta = combinacoes(m, c);
     for (const x of ida) {
       const par = volta.find((y) => y.chave === x.chave);
-      motivos.push({ texto: par ? MUTUO[x.chave]!(nome(c), nome(m)) : x.texto, tom: 'bom', ordem: 10 + (par ? 2 : 1) * x.peso * 100 });
+      motivos.push({ texto: (par && MUTUO[x.chave]?.(nome(c), nome(m))) || x.texto, tom: 'bom', ordem: 10 + (par ? 2 : 1) * x.peso * 100 });
     }
     for (const y of volta) if (!ida.some((x) => x.chave === y.chave)) motivos.push({ texto: y.texto, tom: 'bom', ordem: 10 + y.peso * 100 });
   }

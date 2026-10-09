@@ -5,7 +5,15 @@ import { LIGACOES, ligacoesDoTrio } from './sinergia';
 export interface Encounter {team:string[];name:string;power:number;scale:number}
 export interface Draft {team:string[];candidates:string[];skips:number;rng:number;banned?:string[]}
 export function candidates(draft:Draft,exclude:string[]=[]):string[]{return shuffle(characters.filter(c=>!draft.team.includes(c.id)&&!draft.banned?.includes(c.id)&&!exclude.includes(c.id)).map(c=>c.id),draft).slice(0,3);}
-export function newDraft(seed:number,banned:string[]=[]):Draft{const d={team:[],candidates:[],skips:3,rng:seed>>>0,banned};return {...d,candidates:candidates(d)};}
+/*
+ * O sorteio dos candidatos avança o estado do draft (`rng`). Antes, o
+ * `{...d, candidates: candidates(d)}` copiava o estado *antes* do sorteio, e
+ * a primeira troca sorteava de novo a partir da mesma semente: a segunda tela
+ * saía amarrada à primeira, e alguns personagens apareciam bem menos (Goku
+ * −13% em 200 mil jornadas). tests/sorteio.test.ts confere que todos têm a
+ * mesma chance.
+ */
+export function newDraft(seed:number,banned:string[]=[]):Draft{const d:Draft={team:[],candidates:[],skips:3,rng:seed>>>0,banned};d.candidates=candidates(d);return d;}
 export function skipDraft(d:Draft):Draft{if(d.skips<=0)return d;const next={...d,skips:d.skips-1};next.candidates=candidates(next,d.candidates);return next;}
 export function pickDraft(d:Draft,id:string):Draft{if(d.team.length>=3||!d.candidates.includes(id)||d.team.includes(id))return d;const next={...d,team:[...d.team,id]};next.candidates=next.team.length<3?candidates(next):[];return next;}
 /*

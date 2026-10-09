@@ -18,6 +18,7 @@ import { appendFileSync, readFileSync, writeFileSync } from 'node:fs';
 import { characters } from '../src/data/characters';
 import { createBattle, stepBattle } from '../src/engine/battle';
 import { LIGACOES, ligacoesDoTrio } from '../src/engine/sinergia';
+import { ENGINE_VERSION, rosterFingerprint } from '../src/engine/ranked';
 
 const ids = characters.map((c) => c.id);
 const [modo, ...args] = process.argv.slice(2);
@@ -90,6 +91,14 @@ if (modo === 'simular') {
  * Escala: diferença de 1 entre dois trios ≈ 73% de chance para o mais forte.
  * Não editar à mão: rode o script de novo depois de mudar o elenco.
  */
+
+/*
+ * Com que motor e elenco a força foi medida. As Dicas de trio e a campanha
+ * usam esta força; tests/forca-atualizada.test.ts falha se um personagem ou
+ * o motor mudar sem medir de novo.
+ */
+export const MEDIDA_COM = { motor: ${JSON.stringify(ENGINE_VERSION)}, elenco: ${JSON.stringify(rosterFingerprint())} };
+
 export const FORCA: Record<string, number> = {
 ${forca.map(([k, v]) => `  ${JSON.stringify(k)}: ${v},`).join('\n')}
 };

@@ -166,7 +166,7 @@ Deno.serve(async (request:Request)=>{
     if(input.action==='historico'){
       const {data,error}=await admin.from('ranked_runs').select('id,mode,period_key,score,encounters_cleared,team_ids,finished_at,summary').eq('player_id',user.id).eq('verified',true).order('finished_at',{ascending:false}).limit(100);
       if(error)throw error;
-      return json({runs:(data??[]).map(r=>({id:r.id,mode:r.summary?.livre?'free':r.mode,period:r.period_key,score:r.score,progress:r.encounters_cleared,team:r.team_ids,date:r.finished_at}))},200,origin);
+      return json({runs:(data??[]).map(r=>({id:r.id,mode:r.summary?.livre?'free':r.mode,period:r.period_key,score:r.score,progress:r.encounters_cleared,team:r.team_ids,date:r.finished_at,dicas:r.summary?.dicas===true}))},200,origin);
     }
     if(input.action==='leaderboard'){
       const mode=input.mode==='weekly'?'weekly':input.mode==='season'?'season':'daily';

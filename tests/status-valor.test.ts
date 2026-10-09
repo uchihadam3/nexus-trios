@@ -32,7 +32,9 @@ describe('valor do Status na batalha', () => {
 
   it('os de Vida mostram Vida por segundo', () => {
     expect(valorAtualDoStatus('burning', 12)).toBe('12 de Vida/s');
-    expect(tetoDoStatus('regen')).toBe('25 de Vida/s');
+    expect(tetoDoStatus('burning')).toBe('30 de Vida/s');
+    // a Regeneração não soma: vale a mais forte (o número escrito é o que cura)
+    expect(tetoDoStatus('regen')).toBeNull();
   });
 
   it('quem só renova não tem teto de soma', () => {
