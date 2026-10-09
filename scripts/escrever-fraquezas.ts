@@ -54,15 +54,30 @@ const CONDICAO: Record<string, string> = {
   vulnerable: 'um inimigo estiver vulnerável (Exposto, Marcado, Queimando, Envenenado…)', storedEnergy: 'houver energia guardada',
 };
 
-/* Quanto ele vence a menos contra rivais com esta identidade (em pontos). */
-function contra(m: Medida, id: string): number {
+/* Quanto ele vence a menos contra rivais com esta identidade (em pontos), bruto. */
+function contraBruto(m: Medida, id: string): number | undefined {
   const c = m.contra[id];
-  if (!c || c.lutas < 40) return 0;
-  return Math.round((m.vitorias - c.vitorias) * 100);
+  if (!c || c.lutas < 40) return undefined;
+  return (m.vitorias - c.vitorias) * 100;
+}
+/*
+ * O normal do elenco contra cada identidade: quando uma mecânica é forte contra
+ * quase todo mundo (Provocar, Refletir), "vence menos contra ela" não é ponto
+ * fraco de ninguém em particular. Conta só o que passa do normal.
+ */
+const NORMAL_CONTRA = new Map<string, number>();
+for (const id of new Set(dados.medidas.flatMap((m) => Object.keys(m.contra)))) {
+  const v = dados.medidas.map((m) => contraBruto(m, id)).filter((x): x is number => x !== undefined).sort((a, b) => a - b);
+  NORMAL_CONTRA.set(id, v.length ? v[Math.floor(v.length / 2)]! : 0);
+}
+function contra(m: Medida, id: string): number {
+  const d = contraBruto(m, id);
+  return d === undefined ? 0 : Math.round(d - (NORMAL_CONTRA.get(id) ?? 0));
 }
 
 interface Candidata { nota: number; texto: string; chave: string }
 
+const DANOS = characters.map((x) => Math.max(0, ...x.skills.map(danoDe)));
 const mediana = (v: number[]) => [...v].sort((a, b) => a - b)[Math.floor(v.length / 2)]!;
 const intervaloTipico = mediana(intervalos);
 
@@ -108,10 +123,8 @@ function candidatas(c: Character, m: Medida): Candidata[] {
   if (pIntervalo >= 0.75) {
     const quemTrava = Math.max(dCtl, dInt);
     const nota = (pIntervalo - 0.75) * 6 + (c.interval >= 5 ? 0.6 : 0) + Math.max(0, quemTrava - 2) * 0.3;
-    const vezes = c.interval / intervaloTipico;
-    const ritmo = vezes >= 1.8 ? `no tempo de um golpe dele, o rival comum ataca ${num(vezes, 0)} vezes` : `o comum é a cada ${num(intervaloTipico, 1)} s`;
     const contraQuem = dCtl >= dInt ? 'Controle' : 'Interrupção';
-    out.push({ chave: 'lento', nota, texto: `Contra ${contraQuem}: o ataque básico (${c.basic.name}) sai só a cada ${num(c.interval, 1)} s (${ritmo}), então o dano dele vem das habilidades — travado ou com o Preparo cortado, quase não machuca${aMenos(quemTrava)}` });
+    out.push({ chave: 'lento', nota, texto: `Contra ${contraQuem}: o básico (${c.basic.name}) sai só a cada ${num(c.interval, 1)} s (o comum é ${num(intervaloTipico, 1)} s), então o dano vem das habilidades — travado ou cortado, quase não machuca${aMenos(quemTrava)}` });
   }
   // dano num alvo só, contra quem repõe
   if (!temArea(c) && dCura >= 4) {
@@ -139,7 +152,7 @@ function candidatas(c: Character, m: Medida): Candidata[] {
     out.push({ chave: 'apanha', nota: 1.2 + (pVida <= 0.4 ? 0.4 : 0) + Math.max(0, dExp - 2) * 0.2, texto: `Precisa apanhar para crescer: ${c.trait.name} só o fortalece quando ele recebe dano — contra Explosão, cai antes de crescer o bastante para ${forte.name} fazer diferença${aMenos(dExp)}` });
   }
   // tanques
-  if (dTanque >= 6) out.push({ chave: 'tanque', nota: dTanque * 0.3, texto: `Contra Tanques: o dano dele não dá conta de quem aguenta muito${aMenos(dTanque)}` });
+  if (dTanque >= 6) out.push({ chave: 'tanque', nota: dTanque * 0.3, texto: `Contra Tanques: ${forte.name} não dá conta de quem aguenta muito — o rival segura o golpe e continua de pé${aMenos(dTanque)}` });
   /*
    * As mecânicas novas: cada uma só vira ponto fraco quando o kit dá o motivo
    * E a medida mostra que ele vence menos contra quem tem aquela tag.
@@ -147,22 +160,23 @@ function candidatas(c: Character, m: Medida): Candidata[] {
   const REFORCO_PROPRIO = ['strengthened', 'haste', 'protected', 'regen', 'barrier', 'evasion', 'vampirism', 'reflect', 'thorns'];
   const buff = c.skills.find((s) => s.effects.some((e) => e.kind === 'status' && REFORCO_PROPRIO.includes(e.status) && (e.target ?? s.target) === 'self'));
   const dDis = contra(m, 'Dissipar');
-  if (buff && dDis >= 4) {
+  if (buff && dDis >= 6) {
     const st = buff.effects.find((e) => e.kind === 'status' && REFORCO_PROPRIO.includes(e.status))!;
     out.push({ chave: 'dissipar', nota: dDis * 0.32, texto: `Contra Dissipar: a força dele vem de ${buff.name} (${st.kind === 'status' ? NOME_DO_STATUS[st.status] ?? st.status : ''}) — quem dissipa tira o reforço e ele volta a ser comum${aMenos(dDis)}` });
   }
   const DEBUFF_FORTE = ['paralyzed', 'frozen', 'sleep', 'poison', 'bleed', 'burning', 'cursed', 'confused', 'silenced', 'rooted'];
   const prende = c.skills.find((s) => s.effects.some((e) => e.kind === 'status' && DEBUFF_FORTE.includes(e.status) && (e.target ?? s.target) !== 'self'));
   const dPur = contra(m, 'Purificar');
-  if (prende && dPur >= 4) out.push({ chave: 'purificar', nota: dPur * 0.32, texto: `Contra Purificar: o plano dele é ${prende.name} — quem purifica limpa o rival e desfaz a jogada${aMenos(dPur)}` });
+  if (prende && dPur >= 6) out.push({ chave: 'purificar', nota: dPur * 0.32, texto: `Contra Purificar: o plano dele é ${prende.name} — quem purifica limpa o rival e desfaz a jogada${aMenos(dPur)}` });
   const dProv = contra(m, 'Provocar');
-  if (dProv >= 5) out.push({ chave: 'provocar', nota: dProv * 0.3, texto: `Contra Provocar: o rival que provoca puxa os golpes de ${forte.name} para quem aguenta, longe de quem ele queria derrubar${aMenos(dProv)}` });
+  const umAlvo = forte.target !== 'allEnemies' && !forte.effects.some((e) => e.target === 'allEnemies');
+  if (dProv >= 7 && umAlvo) out.push({ chave: 'provocar', nota: dProv * 0.3, texto: `Contra Provocar: o rival que provoca puxa os golpes de ${forte.name} para quem aguenta, longe de quem ele queria derrubar${aMenos(dProv)}` });
   const dEsq = contra(m, 'Esquiva');
-  if (dEsq >= 5 && danoDe(forte) > 0) out.push({ chave: 'esquiva', nota: dEsq * 0.3, texto: `Contra Esquiva: ${forte.name} é um golpe só — se o rival esquiva, a jogada inteira passa longe${aMenos(dEsq)}` });
+  if (dEsq >= 7 && umAlvo && posicao(DANOS, danoDe(forte)) >= 0.5) out.push({ chave: 'esquiva', nota: dEsq * 0.3, texto: `Contra Esquiva: ${forte.name} é um golpe só — se o rival esquiva, a jogada inteira passa longe${aMenos(dEsq)}` });
   const dRef = Math.max(contra(m, 'Refletir'), contra(m, 'Espinhos'));
-  if (dRef >= 5 && danoDe(forte) > 0) out.push({ chave: 'refletir', nota: dRef * 0.3, texto: `Contra Refletir e Espinhos: bate forte com ${forte.name} e leva parte do golpe de volta${aMenos(dRef)}` });
+  if (dRef >= 7 && posicao(DANOS, danoDe(forte)) >= 0.6) out.push({ chave: 'refletir', nota: dRef * 0.3, texto: `Contra Refletir e Espinhos: bate forte com ${forte.name} e leva parte do golpe de volta${aMenos(dRef)}` });
   const dCeg = contra(m, 'Cegueira');
-  if (dCeg >= 5) out.push({ chave: 'cegueira', nota: dCeg * 0.3, texto: `Contra Cegueira: o ataque básico (${c.basic.name}) passa longe com frequência, e é ele que enche a Carga das habilidades${aMenos(dCeg)}` });
+  if (dCeg >= 7) out.push({ chave: 'cegueira', nota: dCeg * 0.3, texto: `Contra Cegueira: o ataque básico (${c.basic.name}) passa longe com frequência, e é ele que enche a Carga das habilidades${aMenos(dCeg)}` });
   return out;
 }
 

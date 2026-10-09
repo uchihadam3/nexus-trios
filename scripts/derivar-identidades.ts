@@ -108,7 +108,9 @@ const avaliar = (c: Character): Map<Identidade, number> => {
 
   /* Ajudar o trio — e aqui mora a proibição da cura incidental. */
   const curaNosOutros = n('cura') - n('curaEmSi');
-  dar('Cura', percentil('curaNosOutros', curaNosOutros));
+  // a cura tem que estar no kit (habilidade, traço ou o golpe que cura); copiar a cura de um rival não conta
+  const curaNoKit = temEfeito(c, ({ e, alvo }) => (e.kind === 'heal' || (e.kind === 'status' && e.status === 'regen')) && (alvo === 'allyWeak' || alvo === 'allAllies')) || c.basic.jeito?.tipo === 'cura';
+  if (curaNoKit) dar('Cura', percentil('curaNosOutros', curaNosOutros));
   dar('Proteção', p('protecao'));
   dar('Buff', p('buffsEmAliado'));
   /*

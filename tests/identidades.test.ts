@@ -100,7 +100,7 @@ describe('identidades públicas', () => {
         { e: c.trait.effects, alvo: c.trait.target }];
       return partes.some(({ e, alvo }) => e.some((x) =>
         (x.kind === 'heal' || (x.kind === 'status' && x.status === 'regen'))
-        && ['allAllies', 'allyWeak'].includes(x.target ?? alvo)));
+        && ['allAllies', 'allyWeak'].includes(x.target ?? alvo))) || c.basic.jeito?.tipo === 'cura';
     };
     const mentirosos = todas.filter(({ c, ids }) => ids.includes('Cura') && !curaAliado(c.id));
     expect(mentirosos.map((x) => x.c.name)).toEqual([]);
