@@ -9,8 +9,9 @@ describe('replay compartilhado da ranqueada',()=>{
   it('reproduz pontuação e resultados sem depender do estado da tela',()=>{
     const first=replayRanked(team,seed),second=replayRanked(team,seed);
     expect(first).toEqual(second);
-    expect(first.score).toBeGreaterThanOrEqual(first.encountersCleared*1_000_000);
-    expect(first.score).toBeLessThan((first.encountersCleared+1)*1_000_000);
+    // escala por feitos (src/engine/pontos.ts): dezenas de milhares por luta, e a luta perdida também conta
+    expect(first.score).toBeGreaterThan(0);
+    expect(first.score).toBeLessThan(first.summaries.length*400_000);
     expect(first.summaries.length).toBe(first.encountersCleared+(first.encountersCleared===10?0:1));
     expect(rosterFingerprint()).toMatch(/^fnv1a-[0-9a-f]{8}$/);
   });

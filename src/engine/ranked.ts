@@ -6,8 +6,10 @@ import {summarizeBattle,type RunBattleSummary} from './run-summary';
 
 /* 250.4: Preparo mínimo de 0,5 s (leve), efeitos repetidos somados, condições alcançáveis.
  * 250.5: pontos por desempenho (src/engine/pontos.ts), e a luta perdida também pontua.
- * 250.6: rivais escolhidos pela força medida e pela sinergia, chefe sem trio fixo (src/engine/campaign.ts). */
-export const ENGINE_VERSION='nexus-250.6';
+ * 250.6: rivais escolhidos pela força medida e pela sinergia, chefe sem trio fixo (src/engine/campaign.ts).
+ * 250.7: dificuldade calibrada para quem escolhe bem; luta com tempo máximo (decidida pela Vida).
+ *        Cada versão tem o seu ranking: a 250.7 começa com Hoje, Semana e Geral vazios. */
+export const ENGINE_VERSION='nexus-250.7';
 /* Temporada 2: a escala dos pontos mudou (dezenas de milhares por luta, não milhões); a temporada nova não mistura as duas. */
 export const BALANCE_VERSION='season-2';
 export const rosterFingerprint=()=>{

@@ -3,6 +3,7 @@ import type { Character, Effect, Skill, Target, Trait, Visual, ChargeRule } from
 import { expandedCharacters } from './expanded-roster';
 import { intelligenceFor } from './intelligence';
 import { alinharEfeitos } from './alinhar-efeitos';
+import { AJUSTE_DE_FORCA, AJUSTE_DE_RITMO } from './ajuste-de-forca';
 
 const damage=(value:number,target?:Target):Effect=>({kind:'damage',value,target});
 const heal=(value:number,target:Target='self'):Effect=>({kind:'heal',value,target});
@@ -45,6 +46,23 @@ function character(e:Entry):Character {
   return {...rest,portrait:imagePortraits[e.id]??`/portraits/${e.id}.svg`,deathNoteCompatible:e.deathNoteCompatible??false,basic:{name:'Ataque básico',effects:[damage(attack),...(basicEffects??[])],visual,target:'enemyWeak'}};
 }
 const timed=(n:number)=>[charge('time',n)];
+/*
+ * Equilíbrio entre os 250 (pedido do jogador: "nenhum personagem tão ruim que
+ * com ele você nunca vence as 10, e nenhum tão forte que com ele qualquer
+ * dupla vence"). Cada um tem um multiplicador medido em lutas simuladas
+ * (src/data/ajuste-de-forca.ts) que escala a Vida e o que ele produz — dano,
+ * cura, escudo e energia guardada — e, para os poucos cuja força vem de
+ * controle e investigação (não de dano), o ritmo (AJUSTE_DE_RITMO, intervalo
+ * entre ações). Não muda o estilo do kit. Os textos das
+ * fichas saem destes números.
+ */
+function ajustaForca(c:Character):Character{
+  const m=AJUSTE_DE_FORCA[c.id]??1,ritmo=AJUSTE_DE_RITMO[c.id]??1;
+  if(m===1&&ritmo===1)return c;
+  const ef=(e:Effect):Effect=>e.kind==='damage'||e.kind==='heal'||e.kind==='shield'?{...e,value:Math.round(e.value*m)}:e.kind==='store'?{...e,value:Math.round(e.value*m),cap:Math.round(e.cap*m)}:e;
+  return {...c,hp:Math.round(c.hp*m),interval:Math.round(c.interval*ritmo*100)/100,basic:{...c.basic,effects:c.basic.effects.map(ef)},trait:{...c.trait,effects:c.trait.effects.map(ef)},
+    skills:c.skills.map(s=>({...s,effects:s.effects.map(ef)})) as Character['skills']};
+}
 export const characters:Character[] = [
  character({id:'goku',name:'Goku',universe:'Dragon Ball',color:'#f7a25e',symbol:'G',idea:'Quanto mais luta, mais forte fica.',vulnerability:'Grandes preparações expostas a interrupções.',hp:1100,interval:3.8,attack:66,visual:'beam',power:87,tags:['growth','burst'],trait:trait('Além do limite','Cada ação aumenta seu poder em 3%, até 80%.','action',[status('strengthened',.03,120)],'self',0),skills:[
   skill('Kamehameha','beam','Prepara uma onda de 310 de dano.','Tempo + ações', [charge('time',3),charge('action',10)],[damage(310)],{preparation:3,cooldown:5}),
@@ -81,7 +99,7 @@ export const characters:Character[] = [
  character({id:'saitama',name:'Saitama',universe:'One Punch Man',color:'#e4c36d',symbol:'1',idea:'Poucos golpes. Enorme impacto.',vulnerability:'Muito lento; sofre com controle e interrupções.',hp:1310,interval:8.5,attack:190,visual:'impact',power:89,tags:['burst','durable'],deathNoteCompatible:true,trait:trait('Ainda aqui','A cada 10 s, recebe proteção de 20% por 4 s.','time',[status('protected',.2,4)],'self',10),skills:[
   skill('Soco normal','impact','Causa 320 de dano.','Ações + tempo',[charge('action',28),charge('time',2.5)],[damage(320)],{preparation:1.2,cooldown:6}),
   skill('Passo lateral','shield','Protege um aliado com escudo de 240.','Aliados feridos',[charge('allyHurt',18),charge('time',1.4)],[shield(240)],{target:'allyWeak',condition:'threatened'}),
-  skill('Soco sério','impact','Um impacto de 700 de dano, sem vitória garantida.','Tempo em luta',[charge('survived',2.4)],[damage(700)],{preparation:3.2,cooldown:18})]}),
+  skill('Soco sério','impact','Um impacto de 700 de dano, sem vitória garantida.','Tempo em luta e cada ação',[charge('survived',2.4),charge('action',12)],[damage(700)],{preparation:3.2,cooldown:18})]}),
  character({id:'wolverine',name:'Wolverine',universe:'Marvel',color:'#d4bb60',symbol:'W',idea:'Absorve pressão. Volta para a luta.',vulnerability:'Pode cair antes de conseguir se regenerar.',hp:1250,interval:3.6,attack:65,visual:'slash',power:85,tags:['regen','protect'],deathNoteCompatible:true,trait:trait('Fator de cura','Regenera 5 de Vida por segundo.','time',[heal(5)],'self',1),skills:[
   skill('Garras de adamantium','slash','Causa 210 de dano e expõe o alvo.','Ações',[charge('action',20),charge('time',2)],[damage(210),status('exposed',.2,8)]),
   skill('Na minha frente','shield','Escudo de 260 e proteção para o aliado mais ferido.','Aliados feridos',[charge('allyHurt',22),charge('time',2)],[shield(260),status('protected',.2,6)],{target:'allyWeak',condition:'threatened'}),
@@ -143,7 +161,7 @@ export const characters:Character[] = [
   skill('Joia do Tempo','wave','Retarda todos e reduz preparações pela metade.','Preparações inimigas + tempo',[charge('enemyCast',22),charge('time',3)],[status('slow',.4,8,'allEnemies'),{kind:'interrupt',mode:'reduce',value:.5,target:'allEnemies'}],{target:'allEnemies'}),
   skill('Equilíbrio','psychic','Causa 240 de dano a todos e enfraquece por 9 s.','Tempo em luta + dano causado',[charge('survived',2.8),charge('dealt',7)],[damage(240,'allEnemies'),status('weakened',.25,9,'allEnemies')],{preparation:4.5,target:'allEnemies',cooldown:14})]}),
   ...expandedCharacters.map(c=>imagePortraits[c.id]?{...c,portrait:imagePortraits[c.id]}:c),
-] .map(alinharEfeitos)
+] .map(alinharEfeitos).map(ajustaForca)
  .map(c=>({...c,intelligence:intelligenceFor(c.id,c.tags),
    /* Ponto fraco medido (scripts/escrever-fraquezas.ts): contra o quê ele é ruim e por quê. */
    vulnerability:fraquezas[c.id]??c.vulnerability}));

@@ -22,7 +22,9 @@ describe('Direção sem alterar regras',()=>{
  it('explica a regra real da habilidade, incluindo alvo, números, carga e preparação',()=>{
   const expansion=byId.gojo.skills[2];
   expect(describeSkill(expansion)).toContain('todos os inimigos');
-  expect(describeSkill(expansion)).toContain('150');
+  // o número vem da ficha (com o ajuste de força do personagem), não de um valor fixo
+  const dano=expansion.effects.find(e=>e.kind==='damage');
+  expect(describeSkill(expansion)).toContain(String(dano&&'value' in dano?dano.value:''));
   expect(describeSkillUse(expansion)).toContain('+3,4% por segundo');
   expect(describeSkillUse(expansion)).toContain('Preparo: 5 s');
   expect(describeSkillUse(expansion)).toContain('Resfriamento: 14 s');

@@ -7,7 +7,8 @@
  * golpe grande para carregar; quem deixa o rival Exposto/Marcado/Paralisado/
  * Eletrizado/Queimando abre caminho para quem só ataca o rival vulnerável;
  * cura e escudo seguram quem tem pouca Vida; reforço vale mais em quem bate
- * forte; e assim por diante.
+ * forte; quem põe Status no rival faz disparar quem reage a Status (Light,
+ * Zelda…); e assim por diante.
  *
  * Cada combinação é uma "ligação". Quanto cada ligação vale (em força de
  * luta) foi medido em lutas simuladas, junto com a força de cada personagem
@@ -17,7 +18,7 @@
 import { characters, byId } from '../data/characters';
 import type { Character, Effect, StatusId, Target } from './types';
 
-export const LIGACOES = ['carga-golpe', 'abre-vulneravel', 'abre-ferido', 'cuida-fragil', 'reforca-forte', 'adianta-golpe', 'protege-vinganca', 'controla-dano'] as const;
+export const LIGACOES = ['carga-golpe', 'abre-vulneravel', 'abre-ferido', 'cuida-fragil', 'reforca-forte', 'adianta-golpe', 'protege-vinganca', 'controla-dano', 'status-gatilho'] as const;
 export type Ligacao = (typeof LIGACOES)[number];
 
 const PARA_ALIADOS: Target[] = ['allAllies', 'allyWeak'];
@@ -30,6 +31,7 @@ interface Papel {
   daCarga: boolean; adianta: boolean; reforca: boolean; cuida: boolean;
   abre: boolean; prende: boolean; golpeGrande: boolean; precisaVulneravel: boolean;
   precisaFerido: boolean; fragil: boolean; forte: boolean; vinganca: boolean;
+  aplicaStatus: boolean; reageAStatus: boolean;
 }
 
 function efeitos(c: Character): { e: Effect; alvo: Target }[] {
@@ -65,6 +67,9 @@ export function papelDe(id: string): Papel {
     fragil: c.hp < VIDA_MEDIANA * 0.94,
     forte: danoDe(c) >= DANO_ALTO,
     vinganca: ['received', 'allyHurt', 'losing', 'survived'].includes(c.trait.on) || c.skills.some((s) => s.condition === 'threatened'),
+    // quando um aliado põe Status no rival, o traço dispara e as habilidades carregam (battle.ts, 'status'/'negativeStatus')
+    aplicaStatus: ef.some(({ e, alvo }) => e.kind === 'status' && rival(alvo)),
+    reageAStatus: ['status', 'negativeStatus'].includes(c.trait.on) || c.skills.some((s) => s.charge.some((r) => r.on === 'status' || r.on === 'negativeStatus')),
   };
   papeis.set(id, p);
   return p;
@@ -84,6 +89,7 @@ export function ligacoesDoTrio(trio: readonly string[]): Record<Ligacao, number>
     if (pa.adianta && pb.golpeGrande) n['adianta-golpe']++;
     if (pa.cuida && pb.vinganca) n['protege-vinganca']++;
     if (pa.prende && pb.forte) n['controla-dano']++;
+    if (pa.aplicaStatus && pb.reageAStatus) n['status-gatilho']++;
   }
   // a mesma ligação repetida ajuda cada vez menos
   for (const l of LIGACOES) n[l] = Math.min(2, n[l]);

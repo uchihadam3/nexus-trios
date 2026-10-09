@@ -1,5 +1,5 @@
 import { characters, byId } from '../data/characters';
-import { shuffle } from './random';
+import { random, shuffle } from './random';
 import { FORCA, PESO_DA_LIGACAO } from '../data/forca-dos-rivais';
 import { LIGACOES, ligacoesDoTrio } from './sinergia';
 export interface Encounter {team:string[];name:string;power:number;scale:number}
@@ -18,44 +18,60 @@ export function pickDraft(d:Draft,id:string):Draft{if(d.team.length>=3||!d.candi
  * peso de cada ligação de sinergia (src/engine/sinergia.ts) vêm de lutas
  * simuladas (scripts/medir-forca.ts → src/data/forca-dos-rivais.ts).
  *
- * Cada jornada sorteia uma rodada de personagens (DIFICULDADE.rodada) e,
- * dentro dela, dezenas de trios. O chefe da luta 10 é o mais forte desses
- * trios — muda a cada jornada, porque a rodada muda. As lutas 1 a 9 sobem de força e de sinergia
- * a cada luta, e a Vida extra dos rivais (ESCALAS) fecha a curva: a chance de
- * vencer cada luta foi calibrada em lutas simuladas (scripts/calibrar-dificuldade.ts).
+ * Detalhes da calibração logo abaixo, em TRIOS_DA_LUTA.
  */
 export function sinergiaDoTrio(team:readonly string[]):number{const l=ligacoesDoTrio(team);return LIGACOES.reduce((n,k)=>n+l[k]*(PESO_DA_LIGACAO[k]??0),0);}
 export function forcaDoTrio(team:readonly string[]):number{return team.reduce((n,id)=>n+(FORCA[id]??0),0)+sinergiaDoTrio(team);}
-/** Vida dos rivais em cada luta (×): sobe devagar; quem faz a dificuldade é a força do trio escolhido. */
-export const ESCALAS=[.9,.92,.94,.96,.98,1,1.02,1.04,1.06,1.08];
 /*
- * Quão forte é o trio das lutas 1 a 9, como posição entre os trios possíveis
- * da rodada (0 = o mais fraco, 1 = o mais forte), e quantos trios são
- * sorteados para achar o chefe (o mais forte entre mais trios é mais forte). Calibrados por scripts/calibrar-dificuldade.ts para a chance de
- * vencer seguir ~70%, 64%, 58% … 21% e ~12% no chefe (o jogador aceitou até 10%).
+ * A dificuldade é calibrada para quem escolhe bem (pedidos do jogador: a curva
+ * vale para quem escolhe bem; ~10% das jornadas bem jogadas terminam com as 10
+ * vitórias; e escolher bem tem que pesar). O "jogador bom" de referência escolhe no draft o
+ * candidato mais forte que combina com o trio e usa as trocas quando os
+ * candidatos são fracos (scripts/calibrar-dificuldade.ts).
+ *
+ * Cada luta sorteia TRIOS_DA_LUTA[i] trios com os personagens que sobraram e
+ * pega o mais forte entre os que não têm menos sinergia que o da luta
+ * anterior: quanto mais trios sorteados, mais forte o rival. O chefe é o mais
+ * forte entre DIFICULDADE.triosDoChefe trios — nunca um trio fixo. ESCALAS é
+ * a Vida dos rivais (×), que só sobe quando o trio mais forte não basta.
  */
-export const FORCA_DA_LUTA=[.32,.39,.47,.53,.61,.63,.69,.79,.85];
-export const DIFICULDADE={rodada:72,triosDoChefe:13};
+export const TRIOS_DA_LUTA=[1,1,1,1,1,1,1,5,48];
+export const DIFICULDADE={triosDoChefe:293};
+/** Sinergia máxima do rival da luta i: SINERGIA_MAXIMA × (i+1)/10 (o chefe não tem teto). */
+export const SINERGIA_MAXIMA=0.3;
+export const ESCALAS=[.74,.84,.85,.86,.95,.95,1,1,1,1];
 const names=['Primeiro encontro','Novos rivais','O ritmo aumenta','Entre universos','Ponto de ruptura','Pressão crescente','Sem recuar','A última barreira','À altura das lendas','O confronto final'];
-const CANDIDATOS=100;
 const chave=(t:readonly string[])=>[...t].sort().join('|');
+/* `count` trios diferentes sorteados de `ids` (três índices ao acaso; rápido mesmo para milhares de trios). */
 function sampledTeams(ids:string[],rng:{rng:number},count:number):string[][]{
-  const found=new Map<string,string[]>();
-  for(let i=0;i<count*5&&found.size<count;i++){const team=shuffle(ids,rng).slice(0,3);if(team.length===3&&!found.has(chave(team)))found.set(chave(team),team);}
+  const found=new Map<string,string[]>(),n=ids.length;
+  if(n<3)return [];
+  for(let i=0;i<count*5&&found.size<count;i++){
+    const a=Math.floor(random(rng)*n),b=Math.floor(random(rng)*n),c=Math.floor(random(rng)*n);
+    if(a===b||a===c||b===c)continue;
+    const team=[ids[a]!,ids[b]!,ids[c]!],k=chave(team);
+    if(!found.has(k))found.set(k,team);
+  }
   return [...found.values()];
 }
+type Candidato={team:string[];forca:number;sinergia:number};
+const avalia=(team:string[]):Candidato=>({team,forca:forcaDoTrio(team),sinergia:sinergiaDoTrio(team)});
 /*
- * O chefe: entre os trios sorteados com quem sobrou da rodada e entrosados
- * pelo menos como o da luta 9, o mais forte. Quanto mais trios sorteados,
- * mais forte ele sai.
+ * O rival de uma luta: o mais forte entre `quantos` trios sorteados que não
+ * têm menos sinergia que o anterior. Se nenhum dos sorteados é tão entrosado,
+ * sorteia mais antes de desistir (e aí fica com o mais entrosado).
  */
-function trioMaisForte(sobra:string[],rng:{rng:number},sinergiaMinima:number):string[]{
-  const todos=sampledTeams(sobra,rng,DIFICULDADE.triosDoChefe*20).map(team=>({team,forca:forcaDoTrio(team),sinergia:sinergiaDoTrio(team)}));
-  const entrosados=todos.filter(x=>x.sinergia>=sinergiaMinima-1e-9);
-  const lista=(entrosados.length?entrosados:todos).slice(0,DIFICULDADE.triosDoChefe);
-  return lista.reduce((a,b)=>b.forca>a.forca?b:a).team;
+function rival(sobra:string[],rng:{rng:number},quantos:number,sinergiaMinima:number,teto:number):Candidato{
+  const lista=sampledTeams(sobra,rng,quantos).map(avalia);
+  if(!lista.length)throw new Error('Elenco insuficiente para montar um rival sem repetição.');
+  // entre a sinergia da luta anterior e o teto desta luta (o teto sobe a cada luta: a sinergia cresce aos poucos e não acaba antes do chefe)
+  const naFaixa=(x:Candidato)=>x.sinergia>=sinergiaMinima-1e-9&&x.sinergia<=Math.max(teto,sinergiaMinima)+1e-9;
+  let ok=lista.filter(naFaixa);
+  if(!ok.length)ok=sampledTeams(sobra,rng,Math.max(400,quantos*6)).map(avalia).filter(naFaixa).slice(0,quantos);
+  // nenhum tão entrosado quanto o anterior: sorteia mais e fica com os que sobem menos (a sinergia sobe aos poucos e sobra entrosamento para as próximas lutas)
+  if(!ok.length)ok=sampledTeams(sobra,rng,Math.max(400,quantos*6)).map(avalia).filter(x=>x.sinergia>=sinergiaMinima-1e-9).sort((a,b)=>a.sinergia-b.sinergia).slice(0,quantos);
+  return ok.length?ok.reduce((a,b)=>b.forca>a.forca?b:a):lista.reduce((a,b)=>b.sinergia>a.sinergia||b.sinergia===a.sinergia&&b.forca>a.forca?b:a);
 }
-const quantil=(xs:number[],x:number)=>xs.filter(v=>v<x).length/Math.max(1,xs.length-1);
 export function generateCampaign(seed:number,playerTeam:string[]=[]):Encounter[]{
   const uniquePlayer=[...new Set(playerTeam)];
   if(uniquePlayer.length!==playerTeam.length||playerTeam.some(id=>!byId[id]))throw new Error('O trio do jogador contém IDs repetidos ou inválidos.');
@@ -63,29 +79,16 @@ export function generateCampaign(seed:number,playerTeam:string[]=[]):Encounter[]
   const eligible=characters.map(c=>c.id).filter(id=>!uniquePlayer.includes(id));
   if(eligible.length<30)throw new Error('Elenco insuficiente: são necessários três personagens do jogador e trinta inimigos únicos.');
   const rng={rng:seed>>>0};
-  const rodada=shuffle(eligible,rng).slice(0,Math.max(33,Math.min(DIFICULDADE.rodada,eligible.length)));
   const used=new Set(uniquePlayer);
   const encounters:Encounter[]=[];
   let sinergiaAnterior=-Infinity;
-  for(let i=0;i<9;i++){
-    const remaining=rodada.filter(id=>!used.has(id));
-    const lista=sampledTeams(remaining,rng,CANDIDATOS).map(team=>({team,forca:forcaDoTrio(team),sinergia:sinergiaDoTrio(team)}));
-    if(!lista.length)throw new Error(`Elenco insuficiente para criar o encontro ${i+1} sem repetição.`);
-    const forcas=lista.map(x=>x.forca),sinergias=lista.map(x=>x.sinergia);
-    // a força sobe dos mais fracos (luta 1) aos mais fortes (luta 9); a sinergia sobe junto e nunca cai de uma luta para a outra
-    const alvoForca=FORCA_DA_LUTA[i]!,alvoSinergia=.05+.6*(i/8);
-    const nota=(x:typeof lista[number])=>Math.abs(quantil(forcas,x.forca)-alvoForca)*2+Math.abs(quantil(sinergias,x.sinergia)-alvoSinergia);
-    let semCair=lista.filter(x=>x.sinergia>=sinergiaAnterior-1e-9);
-    // nenhum dos sorteados é tão entrosado quanto o da luta anterior: procura mais trios antes de desistir
-    if(!semCair.length)semCair=sampledTeams(remaining,rng,CANDIDATOS*6).map(team=>({team,forca:forcaDoTrio(team),sinergia:sinergiaDoTrio(team)})).filter(x=>x.sinergia>=sinergiaAnterior-1e-9);
-    const escolhido=semCair.length?semCair.reduce((a,b)=>nota(b)<nota(a)?b:a):lista.reduce((a,b)=>b.sinergia>a.sinergia?b:a);
+  for(let i=0;i<10;i++){
+    const escolhido=rival(eligible.filter(id=>!used.has(id)),rng,i<9?TRIOS_DA_LUTA[i]!:DIFICULDADE.triosDoChefe,sinergiaAnterior,i<9?SINERGIA_MAXIMA*(i+1)/10:Infinity);
     sinergiaAnterior=escolhido.sinergia;
     const team=[...escolhido.team];
     encounters.push({team,name:names[i]!,power:Math.round(escolhido.forca*100)/100,scale:ESCALAS[i]!});
     team.forEach(id=>used.add(id));
   }
-  const boss=trioMaisForte(rodada.filter(id=>!used.has(id)),rng,sinergiaAnterior);
-  encounters.push({team:boss,name:names[9]!,power:Math.round(forcaDoTrio(boss)*100)/100,scale:ESCALAS[9]!});
   if(uniquePlayer.length===3){
     const result=validateCampaignUniqueness({team:uniquePlayer,encounters});
     if(!result.valid)throw new Error(`Campanha gerada com violações: ${result.errors.join('; ')}`);

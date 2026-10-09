@@ -19,8 +19,16 @@ type Mode='daily'|'weekly';
  * aceitas de quem estiver no meio de uma.
  */
 type Modo=Mode|'free';
-/* O ranking GERAL não muda de chave: fica para sempre. */
-const CHAVE_GERAL='geral';
+/*
+ * Cada versão do motor tem o seu ranking (pedido do jogador: "depois de
+ * recalibrar a força das lutas, zere o ranking para não ficar injusto").
+ * Jornadas de versões diferentes enfrentaram rivais diferentes e não se
+ * comparam. Nada é apagado: as chaves de Hoje, Semana e Geral levam a versão,
+ * e a versão nova começa com o ranking vazio. GERAL fica para sempre dentro
+ * da versão.
+ */
+const EPOCA=ENGINE_VERSION;
+const CHAVE_GERAL=`geral@${EPOCA}`;
 const url=Deno.env.get('SUPABASE_URL')!,secret=Deno.env.get('SUPABASE_SECRET_KEY')??Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!,publishable=Deno.env.get('SUPABASE_PUBLISHABLE_KEY')??Deno.env.get('SUPABASE_ANON_KEY')!;
 const admin=createClient(url,secret,{auth:{persistSession:false,autoRefreshToken:false}});
 const authClient=createClient(url,publishable,{auth:{persistSession:false,autoRefreshToken:false}});
@@ -53,7 +61,7 @@ async function profile(userId:string){const {data,error}=await admin.from('playe
  * quantas vagas sobram e o que a próxima entrada precisa superar.
  */
 type Escopo='daily'|'weekly'|'season';
-const chaveDo=(escopo:Escopo)=>escopo==='season'?CHAVE_GERAL:period(escopo);
+const chaveDo=(escopo:Escopo)=>escopo==='season'?CHAVE_GERAL:`${period(escopo)}@${EPOCA}`;
 /*
  * Uma página do ranking, mais as entradas da própria conta onde quer que
  * estejam — numeradas pelo banco (`ranking_pagina`). Antes, a função buscava
@@ -77,7 +85,8 @@ async function board(userId:string,mode:Escopo,detailId?:string,pagina=0){
   const publico=(r:LinhaDoRanking)=>{const run=runOf.get(r.run_id);return {position:Number(r.posicao),id:r.run_id,handle:handleOf.get(r.player_id)??'Jogador',score:r.score,progress:r.encounters_cleared,team:r.team_ids,date:r.achieved_at,seed:run?.seed??0,engineVersion:run?.engine_version??ENGINE_VERSION,balanceVersion:run?.balance_version??BALANCE_VERSION,highlights:run?.summary?.highlights??{}};};
   const inicio=pagina*POR_PAGINA,daPagina=rows.filter(r=>Number(r.posicao)>inicio&&Number(r.posicao)<=inicio+POR_PAGINA).map(publico);
   const meus=rows.filter(r=>r.player_id===userId).map(publico);
-  return {mode,period:key,entries:daPagina,mine:meus[0]??null,
+  // na tela, a data (ou "geral") sem a versão
+  return {mode,period:mode==='season'?'geral':period(mode),entries:daPagina,mine:meus[0]??null,
     meus:{entries:meus,vagas:Math.max(0,3-meus.length),precisaSuperar:meus.length>=3?Math.min(...meus.map(m=>m.score)):null},
     details:detailId?([...daPagina,...meus].find(x=>x.id===detailId)??null):null,
     pagina,total,temMais:inicio+POR_PAGINA<total};
@@ -145,7 +154,7 @@ Deno.serve(async (request:Request)=>{
        */
       const registrar=async(escopo:Escopo,chave:string)=>{const {data,error}=await admin.rpc('registrar_no_top3',{p_player:user.id,p_scope:escopo,p_period:chave,p_team:run.team_ids,p_run:run.id,p_score:verified.score,p_cleared:verified.encountersCleared});if(error)throw error;return data;};
       // um ranking só: a mesma jornada entra em Hoje, Semana e Geral (no dia e na semana em que foi validada)
-      const top3={periodo:await registrar('daily',period('daily')),semana:await registrar('weekly',period('weekly')),temporada:await registrar('season',CHAVE_GERAL)};
+      const top3={periodo:await registrar('daily',chaveDo('daily')),semana:await registrar('weekly',chaveDo('weekly')),temporada:await registrar('season',chaveDo('season'))};
       const {data:saved,error:saveError}=await admin.from('ranked_runs').update({verified:true,finished_at:new Date().toISOString(),encounters_cleared:verified.encountersCleared,score:verified.score,summary:{highlights:verified.highlights,outcomes:verified.summaries.map(s=>s.won),livre},digest}).eq('id',run.id).eq('verified',false).select('id').maybeSingle();
       if(saveError)throw saveError;if(!saved)return fail('Jornada já enviada.',409,origin);
       const player=await profile(user.id),xp=(player?.xp??0)+30+verified.encountersCleared*30+(verified.encountersCleared===10?250:0);

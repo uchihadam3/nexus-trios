@@ -1,72 +1,97 @@
 /*
- * Calibra a dificuldade da campanha (src/engine/campaign.ts) para a chance de
- * vencer cada luta seguir a curva pedida pelo jogador: ~70% na primeira,
- * caindo até ~15% na décima.
+ * Calibra a dificuldade da campanha (src/engine/campaign.ts) para quem escolhe
+ * bem: a chance de o "jogador bom" vencer cada luta segue ALVO (92% na
+ * primeira, 55% no chefe), e ~10% das jornadas bem jogadas terminam campeãs.
  *
- * A Vida extra dos rivais (ESCALAS) é fixa e sobe devagar; o que se calibra
- * é a força do trio escolhido para cada luta (FORCA_DA_LUTA, lutas 1–9) e quantos
- * trios são sorteados para achar o chefe (DIFICULDADE.triosDoChefe).
+ * O jogador bom faz o draft de verdade (newDraft/pickDraft/skipDraft): pega o
+ * candidato mais forte que combina com o trio (força medida + sinergia,
+ * src/data/forca-dos-rivais.ts) e usa as trocas quando os candidatos são
+ * fracos (o melhor fora dos 30% mais fortes). Cada luta é jogada por conta própria (não depende de ter vencido
+ * a anterior).
  *
- * A chance é medida com trios do jogador sorteados, cada luta jogada por conta
- * própria (não depende de ter vencido a anterior), por bissecção, com as
- * mesmas jornadas em todos os passos.
+ * Para cada luta, procura por bissecção quantos trios sortear (o rival é o
+ * mais forte deles: TRIOS_DA_LUTA / DIFICULDADE.triosDoChefe); se nem o
+ * máximo basta, procura a Vida extra (ESCALAS); se até um trio sorteado ao
+ * acaso é forte demais (começo da jornada), procura uma Vida menor que 1.
  *
  * Uso:
- *   npx tsx scripts/calibrar-dificuldade.ts luta <0-8> <jornadas>   (imprime a força da luta; rode várias em paralelo)
- *   npx tsx scripts/calibrar-dificuldade.ts chefe <jornadas>        (imprime quantos trios sortear para o chefe)
- *   npx tsx scripts/calibrar-dificuldade.ts medir <jornadas>        (a chance de vencer cada luta com os valores atuais)
+ *   npx tsx scripts/calibrar-dificuldade.ts luta <0-9> <jornadas>   (rode várias lutas em paralelo)
+ *   npx tsx scripts/calibrar-dificuldade.ts medir <bom|aleatorio> <jornadas>
  */
 import { characters } from '../src/data/characters';
+import { FORCA } from '../src/data/forca-dos-rivais';
 import { createBattle, stepBattle } from '../src/engine/battle';
-import { DIFICULDADE, ESCALAS, FORCA_DA_LUTA, generateCampaign } from '../src/engine/campaign';
+import { DIFICULDADE, ESCALAS, TRIOS_DA_LUTA, forcaDoTrio, generateCampaign, newDraft, pickDraft, skipDraft } from '../src/engine/campaign';
 
-const ALVO = [0.70, 0.64, 0.58, 0.52, 0.46, 0.40, 0.33, 0.27, 0.21, 0.12];
+/*
+ * Chance de o jogador bom vencer cada luta. Pedido do jogador: ~10% das
+ * jornadas bem jogadas terminam com as 10 vitórias — o produto das chances
+ * (com quem chega longe sendo, em média, quem tem o trio melhor) dá isso.
+ */
+const ALVO = [0.92, 0.90, 0.88, 0.85, 0.82, 0.78, 0.72, 0.65, 0.57, 0.45];
+const MAXIMO = 600;
 const ids = characters.map((c) => c.id);
+/* troca os candidatos quando o melhor deles não está entre os 30% mais fortes do elenco */
+const CORTE = [...Object.values(FORCA)].sort((a, b) => a - b)[Math.floor(0.7 * Object.values(FORCA).length)] ?? 0;
 
-function jornadas(n: number, base: number) {
+export function trioDoJogadorBom(seed: number): string[] {
+  let d = newDraft(seed);
+  while (d.team.length < 3) {
+    const nota = (id: string) => forcaDoTrio([...d.team, id]);
+    const melhor = [...d.candidates].sort((a, b) => nota(b) - nota(a))[0]!;
+    if ((FORCA[melhor] ?? 0) < CORTE && d.skips > 0) { d = skipDraft(d); continue; }
+    d = pickDraft(d, melhor);
+  }
+  return d.team;
+}
+function jornadas(n: number, base: number, perfil: 'bom' | 'aleatorio') {
   let r = base >>> 0;
   const rnd = () => { r = (Math.imul(r, 1664525) + 1013904223) >>> 0; return r / 4294967296; };
   return Array.from({ length: n }, () => {
+    const seed = Math.floor(rnd() * 2 ** 31);
+    if (perfil === 'bom') return { team: trioDoJogadorBom(seed), seed };
     const t = new Set<string>();
     while (t.size < 3) t.add(ids[Math.floor(rnd() * ids.length)]!);
-    return { team: [...t], seed: Math.floor(rnd() * 2 ** 31) };
+    return { team: [...t], seed };
   });
 }
 function chance(lista: ReturnType<typeof jornadas>, luta: number) {
   let v = 0;
   for (const j of lista) {
     const e = generateCampaign(j.seed, j.team)[luta]!;
-    const b = createBattle(j.team, e.team, j.seed + luta * 7919, ESCALAS[luta]);
+    const b = createBattle(j.team, e.team, j.seed + luta * 7919, e.scale);
     for (let t = 0; t < 9000 && !b.finished; t++) stepBattle(b);
     if (b.winner === 'player') v++;
   }
   return v / lista.length;
 }
+const poe = (luta: number, k: number) => { if (luta < 9) TRIOS_DA_LUTA[luta] = k; else DIFICULDADE.triosDoChefe = k; };
 
 const [modo, a, b] = process.argv.slice(2);
 if (modo === 'luta') {
-  const luta = Number(a), lista = jornadas(Number(b), 777 + luta * 31);
-  let lo = 0, hi = 1;
-  for (let passo = 0; passo < 7; passo++) {
-    const meio = (lo + hi) / 2; FORCA_DA_LUTA[luta] = meio;
-    if (chance(lista, luta) > ALVO[luta]!) lo = meio; else hi = meio;
+  const luta = Number(a), lista = jornadas(Number(b), 777 + luta * 31, 'bom');
+  ESCALAS[luta] = 1; poe(luta, MAXIMO);
+  if (chance(lista, luta) > ALVO[luta]!) {
+    // nem o mais forte entre muitos basta: sobe a Vida
+    let lo = 1, hi = 4;
+    for (let passo = 0; passo < 8; passo++) { const m = (lo + hi) / 2; ESCALAS[luta] = m; if (chance(lista, luta) > ALVO[luta]!) lo = m; else hi = m; }
+    ESCALAS[luta] = Math.round(((lo + hi) / 2) * 100) / 100;
+  } else if ((poe(luta, 1), chance(lista, luta)) < ALVO[luta]!) {
+    // até um trio sorteado ao acaso é forte demais para o começo: rivais com menos Vida
+    let lo = 0.3, hi = 1;
+    for (let passo = 0; passo < 8; passo++) { const m = (lo + hi) / 2; ESCALAS[luta] = m; if (chance(lista, luta) > ALVO[luta]!) lo = m; else hi = m; }
+    ESCALAS[luta] = Math.round(((lo + hi) / 2) * 100) / 100;
+  } else {
+    let lo = 0, hi = Math.log(MAXIMO);
+    for (let passo = 0; passo < 9; passo++) { const m = (lo + hi) / 2; poe(luta, Math.max(1, Math.round(Math.exp(m)))); if (chance(lista, luta) > ALVO[luta]!) lo = m; else hi = m; }
+    poe(luta, Math.max(1, Math.round(Math.exp((lo + hi) / 2))));
   }
-  FORCA_DA_LUTA[luta] = Math.round(((lo + hi) / 2) * 100) / 100;
-  console.log(JSON.stringify({ luta, forca: FORCA_DA_LUTA[luta], chance: chance(lista, luta), alvo: ALVO[luta] }));
-} else if (modo === 'chefe') {
-  const lista = jornadas(Number(a), 999);
-  // em escala de log: 2, 4, 8… trios
-  let lo = Math.log(2), hi = Math.log(3000);
-  for (let passo = 0; passo < 8; passo++) {
-    const meio = (lo + hi) / 2; DIFICULDADE.triosDoChefe = Math.round(Math.exp(meio));
-    if (chance(lista, 9) > ALVO[9]!) lo = meio; else hi = meio;
-  }
-  DIFICULDADE.triosDoChefe = Math.round(Math.exp((lo + hi) / 2));
-  console.log(JSON.stringify({ triosDoChefe: DIFICULDADE.triosDoChefe, chance: chance(lista, 9), alvo: ALVO[9] }));
+  const k = luta < 9 ? TRIOS_DA_LUTA[luta] : DIFICULDADE.triosDoChefe;
+  console.log(JSON.stringify({ luta, trios: k, escala: ESCALAS[luta], chance: chance(lista, luta), alvo: ALVO[luta] }));
 } else if (modo === 'medir') {
-  const lista = jornadas(Number(a), 4242);
-  console.log(ESCALAS.map((_, i) => Math.round(100 * chance(lista, i))).join(' '));
+  const lista = jornadas(Number(b), 4242, a as 'bom' | 'aleatorio');
+  console.log(a, ESCALAS.map((_, i) => Math.round(100 * chance(lista, i))).join(' '));
 } else {
-  console.error('uso: luta <0-8> <jornadas> | chefe <jornadas> | medir <jornadas>');
+  console.error('uso: luta <0-9> <jornadas> | medir <bom|aleatorio> <jornadas>');
   process.exit(1);
 }

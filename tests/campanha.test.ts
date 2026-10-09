@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { forcaDoTrio, generateCampaign, sinergiaDoTrio } from '../src/engine/campaign';
+import { ESCALAS, forcaDoTrio, generateCampaign, sinergiaDoTrio } from '../src/engine/campaign';
 import { characters } from '../src/data/characters';
 import { FORCA } from '../src/data/forca-dos-rivais';
 
@@ -9,9 +9,12 @@ describe('campanha', () => {
   it('a sinergia dos rivais nunca cai de uma luta para a outra (lutas 1 a 9)', () => {
     for (const c of jornadas) for (let i = 1; i < 9; i++) expect(sinergiaDoTrio(c[i]!.team)).toBeGreaterThanOrEqual(sinergiaDoTrio(c[i - 1]!.team) - 1e-9);
   });
-  it('em média, cada luta tem rivais mais fortes que a anterior', () => {
+  it('cada luta é mais difícil: a Vida dos rivais nunca cai e o fim tem os rivais mais fortes', () => {
+    for (let i = 1; i < 10; i++) expect(ESCALAS[i]!).toBeGreaterThanOrEqual(ESCALAS[i - 1]!);
     const media = (i: number) => jornadas.reduce((n, c) => n + forcaDoTrio(c[i]!.team), 0) / jornadas.length;
-    for (let i = 1; i < 10; i++) expect(media(i)).toBeGreaterThan(media(i - 1));
+    const comeco = [0, 1, 2, 3, 4, 5, 6].reduce((n, i) => n + media(i), 0) / 7;
+    expect(media(8)).toBeGreaterThan(comeco);
+    expect(media(9)).toBeGreaterThan(media(8));
   });
   it('o chefe não é fixo: muda de uma jornada para outra', () => {
     expect(new Set(jornadas.map((c) => [...c[9]!.team].sort().join('|'))).size).toBeGreaterThan(40);

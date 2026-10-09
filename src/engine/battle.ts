@@ -301,9 +301,21 @@ export function updateDominion(b:Battle){
   if(leader&&b.lastLead&&leader!==b.lastLead){b.turns++;if(leader==='player')b.viradasDoTrio=(b.viradasDoTrio??0)+1;emit(b,{kind:'turn',source:`${leader}-0`,label:'O Domínio virou'});}
   if(leader)b.lastLead=leader;
 }
+/*
+ * Uma luta normal dura de 20 s a ~1,5 min. Raramente os dois lados se curam e
+ * se protegem mais rápido do que se ferem, e a luta não acabava nunca: na tela
+ * ficava rodando para sempre e o servidor recusava a jornada ("replay sem
+ * conclusão"). Passado o limite, vence quem tem mais Vida (proporcional).
+ * Só muda lutas que antes não terminavam.
+ */
+export const TEMPO_MAXIMO=300;
 export function resolve(b:Battle){
   const p=b.fighters.some(f=>f.side==='player'&&alive(f)),e=b.fighters.some(f=>f.side==='enemy'&&alive(f));
-  if(!p||!e){b.finished=true;b.winner=p?'player':e?'enemy':null;b.reason='Incapacitação da equipe';}
+  if(!p||!e){b.finished=true;b.winner=p?'player':e?'enemy':null;b.reason='Incapacitação da equipe';return;}
+  if(b.time>=TEMPO_MAXIMO){
+    const vida=(lado:string)=>{const t=b.fighters.filter(f=>f.side===lado);return t.reduce((n,f)=>n+Math.max(0,f.hp)/f.maxHp,0)/t.length;};
+    b.finished=true;b.winner=vida('player')>=vida('enemy')?'player':'enemy';b.reason='Tempo esgotado · decidida pela Vida';
+  }
 }
 export function stepBattle(b:Battle,observe?:(snapshot:Battle)=>void):Battle {
   if(b.finished)return b;
