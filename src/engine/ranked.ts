@@ -20,9 +20,16 @@ export async function runDigest(id:string,team:string[],seed:number,outcomes:boo
   const bytes=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(raw));
   return [...new Uint8Array(bytes)].map(b=>b.toString(16).padStart(2,'0')).join('');
 }
-export function replayRanked(team:string[],seed:number){
+/*
+ * `livre`: a Jornada normal (botão Jogar), que também vale o ranking da
+ * Temporada. Lá os rivais são sorteados *depois* da escolha do trio, então
+ * nunca incluem quem o jogador escolheu — a mesma conta da tela
+ * (generateCampaign(seed, trio)). Na Diária e na Semanal os rivais são os
+ * mesmos para todo mundo e o trio não pode usar nenhum deles.
+ */
+export function replayRanked(team:string[],seed:number,livre=false){
   if(team.length!==3||new Set(team).size!==3||team.some(id=>!characters.some(c=>c.id===id)))throw new Error('Trio inválido.');
-  const encounters=generateCampaign(seed);
+  const encounters=livre?generateCampaign(seed,team):generateCampaign(seed);
   const foes=new Set(encounters.flatMap(e=>e.team));if(team.some(id=>foes.has(id)))throw new Error('Trio inclui rival da campanha compartilhada.');
   let score=0;
   const summaries:RunBattleSummary[]=[];

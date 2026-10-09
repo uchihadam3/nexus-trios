@@ -27,3 +27,14 @@ describe('replay compartilhado da ranqueada',()=>{
     expect(()=>replayRanked([generateCampaign(seed)[0].team[0],team[1],team[2]],seed)).toThrow();
   });
 });
+
+describe('Jornada normal no ranking da Temporada',()=>{
+  const seed=424242,team=characters.slice(0,3).map(c=>c.id);
+  it('o servidor refaz a mesma campanha da tela (rivais sorteados depois do trio)',()=>{
+    const livre=replayRanked(team,seed,true);
+    expect(livre).toEqual(replayRanked(team,seed,true));
+    // a tela gera generateCampaign(seed, trio): o trio nunca enfrenta a si mesmo
+    expect(generateCampaign(seed,team).flatMap(e=>e.team).some(id=>team.includes(id))).toBe(false);
+    expect(livre.summaries.length).toBeGreaterThan(0);
+  });
+});

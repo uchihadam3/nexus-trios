@@ -11,6 +11,8 @@
 # Depois de publicar, reaplica a regra do Top 3 às partidas validadas: as que
 # chegaram enquanto a função anterior estava no ar não passaram por ela.
 # Reaplicar é seguro — o mesmo trio com a mesma pontuação só "mantém".
+# A Jornada normal (seed própria, diferente da do desafio) só tem o ranking da
+# Temporada.
 #
 # Uso:  SUPABASE_ACCESS_TOKEN=... scripts/publicar-funcao.sh [project-ref]
 set -euo pipefail
@@ -28,5 +30,5 @@ npx -y supabase@2 functions deploy ranked-api --project-ref "$REF" --use-api --w
 
 curl -sS --fail -X POST "https://api.supabase.com/v1/projects/$REF/database/query" \
   -H "Authorization: Bearer $SUPABASE_ACCESS_TOKEN" -H "Content-Type: application/json" \
-  -d '{"query":"do $$ declare r record; begin for r in select * from public.ranked_runs where verified order by finished_at loop perform public.registrar_no_top3(r.player_id, r.mode, r.period_key::text, r.team_ids, r.id, r.score, r.encounters_cleared, r.finished_at); perform public.registrar_no_top3(r.player_id, '\''season'\'', r.balance_version, r.team_ids, r.id, r.score, r.encounters_cleared, r.finished_at); end loop; end $$; select count(*) as entradas from public.leaderboard_entries;"}'
+  -d '{"query":"do $$ declare r record; begin for r in select x.*, c.seed as seed_do_desafio from public.ranked_runs x join public.ranked_challenges c on c.id = x.challenge_id where x.verified order by x.finished_at loop if r.seed = r.seed_do_desafio then perform public.registrar_no_top3(r.player_id, r.mode, r.period_key::text, r.team_ids, r.id, r.score, r.encounters_cleared, r.finished_at); end if; perform public.registrar_no_top3(r.player_id, '\''season'\'', r.balance_version, r.team_ids, r.id, r.score, r.encounters_cleared, r.finished_at); end loop; end $$; select count(*) as entradas from public.leaderboard_entries;"}'
 echo

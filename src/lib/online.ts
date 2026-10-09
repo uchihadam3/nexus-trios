@@ -91,4 +91,4 @@ export interface PublicRun {position:number;id:string;handle:string;score:number
 export interface MeusTop3 {entries:PublicRun[];vagas:number;precisaSuperar:number|null}
 /* `pagina`, `total` e `temMais` vêm do ranking paginado (FASE L); a função anterior não manda. */
 export interface Leaderboard {mode:'daily'|'weekly'|'season';period:string;entries:PublicRun[];mine:PublicRun|null;details:PublicRun|null;meus?:MeusTop3;pagina?:number;total?:number;temMais?:boolean}
-export interface PartidaDoHistorico {id:string;mode:'daily'|'weekly';period:string;score:number;progress:number;team:string[];date:string}
+export interface PartidaDoHistorico {id:string;mode:'daily'|'weekly'|'free';period:string;score:number;progress:number;team:string[];date:string}

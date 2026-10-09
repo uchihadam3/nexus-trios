@@ -106,10 +106,28 @@ export default function App(){
   const requestRanked=(mode:'daily'|'weekly')=>{setPendingMode(mode);if(run&&(run.stage!=='result'||run.battle?.winner==='player'&&run.index<9))setConfirmNew(true);else void beginRanked(mode);};
   const startBattle=async(index:number)=>{
     const current=runRef.current;if(!current)return;
-    const team=current.draft.team,encounters=current.ranked?current.encounters:current.stage==='draft'?generateCampaign(current.seed,team):current.encounters,encounter=encounters[index];
-    let ranked=current.ranked;
-    if(index===0&&ranked){setOnlineBusy(true);try{const result=await onlineCall<{run:{id:string;seed:number}}> ('start',{mode:ranked.mode,team});if(result.run.seed!==current.seed)throw new Error('O desafio mudou; inicie outra Jornada Ranqueada.');ranked={...ranked,id:result.run.id,status:'playing'};}catch(error){setOnlineNotice(error instanceof Error?error.message:'Jornada Ranqueada indisponível.');return;}finally{setOnlineBusy(false);}}
-    const next={...current,team,encounters,index,stage:'battle' as const,recorded:false,presentation:undefined,battleSynergies:[],raioX:raioXVazio(),telemetry:emptyTally(),ranked,battle:createBattle(team,encounter.team,current.seed+index*7919,encounter.scale)};
+    const team=current.draft.team;
+    let ranked=current.ranked,seed=current.seed,encounters=current.ranked?current.encounters:current.stage==='draft'?generateCampaign(current.seed,team):current.encounters;
+    /*
+     * A Jornada normal também vale o ranking da Temporada (pedido do jogador:
+     * "os recordes não aparecem no ranking"). Com a conta conectada, o
+     * servidor abre a jornada e sorteia os rivais (a seed); no fim, ele refaz
+     * as lutas e registra a pontuação, igual à Ranqueada. Sem conta, sem
+     * internet ou com o servidor fora, a jornada segue normal, só fora do
+     * ranking — jogar nunca fica bloqueado por isso.
+     */
+    if(index===0&&!ranked&&current.stage==='draft'&&onlineConfigured&&conta!==null&&conta.origem!=='convidado'){
+      setOnlineBusy(true);
+      try{
+        const result=await Promise.race([onlineCall<{run:{id:string;seed:number}}>('start',{mode:'free',team}),new Promise<never>((_,falha)=>setTimeout(()=>falha(new Error('O servidor demorou.')),8000))]);
+        seed=result.run.seed;encounters=generateCampaign(seed,team);ranked={mode:'free',id:result.run.id,status:'playing'};
+      }catch(error){console.warn('Jornada fora do ranking:',error instanceof Error?error.message:error);}
+      finally{setOnlineBusy(false);}
+      if(runRef.current!==current)return;
+    }
+    const encounter=encounters[index];
+    if(index===0&&ranked&&ranked.mode!=='free'){setOnlineBusy(true);try{const result=await onlineCall<{run:{id:string;seed:number}}> ('start',{mode:ranked.mode,team});if(result.run.seed!==current.seed)throw new Error('O desafio mudou; inicie outra Jornada Ranqueada.');ranked={...ranked,id:result.run.id,status:'playing'};}catch(error){setOnlineNotice(error instanceof Error?error.message:'Jornada Ranqueada indisponível.');return;}finally{setOnlineBusy(false);}}
+    const next={...current,seed,team,encounters,index,stage:'battle' as const,recorded:false,presentation:undefined,battleSynergies:[],raioX:raioXVazio(),telemetry:emptyTally(),ranked,battle:createBattle(team,encounter.team,seed+index*7919,encounter.scale)};
     direction.current=null;setPresentation(null);changeRun(next);setPaused(false);navigate('game');
     if(index===0)setProfile(p=>{const n={...p,journeys:p.journeys+1};save('profile',n);return n;});
   };

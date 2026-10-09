@@ -5,6 +5,14 @@ import {BALANCE_VERSION,ENGINE_VERSION,replayRanked,rosterFingerprint,runDigest}
 
 declare const Deno:{env:{get:(name:string)=>string|undefined};serve:(handler:(request:Request)=>Response|Promise<Response>)=>unknown};
 type Mode='daily'|'weekly';
+/*
+ * `free`: a Jornada normal (botão Jogar), que também vale o ranking da
+ * Temporada. O servidor sorteia a seed (o jogador não escolhe contra quem
+ * luta). No banco ela fica como uma partida do dia (`daily`), sem mudar o
+ * esquema, e se distingue por ter seed própria, diferente da do desafio do
+ * dia: só entra no Top 3 da Temporada, nunca no de Hoje ou da Semana.
+ */
+type Modo=Mode|'free';
 const url=Deno.env.get('SUPABASE_URL')!,secret=Deno.env.get('SUPABASE_SECRET_KEY')??Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!,publishable=Deno.env.get('SUPABASE_PUBLISHABLE_KEY')??Deno.env.get('SUPABASE_ANON_KEY')!;
 const admin=createClient(url,secret,{auth:{persistSession:false,autoRefreshToken:false}});
 const authClient=createClient(url,publishable,{auth:{persistSession:false,autoRefreshToken:false}});
@@ -24,6 +32,8 @@ async function challenge(mode:Mode){
 function validHandle(value:unknown){if(typeof value!=='string')return null;const handle=value.trim().replace(/\s+/g,' ');
   if(!/^[A-Za-z0-9_ ]{3,16}$/.test(handle)||/@/.test(handle)||/\d{7}/.test(handle)||/(?:fuck|shit|puta|merda|porra|nazi|hitler)/i.test(handle.replace(/[ _]/g,'')))return null;return handle;
 }
+/* a seed da Jornada normal nunca pode coincidir com a do desafio do dia: é isso que a distingue */
+const livreSeed=(doDesafio:number,sorteada:number)=>sorteada===doDesafio?(sorteada+1)&0x7fffffff:sorteada;
 async function profile(userId:string){const {data,error}=await admin.from('players').select('id,handle,nexus_level,xp,renamed_at').eq('id',userId).maybeSingle();if(error)throw error;return data;}
 /*
  * O ranking vem de `leaderboard_entries`, onde cada conta tem até 3 trios
@@ -42,6 +52,8 @@ const chaveDo=(escopo:Escopo)=>escopo==='season'?BALANCE_VERSION:period(escopo);
  * depois da milésima não aparecia nem para si mesmo.
  */
 const POR_PAGINA=50;
+/* Diária, Semanal e Jornada normal somadas: uma Jornada perdida cedo dura poucos minutos. */
+const LIMITE_POR_HORA=30;
 type LinhaDoRanking={posicao:number;total:number;player_id:string;run_id:string;score:number;encounters_cleared:number;team_ids:string[];achieved_at:string};
 async function board(userId:string,mode:Escopo,detailId?:string,pagina=0){
   const key=chaveDo(mode);
@@ -92,13 +104,15 @@ Deno.serve(async (request:Request)=>{
     }
     if(input.action==='start'){
       const player=await profile(user.id);if(!player)return fail('Escolha seu nome público antes da Ranqueada.',409,origin);
-      const mode=input.mode==='weekly'?'weekly':'daily',data=await challenge(mode);
+      const modo:Modo=input.mode==='weekly'?'weekly':input.mode==='free'?'free':'daily',mode:Mode=modo==='free'?'daily':modo,data=await challenge(mode);
       const team=input.team;
       if(!Array.isArray(team)||team.length!==3||team.some(id=>typeof id!=='string'||id.length>80)||new Set(team).size!==3||team.some(id=>!characters.some(c=>c.id===id)))return fail('Trio inválido.',422,origin);
-      const banned=new Set(generateCampaign(data.seed).flatMap(e=>e.team));if(team.some(id=>banned.has(id)))return fail('Um integrante faz parte dos rivais deste desafio.',422,origin);
+      if(modo!=='free'){const banned=new Set(generateCampaign(data.seed).flatMap(e=>e.team));if(team.some(id=>banned.has(id)))return fail('Um integrante faz parte dos rivais deste desafio.',422,origin);}
       const {count,error:rateError}=await admin.from('ranked_runs').select('id',{count:'exact',head:true}).eq('player_id',user.id).gte('started_at',new Date(Date.now()-3600000).toISOString());
-      if(rateError)throw rateError;if((count??0)>=12)return fail('Limite de 12 tentativas por hora. Volte mais tarde.',429,origin);
-      const {data:run,error}=await admin.from('ranked_runs').insert({player_id:user.id,challenge_id:data.id,mode,period_key:data.period_key,seed:data.seed,engine_version:ENGINE_VERSION,balance_version:BALANCE_VERSION,roster_fingerprint:data.roster_fingerprint,team_ids:team}).select('id,seed,mode,period_key,engine_version,roster_fingerprint').single();
+      if(rateError)throw rateError;if((count??0)>=LIMITE_POR_HORA)return fail(`Limite de ${LIMITE_POR_HORA} jornadas por hora. Volte mais tarde.`,429,origin);
+      // na Jornada normal, os rivais saem de uma seed sorteada aqui: o jogador não escolhe contra quem luta
+      const seed=modo==='free'?livreSeed(data.seed,crypto.getRandomValues(new Uint32Array(1))[0]!&0x7fffffff):data.seed;
+      const {data:run,error}=await admin.from('ranked_runs').insert({player_id:user.id,challenge_id:data.id,mode,period_key:data.period_key,seed,engine_version:ENGINE_VERSION,balance_version:BALANCE_VERSION,roster_fingerprint:data.roster_fingerprint,team_ids:team}).select('id,seed,mode,period_key,engine_version,roster_fingerprint').single();
       if(error||!run)throw error??new Error('Não foi possível abrir a Jornada.');
       return json({run},200,origin);
     }
@@ -109,7 +123,7 @@ Deno.serve(async (request:Request)=>{
       if(!run)return fail('Jornada inexistente.',404,origin);if(run.verified)return fail('Jornada já validada.',409,origin);
       if(new Date(run.expires_at).getTime()<Date.now())return fail('Jornada expirada.',410,origin);
       if(run.engine_version!==ENGINE_VERSION||run.roster_fingerprint!==rosterFingerprint()||run.balance_version!==BALANCE_VERSION)return fail('Versão do motor não reconhecida.',409,origin);
-      const verified=replayRanked(run.team_ids,run.seed),digest=await runDigest(run.id,run.team_ids,run.seed,verified.summaries.map(s=>s.won));
+      const livre=run.seed!==await seedFor(run.mode,String(run.period_key)),verified=replayRanked(run.team_ids,run.seed,livre),digest=await runDigest(run.id,run.team_ids,run.seed,verified.summaries.map(s=>s.won));
       if(digest!==input.digest)return fail('Replay não corresponde ao desafio registrado.',422,origin);
       /*
        * O Top 3 é registrado *antes* de a partida ser marcada como validada.
@@ -121,8 +135,9 @@ Deno.serve(async (request:Request)=>{
        * o mesmo trio com a mesma pontuação só "mantém" a entrada.
        */
       const registrar=async(escopo:Escopo,chave:string)=>{const {data,error}=await admin.rpc('registrar_no_top3',{p_player:user.id,p_scope:escopo,p_period:chave,p_team:run.team_ids,p_run:run.id,p_score:verified.score,p_cleared:verified.encountersCleared});if(error)throw error;return data;};
-      const top3={periodo:await registrar(run.mode,String(run.period_key)),temporada:await registrar('season',BALANCE_VERSION)};
-      const {data:saved,error:saveError}=await admin.from('ranked_runs').update({verified:true,finished_at:new Date().toISOString(),encounters_cleared:verified.encountersCleared,score:verified.score,summary:{highlights:verified.highlights,outcomes:verified.summaries.map(s=>s.won)},digest}).eq('id',run.id).eq('verified',false).select('id').maybeSingle();
+      // a Jornada normal só entra na Temporada; Hoje e Semana são os desafios iguais para todo mundo
+      const top3={periodo:livre?undefined:await registrar(run.mode,String(run.period_key)),temporada:await registrar('season',BALANCE_VERSION)};
+      const {data:saved,error:saveError}=await admin.from('ranked_runs').update({verified:true,finished_at:new Date().toISOString(),encounters_cleared:verified.encountersCleared,score:verified.score,summary:{highlights:verified.highlights,outcomes:verified.summaries.map(s=>s.won),livre},digest}).eq('id',run.id).eq('verified',false).select('id').maybeSingle();
       if(saveError)throw saveError;if(!saved)return fail('Jornada já enviada.',409,origin);
       const player=await profile(user.id),xp=(player?.xp??0)+30+verified.encountersCleared*30+(verified.encountersCleared===10?250:0);
       await admin.from('players').update({xp,nexus_level:Math.floor(Math.sqrt(xp/100))+1,updated_at:new Date().toISOString()}).eq('id',user.id);
@@ -131,9 +146,9 @@ Deno.serve(async (request:Request)=>{
     }
     /* "MEUS RECORDES: histórico completo." Todas as partidas validadas da conta. */
     if(input.action==='historico'){
-      const {data,error}=await admin.from('ranked_runs').select('id,mode,period_key,score,encounters_cleared,team_ids,finished_at').eq('player_id',user.id).eq('verified',true).order('finished_at',{ascending:false}).limit(100);
+      const {data,error}=await admin.from('ranked_runs').select('id,mode,period_key,score,encounters_cleared,team_ids,finished_at,summary').eq('player_id',user.id).eq('verified',true).order('finished_at',{ascending:false}).limit(100);
       if(error)throw error;
-      return json({runs:(data??[]).map(r=>({id:r.id,mode:r.mode,period:r.period_key,score:r.score,progress:r.encounters_cleared,team:r.team_ids,date:r.finished_at}))},200,origin);
+      return json({runs:(data??[]).map(r=>({id:r.id,mode:r.summary?.livre?'free':r.mode,period:r.period_key,score:r.score,progress:r.encounters_cleared,team:r.team_ids,date:r.finished_at}))},200,origin);
     }
     if(input.action==='leaderboard'){
       const mode=input.mode==='weekly'?'weekly':input.mode==='season'?'season':'daily';
