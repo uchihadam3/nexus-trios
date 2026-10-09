@@ -190,7 +190,7 @@ export const FAMILIA_DO_BASICO: Record<string, VfxFamily> = {
   kaiba: 'carta_dragao',
   vision: 'laser',
   punisher: 'tiro',
-  moonknight: 'disco',
+  moonknight: 'dardo_crescente',
   gambit: 'cartas',
   doctordoom: 'laser',
   ultron: 'laser',

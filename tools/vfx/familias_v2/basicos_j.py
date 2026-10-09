@@ -723,6 +723,53 @@ def mordida_cartoon(T, t, rng):
     return G, H
 
 
+
+# ------------------------------------------------------------------ Cavaleiro da Lua
+def _crescente(cx, cy, r, ang, n=20):
+    """Dardo em lua crescente: o arco de fora inteiro e o de dentro menor e deslocado, grossa no
+    meio e com as duas pontas finas (a lua de Khonshu)."""
+    fora, dentro = [], []
+    for k in range(n + 1):
+        a = math.pi * (0.36 + 1.28 * k / n)
+        fora.append((math.cos(a) * r, math.sin(a) * r))
+        dentro.append((math.cos(a) * r * 0.8 + r * 0.32, math.sin(a) * r * 0.8))
+    c, s = math.cos(ang), math.sin(ang)
+    return [(cx + x * c - y * s, cy + x * s + y * c) for x, y in fora + dentro[::-1]]
+
+
+def dardo_crescente(T, t, rng):
+    """Dardos crescentes do Cavaleiro da Lua: três luas crescentes de prata chegam girando pela
+    esquerda, uma atrás da outra, e cravam no alvo inclinadas, cada uma com um estalo curto; no fim
+    a lua cheia acende fraca atrás do alvo e os dardos somem em luz."""
+    G, H = vazio(T)
+    env = apaga(t, 0.82, 1)
+    pousos = [(-0.2, -0.24, 0.5), (0.16, -0.02, -0.3), (-0.1, 0.26, 0.2)]
+    dardos, rastros, estalos = [], T.zero(), T.zero()
+    for i, (px, py, inclina) in enumerate(pousos):
+        a0 = 0.04 + 0.1 * i
+        u = ease_in(rel(t, a0, a0 + 0.2), 1.4)
+        if u <= 0:
+            continue
+        x = -1.05 + (px + 1.05) * u
+        y = py - 0.35 * (1 - u) * (1 - u) * (1 if i % 2 else -1)
+        if u < 1:
+            giro = t * 40 + i
+            dardos.append((_crescente(x, y, 0.21, giro), 1.0))
+            rastros += T.arc_band(0.24, 0.035, giro - 2.2, giro, cx=x, cy=y, taper=1.2) * 0.7
+        else:
+            # cravado: a ponta enterrada, inclinado, tremendo um instante
+            tr = 0.08 * math.sin((t - a0 - 0.2) * 70) * (1 - rel(t, a0 + 0.2, a0 + 0.32))
+            dardos.append((_crescente(px - 0.08, py, 0.2, math.pi + inclina + tr), 1.0))
+        k = pulso(t, a0 + 0.19, a0 + 0.32)
+        if k > 0:
+            estalos += T.polys([(estrela(px, py, 0.2 * k + 0.01, 0.3 * i, 4, 0.28), 1.0)], 0.004) * k
+    D = T.polys(dardos, 0.004) * (1 - rel(t, 0.7, 0.9))
+    # a lua crescente do Khonshu acende grande e fraca atrás do alvo
+    lua = T.blur(T.polys([(_crescente(0.05, 0.0, 0.72, math.pi), 1.0)], 0.01), 0.03) * pulso(t, 0.38, 0.98) * 0.45
+    G += (D * 1.3 + T.blur(D, 0.02) * 0.6 + rastros + estalos * 1.2 + lua) * env
+    H += (D * 0.9 + rastros * 0.4 + estalos + lua * 0.2) * env
+    return G, H
+
 REGISTRO = [
     ("barrigada", barrigada, GRANDE, "Barrigada do Homer: a barriga amassa no alvo e balança, ondas achatadas e estrelinhas", False),
     ("estilingue", estilingue, GRANDE, "Estilingue do Bart: a pedrinha vem em arco, TOCK em estrela e estrelinhas girando", False),
@@ -731,5 +778,6 @@ REGISTRO = [
     ("flor_de_lapela", flor_de_lapela, GRANDE, "Flor de lapela do Coringa: esguicho em arco que respinga, chia e borbulha", False),
     ("taco_de_beisebol", taco_de_beisebol, GRANDE, "Taco de beisebol da Arlequina: giro com rastro, CRACK, estrelinhas e um coração", False),
     ("raio_de_gaia", raio_de_gaia, GRANDE, "Raio de Gaia: cinco pontos de luz se unem num raio trançado que abre um planeta de luz", False),
+    ("dardo_crescente", dardo_crescente, GRANDE, "Dardos crescentes do Cavaleiro da Lua: três luas de prata cravam girando e a lua cheia acende", False),
     ("mordida_cartoon", mordida_cartoon, GRANDE, "Mordida de desenho: dentões fecham com CHOMP, gotas de suor e marquinhas", False),
 ]

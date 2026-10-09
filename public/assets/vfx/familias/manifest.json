@@ -1175,6 +1175,20 @@
   "laco": false,
   "bytes": 57618
  },
+ "dardo_crescente": {
+  "descricao": "Dardos crescentes do Cavaleiro da Lua: três luas de prata cravam girando e a lua cheia acende",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 52148
+ },
  "death_note": {
   "descricao": "Death Note: o nome escrito e o coração que para",
   "quadros": 12,

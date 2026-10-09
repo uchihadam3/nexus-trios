@@ -267,6 +267,25 @@ def mordida_cartoon(rng, v):
     return reverb(x, 0.22, 0.1)
 
 
+
+def dardo_crescente(rng, v):
+    """Dardos crescentes do Cavaleiro da Lua: três giros cortando o ar, cada um termina num "tchak"
+    seco de lâmina cravando (sem metal ressoando), e um sopro grave e frio da lua no fim."""
+    x = _z(1.15)
+    for i in range(3):
+        t0 = 0.04 + 0.1 * i
+        n = n_de(0.2)
+        tt = np.arange(n) / SR
+        # o giro: um sopro que pulsa a cada volta do dardo e sobe de tom ao chegar
+        giro = assobio(rng, n, 1400, 3200, 1.3, 0.35) * (0.55 + 0.45 * np.sin(2 * math.pi * (26 + 14 * tt / tt[-1]) * tt) ** 2)
+        poe(x, giro * sobe_e_some(n, 0.85, 1.3) * 0.5, t0)
+        # o cravar: estalo curto e abafado, com um baque pequeno de corpo
+        poe(x, passa(estalo(rng, n_de(0.05), 900, 5200, 0.006), None, 6000, 2) * 0.9, t0 + 0.19)
+        poe(x, baque(n_de(0.12), 190, 110, 0.03, 0.5) * 0.45, t0 + 0.19)
+    n = n_de(0.6)
+    poe(x, passa(rosa(rng, n), 180, 1200, 2) * sobe_e_some(n, 0.35, 1.6) * 0.12, 0.42)
+    return reverb(x, 0.28, 0.12, 6000)
+
 SONS: dict = {
     "barrigada": (barrigada, "básico do Homer: o ar do empurrão, o baque da pança e o \"bloing\" de gelatina"),
     "estilingue": (estilingue, "básico do Bart: twang do elástico, a pedra assobiando e o \"tock\" seco"),
@@ -275,5 +294,6 @@ SONS: dict = {
     "flor-de-lapela": (flor_de_lapela, "básico do Coringa: o esguicho da flor, o respingo e o ácido chiando e borbulhando"),
     "taco-de-beisebol": (taco_de_beisebol, "básico da Arlequina: o giro do taco, o \"crack\" de madeira e um plim"),
     "raio-de-gaia": (raio_de_gaia, "básico do Capitão Planeta: cinco notas de cristal que viram um raio limpo e brilhante"),
+    "dardo-crescente": (dardo_crescente, "básico do Cavaleiro da Lua: três dardos girando que cravam seco, e o sopro frio da lua"),
     "mordida-cartoon": (mordida_cartoon, "básico do Scooby e do Coragem: \"chomp\" de desenho e os dentes batendo de medo"),
 }

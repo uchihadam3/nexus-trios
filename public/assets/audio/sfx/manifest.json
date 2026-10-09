@@ -1362,6 +1362,23 @@
    ],
    "bytes": 55680
   },
+  "dardo-crescente": {
+   "arquivo": "dardo-crescente.mp3",
+   "descricao": "básico do Cavaleiro da Lua: três dardos girando que cravam seco, e o sopro frio da lua",
+   "versoes": [
+    0.0,
+    1.23,
+    2.5017,
+    3.6928
+   ],
+   "duracoes": [
+    1.15,
+    1.1917,
+    1.1111,
+    1.1675
+   ],
+   "bytes": 41038
+  },
   "death-note": {
    "arquivo": "death-note.mp3",
    "descricao": "família death note",
