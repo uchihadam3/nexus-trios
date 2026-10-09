@@ -38,6 +38,11 @@ function InfoDialog({title,children,onClose,icone,cor='#c8f560'}:{title:string;c
   const ref=useRef<HTMLDialogElement>(null);useEffect(()=>{const el=ref.current;el?.showModal();return()=>el?.close();},[]);
   return <dialog className="info-dialog gs-aviso" ref={ref} onCancel={onClose} style={{'--tela':cor} as React.CSSProperties}><button className="icon-button modal-close" onClick={onClose} aria-label="Fechar"><X size={20}/></button>{icone&&<span className="gs-medalhao gs-aviso-medalhao"><span aria-hidden className="uifx uifx-laco gs-anel" style={{'--uifx-img':'url(/assets/ui/fx/anel.webp)','--uifx-cor':cor,'--uifx-dur':'4800ms'} as React.CSSProperties}/>{icone}</span>}<h2>{title}</h2>{children}</dialog>;
 }
+/** Quanto tempo de luta dá para recuperar de uma vez (uma luta longa inteira cabe com folga). */
+const RECUPERACAO_MAXIMA=20*60;
+/** Quanto se recupera por quadro (o resto fica para os próximos). */
+const RECUPERACAO_POR_QUADRO=90;
+
 export default function App(){
   const [screen,setScreen]=useState<Screen>(import.meta.env.DEV&&location.hash==='#debug'?'debug':'home');
   const [settings,setSettings]=useState(loadSettings),[profile,setProfile]=useState(loadProfile),[run,setRun]=useState<Run|null>(loadRun);
@@ -48,7 +53,7 @@ export default function App(){
   const runRef=useRef(run),lastSave=useRef(0);runRef.current=run;
   const direction=useRef<Direction|null>(null);
   const [presentation,setPresentation]=useState<{battle:Battle;beat:Beat|null}|null>(null);
-  const lastAudio=useRef(0),lastDominionSound=useRef(0),passoTocado=useRef({beat:-1,passo:1});
+  const lastAudio=useRef(0),lastDominionSound=useRef(0),passoTocado=useRef({beat:-1,passo:1}),divida=useRef(0);
   const changeRun=(next:Run|null)=>{runRef.current=next;setRun(next);save('run',next);};
   const directionFor=(current:Run)=>{
     const battle=current.battle!;
@@ -116,7 +121,8 @@ export default function App(){
   },[]);
   useEffect(()=>{
     const persist=()=>save('run',runRef.current);
-    const visibility=()=>{if(document.hidden){setPaused(true);persist();}};
+    // sair da aba não pausa mais: a luta continua (pedido do jogador); só guarda o ponto, por garantia
+    const visibility=()=>{if(document.hidden)persist();};
     addEventListener('pagehide',persist);document.addEventListener('visibilitychange',visibility);
     return()=>{removeEventListener('pagehide',persist);document.removeEventListener('visibilitychange',visibility);};
   },[]);
@@ -124,12 +130,35 @@ export default function App(){
     if(screen!=='game'||paused||details||confirmNew||confirmAbandon)return;
     let previous=performance.now();
     const timer=window.setInterval(()=>{
-      const now=performance.now(),elapsed=Math.max(0,Math.min(P.renderIntervalMs/1000,(now-previous)/1000));previous=now;
+      const now=performance.now(),bruto=Math.max(0,(now-previous)/1000),elapsed=Math.min(P.renderIntervalMs/1000,bruto);previous=now;
+      // o tempo que o navegador não deixou rodar (aba escondida, app em segundo plano, celular travado)
+      const atraso=bruto-elapsed;
       if(import.meta.env.DEV){const debugWindow=window as Window & {__nexusFrames?:{count:number;visualSeconds:number;lastElapsed:number}};const frames=debugWindow.__nexusFrames??{count:0,visualSeconds:0,lastElapsed:0};frames.count++;frames.visualSeconds+=elapsed;frames.lastElapsed=elapsed;debugWindow.__nexusFrames=frames;}
       const current=runRef.current;if(!current||current.stage!=='battle'||!current.battle)return;
       if(!direction.current||direction.current.battle!==current.battle){direction.current=directionFor(current);lastAudio.current=current.battle.nextEvent-1;lastDominionSound.current=current.battle.dominion;}
       const d=direction.current;
+      /*
+       * Jogo rodando fora da aba.
+       *
+       * O navegador desacelera ou congela uma aba escondida (no celular, o app
+       * em segundo plano para de vez). Quando ele volta a deixar rodar, a luta
+       * recupera o tempo perdido: avança quadro a quadro, sem sons nem efeitos,
+       * guardando todos os sinais (Raio-X, sinergias, estatísticas), até
+       * alcançar o relógio — ou até a luta acabar.
+       */
+      const recuperados:typeof d.signals=[];
+      if(atraso>.25)divida.current=Math.min(RECUPERACAO_MAXIMA,divida.current+atraso);
+      if(divida.current>1e-6){
+        // no máximo um pedaço por quadro: o celular não trava, e a luta "corre" até alcançar o relógio
+        let resta=Math.min(divida.current,RECUPERACAO_POR_QUADRO);divida.current-=resta;
+        while(resta>1e-6&&!d.complete){const passo=Math.min(P.renderIntervalMs/1000,resta);advanceDirection(d,passo,undefined,settings.speed);recuperados.push(...d.signals);resta-=passo;}
+        if(d.complete)divida.current=0;
+        passoTocado.current={beat:d.active?.event.id??-1,passo:d.active?.etapa??0};
+        if(recuperados.length)lastAudio.current=Math.max(lastAudio.current,...recuperados.map(e=>e.id));
+      }
+      const mudo=document.hidden;
       advanceDirection(d,elapsed,cue=>{
+        if(mudo)return;
         if(cue.phase==='impact'&&d.active){
           const special=d.active.events.find(e=>e.kind==='ko')??d.active.events.find(e=>e.kind==='interrupt')??d.active.events.find(e=>e.kind==='block')??d.active.events.find(e=>e.kind==='turn');
           // eventos que pedem som próprio: interrupção, bloqueio, nocaute, virada; o golpe do beat toca junto
@@ -141,12 +170,13 @@ export default function App(){
         const history=devWindow.__nexusBeatTrace??=[];
         history.push(trace);if(history.length>2000)history.shift();
       }:undefined);
+      if(recuperados.length)d.signals=[...recuperados,...d.signals];
       const fighters=d.visible.fighters,critical=fighters.filter(f=>f.hp>0&&f.hp/f.maxHp<.34).length,casts=fighters.filter(f=>f.hp>0&&f.cast).length;
       battleAudio.setMood({heat:Math.min(1,.15+critical*.13+casts*.17+Math.abs(d.visible.dominion)/150),pressure:d.visible.dominion/100,time:Math.min(1,d.visible.time/120)});
-      if(Math.abs(d.visible.dominion-lastDominionSound.current)>=20){battleAudio.sound('toque',PRIORIDADE.interface);lastDominionSound.current=d.visible.dominion;}
+      if(Math.abs(d.visible.dominion-lastDominionSound.current)>=20){if(!mudo)battleAudio.sound('toque',PRIORIDADE.interface);lastDominionSound.current=d.visible.dominion;}
       // cada passo da cadeia (depois do golpe) tem o seu som: reação, debuff, buff, cura, escudo
       const ativo=d.active;
-      if(ativo?.impacted&&ativo.passos&&ativo.etapa){
+      if(ativo?.impacted&&ativo.passos&&ativo.etapa&&!mudo){
         const visto=passoTocado.current.beat===ativo.event.id?passoTocado.current.passo:0;
         // o primeiro passo já tem o som do golpe; um traço sozinho começa direto na reação
         for(let k=Math.max(ativo.passos[0]?.classe==='reacao'?1:2,visto+1);k<=ativo.etapa;k++){
@@ -158,7 +188,7 @@ export default function App(){
         passoTocado.current={beat:ativo.event.id,passo:ativo.etapa};
       }
       const ready=d.signals.find(e=>e.id>lastAudio.current&&e.kind==='ready');
-      if(ready)battleAudio.sound('pronto',PRIORIDADE.interface,0,ready.id);
+      if(ready&&!mudo)battleAudio.sound('pronto',PRIORIDADE.interface,0,ready.id);
       if(d.signals.length)lastAudio.current=Math.max(lastAudio.current,...d.signals.map(e=>e.id));
       setPresentation({battle:d.visible,beat:d.active?{...d.active}:null});
       const battleSynergies=d.signals.length?addSynergies(current.battleSynergies??[],d.signals):current.battleSynergies??[];
