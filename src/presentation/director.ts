@@ -88,7 +88,7 @@ export const INTERVALO_DA_ETAPA=TEMPO_DO_PASSO.rival;
 const CONTABIL=new Set<BattleEvent['kind']>(['charge','synergy','ready','discovery','basic','skill','cast','turn']);
 const DO_GOLPE=new Set<BattleEvent['kind']>(['damage','block','interrupt','ko']);
 /* Reações que vêm de uma mecânica, não do traço: o passo leva o nome dela. */
-export const ROTULO_DA_MECANICA:Record<string,string>={Refletido:'Refletir',Espinhos:'Espinhos',Vampirismo:'Vampirismo',Sangramento:'Sangramento',Barreira:'Barreira','Última resistência':'Última resistência'};
+export const ROTULO_DA_MECANICA:Record<string,string>={Refletido:'Refletir',Espinhos:'Espinhos',Vampirismo:'Vampirismo',Sangramento:'Sangramento',Barreira:'Barreira','Última resistência':'Última resistência',Ricochete:'Ricochete','Golpe largo':'Golpe largo','Golpe que cura':'Golpe que cura'};
 const ehDaMecanica=(e:BattleEvent)=>(e.kind==='damage'||e.kind==='heal'||e.kind==='resist')&&e.label in ROTULO_DA_MECANICA;
 function montaPassos(beat:Pick<Beat,'event'|'events'|'after'|'traco'>):Passo[]{
   const ator=beat.event.source,lado=beat.after.fighters.find(f=>f.uid===ator)?.side;
