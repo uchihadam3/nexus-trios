@@ -85,14 +85,16 @@ describe('Arte local e composição',()=>{
       expect(existsSync(new URL(`../assets/ai-source/skills/${character.id}.png`,root)),character.id).toBe(true);
     }
   });
-  it('mantém ícones universais próprios para todos os 14 estados e remove glifos emoji antigos',()=>{
-    expect(Object.keys(statuses)).toHaveLength(14);
+  it('mantém ícones universais próprios para todos os estados e remove glifos emoji antigos',()=>{
+    expect(Object.keys(statuses).length).toBeGreaterThanOrEqual(14);
+    for(const id of Object.keys(statuses))expect(existsSync(new URL(`assets/statuses/${id}.png`,root)),id).toBe(true);
     for(const [id,status] of Object.entries(statuses)){expect(status).toMatchObject({name:expect.any(String),description:expect.any(String)});expect((status as {glyph?:string}).glyph,`${id} ainda usa glifo`).toBeUndefined();}
   });
   it('exporta folha transparente de estados e auxiliares com manifesto de recorte',()=>{
     const states=JSON.parse(readFileSync(new URL('assets/sheets/statuses/manifest.json',root),'utf8')) as {count:number;sourceSheet:string;resolution:number[];columns:number;rows:number;cell:number[];items:{id:string;name:string;path:string;row:number;column:number;crop:{width:number;height:number}}[]};
     const ui=JSON.parse(readFileSync(new URL('assets/sheets/ui/manifest.json',root),'utf8')) as {count:number;sourceSheet:string;resolution:number[];columns:number;rows:number;cell:number[];items:{id:string;name:string;path:string;row:number;column:number;crop:{width:number;height:number}}[]};
-    expect(states).toMatchObject({count:14,resolution:[680,680],columns:4,rows:4,cell:[160,160]});
+    const n=Object.keys(statuses).length,linhas=Math.ceil(n/4);
+    expect(states).toMatchObject({count:n,resolution:[680,8+linhas*168],columns:4,rows:linhas,cell:[160,160]});
     expect(ui).toMatchObject({count:16,resolution:[680,680],columns:4,rows:4,cell:[160,160]});
     for(const manifest of [states,ui])expect(existsSync(new URL(manifest.sourceSheet.slice(1),root))).toBe(true);
     expect(states.items.map(item=>item.name)).toEqual(Object.values(statuses).map(status=>status.name));

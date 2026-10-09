@@ -2314,6 +2314,23 @@
    ],
    "bytes": 17692
   },
+  "provocar": {
+   "arquivo": "provocar.mp3",
+   "descricao": "família provocar",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 51384
+  },
   "psiquico": {
    "arquivo": "psiquico.mp3",
    "descricao": "psíquico",

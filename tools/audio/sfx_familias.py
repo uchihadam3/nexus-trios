@@ -1376,6 +1376,26 @@ def ressurreicao(rng, v):
     return reverb(x, 0.9, 0.42, 9000)
 
 
+# ================================================================== provocar
+def provocar(rng, v):
+    """Provocar: duas batidas de peito, um brado de metal rouco (como uma corneta de guerra
+    desafinada) e o eco de um escudo batido — o rival vira a cabeça na hora."""
+    x = _z(1.4)
+    for k, t0 in enumerate((0.0, 0.16)):
+        poe(x, baque(n_de(0.22), 120 - 10 * k, 55, 0.1, 0.5) * (0.75 + 0.15 * k), t0)
+    n = n_de(0.62)
+    t = np.arange(n) / SR
+    vib = 1 + 0.012 * np.sin(2 * math.pi * 6.5 * t)
+    f = varre(nota(50), nota(55), n, 2.5) * vib
+    brado = sum(seno(f * h, n) / h ** 0.8 for h in (1, 2, 3, 4, 5, 6))
+    brado = satura(passa(brado, 180, 3200) * 1.6, 2.2) * env(n, 0.03, 0.3, segura=0.18) * 0.22
+    quinta = satura(sum(seno(f * 1.5 * h, n) / h for h in (1, 2, 3)), 1.8) * env(n, 0.05, 0.25, segura=0.12) * 0.08
+    poe(x, brado + quinta, 0.3)
+    poe(x, passa(rosa(rng, n_de(0.5)), 300, 2500) * env(n_de(0.5), 0.02, 0.18) * 0.08, 0.3)
+    poe(x, modal(n_de(0.9), nota(64), rng=rng, **METAL) * env(n_de(0.9), 0.002, 0.35) * 0.14, 0.34)
+    return reverb(x, 0.5, 0.3, 7000)
+
+
 def renascer(rng, v):
     """Renascer: brasas estalando que se juntam, o fogo sobe num rugido, a fênix grita e as asas batem."""
     x = _z(2.0)
@@ -1412,7 +1432,7 @@ SONS_NOVOS = {
 _BAIXO = {"brasas-renascendo", "cura-em-area", "regeneracao", "grito-de-guerra", "velocidade", "escudo-tech", "barreira-magica", "armadura", "resgate",
           "bencao", "lanche", "purificacao", "enfraquecimento", "lentidao", "marca", "silencio", "medo", "exposto", "hipnose",
           "encanto", "runas", "lua", "petalas", "regeneracao", "confusao", "estrela-invencivel", "disco", "flecha"}
-_ALTO = {"renascer", "ressurreicao", "soco-serio", "supernova", "kamehameha", "canhao-de-energia", "foguete", "tempestade", "punho-gigante", "pisao",
+_ALTO = {"provocar", "renascer", "ressurreicao", "soco-serio", "supernova", "kamehameha", "canhao-de-energia", "foguete", "tempestade", "punho-gigante", "pisao",
          "martelo", "espadao", "buraco-negro", "tsunami", "transformacao-v2", "dragao", "susanoo", "dominio"}
 _ANTES = {"chidori-carga": "faíscas do Chidori", "esfera-espiral-carga": "a esfera girando", "kamehameha-carga": "carga do Kamehameha",
           "kamehameha-feixe": "o feixe saindo", "marretada-giro": "a marreta subindo"}
