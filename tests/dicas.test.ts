@@ -33,14 +33,14 @@ describe('Dicas de trio', () => {
     expect(Math.max(...candidatos.map(nota))).toBe(nota(melhor));
   });
 
-  it('custa 15 mil por luta, aparece na conta e a luta nunca fica negativa', () => {
+  it('custa 25 mil por luta, aparece na conta e a luta nunca fica negativa', () => {
     const [a, b] = generateCampaign(5).map((e) => e.team);
     const luta = createBattle(a!, b!, 5, 1);
     for (let t = 0; t < 9000 && !luta.finished; t++) stepBattle(luta);
     const sem = pontosDaLuta(luta, 3), com = pontosDaLuta(luta, 3, true);
     expect(com.parcelas.at(-1)).toEqual({ id: 'ajuda', rotulo: 'Dicas de trio', valor: -CUSTO_DAS_DICAS });
     expect(com.total).toBe(Math.max(0, sem.total - CUSTO_DAS_DICAS));
-    expect(CUSTO_DAS_DICAS).toBe(15_000);
+    expect(CUSTO_DAS_DICAS).toBe(25_000);
   });
 
   it('o servidor desconta as dicas em cada luta jogada', () => {

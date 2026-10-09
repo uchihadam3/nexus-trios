@@ -79,7 +79,7 @@ export const PONTOS = {
 } as const;
 
 /** O que cada luta custa a quem montou o trio com as Dicas de trio ligadas. */
-export const CUSTO_DAS_DICAS = 15_000;
+export const CUSTO_DAS_DICAS = 25_000;
 
 export const multiplicadorDaLuta = (indice: number) => 1 + PONTOS.porLuta * Math.max(0, indice);
 

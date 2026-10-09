@@ -10,7 +10,7 @@ import {emptyTally} from '../engine/progression';
 export interface Settings {volume:number;musicVolume:number;effectsVolume:number;effects:boolean;speed:1|2;numbers:boolean;visualFeedbackVersion:2;reducedMotion:boolean;auto:boolean;explanations:'normal'|'detailed'|'off';dicasDoTrio:boolean}
 export interface RankedRun {top3?:{periodo?:ResultadoTop3;temporada?:ResultadoTop3};/** `free`: a Jornada normal, que vale só o ranking da Temporada */mode:'daily'|'weekly'|'free';id?:string;status:'draft'|'playing'|'validating'|'verified'|'failed';score?:number;daily?:number|null;weekly?:number|null;season?:number|null;error?:string}
 export interface Run {seed:number;team:string[];encounters:Encounter[];index:number;stage:'draft'|'battle'|'result';draft:Draft;battle:Battle|null;recorded:boolean;presentation?:PresentationCheckpoint;summaries?:RunBattleSummary[];battleSynergies?:RunSynergyEvent[];raioX?:EstadoRaioX;telemetry?:ReturnType<typeof emptyTally>;ranked?:RankedRun;
-  /** As Dicas de trio ficaram ligadas em algum momento da escolha: cada luta desta jornada custa −15 mil. */
+  /** As Dicas de trio ficaram ligadas em algum momento da escolha: cada luta desta jornada custa −25 mil. */
   dicas?:boolean}
 /** O que o aparelho guarda do jogador: jornadas, vitórias e o recorde de pontos (o objetivo do jogo). */
 export interface Profile {journeys:number;victories:number;best:number;wins:number;champion?:string[];publicHandle?:string;recordePontos?:number;/** a escala dos pontos em que o recorde foi feito (2 = a conta por desempenho) */escalaDosPontos?:number}

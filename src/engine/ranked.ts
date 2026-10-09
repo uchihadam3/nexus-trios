@@ -36,7 +36,7 @@ export async function runDigest(id:string,team:string[],seed:number,outcomes:boo
  * (generateCampaign(seed, trio)). Na Diária e na Semanal os rivais são os
  * mesmos para todo mundo e o trio não pode usar nenhum deles.
  */
-/** `dicas`: o jogador montou o trio com as Dicas de trio ligadas (−15 mil por luta, src/engine/pontos.ts). */
+/** `dicas`: o jogador montou o trio com as Dicas de trio ligadas (−25 mil por luta, src/engine/pontos.ts). */
 export function replayRanked(team:string[],seed:number,livre=false,dicas=false){
   if(team.length!==3||new Set(team).size!==3||team.some(id=>!characters.some(c=>c.id===id)))throw new Error('Trio inválido.');
   const encounters=livre?generateCampaign(seed,team):generateCampaign(seed);
