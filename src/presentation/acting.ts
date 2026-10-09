@@ -109,7 +109,8 @@ export function atuacao(beat: Beat | null, battle: Battle, medida: Medida, area:
       const ate = act === 'melee' || act === 'interrupt' ? Math.max(dist * 0.4, dist - medida.medal * 0.82) : Math.min(26, dist * 0.12);
       dx = ux * ate; dy = uy * ate;
     }
-    out[beat.event.source] = { act, dx, dy, ux, uy, seconds: beat.duration, parity };
+    // o movimento de quem age dura o golpe, não a cadeia toda: ele volta ao lugar antes da cura no aliado
+    out[beat.event.source] = { act, dx, dy, ux, uy, seconds: beat.base ?? beat.duration, parity };
   }
 
   for (const f of battle.fighters) {

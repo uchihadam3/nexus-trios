@@ -129,6 +129,23 @@ describe('Direção sem alterar regras',()=>{
   }
   expect(vistos).toBeGreaterThan(0);
  });
+ it('depois de um golpe, a cura e o reforço no próprio trio esperam quem bateu voltar ao lugar',()=>{
+  // pedido do jogador: "tem que esperar ele atacar, voltar pro lugar e depois usar"
+  let vistos=0;
+  const d=createDirection(createBattle(['sakura','gohan','naruto'],['goku','vegeta','hulk'],9)),ja=new Set<number>();
+  for(let frame=0;frame<30000&&!d.complete;frame++){
+   advanceDirection(d,.04);
+   const beat=d.active;
+   if(!beat?.passos||ja.has(beat.event.id)||!['basic','skill'].includes(beat.event.kind))continue;
+   ja.add(beat.event.id);
+   const lado=beat.after.fighters.find(f=>f.uid===beat.event.source)?.side;
+   const ladoDe=(uid?:string)=>beat.after.fighters.find(f=>f.uid===uid)?.side;
+   const bateu=beat.passos[0]?.classe==='golpe'&&beat.events.some(e=>e.kind==='damage'&&e.source===beat.event.source&&ladoDe(e.target)!==lado);
+   if(!bateu)continue;
+   for(const x of beat.passos.slice(1).filter(x=>x.classe==='aliado')){vistos++;expect(x.em).toBeGreaterThanOrEqual((.9-P.impactAt)*(beat.base??0)-1e-6);}
+  }
+  expect(vistos).toBeGreaterThan(0);
+ });
  it('cadeia em ordem: golpe primeiro, a reação de quem sofre na hora dela, depois debuff e buff',()=>{
   let reacoes=0,cadeias=0;
   const ORDEM={golpe:0,rival:1,aliado:2} as const;

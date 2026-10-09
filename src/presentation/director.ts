@@ -79,6 +79,8 @@ export type ClasseDoPasso='golpe'|'reacao'|'rival'|'aliado';
 export interface Passo {classe:ClasseDoPasso;/** quem age neste passo */quem:string;/** nome do traço, numa reação */rotulo?:string;eventos:number[];/** segundos depois do impacto */em:number}
 /** Quanto cada passo fica na tela antes do próximo (o tempo de ler o que aconteceu). */
 export const TEMPO_DO_PASSO:Record<ClasseDoPasso,number>={golpe:.42,reacao:.58,rival:.4,aliado:.4};
+/** Fração do golpe em que quem foi até o alvo já está de volta no lugar (acting-motion.css). */
+const VOLTA_DO_GOLPE=.9;
 /** O máximo que a cadeia inteira pode alongar um golpe (lutas com muitas reações não arrastam). */
 const CADEIA_MAXIMA=2.6;
 /** Quanto dura um traço que dispara sozinho (o nome aparece, o efeito entra, a luta segue). */
@@ -90,7 +92,7 @@ const DO_GOLPE=new Set<BattleEvent['kind']>(['damage','block','interrupt','ko'])
 /* Reações que vêm de uma mecânica, não do traço: o passo leva o nome dela. */
 export const ROTULO_DA_MECANICA:Record<string,string>={Refletido:'Refletir',Espinhos:'Espinhos',Vampirismo:'Vampirismo',Sangramento:'Sangramento',Barreira:'Barreira','Última resistência':'Última resistência',Ricochete:'Ricochete','Golpe largo':'Golpe largo','Golpe que cura':'Golpe que cura','Guarda do golpe':'Guarda do golpe','Roubou Carga':'Roubou Carga',Acelerou:'Acelerou'};
 const ehDaMecanica=(e:BattleEvent)=>['damage','heal','resist','shield','charge','tempo'].includes(e.kind)&&e.label in ROTULO_DA_MECANICA;
-function montaPassos(beat:Pick<Beat,'event'|'events'|'after'|'traco'>):Passo[]{
+function montaPassos(beat:Pick<Beat,'event'|'events'|'after'|'traco'|'base'>):Passo[]{
   const ator=beat.event.source,lado=beat.after.fighters.find(f=>f.uid===ator)?.side;
   const ladoDe=(uid?:string)=>beat.after.fighters.find(f=>f.uid===uid)?.side;
   if(beat.traco){const f=beat.after.fighters.find(x=>x.uid===ator);return [{classe:'reacao',quem:ator,rotulo:f?byId[f.characterId].trait.name:undefined,eventos:beat.events.map(e=>e.id),em:0}];}
@@ -151,6 +153,13 @@ function montaPassos(beat:Pick<Beat,'event'|'events'|'after'|'traco'>):Passo[]{
   const intervalos=passos.slice(0,-1).map(x=>TEMPO_DO_PASSO[x.classe]);
   const total=intervalos.reduce((a,b)=>a+b,0),escala=total>CADEIA_MAXIMA?CADEIA_MAXIMA/total:1;
   let t=0;passos.forEach((x,k)=>{x.em=t;t+=(intervalos[k]??0)*escala;});
+  // depois de um golpe, o que cai no próprio trio (cura, Escudo, reforço, o traço em quem agiu) espera
+  // quem bateu voltar para o lugar: antes, o efeito saía com o personagem ainda no caminho de volta
+  const bateu=passos[0]?.classe==='golpe'&&beat.events.some(e=>e.kind==='damage'&&e.source===ator&&ladoDe(e.target)!==lado);
+  const noMeuTrio=(x:Passo)=>x.eventos.some(id=>{const e=beat.events.find(y=>y.id===id);return !!e?.target&&ladoDe(e.target)===lado&&!CONTABIL.has(e.kind);});
+  const k=bateu?passos.findIndex((x,i)=>i>0&&(x.classe==='aliado'||(x.classe==='reacao'&&x.quem===ator&&noMeuTrio(x)))):-1;
+  const volta=(VOLTA_DO_GOLPE-P.impactAt)*(beat.base??0);
+  if(k>0&&passos[k]!.em<volta){const atraso=volta-passos[k]!.em;for(let i=k;i<passos.length;i++)passos[i]!.em+=atraso;}
   return passos;
 }
 /** Em que passo (1, 2, 3…) o evento aparece. Eventos fora da lista do beat aparecem no primeiro. */
