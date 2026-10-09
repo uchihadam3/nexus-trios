@@ -110,7 +110,7 @@ export function presentStatus(id:StatusId,value:number):StatusPresentation {
   const summary:Record<StatusId,string>={
     exposed:`Recebe +${percent} de dano`,
     /* Marcado não aumenta dano (isso é o Exposto): os rivais miram nele e os golpes atravessam o Escudo. */
-    marked:'Vira o alvo preferido dos rivais, e os golpes nele atravessam o Escudo',
+    marked:'Vira alvo preferencial dos rivais, e os golpes nele atravessam o Escudo',
     /*
      * Lento, Preso e Acelerado: "7% mais lento para agir" — agir é dar o
      * próximo golpe e preparar habilidades, sem usar a palavra "ataque". Na ficha a
