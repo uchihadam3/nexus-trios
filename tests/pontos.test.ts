@@ -10,7 +10,7 @@ import { FATOR_DE_PONTOS } from '../src/data/pontos-por-personagem';
 describe('pontos', () => {
   it('a soma das lutas bate com a pontuação validada pelo servidor', () => {
     let conferidas = 0;
-    for (const seed of [11, 202, 3003, 40004, 500005]) {
+    for (const seed of [11, 202, 3003, 40004, 500005, 61, 707, 8008, 90009, 1234567]) {
       const rivais = new Set(generateCampaign(seed).flatMap((e) => e.team));
       const trio = characters.map((c) => c.id).filter((id) => !rivais.has(id)).slice(seed % 40, seed % 40 + 3);
       const oficial = replayRanked(trio, seed);
@@ -27,7 +27,7 @@ describe('pontos', () => {
       for (const l of lutas) { expect(l.pontos).toBeGreaterThan(0); expect(l.pontos).toBeLessThan(400_000); }
       conferidas += lutas.length;
     }
-    expect(conferidas).toBeGreaterThan(5);
+    expect(conferidas).toBeGreaterThan(10);
   }, 60000);
 
   it('todo personagem tem o seu fator de pontos, dentro do limite (rode scripts/equilibrar-pontos.ts se mudar o elenco)', () => {

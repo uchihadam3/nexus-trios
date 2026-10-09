@@ -38,7 +38,7 @@ for (let seed = 1; seed <= 700; seed++) {
   const trio = [l[(seed * 7) % l.length]!, l[(seed * 13 + 5) % l.length]!, l[(seed * 29 + 11) % l.length]!];
   if (new Set(trio).size === 3) joga(trio, seed);
 }
-for (let rodada = 0; rodada < 6; rodada++) for (const [k, id] of ids.entries()) {
+for (let rodada = 0; rodada < 16; rodada++) for (const [k, id] of ids.entries()) {
   if (conta(id) >= AMOSTRAS) continue;
   const seed = 9000 + rodada * 997 + k, rivais = new Set(generateCampaign(seed).flatMap((e) => e.team));
   if (rivais.has(id)) continue;
