@@ -1,7 +1,6 @@
 import {characters} from '../data/characters';
 import {createBattle,stepBattle} from './battle';
 import {generateCampaign} from './campaign';
-import {pontosDaLuta} from './pontos';
 import {summarizeBattle,type RunBattleSummary} from './run-summary';
 
 /* 250.4: Preparo mínimo de 0,5 s (leve), efeitos repetidos somados, condições alcançáveis.
@@ -37,7 +36,8 @@ export async function runDigest(id:string,team:string[],seed:number,outcomes:boo
  * (generateCampaign(seed, trio)). Na Diária e na Semanal os rivais são os
  * mesmos para todo mundo e o trio não pode usar nenhum deles.
  */
-export function replayRanked(team:string[],seed:number,livre=false){
+/** `dicas`: o jogador montou o trio com as Dicas de trio ligadas (−15 mil por luta, src/engine/pontos.ts). */
+export function replayRanked(team:string[],seed:number,livre=false,dicas=false){
   if(team.length!==3||new Set(team).size!==3||team.some(id=>!characters.some(c=>c.id===id)))throw new Error('Trio inválido.');
   const encounters=livre?generateCampaign(seed,team):generateCampaign(seed);
   const foes=new Set(encounters.flatMap(e=>e.team));if(team.some(id=>foes.has(id)))throw new Error('Trio inclui rival da campanha compartilhada.');
@@ -47,13 +47,13 @@ export function replayRanked(team:string[],seed:number,livre=false){
     const battle=createBattle(team,encounter.team,seed+index*7919,encounter.scale);
     for(let tick=0;tick<9000&&!battle.finished;tick++)stepBattle(battle);
     if(!battle.finished)throw new Error(`Replay sem conclusão no confronto ${index+1}.`);
-    const summary=summarizeBattle(index,battle);summaries.push(summary);
+    const summary=summarizeBattle(index,battle,[],dicas);summaries.push(summary);
     // a conta da tela (src/engine/pontos.ts): a luta perdida também soma o que o trio fez nela
-    score+=pontosDaLuta(battle,index).total;
+    score+=summary.score;
     if(!summary.won)break;
   }
   const cleared=summaries.filter(s=>s.won).length;
   return {seed,team,encountersCleared:cleared,score,summaries,highlights:{survivors:summaries.at(-1)?.survivors??0,turns:summaries.reduce((n,s)=>n+s.turns,0),
     // lutas vencidas sem perder ninguém do trio (o "de pé no fim" da luta perdida era quase sempre 0)
-    semBaixas:summaries.filter(s=>s.won&&s.survivors===3).length}};
+    semBaixas:summaries.filter(s=>s.won&&s.survivors===3).length,...(dicas?{dicas:true}:{})}};
 }

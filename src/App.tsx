@@ -212,7 +212,7 @@ export default function App(){
       const telemetry=d.signals.length?tallyEvents(current.telemetry??emptyTally(),d.signals):current.telemetry??emptyTally();
       let next={...current,battle:d.battle,presentation:checkpointDirection(d),battleSynergies,raioX,telemetry};
       if(d.complete){
-        const summary={...summarizeBattle(current.index,d.battle,battleSynergies),recordeAntes:current.recorded?undefined:loadProfile().recordePontos??0};
+        const summary={...summarizeBattle(current.index,d.battle,battleSynergies,current.dicas===true),recordeAntes:current.recorded?undefined:loadProfile().recordePontos??0};
         next={...next,stage:'result',recorded:true,summaries:current.recorded?current.summaries:[...(current.summaries??[]).filter(s=>s.index!==current.index),summary]};
         if(!current.recorded){
           const won=d.battle.winner==='player',champion=won&&current.index===9;
@@ -240,12 +240,14 @@ export default function App(){
     submission.current=true;const id=run.ranked.id;
     if(run.ranked.status!=='validating')changeRun({...run,ranked:{...run.ranked,status:'validating'}});
     void (async()=>{
-      try{const digest=await runDigest(id,run.team,run.seed,(run.summaries??[]).map(s=>s.won));const result=await onlineCall<{score:number;daily:number|null;weekly:number|null;season:number|null;top3?:{periodo?:ResultadoTop3;temporada?:ResultadoTop3}}>('submit',{runId:id,digest});
+      try{const digest=await runDigest(id,run.team,run.seed,(run.summaries??[]).map(s=>s.won));const result=await onlineCall<{score:number;daily:number|null;weekly:number|null;season:number|null;top3?:{periodo?:ResultadoTop3;temporada?:ResultadoTop3}}>('submit',{runId:id,digest,dicas:run.dicas===true});
         const latest=runRef.current;if(latest?.ranked?.id===id)changeRun({...latest,ranked:{...latest.ranked,status:'verified',score:result.score,daily:result.daily,weekly:result.weekly,season:result.season,top3:result.top3,error:undefined}});
       }catch(error){const latest=runRef.current;if(latest?.ranked?.id===id)changeRun({...latest,ranked:{...latest.ranked,status:'failed',error:error instanceof Error?error.message:'Falha na validação.'}});}
       finally{submission.current=false;}
     })();
   },[run?.stage,run?.index,run?.battle?.winner,run?.ranked?.status,run?.ranked?.id]);
+  /* Dicas de trio ligadas enquanto o trio é escolhido: a jornada inteira paga o custo (src/engine/pontos.ts) */
+  useEffect(()=>{if(settings.dicasDoTrio&&run?.stage==='draft'&&run.draft.team.length<3&&!run.dicas)changeRun({...run,dicas:true});},[settings.dicasDoTrio,run?.stage,run?.draft.team.length,run?.dicas]);
   useEffect(()=>{battleAudio.configure(settings);},[settings]);
   /* versão nova publicada enquanto a aba estava aberta (src/main.tsx): oferece recarregar */
   const [versaoNova,setVersaoNova]=useState(false);
@@ -279,7 +281,7 @@ export default function App(){
       {screen==='conta'&&<AccountScreen autenticacao={autenticacao} conta={conta} profile={profile} conectado={onlineConfigured} google={googleConfigured} aoMudarPerfil={p=>{save('profile',p);setProfile(p);}}/>}
       {screen==='help'&&<HelpScreen onPlay={requestNew}/>}
       {screen==='settings'&&<SettingsScreen settings={settings} onChange={changeSettings} onReset={reset} onGaleria={()=>navigate('vfx')} ranking={onlineConfigured?{nome:profile.publicHandle,onEditar:()=>{setPendingStart(false);setDraftHandle(profile.publicHandle??'');setNameDialog(true);}}:undefined}/>}
-      {screen==='game'&&run?.stage==='draft'&&<DraftScreen draft={run.draft} primeiroRival={run.encounters[0]} onPick={id=>changeRun({...run,draft:pickDraft(run.draft,id)})} onSkip={()=>changeRun({...run,draft:skipDraft(run.draft)})} onDetails={setDetails} onStart={()=>void startBattle(0)} onAbandon={()=>setConfirmAbandon(true)}/>}
+      {screen==='game'&&run?.stage==='draft'&&<DraftScreen draft={run.draft} primeiroRival={run.encounters[0]} dicas={settings.dicasDoTrio} usouDicas={run.dicas===true} onDicas={ligar=>changeSettings({...settings,dicasDoTrio:ligar})} onPick={id=>changeRun({...run,draft:pickDraft(run.draft,id)})} onSkip={()=>changeRun({...run,draft:skipDraft(run.draft)})} onDetails={setDetails} onStart={()=>void startBattle(0)} onAbandon={()=>setConfirmAbandon(true)}/>}
       {screen==='game'&&run?.stage==='battle'&&run.battle&&<BattleScreen battle={presentation&&direction.current?.battle===run.battle?presentation.battle:run.battle} beat={presentation&&direction.current?.battle===run.battle?presentation.beat:null} index={run.index} name={run.encounters[run.index].name} settings={settings} paused={paused||!!details}  onPause={()=>setPaused(!paused)} onAbandon={()=>setConfirmAbandon(true)} onSettings={changeSettings} onExit={()=>{setPaused(true);navigate('home');}}/>}
       {screen==='game'&&run?.stage==='result'&&<ResultScreen run={run} onNext={()=>void startBattle(run.index+1)} onRestart={requestNew} onAbandon={()=>setConfirmAbandon(true)} onHome={()=>navigate('home')} onRanking={()=>navigate('ranking')} onRetry={()=>{if(run.ranked)changeRun({...run,ranked:{...run.ranked,status:'validating'}});}} auto={settings.auto} onAuto={auto=>changeSettings({...settings,auto})}/>}
       {screen==='debug'&&import.meta.env.DEV&&<Suspense fallback={<p>Carregando laboratório…</p>}><DebugScreen/></Suspense>}

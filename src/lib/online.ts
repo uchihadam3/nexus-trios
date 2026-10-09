@@ -83,7 +83,7 @@ export async function onlineCall<T>(action:string,body:Record<string,unknown>={}
   return dados as T;
 }
 
-export interface PublicRun {position:number;id:string;handle:string;score:number;progress:number;team:string[];date:string;seed:number;engineVersion:string;balanceVersion:string;highlights:{survivors?:number;turns?:number;/** lutas vencidas sem perder ninguém (jornadas antigas não têm) */semBaixas?:number}}
+export interface PublicRun {position:number;id:string;handle:string;score:number;progress:number;team:string[];date:string;seed:number;engineVersion:string;balanceVersion:string;highlights:{survivors?:number;turns?:number;/** lutas vencidas sem perder ninguém (jornadas antigas não têm) */semBaixas?:number;/** montou o trio com as Dicas de trio (−15 mil por luta) */dicas?:boolean}}
 /*
  * `meus` só vem da função publicada com a FASE K. A versão anterior não manda,
  * e a tela precisa funcionar com as duas: o jogo vai ao ar antes da função.

@@ -84,7 +84,7 @@ export function Placar({mode,onMode,estado,handle,onConta,onMais,maisCarregando=
       </button>)}</div>}
       <div className="ranking-list rk-lista">{resto.map((row,i)=><button key={row.id} onClick={()=>setSelected(row)} className={minhas.has(row.id)?'mine':''} style={{'--i':Math.min(i,12)} as CSSProperties}>
         <span className="rk-pos">{row.position}</span>
-        <span className="rk-quem"><b>{row.handle}</b><small>{row.progress}/10{row.highlights.semBaixas!==undefined&&<> · {row.highlights.semBaixas} sem baixas</>}</small></span>
+        <span className="rk-quem"><b>{row.handle}</b><small>{row.progress}/10{row.highlights.semBaixas!==undefined&&<> · {row.highlights.semBaixas} sem baixas</>}{row.highlights.dicas&&<> · com dicas</>}</small></span>
         <Trio team={row.team} tamanho="mini"/>
         <strong>{pontos(row.score)}</strong>
       </button>)}{!rows.length&&<p className="rk-vazio">Ainda não há resultado validado nesta aba. O primeiro lugar está livre!</p>}</div>

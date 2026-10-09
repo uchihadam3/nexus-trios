@@ -27,7 +27,7 @@ const ABRE: StatusId[] = ['exposed', 'marked', 'paralyzed', 'electric', 'burning
 const PRENDE: StatusId[] = ['paralyzed', 'rooted', 'slow', 'confused', 'silenced', 'weakened'];
 const REFORCO: StatusId[] = ['strengthened', 'haste', 'protected', 'regen'];
 
-interface Papel {
+export interface Papel {
   daCarga: boolean; adianta: boolean; reforca: boolean; cuida: boolean;
   abre: boolean; prende: boolean; golpeGrande: boolean; precisaVulneravel: boolean;
   precisaFerido: boolean; fragil: boolean; forte: boolean; vinganca: boolean;

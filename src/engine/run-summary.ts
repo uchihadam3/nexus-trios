@@ -24,10 +24,11 @@ export function addSynergies(existing:RunSynergyEvent[],events:BattleEvent[]):Ru
   }
   return next;
 }
-export function summarizeBattle(index:number,battle:Battle,synergies:RunSynergyEvent[]=[]):RunBattleSummary {
+/** `dicas`: o trio foi montado com as Dicas de trio ligadas (cada luta custa CUSTO_DAS_DICAS). */
+export function summarizeBattle(index:number,battle:Battle,synergies:RunSynergyEvent[]=[],dicas=false):RunBattleSummary {
   const players=battle.fighters.filter(f=>f.side==='player'),enemies=battle.fighters.filter(f=>f.side==='enemy');
   const survivors=players.filter(f=>f.hp>0).length;
-  const pontos=pontosDaLuta(battle,index),score=pontos.total;
+  const pontos=pontosDaLuta(battle,index,dicas),score=pontos.total;
   const fighters=players.map((f:Fighter)=>({characterId:f.characterId,...f.stats,hp:Math.round(f.hp)}));
   return {index,won:battle.winner==='player',time:battle.time,reason:battle.reason,score,pontos,survivors,turns:battle.turns,enemies:enemies.map(f=>f.characterId),fighters,synergies:synergies.map(x=>({...x}))};
 }

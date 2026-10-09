@@ -141,7 +141,7 @@ Deno.serve(async (request:Request)=>{
       if(!run)return fail('Jornada inexistente.',404,origin);if(run.verified)return fail('Jornada já validada.',409,origin);
       if(new Date(run.expires_at).getTime()<Date.now())return fail('Jornada expirada.',410,origin);
       if(run.engine_version!==ENGINE_VERSION||run.roster_fingerprint!==rosterFingerprint()||run.balance_version!==BALANCE_VERSION)return fail('Versão do motor não reconhecida.',409,origin);
-      const livre=run.seed!==await seedFor(run.mode,String(run.period_key)),verified=replayRanked(run.team_ids,run.seed,livre),digest=await runDigest(run.id,run.team_ids,run.seed,verified.summaries.map(s=>s.won));
+      const livre=run.seed!==await seedFor(run.mode,String(run.period_key)),dicas=input.dicas===true,verified=replayRanked(run.team_ids,run.seed,livre,dicas),digest=await runDigest(run.id,run.team_ids,run.seed,verified.summaries.map(s=>s.won));
       if(digest!==input.digest)return fail('Replay não corresponde ao desafio registrado.',422,origin);
       /*
        * O Top 3 é registrado *antes* de a partida ser marcada como validada.
@@ -155,7 +155,7 @@ Deno.serve(async (request:Request)=>{
       const registrar=async(escopo:Escopo,chave:string)=>{const {data,error}=await admin.rpc('registrar_no_top3',{p_player:user.id,p_scope:escopo,p_period:chave,p_team:run.team_ids,p_run:run.id,p_score:verified.score,p_cleared:verified.encountersCleared});if(error)throw error;return data;};
       // um ranking só: a mesma jornada entra em Hoje, Semana e Geral (no dia e na semana em que foi validada)
       const top3={periodo:await registrar('daily',chaveDo('daily')),semana:await registrar('weekly',chaveDo('weekly')),temporada:await registrar('season',chaveDo('season'))};
-      const {data:saved,error:saveError}=await admin.from('ranked_runs').update({verified:true,finished_at:new Date().toISOString(),encounters_cleared:verified.encountersCleared,score:verified.score,summary:{highlights:verified.highlights,outcomes:verified.summaries.map(s=>s.won),livre},digest}).eq('id',run.id).eq('verified',false).select('id').maybeSingle();
+      const {data:saved,error:saveError}=await admin.from('ranked_runs').update({verified:true,finished_at:new Date().toISOString(),encounters_cleared:verified.encountersCleared,score:verified.score,summary:{highlights:verified.highlights,outcomes:verified.summaries.map(s=>s.won),livre,dicas},digest}).eq('id',run.id).eq('verified',false).select('id').maybeSingle();
       if(saveError)throw saveError;if(!saved)return fail('Jornada já enviada.',409,origin);
       const player=await profile(user.id),xp=(player?.xp??0)+30+verified.encountersCleared*30+(verified.encountersCleared===10?250:0);
       await admin.from('players').update({xp,nexus_level:Math.floor(Math.sqrt(xp/100))+1,updated_at:new Date().toISOString()}).eq('id',user.id);

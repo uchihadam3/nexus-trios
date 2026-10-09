@@ -23,12 +23,17 @@
  * Também contam: manter o trio vivo (Vida que sobrou e quem ficou de pé) e
  * virar o Domínio. Os feitos crescem com a altura da jornada (luta 10 ×1,45).
  * A jornada é a soma das lutas; a derrota encerra, mas os pontos dela ficam.
+ *
+ * Quem liga as Dicas de trio na escolha (src/presentation/dicas-do-trio.ts)
+ * paga CUSTO_DAS_DICAS em cada luta da jornada: as dicas ensinam, mas o
+ * ranking premia quem monta o trio sozinho.
+ *
  * O servidor (src/engine/ranked.ts, replayRanked) usa exatamente esta conta.
  */
 import type { Battle, Fighter } from './types';
 import { FATOR_DE_PONTOS } from '../data/pontos-por-personagem';
 
-export type ParcelaId = 'dano' | 'nocautes' | 'apoio' | 'jogadas' | 'efeitos' | 'viradas' | 'vida' | 'vitoria';
+export type ParcelaId = 'dano' | 'nocautes' | 'apoio' | 'jogadas' | 'efeitos' | 'viradas' | 'vida' | 'vitoria' | 'ajuda';
 export interface Parcela { id: ParcelaId; rotulo: string; valor: number }
 
 export interface PontosDaLuta {
@@ -73,6 +78,9 @@ export const PONTOS = {
   porLuta: 0.05,
 } as const;
 
+/** O que cada luta custa a quem montou o trio com as Dicas de trio ligadas. */
+export const CUSTO_DAS_DICAS = 15_000;
+
 export const multiplicadorDaLuta = (indice: number) => 1 + PONTOS.porLuta * Math.max(0, indice);
 
 /** Os feitos de um lutador, por tipo, sem o fator do personagem (usado também para medir o fator). */
@@ -89,7 +97,7 @@ export function feitosDoLutador(f: Fighter): Record<'dano' | 'nocautes' | 'apoio
   };
 }
 
-export function pontosDaLuta(battle: Battle, indice = 0): PontosDaLuta {
+export function pontosDaLuta(battle: Battle, indice = 0, dicas = false): PontosDaLuta {
   const trio = battle.fighters.filter((f) => f.side === 'player');
   const de_pe = trio.filter((f) => f.hp > 0).length;
   const vidaMedia = Math.max(0, Math.min(1, trio.reduce((n, f) => n + f.hp / f.maxHp, 0) / 3));
@@ -112,7 +120,9 @@ export function pontosDaLuta(battle: Battle, indice = 0): PontosDaLuta {
     ['vitoria', 'Vitória', venceu ? PONTOS.vitoria : 0],
   ];
   const parcelas = brutas.map(([id, rotulo, v]) => ({ id, rotulo, valor: Math.round(v) })).filter((p) => p.valor > 0);
-  return { total: parcelas.reduce((n, p) => n + p.valor, 0), parcelas, multiplicador: m, de_pe, vidaMedia };
+  if (dicas) parcelas.push({ id: 'ajuda', rotulo: 'Dicas de trio', valor: -CUSTO_DAS_DICAS });
+  // a luta nunca vale menos que zero
+  return { total: Math.max(0, parcelas.reduce((n, p) => n + p.valor, 0)), parcelas, multiplicador: m, de_pe, vidaMedia };
 }
 
 /** A pontuação da jornada: a soma das lutas jogadas (vencidas ou não). */
