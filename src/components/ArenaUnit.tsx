@@ -64,7 +64,8 @@ function LinhaDeStatus({tipo,lista,fighter,onInspect}:{tipo:'buffs'|'debuffs';li
       <StatusBadge status={s} onClick={()=>onInspect({kind:'status',fighter,status:s})}/>
       {pulso>0&&<span key={pulso} className="status-renovado" aria-hidden/>}
     </span>;})}
-    {saindo.filter(x=>!lista.some(s=>s.id===x.s.id)).map(x=><span key={x.chave} className={`status-vida status-saindo ${x.modo}`} aria-hidden><StatusBadge status={x.s}/></span>)}
+    {/* quem está saindo só usa vaga livre: a linha nunca passa de POR_LINHA ícones (antes ela alargava e os ícones vazavam para fora) */}
+    {saindo.filter(x=>!lista.some(s=>s.id===x.s.id)).slice(0,Math.max(0,POR_LINHA-visiveis.length)).map(x=><span key={x.chave} className={`status-vida status-saindo ${x.modo}`} aria-hidden><StatusBadge status={x.s}/></span>)}
     {resto>0&&<button className="status-more" onClick={()=>onInspect({kind:'fighter',fighter})} aria-label={`Mais ${resto} efeitos`}>+{resto}</button>}
   </div>;
 }
