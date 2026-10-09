@@ -89,24 +89,28 @@ const acumulacaoDe=(id:StatusId):string=>{
  * aparecer 30%." Paralisado, Silenciado e Confuso não têm intensidade que
  * importe: ou estão, ou não estão.
  */
-const SEM_VALOR=new Set<StatusId>(['paralyzed','confused','silenced']);
+const SEM_VALOR=new Set<StatusId>(['paralyzed','confused','silenced','marked']);
 const deVida=(id:StatusId)=>id==='regen'||id==='burning';
 export function valorAtualDoStatus(id:StatusId,intensidade:number):string|null{
   if(SEM_VALOR.has(id))return null;
   const v=Math.min(intensidade,statuses[id].cap);
+  if(id==='electric')return `−${Math.round(v*CHOQUE_DO_ELETRIFICADO*100)}%`; // o choque na barra de ação, não dano
   return deVida(id)?`${n(v)} de Vida/s`:pct(v);
 }
 /* Até onde as aplicações somam — só para os Status que somam. */
 export function tetoDoStatus(id:StatusId):string|null{
   const def=statuses[id];
   if(def.stack!=='add')return null;
+  if(id==='electric')return `−${Math.round(def.cap*CHOQUE_DO_ELETRIFICADO*100)}%`;
   return deVida(id)?`${n(def.cap)} de Vida/s`:pct(def.cap);
 }
 
 export function presentStatus(id:StatusId,value:number):StatusPresentation {
   const amount=Math.min(value,statuses[id].cap),percent=pct(amount),number=n(amount);
   const summary:Record<StatusId,string>={
-    exposed:`Recebe +${percent} de dano`,marked:`Recebe +${percent} de dano e vira alvo preferencial`,
+    exposed:`Recebe +${percent} de dano`,
+    /* Marcado não aumenta dano (isso é o Exposto): os rivais miram nele e os golpes atravessam o Escudo. */
+    marked:'Vira o alvo preferido dos rivais, e os golpes nele atravessam o Escudo',
     /*
      * Lento, Preso e Acelerado: "7% mais lento para agir" — agir é dar o
      * próximo golpe e preparar habilidades, sem usar a palavra "ataque". Na ficha a
@@ -120,7 +124,8 @@ export function presentStatus(id:StatusId,value:number):StatusPresentation {
      * — o próximo golpe e o Preparo demoram mais — fica na legenda do Status.
      */
     slow:`${percent} mais lento para agir`,rooted:`${percent} mais lento para agir · vale junto com Lento`,
-    electric:`Recebe +${percent} de dano`,paralyzed:'Não ataca nem avança o Preparo',
+    /* Eletrificado não aumenta dano (isso é o Exposto): é o choque que atrasa a ação a cada golpe. */
+    electric:`Cada golpe recebido atrasa ${Math.round(amount*CHOQUE_DO_ELETRIFICADO*100)}% da próxima ação`,paralyzed:'Não ataca nem avança o Preparo',
     protected:`Recebe ${percent} menos dano${amount>=.3?'; Preparo não pode ser interrompido':''}`,
     haste:`${percent} mais rápido para agir`,confused:'25% de chance do ataque básico atingir a si mesmo',
     regen:`Recupera ${number} de Vida por segundo`,burning:`Perde ${number} de Vida por segundo`,

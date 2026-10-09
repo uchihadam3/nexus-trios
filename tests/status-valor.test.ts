@@ -46,3 +46,23 @@ describe('valor do Status na batalha', () => {
     for (const id of ['paralyzed', 'silenced', 'confused'] as const) expect(valorAtualDoStatus(id, 1)).toBeNull();
   });
 });
+
+describe('Eletrificado', () => {
+  it('não promete dano: mostra o choque na barra de ação', async () => {
+    const { presentStatus } = await import('../src/engine/skill-descriptions');
+    const texto = presentStatus('electric', 0.34).summary;
+    expect(texto).not.toMatch(/dano/);
+    expect(texto).toMatch(/atrasa 20% da próxima ação/);
+    expect(valorAtualDoStatus('electric', 0.34)).toBe('−20%');
+  });
+});
+
+describe('Marcado', () => {
+  it('não promete dano extra: diz que vira alvo e atravessa o Escudo', async () => {
+    const { presentStatus } = await import('../src/engine/skill-descriptions');
+    const texto = presentStatus('marked', 0.18).summary;
+    expect(texto).not.toMatch(/\+\d+% de dano/);
+    expect(texto).toMatch(/atravessam o Escudo/);
+    expect(valorAtualDoStatus('marked', 0.18)).toBeNull();
+  });
+});
