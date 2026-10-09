@@ -52,6 +52,7 @@ const FAZ: Record<StatusId, string> = {
   frozen: 'Preso no gelo: não age. O próximo golpe direto quebra o gelo e entra mais forte.',
   sleep: 'Dorme: não age. Acorda quando o sono acaba ou quando leva um golpe direto (Queimadura e Veneno não acordam).',
   blind: 'Pode errar o ataque básico: o golpe passa longe e não faz nada.',
+  summon: 'Uma criatura luta ao lado dele e ataca o rival mais ferido a cada 1,5 s. Não tem Vida nem pode ser alvo; some quando o tempo acaba, quando quem invocou cai ou com Dissipar.',
   bomb: 'Uma bomba-relógio grudada no rival: quando o tempo acaba, explode com o dano guardado. Aplicar de novo soma o dano. Purificar desarma.',
   evasion: 'A cada golpe de um rival, uma chance de escapar dele inteiro: nem dano, nem debuff entram. Golpes em todos também podem ser esquivados.',
   barrier: 'Anula os próximos debuffs que um rival tentar pôr nele. Cada debuff anulado gasta uma.',

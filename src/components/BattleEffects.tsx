@@ -20,7 +20,7 @@ export function isAreaBeat(beat:Beat|null,battle:Battle):boolean {
 }
 
 /* Beats sem ficha de habilidade (interrupção) ganham uma família direta. */
-const SEM_FICHA:Partial<Record<Beat['event']['kind'],VfxFamily>>={interrupt:'onda_de_choque',revive:'renascer'};
+const SEM_FICHA:Partial<Record<Beat['event']['kind'],VfxFamily>>={interrupt:'onda_de_choque',revive:'renascer',summon:'invocacao'};
 /* Cada variante gira um pouco o impacto, para a mesma família não parecer carimbo. */
 const GIRO_DA_VARIANTE=[0,16,-12,8];
 /* Altura da faixa em relação ao medalhão. */

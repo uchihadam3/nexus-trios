@@ -212,6 +212,8 @@ export default function App(){
           // parte 5: errou, a Barreira anulou, e o som de cada Status novo ao entrar
           const errou=d.active.events.find(e=>e.kind==='miss');
           if(errou)battleAudio.sound(errou.label==='Esquivou'?'esquiva':'errou',PRIORIDADE.importante,0,errou.id,0);
+          const criatura=d.active.event.kind==='summon'?d.active.event:undefined;
+          if(criatura)battleAudio.sound('invocacao',PRIORIDADE.importante,0,criatura.id,0);
           const copiou=d.active.events.find(e=>e.kind==='copy');
           if(copiou)battleAudio.sound('copia',PRIORIDADE.importante,0,copiou.id,0);
           const bum=d.active.events.find(e=>e.kind==='damage'&&e.label==='Explosão');

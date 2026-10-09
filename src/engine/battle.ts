@@ -1,5 +1,5 @@
 import { byId } from '../data/characters';
-import { CHOQUE_DO_ELETRIFICADO, statuses } from '../data/statuses';
+import { CHOQUE_DO_ELETRIFICADO, RITMO_DA_INVOCACAO, statuses } from '../data/statuses';
 import { random,shuffle } from './random';
 import { DOMINION as D, fracaoPorAlvo} from './dominion-config';
 import type { Battle, BattleEvent, Effect, Fighter, Side, Skill, StatusId, Target, Topic } from './types';
@@ -190,9 +190,9 @@ function trigger(b:Battle,f:Fighter,topic:Topic,source?:Fighter,amount=1){
  * dos rivais os buffs que mais ajudam primeiro. `value` é quantos Status saem.
  */
 export const ORDEM_DA_PURIFICACAO:StatusId[]=['paralyzed','frozen','sleep','bomb','silenced','rooted','provoked','confused','blind','poison','bleed','cursed','slow','burning','exposed','marked','electric','weakened'];
-export const ORDEM_DA_DISSIPACAO:StatusId[]=['evasion','barrier','protected','reflect','vampirism','strengthened','haste','thorns','regen'];
+export const ORDEM_DA_DISSIPACAO:StatusId[]=['summon','evasion','barrier','protected','reflect','vampirism','strengthened','haste','thorns','regen'];
 const PESO_DO_DEBUFF:Partial<Record<StatusId,number>>={bomb:.8,paralyzed:1,frozen:.9,sleep:.8,silenced:.65,rooted:.7,provoked:.5,confused:.45,blind:.45,poison:.4,bleed:.4,cursed:.4,slow:.4};
-const PESO_DO_BUFF:Partial<Record<StatusId,number>>={evasion:.5,barrier:.5,protected:.5,reflect:.45,vampirism:.45,strengthened:.4,haste:.4,thorns:.3,regen:.3};
+const PESO_DO_BUFF:Partial<Record<StatusId,number>>={summon:.6,evasion:.5,barrier:.5,protected:.5,reflect:.45,vampirism:.45,strengthened:.4,haste:.4,thorns:.3,regen:.3};
 function quaisSaem(alvo:Fighter,ordem:StatusId[],n:number):StatusId[]{
   const tem=new Set(alvo.statuses.map(s=>s.id));
   return [...ordem.filter(id=>tem.has(id)),...[...tem].filter(id=>!ordem.includes(id)&&ordem!==ORDEM_DA_DISSIPACAO&&negativeStatuses.has(id))].slice(0,Math.max(0,Math.round(n)));
@@ -229,6 +229,18 @@ function copia(b:Battle,f:Fighter,fracao:number){
   if(!effs.length)return;
   emit(b,{kind:'copy',source:f.uid,target:achou.quem.uid,label:`Copiou ${achou.skill.name}`,visual:achou.skill.icon});
   applyEffects(b,f,targets(b,f,achou.skill.target,effs),effs);
+}
+/*
+ * Invocação: uma criatura (o nome vem da ficha: Cão divino, Mago Negro…) luta
+ * ao lado de quem invocou. Ela não é um lutador: não tem Vida, não é alvo e
+ * some quando o tempo acaba, quando quem invocou cai ou com Dissipar. Ataca o
+ * rival mais ferido (ou quem provocou), e os golpes dela são diretos: Esquiva,
+ * Refletir e Espinhos valem.
+ */
+function invocacaoAtaca(b:Battle,f:Fighter,dano:number){
+  const alvo=targets(b,f,'enemyWeak',[{kind:'damage',value:dano}])[0];if(!alvo)return;
+  emit(b,{kind:'summon',source:f.uid,target:alvo.uid,label:byId[f.characterId].invocacao??'Invocação',value:dano});
+  applyEffects(b,f,[alvo],[{kind:'damage',value:dano}]);
 }
 /* Sangramento: agir abre a ferida — cada ataque básico ou habilidade custa Vida. */
 function sangra(b:Battle,f:Fighter){
@@ -458,7 +470,7 @@ function skillValue(b:Battle,f:Fighter,s:Skill,selected:Fighter[],intelligence:n
       const folego=f.hp/f.maxHp;
       for(const target of list){if(quemProvocou(b,target)?.uid===f.uid)continue;add('provocar',(6+fragil*18)*folego*tacticalFactor);}
     }else if(effect.kind==='status'){
-      for(const target of list){const existing=target.statuses.find(x=>x.id===effect.status)?.intensity??0;const weight=effect.status==='paralyzed'?1:effect.status==='rooted'?.7:effect.status==='silenced'?.65:effect.status==='slow'?.4:['exposed','marked','electric','burning'].includes(effect.status)?.35:effect.status==='protected'?.5:effect.status==='vampirism'||effect.status==='reflect'?.45:effect.status==='frozen'?.9:effect.status==='sleep'?.75:effect.status==='barrier'?.5:effect.status==='evasion'?.45:['blind','cursed'].includes(effect.status)?.4:effect.status==='poison'||effect.status==='bleed'?.012:effect.status==='bomb'?.0025:effect.status==='thorns'?.02:0;add('efeito de estado',Math.max(0,effect.value-existing)*weight*24*tacticalFactor);}
+      for(const target of list){const existing=target.statuses.find(x=>x.id===effect.status)?.intensity??0;const weight=effect.status==='paralyzed'?1:effect.status==='rooted'?.7:effect.status==='silenced'?.65:effect.status==='slow'?.4:['exposed','marked','electric','burning'].includes(effect.status)?.35:effect.status==='protected'?.5:effect.status==='vampirism'||effect.status==='reflect'?.45:effect.status==='frozen'?.9:effect.status==='sleep'?.75:effect.status==='barrier'?.5:effect.status==='evasion'?.45:['blind','cursed'].includes(effect.status)?.4:effect.status==='poison'||effect.status==='bleed'?.012:effect.status==='bomb'?.0025:effect.status==='summon'?.012:effect.status==='thorns'?.02:0;add('efeito de estado',Math.max(0,effect.value-existing)*weight*24*tacticalFactor);}
     }else if(effect.kind==='cleanse'||effect.kind==='dispel'){
       // vale o quanto atrapalhava (ou ajudava) o que vai sair
       const ordem=effect.kind==='cleanse'?ORDEM_DA_PURIFICACAO:ORDEM_DA_DISSIPACAO,peso=effect.kind==='cleanse'?PESO_DO_DEBUFF:PESO_DO_BUFF;
@@ -553,6 +565,8 @@ export function stepBattle(b:Battle,observe?:(snapshot:Battle)=>void):Battle {
       const origin=b.fighters.find(x=>x.uid===s.source)??f;
       if(s.id==='burning')damage(b,origin,f,s.intensity*STEP,false);
       if(s.id==='poison')damage(b,origin,f,s.intensity*STEP,false,'Veneno');
+      // Invocação: a criatura ataca sozinha a cada RITMO_DA_INVOCACAO segundos, mesmo com quem invocou travado
+      if(s.id==='summon'){const ja=(s.duration??s.remaining)-s.remaining;if(Math.floor((ja+STEP+1e-6)/RITMO_DA_INVOCACAO)>Math.floor((ja+1e-6)/RITMO_DA_INVOCACAO))invocacaoAtaca(b,f,Math.min(s.intensity,statuses.summon.cap));}
       // Marca explosiva: quando o tempo acaba, explode com o dano guardado
       if(s.id==='bomb'&&s.remaining-STEP<=1e-6){s.remaining=0;damage(b,origin,f,Math.min(s.intensity,statuses.bomb.cap),false,'Explosão');if(!alive(f))break;}
       if(s.id==='regen')healing(b,origin,f,s.intensity*STEP);

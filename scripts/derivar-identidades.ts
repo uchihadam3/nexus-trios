@@ -154,6 +154,7 @@ const avaliar = (c: Character): Map<Identidade, number> => {
   if (c.ultimaResistencia) notas.set('Última resistência', 1);
   if (temEfeito(c, ({ e }) => e.kind === 'status' && e.status === 'bomb')) notas.set('Marca explosiva', 1);
   if (temEfeito(c, ({ e }) => e.kind === 'copy')) notas.set('Copiar', 1);
+  if (c.invocacao) notas.set('Invocação', 1);
   for (const [s, tag] of TAG_DO_STATUS) if (temEfeito(c, ({ e }) => e.kind === 'status' && e.status === s)) notas.set(tag, 1);
   return notas;
 };

@@ -92,6 +92,9 @@ export function ArenaUnit({fighter:f,battle,beat,onInspect,numbers,threatened,li
   const renascendo=out&&(f.renascendo??0)>0;
   // Errou (Cego) aparece em quem bateu; Esquivou aparece em quem escapou
   const errou=impacted?beat?.events.find(e=>revelado(beat,e)&&e.kind==='miss'&&(e.label==='Esquivou'?e.target===f.uid:e.source===f.uid)):undefined;
+  // a criatura invocada em campo: plaquinha com o nome, e pulso quando ela ataca
+  const invocada=!out?f.statuses.find(s=>s.id==='summon'):undefined;
+  const atacou=impacted&&beat?.event.kind==='summon'&&beat.event.source===f.uid;
   const copiou=impacted?beat?.events.find(e=>revelado(beat,e)&&e.source===f.uid&&e.kind==='copy'):undefined;
   const explodiu=impacted?beat?.events.find(e=>revelado(beat,e)&&e.target===f.uid&&e.kind==='damage'&&e.label==='Explosão'):undefined;
   const anulou=impacted?beat?.events.find(e=>revelado(beat,e)&&e.target===f.uid&&e.kind==='resist'):undefined;
@@ -137,6 +140,7 @@ export function ArenaUnit({fighter:f,battle,beat,onInspect,numbers,threatened,li
           ?<span className="unit-ko unit-renasce" aria-label={`Renascendo em ${Math.ceil(f.renascendo??0)} segundos`}><Flame size={24}/><b>RENASCE</b></span>
           :<span className="unit-ko" aria-label="Fora da luta"><Skull size={26}/><b>FORA</b></span>)}
         {levantou&&<span key={levantou.id} className="discovery-pop revive-pop">{levantou.label}</span>}
+        {invocada&&<span className={`unit-invocada ${atacou?'atacou':''}`} title={`${c.invocacao??'Invocação'} · ${Math.ceil(invocada.remaining)} s`}><img src="/assets/statuses/summon.png" alt=""/><b>{c.invocacao??'Invocação'}</b><i>{Math.ceil(invocada.remaining)}s</i></span>}
         {copiou&&<span key={`c${copiou.id}`} className="discovery-pop copiou-pop">{copiou.label}</span>}
         {explodiu&&<span key={`x${explodiu.id}`} className="discovery-pop explodiu-pop">Bum! A marca explodiu</span>}
         {dormindo&&<span className="unit-zz" aria-hidden="true">z<b>z</b><i>z</i></span>}

@@ -12,6 +12,8 @@ import type { StatusId } from '../engine/types';
  */
 /** Eletrificado: cada golpe recebido tira (intensidade × isto) da barra de ação de quem está eletrificado. */
 export const CHOQUE_DO_ELETRIFICADO=.6;
+/** Invocação: a criatura ataca a cada tantos segundos. */
+export const RITMO_DA_INVOCACAO=1.5;
 export const statuses: Record<StatusId,{name:string;color:string;stack:'refresh'|'add';cap:number;tone:'positivo'|'negativo';description:string}> = {
   exposed:{name:'Exposto',color:'#ff9475',stack:'add',cap:.65,tone:'negativo',description:'Recebe mais dano.'},
   paralyzed:{name:'Paralisado',color:'#f5d36c',stack:'refresh',cap:1,tone:'negativo',description:'Não age nem avança preparações.'},
@@ -40,4 +42,5 @@ export const statuses: Record<StatusId,{name:string;color:string;stack:'refresh'
   barrier:{name:'Barreira',color:'#f5e7a1',stack:'add',cap:3,tone:'positivo',description:'Anula os próximos debuffs que receberia.'},
   evasion:{name:'Esquiva',color:'#c8f7ff',stack:'refresh',cap:.6,tone:'positivo',description:'Chance de escapar do golpe inteiro de um rival: dano e debuffs.'},
   bomb:{name:'Marca explosiva',color:'#ff9d3c',stack:'add',cap:400,tone:'negativo',description:'Explode quando o tempo acaba e causa o dano guardado. Aplicar de novo soma.'},
+  summon:{name:'Invocação',color:'#c9a2ff',stack:'refresh',cap:200,tone:'positivo',description:'Uma criatura luta ao lado dele: ataca um rival a cada 1,5 s enquanto durar.'},
 };

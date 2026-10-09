@@ -144,6 +144,13 @@
 .arena-v2 .unit-zz b{font-size:16px;margin-left:1px}.arena-v2 .unit-zz i{font-style:normal;font-size:19px;margin-left:1px}
 @keyframes zz-sobe{0%{transform:translateY(4px);opacity:.3}50%{opacity:1}100%{transform:translateY(-8px);opacity:.3}}
 .arena-v2 .unit .errou-pop{color:#e9eef2;border-color:#ffffff55;background:#22282ced;font-style:italic}
+.arena-v2 .unit-invocada{position:absolute;left:50%;bottom:4px;z-index:6;transform:translateX(-50%);display:flex;align-items:center;gap:3px;max-width:calc(var(--medal) + 30px);padding:2px 7px 2px 3px;border-radius:99px;background:#1c1430ee;border:1px solid #c9a2ff88;color:#efe4ff;font-size:9px;white-space:nowrap;pointer-events:none}
+.arena-v2 .unit-invocada img{width:14px;height:14px}
+.arena-v2 .unit-invocada b{overflow:hidden;text-overflow:ellipsis;font-weight:800}
+.arena-v2 .unit-invocada i{font-style:normal;opacity:.7}
+.arena-v2 .unit-invocada.atacou{animation:invocada-ataca .5s ease-out}
+@keyframes invocada-ataca{0%{box-shadow:0 0 0 0 #c9a2ff}40%{box-shadow:0 0 14px 3px #c9a2ffcc;scale:1.08}100%{box-shadow:none;scale:1}}
+@media (prefers-reduced-motion:reduce){.arena-v2 .unit-invocada.atacou{animation:none}}
 .arena-v2 .unit .copiou-pop{color:#ffe0e0;border-color:#ff7a7a99;background:#2c1212ed}
 .arena-v2 .unit .explodiu-pop{color:#fff0d8;border-color:#ff9d3ccc;background:#2e1a08ed;font-weight:900}
 .arena-v2 .unit .esquivou-pop{color:#e6fbff;border-color:#c8f7ff88;background:#14262bed;font-style:italic}

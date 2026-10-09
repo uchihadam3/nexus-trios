@@ -29,7 +29,7 @@ CORES = {
     "strengthened": "#ffd166", "weakened": "#b8a2d6", "provoked": "#ff7048",
     "vampirism": "#ff4f6e", "reflect": "#8fd8ff", "thorns": "#9fd65e",
     "poison": "#8fd14f", "bleed": "#e8455a", "cursed": "#a874e8", "frozen": "#9fe3ff", "sleep": "#b9b8ff",
-    "blind": "#e3dcb2", "barrier": "#f5e39a", "evasion": "#c8f7ff", "bomb": "#ff9d3c",
+    "blind": "#e3dcb2", "barrier": "#f5e39a", "evasion": "#c8f7ff", "bomb": "#ff9d3c", "summon": "#c9a2ff",
 }
 
 
@@ -341,13 +341,22 @@ def bomba(d):
         linha(d, [(0.7 + 0.08 * math.cos(a), -0.86 + 0.08 * math.sin(a)), (0.7 + 0.2 * math.cos(a), -0.86 + 0.2 * math.sin(a))], 0.07)
 
 
+def pata(d):
+    """Invocação: a pegada de uma criatura (almofada e quatro dedos)."""
+    cx, cy = P(0, 0.32)
+    rx, ry = 0.46 * N * ESCALA, 0.38 * N * ESCALA
+    d.ellipse([cx - rx, cy - ry, cx + rx, cy + ry], fill=255)
+    for (x, y, r) in ((-0.62, -0.18, 0.18), (-0.24, -0.56, 0.2), (0.24, -0.56, 0.2), (0.62, -0.18, 0.18)):
+        circ(d, x, y, r)
+
+
 SIMBOLOS = {
     "burning": chama, "confused": espiral, "electric": raio, "exposed": escudo_rachado,
     "haste": setas, "marked": mira, "paralyzed": pausa, "protected": escudo,
     "regen": coracao_mais, "rooted": cadeado, "silenced": balao_riscado, "slow": ampulheta,
     "strengthened": espada, "weakened": lambda d: espada(d, quebrada=True, invertida=True),
     "provoked": raiva, "vampirism": presas, "reflect": espelho, "thorns": espinhos_icone,
-    "poison": frasco, "bleed": gotas, "cursed": coracao_partido, "frozen": floco, "sleep": zz, "blind": olho_riscado, "barrier": cupula, "evasion": vulto, "bomb": bomba,
+    "poison": frasco, "bleed": gotas, "cursed": coracao_partido, "frozen": floco, "sleep": zz, "blind": olho_riscado, "barrier": cupula, "evasion": vulto, "bomb": bomba, "summon": pata,
 }
 
 
@@ -396,7 +405,7 @@ NOMES = {
     "electric": "Eletrificado", "silenced": "Silenciado", "strengthened": "Fortalecido", "weakened": "Enfraquecido",
     "provoked": "Provocado", "vampirism": "Vampirismo", "reflect": "Refletir", "thorns": "Espinhos",
     "poison": "Envenenado", "bleed": "Sangrando", "cursed": "Amaldiçoado", "frozen": "Congelado", "sleep": "Dormindo",
-    "blind": "Cego", "barrier": "Barreira", "evasion": "Esquiva", "bomb": "Marca explosiva",
+    "blind": "Cego", "barrier": "Barreira", "evasion": "Esquiva", "bomb": "Marca explosiva", "summon": "Invocação",
 }
 
 

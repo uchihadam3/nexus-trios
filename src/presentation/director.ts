@@ -25,7 +25,7 @@ export function familyOf(event:BattleEvent,battle:Battle):Family {
   if(event.kind==='cleanse')return 'buff';
   if(event.kind==='dispel')return 'debuff';
   if(event.kind==='shield'||event.kind==='block')return 'shield';
-  if(event.kind==='miss')return 'physical';
+  if(event.kind==='miss'||event.kind==='summon')return 'physical';
   if(event.kind==='resist')return 'shield';
   if(event.status){if(event.status==='regen')return 'regen';if(event.status==='burning')return 'fire';if(['haste','strengthened','protected'].includes(event.status))return 'buff';if(['rooted','paralyzed'].includes(event.status))return 'prison';return 'debuff';}
   const f=battle.fighters.find(f=>f.uid===event.source),c=f?byId[f.characterId]:null;
@@ -42,7 +42,7 @@ export function familyOf(event:BattleEvent,battle:Battle):Family {
 }
 function focus(events:BattleEvent[]):BattleEvent|undefined {
   return events.find(e=>e.kind==='basic'||e.kind==='skill'||e.kind==='cast')
-    ??events.find(e=>e.kind==='interrupt'||e.kind==='ko'||e.kind==='revive'||e.kind==='turn');
+    ??events.find(e=>e.kind==='interrupt'||e.kind==='ko'||e.kind==='revive'||e.kind==='summon'||e.kind==='turn');
 }
 function duration(event:BattleEvent,grand:boolean){
   if(event.kind==='cast')return P.preparationSeconds;

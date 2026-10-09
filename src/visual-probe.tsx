@@ -62,6 +62,8 @@ if(scenario==='estados'||scenario==='nomes'){
 /* Refletir + Espinhos (o golpe volta) e Vampirismo (o golpe cura). */
 if(scenario==='refletir'){goku.statuses.push({id:'reflect',remaining:6,duration:6,intensity:.35,source:goku.uid},{id:'thorns',remaining:6,duration:6,intensity:16,source:goku.uid});source=sakura;target=goku;effects=[{kind:'damage',value:190}];selected=[goku];}
 if(scenario==='vampiro'){sakura.hp-=300;sakura.statuses.push({id:'vampirism',remaining:8,duration:8,intensity:.3,source:sakura.uid});source=sakura;target=goku;effects=[{kind:'damage',value:220}];selected=[goku];}
+/* Invocação: a criatura em campo, com a plaquinha. */
+if(scenario==='invocacao'){naruto.statuses.push({id:'summon',remaining:6,duration:8,intensity:40,source:naruto.uid});source=gojo;target=goku;effects=[];selected=[goku];}
 /* Status da parte 5 na arena: congelado, dormindo, envenenado, sangrando; e um golpe que erra. */
 if(scenario==='status5'){
   vegeta.statuses.push({id:'frozen',remaining:2,duration:2.5,intensity:.3,source:sakura.uid});

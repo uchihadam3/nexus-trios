@@ -193,6 +193,8 @@ describe('clareza da escrita pública', () => {
           const e = s.effects[i]!;
           /* Guardar/liberar energia, a Death Note, reviver e roubo de vida se explicam na própria frase. */
           if (['store', 'release', 'deathnote', 'revive', 'lifesteal', 'copy'].includes(e.kind)) return;
+          /* A Invocação diz o nome da criatura ("Invoca Cão divino"): ela luta ao lado de quem invocou. */
+          if (e.kind === 'status' && e.status === 'summon') return;
           /* Status diz "em si próprio"; os demais dizem "→ o próprio personagem". */
           const alvo = e.kind === 'status'
             ? targetNamesEm[e.target ?? s.target]

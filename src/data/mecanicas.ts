@@ -205,6 +205,8 @@ const mudancasDe = (id: string): Map<number, Mudanca[]> => {
   // o roubo de vida vem depois do dano: cura pelo que a habilidade causou
   if (roubo) poe(roubo.habilidade, (e) => [...e.filter(semStatus(roubo.troca)), { kind: 'lifesteal', value: roubo.fracao }]);
   for (const a of PEDIDOS_DO_JOGADOR[id] ?? []) poe(a.habilidade, (e) => [...(a.muda ? e.map(a.muda) : e), ...(a.soma ?? [])]);
+  const inv = INVOCACAO[id];
+  if (inv) poe(inv.habilidade, (e) => [...e.filter(semStatus(inv.troca)), { kind: 'status', status: 'summon', value: inv.dano, duration: inv.duracao, target: 'self', rotulo: inv.nome }]);
   const copiar = COPIAR[id];
   if (copiar) poe(copiar.habilidade, (e) => [...e.filter(semStatus(copiar.troca)), { kind: 'copy', value: copiar.fracao }]);
   const tira = TIRA_STATUS[id];
@@ -237,6 +239,20 @@ export const COPIAR: Record<string, { habilidade: number; fracao: number; troca?
   megaman: { habilidade: 1, fracao: 0.6 }, // Arma adquirida do chefe
 };
 
+/** Invocação (parte 8): a habilidade chama uma criatura que ataca sozinha (dano por ataque, duração). */
+export const INVOCACAO: Record<string, { habilidade: number; nome: string; dano: number; duracao: number; troca?: StatusId }> = {
+  megumi: { habilidade: 0, nome: 'Cão divino', dano: 40, duracao: 8, troca: 'marked' },
+  jinwoo: { habilidade: 2, nome: 'Soldados das sombras', dano: 45, duracao: 9, troca: 'slow' },
+  yugi: { habilidade: 1, nome: 'Mago Negro', dano: 50, duracao: 8 },
+  kaiba: { habilidade: 1, nome: 'Dragão Branco de Olhos Azuis', dano: 60, duracao: 7, troca: 'exposed' },
+  bayonetta: { habilidade: 2, nome: 'Gomorrah', dano: 55, duracao: 7 },
+  jotaro: { habilidade: 0, nome: 'Star Platinum', dano: 40, duracao: 6 },
+  pain: { habilidade: 0, nome: 'Caminho Animal', dano: 35, duracao: 8, troca: 'exposed' },
+  mickey: { habilidade: 1, nome: 'Vassouras encantadas', dano: 35, duracao: 8, troca: 'confused' },
+  plankton: { habilidade: 0, nome: 'Exército de clones', dano: 30, duracao: 8, troca: 'exposed' },
+  krang: { habilidade: 0, nome: 'Androide de combate', dano: 50, duracao: 8, troca: 'rooted' },
+};
+
 /** Última resistência: uma vez por luta, o golpe fatal deixa com 1 de Vida e Protegido por um instante. */
 export const ULTIMA_RESISTENCIA: Record<string, { protegido: number; duracao: number }> = {
   naruto: { protegido: 0.5, duracao: 2.5 }, // "Nunca desistir"
@@ -256,10 +272,11 @@ export function aplicaMecanicas(c0: Character): Character {
       return effects.length ? { ...s, effects } : s;
     }) as Character['skills'],
   };
-  const renascer = RENASCER[c.id], mudancas = mudancasDe(c.id), ultimaResistencia = ULTIMA_RESISTENCIA[c.id];
+  const renascer = RENASCER[c.id], mudancas = mudancasDe(c.id), ultimaResistencia = ULTIMA_RESISTENCIA[c.id], invocacao = INVOCACAO[c.id]?.nome;
   if (!renascer && !ultimaResistencia && !mudancas.size) return c;
   return {
     ...c,
+    ...(invocacao ? { invocacao } : {}),
     ...(renascer ? { renascer } : {}),
     ...(ultimaResistencia ? { ultimaResistencia } : {}),
     skills: c.skills.map((s, i) => {

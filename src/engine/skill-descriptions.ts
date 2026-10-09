@@ -95,7 +95,7 @@ const deVida=(id:StatusId)=>id==='regen'||id==='burning'||id==='poison';
 const porGolpe=(id:StatusId)=>id==='thorns';
 /* Sangramento é Vida por ação; Barreira é quantos debuffs ela ainda anula. */
 const porAcao=(id:StatusId)=>id==='bleed';
-const deDano=(id:StatusId)=>id==='bomb';
+const deDano=(id:StatusId)=>id==='bomb'||id==='summon';
 export function valorAtualDoStatus(id:StatusId,intensidade:number):string|null{
   if(SEM_VALOR.has(id))return null;
   const v=Math.min(intensidade,statuses[id].cap);
@@ -146,9 +146,10 @@ export function presentStatus(id:StatusId,value:number):StatusPresentation {
     barrier:`Anula ${amount>=2?`os próximos ${number} debuffs`:'o próximo debuff'}`,
     evasion:`${percent} de chance de escapar de cada golpe de rival`,
     bomb:`Explode quando o tempo acaba: ${number} de dano`,
+    summon:`Uma criatura ataca um rival a cada 1,5 s: ${number} de dano por ataque`,
   };
   return {name:statuses[id].name,tone:positiveStatuses.has(id)?'positivo':'negativo',summary:summary[id],
-    value:['regen','burning','thorns','poison','bleed','barrier','bomb'].includes(id)?number:percent,accumulation:acumulacaoDe(id)};
+    value:['regen','burning','thorns','poison','bleed','barrier','bomb','summon'].includes(id)?number:percent,accumulation:acumulacaoDe(id)};
 }
 /*
  * Os efeitos de uma habilidade, reunidos por em quem caem.
@@ -197,7 +198,7 @@ export function valorCurto(id:StatusId,value:number):string[]{
     regen:`+${v} Vida/s`,burning:`−${v} Vida/s`,strengthened:`+${v} de dano`,weakened:`−${v} de dano`,
     vampirism:`cura ${v} do dano causado`,reflect:`devolve ${v} do dano`,thorns:`${v} de dano em quem bate`,
     poison:`−${v} Vida/s`,bleed:`−${v} Vida por ação`,cursed:`−${v} de cura recebida`,frozen:`+${v} no golpe que quebra`,
-    blind:`${v} de chance de errar`,bomb:`${v} de dano ao explodir`,evasion:`${v} de chance de escapar`,barrier:`anula ${v} debuff${value>=2?'s':''}`,
+    blind:`${v} de chance de errar`,bomb:`${v} de dano ao explodir`,summon:`${v} de dano a cada 1,5 s`,evasion:`${v} de chance de escapar`,barrier:`anula ${v} debuff${value>=2?'s':''}`,
   };
   return curto[id]?[curto[id]!]:[];
 }
@@ -325,6 +326,8 @@ export function presentEffect(effect:Effect,defaultTarget:Target,modo:ModoDeAlvo
        * "Aplica Fortalecido · +18% de dano · 7 s". O que o Status faz e como
        * ele soma estão no cartão que abre ao tocar no nome (glossário).
        */
+      // Invocação não é algo que "se aplica": a criatura chega e luta junto
+      if(effect.status==='summon')return [`Invoca ${effect.rotulo??'uma criatura'}`,...valorCurto(effect.status,effect.value),secs(effect.duration)].join(' · ');
       if(modo==='agrupado')return [`Aplica ${statuses[effect.status].name}`,...valorCurto(effect.status,effect.value),secs(effect.duration)].join(' · ');
       const emQuem=targetNamesEm[effect.target??defaultTarget];
       return [`Aplica ${statuses[effect.status].name} ${emQuem}`,...valorCurto(effect.status,effect.value),secs(effect.duration)].join(' · ');

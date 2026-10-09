@@ -14,7 +14,7 @@
   ],
   "gutter": 8,
   "margin": 8,
-  "count": 27,
+  "count": 28,
   "items": [
     {
       "id": "exposed",
@@ -524,6 +524,25 @@
       },
       "crop": {
         "x": 360,
+        "y": 1032,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "id": "summon",
+      "name": "Invocação",
+      "path": "/assets/statuses/summon.png",
+      "row": 6,
+      "column": 3,
+      "cell": {
+        "x": 512,
+        "y": 1016,
+        "width": 160,
+        "height": 160
+      },
+      "crop": {
+        "x": 528,
         "y": 1032,
         "width": 128,
         "height": 128
