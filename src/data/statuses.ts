@@ -44,3 +44,11 @@ export const statuses: Record<StatusId,{name:string;color:string;stack:'refresh'
   bomb:{name:'Marca explosiva',color:'#ff9d3c',stack:'add',cap:400,tone:'negativo',description:'Explode quando o tempo acaba e causa o dano guardado. Aplicar de novo soma.'},
   summon:{name:'Invocação',color:'#c9a2ff',stack:'refresh',cap:200,tone:'positivo',description:'Uma criatura luta ao lado dele: ataca um rival a cada 1,5 s enquanto durar.'},
 };
+
+/*
+ * Os Status que deixam o alvo "vulnerável" (condição de habilidade). Os Status
+ * novos (Veneno, Sangrando, Amaldiçoado, Congelado, Sono, Cego) também abrem o
+ * alvo: sem eles, as habilidades "contra alvo vulnerável" ficavam cheias
+ * esperando 40%–60% da luta depois que os debuffs miúdos saíram.
+ */
+export const DEIXAM_VULNERAVEL: StatusId[] = ['exposed', 'marked', 'paralyzed', 'electric', 'burning', 'poison', 'bleed', 'cursed', 'frozen', 'sleep', 'blind'];

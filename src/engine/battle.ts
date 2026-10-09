@@ -1,5 +1,5 @@
 import { byId } from '../data/characters';
-import { CHOQUE_DO_ELETRIFICADO, RITMO_DA_INVOCACAO, statuses } from '../data/statuses';
+import { CHOQUE_DO_ELETRIFICADO, DEIXAM_VULNERAVEL, RITMO_DA_INVOCACAO, statuses } from '../data/statuses';
 import { random,shuffle } from './random';
 import { DOMINION as D, fracaoPorAlvo} from './dominion-config';
 import type { Battle, BattleEvent, Effect, Fighter, JeitoDeBater, Side, Skill, StatusId, Target, Topic } from './types';
@@ -502,7 +502,7 @@ function appropriate(b:Battle,f:Fighter,s:Skill){
   if(s.condition==='enemyCast')return hostile(b,f).some(interrompivel);
   if(s.condition==='threatened')return friendly(b,f).some(x=>x.hp/x.maxHp<.85)||hostile(b,f).some(interrompivel);
   if(s.condition==='investigated')return targets(b,f,s.target,s.effects,false).some(x=>(f.investigation[x.uid]??0)>=100);
-  if(s.condition==='vulnerable')return hostile(b,f).some(x=>x.statuses.some(z=>['exposed','marked','paralyzed','electric','burning'].includes(z.id)));
+  if(s.condition==='vulnerable')return hostile(b,f).some(x=>x.statuses.some(z=>DEIXAM_VULNERAVEL.includes(z.id)));
   if(s.condition==='storedEnergy')return (f.storedEnergy??0)>0;
   return true;
 }

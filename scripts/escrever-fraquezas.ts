@@ -48,7 +48,7 @@ const danoDe = (s: Skill) => s.effects.reduce((t, e) => t + (e.kind === 'damage'
 const CONDICAO: Record<string, string> = {
   injured: 'o alvo já estiver ferido', enemyCast: 'um inimigo estiver em Preparo',
   threatened: 'o trio estiver sob ameaça', investigated: 'houver um alvo investigado por completo',
-  vulnerable: 'um inimigo estiver Exposto, Marcado, Paralisado, Eletrificado ou Queimando', storedEnergy: 'houver energia guardada',
+  vulnerable: 'um inimigo estiver vulnerável (Exposto, Marcado, Queimando, Envenenado…)', storedEnergy: 'houver energia guardada',
 };
 
 /* Quanto ele vence a menos contra rivais com esta identidade (em pontos). */
@@ -96,24 +96,33 @@ function candidatas(c: Character, m: Medida): Candidata[] {
     const nota = 0.8 + (pVida <= 0.4 ? 0.5 : 0) + (posicao(primeiros, m.primeiroACair) >= 0.7 ? 0.4 : 0);
     out.push({ chave: 'sustento', nota, texto: `Em luta longa: o kit é só ataque, de ${forte.name} ao básico — sem cura, Escudo ou Regeneração, depende de um aliado que proteja para não ser desgastado` });
   }
-  // lento
+  /*
+   * Lento: o ataque básico demora, então quase todo o dano vem das
+   * habilidades. Isso só é fraqueza contra quem tira as habilidades dele de
+   * jogo (Controle, Interrupção) — "contra trios rápidos" não explicava nada
+   * (pedido do jogador: "ataca só a cada três segundos… não faz sentido").
+   */
   if (pIntervalo >= 0.75) {
-    const nota = (pIntervalo - 0.75) * 8 + (c.interval >= 5 ? 1 : 0);
+    const quemTrava = Math.max(dCtl, dInt);
+    const nota = (pIntervalo - 0.75) * 6 + (c.interval >= 5 ? 0.6 : 0) + Math.max(0, quemTrava - 2) * 0.3;
     const vezes = c.interval / intervaloTipico;
-    const conta = vezes >= 1.8 ? ` — no tempo de um golpe dele, o rival comum ataca ${num(vezes, 0)} vezes` : ` (o comum é a cada ${num(intervaloTipico, 1)} s)`;
-    out.push({ chave: 'lento', nota, texto: `Contra trios rápidos: ataca só a cada ${num(c.interval, 1)} s${conta}` });
+    const ritmo = vezes >= 1.8 ? `no tempo de um golpe dele, o rival comum ataca ${num(vezes, 0)} vezes` : `o comum é a cada ${num(intervaloTipico, 1)} s`;
+    const contraQuem = dCtl >= dInt ? 'Controle' : 'Interrupção';
+    out.push({ chave: 'lento', nota, texto: `Contra ${contraQuem}: o ataque básico (${c.basic.name}) sai só a cada ${num(c.interval, 1)} s (${ritmo}), então o dano dele vem das habilidades — travado ou com o Preparo cortado, quase não machuca${aMenos(quemTrava)}` });
   }
   // dano num alvo só, contra quem repõe
   if (!temArea(c) && dCura >= 4) {
     out.push({ chave: 'alvo', nota: dCura * 0.3, texto: `Contra Cura e Escudo: o golpe mais forte, ${forte.name}, acerta um alvo só, e o rival repõe o que ele tira${aMenos(dCura)}` });
   }
   // depende de condição
-  const condicional = c.skills.find((s) => s.condition !== 'always' && danoDe(s) >= danoDe(forte) * 0.6 && CONDICAO[s.condition]);
+  const condicional = c.skills.find((s) => s.condition !== 'always' && danoDe(forte) > 0 && danoDe(s) >= danoDe(forte) * 0.6 && CONDICAO[s.condition]);
   if (condicional) {
     const principal = danoDe(condicional) >= danoDe(forte) * 0.9;
     // "alvo ferido" é fácil de cumprir: só conta como fraqueza quando a condição é rara de verdade
     const rara = condicional.condition !== 'injured';
-    out.push({ chave: 'condicao', nota: rara ? (principal ? 1.4 : 0.9) : 0.3, texto: `Depende do momento: ${condicional.name} só sai quando ${CONDICAO[condicional.condition]} — sem isso, fica sem ${principal ? 'o golpe mais forte' : 'uma das jogadas principais'}` });
+    const golpe = danoDe(condicional) > 0;
+    const falta = golpe ? (principal ? 'o golpe mais forte' : 'um dos golpes principais') : 'uma das jogadas principais';
+    out.push({ chave: 'condicao', nota: rara ? (principal ? 1.4 : 0.9) : 0.3, texto: `Depende do momento: ${condicional.name} só sai quando ${CONDICAO[condicional.condition]} — sem isso, fica sem ${falta}` });
   }
   // queima
   if (posicao(queimas, m.danoContinuoRecebido) >= 0.8 && dCont >= 4) {

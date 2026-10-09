@@ -1,4 +1,4 @@
-import { CHOQUE_DO_ELETRIFICADO, statuses } from '../data/statuses';
+import { CHOQUE_DO_ELETRIFICADO, DEIXAM_VULNERAVEL, statuses } from '../data/statuses';
 import type { Effect, JeitoDeBater, Skill, Target, Topic, Trait, StatusId } from './types';
 
 const n=(v:number)=>Number(v.toFixed(1)).toLocaleString('pt-BR');
@@ -365,7 +365,7 @@ export function presentSkill(skill:Skill):SkillPresentation {
     enemyCast:'um inimigo estiver preparando uma habilidade',
     threatened:'um aliado tiver menos de 85% de Vida ou um inimigo começar o Preparo',
     investigated:'houver um alvo conhecido com 100 Investigação',
-    vulnerable:'um inimigo estiver Exposto, Marcado, Paralisado, Eletrificado ou Queimando',
+    vulnerable:`um inimigo estiver ${DEIXAM_VULNERAVEL.map(x=>statuses[x].name).join(', ').replace(/, ([^,]*)$/,' ou $1')}`,
     storedEnergy:'houver energia guardada',
   };
   /*

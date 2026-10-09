@@ -16,7 +16,7 @@ describe('a regra de uso fica à vista', () => {
       if (s.condition === 'always') expect(p.requisito, `${c.name} · ${s.name}`).toBeUndefined();
       else expect(p.requisito, `${c.name} · ${s.name}`).toMatch(/^Só usa quando /);
     }
-    expect(presentSkill(byId.majinbuu!.skills[2]!).requisito).toMatch(/Exposto, Marcado, Paralisado, Eletrificado ou Queimando/);
+    expect(presentSkill(byId.majinbuu!.skills[2]!).requisito).toMatch(/Exposto, Marcado, Paralisado, Eletrificado, Queimando, Envenenado, Sangrando, Amaldiçoado, Congelado, Dormindo ou Cego/);
   });
 
   it('a batalha sabe quando a habilidade pronta está esperando a regra, sem mexer na luta', () => {
