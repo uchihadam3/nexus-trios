@@ -93,7 +93,11 @@ export function atuacao(beat: Beat | null, battle: Battle, medida: Medida, area:
   const fonte = px(beat.event.source);
   const links = combatLinks(beat, battle);
   const alvos = [...new Set(links.filter((l) => l.source === beat.event.source).map((l) => l.target))];
-  const principal = beat.event.target ?? alvos[0];
+  // quem age vai até o rival que o golpe acerta (no Cólera do Dragão, o rival, não o aliado curado)
+  const ladoDe = (uid?: string) => battle.fighters.find((f) => f.uid === uid)?.side;
+  const ladoDoAtor = ladoDe(beat.event.source);
+  const golpeNoRival = beat.events.find((e) => e.source === beat.event.source && e.kind === 'damage' && !!e.target && ladoDe(e.target) !== ladoDoAtor)?.target;
+  const principal = (beat.event.target && ladoDe(beat.event.target) !== ladoDoAtor ? beat.event.target : golpeNoRival) ?? beat.event.target ?? alvos[0];
 
   /* O ponto para onde quem age se volta: o alvo, ou o centro dos alvos numa área. */
   const pontos = (area ? alvos : [principal]).map((uid) => (uid ? px(uid) : null)).filter((p): p is { x: number; y: number } => !!p);

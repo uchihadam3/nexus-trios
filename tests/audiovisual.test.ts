@@ -64,7 +64,7 @@ describe('compact reusable audiovisual library',()=>{
     expect(profileFor('light',2)?.family).toBe('death_note');
     expect(profileFor('naruto',1)?.family).toBe('esfera_espiral');
     expect(profileFor('gojo',0)?.family).toBe('atracao');expect(profileFor('gojo',1)?.family).toBe('repulsao');expect(profileFor('gojo',2)?.family).toBe('dominio');
-    expect(profileFor('beerus',0)?.family).toBe('desintegrar');expect(profileFor('sasuke',0)?.family).toBe('chidori');
+    expect(profileFor('beerus',0)?.family).toBe('toque_da_destruicao');expect(profileFor('sasuke',0)?.family).toBe('chidori');
     expect(profileFor('saitama',2)?.family).toBe('soco_serio');expect(profileFor('itachi',2)?.family).toBe('susanoo');
     expect(profileFor('ichigo',0)?.family).toBe('corte_de_energia');
     expect(profileFor('charizard',0)?.family).toBe('sopro_de_fogo');

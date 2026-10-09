@@ -42,6 +42,24 @@
   100%{opacity:1;transform:translate(calc(-50% + var(--dx)),calc(-50% + var(--dy))) rotate(var(--ang)) scale(1)}
 }
 
+/*
+ * Atravessa: um trilho de quem age até um pouco depois do alvo, que corta o que sai dele e apaga
+ * a ponta; dentro, o corpo inteiro anda de uma ponta à outra. A cabeça entra no alvo e some nele,
+ * o corpo vem atrás e some também (o dragão do Shiryu).
+ */
+.battle-effects .fxl-trilho{
+  position:absolute;pointer-events:none;z-index:6;overflow:hidden;transform-origin:0 50%;
+  transform:translateY(-50%) rotate(var(--ang));
+  -webkit-mask:linear-gradient(90deg,transparent 0,#000 7%,#000 calc(100% - var(--some)),transparent 100%);
+  mask:linear-gradient(90deg,transparent 0,#000 7%,#000 calc(100% - var(--some)),transparent 100%);
+}
+.battle-effects .fxl-trilho .fxl-atravessa{
+  left:calc(-1 * var(--corpo));top:0;width:var(--corpo);height:100%;transform:none;
+  animation:fx12-mask calc(.6s * var(--motion-scale,1)) steps(1,end) infinite,fx-atravessa calc(var(--anda) * var(--motion-scale,1)) linear calc(var(--anda-delay) * var(--motion-scale,1)) both;
+}
+@keyframes fx-atravessa{from{transform:translateX(0)}to{transform:translateX(var(--percurso))}}
+@media(prefers-reduced-motion:reduce){.battle-effects .fxl-trilho{display:none}}
+
 /* Faixa: presa em quem age, cresce até o alvo, segura e some. */
 .battle-effects .fxl-faixa{
   z-index:3;transform-origin:0 50%;opacity:0;

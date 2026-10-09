@@ -24,13 +24,13 @@ const DO_EFEITO: Partial<Record<VfxFamily, Distancia>> = {
   corte_dimensional: 'longe', inv_androide: 'longe',
   // de energia ou magia, mas na mão: vai até o alvo
   chidori: 'perto', esfera_espiral: 'perto', kunai_de_hiraishin: 'perto', punho_fotonico: 'perto', toque_da_destruicao: 'perto',
-  cajado_da_caveira: 'perto', punho_da_fenix: 'perto', toque_absorvente: 'perto', soco_da_vida: 'perto', infinito: 'perto',
+  cajado_da_caveira: 'perto', punho_da_fenix: 'perto', toque_absorvente: 'perto', soco_da_vida: 'perto',
 };
 
 /* Golpes de um personagem só (id ou id:habilidade) que fogem da regra do efeito. */
 const DO_GOLPE: Record<string, Distancia> = {
   thor: 'longe',              // a Martelada trovejante é o Mjolnir arremessado
-  greenlantern: 'longe', 'greenlantern:1': 'longe', // construtos do anel
+  'greenlantern:1': 'longe', // o punho de construto do anel
   'coiote:1': 'longe',        // a armadilha já estava montada
   'sukuna:0': 'longe', 'sukuna:2': 'longe', // Desmantelar e o Santuário cortam à distância
   taz: 'perto',               // o redemoinho vai até o alvo e morde

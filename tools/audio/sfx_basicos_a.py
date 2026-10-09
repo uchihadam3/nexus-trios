@@ -11,7 +11,31 @@ from som import (CRISTAL, METAL, SINO, SR, VIDRO, assobio, baque, env, estalo, g
                  reverb, rosa, ruido, satura, seno, sobe_e_some, varre)
 
 # nome do arquivo (com hífen) → (função, descrição)
-SONS: dict = {}
+
+def soco_basico(rng, v):
+    """Soco simples: o ar cortado pelo braço, a pancada seca com corpo (couro na carne) e um baque
+    curto — varia o peso a cada versão para não repetir."""
+    x = _z(0.75)
+    poe(x, _whoosh(rng, 0.13, 500, 3200, 0.85, g=0.45), 0.0)
+    poe(x, B.soco_leve(rng, v) * 0.7 * (0.9 + 0.05 * v), 0.12)
+    poe(x, B.soco_pesado(rng, v) * 0.45, 0.12)
+    poe(x, baque(n_de(0.18), 120 - 8 * v, 60, 0.05, 0.5) * 0.5, 0.12)
+    return reverb(x, 0.2, 0.1, 6000)
+
+
+def chute_basico(rng, v):
+    """Chute simples: um giro de perna mais longo e mais grave que o soco, o estalo do pé acertando
+    e o baque do corpo."""
+    x = _z(0.85)
+    poe(x, _whoosh(rng, 0.2, 300, 2400, 0.8, g=0.55), 0.0)
+    poe(x, B.soco_pesado(rng, v) * 0.85, 0.19)
+    poe(x, estalo(rng, n_de(0.05), 1500, 6000, 0.006) * 0.4, 0.19)
+    poe(x, baque(n_de(0.22), 95, 50, 0.07, 0.5) * 0.55, 0.19)
+    return reverb(x, 0.22, 0.1, 6000)
+
+SONS: dict = {
+    "soco-basico": (soco_basico, "básico de quem só dá um soco: o ar cortado e a pancada seca"),
+    "chute-basico": (chute_basico, "básico de quem só dá um chute: o giro da perna e o estalo do pé"),}
 
 
 def _fwip(rng, seg=0.12, f0=900, f1=4200, g=0.6):
@@ -236,15 +260,12 @@ def soco_relampago(rng, v):
 
 
 SONS.update({
-    "ki-dourado": (ki_dourado, "básico de Goku: três disparos de ki \"fwip\" e os estouros com baforada"),
-    "rajada-continua": (rajada_continua, "básico de Vegeta: rajada metralhada de ki com ronco crescente e explosão"),
     "golpe-do-potencial": (golpe_do_potencial, "básico de Gohan: soco pesado com chiado elétrico do SSJ2"),
     "braco-namekiano": (braco_namekiano, "básico de Piccolo: esticar elástico e orgânico, pancada e o braço voltando"),
     "punho-lendario": (punho_lendario, "básico de Broly: soco grave, saturado e esmagador, com pedras caindo"),
     "toque-da-destruicao": (toque_da_destruicao, "básico de Beerus: \"tic\" do peteleco, zumbido da esfera e implosão sugada"),
     "rei-gun": (rei_gun, "básico de Yusuke: carga curta e o disparo \"pew\" grave do Rei Gun"),
     "soco-casual": (soco_casual, "básico de Saitama: soco seco, pausa e o vendaval \"whoosh\""),
-    "infinito": (infinito, "básico de Gojo: o tempo esticando abafado e o estalo do pulso"),
     "punho-amaldicoado": (punho_amaldicoado, "básico de Yuji: impacto com estalo distorcido do Black Flash"),
     "desmanche": (desmanche, "básico de Sukuna: vários \"shink\" agudos rapidíssimos"),
     "choque-do-pikachu": (choque_do_pikachu, "básico de Pikachu: choque elétrico crepitante agudo"),

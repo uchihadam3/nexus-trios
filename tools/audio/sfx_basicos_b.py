@@ -323,7 +323,6 @@ def soco_titanico(rng, v):
 
 # nome do arquivo (com hífen) → (função, descrição)
 SONS: dict = {
-    "combo-dos-clones": (combo_dos_clones, "básico de Naruto: \"puf\" de fumaça dos clones e chutes, o último para cima"),
     "kusanagi": (kusanagi, "básico de Sasuke: \"shing\" da katana e o crepitar do Chidori"),
     "shuriken": (shuriken, "básico de Itachi: assobio girando de três shurikens e o \"tchak\" de cada uma"),
     "soco-de-chakra": (soco_de_chakra, "básico de Sakura: soco gigantesco e o chão rachando"),

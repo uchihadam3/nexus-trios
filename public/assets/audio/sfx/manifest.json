@@ -886,6 +886,23 @@
    ],
    "bytes": 53424
   },
+  "chute-basico": {
+   "arquivo": "chute-basico.mp3",
+   "descricao": "básico de quem só dá um chute: o giro da perna e o estalo do pé",
+   "versoes": [
+    0.0,
+    0.93,
+    1.8908,
+    2.7921
+   ],
+   "duracoes": [
+    0.85,
+    0.8808,
+    0.8212,
+    0.8629
+   ],
+   "bytes": 28579
+  },
   "chute-demoniaco": {
    "arquivo": "chute-demoniaco.mp3",
    "descricao": "básico de Nezuko: chute e o sangue acendendo em chamas",
@@ -1022,22 +1039,22 @@
    ],
    "bytes": 51960
   },
-  "combo-dos-clones": {
-   "arquivo": "combo-dos-clones.mp3",
-   "descricao": "básico de Naruto: \"puf\" de fumaça dos clones e chutes, o último para cima",
+  "colera-do-dragao": {
+   "arquivo": "colera-do-dragao.mp3",
+   "descricao": "Cólera do Dragão do Shiryu: o sopro até o rival, o rugido, o bote e a espiral",
    "versoes": [
     0.0,
-    1.18,
-    2.3999,
-    3.5427
+    1.9782,
+    4.0271,
+    5.9428
    ],
    "duracoes": [
-    1.1,
-    1.1399,
-    1.0628,
-    1.1167
+    1.8982,
+    1.9689,
+    1.8357,
+    1.9289
    ],
-   "bytes": 42354
+   "bytes": 65874
   },
   "confete": {
    "arquivo": "confete.mp3",
@@ -2858,23 +2875,6 @@
    ],
    "bytes": 28083
   },
-  "infinito": {
-   "arquivo": "infinito.mp3",
-   "descricao": "básico de Gojo: o tempo esticando abafado e o estalo do pulso",
-   "versoes": [
-    0.0,
-    1.33,
-    2.7053,
-    3.993
-   ],
-   "duracoes": [
-    1.25,
-    1.2953,
-    1.2077,
-    1.269
-   ],
-   "bytes": 45826
-  },
   "instinto": {
    "arquivo": "instinto.mp3",
    "descricao": "família instinto",
@@ -3265,23 +3265,6 @@
     1.3198
    ],
    "bytes": 58809
-  },
-  "ki-dourado": {
-   "arquivo": "ki-dourado.mp3",
-   "descricao": "básico de Goku: três disparos de ki \"fwip\" e os estouros com baforada",
-   "versoes": [
-    0.0,
-    1.03,
-    2.0944,
-    3.0923
-   ],
-   "duracoes": [
-    0.95,
-    0.9844,
-    0.9179,
-    0.9644
-   ],
-   "bytes": 38457
   },
   "kunai-de-hiraishin": {
    "arquivo": "kunai-de-hiraishin.mp3",
@@ -3946,6 +3929,23 @@
    ],
    "bytes": 39524
   },
+  "meteoro-madara": {
+   "arquivo": "meteoro-madara.mp3",
+   "descricao": "Meteoro do Madara: o ronco da queda, a explosão e as pedras chovendo",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 70159
+  },
   "meteoros-de-pegaso": {
    "arquivo": "meteoros-de-pegaso.mp3",
    "descricao": "básico de Seiya: rajada de dezenas de socos com zunido",
@@ -4064,6 +4064,23 @@
     1.528
    ],
    "bytes": 65145
+  },
+  "mugen-tsukuyomi": {
+   "arquivo": "mugen-tsukuyomi.mp3",
+   "descricao": "Mugen Tsukuyomi: o tom estranho que sobe, o pulso do olho e os raios",
+   "versoes": [
+    0.0,
+    2.18,
+    4.4361,
+    6.5451
+   ],
+   "duracoes": [
+    2.1,
+    2.1761,
+    2.029,
+    2.132
+   ],
+   "bytes": 73762
   },
   "multi-golpe": {
    "arquivo": "multi-golpe.mp3",
@@ -4745,23 +4762,6 @@
    ],
    "bytes": 51007
   },
-  "rajada-continua": {
-   "arquivo": "rajada-continua.mp3",
-   "descricao": "básico de Vegeta: rajada metralhada de ki com ronco crescente e explosão",
-   "versoes": [
-    0.0,
-    1.58,
-    3.2144,
-    4.7437
-   ],
-   "duracoes": [
-    1.5,
-    1.5544,
-    1.4493,
-    1.5228
-   ],
-   "bytes": 67083
-  },
   "rajada-de-ar": {
    "arquivo": "rajada-de-ar.mp3",
    "descricao": "família rajada de ar",
@@ -5255,6 +5255,23 @@
    ],
    "bytes": 25366
   },
+  "soco-basico": {
+   "arquivo": "soco-basico.mp3",
+   "descricao": "básico de quem só dá um soco: o ar cortado e a pancada seca",
+   "versoes": [
+    0.0,
+    0.83,
+    1.6872,
+    2.4918
+   ],
+   "duracoes": [
+    0.75,
+    0.7772,
+    0.7246,
+    0.7614
+   ],
+   "bytes": 26479
+  },
   "soco-casual": {
    "arquivo": "soco-casual.mp3",
    "descricao": "básico de Saitama: soco seco, pausa e o vendaval \"whoosh\"",
@@ -5611,6 +5628,40 @@
     1.6244
    ],
    "bytes": 64808
+  },
+  "susanoo-manto": {
+   "arquivo": "susanoo-manto.mp3",
+   "descricao": "o Susanoo se formando em volta do Madara",
+   "versoes": [
+    0.0,
+    1.28,
+    2.6035,
+    3.8429
+   ],
+   "duracoes": [
+    1.2,
+    1.2435,
+    1.1594,
+    1.2183
+   ],
+   "bytes": 58869
+  },
+  "susanoo-perfeito": {
+   "arquivo": "susanoo-perfeito.mp3",
+   "descricao": "Susanoo Perfeito do Madara: o chakra que ruge, o corte gigante e as chamas",
+   "versoes": [
+    0.0,
+    1.68,
+    3.418,
+    5.0439
+   ],
+   "duracoes": [
+    1.6,
+    1.658,
+    1.5459,
+    1.6244
+   ],
+   "bytes": 66690
   },
   "taco-de-beisebol": {
    "arquivo": "taco-de-beisebol.mp3",

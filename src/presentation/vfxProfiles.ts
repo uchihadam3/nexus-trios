@@ -47,6 +47,14 @@ export interface Familia {
   acento?: string;
   /** Rotação base do impacto, em graus (cortes diagonais). */
   giro?: number;
+  /** Folha desenhada em quem age quando o golpe sai (o Susanoo em volta do Madara). */
+  noAtor?: string;
+  /** Numa área, o impacto sai uma vez só, grande, no meio dos alvos (o meteoro que cai no centro). */
+  noCentro?: boolean;
+  /** Quando o objeto já voou até o alvo: a fração do começo do impacto que mostrava ele chegando e é pulada. */
+  pula?: number;
+  /** Uma criatura inteira (o dragão do Shiryu) que sai de quem age, anda até o alvo, atravessa ele e some lá dentro. */
+  atravessa?: string;
   /** Tamanho do impacto em relação ao medalhão. */
   escala: number;
   /** Fração do resto do beat que o impacto dura. */
@@ -124,7 +132,7 @@ export const FOLHAS_DA_LINHA = ['cometa', 'mira', 'chegada'] as const;
 /** Todas as folhas que o jogo usa. */
 export const folhasUsadas = (): string[] => [...new Set([...FAMILIAS.flatMap((k) => {
   const x = familia(k);
-  return [x.impacto, x.viagem, x.faixa, x.preparo, x.acento].filter((s): s is string => !!s);
+  return [x.impacto, x.viagem, x.faixa, x.preparo, x.acento, x.noAtor, x.atravessa].filter((s): s is string => !!s);
 }), ...FOLHAS_DA_LINHA])].sort();
 
 export const folha = (nome: string) => `/assets/vfx/familias/${nome}.webp`;
@@ -409,8 +417,11 @@ export function profileFor(characterId: string, skillIndex?: number): VfxProfile
   const family = familiaDe(c, skillIndex);
   const fam = familia(family);
   const area = ehArea(ficha.target, ficha.effects);
-  const proprio = ficha.target === 'self' || ficha.target === 'allAllies' || ficha.target === 'allyWeak';
-  const travel = !proprio && !!(fam.viagem || fam.faixa) && !NO_ALVO.has(family);
+  // de apoio é a habilidade que só cuida do próprio trio; se ela também bate num rival, o golpe viaja até ele
+  const RIVAIS = ['enemyWeak', 'enemyStrong', 'enemyCast', 'investigated', 'leastInvestigated', 'allEnemies', 'randomEnemy'];
+  const bateNoRival = ficha.effects.some((e) => e.kind === 'damage' && RIVAIS.includes(e.target ?? ficha.target));
+  const proprio = (ficha.target === 'self' || ficha.target === 'allAllies' || ficha.target === 'allyWeak') && !bateNoRival;
+  const travel = !proprio && !!(fam.viagem || fam.faixa || fam.atravessa) && !NO_ALVO.has(family);
   const intensity = skillIndex === undefined ? 0.82 : Math.min(1.4, 1 + skillIndex * 0.06 + (ficha.preparation >= 2.5 ? 0.22 : ficha.preparation >= 1.2 ? 0.1 : 0));
   const chave = skillIndex === undefined ? 'basic' : String(skillIndex);
   return {

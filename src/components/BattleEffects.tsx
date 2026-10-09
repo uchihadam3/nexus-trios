@@ -7,7 +7,7 @@ import { SkillIcon } from './Icon';
 import { ArrowDown,HeartPulse,ShieldCheck,Sparkles,Zap } from 'lucide-react';
 import { statuses as statusCatalog } from '../data/statuses';
 import { familia,folha,profileFor,type VfxFamily,type VfxProfile } from '../presentation/vfxProfiles';
-import { efeitosDoJeito } from '../presentation/jeito-efeito';
+import { efeitosDoJeito,VOO_DO_QUIQUE } from '../presentation/jeito-efeito';
 import { FAMILIA_DA_INVOCACAO } from '../presentation/vfx-atribuicao';
 
 export interface Anchor {x:number;y:number}
@@ -27,7 +27,9 @@ const SEM_FICHA:Partial<Record<Beat['event']['kind'],VfxFamily>>={interrupt:'ond
 /* Cada variante gira um pouco o impacto, para a mesma família não parecer carimbo. */
 const GIRO_DA_VARIANTE=[0,16,-12,8];
 /* Altura da faixa em relação ao medalhão. */
-const ALTURA_DA_FAIXA:Record<string,number>={feixe:.36,feixe_pesado:.62,raio_faixa:.7,dreno:.42};
+/* Os objetos arremessados (o escudo do Capitão, o batarangue…) voam grandes, para dar para ver o que é. */
+const TAMANHO_DO_VOO:Record<string,number>={saraivada:1.25,escudo_voando:2.6,batarangue_voando:2.5,shuriken_voando:2.3,tiara_voando:2.5,dardo_voando:2.4,corvo_voando:2.6};
+const ALTURA_DA_FAIXA:Record<string,number>={feixe:.36,feixe_pesado:.62,raio_faixa:.7,dreno:.42,dragao_faixa:.85};
 
 const s=(x:number)=>`${x.toFixed(3)}s`;
 
@@ -54,7 +56,11 @@ export function BattleEffects({battle,beat,anchors,enabled,reduced,medal=80}:{ba
   const area=isAreaBeat(beat,battle);
   const D=beat?.duration??2,I=P.impactAt;
   const p1=beat?point(beat.event.source):{x:50,y:50};
-  const alvoPrincipal=beat?.event.target;
+  // o golpe vai até quem ele acerta: numa habilidade que bate no rival e cura o aliado (o Cólera do
+  // Dragão), o dragão vai até o rival, mesmo que o alvo da habilidade seja o aliado
+  const ladoDoAtor=beat?battle.fighters.find(f=>f.uid===beat.event.source)?.side:undefined;
+  const golpeNoRival=beat?.events.find(e=>e.source===beat.event.source&&e.kind==='damage'&&!!e.target&&battle.fighters.find(f=>f.uid===e.target)?.side!==ladoDoAtor)?.target;
+  const alvoPrincipal=beat?.event.target&&battle.fighters.find(f=>f.uid===beat.event.target)?.side!==ladoDoAtor?beat.event.target:golpeNoRival??beat?.event.target;
   const p2=alvoPrincipal?point(alvoPrincipal):p1;
   const a=px(p1),b=px(p2),dx=b.x-a.x,dy=b.y-a.y,dist=Math.hypot(dx,dy),ang=Math.atan2(dy,dx)*180/Math.PI;
   const intensidade=(perfil?.intensity??1)*(beat?.grand?1.22:1);
@@ -77,8 +83,18 @@ export function BattleEffects({battle,beat,anchors,enabled,reduced,medal=80}:{ba
     }
     // viagem: o projétil sai depois da preparação do golpe e chega no impacto
     if(vai&&!landed&&fam.viagem){
-      const t=medal*(fam.viagem==='saraivada'?1.25:1.05)*Math.min(1.25,intensidade);
-      nodes.push(camada(fam.viagem,{left:`${p1.x}%`,top:`${p1.y}%`,width:t,height:t,'--dx':`${dx}px`,'--dy':`${dy}px`,'--ang':`${ang}deg`,'--voo':s(D*I*.42),'--voo-delay':s(D*I*.58)},'fxl-laco fxl-voo',`voo-${id}`));
+      const t=medal*(TAMANHO_DO_VOO[fam.viagem]??1.05)*Math.min(1.25,intensidade);
+      nodes.push(camada(fam.viagem,{left:`${p1.x}%`,top:`${p1.y}%`,width:t,height:t,'--dx':`${dx}px`,'--dy':`${dy}px`,'--ang':`${ang}deg`,'--voo':s(D*I*.65),'--voo-delay':s(D*I*.35)},'fxl-laco fxl-voo',`voo-${id}`));
+    }
+    // atravessa: o corpo inteiro (o dragão do Shiryu) sai de quem age, anda até o alvo, entra nele e
+    // some lá dentro — a cabeça chega no alvo no momento do impacto
+    if(vai&&fam.atravessa){
+      const h=medal*(ALTURA_DA_FAIXA[fam.atravessa]??.6)*Math.min(1.3,intensidade);
+      const largura=dist+medal*.35,corpo=Math.min(dist*.85,h*4.6);
+      const t0=D*I*.2,ate=Math.max(.15,D*I-t0),v=dist/ate,anda=(largura+corpo)/v;
+      nodes.push(<span key={`atravessa-${id}`} className="fxl-trilho" style={{left:`${p1.x}%`,top:`${p1.y}%`,width:largura,height:h,'--ang':`${ang}deg`,'--some':`${Math.round(medal*.75)}px`} as CSSProperties}>
+        <span className="fxl fxl-laco fxl-atravessa" style={{'--fx-img':`url(${folha(fam.atravessa)})`,'--corpo':`${corpo}px`,'--percurso':`${largura+corpo}px`,'--anda':s(anda),'--anda-delay':s(t0)} as CSSProperties}/>
+      </span>);
     }
     // faixa: o feixe cresce de quem age até o alvo, segura o impacto e some
     if(vai&&fam.faixa){
@@ -105,7 +121,41 @@ export function BattleEffects({battle,beat,anchors,enabled,reduced,medal=80}:{ba
         const meus=beat.events.filter(e=>e.target===uid&&e.source===beat.event.source&&revelado(beat,e)&&!(e.label in ROTULO_DA_MECANICA)&&e.label!=='Guarda do golpe');
         return meus.some(e=>e.kind==='heal')?'cura':meus.some(e=>e.kind==='shield')?'escudo':meus.some(e=>e.kind==='status')?'reforco':null;
       };
+      // o meteoro que cai no meio: numa área, uma folha só, grande, no centro dos rivais atingidos
+      const rivais=alvos.filter(uid=>ladoDe(uid)!==lado);
+      const noCentro=!!fam.noCentro&&rivais.length>1;
+      if(noCentro){
+        const pts=rivais.map(point),cx=pts.reduce((a,p)=>a+p.x,0)/pts.length,cy=pts.reduce((a,p)=>a+p.y,0)/pts.length;
+        const t=Math.min(medal*(perfil?.scale??fam.escala)*1.9*(beat.grand?1.1:1),Math.min(size.w,size.h)*.98);
+        nodes.push(camada(fam.impacto,{left:`${cx}%`,top:`${cy}%`,width:t,height:t,'--ang':'0deg','--flip':1,'--dur':s(dur*1.15)},`fxl-impacto ${reduced?'fxl-parado':''}`,`centro-${id}`));
+      }
+      // o que aparece em quem age quando o golpe sai (o Susanoo em volta do Madara)
+      if(fam.noAtor){
+        const t=Math.min(medal*2.3,Math.min(size.w,size.h)*.8);
+        nodes.push(camada(fam.noAtor,{left:`${p1.x}%`,top:`${p1.y}%`,width:t,height:t,'--fx-cor':cor,'--ang':'0deg','--flip':1,'--dur':s(Math.max(.8,dur*1.3))},`fxl-impacto fxl-sobre ${reduced?'fxl-parado':''}`,`ator-${id}`));
+      }
+      /*
+       * O ricochete é um objeto só (pedido do jogador: "o escudo do Capitão tá virando dois escudos…
+       * tem que bater em um e depois ricochetear e bater no outro"): quem só levou o quique não ganha o
+       * impacto junto com o primeiro; quando o passo do Ricochete chega, o objeto voa do primeiro alvo
+       * até ele e bate lá.
+       */
+      const doQuique=new Set(beat.events.filter(e=>e.kind==='damage'&&e.label==='Ricochete'&&!!e.target).map(e=>e.target!));
+      const soQuique=new Set([...doQuique].filter(uid=>!beat.events.some(e=>e.target===uid&&e.kind==='damage'&&e.label!=='Ricochete'&&e.source===beat.event.source)));
+      for(const e of beat.events)if(e.kind==='damage'&&e.label==='Ricochete'&&e.target&&soQuique.has(e.target)&&revelado(beat,e)&&alvoPrincipal&&!reduced){
+        const de=point(alvoPrincipal),para=point(e.target),qa=px(de),qb=px(para);
+        const vx=qb.x-qa.x,vy=qb.y-qa.y,ang2=Math.atan2(vy,vx)*180/Math.PI;
+        if(fam.viagem){
+          const tv=medal*(TAMANHO_DO_VOO[fam.viagem]??1.05)*Math.min(1.25,intensidade);
+          nodes.push(camada(fam.viagem,{left:`${de.x}%`,top:`${de.y}%`,width:tv,height:tv,'--dx':`${vx}px`,'--dy':`${vy}px`,'--ang':`${ang2}deg`,'--voo':s(VOO_DO_QUIQUE),'--voo-delay':s(0)},'fxl-laco fxl-voo',`quique-voo-${id}-${e.id}`));
+        }
+        const t=Math.min(medal*(perfil?.scale??fam.escala),Math.min(size.w,size.h)*.92);
+        const pula=fam.viagem&&fam.pula?fam.pula:0,durDaFolha=dur/(1-pula);
+        nodes.push(camada(fam.impacto,{left:`${para.x}%`,top:`${para.y}%`,width:t,height:t,'--ang':`${fam.aponta?ang2:0}deg`,'--flip':1,'--dur':s(durDaFolha),'--delay':s(VOO_DO_QUIQUE-pula*durDaFolha)},`fxl-impacto`,`quique-imp-${id}-${e.id}`));
+      }
       alvos.forEach((uid,i)=>{
+        if(noCentro&&rivais.includes(uid))return;
+        if(soQuique.has(uid))return;
         if(ataca&&ladoDe(uid)===lado){
           const apoio=apoioPara(uid);
           if(apoio)sobre(uid,apoio,`apoio-${id}-${uid}`,.12);
@@ -118,7 +168,9 @@ export function BattleEffects({battle,beat,anchors,enabled,reduced,medal=80}:{ba
         const t=Math.min(medal*(perfil?.scale??fam.escala)*(beat.grand?1.25:1)*(area&&i>0?.9:1),Math.min(size.w,size.h)*.92);
         // o clarão do contato vem por baixo, no alvo principal
         if(fam.acento&&i===0&&!reduced)nodes.push(camada(fam.acento,{left:`${p.x}%`,top:`${p.y}%`,width:t*.62,height:t*.62,'--ang':`${direcao}deg`,'--dur':s(Math.max(.35,dur*.6))},'fxl-impacto fxl-acento',`ac-${id}-${uid}`));
-        nodes.push(camada(fam.impacto,{left:`${p.x}%`,top:`${p.y}%`,width:t,height:t,'--ang':`${giro}deg`,'--flip':espelho,'--dur':s(dur),'--delay':s(area?i*.07:0)},`fxl-impacto ${reduced?'fxl-parado':''}`,`imp-${id}-${uid}`));
+        // o objeto já voou até aqui: pula o começo da folha, que mostrava ele chegando
+        const pula=vai&&fam.pula?fam.pula:0,durDaFolha=dur/(1-pula);
+        nodes.push(camada(fam.impacto,{left:`${p.x}%`,top:`${p.y}%`,width:t,height:t,'--ang':`${giro}deg`,'--flip':espelho,'--dur':s(durDaFolha),'--delay':s((area?i*.07:0)-pula*durDaFolha)},`fxl-impacto ${reduced?'fxl-parado':''}`,`imp-${id}-${uid}`));
       });
       // cada uma aparece no passo da cadeia em que acontece (a reação depois do golpe)
       for(const e of beat.events){

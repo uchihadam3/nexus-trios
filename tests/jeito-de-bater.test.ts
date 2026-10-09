@@ -31,10 +31,16 @@ const golpes = (b: Battle, eu: Fighter, n: number): BattleEvent[] => {
 };
 
 describe('Ataque básico com nome e jeito próprios', () => {
-  it('os 250 têm nome próprio, todos diferentes', () => {
-    const nomes = characters.map((c) => c.basic.name);
-    expect(nomes.every((n) => n && n !== 'Ataque básico')).toBe(true);
-    expect(new Set(nomes).size).toBe(characters.length);
+  it('os 250 têm nome, simples, e nunca o nome de uma habilidade do próprio personagem', () => {
+    // pedido do jogador: "o ataque básico tem que ser coisa simples" — muitos são só "Soco" — e não pode
+    // repetir uma habilidade (o Meteoro de Pégaso do Seiya era básico e habilidade ao mesmo tempo)
+    for (const c of characters) {
+      expect(c.basic.name && c.basic.name !== 'Ataque básico', c.id).toBe(true);
+      const habilidades = c.skills.map((s) => s.name.toLowerCase());
+      expect(habilidades, c.id).not.toContain(c.basic.name.toLowerCase());
+      const j = c.basic.jeito;
+      if (j?.tipo === 'serie') expect(habilidades, `${c.id}: ${j.nome}`).not.toContain(j.nome.toLowerCase());
+    }
   });
   it('a maior parte bate do seu jeito, e todo jeito se explica na ficha', () => {
     const com = characters.filter((c) => c.basic.jeito);
@@ -50,7 +56,7 @@ describe('Ataque básico com nome e jeito próprios', () => {
     soBasico(b, eu);
     const meus = golpes(b, eu, 3).filter((e) => e.kind === 'basic' && e.source === eu.uid);
     expect(meus[2]!.label).toBe('Rendan Uzumaki');
-    expect(meus[0]!.label).toBe('Combo do clone');
+    expect(meus[0]!.label).toBe('Soco');
   });
   it('ricochete: o escudo do Capitão quica no segundo rival', () => {
     const b = createBattle(['captain', 'sakura', 'goku'], ['hulk', 'thanos', 'saitama'], 3);

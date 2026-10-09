@@ -1,4 +1,4 @@
-import { CHOQUE_DO_ELETRIFICADO, DEIXAM_VULNERAVEL, statuses } from '../data/statuses';
+import { CHOQUE_DO_ELETRIFICADO, statuses } from '../data/statuses';
 import type { Effect, JeitoDeBater, Skill, Target, Topic, Trait, StatusId } from './types';
 
 const n=(v:number)=>Number(v.toFixed(1)).toLocaleString('pt-BR');
@@ -193,12 +193,12 @@ const maiuscula=(t:string):string=>t.charAt(0).toUpperCase()+t.slice(1);
 export function valorCurto(id:StatusId,value:number):string[]{
   const v=presentStatus(id,value).value;
   const curto:Partial<Record<StatusId,string>>={
-    exposed:`+${v} de dano recebido`,marked:'na mira de todo o trio',electric:`choque: −${Math.round(value*CHOQUE_DO_ELETRIFICADO*100)}% da barra por golpe`,
+    exposed:`+${v} de dano recebido`,electric:`−${Math.round(value*CHOQUE_DO_ELETRIFICADO*100)}% da barra por golpe`,
     protected:`−${v} de dano recebido`,slow:`${v} mais lento`,rooted:`${v} mais lento`,haste:`${v} mais rápido`,
     regen:`+${v} Vida/s`,burning:`−${v} Vida/s`,strengthened:`+${v} de dano`,weakened:`−${v} de dano`,
-    vampirism:`cura ${v} do dano causado`,reflect:`devolve ${v} do dano`,thorns:`${v} de dano em quem bate`,
+    vampirism:`${v} do dano`,reflect:`${v} do dano`,thorns:`${v} de dano por golpe`,
     poison:`−${v} Vida/s`,bleed:`−${v} Vida por ação`,cursed:`−${v} de cura recebida`,frozen:`+${v} no golpe que quebra`,
-    blind:`${v} de chance de errar`,bomb:`${v} de dano ao explodir`,summon:`${v} de dano a cada 1,5 s`,evasion:`${v} de chance de escapar`,barrier:`anula ${v} debuff${value>=2?'s':''}`,
+    blind:`${v} de chance`,bomb:`${v} de dano`,summon:`${v} de dano por ataque`,evasion:`${v} de chance`,barrier:`anula ${v} debuff${value>=2?'s':''}`,
   };
   return curto[id]?[curto[id]!]:[];
 }
@@ -287,7 +287,7 @@ export function presentEffect(effect:Effect,defaultTarget:Target,modo:ModoDeAlvo
   switch(effect.kind){
     case 'damage':return `${n(effect.value)} de dano${target}`;
     case 'heal':return `+${n(effect.value)} de Vida${target}`;
-    case 'shield':return `+${n(effect.value)} Escudo por até 10 s${target}`;
+    case 'shield':return `+${n(effect.value)} Escudo${target}`;
     /*
      * "Aplica <Status>", sempre.
      *
@@ -335,15 +335,15 @@ export function presentEffect(effect:Effect,defaultTarget:Target,modo:ModoDeAlvo
     case 'interrupt':return effect.mode==='cancel'?`Interrompe o Preparo${target}`:effect.mode==='delay'?`Atrasa o Preparo em ${secs(effect.value)}${target}`:`Reduz ${pct(effect.value)} do Preparo${target}`;
     case 'shift':return `${effect.value>=0?'Adianta':'Atrasa'} ${pct(Math.abs(effect.value))} do próximo ataque${target}`;
     case 'investigate':return `+${n(effect.value)} Investigação${target}`;
-    case 'revive':return `Levanta um aliado caído com ${pct(effect.value)} da Vida · 1 vez por luta`;
-    case 'lifesteal':return `Roubo de vida: recupera ${pct(effect.value)} do dano causado`;
-    case 'cleanse':return `Purifica: tira ${effect.value>1?`até ${n(effect.value)} debuffs`:'1 debuff'}${target}`;
-    case 'copy':return `Copia a última habilidade usada por um rival, com ${pct(effect.value)} da força`;
-    case 'dispel':return `Dissipa: tira ${effect.value>1?`até ${n(effect.value)} buffs`:'1 buff'}${target}`;
-    case 'deathnote':return 'Com 100 Investigação: elimina o alvo vulnerável; contra imune, 110 de dano e Exposto +55% por 14 s';
+    case 'revive':return `Levanta um aliado caído com ${pct(effect.value)} da Vida`;
+    case 'lifesteal':return `Roubo de vida · ${pct(effect.value)} do dano`;
+    case 'cleanse':return `Purifica ${effect.value>1?`até ${n(effect.value)} debuffs`:'1 debuff'}${target}`;
+    case 'copy':return `Copia a última habilidade · ${pct(effect.value)} da força`;
+    case 'dispel':return `Dissipa ${effect.value>1?`até ${n(effect.value)} buffs`:'1 buff'}${target}`;
+    case 'deathnote':return 'Com 100 Investigação: elimina o alvo; contra imune, 110 de dano e Exposto +55% por 14 s';
     case 'charge':return `+${n(effect.value)}% de Carga para habilidades${target}`;
     case 'store':return `Guarda ${n(effect.value)} de energia (até ${n(effect.cap)})`;
-    case 'release':return `Libera energia guardada ×${n(effect.multiplier)} como dano, dividido entre inimigos vivos`;
+    case 'release':return `Libera energia guardada ×${n(effect.multiplier)}, dividida entre os inimigos vivos`;
   }
 }
 export function presentSkill(skill:Skill):SkillPresentation {
@@ -365,7 +365,8 @@ export function presentSkill(skill:Skill):SkillPresentation {
     enemyCast:'um inimigo estiver preparando uma habilidade',
     threatened:'um aliado tiver menos de 85% de Vida ou um inimigo começar o Preparo',
     investigated:'houver um alvo conhecido com 100 Investigação',
-    vulnerable:`um inimigo estiver ${DEIXAM_VULNERAVEL.map(x=>statuses[x].name).join(', ').replace(/, ([^,]*)$/,' ou $1')}`,
+    // a lista dos Status que contam fica no termo clicável "vulnerável", não na ficha
+    vulnerable:'um inimigo estiver vulnerável',
     storedEnergy:'houver energia guardada',
   };
   /*
@@ -428,7 +429,7 @@ export function quandoAtiva(trait:Trait):{quando:string;limite:string}{
 }
 /** Última resistência (na ficha, fora do traço): o golpe fatal o deixa de pé uma vez. */
 export function textoDaResistencia(r:{protegido:number;duracao:number}):string{
-  return `Última resistência: o golpe que o derrubaria o deixa com 1 de Vida e Protegido ${pct(r.protegido)} por ${r.duracao.toLocaleString('pt-BR')} s · 1 vez por luta`;
+  return `Última resistência · Protegido ${pct(r.protegido)} por ${r.duracao.toLocaleString('pt-BR')} s`;
 }
 /** O jeito de bater: o que o ataque básico faz além do golpe. */
 export function textoDoJeito(j:JeitoDeBater):string{
@@ -438,17 +439,17 @@ export function textoDoJeito(j:JeitoDeBater):string{
       const partes=[(j.mult??1)>1?`dano ×${x(j.mult!)}`:'',j.status?presentEffect({kind:'status',status:j.status.status,value:j.status.value,duration:j.status.duration},'enemyWeak').replace(/^./,c=>c.toLowerCase()):''].filter(Boolean);
       return `A cada ${j.cada} golpes: ${j.nome}${partes.length?` (${partes.join(' e ')})`:''}`;
     }
-    case 'ricochete':return `Quica no outro rival mais ferido com ${pct(j.fracao)} do dano`;
-    case 'largo':return `Pega também um segundo rival com ${pct(j.fracao)} do dano`;
+    case 'ricochete':return `Quica no outro rival · ${pct(j.fracao)} do dano`;
+    case 'largo':return `Pega também um segundo rival · ${pct(j.fracao)} do dano`;
     case 'cura':return `${pct(j.fracao)} do dano vira cura no aliado mais ferido`;
     case 'escudo':return `${pct(j.fracao)} do dano vira Escudo em si`;
-    case 'rouba':return `Rouba ${j.valor} de Carga do alvo e põe na habilidade dele mais perto de encher`;
+    case 'rouba':return `Rouba ${j.valor} de Carga`;
     case 'acelera':return `Cada golpe adianta a próxima ação em ${pct(j.valor)}`;
   }
 }
 /** Renascer (na ficha do personagem, fora do traço): o que acontece quando ele cai. */
 export function textoDoRenascer(r:{vida:number;atraso:number}):string{
-  return `Renasce: ao cair, volta em ${r.atraso.toLocaleString('pt-BR')} s com ${pct(r.vida)} da Vida · 1 vez por luta`;
+  return `Renasce em ${r.atraso.toLocaleString('pt-BR')} s com ${pct(r.vida)} da Vida`;
 }
 export function presentTrait(trait:Trait):TraitPresentation {
   const effects=trait.effects.map(effect=>{

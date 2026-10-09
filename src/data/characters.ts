@@ -4,8 +4,10 @@ import { expandedCharacters } from './expanded-roster';
 import { intelligenceFor } from './intelligence';
 import { alinharEfeitos } from './alinhar-efeitos';
 import { aplicaMecanicas } from './mecanicas';
+import { aplicaGolpesQueAtacam } from './golpes-que-atacam';
 import { aplicaBasico } from './basicos';
 import { aplicaTraco } from './tracos';
+import { aplicaStatusDoNome } from './status-do-nome';
 import { aplicaCondicao } from './condicao';
 import { FATOR_DA_REGENERACAO,valorDaRegeneracao } from './regeneracao';
 import { AJUSTE_DE_FORCA, AJUSTE_DE_RITMO } from './ajuste-de-forca';
@@ -205,7 +207,7 @@ const deBase:Character[] = [
   skill('Joia do Tempo','wave','Retarda todos e reduz preparações pela metade.','Preparações inimigas + tempo',[charge('enemyCast',22),charge('time',3)],[status('slow',.4,8,'allEnemies'),{kind:'interrupt',mode:'reduce',value:.5,target:'allEnemies'}],{target:'allEnemies'}),
   skill('Equilíbrio','psychic','Causa 240 de dano a todos e enfraquece por 9 s.','Tempo em luta + dano causado',[charge('survived',2.8),charge('dealt',7)],[damage(240,'allEnemies'),status('weakened',.25,9,'allEnemies')],{preparation:4.5,target:'allEnemies',cooldown:14})]}),
   ...expandedCharacters.map(c=>imagePortraits[c.id]?{...c,portrait:imagePortraits[c.id]}:c),
-] .map(alinharEfeitos).map(aplicaMecanicas).map(aplicaBasico).map(aplicaTraco).map(aplicaCondicao)
+] .map(alinharEfeitos).map(aplicaMecanicas).map(aplicaGolpesQueAtacam).map(aplicaBasico).map(aplicaTraco).map(aplicaStatusDoNome).map(aplicaCondicao)
  .map(c=>({...c,intelligence:intelligenceFor(c.id,c.tags),
    /* Ponto fraco medido (scripts/escrever-fraquezas.ts): contra o quê ele é ruim e por quê. */
    vulnerability:fraquezas[c.id]??c.vulnerability}));
@@ -217,5 +219,19 @@ const deBase:Character[] = [
 const VIDA_DE_TANQUE=(()=>{const v=deBase.map(c=>c.hp).sort((a,b)=>a-b);return v[Math.floor(v.length*.75)]!;})();
 const TANQUES_DE_IDENTIDADE=new Set(['piccolo','eren','kaneki','vision','venom','bowser','kirby','donkeykong','ikki','gaara','bobesponja','bebop','mummra','homer']);
 export const TANQUES:ReadonlySet<string>=new Set(deBase.filter(c=>TANQUES_DE_IDENTIDADE.has(c.id)||c.hp>=VIDA_DE_TANQUE).map(c=>c.id));
-export const characters:Character[]=deBase.map(c=>ajustaForca(c,TANQUES.has(c.id),VIDA_DE_TANQUE)).map(ajustaRegeneracao);
+/*
+ * Números que o jogador pediu, como ele pediu: valem depois do ajuste de força (o ajuste mexe no
+ * resto do personagem, nunca nestes). "Discurso interminável do Mojo Jojo: dano 450, mas Preparo de 5 s."
+ */
+const PEDIDOS_DO_JOGADOR:Record<string,{dano?:number;preparo?:number}>={'mojojojo:2':{dano:450,preparo:5}};
+function aplicaPedidos(c:Character):Character{
+  if(!Object.keys(PEDIDOS_DO_JOGADOR).some(k=>k.startsWith(`${c.id}:`)))return c;
+  const skills=c.skills.map((s,i)=>{
+    const p=PEDIDOS_DO_JOGADOR[`${c.id}:${i}`];
+    if(!p)return s;
+    return {...s,...(p.preparo!==undefined?{preparation:p.preparo}:{}),effects:s.effects.map(e=>e.kind==='damage'&&p.dano!==undefined?{...e,value:p.dano}:e)};
+  }) as Character['skills'];
+  return {...c,skills};
+}
+export const characters:Character[]=deBase.map(c=>ajustaForca(c,TANQUES.has(c.id),VIDA_DE_TANQUE)).map(ajustaRegeneracao).map(aplicaPedidos);
 export const byId:Record<string,Character> = Object.fromEntries(characters.map(c=>[c.id,c]));

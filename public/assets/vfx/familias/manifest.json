@@ -279,6 +279,20 @@
   "laco": false,
   "bytes": 42696
  },
+ "batarangue_voando": {
+  "descricao": "o batarangue girando em voo (+x)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 22470
+ },
  "bencao": {
   "descricao": "penas e halo",
   "quadros": 12,
@@ -741,6 +755,20 @@
   "laco": false,
   "bytes": 73658
  },
+ "chute_basico": {
+  "descricao": "Chute simples: o pé sobe em arco, acerta com estrela e anel de choque e volta",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 35112
+ },
  "chute_demoniaco": {
   "descricao": "Nezuko: chute em arco e o sangue explode em chamas",
   "quadros": 12,
@@ -853,8 +881,8 @@
   "laco": false,
   "bytes": 43174
  },
- "combo_dos_clones": {
-  "descricao": "Naruto: clones surgem na fumaça e chutam, o último para cima",
+ "colera_impacto": {
+  "descricao": "o dragão atravessando o alvo: estouro e rastro para a frente",
   "quadros": 12,
   "grade": [
    3,
@@ -865,7 +893,7 @@
    192
   ],
   "laco": false,
-  "bytes": 78114
+  "bytes": 58698
  },
  "cometa": {
   "descricao": "luz que corre pela linha de ação (+x)",
@@ -1077,6 +1105,20 @@
   "laco": false,
   "bytes": 66896
  },
+ "corvo_voando": {
+  "descricao": "o corvo de energia voando (+x)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 23894
+ },
  "corvos": {
   "descricao": "Ilusão de corvos: revoada que sai do corpo",
   "quadros": 12,
@@ -1188,6 +1230,20 @@
   ],
   "laco": false,
   "bytes": 52148
+ },
+ "dardo_voando": {
+  "descricao": "os dardos crescentes girando em voo (+x)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 22864
  },
  "death_note": {
   "descricao": "Death Note: o nome escrito e o coração que para",
@@ -1329,6 +1385,20 @@
   "laco": false,
   "bytes": 55672
  },
+ "dragao_faixa": {
+  "descricao": "o dragão do Cólera do Dragão esticado até o alvo (faixa)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   512,
+   96
+  ],
+  "laco": true,
+  "bytes": 79104
+ },
  "dreno": {
   "descricao": "transferência de energia (faixa)",
   "quadros": 12,
@@ -1454,6 +1524,20 @@
   ],
   "laco": false,
   "bytes": 48668
+ },
+ "escudo_voando": {
+  "descricao": "o escudo do Capitão girando em voo (+x)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 18660
  },
  "esfera_espiral": {
   "descricao": "esfera em espiral moendo",
@@ -2393,20 +2477,6 @@
   "laco": false,
   "bytes": 37002
  },
- "infinito": {
-  "descricao": "básico do Gojo: o soco trava no Infinito e um pulso empurra",
-  "quadros": 12,
-  "grade": [
-   3,
-   4
-  ],
-  "tamanho": [
-   192,
-   192
-  ],
-  "laco": false,
-  "bytes": 60736
- },
  "instinto": {
   "descricao": "Instinto Superior: aura prateada e vultos",
   "quadros": 12,
@@ -2672,20 +2742,6 @@
   ],
   "laco": false,
   "bytes": 68404
- },
- "ki_dourado": {
-  "descricao": "básico do Goku: três esferas de ki douradas que estouram em fumaça",
-  "quadros": 12,
-  "grade": [
-   3,
-   4
-  ],
-  "tamanho": [
-   192,
-   192
-  ],
-  "laco": false,
-  "bytes": 41040
  },
  "kunai_de_hiraishin": {
   "descricao": "Minato: kunai de três pontas, clarão do teleporte e o golpe",
@@ -3205,6 +3261,20 @@
   "laco": false,
   "bytes": 58058
  },
+ "meteoro_madara": {
+  "descricao": "Meteoro do Madara: a rocha gigante cai em fogo no meio dos rivais e explode",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 60188
+ },
  "meteoros_de_pegaso": {
   "descricao": "Seiya: dezenas de socos-meteoro azuis riscando o alvo",
   "quadros": 12,
@@ -3302,6 +3372,20 @@
   ],
   "laco": false,
   "bytes": 92264
+ },
+ "mugen_tsukuyomi": {
+  "descricao": "Mugen Tsukuyomi: a lua do Rinne Sharingan, os raios e os casulos de raízes",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 119672
  },
  "nevasca": {
   "descricao": "flocos em redemoinho",
@@ -3835,20 +3919,6 @@
   "laco": false,
   "bytes": 63246
  },
- "rajada_continua": {
-  "descricao": "básico do Vegeta: dezenas de esferas de ki e a nuvem de fumaça",
-  "quadros": 12,
-  "grade": [
-   3,
-   4
-  ],
-  "tamanho": [
-   192,
-   192
-  ],
-  "laco": false,
-  "bytes": 61768
- },
  "rajada_de_ar": {
   "descricao": "arcos de vento",
   "quadros": 12,
@@ -4255,6 +4325,20 @@
   "laco": false,
   "bytes": 38328
  },
+ "shuriken_voando": {
+  "descricao": "duas shurikens girando em voo (+x)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 9916
+ },
  "silencio": {
   "descricao": "som cortado",
   "quadros": 12,
@@ -4282,6 +4366,20 @@
   ],
   "laco": false,
   "bytes": 54368
+ },
+ "soco_basico": {
+  "descricao": "Soco simples: o punho entra, acerta com estrela e anel de choque e recua",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 37678
  },
  "soco_casual": {
   "descricao": "básico do Saitama: soquinho e, depois, o vendaval exagerado",
@@ -4549,6 +4647,34 @@
   "laco": false,
   "bytes": 83572
  },
+ "susanoo_manto": {
+  "descricao": "O Susanoo em volta do Madara: costelas, máscara de tengu, asas e chamas de chakra",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": true,
+  "bytes": 138634
+ },
+ "susanoo_perfeito": {
+  "descricao": "Susanoo Perfeito do Madara: a espada gigante desce e o chakra azul arde no corte",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 69634
+ },
  "taco_de_beisebol": {
   "descricao": "Taco de beisebol da Arlequina: giro com rastro, CRACK, estrelinhas e um coração",
   "quadros": 12,
@@ -4730,6 +4856,20 @@
   ],
   "laco": false,
   "bytes": 62946
+ },
+ "tiara_voando": {
+  "descricao": "a tiara lunar girando em voo (+x)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 20784
  },
  "tiro": {
   "descricao": "traçante em viagem (+x)",

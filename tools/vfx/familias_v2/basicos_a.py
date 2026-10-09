@@ -720,16 +720,102 @@ def soco_relampago(T, t, rng):
     return G * env, H * env
 
 
+
+# ------------------------------------------------------------------ golpes simples (o básico de quem só bate)
+def _elipse_pts(cx, cy, rx, ry, ang=0.0, n=16):
+    c, s = math.cos(ang), math.sin(ang)
+    return [(cx + rx * math.cos(a) * c - ry * math.sin(a) * s, cy + rx * math.cos(a) * s + ry * math.sin(a) * c)
+            for a in (TAU * k / n for k in range(n))]
+
+
+def _punho_simples(T, cx, cy, esc):
+    """Punho fechado de lado, os nós dos dedos para a frente (+x): o antebraço, a mão, quatro dedos
+    dobrados separados por um vão (é o que faz ler como mão) e o polegar por cima."""
+    formas = [([(cx - 0.42 * esc, cy - 0.1 * esc), (cx - 0.08 * esc, cy - 0.13 * esc), (cx - 0.08 * esc, cy + 0.13 * esc), (cx - 0.42 * esc, cy + 0.1 * esc)], 0.8),
+              (_elipse_pts(cx - 0.02 * esc, cy, 0.12 * esc, 0.17 * esc), 1.0)]
+    for k in range(4):
+        formas.append((_elipse_pts(cx + 0.1 * esc, cy - 0.13 * esc + 0.087 * esc * k, 0.075 * esc, 0.038 * esc), 1.0))
+    formas.append((_elipse_pts(cx + 0.0 * esc, cy - 0.17 * esc, 0.1 * esc, 0.035 * esc, 0.15), 1.0))
+    return np.clip(T.polys(formas, 0.003), 0, 1)
+
+
+def _pe_simples(cx, cy, esc, ang=0.0):
+    """Pé de lado (canela, peito do pé e a sola), a ponta para a frente (+x)."""
+    pts = [(-0.34, -0.10), (-0.06, -0.08), (0.10, -0.04), (0.22, -0.01), (0.26, 0.04), (0.22, 0.09), (-0.02, 0.10), (-0.34, 0.08)]
+    c, s = math.cos(ang), math.sin(ang)
+    return [(cx + (x * c - y * s) * esc, cy + (x * s + y * c) * esc) for x, y in pts]
+
+
+def _contato(T, t, t0, forca=1.0, seed=5):
+    """O contato de um golpe limpo: clarão branco, estrela de impacto, anel de choque achatado e
+    os riscos curtos que saem para os lados (o "tchak" visível do quadrinho)."""
+    G, H = vazio(T)
+    k = pulso(t, t0, t0 + 0.32)
+    est = T.polys([(estrela(0.0, 0.0, 0.3 * forca * k + 0.01, 0.25, 8, 0.36), 1.0)], 0.005) * k
+    clarao = T.gauss(0, 0, 0.16 * forca, 0.16 * forca) * pulso(t, t0, t0 + 0.18) * 2.2
+    anel = T.ring(0.12 + 0.55 * forca * ease_out(rel(t, t0, t0 + 0.45), 2.3), 0.035, squash=1.25) * pulso(t, t0, t0 + 0.5)
+    sub = np.random.default_rng(seed)
+    segs = []
+    u = ease_out(rel(t, t0 + 0.02, t0 + 0.32), 2)
+    for j in range(7):
+        a = -1.25 + 2.5 * j / 6 + sub.uniform(-0.1, 0.1)
+        d0 = 0.22 + 0.25 * u
+        d1 = d0 + 0.16 * forca * (1 - u * 0.6)
+        segs.append((d0 * math.cos(a), d0 * math.sin(a), d1 * math.cos(a), d1 * math.sin(a), 1.0))
+    riscos = T.tapered(segs, 0.022) * pulso(t, t0 + 0.02, t0 + 0.34)
+    pts = []
+    for _ in range(9):
+        a = sub.uniform(-1.0, 1.0)
+        d = 0.2 + 0.5 * ease_out(rel(t, t0, t0 + 0.5), 2) * sub.uniform(0.5, 1)
+        pts.append((d * math.cos(a), d * math.sin(a) + 0.2 * rel(t, t0, t0 + 0.6) ** 2, pulso(t, t0, t0 + 0.55) * sub.uniform(0.4, 0.9)))
+    G += est * 1.2 + clarao + anel + riscos * 1.2 + T.splats(pts, 0.014)
+    H += est * 1.0 + clarao * 1.2 + anel * 0.35 + riscos * 0.9 + T.splats(pts, 0.009) * 0.6
+    return G, H
+
+
+def soco_basico(T, t, rng):
+    """Soco simples: o punho entra pela esquerda com linhas de velocidade, acerta o centro (clarão,
+    estrela e anel de choque), recua um pouco e some — o golpe de quem só dá um soco."""
+    G, H = vazio(T)
+    env = apaga(t, 0.72, 1)
+    vem = ease_in(rel(t, 0.0, 0.22), 1.6)
+    volta = ease_out(rel(t, 0.26, 0.6), 2)
+    px = -0.95 + 0.82 * vem - 0.22 * volta
+    vis = janela(t, 0.0, 0.04) * (1 - rel(t, 0.45, 0.62))
+    P = _punho_simples(T, px, 0.0, 1.15) * vis
+    linhas = rastro_de_velocidade(T, rng, 7, 0.0, 0.55, 0.16, -px - 0.1, cx=0.0, cy=0.0, largura=0.016, seed=21) * (1 - rel(t, 0.2, 0.32)) * 0.8
+    g, h = _contato(T, t, 0.2, 1.0, 11)
+    G += (P * 1.1 + T.blur(P, 0.02) * 0.5 + linhas + g) * env
+    H += (P * 0.55 + linhas * 0.5 + h) * env
+    return G, H
+
+
+def chute_basico(T, t, rng):
+    """Chute simples: o pé sobe em arco de baixo para o alvo deixando o rastro do movimento, acerta
+    (clarão, estrela, anel) e volta."""
+    G, H = vazio(T)
+    env = apaga(t, 0.72, 1)
+    u = ease_in(rel(t, 0.0, 0.24), 1.4)
+    caminho = lambda uu: (-0.95 + 0.9 * uu, 0.55 - 0.55 * math.sin(math.pi * 0.5 * uu))
+    px, py = caminho(u)
+    vis = janela(t, 0.0, 0.04) * (1 - rel(t, 0.42, 0.6))
+    Pe = T.polys([(_pe_simples(px, py, 1.15, -0.6 * (1 - u)), 1.0)], 0.006) * vis
+    rastro = [caminho(max(0.0, u - 0.05 * k)) for k in range(10)]
+    arco = T.polyline(rastro, 0.07) * (1 - rel(t, 0.22, 0.42)) * 0.7 if u > 0.02 else T.zero()
+    g, h = _contato(T, t, 0.22, 1.05, 17)
+    G += (Pe * 1.1 + T.blur(Pe, 0.02) * 0.5 + T.blur(arco, 0.01) + g) * env
+    H += (Pe * 0.55 + arco * 0.4 + h) * env
+    return G, H
+
 REGISTRO = [
-    ("ki_dourado", ki_dourado, GRANDE, "básico do Goku: três esferas de ki douradas que estouram em fumaça", False),
-    ("rajada_continua", rajada_continua, GRANDE, "básico do Vegeta: dezenas de esferas de ki e a nuvem de fumaça", False),
+    ("soco_basico", soco_basico, GRANDE, "Soco simples: o punho entra, acerta com estrela e anel de choque e recua", False),
+    ("chute_basico", chute_basico, GRANDE, "Chute simples: o pé sobe em arco, acerta com estrela e anel de choque e volta", False),
     ("golpe_do_potencial", golpe_do_potencial, GRANDE, "básico do Gohan: soco com aura branca e raios do SSJ2", False),
     ("braco_namekiano", braco_namekiano, GRANDE, "básico do Piccolo: o braço verde estica e acerta", False),
     ("punho_lendario", punho_lendario, GRANDE, "básico do Broly: soco brutal, aura verde explodindo e rachaduras", False),
     ("toque_da_destruicao", toque_da_destruicao, GRANDE, "básico do Beerus: peteleco e a esfera roxa que implode", False),
     ("rei_gun", rei_gun, GRANDE, "básico do Yusuke: tiro do dedo que estoura em anel", False),
     ("soco_casual", soco_casual, GRANDE, "básico do Saitama: soquinho e, depois, o vendaval exagerado", False),
-    ("infinito", infinito, GRANDE, "básico do Gojo: o soco trava no Infinito e um pulso empurra", False),
     ("punho_amaldicoado", punho_amaldicoado, GRANDE, "básico do Yuji: Black Flash, faíscas negras e o espaço rachando", False),
     ("desmanche", desmanche, GRANDE, "básico do Sukuna: cortes finos em grade aparecendo de uma vez", False),
     ("choque_do_pikachu", choque_do_pikachu, GRANDE, "básico do Pikachu: faíscas em zigue-zague e bochechas crepitando", False),

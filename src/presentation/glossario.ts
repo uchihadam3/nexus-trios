@@ -8,7 +8,7 @@
  * só o termo e o número; tocar no termo abre a explicação.
  */
 import type { StatusId } from '../engine/types';
-import { statuses } from '../data/statuses';
+import { DEIXAM_VULNERAVEL, statuses } from '../data/statuses';
 
 export interface Termo {
   id: string;
@@ -70,6 +70,8 @@ const doStatus = (id: StatusId): Termo => ({
   id, nome: statuses[id].name, cor: statuses[id].color,
   rotulo: statuses[id].tone === 'positivo' ? 'STATUS BOM · para quem recebe' : 'STATUS RUIM · para quem recebe',
   texto: FAZ[id], extra: acumula(id),
+  // "Invoca Gomorrah": o verbo da ficha também abre a explicação da Invocação
+  ...(id === 'summon' ? { formas: ['Invoca'] } : {}),
 });
 
 const MECANICAS: Termo[] = [
@@ -93,6 +95,7 @@ const MECANICAS: Termo[] = [
   { id: 'golpe-largo', nome: 'Golpe largo', cor: '#ff9a76', rotulo: 'ATAQUE BÁSICO', formas: ['Pega também um segundo rival'], texto: 'O ataque básico varre e pega também um segundo rival, com parte do dano — a esmagada do Hulk, a espada do Cloud.' },
   { id: 'golpe-que-cura', nome: 'Golpe que cura', cor: '#86e3a8', rotulo: 'ATAQUE BÁSICO', formas: ['vira cura no aliado mais ferido'], texto: 'Parte do dano do ataque básico vira cura no aliado mais ferido — o soco de chakra da Sakura, a Tiara lunar da Sailor Moon.' },
   { id: 'roubar-carga', nome: 'Roubar Carga', cor: '#b8e282', rotulo: 'ATAQUE BÁSICO', formas: ['Rouba'], texto: 'O ataque básico tira Carga da habilidade mais cheia do rival e passa para a habilidade dele que está mais perto de encher — o Kakashi copiando, o Cell absorvendo.' },
+  { id: 'vulneravel', nome: 'vulnerável', cor: '#ff8a6b', rotulo: 'USA QUANDO', formas: ['vulnerável'], texto: `Um rival com um Status negativo que abre a guarda: ${DEIXAM_VULNERAVEL.map((x) => statuses[x].name).join(', ').replace(/, ([^,]*)$/, ' ou $1')}.`, extra: 'Lento, Preso, Enfraquecido, Silenciado, Confuso, Provocado e Marca explosiva atrapalham, mas não abrem a guarda: não contam.' },
   { id: 'interrompe', nome: 'Interrupção', cor: '#ff9a76', rotulo: 'CORTAR O GOLPE', formas: ['Interrompe o Preparo', 'Atrasa o Preparo', 'do Preparo'], texto: 'Age em quem está preparando uma habilidade: cancela o golpe, ou empurra para mais tarde, ou encurta o que já foi preparado.' },
 ];
 

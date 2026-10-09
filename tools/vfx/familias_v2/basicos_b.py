@@ -775,7 +775,6 @@ def soco_titanico(T, t, rng):
 
 
 REGISTRO = [
-    ("combo_dos_clones", combo_dos_clones, GRANDE, "Naruto: clones surgem na fumaça e chutam, o último para cima", False),
     ("kusanagi", kusanagi, GRANDE, "Sasuke: corte fino de katana com estalos de Chidori na lâmina", False),
     ("shuriken", shuriken, GRANDE, "Itachi: três shurikens de quatro pontas chegam girando e cravam", False),
     ("soco_de_chakra", soco_de_chakra, GRANDE, "Sakura: soco com estouro de chakra e o chão rachando", False),

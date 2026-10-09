@@ -34,7 +34,10 @@ export function CombatConnections({battle,beat,anchors,reduced,medal=80}:{battle
   const lado=(uid:string)=>battle.fighters.find(f=>f.uid===uid)?.side;
   /* A ação principal: se ela acerta algum rival, a linha vai para os rivais; senão, para os aliados que ela ajuda. */
   const ofensiva=links.some(l=>l.source===ator&&lado(l.target)!==lado(l.source)&&OFENSIVO.includes(l.kind))||(!links.length&&!!beat?.event.target&&lado(beat.event.target)!==lado(ator??''));
-  const principais=links.filter(l=>l.source===ator&&(lado(l.target)!==lado(l.source))===ofensiva)
+  // o ricochete não é um segundo golpe saindo de quem age: ele quica do primeiro alvo para o segundo depois,
+  // então quem só levou o quique não ganha linha de quem age
+  const soDoQuique=new Set(links.filter(l=>l.event?.label==='Ricochete').map(l=>l.target).filter(t=>!links.some(l=>l.target===t&&l.kind==='attack'&&l.event?.label!=='Ricochete')));
+  const principais=links.filter(l=>l.source===ator&&!soDoQuique.has(l.target)&&(lado(l.target)!==lado(l.source))===ofensiva)
     .filter((l,i,todas)=>todas.findIndex(x=>x.target===l.target)===i);
   const pares=new Set(principais.map(l=>`${l.source}>${l.target}`));
   /* Depois do golpe: só apoio de verdade entre aliados, um de cada vez (no máximo dois). */

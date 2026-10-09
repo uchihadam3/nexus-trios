@@ -38,6 +38,7 @@ const ANTES_DA_NOVA: Partial<Record<FamiliaNova, { antes: Sound; saida?: Sound }
   esfera_espiral: { antes: 'esfera-espiral-carga' },
   kamehameha: { antes: 'kamehameha-carga', saida: 'kamehameha-feixe' },
   marretada: { antes: 'marretada-giro' },
+  susanoo_perfeito: { antes: 'susanoo-manto' },
 };
 const SONS_DE_ANTES = [...new Set(Object.values(ANTES_DA_NOVA).flatMap((x) => [x!.antes, ...(x!.saida ? [x!.saida] : [])]))];
 

@@ -15,6 +15,9 @@ import type { FamiliaNova } from './vfx-familias-novas';
 export const FAMILIAS_DO_JEITO = ['quique', 'golpe_largo', 'golpe_da_serie', 'golpe_que_cura', 'roubar_carga', 'carga_roubada', 'guarda_do_golpe', 'acelera'] as const satisfies readonly FamiliaNova[];
 type FamiliaDoJeito = (typeof FAMILIAS_DO_JEITO)[number];
 
+/** Quanto o objeto do ricochete leva voando do primeiro rival até o segundo (s). */
+export const VOO_DO_QUIQUE = 0.32;
+
 export interface EfeitoDoJeito { alvo: string; familia: FamiliaDoJeito; evento: BattleEvent; atraso: number }
 
 /** Os efeitos de jeito de bater de um beat: o evento principal e os que vieram com ele. */
@@ -27,7 +30,8 @@ export function efeitosDoJeito(principal: BattleEvent, eventos: BattleEvent[], l
     if (jeito?.tipo === 'serie' && principal.label === jeito.nome) out.push({ alvo: principal.target, familia: 'golpe_da_serie', evento: principal, atraso: 0 });
   }
   for (const e of eventos) {
-    if (e.kind === 'damage' && e.label === 'Ricochete' && e.target) out.push({ alvo: e.target, familia: 'quique', evento: e, atraso: 0 });
+    // o objeto voa do primeiro alvo até o segundo antes de quicar nele
+    if (e.kind === 'damage' && e.label === 'Ricochete' && e.target) out.push({ alvo: e.target, familia: 'quique', evento: e, atraso: VOO_DO_QUIQUE });
     if (e.kind === 'damage' && e.label === 'Golpe largo' && e.target) out.push({ alvo: e.target, familia: 'golpe_largo', evento: e, atraso: 0 });
     if (e.kind === 'heal' && e.label === 'Golpe que cura' && e.target) out.push({ alvo: e.target, familia: 'golpe_que_cura', evento: e, atraso: 0.05 });
     if (e.kind === 'shield' && e.label === 'Guarda do golpe' && e.target) out.push({ alvo: e.target, familia: 'guarda_do_golpe', evento: e, atraso: 0.05 });
