@@ -10,7 +10,7 @@
  * - quando caiu, e se caiu de um golpe grande (≥ 35% da Vida num beat);
  * - quantos Preparos começou e quantos foram cortados;
  * - quantos segundos passou preso, paralisado, silenciado ou confuso;
- * - quantos segundos passou Queimando (dano contínuo).
+ * - quantos segundos passou Queimando, Envenenado ou Sangrando (dano contínuo).
  *
  * Saída: docs/fraquezas-medidas.json. O texto de cada ponto fraco é escrito a
  * partir disso em scripts/escrever-fraquezas.ts.
@@ -25,7 +25,7 @@ import type { StatusId } from '../src/engine/types';
 import { identidadesDe } from '../src/presentation/identities';
 
 const LUTAS = Number(process.env.LUTAS ?? 20000);
-const CONTROLE = new Set<StatusId>(['paralyzed', 'rooted', 'silenced', 'confused']);
+const CONTROLE = new Set<StatusId>(['paralyzed', 'rooted', 'silenced', 'confused', 'frozen', 'sleep']);
 
 interface Acumulado {
   id: string; lutas: number; vitorias: number;
@@ -64,7 +64,7 @@ for (let luta = 0; luta < LUTAS; luta += 1) {
     for (const f of b.fighters) {
       if (f.hp <= 0) continue;
       if (f.statuses.some((s) => CONTROLE.has(s.id))) controle.set(f.uid, (controle.get(f.uid) ?? 0) + 0.1);
-      if (f.statuses.some((s) => s.id === 'burning')) acc.get(f.characterId)!.danoContinuoRecebido += 0.1;   // segundos queimando
+      if (f.statuses.some((s) => s.id === 'burning' || s.id === 'poison' || s.id === 'bleed')) acc.get(f.characterId)!.danoContinuoRecebido += 0.1;   // segundos queimando
     }
     for (const ev of b.events) {
       if (ev.id <= visto) continue;

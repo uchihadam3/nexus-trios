@@ -31,9 +31,9 @@ import type { StatusId } from '../src/engine/types';
 const SEMENTES = Number(process.env.SEMENTES ?? 40);
 
 /* Controle duro: tira o turno do alvo, em vez de só atrapalhar. */
-const CONTROLE_DURO = new Set<StatusId>(['paralyzed', 'rooted', 'silenced', 'confused']);
+const CONTROLE_DURO = new Set<StatusId>(['paralyzed', 'rooted', 'silenced', 'confused', 'frozen', 'sleep']);
 /* Os que drenam Vida sozinhos ao longo do tempo. */
-const CONTINUOS = new Set<StatusId>(['burning', 'electric']);
+const CONTINUOS = new Set<StatusId>(['burning', 'electric', 'poison', 'bleed']);
 /* Os que mexem na velocidade da luta. */
 const RITMO = new Set<StatusId>(['haste', 'slow']);
 

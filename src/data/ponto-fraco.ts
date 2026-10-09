@@ -8,7 +8,8 @@
  * Kamehameha demora 3 s para sair". O texto medido (fraquezas.ts, de 20.000
  * lutas) continua sendo a fonte; aqui ele vira etiquetas curtas.
  */
-export type TipoDeFraqueza = 'interrupcao' | 'explosao' | 'area' | 'cura' | 'rapidos' | 'continuo' | 'controle' | 'tanques' | 'longa' | 'momento' | 'apanhar';
+export type TipoDeFraqueza = 'interrupcao' | 'explosao' | 'area' | 'cura' | 'rapidos' | 'continuo' | 'controle' | 'tanques' | 'longa' | 'momento' | 'apanhar'
+  | 'dissipar' | 'purificar' | 'provocar' | 'esquiva' | 'refletir' | 'cegueira';
 
 export interface Fraqueza {
   tipo: TipoDeFraqueza;
@@ -30,11 +31,18 @@ const CABECALHOS: [RegExp, TipoDeFraqueza, string][] = [
   [/^Em luta longa$/, 'longa', 'Luta longa'],
   [/^Depende do momento$/, 'momento', 'Hora certa'],
   [/^Precisa apanhar para crescer$/, 'apanhar', 'Explosão'],
+  [/^Contra Dissipar$/, 'dissipar', 'Dissipar'],
+  [/^Contra Purificar$/, 'purificar', 'Purificar'],
+  [/^Contra Provocar$/, 'provocar', 'Provocar'],
+  [/^Contra Esquiva$/, 'esquiva', 'Esquiva'],
+  [/^Contra Refletir e Espinhos$/, 'refletir', 'Refletir e Espinhos'],
+  [/^Contra Cegueira$/, 'cegueira', 'Cegueira'],
 ];
-const DIVISOR = /(Contra (?:Interrupção|Explosão|Área|Cura e Escudo|trios rápidos|Dano contínuo|Controle|Tanques)|Em luta longa|Depende do momento|Precisa apanhar para crescer):\s/g;
+const DIVISOR = /(Contra (?:Interrupção|Explosão|Área|Cura e Escudo|trios rápidos|Dano contínuo|Controle|Tanques|Dissipar|Purificar|Provocar|Esquiva|Refletir e Espinhos|Cegueira)|Em luta longa|Depende do momento|Precisa apanhar para crescer):\s/g;
 
 const CONDICAO: [RegExp, string][] = [
-  [/inimigo estiver Exposto/, 'com o rival enfraquecido'],
+  [/inimigo estiver vulnerável/, 'com o rival vulnerável'],
+  [/inimigo estiver Exposto/, 'com o rival vulnerável'],
   [/inimigo estiver em Preparo/, 'com o rival em Preparo'],
   [/trio estiver sob ameaça/, 'com o trio em perigo'],
   [/alvo já estiver ferido/, 'com o alvo ferido'],
@@ -47,6 +55,9 @@ export interface NumerosDoPersonagem { hp: number; interval: number }
 const decimal = (n: number) => numero(String(Math.round(n * 100) / 100).replace('.', ','));
 
 function motivoDe(tipo: TipoDeFraqueza, texto: string, c?: NumerosDoPersonagem): string {
+  // ataque lento: o dano vem das habilidades, então quem as trava o desarma
+  const lento = /sai só a cada ([\d,]+) s/.exec(texto);
+  if (lento && (tipo === 'controle' || tipo === 'interrupcao')) return `Básico lento (a cada ${c ? decimal(c.interval) : numero(lento[1]!)} s): o dano vem das habilidades`;
   switch (tipo) {
     case 'interrupcao': {
       const m = /^(.+?) leva ([\d,]+) s de Preparo/.exec(texto);
@@ -77,6 +88,21 @@ function motivoDe(tipo: TipoDeFraqueza, texto: string, c?: NumerosDoPersonagem):
       const m = /^(.+?) só o fortalece/.exec(texto);
       return m ? `${m[1]} só cresce apanhando` : 'Precisa apanhar para crescer';
     }
+    case 'dissipar': {
+      const m = /vem de (.+?) \(/.exec(texto);
+      return m ? `${m[1]} é o reforço que ele perde` : 'Perde os próprios reforços';
+    }
+    case 'purificar': {
+      const m = /plano dele é (.+?) —/.exec(texto);
+      return m ? `${m[1]} pode ser limpo do rival` : 'O rival se limpa';
+    }
+    case 'provocar': return 'Os golpes vão em quem provoca';
+    case 'esquiva': {
+      const m = /^(.+?) é um golpe só/.exec(texto);
+      return m ? `${m[1]} pode passar longe` : 'O golpe pode passar longe';
+    }
+    case 'refletir': return 'Leva parte do golpe de volta';
+    case 'cegueira': return 'O básico erra e a Carga atrasa';
   }
 }
 

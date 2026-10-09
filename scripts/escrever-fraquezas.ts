@@ -22,6 +22,9 @@ import { readFileSync, writeFileSync } from 'node:fs';
 
 import { characters } from '../src/data/characters';
 import type { Character, Effect, Skill } from '../src/engine/types';
+import { statuses } from '../src/data/statuses';
+
+const NOME_DO_STATUS: Record<string, string> = Object.fromEntries(Object.entries(statuses).map(([k, v]) => [k, v.name]));
 
 interface Medida {
   id: string; lutas: number; vitorias: number; taxaDeQueda: number; primeiroACair: number; quedaPorGolpeGrande: number;
@@ -126,7 +129,7 @@ function candidatas(c: Character, m: Medida): Candidata[] {
   }
   // queima
   if (posicao(queimas, m.danoContinuoRecebido) >= 0.8 && dCont >= 4) {
-    out.push({ chave: 'continuo', nota: dCont * 0.3, texto: `Contra Dano contínuo: passa ${num(m.danoContinuoRecebido, 1)} s por luta Queimando e não tem como limpar — com ${num(c.hp)} de Vida, a queimadura pesa${aMenos(dCont)}` });
+    out.push({ chave: 'continuo', nota: dCont * 0.3, texto: `Contra Dano contínuo: passa ${num(m.danoContinuoRecebido, 1)} s por luta Queimando, Envenenado ou Sangrando e não tem como limpar — com ${num(c.hp)} de Vida, isso pesa${aMenos(dCont)}` });
   }
   // área
   if (dArea >= 6) out.push({ chave: 'area', nota: dArea * 0.3, texto: `Contra Área: com ${num(c.hp)} de Vida, sofre junto com o trio inteiro quando o rival acerta todos de uma vez${aMenos(dArea)}` });
@@ -137,6 +140,29 @@ function candidatas(c: Character, m: Medida): Candidata[] {
   }
   // tanques
   if (dTanque >= 6) out.push({ chave: 'tanque', nota: dTanque * 0.3, texto: `Contra Tanques: o dano dele não dá conta de quem aguenta muito${aMenos(dTanque)}` });
+  /*
+   * As mecânicas novas: cada uma só vira ponto fraco quando o kit dá o motivo
+   * E a medida mostra que ele vence menos contra quem tem aquela tag.
+   */
+  const REFORCO_PROPRIO = ['strengthened', 'haste', 'protected', 'regen', 'barrier', 'evasion', 'vampirism', 'reflect', 'thorns'];
+  const buff = c.skills.find((s) => s.effects.some((e) => e.kind === 'status' && REFORCO_PROPRIO.includes(e.status) && (e.target ?? s.target) === 'self'));
+  const dDis = contra(m, 'Dissipar');
+  if (buff && dDis >= 4) {
+    const st = buff.effects.find((e) => e.kind === 'status' && REFORCO_PROPRIO.includes(e.status))!;
+    out.push({ chave: 'dissipar', nota: dDis * 0.32, texto: `Contra Dissipar: a força dele vem de ${buff.name} (${st.kind === 'status' ? NOME_DO_STATUS[st.status] ?? st.status : ''}) — quem dissipa tira o reforço e ele volta a ser comum${aMenos(dDis)}` });
+  }
+  const DEBUFF_FORTE = ['paralyzed', 'frozen', 'sleep', 'poison', 'bleed', 'burning', 'cursed', 'confused', 'silenced', 'rooted'];
+  const prende = c.skills.find((s) => s.effects.some((e) => e.kind === 'status' && DEBUFF_FORTE.includes(e.status) && (e.target ?? s.target) !== 'self'));
+  const dPur = contra(m, 'Purificar');
+  if (prende && dPur >= 4) out.push({ chave: 'purificar', nota: dPur * 0.32, texto: `Contra Purificar: o plano dele é ${prende.name} — quem purifica limpa o rival e desfaz a jogada${aMenos(dPur)}` });
+  const dProv = contra(m, 'Provocar');
+  if (dProv >= 5) out.push({ chave: 'provocar', nota: dProv * 0.3, texto: `Contra Provocar: o rival que provoca puxa os golpes de ${forte.name} para quem aguenta, longe de quem ele queria derrubar${aMenos(dProv)}` });
+  const dEsq = contra(m, 'Esquiva');
+  if (dEsq >= 5 && danoDe(forte) > 0) out.push({ chave: 'esquiva', nota: dEsq * 0.3, texto: `Contra Esquiva: ${forte.name} é um golpe só — se o rival esquiva, a jogada inteira passa longe${aMenos(dEsq)}` });
+  const dRef = Math.max(contra(m, 'Refletir'), contra(m, 'Espinhos'));
+  if (dRef >= 5 && danoDe(forte) > 0) out.push({ chave: 'refletir', nota: dRef * 0.3, texto: `Contra Refletir e Espinhos: bate forte com ${forte.name} e leva parte do golpe de volta${aMenos(dRef)}` });
+  const dCeg = contra(m, 'Cegueira');
+  if (dCeg >= 5) out.push({ chave: 'cegueira', nota: dCeg * 0.3, texto: `Contra Cegueira: o ataque básico (${c.basic.name}) passa longe com frequência, e é ele que enche a Carga das habilidades${aMenos(dCeg)}` });
   return out;
 }
 

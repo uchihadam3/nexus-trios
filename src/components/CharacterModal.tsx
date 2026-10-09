@@ -1,5 +1,5 @@
 import { useEffect,useRef,type CSSProperties } from 'react';
-import { X,HeartPulse,Gauge,Brain,Info,Sparkles,Swords,TriangleAlert,Zap,Hourglass,Snowflake,Target,Scissors,Bomb,Users,ShieldPlus,FastForward,Flame,Lock,Mountain,Clock,type LucideIcon } from 'lucide-react';
+import { X,HeartPulse,Gauge,Brain,Info,Sparkles,Swords,TriangleAlert,Zap,Hourglass,Snowflake,Target,Scissors,Bomb,Users,ShieldPlus,FastForward,Flame,Lock,Mountain,Clock,Wand2,Droplets,Megaphone,Wind,Repeat,EyeOff,type LucideIcon } from 'lucide-react';
 import type { Character } from '../engine/types';
 import { characters } from '../data/characters';
 import { Portrait } from './Portrait';
@@ -12,7 +12,7 @@ import { ComTermos,TermoBotao } from './Termos';
 import { termoPorId } from '../presentation/glossario';
 import { pontoFraco,type TipoDeFraqueza } from '../data/ponto-fraco';
 
-const ICONE_DA_FRAQUEZA:Record<TipoDeFraqueza,LucideIcon>={interrupcao:Scissors,explosao:Bomb,area:Users,cura:ShieldPlus,rapidos:FastForward,continuo:Flame,controle:Lock,tanques:Mountain,longa:Hourglass,momento:Clock,apanhar:Bomb};
+const ICONE_DA_FRAQUEZA:Record<TipoDeFraqueza,LucideIcon>={interrupcao:Scissors,explosao:Bomb,area:Users,cura:ShieldPlus,rapidos:FastForward,continuo:Flame,controle:Lock,tanques:Mountain,longa:Hourglass,momento:Clock,apanhar:Bomb,dissipar:Wand2,purificar:Droplets,provocar:Megaphone,esquiva:Wind,refletir:Repeat,cegueira:EyeOff};
 
 export function intelligenceLabel(value:number){
   return value>=95?'Excepcional':value>=80?'Muito inteligente':value>=60?'Esperto':value>=40?'Comum':'Impulsivo';
