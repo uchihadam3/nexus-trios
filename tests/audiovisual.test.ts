@@ -4,7 +4,7 @@ import { resolve } from 'node:path';
 import { SOM_DA_FAMILIA,TODOS_OS_SONS,type Manifesto } from '../src/audio/cues';
 import { FAMILIAS,VFX_FAMILIES,folhasUsadas,hsl,profileFor } from '../src/presentation/vfxProfiles';
 import { characters } from '../src/data/characters';
-import { LACO_DA_MUSICA,posicaoNoLaco } from '../src/lib/audio';
+import { FAIXAS,LACO_DA_MUSICA,faixaDaLuta,posicaoNoLaco } from '../src/lib/audio';
 
 const root=process.cwd();
 const familias=JSON.parse(readFileSync(resolve(root,'public/assets/vfx/familias/manifest.json'),'utf8')) as Record<string,{quadros:number;grade:[number,number];tamanho:[number,number];laco:boolean;bytes:number}>;
@@ -105,4 +105,26 @@ describe('compact reusable audiovisual library',()=>{
     // a base é a mais presente; pulso e tema ficam por baixo
     expect(musica.camadas['musica-base']!.rmsDb).toBeGreaterThan(musica.camadas['musica-tema']!.rmsDb);
   });
+  /* Pedido do jogador: a música de agora nas lutas 1–5, uma mais tensa nas 6–9 e uma de chefe na 10. */
+  it('troca de música com a jornada: principal (1–5), tensão (6–9), chefe (10)',()=>{
+    expect(Array.from({length:10},(_,i)=>faixaDaLuta(i))).toEqual(['principal','principal','principal','principal','principal','tensao','tensao','tensao','tensao','chefe']);
+  });
+  for(const [faixa,secoes] of [['tensao',['Intro','Perigo','Pressão','Ruptura','Confronto','Retorno']],['chefe',['Aparição','Duelo','Fúria','Desespero','Último golpe','Virada']]] as const){
+    it(`a música ${faixa} vem nas mesmas três camadas, em OGG e MP3, com o laço na segunda seção`,()=>{
+      const m=JSON.parse(readFileSync(resolve(root,`public/assets/audio/musica-${faixa}.json`),'utf8')) as typeof musica;
+      expect(Object.keys(m.camadas).sort()).toEqual(['base','pulso','tema'].map(c=>`musica-${faixa}-${c}`));
+      expect(m.secoes.map(x=>x.nome)).toEqual(secoes);
+      expect(m.segundos).toBeCloseTo(m.compassos*4*60/m.bpm,1);
+      expect(m.segundos).toBeGreaterThan(100);expect(m.segundos).toBeLessThan(160);
+      // o jogo volta a música no mesmo ponto que o arquivo diz
+      expect(FAIXAS[faixa].laco).toBeCloseTo(m.laco.inicio,2);expect(m.secoes[1]!.inicio).toBeCloseTo(m.laco.inicio,2);
+      expect(FAIXAS[faixa].camadas.map(c=>c.split('/').pop())).toEqual(Object.values(m.camadas).map(c=>c.arquivo));
+      for(const camada of Object.values(m.camadas)){
+        const ogg=readFileSync(resolve(root,'public/assets/audio',camada.arquivo));expect(ogg.subarray(0,4).toString('ascii')).toBe('OggS');expect(ogg.length).toBeLessThan(1_800_000);
+        const mp3=readFileSync(resolve(root,'public/assets/audio',camada.mp3!));const cab=mp3.subarray(0,3);expect(cab.toString('ascii')==='ID3'||(cab[0]===0xff&&(cab[1]!&0xe0)===0xe0)).toBe(true);expect(mp3.length).toBeLessThan(1_800_000);
+      }
+      // o mesmo volume da música principal: trocar de música não pula de volume
+      for(const c of ['base','pulso','tema'])expect(Math.abs(m.camadas[`musica-${faixa}-${c}`]!.rmsDb-musica.camadas[`musica-${c}`]!.rmsDb)).toBeLessThan(2.5);
+    });
+  }
 });

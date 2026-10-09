@@ -17,7 +17,7 @@ import type { ResultadoTop3 } from './lib/top3';
 import { defaults,ESCALA_DOS_PONTOS,loadProfile,loadRun,loadSettings,resetStorage,save,storageAvailable } from './lib/storage';
 import type { Run,Settings } from './lib/storage';
 import { PRIORIDADE,type Sound } from './audio/cues';
-import { battleAudio } from './lib/audio';
+import { battleAudio,faixaDaLuta } from './lib/audio';
 import { createDirection,restoreDirection,checkpointDirection,advanceDirection,type Direction,type Beat,type BeatTrace } from './presentation/director';
 import { PRESENTATION as P } from './presentation/config';
 import type { Battle } from './engine/types';
@@ -252,7 +252,7 @@ export default function App(){
   /* versão nova publicada enquanto a aba estava aberta (src/main.tsx): oferece recarregar */
   const [versaoNova,setVersaoNova]=useState(false);
   useEffect(()=>{const ouve=()=>setVersaoNova(true);window.addEventListener('nexus:versao-nova',ouve);return()=>window.removeEventListener('nexus:versao-nova',ouve);},[]);
-  useEffect(()=>{battleAudio.setBattle(screen==='game'&&run?.stage==='battle'&&!paused&&!details&&!confirmNew&&!confirmAbandon,run?`${run.seed}-${run.index}`:undefined);return()=>battleAudio.setBattle(false);},[screen,run?.stage,run?.seed,run?.index,paused,details,confirmNew,confirmAbandon]);
+  useEffect(()=>{battleAudio.setBattle(screen==='game'&&run?.stage==='battle'&&!paused&&!details&&!confirmNew&&!confirmAbandon,run?`${run.seed}-${run.index}`:undefined,faixaDaLuta(run?.index??0),run&&run.index<9?faixaDaLuta(run.index+1):undefined);return()=>battleAudio.setBattle(false);},[screen,run?.stage,run?.seed,run?.index,paused,details,confirmNew,confirmAbandon]);
   const install=async()=>{if(installEvent){await installEvent.prompt();const choice=await installEvent.userChoice;setInstallEvent(null);if(choice.outcome!=='accepted')setInstallHelp(true);}else setInstallHelp(true);};
   /*
    * A conta vive fora do React: o Supabase mantém a sessão no armazenamento

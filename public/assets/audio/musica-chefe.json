@@ -1,0 +1,59 @@
+{
+ "bpm": 168,
+ "compassos": 80,
+ "segundos": 114.286,
+ "secoes": [
+  {
+   "nome": "Aparição",
+   "inicio": 0.0
+  },
+  {
+   "nome": "Duelo",
+   "inicio": 11.429
+  },
+  {
+   "nome": "Fúria",
+   "inicio": 34.286
+  },
+  {
+   "nome": "Desespero",
+   "inicio": 57.143
+  },
+  {
+   "nome": "Último golpe",
+   "inicio": 68.571
+  },
+  {
+   "nome": "Virada",
+   "inicio": 102.857
+  }
+ ],
+ "estilo": "anime arcade · chefe (v5)",
+ "laco": {
+  "inicio": 11.429,
+  "fim": 114.286
+ },
+ "camadas": {
+  "musica-chefe-base": {
+   "arquivo": "musica-chefe-base.ogg",
+   "mp3": "musica-chefe-base.mp3",
+   "segundos": 114.286,
+   "bytes": 1112053,
+   "rmsDb": -21.2
+  },
+  "musica-chefe-pulso": {
+   "arquivo": "musica-chefe-pulso.ogg",
+   "mp3": "musica-chefe-pulso.mp3",
+   "segundos": 114.286,
+   "bytes": 818068,
+   "rmsDb": -24.7
+  },
+  "musica-chefe-tema": {
+   "arquivo": "musica-chefe-tema.ogg",
+   "mp3": "musica-chefe-tema.mp3",
+   "segundos": 114.286,
+   "bytes": 1361290,
+   "rmsDb": -23.2
+  }
+ }
+}

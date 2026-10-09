@@ -4,7 +4,7 @@
 .home-v2::before{content:'';position:absolute;inset:-40px 0 0;z-index:0;pointer-events:none;background:radial-gradient(ellipse 70% 420px at 50% 6%,#c8f56022,transparent 100%),radial-gradient(ellipse 50% 300px at 15% 85%,#8fd3ff12,transparent 100%),radial-gradient(ellipse 50% 300px at 90% 70%,#ffb86b10,transparent 100%)}
 
 .hv-logo{position:relative;display:grid;place-items:center;height:96px;margin-top:4px}
-.hv-raios{width:330px;height:330px;left:50%;top:50%;translate:-50% -50%;opacity:.45}
+.hv-raios{width:min(330px,100vw);height:min(330px,100vw);left:50%;top:50%;translate:-50% -50%;opacity:.45}
 .hv-faiscas{width:300px;height:220px;left:50%;top:50%;translate:-50% -50%;opacity:.7}
 .hv-logo h1{position:relative;margin:0;display:grid;line-height:1}
 .hv-logo h1 span{font-size:clamp(46px,15vw,72px);font-weight:900;letter-spacing:6px;background:linear-gradient(180deg,#fff 20%,#c8f560 95%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 18px #c8f56055);animation:hv-logo .9s cubic-bezier(.2,1.4,.4,1) both}

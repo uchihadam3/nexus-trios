@@ -21,9 +21,10 @@ import { profileFor } from '../presentation/vfxProfiles';
  * extremo), e varia de versão, de tom e de volume — de forma determinística,
  * pelo número do evento, para o replay soar igual.
  *
- * Música: três camadas do mesmo trecho de ~3 min (base, pulso, tema), em laço.
- * A base toca sempre; o pulso e o tema sobem com a intensidade da luta. Cada
- * luta começa numa seção diferente.
+ * Música: três camadas do mesmo trecho de ~2 min (base, pulso, tema), em laço.
+ * A base toca sempre; o pulso e o tema sobem com a intensidade da luta.
+ * São três músicas (FAIXAS): a principal nas lutas 1 a 5, a de tensão nas
+ * lutas 6 a 9 e a do chefe na luta 10 (tools/audio/generate_music_v5.py).
  */
 const SFX='/assets/audio/sfx/';
 export const AUDIO_ASSETS={battleLoop:null as string|null,battleStems:['/assets/audio/musica-base.ogg','/assets/audio/musica-pulso.ogg','/assets/audio/musica-tema.ogg'] as const};
@@ -36,10 +37,26 @@ export const AUDIO_ASSETS={battleLoop:null as string|null,battleStems:['/assets/
 export function tocaOgg(){try{return typeof Audio!=='undefined'&&new Audio().canPlayType('audio/ogg; codecs="vorbis"')!=='';}catch{return false;}}
 export const LACO_DA_MUSICA=12.308;
 /** Posição na música depois de `t` segundos tocando, a partir de `inicio`, respeitando o laço. */
-export function posicaoNoLaco(inicio:number,t:number,duracao:number){
+export function posicaoNoLaco(inicio:number,t:number,duracao:number,laco=LACO_DA_MUSICA){
   const p=inicio+t;if(p<duracao)return p;
-  const volta=duracao-LACO_DA_MUSICA;return LACO_DA_MUSICA+((p-LACO_DA_MUSICA)%volta);
+  const volta=duracao-laco;return laco+((p-laco)%volta);
 }
+export type Faixa='principal'|'tensao'|'chefe';
+const camadas=(nome:string)=>(['base','pulso','tema'] as const).map(c=>`/assets/audio/${nome}-${c}.ogg`);
+/*
+ * As três músicas de batalha. `laco`: onde a música volta depois do fim (o
+ * começo da segunda seção, em segundos — musica*.json).
+ *   principal (lutas 1–5): anime arcade, mi menor, 156 BPM (v4)
+ *   tensao    (lutas 6–9): ré menor harmônica, 150 BPM, mais séria (v5)
+ *   chefe     (luta 10):   dó menor frígio, 168 BPM, coro, sinos e metais (v5)
+ */
+export const FAIXAS:Record<Faixa,{camadas:readonly string[];laco:number}>={
+  principal:{camadas:AUDIO_ASSETS.battleStems,laco:LACO_DA_MUSICA},
+  tensao:{camadas:camadas('musica-tensao'),laco:12.8},
+  chefe:{camadas:camadas('musica-chefe'),laco:11.429},
+};
+/** Qual música toca em cada luta (índice 0–9). */
+export const faixaDaLuta=(indice:number):Faixa=>indice>=9?'chefe':indice>=5?'tensao':'principal';
 const MAX_VOZES=5;
 export interface MusicMood {heat:number;pressure:number;time:number}
 class BattleAudio {
@@ -48,8 +65,11 @@ class BattleAudio {
   private music:GainNode|null=null;
   private effects:GainNode|null=null;
   private bus:GainNode|null=null;
-  private stemBuffers:(AudioBuffer|null)[]=[];
-  private stemLoading:Promise<void>|null=null;
+  /* as camadas decodificadas de cada música (carregadas uma vez; a próxima música chega antes da luta dela) */
+  private carregadas=new Map<Faixa,{buffers:(AudioBuffer|null)[];loading:Promise<void>|null}>();
+  private faixa:Faixa='principal';
+  private da(faixa:Faixa){let c=this.carregadas.get(faixa);if(!c){c={buffers:FAIXAS[faixa].camadas.map(()=>null),loading:null};this.carregadas.set(faixa,c);}return c;}
+  private get stemBuffers(){return this.da(this.faixa).buffers;}
   private stemSources:AudioBufferSourceNode[]=[];
   private stemGains:GainNode[]=[];
   private startToken=0;
@@ -103,10 +123,20 @@ class BattleAudio {
   /** Onde cada lutador está na tela (x em %), para o som vir do lado certo. */
   setPositions(anchors:Record<string,{x:number;y:number}>){this.posicoes=Object.fromEntries(Object.entries(anchors).filter(([k])=>/^(player|enemy)-\d$/.test(k)).map(([k,a])=>[k,a.x]));}
   private pan(uid?:string){if(!uid)return 0;const x=this.posicoes[uid]??(17+(Number(uid.split('-')[1])||0)*33);return Math.max(-.45,Math.min(.45,(x-50)/50*.5));}
-  /** Liga/desliga a música da luta. `luta` identifica a luta: numa luta nova a música começa numa seção sorteada; na mesma luta (depois de uma pausa) continua de onde parou. */
-  setBattle(active:boolean,luta?:string){
+  /**
+   * Liga/desliga a música da luta. `luta` identifica a luta: numa luta nova a
+   * música começa do início; na mesma luta (depois de uma pausa) continua de
+   * onde parou. `faixa`: qual das três músicas; `proxima`: a da luta seguinte,
+   * que já vai sendo carregada.
+   */
+  setBattle(active:boolean,luta?:string,faixa:Faixa='principal',proxima?:Faixa){
     this.active=active;
-    if(active){if(luta!==undefined&&luta!==this.luta){this.luta=luta;this.musicOffset=0;}this.start();void this.preloadCues();}
+    if(active){
+      if(faixa!==this.faixa){this.stop();this.faixa=faixa;this.musicOffset=0;}
+      if(luta!==undefined&&luta!==this.luta){this.luta=luta;this.musicOffset=0;}
+      this.start();void this.preloadCues();
+      if(proxima&&proxima!==faixa)void this.loadStems().then(()=>this.loadStems(proxima));
+    }
     else this.stop();
   }
   setMood(mood:MusicMood){
@@ -131,28 +161,28 @@ class BattleAudio {
     this.running=true;const token=++this.startToken;this.bus=this.ctx.createGain();this.bus.gain.setValueAtTime(0,this.ctx.currentTime);this.bus.gain.linearRampToValueAtTime(1,this.ctx.currentTime+2.4);this.bus.connect(this.music);
     void this.playStems(token);
   }
-  private loadStems(){
+  private loadStems(faixa:Faixa=this.faixa){
     const ctx=this.ctx;if(!ctx)return Promise.resolve();
-    if(!this.stemLoading){
-      this.stemBuffers=AUDIO_ASSETS.battleStems.map(()=>null);
+    const alvo=this.da(faixa);
+    if(!alvo.loading){
       // a base primeiro: a música começa assim que ela chega; as outras camadas entram depois
-      this.stemLoading=AUDIO_ASSETS.battleStems.reduce<Promise<void>>((anterior,path,index)=>anterior.then(async()=>{
+      alvo.loading=FAIXAS[faixa].camadas.reduce<Promise<void>>((anterior,path,index)=>anterior.then(async()=>{
         // OGG onde o navegador toca OGG; senão (iPhone/Safari) o MP3. Se o OGG não decodificar, tenta o MP3.
         const mp3=path.replace(/\.ogg$/,'.mp3'),ordem=tocaOgg()?[path,mp3]:[mp3];
         for(const arquivo of ordem){
-          try{const r=await fetch(arquivo);if(!r.ok)continue;this.stemBuffers[index]=await ctx.decodeAudioData(await r.arrayBuffer());this.attachStem(index);return;}catch{/* tenta o próximo formato */}
+          try{const r=await fetch(arquivo);if(!r.ok)continue;alvo.buffers[index]=await ctx.decodeAudioData(await r.arrayBuffer());if(faixa===this.faixa)this.attachStem(index);return;}catch{/* tenta o próximo formato */}
         }
       }),Promise.resolve());
     }
-    return this.stemLoading;
+    return alvo.loading;
   }
   private attachStem(index:number){
     const ctx=this.ctx,bus=this.bus,buffer=this.stemBuffers[index];
     if(!ctx||!bus||!buffer||!this.running||this.stemSources[index])return;
     if(index===0)this.musicStartedAt=ctx.currentTime+.05;
     const base=this.stemBuffers[0];if(!base)return;
-    const source=ctx.createBufferSource(),gain=ctx.createGain();source.buffer=buffer;source.loop=true;source.loopStart=Math.min(LACO_DA_MUSICA,buffer.duration-1);source.loopEnd=buffer.duration;
-    const posicao=posicaoNoLaco(this.musicOffset,Math.max(0,ctx.currentTime+.05-this.musicStartedAt),buffer.duration);
+    const source=ctx.createBufferSource(),gain=ctx.createGain();source.buffer=buffer;source.loop=true;source.loopStart=Math.min(FAIXAS[this.faixa].laco,buffer.duration-1);source.loopEnd=buffer.duration;
+    const posicao=posicaoNoLaco(this.musicOffset,Math.max(0,ctx.currentTime+.05-this.musicStartedAt),buffer.duration,FAIXAS[this.faixa].laco);
     gain.gain.setValueAtTime(0,ctx.currentTime);gain.gain.linearRampToValueAtTime(this.stemLevels()[index],ctx.currentTime+(index===0?.05:2));
     source.connect(gain);gain.connect(bus);source.onended=()=>{source.disconnect();gain.disconnect();};
     source.start(ctx.currentTime+.05,posicao);this.stemSources[index]=source;this.stemGains[index]=gain;
@@ -272,7 +302,7 @@ class BattleAudio {
     if(grand){this.sound('grand-impacto',PRIORIDADE.grand,panAlvo,chave);if(som)this.sound(som.impacto,PRIORIDADE.importante,panAlvo,chave+1);return;}
     if(som)this.sound(som.impacto,apoio?PRIORIDADE.apoio:event.kind==='skill'?PRIORIDADE.habilidade:PRIORIDADE.basico,panAlvo,chave);
   }
-  private posicaoDaMusica(){const base=this.stemBuffers[0];return this.running&&this.ctx&&this.musicStartedAt&&base&&this.stemSources[0]?posicaoNoLaco(this.musicOffset,Math.max(0,this.ctx.currentTime-this.musicStartedAt),base.duration):this.musicOffset;}
-  get status(){const base=this.stemBuffers[0];const trackSeconds=this.posicaoDaMusica();return {state:this.ctx?.state??'locked',musicRunning:this.running,mode:this.stemSources.length?'stems':'synth',stemsPlaying:this.stemSources.filter(Boolean).length,musicSeconds:base?.duration??0,trackSeconds,activeCues:this.vozes.length,loadedCues:this.buffers.size,step:this.step};}
+  private posicaoDaMusica(){const base=this.stemBuffers[0];return this.running&&this.ctx&&this.musicStartedAt&&base&&this.stemSources[0]?posicaoNoLaco(this.musicOffset,Math.max(0,this.ctx.currentTime-this.musicStartedAt),base.duration,FAIXAS[this.faixa].laco):this.musicOffset;}
+  get status(){const base=this.stemBuffers[0];const trackSeconds=this.posicaoDaMusica();return {state:this.ctx?.state??'locked',musicRunning:this.running,mode:this.stemSources.length?'stems':'synth',faixa:this.faixa,stemsPlaying:this.stemSources.filter(Boolean).length,musicSeconds:base?.duration??0,trackSeconds,activeCues:this.vozes.length,loadedCues:this.buffers.size,step:this.step};}
 }
 export const battleAudio=new BattleAudio();

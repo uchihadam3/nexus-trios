@@ -1,0 +1,59 @@
+{
+ "bpm": 150,
+ "compassos": 80,
+ "segundos": 128.0,
+ "secoes": [
+  {
+   "nome": "Intro",
+   "inicio": 0.0
+  },
+  {
+   "nome": "Perigo",
+   "inicio": 12.8
+  },
+  {
+   "nome": "Pressão",
+   "inicio": 38.4
+  },
+  {
+   "nome": "Ruptura",
+   "inicio": 64.0
+  },
+  {
+   "nome": "Confronto",
+   "inicio": 76.8
+  },
+  {
+   "nome": "Retorno",
+   "inicio": 115.2
+  }
+ ],
+ "estilo": "anime arcade · tensão (v5)",
+ "laco": {
+  "inicio": 12.8,
+  "fim": 128.0
+ },
+ "camadas": {
+  "musica-tensao-base": {
+   "arquivo": "musica-tensao-base.ogg",
+   "mp3": "musica-tensao-base.mp3",
+   "segundos": 128.0,
+   "bytes": 1357251,
+   "rmsDb": -22.3
+  },
+  "musica-tensao-pulso": {
+   "arquivo": "musica-tensao-pulso.ogg",
+   "mp3": "musica-tensao-pulso.mp3",
+   "segundos": 128.0,
+   "bytes": 1017577,
+   "rmsDb": -25.8
+  },
+  "musica-tensao-tema": {
+   "arquivo": "musica-tensao-tema.ogg",
+   "mp3": "musica-tensao-tema.mp3",
+   "segundos": 128.0,
+   "bytes": 1663070,
+   "rmsDb": -24.3
+  }
+ }
+}

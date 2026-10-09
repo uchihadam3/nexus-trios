@@ -25,7 +25,11 @@
 @keyframes gs-veu{from{opacity:0}}
 .gs-nav.aberto{display:block;position:fixed;top:62px;left:0;right:0;z-index:2;padding:14px 14px 18px;background:linear-gradient(180deg,#0d150fee,#0b120ef7);box-shadow:0 24px 40px #000a,inset 0 -1px 0 #c8f56026;animation:gs-desce .26s cubic-bezier(.2,.9,.3,1.2) both}
 @keyframes gs-desce{from{transform:translateY(-14px);opacity:0}}
-.gs-nav-grade{display:grid;grid-template-columns:1fr 1fr;gap:10px;max-width:520px;margin:0 auto}
+/* minmax(0,1fr): sem isso, "Configurações" alargava a coluna da esquerda e a da direita saía da tela em celulares estreitos */
+.gs-nav-grade{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;max-width:520px;margin:0 auto}
+.gs-nav-grade button{min-width:0}
+.gs-nav-grade b{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+@media (max-width:380px){.gs-nav-grade{gap:8px}.gs-nav-grade button{gap:8px;padding:9px 9px}.gs-nav-grade button svg{width:34px;height:34px;padding:7px}.gs-nav-grade b{font-size:13px}.gs-nav-grade small{font-size:10px;padding:2px 5px}}
 .gs-nav-grade button{position:relative;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:10px;min-height:64px;padding:10px 12px;border:0;border-radius:16px;cursor:pointer;text-align:left;color:#f2f7ec;background:linear-gradient(160deg,color-mix(in srgb,var(--tile),#0f1712 84%),#0e1511);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--tile),transparent 66%),inset 0 1px 0 #ffffff12;animation:gs-tile .32s calc(var(--k)*45ms) cubic-bezier(.2,.9,.3,1.3) both;transition:transform .12s}
 @keyframes gs-tile{from{transform:translateY(10px) scale(.94);opacity:0}}
 .gs-nav-grade button:active{transform:scale(.95)}
