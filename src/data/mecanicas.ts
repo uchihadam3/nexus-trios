@@ -1,4 +1,4 @@
-import type { Character, Effect, StatusId } from '../engine/types';
+import type { Character, Effect, StatusId, Target } from '../engine/types';
 
 /*
  * Mecânicas novas, por personagem (pedido do jogador: "levantar personagem
@@ -49,15 +49,64 @@ export const PROVOCAR: Record<string, { habilidade: number; duracao: number; tro
   alphonse: { habilidade: 1, duracao: 4, troca: 'weakened' }, // a armadura chama o golpe para si
 };
 
+/** Roubo de vida: a habilidade cura quem age em `fracao` do dano que ela mesma causou. */
+export const ROUBO_DE_VIDA: Record<string, { habilidade: number; fracao: number; troca?: StatusId }> = {
+  rogue: { habilidade: 0, fracao: 0.5 }, // Vampira: o toque absorve
+  blade: { habilidade: 1, fracao: 0.3, troca: 'weakened' }, // meio-vampiro: a lâmina de prata bebe
+  dio: { habilidade: 0, fracao: 0.25 }, // "Muda": o vampiro se alimenta no golpe
+  galactus: { habilidade: 0, fracao: 0.4, troca: 'slow' }, // Dreno planetário
+  malenia: { habilidade: 0, fracao: 0.35 }, // cada acerto a cura
+  arthas: { habilidade: 0, fracao: 0.3 }, // a Ceifadora de Almas come almas
+  cell: { habilidade: 0, fracao: 0.3 }, // Absorção
+};
+
+/**
+ * Status novos dados por uma habilidade (Vampirismo, Refletir, Espinhos), com
+ * `troca`: o Status que sai para dar lugar, para o personagem ficar diferente
+ * em vez de só ganhar mais um efeito.
+ */
+export interface GanhaStatus { habilidade: number; status: StatusId; valor: number; duracao: number; alvo?: Target; troca?: StatusId }
+export const GANHA_STATUS: Record<string, GanhaStatus[]> = {
+  // Vampirismo: por um tempo, todo golpe cura
+  alucardcv: [{ habilidade: 1, status: 'vampirism', valor: 0.3, duracao: 8, alvo: 'self' }],
+  nezuko: [{ habilidade: 2, status: 'vampirism', valor: 0.25, duracao: 8, alvo: 'self' }],
+  kaneki: [{ habilidade: 2, status: 'vampirism', valor: 0.3, duracao: 7, alvo: 'self', troca: 'regen' }],
+  carnage: [{ habilidade: 1, status: 'vampirism', valor: 0.3, duracao: 7, alvo: 'self', troca: 'regen' }],
+  venom: [{ habilidade: 2, status: 'vampirism', valor: 0.3, duracao: 8, alvo: 'self' }],
+  muzan: [{ habilidade: 2, status: 'vampirism', valor: 0.25, duracao: 9, alvo: 'self' }],
+  // Refletir: devolve parte do golpe recebido
+  giorno: [{ habilidade: 1, status: 'reflect', valor: 0.35, duracao: 6, alvo: 'allyWeak', troca: 'protected' }], // Reflexo de dano
+  link: [{ habilidade: 1, status: 'reflect', valor: 0.35, duracao: 6, alvo: 'self', troca: 'exposed' }], // o Escudo Hyliano rebate
+  iroh: [{ habilidade: 1, status: 'reflect', valor: 0.4, duracao: 5, alvo: 'self', troca: 'exposed' }], // Redirecionar
+  zuko: [{ habilidade: 1, status: 'reflect', valor: 0.35, duracao: 5, alvo: 'self' }], // Redirecionar relâmpago
+  splinter: [{ habilidade: 1, status: 'reflect', valor: 0.35, duracao: 5, alvo: 'self' }], // Redirecionar
+  shiryu: [{ habilidade: 0, status: 'reflect', valor: 0.3, duracao: 6, alvo: 'allyWeak' }], // o Escudo do Dragão devolve o golpe
+  mewtwo: [{ habilidade: 1, status: 'reflect', valor: 0.25, duracao: 6, alvo: 'allAllies', troca: 'confused' }], // Barreira (Reflect)
+  // Espinhos: quem bate se machuca a cada golpe
+  groot: [{ habilidade: 0, status: 'thorns', valor: 18, duracao: 6, alvo: 'allyWeak' }], // galhos com espinhos
+  bowser: [{ habilidade: 1, status: 'thorns', valor: 16, duracao: 8, alvo: 'self' }], // o casco cheio de pontas
+  edward: [{ habilidade: 1, status: 'thorns', valor: 15, duracao: 6, alvo: 'allyWeak' }], // a muralha sai com estacas
+  toph: [{ habilidade: 1, status: 'thorns', valor: 12, duracao: 6, alvo: 'allAllies', troca: 'marked' }], // pontas de pedra
+  frozone: [{ habilidade: 1, status: 'thorns', valor: 14, duracao: 6, alvo: 'allAllies' }], // a parede vira estalactites
+  gaara: [{ habilidade: 0, status: 'thorns', valor: 18, duracao: 6, alvo: 'allyWeak' }], // a areia responde sozinha
+};
+
 type Mudanca = (effects: Effect[]) => Effect[];
+const semStatus = (troca?: StatusId) => (x: Effect) => !(troca && x.kind === 'status' && x.status === troca);
 const mudancasDe = (id: string): Map<number, Mudanca[]> => {
   const m = new Map<number, Mudanca[]>();
   const poe = (i: number, f: Mudanca) => m.set(i, [...(m.get(i) ?? []), f]);
-  const reviver = REVIVER[id], provocar = PROVOCAR[id];
+  const reviver = REVIVER[id], provocar = PROVOCAR[id], roubo = ROUBO_DE_VIDA[id];
   if (reviver) poe(reviver.habilidade, (e) => [...e, { kind: 'revive', value: reviver.vida, target: 'allyFallen' }]);
   if (provocar) poe(provocar.habilidade, (e) => [
-    ...e.filter((x) => !(provocar.troca && x.kind === 'status' && x.status === provocar.troca)),
+    ...e.filter(semStatus(provocar.troca)),
     { kind: 'status', status: 'provoked', value: 1, duration: provocar.duracao, target: 'allEnemies' },
+  ]);
+  // o roubo de vida vem depois do dano: cura pelo que a habilidade causou
+  if (roubo) poe(roubo.habilidade, (e) => [...e.filter(semStatus(roubo.troca)), { kind: 'lifesteal', value: roubo.fracao }]);
+  for (const g of GANHA_STATUS[id] ?? []) poe(g.habilidade, (e) => [
+    ...e.filter(semStatus(g.troca)),
+    { kind: 'status', status: g.status, value: g.valor, duration: g.duracao, ...(g.alvo ? { target: g.alvo } : {}) },
   ]);
   return m;
 };

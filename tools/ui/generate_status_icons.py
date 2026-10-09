@@ -27,6 +27,7 @@ CORES = {
     "slow": "#9fa8ff", "haste": "#c8f560", "confused": "#d68cff", "rooted": "#d9dde6",
     "regen": "#7fe88f", "burning": "#ff8a3d", "electric": "#ffe45c", "silenced": "#b49cff",
     "strengthened": "#ffd166", "weakened": "#b8a2d6", "provoked": "#ff7048",
+    "vampirism": "#ff4f6e", "reflect": "#8fd8ff", "thorns": "#9fd65e",
 }
 
 
@@ -198,12 +199,52 @@ def raiva(d):
             linha(d, pts, 0.33)
 
 
+def presas(d):
+    """Vampirismo: uma gota de sangue com duas presas mordendo por cima."""
+    pts = []
+    for i in range(80):
+        a = i / 79 * 2 * math.pi
+        x = 0.55 * math.sin(a)
+        y = 0.25 - 0.55 * math.cos(a)
+        if y < 0.25:
+            y = 0.25 - (0.25 - y) * 1.0
+        pts.append((x, y + 0.12))
+    # a gota: círculo embaixo e ponta para cima
+    poly(d, [(0.0, -0.95)] + [(0.55 * math.cos(a), 0.3 + 0.55 * math.sin(a)) for a in np.linspace(-0.25, math.pi + 0.25, 60)][::-1])
+    circ(d, 0, 0.3, 0.55)
+    # presas (vazadas)
+    for sx in (-1, 1):
+        poly(d, [(sx * 0.32, 0.05), (sx * 0.1, 0.05), (sx * 0.21, 0.5)], 0)
+
+
+def espelho(d):
+    """Refletir: hexágono de espelho com uma seta que bate e volta."""
+    hexa = [(0.86 * math.cos(k * math.pi / 3 + math.pi / 6), 0.86 * math.sin(k * math.pi / 3 + math.pi / 6)) for k in range(6)]
+    poly(d, hexa)
+    poly(d, [(x * 0.7, y * 0.7) for x, y in hexa], 0)
+    # seta em V: entra e volta
+    linha(d, [(-0.42, -0.35), (0.12, 0.18), (-0.42, 0.42)], 0.16)
+    poly(d, [(-0.62, 0.3), (-0.3, 0.58), (-0.58, 0.62)])
+    circ(d, 0.22, 0.18, 0.12)
+
+
+def espinhos_icone(d):
+    """Espinhos: um anel com pontas para fora."""
+    circ(d, 0, 0, 0.42)
+    circ(d, 0, 0, 0.22, 0)
+    for k in range(8):
+        a = k * math.pi / 4 + math.pi / 8
+        n = (-math.sin(a) * 0.17, math.cos(a) * 0.17)
+        b = (0.36 * math.cos(a), 0.36 * math.sin(a))
+        poly(d, [(b[0] + n[0], b[1] + n[1]), (0.98 * math.cos(a), 0.98 * math.sin(a)), (b[0] - n[0], b[1] - n[1])])
+
+
 SIMBOLOS = {
     "burning": chama, "confused": espiral, "electric": raio, "exposed": escudo_rachado,
     "haste": setas, "marked": mira, "paralyzed": pausa, "protected": escudo,
     "regen": coracao_mais, "rooted": cadeado, "silenced": balao_riscado, "slow": ampulheta,
     "strengthened": espada, "weakened": lambda d: espada(d, quebrada=True, invertida=True),
-    "provoked": raiva,
+    "provoked": raiva, "vampirism": presas, "reflect": espelho, "thorns": espinhos_icone,
 }
 
 
@@ -250,7 +291,7 @@ NOMES = {
     "exposed": "Exposto", "paralyzed": "Paralisado", "protected": "Protegido", "marked": "Marcado", "slow": "Lento",
     "haste": "Acelerado", "confused": "Confuso", "rooted": "Preso", "regen": "Regeneração", "burning": "Queimando",
     "electric": "Eletrificado", "silenced": "Silenciado", "strengthened": "Fortalecido", "weakened": "Enfraquecido",
-    "provoked": "Provocado",
+    "provoked": "Provocado", "vampirism": "Vampirismo", "reflect": "Refletir", "thorns": "Espinhos",
 }
 
 

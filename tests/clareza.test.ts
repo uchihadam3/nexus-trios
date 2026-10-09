@@ -191,8 +191,8 @@ describe('clareza da escrita pública', () => {
         expect(p.mostrarAlvo, `${c.name} · ${s.name} ainda mostra Alvo`).toBe(false);
         p.effects.forEach((linha, i) => {
           const e = s.effects[i]!;
-          /* Guardar/liberar energia e a Death Note se explicam na própria frase. */
-          if (['store', 'release', 'deathnote'].includes(e.kind)) return;
+          /* Guardar/liberar energia, a Death Note, reviver e roubo de vida se explicam na própria frase. */
+          if (['store', 'release', 'deathnote', 'revive', 'lifesteal'].includes(e.kind)) return;
           /* Status diz "em si próprio"; os demais dizem "→ o próprio personagem". */
           const alvo = e.kind === 'status'
             ? targetNamesEm[e.target ?? s.target]

@@ -91,18 +91,20 @@ const acumulacaoDe=(id:StatusId):string=>{
  */
 const SEM_VALOR=new Set<StatusId>(['paralyzed','confused','silenced','marked','provoked']);
 const deVida=(id:StatusId)=>id==='regen'||id==='burning';
+/* Espinhos é um número fixo por golpe, não %. */
+const porGolpe=(id:StatusId)=>id==='thorns';
 export function valorAtualDoStatus(id:StatusId,intensidade:number):string|null{
   if(SEM_VALOR.has(id))return null;
   const v=Math.min(intensidade,statuses[id].cap);
   if(id==='electric')return `−${Math.round(v*CHOQUE_DO_ELETRIFICADO*100)}%`; // o choque na barra de ação, não dano
-  return deVida(id)?`${n(v)} de Vida/s`:pct(v);
+  return deVida(id)?`${n(v)} de Vida/s`:porGolpe(id)?`${n(v)} por golpe`:pct(v);
 }
 /* Até onde as aplicações somam — só para os Status que somam. */
 export function tetoDoStatus(id:StatusId):string|null{
   const def=statuses[id];
   if(def.stack!=='add')return null;
   if(id==='electric')return `−${Math.round(def.cap*CHOQUE_DO_ELETRIFICADO*100)}%`;
-  return deVida(id)?`${n(def.cap)} de Vida/s`:pct(def.cap);
+  return deVida(id)?`${n(def.cap)} de Vida/s`:porGolpe(id)?`${n(def.cap)} por golpe`:pct(def.cap);
 }
 
 export function presentStatus(id:StatusId,value:number):StatusPresentation {
@@ -131,9 +133,11 @@ export function presentStatus(id:StatusId,value:number):StatusPresentation {
     regen:`Recupera ${number} de Vida por segundo`,burning:`Perde ${number} de Vida por segundo`,
     silenced:'Não começa novas habilidades',strengthened:`+${percent} de dano`,weakened:`−${percent} de dano`,
     provoked:'Só mira em quem provocou',
+    vampirism:`Cura ${percent} do dano que causa`,reflect:`Devolve ${percent} do dano recebido a quem bateu`,
+    thorns:`Quem bate leva ${number} de dano por golpe`,
   };
   return {name:statuses[id].name,tone:positiveStatuses.has(id)?'positivo':'negativo',summary:summary[id],
-    value:['regen','burning'].includes(id)?number:percent,accumulation:acumulacaoDe(id)};
+    value:['regen','burning','thorns'].includes(id)?number:percent,accumulation:acumulacaoDe(id)};
 }
 /*
  * Os efeitos de uma habilidade, reunidos por em quem caem.
@@ -159,7 +163,7 @@ export interface GrupoDeEfeitos {titulo:string;linhas:LinhaDeEfeito[]}
  * alvo, então herdaria o da habilidade — e um "Guarda 40 de energia" sob o
  * cabeçalho "No inimigo mais ferido" estaria simplesmente mentindo.
  */
-const seExplicaSozinho=new Set<Effect['kind']>(['store','release','deathnote','revive']);
+const seExplicaSozinho=new Set<Effect['kind']>(['store','release','deathnote','revive','lifesteal']);
 const maiuscula=(t:string):string=>t.charAt(0).toUpperCase()+t.slice(1);
 
 /*
@@ -180,6 +184,7 @@ export function valorCurto(id:StatusId,value:number):string[]{
     exposed:`+${v} de dano recebido`,marked:'na mira · atravessa escudo',electric:`choque: −${Math.round(value*CHOQUE_DO_ELETRIFICADO*100)}% da barra por golpe`,
     protected:`−${v} de dano recebido`,slow:`${v} mais lento`,rooted:`${v} mais lento`,haste:`${v} mais rápido`,
     regen:`+${v} Vida/s`,burning:`−${v} Vida/s`,strengthened:`+${v} de dano`,weakened:`−${v} de dano`,
+    vampirism:`cura ${v} do dano causado`,reflect:`devolve ${v} do dano`,thorns:`${v} de dano em quem bate`,
   };
   return curto[id]?[curto[id]!]:[];
 }
@@ -315,6 +320,7 @@ export function presentEffect(effect:Effect,defaultTarget:Target,modo:ModoDeAlvo
     case 'shift':return `${effect.value>=0?'Adianta':'Atrasa'} ${pct(Math.abs(effect.value))} do próximo ataque${target}`;
     case 'investigate':return `+${n(effect.value)} Investigação${target}`;
     case 'revive':return `Levanta um aliado caído com ${pct(effect.value)} da Vida · 1 vez por luta`;
+    case 'lifesteal':return `Roubo de vida: recupera ${pct(effect.value)} do dano causado`;
     case 'deathnote':return 'Com 100 Investigação: elimina o alvo vulnerável; contra imune, 110 de dano e Exposto +55% por 14 s';
     case 'charge':return `+${n(effect.value)}% de Carga para habilidades${target}`;
     case 'store':return `Guarda ${n(effect.value)} de energia (até ${n(effect.cap)})`;

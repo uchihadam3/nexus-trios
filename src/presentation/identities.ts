@@ -29,7 +29,7 @@ export type Identidade =
   | 'Tanque' | 'Sobrevivência' | 'Proteção' | 'Cura' | 'Regeneração'
   | 'Controle' | 'Interrupção' | 'Ritmo' | 'Suporte' | 'Carga'
   | 'Buff' | 'Debuff' | 'Virada' | 'Preparação' | 'Transformação'
-  | 'Contra-ataque' | 'Especialista' | 'Reviver' | 'Renascer' | 'Provocar';
+  | 'Contra-ataque' | 'Especialista' | 'Reviver' | 'Renascer' | 'Provocar' | 'Roubo de vida' | 'Refletir' | 'Espinhos';
 
 /*
  * A taxonomia da direção tinha 23 termos. Este arquivo tem 22.
@@ -66,6 +66,9 @@ export const explicacaoDaIdentidade: Record<Identidade, string> = {
   'Contra-ataque': 'Apanhar é o que carrega as habilidades dele.',
   'Especialista': 'Só age na situação certa, e aí resolve.',
   'Reviver': 'Levanta um aliado que caiu, uma vez por luta.',
+  'Roubo de vida': 'Os golpes dele curam: parte do dano que causa volta como Vida.',
+  'Refletir': 'Devolve parte de cada golpe recebido para quem bateu.',
+  'Espinhos': 'Quem bate se fere: cada golpe recebido devolve um dano fixo.',
   'Provocar': 'Chama a briga: os rivais só conseguem mirar nele por alguns segundos.',
   'Renascer': 'Quando cai, volta sozinho uma vez, com parte da Vida.',
 };
@@ -75,7 +78,7 @@ export const ordemDasIdentidades: readonly Identidade[] = [
   'Pressão', 'Explosão', 'Área', 'Dano contínuo', 'Finalização',
   'Controle', 'Interrupção', 'Debuff', 'Ritmo',
   'Reviver', 'Cura', 'Proteção', 'Buff', 'Carga', 'Suporte',
-  'Provocar', 'Renascer', 'Tanque', 'Regeneração', 'Sobrevivência',
+  'Provocar', 'Refletir', 'Espinhos', 'Roubo de vida', 'Renascer', 'Tanque', 'Regeneração', 'Sobrevivência',
   'Transformação', 'Contra-ataque', 'Preparação', 'Virada', 'Especialista',
 ];
 
@@ -83,7 +86,7 @@ export const ordemDasIdentidades: readonly Identidade[] = [
 export const familiaDaIdentidade: Record<Identidade, 'ataque' | 'atrapalha' | 'ajuda' | 'aguenta' | 'jeito'> = {
   'Pressão': 'ataque', 'Explosão': 'ataque', 'Área': 'ataque', 'Dano contínuo': 'ataque', 'Finalização': 'ataque',
   'Controle': 'atrapalha', 'Interrupção': 'atrapalha', 'Debuff': 'atrapalha', 'Ritmo': 'atrapalha',
-  'Reviver': 'ajuda', 'Renascer': 'aguenta', 'Provocar': 'aguenta', 'Cura': 'ajuda', 'Proteção': 'ajuda', 'Buff': 'ajuda', 'Carga': 'ajuda', 'Suporte': 'ajuda',
+  'Reviver': 'ajuda', 'Renascer': 'aguenta', 'Provocar': 'aguenta', 'Refletir': 'aguenta', 'Espinhos': 'aguenta', 'Roubo de vida': 'aguenta', 'Cura': 'ajuda', 'Proteção': 'ajuda', 'Buff': 'ajuda', 'Carga': 'ajuda', 'Suporte': 'ajuda',
   'Tanque': 'aguenta', 'Regeneração': 'aguenta', 'Sobrevivência': 'aguenta',
   'Transformação': 'jeito', 'Contra-ataque': 'jeito', 'Preparação': 'jeito', 'Virada': 'jeito', 'Especialista': 'jeito',
 };
@@ -119,7 +122,7 @@ export const oQueAdiciona = (candidato: Character | string, trio: readonly (Char
  */
 const LACUNAS: readonly { texto: string; cobertaPor: readonly Identidade[] }[] = [
   { texto: 'Pouca proteção', cobertaPor: ['Proteção', 'Tanque', 'Provocar'] },
-  { texto: 'Pouca recuperação', cobertaPor: ['Cura', 'Regeneração', 'Reviver', 'Renascer'] },
+  { texto: 'Pouca recuperação', cobertaPor: ['Cura', 'Regeneração', 'Reviver', 'Renascer', 'Roubo de vida'] },
   { texto: 'Pouca interrupção', cobertaPor: ['Interrupção', 'Controle'] },
   { texto: 'Pouco dano concentrado', cobertaPor: ['Explosão', 'Finalização'] },
 ];
@@ -169,6 +172,9 @@ export const guiaDaIdentidade: Record<Identidade, GuiaDaIdentidade> = {
   'Transformação': { naLuta: ['Muda de forma ou fica mais forte no meio da luta.', 'O começo é mais fraco; o final é o melhor momento.'], combina: ['Tanque', 'Proteção'], cuidado: 'Explosão no começo derruba antes da transformação.' },
   'Contra-ataque': { naLuta: ['Cada golpe que recebe carrega as habilidades dele.', 'Quanto mais apanha, mais rápido revida.'], combina: ['Tanque', 'Regeneração'], cuidado: 'Controle e dano contínuo machucam sem dar Carga a ele.' },
   'Especialista': { naLuta: ['Espera a situação certa para agir.', 'Quando ela aparece, decide a luta.'], combina: ['Suporte', 'Carga'], cuidado: 'Se a situação não aparecer, ele faz pouco.' },
+  'Roubo de vida': { naLuta: ['Os golpes curam quem bate: parte do dano volta como Vida.', 'Quanto mais ele acerta, mais tempo fica de pé.'], combina: ['Buff', 'Provocar'], cuidado: 'Se não acerta, não se cura: Lento, Paralisado e Enfraquecido cortam a cura junto com o dano.' },
+  'Refletir': { naLuta: ['Cada golpe recebido volta em parte para quem bateu, mesmo se o Escudo segurar.', 'Pune golpes grandes: quanto mais forte o golpe, mais volta.'], combina: ['Provocar', 'Tanque'], cuidado: 'Dura pouco: golpes em todos e Queimadura passam sem voltar.' },
+  'Espinhos': { naLuta: ['Quem bate leva um dano fixo a cada golpe.', 'Pune quem bate muitas vezes: golpes rápidos e em área se machucam mais.'], combina: ['Provocar', 'Proteção'], cuidado: 'Um golpe grande e raro quase não sente os espinhos.' },
   'Provocar': { naLuta: ['Grita e deixa os rivais Provocados: o ataque básico e as habilidades de um alvo deles só vão nele.', 'Golpes em todos continuam iguais; se ele cair, a provocação acaba.'], combina: ['Cura', 'Proteção'], cuidado: 'Ele leva os golpes de todo mundo: precisa de Vida, Escudo ou cura para aguentar.' },
   'Reviver': { naLuta: ['Quando um aliado cai, a habilidade dele o levanta com parte da Vida.', 'Uma vez por luta — e cada lutador só volta uma vez.'], combina: ['Explosão', 'Pressão'], cuidado: 'Leva um tempo de Preparo: se for interrompido ou cair antes, o aliado fica no chão.' },
   'Renascer': { naLuta: ['Quando cai, fica em brasas por um instante e volta sozinho.', 'Volta com parte da Vida, uma vez por luta.'], combina: ['Tanque', 'Virada'], cuidado: 'A Death Note impede: quem é executado não renasce.' },

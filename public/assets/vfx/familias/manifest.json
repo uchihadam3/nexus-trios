@@ -895,6 +895,20 @@
   "laco": false,
   "bytes": 37272
  },
+ "espinhos": {
+  "descricao": "pontas que brotam do corpo e recolhem",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 91728
+ },
  "espinhos_de_terra": {
   "descricao": "pontas de pedra em linha",
   "quadros": 12,
@@ -2043,6 +2057,20 @@
   "laco": false,
   "bytes": 54116
  },
+ "reflexo": {
+  "descricao": "escudo de espelho hexagonal que devolve o golpe",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 72336
+ },
  "reforco": {
   "descricao": "reforço",
   "quadros": 12,
@@ -2546,6 +2574,20 @@
   ],
   "laco": false,
   "bytes": 48600
+ },
+ "vampirismo": {
+  "descricao": "gotas de sangue em espiral e pulso de coração",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 69106
  },
  "velocidade": {
   "descricao": "linhas de vento e asinhas",
