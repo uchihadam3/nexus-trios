@@ -14,7 +14,7 @@ import { byId,characters } from './data/characters';
 import { createBattle } from './engine/battle';
 import { generateCampaign,newDraft,pickDraft,skipDraft } from './engine/campaign';
 import type { ResultadoTop3 } from './lib/top3';
-import { defaults,loadProfile,loadRun,loadSettings,resetStorage,save,storageAvailable } from './lib/storage';
+import { defaults,ESCALA_DOS_PONTOS,loadProfile,loadRun,loadSettings,resetStorage,save,storageAvailable } from './lib/storage';
 import type { Run,Settings } from './lib/storage';
 import { PRIORIDADE,type Sound } from './audio/cues';
 import { battleAudio } from './lib/audio';
@@ -257,14 +257,14 @@ export default function App(){
     return ()=>{vivo=false;parar();};
   },[autenticacao]);
 
-  const reset=()=>{resetStorage();setSettings(defaults);setProfile({journeys:0,victories:0,best:0,wins:0,recordePontos:0});setRun(null);runRef.current=null;navigate('home');};
+  const reset=()=>{resetStorage();setSettings(defaults);setProfile({journeys:0,victories:0,best:0,wins:0,recordePontos:0,escalaDosPontos:ESCALA_DOS_PONTOS});setRun(null);runRef.current=null;navigate('home');};
   return <div onPointerDownCapture={()=>void battleAudio.unlock()} onPointerUpCapture={()=>void battleAudio.unlock()} onTouchEndCapture={()=>void battleAudio.unlock()} onClickCapture={()=>void battleAudio.unlock()} onKeyDownCapture={e=>{if(e.key==='Enter'||e.key===' ')void battleAudio.unlock();}} className={`app ${settings.reducedMotion?'reduce-motion':''} ${screen==='game'&&run?.stage==='battle'?'in-battle':''}`}>
     <ToqueGlobal/>
     <Cabecalho tela={screen} menu={menu} onMenu={setMenu} onNavigate={navigate} recorde={profile.recordePontos??0} apelido={profile.publicHandle} online={onlineConfigured} total={characters.length}/>
     <main key={`${screen}-${screen==='game'?run?.stage??'idle':'page'}`} className={screen==='game'&&run?.stage==='battle'?'main battle-main screen-enter':'main screen-enter'}>
       {screen==='home'&&<Home profile={profile} run={run} conta={conta!==null&&conta.origem!=='convidado'} onPlay={requestNew} onRanked={requestRanked} onContinue={()=>{if(run?.stage==='battle'&&run.battle){direction.current=directionFor(run);setPresentation({battle:direction.current.visible,beat:direction.current.active});}navigate('game');setPaused(run?.stage==='battle');}} onAbandon={()=>setConfirmAbandon(true)} onNavigate={navigate} onInstall={()=>void install()}/>}
       {screen==='characters'&&<CharactersScreen onDetails={setDetails}/>}
-      {screen==='ranking'&&<RankingScreen handle={profile.publicHandle} conta={conta!==null&&conta.origem!=='convidado'} onConta={()=>navigate('conta')}/>}
+      {screen==='ranking'&&<RankingScreen handle={profile.publicHandle} conta={conta!==null&&conta.origem!=='convidado'} onConta={()=>navigate('conta')} recorde={profile.recordePontos??0}/>}
       {screen==='conta'&&<AccountScreen autenticacao={autenticacao} conta={conta} profile={profile} conectado={onlineConfigured} google={googleConfigured} aoMudarPerfil={p=>{save('profile',p);setProfile(p);}}/>}
       {screen==='help'&&<HelpScreen onPlay={requestNew}/>}
       {screen==='settings'&&<SettingsScreen settings={settings} onChange={changeSettings} onReset={reset} onGaleria={()=>navigate('vfx')} ranking={onlineConfigured?{nome:profile.publicHandle,onEditar:()=>{setPendingMode(null);setDraftHandle(profile.publicHandle??'');setNameDialog(true);}}:undefined}/>}

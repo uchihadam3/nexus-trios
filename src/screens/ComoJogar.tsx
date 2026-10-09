@@ -8,7 +8,6 @@ import { TelaTopo } from '../components/Casca';
 import { TermoBotao } from '../components/Termos';
 import { GLOSSARIO,type Termo } from '../presentation/glossario';
 import { statuses } from '../data/statuses';
-import { PONTOS } from '../engine/pontos';
 
 /*
  * Como jogar (remake): aprender jogando o olho, não lendo.
@@ -35,13 +34,14 @@ function Cena({i}:{i:number}){
   if(i===2)return <div className="demo-art demo-prep"><div className="prep-portrait"><Portrait character={byId.goku}/><i/></div><div><strong>PREPARANDO</strong><span>Kamehameha</span><small>Pode ser interrompido</small></div></div>;
   if(i===3)return <div className="demo-art demo-shield"><Shield size={58}/><div><span>ESCUDO</span><strong>180 bloqueado</strong><i/></div></div>;
   if(i===4)return <div className="demo-art demo-status"><Portrait character={byId.vegeta}/><span>→</span><StatusBadge status={{id:'exposed',remaining:8,duration:8,intensity:.22,source:''}}/><strong>EXPOSTO</strong></div>;
-  return <div className="cj-pontos"><span><b>1 milhão</b><small>por vitória</small></span><span><b>+{PONTOS.vidaMaxima.toLocaleString('pt-BR')}</b><small>com a Vida cheia</small></span><span><b>+{PONTOS.porSobrevivente.toLocaleString('pt-BR')}</b><small>por lutador de pé</small></span></div>;
+  // a escala de uma luta (src/engine/pontos.ts): o que o trio fez vale, até na derrota
+  return <div className="cj-pontos"><span><b>~1.000</b><small>derrota feia</small></span><span><b>~10.000</b><small>vitória boa</small></span><span><b>15.000+</b><small>luta incrível</small></span></div>;
 }
 
 /* Regras do jogo que não estão no glossário da ficha. */
 const BASE:Termo[]=[
   {id:'trio',nome:'Trio',cor:'#c8f560',rotulo:'COMEÇO',texto:'Você escolhe 3 lutadores. Eles lutam sozinhos: seu trabalho é montar um trio que funcione junto.'},
-  {id:'jornada',nome:'Jornada',cor:'#ffd36b',rotulo:'OBJETIVO',texto:'10 lutas seguidas. Uma derrota encerra a jornada. Cada vitória soma pontos para o ranking.'},
+  {id:'jornada',nome:'Jornada',cor:'#ffd36b',rotulo:'OBJETIVO',texto:'10 lutas seguidas. Cada luta soma pontos pelo que o trio fez: dano, nocautes, cura, vitória, Vida que sobrou e rapidez. Uma derrota encerra a jornada, mas os pontos dela ficam.'},
   {id:'vida',nome:'Vida',cor:'#86e3a8',rotulo:'SOBREVIVER',texto:'Quando chega a zero, o lutador sai da luta. A Vida que sobra no fim vale pontos.'},
   {id:'basico',nome:'Ataque básico',cor:'#ff9a76',rotulo:'RITMO',texto:'O golpe de sempre. O círculo em volta do retrato mostra quanto falta para o próximo.'},
   {id:'vantagem',nome:'Vantagem',cor:'#8fd3ff',rotulo:'QUEM DOMINA',texto:'A barra do topo mostra quem está controlando a luta. Algumas habilidades reagem a ela; virar o jogo dá pontos.'},

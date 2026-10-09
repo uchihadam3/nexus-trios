@@ -12,7 +12,7 @@ import {
   contasReivindicadas, deveOferecer, levarParaAConta, manterSeparado,
   marcarReivindicado, resumoDoProgresso,
 } from '../src/lib/migracao';
-import { loadProfile, type Profile } from '../src/lib/storage';
+import { ESCALA_DOS_PONTOS, loadProfile, type Profile } from '../src/lib/storage';
 
 /* O ambiente de teste não tem navegador; um localStorage de mentira basta. */
 const memoria = new Map<string, string>();
@@ -29,7 +29,7 @@ beforeEach(() => {
 });
 
 const novato = (): Profile => ({ journeys: 0, victories: 0, best: 0, wins: 0, recordePontos: 0 });
-const veterano = (): Profile => ({ journeys: 12, victories: 4, best: 8, wins: 31, recordePontos: 7_042_000 });
+const veterano = (): Profile => ({ journeys: 12, victories: 4, best: 8, wins: 31, recordePontos: 7_042_000, escalaDosPontos: ESCALA_DOS_PONTOS });
 
 const conta = (over: Partial<Conta> = {}): Conta =>
   ({ id: 'u1', email: 'a@b.com', handle: 'Jogador_01', origem: 'email', ...over });
@@ -101,6 +101,12 @@ describe('as duas respostas preservam tudo', () => {
     /* O perfil no armazenamento continua lá, inteiro: quem salva é a tela. */
     expect(loadProfile().journeys).toBe(12);
     expect(loadProfile().recordePontos).toBe(7_042_000);
+  });
+
+  it('recorde da escala antiga (1 milhão por vitória) recomeça na escala nova, o resto do perfil fica', () => {
+    localStorage.setItem('nexus-v1-profile', JSON.stringify({ journeys: 12, victories: 4, best: 8, wins: 31, recordePontos: 7_042_000 }));
+    const p = loadProfile();
+    expect(p).toMatchObject({ journeys: 12, victories: 4, best: 8, wins: 31, recordePontos: 0, escalaDosPontos: ESCALA_DOS_PONTOS });
   });
 });
 

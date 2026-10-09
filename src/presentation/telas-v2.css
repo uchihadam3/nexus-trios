@@ -201,3 +201,10 @@
 .aj-testar{display:flex;flex-direction:column;gap:8px;margin-top:6px}
 .aj-testar button{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;border-radius:12px;border:1px solid rgba(200,245,96,.45);background:rgba(200,245,96,.1);color:#e9ffc4;font-weight:800;font-size:15px}
 .aj-testar p{margin:0;font-size:13px;line-height:1.4;color:#c9d4c0}
+
+/* Ranking: o recorde da Jornada normal (fica no aparelho) acima do placar online */
+.rk-recorde-local{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:0 0 12px;padding:10px 14px;border-radius:14px;background:linear-gradient(160deg,#ffd36b22,#ffd36b08);box-shadow:inset 0 0 0 1px #ffd36b55;color:#ffe9b0}
+.rk-recorde-local svg{color:#ffd36b}
+.rk-recorde-local span{font-weight:700;font-size:13px}
+.rk-recorde-local b{margin-left:auto;font-size:20px;font-weight:900;color:#fff3cf}
+.rk-recorde-local small{flex-basis:100%;text-align:right;font-size:11px;color:#d9c48d;margin-top:-4px}

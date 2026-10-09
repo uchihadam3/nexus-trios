@@ -1,5 +1,5 @@
 import { useEffect,useState,type CSSProperties,type ReactNode } from 'react';
-import { ArrowRight,RotateCcw,Home,Trophy,HeartPulse,Users,TrendingUp,Shield,Crown,Sparkles,Medal,LogOut } from 'lucide-react';
+import { ArrowRight,RotateCcw,Home,Trophy,HeartPulse,TrendingUp,Shield,Crown,Sparkles,Medal,LogOut,Swords,Skull,Zap,Timer } from 'lucide-react';
 import type { Run } from '../lib/storage';
 import { byId } from '../data/characters';
 import { Portrait } from '../components/Portrait';
@@ -53,18 +53,16 @@ export function ResultScreen({run,onNext,onRestart,onAbandon,onHome,onRanking,on
   const b=run.battle!,won=b.winner==='player',champion=won&&run.index===9,fimDaJornada=champion||!won;
   const resumos=run.summaries?.length?run.summaries:[summarizeBattle(run.index,b)];
   const atual=resumos.find(s=>s.index===run.index)??summarizeBattle(run.index,b);
-  const p=atual.pontos??pontosDaLuta(b);
+  // resumos salvos antes da conta nova não têm as parcelas: refaz pela luta
+  const p=atual.pontos?.parcelas?atual.pontos:pontosDaLuta(b,run.index);
   const jornada=(ate:number)=>pontosDaJornada(resumos.filter(s=>s.index<=ate).map(s=>({pontos:s.score,won:s.won})));
   const antes=jornada(run.index-1),total=jornada(run.index);
   const recordeAntes=atual.recordeAntes??0,novoRecorde=total>0&&total>recordeAntes;
   const vitorias=resumos.filter(s=>s.won).length;
 
-  const parcelas:Parcela[]=[
-    {rotulo:'Vitória',valor:p.vitoria,icone:<Trophy size={15}/>},
-    {rotulo:`Vida ${Math.round(p.vidaMedia*100)}%`,valor:p.vida,icone:<HeartPulse size={15}/>},
-    {rotulo:`${p.de_pe} de pé`,valor:p.sobreviventes,icone:<Users size={15}/>},
-    {rotulo:`${p.viradas/500} ${p.viradas===500?'virada':'viradas'}`,valor:p.viradas,icone:<TrendingUp size={15}/>},
-  ].filter(x=>x.valor>0);
+  // cada parcela da luta com o seu ícone (a conta vem de src/engine/pontos.ts, a mesma do ranking)
+  const ICONE:Record<string,ReactNode>={dano:<Swords size={15}/>,nocautes:<Skull size={15}/>,apoio:<Shield size={15}/>,jogadas:<Zap size={15}/>,viradas:<TrendingUp size={15}/>,vitoria:<Trophy size={15}/>,vida:<HeartPulse size={15}/>,rapidez:<Timer size={15}/>};
+  const parcelas:Parcela[]=p.parcelas.map(x=>({rotulo:x.rotulo,valor:x.valor,icone:ICONE[x.id]}));
 
   /* A sequência do placar: parcelas uma a uma, depois o total sobe, depois o recorde. */
   const [fase,setFase]=useState(reduzido()?3:0);
@@ -103,13 +101,14 @@ export function ResultScreen({run,onNext,onRestart,onAbandon,onHome,onRanking,on
     </header>
 
     <div className="rs-placar">
-      {won?<>
-        <span className="rs-rotulo">PONTOS DESTA LUTA</span>
+      {/* na derrota também: os pontos do que o trio fez nesta luta ficam */}
+      {p.total>0?<>
+        <span className="rs-rotulo">PONTOS DESTA LUTA{p.multiplicador>1?` · ×${p.multiplicador.toFixed(2).replace('.',',')}`:''}</span>
         <strong className="rs-desta">+{fase>=1?<Contador de={0} para={p.total} ms={900}/>:'0'}</strong>
         <ul className="rs-parcelas">{parcelas.map((x,i)=><li key={x.rotulo} className={fase>=1?'entra':''} style={{'--i':i} as CSSProperties}>{x.icone}<span>{x.rotulo}</span><b>+{formatarPontos(x.valor)}</b></li>)}</ul>
-      </>:<p className="rs-sem">Derrota não pontua: a jornada termina aqui com o que você já fez.</p>}
+      </>:<p className="rs-sem">Nenhum ponto nesta luta: a jornada termina aqui com o que você já fez.</p>}
       <div className={`rs-total ${fase>=2?'subiu':''}`}>
-        {fase>=2&&won&&<Fx nome="pontos" cor={cor} ms={900} className="rs-estouro"/>}
+        {fase>=2&&p.total>0&&<Fx nome="pontos" cor={cor} ms={900} className="rs-estouro"/>}
         <span className="rs-rotulo">{fimDaJornada?'PONTUAÇÃO FINAL':'TOTAL DA JORNADA'}</span>
         <strong>{fase>=2?<Contador de={antes} para={total} ms={1200}/>:formatarPontos(antes)}</strong>
         <small>{vitorias} {vitorias===1?'vitória':'vitórias'} · {formatarPontos(total)} pontos para o ranking</small>

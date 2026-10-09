@@ -17,11 +17,13 @@ describe('pontos', () => {
       for (const [index, encontro] of generateCampaign(seed).entries()) {
         const b = createBattle(trio, encontro.team, seed + index * 7919, encontro.scale);
         for (let t = 0; t < 9000 && !b.finished; t++) stepBattle(b);
-        const p = pontosDaLuta(b);
+        const p = pontosDaLuta(b, index);
         lutas.push({ pontos: p.total, won: b.winner === 'player' });
         if (b.winner !== 'player') break;
       }
       expect(pontosDaJornada(lutas)).toBe(oficial.score);
+      // a luta perdida também pontua (o que o trio fez nela), e cada luta cabe na escala de milhares
+      for (const l of lutas) { expect(l.pontos).toBeGreaterThan(0); expect(l.pontos).toBeLessThan(40_000); }
       conferidas += lutas.length;
     }
     expect(conferidas).toBeGreaterThan(5);

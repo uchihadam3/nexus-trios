@@ -1,12 +1,14 @@
 import {characters} from '../data/characters';
 import {createBattle,stepBattle} from './battle';
 import {generateCampaign} from './campaign';
-import {emptyTally,tallyEvents} from './progression';
+import {pontosDaLuta} from './pontos';
 import {summarizeBattle,type RunBattleSummary} from './run-summary';
 
-/* 250.4: Preparo mínimo de 0,5 s (leve), efeitos repetidos somados, condições alcançáveis. */
-export const ENGINE_VERSION='nexus-250.4';
-export const BALANCE_VERSION='season-1';
+/* 250.4: Preparo mínimo de 0,5 s (leve), efeitos repetidos somados, condições alcançáveis.
+ * 250.5: pontos por desempenho (src/engine/pontos.ts), e a luta perdida também pontua. */
+export const ENGINE_VERSION='nexus-250.5';
+/* Temporada 2: a escala dos pontos mudou (milhares por luta, não milhões); a temporada nova não mistura as duas. */
+export const BALANCE_VERSION='season-2';
 export const rosterFingerprint=()=>{
   const data=characters.map(c=>[c.id,c.hp,c.interval,c.basic,c.trait,c.skills]);
   let hash=2166136261;const raw=JSON.stringify(data);
@@ -22,26 +24,17 @@ export function replayRanked(team:string[],seed:number){
   if(team.length!==3||new Set(team).size!==3||team.some(id=>!characters.some(c=>c.id===id)))throw new Error('Trio inválido.');
   const encounters=generateCampaign(seed);
   const foes=new Set(encounters.flatMap(e=>e.team));if(team.some(id=>foes.has(id)))throw new Error('Trio inclui rival da campanha compartilhada.');
-  let quality=0;
+  let score=0;
   const summaries:RunBattleSummary[]=[];
   for(const [index,encounter] of encounters.entries()){
     const battle=createBattle(team,encounter.team,seed+index*7919,encounter.scale);
-    let tally=emptyTally();
-    for(let tick=0;tick<9000&&!battle.finished;tick++){stepBattle(battle);tally=tallyEvents(tally,battle.events);}
+    for(let tick=0;tick<9000&&!battle.finished;tick++)stepBattle(battle);
     if(!battle.finished)throw new Error(`Replay sem conclusão no confronto ${index+1}.`);
     const summary=summarizeBattle(index,battle);summaries.push(summary);
-    if(summary.won){
-      const health=battle.fighters.filter(f=>f.side==='player').reduce((n,f)=>n+f.hp/f.maxHp,0)/3;
-      quality+=Math.round(Math.max(0,Math.min(1,health))*10000)+summary.survivors*6000+Math.min(2000,tally.turns*500);
-    }
+    // a conta da tela (src/engine/pontos.ts): a luta perdida também soma o que o trio fez nela
+    score+=pontosDaLuta(battle,index).total;
     if(!summary.won)break;
   }
-  /*
-   * A qualidade era somada com 12.000 por objetivo cumprido. Com os Objetivos
-   * removidos, o que pontua é o que a jornada mostrou: quantos confrontos
-   * caíram, com quanta Vida e quantos lutadores de pé.
-   */
   const cleared=summaries.filter(s=>s.won).length;
-  quality=Math.min(999999,quality);
-  return {seed,team,encountersCleared:cleared,score:cleared*1000000+quality,summaries,highlights:{survivors:summaries.at(-1)?.survivors??0,turns:summaries.reduce((n,s)=>n+s.turns,0)}};
+  return {seed,team,encountersCleared:cleared,score,summaries,highlights:{survivors:summaries.at(-1)?.survivors??0,turns:summaries.reduce((n,s)=>n+s.turns,0)}};
 }

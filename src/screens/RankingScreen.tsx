@@ -21,7 +21,7 @@ type Modo=(typeof modes)[number][0];
  * entrega o ranking para quem tem conta: sem ela, a tela convida a entrar em
  * vez de parecer uma queda de conexão.
  */
-export function RankingScreen({handle,conta,onConta}:{handle?:string;conta:boolean;onConta:()=>void}){
+export function RankingScreen({handle,conta,onConta,recorde}:{handle?:string;conta:boolean;onConta:()=>void;recorde?:number}){
   const [mode,setMode]=useState<Modo>('daily'),[board,setBoard]=useState<Leaderboard|null>(null),[historico,setHistorico]=useState<PartidaDoHistorico[]|null>(null),[loading,setLoading]=useState(false),[maisCarregando,setMaisCarregando]=useState(false),[error,setError]=useState('');
   useEffect(()=>{if(!onlineConfigured||!conta)return;let active=true;setLoading(true);setError('');setHistorico(null);
     /*
@@ -46,7 +46,7 @@ export function RankingScreen({handle,conta,onConta}:{handle?:string;conta:boole
     finally{setMaisCarregando(false);}
   };
   const estado:EstadoDoPlacar=!onlineConfigured?{tipo:'desligado'}:!conta?{tipo:'sem-conta'}:error?{tipo:'erro',texto:error}:loading?{tipo:'carregando'}:historico?{tipo:'historico',partidas:historico}:{tipo:'placar',board};
-  return <Placar mode={mode} onMode={setMode} estado={estado} handle={handle} onConta={onConta} onMais={()=>void verMais()} maisCarregando={maisCarregando}/>;
+  return <Placar mode={mode} onMode={setMode} estado={estado} handle={handle} onConta={onConta} onMais={()=>void verMais()} maisCarregando={maisCarregando} recorde={recorde}/>;
 }
 
 export type EstadoDoPlacar={tipo:'desligado'|'sem-conta'|'carregando'}|{tipo:'erro';texto:string}|{tipo:'historico';partidas:PartidaDoHistorico[]}|{tipo:'placar';board:Leaderboard|null};
@@ -54,7 +54,7 @@ export type EstadoDoPlacar={tipo:'desligado'|'sem-conta'|'carregando'}|{tipo:'er
 const Trio=({team,tamanho=''}:{team:string[];tamanho?:string})=><span className={`rk-trio ${tamanho}`}>{team.map(id=>byId[id]&&<span key={id} style={{'--character':byId[id].color} as CSSProperties}><Portrait character={byId[id]}/></span>)}</span>;
 
 /** O desenho do ranking, sem rede: a tela de verdade e o banco de provas usam o mesmo. */
-export function Placar({mode,onMode,estado,handle,onConta,onMais,maisCarregando=false}:{mode:Modo;onMode:(m:Modo)=>void;estado:EstadoDoPlacar;handle?:string;onConta:()=>void;onMais:()=>void;maisCarregando?:boolean}){
+export function Placar({mode,onMode,estado,handle,onConta,onMais,maisCarregando=false,recorde}:{mode:Modo;onMode:(m:Modo)=>void;estado:EstadoDoPlacar;handle?:string;onConta:()=>void;onMais:()=>void;maisCarregando?:boolean;recorde?:number}){
   const [selected,setSelected]=useState<PublicRun|null>(null);
   const board=estado.tipo==='placar'?estado.board:null;
   const rows=mode==='mine'?(board?.mine?[board.mine]:[]):board?.entries??[];
@@ -63,6 +63,8 @@ export function Placar({mode,onMode,estado,handle,onConta,onMais,maisCarregando=
   const podio=mode==='mine'?[]:rows.slice(0,3),resto=mode==='mine'?rows:rows.slice(3);
   return <section className="ranking-screen ranking-v2">
     <TelaTopo icone={<Trophy/>} cor="#ffd36b" rotulo="RANKING" titulo="Quem fez mais pontos"><p>Toda jornada é refeita pelo servidor antes de entrar.</p></TelaTopo>
+    {/* o recorde da Jornada normal fica neste aparelho; o placar abaixo é o das ranqueadas (Diária e Semanal) */}
+    {recorde!==undefined&&<div className="rk-recorde-local"><Trophy size={16}/><span>Seu recorde na Jornada</span><b>{recorde.toLocaleString('pt-BR')}</b><small>pontos · neste aparelho</small></div>}
     <div className="rk-abas" role="tablist">{modes.map(([value,label])=><button key={value} role="tab" aria-selected={mode===value} className={mode===value?'ativo':''} onClick={()=>{onMode(value);setSelected(null);}}>{label}</button>)}</div>
 
     {estado.tipo==='desligado'?<div className="rk-bloqueio"><span className="rk-cadeado"><WifiOff size={30}/></span><b>Ranking desligado nesta versão</b><p>A Jornada casual continua funcionando sem internet.</p></div>

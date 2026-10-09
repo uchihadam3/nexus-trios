@@ -1,0 +1,51 @@
+name: Servidor do ranking
+
+# Republica a função `ranked-api` quando as regras do jogo mudam.
+#
+# O servidor refaz cada jornada ranqueada com a cópia do motor e do elenco que
+# foi publicada junto com ele, e só aceita a partida se a versão do jogo for a
+# mesma. Toda mudança em personagens, habilidades ou no motor deixava essa
+# cópia velha até alguém republicar à mão — e, enquanto isso, nenhum recorde
+# entrava no ranking. Aqui ela é republicada sozinha, pelo mesmo
+# scripts/publicar-funcao.sh de sempre.
+#
+# Só publica com o segredo SUPABASE_ACCESS_TOKEN cadastrado no repositório
+# (Settings → Secrets and variables → Actions). Sem ele, o job só avisa.
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'src/engine/**'
+      - 'src/data/**'
+      - 'supabase/functions/**'
+      - 'scripts/publicar-funcao.sh'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: servidor-do-ranking
+  cancel-in-progress: false
+jobs:
+  publicar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+    steps:
+      - name: Sem o segredo, só avisa
+        if: env.SUPABASE_ACCESS_TOKEN == ''
+        run: echo "::warning::O segredo SUPABASE_ACCESS_TOKEN não está cadastrado; o servidor do ranking NÃO foi atualizado e as ranqueadas seguem bloqueadas até ele ser publicado."
+      - uses: actions/checkout@v4
+        if: env.SUPABASE_ACCESS_TOKEN != ''
+      - uses: actions/setup-node@v4
+        if: env.SUPABASE_ACCESS_TOKEN != ''
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+        if: env.SUPABASE_ACCESS_TOKEN != ''
+      # a função tem de passar no typecheck do Deno antes de subir
+      - run: npx -y deno@2 check supabase/functions/ranked-api/index.ts
+        if: env.SUPABASE_ACCESS_TOKEN != ''
+      - run: bash scripts/publicar-funcao.sh
+        if: env.SUPABASE_ACCESS_TOKEN != ''
