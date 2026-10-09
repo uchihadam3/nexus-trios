@@ -336,7 +336,7 @@ function golpeDaSerie(effects:Effect[],j:Extract<JeitoDeBater,{tipo:'serie'}>):E
   return j.status?[...fortes,{kind:'status',status:j.status.status,value:j.status.value,duration:j.status.duration}]:fortes;
 }
 /* O que o jeito de bater faz depois do golpe acertar (série já foi resolvida no golpe). */
-function jeitoDeBater(b:Battle,f:Fighter,alvo:Fighter,j:JeitoDeBater,dano:number){
+export function jeitoDeBater(b:Battle,f:Fighter,alvo:Fighter,j:JeitoDeBater,dano:number){
   if(j.tipo==='serie')return;
   if(j.tipo==='ricochete'||j.tipo==='largo'){
     if(dano<=0)return;
@@ -361,7 +361,7 @@ function jeitoDeBater(b:Battle,f:Fighter,alvo:Fighter,j:JeitoDeBater,dano:number
     emit(b,{kind:'shield',source:f.uid,target:f.uid,value:Math.round(dano*j.fracao),label:'Guarda do golpe'});
     return;
   }
-  if(j.tipo==='acelera'){f.action=Math.min(.95,f.action+j.valor);return;}
+  if(j.tipo==='acelera'){const antes=f.action;f.action=Math.min(.95,f.action+j.valor);if(f.action-antes>.005)emit(b,{kind:'tempo',source:f.uid,target:f.uid,label:'Acelerou',value:f.action-antes});return;}
   if(j.tipo==='rouba'){
     const dele=alvo.skills.reduce((a,s,i)=>s.charge>(alvo.skills[a]?.charge??0)?i:a,0);
     // a Carga roubada vai para a habilidade dele que está mais perto de encher (e que pode receber)

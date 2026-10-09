@@ -88,8 +88,8 @@ export const INTERVALO_DA_ETAPA=TEMPO_DO_PASSO.rival;
 const CONTABIL=new Set<BattleEvent['kind']>(['charge','synergy','ready','discovery','basic','skill','cast','turn']);
 const DO_GOLPE=new Set<BattleEvent['kind']>(['damage','block','interrupt','ko']);
 /* Reações que vêm de uma mecânica, não do traço: o passo leva o nome dela. */
-export const ROTULO_DA_MECANICA:Record<string,string>={Refletido:'Refletir',Espinhos:'Espinhos',Vampirismo:'Vampirismo',Sangramento:'Sangramento',Barreira:'Barreira','Última resistência':'Última resistência',Ricochete:'Ricochete','Golpe largo':'Golpe largo','Golpe que cura':'Golpe que cura'};
-const ehDaMecanica=(e:BattleEvent)=>(e.kind==='damage'||e.kind==='heal'||e.kind==='resist')&&e.label in ROTULO_DA_MECANICA;
+export const ROTULO_DA_MECANICA:Record<string,string>={Refletido:'Refletir',Espinhos:'Espinhos',Vampirismo:'Vampirismo',Sangramento:'Sangramento',Barreira:'Barreira','Última resistência':'Última resistência',Ricochete:'Ricochete','Golpe largo':'Golpe largo','Golpe que cura':'Golpe que cura','Guarda do golpe':'Guarda do golpe','Roubou Carga':'Roubou Carga',Acelerou:'Acelerou'};
+const ehDaMecanica=(e:BattleEvent)=>['damage','heal','resist','shield','charge','tempo'].includes(e.kind)&&e.label in ROTULO_DA_MECANICA;
 function montaPassos(beat:Pick<Beat,'event'|'events'|'after'|'traco'>):Passo[]{
   const ator=beat.event.source,lado=beat.after.fighters.find(f=>f.uid===ator)?.side;
   const ladoDe=(uid?:string)=>beat.after.fighters.find(f=>f.uid===uid)?.side;
@@ -107,9 +107,9 @@ function montaPassos(beat:Pick<Beat,'event'|'events'|'after'|'traco'>):Passo[]{
   let atual:Passo|null=null;
   for(const e of beat.events){
     // contabilidade (Carga, "pronto", sinergia) e ajustes nulos vão no passo que os causou
-    if(CONTABIL.has(e.kind)||(e.kind==='tempo'&&Math.abs(e.value??0)<.005)){if(atual)atual.eventos.push(e.id);else soltos.push(e.id);continue;}
     const dono=e.kind==='block'?(e.attacker??ator):e.source;
-    // Refletir, Espinhos e Vampirismo: um passo de reação com o nome da mecânica
+    // Refletir, Espinhos, Vampirismo e os jeitos de bater (Ricochete, Roubou Carga…): um passo com o nome da mecânica
+    if(!ehDaMecanica(e)&&(CONTABIL.has(e.kind)||(e.kind==='tempo'&&Math.abs(e.value??0)<.005))){if(atual)atual.eventos.push(e.id);else soltos.push(e.id);continue;}
     if(ehDaMecanica(e)){
       const rotulo=ROTULO_DA_MECANICA[e.label]!;
       if(!(atual?.classe==='reacao'&&atual.quem===dono&&atual.rotulo===rotulo)){atual={classe:'reacao',quem:dono,rotulo,eventos:[],em:0};passos.push(atual);}

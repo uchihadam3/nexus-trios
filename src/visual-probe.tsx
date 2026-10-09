@@ -2,7 +2,7 @@ import { useEffect,useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import { PRESENTATION } from './presentation/config';
 import { BattleScreen } from './screens/BattleScreen';
-import { applyEffects,createBattle } from './engine/battle';
+import { applyEffects,createBattle,jeitoDeBater } from './engine/battle';
 import { byId } from './data/characters';
 import type { BattleEvent,Effect,Visual } from './engine/types';
 import type { Beat } from './presentation/director';
@@ -96,10 +96,14 @@ if(hab){
   if(ficha.effects.some(e=>e.kind==='deathnote'))effects=[{kind:'damage',value:r2.hp}];
   if(!effects.length)effects=[{kind:'damage',value:60}];
 }
+// o jeito de bater do básico (Ricochete, Golpe largo, Roubou Carga…), como na luta
+const jeito=hab&&habIndex===undefined?byId[habId].basic.jeito:undefined;
 const before=structuredClone(battle),kind=hab?(habIndex===undefined?'basic':'skill'):scenario==='basic'||scenario==='energy'?'basic':'skill';
 if(renasce){goku.hp=Math.round(goku.maxHp*.4);goku.renascendo=0;goku.voltou=true;battle.events.push({id:1001,time:0,kind:'revive',source:goku.uid,target:goku.uid,label:'Renasceu',value:goku.hp});}
-const event:BattleEvent=renasce?{id:1000,time:0,kind:'revive',source:goku.uid,target:goku.uid,label:'Renasceu',value:goku.hp}:{id:1000,time:0,kind,source:source.uid,target:target.uid,skill:kind==='skill'?(hab?skillIndex:0):undefined,label:kind==='basic'?'Ataque básico':label,visual};
+const event:BattleEvent=renasce?{id:1000,time:0,kind:'revive',source:goku.uid,target:goku.uid,label:'Renasceu',value:goku.hp}:{id:1000,time:0,kind,source:source.uid,target:target.uid,skill:kind==='skill'?(hab?skillIndex:0):undefined,label:kind==='basic'?(jeito?.tipo==='serie'?jeito.nome:hab?label:'Ataque básico'):label,visual};
+const danoAntes=source.stats.damage;
 if(porAlvo){const alvoDe=porAlvo;for(const e of effects)applyEffects(battle,source,alvoDe(e),[{...e,target:undefined} as Effect]);}else applyEffects(battle,source,selected,effects);
+if(jeito&&jeito.tipo!=='serie'){for(const f of battle.fighters)if(f.side!==source.side)for(const s of f.skills)s.charge=50;jeitoDeBater(battle,source,target,jeito,source.stats.damage-danoAntes);}
 if(scenario==='status5')battle.events.push({id:1002,time:0,kind:'miss',source:goku.uid,target:sakura.uid,label:'Errou'});
 const events=renasce?[event]:[event,...battle.events],after=structuredClone(battle),impacted=phase==='impact';
 const beat:Beat={event,events,before,after,duration:2,elapsed:impacted?1.1:.35,impacted,family:visual==='impact'?'physical':visual==='psychic'?'psychic':visual==='bolt'?'electric':visual==='shield'?'shield':'buff',grand:false};

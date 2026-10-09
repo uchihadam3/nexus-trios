@@ -4,6 +4,7 @@ import { forcaDoTrio, generateCampaign, newDraft } from '../src/engine/campaign'
 import { CUSTO_DAS_DICAS, pontosDaLuta } from '../src/engine/pontos';
 import { replayRanked } from '../src/engine/ranked';
 import { createBattle, stepBattle } from '../src/engine/battle';
+import { pontoFraco } from '../src/data/ponto-fraco';
 import { dicasDoDraft } from '../src/presentation/dicas-do-trio';
 
 const ids = characters.map((c) => c.id);
@@ -69,6 +70,13 @@ describe('Dicas de trio', () => {
     expect(comPorque.some((m) => /Barreira elétrica de Raiden/.test(m.porque!))).toBe(true);
   });
 
+  it('"fraco contra provocar" fica só assim, sem explicar o que é provocar', () => {
+    const quem = characters.filter((c) => pontoFraco(c.vulnerability, c)[0]?.tipo === 'provocar').map((c) => c.id);
+    expect(quem.length).toBeGreaterThan(0);
+    for (const d of dicasDoDraft(quem.slice(0, 3), [])) {
+      expect(d.detalhe.map((x) => x.texto)).toContain('Cuidado: fraco contra provocar');
+    }
+  });
   it('custa 25 mil por luta, aparece na conta e a luta nunca fica negativa', () => {
     const [a, b] = generateCampaign(5).map((e) => e.team);
     const luta = createBattle(a!, b!, 5, 1);

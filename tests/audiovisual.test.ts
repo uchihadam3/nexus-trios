@@ -1,4 +1,5 @@
 import { FAMILIA_DA_INVOCACAO } from '../src/presentation/vfx-atribuicao';
+import { FAMILIAS_DO_JEITO } from '../src/presentation/jeito-efeito';
 import { describe,expect,it } from 'vitest';
 import { readFileSync,readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
@@ -27,14 +28,14 @@ describe('compact reusable audiovisual library',()=>{
       expect(f.bytes,`${nome} pequeno o bastante para celular`).toBeLessThan(f.tamanho[0]>200?240_000:200_000);
       bytes+=f.bytes;decodificado+=f.tamanho[0]*f.tamanho[1]*12*4;
     }
-    // só as folhas das famílias da luta são baixadas; o total é o catálogo inteiro
-    expect(bytes).toBeLessThan(14_000_000);
+    // só as folhas das famílias da luta são baixadas; o total é o catálogo inteiro (com os jeitos de bater)
+    expect(bytes).toBeLessThan(25_000_000);
     // nenhuma folha decodificada passa de ~4,5 MB na memória (a maior é a faixa de 512 × 96 × 12)
     expect(decodificado/Object.keys(familias).length).toBeLessThan(2_000_000);
     expect(readdirSync(resolve(root,'public/assets/vfx')).filter(x=>x.endsWith('.webp'))).toEqual(['arena.webp']);
   });
-  it('maps every basic and skill to one of the 150–260 shared families (more for the signature skills), all of them used, none dominating',()=>{
-    expect(FAMILIAS.length).toBeGreaterThanOrEqual(150);expect(FAMILIAS.length).toBeLessThanOrEqual(260);
+  it('maps every basic and skill to one of the 150–400 families (signature skills and the own basic attack of each character), all of them used, none dominating',()=>{
+    expect(FAMILIAS.length).toBeGreaterThanOrEqual(150);expect(FAMILIAS.length).toBeLessThanOrEqual(400);
     const uso=new Map<string,number>();let total=0;
     for(const character of characters){
       for(const index of [undefined,0,1,2] as const){
@@ -50,7 +51,7 @@ describe('compact reusable audiovisual library',()=>{
     // não são de habilidade: as brasas aparecem no lutador caído (ArenaUnit) e a marca de
     // Provocado por cima de quem recebe o Status, seja qual for o golpe (BattleEffects)
     // e o espelho, os espinhos e as gotas de sangue sobre quem devolve o golpe ou rouba a Vida
-    const SO_NA_ARENA=new Set(['brasas_renascendo','provocar','reflexo','espinhos','vampirismo','dissipar','sono','cegueira','esquiva','ultima_resistencia','copia',...Object.values(FAMILIA_DA_INVOCACAO)]);
+    const SO_NA_ARENA=new Set(['brasas_renascendo','provocar','reflexo','espinhos','vampirismo','dissipar','sono','cegueira','esquiva','ultima_resistencia','copia',...FAMILIAS_DO_JEITO,...Object.values(FAMILIA_DA_INVOCACAO)]);
     for(const f of FAMILIAS)if(!SO_NA_ARENA.has(f))expect(uso.get(f)??0,`${f} usada`).toBeGreaterThan(0);
     for(const [f,n] of uso)expect(n/total,`${f} não domina`).toBeLessThan(.16);
   });
@@ -88,7 +89,7 @@ describe('compact reusable audiovisual library',()=>{
     }
     // a luta baixa só os sons das famílias dos seis lutadores (precarregarLuta)
     // as mecânicas novas (reviver, provocar, refletir, status novos…) trazem sons próprios; a luta continua baixando só os dos seis lutadores
-    expect(bytes).toBeLessThan(12_000_000);
+    expect(bytes).toBeLessThan(19_000_000);
     expect(readdirSync(resolve(root,'public/assets/audio/sfx')).filter(x=>x.endsWith('.wav'))).toEqual([]);
   });
   it('a música começa na Intro e, depois do fim, volta ao Encontro',()=>{

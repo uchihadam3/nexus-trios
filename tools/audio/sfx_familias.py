@@ -1958,6 +1958,117 @@ def muda(rng, v):
     return reverb(x, 0.4, 0.2, 8000)
 
 
+
+# ------------------------------------------------------------ os jeitos de bater
+def quique(rng, v):
+    """Ricochete: o golpe chega assobiando, bate num ping de metal e sai quicando com o
+    "piu" do ricochete (tom que cai com vibrato), e uma pancada menor no segundo rival."""
+    x = _z(1.1)
+    poe(x, _whoosh(rng, 0.16, 900, 4000, 0.85, g=0.35), 0.0)
+    poe(x, B.soco_leve(rng, v) * 0.75, 0.15)
+    poe(x, modal(n_de(0.35), nota(91), rng=rng, **METAL) * env(n_de(0.35), 0.0005, 0.12) * 0.22, 0.15)
+    n = n_de(0.32)
+    f = varre(3400, 1100, n, 0.8) * (1 + 0.04 * np.sin(np.arange(n) / SR * 2 * math.pi * 38))
+    poe(x, seno(f, n) * env(n, 0.002, 0.18) * 0.16, 0.17)
+    poe(x, estalo(rng, n_de(0.06), 2500, 9000, 0.008) * 0.35, 0.16)
+    return reverb(x, 0.3, 0.15, 8000)
+
+
+def golpe_largo(rng, v):
+    """Golpe largo: o sopro grande e grave de uma varrida, com duas pancadas uma atrás da
+    outra (os dois rivais) e a poeira chiando no fim."""
+    x = _z(1.2)
+    poe(x, _whoosh(rng, 0.5, 120, 1800, 0.55, g=0.9), 0.0)
+    poe(x, B.soco_pesado(rng, v) * 0.9, 0.2)
+    poe(x, B.soco_leve(rng, v) * 0.8, 0.36)
+    n = n_de(0.5)
+    poe(x, passa(rosa(rng, n), 400, 3500, 2) * env(n, 0.03, 0.25) * 0.18, 0.3)
+    return reverb(x, 0.35, 0.18, 6500)
+
+
+def golpe_da_serie(rng, v):
+    """O golpe final da série: três estalos curtos que sobem de tom (o combo contando) e o
+    golpe grande, com baque grave e o estalo de quebrar a guarda."""
+    x = _z(1.3)
+    for i, nt in enumerate((79, 83, 86)):
+        poe(x, B.soco_leve(rng, v) * (0.45 + 0.08 * i), 0.04 + 0.1 * i)
+        poe(x, _tom(nota(nt), nota(nt), 0.12, 0.05, 0.1), 0.04 + 0.1 * i)
+    poe(x, _whoosh(rng, 0.12, 600, 5000, 0.9, g=0.4), 0.28)
+    poe(x, B.soco_pesado(rng, v) * 1.2, 0.38)
+    poe(x, baque(n_de(0.5), 80, 35, 0.25, 0.6) * 0.8, 0.38)
+    poe(x, estalo(rng, n_de(0.1), 1800, 8000, 0.015) * 0.5, 0.39)
+    return reverb(x, 0.45, 0.2, 7000)
+
+
+def golpe_que_cura(rng, v):
+    """Golpe que cura: o baque abafado do golpe vira um brilho que sobe — arpejo de cristal
+    maior e um sopro de ar, como a força chegando no aliado."""
+    x = _z(1.4)
+    poe(x, passa(B.soco_leve(rng, v), None, 2500, 2) * 0.55, 0.0)
+    poe(x, _whoosh(rng, 0.4, 500, 2600, 0.7, g=0.25), 0.05)
+    for i, nt in enumerate((72, 76, 79, 84)):
+        poe(x, _brilho(rng, 0.7, nota(nt), 0.12, CRISTAL), 0.3 + 0.07 * i)
+    n = n_de(0.6)
+    poe(x, graos(rng, n, 14, 0.0, 0.9, 5000, 12000, 0.004, 0.6) * 0.08, 0.45)
+    return reverb(x, 0.6, 0.3, 9000)
+
+
+def roubar_carga(rng, v):
+    """Roubou Carga: um zumbido elétrico que é sugado para baixo (tom que cai tremendo) e
+    as gotinhas de energia caindo uma a uma, junto com o golpe."""
+    x = _z(1.2)
+    poe(x, B.soco_leve(rng, v) * 0.6, 0.0)
+    n = n_de(0.6)
+    f = varre(1400, 180, n, 0.7)
+    trem = 0.6 + 0.4 * np.sin(np.arange(n) / SR * 2 * math.pi * 22)
+    poe(x, satura(seno(f, n) * 0.6, 2.0) * trem * sobe_e_some(n, 0.25, 1.5) * 0.18, 0.08)
+    poe(x, _whoosh(rng, 0.5, 4000, 400, 0.3, g=0.3), 0.08)
+    for i in range(5):
+        poe(x, _tom(nota(88 - 3 * i), nota(82 - 3 * i), 0.07, 0.04, 0.07), 0.15 + 0.08 * i)
+    return reverb(x, 0.35, 0.15, 7000)
+
+
+def carga_roubada(rng, v):
+    """A Carga roubada chega: gotinhas que sobem de tom cada vez mais rápido e o "plim"
+    de sino do medidor enchendo."""
+    x = _z(1.1)
+    t = 0.0
+    for i in range(7):
+        poe(x, _tom(nota(70 + 2 * i), nota(74 + 2 * i), 0.06, 0.03, 0.06), t)
+        t += 0.07 - 0.006 * i
+    n = n_de(0.4)
+    poe(x, assobio(rng, n, 400, 3000, 1.4, 0.4) * sobe_e_some(n, 0.9, 1.2) * 0.25, 0.0)
+    poe(x, _brilho(rng, 0.8, nota(88), 0.16, SINO), 0.45)
+    return reverb(x, 0.45, 0.2, 9000)
+
+
+def guarda_do_golpe(rng, v):
+    """Guarda do golpe: os cacos tilintando enquanto voltam, o "clanc" metálico da placa se
+    fechando e o brilho que passa por ela."""
+    x = _z(1.2)
+    poe(x, B.soco_leve(rng, v) * 0.55, 0.0)
+    for i in range(6):
+        poe(x, _tilim(rng, 0.05, 2500, 8000) * 0.3, 0.06 + 0.05 * i + rng.uniform(0, 0.02))
+    poe(x, modal(n_de(0.7), nota(62), rng=rng, **METAL) * env(n_de(0.7), 0.001, 0.25) * 0.3, 0.38)
+    poe(x, baque(n_de(0.3), 140, 80, 0.08, 0.6) * 0.5, 0.38)
+    poe(x, _whoosh(rng, 0.25, 3000, 9000, 0.6, g=0.12), 0.5)
+    return reverb(x, 0.4, 0.2, 8000)
+
+
+def acelera(rng, v):
+    """Acelerou: um "zip" agudo de quem dispara, o tique-taque do relógio correndo cada vez
+    mais rápido e um "zing" que fecha."""
+    x = _z(1.0)
+    poe(x, _whoosh(rng, 0.14, 1500, 9000, 0.8, g=0.45), 0.0)
+    t, passo = 0.1, 0.07
+    while t < 0.48:
+        poe(x, estalo(rng, n_de(0.03), 2500, 7000, 0.003) * 0.3, t)
+        t += passo
+        passo = max(0.018, passo * 0.8)
+    poe(x, _tom(nota(84), nota(96), 0.3, 0.15, 0.14, 2.0), 0.48)
+    poe(x, _brilho(rng, 0.4, nota(96), 0.06, VIDRO), 0.5)
+    return reverb(x, 0.3, 0.12, 9000)
+
 SONS_NOVOS = {
     nome.replace("_", "-"): (fn, "família " + nome.replace("_", " "))
     for nome, fn in list(globals().items())
@@ -1975,5 +2086,6 @@ for _k, _d in _ANTES.items():
     SONS_NOVOS[_k] = (SONS_NOVOS[_k][0], _d)
 _ALTO |= {"marretada", "kamehameha-feixe"}
 _ALTO |= {"death-note", "shoryuken", "punho-divergente", "agua-benta", "kaioken", "gear-fifth", "corvos", "shun-goku-satsu", "spin-dash", "gatling", "manto-kurama", "estado-avatar", "tenho-a-forca", "muda"}
+_ALTO |= {"quique", "golpe-largo", "golpe-da-serie", "golpe-que-cura", "roubar-carga", "carga-roubada", "guarda-do-golpe", "acelera"}
 _ALTO |= {"inv-cao", "inv-sombras", "inv-mago", "inv-dragao", "inv-gomorrah", "inv-ora", "inv-feras", "inv-vassouras", "inv-clones", "inv-androide"}
 ALVO_NOVO = {k: (-23 if k in _BAIXO else -15 if k in _ALTO else -18) for k in SONS_NOVOS}

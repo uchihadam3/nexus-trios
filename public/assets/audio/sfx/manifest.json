@@ -2,6 +2,23 @@
  "taxa": 44100,
  "versoes": 4,
  "sons": {
+  "acelera": {
+   "arquivo": "acelera.mp3",
+   "descricao": "família acelera",
+   "versoes": [
+    0.0,
+    1.08,
+    2.1963,
+    3.2424
+   ],
+   "duracoes": [
+    1.0,
+    1.0363,
+    0.9662,
+    1.0152
+   ],
+   "bytes": 54504
+  },
   "acido": {
    "arquivo": "acido.mp3",
    "descricao": "família acido",
@@ -18,6 +35,57 @@
     1.1167
    ],
    "bytes": 59196
+  },
+  "adaga-de-kamish": {
+   "arquivo": "adaga-de-kamish.mp3",
+   "descricao": "básico de Jinwoo: dois cortes de adaga e o sussurro da sombra",
+   "versoes": [
+    0.0,
+    1.28,
+    2.6035,
+    3.8429
+   ],
+   "duracoes": [
+    1.2,
+    1.2435,
+    1.1594,
+    1.2183
+   ],
+   "bytes": 49539
+  },
+  "adaga-do-tempo": {
+   "arquivo": "adaga-do-tempo.mp3",
+   "descricao": "básico do Príncipe: corte e areia escorrendo ao contrário",
+   "versoes": [
+    0.0,
+    1.38,
+    2.8071,
+    4.1432
+   ],
+   "duracoes": [
+    1.3,
+    1.3471,
+    1.256,
+    1.3198
+   ],
+   "bytes": 66566
+  },
+  "adaga-ilusoria": {
+   "arquivo": "adaga-ilusoria.mp3",
+   "descricao": "básico de Loki: adaga voando, brilho mágico, ecos ilusórios e o shink real",
+   "versoes": [
+    0.0,
+    1.18,
+    2.3999,
+    3.5427
+   ],
+   "duracoes": [
+    1.1,
+    1.1399,
+    1.0628,
+    1.1167
+   ],
+   "bytes": 45818
   },
   "agua": {
    "arquivo": "agua.mp3",
@@ -53,6 +121,40 @@
    ],
    "bytes": 84979
   },
+  "agulha-de-espinho": {
+   "arquivo": "agulha-de-espinho.mp3",
+   "descricao": "básico de Yor: dois 'tsk' afiados e um sussurro de pétalas",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 65981
+  },
+  "aparar-e-cortar": {
+   "arquivo": "aparar-e-cortar.mp3",
+   "descricao": "básico de Sekiro: tink de deflexão e o contra-corte",
+   "versoes": [
+    0.0,
+    1.0851,
+    2.2753,
+    3.3671
+   ],
+   "duracoes": [
+    1.0051,
+    1.1102,
+    1.0117,
+    1.0484
+   ],
+   "bytes": 45027
+  },
   "areia": {
    "arquivo": "areia.mp3",
    "descricao": "família areia",
@@ -69,6 +171,40 @@
     1.3198
    ],
    "bytes": 73088
+  },
+  "arma-da-gravidade": {
+   "arquivo": "arma-da-gravidade.mp3",
+   "descricao": "básico de Gordon: zumbido da arma, tranco e caixa quebrando",
+   "versoes": [
+    0.0,
+    1.38,
+    2.8071,
+    4.1432
+   ],
+   "duracoes": [
+    1.3,
+    1.3471,
+    1.256,
+    1.3198
+   ],
+   "bytes": 52699
+  },
+  "arma-grande": {
+   "arquivo": "arma-grande.mp3",
+   "descricao": "básico de Rocket: carga, tranco de canhão pesado e explosão",
+   "versoes": [
+    0.0,
+    1.38,
+    2.8071,
+    4.1432
+   ],
+   "duracoes": [
+    1.3,
+    1.3471,
+    1.256,
+    1.3198
+   ],
+   "bytes": 59502
   },
   "armadura": {
    "arquivo": "armadura.mp3",
@@ -155,6 +291,23 @@
    ],
    "bytes": 56544
   },
+  "barrigada": {
+   "arquivo": "barrigada.mp3",
+   "descricao": "básico do Homer: o ar do empurrão, o baque da pança e o \"bloing\" de gelatina",
+   "versoes": [
+    0.0,
+    1.0649,
+    2.0533,
+    2.9825
+   ],
+   "duracoes": [
+    0.9849,
+    0.9083,
+    0.8493,
+    0.9852
+   ],
+   "bytes": 29795
+  },
   "bastao": {
    "arquivo": "bastao.mp3",
    "descricao": "família bastao",
@@ -172,6 +325,23 @@
    ],
    "bytes": 20847
   },
+  "batarangue": {
+   "arquivo": "batarangue.mp3",
+   "descricao": "básico de Batman: assobio do batarangue girando e o \"tchak\" quando crava",
+   "versoes": [
+    0.0,
+    0.7663,
+    1.5983,
+    2.3553
+   ],
+   "duracoes": [
+    0.6863,
+    0.752,
+    0.677,
+    0.7095
+   ],
+   "bytes": 28781
+  },
   "bencao": {
    "arquivo": "bencao.mp3",
    "descricao": "família bencao",
@@ -188,6 +358,57 @@
     1.6244
    ],
    "bytes": 52228
+  },
+  "bicada": {
+   "arquivo": "bicada.mp3",
+   "descricao": "básico do Pica-Pau e do Patolino: bicadas rapidíssimas em madeira",
+   "versoes": [
+    0.0,
+    0.93,
+    1.8908,
+    2.7921
+   ],
+   "duracoes": [
+    0.85,
+    0.8808,
+    0.8212,
+    0.8629
+   ],
+   "bytes": 50504
+  },
+  "bigorna": {
+   "arquivo": "bigorna.mp3",
+   "descricao": "básico do Coiote: assobio da queda, CLANG e poeira",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 50395
+  },
+  "blasters-elementais": {
+   "arquivo": "blasters-elementais.mp3",
+   "descricao": "básico de Senhor das Estrelas: pew pew retrô alternado e estouros",
+   "versoes": [
+    0.0,
+    1.03,
+    2.0944,
+    3.0923
+   ],
+   "duracoes": [
+    0.95,
+    0.9844,
+    0.9179,
+    0.9644
+   ],
+   "bytes": 39440
   },
   "bloco-de-gelo": {
    "arquivo": "bloco-de-gelo.mp3",
@@ -274,6 +495,40 @@
    ],
    "bytes": 23841
   },
+  "bracelete": {
+   "arquivo": "bracelete.mp3",
+   "descricao": "básico de Mulher-Maravilha: \"clang\" dos braceletes e o soco",
+   "versoes": [
+    0.0,
+    1.18,
+    2.3999,
+    3.5427
+   ],
+   "duracoes": [
+    1.1,
+    1.1399,
+    1.0628,
+    1.1167
+   ],
+   "bytes": 43030
+  },
+  "braco-namekiano": {
+   "arquivo": "braco-namekiano.mp3",
+   "descricao": "básico de Piccolo: esticar elástico e orgânico, pancada e o braço voltando",
+   "versoes": [
+    0.0,
+    1.08,
+    2.1963,
+    3.2424
+   ],
+   "duracoes": [
+    1.0,
+    1.0363,
+    0.9662,
+    1.0152
+   ],
+   "bytes": 35353
+  },
   "brasas-renascendo": {
    "arquivo": "brasas-renascendo.mp3",
    "descricao": "família brasas renascendo",
@@ -308,6 +563,23 @@
    ],
    "bytes": 51350
   },
+  "cajado-da-caveira": {
+   "arquivo": "cajado-da-caveira.mp3",
+   "descricao": "básico do Esqueleto: pancada do cajado e magia sinistra",
+   "versoes": [
+    0.0,
+    1.33,
+    2.7053,
+    3.993
+   ],
+   "duracoes": [
+    1.25,
+    1.2953,
+    1.2077,
+    1.269
+   ],
+   "bytes": 44266
+  },
   "canhao": {
    "arquivo": "canhao.mp3",
    "descricao": "família canhao",
@@ -325,6 +597,23 @@
    ],
    "bytes": 54263
   },
+  "canhao-de-braco": {
+   "arquivo": "canhao-de-braco.mp3",
+   "descricao": "básico de Samus: tiro de plasma sci-fi e estouro pequeno",
+   "versoes": [
+    0.0,
+    1.11,
+    2.2562,
+    3.3324
+   ],
+   "duracoes": [
+    1.03,
+    1.0663,
+    0.9962,
+    1.0452
+   ],
+   "bytes": 46500
+  },
   "canhao-de-energia": {
    "arquivo": "canhao-de-energia.mp3",
    "descricao": "família canhao de energia",
@@ -341,6 +630,23 @@
     1.3198
    ],
    "bytes": 54517
+  },
+  "canhao-sonico": {
+   "arquivo": "canhao-sonico.mp3",
+   "descricao": "básico de Ciborgue: onda sônica pulsante batendo no alvo",
+   "versoes": [
+    0.0,
+    1.08,
+    2.1963,
+    3.2424
+   ],
+   "duracoes": [
+    1.0,
+    1.0363,
+    0.9662,
+    1.0152
+   ],
+   "bytes": 41319
   },
   "carga-grande": {
    "arquivo": "carga-grande.mp3",
@@ -375,6 +681,57 @@
     0.6091
    ],
    "bytes": 25444
+  },
+  "carga-roubada": {
+   "arquivo": "carga-roubada.mp3",
+   "descricao": "família carga roubada",
+   "versoes": [
+    0.0,
+    1.18,
+    2.3999,
+    3.5427
+   ],
+   "duracoes": [
+    1.1,
+    1.1399,
+    1.0628,
+    1.1167
+   ],
+   "bytes": 42115
+  },
+  "carta-dragao": {
+   "arquivo": "carta-dragao.mp3",
+   "descricao": "básico de Kaiba: carta, carga e o rugido de energia do raio do dragão",
+   "versoes": [
+    0.0,
+    1.43,
+    2.909,
+    4.2933
+   ],
+   "duracoes": [
+    1.35,
+    1.399,
+    1.3043,
+    1.3705
+   ],
+   "bytes": 56502
+  },
+  "carta-magica": {
+   "arquivo": "carta-magica.mp3",
+   "descricao": "básico de Yugi: carta virando, sininhos e a estrela mágica estourando",
+   "versoes": [
+    0.0,
+    1.38,
+    2.8071,
+    4.1432
+   ],
+   "duracoes": [
+    1.3,
+    1.3471,
+    1.256,
+    1.3198
+   ],
+   "bytes": 69895
   },
   "cartas": {
    "arquivo": "cartas.mp3",
@@ -426,6 +783,23 @@
     0.9869
    ],
    "bytes": 39378
+  },
+  "chama-do-triangulo": {
+   "arquivo": "chama-do-triangulo.mp3",
+   "descricao": "básico de Bill Cipher: tilintar distorcido e chama azul estranha",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 66596
   },
   "chama-negra": {
    "arquivo": "chama-negra.mp3",
@@ -495,6 +869,57 @@
    ],
    "bytes": 65314
   },
+  "choque-do-pikachu": {
+   "arquivo": "choque-do-pikachu.mp3",
+   "descricao": "básico de Pikachu: choque elétrico crepitante agudo",
+   "versoes": [
+    0.0,
+    1.08,
+    2.1963,
+    3.2424
+   ],
+   "duracoes": [
+    1.0,
+    1.0363,
+    0.9662,
+    1.0152
+   ],
+   "bytes": 53424
+  },
+  "chute-demoniaco": {
+   "arquivo": "chute-demoniaco.mp3",
+   "descricao": "básico de Nezuko: chute e o sangue acendendo em chamas",
+   "versoes": [
+    0.0,
+    1.28,
+    2.6035,
+    3.8429
+   ],
+   "duracoes": [
+    1.2,
+    1.2435,
+    1.1594,
+    1.2183
+   ],
+   "bytes": 69040
+  },
+  "chute-do-dragao": {
+   "arquivo": "chute-do-dragao.mp3",
+   "descricao": "básico de Liu Kang: chute voador e rugido de chamas",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 57547
+  },
   "chute-giratorio": {
    "arquivo": "chute-giratorio.mp3",
    "descricao": "família chute giratorio",
@@ -511,6 +936,23 @@
     0.6594
    ],
    "bytes": 25605
+  },
+  "chute-relampago": {
+   "arquivo": "chute-relampago.mp3",
+   "descricao": "básico de Chun-Li: rajada de chutes muito rápidos e o último mais forte",
+   "versoes": [
+    0.0,
+    1.13,
+    2.2981,
+    3.3926
+   ],
+   "duracoes": [
+    1.05,
+    1.0881,
+    1.0145,
+    1.066
+   ],
+   "bytes": 51397
   },
   "chute-voador": {
    "arquivo": "chute-voador.mp3",
@@ -580,6 +1022,23 @@
    ],
    "bytes": 51960
   },
+  "combo-dos-clones": {
+   "arquivo": "combo-dos-clones.mp3",
+   "descricao": "básico de Naruto: \"puf\" de fumaça dos clones e chutes, o último para cima",
+   "versoes": [
+    0.0,
+    1.18,
+    2.3999,
+    3.5427
+   ],
+   "duracoes": [
+    1.1,
+    1.1399,
+    1.0628,
+    1.1167
+   ],
+   "bytes": 42354
+  },
   "confete": {
    "arquivo": "confete.mp3",
    "descricao": "família confete",
@@ -648,6 +1107,57 @@
    ],
    "bytes": 51183
   },
+  "corrente-de-andromeda": {
+   "arquivo": "corrente-de-andromeda.mp3",
+   "descricao": "básico de Shun: elos tilintando e o estalo da ponta",
+   "versoes": [
+    0.0,
+    1.08,
+    2.1963,
+    3.2424
+   ],
+   "duracoes": [
+    1.0,
+    1.0363,
+    0.9662,
+    1.0152
+   ],
+   "bytes": 45866
+  },
+  "corrente-flamejante": {
+   "arquivo": "corrente-flamejante.mp3",
+   "descricao": "básico de Motoqueiro Fantasma: corrente chacoalhando e fogo rugindo",
+   "versoes": [
+    0.0,
+    1.38,
+    2.8071,
+    4.1432
+   ],
+   "duracoes": [
+    1.3,
+    1.3471,
+    1.256,
+    1.3198
+   ],
+   "bytes": 70183
+  },
+  "cortador-de-plasma": {
+   "arquivo": "cortador-de-plasma.mp3",
+   "descricao": "básico de Isaac: bipes da mira, pshew do plasma e chiado",
+   "versoes": [
+    0.0,
+    1.08,
+    2.1963,
+    3.2424
+   ],
+   "duracoes": [
+    1.0,
+    1.0363,
+    0.9662,
+    1.0152
+   ],
+   "bytes": 42430
+  },
   "corte": {
    "arquivo": "corte.mp3",
    "descricao": "corte",
@@ -664,6 +1174,23 @@
     0.4264
    ],
    "bytes": 20195
+  },
+  "corte-dimensional": {
+   "arquivo": "corte-dimensional.mp3",
+   "descricao": "básico de Vergil: cortes múltiplos no espaço, \"tchk\" da bainha e o espaço se partindo",
+   "versoes": [
+    0.0,
+    1.38,
+    2.8071,
+    4.1432
+   ],
+   "duracoes": [
+    1.3,
+    1.3471,
+    1.256,
+    1.3198
+   ],
+   "bytes": 79848
   },
   "corte-giratorio": {
    "arquivo": "corte-giratorio.mp3",
@@ -716,6 +1243,23 @@
    ],
    "bytes": 22222
   },
+  "corvo-da-alma": {
+   "arquivo": "corvo-da-alma.mp3",
+   "descricao": "básico de Ravena: asas batendo e sussurro sombrio de ar",
+   "versoes": [
+    0.0,
+    1.38,
+    2.8071,
+    4.1432
+   ],
+   "duracoes": [
+    1.3,
+    1.3471,
+    1.256,
+    1.3198
+   ],
+   "bytes": 47646
+  },
   "corvos": {
    "arquivo": "corvos.mp3",
    "descricao": "família corvos",
@@ -749,6 +1293,23 @@
     1.3198
    ],
    "bytes": 51503
+  },
+  "cqc": {
+   "arquivo": "cqc.mp3",
+   "descricao": "básico de Snake: agarrão, giro e queda pesada no chão",
+   "versoes": [
+    0.0,
+    1.18,
+    2.3573,
+    3.5001
+   ],
+   "duracoes": [
+    1.1,
+    1.0973,
+    1.0628,
+    1.0757
+   ],
+   "bytes": 44323
   },
   "cravar": {
    "arquivo": "cravar.mp3",
@@ -818,6 +1379,23 @@
    ],
    "bytes": 91480
   },
+  "dedo-apontado": {
+   "arquivo": "dedo-apontado.mp3",
+   "descricao": "básico de Makima: silêncio pesado e um 'bang' abafado e sinistro",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 38947
+  },
   "derrota": {
    "arquivo": "derrota.mp3",
    "descricao": "derrota",
@@ -852,6 +1430,23 @@
    ],
    "bytes": 93362
   },
+  "desmanche": {
+   "arquivo": "desmanche.mp3",
+   "descricao": "básico de Sukuna: vários \"shink\" agudos rapidíssimos",
+   "versoes": [
+    0.0,
+    0.8379,
+    1.7208,
+    2.5687
+   ],
+   "duracoes": [
+    0.7579,
+    0.8029,
+    0.7679,
+    0.7736
+   ],
+   "bytes": 41990
+  },
   "disco": {
    "arquivo": "disco.mp3",
    "descricao": "família disco",
@@ -885,6 +1480,23 @@
     0.3249
    ],
    "bytes": 14398
+  },
+  "disparo-arcano": {
+   "arquivo": "disparo-arcano.mp3",
+   "descricao": "básico de Doutor Estranho: acorde de cristal da mandala e crepitar arcano",
+   "versoes": [
+    0.0,
+    1.28,
+    2.6035,
+    3.8429
+   ],
+   "duracoes": [
+    1.2,
+    1.2435,
+    1.1594,
+    1.2183
+   ],
+   "bytes": 62555
   },
   "dissipar": {
    "arquivo": "dissipar.mp3",
@@ -970,6 +1582,23 @@
     0.9137
    ],
    "bytes": 34761
+  },
+  "duas-pistolas": {
+   "arquivo": "duas-pistolas.mp3",
+   "descricao": "básico de Lara: dois tiros rápidos de pistola e cartuchos tilintando",
+   "versoes": [
+    0.0,
+    0.92,
+    1.869,
+    2.7614
+   ],
+   "duracoes": [
+    0.84,
+    0.869,
+    0.8124,
+    1.0152
+   ],
+   "bytes": 35781
   },
   "encanto": {
    "arquivo": "encanto.mp3",
@@ -1073,6 +1702,23 @@
    ],
    "bytes": 27396
   },
+  "escudo-do-capitao": {
+   "arquivo": "escudo-do-capitao.mp3",
+   "descricao": "básico de Capitão América: escudo girando e o clang metálico que vibra",
+   "versoes": [
+    0.0,
+    1.4391,
+    2.9283,
+    4.3185
+   ],
+   "duracoes": [
+    1.3591,
+    1.4092,
+    1.3102,
+    1.4066
+   ],
+   "bytes": 45198
+  },
   "escudo-fisico": {
    "arquivo": "escudo-fisico.mp3",
    "descricao": "família escudo fisico",
@@ -1157,6 +1803,57 @@
     0.8122
    ],
    "bytes": 35771
+  },
+  "espada-de-alucard": {
+   "arquivo": "espada-de-alucard.mp3",
+   "descricao": "básico de Alucard: espada elegante e asas de morcegos",
+   "versoes": [
+    0.0,
+    1.43,
+    2.909,
+    4.2933
+   ],
+   "duracoes": [
+    1.35,
+    1.399,
+    1.3043,
+    1.3468
+   ],
+   "bytes": 55820
+  },
+  "espada-de-augurio": {
+   "arquivo": "espada-de-augurio.mp3",
+   "descricao": "básico do Lion-O: corte da espada e o brilho do Olho",
+   "versoes": [
+    0.0,
+    1.38,
+    2.8071,
+    4.1432
+   ],
+   "duracoes": [
+    1.3,
+    1.3471,
+    1.256,
+    1.3198
+   ],
+   "bytes": 51287
+  },
+  "espada-mestra": {
+   "arquivo": "espada-mestra.mp3",
+   "descricao": "básico de Link: corte de espada e um brilho de cristal subindo",
+   "versoes": [
+    0.0,
+    1.18,
+    2.3999,
+    3.5427
+   ],
+   "duracoes": [
+    1.1,
+    1.1399,
+    1.0628,
+    1.1167
+   ],
+   "bytes": 51857
   },
   "espadao": {
    "arquivo": "espadao.mp3",
@@ -1277,6 +1974,23 @@
    ],
    "bytes": 73143
   },
+  "estalo-de-dedos": {
+   "arquivo": "estalo-de-dedos.mp3",
+   "descricao": "básico de Roy: snap dos dedos, faísca chiando e explosão de chamas",
+   "versoes": [
+    0.0,
+    1.43,
+    2.909,
+    4.2933
+   ],
+   "duracoes": [
+    1.35,
+    1.399,
+    1.3043,
+    1.3705
+   ],
+   "bytes": 58732
+  },
   "esticar": {
    "arquivo": "esticar.mp3",
    "descricao": "família esticar",
@@ -1293,6 +2007,23 @@
     0.9137
    ],
    "bytes": 26122
+  },
+  "estilingue": {
+   "arquivo": "estilingue.mp3",
+   "descricao": "básico do Bart: twang do elástico, a pedra assobiando e o \"tock\" seco",
+   "versoes": [
+    0.0,
+    0.9748,
+    2.0315,
+    2.9991
+   ],
+   "duracoes": [
+    0.8948,
+    0.9767,
+    0.8876,
+    0.9213
+   ],
+   "bytes": 40405
   },
   "estocada": {
    "arquivo": "estocada.mp3",
@@ -1396,6 +2127,23 @@
    ],
    "bytes": 40070
   },
+  "feitico-comum": {
+   "arquivo": "feitico-comum.mp3",
+   "descricao": "básico de Frieren: arpejo de cristal e o 'piuu' do Zoltraak",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 59680
+  },
   "feixe": {
    "arquivo": "feixe.mp3",
    "descricao": "feixe",
@@ -1464,6 +2212,23 @@
    ],
    "bytes": 16687
   },
+  "flor-de-lapela": {
+   "arquivo": "flor-de-lapela.mp3",
+   "descricao": "básico do Coringa: o esguicho da flor, o respingo e o ácido chiando e borbulhando",
+   "versoes": [
+    0.0,
+    1.33,
+    2.7053,
+    3.993
+   ],
+   "duracoes": [
+    1.25,
+    1.2953,
+    1.2077,
+    1.269
+   ],
+   "bytes": 57484
+  },
   "florete": {
    "arquivo": "florete.mp3",
    "descricao": "família florete",
@@ -1497,6 +2262,23 @@
     0.8629
    ],
    "bytes": 53797
+  },
+  "fogo-azul": {
+   "arquivo": "fogo-azul.mp3",
+   "descricao": "básico da Azula: jato de fogo de alta pressão",
+   "versoes": [
+    0.0,
+    1.13,
+    2.2981,
+    3.3926
+   ],
+   "duracoes": [
+    1.05,
+    1.0881,
+    1.0145,
+    1.066
+   ],
+   "bytes": 47270
   },
   "foguete": {
    "arquivo": "foguete.mp3",
@@ -1532,6 +2314,57 @@
    ],
    "bytes": 34898
   },
+  "frigideira": {
+   "arquivo": "frigideira.mp3",
+   "descricao": "básico do Tom: frigideira BONG vibrando",
+   "versoes": [
+    0.0,
+    1.38,
+    2.8071,
+    4.1432
+   ],
+   "duracoes": [
+    1.3,
+    1.3471,
+    1.256,
+    1.3198
+   ],
+   "bytes": 39321
+  },
+  "frostmourne": {
+   "arquivo": "frostmourne.mp3",
+   "descricao": "básico de Arthas: lâmina rúnica, gelo estalando e vento frio",
+   "versoes": [
+    0.0,
+    1.58,
+    3.2144,
+    4.7437
+   ],
+   "duracoes": [
+    1.5,
+    1.5544,
+    1.4493,
+    1.5228
+   ],
+   "bytes": 58330
+  },
+  "gadget-surpresa": {
+   "arquivo": "gadget-surpresa.mp3",
+   "descricao": "básico do Bugiganga: clique, a mola \"boing\", o soco da luva e o zip de recolher",
+   "versoes": [
+    0.0,
+    1.1751,
+    2.395,
+    3.5378
+   ],
+   "duracoes": [
+    1.0951,
+    1.1399,
+    1.0628,
+    1.1167
+   ],
+   "bytes": 45631
+  },
   "gancho": {
    "arquivo": "gancho.mp3",
    "descricao": "golpe para cima",
@@ -1549,6 +2382,23 @@
    ],
    "bytes": 20524
   },
+  "garra-flamejante": {
+   "arquivo": "garra-flamejante.mp3",
+   "descricao": "básico de Charizard: três garras e a chama acendendo",
+   "versoes": [
+    0.0,
+    1.18,
+    2.3999,
+    3.5427
+   ],
+   "duracoes": [
+    1.1,
+    1.1399,
+    1.0628,
+    1.1167
+   ],
+   "bytes": 61786
+  },
   "garras": {
    "arquivo": "garras.mp3",
    "descricao": "família garras",
@@ -1565,6 +2415,40 @@
     0.6091
    ],
    "bytes": 24880
+  },
+  "garras-cineticas": {
+   "arquivo": "garras-cineticas.mp3",
+   "descricao": "básico de Pantera Negra: garras de vibranium e pulso cinético",
+   "versoes": [
+    0.0,
+    1.13,
+    2.2981,
+    3.3926
+   ],
+   "duracoes": [
+    1.05,
+    1.0881,
+    1.0145,
+    1.066
+   ],
+   "bytes": 47479
+  },
+  "garras-de-killua": {
+   "arquivo": "garras-de-killua.mp3",
+   "descricao": "básico de Killua: três cortes rápidos com estalos de choque e crepitar elétrico",
+   "versoes": [
+    0.0,
+    0.9102,
+    1.8432,
+    2.7261
+   ],
+   "duracoes": [
+    0.8302,
+    0.853,
+    0.8029,
+    0.8547
+   ],
+   "bytes": 44101
   },
   "gas": {
    "arquivo": "gas.mp3",
@@ -1634,6 +2518,159 @@
    ],
    "bytes": 46961
   },
+  "golpe-alienigena": {
+   "arquivo": "golpe-alienigena.mp3",
+   "descricao": "básico do Ben 10: \"zwip\" do Omnitrix e o golpe do alien",
+   "versoes": [
+    0.0,
+    1.08,
+    2.1963,
+    3.2424
+   ],
+   "duracoes": [
+    1.0,
+    1.0363,
+    0.9662,
+    1.0152
+   ],
+   "bytes": 36594
+  },
+  "golpe-da-serie": {
+   "arquivo": "golpe-da-serie.mp3",
+   "descricao": "família golpe da serie",
+   "versoes": [
+    0.0,
+    1.3324,
+    2.7595,
+    4.0955
+   ],
+   "duracoes": [
+    1.2524,
+    1.3471,
+    1.256,
+    1.3198
+   ],
+   "bytes": 44965
+  },
+  "golpe-de-panico": {
+   "arquivo": "golpe-de-panico.mp3",
+   "descricao": "básico de Anya: tapinhas cômicos, 'boing' e estrelinhas",
+   "versoes": [
+    0.0,
+    1.3579,
+    2.7364,
+    4.0404
+   ],
+   "duracoes": [
+    1.2779,
+    1.2985,
+    1.224,
+    1.2644
+   ],
+   "bytes": 49566
+  },
+  "golpe-do-espiao": {
+   "arquivo": "golpe-do-espiao.mp3",
+   "descricao": "básico de Loid: cliques da mira e golpe de mão preciso",
+   "versoes": [
+    0.0,
+    0.9185,
+    1.8742,
+    2.7719
+   ],
+   "duracoes": [
+    0.8385,
+    0.8757,
+    0.8177,
+    0.8073
+   ],
+   "bytes": 36233
+  },
+  "golpe-do-potencial": {
+   "arquivo": "golpe-do-potencial.mp3",
+   "descricao": "básico de Gohan: soco pesado com chiado elétrico do SSJ2",
+   "versoes": [
+    0.0,
+    1.18,
+    2.3999,
+    3.5427
+   ],
+   "duracoes": [
+    1.1,
+    1.1399,
+    1.0628,
+    1.1167
+   ],
+   "bytes": 42838
+  },
+  "golpe-largo": {
+   "arquivo": "golpe-largo.mp3",
+   "descricao": "família golpe largo",
+   "versoes": [
+    0.0,
+    1.205,
+    2.3977,
+    3.6371
+   ],
+   "duracoes": [
+    1.125,
+    1.1126,
+    1.1594,
+    1.2026
+   ],
+   "bytes": 38323
+  },
+  "golpe-psiquico": {
+   "arquivo": "golpe-psiquico.mp3",
+   "descricao": "básico de Professor X: zumbido psíquico que cresce e pulso que ressoa",
+   "versoes": [
+    0.0,
+    1.18,
+    2.3999,
+    3.5427
+   ],
+   "duracoes": [
+    1.1,
+    1.1399,
+    1.0628,
+    1.1167
+   ],
+   "bytes": 36770
+  },
+  "golpe-que-cura": {
+   "arquivo": "golpe-que-cura.mp3",
+   "descricao": "família golpe que cura",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 60486
+  },
+  "golpe-sobre-humano": {
+   "arquivo": "golpe-sobre-humano.mp3",
+   "descricao": "básico de Wesker: \"zip\" de velocidade e palma seca e pesada",
+   "versoes": [
+    0.0,
+    0.9968,
+    2.0613,
+    3.0591
+   ],
+   "duracoes": [
+    0.9168,
+    0.9844,
+    0.9179,
+    0.9644
+   ],
+   "bytes": 35348
+  },
   "grand-carga": {
    "arquivo": "grand-carga.mp3",
    "descricao": "grande habilidade carregando",
@@ -1668,6 +2705,23 @@
    ],
    "bytes": 84429
   },
+  "grande-faca": {
+   "arquivo": "grande-faca.mp3",
+   "descricao": "básico de Pyramid Head: metal arrastando e golpe pesado",
+   "versoes": [
+    0.0,
+    1.58,
+    3.2144,
+    4.7437
+   ],
+   "duracoes": [
+    1.5,
+    1.5544,
+    1.4493,
+    1.5228
+   ],
+   "bytes": 58903
+  },
   "gravidade": {
    "arquivo": "gravidade.mp3",
    "descricao": "família gravidade",
@@ -1701,6 +2755,23 @@
     1.3198
    ],
    "bytes": 46161
+  },
+  "guarda-do-golpe": {
+   "arquivo": "guarda-do-golpe.mp3",
+   "descricao": "família guarda do golpe",
+   "versoes": [
+    0.0,
+    1.28,
+    2.6035,
+    3.8429
+   ],
+   "duracoes": [
+    1.2,
+    1.2435,
+    1.1594,
+    1.2183
+   ],
+   "bytes": 50806
   },
   "hadouken": {
    "arquivo": "hadouken.mp3",
@@ -1769,6 +2840,23 @@
     0.7107
    ],
    "bytes": 28083
+  },
+  "infinito": {
+   "arquivo": "infinito.mp3",
+   "descricao": "básico de Gojo: o tempo esticando abafado e o estalo do pulso",
+   "versoes": [
+    0.0,
+    1.33,
+    2.7053,
+    3.993
+   ],
+   "duracoes": [
+    1.25,
+    1.2953,
+    1.2077,
+    1.269
+   ],
+   "bytes": 45826
   },
   "instinto": {
    "arquivo": "instinto.mp3",
@@ -2008,6 +3096,23 @@
    ],
    "bytes": 47615
   },
+  "jajanken": {
+   "arquivo": "jajanken.mp3",
+   "descricao": "básico de Gon: aura carregando que sobe e soco que estoura com pedrinhas",
+   "versoes": [
+    0.0,
+    1.43,
+    2.909,
+    4.2933
+   ],
+   "duracoes": [
+    1.35,
+    1.399,
+    1.3043,
+    1.3705
+   ],
+   "bytes": 52204
+  },
   "jato-dagua": {
    "arquivo": "jato-dagua.mp3",
    "descricao": "família jato dagua",
@@ -2024,6 +3129,23 @@
     0.9137
    ],
    "bytes": 49440
+  },
+  "kagune": {
+   "arquivo": "kagune.mp3",
+   "descricao": "básico de Kaneki: tentáculos de carne esticando e quatro perfurações",
+   "versoes": [
+    0.0,
+    1.08,
+    2.1963,
+    3.2424
+   ],
+   "duracoes": [
+    1.0,
+    1.0363,
+    0.9662,
+    1.0152
+   ],
+   "bytes": 35597
   },
   "kaioken": {
    "arquivo": "kaioken.mp3",
@@ -2093,6 +3215,108 @@
    ],
    "bytes": 40820
   },
+  "karate": {
+   "arquivo": "karate.mp3",
+   "descricao": "básico do Bob Esponja: \"tchop\" e bolhas estourando",
+   "versoes": [
+    0.0,
+    1.13,
+    2.2981,
+    3.3926
+   ],
+   "duracoes": [
+    1.05,
+    1.0881,
+    1.0145,
+    1.066
+   ],
+   "bytes": 44094
+  },
+  "keyblade": {
+   "arquivo": "keyblade.mp3",
+   "descricao": "básico de Sora: golpe da chave-espada e brilho mágico",
+   "versoes": [
+    0.0,
+    1.38,
+    2.8071,
+    4.1432
+   ],
+   "duracoes": [
+    1.3,
+    1.3471,
+    1.256,
+    1.3198
+   ],
+   "bytes": 58809
+  },
+  "ki-dourado": {
+   "arquivo": "ki-dourado.mp3",
+   "descricao": "básico de Goku: três disparos de ki \"fwip\" e os estouros com baforada",
+   "versoes": [
+    0.0,
+    1.03,
+    2.0944,
+    3.0923
+   ],
+   "duracoes": [
+    0.95,
+    0.9844,
+    0.9179,
+    0.9644
+   ],
+   "bytes": 38457
+  },
+  "kunai-de-hiraishin": {
+   "arquivo": "kunai-de-hiraishin.mp3",
+   "descricao": "básico de Minato: kunai cravando, \"zip\" do teleporte e o golpe",
+   "versoes": [
+    0.0,
+    0.9988,
+    2.0251,
+    3.02
+   ],
+   "duracoes": [
+    0.9188,
+    0.9463,
+    0.9148,
+    0.9085
+   ],
+   "bytes": 38115
+  },
+  "kunai-do-inferno": {
+   "arquivo": "kunai-do-inferno.mp3",
+   "descricao": "básico de Scorpion: lança voando, crava, corda estica e puxão com fogo",
+   "versoes": [
+    0.0,
+    1.38,
+    2.8071,
+    4.1432
+   ],
+   "duracoes": [
+    1.3,
+    1.3471,
+    1.256,
+    1.3198
+   ],
+   "bytes": 69069
+  },
+  "kusanagi": {
+   "arquivo": "kusanagi.mp3",
+   "descricao": "básico de Sasuke: \"shing\" da katana e o crepitar do Chidori",
+   "versoes": [
+    0.0,
+    0.9861,
+    2.0135,
+    3.0114
+   ],
+   "duracoes": [
+    0.9061,
+    0.9474,
+    0.9179,
+    0.9173
+   ],
+   "bytes": 53965
+  },
   "labareda": {
    "arquivo": "labareda.mp3",
    "descricao": "família labareda",
@@ -2109,6 +3333,23 @@
     0.9132
    ],
    "bytes": 55173
+  },
+  "laco": {
+   "arquivo": "laco.mp3",
+   "descricao": "básico do Woody: corda girando, arremesso e puxão",
+   "versoes": [
+    0.0,
+    1.13,
+    2.2981,
+    3.3926
+   ],
+   "duracoes": [
+    1.05,
+    1.0881,
+    1.0145,
+    1.066
+   ],
+   "bytes": 49283
   },
   "lamina-de-agua": {
    "arquivo": "lamina-de-agua.mp3",
@@ -2178,6 +3419,40 @@
    ],
    "bytes": 29358
   },
+  "lamina-oculta": {
+   "arquivo": "lamina-oculta.mp3",
+   "descricao": "básico de Ezio: mola metálica \"shkt\", perfuração e o zumbido da visão de águia",
+   "versoes": [
+    0.0,
+    1.18,
+    2.3999,
+    3.5427
+   ],
+   "duracoes": [
+    1.1,
+    1.1399,
+    1.0628,
+    1.1167
+   ],
+   "bytes": 43795
+  },
+  "lamina-protetica": {
+   "arquivo": "lamina-protetica.mp3",
+   "descricao": "básico de Malenia: cortes em rajada e sopro girando",
+   "versoes": [
+    0.0,
+    1.38,
+    2.8071,
+    4.1432
+   ],
+   "duracoes": [
+    1.3,
+    1.3471,
+    1.256,
+    1.3198
+   ],
+   "bytes": 58048
+  },
   "lamina-sombria": {
    "arquivo": "lamina-sombria.mp3",
    "descricao": "família lamina sombria",
@@ -2194,6 +3469,74 @@
     1.0152
    ],
    "bytes": 38337
+  },
+  "lamina-viva": {
+   "arquivo": "lamina-viva.mp3",
+   "descricao": "básico de Carnificina: quatro cortes orgânicos rasgando, com respingos",
+   "versoes": [
+    0.0,
+    1.03,
+    2.0944,
+    3.0894
+   ],
+   "duracoes": [
+    0.95,
+    0.9844,
+    0.9149,
+    0.9644
+   ],
+   "bytes": 38085
+  },
+  "laminas-do-caos": {
+   "arquivo": "laminas-do-caos.mp3",
+   "descricao": "básico de Kratos: correntes chacoalhando, giro com fogo e dois cortes",
+   "versoes": [
+    0.0,
+    1.23,
+    2.5017,
+    3.6928
+   ],
+   "duracoes": [
+    1.15,
+    1.1917,
+    1.1111,
+    1.1675
+   ],
+   "bytes": 53431
+  },
+  "laminas-odm": {
+   "arquivo": "laminas-odm.mp3",
+   "descricao": "básico de Mikasa: cabos disparando, gás e dois cortes",
+   "versoes": [
+    0.0,
+    1.0622,
+    2.1733,
+    3.1857
+   ],
+   "duracoes": [
+    0.9822,
+    1.0311,
+    0.9324,
+    1.0126
+   ],
+   "bytes": 49393
+  },
+  "laminas-serrilhadas": {
+   "arquivo": "laminas-serrilhadas.mp3",
+   "descricao": "básico de Inosuke: dois rasgos ásperos de lâmina dentada",
+   "versoes": [
+    0.0,
+    0.8724,
+    1.7877,
+    2.6135
+   ],
+   "duracoes": [
+    0.7924,
+    0.8353,
+    0.7458,
+    0.808
+   ],
+   "bytes": 37489
   },
   "lanche": {
    "arquivo": "lanche.mp3",
@@ -2246,6 +3589,23 @@
    ],
    "bytes": 62472
   },
+  "leque-gunbai": {
+   "arquivo": "leque-gunbai.mp3",
+   "descricao": "básico de Madara: abanada pesada do gunbai e a rajada de vento",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 49465
+  },
   "lua": {
    "arquivo": "lua.mp3",
    "descricao": "família lua",
@@ -2297,6 +3657,40 @@
    ],
    "bytes": 52104
   },
+  "machado-de-energon": {
+   "arquivo": "machado-de-energon.mp3",
+   "descricao": "básico do Optimus: zumbido de energia e corte pesado",
+   "versoes": [
+    0.0,
+    1.18,
+    2.3999,
+    3.5427
+   ],
+   "duracoes": [
+    1.1,
+    1.1399,
+    1.0628,
+    1.1167
+   ],
+   "bytes": 45061
+  },
+  "magia-do-caos": {
+   "arquivo": "magia-do-caos.mp3",
+   "descricao": "básico de Feiticeira Escarlate: magia do caos distorcida e sinistra",
+   "versoes": [
+    0.0,
+    1.38,
+    2.8071,
+    4.1432
+   ],
+   "duracoes": [
+    1.3,
+    1.3471,
+    1.256,
+    1.3198
+   ],
+   "bytes": 44275
+  },
   "maldicao": {
    "arquivo": "maldicao.mp3",
    "descricao": "maldição",
@@ -2314,6 +3708,23 @@
    ],
    "bytes": 38984
   },
+  "manopla": {
+   "arquivo": "manopla.mp3",
+   "descricao": "básico de Thanos: soco pesado da manopla e seis brilhos cristalinos",
+   "versoes": [
+    0.0,
+    1.38,
+    2.8071,
+    4.1432
+   ],
+   "duracoes": [
+    1.3,
+    1.3471,
+    1.256,
+    1.3198
+   ],
+   "bytes": 49997
+  },
   "manto-kurama": {
    "arquivo": "manto-kurama.mp3",
    "descricao": "família manto kurama",
@@ -2330,6 +3741,23 @@
     1.7881
    ],
    "bytes": 76304
+  },
+  "mao-da-perdicao": {
+   "arquivo": "mao-da-perdicao.mp3",
+   "descricao": "básico de Hellboy: pedra pesada esmagando e cascalho",
+   "versoes": [
+    0.0,
+    1.38,
+    2.8071,
+    4.1432
+   ],
+   "duracoes": [
+    1.3,
+    1.3471,
+    1.256,
+    1.3198
+   ],
+   "bytes": 55961
   },
   "marca": {
    "arquivo": "marca.mp3",
@@ -2399,6 +3827,57 @@
    ],
    "bytes": 39464
   },
+  "martelo-e-prego": {
+   "arquivo": "martelo-e-prego.mp3",
+   "descricao": "básico de Nobara: \"tink\" dos pregos, martelada e ressonância",
+   "versoes": [
+    0.0,
+    1.38,
+    2.8071,
+    4.1432
+   ],
+   "duracoes": [
+    1.3,
+    1.3471,
+    1.256,
+    1.3198
+   ],
+   "bytes": 52808
+  },
+  "masamune": {
+   "arquivo": "masamune.mp3",
+   "descricao": "básico de Sephiroth: lâmina longa cortando o ar e o \"shiiing\" longo do fio",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 58816
+  },
+  "matadora-de-dragoes": {
+   "arquivo": "matadora-de-dragoes.mp3",
+   "descricao": "básico de Guts: whoosh grave de ferro enorme, clang abafado e baque que treme",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 59967
+  },
   "medo": {
    "arquivo": "medo.mp3",
    "descricao": "família medo",
@@ -2416,6 +3895,23 @@
    ],
    "bytes": 37782
   },
+  "mega-buster": {
+   "arquivo": "mega-buster.mp3",
+   "descricao": "básico de Mega Man: três \"pew\" de 8 bits com estalinhos",
+   "versoes": [
+    0.0,
+    1.03,
+    2.0944,
+    3.0923
+   ],
+   "duracoes": [
+    0.95,
+    0.9844,
+    0.9179,
+    0.9644
+   ],
+   "bytes": 41522
+  },
   "metal": {
    "arquivo": "metal.mp3",
    "descricao": "família metal",
@@ -2432,6 +3928,23 @@
     1.1167
    ],
    "bytes": 39524
+  },
+  "meteoros-de-pegaso": {
+   "arquivo": "meteoros-de-pegaso.mp3",
+   "descricao": "básico de Seiya: rajada de dezenas de socos com zunido",
+   "versoes": [
+    0.0,
+    1.18,
+    2.3999,
+    3.5427
+   ],
+   "duracoes": [
+    1.1,
+    1.1399,
+    1.0628,
+    1.1167
+   ],
+   "bytes": 45661
   },
   "mil-cortes": {
    "arquivo": "mil-cortes.mp3",
@@ -2483,6 +3996,23 @@
     0.5076
    ],
    "bytes": 20234
+  },
+  "mordida-cartoon": {
+   "arquivo": "mordida-cartoon.mp3",
+   "descricao": "básico do Scooby e do Coragem: \"chomp\" de desenho e os dentes batendo de medo",
+   "versoes": [
+    0.0,
+    0.913,
+    1.886,
+    2.8006
+   ],
+   "duracoes": [
+    0.833,
+    0.893,
+    0.8346,
+    0.842
+   ],
+   "bytes": 37205
   },
   "motosserra": {
    "arquivo": "motosserra.mp3",
@@ -2569,6 +4099,23 @@
    ],
    "bytes": 41852
   },
+  "nunchakus": {
+   "arquivo": "nunchakus.mp3",
+   "descricao": "básico do Michelangelo: giro \"vuvuvu\" e dois golpes de madeira",
+   "versoes": [
+    0.0,
+    1.03,
+    2.0944,
+    3.0918
+   ],
+   "duracoes": [
+    0.95,
+    0.9844,
+    0.9173,
+    0.9644
+   ],
+   "bytes": 40638
+  },
   "olho": {
    "arquivo": "olho.mp3",
    "descricao": "família olho",
@@ -2602,6 +4149,23 @@
     0.9137
    ],
    "bytes": 34939
+  },
+  "pancada-de-sangue": {
+   "arquivo": "pancada-de-sangue.mp3",
+   "descricao": "básico de Power: pancada molhada, esguicho e gotas pingando",
+   "versoes": [
+    0.0,
+    1.2404,
+    2.4925,
+    3.6295
+   ],
+   "duracoes": [
+    1.1604,
+    1.172,
+    1.057,
+    1.268
+   ],
+   "bytes": 37402
   },
   "pentagrama": {
    "arquivo": "pentagrama.mp3",
@@ -2654,6 +4218,23 @@
    ],
    "bytes": 46109
   },
+  "pisada-do-mario": {
+   "arquivo": "pisada-do-mario.mp3",
+   "descricao": "básico de Mario: \"boing\" de pulo, pisada fofa e brilho de moeda",
+   "versoes": [
+    0.0,
+    1.08,
+    2.1963,
+    3.2424
+   ],
+   "duracoes": [
+    1.0,
+    1.0363,
+    0.9662,
+    1.0152
+   ],
+   "bytes": 40665
+  },
   "pisao": {
    "arquivo": "pisao.mp3",
    "descricao": "família pisao",
@@ -2687,6 +4268,23 @@
     0.9137
    ],
    "bytes": 56944
+  },
+  "po-de-diamante": {
+   "arquivo": "po-de-diamante.mp3",
+   "descricao": "básico de Hyoga: cristais tilintando, vento frio e gelo estalando",
+   "versoes": [
+    0.0,
+    1.43,
+    2.909,
+    4.2933
+   ],
+   "duracoes": [
+    1.35,
+    1.399,
+    1.3043,
+    1.3705
+   ],
+   "bytes": 59000
   },
   "portal": {
    "arquivo": "portal.mp3",
@@ -2824,6 +4422,57 @@
    ],
    "bytes": 68377
   },
+  "punho-amaldicoado": {
+   "arquivo": "punho-amaldicoado.mp3",
+   "descricao": "básico de Yuji: impacto com estalo distorcido do Black Flash",
+   "versoes": [
+    0.0,
+    0.98,
+    1.9926,
+    2.9422
+   ],
+   "duracoes": [
+    0.9,
+    0.9326,
+    0.8695,
+    0.9137
+   ],
+   "bytes": 33718
+  },
+  "punho-da-fenix": {
+   "arquivo": "punho-da-fenix.mp3",
+   "descricao": "básico de Ikki: soco, chama explodindo e o grito de vento da fênix",
+   "versoes": [
+    0.0,
+    1.43,
+    2.909,
+    4.2933
+   ],
+   "duracoes": [
+    1.35,
+    1.399,
+    1.3043,
+    1.3705
+   ],
+   "bytes": 55340
+  },
+  "punho-de-apokolips": {
+   "arquivo": "punho-de-apokolips.mp3",
+   "descricao": "básico de Darkseid: soco grave e o zumbido sinistro do Ômega",
+   "versoes": [
+    0.0,
+    1.38,
+    2.8071,
+    4.1432
+   ],
+   "duracoes": [
+    1.3,
+    1.3471,
+    1.256,
+    1.3198
+   ],
+   "bytes": 51104
+  },
   "punho-divergente": {
    "arquivo": "punho-divergente.mp3",
    "descricao": "família punho divergente",
@@ -2841,6 +4490,40 @@
    ],
    "bytes": 58256
   },
+  "punho-do-dragao": {
+   "arquivo": "punho-do-dragao.mp3",
+   "descricao": "básico de Shiryu: gancho subindo e o rugido de vento do dragão",
+   "versoes": [
+    0.0,
+    1.43,
+    2.909,
+    4.2933
+   ],
+   "duracoes": [
+    1.35,
+    1.399,
+    1.3043,
+    1.3705
+   ],
+   "bytes": 47027
+  },
+  "punho-fotonico": {
+   "arquivo": "punho-fotonico.mp3",
+   "descricao": "básico de Capitã Marvel: energia fotônica e explosão de luz",
+   "versoes": [
+    0.0,
+    1.28,
+    2.6035,
+    3.8429
+   ],
+   "duracoes": [
+    1.2,
+    1.2435,
+    1.1594,
+    1.2183
+   ],
+   "bytes": 47588
+  },
   "punho-gigante": {
    "arquivo": "punho-gigante.mp3",
    "descricao": "família punho gigante",
@@ -2857,6 +4540,40 @@
     1.0152
    ],
    "bytes": 40612
+  },
+  "punho-lendario": {
+   "arquivo": "punho-lendario.mp3",
+   "descricao": "básico de Broly: soco grave, saturado e esmagador, com pedras caindo",
+   "versoes": [
+    0.0,
+    1.38,
+    2.8071,
+    4.1432
+   ],
+   "duracoes": [
+    1.3,
+    1.3471,
+    1.256,
+    1.3198
+   ],
+   "bytes": 46697
+  },
+  "punho-transmutado": {
+   "arquivo": "punho-transmutado.mp3",
+   "descricao": "básico de Edward: estalo azul de transmutação, pedra roncando e baque de rocha",
+   "versoes": [
+    0.0,
+    1.43,
+    2.909,
+    4.2933
+   ],
+   "duracoes": [
+    1.35,
+    1.399,
+    1.3043,
+    1.3705
+   ],
+   "bytes": 74405
   },
   "purificacao": {
    "arquivo": "purificacao.mp3",
@@ -2892,6 +4609,23 @@
    ],
    "bytes": 39584
   },
+  "quique": {
+   "arquivo": "quique.mp3",
+   "descricao": "família quique",
+   "versoes": [
+    0.0,
+    0.8661,
+    1.7463,
+    2.635
+   ],
+   "duracoes": [
+    0.7861,
+    0.8003,
+    0.8087,
+    0.8279
+   ],
+   "bytes": 31995
+  },
   "radiacao": {
    "arquivo": "radiacao.mp3",
    "descricao": "família radiacao",
@@ -2925,6 +4659,23 @@
     0.6091
    ],
    "bytes": 41326
+  },
+  "raio-de-gaia": {
+   "arquivo": "raio-de-gaia.mp3",
+   "descricao": "básico do Capitão Planeta: cinco notas de cristal que viram um raio limpo e brilhante",
+   "versoes": [
+    0.0,
+    1.38,
+    2.8071,
+    4.1432
+   ],
+   "duracoes": [
+    1.3,
+    1.3471,
+    1.256,
+    1.3198
+   ],
+   "bytes": 49246
   },
   "raio-divino": {
    "arquivo": "raio-divino.mp3",
@@ -2960,6 +4711,40 @@
    ],
    "bytes": 50986
   },
+  "raio-fantasma": {
+   "arquivo": "raio-fantasma.mp3",
+   "descricao": "básico do Danny Phantom: disparo de ectoplasma com zumbido etéreo e um \"uuuu\" fantasma",
+   "versoes": [
+    0.0,
+    1.38,
+    2.8071,
+    4.1432
+   ],
+   "duracoes": [
+    1.3,
+    1.3471,
+    1.256,
+    1.3198
+   ],
+   "bytes": 51007
+  },
+  "rajada-continua": {
+   "arquivo": "rajada-continua.mp3",
+   "descricao": "básico de Vegeta: rajada metralhada de ki com ronco crescente e explosão",
+   "versoes": [
+    0.0,
+    1.58,
+    3.2144,
+    4.7437
+   ],
+   "duracoes": [
+    1.5,
+    1.5544,
+    1.4493,
+    1.5228
+   ],
+   "bytes": 67083
+  },
   "rajada-de-ar": {
    "arquivo": "rajada-de-ar.mp3",
    "descricao": "família rajada de ar",
@@ -2993,6 +4778,23 @@
     0.5584
    ],
    "bytes": 23872
+  },
+  "rebellion-e-ebony": {
+   "arquivo": "rebellion-e-ebony.mp3",
+   "descricao": "básico de Dante: espadão pesado e dois tiros de pistola",
+   "versoes": [
+    0.0,
+    1.23,
+    2.5017,
+    3.6928
+   ],
+   "duracoes": [
+    1.15,
+    1.1917,
+    1.1111,
+    1.1675
+   ],
+   "bytes": 42686
   },
   "reflexo": {
    "arquivo": "reflexo.mp3",
@@ -3045,6 +4847,23 @@
    ],
    "bytes": 46734
   },
+  "rei-gun": {
+   "arquivo": "rei-gun.mp3",
+   "descricao": "básico de Yusuke: carga curta e o disparo \"pew\" grave do Rei Gun",
+   "versoes": [
+    0.0,
+    1.08,
+    2.1963,
+    3.2424
+   ],
+   "duracoes": [
+    1.0,
+    1.0363,
+    0.9662,
+    1.0152
+   ],
+   "bytes": 40357
+  },
   "relogio": {
    "arquivo": "relogio.mp3",
    "descricao": "família relogio",
@@ -3079,6 +4898,23 @@
    ],
    "bytes": 99870
   },
+  "rendicao": {
+   "arquivo": "rendicao.mp3",
+   "descricao": "básico de Shaka: sino tibetano e o pulso de luz",
+   "versoes": [
+    0.0,
+    1.5,
+    3.0515,
+    4.5035
+   ],
+   "duracoes": [
+    1.42,
+    1.4715,
+    1.372,
+    1.4416
+   ],
+   "bytes": 61775
+  },
   "repulsao": {
    "arquivo": "repulsao.mp3",
    "descricao": "família repulsao",
@@ -3095,6 +4931,23 @@
     1.1167
    ],
    "bytes": 45352
+  },
+  "repulsor": {
+   "arquivo": "repulsor.mp3",
+   "descricao": "básico de Homem de Ferro: carga eletrônica e o \"pew\" grave do repulsor",
+   "versoes": [
+    0.0,
+    1.08,
+    2.1963,
+    3.2424
+   ],
+   "duracoes": [
+    1.0,
+    1.0363,
+    0.9662,
+    1.0152
+   ],
+   "bytes": 36173
   },
   "resgate": {
    "arquivo": "resgate.mp3",
@@ -3147,6 +5000,40 @@
    ],
    "bytes": 28694
   },
+  "rinnegan": {
+   "arquivo": "rinnegan.mp3",
+   "descricao": "básico de Pain: onda de pressão grave do Shinra Tensei",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 51345
+  },
+  "roubar-carga": {
+   "arquivo": "roubar-carga.mp3",
+   "descricao": "família roubar carga",
+   "versoes": [
+    0.0,
+    1.0423,
+    2.0806,
+    3.0737
+   ],
+   "duracoes": [
+    0.9623,
+    0.9582,
+    0.9132,
+    0.9122
+   ],
+   "bytes": 31587
+  },
   "rugido": {
    "arquivo": "rugido.mp3",
    "descricao": "família rugido",
@@ -3181,6 +5068,23 @@
    ],
    "bytes": 38512
   },
+  "sais": {
+   "arquivo": "sais.mp3",
+   "descricao": "básico do Raphael: duas estocadas metálicas dos sais",
+   "versoes": [
+    0.0,
+    0.93,
+    1.8571,
+    2.7584
+   ],
+   "duracoes": [
+    0.85,
+    0.8471,
+    0.8212,
+    0.8629
+   ],
+   "bytes": 37989
+  },
   "sangue": {
    "arquivo": "sangue.mp3",
    "descricao": "família sangue",
@@ -3197,6 +5101,23 @@
     0.9137
    ],
    "bytes": 33860
+  },
+  "saque-do-trovao": {
+   "arquivo": "saque-do-trovao.mp3",
+   "descricao": "básico de Zenitsu: estalo de trovão seco e a lâmina voltando à bainha",
+   "versoes": [
+    0.0,
+    1.23,
+    2.5017,
+    3.6928
+   ],
+   "duracoes": [
+    1.15,
+    1.1917,
+    1.1111,
+    1.1675
+   ],
+   "bytes": 56073
   },
   "saraivada": {
    "arquivo": "saraivada.mp3",
@@ -3283,6 +5204,23 @@
    ],
    "bytes": 73439
   },
+  "shuriken": {
+   "arquivo": "shuriken.mp3",
+   "descricao": "básico de Itachi: assobio girando de três shurikens e o \"tchak\" de cada uma",
+   "versoes": [
+    0.0,
+    0.98,
+    1.9037,
+    2.8532
+   ],
+   "duracoes": [
+    0.9,
+    0.8437,
+    0.8695,
+    0.9137
+   ],
+   "bytes": 34883
+  },
   "silencio": {
    "arquivo": "silencio.mp3",
    "descricao": "família silencio",
@@ -3299,6 +5237,142 @@
     0.9437
    ],
    "bytes": 25366
+  },
+  "soco-casual": {
+   "arquivo": "soco-casual.mp3",
+   "descricao": "básico de Saitama: soco seco, pausa e o vendaval \"whoosh\"",
+   "versoes": [
+    0.0,
+    1.63,
+    3.3162,
+    4.8938
+   ],
+   "duracoes": [
+    1.55,
+    1.6062,
+    1.4976,
+    1.5736
+   ],
+   "bytes": 61752
+  },
+  "soco-da-vida": {
+   "arquivo": "soco-da-vida.mp3",
+   "descricao": "básico de Giorno: soco, galhos brotando e arpejo dourado",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 54537
+  },
+  "soco-de-aco": {
+   "arquivo": "soco-de-aco.mp3",
+   "descricao": "básico de Superman: estrondo sônico duplo e o soco pesado",
+   "versoes": [
+    0.0,
+    1.28,
+    2.6035,
+    3.8429
+   ],
+   "duracoes": [
+    1.2,
+    1.2435,
+    1.1594,
+    1.2183
+   ],
+   "bytes": 40869
+  },
+  "soco-de-chakra": {
+   "arquivo": "soco-de-chakra.mp3",
+   "descricao": "básico de Sakura: soco gigantesco e o chão rachando",
+   "versoes": [
+    0.0,
+    1.38,
+    2.8071,
+    4.1432
+   ],
+   "duracoes": [
+    1.3,
+    1.3471,
+    1.256,
+    1.3198
+   ],
+   "bytes": 53987
+  },
+  "soco-de-marinheiro": {
+   "arquivo": "soco-de-marinheiro.mp3",
+   "descricao": "básico do Popeye: manivela cômica e o soco com estrelinhas",
+   "versoes": [
+    0.0,
+    1.2155,
+    2.4649,
+    3.6458
+   ],
+   "duracoes": [
+    1.1355,
+    1.1694,
+    1.1009,
+    1.1675
+   ],
+   "bytes": 47439
+  },
+  "soco-de-pym": {
+   "arquivo": "soco-de-pym.mp3",
+   "descricao": "básico de Homem-Formiga: \"zip\" de encolher e o soco que cresce",
+   "versoes": [
+    0.0,
+    1.08,
+    2.1963,
+    3.2424
+   ],
+   "duracoes": [
+    1.0,
+    1.0363,
+    0.9662,
+    1.0152
+   ],
+   "bytes": 42040
+  },
+  "soco-do-diabo": {
+   "arquivo": "soco-do-diabo.mp3",
+   "descricao": "básico de Kazuya: soco pesado e estalo elétrico grave",
+   "versoes": [
+    0.0,
+    1.28,
+    2.6035,
+    3.8429
+   ],
+   "duracoes": [
+    1.2,
+    1.2435,
+    1.1594,
+    1.1744
+   ],
+   "bytes": 48420
+  },
+  "soco-do-stand": {
+   "arquivo": "soco-do-stand.mp3",
+   "descricao": "básico de Jotaro: soco pesado com eco fantasmagórico",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 46289
   },
   "soco-leve": {
    "arquivo": "soco-leve.mp3",
@@ -3334,6 +5408,23 @@
    ],
    "bytes": 19265
   },
+  "soco-relampago": {
+   "arquivo": "soco-relampago.mp3",
+   "descricao": "básico de Flash: zunido supersônico e uma série de socos ultrarrápidos",
+   "versoes": [
+    0.0,
+    1.18,
+    2.3999,
+    3.5427
+   ],
+   "duracoes": [
+    1.1,
+    1.1399,
+    1.0628,
+    1.1167
+   ],
+   "bytes": 64109
+  },
   "soco-serio": {
    "arquivo": "soco-serio.mp3",
    "descricao": "família soco serio",
@@ -3350,6 +5441,23 @@
     1.5228
    ],
    "bytes": 57639
+  },
+  "soco-titanico": {
+   "arquivo": "soco-titanico.mp3",
+   "descricao": "básico de Eren: soco de titã grave e pesado e o chiado do vapor",
+   "versoes": [
+    0.0,
+    1.58,
+    3.2144,
+    4.7437
+   ],
+   "duracoes": [
+    1.5,
+    1.5544,
+    1.4493,
+    1.5228
+   ],
+   "bytes": 54989
   },
   "sombra": {
    "arquivo": "sombra.mp3",
@@ -3419,6 +5527,23 @@
    ],
    "bytes": 45997
   },
+  "spin-attack": {
+   "arquivo": "spin-attack.mp3",
+   "descricao": "básico de Sonic: bola girando e quique elástico",
+   "versoes": [
+    0.0,
+    1.0296,
+    2.094,
+    3.0919
+   ],
+   "duracoes": [
+    0.9496,
+    0.9844,
+    0.9179,
+    0.9644
+   ],
+   "bytes": 35531
+  },
   "spin-dash": {
    "arquivo": "spin-dash.mp3",
    "descricao": "família spin dash",
@@ -3470,6 +5595,23 @@
    ],
    "bytes": 64808
   },
+  "taco-de-beisebol": {
+   "arquivo": "taco-de-beisebol.mp3",
+   "descricao": "básico da Arlequina: o giro do taco, o \"crack\" de madeira e um plim",
+   "versoes": [
+    0.0,
+    1.0199,
+    2.1362,
+    3.1823
+   ],
+   "duracoes": [
+    0.9399,
+    1.0363,
+    0.9662,
+    0.9658
+   ],
+   "bytes": 34472
+  },
   "teia": {
    "arquivo": "teia.mp3",
    "descricao": "família teia",
@@ -3486,6 +5628,23 @@
     0.5171
    ],
    "bytes": 26375
+  },
+  "teia-e-soco": {
+   "arquivo": "teia-e-soco.mp3",
+   "descricao": "básico de Homem-Aranha: \"thwip\" da teia, o splat e o soco",
+   "versoes": [
+    0.0,
+    0.98,
+    1.9926,
+    2.9422
+   ],
+   "duracoes": [
+    0.9,
+    0.9326,
+    0.8695,
+    0.9137
+   ],
+   "bytes": 36175
   },
   "teleporte": {
    "arquivo": "teleporte.mp3",
@@ -3538,6 +5697,23 @@
    ],
    "bytes": 85691
   },
+  "tentaculo-simbionte": {
+   "arquivo": "tentaculo-simbionte.mp3",
+   "descricao": "básico de Venom: tentáculos viscosos, chicotada e aperto molhado",
+   "versoes": [
+    0.0,
+    1.08,
+    2.1963,
+    3.2424
+   ],
+   "duracoes": [
+    1.0,
+    1.0363,
+    0.9662,
+    1.0152
+   ],
+   "bytes": 33347
+  },
   "tentaculos": {
    "arquivo": "tentaculos.mp3",
    "descricao": "família tentaculos",
@@ -3588,6 +5764,23 @@
     1.3198
    ],
    "bytes": 55423
+  },
+  "tiara-lunar": {
+   "arquivo": "tiara-lunar.mp3",
+   "descricao": "básico de Sailor Moon: disco girando que acerta com brilho mágico",
+   "versoes": [
+    0.0,
+    1.28,
+    2.6035,
+    3.8429
+   ],
+   "duracoes": [
+    1.2,
+    1.2435,
+    1.1594,
+    1.2183
+   ],
+   "bytes": 60995
   },
   "tiro": {
    "arquivo": "tiro.mp3",
@@ -3640,6 +5833,57 @@
    ],
    "bytes": 7371
   },
+  "toque-absorvente": {
+   "arquivo": "toque-absorvente.mp3",
+   "descricao": "básico de Vampira: toque leve, sucção de energia que sobe e brilho",
+   "versoes": [
+    0.0,
+    1.13,
+    2.2981,
+    3.3926
+   ],
+   "duracoes": [
+    1.05,
+    1.0881,
+    1.0145,
+    1.066
+   ],
+   "bytes": 47527
+  },
+  "toque-da-destruicao": {
+   "arquivo": "toque-da-destruicao.mp3",
+   "descricao": "básico de Beerus: \"tic\" do peteleco, zumbido da esfera e implosão sugada",
+   "versoes": [
+    0.0,
+    1.28,
+    2.6035,
+    3.8429
+   ],
+   "duracoes": [
+    1.2,
+    1.2435,
+    1.1594,
+    1.2183
+   ],
+   "bytes": 52506
+  },
+  "toque-do-devorador": {
+   "arquivo": "toque-do-devorador.mp3",
+   "descricao": "básico de Galactus: grave cósmico, a mão fecha e a matéria se desintegra",
+   "versoes": [
+    0.0,
+    1.53,
+    3.1126,
+    4.5935
+   ],
+   "duracoes": [
+    1.45,
+    1.5026,
+    1.401,
+    1.4721
+   ],
+   "bytes": 72977
+  },
   "tornado": {
    "arquivo": "tornado.mp3",
    "descricao": "família tornado",
@@ -3690,6 +5934,23 @@
     1.6544
    ],
    "bytes": 63689
+  },
+  "tridente": {
+   "arquivo": "tridente.mp3",
+   "descricao": "básico de Aquaman: estocada metálica do tridente e respingo de água",
+   "versoes": [
+    0.0,
+    1.08,
+    2.1963,
+    3.2424
+   ],
+   "duracoes": [
+    1.0,
+    1.0363,
+    0.9662,
+    1.0152
+   ],
+   "bytes": 39162
   },
   "tsunami": {
    "arquivo": "tsunami.mp3",
@@ -3962,6 +6223,23 @@
     1.8274
    ],
    "bytes": 58374
+  },
+  "z-saber": {
+   "arquivo": "z-saber.mp3",
+   "descricao": "básico de Zero: \"vwum\" do sabre de energia e o chiado do corte",
+   "versoes": [
+    0.0,
+    1.08,
+    2.1963,
+    3.2424
+   ],
+   "duracoes": [
+    1.0,
+    1.0363,
+    0.9662,
+    1.0152
+   ],
+   "bytes": 39657
   }
  }
 }

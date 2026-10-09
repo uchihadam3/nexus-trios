@@ -1,4 +1,18 @@
 {
+ "acelera": {
+  "descricao": "Acelerou: setas, vultos e o relógio que dá a volta",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 74458
+ },
  "acido": {
   "descricao": "respingo de ácido",
   "quadros": 12,
@@ -12,6 +26,48 @@
   ],
   "laco": false,
   "bytes": 27580
+ },
+ "adaga_de_kamish": {
+  "descricao": "Jinwoo: dois cortes de adaga em X e fumaça de sombra subindo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 59818
+ },
+ "adaga_do_tempo": {
+  "descricao": "Príncipe: corte da adaga e areia do tempo voltando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 110624
+ },
+ "adaga_ilusoria": {
+  "descricao": "Loki: a adaga se divide em ilusões; só a verdadeira crava",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 41542
  },
  "agua": {
   "descricao": "respingo de água",
@@ -41,6 +97,34 @@
   "laco": false,
   "bytes": 36000
  },
+ "agulha_de_espinho": {
+  "descricao": "Agulha de espinho de Yor: dois estiletes em X e pétalas de rosa",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 41122
+ },
+ "aparar_e_cortar": {
+  "descricao": "Sekiro: faísca de aparar e contra-corte",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 79598
+ },
  "areia": {
   "descricao": "casulo de areia",
   "quadros": 12,
@@ -54,6 +138,34 @@
   ],
   "laco": false,
   "bytes": 99266
+ },
+ "arma_da_gravidade": {
+  "descricao": "Gordon: feixe puxa a caixa e a lança no alvo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 48994
+ },
+ "arma_grande": {
+  "descricao": "Rocket: carga, tranco e bola de plasma que explode",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 82660
  },
  "armadura": {
   "descricao": "placas de armadura",
@@ -125,6 +237,20 @@
   "laco": false,
   "bytes": 70042
  },
+ "barrigada": {
+  "descricao": "Barrigada do Homer: a barriga amassa no alvo e balança, ondas achatadas e estrelinhas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 69452
+ },
  "bastao": {
   "descricao": "golpe de bastão",
   "quadros": 12,
@@ -139,6 +265,20 @@
   "laco": false,
   "bytes": 45154
  },
+ "batarangue": {
+  "descricao": "Batarangue: o morcego girando que crava no alvo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 42696
+ },
  "bencao": {
   "descricao": "penas e halo",
   "quadros": 12,
@@ -152,6 +292,48 @@
   ],
   "laco": false,
   "bytes": 56000
+ },
+ "bicada": {
+  "descricao": "Bicada-britadeira: o bico bate e volta, o buraco racha e as lascas voam",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 57960
+ },
+ "bigorna": {
+  "descricao": "Bigorna ACME: a sombra cresce, a bigorna cai, esmaga e levanta poeira",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 53582
+ },
+ "blasters_elementais": {
+  "descricao": "Senhor das Estrelas: dois blasters alternando tiros de plasma",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 33230
  },
  "bloco_de_gelo": {
   "descricao": "bloco de gelo prendendo",
@@ -237,6 +419,34 @@
   "laco": false,
   "bytes": 49348
  },
+ "bracelete": {
+  "descricao": "Golpe de bracelete: braceletes em X e o soco",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 58982
+ },
+ "braco_namekiano": {
+  "descricao": "básico do Piccolo: o braço verde estica e acerta",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 39320
+ },
  "brasas_renascendo": {
   "descricao": "brasas sobre quem vai renascer (laço)",
   "quadros": 12,
@@ -265,6 +475,34 @@
   "laco": false,
   "bytes": 51608
  },
+ "cajado_da_caveira": {
+  "descricao": "Cajado da Caveira: o crânio de carneiro bate e solta faíscas mágicas num círculo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 75454
+ },
+ "canhao_de_braco": {
+  "descricao": "Samus: bola de plasma do canhão, explosão pequena e anel (+x)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 61472
+ },
  "canhao_de_energia": {
   "descricao": "canhão de energia (faixa)",
   "quadros": 12,
@@ -278,6 +516,20 @@
   ],
   "laco": true,
   "bytes": 26642
+ },
+ "canhao_sonico": {
+  "descricao": "Ciborgue: arcos de onda sonora em sequência",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 49802
  },
  "carga": {
   "descricao": "preparo: energia convergindo",
@@ -306,6 +558,48 @@
   ],
   "laco": true,
   "bytes": 41132
+ },
+ "carga_roubada": {
+  "descricao": "A Carga roubada enche a habilidade de quem roubou",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 58808
+ },
+ "carta_dragao": {
+  "descricao": "Kaiba: carta vira e solta o raio branco do dragão",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 70138
+ },
+ "carta_magica": {
+  "descricao": "Yugi: carta vira, brilha e solta estrela mágica",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 70758
  },
  "cartas_explosivas": {
   "descricao": "cartas que estouram",
@@ -363,6 +657,20 @@
   "laco": false,
   "bytes": 88196
  },
+ "chama_do_triangulo": {
+  "descricao": "Bill Cipher: triângulo de olho que derrama chama azul",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 57072
+ },
  "chama_negra": {
   "descricao": "chama negra lenta",
   "quadros": 12,
@@ -419,6 +727,48 @@
   "laco": false,
   "bytes": 90854
  },
+ "choque_do_pikachu": {
+  "descricao": "básico do Pikachu: faíscas em zigue-zague e bochechas crepitando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 73658
+ },
+ "chute_demoniaco": {
+  "descricao": "Nezuko: chute em arco e o sangue explode em chamas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 47088
+ },
+ "chute_do_dragao": {
+  "descricao": "Liu Kang: chute voador com dragão de fogo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 59904
+ },
  "chute_giratorio": {
   "descricao": "chute giratório baixo",
   "quadros": 12,
@@ -432,6 +782,20 @@
   ],
   "laco": false,
   "bytes": 46596
+ },
+ "chute_relampago": {
+  "descricao": "Chun-Li: leque de chutes rápidos em borrão",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 61934
  },
  "chute_voador": {
   "descricao": "chute voador (diagonal)",
@@ -488,6 +852,20 @@
   ],
   "laco": false,
   "bytes": 43174
+ },
+ "combo_dos_clones": {
+  "descricao": "Naruto: clones surgem na fumaça e chutam, o último para cima",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 78114
  },
  "cometa": {
   "descricao": "luz que corre pela linha de ação (+x)",
@@ -559,6 +937,48 @@
   "laco": false,
   "bytes": 57600
  },
+ "corrente_de_andromeda": {
+  "descricao": "Shun: corrente em zigue-zague com ponta triangular",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 43632
+ },
+ "corrente_flamejante": {
+  "descricao": "Corrente flamejante: a corrente em chamas que enrola",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 72266
+ },
+ "cortador_de_plasma": {
+  "descricao": "Isaac: mira de três pontos e lâmina de plasma",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 43366
+ },
  "corte": {
   "descricao": "corte em arco",
   "quadros": 12,
@@ -601,6 +1021,20 @@
   "laco": false,
   "bytes": 40710
  },
+ "corte_dimensional": {
+  "descricao": "Vergil: esfera de cortes em volta do alvo que se parte",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 108900
+ },
  "corte_giratorio": {
   "descricao": "corte giratório",
   "quadros": 12,
@@ -629,6 +1063,20 @@
   "laco": false,
   "bytes": 50218
  },
+ "corvo_da_alma": {
+  "descricao": "Energia da alma: o corvo escuro que mergulha",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 66896
+ },
  "corvos": {
   "descricao": "Ilusão de corvos: revoada que sai do corpo",
   "quadros": 12,
@@ -656,6 +1104,20 @@
   ],
   "laco": false,
   "bytes": 152864
+ },
+ "cqc": {
+  "descricao": "Snake: '!' de alerta, agarrão, giro no ar e queda com poeira",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 42298
  },
  "cravar": {
   "descricao": "flecha cravando",
@@ -727,6 +1189,20 @@
   "laco": false,
   "bytes": 54228
  },
+ "dedo_apontado": {
+  "descricao": "Dedo apontado de Makima: pressão invisível e estouro em 'bang'",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 70982
+ },
  "desintegrar": {
   "descricao": "desintegração em grãos",
   "quadros": 12,
@@ -741,6 +1217,20 @@
   "laco": false,
   "bytes": 73436
  },
+ "desmanche": {
+  "descricao": "básico do Sukuna: cortes finos em grade aparecendo de uma vez",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 69212
+ },
  "disco": {
   "descricao": "disco girando em viagem (+x)",
   "quadros": 12,
@@ -754,6 +1244,20 @@
   ],
   "laco": true,
   "bytes": 14102
+ },
+ "disparo_arcano": {
+  "descricao": "Disparo arcano: mandala de runas e faíscas arcanas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 91240
  },
  "dissipar": {
   "descricao": "anel de proteção do rival que racha e se desfaz",
@@ -825,6 +1329,20 @@
   "laco": true,
   "bytes": 149188
  },
+ "duas_pistolas": {
+  "descricao": "Lara: dois tiros alternados das duas pistolas (+x)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 39134
+ },
  "encanto": {
   "descricao": "estrelas de encanto",
   "quadros": 12,
@@ -881,6 +1399,20 @@
   "laco": false,
   "bytes": 74492
  },
+ "escudo_do_capitao": {
+  "descricao": "Escudo arremessado: o escudo da estrela que quica",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 62508
+ },
  "escudo_fisico": {
   "descricao": "brasão de escudo",
   "quadros": 12,
@@ -936,6 +1468,48 @@
   ],
   "laco": false,
   "bytes": 48634
+ },
+ "espada_de_alucard": {
+  "descricao": "Alucard: corte elegante que vira morcegos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 46546
+ },
+ "espada_de_augurio": {
+  "descricao": "Espada de Augúrio: corte em arco e o Olho de Thundera abre brilhando no rastro",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 52064
+ },
+ "espada_mestra": {
+  "descricao": "Link: arco de espada azul-claro e o reflexo dos três triângulos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 53748
  },
  "espadao": {
   "descricao": "espadão que racha o chão",
@@ -1035,6 +1609,20 @@
   "laco": false,
   "bytes": 83470
  },
+ "estalo_de_dedos": {
+  "descricao": "Estalo de dedos de Roy: faísca, linha de fogo e explosão de chamas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 62126
+ },
  "esticar": {
   "descricao": "braço elástico",
   "quadros": 12,
@@ -1062,6 +1650,20 @@
   ],
   "laco": true,
   "bytes": 26652
+ },
+ "estilingue": {
+  "descricao": "Estilingue do Bart: a pedrinha vem em arco, TOCK em estrela e estrelinhas girando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 39022
  },
  "estocada": {
   "descricao": "perfuração (+x)",
@@ -1203,6 +1805,20 @@
   "laco": false,
   "bytes": 140690
  },
+ "feitico_comum": {
+  "descricao": "Feitiço de ataque comum de Frieren: círculo mágico e raio Zoltraak",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 58132
+ },
  "feixe": {
   "descricao": "feixe fino (faixa)",
   "quadros": 12,
@@ -1287,6 +1903,20 @@
   "laco": true,
   "bytes": 6360
  },
+ "flor_de_lapela": {
+  "descricao": "Flor de lapela do Coringa: esguicho em arco que respinga, chia e borbulha",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 47954
+ },
  "florete": {
   "descricao": "estocadas finas em sequência",
   "quadros": 12,
@@ -1314,6 +1944,20 @@
   ],
   "laco": false,
   "bytes": 55738
+ },
+ "fogo_azul": {
+  "descricao": "Fogo azul: jato afiado de chamas que abre em labaredas no alvo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 44244
  },
  "foguete": {
   "descricao": "foguete em viagem (+x)",
@@ -1343,6 +1987,48 @@
   "laco": false,
   "bytes": 45696
  },
+ "frigideira": {
+  "descricao": "Frigideira: acerta de lado com um BONG, treme em ondas e estrelinhas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 57022
+ },
+ "frostmourne": {
+  "descricao": "Arthas: corte rúnico gelado com runas e cristais",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 74812
+ },
+ "gadget_surpresa": {
+  "descricao": "Gadget surpresa: luva de boxe numa mola sai da esquerda e acerta com POW",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 53694
+ },
  "gancho": {
   "descricao": "golpe para cima",
   "quadros": 12,
@@ -1357,6 +2043,20 @@
   "laco": false,
   "bytes": 49868
  },
+ "garra_flamejante": {
+  "descricao": "Charizard: três garras de fogo com chamas nos riscos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 86664
+ },
  "garras": {
   "descricao": "três rasgos de garra",
   "quadros": 12,
@@ -1370,6 +2070,34 @@
   ],
   "laco": false,
   "bytes": 69646
+ },
+ "garras_cineticas": {
+  "descricao": "Pantera Negra: garras em X e pulso cinético",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 95332
+ },
+ "garras_de_killua": {
+  "descricao": "Garras de Killua: três riscos de garra feitos de relâmpago",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 79238
  },
  "gas": {
   "descricao": "nuvem de gás",
@@ -1427,6 +2155,90 @@
   "laco": false,
   "bytes": 119326
  },
+ "golpe_alienigena": {
+  "descricao": "Golpe alienígena: a ampulheta do Omnitrix estoura em verde e o punho do alien acerta",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 74682
+ },
+ "golpe_da_serie": {
+  "descricao": "Série: os três pontos do combo e o golpe final",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 91262
+ },
+ "golpe_de_panico": {
+  "descricao": "Golpe de pânico de Anya: tapinhas, suor, '!' e estrelinhas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 42084
+ },
+ "golpe_do_espiao": {
+  "descricao": "Golpe do espião de Loid: retícula de mira e cutelada precisa",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 47670
+ },
+ "golpe_do_potencial": {
+  "descricao": "básico do Gohan: soco com aura branca e raios do SSJ2",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 103922
+ },
+ "golpe_largo": {
+  "descricao": "Golpe largo: varrida que pega dois",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 51926
+ },
  "golpe_pesado": {
   "descricao": "impacto pesado",
   "quadros": 12,
@@ -1440,6 +2252,62 @@
   ],
   "laco": false,
   "bytes": 104664
+ },
+ "golpe_psiquico": {
+  "descricao": "Professor X: ondas psíquicas fecham na cabeça e estouram",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 66848
+ },
+ "golpe_que_cura": {
+  "descricao": "Golpe que cura: a força do golpe vira cura no aliado",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 45686
+ },
+ "golpe_sobre_humano": {
+  "descricao": "Wesker: olhos vermelhos, vultos de velocidade e palma aberta",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 75914
+ },
+ "grande_faca": {
+  "descricao": "Pyramid Head: faca arrastada e golpe pesado",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 68118
  },
  "gravidade": {
   "descricao": "pressão de gravidade",
@@ -1469,6 +2337,20 @@
   "laco": false,
   "bytes": 116754
  },
+ "guarda_do_golpe": {
+  "descricao": "Guarda do golpe: os cacos viram placa de escudo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 44102
+ },
  "hipnose": {
   "descricao": "espiral hipnótica",
   "quadros": 12,
@@ -1496,6 +2378,20 @@
   ],
   "laco": false,
   "bytes": 37002
+ },
+ "infinito": {
+  "descricao": "básico do Gojo: o soco trava no Infinito e um pulso empurra",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 60736
  },
  "instinto": {
   "descricao": "Instinto Superior: aura prateada e vultos",
@@ -1679,6 +2575,20 @@
   "laco": false,
   "bytes": 54134
  },
+ "jajanken": {
+  "descricao": "Jajanken (pedra) de Gon: o punho junta aura, brilha e explode no alvo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 91928
+ },
  "jato_dagua": {
   "descricao": "jato d'água (faixa)",
   "quadros": 12,
@@ -1692,6 +2602,20 @@
   ],
   "laco": true,
   "bytes": 226474
+ },
+ "kagune": {
+  "descricao": "Kaneki: quatro kagune segmentados descem e perfuram",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 91120
  },
  "kaioken": {
   "descricao": "Kaioken: aura de fogo carmesim",
@@ -1707,6 +2631,90 @@
   "laco": false,
   "bytes": 87790
  },
+ "karate": {
+  "descricao": "Karatê: mão em faca desce num tchop e as bolhas estouram",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 44332
+ },
+ "keyblade": {
+  "descricao": "Sora: golpe de chave-espada com estrelinhas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 68404
+ },
+ "ki_dourado": {
+  "descricao": "básico do Goku: três esferas de ki douradas que estouram em fumaça",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 41040
+ },
+ "kunai_de_hiraishin": {
+  "descricao": "Minato: kunai de três pontas, clarão do teleporte e o golpe",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 50388
+ },
+ "kunai_do_inferno": {
+  "descricao": "Scorpion: kunai na corda crava, queima e puxa",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 40760
+ },
+ "kusanagi": {
+  "descricao": "Sasuke: corte fino de katana com estalos de Chidori na lâmina",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 61662
+ },
  "labareda": {
   "descricao": "coluna de fogo",
   "quadros": 12,
@@ -1720,6 +2728,20 @@
   ],
   "laco": false,
   "bytes": 71108
+ },
+ "laco": {
+  "descricao": "Laço: a laçada gira, voa, cai em volta do alvo e aperta",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 35620
  },
  "lamina_de_agua": {
   "descricao": "fita de água em espiral",
@@ -1763,6 +2785,34 @@
   "laco": false,
   "bytes": 42734
  },
+ "lamina_oculta": {
+  "descricao": "Ezio: a lâmina salta do pulso e perfura, ondas da visão de águia",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 78820
+ },
+ "lamina_protetica": {
+  "descricao": "Malenia: rajada de cortes e pétalas escarlates",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 64706
+ },
  "lamina_sombria": {
   "descricao": "lâmina sombria",
   "quadros": 12,
@@ -1776,6 +2826,62 @@
   ],
   "laco": false,
   "bytes": 36704
+ },
+ "lamina_viva": {
+  "descricao": "Carnificina: lâminas vivas retorcidas rasgam em quatro ângulos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 50126
+ },
+ "laminas_do_caos": {
+  "descricao": "Kratos: duas lâminas em chamas presas a correntes cortam em X",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 65104
+ },
+ "laminas_odm": {
+  "descricao": "Mikasa: cabos de manobra, gás e duas lâminas em X",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 57044
+ },
+ "laminas_serrilhadas": {
+  "descricao": "Inosuke: dois cortes em X com bordas dentadas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 73798
  },
  "lanche": {
   "descricao": "mordida, vapor e coração",
@@ -1819,6 +2925,20 @@
   "laco": false,
   "bytes": 44346
  },
+ "leque_gunbai": {
+  "descricao": "Madara: o gunbai varre e solta uma parede de vento em leque",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 74048
+ },
  "lua": {
   "descricao": "meia-lua acesa",
   "quadros": 12,
@@ -1861,6 +2981,34 @@
   "laco": false,
   "bytes": 50912
  },
+ "machado_de_energon": {
+  "descricao": "Machado de energon: o machado de energia desce num arco pesado e crava no alvo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 50010
+ },
+ "magia_do_caos": {
+  "descricao": "Raio de caos: fios em espiral que estouram",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 126240
+ },
  "maldicao": {
   "descricao": "maldição",
   "quadros": 12,
@@ -1875,6 +3023,20 @@
   "laco": false,
   "bytes": 83844
  },
+ "manopla": {
+  "descricao": "Punho do Titã: a manopla e as seis joias",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 62206
+ },
  "manto_kurama": {
   "descricao": "Manto da Kurama: chamas, orelhas e nove caudas",
   "quadros": 12,
@@ -1888,6 +3050,20 @@
   ],
   "laco": false,
   "bytes": 78298
+ },
+ "mao_da_perdicao": {
+  "descricao": "Hellboy: o punho de pedra desce e esmaga com cascalho",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 76868
  },
  "marca": {
   "descricao": "alvo travando",
@@ -1931,6 +3107,48 @@
   "laco": false,
   "bytes": 52824
  },
+ "martelo_e_prego": {
+  "descricao": "Nobara: pregos cravam, o martelo bate e a ressonância estoura",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 46172
+ },
+ "masamune": {
+  "descricao": "Sephiroth: corte finíssimo e longo atravessando o quadro, penas caindo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 57224
+ },
+ "matadora_de_dragoes": {
+  "descricao": "Matadora de Dragões de Guts: a lâmina gigante desce, faíscas e respingos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 71336
+ },
  "medo": {
   "descricao": "olhos na sombra",
   "quadros": 12,
@@ -1945,6 +3163,20 @@
   "laco": false,
   "bytes": 83840
  },
+ "mega_buster": {
+  "descricao": "Mega Man: três bolinhas do buster estalando em quadradinhos (+x)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 24132
+ },
  "metal": {
   "descricao": "chapas de metal fechando",
   "quadros": 12,
@@ -1958,6 +3190,20 @@
   ],
   "laco": false,
   "bytes": 58058
+ },
+ "meteoros_de_pegaso": {
+  "descricao": "Seiya: dezenas de socos-meteoro azuis riscando o alvo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 79500
  },
  "mil_cortes": {
   "descricao": "mil cortes e X final",
@@ -2015,6 +3261,20 @@
   "laco": false,
   "bytes": 64612
  },
+ "mordida_cartoon": {
+  "descricao": "Mordida de desenho: dentões fecham com CHOMP, gotas de suor e marquinhas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 80544
+ },
  "motosserra": {
   "descricao": "dentes de serra girando",
   "quadros": 12,
@@ -2042,6 +3302,20 @@
   ],
   "laco": false,
   "bytes": 80962
+ },
+ "nunchakus": {
+  "descricao": "Nunchakus do Michelangelo: giram na corrente e batem duas vezes",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 56778
  },
  "olho": {
   "descricao": "olho gigante se abrindo",
@@ -2085,6 +3359,20 @@
   "laco": true,
   "bytes": 58050
  },
+ "pancada_de_sangue": {
+  "descricao": "Pancada de sangue de Power: martelo de sangue e gotas espirrando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 63258
+ },
  "pentagrama": {
   "descricao": "pentagrama infernal",
   "quadros": 12,
@@ -2127,6 +3415,20 @@
   "laco": false,
   "bytes": 44548
  },
+ "pisada_do_mario": {
+  "descricao": "Mario: a bota pisa, achata, estrelinhas e moeda",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 35686
+ },
  "pisao": {
   "descricao": "pisão com rachaduras",
   "quadros": 12,
@@ -2154,6 +3456,20 @@
   ],
   "laco": false,
   "bytes": 74736
+ },
+ "po_de_diamante": {
+  "descricao": "Hyoga: jato de cristais de gelo que congela o alvo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 60924
  },
  "portal": {
   "descricao": "portal",
@@ -2239,6 +3555,48 @@
   "laco": false,
   "bytes": 91250
  },
+ "punho_amaldicoado": {
+  "descricao": "básico do Yuji: Black Flash, faíscas negras e o espaço rachando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 109096
+ },
+ "punho_da_fenix": {
+  "descricao": "Ikki: soco em chamas que abre asas de fênix",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 67750
+ },
+ "punho_de_apokolips": {
+  "descricao": "Darkseid: punho pesado, rachaduras, Ômega e feixes",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 95276
+ },
  "punho_divergente": {
   "descricao": "Punho divergente: o soco e o impacto atrasado",
   "quadros": 12,
@@ -2253,6 +3611,34 @@
   "laco": false,
   "bytes": 58912
  },
+ "punho_do_dragao": {
+  "descricao": "Shiryu: gancho que sobe com o dragão em espiral",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 74138
+ },
+ "punho_fotonico": {
+  "descricao": "Punho fotônico: o punho em luz e a estrela de oito pontas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 102118
+ },
  "punho_gigante": {
   "descricao": "silhueta de punho gigante",
   "quadros": 12,
@@ -2266,6 +3652,34 @@
   ],
   "laco": false,
   "bytes": 78934
+ },
+ "punho_lendario": {
+  "descricao": "básico do Broly: soco brutal, aura verde explodindo e rachaduras",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 104096
+ },
+ "punho_transmutado": {
+  "descricao": "Punho transmutado de Edward: círculo de alquimia e punho de pedra que sobe",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 89404
  },
  "purificar_onda": {
   "descricao": "onda que lava",
@@ -2295,6 +3709,20 @@
   "laco": false,
   "bytes": 39894
  },
+ "quique": {
+  "descricao": "Ricochete: o golpe quica e acerta o segundo rival",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 47388
+ },
  "radiacao": {
   "descricao": "radiação pulsando",
   "quadros": 12,
@@ -2322,6 +3750,20 @@
   ],
   "laco": false,
   "bytes": 121504
+ },
+ "raio_de_gaia": {
+  "descricao": "Raio de Gaia: cinco pontos de luz se unem num raio trançado que abre um planeta de luz",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 80878
  },
  "raio_divino": {
   "descricao": "feixe do céu",
@@ -2365,6 +3807,34 @@
   "laco": true,
   "bytes": 130246
  },
+ "raio_fantasma": {
+  "descricao": "Raio fantasma: raio de ectoplasma com fiapos ondulando e caudas de fantasma no alvo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 63246
+ },
+ "rajada_continua": {
+  "descricao": "básico do Vegeta: dezenas de esferas de ki e a nuvem de fumaça",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 61768
+ },
  "rajada_de_ar": {
   "descricao": "arcos de vento",
   "quadros": 12,
@@ -2392,6 +3862,20 @@
   ],
   "laco": false,
   "bytes": 54116
+ },
+ "rebellion_e_ebony": {
+  "descricao": "Dante: corte largo de espadão e dois tiros de pistola",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 60576
  },
  "reflexo": {
   "descricao": "escudo de espelho hexagonal que devolve o golpe",
@@ -2435,6 +3919,20 @@
   "laco": false,
   "bytes": 56320
  },
+ "rei_gun": {
+  "descricao": "básico do Yusuke: tiro do dedo que estoura em anel",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 58988
+ },
  "relogio": {
   "descricao": "mostrador de relógio",
   "quadros": 12,
@@ -2463,6 +3961,20 @@
   "laco": false,
   "bytes": 72438
  },
+ "rendicao": {
+  "descricao": "Shaka: lótus dourada abre sobre a roda de luz",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 119348
+ },
  "repulsao": {
   "descricao": "estouro para fora",
   "quadros": 12,
@@ -2476,6 +3988,20 @@
   ],
   "laco": false,
   "bytes": 117304
+ },
+ "repulsor": {
+  "descricao": "Repulsor de mão: o anel da palma e o raio curto",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 47424
  },
  "resgate": {
   "descricao": "mergulho de resgate",
@@ -2519,6 +4045,20 @@
   "laco": false,
   "bytes": 69510
  },
+ "rinnegan": {
+  "descricao": "Pain: olho do Rinnegan e ondas de repulsão para fora",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 86222
+ },
  "rocha": {
   "descricao": "pedra em viagem (+x)",
   "quadros": 12,
@@ -2532,6 +4072,20 @@
   ],
   "laco": true,
   "bytes": 18958
+ },
+ "roubar_carga": {
+  "descricao": "Roubou Carga: a energia sai do rival",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 27688
  },
  "rugido": {
   "descricao": "ondas de som em cone",
@@ -2561,6 +4115,20 @@
   "laco": false,
   "bytes": 50360
  },
+ "sais": {
+  "descricao": "Sais do Raphael: dois sais estocam em sequência, cada um com clarão de três pontas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 52434
+ },
  "sangue": {
   "descricao": "respingo de sangue",
   "quadros": 12,
@@ -2574,6 +4142,20 @@
   ],
   "laco": false,
   "bytes": 30012
+ },
+ "saque_do_trovao": {
+  "descricao": "Zenitsu: risco de relâmpago horizontal e o raio em ziguezague",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 71396
  },
  "saraivada": {
   "descricao": "rajada múltipla em viagem (+x)",
@@ -2645,6 +4227,20 @@
   "laco": false,
   "bytes": 51396
  },
+ "shuriken": {
+  "descricao": "Itachi: três shurikens de quatro pontas chegam girando e cravam",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 38328
+ },
  "silencio": {
   "descricao": "som cortado",
   "quadros": 12,
@@ -2673,6 +4269,132 @@
   "laco": false,
   "bytes": 54368
  },
+ "soco_casual": {
+  "descricao": "básico do Saitama: soquinho e, depois, o vendaval exagerado",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 86792
+ },
+ "soco_da_vida": {
+  "descricao": "Soco da vida de Giorno: galhos, folhas e a joaninha dourada",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 113544
+ },
+ "soco_de_aco": {
+  "descricao": "Soco de aço: barreira do som e anéis de choque",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 75304
+ },
+ "soco_de_chakra": {
+  "descricao": "Sakura: soco com estouro de chakra e o chão rachando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 113486
+ },
+ "soco_de_marinheiro": {
+  "descricao": "Soco de marinheiro: o braço gira como manivela, soco com estrelas e âncora estampada",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 54886
+ },
+ "soco_de_pym": {
+  "descricao": "Soco de Pym: o soco minúsculo que cresce",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 67826
+ },
+ "soco_do_diabo": {
+  "descricao": "Kazuya: soco com raios do Gene do Diabo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 100482
+ },
+ "soco_do_stand": {
+  "descricao": "Soco do Stand de Jotaro: punho fantasma com vultos e eco",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 65634
+ },
+ "soco_relampago": {
+  "descricao": "básico do Flash: relâmpagos convergindo e mil socos num instante",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 64304
+ },
  "soco_serio": {
   "descricao": "sopro gigante para a frente",
   "quadros": 12,
@@ -2686,6 +4408,20 @@
   ],
   "laco": false,
   "bytes": 125132
+ },
+ "soco_titanico": {
+  "descricao": "Eren: punho de titã, impacto colossal e vapor subindo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 80620
  },
  "sombra": {
   "descricao": "tentáculos de sombra",
@@ -2743,6 +4479,20 @@
   "laco": false,
   "bytes": 29444
  },
+ "spin_attack": {
+  "descricao": "Sonic: bola azul girando quica no alvo e volta",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 56690
+ },
  "spin_dash": {
   "descricao": "Spin Dash: bola azul girando e anéis",
   "quadros": 12,
@@ -2785,6 +4535,20 @@
   "laco": false,
   "bytes": 83572
  },
+ "taco_de_beisebol": {
+  "descricao": "Taco de beisebol da Arlequina: giro com rastro, CRACK, estrelinhas e um coração",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 43638
+ },
  "teia_bola": {
   "descricao": "bola de teia em viagem (+x)",
   "quadros": 12,
@@ -2798,6 +4562,20 @@
   ],
   "laco": true,
   "bytes": 23046
+ },
+ "teia_e_soco": {
+  "descricao": "Teia e soco: o fio gruda em teia e o soco chega",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 66818
  },
  "teia_rede": {
   "descricao": "rede de teia",
@@ -2869,6 +4647,20 @@
   "laco": false,
   "bytes": 51662
  },
+ "tentaculo_simbionte": {
+  "descricao": "Venom: tentáculos lisos chicoteiam e enrolam o alvo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 56900
+ },
  "tentaculos": {
   "descricao": "tentáculos chicoteando",
   "quadros": 12,
@@ -2911,6 +4703,20 @@
   "laco": false,
   "bytes": 74720
  },
+ "tiara_lunar": {
+  "descricao": "Sailor Moon: tiara-disco com lua crescente que acerta com brilho",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 62946
+ },
  "tiro": {
   "descricao": "traçante em viagem (+x)",
   "quadros": 12,
@@ -2939,6 +4745,48 @@
   "laco": false,
   "bytes": 40450
  },
+ "toque_absorvente": {
+  "descricao": "Vampira: a mão toca e suga fios de vida do alvo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 94078
+ },
+ "toque_da_destruicao": {
+  "descricao": "básico do Beerus: peteleco e a esfera roxa que implode",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 52060
+ },
+ "toque_do_devorador": {
+  "descricao": "Galactus: mão cósmica fecha e suga a matéria em fragmentos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 100364
+ },
  "tornado": {
   "descricao": "funil de tornado",
   "quadros": 12,
@@ -2966,6 +4814,20 @@
   ],
   "laco": false,
   "bytes": 119654
+ },
+ "tridente": {
+  "descricao": "Aquaman: estocada do tridente com espiral e respingo de água",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 48790
  },
  "tsunami": {
   "descricao": "onda gigante",
@@ -3064,5 +4926,19 @@
   ],
   "laco": false,
   "bytes": 65596
+ },
+ "z_saber": {
+  "descricao": "Zero: meia-lua do sabre de energia",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 56964
  }
 }

@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { byId, characters } from '../src/data/characters';
 import { createBattle, stepBattle } from '../src/engine/battle';
 import { textoDoJeito } from '../src/engine/skill-descriptions';
+import { efeitosDoJeito } from '../src/presentation/jeito-efeito';
 import type { Battle, BattleEvent, Fighter } from '../src/engine/types';
 
 /*
@@ -101,5 +102,18 @@ describe('Ataque básico com nome e jeito próprios', () => {
     golpes(b, eu, 1);
     // logo depois do golpe a barra já começa adiantada
     expect(eu.action).toBeGreaterThanOrEqual((byId.flash!.basic.jeito as { valor: number }).valor - 0.05);
+  });
+  it('cada jeito tem a sua animação e o seu som na batalha', () => {
+    const esperado: Record<string, string[]> = { serie: ['golpe_da_serie'], ricochete: ['quique'], largo: ['golpe_largo'], cura: ['golpe_que_cura'], escudo: ['guarda_do_golpe'], rouba: ['roubar_carga', 'carga_roubada'], acelera: ['acelera'] };
+    for (const [tipo, familias] of Object.entries(esperado)) {
+      const c = characters.find((x) => x.basic.jeito?.tipo === tipo && !['sakura', 'hulk', 'thanos', 'saitama'].includes(x.id))!;
+      const b = createBattle([c.id, 'sakura', 'thanos'], ['hulk', 'goku', 'saitama'], 5);
+      const eu = quem(b, c.id);
+      soBasico(b, eu);
+      for (const f of b.fighters) { if (f.uid !== eu.uid) f.hp = f.maxHp * 0.5; for (const s of f.skills) s.charge = f.side === eu.side ? 0 : 50; }
+      const ev = golpes(b, eu, 4);
+      const achadas = new Set(ev.filter((e) => e.kind === 'basic' && e.source === eu.uid).flatMap((g) => efeitosDoJeito(g, ev.filter((e) => e.id > g.id && e.id < g.id + 12 && e.source === eu.uid), b.fighters).map((x) => x.familia)));
+      for (const f of familias) expect(achadas.has(f as never), `${c.id} (${tipo}) → ${f}`).toBe(true);
+    }
   });
 });

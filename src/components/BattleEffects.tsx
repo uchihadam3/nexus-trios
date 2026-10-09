@@ -7,6 +7,7 @@ import { SkillIcon } from './Icon';
 import { ArrowDown,HeartPulse,ShieldCheck,Sparkles,Zap } from 'lucide-react';
 import { statuses as statusCatalog } from '../data/statuses';
 import { familia,folha,profileFor,type VfxFamily,type VfxProfile } from '../presentation/vfxProfiles';
+import { efeitosDoJeito } from '../presentation/jeito-efeito';
 import { FAMILIA_DA_INVOCACAO } from '../presentation/vfx-atribuicao';
 
 export interface Anchor {x:number;y:number}
@@ -122,6 +123,8 @@ export function BattleEffects({battle,beat,anchors,enabled,reduced,medal=80}:{ba
         if(e.kind==='damage'&&e.label==='Espinhos')sobre(e.source,'espinhos',`esp-${id}-${e.id}`,0);
         if(e.kind==='heal'&&(e.label==='Vampirismo'||e.label==='Roubo de vida')&&e.target)sobre(e.target,'vampirismo',`vamp-${id}-${e.id}`,.1);
       }
+      // os jeitos de bater: o quique, a varrida, o fim da série, a cura, a Carga roubada, a guarda e o relógio
+      for(const x of efeitosDoJeito(beat.event,beat.events,beat.after.fighters))if(x.evento===beat.event||revelado(beat,x.evento))sobre(x.alvo,x.familia,`jeito-${id}-${x.familia}-${x.evento.id}`,x.atraso);
     }
   }
 

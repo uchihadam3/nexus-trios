@@ -30,6 +30,7 @@ import {carregarCliente,googleConfigured,haSessaoOuRetorno,onlineCall,onlineConf
 import {criarAutenticacaoPreguicosa,type Conta} from './lib/auth';
 import {AccountScreen} from './screens/AccountScreen';
 import {FAMILIA_DA_INVOCACAO} from './presentation/vfx-atribuicao';
+import {efeitosDoJeito,somDoJeito} from './presentation/jeito-efeito';
 const DebugScreen=lazy(()=>import('./screens/DebugScreen').then(m=>({default:m.DebugScreen})));
 const VfxLabScreen=lazy(()=>import('./screens/VfxLabScreen').then(m=>({default:m.VfxLabScreen})));
 type Screen='home'|'game'|'characters'|'ranking'|'conta'|'help'|'settings'|'debug'|'vfx';
@@ -227,6 +228,9 @@ export default function App(){
           const limpeza=d.active.events.find(e=>e.kind==='cleanse'||e.kind==='dispel');
           if(limpeza)battleAudio.sound(limpeza.kind==='cleanse'?'purificacao':'dissipar',PRIORIDADE.importante,0,limpeza.id,.1);
           if(mecanica)battleAudio.sound(mecanica.label==='Refletido'?'reflexo':mecanica.label==='Espinhos'?'espinhos':'vampirismo',PRIORIDADE.importante,0,mecanica.id,.14);
+          // o golpe final da série tem o som dele junto do golpe (as outras mecânicas tocam no passo delas)
+          const serie=efeitosDoJeito(d.active.event,[],d.active.after.fighters)[0];
+          if(serie)battleAudio.sound(somDoJeito(serie.familia),PRIORIDADE.importante,0,d.active.event.id*10+9,.02);
           const special=d.active.events.find(e=>e.kind==='ko')??d.active.events.find(e=>e.kind==='interrupt')??d.active.events.find(e=>e.kind==='block')??d.active.events.find(e=>e.kind==='turn');
           // eventos que pedem som próprio: interrupção, bloqueio, nocaute, virada; o golpe do beat toca junto
           if(special){const pan=0,chave=special.id;battleAudio.sound(special.kind==='interrupt'?'interrupcao':special.kind==='block'?'bloqueio':special.kind==='ko'?'nocaute':'virada',special.kind==='block'?PRIORIDADE.apoio:PRIORIDADE.importante,pan,chave);if(special.kind!=='turn')battleAudio.cue(cue,d.visible);}
@@ -250,6 +254,9 @@ export default function App(){
           const passo=ativo.passos[k-1];if(!passo)continue;
           const eventos=ativo.events.filter(e=>passo.eventos.includes(e.id));
           const som:Sound=passo.classe==='reacao'?'reacao':passo.classe==='rival'?'enfraquecer':eventos.some(e=>e.kind==='heal')?'cura':eventos.some(e=>e.kind==='shield')?'escudo':'reforco';
+          // o passo de um jeito de bater (Ricochete, Roubou Carga…) toca o som próprio da mecânica
+          const jeito=efeitosDoJeito({...ativo.event,kind:'skill'},eventos,ativo.after.fighters);
+          if(jeito.length){jeito.forEach((x,i)=>battleAudio.sound(somDoJeito(x.familia),PRIORIDADE.habilidade,0,ativo.event.id*10+k+i*1000,x.atraso));continue;}
           battleAudio.sound(som,passo.classe==='reacao'?PRIORIDADE.habilidade:PRIORIDADE.apoio,0,ativo.event.id*10+k);
         }
         passoTocado.current={beat:ativo.event.id,passo:ativo.etapa};

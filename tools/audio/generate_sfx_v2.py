@@ -854,9 +854,16 @@ def versao(nome: str, v: int) -> np.ndarray:
 
 def _registra_novos():
     """As famílias novas de efeito (tools/audio/sfx_familias.py), uma receita por família."""
+    import importlib
     import sfx_familias
     SONS.update(sfx_familias.SONS_NOVOS)
     ALVO_DB.update(sfx_familias.ALVO_NOVO)
+    # o som próprio de cada ataque básico (tools/audio/sfx_basicos_*.py), um módulo por lote
+    for letra in "abcdefghij":
+        m = importlib.import_module(f"sfx_basicos_{letra}")
+        for nome, (fn, desc) in m.SONS.items():
+            SONS[nome] = (fn, desc)
+            ALVO_DB[nome] = -15
 
 
 def main(argv):

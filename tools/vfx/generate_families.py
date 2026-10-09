@@ -1234,8 +1234,45 @@ def previa(nomes, destino, cor=(0.35, 0.65, 1.0)):
     Image.fromarray((np.clip(np.concatenate(linhas, axis=0), 0, 1) * 255).astype(np.uint8)).save(destino)
 
 
+def gif(nomes, destino, cor=(0.35, 0.65, 1.0), lado=192, ms=90, voltas=2):
+    """GIF animado (para mostrar ao jogador): as folhas lado a lado, como o jogo pinta."""
+    filmes = []
+    for item in nomes:
+        # "nome:#rrggbb" pinta com a cor que o jogo usa para a família
+        nome, _, hexa = item.partition(":")
+        cor_dela = tuple(int(hexa[i:i + 2], 16) / 255 for i in (1, 3, 5)) if hexa else cor
+        sheet = np.asarray(renderiza(nome), np.float32) / 255
+        _, T, _, _ = FOLHAS[nome]
+        quadros = []
+        for i in range(FRAMES):
+            q = sheet[(i // COLS) * T.h:(i // COLS + 1) * T.h, (i % COLS) * T.w:(i % COLS + 1) * T.w]
+            a, g = q[..., 3:4], q[..., :3]
+            fundo = np.ones_like(g) * np.array([0.05, 0.08, 0.1])
+            base = fundo * (1 - a) + np.array(cor_dela) * a
+            im = Image.fromarray((np.clip(1 - (1 - base) * (1 - g * a * 0.85), 0, 1) * 255).astype(np.uint8))
+            larg = lado * 2 if T.w != T.h else lado
+            quadros.append(im.resize((larg, round(larg * T.h / T.w)), Image.LANCZOS))
+        filmes.append(quadros)
+    larg = sum(f[0].width for f in filmes) + 6 * (len(filmes) - 1)
+    alto = max(f[0].height for f in filmes)
+    saida = []
+    for _ in range(voltas):
+        for i in range(FRAMES):
+            tela = Image.new("RGB", (larg, alto), (5, 5, 8))
+            x = 0
+            for f in filmes:
+                tela.paste(f[i], (x, (alto - f[i].height) // 2))
+                x += f[i].width + 6
+            saida.append(tela)
+        saida += [saida[-1]] * 3
+    saida[0].save(destino, save_all=True, append_images=saida[1:], duration=ms, loop=0, optimize=True)
+
+
 def main(argv):
     _registro_base()
+    if argv and argv[0] == "--gif":
+        gif(argv[2:], argv[1])
+        return
     if argv and argv[0] == "--previa":
         previa(argv[2:] or list(FOLHAS), argv[1])
         return
