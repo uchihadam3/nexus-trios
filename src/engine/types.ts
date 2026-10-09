@@ -14,10 +14,24 @@ export interface Skill {
   requiresSkills?:number[];
   target:Target; effects:Effect[]; preparation:number; cooldown:number; priority:number;
 }
+/**
+ * O jeito de bater de cada um (ataque básico com individualidade):
+ *  serie     — a cada `cada` golpes, o golpe sai especial (`nome`): dano × `mult` e/ou um Status
+ *  ricochete — o golpe quica no outro rival com `fracao` do dano
+ *  largo     — o golpe pega também um segundo rival com `fracao` do dano
+ *  cura      — `fracao` do dano vira cura no aliado mais ferido
+ *  rouba     — tira `valor` de Carga da habilidade mais cheia do alvo e põe na sua
+ *  escudo    — `fracao` do dano vira Escudo em si
+ *  acelera   — cada golpe adianta a próxima ação em `valor`
+ */
+export type JeitoDeBater =
+  | { tipo: 'serie'; cada: number; nome: string; mult?: number; status?: { status: StatusId; value: number; duration: number } }
+  | { tipo: 'ricochete' | 'largo' | 'cura' | 'escudo'; fracao: number }
+  | { tipo: 'rouba' | 'acelera'; valor: number };
 export interface Trait {name:string;description:string; on:Topic; cooldown:number; effects:Effect[]; target:Target}
 export interface Character {
   id:string; name:string; universe:string; portrait:string; color:string; symbol:string; idea:string; vulnerability:string; intelligence?:number;
-  hp:number; interval:number; basic:{name:string;effects:Effect[];visual:Visual;target:Target};
+  hp:number; interval:number; basic:{name:string;effects:Effect[];visual:Visual;target:Target;jeito?:JeitoDeBater};
   trait:Trait; skills:[Skill,Skill,Skill]; tags:string[]; power:number; deathNoteCompatible:boolean;
   /** Renascer: ao cair, volta sozinho com `vida` (fração) da Vida depois de `atraso` segundos — uma vez por luta. A Death Note impede. */
   renascer?:{vida:number;atraso:number};
@@ -31,6 +45,8 @@ export interface Shield {amount:number;remaining:number;source:string}
 export interface SkillState {charge:number;cooldown:number;executing:number;uses:number;readySince?:number|null}
 export interface Fighter {
   uid:string;characterId:string;side:Side;slot:number;hp:number;maxHp:number;action:number;
+  /** Ataques básicos dados (a série do jeito de bater conta por aqui). */
+  golpes?:number;
   skills:SkillState[];statuses:Status[];shields:Shield[];
   cast:null|{skill:number;elapsed:number;duration:number;targets:string[]};
   investigation:Record<string,number>;discovered?:Record<string,'vulnerable'|'immune'>;traitTimer:number;

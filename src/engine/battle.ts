@@ -2,7 +2,7 @@ import { byId } from '../data/characters';
 import { CHOQUE_DO_ELETRIFICADO, RITMO_DA_INVOCACAO, statuses } from '../data/statuses';
 import { random,shuffle } from './random';
 import { DOMINION as D, fracaoPorAlvo} from './dominion-config';
-import type { Battle, BattleEvent, Effect, Fighter, Side, Skill, StatusId, Target, Topic } from './types';
+import type { Battle, BattleEvent, Effect, Fighter, JeitoDeBater, Side, Skill, StatusId, Target, Topic } from './types';
 import { chooseTarget, inferTargetIntent } from './targeting';
 
 export const STEP=.1;
@@ -326,6 +326,57 @@ function healing(b:Battle,source:Fighter,target:Fighter,value:number,label='Recu
   const used=Math.min(target.maxHp-target.hp,value);target.hp+=used;source.stats.healing+=used;
   if(used>.01){pressure(b,source.side,D.event.usefulHealingPerFullCondition*clamp(used/target.maxHp));emit(b,{kind:'heal',source:source.uid,target:target.uid,label,value:used});}
 }
+/*
+ * O golpe especial da série: o mesmo ataque básico com o dano multiplicado e,
+ * se o jeito pede, um Status no alvo (o 3º soco do combo que quebra a guarda).
+ */
+function golpeDaSerie(effects:Effect[],j:Extract<JeitoDeBater,{tipo:'serie'}>):Effect[]{
+  const mult=j.mult??1;
+  const fortes=effects.map(e=>e.kind==='damage'&&!e.target?{...e,value:e.value*mult}:e);
+  return j.status?[...fortes,{kind:'status',status:j.status.status,value:j.status.value,duration:j.status.duration}]:fortes;
+}
+/* O que o jeito de bater faz depois do golpe acertar (série já foi resolvida no golpe). */
+function jeitoDeBater(b:Battle,f:Fighter,alvo:Fighter,j:JeitoDeBater,dano:number){
+  if(j.tipo==='serie')return;
+  if(j.tipo==='ricochete'||j.tipo==='largo'){
+    if(dano<=0)return;
+    const outros=hostile(b,f).filter(x=>x.uid!==alvo.uid&&alive(x));
+    if(!outros.length)return;
+    const segundo=outros.reduce((a,z)=>z.hp/z.maxHp<a.hp/a.maxHp?z:a);
+    damage(b,f,segundo,dano*j.fracao,false,j.tipo==='ricochete'?'Ricochete':'Golpe largo');
+    return;
+  }
+  if(j.tipo==='cura'){
+    if(dano<=0)return;
+    const aliados=friendly(b,f).filter(alive);
+    if(!aliados.length)return;
+    const ferido=aliados.reduce((a,z)=>z.hp/z.maxHp<a.hp/a.maxHp?z:a);
+    if(ferido.hp<ferido.maxHp)healing(b,f,ferido,dano*j.fracao,'Golpe que cura');
+    return;
+  }
+  if(j.tipo==='escudo'){
+    if(dano<=0)return;
+    f.shields.push({amount:dano*j.fracao,remaining:6,source:f.uid});
+    f.stats.protection+=dano*j.fracao;
+    emit(b,{kind:'shield',source:f.uid,target:f.uid,value:Math.round(dano*j.fracao),label:'Guarda do golpe'});
+    return;
+  }
+  if(j.tipo==='acelera'){f.action=Math.min(.95,f.action+j.valor);return;}
+  if(j.tipo==='rouba'){
+    const dele=alvo.skills.reduce((a,s,i)=>s.charge>(alvo.skills[a]?.charge??0)?i:a,0);
+    // a Carga roubada vai para a habilidade dele que está mais perto de encher (e que pode receber)
+    const livres=f.skills.map((s,i)=>({s,i})).filter(({s,i})=>s.cooldown<=0&&s.charge<100&&f.cast?.skill!==i);
+    if(!livres.length)return;
+    const meu=livres.reduce((a,z)=>z.s.charge>a.s.charge?z:a).i;
+    const tirou=Math.min(j.valor,alvo.skills[dele]?.charge??0);
+    if(tirou<=0)return;
+    alvo.skills[dele]!.charge-=tirou;
+    const antes=f.skills[meu]!.charge;
+    f.skills[meu]!.charge=Math.min(100,antes+tirou);
+    emit(b,{kind:'charge',source:f.uid,target:f.uid,skill:meu,label:'Roubou Carga',value:f.skills[meu]!.charge-antes});
+    if(antes<100&&f.skills[meu]!.charge>=100){const s=byId[f.characterId].skills[meu]!;emit(b,{kind:'ready',source:f.uid,skill:meu,label:s.name,visual:s.icon});}
+  }
+}
 export function applyEffects(b:Battle,source:Fighter,selected:Fighter[],effects:Effect[],scale=1){
   const danoAntes=source.stats.damage;
   /*
@@ -615,11 +666,17 @@ export function stepBattle(b:Battle,observe?:(snapshot:Battle)=>void):Battle {
     if(f.action>=1){
       f.action-=1;
       const selected=intensity(f,'confused')&&random(b)<.25?[f]:targets(b,f,c.basic.target,c.basic.effects);
-      emit(b,{kind:'basic',source:f.uid,target:selected[0]?.uid,label:c.basic.name,visual:c.basic.visual});
+      f.golpes=(f.golpes??0)+1;
+      const jeito=c.basic.jeito,especial=jeito?.tipo==='serie'&&f.golpes%jeito.cada===0?jeito:undefined;
+      emit(b,{kind:'basic',source:f.uid,target:selected[0]?.uid,label:especial?especial.nome:c.basic.name,visual:c.basic.visual});
       // Cego: o golpe pode passar longe
       const cego=intensity(f,'blind');
       if(cego>0&&selected[0]&&selected[0].side!==f.side&&random(b)<Math.min(cego,statuses.blind.cap))emit(b,{kind:'miss',source:f.uid,target:selected[0].uid,label:'Errou'});
-      else applyEffects(b,f,selected,c.basic.effects);
+      else{
+        const antes=f.stats.damage;
+        applyEffects(b,f,selected,especial?golpeDaSerie(c.basic.effects,especial):c.basic.effects);
+        if(jeito&&selected[0]&&selected[0].side!==f.side)jeitoDeBater(b,f,selected[0],jeito,f.stats.damage-antes);
+      }
       sangra(b,f);
       trigger(b,f,'action',f);resolve(b);observe?.(b);if(b.finished)break;
     }

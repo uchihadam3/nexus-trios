@@ -5,7 +5,7 @@ import { characters } from '../data/characters';
 import { Portrait } from './Portrait';
 import { SkillIcon } from './Icon';
 import { EfeitosAgrupados } from './EfeitosAgrupados';
-import { presentEffect,presentSkill,presentTrait,targetNames,textoDaResistencia,textoDoRenascer } from '../engine/skill-descriptions';
+import { presentEffect,presentSkill,presentTrait,targetNames,textoDaResistencia,textoDoJeito,textoDoRenascer } from '../engine/skill-descriptions';
 import { identidadesDe } from '../presentation/identities';
 import { IdentityChips } from './IdentityChips';
 import { ComTermos,TermoBotao } from './Termos';
@@ -64,7 +64,8 @@ export function CharacterModal({character:c,onClose}:{character:Character;onClos
 
     <section className="fv-basico">
       <span className="fv-selo"><Swords size={13}/>ATAQUE BÁSICO · {targetNames[c.basic.target]}</span>
-      <div className="fv-chips">{c.basic.effects.map((effect,i)=><span key={i}><ComTermos texto={presentEffect(effect,c.basic.target)}/></span>)}</div>
+      <h3>{c.basic.name}</h3>
+      <div className="fv-chips">{c.basic.effects.map((effect,i)=><span key={i}><ComTermos texto={presentEffect(effect,c.basic.target)}/></span>)}{c.basic.jeito&&<span className="fv-jeito"><ComTermos texto={textoDoJeito(c.basic.jeito)}/></span>}</div>
     </section>
 
     <div className="fv-habilidades">{c.skills.map((s,i)=>{const p=presentSkill(s);return <article key={s.id} className="fv-habilidade">

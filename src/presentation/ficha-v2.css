@@ -19,7 +19,8 @@
 .fv-traco,.fv-basico,.fv-habilidade,.fv-fraco,.fv-aviso{border-radius:18px;padding:12px 14px}
 .fv-traco{background:linear-gradient(160deg,#ffd36b1f,#ffd36b08);box-shadow:inset 0 0 0 1px #ffd36b55}
 .fv-traco .fv-selo{color:#ffd36b}
-.fv-traco h3{margin:4px 0 6px;font-size:18px}
+.fv-traco h3,.fv-basico h3{margin:4px 0 6px;font-size:18px}
+.fv-chips .fv-jeito{background:#ffb4702a;box-shadow:inset 0 0 0 1px #ffb47055}
 .fv-traco small{color:#d9c48a}
 .fv-basico{background:#101915;box-shadow:inset 0 0 0 1px #ffffff12}
 .fv-habilidades{display:grid;gap:10px;min-width:0}

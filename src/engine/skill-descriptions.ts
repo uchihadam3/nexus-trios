@@ -1,5 +1,5 @@
 import { CHOQUE_DO_ELETRIFICADO, statuses } from '../data/statuses';
-import type { Effect, Skill, Target, Topic, Trait, StatusId } from './types';
+import type { Effect, JeitoDeBater, Skill, Target, Topic, Trait, StatusId } from './types';
 
 const n=(v:number)=>Number(v.toFixed(1)).toLocaleString('pt-BR');
 const pct=(v:number)=>`${Math.round(v*100)}%`;
@@ -429,6 +429,22 @@ export function quandoAtiva(trait:Trait):{quando:string;limite:string}{
 /** Última resistência (na ficha, fora do traço): o golpe fatal o deixa de pé uma vez. */
 export function textoDaResistencia(r:{protegido:number;duracao:number}):string{
   return `Última resistência: o golpe que o derrubaria o deixa com 1 de Vida e Protegido ${pct(r.protegido)} por ${r.duracao.toLocaleString('pt-BR')} s · 1 vez por luta`;
+}
+/** O jeito de bater: o que o ataque básico faz além do golpe. */
+export function textoDoJeito(j:JeitoDeBater):string{
+  const x=(n:number)=>n.toLocaleString('pt-BR',{maximumFractionDigits:1});
+  switch(j.tipo){
+    case 'serie':{
+      const partes=[(j.mult??1)>1?`dano ×${x(j.mult!)}`:'',j.status?presentEffect({kind:'status',status:j.status.status,value:j.status.value,duration:j.status.duration},'enemyWeak').replace(/^./,c=>c.toLowerCase()):''].filter(Boolean);
+      return `A cada ${j.cada} golpes: ${j.nome}${partes.length?` (${partes.join(' e ')})`:''}`;
+    }
+    case 'ricochete':return `Quica no outro rival mais ferido com ${pct(j.fracao)} do dano`;
+    case 'largo':return `Pega também um segundo rival com ${pct(j.fracao)} do dano`;
+    case 'cura':return `${pct(j.fracao)} do dano vira cura no aliado mais ferido`;
+    case 'escudo':return `${pct(j.fracao)} do dano vira Escudo em si`;
+    case 'rouba':return `Rouba ${j.valor} de Carga do alvo e põe na habilidade dele mais perto de encher`;
+    case 'acelera':return `Cada golpe adianta a próxima ação em ${pct(j.valor)}`;
+  }
 }
 /** Renascer (na ficha do personagem, fora do traço): o que acontece quando ele cai. */
 export function textoDoRenascer(r:{vida:number;atraso:number}):string{
