@@ -300,9 +300,21 @@ export function applyEffects(b:Battle,source:Fighter,selected:Fighter[],effects:
     }
   }
 }
+/*
+ * Golpe pronto que espera o momento ideal (rival vulnerável, rival em
+ * Preparo) não pode esperar para sempre. Pedido do jogador: o Majin Boo
+ * ficou com a Regeneração total pronta a luta inteira porque quem deixava o
+ * rival Exposto já tinha caído. Depois de tanto tempo pronta, sai assim mesmo.
+ */
+export const ESPERA_PELO_MOMENTO=6;
+const cansouDeEsperar=(b:Battle,f:Fighter,s:Skill)=>{
+  const i=byId[f.characterId].skills.indexOf(s),st=f.skills[i];
+  return !!st&&st.readySince!=null&&b.time-st.readySince>=ESPERA_PELO_MOMENTO-1e-6&&s.effects.some(e=>e.kind==='damage');
+};
 function appropriate(b:Battle,f:Fighter,s:Skill){
   if(s.requiresSkills?.some(index=>(f.skills[index]?.uses??0)<1))return false;
   if(temReviver(s)&&podeReviver(b,f))return true;
+  if((s.condition==='vulnerable'||s.condition==='enemyCast')&&cansouDeEsperar(b,f,s))return true;
   if(s.condition==='injured')return targets(b,f,s.target,s.effects).some(x=>x.hp/x.maxHp<.78);
   if(s.condition==='enemyCast')return hostile(b,f).some(interrompivel);
   if(s.condition==='threatened')return friendly(b,f).some(x=>x.hp/x.maxHp<.85)||hostile(b,f).some(interrompivel);
@@ -419,6 +431,8 @@ export function stepBattle(b:Battle,observe?:(snapshot:Battle)=>void):Battle {
       continue;
     }
     f.traitTimer=Math.max(0,f.traitTimer-STEP);
+    // desde quando cada habilidade está pronta (para não esperar o momento ideal para sempre)
+    for(const st of f.skills){const pronta=st.charge>=100&&st.cooldown<=0;st.readySince=pronta?(st.readySince??b.time):null;}
     for(const s of [...f.statuses]){
       const origin=b.fighters.find(x=>x.uid===s.source)??f;
       if(s.id==='burning')damage(b,origin,f,s.intensity*STEP,false);

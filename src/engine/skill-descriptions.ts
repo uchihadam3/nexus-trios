@@ -368,7 +368,9 @@ export function presentSkill(skill:Skill):SkillPresentation {
   const temCabecalho=grupos.some(g=>g.titulo!=='');
   return {summary:effects[0]??'Sem efeito',target:targetNames[skill.target],effects,grupos,
     mostrarAlvo:!temCabecalho&&(skill.effects.length===0||!skill.effects.every(seApresenta)),
-    charge:cargasLegiveis(skill.charge),useWhen:use[skill.condition],
+    charge:cargasLegiveis(skill.charge),
+    // golpe que espera o momento ideal sai assim mesmo depois de 6 s pronto (ESPERA_PELO_MOMENTO no motor)
+    useWhen:use[skill.condition]+((skill.condition==='vulnerable'||skill.condition==='enemyCast')&&skill.effects.some(e=>e.kind==='damage')?'; se não acontecer, sai depois de 6 s pronta':''),
     preparation:skill.preparation>0?secs(skill.preparation):'instantâneo',cooldown:secs(skill.cooldown)};
 }
 /*
