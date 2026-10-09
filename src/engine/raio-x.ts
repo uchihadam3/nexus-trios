@@ -34,6 +34,9 @@ export type TipoDeElo =
   | 'alvo-preparado'   /* A deixou um inimigo vulnerável e B aproveitou */
   | 'finalizacao'      /* A deixou um inimigo vulnerável e B o derrubou */
   | 'controle'         /* A travou um inimigo que estava preparando algo */
+  | 'levantou'         /* A levantou B depois de B cair (Reviver) */
+  | 'purificou'        /* A tirou Status ruins de B (Purificar) */
+  | 'provocou'         /* A provocou os rivais e apanhou no lugar de B */
   | 'conflito';        /* A prejudicou B — ver a nota no fim do arquivo */
 
 export interface Elo { de: string; para: string; tipo: TipoDeElo; vezes: number; valor: number }
@@ -47,6 +50,8 @@ export interface EstadoRaioX {
   preparando: { uid: string; desde: number }[];
   /** Dano que cada lutador do trio absorveu. */
   absorvido: Record<string, number>;
+  /** Rivais provocados: quem provocou e até quando (os golpes deles vão nele). */
+  provocados?: { alvo: string; de: string; ate: number }[];
   /** Último instante visto, para expirar marcas. */
   tempo: number;
 }
@@ -79,6 +84,7 @@ export function acumularRaioX(estado: EstadoRaioX, eventos: readonly BattleEvent
   let preparando = estado.preparando.map((p) => ({ ...p }));
   const absorvido = { ...estado.absorvido };
   let tempo = estado.tempo;
+  let provocados = (estado.provocados ?? []).map((p) => ({ ...p }));
 
   const lado = (uid: string) => battle.fighters.find((f) => f.uid === uid)?.side;
   const ligar = (de: string, para: string, tipo: TipoDeElo, valor = 0) => {
@@ -92,12 +98,16 @@ export function acumularRaioX(estado: EstadoRaioX, eventos: readonly BattleEvent
     tempo = Math.max(tempo, ev.time);
     /* Marcas vencidas saem antes de qualquer pergunta sobre elas. */
     marcas = marcas.filter((m) => m.ate > ev.time);
+    provocados = provocados.filter((p) => p.ate > ev.time);
 
     switch (ev.kind) {
       /* A Carga que um aliado fez subir: o motor já identifica a fonte. */
       case 'synergy': if (ev.target) ligar(ev.source, ev.target, 'carga', ev.value ?? 0); break;
 
       case 'heal': if (ev.target && doTrio(ev.target)) ligar(ev.source, ev.target, 'cura', ev.value ?? 0); break;
+      /* Reviver e Purificar: o motor diz quem fez em quem. */
+      case 'revive': if (ev.target && doTrio(ev.target)) ligar(ev.source, ev.target, 'levantou', 1); break;
+      case 'cleanse': if (ev.target && doTrio(ev.target)) ligar(ev.source, ev.target, 'purificou', ev.removidos?.length ?? 1); break;
       case 'shield': if (ev.target && doTrio(ev.target)) ligar(ev.source, ev.target, 'escudo', ev.value ?? 0); break;
 
       case 'cast': preparando = [...preparando.filter((p) => p.uid !== ev.source), { uid: ev.source, desde: ev.time }]; break;
@@ -121,6 +131,8 @@ export function acumularRaioX(estado: EstadoRaioX, eventos: readonly BattleEvent
             ligar(ev.source, alvo, 'preparo-protegido', duracao);
           } else ligar(ev.source, alvo, 'reforco', duracao);
         } else {
+          /* Provocar: os golpes deste rival vão em quem provocou, enquanto durar. */
+          if (id === 'provoked' && doTrio(ev.source)) provocados = [...provocados.filter((p) => p.alvo !== alvo), { alvo, de: ev.source, ate: ev.time + duracao }];
           /* Debuff em inimigo: vira marca, para responder a quem aproveitou. */
           if (VULNERABILIZA.has(id) || TRAVA.has(id)) {
             marcas = [...marcas.filter((m) => !(m.alvo === alvo && m.status === id)),
@@ -140,7 +152,13 @@ export function acumularRaioX(estado: EstadoRaioX, eventos: readonly BattleEvent
       case 'damage': {
         const alvo = ev.target;
         if (!alvo) break;
-        if (doTrio(alvo) && lado(ev.source) !== 'player') absorvido[alvo] = (absorvido[alvo] ?? 0) + (ev.value ?? 0);
+        if (doTrio(alvo) && lado(ev.source) !== 'player') {
+          absorvido[alvo] = (absorvido[alvo] ?? 0) + (ev.value ?? 0);
+          /* o rival provocado bateu em quem provocou: foi um golpe a menos nos aliados */
+          if (provocados.some((p) => p.alvo === ev.source && p.de === alvo)) {
+            for (const f of battle.fighters) if (f.side === 'player' && f.uid !== alvo && f.hp > 0) ligar(alvo, f.uid, 'provocou', (ev.value ?? 0) / 2);
+          }
+        }
         if (!doTrio(ev.source) || doTrio(alvo)) break;
         /* Quem abriu este inimigo antes deste golpe leva o crédito do elo. */
         for (const m of marcas) {
@@ -163,7 +181,7 @@ export function acumularRaioX(estado: EstadoRaioX, eventos: readonly BattleEvent
     }
   }
 
-  return { elos, marcas, preparando, absorvido, tempo };
+  return { elos, marcas, preparando, absorvido, tempo, provocados };
 }
 
 /* ---------------------------------------------------------------------------
@@ -201,6 +219,9 @@ const FRASES: Record<TipoDeElo, (n: number, v: number, o: string) => { frase: st
   'alvo-preparado': (n, _v, o) => ({ frase: `deixou o alvo vulnerável para ${o}`, destaque: { numero: `${n}`, rotulo: n === 1 ? 'golpe a mais forte' : 'golpes mais fortes' } }),
   'finalizacao': (n, _v, o) => ({ frase: `deixou o alvo vulnerável e ${o} derrubou`, destaque: { numero: `${n}`, rotulo: n === 1 ? 'rival derrubado' : 'rivais derrubados' } }),
   'controle': (n, _v, o) => ({ frase: `travou golpes rivais e deu tempo a ${o}`, destaque: { numero: `${n}`, rotulo: n === 1 ? 'golpe travado' : 'golpes travados' } }),
+  'levantou': (_n, _v, o) => ({ frase: `levantou ${o} depois que caiu`, destaque: { numero: '1', rotulo: 'aliado de volta' } }),
+  'purificou': (_n, v, o) => ({ frase: `tirou Status ruins de ${o}`, destaque: { numero: `${n0(v)}`, rotulo: v === 1 ? 'Status tirado' : 'Status tirados' } }),
+  'provocou': (n, _v, o) => ({ frase: `provocou os rivais e apanhou no lugar de ${o}`, destaque: { numero: `${n}`, rotulo: n === 1 ? 'golpe puxado' : 'golpes puxados' } }),
   'conflito': (n, _v, o) => ({ frase: `atrapalhou ${o}`, destaque: { numero: `${n}×`, rotulo: 'atrapalhou' } }),
 };
 
@@ -208,6 +229,7 @@ const FRASES: Record<TipoDeElo, (n: number, v: number, o: string) => { frase: st
 const PESO: Record<TipoDeElo, number> = {
   'finalizacao': 3, 'preparo-protegido': 2.5, 'controle': 2, 'alvo-preparado': 1.4,
   'cura': 1.2, 'escudo': 1.2, 'aceleracao': 1, 'reforco': 1, 'carga': 0.8, 'conflito': 0,
+  'levantou': 6, 'purificou': 1.5, 'provocou': 0.6,
 };
 
 /*

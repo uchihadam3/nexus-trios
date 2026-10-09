@@ -182,3 +182,38 @@ describe('quem segurou a pressão', () => {
     expect(quemAbsorveu(raioXVazio(), b)).toBeNull();
   });
 });
+
+/*
+ * Os elos das mecânicas novas, provados por eventos (nada inferido do kit):
+ * levantou (Reviver), purificou (Purificar) e provocou (o rival provocado
+ * bateu em quem provocou, e não nos aliados).
+ */
+import { acumularRaioX as acumulaNovo, lerRaioX as leNovo, raioXVazio as vazioNovo } from '../src/engine/raio-x';
+import { createBattle as criaNova } from '../src/engine/battle';
+import type { BattleEvent as EventoNovo } from '../src/engine/types';
+describe('Raio-X: elos das mecânicas novas', () => {
+  const b = criaNova(['sailormoon', 'captain', 'goku'], ['hulk', 'thanos', 'saitama'], 3);
+  const [moon, cap, goku] = b.fighters.filter((f) => f.side === 'player');
+  const hulk = b.fighters.find((f) => f.side === 'enemy')!;
+  const ev = (e: Partial<EventoNovo>): EventoNovo => ({ id: 0, time: 1, kind: 'damage', source: '', label: '', ...e }) as EventoNovo;
+  it('levantou e purificou vêm dos eventos do motor', () => {
+    const s = acumulaNovo(vazioNovo(), [
+      ev({ kind: 'revive', source: moon!.uid, target: goku!.uid, label: 'Levantou' }),
+      ev({ kind: 'cleanse', source: moon!.uid, target: cap!.uid, label: 'Purificou', removidos: ['paralyzed', 'slow'] }),
+    ], b);
+    expect(s.elos).toContainEqual({ de: moon!.uid, para: goku!.uid, tipo: 'levantou', vezes: 1, valor: 1 });
+    expect(s.elos).toContainEqual({ de: moon!.uid, para: cap!.uid, tipo: 'purificou', vezes: 1, valor: 2 });
+    const par = leNovo(s, b).find((p) => [p.a, p.b].includes(moon!.uid) && [p.a, p.b].includes(goku!.uid))!;
+    expect([par.aParaB.frase, par.bParaA.frase]).toContain(`levantou ${'Goku'} depois que caiu`);
+  });
+  it('provocou: só conta o golpe do rival provocado em quem provocou', () => {
+    const s = acumulaNovo(vazioNovo(), [
+      ev({ kind: 'status', status: 'provoked', source: cap!.uid, target: hulk.uid, value: 5, label: 'Provocado' }),
+      ev({ kind: 'damage', source: hulk.uid, target: cap!.uid, value: 200, time: 2 }),
+      ev({ kind: 'damage', source: hulk.uid, target: cap!.uid, value: 200, time: 9 }), // já passou a provocação
+    ], b);
+    const puxados = s.elos.filter((e) => e.tipo === 'provocou' && e.de === cap!.uid);
+    expect(puxados.map((e) => e.para).sort()).toEqual([goku!.uid, moon!.uid].sort());
+    expect(puxados.every((e) => e.vezes === 1)).toBe(true);
+  });
+});

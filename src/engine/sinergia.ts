@@ -16,14 +16,16 @@
  * não ajuda de verdade na luta fica com peso zero.
  */
 import { characters, byId } from '../data/characters';
+import { DEIXAM_VULNERAVEL } from '../data/statuses';
 import type { Character, Effect, StatusId, Target } from './types';
 
-export const LIGACOES = ['carga-golpe', 'abre-vulneravel', 'abre-ferido', 'cuida-fragil', 'reforca-forte', 'adianta-golpe', 'protege-vinganca', 'controla-dano', 'status-gatilho'] as const;
+export const LIGACOES = ['carga-golpe', 'abre-vulneravel', 'abre-ferido', 'cuida-fragil', 'reforca-forte', 'adianta-golpe', 'protege-vinganca', 'controla-dano', 'status-gatilho', 'provoca-fragil', 'levanta-forte', 'limpa-forte'] as const;
 export type Ligacao = (typeof LIGACOES)[number];
 
 const PARA_ALIADOS: Target[] = ['allAllies', 'allyWeak'];
 const PARA_RIVAIS: Target[] = ['enemyWeak', 'enemyStrong', 'enemyCast', 'investigated', 'leastInvestigated', 'allEnemies', 'randomEnemy'];
-const ABRE: StatusId[] = ['exposed', 'marked', 'paralyzed', 'electric', 'burning'];
+/* deixa o rival vulnerável: a mesma lista da condição das habilidades (Veneno, Sangrando… também) */
+const ABRE: StatusId[] = DEIXAM_VULNERAVEL;
 const PRENDE: StatusId[] = ['paralyzed', 'frozen', 'sleep', 'rooted', 'slow', 'confused', 'silenced', 'weakened', 'blind'];
 const REFORCO: StatusId[] = ['strengthened', 'haste', 'protected', 'regen'];
 
@@ -32,6 +34,8 @@ export interface Papel {
   abre: boolean; prende: boolean; golpeGrande: boolean; precisaVulneravel: boolean;
   precisaFerido: boolean; fragil: boolean; forte: boolean; vinganca: boolean;
   aplicaStatus: boolean; reageAStatus: boolean;
+  /** mecânicas novas: Provocar (puxa os golpes), Reviver, Purificar */
+  provoca: boolean; levanta: boolean; purifica: boolean;
 }
 
 function efeitos(c: Character): { e: Effect; alvo: Target }[] {
@@ -70,6 +74,9 @@ export function papelDe(id: string): Papel {
     // quando um aliado põe Status no rival, o traço dispara e as habilidades carregam (battle.ts, 'status'/'negativeStatus')
     aplicaStatus: ef.some(({ e, alvo }) => e.kind === 'status' && rival(alvo)),
     reageAStatus: ['status', 'negativeStatus'].includes(c.trait.on) || c.skills.some((s) => s.charge.some((r) => r.on === 'status' || r.on === 'negativeStatus')),
+    provoca: ef.some(({ e }) => e.kind === 'status' && e.status === 'provoked'),
+    levanta: ef.some(({ e }) => e.kind === 'revive'),
+    purifica: ef.some(({ e, alvo }) => e.kind === 'cleanse' && aliado(alvo)),
   };
   papeis.set(id, p);
   return p;
@@ -90,6 +97,9 @@ export function ligacoesDoTrio(trio: readonly string[]): Record<Ligacao, number>
     if (pa.cuida && pb.vinganca) n['protege-vinganca']++;
     if (pa.prende && pb.forte) n['controla-dano']++;
     if (pa.aplicaStatus && pb.reageAStatus) n['status-gatilho']++;
+    if (pa.provoca && pb.fragil) n['provoca-fragil']++;
+    if (pa.levanta && pb.forte) n['levanta-forte']++;
+    if (pa.purifica && pb.forte) n['limpa-forte']++;
   }
   // a mesma ligação repetida ajuda cada vez menos
   for (const l of LIGACOES) n[l] = Math.min(2, n[l]);

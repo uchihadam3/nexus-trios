@@ -22,8 +22,9 @@ import { FORCA, PESO_DA_LIGACAO } from '../data/forca-dos-rivais';
 import { pontoFraco } from '../data/ponto-fraco';
 import { forcaDoTrio } from '../engine/campaign';
 import { papelDe } from '../engine/sinergia';
+import { porQue } from './porque';
 
-export interface Motivo { texto: string; tom: 'bom' | 'alerta' }
+export interface Motivo { texto: string; tom: 'bom' | 'alerta'; /** o porquê, com as habilidades (na explicação maior) */ porque?: string }
 export interface DicaDoCandidato {
   id: string;
   /** 0–100: combina melhor com o trio do que esta % do elenco disponível */
@@ -62,6 +63,9 @@ function combinacoes(a: string, b: string): { chave: string; texto: string; peso
   if (pa.cuida && pb.vinganca) poe('protege-vinganca', `${A} segura ${B} de pé, e ${B} fica mais forte apanhando`);
   if (pa.prende && pb.forte) poe('controla-dano', `${A} prende os rivais enquanto ${B} bate`);
   if (pa.aplicaStatus && pb.reageAStatus) poe('status-gatilho', `${A} põe Status nos rivais, e isso ativa ${B}`);
+  if (pa.provoca && pb.fragil) poe('provoca-fragil', `${A} provoca e puxa os golpes que iriam em ${B}`);
+  if (pa.levanta && pb.forte) poe('levanta-forte', `${A} levanta ${B} se ele cair`);
+  if (pa.purifica && pb.forte) poe('limpa-forte', `${A} limpa os Status ruins e ${B} segue batendo`);
   return lista;
 }
 
@@ -80,9 +84,13 @@ function motivosDe(c: string, time: string[]): (Motivo & { ordem: number })[] {
     const ida = combinacoes(c, m), volta = combinacoes(m, c);
     for (const x of ida) {
       const par = volta.find((y) => y.chave === x.chave);
-      motivos.push({ texto: (par && MUTUO[x.chave]?.(nome(c), nome(m))) || x.texto, tom: 'bom', ordem: 10 + (par ? 2 : 1) * x.peso * 100 });
+      const porque = [porQue(x.chave, c, m), par ? porQue(x.chave, m, c) : undefined].filter(Boolean).join('. ');
+      motivos.push({ texto: (par && MUTUO[x.chave]?.(nome(c), nome(m))) || x.texto, tom: 'bom', ordem: 10 + (par ? 2 : 1) * x.peso * 100, ...(porque ? { porque } : {}) });
     }
-    for (const y of volta) if (!ida.some((x) => x.chave === y.chave)) motivos.push({ texto: y.texto, tom: 'bom', ordem: 10 + y.peso * 100 });
+    for (const y of volta) if (!ida.some((x) => x.chave === y.chave)) {
+      const porque = porQue(y.chave, m, c);
+      motivos.push({ texto: y.texto, tom: 'bom', ordem: 10 + y.peso * 100, ...(porque ? { porque } : {}) });
+    }
   }
   // o que falta no trio
   if (time.length) {
@@ -112,7 +120,9 @@ export function dicasDoDraft(candidatos: string[], time: string[], fora: string[
     const fraco = pontoFraco(byId[id]!.vulnerability, byId[id])[0];
     const detalhe = fraco ? [...motivos, { texto: `Cuidado: fraco contra ${fraco.contra.toLowerCase()} — ${fraco.motivo.charAt(0).toLowerCase()}${fraco.motivo.slice(1)}`, tom: 'alerta' as const, ordem: 0 }] : motivos;
     const limpa = (l: typeof motivos) => l.map(({ texto, tom }) => ({ texto, tom }));
-    return { id, nota: nota(id), encaixe, curtos: limpa(motivos.slice(0, 2)), detalhe: limpa(detalhe) };
+    // na explicação maior, cada combinação vem com o porquê (a habilidade que liga a outra)
+    const explica = (l: typeof motivos) => l.map(({ texto, tom, porque }) => ({ texto, tom, ...(porque ? { porque } : {}) }));
+    return { id, nota: nota(id), encaixe, curtos: limpa(motivos.slice(0, 2)), detalhe: explica(detalhe) };
   });
   const melhor = lista.reduce((a, b) => (b.nota > a.nota ? b : a), lista[0]!);
   return lista.map((d) => ({ id: d.id, encaixe: d.encaixe, curtos: d.curtos, detalhe: d.detalhe, melhor: d.id === melhor?.id }));

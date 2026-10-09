@@ -127,3 +127,6 @@
 @keyframes dv-sorteia{from{opacity:.45}to{opacity:.9}}
 .dv-arena:disabled{filter:saturate(.4) brightness(.8);cursor:progress}
 @media (prefers-reduced-motion:reduce){.dv-rival-sorteando b{animation:none}}
+
+/* o porquê de cada combinação, com as habilidades de verdade */
+.dv-porque-como{display:block;margin-top:3px;font-size:12.5px;line-height:1.4;font-weight:500;color:#c5d6c9}

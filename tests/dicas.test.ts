@@ -33,6 +33,42 @@ describe('Dicas de trio', () => {
     expect(Math.max(...candidatos.map(nota))).toBe(nota(melhor));
   });
 
+  /*
+   * Seguir a dica tem que ganhar mais (pedido do jogador: "mais inteligente
+   * tem que saber qual é melhor e por quê"). Um robô monta o trio pegando a
+   * melhor escolha da dica entre três sorteados, outro pega um dos três ao
+   * acaso; os dois enfrentam os mesmos rivais.
+   */
+  it('quem segue a dica monta trios que vencem mais do que quem escolhe ao acaso', () => {
+    let r = 77;
+    const rnd = () => { r = (Math.imul(r, 1664525) + 1013904223) >>> 0; return r / 4294967296; };
+    const sorteia = (fora: string[], n: number) => { const o: string[] = []; while (o.length < n) { const x = ids[Math.floor(rnd() * ids.length)]!; if (!o.includes(x) && !fora.includes(x)) o.push(x); } return o; };
+    let comDica = 0, aoAcaso = 0;
+    for (let jogo = 0; jogo < 70; jogo++) {
+      const rivais = sorteia([], 3);
+      const dica: string[] = [], acaso: string[] = [];
+      for (let vez = 0; vez < 3; vez++) {
+        const tres = sorteia([...rivais, ...dica, ...acaso], 3);
+        dica.push(dicasDoDraft(tres, dica, rivais).find((x) => x.melhor)!.id);
+        acaso.push(tres[Math.floor(rnd() * 3)]!);
+      }
+      for (const [time, soma] of [[dica, 1], [acaso, 0]] as const) {
+        const luta = createBattle([...time], rivais, 1000 + jogo, 1);
+        for (let t = 0; t < 9000 && !luta.finished; t++) stepBattle(luta);
+        if (luta.winner === 'player') { if (soma) comDica++; else aoAcaso++; }
+      }
+    }
+    expect(comDica).toBeGreaterThan(aoAcaso + 5);
+  });
+
+  it('a explicação diz o porquê com as habilidades de verdade', () => {
+    const d = dicasDoDraft(['sakura'], ['raidenmk'])[0]!;
+    const comPorque = d.detalhe.filter((m) => m.porque);
+    expect(comPorque.length).toBeGreaterThan(0);
+    // cita uma habilidade do Raiden e diz o que ela faz pela Sakura
+    expect(comPorque.some((m) => /Barreira elétrica de Raiden/.test(m.porque!))).toBe(true);
+  });
+
   it('custa 25 mil por luta, aparece na conta e a luta nunca fica negativa', () => {
     const [a, b] = generateCampaign(5).map((e) => e.team);
     const luta = createBattle(a!, b!, 5, 1);
