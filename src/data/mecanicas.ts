@@ -11,6 +11,10 @@ import type { Character, Effect, StatusId } from '../engine/types';
 export const REVIVER: Record<string, { habilidade: number; vida: number }> = {
   sailormoon: { habilidade: 2, vida: 0.4 }, // o Cristal de Prata devolve o trio à luta
   sora: { habilidade: 1, vida: 0.35 }, // Cura (Vida+): levanta quem caiu
+  arthas: { habilidade: 1, vida: 0.3 }, // Erguer os mortos
+  jinwoo: { habilidade: 0, vida: 0.3 }, // Extração de sombra: "Levante-se"
+  giorno: { habilidade: 0, vida: 0.35 }, // Gold Experience cria vida
+  jill: { habilidade: 0, vida: 0.3 }, // o kit de primeiros socorros põe o parceiro de pé
 };
 
 /** Renascer: ao cair, volta sozinho depois de `atraso` segundos com esta fração da Vida. */
@@ -21,6 +25,10 @@ export const RENASCER: Record<string, { vida: number; atraso: number }> = {
   majinbuu: { vida: 0.35, atraso: 2.5 }, // se refaz de qualquer pedaço
   mummra: { vida: 0.4, atraso: 2.5 }, // "Antigos Espíritos do Mal…": volta do sarcófago
   cell: { vida: 0.3, atraso: 2.5 }, // volta inteiro de uma célula só
+  mario: { vida: 0.35, atraso: 1.5 }, // o cogumelo 1-Up: uma vida extra
+  wolverine: { vida: 0.3, atraso: 3 }, // o fator de cura não deixa ele ficar no chão
+  alucardcv: { vida: 0.35, atraso: 2 }, // vira névoa e se refaz
+  muzan: { vida: 0.3, atraso: 2.5 }, // o corpo se remonta de qualquer pedaço
 };
 
 /**
@@ -33,6 +41,12 @@ export const PROVOCAR: Record<string, { habilidade: number; duracao: number; tro
   hulk: { habilidade: 1, duracao: 4, troca: 'slow' }, // o Rugido chama a briga para ele
   bowser: { habilidade: 1, duracao: 3.5 }, // o rei Koopa ruge e fica mais pesado
   eren: { habilidade: 1, duracao: 4 }, // endurece e atrai o golpe para o titã
+  majinbuu: { habilidade: 1, duracao: 3.5 }, // debocha e chama para a briga: ele se refaz de tudo
+  bart: { habilidade: 1, duracao: 3, troca: 'confused' }, // "Provocação": agora literal
+  patolino: { habilidade: 0, duracao: 3, troca: 'weakened' }, // "Exijo atenção"
+  cartman: { habilidade: 0, duracao: 3.5, troca: 'slow' }, // "Respeitem minha autoridade!"
+  srincrivel: { habilidade: 1, duracao: 4 }, // se põe na frente do trio inteiro
+  alphonse: { habilidade: 1, duracao: 4, troca: 'weakened' }, // a armadura chama o golpe para si
 };
 
 type Mudanca = (effects: Effect[]) => Effect[];
