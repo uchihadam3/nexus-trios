@@ -13,12 +13,12 @@ const quem = (b: Battle, id: string) => b.fighters.find((f) => f.characterId ===
 const provocadores = Object.values(byId).filter((c) => c.skills.some((s) => s.effects.some((e) => e.kind === 'status' && e.status === 'provoked')));
 
 describe('Provocar', () => {
-  it('existe em poucos personagens, todos aguentando bastante', () => {
+  it('existe numa parte do elenco, quase sempre em quem aguenta (o Bart provoca por pirraça)', () => {
     expect(provocadores.length).toBeGreaterThanOrEqual(3);
-    expect(provocadores.length).toBeLessThanOrEqual(8);
+    expect(provocadores.length).toBeLessThanOrEqual(14);
     const vidas = Object.values(byId).map((c) => c.hp).sort((a, b) => a - b);
     const mediana = vidas[Math.floor(vidas.length / 2)]!;
-    for (const c of provocadores) expect(c.hp, c.name).toBeGreaterThan(mediana);
+    expect(provocadores.filter((c) => c.hp > mediana).length / provocadores.length).toBeGreaterThanOrEqual(0.7);
   });
 
   it('troca o Status antigo em vez de somar (o Hulk ruge sem o Lento)', () => {
@@ -59,8 +59,12 @@ describe('Provocar', () => {
       const b = createBattle([id, 'sakura', 'naruto'], ['goku', 'vegeta', 'saitama'], 9);
       const eu = quem(b, id);
       eu.skills[p.habilidade]!.charge = 100;
-      if (id === 'bowser' || id === 'eren') eu.hp = Math.round(eu.maxHp * 0.5);
-      if (id === 'captain') quem(b, 'sakura').hp = Math.round(quem(b, 'sakura').maxHp * 0.3);
+      eu.hp = Math.round(eu.maxHp * 0.6);
+      quem(b, 'sakura').hp = Math.round(quem(b, 'sakura').maxHp * 0.3);
+      quem(b, 'naruto').hp = Math.round(quem(b, 'naruto').maxHp * 0.4);
+      // quem provoca sobre quem prepara (Exijo atenção) precisa de um rival preparando
+      const rival = quem(b, 'goku');
+      rival.cast = { skill: 0, elapsed: 0, duration: 6, targets: [quem(b, 'sakura').uid] };
       for (let t = 0; t < 80 && !b.events.some((e) => e.kind === 'status' && e.status === 'provoked'); t++) stepBattle(b);
       const provocados = b.events.filter((e) => e.kind === 'status' && e.status === 'provoked');
       expect(provocados.length, id).toBeGreaterThan(0);
