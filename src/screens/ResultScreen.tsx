@@ -1,5 +1,5 @@
 import { useEffect,useState,type CSSProperties,type ReactNode } from 'react';
-import { ArrowRight,RotateCcw,Home,Trophy,HeartPulse,TrendingUp,Shield,Crown,Sparkles,Medal,LogOut,Swords,Skull,Zap,Timer } from 'lucide-react';
+import { ArrowRight,RotateCcw,Home,Trophy,HeartPulse,TrendingUp,Shield,Crown,Sparkles,Medal,LogOut,Swords,Skull,Zap } from 'lucide-react';
 import type { Run } from '../lib/storage';
 import { byId } from '../data/characters';
 import { Portrait } from '../components/Portrait';
@@ -61,7 +61,7 @@ export function ResultScreen({run,onNext,onRestart,onAbandon,onHome,onRanking,on
   const vitorias=resumos.filter(s=>s.won).length;
 
   // cada parcela da luta com o seu ícone (a conta vem de src/engine/pontos.ts, a mesma do ranking)
-  const ICONE:Record<string,ReactNode>={dano:<Swords size={15}/>,nocautes:<Skull size={15}/>,apoio:<Shield size={15}/>,jogadas:<Zap size={15}/>,viradas:<TrendingUp size={15}/>,vitoria:<Trophy size={15}/>,vida:<HeartPulse size={15}/>,rapidez:<Timer size={15}/>};
+  const ICONE:Record<string,ReactNode>={dano:<Swords size={15}/>,nocautes:<Skull size={15}/>,apoio:<Shield size={15}/>,jogadas:<Zap size={15}/>,viradas:<TrendingUp size={15}/>,vitoria:<Trophy size={15}/>,efeitos:<Sparkles size={15}/>,vida:<HeartPulse size={15}/>};
   const parcelas:Parcela[]=p.parcelas.map(x=>({rotulo:x.rotulo,valor:x.valor,icone:ICONE[x.id]}));
 
   /* A sequência do placar: parcelas uma a uma, depois o total sobe, depois o recorde. */

@@ -4,6 +4,7 @@ import { generateCampaign } from '../src/engine/campaign';
 import { createBattle, stepBattle } from '../src/engine/battle';
 import { pontosDaJornada, pontosDaLuta } from '../src/engine/pontos';
 import { characters } from '../src/data/characters';
+import { FATOR_DE_PONTOS } from '../src/data/pontos-por-personagem';
 
 /* Os pontos que a tela mostra depois de cada luta são exatamente os do ranking. */
 describe('pontos', () => {
@@ -28,4 +29,12 @@ describe('pontos', () => {
     }
     expect(conferidas).toBeGreaterThan(5);
   }, 60000);
+
+  it('todo personagem tem o seu fator de pontos, dentro do limite (rode scripts/equilibrar-pontos.ts se mudar o elenco)', () => {
+    for (const c of characters) {
+      expect(FATOR_DE_PONTOS[c.id], c.id).toBeDefined();
+      expect(FATOR_DE_PONTOS[c.id]).toBeGreaterThanOrEqual(0.5);
+      expect(FATOR_DE_PONTOS[c.id]).toBeLessThanOrEqual(2);
+    }
+  });
 });

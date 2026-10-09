@@ -27,7 +27,9 @@ export interface Fighter {
   cast:null|{skill:number;elapsed:number;duration:number;targets:string[]};
   investigation:Record<string,number>;discovered?:Record<string,'vulnerable'|'immune'>;traitTimer:number;
   storedEnergy:number;
-  stats:{damage:number;healing:number;protection:number;interrupts:number;skills:number;kills:number};
+  stats:{damage:number;healing:number;protection:number;interrupts:number;skills:number;kills:number;
+    /** Feitos que não viram número na tela (para os pontos): segundos de Status ruim no rival e bom no trio, ação adiantada/atrasada, Carga dada a aliados. Opcionais: lutas salvas antes não têm. */
+    debuffs?:number;buffs?:number;tempo?:number;carga?:number};
 }
 export interface BattleEvent {id:number;time:number;kind:'basic'|'skill'|'cast'|'damage'|'heal'|'shield'|'status'|'interrupt'|'ko'|'synergy'|'charge'|'tempo'|'turn'|'ready'|'block'|'discovery';source:string;target?:string;skill?:number;label:string;value?:number;visual?:Visual;status?:StatusId;attacker?:string}
 export interface TargetDecision {time:number;actor:string;intent:TargetIntent;target:string;score:number;reasons:string[]}

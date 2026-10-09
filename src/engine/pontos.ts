@@ -1,31 +1,39 @@
 /*
  * Os pontos de cada luta — os mesmos do ranking.
  *
- * Pedido do jogador: "sempre dá mais ou menos 1 milhão por batalha; tem que
- * variar mais, e se perder a batalha ainda ganha os pontos que fez nela". A
- * conta antiga era 1.000.000 por vitória e só uns 30.000 de "qualidade" — toda
- * luta vencida parecia igual, e a derrota valia zero.
+ * Pedidos do jogador, em ordem:
+ *   - "sempre dá ~1 milhão por batalha; tem que variar, e a derrota também
+ *     pontua o que você fez nela";
+ *   - escala de ~10 mil (derrota feia) a ~180 mil (luta incrível);
+ *   - "os pontos têm que vir dos feitos na batalha, e não da vitória em si":
+ *     a vitória vale só 25 mil, fixos;
+ *   - "balanceados, para que todos os personagens que jogarem bem pontuem
+ *     parecido".
  *
- * Agora a luta paga pelo que o trio fez nela:
- *   combate  · dano causado, nocautes, cura e proteção, interrupções e
- *              habilidades usadas — conta mesmo na derrota;
- *   vitória  · um bônus por vencer, mais a Vida que sobrou, quem ficou de pé
- *              e a rapidez (vencer depressa vale mais);
- *   viradas  · virar o Domínio a seu favor.
- * Tudo multiplicado pela altura da jornada (a luta 10 vale ×1,45).
- * A escala é a pedida: derrota feia ~10 mil; vitória ruim ~60 mil;
- * vitória razoável ~100 mil; luta incrível 150–180 mil.
- * A jornada é a soma das lutas (a derrota encerra, mas os pontos dela ficam).
+ * Feitos de cada lutador do trio: dano, nocautes, cura e proteção,
+ * habilidades e cortes, Status no rival e no trio, adiantar/atrasar ação,
+ * Carga dada a aliados e investigação. Os pesos dão a cada tipo de feito a
+ * sua parte da luta (o dano não engole o resto). Por cima, cada personagem
+ * tem um fator medido em lutas simuladas (src/data/pontos-por-personagem.ts,
+ * scripts/equilibrar-pontos.ts): quem tem um kit que gera pouco número
+ * "visível" (controle, investigação, apoio) é corrigido para cima, e quem
+ * gera muito, para baixo — então o jogo típico de qualquer personagem rende
+ * parecido, e jogar acima disso rende mais.
+ *
+ * Também contam: manter o trio vivo (Vida que sobrou e quem ficou de pé) e
+ * virar o Domínio. Os feitos crescem com a altura da jornada (luta 10 ×1,45).
+ * A jornada é a soma das lutas; a derrota encerra, mas os pontos dela ficam.
  * O servidor (src/engine/ranked.ts, replayRanked) usa exatamente esta conta.
  */
-import type { Battle } from './types';
+import type { Battle, Fighter } from './types';
+import { FATOR_DE_PONTOS } from '../data/pontos-por-personagem';
 
-export type ParcelaId = 'dano' | 'nocautes' | 'apoio' | 'jogadas' | 'viradas' | 'vitoria' | 'vida' | 'rapidez';
+export type ParcelaId = 'dano' | 'nocautes' | 'apoio' | 'jogadas' | 'efeitos' | 'viradas' | 'vida' | 'vitoria';
 export interface Parcela { id: ParcelaId; rotulo: string; valor: number }
 
 export interface PontosDaLuta {
   total: number;
-  /** As parcelas já multiplicadas pela altura da jornada, na ordem de exibição. */
+  /** As parcelas da luta, na ordem de exibição. */
   parcelas: Parcela[];
   /** O multiplicador da luta (1 na primeira, cresce a cada luta). */
   multiplicador: number;
@@ -34,46 +42,76 @@ export interface PontosDaLuta {
   vidaMedia: number;
 }
 
+/** Quanto vale cada unidade de feito (antes do fator do personagem). */
+export const FEITOS = {
+  porDano: 3.3,
+  porNocaute: 1_450,
+  porApoio: 8.5,
+  porHabilidade: 370,
+  porCorte: 4_250,
+  /** por segundo de Status ruim posto no rival */
+  porDebuff: 22,
+  /** por segundo de Status bom posto no trio */
+  porBuff: 14,
+  /** por barra de ação adiantada (aliado) ou atrasada (rival) */
+  porTempo: 1_800,
+  /** por ponto de Carga dado a aliados */
+  porCarga: 8.5,
+  /** por ponto de investigação */
+  porInvestigacao: 30,
+} as const;
+
 export const PONTOS = {
-  porDano: 4,
-  porNocaute: 2_500,
-  porApoio: 3.5,
-  porInterrupcao: 2_500,
-  porHabilidade: 450,
-  porVirada: 1_200,
-  viradasMaximo: 4_800,
-  vitoria: 7_000,
-  vidaMaxima: 45_000,
-  porSobrevivente: 5_500,
-  rapidezMaxima: 40_000,
-  /** Vencer até este tempo de luta vale a rapidez inteira; depois cai até zero. */
-  rapidoAte: 18,
-  lentoDe: 45,
-  /** Quanto cada luta da jornada multiplica a mais (luta 10 = ×1,45). */
+  porVirada: 2_500,
+  viradasMaximo: 10_000,
+  /** Manter o trio vivo é um feito: a Vida que sobrou e quem ficou de pé. */
+  vidaMaxima: 62_000,
+  porSobrevivente: 1_000,
+  /** A vitória em si vale só isto, fixo: o resto vem do que o trio fez. */
+  vitoria: 25_000,
+  /** Quanto cada luta da jornada multiplica os feitos (luta 10 = ×1,45). */
   porLuta: 0.05,
 } as const;
 
 export const multiplicadorDaLuta = (indice: number) => 1 + PONTOS.porLuta * Math.max(0, indice);
 
+/** Os feitos de um lutador, por tipo, sem o fator do personagem (usado também para medir o fator). */
+export function feitosDoLutador(f: Fighter): Record<'dano' | 'nocautes' | 'apoio' | 'jogadas' | 'efeitos', number> {
+  const s = f.stats;
+  const investigacao = Object.values(f.investigation ?? {}).reduce((n, v) => n + v, 0);
+  return {
+    dano: s.damage * FEITOS.porDano,
+    nocautes: s.kills * FEITOS.porNocaute,
+    apoio: (s.healing + s.protection) * FEITOS.porApoio,
+    jogadas: s.skills * FEITOS.porHabilidade + s.interrupts * FEITOS.porCorte,
+    efeitos: (s.debuffs ?? 0) * FEITOS.porDebuff + (s.buffs ?? 0) * FEITOS.porBuff + (s.tempo ?? 0) * FEITOS.porTempo
+      + (s.carga ?? 0) * FEITOS.porCarga + investigacao * FEITOS.porInvestigacao,
+  };
+}
+
 export function pontosDaLuta(battle: Battle, indice = 0): PontosDaLuta {
   const trio = battle.fighters.filter((f) => f.side === 'player');
   const de_pe = trio.filter((f) => f.hp > 0).length;
   const vidaMedia = Math.max(0, Math.min(1, trio.reduce((n, f) => n + f.hp / f.maxHp, 0) / 3));
-  const soma = (k: keyof (typeof trio)[number]['stats']) => trio.reduce((n, f) => n + f.stats[k], 0);
   const venceu = battle.winner === 'player';
-  const rapidez = venceu ? Math.max(0, Math.min(1, (PONTOS.lentoDe - battle.time) / (PONTOS.lentoDe - PONTOS.rapidoAte))) : 0;
   const m = multiplicadorDaLuta(indice);
+  const soma = { dano: 0, nocautes: 0, apoio: 0, jogadas: 0, efeitos: 0 };
+  for (const f of trio) {
+    const fator = FATOR_DE_PONTOS[f.characterId] ?? 1;
+    const x = feitosDoLutador(f);
+    for (const k of Object.keys(soma) as (keyof typeof soma)[]) soma[k] += x[k] * fator;
+  }
   const brutas: [ParcelaId, string, number][] = [
-    ['dano', 'Dano causado', soma('damage') * PONTOS.porDano],
-    ['nocautes', 'Nocautes', soma('kills') * PONTOS.porNocaute],
-    ['apoio', 'Cura e proteção', (soma('healing') + soma('protection')) * PONTOS.porApoio],
-    ['jogadas', 'Habilidades e cortes', soma('skills') * PONTOS.porHabilidade + soma('interrupts') * PONTOS.porInterrupcao],
-    ['viradas', 'Viradas', Math.min(PONTOS.viradasMaximo, (battle.viradasDoTrio ?? 0) * PONTOS.porVirada)],
+    ['dano', 'Dano causado', soma.dano * m],
+    ['nocautes', 'Nocautes', soma.nocautes * m],
+    ['apoio', 'Cura e proteção', soma.apoio * m],
+    ['jogadas', 'Habilidades e cortes', soma.jogadas * m],
+    ['efeitos', 'Status, ritmo e Carga', soma.efeitos * m],
+    ['viradas', 'Viradas', Math.min(PONTOS.viradasMaximo, (battle.viradasDoTrio ?? 0) * PONTOS.porVirada) * m],
+    ['vida', `Trio vivo · ${de_pe} de pé`, (vidaMedia * PONTOS.vidaMaxima + de_pe * PONTOS.porSobrevivente) * m],
     ['vitoria', 'Vitória', venceu ? PONTOS.vitoria : 0],
-    ['vida', `Vida ${Math.round(vidaMedia * 100)}% · ${de_pe} de pé`, venceu ? vidaMedia * PONTOS.vidaMaxima + de_pe * PONTOS.porSobrevivente : 0],
-    ['rapidez', 'Rapidez', rapidez * PONTOS.rapidezMaxima],
   ];
-  const parcelas = brutas.map(([id, rotulo, v]) => ({ id, rotulo, valor: Math.round(v * m) })).filter((p) => p.valor > 0);
+  const parcelas = brutas.map(([id, rotulo, v]) => ({ id, rotulo, valor: Math.round(v) })).filter((p) => p.valor > 0);
   return { total: parcelas.reduce((n, p) => n + p.valor, 0), parcelas, multiplicador: m, de_pe, vidaMedia };
 }
 

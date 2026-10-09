@@ -96,7 +96,7 @@ function gain(b:Battle,f:Fighter,topic:Topic,amount:number,source?:Fighter){
     if(delta>0&&state.charge>before&&topic!=='time'){
       const gained=state.charge-before,actor=source??f;
       emit(b,{kind:'charge',source:actor.uid,target:f.uid,skill:i,label:topic,value:gained});
-      if(source&&source.uid!==f.uid&&source.side===f.side){pressure(b,f.side,D.event.synergyCharge*clamp(gained/25));emit(b,{kind:'synergy',source:source.uid,target:f.uid,skill:i,label:s.name,value:gained});}
+      if(source&&source.uid!==f.uid&&source.side===f.side){pressure(b,f.side,D.event.synergyCharge*clamp(gained/25));emit(b,{kind:'synergy',source:source.uid,target:f.uid,skill:i,label:s.name,value:gained});source.stats.carga=(source.stats.carga??0)+gained;}
     }
   });
 }
@@ -181,6 +181,7 @@ export function applyEffects(b:Battle,source:Fighter,selected:Fighter[],effects:
            * proibiu. Com ela, a resposta é exata.
            */
           emit(b,{kind:'status',source:source.uid,target:target.uid,label:def.name,status:effect.status,value:effect.duration});
+          if(target.side!==source.side)source.stats.debuffs=(source.stats.debuffs??0)+effect.duration;else source.stats.buffs=(source.stats.buffs??0)+effect.duration;
           if(target.side!==source.side){const weight=effect.status==='paralyzed'?1:effect.status==='rooted'?.65:effect.status==='slow'?.35:effect.status==='silenced'?.55:['exposed','marked','electric','burning'].includes(effect.status)?.3:0;if(weight)pressure(b,source.side,D.event.statusApplied*weight);}
           // Status events only charge observers; they cannot recursively execute other traits.
           const negative=target.side!==source.side&&negativeStatuses.has(effect.status);
@@ -205,11 +206,11 @@ export function applyEffects(b:Battle,source:Fighter,selected:Fighter[],effects:
           else applyEffects(b,source,[target],[{kind:'status',status:'exposed',value:.55,duration:14},{kind:'damage',value:110}]);
           break;
         }
-        case 'charge':target.skills.forEach((s,i)=>{if(s.cooldown<=0&&target.cast?.skill!==i){const before=s.charge;s.charge=Math.min(100,s.charge+effect.value);if(before<100&&s.charge>=100)emit(b,{kind:'ready',source:target.uid,skill:i,label:byId[target.characterId].skills[i].name,visual:byId[target.characterId].skills[i].icon});if(s.charge>before){emit(b,{kind:'charge',source:source.uid,target:target.uid,skill:i,label:source.uid===target.uid?'trait':'synergy',value:s.charge-before});if(source.uid!==target.uid){pressure(b,source.side,D.event.synergyCharge*clamp((s.charge-before)/25));emit(b,{kind:'synergy',source:source.uid,target:target.uid,skill:i,label:'Carga recebida',value:s.charge-before});}}}});break;
+        case 'charge':target.skills.forEach((s,i)=>{if(s.cooldown<=0&&target.cast?.skill!==i){const before=s.charge;s.charge=Math.min(100,s.charge+effect.value);if(before<100&&s.charge>=100)emit(b,{kind:'ready',source:target.uid,skill:i,label:byId[target.characterId].skills[i].name,visual:byId[target.characterId].skills[i].icon});if(s.charge>before){emit(b,{kind:'charge',source:source.uid,target:target.uid,skill:i,label:source.uid===target.uid?'trait':'synergy',value:s.charge-before});if(source.uid!==target.uid){pressure(b,source.side,D.event.synergyCharge*clamp((s.charge-before)/25));emit(b,{kind:'synergy',source:source.uid,target:target.uid,skill:i,label:'Carga recebida',value:s.charge-before});source.stats.carga=(source.stats.carga??0)+(s.charge-before);}}}});break;
         case 'shift':{
           const before=target.action;target.action=clamp(target.action+effect.value);
           const delta=target.action-before;
-          if(Math.abs(delta)>.005)emit(b,{kind:'tempo',source:source.uid,target:target.uid,label:delta>0?'Ação adiantada':'Ação atrasada',value:delta});
+          if(Math.abs(delta)>.005){emit(b,{kind:'tempo',source:source.uid,target:target.uid,label:delta>0?'Ação adiantada':'Ação atrasada',value:delta});source.stats.tempo=(source.stats.tempo??0)+Math.abs(delta);}
           break;
         }
         case 'store':source.storedEnergy=Math.min(effect.cap,(source.storedEnergy??0)+effect.value*scale);emit(b,{kind:'shield',source:source.uid,target:source.uid,label:'Energia cinética armazenada',value:source.storedEnergy,visual:'bolt'});break;
