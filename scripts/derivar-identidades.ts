@@ -24,7 +24,7 @@ import { characters } from '../src/data/characters';
 import { statuses } from '../src/data/statuses';
 import type { Identidade } from '../src/presentation/identities';
 import { ordemDasIdentidades } from '../src/presentation/identities';
-import type { Character, Effect, Target } from '../src/engine/types';
+import type { Character, Effect, StatusId, Target } from '../src/engine/types';
 
 interface Medida { id: string; nome: string; [k: string]: number | string }
 const { medidas } = JSON.parse(readFileSync('docs/identidades-medidas.json', 'utf8')) as { medidas: Medida[] };
@@ -149,6 +149,8 @@ const avaliar = (c: Character): Map<Identidade, number> => {
   if (temEfeito(c, ({ e }) => e.kind === 'status' && e.status === 'thorns')) notas.set('Espinhos', 1);
   if (temEfeito(c, ({ e }) => e.kind === 'cleanse')) notas.set('Purificar', 1);
   if (temEfeito(c, ({ e }) => e.kind === 'dispel')) notas.set('Dissipar', 1);
+  const TAG_DO_STATUS: [StatusId, Identidade][] = [['poison', 'Veneno'], ['bleed', 'Sangramento'], ['cursed', 'Maldição'], ['frozen', 'Congelar'], ['sleep', 'Sono'], ['blind', 'Cegueira'], ['barrier', 'Barreira']];
+  for (const [s, tag] of TAG_DO_STATUS) if (temEfeito(c, ({ e }) => e.kind === 'status' && e.status === s)) notas.set(tag, 1);
   return notas;
 };
 

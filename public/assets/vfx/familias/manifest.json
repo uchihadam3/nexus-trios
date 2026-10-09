@@ -335,6 +335,20 @@
   "laco": false,
   "bytes": 63584
  },
+ "cegueira": {
+  "descricao": "clarão que ofusca, com véu",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 88196
+ },
  "chama_negra": {
   "descricao": "chama negra lenta",
   "quadros": 12,
@@ -2350,6 +2364,20 @@
   ],
   "laco": false,
   "bytes": 97720
+ },
+ "sono": {
+  "descricao": "névoa lilás e três Z subindo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 65430
  },
  "sopro_de_fogo": {
   "descricao": "jato de fogo em cone",

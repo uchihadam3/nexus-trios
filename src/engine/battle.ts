@@ -175,10 +175,10 @@ function trigger(b:Battle,f:Fighter,topic:Topic,source?:Fighter,amount=1){
  * está travado volta a agir antes de quem só está mais lento). Dissipar tira
  * dos rivais os buffs que mais ajudam primeiro. `value` é quantos Status saem.
  */
-export const ORDEM_DA_PURIFICACAO:StatusId[]=['paralyzed','silenced','rooted','provoked','confused','slow','burning','exposed','marked','electric','weakened'];
-export const ORDEM_DA_DISSIPACAO:StatusId[]=['protected','reflect','vampirism','strengthened','haste','thorns','regen'];
-const PESO_DO_DEBUFF:Partial<Record<StatusId,number>>={paralyzed:1,silenced:.65,rooted:.7,provoked:.5,confused:.45,slow:.4};
-const PESO_DO_BUFF:Partial<Record<StatusId,number>>={protected:.5,reflect:.45,vampirism:.45,strengthened:.4,haste:.4,thorns:.3,regen:.3};
+export const ORDEM_DA_PURIFICACAO:StatusId[]=['paralyzed','frozen','sleep','silenced','rooted','provoked','confused','blind','poison','bleed','cursed','slow','burning','exposed','marked','electric','weakened'];
+export const ORDEM_DA_DISSIPACAO:StatusId[]=['barrier','protected','reflect','vampirism','strengthened','haste','thorns','regen'];
+const PESO_DO_DEBUFF:Partial<Record<StatusId,number>>={paralyzed:1,frozen:.9,sleep:.8,silenced:.65,rooted:.7,provoked:.5,confused:.45,blind:.45,poison:.4,bleed:.4,cursed:.4,slow:.4};
+const PESO_DO_BUFF:Partial<Record<StatusId,number>>={barrier:.5,protected:.5,reflect:.45,vampirism:.45,strengthened:.4,haste:.4,thorns:.3,regen:.3};
 function quaisSaem(alvo:Fighter,ordem:StatusId[],n:number):StatusId[]{
   const tem=new Set(alvo.statuses.map(s=>s.id));
   return [...ordem.filter(id=>tem.has(id)),...[...tem].filter(id=>!ordem.includes(id)&&ordem!==ORDEM_DA_DISSIPACAO&&negativeStatuses.has(id))].slice(0,Math.max(0,Math.round(n)));
@@ -191,6 +191,12 @@ function tiraStatus(b:Battle,source:Fighter,alvo:Fighter,kind:'cleanse'|'dispel'
   pressure(b,source.side,D.event.statusApplied*.4*saem.length);
   emit(b,{kind,source:source.uid,target:alvo.uid,label:kind==='cleanse'?'Purificado':'Dissipado',value:saem.length,removidos:saem});
 }
+/* Sangramento: agir abre a ferida — cada ataque básico ou habilidade custa Vida. */
+function sangra(b:Battle,f:Fighter){
+  const s=f.statuses.find(x=>x.id==='bleed');if(!s||!alive(f))return;
+  const origem=b.fighters.find(x=>x.uid===s.source)??f;
+  damage(b,origem,f,Math.min(s.intensity,statuses.bleed.cap),false,'Sangramento');
+}
 function devolve(b:Battle,dono:Fighter,agressor:Fighter,valor:number,label:'Refletido'|'Espinhos'){
   if(valor<=.01||!alive(agressor))return;
   damage(b,dono,agressor,valor,false,label);
@@ -199,17 +205,24 @@ function damage(b:Battle,source:Fighter,target:Fighter,raw:number,direto=true,la
   if(!alive(target))return;
   // o golpe devolvido é o próprio golpe (ou o espinho fixo): Fortalecido e Enfraquecido de quem devolve não mexem nele
   const devolvido=label==='Refletido'||label==='Espinhos';
-  const outgoing=devolvido?raw:raw*(1+intensity(source,'strengthened'))*(1-intensity(source,'weakened'));
-  const beforeProtection=outgoing*(1+intensity(target,'exposed'));
-  const protection=intensity(target,'protected');
+  // Veneno e Sangramento são por dentro: passam por Exposto, Protegido e Escudo
+  const interno=label==='Veneno'||label==='Sangramento';
+  const outgoing=devolvido||interno?raw:raw*(1+intensity(source,'strengthened'))*(1-intensity(source,'weakened'));
+  // Congelado: o golpe direto quebra o gelo e entra mais forte
+  const gelo=direto?intensity(target,'frozen'):0;
+  if(gelo>0){target.statuses=target.statuses.filter(s=>s.id!=='frozen');label='Quebrou o gelo';}
+  const beforeProtection=interno?outgoing:outgoing*(1+intensity(target,'exposed'))*(1+gelo);
+  const protection=interno?0:intensity(target,'protected');
   let amount=beforeProtection*(1-protection),blocked=beforeProtection-amount;
-  const atravessaEscudo=intensity(target,'marked')>0;
+  const atravessaEscudo=interno||intensity(target,'marked')>0;
   if(!atravessaEscudo)for(const s of target.shields){const used=Math.min(s.amount,amount);s.amount-=used;amount-=used;blocked+=used;const owner=b.fighters.find(f=>f.uid===s.source);if(owner&&used>0){owner.stats.protection+=used;pressure(b,owner.side,D.event.usefulProtectionPerFullCondition*clamp(used/target.maxHp));emit(b,{kind:'block',source:owner.uid,target:target.uid,attacker:source.uid,label:'Bloqueio',value:used,visual:'shield'});trigger(b,owner,'protected',owner,used/100);}}
   target.shields=target.shields.filter(s=>s.amount>.01);
   if(protection>0){const owner=b.fighters.find(f=>f.uid===target.statuses.find(s=>s.id==='protected')?.source);if(owner){owner.stats.protection+=beforeProtection*protection;pressure(b,owner.side,D.event.usefulProtectionPerFullCondition*clamp(beforeProtection*protection/target.maxHp));emit(b,{kind:'block',source:owner.uid,target:target.uid,attacker:source.uid,label:'Proteção',value:beforeProtection*protection,visual:'shield'});trigger(b,owner,'protected',owner,beforeProtection*protection/100);}}
   const hpBefore=target.hp;
   const dealt=Math.min(hpBefore,amount);target.hp=Math.max(0,hpBefore-dealt);source.stats.damage+=dealt;
   if(dealt>.01){
+    // Dormindo: o golpe direto acorda
+    if(direto&&target.hp>0&&intensity(target,'sleep')>0){target.statuses=target.statuses.filter(s=>s.id!=='sleep');if(label==='Impacto')label='Acordou';}
     emit(b,{kind:'damage',source:source.uid,target:target.uid,label,value:dealt});
     const choque=intensity(target,'electric');if(choque>0&&target.hp>0)target.action=Math.max(0,target.action-choque*CHOQUE_DO_ELETRIFICADO);
     pressure(b,source.side,D.event.damagePerFullCondition*clamp(dealt/target.maxHp));
@@ -234,6 +247,7 @@ function damage(b:Battle,source:Fighter,target:Fighter,raw:number,direto=true,la
 }
 function healing(b:Battle,source:Fighter,target:Fighter,value:number,label='Recuperação'){
   if(!alive(target))return;
+  value*=1-Math.min(intensity(target,'cursed'),statuses.cursed.cap);
   const used=Math.min(target.maxHp-target.hp,value);target.hp+=used;source.stats.healing+=used;
   if(used>.01){pressure(b,source.side,D.event.usefulHealingPerFullCondition*clamp(used/target.maxHp));emit(b,{kind:'heal',source:source.uid,target:target.uid,label,value:used});}
 }
@@ -271,10 +285,13 @@ export function applyEffects(b:Battle,source:Fighter,selected:Fighter[],effects:
         case 'heal':healing(b,source,target,effect.value);break;
         case 'shield':{
           const existing=target.shields.reduce((n,s)=>n+s.amount,0);
-          const added=Math.max(0,Math.min(effect.value,target.maxHp*.55-existing));
+          const added=Math.max(0,Math.min(effect.value*(1-Math.min(intensity(target,'cursed'),statuses.cursed.cap)),target.maxHp*.55-existing));
           if(added>0){target.shields.push({amount:added,remaining:10,source:source.uid});emit(b,{kind:'shield',source:source.uid,target:target.uid,label:'Escudo',value:added,visual:'shield'});}break;
         }
         case 'status':{
+          // Barreira: o próximo debuff de um rival não entra
+          const barreira=target.side!==source.side&&negativeStatuses.has(effect.status)?target.statuses.find(s=>s.id==='barrier'):undefined;
+          if(barreira){barreira.intensity-=1;if(barreira.intensity<.5)target.statuses=target.statuses.filter(s=>s!==barreira);emit(b,{kind:'resist',source:target.uid,target:target.uid,label:'Barreira',status:effect.status});break;}
           const def=statuses[effect.status],existing=target.statuses.find(s=>s.id===effect.status);
           if(existing){existing.remaining=Math.max(existing.remaining,effect.duration);existing.duration=Math.max(existing.duration??0,effect.duration);existing.intensity=Math.min(def.cap,def.stack==='add'?existing.intensity+effect.value:Math.max(existing.intensity,effect.value));existing.source=source.uid;}
           else target.statuses.push({id:effect.status,remaining:effect.duration,duration:effect.duration,intensity:Math.min(def.cap,effect.value),source:source.uid});
@@ -289,7 +306,7 @@ export function applyEffects(b:Battle,source:Fighter,selected:Fighter[],effects:
            */
           emit(b,{kind:'status',source:source.uid,target:target.uid,label:def.name,status:effect.status,value:effect.duration});
           if(target.side!==source.side)source.stats.debuffs=(source.stats.debuffs??0)+effect.duration;else source.stats.buffs=(source.stats.buffs??0)+effect.duration;
-          if(target.side!==source.side){const weight=effect.status==='paralyzed'?1:effect.status==='rooted'?.65:effect.status==='slow'?.35:effect.status==='silenced'?.55:effect.status==='provoked'?.4:['exposed','marked','electric','burning'].includes(effect.status)?.3:0;if(weight)pressure(b,source.side,D.event.statusApplied*weight);}
+          if(target.side!==source.side){const weight=effect.status==='paralyzed'?1:effect.status==='rooted'?.65:effect.status==='slow'?.35:effect.status==='silenced'?.55:effect.status==='provoked'?.4:effect.status==='frozen'?.9:effect.status==='sleep'?.7:['blind','poison','bleed','cursed'].includes(effect.status)?.35:['exposed','marked','electric','burning'].includes(effect.status)?.3:0;if(weight)pressure(b,source.side,D.event.statusApplied*weight);}
           // Status events only charge observers; they cannot recursively execute other traits.
           const negative=target.side!==source.side&&negativeStatuses.has(effect.status);
           for(const f of friendly(b,source)){gain(b,f,'status',1,source);if(negative)gain(b,f,'negativeStatus',1,source);}
@@ -373,7 +390,7 @@ function skillValue(b:Battle,f:Fighter,s:Skill,selected:Fighter[],intelligence:n
       const folego=f.hp/f.maxHp;
       for(const target of list){if(quemProvocou(b,target)?.uid===f.uid)continue;add('provocar',(6+fragil*18)*folego*tacticalFactor);}
     }else if(effect.kind==='status'){
-      for(const target of list){const existing=target.statuses.find(x=>x.id===effect.status)?.intensity??0;const weight=effect.status==='paralyzed'?1:effect.status==='rooted'?.7:effect.status==='silenced'?.65:effect.status==='slow'?.4:['exposed','marked','electric','burning'].includes(effect.status)?.35:effect.status==='protected'?.5:effect.status==='vampirism'||effect.status==='reflect'?.45:effect.status==='thorns'?.02:0;add('efeito de estado',Math.max(0,effect.value-existing)*weight*24*tacticalFactor);}
+      for(const target of list){const existing=target.statuses.find(x=>x.id===effect.status)?.intensity??0;const weight=effect.status==='paralyzed'?1:effect.status==='rooted'?.7:effect.status==='silenced'?.65:effect.status==='slow'?.4:['exposed','marked','electric','burning'].includes(effect.status)?.35:effect.status==='protected'?.5:effect.status==='vampirism'||effect.status==='reflect'?.45:effect.status==='frozen'?.9:effect.status==='sleep'?.75:effect.status==='barrier'?.5:['blind','cursed'].includes(effect.status)?.4:effect.status==='poison'||effect.status==='bleed'?.012:effect.status==='thorns'?.02:0;add('efeito de estado',Math.max(0,effect.value-existing)*weight*24*tacticalFactor);}
     }else if(effect.kind==='cleanse'||effect.kind==='dispel'){
       // vale o quanto atrapalhava (ou ajudava) o que vai sair
       const ordem=effect.kind==='cleanse'?ORDEM_DA_PURIFICACAO:ORDEM_DA_DISSIPACAO,peso=effect.kind==='cleanse'?PESO_DO_DEBUFF:PESO_DO_BUFF;
@@ -416,6 +433,7 @@ function execute(b:Battle,f:Fighter,index:number,selected:Fighter[]){
   const s=byId[f.characterId].skills[index],eventStart=b.nextEvent;
   emit(b,{kind:'skill',source:f.uid,target:selected[0]?.uid,skill:index,label:s.name,visual:s.icon});
   applyEffects(b,f,selected,s.effects);
+  sangra(b,f);
   const effective=b.events.some(e=>e.id>=eventStart&&(['damage','heal','block','interrupt','ko','synergy','revive','cleanse','dispel'].includes(e.kind)||e.kind==='status'&&e.target!==f.uid));
   if(effective)pressure(b,f.side,s.preparation>=2.5?D.event.grandSkill:D.event.successfulSkill);
   f.stats.skills++;
@@ -426,7 +444,7 @@ export function updateDominion(b:Battle){
   const group=(side:Side)=>b.fighters.filter(f=>f.side===side);
   const health=(side:Side)=>group(side).reduce((n,f)=>n+f.hp/f.maxHp,0)/3;
   const count=(side:Side)=>group(side).filter(alive).length;
-  const controlled=(side:Side)=>group(side).filter(alive).reduce((n,f)=>n+(intensity(f,'paralyzed')*D.controlStatus.paralyzed)+(intensity(f,'slow')*D.controlStatus.slowed)+(intensity(f,'rooted')*D.controlStatus.rooted)+(intensity(f,'silenced')*D.controlStatus.silenced)+(intensity(f,'exposed')*D.controlStatus.exposed)+(intensity(f,'marked')*D.controlStatus.marked),0);
+  const controlled=(side:Side)=>group(side).filter(alive).reduce((n,f)=>n+(Math.max(intensity(f,'paralyzed'),intensity(f,'frozen')>0?1:0,intensity(f,'sleep'))*D.controlStatus.paralyzed)+(intensity(f,'slow')*D.controlStatus.slowed)+(intensity(f,'rooted')*D.controlStatus.rooted)+(intensity(f,'silenced')*D.controlStatus.silenced)+(intensity(f,'exposed')*D.controlStatus.exposed)+(intensity(f,'marked')*D.controlStatus.marked),0);
   const situation=clamp((health('player')-health('enemy'))*D.situation.condition+(count('player')-count('enemy'))*D.situation.activeFighter+(controlled('enemy')-controlled('player'))*D.situation.control,-D.maxScore,D.maxScore);
   const target=clamp(situation*D.situationWeight+b.momentum*D.eventMemoryWeight,-D.maxScore,D.maxScore);
   const approach=1-Math.exp(-STEP/D.responseSeconds);
@@ -464,6 +482,7 @@ export function stepBattle(b:Battle,observe?:(snapshot:Battle)=>void):Battle {
     for(const s of [...f.statuses]){
       const origin=b.fighters.find(x=>x.uid===s.source)??f;
       if(s.id==='burning')damage(b,origin,f,s.intensity*STEP,false);
+      if(s.id==='poison')damage(b,origin,f,s.intensity*STEP,false,'Veneno');
       if(s.id==='regen')healing(b,origin,f,s.intensity*STEP);
       s.remaining-=STEP;
     }
@@ -478,7 +497,7 @@ export function stepBattle(b:Battle,observe?:(snapshot:Battle)=>void):Battle {
     if(!alive(f))continue;
     const c=byId[f.characterId];
     const rate=(1+intensity(f,'haste'))*(1-intensity(f,'slow'))*(1-intensity(f,'rooted'));
-    if(intensity(f,'paralyzed'))continue;
+    if(intensity(f,'paralyzed')||intensity(f,'frozen')||intensity(f,'sleep'))continue;
     if(f.cast){
       f.cast.elapsed+=STEP*rate;
       if(f.cast.elapsed>=f.cast.duration){const cast=f.cast;f.cast=null;let list=cast.targets.map(id=>b.fighters.find(x=>x.uid===id)).filter((x):x is Fighter=>!!x&&alive(x));if(!list.length&&c.skills[cast.skill].condition!=='investigated')list=targets(b,f,c.skills[cast.skill].target,c.skills[cast.skill].effects);execute(b,f,cast.skill,list);resolve(b);observe?.(b);if(b.finished)break;}
@@ -499,7 +518,12 @@ export function stepBattle(b:Battle,observe?:(snapshot:Battle)=>void):Battle {
       f.action-=1;
       const selected=intensity(f,'confused')&&random(b)<.25?[f]:targets(b,f,c.basic.target,c.basic.effects);
       emit(b,{kind:'basic',source:f.uid,target:selected[0]?.uid,label:c.basic.name,visual:c.basic.visual});
-      applyEffects(b,f,selected,c.basic.effects);trigger(b,f,'action',f);resolve(b);observe?.(b);if(b.finished)break;
+      // Cego: o golpe pode passar longe
+      const cego=intensity(f,'blind');
+      if(cego>0&&selected[0]&&selected[0].side!==f.side&&random(b)<Math.min(cego,statuses.blind.cap))emit(b,{kind:'miss',source:f.uid,target:selected[0].uid,label:'Errou'});
+      else applyEffects(b,f,selected,c.basic.effects);
+      sangra(b,f);
+      trigger(b,f,'action',f);resolve(b);observe?.(b);if(b.finished)break;
     }
   }
   updateDominion(b);resolve(b);observe?.(b);return b;

@@ -209,6 +209,14 @@ export default function App(){
           if(provocou)battleAudio.sound('provocar',PRIORIDADE.importante,0,provocou.id,.05);
           // golpe devolvido e vida roubada: o som da mecânica, um pouco depois do golpe
           const mecanica=d.active.events.find(e=>e.kind==='damage'&&(e.label==='Refletido'||e.label==='Espinhos'))??d.active.events.find(e=>e.kind==='heal'&&(e.label==='Vampirismo'||e.label==='Roubo de vida'));
+          // parte 5: errou, a Barreira anulou, e o som de cada Status novo ao entrar
+          const errou=d.active.events.find(e=>e.kind==='miss');
+          if(errou)battleAudio.sound('errou',PRIORIDADE.importante,0,errou.id,0);
+          const anulou=d.active.events.find(e=>e.kind==='resist');
+          if(anulou)battleAudio.sound('barreira-anula',PRIORIDADE.importante,0,anulou.id,.08);
+          const SOM_DO_STATUS:Record<string,string>={poison:'veneno',bleed:'sangue',cursed:'maldicao',frozen:'bloco-de-gelo',sleep:'sono',blind:'cegueira',barrier:'barreira-magica'};
+          const novo=d.active.events.find(e=>e.kind==='status'&&e.status&&SOM_DO_STATUS[e.status]);
+          if(novo?.status)battleAudio.sound(SOM_DO_STATUS[novo.status]!,PRIORIDADE.apoio,0,novo.id,.12);
           const limpeza=d.active.events.find(e=>e.kind==='cleanse'||e.kind==='dispel');
           if(limpeza)battleAudio.sound(limpeza.kind==='cleanse'?'purificacao':'dissipar',PRIORIDADE.importante,0,limpeza.id,.1);
           if(mecanica)battleAudio.sound(mecanica.label==='Refletido'?'reflexo':mecanica.label==='Espinhos'?'espinhos':'vampirismo',PRIORIDADE.importante,0,mecanica.id,.14);

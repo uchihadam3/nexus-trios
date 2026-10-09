@@ -89,22 +89,26 @@ const acumulacaoDe=(id:StatusId):string=>{
  * aparecer 30%." Paralisado, Silenciado e Confuso não têm intensidade que
  * importe: ou estão, ou não estão.
  */
-const SEM_VALOR=new Set<StatusId>(['paralyzed','confused','silenced','marked','provoked']);
-const deVida=(id:StatusId)=>id==='regen'||id==='burning';
+const SEM_VALOR=new Set<StatusId>(['paralyzed','confused','silenced','marked','provoked','sleep']);
+const deVida=(id:StatusId)=>id==='regen'||id==='burning'||id==='poison';
 /* Espinhos é um número fixo por golpe, não %. */
 const porGolpe=(id:StatusId)=>id==='thorns';
+/* Sangramento é Vida por ação; Barreira é quantos debuffs ela ainda anula. */
+const porAcao=(id:StatusId)=>id==='bleed';
 export function valorAtualDoStatus(id:StatusId,intensidade:number):string|null{
   if(SEM_VALOR.has(id))return null;
   const v=Math.min(intensidade,statuses[id].cap);
   if(id==='electric')return `−${Math.round(v*CHOQUE_DO_ELETRIFICADO*100)}%`; // o choque na barra de ação, não dano
-  return deVida(id)?`${n(v)} de Vida/s`:porGolpe(id)?`${n(v)} por golpe`:pct(v);
+  if(id==='barrier')return `${n(Math.round(v))}`;
+  return deVida(id)?`${n(v)} de Vida/s`:porGolpe(id)?`${n(v)} por golpe`:porAcao(id)?`${n(v)} por ação`:pct(v);
 }
 /* Até onde as aplicações somam — só para os Status que somam. */
 export function tetoDoStatus(id:StatusId):string|null{
   const def=statuses[id];
   if(def.stack!=='add')return null;
   if(id==='electric')return `−${Math.round(def.cap*CHOQUE_DO_ELETRIFICADO*100)}%`;
-  return deVida(id)?`${n(def.cap)} de Vida/s`:porGolpe(id)?`${n(def.cap)} por golpe`:pct(def.cap);
+  if(id==='barrier')return `${n(def.cap)}`;
+  return deVida(id)?`${n(def.cap)} de Vida/s`:porGolpe(id)?`${n(def.cap)} por golpe`:porAcao(id)?`${n(def.cap)} por ação`:pct(def.cap);
 }
 
 export function presentStatus(id:StatusId,value:number):StatusPresentation {
@@ -135,9 +139,13 @@ export function presentStatus(id:StatusId,value:number):StatusPresentation {
     provoked:'Só mira em quem provocou',
     vampirism:`Cura ${percent} do dano que causa`,reflect:`Devolve ${percent} do dano recebido a quem bateu`,
     thorns:`Quem bate leva ${number} de dano por golpe`,
+    poison:`Perde ${number} de Vida por segundo, passando por Escudo e Protegido`,bleed:`Perde ${number} de Vida a cada ação`,
+    cursed:`Recebe ${percent} menos cura e Escudo`,frozen:`Não age; o próximo golpe quebra o gelo com +${percent} de dano`,
+    sleep:'Não age até acordar; qualquer golpe acorda',blind:`${percent} de chance de errar o ataque básico`,
+    barrier:`Anula ${amount>=2?`os próximos ${number} debuffs`:'o próximo debuff'}`,
   };
   return {name:statuses[id].name,tone:positiveStatuses.has(id)?'positivo':'negativo',summary:summary[id],
-    value:['regen','burning','thorns'].includes(id)?number:percent,accumulation:acumulacaoDe(id)};
+    value:['regen','burning','thorns','poison','bleed','barrier'].includes(id)?number:percent,accumulation:acumulacaoDe(id)};
 }
 /*
  * Os efeitos de uma habilidade, reunidos por em quem caem.
@@ -185,6 +193,8 @@ export function valorCurto(id:StatusId,value:number):string[]{
     protected:`−${v} de dano recebido`,slow:`${v} mais lento`,rooted:`${v} mais lento`,haste:`${v} mais rápido`,
     regen:`+${v} Vida/s`,burning:`−${v} Vida/s`,strengthened:`+${v} de dano`,weakened:`−${v} de dano`,
     vampirism:`cura ${v} do dano causado`,reflect:`devolve ${v} do dano`,thorns:`${v} de dano em quem bate`,
+    poison:`−${v} Vida/s`,bleed:`−${v} Vida por ação`,cursed:`−${v} de cura recebida`,frozen:`+${v} no golpe que quebra`,
+    blind:`${v} de chance de errar`,barrier:`anula ${v} debuff${value>=2?'s':''}`,
   };
   return curto[id]?[curto[id]!]:[];
 }

@@ -137,6 +137,15 @@
 @keyframes renasce-respira{0%,100%{box-shadow:0 0 0 1px #ff8a3a55,0 0 10px #ff6a1a44}50%{box-shadow:0 0 0 2px #ffb05a99,0 0 22px #ff7a2a88}}
 .arena-v2 .unit.is-renascendo .unit-flag.flag-out{background:#3a1606;border-color:#ff9a4a;color:#ffc27a}
 .arena-v2 .unit.is-renascendo .unit-meta span:first-child{color:#ffc27a}
+/* Congelado: o retrato fica azul-gelo, com uma borda cristalina. Dormindo: cinza-lilás e "zzz" subindo. */
+.arena-v2 .unit.is-frozen .medal-frame{filter:saturate(.4) brightness(1.08) hue-rotate(160deg) sepia(.15);box-shadow:inset 0 0 0 3px #bdf0ffcc,0 0 14px #9fe3ff88}
+.arena-v2 .unit.is-asleep .medal-frame{filter:grayscale(.45) brightness(.8)}
+.arena-v2 .unit-zz{position:absolute;right:6%;top:-2%;z-index:6;font-weight:900;color:#d4d2ff;font-size:13px;text-shadow:0 0 6px #6a63d8;pointer-events:none;animation:zz-sobe 1.8s ease-in-out infinite}
+.arena-v2 .unit-zz b{font-size:16px;margin-left:1px}.arena-v2 .unit-zz i{font-style:normal;font-size:19px;margin-left:1px}
+@keyframes zz-sobe{0%{transform:translateY(4px);opacity:.3}50%{opacity:1}100%{transform:translateY(-8px);opacity:.3}}
+.arena-v2 .unit .errou-pop{color:#e9eef2;border-color:#ffffff55;background:#22282ced;font-style:italic}
+.arena-v2 .unit .anulou-pop{color:#fff3c4;border-color:#f5e39a99;background:#2a2410ed}
+@media (prefers-reduced-motion:reduce){.arena-v2 .unit-zz{animation:none}}
 .arena-v2 .unit .purifica-pop{color:#e8fbff;border-color:#bfefff99;background:#10262ced}
 .arena-v2 .unit .dissipa-pop{color:#e6d6ff;border-color:#b79cff99;background:#1d1530ed}
 .arena-v2 .unit .revive-pop{color:#fff1b8;border-color:#ffd56a99;background:#2e2410ed}

@@ -46,6 +46,13 @@ const FAZ: Record<StatusId, string> = {
   vampirism: 'Cada golpe dele cura uma parte do dano que causou. Vale enquanto o Status durar.',
   reflect: 'Cada golpe recebido volta em parte para quem bateu, mesmo se o Escudo segurar.',
   thorns: 'Quem bate leva um dano fixo a cada golpe: pune quem ataca muitas vezes, como golpes rápidos e em área.',
+  poison: 'Perde Vida a cada segundo, e o veneno passa por dentro: Escudo e Protegido não seguram. Aplicar de novo soma.',
+  bleed: 'Cada vez que ele age (ataque básico ou habilidade), a ferida abre e ele perde Vida. Parado, não sangra.',
+  cursed: 'Recebe menos cura e menos Escudo de todo mundo, inclusive dele mesmo.',
+  frozen: 'Preso no gelo: não age. O próximo golpe direto quebra o gelo e entra mais forte.',
+  sleep: 'Dorme: não age. Acorda quando o sono acaba ou quando leva um golpe direto (Queimadura e Veneno não acordam).',
+  blind: 'Pode errar o ataque básico: o golpe passa longe e não faz nada.',
+  barrier: 'Anula os próximos debuffs que um rival tentar pôr nele. Cada debuff anulado gasta uma.',
   provoked: 'Só consegue mirar em quem provocou. Golpes em todos continuam iguais; se quem provocou cair, acaba na hora.',
 };
 

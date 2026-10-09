@@ -13,8 +13,8 @@ export const TARGETING = {
 const clamp=(n:number,lo=0,hi=1)=>Math.min(hi,Math.max(lo,n));
 const effectDamage=(effects:Effect[]=[])=>(effects.reduce((n,e)=>n+(e.kind==='damage'||e.kind==='deathnote'?e.value:e.kind==='release'?250*e.multiplier:0),0));
 const positiveStatuses=new Set(['protected','regen','haste','strengthened']);
-const controlStatuses=new Set(['paralyzed','rooted','slow','silenced','confused']);
-const harmfulStatuses=new Set(['exposed','marked','burning','electric','weakened',...controlStatuses]);
+const controlStatuses=new Set(['paralyzed','frozen','sleep','rooted','slow','silenced','confused','blind']);
+const harmfulStatuses=new Set(['exposed','marked','burning','electric','weakened','poison','bleed','cursed',...controlStatuses]);
 function status(f:Fighter,id:string){return f.statuses.find(s=>s.id===id)?.intensity??0;}
 function stableNoise(seed:number,turn:number,actor:string,target:string,intent:TargetIntent){
   let h=2166136261;

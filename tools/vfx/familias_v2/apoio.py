@@ -573,6 +573,47 @@ def dissipar(T, t, rng):
     return G, H
 
 
+def _z(cx, cy, s):
+    """A letra Z como polígono."""
+    return [(cx - 0.5 * s, cy - 0.5 * s), (cx + 0.5 * s, cy - 0.5 * s), (cx + 0.5 * s, cy - 0.32 * s), (cx - 0.2 * s, cy + 0.32 * s),
+            (cx + 0.5 * s, cy + 0.32 * s), (cx + 0.5 * s, cy + 0.5 * s), (cx - 0.5 * s, cy + 0.5 * s), (cx - 0.5 * s, cy + 0.32 * s),
+            (cx + 0.2 * s, cy - 0.32 * s), (cx - 0.5 * s, cy - 0.32 * s)]
+
+
+def sono(T, t, rng):
+    """Sono: uma névoa lilás desce sobre o rival e três Z sobem balançando, um depois do outro."""
+    G, H = vazio(T)
+    env = apaga(t, 0.7, 1)
+    nevoa = (T.gauss(0, 0.08, 0.36, 0.22) * 0.9 + T.ring(0.42, 0.08, squash=2.2, cy=0.15) * 0.6) * janela(t, 0.0, 0.3)
+    letras = []
+    for k in range(3):
+        f = rel(t, 0.12 + 0.16 * k, 0.75 + 0.08 * k)
+        if f <= 0:
+            continue
+        x = 0.1 + 0.18 * k + 0.08 * math.sin(f * 6 + k)
+        y = 0.1 - 0.95 * f
+        tam = 0.16 + 0.07 * k
+        letras.append((_z(x, y, tam * (0.6 + 0.4 * back(min(1.0, f * 3), 2.0))), math.sin(math.pi * min(1.0, f * 1.1))))
+    Z = T.polys(letras, 0.004)
+    G += (nevoa * 0.8 + Z * 1.6) * env
+    H += (nevoa * 0.25 + Z * 0.9) * env
+    return G, H
+
+
+def cegueira(T, t, rng):
+    """Cego: um clarão branco estoura nos olhos, raios curtos em estrela e um véu que demora a sumir."""
+    G, H = vazio(T)
+    estoura = pulso(t, 0.0, 0.35)
+    veu = some(t, 0.15, 1.0, 1.2)
+    raios = (T.flare(0, -0.05, 0.85 * estoura + 0.01, ang=0.0, thin=0.02) + T.flare(0, -0.05, 0.6 * estoura + 0.01, ang=math.pi / 4, thin=0.014)) * estoura * 2.4
+    clarao = T.gauss(0, -0.05, 0.3, 0.3) * estoura * 2.0
+    halo = T.gauss(0, -0.05, 0.32, 0.24) * veu * 0.55
+    anel = T.ring(0.2 + 0.6 * ease_out(rel(t, 0.0, 0.5), 2), 0.03) * pulso(t, 0.0, 0.55)
+    G += raios + clarao + halo + anel
+    H += raios * 0.9 + clarao * 1.4 + halo * 0.5 + anel * 0.6
+    return G, H
+
+
 def renascer(T, t, rng):
     """Renascer: brasas giram e se juntam no corpo caído, sobem numa coluna de fogo e um par de
     asas de chama se abre para o alto, soltando penas de brasa."""
@@ -629,6 +670,8 @@ def brasas_renascendo(T, t, rng):
 REGISTRO = [
     ("ressurreicao", ressurreicao, GRANDE, "feixe de luz que levanta o aliado caído", False),
     ("renascer", renascer, GRANDE, "asas de fogo: renasce das cinzas", False),
+    ("sono", sono, GRANDE, "névoa lilás e três Z subindo", False),
+    ("cegueira", cegueira, GRANDE, "clarão que ofusca, com véu", False),
     ("dissipar", dissipar, GRANDE, "anel de proteção do rival que racha e se desfaz", False),
     ("reflexo", reflexo, GRANDE, "escudo de espelho hexagonal que devolve o golpe", False),
     ("espinhos", espinhos, GRANDE, "pontas que brotam do corpo e recolhem", False),

@@ -31,4 +31,11 @@ export const statuses: Record<StatusId,{name:string;color:string;stack:'refresh'
   vampirism:{name:'Vampirismo',color:'#e0546f',stack:'refresh',cap:.6,tone:'positivo',description:'Cada golpe de quem tem Vampirismo cura parte do dano que ele causa.'},
   reflect:{name:'Refletir',color:'#9fdcff',stack:'refresh',cap:.6,tone:'positivo',description:'Devolve parte do dano de cada golpe recebido para quem bateu.'},
   thorns:{name:'Espinhos',color:'#a6d36a',stack:'add',cap:60,tone:'positivo',description:'Quem bate em quem tem Espinhos leva um dano fixo a cada golpe.'},
+  poison:{name:'Envenenado',color:'#8fd14f',stack:'add',cap:30,tone:'negativo',description:'Perde Vida por segundo, e o veneno passa por Escudo e Protegido.'},
+  bleed:{name:'Sangrando',color:'#e0485a',stack:'add',cap:60,tone:'negativo',description:'Cada ação dele (ataque básico ou habilidade) custa Vida.'},
+  cursed:{name:'Amaldiçoado',color:'#9b6bd6',stack:'refresh',cap:.6,tone:'negativo',description:'Recebe menos cura e menos Escudo.'},
+  frozen:{name:'Congelado',color:'#9fe3ff',stack:'refresh',cap:.6,tone:'negativo',description:'Não age; o próximo golpe quebra o gelo e causa mais dano.'},
+  sleep:{name:'Dormindo',color:'#b7b6f2',stack:'refresh',cap:1,tone:'negativo',description:'Não age até o sono acabar ou até levar um golpe.'},
+  blind:{name:'Cego',color:'#d8d2b0',stack:'refresh',cap:.6,tone:'negativo',description:'Pode errar o ataque básico.'},
+  barrier:{name:'Barreira',color:'#f5e7a1',stack:'add',cap:3,tone:'positivo',description:'Anula os próximos debuffs que receberia.'},
 };

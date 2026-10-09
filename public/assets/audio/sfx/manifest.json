@@ -104,6 +104,23 @@
    ],
    "bytes": 47493
   },
+  "barreira-anula": {
+   "arquivo": "barreira-anula.mp3",
+   "descricao": "família barreira anula",
+   "versoes": [
+    0.0,
+    0.98,
+    1.9926,
+    2.9422
+   ],
+   "duracoes": [
+    0.9,
+    0.9326,
+    0.8695,
+    0.9137
+   ],
+   "bytes": 35638
+  },
   "barreira-magica": {
    "arquivo": "barreira-magica.mp3",
    "descricao": "família barreira magica",
@@ -375,6 +392,23 @@
     1.3198
    ],
    "bytes": 44894
+  },
+  "cegueira": {
+   "arquivo": "cegueira.mp3",
+   "descricao": "família cegueira",
+   "versoes": [
+    0.0,
+    1.0563,
+    2.1484,
+    3.174
+   ],
+   "duracoes": [
+    0.9763,
+    1.012,
+    0.9456,
+    0.9869
+   ],
+   "bytes": 39378
   },
   "chama-negra": {
    "arquivo": "chama-negra.mp3",
@@ -936,6 +970,23 @@
     1.3198
    ],
    "bytes": 23221
+  },
+  "errou": {
+   "arquivo": "errou.mp3",
+   "descricao": "família errou",
+   "versoes": [
+    0.0,
+    0.58,
+    1.1781,
+    1.7412
+   ],
+   "duracoes": [
+    0.5,
+    0.5181,
+    0.4831,
+    0.5076
+   ],
+   "bytes": 21811
   },
   "escudo": {
    "arquivo": "escudo.mp3",
@@ -2891,6 +2942,23 @@
     1.0152
    ],
    "bytes": 33472
+  },
+  "sono": {
+   "arquivo": "sono.mp3",
+   "descricao": "família sono",
+   "versoes": [
+    0.0,
+    1.68,
+    3.418,
+    5.0439
+   ],
+   "duracoes": [
+    1.6,
+    1.658,
+    1.5459,
+    1.6244
+   ],
+   "bytes": 54774
   },
   "sopro-de-fogo": {
    "arquivo": "sopro-de-fogo.mp3",
