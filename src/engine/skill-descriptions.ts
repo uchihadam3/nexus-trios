@@ -89,7 +89,7 @@ const acumulacaoDe=(id:StatusId):string=>{
  * aparecer 30%." Paralisado, Silenciado e Confuso não têm intensidade que
  * importe: ou estão, ou não estão.
  */
-const SEM_VALOR=new Set<StatusId>(['paralyzed','confused','silenced','marked']);
+const SEM_VALOR=new Set<StatusId>(['paralyzed','confused','silenced','marked','provoked']);
 const deVida=(id:StatusId)=>id==='regen'||id==='burning';
 export function valorAtualDoStatus(id:StatusId,intensidade:number):string|null{
   if(SEM_VALOR.has(id))return null;
@@ -130,6 +130,7 @@ export function presentStatus(id:StatusId,value:number):StatusPresentation {
     haste:`${percent} mais rápido para agir`,confused:'25% de chance do ataque básico atingir a si mesmo',
     regen:`Recupera ${number} de Vida por segundo`,burning:`Perde ${number} de Vida por segundo`,
     silenced:'Não começa novas habilidades',strengthened:`+${percent} de dano`,weakened:`−${percent} de dano`,
+    provoked:'Só mira em quem provocou',
   };
   return {name:statuses[id].name,tone:positiveStatuses.has(id)?'positivo':'negativo',summary:summary[id],
     value:['regen','burning'].includes(id)?number:percent,accumulation:acumulacaoDe(id)};

@@ -405,6 +405,48 @@ def ressurreicao(T, t, rng):
     return G, H
 
 
+def _arco(cx, cy, r, a0, a1, w, n=28):
+    """Um arco grosso como polígono (borda de fora e de dentro)."""
+    fora = [(cx + (r + w / 2) * math.cos(a0 + (a1 - a0) * i / (n - 1)), cy + (r + w / 2) * math.sin(a0 + (a1 - a0) * i / (n - 1))) for i in range(n)]
+    dentro = [(cx + (r - w / 2) * math.cos(a1 - (a1 - a0) * i / (n - 1)), cy + (r - w / 2) * math.sin(a1 - (a1 - a0) * i / (n - 1))) for i in range(n)]
+    return fora + dentro
+
+
+def provocar(T, t, rng):
+    """Provocar: dois anéis vermelhos se fecham sobre o rival (a atenção dele é puxada), a marca
+    de raiva dos desenhos estoura em cima dele tremendo, e riscos de tensão saem em volta."""
+    G, H = vazio(T)
+    env = apaga(t, 0.72, 1)
+    aneis = 0
+    for k, a0 in enumerate((0.0, 0.12)):
+        f = ease_in(rel(t, a0, a0 + 0.34), 1.5)
+        r = 0.95 - 0.7 * f
+        aneis = aneis + T.ring(r, 0.03 + 0.025 * f) * pulso(t, a0, a0 + 0.38) * (1.2 - 0.3 * k)
+    # a marca de raiva: quatro arcos se encarando, com pop e tremor
+    pop = back(rel(t, 0.22, 0.42), 2.2)
+    treme = 0.025 * math.sin(t * 90) * janela(t, 0.3, 0.36) * (1 - rel(t, 0.55, 0.8))
+    cx, cy, esc = 0.0 + treme, -0.08, 0.36 * pop
+    marca = []
+    for sx in (-1, 1):
+        for sy in (-1, 1):
+            ox, oy = cx + sx * 0.86 * esc, cy + sy * 0.86 * esc
+            meio = math.atan2(-sy, -sx)
+            marca.append((_arco(ox, oy, 0.6 * esc, meio - 0.72, meio + 0.72, 0.3 * esc), 1.0))
+    brilho_marca = janela(t, 0.22, 0.28)
+    # riscos de tensão: traços curtos que saem em volta, no instante do estouro
+    riscos = []
+    sai = ease_out(rel(t, 0.32, 0.6), 2)
+    for k in range(10):
+        a = k / 10 * TAU + 0.3
+        r0 = 0.42 + 0.3 * sai
+        riscos.append((lamina(cx + r0 * math.cos(a), cy + r0 * math.sin(a), cx + (r0 + 0.16) * math.cos(a), cy + (r0 + 0.16) * math.sin(a), 0.03), pulso(t, 0.3, 0.68)))
+    halo = T.gauss(cx, cy, 0.3, 0.3) * pulso(t, 0.2, 0.6) * 0.9
+    M = T.polys(marca, 0.006) * brilho_marca
+    G += (aneis + M * 1.4 + T.polys(riscos, 0.004) * 1.2 + halo) * env
+    H += (aneis * 0.45 + M * 0.8 + T.polys(riscos, 0.004) * 0.6) * env
+    return G, H
+
+
 def renascer(T, t, rng):
     """Renascer: brasas giram e se juntam no corpo caído, sobem numa coluna de fogo e um par de
     asas de chama se abre para o alto, soltando penas de brasa."""
@@ -461,6 +503,7 @@ def brasas_renascendo(T, t, rng):
 REGISTRO = [
     ("ressurreicao", ressurreicao, GRANDE, "feixe de luz que levanta o aliado caído", False),
     ("renascer", renascer, GRANDE, "asas de fogo: renasce das cinzas", False),
+    ("provocar", provocar, GRANDE, "marca de raiva sobre o rival provocado, anéis se fechando", False),
     ("brasas_renascendo", brasas_renascendo, GRANDE, "brasas sobre quem vai renascer (laço)", True),
     ("cura_em_area", cura_em_area, GRANDE, "cura em área com cruzes", False),
     ("regeneracao", regeneracao, GRANDE, "folhas subindo em espiral", False),
