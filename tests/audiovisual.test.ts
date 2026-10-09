@@ -1,3 +1,4 @@
+import { FAMILIA_DA_INVOCACAO } from '../src/presentation/vfx-atribuicao';
 import { describe,expect,it } from 'vitest';
 import { readFileSync,readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
@@ -32,8 +33,8 @@ describe('compact reusable audiovisual library',()=>{
     expect(decodificado/Object.keys(familias).length).toBeLessThan(2_000_000);
     expect(readdirSync(resolve(root,'public/assets/vfx')).filter(x=>x.endsWith('.webp'))).toEqual(['arena.webp']);
   });
-  it('maps every basic and skill to one of the 150–180 shared families, all of them used, none dominating',()=>{
-    expect(FAMILIAS.length).toBeGreaterThanOrEqual(150);expect(FAMILIAS.length).toBeLessThanOrEqual(180);
+  it('maps every basic and skill to one of the 150–260 shared families (more for the signature skills), all of them used, none dominating',()=>{
+    expect(FAMILIAS.length).toBeGreaterThanOrEqual(150);expect(FAMILIAS.length).toBeLessThanOrEqual(260);
     const uso=new Map<string,number>();let total=0;
     for(const character of characters){
       for(const index of [undefined,0,1,2] as const){
@@ -49,7 +50,7 @@ describe('compact reusable audiovisual library',()=>{
     // não são de habilidade: as brasas aparecem no lutador caído (ArenaUnit) e a marca de
     // Provocado por cima de quem recebe o Status, seja qual for o golpe (BattleEffects)
     // e o espelho, os espinhos e as gotas de sangue sobre quem devolve o golpe ou rouba a Vida
-    const SO_NA_ARENA=new Set(['brasas_renascendo','provocar','reflexo','espinhos','vampirismo','dissipar','sono','cegueira','esquiva','ultima_resistencia','copia']);
+    const SO_NA_ARENA=new Set(['brasas_renascendo','provocar','reflexo','espinhos','vampirismo','dissipar','sono','cegueira','esquiva','ultima_resistencia','copia',...Object.values(FAMILIA_DA_INVOCACAO)]);
     for(const f of FAMILIAS)if(!SO_NA_ARENA.has(f))expect(uso.get(f)??0,`${f} usada`).toBeGreaterThan(0);
     for(const [f,n] of uso)expect(n/total,`${f} não domina`).toBeLessThan(.16);
   });

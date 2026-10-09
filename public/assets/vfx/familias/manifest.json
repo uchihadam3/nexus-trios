@@ -1413,6 +1413,146 @@
   "laco": false,
   "bytes": 37002
  },
+ "inv_androide": {
+  "descricao": "Androide de combate: soco-foguete",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 39616
+ },
+ "inv_cao": {
+  "descricao": "Cão divino: lobo de sombra que salta e morde",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 55594
+ },
+ "inv_clones": {
+  "descricao": "Exército de clones: enxame de Planktons",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 47780
+ },
+ "inv_dragao": {
+  "descricao": "Dragão Branco: cabeça do dragão e raio branco",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 57044
+ },
+ "inv_feras": {
+  "descricao": "Caminho Animal: feras saindo das nuvens",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 52054
+ },
+ "inv_gomorrah": {
+  "descricao": "Gomorrah: mandíbulas que se fecham",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 67388
+ },
+ "inv_mago": {
+  "descricao": "Mago Negro: círculo mágico e esfera escura",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 60000
+ },
+ "inv_ora": {
+  "descricao": "Star Platinum: chuva de socos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 65188
+ },
+ "inv_sombras": {
+  "descricao": "Soldados das sombras: sobem do chão e cortam",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 47686
+ },
+ "inv_vassouras": {
+  "descricao": "Vassouras encantadas: batem e espirram água",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 37436
+ },
  "investida": {
   "descricao": "investida com linhas de velocidade",
   "quadros": 12,

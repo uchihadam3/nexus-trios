@@ -29,6 +29,7 @@ import {runDigest} from './engine/ranked';
 import {carregarCliente,googleConfigured,haSessaoOuRetorno,onlineCall,onlineConfigured} from './lib/online';
 import {criarAutenticacaoPreguicosa,type Conta} from './lib/auth';
 import {AccountScreen} from './screens/AccountScreen';
+import {FAMILIA_DA_INVOCACAO} from './presentation/vfx-atribuicao';
 const DebugScreen=lazy(()=>import('./screens/DebugScreen').then(m=>({default:m.DebugScreen})));
 const VfxLabScreen=lazy(()=>import('./screens/VfxLabScreen').then(m=>({default:m.VfxLabScreen})));
 type Screen='home'|'game'|'characters'|'ranking'|'conta'|'help'|'settings'|'debug'|'vfx';
@@ -213,7 +214,7 @@ export default function App(){
           const errou=d.active.events.find(e=>e.kind==='miss');
           if(errou)battleAudio.sound(errou.label==='Esquivou'?'esquiva':'errou',PRIORIDADE.importante,0,errou.id,0);
           const criatura=d.active.event.kind==='summon'?d.active.event:undefined;
-          if(criatura)battleAudio.sound('invocacao',PRIORIDADE.importante,0,criatura.id,0);
+          if(criatura){const quem=d.active.after.fighters.find(f=>f.uid===criatura.source),fam=quem?FAMILIA_DA_INVOCACAO[quem.characterId]:undefined;battleAudio.sound(fam?fam.replace(/_/g,'-'):'invocacao',PRIORIDADE.importante,0,criatura.id,0);}
           const copiou=d.active.events.find(e=>e.kind==='copy');
           if(copiou)battleAudio.sound('copia',PRIORIDADE.importante,0,copiou.id,0);
           const bum=d.active.events.find(e=>e.kind==='damage'&&e.label==='Explosão');

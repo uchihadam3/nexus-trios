@@ -1557,6 +1557,170 @@ def brasas_renascendo(rng, v):
     x += passa(rosa(rng, n), 80, 500, 2) * sobe_e_some(n, 0.5, 1.0) * 0.08
     return reverb(x, 0.4, 0.2, 5000)
 
+
+# ================================================================== invocações (cada criatura com a sua voz)
+def _rosnado(rng, seg, f=62.0, g=0.3):
+    """Rosnado: ruído grave com batimento irregular da garganta e um tom serrilhado embaixo."""
+    n = n_de(seg)
+    t = np.arange(n) / SR
+    garganta = np.clip(passa(ruido(rng, n), 18, 45, 2) * 6 + 0.5, 0, 1)
+    voz = satura(sum(np.sin(2 * math.pi * f * k * t * (1 + 0.02 * np.sin(2 * math.pi * 3 * t))) / k for k in range(1, 9)), 2.5)
+    return passa(voz * garganta + passa(rosa(rng, n), 120, 1400, 2) * garganta * 0.8, 50, 2400, 2) * sobe_e_some(n, 0.4, 1.2) * g
+
+
+def _rugido(rng, seg, m0, m1, g=0.3, sal=2.8):
+    """Rugido grande: harmônicos que descem com vibrato largo, ar rasgado e saturação."""
+    n = n_de(seg)
+    t = np.arange(n) / SR
+    f = varre(nota(m0), nota(m1), n, 1.4) * (1 + 0.03 * np.sin(2 * math.pi * 7 * t))
+    voz = sum(seno(f * h, n) / h ** 0.7 for h in range(1, 10))
+    ar = passa(rosa(rng, n), 300, 5000, 2) * 0.6
+    return satura((voz * 0.5 + ar) * 1.4, sal) * env(n, 0.06, seg * 0.45, segura=seg * 0.3) * g
+
+
+def inv_cao(rng, v):
+    """Cão divino: rosnado baixo nas sombras, o salto (sopro rápido) e a mordida que estala."""
+    x = _z(1.3)
+    poe(x, _rosnado(rng, 0.55, 58, 0.35), 0)
+    poe(x, _whoosh(rng, 0.28, 300, 3200, 0.85, g=0.55), 0.3)
+    for k in range(2):
+        poe(x, estalo(rng, n_de(0.05), 1800, 7000, 0.005) * 0.7, 0.56 + 0.04 * k)
+    poe(x, B._carne(rng, n_de(0.25)) * 0.6, 0.57)
+    poe(x, baque(n_de(0.25), 140, 60, 0.06, 0.6) * 0.5, 0.57)
+    poe(x, passa(rosa(rng, n_de(0.6)), 80, 600, 2) * env(n_de(0.6), 0.05, 0.3) * 0.12, 0.62)
+    return reverb(x, 0.5, 0.22, 4500)
+
+
+def inv_sombras(rng, v):
+    """Soldados das sombras: o chão racha num tremor grave, as armaduras tilintam ao se erguer
+    e três lâminas cantam juntas."""
+    x = _z(1.6)
+    n = n_de(0.9)
+    poe(x, passa(rosa(rng, n), 30, 220, 2) * sobe_e_some(n, 0.5, 1.2) * 0.6 + baque(n, 60, 30, 0.4, 0.2) * 0.4, 0)
+    poe(x, graos(rng, n_de(0.5), 30, 0.0, 0.6, 300, 2500, 0.01) * 0.25, 0.05)
+    for k in range(4):
+        poe(x, modal(n_de(0.4), nota(58 + 3 * k), rng=rng, **METAL) * env(n_de(0.4), 0.002, 0.15) * 0.08, 0.25 + 0.08 * k)
+    for k in range(3):
+        poe(x, _whoosh(rng, 0.2, 1500, 6000, 0.7, g=0.4), 0.78 + 0.05 * k)
+        poe(x, modal(n_de(0.5), nota(88 + k), rng=rng, **METAL) * env(n_de(0.5), 0.001, 0.25) * 0.08, 0.86 + 0.05 * k)
+    return reverb(x, 0.6, 0.3, 5000)
+
+
+def inv_mago(rng, v):
+    """Mago Negro: o círculo mágico gira com um arpejo cristalino que sobe, a esfera escura
+    zumbe no cajado e estoura no alvo."""
+    x = _z(1.7)
+    for k, mm in enumerate((67, 71, 74, 79, 83, 86)):
+        poe(x, modal(n_de(0.6), nota(mm), rng=rng, **CRISTAL) * env(n_de(0.6), 0.002, 0.3) * 0.09, 0.05 * k)
+    n = n_de(0.55)
+    t = np.arange(n) / SR
+    zumbido = sum(seno(np.full(n, nota(43)) * h * (1 + 0.01 * np.sin(2 * math.pi * 5 * t)), n) / h for h in (1, 2, 3, 5))
+    poe(x, satura(zumbido, 1.6) * env(n, 0.15, 0.2, segura=0.15) * 0.18, 0.35)
+    poe(x, _whoosh(rng, 0.3, 500, 2500, 0.8, g=0.4), 0.62)
+    poe(x, B.impacto_energia(rng, v) * 0.8, 0.9)
+    return reverb(x, 0.7, 0.32, 7000)
+
+
+def inv_dragao(rng, v):
+    """Dragão Branco: o rugido do dragão, o raio que carrega com um assobio subindo e o
+    estrondo branco no alvo."""
+    x = _z(2.0)
+    poe(x, _rugido(rng, 0.75, 52, 40, 0.42), 0)
+    n = n_de(0.4)
+    poe(x, seno(varre(nota(60), nota(84), n, 1.5), n) * sobe_e_some(n, 0.9, 1.0) * 0.12, 0.45)
+    poe(x, B.feixe(rng, v)[: n_de(0.5)] * 0.9, 0.62)
+    poe(x, B.explosao(rng, v) * 0.9, 0.95)
+    poe(x, _brilho(rng, 0.8, nota(96), 0.08, SINO), 0.97)
+    return reverb(x, 0.8, 0.3, 6000)
+
+
+def inv_gomorrah(rng, v):
+    """Gomorrah: um rugido demoníaco grave sai do portal e as mandíbulas se fecham com um
+    estalo de ossos que faz o chão tremer."""
+    x = _z(1.7)
+    poe(x, passa(_rugido(rng, 0.8, 34, 28, 0.5, 3.5), 40, 1800, 2), 0)
+    poe(x, _rosnado(rng, 0.5, 40, 0.25), 0.1)
+    poe(x, _whoosh(rng, 0.25, 200, 1400, 0.95, g=0.45), 0.45)
+    poe(x, baque(n_de(0.5), 90, 32, 0.25, 0.8) * 0.9, 0.72)
+    for _ in range(8):
+        poe(x, estalo(rng, n_de(0.04), 900, 5000, 0.006) * rng.uniform(0.3, 0.6), 0.72 + rng.uniform(0, 0.05))
+    return reverb(x, 0.8, 0.35, 3500)
+
+
+def inv_ora(rng, v):
+    """Star Platinum: uma rajada de socos cada vez mais rápida (ORA ORA ORA) e o último, pesado,
+    que estoura."""
+    x = _z(1.6)
+    t = 0.05
+    k = 0
+    while t < 0.62:
+        poe(x, B.soco_leve(rng, v) * rng.uniform(0.45, 0.7), t)
+        poe(x, _whoosh(rng, 0.06, 900, 3500, 0.8, g=0.15), max(0.0, t - 0.04))
+        t += max(0.022, 0.06 - 0.0025 * k)
+        k += 1
+    poe(x, _whoosh(rng, 0.2, 300, 2500, 0.9, g=0.5), 0.6)
+    poe(x, B.soco_pesado(rng, v) * 1.2, 0.72)
+    poe(x, baque(n_de(0.45), 80, 34, 0.25, 0.6) * 0.6, 0.72)
+    return reverb(x, 0.4, 0.2, 6000)
+
+
+def inv_feras(rng, v):
+    """Caminho Animal: três "puf" de fumaça de invocação, um latido, um guincho de ave e o
+    pisão do rinoceronte que acerta o alvo."""
+    x = _z(1.7)
+    for k in range(3):
+        n = n_de(0.35)
+        poe(x, passa(rosa(rng, n), 200, 2500, 2) * env(n, 0.005, 0.12) * 0.35 + baque(n, 160, 70, 0.05, 0.3) * 0.3, 0.06 * k)
+    n = n_de(0.14)
+    latido = satura(sum(seno(varre(nota(62), nota(55), n, 1.0) * h, n) / h for h in range(1, 7)), 3) * env(n, 0.004, 0.06)
+    poe(x, passa(latido, 250, 3500, 2) * 0.25, 0.3)
+    poe(x, passa(latido, 250, 3500, 2) * 0.2, 0.45)
+    n = n_de(0.35)
+    poe(x, satura(seno(varre(nota(96), nota(88), n, 0.7) * (1 + 0.03 * np.sin(2 * math.pi * 30 * np.arange(n) / SR)), n), 2) * env(n, 0.01, 0.15) * 0.08, 0.38)
+    poe(x, B.soco_pesado(rng, v), 0.85)
+    poe(x, baque(n_de(0.4), 70, 35, 0.2, 0.5) * 0.6, 0.85)
+    return reverb(x, 0.5, 0.25, 5000)
+
+
+def inv_vassouras(rng, v):
+    """Vassouras encantadas: passinhos de madeira marchando no compasso, o balde balançando
+    e o respingo de água em cima do alvo."""
+    x = _z(1.7)
+    for k in range(8):
+        poe(x, _madeira_oca(rng, n_de(0.12), 420 + 60 * (k % 2)) * 0.18, 0.08 * k)
+        if k % 2 == 0:
+            poe(x, _tilim(rng, 0.06, 1500, 4000) * 0.06, 0.08 * k + 0.02)
+    poe(x, _madeira_oca(rng, n_de(0.2), 300) * 0.35, 0.7)
+    poe(x, B.agua(rng, v) * 1.0, 0.72)
+    return reverb(x, 0.45, 0.2, 7000)
+
+
+def inv_clones(rng, v):
+    """Exército de clones: dezenas de vozinhas agudas e passinhos miúdos correndo, e o montinho
+    caindo em cima do alvo."""
+    x = _z(1.4)
+    poe(x, _piados(rng, n_de(0.8), 40, 0.0, 1.0, 1400, 3000, 0.07), 0)
+    poe(x, graos(rng, n_de(0.8), 90, 0.0, 1.0, 1500, 6000, 0.003) * 0.25, 0)
+    for k in range(5):
+        poe(x, baque(n_de(0.12), 260, 160, 0.03, 0.5) * 0.18, 0.72 + 0.04 * k)
+    poe(x, B.soco_leve(rng, v) * 0.6, 0.78)
+    return reverb(x, 0.35, 0.15, 8000)
+
+
+def inv_androide(rng, v):
+    """Androide de combate: o motor do foguete acende, o punho de metal corta o ar e acerta com
+    um clangor, soltando engrenagens que tilintam no chão."""
+    x = _z(1.6)
+    n = n_de(0.55)
+    poe(x, passa(ruido(rng, n), 600, 6000, 2) * sobe_e_some(n, 0.7, 1.0) * 0.35 + _tom(nota(45), nota(57), 0.55, 0.4, 0.1), 0)
+    poe(x, _whoosh(rng, 0.3, 300, 3000, 0.9, g=0.55), 0.3)
+    poe(x, B.soco_pesado(rng, v) * 0.9, 0.6)
+    poe(x, modal(n_de(1.0), nota(52), rng=rng, **METAL) * env(n_de(1.0), 0.001, 0.4) * 0.22, 0.6)
+    for k in range(7):
+        poe(x, _tilim(rng, 0.07, 2500, 7500) * rng.uniform(0.12, 0.25), 0.72 + 0.06 * k + rng.uniform(0, 0.03))
+    return reverb(x, 0.45, 0.2, 7000)
+
+
 SONS_NOVOS = {
     nome.replace("_", "-"): (fn, "família " + nome.replace("_", " "))
     for nome, fn in list(globals().items())
@@ -1573,4 +1737,5 @@ _ANTES = {"chidori-carga": "faíscas do Chidori", "esfera-espiral-carga": "a esf
 for _k, _d in _ANTES.items():
     SONS_NOVOS[_k] = (SONS_NOVOS[_k][0], _d)
 _ALTO |= {"marretada", "kamehameha-feixe"}
+_ALTO |= {"inv-cao", "inv-sombras", "inv-mago", "inv-dragao", "inv-gomorrah", "inv-ora", "inv-feras", "inv-vassouras", "inv-clones", "inv-androide"}
 ALVO_NOVO = {k: (-23 if k in _BAIXO else -15 if k in _ALTO else -18) for k in SONS_NOVOS}

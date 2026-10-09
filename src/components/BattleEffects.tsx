@@ -7,6 +7,7 @@ import { SkillIcon } from './Icon';
 import { ArrowDown,HeartPulse,ShieldCheck,Sparkles,Zap } from 'lucide-react';
 import { statuses as statusCatalog } from '../data/statuses';
 import { familia,folha,profileFor,type VfxFamily,type VfxProfile } from '../presentation/vfxProfiles';
+import { FAMILIA_DA_INVOCACAO } from '../presentation/vfx-atribuicao';
 
 export interface Anchor {x:number;y:number}
 export type Anchors=Record<string,Anchor>;
@@ -44,7 +45,7 @@ export function BattleEffects({battle,beat,anchors,enabled,reduced,medal=80}:{ba
   const character=source?byId[source.characterId]:null;
   const kind=beat?.event.kind;
   const perfil:VfxProfile|undefined=beat&&(kind==='basic'||kind==='skill'||kind==='cast')?profileFor(source?.characterId??'',beat.event.skill):undefined;
-  const chave:VfxFamily|undefined=perfil?.family??(kind?SEM_FICHA[kind]:undefined);
+  const chave:VfxFamily|undefined=perfil?.family??(kind==='summon'&&character?FAMILIA_DA_INVOCACAO[character.id]:undefined)??(kind?SEM_FICHA[kind]:undefined);
   const fam=chave?familia(chave):undefined;
   const cor=perfil?.color??character?.color??'#cfe6ff';
   const landed=beat?.impacted??false;
@@ -58,7 +59,9 @@ export function BattleEffects({battle,beat,anchors,enabled,reduced,medal=80}:{ba
   const vai=!!beat&&!reduced&&kind!=='cast'&&!!alvoPrincipal&&alvoPrincipal!==beat.event.source&&!!perfil?.travel&&dist>medal*.6;
 
   /* Alvos que recebem impacto: quem levou dano, cura, Escudo ou Status deste beat (até três). */
-  const alvos=beat?[...new Set(beat.events.filter(e=>e.target&&['damage','status','interrupt','shield','heal','ko','block','revive','cleanse','dispel'].includes(e.kind)).map(e=>e.target!))].slice(0,3):[];
+  // a criatura invocada ataca os rivais; o Status de invocação em quem invocou não ganha a criatura em cima dele
+  const criatura=!!chave&&chave.startsWith('inv_');
+  const alvos=beat?[...new Set(beat.events.filter(e=>e.target&&['damage','status','interrupt','shield','heal','ko','block','revive','cleanse','dispel'].includes(e.kind)&&!(criatura&&e.target===beat.event.source&&e.kind==='status')).map(e=>e.target!))].slice(0,3):[];
   if(beat&&landed&&!alvos.length&&kind!=='turn'&&kind!=='cast')alvos.push(alvoPrincipal??beat.event.source);
 
   const camada=(nome:string,estilo:Record<string,string|number>,classe:string,key:string)=><span key={key} className={`fxl ${classe}`} style={{'--fx-img':`url(${folha(nome)})`,...estilo} as CSSProperties}/>;

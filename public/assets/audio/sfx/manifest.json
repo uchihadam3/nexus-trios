@@ -1685,6 +1685,176 @@
    ],
    "bytes": 32390
   },
+  "inv-androide": {
+   "arquivo": "inv-androide.mp3",
+   "descricao": "família inv androide",
+   "versoes": [
+    0.0,
+    1.68,
+    3.4174,
+    5.0433
+   ],
+   "duracoes": [
+    1.6,
+    1.6574,
+    1.5459,
+    1.6135
+   ],
+   "bytes": 63970
+  },
+  "inv-cao": {
+   "arquivo": "inv-cao.mp3",
+   "descricao": "família inv cao",
+   "versoes": [
+    0.0,
+    1.38,
+    2.8071,
+    4.1432
+   ],
+   "duracoes": [
+    1.3,
+    1.3471,
+    1.256,
+    1.3198
+   ],
+   "bytes": 44973
+  },
+  "inv-clones": {
+   "arquivo": "inv-clones.mp3",
+   "descricao": "família inv clones",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 71364
+  },
+  "inv-dragao": {
+   "arquivo": "inv-dragao.mp3",
+   "descricao": "família inv dragao",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 79027
+  },
+  "inv-feras": {
+   "arquivo": "inv-feras.mp3",
+   "descricao": "família inv feras",
+   "versoes": [
+    0.0,
+    1.78,
+    3.6217,
+    5.3441
+   ],
+   "duracoes": [
+    1.7,
+    1.7617,
+    1.6425,
+    1.7259
+   ],
+   "bytes": 56694
+  },
+  "inv-gomorrah": {
+   "arquivo": "inv-gomorrah.mp3",
+   "descricao": "família inv gomorrah",
+   "versoes": [
+    0.0,
+    1.78,
+    3.6217,
+    5.3441
+   ],
+   "duracoes": [
+    1.7,
+    1.7617,
+    1.6425,
+    1.7259
+   ],
+   "bytes": 60758
+  },
+  "inv-mago": {
+   "arquivo": "inv-mago.mp3",
+   "descricao": "família inv mago",
+   "versoes": [
+    0.0,
+    1.78,
+    3.6217,
+    5.3441
+   ],
+   "duracoes": [
+    1.7,
+    1.7617,
+    1.6425,
+    1.7259
+   ],
+   "bytes": 59675
+  },
+  "inv-ora": {
+   "arquivo": "inv-ora.mp3",
+   "descricao": "família inv ora",
+   "versoes": [
+    0.0,
+    1.68,
+    3.418,
+    5.0439
+   ],
+   "duracoes": [
+    1.6,
+    1.658,
+    1.5459,
+    1.6244
+   ],
+   "bytes": 64502
+  },
+  "inv-sombras": {
+   "arquivo": "inv-sombras.mp3",
+   "descricao": "família inv sombras",
+   "versoes": [
+    0.0,
+    1.68,
+    3.418,
+    5.0439
+   ],
+   "duracoes": [
+    1.6,
+    1.658,
+    1.5459,
+    1.6244
+   ],
+   "bytes": 66327
+  },
+  "inv-vassouras": {
+   "arquivo": "inv-vassouras.mp3",
+   "descricao": "família inv vassouras",
+   "versoes": [
+    0.0,
+    1.78,
+    3.6217,
+    5.3441
+   ],
+   "duracoes": [
+    1.7,
+    1.7617,
+    1.6425,
+    1.7259
+   ],
+   "bytes": 70493
+  },
   "investida": {
    "arquivo": "investida.mp3",
    "descricao": "família investida",

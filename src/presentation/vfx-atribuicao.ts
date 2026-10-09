@@ -25,17 +25,17 @@ const T: Record<string, string> = {
   kakashi: 'olho chidori clones', itachi: 'lua_vermelha - susanoo', sakura: 'pisao punho_gigante cura_em_area',
   tanjiro: 'marca lamina_de_agua lamina_de_fogo', nezuko: 'sangue labareda transformacao', zenitsu: 'iaido velocidade lamina_eletrica',
   inosuke: 'olho garras investida', muzan: 'tentaculos acido regeneracao', yuji: '- faisca_negra -',
-  megumi: 'invocacao tempestade -', nobara: 'facas maldicao explosao', sukuna: 'mil_cortes corte_vertical mil_cortes',
+  megumi: 'inv_cao tempestade -', nobara: 'facas maldicao explosao', sukuna: 'mil_cortes corte_vertical mil_cortes',
   ichigo: '- transformacao lamina_sombria', rukia: 'espinho_de_gelo nevasca bloco_de_gelo', aizen: 'hipnose sarcofago olho',
   kenpachi: 'espadao corte_vertical transformacao', eren: 'punho_gigante armadura rugido', mikasa: 'investida - iaido',
   levi: 'marca - -', gon: 'punho_gigante corte_vertical hadouken', killua: 'clones raio raio_em_cadeia',
   hisoka: 'esticar cartas teia', kurapika: 'corrente corrente olho', edward: 'espinhos_de_terra runas metal',
   alphonse: 'armadura cura_em_area barreira_magica', roy: 'sopro_de_fogo chuva_de_meteoros labareda', guts: 'espadao armadura -',
-  griffith: 'marca grito_de_guerra asa_negra', jotaro: '- rajada_de_golpes relogio', dio: '- facas relogio',
+  griffith: 'marca grito_de_guerra asa_negra', jotaro: 'inv_ora rajada_de_golpes relogio', dio: '- facas relogio',
   giorno: 'vinhas barreira_magica cura_em_area', denji: 'motosserra sangue mil_cortes', power: '- martelo sangue',
   makima: 'olho - hipnose', frieren: 'runas laser encanto', anya: 'olho resgate -',
-  loid: 'clones silencio velocidade', yor: 'facas chute_voador petalas', jinwoo: 'invocacao grito_de_guerra -',
-  kaneki: 'tentaculos mordida tentaculos', yugi: 'cartas invocacao runas', kaiba: 'canhao_de_energia dragao supernova',
+  loid: 'clones silencio velocidade', yor: 'facas chute_voador petalas', jinwoo: 'invocacao grito_de_guerra inv_sombras',
+  kaneki: 'tentaculos mordida tentaculos', yugi: 'cartas inv_mago runas', kaiba: 'canhao_de_energia inv_dragao supernova',
   blackpanther: 'armadura garras repulsao', scarletwitch: 'sorte - fenda', vision: 'teleporte laser pulso_emp',
   antman: 'atracao enxame punho_gigante', captainmarvel: 'cosmico hadouken supernova', daredevil: 'marca bastao bastao',
   punisher: 'marca espingarda tiro_preciso', ghostrider: 'corrente olho labareda', blade: 'marca iaido -',
@@ -49,7 +49,7 @@ const T: Record<string, string> = {
   shazam: 'raio_divino grito_de_guerra encanto', cloud: 'corte_vertical escudo_fisico mil_cortes', tifa: 'exposto - -',
   sephiroth: 'iaido lamina_sombria asa_negra', kratos: 'lamina_de_fogo rugido labareda', link: '- escudo_fisico -',
   zelda: 'selo barreira_magica flecha', ganondorf: 'faisca_negra runas raio_divino', samus: 'marca missil esfera_carregada',
-  dante: 'espadao saraivada transformacao', vergil: 'iaido fenda mil_cortes', bayonetta: 'chute_giratorio relogio invocacao',
+  dante: 'espadao saraivada transformacao', vergil: 'iaido fenda mil_cortes', bayonetta: 'chute_giratorio relogio inv_gomorrah',
   masterchief: 'escudo_tech saraivada pisao', doomslayer: 'investida armadura espinhos_de_terra', snake: 'teleporte tiro_preciso silencio',
   raidenmgr: 'lamina_eletrica mil_cortes iaido', leon: '- tiro_preciso corte_vertical', jill: 'cura grito_de_guerra armadura',
   wesker: 'teleporte rajada_de_golpes olho', lara: 'flecha - tiro_preciso', ezio: 'clones florete -',
@@ -81,7 +81,7 @@ const T: Record<string, string> = {
   samuraijack: 'iaido purificacao corte_vertical', heman: 'espadao transformacao espadao', popeye: 'pow_cartoon lanche rajada_de_golpes',
   optimus: 'escudo_tech laser grito_de_guerra', salsicha: 'velocidade lanche bonk', bobesponja: 'bolhas esticar chute_voador',
   scooby: 'bonk lanche sorte', rick: 'portal pulso_emp radiacao', finn: '- investida confete',
-  megatron: 'canhao_de_energia punho_gigante medo', docinho: 'investida - supernova', mickey: 'encanto invocacao confete',
+  megatron: 'canhao_de_energia punho_gigante medo', docinho: 'investida - supernova', mickey: 'encanto inv_vassouras confete',
   donald: 'pow_cartoon rugido -', pateta: 'bonk confusao sorte', stitch: '- mordida pow_cartoon',
   buzz: 'laser pulso_emp foguete', woody: 'chicote grito_de_guerra confete', srincrivel: 'investida escudo_fisico punho_gigante',
   mulherelastica: 'esticar escudo_fisico resgate', frozone: '- bloco_de_gelo nevasca', korra: 'sopro_de_fogo espinhos_de_terra transformacao',
@@ -89,12 +89,12 @@ const T: Record<string, string> = {
   iroh: 'lanche raio_em_cadeia sopro_de_fogo', patolino: 'confusao mordida bomba', taz: 'tornado mordida atracao',
   coiote: 'bomba bonk foguete', papaleguas: 'investida areia velocidade', marvin: 'bomba laser desintegrar',
   tom: 'pow_cartoon investida garras', jerry: 'bonk teleporte marretada', pantera: 'silencio clones teleporte',
-  shredder: 'garras investida mil_cortes', splinter: '- bastao bonk', krang: 'punho_gigante escudo_tech -',
+  shredder: 'garras investida mil_cortes', splinter: '- bastao bonk', krang: 'inv_androide escudo_tech -',
   caseyjones: 'bastao - pow_cartoon', bebop: 'investida armadura pisao', skeletor: 'caveira - dominio',
   shera: 'raio_divino grito_de_guerra chute_voador', liono: 'espadao olho tempestade', cheetara: 'bastao investida florete',
   mummra: 'invocacao transformacao sarcofago', homer: 'bonk lanche pow_cartoon', bart: 'tiro confusao bomba',
   peter: 'pow_cartoon bomba confusao', stewie: 'laser escudo_tech dominio', cartman: 'rugido enfraquecimento gas',
-  billcipher: 'runas fenda olho', plankton: 'clones pulso_emp -', mojojojo: 'punho_gigante laser rugido',
+  billcipher: 'runas fenda olho', plankton: 'inv_clones pulso_emp -', mojojojo: 'punho_gigante laser rugido',
   capitaoplaneta: 'barreira_magica vinhas grito_de_guerra', bugiganga: 'esticar rajada_de_ar confusao', dannyphantom: 'laser teleporte rugido',
   coragem: 'medo resgate bencao',
 };
@@ -102,6 +102,16 @@ const T: Record<string, string> = {
 export const FAMILIA_DA_HABILIDADE: Record<string, VfxFamily> = Object.fromEntries(
   Object.entries(T).flatMap(([id, linha]) => linha.split(' ').flatMap((f, i) => (f === '-' ? [] : [[`${id}:${i}`, f as VfxFamily]]))),
 );
+
+/*
+ * A criatura de cada invocador (parte 8): a mesma animação e o mesmo som quando
+ * ela chega (a habilidade) e a cada ataque dela. O Caminho Deva do Pain segue
+ * com a gravidade; o Caminho Animal aparece nos ataques da invocação.
+ */
+export const FAMILIA_DA_INVOCACAO: Record<string, VfxFamily> = {
+  megumi: 'inv_cao', jinwoo: 'inv_sombras', yugi: 'inv_mago', kaiba: 'inv_dragao', bayonetta: 'inv_gomorrah',
+  jotaro: 'inv_ora', pain: 'inv_feras', mickey: 'inv_vassouras', plankton: 'inv_clones', krang: 'inv_androide',
+};
 
 /*
  * O ataque básico de quem tem um jeito próprio de bater: o espadachim corta, o

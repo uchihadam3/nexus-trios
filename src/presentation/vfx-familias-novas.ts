@@ -156,6 +156,17 @@ export const FAMILIAS_NOVAS = {
   medo: n({ nome: 'Medo', grupo: 'apoio', impacto: 'medo', escala: 2.0, tempo: 0.95, cor: '#c84aff', tinta: 'fixa' }),
   exposto: n({ nome: 'Guarda quebrada', grupo: 'apoio', impacto: 'exposto', escala: 1.9, tempo: 0.9, cor: '#ff9475', tinta: 'fixa' }),
   estrela_invencivel: n({ nome: 'Estrela invencível', grupo: 'especial', impacto: 'estrela_invencivel', escala: 2.0, tempo: 0.95, cor: '#ffe066', tinta: 'fixa' }),
+  // ------------------------------------------------------------ invocações (cada criatura com a sua animação e o seu som)
+  inv_cao: n({ nome: 'Cão divino', grupo: 'magia', impacto: 'inv_cao', escala: 2.4, tempo: 1.0, cor: '#9a86ff', tinta: 'fixa' }),
+  inv_sombras: n({ nome: 'Soldados das sombras', grupo: 'magia', impacto: 'inv_sombras', escala: 2.5, tempo: 1.0, cor: '#8a5cff', tinta: 'fixa' }),
+  inv_mago: n({ nome: 'Mago Negro', grupo: 'magia', impacto: 'inv_mago', escala: 2.5, tempo: 1.0, cor: '#b46bff', tinta: 'fixa' }),
+  inv_dragao: n({ nome: 'Dragão Branco', grupo: 'energia', impacto: 'inv_dragao', escala: 2.6, tempo: 1.0, cor: '#cfeaff', tinta: 'fixa' }),
+  inv_gomorrah: n({ nome: 'Gomorrah', grupo: 'magia', impacto: 'inv_gomorrah', escala: 2.4, tempo: 1.0, cor: '#ff4a6a', tinta: 'fixa' }),
+  inv_ora: n({ nome: 'Star Platinum', grupo: 'físico', impacto: 'inv_ora', escala: 2.4, tempo: 1.0, cor: '#a98bff', tinta: 'fixa' }),
+  inv_feras: n({ nome: 'Caminho Animal', grupo: 'magia', impacto: 'inv_feras', escala: 2.4, tempo: 1.0, cor: '#ffb070', tinta: 'fixa' }),
+  inv_vassouras: n({ nome: 'Vassouras encantadas', grupo: 'especial', impacto: 'inv_vassouras', escala: 2.3, tempo: 1.0, cor: '#7fd6ff', tinta: 'fixa' }),
+  inv_clones: n({ nome: 'Exército de clones', grupo: 'especial', impacto: 'inv_clones', escala: 2.2, tempo: 1.0, cor: '#5fe36b', tinta: 'fixa' }),
+  inv_androide: n({ nome: 'Androide de combate', grupo: 'físico', impacto: 'inv_androide', escala: 2.3, tempo: 1.0, cor: '#ffb070', tinta: 'fixa' }),
 } as const satisfies Record<string, Familia>;
 
 export type FamiliaNova = keyof typeof FAMILIAS_NOVAS;
@@ -166,7 +177,8 @@ export const SOM_DA_NOVA = (k: FamiliaNova): string => (k === 'transformacao' ? 
 /** Estas acontecem no alvo, sem nada voando até ele. */
 export const NOVAS_NO_ALVO = new Set<FamiliaNova>(['ressurreicao', 'renascer', 'brasas_renascendo', 'provocar', 'copia', 'esquiva', 'ultima_resistencia', 'sono', 'cegueira', 'dissipar', 'reflexo', 'espinhos', 'vampirismo', 'olho', 'hipnose', 'relogio', 'runas', 'sarcofago', 'encanto', 'caveira', 'clones',
   'teleporte', 'fenda', 'sorte', 'confusao', 'pentagrama', 'invocacao', 'lua_vermelha', 'susanoo', 'dominio', 'desintegrar', 'buraco_negro',
-  'gravidade', 'cosmico', 'tempestade', 'raio_divino', 'chuva_de_meteoros', 'lua', 'marca', 'silencio', 'medo', 'exposto', 'lentidao', 'enfraquecimento']);
+  'gravidade', 'cosmico', 'tempestade', 'raio_divino', 'chuva_de_meteoros', 'lua', 'marca', 'silencio', 'medo', 'exposto', 'lentidao', 'enfraquecimento',
+  'inv_cao', 'inv_sombras', 'inv_mago', 'inv_dragao', 'inv_gomorrah', 'inv_ora', 'inv_feras', 'inv_vassouras', 'inv_clones', 'inv_androide']);
 
 /** Bons para o ataque básico do personagem (quando ele já usa a família numa habilidade). */
 export const NOVAS_DE_BASICO = new Set<FamiliaNova>(['garras', 'chicote', 'corrente', 'bastao', 'mordida', 'tentaculos', 'florete', 'lamina_de_fogo',
