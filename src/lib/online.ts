@@ -53,7 +53,7 @@ async function session(){
   if(!client)throw new Error('Ranking online ainda não está conectado.');
   const current=await client.auth.getSession();if(current.error)throw new Error(current.error.message);
   const sessao=current.data.session;
-  if(!sessao||sessao.user.is_anonymous===true)throw new Error('Entre na sua conta para jogar a Jornada Ranqueada.');
+  if(!sessao||sessao.user.is_anonymous===true)throw new Error('Entre na sua conta para entrar no ranking.');
   return sessao;
 }
 /*

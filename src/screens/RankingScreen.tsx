@@ -6,7 +6,7 @@ import {TelaTopo} from '../components/Casca';
 import {onlineCall,onlineConfigured,type Leaderboard,type MeusTop3,type PartidaDoHistorico,type PublicRun} from '../lib/online';
 import {pontos,situacaoDasVagas} from '../lib/top3';
 
-const modes=[['daily','HOJE'],['weekly','SEMANA'],['season','TEMPORADA'],['mine','MEUS']] as const;
+const modes=[['daily','HOJE'],['weekly','SEMANA'],['season','GERAL'],['mine','MEUS']] as const;
 type Modo=(typeof modes)[number][0];
 
 /*
@@ -22,7 +22,7 @@ type Modo=(typeof modes)[number][0];
  * vez de parecer uma queda de conexão.
  */
 export function RankingScreen({handle,conta,onConta,recorde}:{handle?:string;conta:boolean;onConta:()=>void;recorde?:number}){
-  const [mode,setMode]=useState<Modo>('season'),[board,setBoard]=useState<Leaderboard|null>(null),[historico,setHistorico]=useState<PartidaDoHistorico[]|null>(null),[loading,setLoading]=useState(false),[maisCarregando,setMaisCarregando]=useState(false),[error,setError]=useState('');
+  const [mode,setMode]=useState<Modo>('daily'),[board,setBoard]=useState<Leaderboard|null>(null),[historico,setHistorico]=useState<PartidaDoHistorico[]|null>(null),[loading,setLoading]=useState(false),[maisCarregando,setMaisCarregando]=useState(false),[error,setError]=useState('');
   useEffect(()=>{if(!onlineConfigured||!conta)return;let active=true;setLoading(true);setError('');setHistorico(null);
     /*
      * "Meus" é o histórico completo, que só a função da FASE K entrega. Com a
@@ -63,18 +63,18 @@ export function Placar({mode,onMode,estado,handle,onConta,onMais,maisCarregando=
   const podio=mode==='mine'?[]:rows.slice(0,3),resto=mode==='mine'?rows:rows.slice(3);
   return <section className="ranking-screen ranking-v2">
     <TelaTopo icone={<Trophy/>} cor="#ffd36b" rotulo="RANKING" titulo="Quem fez mais pontos"><p>Toda jornada é refeita pelo servidor antes de entrar.</p></TelaTopo>
-    {/* o recorde deste aparelho; com conta, a Jornada normal entra na Temporada, e Hoje/Semana são as Ranqueadas */}
+    {/* o recorde deste aparelho; com conta, cada Jornada entra em Hoje, Semana e Geral ao mesmo tempo */}
     {recorde!==undefined&&<div className="rk-recorde-local"><Trophy size={16}/><span>Seu recorde na Jornada</span><b>{recorde.toLocaleString('pt-BR')}</b><small>pontos · neste aparelho</small></div>}
     <div className="rk-abas" role="tablist">{modes.map(([value,label])=><button key={value} role="tab" aria-selected={mode===value} className={mode===value?'ativo':''} onClick={()=>{onMode(value);setSelected(null);}}>{label}</button>)}</div>
 
     {estado.tipo==='desligado'?<div className="rk-bloqueio"><span className="rk-cadeado"><WifiOff size={30}/></span><b>Ranking desligado nesta versão</b><p>A Jornada casual continua funcionando sem internet.</p></div>
-    :estado.tipo==='sem-conta'?<div className="rk-bloqueio"><span className="rk-cadeado"><Lock size={30}/></span><b>Entre para ver o placar</b><p>Com conta, toda Jornada vale o ranking da Temporada, e a Diária e a Semanal valem Hoje e Semana. Você vê as posições e coloca seu trio na disputa.</p><button className="primary gs-cta" onClick={onConta}><LogIn size={18}/> Entrar ou criar conta</button></div>
+    :estado.tipo==='sem-conta'?<div className="rk-bloqueio"><span className="rk-cadeado"><Lock size={30}/></span><b>Entre para ver o placar</b><p>Com conta, toda Jornada vale ranking: entra em Hoje, Semana e Geral ao mesmo tempo. Você vê as posições e coloca seu trio na disputa.</p><button className="primary gs-cta" onClick={onConta}><LogIn size={18}/> Entrar ou criar conta</button></div>
     :estado.tipo==='erro'?<p role="alert" className="rk-aviso"><WifiOff size={18}/>{estado.texto}</p>
     :estado.tipo==='carregando'?<div className="rk-carregando" aria-label="Carregando resultados verificados">{[0,1,2,3].map(i=><i key={i} style={{'--i':i} as CSSProperties}/>)}</div>
     :estado.tipo==='historico'?<Historico partidas={estado.partidas}/>
     :<>
       {mode!=='mine'&&board?.meus&&<MeusTres meus={board.meus} onSelect={setSelected}/>}
-      <p className="rk-contexto">{mode==='daily'?'Desafio de hoje':mode==='weekly'?'Desafio da semana':mode==='season'?'Melhores da temporada':'Seu melhor resultado da temporada'} · {board?.period}{handle&&<> · <b>{handle}</b></>}</p>
+      <p className="rk-contexto">{mode==='daily'?'Melhores de hoje':mode==='weekly'?'Melhores da semana':mode==='season'?'Melhores de todos os tempos':'Seu melhor resultado'} · {board?.period}{handle&&<> · <b>{handle}</b></>}</p>
       {podio.length>0&&<div className="rk-podio">{[podio[1],podio[0],podio[2]].map((row,i)=>row&&<button key={row.id} className={`rk-degrau p${row.position} ${minhas.has(row.id)?'mine':''}`} style={{'--i':i} as CSSProperties} onClick={()=>setSelected(row)}>
         <span className="rk-coroa">{row.position===1?<Crown size={22}/>:<Medal size={18}/>}</span>
         <Trio team={row.team}/>
@@ -119,5 +119,5 @@ function MeusTres({meus,onSelect}:{meus:MeusTop3;onSelect:(r:PublicRun)=>void}){
 /* "MEUS": o histórico completo. Toda partida validada, da mais recente. */
 function Historico({partidas}:{partidas:PartidaDoHistorico[]}){
   if(!partidas.length)return <p className="rk-vazio">Você ainda não tem Jornada validada no ranking. Jogue com a conta conectada: no fim, ela entra sozinha.</p>;
-  return <><p className="rk-contexto">Todas as suas jornadas validadas · {partidas.length}</p><div className="ranking-list rk-lista historico">{partidas.map(p=><div key={p.id} className="historico-linha"><span className="rk-quem"><b>{new Date(p.date).toLocaleDateString('pt-BR')}</b><small>{p.mode==='free'?'Jornada':p.mode==='daily'?'Diário':'Semanal'} · {p.progress}/10</small></span><Trio team={p.team} tamanho="mini"/><strong>{pontos(p.score)}</strong></div>)}</div></>;
+  return <><p className="rk-contexto">Todas as suas jornadas validadas · {partidas.length}</p><div className="ranking-list rk-lista historico">{partidas.map(p=><div key={p.id} className="historico-linha"><span className="rk-quem"><b>{new Date(p.date).toLocaleDateString('pt-BR')}</b><small>{p.progress}/10 lutas</small></span><Trio team={p.team} tamanho="mini"/><strong>{pontos(p.score)}</strong></div>)}</div></>;
 }

@@ -11,8 +11,8 @@
 # Depois de publicar, reaplica a regra do Top 3 às partidas validadas: as que
 # chegaram enquanto a função anterior estava no ar não passaram por ela.
 # Reaplicar é seguro — o mesmo trio com a mesma pontuação só "mantém".
-# A Jornada normal (seed própria, diferente da do desafio) só tem o ranking da
-# Temporada.
+# Um ranking só: cada jornada entra em Hoje (o dia em que foi validada, no
+# horário de Brasília), Semana (a semana desse dia) e Geral (para sempre).
 #
 # Uso:  SUPABASE_ACCESS_TOKEN=... scripts/publicar-funcao.sh [project-ref]
 set -euo pipefail
@@ -28,7 +28,11 @@ npx esbuild "$RAIZ/supabase/functions/ranked-api/index.ts" --bundle --format=esm
 printf 'project_id = "nexus-trios"\n' > "$B/supabase/config.toml"
 npx -y supabase@2 functions deploy ranked-api --project-ref "$REF" --use-api --workdir "$B"
 
-curl -sS --fail -X POST "https://api.supabase.com/v1/projects/$REF/database/query" \
-  -H "Authorization: Bearer $SUPABASE_ACCESS_TOKEN" -H "Content-Type: application/json" \
-  -d '{"query":"do $$ declare r record; begin for r in select x.*, c.seed as seed_do_desafio from public.ranked_runs x join public.ranked_challenges c on c.id = x.challenge_id where x.verified order by x.finished_at loop if r.seed = r.seed_do_desafio then perform public.registrar_no_top3(r.player_id, r.mode, r.period_key::text, r.team_ids, r.id, r.score, r.encounters_cleared, r.finished_at); end if; perform public.registrar_no_top3(r.player_id, '\''season'\'', r.balance_version, r.team_ids, r.id, r.score, r.encounters_cleared, r.finished_at); end loop; end $$; select count(*) as entradas from public.leaderboard_entries;"}'
+# Só as jornadas da versão atual dos pontos (BALANCE_VERSION): as de escalas
+# antigas não se comparam com as de hoje.
+BV="$(grep -oP "BALANCE_VERSION='\K[^']+" "$RAIZ/src/engine/ranked.ts")"
+[[ "$BV" =~ ^[A-Za-z0-9_-]+$ ]] || { echo "BALANCE_VERSION não encontrada" >&2; exit 1; }
+SQL="do \$\$ declare r record; d date; begin for r in select * from public.ranked_runs where verified and balance_version = '$BV' order by finished_at loop d := (r.finished_at at time zone 'America/Sao_Paulo')::date; perform public.registrar_no_top3(r.player_id, 'daily', d::text, r.team_ids, r.id, r.score, r.encounters_cleared, r.finished_at); perform public.registrar_no_top3(r.player_id, 'weekly', (d - (extract(isodow from d)::int - 1))::text, r.team_ids, r.id, r.score, r.encounters_cleared, r.finished_at); perform public.registrar_no_top3(r.player_id, 'season', 'geral', r.team_ids, r.id, r.score, r.encounters_cleared, r.finished_at); end loop; end \$\$; select count(*) as entradas from public.leaderboard_entries;"
+jq -n --arg q "$SQL" '{query: $q}' | curl -sS --fail -X POST "https://api.supabase.com/v1/projects/$REF/database/query" \
+  -H "Authorization: Bearer $SUPABASE_ACCESS_TOKEN" -H "Content-Type: application/json" --data-binary @-
 echo

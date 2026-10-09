@@ -58,11 +58,11 @@ export function AccountScreen({ autenticacao, conta, profile, conectado, google 
 
   return <section className="account-screen conta-v2">
     <TelaTopo icone={<ShieldCheck />} cor="#86e3a8" rotulo="CONTA NEXUS" titulo={logado ? 'Sua conta' : 'Entre na disputa'}>
-      <p>{logado ? 'Pronto para a Jornada Ranqueada.' : 'Opcional: jogar funciona sem conta.'}</p>
+      <p>{logado ? 'Pronto: toda Jornada vale ranking.' : 'Opcional: jogar funciona sem conta.'}</p>
     </TelaTopo>
     {!logado && <div className="ct-vantagens">
       <span style={{ '--tile': '#ffd36b' } as CSSProperties}><Trophy size={20} /><b>Ranking</b><small>seu trio no placar</small></span>
-      <span style={{ '--tile': '#8fd3ff' } as CSSProperties}><Swords size={20} /><b>Ranqueada</b><small>o mesmo desafio para todos</small></span>
+      <span style={{ '--tile': '#8fd3ff' } as CSSProperties}><Swords size={20} /><b>Ranking</b><small>hoje, semana e geral</small></span>
       <span style={{ '--tile': '#c3a2ff' } as CSSProperties}><BadgeCheck size={20} /><b>Nome público</b><small>sem mostrar o e-mail</small></span>
     </div>}
 

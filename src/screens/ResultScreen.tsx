@@ -138,11 +138,8 @@ export function ResultScreen({run,onNext,onRestart,onAbandon,onHome,onRanking,on
       </div>
     </section>}
 
-    {run.ranked&&fimDaJornada&&<div className="rs-ranqueada" role="status"><strong>{run.ranked.mode==='free'?'RANKING · TEMPORADA':`RANQUEADA · ${run.ranked.mode==='daily'?'DIÁRIO':'SEMANAL'}`}</strong>
-      {run.ranked.status==='verified'?<><span>Pontuação validada: <b>{formatarPontos(run.ranked.score??0)}</b></span>
-        {run.ranked.mode==='free'
-          ?<><span>Posição na temporada: #{run.ranked.season??'—'}</span>{run.ranked.top3?.temporada&&<AvisoTop3 resultado={run.ranked.top3.temporada}/>}</>
-          :<><span>Posição: diário #{run.ranked.daily??'—'} · semanal #{run.ranked.weekly??'—'} · temporada #{run.ranked.season??'—'}</span>{run.ranked.top3?.periodo&&<AvisoTop3 resultado={run.ranked.top3.periodo}/>}</>}</>
+    {run.ranked&&fimDaJornada&&<div className="rs-ranqueada" role="status"><strong>RANKING</strong>
+      {run.ranked.status==='verified'?<><span>Pontuação validada: <b>{formatarPontos(run.ranked.score??0)}</b></span><span>Posição: hoje #{run.ranked.daily??'—'} · semana #{run.ranked.weekly??'—'} · geral #{run.ranked.season??'—'}</span>{(run.ranked.top3?.temporada??run.ranked.top3?.periodo)&&<AvisoTop3 resultado={(run.ranked.top3?.temporada??run.ranked.top3?.periodo)!}/>}</>
         :run.ranked.status==='failed'?<><span>Validação pendente: {run.ranked.error}</span>{onRetry&&<button className="secondary" onClick={onRetry}>Tentar validar de novo</button>}</>
         :<span>Validando no servidor…</span>}
       {onRanking&&<button className="text-button" onClick={onRanking}>Ver ranking →</button>}</div>}

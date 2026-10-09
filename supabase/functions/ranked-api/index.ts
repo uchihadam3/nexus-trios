@@ -6,13 +6,21 @@ import {BALANCE_VERSION,ENGINE_VERSION,replayRanked,rosterFingerprint,runDigest}
 declare const Deno:{env:{get:(name:string)=>string|undefined};serve:(handler:(request:Request)=>Response|Promise<Response>)=>unknown};
 type Mode='daily'|'weekly';
 /*
- * `free`: a Jornada normal (botão Jogar), que também vale o ranking da
- * Temporada. O servidor sorteia a seed (o jogador não escolhe contra quem
- * luta). No banco ela fica como uma partida do dia (`daily`), sem mudar o
- * esquema, e se distingue por ter seed própria, diferente da do desafio do
- * dia: só entra no Top 3 da Temporada, nunca no de Hoje ou da Semana.
+ * Um ranking só (pedido do jogador): toda Jornada é ranqueada — o botão Jogar,
+ * não existe "casual" e "ranqueada". Cada jornada validada entra ao mesmo
+ * tempo em HOJE, SEMANA e GERAL (até 3 trios por conta em cada um). Hoje zera
+ * na virada do dia, Semana na virada da semana, e Geral fica para sempre.
+ *
+ * `free` é essa jornada: o servidor sorteia a seed, então o jogador não
+ * escolhe contra quem luta. No banco ela fica como partida do dia (`daily`),
+ * sem mudar o esquema; a seed própria (diferente da do desafio do dia) diz ao
+ * replay que os rivais foram sorteados depois do trio. `daily`/`weekly` são
+ * as jornadas de desafio compartilhado de versões anteriores do jogo, ainda
+ * aceitas de quem estiver no meio de uma.
  */
 type Modo=Mode|'free';
+/* O ranking GERAL não muda de chave: fica para sempre. */
+const CHAVE_GERAL='geral';
 const url=Deno.env.get('SUPABASE_URL')!,secret=Deno.env.get('SUPABASE_SECRET_KEY')??Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!,publishable=Deno.env.get('SUPABASE_PUBLISHABLE_KEY')??Deno.env.get('SUPABASE_ANON_KEY')!;
 const admin=createClient(url,secret,{auth:{persistSession:false,autoRefreshToken:false}});
 const authClient=createClient(url,publishable,{auth:{persistSession:false,autoRefreshToken:false}});
@@ -20,7 +28,8 @@ const allowed=new Set(['https://uchihadam3.github.io','http://localhost:5173','h
 const json=(data:unknown,status=200,origin='')=>new Response(JSON.stringify(data),{status,headers:{'content-type':'application/json','cache-control':'no-store','access-control-allow-origin':allowed.has(origin)?origin:'https://uchihadam3.github.io','access-control-allow-headers':'authorization, apikey, content-type, x-client-info','access-control-allow-methods':'POST, OPTIONS'}});
 const fail=(message:string,status=400,origin='')=>json({error:message},status,origin);
 const iso=(date:Date)=>date.toISOString().slice(0,10);
-const period=(mode:Mode)=>{const date=new Date();if(mode==='weekly')date.setUTCDate(date.getUTCDate()-(date.getUTCDay()+6)%7);return iso(date)};
+/* Os dias e as semanas viram no horário de Brasília (UTC−3, sem horário de verão), não à meia-noite de Londres. */
+const period=(mode:Mode)=>{const date=new Date(Date.now()-3*3600000);if(mode==='weekly')date.setUTCDate(date.getUTCDate()-(date.getUTCDay()+6)%7);return iso(date)};
 async function seedFor(mode:Mode,key:string){const bytes=new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(`nexus:${BALANCE_VERSION}:${mode}:${key}`)));return new DataView(bytes.buffer).getUint32(0,false)&0x7fffffff;}
 async function challenge(mode:Mode){
   const key=period(mode),seed=await seedFor(mode,key),fingerprint=rosterFingerprint();
@@ -44,7 +53,7 @@ async function profile(userId:string){const {data,error}=await admin.from('playe
  * quantas vagas sobram e o que a próxima entrada precisa superar.
  */
 type Escopo='daily'|'weekly'|'season';
-const chaveDo=(escopo:Escopo)=>escopo==='season'?BALANCE_VERSION:period(escopo);
+const chaveDo=(escopo:Escopo)=>escopo==='season'?CHAVE_GERAL:period(escopo);
 /*
  * Uma página do ranking, mais as entradas da própria conta onde quer que
  * estejam — numeradas pelo banco (`ranking_pagina`). Antes, a função buscava
@@ -135,8 +144,8 @@ Deno.serve(async (request:Request)=>{
        * o mesmo trio com a mesma pontuação só "mantém" a entrada.
        */
       const registrar=async(escopo:Escopo,chave:string)=>{const {data,error}=await admin.rpc('registrar_no_top3',{p_player:user.id,p_scope:escopo,p_period:chave,p_team:run.team_ids,p_run:run.id,p_score:verified.score,p_cleared:verified.encountersCleared});if(error)throw error;return data;};
-      // a Jornada normal só entra na Temporada; Hoje e Semana são os desafios iguais para todo mundo
-      const top3={periodo:livre?undefined:await registrar(run.mode,String(run.period_key)),temporada:await registrar('season',BALANCE_VERSION)};
+      // um ranking só: a mesma jornada entra em Hoje, Semana e Geral (no dia e na semana em que foi validada)
+      const top3={periodo:await registrar('daily',period('daily')),semana:await registrar('weekly',period('weekly')),temporada:await registrar('season',CHAVE_GERAL)};
       const {data:saved,error:saveError}=await admin.from('ranked_runs').update({verified:true,finished_at:new Date().toISOString(),encounters_cleared:verified.encountersCleared,score:verified.score,summary:{highlights:verified.highlights,outcomes:verified.summaries.map(s=>s.won),livre},digest}).eq('id',run.id).eq('verified',false).select('id').maybeSingle();
       if(saveError)throw saveError;if(!saved)return fail('Jornada já enviada.',409,origin);
       const player=await profile(user.id),xp=(player?.xp??0)+30+verified.encountersCleared*30+(verified.encountersCleared===10?250:0);

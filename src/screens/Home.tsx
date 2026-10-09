@@ -1,5 +1,5 @@
 import type { CSSProperties } from 'react';
-import { ArrowRight,Trophy,CircleHelp,Settings2,Download,Users,Crown,Globe2,ShieldCheck,Play,Calendar,CalendarDays,LogOut } from 'lucide-react';
+import { ArrowRight,Trophy,CircleHelp,Settings2,Download,Users,Crown,ShieldCheck,Play,LogOut } from 'lucide-react';
 import { byId,characters } from '../data/characters';
 import { Portrait } from '../components/Portrait';
 import type { Profile, Run } from '../lib/storage';
@@ -15,12 +15,12 @@ import { formatarPontos,pontosDaJornada } from '../engine/pontos';
  * e mostra a luta e os pontos de agora. O resto do jogo fica num painel de
  * botões-ícone, como o menu de um jogo.
  */
-interface Props {profile:Profile;run:Run|null;conta:boolean;onPlay:()=>void;onRanked:(mode:'daily'|'weekly')=>void;onContinue:()=>void;onAbandon:()=>void;onNavigate:(s:'characters'|'ranking'|'conta'|'help'|'settings')=>void;onInstall:()=>void}
+interface Props {profile:Profile;run:Run|null;conta:boolean;onPlay:()=>void;onContinue:()=>void;onAbandon:()=>void;onNavigate:(s:'characters'|'ranking'|'conta'|'help'|'settings')=>void;onInstall:()=>void}
 
 const Fx=({nome,cor,ms,className}:{nome:string;cor:string;ms:number;className:string})=>
   <span aria-hidden className={`uifx uifx-laco ${className}`} style={{'--uifx-img':`url(/assets/ui/fx/${nome}.webp)`,'--uifx-cor':cor,'--uifx-dur':`${ms}ms`} as CSSProperties}/>;
 
-export function Home({profile,run,conta,onPlay,onRanked,onContinue,onAbandon,onNavigate,onInstall}:Props){
+export function Home({profile,run,conta,onPlay,onContinue,onAbandon,onNavigate,onInstall}:Props){
   const terminal=run?.stage==='result'&&(run.battle?.winner!=='player'||run.index===9);
   const wonCurrent=run?.stage==='result'&&run.battle?.winner==='player';
   const completed=run?run.index+(wonCurrent?1:0):0;
@@ -54,7 +54,7 @@ export function Home({profile,run,conta,onPlay,onRanked,onContinue,onAbandon,onN
         </button>
         :<button className="hv-cta" onClick={run?onContinue:onPlay} aria-label={run?'Ver resultado':'Montar meu trio'}>
           <Fx nome="brilho" cor="#ffffff" ms={2600} className="hv-brilho"/>
-          <Play size={26} fill="currentColor"/><span><b>{run?'VER RESULTADO':'JOGAR'}</b><small>{run?`${formatarPontos(pontosAgora)} pontos nesta jornada`:'10 lutas · máximo de pontos'}</small></span><ArrowRight size={22}/>
+          <Play size={26} fill="currentColor"/><span><b>{run?'VER RESULTADO':'JOGAR'}</b><small>{run?`${formatarPontos(pontosAgora)} pontos nesta jornada`:onlineConfigured&&conta?'10 lutas · vale o ranking':'10 lutas · máximo de pontos'}</small></span><ArrowRight size={22}/>
         </button>}
       {emAndamento&&<div className="hv-trilha" aria-label={`${completed} de 10 lutas vencidas`}>{Array.from({length:10},(_,i)=><i key={i} className={i<completed?'ok':i===completed?'agora':''}/>)}</div>}
       {(emAndamento||terminal)&&<div className="hv-secundarias">
@@ -63,18 +63,9 @@ export function Home({profile,run,conta,onPlay,onRanked,onContinue,onAbandon,onN
       </div>}
     </div>
 
-    {onlineConfigured&&<section className="hv-ranqueada" aria-label="Jornada Ranqueada">
-      <span className="hv-rotulo"><Globe2 size={14}/>RANQUEADA · o mesmo desafio para todos</span>
-      <div>
-        <button onClick={()=>onRanked('daily')}><Calendar size={20}/><b>Diária</b><small>muda todo dia</small></button>
-        <button onClick={()=>onRanked('weekly')}><CalendarDays size={20}/><b>Semanal</b><small>a semana toda</small></button>
-        <button onClick={()=>onNavigate('ranking')}><Trophy size={20}/><b>Ranking</b><small>quem fez mais</small></button>
-      </div>
-    </section>}
-
     <nav className="hv-menu" aria-label="Menu do jogo">
       <button onClick={()=>onNavigate('characters')} style={{'--tile':'#ffb86b'} as CSSProperties}><Users size={22}/><b>Personagens</b><small>{characters.length} lutadores</small></button>
-      {!onlineConfigured&&<button onClick={()=>onNavigate('ranking')} style={{'--tile':'#ffd36b'} as CSSProperties}><Trophy size={22}/><b>Ranking</b><small>os melhores</small></button>}
+      <button onClick={()=>onNavigate('ranking')} style={{'--tile':'#ffd36b'} as CSSProperties}><Trophy size={22}/><b>Ranking</b><small>os melhores</small></button>
       <button onClick={()=>onNavigate('help')} style={{'--tile':'#8fd3ff'} as CSSProperties}><CircleHelp size={22}/><b>Como jogar</b><small>em 1 minuto</small></button>
       <button onClick={()=>onNavigate('settings')} style={{'--tile':'#c3a2ff'} as CSSProperties}><Settings2 size={22}/><b>Ajustes</b><small>som e visual</small></button>
       <button onClick={()=>onNavigate('conta')} style={{'--tile':'#86e3a8'} as CSSProperties}><ShieldCheck size={22}/><b>Conta</b><small>{conta?'conectada':'para o ranking'}</small></button>

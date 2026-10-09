@@ -25,7 +25,7 @@ import { addSynergies,summarizeBattle } from './engine/run-summary';
 import { acumularRaioX,raioXVazio } from './engine/raio-x';
 import {emptyTally,tallyEvents} from './engine/progression';
 import { pontosDaJornada } from './engine/pontos';
-import {runDigest,ENGINE_VERSION,rosterFingerprint } from './engine/ranked';
+import {runDigest} from './engine/ranked';
 import {carregarCliente,googleConfigured,haSessaoOuRetorno,onlineCall,onlineConfigured} from './lib/online';
 import {criarAutenticacaoPreguicosa,type Conta} from './lib/auth';
 import {AccountScreen} from './screens/AccountScreen';
@@ -47,7 +47,7 @@ export default function App(){
   const [screen,setScreen]=useState<Screen>(import.meta.env.DEV&&location.hash==='#debug'?'debug':'home');
   const [settings,setSettings]=useState(loadSettings),[profile,setProfile]=useState(loadProfile),[run,setRun]=useState<Run|null>(loadRun);
   const [paused,setPaused]=useState(false),[details,setDetails]=useState<string|null>(null),[menu,setMenu]=useState(false),[installHelp,setInstallHelp]=useState(false),[confirmNew,setConfirmNew]=useState(false),[confirmAbandon,setConfirmAbandon]=useState(false);
-  const [onlineNotice,setOnlineNotice]=useState(''),[nameDialog,setNameDialog]=useState(false),[draftHandle,setDraftHandle]=useState(''),[pendingMode,setPendingMode]=useState<'daily'|'weekly'|null>(null),[onlineBusy,setOnlineBusy]=useState(false);
+  const [onlineNotice,setOnlineNotice]=useState(''),[nameDialog,setNameDialog]=useState(false),[draftHandle,setDraftHandle]=useState(''),[pendingStart,setPendingStart]=useState(false),[onlineBusy,setOnlineBusy]=useState(false);
   const submission=useRef(false);
   const [installEvent,setInstallEvent]=useState<InstallEvent|null>(null),[installed,setInstalled]=useState(()=>matchMedia('(display-mode: standalone)').matches);
   const runRef=useRef(run),lastSave=useRef(0);runRef.current=run;
@@ -66,57 +66,47 @@ export default function App(){
   };
   const changeSettings=(next:Settings)=>{battleAudio.configure(next);setSettings(next);save('settings',next);};
   const navigate=(next:Screen)=>{if(next!=='game')setPaused(true);setScreen(next);setMenu(false);window.scrollTo(0,0);};
-  const prepareRanked=async(mode:'daily'|'weekly')=>{
-    const response=await onlineCall<{challenge:{seed:number;engine_version?:string;roster_fingerprint?:string};banned:string[]}>('challenge',{mode});
-    /*
-     * O servidor refaz as 10 lutas com a cópia do motor que ele tem. Se as
-     * regras do jogo mudaram e o servidor ainda não foi atualizado, o
-     * resultado não bateria e a jornada inteira terminaria "não validada".
-     * Melhor avisar antes de começar.
-     */
-    const c=response.challenge;
-    if((c.engine_version&&c.engine_version!==ENGINE_VERSION)||(c.roster_fingerprint&&c.roster_fingerprint!==rosterFingerprint())){
-      setOnlineNotice('O ranking está sendo atualizado para as regras novas do jogo. Enquanto isso, jogue a Jornada normal — o ranqueado volta assim que o servidor for atualizado.');
-      return;
-    }
-    const seed=c.seed;
-    changeRun({seed,team:[],encounters:generateCampaign(seed),index:0,stage:'draft',draft:newDraft(seed,response.banned),battle:null,recorded:false,summaries:[],ranked:{mode,status:'draft'}});
-    setConfirmNew(false);setConfirmAbandon(false);setPendingMode(null);setPaused(false);navigate('game');
-  };
-  const beginRanked=async(mode:'daily'|'weekly')=>{
-    if(!onlineConfigured){setOnlineNotice('Ranking online ainda não está conectado. A Jornada Casual funciona sem internet.');return;}
-    setOnlineBusy(true);
-    try{
-      const response=await onlineCall<{profile:{handle:string}|null}>('profile');
-      if(!response.profile){setPendingMode(mode);setNameDialog(true);}else{setProfile(p=>{const n={...p,publicHandle:response.profile!.handle};save('profile',n);return n;});await prepareRanked(mode);}
-    }catch(error){setOnlineNotice(error instanceof Error?error.message:'Não foi possível abrir o desafio online.');}
-    finally{setOnlineBusy(false);}
-  };
+  /*
+   * Um jogo só, e ele é ranqueado (pedido do jogador: "não existe casual e
+   * ranqueada, tudo é ranqueado"). Com a conta conectada, falta só o nome
+   * público: na primeira jornada sem ele, o jogo pede o nome e segue.
+   */
+  const contaConectada=()=>onlineConfigured&&conta!==null&&conta.origem!=='convidado';
   const saveHandle=async()=>{
     setOnlineBusy(true);
-    try{const response=await onlineCall<{profile:{handle:string}}> ('profile',{handle:draftHandle});setProfile(p=>{const n={...p,publicHandle:response.profile.handle};save('profile',n);return n;});setNameDialog(false);if(pendingMode)await prepareRanked(pendingMode);}
+    try{const response=await onlineCall<{profile:{handle:string}}> ('profile',{handle:draftHandle});setProfile(p=>{const n={...p,publicHandle:response.profile.handle};save('profile',n);return n;});setNameDialog(false);if(pendingStart){setPendingStart(false);abreJornada();}}
     catch(error){setOnlineNotice(error instanceof Error?error.message:'Não foi possível salvar o nome.');}
     finally{setOnlineBusy(false);}
   };
-  const startNew=()=>{
-    const seed=crypto.getRandomValues(new Uint32Array(1))[0];
-    changeRun({seed,team:[],encounters:generateCampaign(seed),index:0,stage:'draft',draft:newDraft(seed),battle:null,recorded:false,summaries:[]});setPendingMode(null);setPaused(false);setConfirmNew(false);setConfirmAbandon(false);navigate('game');
+  const startNew=async()=>{
+    if(contaConectada()&&!profile.publicHandle){
+      setOnlineBusy(true);
+      try{
+        const response=await onlineCall<{profile:{handle:string}|null}>('profile');
+        if(!response.profile){setConfirmNew(false);setPendingStart(true);setNameDialog(true);return;}
+        setProfile(p=>{const n={...p,publicHandle:response.profile!.handle};save('profile',n);return n;});
+      }catch{/* sem servidor: joga do mesmo jeito, só fora do ranking */}
+      finally{setOnlineBusy(false);}
+    }
+    abreJornada();
   };
-  const requestNew=()=>{setPendingMode(null);if(run&&(run.stage!=='result'||run.battle?.winner==='player'&&run.index<9))setConfirmNew(true);else startNew();};
-  const requestRanked=(mode:'daily'|'weekly')=>{setPendingMode(mode);if(run&&(run.stage!=='result'||run.battle?.winner==='player'&&run.index<9))setConfirmNew(true);else void beginRanked(mode);};
+  const abreJornada=()=>{
+    const seed=crypto.getRandomValues(new Uint32Array(1))[0];
+    changeRun({seed,team:[],encounters:generateCampaign(seed),index:0,stage:'draft',draft:newDraft(seed),battle:null,recorded:false,summaries:[]});setPaused(false);setConfirmNew(false);setConfirmAbandon(false);navigate('game');
+  };
+  const requestNew=()=>{if(run&&(run.stage!=='result'||run.battle?.winner==='player'&&run.index<9))setConfirmNew(true);else void startNew();};
   const startBattle=async(index:number)=>{
     const current=runRef.current;if(!current)return;
     const team=current.draft.team;
     let ranked=current.ranked,seed=current.seed,encounters=current.ranked?current.encounters:current.stage==='draft'?generateCampaign(current.seed,team):current.encounters;
     /*
-     * A Jornada normal também vale o ranking da Temporada (pedido do jogador:
-     * "os recordes não aparecem no ranking"). Com a conta conectada, o
-     * servidor abre a jornada e sorteia os rivais (a seed); no fim, ele refaz
-     * as lutas e registra a pontuação, igual à Ranqueada. Sem conta, sem
-     * internet ou com o servidor fora, a jornada segue normal, só fora do
-     * ranking — jogar nunca fica bloqueado por isso.
+     * Toda jornada vale o ranking (Hoje, Semana e Geral). Com a conta
+     * conectada, o servidor abre a jornada e sorteia os rivais (a seed); no
+     * fim, ele refaz as lutas e registra a pontuação. Sem conta, sem internet
+     * ou com o servidor fora, a jornada segue normal, só fora do ranking —
+     * jogar nunca fica bloqueado por isso.
      */
-    if(index===0&&!ranked&&current.stage==='draft'&&onlineConfigured&&conta!==null&&conta.origem!=='convidado'){
+    if(index===0&&!ranked&&current.stage==='draft'&&contaConectada()){
       setOnlineBusy(true);
       try{
         const result=await Promise.race([onlineCall<{run:{id:string;seed:number}}>('start',{mode:'free',team}),new Promise<never>((_,falha)=>setTimeout(()=>falha(new Error('O servidor demorou.')),8000))]);
@@ -280,12 +270,12 @@ export default function App(){
     <ToqueGlobal/>
     <Cabecalho tela={screen} menu={menu} onMenu={setMenu} onNavigate={navigate} recorde={profile.recordePontos??0} apelido={profile.publicHandle} online={onlineConfigured} total={characters.length}/>
     <main key={`${screen}-${screen==='game'?run?.stage??'idle':'page'}`} className={screen==='game'&&run?.stage==='battle'?'main battle-main screen-enter':'main screen-enter'}>
-      {screen==='home'&&<Home profile={profile} run={run} conta={conta!==null&&conta.origem!=='convidado'} onPlay={requestNew} onRanked={requestRanked} onContinue={()=>{if(run?.stage==='battle'&&run.battle){direction.current=directionFor(run);setPresentation({battle:direction.current.visible,beat:direction.current.active});}navigate('game');setPaused(run?.stage==='battle');}} onAbandon={()=>setConfirmAbandon(true)} onNavigate={navigate} onInstall={()=>void install()}/>}
+      {screen==='home'&&<Home profile={profile} run={run} conta={conta!==null&&conta.origem!=='convidado'} onPlay={requestNew} onContinue={()=>{if(run?.stage==='battle'&&run.battle){direction.current=directionFor(run);setPresentation({battle:direction.current.visible,beat:direction.current.active});}navigate('game');setPaused(run?.stage==='battle');}} onAbandon={()=>setConfirmAbandon(true)} onNavigate={navigate} onInstall={()=>void install()}/>}
       {screen==='characters'&&<CharactersScreen onDetails={setDetails}/>}
       {screen==='ranking'&&<RankingScreen handle={profile.publicHandle} conta={conta!==null&&conta.origem!=='convidado'} onConta={()=>navigate('conta')} recorde={profile.recordePontos??0}/>}
       {screen==='conta'&&<AccountScreen autenticacao={autenticacao} conta={conta} profile={profile} conectado={onlineConfigured} google={googleConfigured} aoMudarPerfil={p=>{save('profile',p);setProfile(p);}}/>}
       {screen==='help'&&<HelpScreen onPlay={requestNew}/>}
-      {screen==='settings'&&<SettingsScreen settings={settings} onChange={changeSettings} onReset={reset} onGaleria={()=>navigate('vfx')} ranking={onlineConfigured?{nome:profile.publicHandle,onEditar:()=>{setPendingMode(null);setDraftHandle(profile.publicHandle??'');setNameDialog(true);}}:undefined}/>}
+      {screen==='settings'&&<SettingsScreen settings={settings} onChange={changeSettings} onReset={reset} onGaleria={()=>navigate('vfx')} ranking={onlineConfigured?{nome:profile.publicHandle,onEditar:()=>{setPendingStart(false);setDraftHandle(profile.publicHandle??'');setNameDialog(true);}}:undefined}/>}
       {screen==='game'&&run?.stage==='draft'&&<DraftScreen draft={run.draft} primeiroRival={run.encounters[0]} onPick={id=>changeRun({...run,draft:pickDraft(run.draft,id)})} onSkip={()=>changeRun({...run,draft:skipDraft(run.draft)})} onDetails={setDetails} onStart={()=>void startBattle(0)} onAbandon={()=>setConfirmAbandon(true)}/>}
       {screen==='game'&&run?.stage==='battle'&&run.battle&&<BattleScreen battle={presentation&&direction.current?.battle===run.battle?presentation.battle:run.battle} beat={presentation&&direction.current?.battle===run.battle?presentation.beat:null} index={run.index} name={run.encounters[run.index].name} settings={settings} paused={paused||!!details}  onPause={()=>setPaused(!paused)} onAbandon={()=>setConfirmAbandon(true)} onSettings={changeSettings} onExit={()=>{setPaused(true);navigate('home');}}/>}
       {screen==='game'&&run?.stage==='result'&&<ResultScreen run={run} onNext={()=>void startBattle(run.index+1)} onRestart={requestNew} onAbandon={()=>setConfirmAbandon(true)} onHome={()=>navigate('home')} onRanking={()=>navigate('ranking')} onRetry={()=>{if(run.ranked)changeRun({...run,ranked:{...run.ranked,status:'validating'}});}} auto={settings.auto} onAuto={auto=>changeSettings({...settings,auto})}/>}
@@ -294,8 +284,8 @@ export default function App(){
       {!storageAvailable&&<p role="alert" className="storage-warning">Não foi possível salvar neste navegador. Sua sessão continua, mas pode não ser recuperada ao fechar.</p>}
     </main>
     {details&&<CharacterModal character={byId[details]} onClose={()=>setDetails(null)}/>}
-    {confirmNew&&<InfoDialog title="Começar uma nova jornada?" icone={<RotateCcw/>} cor="#ffb86b" onClose={()=>setConfirmNew(false)}><p>A jornada de agora some. <b>Seu recorde fica salvo.</b></p><div className="result-actions"><button className="danger" onClick={()=>pendingMode?void beginRanked(pendingMode):startNew()}>Descartar e começar outra <ArrowUpRight size={18}/></button><button className="secondary" onClick={()=>setConfirmNew(false)}>Continuar jornada</button></div></InfoDialog>}
-    {nameDialog&&<InfoDialog title="Seu nome no ranking" icone={<UserPen/>} cor="#86e3a8" onClose={()=>setNameDialog(false)}><p>De 3 a 16 letras. Aparece junto do seu trio e dos seus pontos.</p><input className="handle-input" aria-label="Nome público" maxLength={16} value={draftHandle} onChange={e=>setDraftHandle(e.target.value)} placeholder="Seu nome no Nexus"/><p>Prévia: <strong>{draftHandle.trim()||'Seu nome'}</strong></p><button className="primary" disabled={onlineBusy} onClick={()=>void saveHandle()}>Confirmar nome</button></InfoDialog>}
+    {confirmNew&&<InfoDialog title="Começar uma nova jornada?" icone={<RotateCcw/>} cor="#ffb86b" onClose={()=>setConfirmNew(false)}><p>A jornada de agora some. <b>Seu recorde fica salvo.</b></p><div className="result-actions"><button className="danger" onClick={()=>void startNew()}>Descartar e começar outra <ArrowUpRight size={18}/></button><button className="secondary" onClick={()=>setConfirmNew(false)}>Continuar jornada</button></div></InfoDialog>}
+    {nameDialog&&<InfoDialog title="Seu nome no ranking" icone={<UserPen/>} cor="#86e3a8" onClose={()=>{setNameDialog(false);/* sem nome, a jornada começa do mesmo jeito, só fora do ranking */if(pendingStart){setPendingStart(false);abreJornada();}}}><p>De 3 a 16 letras. Aparece junto do seu trio e dos seus pontos.</p><input className="handle-input" aria-label="Nome público" maxLength={16} value={draftHandle} onChange={e=>setDraftHandle(e.target.value)} placeholder="Seu nome no Nexus"/><p>Prévia: <strong>{draftHandle.trim()||'Seu nome'}</strong></p><button className="primary" disabled={onlineBusy} onClick={()=>void saveHandle()}>Confirmar nome</button></InfoDialog>}
     {onlineNotice&&<InfoDialog title="Conexão do ranking" icone={<WifiOff/>} cor="#ff9a8a" onClose={()=>setOnlineNotice('')}><p role="alert">{onlineNotice}</p><button className="primary" onClick={()=>setOnlineNotice('')}>Entendi</button></InfoDialog>}
     {confirmAbandon&&<InfoDialog title="Desistir desta jornada?" icone={<Flag/>} cor="#ff7a6b" onClose={()=>setConfirmAbandon(false)}><p>A jornada de agora some e você monta um trio novo. <b>Seu recorde fica salvo.</b></p><div className="result-actions"><button className="danger" onClick={startNew}>Desistir e começar outra <ArrowUpRight size={18}/></button><button className="secondary" onClick={()=>setConfirmAbandon(false)}>Continuar jornada</button></div></InfoDialog>}
     {installHelp&&<InfoDialog title={installed?'O NEXUS já está instalado':'Leve seu trio no bolso'} icone={<Download/>} cor="#8fd3ff" onClose={()=>setInstallHelp(false)}><p>{installed?'Abra o jogo pelo ícone na tela inicial do aparelho.':<><b>Android:</b> menu do navegador → “Instalar aplicativo”.<br/><b>iPhone:</b> Compartilhar → “Adicionar à Tela de Início”.</>}</p><p>O progresso fica neste aparelho e o jogo abre mesmo sem internet.</p><button className="primary" onClick={()=>setInstallHelp(false)}>Entendi</button></InfoDialog>}
