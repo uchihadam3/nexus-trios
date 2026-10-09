@@ -89,7 +89,28 @@ export function BattleEffects({battle,beat,anchors,enabled,reduced,medal=80}:{ba
     if(landed){
       const dur=reduced?.35:Math.max(.42,D*(1-I)*fam.tempo);
       const giroBase=(fam.giro??0)+GIRO_DA_VARIANTE[perfil?.variant??0];
+      // efeitos que contam a mecânica por cima da família do golpe: quem foi levantado por um
+      // aliado (a do renascer já é o próprio beat) e quem foi Provocado
+      const sobre=(alvo:string,nome:VfxFamily,chaveDoNo:string,atraso:number)=>{
+        const p=point(alvo),f=familia(nome),t=Math.min(medal*f.escala,Math.min(size.w,size.h)*.92);
+        nodes.push(camada(f.impacto,{left:`${p.x}%`,top:`${p.y}%`,width:t,height:t,'--fx-cor':f.cor,'--ang':'0deg','--flip':1,'--dur':s(Math.max(.6,dur*1.1)),'--delay':s(atraso)},`fxl-impacto fxl-sobre ${reduced?'fxl-parado':''}`,chaveDoNo));
+      };
+      // um golpe que ataca o rival e também cura ou reforça alguém do próprio trio (o soco da Sakura
+      // que cura, o golpe do Gohan que fortalece ele mesmo): o aliado ganha o efeito do que recebeu,
+      // nunca o desenho do ataque — senão parece que ele também apanhou
+      const ladoDe=(uid?:string)=>battle.fighters.find(f=>f.uid===uid)?.side;
+      const lado=ladoDe(beat.event.source);
+      const ataca=beat.events.some(e=>e.source===beat.event.source&&e.kind==='damage'&&!!e.target&&ladoDe(e.target)!==lado);
+      const apoioPara=(uid:string):VfxFamily|null=>{
+        const meus=beat.events.filter(e=>e.target===uid&&e.source===beat.event.source&&revelado(beat,e)&&!(e.label in ROTULO_DA_MECANICA)&&e.label!=='Guarda do golpe');
+        return meus.some(e=>e.kind==='heal')?'cura':meus.some(e=>e.kind==='shield')?'escudo':meus.some(e=>e.kind==='status')?'reforco':null;
+      };
       alvos.forEach((uid,i)=>{
+        if(ataca&&ladoDe(uid)===lado){
+          const apoio=apoioPara(uid);
+          if(apoio)sobre(uid,apoio,`apoio-${id}-${uid}`,.12);
+          return;
+        }
         const p=point(uid),q=px(p),vx=q.x-a.x,vy=q.y-a.y;
         const direcao=Math.atan2(vy,vx)*180/Math.PI;
         const espelho=!fam.aponta&&vx<-1?-1:1;
@@ -99,12 +120,6 @@ export function BattleEffects({battle,beat,anchors,enabled,reduced,medal=80}:{ba
         if(fam.acento&&i===0&&!reduced)nodes.push(camada(fam.acento,{left:`${p.x}%`,top:`${p.y}%`,width:t*.62,height:t*.62,'--ang':`${direcao}deg`,'--dur':s(Math.max(.35,dur*.6))},'fxl-impacto fxl-acento',`ac-${id}-${uid}`));
         nodes.push(camada(fam.impacto,{left:`${p.x}%`,top:`${p.y}%`,width:t,height:t,'--ang':`${giro}deg`,'--flip':espelho,'--dur':s(dur),'--delay':s(area?i*.07:0)},`fxl-impacto ${reduced?'fxl-parado':''}`,`imp-${id}-${uid}`));
       });
-      // efeitos que contam a mecânica por cima da família do golpe: quem foi levantado por um
-      // aliado (a do renascer já é o próprio beat) e quem foi Provocado
-      const sobre=(alvo:string,nome:VfxFamily,chaveDoNo:string,atraso:number)=>{
-        const p=point(alvo),f=familia(nome),t=Math.min(medal*f.escala,Math.min(size.w,size.h)*.92);
-        nodes.push(camada(f.impacto,{left:`${p.x}%`,top:`${p.y}%`,width:t,height:t,'--fx-cor':f.cor,'--ang':'0deg','--flip':1,'--dur':s(Math.max(.6,dur*1.1)),'--delay':s(atraso)},`fxl-impacto fxl-sobre ${reduced?'fxl-parado':''}`,chaveDoNo));
-      };
       // cada uma aparece no passo da cadeia em que acontece (a reação depois do golpe)
       for(const e of beat.events){
         if(!revelado(beat,e))continue;
