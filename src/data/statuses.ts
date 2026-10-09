@@ -27,4 +27,5 @@ export const statuses: Record<StatusId,{name:string;color:string;stack:'refresh'
   silenced:{name:'Silenciado',color:'#b6a3d7',stack:'refresh',cap:1,tone:'negativo',description:'Não inicia habilidades; preparações em andamento continuam.'},
   strengthened:{name:'Fortalecido',color:'#e2f391',stack:'add',cap:.8,tone:'positivo',description:'Causa mais dano.'},
   weakened:{name:'Enfraquecido',color:'#bca4cf',stack:'refresh',cap:.6,tone:'negativo',description:'Causa menos dano.'},
+  provoked:{name:'Provocado',color:'#ff7a52',stack:'refresh',cap:1,tone:'negativo',description:'Só consegue mirar em quem provocou: o ataque básico e as habilidades de um alvo só vão nele.'},
 };

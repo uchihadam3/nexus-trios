@@ -26,7 +26,7 @@ CORES = {
     "exposed": "#ff8a66", "paralyzed": "#ffd75e", "protected": "#6fe3cf", "marked": "#ff6b7d",
     "slow": "#9fa8ff", "haste": "#c8f560", "confused": "#d68cff", "rooted": "#d9dde6",
     "regen": "#7fe88f", "burning": "#ff8a3d", "electric": "#ffe45c", "silenced": "#b49cff",
-    "strengthened": "#ffd166", "weakened": "#b8a2d6",
+    "strengthened": "#ffd166", "weakened": "#b8a2d6", "provoked": "#ff7048",
 }
 
 
@@ -184,11 +184,26 @@ def espada(d, quebrada=False, invertida=False):
             poly(d, [(x - 0.2, -0.28), (x, -0.58), (x + 0.2, -0.28), (x + 0.2, -0.1), (x, -0.38), (x - 0.2, -0.1)])
 
 
+def raiva(d):
+    """A marca de raiva dos desenhos: quatro arcos se encarando, com um vão em cruz no meio."""
+    for sx in (-1, 1):
+        for sy in (-1, 1):
+            cx, cy = sx * 0.86, sy * 0.86
+            pts = []
+            for i in range(40):
+                # o arco que olha para o centro, de um eixo ao outro
+                a0 = math.atan2(-sy, -sx)
+                a = a0 - 0.72 + 1.44 * i / 39
+                pts.append((cx + 0.6 * math.cos(a), cy + 0.6 * math.sin(a)))
+            linha(d, pts, 0.33)
+
+
 SIMBOLOS = {
     "burning": chama, "confused": espiral, "electric": raio, "exposed": escudo_rachado,
     "haste": setas, "marked": mira, "paralyzed": pausa, "protected": escudo,
     "regen": coracao_mais, "rooted": cadeado, "silenced": balao_riscado, "slow": ampulheta,
     "strengthened": espada, "weakened": lambda d: espada(d, quebrada=True, invertida=True),
+    "provoked": raiva,
 }
 
 
@@ -231,12 +246,42 @@ def desenha(nome: str) -> Image.Image:
     return im.resize((FINAL, FINAL), Image.LANCZOS)
 
 
+NOMES = {
+    "exposed": "Exposto", "paralyzed": "Paralisado", "protected": "Protegido", "marked": "Marcado", "slow": "Lento",
+    "haste": "Acelerado", "confused": "Confuso", "rooted": "Preso", "regen": "Regeneração", "burning": "Queimando",
+    "electric": "Eletrificado", "silenced": "Silenciado", "strengthened": "Fortalecido", "weakened": "Enfraquecido",
+    "provoked": "Provocado",
+}
+
+
+def folha():
+    """A folha com todos os ícones (4 por linha) e o manifesto de recorte, na ordem do jogo."""
+    import json
+    cols, cel, margem = 4, 160, 8
+    ordem = list(NOMES)
+    linhas = math.ceil(len(ordem) / cols)
+    W, H = margem + cols * (cel + margem), margem + linhas * (cel + margem)
+    sheet = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+    itens = []
+    for i, nome in enumerate(ordem):
+        r, c = divmod(i, cols)
+        x, y = margem + c * (cel + margem), margem + r * (cel + margem)
+        sheet.alpha_composite(Image.open(OUT / f"{nome}.png").convert("RGBA"), (x + 16, y + 16))
+        itens.append({"id": nome, "name": NOMES[nome], "path": f"/assets/statuses/{nome}.png", "row": r, "column": c,
+                      "cell": {"x": x, "y": y, "width": cel, "height": cel}, "crop": {"x": x + 16, "y": y + 16, "width": FINAL, "height": FINAL}})
+    sheet.save(ROOT / "public/assets/sheets/statuses.png", optimize=True)
+    manifesto = {"category": "statuses", "sourceSheet": "/assets/sheets/statuses.png", "format": "PNG RGBA", "resolution": [W, H],
+                 "columns": cols, "rows": linhas, "cell": [cel, cel], "gutter": margem, "margin": margem, "count": len(ordem), "items": itens}
+    (ROOT / "public/assets/sheets/statuses/manifest.json").write_text(json.dumps(manifesto, indent=2, ensure_ascii=False) + "\n")
+
+
 def main():
     OUT.mkdir(parents=True, exist_ok=True)
     for nome in SIMBOLOS:
         destino = OUT / f"{nome}.png"
         desenha(nome).save(destino, optimize=True)
         print(f"{nome:13s} {destino.stat().st_size / 1024:5.1f} KB")
+    folha()
 
 
 if __name__ == "__main__":
