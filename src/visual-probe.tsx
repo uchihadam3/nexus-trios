@@ -62,6 +62,9 @@ if(scenario==='estados'||scenario==='nomes'){
 /* Refletir + Espinhos (o golpe volta) e Vampirismo (o golpe cura). */
 if(scenario==='refletir'){goku.statuses.push({id:'reflect',remaining:6,duration:6,intensity:.35,source:goku.uid},{id:'thorns',remaining:6,duration:6,intensity:16,source:goku.uid});source=sakura;target=goku;effects=[{kind:'damage',value:190}];selected=[goku];}
 if(scenario==='vampiro'){sakura.hp-=300;sakura.statuses.push({id:'vampirism',remaining:8,duration:8,intensity:.3,source:sakura.uid});source=sakura;target=goku;effects=[{kind:'damage',value:220}];selected=[goku];}
+/* Purificar (tira debuffs do aliado) e Dissipar (tira buffs do rival). */
+if(scenario==='purificar'){naruto.statuses.push({id:'paralyzed',remaining:4,duration:4,intensity:1,source:goku.uid},{id:'slow',remaining:6,duration:6,intensity:.2,source:goku.uid});source=sakura;target=naruto;effects=[{kind:'cleanse',value:2}];selected=[naruto];}
+if(scenario==='dissipar'){goku.statuses.push({id:'protected',remaining:6,duration:6,intensity:.3,source:goku.uid},{id:'strengthened',remaining:6,duration:6,intensity:.2,source:goku.uid});source=gojo;target=goku;effects=[{kind:'damage',value:120},{kind:'dispel',value:2}];selected=[goku];}
 /* Reviver e Renascer: em brasas esperando, e a volta sozinho. */
 if(scenario==='renascendo'){vegeta.hp=0;vegeta.renascendo=1.6;source=sakura;target=goku;}
 const renasce=scenario==='renasce';

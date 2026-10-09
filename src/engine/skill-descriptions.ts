@@ -321,6 +321,8 @@ export function presentEffect(effect:Effect,defaultTarget:Target,modo:ModoDeAlvo
     case 'investigate':return `+${n(effect.value)} Investigação${target}`;
     case 'revive':return `Levanta um aliado caído com ${pct(effect.value)} da Vida · 1 vez por luta`;
     case 'lifesteal':return `Roubo de vida: recupera ${pct(effect.value)} do dano causado`;
+    case 'cleanse':return `Purifica: tira ${effect.value>1?`até ${n(effect.value)} debuffs`:'1 debuff'}${target}`;
+    case 'dispel':return `Dissipa: tira ${effect.value>1?`até ${n(effect.value)} buffs`:'1 buff'}${target}`;
     case 'deathnote':return 'Com 100 Investigação: elimina o alvo vulnerável; contra imune, 110 de dano e Exposto +55% por 14 s';
     case 'charge':return `+${n(effect.value)}% de Carga para habilidades${target}`;
     case 'store':return `Guarda ${n(effect.value)} de energia (até ${n(effect.cap)})`;

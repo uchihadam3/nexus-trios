@@ -89,6 +89,27 @@ export const GANHA_STATUS: Record<string, GanhaStatus[]> = {
   toph: [{ habilidade: 1, status: 'thorns', valor: 12, duracao: 6, alvo: 'allAllies', troca: 'marked' }], // pontas de pedra
   frozone: [{ habilidade: 1, status: 'thorns', valor: 14, duracao: 6, alvo: 'allAllies' }], // a parede vira estalactites
   gaara: [{ habilidade: 0, status: 'thorns', valor: 18, duracao: 6, alvo: 'allyWeak' }], // a areia responde sozinha
+  sonic: [{ habilidade: 0, status: 'thorns', valor: 12, duracao: 5, alvo: 'self' }], // o Spin Dash vira uma bola de espinhos
+};
+
+/**
+ * Purificar (tira debuffs dos aliados) e Dissipar (tira buffs dos rivais):
+ * `quantos` Status saem, os que mais pesam primeiro.
+ */
+export interface TiraStatus { habilidade: number; tipo: 'cleanse' | 'dispel'; quantos: number; alvo: Target; troca?: StatusId }
+export const TIRA_STATUS: Record<string, TiraStatus> = {
+  sailormoon: { habilidade: 1, tipo: 'cleanse', quantos: 2, alvo: 'allAllies', troca: 'slow' }, // "limpa o que gruda" no trio
+  iroh: { habilidade: 0, tipo: 'cleanse', quantos: 2, alvo: 'self' }, // o chá de jasmim acalma tudo
+  samuraijack: { habilidade: 1, tipo: 'cleanse', quantos: 2, alvo: 'self', troca: 'exposed' }, // a postura serena limpa a mente
+  zelda: { habilidade: 1, tipo: 'cleanse', quantos: 1, alvo: 'allAllies', troca: 'slow' }, // a barreira sagrada purifica
+  professorx: { habilidade: 0, tipo: 'cleanse', quantos: 1, alvo: 'allAllies' }, // tira a interferência da mente do trio
+  aang: { habilidade: 1, tipo: 'cleanse', quantos: 2, alvo: 'allyWeak' }, // a água que cura também lava
+  constantine: { habilidade: 1, tipo: 'dispel', quantos: 2, alvo: 'enemyWeak', troca: 'slow' }, // Exorcismo
+  scarletwitch: { habilidade: 1, tipo: 'dispel', quantos: 1, alvo: 'enemyCast', troca: 'slow' }, // desfaz o feitiço de quem prepara
+  rogue: { habilidade: 1, tipo: 'dispel', quantos: 2, alvo: 'enemyCast' }, // "Força roubada": toma o que o rival tinha
+  frieren: { habilidade: 0, tipo: 'dispel', quantos: 2, alvo: 'enemyStrong' }, // lê a mana e desmonta a defesa
+  billcipher: { habilidade: 1, tipo: 'dispel', quantos: 1, alvo: 'enemyWeak', troca: 'confused' }, // realidade invertida
+  darkseid: { habilidade: 1, tipo: 'dispel', quantos: 1, alvo: 'enemyStrong', troca: 'weakened' }, // o tirano arranca a proteção
 };
 
 type Mudanca = (effects: Effect[]) => Effect[];
@@ -104,6 +125,8 @@ const mudancasDe = (id: string): Map<number, Mudanca[]> => {
   ]);
   // o roubo de vida vem depois do dano: cura pelo que a habilidade causou
   if (roubo) poe(roubo.habilidade, (e) => [...e.filter(semStatus(roubo.troca)), { kind: 'lifesteal', value: roubo.fracao }]);
+  const tira = TIRA_STATUS[id];
+  if (tira) poe(tira.habilidade, (e) => [...e.filter(semStatus(tira.troca)), { kind: tira.tipo, value: tira.quantos, target: tira.alvo }]);
   for (const g of GANHA_STATUS[id] ?? []) poe(g.habilidade, (e) => [
     ...e.filter(semStatus(g.troca)),
     { kind: 'status', status: g.status, value: g.valor, duration: g.duracao, ...(g.alvo ? { target: g.alvo } : {}) },

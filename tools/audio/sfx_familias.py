@@ -1397,6 +1397,22 @@ def provocar(rng, v):
 
 
 # ================================================================== refletir, espinhos, vampirismo
+def dissipar(rng, v):
+    """Dissipar: um zumbido mágico que segura a nota, racha (estalos de vidro) e se desfaz num
+    sopro que desce."""
+    x = _z(1.2)
+    n = n_de(0.35)
+    t = np.arange(n) / SR
+    zumbe = sum(seno(np.full(n, nota(m)) * (1 + 0.006 * np.sin(2 * math.pi * 7 * t)), n) for m in (76, 83)) * env(n, 0.03, 0.2, segura=0.12) * 0.07
+    poe(x, zumbe, 0.0)
+    for k in range(5):
+        poe(x, modal(n_de(0.3), nota(88 + 2 * k), rng=rng, **VIDRO) * env(n_de(0.3), 0.001, 0.12) * (0.12 - 0.015 * k), 0.24 + 0.035 * k)
+        poe(x, estalo(rng, n_de(0.02), 2500, 9000, 0.003) * 0.25, 0.24 + 0.035 * k)
+    m = n_de(0.6)
+    poe(x, assobio(rng, m, 7000, 1500, 0.8, 0.4) * sobe_e_some(m, 0.2, 1.4) * 0.14, 0.32)
+    return reverb(x, 0.7, 0.32, 9000)
+
+
 def reflexo(rng, v):
     """Refletir: o golpe bate num espelho (tinido de vidro com brilho) e volta num assobio que sobe."""
     x = _z(1.1)
@@ -1474,7 +1490,7 @@ SONS_NOVOS = {
 _BAIXO = {"brasas-renascendo", "cura-em-area", "regeneracao", "grito-de-guerra", "velocidade", "escudo-tech", "barreira-magica", "armadura", "resgate",
           "bencao", "lanche", "purificacao", "enfraquecimento", "lentidao", "marca", "silencio", "medo", "exposto", "hipnose",
           "encanto", "runas", "lua", "petalas", "regeneracao", "confusao", "estrela-invencivel", "disco", "flecha"}
-_ALTO = {"reflexo", "espinhos", "vampirismo", "provocar", "renascer", "ressurreicao", "soco-serio", "supernova", "kamehameha", "canhao-de-energia", "foguete", "tempestade", "punho-gigante", "pisao",
+_ALTO = {"dissipar", "reflexo", "espinhos", "vampirismo", "provocar", "renascer", "ressurreicao", "soco-serio", "supernova", "kamehameha", "canhao-de-energia", "foguete", "tempestade", "punho-gigante", "pisao",
          "martelo", "espadao", "buraco-negro", "tsunami", "transformacao-v2", "dragao", "susanoo", "dominio"}
 _ANTES = {"chidori-carga": "faíscas do Chidori", "esfera-espiral-carga": "a esfera girando", "kamehameha-carga": "carga do Kamehameha",
           "kamehameha-feixe": "o feixe saindo", "marretada-giro": "a marreta subindo"}

@@ -685,6 +685,20 @@
   "laco": true,
   "bytes": 14102
  },
+ "dissipar": {
+  "descricao": "anel de proteção do rival que racha e se desfaz",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 69986
+ },
  "distorcao": {
   "descricao": "distorção",
   "quadros": 12,
