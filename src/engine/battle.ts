@@ -29,6 +29,8 @@ export function createBattle(player:string[],enemy:string[],seed=Date.now(),enem
 export function targets(b:Battle,actor:Fighter,rule:Target,effects:Effect[]=[],record=true):Fighter[] {
   const allies=friendly(b,actor).sort((a,z)=>a.characterId.localeCompare(z.characterId)),enemies=hostile(b,actor).sort((a,z)=>a.characterId.localeCompare(z.characterId));
   if(rule==='self')return alive(actor)?[actor]:[];
+  // Reviver: o aliado caído mais forte que ainda pode voltar (cada lutador só volta uma vez)
+  if(rule==='allyFallen')return caidos(b,actor).slice(0,1);
   if(rule==='allAllies')return allies;
   if(rule==='allEnemies')return enemies;
   if(actor.characterId==='light'&&rule==='enemyWeak'&&effects.some(effect=>effect.kind==='investigate')){
@@ -84,6 +86,31 @@ export function targets(b:Battle,actor:Fighter,rule:Target,effects:Effect[]=[],r
  */
 export const PREPARO_LEVE=.5;
 const interrompivel=(x:Fighter)=>!!x.cast&&x.cast.duration>PREPARO_LEVE+1e-6;
+
+/*
+ * Reviver e Renascer (pedido do jogador: "levantar personagem caído").
+ *
+ * Reviver é um efeito de habilidade: levanta o aliado caído mais forte com
+ * uma fração da Vida. Quem levanta faz isso uma vez por luta, e cada lutador
+ * só volta uma vez (`voltou`). Renascer é de quem tem `renascer` na ficha: ao
+ * cair, fica em brasas por `atraso` segundos e volta sozinho. A Death Note
+ * impede (execução não tem volta). Enquanto alguém vai renascer, o trio dele
+ * ainda não perdeu.
+ */
+const caidos=(b:Battle,actor:Fighter)=>b.fighters.filter(x=>x.side===actor.side&&!alive(x)&&!x.voltou&&!((x.renascendo??0)>0))
+  .sort((a,z)=>byId[z.characterId].power-byId[a.characterId].power||a.uid.localeCompare(z.uid));
+const podeReviver=(b:Battle,f:Fighter)=>!f.reviveu&&caidos(b,f).length>0;
+const temReviver=(s:Skill)=>s.effects.some(e=>e.kind==='revive');
+const voltando=(f:Fighter)=>(f.renascendo??0)>0;
+function levanta(b:Battle,source:Fighter,target:Fighter,fracao:number){
+  target.hp=Math.max(1,Math.round(target.maxHp*fracao));target.voltou=true;target.renascendo=0;
+  target.statuses=[];target.shields=[];target.cast=null;target.action=0;
+  target.skills.forEach(s=>{s.charge=0;s.cooldown=0;s.executing=0;});
+  if(source.uid!==target.uid){source.stats.healing+=target.hp;source.stats.revives=(source.stats.revives??0)+1;}
+  // voltar à luta pesa como um nocaute ao contrário
+  pressure(b,target.side,D.event.knockout);
+  emit(b,{kind:'revive',source:source.uid,target:target.uid,label:source.uid===target.uid?'Renasceu':'De pé!',value:target.hp});
+}
 
 function gain(b:Battle,f:Fighter,topic:Topic,amount:number,source?:Fighter){
   if(!alive(f))return;
@@ -141,6 +168,8 @@ function damage(b:Battle,source:Fighter,target:Fighter,raw:number){
   if(!alive(target)){
     pressure(b,source.side,D.event.knockout);target.cast=null;target.action=0;target.statuses=[];target.shields=[];source.stats.kills++;
     emit(b,{kind:'ko',source:source.uid,target:target.uid,label:`${byId[target.characterId].name} incapacitado`});
+    const renascer=byId[target.characterId].renascer;
+    if(renascer&&!target.voltou)target.renascendo=renascer.atraso;
   }
 }
 function healing(b:Battle,source:Fighter,target:Fighter,value:number){
@@ -167,6 +196,10 @@ export function applyEffects(b:Battle,source:Fighter,selected:Fighter[],effects:
     const vivosNoAlvo=list.filter(alive).length;
     const fracao=fracaoPorAlvo(vivosNoAlvo);
     for(const target of list){
+      if(effect.kind==='revive'){
+        if(!source.reviveu&&!alive(target)&&!target.voltou&&!voltando(target)&&target.side===source.side){source.reviveu=true;levanta(b,source,target,effect.value);}
+        continue;
+      }
       if(!alive(target))continue;
       switch(effect.kind){
         case 'damage':damage(b,source,target,effect.value*fracao);break;
@@ -211,7 +244,7 @@ export function applyEffects(b:Battle,source:Fighter,selected:Fighter[],effects:
         case 'investigate':{const before=source.investigation[target.uid]??0,after=Math.min(100,before+effect.value);source.investigation[target.uid]=after;const quarters=Math.floor(after/25)-Math.floor(before/25);if(quarters>0)pressure(b,source.side,quarters*D.event.investigationQuarter+(after===100?D.event.investigationComplete:0));if(after===100&&!source.discovered?.[target.uid]){source.discovered??={};source.discovered[target.uid]=byId[target.characterId].deathNoteCompatible?'vulnerable':'immune';emit(b,{kind:'discovery',source:source.uid,target:target.uid,label:source.discovered[target.uid]==='vulnerable'?'Vulnerável à Death Note':'Imune à execução'});}break;}
         case 'deathnote':{
           if((source.investigation[target.uid]??0)<100)break;
-          if(byId[target.characterId].deathNoteCompatible){const value=target.hp;target.hp=0;target.cast=null;target.shields=[];target.statuses=[];source.stats.damage+=value;source.stats.kills++;pressure(b,source.side,D.event.deathNote);emit(b,{kind:'ko',source:source.uid,target:target.uid,label:'Sentença concluída',value});}
+          if(byId[target.characterId].deathNoteCompatible){const value=target.hp;target.hp=0;target.cast=null;target.shields=[];target.statuses=[];target.voltou=true;target.renascendo=0;source.stats.damage+=value;source.stats.kills++;pressure(b,source.side,D.event.deathNote);emit(b,{kind:'ko',source:source.uid,target:target.uid,label:'Sentença concluída',value});}
           else applyEffects(b,source,[target],[{kind:'status',status:'exposed',value:.55,duration:14},{kind:'damage',value:110}]);
           break;
         }
@@ -239,6 +272,7 @@ export function condicaoAtendida(b:Battle,f:Fighter,s:Skill):boolean{
 }
 function appropriate(b:Battle,f:Fighter,s:Skill){
   if(s.requiresSkills?.some(index=>(f.skills[index]?.uses??0)<1))return false;
+  if(temReviver(s)&&podeReviver(b,f))return true;
   if(s.condition==='injured')return targets(b,f,s.target,s.effects).some(x=>x.hp/x.maxHp<.78);
   if(s.condition==='enemyCast')return hostile(b,f).some(interrompivel);
   if(s.condition==='threatened')return friendly(b,f).some(x=>x.hp/x.maxHp<.85)||hostile(b,f).some(interrompivel);
@@ -251,6 +285,7 @@ function skillValue(b:Battle,f:Fighter,s:Skill,selected:Fighter[],intelligence:n
   let value=0;const reasons:string[]=[],tacticalFactor=.65+intelligence/120;
   const add=(label:string,n:number)=>{if(n>0.05){value+=n;reasons.push(`${label} +${n.toFixed(1)}`);}};
   for(const effect of s.effects){
+    if(effect.kind==='revive'){if(podeReviver(b,f))add('levantar aliado caído',70*effect.value*tacticalFactor);continue;}
     const list=(effect.target?targets(b,f,effect.target,[effect],false):selected).filter(alive);
     if(effect.kind==='damage'||effect.kind==='deathnote'||effect.kind==='release'){
       const raw=effect.kind==='release'?(f.storedEnergy??0)*effect.multiplier:effect.value;
@@ -301,7 +336,7 @@ function execute(b:Battle,f:Fighter,index:number,selected:Fighter[]){
   const s=byId[f.characterId].skills[index],eventStart=b.nextEvent;
   emit(b,{kind:'skill',source:f.uid,target:selected[0]?.uid,skill:index,label:s.name,visual:s.icon});
   applyEffects(b,f,selected,s.effects);
-  const effective=b.events.some(e=>e.id>=eventStart&&(['damage','heal','block','interrupt','ko','synergy'].includes(e.kind)||e.kind==='status'&&e.target!==f.uid));
+  const effective=b.events.some(e=>e.id>=eventStart&&(['damage','heal','block','interrupt','ko','synergy','revive'].includes(e.kind)||e.kind==='status'&&e.target!==f.uid));
   if(effective)pressure(b,f.side,s.preparation>=2.5?D.event.grandSkill:D.event.successfulSkill);
   f.stats.skills++;
   f.skills[index].uses=(f.skills[index].uses??0)+1;
@@ -329,7 +364,8 @@ export function updateDominion(b:Battle){
  */
 export const TEMPO_MAXIMO=300;
 export function resolve(b:Battle){
-  const p=b.fighters.some(f=>f.side==='player'&&alive(f)),e=b.fighters.some(f=>f.side==='enemy'&&alive(f));
+  const naLuta=(f:Fighter)=>alive(f)||voltando(f);
+  const p=b.fighters.some(f=>f.side==='player'&&naLuta(f)),e=b.fighters.some(f=>f.side==='enemy'&&naLuta(f));
   if(!p||!e){b.finished=true;b.winner=p?'player':e?'enemy':null;b.reason='Incapacitação da equipe';return;}
   if(b.time>=TEMPO_MAXIMO){
     const vida=(lado:string)=>{const t=b.fighters.filter(f=>f.side===lado);return t.reduce((n,f)=>n+Math.max(0,f.hp)/f.maxHp,0)/t.length;};
@@ -340,7 +376,10 @@ export function stepBattle(b:Battle,observe?:(snapshot:Battle)=>void):Battle {
   if(b.finished)return b;
   b.time+=STEP;b.momentum*=Math.exp(-Math.LN2*STEP/D.memoryHalfLifeSeconds);
   for(const f of b.fighters){
-    if(!alive(f))continue;
+    if(!alive(f)){
+      if(voltando(f)){f.renascendo=Math.max(0,(f.renascendo??0)-STEP);if(f.renascendo<=1e-6)levanta(b,f,f,byId[f.characterId].renascer?.vida??.3);}
+      continue;
+    }
     f.traitTimer=Math.max(0,f.traitTimer-STEP);
     for(const s of [...f.statuses]){
       const origin=b.fighters.find(x=>x.uid===s.source)??f;

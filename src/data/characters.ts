@@ -3,6 +3,7 @@ import type { Character, Effect, Skill, Target, Trait, Visual, ChargeRule } from
 import { expandedCharacters } from './expanded-roster';
 import { intelligenceFor } from './intelligence';
 import { alinharEfeitos } from './alinhar-efeitos';
+import { aplicaMecanicas } from './mecanicas';
 import { FATOR_DA_REGENERACAO,valorDaRegeneracao } from './regeneracao';
 import { AJUSTE_DE_FORCA, AJUSTE_DE_RITMO } from './ajuste-de-forca';
 
@@ -201,7 +202,7 @@ const deBase:Character[] = [
   skill('Joia do Tempo','wave','Retarda todos e reduz preparações pela metade.','Preparações inimigas + tempo',[charge('enemyCast',22),charge('time',3)],[status('slow',.4,8,'allEnemies'),{kind:'interrupt',mode:'reduce',value:.5,target:'allEnemies'}],{target:'allEnemies'}),
   skill('Equilíbrio','psychic','Causa 240 de dano a todos e enfraquece por 9 s.','Tempo em luta + dano causado',[charge('survived',2.8),charge('dealt',7)],[damage(240,'allEnemies'),status('weakened',.25,9,'allEnemies')],{preparation:4.5,target:'allEnemies',cooldown:14})]}),
   ...expandedCharacters.map(c=>imagePortraits[c.id]?{...c,portrait:imagePortraits[c.id]}:c),
-] .map(alinharEfeitos)
+] .map(alinharEfeitos).map(aplicaMecanicas)
  .map(c=>({...c,intelligence:intelligenceFor(c.id,c.tags),
    /* Ponto fraco medido (scripts/escrever-fraquezas.ts): contra o quê ele é ruim e por quê. */
    vulnerability:fraquezas[c.id]??c.vulnerability}));

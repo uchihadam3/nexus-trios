@@ -20,7 +20,7 @@ export const targetNamesEm:Record<Target,string>={
    * celular para dizer a mesma coisa.
    */
   enemyCast:'no inimigo em Preparo',
-  investigated:'no inimigo mais investigado',allyWeak:'no aliado mais ferido',
+  investigated:'no inimigo mais investigado',allyWeak:'no aliado mais ferido',allyFallen:'no aliado caído',
   self:'em si próprio',allEnemies:'em todos os inimigos',allAllies:'em todo o trio',
   randomEnemy:'em um inimigo sorteado',
 };
@@ -40,7 +40,7 @@ export const targetNamesEm:Record<Target,string>={
 export const targetNames:Record<Target,string>={
   enemyWeak:'inimigo mais ferido',enemyStrong:'inimigo mais forte',
   enemyCast:'inimigo em Preparo',
-  investigated:'inimigo mais investigado',allyWeak:'aliado mais ferido',
+  investigated:'inimigo mais investigado',allyWeak:'aliado mais ferido',allyFallen:'aliado caído',
   self:'o próprio personagem',allEnemies:'todos os inimigos',allAllies:'todo o trio',
   randomEnemy:'um inimigo sorteado',
 };
@@ -158,7 +158,7 @@ export interface GrupoDeEfeitos {titulo:string;linhas:LinhaDeEfeito[]}
  * alvo, então herdaria o da habilidade — e um "Guarda 40 de energia" sob o
  * cabeçalho "No inimigo mais ferido" estaria simplesmente mentindo.
  */
-const seExplicaSozinho=new Set<Effect['kind']>(['store','release','deathnote']);
+const seExplicaSozinho=new Set<Effect['kind']>(['store','release','deathnote','revive']);
 const maiuscula=(t:string):string=>t.charAt(0).toUpperCase()+t.slice(1);
 
 /*
@@ -313,6 +313,7 @@ export function presentEffect(effect:Effect,defaultTarget:Target,modo:ModoDeAlvo
     case 'interrupt':return effect.mode==='cancel'?`Interrompe o Preparo${target}`:effect.mode==='delay'?`Atrasa o Preparo em ${secs(effect.value)}${target}`:`Reduz ${pct(effect.value)} do Preparo${target}`;
     case 'shift':return `${effect.value>=0?'Adianta':'Atrasa'} ${pct(Math.abs(effect.value))} do próximo ataque${target}`;
     case 'investigate':return `+${n(effect.value)} Investigação${target}`;
+    case 'revive':return `Levanta um aliado caído com ${pct(effect.value)} da Vida · 1 vez por luta`;
     case 'deathnote':return 'Com 100 Investigação: elimina o alvo vulnerável; contra imune, 110 de dano e Exposto +55% por 14 s';
     case 'charge':return `+${n(effect.value)}% de Carga para habilidades${target}`;
     case 'store':return `Guarda ${n(effect.value)} de energia (até ${n(effect.cap)})`;
@@ -398,6 +399,10 @@ export function quandoAtiva(trait:Trait):{quando:string;limite:string}{
   const limite=trait.cooldown>=.5?`no máximo 1 vez a cada ${secs(trait.cooldown)}`:'';
   const base=QUANDO_EVENTO[trait.on]??`Ao ${topicNames[trait.on]}`;
   return {quando:limite?`${base} · ${limite}`:base,limite};
+}
+/** Renascer (na ficha do personagem, fora do traço): o que acontece quando ele cai. */
+export function textoDoRenascer(r:{vida:number;atraso:number}):string{
+  return `Renasce: ao cair, volta em ${r.atraso.toLocaleString('pt-BR')} s com ${pct(r.vida)} da Vida · 1 vez por luta`;
 }
 export function presentTrait(trait:Trait):TraitPresentation {
   const effects=trait.effects.map(effect=>{

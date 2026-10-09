@@ -372,7 +372,96 @@ def estrela_invencivel(T, t, rng):
     return G, H
 
 
+
+def ressurreicao(T, t, rng):
+    """Reviver: um feixe de luz desce do alto sobre o aliado caído, um anel se acende no chão,
+    penas de luz sobem e uma estrela se abre no instante em que ele se levanta."""
+    G, H = vazio(T)
+    env = apaga(t, 0.8, 1)
+    desce = ease_out(rel(t, 0, 0.32), 2)
+    topo, chao = -1.05, 0.48
+    fundo = topo + (chao - topo) * desce
+    larg = 0.16 + 0.07 * pulso(t, 0.3, 0.75) + 0.08 * np.clip((T.V - topo) / (chao - topo), 0, 1) ** 2
+    corpo_feixe = smooth(larg - np.abs(T.U), 0, larg * 0.7) * smooth(fundo - T.V, -0.02, 0.08) * smooth(T.V - topo, 0, 0.25)
+    gradiente = 0.55 + 0.45 * np.clip((T.V - topo) / (chao - topo), 0, 1)
+    feixe = corpo_feixe * gradiente * (1.35 - 0.5 * rel(t, 0.55, 1))
+    nucleo = smooth(larg * 0.28 - np.abs(T.U), 0, larg * 0.2) * smooth(fundo - T.V, -0.02, 0.06) * smooth(T.V - topo, 0, 0.3)
+    abre = ease_out(rel(t, 0.25, 0.65), 2)
+    anel = (T.ring(0.18 + 0.55 * abre, 0.035, cy=chao, squash=3.6) * 1.3 + T.ring(0.1 + 0.35 * abre, 0.012, cy=chao, squash=3.6)) * janela(t, 0.22, 0.3)
+    penas = []
+    sub = np.random.default_rng(907)
+    for k in range(16):
+        a0 = sub.uniform(0.25, 0.55)
+        f = rel(t, a0, a0 + 0.45)
+        x = sub.uniform(-0.45, 0.45) + 0.08 * math.sin(f * 7 + k)
+        y = chao - 0.05 - f * 1.25
+        a = 0.7 * math.sin(f * 6 + k) + math.pi / 2
+        penas.append((lamina(x - math.cos(a) * 0.06, y - math.sin(a) * 0.06, x + math.cos(a) * 0.06, y + math.sin(a) * 0.06, 0.022), math.sin(math.pi * f)))
+    estrela_brilho = pulso(t, 0.5, 0.85)
+    flare = (T.flare(0, 0.08, 0.75 * estrela_brilho + 0.01, ang=0.0, thin=0.014) + T.flare(0, 0.08, 0.45 * estrela_brilho + 0.01, ang=math.pi / 4, thin=0.01) * 0.6) * estrela_brilho * 2.2
+    halo = T.gauss(0, 0.08, 0.26, 0.34) * estrela_brilho * 1.3
+    G += (feixe + anel + T.polys(penas, 0.004) * 1.3 + flare + halo) * env
+    H += (nucleo * 1.4 + anel * 0.5 + T.polys(penas, 0.004) * 0.6 + flare * 0.9) * env
+    return G, H
+
+
+def renascer(T, t, rng):
+    """Renascer: brasas giram e se juntam no corpo caído, sobem numa coluna de fogo e um par de
+    asas de chama se abre para o alto, soltando penas de brasa."""
+    G, H = vazio(T)
+    junta = rel(t, 0, 0.36)
+    brasas = []
+    for k in range(30):
+        a0 = k / 30 * TAU
+        r = 0.08 + 0.72 * (1 - ease_in(junta, 1.6))
+        a = a0 + junta * 5
+        vivo = 1 - rel(t, 0.34, 0.42)
+        brasas.append((math.cos(a) * r, 0.18 + math.sin(a) * r * 0.42, (0.4 + 0.6 * junta) * vivo))
+    estouro = pulso(t, 0.32, 0.62)
+    n = _subindo(T, 977, t, 0.06, 1.6)
+    coluna = T.gauss(0, -0.15, 0.13, 0.62) * (0.75 + 0.25 * np.clip(n, -1, 1)) * estouro * 1.7
+    abre = back(rel(t, 0.38, 0.72), 1.4)
+    bate = 0.12 * math.sin(rel(t, 0.62, 0.95) * math.pi)
+    asas, fio = T.zero(), T.zero()
+    for lado in (-1, 1):
+        for k in range(8):
+            # as penas de cima apontam para o alto; as de baixo abrem para o lado
+            a = -math.pi / 2 + lado * (0.18 + k * 0.17) - lado * bate
+            comp = (0.92 - 0.06 * k) * abre
+            x1, y1 = lado * 0.05, 0.02
+            x2, y2 = x1 + math.cos(a) * comp, y1 + math.sin(a) * comp * 0.9
+            asas += T.polys([(lamina(x1, y1, x2, y2, 0.075 - 0.005 * k), 1 - 0.07 * k)], 0.012)
+            fio += T.polys([(lamina(x1, y1, x1 + (x2 - x1) * 0.8, y1 + (y2 - y1) * 0.8, 0.02), 1)], 0.005)
+    asas = asas * (0.7 + 0.3 * np.clip(n, -1, 1)) * apaga(t, 0.75, 1)
+    fio = fio * apaga(t, 0.75, 1)
+    penas = []
+    for _ in range(26):
+        f = (rng.uniform(0, 1) + t * 1.2) % 1
+        penas.append((rng.uniform(-0.65, 0.65), -0.55 + f * 1.0, math.sin(math.pi * f) * rng.uniform(0.3, 1) * rel(t, 0.42, 0.6)))
+    chao = T.ring(0.2 + 0.5 * ease_out(rel(t, 0.32, 0.7), 2), 0.03, cy=0.42, squash=3.6) * pulso(t, 0.32, 0.9) * 1.2
+    G += T.splats(brasas, 0.016) * 1.4 + (coluna + T.glow(asas, 1.2, 1.2, 0.03) + T.splats(penas, 0.012) + chao) * apaga(t, 0.82, 1)
+    H += T.splats(brasas, 0.009) + (coluna * 0.8 + fio * 1.2 + chao * 0.4) * apaga(t, 0.82, 1)
+    return G, H
+
+
+def brasas_renascendo(T, t, rng):
+    """Renascendo (laço): brasas fracas sobem do corpo caído e um anel de fogo respira no chão."""
+    G, H = vazio(T)
+    respira = 0.6 + 0.4 * math.sin(t * TAU)
+    pts = []
+    for k in range(18):
+        f = (k / 18 + t) % 1
+        x = 0.35 * math.sin(k * 2.4 + f * 3)
+        pts.append((x, 0.4 - f * 0.8, math.sin(math.pi * f) * (0.5 + 0.5 * ((k * 7) % 3 == 0))))
+    anel = T.ring(0.42, 0.03, cy=0.42, squash=3.6) * respira
+    G += T.splats(pts, 0.014) * 1.2 + anel + T.gauss(0, 0.3, 0.25, 0.12) * 0.35 * respira
+    H += T.splats(pts, 0.007) * 0.8 + anel * 0.35
+    return G, H
+
 REGISTRO = [
+    ("ressurreicao", ressurreicao, GRANDE, "feixe de luz que levanta o aliado caído", False),
+    ("renascer", renascer, GRANDE, "asas de fogo: renasce das cinzas", False),
+    ("brasas_renascendo", brasas_renascendo, GRANDE, "brasas sobre quem vai renascer (laço)", True),
     ("cura_em_area", cura_em_area, GRANDE, "cura em área com cruzes", False),
     ("regeneracao", regeneracao, GRANDE, "folhas subindo em espiral", False),
     ("grito_de_guerra", grito_de_guerra, GRANDE, "estandarte de raios e divisas", False),

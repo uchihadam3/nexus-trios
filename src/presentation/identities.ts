@@ -29,7 +29,7 @@ export type Identidade =
   | 'Tanque' | 'Sobrevivência' | 'Proteção' | 'Cura' | 'Regeneração'
   | 'Controle' | 'Interrupção' | 'Ritmo' | 'Suporte' | 'Carga'
   | 'Buff' | 'Debuff' | 'Virada' | 'Preparação' | 'Transformação'
-  | 'Contra-ataque' | 'Especialista';
+  | 'Contra-ataque' | 'Especialista' | 'Reviver' | 'Renascer';
 
 /*
  * A taxonomia da direção tinha 23 termos. Este arquivo tem 22.
@@ -65,14 +65,16 @@ export const explicacaoDaIdentidade: Record<Identidade, string> = {
   'Transformação': 'Fica mais forte conforme a luta avança.',
   'Contra-ataque': 'Apanhar é o que carrega as habilidades dele.',
   'Especialista': 'Só age na situação certa, e aí resolve.',
+  'Reviver': 'Levanta um aliado que caiu, uma vez por luta.',
+  'Renascer': 'Quando cai, volta sozinho uma vez, com parte da Vida.',
 };
 
 /** A ordem em que as identidades aparecem, quando o personagem tem várias. */
 export const ordemDasIdentidades: readonly Identidade[] = [
   'Pressão', 'Explosão', 'Área', 'Dano contínuo', 'Finalização',
   'Controle', 'Interrupção', 'Debuff', 'Ritmo',
-  'Cura', 'Proteção', 'Buff', 'Carga', 'Suporte',
-  'Tanque', 'Regeneração', 'Sobrevivência',
+  'Reviver', 'Cura', 'Proteção', 'Buff', 'Carga', 'Suporte',
+  'Renascer', 'Tanque', 'Regeneração', 'Sobrevivência',
   'Transformação', 'Contra-ataque', 'Preparação', 'Virada', 'Especialista',
 ];
 
@@ -80,7 +82,7 @@ export const ordemDasIdentidades: readonly Identidade[] = [
 export const familiaDaIdentidade: Record<Identidade, 'ataque' | 'atrapalha' | 'ajuda' | 'aguenta' | 'jeito'> = {
   'Pressão': 'ataque', 'Explosão': 'ataque', 'Área': 'ataque', 'Dano contínuo': 'ataque', 'Finalização': 'ataque',
   'Controle': 'atrapalha', 'Interrupção': 'atrapalha', 'Debuff': 'atrapalha', 'Ritmo': 'atrapalha',
-  'Cura': 'ajuda', 'Proteção': 'ajuda', 'Buff': 'ajuda', 'Carga': 'ajuda', 'Suporte': 'ajuda',
+  'Reviver': 'ajuda', 'Renascer': 'aguenta', 'Cura': 'ajuda', 'Proteção': 'ajuda', 'Buff': 'ajuda', 'Carga': 'ajuda', 'Suporte': 'ajuda',
   'Tanque': 'aguenta', 'Regeneração': 'aguenta', 'Sobrevivência': 'aguenta',
   'Transformação': 'jeito', 'Contra-ataque': 'jeito', 'Preparação': 'jeito', 'Virada': 'jeito', 'Especialista': 'jeito',
 };
@@ -116,7 +118,7 @@ export const oQueAdiciona = (candidato: Character | string, trio: readonly (Char
  */
 const LACUNAS: readonly { texto: string; cobertaPor: readonly Identidade[] }[] = [
   { texto: 'Pouca proteção', cobertaPor: ['Proteção', 'Tanque'] },
-  { texto: 'Pouca recuperação', cobertaPor: ['Cura', 'Regeneração'] },
+  { texto: 'Pouca recuperação', cobertaPor: ['Cura', 'Regeneração', 'Reviver', 'Renascer'] },
   { texto: 'Pouca interrupção', cobertaPor: ['Interrupção', 'Controle'] },
   { texto: 'Pouco dano concentrado', cobertaPor: ['Explosão', 'Finalização'] },
 ];
@@ -166,6 +168,8 @@ export const guiaDaIdentidade: Record<Identidade, GuiaDaIdentidade> = {
   'Transformação': { naLuta: ['Muda de forma ou fica mais forte no meio da luta.', 'O começo é mais fraco; o final é o melhor momento.'], combina: ['Tanque', 'Proteção'], cuidado: 'Explosão no começo derruba antes da transformação.' },
   'Contra-ataque': { naLuta: ['Cada golpe que recebe carrega as habilidades dele.', 'Quanto mais apanha, mais rápido revida.'], combina: ['Tanque', 'Regeneração'], cuidado: 'Controle e dano contínuo machucam sem dar Carga a ele.' },
   'Especialista': { naLuta: ['Espera a situação certa para agir.', 'Quando ela aparece, decide a luta.'], combina: ['Suporte', 'Carga'], cuidado: 'Se a situação não aparecer, ele faz pouco.' },
+  'Reviver': { naLuta: ['Quando um aliado cai, a habilidade dele o levanta com parte da Vida.', 'Uma vez por luta — e cada lutador só volta uma vez.'], combina: ['Explosão', 'Pressão'], cuidado: 'Leva um tempo de Preparo: se for interrompido ou cair antes, o aliado fica no chão.' },
+  'Renascer': { naLuta: ['Quando cai, fica em brasas por um instante e volta sozinho.', 'Volta com parte da Vida, uma vez por luta.'], combina: ['Tanque', 'Virada'], cuidado: 'A Death Note impede: quem é executado não renasce.' },
 };
 
 /** Quantos lutadores têm cada identidade. */

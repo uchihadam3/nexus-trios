@@ -223,6 +223,20 @@
   "laco": false,
   "bytes": 49348
  },
+ "brasas_renascendo": {
+  "descricao": "brasas sobre quem vai renascer (laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": true,
+  "bytes": 44302
+ },
  "buraco_negro": {
   "descricao": "buraco negro sugando",
   "quadros": 12,
@@ -2057,6 +2071,20 @@
   "laco": false,
   "bytes": 66486
  },
+ "renascer": {
+  "descricao": "asas de fogo: renasce das cinzas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 72438
+ },
  "repulsao": {
   "descricao": "estouro para fora",
   "quadros": 12,
@@ -2084,6 +2112,20 @@
   ],
   "laco": false,
   "bytes": 46072
+ },
+ "ressurreicao": {
+  "descricao": "feixe de luz que levanta o aliado caído",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 69288
  },
  "ricochete": {
   "descricao": "estalo de ricochete",
