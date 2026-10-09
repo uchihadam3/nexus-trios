@@ -1073,6 +1073,23 @@
    ],
    "bytes": 28530
   },
+  "espinhos": {
+   "arquivo": "espinhos.mp3",
+   "descricao": "família espinhos",
+   "versoes": [
+    0.0,
+    0.8988,
+    1.8599,
+    2.7755
+   ],
+   "duracoes": [
+    0.8188,
+    0.881,
+    0.8356,
+    0.8681
+   ],
+   "bytes": 35604
+  },
   "espinhos-de-terra": {
    "arquivo": "espinhos-de-terra.mp3",
    "descricao": "família espinhos de terra",
@@ -2518,6 +2535,23 @@
    ],
    "bytes": 23872
   },
+  "reflexo": {
+   "arquivo": "reflexo.mp3",
+   "descricao": "família reflexo",
+   "versoes": [
+    0.0,
+    1.18,
+    2.3999,
+    3.5427
+   ],
+   "duracoes": [
+    1.1,
+    1.1399,
+    1.0628,
+    1.1167
+   ],
+   "bytes": 44376
+  },
   "reforco": {
    "arquivo": "reforco.mp3",
    "descricao": "reforço",
@@ -3248,6 +3282,23 @@
     0.2843
    ],
    "bytes": 10226
+  },
+  "vampirismo": {
+   "arquivo": "vampirismo.mp3",
+   "descricao": "família vampirismo",
+   "versoes": [
+    0.0,
+    1.38,
+    2.8071,
+    4.1432
+   ],
+   "duracoes": [
+    1.3,
+    1.3471,
+    1.256,
+    1.3198
+   ],
+   "bytes": 45024
   },
   "velocidade": {
    "arquivo": "velocidade.mp3",

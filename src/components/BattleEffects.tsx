@@ -1,6 +1,6 @@
 import { useLayoutEffect,useRef,useState,type CSSProperties,type ReactElement } from 'react';
 import type { Battle } from '../engine/types';
-import type { Beat } from '../presentation/director';
+import { revelado,type Beat } from '../presentation/director';
 import { PRESENTATION as P } from '../presentation/config';
 import { byId } from '../data/characters';
 import { SkillIcon } from './Icon';
@@ -100,9 +100,15 @@ export function BattleEffects({battle,beat,anchors,enabled,reduced,medal=80}:{ba
         const p=point(alvo),f=familia(nome),t=Math.min(medal*f.escala,Math.min(size.w,size.h)*.92);
         nodes.push(camada(f.impacto,{left:`${p.x}%`,top:`${p.y}%`,width:t,height:t,'--fx-cor':f.cor,'--ang':'0deg','--flip':1,'--dur':s(Math.max(.6,dur*1.1)),'--delay':s(atraso)},`fxl-impacto fxl-sobre ${reduced?'fxl-parado':''}`,chaveDoNo));
       };
+      // cada uma aparece no passo da cadeia em que acontece (a reação depois do golpe)
       for(const e of beat.events){
+        if(!revelado(beat,e))continue;
         if(e.kind==='revive'&&e.target&&e.source!==e.target)sobre(e.target,'ressurreicao',`rev-${id}-${e.target}`,.12);
         if(e.kind==='status'&&e.status==='provoked'&&e.target)sobre(e.target,'provocar',`prov-${id}-${e.target}`,.08);
+        // o golpe devolvido: o espelho ou os espinhos aparecem em quem devolveu
+        if(e.kind==='damage'&&e.label==='Refletido')sobre(e.source,'reflexo',`refl-${id}-${e.id}`,0);
+        if(e.kind==='damage'&&e.label==='Espinhos')sobre(e.source,'espinhos',`esp-${id}-${e.id}`,0);
+        if(e.kind==='heal'&&(e.label==='Vampirismo'||e.label==='Roubo de vida')&&e.target)sobre(e.target,'vampirismo',`vamp-${id}-${e.id}`,.1);
       }
     }
   }

@@ -447,6 +447,93 @@ def provocar(T, t, rng):
     return G, H
 
 
+def reflexo(T, t, rng):
+    """Refletir: um escudo hexagonal de espelho estoura na frente de quem foi atingido, um brilho
+    corre pela face e estilhaços de luz voltam para fora — o golpe foi devolvido."""
+    G, H = vazio(T)
+    env = apaga(t, 0.6, 1)
+    pop = back(rel(t, 0.0, 0.22), 2.0)
+    r = 0.62 * pop
+    hexa = [(r * math.cos(k * TAU / 6 + math.pi / 6), r * math.sin(k * TAU / 6 + math.pi / 6) - 0.04) for k in range(6)]
+    dentro = [(x * 0.84, (y + 0.04) * 0.84 - 0.04) for x, y in hexa]
+    borda = T.polys([(hexa, 1.0)], 0.004) - T.polys([(dentro, 1.0)], 0.004)
+    face = T.polys([(dentro, 1.0)], 0.01) * 0.28
+    # o brilho que atravessa a face na diagonal
+    corre = -0.9 + 1.8 * ease_out(rel(t, 0.12, 0.45), 2)
+    faixa = smooth(0.09 - np.abs((T.U + T.V) * 0.7 - corre), 0, 0.06) * T.polys([(dentro, 1.0)], 0.01)
+    # estilhaços: saem das arestas para fora
+    sai = ease_out(rel(t, 0.18, 0.7), 2)
+    cacos = []
+    for k in range(12):
+        a = k / 12 * TAU + 0.26
+        d0 = 0.55 + 0.5 * sai
+        cacos.append((lamina(d0 * math.cos(a), d0 * math.sin(a) - 0.04, (d0 + 0.13) * math.cos(a), (d0 + 0.13) * math.sin(a) - 0.04, 0.035), pulso(t, 0.16, 0.75)))
+    flash = T.gauss(0, -0.04, 0.35, 0.35) * pulso(t, 0.0, 0.3) * 1.2
+    G += (borda * 1.5 + face + faixa * 1.6 + T.polys(cacos, 0.004) * 1.2 + flash) * env
+    H += (borda * 0.9 + faixa * 1.3 + T.polys(cacos, 0.004) * 0.7 + flash * 0.8) * env
+    return G, H
+
+
+def espinhos(T, t, rng):
+    """Espinhos: pontas curvas brotam do corpo em todas as direções num estalo e recolhem —
+    quem bateu se feriu nelas."""
+    G, H = vazio(T)
+    env = apaga(t, 0.55, 1)
+    brota = back(rel(t, 0.0, 0.2), 2.6)
+    recolhe = 1 - ease_in(rel(t, 0.55, 0.95), 2)
+    pontas = []
+    sub = np.random.default_rng(311)
+    for k in range(16):
+        a = k / 16 * TAU + sub.uniform(-0.12, 0.12)
+        base = 0.3
+        comp = (0.32 + sub.uniform(0, 0.2)) * brota * recolhe
+        curva = sub.uniform(-0.25, 0.25)
+        bx, by = base * math.cos(a), base * math.sin(a)
+        px_, py_ = (base + comp) * math.cos(a + curva * 0.4), (base + comp) * math.sin(a + curva * 0.4)
+        larg = 0.055
+        n1 = (-math.sin(a) * larg, math.cos(a) * larg)
+        pontas.append(([(bx + n1[0], by + n1[1]), (px_, py_), (bx - n1[0], by - n1[1])], 1.0))
+    anel = T.ring(0.3, 0.05) * pulso(t, 0.0, 0.5) * 1.1
+    estalo = T.gauss(0, 0, 0.28, 0.28) * pulso(t, 0.0, 0.22)
+    P = T.polys(pontas, 0.003)
+    G += (P * 1.4 + anel + estalo) * env
+    H += (P * 0.6 + anel * 0.4 + estalo * 0.9) * env
+    return G, H
+
+
+def vampirismo(T, t, rng):
+    """Vampirismo: gotas de sangue giram em espiral para dentro de quem bateu e um pulso de
+    coração acende no centro quando a Vida volta."""
+    G, H = vazio(T)
+    env = apaga(t, 0.7, 1)
+    gotas = []
+    sub = np.random.default_rng(613)
+    for k in range(18):
+        a0 = sub.uniform(0, 0.35)
+        f = ease_in(rel(t, a0, a0 + 0.5), 1.4)
+        ang = k / 18 * TAU + 2.4 * f
+        r = 0.92 - 0.82 * f
+        x, y = r * math.cos(ang), r * math.sin(ang)
+        tam = 0.075 * (1 - 0.45 * f)
+        # gota: ponta para trás do movimento
+        tx, ty = -math.sin(ang), math.cos(ang)
+        vis = (min(1.0, f * 6) * (1 - f) ** 0.5) if 0 < f < 1 else 0.0
+        gotas.append(([(x + tx * tam * 2.6, y + ty * tam * 2.6), (x + ty * tam, y - tx * tam), (x - tx * tam * 0.9, y - ty * tam * 0.9), (x - ty * tam, y + tx * tam)], vis))
+        # rastro: uma segunda gota menor, um pouco atrás
+        ang2 = ang - 0.22
+        r2 = r + 0.06
+        x2, y2 = r2 * math.cos(ang2), r2 * math.sin(ang2)
+        t2 = tam * 0.55
+        gotas.append(([(x2 + t2, y2), (x2, y2 + t2), (x2 - t2, y2), (x2, y2 - t2)], vis * 0.6))
+    bate = pulso(t, 0.45, 0.62) + 0.7 * pulso(t, 0.64, 0.8)
+    coracao = T.gauss(0, 0, 0.24, 0.24) * bate * 2.2 + T.gauss(0, 0, 0.36, 0.36) * bate * 0.4
+    anel = T.ring(0.15 + 0.4 * rel(t, 0.45, 0.85), 0.03) * pulso(t, 0.45, 0.9)
+    D = T.polys(gotas, 0.004)
+    G += (D * 1.8 + coracao + anel * 1.3) * env
+    H += (D * 0.5 + coracao * 1.1 + anel * 0.5) * env
+    return G, H
+
+
 def renascer(T, t, rng):
     """Renascer: brasas giram e se juntam no corpo caído, sobem numa coluna de fogo e um par de
     asas de chama se abre para o alto, soltando penas de brasa."""
@@ -503,6 +590,9 @@ def brasas_renascendo(T, t, rng):
 REGISTRO = [
     ("ressurreicao", ressurreicao, GRANDE, "feixe de luz que levanta o aliado caído", False),
     ("renascer", renascer, GRANDE, "asas de fogo: renasce das cinzas", False),
+    ("reflexo", reflexo, GRANDE, "escudo de espelho hexagonal que devolve o golpe", False),
+    ("espinhos", espinhos, GRANDE, "pontas que brotam do corpo e recolhem", False),
+    ("vampirismo", vampirismo, GRANDE, "gotas de sangue em espiral e pulso de coração", False),
     ("provocar", provocar, GRANDE, "marca de raiva sobre o rival provocado, anéis se fechando", False),
     ("brasas_renascendo", brasas_renascendo, GRANDE, "brasas sobre quem vai renascer (laço)", True),
     ("cura_em_area", cura_em_area, GRANDE, "cura em área com cruzes", False),
