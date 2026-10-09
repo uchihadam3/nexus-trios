@@ -155,21 +155,6 @@ def faixa_sobe(rng, n):
     return assobio(rng, n, 9000, 300, 1.5, 0.5) * np.linspace(0, 1, n) ** 2.5
 
 
-def rei_gun(rng, v):
-    x = _z(1.0)
-    n = n_de(0.17)
-    carga = seno(varre(300, 1300, n, 0.8), n) * np.linspace(0.1, 1, n) * 0.2
-    poe(x, carga + assobio(rng, n, 1500, 6000, 1.0) * np.linspace(0, 1, n) * 0.25, 0)
-    n = n_de(0.3)
-    pew = satura(seno(varre(950, 110, n, 0.35), n) * env(n, 0.001, 0.09), 2.2) * 0.65
-    poe(x, pew + baque(n, 120, 55, 0.08, 0.5) * 0.6 + estalo(rng, n, 1500, 7000, 0.006) * 0.5, 0.16)
-    poe(x, _whoosh(rng, 0.14, 800, 3000, 0.9, g=0.35), 0.17)
-    poe(x, B.impacto_energia(rng, v), 0.3, 1.0)
-    n = n_de(0.5)
-    poe(x, passa(rosa(rng, n), 200, 2500, 2) * env(n, 0.01, 0.15) * 0.45, 0.31)
-    return reverb(x, 0.5, 0.22)
-
-
 def soco_casual(rng, v):
     x = _z(1.55)
     poe(x, B.soco_leve(rng, v), 0, 0.8)
@@ -264,7 +249,6 @@ SONS.update({
     "braco-namekiano": (braco_namekiano, "básico de Piccolo: esticar elástico e orgânico, pancada e o braço voltando"),
     "punho-lendario": (punho_lendario, "básico de Broly: soco grave, saturado e esmagador, com pedras caindo"),
     "toque-da-destruicao": (toque_da_destruicao, "básico de Beerus: \"tic\" do peteleco, zumbido da esfera e implosão sugada"),
-    "rei-gun": (rei_gun, "básico de Yusuke: carga curta e o disparo \"pew\" grave do Rei Gun"),
     "soco-casual": (soco_casual, "básico de Saitama: soco seco, pausa e o vendaval \"whoosh\""),
     "punho-amaldicoado": (punho_amaldicoado, "básico de Yuji: impacto com estalo distorcido do Black Flash"),
     "desmanche": (desmanche, "básico de Sukuna: vários \"shink\" agudos rapidíssimos"),

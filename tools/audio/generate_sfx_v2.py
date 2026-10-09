@@ -859,7 +859,7 @@ def _registra_novos():
     SONS.update(sfx_familias.SONS_NOVOS)
     ALVO_DB.update(sfx_familias.ALVO_NOVO)
     # o som próprio de cada ataque básico (tools/audio/sfx_basicos_*.py), um módulo por lote
-    for modulo in [f"sfx_basicos_{letra}" for letra in "abcdefghij"] + ["sfx_madara", "sfx_viagens"]:
+    for modulo in [f"sfx_basicos_{letra}" for letra in "abcdefghij"] + ["sfx_madara", "sfx_viagens", "sfx_ninjas"]:
         m = importlib.import_module(modulo)
         for nome, (fn, desc) in m.SONS.items():
             SONS[nome] = (fn, desc)

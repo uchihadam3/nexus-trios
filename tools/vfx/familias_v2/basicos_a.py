@@ -400,38 +400,6 @@ def toque_da_destruicao(T, t, rng):
 
 
 # ------------------------------------------------------------------ Yusuke
-def rei_gun(T, t, rng):
-    """Rei Gun (Yusuke): a ponta do dedo carrega, dispara uma bala de energia espiritual que
-    atravessa a folha e estoura no alvo num anel largo."""
-    G, H = vazio(T)
-    env = apaga(t, 0.82, 1)
-    fx, fy = -0.82, 0.0
-    carga = janela(t, 0.0, 0.12) * (1 - rel(t, 0.15, 0.22))
-    G += T.gauss(fx, fy, 0.04 + 0.05 * carga) * carga * 2.0
-    H += T.gauss(fx, fy, 0.03 + 0.02 * carga) * carga * 2.0 + T.flare(fx, fy, 0.3 * carga + 0.01, 0.0, 0.02) * carga
-    # anel do disparo
-    tiro = pulso(t, 0.13, 0.3)
-    G += T.ring(0.05 + 0.15 * rel(t, 0.13, 0.3), 0.02, fx, fy) * tiro
-    hit = 0.3
-    if 0.14 <= t < hit + 0.01:
-        u = ease_in(rel(t, 0.14, hit), 1.3)
-        x = fx + (0.0 - fx) * u
-        cauda = T.tapered([(x - 0.55, 0.0, x, 0.0, 1.0)], 0.2)
-        G += T.gauss(x, 0, 0.1) * 2.0 + T.gauss(x, 0, 0.18) * 0.6 + T.blur(cauda, 0.02) * 1.2
-        H += T.gauss(x, 0, 0.065) * 2.5 + T.blur(cauda, 0.01) * 0.5
-    # estouro em anel
-    e = rel(t, hit, 0.85)
-    k = pulso(t, hit - 0.01, hit + 0.22)
-    g, h = _clarao(T, k, 0, 0, 0.22, 0.75, 0.0)
-    anel1 = T.ring(0.12 + 0.62 * ease_out(e, 2.2), 0.07 * (1 - e) + 0.01) * (1 - e) ** 0.9 * (t >= hit) * 1.5
-    anel2 = T.ring(0.08 + 0.4 * ease_out(rel(t, hit + 0.06, 0.85), 2), 0.03) * pulso(t, hit + 0.06, 0.85) * 0.9
-    fa = faiscas(T, np.random.default_rng(14), t, 14, 0.75, 0.03, inicio=hit)
-    G += g + anel1 + anel2 + fa * 1.1
-    H += h + anel1 * 0.8 + anel2 * 0.5 + fa * 0.6
-    return G * env, H * env
-
-
-# ------------------------------------------------------------------ Saitama
 def soco_casual(T, t, rng):
     """Soco casual (Saitama): um soquinho com um clarão pequeno... uma pausa... e então um
     vendaval enorme de vento e poeira atravessa a tela inteira (a piada do One Punch)."""
@@ -814,7 +782,6 @@ REGISTRO = [
     ("braco_namekiano", braco_namekiano, GRANDE, "básico do Piccolo: o braço verde estica e acerta", False),
     ("punho_lendario", punho_lendario, GRANDE, "básico do Broly: soco brutal, aura verde explodindo e rachaduras", False),
     ("toque_da_destruicao", toque_da_destruicao, GRANDE, "básico do Beerus: peteleco e a esfera roxa que implode", False),
-    ("rei_gun", rei_gun, GRANDE, "básico do Yusuke: tiro do dedo que estoura em anel", False),
     ("soco_casual", soco_casual, GRANDE, "básico do Saitama: soquinho e, depois, o vendaval exagerado", False),
     ("punho_amaldicoado", punho_amaldicoado, GRANDE, "básico do Yuji: Black Flash, faíscas negras e o espaço rachando", False),
     ("desmanche", desmanche, GRANDE, "básico do Sukuna: cortes finos em grade aparecendo de uma vez", False),

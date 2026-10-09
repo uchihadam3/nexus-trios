@@ -2715,6 +2715,20 @@
   "laco": false,
   "bytes": 87790
  },
+ "kamui": {
+  "descricao": "Kakashi · Kamui: o Mangekyō e a espiral que suga",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 114300
+ },
  "karate": {
   "descricao": "Karatê: mão em faca desce num tchop e as bolhas estouram",
   "quadros": 12,
@@ -3457,6 +3471,34 @@
   "laco": true,
   "bytes": 58050
  },
+ "palma_faixa": {
+  "descricao": "Killua · o raio da Palma relâmpago até o rival (faixa)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   512,
+   96
+  ],
+  "laco": true,
+  "bytes": 226784
+ },
+ "palma_impacto": {
+  "descricao": "Killua · o raio estourando no rival",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 106802
+ },
  "pancada_de_sangue": {
   "descricao": "Pancada de sangue de Power: martelo de sangue e gotas espirrando",
   "quadros": 12,
@@ -3835,6 +3877,34 @@
   "laco": false,
   "bytes": 85794
  },
+ "raikiri_impacto": {
+  "descricao": "Kakashi · Raikiri: a mão de raio atravessa o rival",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 111992
+ },
+ "raikiri_mao": {
+  "descricao": "Kakashi · o Raikiri crepitando na mão (laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 77920
+ },
  "raio": {
   "descricao": "descarga elétrica",
   "quadros": 12,
@@ -4003,8 +4073,36 @@
   "laco": false,
   "bytes": 56320
  },
- "rei_gun": {
-  "descricao": "básico do Yusuke: tiro do dedo que estoura em anel",
+ "reigun_bala": {
+  "descricao": "Yusuke · a bala do Reigun voando (laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 25380
+ },
+ "reigun_carga": {
+  "descricao": "Yusuke · a energia juntando na ponta do dedo (laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 53692
+ },
+ "reigun_explosao": {
+  "descricao": "Yusuke · a bala do Reigun explodindo",
   "quadros": 12,
   "grade": [
    3,
@@ -4015,7 +4113,7 @@
    192
   ],
   "laco": false,
-  "bytes": 58988
+  "bytes": 94526
  },
  "relogio": {
   "descricao": "mostrador de relógio",
@@ -4142,6 +4240,20 @@
   ],
   "laco": false,
   "bytes": 86222
+ },
+ "ritmo_eletrico": {
+  "descricao": "Killua · Ritmo elétrico: as imagens giram e fecham com as garras",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 82804
  },
  "rocha": {
   "descricao": "pedra em viagem (+x)",
@@ -4283,6 +4395,34 @@
   "laco": false,
   "bytes": 86410
  },
+ "sharingan_ator": {
+  "descricao": "Kakashi · o Sharingan acende nele",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": false,
+  "bytes": 22952
+ },
+ "sharingan_kakashi": {
+  "descricao": "Kakashi · Sharingan: o olho abre e o genjutsu estoura",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 75142
+ },
  "shoryuken": {
   "descricao": "Shoryuken: o soco que sobe em espiral",
   "quadros": 12,
@@ -4296,6 +4436,34 @@
   ],
   "laco": false,
   "bytes": 49856
+ },
+ "shotgun_impacto": {
+  "descricao": "Yusuke · as balas do Shotgun pipocando no rival",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 39128
+ },
+ "shotgun_rajada": {
+  "descricao": "Yusuke · o leque de balas do Shotgun voando (laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 40448
  },
  "shun_goku_satsu": {
   "descricao": "Shun Goku Satsu: golpes no escuro e o 天",
@@ -4492,6 +4660,20 @@
   ],
   "laco": false,
   "bytes": 65634
+ },
+ "soco_espiritual": {
+  "descricao": "Yusuke · Soco espiritual com a aura azul",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 81114
  },
  "soco_relampago": {
   "descricao": "básico do Flash: relâmpagos convergindo e mil socos num instante",
@@ -5038,6 +5220,34 @@
   ],
   "laco": false,
   "bytes": 29406
+ },
+ "velocidade_aura": {
+  "descricao": "Killua · a aura elétrica nele",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": false,
+  "bytes": 69338
+ },
+ "velocidade_divina": {
+  "descricao": "Killua · Velocidade divina: aparece em volta e bate de todos os lados",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 71774
  },
  "veneno": {
   "descricao": "nuvem tóxica",
