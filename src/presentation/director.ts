@@ -25,6 +25,8 @@ export function familyOf(event:BattleEvent,battle:Battle):Family {
   if(event.kind==='cleanse')return 'buff';
   if(event.kind==='dispel')return 'debuff';
   if(event.kind==='shield'||event.kind==='block')return 'shield';
+  if(event.kind==='miss')return 'physical';
+  if(event.kind==='resist')return 'shield';
   if(event.status){if(event.status==='regen')return 'regen';if(event.status==='burning')return 'fire';if(['haste','strengthened','protected'].includes(event.status))return 'buff';if(['rooted','paralyzed'].includes(event.status))return 'prison';return 'debuff';}
   const f=battle.fighters.find(f=>f.uid===event.source),c=f?byId[f.characterId]:null;
   const effects=event.skill!==undefined?c?.skills[event.skill].effects:[];
@@ -86,8 +88,8 @@ export const INTERVALO_DA_ETAPA=TEMPO_DO_PASSO.rival;
 const CONTABIL=new Set<BattleEvent['kind']>(['charge','synergy','ready','discovery','basic','skill','cast','turn']);
 const DO_GOLPE=new Set<BattleEvent['kind']>(['damage','block','interrupt','ko']);
 /* Reações que vêm de uma mecânica, não do traço: o passo leva o nome dela. */
-export const ROTULO_DA_MECANICA:Record<string,string>={Refletido:'Refletir',Espinhos:'Espinhos',Vampirismo:'Vampirismo'};
-const ehDaMecanica=(e:BattleEvent)=>(e.kind==='damage'||e.kind==='heal')&&e.label in ROTULO_DA_MECANICA;
+export const ROTULO_DA_MECANICA:Record<string,string>={Refletido:'Refletir',Espinhos:'Espinhos',Vampirismo:'Vampirismo',Sangramento:'Sangramento',Barreira:'Barreira'};
+const ehDaMecanica=(e:BattleEvent)=>(e.kind==='damage'||e.kind==='heal'||e.kind==='resist')&&e.label in ROTULO_DA_MECANICA;
 function montaPassos(beat:Pick<Beat,'event'|'events'|'after'|'traco'>):Passo[]{
   const ator=beat.event.source,lado=beat.after.fighters.find(f=>f.uid===ator)?.side;
   const ladoDe=(uid?:string)=>beat.after.fighters.find(f=>f.uid===uid)?.side;
@@ -249,8 +251,9 @@ function collect(d:Direction,events:BattleEvent[],before:Battle,after:Battle,leg
   if(traco){d.queue.push(makeBeat(traco,events,before,after,false,false,true));return;}
   const change=events.find(e=>e.kind==='damage'||e.kind==='heal');
   if(change){
-    const burning=change.kind==='damage'&&before.fighters.find(f=>f.uid===change.target)?.statuses.some(s=>s.id==='burning');
-    const event={...change,label:burning?'Queimadura':change.kind==='heal'?'Regeneração':'Efeito contínuo',status:burning?'burning' as const:change.kind==='heal'?'regen' as const:undefined};
+    const burning=change.kind==='damage'&&change.label!=='Veneno'&&before.fighters.find(f=>f.uid===change.target)?.statuses.some(s=>s.id==='burning');
+    const veneno=change.kind==='damage'&&change.label==='Veneno';
+    const event={...change,label:veneno?'Veneno':burning?'Queimadura':change.kind==='heal'?'Regeneração':'Efeito contínuo',status:veneno?'poison' as const:burning?'burning' as const:change.kind==='heal'?'regen' as const:undefined};
     const last=d.queue[d.queue.length-1];
     // One fixed window covers every affected fighter, without crossing an action.
     if(last?.periodic&&(previous?(last.event.source===event.source&&last.event.target===event.target&&last.event.kind===event.kind):true)&&

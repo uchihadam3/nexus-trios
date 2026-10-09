@@ -49,7 +49,7 @@ describe('compact reusable audiovisual library',()=>{
     // não são de habilidade: as brasas aparecem no lutador caído (ArenaUnit) e a marca de
     // Provocado por cima de quem recebe o Status, seja qual for o golpe (BattleEffects)
     // e o espelho, os espinhos e as gotas de sangue sobre quem devolve o golpe ou rouba a Vida
-    const SO_NA_ARENA=new Set(['brasas_renascendo','provocar','reflexo','espinhos','vampirismo','dissipar']);
+    const SO_NA_ARENA=new Set(['brasas_renascendo','provocar','reflexo','espinhos','vampirismo','dissipar','sono','cegueira']);
     for(const f of FAMILIAS)if(!SO_NA_ARENA.has(f))expect(uso.get(f)??0,`${f} usada`).toBeGreaterThan(0);
     for(const [f,n] of uso)expect(n/total,`${f} não domina`).toBeLessThan(.16);
   });
@@ -86,7 +86,8 @@ describe('compact reusable audiovisual library',()=>{
       expect(som.descricao.length,nome).toBeGreaterThan(3);
     }
     // a luta baixa só os sons das famílias dos seis lutadores (precarregarLuta)
-    expect(bytes).toBeLessThan(8_500_000);
+    // as mecânicas novas (reviver, provocar, refletir, status novos…) trazem sons próprios; a luta continua baixando só os dos seis lutadores
+    expect(bytes).toBeLessThan(10_000_000);
     expect(readdirSync(resolve(root,'public/assets/audio/sfx')).filter(x=>x.endsWith('.wav'))).toEqual([]);
   });
   it('a música começa na Intro e, depois do fim, volta ao Encontro',()=>{

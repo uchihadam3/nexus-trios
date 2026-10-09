@@ -1397,6 +1397,43 @@ def provocar(rng, v):
 
 
 # ================================================================== refletir, espinhos, vampirismo
+def sono(rng, v):
+    """Sono: uma caixinha de música desce três notas devagar e um sopro morno embala."""
+    x = _z(1.6)
+    for k, m in enumerate((84, 79, 76, 72)):
+        poe(x, modal(n_de(0.9), nota(m), rng=rng, **SINO) * env(n_de(0.9), 0.004, 0.5) * (0.12 - 0.015 * k), 0.05 + 0.22 * k)
+    n = n_de(1.1)
+    poe(x, passa(rosa(rng, n), 200, 1200) * sobe_e_some(n, 0.5, 1.6) * 0.08, 0.1)
+    return reverb(x, 0.9, 0.4, 7000)
+
+
+def cegueira(rng, v):
+    """Cego: estalo de flash e um zumbido agudo que fica no ouvido e some."""
+    x = _z(1.2)
+    poe(x, estalo(rng, n_de(0.04), 2000, 12000, 0.006) * 0.6, 0.0)
+    poe(x, passa(ruido(rng, n_de(0.12)), 3000, 12000) * env(n_de(0.12), 0.001, 0.05) * 0.4, 0.0)
+    n = n_de(0.9)
+    poe(x, seno(np.full(n, 4200.0), n) * env(n, 0.01, 0.4) * 0.05, 0.03)
+    return reverb(x, 0.5, 0.25, 12000)
+
+
+def errou(rng, v):
+    """Errou: o golpe passa longe — um assobio que cruza e some, sem impacto."""
+    x = _z(0.5)
+    n = n_de(0.32)
+    poe(x, assobio(rng, n, 900, 3200, 0.8, 0.6) * sobe_e_some(n, 0.4, 1.0) * 0.3, 0.0)
+    return reverb(x, 0.3, 0.15, 9000)
+
+
+def barreira_anula(rng, v):
+    """Barreira: o debuff bate na cúpula e se desfaz — um tinido claro e um eco curto."""
+    x = _z(0.9)
+    poe(x, modal(n_de(0.7), nota(91), rng=rng, **CRISTAL) * env(n_de(0.7), 0.001, 0.3) * 0.18, 0.0)
+    poe(x, modal(n_de(0.5), nota(98), rng=rng, **VIDRO) * env(n_de(0.5), 0.001, 0.2) * 0.08, 0.04)
+    poe(x, baque(n_de(0.1), 300, 180, 0.04, 0.5) * 0.2, 0.0)
+    return reverb(x, 0.6, 0.3, 11000)
+
+
 def dissipar(rng, v):
     """Dissipar: um zumbido mágico que segura a nota, racha (estalos de vidro) e se desfaz num
     sopro que desce."""
@@ -1490,7 +1527,7 @@ SONS_NOVOS = {
 _BAIXO = {"brasas-renascendo", "cura-em-area", "regeneracao", "grito-de-guerra", "velocidade", "escudo-tech", "barreira-magica", "armadura", "resgate",
           "bencao", "lanche", "purificacao", "enfraquecimento", "lentidao", "marca", "silencio", "medo", "exposto", "hipnose",
           "encanto", "runas", "lua", "petalas", "regeneracao", "confusao", "estrela-invencivel", "disco", "flecha"}
-_ALTO = {"dissipar", "reflexo", "espinhos", "vampirismo", "provocar", "renascer", "ressurreicao", "soco-serio", "supernova", "kamehameha", "canhao-de-energia", "foguete", "tempestade", "punho-gigante", "pisao",
+_ALTO = {"sono", "cegueira", "errou", "barreira-anula", "dissipar", "reflexo", "espinhos", "vampirismo", "provocar", "renascer", "ressurreicao", "soco-serio", "supernova", "kamehameha", "canhao-de-energia", "foguete", "tempestade", "punho-gigante", "pisao",
          "martelo", "espadao", "buraco-negro", "tsunami", "transformacao-v2", "dragao", "susanoo", "dominio"}
 _ANTES = {"chidori-carga": "faíscas do Chidori", "esfera-espiral-carga": "a esfera girando", "kamehameha-carga": "carga do Kamehameha",
           "kamehameha-feixe": "o feixe saindo", "marretada-giro": "a marreta subindo"}

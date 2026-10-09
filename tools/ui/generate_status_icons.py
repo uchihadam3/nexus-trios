@@ -28,6 +28,8 @@ CORES = {
     "regen": "#7fe88f", "burning": "#ff8a3d", "electric": "#ffe45c", "silenced": "#b49cff",
     "strengthened": "#ffd166", "weakened": "#b8a2d6", "provoked": "#ff7048",
     "vampirism": "#ff4f6e", "reflect": "#8fd8ff", "thorns": "#9fd65e",
+    "poison": "#8fd14f", "bleed": "#e8455a", "cursed": "#a874e8", "frozen": "#9fe3ff", "sleep": "#b9b8ff",
+    "blind": "#e3dcb2", "barrier": "#f5e39a",
 }
 
 
@@ -239,12 +241,93 @@ def espinhos_icone(d):
         poly(d, [(b[0] + n[0], b[1] + n[1]), (0.98 * math.cos(a), 0.98 * math.sin(a)), (b[0] - n[0], b[1] - n[1])])
 
 
+def frasco(d):
+    """Envenenado: frasco redondo com gargalo e bolhas subindo."""
+    circ(d, 0, 0.32, 0.56)
+    poly(d, [(-0.17, -0.3), (0.17, -0.3), (0.17, -0.72), (-0.17, -0.72)])
+    poly(d, [(-0.28, -0.72), (0.28, -0.72), (0.28, -0.88), (-0.28, -0.88)])
+    for (x, y, r) in ((-0.16, 0.42, 0.11), (0.14, 0.18, 0.08), (0.02, 0.56, 0.06)):
+        circ(d, x, y, r, 0)
+    for (x, y, r) in ((0.42, -0.62, 0.09), (0.6, -0.86, 0.06)):
+        circ(d, x, y, r)
+
+
+def gota(d, cx, cy, s):
+    poly(d, [(cx, cy - 0.62 * s)] + [(cx + 0.36 * s * math.cos(a), cy + 0.12 * s + 0.36 * s * math.sin(a)) for a in np.linspace(-0.3, math.pi + 0.3, 30)][::-1])
+    circ(d, cx, cy + 0.12 * s, 0.36 * s)
+
+
+def gotas(d):
+    """Sangrando: três gotas descendo."""
+    gota(d, -0.38, -0.28, 0.9)
+    gota(d, 0.36, -0.05, 1.05)
+    gota(d, -0.05, 0.52, 0.75)
+
+
+def coracao_partido(d):
+    """Amaldiçoado: coração partido (corta a cura)."""
+    pts = []
+    for i in range(120):
+        t = i / 119 * 2 * math.pi
+        x = 16 * math.sin(t) ** 3
+        y = -(13 * math.cos(t) - 5 * math.cos(2 * t) - 2 * math.cos(3 * t) - math.cos(4 * t))
+        pts.append((x / 17 * 0.92, y / 17 * 0.92 + 0.06))
+    poly(d, pts)
+    poly(d, [(-0.04, -0.62), (0.12, -0.25), (-0.1, 0.0), (0.1, 0.3), (-0.02, 0.9), (0.08, 0.9), (0.22, 0.3), (0.02, 0.0), (0.24, -0.25), (0.08, -0.62)], 0)
+
+
+def floco(d):
+    """Congelado: floco de neve de seis braços com galhos."""
+    for k in range(6):
+        a = k * math.pi / 3
+        ca, sa = math.cos(a), math.sin(a)
+        linha(d, [(0, 0), (0.9 * ca, 0.9 * sa)], 0.13)
+        for f in (0.45, 0.68):
+            for s in (-1, 1):
+                b = a + s * 0.7
+                linha(d, [(f * ca, f * sa), (f * ca + 0.25 * math.cos(b), f * sa + 0.25 * math.sin(b))], 0.1)
+    circ(d, 0, 0, 0.16)
+
+
+def zz(d):
+    """Dormindo: um Z grande e um pequeno."""
+    def z(cx, cy, s):
+        poly(d, [(cx - 0.5 * s, cy - 0.5 * s), (cx + 0.5 * s, cy - 0.5 * s), (cx + 0.5 * s, cy - 0.3 * s), (cx - 0.18 * s, cy + 0.3 * s),
+                 (cx + 0.5 * s, cy + 0.3 * s), (cx + 0.5 * s, cy + 0.5 * s), (cx - 0.5 * s, cy + 0.5 * s), (cx - 0.5 * s, cy + 0.3 * s),
+                 (cx + 0.18 * s, cy - 0.3 * s), (cx - 0.5 * s, cy - 0.3 * s)])
+    z(-0.22, 0.25, 1.15)
+    z(0.5, -0.5, 0.65)
+
+
+def olho_riscado(d):
+    """Cego: olho com um traço por cima."""
+    cx, cy = P(0, 0)
+    rx, ry = 0.9 * N * ESCALA, 0.5 * N * ESCALA
+    d.ellipse([cx - rx, cy - ry, cx + rx, cy + ry], fill=255)
+    rx2, ry2 = 0.7 * N * ESCALA, 0.33 * N * ESCALA
+    d.ellipse([cx - rx2, cy - ry2, cx + rx2, cy + ry2], fill=0)
+    circ(d, 0, 0, 0.28)
+    linha(d, [(-0.85, 0.75), (0.85, -0.75)], 0.24, 0)
+    linha(d, [(-0.75, 0.65), (0.75, -0.65)], 0.12, 255)
+
+
+def cupula(d):
+    """Barreira: cúpula cheia sobre uma base, com uma estrela de brilho vazada."""
+    pts = [(0.84 * math.cos(a), 0.4 - 0.9 * math.sin(a)) for a in np.linspace(0, math.pi, 60)]
+    poly(d, pts + [(-0.84, 0.46), (0.84, 0.46)])
+    poly(d, [(-0.84, 0.46), (0.84, 0.46), (0.84, 0.54), (-0.84, 0.54)], 0)
+    poly(d, [(-0.95, 0.54), (0.95, 0.54), (0.95, 0.74), (-0.95, 0.74)])
+    poly(d, [(-0.12, -0.04), (-0.04, -0.12), (0.0, -0.42), (0.04, -0.12), (0.12, -0.04), (0.04, 0.04), (0.0, 0.32), (-0.04, 0.04)], 0)
+    poly(d, [(-0.3, -0.04), (0.0, -0.08), (0.3, -0.04), (0.0, 0.0)], 0)
+
+
 SIMBOLOS = {
     "burning": chama, "confused": espiral, "electric": raio, "exposed": escudo_rachado,
     "haste": setas, "marked": mira, "paralyzed": pausa, "protected": escudo,
     "regen": coracao_mais, "rooted": cadeado, "silenced": balao_riscado, "slow": ampulheta,
     "strengthened": espada, "weakened": lambda d: espada(d, quebrada=True, invertida=True),
     "provoked": raiva, "vampirism": presas, "reflect": espelho, "thorns": espinhos_icone,
+    "poison": frasco, "bleed": gotas, "cursed": coracao_partido, "frozen": floco, "sleep": zz, "blind": olho_riscado, "barrier": cupula,
 }
 
 
@@ -292,6 +375,8 @@ NOMES = {
     "haste": "Acelerado", "confused": "Confuso", "rooted": "Preso", "regen": "Regeneração", "burning": "Queimando",
     "electric": "Eletrificado", "silenced": "Silenciado", "strengthened": "Fortalecido", "weakened": "Enfraquecido",
     "provoked": "Provocado", "vampirism": "Vampirismo", "reflect": "Refletir", "thorns": "Espinhos",
+    "poison": "Envenenado", "bleed": "Sangrando", "cursed": "Amaldiçoado", "frozen": "Congelado", "sleep": "Dormindo",
+    "blind": "Cego", "barrier": "Barreira",
 }
 
 

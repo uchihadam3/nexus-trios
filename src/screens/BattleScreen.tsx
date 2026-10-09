@@ -57,13 +57,15 @@ export function BattleScreen({battle,beat,index,name,settings,paused,onPause,onA
   const actionTargets=new Set(links.map(link=>link.target));
   const actionSources=new Set(links.map(link=>link.source));
   if(beat&&!beat.impacted&&beat.event.target)threats.add(beat.event.target);
-  const recent=battle.events.filter(e=>['damage','heal','shield','status','interrupt','ko','revive','cleanse','dispel','block','discovery','turn','synergy'].includes(e.kind)&&(!['block','shield'].includes(e.kind)||(e.value??0)>=20)).slice(-12).reverse();
+  const recent=battle.events.filter(e=>['damage','heal','shield','status','interrupt','ko','revive','cleanse','dispel','miss','resist','block','discovery','turn','synergy'].includes(e.kind)&&(!['block','shield'].includes(e.kind)||(e.value??0)>=20)).slice(-12).reverse();
   const sourceName=(uid:string)=>{const f=battle.fighters.find(x=>x.uid===uid);return f?byId[f.characterId].name:'Equipe'};
   const historyText=(event:Battle['events'][number])=>{
     const from=sourceName(event.source),to=event.target?sourceName(event.target):'';
     if(event.kind==='skill'||event.kind==='cast')return `${from}: ${event.label}${to?` → ${to}`:''}`;
     if(event.kind==='interrupt')return `${from} ${event.label.toLocaleLowerCase('pt-BR')}${to?` de ${to}`:''}`;
     if(event.kind==='ko')return `${to||from} saiu da luta`;
+    if(event.kind==='miss')return `${from} errou o golpe em ${to}`;
+    if(event.kind==='resist')return `A Barreira de ${to||from} anulou ${event.status?statuses[event.status].name:'o debuff'}`;
     if(event.kind==='cleanse'||event.kind==='dispel'){const nomes=(event.removidos??[]).map(id=>statuses[id].name).join(', ');return `${from} ${event.kind==='cleanse'?'purificou':'dissipou'} ${to}: ${nomes}`;}
     if(event.kind==='revive')return event.source===event.target?`${from} renasceu com ${Math.round(event.value??0)} de Vida`:`${from} levantou ${to} com ${Math.round(event.value??0)} de Vida`;
     if(event.kind==='damage')return `${from} acertou ${to} por ${Math.round(event.value??0)}`;

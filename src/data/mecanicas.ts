@@ -71,7 +71,6 @@ export const GANHA_STATUS: Record<string, GanhaStatus[]> = {
   alucardcv: [{ habilidade: 1, status: 'vampirism', valor: 0.3, duracao: 8, alvo: 'self' }],
   nezuko: [{ habilidade: 2, status: 'vampirism', valor: 0.25, duracao: 8, alvo: 'self' }],
   kaneki: [{ habilidade: 2, status: 'vampirism', valor: 0.3, duracao: 7, alvo: 'self', troca: 'regen' }],
-  carnage: [{ habilidade: 1, status: 'vampirism', valor: 0.3, duracao: 7, alvo: 'self', troca: 'regen' }],
   venom: [{ habilidade: 2, status: 'vampirism', valor: 0.3, duracao: 8, alvo: 'self' }],
   muzan: [{ habilidade: 2, status: 'vampirism', valor: 0.25, duracao: 9, alvo: 'self' }],
   // Refletir: devolve parte do golpe recebido
@@ -87,9 +86,52 @@ export const GANHA_STATUS: Record<string, GanhaStatus[]> = {
   bowser: [{ habilidade: 1, status: 'thorns', valor: 16, duracao: 8, alvo: 'self' }], // o casco cheio de pontas
   edward: [{ habilidade: 1, status: 'thorns', valor: 15, duracao: 6, alvo: 'allyWeak' }], // a muralha sai com estacas
   toph: [{ habilidade: 1, status: 'thorns', valor: 12, duracao: 6, alvo: 'allAllies', troca: 'marked' }], // pontas de pedra
-  frozone: [{ habilidade: 1, status: 'thorns', valor: 14, duracao: 6, alvo: 'allAllies' }], // a parede vira estalactites
   gaara: [{ habilidade: 0, status: 'thorns', valor: 18, duracao: 6, alvo: 'allyWeak' }], // a areia responde sozinha
   sonic: [{ habilidade: 0, status: 'thorns', valor: 12, duracao: 5, alvo: 'self' }], // o Spin Dash vira uma bola de espinhos
+
+  /* ---- Status-assinatura (parte 5): cada um com o que tem na história ---- */
+  // Envenenado: perde Vida por segundo, por dentro do Escudo
+  coringa: [{ habilidade: 0, status: 'poison', valor: 8, duracao: 6, troca: 'weakened' }], // o gás do riso é veneno
+  malenia: [{ habilidade: 1, status: 'poison', valor: 8, duracao: 6, alvo: 'allEnemies', troca: 'burning' }], // a podridão escarlate
+  wesker: [{ habilidade: 1, status: 'poison', valor: 7, duracao: 6 }], // o vírus Uroboros
+  agent47: [{ habilidade: 0, status: 'poison', valor: 7, duracao: 7, troca: 'weakened' }], // a bebida batizada
+  greengoblin: [{ habilidade: 1, status: 'poison', valor: 6, duracao: 6, alvo: 'allEnemies' }, // o gás
+    { habilidade: 0, status: 'blind', valor: 0.3, duracao: 5, troca: 'marked' }], // a fumaça da bomba abóbora
+  // Sangrando: cada ação custa Vida
+  wolverine: [{ habilidade: 0, status: 'bleed', valor: 25, duracao: 8, troca: 'exposed' }], // garras de adamantium
+  sukuna: [{ habilidade: 0, status: 'bleed', valor: 22, duracao: 8, troca: 'exposed' }], // Desmantelar corta
+  guts: [{ habilidade: 0, status: 'bleed', valor: 20, duracao: 8 }], // a Matadora de Dragões
+  kenpachi: [{ habilidade: 1, status: 'bleed', valor: 18, duracao: 8 }], // corte selvagem
+  carnage: [{ habilidade: 0, status: 'bleed', valor: 20, duracao: 8, troca: 'burning' }, { habilidade: 1, status: 'vampirism', valor: 0.3, duracao: 7, alvo: 'self', troca: 'regen' }],
+  shredder: [{ habilidade: 0, status: 'bleed', valor: 20, duracao: 8 }], // garras de aço
+  kratos: [{ habilidade: 0, status: 'bleed', valor: 18, duracao: 8 }], // as Lâminas do Caos
+  // Amaldiçoado: menos cura e Escudo
+  nobara: [{ habilidade: 0, status: 'cursed', valor: 0.4, duracao: 8, troca: 'marked' }], // pregos amaldiçoados
+  skeletor: [{ habilidade: 1, status: 'cursed', valor: 0.4, duracao: 8, troca: 'burning' }], // Maldição
+  hadescz: [{ habilidade: 0, status: 'cursed', valor: 0.3, duracao: 8, alvo: 'allEnemies', troca: 'exposed' }, // Elísios
+    { habilidade: 1, status: 'sleep', valor: 1, duracao: 4, troca: 'silenced' }], // Sono eterno
+  ghostrider: [{ habilidade: 1, status: 'cursed', valor: 0.35, duracao: 7, alvo: 'allEnemies', troca: 'slow' }], // olhar de penitência
+  // Congelado: não age; o próximo golpe quebra o gelo (e gelo não queima: Lento no golpe rápido)
+  subzero: [{ habilidade: 0, status: 'slow', valor: 0.2, duracao: 5, troca: 'burning' }, { habilidade: 1, status: 'frozen', valor: 0.3, duracao: 2.5, troca: 'paralyzed' }],
+  hyoga: [{ habilidade: 0, status: 'slow', valor: 0.2, duracao: 5, troca: 'burning' }, { habilidade: 2, status: 'frozen', valor: 0.3, duracao: 2, alvo: 'allEnemies', troca: 'paralyzed' }],
+  camus: [{ habilidade: 2, status: 'frozen', valor: 0.35, duracao: 2, alvo: 'allEnemies', troca: 'paralyzed' }], // o esquife de gelo
+  rukia: [{ habilidade: 0, status: 'slow', valor: 0.2, duracao: 5, troca: 'burning' }, { habilidade: 2, status: 'frozen', valor: 0.35, duracao: 2.5, troca: 'paralyzed' }],
+  frozone: [{ habilidade: 0, status: 'slow', valor: 0.2, duracao: 5, troca: 'burning' }, { habilidade: 1, status: 'thorns', valor: 14, duracao: 6, alvo: 'allAllies' }, { habilidade: 2, status: 'frozen', valor: 0.3, duracao: 2, alvo: 'allEnemies', troca: 'rooted' }],
+  // Dormindo: não age até acordar
+  madara: [{ habilidade: 2, status: 'sleep', valor: 1, duracao: 4, alvo: 'allEnemies', troca: 'confused' }], // o Tsukuyomi Infinito
+  itachi: [{ habilidade: 0, status: 'sleep', valor: 1, duracao: 3, troca: 'confused' }], // Tsukuyomi
+  aizen: [{ habilidade: 0, status: 'sleep', valor: 1, duracao: 3, alvo: 'allEnemies', troca: 'confused' }], // a hipnose completa
+  // Cego: pode errar o ataque básico
+  kuririn: [{ habilidade: 1, status: 'blind', valor: 0.4, duracao: 5, alvo: 'allEnemies', troca: 'confused' }], // Taiyoken
+  shaka: [{ habilidade: 0, status: 'blind', valor: 0.45, duracao: 6, troca: 'confused' }, // tira os sentidos
+    { habilidade: 1, status: 'barrier', valor: 2, duracao: 8, alvo: 'allyWeak' }], // o Kaan
+  zelda: [{ habilidade: 0, status: 'blind', valor: 0.3, duracao: 5, troca: 'slow' }], // o Selo da Luz ofusca
+  // Barreira: anula os próximos debuffs
+  strange: [{ habilidade: 0, status: 'barrier', valor: 1, duracao: 8, alvo: 'allAllies' }], // Escudo de Serafim
+  jeangrey: [{ habilidade: 1, status: 'barrier', valor: 1, duracao: 8, alvo: 'allAllies' }], // escudo mental
+  greenlantern: [{ habilidade: 0, status: 'barrier', valor: 1, duracao: 8, alvo: 'allyWeak' }], // escudo de vontade
+  raidenmk: [{ habilidade: 1, status: 'barrier', valor: 1, duracao: 8, alvo: 'allAllies', troca: 'electric' }], // barreira elétrica
+  alphonse: [{ habilidade: 2, status: 'barrier', valor: 1, duracao: 8, alvo: 'allAllies' }], // barreira transmutada
 };
 
 /**
@@ -112,6 +154,23 @@ export const TIRA_STATUS: Record<string, TiraStatus> = {
   darkseid: { habilidade: 1, tipo: 'dispel', quantos: 1, alvo: 'enemyStrong', troca: 'weakened' }, // o tirano arranca a proteção
 };
 
+/*
+ * Ajustes pedidos pelo jogador, número a número. Ficam aqui (e não nas regras
+ * de estilo de expanded-roster.ts) para ninguém mais ser mexido junto.
+ */
+type Ajuste = { habilidade: number; muda: (e: Effect) => Effect };
+const valor = (kind: Effect['kind'], status: StatusId | undefined, f: (e: Effect) => Effect) => (e: Effect) =>
+  e.kind === kind && (!status || (e.kind === 'status' && e.status === status)) ? f(e) : e;
+export const PEDIDOS_DO_JOGADOR: Record<string, Ajuste[]> = {
+  professorx: [
+    { habilidade: 0, muda: valor('charge', undefined, (e) => ({ ...e, value: 10 } as Effect)) }, // Coordenação mental: Carga 5 → 10
+    { habilidade: 0, muda: valor('status', 'haste', (e) => ({ ...e, value: 0.1 } as Effect)) }, // Acelerado 8% → 10%
+    { habilidade: 1, muda: (e) => (e.kind === 'interrupt' && e.mode === 'delay' ? { ...e, value: 3 } : e) }, // Bloqueio mental: atraso 1,7 s → 3 s
+    { habilidade: 1, muda: valor('status', 'confused', (e) => ({ ...e, duration: 7 } as Effect)) }, // Confuso 5 s → 7 s
+    { habilidade: 2, muda: valor('status', 'silenced', (e) => ({ ...e, duration: 5 } as Effect)) }, // Paralisia mental: Silenciado 3 s → 5 s
+  ],
+};
+
 type Mudanca = (effects: Effect[]) => Effect[];
 const semStatus = (troca?: StatusId) => (x: Effect) => !(troca && x.kind === 'status' && x.status === troca);
 const mudancasDe = (id: string): Map<number, Mudanca[]> => {
@@ -125,6 +184,7 @@ const mudancasDe = (id: string): Map<number, Mudanca[]> => {
   ]);
   // o roubo de vida vem depois do dano: cura pelo que a habilidade causou
   if (roubo) poe(roubo.habilidade, (e) => [...e.filter(semStatus(roubo.troca)), { kind: 'lifesteal', value: roubo.fracao }]);
+  for (const a of PEDIDOS_DO_JOGADOR[id] ?? []) poe(a.habilidade, (e) => e.map(a.muda));
   const tira = TIRA_STATUS[id];
   if (tira) poe(tira.habilidade, (e) => [...e.filter(semStatus(tira.troca)), { kind: tira.tipo, value: tira.quantos, target: tira.alvo }]);
   for (const g of GANHA_STATUS[id] ?? []) poe(g.habilidade, (e) => [
@@ -134,7 +194,28 @@ const mudancasDe = (id: string): Map<number, Mudanca[]> => {
   return m;
 };
 
-export function aplicaMecanicas(c: Character): Character {
+/*
+ * Debuff miúdo (pedido do jogador: "quase todos os personagens causam
+ * debuff"): 137 ataques básicos punham um Status de 3–8% em todo golpe, e 77
+ * habilidades um de 5–6%. Não mudava a luta e enchia a tela de ícones. O
+ * ataque básico volta a ser só dano (queimar e envenenar por segundo ficam),
+ * e a habilidade perde o debuff miúdo — no lugar, quem tem uma marca própria
+ * ganhou o Status dela (acima).
+ */
+const POR_SEGUNDO = new Set<StatusId>(['burning', 'poison', 'bleed']);
+const miudo = (limite: number) => (e: Effect) => e.kind === 'status' && !POR_SEGUNDO.has(e.status) && negativo(e.status) && e.value <= limite;
+const negativo = (s: StatusId) => !['protected', 'haste', 'regen', 'strengthened', 'vampirism', 'reflect', 'thorns', 'barrier'].includes(s);
+export const LIMITE_DO_MIUDO = { basico: 0.08, habilidade: 0.065 };
+
+export function aplicaMecanicas(c0: Character): Character {
+  const c: Character = {
+    ...c0,
+    basic: { ...c0.basic, effects: c0.basic.effects.filter((e) => !miudo(LIMITE_DO_MIUDO.basico)(e)) },
+    skills: c0.skills.map((s) => {
+      const effects = s.effects.filter((e) => !miudo(LIMITE_DO_MIUDO.habilidade)(e));
+      return effects.length ? { ...s, effects } : s;
+    }) as Character['skills'],
+  };
   const renascer = RENASCER[c.id], mudancas = mudancasDe(c.id);
   if (!renascer && !mudancas.size) return c;
   return {

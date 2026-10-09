@@ -1,6 +1,6 @@
 import { useEffect,useRef,useState,type CSSProperties } from 'react';
 import { createPortal } from 'react-dom';
-import { BatteryCharging,Bomb,Castle,Droplet,Sparkle,Eraser,Flame,Megaphone,Hexagon,Asterisk,CircleArrowDown,CircleArrowUp,Crosshair,Droplets,Gauge,HandHelping,HandHeart,Heart,HeartPulse,Hourglass,Lock,Radar,RotateCcw,Scissors,ShieldPlus,Skull,Sparkles,Sprout,Swords,Timer,TriangleAlert,X,type LucideIcon } from 'lucide-react';
+import { BatteryCharging,Bomb,Castle,Droplet,Sparkle,Eraser,FlaskConical,Bandage,HeartCrack,Snowflake,Moon,EyeOff,ShieldCheck,Flame,Megaphone,Hexagon,Asterisk,CircleArrowDown,CircleArrowUp,Crosshair,Droplets,Gauge,HandHelping,HandHeart,Heart,HeartPulse,Hourglass,Lock,Radar,RotateCcw,Scissors,ShieldPlus,Skull,Sparkles,Sprout,Swords,Timer,TriangleAlert,X,type LucideIcon } from 'lucide-react';
 import { byId } from '../data/characters';
 import { Portrait } from './Portrait';
 import { exemplosDe,explicacaoDaIdentidade,familiaDaIdentidade,guiaDaIdentidade,quantosTem,type Identidade } from '../presentation/identities';
@@ -15,7 +15,7 @@ const ICONE:Record<Identidade,LucideIcon>={
   'Tanque':Castle,'Sobrevivência':HeartPulse,'Proteção':ShieldPlus,'Cura':Heart,'Regeneração':Sprout,
   'Controle':Lock,'Interrupção':Scissors,'Ritmo':Timer,'Suporte':HandHelping,'Carga':BatteryCharging,
   'Buff':CircleArrowUp,'Debuff':CircleArrowDown,'Virada':RotateCcw,'Preparação':Hourglass,'Transformação':Sparkles,
-  'Contra-ataque':Swords,'Especialista':Crosshair,'Reviver':HandHeart,'Renascer':Flame,'Provocar':Megaphone,'Roubo de vida':Droplet,'Purificar':Sparkle,'Dissipar':Eraser,'Refletir':Hexagon,'Espinhos':Asterisk,
+  'Contra-ataque':Swords,'Especialista':Crosshair,'Reviver':HandHeart,'Renascer':Flame,'Provocar':Megaphone,'Roubo de vida':Droplet,'Purificar':Sparkle,'Dissipar':Eraser,'Veneno':FlaskConical,'Sangramento':Bandage,'Maldição':HeartCrack,'Congelar':Snowflake,'Sono':Moon,'Cegueira':EyeOff,'Barreira':ShieldCheck,'Refletir':Hexagon,'Espinhos':Asterisk,
 };
 const FAMILIA={
   ataque:{nome:'ATAQUE',cor:'#ff9a76'},atrapalha:{nome:'ATRAPALHA O RIVAL',cor:'#c3a2ff'},ajuda:{nome:'AJUDA O TRIO',cor:'#86e3a8'},

@@ -1,5 +1,5 @@
 export type Side = 'player' | 'enemy';
-export type StatusId = 'exposed' | 'paralyzed' | 'protected' | 'marked' | 'slow' | 'haste' | 'confused' | 'rooted' | 'regen' | 'burning' | 'electric' | 'silenced' | 'strengthened' | 'weakened' | 'provoked' | 'vampirism' | 'reflect' | 'thorns';
+export type StatusId = 'exposed' | 'paralyzed' | 'protected' | 'marked' | 'slow' | 'haste' | 'confused' | 'rooted' | 'regen' | 'burning' | 'electric' | 'silenced' | 'strengthened' | 'weakened' | 'provoked' | 'vampirism' | 'reflect' | 'thorns' | 'poison' | 'bleed' | 'cursed' | 'frozen' | 'sleep' | 'blind' | 'barrier';
 export type Topic = 'time' | 'action' | 'dealt' | 'received' | 'allyHurt' | 'enemyHurt' | 'interrupt' | 'status' | 'negativeStatus' | 'protected' | 'enemyCast' | 'survived' | 'losing' | 'winning';
 /** `allyFallen`: o aliado caído que ainda pode ser levantado (Reviver). */
 export type Target = 'enemyWeak' | 'enemyStrong' | 'enemyCast' | 'investigated' | 'allyWeak' | 'self' | 'allEnemies' | 'allAllies' | 'randomEnemy' | 'allyFallen';
@@ -43,7 +43,7 @@ export interface Fighter {
     /** Aliados levantados (Reviver). */
     revives?:number};
 }
-export interface BattleEvent {id:number;time:number;kind:'basic'|'skill'|'cast'|'damage'|'heal'|'shield'|'status'|'interrupt'|'ko'|'synergy'|'charge'|'tempo'|'turn'|'ready'|'block'|'discovery'|'revive'|'cleanse'|'dispel';source:string;target?:string;skill?:number;label:string;value?:number;visual?:Visual;status?:StatusId;attacker?:string;
+export interface BattleEvent {id:number;time:number;kind:'basic'|'skill'|'cast'|'damage'|'heal'|'shield'|'status'|'interrupt'|'ko'|'synergy'|'charge'|'tempo'|'turn'|'ready'|'block'|'discovery'|'revive'|'cleanse'|'dispel'|'miss'|'resist';source:string;target?:string;skill?:number;label:string;value?:number;visual?:Visual;status?:StatusId;attacker?:string;
   /** Purificar/Dissipar: os Status que saíram, na ordem. */
   removidos?:StatusId[]}
 export interface TargetDecision {time:number;actor:string;intent:TargetIntent;target:string;score:number;reasons:string[]}

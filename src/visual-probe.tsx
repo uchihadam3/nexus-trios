@@ -62,6 +62,14 @@ if(scenario==='estados'||scenario==='nomes'){
 /* Refletir + Espinhos (o golpe volta) e Vampirismo (o golpe cura). */
 if(scenario==='refletir'){goku.statuses.push({id:'reflect',remaining:6,duration:6,intensity:.35,source:goku.uid},{id:'thorns',remaining:6,duration:6,intensity:16,source:goku.uid});source=sakura;target=goku;effects=[{kind:'damage',value:190}];selected=[goku];}
 if(scenario==='vampiro'){sakura.hp-=300;sakura.statuses.push({id:'vampirism',remaining:8,duration:8,intensity:.3,source:sakura.uid});source=sakura;target=goku;effects=[{kind:'damage',value:220}];selected=[goku];}
+/* Status da parte 5 na arena: congelado, dormindo, envenenado, sangrando; e um golpe que erra. */
+if(scenario==='status5'){
+  vegeta.statuses.push({id:'frozen',remaining:2,duration:2.5,intensity:.3,source:sakura.uid});
+  hulk.statuses.push({id:'sleep',remaining:3,duration:4,intensity:1,source:sakura.uid},{id:'poison',remaining:5,duration:6,intensity:8,source:sakura.uid});
+  goku.statuses.push({id:'bleed',remaining:6,duration:8,intensity:20,source:sakura.uid},{id:'blind',remaining:4,duration:5,intensity:.4,source:sakura.uid},{id:'cursed',remaining:6,duration:8,intensity:.4,source:sakura.uid});
+  naruto.statuses.push({id:'barrier',remaining:6,duration:8,intensity:1,source:gojo.uid});
+  source=goku;target=sakura;effects=[];selected=[sakura];
+}
 /* Purificar (tira debuffs do aliado) e Dissipar (tira buffs do rival). */
 if(scenario==='purificar'){naruto.statuses.push({id:'paralyzed',remaining:4,duration:4,intensity:1,source:goku.uid},{id:'slow',remaining:6,duration:6,intensity:.2,source:goku.uid});source=sakura;target=naruto;effects=[{kind:'cleanse',value:2}];selected=[naruto];}
 if(scenario==='dissipar'){goku.statuses.push({id:'protected',remaining:6,duration:6,intensity:.3,source:goku.uid},{id:'strengthened',remaining:6,duration:6,intensity:.2,source:goku.uid});source=gojo;target=goku;effects=[{kind:'damage',value:120},{kind:'dispel',value:2}];selected=[goku];}
@@ -90,6 +98,7 @@ const before=structuredClone(battle),kind=hab?(habIndex===undefined?'basic':'ski
 if(renasce){goku.hp=Math.round(goku.maxHp*.4);goku.renascendo=0;goku.voltou=true;battle.events.push({id:1001,time:0,kind:'revive',source:goku.uid,target:goku.uid,label:'Renasceu',value:goku.hp});}
 const event:BattleEvent=renasce?{id:1000,time:0,kind:'revive',source:goku.uid,target:goku.uid,label:'Renasceu',value:goku.hp}:{id:1000,time:0,kind,source:source.uid,target:target.uid,skill:kind==='skill'?(hab?skillIndex:0):undefined,label:kind==='basic'?'Ataque básico':label,visual};
 if(porAlvo){const alvoDe=porAlvo;for(const e of effects)applyEffects(battle,source,alvoDe(e),[{...e,target:undefined} as Effect]);}else applyEffects(battle,source,selected,effects);
+if(scenario==='status5')battle.events.push({id:1002,time:0,kind:'miss',source:goku.uid,target:sakura.uid,label:'Errou'});
 const events=renasce?[event]:[event,...battle.events],after=structuredClone(battle),impacted=phase==='impact';
 const beat:Beat={event,events,before,after,duration:2,elapsed:impacted?1.1:.35,impacted,family:visual==='impact'?'physical':visual==='psychic'?'psychic':visual==='bolt'?'electric':visual==='shield'?'shield':'buff',grand:false};
 const settings={...defaults,volume:0,musicVolume:0,effectsVolume:0,numbers:true,explanations:'off' as const};

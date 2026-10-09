@@ -19,7 +19,7 @@ export const SONS = [
   'psiquico', 'sombra', 'luz', 'portal', 'maldicao', 'prisao', 'selo', 'distorcao',
   'cura', 'escudo', 'bloqueio', 'reforco', 'enfraquecer', 'purificar', 'dreno',
   'interrupcao', 'pronto', 'preparo', 'grand-carga', 'grand-impacto', 'nocaute', 'vitoria', 'derrota', 'virada',
-  'transformacao', 'toque',
+  'transformacao', 'toque', 'errou', 'barreira-anula',
   'ui-clique', 'ui-confirma', 'ui-abrir', 'ui-fechar', 'ui-alternar', 'ui-escolher', 'ui-arena', 'reacao',
 ] as const;
 

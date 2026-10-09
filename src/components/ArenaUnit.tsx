@@ -89,6 +89,9 @@ export function ArenaUnit({fighter:f,battle,beat,onInspect,numbers,threatened,li
   const out=f.hp<=0,critical=!out&&f.hp/f.maxHp<=P.criticalCondition;
   // caiu, mas vai renascer: fica em brasas em vez de "fora"
   const renascendo=out&&(f.renascendo??0)>0;
+  const errou=impacted?beat?.events.find(e=>revelado(beat,e)&&e.source===f.uid&&e.kind==='miss'):undefined;
+  const anulou=impacted?beat?.events.find(e=>revelado(beat,e)&&e.target===f.uid&&e.kind==='resist'):undefined;
+  const congelado=!out&&f.statuses.some(s=>s.id==='frozen'),dormindo=!out&&f.statuses.some(s=>s.id==='sleep');
   const limpo=impacted?[...(beat?.events??[])].reverse().find(e=>revelado(beat!,e)&&e.target===f.uid&&(e.kind==='cleanse'||e.kind==='dispel')):undefined;
   const levantou=impacted?beat?.events.find(e=>revelado(beat,e)&&e.target===f.uid&&e.kind==='revive'):undefined;
   const ring=acting&&!impacted?1:f.action;
@@ -101,7 +104,7 @@ export function ArenaUnit({fighter:f,battle,beat,onInspect,numbers,threatened,li
   const buffs=f.statuses.filter(s=>statuses[s.id].tone!=='negativo'),debuffs=f.statuses.filter(s=>statuses[s.id].tone==='negativo');
   const hpPct=Math.max(0,Math.min(100,100*f.hp/f.maxHp)),shieldPct=Math.min(100-hpPct,100*shield/f.maxHp);
   const marcas=[
-    out&&'is-out',renascendo&&'is-renascendo',levantou&&'is-revived',preparing&&'is-casting',hit&&'is-hit',acting&&'is-acting',basicStyle,critical&&'is-critical',
+    out&&'is-out',renascendo&&'is-renascendo',congelado&&'is-frozen',dormindo&&'is-asleep',levantou&&'is-revived',preparing&&'is-casting',hit&&'is-hit',acting&&'is-acting',basicStyle,critical&&'is-critical',
     (shielded||blocked)&&'is-helped',linkedSource&&'is-source',linkedTarget&&'is-target',knocked&&'is-newly-out',
     broken&&'is-broken',threatened&&'is-threatened',ring>=P.nearAction&&'is-near',tempo&&'is-tempo',reagindo&&'is-reacting',
   ].filter(Boolean).join(' ');
@@ -130,6 +133,9 @@ export function ArenaUnit({fighter:f,battle,beat,onInspect,numbers,threatened,li
           ?<span className="unit-ko unit-renasce" aria-label={`Renascendo em ${Math.ceil(f.renascendo??0)} segundos`}><Flame size={24}/><b>RENASCE</b></span>
           :<span className="unit-ko" aria-label="Fora da luta"><Skull size={26}/><b>FORA</b></span>)}
         {levantou&&<span key={levantou.id} className="discovery-pop revive-pop">{levantou.label}</span>}
+        {dormindo&&<span className="unit-zz" aria-hidden="true">z<b>z</b><i>z</i></span>}
+        {errou&&<span key={`e${errou.id}`} className="discovery-pop errou-pop">Errou!</span>}
+        {anulou&&<span key={`a${anulou.id}`} className="discovery-pop anulou-pop">Barreira · anulou {anulou.status?statuses[anulou.status].name:'o debuff'}</span>}
         {limpo&&!levantou&&<span key={`l${limpo.id}`} className={`discovery-pop ${limpo.kind==='cleanse'?'purifica-pop':'dissipa-pop'}`}>{limpo.label}{(limpo.removidos?.length??0)>0&&<> · {limpo.removidos!.map(id=>statuses[id].name).join(', ')}</>}</span>}
         {reagindo&&<span key={`r${reagindo.eventos[0]??0}`} className="reacao-pop"><Zap size={11} strokeWidth={3}/>{reagindo.rotulo??'Reação'}</span>}
         {reagindo&&<span key={`a${reagindo.eventos[0]??0}`} className="reacao-anel" aria-hidden="true"/>}

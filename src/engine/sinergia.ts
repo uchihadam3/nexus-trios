@@ -24,7 +24,7 @@ export type Ligacao = (typeof LIGACOES)[number];
 const PARA_ALIADOS: Target[] = ['allAllies', 'allyWeak'];
 const PARA_RIVAIS: Target[] = ['enemyWeak', 'enemyStrong', 'enemyCast', 'investigated', 'allEnemies', 'randomEnemy'];
 const ABRE: StatusId[] = ['exposed', 'marked', 'paralyzed', 'electric', 'burning'];
-const PRENDE: StatusId[] = ['paralyzed', 'rooted', 'slow', 'confused', 'silenced', 'weakened'];
+const PRENDE: StatusId[] = ['paralyzed', 'frozen', 'sleep', 'rooted', 'slow', 'confused', 'silenced', 'weakened', 'blind'];
 const REFORCO: StatusId[] = ['strengthened', 'haste', 'protected', 'regen'];
 
 export interface Papel {

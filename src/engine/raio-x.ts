@@ -57,7 +57,7 @@ export const raioXVazio = (): EstadoRaioX =>
 /* Os que abrem o inimigo para o golpe de outro. */
 const VULNERABILIZA = new Set<StatusId>(['exposed', 'marked', 'electric', 'weakened']);
 /* Os que tiram o turno do inimigo. */
-const TRAVA = new Set<StatusId>(['paralyzed', 'rooted', 'silenced', 'confused']);
+const TRAVA = new Set<StatusId>(['paralyzed', 'frozen', 'sleep', 'rooted', 'silenced', 'confused', 'blind']);
 
 const doTrio = (uid: string) => uid.startsWith('player-');
 
