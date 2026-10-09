@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { characters } from '../src/data/characters';
+import { byId, characters } from '../src/data/characters';
 import { forcaDoTrio, generateCampaign, newDraft } from '../src/engine/campaign';
 import { CUSTO_DAS_DICAS, pontosDaLuta } from '../src/engine/pontos';
 import { replayRanked } from '../src/engine/ranked';
@@ -70,11 +70,11 @@ describe('Dicas de trio', () => {
     expect(comPorque.some((m) => /Barreira elétrica de Raiden/.test(m.porque!))).toBe(true);
   });
 
-  it('"fraco contra provocar" fica só assim, sem explicar o que é provocar', () => {
-    const quem = characters.filter((c) => pontoFraco(c.vulnerability, c)[0]?.tipo === 'provocar').map((c) => c.id);
-    expect(quem.length).toBeGreaterThan(0);
-    for (const d of dicasDoDraft(quem.slice(0, 3), [])) {
-      expect(d.detalhe.map((x) => x.texto)).toContain('Cuidado: fraco contra provocar');
+  it('o cuidado do draft é o ponto fraco do próprio personagem, com o porquê', () => {
+    const ids = characters.slice(0, 6).map((c) => c.id);
+    for (const d of dicasDoDraft(ids.slice(0, 3), [])) {
+      const f = pontoFraco(byId[d.id]!)[0]!;
+      expect(d.detalhe.map((x) => x.texto).some((t) => t.startsWith(`Cuidado: ${f.rotulo.charAt(0).toLowerCase()}`) && !/fraco contra/.test(t))).toBe(true);
     }
   });
   it('custa 25 mil por luta, aparece na conta e a luta nunca fica negativa', () => {

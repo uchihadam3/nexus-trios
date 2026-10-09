@@ -35,16 +35,30 @@ describe('texto de quando o traço ativa', () => {
  * genérica repetida.
  */
 import { fraquezas } from '../src/data/fraquezas';
+import { pontoFraco } from '../src/data/ponto-fraco';
 describe('pontos fracos', () => {
-  it('todos têm um ponto fraco próprio, com o contra-quê e o porquê', () => {
-    const textos = characters.map((c) => c.vulnerability);
-    expect(new Set(textos).size).toBeGreaterThanOrEqual(characters.length - 4);
+  it('todos têm um ponto fraco do próprio personagem, com o porquê', () => {
     for (const c of characters) {
       expect(c.vulnerability, c.id).toBe(fraquezas[c.id]);
-      expect(c.vulnerability, c.id).toMatch(/^(Contra|Em luta longa|Depende do momento|Precisa apanhar)[^:]*: .{40,}/);
+      expect(c.vulnerability, c.id).toMatch(/^(Cai rápido|Habilidade rara|Preparo longo|Ataque lento|Pouco dano|Precisa apanhar): .{12,}/);
       expect(c.vulnerability.length, c.id).toBeLessThanOrEqual(240);
+      expect(pontoFraco(c).length, c.id).toBeGreaterThan(0);
+      // um ponto fraco de cada tipo (pouca Vida e cair rápido são a mesma coisa: "Cai rápido")
+      expect(new Set(pontoFraco(c).map((f) => f.tipo)).size, c.id).toBe(pontoFraco(c).length);
     }
-    expect(byId.donald.vulnerability).not.toMatch(/perde o controle/i);
+  });
+  /*
+   * Pedido do jogador: "todo mundo sofre com Espinhos, todo mundo recebe dano em
+   * área — isso não é ponto fraco". Nada do que pesa em todo mundo aparece.
+   */
+  it('nunca é "contra" algo que pesa em todo mundo (Espinhos, Área, Tanques…)', () => {
+    for (const c of characters) expect(c.vulnerability, c.id).not.toMatch(/Contra |Espinhos|em área|Tanques|Refletir|Provocar|Pouca Vida/);
+  });
+  it('a Vida e o ritmo do ponto fraco são os de agora', () => {
+    for (const c of characters) for (const f of pontoFraco(c)) {
+      if (/de Vida/.test(f.motivo)) expect(f.motivo).toMatch(new RegExp(`[Ss]ó ${c.hp.toLocaleString('pt-BR').replace('.', '\\.')} de Vida`));
+      if (f.tipo === 'lento') expect(f.motivo).toBe(`Ataca só a cada ${(Math.round(c.interval * 100) / 100).toLocaleString('pt-BR')} s`);
+    }
   });
 });
 

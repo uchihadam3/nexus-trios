@@ -117,10 +117,8 @@ export function dicasDoDraft(candidatos: string[], time: string[], fora: string[
     const motivos = motivosDe(id, time);
     // um candidato que encaixa mal começa pelo aviso, mesmo tendo alguma combinação
     if (time.length && encaixe < 35) motivos.unshift({ texto: `Encaixa pouco: há opções bem melhores para este trio`, tom: 'alerta', ordem: 99 });
-    const fraco = pontoFraco(byId[id]!.vulnerability, byId[id])[0];
-    // "fraco contra Provocar" já se explica: aqui o porquê só repetiria o nome (pedido do jogador)
-    const porque = fraco && fraco.tipo !== 'provocar' ? ` — ${fraco.motivo.charAt(0).toLowerCase()}${fraco.motivo.slice(1)}` : '';
-    const detalhe = fraco ? [...motivos, { texto: `Cuidado: fraco contra ${fraco.contra.toLowerCase()}${porque}`, tom: 'alerta' as const, ordem: 0 }] : motivos;
+    const fraco = pontoFraco(byId[id]!)[0];
+    const detalhe = fraco ? [...motivos, { texto: `Cuidado: ${fraco.rotulo.charAt(0).toLowerCase()}${fraco.rotulo.slice(1)} — ${fraco.motivo.charAt(0).toLowerCase()}${fraco.motivo.slice(1)}`, tom: 'alerta' as const, ordem: 0 }] : motivos;
     const limpa = (l: typeof motivos) => l.map(({ texto, tom }) => ({ texto, tom }));
     // na explicação maior, cada combinação vem com o porquê (a habilidade que liga a outra)
     const explica = (l: typeof motivos) => l.map(({ texto, tom, porque }) => ({ texto, tom, ...(porque ? { porque } : {}) }));

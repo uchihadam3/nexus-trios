@@ -26,7 +26,7 @@ const ALVO = Number(process.env.ALVO ?? 0.5);
 const ORIGINAL: Record<string, number> = Object.fromEntries([...readFileSync(new URL('./forca-original.txt', import.meta.url), 'utf8').matchAll(/"([^"]+)": (-?[\d.]+),/g)].map((m) => [m[1]!, Number(m[2])]));
 /** força ganha por personagem a cada ×e no multiplicador (medida entre rodadas) */
 const BETA = Number(process.env.BETA ?? 0.9);
-const PASSO = 0.85, MIN = 0.5, MAX = 3;
+const PASSO = Number(process.env.PASSO ?? 0.85), MIN = 0.5, MAX = 3;
 
 const novo: Record<string, number> = {};
 let maior = 0;

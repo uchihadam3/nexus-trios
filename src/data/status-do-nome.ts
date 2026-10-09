@@ -42,7 +42,7 @@ const TROCAS: Record<string, Troca> = {
   'mummra:1': { de: 'burning', para: 'cursed', valor: 0.12 },
   // a presença do Cabeça de Pirâmide enfraquece
   'pyramidhead:1': { de: 'burning', para: 'weakened', valor: 0.08 },
-  // o discurso do Mojo Jojo prende todo mundo ouvindo; o chapéu-helicóptero confunde
+  // o discurso do Macaco Louco prende todo mundo ouvindo; o chapéu-helicóptero confunde
   'mojojojo:2': { de: 'electric', para: 'slow', valor: 0.16 },
   'bugiganga:1': { de: 'electric', para: 'confused', valor: 1 },
 };

@@ -10,7 +10,9 @@
  * - quando caiu, e se caiu de um golpe grande (≥ 35% da Vida num beat);
  * - quantos Preparos começou e quantos foram cortados;
  * - quantos segundos passou preso, paralisado, silenciado ou confuso;
- * - quantos segundos passou Queimando, Envenenado ou Sangrando (dano contínuo).
+ * - quantos segundos passou Queimando, Envenenado ou Sangrando (dano contínuo);
+ * - quantas vezes cada habilidade dele saiu, quanto dano ele causou e quanto
+ *   tempo ficou de pé — o ponto fraco é o que ele não consegue fazer.
  *
  * Saída: docs/fraquezas-medidas.json. O texto de cada ponto fraco é escrito a
  * partir disso em scripts/escrever-fraquezas.ts.
@@ -32,6 +34,7 @@ interface Acumulado {
   quedas: number; tempoDeQueda: number; primeiroACair: number; quedaPorGolpeGrande: number;
   preparos: number; preparosCortados: number; controleSegundos: number;
   danoRecebido: number; danoContinuoRecebido: number; duracaoMedia: number;
+  usos: [number, number, number]; danoCausado: number; tempoDePe: number;
   /* identidade do trio rival → [lutas, vitórias] */
   contra: Record<string, [number, number]>;
 }
@@ -39,6 +42,7 @@ interface Acumulado {
 const acc = new Map<string, Acumulado>(characters.map((c) => [c.id, {
   id: c.id, lutas: 0, vitorias: 0, quedas: 0, tempoDeQueda: 0, primeiroACair: 0, quedaPorGolpeGrande: 0,
   preparos: 0, preparosCortados: 0, controleSegundos: 0, danoRecebido: 0, danoContinuoRecebido: 0, duracaoMedia: 0, contra: {},
+  usos: [0, 0, 0], danoCausado: 0, tempoDePe: 0,
 }]));
 
 /* Gerador simples e determinístico para sortear os trios. */
@@ -59,6 +63,7 @@ for (let luta = 0; luta < LUTAS; luta += 1) {
   const danoNoBeat = new Map<string, { tempo: number; valor: number }>();
   const caiuDeGolpeGrande = new Set<string>();
   const controle = new Map<string, number>();
+  const quedaDe = new Map<string, number>();
   for (let passo = 0; passo < 6000 && !b.finished; passo += 1) {
     stepBattle(b);
     for (const f of b.fighters) {
@@ -72,6 +77,8 @@ for (let luta = 0; luta < LUTAS; luta += 1) {
       const alvo = ev.target ? b.fighters.find((f) => f.uid === ev.target) : undefined;
       const fonte = b.fighters.find((f) => f.uid === ev.source);
       if (ev.kind === 'cast' && fonte) acc.get(fonte.characterId)!.preparos += 1;
+      if (ev.kind === 'skill' && fonte && ev.skill !== undefined && ev.skill < 3) acc.get(fonte.characterId)!.usos[ev.skill] += 1;
+      if (ev.kind === 'damage' && alvo && fonte && fonte.side !== alvo.side) acc.get(fonte.characterId)!.danoCausado += ev.value ?? 0;
       if (ev.kind === 'interrupt' && alvo && ev.label === 'Interrompido!') acc.get(alvo.characterId)!.preparosCortados += 1;
       if (ev.kind === 'damage' && alvo && fonte && fonte.side !== alvo.side) {
         const m = acc.get(alvo.characterId)!;
@@ -83,7 +90,7 @@ for (let luta = 0; luta < LUTAS; luta += 1) {
       }
       if (ev.kind === 'ko' && alvo) {
         const m = acc.get(alvo.characterId)!;
-        m.quedas += 1; m.tempoDeQueda += b.time;
+        m.quedas += 1; m.tempoDeQueda += b.time; quedaDe.set(alvo.uid, b.time);
         if (!primeiraQueda) { primeiraQueda = alvo.uid; m.primeiroACair += 1; }
         const d = danoNoBeat.get(alvo.uid);
         if (d && Math.abs(d.tempo - ev.time) < 0.05 && d.valor >= alvo.maxHp * 0.35) caiuDeGolpeGrande.add(alvo.uid);
@@ -92,7 +99,7 @@ for (let luta = 0; luta < LUTAS; luta += 1) {
   }
   for (const f of b.fighters) {
     const m = acc.get(f.characterId)!;
-    m.lutas += 1; m.duracaoMedia += b.time;
+    m.lutas += 1; m.duracaoMedia += b.time; m.tempoDePe += quedaDe.get(f.uid) ?? b.time;
     const venceu = b.winner === f.side;
     if (venceu) m.vitorias += 1;
     if (caiuDeGolpeGrande.has(f.uid)) m.quedaPorGolpeGrande += 1;
@@ -117,6 +124,9 @@ const saida = [...acc.values()].map((m) => ({
   danoRecebido: +(m.danoRecebido / m.lutas).toFixed(1),
   danoContinuoRecebido: +(m.danoContinuoRecebido / m.lutas).toFixed(1),
   duracaoMedia: +(m.duracaoMedia / m.lutas).toFixed(2),
+  usos: m.usos.map((u) => +(u / m.lutas).toFixed(3)),
+  danoCausado: +(m.danoCausado / m.lutas).toFixed(1),
+  tempoDePe: +(m.tempoDePe / m.lutas).toFixed(2),
   contra: Object.fromEntries(Object.entries(m.contra).map(([k, [n, v]]) => [k, { lutas: n, vitorias: +(v / n).toFixed(4) }])),
 }));
 writeFileSync('docs/fraquezas-medidas.json', JSON.stringify({ lutas: LUTAS, medidas: saida }, null, 1) + '\n');

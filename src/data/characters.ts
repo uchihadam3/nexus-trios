@@ -221,9 +221,9 @@ const TANQUES_DE_IDENTIDADE=new Set(['piccolo','eren','kaneki','vision','venom',
 export const TANQUES:ReadonlySet<string>=new Set(deBase.filter(c=>TANQUES_DE_IDENTIDADE.has(c.id)||c.hp>=VIDA_DE_TANQUE).map(c=>c.id));
 /*
  * Números que o jogador pediu, como ele pediu: valem depois do ajuste de força (o ajuste mexe no
- * resto do personagem, nunca nestes). "Discurso interminável do Mojo Jojo: dano 450, mas Preparo de 5 s."
+ * resto do personagem, nunca nestes). "Discurso interminável do Macaco Louco: dano 450" e "o tempo de preparo… pra quatro segundos".
  */
-const PEDIDOS_DO_JOGADOR:Record<string,{dano?:number;preparo?:number}>={'mojojojo:2':{dano:450,preparo:5}};
+const PEDIDOS_DO_JOGADOR:Record<string,{dano?:number;preparo?:number}>={'mojojojo:2':{dano:450,preparo:4}};
 function aplicaPedidos(c:Character):Character{
   if(!Object.keys(PEDIDOS_DO_JOGADOR).some(k=>k.startsWith(`${c.id}:`)))return c;
   const skills=c.skills.map((s,i)=>{

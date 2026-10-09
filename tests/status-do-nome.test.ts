@@ -33,10 +33,11 @@ describe('a ficha não repete o que o termo clicável já explica', () => {
 });
 
 describe('os números que o jogador pediu', () => {
-  it('Discurso interminável do Mojo Jojo: 450 de dano e Preparo de 5 s', () => {
+  it('Discurso interminável do Macaco Louco: 450 de dano e Preparo de 4 s', () => {
     const s = byId.mojojojo!.skills[2]!;
     expect(s.name).toBe('Discurso interminável');
-    expect(s.preparation).toBe(5);
+    expect(s.preparation).toBe(4);
+    expect(byId.mojojojo!.name).toBe('Macaco Louco');
     expect(s.effects.flatMap((e) => (e.kind === 'damage' ? [e.value] : []))).toEqual([450]);
   });
 });

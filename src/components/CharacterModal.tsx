@@ -1,5 +1,5 @@
 import { useEffect,useRef,type CSSProperties } from 'react';
-import { X,HeartPulse,Gauge,Brain,Info,Sparkles,Swords,TriangleAlert,Zap,Hourglass,Snowflake,Target,Scissors,Bomb,Users,ShieldPlus,FastForward,Flame,Lock,Mountain,Clock,Wand2,Droplets,Megaphone,Wind,Repeat,EyeOff,type LucideIcon } from 'lucide-react';
+import { X,HeartPulse,Gauge,Brain,Info,Sparkles,Swords,TriangleAlert,Zap,Hourglass,Snowflake,Target,Scissors,Bomb,TrendingDown,Turtle,Sword,type LucideIcon } from 'lucide-react';
 import type { Character } from '../engine/types';
 import { characters } from '../data/characters';
 import { Portrait } from './Portrait';
@@ -12,7 +12,7 @@ import { ComTermos,TermoBotao } from './Termos';
 import { termoPorId } from '../presentation/glossario';
 import { pontoFraco,type TipoDeFraqueza } from '../data/ponto-fraco';
 
-const ICONE_DA_FRAQUEZA:Record<TipoDeFraqueza,LucideIcon>={interrupcao:Scissors,explosao:Bomb,area:Users,cura:ShieldPlus,rapidos:FastForward,continuo:Flame,controle:Lock,tanques:Mountain,longa:Hourglass,momento:Clock,apanhar:Bomb,dissipar:Wand2,purificar:Droplets,provocar:Megaphone,esquiva:Wind,refletir:Repeat,cegueira:EyeOff};
+const ICONE_DA_FRAQUEZA:Record<TipoDeFraqueza,LucideIcon>={cai:TrendingDown,rara:Hourglass,preparo:Scissors,lento:Turtle,dano:Sword,apanhar:Bomb};
 
 export function intelligenceLabel(value:number){
   return value>=95?'Excepcional':value>=80?'Muito inteligente':value>=60?'Esperto':value>=40?'Comum':'Impulsivo';
@@ -79,11 +79,11 @@ export function CharacterModal({character:c,onClose}:{character:Character;onClos
       </div>
     </article>;})}</div>
 
-    {/* curto: contra o quê ele perde, e por quê em poucas palavras */}
+    {/* curto: o que ele não consegue fazer, e por quê em poucas palavras */}
     <section className="fv-fraco" aria-label="Ponto fraco">
       <span className="fv-selo"><TriangleAlert size={13}/>PONTO FRACO</span>
-      <ul>{pontoFraco(c.vulnerability,c).map(x=>{const Icone=ICONE_DA_FRAQUEZA[x.tipo];return <li key={x.contra}>
-        <span className="fv-fraco-contra"><Icone size={15} strokeWidth={2.4}/>{x.contra}</span>
+      <ul>{pontoFraco(c).map(x=>{const Icone=ICONE_DA_FRAQUEZA[x.tipo];return <li key={x.tipo}>
+        <span className="fv-fraco-contra"><Icone size={15} strokeWidth={2.4}/>{x.rotulo}</span>
         <span className="fv-fraco-motivo">{x.motivo}</span>
       </li>;})}</ul>
     </section>
