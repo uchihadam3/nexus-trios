@@ -25,7 +25,7 @@ describe('texto de quando o traço ativa', () => {
   });
   it('os exemplos do jogador', () => {
     expect(presentTrait(byId.nezuko.trait).quando).toBe('A cada 2 s');
-    expect(presentTrait(byId.donald.trait).quando).toBe('Ao receber dano · no máximo 1 vez a cada 3 s');
+    expect(presentTrait(byId.kenpachi.trait).quando).toBe('Ao receber dano · no máximo 1 vez a cada 3 s');
   });
 });
 
@@ -45,5 +45,21 @@ describe('pontos fracos', () => {
       expect(c.vulnerability.length, c.id).toBeLessThanOrEqual(240);
     }
     expect(byId.donald.vulnerability).not.toMatch(/perde o controle/i);
+  });
+});
+
+/*
+ * Traços próprios (pedido do jogador: "tem que ser mais criativo nos
+ * traços… individualidade"): nenhum traço repetido entre os 250.
+ */
+describe('traço próprio de cada um', () => {
+  it('os 250 têm traços com nomes diferentes', () => {
+    expect(new Set(characters.map((c) => c.trait.name)).size).toBe(characters.length);
+  });
+  it('alguns da lore: Blaze do Charizard, Fênix da Jean Grey, caixa do Snake, chá do Iroh', () => {
+    expect(byId.charizard!.trait).toMatchObject({ name: 'Blaze', on: 'losing' });
+    expect(byId.jeangrey!.trait.effects[0]).toMatchObject({ kind: 'heal' });
+    expect(byId.snake!.trait.effects[0]).toMatchObject({ kind: 'status', status: 'evasion' });
+    expect(byId.iroh!.trait).toMatchObject({ target: 'allAllies' });
   });
 });
