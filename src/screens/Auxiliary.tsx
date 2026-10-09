@@ -18,7 +18,8 @@ export function CharactersScreen({onDetails}:{onDetails:(id:string)=>void}){
   const [query,setQuery]=useState(''),[universe,setUniverse]=useState('Todos'),[role,setRole]=useState<Identidade|'Todas'>('Todas'),[visibleCount,setVisibleCount]=useState(30);
   const sem=(t:string)=>t.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
   const filtered=characters.filter(c=>(universe==='Todos'||c.universe===universe)&&(role==='Todas'||identidadesDe(c).includes(role))&&sem(`${c.name} ${c.universe}`).includes(sem(query)));
-  const universos=['Todos',...[...new Set(characters.map(c=>c.universe))].sort((a,b)=>characters.filter(c=>c.universe===b).length-characters.filter(c=>c.universe===a).length)];
+  // em ordem alfabética (pedido do jogador: "fica mais fácil de achar"), e não pela quantidade de personagens
+  const universos=['Todos',...[...new Set(characters.map(c=>c.universe))].sort((a,b)=>a.localeCompare(b,'pt-BR',{sensitivity:'base'}))];
   const fim=useRef<HTMLDivElement>(null);
   useEffect(()=>{const el=fim.current;if(!el||typeof IntersectionObserver==='undefined')return;const o=new IntersectionObserver(es=>{if(es.some(e=>e.isIntersecting))setVisibleCount(n=>n+30);},{rootMargin:'400px'});o.observe(el);return()=>o.disconnect();},[filtered.length]);
   const muda=(f:()=>void)=>{f();setVisibleCount(30);};
