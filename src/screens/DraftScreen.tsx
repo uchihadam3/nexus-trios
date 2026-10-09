@@ -5,7 +5,7 @@ import type { Draft,Encounter } from '../engine/campaign';
 import { byId } from '../data/characters';
 import { Portrait } from '../components/Portrait';
 import { SkillIcon } from '../components/Icon';
-import { presentTrait } from '../engine/skill-descriptions';
+import { presentTrait,textoDoRenascer } from '../engine/skill-descriptions';
 import { identidadesDe,identidadesDoTrio,lacunasDoTrio,oQueAdiciona } from '../presentation/identities';
 import { IdentityChips } from '../components/IdentityChips';
 import { ComTermos } from '../components/Termos';
@@ -73,7 +73,7 @@ export function DraftScreen({draft,primeiroRival,dicas,usouDicas,onDicas,onPick,
           </button>}
           <IdentityChips ids={identidadesDe(c)} trio={team.length?doTrio:undefined} novas={ligadas&&team.length?novas:undefined}/>
           {conexao&&!dica&&<p className="dv-conexao"><Sparkles size={14}/>{conexao}</p>}
-          <p className="dv-traco"><b>{c.trait.name}</b> <ComTermos texto={trait.summary}/></p>
+          <p className="dv-traco"><b>{c.trait.name}</b> <ComTermos texto={trait.summary}/>{c.renascer&&<> · <ComTermos texto={textoDoRenascer(c.renascer)}/></>}</p>
           <div className="dv-habilidades">{c.skills.map(s=><span key={s.id} title={s.name}><SkillIcon type={s.icon} characterId={c.id} skillId={s.id} size={30}/></span>)}<button className="text-button" onClick={()=>onDetails(id)}>Ficha</button></div>
           <button className="dv-escolher choose-button" onClick={()=>onPick(id)} aria-label="Escolher" title={`Adicionar ${c.name} ao trio`}>ESCOLHER</button>
         </div>

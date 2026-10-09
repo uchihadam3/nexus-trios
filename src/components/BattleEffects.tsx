@@ -20,7 +20,7 @@ export function isAreaBeat(beat:Beat|null,battle:Battle):boolean {
 }
 
 /* Beats sem ficha de habilidade (interrupção) ganham uma família direta. */
-const SEM_FICHA:Partial<Record<Beat['event']['kind'],VfxFamily>>={interrupt:'onda_de_choque'};
+const SEM_FICHA:Partial<Record<Beat['event']['kind'],VfxFamily>>={interrupt:'onda_de_choque',revive:'renascer'};
 /* Cada variante gira um pouco o impacto, para a mesma família não parecer carimbo. */
 const GIRO_DA_VARIANTE=[0,16,-12,8];
 /* Altura da faixa em relação ao medalhão. */
@@ -58,7 +58,7 @@ export function BattleEffects({battle,beat,anchors,enabled,reduced,medal=80}:{ba
   const vai=!!beat&&!reduced&&kind!=='cast'&&!!alvoPrincipal&&alvoPrincipal!==beat.event.source&&!!perfil?.travel&&dist>medal*.6;
 
   /* Alvos que recebem impacto: quem levou dano, cura, Escudo ou Status deste beat (até três). */
-  const alvos=beat?[...new Set(beat.events.filter(e=>e.target&&['damage','status','interrupt','shield','heal','ko','block'].includes(e.kind)).map(e=>e.target!))].slice(0,3):[];
+  const alvos=beat?[...new Set(beat.events.filter(e=>e.target&&['damage','status','interrupt','shield','heal','ko','block','revive'].includes(e.kind)).map(e=>e.target!))].slice(0,3):[];
   if(beat&&landed&&!alvos.length&&kind!=='turn'&&kind!=='cast')alvos.push(alvoPrincipal??beat.event.source);
 
   const camada=(nome:string,estilo:Record<string,string|number>,classe:string,key:string)=><span key={key} className={`fxl ${classe}`} style={{'--fx-img':`url(${folha(nome)})`,...estilo} as CSSProperties}/>;
@@ -94,6 +94,11 @@ export function BattleEffects({battle,beat,anchors,enabled,reduced,medal=80}:{ba
         if(fam.acento&&i===0&&!reduced)nodes.push(camada(fam.acento,{left:`${p.x}%`,top:`${p.y}%`,width:t*.62,height:t*.62,'--ang':`${direcao}deg`,'--dur':s(Math.max(.35,dur*.6))},'fxl-impacto fxl-acento',`ac-${id}-${uid}`));
         nodes.push(camada(fam.impacto,{left:`${p.x}%`,top:`${p.y}%`,width:t,height:t,'--ang':`${giro}deg`,'--flip':espelho,'--dur':s(dur),'--delay':s(area?i*.07:0)},`fxl-impacto ${reduced?'fxl-parado':''}`,`imp-${id}-${uid}`));
       });
+      // quem foi levantado por um aliado: a luz da ressurreição por cima do resto (a do renascer já é o próprio beat)
+      for(const e of beat.events)if(e.kind==='revive'&&e.target&&e.source!==e.target){
+        const p=point(e.target),volta=familia('ressurreicao'),t=Math.min(medal*volta.escala,Math.min(size.w,size.h)*.92);
+        nodes.push(camada(volta.impacto,{left:`${p.x}%`,top:`${p.y}%`,width:t,height:t,'--ang':'0deg','--flip':1,'--dur':s(Math.max(.6,dur*1.1)),'--delay':s(.12)},`fxl-impacto ${reduced?'fxl-parado':''}`,`rev-${id}-${e.target}`));
+      }
     }
   }
 

@@ -21,7 +21,7 @@ export interface Cue {event:BattleEvent;family:Family;phase:'start'|'impact';gra
 export interface BeatTrace {eventId:number;kind:BattleEvent['kind'];duration:number;realStart:number;realImpact:number|null;realFinish:number|null;speed:number;queueLength:number;battleTime:number;source:string;haste:number;slow:number;rooted:number;shifts:{target:string;value:number}[]}
 export function familyOf(event:BattleEvent,battle:Battle):Family {
   if(event.kind==='ko'||event.kind==='turn'||event.kind==='interrupt')return event.kind;
-  if(event.kind==='heal')return 'heal';
+  if(event.kind==='heal'||event.kind==='revive')return 'heal';
   if(event.kind==='shield'||event.kind==='block')return 'shield';
   if(event.status){if(event.status==='regen')return 'regen';if(event.status==='burning')return 'fire';if(['haste','strengthened','protected'].includes(event.status))return 'buff';if(['rooted','paralyzed'].includes(event.status))return 'prison';return 'debuff';}
   const f=battle.fighters.find(f=>f.uid===event.source),c=f?byId[f.characterId]:null;
@@ -38,11 +38,11 @@ export function familyOf(event:BattleEvent,battle:Battle):Family {
 }
 function focus(events:BattleEvent[]):BattleEvent|undefined {
   return events.find(e=>e.kind==='basic'||e.kind==='skill'||e.kind==='cast')
-    ??events.find(e=>e.kind==='interrupt'||e.kind==='ko'||e.kind==='turn');
+    ??events.find(e=>e.kind==='interrupt'||e.kind==='ko'||e.kind==='revive'||e.kind==='turn');
 }
 function duration(event:BattleEvent,grand:boolean){
   if(event.kind==='cast')return P.preparationSeconds;
-  if(event.kind==='ko')return P.knockoutSeconds;
+  if(event.kind==='ko'||event.kind==='revive')return P.knockoutSeconds;
   if(event.kind==='turn')return P.turnaroundSeconds;
   if(event.kind==='interrupt')return P.interruptSeconds;
   if(event.kind==='tempo')return P.tempoSeconds;
@@ -166,11 +166,15 @@ export function visivelNaEtapa(beat:Beat,etapa:number):Battle{
   v.fighters.forEach((f,i)=>{
     const antes=beat.before.fighters[i];if(!antes)return;
     const meus=vistos.filter(e=>e.target===f.uid);
-    if(meus.some(e=>e.kind==='ko'))f.hp=0;
-    else{
-      const delta=meus.reduce((t,e)=>t+(e.kind==='heal'?e.value??0:e.kind==='damage'?-(e.value??0):0),0);
-      f.hp=Math.max(0,Math.min(f.maxHp,antes.hp+delta));
+    // na ordem: cair zera, levantar volta com a Vida prometida, e o resto soma por cima
+    let hp=antes.hp;
+    for(const e of meus){
+      if(e.kind==='ko')hp=0;
+      else if(e.kind==='revive')hp=e.value??1;
+      else if(e.kind==='heal'&&hp>0)hp+=e.value??0;
+      else if(e.kind==='damage')hp-=e.value??0;
     }
+    f.hp=Math.max(0,Math.min(f.maxHp,hp));
     const escudos=structuredClone(antes.shields);
     for(const e of meus){
       if(e.kind==='shield'&&e.label==='Escudo')escudos.push({amount:e.value??0,remaining:10,source:e.source});
@@ -234,14 +238,14 @@ function collect(d:Direction,events:BattleEvent[],before:Battle,after:Battle,leg
     const last=d.queue[d.queue.length-1];
     // One fixed window covers every affected fighter, without crossing an action.
     if(last?.periodic&&(previous?(last.event.source===event.source&&last.event.target===event.target&&last.event.kind===event.kind):true)&&
-       !events.some(e=>e.kind==='ko'||e.kind==='interrupt'||e.kind==='turn')&&after.time-last.before.time<=(legacy?1.01:previous?.51:P.periodicWindowSeconds+.01)){
+       !events.some(e=>e.kind==='ko'||e.kind==='revive'||e.kind==='interrupt'||e.kind==='turn')&&after.time-last.before.time<=(legacy?1.01:previous?.51:P.periodicWindowSeconds+.01)){
       last.events.push(...events);last.after=after;
       if(previous)last.event.value=(last.event.value??0)+(event.value??0);
     }else d.queue.push(makeBeat(event,events,before,after,true,previous));
     return;
   }
   if(previous){
-    const important=events.find(e=>e.kind==='interrupt'||e.kind==='ko'||e.kind==='turn'||e.kind==='ready'||e.kind==='status'||e.kind==='shield');
+    const important=events.find(e=>e.kind==='interrupt'||e.kind==='ko'||e.kind==='revive'||e.kind==='turn'||e.kind==='ready'||e.kind==='status'||e.kind==='shield');
     if(important)d.queue.push(makeBeat(important,events,before,after,legacy&&(important.kind==='ready'||important.kind==='status'),true));
     return;
   }
