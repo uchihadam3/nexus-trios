@@ -43,6 +43,7 @@ const FAZ: Record<StatusId, string> = {
   silenced: 'Não começa habilidades novas. O ataque básico continua.',
   strengthened: 'Causa mais dano em tudo: ataque básico e habilidades.',
   weakened: 'Causa menos dano em tudo.',
+  provoked: 'Só consegue mirar em quem provocou. Golpes em todos continuam iguais; se quem provocou cair, acaba na hora.',
 };
 
 const acumula = (id: StatusId) => {

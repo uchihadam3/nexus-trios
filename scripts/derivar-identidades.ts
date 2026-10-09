@@ -143,6 +143,7 @@ const avaliar = (c: Character): Map<Identidade, number> => {
   /* Mecânicas que poucos têm: a ficha garante, e a etiqueta vem antes de todas. */
   if (temEfeito(c, ({ e }) => e.kind === 'revive')) notas.set('Reviver', 1);
   if (c.renascer) notas.set('Renascer', 1);
+  if (temEfeito(c, ({ e }) => e.kind === 'status' && e.status === 'provoked')) notas.set('Provocar', 1);
   return notas;
 };
 

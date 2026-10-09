@@ -52,6 +52,9 @@ export function targets(b:Battle,actor:Fighter,rule:Target,effects:Effect[]=[],r
       return [];
     }
   }
+  // Provocado: todo golpe de um alvo vai em quem provocou, enquanto ele estiver de pé
+  const provocador=rule!=='allyWeak'&&rule!=='enemyCast'?quemProvocou(b,actor):undefined;
+  if(provocador)return [provocador];
   const intent=inferTargetIntent(actor,rule,effects);
   if(rule==='enemyCast'){
     const casting=enemies.filter(interrompivel);
@@ -97,6 +100,17 @@ const interrompivel=(x:Fighter)=>!!x.cast&&x.cast.duration>PREPARO_LEVE+1e-6;
  * impede (execução não tem volta). Enquanto alguém vai renascer, o trio dele
  * ainda não perdeu.
  */
+/*
+ * Provocar: um tanque grita, e os rivais atingidos ficam Provocados — o
+ * ataque básico e as habilidades de um alvo só vão nele. Golpes em todos,
+ * interrupções e Death Note seguem as próprias regras. Se quem provocou cai,
+ * a provocação acaba na hora.
+ */
+function quemProvocou(b:Battle,actor:Fighter):Fighter|undefined{
+  const s=actor.statuses.find(x=>x.id==='provoked');if(!s)return undefined;
+  const f=b.fighters.find(x=>x.uid===s.source);
+  return f&&f.side!==actor.side&&alive(f)?f:undefined;
+}
 const caidos=(b:Battle,actor:Fighter)=>b.fighters.filter(x=>x.side===actor.side&&!alive(x)&&!x.voltou&&!((x.renascendo??0)>0))
   .sort((a,z)=>byId[z.characterId].power-byId[a.characterId].power||a.uid.localeCompare(z.uid));
 const podeReviver=(b:Battle,f:Fighter)=>!f.reviveu&&caidos(b,f).length>0;
@@ -224,7 +238,7 @@ export function applyEffects(b:Battle,source:Fighter,selected:Fighter[],effects:
            */
           emit(b,{kind:'status',source:source.uid,target:target.uid,label:def.name,status:effect.status,value:effect.duration});
           if(target.side!==source.side)source.stats.debuffs=(source.stats.debuffs??0)+effect.duration;else source.stats.buffs=(source.stats.buffs??0)+effect.duration;
-          if(target.side!==source.side){const weight=effect.status==='paralyzed'?1:effect.status==='rooted'?.65:effect.status==='slow'?.35:effect.status==='silenced'?.55:['exposed','marked','electric','burning'].includes(effect.status)?.3:0;if(weight)pressure(b,source.side,D.event.statusApplied*weight);}
+          if(target.side!==source.side){const weight=effect.status==='paralyzed'?1:effect.status==='rooted'?.65:effect.status==='slow'?.35:effect.status==='silenced'?.55:effect.status==='provoked'?.4:['exposed','marked','electric','burning'].includes(effect.status)?.3:0;if(weight)pressure(b,source.side,D.event.statusApplied*weight);}
           // Status events only charge observers; they cannot recursively execute other traits.
           const negative=target.side!==source.side&&negativeStatuses.has(effect.status);
           for(const f of friendly(b,source)){gain(b,f,'status',1,source);if(negative)gain(b,f,'negativeStatus',1,source);}
@@ -292,6 +306,11 @@ function skillValue(b:Battle,f:Fighter,s:Skill,selected:Fighter[],intelligence:n
       for(const target of list){const existing=target.shields.reduce((n,x)=>n+x.amount,0);const need=target.maxHp*(1-target.hp/target.maxHp)+target.maxHp*.12-existing;const used=Math.max(0,Math.min(effect.value,need));add('proteção preventiva',used/target.maxHp*26*tacticalFactor);}
     }else if(effect.kind==='interrupt'){
       for(const target of list)if(target.cast&&interrompivel(target))add('interromper preparação',(22+Math.max(0,target.cast.elapsed/target.cast.duration)*12)*tacticalFactor);
+    }else if(effect.kind==='status'&&effect.status==='provoked'){
+      const aliados=friendly(b,f).filter(x=>x.uid!==f.uid);
+      const fragil=aliados.length?Math.max(0,...aliados.map(x=>1-x.hp/x.maxHp)):0;
+      const folego=f.hp/f.maxHp;
+      for(const target of list){if(quemProvocou(b,target)?.uid===f.uid)continue;add('provocar',(6+fragil*18)*folego*tacticalFactor);}
     }else if(effect.kind==='status'){
       for(const target of list){const existing=target.statuses.find(x=>x.id===effect.status)?.intensity??0;const weight=effect.status==='paralyzed'?1:effect.status==='rooted'?.7:effect.status==='silenced'?.65:effect.status==='slow'?.4:['exposed','marked','electric','burning'].includes(effect.status)?.35:effect.status==='protected'?.5:0;add('efeito de estado',Math.max(0,effect.value-existing)*weight*24*tacticalFactor);}
     }else if(effect.kind==='investigate'){

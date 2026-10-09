@@ -46,8 +46,9 @@ describe('compact reusable audiovisual library',()=>{
         if(index!==undefined){const skill=character.skills[index];expect(p!.area,skill.name).toBe(skill.target==='allEnemies'||skill.target==='allAllies'||skill.effects.some(e=>e.target==='allEnemies'||e.target==='allAllies'));}
       }
     }
-    // as brasas de quem vai renascer não são de habilidade: aparecem no lutador caído (ArenaUnit)
-    const SO_NA_ARENA=new Set(['brasas_renascendo']);
+    // não são de habilidade: as brasas aparecem no lutador caído (ArenaUnit) e a marca de
+    // Provocado por cima de quem recebe o Status, seja qual for o golpe (BattleEffects)
+    const SO_NA_ARENA=new Set(['brasas_renascendo','provocar']);
     for(const f of FAMILIAS)if(!SO_NA_ARENA.has(f))expect(uso.get(f)??0,`${f} usada`).toBeGreaterThan(0);
     for(const [f,n] of uso)expect(n/total,`${f} não domina`).toBeLessThan(.16);
   });
