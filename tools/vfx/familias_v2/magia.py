@@ -321,19 +321,6 @@ def invocacao(T, t, rng):
     return G, H
 
 
-def lua_vermelha(T, t, rng):
-    """Lua vermelha: o céu escurece, uma lua cheia com o desenho de um olho domina tudo."""
-    G, H = vazio(T)
-    abre = ease_out(rel(t, 0, 0.35), 2)
-    env = apaga(t, 0.75, 1)
-    r = 0.55 * abre + 0.01
-    disco = smooth(r - T.RAD, -0.01, 0.02)
-    padrao = (np.abs(np.cos(3 * (T.ANG - t * 1.5))) ** 10) * smooth(T.RAD, r * 0.25, r * 0.3) * smooth(r * 0.7 - T.RAD, 0, 0.02) + T.ring(r * 0.72, 0.012) + T.gauss(0, 0, r * 0.15 + 0.01)
-    halo = T.ring(r * 1.15, 0.08) * 0.5
-    G += (disco * 0.9 + padrao * disco * 0.9 + halo) * env
-    H += (disco * 0.3 - padrao * disco * 0.2).clip(0) * env
-    return G, H
-
 
 def susanoo(T, t, rng):
     """Susanoo: costelas e um braço espectral se erguem em volta do alvo, em chamas frias."""
@@ -391,7 +378,6 @@ REGISTRO = [
     ("confusao", confusao, GRANDE, "interrogações girando", False),
     ("pentagrama", pentagrama, GRANDE, "pentagrama infernal", False),
     ("invocacao", invocacao, GRANDE, "silhueta invocada", False),
-    ("lua_vermelha", lua_vermelha, GRANDE, "lua com olho", False),
     ("susanoo", susanoo, GRANDE, "guerreiro espectral", False),
     ("asa_negra", asa_negra, GRANDE, "asa e penas negras", False),
 ]

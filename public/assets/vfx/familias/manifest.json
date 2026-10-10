@@ -251,6 +251,20 @@
   "laco": false,
   "bytes": 96158
  },
+ "aura_besta": {
+  "descricao": "Gohan · a aura do Despertar (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 75750
+ },
  "aura_trunks": {
   "descricao": "Trunks · a aura dourada (laço)",
   "quadros": 12,
@@ -334,6 +348,34 @@
   ],
   "laco": true,
   "bytes": 38322
+ },
+ "azarath_canto": {
+  "descricao": "Ravena · o canto do Azarath (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 54646
+ },
+ "azarath_metrion": {
+  "descricao": "Ravena · os tentáculos negros agarrando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 75170
  },
  "azul_gojo": {
   "descricao": "Gojo · o Azul puxando tudo",
@@ -600,6 +642,48 @@
   ],
   "laco": false,
   "bytes": 47846
+ },
+ "bola_da_morte": {
+  "descricao": "Freeza · a explosão da Bola da Morte",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 102818
+ },
+ "bola_da_morte_carga": {
+  "descricao": "Freeza · a Bola da Morte crescendo (ergue)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": false,
+  "bytes": 48240
+ },
+ "bola_da_morte_voo": {
+  "descricao": "Freeza · a Bola da Morte voando (laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 20952
  },
  "bola_de_ar": {
   "descricao": "Aang · a Rajada de ar voando em espiral (laço)",
@@ -1693,6 +1777,20 @@
   "laco": false,
   "bytes": 71088
  },
+ "corvos_itachi_voo": {
+  "descricao": "Itachi · o bando de corvos voando (laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 19708
+ },
  "cosmico": {
   "descricao": "galáxia girando",
   "quadros": 12,
@@ -1762,6 +1860,20 @@
   ],
   "laco": true,
   "bytes": 26758
+ },
+ "crueldade_freeza": {
+  "descricao": "Freeza · a mão invisível apertando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 38666
  },
  "cura": {
   "descricao": "cura",
@@ -1874,6 +1986,20 @@
   ],
   "laco": false,
   "bytes": 69212
+ },
+ "despertar_gohan": {
+  "descricao": "Gohan · o soco desperto",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 46288
  },
  "deus_do_trovao": {
   "descricao": "Thor · o raio gigante do céu",
@@ -2462,6 +2588,20 @@
   ],
   "laco": false,
   "bytes": 62126
+ },
+ "estalo_thanos": {
+  "descricao": "Thanos · o estalo e o pó",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 29786
  },
  "esticar": {
   "descricao": "braço elástico",
@@ -3905,6 +4045,20 @@
   "laco": false,
   "bytes": 44308
  },
+ "joia_do_tempo": {
+  "descricao": "Thanos · a Joia do Tempo e a areia lenta",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 59060
+ },
  "kagune": {
   "descricao": "Kaneki: quatro kagune segmentados descem e perfuram",
   "quadros": 12,
@@ -4479,20 +4633,6 @@
   "laco": false,
   "bytes": 96900
  },
- "lua_vermelha": {
-  "descricao": "lua com olho",
-  "quadros": 12,
-  "grade": [
-   3,
-   4
-  ],
-  "tamanho": [
-   192,
-   192
-  ],
-  "laco": false,
-  "bytes": 54256
- },
  "luz": {
   "descricao": "pilar de luz",
   "quadros": 12,
@@ -4633,6 +4773,34 @@
   "laco": false,
   "bytes": 62206
  },
+ "manopla_joias": {
+  "descricao": "Thanos · as seis joias acendendo (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 28690
+ },
+ "manto_de_sombras": {
+  "descricao": "Ravena · o manto de capuz no aliado",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 58746
+ },
  "mao_da_perdicao": {
   "descricao": "Hellboy: o punho de pedra desce e esmaga com cascalho",
   "quadros": 12,
@@ -4716,6 +4884,48 @@
   ],
   "laco": false,
   "bytes": 57224
+ },
+ "masenko": {
+  "descricao": "Gohan · o Masenko estourando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 60380
+ },
+ "masenko_carga": {
+  "descricao": "Gohan · o Masenko juntando (ergue)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": false,
+  "bytes": 41824
+ },
+ "masenko_guarda": {
+  "descricao": "Gohan · a barreira amarela no aliado",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 11512
  },
  "matadora_guts": {
   "descricao": "Guts · o arco pesado da Matadora de Dragões",
@@ -5892,6 +6102,34 @@
   ],
   "laco": false,
   "bytes": 63246
+ },
+ "raio_mortal": {
+  "descricao": "Freeza · o furo do Raio mortal",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 13090
+ },
+ "raio_mortal_faixa": {
+  "descricao": "Freeza · o Raio mortal (faixa, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   512,
+   96
+  ],
+  "laco": true,
+  "bytes": 5460
  },
  "rajada_aang": {
   "descricao": "Aang · o vento estourando no rival",
@@ -7544,6 +7782,20 @@
   ],
   "laco": false,
   "bytes": 64204
+ },
+ "tsukuyomi": {
+  "descricao": "Itachi · o Tsukuyomi e o Mangekyō",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 50422
  },
  "tsunami": {
   "descricao": "onda gigante",

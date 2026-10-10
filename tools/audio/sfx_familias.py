@@ -860,15 +860,6 @@ def invocacao(rng, v):
     return x
 
 
-def lua_vermelha(rng, v):
-    n = n_de(1.6)
-    x = np.zeros(n)
-    for k, m in enumerate((45, 48, 52, 57)):
-        poe(x, seno(np.full(n_de(1.4), nota(m)), n_de(1.4)) * env(n_de(1.4), 0.3, 0.8) * 0.09, k * 0.05)
-    x += passa(rosa(rng, n), 60, 400, 2) * env(n, 0.2, 0.8) * 0.4
-    poe(x, B.maldicao(rng, v)[: n_de(0.8)] * 0.5, 0.3)
-    return reverb(x, 0.9, 0.4, 2500)
-
 
 def susanoo(rng, v):
     x = _z(1.6)

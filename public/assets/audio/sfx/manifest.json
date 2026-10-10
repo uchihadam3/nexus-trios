@@ -342,6 +342,23 @@
    ],
    "bytes": 47493
   },
+  "aura-besta": {
+   "arquivo": "aura-besta.mp3",
+   "descricao": "Despertar: a aura explodindo (Preparo)",
+   "versoes": [
+    0.0,
+    1.88,
+    3.8253,
+    5.6444
+   ],
+   "duracoes": [
+    1.8,
+    1.8653,
+    1.7391,
+    1.8274
+   ],
+   "bytes": 73705
+  },
   "aura-trunks": {
    "arquivo": "aura-trunks.mp3",
    "descricao": "a aura de Super Saiyajin",
@@ -426,6 +443,40 @@
     1.9289
    ],
    "bytes": 78472
+  },
+  "azarath-canto": {
+   "arquivo": "azarath-canto.mp3",
+   "descricao": "Ravena: o canto do Azarath (Preparo)",
+   "versoes": [
+    0.0,
+    1.68,
+    3.418,
+    5.0439
+   ],
+   "duracoes": [
+    1.6,
+    1.658,
+    1.5459,
+    1.6244
+   ],
+   "bytes": 54323
+  },
+  "azarath-metrion": {
+   "arquivo": "azarath-metrion.mp3",
+   "descricao": "Azarath Metrion Zinthos: os tentáculos e a alma",
+   "versoes": [
+    0.0,
+    1.88,
+    3.8253,
+    5.6444
+   ],
+   "duracoes": [
+    1.8,
+    1.8653,
+    1.7391,
+    1.8274
+   ],
+   "bytes": 65716
   },
   "azul-gojo": {
    "arquivo": "azul-gojo.mp3",
@@ -732,6 +783,40 @@
     1.0152
    ],
    "bytes": 54653
+  },
+  "bola-da-morte": {
+   "arquivo": "bola-da-morte.mp3",
+   "descricao": "Forma final: a explosão enorme",
+   "versoes": [
+    0.0,
+    1.8316,
+    3.721,
+    5.5021
+   ],
+   "duracoes": [
+    1.7516,
+    1.8094,
+    1.7011,
+    1.7784
+   ],
+   "bytes": 62819
+  },
+  "bola-da-morte-carga": {
+   "arquivo": "bola-da-morte-carga.mp3",
+   "descricao": "Forma final: a Bola da Morte crescendo",
+   "versoes": [
+    0.0,
+    1.68,
+    3.418,
+    5.0439
+   ],
+   "duracoes": [
+    1.6,
+    1.658,
+    1.5459,
+    1.6244
+   ],
+   "bytes": 57661
   },
   "bolhas": {
    "arquivo": "bolhas.mp3",
@@ -1872,6 +1957,23 @@
    ],
    "bytes": 14181
   },
+  "crueldade-freeza": {
+   "arquivo": "crueldade-freeza.mp3",
+   "descricao": "Crueldade calculada: a pressão e a pancada",
+   "versoes": [
+    0.0,
+    1.78,
+    3.6217,
+    5.3441
+   ],
+   "duracoes": [
+    1.7,
+    1.7617,
+    1.6425,
+    1.7259
+   ],
+   "bytes": 54339
+  },
   "cura": {
    "arquivo": "cura.mp3",
    "descricao": "cura",
@@ -2007,6 +2109,23 @@
     0.7736
    ],
    "bytes": 41990
+  },
+  "despertar-gohan": {
+   "arquivo": "despertar-gohan.mp3",
+   "descricao": "Despertar: o soco desperto",
+   "versoes": [
+    0.0,
+    1.88,
+    3.8253,
+    5.633
+   ],
+   "duracoes": [
+    1.8,
+    1.8653,
+    1.7278,
+    1.8274
+   ],
+   "bytes": 60177
   },
   "deus-do-trovao": {
    "arquivo": "deus-do-trovao.mp3",
@@ -2721,6 +2840,23 @@
     1.3705
    ],
    "bytes": 58732
+  },
+  "estalo-thanos": {
+   "arquivo": "estalo-thanos.mp3",
+   "descricao": "Equilíbrio: o estalo e o pó",
+   "versoes": [
+    0.0,
+    2.28,
+    4.6398,
+    6.8454
+   ],
+   "duracoes": [
+    2.2,
+    2.2798,
+    2.1256,
+    2.2335
+   ],
+   "bytes": 84302
   },
   "esticar": {
    "arquivo": "esticar.mp3",
@@ -4371,6 +4507,23 @@
    ],
    "bytes": 51133
   },
+  "joia-do-tempo": {
+   "arquivo": "joia-do-tempo.mp3",
+   "descricao": "Joia do Tempo: o som esticando e a areia",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 116714
+  },
   "kagune": {
    "arquivo": "kagune.mp3",
    "descricao": "básico de Kaneki: tentáculos de carne esticando e quatro perfurações",
@@ -5085,23 +5238,6 @@
    ],
    "bytes": 59952
   },
-  "lua-vermelha": {
-   "arquivo": "lua-vermelha.mp3",
-   "descricao": "família lua vermelha",
-   "versoes": [
-    0.0,
-    1.68,
-    3.418,
-    5.0439
-   ],
-   "duracoes": [
-    1.6,
-    1.658,
-    1.5459,
-    1.6244
-   ],
-   "bytes": 54567
-  },
   "luz": {
    "arquivo": "luz.mp3",
    "descricao": "luz sagrada",
@@ -5255,6 +5391,40 @@
    ],
    "bytes": 49997
   },
+  "manopla-joias": {
+   "arquivo": "manopla-joias.mp3",
+   "descricao": "Equilíbrio: as seis joias acendendo (Preparo)",
+   "versoes": [
+    0.0,
+    1.88,
+    3.8253,
+    5.6444
+   ],
+   "duracoes": [
+    1.8,
+    1.8653,
+    1.7391,
+    1.8274
+   ],
+   "bytes": 71719
+  },
+  "manto-de-sombras": {
+   "arquivo": "manto-de-sombras.mp3",
+   "descricao": "Manto de sombras: o pano escuro e a cura",
+   "versoes": [
+    0.0,
+    1.78,
+    3.6217,
+    5.3441
+   ],
+   "duracoes": [
+    1.7,
+    1.7617,
+    1.6425,
+    1.7259
+   ],
+   "bytes": 62727
+  },
   "mao-da-perdicao": {
    "arquivo": "mao-da-perdicao.mp3",
    "descricao": "básico de Hellboy: pedra pesada esmagando e cascalho",
@@ -5373,6 +5543,40 @@
     1.4213
    ],
    "bytes": 58816
+  },
+  "masenko": {
+   "arquivo": "masenko.mp3",
+   "descricao": "Masenko: o disparo e a explosão",
+   "versoes": [
+    0.0,
+    1.58,
+    3.2144,
+    4.7437
+   ],
+   "duracoes": [
+    1.5,
+    1.5544,
+    1.4493,
+    1.5228
+   ],
+   "bytes": 58789
+  },
+  "masenko-carga": {
+   "arquivo": "masenko-carga.mp3",
+   "descricao": "Masenko: a energia juntando",
+   "versoes": [
+    0.0,
+    0.88,
+    1.789,
+    2.6419
+   ],
+   "duracoes": [
+    0.8,
+    0.829,
+    0.7729,
+    0.8122
+   ],
+   "bytes": 34476
   },
   "matadora-guts": {
    "arquivo": "matadora-guts.mp3",
@@ -6716,6 +6920,40 @@
     1.3198
    ],
    "bytes": 51007
+  },
+  "raio-mortal": {
+   "arquivo": "raio-mortal.mp3",
+   "descricao": "Raio mortal: o furo",
+   "versoes": [
+    0.0,
+    0.9002,
+    1.7524,
+    2.5953
+   ],
+   "duracoes": [
+    0.8202,
+    0.7723,
+    0.7628,
+    0.7693
+   ],
+   "bytes": 31158
+  },
+  "raio-mortal-saida": {
+   "arquivo": "raio-mortal-saida.mp3",
+   "descricao": "Raio mortal: o raio fino saindo",
+   "versoes": [
+    0.0,
+    0.43,
+    0.8727,
+    1.2908
+   ],
+   "duracoes": [
+    0.35,
+    0.3627,
+    0.3382,
+    0.3553
+   ],
+   "bytes": 21538
   },
   "rajada-de-ar": {
    "arquivo": "rajada-de-ar.mp3",
@@ -8620,6 +8858,23 @@
     0.9137
    ],
    "bytes": 39737
+  },
+  "tsukuyomi": {
+   "arquivo": "tsukuyomi.mp3",
+   "descricao": "Tsukuyomi: o olho girando e o mundo afundando",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 57002
   },
   "tsunami": {
    "arquivo": "tsunami.mp3",
