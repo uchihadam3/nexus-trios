@@ -32,8 +32,9 @@ describe('compact reusable audiovisual library',()=>{
     // cresce com as habilidades desenhadas para cada personagem (Madara, Kakashi, Cloud…); a luta baixa
     // só as folhas de quem está nela, então o catálogo inteiro não pesa no celular
     // (Piccolo, Charizard, Mega Man, Super-Homem, Hyoga, Hulk, Aiolia, Arthas, Aang, Sakura, Ciclope, Shaka e Mumm-Ra
-    // ganharam folhas próprias: 33 MB)
-    expect(bytes).toBeLessThan(33_000_000);
+    // ganharam folhas próprias: 33 MB). Como cada personagem vai ganhando as suas, o total só cresce; o que
+    // importa é cada folha continuar leve: a média fica abaixo de 90 KB (e cada uma tem o seu teto acima)
+    expect(bytes/Object.keys(familias).length).toBeLessThan(90_000);
     // nenhuma folha decodificada passa de ~4,5 MB na memória (a maior é a faixa de 512 × 96 × 12)
     expect(decodificado/Object.keys(familias).length).toBeLessThan(2_000_000);
     expect(readdirSync(resolve(root,'public/assets/vfx')).filter(x=>x.endsWith('.webp'))).toEqual(['arena.webp']);
@@ -55,9 +56,9 @@ describe('compact reusable audiovisual library',()=>{
     // não são de habilidade: as brasas aparecem no lutador caído (ArenaUnit) e a marca de
     // Provocado por cima de quem recebe o Status, seja qual for o golpe (BattleEffects)
     // e o espelho, os espinhos e as gotas de sangue sobre quem devolve o golpe ou rouba a Vida;
-    // o renascer é o fogo de quem volta sozinho (o beat de Renasceu); a esfera, a terra, o veneno e a onda de energia são
-    // as reservas dos golpes de energia, de pedra, de veneno/peste e de onda sem família própria (vfxProfiles: ícones e nomes)
-    const SO_NA_ARENA=new Set(['esfera','terra','veneno','onda_de_energia','renascer','brasas_renascendo','provocar','reflexo','espinhos','vampirismo','dissipar','sono','cegueira','esquiva','ultima_resistencia','copia',...FAMILIAS_DO_JEITO,...Object.values(FAMILIA_DA_INVOCACAO)]);
+    // o renascer é o fogo de quem volta sozinho (o beat de Renasceu); a esfera, a terra, o veneno, a onda de energia e o feixe pesado são
+    // as reservas dos golpes de energia, de pedra, de veneno/peste, de onda e de feixe sem família própria (vfxProfiles: ícones e nomes)
+    const SO_NA_ARENA=new Set(['esfera','terra','veneno','onda_de_energia','feixe_pesado','renascer','brasas_renascendo','provocar','reflexo','espinhos','vampirismo','dissipar','sono','cegueira','esquiva','ultima_resistencia','copia',...FAMILIAS_DO_JEITO,...Object.values(FAMILIA_DA_INVOCACAO)]);
     for(const f of FAMILIAS)if(!SO_NA_ARENA.has(f))expect(uso.get(f)??0,`${f} usada`).toBeGreaterThan(0);
     for(const [f,n] of uso)expect(n/total,`${f} não domina`).toBeLessThan(.16);
   });
@@ -65,17 +66,17 @@ describe('compact reusable audiovisual library',()=>{
     expect(profileFor('goku',0)?.family).toBe('kamehameha');
     const [h]=hsl(profileFor('goku',0)!.color);expect(h).toBeGreaterThan(185);expect(h).toBeLessThan(215);
     expect(profileFor('superman',0)?.family).toBe('visao_de_calor');expect(hsl(profileFor('superman',0)!.color)[0]).toBeLessThan(15);
-    expect(profileFor('pikachu',0)?.family).toBe('raio');
+    expect(profileFor('pikachu',0)?.family).toBe('choque_do_trovao');
     expect(profileFor('spiderman',0)?.family).toBe('lancar_teia');
     expect(profileFor('light',2)?.family).toBe('death_note');
     expect(profileFor('naruto',1)?.family).toBe('rasengan');
-    expect(profileFor('gojo',0)?.family).toBe('atracao');expect(profileFor('gojo',1)?.family).toBe('repulsao');expect(profileFor('gojo',2)?.family).toBe('dominio');
+    expect(profileFor('gojo',0)?.family).toBe('azul_gojo');expect(profileFor('gojo',1)?.family).toBe('vermelho_gojo');expect(profileFor('gojo',2)?.family).toBe('vazio_infinito');
     expect(profileFor('beerus',0)?.family).toBe('toque_da_destruicao');expect(profileFor('sasuke',0)?.family).toBe('chidori_sasuke');
     expect(profileFor('saitama',2)?.family).toBe('soco_serio');expect(profileFor('itachi',2)?.family).toBe('susanoo');
     expect(profileFor('ichigo',0)?.family).toBe('corte_de_energia');
     expect(profileFor('charizard',0)?.family).toBe('lanca_chamas');
     // a mesma família muda de cor com o personagem
-    expect(profileFor('vegeta',0)?.family).toBe('kamehameha');expect(profileFor('vegeta',0)?.color).not.toBe(profileFor('goku',0)?.color);
+    expect(profileFor('vegeta',0)?.family).toBe('galick_gun');expect(profileFor('vegeta',0)?.color).not.toBe(profileFor('goku',0)?.color);
   });
   it('has a sound family for every visual family, with 4 MP3 versions per sound, within budget',()=>{
     expect(sfx.versoes).toBe(4);

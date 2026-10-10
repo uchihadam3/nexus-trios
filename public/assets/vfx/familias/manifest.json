@@ -69,6 +69,20 @@
   "laco": false,
   "bytes": 41542
  },
+ "agilidade_pikachu": {
+  "descricao": "Pikachu · os rastros de Agilidade no aliado",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 39518
+ },
  "agua": {
   "descricao": "respingo de água",
   "quadros": 12,
@@ -307,6 +321,20 @@
   "laco": true,
   "bytes": 38322
  },
+ "azul_gojo": {
+  "descricao": "Gojo · o Azul puxando tudo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 98022
+ },
  "bala_de_canhao": {
   "descricao": "bala de canhão em viagem (+x)",
   "quadros": 12,
@@ -516,6 +544,20 @@
   ],
   "laco": false,
   "bytes": 28502
+ },
+ "bochechas_pikachu": {
+  "descricao": "Pikachu · as bochechas faiscando (ergue)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": false,
+  "bytes": 47846
  },
  "bola_de_ar": {
   "descricao": "Aang · a Rajada de ar voando em espiral (laço)",
@@ -2631,6 +2673,48 @@
   "laco": true,
   "bytes": 28926
  },
+ "final_flash_carga": {
+  "descricao": "Vegeta · os braços abertos juntando o Final Flash (ergue)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": false,
+  "bytes": 46300
+ },
+ "final_flash_faixa": {
+  "descricao": "Vegeta · o feixe gigante do Final Flash (faixa)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   512,
+   96
+  ],
+  "laco": true,
+  "bytes": 105668
+ },
+ "final_flash_impacto": {
+  "descricao": "Vegeta · a explosão do Final Flash",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 115878
+ },
  "flecha": {
   "descricao": "flecha em viagem (+x)",
   "quadros": 12,
@@ -2840,6 +2924,48 @@
   ],
   "laco": false,
   "bytes": 53694
+ },
+ "galick_carga": {
+  "descricao": "Vegeta · a Galick Gun juntando nas mãos (ergue)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": false,
+  "bytes": 43728
+ },
+ "galick_faixa": {
+  "descricao": "Vegeta · o feixe roxo da Galick Gun (faixa)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   512,
+   96
+  ],
+  "laco": true,
+  "bytes": 135572
+ },
+ "galick_impacto": {
+  "descricao": "Vegeta · a explosão roxa da Galick Gun",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 99266
  },
  "gancho": {
   "descricao": "golpe para cima",
@@ -3442,6 +3568,20 @@
   ],
   "laco": false,
   "bytes": 55146
+ },
+ "investigacao_light": {
+  "descricao": "Light · a mira e a leitura do rival",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 21328
  },
  "invocacao": {
   "descricao": "silhueta invocada",
@@ -4619,6 +4759,20 @@
   "laco": false,
   "bytes": 60058
  },
+ "onda_choque_voo": {
+  "descricao": "Pikachu · a Onda de Choque voando (laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 27072
+ },
  "onda_de_choque": {
   "descricao": "onda de choque",
   "quadros": 12,
@@ -4633,6 +4787,20 @@
   "laco": false,
   "bytes": 77528
  },
+ "onda_paralisa": {
+  "descricao": "Pikachu · os anéis prendendo o rival",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 40184
+ },
  "orbe": {
   "descricao": "esfera de energia em viagem (+x)",
   "quadros": 12,
@@ -4646,6 +4814,20 @@
   ],
   "laco": true,
   "bytes": 58050
+ },
+ "orgulho_saiyajin": {
+  "descricao": "Vegeta · a aura dourada de Não vou cair",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 83768
  },
  "palma_faixa": {
   "descricao": "Killua · o raio da Palma relâmpago até o rival (faixa)",
@@ -4702,6 +4884,20 @@
   ],
   "laco": true,
   "bytes": 38538
+ },
+ "passo_lateral": {
+  "descricao": "Saitama · a capa varrendo e virando escudo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 38572
  },
  "pedra_bloco": {
   "descricao": "Toph · o bloco de pedra voando (laço, básico)",
@@ -5879,6 +6075,20 @@
   "laco": false,
   "bytes": 86908
  },
+ "seis_olhos": {
+  "descricao": "Gojo · os Seis Olhos acendendo (nele)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": false,
+  "bytes": 7928
+ },
  "selo": {
   "descricao": "círculo mágico",
   "quadros": 12,
@@ -6845,6 +7055,34 @@
   "laco": false,
   "bytes": 37656
  },
+ "trovao_faixa": {
+  "descricao": "Pikachu · o raio do Choque do Trovão (faixa)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   512,
+   96
+  ],
+  "laco": true,
+  "bytes": 139118
+ },
+ "trovao_pikachu": {
+  "descricao": "Pikachu · o Choque do Trovão no rival",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 64204
+ },
  "tsunami": {
   "descricao": "onda gigante",
   "quadros": 12,
@@ -6928,6 +7166,20 @@
   ],
   "laco": false,
   "bytes": 21468
+ },
+ "vazio_infinito": {
+  "descricao": "Gojo · o Vazio Infinito",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 129716
  },
  "velocidade": {
   "descricao": "linhas de vento e asinhas",
@@ -7013,6 +7265,34 @@
   "laco": false,
   "bytes": 53370
  },
+ "vermelho_bola": {
+  "descricao": "Gojo · a bola do Vermelho voando (laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 9250
+ },
+ "vermelho_gojo": {
+  "descricao": "Gojo · o Vermelho empurrando tudo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 68576
+ },
  "vinhas": {
   "descricao": "vinhas enrolando",
   "quadros": 12,
@@ -7068,6 +7348,20 @@
   ],
   "laco": false,
   "bytes": 62520
+ },
+ "xeque_light": {
+  "descricao": "Light · o rei do xadrez e a marca",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 28976
  },
  "z_saber": {
   "descricao": "Zero: meia-lua do sabre de energia",

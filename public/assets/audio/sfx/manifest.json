@@ -87,6 +87,23 @@
    ],
    "bytes": 45818
   },
+  "agilidade-pikachu": {
+   "arquivo": "agilidade-pikachu.mp3",
+   "descricao": "Agilidade: os rastros correndo em volta",
+   "versoes": [
+    0.0,
+    1.1468,
+    2.3257,
+    3.4417
+   ],
+   "duracoes": [
+    1.0668,
+    1.0989,
+    1.0361,
+    1.0827
+   ],
+   "bytes": 43421
+  },
   "agua": {
    "arquivo": "agua.mp3",
    "descricao": "água",
@@ -393,6 +410,23 @@
    ],
    "bytes": 78472
   },
+  "azul-gojo": {
+   "arquivo": "azul-gojo.mp3",
+   "descricao": "Azul: tudo sendo sugado",
+   "versoes": [
+    0.0,
+    1.68,
+    3.418,
+    5.0439
+   ],
+   "duracoes": [
+    1.6,
+    1.658,
+    1.5459,
+    1.6244
+   ],
+   "bytes": 54682
+  },
   "barreira-anula": {
    "arquivo": "barreira-anula.mp3",
    "descricao": "família barreira anula",
@@ -630,6 +664,23 @@
     0.5076
    ],
    "bytes": 18866
+  },
+  "bochechas-pikachu": {
+   "arquivo": "bochechas-pikachu.mp3",
+   "descricao": "Pikachu: as bochechas carregando",
+   "versoes": [
+    0.0,
+    1.08,
+    2.1963,
+    3.2424
+   ],
+   "duracoes": [
+    1.0,
+    1.0363,
+    0.9662,
+    1.0152
+   ],
+   "bytes": 54653
   },
   "bolhas": {
    "arquivo": "bolhas.mp3",
@@ -1157,6 +1208,23 @@
     1.0152
    ],
    "bytes": 53424
+  },
+  "choque-do-trovao": {
+   "arquivo": "choque-do-trovao.mp3",
+   "descricao": "Choque do Trovão: o trovão no rival",
+   "versoes": [
+    0.0,
+    1.78,
+    3.6217,
+    5.3441
+   ],
+   "duracoes": [
+    1.7,
+    1.7617,
+    1.6425,
+    1.7259
+   ],
+   "bytes": 64982
   },
   "chute-basico": {
    "arquivo": "chute-basico.mp3",
@@ -2739,6 +2807,57 @@
    ],
    "bytes": 52836
   },
+  "final-flash": {
+   "arquivo": "final-flash.mp3",
+   "descricao": "Final Flash: a explosão gigante",
+   "versoes": [
+    0.0,
+    2.0545,
+    4.1761,
+    6.2106
+   ],
+   "duracoes": [
+    1.9745,
+    2.0415,
+    1.9545,
+    2.0217
+   ],
+   "bytes": 65132
+  },
+  "final-flash-carga": {
+   "arquivo": "final-flash-carga.mp3",
+   "descricao": "Final Flash: as duas mãos juntando a energia",
+   "versoes": [
+    0.0,
+    1.28,
+    2.6035,
+    3.8429
+   ],
+   "duracoes": [
+    1.2,
+    1.2435,
+    1.1594,
+    1.2183
+   ],
+   "bytes": 48532
+  },
+  "final-flash-feixe": {
+   "arquivo": "final-flash-feixe.mp3",
+   "descricao": "Final Flash: o feixe gigante",
+   "versoes": [
+    0.0,
+    1.38,
+    2.8071,
+    4.1432
+   ],
+   "duracoes": [
+    1.3,
+    1.3471,
+    1.256,
+    1.3198
+   ],
+   "bytes": 51242
+  },
   "flecha": {
    "arquivo": "flecha.mp3",
    "descricao": "família flecha",
@@ -2993,6 +3112,57 @@
     1.1167
    ],
    "bytes": 45631
+  },
+  "galick-gun": {
+   "arquivo": "galick-gun.mp3",
+   "descricao": "Galick Gun: a explosão roxa",
+   "versoes": [
+    0.0,
+    1.6643,
+    3.4024,
+    5.0282
+   ],
+   "duracoes": [
+    1.5843,
+    1.658,
+    1.5459,
+    1.5894
+   ],
+   "bytes": 58619
+  },
+  "galick-gun-carga": {
+   "arquivo": "galick-gun-carga.mp3",
+   "descricao": "Galick Gun: a energia roxa juntando",
+   "versoes": [
+    0.0,
+    1.08,
+    2.1963,
+    3.2424
+   ],
+   "duracoes": [
+    1.0,
+    1.0363,
+    0.9662,
+    1.0152
+   ],
+   "bytes": 43646
+  },
+  "galick-gun-feixe": {
+   "arquivo": "galick-gun-feixe.mp3",
+   "descricao": "Galick Gun: o feixe saindo",
+   "versoes": [
+    0.0,
+    1.18,
+    2.3999,
+    3.5427
+   ],
+   "duracoes": [
+    1.1,
+    1.1399,
+    1.0628,
+    1.1167
+   ],
+   "bytes": 43176
   },
   "gancho": {
    "arquivo": "gancho.mp3",
@@ -3792,6 +3962,23 @@
     0.8122
    ],
    "bytes": 28771
+  },
+  "investigacao-light": {
+   "arquivo": "investigacao-light.mp3",
+   "descricao": "Investigação: a mira e a leitura",
+   "versoes": [
+    0.0,
+    1.78,
+    3.6217,
+    5.3441
+   ],
+   "duracoes": [
+    1.7,
+    1.7617,
+    1.6425,
+    1.7259
+   ],
+   "bytes": 71292
   },
   "invocacao": {
    "arquivo": "invocacao.mp3",
@@ -5136,6 +5323,23 @@
    ],
    "bytes": 71555
   },
+  "nao-vou-cair": {
+   "arquivo": "nao-vou-cair.mp3",
+   "descricao": "Não vou cair: o grito e a aura de Super Saiyajin",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 74859
+  },
   "nen-gon": {
    "arquivo": "nen-gon.mp3",
    "descricao": "a aura do Gon juntando no punho",
@@ -5272,6 +5476,40 @@
    ],
    "bytes": 34939
   },
+  "onda-de-choque-pikachu": {
+   "arquivo": "onda-de-choque-pikachu.mp3",
+   "descricao": "Onda de Choque: os anéis prendendo",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 59169
+  },
+  "onda-de-choque-saida": {
+   "arquivo": "onda-de-choque-saida.mp3",
+   "descricao": "Onda de Choque: a onda saindo",
+   "versoes": [
+    0.0,
+    0.68,
+    1.3817,
+    2.0415
+   ],
+   "duracoes": [
+    0.6,
+    0.6217,
+    0.5797,
+    0.6091
+   ],
+   "bytes": 24062
+  },
   "palma-relampago": {
    "arquivo": "palma-relampago.mp3",
    "descricao": "Palma relâmpago: o raio rasgando e o trovão",
@@ -5305,6 +5543,23 @@
     1.268
    ],
    "bytes": 37402
+  },
+  "passo-lateral": {
+   "arquivo": "passo-lateral.mp3",
+   "descricao": "Passo lateral: a capa e o escudo",
+   "versoes": [
+    0.0,
+    1.38,
+    2.8071,
+    4.1432
+   ],
+   "duracoes": [
+    1.3,
+    1.3471,
+    1.256,
+    1.3198
+   ],
+   "bytes": 45761
   },
   "pedra-da-toph": {
    "arquivo": "pedra-da-toph.mp3",
@@ -7788,6 +8043,23 @@
    ],
    "bytes": 37839
   },
+  "trovao-feixe": {
+   "arquivo": "trovao-feixe.mp3",
+   "descricao": "Choque do Trovão: a descarga",
+   "versoes": [
+    0.0,
+    0.98,
+    1.9926,
+    2.9422
+   ],
+   "duracoes": [
+    0.9,
+    0.9326,
+    0.8695,
+    0.9137
+   ],
+   "bytes": 39737
+  },
   "tsunami": {
    "arquivo": "tsunami.mp3",
    "descricao": "família tsunami",
@@ -7992,6 +8264,40 @@
    ],
    "bytes": 45024
   },
+  "vazio-infinito": {
+   "arquivo": "vazio-infinito.mp3",
+   "descricao": "Vazio Infinito: o acorde do infinito",
+   "versoes": [
+    0.0,
+    2.48,
+    5.047,
+    7.4459
+   ],
+   "duracoes": [
+    2.4,
+    2.487,
+    2.3188,
+    2.4365
+   ],
+   "bytes": 102714
+  },
+  "vazio-infinito-selo": {
+   "arquivo": "vazio-infinito-selo.mp3",
+   "descricao": "Vazio Infinito: o sinal de mão",
+   "versoes": [
+    0.0,
+    1.08,
+    2.1963,
+    3.2424
+   ],
+   "duracoes": [
+    1.0,
+    1.0363,
+    0.9662,
+    1.0152
+   ],
+   "bytes": 40688
+  },
   "velocidade": {
    "arquivo": "velocidade.mp3",
    "descricao": "família velocidade",
@@ -8076,6 +8382,40 @@
     1.0152
    ],
    "bytes": 40002
+  },
+  "vermelho-gojo": {
+   "arquivo": "vermelho-gojo.mp3",
+   "descricao": "Vermelho: o estouro que empurra",
+   "versoes": [
+    0.0,
+    1.597,
+    3.2476,
+    4.7548
+   ],
+   "duracoes": [
+    1.517,
+    1.5706,
+    1.4272,
+    1.4924
+   ],
+   "bytes": 53841
+  },
+  "vermelho-gojo-saida": {
+   "arquivo": "vermelho-gojo-saida.mp3",
+   "descricao": "Vermelho: o estalo do dedo",
+   "versoes": [
+    0.0,
+    0.68,
+    1.3817,
+    2.0415
+   ],
+   "duracoes": [
+    0.6,
+    0.6217,
+    0.5797,
+    0.6091
+   ],
+   "bytes": 27540
   },
   "vinhas": {
    "arquivo": "vinhas.mp3",
@@ -8195,6 +8535,23 @@
     1.7467
    ],
    "bytes": 54676
+  },
+  "xeque-light": {
+   "arquivo": "xeque-light.mp3",
+   "descricao": "Tudo conforme o plano: a peça no tabuleiro",
+   "versoes": [
+    0.0,
+    1.98,
+    4.0289,
+    5.9446
+   ],
+   "duracoes": [
+    1.9,
+    1.9689,
+    1.8357,
+    1.9289
+   ],
+   "bytes": 50931
   },
   "z-saber": {
    "arquivo": "z-saber.mp3",

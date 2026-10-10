@@ -74,6 +74,12 @@ const ANTES_DA_NOVA: Partial<Record<FamiliaNova, { antes: Sound; saida?: Sound }
   furia_espartana: { antes: 'furia-kratos' },
   ira_dos_deuses: { antes: 'ira-kratos' },
   ricochete_optico: { antes: 'laser-curto' },
+  galick_gun: { antes: 'galick-gun-carga', saida: 'galick-gun-feixe' },
+  final_flash: { antes: 'final-flash-carga', saida: 'final-flash-feixe' },
+  vermelho_gojo: { antes: 'vermelho-gojo-saida' },
+  vazio_infinito: { antes: 'vazio-infinito-selo' },
+  choque_do_trovao: { antes: 'bochechas-pikachu', saida: 'trovao-feixe' },
+  onda_de_choque_pikachu: { antes: 'onda-de-choque-saida' },
 };
 const SONS_DE_ANTES = [...new Set(Object.values(ANTES_DA_NOVA).flatMap((x) => [x!.antes, ...(x!.saida ? [x!.saida] : [])]))];
 

@@ -13,9 +13,9 @@
 import type { VfxFamily } from './vfxProfiles';
 
 const T: Record<string, string> = {
-  goku: 'kamehameha kaioken instinto', vegeta: 'kamehameha transformacao -', naruto: 'clones_naruto rasengan modo_kurama',
-  sasuke: 'chidori_sasuke amaterasu genjutsu_sasuke', luffy: 'gomu_gatling corpo_de_borracha gear_fifth_nika', gojo: 'atracao repulsao dominio',
-  light: 'olho marca death_note', pikachu: '- raio_em_cadeia velocidade', saitama: 'soco_casual resgate soco_serio',
+  goku: 'kamehameha kaioken instinto', vegeta: 'galick_gun nao_vou_cair final_flash', naruto: 'clones_naruto rasengan modo_kurama',
+  sasuke: 'chidori_sasuke amaterasu genjutsu_sasuke', luffy: 'gomu_gatling corpo_de_borracha gear_fifth_nika', gojo: 'azul_gojo vermelho_gojo vazio_infinito',
+  light: 'investigacao_light xeque_light death_note', pikachu: 'choque_do_trovao onda_de_choque_pikachu agilidade_pikachu', saitama: 'soco_casual passo_lateral soco_serio',
   wolverine: 'garras armadura regeneracao', batman: 'marca disco escudo_tech', superman: 'visao_de_calor eu_te_seguro ultimo_filho_de_krypton',
   spiderman: 'lancar_teia salvamento_aranha teia_de_impacto', hulk: 'hulk_esmaga rugido_do_hulk mais_forte_ainda', thor: 'martelo tempestade raio_em_cadeia',
   strange: 'barreira_magica relogio portal', flash: 'soco_relampago resgate velocidade', wonderwoman: 'chicote escudo_fisico investida',
