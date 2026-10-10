@@ -69,6 +69,20 @@
   "laco": false,
   "bytes": 41542
  },
+ "adaptacao_demoniaca": {
+  "descricao": "Muzan · a carne fecha, as bocas e o olho",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 63436
+ },
  "agilidade_pikachu": {
   "descricao": "Pikachu · os rastros de Agilidade no aliado",
   "quadros": 12,
@@ -250,6 +264,20 @@
   ],
   "laco": false,
   "bytes": 96158
+ },
+ "audicao_zenitsu": {
+  "descricao": "Zenitsu · as ondas de som e o risco de raio",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 31882
  },
  "aura_besta": {
   "descricao": "Gohan · a aura do Despertar (Preparo, laço)",
@@ -1287,6 +1315,20 @@
   "laco": false,
   "bytes": 51818
  },
+ "chicotes_de_carne": {
+  "descricao": "Muzan · os chicotes de carne com espinhos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 41418
+ },
  "chidori_sasuke": {
   "descricao": "Sasuke · a lança de raio atravessando o rival",
   "quadros": 12,
@@ -2000,6 +2042,20 @@
   ],
   "laco": false,
   "bytes": 46288
+ },
+ "despertar_nezuko": {
+  "descricao": "Nezuko · as vinhas da forma desperta e o chute",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 96874
  },
  "deus_do_trovao": {
   "descricao": "Thor · o raio gigante do céu",
@@ -2924,6 +2980,20 @@
   ],
   "laco": false,
   "bytes": 104354
+ },
+ "explosao_de_sangue": {
+  "descricao": "Nezuko · as gotas que explodem em chamas rosa",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 38900
  },
  "explosao_grande": {
   "descricao": "explosão em cogumelo",
@@ -3891,6 +3961,34 @@
   "laco": false,
   "bytes": 44102
  },
+ "hinokami_kagura": {
+  "descricao": "Tanjiro · a Dança do Deus do Fogo: o halo de chamas e o corte",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 72910
+ },
+ "hinokami_preparo": {
+  "descricao": "Tanjiro · as chamas subindo na lâmina (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 26076
+ },
  "hipnose": {
   "descricao": "espiral hipnótica",
   "quadros": 12,
@@ -4114,6 +4212,20 @@
   ],
   "laco": false,
   "bytes": 55146
+ },
+ "investida_inosuke": {
+  "descricao": "Inosuke · a cabeça do javali e os cortes loucos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 36426
  },
  "investigacao_light": {
   "descricao": "Light · a mira e a leitura do rival",
@@ -5417,6 +5529,20 @@
   "laco": false,
   "bytes": 56778
  },
+ "olfato_tanjiro": {
+  "descricao": "Tanjiro · o fio da abertura (o cheiro até o ponto fraco)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 23636
+ },
  "olho": {
   "descricao": "olho gigante se abrindo",
   "quadros": 12,
@@ -5655,6 +5781,20 @@
   "laco": false,
   "bytes": 44270
  },
+ "percepcao_espacial": {
+  "descricao": "Inosuke · as vibrações do chão e o X",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 19622
+ },
  "petalas": {
   "descricao": "flor e pétalas",
   "quadros": 12,
@@ -5864,6 +6004,34 @@
   ],
   "laco": false,
   "bytes": 97662
+ },
+ "presas_rasgantes": {
+  "descricao": "Inosuke · as duas lâminas lascadas em X",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 33764
+ },
+ "primeira_postura": {
+  "descricao": "Zenitsu · a cúpula elétrica no aliado",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 50114
  },
  "prisao": {
   "descricao": "prisão de barras",
@@ -6621,6 +6789,20 @@
   "laco": false,
   "bytes": 32342
  },
+ "respiracao_da_agua": {
+  "descricao": "Tanjiro · a Roda d'Água com as ondas japonesas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 65090
+ },
  "ressurreicao": {
   "descricao": "feixe de luz que levanta o aliado caído",
   "quadros": 12,
@@ -6831,6 +7013,34 @@
   "laco": false,
   "bytes": 30012
  },
+ "sangue_corruptor": {
+  "descricao": "Muzan · as veias escuras se espalhando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 60004
+ },
+ "sangue_nezuko": {
+  "descricao": "Nezuko · o chute demoníaco e o sangue",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 33030
+ },
  "saque_do_trovao": {
   "descricao": "Zenitsu: risco de relâmpago horizontal e o raio em ziguezague",
   "quadros": 12,
@@ -6900,6 +7110,20 @@
   ],
   "laco": true,
   "bytes": 58776
+ },
+ "seis_dobras": {
+  "descricao": "Zenitsu · seis riscos de raio de seis lados",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 45402
  },
  "seis_mundos": {
   "descricao": "Shaka · os seis portais puxando para o centro",

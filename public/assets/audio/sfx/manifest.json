@@ -87,6 +87,23 @@
    ],
    "bytes": 45818
   },
+  "adaptacao-demoniaca": {
+   "arquivo": "adaptacao-demoniaca.mp3",
+   "descricao": "Muzan: a carne se adapta",
+   "versoes": [
+    0.0,
+    2.0663,
+    4.2037,
+    6.1759
+   ],
+   "duracoes": [
+    1.9863,
+    2.0575,
+    1.8922,
+    1.9743
+   ],
+   "bytes": 62431
+  },
   "agilidade-pikachu": {
    "arquivo": "agilidade-pikachu.mp3",
    "descricao": "Agilidade: os rastros correndo em volta",
@@ -341,6 +358,23 @@
     1.0152
    ],
    "bytes": 47493
+  },
+  "audicao-zenitsu": {
+   "arquivo": "audicao-zenitsu.mp3",
+   "descricao": "Zenitsu: o ouvido e o raio",
+   "versoes": [
+    0.0,
+    1.5233,
+    3.1577,
+    4.687
+   ],
+   "duracoes": [
+    1.4433,
+    1.5544,
+    1.4493,
+    1.4933
+   ],
+   "bytes": 44803
   },
   "aura-besta": {
    "arquivo": "aura-besta.mp3",
@@ -1345,6 +1379,23 @@
    ],
    "bytes": 25058
   },
+  "chicotes-de-carne": {
+   "arquivo": "chicotes-de-carne.mp3",
+   "descricao": "Muzan: os chicotes de carne",
+   "versoes": [
+    0.0,
+    1.047,
+    2.0839,
+    3.0997
+   ],
+   "duracoes": [
+    0.967,
+    0.9569,
+    0.9358,
+    0.9819
+   ],
+   "bytes": 33624
+  },
   "chidori-sasuke": {
    "arquivo": "chidori-sasuke.mp3",
    "descricao": "Chidori: a lança de raio atravessando",
@@ -2126,6 +2177,23 @@
     1.8274
    ],
    "bytes": 60177
+  },
+  "despertar-nezuko": {
+   "arquivo": "despertar-nezuko.mp3",
+   "descricao": "Nezuko: a forma desperta",
+   "versoes": [
+    0.0,
+    2.0577,
+    4.0963,
+    6.0876
+   ],
+   "duracoes": [
+    1.9777,
+    1.9586,
+    1.9114,
+    1.9193
+   ],
+   "bytes": 63611
   },
   "deus-do-trovao": {
    "arquivo": "deus-do-trovao.mp3",
@@ -3180,6 +3248,23 @@
     1.9707
    ],
    "bytes": 68763
+  },
+  "explosao-de-sangue": {
+   "arquivo": "explosao-de-sangue.mp3",
+   "descricao": "Nezuko: o Sangue Explosivo",
+   "versoes": [
+    0.0,
+    1.9983,
+    4.1145,
+    6.1268
+   ],
+   "duracoes": [
+    1.9183,
+    2.0362,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 79526
   },
   "exposto": {
    "arquivo": "exposto.mp3",
@@ -4252,6 +4337,40 @@
    ],
    "bytes": 35139
   },
+  "hinokami-kagura": {
+   "arquivo": "hinokami-kagura.mp3",
+   "descricao": "Tanjiro: a Dança do Deus do Fogo",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 92420
+  },
+  "hinokami-preparo": {
+   "arquivo": "hinokami-preparo.mp3",
+   "descricao": "Tanjiro: o fogo acendendo na lâmina (antes do golpe)",
+   "versoes": [
+    0.0,
+    1.28,
+    2.6035,
+    3.8429
+   ],
+   "duracoes": [
+    1.2,
+    1.2435,
+    1.1594,
+    1.2183
+   ],
+   "bytes": 61739
+  },
   "hipnose": {
    "arquivo": "hipnose.mp3",
    "descricao": "família hipnose",
@@ -4574,6 +4693,23 @@
     0.8122
    ],
    "bytes": 28771
+  },
+  "investida-inosuke": {
+   "arquivo": "investida-inosuke.mp3",
+   "descricao": "Inosuke: a investida do javali",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 66946
   },
   "investigacao-light": {
    "arquivo": "investigacao-light.mp3",
@@ -6207,6 +6343,23 @@
    ],
    "bytes": 40638
   },
+  "olfato-tanjiro": {
+   "arquivo": "olfato-tanjiro.mp3",
+   "descricao": "Tanjiro: a fungada e o fio do cheiro",
+   "versoes": [
+    0.0,
+    1.38,
+    2.8071,
+    4.1432
+   ],
+   "duracoes": [
+    1.3,
+    1.3471,
+    1.256,
+    1.3198
+   ],
+   "bytes": 53914
+  },
   "olho": {
    "arquivo": "olho.mp3",
    "descricao": "família olho",
@@ -6393,6 +6546,23 @@
     1.4213
    ],
    "bytes": 76078
+  },
+  "percepcao-espacial": {
+   "arquivo": "percepcao-espacial.mp3",
+   "descricao": "Inosuke: o tremor e o X",
+   "versoes": [
+    0.0,
+    1.58,
+    3.2144,
+    4.7437
+   ],
+   "duracoes": [
+    1.5,
+    1.5544,
+    1.4493,
+    1.5228
+   ],
+   "bytes": 52934
   },
   "petalas": {
    "arquivo": "petalas.mp3",
@@ -6648,6 +6818,40 @@
     0.7107
    ],
    "bytes": 25308
+  },
+  "presas-rasgantes": {
+   "arquivo": "presas-rasgantes.mp3",
+   "descricao": "Inosuke: as lâminas lascadas",
+   "versoes": [
+    0.0,
+    1.1612,
+    2.3583,
+    3.4921
+   ],
+   "duracoes": [
+    1.0812,
+    1.1171,
+    1.0538,
+    1.0711
+   ],
+   "bytes": 44044
+  },
+  "primeira-postura": {
+   "arquivo": "primeira-postura.mp3",
+   "descricao": "Zenitsu: a cúpula elétrica no aliado",
+   "versoes": [
+    0.0,
+    1.6791,
+    3.3516,
+    4.9775
+   ],
+   "duracoes": [
+    1.5991,
+    1.5925,
+    1.5459,
+    1.6244
+   ],
+   "bytes": 69643
   },
   "prisao": {
    "arquivo": "prisao.mp3",
@@ -7584,6 +7788,23 @@
    ],
    "bytes": 50409
   },
+  "respiracao-da-agua": {
+   "arquivo": "respiracao-da-agua.mp3",
+   "descricao": "Tanjiro: a Roda d'Água",
+   "versoes": [
+    0.0,
+    1.68,
+    3.418,
+    5.0439
+   ],
+   "duracoes": [
+    1.6,
+    1.658,
+    1.5459,
+    1.6244
+   ],
+   "bytes": 62918
+  },
   "ressurreicao": {
    "arquivo": "ressurreicao.mp3",
    "descricao": "família ressurreicao",
@@ -7839,6 +8060,40 @@
    ],
    "bytes": 33860
   },
+  "sangue-corruptor": {
+   "arquivo": "sangue-corruptor.mp3",
+   "descricao": "Muzan: o sangue corruptor",
+   "versoes": [
+    0.0,
+    1.88,
+    3.8253,
+    5.6444
+   ],
+   "duracoes": [
+    1.8,
+    1.8653,
+    1.7391,
+    1.8274
+   ],
+   "bytes": 58846
+  },
+  "sangue-nezuko": {
+   "arquivo": "sangue-nezuko.mp3",
+   "descricao": "Nezuko: o chute demoníaco",
+   "versoes": [
+    0.0,
+    1.2668,
+    2.5223,
+    3.7462
+   ],
+   "duracoes": [
+    1.1868,
+    1.1756,
+    1.1439,
+    1.2117
+   ],
+   "bytes": 38318
+  },
   "saque-do-trovao": {
    "arquivo": "saque-do-trovao.mp3",
    "descricao": "básico de Zenitsu: estalo de trovão seco e a lâmina voltando à bainha",
@@ -7906,6 +8161,23 @@
     2.0305
    ],
    "bytes": 59575
+  },
+  "seis-dobras": {
+   "arquivo": "seis-dobras.mp3",
+   "descricao": "Zenitsu: as Seis Dobras",
+   "versoes": [
+    0.0,
+    1.88,
+    3.8253,
+    5.6444
+   ],
+   "duracoes": [
+    1.8,
+    1.8653,
+    1.7391,
+    1.8274
+   ],
+   "bytes": 68982
   },
   "seis-mundos": {
    "arquivo": "seis-mundos.mp3",

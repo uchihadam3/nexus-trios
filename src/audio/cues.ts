@@ -93,6 +93,7 @@ const ANTES_DA_NOVA: Partial<Record<FamiliaNova, { antes: Sound; saida?: Sound }
   estalo_thanos: { antes: 'manopla-joias' },
   masenko: { antes: 'masenko-carga' },
   susanoo: { antes: 'susanoo-forma' },
+  hinokami_kagura: { antes: 'hinokami-preparo' },
   despertar_gohan: { antes: 'aura-besta' },
   raio_mortal: { antes: 'raio-mortal-saida' },
   bola_da_morte: { antes: 'bola-da-morte-carga' },
