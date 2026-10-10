@@ -2113,6 +2113,20 @@
   "laco": false,
   "bytes": 45002
  },
+ "espiritos_antigos": {
+  "descricao": "Mumm-Ra · os quatro espíritos entrando no rival",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 44936
+ },
  "esquiva": {
   "descricao": "vultos que escapam para os lados e riscos de vento",
   "quadros": 12,
@@ -2406,6 +2420,34 @@
   ],
   "laco": true,
   "bytes": 132384
+ },
+ "feixe_ciclope": {
+  "descricao": "Ciclope · o Feixe concentrado (faixa)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   512,
+   96
+  ],
+  "laco": true,
+  "bytes": 55758
+ },
+ "feixe_concentrado": {
+  "descricao": "Ciclope · o feixe batendo e cortando o golpe",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 47588
  },
  "feixe_ki": {
   "descricao": "feixe de ki com hélice (faixa)",
@@ -3387,6 +3429,20 @@
   "laco": false,
   "bytes": 68404
  },
+ "khan_escudo": {
+  "descricao": "Shaka · a esfera dourada do Khan no aliado",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 89186
+ },
  "krypton_carga": {
   "descricao": "Super-Homem · a luz do sol juntando nele (laço)",
   "quadros": 12,
@@ -3708,6 +3764,20 @@
   ],
   "laco": true,
   "bytes": 64668
+ },
+ "lotus_shaka": {
+  "descricao": "Shaka · a mandala dourada girando (laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 46028
  },
  "lua": {
   "descricao": "meia-lua acesa",
@@ -4156,6 +4226,20 @@
   ],
   "laco": false,
   "bytes": 119672
+ },
+ "mumm_ra_desperta": {
+  "descricao": "Mumm-Ra · as faixas soltando e a aura escura",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 70728
  },
  "muralha_de_terra": {
   "descricao": "Toph · Muralha de terra rompendo embaixo do rival",
@@ -5193,6 +5277,20 @@
   "laco": false,
   "bytes": 69510
  },
+ "ricochete_optico": {
+  "descricao": "Ciclope · o raio quicando de rival em rival",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 38982
+ },
  "rinnegan": {
   "descricao": "Pain: olho do Rinnegan e ondas de repulsão para fora",
   "quadros": 12,
@@ -5388,6 +5486,48 @@
   ],
   "laco": false,
   "bytes": 51490
+ },
+ "sarcofago_maldito": {
+  "descricao": "Mumm-Ra · o sarcófago gigante no campo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 65906
+ },
+ "sarcofago_preparo": {
+  "descricao": "Mumm-Ra · os hieróglifos acendendo (laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 58776
+ },
+ "seis_mundos": {
+  "descricao": "Shaka · os seis portais puxando para o centro",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 86908
  },
  "selo": {
   "descricao": "círculo mágico",
@@ -6061,6 +6201,20 @@
   "laco": false,
   "bytes": 74720
  },
+ "tesouro_do_ceu": {
+  "descricao": "Shaka · o lótus e os cinco sentidos se apagando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 86208
+ },
  "tiara_lunar": {
   "descricao": "Sailor Moon: tiara-disco com lua crescente que acerta com brilho",
   "quadros": 12,
@@ -6271,6 +6425,20 @@
   "laco": false,
   "bytes": 69106
  },
+ "varredura_optica": {
+  "descricao": "Ciclope · o raio varrendo a fileira",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 29762
+ },
  "velocidade": {
   "descricao": "linhas de vento e asinhas",
   "quadros": 12,
@@ -6382,6 +6550,20 @@
   ],
   "laco": false,
   "bytes": 41554
+ },
+ "visor_carregando": {
+  "descricao": "Ciclope · o visor acendendo (laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 7926
  },
  "z_saber": {
   "descricao": "Zero: meia-lua do sabre de energia",

@@ -138,6 +138,23 @@
    ],
    "bytes": 65981
   },
+  "antigos-espiritos": {
+   "arquivo": "antigos-espiritos.mp3",
+   "descricao": "Antigos Espíritos: os espíritos uivando",
+   "versoes": [
+    0.0,
+    1.68,
+    3.418,
+    5.0439
+   ],
+   "duracoes": [
+    1.6,
+    1.658,
+    1.5459,
+    1.6244
+   ],
+   "bytes": 49336
+  },
   "aparar-e-cortar": {
    "arquivo": "aparar-e-cortar.mp3",
    "descricao": "básico de Sekiro: tink de deflexão e o contra-corte",
@@ -2586,6 +2603,23 @@
    ],
    "bytes": 40846
   },
+  "feixe-concentrado": {
+   "arquivo": "feixe-concentrado.mp3",
+   "descricao": "Feixe concentrado: o raio grosso e o golpe cortado",
+   "versoes": [
+    0.0,
+    1.6687,
+    3.3916,
+    4.9705
+   ],
+   "duracoes": [
+    1.5887,
+    1.6429,
+    1.4989,
+    1.5819
+   ],
+   "bytes": 60035
+  },
   "fenda": {
    "arquivo": "fenda.mp3",
    "descricao": "família fenda",
@@ -2772,6 +2806,23 @@
     1.8751
    ],
    "bytes": 63023
+  },
+  "forma-desperta": {
+   "arquivo": "forma-desperta.mp3",
+   "descricao": "Forma desperta: o grito e as faixas rasgando",
+   "versoes": [
+    0.0,
+    1.98,
+    4.0289,
+    5.9446
+   ],
+   "duracoes": [
+    1.9,
+    1.9689,
+    1.8357,
+    1.9289
+   ],
+   "bytes": 71996
   },
   "frigideira": {
    "arquivo": "frigideira.mp3",
@@ -4184,6 +4235,23 @@
    ],
    "bytes": 68461
   },
+  "lotus-shaka": {
+   "arquivo": "lotus-shaka.mp3",
+   "descricao": "a meditação do Shaka no Preparo",
+   "versoes": [
+    0.0,
+    2.68,
+    5.4543,
+    8.0463
+   ],
+   "duracoes": [
+    2.6,
+    2.6943,
+    2.5121,
+    2.6396
+   ],
+   "bytes": 69636
+  },
   "lua": {
    "arquivo": "lua.mp3",
    "descricao": "família lua",
@@ -5561,6 +5629,23 @@
    ],
    "bytes": 31536
   },
+  "rajada-de-contencao": {
+   "arquivo": "rajada-de-contencao.mp3",
+   "descricao": "Rajada de contenção: o raio varrendo a fileira",
+   "versoes": [
+    0.0,
+    1.58,
+    3.2144,
+    4.7437
+   ],
+   "duracoes": [
+    1.5,
+    1.5544,
+    1.4493,
+    1.5228
+   ],
+   "bytes": 53766
+  },
   "rajada-do-aang": {
    "arquivo": "rajada-do-aang.mp3",
    "descricao": "Rajada de ar: a bola de vento e o estouro",
@@ -5918,6 +6003,23 @@
    ],
    "bytes": 84200
   },
+  "retorno-ao-sarcofago": {
+   "arquivo": "retorno-ao-sarcofago.mp3",
+   "descricao": "Retorno ao sarcófago: a pedra e a escuridão",
+   "versoes": [
+    0.0,
+    2.38,
+    4.8434,
+    7.1456
+   ],
+   "duracoes": [
+    2.3,
+    2.3834,
+    2.2222,
+    2.335
+   ],
+   "bytes": 81897
+  },
   "ricochete": {
    "arquivo": "ricochete.mp3",
    "descricao": "família ricochete",
@@ -5934,6 +6036,23 @@
     0.8024
    ],
    "bytes": 28694
+  },
+  "ricochete-optico": {
+   "arquivo": "ricochete-optico.mp3",
+   "descricao": "Ricochete óptico: o raio quicando",
+   "versoes": [
+    0.0,
+    1.133,
+    2.3414,
+    3.4729
+   ],
+   "duracoes": [
+    1.053,
+    1.1284,
+    1.0515,
+    1.1115
+   ],
+   "bytes": 39893
   },
   "rinnegan": {
    "arquivo": "rinnegan.mp3",
@@ -6155,6 +6274,40 @@
     1.3198
    ],
    "bytes": 47483
+  },
+  "sarcofago-preparo": {
+   "arquivo": "sarcofago-preparo.mp3",
+   "descricao": "os hieróglifos acendendo",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 59575
+  },
+  "seis-mundos": {
+   "arquivo": "seis-mundos.mp3",
+   "descricao": "Rendição dos Seis Mundos: os seis portais",
+   "versoes": [
+    0.0,
+    2.48,
+    5.047,
+    7.4459
+   ],
+   "duracoes": [
+    2.4,
+    2.487,
+    2.3188,
+    2.4365
+   ],
+   "bytes": 69346
   },
   "selo": {
    "arquivo": "selo.mp3",
@@ -6887,6 +7040,23 @@
    ],
    "bytes": 55423
   },
+  "tesouro-do-ceu": {
+   "arquivo": "tesouro-do-ceu.mp3",
+   "descricao": "Tesouro do Céu: o gongo e os sentidos se apagando",
+   "versoes": [
+    0.0,
+    2.18,
+    4.4361,
+    6.5451
+   ],
+   "duracoes": [
+    2.1,
+    2.1761,
+    2.029,
+    2.132
+   ],
+   "bytes": 59965
+  },
   "tiara-lunar": {
    "arquivo": "tiara-lunar.mp3",
    "descricao": "básico de Sailor Moon: disco girando que acerta com brilho mágico",
@@ -6954,6 +7124,23 @@
     0.9137
    ],
    "bytes": 35312
+  },
+  "todo-poderoso": {
+   "arquivo": "todo-poderoso.mp3",
+   "descricao": "Todo-poderoso: a esfera dourada fechando",
+   "versoes": [
+    0.0,
+    1.68,
+    3.418,
+    5.0439
+   ],
+   "duracoes": [
+    1.6,
+    1.658,
+    1.5459,
+    1.6244
+   ],
+   "bytes": 44857
   },
   "toque": {
    "arquivo": "toque.mp3",
@@ -7447,6 +7634,23 @@
     1.6168
    ],
    "bytes": 56369
+  },
+  "visor-carregando": {
+   "arquivo": "visor-carregando.mp3",
+   "descricao": "o visor do Ciclope carregando",
+   "versoes": [
+    0.0,
+    1.38,
+    2.8071,
+    4.1432
+   ],
+   "duracoes": [
+    1.3,
+    1.3471,
+    1.256,
+    1.3198
+   ],
+   "bytes": 51377
   },
   "vitoria": {
    "arquivo": "vitoria.mp3",
