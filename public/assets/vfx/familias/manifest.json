@@ -251,6 +251,34 @@
   "laco": false,
   "bytes": 69452
  },
+ "barril_quebrando": {
+  "descricao": "Donkey Kong · o barril se espatifando no rival",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 60586
+ },
+ "barril_voando": {
+  "descricao": "Donkey Kong · o barril girando no ar (laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 16152
+ },
  "bastao": {
   "descricao": "golpe de bastão",
   "quadros": 12,
@@ -292,6 +320,34 @@
   ],
   "laco": true,
   "bytes": 22470
+ },
+ "batida_do_gorila": {
+  "descricao": "Donkey Kong · Batida do gorila: rachaduras, ondas e pedras",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 95472
+ },
+ "batida_preparo": {
+  "descricao": "Donkey Kong · o chão tremendo no Preparo (laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 18472
  },
  "bencao": {
   "descricao": "penas e halo",
@@ -936,6 +992,20 @@
   ],
   "laco": false,
   "bytes": 27884
+ },
+ "contra_buster": {
+  "descricao": "Cloud · o contra-ataque: corte horizontal pesado",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 30830
  },
  "copia": {
   "descricao": "linhas de leitura, vírgulas girando e a forma copiada piscando",
@@ -2267,6 +2337,20 @@
   "laco": false,
   "bytes": 74682
  },
+ "golpe_ascendente": {
+  "descricao": "Cloud · Golpe ascendente: a Buster Sword sobe num arco",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 44950
+ },
  "golpe_da_serie": {
   "descricao": "Série: os três pontos do combo e o golpe final",
   "quadros": 12,
@@ -2434,6 +2518,20 @@
   ],
   "laco": false,
   "bytes": 116754
+ },
+ "guarda_buster": {
+  "descricao": "Cloud · a guarda com a Buster Sword de pé (nele)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": false,
+  "bytes": 34910
  },
  "guarda_do_golpe": {
   "descricao": "Guarda do golpe: os cacos viram placa de escudo",
@@ -3023,6 +3121,20 @@
   "laco": false,
   "bytes": 74048
  },
+ "limite_cloud": {
+  "descricao": "Cloud · a aura do Limite no Preparo (laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 64668
+ },
  "lua": {
   "descricao": "meia-lua acesa",
   "quadros": 12,
@@ -3442,6 +3554,20 @@
   ],
   "laco": false,
   "bytes": 47270
+ },
+ "omnislash": {
+  "descricao": "Cloud · Omnislash: os cortes de todos os lados e o final",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 60058
  },
  "onda_de_choque": {
   "descricao": "onda de choque",
@@ -4674,6 +4800,20 @@
   ],
   "laco": false,
   "bytes": 81114
+ },
+ "soco_giratorio": {
+  "descricao": "Donkey Kong · Soco giratório: o braço gira e o punho gigante acerta",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 55662
  },
  "soco_relampago": {
   "descricao": "básico do Flash: relâmpagos convergindo e mil socos num instante",

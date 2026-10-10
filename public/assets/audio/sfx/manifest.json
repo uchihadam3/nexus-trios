@@ -308,6 +308,23 @@
    ],
    "bytes": 29795
   },
+  "barril-arremessado": {
+   "arquivo": "barril-arremessado.mp3",
+   "descricao": "Barril arremessado: o barril girando e se espatifando",
+   "versoes": [
+    0.0,
+    1.88,
+    3.8253,
+    5.557
+   ],
+   "duracoes": [
+    1.8,
+    1.8653,
+    1.6517,
+    1.8274
+   ],
+   "bytes": 64584
+  },
   "bastao": {
    "arquivo": "bastao.mp3",
    "descricao": "família bastao",
@@ -341,6 +358,40 @@
     0.7095
    ],
    "bytes": 28781
+  },
+  "batida-do-gorila": {
+   "arquivo": "batida-do-gorila.mp3",
+   "descricao": "Batida do gorila: o chão rachando e as pedras caindo",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 68796
+  },
+  "batida-preparo": {
+   "arquivo": "batida-preparo.mp3",
+   "descricao": "o Donkey Kong batendo no peito antes da batida",
+   "versoes": [
+    0.0,
+    1.38,
+    2.8071,
+    4.1432
+   ],
+   "duracoes": [
+    1.3,
+    1.3471,
+    1.256,
+    1.3198
+   ],
+   "bytes": 38898
   },
   "bencao": {
    "arquivo": "bencao.mp3",
@@ -2569,6 +2620,23 @@
    ],
    "bytes": 36594
   },
+  "golpe-ascendente": {
+   "arquivo": "golpe-ascendente.mp3",
+   "descricao": "Golpe ascendente do Cloud: a Buster Sword subindo e o impacto",
+   "versoes": [
+    0.0,
+    1.38,
+    2.8071,
+    4.1432
+   ],
+   "duracoes": [
+    1.3,
+    1.3471,
+    1.256,
+    1.3198
+   ],
+   "bytes": 57057
+  },
   "golpe-da-serie": {
    "arquivo": "golpe-da-serie.mp3",
    "descricao": "família golpe da serie",
@@ -3623,6 +3691,23 @@
    ],
    "bytes": 49465
   },
+  "limite-cloud": {
+   "arquivo": "limite-cloud.mp3",
+   "descricao": "o Limite do Cloud crescendo no Preparo",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 68461
+  },
   "lua": {
    "arquivo": "lua.mp3",
    "descricao": "família lua",
@@ -4184,6 +4269,23 @@
    ],
    "bytes": 42253
   },
+  "omnislash": {
+   "arquivo": "omnislash.mp3",
+   "descricao": "Omnislash: os cortes cada vez mais rápidos e o corte final",
+   "versoes": [
+    0.0,
+    2.28,
+    4.6398,
+    6.8454
+   ],
+   "duracoes": [
+    2.2,
+    2.2798,
+    2.1256,
+    2.2335
+   ],
+   "bytes": 91283
+  },
   "onda-choque": {
    "arquivo": "onda-choque.mp3",
    "descricao": "onda de choque",
@@ -4370,6 +4472,23 @@
     1.0152
    ],
    "bytes": 35669
+  },
+  "postura-de-guarda": {
+   "arquivo": "postura-de-guarda.mp3",
+   "descricao": "Postura de guarda: o bloqueio de metal e o contra-ataque",
+   "versoes": [
+    0.0,
+    1.58,
+    3.2144,
+    4.7437
+   ],
+   "duracoes": [
+    1.5,
+    1.5544,
+    1.4493,
+    1.5228
+   ],
+   "bytes": 65969
   },
   "pow-cartoon": {
    "arquivo": "pow-cartoon.mp3",
@@ -5560,6 +5679,23 @@
     1.4213
    ],
    "bytes": 46717
+  },
+  "soco-giratorio": {
+   "arquivo": "soco-giratorio.mp3",
+   "descricao": "Soco giratório do Donkey Kong: o braço girando e o soco gigante",
+   "versoes": [
+    0.0,
+    1.4103,
+    2.8818,
+    4.3144
+   ],
+   "duracoes": [
+    1.3303,
+    1.3915,
+    1.3527,
+    1.4071
+   ],
+   "bytes": 39807
   },
   "soco-leve": {
    "arquivo": "soco-leve.mp3",

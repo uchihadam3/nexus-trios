@@ -1,4 +1,5 @@
 import { useCallback,useEffect,useLayoutEffect,useRef,useState } from 'react';
+import { ComTermos } from '../components/Termos';
 import { battleAudio } from '../lib/audio';
 import { Pause,Play,FastForward,VolumeX,Volume2,SlidersHorizontal,Check,LogOut,ChevronLeft,ScrollText } from 'lucide-react';
 import { AuxIcon } from '../components/Icon';
@@ -104,7 +105,7 @@ export function BattleScreen({battle,beat,index,name,settings,paused,onPause,onA
       <div className="arena-floor" aria-hidden="true"><span className="floor-glow floor-rivals"/><span className="floor-glow floor-allies"/><span className="floor-ring ring-outer"/><span className="floor-ring ring-inner"/><span className="floor-lines"/></div>
       <div className="team team-rivals">{battle.fighters.filter(f=>f.side==='enemy').map(unit)}</div>
       <div className="arena-center"><span className="arena-versus" aria-hidden="true">VS</span><span className="arena-encounter">{name}</span>
-        {settings.explanations!=='off'&&<div className="battle-hint"><span><i className="legend-circle"/>Próximo ataque</span><span><i className="legend-ready"/>Pronta</span><span><i className="legend-cast"/>Preparo</span></div>}
+        {settings.explanations!=='off'&&<div className="battle-hint"><span><i className="legend-circle"/><ComTermos texto="Próximo ataque"/></span><span><i className="legend-ready"/><ComTermos texto="Pronta"/></span><span><i className="legend-cast"/><ComTermos texto="Preparo"/></span></div>}
       </div>
       <div className="team team-allies">{battle.fighters.filter(f=>f.side==='player').map(unit)}</div>
       <CombatConnections battle={battle} beat={beat} anchors={anchors} reduced={settings.reducedMotion} medal={box.medal}/>
@@ -119,9 +120,9 @@ export function BattleScreen({battle,beat,index,name,settings,paused,onPause,onA
       <button className={`control mixer-button ${mixer?'selected':''}`} aria-label="Ajustes da batalha" aria-expanded={mixer} onClick={()=>setMixer(!mixer)}><SlidersHorizontal size={18}/></button>
       <button className="control control-danger abandon-battle" onClick={onAbandon} aria-label="Desistir da jornada"><LogOut size={17}/><span>Desistir</span></button>
     </footer>
-    {historyOpen&&<aside className="battle-history"><div><strong><AuxIcon id="history" size={18}/> Momentos importantes</strong><button aria-label="Fechar histórico" onClick={()=>setHistoryOpen(false)}>×</button></div>{recent.length?recent.map(e=><p key={e.id}>{historyText(e)}</p>):<p>A luta ainda não teve momentos decisivos.</p>}</aside>}
+    {historyOpen&&<aside className="battle-history"><div><strong><AuxIcon id="history" size={18}/> Momentos importantes</strong><button aria-label="Fechar histórico" onClick={()=>setHistoryOpen(false)}>×</button></div>{recent.length?recent.map(e=><p key={e.id}><ComTermos texto={historyText(e)}/></p>):<p>A luta ainda não teve momentos decisivos.</p>}</aside>}
     {mixer&&<div className="battle-mixer">{(['musicVolume','effectsVolume'] as const).map(key=><label key={key}>{key==='musicVolume'?'Música':'Efeitos'}<input type="range" min="0" max="100" value={settings[key]} onChange={e=>onSettings({...settings,[key]:Number(e.target.value)})}/></label>)}<label className="auto-label"><input type="checkbox" checked={settings.auto} onChange={e=>onSettings({...settings,auto:e.target.checked})}/>Próximo confronto automático</label></div>}
     {inspect&&<BattleInspector target={inspect} battle={battle} onClose={()=>setInspect(null)} onSelect={setInspect}/>}
-    {tutorial>=0&&<div className="battle-tutorial"><div><span><AuxIcon id="help" size={20}/> GUIA {tutorial+1}/5</span><button onClick={closeTutorial} aria-label="Pular guia"><Check size={17}/></button></div><p><b>{tutorialSteps[tutorial][0]}</b></p><p>{tutorialSteps[tutorial][1]}</p><button className="secondary" onClick={()=>tutorial===4?closeTutorial():setTutorial(tutorial+1)}>{tutorial===4?'Pronto. Assistir meu trio':'Entendi'}</button><button className="text-button" onClick={closeTutorial}>Pular guia</button></div>}
+    {tutorial>=0&&<div className="battle-tutorial"><div><span><AuxIcon id="help" size={20}/> GUIA {tutorial+1}/5</span><button onClick={closeTutorial} aria-label="Pular guia"><Check size={17}/></button></div><p><b>{tutorialSteps[tutorial][0]}</b></p><p><ComTermos texto={tutorialSteps[tutorial][1]}/></p><button className="secondary" onClick={()=>tutorial===4?closeTutorial():setTutorial(tutorial+1)}>{tutorial===4?'Pronto. Assistir meu trio':'Entendi'}</button><button className="text-button" onClick={closeTutorial}>Pular guia</button></div>}
   </section>;
 }

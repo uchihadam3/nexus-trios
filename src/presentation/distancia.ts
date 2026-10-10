@@ -35,6 +35,7 @@ const DO_GOLPE: Record<string, Distancia> = {
   'coiote:1': 'longe',        // a armadilha já estava montada
   'sukuna:0': 'longe', 'sukuna:2': 'longe', // Desmantelar e o Santuário cortam à distância
   taz: 'perto',               // o redemoinho vai até o alvo e morde
+  'cloud:1': 'perto',         // a guarda e o contra-ataque com a Buster Sword
 };
 
 /** Se o golpe vai até o alvo ou fica de longe; undefined = segue o ícone (apoio, especiais sem regra). */
