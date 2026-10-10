@@ -318,50 +318,6 @@ def bracelete(T, t, rng):
 
 
 # ------------------------------------------------------------------ Homem de Ferro
-def repulsor(T, t, rng):
-    """Repulsor de mão: o anel branco-azulado da palma acende puxando partículas, dispara um raio
-    curto e grosso que estoura no alvo em anéis concêntricos."""
-    G, H = vazio(T)
-    env = apaga(t, 0.82, 1)
-    mx, my = -0.62, 0.0
-    carga = janela(t, 0.0, 0.22)
-    tremor = 0.012 * math.sin(t * 120) * carga
-    palma = (T.ring(0.13 + tremor, 0.02, mx, my) * 1.2 + T.ring(0.07, 0.014, mx, my) * 0.8 + T.gauss(mx, my, 0.05, 0.05) * (0.6 + 0.8 * carga)) * (0.3 + 0.7 * carga)
-    raios_palma = T.lines([(mx + math.cos(a) * 0.15, my + math.sin(a) * 0.15, mx + math.cos(a) * 0.22, my + math.sin(a) * 0.22, 1.0)
-                           for a in (j * TAU / 6 + 0.5 for j in range(6))], 0.014, 0.002) * carga
-    sub = np.random.default_rng(3000)
-    entra = []
-    for j in range(14):
-        a = sub.uniform(0, TAU)
-        a0 = sub.uniform(0.0, 0.12)
-        u = rel(t, a0, a0 + 0.12)
-        if 0 < u < 1:
-            d = 0.45 * (1 - ease_in(u, 1.5)) + 0.13
-            entra.append((mx + math.cos(a) * d, my + math.sin(a) * d, 0.8))
-    E = T.splats(entra, 0.014) if entra else T.zero()
-    vis_mao = 1 - rel(t, 0.42, 0.6)
-    # o disparo
-    tiro = rel(t, 0.22, 0.3)
-    fim = rel(t, 0.36, 0.46)
-    x_ini = mx + 0.1 + (0.0 - mx) * ease_in(fim, 1.2)
-    x_fim = mx + 0.1 + (0.05 - mx - 0.1) * ease_out(tiro, 1.5)
-    feixe = T.zero()
-    nucleo = T.zero()
-    if tiro > 0 and fim < 1:
-        larg = 0.1 * (1 - 0.5 * fim)
-        feixe = T.polys([(lamina(x_ini - 0.04, my, x_fim + 0.08, 0.0, larg), 1.0)], 0.02)
-        nucleo = T.polys([(lamina(x_ini, my, x_fim + 0.04, 0.0, larg * 0.4), 1.0)], 0.006)
-    boca = T.ring(0.1, 0.022, mx + 0.16, my, squash=0.35) * pulso(t, 0.2, 0.42) * 1.2
-    k = pulso(t, 0.28, 0.6)
-    g, h = _clarao(T, k, 0.04, 0.0, 0.25, 0.85)
-    aneis = 0
-    for j, a0 in enumerate((0.29, 0.36, 0.44)):
-        u = ease_out(rel(t, a0, a0 + 0.36), 2)
-        aneis = aneis + T.ring(0.06 + 0.62 * u, 0.04 - 0.008 * j, 0.04, 0.0) * pulso(t, a0, a0 + 0.4) * (1.3 - 0.25 * j)
-    G += ((palma * 1.3 + raios_palma + E * 1.4) * vis_mao + feixe * 1.4 + nucleo + boca + g + aneis) * env
-    H += ((palma * 1.0 + raios_palma * 0.7 + E) * vis_mao + feixe * 0.6 + nucleo * 1.6 + boca * 0.8 + h + aneis * 0.5) * env
-    return G, H
-
 
 # ------------------------------------------------------------------ Capitão América
 def _escudo(T, cx, cy, r, giro, sq=1.0):
@@ -720,7 +676,6 @@ REGISTRO = [
     ("teia_e_soco", teia_e_soco, GRANDE, "Teia e soco: o fio gruda em teia e o soco chega", False),
     ("disparo_arcano", disparo_arcano, GRANDE, "Disparo arcano: mandala de runas e faíscas arcanas", False),
     ("bracelete", bracelete, GRANDE, "Golpe de bracelete: braceletes em X e o soco", False),
-    ("repulsor", repulsor, GRANDE, "Repulsor de mão: o anel da palma e o raio curto", False),
     ("escudo_do_capitao", escudo_do_capitao, GRANDE, "Escudo arremessado: o escudo da estrela que quica", False),
     ("corvo_da_alma", corvo_da_alma, GRANDE, "Energia da alma: o corvo escuro que mergulha", False),
     ("manopla", manopla, GRANDE, "Punho do Titã: a manopla e as seis joias", False),

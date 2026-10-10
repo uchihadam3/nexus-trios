@@ -84,6 +84,11 @@ const ANTES_DA_NOVA: Partial<Record<FamiliaNova, { antes: Sound; saida?: Sound }
   mjolnir_impacto: { antes: 'mjolnir-lanca' },
   tempestade_thor: { antes: 'trovao-chamado' },
   deus_do_trovao: { antes: 'trovao-chamado' },
+  laco_da_verdade: { antes: 'laco-saida' },
+  repulsores_stark: { antes: 'repulsor-saida' },
+  unibeam_impacto: { antes: 'unibeam-carga', saida: 'unibeam-feixe' },
+  escudo_ricochete: { antes: 'escudo-ricochete-saida' },
+  colapso_magneto: { antes: 'campo-magneto' },
 };
 const SONS_DE_ANTES = [...new Set(Object.values(ANTES_DA_NOVA).flatMap((x) => [x!.antes, ...(x!.saida ? [x!.saida] : [])]))];
 

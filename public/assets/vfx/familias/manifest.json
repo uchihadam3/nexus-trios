@@ -293,6 +293,20 @@
   "laco": true,
   "bytes": 64266
  },
+ "avante": {
+  "descricao": "Capitão América · a estrela e o vento do Avante",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 33916
+ },
  "avatar_aang": {
   "descricao": "Aang · o tornado do Estado Avatar com os quatro elementos",
   "quadros": 12,
@@ -699,6 +713,20 @@
   "laco": false,
   "bytes": 58982
  },
+ "braceletes_amazona": {
+  "descricao": "Mulher-Maravilha · os braceletes defendendo o aliado",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 25750
+ },
  "braco_namekiano": {
   "descricao": "básico do Piccolo: o braço verde estica e acerta",
   "quadros": 12,
@@ -880,6 +908,20 @@
   ],
   "laco": false,
   "bytes": 42410
+ },
+ "campo_magneto": {
+  "descricao": "Magneto · o campo e os pedaços de metal (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 26386
  },
  "canhao_de_braco": {
   "descricao": "Samus: bola de plasma do canhão, explosão pequena e anel (+x)",
@@ -1328,6 +1370,20 @@
   ],
   "laco": false,
   "bytes": 54008
+ },
+ "colapso_magneto": {
+  "descricao": "Magneto · o metal esmagando o rival",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 40686
  },
  "colera_impacto": {
   "descricao": "o dragão atravessando o alvo: estouro e rastro para a frente",
@@ -1833,6 +1889,20 @@
   "laco": false,
   "bytes": 40346
  },
+ "dia_todo": {
+  "descricao": "Capitão América · o escudo erguido e a cura",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 41498
+ },
  "diamante_faixa": {
   "descricao": "Hyoga · o Pó de Diamante correndo até o rival (faixa)",
   "quadros": 12,
@@ -2112,6 +2182,34 @@
   ],
   "laco": false,
   "bytes": 46296
+ },
+ "escudo_ricochete": {
+  "descricao": "Capitão América · o clang do escudo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 26124
+ },
+ "escudo_ricochete_voo": {
+  "descricao": "Capitão América · o escudo quicando (laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 7916
  },
  "escudo_serafim": {
   "descricao": "Doutor Estranho · a mandala do Escudo de Serafim",
@@ -3527,6 +3625,20 @@
   "laco": false,
   "bytes": 37002
  },
+ "impeto_amazona": {
+  "descricao": "Mulher-Maravilha · escudo, espada e a estrela",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 40254
+ },
  "instinto": {
   "descricao": "Instinto Superior: aura prateada e vultos",
   "quadros": 12,
@@ -4044,6 +4156,34 @@
   ],
   "laco": false,
   "bytes": 35620
+ },
+ "laco_da_verdade": {
+  "descricao": "Mulher-Maravilha · a laçada apertando o rival",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 65852
+ },
+ "laco_dourado_voo": {
+  "descricao": "Mulher-Maravilha · o Laço da Verdade voando (laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 11068
  },
  "laco_temporal": {
   "descricao": "Doutor Estranho · os anéis de relógio voltando",
@@ -4843,6 +4983,20 @@
   "laco": false,
   "bytes": 70728
  },
+ "muralha_de_metal": {
+  "descricao": "Magneto · as vigas formando a muralha",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 49484
+ },
  "nen_gon": {
   "descricao": "Gon · a aura juntando no punho (laço)",
   "quadros": 12,
@@ -5221,6 +5375,20 @@
   "laco": true,
   "bytes": 140520
  },
+ "plano_que_plano": {
+  "descricao": "Deadpool · tiros, granada e o BUM",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 35146
+ },
  "plasma_faixa": {
   "descricao": "Aiolia · os raios do Relâmpago de Plasma (faixa)",
   "quadros": 12,
@@ -5332,6 +5500,34 @@
   ],
   "laco": false,
   "bytes": 53638
+ },
+ "prisao_magnetica": {
+  "descricao": "Magneto · os aros de metal prendendo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 77130
+ },
+ "protocolo_de_protecao": {
+  "descricao": "Homem de Ferro · as placas hexagonais no aliado",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 53184
  },
  "provocar": {
   "descricao": "marca de raiva sobre o rival provocado, anéis se fechando",
@@ -5500,6 +5696,20 @@
   ],
   "laco": false,
   "bytes": 60826
+ },
+ "quarta_parede": {
+  "descricao": "Deadpool · o quadro do gibi quebrando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 13380
  },
  "queimadura": {
   "descricao": "ponto queimando",
@@ -5949,8 +6159,22 @@
   "laco": false,
   "bytes": 117304
  },
- "repulsor": {
-  "descricao": "Repulsor de mão: o anel da palma e o raio curto",
+ "repulsor_stark_voo": {
+  "descricao": "Homem de Ferro · o repulsor voando (laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 12738
+ },
+ "repulsores_stark": {
+  "descricao": "Homem de Ferro · o repulsor estourando",
   "quadros": 12,
   "grade": [
    3,
@@ -5961,7 +6185,7 @@
    192
   ],
   "laco": false,
-  "bytes": 47424
+  "bytes": 33748
  },
  "resgate": {
   "descricao": "mergulho de resgate",
@@ -6466,6 +6690,20 @@
   ],
   "laco": false,
   "bytes": 37090
+ },
+ "so_um_arranhao": {
+  "descricao": "Deadpool · o band-aid e a regeneração",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 44054
  },
  "soco": {
   "descricao": "impacto leve",
@@ -7362,6 +7600,48 @@
   ],
   "laco": false,
   "bytes": 84190
+ },
+ "unibeam_carga": {
+  "descricao": "Homem de Ferro · o reator carregando (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 13134
+ },
+ "unibeam_faixa": {
+  "descricao": "Homem de Ferro · o feixe do Unibeam (faixa, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 23186
+ },
+ "unibeam_impacto": {
+  "descricao": "Homem de Ferro · o Unibeam no rival",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 58052
  },
  "vampirismo": {
   "descricao": "gotas de sangue em espiral e pulso de coração",

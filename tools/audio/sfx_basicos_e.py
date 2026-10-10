@@ -149,24 +149,6 @@ def bracelete(rng, v):
 
 
 # ------------------------------------------------------------------ Homem de Ferro
-def repulsor(rng, v):
-    """A carga eletrônica que sobe zunindo na palma, o "pew" grave do repulsor e o estouro no alvo."""
-    x = _z(1.0)
-    n = n_de(0.2)
-    f = varre(380, 1700, n, 0.9)
-    carga = seno(f * (1 + 0.02 * seno(f * 0.5, n)), n) * 0.18 + seno(f * 2.01, n) * 0.05
-    carga *= sobe_e_some(n, 0.97, 1.4) * (0.75 + 0.25 * np.sin(2 * math.pi * 55 * _t(n)))
-    poe(x, carga, 0.0)
-    em = 0.18
-    m = n_de(0.32)
-    pew = satura(seno(varre(1100, 95, m, 0.45), m) * env(m, 0.002, 0.11) * 1.2, 2.2) * 0.55
-    pew += seno(varre(2200, 190, m, 0.45), m) * env(m, 0.001, 0.05) * 0.12
-    pew += passa(ruido(rng, m), 1500, 9000, 2) * env(m, 0.001, 0.02) * 0.45
-    poe(x, pew, em)
-    poe(x, B.impacto_energia(rng, v), em + 0.08, 0.8)
-    poe(x, baque(n_de(0.4), 90, 40, 0.12, 0.3) * 0.5, em + 0.08)
-    return reverb(x, 0.5, 0.22)
-
 
 # ------------------------------------------------------------------ Capitão América
 def escudo_do_capitao(rng, v):
@@ -319,7 +301,6 @@ SONS["soco-de-aco"] = (soco_de_aco, "básico de Superman: estrondo sônico duplo
 SONS["teia-e-soco"] = (teia_e_soco, "básico de Homem-Aranha: \"thwip\" da teia, o splat e o soco")
 SONS["disparo-arcano"] = (disparo_arcano, "básico de Doutor Estranho: acorde de cristal da mandala e crepitar arcano")
 SONS["bracelete"] = (bracelete, "básico de Mulher-Maravilha: \"clang\" dos braceletes e o soco")
-SONS["repulsor"] = (repulsor, "básico de Homem de Ferro: carga eletrônica e o \"pew\" grave do repulsor")
 SONS["escudo-do-capitao"] = (escudo_do_capitao, "básico de Capitão América: escudo girando e o clang metálico que vibra")
 SONS["corvo-da-alma"] = (corvo_da_alma, "básico de Ravena: asas batendo e sussurro sombrio de ar")
 SONS["manopla"] = (manopla, "básico de Thanos: soco pesado da manopla e seis brilhos cristalinos")

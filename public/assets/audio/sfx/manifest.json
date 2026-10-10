@@ -376,6 +376,23 @@
    ],
    "bytes": 89602
   },
+  "avante": {
+   "arquivo": "avante.mp3",
+   "descricao": "Avante: a fanfarra e o vento",
+   "versoes": [
+    0.0,
+    1.68,
+    3.418,
+    5.0439
+   ],
+   "duracoes": [
+    1.6,
+    1.658,
+    1.5459,
+    1.6244
+   ],
+   "bytes": 62000
+  },
   "avatar-brilho": {
    "arquivo": "avatar-brilho.mp3",
    "descricao": "o Estado Avatar acendendo",
@@ -784,6 +801,23 @@
    ],
    "bytes": 43030
   },
+  "braceletes-amazona": {
+   "arquivo": "braceletes-amazona.mp3",
+   "descricao": "Braceletes: as balas ricocheteando",
+   "versoes": [
+    0.0,
+    1.5749,
+    3.2173,
+    4.7361
+   ],
+   "duracoes": [
+    1.4949,
+    1.5624,
+    1.4388,
+    1.5278
+   ],
+   "bytes": 54747
+  },
   "braco-namekiano": {
    "arquivo": "braco-namekiano.mp3",
    "descricao": "básico de Piccolo: esticar elástico e orgânico, pancada e o braço voltando",
@@ -919,6 +953,23 @@
     1.269
    ],
    "bytes": 44266
+  },
+  "campo-magneto": {
+   "arquivo": "campo-magneto.mp3",
+   "descricao": "Magneto erguendo o campo (Preparo)",
+   "versoes": [
+    0.0,
+    1.78,
+    3.6217,
+    5.3441
+   ],
+   "duracoes": [
+    1.7,
+    1.7617,
+    1.6425,
+    1.7259
+   ],
+   "bytes": 62577
   },
   "canhao": {
    "arquivo": "canhao.mp3",
@@ -1429,6 +1480,23 @@
     1.6244
    ],
    "bytes": 52397
+  },
+  "colapso-magneto": {
+   "arquivo": "colapso-magneto.mp3",
+   "descricao": "Colapso: o metal esmagando",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 67846
   },
   "colera-do-dragao": {
    "arquivo": "colera-do-dragao.mp3",
@@ -1957,6 +2025,23 @@
    ],
    "bytes": 79346
   },
+  "dia-todo": {
+   "arquivo": "dia-todo.mp3",
+   "descricao": "Eu posso o dia todo: o escudo e a determinação",
+   "versoes": [
+    0.0,
+    1.88,
+    3.8253,
+    5.6444
+   ],
+   "duracoes": [
+    1.8,
+    1.8653,
+    1.7391,
+    1.8274
+   ],
+   "bytes": 65419
+  },
   "disco": {
    "arquivo": "disco.mp3",
    "descricao": "família disco",
@@ -2296,6 +2381,40 @@
     0.7399
    ],
    "bytes": 25926
+  },
+  "escudo-ricochete": {
+   "arquivo": "escudo-ricochete.mp3",
+   "descricao": "Escudo ricochete: os três clangs",
+   "versoes": [
+    0.0,
+    1.68,
+    3.418,
+    5.0439
+   ],
+   "duracoes": [
+    1.6,
+    1.658,
+    1.5459,
+    1.6244
+   ],
+   "bytes": 60339
+  },
+  "escudo-ricochete-saida": {
+   "arquivo": "escudo-ricochete-saida.mp3",
+   "descricao": "Escudo ricochete: o arremesso",
+   "versoes": [
+    0.0,
+    0.58,
+    1.1781,
+    1.7412
+   ],
+   "duracoes": [
+    0.5,
+    0.5181,
+    0.4831,
+    0.5076
+   ],
+   "bytes": 23108
   },
   "escudo-serafim": {
    "arquivo": "escudo-serafim.mp3",
@@ -3878,6 +3997,23 @@
    ],
    "bytes": 28083
   },
+  "impeto-amazona": {
+   "arquivo": "impeto-amazona.mp3",
+   "descricao": "Ímpeto amazona: escudo, espada e o estouro",
+   "versoes": [
+    0.0,
+    1.58,
+    3.2144,
+    4.7437
+   ],
+   "duracoes": [
+    1.5,
+    1.5544,
+    1.4493,
+    1.5228
+   ],
+   "bytes": 61003
+  },
   "instinto": {
    "arquivo": "instinto.mp3",
    "descricao": "família instinto",
@@ -4540,6 +4676,40 @@
     1.066
    ],
    "bytes": 49283
+  },
+  "laco-da-verdade": {
+   "arquivo": "laco-da-verdade.mp3",
+   "descricao": "Laço da Verdade: a corda apertando e a magia",
+   "versoes": [
+    0.0,
+    1.78,
+    3.6217,
+    5.3441
+   ],
+   "duracoes": [
+    1.7,
+    1.7617,
+    1.6425,
+    1.7259
+   ],
+   "bytes": 59130
+  },
+  "laco-saida": {
+   "arquivo": "laco-saida.mp3",
+   "descricao": "Laço da Verdade: a corda girando no ar",
+   "versoes": [
+    0.0,
+    0.88,
+    1.789,
+    2.6419
+   ],
+   "duracoes": [
+    0.8,
+    0.829,
+    0.7729,
+    0.8122
+   ],
+   "bytes": 34245
   },
   "laco-temporal": {
    "arquivo": "laco-temporal.mp3",
@@ -5527,6 +5697,23 @@
    ],
    "bytes": 35090
   },
+  "muralha-de-metal": {
+   "arquivo": "muralha-de-metal.mp3",
+   "descricao": "Muralha de metal: as vigas empilhando",
+   "versoes": [
+    0.0,
+    1.88,
+    3.8253,
+    5.6444
+   ],
+   "duracoes": [
+    1.8,
+    1.8653,
+    1.7391,
+    1.8274
+   ],
+   "bytes": 62672
+  },
   "muralha-de-terra": {
    "arquivo": "muralha-de-terra.mp3",
    "descricao": "Muralha de terra: a muralha rompendo o chão",
@@ -5935,6 +6122,23 @@
    ],
    "bytes": 51087
   },
+  "plano-que-plano": {
+   "arquivo": "plano-que-plano.mp3",
+   "descricao": "Plano? Que plano?: tiros, granada e BUM",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 77107
+  },
   "poeira-de-diamante": {
    "arquivo": "poeira-de-diamante.mp3",
    "descricao": "Pó de Diamante: o vento gelado e os cristais",
@@ -6071,6 +6275,23 @@
    ],
    "bytes": 37201
   },
+  "prisao-magnetica": {
+   "arquivo": "prisao-magnetica.mp3",
+   "descricao": "Prisão magnética: o zumbido e os aros",
+   "versoes": [
+    0.0,
+    1.5917,
+    3.2699,
+    4.8238
+   ],
+   "duracoes": [
+    1.5117,
+    1.5982,
+    1.4738,
+    1.5469
+   ],
+   "bytes": 55774
+  },
   "pronto": {
    "arquivo": "pronto.mp3",
    "descricao": "habilidade pronta",
@@ -6087,6 +6308,23 @@
     0.5584
    ],
    "bytes": 17692
+  },
+  "protocolo-de-protecao": {
+   "arquivo": "protocolo-de-protecao.mp3",
+   "descricao": "Protocolo de proteção: as placas encaixando",
+   "versoes": [
+    0.0,
+    1.58,
+    3.2144,
+    4.7437
+   ],
+   "duracoes": [
+    1.5,
+    1.5544,
+    1.4493,
+    1.5228
+   ],
+   "bytes": 74178
   },
   "provocar": {
    "arquivo": "provocar.mp3",
@@ -6308,6 +6546,23 @@
     0.8122
    ],
    "bytes": 39584
+  },
+  "quarta-parede": {
+   "arquivo": "quarta-parede.mp3",
+   "descricao": "Quarta parede: o quadro quebrando",
+   "versoes": [
+    0.0,
+    1.78,
+    3.6217,
+    5.3441
+   ],
+   "duracoes": [
+    1.7,
+    1.7617,
+    1.6425,
+    1.7259
+   ],
+   "bytes": 87917
   },
   "quique": {
    "arquivo": "quique.mp3",
@@ -6836,22 +7091,39 @@
    ],
    "bytes": 45352
   },
-  "repulsor": {
-   "arquivo": "repulsor.mp3",
-   "descricao": "básico de Homem de Ferro: carga eletrônica e o \"pew\" grave do repulsor",
+  "repulsor-saida": {
+   "arquivo": "repulsor-saida.mp3",
+   "descricao": "Repulsores: o disparo",
    "versoes": [
     0.0,
-    1.08,
-    2.1963,
-    3.2424
+    0.78,
+    1.5854,
+    2.3417
    ],
    "duracoes": [
-    1.0,
-    1.0363,
-    0.9662,
-    1.0152
+    0.7,
+    0.7254,
+    0.6763,
+    0.7107
    ],
-   "bytes": 36173
+   "bytes": 25554
+  },
+  "repulsores-stark": {
+   "arquivo": "repulsores-stark.mp3",
+   "descricao": "Repulsores: o estouro no rival",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 53154
   },
   "resgate": {
    "arquivo": "resgate.mp3",
@@ -7362,6 +7634,23 @@
     0.9437
    ],
    "bytes": 25366
+  },
+  "so-um-arranhao": {
+   "arquivo": "so-um-arranhao.mp3",
+   "descricao": "Só um arranhão: o band-aid e a regeneração",
+   "versoes": [
+    0.0,
+    1.88,
+    3.8253,
+    5.6444
+   ],
+   "duracoes": [
+    1.8,
+    1.8653,
+    1.7391,
+    1.8274
+   ],
+   "bytes": 68897
   },
   "soco-basico": {
    "arquivo": "soco-basico.mp3",
@@ -8518,6 +8807,57 @@
     2.0305
    ],
    "bytes": 70728
+  },
+  "unibeam-carga": {
+   "arquivo": "unibeam-carga.mp3",
+   "descricao": "Unibeam: o reator carregando",
+   "versoes": [
+    0.0,
+    1.58,
+    3.2144,
+    4.7437
+   ],
+   "duracoes": [
+    1.5,
+    1.5544,
+    1.4493,
+    1.5228
+   ],
+   "bytes": 55620
+  },
+  "unibeam-feixe": {
+   "arquivo": "unibeam-feixe.mp3",
+   "descricao": "Unibeam: o feixe rugindo",
+   "versoes": [
+    0.0,
+    1.18,
+    2.3999,
+    3.5427
+   ],
+   "duracoes": [
+    1.1,
+    1.1399,
+    1.0628,
+    1.1167
+   ],
+   "bytes": 47107
+  },
+  "unibeam-impacto": {
+   "arquivo": "unibeam-impacto.mp3",
+   "descricao": "Unibeam: a explosão no rival",
+   "versoes": [
+    0.0,
+    1.68,
+    3.418,
+    5.0439
+   ],
+   "duracoes": [
+    1.6,
+    1.658,
+    1.5459,
+    1.6244
+   ],
+   "bytes": 60223
   },
   "vampirismo": {
    "arquivo": "vampirismo.mp3",
