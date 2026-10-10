@@ -321,25 +321,6 @@ def invocacao(T, t, rng):
     return G, H
 
 
-
-def susanoo(T, t, rng):
-    """Susanoo: costelas e um braço espectral se erguem em volta do alvo, em chamas frias."""
-    G, H = vazio(T)
-    sobe = ease_out(rel(t, 0, 0.4), 2)
-    env = apaga(t, 0.75, 1)
-    costelas = T.zero()
-    for k in range(4):
-        y = 0.35 - k * 0.18 * sobe
-        costelas += T.arc_band(0.45 - k * 0.04, 0.03, math.pi * 1.05, math.pi * 1.95, cy=y + 0.3, squash=1.6)
-    coluna = np.exp(-(T.U / 0.04) ** 2) * smooth(0.5 - T.V, 0, 0.05) * smooth(T.V - 0.5 + 0.9 * sobe, 0, 0.1)
-    cranio = T.ring(0.17, 0.03, 0, 0.5 - 0.95 * sobe) * janela(t, 0.25, 0.4)
-    n = _subindo(T, 651, t, 0.05, 1.2)
-    aura = smooth(0.62 - np.hypot(T.U / 0.9, (T.V - 0.05) / 1.1) + 0.08 * n, 0, 0.12) * 0.4 * sobe
-    G += (costelas * 1.4 + coluna * 1.2 + cranio * 1.4 + aura * (0.6 + 0.4 * np.clip(n, -1, 1))) * env
-    H += (costelas * 0.6 + cranio * 0.5) * env
-    return G, H
-
-
 def asa_negra(T, t, rng):
     """Asa negra: uma asa única se abre e penas escuras caem cortando o ar em volta do alvo."""
     G, H = vazio(T)
@@ -378,6 +359,5 @@ REGISTRO = [
     ("confusao", confusao, GRANDE, "interrogações girando", False),
     ("pentagrama", pentagrama, GRANDE, "pentagrama infernal", False),
     ("invocacao", invocacao, GRANDE, "silhueta invocada", False),
-    ("susanoo", susanoo, GRANDE, "guerreiro espectral", False),
     ("asa_negra", asa_negra, GRANDE, "asa e penas negras", False),
 ]

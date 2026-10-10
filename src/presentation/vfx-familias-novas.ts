@@ -114,7 +114,7 @@ export const FAMILIAS_NOVAS = {
   confusao: n({ nome: 'Confusão', grupo: 'magia', impacto: 'confusao', escala: 2.0, tempo: 0.95, cor: '#ffe066', tinta: 'elemento' }),
   pentagrama: n({ nome: 'Pentagrama', grupo: 'magia', impacto: 'pentagrama', escala: 2.2, tempo: 0.95, cor: '#ff4a3a', tinta: 'elemento' }),
   invocacao: n({ nome: 'Invocação', grupo: 'magia', impacto: 'invocacao', escala: 2.1, tempo: 0.95 }),
-  susanoo: n({ nome: 'Susanoo', grupo: 'especial', impacto: 'susanoo', escala: 2.4, tempo: 0.95, cor: '#ff5a4a', tinta: 'fixa' }),
+  susanoo: n({ nome: 'Susanoo', grupo: 'especial', preparo: 'susanoo_itachi_forma', noAtor: 'susanoo_itachi', impacto: 'espada_totsuka', escala: 2.4, tempo: 1.0, cor: '#ff3b3b', tinta: 'fixa' }),
   asa_negra: n({ nome: 'Asa negra', grupo: 'magia', impacto: 'asa_negra', escala: 2.2, tempo: 0.95, cor: '#8a7cff' }),
   // ------------------------------------------------------------ apoio e Status
   cura_em_area: n({ nome: 'Cura em área', grupo: 'apoio', impacto: 'cura_em_area', escala: 2.0, tempo: 0.95, cor: '#7dffb0', tinta: 'fixa' }),
@@ -167,7 +167,7 @@ export const FAMILIAS_NOVAS = {
   agua_benta: n({ nome: 'Água benta', grupo: 'elemento', impacto: 'agua_benta', escala: 2.4, tempo: 1.0, cor: '#7fb8ff', tinta: 'fixa' }),
   kaioken: n({ nome: 'Kaioken', grupo: 'especial', impacto: 'kaioken', escala: 2.3, tempo: 1.0, cor: '#ff4a3a', tinta: 'fixa' }),
   instinto: n({ nome: 'Instinto Superior', grupo: 'especial', impacto: 'instinto', escala: 2.2, tempo: 1.0, cor: '#a3b4d4', tinta: 'fixa' }),
-  corvos: n({ nome: 'Ilusão de corvos', grupo: 'magia', viagem: 'corvos_itachi_voo', impacto: 'corvos', escala: 2.4, tempo: 1.0, cor: '#9a86c8', tinta: 'fixa' }),
+  corvos: n({ nome: 'Ilusão de corvos', grupo: 'magia', viagem: 'corvos_itachi_voo', impacto: 'corvos', escala: 2.4, tempo: 1.0, cor: '#3a2e48', tinta: 'fixa' }),
   shun_goku_satsu: n({ nome: 'Shun Goku Satsu', grupo: 'especial', impacto: 'shun_goku_satsu', escala: 2.4, tempo: 1.0, cor: '#ff4a6a', tinta: 'fixa' }),
   spin_dash: n({ nome: 'Spin Dash', grupo: 'físico', aponta: true, impacto: 'spin_dash', escala: 2.2, tempo: 0.95, cor: '#4a8cff', tinta: 'fixa' }),
   estado_avatar: n({ nome: 'Estado Avatar', grupo: 'especial', impacto: 'estado_avatar', escala: 2.4, tempo: 1.0, cor: '#7fd0ff', tinta: 'fixa' }),

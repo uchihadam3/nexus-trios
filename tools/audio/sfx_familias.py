@@ -860,18 +860,6 @@ def invocacao(rng, v):
     return x
 
 
-
-def susanoo(rng, v):
-    x = _z(1.6)
-    n = n_de(1.2)
-    t = np.arange(n) / SR
-    corpo = satura(passa(rosa(rng, n), 60, 900, 2) * (0.7 + 0.3 * np.sin(2 * math.pi * 4 * t)), 2) * sobe_e_some(n, 0.6, 1.4) * 0.7
-    poe(x, corpo, 0)
-    poe(x, B.fogo(rng, v)[: n_de(0.9)] * 0.4, 0.1)
-    poe(x, baque(n_de(0.6), 60, 30, 0.3, 0.3), 0.6)
-    return reverb(x, 0.7, 0.3)
-
-
 def asa_negra(rng, v):
     x = _z(1.3)
     for k in range(3):
@@ -1992,7 +1980,7 @@ _BAIXO = {"brasas-renascendo", "cura-em-area", "regeneracao", "grito-de-guerra",
           "bencao", "lanche", "purificacao", "enfraquecimento", "lentidao", "marca", "silencio", "medo", "exposto", "hipnose",
           "encanto", "runas", "lua", "petalas", "regeneracao", "confusao", "estrela-invencivel", "disco", "flecha"}
 _ALTO = {"copia", "esquiva", "ultima-resistencia", "sono", "cegueira", "errou", "barreira-anula", "dissipar", "reflexo", "espinhos", "vampirismo", "provocar", "renascer", "ressurreicao", "soco-serio", "supernova", "kamehameha", "canhao-de-energia", "foguete", "tempestade", "punho-gigante", "pisao",
-         "martelo", "espadao", "buraco-negro", "tsunami", "transformacao-v2", "dragao", "susanoo", "dominio"}
+         "martelo", "espadao", "buraco-negro", "tsunami", "transformacao-v2", "dragao", "dominio"}
 _ANTES = {"esfera-espiral-carga": "a esfera girando", "kamehameha-carga": "carga do Kamehameha",
           "kamehameha-feixe": "o feixe saindo", "marretada-giro": "a marreta subindo"}
 for _k, _d in _ANTES.items():

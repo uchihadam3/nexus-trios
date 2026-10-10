@@ -8283,20 +8283,37 @@
   },
   "susanoo": {
    "arquivo": "susanoo.mp3",
-   "descricao": "família susanoo",
+   "descricao": "Susanoo: a espada Totsuka descendo, o corte e o selamento",
    "versoes": [
     0.0,
-    1.68,
-    3.418,
-    5.0439
+    2.08,
+    4.2325,
+    6.2449
    ],
    "duracoes": [
-    1.6,
-    1.658,
-    1.5459,
-    1.6244
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
    ],
-   "bytes": 64808
+   "bytes": 70976
+  },
+  "susanoo-forma": {
+   "arquivo": "susanoo-forma.mp3",
+   "descricao": "Susanoo: o chakra rugindo e as costelas fechando (antes do golpe)",
+   "versoes": [
+    0.0,
+    1.58,
+    3.2144,
+    4.7437
+   ],
+   "duracoes": [
+    1.5,
+    1.5544,
+    1.4493,
+    1.5228
+   ],
+   "bytes": 65441
   },
   "susanoo-manto": {
    "arquivo": "susanoo-manto.mp3",

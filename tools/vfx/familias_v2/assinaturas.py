@@ -282,33 +282,29 @@ def gear_fifth(T, t, rng):
 
 
 # ------------------------------------------------------------------ Corvos
-def _corvo(cx, cy, s, bate, inclina):
-    """Corvo em voo: silhueta em M (as duas asas e o corpo), as asas subindo e descendo."""
-    asa = 0.07 * math.sin(bate)
-    pts = [(-0.2, -0.03 - asa), (-0.12, -0.07 - asa * 0.5), (-0.03, -0.02), (0.0, -0.035), (0.03, -0.02), (0.12, -0.07 - asa * 0.5),
-           (0.2, -0.03 - asa), (0.1, -0.01), (0.04, 0.03), (0.0, 0.07), (-0.04, 0.03), (-0.1, -0.01)]
-    return [(_move(_gira(pts, inclina), cx, cy, s), 1.0)]
-
-
 def corvos(T, t, rng):
-    """Ilusão de corvos: o olho vermelho acende no meio e o corpo se desfaz numa revoada de
-    corvos que saem para todos os lados batendo as asas; penas caem devagar."""
+    """Ilusão de corvos: o Sharingan acende no meio e o corpo se desfaz numa revoada de corvos de perfil
+    (bico, cauda em leque, as penas da ponta da asa abertas) que saem para todos os lados batendo as
+    asas, com os olhos acesos; penas pretas caem devagar."""
+    from .rodada04 import corvo_de_lado
     G, H = vazio(T)
     env = apaga(t, 0.8, 1)
     olho = pulso(t, 0.0, 0.3)
     O = (T.ring(0.1, 0.02) + T.gauss(0, 0, 0.03, 0.03) * 1.5) * olho * 1.4
     virgulas = [(estrela(0.07 * math.cos(a + t * 8), 0.07 * math.sin(a + t * 8), 0.025, a, 3, 0.5), olho) for a in (0, TAU / 3, 2 * TAU / 3)]
     sub = np.random.default_rng(66)
-    aves = []
-    for k in range(15):
-        a = sub.uniform(0, TAU)
-        a0 = 0.12 + sub.uniform(0, 0.2)
-        u = ease_out(rel(t, a0, a0 + 0.6), 1.5)
+    aves, olhos = [], []
+    for k in range(9):
+        a = TAU * k / 9 + sub.uniform(-0.2, 0.2)
+        a0 = 0.08 + sub.uniform(0, 0.18)
+        u = ease_out(rel(t, a0, a0 + 0.65), 1.4)
         if u <= 0:
             continue
-        d = 0.05 + 0.85 * u
-        s = 0.9 + 0.6 * sub.uniform()
-        aves += [(p, (1 - rel(t, 0.7, 0.95))) for p, _ in _corvo(d * math.cos(a), d * math.sin(a) - 0.15 * u, s, t * 34 + k * 1.3, 0.35 * math.cos(a))]
+        d = 0.08 + 0.78 * u
+        vis = 1 - rel(t, 0.72, 0.95)
+        corpo, penas, o = corvo_de_lado(d * math.cos(a), d * math.sin(a) - 0.12 * u, 0.85 + 0.45 * u + 0.2 * sub.uniform(), t * 30 + k * 1.3, a)
+        aves += [(f, w * vis) for f, w in corpo + penas]
+        olhos.append((*o, vis))
     penas = []
     for k in range(10):
         x = sub.uniform(-0.6, 0.6)
@@ -316,8 +312,10 @@ def corvos(T, t, rng):
         penas.append((_gira([(-0.012, -0.04), (0.012, -0.04), (0.006, 0.04), (-0.006, 0.04)], math.sin(t * 6 + k) * 0.8, x + 0.05 * math.sin(t * 5 + k), y), pulso(t, 0.3, 1.0) * 0.7))
     nevoa = T.gauss(0, 0, 0.35, 0.35) * pulso(t, 0.1, 0.5) * 0.4
     A = T.polys(aves, 0.003)
-    G += (O + T.polys(virgulas, 0.003) + A * 1.3 + T.polys(penas, 0.003) + nevoa) * env
-    H += (O * 1.2 + A * 0.25) * env
+    G += (O + T.polys(virgulas, 0.003) + A * 1.4 + T.polys(penas, 0.003) + nevoa) * env
+    A = np.clip(A, 0, 1)
+    borda = np.clip(A - T.blur(A, 0.01), 0, 1)
+    H += (O * 1.2 + T.splats(olhos, 0.007) * 1.6 + borda * 0.7) * env
     return G, H
 
 

@@ -47,7 +47,7 @@ import math
 import numpy as np
 
 from .charizard_megaman import _brasas, _fogo
-from .base import FAIXA, GRANDE, MEDIA, TAU, apaga, back, ease_in, ease_out, estrela, jagged, lamina, pulso, rel, vazio
+from .base import FAIXA, GRANDE, MEDIA, TAU, apaga, back, ease_in, ease_out, estrela, jagged, janela, lamina, pulso, rel, vazio
 
 
 def _quadro(t, seed=0):
@@ -425,22 +425,238 @@ def tsukuyomi(T, t, rng):
     return G, H
 
 
+def corvo_de_lado(cx, cy, s, fase, ang=0.0):
+    """Um corvo de perfil voando para +x (girado por `ang`): o bico grosso e a cabeça na frente, o corpo,
+    a cauda em leque atrás e a asa com as penas da ponta separadas (os "dedos" do corvo — é isso que o
+    diferencia do morcego, de asa lisa em membrana). `fase` bate a asa. Devolve (formas do corpo, formas
+    das penas, o ponto do olho)."""
+    # voando para a esquerda: espelha (a cabeça para −x, sem ficar de cabeça para baixo) e gira pouco
+    espelho = -1.0 if math.cos(ang) < 0 else 1.0
+    r = ang if espelho > 0 else ang - math.pi
+    c, sn = math.cos(r), math.sin(r)
+
+    def p(x, y):
+        xx, yy = x * espelho * s, y * s
+        return (cx + xx * c - yy * sn, cy + xx * sn + yy * c)
+
+    corpo = []
+    # corpo e cabeça (uma gota comprida), o bico grosso e a cauda em leque
+    tronco = []
+    for k in range(18):
+        u = k / 17
+        x = -0.11 + 0.21 * u
+        w = 0.032 * math.sin(math.pi * min(1, u * 1.05)) ** 0.7 + 0.004
+        tronco.append((x, -w * 0.9 - 0.004))
+    for k in range(17, -1, -1):
+        u = k / 17
+        x = -0.11 + 0.21 * u
+        w = 0.032 * math.sin(math.pi * min(1, u * 1.05)) ** 0.7 + 0.004
+        tronco.append((x, w))
+    corpo.append(([p(x, y) for x, y in tronco], 1.0))
+    corpo.append(([p(0.08 + 0.03 * math.cos(a), -0.012 + 0.026 * math.sin(a)) for a in np.linspace(0, TAU, 14)], 1.0))
+    corpo.append(([p(0.1, -0.026), p(0.165, -0.008), p(0.17, -0.002), p(0.1, 0.006)], 1.0))
+    leque = [(-0.1, -0.012)]
+    for a in np.linspace(-0.32, 0.32, 7):
+        leque.append((-0.1 - 0.1 * math.cos(a) - 0.008 * math.cos(a * 9), 0.0 + 0.1 * math.sin(a)))
+    leque.append((-0.1, 0.014))
+    corpo.append(([p(x, y) for x, y in leque], 1.0))
+    # a asa: do ombro até o "pulso" e, dali, cinco penas compridas separadas
+    bate = math.sin(fase)
+    th = -math.pi / 2 - 0.35 + 1.55 * (0.5 - 0.5 * bate)     # em cima (−110°) até embaixo (~+25°)
+    penas = []
+    for lado, peso, atras in ((0, 1.0, 0.0), (1, 0.55, -0.025)):
+        t2 = th + (0.18 if lado else 0.0)
+        ox, oy = 0.015 + atras, -0.018
+        L = 0.11
+        wx, wy = ox + L * math.cos(t2) - 0.03, oy + L * math.sin(t2)
+        base = [(ox + 0.035, oy), (ox - 0.045, oy + 0.004)]
+        braco = [base[0], (wx + 0.02, wy), (wx - 0.035, wy + 0.01 * math.copysign(1, math.sin(t2))), base[1]]
+        corpo.append(([p(x, y) for x, y in braco], peso))
+        for k in range(5):
+            a = t2 - 0.42 + 0.2 * k - 0.25
+            comp = 0.1 - 0.012 * abs(k - 1.5)
+            x0, y0 = wx - 0.03 + 0.013 * k, wy
+            penas.append((lamina(*p(x0, y0), *p(x0 + comp * math.cos(a), y0 + comp * math.sin(a)), 0.012 * s), peso))
+    olho = p(0.09, -0.02)
+    return corpo, penas, olho
+
+
 def corvos_itachi_voo(T, t, rng):
-    """O bando de corvos do Itachi voando para +x: seis corvos pequenos batendo as asas, em formação
-    solta, com as penas soltas atrás."""
+    """O bando de corvos do Itachi voando para +x: seis corvos de perfil (bico, cauda em leque, as penas
+    da ponta da asa abertas como dedos) batendo as asas fora de compasso, com penas soltas caindo atrás."""
     G, H = vazio(T)
     sub = np.random.default_rng(47)
+    formas, olhos = [], []
+    for k in range(5):
+        cx = (0.5, 0.05, -0.4, 0.25, -0.2)[k] + sub.uniform(-0.03, 0.03)
+        cy = (-0.3, -0.42, -0.28, 0.2, 0.32)[k] + 0.04 * math.sin(TAU * (t * 2 + k * 0.3))
+        corpo, penas, olho = corvo_de_lado(cx, cy, 2.0, TAU * (t * 3 + k * 0.23), -0.08)
+        formas += corpo + penas
+        olhos.append((*olho, 1.0))
+    C = np.clip(T.polys(formas, 0.003), 0, 1)
+    soltas = []
+    for k in range(8):
+        f = (sub.uniform() + t) % 1
+        x, y = 0.3 - 1.1 * f, sub.uniform(-0.3, 0.35) + 0.15 * f
+        soltas.append((lamina(x - 0.025, y, x + 0.025, y + 0.012 * math.sin(k + t * 9), 0.008), math.sin(math.pi * f)))
+    G += C * 1.4 + T.polys(soltas, 0.003) * 0.8
+    H += T.splats(olhos, 0.007) * 1.6 + np.clip(C - T.blur(C, 0.01), 0, 1) * 0.7
+    return G, H
+
+
+# ------------------------------------------------------------------ o Susanoo do Itachi
+PIVO = (0.34, -0.2)   # o ombro direito do Susanoo (de onde a espada gira)
+
+
+def _corpo_susanoo(T, forma, fase, braco):
+    """O Susanoo vermelho do Itachi, de pé atrás e acima dele (o Itachi fica no centro, embaixo):
+    as costelas, os ombros largos, a cabeça de capuz com o nariz comprido de tengu e os olhos acesos,
+    o Espelho de Yata redondo no braço esquerdo e o braço direito com a espada Totsuka — uma lâmina
+    comprida, ondulada como líquido. `forma` (0→1) monta o corpo de baixo para cima; `braco` é o ângulo
+    da espada (−2,3 erguida atrás da cabeça → 0,5 baixada à frente). Devolve (corpo, núcleo, ponta)."""
+    from .madara import _chama, _costela
+    K, DY = 0.8, 0.1
+    E = lambda pts: [(x * K, y * K + DY) for x, y in pts]
+    sobe = lambda y: forma >= (0.55 - y) / 1.5          # a parte em y aparece quando a forma passa por ela
     formas = []
-    for k in range(6):
-        cx = 0.35 - 0.25 * (k % 3) + sub.uniform(-0.05, 0.05)
-        cy = -0.25 + 0.25 * (k // 2) * 0.6 + sub.uniform(-0.05, 0.05)
-        bate = math.sin(TAU * (t * 4 + k * 0.17))
-        s = 0.09
-        formas.append(([(cx - 2 * s, cy - bate * s), (cx - 0.6 * s, cy - 0.2 * s), (cx, cy - 0.35 * s), (cx + 0.6 * s, cy - 0.2 * s), (cx + 2 * s, cy - bate * s), (cx + 0.5 * s, cy + 0.25 * s), (cx, cy + 0.4 * s), (cx - 0.5 * s, cy + 0.25 * s)], 1.0))
-    C = T.polys(formas, 0.003)
-    penas = [(-0.6 + 0.3 * ((sub.uniform() + t * 1.5) % 1) * -1, sub.uniform(-0.35, 0.35), 0.5) for _ in range(10)]
-    G += C * 1.2 + T.splats(penas, 0.01) * 0.6
-    H += C * 0.2
+    for k in range(4):
+        y = 0.12 - 0.13 * k
+        if not sobe(y):
+            continue
+        r = 0.33 - 0.025 * k
+        formas.append((E(_costela(0.0, y, r, -math.pi * 0.95, -math.pi * 0.55, 0.03)), 1.0))
+        formas.append((E(_costela(0.0, y, r, -math.pi * 0.45, -math.pi * 0.05, 0.03)), 1.0))
+    coluna = T.polyline(E([(0.0, 0.25), (0.0, -0.45 + 0.7 * (1 - min(1, forma * 1.4)))]), 0.022)
+    nucleo = T.zero()
+    ponta = None
+    if sobe(-0.45):
+        # ombros (as placas largas) e a cabeça de capuz com o nariz de tengu
+        formas += [(E([(-0.6, -0.36), (-0.16, -0.5), (-0.14, -0.38), (-0.55, -0.24)]), 0.95), (E([(0.6, -0.36), (0.16, -0.5), (0.14, -0.38), (0.55, -0.24)]), 0.95)]
+        capuz = [(-0.16, -0.5), (-0.2, -0.66), (-0.13, -0.8), (0.0, -0.86), (0.13, -0.8), (0.2, -0.66), (0.16, -0.5), (0.05, -0.44), (-0.05, -0.44)]
+        nariz = [(-0.03, -0.66), (0.0, -0.53), (0.03, -0.66)]
+        queixo = [(-0.08, -0.47), (0.0, -0.4), (0.08, -0.47)]
+        formas += [(E(capuz), 1.0), (E(nariz), 1.0), (E(queixo), 0.9)]
+        nucleo += T.gauss(-0.075 * K, -0.66 * K + DY, 0.022, 0.012) + T.gauss(0.075 * K, -0.66 * K + DY, 0.022, 0.012)
+    if sobe(-0.3):
+        # o braço esquerdo (à esquerda da tela) com o Espelho de Yata: o disco com o anel e o brilho
+        formas.append((E([(-0.55, -0.3), (-0.62, -0.08), (-0.56, -0.06), (-0.48, -0.28)]), 0.9))
+        ex, ey = -0.66 * K, 0.02 * K + DY
+        espelho = T.ring(0.15 * K, 0.022, ex, ey) + T.gauss(ex, ey, 0.1, 0.1) * 0.45
+        nucleo += T.ring(0.15 * K, 0.009, ex, ey) * 0.7 + T.gauss(ex - 0.03, ey - 0.03, 0.025, 0.025) * 0.8
+        formas_espelho = espelho
+    else:
+        formas_espelho = T.zero()
+    if sobe(-0.2):
+        # o braço direito e a Totsuka: do ombro (0,55; −0,3) até a mão e, dali, a lâmina ondulada
+        ox, oy = PIVO
+        mx, my = ox + 0.17 * math.cos(braco + 0.6), oy + 0.17 * math.sin(braco + 0.6)
+        formas.append((lamina(ox, oy, mx, my, 0.06), 1.0))
+        comp = 0.6
+        lam = []
+        for k in range(21):
+            u = k / 20
+            onda = 0.025 * math.sin(fase * 3 + u * 9) * u
+            x = mx + comp * u * math.cos(braco) - onda * math.sin(braco)
+            y = my + comp * u * math.sin(braco) + onda * math.cos(braco)
+            lam.append((x, y))
+        lamina_pts = []
+        for k, (x, y) in enumerate(lam):
+            w = 0.03 * (1 - (k / 20) ** 3) + 0.004
+            lamina_pts.append((x - w * math.sin(braco), y + w * math.cos(braco)))
+        for k, (x, y) in list(enumerate(lam))[::-1]:
+            w = 0.03 * (1 - (k / 20) ** 3) + 0.004
+            lamina_pts.append((x + w * math.sin(braco), y - w * math.cos(braco)))
+        formas.append((lamina_pts, 1.0))
+        nucleo += T.polyline(lam, 0.008) * 1.2
+        ponta = lam[-1]
+    corpo = np.clip(T.polys(formas, 0.006) + coluna * 0.7 + formas_espelho, 0, 1.4)
+    # as chamas de chakra em volta, mais altas quanto mais formado
+    chamas = []
+    for k in range(14):
+        x = (-0.7 + 1.4 * k / 13) * K
+        alt = (0.55 + 0.35 * math.cos(x * 2.0)) * (0.8 + 0.2 * math.sin(fase * 3 + k * 1.9)) * min(1, forma * 1.3)
+        chamas.append((_chama(x, 0.45, alt * 1.15, 0.1, fase * 2 + k * 1.3, 0.5), 0.5))
+    return corpo, nucleo, T.polys(chamas, 0.02), ponta
+
+
+def susanoo_itachi_forma(T, t, rng):
+    """O Preparo do Susanoo: as chamas vermelhas de chakra sobem em volta do Itachi e as costelas e a
+    coluna vão se fechando, pulsando (laço)."""
+    G, H = vazio(T)
+    fase = t * TAU
+    corpo, nucleo, chamas, _ = _corpo_susanoo(T, 0.42 + 0.05 * math.sin(fase), fase, -2.4)
+    brilho = 0.8 + 0.2 * math.sin(fase * 2)
+    G += (chamas * 0.8 + T.blur(corpo, 0.03) * 0.6 + corpo * 0.75) * brilho
+    H += (corpo * 0.25 + chamas * 0.1) * brilho
+    return G, H
+
+
+def susanoo_itachi(T, t, rng):
+    """O Susanoo do Itachi aparece em cima dele: o corpo vermelho sobe das chamas (costelas, ombros, a
+    cabeça de capuz com o nariz de tengu e os olhos acesos, o Espelho de Yata no braço), ergue a espada
+    Totsuka atrás da cabeça e desce num golpe enorme para a frente — o arco vermelho do corte varre o
+    alto e a onda de chakra sai para os rivais; depois se desfaz em brasas."""
+    G, H = vazio(T)
+    fase = t * TAU * 1.5
+    forma = ease_out(rel(t, 0.0, 0.25), 2)
+    ergue = ease_out(rel(t, 0.16, 0.32), 2)
+    desce = ease_in(rel(t, 0.32, 0.44), 2.2)
+    braco = -1.3 - 1.3 * ergue + 2.0 * desce               # −1,3 → −2,6 (erguida atrás da cabeça) → −0,6 (o golpe à frente)
+    env = apaga(t, 0.8, 1)
+    corpo, nucleo, chamas, ponta = _corpo_susanoo(T, forma, fase, braco)
+    G += (chamas * 0.8 + T.blur(corpo, 0.03) * 0.8 + corpo * 0.9) * env
+    H += (corpo * 0.35 + nucleo * 1.4 + chamas * 0.1) * env
+    # o arco do corte: a trilha da ponta da espada enquanto desce, larga e brilhante
+    if desce > 0:
+        a0, a1 = -2.6, braco
+        ox, oy = PIVO
+        trilha = []
+        for k in range(26):
+            a = a0 + (a1 - a0) * k / 25
+            r = 0.6
+            trilha.append((ox + 0.17 * math.cos(a + 0.6) + r * math.cos(a), oy + 0.17 * math.sin(a + 0.6) + r * math.sin(a)))
+        k_t = 1 - rel(t, 0.5, 0.72)
+        A = T.polyline(trilha, 0.075) * k_t
+        G += (T.blur(A, 0.05) * 1.2 + A * 1.3) * env
+        H += T.polyline(trilha, 0.02) * k_t * 1.8 * env
+    # a onda de chakra que sai do golpe para a frente (para cima, onde estão os rivais) e as brasas finais
+    onda = rel(t, 0.42, 0.78)
+    if 0 < onda < 1:
+        G += T.arc_band(0.3 + 0.9 * onda, 0.05 * (1 - onda) + 0.01, math.pi * 1.15, math.pi * 1.85, cy=0.2) * (1 - onda) * 1.2
+    G += _brasas(T, t, 77, 26, 0.0, -0.1, 0.7, 0.8) * janela(t, 0.45, 0.6) * 0.8
+    return G, H
+
+
+def espada_totsuka(T, t, rng):
+    """A espada Totsuka chega no rival: depois de um instante (o Susanoo erguendo a espada), o corte
+    vermelho enorme desce na diagonal, a lâmina líquida fica um momento, o rival é puxado num redemoinho
+    de selamento (a Totsuka sela quem ela corta) e as faíscas vermelhas espirram."""
+    G, H = vazio(T)
+    corta = ease_out(rel(t, 0.42, 0.54), 2)
+    env = apaga(t, 0.86, 1)
+    if corta <= 0:
+        return G, H
+    some_ = rel(t, 0.58, 0.74)
+    L = lamina(-0.75, -0.75, 0.75, 0.75, 0.09, prog=corta, inicio=some_)
+    C = T.polys([(L, 1.0)], 0.01)
+    fio = T.polys([(lamina(-0.75, -0.75, 0.75, 0.75, 0.025, prog=corta, inicio=some_), 1.0)], 0.004)
+    # o redemoinho de selamento: três braços em espiral girando e fechando para o centro
+    gira = rel(t, 0.55, 0.97)
+    esp = []
+    for k in range(3):
+        pts = []
+        for j in range(24):
+            u = j / 23
+            a = TAU * k / 3 + u * 4.0 + gira * 9
+            r = (0.55 * (1 - gira * 0.7)) * (1 - u) + 0.03
+            pts.append((r * math.cos(a), r * math.sin(a) * 0.85))
+        esp.append(pts)
+    E = sum((T.polyline(pp, 0.022) for pp in esp), T.zero()) * janela(t, 0.55, 0.66) * (1 - rel(t, 0.85, 0.97))
+    nucleo = T.gauss(0, 0, 0.08, 0.08) * pulso(t, 0.58, 0.95)
+    cl = pulso(t, 0.46, 0.62)
+    G += (C * 1.2 + T.blur(C, 0.04) * 0.7 + E * 0.9 + nucleo + T.gauss(0, 0, 0.3, 0.3) * cl * 0.6) * env
+    H += (fio * 1.6 + E * 0.25 + nucleo * 1.2 + T.flare(0, 0, 0.6 * cl + 0.01, ang=0.785, thin=0.02) * cl) * env
+    G += _faiscas(T, t, 31, 18, 0.48, alcance=0.75, tam=0.012) * env
     return G, H
 
 
@@ -463,5 +679,8 @@ REGISTRO = [
     ("bola_da_morte_voo", bola_da_morte_voo, MEDIA, "Freeza · a Bola da Morte voando (laço)", True),
     ("bola_da_morte", bola_da_morte, GRANDE, "Freeza · a explosão da Bola da Morte", False),
     ("tsukuyomi", tsukuyomi, GRANDE, "Itachi · o Tsukuyomi e o Mangekyō", False),
-    ("corvos_itachi_voo", corvos_itachi_voo, MEDIA, "Itachi · o bando de corvos voando (laço)", True),
+    ("corvos_itachi_voo", corvos_itachi_voo, MEDIA, "Itachi · o bando de corvos de perfil voando (laço)", True),
+    ("susanoo_itachi_forma", susanoo_itachi_forma, GRANDE, "Itachi · o Susanoo se formando nas chamas vermelhas (Preparo, laço)", True),
+    ("susanoo_itachi", susanoo_itachi, GRANDE, "Itachi · o Susanoo aparece em cima dele e desce a espada Totsuka", False),
+    ("espada_totsuka", espada_totsuka, GRANDE, "Itachi · o corte da Totsuka e o redemoinho de selamento no rival", False),
 ]

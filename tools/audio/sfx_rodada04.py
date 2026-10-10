@@ -225,6 +225,35 @@ def tsukuyomi(rng, v):
     return reverb(x, 0.75, 0.4, 3500)
 
 
+def susanoo_forma(rng, v):
+    """O Susanoo se formando: o chakra rugindo como fogo grave que sobe, os ossos estalando um a um
+    (as costelas fechando) e o coro baixo por baixo."""
+    x = _z(1.5)
+    n = n_de(1.3)
+    t = _t(n)
+    poe(x, satura(passa(rosa(rng, n), 50, 700, 2) * (0.7 + 0.3 * np.sin(2 * math.pi * 5 * t)), 2.2) * sobe_e_some(n, 0.75, 1.3) * 0.55, 0.0)
+    poe(x, B.fogo(rng, v)[: n_de(1.0)] * 0.35, 0.1)
+    for k in range(4):
+        poe(x, estalo(rng, n_de(0.06), 1400 - 150 * k) * 0.35, 0.25 + 0.17 * k)
+    poe(x, _coro(55, n_de(1.2), (0.12, 0.08, 0.05)) * sobe_e_some(n_de(1.2), 0.6, 1.5), 0.2)
+    return reverb(x, 0.6, 0.3)
+
+
+def susanoo(rng, v):
+    """O golpe da Totsuka: o chakra rugindo, a espada enorme descendo (o "vuuum" grave e longo do ar
+    cortado), o corte rasgando os rivais e o redemoinho do selamento sugando para dentro."""
+    x = _z(2.0)
+    n = n_de(0.6)
+    poe(x, satura(passa(rosa(rng, n), 60, 900, 2), 2) * sobe_e_some(n, 0.5, 1.4) * 0.4, 0.0)
+    poe(x, _whoosh(rng, 0.45, 180, 1400, 0.75, 1.6, 0.9), 0.3)
+    poe(x, B.corte_pesado(rng, v) * 0.85, 0.66)
+    poe(x, baque(n_de(0.5), 70, 35, 0.3, 0.35), 0.66)
+    m = n_de(0.9)
+    poe(x, seno(varre(700, 120, m, 1.0), m) * env(m, 0.02, 0.8) * 0.12, 0.85)
+    poe(x, passa(rosa(rng, m), 300, 2500, 2) * sobe_e_some(m, 0.3, 1.2) * 0.3 * np.linspace(1, 0.2, m), 0.85)
+    return reverb(x, 0.7, 0.35)
+
+
 SONS: dict = {
     "azarath-canto": (azarath_canto, "Ravena: o canto do Azarath (Preparo)"),
     "azarath-metrion": (azarath_metrion, "Azarath Metrion Zinthos: os tentáculos e a alma"),
@@ -242,4 +271,6 @@ SONS: dict = {
     "bola-da-morte-carga": (bola_da_morte_carga, "Forma final: a Bola da Morte crescendo"),
     "bola-da-morte": (bola_da_morte, "Forma final: a explosão enorme"),
     "tsukuyomi": (tsukuyomi, "Tsukuyomi: o olho girando e o mundo afundando"),
+    "susanoo-forma": (susanoo_forma, "Susanoo: o chakra rugindo e as costelas fechando (antes do golpe)"),
+    "susanoo": (susanoo, "Susanoo: a espada Totsuka descendo, o corte e o selamento"),
 }

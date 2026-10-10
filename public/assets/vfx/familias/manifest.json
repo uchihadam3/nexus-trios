@@ -1775,10 +1775,10 @@
    192
   ],
   "laco": false,
-  "bytes": 71088
+  "bytes": 91322
  },
  "corvos_itachi_voo": {
-  "descricao": "Itachi · o bando de corvos voando (laço)",
+  "descricao": "Itachi · o bando de corvos de perfil voando (laço)",
   "quadros": 12,
   "grade": [
    3,
@@ -1789,7 +1789,7 @@
    160
   ],
   "laco": true,
-  "bytes": 19708
+  "bytes": 70614
  },
  "cosmico": {
   "descricao": "galáxia girando",
@@ -2462,6 +2462,20 @@
   ],
   "laco": false,
   "bytes": 53748
+ },
+ "espada_totsuka": {
+  "descricao": "Itachi · o corte da Totsuka e o redemoinho de selamento no rival",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 29128
  },
  "espadao": {
   "descricao": "espadão que racha o chão",
@@ -7265,8 +7279,8 @@
   "laco": false,
   "bytes": 184744
  },
- "susanoo": {
-  "descricao": "guerreiro espectral",
+ "susanoo_itachi": {
+  "descricao": "Itachi · o Susanoo aparece em cima dele e desce a espada Totsuka",
   "quadros": 12,
   "grade": [
    3,
@@ -7277,7 +7291,21 @@
    192
   ],
   "laco": false,
-  "bytes": 83572
+  "bytes": 88108
+ },
+ "susanoo_itachi_forma": {
+  "descricao": "Itachi · o Susanoo se formando nas chamas vermelhas (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": true,
+  "bytes": 44338
  },
  "susanoo_manto": {
   "descricao": "O Susanoo em volta do Madara: costelas, máscara de tengu, asas e chamas de chakra",
