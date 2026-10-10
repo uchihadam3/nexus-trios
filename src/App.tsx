@@ -20,7 +20,7 @@ import { PRIORIDADE,type Sound } from './audio/cues';
 import { battleAudio,faixaDaLuta } from './lib/audio';
 import { createDirection,restoreDirection,checkpointDirection,advanceDirection,type Direction,type Beat,type BeatTrace } from './presentation/director';
 import { PRESENTATION as P } from './presentation/config';
-import type { Battle } from './engine/types';
+import type { Battle, BattleEvent } from './engine/types';
 import { addSynergies,summarizeBattle } from './engine/run-summary';
 import { acumularRaioX,raioXVazio } from './engine/raio-x';
 import {emptyTally,tallyEvents} from './engine/progression';
@@ -224,7 +224,8 @@ export default function App(){
           const anulou=d.active.events.find(e=>e.kind==='resist');
           if(anulou)battleAudio.sound(anulou.label==='Última resistência'?'ultima-resistencia':'barreira-anula',PRIORIDADE.importante,0,anulou.id,.08);
           const SOM_DO_STATUS:Record<string,string>={poison:'veneno',bleed:'sangue',cursed:'maldicao',frozen:'bloco-de-gelo',sleep:'sono',blind:'cegueira',barrier:'barreira-magica'};
-          const novo=d.active.events.find(e=>e.kind==='status'&&e.status&&SOM_DO_STATUS[e.status]);
+          const jaTinha=(e:BattleEvent)=>!!d.active?.before.fighters.find(f=>f.uid===e.target)?.statuses.some(s=>s.id===e.status);
+          const novo=d.active.events.find(e=>e.kind==='status'&&e.status&&SOM_DO_STATUS[e.status]&&!jaTinha(e));
           if(novo?.status)battleAudio.sound(SOM_DO_STATUS[novo.status]!,PRIORIDADE.apoio,0,novo.id,.12);
           const limpeza=d.active.events.find(e=>e.kind==='cleanse'||e.kind==='dispel');
           if(limpeza)battleAudio.sound(limpeza.kind==='cleanse'?'purificacao':'dissipar',PRIORIDADE.importante,0,limpeza.id,.1);
@@ -254,7 +255,10 @@ export default function App(){
         for(let k=Math.max(ativo.passos[0]?.classe==='reacao'?1:2,visto+1);k<=ativo.etapa;k++){
           const passo=ativo.passos[k-1];if(!passo)continue;
           const eventos=ativo.events.filter(e=>passo.eventos.includes(e.id));
-          const som:Sound=passo.classe==='reacao'?'reacao':passo.classe==='rival'?'enfraquecer':eventos.some(e=>e.kind==='heal')?'cura':eventos.some(e=>e.kind==='shield')?'escudo':'reforco';
+          // buff ou debuff que o alvo já tinha só renova o tempo: som curto e macio, não o de entrar (pedido do jogador)
+          const status=eventos.filter(e=>e.kind==='status');
+          const renova=status.length>0&&status.length===eventos.length&&status.every(e=>ativo.before.fighters.find(f=>f.uid===e.target)?.statuses.some(s=>s.id===e.status));
+          const som:Sound=passo.classe==='reacao'?'reacao':passo.classe==='rival'?(renova?'renova-debuff':'enfraquecer'):eventos.some(e=>e.kind==='heal')?'cura':eventos.some(e=>e.kind==='shield')?'escudo':renova?'renova-buff':'reforco';
           // o passo de um jeito de bater (Ricochete, Roubou Carga…) toca o som próprio da mecânica
           const jeito=efeitosDoJeito({...ativo.event,kind:'skill'},eventos,ativo.after.fighters);
           if(jeito.length){jeito.forEach((x,i)=>battleAudio.sound(somDoJeito(x.familia),PRIORIDADE.habilidade,0,ativo.event.id*10+k+i*1000,x.atraso));continue;}

@@ -111,6 +111,20 @@
   "laco": false,
   "bytes": 41122
  },
+ "amaterasu": {
+  "descricao": "Sasuke · as chamas negras do Amaterasu",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 79460
+ },
  "aparar_e_cortar": {
   "descricao": "Sekiro: faísca de aparar e contra-corte",
   "quadros": 12,
@@ -208,6 +222,20 @@
   ],
   "laco": false,
   "bytes": 96158
+ },
+ "aura_trunks": {
+  "descricao": "Trunks · a aura dourada (laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 50808
  },
  "aurora_faixa": {
   "descricao": "Hyoga · o raio da Execução Aurora (faixa)",
@@ -629,6 +657,34 @@
   "laco": false,
   "bytes": 51608
  },
+ "burning_attack": {
+  "descricao": "Trunks · a explosão do Burning Attack",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 90866
+ },
+ "burning_bola": {
+  "descricao": "Trunks · a bola do Burning Attack voando (laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 11524
+ },
  "buster_bala": {
   "descricao": "Mega Man · os três tiros do Buster voando (laço)",
   "quadros": 12,
@@ -965,20 +1021,6 @@
   "laco": false,
   "bytes": 57072
  },
- "chama_negra": {
-  "descricao": "chama negra lenta",
-  "quadros": 12,
-  "grade": [
-   3,
-   4
-  ],
-  "tamanho": [
-   192,
-   192
-  ],
-  "laco": false,
-  "bytes": 39064
- },
  "chamas_faixa": {
   "descricao": "Charizard · o jato do Lança-chamas até o rival (faixa)",
   "quadros": 12,
@@ -1021,8 +1063,8 @@
   "laco": false,
   "bytes": 51818
  },
- "chidori": {
-  "descricao": "mil pássaros",
+ "chidori_sasuke": {
+  "descricao": "Sasuke · a lança de raio atravessando o rival",
   "quadros": 12,
   "grade": [
    3,
@@ -1033,7 +1075,21 @@
    192
   ],
   "laco": false,
-  "bytes": 90854
+  "bytes": 73132
+ },
+ "chidori_sasuke_mao": {
+  "descricao": "Sasuke · o Chidori na mão (laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 75576
  },
  "choque_do_pikachu": {
   "descricao": "básico do Pikachu: faíscas em zigue-zague e bochechas crepitando",
@@ -1146,20 +1202,6 @@
   ],
   "laco": false,
   "bytes": 41274
- },
- "clarao_solar": {
-  "descricao": "clarão que cega",
-  "quadros": 12,
-  "grade": [
-   3,
-   4
-  ],
-  "tamanho": [
-   192,
-   192
-  ],
-  "laco": false,
-  "bytes": 87366
  },
  "clones": {
   "descricao": "silhuetas em leque",
@@ -1412,6 +1454,20 @@
   ],
   "laco": false,
   "bytes": 108900
+ },
+ "corte_final": {
+  "descricao": "Trunks · o corte vertical gigante",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 46896
  },
  "corte_giratorio": {
   "descricao": "corte giratório",
@@ -2028,6 +2084,20 @@
   ],
   "laco": false,
   "bytes": 52064
+ },
+ "espada_do_futuro": {
+  "descricao": "Trunks · os cortes em grade da espada",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 88292
  },
  "espada_mestra": {
   "descricao": "Link: arco de espada azul-claro e o reflexo dos três triângulos",
@@ -2687,6 +2757,20 @@
   "laco": false,
   "bytes": 74812
  },
+ "furia_espartana": {
+  "descricao": "Kratos · a pancada rápida da Fúria",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 44872
+ },
  "furia_hulk": {
   "descricao": "Hulk · a fúria: aura verde, raios e vapor",
   "quadros": 12,
@@ -2700,6 +2784,20 @@
   ],
   "laco": false,
   "bytes": 88914
+ },
+ "furia_kratos": {
+  "descricao": "Kratos · a aura da Fúria espartana (nele)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": false,
+  "bytes": 52488
  },
  "gadget_surpresa": {
   "descricao": "Gadget surpresa: luva de boxe numa mola sai da esquerda e acerta com POW",
@@ -2826,6 +2924,20 @@
   ],
   "laco": false,
   "bytes": 119326
+ },
+ "genjutsu_sasuke": {
+  "descricao": "Sasuke · o Sharingan gigante e a confusão",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 72250
  },
  "golpe_alienigena": {
   "descricao": "Golpe alienígena: a ampulheta do Omnitrix estoura em verde e o punho do alien acerta",
@@ -3317,6 +3429,34 @@
   "laco": false,
   "bytes": 54134
  },
+ "ira_dos_deuses": {
+  "descricao": "Kratos · a rachadura e a coluna de fogo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 80474
+ },
+ "ira_kratos": {
+  "descricao": "Kratos · a raiva juntando (laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 69844
+ },
  "jajanken_papel": {
   "descricao": "Gon · Jajanken: Papel explodindo",
   "quadros": 12,
@@ -3387,6 +3527,48 @@
   "laco": false,
   "bytes": 87790
  },
+ "kame_faixa_kuririn": {
+  "descricao": "Kuririn · o feixe do Kamehameha (faixa)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   512,
+   96
+  ],
+  "laco": true,
+  "bytes": 68994
+ },
+ "kame_kuririn": {
+  "descricao": "Kuririn · a bola azul entre as mãos (laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 28628
+ },
+ "kame_kuririn_impacto": {
+  "descricao": "Kuririn · a explosão azul do Kamehameha",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 85436
+ },
  "kamui": {
   "descricao": "Kakashi · Kamui: o Mangekyō e a espiral que suga",
   "quadros": 12,
@@ -3442,6 +3624,34 @@
   ],
   "laco": false,
   "bytes": 89186
+ },
+ "kienzan_corte": {
+  "descricao": "Kuririn · o disco atravessando e o corte fino",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 22714
+ },
+ "kienzan_disco": {
+  "descricao": "Kuririn · o disco do Kienzan girando (laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 4246
  },
  "krypton_carga": {
   "descricao": "Super-Homem · a luz do sol juntando nele (laço)",
@@ -3625,8 +3835,8 @@
   "laco": false,
   "bytes": 50126
  },
- "laminas_do_caos": {
-  "descricao": "Kratos: duas lâminas em chamas presas a correntes cortam em X",
+ "laminas_kratos": {
+  "descricao": "Kratos · as Lâminas do Caos nas correntes",
   "quadros": 12,
   "grade": [
    3,
@@ -3637,7 +3847,7 @@
    192
   ],
   "laco": false,
-  "bytes": 65104
+  "bytes": 63312
  },
  "laminas_odm": {
   "descricao": "Mikasa: cabos de manobra, gás e duas lâminas em X",
@@ -3918,6 +4128,20 @@
   ],
   "laco": false,
   "bytes": 83844
+ },
+ "mangekyo_sasuke": {
+  "descricao": "Sasuke · o Mangekyō acendendo nele",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": false,
+  "bytes": 32414
  },
  "manopla": {
   "descricao": "Punho do Titã: a manopla e as seis joias",
@@ -5278,7 +5502,7 @@
   "bytes": 69510
  },
  "ricochete_optico": {
-  "descricao": "Ciclope · o raio quicando de rival em rival",
+  "descricao": "Ciclope · o quique do raio em cada rival",
   "quadros": 12,
   "grade": [
    3,
@@ -5289,7 +5513,7 @@
    192
   ],
   "laco": false,
-  "bytes": 38982
+  "bytes": 43020
  },
  "rinnegan": {
   "descricao": "Pain: olho do Rinnegan e ondas de repulsão para fora",
@@ -5431,6 +5655,20 @@
   "laco": false,
   "bytes": 52434
  },
+ "salvamento_aranha": {
+  "descricao": "Homem-Aranha · chega balançando e cobre o aliado de teia",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 58888
+ },
  "sangue": {
   "descricao": "respingo de sangue",
   "quadros": 12,
@@ -5542,6 +5780,20 @@
   ],
   "laco": false,
   "bytes": 86410
+ },
+ "selo_burning": {
+  "descricao": "Trunks · os gestos do Burning Attack (nele)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": false,
+  "bytes": 11844
  },
  "sharingan_ator": {
   "descricao": "Kakashi · o Sharingan acende nele",
@@ -6047,6 +6299,34 @@
   "laco": false,
   "bytes": 43638
  },
+ "taiyoken": {
+  "descricao": "Kuririn · o clarão solar no campo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 78234
+ },
+ "taiyoken_flash": {
+  "descricao": "Kuririn · as mãos no rosto acendendo (nele)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": false,
+  "bytes": 35174
+ },
  "teia_bola": {
   "descricao": "bola de teia em viagem (+x)",
   "quadros": 12,
@@ -6060,6 +6340,20 @@
   ],
   "laco": true,
   "bytes": 23046
+ },
+ "teia_de_impacto": {
+  "descricao": "Homem-Aranha · o tiro estourando e cortando o golpe",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 44872
  },
  "teia_e_soco": {
   "descricao": "Teia e soco: o fio gruda em teia e o soco chega",
@@ -6075,6 +6369,34 @@
   "laco": false,
   "bytes": 66818
  },
+ "teia_impacto_bola": {
+  "descricao": "Homem-Aranha · o tiro de teia grosso (laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 16816
+ },
+ "teia_prende": {
+  "descricao": "Homem-Aranha · a rede de teia grudando no rival",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 110862
+ },
  "teia_rede": {
   "descricao": "rede de teia",
   "quadros": 12,
@@ -6088,6 +6410,20 @@
   ],
   "laco": false,
   "bytes": 146458
+ },
+ "teia_voando": {
+  "descricao": "Homem-Aranha · a bola de teia voando (laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 12238
  },
  "telecinese": {
   "descricao": "telecinese",
@@ -6426,7 +6762,7 @@
   "bytes": 69106
  },
  "varredura_optica": {
-  "descricao": "Ciclope · o raio varrendo a fileira",
+  "descricao": "Ciclope · o feixe passando em cada rival",
   "quadros": 12,
   "grade": [
    3,
@@ -6437,7 +6773,7 @@
    192
   ],
   "laco": false,
-  "bytes": 29762
+  "bytes": 21468
  },
  "velocidade": {
   "descricao": "linhas de vento e asinhas",

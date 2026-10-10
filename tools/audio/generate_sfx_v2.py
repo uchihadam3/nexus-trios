@@ -518,6 +518,35 @@ def reforco(rng, v):
     return reverb(x, 0.6, 0.3)
 
 
+
+def renova_buff(rng, v):
+    """O buff renovado em quem já tinha (pedido do jogador: o som de aplicar de novo era chato): curto e
+    macio — um "fuu" de ar subindo e duas notas quentes e baixas que confirmam, sem chiado agudo."""
+    n = n_de(0.55)
+    x = np.zeros(n)
+    m = n_de(0.25)
+    poe(x, passa(rosa(rng, m), 300, 2200, 2) * np.linspace(0, 1, m) ** 2 * env(m, 0.2, 0.05) * 0.35, 0.0)
+    for k, nn in enumerate((62, 69)):
+        r = n_de(0.38)
+        f = nota(nn)
+        tom = (seno(f, r) + seno(f * 2, r) * 0.18 + seno(f * 1.002, r) * 0.5) * env(r, 0.015, 0.3)
+        poe(x, tom * 0.16, 0.12 + 0.07 * k)
+    return reverb(x, 0.4, 0.2, 5000)
+
+
+def renova_debuff(rng, v):
+    """O debuff renovado em quem já tinha: o mal apertando de novo — um "tum" abafado e grave e um ronco
+    curto que fecha, bem mais leve que o debuff entrando."""
+    n = n_de(0.5)
+    x = np.zeros(n)
+    poe(x, baque(n_de(0.35), 70, 38, 0.1, 0.2) * 0.8, 0.0)
+    r = n_de(0.35)
+    ronco = passa(serra_suave(np.full(r, 49.0), r, 8) * 0.6 + serra_suave(np.full(r, 51.9), r, 8) * 0.5, None, 600, 2) * env(r, 0.01, 0.28)
+    poe(x, ronco * 0.35, 0.02)
+    m = n_de(0.22)
+    poe(x, passa(rosa(rng, m), 80, 700, 2) * np.linspace(1, 0, m) ** 2 * 0.3, 0.0)
+    return reverb(x, 0.35, 0.18, 2200)
+
 def enfraquecer(rng, v):
     """O debuff entrando no rival (pedido do jogador: "tá tipo um sininho… não faz sentido"): nada de
     nota aguda. Um "fuuum" escuro sendo sugado para baixo (ruído que fecha o filtro), a pancada abafada
@@ -813,7 +842,7 @@ SONS = {
     "maldicao": (maldicao, "maldição"), "prisao": (prisao, "prisão/correntes"), "selo": (selo, "selo"), "distorcao": (distorcao, "distorção"),
     # apoio
     "cura": (cura, "cura"), "escudo": (escudo, "Escudo"), "bloqueio": (bloqueio, "bloqueio"), "reforco": (reforco, "reforço"),
-    "enfraquecer": (enfraquecer, "debuff"), "purificar": (purificar, "purificar"), "dreno": (dreno, "dreno"),
+    "enfraquecer": (enfraquecer, "debuff"), "renova-buff": (renova_buff, "buff renovado"), "renova-debuff": (renova_debuff, "debuff renovado"), "purificar": (purificar, "purificar"), "dreno": (dreno, "dreno"),
     # eventos
     "interrupcao": (interrupcao, "interrupção"), "pronto": (pronto, "habilidade pronta"), "preparo": (preparo, "início do preparo"),
     "grand-carga": (grand_carga, "grande habilidade carregando"), "grand-impacto": (grand_impacto, "grande habilidade"),
@@ -836,7 +865,7 @@ ALVO_DB = {
     "saraivada": -18, "missil": -18, "impacto-energia": -15, "lamina-energia": -18, "corte-giratorio": -18,
     "fogo": -18, "gelo": -19, "vento": -23, "agua": -19, "terra": -15, "veneno": -23,
     "psiquico": -23, "sombra": -19, "luz": -23, "portal": -23, "maldicao": -23, "prisao": -19, "selo": -24, "distorcao": -23,
-    "cura": -24, "escudo": -23, "bloqueio": -19, "reforco": -24, "enfraquecer": -24, "purificar": -25, "dreno": -23,
+    "cura": -24, "escudo": -23, "bloqueio": -19, "reforco": -24, "enfraquecer": -24, "renova-buff": -27, "renova-debuff": -26, "purificar": -25, "dreno": -23,
     "carga-pequena": -24, "carga-grande": -19, "pronto": -24, "preparo": -25, "toque": -26,
     "ui-clique": -27, "ui-confirma": -23, "ui-abrir": -27, "ui-fechar": -28, "ui-alternar": -28,
     "ui-escolher": -21, "ui-arena": -18, "reacao": -21,
@@ -877,7 +906,7 @@ def _registra_novos():
     SONS.update(sfx_familias.SONS_NOVOS)
     ALVO_DB.update(sfx_familias.ALVO_NOVO)
     # o som próprio de cada ataque básico (tools/audio/sfx_basicos_*.py), um módulo por lote
-    for modulo in [f"sfx_basicos_{letra}" for letra in "abcdefghij"] + ["sfx_madara", "sfx_viagens", "sfx_ninjas", "sfx_cloud_dk", "sfx_naruto_ikki_luffy", "sfx_toph_gon", "sfx_piccolo", "sfx_herois", "sfx_hulk", "sfx_aiolia_arthas", "sfx_aang_sakura", "sfx_ciclope_shaka_mummra"]:
+    for modulo in [f"sfx_basicos_{letra}" for letra in "abcdefghij"] + ["sfx_madara", "sfx_viagens", "sfx_ninjas", "sfx_cloud_dk", "sfx_naruto_ikki_luffy", "sfx_toph_gon", "sfx_piccolo", "sfx_herois", "sfx_hulk", "sfx_aiolia_arthas", "sfx_aang_sakura", "sfx_ciclope_shaka_mummra", "sfx_sasuke_aranha_trunks_kuririn_kratos"]:
         m = importlib.import_module(modulo)
         for nome, (fn, desc) in m.SONS.items():
             SONS[nome] = (fn, desc)

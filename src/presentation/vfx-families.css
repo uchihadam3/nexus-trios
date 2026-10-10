@@ -74,6 +74,17 @@
   100%{opacity:0;transform:translateY(-50%) rotate(var(--ang)) scaleX(1) scaleY(.15)}
 }
 
+/* Varredura: o feixe cresce mirando no primeiro rival, gira até o último e some. */
+.battle-effects .fxl-faixa.fxl-varre{animation-name:fx12-mask,fx-varre}
+@keyframes fx-varre{
+  0%{opacity:0;transform:translateY(-50%) rotate(var(--ang0)) scaleX(.02) scaleY(.4)}
+  8%{opacity:1}
+  22%{transform:translateY(-50%) rotate(var(--ang0)) scaleX(1) scaleY(1.1)}
+  62%{opacity:1;transform:translateY(-50%) rotate(var(--ang1)) scaleX(1) scaleY(1)}
+  72%{opacity:1;transform:translateY(-50%) rotate(var(--ang1)) scaleX(1) scaleY(.9)}
+  100%{opacity:0;transform:translateY(-50%) rotate(var(--ang1)) scaleX(1) scaleY(.15)}
+}
+
 /* Preparo: cresce devagar em quem prepara. */
 .battle-effects .fxl-laco:not(.fxl-voo):not(.fxl-faixa){z-index:3;opacity:.9}
 

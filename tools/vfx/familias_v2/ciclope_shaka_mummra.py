@@ -1,10 +1,11 @@
 """As habilidades do Ciclope, do Shaka de Virgem e do Mumm-Ra, desenhadas para eles.
 
 Ciclope
-- varredura_optica: a Rajada de contenção — o raio óptico grosso varrendo a
-  fileira dos rivais de um lado ao outro, a marca queimada e as faíscas.
-- ricochete_optico: o raio batendo num rival, quicando para o outro e para o
-  outro, com o clarão em cada batida.
+- varredura_optica: a Rajada de contenção em cada rival — o feixe sai do
+  Ciclope (feixe_ciclope, varrendo a fileira) e, quando passa por ele, o ponto
+  quente corre e deixa o risco queimado e as faíscas.
+- ricochete_optico: o Ricochete óptico em cada rival — o feixe sai do Ciclope,
+  bate num e quica para o outro; em cada um, o clarão e as faíscas do quique.
 - visor_carregando: o visor acendendo — a linha vermelha crescendo e pulsando
   (Preparo, laço).
 - feixe_ciclope: o Feixe concentrado — o raio largo e reto com as ondas de
@@ -51,44 +52,37 @@ def _gira(pts, ang, cx=0.0, cy=0.0):
 
 # =================================================================== Ciclope
 def varredura_optica(T, t, rng):
-    """A Rajada de contenção: o raio óptico vem de baixo à esquerda e varre a fileira dos rivais de
-    um lado ao outro (o ponto de impacto correndo), deixando a marca queimada e as faíscas."""
+    """A Rajada de contenção em cada rival: o feixe (que sai do Ciclope e varre a fileira) passa por
+    ele da esquerda para a direita — o ponto quente corre, deixa o risco queimado e as faíscas."""
     G, H = vazio(T)
     env = apaga(t, 0.84, 1)
-    varre = ease_in(rel(t, 0.05, 0.55), 1.2)
-    px, py = -0.85 + 1.7 * varre, 0.1 + 0.05 * math.sin(TAU * t * 6)
-    vivo = 1 - rel(t, 0.55, 0.68)
-    raio = T.lines([(-1.0, 0.9, px, py, 1.0)], 0.06) * vivo
-    nucleo = T.lines([(-1.0, 0.9, px, py, 1.0)], 0.02) * vivo
-    ponto = T.gauss(px, py, 0.1) * vivo * 1.4
-    marca = T.lines([(-0.85, 0.12, px, 0.12, 1.0)], 0.025) * (1 - rel(t, 0.6, 0.95)) * 0.6
+    varre = ease_out(rel(t, 0.0, 0.35), 1.6)
+    px, py = -0.6 + 1.2 * varre, 0.04 * math.sin(TAU * t * 7)
+    vivo = 1 - rel(t, 0.35, 0.5)
+    ponto = T.gauss(px, py, 0.13) * vivo * 1.5
+    marca = T.lines([(-0.6, 0.0, px, 0.0, 1.0)], 0.03) * (1 - rel(t, 0.45, 0.95))
+    brasa = T.blur(marca, 0.03) * 0.6
     q = _quadro(t, 3)
-    fa = T.splats([(px + q.normal(0, 0.05), py + q.uniform(-0.1, 0.05), q.uniform(0.5, 1)) for _ in range(10)], 0.012) * vivo
-    G += (raio * 0.9 + T.blur(raio, 0.02) * 0.6 + nucleo * 1.2 + ponto + marca + fa * 1.2) * env
-    H += (nucleo * 1.2 + ponto * 1.1 + raio * 0.3) * env
+    fa = T.splats([(px + q.normal(0, 0.06), py + q.uniform(-0.25, 0.08), q.uniform(0.5, 1)) for _ in range(12)], 0.012) * vivo
+    G += (ponto + marca * 1.2 + brasa + fa * 1.2) * env
+    H += (ponto * 1.1 + marca * 0.7) * env
     return G, H
 
 
 def ricochete_optico(T, t, rng):
-    """O Ricochete óptico: o raio bate num rival e quica para o outro e para o outro, cada trecho
-    acendendo na sua vez, com o clarão em cada batida."""
+    """O Ricochete óptico em cada rival: o raio bate e quica — o clarão, a estrela de faíscas que
+    espirra para o lado de onde o raio sai de novo e o anel."""
     G, H = vazio(T)
-    env = apaga(t, 0.84, 1)
-    pontos = [(-1.0, 0.6), (-0.55, 0.05), (0.0, -0.25), (0.55, 0.1), (0.9, -0.4)]
-    R = T.zero()
-    fl = T.zero()
-    for j in range(len(pontos) - 1):
-        ini = 0.1 * j
-        f = rel(t, ini, ini + 0.12)
-        if f <= 0:
-            continue
-        (x1, y1), (x2, y2) = pontos[j], pontos[j + 1]
-        xe, ye = x1 + (x2 - x1) * f, y1 + (y2 - y1) * f
-        R += T.lines([(x1, y1, xe, ye, 1.0)], 0.035) * (1 - rel(t, ini + 0.25, ini + 0.5))
-        k = pulso(t, ini + 0.1, ini + 0.4)
-        fl += (T.gauss(x2, y2, 0.08) * 1.3 + T.flare(x2, y2, 0.6 * k + 1e-3, 0.4, 0.012)) * k
-    G += (R * 1.2 + T.blur(R, 0.02) * 0.7 + fl) * env
-    H += (R * 0.9 + fl * 0.9) * env
+    env = apaga(t, 0.82, 1)
+    k = pulso(t, 0.0, 0.4)
+    clarao = T.gauss(0, 0, 0.18) * k * 1.8 + T.flare(0, 0, 1.0 * k + 1e-3, 0.5, 0.01) * k
+    anel = T.ring(0.1 + 0.45 * ease_out(rel(t, 0.0, 0.45), 2), 0.035) * pulso(t, 0.0, 0.5)
+    sai = ease_out(rel(t, 0.0, 0.35), 2)
+    raios = T.tapered([(0.08 * math.cos(a), 0.08 * math.sin(a), (0.12 + 0.5 * sai) * math.cos(a) + 1e-3, (0.12 + 0.5 * sai) * math.sin(a), 1.0) for a in (-0.5, -0.15, 0.2, 0.55, 2.6, 3.6)], 0.035) * pulso(t, 0.0, 0.5)
+    q = _quadro(t, 7)
+    fa = T.splats([(q.normal(0.25 * sai, 0.15), q.normal(0, 0.15), q.uniform(0.4, 1)) for _ in range(10)], 0.011) * pulso(t, 0.05, 0.7)
+    G += (clarao + anel + raios * 1.1 + fa) * env
+    H += (clarao * 1.1 + raios * 0.6) * env
     return G, H
 
 
@@ -349,8 +343,8 @@ def sarcofago_maldito(T, t, rng):
 
 
 REGISTRO = [
-    ("varredura_optica", varredura_optica, GRANDE, "Ciclope · o raio varrendo a fileira", False),
-    ("ricochete_optico", ricochete_optico, GRANDE, "Ciclope · o raio quicando de rival em rival", False),
+    ("varredura_optica", varredura_optica, GRANDE, "Ciclope · o feixe passando em cada rival", False),
+    ("ricochete_optico", ricochete_optico, GRANDE, "Ciclope · o quique do raio em cada rival", False),
     ("visor_carregando", visor_carregando, MEDIA, "Ciclope · o visor acendendo (laço)", True),
     ("feixe_ciclope", feixe_ciclope, FAIXA, "Ciclope · o Feixe concentrado (faixa)", True),
     ("feixe_concentrado", feixe_concentrado, GRANDE, "Ciclope · o feixe batendo e cortando o golpe", False),

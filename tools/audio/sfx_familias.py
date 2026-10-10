@@ -61,14 +61,12 @@ def chute_giratorio(rng, v):
     return x
 
 
-
 def pow_cartoon(rng, v):
     x = _z(0.6)
     poe(x, B.soco_pesado(rng, v), 0, 0.9)
     poe(x, satura(passa(ruido(rng, n_de(0.12)), 500, 4000, 2) * env(n_de(0.12), 0.001, 0.04), 3) * 0.8, 0)
     poe(x, _tom(nota(74), nota(86), 0.18, 0.12, 0.2), 0.05)
     return reverb(x, 0.3, 0.15)
-
 
 
 def investida(rng, v):
@@ -180,7 +178,6 @@ def corte_vertical(rng, v):
     x = B.corte(rng, v)
     poe(x, baque(n_de(0.2), 140, 70, 0.04, 0.2) * 0.4, 0.12)
     return x
-
 
 
 def mil_cortes(rng, v):
@@ -391,14 +388,12 @@ def hadouken(rng, v):
     return x
 
 
-
 def canhao_de_energia(rng, v):
     x = _z(1.3)
     n = n_de(1.0)
     poe(x, satura(seno(varre(60, 90, n, 0.5), n), 4) * env(n, 0.01, 0.6, segura=0.4) * 0.5 + B.feixe(rng, v)[:n] * 0.6, 0)
     poe(x, B.explosao(rng, v)[: n_de(0.5)] * 0.7, 0.8)
     return x
-
 
 
 def buraco_negro(rng, v):
@@ -533,14 +528,6 @@ def fenix(rng, v):
     return reverb(x, 0.6, 0.3)
 
 
-def chama_negra(rng, v):
-    n = n_de(1.3)
-    x = passa(B.fogo(rng, v), None, 1200) * 1.2
-    x = _corta(x, 1.3)
-    x += passa(rosa(rng, n), 50, 300, 2) * env(n, 0.1, 0.7) * 0.5 + _corta(_tom(nota(36), nota(33), 1.3, 0.8, 0.2), 1.3)
-    return reverb(x, 0.6, 0.3, 1800)
-
-
 def dragao(rng, v):
     x = _z(1.6)
     n = n_de(0.9)
@@ -592,7 +579,6 @@ def raio_em_cadeia(rng, v):
         poe(x, B.raio(rng, v)[: n_de(0.35)] * 0.6, k * 0.13)
         poe(x, _tom(nota(84 + 3 * k), nota(80 + 3 * k), 0.15, 0.08, 0.12), k * 0.13 + 0.05)
     return x
-
 
 
 def tsunami(rng, v):
@@ -855,14 +841,6 @@ def confusao(rng, v):
     return reverb(x, 0.5, 0.25)
 
 
-def clarao_solar(rng, v):
-    n = n_de(1.0)
-    x = assobio(rng, n, 2000, 9000, 0.3, 0.5) * env(n, 0.001, 0.4) * 0.6
-    x += modal(n, nota(96), rng=rng, **CRISTAL) * env(n, 0.001, 0.5) * 0.2
-    x += estalo(rng, n, 2000, 10000, 0.01) * 0.5
-    return reverb(x, 0.6, 0.35, 10000)
-
-
 def pentagrama(rng, v):
     x = _z(1.4)
     n = n_de(0.6)
@@ -965,7 +943,6 @@ def barreira_magica(rng, v):
     for k, m in enumerate((67, 74, 79)):
         poe(x, modal(n_de(1.0), nota(m), rng=rng, **CRISTAL) * env(n_de(1.0), 0.05, 0.6) * 0.12, 0.1 + k * 0.1)
     return reverb(x, 0.7, 0.35)
-
 
 
 def armadura(rng, v):
@@ -1075,7 +1052,6 @@ def estrela_invencivel(rng, v):
     return reverb(x, 0.4, 0.2)
 
 
-
 def _tilim(rng, seg=0.06, lo=2200, hi=7000):
     """Um elo batendo no outro: poucos parciais altos e inarmônicos, bem curtos."""
     n = n_de(seg)
@@ -1141,33 +1117,6 @@ def _piados(rng, n, quantos, inicio=0.0, fim=1.0, lo=2600, hi=5200, g=0.1):
         s = np.sin(2 * math.pi * np.cumsum(freq) / SR)
         poe(x, satura(s, 2.5) * env(m, 0.002, m / SR * 0.5) * g * rng.uniform(0.5, 1.0), rng.uniform(inicio, fim) * n / SR)
     return x
-
-
-def chidori_carga(rng, v):
-    """Antes do golpe: a mão acende, as faíscas e os piados vão engrossando até a investida."""
-    n = n_de(0.9)
-    sobe = np.linspace(0, 1, n) ** 1.3
-    x = _faiscas(rng, n, 150, 1400) * (0.35 + 0.65 * sobe) * 0.9
-    x += _zumbido_de_arco(rng, n, 120) * sobe * 0.28
-    x += _piados(rng, n, 70, 0.1, 1.0, g=0.08) * (0.3 + 0.7 * sobe)
-    poe(x, assobio(rng, n_de(0.25), 300, 3000, 1.3, 0.5) * sobe_e_some(n_de(0.25), 0.9, 1.2) * 0.6, 0.65)   # a investida
-    return reverb(x, 0.3, 0.15)
-
-
-def chidori(rng, v):
-    """O impacto: descarga num estouro de faíscas, o "tzzak" caindo de tom, o soco, e o chiado morrendo."""
-    x = _z(0.95)
-    n = n_de(0.95)
-    descarga = _faiscas(rng, n_de(0.12), 4000, 2500, 800, 12000, 1.6)
-    poe(x, descarga, 0)
-    zap = satura(seno(varre(3200, 180, n_de(0.16), 1.6), n_de(0.16)), 4) * env(n_de(0.16), 0.0005, 0.08) * 0.45
-    poe(x, passa(zap, 150, 9000, 2), 0)
-    poe(x, B.soco_pesado(rng, v)[: n_de(0.35)] * 0.7, 0.005)
-    resto = np.linspace(1, 0, n) ** 2
-    x += _faiscas(rng, n, 900, 30, forca=0.7) * resto * 0.8
-    x += _zumbido_de_arco(rng, n, 112) * env(n, 0.002, 0.25) * 0.3
-    x += _piados(rng, n, 25, 0.0, 0.5, g=0.06) * resto
-    return reverb(x, 0.35, 0.18)
 
 
 def _giro(rng, n, rot0, rot1, centro=1500.0):
@@ -1328,7 +1277,6 @@ def iaido(rng, v):
     poe(x, B._lamina_curta(rng, n_de(0.3), rng.uniform(2800, 3400)) * 0.3, 0.17)
     poe(x, B.corte_pesado(rng, v), 0.38, 0.9)
     return x
-
 
 
 # ================================================================== reviver e renascer
@@ -1933,7 +1881,6 @@ def muda(rng, v):
     return reverb(x, 0.4, 0.2, 8000)
 
 
-
 # ------------------------------------------------------------ os jeitos de bater
 def quique(rng, v):
     """Ricochete: o golpe chega assobiando, bate num ping de metal e sai quicando com o
@@ -2055,7 +2002,7 @@ _BAIXO = {"brasas-renascendo", "cura-em-area", "regeneracao", "grito-de-guerra",
           "encanto", "runas", "lua", "petalas", "regeneracao", "confusao", "estrela-invencivel", "disco", "flecha"}
 _ALTO = {"copia", "esquiva", "ultima-resistencia", "sono", "cegueira", "errou", "barreira-anula", "dissipar", "reflexo", "espinhos", "vampirismo", "provocar", "renascer", "ressurreicao", "soco-serio", "supernova", "kamehameha", "canhao-de-energia", "foguete", "tempestade", "punho-gigante", "pisao",
          "martelo", "espadao", "buraco-negro", "tsunami", "transformacao-v2", "dragao", "susanoo", "dominio"}
-_ANTES = {"chidori-carga": "faíscas do Chidori", "esfera-espiral-carga": "a esfera girando", "kamehameha-carga": "carga do Kamehameha",
+_ANTES = {"esfera-espiral-carga": "a esfera girando", "kamehameha-carga": "carga do Kamehameha",
           "kamehameha-feixe": "o feixe saindo", "marretada-giro": "a marreta subindo"}
 for _k, _d in _ANTES.items():
     SONS_NOVOS[_k] = (SONS_NOVOS[_k][0], _d)

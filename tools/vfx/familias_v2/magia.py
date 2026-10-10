@@ -273,18 +273,6 @@ def confusao(T, t, rng):
     return G, H
 
 
-def clarao_solar(T, t, rng):
-    """Clarão solar: uma explosão de luz branca que cega, raios em volta, a tela inteira acende."""
-    G, H = vazio(T)
-    flash = some(t, 0, 0.6, 1.2)
-    tela = smooth(0.85 - T.RAD, 0, 0.55) * flash * 1.2
-    sol = T.gauss(0, 0, 0.2) * 3 * flash
-    raios = (np.abs(np.cos(T.ANG * 6 + t)) ** 12) * np.exp(-T.RAD * 2.2) * flash * 1.6
-    G += tela + sol + raios
-    H += tela * 0.9 + sol + raios * 0.8
-    return G, H
-
-
 def pentagrama(T, t, rng):
     """Pentagrama: um círculo infernal se desenha no chão, as pontas acendem e chamas sobem."""
     G, H = vazio(T)
@@ -401,7 +389,6 @@ REGISTRO = [
     ("sorte", sorte, GRANDE, "dados rolando", False),
     ("confete", confete, GRANDE, "estouro de festa", False),
     ("confusao", confusao, GRANDE, "interrogações girando", False),
-    ("clarao_solar", clarao_solar, GRANDE, "clarão que cega", False),
     ("pentagrama", pentagrama, GRANDE, "pentagrama infernal", False),
     ("invocacao", invocacao, GRANDE, "silhueta invocada", False),
     ("lua_vermelha", lua_vermelha, GRANDE, "lua com olho", False),

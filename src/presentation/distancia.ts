@@ -23,7 +23,7 @@ const DO_EFEITO: Partial<Record<VfxFamily, Distancia>> = {
   gadget_surpresa: 'longe', bigorna: 'longe', dedo_apontado: 'longe', punho_transmutado: 'longe', desmanche: 'longe',
   corte_dimensional: 'longe', inv_androide: 'longe',
   // de energia ou magia, mas na mão: vai até o alvo
-  chidori: 'perto', esfera_espiral: 'perto', kunai_de_hiraishin: 'perto', punho_fotonico: 'perto', toque_da_destruicao: 'perto',
+  esfera_espiral: 'perto', kunai_de_hiraishin: 'perto', punho_fotonico: 'perto', toque_da_destruicao: 'perto',
   cajado_da_caveira: 'perto', toque_absorvente: 'perto', soco_da_vida: 'perto',
   raikiri: 'perto', // o Kakashi corre até o rival com o raio na mão
   rasengan: 'perto', // o Naruto leva a esfera na mão até o rival

@@ -38,8 +38,8 @@ describe('compact reusable audiovisual library',()=>{
     expect(decodificado/Object.keys(familias).length).toBeLessThan(2_000_000);
     expect(readdirSync(resolve(root,'public/assets/vfx')).filter(x=>x.endsWith('.webp'))).toEqual(['arena.webp']);
   });
-  it('maps every basic and skill to one of the 150–400 families (signature skills and the own basic attack of each character), all of them used, none dominating',()=>{
-    expect(FAMILIAS.length).toBeGreaterThanOrEqual(150);expect(FAMILIAS.length).toBeLessThanOrEqual(400);
+  it('maps every basic and skill to one of the 150–500 families (signature skills and the own basic attack of each character), all of them used, none dominating',()=>{
+    expect(FAMILIAS.length).toBeGreaterThanOrEqual(150);expect(FAMILIAS.length).toBeLessThanOrEqual(500);
     const uso=new Map<string,number>();let total=0;
     for(const character of characters){
       for(const index of [undefined,0,1,2] as const){
@@ -66,11 +66,11 @@ describe('compact reusable audiovisual library',()=>{
     const [h]=hsl(profileFor('goku',0)!.color);expect(h).toBeGreaterThan(185);expect(h).toBeLessThan(215);
     expect(profileFor('superman',0)?.family).toBe('visao_de_calor');expect(hsl(profileFor('superman',0)!.color)[0]).toBeLessThan(15);
     expect(profileFor('pikachu',0)?.family).toBe('raio');
-    expect(profileFor('spiderman',0)?.family).toBe('teia');
+    expect(profileFor('spiderman',0)?.family).toBe('lancar_teia');
     expect(profileFor('light',2)?.family).toBe('death_note');
     expect(profileFor('naruto',1)?.family).toBe('rasengan');
     expect(profileFor('gojo',0)?.family).toBe('atracao');expect(profileFor('gojo',1)?.family).toBe('repulsao');expect(profileFor('gojo',2)?.family).toBe('dominio');
-    expect(profileFor('beerus',0)?.family).toBe('toque_da_destruicao');expect(profileFor('sasuke',0)?.family).toBe('chidori');
+    expect(profileFor('beerus',0)?.family).toBe('toque_da_destruicao');expect(profileFor('sasuke',0)?.family).toBe('chidori_sasuke');
     expect(profileFor('saitama',2)?.family).toBe('soco_serio');expect(profileFor('itachi',2)?.family).toBe('susanoo');
     expect(profileFor('ichigo',0)?.family).toBe('corte_de_energia');
     expect(profileFor('charizard',0)?.family).toBe('lanca_chamas');

@@ -51,6 +51,10 @@ export interface Familia {
   noAtor?: string;
   /** Numa área, o impacto sai uma vez só, grande, no meio dos alvos (o meteoro que cai no centro). */
   noCentro?: boolean;
+  /** Numa área, a faixa sai de quem age e varre os rivais de um lado ao outro (a rajada do Ciclope); cada um é atingido quando o feixe passa. */
+  varre?: boolean;
+  /** Numa área, a faixa sai de quem age até o primeiro rival e quica de um rival para o outro (o ricochete do Ciclope). */
+  encadeia?: boolean;
   /** Quando o objeto já voou até o alvo: a fração do começo do impacto que mostrava ele chegando e é pulada. */
   pula?: number;
   /** Uma criatura inteira (o dragão do Shiryu) que sai de quem age, anda até o alvo, atravessa ele e some lá dentro. */
@@ -242,7 +246,7 @@ const COR_ICONICA: Record<string, string> = {
 
 export function corDoEfeito(k: VfxFamily, personagem: Character, chave: string, nome: string): string {
   const fam = familia(k);
-  const escura = ['sombra', 'execucao', 'lamina_sombria', 'chama_negra', 'asa_negra', 'buraco_negro', 'caveira', 'medo'].includes(k);
+  const escura = ['sombra', 'execucao', 'lamina_sombria', 'amaterasu', 'asa_negra', 'buraco_negro', 'caveira', 'medo'].includes(k);
   const iconica = COR_ICONICA[`${personagem.id}:${chave}`];
   if (iconica) return legivel(iconica, escura);
   const doNome = COR_DO_NOME.find(([re]) => re.test(normaliza(nome)))?.[1];

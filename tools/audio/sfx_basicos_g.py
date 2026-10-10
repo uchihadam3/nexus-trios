@@ -78,20 +78,6 @@ def masamune(rng, v):
 
 
 # ------------------------------------------------------------------ Kratos
-def laminas_do_caos(rng, v):
-    """Correntes chacoalhando, duas lâminas girando com sopro de fogo, dois cortes e as chamas estalando."""
-    x = _z(1.15)
-    poe(x, _elos(rng, 0.5, 16, 0.0, 0.42, 0.3), 0)
-    for k, em in enumerate((0.0, 0.15)):
-        n = n_de(0.28)
-        giro = assobio(rng, n, 250, 1800, 1.2, 0.55) * sobe_e_some(n, 0.8, 1.3) * 0.8
-        poe(x, giro, em)
-        poe(x, B.corte_pesado(rng, v) * (0.85 if k == 0 else 1.0), em + 0.2)
-    fogo = B.fogo(rng, v)[: n_de(0.85)]
-    poe(x, fogo * 0.55, 0.05)
-    poe(x, graos(rng, n_de(0.7), 30, 0.15, 0.6, 1500, 7000, 0.003) * 0.35, 0.2)
-    return reverb(x, 0.5, 0.22, 6000)
-
 
 # ------------------------------------------------------------------ Link
 def espada_mestra(rng, v):
@@ -289,7 +275,6 @@ def pisada_do_mario(rng, v):
 
 
 SONS["masamune"] = (masamune, "básico de Sephiroth: lâmina longa cortando o ar e o \"shiiing\" longo do fio")
-SONS["laminas-do-caos"] = (laminas_do_caos, "básico de Kratos: correntes chacoalhando, giro com fogo e dois cortes")
 SONS["espada-mestra"] = (espada_mestra, "básico de Link: corte de espada e um brilho de cristal subindo")
 SONS["canhao-de-braco"] = (canhao_de_braco, "básico de Samus: tiro de plasma sci-fi e estouro pequeno")
 SONS["rebellion-e-ebony"] = (rebellion_e_ebony, "básico de Dante: espadão pesado e dois tiros de pistola")

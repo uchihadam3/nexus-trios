@@ -97,56 +97,6 @@ def masamune(T, t, rng):
 
 
 # ------------------------------------------------------------------ Kratos
-def laminas_do_caos(T, t, rng):
-    """Lâminas do Caos: duas lâminas presas a correntes chegam girando em arcos largos (uma por
-    cima, outra por baixo), arrastando fogo, e cortam o alvo em X com brasas."""
-    G, H = vazio(T)
-    env = apaga(t, 0.78, 1)
-    ax, ay, R = -0.92, 0.05, 0.92
-    total_g, total_h = T.zero(), T.zero()
-    sub = np.random.default_rng(717)
-    for a0, a1, t0, t1 in ((-1.7, 0.12, 0.0, 0.28), (1.7, -0.12, 0.2, 0.48)):
-        p = rel(t, t0, t1)
-        if p <= 0:
-            continue
-        vai = 1 - rel(t, t1 + 0.04, t1 + 0.22)
-        a = a0 + (a1 - a0) * ease_in(p, 1.25)
-        cos_, sin_ = math.cos(a), math.sin(a)
-        lado = 1 if a1 > a0 else -1
-        tx, ty = -sin_ * lado, cos_ * lado          # para onde a lâmina vai (frente do giro)
-        # corrente: elos do ombro até a lâmina
-        elos = [(ax + cos_ * r, ay + sin_ * r, 1.0) for r in np.arange(0.12, R - 0.2, 0.07)]
-        corrente = (T.splats(elos, 0.016) * 0.8 + T.polyline([(ax + cos_ * 0.12, ay + sin_ * 0.12), (ax + cos_ * (R - 0.2), ay + sin_ * (R - 0.2))], 0.01) * 0.5) * vai
-        # lâmina: lente larga ao longo do raio + o gancho na ponta
-        b0 = (ax + cos_ * (R - 0.24), ay + sin_ * (R - 0.24))
-        b1 = (ax + cos_ * (R + 0.26), ay + sin_ * (R + 0.26))
-        gancho = [(b1[0], b1[1]), (b1[0] - cos_ * 0.17 + tx * 0.15, b1[1] - sin_ * 0.17 + ty * 0.15), (b1[0] - cos_ * 0.15, b1[1] - sin_ * 0.15)]
-        lam = T.polys([(lamina(b0[0], b0[1], b1[0], b1[1], 0.1), 1), (gancho, 1)], 0.004) * vai
-        # rastro de fogo: meia-lua atrás da lâmina, com línguas de chama subindo dela
-        atras = a - (a1 - a0) * 0.55 * min(1.0, p * 2.5)
-        trilha = T.arc_band(R + 0.02, 0.2, atras, a + 0.001 * lado, cx=ax, cy=ay, crescente=True) * vai
-        chamas = []
-        for f in np.linspace(0.15, 1.0, 6):
-            af = atras + (a - atras) * f
-            rf = R + sub.uniform(-0.1, 0.12)
-            cxf, cyf = ax + math.cos(af) * rf, ay + math.sin(af) * rf
-            chamas.append((_chama(cxf, cyf + 0.04, 0.12 + 0.16 * f, 0.055 + 0.03 * f, t * 45 + f * 7 + a0), 0.7))
-        C = T.polys(chamas, 0.012) * vai
-        total_g += corrente + lam * 1.4 + T.glow(trilha, 1.0, 0.8, 0.03) * 1.1 + C * 1.1
-        total_h += corrente * 0.4 + lam * 0.9 + trilha * 0.45 + C * 0.35
-    # o X de cortes no alvo e o estouro de brasas
-    xg = T.zero()
-    for (sx, tc) in ((1, 0.28), (-1, 0.48)):
-        pc = ease_out(rel(t, tc - 0.03, tc + 0.06), 2)
-        if pc > 0:
-            xg += T.polys([(lamina(-0.42, -0.42 * sx, 0.42, 0.42 * sx, 0.06, pc, inicio=rel(t, tc + 0.15, tc + 0.45)), 1)], 0.003)
-    k = max(pulso(t, 0.26, 0.52), pulso(t, 0.46, 0.78))
-    g, h = _clarao(T, k, r=0.24, tam=0.8)
-    brasas = faiscas(T, rng, t, 22, 0.7, 0.03, cone=(-math.pi, 0.2), gravidade=-0.15, inicio=0.3)
-    G += (total_g + T.glow(xg, 1.2, 1.1, 0.025) + g + T.glow(brasas, 1, 1, 0.02)) * env
-    H += (total_h + xg * 1.4 + h + brasas * 0.6) * env
-    return G, H
-
 
 # ------------------------------------------------------------------ Link
 def _triforce(lado):
@@ -637,7 +587,6 @@ def pisada_do_mario(T, t, rng):
 
 REGISTRO = [
     ("masamune", masamune, GRANDE, "Sephiroth: corte finíssimo e longo atravessando o quadro, penas caindo", False),
-    ("laminas_do_caos", laminas_do_caos, GRANDE, "Kratos: duas lâminas em chamas presas a correntes cortam em X", False),
     ("espada_mestra", espada_mestra, GRANDE, "Link: arco de espada azul-claro e o reflexo dos três triângulos", False),
     ("canhao_de_braco", canhao_de_braco, GRANDE, "Samus: bola de plasma do canhão, explosão pequena e anel (+x)", False),
     ("rebellion_e_ebony", rebellion_e_ebony, GRANDE, "Dante: corte largo de espadão e dois tiros de pistola", False),

@@ -83,20 +83,6 @@ def fenix(T, t, rng):
     return G, H
 
 
-def chama_negra(T, t, rng):
-    """Chama negra: línguas densas e lentas que não se apagam, quase sem núcleo claro."""
-    G, H = vazio(T)
-    env = janela(t, 0, 0.2) * apaga(t, 0.7, 1)
-    acc = T.zero()
-    for k, (cx, h, w) in enumerate(((0, 0.8, 0.28), (-0.22, 0.55, 0.2), (0.24, 0.6, 0.2), (-0.4, 0.35, 0.13), (0.4, 0.4, 0.13))):
-        c, _ = _chama_em(T, t, 431 + k, 0.45, h, w, cx, 0.5)
-        acc = np.maximum(acc, c)
-    borda = acc * (1 - smooth(acc, 0.35, 0.8))
-    G += (acc * 1.3 + borda * 1.2) * env
-    H += borda * 0.25 * env
-    return G, H
-
-
 def dragao(T, t, rng):
     """Dragão: um corpo serpenteando chega em espiral, a cabeça morde o alvo e estoura."""
     G, H = vazio(T)
@@ -228,44 +214,6 @@ def _raio_ramificado(T, sub, x0, y0, ang, comp, largura, ramos=2, peso=1.0):
         c = comp * sub.uniform(0.25, 0.45)
         a += T.polyline(jagged(sub, bx, by, bx + math.cos(b) * c, by + math.sin(b) * c, 3, 0.22), largura * 0.6, peso * 0.7)
     return a
-
-
-def chidori(T, t, rng):
-    """Chidori: uma bola de raios densa na mão, estalando para todos os lados (o "canto
-    de mil pássaros"), um rastro elétrico grosso da investida, e no contato a descarga
-    atravessa o alvo: clarão, raios explodindo em volta e arcos estalando no corpo."""
-    G, H = vazio(T)
-    sub = np.random.default_rng(int(t * 997) + 491)        # raios novos a cada quadro: ele cintila
-    bate = 0.32
-    cx = -0.5 + 0.5 * ease_in(rel(t, 0.0, bate), 2.2)
-    pisca = sub.uniform(0.8, 1.2)
-    env = apaga(t, 0.62, 1)
-    if t < bate + 0.06:
-        bola = T.gauss(cx, 0, 0.075) * 2.8 * pisca + T.gauss(cx, 0, 0.16) * 0.9
-        coroa = T.zero()
-        for _ in range(16):
-            coroa += _raio_ramificado(T, sub, cx, 0, sub.uniform(0, TAU), sub.uniform(0.12, 0.34), 0.008, 1, sub.uniform(0.6, 1))
-        for _ in range(3):                                   # alguns arcos longos que chicoteiam
-            coroa += _raio_ramificado(T, sub, cx, 0, sub.uniform(0, TAU), sub.uniform(0.4, 0.62), 0.007, 2, 0.8)
-        rastro = T.zero()
-        for _ in range(5):
-            y = sub.uniform(-0.12, 0.12)
-            rastro += T.polyline(jagged(sub, cx - 0.06, y * 0.4, cx - 0.95, y + sub.uniform(-0.1, 0.1), 5, 0.12), 0.012, 0.8)
-        G += bola + T.glow(coroa + rastro, 1.5, 1.8, 0.022)
-        H += bola + coroa + rastro * 0.6
-    if t >= bate:
-        tt = rel(t, bate, 1)
-        clarao = T.gauss(0, 0, 0.16) * some(t, bate, bate + 0.3, 1.2) * 3.2
-        anel = T.ring(0.1 + 0.65 * ease_out(tt, 2.2), 0.03) * (1 - tt) ** 1.3 * 1.6
-        estouro = T.zero()
-        n = int(9 * (1 - tt) ** 1.5 + 2)
-        for _ in range(n):                                    # a descarga saindo do alvo para todos os lados
-            estouro += _raio_ramificado(T, sub, sub.uniform(-0.05, 0.05), sub.uniform(-0.05, 0.05), sub.uniform(0, TAU),
-                                        sub.uniform(0.25, 0.75) * (0.6 + 0.6 * ease_out(min(1, tt * 3), 2)), 0.009, 2, 1.0)
-        atravessa = T.polyline(jagged(sub, -0.1, 0, 0.95, sub.uniform(-0.15, 0.15), 5, 0.08), 0.018, 1) * some(t, bate, bate + 0.25)
-        G += clarao + anel + T.glow(estouro + atravessa, 1.6, 1.8, 0.022) * env
-        H += clarao + (estouro + atravessa) * env
-    return G, H
 
 
 def tsunami(T, t, rng):
@@ -563,14 +511,12 @@ REGISTRO = [
     ("labareda", labareda, GRANDE, "coluna de fogo", False),
     ("sopro_de_fogo", sopro_de_fogo, GRANDE, "jato de fogo em cone", False),
     ("fenix", fenix, GRANDE, "asas de fogo", False),
-    ("chama_negra", chama_negra, GRANDE, "chama negra lenta", False),
     ("dragao", dragao, GRANDE, "dragão serpenteando", False),
     ("nevasca", nevasca, GRANDE, "flocos em redemoinho", False),
     ("bloco_de_gelo", bloco_de_gelo, GRANDE, "bloco de gelo prendendo", False),
     ("espinho_de_gelo", espinho_de_gelo, GRANDE, "lanças de gelo do chão", False),
     ("tempestade", tempestade, GRANDE, "nuvem e raios de cima", False),
     ("raio_em_cadeia", raio_em_cadeia, GRANDE, "raio pulando em cadeia", False),
-    ("chidori", chidori, GRANDE, "mil pássaros", False),
     ("tsunami", tsunami, GRANDE, "onda gigante", False),
     ("areia", areia, GRANDE, "casulo de areia", False),
     ("espinhos_de_terra", espinhos_de_terra, GRANDE, "pontas de pedra em linha", False),

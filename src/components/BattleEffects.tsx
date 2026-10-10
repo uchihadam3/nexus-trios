@@ -28,8 +28,8 @@ const SEM_FICHA:Partial<Record<Beat['event']['kind'],VfxFamily>>={interrupt:'ond
 const GIRO_DA_VARIANTE=[0,16,-12,8];
 /* Altura da faixa em relação ao medalhão. */
 /* Os objetos arremessados (o escudo do Capitão, o batarangue…) voam grandes, para dar para ver o que é. */
-const TAMANHO_DO_VOO:Record<string,number>={saraivada:1.25,escudo_voando:2.6,batarangue_voando:2.5,shuriken_voando:2.3,tiara_voando:2.5,dardo_voando:2.4,corvo_voando:2.6,reigun_bala:2.2,shotgun_rajada:2.2,barril_voando:2.4,fenix_voando:2.6,pedra_bloco:2.0,papel_bola:2.2,bola_do_charizard:2.4,buster_bala:2.2,raio_copiado:2.2,carga_maxima_bala:2.6,leao_dourado:2.6,bola_de_ar:2.4};
-const ALTURA_DA_FAIXA:Record<string,number>={feixe:.36,feixe_pesado:.62,raio_faixa:.7,dreno:.42,dragao_faixa:.85,palma_faixa:.55,makanko_faixa:.5,chamas_faixa:.75,calor_faixa:.42,diamante_faixa:.6,aurora_faixa:.78,plasma_faixa:.7,feixe_ciclope:.6};
+const TAMANHO_DO_VOO:Record<string,number>={teia_voando:2.0,teia_impacto_bola:2.1,burning_bola:2.3,kienzan_disco:2.4,saraivada:1.25,escudo_voando:2.6,batarangue_voando:2.5,shuriken_voando:2.3,tiara_voando:2.5,dardo_voando:2.4,corvo_voando:2.6,reigun_bala:2.2,shotgun_rajada:2.2,barril_voando:2.4,fenix_voando:2.6,pedra_bloco:2.0,papel_bola:2.2,bola_do_charizard:2.4,buster_bala:2.2,raio_copiado:2.2,carga_maxima_bala:2.6,leao_dourado:2.6,bola_de_ar:2.4};
+const ALTURA_DA_FAIXA:Record<string,number>={feixe:.36,feixe_pesado:.62,raio_faixa:.7,dreno:.42,dragao_faixa:.85,palma_faixa:.55,makanko_faixa:.5,chamas_faixa:.75,calor_faixa:.42,diamante_faixa:.6,aurora_faixa:.78,plasma_faixa:.7,feixe_ciclope:.6,kame_faixa_kuririn:.5};
 
 const s=(x:number)=>`${x.toFixed(3)}s`;
 
@@ -72,6 +72,44 @@ export function BattleEffects({battle,beat,anchors,enabled,reduced,medal=80}:{ba
   const alvos=beat?[...new Set(beat.events.filter(e=>e.target&&['damage','status','interrupt','shield','heal','ko','block','revive','cleanse','dispel'].includes(e.kind)&&!(criatura&&e.target===beat.event.source&&e.kind==='status')).map(e=>e.target!))].slice(0,3):[];
   if(beat&&landed&&!alvos.length&&kind!=='turn'&&kind!=='cast')alvos.push(alvoPrincipal??beat.event.source);
 
+  /*
+   * Varredura (pedido do jogador: "a rajada do Ciclope tá saindo do lado, tinha que sair dele e cortar
+   * os três"): o feixe sai de quem age, mira no primeiro rival e gira até o último; cada rival é
+   * atingido quando o feixe passa por ele. O feixe passa de 22% a 62% da faixa (veja fx-varre).
+   */
+  const varredura=(()=>{
+    if(!beat||!fam?.varre||!fam.faixa)return null;
+    const lado=battle.fighters.find(f=>f.uid===beat.event.source)?.side;
+    const rivais=alvos.filter(uid=>battle.fighters.find(f=>f.uid===uid)?.side!==lado);
+    if(rivais.length<2)return null;
+    const mira=rivais.map(uid=>{const q=px(point(uid)),vx=q.x-a.x,vy=q.y-a.y;return{uid,ang:Math.atan2(vy,vx)*180/Math.PI,dist:Math.hypot(vx,vy)};}).sort((m,n)=>m.ang-n.ang);
+    const de=mira[0].ang,ate=mira[mira.length-1].ang,abre=Math.max(1e-3,ate-de);
+    const passa:Record<string,number>={};
+    for(const m of mira)passa[m.uid]=Math.max(0,D*I*.55+D*.78*(.22+.4*(m.ang-de)/abre)-D*I);
+    return{de,ate,largura:Math.max(...mira.map(m=>m.dist))+medal*.25,passa};
+  })();
+  /*
+   * Encadeia: o feixe sai de quem age até o primeiro rival e quica para o próximo e para o próximo,
+   * cada trecho acendendo na sua vez; cada rival é atingido quando o trecho chega nele.
+   */
+  const cadeia=(()=>{
+    if(!beat||!fam?.encadeia||!fam.faixa)return null;
+    const lado=battle.fighters.find(f=>f.uid===beat.event.source)?.side;
+    const rivais=alvos.filter(uid=>battle.fighters.find(f=>f.uid===uid)?.side!==lado);
+    if(rivais.length<2)return null;
+    const primeiro=alvoPrincipal&&rivais.includes(alvoPrincipal)?alvoPrincipal:rivais[0];
+    const ordem=[primeiro],resto=rivais.filter(u=>u!==primeiro);
+    while(resto.length){const ult=px(point(ordem[ordem.length-1]));resto.sort((m,n)=>{const qm=px(point(m)),qn=px(point(n));return Math.hypot(qm.x-ult.x,qm.y-ult.y)-Math.hypot(qn.x-ult.x,qn.y-ult.y);});ordem.push(resto.shift()!);}
+    const trecho=D*.42,passo=D*.13,inicio=D*I*.55;
+    const passa:Record<string,number>={};
+    const trechos=ordem.map((uid,k)=>{
+      const de=k===0?p1:point(ordem[k-1]),qa=px(de),qb=px(point(uid)),vx=qb.x-qa.x,vy=qb.y-qa.y;
+      passa[uid]=Math.max(0,inicio+k*passo+trecho*.22-D*I);
+      return{uid,de,largura:Math.hypot(vx,vy),ang:Math.atan2(vy,vx)*180/Math.PI,atraso:inicio+k*passo};
+    });
+    return{trechos,trecho,passa};
+  })();
+
   const camada=(nome:string,estilo:Record<string,string|number>,classe:string,key:string)=><span key={key} className={`fxl ${classe}`} style={{'--fx-img':`url(${folha(nome)})`,...estilo} as CSSProperties}/>;
   const nodes:ReactElement[]=[];
   if(enabled&&beat&&fam&&kind!=='turn'&&size.w>0){
@@ -97,7 +135,13 @@ export function BattleEffects({battle,beat,anchors,enabled,reduced,medal=80}:{ba
       </span>);
     }
     // faixa: o feixe cresce de quem age até o alvo, segura o impacto e some
-    if(vai&&fam.faixa){
+    if(vai&&fam.faixa&&cadeia){
+      const h=medal*(ALTURA_DA_FAIXA[fam.faixa]??.4)*Math.min(1.3,intensidade);
+      for(const t of cadeia.trechos)nodes.push(camada(fam.faixa,{left:`${t.de.x}%`,top:`${t.de.y}%`,width:t.largura,height:h,'--ang':`${t.ang}deg`,'--faixa':s(cadeia.trecho),'--faixa-delay':s(t.atraso)},'fxl-laco fxl-faixa',`faixa-${id}-${t.uid}`));
+    }else if(vai&&fam.faixa&&varredura){
+      const h=medal*(ALTURA_DA_FAIXA[fam.faixa]??.4)*Math.min(1.3,intensidade);
+      nodes.push(camada(fam.faixa,{left:`${p1.x}%`,top:`${p1.y}%`,width:varredura.largura,height:h,'--ang0':`${varredura.de}deg`,'--ang1':`${varredura.ate}deg`,'--faixa':s(D*.78),'--faixa-delay':s(D*I*.55)},'fxl-laco fxl-faixa fxl-varre',`faixa-${id}`));
+    }else if(vai&&fam.faixa){
       const h=medal*(ALTURA_DA_FAIXA[fam.faixa]??.4)*Math.min(1.3,intensidade);
       nodes.push(camada(fam.faixa,{left:`${p1.x}%`,top:`${p1.y}%`,width:dist,height:h,'--ang':`${ang}deg`,'--faixa':s(D*.78),'--faixa-delay':s(D*I*.55)},'fxl-laco fxl-faixa',`faixa-${id}`));
     }
@@ -170,7 +214,7 @@ export function BattleEffects({battle,beat,anchors,enabled,reduced,medal=80}:{ba
         if(fam.acento&&i===0&&!reduced)nodes.push(camada(fam.acento,{left:`${p.x}%`,top:`${p.y}%`,width:t*.62,height:t*.62,'--ang':`${direcao}deg`,'--dur':s(Math.max(.35,dur*.6))},'fxl-impacto fxl-acento',`ac-${id}-${uid}`));
         // o objeto já voou até aqui: pula o começo da folha, que mostrava ele chegando
         const pula=vai&&fam.pula?fam.pula:0,durDaFolha=dur/(1-pula);
-        nodes.push(camada(fam.impacto,{left:`${p.x}%`,top:`${p.y}%`,width:t,height:t,'--ang':`${giro}deg`,'--flip':espelho,'--dur':s(durDaFolha),'--delay':s((area?i*.07:0)-pula*durDaFolha)},`fxl-impacto ${reduced?'fxl-parado':''}`,`imp-${id}-${uid}`));
+        nodes.push(camada(fam.impacto,{left:`${p.x}%`,top:`${p.y}%`,width:t,height:t,'--ang':`${giro}deg`,'--flip':espelho,'--dur':s(durDaFolha),'--delay':s(((varredura??cadeia)?.passa[uid]??(area?i*.07:0))-pula*durDaFolha)},`fxl-impacto ${reduced?'fxl-parado':''}`,`imp-${id}-${uid}`));
       });
       // cada uma aparece no passo da cadeia em que acontece (a reação depois do golpe)
       for(const e of beat.events){

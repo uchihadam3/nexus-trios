@@ -17,7 +17,7 @@ export const SONS = [
   'disparo', 'tiro', 'saraivada', 'missil', 'explosao', 'carga-pequena', 'carga-grande', 'feixe', 'impacto-energia',
   'raio', 'fogo', 'gelo', 'vento', 'agua', 'terra', 'veneno',
   'psiquico', 'sombra', 'luz', 'portal', 'maldicao', 'prisao', 'selo', 'distorcao',
-  'cura', 'escudo', 'bloqueio', 'reforco', 'enfraquecer', 'purificar', 'dreno',
+  'cura', 'escudo', 'bloqueio', 'reforco', 'enfraquecer', 'renova-buff', 'renova-debuff', 'purificar', 'dreno',
   'interrupcao', 'pronto', 'preparo', 'grand-carga', 'grand-impacto', 'nocaute', 'vitoria', 'derrota', 'virada',
   'transformacao', 'toque', 'errou', 'barreira-anula',
   'ui-clique', 'ui-confirma', 'ui-abrir', 'ui-fechar', 'ui-alternar', 'ui-escolher', 'ui-arena', 'reacao',
@@ -34,7 +34,6 @@ export type Sound = typeof SONS[number] | (string & { readonly __somNovo?: never
  * chega (se é corpo a corpo); o impacto fica só com o estouro.
  */
 const ANTES_DA_NOVA: Partial<Record<FamiliaNova, { antes: Sound; saida?: Sound }>> = {
-  chidori: { antes: 'chidori-carga' },
   esfera_espiral: { antes: 'esfera-espiral-carga' },
   kamehameha: { antes: 'kamehameha-carga', saida: 'kamehameha-feixe' },
   marretada: { antes: 'marretada-giro' },
@@ -64,6 +63,15 @@ const ANTES_DA_NOVA: Partial<Record<FamiliaNova, { antes: Sound; saida?: Sound }
   jajanken_pedra: { antes: 'nen-gon' },
   jajanken_papel: { antes: 'nen-gon' },
   batida_do_gorila: { antes: 'batida-preparo' },
+  chidori_sasuke: { antes: 'chidori-sasuke-mao' },
+  amaterasu: { antes: 'mangekyo-sasuke' },
+  genjutsu_sasuke: { antes: 'mangekyo-sasuke' },
+  burning_attack: { antes: 'selo-burning' },
+  corte_final: { antes: 'aura-trunks' },
+  taiyoken: { antes: 'taiyoken-flash' },
+  kame_kuririn: { antes: 'kame-kuririn-carga' },
+  furia_espartana: { antes: 'furia-kratos' },
+  ira_dos_deuses: { antes: 'ira-kratos' },
 };
 const SONS_DE_ANTES = [...new Set(Object.values(ANTES_DA_NOVA).flatMap((x) => [x!.antes, ...(x!.saida ? [x!.saida] : [])]))];
 
