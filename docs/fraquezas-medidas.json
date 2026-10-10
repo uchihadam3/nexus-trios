@@ -157,18 +157,28 @@
     "revives": 0
    },
    "danoPorAcao": [
-    681.9,
-    236.8,
-    0.3,
+    680.4,
+    236.7,
+    0,
+    0,
+    1.9
+   ],
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
     0
    ],
-   "apoioPorAcao": [
+   "escudoPorAcao": [
     0,
     0,
     0,
-    104
+    104,
+    0
    ],
    "statusPorAcao": [
+    {},
     {},
     {},
     {},
@@ -336,18 +346,28 @@
     "revives": 0
    },
    "danoPorAcao": [
-    554.9,
+    553.8,
     168.9,
     0,
-    303.7
+    303.6,
+    1.3
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
     0,
     0,
     96.3,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
+    0,
+    0,
+    0,
     0
    ],
    "statusPorAcao": [
+    {},
     {},
     {},
     {},
@@ -515,22 +535,32 @@
     "revives": 0
    },
    "danoPorAcao": [
-    648.8,
-    0.1,
-    409.1,
-    0.1
+    647.8,
+    0,
+    409,
+    0,
+    1.3
    ],
-   "apoioPorAcao": [
-    90.7,
-    257.3,
-    21.4,
-    403.6
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    159.5
+   ],
+   "escudoPorAcao": [
+    0,
+    240.6,
+    0,
+    372.7,
+    0
    ],
    "statusPorAcao": [
     {},
     {
      "confused": 1.372
     },
+    {},
     {},
     {}
    ],
@@ -696,12 +726,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    518.8,
-    269.5,
-    25.1,
-    9
+    479,
+    266.2,
+    0,
+    0,
+    77.1
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -720,7 +759,8 @@
     },
     {
      "confused": 1.138
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 14.02,
    "lutasComHabilidade": 447,
@@ -884,18 +924,28 @@
     "revives": 0
    },
    "danoPorAcao": [
-    720.8,
-    360.5,
-    0.2,
-    0.1
+    719.6,
+    360.3,
+    0,
+    0,
+    1.7
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
     0,
     0,
     0,
-    155.4
+    155.4,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
    ],
    "statusPorAcao": [
+    {},
     {},
     {},
     {},
@@ -1063,16 +1113,25 @@
     "revives": 0
    },
    "danoPorAcao": [
-    297.3,
-    108.2,
+    296.5,
+    108.1,
     152.1,
-    53.3
+    53.3,
+    0.8
    ],
-   "apoioPorAcao": [
-    329.1,
-    20.8,
-    11,
-    2.8
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    103.8,
+    0,
+    0,
+    0,
+    259.8
    ],
    "statusPorAcao": [
     {},
@@ -1082,7 +1141,8 @@
     {},
     {
      "paralyzed": 0.403
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 18.6,
    "lutasComHabilidade": 294,
@@ -1246,12 +1306,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    209.5,
-    0.5,
-    0.1,
-    3.1
+    209.3,
+    0,
+    0,
+    3.1,
+    0.8
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -1266,7 +1335,8 @@
     },
     {
      "exposed": 0.019
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 8.59,
    "lutasComHabilidade": 410,
@@ -1430,12 +1500,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    593.6,
-    346.3,
+    593.4,
+    346.2,
+    0,
+    0,
+    0.2
+   ],
+   "curaPorAcao": [
+    0,
+    0,
+    0,
     0,
     0
    ],
-   "apoioPorAcao": [
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -1443,17 +1522,20 @@
    ],
    "statusPorAcao": [
     {
-     "electric": 2.102
+     "electric": 0.19
     },
     {
-     "electric": 2.92
+     "electric": 2.527
     },
     {
      "paralyzed": 1.135,
-     "electric": 0.071
+     "electric": 0.01
     },
     {
-     "electric": 0.098
+     "electric": 0.004
+    },
+    {
+     "electric": 2.459
     }
    ],
    "primeiraHabilidade": 8.81,
@@ -1618,18 +1700,28 @@
     "revives": 0
    },
    "danoPorAcao": [
-    531.1,
-    235.2,
-    0.4,
-    178.6
+    530.4,
+    234.6,
+    0,
+    178.6,
+    1.8
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
     0,
     0,
     411.1,
+    0,
     0
    ],
    "statusPorAcao": [
+    {},
     {},
     {},
     {},
@@ -1797,16 +1889,25 @@
     "revives": 0
    },
    "danoPorAcao": [
-    512.9,
-    290.4,
-    21.8,
-    13.5
+    398.1,
+    222.3,
+    1.3,
+    0.2,
+    216.8
    ],
-   "apoioPorAcao": [
-    63.6,
-    14.4,
-    449.6,
-    276.9
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    270.3,
+    95.8
+   ],
+   "escudoPorAcao": [
+    0,
+    0,
+    438.4,
+    0,
+    0
    ],
    "statusPorAcao": [
     {
@@ -1815,6 +1916,7 @@
     {
      "bleed": 1.774
     },
+    {},
     {},
     {}
    ],
@@ -1980,16 +2082,25 @@
     "revives": 0
    },
    "danoPorAcao": [
-    673.5,
-    0.1,
+    673.2,
+    0,
     212.9,
+    0,
+    0.4
+   ],
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
     0
    ],
-   "apoioPorAcao": [
+   "escudoPorAcao": [
     0,
     0,
     0,
-    645.8
+    645.8,
+    0
    ],
    "statusPorAcao": [
     {},
@@ -2000,7 +2111,8 @@
     {},
     {
      "weakened": 3.659
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 12.79,
    "lutasComHabilidade": 472,
@@ -2164,15 +2276,24 @@
     "revives": 0
    },
    "danoPorAcao": [
-    364.3,
-    64,
-    0.7,
-    99.2
+    360.3,
+    59.8,
+    0,
+    98.8,
+    9.4
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
     0,
     0,
     288.5,
+    0,
     0
    ],
    "statusPorAcao": [
@@ -2183,7 +2304,8 @@
     {},
     {
      "slow": 0.815
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 13.92,
    "lutasComHabilidade": 325,
@@ -2347,16 +2469,25 @@
     "revives": 0
    },
    "danoPorAcao": [
-    551.1,
+    550.8,
     0,
     0,
-    142
+    142,
+    0.4
    ],
-   "apoioPorAcao": [
-    118,
-    20,
-    579.1,
-    4.2
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    7.5,
+    0.3,
+    569.7,
+    0.7,
+    143
    ],
    "statusPorAcao": [
     {
@@ -2365,6 +2496,7 @@
     {
      "rooted": 0.34
     },
+    {},
     {},
     {}
    ],
@@ -2530,16 +2662,25 @@
     "revives": 0
    },
    "danoPorAcao": [
-    759,
-    439,
-    0.2,
-    175.7
+    757.2,
+    438.7,
+    0,
+    175.4,
+    2.6
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
     0,
     0,
     0,
-    186.1
+    186.1,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
    ],
    "statusPorAcao": [
     {},
@@ -2550,6 +2691,7 @@
      "weakened": 1.296,
      "provoked": 1.329
     },
+    {},
     {}
    ],
    "primeiraHabilidade": 16.35,
@@ -2714,12 +2856,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    347.5,
-    115.4,
-    28.4,
-    263.1
+    346.6,
+    115.2,
+    28.3,
+    262,
+    2.2
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -2735,7 +2886,8 @@
     },
     {
      "paralyzed": 0.967
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 12.97,
    "lutasComHabilidade": 417,
@@ -2899,18 +3051,28 @@
     "revives": 0
    },
    "danoPorAcao": [
-    412.1,
-    0.2,
-    0.1,
-    0.1
+    409.2,
+    0,
+    0,
+    0,
+    3.2
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
     122.4,
     998.1,
+    0,
     0,
     0
    ],
    "statusPorAcao": [
+    {},
     {},
     {},
     {},
@@ -3078,15 +3240,24 @@
     "revives": 0
    },
    "danoPorAcao": [
-    514.1,
-    342.1,
+    513.9,
+    342,
+    0,
+    0,
+    0.2
+   ],
+   "curaPorAcao": [
+    0,
+    0,
+    0,
     0,
     0
    ],
-   "apoioPorAcao": [
+   "escudoPorAcao": [
     0,
     0,
     330.7,
+    0,
     0
    ],
    "statusPorAcao": [
@@ -3095,7 +3266,8 @@
     {},
     {
      "slow": 2.988
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 8.01,
    "lutasComHabilidade": 495,
@@ -3259,16 +3431,25 @@
     "revives": 0
    },
    "danoPorAcao": [
-    380.4,
-    0.4,
-    0.3,
-    260.5
+    379.5,
+    0,
+    0,
+    260.3,
+    1.8
    ],
-   "apoioPorAcao": [
-    243.3,
-    14.9,
-    449.9,
-    9.9
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    138.1,
+    0.4,
+    442.5,
+    0.6,
+    136.4
    ],
    "statusPorAcao": [
     {},
@@ -3276,6 +3457,7 @@
      "rooted": 0.234,
      "marked": 0.24
     },
+    {},
     {},
     {}
    ],
@@ -3441,15 +3623,24 @@
     "revives": 0
    },
    "danoPorAcao": [
-    459.7,
-    247.7,
-    0.1,
-    189.3
+    459,
+    247.4,
+    0,
+    189.3,
+    1.1
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
     0,
     0,
     338.8,
+    0,
     0
    ],
    "statusPorAcao": [
@@ -3457,6 +3648,7 @@
     {
      "exposed": 1.324
     },
+    {},
     {},
     {}
    ],
@@ -3622,15 +3814,24 @@
     "revives": 0
    },
    "danoPorAcao": [
-    335.2,
-    181.2,
-    0.4,
-    0.1
+    334,
+    180.8,
+    0,
+    0,
+    2.1
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
     0,
     0,
-    505.4,
+    152,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
+    0,
+    353.4,
+    0,
     0
    ],
    "statusPorAcao": [
@@ -3639,6 +3840,7 @@
     {
      "provoked": 4.514
     },
+    {},
     {}
    ],
    "primeiraHabilidade": 9.66,
@@ -3803,16 +4005,25 @@
     "revives": 0
    },
    "danoPorAcao": [
-    437.8,
-    0.1,
-    0.5,
-    316.2
+    436.6,
+    0,
+    0,
+    316.1,
+    1.8
    ],
-   "apoioPorAcao": [
-    82.5,
-    6.6,
-    684.6,
-    17.1
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    1.4,
+    2.7,
+    673.1,
+    15.4,
+    98.2
    ],
    "statusPorAcao": [
     {},
@@ -3822,7 +4033,8 @@
     {},
     {
      "slow": 1.998
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 12.38,
    "lutasComHabilidade": 390,
@@ -3986,16 +4198,25 @@
     "revives": 0
    },
    "danoPorAcao": [
-    754.5,
-    508.8,
-    0.1,
-    0
+    754.2,
+    508.7,
+    0,
+    0,
+    0.5
    ],
-   "apoioPorAcao": [
-    138.8,
-    31.4,
-    21.7,
-    392
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    382.7,
+    201.3
+   ],
+   "escudoPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
    ],
    "statusPorAcao": [
     {},
@@ -4004,6 +4225,7 @@
      "confused": 1.986,
      "weakened": 2.016
     },
+    {},
     {}
    ],
    "primeiraHabilidade": 12.96,
@@ -4168,22 +4390,32 @@
     "revives": 0
    },
    "danoPorAcao": [
-    232.3,
-    92.2,
-    0.2,
-    272.9
+    231.6,
+    91.8,
+    0,
+    272.5,
+    1.6
    ],
-   "apoioPorAcao": [
-    136.8,
-    10.8,
-    517.6,
-    10.4
+   "curaPorAcao": [
+    0.7,
+    0,
+    0,
+    0.2,
+    210.8
+   ],
+   "escudoPorAcao": [
+    0,
+    0,
+    463.8,
+    0,
+    0
    ],
    "statusPorAcao": [
     {},
     {
      "silenced": 0.629
     },
+    {},
     {},
     {}
    ],
@@ -4349,12 +4581,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    290.9,
-    143.4,
-    0.6,
-    77.4
+    288.6,
+    142.9,
+    0,
+    77.4,
+    3.4
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -4370,7 +4611,8 @@
     },
     {
      "weakened": 0.444
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 19.96,
    "lutasComHabilidade": 297,
@@ -4534,18 +4776,28 @@
     "revives": 0
    },
    "danoPorAcao": [
-    395.4,
-    114.5,
+    395,
+    114.4,
     364,
-    88.1
+    88.1,
+    0.5
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
     0,
     0,
     201.9,
+    0,
     0
    ],
    "statusPorAcao": [
+    {},
     {},
     {},
     {},
@@ -4713,22 +4965,32 @@
     "revives": 0
    },
    "danoPorAcao": [
-    599.8,
+    599.5,
     287.5,
     0,
-    0.1
+    0,
+    0.5
    ],
-   "apoioPorAcao": [
-    247.8,
-    5.5,
-    476,
-    406
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    374.9,
+    111.5
+   ],
+   "escudoPorAcao": [
+    180.3,
+    0,
+    468.5,
+    0,
+    0
    ],
    "statusPorAcao": [
     {},
     {
      "exposed": 0.608
     },
+    {},
     {},
     {}
    ],
@@ -4894,12 +5156,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    270.4,
-    29.9,
-    58.6,
-    343.8
+    249.3,
+    28.9,
+    57.8,
+    342.8,
+    23.7
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -4907,18 +5178,21 @@
    ],
    "statusPorAcao": [
     {
-     "exposed": 4.684,
-     "bleed": 0.806
+     "bleed": 0.806,
+     "exposed": 0.771
     },
     {
      "marked": 0.194,
-     "exposed": 0.093
+     "exposed": 0.054
     },
     {
-     "exposed": 0.215
+     "exposed": 0.151
     },
     {
-     "exposed": 1.18
+     "exposed": 0.952
+    },
+    {
+     "exposed": 4.244
     }
    ],
    "primeiraHabilidade": 11.44,
@@ -5083,16 +5357,25 @@
     "revives": 0
    },
    "danoPorAcao": [
-    430.7,
-    83.6,
-    176.3,
-    291.1
+    429,
+    83.4,
+    174.7,
+    290.3,
+    4.4
    ],
-   "apoioPorAcao": [
-    0.8,
-    0.3,
-    0.2,
-    25.9
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    4.6,
+    1.4
+   ],
+   "escudoPorAcao": [
+    0,
+    0,
+    0,
+    21.2,
+    0
    ],
    "statusPorAcao": [
     {},
@@ -5121,7 +5404,8 @@
      "bleed": 0.004,
      "cursed": 0.006,
      "poison": 0.002
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 21.51,
    "lutasComHabilidade": 390,
@@ -5285,31 +5569,43 @@
     "revives": 0
    },
    "danoPorAcao": [
-    314.1,
+    313.6,
     0,
     0,
-    452
+    451.9,
+    0.7
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
     0,
     0,
     159.8,
+    0,
     0
    ],
    "statusPorAcao": [
     {
-     "confused": 2.307
+     "confused": 1.153
     },
     {
      "marked": 0.52,
      "sleep": 0.52,
-     "confused": 0.096
+     "confused": 0.004
     },
     {
-     "confused": 0.931
+     "confused": 0.807
     },
     {
-     "confused": 2.098
+     "confused": 1.976
+    },
+    {
+     "confused": 1.491
     }
    ],
    "primeiraHabilidade": 12.07,
@@ -5474,16 +5770,25 @@
     "revives": 0
    },
    "danoPorAcao": [
-    306.2,
-    125,
-    276.1,
-    343
+    305.2,
+    124.9,
+    275.8,
+    342.8,
+    1.5
    ],
-   "apoioPorAcao": [
-    214.9,
-    13,
-    27,
-    380.5
+   "curaPorAcao": [
+    103.6,
+    0,
+    0,
+    320,
+    211.8
+   ],
+   "escudoPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
    ],
    "statusPorAcao": [
     {},
@@ -5491,6 +5796,7 @@
     {
      "exposed": 0.814
     },
+    {},
     {}
    ],
    "primeiraHabilidade": 10.86,
@@ -5655,12 +5961,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    523.1,
+    522.8,
     0,
-    364.8,
-    511.9
+    364.6,
+    511.7,
+    0.7
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -5668,19 +5983,22 @@
    ],
    "statusPorAcao": [
     {
-     "marked": 1.516
+     "marked": 0.077
     },
     {
-     "marked": 1.024,
+     "marked": 0.865,
      "exposed": 0.875
     },
     {
      "slow": 1.069,
      "exposed": 1.085,
-     "marked": 0.228
+     "marked": 0.014
     },
     {
-     "marked": 0.155
+     "marked": 0.036
+    },
+    {
+     "marked": 1.931
     }
    ],
    "primeiraHabilidade": 12.72,
@@ -5845,16 +6163,25 @@
     "revives": 0
    },
    "danoPorAcao": [
-    571.4,
-    133.7,
-    453.9,
-    120.6
+    404.3,
+    124.7,
+    401,
+    118.1,
+    231.5
    ],
-   "apoioPorAcao": [
-    84.8,
-    15.9,
-    23.7,
-    3
+   "curaPorAcao": [
+    8.3,
+    9.5,
+    10.8,
+    0,
+    98.8
+   ],
+   "escudoPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
    ],
    "statusPorAcao": [
     {
@@ -5864,6 +6191,7 @@
     {
      "burning": 4.088
     },
+    {},
     {}
    ],
    "primeiraHabilidade": 11.9,
@@ -6028,15 +6356,24 @@
     "revives": 0
    },
    "danoPorAcao": [
-    567.4,
-    230.7,
+    567.1,
+    230.6,
     0,
-    291.7
+    291.7,
+    0.4
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
     0,
     0,
     232.9,
+    0,
     0
    ],
    "statusPorAcao": [
@@ -6047,7 +6384,8 @@
     },
     {
      "paralyzed": 1.34
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 10.94,
    "lutasComHabilidade": 461,
@@ -6211,12 +6549,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    765.7,
+    765.6,
     118.4,
     403,
-    360.5
+    360.5,
+    0.2
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -6230,6 +6577,7 @@
     {
      "exposed": 0.886
     },
+    {},
     {}
    ],
    "primeiraHabilidade": 18.45,
@@ -6394,32 +6742,44 @@
     "revives": 0
    },
    "danoPorAcao": [
-    544.9,
-    105.2,
-    274.1,
-    12.4
+    433,
+    93.6,
+    250.7,
+    0,
+    159.4
    ],
-   "apoioPorAcao": [
-    223.6,
-    34.3,
-    65.2,
-    289.4
+   "curaPorAcao": [
+    20.4,
+    9.4,
+    17.4,
+    237.8,
+    327.4
+   ],
+   "escudoPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
    ],
    "statusPorAcao": [
     {
-     "poison": 7.037
+     "poison": 0.31
     },
     {
      "marked": 1.628,
-     "poison": 0.593
+     "poison": 0.025
     },
     {
      "weakened": 1.994,
      "slow": 2.006,
-     "poison": 1.079
+     "poison": 0.035
     },
     {
-     "poison": 0.634
+     "poison": 0.029
+    },
+    {
+     "poison": 8.944
     }
    ],
    "primeiraHabilidade": 11.96,
@@ -6584,12 +6944,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    721.1,
+    720,
     85.3,
-    219.2,
-    185.7
+    219,
+    185.7,
+    1.4
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -6603,6 +6972,7 @@
     {
      "exposed": 0.69
     },
+    {},
     {}
    ],
    "primeiraHabilidade": 14.83,
@@ -6767,12 +7137,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    371.9,
-    82.1,
-    366,
-    343.2
+    328.6,
+    65.3,
+    363.9,
+    339.5,
+    66
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -6780,20 +7159,23 @@
    ],
    "statusPorAcao": [
     {
-     "rooted": 1.497,
-     "slow": 1.508
+     "rooted": 0.042,
+     "slow": 0.042
     },
     {
-     "rooted": 0.093,
-     "slow": 0.093
+     "rooted": 0.009,
+     "slow": 0.009
     },
     {
-     "rooted": 2.17,
-     "slow": 0.062
+     "rooted": 2.108
     },
     {
-     "slow": 1.247,
-     "rooted": 0.212
+     "slow": 1.066,
+     "rooted": 0.031
+    },
+    {
+     "rooted": 1.781,
+     "slow": 1.792
     }
    ],
    "primeiraHabilidade": 12.98,
@@ -6958,12 +7340,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    324.6,
-    57.2,
-    543.4,
-    371.2
+    243.4,
+    54.3,
+    525.7,
+    360.4,
+    112.6
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -6971,25 +7362,29 @@
    ],
    "statusPorAcao": [
     {
-     "marked": 5.444,
-     "bleed": 5.468,
+     "marked": 3.092,
+     "bleed": 3.095,
      "cursed": 1.27
     },
     {
      "rooted": 0.324,
      "cursed": 0.324,
-     "marked": 0.216,
-     "bleed": 0.218
+     "marked": 0.16,
+     "bleed": 0.16
     },
     {
-     "marked": 0.932,
-     "bleed": 0.939,
+     "marked": 0.581,
+     "bleed": 0.583,
      "exposed": 3.75
     },
     {
      "exposed": 1.257,
-     "marked": 0.831,
-     "bleed": 0.84
+     "marked": 0.565,
+     "bleed": 0.572
+    },
+    {
+     "marked": 3.025,
+     "bleed": 3.056
     }
    ],
    "primeiraHabilidade": 8.19,
@@ -7154,12 +7549,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    273.3,
-    48.2,
-    190.5,
-    239.1
+    268.2,
+    39.9,
+    188.8,
+    238.8,
+    15.4
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -7167,18 +7571,21 @@
    ],
    "statusPorAcao": [
     {
-     "cursed": 2.749
+     "cursed": 2.716
     },
     {
-     "cursed": 0.141,
+     "cursed": 0.089,
      "bleed": 0.282
     },
     {
-     "cursed": 0.323,
+     "cursed": 0.304,
      "marked": 1.031
     },
     {
-     "cursed": 0.464
+     "cursed": 0.462
+    },
+    {
+     "cursed": 0.106
     }
    ],
    "primeiraHabilidade": 9.32,
@@ -7343,18 +7750,28 @@
     "revives": 0
    },
    "danoPorAcao": [
-    719.1,
+    718.3,
     153.3,
-    0.3,
-    124.1
+    0,
+    124,
+    1.1
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
     0
    ],
    "statusPorAcao": [
+    {},
     {},
     {},
     {},
@@ -7522,12 +7939,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    308,
-    100.9,
-    465.7,
-    369.9
+    307.3,
+    100.6,
+    465.2,
+    369.8,
+    1.6
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -7545,7 +7971,8 @@
     },
     {
      "frozen": 0.496
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 9.61,
    "lutasComHabilidade": 456,
@@ -7709,12 +8136,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    190.2,
-    170.2,
-    187.4,
-    314.4
+    189.6,
+    170.1,
+    187,
+    314.3,
+    1.3
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -7722,23 +8158,22 @@
    ],
    "statusPorAcao": [
     {
-     "confused": 2.941,
-     "silenced": 2.975
+     "confused": 0.051,
+     "silenced": 0.051
     },
     {
      "exposed": 1.389,
-     "sleep": 1.395,
-     "confused": 0.162,
-     "silenced": 0.162
+     "sleep": 1.395
     },
-    {
-     "confused": 0.09,
-     "silenced": 0.094
-    },
+    {},
     {
      "exposed": 0.658,
-     "confused": 0.461,
-     "silenced": 0.467
+     "confused": 0.059,
+     "silenced": 0.059
+    },
+    {
+     "confused": 3.545,
+     "silenced": 3.588
     }
    ],
    "primeiraHabilidade": 11.86,
@@ -7903,12 +8338,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    443.2,
-    140.5,
-    162.5,
-    280.3
+    420,
+    137.2,
+    141.9,
+    277.6,
+    50
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -7920,6 +8364,7 @@
     {
      "bleed": 1.319
     },
+    {},
     {}
    ],
    "primeiraHabilidade": 11.06,
@@ -8084,15 +8529,24 @@
     "revives": 0
    },
    "danoPorAcao": [
-    458.6,
-    190.6,
-    0.4,
-    532.9
+    457.3,
+    190.5,
+    0,
+    532.9,
+    1.8
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
     160.4,
     0,
     235.2,
+    0,
     0
    ],
    "statusPorAcao": [
@@ -8105,7 +8559,8 @@
     },
     {
      "weakened": 1.232
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 20.33,
    "lutasComHabilidade": 463,
@@ -8269,31 +8724,43 @@
     "revives": 0
    },
    "danoPorAcao": [
-    413.3,
-    126.6,
-    273,
-    177.6
+    412.9,
+    126.5,
+    272.9,
+    177.5,
+    0.6
    ],
-   "apoioPorAcao": [
-    278.2,
-    20.1,
-    128.4,
-    14.3
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    7.3,
+    0.3,
+    115.1,
+    0.4,
+    318
    ],
    "statusPorAcao": [
     {
-     "marked": 6.019
+     "marked": 0.157
     },
     {
-     "marked": 0.438
+     "marked": 0.006
     },
     {
      "exposed": 1.286,
-     "marked": 0.301
+     "marked": 0.015
     },
     {
      "paralyzed": 0.998,
-     "marked": 0.305
+     "marked": 0.006
+    },
+    {
+     "marked": 6.879
     }
    ],
    "primeiraHabilidade": 11.25,
@@ -8458,12 +8925,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    437.6,
-    119.2,
+    437.1,
+    119,
     164.3,
-    285.7
+    285.7,
+    0.7
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -8474,6 +8950,7 @@
     {
      "marked": 0.754
     },
+    {},
     {},
     {}
    ],
@@ -8639,12 +9116,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    430.6,
-    125.9,
-    251.5,
-    274.4
+    429.8,
+    125.8,
+    251.4,
+    274.3,
+    0.9
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -8660,7 +9146,8 @@
     },
     {
      "weakened": 0.342
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 15.9,
    "lutasComHabilidade": 412,
@@ -8824,12 +9311,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    437.2,
+    437,
     173.4,
-    143.6,
-    230.3
+    143.5,
+    230.2,
+    0.4
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -8845,7 +9341,8 @@
     },
     {
      "paralyzed": 1.196
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 12.01,
    "lutasComHabilidade": 414,
@@ -9009,12 +9506,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    421,
+    420.3,
     0,
-    117.9,
-    431.3
+    117.8,
+    431.3,
+    0.7
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -9029,7 +9535,8 @@
     {},
     {
      "exposed": 0.826
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 13.75,
    "lutasComHabilidade": 453,
@@ -9193,12 +9700,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    375,
+    374.7,
     149,
     211.1,
-    373.3
+    373.3,
+    0.3
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -9215,7 +9731,8 @@
     },
     {
      "paralyzed": 1.109
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 13.91,
    "lutasComHabilidade": 447,
@@ -9379,22 +9896,32 @@
     "revives": 0
    },
    "danoPorAcao": [
-    473.1,
-    140,
-    247.3,
-    331
+    465.8,
+    139.5,
+    243,
+    330.6,
+    12.5
    ],
-   "apoioPorAcao": [
-    296.6,
-    17.8,
-    305,
-    7.5
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    171.5,
+    0.6,
+    298,
+    1.2,
+    155.6
    ],
    "statusPorAcao": [
     {},
     {
      "exposed": 0.968
     },
+    {},
     {},
     {}
    ],
@@ -9560,16 +10087,25 @@
     "revives": 0
    },
    "danoPorAcao": [
-    268.7,
-    0.2,
-    0.4,
+    267.8,
+    0,
+    0,
+    0,
+    1.6
+   ],
+   "curaPorAcao": [
+    0,
+    0,
+    129.7,
+    0,
     0
    ],
-   "apoioPorAcao": [
-    345.9,
-    174.1,
-    148.1,
-    544.7
+   "escudoPorAcao": [
+    108.6,
+    159.6,
+    0.3,
+    538.5,
+    276.2
    ],
    "statusPorAcao": [
     {},
@@ -9577,6 +10113,7 @@
     {
      "provoked": 5.644
     },
+    {},
     {}
    ],
    "primeiraHabilidade": 10.99,
@@ -9741,31 +10278,43 @@
     "revives": 0
    },
    "danoPorAcao": [
-    330.8,
-    188.6,
-    171,
-    217
+    131.3,
+    145.8,
+    141.2,
+    201.1,
+    287.9
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
     54.8,
     0,
     12.6,
+    0,
     0
    ],
    "statusPorAcao": [
     {
-     "burning": 4.867
+     "burning": 1.797
     },
     {
-     "burning": 1.85
+     "burning": 1.424
     },
     {
      "slow": 2.785,
-     "burning": 0.568
+     "burning": 0.108
     },
     {
-     "burning": 0.291,
+     "burning": 0.11,
      "paralyzed": 1.049
+    },
+    {
+     "burning": 4.137
     }
    ],
    "primeiraHabilidade": 10.3,
@@ -9930,22 +10479,32 @@
     "revives": 0
    },
    "danoPorAcao": [
-    561,
-    224.8,
-    2.6,
-    298
+    544.8,
+    210.4,
+    0,
+    297.6,
+    33.7
    ],
-   "apoioPorAcao": [
-    41.4,
-    12.1,
-    259.4,
-    2.6
+   "curaPorAcao": [
+    0,
+    0,
+    233.1,
+    0,
+    82.3
+   ],
+   "escudoPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
    ],
    "statusPorAcao": [
     {},
     {
      "bleed": 0.78
     },
+    {},
     {},
     {}
    ],
@@ -10111,12 +10670,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    225.7,
-    83.3,
-    129.4,
-    137.5
+    225.2,
+    82.7,
+    129.1,
+    137.5,
+    1.3
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -10130,6 +10698,7 @@
      "marked": 0.525,
      "weakened": 0.535
     },
+    {},
     {},
     {}
    ],
@@ -10295,12 +10864,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    660.9,
-    83,
-    157.2,
-    152.5
+    469.9,
+    77.1,
+    150.3,
+    149.2,
+    207
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -10312,6 +10890,7 @@
     {
      "slow": 0.423
     },
+    {},
     {}
    ],
    "primeiraHabilidade": 21.73,
@@ -10476,15 +11055,24 @@
     "revives": 0
    },
    "danoPorAcao": [
-    449.9,
+    448.5,
     79.3,
-    162.5,
-    193.4
+    162.4,
+    193.4,
+    1.5
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
     65.6,
     17.4,
     6,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
+    0,
+    0,
+    0,
     0
    ],
    "statusPorAcao": [
@@ -10493,6 +11081,7 @@
     {
      "slow": 0.321
     },
+    {},
     {}
    ],
    "primeiraHabilidade": 22.23,
@@ -10657,18 +11246,28 @@
     "revives": 0.289
    },
    "danoPorAcao": [
-    288.8,
+    284.9,
     149.2,
-    36.9,
-    238.3
+    35.3,
+    238.2,
+    5.6
    ],
-   "apoioPorAcao": [
-    311.9,
-    237.1,
-    47.3,
-    389.9
+   "curaPorAcao": [
+    82.8,
+    148.2,
+    0.1,
+    333.7,
+    383.2
+   ],
+   "escudoPorAcao": [
+    0,
+    0,
+    38.2,
+    0,
+    0
    ],
    "statusPorAcao": [
+    {},
     {},
     {},
     {},
@@ -10836,16 +11435,25 @@
     "revives": 0
    },
    "danoPorAcao": [
-    534.5,
-    144.3,
+    533.9,
+    144.2,
     240,
-    245.8
+    245.6,
+    0.9
    ],
-   "apoioPorAcao": [
-    399.3,
-    31.5,
-    50.4,
-    19.2
+   "curaPorAcao": [
+    56.1,
+    0,
+    13,
+    0,
+    431.1
+   ],
+   "escudoPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
    ],
    "statusPorAcao": [
     {},
@@ -10855,7 +11463,8 @@
     },
     {
      "paralyzed": 1.002
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 12.75,
    "lutasComHabilidade": 480,
@@ -11019,12 +11628,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    470,
-    221.5,
-    310.7,
-    275.1
+    416.9,
+    219.8,
+    307.7,
+    274.6,
+    58.3
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -11042,7 +11660,8 @@
     },
     {
      "confused": 0.395
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 18.06,
    "lutasComHabilidade": 464,
@@ -11206,16 +11825,25 @@
     "revives": 0
    },
    "danoPorAcao": [
-    233.3,
-    119.2,
-    188,
-    310.2
+    232.6,
+    119.1,
+    187.7,
+    310.1,
+    1
    ],
-   "apoioPorAcao": [
-    53.3,
-    4.3,
-    5,
-    5.4
+   "curaPorAcao": [
+    0.7,
+    0.2,
+    0.1,
+    0.2,
+    66.7
+   ],
+   "escudoPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
    ],
    "statusPorAcao": [
     {},
@@ -11228,7 +11856,8 @@
     },
     {
      "paralyzed": 0.908
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 13.25,
    "lutasComHabilidade": 403,
@@ -11392,12 +12021,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    379.9,
+    379.3,
     27.3,
-    370.8,
-    96.3
+    370.5,
+    96.2,
+    1
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -11405,18 +12043,20 @@
    ],
    "statusPorAcao": [
     {
-     "weakened": 1.544
+     "weakened": 0.058
     },
     {
      "marked": 0.117,
-     "slow": 0.123,
-     "weakened": 0.012
+     "slow": 0.123
     },
     {
-     "weakened": 0.188
+     "weakened": 0.026
     },
     {
-     "weakened": 0.01
+     "weakened": 0.004
+    },
+    {
+     "weakened": 1.667
     }
    ],
    "primeiraHabilidade": 14.48,
@@ -11581,15 +12221,24 @@
     "revives": 0
    },
    "danoPorAcao": [
-    289.1,
+    288.7,
     0,
-    0.1,
+    0,
+    0,
+    0.5
+   ],
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
     0
    ],
-   "apoioPorAcao": [
+   "escudoPorAcao": [
     0,
     0,
     688.7,
+    0,
     0
    ],
    "statusPorAcao": [
@@ -11601,7 +12250,8 @@
     {},
     {
      "silenced": 0.412
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 12.64,
    "lutasComHabilidade": 496,
@@ -11765,31 +12415,41 @@
     "revives": 0
    },
    "danoPorAcao": [
-    417.6,
-    56.2,
+    416.9,
+    56.1,
     109.9,
-    337.3
+    337.3,
+    0.8
    ],
-   "apoioPorAcao": [
-    113.6,
-    2.2,
-    0.4,
-    9
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    5.2,
+    0.2,
+    0,
+    2.4,
+    117.4
    ],
    "statusPorAcao": [
     {
-     "weakened": 2.053,
-     "exposed": 2.525
+     "exposed": 2.525,
+     "weakened": 0.095
     },
     {
      "marked": 0.368,
-     "weakened": 0.416
+     "weakened": 0.379
+    },
+    {},
+    {
+     "weakened": 0.043
     },
     {
-     "weakened": 0.008
-    },
-    {
-     "weakened": 0.165
+     "weakened": 2.125
     }
    ],
    "primeiraHabilidade": 11.73,
@@ -11954,12 +12614,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    467.2,
-    107.2,
-    255.1,
-    402.4
+    390.1,
+    99.3,
+    245.1,
+    390.8,
+    106.6
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -11967,19 +12636,22 @@
    ],
    "statusPorAcao": [
     {
-     "bleed": 5.175
+     "bleed": 4.762
     },
     {
      "marked": 0.54,
      "exposed": 0.54,
-     "bleed": 0.143
+     "bleed": 0.08
     },
     {
      "paralyzed": 1.044,
-     "bleed": 0.327
+     "bleed": 0.143
     },
     {
-     "bleed": 0.5
+     "bleed": 0.293
+    },
+    {
+     "bleed": 0.867
     }
    ],
    "primeiraHabilidade": 9.3,
@@ -12144,15 +12816,24 @@
     "revives": 0.098
    },
    "danoPorAcao": [
-    337.8,
-    106.8,
-    339.6,
-    303.2
+    204.1,
+    70.8,
+    318.7,
+    257.3,
+    236.6
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
     0,
     0,
     42,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
+    0,
+    0,
+    0,
     0
    ],
    "statusPorAcao": [
@@ -12163,6 +12844,7 @@
     {
      "marked": 1.465
     },
+    {},
     {}
    ],
    "primeiraHabilidade": 8.58,
@@ -12327,18 +13009,28 @@
     "revives": 0
    },
    "danoPorAcao": [
-    602.2,
+    601.1,
     225.1,
-    0.1,
-    296.8
+    0,
+    296.8,
+    1.2
    ],
-   "apoioPorAcao": [
-    276.8,
-    42.8,
-    320.2,
-    8.4
+   "curaPorAcao": [
+    104,
+    18.1,
+    278.3,
+    0.5,
+    247.3
+   ],
+   "escudoPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
    ],
    "statusPorAcao": [
+    {},
     {},
     {},
     {},
@@ -12506,12 +13198,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    351.3,
+    332.3,
     130.1,
-    203.9,
-    165.6
+    190.4,
+    165.3,
+    32.8
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -12527,7 +13228,8 @@
     },
     {
      "weakened": 0.011
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 20.29,
    "lutasComHabilidade": 293,
@@ -12691,12 +13393,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    404.1,
+    381.5,
     150,
-    195.4,
-    226.3
+    164.6,
+    211.8,
+    68
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -12710,7 +13421,8 @@
     {},
     {
      "burning": 0.279
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 18.81,
    "lutasComHabilidade": 334,
@@ -12874,14 +13586,23 @@
     "revives": 0
    },
    "danoPorAcao": [
-    512,
+    511.6,
     183,
     262.6,
-    303.7
+    303.7,
+    0.6
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
     180.1,
     85.9,
+    0,
     0,
     0
    ],
@@ -12893,7 +13614,8 @@
     },
     {
      "exposed": 0.623
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 20.04,
    "lutasComHabilidade": 486,
@@ -13057,12 +13779,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    342.9,
-    92.6,
-    213.5,
-    61.9
+    341.7,
+    92.3,
+    213.4,
+    61.9,
+    1.7
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -13081,7 +13812,8 @@
     },
     {
      "confused": 0.042
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 14.96,
    "lutasComHabilidade": 281,
@@ -13245,12 +13977,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    577.2,
-    181.7,
-    144,
-    192.7
+    576.8,
+    181.6,
+    143.8,
+    192.7,
+    0.7
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -13262,6 +14003,7 @@
     {
      "exposed": 0.228
     },
+    {},
     {}
    ],
    "primeiraHabilidade": 22.24,
@@ -13426,12 +14168,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    395.8,
+    395.4,
     156.6,
     199.2,
-    353.1
+    353.1,
+    0.4
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -13446,7 +14197,8 @@
     {},
     {
      "paralyzed": 0.59
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 13.81,
    "lutasComHabilidade": 485,
@@ -13610,14 +14362,23 @@
     "revives": 0
    },
    "danoPorAcao": [
-    332.3,
-    0.2,
-    292.2,
-    232.9
+    331.7,
+    0,
+    292.1,
+    232.9,
+    0.9
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
     116.1,
     95.6,
+    0,
     0,
     0
    ],
@@ -13629,7 +14390,8 @@
     },
     {
      "paralyzed": 2.268
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 14.17,
    "lutasComHabilidade": 455,
@@ -13793,12 +14555,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    867.9,
+    867.7,
     0,
     231.3,
-    449.6
+    449.6,
+    0.3
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -13812,6 +14583,7 @@
     {
      "slow": 0.434
     },
+    {},
     {}
    ],
    "primeiraHabilidade": 14.89,
@@ -13976,12 +14748,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    503.2,
-    0.1,
-    300.4,
-    516.1
+    502.8,
+    0,
+    300.1,
+    516,
+    0.9
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -13996,6 +14777,7 @@
     {
      "marked": 1.075
     },
+    {},
     {}
    ],
    "primeiraHabilidade": 11.44,
@@ -14160,31 +14942,43 @@
     "revives": 0
    },
    "danoPorAcao": [
-    344.4,
-    52.4,
-    245.4,
-    285.4
+    174.5,
+    41.9,
+    204.4,
+    263.3,
+    243.4
    ],
-   "apoioPorAcao": [
-    49.3,
-    1.5,
-    11,
-    3.5
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    65.3
+   ],
+   "escudoPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
    ],
    "statusPorAcao": [
     {
-     "burning": 4.157
+     "burning": 0.131
     },
     {
-     "burning": 0.629
+     "burning": 0.474
     },
     {
      "cursed": 3.398,
-     "burning": 0.787
+     "burning": 0.038
     },
     {
      "paralyzed": 1.151,
-     "burning": 0.357
+     "burning": 0.018
+    },
+    {
+     "burning": 5.269
     }
    ],
    "primeiraHabilidade": 9.5,
@@ -14349,16 +15143,25 @@
     "revives": 0
    },
    "danoPorAcao": [
-    436.3,
-    5.9,
-    263,
-    353.5
+    403.2,
+    0.2,
+    253.1,
+    350.9,
+    51.2
    ],
-   "apoioPorAcao": [
-    59.3,
-    2.8,
-    68,
-    11.5
+   "curaPorAcao": [
+    50.9,
+    0.1,
+    64.9,
+    11.3,
+    14.5
+   ],
+   "escudoPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
    ],
    "statusPorAcao": [
     {
@@ -14371,6 +15174,7 @@
     {
      "marked": 1.256
     },
+    {},
     {}
    ],
    "primeiraHabilidade": 11.18,
@@ -14535,12 +15339,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    461.3,
-    142.5,
+    461.2,
+    142.4,
     287.6,
-    379.4
+    379.4,
+    0.1
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -14548,19 +15361,22 @@
    ],
    "statusPorAcao": [
     {
-     "confused": 4.841
+     "confused": 0.28
     },
     {
-     "confused": 0.943,
+     "confused": 0.654,
      "marked": 0.641
     },
     {
      "exposed": 0.896,
-     "confused": 0.404
+     "confused": 0.026
     },
     {
      "weakened": 1.424,
-     "confused": 0.204
+     "confused": 0.024
+    },
+    {
+     "confused": 5.409
     }
    ],
    "primeiraHabilidade": 20.39,
@@ -14725,32 +15541,40 @@
     "revives": 0
    },
    "danoPorAcao": [
-    139.8,
+    139.2,
     0,
-    228.2,
-    604.7
+    227.9,
+    604.6,
+    0.9
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
     0
    ],
    "statusPorAcao": [
-    {
-     "electric": 9.122
-    },
+    {},
     {
      "slow": 0.694,
-     "weakened": 0.707,
-     "electric": 0.095
+     "weakened": 0.707
     },
     {
-     "slow": 3.236,
-     "electric": 0.428
+     "slow": 3.236
     },
     {
-     "electric": 3.384
+     "electric": 3.248
+    },
+    {
+     "electric": 9.781
     }
    ],
    "primeiraHabilidade": 7.7,
@@ -14915,12 +15739,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    483.4,
+    482.8,
     53.2,
-    342.1,
-    408.5
+    342,
+    408.5,
+    0.8
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -14936,6 +15769,7 @@
     {
      "weakened": 2.871
     },
+    {},
     {}
    ],
    "primeiraHabilidade": 6.67,
@@ -15100,16 +15934,25 @@
     "revives": 0
    },
    "danoPorAcao": [
-    173.4,
-    0.1,
-    0.1,
-    46.2
+    171.7,
+    0,
+    0,
+    46.2,
+    1.9
    ],
-   "apoioPorAcao": [
-    101.8,
-    172.7,
-    118.9,
-    0.4
+   "curaPorAcao": [
+    2,
+    0.2,
+    0.3,
+    0,
+    107.4
+   ],
+   "escudoPorAcao": [
+    0,
+    169.8,
+    114.1,
+    0,
+    0
    ],
    "statusPorAcao": [
     {},
@@ -15117,7 +15960,8 @@
     {},
     {
      "paralyzed": 0.155
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 15.58,
    "lutasComHabilidade": 323,
@@ -15281,16 +16125,25 @@
     "revives": 0
    },
    "danoPorAcao": [
-    328.2,
-    193.4,
-    175.8,
-    530.5
+    326.5,
+    191.9,
+    175.2,
+    529.2,
+    5.1
    ],
-   "apoioPorAcao": [
-    84.7,
-    77,
-    10.4,
-    111.1
+   "curaPorAcao": [
+    82.7,
+    75.7,
+    10.2,
+    77.9,
+    4.5
+   ],
+   "escudoPorAcao": [
+    0,
+    0,
+    0,
+    32.4,
+    0
    ],
    "statusPorAcao": [
     {},
@@ -15316,7 +16169,8 @@
      "bleed": 0.014,
      "sleep": 0.004,
      "bomb": 0.002
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 10.61,
    "lutasComHabilidade": 453,
@@ -15480,12 +16334,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    313.1,
-    160.1,
-    257.1,
-    611.6
+    304,
+    146,
+    247.4,
+    601.6,
+    43.1
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -15502,7 +16365,8 @@
     },
     {
      "slow": 1.972
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 15.68,
    "lutasComHabilidade": 449,
@@ -15666,12 +16530,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    312.2,
-    73,
+    311.4,
+    72.8,
     37.2,
-    133.1
+    133,
+    1.1
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -15685,7 +16558,8 @@
     },
     {
      "silenced": 1.637
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 13.04,
    "lutasComHabilidade": 411,
@@ -15849,18 +16723,28 @@
     "revives": 0
    },
    "danoPorAcao": [
-    571.3,
-    181.6,
+    570.6,
+    181.3,
     295.6,
-    170.8
+    170.8,
+    1.2
    ],
-   "apoioPorAcao": [
-    258.3,
-    41.7,
-    277.1,
-    6.9
+   "curaPorAcao": [
+    26.9,
+    16.3,
+    241.6,
+    0.3,
+    298.8
+   ],
+   "escudoPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
    ],
    "statusPorAcao": [
+    {},
     {},
     {},
     {},
@@ -16028,31 +16912,43 @@
     "revives": 0
    },
    "danoPorAcao": [
-    311.5,
-    55.8,
-    184.8,
-    346.8
+    234.4,
+    42.6,
+    162.5,
+    332.5,
+    127
    ],
-   "apoioPorAcao": [
-    59.9,
-    5.8,
-    1.3,
-    14.7
+   "curaPorAcao": [
+    20.2,
+    3.6,
+    0,
+    13.6,
+    44.4
+   ],
+   "escudoPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
    ],
    "statusPorAcao": [
     {
-     "bleed": 3.504
+     "bleed": 2.178
     },
     {
      "exposed": 0.354,
-     "bleed": 0.533
+     "bleed": 0.48
     },
     {
      "marked": 1.111,
-     "bleed": 0.55
+     "bleed": 0.38
     },
     {
-     "bleed": 0.496
+     "bleed": 0.383
+    },
+    {
+     "bleed": 1.661
     }
    ],
    "primeiraHabilidade": 8.93,
@@ -16217,15 +17113,24 @@
     "revives": 0
    },
    "danoPorAcao": [
-    507.7,
+    506.1,
     69.5,
     65.3,
-    44.3
+    44.3,
+    1.7
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
     177.6,
     42,
     32.5,
+    0,
     0
    ],
    "statusPorAcao": [
@@ -16239,7 +17144,8 @@
     },
     {
      "exposed": 0.019
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 30.97,
    "lutasComHabilidade": 131,
@@ -16403,12 +17309,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    257.6,
+    257.3,
     92.7,
     79.5,
-    457.8
+    457.7,
+    0.5
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -16416,17 +17331,20 @@
    ],
    "statusPorAcao": [
     {
-     "confused": 4.664
+     "confused": 0.233
     },
     {
-     "confused": 0.71
+     "confused": 0.554
     },
     {
-     "confused": 0.488
+     "confused": 0.349
     },
     {
      "exposed": 0.518,
-     "confused": 0.313
+     "confused": 0.027
+    },
+    {
+     "confused": 5.013
     }
    ],
    "primeiraHabilidade": 13.69,
@@ -16591,15 +17509,24 @@
     "revives": 0
    },
    "danoPorAcao": [
-    336.4,
-    170.7,
-    252.7,
-    164.6
+    335.8,
+    170.6,
+    252.5,
+    164.6,
+    0.8
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
     0,
     0,
     420.9,
+    0,
     0
    ],
    "statusPorAcao": [
@@ -16608,6 +17535,7 @@
      "marked": 0.771,
      "weakened": 0.788
     },
+    {},
     {},
     {}
    ],
@@ -16773,12 +17701,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    307.6,
-    74.5,
-    191.8,
-    348.5
+    292.5,
+    72.5,
+    173.1,
+    339.9,
+    44.3
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -16799,7 +17736,8 @@
     },
     {
      "exposed": 1.105
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 11.77,
    "lutasComHabilidade": 455,
@@ -16963,15 +17901,24 @@
     "revives": 0
    },
    "danoPorAcao": [
-    454.6,
+    452.4,
     111.5,
     0,
-    182.7
+    182.6,
+    2.3
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
     0,
     0,
     249.3,
+    0,
     0
    ],
    "statusPorAcao": [
@@ -16982,7 +17929,8 @@
     {},
     {
      "slow": 0.306
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 13.22,
    "lutasComHabilidade": 433,
@@ -17146,16 +18094,25 @@
     "revives": 0
    },
    "danoPorAcao": [
-    263.6,
-    63.4,
-    317.4,
-    133.7
+    261.3,
+    63.1,
+    316.6,
+    133.7,
+    3.3
    ],
-   "apoioPorAcao": [
-    96.6,
-    30.4,
-    201.8,
-    3
+   "curaPorAcao": [
+    18,
+    27,
+    4.5,
+    2.1,
+    88.8
+   ],
+   "escudoPorAcao": [
+    0,
+    0,
+    191.5,
+    0,
+    0
    ],
    "statusPorAcao": [
     {},
@@ -17165,7 +18122,8 @@
     },
     {
      "exposed": 0.54
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 21.09,
    "lutasComHabilidade": 343,
@@ -17329,14 +18287,23 @@
     "revives": 0
    },
    "danoPorAcao": [
-    466.9,
+    466.4,
     190.8,
     222.4,
-    246.1
+    246,
+    0.5
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
     0,
-    286.1,
+    144.7,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
+    141.5,
+    0,
     0,
     0
    ],
@@ -17346,7 +18313,8 @@
     {},
     {
      "confused": 1.58
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 11.54,
    "lutasComHabilidade": 450,
@@ -17510,16 +18478,25 @@
     "revives": 0
    },
    "danoPorAcao": [
-    307,
-    12.7,
-    1.4,
-    262.2
+    295,
+    0.3,
+    0,
+    262,
+    25.9
    ],
-   "apoioPorAcao": [
-    734.1,
-    254.4,
-    1064.7,
-    70.8
+   "curaPorAcao": [
+    119.7,
+    0,
+    38.6,
+    0,
+    594.9
+   ],
+   "escudoPorAcao": [
+    0,
+    189.5,
+    845.5,
+    0,
+    335.8
    ],
    "statusPorAcao": [
     {},
@@ -17527,7 +18504,8 @@
     {},
     {
      "rooted": 1.351
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 11.76,
    "lutasComHabilidade": 479,
@@ -17691,12 +18669,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    760.1,
-    118.4,
-    278.9,
-    141
+    548.4,
+    101,
+    267.3,
+    137.6,
+    244.1
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -17713,7 +18700,8 @@
     },
     {
      "slow": 0.572
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 21.1,
    "lutasComHabilidade": 486,
@@ -17877,31 +18865,41 @@
     "revives": 0
    },
    "danoPorAcao": [
-    434.2,
+    433.1,
     109.1,
-    0.3,
-    369.9
+    0,
+    369.9,
+    1.4
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
     0,
     0,
     449.7,
+    0,
     0
    ],
    "statusPorAcao": [
     {
-     "slow": 7.019
+     "slow": 1.876
     },
     {
-     "slow": 0.797
+     "slow": 0.562
     },
     {
-     "weakened": 4.006,
-     "slow": 0.469
+     "weakened": 4.006
     },
     {
-     "exposed": 1.33,
-     "slow": 0.139
+     "exposed": 1.33
+    },
+    {
+     "slow": 5.985
     }
    ],
    "primeiraHabilidade": 12.7,
@@ -18066,16 +19064,25 @@
     "revives": 0
    },
    "danoPorAcao": [
-    278.9,
-    0.6,
-    50.5,
-    294.2
+    278.1,
+    0,
+    50.4,
+    294.2,
+    1.5
    ],
-   "apoioPorAcao": [
-    334.1,
-    224.1,
-    4.7,
-    16.1
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    100.9,
+    211,
+    0.2,
+    0.1,
+    266.8
    ],
    "statusPorAcao": [
     {},
@@ -18085,7 +19092,8 @@
     },
     {
      "exposed": 0.633
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 12.48,
    "lutasComHabilidade": 379,
@@ -18249,15 +19257,24 @@
     "revives": 0
    },
    "danoPorAcao": [
-    420.7,
+    419.8,
     105.3,
-    157.7,
-    289.1
+    157.6,
+    289,
+    1.2
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
     0,
     0,
     249.4,
+    0,
     0
    ],
    "statusPorAcao": [
@@ -18266,6 +19283,7 @@
      "marked": 0.474,
      "weakened": 0.474
     },
+    {},
     {},
     {}
    ],
@@ -18431,18 +19449,28 @@
     "revives": 0
    },
    "danoPorAcao": [
-    524.7,
-    175,
-    0.3,
-    160.4
+    524.3,
+    174.8,
+    0,
+    160.4,
+    1
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
     0,
     0,
     358.2,
+    0,
     0
    ],
    "statusPorAcao": [
+    {},
     {},
     {},
     {},
@@ -18610,15 +19638,24 @@
     "revives": 0
    },
    "danoPorAcao": [
-    538.3,
-    155.3,
-    383.7,
-    177.7
+    537.5,
+    155.2,
+    383.6,
+    177.6,
+    1
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
     0,
     0,
     236.3,
+    0,
     0
    ],
    "statusPorAcao": [
@@ -18627,7 +19664,8 @@
     {},
     {
      "exposed": 0.662
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 17.07,
    "lutasComHabilidade": 469,
@@ -18791,12 +19829,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    682,
+    681.8,
     137,
     218,
-    289.8
+    289.8,
+    0.3
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -18810,7 +19857,8 @@
     {},
     {
      "paralyzed": 0.606
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 16.71,
    "lutasComHabilidade": 422,
@@ -18974,12 +20022,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    229.4,
-    115.2,
-    147.5,
-    356.9
+    228.4,
+    114.8,
+    147.3,
+    356.8,
+    1.8
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -18987,22 +20044,26 @@
    ],
    "statusPorAcao": [
     {
-     "marked": 4.516,
-     "weakened": 4.524
+     "marked": 0.567,
+     "weakened": 0.567
     },
     {
-     "weakened": 1.095,
-     "marked": 0.474
+     "weakened": 0.714,
+     "marked": 0.097
     },
     {
      "exposed": 0.712,
-     "marked": 0.23,
-     "weakened": 0.232
+     "marked": 0.111,
+     "weakened": 0.111
     },
     {
-     "marked": 0.365,
-     "weakened": 0.371,
+     "marked": 0.31,
+     "weakened": 0.317,
      "exposed": 2.23
+    },
+    {
+     "marked": 4.5,
+     "weakened": 4.514
     }
    ],
    "primeiraHabilidade": 11.67,
@@ -19167,12 +20228,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    412.9,
-    186.5,
-    126.1,
-    600.4
+    385.1,
+    153.3,
+    118.5,
+    574.3,
+    94.7
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -19180,18 +20250,21 @@
    ],
    "statusPorAcao": [
     {
-     "weakened": 4.224
+     "weakened": 0.156
     },
     {
      "bleed": 0.52,
-     "weakened": 0.248
+     "weakened": 0.018
     },
     {
-     "weakened": 0.534
+     "weakened": 0.029
     },
     {
      "burning": 1.729,
-     "weakened": 0.228
+     "weakened": 0.025
+    },
+    {
+     "weakened": 5.006
     }
    ],
    "primeiraHabilidade": 15.16,
@@ -19356,16 +20429,25 @@
     "revives": 0
    },
    "danoPorAcao": [
-    720.5,
-    177.5,
-    260.7,
-    302.3
+    689.5,
+    175.4,
+    213.4,
+    287.3,
+    95.4
    ],
-   "apoioPorAcao": [
-    36,
-    2.4,
-    280.2,
-    6.3
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    1.7,
+    0.2,
+    257.8,
+    0.3,
+    65
    ],
    "statusPorAcao": [
     {},
@@ -19375,7 +20457,8 @@
     {},
     {
      "exposed": 0.844
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 20.56,
    "lutasComHabilidade": 388,
@@ -19539,31 +20622,43 @@
     "revives": 0
    },
    "danoPorAcao": [
-    277,
+    276.7,
     105.8,
-    297.3,
-    85.2
+    297.1,
+    85.2,
+    0.5
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
     94.9,
     0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
+    0,
     938.6,
+    0,
     0
    ],
    "statusPorAcao": [
     {
-     "rooted": 3.577
+     "rooted": 0.073
     },
     {
-     "rooted": 1.423,
+     "rooted": 1.277,
      "blind": 0.805
     },
     {
-     "rooted": 0.41
+     "rooted": 0.009
     },
     {
-     "rooted": 0.195,
-     "silenced": 0.345
+     "silenced": 0.345,
+     "rooted": 0.161
+    },
+    {
+     "rooted": 4.086
     }
    ],
    "primeiraHabilidade": 11.23,
@@ -19728,15 +20823,24 @@
     "revives": 0
    },
    "danoPorAcao": [
-    399.4,
-    149.2,
-    0.6,
-    306.3
+    397.7,
+    148.7,
+    0,
+    305.8,
+    3.2
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
     0,
     0,
     379.7,
+    0,
     0
    ],
    "statusPorAcao": [
@@ -19749,7 +20853,8 @@
     },
     {
      "silenced": 0.852
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 14.11,
    "lutasComHabilidade": 453,
@@ -19913,31 +21018,38 @@
     "revives": 0
    },
    "danoPorAcao": [
-    279.2,
-    0.1,
+    278.3,
+    0,
     42.5,
-    407.1
+    406.8,
+    1.3
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
     0
    ],
    "statusPorAcao": [
+    {},
     {
-     "marked": 4.585
-    },
-    {
-     "marked": 0.865,
+     "marked": 0.722,
      "exposed": 0.731
     },
     {
-     "slow": 0.194,
-     "marked": 0.088
+     "slow": 0.194
     },
+    {},
     {
-     "marked": 0.316
+     "marked": 5.133
     }
    ],
    "primeiraHabilidade": 11.75,
@@ -20102,12 +21214,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    556.8,
-    147.4,
-    199,
-    123.3
+    555.7,
+    147.3,
+    198.8,
+    123.3,
+    1.5
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -20119,6 +21240,7 @@
     {
      "exposed": 2.115
     },
+    {},
     {}
    ],
    "primeiraHabilidade": 15.95,
@@ -20283,12 +21405,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    277.9,
-    85.5,
-    134.3,
-    582.1
+    255.2,
+    84.8,
+    128.9,
+    579.7,
+    31.2
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -20305,6 +21436,7 @@
     {
      "slow": 0.677
     },
+    {},
     {}
    ],
    "primeiraHabilidade": 12.23,
@@ -20469,12 +21601,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    543.6,
-    75.8,
-    204.1,
-    182.6
+    519.6,
+    74.4,
+    203.3,
+    180.3,
+    28.4
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -20482,16 +21623,19 @@
    ],
    "statusPorAcao": [
     {
-     "slow": 1.669
+     "slow": 0.069
     },
     {
-     "slow": 0.026
+     "slow": 0.004
     },
     {
-     "slow": 0.746
+     "slow": 0.74
     },
     {
-     "slow": 0.032
+     "slow": 0.006
+    },
+    {
+     "slow": 1.654
     }
    ],
    "primeiraHabilidade": 23.47,
@@ -20656,16 +21800,25 @@
     "revives": 0
    },
    "danoPorAcao": [
-    459.6,
-    0.1,
-    212.5,
-    382.3
+    459,
+    0,
+    212.4,
+    382.2,
+    0.8
    ],
-   "apoioPorAcao": [
-    351.7,
-    245.9,
-    11.8,
-    216
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    168.8,
+    234.7,
+    0.9,
+    213.2,
+    207.8
    ],
    "statusPorAcao": [
     {},
@@ -20675,7 +21828,8 @@
     },
     {
      "slow": 2.115
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 14.41,
    "lutasComHabilidade": 437,
@@ -20839,16 +21993,25 @@
     "revives": 0
    },
    "danoPorAcao": [
-    539.1,
-    164.5,
-    0.3,
-    374.5
+    537.1,
+    164,
+    0,
+    374.4,
+    3.1
    ],
-   "apoioPorAcao": [
-    632.4,
-    77.2,
-    367.2,
-    45.7
+   "curaPorAcao": [
+    72.3,
+    42.2,
+    0.5,
+    12.9,
+    162.2
+   ],
+   "escudoPorAcao": [
+    198.9,
+    15.2,
+    328,
+    18.3,
+    272.1
    ],
    "statusPorAcao": [
     {},
@@ -20858,7 +22021,8 @@
     {},
     {
      "paralyzed": 2.062
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 15.26,
    "lutasComHabilidade": 445,
@@ -21022,12 +22186,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    382.4,
+    382,
     42.4,
-    368.3,
-    145.9
+    368.2,
+    145.9,
+    0.5
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -21043,7 +22216,8 @@
     },
     {
      "silenced": 0.289
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 15.42,
    "lutasComHabilidade": 376,
@@ -21207,13 +22381,22 @@
     "revives": 0
    },
    "danoPorAcao": [
-    269.3,
-    70.8,
-    123.8,
-    585.5
+    268.7,
+    70.7,
+    123.7,
+    585.4,
+    0.9
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
     71,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
+    0,
     0,
     0,
     0
@@ -21228,7 +22411,8 @@
     {},
     {
      "paralyzed": 3.643
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 6.75,
    "lutasComHabilidade": 480,
@@ -21392,12 +22576,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    649.1,
+    648.5,
     72.8,
-    209.8,
-    448.6
+    209.7,
+    448.6,
+    0.6
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -21411,6 +22604,7 @@
     {
      "slow": 0.489
     },
+    {},
     {}
    ],
    "primeiraHabilidade": 15.74,
@@ -21575,18 +22769,28 @@
     "revives": 0.367
    },
    "danoPorAcao": [
-    219.3,
+    218.6,
     132.1,
     114.5,
-    192.5
+    192.5,
+    0.7
    ],
-   "apoioPorAcao": [
-    489.2,
-    261.7,
-    39.4,
-    292.8
+   "curaPorAcao": [
+    2.5,
+    122.3,
+    0.3,
+    258.2,
+    603.1
+   ],
+   "escudoPorAcao": [
+    0,
+    96.6,
+    0,
+    0,
+    0
    ],
    "statusPorAcao": [
+    {},
     {},
     {},
     {},
@@ -21754,12 +22958,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    310.8,
-    85.5,
-    369.1,
-    123.5
+    290.8,
+    84.4,
+    357.8,
+    123.4,
+    32.4
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -21767,19 +22980,22 @@
    ],
    "statusPorAcao": [
     {
-     "exposed": 7.388
+     "exposed": 6.931
     },
     {
-     "exposed": 0.156
+     "exposed": 0.119
     },
     {
      "silenced": 1.614,
      "bleed": 1.614,
-     "exposed": 0.863
+     "exposed": 0.527
     },
     {
      "paralyzed": 0.804,
      "exposed": 0.471
+    },
+    {
+     "exposed": 0.828
     }
    ],
    "primeiraHabilidade": 7.66,
@@ -21944,12 +23160,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    402.2,
-    384.8,
-    0.1,
-    433.1
+    401.2,
+    384.7,
+    0,
+    433,
+    1.2
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -21965,6 +23190,7 @@
      "rooted": 1.164,
      "marked": 1.185
     },
+    {},
     {}
    ],
    "primeiraHabilidade": 13.35,
@@ -22129,12 +23355,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    657,
-    177.9,
-    261.6,
-    357.5
+    656.1,
+    177.8,
+    261.2,
+    357.4,
+    1.5
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -22149,7 +23384,8 @@
     {},
     {
      "exposed": 0.389
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 14.67,
    "lutasComHabilidade": 429,
@@ -22313,18 +23549,28 @@
     "revives": 0
    },
    "danoPorAcao": [
-    394.8,
-    120.9,
-    277.8,
-    581.6
+    381.5,
+    115.8,
+    277.2,
+    581.5,
+    19.2
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
     0,
     0,
     181.7,
+    0,
     0
    ],
    "statusPorAcao": [
+    {},
     {},
     {},
     {},
@@ -22492,12 +23738,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    620,
+    619.4,
     77.4,
-    212.5,
-    219.9
+    212.4,
+    219.9,
+    0.7
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -22509,6 +23764,7 @@
     {
      "slow": 0.595
     },
+    {},
     {}
    ],
    "primeiraHabilidade": 18.01,
@@ -22673,29 +23929,37 @@
     "revives": 0
    },
    "danoPorAcao": [
-    378.4,
-    129.9,
-    343.3,
-    232
+    374.7,
+    129.2,
+    342,
+    231.9,
+    5.9
    ],
-   "apoioPorAcao": [
-    0.4,
+   "curaPorAcao": [
     0.1,
-    29.3,
+    0,
+    8.2,
+    0,
+    0.5
+   ],
+   "escudoPorAcao": [
+    0,
+    0,
+    21,
+    0,
     0
    ],
    "statusPorAcao": [
     {
-     "weakened": 1.534
+     "weakened": 0.032
     },
     {
      "exposed": 0.841,
-     "weakened": 0.243
+     "weakened": 0.02
     },
     {
      "electric": 1.191,
      "slow": 1.241,
-     "weakened": 0.295,
      "silenced": 0.028,
      "cursed": 0.016,
      "rooted": 0.038,
@@ -22703,6 +23967,7 @@
      "confused": 0.062,
      "paralyzed": 0.036,
      "exposed": 0.161,
+     "weakened": 0.143,
      "marked": 0.066,
      "provoked": 0.028,
      "bleed": 0.006,
@@ -22712,7 +23977,10 @@
      "poison": 0.006
     },
     {
-     "weakened": 0.072
+     "weakened": 0.022
+    },
+    {
+     "weakened": 1.926
     }
    ],
    "primeiraHabilidade": 13.5,
@@ -22877,12 +24145,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    392.4,
-    76.2,
-    194.7,
-    468.8
+    338.3,
+    70.7,
+    188.3,
+    465.5,
+    69.3
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -22890,18 +24167,21 @@
    ],
    "statusPorAcao": [
     {
-     "electric": 4.42,
+     "electric": 3.249,
      "burning": 2.022
     },
     {
-     "electric": 1.542
+     "electric": 1.4
     },
     {
-     "electric": 0.406
+     "electric": 0.167
     },
     {
      "paralyzed": 2.829,
-     "electric": 0.357
+     "electric": 0.287
+    },
+    {
+     "electric": 1.622
     }
    ],
    "primeiraHabilidade": 10.46,
@@ -23066,13 +24346,22 @@
     "revives": 0
    },
    "danoPorAcao": [
-    582.5,
-    172.8,
-    178.3,
-    377.8
+    581.8,
+    172.7,
+    178.1,
+    377.8,
+    1
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
     240.9,
+    0,
     0,
     0,
     0
@@ -23083,6 +24372,7 @@
     {
      "exposed": 0.757
     },
+    {},
     {}
    ],
    "primeiraHabilidade": 21.61,
@@ -23247,16 +24537,25 @@
     "revives": 0
    },
    "danoPorAcao": [
-    371.3,
-    139.7,
-    232,
-    321.1
+    346.2,
+    123.6,
+    203.9,
+    319.8,
+    70.5
    ],
-   "apoioPorAcao": [
-    186.7,
-    18.9,
-    234.6,
-    6.3
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    5.8,
+    0.7,
+    218.9,
+    0.9,
+    220.3
    ],
    "statusPorAcao": [
     {},
@@ -23268,7 +24567,8 @@
     },
     {
      "paralyzed": 1.816
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 17.32,
    "lutasComHabilidade": 442,
@@ -23432,12 +24732,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    466.8,
-    150.9,
-    211.7,
-    316.9
+    466.2,
+    150.7,
+    211.6,
+    316.8,
+    0.9
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -23451,7 +24760,8 @@
     },
     {
      "exposed": 0.629
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 16.44,
    "lutasComHabilidade": 471,
@@ -23615,12 +24925,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    516.9,
+    515.8,
     146.2,
     191.9,
-    276.6
+    276.6,
+    1.1
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -23634,7 +24953,8 @@
     {},
     {
      "paralyzed": 0.543
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 17.18,
    "lutasComHabilidade": 422,
@@ -23798,12 +25118,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    269.8,
-    96.9,
-    119.1,
-    290.5
+    268.7,
+    96.5,
+    118.9,
+    290.5,
+    1.7
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -23811,19 +25140,22 @@
    ],
    "statusPorAcao": [
     {
-     "marked": 4.022
+     "marked": 1.748
     },
     {
      "weakened": 0.56,
-     "marked": 0.337
+     "marked": 0.069
     },
     {
      "exposed": 0.571,
-     "marked": 0.132
+     "marked": 0.078
     },
     {
-     "marked": 0.395,
+     "marked": 0.324,
      "silenced": 0.404
+    },
+    {
+     "marked": 2.667
     }
    ],
    "primeiraHabilidade": 9.99,
@@ -23988,12 +25320,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    361.3,
-    41.3,
-    373.7,
-    312.6
+    196.4,
+    35.8,
+    300.6,
+    284.7,
+    271.5
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -24013,7 +25354,8 @@
     },
     {
      "exposed": 1.464
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 6.8,
    "lutasComHabilidade": 500,
@@ -24177,12 +25519,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    301.6,
+    301,
     74.4,
-    0.5,
-    515.6
+    0,
+    515.3,
+    1.5
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -24190,20 +25541,23 @@
    ],
    "statusPorAcao": [
     {
-     "slow": 3.328,
+     "slow": 0.18,
      "frozen": 1.06
     },
     {
-     "slow": 0.683
+     "slow": 0.552
     },
     {
      "exposed": 1.435,
-     "slow": 1.925,
+     "slow": 1.452,
      "frozen": 1.439
     },
     {
      "rooted": 0.907,
-     "slow": 0.348
+     "slow": 0.02
+    },
+    {
+     "slow": 4.08
     }
    ],
    "primeiraHabilidade": 10.82,
@@ -24368,12 +25722,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    534.1,
-    114.1,
-    258.5,
-    219.9
+    240.6,
+    86.2,
+    195.2,
+    200.6,
+    403.9
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -24381,17 +25744,20 @@
    ],
    "statusPorAcao": [
     {
-     "burning": 12.344
+     "burning": 8.282
     },
     {
-     "burning": 0.333
+     "burning": 0.047
     },
     {
      "exposed": 1.631,
-     "burning": 2.584
+     "burning": 1.756
     },
     {
-     "burning": 0.943
+     "burning": 0.813
+    },
+    {
+     "burning": 5.306
     }
    ],
    "primeiraHabilidade": 8.79,
@@ -24556,30 +25922,39 @@
     "revives": 0
    },
    "danoPorAcao": [
-    267.9,
-    54.9,
-    0.1,
-    465.8
+    266.8,
+    54.6,
+    0,
+    465.6,
+    1.8
    ],
-   "apoioPorAcao": [
-    212,
-    9.3,
-    369.1,
-    16.8
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    2.2,
+    0.4,
+    358.1,
+    0,
+    246.5
    ],
    "statusPorAcao": [
     {
-     "electric": 4.208
+     "electric": 0.044
     },
     {
-     "electric": 1.239
+     "electric": 1.061
+    },
+    {},
+    {
+     "paralyzed": 3.114
     },
     {
-     "electric": 0.221
-    },
-    {
-     "paralyzed": 3.114,
-     "electric": 0.33
+     "electric": 4.893
     }
    ],
    "primeiraHabilidade": 10.78,
@@ -24744,12 +26119,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    770.7,
-    11.7,
-    238.8,
-    194.6
+    569.9,
+    1.4,
+    224.5,
+    187.7,
+    232.4
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -24757,17 +26141,20 @@
    ],
    "statusPorAcao": [
     {
-     "exposed": 4.766
+     "exposed": 0.284
     },
     {
-     "exposed": 0.266
+     "exposed": 0.028
     },
     {
      "paralyzed": 0.937,
-     "exposed": 0.355
+     "exposed": 0.026
     },
     {
-     "exposed": 0.522
+     "exposed": 0.379
+    },
+    {
+     "exposed": 5.193
     }
    ],
    "primeiraHabilidade": 17.67,
@@ -24932,12 +26319,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    453.2,
-    146.2,
-    127.8,
-    355.3
+    449.3,
+    143.9,
+    126.5,
+    347.8,
+    15.1
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -24950,7 +26346,8 @@
     {
      "exposed": 0.462,
      "burning": 0.478
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 14.31,
    "lutasComHabilidade": 462,
@@ -25114,18 +26511,28 @@
     "revives": 0.182
    },
    "danoPorAcao": [
-    274.7,
+    274.2,
     154,
     0,
-    207.8
+    207.7,
+    0.5
    ],
-   "apoioPorAcao": [
-    152.3,
-    229.3,
-    202.5,
-    271.2
+   "curaPorAcao": [
+    2.6,
+    126.1,
+    174.1,
+    265.2,
+    191.2
+   ],
+   "escudoPorAcao": [
+    0,
+    96.3,
+    0,
+    0,
+    0
    ],
    "statusPorAcao": [
+    {},
     {},
     {},
     {},
@@ -25293,12 +26700,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    568.2,
-    123.2,
-    286.7,
-    283.7
+    420.3,
+    118.2,
+    277.5,
+    276.7,
+    169.2
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -25313,6 +26729,7 @@
     {
      "marked": 2.113
     },
+    {},
     {}
    ],
    "primeiraHabilidade": 13.61,
@@ -25477,12 +26894,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    357,
-    0.1,
+    356.1,
+    0,
     172.1,
-    286.1
+    286,
+    1.1
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -25490,21 +26916,25 @@
    ],
    "statusPorAcao": [
     {
-     "weakened": 4.608,
-     "exposed": 6.574
+     "exposed": 2.257,
+     "weakened": 0.301
     },
     {
-     "weakened": 0.135,
-     "exposed": 0.135
+     "weakened": 0.008,
+     "exposed": 0.008
     },
     {
      "paralyzed": 0.782,
-     "weakened": 0.281,
-     "exposed": 0.287
+     "weakened": 0.022,
+     "exposed": 0.022
     },
     {
-     "weakened": 0.273,
-     "exposed": 0.275
+     "weakened": 0.022,
+     "exposed": 0.022
+    },
+    {
+     "weakened": 4.943,
+     "exposed": 4.962
     }
    ],
    "primeiraHabilidade": 14.88,
@@ -25669,29 +27099,41 @@
     "revives": 0
    },
    "danoPorAcao": [
-    698.1,
-    130,
-    370.5,
-    45.5
+    268.5,
+    78.1,
+    289.8,
+    37.5,
+    570
    ],
-   "apoioPorAcao": [
-    247.2,
-    43.2,
-    98,
-    4.1
+   "curaPorAcao": [
+    53.9,
+    27.5,
+    75.2,
+    0.8,
+    235
+   ],
+   "escudoPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
    ],
    "statusPorAcao": [
     {
-     "poison": 14.1
+     "poison": 1.489
     },
     {
-     "poison": 0.876
+     "poison": 0.047
     },
     {
-     "poison": 4.31
+     "poison": 2.947
     },
     {
-     "poison": 0.218
+     "poison": 0.045
+    },
+    {
+     "poison": 14.976
     }
    ],
    "primeiraHabilidade": 14.17,
@@ -25856,12 +27298,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    638.4,
-    5.6,
-    378.1,
-    388.4
+    637.9,
+    5.3,
+    378,
+    388.3,
+    0.9
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -25878,7 +27329,8 @@
     },
     {
      "silenced": 0.016
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 14.36,
    "lutasComHabilidade": 323,
@@ -26042,33 +27494,45 @@
     "revives": 0.205
    },
    "danoPorAcao": [
-    239.5,
-    44.2,
-    0.6,
-    557
+    238.7,
+    44.1,
+    0,
+    556.7,
+    1.7
    ],
-   "apoioPorAcao": [
-    99,
-    18.7,
-    185.3,
-    126.3
+   "curaPorAcao": [
+    21.5,
+    15.1,
+    0.2,
+    122,
+    97
+   ],
+   "escudoPorAcao": [
+    0,
+    0,
+    173.5,
+    0,
+    0
    ],
    "statusPorAcao": [
     {
-     "weakened": 7.05,
-     "slow": 5.119
+     "slow": 5.119,
+     "weakened": 1.434
     },
     {
-     "weakened": 0.407,
+     "weakened": 0.187,
      "marked": 0.48
     },
     {
      "cursed": 1.203,
-     "weakened": 0.742
+     "weakened": 0.015
     },
     {
      "slow": 2.692,
-     "weakened": 0.86
+     "weakened": 0.587
+    },
+    {
+     "weakened": 6.836
     }
    ],
    "primeiraHabilidade": 12.17,
@@ -26233,16 +27697,25 @@
     "revives": 0
    },
    "danoPorAcao": [
-    409.7,
-    133.3,
-    367.2,
-    218.1
+    382.4,
+    125.1,
+    325.3,
+    199.6,
+    95.9
    ],
-   "apoioPorAcao": [
-    29.1,
-    203,
-    6.4,
-    4.6
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    1.6,
+    185.8,
+    0.1,
+    0.2,
+    55.4
    ],
    "statusPorAcao": [
     {},
@@ -26253,7 +27726,8 @@
     {
      "confused": 1.055,
      "silenced": 1.067
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 13.67,
    "lutasComHabilidade": 470,
@@ -26417,12 +27891,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    344.8,
+    344.3,
     113.7,
     106.6,
-    511.1
+    511.1,
+    0.6
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -26442,7 +27925,8 @@
     {
      "weakened": 0.478,
      "rooted": 0.484
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 14.3,
    "lutasComHabilidade": 470,
@@ -26606,12 +28090,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    828,
+    827.5,
     102.9,
-    174.7,
-    132.6
+    174.4,
+    132.4,
+    0.9
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -26631,7 +28124,8 @@
     },
     {
      "slow": 0.554
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 20.39,
    "lutasComHabilidade": 391,
@@ -26795,12 +28289,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    347.9,
-    87.4,
-    263.4,
-    234.4
+    347.1,
+    87.3,
+    263.3,
+    234.4,
+    1
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -26816,7 +28319,8 @@
     },
     {
      "paralyzed": 0.461
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 12.78,
    "lutasComHabilidade": 370,
@@ -26980,32 +28484,41 @@
     "revives": 0
    },
    "danoPorAcao": [
-    355.7,
-    116.7,
-    2.3,
-    277.9
+    315.7,
+    115.6,
+    0.1,
+    277.8,
+    43.5
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
     0,
     0,
     246.6,
+    0,
     0
    ],
    "statusPorAcao": [
     {
-     "weakened": 15.411,
      "bleed": 4.738
     },
     {
-     "rooted": 0.778,
-     "weakened": 0.826
+     "rooted": 0.778
     },
     {
-     "weakened": 3.025
+     "weakened": 1.289
     },
     {
-     "weakened": 0.698,
      "silenced": 0.537
+    },
+    {
+     "weakened": 18.671
     }
    ],
    "primeiraHabilidade": 16.11,
@@ -27170,16 +28683,25 @@
     "revives": 0
    },
    "danoPorAcao": [
-    338.8,
-    78.5,
-    151.9,
-    375.6
+    335,
+    77.9,
+    149.6,
+    375.2,
+    7.1
    ],
-   "apoioPorAcao": [
-    75.5,
-    5.1,
-    178,
-    96.9
+   "curaPorAcao": [
+    72.4,
+    4.8,
+    131.9,
+    96.7,
+    5.3
+   ],
+   "escudoPorAcao": [
+    0,
+    0,
+    44.4,
+    0,
+    0
    ],
    "statusPorAcao": [
     {},
@@ -27208,7 +28730,8 @@
     },
     {
      "exposed": 0.626
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 13.39,
    "lutasComHabilidade": 455,
@@ -27372,12 +28895,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    434.1,
-    147.2,
-    347.4,
-    405.5
+    433.1,
+    146.8,
+    347.1,
+    405.3,
+    1.9
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -27393,7 +28925,8 @@
     },
     {
      "paralyzed": 1.76
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 17.74,
    "lutasComHabilidade": 458,
@@ -27557,32 +29090,40 @@
     "revives": 0
    },
    "danoPorAcao": [
-    564.8,
-    95.3,
-    662.8,
-    54.7
+    352.3,
+    87.2,
+    580,
+    51.4,
+    306.8
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
     0
    ],
    "statusPorAcao": [
-    {
-     "burning": 4.859
-    },
+    {},
     {
      "rooted": 0.59,
-     "slow": 0.596,
-     "burning": 0.153
+     "slow": 0.596
     },
     {
-     "burning": 5.002
+     "burning": 4.196
     },
     {
-     "silenced": 0.188,
-     "burning": 0.073
+     "silenced": 0.188
+    },
+    {
+     "burning": 5.892
     }
    ],
    "primeiraHabilidade": 9.8,
@@ -27747,18 +29288,28 @@
     "revives": 0
    },
    "danoPorAcao": [
-    623.9,
+    623.2,
     127.3,
     252.5,
-    254.9
+    254.9,
+    0.7
    ],
-   "apoioPorAcao": [
-    229.2,
-    5.1,
-    269.8,
-    3.9
+   "curaPorAcao": [
+    10.7,
+    1.1,
+    257.5,
+    0.2,
+    238.6
+   ],
+   "escudoPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
    ],
    "statusPorAcao": [
+    {},
     {},
     {},
     {},
@@ -27926,18 +29477,28 @@
     "revives": 0
    },
    "danoPorAcao": [
-    593.6,
-    163,
+    593.2,
+    162.9,
     0,
-    161.6
+    161.6,
+    0.5
    ],
-   "apoioPorAcao": [
-    264.4,
-    46.3,
+   "curaPorAcao": [
+    264.2,
+    46.2,
     13.3,
-    31.2
+    31.2,
+    0.3
+   ],
+   "escudoPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
    ],
    "statusPorAcao": [
+    {},
     {},
     {},
     {},
@@ -28105,16 +29666,25 @@
     "revives": 0
    },
    "danoPorAcao": [
-    483.1,
-    168.7,
-    167.9,
-    312.6
+    482.2,
+    168.5,
+    167.7,
+    312.5,
+    1.4
    ],
-   "apoioPorAcao": [
-    34,
-    2.4,
-    5.7,
-    3.3
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    45.5
+   ],
+   "escudoPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
    ],
    "statusPorAcao": [
     {},
@@ -28122,7 +29692,8 @@
     {},
     {
      "exposed": 0.443
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 12.33,
    "lutasComHabilidade": 470,
@@ -28286,16 +29857,25 @@
     "revives": 0
    },
    "danoPorAcao": [
-    350.8,
-    116.3,
-    1,
-    282.9
+    348.8,
+    115.6,
+    0,
+    282.5,
+    4
    ],
-   "apoioPorAcao": [
-    777.7,
-    83.5,
-    187.9,
-    104
+   "curaPorAcao": [
+    6.6,
+    0.5,
+    96.6,
+    79.1,
+    970.2
+   ],
+   "escudoPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
    ],
    "statusPorAcao": [
     {},
@@ -28308,7 +29888,8 @@
     },
     {
      "exposed": 0.75
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 16.16,
    "lutasComHabilidade": 401,
@@ -28472,12 +30053,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    578.3,
+    577.7,
     62.3,
-    0.1,
-    611.3
+    0,
+    611.2,
+    0.9
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -28485,18 +30075,21 @@
    ],
    "statusPorAcao": [
     {
-     "exposed": 1.568
+     "exposed": 0.095
     },
     {
      "weakened": 0.158,
-     "exposed": 0.013
+     "exposed": 0.004
     },
     {
-     "exposed": 2.119,
+     "exposed": 1.97,
      "blind": 1.996
     },
     {
-     "exposed": 0.143
+     "exposed": 0.024
+    },
+    {
+     "exposed": 1.749
     }
    ],
    "primeiraHabilidade": 13.16,
@@ -28661,16 +30254,25 @@
     "revives": 0
    },
    "danoPorAcao": [
-    301.6,
-    12.8,
-    300.8,
-    329.9
+    287,
+    0.6,
+    299,
+    329.8,
+    28.6
    ],
-   "apoioPorAcao": [
-    285.6,
-    110.5,
-    127.4,
-    112.5
+   "curaPorAcao": [
+    0,
+    0,
+    85.9,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    85,
+    105,
+    18.3,
+    103.3,
+    238.4
    ],
    "statusPorAcao": [
     {},
@@ -28678,7 +30280,8 @@
     {},
     {
      "exposed": 1.821
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 12.8,
    "lutasComHabilidade": 443,
@@ -28842,12 +30445,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    286.7,
-    85.7,
-    375.2,
-    168.1
+    285.1,
+    85.5,
+    375.1,
+    168.1,
+    1.8
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -28855,18 +30467,21 @@
    ],
    "statusPorAcao": [
     {
-     "slow": 19.083
+     "slow": 1.621
     },
     {
-     "slow": 1.07
+     "slow": 0.579
     },
     {
      "rooted": 0.913,
-     "slow": 1.57
+     "slow": 0.919
     },
     {
-     "slow": 0.745,
+     "slow": 0.66,
      "frozen": 0.664
+    },
+    {
+     "slow": 18.689
     }
    ],
    "primeiraHabilidade": 12.73,
@@ -29031,31 +30646,43 @@
     "revives": 0
    },
    "danoPorAcao": [
-    334.5,
+    334.2,
     204.7,
     250.8,
-    113.5
+    113.5,
+    0.3
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
     122.2,
     0,
     621.6,
+    0,
     0
    ],
    "statusPorAcao": [
     {
-     "rooted": 3.346
+     "rooted": 0.123
     },
     {
-     "rooted": 2.593,
+     "rooted": 2.544,
      "slow": 2.012
     },
     {
-     "rooted": 0.272
+     "rooted": 0.002
     },
     {
      "silenced": 0.366,
-     "rooted": 0.235
+     "rooted": 0.213
+    },
+    {
+     "rooted": 3.564
     }
    ],
    "primeiraHabilidade": 15.02,
@@ -29220,16 +30847,25 @@
     "revives": 0
    },
    "danoPorAcao": [
-    332.8,
-    114,
-    459.8,
-    172.2
+    319.9,
+    109.7,
+    457,
+    162.5,
+    29.6
    ],
-   "apoioPorAcao": [
-    636.6,
-    57.8,
-    93.4,
-    102.4
+   "curaPorAcao": [
+    56.6,
+    0.1,
+    12.7,
+    79.4,
+    741.3
+   ],
+   "escudoPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
    ],
    "statusPorAcao": [
     {},
@@ -29240,7 +30876,8 @@
     },
     {
      "burning": 0.715
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 16.64,
    "lutasComHabilidade": 485,
@@ -29404,12 +31041,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    391.2,
-    85.7,
+    390.1,
+    85.6,
     87.4,
-    313.8
+    313.7,
+    1.4
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -29429,7 +31075,8 @@
     },
     {
      "exposed": 0.608
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 13.36,
    "lutasComHabilidade": 377,
@@ -29593,36 +31240,49 @@
     "revives": 0
    },
    "danoPorAcao": [
-    176.7,
+    175.7,
     0,
-    0.7,
-    397.1
+    0,
+    397,
+    1.8
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
     0,
     0,
     168.1,
+    0,
     0
    ],
    "statusPorAcao": [
     {
-     "silenced": 2.587,
-     "confused": 2.589
+     "silenced": 0.061,
+     "confused": 0.061
     },
     {
      "marked": 0.677,
      "blind": 0.679,
-     "silenced": 0.431,
-     "confused": 0.431
+     "silenced": 0.301,
+     "confused": 0.301
     },
     {
-     "silenced": 0.448,
-     "confused": 0.448
+     "silenced": 0.014,
+     "confused": 0.014
     },
     {
-     "silenced": 2.362,
-     "confused": 0.339,
+     "silenced": 2.258,
+     "confused": 0.235,
      "paralyzed": 2.029
+    },
+    {
+     "silenced": 3.194,
+     "confused": 3.196
     }
    ],
    "primeiraHabilidade": 10.55,
@@ -29787,12 +31447,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    441.3,
+    440.9,
     84.2,
-    211.5,
-    273.5
+    211.3,
+    273.4,
+    0.6
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -29800,21 +31469,25 @@
    ],
    "statusPorAcao": [
     {
-     "electric": 6.577,
-     "exposed": 6.587
+     "electric": 6.569,
+     "exposed": 6.579
     },
     {
      "electric": 0.513,
      "exposed": 0.515
     },
     {
-     "electric": 2.21,
-     "exposed": 0.517
+     "electric": 2.208,
+     "exposed": 0.515
     },
     {
      "paralyzed": 0.637,
      "electric": 0.295,
      "exposed": 0.303
+    },
+    {
+     "electric": 0.01,
+     "exposed": 0.01
     }
    ],
    "primeiraHabilidade": 14.85,
@@ -29979,12 +31652,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    204.8,
-    54.8,
-    170.7,
-    589.9
+    204.2,
+    54.7,
+    170.5,
+    589.9,
+    0.9
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -29992,19 +31674,22 @@
    ],
    "statusPorAcao": [
     {
-     "slow": 5.205
+     "slow": 1.04
     },
     {
-     "slow": 0.465,
+     "slow": 0.275,
      "marked": 0.279
     },
     {
      "silenced": 0.581,
-     "slow": 0.862
+     "slow": 0.583
     },
     {
-     "slow": 1.673,
+     "slow": 1.457,
      "frozen": 1.476
+    },
+    {
+     "slow": 4.851
     }
    ],
    "primeiraHabilidade": 13.53,
@@ -30169,12 +31854,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    220.2,
-    0.5,
-    324.2,
-    233.6
+    218.7,
+    0,
+    323.3,
+    233.6,
+    2.8
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -30182,20 +31876,21 @@
    ],
    "statusPorAcao": [
     {
-     "cursed": 10.992
+     "cursed": 0.76
     },
     {
      "rooted": 1.638,
-     "cursed": 2.263
+     "cursed": 1.64
     },
     {
-     "sleep": 1.752,
-     "cursed": 2.47
+     "sleep": 1.752
     },
     {
      "silenced": 0.843,
-     "slow": 0.843,
-     "cursed": 0.135
+     "slow": 0.843
+    },
+    {
+     "cursed": 13.46
     }
    ],
    "primeiraHabilidade": 6.95,
@@ -30360,39 +32055,43 @@
     "revives": 0
    },
    "danoPorAcao": [
-    276,
-    142,
-    312.7,
-    139.7
+    275.2,
+    141,
+    312.6,
+    139.7,
+    1.9
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
     0
    ],
    "statusPorAcao": [
-    {
-     "slow": 11.64,
-     "weakened": 11.714
-    },
+    {},
     {
      "rooted": 1.839,
-     "exposed": 1.847,
-     "slow": 0.563,
-     "weakened": 0.565
+     "exposed": 1.847
     },
     {
      "silenced": 1.286,
-     "confused": 1.29,
-     "slow": 0.942,
-     "weakened": 0.959
+     "confused": 1.29
     },
     {
      "silenced": 0.888,
-     "sleep": 0.805,
-     "slow": 0.161,
-     "weakened": 0.161
+     "sleep": 0.805
+    },
+    {
+     "slow": 13.306,
+     "weakened": 13.4
     }
    ],
    "primeiraHabilidade": 10.42,
@@ -30557,12 +32256,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    174.4,
-    68.2,
-    391.1,
-    258
+    162.1,
+    54.8,
+    380.7,
+    257.3,
+    36.8
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -30578,7 +32286,8 @@
     },
     {
      "weakened": 1.815
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 9.65,
    "lutasComHabilidade": 474,
@@ -30742,12 +32451,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    397.2,
-    101.5,
-    401.5,
-    36.2
+    396.4,
+    101.4,
+    401.3,
+    36.2,
+    1
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -30761,7 +32479,8 @@
     {},
     {
      "exposed": 0.105
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 7.43,
    "lutasComHabilidade": 440,
@@ -30925,16 +32644,25 @@
     "revives": 0
    },
    "danoPorAcao": [
-    500.1,
-    11.9,
-    1.4,
-    360.2
+    484.4,
+    0.4,
+    0,
+    359.4,
+    29.3
    ],
-   "apoioPorAcao": [
-    463.5,
-    213.9,
-    224.3,
-    19.7
+   "curaPorAcao": [
+    0,
+    0,
+    161.9,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    155.1,
+    201.4,
+    30.8,
+    1.1,
+    371.2
    ],
    "statusPorAcao": [
     {},
@@ -30943,7 +32671,8 @@
     {
      "rooted": 0.888,
      "exposed": 0.901
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 12.93,
    "lutasComHabilidade": 458,
@@ -31107,12 +32836,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    379,
-    221.3,
+    378.6,
+    221.2,
     130.5,
-    265.5
+    265.5,
+    0.4
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -31127,6 +32865,7 @@
     {
      "slow": 0.541
     },
+    {},
     {}
    ],
    "primeiraHabilidade": 14.03,
@@ -31291,16 +33030,25 @@
     "revives": 0
    },
    "danoPorAcao": [
-    226.7,
-    65.1,
-    0.4,
-    574.4
+    225.3,
+    64.9,
+    0,
+    574.4,
+    2.1
    ],
-   "apoioPorAcao": [
-    37.3,
-    18.8,
-    121.4,
-    134.8
+   "curaPorAcao": [
+    37,
+    18.7,
+    121.3,
+    134.8,
+    0.4
+   ],
+   "escudoPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
    ],
    "statusPorAcao": [
     {},
@@ -31311,7 +33059,8 @@
     {},
     {
      "weakened": 3.151
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 11.1,
    "lutasComHabilidade": 462,
@@ -31475,12 +33224,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    340.6,
-    154.2,
-    104.1,
-    425.7
+    339.9,
+    153.9,
+    104,
+    425.7,
+    1.1
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -31492,7 +33250,8 @@
     {},
     {
      "exposed": 0.841
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 13.43,
    "lutasComHabilidade": 443,
@@ -31656,12 +33415,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    322.9,
-    153.7,
-    124.6,
-    181.8
+    322.4,
+    153.5,
+    124.5,
+    181.8,
+    0.8
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -31669,19 +33437,22 @@
    ],
    "statusPorAcao": [
     {
-     "marked": 4.6
+     "marked": 0.628
     },
     {
-     "marked": 0.581,
+     "marked": 0.143,
      "weakened": 0.991
     },
     {
      "exposed": 0.647,
-     "marked": 0.562
+     "marked": 0.182
     },
     {
      "silenced": 0.25,
-     "marked": 0.218
+     "marked": 0.126
+    },
+    {
+     "marked": 4.882
     }
    ],
    "primeiraHabilidade": 12.64,
@@ -31846,15 +33617,24 @@
     "revives": 0
    },
    "danoPorAcao": [
-    267.2,
-    67.6,
-    25.5,
-    511.3
+    241.7,
+    65.7,
+    0.4,
+    503.8,
+    60
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
     72.4,
     0,
     485.2,
+    0,
     0
    ],
    "statusPorAcao": [
@@ -31867,7 +33647,8 @@
     {
      "confused": 2.164,
      "silenced": 2.18
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 11.28,
    "lutasComHabilidade": 354,
@@ -32031,12 +33812,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    417.1,
-    109.3,
-    369.3,
-    301.2
+    402.2,
+    100.8,
+    344.2,
+    293.3,
+    56.6
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -32052,7 +33842,8 @@
     },
     {
      "paralyzed": 0.569
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 13.28,
    "lutasComHabilidade": 401,
@@ -32216,12 +34007,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    467.8,
+    466.3,
     0,
-    213.9,
-    213.5
+    213.8,
+    213.2,
+    1.9
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -32229,18 +34029,21 @@
    ],
    "statusPorAcao": [
     {
-     "exposed": 7.51
+     "exposed": 2.51
     },
     {
-     "exposed": 0.23
+     "exposed": 0.015
     },
     {
      "paralyzed": 0.95,
-     "exposed": 0.364
+     "exposed": 0.03
     },
     {
      "weakened": 0.351,
-     "exposed": 0.184
+     "exposed": 0.03
+    },
+    {
+     "exposed": 5.703
     }
    ],
    "primeiraHabilidade": 13.73,
@@ -32405,12 +34208,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    608.8,
-    136.4,
-    274.6,
-    170.1
+    315.7,
+    70.8,
+    196.8,
+    138.8,
+    467.7
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -32429,7 +34241,8 @@
     {
      "burning": 0.471,
      "exposed": 0.477
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 15.99,
    "lutasComHabilidade": 421,
@@ -32593,15 +34406,24 @@
     "revives": 0
    },
    "danoPorAcao": [
-    411.7,
-    136.5,
-    334.8,
-    151.3
+    411.1,
+    136.4,
+    334.7,
+    151.3,
+    0.8
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
     0,
     0,
     201.2,
+    0,
     0
    ],
    "statusPorAcao": [
@@ -32610,7 +34432,8 @@
     {},
     {
      "exposed": 0.29
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 14.09,
    "lutasComHabilidade": 486,
@@ -32774,12 +34597,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    486.5,
-    111.6,
-    251.7,
-    90.4
+    443.7,
+    98.7,
+    228.3,
+    86,
+    83.4
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -32787,20 +34619,24 @@
    ],
    "statusPorAcao": [
     {
-     "confused": 1.11,
-     "burning": 1.118
+     "confused": 0.081,
+     "burning": 0.081
     },
     {
-     "confused": 0.094,
-     "burning": 0.099
+     "confused": 0.007,
+     "burning": 0.007
     },
     {
-     "burning": 1.107,
-     "confused": 0.189
+     "burning": 0.951,
+     "confused": 0.034
     },
     {
-     "burning": 0.294,
-     "confused": 0.024
+     "burning": 0.275,
+     "confused": 0.006
+    },
+    {
+     "confused": 1.29,
+     "burning": 1.303
     }
    ],
    "primeiraHabilidade": 12.04,
@@ -32965,18 +34801,28 @@
     "revives": 0.123
    },
    "danoPorAcao": [
-    245.2,
+    243.2,
     0,
-    195.5,
-    0.1
+    194.9,
+    0,
+    2.8
    ],
-   "apoioPorAcao": [
-    462.4,
-    313.1,
-    100,
-    472.3
+   "curaPorAcao": [
+    86.9,
+    146.1,
+    1.1,
+    457.6,
+    536
+   ],
+   "escudoPorAcao": [
+    0,
+    120.3,
+    0,
+    0,
+    0
    ],
    "statusPorAcao": [
+    {},
     {},
     {},
     {},
@@ -33144,12 +34990,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    506.3,
-    150.8,
-    91.5,
-    290.6
+    497.5,
+    142.6,
+    90.8,
+    290.5,
+    17.8
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -33157,18 +35012,19 @@
    ],
    "statusPorAcao": [
     {
-     "confused": 3.475
+     "confused": 1.873
     },
     {
-     "confused": 0.635,
+     "confused": 0.525,
      "poison": 0.512
     },
+    {},
     {
-     "confused": 0.017
+     "confused": 0.369,
+     "weakened": 0.369
     },
     {
-     "confused": 0.386,
-     "weakened": 0.369
+     "confused": 1.745
     }
    ],
    "primeiraHabilidade": 22.57,
@@ -33333,12 +35189,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    799.6,
-    134.1,
-    266.5,
-    615.1
+    749.4,
+    128.9,
+    259.4,
+    608.8,
+    68.8
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -33356,7 +35221,8 @@
     {
      "confused": 1.513,
      "bomb": 1.552
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 20.89,
    "lutasComHabilidade": 474,
@@ -33520,33 +35386,41 @@
     "revives": 0
    },
    "danoPorAcao": [
-    143.6,
-    155.6,
-    61.5,
-    258.9
+    141.5,
+    155.4,
+    61.4,
+    258.5,
+    2.9
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
     0
    ],
    "statusPorAcao": [
-    {
-     "exposed": 4.024
-    },
+    {},
     {
      "marked": 0.551,
-     "exposed": 0.722
+     "exposed": 0.56
     },
     {
-     "slow": 0.598,
-     "exposed": 0.298
+     "slow": 0.598
     },
     {
      "silenced": 0.709,
-     "rooted": 0.713,
-     "exposed": 0.389
+     "rooted": 0.713
+    },
+    {
+     "exposed": 4.873
     }
    ],
    "primeiraHabilidade": 12.19,
@@ -33711,16 +35585,25 @@
     "revives": 0
    },
    "danoPorAcao": [
-    576.6,
+    575.6,
     59.2,
     172.8,
-    245.5
+    245.5,
+    1
    ],
-   "apoioPorAcao": [
-    309,
-    0.8,
-    3.8,
-    2.1
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    178.8,
+    0,
+    0,
+    0.1,
+    136.8
    ],
    "statusPorAcao": [
     {},
@@ -33732,7 +35615,8 @@
     {
      "weakened": 0.189,
      "silenced": 0.195
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 25.74,
    "lutasComHabilidade": 310,
@@ -33896,16 +35780,25 @@
     "revives": 0
    },
    "danoPorAcao": [
-    580.7,
-    124.5,
-    353.7,
-    64.4
+    330.3,
+    109.6,
+    328.5,
+    60.4,
+    294.5
    ],
-   "apoioPorAcao": [
-    96.6,
-    7.4,
-    8.5,
-    1.8
+   "curaPorAcao": [
+    3.8,
+    0.6,
+    0.3,
+    0.1,
+    109.5
+   ],
+   "escudoPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
    ],
    "statusPorAcao": [
     {
@@ -33916,6 +35809,7 @@
      "rooted": 2.824,
      "bleed": 1.15
     },
+    {},
     {}
    ],
    "primeiraHabilidade": 15.23,
@@ -34080,16 +35974,25 @@
     "revives": 0
    },
    "danoPorAcao": [
-    407.5,
-    117.8,
-    308.6,
-    158.7
+    407,
+    117.7,
+    308.5,
+    158.5,
+    1
    ],
-   "apoioPorAcao": [
-    253.1,
-    14.4,
-    222.9,
-    78.9
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    74.4,
+    0.7,
+    212.7,
+    76,
+    205.5
    ],
    "statusPorAcao": [
     {},
@@ -34099,7 +36002,8 @@
     {},
     {
      "rooted": 0.446
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 17.22,
    "lutasComHabilidade": 466,
@@ -34263,12 +36167,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    282.9,
-    121,
-    164.3,
-    224.8
+    281.3,
+    120.1,
+    163.9,
+    224.2,
+    3.4
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -34276,17 +36189,20 @@
    ],
    "statusPorAcao": [
     {
-     "exposed": 4.757
+     "exposed": 0.783
     },
     {
      "weakened": 1.022,
-     "exposed": 0.634
+     "exposed": 0.171
     },
     {
-     "exposed": 1.452
+     "exposed": 1.307
     },
     {
-     "exposed": 0.895
+     "exposed": 0.61
+    },
+    {
+     "exposed": 4.866
     }
    ],
    "primeiraHabilidade": 11.57,
@@ -34451,15 +36367,24 @@
     "revives": 0
    },
    "danoPorAcao": [
-    338.4,
+    337.5,
     88.9,
-    174.2,
-    399.1
+    174.1,
+    399,
+    1
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
     0,
     0,
     304.9,
+    0,
     0
    ],
    "statusPorAcao": [
@@ -34468,6 +36393,7 @@
      "marked": 0.544,
      "weakened": 0.552
     },
+    {},
     {},
     {}
    ],
@@ -34633,12 +36559,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    581.1,
-    158.8,
+    580.6,
+    158.4,
     179.4,
-    323
+    322.7,
+    1.2
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -34652,7 +36587,8 @@
     },
     {
      "exposed": 0.515
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 19.39,
    "lutasComHabilidade": 475,
@@ -34816,12 +36752,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    404.1,
-    122.1,
-    82.8,
-    441.5
+    380.5,
+    121,
+    71.5,
+    439.5,
+    38
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -34829,19 +36774,22 @@
    ],
    "statusPorAcao": [
     {
-     "slow": 1.629
+     "slow": 0.025
     },
     {
-     "slow": 0.783,
+     "slow": 0.721,
      "weakened": 0.732
     },
     {
      "bomb": 0.582,
-     "slow": 0.049
+     "slow": 0.002
     },
     {
      "rooted": 1.113,
-     "slow": 0.295
+     "slow": 0.066
+    },
+    {
+     "slow": 1.943
     }
    ],
    "primeiraHabilidade": 12.33,
@@ -35006,12 +36954,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    547.2,
+    546.4,
     92.3,
-    430.6,
-    118.5
+    430.5,
+    118.5,
+    1
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -35030,7 +36987,8 @@
     },
     {
      "slow": 0.725
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 14.44,
    "lutasComHabilidade": 479,
@@ -35194,12 +37152,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    289.6,
+    289.2,
     9,
-    493.7,
-    126.9
+    493.6,
+    126.9,
+    0.5
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -35218,7 +37185,8 @@
     },
     {
      "confused": 0.539
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 11.68,
    "lutasComHabilidade": 425,
@@ -35382,16 +37350,25 @@
     "revives": 0
    },
    "danoPorAcao": [
-    519.1,
+    518.6,
     152.5,
     0,
-    364.5
+    364.5,
+    0.5
    ],
-   "apoioPorAcao": [
-    243.4,
-    10,
-    267.2,
-    9.8
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    83.4,
+    0.8,
+    259.4,
+    1.1,
+    185.6
    ],
    "statusPorAcao": [
     {},
@@ -35402,7 +37379,8 @@
     {
      "rooted": 0.59,
      "exposed": 0.601
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 18.21,
    "lutasComHabilidade": 432,
@@ -35566,12 +37544,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    263.3,
-    66.6,
-    512.9,
-    459
+    263.1,
+    66.5,
+    512.8,
+    459,
+    0.4
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -35579,19 +37566,22 @@
    ],
    "statusPorAcao": [
     {
-     "confused": 1.228
+     "confused": 0.051
     },
     {
-     "confused": 0.888,
+     "confused": 0.772,
      "weakened": 0.774
     },
     {
      "exposed": 3.933,
-     "confused": 0.335
+     "confused": 0.053
     },
     {
-     "confused": 2.1,
+     "confused": 2.028,
      "slow": 2.067
+    },
+    {
+     "confused": 1.646
     }
    ],
    "primeiraHabilidade": 11.2,
@@ -35756,16 +37746,25 @@
     "revives": 0
    },
    "danoPorAcao": [
-    516.2,
-    181.7,
+    516,
+    181.6,
     261.1,
-    146.1
+    146.1,
+    0.2
    ],
-   "apoioPorAcao": [
-    172.5,
-    6.7,
-    7.9,
-    1.3
+   "curaPorAcao": [
+    12.7,
+    1.2,
+    0.6,
+    0.4,
+    173.6
+   ],
+   "escudoPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
    ],
    "statusPorAcao": [
     {},
@@ -35775,7 +37774,8 @@
     },
     {
      "exposed": 0.115
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 20.62,
    "lutasComHabilidade": 436,
@@ -35939,12 +37939,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    371.2,
-    188.8,
-    392.4,
-    218.2
+    341.3,
+    181.7,
+    331.6,
+    208.1,
+    107.9
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -35958,6 +37967,7 @@
     {
      "burning": 2.664
     },
+    {},
     {}
    ],
    "primeiraHabilidade": 14.02,
@@ -36122,15 +38132,24 @@
     "revives": 0
    },
    "danoPorAcao": [
-    385.2,
-    111.6,
-    161.1,
-    196.3
+    384.1,
+    111.5,
+    161,
+    196.3,
+    1.2
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
     0,
     0,
     205.7,
+    0,
     0
    ],
    "statusPorAcao": [
@@ -36141,7 +38160,8 @@
     {},
     {
      "slow": 0.541
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 13.91,
    "lutasComHabilidade": 360,
@@ -36305,12 +38325,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    461.3,
+    460.6,
     179.1,
-    0.2,
-    475.1
+    0,
+    475,
+    1.1
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -36318,17 +38347,20 @@
    ],
    "statusPorAcao": [
     {
-     "exposed": 1.239
+     "exposed": 0.063
     },
     {
      "marked": 0.517,
-     "exposed": 0.658
+     "exposed": 0.535
     },
     {
-     "exposed": 0.166
+     "exposed": 0.002
     },
     {
-     "exposed": 0.141
+     "exposed": 0.04
+    },
+    {
+     "exposed": 1.564
     }
    ],
    "primeiraHabilidade": 12.16,
@@ -36493,15 +38525,24 @@
     "revives": 0
    },
    "danoPorAcao": [
-    584.4,
-    204.4,
-    0.5,
-    231.2
+    582.4,
+    203.6,
+    0,
+    231.1,
+    3.6
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
     0,
     0,
-    457.4,
+    160,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
+    0,
+    297.4,
+    0,
     0
    ],
    "statusPorAcao": [
@@ -36510,7 +38551,8 @@
     {},
     {
      "exposed": 0.267
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 13.83,
    "lutasComHabilidade": 494,
@@ -36674,15 +38716,24 @@
     "revives": 0
    },
    "danoPorAcao": [
-    407,
+    406.9,
     189.9,
     251.7,
-    258
+    257.8,
+    0.3
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
     0,
     0,
     162.4,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
+    0,
+    0,
+    0,
     0
    ],
    "statusPorAcao": [
@@ -36691,7 +38742,8 @@
     {},
     {
      "exposed": 0.451
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 17.51,
    "lutasComHabilidade": 439,
@@ -36855,16 +38907,25 @@
     "revives": 0
    },
    "danoPorAcao": [
-    330.9,
-    0.1,
-    263.1,
+    329.8,
+    0,
+    262.9,
+    0,
+    1.4
+   ],
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
     0
    ],
-   "apoioPorAcao": [
-    253.4,
-    132.8,
-    13.2,
-    323.1
+   "escudoPorAcao": [
+    116.7,
+    127.5,
+    0.4,
+    320.1,
+    157.9
    ],
    "statusPorAcao": [
     {},
@@ -36872,6 +38933,7 @@
     {
      "weakened": 1.277
     },
+    {},
     {}
    ],
    "primeiraHabilidade": 12.73,
@@ -37036,18 +39098,28 @@
     "revives": 0
    },
    "danoPorAcao": [
-    542.2,
-    133.8,
+    541.8,
+    133.7,
     343.5,
-    198.7
+    198.7,
+    0.5
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
     0,
     0,
     393.2,
-    121.1
+    121.1,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
    ],
    "statusPorAcao": [
+    {},
     {},
     {},
     {},
@@ -37215,16 +39287,25 @@
     "revives": 0
    },
    "danoPorAcao": [
-    439.1,
+    439,
     182.5,
     0,
-    601.9
+    601.9,
+    0.1
    ],
-   "apoioPorAcao": [
-    114.1,
-    14.5,
-    303.5,
-    8.7
+   "curaPorAcao": [
+    6.3,
+    0.3,
+    286.4,
+    0.8,
+    147
+   ],
+   "escudoPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
    ],
    "statusPorAcao": [
     {},
@@ -37235,7 +39316,8 @@
     {},
     {
      "slow": 2.132
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 18.64,
    "lutasComHabilidade": 490,
@@ -37402,13 +39484,22 @@
     401.8,
     112.7,
     326.8,
-    205.3
+    205.3,
+    0.1
    ],
-   "apoioPorAcao": [
-    53,
-    3.4,
-    488.2,
-    1.3
+   "curaPorAcao": [
+    0,
+    0,
+    482.5,
+    0,
+    63.4
+   ],
+   "escudoPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
    ],
    "statusPorAcao": [
     {},
@@ -37419,7 +39510,8 @@
     {},
     {
      "slow": 1.215
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 10.25,
    "lutasComHabilidade": 429,
@@ -37583,12 +39675,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    571.6,
-    6,
-    134.2,
-    80.8
+    570.2,
+    5.9,
+    134.1,
+    80.7,
+    1.6
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -37606,7 +39707,8 @@
     },
     {
      "silenced": 0.04
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 25.63,
    "lutasComHabilidade": 111,
@@ -37770,12 +39872,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    500.5,
+    500.2,
     162.4,
-    221.7,
-    347.6
+    221.6,
+    347.6,
+    0.5
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -37789,7 +39900,8 @@
     },
     {
      "exposed": 0.559
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 15.37,
    "lutasComHabilidade": 463,
@@ -37953,33 +40065,41 @@
     "revives": 0
    },
    "danoPorAcao": [
-    306.5,
+    305.6,
     347.2,
-    226.4,
-    147.3
+    225.9,
+    147,
+    1.7
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
     0
    ],
    "statusPorAcao": [
-    {
-     "weakened": 3.949
-    },
+    {},
     {
      "rooted": 1.822,
-     "exposed": 1.844,
-     "weakened": 0.539
+     "exposed": 1.844
     },
     {
-     "silenced": 1.021,
-     "weakened": 1.524
+     "silenced": 1.021
     },
     {
      "silenced": 0.357,
-     "weakened": 0.537
+     "weakened": 0.366
+    },
+    {
+     "weakened": 6.184
     }
    ],
    "primeiraHabilidade": 13.23,
@@ -38144,12 +40264,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    595,
+    594.6,
     135,
-    244.1,
-    428.6
+    244,
+    428.6,
+    0.5
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -38163,7 +40292,8 @@
     {},
     {
      "exposed": 1.152
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 15.17,
    "lutasComHabilidade": 460,
@@ -38327,14 +40457,23 @@
     "revives": 0
    },
    "danoPorAcao": [
-    391.8,
-    180.7,
-    486.7,
-    162.8
+    278.4,
+    169.2,
+    450.8,
+    160.2,
+    163.4
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
     0,
-    289.2,
+    153.9,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
+    135.4,
+    0,
     0,
     0
    ],
@@ -38344,7 +40483,8 @@
     {},
     {
      "weakened": 0.626
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 10.76,
    "lutasComHabilidade": 482,
@@ -38511,9 +40651,18 @@
     583.6,
     129.7,
     190.4,
-    493.3
+    493.3,
+    0.1
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -38525,7 +40674,8 @@
     {},
     {
      "exposed": 1.686
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 11.72,
    "lutasComHabilidade": 434,
@@ -38689,12 +40839,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    338.8,
+    338.3,
     84.3,
     290.8,
-    151.8
+    151.7,
+    0.6
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -38715,7 +40874,8 @@
     },
     {
      "slow": 0.928
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 18.22,
    "lutasComHabilidade": 464,
@@ -38879,16 +41039,25 @@
     "revives": 0
    },
    "danoPorAcao": [
-    604.5,
-    165.6,
-    492.2,
-    157.9
+    603.9,
+    165.5,
+    492.1,
+    157.9,
+    0.7
    ],
-   "apoioPorAcao": [
-    200.3,
-    8.9,
-    25.5,
-    4.2
+   "curaPorAcao": [
+    70.3,
+    0.6,
+    12.4,
+    0.5,
+    155
+   ],
+   "escudoPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
    ],
    "statusPorAcao": [
     {},
@@ -38896,6 +41065,7 @@
     {
      "exposed": 2.809
     },
+    {},
     {}
    ],
    "primeiraHabilidade": 17.96,
@@ -39060,30 +41230,38 @@
     "revives": 0
    },
    "danoPorAcao": [
-    219.7,
-    215.2,
+    219.1,
+    215.1,
     138,
-    381.8
+    381.6,
+    1
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
     0
    ],
    "statusPorAcao": [
+    {},
     {
-     "marked": 5.692
-    },
-    {
-     "marked": 1.006,
+     "marked": 0.568,
      "exposed": 0.577
     },
     {
-     "marked": 1.061
+     "marked": 0.652
     },
+    {},
     {
-     "marked": 0.424
+     "marked": 6.964
     }
    ],
    "primeiraHabilidade": 9.93,
@@ -39248,16 +41426,25 @@
     "revives": 0
    },
    "danoPorAcao": [
-    346.6,
-    116.7,
-    193.7,
-    208.2
+    344.8,
+    116.4,
+    193.6,
+    208.2,
+    2.2
    ],
-   "apoioPorAcao": [
-    94.8,
-    3.3,
-    442.6,
-    344.1
+   "curaPorAcao": [
+    1.5,
+    0.1,
+    0.1,
+    0.1,
+    102.7
+   ],
+   "escudoPorAcao": [
+    0,
+    0,
+    438.4,
+    341.9,
+    0
    ],
    "statusPorAcao": [
     {
@@ -39267,6 +41454,7 @@
      "marked": 0.839,
      "weakened": 0.845
     },
+    {},
     {},
     {}
    ],
@@ -39432,16 +41620,25 @@
     "revives": 0
    },
    "danoPorAcao": [
-    274.3,
-    84.8,
-    0.9,
-    218.7
+    272.7,
+    84.5,
+    0,
+    218.4,
+    3
    ],
-   "apoioPorAcao": [
-    313,
-    11,
-    591.7,
-    14.5
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    55.4,
+    0.1,
+    581.7,
+    0,
+    293
    ],
    "statusPorAcao": [
     {},
@@ -39453,7 +41650,8 @@
     },
     {
      "rooted": 0.926
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 13.74,
    "lutasComHabilidade": 450,
@@ -39617,18 +41815,28 @@
     "revives": 0
    },
    "danoPorAcao": [
-    419.7,
+    418.9,
     0,
-    0.2,
-    0.1
+    0,
+    0,
+    1.1
    ],
-   "apoioPorAcao": [
-    447.4,
-    194.4,
-    187,
-    537
+   "curaPorAcao": [
+    0,
+    0,
+    136.1,
+    278.4,
+    0
+   ],
+   "escudoPorAcao": [
+    143.4,
+    185.3,
+    26,
+    248,
+    348.7
    ],
    "statusPorAcao": [
+    {},
     {},
     {},
     {},
@@ -39796,16 +42004,25 @@
     "revives": 0
    },
    "danoPorAcao": [
-    242.2,
-    60.8,
-    303.3,
-    496.5
+    227.4,
+    60.3,
+    290.5,
+    494.6,
+    30
    ],
-   "apoioPorAcao": [
-    134.9,
-    5.1,
-    20.5,
-    10.2
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    4,
+    0.2,
+    0.7,
+    0.2,
+    165.5
    ],
    "statusPorAcao": [
     {
@@ -39820,7 +42037,8 @@
     {
      "slow": 2.441,
      "frozen": 2.451
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 10.55,
    "lutasComHabilidade": 491,
@@ -39984,12 +42202,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    390.5,
-    148.9,
-    172.9,
-    397.8
+    368.3,
+    127.3,
+    168,
+    390.8,
+    55.8
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -40003,7 +42230,8 @@
     {},
     {
      "electric": 1.579
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 12.72,
    "lutasComHabilidade": 468,
@@ -40167,12 +42395,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    487.5,
-    137.9,
-    245.7,
-    202
+    354.6,
+    118,
+    216.2,
+    195.2,
+    189
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -40189,7 +42426,8 @@
     },
     {
      "paralyzed": 0.843
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 12.67,
    "lutasComHabilidade": 387,
@@ -40353,12 +42591,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    316.3,
-    138.6,
-    275.4,
-    327.1
+    315.7,
+    138.4,
+    275.3,
+    327.1,
+    0.9
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -40377,7 +42624,8 @@
     },
     {
      "silenced": 0.707
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 10.08,
    "lutasComHabilidade": 405,
@@ -40541,34 +42789,47 @@
     "revives": 0
    },
    "danoPorAcao": [
-    294,
-    101.5,
-    209.7,
-    413.7
+    281.1,
+    99.4,
+    200.4,
+    412.5,
+    25.6
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
     98.9,
     0,
     445.2,
+    0,
     0
    ],
    "statusPorAcao": [
     {
-     "rooted": 1.427,
-     "exposed": 1.444
+     "rooted": 0.037,
+     "exposed": 0.037
     },
     {
-     "rooted": 0.757,
+     "rooted": 0.638,
      "slow": 0.634,
-     "exposed": 0.129
+     "exposed": 0.007
     },
     {
-     "rooted": 0.138,
-     "exposed": 0.146
+     "rooted": 0.006,
+     "exposed": 0.006
     },
     {
-     "rooted": 0.993,
-     "exposed": 0.114
+     "rooted": 0.897,
+     "exposed": 0.019
+    },
+    {
+     "rooted": 1.737,
+     "exposed": 1.763
     }
    ],
    "primeiraHabilidade": 13.03,
@@ -40733,16 +42994,25 @@
     "revives": 0
    },
    "danoPorAcao": [
-    471,
-    19.8,
-    371.1,
-    294.8
+    406.3,
+    1.2,
+    318.1,
+    269.9,
+    161.3
    ],
-   "apoioPorAcao": [
-    224,
-    7.1,
-    9.9,
-    3.6
+   "curaPorAcao": [
+    119.8,
+    0,
+    0,
+    0,
+    124.7
+   ],
+   "escudoPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
    ],
    "statusPorAcao": [
     {},
@@ -40752,7 +43022,8 @@
     },
     {
      "burning": 0.424
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 15.56,
    "lutasComHabilidade": 459,
@@ -40916,12 +43187,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    314.1,
+    313,
     9.2,
-    558.8,
-    408.7
+    558.2,
+    408.5,
+    2
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -40938,7 +43218,8 @@
     },
     {
      "confused": 1.674
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 11.04,
    "lutasComHabilidade": 459,
@@ -41102,16 +43383,25 @@
     "revives": 0
    },
    "danoPorAcao": [
-    966.5,
+    965.9,
     109.5,
-    0.3,
-    534.3
+    0.1,
+    534.2,
+    1
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
     90.2,
     0,
     109.2,
-    74.4
+    74.4,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
    ],
    "statusPorAcao": [
     {},
@@ -41122,7 +43412,8 @@
     {},
     {
      "exposed": 1.449
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 12.11,
    "lutasComHabilidade": 446,
@@ -41286,12 +43577,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    444.5,
-    3.2,
-    101,
-    656.3
+    389.5,
+    0,
+    99.2,
+    655.9,
+    60.5
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -41299,18 +43599,18 @@
    ],
    "statusPorAcao": [
     {
-     "rooted": 1.859
+     "rooted": 0.057
     },
     {
-     "rooted": 0.79,
+     "rooted": 0.709,
      "bomb": 0.709
     },
+    {},
     {
-     "rooted": 0.022
+     "paralyzed": 1.707
     },
     {
-     "paralyzed": 1.707,
-     "rooted": 0.154
+     "rooted": 2.059
     }
    ],
    "primeiraHabilidade": 15.41,
@@ -41475,30 +43775,42 @@
     "revives": 0
    },
    "danoPorAcao": [
-    607.3,
+    606.9,
     272.5,
+    0,
+    0,
+    0.5
+   ],
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    145.6,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
+    0,
+    0,
     0,
     0
    ],
-   "apoioPorAcao": [
-    0,
-    0,
-    0,
-    145.6
-   ],
    "statusPorAcao": [
     {
-     "confused": 5.21
+     "confused": 0.664
     },
     {
-     "confused": 0.45
+     "confused": 0.044
     },
     {
-     "confused": 4.012,
+     "confused": 3.79,
      "slow": 3.822
     },
     {
-     "confused": 0.311
+     "confused": 0.023
+    },
+    {
+     "confused": 5.463
     }
    ],
    "primeiraHabilidade": 9.61,
@@ -41663,32 +43975,40 @@
     "revives": 0
    },
    "danoPorAcao": [
-    367.7,
-    0.3,
-    180.1,
-    270.5
+    367,
+    0,
+    179.6,
+    270.5,
+    1.4
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
     0
    ],
    "statusPorAcao": [
+    {},
     {
-     "marked": 4.662
-    },
-    {
-     "marked": 1.292,
+     "marked": 0.912,
      "exposed": 0.919
     },
     {
-     "slow": 0.738,
-     "marked": 0.431
+     "slow": 0.738
     },
     {
-     "marked": 0.079,
      "silenced": 0.256
+    },
+    {
+     "marked": 5.552
     }
    ],
    "primeiraHabilidade": 17.04,
@@ -41853,12 +44173,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    375.3,
-    102.1,
-    247.2,
-    454.5
+    374.6,
+    101.9,
+    246.8,
+    454.3,
+    1.4
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -41866,18 +44195,21 @@
    ],
    "statusPorAcao": [
     {
-     "marked": 4.208
+     "marked": 4.196
     },
     {
      "marked": 0.309,
      "exposed": 0.709
     },
     {
-     "marked": 1.859
+     "marked": 1.857
     },
     {
-     "marked": 0.644,
+     "marked": 0.64,
      "rooted": 0.972
+    },
+    {
+     "marked": 0.018
     }
    ],
    "primeiraHabilidade": 10.9,
@@ -42042,16 +44374,25 @@
     "revives": 0
    },
    "danoPorAcao": [
-    472.5,
+    471,
     131.8,
-    320.4,
-    132.3
+    320.2,
+    132.3,
+    1.6
    ],
-   "apoioPorAcao": [
-    132.6,
-    5.2,
-    10.1,
-    0.9
+   "curaPorAcao": [
+    13.8,
+    0.8,
+    0.7,
+    0.5,
+    133
+   ],
+   "escudoPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
    ],
    "statusPorAcao": [
     {},
@@ -42063,7 +44404,8 @@
     {
      "paralyzed": 0.094,
      "confused": 0.096
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 15.75,
    "lutasComHabilidade": 482,
@@ -42227,12 +44569,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    451.8,
+    451.4,
     9.2,
     452.2,
-    187.6
+    187.6,
+    0.4
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -42249,7 +44600,8 @@
     },
     {
      "silenced": 0.502
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 15.01,
    "lutasComHabilidade": 352,
@@ -42413,12 +44765,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    439.6,
-    131.5,
-    167.7,
-    274.9
+    385.7,
+    118.4,
+    159.1,
+    273,
+    77.6
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -42436,7 +44797,8 @@
     },
     {
      "exposed": 0.589
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 14.15,
    "lutasComHabilidade": 444,
@@ -42600,12 +44962,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    530.1,
-    26,
-    243.6,
-    191.9
+    298.8,
+    2.4,
+    200,
+    176,
+    314.4
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -42613,19 +44984,22 @@
    ],
    "statusPorAcao": [
     {
-     "exposed": 4.487
+     "exposed": 0.217
     },
     {
-     "exposed": 0.329
+     "exposed": 0.02
     },
     {
      "paralyzed": 0.888,
-     "exposed": 0.368
+     "exposed": 0.018
     },
     {
      "confused": 0.368,
      "weakened": 0.376,
-     "exposed": 0.176
+     "exposed": 0.029
+    },
+    {
+     "exposed": 5.076
     }
    ],
    "primeiraHabilidade": 15.71,
@@ -42790,30 +45164,42 @@
     "revives": 0
    },
    "danoPorAcao": [
-    397.3,
-    191.9,
-    23.8,
-    230.9
+    313.8,
+    155,
+    0,
+    226.7,
+    148.5
    ],
-   "apoioPorAcao": [
-    182.4,
-    16.4,
-    338.9,
-    5.3
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    8.2,
+    0.4,
+    318,
+    0.7,
+    215.5
    ],
    "statusPorAcao": [
     {
-     "weakened": 4.986
+     "weakened": 0.228
     },
     {
-     "weakened": 0.447
+     "weakened": 0.012
     },
     {
-     "weakened": 0.595
+     "weakened": 0.029
     },
     {
      "confused": 1.039,
-     "weakened": 0.146
+     "weakened": 0.019
+    },
+    {
+     "weakened": 5.885
     }
    ],
    "primeiraHabilidade": 10.18,
@@ -42978,12 +45364,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    815.5,
+    814.7,
     139.4,
     230.6,
-    240.4
+    240.4,
+    1
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -42997,7 +45392,8 @@
     {},
     {
      "paralyzed": 0.251
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 15.56,
    "lutasComHabilidade": 419,
@@ -43161,16 +45557,25 @@
     "revives": 0
    },
    "danoPorAcao": [
-    517.5,
+    516.7,
     127.8,
     289.8,
-    488.5
+    488.4,
+    0.9
    ],
-   "apoioPorAcao": [
-    264.6,
-    16.6,
-    305.5,
-    15.4
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    12,
+    0.4,
+    296,
+    2,
+    291.8
    ],
    "statusPorAcao": [
     {},
@@ -43180,7 +45585,8 @@
     {},
     {
      "rooted": 2.111
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 24.69,
    "lutasComHabilidade": 455,
@@ -43344,12 +45750,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    163.7,
-    168.3,
-    286.2,
-    165.1
+    163.4,
+    168.2,
+    285.6,
+    165,
+    1.1
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -43357,22 +45772,22 @@
    ],
    "statusPorAcao": [
     {
-     "weakened": 11.552,
      "cursed": 4.057
     },
     {
      "rooted": 1.661,
-     "exposed": 1.667,
-     "weakened": 0.423
+     "exposed": 1.667
     },
     {
      "silenced": 1.885,
-     "cursed": 1.889,
-     "weakened": 1.32
+     "cursed": 1.889
     },
     {
      "silenced": 0.836,
-     "weakened": 1.068
+     "weakened": 0.84
+    },
+    {
+     "weakened": 13.522
     }
    ],
    "primeiraHabilidade": 5.59,
@@ -43537,16 +45952,25 @@
     "revives": 0
    },
    "danoPorAcao": [
-    479,
-    139,
-    0.3,
-    133.8
+    477.5,
+    138.9,
+    0,
+    133.8,
+    2
    ],
-   "apoioPorAcao": [
-    181.8,
-    4.5,
-    675.3,
-    2.1
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    3,
+    0.1,
+    665.1,
+    0.1,
+    195.4
    ],
    "statusPorAcao": [
     {},
@@ -43554,7 +45978,8 @@
     {},
     {
      "exposed": 0.211
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 12.81,
    "lutasComHabilidade": 466,
@@ -43718,12 +46143,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    384,
+    382.8,
     33.1,
-    131.4,
-    431.1
+    131.3,
+    431.1,
+    1.4
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -43731,18 +46165,19 @@
    ],
    "statusPorAcao": [
     {
-     "marked": 1.524
+     "marked": 0.052
     },
     {
-     "marked": 0.186,
+     "marked": 0.171,
      "weakened": 0.171
     },
-    {
-     "marked": 0.032
-    },
+    {},
     {
      "exposed": 0.615,
-     "marked": 0.141
+     "marked": 0.05
+    },
+    {
+     "marked": 1.61
     }
    ],
    "primeiraHabilidade": 13.39,
@@ -43907,12 +46342,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    427.8,
-    172.4,
+    427.1,
+    172.3,
     341.3,
-    293.6
+    293.6,
+    0.8
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -43927,6 +46371,7 @@
     {
      "slow": 2.488
     },
+    {},
     {}
    ],
    "primeiraHabilidade": 12.53,
@@ -44091,16 +46536,25 @@
     "revives": 0
    },
    "danoPorAcao": [
-    384.4,
-    154.6,
-    0.1,
-    297.7
+    383.5,
+    154.5,
+    0,
+    297.4,
+    1.4
    ],
-   "apoioPorAcao": [
-    851.3,
-    87.8,
-    399,
-    137
+   "curaPorAcao": [
+    8.4,
+    0.5,
+    286.4,
+    104.8,
+    1075.1
+   ],
+   "escudoPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
    ],
    "statusPorAcao": [
     {
@@ -44112,7 +46566,8 @@
     },
     {
      "weakened": 1.606
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 17.06,
    "lutasComHabilidade": 499,
@@ -44276,16 +46731,25 @@
     "revives": 0
    },
    "danoPorAcao": [
-    380.7,
+    380.4,
     231.3,
     332.2,
-    344.2
+    344.2,
+    0.3
    ],
-   "apoioPorAcao": [
-    168.7,
-    19.3,
-    260.3,
-    11.5
+   "curaPorAcao": [
+    0,
+    0,
+    234,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    7.4,
+    1.2,
+    0.6,
+    0.7,
+    215.9
    ],
    "statusPorAcao": [
     {},
@@ -44293,7 +46757,8 @@
     {},
     {
      "exposed": 0.585
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 22.41,
    "lutasComHabilidade": 472,
@@ -44457,12 +46922,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    396.6,
-    89.1,
-    70.9,
-    512.3
+    396,
+    89,
+    70.8,
+    512.3,
+    0.7
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -44482,7 +46956,8 @@
     },
     {
      "exposed": 0.755
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 13.46,
    "lutasComHabilidade": 437,
@@ -44646,12 +47121,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    861.3,
-    85.3,
+    861,
+    85.2,
     200.6,
-    529.7
+    529.7,
+    0.3
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -44668,7 +47152,8 @@
     },
     {
      "confused": 1.659
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 20.75,
    "lutasComHabilidade": 453,
@@ -44832,31 +47317,43 @@
     "revives": 0
    },
    "danoPorAcao": [
-    302.3,
-    157.6,
-    111.9,
-    137.8
+    301.3,
+    157.3,
+    111.7,
+    137.7,
+    1.7
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
     0,
     0,
     339.3,
+    0,
     0
    ],
    "statusPorAcao": [
     {
-     "exposed": 1.48
+     "exposed": 0.018
     },
     {
      "marked": 0.927,
      "weakened": 0.936,
-     "exposed": 0.285
+     "exposed": 0.027
     },
     {
-     "exposed": 0.046
+     "exposed": 0.007
     },
     {
-     "exposed": 0.064
+     "exposed": 0.004
+    },
+    {
+     "exposed": 1.821
     }
    ],
    "primeiraHabilidade": 17.47,
@@ -45021,31 +47518,40 @@
     "revives": 0
    },
    "danoPorAcao": [
-    407.8,
-    179.1,
-    0.1,
-    311.6
+    406.7,
+    178.9,
+    0,
+    311.5,
+    1.5
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
     0,
     0,
     611,
+    0,
     0
    ],
    "statusPorAcao": [
+    {},
     {
-     "weakened": 4.464
+     "provoked": 1.915
     },
     {
-     "provoked": 1.915,
-     "weakened": 0.387
-    },
-    {
-     "weakened": 5.595
+     "weakened": 4.615
     },
     {
      "silenced": 1.038,
-     "weakened": 1.17
+     "weakened": 1.063
+    },
+    {
+     "weakened": 5.937
     }
    ],
    "primeiraHabilidade": 12.46,
@@ -45210,35 +47716,45 @@
     "revives": 0
    },
    "danoPorAcao": [
-    188.8,
+    188.2,
     0,
-    0.2,
-    538.8
+    0,
+    538.6,
+    1.1
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
     0,
     0,
     111,
+    0,
     0
    ],
    "statusPorAcao": [
     {
-     "exposed": 2.515,
-     "confused": 3.312
+     "confused": 1.384,
+     "exposed": 0.589
     },
     {
-     "confused": 0.561,
+     "confused": 0.523,
      "marked": 0.323,
-     "exposed": 0.243
+     "exposed": 0.205
     },
+    {},
     {
-     "exposed": 0.232,
-     "confused": 0.232
-    },
-    {
-     "confused": 2.344,
-     "exposed": 0.574,
+     "confused": 2.314,
+     "exposed": 0.544,
      "silenced": 1.789
+    },
+    {
+     "exposed": 2.226,
+     "confused": 2.228
     }
    ],
    "primeiraHabilidade": 10.51,
@@ -45403,12 +47919,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    182.6,
-    116.6,
-    489.6,
-    392.9
+    157.6,
+    105,
+    479.8,
+    392.5,
+    46.8
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -45425,7 +47950,8 @@
     {
      "weakened": 2.117,
      "slow": 2.143
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 11.07,
    "lutasComHabilidade": 459,
@@ -45589,15 +48115,24 @@
     "revives": 0
    },
    "danoPorAcao": [
-    314.1,
-    113.7,
-    220.4,
-    272.8
+    313.7,
+    113.5,
+    220.3,
+    272.8,
+    0.8
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
     0,
     0,
     256.1,
+    0,
     0
    ],
    "statusPorAcao": [
@@ -45609,7 +48144,8 @@
     {
      "slow": 0.721,
      "exposed": 0.733
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 11.45,
    "lutasComHabilidade": 505,
@@ -45773,16 +48309,25 @@
     "revives": 0
    },
    "danoPorAcao": [
-    138.8,
-    0.3,
-    0.2,
-    162.4
+    136.3,
+    0,
+    0,
+    162.3,
+    3.1
    ],
-   "apoioPorAcao": [
-    771.4,
-    207.9,
-    95.6,
-    198.4
+   "curaPorAcao": [
+    46.3,
+    0,
+    0,
+    150.8,
+    947.3
+   ],
+   "escudoPorAcao": [
+    0,
+    128.9,
+    0,
+    0,
+    0
    ],
    "statusPorAcao": [
     {},
@@ -45791,6 +48336,7 @@
      "weakened": 4.026,
      "slow": 4.092
     },
+    {},
     {}
    ],
    "primeiraHabilidade": 13.68,
@@ -45955,12 +48501,21 @@
     "revives": 0
    },
    "danoPorAcao": [
-    482.7,
-    0.1,
+    482.2,
+    0,
     277.4,
-    550
+    550,
+    0.6
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
+    0,
     0,
     0,
     0,
@@ -45968,22 +48523,24 @@
    ],
    "statusPorAcao": [
     {
-     "weakened": 1.734
+     "weakened": 0.055
     },
     {
      "rooted": 0.312,
-     "slow": 0.312,
-     "weakened": 0.013
+     "slow": 0.312
     },
     {
      "confused": 0.755,
      "exposed": 0.759,
-     "weakened": 0.181
+     "weakened": 0.025
     },
     {
      "confused": 1.741,
      "rooted": 1.755,
-     "weakened": 0.162
+     "weakened": 0.04
+    },
+    {
+     "weakened": 1.97
     }
    ],
    "primeiraHabilidade": 16.07,
@@ -46148,15 +48705,24 @@
     "revives": 0
    },
    "danoPorAcao": [
-    417.1,
-    137.5,
-    0.3,
-    486.2
+    416.3,
+    137.3,
+    0,
+    486.1,
+    1.3
    ],
-   "apoioPorAcao": [
+   "curaPorAcao": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "escudoPorAcao": [
     0,
     0,
     227.3,
+    0,
     0
    ],
    "statusPorAcao": [
@@ -46170,7 +48736,8 @@
     {
      "silenced": 1.936,
      "weakened": 1.965
-    }
+    },
+    {}
    ],
    "primeiraHabilidade": 12.4,
    "lutasComHabilidade": 465,
@@ -46334,18 +48901,28 @@
     "revives": 0
    },
    "danoPorAcao": [
-    299.4,
+    298.3,
     0,
     167.1,
+    0,
+    1.1
+   ],
+   "curaPorAcao": [
+    4.6,
+    189.4,
+    0.5,
+    257.7,
+    623.1
+   ],
+   "escudoPorAcao": [
+    0,
+    152.3,
+    0,
+    0,
     0
    ],
-   "apoioPorAcao": [
-    472.6,
-    373.4,
-    111.2,
-    270.2
-   ],
    "statusPorAcao": [
+    {},
     {},
     {},
     {},

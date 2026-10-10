@@ -40,20 +40,24 @@ interface Acumulado {
   usos: [number, number, number]; danoCausado: number; tempoDePe: number;
   /* o que ele fez (Fighter.stats, somado), para os pontos fortes */
   feitos: { kills: number; healing: number; protection: number; skills: number; interrupts: number; debuffs: number; buffs: number; tempo: number; carga: number; revives: number };
-  /* dano, cura+escudo e Status no rival por ação: [básico, hab. 1, hab. 2, hab. 3] */
-  danoPorAcao: number[]; apoioPorAcao: number[]; statusPorAcao: Record<string, number>[];
+  /* dano, cura+escudo e Status no rival por ação: [básico, hab. 1, hab. 2, hab. 3, fora das ações] — o último é o
+   * que não sai junto com uma ação: o traço e o que continua depois (Regeneração, Queimadura, Veneno…) */
+  danoPorAcao: number[]; curaPorAcao: number[]; escudoPorAcao: number[]; statusPorAcao: Record<string, number>[];
   /* segundos até a primeira habilidade sair (soma; lutas em que saiu) */
   primeiraHabilidade: number; lutasComHabilidade: number;
   /* identidade do trio rival → [lutas, vitórias] */
   contra: Record<string, [number, number]>;
 }
 
+/* o índice do que sai fora das ações (traço, Regeneração, Queimadura…) */
+const FORA = 4;
+
 const acc = new Map<string, Acumulado>(characters.map((c) => [c.id, {
   id: c.id, lutas: 0, vitorias: 0, quedas: 0, tempoDeQueda: 0, primeiroACair: 0, quedaPorGolpeGrande: 0,
   preparos: 0, preparosCortados: 0, controleSegundos: 0, danoRecebido: 0, danoContinuoRecebido: 0, duracaoMedia: 0, contra: {},
   usos: [0, 0, 0], danoCausado: 0, tempoDePe: 0,
   feitos: { kills: 0, healing: 0, protection: 0, skills: 0, interrupts: 0, debuffs: 0, buffs: 0, tempo: 0, carga: 0, revives: 0 },
-  danoPorAcao: [0, 0, 0, 0], apoioPorAcao: [0, 0, 0, 0], statusPorAcao: [{}, {}, {}, {}], primeiraHabilidade: 0, lutasComHabilidade: 0,
+  danoPorAcao: [0, 0, 0, 0, 0], curaPorAcao: [0, 0, 0, 0, 0], escudoPorAcao: [0, 0, 0, 0, 0], statusPorAcao: [{}, {}, {}, {}, {}], primeiraHabilidade: 0, lutasComHabilidade: 0,
 }]));
 
 /* Gerador simples e determinístico para sortear os trios. */
@@ -76,7 +80,7 @@ for (let luta = 0; luta < LUTAS; luta += 1) {
   const controle = new Map<string, number>();
   const quedaDe = new Map<string, number>();
   /* a última ação de cada lutador (0 = básico, 1–3 = habilidade): o dano, a cura e os Status que vêm depois são dela */
-  const acao = new Map<string, number>();
+  const acao = new Map<string, number>(), quando = new Map<string, number>();
   const primeira = new Map<string, number>();
   for (let passo = 0; passo < 6000 && !b.finished; passo += 1) {
     stepBattle(b);
@@ -91,12 +95,14 @@ for (let luta = 0; luta < LUTAS; luta += 1) {
       const alvo = ev.target ? b.fighters.find((f) => f.uid === ev.target) : undefined;
       const fonte = b.fighters.find((f) => f.uid === ev.source);
       if (ev.kind === 'cast' && fonte) acc.get(fonte.characterId)!.preparos += 1;
-      if (ev.kind === 'basic' && fonte) acao.set(fonte.uid, 0);
-      if (ev.kind === 'skill' && fonte && ev.skill !== undefined && ev.skill < 3) { acao.set(fonte.uid, ev.skill + 1); if (!primeira.has(fonte.uid)) primeira.set(fonte.uid, ev.time); }
+      if (ev.kind === 'basic' && fonte) { acao.set(fonte.uid, 0); quando.set(fonte.uid, ev.time); }
+      if (ev.kind === 'skill' && fonte && ev.skill !== undefined && ev.skill < 3) { acao.set(fonte.uid, ev.skill + 1); quando.set(fonte.uid, ev.time); if (!primeira.has(fonte.uid)) primeira.set(fonte.uid, ev.time); }
       if (fonte && alvo) {
-        const m = acc.get(fonte.characterId)!, a = acao.get(fonte.uid) ?? 0;
+        // só é da ação o que sai no mesmo instante dela; o resto é do traço ou do que continua (pedido do
+        // jogador: a cura do traço da Jill aparecia como se fosse do "Tiro da Beretta")
+        const m = acc.get(fonte.characterId)!, a = quando.get(fonte.uid) === ev.time ? acao.get(fonte.uid) ?? 0 : FORA;
         if (ev.kind === 'damage' && fonte.side !== alvo.side) m.danoPorAcao[a]! += ev.value ?? 0;
-        if ((ev.kind === 'heal' || ev.kind === 'shield') && fonte.side === alvo.side && ev.label !== 'Energia cinética armazenada') m.apoioPorAcao[a]! += ev.value ?? 0;
+        if ((ev.kind === 'heal' || ev.kind === 'shield') && fonte.side === alvo.side && ev.label !== 'Energia cinética armazenada') (ev.kind === 'heal' ? m.curaPorAcao : m.escudoPorAcao)[a]! += ev.value ?? 0;
         if (ev.kind === 'status' && ev.status && fonte.side !== alvo.side) m.statusPorAcao[a]![ev.status] = (m.statusPorAcao[a]![ev.status] ?? 0) + 1;
       }
       if (ev.kind === 'skill' && fonte && ev.skill !== undefined && ev.skill < 3) acc.get(fonte.characterId)!.usos[ev.skill] += 1;
@@ -156,7 +162,8 @@ const saida = [...acc.values()].map((m) => ({
   tempoDePe: +(m.tempoDePe / m.lutas).toFixed(2),
   feitos: Object.fromEntries(Object.entries(m.feitos).map(([k, v]) => [k, +(v / m.lutas).toFixed(3)])),
   danoPorAcao: m.danoPorAcao.map((v) => +(v / m.lutas).toFixed(1)),
-  apoioPorAcao: m.apoioPorAcao.map((v) => +(v / m.lutas).toFixed(1)),
+  curaPorAcao: m.curaPorAcao.map((v) => +(v / m.lutas).toFixed(1)),
+  escudoPorAcao: m.escudoPorAcao.map((v) => +(v / m.lutas).toFixed(1)),
   statusPorAcao: m.statusPorAcao.map((o) => Object.fromEntries(Object.entries(o).map(([k, v]) => [k, +(v / m.lutas).toFixed(3)]))),
   primeiraHabilidade: m.lutasComHabilidade ? +(m.primeiraHabilidade / m.lutasComHabilidade).toFixed(2) : null,
   semHabilidade: +(1 - m.lutasComHabilidade / m.lutas).toFixed(4),

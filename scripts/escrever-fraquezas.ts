@@ -33,7 +33,7 @@ interface Medida {
   id: string; lutas: number; primeiroACair: number; cortados: number; quedaPorGolpeGrande: number;
   usos: [number, number, number]; danoCausado: number; tempoDePe: number; duracaoMedia: number;
   feitos: { kills: number; healing: number; protection: number; skills: number; interrupts: number; debuffs: number; buffs: number; tempo: number; carga: number; revives: number };
-  danoPorAcao: number[]; apoioPorAcao: number[]; statusPorAcao: Record<string, number>[];
+  danoPorAcao: number[]; curaPorAcao: number[]; escudoPorAcao: number[]; statusPorAcao: Record<string, number>[];
   primeiraHabilidade: number | null; semHabilidade: number;
 }
 const dados = JSON.parse(readFileSync('docs/fraquezas-medidas.json', 'utf8')) as { lutas: number; medidas: Medida[] };
@@ -75,7 +75,29 @@ const VIDA_ALTA = [...vidas].sort((a, b) => a - b)[Math.floor(vidas.length * 0.7
 const p = (k: keyof typeof M, m: Medida) => posicao(C[k], M[k](m));
 
 /* ------------------------------------------------------------------ as ações de cada um */
-const nomeDaAcao = (c: Character, i: number) => (i === 0 ? c.basic.name : c.skills[i - 1]!.name);
+/*
+ * O 5º "lugar" (índice 4) é o que não sai junto com uma ação: o traço e o que continua depois. Se o traço
+ * faz aquilo (cura, bate, põe Status), é ele; senão é o Status que fica (Regeneração, Queimadura…).
+ */
+const CONTINUA: Record<string, string> = { regen: 'a Regeneração que fica no aliado', burning: 'a Queimadura que fica no rival', poison: 'o Veneno que fica no rival', bleed: 'o Sangramento que fica no rival' };
+type Tipo = 'dano' | 'cura' | 'escudo' | 'status';
+const traçoFaz = (c: Character, tipo: Tipo) => c.trait.effects.some((e) =>
+  tipo === 'dano' ? e.kind === 'damage' || (e.kind === 'status' && ['burning', 'poison', 'bleed'].includes(e.status))
+    : tipo === 'cura' ? e.kind === 'heal' || (e.kind === 'status' && e.status === 'regen') : tipo === 'escudo' ? e.kind === 'shield' : e.kind === 'status');
+const continuaDe = (c: Character, tipo: Tipo) => {
+  const ids = c.skills.flatMap((s) => s.effects).filter((e) => e.kind === 'status').map((e) => (e as { status: string }).status);
+  const achado = (tipo === 'cura' ? ['regen'] : tipo === 'dano' ? ['burning', 'poison', 'bleed'] : []).find((id) => ids.includes(id));
+  return achado ? CONTINUA[achado]! : 'o que fica no alvo';
+};
+const nomeDaAcao = (c: Character, i: number, tipo: Tipo = 'dano') => {
+  if (i === 0) return c.basic.name;
+  if (i <= 3) return c.skills[i - 1]!.name;
+  return traçoFaz(c, tipo) ? `o traço ${c.trait.name}` : continuaDe(c, tipo);
+};
+/* o começo da frase em maiúscula ("o traço X devolve…" → "O traço X devolve…") */
+const maiuscula = (t: string) => t.charAt(0).toUpperCase() + t.slice(1);
+/* o golpe que a ficha destaca: só ações de verdade (o básico ou uma habilidade) */
+const golpeDe = (c: Character, i: number) => (i <= 3 ? nomeDaAcao(c, i) : undefined);
 const maiorAcao = (lista: number[]) => lista.reduce((best, v, i) => (v > lista[best]! ? i : best), 0);
 const nomeDoStatus = (s: string) => statuses[s as StatusId]?.name ?? s;
 const ALIADOS = ['allAllies', 'allyWeak', 'allyFallen'];
@@ -95,25 +117,25 @@ interface Candidata { nota: number; tipo: string; rotulo: string; motivo: string
 /* ------------------------------------------------------------------ pontos fortes */
 function fortes(c: Character, m: Medida): Candidata[] {
   const out: Candidata[] = [];
-  const acaoDano = maiorAcao(m.danoPorAcao), acaoApoio = maiorAcao(m.apoioPorAcao);
+  const acaoDano = maiorAcao(m.danoPorAcao), acaoCura = maiorAcao(m.curaPorAcao), acaoEscudo = maiorAcao(m.escudoPorAcao);
   const totalStatus = m.statusPorAcao.map((o) => Object.values(o).reduce((t, v) => t + v, 0));
   const acaoStatus = maiorAcao(totalStatus);
   const statusDe = (i: number) => Object.entries(m.statusPorAcao[i] ?? {}).sort((a, b) => b[1] - a[1]).slice(0, 2).map(([s]) => nomeDoStatus(s));
   const forte = (tipo: TipoDeForca, rotulo: string, posi: number, motivo: string, extra = 0, golpe?: string) =>
     out.push({ tipo, rotulo, nota: (posi - 0.8) * 6 + extra, motivo, ...(golpe ? { golpe } : {}) });
 
-  forte('dano', 'Bate muito forte', p('danoPorMinuto', m), `${nomeDaAcao(c, acaoDano)} tira uns ${redondo(m.danoPorAcao[acaoDano]!)} de Vida por luta`, 0, nomeDaAcao(c, acaoDano));
+  forte('dano', 'Bate muito forte', p('danoPorMinuto', m), maiuscula(`${nomeDaAcao(c, acaoDano, 'dano')} tira uns ${redondo(m.danoPorAcao[acaoDano]!)} de Vida por luta`), 0, golpeDe(c, acaoDano));
   if (m.feitos.kills > 0) forte('nocaute', 'Finalizador', p('nocautes', m), `Derruba ${porLuta(m.feitos.kills, 'rival', 'rivais')}, mais que quase todo o elenco`, m.feitos.kills >= 0.9 ? 0 : -0.3);
-  if (m.feitos.healing > 0) forte('cura', 'Cura forte', p('cura', m), `${nomeDaAcao(c, acaoApoio)} devolve uns ${redondo(m.feitos.healing)} de Vida por luta`, 0.15, nomeDaAcao(c, acaoApoio));
-  if (m.feitos.protection > 0) forte('escudo', 'Escudo forte', p('escudo', m), `${nomeDaAcao(c, acaoApoio)} segura uns ${redondo(m.feitos.protection)} de dano por luta com Escudo`, 0.1, nomeDaAcao(c, acaoApoio));
+  if (m.feitos.healing > 0) forte('cura', 'Cura forte', p('cura', m), maiuscula(`${nomeDaAcao(c, acaoCura, 'cura')} devolve uns ${redondo(m.feitos.healing)} de Vida por luta`), 0.15, golpeDe(c, acaoCura));
+  if (m.feitos.protection > 0) forte('escudo', 'Escudo forte', p('escudo', m), maiuscula(`${nomeDaAcao(c, acaoEscudo, 'escudo')} segura uns ${redondo(m.feitos.protection)} de dano por luta com Escudo`), 0.1, golpeDe(c, acaoEscudo));
   if (m.feitos.debuffs > 0 && totalStatus[acaoStatus]! > 0) {
     const st = statusDe(acaoStatus);
-    forte('controle', 'Atrapalha os rivais', p('controle', m), `${nomeDaAcao(c, acaoStatus)} deixa os rivais ${st.join(' e ')}`, 0, nomeDaAcao(c, acaoStatus));
+    forte('controle', 'Atrapalha os rivais', p('controle', m), maiuscula(`${nomeDaAcao(c, acaoStatus, 'status')} deixa os rivais ${st.join(' e ')}`), 0, golpeDe(c, acaoStatus));
   }
   if (m.feitos.tempo > 0) forte('ritmo', 'Dita o ritmo', p('ritmo', m), 'Adianta a vez do trio e atrasa a dos rivais', 0.05);
-  if (m.feitos.carga > 0) forte('carga', 'Enche a Carga do trio', p('carga', m), 'As habilidades dos aliados saem antes com ele no trio');
+  if (m.feitos.carga > 0) forte('carga', 'Enche a Carga do trio', p('carga', m), 'As habilidades dos aliados saem antes quando está no trio');
   if (m.feitos.interrupts > 0) forte('corte', 'Corta Preparos', p('cortes', m), `Corta ${porLuta(m.feitos.interrupts, 'golpe em Preparo', 'golpes em Preparo')}`, m.feitos.interrupts >= 0.9 ? 0.1 : -1);
-  if (m.feitos.buffs > 0) forte('reforco', 'Sempre reforçado', p('reforco', m), 'Mantém Status bons nele e no trio quase a luta toda');
+  if (m.feitos.buffs > 0) forte('reforco', 'Sempre reforçado', p('reforco', m), 'Mantém Status bons em si e no trio quase a luta toda');
   if (m.feitos.revives > 0.05) forte('reviver', 'Levanta aliados', 0.8 + Math.min(0.2, m.feitos.revives), `Põe de pé ${porLuta(m.feitos.revives, 'aliado caído', 'aliados caídos')}`, 0.6);
   const porque = [c.hp >= VIDA_ALTA ? `${num(c.hp)} de Vida` : '', temSustento(c) ? 'se cura ou se protege' : ''].filter(Boolean);
   forte('aguenta', 'Difícil de derrubar', p('dePe', m), `Fica de pé ${pct(Math.min(1, M.dePe(m)))} da luta${porque.length ? ` (${porque.join(', ')})` : ''}`);
@@ -163,12 +185,12 @@ function fracos(c: Character, m: Medida): Candidata[] {
   fraco('lento', 'Ataque lento', (pIntervalo - 0.85) * 7 + 0.3, `${c.basic.name} sai só a cada ${num(c.interval, 2)} s`, c.basic.name);
   // Pouco dano (quem cuida do trio não precisa bater forte: vale menos)
   fraco('dano', 'Pouco dano', (0.12 - p('danoPorMinuto', m)) * 8 + (apoia(c) ? -0.6 : 0.3),
-    apoia(c) ? 'Bate pouco; o forte dele é cuidar do trio' : 'Bate pouco e precisa do trio para derrubar alguém');
+    apoia(c) ? 'Bate pouco; o forte é cuidar do trio' : 'Bate pouco e precisa do trio para derrubar alguém');
   // Não finaliza: bate bastante, mas o dano se espalha e quase não derruba ninguém
   if (p('danoPorMinuto', m) >= 0.4) fraco('espalha', 'Não finaliza', (0.12 - p('finaliza', m)) * 8 + 0.2, 'Bate bastante, mas espalha o dano e quase não derruba ninguém');
   // Só cresce apanhando
   const cresceApanhando = c.trait.on === 'received' && c.trait.effects.some((e) => e.kind === 'status' && ['strengthened', 'haste'].includes(e.status));
-  if (cresceApanhando) fraco('apanhar', 'Precisa apanhar', 0.7 + (pVida <= 0.4 ? 0.3 : 0), `${c.trait.name} só o fortalece quando ele recebe dano`);
+  if (cresceApanhando) fraco('apanhar', 'Precisa apanhar', 0.7 + (pVida <= 0.4 ? 0.3 : 0), `${c.trait.name} só fortalece quando recebe dano`);
   return out;
 }
 
@@ -196,7 +218,7 @@ function escolher(listas: Map<string, Candidata[]>, segundaMinima: number) {
 const F = escolher(new Map(characters.map((c) => [c.id, fracos(c, porId.get(c.id)!)])), 1.0);
 const S = escolher(new Map(characters.map((c) => [c.id, fortes(c, porId.get(c.id)!)])), 0.9);
 
-const minuscula = (t: string) => (/^(É|Só|Bate|Em|A|Fica|Derruba|Corta|Põe|Solta|Adianta|As|Mantém|Segura|Nenhum) /.test(t) ? t.charAt(0).toLowerCase() + t.slice(1) : t);
+const minuscula = (t: string) => (/^(É|Só|Bate|Em|A|O|Fica|Derruba|Corta|Põe|Solta|Adianta|As|Mantém|Segura|Nenhum) /.test(t) ? t.charAt(0).toLowerCase() + t.slice(1) : t);
 const frase = (l: Candidata[]) => l.map((x) => `${x.rotulo}: ${minuscula(x.motivo)}.`).join(' ');
 const json = (l: Candidata[]) => JSON.stringify(l.map(({ tipo, rotulo, motivo }) => ({ tipo, rotulo, motivo })));
 writeFileSync('src/data/fraquezas.ts', `/*
