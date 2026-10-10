@@ -1,4 +1,5 @@
 import { CHOQUE_DO_ELETRIFICADO, statuses } from '../data/statuses';
+import { textoDoFerido } from './ferido';
 import type { Effect, JeitoDeBater, Skill, Target, Topic, Trait, StatusId } from './types';
 
 const n=(v:number)=>Number(v.toFixed(1)).toLocaleString('pt-BR');
@@ -361,7 +362,7 @@ export function presentSkill(skill:Skill):SkillPresentation {
      * linha do Alvo já respondeu contra quem.
      */
     always:'ficar pronta',
-    injured:'o alvo estiver com menos de 78% de Vida',
+    injured:'o alvo estiver com menos de 78% de Vida', // a ficha usa textoDoFerido (de quem é a Vida)
     enemyCast:'um inimigo estiver preparando uma habilidade',
     threatened:'um aliado tiver menos de 85% de Vida ou um inimigo começar o Preparo',
     investigated:'houver um alvo conhecido com 100 Investigação',
@@ -388,10 +389,12 @@ export function presentSkill(skill:Skill):SkillPresentation {
    * explicam sozinhos. Fora disso, repetiria o primeiro cabeçalho.
    */
   const temCabecalho=grupos.some(g=>g.titulo!=='');
+  // "alvo ferido" diz de quem é a Vida: o aliado que recebe a cura, ele mesmo ou o inimigo (engine/ferido.ts)
+  const quando=skill.condition==='injured'?textoDoFerido(skill):use[skill.condition];
   return {summary:effects[0]??'Sem efeito',target:targetNames[skill.target],effects,grupos,
     mostrarAlvo:!temCabecalho&&(skill.effects.length===0||!skill.effects.every(seApresenta)),
-    charge:cargasLegiveis(skill.charge),useWhen:use[skill.condition],
-    ...(skill.condition!=='always'?{requisito:`Só usa quando ${use[skill.condition]}`}:{}),
+    charge:cargasLegiveis(skill.charge),useWhen:quando,
+    ...(skill.condition!=='always'?{requisito:`Só usa quando ${quando}`}:{}),
     preparation:skill.preparation>0?secs(skill.preparation):'instantâneo',cooldown:secs(skill.cooldown)};
 }
 /*

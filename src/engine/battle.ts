@@ -2,6 +2,7 @@ import { byId } from '../data/characters';
 import { CHOQUE_DO_ELETRIFICADO, DEIXAM_VULNERAVEL, RITMO_DA_INVOCACAO, statuses } from '../data/statuses';
 import { random,shuffle } from './random';
 import { DOMINION as D, fracaoPorAlvo} from './dominion-config';
+import { alvosDoFerido } from './ferido';
 import type { Battle, BattleEvent, Effect, Fighter, JeitoDeBater, Side, Skill, StatusId, Target, Topic } from './types';
 import { chooseTarget, inferTargetIntent } from './targeting';
 
@@ -502,7 +503,8 @@ export function condicaoAtendida(b:Battle,f:Fighter,s:Skill):boolean{
 function appropriate(b:Battle,f:Fighter,s:Skill){
   if(s.requiresSkills?.some(index=>(f.skills[index]?.uses??0)<1))return false;
   if(temReviver(s)&&podeReviver(b,f))return true;
-  if(s.condition==='injured')return targets(b,f,s.target,s.effects).some(x=>x.hp/x.maxHp<.78);
+  // de quem é a Vida que importa: quem recebe a cura/proteção, ou o alvo do golpe (engine/ferido.ts)
+  if(s.condition==='injured')return alvosDoFerido(s).some(regra=>targets(b,f,regra,regra===s.target?s.effects:s.effects.filter(e=>e.target===regra),false).some(x=>x.hp/x.maxHp<.78));
   if(s.condition==='enemyCast')return hostile(b,f).some(interrompivel);
   if(s.condition==='threatened')return friendly(b,f).some(x=>x.hp/x.maxHp<.85)||hostile(b,f).some(interrompivel);
   if(s.condition==='investigated')return targets(b,f,s.target,s.effects,false).some(x=>(f.investigation[x.uid]??0)>=100);
