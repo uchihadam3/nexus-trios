@@ -1,0 +1,59 @@
+{
+ "bpm": 162,
+ "compassos": 80,
+ "segundos": 118.519,
+ "secoes": [
+  {
+   "nome": "Faíscas",
+   "inicio": 0.0
+  },
+  {
+   "nome": "Avanço",
+   "inicio": 11.852
+  },
+  {
+   "nome": "Choque",
+   "inicio": 35.556
+  },
+  {
+   "nome": "Foco",
+   "inicio": 59.259
+  },
+  {
+   "nome": "Clímax",
+   "inicio": 71.111
+  },
+  {
+   "nome": "Retorno",
+   "inicio": 106.667
+  }
+ ],
+ "estilo": "anime arcade · ascensão (v5)",
+ "laco": {
+  "inicio": 11.852,
+  "fim": 118.519
+ },
+ "camadas": {
+  "musica-ascensao-base": {
+   "arquivo": "musica-ascensao-base.ogg",
+   "mp3": "musica-ascensao-base.mp3",
+   "segundos": 118.519,
+   "bytes": 1144258,
+   "rmsDb": -22.0
+  },
+  "musica-ascensao-pulso": {
+   "arquivo": "musica-ascensao-pulso.ogg",
+   "mp3": "musica-ascensao-pulso.mp3",
+   "segundos": 118.519,
+   "bytes": 961956,
+   "rmsDb": -25.5
+  },
+  "musica-ascensao-tema": {
+   "arquivo": "musica-ascensao-tema.ogg",
+   "mp3": "musica-ascensao-tema.mp3",
+   "segundos": 118.519,
+   "bytes": 1396904,
+   "rmsDb": -24.0
+  }
+ }
+}

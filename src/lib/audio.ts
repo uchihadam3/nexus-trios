@@ -23,8 +23,9 @@ import { profileFor } from '../presentation/vfxProfiles';
  *
  * Música: três camadas do mesmo trecho de ~2 min (base, pulso, tema), em laço.
  * A base toca sempre; o pulso e o tema sobem com a intensidade da luta.
- * São três músicas (FAIXAS): a principal nas lutas 1 a 5, a de tensão nas
- * lutas 6 a 9 e a do chefe na luta 10 (tools/audio/generate_music_v5.py).
+ * São quatro músicas (FAIXAS): a principal nas lutas 1 a 3, a ascensão nas
+ * lutas 4 a 6, a de tensão nas lutas 7 a 9 e a do chefe na luta 10
+ * (tools/audio/generate_music_v5.py).
  */
 const SFX='/assets/audio/sfx/';
 export const AUDIO_ASSETS={battleLoop:null as string|null,battleStems:['/assets/audio/musica-base.ogg','/assets/audio/musica-pulso.ogg','/assets/audio/musica-tema.ogg'] as const};
@@ -41,22 +42,24 @@ export function posicaoNoLaco(inicio:number,t:number,duracao:number,laco=LACO_DA
   const p=inicio+t;if(p<duracao)return p;
   const volta=duracao-laco;return laco+((p-laco)%volta);
 }
-export type Faixa='principal'|'tensao'|'chefe';
+export type Faixa='principal'|'ascensao'|'tensao'|'chefe';
 const camadas=(nome:string)=>(['base','pulso','tema'] as const).map(c=>`/assets/audio/${nome}-${c}.ogg`);
 /*
- * As três músicas de batalha. `laco`: onde a música volta depois do fim (o
+ * As quatro músicas de batalha. `laco`: onde a música volta depois do fim (o
  * começo da segunda seção, em segundos — musica*.json).
- *   principal (lutas 1–5): anime arcade, mi menor, 156 BPM (v4)
- *   tensao    (lutas 6–9): ré menor harmônica, 150 BPM, mais séria (v5)
+ *   principal (lutas 1–3): anime arcade, mi menor, 156 BPM (v4)
+ *   ascensao  (lutas 4–6): lá menor heroico, 162 BPM, baixo em oitavas e metais (v5)
+ *   tensao    (lutas 7–9): ré menor harmônica, 150 BPM, mais séria (v5)
  *   chefe     (luta 10):   dó menor frígio, 168 BPM, coro, sinos e metais (v5)
  */
 export const FAIXAS:Record<Faixa,{camadas:readonly string[];laco:number}>={
   principal:{camadas:AUDIO_ASSETS.battleStems,laco:LACO_DA_MUSICA},
+  ascensao:{camadas:camadas('musica-ascensao'),laco:11.852},
   tensao:{camadas:camadas('musica-tensao'),laco:12.8},
   chefe:{camadas:camadas('musica-chefe'),laco:11.429},
 };
 /** Qual música toca em cada luta (índice 0–9). */
-export const faixaDaLuta=(indice:number):Faixa=>indice>=9?'chefe':indice>=5?'tensao':'principal';
+export const faixaDaLuta=(indice:number):Faixa=>indice>=9?'chefe':indice>=6?'tensao':indice>=3?'ascensao':'principal';
 const MAX_VOZES=5;
 export interface MusicMood {heat:number;pressure:number;time:number}
 class BattleAudio {

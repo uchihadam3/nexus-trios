@@ -36,7 +36,19 @@ Cada faixa sai nas mesmas três camadas da v4 (base, pulso, tema), em OGG e
 MP3, com o mesmo volume de cada camada: o jogo sobe pulso e tema quando a luta
 esquenta, igual à música de agora.
 
-Uso: python3 tools/audio/generate_music_v5.py [tensao|chefe]
+ASCENSÃO (lutas 4–6) — lá menor, 162 BPM, 80 compassos (~1 min 59 s)
+  Pedido do jogador: "uma segunda música, muito boa, no mesmo nível" entre a
+  principal e a de tensão: a jornada esquentando, ainda heroica, mais intensa
+  que a primeira e menos sombria que a de tensão.
+  Faíscas     o arpejo de faíscas e o baixo em oitavas subindo, a guitarra cresce
+  Avanço      o tema heroico (lá menor com o mi maior), baixo em oitavas pulsando
+  Choque      riff sincopado, o supersaw chama e os metais respondem
+  Foco        meio-tempo: sinos, coro e o tema longo, a carga subindo
+  Clímax      o tema um tom acima (si menor), bumbo duplo no fim, tudo junto
+  Retorno     a sirene subindo e a virada de volta ao Avanço
+  (o laço volta para o Avanço)
+
+Uso: python3 tools/audio/generate_music_v5.py [ascensao|tensao|chefe]
      (gera public/assets/audio/musica-<faixa>-*.ogg/.mp3 e musica-<faixa>.json)
 """
 from __future__ import annotations
@@ -501,6 +513,232 @@ def tensao():
     m.renderiza("anime arcade · tensão (v5)")
 
 
+# ================================================================== ASCENSÃO (lutas 4–6)
+ACORDES_ASCENSAO = {
+    "Am": (45, [57, 60, 64]), "F": (41, [53, 57, 60]), "C": (36, [48, 52, 55]), "G": (43, [55, 59, 62]),
+    "E": (40, [52, 56, 59]), "Dm": (38, [50, 53, 57]), "Em": (40, [52, 55, 59]),
+    # o Clímax um tom acima (si menor)
+    "Bm": (35, [47, 50, 54]), "Gc": (43, [55, 59, 62]), "D": (38, [50, 54, 57]), "A": (45, [57, 61, 64]), "F#": (42, [54, 58, 61]),
+}
+PROG_ASCENSAO = (["Am", "Am", "F", "F", "C", "C", "G", "E"]                                 # Faíscas 0–7
+                 + ["Am", "F", "C", "G", "Am", "F", "G", "E"] * 2                           # Avanço 8–23
+                 + ["Dm", "Am", "Dm", "E", "Dm", "Am", "Dm", "E"]                           # Choque 24–39
+                 + ["F", "G", "Am", "E", "F", "G", "E", "E"]
+                 + ["F", "G", "Em", "Am", "F", "G", "E", "E"]                               # Foco 40–47
+                 + ["Bm", "Gc", "D", "A", "Bm", "Gc", "A", "F#"] * 3                        # Clímax +1 tom 48–71
+                 + ["Am", "Am", "F", "F", "G", "G", "E", "E"])                              # Retorno 72–79
+SECOES_ASCENSAO = [("Faíscas", 0), ("Avanço", 8), ("Choque", 24), ("Foco", 40), ("Clímax", 48), ("Retorno", 72)]
+
+# o tema do Avanço: o mi que salta para o lá, desce em escada e termina no sol sustenido (o mi maior)
+TEMA_AVANCO = [(0, 1.5, 76), (1.5, .5, 74), (2, 1, 76), (3, 1, 81),
+               (4, 2, 79), (6, 1, 77), (7, 1, 76),
+               (8, 1.5, 76), (9.5, .5, 74), (10, 1, 72), (11, 1, 74),
+               (12, 3, 71), (15, 1, 74),
+               (16, 1.5, 76), (17.5, .5, 74), (18, 1, 76), (19, 1, 81),
+               (20, 2, 84), (22, 1, 83), (23, 1, 81),
+               (24, 1.5, 79), (25.5, .5, 81), (26, 1, 83), (27, 1, 79),
+               (28, 3, 80), (31, 1, 76)]
+# o Choque: a chamada curta (o supersaw), a resposta fica com os metais
+CHAMADA = [(0, .5, 81), (.5, .5, 81), (1.5, 1, 84), (3, 1, 81),
+           (4, .5, 76), (4.5, .5, 76), (5.5, 1, 79), (7, 1, 76),
+           (8, .5, 77), (8.5, .5, 77), (9.5, 1, 81), (11, 1, 86),
+           (12, 2, 83), (14, 1, 80), (15, 1, 76)]
+PONTE_ASCENSAO = [(0, 2, 77), (2, 1, 79), (3, 1, 81),
+                  (4, 2, 83), (6, 1, 81), (7, 1, 79),
+                  (8, 3, 81), (11, 1, 84),
+                  (12, 4, 83),
+                  (16, 2, 84), (18, 1, 83), (19, 1, 81),
+                  (20, 2, 83), (22, 1, 86), (23, 1, 88),
+                  (24, 4, 88), (28, 4, 80)]
+FOCO_ASCENSAO = [(0, 4, 77), (4, 4, 79), (8, 3, 79), (11, 1, 76), (12, 4, 76),
+                 (16, 3, 77), (19, 1, 79), (20, 4, 81), (24, 4, 83), (28, 4, 80)]
+
+
+def ascensao():
+    m = Musica("ascensao", 162, PROG_ASCENSAO, ACORDES_ASCENSAO, SECOES_ASCENSAO, laco=8, semente=162080)
+    assert m.compassos == 80
+    S16, BAR, BEAT = m.S16, m.BAR, m.BEAT
+    SINCOPE = [(0, 3), (3, 3), (6, 2), (8, 2), (10, 2), (12, 4)]
+
+    for b in range(m.compassos):
+        sec, local = m.secao(b)
+        t0 = m.t(b)
+        raiz, notas = m.acorde(b)
+        pc = power(raiz + 12 if raiz < 40 else raiz)
+        clima = sec == "Clímax"
+
+        # ------------------------------------------------ o arpejo de faíscas (pulso)
+        if sec in ("Faíscas", "Avanço", "Clímax", "Retorno"):
+            arp = [notas[0] + 24, notas[1] + 24, notas[2] + 24, notas[0] + 36, notas[2] + 24, notas[1] + 24, notas[0] + 24, notas[2] + 12]
+            forca = (0.35 + 0.5 * local / 7) if sec == "Faíscas" else 0.7 if sec != "Clímax" else 0.85
+            for k in range(16):
+                m.poe(m.pulso_eco, pan(faisca(arp[k % 8], forca * (1.0 if k % 4 == 0 else 0.75)), 0.35 * (1 if k % 2 else -1)), t0 + k * S16)
+
+        # ------------------------------------------------ pad e coro
+        if sec == "Faíscas":
+            m.poe(m.base_sala, pad(notas, BAR, 0.5 + 0.5 * local / 7, 1200 + 300 * local), t0)
+        elif sec == "Foco":
+            m.poe(m.base_sala, pad(notas, BAR, 0.9, 1900), t0)
+            m.poe(m.tema, coro([n + 12 for n in notas], BAR, 0.8 + 0.03 * local), t0)
+        elif clima:
+            m.poe(m.base_sala, pad(notas, BAR, 0.55, 3200), t0)
+            m.poe(m.tema, coro([n + 12 for n in notas], BAR, 0.6 if local < 8 else 0.85 if local < 16 else 1.0), t0)
+        else:
+            m.poe(m.base_sala, pad(notas, BAR, 0.45, 2700), t0)
+
+        # ------------------------------------------------ baixo: oitavas pulsando (a marca desta música)
+        if sec == "Faíscas":
+            if local >= 4:
+                for k in range(8):
+                    m.poe(m.base, baixo(raiz + (12 if k % 2 else 0), BEAT * 0.42, 0.6 + 0.1 * (local - 4)), t0 + k * BEAT / 2)
+            elif local % 2 == 0:
+                m.poe(m.base, timpano(raiz, 0.8), t0)
+        elif sec in ("Avanço", "Retorno") or clima:
+            for k in range(16):
+                m.poe(m.base, baixo(raiz + (12 if k % 2 else 0), S16 * 0.8, 1.05 if k % 4 == 0 else 0.85), t0 + k * S16)
+        elif sec == "Choque":
+            for p, d in SINCOPE:
+                m.poe(m.base, baixo(raiz, S16 * d * 0.88, 1.05 if p in (0, 8) else 0.9), t0 + p * S16)
+        elif sec == "Foco":
+            for p, d in ((0, 6), (6, 4), (10, 6)):
+                m.poe(m.base, baixo(raiz, S16 * d * 0.9, 0.85), t0 + p * S16)
+
+        # ------------------------------------------------ guitarras (pulso)
+        if sec == "Faíscas" and local >= 6:
+            m.poe(m.pulso, guitarra(pc, BAR * 0.95, 0.6 + 0.3 * (local - 6)), t0)
+        elif sec == "Avanço" or (clima and local < 16):
+            m.poe(m.pulso, guitarra(pc, BEAT * 1.4, 1.0), t0)
+            for k in range(3, 8):
+                m.poe(m.pulso, guitarra(pc, BEAT * 0.35, 0.82, abafada=True), t0 + k * BEAT / 2)
+        elif sec == "Choque":
+            for p, d in SINCOPE:
+                aberto = p in (0, 6, 12)
+                m.poe(m.pulso, guitarra(pc, S16 * d * (0.95 if aberto else 0.7), 1.0 if aberto else 0.85, abafada=not aberto), t0 + p * S16)
+            for p in (2, 10):                                                # contratempo
+                m.poe(m.pulso, guitarra(pc, S16 * 0.6, 0.7, abafada=True, lado=0.3), t0 + p * S16)
+        elif sec == "Foco" and local >= 6:
+            passo = BEAT / 2 if local == 6 else S16
+            for k in range(int(BAR / passo)):
+                m.poe(m.pulso, guitarra(pc, passo * 0.6, 0.55 + 0.35 * k * passo / BAR, abafada=True), t0 + k * passo)
+        elif clima:                                                          # o fim do Clímax: galope
+            for beat in range(4):
+                for p, d in ((0, 2), (2, 1), (3, 1)):
+                    aberto = beat == 0 and p == 0
+                    m.poe(m.pulso, guitarra(pc, S16 * d * (2.5 if aberto else 0.8), 1.0 if aberto else 0.85, abafada=not aberto), t0 + (beat * 4 + p) * S16)
+        elif sec == "Retorno":
+            m.poe(m.pulso, guitarra(pc, BEAT * 0.9, 1.0), t0)
+            for k in range(2, 8):
+                m.poe(m.pulso, guitarra(pc, BEAT * 0.35, 0.78 + 0.03 * local, abafada=True), t0 + k * BEAT / 2)
+
+        # ------------------------------------------------ bateria
+        if sec == "Faíscas":
+            m.bat(range(0, 16, 2), m.CHIMBAL, m.pulso, t0, 0.4 + 0.6 * local / 7)
+            if local >= 4:
+                m.bat([0, 8], m.BUMBO, m.base, t0)
+            if local == 3:
+                m.virada_de_tons(t0, [52, 50, 47, 45], 0.8)
+            if local == 6:
+                m.poe(m.base, m.rufo(2, 0.15), t0)
+                m.poe(m.base, riser(BAR * 2), t0)
+        elif sec == "Avanço":
+            m.bat([0, 6, 8, 10], m.BUMBO_F, m.base, t0)
+            m.bat([4, 12], m.CAIXA, m.base_sala, t0)
+            m.bat(range(0, 16, 2), m.CHIMBAL_F, m.pulso, t0)
+            m.bat([2, 6, 10, 14], m.CHIMBAL_ABERTO, m.pulso, t0, 0.5)
+            if local in (0, 8):
+                m.poe(m.pulso, m.PRATO, t0)
+                if local == 0:
+                    m.poe(m.base, m.IMPACTO, t0)
+            if local == 15:
+                m.virada_de_tons(t0, [57, 55, 52, 50, 48, 45, 43, 41])
+        elif sec == "Choque":
+            m.bat([0, 3, 6, 10, 12], m.BUMBO_F, m.base, t0)
+            m.bat([4, 12], m.CAIXA_F, m.base_sala, t0)
+            for k in range(0, 16, 2):
+                m.poe(m.pulso, m.CONDUCAO, t0 + k * S16)
+            if local % 4 == 0:
+                m.poe(m.pulso, m.PRATO, t0)
+            if local == 0:
+                m.poe(m.base, m.IMPACTO, t0, 1.1)
+            if local in (7, 15):
+                m.virada_de_tons(t0, [55, 52, 50, 48, 45, 43, 41, 40])
+        elif sec == "Foco":
+            m.bat([0, 10], m.BUMBO, m.base, t0)
+            m.bat([8], m.CAIXA, m.base_sala, t0)                             # meio-tempo
+            m.bat(range(0, 16, 4), m.CHIMBAL, m.pulso, t0)
+            if local == 0:
+                m.poe(m.base, m.IMPACTO, t0, 0.8)
+                m.poe(m.pulso, m.PRATO, t0, 0.7)
+            if local == 6:
+                m.poe(m.base, m.rufo(2, 0.2), t0)
+                m.poe(m.base, riser(BAR * 2, 1.3), t0)
+        elif clima:
+            if local < 16:
+                m.bat([0, 6, 8, 10], m.BUMBO_F, m.base, t0)
+            else:
+                m.bat(range(16), m.BUMBO, m.base, t0)                       # bumbo duplo
+            m.bat([4, 12], m.CAIXA_F, m.base_sala, t0)
+            for k in range(0, 16, 2):
+                m.poe(m.pulso, m.CONDUCAO, t0 + k * S16)
+            if local % 4 == 0:
+                m.poe(m.pulso, m.PRATO, t0)
+            if local in (0, 8, 16):
+                m.poe(m.base, m.IMPACTO, t0, 1.2)
+                m.poe(m.base, timpano(raiz, 1.0), t0)
+            if local in (7, 15):
+                m.virada_de_tons(t0, [59, 57, 54, 52, 50, 47, 45, 43])
+        elif sec == "Retorno":
+            m.bat(range(0, 16, 2), m.BUMBO_F, m.base, t0)
+            m.bat([4, 12] if local < 4 else range(0, 16, 2), m.CAIXA if local < 4 else m.CAIXA_FANTASMA, m.base_sala, t0)
+            m.bat(range(0, 16, 2), m.CHIMBAL_F, m.pulso, t0)
+            if local == 0:
+                m.poe(m.pulso, m.PRATO, t0)
+                m.poe(m.base, m.IMPACTO, t0, 0.9)
+            if local == 4:
+                m.poe(m.base, riser(BAR * 4, 1.3), t0)
+            if local == 6:
+                m.poe(m.base, m.rufo(2, 0.25), t0)
+
+        # ------------------------------------------------ tema
+        if sec == "Faíscas" and local == 4:
+            m.poe(m.tema, metais([n + 12 for n in notas], BEAT * 1.6, 0.9), t0)
+        if sec == "Avanço" and local == 0:
+            m.frase(m.tema_eco, TEMA_AVANCO, t0, forte=1.0, brilho=5400)
+        if sec == "Avanço" and local == 8:
+            m.frase(m.tema_eco, TEMA_AVANCO, t0, forte=1.05, brilho=5800, dobra=-12)
+        if sec == "Choque":
+            if local in (0, 4):
+                # a chamada no supersaw; os metais respondem em cada compasso, no fim do 3º tempo
+                m.frase(m.tema_eco, CHAMADA, t0, forte=1.0, brilho=5600)
+            if local < 8:
+                m.poe(m.tema, metais([n + 12 for n in notas], S16 * 1.5, 1.1), t0 + 2.5 * BEAT)
+                m.poe(m.tema, metais([n + 12 for n in notas], S16 * 3.5, 1.15), t0 + 3 * BEAT)
+            if local == 8:
+                m.frase(m.tema_eco, PONTE_ASCENSAO, t0, forte=1.05, brilho=5800, dobra=-12)
+                m.frase(m.tema, PONTE_ASCENSAO, t0, transp=-12, forte=0.5, voz="metal")
+        if sec == "Foco":
+            if local == 0:
+                m.frase(m.tema_eco, FOCO_ASCENSAO, t0, forte=0.8, brilho=3400)
+            seq = [notas[0] + 24, notas[2] + 12, notas[1] + 24, notas[2] + 12]
+            for k, nota in enumerate(seq):
+                m.poe(m.tema_eco, pan(v4.sino(nota, 0.75), 0.3 * (1 if k % 2 else -1)), t0 + k * BEAT)
+        if clima:
+            if local == 0:
+                m.frase(m.tema_eco, TEMA_AVANCO, t0, transp=2, forte=1.1, brilho=6000, dobra=-12)
+            if local == 8:
+                m.frase(m.tema_eco, TEMA_AVANCO, t0, transp=2, forte=1.1, brilho=6200, voz="ambos")
+            if local == 16:
+                m.frase(m.tema_eco, TEMA_AVANCO, t0, transp=2, forte=1.2, brilho=6500, dobra=-12, voz="ambos")
+                m.frase(m.tema_eco, TEMA_AVANCO, t0, transp=2 - 5, forte=0.38, brilho=4000)
+        if sec == "Retorno":
+            # a sirene: uma nota longa subindo até a volta ao Avanço
+            m.poe(m.tema_eco, supersaw(76 + local, BAR * 0.95, 0.5 + 0.06 * local, 2400 + 500 * local, False), t0)
+            if local in (0, 2, 4, 6):
+                m.poe(m.tema, metais([n + 12 for n in notas], BEAT * 0.9, 1.1), t0)
+
+    m.renderiza("anime arcade · ascensão (v5)")
+
+
 # ================================================================== CHEFE (luta 10)
 ACORDES_CHEFE = {
     "Cm": (36, [48, 51, 55]), "Ab": (44, [56, 60, 63]), "Db": (37, [49, 53, 56]), "G": (43, [55, 59, 62]),
@@ -786,7 +1024,9 @@ def chefe():
 
 
 if __name__ == "__main__":
-    qual = sys.argv[1:] or ["tensao", "chefe"]
+    qual = sys.argv[1:] or ["ascensao", "tensao", "chefe"]
+    if "ascensao" in qual:
+        ascensao()
     if "tensao" in qual:
         tensao()
     if "chefe" in qual:

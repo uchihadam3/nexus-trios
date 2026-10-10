@@ -120,11 +120,11 @@ describe('compact reusable audiovisual library',()=>{
     // a base é a mais presente; pulso e tema ficam por baixo
     expect(musica.camadas['musica-base']!.rmsDb).toBeGreaterThan(musica.camadas['musica-tema']!.rmsDb);
   });
-  /* Pedido do jogador: a música de agora nas lutas 1–5, uma mais tensa nas 6–9 e uma de chefe na 10. */
-  it('troca de música com a jornada: principal (1–5), tensão (6–9), chefe (10)',()=>{
-    expect(Array.from({length:10},(_,i)=>faixaDaLuta(i))).toEqual(['principal','principal','principal','principal','principal','tensao','tensao','tensao','tensao','chefe']);
+  /* Pedido do jogador: a principal nas lutas 1–3, a ascensão nas 4–6, a mais tensa nas 7–9 e a do chefe na 10. */
+  it('troca de música com a jornada: principal (1–3), ascensão (4–6), tensão (7–9), chefe (10)',()=>{
+    expect(Array.from({length:10},(_,i)=>faixaDaLuta(i))).toEqual(['principal','principal','principal','ascensao','ascensao','ascensao','tensao','tensao','tensao','chefe']);
   });
-  for(const [faixa,secoes] of [['tensao',['Intro','Perigo','Pressão','Ruptura','Confronto','Retorno']],['chefe',['Aparição','Duelo','Fúria','Desespero','Último golpe','Virada']]] as const){
+  for(const [faixa,secoes] of [['ascensao',['Faíscas','Avanço','Choque','Foco','Clímax','Retorno']],['tensao',['Intro','Perigo','Pressão','Ruptura','Confronto','Retorno']],['chefe',['Aparição','Duelo','Fúria','Desespero','Último golpe','Virada']]] as const){
     it(`a música ${faixa} vem nas mesmas três camadas, em OGG e MP3, com o laço na segunda seção`,()=>{
       const m=JSON.parse(readFileSync(resolve(root,`public/assets/audio/musica-${faixa}.json`),'utf8')) as typeof musica;
       expect(Object.keys(m.camadas).sort()).toEqual(['base','pulso','tema'].map(c=>`musica-${faixa}-${c}`));
