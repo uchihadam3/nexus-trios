@@ -2841,8 +2841,8 @@
   "laco": false,
   "bytes": 54134
  },
- "jajanken": {
-  "descricao": "Jajanken (pedra) de Gon: o punho junta aura, brilha e explode no alvo",
+ "jajanken_papel": {
+  "descricao": "Gon · Jajanken: Papel explodindo",
   "quadros": 12,
   "grade": [
    3,
@@ -2853,7 +2853,35 @@
    192
   ],
   "laco": false,
-  "bytes": 91928
+  "bytes": 109574
+ },
+ "jajanken_pedra": {
+  "descricao": "Gon · Jajanken: Pedra, o punho de aura",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 92924
+ },
+ "jajanken_tesoura": {
+  "descricao": "Gon · Jajanken: Tesoura, a lâmina dos dedos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 44308
  },
  "jato_dagua": {
   "descricao": "jato d'água (faixa)",
@@ -3457,6 +3485,34 @@
   "laco": false,
   "bytes": 58058
  },
+ "metal_dobrado": {
+  "descricao": "Toph · Metal dobrado: as faixas enrolam e esmagam",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 97418
+ },
+ "metal_preparo": {
+  "descricao": "Toph · as placas de metal girando no Preparo (laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 40456
+ },
  "meteoro_madara": {
   "descricao": "Meteoro do Madara: a rocha gigante cai em fogo no meio dos rivais e explode",
   "quadros": 12,
@@ -3597,6 +3653,34 @@
   "laco": false,
   "bytes": 119672
  },
+ "muralha_de_terra": {
+  "descricao": "Toph · Muralha de terra rompendo embaixo do rival",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 52002
+ },
+ "nen_gon": {
+  "descricao": "Gon · a aura juntando no punho (laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 43632
+ },
  "nevasca": {
   "descricao": "flocos em redemoinho",
   "quadros": 12,
@@ -3723,6 +3807,48 @@
   "laco": false,
   "bytes": 63258
  },
+ "papel_bola": {
+  "descricao": "Gon · a bola de aura do Papel voando (laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 38538
+ },
+ "pedra_bloco": {
+  "descricao": "Toph · o bloco de pedra voando (laço, básico)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 25770
+ },
+ "pedra_estilhaca": {
+  "descricao": "Toph · o bloco se partindo no rival",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 54016
+ },
  "pentagrama": {
   "descricao": "pentagrama infernal",
   "quadros": 12,
@@ -3778,6 +3904,20 @@
   ],
   "laco": false,
   "bytes": 35686
+ },
+ "pisada_toph": {
+  "descricao": "Toph · a pisada no chão (nela)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": false,
+  "bytes": 33044
  },
  "pisao": {
   "descricao": "pisão com rachaduras",
@@ -5542,6 +5682,20 @@
   ],
   "laco": false,
   "bytes": 65596
+ },
+ "visao_sismica": {
+  "descricao": "Toph · Visão sísmica: as ondas, o contorno e a terra prendendo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 41554
  },
  "z_saber": {
   "descricao": "Zero: meia-lua do sabre de energia",

@@ -28,7 +28,7 @@ const T: Record<string, string> = {
   megumi: 'inv_cao tempestade -', nobara: 'facas maldicao explosao', sukuna: 'desmanche corte_vertical mil_cortes',
   ichigo: '- transformacao lamina_sombria', rukia: 'espinho_de_gelo nevasca bloco_de_gelo', aizen: 'hipnose sarcofago olho',
   kenpachi: 'espadao corte_vertical transformacao', eren: 'soco_titanico armadura rugido', mikasa: 'investida - iaido',
-  levi: 'marca - -', gon: 'jajanken corte_vertical esfera', killua: 'ritmo_eletrico palma_relampago velocidade_divina',
+  levi: 'marca - -', gon: 'jajanken_pedra jajanken_tesoura jajanken_papel', killua: 'ritmo_eletrico palma_relampago velocidade_divina',
   hisoka: 'esticar cartas teia', kurapika: 'corrente corrente olho', edward: 'espinhos_de_terra runas punho_transmutado',
   alphonse: 'armadura cura_em_area barreira_magica', roy: 'estalo_de_dedos chuva_de_meteoros labareda', guts: 'matadora_de_dragoes armadura -',
   griffith: 'marca grito_de_guerra asa_negra', jotaro: 'inv_ora rajada_de_golpes relogio', dio: 'muda facas relogio',
@@ -85,7 +85,7 @@ const T: Record<string, string> = {
   donald: 'pow_cartoon rugido -', pateta: 'bonk confusao sorte', stitch: '- mordida pow_cartoon',
   buzz: 'laser pulso_emp foguete', woody: 'laco grito_de_guerra confete', srincrivel: 'investida escudo_fisico punho_gigante',
   mulherelastica: 'esticar escudo_fisico resgate', frozone: '- bloco_de_gelo nevasca', korra: 'sopro_de_fogo espinhos_de_terra estado_avatar',
-  zuko: 'lamina_de_fogo raio_em_cadeia corte_cruzado', azula: 'fogo_azul - florete', toph: '- espinhos_de_terra metal',
+  zuko: 'lamina_de_fogo raio_em_cadeia corte_cruzado', azula: 'fogo_azul - florete', toph: 'visao_sismica muralha_de_terra metal_dobrado',
   iroh: 'lanche raio_em_cadeia sopro_de_fogo', patolino: 'confusao mordida bomba', taz: 'tornado mordida atracao',
   coiote: 'bomba bonk foguete', papaleguas: 'investida areia velocidade', marvin: 'bomba laser desintegrar',
   tom: 'pow_cartoon investida garras', jerry: 'bonk teleporte marretada', pantera: 'silencio clones teleporte',
@@ -124,6 +124,7 @@ export const FAMILIA_DA_INVOCACAO: Record<string, VfxFamily> = {
  * (as próprias habilidades e o visual do personagem).
  */
 export const FAMILIA_DO_BASICO: Record<string, VfxFamily> = {
+  toph: 'pedra_da_toph',
   akuma: 'soco',
   agent47: 'tiro',
   arthas: 'frostmourne',

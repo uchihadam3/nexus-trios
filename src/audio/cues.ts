@@ -44,6 +44,9 @@ const ANTES_DA_NOVA: Partial<Record<FamiliaNova, { antes: Sound; saida?: Sound }
   omnislash: { antes: 'limite-cloud' },
   rasengan: { antes: 'rasengan-mao' },
   renascimento: { antes: 'fenix-asas' },
+  metal_dobrado: { antes: 'metal-preparo' },
+  jajanken_pedra: { antes: 'nen-gon' },
+  jajanken_papel: { antes: 'nen-gon' },
   batida_do_gorila: { antes: 'batida-preparo' },
 };
 const SONS_DE_ANTES = [...new Set(Object.values(ANTES_DA_NOVA).flatMap((x) => [x!.antes, ...(x!.saida ? [x!.saida] : [])]))];

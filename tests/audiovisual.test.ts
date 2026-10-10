@@ -53,8 +53,9 @@ describe('compact reusable audiovisual library',()=>{
     // não são de habilidade: as brasas aparecem no lutador caído (ArenaUnit) e a marca de
     // Provocado por cima de quem recebe o Status, seja qual for o golpe (BattleEffects)
     // e o espelho, os espinhos e as gotas de sangue sobre quem devolve o golpe ou rouba a Vida;
-    // o renascer é o fogo de quem volta sozinho (o beat de Renasceu)
-    const SO_NA_ARENA=new Set(['renascer','brasas_renascendo','provocar','reflexo','espinhos','vampirismo','dissipar','sono','cegueira','esquiva','ultima_resistencia','copia',...FAMILIAS_DO_JEITO,...Object.values(FAMILIA_DA_INVOCACAO)]);
+    // o renascer é o fogo de quem volta sozinho (o beat de Renasceu); a esfera e a terra são as reservas
+    // dos golpes de energia e de pedra sem família própria (vfxProfiles: ícone 'beam' e nomes de terra)
+    const SO_NA_ARENA=new Set(['esfera','terra','renascer','brasas_renascendo','provocar','reflexo','espinhos','vampirismo','dissipar','sono','cegueira','esquiva','ultima_resistencia','copia',...FAMILIAS_DO_JEITO,...Object.values(FAMILIA_DA_INVOCACAO)]);
     for(const f of FAMILIAS)if(!SO_NA_ARENA.has(f))expect(uso.get(f)??0,`${f} usada`).toBeGreaterThan(0);
     for(const [f,n] of uso)expect(n/total,`${f} não domina`).toBeLessThan(.16);
   });
@@ -92,7 +93,7 @@ describe('compact reusable audiovisual library',()=>{
     }
     // a luta baixa só os sons das famílias dos seis lutadores (precarregarLuta)
     // as mecânicas novas (reviver, provocar, refletir, status novos…) trazem sons próprios; a luta continua baixando só os dos seis lutadores
-    expect(bytes).toBeLessThan(19_000_000);
+    expect(bytes).toBeLessThan(21_000_000);
     expect(readdirSync(resolve(root,'public/assets/audio/sfx')).filter(x=>x.endsWith('.wav'))).toEqual([]);
   });
   it('a música começa na Intro e, depois do fim, volta ao Encontro',()=>{

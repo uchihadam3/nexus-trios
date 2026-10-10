@@ -317,7 +317,6 @@ def agulha_de_espinho(rng, v):
 
 # nome do arquivo (com hífen) → (função, descrição)
 SONS: dict = {
-    "jajanken": (jajanken, "básico de Gon: aura carregando que sobe e soco que estoura com pedrinhas"),
     "garras-de-killua": (garras_de_killua, "básico de Killua: três cortes rápidos com estalos de choque e crepitar elétrico"),
     "punho-transmutado": (punho_transmutado, "básico de Edward: estalo azul de transmutação, pedra roncando e baque de rocha"),
     "estalo-de-dedos": (estalo_de_dedos, "básico de Roy: snap dos dedos, faísca chiando e explosão de chamas"),

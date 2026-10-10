@@ -814,7 +814,6 @@ def agulha_de_espinho(T, t, rng):
 
 
 REGISTRO = [
-    ("jajanken", jajanken, GRANDE, "Jajanken (pedra) de Gon: o punho junta aura, brilha e explode no alvo", False),
     ("garras_de_killua", garras_de_killua, GRANDE, "Garras de Killua: três riscos de garra feitos de relâmpago", False),
     ("punho_transmutado", punho_transmutado, GRANDE, "Punho transmutado de Edward: círculo de alquimia e punho de pedra que sobe", False),
     ("estalo_de_dedos", estalo_de_dedos, GRANDE, "Estalo de dedos de Roy: faísca, linha de fogo e explosão de chamas", False),

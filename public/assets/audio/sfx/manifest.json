@@ -3266,22 +3266,56 @@
    ],
    "bytes": 47615
   },
-  "jajanken": {
-   "arquivo": "jajanken.mp3",
-   "descricao": "básico de Gon: aura carregando que sobe e soco que estoura com pedrinhas",
+  "jajanken-papel": {
+   "arquivo": "jajanken-papel.mp3",
+   "descricao": "Jajanken: Papel, a bola de aura explodindo",
    "versoes": [
     0.0,
-    1.43,
-    2.909,
-    4.2933
+    2.08,
+    4.2325,
+    6.2449
    ],
    "duracoes": [
-    1.35,
-    1.399,
-    1.3043,
-    1.3705
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
    ],
-   "bytes": 52204
+   "bytes": 75343
+  },
+  "jajanken-pedra": {
+   "arquivo": "jajanken-pedra.mp3",
+   "descricao": "Jajanken: Pedra, o soco enorme",
+   "versoes": [
+    0.0,
+    1.68,
+    3.418,
+    5.0439
+   ],
+   "duracoes": [
+    1.6,
+    1.658,
+    1.5459,
+    1.6244
+   ],
+   "bytes": 58112
+  },
+  "jajanken-tesoura": {
+   "arquivo": "jajanken-tesoura.mp3",
+   "descricao": "Jajanken: Tesoura, os dois cortes de aura",
+   "versoes": [
+    0.0,
+    1.38,
+    2.8071,
+    4.1432
+   ],
+   "duracoes": [
+    1.3,
+    1.3471,
+    1.256,
+    1.3198
+   ],
+   "bytes": 51133
   },
   "jato-dagua": {
    "arquivo": "jato-dagua.mp3",
@@ -4099,6 +4133,40 @@
    ],
    "bytes": 39524
   },
+  "metal-dobrado": {
+   "arquivo": "metal-dobrado.mp3",
+   "descricao": "Metal dobrado: as faixas chiando, o aperto e o esmagamento",
+   "versoes": [
+    0.0,
+    1.88,
+    3.7979,
+    5.5543
+   ],
+   "duracoes": [
+    1.8,
+    1.8379,
+    1.6764,
+    1.8274
+   ],
+   "bytes": 78514
+  },
+  "metal-preparo": {
+   "arquivo": "metal-preparo.mp3",
+   "descricao": "as placas de metal girando no Preparo",
+   "versoes": [
+    0.0,
+    1.38,
+    2.8071,
+    4.1432
+   ],
+   "duracoes": [
+    1.3,
+    1.3471,
+    1.256,
+    1.3198
+   ],
+   "bytes": 64017
+  },
   "meteoro-madara": {
    "arquivo": "meteoro-madara.mp3",
    "descricao": "Meteoro do Madara: o ronco da queda, a explosão e as pedras chovendo",
@@ -4286,6 +4354,40 @@
    ],
    "bytes": 35090
   },
+  "muralha-de-terra": {
+   "arquivo": "muralha-de-terra.mp3",
+   "descricao": "Muralha de terra: a muralha rompendo o chão",
+   "versoes": [
+    0.0,
+    1.88,
+    3.8253,
+    5.6444
+   ],
+   "duracoes": [
+    1.8,
+    1.8653,
+    1.7391,
+    1.8274
+   ],
+   "bytes": 71555
+  },
+  "nen-gon": {
+   "arquivo": "nen-gon.mp3",
+   "descricao": "a aura do Gon juntando no punho",
+   "versoes": [
+    0.0,
+    1.38,
+    2.8071,
+    4.1432
+   ],
+   "duracoes": [
+    1.3,
+    1.3471,
+    1.256,
+    1.3198
+   ],
+   "bytes": 51167
+  },
   "nevasca": {
    "arquivo": "nevasca.mp3",
    "descricao": "família nevasca",
@@ -4421,6 +4523,23 @@
     1.268
    ],
    "bytes": 37402
+  },
+  "pedra-da-toph": {
+   "arquivo": "pedra-da-toph.mp3",
+   "descricao": "básico da Toph: a pisada, o bloco voando e a pedra se partindo",
+   "versoes": [
+    0.0,
+    1.38,
+    2.8071,
+    4.1432
+   ],
+   "duracoes": [
+    1.3,
+    1.3471,
+    1.256,
+    1.3198
+   ],
+   "bytes": 49329
   },
   "pentagrama": {
    "arquivo": "pentagrama.mp3",
@@ -6699,6 +6818,23 @@
     0.9137
    ],
    "bytes": 36566
+  },
+  "visao-sismica": {
+   "arquivo": "visao-sismica.mp3",
+   "descricao": "Visão sísmica: a pisada, o tremor e a terra prendendo",
+   "versoes": [
+    0.0,
+    1.68,
+    3.418,
+    5.0439
+   ],
+   "duracoes": [
+    1.6,
+    1.658,
+    1.5459,
+    1.6168
+   ],
+   "bytes": 56369
   },
   "vitoria": {
    "arquivo": "vitoria.mp3",

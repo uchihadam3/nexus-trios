@@ -77,8 +77,12 @@ function rate(b:Battle,actor:Fighter,candidate:Fighter,rule:Target,intent:Target
   }else{
     add('ameaça ao trio',threat(candidate)*(intent==='interrupt'?0.45:0.85)*foresight);
     add('vulnerabilidade',status(candidate,'exposed')*4+status(candidate,'electric')*1.2);
-    // Marcado: o trio rival inteiro mira nele
-    if(intent!=='interrupt')add('marcado',status(candidate,'marked')>0?8+status(candidate,'marked')*10:0);
+    // Marcado: o trio rival inteiro mira nele — menos o Light na marca que ele mesmo pôs. "Tudo
+    // conforme o plano" marca o rival menos investigado para despistar (pedido do jogador: "o Light tem
+    // que ignorar essa marcação, faz parte do plano"): o trio dele foca no marcado, e ele investiga,
+    // bate e usa a Death Note em outro
+    const marcaDoPlano=actor.characterId==='light'&&candidate.statuses.some(x=>x.id==='marked'&&x.source===actor.uid);
+    if(intent!=='interrupt')add(marcaDoPlano?'a marca é o despiste do plano':'marcado',marcaDoPlano?-6:status(candidate,'marked')>0?8+status(candidate,'marked')*10:0);
     if(rule==='enemyWeak')add('condição baixa',(1-ratio)*2.4);
     if(rule==='enemyStrong')add('poder estimado',c.power/100*2.5);
     if(rule==='investigated')add('informação reunida',(actor.investigation[candidate.uid]??0)/100*18);
