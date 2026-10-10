@@ -5,7 +5,7 @@
  * inteligentes, que ensinam qual personagem combina com qual — a melhor
  * escolha marcada, quanto (%) cada candidato encaixa no trio, um motivo curto
  * e, tocando, uma explicação maior. Quem usa as dicas aprende, mas pontua
- * menos: −25 mil por luta da jornada (src/engine/pontos.ts).
+ * menos: −10 mil por luta da jornada (src/engine/pontos.ts).
  *
  * Tudo vem do que foi medido em lutas simuladas, não de opinião:
  *   - a força de cada personagem e o peso de cada combinação

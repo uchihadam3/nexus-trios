@@ -8,7 +8,7 @@ import { META_DAS_DICAS } from '../lib/dicas-liberadas';
  * Pedidos do jogador: fica "no lugar que tava, nos personagens"; trancado até
  * META_DAS_DICAS pontos numa jornada (src/lib/dicas-liberadas.ts); e "se a
  * pessoa ligar e desligar, fala que ele ainda está sendo usado": ligou uma vez,
- * a jornada inteira paga −25 mil por luta, mesmo desligando depois — por isso
+ * a jornada inteira paga −10 mil por luta, mesmo desligando depois — por isso
  * espiar a melhor escolha e desligar não adianta.
  */
 export function BotaoDicas({ligado,liberado,usado=false,desativado=false,onMudar}:{ligado:boolean;liberado:boolean;/** a jornada já usou as Dicas */usado?:boolean;desativado?:boolean;onMudar:(ligar:boolean)=>void}){

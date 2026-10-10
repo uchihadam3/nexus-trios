@@ -97,7 +97,7 @@ export function Placar({mode,onMode,estado,handle,onConta,onMais,maisCarregando=
         <button className="rk-fechar" onClick={()=>setSelected(null)} aria-label="Fechar detalhes"><X size={18}/></button>
         <span className="rk-cartao-pos">#{selected.position}</span>
         <h2>{selected.handle}</h2>
-        {selected.highlights.dicas&&<p className="rk-cartao-dicas"><Lightbulb size={15}/>Montou o trio com as Dicas de trio ligadas · −25 mil por luta</p>}
+        {selected.highlights.dicas&&<p className="rk-cartao-dicas"><Lightbulb size={15}/>Montou o trio com as Dicas de trio ligadas · cada luta perdeu pontos</p>}
         <div className="rk-cartao-trio">{selected.team.map(id=>byId[id]&&<div key={id} style={{'--character':byId[id].color} as CSSProperties}><Portrait character={byId[id]}/><span>{byId[id].name}</span></div>)}</div>
         <strong className="rk-cartao-pontos">{pontos(selected.score)}<small>pontos</small></strong>
         <div className="rk-cartao-numeros"><span><b>{selected.progress}/10</b><small>lutas</small></span><span><b>{selected.highlights.semBaixas??'—'}</b><small>lutas sem baixas</small></span><span><b>{selected.highlights.turns??0}</b><small>viradas</small></span></div>
@@ -125,4 +125,4 @@ function Historico({partidas}:{partidas:PartidaDoHistorico[]}){
 }
 
 /* Quem montou o trio com as Dicas de trio aparece marcado no ranking (pedido do jogador). */
-function ComDicas(){return <span className="rk-dicas" title="Usou as Dicas de trio: −25 mil por luta"><Lightbulb size={11}/>com dicas</span>;}
+function ComDicas(){return <span className="rk-dicas" title="Usou as Dicas de trio: cada luta perdeu pontos"><Lightbulb size={11}/>com dicas</span>;}
