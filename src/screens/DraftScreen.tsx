@@ -45,9 +45,12 @@ export function DraftScreen({draft,primeiroRival,dicas,onPick,onSkip,onDetails,o
     <header className="dv-topo">
       <span className="dv-rotulo">{full?'TRIO COMPLETO':`ESCOLHA ${vez+1} DE 3`}</span>
       <h1>{full?'Pronto para a arena':'Monte seu trio'}</h1>
-      <div className="dv-espacos">{[0,1,2].map(i=>{const c=team[i];return <div key={c?.id??`vazio-${i}`} className={`dv-espaco ${c?'cheio':''} ${i===vez&&!full?'vez':''}`} style={c?{'--character':c.color} as CSSProperties:undefined}>
-        {c?<><Portrait character={c}/><b>{c.name}</b></>:<><span>?</span><b>{i===vez?'escolha agora':`espaço ${i+1}`}</b></>}
-      </div>;})}</div>
+      {/* quem já está no trio abre a ficha (pedido do jogador: "clicar ali em cima e ver o que ele faz, pra ver se combina") */}
+      <div className="dv-espacos">{[0,1,2].map(i=>{const c=team[i];return c
+        ?<button key={c.id} type="button" className="dv-espaco cheio" style={{'--character':c.color} as CSSProperties} onClick={()=>onDetails(c.id)} aria-label={`Ver a ficha de ${c.name}`}>
+          <Portrait character={c}/><b>{c.name}</b><small className="dv-espaco-ficha"><Info size={10}/>ficha</small>
+        </button>
+        :<div key={`vazio-${i}`} className={`dv-espaco ${i===vez&&!full?'vez':''}`}><span>?</span><b>{i===vez?'escolha agora':`espaço ${i+1}`}</b></div>;})}</div>
       {team.length>0&&<div className="dv-trio-faz"><IdentityChips ids={doTrio} trio={doTrio}/>{ligadas&&lacunas.length>0&&<small><TriangleAlert size={13}/>{lacunas.join(' · ')}</small>}</div>}
       {/* as Dicas são decididas na tela inicial, antes da jornada (src/components/BotaoDicas.tsx): aqui só o aviso */}
       {dicas&&<div className="dv-dicas ligado aviso" role="status">

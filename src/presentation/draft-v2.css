@@ -12,6 +12,10 @@
 .dv-espaco.cheio .portrait{box-shadow:0 0 0 3px #0c140f,0 0 0 5px var(--character),0 0 18px color-mix(in srgb,var(--character),transparent 50%);animation:dv-entra .55s cubic-bezier(.2,1.7,.4,1) both}
 .dv-espaco b{font-size:11px;font-weight:800;color:#cfdcc9;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .dv-espaco.vez b{color:#c8f560}
+button.dv-espaco{border:0;padding:0;background:none;font:inherit;color:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}
+button.dv-espaco:active .portrait{transform:scale(.94)}
+button.dv-espaco:focus-visible{outline:2px solid #c8f560;outline-offset:4px;border-radius:14px}
+.dv-espaco-ficha{display:inline-flex;align-items:center;gap:3px;margin-top:-2px;font-size:10px;font-weight:800;letter-spacing:.04em;color:#c8f560;opacity:.85}
 @keyframes dv-pulsa{50%{box-shadow:inset 0 0 0 2px #c8f560,0 0 30px #c8f56099}}
 @keyframes dv-entra{0%{scale:.2;opacity:0;rotate:-25deg}60%{scale:1.15;opacity:1}100%{scale:1;rotate:0deg}}
 .dv-trio-faz{display:grid;justify-items:center;gap:4px}
