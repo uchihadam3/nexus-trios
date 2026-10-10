@@ -395,6 +395,9 @@ export default function App(){
    * recusava as jornadas. Agora, ao entrar, o perfil é conferido e, se faltar, criado com esse nome.
    */
   const logado=conta!==null&&conta.origem!=='convidado';
+  /* Acabou de entrar na conta (pela porta ou pela tela de Conta): o jogo vai para o início, não fica na tela de sair. */
+  const estavaLogado=useRef<boolean|null>(null);
+  useEffect(()=>{if(estavaLogado.current===false&&logado)navigate('home');if(contaPronta)estavaLogado.current=logado;},[logado,contaPronta]);
   const [nomeDaConta,setNomeDaConta]=useState<{id:string;handle:string|null}|null>(null);
   const [erroDaConta,setErroDaConta]=useState('');
   const buscaNome=async(c:Conta)=>{
