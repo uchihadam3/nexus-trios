@@ -263,6 +263,16 @@ export const ULTIMA_RESISTENCIA: Record<string, { protegido: number; duracao: nu
   coragem: { protegido: 0.6, duracao: 2.5 }, // morre de medo, mas não cai
 };
 
+/** Ninguém suspeita dele: os rivais preferem outros alvos, menos quando ele está em Preparo (peso na escolha do alvo). */
+export const DESPERCEBIDO: Record<string, { peso: number }> = {
+  light: { peso: 8 }, // "Kira não pode ser descoberto": o trio rival caça o aliado marcado e esquece dele
+};
+
+/** Isca: quando um rival bate no aliado que ele marcou, ganha Investigação sobre esse rival. */
+export const ISCA: Record<string, { investiga: number }> = {
+  light: { investiga: 12 }, // quem morde a isca do plano revela o próprio nome
+};
+
 export function aplicaMecanicas(c0: Character): Character {
   const c: Character = {
     ...c0,
@@ -272,13 +282,15 @@ export function aplicaMecanicas(c0: Character): Character {
       return effects.length ? { ...s, effects } : s;
     }) as Character['skills'],
   };
-  const renascer = RENASCER[c.id], mudancas = mudancasDe(c.id), ultimaResistencia = ULTIMA_RESISTENCIA[c.id], invocacao = INVOCACAO[c.id]?.nome;
-  if (!renascer && !ultimaResistencia && !mudancas.size) return c;
+  const renascer = RENASCER[c.id], mudancas = mudancasDe(c.id), ultimaResistencia = ULTIMA_RESISTENCIA[c.id], invocacao = INVOCACAO[c.id]?.nome, despercebido = DESPERCEBIDO[c.id], isca = ISCA[c.id];
+  if (!renascer && !ultimaResistencia && !despercebido && !isca && !mudancas.size) return c;
   return {
     ...c,
     ...(invocacao ? { invocacao } : {}),
     ...(renascer ? { renascer } : {}),
     ...(ultimaResistencia ? { ultimaResistencia } : {}),
+    ...(despercebido ? { despercebido } : {}),
+    ...(isca ? { isca } : {}),
     skills: c.skills.map((s, i) => {
       const fs = mudancas.get(i);
       return fs ? { ...s, effects: fs.reduce((e, f) => f(e), [...s.effects]) } : s;

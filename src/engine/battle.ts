@@ -33,6 +33,8 @@ export function targets(b:Battle,actor:Fighter,rule:Target,effects:Effect[]=[],r
   if(rule==='allyFallen')return caidos(b,actor).slice(0,1);
   if(rule==='allAllies')return allies;
   if(rule==='allEnemies')return enemies;
+  // o aliado com mais Vida, sem ser quem age (o Light marca ele para os rivais o caçarem em vez dele)
+  if(rule==='allyStrongest'){const outros=allies.filter(x=>x.uid!==actor.uid&&alive(x));return outros.length?[outros.reduce((a,z)=>z.hp>a.hp?z:a)]:[];}
   if(actor.characterId==='light'&&rule==='enemyWeak'&&effects.some(effect=>effect.kind==='investigate')){
     const unknown=enemies.filter(x=>!actor.discovered?.[x.uid]);
     if(unknown.length)return chooseTarget(b,actor,unknown,rule,'investigate',effects,record);
@@ -123,8 +125,8 @@ const interrompivel=(x:Fighter)=>!!x.cast&&x.cast.duration>PREPARO_LEVE+1e-6;
  * uma fração da Vida. Quem levanta faz isso uma vez por luta, e cada lutador
  * só volta uma vez (`voltou`). Renascer é de quem tem `renascer` na ficha: ao
  * cair, fica em brasas por `atraso` segundos e volta sozinho. A Death Note
- * impede (execução não tem volta). Enquanto alguém vai renascer, o trio dele
- * ainda não perdeu.
+ * impede (execução não tem volta). Ele só volta se algum aliado continuar de
+ * pé até o fim das brasas: se o último cair antes, a luta acaba e ele fica no chão.
  */
 /*
  * Provocar: um tanque grita, e os rivais atingidos ficam Provocados — o
@@ -292,6 +294,8 @@ function damage(b:Battle,source:Fighter,target:Fighter,raw:number,direto=true,la
     // Dormindo: o golpe direto acorda
     if(direto&&target.hp>0&&intensity(target,'sleep')>0){target.statuses=target.statuses.filter(s=>s.id!=='sleep');if(label==='Impacto')label='Acordou';}
     emit(b,{kind:'damage',source:source.uid,target:target.uid,label,value:dealt});
+    // Isca (o Light): quem bate no aliado que ele marcou se entrega — ele ganha Investigação sobre esse rival
+    if(direto&&source.side!==target.side)for(const m of target.statuses)if(m.id==='marked'){const quem=b.fighters.find(f=>f.uid===m.source);const isca=quem&&quem.side===target.side&&alive(quem)?byId[quem.characterId].isca:undefined;if(quem&&isca)applyEffects(b,quem,[source],[{kind:'investigate',value:isca.investiga}]);}
     const choque=intensity(target,'electric');if(choque>0&&target.hp>0)target.action=Math.max(0,target.action-choque*CHOQUE_DO_ELETRIFICADO);
     pressure(b,source.side,D.event.damagePerFullCondition*clamp(dealt/target.maxHp));
     if(beforeProtection>=hpBefore&&target.hp>0&&blocked>0)pressure(b,target.side,D.event.clutchSave);
@@ -607,7 +611,9 @@ export function updateDominion(b:Battle){
  */
 export const TEMPO_MAXIMO=300;
 export function resolve(b:Battle){
-  const naLuta=(f:Fighter)=>alive(f)||voltando(f);
+  // quem está em brasas não segura o trio na luta (pedido do jogador): se cair o último de pé antes de ele
+  // renascer, a luta acaba e ele não volta
+  const naLuta=(f:Fighter)=>alive(f);
   const p=b.fighters.some(f=>f.side==='player'&&naLuta(f)),e=b.fighters.some(f=>f.side==='enemy'&&naLuta(f));
   if(!p||!e){b.finished=true;b.winner=p?'player':e?'enemy':null;b.reason='Incapacitação da equipe';return;}
   if(b.time>=TEMPO_MAXIMO){

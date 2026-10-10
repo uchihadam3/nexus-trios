@@ -22,7 +22,7 @@ export const targetNamesEm:Record<Target,string>={
   enemyCast:'no inimigo em Preparo',
   investigated:'no inimigo mais investigado',allyWeak:'no aliado mais ferido',allyFallen:'no aliado caído',
   self:'em si próprio',allEnemies:'em todos os inimigos',allAllies:'em todo o trio',
-  randomEnemy:'em um inimigo sorteado',leastInvestigated:'no inimigo menos investigado',
+  randomEnemy:'em um inimigo sorteado',leastInvestigated:'no inimigo menos investigado',allyStrongest:'no aliado com mais Vida',
 };
 /*
  * O alvo dito pelo que ele é, não por uma metáfora.
@@ -42,7 +42,7 @@ export const targetNames:Record<Target,string>={
   enemyCast:'inimigo em Preparo',
   investigated:'inimigo mais investigado',allyWeak:'aliado mais ferido',allyFallen:'aliado caído',
   self:'o próprio personagem',allEnemies:'todos os inimigos',allAllies:'todo o trio',
-  randomEnemy:'um inimigo sorteado',leastInvestigated:'inimigo menos investigado',
+  randomEnemy:'um inimigo sorteado',leastInvestigated:'inimigo menos investigado',allyStrongest:'aliado com mais Vida',
 };
 export const topicNames:Record<Topic,string>={
   time:'por segundo',action:'ao atacar',dealt:'a cada 100 de dano causado',received:'a cada 100 de dano recebido',
@@ -430,6 +430,14 @@ export function quandoAtiva(trait:Trait):{quando:string;limite:string}{
 /** Última resistência (na ficha, fora do traço): o golpe fatal o deixa de pé uma vez. */
 export function textoDaResistencia(r:{protegido:number;duracao:number}):string{
   return `Última resistência · Protegido ${pct(r.protegido)} por ${r.duracao.toLocaleString('pt-BR')} s`;
+}
+/** Ninguém suspeita dele (na ficha, junto do traço): os rivais preferem outros alvos. */
+export function textoDoDespercebido():string{
+  return 'Ninguém suspeita dele · os rivais preferem outros alvos, menos quando ele está em Preparo';
+}
+/** Isca (na ficha, junto do traço): quem bate no aliado marcado por ele se entrega. */
+export function textoDaIsca(i:{investiga:number}):string{
+  return `Isca · quem bate no aliado que ele marcou dá ${i.investiga} de Investigação sobre si`;
 }
 /** O jeito de bater: o que o ataque básico faz além do golpe. */
 export function textoDoJeito(j:JeitoDeBater):string{

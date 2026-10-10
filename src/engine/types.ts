@@ -2,7 +2,7 @@ export type Side = 'player' | 'enemy';
 export type StatusId = 'exposed' | 'paralyzed' | 'protected' | 'marked' | 'slow' | 'haste' | 'confused' | 'rooted' | 'regen' | 'burning' | 'electric' | 'silenced' | 'strengthened' | 'weakened' | 'provoked' | 'vampirism' | 'reflect' | 'thorns' | 'poison' | 'bleed' | 'cursed' | 'frozen' | 'sleep' | 'blind' | 'barrier' | 'evasion' | 'bomb' | 'summon';
 export type Topic = 'time' | 'action' | 'dealt' | 'received' | 'allyHurt' | 'enemyHurt' | 'interrupt' | 'status' | 'negativeStatus' | 'protected' | 'enemyCast' | 'survived' | 'losing' | 'winning';
 /** `allyFallen`: o aliado caído que ainda pode ser levantado (Reviver). */
-export type Target = 'enemyWeak' | 'enemyStrong' | 'enemyCast' | 'investigated' | 'allyWeak' | 'self' | 'allEnemies' | 'allAllies' | 'randomEnemy' | 'allyFallen' | 'leastInvestigated';
+export type Target = 'enemyWeak' | 'enemyStrong' | 'enemyCast' | 'investigated' | 'allyWeak' | 'self' | 'allEnemies' | 'allAllies' | 'randomEnemy' | 'allyFallen' | 'leastInvestigated' | 'allyStrongest';
 export type TargetIntent = 'offense'|'finisher'|'interrupt'|'control'|'heal'|'protect'|'buff'|'investigate';
 export type Visual = 'beam' | 'bolt' | 'slash' | 'web' | 'shield' | 'wave' | 'psychic' | 'impact';
 /** `revive`: levanta um aliado caído com `value` (fração) da Vida — uma vez por luta para quem levanta, e cada lutador só volta uma vez. */
@@ -37,6 +37,10 @@ export interface Character {
   renascer?:{vida:number;atraso:number};
   /** Última resistência: uma vez por luta, o golpe fatal o deixa com 1 de Vida e Protegido. */
   ultimaResistencia?:{protegido:number;duracao:number};
+  /** Ninguém suspeita dele: os rivais preferem outros alvos, menos quando ele está em Preparo (o Light). */
+  despercebido?:{peso:number};
+  /** Isca: quando um rival bate no aliado que ele marcou, ganha `investiga` de Investigação sobre esse rival (o Light). */
+  isca?:{investiga:number};
   /** Nome da criatura que a Invocação dele chama (Cão divino, Mago Negro…). */
   invocacao?:string;
 }

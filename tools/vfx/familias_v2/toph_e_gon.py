@@ -12,8 +12,9 @@ Toph
   (nela, quando usa as técnicas).
 - visao_sismica: as ondas da pisada chegam pelo chão até o rival, acendem o
   contorno dele (ela "vê") e a terra sobe e prende os pés.
-- muralha_de_terra: a muralha de pedra com espinhos sobe embaixo do rival e
-  acerta, com as lascas voando.
+- pedregulho_toph: a pedra da Muralha de terra voando e esmagando o rival
+  (a muralha de espinhos que protege o trio é a espinhos_de_terra, na frente de
+  cada aliado — pedido do jogador: "a muralha que ela fazia antes era mais da hora").
 - metal_preparo: as placas de metal girando em volta dela no Preparo (laço).
 - metal_dobrado: as faixas de metal se enrolam no rival, apertam e esmagam,
   com faíscas.
@@ -159,36 +160,30 @@ def visao_sismica(T, t, rng):
     return G, H
 
 
-def muralha_de_terra(T, t, rng):
-    """Muralha de terra: a muralha de pedra com espinhos rompe o chão embaixo do rival e o acerta para
-    cima; lascas e pedras voam e a poeira desce."""
+def pedregulho_toph(T, t, rng):
+    """A pedra da Muralha de terra acertando o rival: o pedregulho chega girando, esmaga com o clarão
+    seco, se parte em lascas grandes que voam e caem, e a poeira sobe."""
     G, H = vazio(T)
-    env = apaga(t, 0.84, 1)
-    chao = 0.6
-    sobe = back(rel(t, 0.0, 0.25), 1.6)
-    muro = [(-0.6, chao + 0.05)]
-    for j in range(9):
-        x = -0.6 + 1.2 * j / 8
-        alt = (0.55 + 0.35 * math.sin(j * 1.7) * 0.4) * sobe
-        muro += [(x - 0.05, chao - alt * 0.85), (x, chao - alt), (x + 0.05, chao - alt * 0.85)]
-    muro += [(0.6, chao + 0.05)]
-    M = T.polys([(muro, 1.0)], 0.004) * (1 - rel(t, 0.75, 1.0))
-    linhas = sum(T.polyline([(x, chao), (x + 0.02, chao - 0.4 * sobe)], 0.01) for x in (-0.4, -0.12, 0.15, 0.42)) * (1 - rel(t, 0.75, 1.0))
-    k = pulso(t, 0.1, 0.4)
-    golpe = T.polys([(estrela(0, chao - 0.5 * sobe, 0.32 * k + 0.01, 0.0, 8, 0.4), 1.0)], 0.005) * k
-    sub = np.random.default_rng(361)
+    env = apaga(t, 0.86, 1)
+    chega = ease_in(rel(t, 0.0, 0.18), 1.6)
+    cx, cy = -0.6 + 0.6 * chega, -0.5 + 0.5 * chega
+    pedra = [(cx + 0.2 * math.cos(a + t * 6) * (1 + 0.15 * math.sin(3 * a)), cy + 0.18 * math.sin(a + t * 6) * (1 + 0.15 * math.cos(2 * a))) for a in np.linspace(0, TAU, 9)[:-1]]
+    bloco = T.polys([(pedra, 1.0)], 0.006) * (1 - rel(t, 0.18, 0.22))
+    k = pulso(t, 0.17, 0.45)
+    clarao = T.gauss(0, 0, 0.2) * k * 1.4
+    sub = np.random.default_rng(91)
     lascas = []
-    for j in range(10):
-        a = sub.uniform(-math.pi * 0.95, -math.pi * 0.05)
-        f = ease_out(rel(t, 0.08, 0.9), 1.6)
-        d = 0.8 * f * sub.uniform(0.5, 1)
-        lascas.append((_rocha(d * math.cos(a), chao - 0.4 + d * math.sin(a) + 0.8 * rel(t, 0.3, 1.0) ** 2, 0.05, a + 4 * f, 370 + j), pulso(t, 0.08, 0.95)))
-    L = T.polys(lascas, 0.003)
-    po = T.splats([(sub.normal(0, 0.4), chao - sub.uniform(0, 0.3), 0.7) for _ in range(14)], 0.07) * pulso(t, 0.1, 1.0)
-    G += (np.clip(M - linhas * 0.6, 0, None) * 1.1 + golpe * 1.2 + L * 1.1 + po * 0.5) * env
-    H += (M * 0.2 + golpe * 0.8 + L * 0.2) * env
+    for _ in range(10):
+        a = sub.uniform(-math.pi, 0.2)
+        d = (0.1 + 0.6 * ease_out(rel(t, 0.18, 0.6), 2) * sub.uniform(0.5, 1))
+        x, y = d * math.cos(a), d * math.sin(a) + 0.5 * rel(t, 0.3, 1.0) ** 2
+        r = sub.uniform(0.04, 0.08)
+        lascas.append(([(x + r * math.cos(b + t * 5), y + r * math.sin(b + t * 5)) for b in np.linspace(0, TAU, 6)[:-1]], 1.0 * (1 - rel(t, 0.7, 1.0))))
+    L = T.polys(lascas, 0.004) * rel(t, 0.18, 0.2)
+    poeira = T.splats([(sub.normal(0, 0.3), 0.2 - 0.4 * ease_out(rel(t, 0.2, 0.9), 2) * sub.uniform(0.3, 1), pulso(t, 0.2, 0.95) * sub.uniform(0.3, 0.7)) for _ in range(18)], 0.05)
+    G += (bloco * 0.9 + clarao + L * 0.9 + poeira * 0.4) * env
+    H += (clarao * 0.8 + bloco * 0.2) * env
     return G, H
-
 
 def metal_preparo(T, t, rng):
     """As placas de metal girando em volta da Toph no Preparo do Metal dobrado, com o brilho do aço."""
@@ -358,7 +353,7 @@ REGISTRO = [
     ("pedra_estilhaca", pedra_estilhaca, GRANDE, "Toph · o bloco se partindo no rival", False),
     ("pisada_toph", pisada_toph, MEDIA, "Toph · a pisada no chão (nela)", False),
     ("visao_sismica", visao_sismica, GRANDE, "Toph · Visão sísmica: as ondas, o contorno e a terra prendendo", False),
-    ("muralha_de_terra", muralha_de_terra, GRANDE, "Toph · Muralha de terra rompendo embaixo do rival", False),
+    ("pedregulho_toph", pedregulho_toph, GRANDE, "Toph · a pedra da Muralha esmagando o rival", False),
     ("metal_preparo", metal_preparo, MEDIA, "Toph · as placas de metal girando no Preparo (laço)", True),
     ("metal_dobrado", metal_dobrado, GRANDE, "Toph · Metal dobrado: as faixas enrolam e esmagam", False),
     ("nen_gon", nen_gon, MEDIA, "Gon · a aura juntando no punho (laço)", True),

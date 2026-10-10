@@ -54,12 +54,13 @@ describe('Renascer', () => {
   });
 
   for (const c of renascem) {
-    it(`${c.name} volta sozinho uma vez, depois do tempo prometido`, () => {
+    it(`${c.name} volta sozinho uma vez, depois do tempo prometido (com um aliado de pé)`, () => {
       const aliados = ['goku', 'naruto', 'batman'].filter((x) => x !== c.id).slice(0, 2);
       const b = createBattle([c.id, ...aliados], ['saitama', 'thanos', 'hulk'], 11);
-      const eu = quem(b, c.id);
-      // os aliados já caíram: o rival só tem ele para bater (e o trio não pode perder enquanto ele vai renascer)
-      for (const f of b.fighters.filter((f) => f.side === 'player' && f.uid !== eu.uid)) derruba(b, f);
+      const eu = quem(b, c.id), deFora = quem(b, aliados[0]!), dePe = quem(b, aliados[1]!);
+      // um aliado caiu e o outro aguenta tudo: o trio segue na luta enquanto ele está em brasas
+      derruba(b, deFora);
+      dePe.maxHp = dePe.hp = 1_000_000;
       eu.hp = 1;
       anda(b, 30, () => eu.hp <= 0);
       expect(eu.hp).toBe(0);
@@ -87,21 +88,31 @@ describe('Renascer', () => {
     expect(alvo.renascendo ?? 0).toBe(0);
   });
 
-  it('o trio não perde enquanto alguém ainda vai renascer', () => {
+  it('quem cai por último não renasce: sem ninguém de pé, a luta acaba (pedido do jogador)', () => {
     const c = renascem[0]!;
     const b = createBattle([c.id, 'goku', 'naruto'], ['saitama', 'thanos', 'hulk'], 5);
     const eu = quem(b, c.id);
     for (const f of b.fighters.filter((f) => f.side === 'player' && f.uid !== eu.uid)) derruba(b, f);
-    for (const r of b.fighters.filter((f) => f.side === 'enemy')) r.statuses.push({ id: 'paralyzed', remaining: 999, intensity: 1, source: r.uid });
     eu.hp = 1;
-    const rival = b.fighters.find((f) => f.side === 'enemy')!;
-    rival.statuses = [];
-    anda(b, 30, () => eu.hp <= 0);
+    anda(b, 30, () => eu.hp <= 0 || b.finished);
     expect(eu.hp).toBe(0);
-    expect(b.finished).toBe(false);
-    for (const r of b.fighters.filter((f) => f.side === 'enemy')) r.statuses = [{ id: 'paralyzed', remaining: 999, intensity: 1, source: r.uid }];
-    anda(b, c.renascer!.atraso + 1, () => eu.hp > 0);
-    expect(eu.hp).toBeGreaterThan(0);
-    expect(b.finished).toBe(false);
+    expect(b.finished).toBe(true);
+    expect(b.winner).toBe('enemy');
+  });
+
+  it('se o último aliado cai enquanto ele está em brasas, a luta acaba e ele não volta', () => {
+    const c = renascem[0]!;
+    const b = createBattle([c.id, 'goku', 'naruto'], ['saitama', 'thanos', 'hulk'], 5);
+    const eu = quem(b, c.id), outro = quem(b, 'naruto');
+    derruba(b, quem(b, 'goku'));
+    outro.maxHp = outro.hp = 1_000_000;
+    eu.hp = 1;
+    anda(b, 30, () => eu.hp <= 0);
+    expect(eu.renascendo).toBeGreaterThan(0);
+    derruba(b, outro);
+    anda(b, 1);
+    expect(b.finished).toBe(true);
+    expect(b.winner).toBe('enemy');
+    expect(eu.hp).toBe(0);
   });
 });

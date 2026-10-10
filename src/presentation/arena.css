@@ -109,6 +109,9 @@
 .arena-v2 .attack-ring-fill{stroke:var(--team);stroke-width:4.2;stroke-linecap:round;filter:drop-shadow(0 0 3px color-mix(in srgb,var(--team) 70%,transparent));transition:stroke-dasharray .1s linear}
 .arena-v2 .is-near .attack-ring-fill{stroke:#fff6d6;stroke-width:5;filter:drop-shadow(0 0 5px var(--team)) drop-shadow(0 0 2px #fff)}
 .arena-v2 .is-near .medal-aura{opacity:.42}
+.arena-v2 .renasce-ring{position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg);fill:none;stroke:#ff8a3a;stroke-width:4;stroke-linecap:round;filter:drop-shadow(0 0 5px #ff7a2acc);pointer-events:none;z-index:3}
+.arena-v2 .renasce-ring .renasce-ring-trilho{stroke:#ff8a3a33;stroke-width:3}
+.arena-v2 .unit-renasce .renasce-segundos{font-style:normal;font-size:.62rem;font-weight:800;opacity:.9}
 .arena-v2 .prep-ring{position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg);fill:none;stroke:var(--gold);stroke-width:3.4;stroke-linecap:round;filter:drop-shadow(0 0 4px #f4d47e99);pointer-events:none}
 .arena-v2 .unit-flag{position:absolute;right:1%;top:1%;z-index:3;width:21px;height:21px;display:grid;place-items:center;border-radius:50%;background:#0b1218;border:1.5px solid var(--team);color:var(--team);box-shadow:0 2px 6px #000a}
 .arena-v2 .flag-critical{border-color:#ff6b6b;color:#ff8f8f;animation:flag-beat 1s ease-in-out infinite}

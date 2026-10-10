@@ -81,6 +81,10 @@ function rate(b:Battle,actor:Fighter,candidate:Fighter,rule:Target,intent:Target
     // conforme o plano" marca o rival menos investigado para despistar (pedido do jogador: "o Light tem
     // que ignorar essa marcação, faz parte do plano"): o trio dele foca no marcado, e ele investiga,
     // bate e usa a Death Note em outro
+    // Ninguém suspeita dele (o Light): os rivais preferem outro alvo — até ele abrir a Death Note (em
+    // Preparo, todo mundo percebe e pode cortar)
+    const discreto=byId[candidate.characterId].despercebido;
+    if(discreto&&!candidate.cast)add('ninguém suspeita dele',-discreto.peso);
     const marcaDoPlano=actor.characterId==='light'&&candidate.statuses.some(x=>x.id==='marked'&&x.source===actor.uid);
     if(intent!=='interrupt')add(marcaDoPlano?'a marca é o despiste do plano':'marcado',marcaDoPlano?-6:status(candidate,'marked')>0?8+status(candidate,'marked')*10:0);
     if(rule==='enemyWeak')add('condição baixa',(1-ratio)*2.4);

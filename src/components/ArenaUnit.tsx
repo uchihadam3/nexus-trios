@@ -136,8 +136,10 @@ export function ArenaUnit({fighter:f,battle,beat,onInspect,numbers,threatened,li
         {broken&&<span className="unit-break" aria-hidden="true">×</span>}
         {tempo&&<span className={`unit-tempo ${tempo.value!>0?'advanced':'delayed'}`} aria-label={tempo.label}><AuxIcon id={tempo.value!>0?'tempo-up':'tempo-down'} size={18}/></span>}
         {renascendo&&<span className="unit-brasas" aria-hidden="true" style={{'--fx-img':`url(${folha('brasas_renascendo')})`} as React.CSSProperties}/>}
+        {/* o tempo até renascer: a barrinha enche em volta do medalhão */}
+        {renascendo&&<svg className="renasce-ring" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="47" className="renasce-ring-trilho"/><circle cx="50" cy="50" r="47" pathLength="100" strokeDasharray={`${Math.min(100,Math.max(0,100*(1-(f.renascendo??0)/(c.renascer?.atraso||1))))} 100`}/></svg>}
         {out&&(renascendo
-          ?<span className="unit-ko unit-renasce" aria-label={`Renascendo em ${Math.ceil(f.renascendo??0)} segundos`}><Flame size={24}/><b>RENASCE</b></span>
+          ?<span className="unit-ko unit-renasce" aria-label={`Renascendo em ${Math.ceil(f.renascendo??0)} segundos`}><Flame size={24}/><b>RENASCE</b><i className="renasce-segundos">{Math.ceil(f.renascendo??0)}s</i></span>
           :<span className="unit-ko" aria-label="Fora da luta"><Skull size={26}/><b>FORA</b></span>)}
         {levantou&&<span key={levantou.id} className="discovery-pop revive-pop">{levantou.label}</span>}
         {invocada&&<span className={`unit-invocada ${atacou?'atacou':''}`} title={`${c.invocacao??'Invocação'} · ${Math.ceil(invocada.remaining)} s`}><img src="/assets/statuses/summon.png" alt=""/><b>{c.invocacao??'Invocação'}</b><i>{Math.ceil(invocada.remaining)}s</i></span>}

@@ -4661,20 +4661,6 @@
   "laco": false,
   "bytes": 70728
  },
- "muralha_de_terra": {
-  "descricao": "Toph · Muralha de terra rompendo embaixo do rival",
-  "quadros": 12,
-  "grade": [
-   3,
-   4
-  ],
-  "tamanho": [
-   192,
-   192
-  ],
-  "laco": false,
-  "bytes": 52002
- },
  "nen_gon": {
   "descricao": "Gon · a aura juntando no punho (laço)",
   "quadros": 12,
@@ -4926,6 +4912,20 @@
   ],
   "laco": false,
   "bytes": 54016
+ },
+ "pedregulho_toph": {
+  "descricao": "Toph · a pedra da Muralha esmagando o rival",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 33576
  },
  "pentagrama": {
   "descricao": "pentagrama infernal",

@@ -217,6 +217,12 @@ export function BattleEffects({battle,beat,anchors,enabled,reduced,medal=80}:{ba
         if(noCentro&&rivais.includes(uid))return;
         if(soQuique.has(uid))return;
         if(ataca&&ladoDe(uid)===lado){
+          // a família tem o desenho próprio do que ela faz no trio (a muralha da Toph na frente de cada aliado)
+          if(fam.noAliado){
+            const p=point(uid),t=Math.min(medal*fam.escala,Math.min(size.w,size.h)*.92);
+            nodes.push(camada(fam.noAliado,{left:`${p.x}%`,top:`${p.y}%`,width:t,height:t,'--fx-cor':cor,'--ang':'0deg','--flip':1,'--dur':s(Math.max(.6,dur*1.1)),'--delay':s(.12+i*.06)},`fxl-impacto fxl-sobre ${reduced?'fxl-parado':''}`,`aliado-${id}-${uid}`));
+            return;
+          }
           const apoio=apoioPara(uid);
           if(apoio)sobre(uid,apoio,`apoio-${id}-${uid}`,.12);
           return;
