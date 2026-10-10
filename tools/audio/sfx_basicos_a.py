@@ -228,21 +228,6 @@ def choque_do_pikachu(rng, v):
     return reverb(x, 0.35, 0.16)
 
 
-def soco_relampago(rng, v):
-    x = _z(1.1)
-    n = n_de(0.16)
-    zum = seno(varre(1800, 7500, n, 0.6), n) * sobe_e_some(n, 0.85, 1.5) * 0.18
-    poe(x, zum + _whoosh(rng, 0.16, 2000, 10000, 0.9, g=0.7), 0)
-    poe(x, estalo(rng, n_de(0.2), 800, 9000, 0.006) * 1.0 + baque(n_de(0.2), 130, 60, 0.05, 0.5) * 0.4, 0.15)
-    t0, k = 0.18, 0
-    while t0 < 0.58 and k < 30:
-        poe(x, B.soco_leve(rng, v)[: n_de(0.1)] * env(n_de(0.1), 0.0005, 0.03), t0, rng.uniform(0.8, 1.1))
-        t0 += max(0.015, rng.uniform(0.022, 0.032))
-        k += 1
-    poe(x, _ziz(rng, 0.45, 2000, 12000, 0.01, 0.35) * env(n_de(0.45), 0.01, 0.2), 0.16)
-    poe(x, B.soco_pesado(rng, v), 0.6, 1.0)
-    return reverb(x, 0.4, 0.18)
-
 
 SONS.update({
     "golpe-do-potencial": (golpe_do_potencial, "básico de Gohan: soco pesado com chiado elétrico do SSJ2"),
@@ -253,5 +238,4 @@ SONS.update({
     "punho-amaldicoado": (punho_amaldicoado, "básico de Yuji: impacto com estalo distorcido do Black Flash"),
     "desmanche": (desmanche, "básico de Sukuna: vários \"shink\" agudos rapidíssimos"),
     "choque-do-pikachu": (choque_do_pikachu, "básico de Pikachu: choque elétrico crepitante agudo"),
-    "soco-relampago": (soco_relampago, "básico de Flash: zunido supersônico e uma série de socos ultrarrápidos"),
 })

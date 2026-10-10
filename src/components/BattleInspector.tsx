@@ -8,7 +8,7 @@ import { EfeitosAgrupados } from './EfeitosAgrupados';
 import { ComTermos,TermoBotao } from './Termos';
 import { termoPorId } from '../presentation/glossario';
 import { StatusBadge } from './StatusBadge';
-import { presentSkill,presentStatus,presentTrait,tetoDoStatus,textoDaIsca,textoDaResistencia,textoDoDespercebido,textoDoJeito,textoDoRenascer,valorAtualDoStatus } from '../engine/skill-descriptions';
+import { presentEffect,presentSkill,presentStatus,presentTrait,tetoDoStatus,textoDaIsca,textoDaResistencia,textoDoDespercebido,textoDoJeito,textoDoRenascer,valorAtualDoStatus } from '../engine/skill-descriptions';
 
 export type InspectTarget={kind:'fighter';fighter:Fighter}|{kind:'skill';fighter:Fighter;index:number}|{kind:'status';fighter:Fighter;status:Status};
 export function BattleInspector({target,battle,onClose,onSelect}:{target:InspectTarget;battle:Battle;onClose:()=>void;onSelect:(target:InspectTarget)=>void}){
@@ -33,7 +33,8 @@ export function BattleInspector({target,battle,onClose,onSelect}:{target:Inspect
       <div className="inspector-title"><span className="inspector-avatar" style={{'--character':c.color} as React.CSSProperties}>{c.symbol}</span><div><small>{c.universe}</small><h3>{c.name}</h3></div></div>
       <div className="inspector-meta"><span><HeartPulse size={13}/>{health} de {f.maxHp} Vida</span><span><Clock3 size={13}/>{Math.max(0,100-f.action*100).toFixed(0)}% até o ataque básico</span></div>
       <p><strong>{c.trait.name}.</strong> <ComTermos texto={presentTrait(c.trait).effects.join(' · ')}/>. <ComTermos texto={presentTrait(c.trait).quando}/>.{c.renascer&&<> <ComTermos texto={(f.voltou?'Já renasceu nesta luta. ':'')+textoDoRenascer(c.renascer)}/>.</>}{c.ultimaResistencia&&<> <ComTermos texto={(f.resistiu?'Já usou nesta luta. ':'')+textoDaResistencia(c.ultimaResistencia)}/>.</>}{c.despercebido&&<> <ComTermos texto={textoDoDespercebido()}/>.</>}{c.isca&&<> <ComTermos texto={textoDaIsca(c.isca)}/>.</>}</p>
-      <p><strong>{c.basic.name}.</strong> {c.basic.jeito?<ComTermos texto={textoDoJeito(c.basic.jeito)+'.'}/>:'Ataque básico.'}</p>
+      {/* O ataque básico com o que ele faz (o dano e os efeitos), como na ficha fora da luta. */}
+      <p><strong>{c.basic.name}.</strong> <ComTermos texto={c.basic.effects.map(effect=>presentEffect(effect,c.basic.target)).join(' · ')+'.'}/>{c.basic.jeito&&<> <ComTermos texto={textoDoJeito(c.basic.jeito)+'.'}/></>}</p>
       <div className="inspector-skills">{c.skills.map((s,i)=><button key={s.id} onClick={()=>onSelect({kind:'skill',fighter:f,index:i})}><SkillIcon type={s.icon} characterId={c.id} skillId={s.id} size={19}/><span>{s.name}</span><small>{Math.round(f.skills[i].charge)}%</small></button>)}</div>
       {/*
         * Os Status do lutador com o valor de agora e o tempo que falta. A

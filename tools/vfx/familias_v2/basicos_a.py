@@ -636,57 +636,6 @@ def choque_do_pikachu(T, t, rng):
 
 
 # ------------------------------------------------------------------ Flash
-def soco_relampago(T, t, rng):
-    """Soco à velocidade da luz (Flash): riscos de relâmpago convergem de vários lados, uma
-    rajada de socos aparece em pontos diferentes no mesmo instante e um impacto final."""
-    G, H = vazio(T)
-    env = apaga(t, 0.82, 1)
-    sub = np.random.default_rng(777)
-    # relâmpagos convergindo (a cabeça corre para o centro)
-    R = T.zero()
-    for j in range(7):
-        a = j / 7 * TAU + sub.uniform(-0.25, 0.25) + math.pi
-        a0 = 0.0 + 0.03 * j
-        u = ease_in(rel(t, a0, a0 + 0.14), 1.2)
-        if u <= 0 or t > a0 + 0.3:
-            continue
-        cab = 1.05 * (1 - u) + 0.08
-        cauda = min(1.1, cab + 0.55)
-        come = rel(t, a0 + 0.14, a0 + 0.3)
-        cauda = cauda - (cauda - cab) * come
-        seg = jagged(np.random.default_rng(300 + j + 7 * int(t * 22)), math.cos(a) * cauda, math.sin(a) * cauda, math.cos(a) * cab, math.sin(a) * cab, 4, 0.22)
-        R += T.polyline(seg, 0.022)
-    G += R * 1.3 + T.blur(R, 0.03) * 1.2
-    H += R * 1.1
-    # rastro de velocidade vindo da esquerda
-    rs = rastro_de_velocidade(T, rng, 10, 0.0, 0.8, 0.45, 0.2, seed=52, largura=0.014) * pulso(t, 0.1, 0.6)
-    G += rs * 0.8
-    H += rs * 0.4
-    # a saraivada de socos: vultos de punho e estrelinhas em pontos diferentes
-    vultos, est = [], []
-    sub = np.random.default_rng(91)
-    for j in range(16):
-        a0 = 0.18 + 0.026 * j
-        tx, ty = sub.uniform(-0.3, 0.3), sub.uniform(-0.38, 0.38)
-        k = pulso(t, a0, a0 + 0.1)
-        if k <= 0:
-            continue
-        vultos.append((_move(_PUNHO, tx - 0.17 + 0.05 * rel(t, a0, a0 + 0.05), ty, 1.2), k * 0.7))
-        est.append((estrela(tx + 0.03, ty, 0.11 * k + 0.01, j * 0.7, 5, 0.42), k))
-    if vultos:
-        V = T.polys(vultos, 0.01)
-        E = T.polys(est, 0.004)
-        G += V * 0.9 + E * 1.3
-        H += V * 0.25 + E * 0.9
-    # impacto final
-    k = pulso(t, 0.58, 0.85)
-    g, h = _clarao(T, k, 0, 0, 0.3, 0.95)
-    anel = T.ring(0.1 + 0.6 * ease_out(rel(t, 0.58, 0.9), 2), 0.04) * pulso(t, 0.58, 0.92) * 1.2
-    fa = faiscas(T, np.random.default_rng(5), t, 14, 0.8, 0.03, inicio=0.58)
-    G += g + anel + fa * 1.2
-    H += h + anel * 0.5 + fa * 0.7
-    return G * env, H * env
-
 
 
 # ------------------------------------------------------------------ golpes simples (o básico de quem só bate)
@@ -786,5 +735,4 @@ REGISTRO = [
     ("punho_amaldicoado", punho_amaldicoado, GRANDE, "básico do Yuji: Black Flash, faíscas negras e o espaço rachando", False),
     ("desmanche", desmanche, GRANDE, "básico do Sukuna: cortes finos em grade aparecendo de uma vez", False),
     ("choque_do_pikachu", choque_do_pikachu, GRANDE, "básico do Pikachu: faíscas em zigue-zague e bochechas crepitando", False),
-    ("soco_relampago", soco_relampago, GRANDE, "básico do Flash: relâmpagos convergindo e mil socos num instante", False),
 ]

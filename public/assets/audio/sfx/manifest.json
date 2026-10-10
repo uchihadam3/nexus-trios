@@ -529,6 +529,40 @@
    ],
    "bytes": 28781
   },
+  "batarangue-eletrico": {
+   "arquivo": "batarangue-eletrico.mp3",
+   "descricao": "Batarangue: crava e descarrega o choque",
+   "versoes": [
+    0.0,
+    1.4278,
+    2.9472,
+    4.2787
+   ],
+   "duracoes": [
+    1.3478,
+    1.4394,
+    1.2515,
+    1.3871
+   ],
+   "bytes": 56942
+  },
+  "batarangue-eletrico-saida": {
+   "arquivo": "batarangue-eletrico-saida.mp3",
+   "descricao": "Batarangue: o arremesso e o bip",
+   "versoes": [
+    0.0,
+    0.68,
+    1.3817,
+    2.0415
+   ],
+   "duracoes": [
+    0.6,
+    0.6217,
+    0.5797,
+    0.6091
+   ],
+   "bytes": 24075
+  },
   "batida-do-gorila": {
    "arquivo": "batida-do-gorila.mp3",
    "descricao": "Batida do gorila: o chão rachando e as pedras caindo",
@@ -953,6 +987,23 @@
     1.0152
    ],
    "bytes": 41319
+  },
+  "capa-de-contingencia": {
+   "arquivo": "capa-de-contingencia.mp3",
+   "descricao": "Plano de contingência: a fumaça e a capa",
+   "versoes": [
+    0.0,
+    1.57,
+    3.2044,
+    4.7337
+   ],
+   "duracoes": [
+    1.49,
+    1.5544,
+    1.4493,
+    1.5228
+   ],
+   "bytes": 54011
   },
   "carga-grande": {
    "arquivo": "carga-grande.mp3",
@@ -1889,6 +1940,23 @@
    ],
    "bytes": 41990
   },
+  "deus-do-trovao": {
+   "arquivo": "deus-do-trovao.mp3",
+   "descricao": "Deus do Trovão: o raio gigante",
+   "versoes": [
+    0.0,
+    2.211,
+    4.5045,
+    6.7101
+   ],
+   "duracoes": [
+    2.131,
+    2.2135,
+    2.1256,
+    2.2061
+   ],
+   "bytes": 79346
+  },
   "disco": {
    "arquivo": "disco.mp3",
    "descricao": "família disco",
@@ -2228,6 +2296,23 @@
     0.7399
    ],
    "bytes": 25926
+  },
+  "escudo-serafim": {
+   "arquivo": "escudo-serafim.mp3",
+   "descricao": "Escudo de Serafim: o acorde e as runas",
+   "versoes": [
+    0.0,
+    1.88,
+    3.7545,
+    5.4744
+   ],
+   "duracoes": [
+    1.8,
+    1.7945,
+    1.6399,
+    1.7402
+   ],
+   "bytes": 60548
   },
   "escudo-tech": {
    "arquivo": "escudo-tech.mp3",
@@ -2705,6 +2790,23 @@
    ],
    "bytes": 40070
   },
+  "fator-de-cura": {
+   "arquivo": "fator-de-cura.mp3",
+   "descricao": "Não acabou: a carne fechando e o coração",
+   "versoes": [
+    0.0,
+    1.98,
+    4.0289,
+    5.9446
+   ],
+   "duracoes": [
+    1.9,
+    1.9689,
+    1.8357,
+    1.9289
+   ],
+   "bytes": 68579
+  },
   "feitico-comum": {
    "arquivo": "feitico-comum.mp3",
    "descricao": "básico de Frieren: arpejo de cristal e o 'piuu' do Zoltraak",
@@ -2977,6 +3079,23 @@
    ],
    "bytes": 61307
   },
+  "forca-de-aceleracao": {
+   "arquivo": "forca-de-aceleracao.mp3",
+   "descricao": "Além do tempo: a Força de Aceleração",
+   "versoes": [
+    0.0,
+    1.88,
+    3.8253,
+    5.6444
+   ],
+   "duracoes": [
+    1.8,
+    1.8653,
+    1.7391,
+    1.8274
+   ],
+   "bytes": 75762
+  },
   "forca-monstruosa": {
    "arquivo": "forca-monstruosa.mp3",
    "descricao": "Força monstruosa: o soco que racha o chão",
@@ -3215,6 +3334,23 @@
    ],
    "bytes": 24880
   },
+  "garras-adamantium": {
+   "arquivo": "garras-adamantium.mp3",
+   "descricao": "Garras de adamantium: o snikt e os dois cortes",
+   "versoes": [
+    0.0,
+    1.0521,
+    2.1412,
+    3.1667
+   ],
+   "duracoes": [
+    0.9721,
+    1.0091,
+    0.9455,
+    0.992
+   ],
+   "bytes": 44822
+  },
   "garras-cineticas": {
    "arquivo": "garras-cineticas.mp3",
    "descricao": "básico de Pantera Negra: garras de vibranium e pulso cinético",
@@ -3231,6 +3367,23 @@
     1.066
    ],
    "bytes": 47479
+  },
+  "garras-cruzadas": {
+   "arquivo": "garras-cruzadas.mp3",
+   "descricao": "Na minha frente: as garras cruzando com o clang",
+   "versoes": [
+    0.0,
+    1.58,
+    3.2144,
+    4.7437
+   ],
+   "duracoes": [
+    1.5,
+    1.5544,
+    1.4493,
+    1.5228
+   ],
+   "bytes": 54927
   },
   "garras-de-killua": {
    "arquivo": "garras-de-killua.mp3",
@@ -4388,6 +4541,23 @@
    ],
    "bytes": 49283
   },
+  "laco-temporal": {
+   "arquivo": "laco-temporal.mp3",
+   "descricao": "Laço temporal: o tique-taque voltando",
+   "versoes": [
+    0.0,
+    1.88,
+    3.8253,
+    5.6444
+   ],
+   "duracoes": [
+    1.8,
+    1.8653,
+    1.7391,
+    1.8274
+   ],
+   "bytes": 74918
+  },
   "lamina-de-agua": {
    "arquivo": "lamina-de-agua.mp3",
    "descricao": "família lamina de agua",
@@ -5170,6 +5340,23 @@
    ],
    "bytes": 66806
   },
+  "mil-golpes-flash": {
+   "arquivo": "mil-golpes-flash.mp3",
+   "descricao": "Mil golpes: a rajada de socos",
+   "versoes": [
+    0.0,
+    1.58,
+    3.2144,
+    4.7437
+   ],
+   "duracoes": [
+    1.5,
+    1.5544,
+    1.4493,
+    1.5228
+   ],
+   "bytes": 50180
+  },
   "missil": {
    "arquivo": "missil.mp3",
    "descricao": "míssil",
@@ -5186,6 +5373,40 @@
     0.7614
    ],
    "bytes": 31417
+  },
+  "mjolnir-impacto": {
+   "arquivo": "mjolnir-impacto.mp3",
+   "descricao": "Mjolnir: a pancada e o trovão",
+   "versoes": [
+    0.0,
+    1.88,
+    3.8253,
+    5.6444
+   ],
+   "duracoes": [
+    1.8,
+    1.8653,
+    1.7391,
+    1.8274
+   ],
+   "bytes": 60043
+  },
+  "mjolnir-lanca": {
+   "arquivo": "mjolnir-lanca.mp3",
+   "descricao": "Mjolnir: o martelo girando no ar",
+   "versoes": [
+    0.0,
+    0.88,
+    1.789,
+    2.6419
+   ],
+   "duracoes": [
+    0.8,
+    0.829,
+    0.7729,
+    0.8122
+   ],
+   "bytes": 32960
   },
   "modo-kurama": {
    "arquivo": "modo-kurama.mp3",
@@ -5747,6 +5968,23 @@
     1.0152
    ],
    "bytes": 35669
+  },
+  "portal-estranho": {
+   "arquivo": "portal-estranho.mp3",
+   "descricao": "Portais: as faíscas girando",
+   "versoes": [
+    0.0,
+    1.7525,
+    3.5941,
+    5.3099
+   ],
+   "duracoes": [
+    1.6725,
+    1.7617,
+    1.6358,
+    1.7153
+   ],
+   "bytes": 68546
   },
   "postura-de-guarda": {
    "arquivo": "postura-de-guarda.mp3",
@@ -6632,6 +6870,23 @@
    ],
    "bytes": 37599
   },
+  "resgate-flash": {
+   "arquivo": "resgate-flash.mp3",
+   "descricao": "Resgate instantâneo: o vulto e o escudo elétrico",
+   "versoes": [
+    0.0,
+    1.4511,
+    2.9097,
+    4.3006
+   ],
+   "duracoes": [
+    1.3711,
+    1.3785,
+    1.311,
+    1.3716
+   ],
+   "bytes": 50409
+  },
   "ressurreicao": {
    "arquivo": "ressurreicao.mp3",
    "descricao": "família ressurreicao",
@@ -7346,23 +7601,6 @@
    ],
    "bytes": 19265
   },
-  "soco-relampago": {
-   "arquivo": "soco-relampago.mp3",
-   "descricao": "básico de Flash: zunido supersônico e uma série de socos ultrarrápidos",
-   "versoes": [
-    0.0,
-    1.18,
-    2.3999,
-    3.5427
-   ],
-   "duracoes": [
-    1.1,
-    1.1399,
-    1.0628,
-    1.1167
-   ],
-   "bytes": 64109
-  },
   "soco-serio": {
    "arquivo": "soco-serio.mp3",
    "descricao": "família soco serio",
@@ -7703,6 +7941,23 @@
    ],
    "bytes": 80095
   },
+  "tempestade-thor": {
+   "arquivo": "tempestade-thor.mp3",
+   "descricao": "Tempestade: o vento, a chuva e os raios",
+   "versoes": [
+    0.0,
+    2.48,
+    5.047,
+    7.4459
+   ],
+   "duracoes": [
+    2.4,
+    2.487,
+    2.3188,
+    2.4365
+   ],
+   "bytes": 96185
+  },
   "tenho-a-forca": {
    "arquivo": "tenho-a-forca.mp3",
    "descricao": "família tenho a forca",
@@ -8042,6 +8297,23 @@
     0.9137
    ],
    "bytes": 37839
+  },
+  "trovao-chamado": {
+   "arquivo": "trovao-chamado.mp3",
+   "descricao": "Thor chamando o trovão (Preparo)",
+   "versoes": [
+    0.0,
+    1.68,
+    3.418,
+    5.0439
+   ],
+   "duracoes": [
+    1.6,
+    1.658,
+    1.5459,
+    1.6244
+   ],
+   "bytes": 62381
   },
   "trovao-feixe": {
    "arquivo": "trovao-feixe.mp3",
@@ -8467,6 +8739,23 @@
     1.6664
    ],
    "bytes": 80877
+  },
+  "visao-de-detetive": {
+   "arquivo": "visao-de-detetive.mp3",
+   "descricao": "Análise tática: o visor e as miras travando",
+   "versoes": [
+    0.0,
+    1.3845,
+    2.8151,
+    4.1565
+   ],
+   "duracoes": [
+    1.3045,
+    1.3507,
+    1.2613,
+    1.3239
+   ],
+   "bytes": 48533
   },
   "visao-sismica": {
    "arquivo": "visao-sismica.mp3",

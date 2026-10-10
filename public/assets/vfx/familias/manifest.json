@@ -433,6 +433,34 @@
   "laco": false,
   "bytes": 42696
  },
+ "batarangue_eletrico": {
+  "descricao": "Batman · o batarangue elétrico descarregando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 43206
+ },
+ "batarangue_eletrico_voo": {
+  "descricao": "Batman · o batarangue elétrico voando (laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 15738
+ },
  "batarangue_voando": {
   "descricao": "o batarangue girando em voo (+x)",
   "quadros": 12,
@@ -894,6 +922,20 @@
   ],
   "laco": false,
   "bytes": 49802
+ },
+ "capa_de_contingencia": {
+  "descricao": "Batman · a fumaça e a capa de escudo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 56554
  },
  "carga": {
   "descricao": "preparo: energia convergindo",
@@ -1777,6 +1819,20 @@
   "laco": false,
   "bytes": 69212
  },
+ "deus_do_trovao": {
+  "descricao": "Thor · o raio gigante do céu",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 40346
+ },
  "diamante_faixa": {
   "descricao": "Hyoga · o Pó de Diamante correndo até o rival (faixa)",
   "quadros": 12,
@@ -2056,6 +2112,20 @@
   ],
   "laco": false,
   "bytes": 46296
+ },
+ "escudo_serafim": {
+  "descricao": "Doutor Estranho · a mandala do Escudo de Serafim",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 98824
  },
  "escudo_tech": {
   "descricao": "parede de painéis hexagonais",
@@ -2519,6 +2589,20 @@
   "laco": false,
   "bytes": 140690
  },
+ "fator_de_cura": {
+  "descricao": "Wolverine · os cortes fechando (fator de cura)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 42638
+ },
  "feitico_comum": {
   "descricao": "Feitiço de ataque comum de Frieren: círculo mágico e raio Zoltraak",
   "quadros": 12,
@@ -2813,6 +2897,20 @@
   "laco": true,
   "bytes": 20324
  },
+ "forca_de_aceleracao": {
+  "descricao": "Flash · a Força de Aceleração no aliado",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 34546
+ },
  "forca_monstruosa": {
   "descricao": "Sakura · o soco que racha o chão, com as pétalas",
   "quadros": 12,
@@ -3009,6 +3107,20 @@
   "laco": false,
   "bytes": 69646
  },
+ "garras_adamantium": {
+  "descricao": "Wolverine · as garras cortando em X",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 60080
+ },
  "garras_cineticas": {
   "descricao": "Pantera Negra: garras em X e pulso cinético",
   "quadros": 12,
@@ -3022,6 +3134,20 @@
   ],
   "laco": false,
   "bytes": 95332
+ },
+ "garras_cruzadas": {
+  "descricao": "Wolverine · as garras cruzadas na frente do aliado",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 64734
  },
  "garras_de_killua": {
   "descricao": "Garras de Killua: três riscos de garra feitos de relâmpago",
@@ -3919,6 +4045,20 @@
   "laco": false,
   "bytes": 35620
  },
+ "laco_temporal": {
+  "descricao": "Doutor Estranho · os anéis de relógio voltando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 35044
+ },
  "lamina_de_agua": {
   "descricao": "fita de água em espiral",
   "quadros": 12,
@@ -4549,6 +4689,20 @@
   "laco": false,
   "bytes": 84656
  },
+ "mil_golpes_flash": {
+  "descricao": "Flash · os socos rápidos com raios",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 49058
+ },
  "mira": {
   "descricao": "mira no alvo (laço)",
   "quadros": 12,
@@ -4576,6 +4730,34 @@
   ],
   "laco": true,
   "bytes": 17664
+ },
+ "mjolnir_impacto": {
+  "descricao": "Thor · o martelo batendo e o trovão",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 64828
+ },
+ "mjolnir_voando": {
+  "descricao": "Thor · o Mjolnir voando (laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 37200
  },
  "modo_kurama": {
   "descricao": "Naruto · o Manto da Kurama: chamas, caudas e o selo",
@@ -5080,6 +5262,20 @@
   ],
   "laco": true,
   "bytes": 13086
+ },
+ "portal_estranho": {
+  "descricao": "Doutor Estranho · o portal de faíscas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 61836
  },
  "portal_rick": {
   "descricao": "Rick · o portal abrindo no rival",
@@ -5781,6 +5977,20 @@
   "laco": false,
   "bytes": 46072
  },
+ "resgate_flash": {
+  "descricao": "Flash · o raio dando a volta no aliado",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 32342
+ },
  "ressurreicao": {
   "descricao": "feixe de luz que levanta o aliado caído",
   "quadros": 12,
@@ -6439,20 +6649,6 @@
   "laco": false,
   "bytes": 55662
  },
- "soco_relampago": {
-  "descricao": "básico do Flash: relâmpagos convergindo e mil socos num instante",
-  "quadros": 12,
-  "grade": [
-   3,
-   4
-  ],
-  "tamanho": [
-   192,
-   192
-  ],
-  "laco": false,
-  "bytes": 64304
- },
  "soco_serio": {
   "descricao": "sopro gigante para a frente",
   "quadros": 12,
@@ -6817,6 +7013,20 @@
   "laco": false,
   "bytes": 31074
  },
+ "tempestade_thor": {
+  "descricao": "Thor · a nuvem e os raios em cada rival",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 25778
+ },
  "tenho_a_forca": {
   "descricao": "Eu tenho a força: raios na espada erguida",
   "quadros": 12,
@@ -7054,6 +7264,20 @@
   ],
   "laco": false,
   "bytes": 37656
+ },
+ "trovao_chamado": {
+  "descricao": "Thor · os raios caindo nele (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 51266
  },
  "trovao_faixa": {
   "descricao": "Pikachu · o raio do Choque do Trovão (faixa)",
@@ -7306,6 +7530,20 @@
   ],
   "laco": false,
   "bytes": 65596
+ },
+ "visao_de_detetive": {
+  "descricao": "Batman · a visão de detetive no rival",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 41046
  },
  "visao_sismica": {
   "descricao": "Toph · Visão sísmica: as ondas, o contorno e a terra prendendo",

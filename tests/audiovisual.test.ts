@@ -96,8 +96,9 @@ describe('compact reusable audiovisual library',()=>{
     }
     // a luta baixa só os sons das famílias dos seis lutadores (precarregarLuta)
     // as mecânicas novas (reviver, provocar, refletir, status novos…) trazem sons próprios; a luta continua baixando só os dos seis lutadores
-    // (os sons próprios dos personagens que ganharam habilidades desenhadas: 26 MB)
-    expect(bytes).toBeLessThan(26_000_000);
+    // os sons próprios de cada personagem fazem o total crescer a cada rodada (a luta só baixa os dos seis
+    // lutadores); o que importa é cada som continuar leve: a média fica abaixo de 60 KB
+    expect(bytes/Object.keys(sfx.sons).length).toBeLessThan(60_000);
     expect(readdirSync(resolve(root,'public/assets/audio/sfx')).filter(x=>x.endsWith('.wav'))).toEqual([]);
   });
   it('a música começa na Intro e, depois do fim, volta ao Encontro',()=>{
