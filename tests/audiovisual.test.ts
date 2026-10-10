@@ -29,7 +29,9 @@ describe('compact reusable audiovisual library',()=>{
       bytes+=f.bytes;decodificado+=f.tamanho[0]*f.tamanho[1]*12*4;
     }
     // só as folhas das famílias da luta são baixadas; o total é o catálogo inteiro (com os jeitos de bater)
-    expect(bytes).toBeLessThan(25_000_000);
+    // cresce com as habilidades desenhadas para cada personagem (Madara, Kakashi, Cloud…); a luta baixa
+    // só as folhas de quem está nela, então o catálogo inteiro não pesa no celular
+    expect(bytes).toBeLessThan(28_000_000);
     // nenhuma folha decodificada passa de ~4,5 MB na memória (a maior é a faixa de 512 × 96 × 12)
     expect(decodificado/Object.keys(familias).length).toBeLessThan(2_000_000);
     expect(readdirSync(resolve(root,'public/assets/vfx')).filter(x=>x.endsWith('.webp'))).toEqual(['arena.webp']);
@@ -50,8 +52,9 @@ describe('compact reusable audiovisual library',()=>{
     }
     // não são de habilidade: as brasas aparecem no lutador caído (ArenaUnit) e a marca de
     // Provocado por cima de quem recebe o Status, seja qual for o golpe (BattleEffects)
-    // e o espelho, os espinhos e as gotas de sangue sobre quem devolve o golpe ou rouba a Vida
-    const SO_NA_ARENA=new Set(['brasas_renascendo','provocar','reflexo','espinhos','vampirismo','dissipar','sono','cegueira','esquiva','ultima_resistencia','copia',...FAMILIAS_DO_JEITO,...Object.values(FAMILIA_DA_INVOCACAO)]);
+    // e o espelho, os espinhos e as gotas de sangue sobre quem devolve o golpe ou rouba a Vida;
+    // o renascer é o fogo de quem volta sozinho (o beat de Renasceu)
+    const SO_NA_ARENA=new Set(['renascer','brasas_renascendo','provocar','reflexo','espinhos','vampirismo','dissipar','sono','cegueira','esquiva','ultima_resistencia','copia',...FAMILIAS_DO_JEITO,...Object.values(FAMILIA_DA_INVOCACAO)]);
     for(const f of FAMILIAS)if(!SO_NA_ARENA.has(f))expect(uso.get(f)??0,`${f} usada`).toBeGreaterThan(0);
     for(const [f,n] of uso)expect(n/total,`${f} não domina`).toBeLessThan(.16);
   });
@@ -62,7 +65,7 @@ describe('compact reusable audiovisual library',()=>{
     expect(profileFor('pikachu',0)?.family).toBe('raio');
     expect(profileFor('spiderman',0)?.family).toBe('teia');
     expect(profileFor('light',2)?.family).toBe('death_note');
-    expect(profileFor('naruto',1)?.family).toBe('esfera_espiral');
+    expect(profileFor('naruto',1)?.family).toBe('rasengan');
     expect(profileFor('gojo',0)?.family).toBe('atracao');expect(profileFor('gojo',1)?.family).toBe('repulsao');expect(profileFor('gojo',2)?.family).toBe('dominio');
     expect(profileFor('beerus',0)?.family).toBe('toque_da_destruicao');expect(profileFor('sasuke',0)?.family).toBe('chidori');
     expect(profileFor('saitama',2)?.family).toBe('soco_serio');expect(profileFor('itachi',2)?.family).toBe('susanoo');

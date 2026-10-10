@@ -257,6 +257,23 @@
    ],
    "bytes": 47493
   },
+  "ave-fenix": {
+   "arquivo": "ave-fenix.mp3",
+   "descricao": "Ave Fênix: o grito da fênix e o fogo estourando",
+   "versoes": [
+    0.0,
+    1.98,
+    4.0289,
+    5.9446
+   ],
+   "duracoes": [
+    1.9,
+    1.9689,
+    1.8357,
+    1.9289
+   ],
+   "bytes": 78472
+  },
   "barreira-anula": {
    "arquivo": "barreira-anula.mp3",
    "descricao": "família barreira anula",
@@ -1090,6 +1107,23 @@
    ],
    "bytes": 51960
   },
+  "clones-naruto": {
+   "arquivo": "clones-naruto.mp3",
+   "descricao": "Clones das sombras: os puf de fumaça e os clones saltando",
+   "versoes": [
+    0.0,
+    1.68,
+    3.418,
+    5.0439
+   ],
+   "duracoes": [
+    1.6,
+    1.658,
+    1.5459,
+    1.6244
+   ],
+   "bytes": 52397
+  },
   "colera-do-dragao": {
    "arquivo": "colera-do-dragao.mp3",
    "descricao": "Cólera do Dragão do Shiryu: o sopro até o rival, o rugido, o bote e a espiral",
@@ -1157,6 +1191,23 @@
     1.1167
    ],
    "bytes": 40656
+  },
+  "corpo-de-borracha": {
+   "arquivo": "corpo-de-borracha.mp3",
+   "descricao": "Corpo de borracha: os boings e os ricochetes",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 46236
   },
   "corrente": {
    "arquivo": "corrente.mp3",
@@ -2280,6 +2331,23 @@
    ],
    "bytes": 67228
   },
+  "fenix-asas": {
+   "arquivo": "fenix-asas.mp3",
+   "descricao": "as asas de fogo abrindo no Ikki",
+   "versoes": [
+    0.0,
+    1.08,
+    2.1963,
+    3.2424
+   ],
+   "duracoes": [
+    1.0,
+    1.0363,
+    0.9662,
+    1.0152
+   ],
+   "bytes": 52836
+  },
   "flecha": {
    "arquivo": "flecha.mp3",
    "descricao": "família flecha",
@@ -2552,39 +2620,22 @@
    ],
    "bytes": 46495
   },
-  "gatling": {
-   "arquivo": "gatling.mp3",
-   "descricao": "família gatling",
+  "gear-fifth-nika": {
+   "arquivo": "gear-fifth-nika.mp3",
+   "descricao": "Gear Fifth: o tambor da libertação e as nuvens",
    "versoes": [
     0.0,
-    1.68,
-    3.418,
-    5.0439
+    2.08,
+    4.2325,
+    6.2449
    ],
    "duracoes": [
-    1.6,
-    1.658,
-    1.5459,
-    1.6244
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
    ],
-   "bytes": 67665
-  },
-  "gear-fifth": {
-   "arquivo": "gear-fifth.mp3",
-   "descricao": "família gear fifth",
-   "versoes": [
-    0.0,
-    1.98,
-    4.0289,
-    5.9446
-   ],
-   "duracoes": [
-    1.9,
-    1.9689,
-    1.8357,
-    1.9289
-   ],
-   "bytes": 55608
+   "bytes": 74600
   },
   "gelo": {
    "arquivo": "gelo.mp3",
@@ -2705,6 +2756,23 @@
    ],
    "bytes": 42838
   },
+  "golpe-fantasma": {
+   "arquivo": "golpe-fantasma.mp3",
+   "descricao": "Golpe Fantasma: o toque e a mente perdendo o rumo",
+   "versoes": [
+    0.0,
+    1.88,
+    3.8253,
+    5.6444
+   ],
+   "duracoes": [
+    1.8,
+    1.8653,
+    1.7391,
+    1.8274
+   ],
+   "bytes": 66994
+  },
   "golpe-largo": {
    "arquivo": "golpe-largo.mp3",
    "descricao": "família golpe largo",
@@ -2772,6 +2840,23 @@
     0.9644
    ],
    "bytes": 35348
+  },
+  "gomu-gatling": {
+   "arquivo": "gomu-gatling.mp3",
+   "descricao": "Gomu Gomu no Gatling: o braço esticando e a metralhadora de socos",
+   "versoes": [
+    0.0,
+    1.78,
+    3.6217,
+    5.3441
+   ],
+   "duracoes": [
+    1.7,
+    1.7617,
+    1.6425,
+    1.7259
+   ],
+   "bytes": 73490
   },
   "grand-carga": {
    "arquivo": "grand-carga.mp3",
@@ -3827,23 +3912,6 @@
    ],
    "bytes": 49997
   },
-  "manto-kurama": {
-   "arquivo": "manto-kurama.mp3",
-   "descricao": "família manto kurama",
-   "versoes": [
-    0.0,
-    1.8481,
-    3.7778,
-    5.5944
-   ],
-   "duracoes": [
-    1.7681,
-    1.8496,
-    1.7367,
-    1.7881
-   ],
-   "bytes": 76304
-  },
   "mao-da-perdicao": {
    "arquivo": "mao-da-perdicao.mp3",
    "descricao": "básico de Hellboy: pedra pesada esmagando e cascalho",
@@ -4098,6 +4166,23 @@
     0.7614
    ],
    "bytes": 31417
+  },
+  "modo-kurama": {
+   "arquivo": "modo-kurama.mp3",
+   "descricao": "Manto da Kurama: o rugido e o chakra em chamas",
+   "versoes": [
+    0.0,
+    1.88,
+    3.7873,
+    5.6064
+   ],
+   "duracoes": [
+    1.8,
+    1.8273,
+    1.7391,
+    1.8261
+   ],
+   "bytes": 74587
   },
   "mordida": {
    "arquivo": "mordida.mp3",
@@ -4626,23 +4711,6 @@
    ],
    "bytes": 33718
   },
-  "punho-da-fenix": {
-   "arquivo": "punho-da-fenix.mp3",
-   "descricao": "básico de Ikki: soco, chama explodindo e o grito de vento da fênix",
-   "versoes": [
-    0.0,
-    1.43,
-    2.909,
-    4.2933
-   ],
-   "duracoes": [
-    1.35,
-    1.399,
-    1.3043,
-    1.3705
-   ],
-   "bytes": 55340
-  },
   "punho-de-apokolips": {
    "arquivo": "punho-de-apokolips.mp3",
    "descricao": "básico de Darkseid: soco grave e o zumbido sinistro do Ômega",
@@ -4966,6 +5034,40 @@
    ],
    "bytes": 31536
   },
+  "rasengan": {
+   "arquivo": "rasengan.mp3",
+   "descricao": "Rasengan: o giro, a broca e o estouro",
+   "versoes": [
+    0.0,
+    1.88,
+    3.8253,
+    5.6444
+   ],
+   "duracoes": [
+    1.8,
+    1.8653,
+    1.7391,
+    1.8274
+   ],
+   "bytes": 72971
+  },
+  "rasengan-mao": {
+   "arquivo": "rasengan-mao.mp3",
+   "descricao": "o Rasengan girando na mão, no Preparo",
+   "versoes": [
+    0.0,
+    1.18,
+    2.3999,
+    3.5427
+   ],
+   "duracoes": [
+    1.1,
+    1.1399,
+    1.0628,
+    1.1167
+   ],
+   "bytes": 54611
+  },
   "reacao": {
    "arquivo": "reacao.mp3",
    "descricao": "traço disparou (reação)",
@@ -5135,6 +5237,23 @@
     2.0305
    ],
    "bytes": 99870
+  },
+  "renascimento": {
+   "arquivo": "renascimento.mp3",
+   "descricao": "Renascimento: a coluna de fogo e a fênix gritando",
+   "versoes": [
+    0.0,
+    1.9479,
+    3.9932,
+    5.8805
+   ],
+   "duracoes": [
+    1.8679,
+    1.9654,
+    1.8073,
+    1.9593
+   ],
+   "bytes": 64479
   },
   "rendicao": {
    "arquivo": "rendicao.mp3",

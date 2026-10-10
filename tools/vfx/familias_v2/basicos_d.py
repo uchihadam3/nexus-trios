@@ -745,7 +745,6 @@ REGISTRO = [
     ("punho_do_dragao", punho_do_dragao, GRANDE, "Shiryu: gancho que sobe com o dragão em espiral", False),
     ("po_de_diamante", po_de_diamante, GRANDE, "Hyoga: jato de cristais de gelo que congela o alvo", False),
     ("corrente_de_andromeda", corrente_de_andromeda, GRANDE, "Shun: corrente em zigue-zague com ponta triangular", False),
-    ("punho_da_fenix", punho_da_fenix, GRANDE, "Ikki: soco em chamas que abre asas de fênix", False),
     ("rendicao", rendicao, GRANDE, "Shaka: lótus dourada abre sobre a roda de luz", False),
     ("tiara_lunar", tiara_lunar, GRANDE, "Sailor Moon: tiara-disco com lua crescente que acerta com brilho", False),
     ("garra_flamejante", garra_flamejante, GRANDE, "Charizard: três garras de fogo com chamas nos riscos", False),

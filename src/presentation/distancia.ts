@@ -18,14 +18,16 @@ const POR_GRUPO: Partial<Record<string, Distancia>> = { 'físico': 'perto', cort
 /* Efeitos que fogem da regra do grupo. */
 const DO_EFEITO: Partial<Record<VfxFamily, Distancia>> = {
   // alcançam de longe: chicote, corrente, laço, braço que estica, tentáculo, rugido, onda de corte
-  chicote: 'longe', corrente: 'longe', laco: 'longe', esticar: 'longe', gatling: 'longe', braco_namekiano: 'longe',
+  chicote: 'longe', corrente: 'longe', laco: 'longe', esticar: 'longe', braco_namekiano: 'longe',
   tentaculos: 'longe', tentaculo_simbionte: 'longe', kagune: 'longe', rugido: 'longe', corte_de_energia: 'longe',
   gadget_surpresa: 'longe', bigorna: 'longe', dedo_apontado: 'longe', punho_transmutado: 'longe', desmanche: 'longe',
   corte_dimensional: 'longe', inv_androide: 'longe',
   // de energia ou magia, mas na mão: vai até o alvo
   chidori: 'perto', esfera_espiral: 'perto', kunai_de_hiraishin: 'perto', punho_fotonico: 'perto', toque_da_destruicao: 'perto',
-  cajado_da_caveira: 'perto', punho_da_fenix: 'perto', toque_absorvente: 'perto', soco_da_vida: 'perto',
+  cajado_da_caveira: 'perto', toque_absorvente: 'perto', soco_da_vida: 'perto',
   raikiri: 'perto', // o Kakashi corre até o rival com o raio na mão
+  rasengan: 'perto', // o Naruto leva a esfera na mão até o rival
+  gomu_gatling: 'longe', // os braços de borracha esticam até o rival
 };
 
 /* Golpes de um personagem só (id ou id:habilidade) que fogem da regra do efeito. */

@@ -13,8 +13,8 @@
 import type { VfxFamily } from './vfxProfiles';
 
 const T: Record<string, string> = {
-  goku: 'kamehameha kaioken instinto', vegeta: 'kamehameha transformacao -', naruto: 'clones esfera_espiral manto_kurama',
-  sasuke: 'chidori chama_negra hipnose', luffy: 'gatling esticar gear_fifth', gojo: 'atracao repulsao dominio',
+  goku: 'kamehameha kaioken instinto', vegeta: 'kamehameha transformacao -', naruto: 'clones_naruto rasengan modo_kurama',
+  sasuke: 'chidori chama_negra hipnose', luffy: 'gomu_gatling corpo_de_borracha gear_fifth_nika', gojo: 'atracao repulsao dominio',
   light: 'olho marca death_note', pikachu: '- raio_em_cadeia velocidade', saitama: 'soco_casual resgate soco_serio',
   wolverine: 'garras armadura regeneracao', batman: 'marca disco escudo_tech', superman: 'laser resgate -',
   spiderman: 'teia resgate teia', hulk: '- rugido punho_gigante', thor: 'martelo tempestade raio_em_cadeia',
@@ -65,7 +65,7 @@ const T: Record<string, string> = {
   donkeykong: 'soco_giratorio barril_arremessado batida_do_gorila', simonbelmont: 'chicote agua_benta disco', princeofpersia: 'adaga_do_tempo relogio areia',
   alucardcv: 'espada_de_alucard teleporte caveira', seiya: 'meteoros_de_pegaso cosmico investida', majinbuu: 'laser regeneracao pow_cartoon',
   kuririn: 'disco clarao_solar kamehameha', shiryu: 'escudo_fisico colera_do_dragao pilar', hyoga: 'po_de_diamante bloco_de_gelo bloco_de_gelo',
-  shun: 'corrente tornado corrente', ikki: 'punho_da_fenix hipnose renascer', saga: 'cosmico fenda hipnose',
+  shun: 'corrente tornado corrente', ikki: 'ave_fenix golpe_fantasma renascimento', saga: 'cosmico fenda hipnose',
   shaka: 'olho barreira_magica rendicao', aiolia: 'plasma raio_em_cadeia rugido', camus: 'nevasca bloco_de_gelo espinho_de_gelo',
   hadescz: 'dominio medo caveira', madara: 'susanoo_perfeito meteoro_madara mugen_tsukuyomi', pain: 'gravidade rinnegan buraco_negro',
   minato: 'teleporte esfera_espiral marca', gaara: 'areia areia areia', trunks: 'mil_cortes hadouken corte_vertical',

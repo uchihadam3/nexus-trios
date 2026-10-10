@@ -317,7 +317,6 @@ SONS["meteoros-de-pegaso"] = (meteoros_de_pegaso, "básico de Seiya: rajada de d
 SONS["punho-do-dragao"] = (punho_do_dragao, "básico de Shiryu: gancho subindo e o rugido de vento do dragão")
 SONS["po-de-diamante"] = (po_de_diamante, "básico de Hyoga: cristais tilintando, vento frio e gelo estalando")
 SONS["corrente-de-andromeda"] = (corrente_de_andromeda, "básico de Shun: elos tilintando e o estalo da ponta")
-SONS["punho-da-fenix"] = (punho_da_fenix, "básico de Ikki: soco, chama explodindo e o grito de vento da fênix")
 SONS["rendicao"] = (rendicao, "básico de Shaka: sino tibetano e o pulso de luz")
 SONS["tiara-lunar"] = (tiara_lunar, "básico de Sailor Moon: disco girando que acerta com brilho mágico")
 SONS["garra-flamejante"] = (garra_flamejante, "básico de Charizard: três garras e a chama acendendo")

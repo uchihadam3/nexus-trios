@@ -937,6 +937,20 @@
   "laco": false,
   "bytes": 43174
  },
+ "clones_naruto": {
+  "descricao": "Naruto · Clones das sombras: fumaça, clones e a espiral",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 54008
+ },
  "colera_impacto": {
   "descricao": "o dragão atravessando o alvo: estouro e rastro para a frente",
   "quadros": 12,
@@ -1020,6 +1034,20 @@
   ],
   "laco": false,
   "bytes": 57104
+ },
+ "corpo_de_borracha": {
+  "descricao": "Luffy · Corpo de borracha: estica e os golpes ricocheteiam",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 61252
  },
  "corrente": {
   "descricao": "corrente que voa e se enrola no alvo",
@@ -2057,6 +2085,48 @@
   "laco": false,
   "bytes": 61000
  },
+ "fenix_asas": {
+  "descricao": "Ikki · as asas de fogo abrindo nele",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": false,
+  "bytes": 57740
+ },
+ "fenix_explosao": {
+  "descricao": "Ikki · a fênix estourando em fogo e penas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 108376
+ },
+ "fenix_voando": {
+  "descricao": "Ikki · a fênix de fogo voando (laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 28926
+ },
  "flecha": {
   "descricao": "flecha em viagem (+x)",
   "quadros": 12,
@@ -2281,8 +2351,8 @@
   "laco": false,
   "bytes": 108932
  },
- "gatling": {
-  "descricao": "Gatling: braços de borracha martelando",
+ "gear_fifth_nika": {
+  "descricao": "Luffy · Gear Fifth: nuvens, o sol do Nika e o tambor",
   "quadros": 12,
   "grade": [
    3,
@@ -2293,21 +2363,7 @@
    192
   ],
   "laco": false,
-  "bytes": 52280
- },
- "gear_fifth": {
-  "descricao": "Gear Fifth: nuvens, raios e anéis de borracha",
-  "quadros": 12,
-  "grade": [
-   3,
-   4
-  ],
-  "tamanho": [
-   192,
-   192
-  ],
-  "laco": false,
-  "bytes": 112244
+  "bytes": 91006
  },
  "gelo": {
   "descricao": "cristais de gelo",
@@ -2407,6 +2463,20 @@
   "laco": false,
   "bytes": 103922
  },
+ "golpe_fantasma": {
+  "descricao": "Ikki · Golpe Fantasma: o toque na mente e a ilusão",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 61588
+ },
  "golpe_largo": {
   "descricao": "Golpe largo: varrida que pega dois",
   "quadros": 12,
@@ -2476,6 +2546,20 @@
   ],
   "laco": false,
   "bytes": 75914
+ },
+ "gomu_gatling": {
+  "descricao": "Luffy · Gomu Gomu no Gatling: a chuva de punhos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 74714
  },
  "grande_faca": {
   "descricao": "Pyramid Head: faca arrastada e golpe pesado",
@@ -3233,20 +3317,6 @@
   "laco": false,
   "bytes": 62206
  },
- "manto_kurama": {
-  "descricao": "Manto da Kurama: chamas, orelhas e nove caudas",
-  "quadros": 12,
-  "grade": [
-   3,
-   4
-  ],
-  "tamanho": [
-   192,
-   192
-  ],
-  "laco": false,
-  "bytes": 78298
- },
  "mao_da_perdicao": {
   "descricao": "Hellboy: o punho de pedra desce e esmaga com cascalho",
   "quadros": 12,
@@ -3456,6 +3526,20 @@
   ],
   "laco": true,
   "bytes": 17664
+ },
+ "modo_kurama": {
+  "descricao": "Naruto · o Manto da Kurama: chamas, caudas e o selo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 94614
  },
  "mordida": {
   "descricao": "dentes fechando",
@@ -3835,20 +3919,6 @@
   "laco": false,
   "bytes": 109096
  },
- "punho_da_fenix": {
-  "descricao": "Ikki: soco em chamas que abre asas de fênix",
-  "quadros": 12,
-  "grade": [
-   3,
-   4
-  ],
-  "tamanho": [
-   192,
-   192
-  ],
-  "laco": false,
-  "bytes": 67750
- },
  "punho_de_apokolips": {
   "descricao": "Darkseid: punho pesado, rachaduras, Ômega e feixes",
   "quadros": 12,
@@ -4143,6 +4213,34 @@
   "laco": false,
   "bytes": 54116
  },
+ "rasengan_impacto": {
+  "descricao": "Naruto · o Rasengan perfurando em espiral",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 88276
+ },
+ "rasengan_mao": {
+  "descricao": "Naruto · o Rasengan girando na mão (laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 31176
+ },
  "rebellion_e_ebony": {
   "descricao": "Dante: corte largo de espadão e dois tiros de pistola",
   "quadros": 12,
@@ -4268,6 +4366,20 @@
   ],
   "laco": false,
   "bytes": 72438
+ },
+ "renascimento_chamas": {
+  "descricao": "Ikki · Renascimento: a coluna de fogo e a fênix subindo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 81424
  },
  "rendicao": {
   "descricao": "Shaka: lótus dourada abre sobre a roda de luz",

@@ -507,12 +507,9 @@ REGISTRO = [
     ("agua_benta", agua_benta, GRANDE, "Água benta: o frasco quebra em chamas sagradas", False),
     ("kaioken", kaioken, GRANDE, "Kaioken: aura de fogo carmesim", False),
     ("instinto", instinto, GRANDE, "Instinto Superior: aura prateada e vultos", False),
-    ("gear_fifth", gear_fifth, GRANDE, "Gear Fifth: nuvens, raios e anéis de borracha", False),
     ("corvos", corvos, GRANDE, "Ilusão de corvos: revoada que sai do corpo", False),
     ("shun_goku_satsu", shun_goku_satsu, GRANDE, "Shun Goku Satsu: golpes no escuro e o 天", False),
     ("spin_dash", spin_dash, GRANDE, "Spin Dash: bola azul girando e anéis", False),
-    ("gatling", gatling, GRANDE, "Gatling: braços de borracha martelando", False),
-    ("manto_kurama", manto_kurama, GRANDE, "Manto da Kurama: chamas, orelhas e nove caudas", False),
     ("estado_avatar", estado_avatar, GRANDE, "Estado Avatar: olhos acesos, vento e quatro orbes", False),
     ("tenho_a_forca", tenho_a_forca, GRANDE, "Eu tenho a força: raios na espada erguida", False),
 ]
