@@ -1,6 +1,6 @@
 import { useMemo,useState,type CSSProperties } from 'react';
 import { createPortal } from 'react-dom';
-import { ArrowRight,CircleCheck,Crown,Dices,Info,Lightbulb,LogOut,Sparkles,Swords,TriangleAlert,X } from 'lucide-react';
+import { ArrowRight,CircleCheck,Crown,Dices,Info,Lightbulb,Lock,LogOut,Sparkles,Swords,TriangleAlert,X } from 'lucide-react';
 import type { Draft,Encounter } from '../engine/campaign';
 import { byId } from '../data/characters';
 import { Portrait } from '../components/Portrait';
@@ -12,6 +12,7 @@ import { ComTermos } from '../components/Termos';
 import { draftConnection } from '../presentation/draft-connections';
 import { dicasDoDraft,type DicaDoCandidato } from '../presentation/dicas-do-trio';
 import { CUSTO_DAS_DICAS,formatarPontos } from '../engine/pontos';
+import { META_DAS_DICAS } from '../lib/dicas-liberadas';
 
 /*
  * A escolha do trio (remake).
@@ -49,9 +50,15 @@ export function DraftScreen({draft,primeiroRival,dicas,podeDicas=true,usouDicas,
         {c?<><Portrait character={c}/><b>{c.name}</b></>:<><span>?</span><b>{i===vez?'escolha agora':`espaço ${i+1}`}</b></>}
       </div>;})}</div>
       {team.length>0&&<div className="dv-trio-faz"><IdentityChips ids={doTrio} trio={doTrio}/>{ligadas&&lacunas.length>0&&<small><TriangleAlert size={13}/>{lacunas.join(' · ')}</small>}</div>}
-      {(podeDicas&&!full||usouDicas)&&<button className={`dv-dicas ${dicas?'ligado':''}`} role="switch" aria-checked={dicas} onClick={()=>onDicas(!dicas)} disabled={full}>
+      {podeDicas?(!full||usouDicas)&&<button className={`dv-dicas ${dicas?'ligado':''}`} role="switch" aria-checked={dicas} onClick={()=>onDicas(!dicas)} disabled={full}>
         <span className="dv-dicas-lampada"><Lightbulb size={20}/></span>
         <span className="dv-dicas-texto"><b>DICAS DE TRIO</b><small>{dicas?<>ligadas · <em>−{formatarPontos(CUSTO_DAS_DICAS)} por luta</em></>:usouDicas?<>esta jornada já usou · <em>−{formatarPontos(CUSTO_DAS_DICAS)} por luta</em></>:'desligadas · pontos cheios'}</small></span>
+        <span className="dv-dicas-chave" aria-hidden><i/></span>
+      </button>
+      /* trancado: aparece, mas só liga depois da meta numa jornada (src/lib/dicas-liberadas.ts) */
+      :!full&&<button className="dv-dicas trancado" role="switch" aria-checked={false} aria-disabled="true" disabled>
+        <span className="dv-dicas-lampada"><Lock size={18}/></span>
+        <span className="dv-dicas-texto"><b>DICAS DE TRIO</b><small>libera ao fazer <em>{formatarPontos(META_DAS_DICAS)} pontos</em> com um trio</small></span>
         <span className="dv-dicas-chave" aria-hidden><i/></span>
       </button>}
     </header>
@@ -85,7 +92,7 @@ export function DraftScreen({draft,primeiroRival,dicas,podeDicas=true,usouDicas,
     {porque&&createPortal(<div className="dv-porque-fundo" onClick={()=>setPorque(null)}><div className="dv-porque" role="dialog" aria-modal="true" aria-label={`Por que ${byId[porque.id].name}`} style={{'--character':byId[porque.id].color,'--nivel':NIVEL(porque.encaixe).cor} as CSSProperties} onClick={e=>e.stopPropagation()}>
       <button className="dv-porque-fechar" onClick={()=>setPorque(null)} aria-label="Fechar"><X size={18}/></button>
       <div className="dv-porque-cabeca"><Portrait character={byId[porque.id]}/><div><span>{porque.melhor?<><Crown size={12}/>MELHOR ESCOLHA</>:'DICA DO TÉCNICO'}</span><h2>{byId[porque.id].name}</h2></div></div>
-      <div className="dv-porque-encaixe"><b>{porque.encaixe}%</b><p>{team.length?<>Combina com <strong>{comQuem}</strong> melhor do que {porque.encaixe}% dos personagens que poderiam entrar agora.</>:<>Mais forte, sozinho, do que {porque.encaixe}% do elenco — medido em milhares de lutas simuladas.</>}</p></div>
+      <div className="dv-porque-encaixe"><b>{porque.encaixe}%</b><p>{team.length?<>Combina com <strong>{comQuem}</strong> melhor do que {porque.encaixe}% dos personagens que poderiam entrar agora.</>:<>Mais forte, sozinho, do que {porque.encaixe}% do elenco.</>}</p></div>
       <ul>{porque.detalhe.map(m=><li key={m.texto} className={m.tom}>{m.tom==='bom'?<CircleCheck size={15}/>:<TriangleAlert size={15}/>}<span>{m.texto}{m.porque&&<small className="dv-porque-como">{m.porque}.</small>}</span></li>)}</ul>
       <p className="dv-porque-licao">{team.length?'Dica: o trio vence junto. Procure quem cura e protege os de pouca Vida e quem enche a Carga dos golpes grandes.':'Dica: comece por alguém forte. Depois, o técnico procura quem combina com ele.'}</p>
       <button className="dv-escolher" onClick={()=>{const id=porque.id;setPorque(null);onPick(id);}}>ESCOLHER {primeiroNome(porque.id).toUpperCase()}</button>

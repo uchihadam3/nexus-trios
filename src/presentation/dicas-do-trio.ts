@@ -20,6 +20,7 @@
 import { byId, characters } from '../data/characters';
 import { FORCA, PESO_DA_LIGACAO } from '../data/forca-dos-rivais';
 import { pontoFraco } from '../data/ponto-fraco';
+import { pontoForte } from '../data/ponto-forte';
 import { forcaDoTrio } from '../engine/campaign';
 import { papelDe } from '../engine/sinergia';
 import { porQue } from './porque';
@@ -37,9 +38,10 @@ export interface DicaDoCandidato {
 }
 
 const nome = (id: string) => byId[id]!.name.split(/[ ,]/)[0]!;
+/* "É o primeiro a cair…" vira "é o primeiro a cair…" depois dos dois-pontos; nome de habilidade fica como está */
+const minuscula = (t: string) => (/^(É|Só|Bate|Em|A|Fica|Derruba|Corta|Põe|Solta|Adianta|As|Mantém|Segura|Nenhum) /.test(t) ? t.charAt(0).toLowerCase() + t.slice(1) : t);
 const VIDAS = characters.map((c) => c.hp).sort((a, b) => a - b);
 const VIDA_MEDIANA = VIDAS[Math.floor(VIDAS.length / 2)]!;
-const FORCAS = Object.values(FORCA).sort((a, b) => a - b);
 const percentil = (lista: number[], x: number) => Math.round((100 * lista.filter((v) => v < x).length) / Math.max(1, lista.length));
 
 const aguenta = (id: string) => byId[id]!.hp >= VIDA_MEDIANA * 1.12 || papelDe(id).cuida;
@@ -99,12 +101,15 @@ function motivosDe(c: string, time: string[]): (Motivo & { ordem: number })[] {
     if (!time.some((m) => papelDe(m).forte) && papelDe(c).forte) motivos.push({ texto: `Traz o dano forte que falta no trio`, tom: 'bom', ordem: 12 });
     if (time.every((m) => papelDe(m).fragil) && papelDe(c).fragil && !papelDe(c).cuida) motivos.push({ texto: `Mais um de pouca Vida: o trio pode cair rápido`, tom: 'alerta', ordem: 11 });
   }
-  // força sozinho, medida nas lutas
-  const q = percentil(FORCAS, FORCA[c] ?? 0);
-  if (q >= 85) motivos.push({ texto: `Um dos mais fortes do jogo`, tom: 'bom', ordem: time.length ? 9 : 20 });
-  else if (q >= 60) motivos.push({ texto: `Forte mesmo sozinho`, tom: 'bom', ordem: time.length ? 5 : 15 });
-  else if (q <= 20) motivos.push({ texto: `Fraco sozinho: precisa dos parceiros certos`, tom: 'alerta', ordem: time.length ? 4 : 15 });
-  else motivos.push({ texto: `Força média sozinho`, tom: 'bom', ordem: time.length ? 1 : 15 });
+  /*
+   * O porquê de ele ser forte, medido (pedido do jogador: "você fala por que é fraco, mas não fala por
+   * que é forte… você só falou que ele é mais forte que 88%"). A porcentagem já está no topo: aqui vem
+   * o ponto forte dele, com a habilidade que faz isso; e o ponto fraco entra uma vez só, como cuidado.
+   */
+  const fortes = pontoForte(byId[c]!);
+  fortes.forEach((f, i) => motivos.push({ texto: `${f.rotulo}: ${minuscula(f.motivo)}`, tom: 'bom', ordem: (time.length ? 6 : 20) - i * 3 }));
+  const fraco = pontoFraco(byId[c]!)[0];
+  if (fraco) motivos.push({ texto: `Cuidado: ${fraco.rotulo.charAt(0).toLowerCase()}${fraco.rotulo.slice(1)} — ${minuscula(fraco.motivo)}`, tom: 'alerta', ordem: time.length ? 0.5 : 16 });
   return motivos.sort((a, b) => b.ordem - a.ordem);
 }
 
@@ -117,8 +122,7 @@ export function dicasDoDraft(candidatos: string[], time: string[], fora: string[
     const motivos = motivosDe(id, time);
     // um candidato que encaixa mal começa pelo aviso, mesmo tendo alguma combinação
     if (time.length && encaixe < 35) motivos.unshift({ texto: `Encaixa pouco: há opções bem melhores para este trio`, tom: 'alerta', ordem: 99 });
-    const fraco = pontoFraco(byId[id]!)[0];
-    const detalhe = fraco ? [...motivos, { texto: `Cuidado: ${fraco.rotulo.charAt(0).toLowerCase()}${fraco.rotulo.slice(1)} — ${fraco.motivo.charAt(0).toLowerCase()}${fraco.motivo.slice(1)}`, tom: 'alerta' as const, ordem: 0 }] : motivos;
+    const detalhe = motivos;
     const limpa = (l: typeof motivos) => l.map(({ texto, tom }) => ({ texto, tom }));
     // na explicação maior, cada combinação vem com o porquê (a habilidade que liga a outra)
     const explica = (l: typeof motivos) => l.map(({ texto, tom, porque }) => ({ texto, tom, ...(porque ? { porque } : {}) }));

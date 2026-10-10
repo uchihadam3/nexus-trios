@@ -42,6 +42,11 @@
 .fv-fraco-contra{display:inline-flex;align-items:center;gap:5px;padding:4px 10px 4px 8px;border-radius:999px;background:#ff8a7a26;box-shadow:inset 0 0 0 1px #ff8a7a66;color:#ffd6cf;font-size:13px;font-weight:800;white-space:nowrap}
 .fv-fraco-contra svg{color:#ff8a7a}
 .fv-fraco-motivo{font-size:12.5px;color:#e9c4bd;line-height:1.3}
+.fv-forte{background:linear-gradient(160deg,#7ae0a01c,#7ae0a008);box-shadow:inset 0 0 0 1px #7ae0a055;color:#c6f0d4}
+.fv-forte .fv-selo{color:#8ff0b0}
+.fv-forte .fv-fraco-contra{background:#7ae0a026;box-shadow:inset 0 0 0 1px #7ae0a066;color:#d4f7e0}
+.fv-forte .fv-fraco-contra svg{color:#7ae0a0}
+.fv-forte .fv-fraco-motivo{color:#c4e9d0}
 .fv-aviso{display:flex;gap:10px;background:#8fd3ff12;box-shadow:inset 0 0 0 1px #8fd3ff44}
 @media (prefers-reduced-motion:reduce){.fv-retrato,.fv-atributo em{animation:none}}
 

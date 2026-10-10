@@ -36,11 +36,12 @@ describe('texto de quando o traço ativa', () => {
  */
 import { fraquezas } from '../src/data/fraquezas';
 import { pontoFraco } from '../src/data/ponto-fraco';
+import { pontoForte } from '../src/data/ponto-forte';
 describe('pontos fracos', () => {
   it('todos têm um ponto fraco do próprio personagem, com o porquê', () => {
     for (const c of characters) {
       expect(c.vulnerability, c.id).toBe(fraquezas[c.id]);
-      expect(c.vulnerability, c.id).toMatch(/^(Cai rápido|Habilidade rara|Preparo longo|Ataque lento|Pouco dano|Precisa apanhar): .{12,}/);
+      expect(c.vulnerability, c.id).toMatch(/^(Cai rápido|Cai de um golpe|Habilidade rara|Espera a hora certa|Preparo cortado|Demora a agir|Ataque lento|Pouco dano|Não finaliza|Precisa apanhar): .{12,}/);
       expect(c.vulnerability.length, c.id).toBeLessThanOrEqual(240);
       expect(pontoFraco(c).length, c.id).toBeGreaterThan(0);
       // um ponto fraco de cada tipo (pouca Vida e cair rápido são a mesma coisa: "Cai rápido")
@@ -54,10 +55,29 @@ describe('pontos fracos', () => {
   it('nunca é "contra" algo que pesa em todo mundo (Espinhos, Área, Tanques…)', () => {
     for (const c of characters) expect(c.vulnerability, c.id).not.toMatch(/Contra |Espinhos|em área|Tanques|Refletir|Provocar|Pouca Vida/);
   });
+  /*
+   * Pedido do jogador: "quase todos os personagens é cai rápido ou habilidade rara… tem que especificar
+   * melhor". Muitos tipos, e nenhum engole o elenco.
+   */
+  it('pontos fracos e fortes variados: nenhum tipo passa de 1 em cada 5 personagens', () => {
+    for (const [nome, f] of [['fraco', (c: (typeof characters)[number]) => pontoFraco(c)[0]!.tipo], ['forte', (c: (typeof characters)[number]) => pontoForte(c)[0]!.tipo]] as const) {
+      const conta = new Map<string, number>();
+      for (const c of characters) conta.set(f(c), (conta.get(f(c)) ?? 0) + 1);
+      expect(conta.size, nome).toBeGreaterThanOrEqual(7);
+      for (const [tipo, n] of conta) expect(n / characters.length, `${nome} ${tipo}`).toBeLessThanOrEqual(0.2);
+    }
+  });
+  it('todo personagem tem ponto forte, com o porquê', () => {
+    for (const c of characters) {
+      const f = pontoForte(c);
+      expect(f.length, c.id).toBeGreaterThan(0);
+      for (const x of f) expect(x.motivo.length, c.id).toBeGreaterThan(15);
+    }
+  });
   it('a Vida e o ritmo do ponto fraco são os de agora', () => {
     for (const c of characters) for (const f of pontoFraco(c)) {
       if (/de Vida/.test(f.motivo)) expect(f.motivo).toMatch(new RegExp(`[Ss]ó ${c.hp.toLocaleString('pt-BR').replace('.', '\\.')} de Vida`));
-      if (f.tipo === 'lento') expect(f.motivo).toBe(`Ataca só a cada ${(Math.round(c.interval * 100) / 100).toLocaleString('pt-BR')} s`);
+      if (f.tipo === 'lento') expect(f.motivo).toBe(`${c.basic.name} sai só a cada ${(Math.round(c.interval * 100) / 100).toLocaleString('pt-BR')} s`);
     }
   });
 });

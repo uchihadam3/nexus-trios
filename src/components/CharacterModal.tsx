@@ -1,5 +1,5 @@
 import { useEffect,useRef,type CSSProperties } from 'react';
-import { X,HeartPulse,Gauge,Brain,Info,Sparkles,Swords,TriangleAlert,Zap,Hourglass,Snowflake,Target,Scissors,Bomb,TrendingDown,Turtle,Sword,type LucideIcon } from 'lucide-react';
+import { X,HeartPulse,Gauge,Brain,Info,Sparkles,Swords,TriangleAlert,Zap,Hourglass,Snowflake,Target,Scissors,Bomb,TrendingDown,Turtle,Sword,Skull,Clock,Shuffle,Heart,Shield,Lock,Timer,BatteryCharging,ShieldPlus,HandHeart,Mountain,Rocket,Award,CircleCheck,type LucideIcon } from 'lucide-react';
 import type { Character } from '../engine/types';
 import { characters } from '../data/characters';
 import { Portrait } from './Portrait';
@@ -11,8 +11,10 @@ import { IdentityChips } from './IdentityChips';
 import { ComTermos,TermoBotao } from './Termos';
 import { termoPorId } from '../presentation/glossario';
 import { pontoFraco,type TipoDeFraqueza } from '../data/ponto-fraco';
+import { pontoForte,type TipoDeForca } from '../data/ponto-forte';
 
-const ICONE_DA_FRAQUEZA:Record<TipoDeFraqueza,LucideIcon>={cai:TrendingDown,rara:Hourglass,preparo:Scissors,lento:Turtle,dano:Sword,apanhar:Bomb};
+const ICONE_DA_FRAQUEZA:Record<TipoDeFraqueza,LucideIcon>={cai:TrendingDown,golpe:Skull,rara:Hourglass,espera:Clock,preparo:Scissors,demora:Timer,lento:Turtle,dano:Sword,espalha:Shuffle,apanhar:Bomb};
+const ICONE_DA_FORCA:Record<TipoDeForca,LucideIcon>={dano:Swords,nocaute:Skull,cura:Heart,escudo:Shield,controle:Lock,ritmo:Gauge,carga:BatteryCharging,corte:Scissors,reforco:ShieldPlus,reviver:HandHeart,aguenta:Mountain,agil:Sparkles,cedo:Rocket,rapido:Zap,equilibrado:Award};
 
 export function intelligenceLabel(value:number){
   return value>=95?'Excepcional':value>=80?'Muito inteligente':value>=60?'Esperto':value>=40?'Comum':'Impulsivo';
@@ -79,6 +81,14 @@ export function CharacterModal({character:c,onClose}:{character:Character;onClos
       </div>
     </article>;})}</div>
 
+    {/* o que ele faz melhor que o elenco, e com qual habilidade */}
+    <section className="fv-fraco fv-forte" aria-label="Ponto forte">
+      <span className="fv-selo"><CircleCheck size={13}/>PONTO FORTE</span>
+      <ul>{pontoForte(c).map(x=>{const Icone=ICONE_DA_FORCA[x.tipo];return <li key={x.tipo}>
+        <span className="fv-fraco-contra"><Icone size={15} strokeWidth={2.4}/>{x.rotulo}</span>
+        <span className="fv-fraco-motivo">{x.motivo}</span>
+      </li>;})}</ul>
+    </section>
     {/* curto: o que ele não consegue fazer, e por quê em poucas palavras */}
     <section className="fv-fraco" aria-label="Ponto fraco">
       <span className="fv-selo"><TriangleAlert size={13}/>PONTO FRACO</span>

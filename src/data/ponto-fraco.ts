@@ -10,7 +10,7 @@
  */
 import { pontosFracos } from './fraquezas';
 
-export type TipoDeFraqueza = 'cai' | 'rara' | 'preparo' | 'lento' | 'dano' | 'apanhar';
+export type TipoDeFraqueza = 'cai' | 'golpe' | 'rara' | 'espera' | 'preparo' | 'demora' | 'lento' | 'dano' | 'espalha' | 'apanhar';
 
 export interface Fraqueza {
   tipo: TipoDeFraqueza;
@@ -29,8 +29,8 @@ const decimal = (n: number) => (Math.round(n * 100) / 100).toLocaleString('pt-BR
 export function pontoFraco(c: QuemTemOPontoFraco): Fraqueza[] {
   return (pontosFracos[c.id] ?? []).slice(0, 2).map((x) => {
     // a Vida e o ritmo do texto guardado podem ter mudado no equilíbrio: valem os de agora
-    if (x.tipo === 'cai') return { ...x, motivo: x.motivo.replace(/([Ss])ó [\d.]+ de Vida/, (_, s) => `${s}ó ${Math.round(c.hp).toLocaleString('pt-BR')} de Vida`) };
-    if (x.tipo === 'lento') return { ...x, motivo: `Ataca só a cada ${decimal(c.interval)} s` };
+    if (/[Ss]ó [\d.]+ de Vida/.test(x.motivo)) return { ...x, motivo: x.motivo.replace(/([Ss])ó [\d.]+ de Vida/, (_, s) => `${s}ó ${Math.round(c.hp).toLocaleString('pt-BR')} de Vida`) };
+    if (x.tipo === 'lento') return { ...x, motivo: x.motivo.replace(/a cada [\d.,]+ s/, `a cada ${decimal(c.interval)} s`) };
     return { ...x };
   });
 }
