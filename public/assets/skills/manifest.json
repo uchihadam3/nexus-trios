@@ -13674,10 +13674,10 @@
       "artMethod": "AI sheet"
     },
     {
-      "id": "caixao-de-areia",
+      "id": "escudo-de-areia",
       "character": "gaara",
-      "name": "Caixão de areia",
-      "path": "/assets/skills/gaara/caixao-de-areia.png",
+      "name": "Escudo de areia",
+      "path": "/assets/skills/gaara/escudo-de-areia.png",
       "sheet": "/assets/sheets/skills/pages/gaara.png",
       "row": 0,
       "column": 1,
