@@ -123,26 +123,6 @@ def estalo_de_dedos(rng, v):
 
 
 # ------------------------------------------------------------------ Guts
-def matadora_de_dragoes(rng, v):
-    """Matadora de Dragões: o ar pesado cortado por uma placa de ferro enorme (whoosh grave e
-    lento), o choque de ferro bruto (clang abafado e grave, sem brilho de espada fina) e o
-    baque que treme o chão, com faíscas e entulho."""
-    x = _z(1.4)
-    n = n_de(0.34)
-    poe(x, assobio(rng, n, 120, 1100, 1.6, 0.6) * sobe_e_some(n, 0.85, 1.6) * 1.0, 0.0)
-    poe(x, passa(rosa(rng, n), 40, 200, 2) * sobe_e_some(n, 0.9, 2.0) * 0.6, 0.0)
-    t0 = 0.32
-    poe(x, B.esmagar(rng, v) * 0.9, t0)
-    poe(x, baque(n_de(0.9), 70, 28, 0.35, 0.7) * 1.1, t0)
-    m = n_de(0.9)
-    clang = modal(m, rng.uniform(150, 175), rng=rng, desafina=0.02, **METAL) * env(m, 0.001, 0.22)
-    clang += modal(m, rng.uniform(610, 680), rng=rng, desafina=0.03, **METAL) * env(m, 0.001, 0.08) * 0.5
-    poe(x, satura(passa(clang, 100, 4000, 2), 1.8) * 0.45, t0)
-    poe(x, _chiado(rng, 0.15, 1500, 7000, 0.0005, 0.02, 0.6), t0)
-    poe(x, graos(rng, n_de(0.6), 35, 0.0, 0.4, 2500, 10000, 0.003) * 0.3, t0 + 0.01)
-    poe(x, graos(rng, n_de(0.9), 26, 0.1, 0.8, 500, 3000, 0.009) * 0.35, t0 + 0.05)
-    return reverb(x, 0.7, 0.26, 5000)
-
 
 # ------------------------------------------------------------------ Jotaro
 def soco_do_stand(rng, v):
@@ -320,7 +300,6 @@ SONS: dict = {
     "garras-de-killua": (garras_de_killua, "básico de Killua: três cortes rápidos com estalos de choque e crepitar elétrico"),
     "punho-transmutado": (punho_transmutado, "básico de Edward: estalo azul de transmutação, pedra roncando e baque de rocha"),
     "estalo-de-dedos": (estalo_de_dedos, "básico de Roy: snap dos dedos, faísca chiando e explosão de chamas"),
-    "matadora-de-dragoes": (matadora_de_dragoes, "básico de Guts: whoosh grave de ferro enorme, clang abafado e baque que treme"),
     "soco-do-stand": (soco_do_stand, "básico de Jotaro: soco pesado com eco fantasmagórico"),
     "soco-da-vida": (soco_da_vida, "básico de Giorno: soco, galhos brotando e arpejo dourado"),
     "pancada-de-sangue": (pancada_de_sangue, "básico de Power: pancada molhada, esguicho e gotas pingando"),

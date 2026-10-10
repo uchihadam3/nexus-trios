@@ -195,6 +195,20 @@
   "laco": false,
   "bytes": 17238
  },
+ "armadura_berserker": {
+  "descricao": "Guts · a Armadura Berserker fechando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 59308
+ },
  "asa_negra": {
   "descricao": "asa e penas negras",
   "quadros": 12,
@@ -2799,6 +2813,20 @@
   "laco": false,
   "bytes": 52488
  },
+ "gadget_rick": {
+  "descricao": "Rick · a invenção explodindo no meio dos rivais",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 92238
+ },
  "gadget_surpresa": {
   "descricao": "Gadget surpresa: luva de boxe numa mola sai da esquerda e acerta com POW",
   "quadros": 12,
@@ -3539,7 +3567,7 @@
    96
   ],
   "laco": true,
-  "bytes": 68994
+  "bytes": 111786
  },
  "kame_kuririn": {
   "descricao": "Kuririn · a bola azul entre as mãos (laço)",
@@ -3553,7 +3581,7 @@
    160
   ],
   "laco": true,
-  "bytes": 28628
+  "bytes": 38052
  },
  "kame_kuririn_impacto": {
   "descricao": "Kuririn · a explosão azul do Kamehameha",
@@ -3640,7 +3668,7 @@
   "bytes": 22714
  },
  "kienzan_disco": {
-  "descricao": "Kuririn · o disco do Kienzan girando (laço)",
+  "descricao": "Kuririn · o disco do Kienzan voando (laço)",
   "quadros": 12,
   "grade": [
    3,
@@ -3651,7 +3679,21 @@
    160
   ],
   "laco": true,
-  "bytes": 4246
+  "bytes": 16738
+ },
+ "kienzan_forma": {
+  "descricao": "Kuririn · a mão erguida formando o Kienzan",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 32122
  },
  "krypton_carga": {
   "descricao": "Super-Homem · a luz do sol juntando nele (laço)",
@@ -3918,6 +3960,20 @@
   ],
   "laco": true,
   "bytes": 10286
+ },
+ "laser_curto": {
+  "descricao": "Ciclope · o laser curto do Ricochete voando (laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 9480
  },
  "leao_dourado": {
   "descricao": "Aiolia · o Rugido do Leão voando (laço)",
@@ -4241,8 +4297,8 @@
   "laco": false,
   "bytes": 57224
  },
- "matadora_de_dragoes": {
-  "descricao": "Matadora de Dragões de Guts: a lâmina gigante desce, faíscas e respingos",
+ "matadora_guts": {
+  "descricao": "Guts · o arco pesado da Matadora de Dragões",
   "quadros": 12,
   "grade": [
    3,
@@ -4253,7 +4309,7 @@
    192
   ],
   "laco": false,
-  "bytes": 71336
+  "bytes": 38488
  },
  "medo": {
   "descricao": "olhos na sombra",
@@ -4759,6 +4815,34 @@
   "laco": false,
   "bytes": 81428
  },
+ "plano_b": {
+  "descricao": "Rick · a explosão do plasma",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 98304
+ },
+ "plano_b_faixa": {
+  "descricao": "Rick · o canhão de plasma (faixa, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   512,
+   96
+  ],
+  "laco": true,
+  "bytes": 140520
+ },
  "plasma_faixa": {
   "descricao": "Aiolia · os raios do Relâmpago de Plasma (faixa)",
   "quadros": 12,
@@ -4786,6 +4870,34 @@
   ],
   "laco": false,
   "bytes": 45712
+ },
+ "portal_bala": {
+  "descricao": "Rick · o tiro da pistola de portal (laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 13086
+ },
+ "portal_rick": {
+  "descricao": "Rick · o portal abrindo no rival",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 51178
  },
  "pow_cartoon": {
   "descricao": "balão POW de quadrinho",
@@ -5795,6 +5907,20 @@
   "laco": false,
   "bytes": 11844
  },
+ "sem_piedade": {
+  "descricao": "Omni-Man · a surra, pancada atrás de pancada",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 76862
+ },
  "sharingan_ator": {
   "descricao": "Kakashi · o Sharingan acende nele",
   "quadros": 12,
@@ -6144,6 +6270,20 @@
   ],
   "laco": false,
   "bytes": 80620
+ },
+ "soco_viltrumita": {
+  "descricao": "Omni-Man · o soco com as ondas de choque",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 69916
  },
  "sombra": {
   "descricao": "tentáculos de sombra",
@@ -6733,6 +6873,20 @@
   "laco": false,
   "bytes": 93424
  },
+ "ultimo_esforco": {
+  "descricao": "Guts · a lâmina caindo e a cratera",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 61026
+ },
  "ultimo_filho": {
   "descricao": "Super-Homem · o soco supersônico com o estrondo",
   "quadros": 12,
@@ -6900,6 +7054,20 @@
   ],
   "laco": true,
   "bytes": 7926
+ },
+ "voo_de_impacto": {
+  "descricao": "Omni-Man · o voo supersônico e o estrondo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 62520
  },
  "z_saber": {
   "descricao": "Zero: meia-lua do sabre de energia",

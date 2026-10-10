@@ -316,64 +316,6 @@ def estalo_de_dedos(T, t, rng):
 
 
 # ================================================================== Guts
-def matadora_de_dragoes(T, t, rng):
-    """Golpe da Matadora de Dragões: a lâmina enorme de ferro bruto (larga, sem brilho, cheia de
-    lascas) cai do alto num arco pesado, crava no alvo, o chão racha e voam faíscas e respingos."""
-    G, H = vazio(T)
-    env = apaga(t, 0.8, 1)
-    px, py = -0.95, -0.4
-    a_ini, a_fim = -1.5, 0.35
-    gira = 0.08 * ease_out(rel(t, 0.0, 0.08)) + 0.92 * ease_in(rel(t, 0.06, 0.3), 2.2)
-    a = a_ini + (a_fim - a_ini) * gira
-    a -= pulso(t, 0.3, 0.42) * 0.06              # o tranco do impacto
-    c, s = math.cos(a), math.sin(a)
-    nx, ny = -s, c
-    r0, r1, w = 0.25, 1.5, 0.15
-    lam = [(px + c * r0 + nx * w, py + s * r0 + ny * w), (px + c * (r1 - 0.22) + nx * w, py + s * (r1 - 0.22) + ny * w),
-           (px + c * r1 - nx * w * 0.35, py + s * r1 - ny * w * 0.35), (px + c * (r1 - 0.06) - nx * w, py + s * (r1 - 0.06) - ny * w),
-           (px + c * r0 - nx * w, py + s * r0 - ny * w)]
-    some_l = 1 - rel(t, 0.6, 0.85)
-    gx, gy = px + c * (r0 - 0.03), py + s * (r0 - 0.03)
-    guarda = [(gx + nx * 0.24 + c * 0.035, gy + ny * 0.24 + s * 0.035), (gx + nx * 0.24 - c * 0.035, gy + ny * 0.24 - s * 0.035),
-              (gx - nx * 0.24 - c * 0.035, gy - ny * 0.24 - s * 0.035), (gx - nx * 0.24 + c * 0.035, gy - ny * 0.24 + s * 0.035)]
-    cabo = [(px + nx * 0.04, py + ny * 0.04), (gx + nx * 0.045, gy + ny * 0.045), (gx - nx * 0.045, gy - ny * 0.045), (px - nx * 0.04, py - ny * 0.04)]
-    L = np.minimum(T.polys([(lam, 1.0), (guarda, 1.0), (cabo, 0.8)], 0.004), 1) * some_l
-    # lascas e o vinco do meio (ferro bruto)
-    meio = T.polyline([(px + c * (r0 + 0.05), py + s * (r0 + 0.05)), (px + c * (r1 - 0.15), py + s * (r1 - 0.15))], 0.012) * some_l
-    sub = _sub(3)
-    lascas = []
-    for _ in range(6):
-        u = sub.uniform(r0 + 0.2, r1 - 0.1)
-        lado = sub.choice([-1, 1])
-        bx, by = px + c * u + nx * w * lado, py + s * u + ny * w * lado
-        lascas.append(([(bx + c * 0.04, by + s * 0.04), (bx - c * 0.04, by - s * 0.04), (bx - nx * lado * 0.035, by - ny * lado * 0.035)], 1.0))
-    Ls = T.polys(lascas, 0.002) * some_l
-    # o arco do movimento atrás da lâmina
-    arco = T.arc_band(1.0, 0.32, a_ini + 0.15, a - 0.08, cx=px, cy=py, taper=1.2) * janela(t, 0.1, 0.18) * (1 - rel(t, 0.3, 0.55))
-    # impacto: clarão, rachaduras, faíscas para cima, respingos
-    k = pulso(t, 0.28, 0.6)
-    g, h = _clarao(T, k, 0.05, 0.12, 0.3, 0.9, 0.0)
-    sub = _sub(61)
-    rach = T.zero()
-    cresce = ease_out(rel(t, 0.3, 0.45), 2)
-    for j in range(5):
-        ang = math.pi * (0.1 + 0.8 * j / 4) + sub.uniform(-0.15, 0.15)
-        comp = 0.55 * cresce * sub.uniform(0.6, 1)
-        rach += T.polyline(jagged(sub, 0.05, 0.18, 0.05 + math.cos(ang) * comp * 1.5, 0.18 + math.sin(ang) * comp * 0.45, 4, 0.25), 0.016)
-    rach *= janela(t, 0.3, 0.33) * (1 - rel(t, 0.7, 1.0))
-    F = faiscas(T, _sub(71), t, 22, 0.9, 0.035, cone=(-math.pi + 0.2, -0.2), gravidade=0.5, cx=0.05, cy=0.12, inicio=0.3)
-    resp = []
-    sub = _sub(81)
-    for _ in range(9):
-        aa = sub.uniform(-math.pi + 0.3, -0.3)
-        d = 0.1 + 0.5 * ease_out(rel(t, 0.3, 0.8), 2) * sub.uniform(0.5, 1)
-        resp.append((_gota(0.05 + math.cos(aa) * d, 0.12 + math.sin(aa) * d + 0.5 * rel(t, 0.3, 1) ** 2, 0.022, aa + math.pi), 1.0))
-    R = T.polys(resp, 0.004) * pulso(t, 0.3, 1.0) if t > 0.3 else T.zero()
-    po = poeira(T, _sub(9), t, 20, 0.05, 0.2, 0.7, 0.2, 0.04, 0.3) * janela(t, 0.3, 0.34)
-    G += (L * 0.95 + Ls * 0.4 + arco * 1.1 + g + rach * 1.3 + F * 1.6 + R * 1.1 + po * 0.55) * env
-    H += (np.maximum(L * 0.28 - meio * 0.25 - Ls * 0.2, 0) + T.blur(L, 0.006) * 0.08 + arco * 0.35 + h + rach * 0.9 + F * 1.1 + R * 0.35) * env
-    return G, H
-
 
 # ================================================================== Jotaro
 def soco_do_stand(T, t, rng):
@@ -817,7 +759,6 @@ REGISTRO = [
     ("garras_de_killua", garras_de_killua, GRANDE, "Garras de Killua: três riscos de garra feitos de relâmpago", False),
     ("punho_transmutado", punho_transmutado, GRANDE, "Punho transmutado de Edward: círculo de alquimia e punho de pedra que sobe", False),
     ("estalo_de_dedos", estalo_de_dedos, GRANDE, "Estalo de dedos de Roy: faísca, linha de fogo e explosão de chamas", False),
-    ("matadora_de_dragoes", matadora_de_dragoes, GRANDE, "Matadora de Dragões de Guts: a lâmina gigante desce, faíscas e respingos", False),
     ("soco_do_stand", soco_do_stand, GRANDE, "Soco do Stand de Jotaro: punho fantasma com vultos e eco", False),
     ("soco_da_vida", soco_da_vida, GRANDE, "Soco da vida de Giorno: galhos, folhas e a joaninha dourada", False),
     ("pancada_de_sangue", pancada_de_sangue, GRANDE, "Pancada de sangue de Power: martelo de sangue e gotas espirrando", False),

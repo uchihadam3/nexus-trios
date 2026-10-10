@@ -274,6 +274,23 @@
    ],
    "bytes": 38471
   },
+  "armadura-berserker": {
+   "arquivo": "armadura-berserker.mp3",
+   "descricao": "Armadura Berserker: as placas fechando e o rosnado",
+   "versoes": [
+    0.0,
+    1.98,
+    4.0289,
+    5.9446
+   ],
+   "duracoes": [
+    1.9,
+    1.9689,
+    1.8357,
+    1.9289
+   ],
+   "bytes": 66844
+  },
   "asa-negra": {
    "arquivo": "asa-negra.mp3",
    "descricao": "família asa negra",
@@ -3317,6 +3334,23 @@
    ],
    "bytes": 35348
   },
+  "golpe-viltrumita": {
+   "arquivo": "golpe-viltrumita.mp3",
+   "descricao": "Golpe viltrumita: o soco e o estrondo",
+   "versoes": [
+    0.0,
+    1.3221,
+    2.8062,
+    4.1248
+   ],
+   "duracoes": [
+    1.2421,
+    1.4041,
+    1.2386,
+    1.3604
+   ],
+   "bytes": 40191
+  },
   "gomu-gatling": {
    "arquivo": "gomu-gatling.mp3",
    "descricao": "Gomu Gomu no Gatling: o braço esticando e a metralhadora de socos",
@@ -3725,6 +3759,23 @@
    ],
    "bytes": 70493
   },
+  "invencao-improvisada": {
+   "arquivo": "invencao-improvisada.mp3",
+   "descricao": "Invenção improvisada: o apito e a explosão esquisita",
+   "versoes": [
+    0.0,
+    2.18,
+    4.4361,
+    6.5377
+   ],
+   "duracoes": [
+    2.1,
+    2.1761,
+    2.0216,
+    2.1056
+   ],
+   "bytes": 72120
+  },
   "investida": {
    "arquivo": "investida.mp3",
    "descricao": "família investida",
@@ -3880,20 +3931,20 @@
   },
   "kame-kuririn": {
    "arquivo": "kame-kuririn.mp3",
-   "descricao": "Kamehameha: o feixe e a explosão",
+   "descricao": "Kamehameha: a explosão azul",
    "versoes": [
     0.0,
-    1.98,
-    4.0289,
-    5.9446
+    1.58,
+    3.2144,
+    4.7437
    ],
    "duracoes": [
-    1.9,
-    1.9689,
-    1.8357,
-    1.9289
+    1.5,
+    1.5544,
+    1.4493,
+    1.5228
    ],
-   "bytes": 78171
+   "bytes": 56112
   },
   "kame-kuririn-carga": {
    "arquivo": "kame-kuririn-carga.mp3",
@@ -3911,6 +3962,23 @@
     1.4213
    ],
    "bytes": 57211
+  },
+  "kame-kuririn-feixe": {
+   "arquivo": "kame-kuririn-feixe.mp3",
+   "descricao": "Kamehameha: o feixe saindo",
+   "versoes": [
+    0.0,
+    1.08,
+    2.1963,
+    3.2424
+   ],
+   "duracoes": [
+    1.0,
+    1.0363,
+    0.9662,
+    1.0152
+   ],
+   "bytes": 41876
   },
   "kamehameha": {
    "arquivo": "kamehameha.mp3",
@@ -4388,6 +4456,23 @@
    ],
    "bytes": 29594
   },
+  "laser-curto": {
+   "arquivo": "laser-curto.mp3",
+   "descricao": "Ricochete óptico: o laser curto saindo",
+   "versoes": [
+    0.0,
+    0.33,
+    0.669,
+    0.9906
+   ],
+   "duracoes": [
+    0.25,
+    0.259,
+    0.2415,
+    0.2538
+   ],
+   "bytes": 14055
+  },
   "lentidao": {
    "arquivo": "lentidao.mp3",
    "descricao": "família lentidao",
@@ -4762,22 +4847,22 @@
    ],
    "bytes": 58816
   },
-  "matadora-de-dragoes": {
-   "arquivo": "matadora-de-dragoes.mp3",
-   "descricao": "básico de Guts: whoosh grave de ferro enorme, clang abafado e baque que treme",
+  "matadora-guts": {
+   "arquivo": "matadora-guts.mp3",
+   "descricao": "Matadora de Dragões: o ferro enorme",
    "versoes": [
     0.0,
-    1.48,
-    3.0108,
-    4.4434
+    1.8135,
+    3.6482,
+    5.4038
    ],
    "duracoes": [
-    1.4,
-    1.4508,
-    1.3527,
-    1.4213
+    1.7335,
+    1.7546,
+    1.6757,
+    1.8274
    ],
-   "bytes": 59967
+   "bytes": 53714
   },
   "medo": {
    "arquivo": "medo.mp3",
@@ -5322,6 +5407,57 @@
     1.0152
    ],
    "bytes": 45502
+  },
+  "pistola-de-portal": {
+   "arquivo": "pistola-de-portal.mp3",
+   "descricao": "Pistola de portal: o tiro e o portal",
+   "versoes": [
+    0.0,
+    1.58,
+    3.2144,
+    4.7437
+   ],
+   "duracoes": [
+    1.5,
+    1.5544,
+    1.4493,
+    1.5228
+   ],
+   "bytes": 59468
+  },
+  "plano-b": {
+   "arquivo": "plano-b.mp3",
+   "descricao": "Plano B: a explosão do plasma",
+   "versoes": [
+    0.0,
+    1.68,
+    3.418,
+    5.0439
+   ],
+   "duracoes": [
+    1.6,
+    1.658,
+    1.5459,
+    1.6244
+   ],
+   "bytes": 59949
+  },
+  "plano-b-carga": {
+   "arquivo": "plano-b-carga.mp3",
+   "descricao": "Plano B: o canhão carregando e disparando",
+   "versoes": [
+    0.0,
+    1.38,
+    2.8071,
+    4.1432
+   ],
+   "duracoes": [
+    1.3,
+    1.3471,
+    1.256,
+    1.3198
+   ],
+   "bytes": 51087
   },
   "poeira-de-diamante": {
    "arquivo": "poeira-de-diamante.mp3",
@@ -6297,17 +6433,17 @@
    "descricao": "Ricochete óptico: o raio quicando",
    "versoes": [
     0.0,
-    1.133,
-    2.3414,
-    3.4729
+    1.2472,
+    2.5358,
+    3.7667
    ],
    "duracoes": [
-    1.053,
-    1.1284,
-    1.0515,
-    1.1115
+    1.1672,
+    1.2086,
+    1.1509,
+    1.1847
    ],
-   "bytes": 39893
+   "bytes": 45139
   },
   "rinnegan": {
    "arquivo": "rinnegan.mp3",
@@ -6614,6 +6750,23 @@
     0.9137
    ],
    "bytes": 33407
+  },
+  "sem-piedade": {
+   "arquivo": "sem-piedade.mp3",
+   "descricao": "Sem piedade: a surra",
+   "versoes": [
+    0.0,
+    1.98,
+    4.0289,
+    5.9446
+   ],
+   "duracoes": [
+    1.9,
+    1.9689,
+    1.8357,
+    1.9289
+   ],
+   "bytes": 62303
   },
   "sharingan-kakashi": {
    "arquivo": "sharingan-kakashi.mp3",
@@ -7788,6 +7941,23 @@
    ],
    "bytes": 49788
   },
+  "ultimo-esforco": {
+   "arquivo": "ultimo-esforco.mp3",
+   "descricao": "Último esforço: o grito e o golpe que afunda o chão",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 69679
+  },
   "ultimo-filho-de-krypton": {
    "arquivo": "ultimo-filho-de-krypton.mp3",
    "descricao": "Último filho de Krypton: o soco supersônico",
@@ -8008,6 +8178,23 @@
     1.8274
    ],
    "bytes": 58374
+  },
+  "voo-de-impacto": {
+   "arquivo": "voo-de-impacto.mp3",
+   "descricao": "Voo de impacto: a descida supersônica e o estrondo",
+   "versoes": [
+    0.0,
+    1.8256,
+    3.6963,
+    5.4472
+   ],
+   "duracoes": [
+    1.7456,
+    1.7907,
+    1.6709,
+    1.7467
+   ],
+   "bytes": 54676
   },
   "z-saber": {
    "arquivo": "z-saber.mp3",

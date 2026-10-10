@@ -69,9 +69,11 @@ const ANTES_DA_NOVA: Partial<Record<FamiliaNova, { antes: Sound; saida?: Sound }
   burning_attack: { antes: 'selo-burning' },
   corte_final: { antes: 'aura-trunks' },
   taiyoken: { antes: 'taiyoken-flash' },
-  kame_kuririn: { antes: 'kame-kuririn-carga' },
+  kame_kuririn: { antes: 'kame-kuririn-carga', saida: 'kame-kuririn-feixe' },
+  plano_b: { antes: 'plano-b-carga' },
   furia_espartana: { antes: 'furia-kratos' },
   ira_dos_deuses: { antes: 'ira-kratos' },
+  ricochete_optico: { antes: 'laser-curto' },
 };
 const SONS_DE_ANTES = [...new Set(Object.values(ANTES_DA_NOVA).flatMap((x) => [x!.antes, ...(x!.saida ? [x!.saida] : [])]))];
 

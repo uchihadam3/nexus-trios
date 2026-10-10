@@ -62,15 +62,17 @@ def rajada_de_contencao(rng, v):
 
 
 def ricochete_optico(rng, v):
-    """Ricochete óptico: o raio batendo e quicando — três golpes do raio, cada um com o seu estalo e
-    um tom subindo."""
+    """Ricochete óptico: o laser curto batendo e quicando de um rival para o outro — três batidas, uma
+    a cada quique (no ritmo do tiro na tela), cada uma com o estalo, o "tsing" e um tom mais alto."""
     x = _z(1.5)
-    for k in range(4):
-        r = _raio_optico(rng, 0.14, 0.7, 170 + 25 * k)
-        poe(x, r * env(len(r), 0.005, 0.1), 0.1 * k)
-        poe(x, estalo(rng, n_de(0.06), 1500, 7000, 0.012) * 0.8, 0.1 * k + 0.12)
-        poe(x, baque(n_de(0.25), 180, 90, 0.06, 0.6) * 0.4, 0.1 * k + 0.12)
-    return reverb(x, 0.4, 0.2, 6500)
+    for k in range(3):
+        t0 = 0.26 * k
+        r = _raio_optico(rng, 0.12, 0.7, 190 + 30 * k)
+        poe(x, r * env(len(r), 0.004, 0.09), t0)
+        poe(x, estalo(rng, n_de(0.05), 1500, 7000, 0.01) * 0.8, t0)
+        poe(x, _brilho(rng, 0.3, nota(84 + 3 * k), 0.1), t0 + 0.01)
+        poe(x, baque(n_de(0.2), 180, 90, 0.05, 0.6) * 0.35, t0)
+    return reverb(x, 0.4, 0.2, 7000)
 
 
 def visor_carregando(rng, v):

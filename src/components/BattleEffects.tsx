@@ -28,8 +28,8 @@ const SEM_FICHA:Partial<Record<Beat['event']['kind'],VfxFamily>>={interrupt:'ond
 const GIRO_DA_VARIANTE=[0,16,-12,8];
 /* Altura da faixa em relação ao medalhão. */
 /* Os objetos arremessados (o escudo do Capitão, o batarangue…) voam grandes, para dar para ver o que é. */
-const TAMANHO_DO_VOO:Record<string,number>={teia_voando:2.0,teia_impacto_bola:2.1,burning_bola:2.3,kienzan_disco:2.4,saraivada:1.25,escudo_voando:2.6,batarangue_voando:2.5,shuriken_voando:2.3,tiara_voando:2.5,dardo_voando:2.4,corvo_voando:2.6,reigun_bala:2.2,shotgun_rajada:2.2,barril_voando:2.4,fenix_voando:2.6,pedra_bloco:2.0,papel_bola:2.2,bola_do_charizard:2.4,buster_bala:2.2,raio_copiado:2.2,carga_maxima_bala:2.6,leao_dourado:2.6,bola_de_ar:2.4};
-const ALTURA_DA_FAIXA:Record<string,number>={feixe:.36,feixe_pesado:.62,raio_faixa:.7,dreno:.42,dragao_faixa:.85,palma_faixa:.55,makanko_faixa:.5,chamas_faixa:.75,calor_faixa:.42,diamante_faixa:.6,aurora_faixa:.78,plasma_faixa:.7,feixe_ciclope:.6,kame_faixa_kuririn:.5};
+const TAMANHO_DO_VOO:Record<string,number>={laser_curto:1.7,portal_bala:1.9,teia_voando:2.0,teia_impacto_bola:2.1,burning_bola:2.3,kienzan_disco:2.4,saraivada:1.25,escudo_voando:2.6,batarangue_voando:2.5,shuriken_voando:2.3,tiara_voando:2.5,dardo_voando:2.4,corvo_voando:2.6,reigun_bala:2.2,shotgun_rajada:2.2,barril_voando:2.4,fenix_voando:2.6,pedra_bloco:2.0,papel_bola:2.2,bola_do_charizard:2.4,buster_bala:2.2,raio_copiado:2.2,carga_maxima_bala:2.6,leao_dourado:2.6,bola_de_ar:2.4};
+const ALTURA_DA_FAIXA:Record<string,number>={feixe:.36,feixe_pesado:.62,raio_faixa:.7,dreno:.42,dragao_faixa:.85,palma_faixa:.55,makanko_faixa:.5,chamas_faixa:.75,calor_faixa:.42,diamante_faixa:.6,aurora_faixa:.78,plasma_faixa:.7,feixe_ciclope:.6,kame_faixa_kuririn:.75,plano_b_faixa:.8};
 
 const s=(x:number)=>`${x.toFixed(3)}s`;
 
@@ -89,23 +89,31 @@ export function BattleEffects({battle,beat,anchors,enabled,reduced,medal=80}:{ba
     return{de,ate,largura:Math.max(...mira.map(m=>m.dist))+medal*.25,passa};
   })();
   /*
-   * Encadeia: o feixe sai de quem age até o primeiro rival e quica para o próximo e para o próximo,
-   * cada trecho acendendo na sua vez; cada rival é atingido quando o trecho chega nele.
+   * Encadeia: o golpe sai de quem age até o primeiro rival e quica para o próximo e para o próximo;
+   * cada rival é atingido quando o golpe chega nele. Com `viagem` é um tiro curto que voa e quica
+   * (o Ricochete do Ciclope — pedido do jogador: "sai um laser curto bem no personagem do meio e
+   * fica ricocheteando nos personagens"); com `faixa`, cada trecho é um feixe que acende na sua vez.
    */
   const cadeia=(()=>{
-    if(!beat||!fam?.encadeia||!fam.faixa)return null;
+    if(!beat||!fam?.encadeia||!(fam.faixa||fam.viagem))return null;
     const lado=battle.fighters.find(f=>f.uid===beat.event.source)?.side;
     const rivais=alvos.filter(uid=>battle.fighters.find(f=>f.uid===uid)?.side!==lado);
     if(rivais.length<2)return null;
-    const primeiro=alvoPrincipal&&rivais.includes(alvoPrincipal)?alvoPrincipal:rivais[0];
+    // o primeiro é o do meio da fileira (na tela); depois quica no mais perto e no outro
+    const porX=[...rivais].sort((m,n)=>px(point(m)).x-px(point(n)).x);
+    const primeiro=porX[Math.floor((porX.length-1)/2)];
     const ordem=[primeiro],resto=rivais.filter(u=>u!==primeiro);
     while(resto.length){const ult=px(point(ordem[ordem.length-1]));resto.sort((m,n)=>{const qm=px(point(m)),qn=px(point(n));return Math.hypot(qm.x-ult.x,qm.y-ult.y)-Math.hypot(qn.x-ult.x,qn.y-ult.y);});ordem.push(resto.shift()!);}
-    const trecho=D*.42,passo=D*.13,inicio=D*I*.55;
+    const voa=!!fam.viagem;
+    // tiro: o primeiro voo chega no impacto; cada quique depois leva `passo`
+    const trecho=voa?D*.13:D*.42,passo=D*.13,inicio=voa?D*I*.35:D*I*.55,primeiroVoo=D*I*.65;
     const passa:Record<string,number>={};
     const trechos=ordem.map((uid,k)=>{
       const de=k===0?p1:point(ordem[k-1]),qa=px(de),qb=px(point(uid)),vx=qb.x-qa.x,vy=qb.y-qa.y;
-      passa[uid]=Math.max(0,inicio+k*passo+trecho*.22-D*I);
-      return{uid,de,largura:Math.hypot(vx,vy),ang:Math.atan2(vy,vx)*180/Math.PI,atraso:inicio+k*passo};
+      const atraso=voa?(k===0?inicio:inicio+primeiroVoo+(k-1)*passo):inicio+k*passo;
+      const dura=voa?(k===0?primeiroVoo:trecho):trecho;
+      passa[uid]=Math.max(0,voa?atraso+dura-D*I:atraso+trecho*.22-D*I);
+      return{uid,de,vx,vy,largura:Math.hypot(vx,vy),ang:Math.atan2(vy,vx)*180/Math.PI,atraso,dura};
     });
     return{trechos,trecho,passa};
   })();
@@ -120,7 +128,15 @@ export function BattleEffects({battle,beat,anchors,enabled,reduced,medal=80}:{ba
       nodes.push(camada(fam.preparo,{left:`${p1.x}%`,top:`${p1.y}%`,width:t,height:t},'fxl-laco',`prep-${id}`));
     }
     // viagem: o projétil sai depois da preparação do golpe e chega no impacto
-    if(vai&&!landed&&fam.viagem){
+    // ergue: antes do objeto sair, ele se forma em cima de quem age (o Kienzan na mão erguida)
+    if(vai&&!landed&&fam.ergue){
+      const t=medal*1.9*intensidade;
+      nodes.push(camada(fam.ergue,{left:`${p1.x}%`,top:`calc(${p1.y}% - ${Math.round(medal*.45)}px)`,width:t,height:t,'--fx-cor':cor,'--ang':'0deg','--flip':1,'--dur':s(D*I*.4),'--delay':'0s'},'fxl-impacto fxl-sobre',`ergue-${id}`));
+    }
+    if(vai&&fam.viagem&&cadeia){
+      const t=medal*(TAMANHO_DO_VOO[fam.viagem]??1.05)*Math.min(1.25,intensidade);
+      for(const v of cadeia.trechos)nodes.push(camada(fam.viagem,{left:`${v.de.x}%`,top:`${v.de.y}%`,width:t,height:t,'--dx':`${v.vx}px`,'--dy':`${v.vy}px`,'--ang':`${v.ang}deg`,'--voo':s(v.dura),'--voo-delay':s(v.atraso)},'fxl-laco fxl-voo fxl-quica',`voo-${id}-${v.uid}`));
+    }else if(vai&&!landed&&fam.viagem){
       const t=medal*(TAMANHO_DO_VOO[fam.viagem]??1.05)*Math.min(1.25,intensidade);
       nodes.push(camada(fam.viagem,{left:`${p1.x}%`,top:`${p1.y}%`,width:t,height:t,'--dx':`${dx}px`,'--dy':`${dy}px`,'--ang':`${ang}deg`,'--voo':s(D*I*.65),'--voo-delay':s(D*I*.35)},'fxl-laco fxl-voo',`voo-${id}`));
     }
@@ -135,7 +151,7 @@ export function BattleEffects({battle,beat,anchors,enabled,reduced,medal=80}:{ba
       </span>);
     }
     // faixa: o feixe cresce de quem age até o alvo, segura o impacto e some
-    if(vai&&fam.faixa&&cadeia){
+    if(vai&&fam.faixa&&!fam.viagem&&cadeia){
       const h=medal*(ALTURA_DA_FAIXA[fam.faixa]??.4)*Math.min(1.3,intensidade);
       for(const t of cadeia.trechos)nodes.push(camada(fam.faixa,{left:`${t.de.x}%`,top:`${t.de.y}%`,width:t.largura,height:h,'--ang':`${t.ang}deg`,'--faixa':s(cadeia.trecho),'--faixa-delay':s(t.atraso)},'fxl-laco fxl-faixa',`faixa-${id}-${t.uid}`));
     }else if(vai&&fam.faixa&&varredura){

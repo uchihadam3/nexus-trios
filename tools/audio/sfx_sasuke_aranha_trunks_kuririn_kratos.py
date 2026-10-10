@@ -237,14 +237,20 @@ def kame_kuririn_carga(rng, v):
     return reverb(x, 0.4, 0.2, 7000)
 
 
-def kame_kuririn(rng, v):
-    """O Kamehameha saindo: o "HAAA" do feixe (o rugido de energia) e a explosão azul."""
-    x = _z(1.9)
+def kame_kuririn_feixe(rng, v):
+    """O Kamehameha saindo: o "HAAA" do feixe (o rugido de energia que sai das mãos)."""
     n = n_de(1.0)
     t = _t(n)
     feixe = passa(rosa(rng, n), 200, 3000, 2) * (0.85 + 0.15 * np.sin(2 * math.pi * 9 * t)) * 0.6 + seno(110, n) * 0.12
-    poe(x, feixe * sobe_e_some(n, 0.05, 1.2), 0.0)
-    poe(x, B.explosao(rng, v) * 0.8, 0.75)
+    return reverb(feixe * sobe_e_some(n, 0.05, 1.2), 0.45, 0.22, 6500)
+
+
+def kame_kuririn(rng, v):
+    """O Kamehameha no rival: a explosão azul e o eco do ki se espalhando."""
+    x = _z(1.5)
+    poe(x, B.explosao(rng, v) * 0.85, 0.0)
+    n = n_de(0.9)
+    poe(x, passa(rosa(rng, n), 300, 3000, 2) * sobe_e_some(n, 0.05, 1.3) * 0.25, 0.05)
     return reverb(x, 0.5, 0.25, 6500)
 
 
@@ -325,7 +331,8 @@ SONS: dict = {
     "taiyoken-flash": (taiyoken_flash, "as mãos no rosto antes do Taiyoken"),
     "taiyoken": (taiyoken, "Taiyoken: o clarão que cega"),
     "kame-kuririn-carga": (kame_kuririn_carga, "o Kamehameha juntando"),
-    "kame-kuririn": (kame_kuririn, "Kamehameha: o feixe e a explosão"),
+    "kame-kuririn-feixe": (kame_kuririn_feixe, "Kamehameha: o feixe saindo"),
+    "kame-kuririn": (kame_kuririn, "Kamehameha: a explosão azul"),
     "laminas-kratos": (laminas_kratos, "Lâminas do Caos: as correntes e os dois cortes"),
     "furia-kratos": (furia_kratos, "a Fúria espartana: o urro"),
     "furia-espartana": (furia_espartana, "a pancada da Fúria"),

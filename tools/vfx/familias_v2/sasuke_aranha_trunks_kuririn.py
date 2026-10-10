@@ -29,13 +29,16 @@ Trunks
   meio e as duas metades se afastando.
 
 Kuririn
-- kienzan_disco: o disco serrilhado e fininho girando (laço, viagem).
+- kienzan_forma: o Kuririn ergue a mão e o disco se forma em cima dela, girando
+  cada vez mais rápido, antes de ser arremessado.
+- kienzan_disco: o disco redondo e serrilhado voando e girando (laço, viagem).
 - kienzan_corte: o disco atravessando o rival — o corte fino e as faíscas.
 - taiyoken_flash: as mãos no rosto acendendo (nele).
 - taiyoken: o clarão solar enorme no campo dos rivais, com os raios e as
   espirais de quem ficou cego.
 - kame_kuririn: a bola azul entre as mãos (Preparo, laço).
-- kame_faixa_kuririn: o feixe azul com a onda em espiral (faixa, laço).
+- kame_faixa_kuririn: o feixe grosso do Kamehameha, de borda turbulenta e miolo
+  branco (faixa, laço).
 - kame_kuririn_impacto: a explosão azul do Kamehameha.
 
 Kratos
@@ -395,21 +398,53 @@ def corte_final(T, t, rng):
 
 
 # =================================================================== Kuririn
-def kienzan_disco(T, t, rng):
-    """O Kienzan voando: o disco fininho e chato (visto de lado, uma elipse fina) com a borda
-    serrilhada girando e o zumbido de luz atrás."""
+def _disco(T, cx, cy, r, giro, sq=0.45, dentes=28):
+    """O Kienzan: um disco redondo de energia (visto um pouco de cima, achatado), a borda serrilhada
+    girando, o miolo claro e os anéis de dentro."""
+    pts = []
+    for k in range(dentes * 2):
+        a = TAU * k / (dentes * 2) + giro
+        rr = r if k % 2 == 0 else r * 0.88
+        pts.append((cx + rr * math.cos(a), cy + rr * math.sin(a) * sq))
+    cheio = T.polys([(pts, 1.0)], 0.004)
+    borda = T.polyline(pts + [pts[0]], 0.012)
+    anel = T.ring(r * 0.55, 0.012, cx, cy, 1 / sq)
+    miolo = T.gauss(cx, cy, r * 0.35, r * 0.35 * sq)
+    return cheio * 0.45 + borda * 1.2 + anel * 0.6 + miolo * 0.6, borda * 0.6 + miolo * 0.5
+
+
+def kienzan_forma(T, t, rng):
+    """O Kuririn ergue a mão e forma o Kienzan em cima dela: a luz junta num ponto, abre num disco que
+    cresce girando cada vez mais rápido, as faíscas da serra, e no fim ele é arremessado (some
+    para o lado)."""
     G, H = vazio(T)
-    cx = 0.3
-    dentes = []
-    for k in range(24):
-        a = TAU * k / 24 + TAU * t * 3
-        r = 0.32 if k % 2 == 0 else 0.27
-        dentes.append((cx + r * math.cos(a), r * math.sin(a) * 0.22))
-    D = T.polys([(dentes, 1.0)], 0.004)
-    brilho = T.gauss(cx, 0, 0.3, 0.06) * 0.6
-    rastro = T.tapered([(cx - 0.95, 0, cx - 0.3, 0, 1.0)], 0.06) * 0.6
-    G += D * 1.2 + brilho + rastro
-    H += D * 0.6
+    cresce = ease_out(rel(t, 0.05, 0.6), 2)
+    sai = ease_in(rel(t, 0.82, 1.0), 2)
+    cx, cy = 0.0 + 0.6 * sai, -0.15
+    braco = T.tapered([(0.0, 0.75, 0.0, cy + 0.08, 1.0)], 0.07) * 0.5 * (1 - sai)
+    junta = T.gauss(0, cy, 0.08) * pulso(t, 0.0, 0.35) * 1.4
+    giro = TAU * (t * 2 + 3 * t * t)
+    D, Dh = _disco(T, cx, cy, 0.05 + 0.4 * cresce, giro)
+    q = _quadro(t, 71)
+    fa = T.splats([(cx + (0.05 + 0.4 * cresce) * math.cos(a) * 1.05, cy + (0.05 + 0.4 * cresce) * math.sin(a) * 0.47, q.uniform(0.4, 1)) for a in q.uniform(0, TAU, 8)], 0.01) * rel(t, 0.3, 0.5)
+    some = 1 - rel(t, 0.9, 1.0)
+    G += (braco + junta + D * rel(t, 0.05, 0.2) + fa) * some
+    H += (junta * 1.2 + Dh) * some
+    return G, H
+
+
+def kienzan_disco(T, t, rng):
+    """O Kienzan voando para +x: o disco redondo e serrilhado girando rápido, um pouco achatado, com o
+    brilho da borda e os arcos curtos do giro ficando para trás."""
+    G, H = vazio(T)
+    cx = 0.15
+    giro = TAU * t * 4
+    D, Dh = _disco(T, cx, 0, 0.42, giro, 0.5)
+    rastro = T.zero()
+    for j in range(3):
+        rastro += T.arc_band(0.42 + 0.03 * j, 0.012, math.pi * 0.6, math.pi * 1.4, 1.0, 0.0, cx - 0.1 * (j + 1), 0, 0.5) * (0.5 - 0.15 * j)
+    G += D * 1.1 + rastro + T.gauss(cx, 0, 0.5, 0.22) * 0.2
+    H += Dh
     return G, H
 
 
@@ -468,41 +503,48 @@ def taiyoken(T, t, rng):
 
 
 def kame_kuririn(T, t, rng):
-    """O Kamehameha juntando nas mãos do Kuririn: a bola azul pulsando entre as mãos, as faíscas
-    entrando e o brilho."""
+    """O Kamehameha juntando nas mãos em concha do Kuririn: as duas mãos (dois arcos) para trás, a bola
+    azul crescendo e pulsando entre elas, os raios finos estalando em volta e a energia sendo
+    puxada para dentro."""
     G, H = vazio(T)
-    pul = 0.85 + 0.15 * math.sin(TAU * t * 5)
-    bola = T.gauss(0, 0, 0.13 * pul)
+    pul = 0.85 + 0.15 * math.sin(TAU * t * 6)
+    bola = T.gauss(0, 0, 0.17 * pul)
+    nucleo = T.gauss(0, 0, 0.07)
+    maos = T.arc_band(0.27, 0.05, math.pi * 0.55, math.pi * 1.45, 1.0, 0.0, 0.08, 0.0, 0.3) * 0.5
+    q = _quadro(t, 73)
+    R = T.zero()
+    for _ in range(4):
+        a = q.uniform(0, TAU)
+        R += _raio(T, q, 0.12 * math.cos(a), 0.12 * math.sin(a), 0.36 * math.cos(a), 0.36 * math.sin(a), 0.008, 3, 0.4)
     sub = np.random.default_rng(47)
     pts = []
-    for _ in range(22):
+    for _ in range(26):
         a = sub.uniform(0, TAU)
         f = (sub.uniform() + t * 2) % 1
-        r = 0.7 * (1 - f) + 0.15
+        r = 0.75 * (1 - f) + 0.18
         pts.append((r * math.cos(a), r * math.sin(a), f))
-    G += bola * 1.7 + T.splats(pts, 0.012) + T.ring(0.2, 0.04) * 0.4 * pul
-    H += bola * 1.7
+    G += bola * 1.6 + nucleo * 1.2 + maos + R * 0.9 + T.splats(pts, 0.013) + T.ring(0.24, 0.05) * 0.35 * pul
+    H += bola * 1.5 + nucleo * 1.5 + R * 0.5
     return G, H
 
 
 def kame_faixa_kuririn(T, t, rng):
-    """O feixe do Kamehameha do Kuririn: o raio azul com o miolo claro e uma onda em espiral
-    enrolada nele, girando — mais fino que o do Goku."""
+    """O feixe do Kamehameha: grosso, com a borda turbulenta correndo para a frente (o ruído rolando
+    em x), o miolo branco, o brilho em volta e as faixas de energia andando dentro dele."""
     G, H = vazio(T)
     alto = T.H / T.W
-    corpo = np.exp(-(T.V / (alto * 0.22)) ** 2)
-    miolo = np.exp(-(T.V / (alto * 0.08)) ** 2)
-    onda = T.zero()
-    pts1, pts2 = [], []
-    for k in range(200):
-        f = k / 199
-        x = -0.98 + 1.96 * f
-        ph = TAU * (f * 5 - t * 2)
-        pts1.append((x, alto * 0.3 * math.sin(ph)))
-        pts2.append((x, -alto * 0.3 * math.sin(ph)))
-    onda = T.polyline(pts1, 0.008) + T.polyline(pts2, 0.008) * 0.6
-    G += corpo * 0.9 + miolo * 1.3 + onda * 0.9 + T.gauss(-0.95, 0, 0.05, alto * 0.4)
-    H += miolo * 1.4 + onda * 0.3
+    n = np.roll(_ruido(T, 79, 0.04, 3), int((t % 1) * T.W), axis=1)
+    larg = alto * (0.4 + 0.1 * n)
+    corpo = np.clip(1 - (np.abs(T.V) / larg) ** 2, 0, 1)
+    miolo = np.exp(-(T.V / (alto * 0.11)) ** 2)
+    brilho = np.exp(-(T.V / (alto * 0.45)) ** 2) * 0.35
+    faixas = T.zero()
+    for j in range(5):
+        x = -0.95 + ((j / 5 + t) % 1) * 1.9
+        faixas += np.exp(-((T.U - x) / 0.04) ** 2) * corpo * 0.35
+    boca = T.gauss(-0.95, 0, 0.07, alto * 0.45) * 1.2
+    G += corpo * 1.0 + miolo * 1.4 + brilho + faixas + boca
+    H += miolo * 1.5 + boca * 0.8 + corpo * 0.2
     return G, H
 
 
@@ -651,7 +693,8 @@ REGISTRO = [
     ("burning_attack", burning_attack, GRANDE, "Trunks · a explosão do Burning Attack", False),
     ("aura_trunks", aura_trunks, MEDIA, "Trunks · a aura dourada (laço)", True),
     ("corte_final", corte_final, GRANDE, "Trunks · o corte vertical gigante", False),
-    ("kienzan_disco", kienzan_disco, MEDIA, "Kuririn · o disco do Kienzan girando (laço)", True),
+    ("kienzan_forma", kienzan_forma, GRANDE, "Kuririn · a mão erguida formando o Kienzan", False),
+    ("kienzan_disco", kienzan_disco, MEDIA, "Kuririn · o disco do Kienzan voando (laço)", True),
     ("kienzan_corte", kienzan_corte, GRANDE, "Kuririn · o disco atravessando e o corte fino", False),
     ("taiyoken_flash", taiyoken_flash, MEDIA, "Kuririn · as mãos no rosto acendendo (nele)", False),
     ("taiyoken", taiyoken, GRANDE, "Kuririn · o clarão solar no campo", False),

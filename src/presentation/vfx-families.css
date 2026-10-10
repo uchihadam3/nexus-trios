@@ -74,6 +74,15 @@
   100%{opacity:0;transform:translateY(-50%) rotate(var(--ang)) scaleX(1) scaleY(.15)}
 }
 
+/* Quique: o tiro curto voa de um ponto ao outro e some ao chegar (o próximo trecho sai dali). */
+.battle-effects .fxl-voo.fxl-quica{animation-name:fx12-mask,fx-quica;animation-timing-function:steps(1,end),linear}
+@keyframes fx-quica{
+  0%{opacity:0;transform:translate(-50%,-50%) rotate(var(--ang)) scale(.8)}
+  6%{opacity:1}
+  94%{opacity:1;transform:translate(calc(-50% + var(--dx)),calc(-50% + var(--dy))) rotate(var(--ang)) scale(1)}
+  100%{opacity:0;transform:translate(calc(-50% + var(--dx)),calc(-50% + var(--dy))) rotate(var(--ang)) scale(1)}
+}
+
 /* Varredura: o feixe cresce mirando no primeiro rival, gira até o último e some. */
 .battle-effects .fxl-faixa.fxl-varre{animation-name:fx12-mask,fx-varre}
 @keyframes fx-varre{

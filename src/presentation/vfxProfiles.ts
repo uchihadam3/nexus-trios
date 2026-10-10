@@ -55,6 +55,8 @@ export interface Familia {
   varre?: boolean;
   /** Numa área, a faixa sai de quem age até o primeiro rival e quica de um rival para o outro (o ricochete do Ciclope). */
   encadeia?: boolean;
+  /** Folha em quem age antes do objeto sair, num golpe sem Preparo (o Kuririn erguendo a mão e formando o Kienzan). */
+  ergue?: string;
   /** Quando o objeto já voou até o alvo: a fração do começo do impacto que mostrava ele chegando e é pulada. */
   pula?: number;
   /** Uma criatura inteira (o dragão do Shiryu) que sai de quem age, anda até o alvo, atravessa ele e some lá dentro. */
@@ -136,7 +138,7 @@ export const FOLHAS_DA_LINHA = ['cometa', 'mira', 'chegada'] as const;
 /** Todas as folhas que o jogo usa. */
 export const folhasUsadas = (): string[] => [...new Set([...FAMILIAS.flatMap((k) => {
   const x = familia(k);
-  return [x.impacto, x.viagem, x.faixa, x.preparo, x.acento, x.noAtor, x.atravessa].filter((s): s is string => !!s);
+  return [x.impacto, x.viagem, x.faixa, x.preparo, x.acento, x.noAtor, x.atravessa, x.ergue].filter((s): s is string => !!s);
 }), ...FOLHAS_DA_LINHA])].sort();
 
 export const folha = (nome: string) => `/assets/vfx/familias/${nome}.webp`;

@@ -44,7 +44,7 @@ export function CombatConnections({battle,beat,anchors,reduced,medal=80}:{battle
   const depois=ofensiva?links.filter(l=>lado(l.source)===lado(l.target)&&!OFENSIVO.includes(l.kind)&&!pares.has(`${l.source}>${l.target}`))
     .filter((l,i,todas)=>todas.findIndex(x=>x.source===l.source&&x.target===l.target)===i).slice(0,2):[];
   const fighter=battle.fighters.find(f=>f.uid===ator);
-  const corDoEfeito=profileFor(fighter?.characterId??'',beat?.event.skill)?.color;
+  const perfil=profileFor(fighter?.characterId??'',beat?.event.skill),corDoEfeito=perfil?.color;
 
   const px=(uid:string)=>{const a=anchors[uid]??fallbackPoint(uid);return {x:a.x*size.w/100,y:a.y*size.h/100};};
   const raio=medal*.5;
@@ -61,7 +61,10 @@ export function CombatConnections({battle,beat,anchors,reduced,medal=80}:{battle
   if(!beat||!size.w||beat.periodic||beat.event.kind==='turn')return <div ref={root} className="combat-connections" aria-hidden="true"/>;
   const preparo=beat.event.kind==='cast';
   const W=Math.max(.3,beat.duration*(preparo?1:P.impactAt));
-  const antes=!beat.impacted||preparo?principais.map(l=>linha(l,ofensiva?(corDoEfeito??'#ffd9a8'):(corDoEfeito??COR_DE_APOIO[l.kind]))):[];
+  // o golpe que já voa até o alvo (o Kienzan, o Kamehameha, um tiro) mostra sozinho quem acerta quem:
+  // a linha por cima dele parecia um laser (pedido do jogador); no Preparo ela continua
+  const voaSozinho=!preparo&&!!perfil?.travel;
+  const antes=voaSozinho?[]:!beat.impacted||preparo?principais.map(l=>linha(l,ofensiva?(corDoEfeito??'#ffd9a8'):(corDoEfeito??COR_DE_APOIO[l.kind]))):[];
   /* as linhas de apoio entram na etapa do efeito no próprio trio */
   const apos=beat.impacted&&!preparo&&(beat.etapa??99)>=Math.max(1,(beat.passos?.findIndex(x=>x.classe==='aliado')??-1)+1)?depois.map(l=>linha(l,COR_DE_APOIO[l.kind])):[];
   const img=(nome:string)=>`url(${folha(nome)})`;

@@ -4,8 +4,9 @@ Ciclope
 - varredura_optica: a Rajada de contenção em cada rival — o feixe sai do
   Ciclope (feixe_ciclope, varrendo a fileira) e, quando passa por ele, o ponto
   quente corre e deixa o risco queimado e as faíscas.
-- ricochete_optico: o Ricochete óptico em cada rival — o feixe sai do Ciclope,
-  bate num e quica para o outro; em cada um, o clarão e as faíscas do quique.
+- laser_curto: o tiro curto do Ricochete óptico voando (laço, viagem) — sai do
+  Ciclope, bate no rival do meio e quica de um rival para o outro.
+- ricochete_optico: o quique em cada rival — o clarão e as faíscas.
 - visor_carregando: o visor acendendo — a linha vermelha crescendo e pulsando
   (Preparo, laço).
 - feixe_ciclope: o Feixe concentrado — o raio largo e reto com as ondas de
@@ -68,6 +69,19 @@ def varredura_optica(T, t, rng):
     H += (ponto * 1.1 + marca * 0.7) * env
     return G, H
 
+
+
+def laser_curto(T, t, rng):
+    """O tiro do Ricochete óptico voando para +x: um laser curto (não o feixe inteiro), a ponta
+    clara, o rastro afinando e a borda tremendo."""
+    G, H = vazio(T)
+    tremor = 0.9 + 0.1 * math.sin(TAU * t * 9)
+    corpo = T.tapered([(-0.55, 0.0, 0.35, 0.0, 1.0)], 0.12) * tremor
+    miolo = T.tapered([(-0.35, 0.0, 0.35, 0.0, 1.0)], 0.04)
+    ponta = T.gauss(0.33, 0, 0.07)
+    G += T.blur(corpo, 0.03) * 0.8 + corpo * 0.5 + miolo * 1.3 + ponta * 1.4
+    H += miolo * 1.2 + ponta * 1.2
+    return G, H
 
 def ricochete_optico(T, t, rng):
     """O Ricochete óptico em cada rival: o raio bate e quica — o clarão, a estrela de faíscas que
@@ -344,6 +358,7 @@ def sarcofago_maldito(T, t, rng):
 
 REGISTRO = [
     ("varredura_optica", varredura_optica, GRANDE, "Ciclope · o feixe passando em cada rival", False),
+    ("laser_curto", laser_curto, MEDIA, "Ciclope · o laser curto do Ricochete voando (laço)", True),
     ("ricochete_optico", ricochete_optico, GRANDE, "Ciclope · o quique do raio em cada rival", False),
     ("visor_carregando", visor_carregando, MEDIA, "Ciclope · o visor acendendo (laço)", True),
     ("feixe_ciclope", feixe_ciclope, FAIXA, "Ciclope · o Feixe concentrado (faixa)", True),
