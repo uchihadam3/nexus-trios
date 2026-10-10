@@ -23,10 +23,12 @@ import type { Profile } from '../lib/storage';
 
 type Modo = 'entrar' | 'criar' | 'recuperar';
 
-export function AccountScreen({ autenticacao, conta, profile, conectado, google = false, aoMudarPerfil }:
+export function AccountScreen({ autenticacao, conta, profile, conectado, google = false, aoMudarPerfil, obrigatorio = false }:
 { autenticacao: Autenticacao; conta: Conta | null; profile: Profile; conectado: boolean;
-  google?: boolean; aoMudarPerfil: (p: Profile) => void }) {
-  const [modo, setModo] = useState<Modo>('entrar');
+  google?: boolean; aoMudarPerfil: (p: Profile) => void;
+  /** A porta de entrada (PortaoDaConta): sem conta não se joga, e quem chega primeiro cria a conta. */
+  obrigatorio?: boolean }) {
+  const [modo, setModo] = useState<Modo>(obrigatorio ? 'criar' : 'entrar');
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
   const [handle, setHandle] = useState(profile.publicHandle ?? '');
@@ -57,8 +59,8 @@ export function AccountScreen({ autenticacao, conta, profile, conectado, google 
   const resumo = resumoDoProgresso(profile);
 
   return <section className="account-screen conta-v2">
-    <TelaTopo icone={<ShieldCheck />} cor="#86e3a8" rotulo="CONTA NEXUS" titulo={logado ? 'Sua conta' : 'Entre na disputa'}>
-      <p>{logado ? 'Pronto: toda Jornada vale ranking.' : 'Opcional: jogar funciona sem conta.'}</p>
+    <TelaTopo icone={<ShieldCheck />} cor="#86e3a8" rotulo="CONTA NEXUS" titulo={logado ? 'Sua conta' : obrigatorio ? 'Entre para jogar' : 'Entre na disputa'}>
+      <p>{logado ? 'Pronto: toda Jornada vale ranking.' : 'Crie sua conta ou entre: toda Jornada vai para o ranking.'}</p>
     </TelaTopo>
     {!logado && <div className="ct-vantagens">
       <span style={{ '--tile': '#ffd36b' } as CSSProperties}><Trophy size={20} /><b>Ranking</b><small>seu trio no placar</small></span>
@@ -74,11 +76,11 @@ export function AccountScreen({ autenticacao, conta, profile, conectado, google 
       * conquistou está neste aparelho e vai continuar aqui.
       */}
     <p className="account-progresso">
-      <Smartphone size={18} /><span>Seu recorde e suas jornadas ficam <b>neste aparelho</b>, com conta ou sem. Entrar não apaga nada.</span>
+      <Smartphone size={18} /><span>{obrigatorio ? <>O que você já jogou <b>neste aparelho</b> continua aqui: entrar não apaga nada.</> : <>Seu recorde e suas jornadas ficam <b>neste aparelho</b>, com conta ou sem. Entrar não apaga nada.</>}</span>
     </p>
 
     {!conectado && <p className="account-aviso erro">
-      A conta online ainda não foi conectada neste build. O jogo casual funciona normalmente.
+      A conta online ainda não foi conectada neste build.
     </p>}
 
     {/*

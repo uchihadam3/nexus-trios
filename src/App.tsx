@@ -29,9 +29,10 @@ import {ENGINE_VERSION,rosterFingerprint,runDigest} from './engine/ranked';
 import {PULOS_DO_DESAFIO,liberar} from './lib/conquistas';
 import {ConquistasScreen} from './screens/ConquistasScreen';
 import {carregarCliente,googleConfigured,haSessaoOuRetorno,onlineCall,onlineConfigured} from './lib/online';
-import {criarAutenticacaoPreguicosa,type Conta} from './lib/auth';
+import {criarAutenticacaoPreguicosa,validarHandle,type Conta} from './lib/auth';
 import { dicasLiberadas,ehDono } from './lib/dicas-liberadas';
 import {AccountScreen} from './screens/AccountScreen';
+import {PortaoDaConta,type EtapaDoPortao} from './screens/PortaoDaConta';
 import {FAMILIA_DA_INVOCACAO} from './presentation/vfx-atribuicao';
 import {efeitosDoJeito,somDoJeito} from './presentation/jeito-efeito';
 import {SOM_DA_ESPERA,SOM_DA_VOLTA} from './presentation/renascer-proprio';
@@ -380,13 +381,38 @@ export default function App(){
    */
   const autenticacao=useMemo(()=>criarAutenticacaoPreguicosa(carregarCliente),[]);
   const [conta,setConta]=useState<Conta|null>(null);
+  /* Sem sessão guardada nem volta de link, não há conta a descobrir: a porta já abre no cadastro. */
+  const [contaPronta,setContaPronta]=useState(()=>!haSessaoOuRetorno());
   useEffect(()=>{
     let vivo=true;
-    /* Sem sessão guardada nem volta de link, não há conta a descobrir: o Supabase fica para quando for usado. */
-    if(haSessaoOuRetorno())void autenticacao.conta().then((c:Conta|null)=>{if(vivo)setConta(c);});
-    const parar=autenticacao.observar((c:Conta|null)=>{setConta(c);});
+    if(haSessaoOuRetorno())void autenticacao.conta().then((c:Conta|null)=>{if(vivo){setConta(c);setContaPronta(true);}});
+    const parar=autenticacao.observar((c:Conta|null)=>{setConta(c);setContaPronta(true);});
     return ()=>{vivo=false;parar();};
   },[autenticacao]);
+  /*
+   * O nome público da conta, no servidor (src/screens/PortaoDaConta.tsx). O nome escolhido no cadastro
+   * vinha só nos dados de login, e o perfil público só nascia se o jogo pedisse — sem ele, o servidor
+   * recusava as jornadas. Agora, ao entrar, o perfil é conferido e, se faltar, criado com esse nome.
+   */
+  const logado=conta!==null&&conta.origem!=='convidado';
+  const [nomeDaConta,setNomeDaConta]=useState<{id:string;handle:string|null}|null>(null);
+  const [erroDaConta,setErroDaConta]=useState('');
+  const buscaNome=async(c:Conta)=>{
+    setErroDaConta('');
+    try{
+      const r=await onlineCall<{profile:{handle:string}|null}>('profile');
+      let handle=r.profile?.handle??null;
+      if(!handle&&c.handle&&!validarHandle(c.handle)){try{handle=(await onlineCall<{profile:{handle:string}}>('profile',{handle:c.handle})).profile.handle;}catch{/* o nome já tem dono: escolhe outro na porta */}}
+      if(handle){const h=handle;setProfile(p=>{const n={...p,publicHandle:h};save('profile',n);return n;});}
+      setNomeDaConta({id:c.id,handle});
+    }catch(error){setErroDaConta(error instanceof Error?error.message:'Sem conexão com o servidor.');}
+  };
+  useEffect(()=>{if(onlineConfigured&&logado&&conta&&nomeDaConta?.id!==conta.id)void buscaNome(conta);},[logado,conta?.id]);
+  const escolheNome=async(handle:string):Promise<string|null>=>{
+    if(!conta)return 'Entre na conta primeiro.';
+    try{const r=await onlineCall<{profile:{handle:string}}>('profile',{handle});setProfile(p=>{const n={...p,publicHandle:r.profile.handle};save('profile',n);return n;});setNomeDaConta({id:conta.id,handle:r.profile.handle});return null;}
+    catch(error){return error instanceof Error?error.message:'Não foi possível salvar o nome.';}
+  };
   /* O botão das Dicas de trio: a conta do dono sempre; os outros depois de META_DAS_DICAS numa jornada (src/lib/dicas-liberadas.ts) */
   const [dono,setDono]=useState(false);
   useEffect(()=>{let vivo=true;void ehDono(conta?.email).then(d=>{if(vivo)setDono(d);});return ()=>{vivo=false;};},[conta?.email]);
@@ -394,6 +420,9 @@ export default function App(){
   /* Dicas ligadas enquanto o trio é escolhido: a jornada inteira paga o custo, mesmo desligando depois (src/engine/pontos.ts) */
   useEffect(()=>{if(settings.dicasDoTrio&&podeDicas&&run?.stage==='draft'&&run.draft.team.length<3&&!run.dicas)changeRun({...run,dicas:true});},[settings.dicasDoTrio,podeDicas,run?.stage,run?.draft.team.length,run?.dicas]);
 
+  /* A porta de entrada: sem conta e sem nome público, o jogo não abre (pedido do jogador). */
+  const etapaDoPortao:EtapaDoPortao|null=!onlineConfigured?null:!contaPronta?'carregando':!logado?'entrar':nomeDaConta?.id!==conta!.id?(erroDaConta?'erro':'carregando'):!nomeDaConta.handle?'nome':null;
+  if(etapaDoPortao)return <PortaoDaConta etapa={etapaDoPortao} autenticacao={autenticacao} conta={conta} profile={profile} conectado={onlineConfigured} google={googleConfigured} aoMudarPerfil={p=>{save('profile',p);setProfile(p);}} erro={erroDaConta} onTentar={()=>{if(conta)void buscaNome(conta);}} onNome={escolheNome}/>;
   const reset=()=>{resetStorage();setSettings(defaults);setProfile({journeys:0,victories:0,best:0,wins:0,recordePontos:0,escalaDosPontos:ESCALA_DOS_PONTOS});setRun(null);runRef.current=null;navigate('home');};
   return <div onPointerDownCapture={()=>void battleAudio.unlock()} onPointerUpCapture={()=>void battleAudio.unlock()} onTouchEndCapture={()=>void battleAudio.unlock()} onClickCapture={()=>void battleAudio.unlock()} onKeyDownCapture={e=>{if(e.key==='Enter'||e.key===' ')void battleAudio.unlock();}} className={`app ${settings.reducedMotion?'reduce-motion':''} ${screen==='game'&&run?.stage==='battle'?'in-battle':''}`}>
     <ToqueGlobal/>

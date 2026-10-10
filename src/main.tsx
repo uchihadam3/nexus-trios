@@ -18,6 +18,7 @@ import './presentation/ficha-v2.css';
 import './presentation/casca-v2.css';
 import './presentation/telas-v2.css';
 import './presentation/conquistas.css';
+import './presentation/portao.css';
 createRoot(document.getElementById('root')!).render(<App/>);
 /*
  * Versão nova do jogo. O service worker novo assume na hora (skipWaiting), mas

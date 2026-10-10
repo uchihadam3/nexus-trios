@@ -1,0 +1,19 @@
+/* A porta de entrada (src/screens/PortaoDaConta.tsx): conta e nome público antes de jogar. */
+.portao{min-height:100dvh;padding:18px 16px 32px;display:flex;flex-direction:column;align-items:center;gap:14px;
+  background:radial-gradient(120% 70% at 50% 0%,#1d2a3a 0%,#0b1118 60%,#070a0f 100%);color:#e9f1f7}
+.portao-marca{display:flex;align-items:baseline;gap:8px;letter-spacing:4px;margin:8px 0 2px}
+.portao-marca b{font-size:1.7rem;font-weight:900;color:#fff;text-shadow:0 0 18px #6fd0ff88}
+.portao-marca span{font-size:.8rem;font-weight:800;color:#86e3a8}
+.portao .account-screen{width:100%}
+.portao-cartao{width:100%;max-width:440px;display:grid;justify-items:center;gap:12px;text-align:center;padding:22px 18px;border-radius:18px;
+  background:linear-gradient(180deg,#152130ee,#0d151fee);border:1px solid #86e3a855;box-shadow:0 10px 40px #0008}
+.portao-cartao h2{margin:0;font-size:1.2rem}
+.portao-cartao p{margin:0;color:#c3d2dd;line-height:1.45}
+.portao-cartao svg{color:#86e3a8}
+.portao-cartao .primary,.portao-cartao .secondary{width:100%;justify-content:center}
+.portao-campo{width:100%;display:grid;gap:6px;text-align:left}
+.portao-campo span{font-size:.75rem;font-weight:800;letter-spacing:1px;color:#9fb3c2}
+.portao-campo input{width:100%;padding:12px 14px;border-radius:12px;border:1px solid #86e3a866;background:#08111a;color:#fff;font-size:1rem}
+.portao-giro{width:36px;height:36px;border-radius:50%;border:3px solid #86e3a833;border-top-color:#86e3a8;animation:portao-gira .9s linear infinite}
+@keyframes portao-gira{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.portao-giro{animation:none}}
