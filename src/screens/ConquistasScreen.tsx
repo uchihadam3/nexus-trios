@@ -1,19 +1,19 @@
-import {useEffect,useMemo,useRef,useState,type CSSProperties} from 'react';
-import {Award,ChevronLeft,ChevronRight,Lock,Sparkles,Trophy,X} from 'lucide-react';
+import {useEffect,useMemo,useState,type CSSProperties} from 'react';
+import {Award,ChevronRight,Lock,Sparkles,Trophy,X} from 'lucide-react';
 import {byId} from '../data/characters';
 import type {Character} from '../engine/types';
 import {Portrait} from '../components/Portrait';
 import {TelaTopo} from '../components/Casca';
-import {ABAS,PERSONAGENS_DA_ABA,TOTAL_DE_CONQUISTAS,juntar,sugestao,tituloDe,type Aba} from '../lib/conquistas';
+import {PERSONAGENS_DA_ABA,TOTAL_DE_CONQUISTAS,juntar,sugestao,tituloDe} from '../lib/conquistas';
+import {Album} from '../components/Album';
 import {onlineCall,onlineConfigured,type RankingDeConquistas} from '../lib/online';
 import type {Profile} from '../lib/storage';
 
 /*
  * As Conquistas (pedido do jogador): todos os personagens, um por conquista.
  *
- * Sem lista infinita: quatro abas (Anime, Heróis, Games, Desenhos) e, em cada
- * uma, páginas de retratos (6 × 5) que passam de lado com o dedo, com os
- * pontinhos embaixo. O bloqueado fica cinza com cadeado; o liberado fica
+ * Sem lista infinita: o álbum (components/Album.tsx), com as quatro abas e as
+ * páginas que passam de lado. O bloqueado fica cinza com cadeado; o liberado fica
  * colorido, com o anel dourado e o brilho passando, e o recém-liberado ganha
  * o selo NOVO até a tela ser vista.
  *
@@ -21,8 +21,6 @@ import type {Profile} from '../lib/storage';
  * quanto falta para o próximo; com conta, a posição no ranking de conquistas.
  * Embaixo, três sugestões do dia de quem ainda falta.
  */
-const POR_PAGINA=30;
-const paginas=<T,>(lista:T[])=>Array.from({length:Math.max(1,Math.ceil(lista.length/POR_PAGINA))},(_,i)=>lista.slice(i*POR_PAGINA,(i+1)*POR_PAGINA));
 const data=(iso:string)=>new Date(iso).toLocaleDateString('pt-BR');
 
 export function ConquistasScreen({profile,conta,onProfile,onRanking}:{profile:Profile;conta:boolean;onProfile:(p:Profile)=>void;onRanking:()=>void}){
@@ -40,11 +38,7 @@ export function ConquistasScreen({profile,conta,onProfile,onRanking}:{profile:Pr
   },[profile.conquistas]);
 
   const liberadas=Object.keys(conquistas).length,titulo=tituloDe(liberadas);
-  const [aba,setAba]=useState<Aba>('anime'),[pagina,setPagina]=useState(0),[aberto,setAberto]=useState<Character|null>(null);
-  const trilho=useRef<HTMLDivElement>(null);
-  const lista=PERSONAGENS_DA_ABA[aba],folhas=useMemo(()=>paginas(lista),[lista]);
-  const irPara=(p:number)=>{const t=trilho.current;if(!t)return;const alvo=Math.max(0,Math.min(folhas.length-1,p));t.scrollTo({left:alvo*t.clientWidth,behavior:'smooth'});setPagina(alvo);};
-  const trocarAba=(a:Aba)=>{setAba(a);setPagina(0);trilho.current?.scrollTo({left:0});};
+  const [aberto,setAberto]=useState<Character|null>(null);
   const doDia=useMemo(()=>sugestao(conquistas),[conquistas]);
   const R=44,C=2*Math.PI*R,fracao=liberadas/TOTAL_DE_CONQUISTAS;
 
@@ -66,24 +60,14 @@ export function ConquistasScreen({profile,conta,onProfile,onRanking}:{profile:Pr
       </div>
     </div>
 
-    <div className="cq-abas" role="tablist">{ABAS.map(a=>{const da=PERSONAGENS_DA_ABA[a.id],tem=da.filter(c=>conquistas[c.id]).length;return <button key={a.id} role="tab" aria-selected={aba===a.id} className={aba===a.id?'ativo':''} style={{'--aba':a.cor} as CSSProperties} onClick={()=>trocarAba(a.id)}>
-      <b>{a.nome}</b><small>{tem}/{da.length}</small><i style={{width:`${(tem/da.length)*100}%`}}/></button>;})}</div>
-
-    <div className="cq-album" style={{'--aba':ABAS.find(a=>a.id===aba)!.cor} as CSSProperties}>
-      <div className="cq-trilho" ref={trilho} onScroll={e=>{const t=e.currentTarget;const p=Math.round(t.scrollLeft/Math.max(1,t.clientWidth));if(p!==pagina)setPagina(p);}}>
-        {folhas.map((folha,fi)=><div key={`${aba}-${fi}`} className="cq-pagina">{folha.map((c,i)=>{const quando=conquistas[c.id],novo=!!quando&&!vistasAoAbrir.has(c.id);
-          return <button key={c.id} className={`cq-carta ${quando?'liberada':'bloqueada'} ${novo?'novo':''}`} style={{'--character':c.color,'--i':i} as CSSProperties} onClick={()=>setAberto(c)} aria-label={`${c.name}: ${quando?`liberado em ${data(quando)}`:'bloqueado'}`}>
-            <span className="cq-retrato"><Portrait character={c}/>{!quando&&<Lock className="cq-cadeado" size={14}/>}</span>
-            <small>{c.name}</small>
-            {novo&&<em className="cq-novo">NOVO</em>}
-          </button>;})}</div>)}
-      </div>
-      {folhas.length>1&&<div className="cq-paginas">
-        <button aria-label="Página anterior" disabled={pagina===0} onClick={()=>irPara(pagina-1)}><ChevronLeft size={18}/></button>
-        <span>{folhas.map((_,i)=><i key={i} className={i===pagina?'ativo':''} onClick={()=>irPara(i)}/>)}</span>
-        <button aria-label="Próxima página" disabled={pagina>=folhas.length-1} onClick={()=>irPara(pagina+1)}><ChevronRight size={18}/></button>
-      </div>}
-    </div>
+    <Album listas={PERSONAGENS_DA_ABA} rotulo={a=>`${PERSONAGENS_DA_ABA[a].filter(c=>conquistas[c.id]).length}/${PERSONAGENS_DA_ABA[a].length}`}
+      barra={a=>PERSONAGENS_DA_ABA[a].filter(c=>conquistas[c.id]).length/PERSONAGENS_DA_ABA[a].length}
+      carta={(c,i)=>{const quando=conquistas[c.id],novo=!!quando&&!vistasAoAbrir.has(c.id);
+        return <button key={c.id} className={`cq-carta ${quando?'liberada':'bloqueada'} ${novo?'novo':''}`} style={{'--character':c.color,'--i':i} as CSSProperties} onClick={()=>setAberto(c)} aria-label={`${c.name}: ${quando?`liberado em ${data(quando)}`:'bloqueado'}`}>
+          <span className="cq-retrato"><Portrait character={c}/>{!quando&&<Lock className="cq-cadeado" size={14}/>}</span>
+          <small>{c.name}</small>
+          {novo&&<em className="cq-novo">NOVO</em>}
+        </button>;}}/>
 
     {doDia.length>0&&<div className="cq-sugestao">
       <span className="cq-sugestao-rotulo"><Sparkles size={14}/>DESAFIO DO DIA</span>
