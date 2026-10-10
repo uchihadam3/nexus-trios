@@ -31,7 +31,8 @@ describe('compact reusable audiovisual library',()=>{
     // só as folhas das famílias da luta são baixadas; o total é o catálogo inteiro (com os jeitos de bater)
     // cresce com as habilidades desenhadas para cada personagem (Madara, Kakashi, Cloud…); a luta baixa
     // só as folhas de quem está nela, então o catálogo inteiro não pesa no celular
-    expect(bytes).toBeLessThan(28_000_000);
+    // (Piccolo, Charizard, Mega Man, Super-Homem, Hyoga e Hulk ganharam folhas próprias: 30 MB)
+    expect(bytes).toBeLessThan(30_000_000);
     // nenhuma folha decodificada passa de ~4,5 MB na memória (a maior é a faixa de 512 × 96 × 12)
     expect(decodificado/Object.keys(familias).length).toBeLessThan(2_000_000);
     expect(readdirSync(resolve(root,'public/assets/vfx')).filter(x=>x.endsWith('.webp'))).toEqual(['arena.webp']);
@@ -53,9 +54,9 @@ describe('compact reusable audiovisual library',()=>{
     // não são de habilidade: as brasas aparecem no lutador caído (ArenaUnit) e a marca de
     // Provocado por cima de quem recebe o Status, seja qual for o golpe (BattleEffects)
     // e o espelho, os espinhos e as gotas de sangue sobre quem devolve o golpe ou rouba a Vida;
-    // o renascer é o fogo de quem volta sozinho (o beat de Renasceu); a esfera e a terra são as reservas
-    // dos golpes de energia e de pedra sem família própria (vfxProfiles: ícone 'beam' e nomes de terra)
-    const SO_NA_ARENA=new Set(['esfera','terra','renascer','brasas_renascendo','provocar','reflexo','espinhos','vampirismo','dissipar','sono','cegueira','esquiva','ultima_resistencia','copia',...FAMILIAS_DO_JEITO,...Object.values(FAMILIA_DA_INVOCACAO)]);
+    // o renascer é o fogo de quem volta sozinho (o beat de Renasceu); a esfera, a terra e o veneno são as reservas
+    // dos golpes de energia, de pedra e de veneno/peste sem família própria (vfxProfiles: ícone 'beam' e nomes)
+    const SO_NA_ARENA=new Set(['esfera','terra','veneno','renascer','brasas_renascendo','provocar','reflexo','espinhos','vampirismo','dissipar','sono','cegueira','esquiva','ultima_resistencia','copia',...FAMILIAS_DO_JEITO,...Object.values(FAMILIA_DA_INVOCACAO)]);
     for(const f of FAMILIAS)if(!SO_NA_ARENA.has(f))expect(uso.get(f)??0,`${f} usada`).toBeGreaterThan(0);
     for(const [f,n] of uso)expect(n/total,`${f} não domina`).toBeLessThan(.16);
   });
@@ -93,7 +94,8 @@ describe('compact reusable audiovisual library',()=>{
     }
     // a luta baixa só os sons das famílias dos seis lutadores (precarregarLuta)
     // as mecânicas novas (reviver, provocar, refletir, status novos…) trazem sons próprios; a luta continua baixando só os dos seis lutadores
-    expect(bytes).toBeLessThan(21_000_000);
+    // (os sons próprios de Piccolo, Charizard, Mega Man, Super-Homem, Hyoga e Hulk: 23 MB)
+    expect(bytes).toBeLessThan(23_000_000);
     expect(readdirSync(resolve(root,'public/assets/audio/sfx')).filter(x=>x.endsWith('.wav'))).toEqual([]);
   });
   it('a música começa na Intro e, depois do fim, volta ao Encontro',()=>{

@@ -59,6 +59,3 @@
 .hv-numeros b{color:#dfe9db}
 @media (min-width:760px){.home-v2{width:min(820px,100%);gap:20px;padding-top:18px}.hv-logo{height:120px}.hv-medalhao{max-width:130px}.hv-medalhao.m1{max-width:158px}.hv-jogar,.hv-recorde{width:min(560px,100%);justify-self:center}.hv-menu{grid-template-columns:repeat(6,1fr)}.hv-ranqueada{width:min(560px,100%);justify-self:center}}
 @media (prefers-reduced-motion:reduce){.hv-logo h1 span,.hv-logo h1 small,.hv-medalhao,.hv-medalhao .portrait,.hv-cta,.hv-trilha i.agora{animation:none}}
-/* Dicas de trio: decididas aqui, antes da jornada (src/components/BotaoDicas.tsx) */
-.hv-dicas{display:flex;justify-content:center;width:100%}
-.hv-dicas .dv-dicas{margin-top:2px}

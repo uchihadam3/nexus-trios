@@ -67,25 +67,6 @@ def mil_cortes(T, t, rng):
     return G, H
 
 
-def foice(T, t, rng):
-    """Foice: meia-lua enorme varrendo de cima, rastro de névoa e almas sendo puxadas."""
-    G, H = vazio(T)
-    p = ease_out(rel(t, 0, 0.32), 2)
-    env = apaga(t, 0.45, 1)
-    lam = T.arc_band(0.66, 0.14, -3.0, -3.0 + 2.9 * p + 0.01, cx=0.05, cy=0.05, crescente=True) * env
-    nevoa = T.arc_band(0.56, 0.2, -3.0, -3.0 + 2.9 * p + 0.01, cx=0.05, cy=0.05) * env
-    n = _subindo(T, 101, t, 0.07, 0.5)
-    nevoa = nevoa * np.clip(0.5 + 0.5 * n, 0, 1)
-    almas = []
-    for _ in range(10):
-        f = (rng.uniform(0, 1) + t * 0.8) % 1
-        almas.append((rng.uniform(-0.5, 0.5), 0.5 - f * 1.1, math.sin(math.pi * f) * rng.uniform(0.4, 1) * janela(t, 0.2, 0.4)))
-    a = T.splats(almas, 0.025)
-    G += T.glow(lam, 1.2, 1.2, 0.025) + nevoa * 0.6 + a * 1.2
-    H += lam * 0.7 + a * 0.4
-    return G, H
-
-
 def espadao(T, t, rng):
     """Espadão: arco largo e pesado, o chão racha embaixo e blocos voam."""
     G, H = vazio(T)
@@ -269,7 +250,6 @@ REGISTRO = [
     ("corte_vertical", corte_vertical, GRANDE, "corte vertical", False),
     ("iaido", iaido, GRANDE, "saque rápido com clarão atrasado", False),
     ("mil_cortes", mil_cortes, GRANDE, "mil cortes e X final", False),
-    ("foice", foice, GRANDE, "foice em meia-lua", False),
     ("espadao", espadao, GRANDE, "espadão que racha o chão", False),
     ("lamina_de_fogo", lamina_de_fogo, GRANDE, "lâmina de fogo", False),
     ("lamina_eletrica", lamina_eletrica, GRANDE, "lâmina elétrica", False),

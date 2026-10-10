@@ -2,7 +2,6 @@ import type { CSSProperties } from 'react';
 import { ArrowRight,Trophy,CircleHelp,Settings2,Download,Users,Crown,ShieldCheck,Play,LogOut } from 'lucide-react';
 import { byId,characters } from '../data/characters';
 import { Portrait } from '../components/Portrait';
-import { BotaoDicas } from '../components/BotaoDicas';
 import type { Profile, Run } from '../lib/storage';
 import {onlineConfigured} from '../lib/online';
 import { formatarPontos,pontosDaJornada } from '../engine/pontos';
@@ -16,12 +15,12 @@ import { formatarPontos,pontosDaJornada } from '../engine/pontos';
  * e mostra a luta e os pontos de agora. O resto do jogo fica num painel de
  * botões-ícone, como o menu de um jogo.
  */
-interface Props {profile:Profile;run:Run|null;conta:boolean;/** Dicas de trio: decididas aqui, antes da jornada */dicas:boolean;podeDicas:boolean;onDicas:(ligar:boolean)=>void;onPlay:()=>void;onContinue:()=>void;onAbandon:()=>void;onNavigate:(s:'characters'|'ranking'|'conta'|'help'|'settings')=>void;onInstall:()=>void}
+interface Props {profile:Profile;run:Run|null;conta:boolean;onPlay:()=>void;onContinue:()=>void;onAbandon:()=>void;onNavigate:(s:'characters'|'ranking'|'conta'|'help'|'settings')=>void;onInstall:()=>void}
 
 const Fx=({nome,cor,ms,className}:{nome:string;cor:string;ms:number;className:string})=>
   <span aria-hidden className={`uifx uifx-laco ${className}`} style={{'--uifx-img':`url(/assets/ui/fx/${nome}.webp)`,'--uifx-cor':cor,'--uifx-dur':`${ms}ms`} as CSSProperties}/>;
 
-export function Home({profile,run,conta,dicas,podeDicas,onDicas,onPlay,onContinue,onAbandon,onNavigate,onInstall}:Props){
+export function Home({profile,run,conta,onPlay,onContinue,onAbandon,onNavigate,onInstall}:Props){
   const terminal=run?.stage==='result'&&(run.battle?.winner!=='player'||run.index===9);
   const wonCurrent=run?.stage==='result'&&run.battle?.winner==='player';
   const completed=run?run.index+(wonCurrent?1:0):0;
@@ -57,7 +56,6 @@ export function Home({profile,run,conta,dicas,podeDicas,onDicas,onPlay,onContinu
           <Fx nome="brilho" cor="#ffffff" ms={2600} className="hv-brilho"/>
           <Play size={26} fill="currentColor"/><span><b>{run?'VER RESULTADO':'JOGAR'}</b><small>{run?`${formatarPontos(pontosAgora)} pontos nesta jornada`:onlineConfigured&&conta?'10 lutas · vale o ranking':'10 lutas · máximo de pontos'}</small></span><ArrowRight size={22}/>
         </button>}
-      {!emAndamento&&<div className="hv-dicas"><BotaoDicas ligado={dicas} liberado={podeDicas} onMudar={onDicas}/></div>}
       {emAndamento&&<div className="hv-trilha" aria-label={`${completed} de 10 lutas vencidas`}>{Array.from({length:10},(_,i)=><i key={i} className={i<completed?'ok':i===completed?'agora':''}/>)}</div>}
       {(emAndamento||terminal)&&<div className="hv-secundarias">
         {terminal&&<button className="secondary" onClick={onPlay}><Play size={15}/>Nova jornada</button>}

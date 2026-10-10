@@ -1,6 +1,6 @@
 import { useMemo,useState,type CSSProperties } from 'react';
 import { createPortal } from 'react-dom';
-import { ArrowRight,CircleCheck,Crown,Dices,Info,Lightbulb,LogOut,Sparkles,Swords,TriangleAlert,X } from 'lucide-react';
+import { ArrowRight,CircleCheck,Crown,Dices,Info,LogOut,Sparkles,Swords,TriangleAlert,X } from 'lucide-react';
 import type { Draft,Encounter } from '../engine/campaign';
 import { byId } from '../data/characters';
 import { Portrait } from '../components/Portrait';
@@ -10,8 +10,8 @@ import { identidadesDe,identidadesDoTrio,lacunasDoTrio,oQueAdiciona } from '../p
 import { IdentityChips } from '../components/IdentityChips';
 import { ComTermos } from '../components/Termos';
 import { draftConnection } from '../presentation/draft-connections';
+import { BotaoDicas } from '../components/BotaoDicas';
 import { dicasDoDraft,type DicaDoCandidato } from '../presentation/dicas-do-trio';
-import { CUSTO_DAS_DICAS,formatarPontos } from '../engine/pontos';
 
 /*
  * A escolha do trio (remake).
@@ -32,7 +32,7 @@ import { CUSTO_DAS_DICAS,formatarPontos } from '../engine/pontos';
  */
 const NIVEL=(n:number)=>n>=80?{rotulo:'ÓTIMO',cor:'#7dff9b'}:n>=55?{rotulo:'BOM',cor:'#c8f560'}:n>=35?{rotulo:'OK',cor:'#ffd166'}:{rotulo:'FRACO',cor:'#ff7a85'};
 const primeiroNome=(id:string)=>byId[id].name.split(/[ ,]/)[0];
-export function DraftScreen({draft,primeiroRival,dicas,onPick,onSkip,onDetails,onStart,onAbandon}:{draft:Draft;primeiroRival?:Encounter;/** a jornada foi aberta com as Dicas de trio ligadas */dicas:boolean;onPick:(id:string)=>void;onSkip:()=>void;onDetails:(id:string)=>void;onStart:()=>void;onAbandon:()=>void}){
+export function DraftScreen({draft,primeiroRival,dicas,podeDicas,usouDicas,onDicas,onPick,onSkip,onDetails,onStart,onAbandon}:{draft:Draft;primeiroRival?:Encounter;dicas:boolean;/** o botão só liga para quem liberou as Dicas (src/lib/dicas-liberadas.ts) */podeDicas:boolean;usouDicas:boolean;onDicas:(ligar:boolean)=>void;onPick:(id:string)=>void;onSkip:()=>void;onDetails:(id:string)=>void;onStart:()=>void;onAbandon:()=>void}){
   const full=draft.team.length===3,team=draft.team.map(id=>byId[id]);
   const doTrio=identidadesDoTrio(team),lacunas=lacunasDoTrio(team);
   const vez=draft.team.length;
@@ -52,11 +52,7 @@ export function DraftScreen({draft,primeiroRival,dicas,onPick,onSkip,onDetails,o
         </button>
         :<div key={`vazio-${i}`} className={`dv-espaco ${i===vez&&!full?'vez':''}`}><span>?</span><b>{i===vez?'escolha agora':`espaço ${i+1}`}</b></div>;})}</div>
       {team.length>0&&<div className="dv-trio-faz"><IdentityChips ids={doTrio} trio={doTrio}/>{ligadas&&lacunas.length>0&&<small><TriangleAlert size={13}/>{lacunas.join(' · ')}</small>}</div>}
-      {/* as Dicas são decididas na tela inicial, antes da jornada (src/components/BotaoDicas.tsx): aqui só o aviso */}
-      {dicas&&<div className="dv-dicas ligado aviso" role="status">
-        <span className="dv-dicas-lampada"><Lightbulb size={20}/></span>
-        <span className="dv-dicas-texto"><b>DICAS DE TRIO</b><small>ligadas nesta jornada · <em>−{formatarPontos(CUSTO_DAS_DICAS)} por luta</em></small></span>
-      </div>}
+      {(!full||usouDicas)&&<BotaoDicas ligado={dicas} liberado={podeDicas} usado={usouDicas} desativado={full} onMudar={onDicas}/>}
     </header>
 
     {!full&&<div className="dv-cartas" key={draft.candidates.join('-')}>{draft.candidates.map((id,i)=>{

@@ -519,12 +519,30 @@ def reforco(rng, v):
 
 
 def enfraquecer(rng, v):
-    n = n_de(0.9)
-    f = varre(nota(rng.uniform(62, 65)), nota(rng.uniform(48, 50)), n, 0.8)
-    x = (seno(f, n) * 0.25 + seno(f * 1.06, n) * 0.18) * env(n, 0.01, 0.35)          # duas notas desafinadas descendo
-    x += baque(n, 90, 50, 0.1, 0.1) * 0.4
-    x += passa(rosa(rng, n), 300, 1200, 2) * env(n, 0.02, 0.2) * 0.15
-    return reverb(x, 0.6, 0.3, 4000)
+    """O debuff entrando no rival (pedido do jogador: "tá tipo um sininho… não faz sentido"): nada de
+    nota aguda. Um "fuuum" escuro sendo sugado para baixo (ruído que fecha o filtro), a pancada abafada
+    e grave quando o mal gruda, e um ronco dissonante bem grave que cai e some."""
+    n = n_de(0.95)
+    t = np.arange(n) / SR
+    x = np.zeros(n)
+    # o puxão: ruído rosa com o "brilho" fechando (de 1800 para 250 Hz), crescendo até o impacto
+    m = n_de(0.32)
+    puxa = passa(rosa(rng, m), 120, 1800, 2) * 0.6 + passa(rosa(rng, m), 120, 500, 2) * 0.6
+    puxa *= np.linspace(0.15, 1.0, m) ** 2
+    poe(x, puxa * 0.55, 0.0)
+    # o impacto abafado
+    poe(x, baque(n_de(0.5), 75, 32, 0.16, 0.25) * 0.9, 0.3)
+    # o ronco dissonante grave (segunda menor), caindo de leve e saturado
+    r = n_de(0.6)
+    tr = np.arange(r) / SR
+    queda = 1 - 0.12 * (tr / tr[-1])
+    ronco = serra_suave(55 * queda, r, 10) * 0.5 + serra_suave(58.3 * queda, r, 10) * 0.45
+    ronco = passa(satura(ronco, 1.8), None, 900, 2) * env(r, 0.01, 0.45)
+    poe(x, ronco * 0.45, 0.3)
+    # o resto do mal se espalhando: um chiado grave que some
+    poe(x, passa(rosa(rng, n_de(0.5)), 60, 400, 2) * env(n_de(0.5), 0.02, 0.4) * 0.3, 0.34)
+    _ = t
+    return reverb(x, 0.5, 0.22, 2500)
 
 
 def purificar(rng, v):
@@ -859,7 +877,7 @@ def _registra_novos():
     SONS.update(sfx_familias.SONS_NOVOS)
     ALVO_DB.update(sfx_familias.ALVO_NOVO)
     # o som próprio de cada ataque básico (tools/audio/sfx_basicos_*.py), um módulo por lote
-    for modulo in [f"sfx_basicos_{letra}" for letra in "abcdefghij"] + ["sfx_madara", "sfx_viagens", "sfx_ninjas", "sfx_cloud_dk", "sfx_naruto_ikki_luffy", "sfx_toph_gon", "sfx_piccolo", "sfx_herois"]:
+    for modulo in [f"sfx_basicos_{letra}" for letra in "abcdefghij"] + ["sfx_madara", "sfx_viagens", "sfx_ninjas", "sfx_cloud_dk", "sfx_naruto_ikki_luffy", "sfx_toph_gon", "sfx_piccolo", "sfx_herois", "sfx_hulk", "sfx_aiolia_arthas", "sfx_aang_sakura"]:
         m = importlib.import_module(modulo)
         for nome, (fn, desc) in m.SONS.items():
             SONS[nome] = (fn, desc)

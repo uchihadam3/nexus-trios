@@ -288,20 +288,6 @@ def tsunami(T, t, rng):
     return G, H
 
 
-def jato_dagua(T, t, rng):
-    """Jato d'água: um fluxo grosso e ondulado com bolhas e espuma nas bordas (faixa)."""
-    G, H = vazio(T)
-    n = np.roll(T.noise(np.random.default_rng(511), 0.03, 3), int(t * T.W), axis=1)
-    larg = 0.05 * (1 + 0.25 * n)
-    perfil = np.exp(-np.abs(T.V / larg) ** 2.2)
-    bordas = np.exp(-((np.abs(T.V) - larg) / 0.01) ** 2) * (0.5 + 0.5 * np.clip(n, 0, 1))
-    listras = 0.75 + 0.25 * np.sin(T.U * 30 - t * TAU * 4 + T.V * 40)
-    ponta = smooth(T.U, -0.99, -0.9) * smooth(-T.U, -0.99, -0.94)
-    G += (perfil * 1.3 * listras + bordas * 1.2) * ponta
-    H += (bordas * 0.8 + perfil * 0.4) * ponta
-    return G, H
-
-
 def areia(T, t, rng):
     """Areia: grãos girando e subindo em volta do alvo até fecharem num casulo."""
     G, H = vazio(T)
@@ -586,7 +572,6 @@ REGISTRO = [
     ("raio_em_cadeia", raio_em_cadeia, GRANDE, "raio pulando em cadeia", False),
     ("chidori", chidori, GRANDE, "mil pássaros", False),
     ("tsunami", tsunami, GRANDE, "onda gigante", False),
-    ("jato_dagua", jato_dagua, FAIXA, "jato d'água (faixa)", True),
     ("areia", areia, GRANDE, "casulo de areia", False),
     ("espinhos_de_terra", espinhos_de_terra, GRANDE, "pontas de pedra em linha", False),
     ("metal", metal, GRANDE, "chapas de metal fechando", False),

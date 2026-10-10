@@ -291,6 +291,23 @@
    ],
    "bytes": 89602
   },
+  "avatar-brilho": {
+   "arquivo": "avatar-brilho.mp3",
+   "descricao": "o Estado Avatar acendendo",
+   "versoes": [
+    0.0,
+    2.28,
+    4.6398,
+    6.8454
+   ],
+   "duracoes": [
+    2.2,
+    2.2798,
+    2.1256,
+    2.2335
+   ],
+   "bytes": 64997
+  },
   "ave-fenix": {
    "arquivo": "ave-fenix.mp3",
    "descricao": "Ave Fênix: o grito da fênix e o fogo estourando",
@@ -682,6 +699,40 @@
    ],
    "bytes": 48581
   },
+  "byakugou": {
+   "arquivo": "byakugou.mp3",
+   "descricao": "Byakugou: a cura grande no trio",
+   "versoes": [
+    0.0,
+    1.8617,
+    3.7703,
+    5.5655
+   ],
+   "duracoes": [
+    1.7817,
+    1.8286,
+    1.7152,
+    1.8143
+   ],
+   "bytes": 70469
+  },
+  "byakugou-selo": {
+   "arquivo": "byakugou-selo.mp3",
+   "descricao": "o selo do Byakugou acendendo",
+   "versoes": [
+    0.0,
+    1.38,
+    2.8071,
+    4.1432
+   ],
+   "duracoes": [
+    1.3,
+    1.3471,
+    1.256,
+    1.3198
+   ],
+   "bytes": 43476
+  },
   "cajado-da-caveira": {
    "arquivo": "cajado-da-caveira.mp3",
    "descricao": "básico do Esqueleto: pancada do cajado e magia sinistra",
@@ -919,6 +970,23 @@
     0.9869
    ],
    "bytes": 39378
+  },
+  "ceifadora-de-almas": {
+   "arquivo": "ceifadora-de-almas.mp3",
+   "descricao": "Ceifadora de Almas: o corte gelado e a alma arrancada",
+   "versoes": [
+    0.0,
+    1.68,
+    3.418,
+    5.0439
+   ],
+   "duracoes": [
+    1.6,
+    1.658,
+    1.5459,
+    1.6244
+   ],
+   "bytes": 59434
   },
   "chama-do-triangulo": {
    "arquivo": "chama-do-triangulo.mp3",
@@ -1243,6 +1311,23 @@
    ],
    "bytes": 37496
   },
+  "controle-de-chakra": {
+   "arquivo": "controle-de-chakra.mp3",
+   "descricao": "Controle de chakra: o chakra apertando no punho",
+   "versoes": [
+    0.0,
+    1.38,
+    2.8071,
+    4.1432
+   ],
+   "duracoes": [
+    1.3,
+    1.3471,
+    1.256,
+    1.3198
+   ],
+   "bytes": 53182
+  },
   "copia": {
    "arquivo": "copia.mp3",
    "descricao": "família copia",
@@ -1480,6 +1565,23 @@
     1.3198
    ],
    "bytes": 51503
+  },
+  "cosmo-leao": {
+   "arquivo": "cosmo-leao.mp3",
+   "descricao": "o cosmo dourado do Aiolia subindo",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 87575
   },
   "cqc": {
    "arquivo": "cqc.mp3",
@@ -1736,6 +1838,23 @@
    ],
    "bytes": 40898
   },
+  "dobra-de-agua": {
+   "arquivo": "dobra-de-agua.mp3",
+   "descricao": "Dobra de água: o chicote de água e a bolha",
+   "versoes": [
+    0.0,
+    1.78,
+    3.6217,
+    5.3441
+   ],
+   "duracoes": [
+    1.7,
+    1.7617,
+    1.6425,
+    1.7259
+   ],
+   "bytes": 63807
+  },
   "dominio": {
    "arquivo": "dominio.mp3",
    "descricao": "família dominio",
@@ -1826,17 +1945,17 @@
    "descricao": "debuff",
    "versoes": [
     0.0,
-    0.98,
-    1.9926,
-    2.9422
+    1.03,
+    2.0944,
+    3.0923
    ],
    "duracoes": [
-    0.9,
-    0.9326,
-    0.8695,
-    0.9137
+    0.95,
+    0.9844,
+    0.9179,
+    0.9644
    ],
-   "bytes": 24603
+   "bytes": 30621
   },
   "enfraquecimento": {
    "arquivo": "enfraquecimento.mp3",
@@ -1871,6 +1990,23 @@
     1.3198
    ],
    "bytes": 23221
+  },
+  "erguer-os-mortos": {
+   "arquivo": "erguer-os-mortos.mp3",
+   "descricao": "Erguer os mortos: os ossos subindo e o escudo",
+   "versoes": [
+    0.0,
+    1.98,
+    4.0289,
+    5.9446
+   ],
+   "duracoes": [
+    1.9,
+    1.9689,
+    1.8357,
+    1.9289
+   ],
+   "bytes": 68913
   },
   "errou": {
    "arquivo": "errou.mp3",
@@ -2194,6 +2330,23 @@
     2.0305
    ],
    "bytes": 73143
+  },
+  "estado-avatar-aang": {
+   "arquivo": "estado-avatar-aang.mp3",
+   "descricao": "Estado Avatar: o tornado com os quatro elementos",
+   "versoes": [
+    0.0,
+    2.38,
+    4.8434,
+    7.1456
+   ],
+   "duracoes": [
+    2.3,
+    2.3834,
+    2.2222,
+    2.335
+   ],
+   "bytes": 88617
   },
   "estalo-de-dedos": {
    "arquivo": "estalo-de-dedos.mp3",
@@ -2603,22 +2756,22 @@
    ],
    "bytes": 61307
   },
-  "foice": {
-   "arquivo": "foice.mp3",
-   "descricao": "família foice",
+  "forca-monstruosa": {
+   "arquivo": "forca-monstruosa.mp3",
+   "descricao": "Força monstruosa: o soco que racha o chão",
    "versoes": [
     0.0,
-    1.01,
-    2.0526,
-    3.0322
+    1.8774,
+    3.9263,
+    5.842
    ],
    "duracoes": [
-    0.93,
-    0.9626,
-    0.8995,
-    0.9437
+    1.7974,
+    1.9689,
+    1.8357,
+    1.8751
    ],
-   "bytes": 34898
+   "bytes": 63023
   },
   "frigideira": {
    "arquivo": "frigideira.mp3",
@@ -2653,6 +2806,23 @@
     1.5228
    ],
    "bytes": 58330
+  },
+  "furia-hulk": {
+   "arquivo": "furia-hulk.mp3",
+   "descricao": "a fúria do Hulk crescendo",
+   "versoes": [
+    0.0,
+    1.68,
+    3.418,
+    5.0439
+   ],
+   "duracoes": [
+    1.6,
+    1.658,
+    1.5459,
+    1.6244
+   ],
+   "bytes": 63317
   },
   "gadget-surpresa": {
    "arquivo": "gadget-surpresa.mp3",
@@ -3147,6 +3317,23 @@
    ],
    "bytes": 23845
   },
+  "hulk-esmaga": {
+   "arquivo": "hulk-esmaga.mp3",
+   "descricao": "Esmagar: o estrondo dos dois punhos no chão",
+   "versoes": [
+    0.0,
+    2.1124,
+    4.3421,
+    6.3812
+   ],
+   "duracoes": [
+    2.0324,
+    2.1497,
+    1.9591,
+    2.1067
+   ],
+   "bytes": 70868
+  },
   "iaido": {
    "arquivo": "iaido.mp3",
    "descricao": "família iaido",
@@ -3469,23 +3656,6 @@
     1.3198
    ],
    "bytes": 51133
-  },
-  "jato-dagua": {
-   "arquivo": "jato-dagua.mp3",
-   "descricao": "família jato dagua",
-   "versoes": [
-    0.0,
-    0.98,
-    1.9926,
-    2.9422
-   ],
-   "duracoes": [
-    0.9,
-    0.9326,
-    0.8695,
-    0.9137
-   ],
-   "bytes": 49440
   },
   "kagune": {
    "arquivo": "kagune.mp3",
@@ -4098,6 +4268,23 @@
     1.3198
    ],
    "bytes": 44275
+  },
+  "mais-forte-ainda": {
+   "arquivo": "mais-forte-ainda.mp3",
+   "descricao": "Mais forte ainda: o gancho de baixo para cima",
+   "versoes": [
+    0.0,
+    1.048,
+    2.1361,
+    3.1592
+   ],
+   "duracoes": [
+    0.968,
+    1.008,
+    0.9431,
+    1.0276
+   ],
+   "bytes": 33889
   },
   "makanko-carga": {
    "arquivo": "makanko-carga.mp3",
@@ -4847,23 +5034,6 @@
    ],
    "bytes": 45502
   },
-  "plasma": {
-   "arquivo": "plasma.mp3",
-   "descricao": "família plasma",
-   "versoes": [
-    0.0,
-    0.98,
-    1.9926,
-    2.9422
-   ],
-   "duracoes": [
-    0.9,
-    0.9326,
-    0.8695,
-    0.9137
-   ],
-   "bytes": 56944
-  },
   "poeira-de-diamante": {
    "arquivo": "poeira-de-diamante.mp3",
    "descricao": "Pó de Diamante: o vento gelado e os cristais",
@@ -4931,6 +5101,23 @@
     0.6091
    ],
    "bytes": 23200
+  },
+  "praga-da-carne": {
+   "arquivo": "praga-da-carne.mp3",
+   "descricao": "Praga da Carne: a névoa da peste e a vida sugada",
+   "versoes": [
+    0.0,
+    2.38,
+    4.8434,
+    7.1456
+   ],
+   "duracoes": [
+    2.3,
+    2.3834,
+    2.2222,
+    2.335
+   ],
+   "bytes": 88943
   },
   "preparo": {
    "arquivo": "preparo.mp3",
@@ -5374,6 +5561,23 @@
    ],
    "bytes": 31536
   },
+  "rajada-do-aang": {
+   "arquivo": "rajada-do-aang.mp3",
+   "descricao": "Rajada de ar: a bola de vento e o estouro",
+   "versoes": [
+    0.0,
+    1.58,
+    3.2144,
+    4.7437
+   ],
+   "duracoes": [
+    1.5,
+    1.5544,
+    1.4493,
+    1.5228
+   ],
+   "bytes": 52927
+  },
   "rasengan": {
    "arquivo": "rasengan.mp3",
    "descricao": "Rasengan: o giro, a broca e o estouro",
@@ -5560,6 +5764,23 @@
     1.0152
    ],
    "bytes": 52309
+  },
+  "relampago-de-plasma": {
+   "arquivo": "relampago-de-plasma.mp3",
+   "descricao": "Relâmpago de Plasma: a rajada de raios",
+   "versoes": [
+    0.0,
+    1.5205,
+    3.0359,
+    4.4757
+   ],
+   "duracoes": [
+    1.4405,
+    1.4354,
+    1.3598,
+    1.4033
+   ],
+   "bytes": 82466
   },
   "relogio": {
    "arquivo": "relogio.mp3",
@@ -5781,6 +6002,57 @@
     1.1167
    ],
    "bytes": 43493
+  },
+  "rugido-do-hulk": {
+   "arquivo": "rugido-do-hulk.mp3",
+   "descricao": "Rugido: o urro longo e grave",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 67066
+  },
+  "rugido-do-leao": {
+   "arquivo": "rugido-do-leao.mp3",
+   "descricao": "Rugido do Leão: o rugido e a explosão dourada",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 85199
+  },
+  "runa-lich": {
+   "arquivo": "runa-lich.mp3",
+   "descricao": "as runas da Frostmourne girando",
+   "versoes": [
+    0.0,
+    2.18,
+    4.4361,
+    6.5451
+   ],
+   "duracoes": [
+    2.1,
+    2.1761,
+    2.029,
+    2.132
+   ],
+   "bytes": 73237
   },
   "runas": {
    "arquivo": "runas.mp3",
@@ -6121,6 +6393,23 @@
     1.1744
    ],
    "bytes": 48420
+  },
+  "soco-do-hulk": {
+   "arquivo": "soco-do-hulk.mp3",
+   "descricao": "o soco do Hulk: vento pesado e impacto grave",
+   "versoes": [
+    0.0,
+    1.18,
+    2.3999,
+    3.5427
+   ],
+   "duracoes": [
+    1.1,
+    1.1399,
+    1.0628,
+    1.1167
+   ],
+   "bytes": 35612
   },
   "soco-do-stand": {
    "arquivo": "soco-do-stand.mp3",
@@ -7022,6 +7311,23 @@
     0.9137
    ],
    "bytes": 37066
+  },
+  "velocidade-da-luz": {
+   "arquivo": "velocidade-da-luz.mp3",
+   "descricao": "Velocidade da Luz: os cortes de luz em sequência",
+   "versoes": [
+    0.0,
+    1.5155,
+    3.0694,
+    4.5964
+   ],
+   "duracoes": [
+    1.4355,
+    1.4739,
+    1.447,
+    1.5083
+   ],
+   "bytes": 91132
   },
   "velocidade-divina": {
    "arquivo": "velocidade-divina.mp3",

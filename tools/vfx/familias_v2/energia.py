@@ -254,27 +254,6 @@ def dominio(T, t, rng):
     return G, H
 
 
-def plasma(T, t, rng):
-    """Plasma: esfera instável pulsando, arcos se soltando da superfície e voltando."""
-    G, H = vazio(T)
-    env = janela(t, 0, 0.1) * apaga(t, 0.6, 1)
-    s = 0.22 * (1 + 0.1 * math.sin(t * 35)) * (0.7 + 0.3 * ease_out(rel(t, 0, 0.2), 2))
-    nucleo = T.gauss(0, 0, s * 0.6) * 2.2 + T.ring(s, 0.03) * 1.2
-    sub = np.random.default_rng(int(t * 997) + 361)
-    arcos = T.zero()
-    for _ in range(5):
-        a = sub.uniform(0, TAU)
-        b = a + sub.uniform(-0.8, 0.8)
-        far = sub.uniform(0.45, 0.75)
-        m = (a + b) / 2
-        pts = jagged(sub, math.cos(a) * s, math.sin(a) * s, math.cos(m) * far, math.sin(m) * far, 3, 0.3)
-        pts += jagged(sub, math.cos(m) * far, math.sin(m) * far, math.cos(b) * s, math.sin(b) * s, 3, 0.3)
-        arcos += T.polyline(pts, 0.012, 1)
-    G += (nucleo + T.glow(arcos, 1.3, 1.5, 0.02)) * env
-    H += (nucleo * 1.1 + arcos) * env
-    return G, H
-
-
 def desintegrar(T, t, rng):
     """Desintegrar (Hakai): o alvo se desfaz em grãos de luz que sobem e somem no ar."""
     G, H = vazio(T)
@@ -310,6 +289,5 @@ REGISTRO = [
     ("atracao", atracao, GRANDE, "tudo puxado para um ponto", False),
     ("repulsao", repulsao, GRANDE, "estouro para fora", False),
     ("dominio", dominio, GRANDE, "domínio de céu infinito", False),
-    ("plasma", plasma, GRANDE, "esfera de plasma", False),
     ("desintegrar", desintegrar, GRANDE, "desintegração em grãos", False),
 ]

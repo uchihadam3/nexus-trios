@@ -96,7 +96,7 @@ export const AJUSTE_DE_FORCA: Record<string, number> = {
   "hiei": 1.02,
   "hisoka": 1.09,
   "homer": 1.13,
-  "hulk": 1.03,
+  "hulk": 1.0,
   "hyoga": 0.97,
   "ichigo": 1.12,
   "ikki": 0.69,

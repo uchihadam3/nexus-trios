@@ -237,6 +237,34 @@
   "laco": true,
   "bytes": 64266
  },
+ "avatar_aang": {
+  "descricao": "Aang · o tornado do Estado Avatar com os quatro elementos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 124304
+ },
+ "avatar_brilho": {
+  "descricao": "Aang · as setas acendendo e os quatro elementos (laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 38322
+ },
  "bala_de_canhao": {
   "descricao": "bala de canhão em viagem (+x)",
   "quadros": 12,
@@ -447,6 +475,20 @@
   "laco": false,
   "bytes": 28502
  },
+ "bola_de_ar": {
+  "descricao": "Aang · a Rajada de ar voando em espiral (laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 19932
+ },
  "bola_de_fogo": {
   "descricao": "bola de fogo em viagem (+x)",
   "quadros": 12,
@@ -628,6 +670,34 @@
   ],
   "laco": false,
   "bytes": 20936
+ },
+ "byakugou_cura": {
+  "descricao": "Sakura · a luz verde da cura com o losango e as pétalas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 63548
+ },
+ "byakugou_selo": {
+  "descricao": "Sakura · o selo do Byakugou acendendo (laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 35702
  },
  "cajado_da_caveira": {
   "descricao": "Cajado da Caveira: o crânio de carneiro bate e solta faíscas mágicas num círculo",
@@ -866,6 +936,20 @@
   ],
   "laco": false,
   "bytes": 88196
+ },
+ "ceifadora_de_almas": {
+  "descricao": "Arthas · a Frostmourne corta e arranca a alma",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 35922
  },
  "chama_do_triangulo": {
   "descricao": "Bill Cipher: triângulo de olho que derrama chama azul",
@@ -1175,6 +1259,20 @@
   "laco": false,
   "bytes": 30830
  },
+ "controle_de_chakra": {
+  "descricao": "Sakura · o chakra apertando no punho",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 70372
+ },
  "copia": {
   "descricao": "linhas de leitura, vírgulas girando e a forma copiada piscando",
   "quadros": 12,
@@ -1398,6 +1496,20 @@
   ],
   "laco": false,
   "bytes": 152864
+ },
+ "cosmo_leao": {
+  "descricao": "Aiolia · o cosmo dourado e a juba do leão (laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 102378
  },
  "cqc": {
   "descricao": "Snake: '!' de alerta, agarrão, giro no ar e queda com poeira",
@@ -1637,6 +1749,20 @@
   "laco": false,
   "bytes": 158706
  },
+ "dobra_de_agua": {
+  "descricao": "Aang · o chicote de água fecha a bolha no aliado",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 54350
+ },
  "dominio": {
   "descricao": "domínio de céu infinito",
   "quadros": 12,
@@ -1748,6 +1874,20 @@
   ],
   "laco": false,
   "bytes": 40408
+ },
+ "erguer_os_mortos": {
+  "descricao": "Arthas · as mãos de osso sobem e fecham o escudo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 118304
  },
  "escudo": {
   "descricao": "cúpula de escudo",
@@ -2463,8 +2603,8 @@
   "laco": true,
   "bytes": 20324
  },
- "foice": {
-  "descricao": "foice em meia-lua",
+ "forca_monstruosa": {
+  "descricao": "Sakura · o soco que racha o chão, com as pétalas",
   "quadros": 12,
   "grade": [
    3,
@@ -2475,7 +2615,7 @@
    192
   ],
   "laco": false,
-  "bytes": 45696
+  "bytes": 75270
  },
  "frigideira": {
   "descricao": "Frigideira: acerta de lado com um BONG, treme em ondas e estrelinhas",
@@ -2504,6 +2644,20 @@
   ],
   "laco": false,
   "bytes": 74812
+ },
+ "furia_hulk": {
+  "descricao": "Hulk · a fúria: aura verde, raios e vapor",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 88914
  },
  "gadget_surpresa": {
   "descricao": "Gadget surpresa: luva de boxe numa mola sai da esquerda e acerta com POW",
@@ -2855,6 +3009,20 @@
   "laco": false,
   "bytes": 116754
  },
+ "grito_hulk": {
+  "descricao": "Hulk · o rugido saindo dele em arcos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": false,
+  "bytes": 34036
+ },
  "guarda_buster": {
   "descricao": "Cloud · a guarda com a Buster Sword de pé (nele)",
   "quadros": 12,
@@ -2896,6 +3064,20 @@
   ],
   "laco": false,
   "bytes": 73684
+ },
+ "hulk_esmaga": {
+  "descricao": "Hulk · Esmagar: os dois punhos do alto, a cratera e as estrelinhas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 90474
  },
  "iaido": {
   "descricao": "saque rápido com clarão atrasado",
@@ -3134,20 +3316,6 @@
   ],
   "laco": false,
   "bytes": 44308
- },
- "jato_dagua": {
-  "descricao": "jato d'água (faixa)",
-  "quadros": 12,
-  "grade": [
-   3,
-   4
-  ],
-  "tamanho": [
-   512,
-   96
-  ],
-  "laco": true,
-  "bytes": 226474
  },
  "kagune": {
   "descricao": "Kaneki: quatro kagune segmentados descem e perfuram",
@@ -3485,6 +3653,20 @@
   "laco": true,
   "bytes": 10286
  },
+ "leao_dourado": {
+  "descricao": "Aiolia · o Rugido do Leão voando (laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 36142
+ },
  "lentidao": {
   "descricao": "ampulheta",
   "quadros": 12,
@@ -3596,6 +3778,20 @@
   ],
   "laco": false,
   "bytes": 126240
+ },
+ "mais_forte_ainda": {
+  "descricao": "Hulk · Mais forte ainda: o gancho de baixo para cima",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 45240
  },
  "makanko_carga": {
   "descricao": "Piccolo · os dedos na testa e a espiral de ki apertando (laço)",
@@ -4255,19 +4451,19 @@
   "laco": false,
   "bytes": 81428
  },
- "plasma": {
-  "descricao": "esfera de plasma",
+ "plasma_faixa": {
+  "descricao": "Aiolia · os raios do Relâmpago de Plasma (faixa)",
   "quadros": 12,
   "grade": [
    3,
    4
   ],
   "tamanho": [
-   192,
-   192
+   512,
+   96
   ],
-  "laco": false,
-  "bytes": 74736
+  "laco": true,
+  "bytes": 217142
  },
  "portal": {
   "descricao": "portal",
@@ -4296,6 +4492,20 @@
   ],
   "laco": false,
   "bytes": 129142
+ },
+ "praga_da_carne": {
+  "descricao": "Arthas · a névoa da peste com caveiras e gelo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 97662
  },
  "prisao": {
   "descricao": "prisão de barras",
@@ -4661,6 +4871,20 @@
   "laco": false,
   "bytes": 63246
  },
+ "rajada_aang": {
+  "descricao": "Aang · o vento estourando no rival",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 98838
+ },
  "rajada_de_ar": {
   "descricao": "arcos de vento",
   "quadros": 12,
@@ -4828,6 +5052,20 @@
   ],
   "laco": false,
   "bytes": 94526
+ },
+ "relampago_de_plasma": {
+  "descricao": "Aiolia · os raios acertando o rival",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 109460
  },
  "relogio": {
   "descricao": "mostrador de relógio",
@@ -5024,6 +5262,48 @@
   ],
   "laco": false,
   "bytes": 46664
+ },
+ "rugido_do_hulk": {
+  "descricao": "Hulk · as ondas do rugido chegando, o rival treme",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 39720
+ },
+ "rugido_do_leao": {
+  "descricao": "Aiolia · a explosão dourada com a juba",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 142508
+ },
+ "runa_lich": {
+  "descricao": "Arthas · as runas girando no Preparo (laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 82942
  },
  "runas": {
   "descricao": "círculo de runas",
@@ -5374,6 +5654,20 @@
   ],
   "laco": false,
   "bytes": 100482
+ },
+ "soco_do_hulk": {
+  "descricao": "Hulk · o soco enorme e a onda de choque para os lados",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 53850
  },
  "soco_do_stand": {
   "descricao": "Soco do Stand de Jotaro: punho fantasma com vultos e eco",
@@ -6004,6 +6298,20 @@
   ],
   "laco": false,
   "bytes": 69338
+ },
+ "velocidade_da_luz": {
+  "descricao": "Aiolia · a grade de plasma cruzando o campo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 112330
  },
  "velocidade_divina": {
   "descricao": "Killua · Velocidade divina: aparece em volta e bate de todos os lados",

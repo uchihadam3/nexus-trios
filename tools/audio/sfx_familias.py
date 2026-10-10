@@ -192,15 +192,6 @@ def mil_cortes(rng, v):
     return x
 
 
-def foice(rng, v):
-    x = _z(1.0)
-    n = n_de(0.45)
-    poe(x, assobio(rng, n, 200, 1400, 1.0, 0.5) * sobe_e_some(n, 0.7, 1.5) * 0.9, 0)
-    poe(x, B.corte(rng, v), 0.3, 0.7)
-    poe(x, B.sombra(rng, v)[: n_de(0.6)] * 0.4, 0.3)
-    return x
-
-
 def espadao(rng, v):
     x = _z(1.1)
     poe(x, _whoosh(rng, 0.3, 200, 1800, 0.85, g=1.0), 0)
@@ -506,14 +497,6 @@ def dominio(rng, v):
     return reverb(x, 0.9, 0.45, 6000)
 
 
-def plasma(rng, v):
-    n = n_de(0.9)
-    t = np.arange(n) / SR
-    x = satura(seno(180 + 40 * np.sin(2 * math.pi * 9 * t), n), 5) * env(n, 0.01, 0.4, segura=0.3) * 0.3
-    x += graos(rng, n, 40, 0, 0.7, 2000, 9000, 0.002) * 0.5
-    return reverb(x, 0.35, 0.2)
-
-
 def desintegrar(rng, v):
     n = n_de(1.3)
     x = graos(rng, n, 140, 0.05, 1.0, 3000, 11000, 0.003) * 0.6 * np.linspace(1, 0.2, n)
@@ -618,14 +601,6 @@ def tsunami(rng, v):
     poe(x, B.agua(rng, v) * 0.9, 0.7)
     poe(x, baque(n_de(0.6), 60, 30, 0.3, 0.2) * 0.7, 0.8)
     return reverb(x, 0.7, 0.3, 3500)
-
-
-def jato_dagua(rng, v):
-    n = n_de(0.9)
-    t = np.arange(n) / SR
-    x = passa(ruido(rng, n), 800, 6000, 2) * env(n, 0.02, 0.4, segura=0.4) * 0.5 * (0.8 + 0.2 * np.sin(2 * math.pi * 17 * t))
-    x += graos(rng, n, 30, 0.1, 0.8, 600, 2000, 0.01) * 0.3
-    return x
 
 
 def areia(rng, v):
