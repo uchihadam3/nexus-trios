@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { characters } from '../src/data/characters';
-import { ABAS, PERSONAGENS_DA_ABA, TOTAL_DE_CONQUISTAS, juntar, liberar, limpar, sugestao, tituloDe } from '../src/lib/conquistas';
+import { ABAS, PERSONAGENS_DA_ABA, PULOS_DO_DESAFIO, TOTAL_DE_CONQUISTAS, ateMeiaNoite, desafioDoDia, hoje, juntar, liberar, limpar, sugestao, tituloDe } from '../src/lib/conquistas';
 
 describe('Conquistas: uma por personagem', () => {
   it('são 250, e cada personagem está em exatamente uma aba', () => {
@@ -41,5 +41,26 @@ describe('Conquistas: uma por personagem', () => {
     expect(s).toHaveLength(3);
     expect(s.some((c) => c.id === 'goku')).toBe(false);
     expect(sugestao({}, '2026-10-10').map((c) => c.id)).toEqual(sugestao({}, '2026-10-10').map((c) => c.id));
+  });
+});
+
+describe('Desafio do Dia', () => {
+  it('três que faltam, os mesmos o dia todo, e outros três no dia seguinte', () => {
+    const d = desafioDoDia(undefined, { goku: '2026-10-01T00:00:00.000Z' }, '2026-10-10');
+    expect(d.ids).toHaveLength(3);
+    expect(d.ids).not.toContain('goku');
+    // liberou um no meio do dia: os três guardados continuam os mesmos (o liberado só sai da tela)
+    const depois = desafioDoDia(d, { goku: '2026-10-01T00:00:00.000Z', [d.ids[0]!]: '2026-10-10T12:00:00.000Z' }, '2026-10-10');
+    expect(depois).toEqual(d);
+    const amanha = desafioDoDia(d, {}, '2026-10-11');
+    expect(amanha.dia).toBe('2026-10-11');
+    expect(amanha.ids).not.toEqual(d.ids);
+  });
+  it('o dia vira à meia-noite do aparelho, e o relógio mostra quanto falta', () => {
+    expect(hoje(new Date(2026, 9, 10, 23, 59))).toBe('2026-10-10');
+    expect(hoje(new Date(2026, 9, 11, 0, 1))).toBe('2026-10-11');
+    expect(ateMeiaNoite(new Date(2026, 9, 10, 18, 48))).toBe('5 h 12 min');
+    expect(ateMeiaNoite(new Date(2026, 9, 10, 23, 30))).toBe('30 min');
+    expect(PULOS_DO_DESAFIO).toBe(5);
   });
 });

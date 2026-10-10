@@ -1,10 +1,10 @@
-import {useEffect,useMemo,useState,type CSSProperties} from 'react';
-import {Award,ChevronRight,Lock,Sparkles,Trophy,X} from 'lucide-react';
+import {useEffect,useState,type CSSProperties} from 'react';
+import {Award,ChevronRight,Clock3,Lock,Play,Trophy,X,Zap} from 'lucide-react';
 import {byId} from '../data/characters';
 import type {Character} from '../engine/types';
 import {Portrait} from '../components/Portrait';
 import {TelaTopo} from '../components/Casca';
-import {PERSONAGENS_DA_ABA,TOTAL_DE_CONQUISTAS,juntar,sugestao,tituloDe} from '../lib/conquistas';
+import {PERSONAGENS_DA_ABA,PULOS_DO_DESAFIO,TOTAL_DE_CONQUISTAS,ateMeiaNoite,desafioDoDia,juntar,tituloDe} from '../lib/conquistas';
 import {Album} from '../components/Album';
 import {onlineCall,onlineConfigured,type RankingDeConquistas} from '../lib/online';
 import type {Profile} from '../lib/storage';
@@ -23,23 +23,28 @@ import type {Profile} from '../lib/storage';
  */
 const data=(iso:string)=>new Date(iso).toLocaleDateString('pt-BR');
 
-export function ConquistasScreen({profile,conta,onProfile,onRanking}:{profile:Profile;conta:boolean;onProfile:(p:Profile)=>void;onRanking:()=>void}){
+export function ConquistasScreen({profile,conta,onProfile,onRanking,onDesafio}:{profile:Profile;conta:boolean;/** recebe uma atualização (do perfil mais novo), para duas mudanças seguidas não se apagarem */onProfile:(muda:(p:Profile)=>Profile)=>void;onRanking:()=>void;onDesafio:(id:string)=>void}){
   const conquistas=profile.conquistas??{};
   const [noRanking,setNoRanking]=useState<{total:number;posicao:number|null}|null>(null);
   /* As do servidor entram no aparelho; e a posição no ranking de conquistas. */
   useEffect(()=>{if(!onlineConfigured||!conta)return;let ativo=true;
-    void onlineCall<{conquistas:{id:string;data:string}[]}>('conquistas').then(r=>{if(!ativo)return;const juntas=juntar(profile.conquistas??{},r.conquistas);if(Object.keys(juntas).length!==Object.keys(profile.conquistas??{}).length||Object.entries(juntas).some(([k,v])=>profile.conquistas?.[k]!==v))onProfile({...profile,conquistas:juntas});setNoRanking(n=>({total:r.conquistas.length,posicao:n?.posicao??null}));}).catch(()=>{});
+    void onlineCall<{conquistas:{id:string;data:string}[]}>('conquistas').then(r=>{if(!ativo)return;onProfile(p=>{const juntas=juntar(p.conquistas??{},r.conquistas);return Object.keys(juntas).length!==Object.keys(p.conquistas??{}).length||Object.entries(juntas).some(([k,v])=>p.conquistas?.[k]!==v)?{...p,conquistas:juntas}:p;});setNoRanking(n=>({total:r.conquistas.length,posicao:n?.posicao??null}));}).catch(()=>{});
     void onlineCall<RankingDeConquistas>('leaderboard',{mode:'conquistas'}).then(r=>{if(ativo&&r.mine)setNoRanking(n=>({total:r.mine!.total,posicao:r.mine!.position??n?.posicao??null}));}).catch(()=>{});
     return()=>{ativo=false};
   },[conta]);
   /* O que estava NOVO fica visto depois de a tela ficar aberta um pouco (o selo aparece na primeira vez). */
   const [vistasAoAbrir]=useState(()=>new Set(profile.conquistasVistas??[]));
-  useEffect(()=>{const id=window.setTimeout(()=>{const todas=Object.keys(profile.conquistas??{});if(todas.some(k=>!vistasAoAbrir.has(k)))onProfile({...profile,conquistasVistas:todas});},1500);return()=>window.clearTimeout(id);
+  useEffect(()=>{const id=window.setTimeout(()=>{const todas=Object.keys(profile.conquistas??{});if(todas.some(k=>!vistasAoAbrir.has(k)))onProfile(p=>({...p,conquistasVistas:Object.keys(p.conquistas??{})}));},1500);return()=>window.clearTimeout(id);
   },[profile.conquistas]);
 
   const liberadas=Object.keys(conquistas).length,titulo=tituloDe(liberadas);
   const [aberto,setAberto]=useState<Character|null>(null);
-  const doDia=useMemo(()=>sugestao(conquistas),[conquistas]);
+  /* O Desafio do Dia: os três de hoje ficam guardados; quem foi liberado sai; feitos os três, outros chegam à meia-noite. */
+  const desafio=desafioDoDia(profile.desafio,conquistas),faltam=desafio.ids.filter(id=>!conquistas[id]).map(id=>byId[id]).filter((c):c is Character=>!!c);
+  useEffect(()=>{if(profile.desafio?.dia!==desafio.dia||profile.desafio.ids.join()!==desafio.ids.join())onProfile(p=>({...p,desafio}));},[desafio.dia,desafio.ids.join()]);
+  const [,setRelogio]=useState(0);
+  useEffect(()=>{const id=window.setInterval(()=>setRelogio(n=>n+1),30000);return()=>window.clearInterval(id);},[]);
+  const noDesafio=(id:string)=>desafio.ids.includes(id)&&!conquistas[id];
   const R=44,C=2*Math.PI*R,fracao=liberadas/TOTAL_DE_CONQUISTAS;
 
   return <section className="conquistas-tela">
@@ -60,6 +65,19 @@ export function ConquistasScreen({profile,conta,onProfile,onRanking}:{profile:Pr
       </div>
     </div>
 
+    <div className={`cq-desafio ${faltam.length?'':'completo'}`}>
+      <div className="cq-desafio-topo">
+        <span className="cq-desafio-rotulo"><Zap size={15}/>DESAFIO DO DIA</span>
+        <span className="cq-desafio-pips" aria-label={`${desafio.ids.length-faltam.length} de ${desafio.ids.length} feitos hoje`}>{desafio.ids.map(id=><i key={id} className={conquistas[id]?'feito':''}/>)}</span>
+      </div>
+      {faltam.length?<>
+        <div className="cq-desafio-trio">{faltam.map((c,i)=><button key={c.id} onClick={()=>setAberto(c)} style={{'--character':c.color,'--i':i} as CSSProperties} aria-label={`Desafio: jogar com ${c.name}`}>
+          <span className="cq-desafio-retrato"><Portrait character={c}/></span><b>{c.name}</b><em><Play size={10} fill="currentColor"/>JOGAR</em></button>)}</div>
+        <p>Toque num deles: a Jornada já começa com ele no trio e <b>{PULOS_DO_DESAFIO} trocas</b> de opções (em vez de 3). Termine as 10 lutas para liberar.</p>
+        <small className="cq-desafio-relogio"><Clock3 size={12}/>Novos desafios em {ateMeiaNoite()}</small>
+      </>:<div className="cq-desafio-fim"><Trophy size={30}/><b>Desafio de hoje completo!</b><small><Clock3 size={12}/>Novos desafios em {ateMeiaNoite()}</small></div>}
+    </div>
+
     <Album listas={PERSONAGENS_DA_ABA} rotulo={a=>`${PERSONAGENS_DA_ABA[a].filter(c=>conquistas[c.id]).length}/${PERSONAGENS_DA_ABA[a].length}`}
       barra={a=>PERSONAGENS_DA_ABA[a].filter(c=>conquistas[c.id]).length/PERSONAGENS_DA_ABA[a].length}
       carta={(c,i)=>{const quando=conquistas[c.id],novo=!!quando&&!vistasAoAbrir.has(c.id);
@@ -68,12 +86,6 @@ export function ConquistasScreen({profile,conta,onProfile,onRanking}:{profile:Pr
           <small>{c.name}</small>
           {novo&&<em className="cq-novo">NOVO</em>}
         </button>;}}/>
-
-    {doDia.length>0&&<div className="cq-sugestao">
-      <span className="cq-sugestao-rotulo"><Sparkles size={14}/>DESAFIO DO DIA</span>
-      <div>{doDia.map(c=><button key={c.id} onClick={()=>setAberto(c)} style={{'--character':c.color} as CSSProperties}><Portrait character={c}/><small>{c.name}</small></button>)}</div>
-      <p>Monte um trio com eles e termine as 10 lutas: são <b>3 conquistas</b> de uma vez.</p>
-    </div>}
 
     {aberto&&<div className="cq-veu" role="dialog" aria-label={aberto.name} onClick={e=>{if(e.target===e.currentTarget)setAberto(null);}}>
       <div className={`cq-ficha ${conquistas[aberto.id]?'liberada':'bloqueada'}`} style={{'--character':aberto.color} as CSSProperties}>
@@ -84,6 +96,7 @@ export function ConquistasScreen({profile,conta,onProfile,onRanking}:{profile:Pr
         {conquistas[aberto.id]
           ?<p className="cq-ficha-ok"><Award size={16}/>Conquista liberada em <b>{data(conquistas[aberto.id]!)}</b></p>
           :<p className="cq-ficha-falta">Termine as <b>10 lutas</b> de uma Jornada com {aberto.name} no trio para liberar.</p>}
+        {noDesafio(aberto.id)&&<button className="primary cq-ficha-jogar" onClick={()=>{setAberto(null);onDesafio(aberto.id);}}><Play size={18} fill="currentColor"/>Jogar com {aberto.name}<small>já no trio · {PULOS_DO_DESAFIO} trocas</small></button>}
       </div>
     </div>}
   </section>;

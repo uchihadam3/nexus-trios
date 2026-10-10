@@ -1,11 +1,11 @@
 import type { CSSProperties } from 'react';
-import { ArrowRight,Award,ChevronRight,Trophy,CircleHelp,Settings2,Download,Users,Crown,ShieldCheck,Play,LogOut } from 'lucide-react';
+import { ArrowRight,Award,ChevronRight,Zap,Trophy,CircleHelp,Settings2,Download,Users,Crown,ShieldCheck,Play,LogOut } from 'lucide-react';
 import { byId,characters } from '../data/characters';
 import { Portrait } from '../components/Portrait';
 import type { Profile, Run } from '../lib/storage';
 import {onlineConfigured} from '../lib/online';
 import { formatarPontos,pontosDaJornada } from '../engine/pontos';
-import { TOTAL_DE_CONQUISTAS,tituloDe } from '../lib/conquistas';
+import { TOTAL_DE_CONQUISTAS,desafioDoDia,tituloDe } from '../lib/conquistas';
 
 /*
  * A tela inicial (remake).
@@ -65,10 +65,10 @@ export function Home({profile,run,conta,onPlay,onContinue,onAbandon,onNavigate,o
     </div>
 
     {/* As Conquistas: quantos já foram liberados, o título e os últimos liberados. */}
-    {(()=>{const lista=Object.entries(profile.conquistas??{}).sort((a,b)=>b[1].localeCompare(a[1])),n=lista.length,t=tituloDe(n),novas=lista.filter(([id])=>!(profile.conquistasVistas??[]).includes(id)).length;
+    {(()=>{const lista=Object.entries(profile.conquistas??{}).sort((a,b)=>b[1].localeCompare(a[1])),n=lista.length,t=tituloDe(n),novas=lista.filter(([id])=>!(profile.conquistasVistas??[]).includes(id)).length,desafios=desafioDoDia(profile.desafio,profile.conquistas??{}).ids.filter(id=>!profile.conquistas?.[id]).length;
       return <button className="hv-conquistas-faixa" onClick={()=>onNavigate('conquistas')} style={{'--titulo':t.atual.cor} as CSSProperties} aria-label={`Conquistas: ${n} de ${TOTAL_DE_CONQUISTAS}`}>
         <span className="hv-cq-icone"><Award size={24}/>{novas>0&&<em>{novas}</em>}</span>
-        <span className="hv-cq-texto"><b>CONQUISTAS</b><small>{t.atual.nome} · <strong>{n}</strong>/{TOTAL_DE_CONQUISTAS}</small><span className="hv-cq-barra"><i style={{width:`${(n/TOTAL_DE_CONQUISTAS)*100}%`}}/></span></span>
+        <span className="hv-cq-texto"><b>CONQUISTAS</b><small>{t.atual.nome} · <strong>{n}</strong>/{TOTAL_DE_CONQUISTAS}{desafios>0&&<em className="hv-cq-desafio"><Zap size={10}/>{desafios} {desafios===1?'desafio':'desafios'} hoje</em>}</small><span className="hv-cq-barra"><i style={{width:`${(n/TOTAL_DE_CONQUISTAS)*100}%`}}/></span></span>
         <span className="hv-cq-ultimos">{lista.slice(0,3).map(([id])=>byId[id]&&<span key={id} style={{'--character':byId[id].color} as CSSProperties}><Portrait character={byId[id]}/></span>)}</span>
         <ChevronRight size={20}/>
       </button>;})()}

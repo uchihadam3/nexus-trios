@@ -101,3 +101,32 @@ export function sugestao(conquistas: Conquistas, dia = new Date().toISOString().
   while (r.length < 3) { h = (h * 1103515245 + 12345) >>> 0; const i = h % faltam.length; if (!usados.has(i)) { usados.add(i); r.push(faltam[i]!); } }
   return r;
 }
+
+/*
+ * O Desafio do Dia (pedido do jogador): três personagens que você ainda não
+ * liberou, os mesmos o dia todo. Tocar num deles começa uma Jornada com ele já
+ * escolhido e PULOS_DO_DESAFIO trocas de opções, em vez das 3 de sempre, para
+ * achar quem combina com ele. Quem você libera sai do desafio; feitos os três,
+ * outros três chegam à meia-noite (do aparelho).
+ *
+ * Os três do dia ficam guardados no perfil (`Profile.desafio`): sem isso, a
+ * escolha mudaria toda vez que alguém fosse liberado.
+ */
+export const PULOS_DO_DESAFIO = 5;
+export interface Desafio { dia: string; ids: string[] }
+/** O dia do aparelho (a virada é à meia-noite local), como aaaa-mm-dd. */
+export function hoje(agora = new Date()): string {
+  const p = (n: number) => String(n).padStart(2, '0');
+  return `${agora.getFullYear()}-${p(agora.getMonth() + 1)}-${p(agora.getDate())}`;
+}
+/** Os três do dia: os que já estavam guardados para hoje, ou três novos que faltam. */
+export function desafioDoDia(guardado: Desafio | undefined, conquistas: Conquistas, dia = hoje()): Desafio {
+  if (guardado && guardado.dia === dia && guardado.ids.every((id) => characters.some((c) => c.id === id))) return guardado;
+  return { dia, ids: sugestao(conquistas, dia).map((c) => c.id) };
+}
+/** Quanto falta para a meia-noite, como "5 h 12 min". */
+export function ateMeiaNoite(agora = new Date()): string {
+  const fim = new Date(agora); fim.setHours(24, 0, 0, 0);
+  const min = Math.max(1, Math.ceil((fim.getTime() - agora.getTime()) / 60000));
+  return min >= 60 ? `${Math.floor(min / 60)} h ${String(min % 60).padStart(2, '0')} min` : `${min} min`;
+}

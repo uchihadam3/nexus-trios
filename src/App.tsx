@@ -12,7 +12,7 @@ import { CharacterModal } from './components/CharacterModal';
 import { Cabecalho,ToqueGlobal } from './components/Casca';
 import { byId,characters } from './data/characters';
 import { createBattle } from './engine/battle';
-import { generateCampaign,newDraft,pickDraft,skipDraft } from './engine/campaign';
+import { candidates,generateCampaign,newDraft,pickDraft,skipDraft } from './engine/campaign';
 import type { ResultadoTop3 } from './lib/top3';
 import { defaults,ESCALA_DOS_PONTOS,loadProfile,loadRun,loadSettings,resetStorage,save,storageAvailable } from './lib/storage';
 import type { Run,Settings } from './lib/storage';
@@ -26,7 +26,7 @@ import { acumularRaioX,raioXVazio } from './engine/raio-x';
 import {emptyTally,tallyEvents} from './engine/progression';
 import { pontosDaJornada } from './engine/pontos';
 import {runDigest} from './engine/ranked';
-import {liberar} from './lib/conquistas';
+import {PULOS_DO_DESAFIO,liberar} from './lib/conquistas';
 import {ConquistasScreen} from './screens/ConquistasScreen';
 import {carregarCliente,googleConfigured,haSessaoOuRetorno,onlineCall,onlineConfigured} from './lib/online';
 import {criarAutenticacaoPreguicosa,type Conta} from './lib/auth';
@@ -97,11 +97,17 @@ export default function App(){
     }
     abreJornada();
   };
+  /* O Desafio do Dia escolhido (src/lib/conquistas.ts): a próxima Jornada começa com ele no trio e mais trocas. */
+  const desafioPendente=useRef<string|null>(null);
   const abreJornada=()=>{
     const seed=crypto.getRandomValues(new Uint32Array(1))[0];
-    changeRun({seed,team:[],encounters:generateCampaign(seed),index:0,stage:'draft',draft:newDraft(seed),battle:null,recorded:false,summaries:[]});setPaused(false);setConfirmNew(false);setConfirmAbandon(false);navigate('game');
+    const escolhido=desafioPendente.current;desafioPendente.current=null;
+    let draft=newDraft(seed);
+    if(escolhido){draft={...draft,team:[escolhido],skips:PULOS_DO_DESAFIO};draft={...draft,candidates:candidates(draft)};}
+    changeRun({seed,team:[],encounters:generateCampaign(seed),index:0,stage:'draft',draft,battle:null,recorded:false,summaries:[],...(escolhido?{desafio:escolhido}:{})});setPaused(false);setConfirmNew(false);setConfirmAbandon(false);navigate('game');
   };
-  const requestNew=()=>{if(run&&(run.stage!=='result'||run.battle?.winner==='player'&&run.index<9))setConfirmNew(true);else void startNew();};
+  const jogarDesafio=(id:string)=>{desafioPendente.current=id;if(run&&(run.stage!=='result'||run.battle?.winner==='player'&&run.index<9))setConfirmNew(true);else void startNew();};
+  const requestNew=()=>{desafioPendente.current=null;if(run&&(run.stage!=='result'||run.battle?.winner==='player'&&run.index<9))setConfirmNew(true);else void startNew();};
   /*
    * Os rivais da jornada saem assim que o trio fica pronto, não ao entrar na
    * arena: assim a "Primeira luta" mostrada na escolha é exatamente a luta que
@@ -358,12 +364,12 @@ export default function App(){
     <main key={`${screen}-${screen==='game'?run?.stage??'idle':'page'}`} className={screen==='game'&&run?.stage==='battle'?'main battle-main screen-enter':'main screen-enter'}>
       {screen==='home'&&<Home profile={profile} run={run} conta={conta!==null&&conta.origem!=='convidado'} onPlay={requestNew} onContinue={()=>{if(run?.stage==='battle'&&run.battle){direction.current=directionFor(run);setPresentation({battle:direction.current.visible,beat:direction.current.active});}navigate('game');setPaused(run?.stage==='battle');}} onAbandon={()=>setConfirmAbandon(true)} onNavigate={navigate} onInstall={()=>void install()}/>}
       {screen==='characters'&&<CharactersScreen onDetails={setDetails}/>}
-      {screen==='conquistas'&&<ConquistasScreen profile={profile} conta={conta!==null&&conta.origem!=='convidado'} onProfile={p=>{save('profile',p);setProfile(p);}} onRanking={()=>{setRankingInicial('conquistas');navigate('ranking');}}/>}
+      {screen==='conquistas'&&<ConquistasScreen profile={profile} conta={conta!==null&&conta.origem!=='convidado'} onProfile={muda=>setProfile(p=>{const n=muda(p);if(n!==p)save('profile',n);return n;})} onRanking={()=>{setRankingInicial('conquistas');navigate('ranking');}} onDesafio={jogarDesafio}/>}
       {screen==='ranking'&&<RankingScreen inicial={rankingInicial} handle={profile.publicHandle} conta={conta!==null&&conta.origem!=='convidado'} onConta={()=>navigate('conta')} recorde={profile.recordePontos??0}/>}
       {screen==='conta'&&<AccountScreen autenticacao={autenticacao} conta={conta} profile={profile} conectado={onlineConfigured} google={googleConfigured} aoMudarPerfil={p=>{save('profile',p);setProfile(p);}}/>}
       {screen==='help'&&<HelpScreen onPlay={requestNew}/>}
       {screen==='settings'&&<SettingsScreen settings={settings} onChange={changeSettings} onReset={reset} onGaleria={()=>navigate('vfx')} ranking={onlineConfigured?{nome:profile.publicHandle,onEditar:()=>{setPendingStart(false);setDraftHandle(profile.publicHandle??'');setNameDialog(true);}}:undefined}/>}
-      {screen==='game'&&run?.stage==='draft'&&<DraftScreen draft={run.draft} primeiroRival={run.preparado||run.ranked&&run.ranked.mode!=='free'?run.encounters[0]:undefined} dicas={settings.dicasDoTrio&&podeDicas} podeDicas={podeDicas} usouDicas={run.dicas===true} onDicas={ligar=>changeSettings({...settings,dicasDoTrio:ligar})} onPick={id=>changeRun({...run,draft:pickDraft(run.draft,id)})} onSkip={()=>changeRun({...run,draft:skipDraft(run.draft)})} onDetails={setDetails} onStart={()=>void startBattle(0)} onAbandon={()=>setConfirmAbandon(true)}/>}
+      {screen==='game'&&run?.stage==='draft'&&<DraftScreen draft={run.draft} desafio={run.desafio} primeiroRival={run.preparado||run.ranked&&run.ranked.mode!=='free'?run.encounters[0]:undefined} dicas={settings.dicasDoTrio&&podeDicas} podeDicas={podeDicas} usouDicas={run.dicas===true} onDicas={ligar=>changeSettings({...settings,dicasDoTrio:ligar})} onPick={id=>changeRun({...run,draft:pickDraft(run.draft,id)})} onSkip={()=>changeRun({...run,draft:skipDraft(run.draft)})} onDetails={setDetails} onStart={()=>void startBattle(0)} onAbandon={()=>setConfirmAbandon(true)}/>}
       {screen==='game'&&run?.stage==='battle'&&run.battle&&<BattleScreen battle={presentation&&direction.current?.battle===run.battle?presentation.battle:run.battle} beat={presentation&&direction.current?.battle===run.battle?presentation.beat:null} index={run.index} name={run.encounters[run.index].name} settings={settings} paused={paused||!!details}  onPause={()=>setPaused(!paused)} onAbandon={()=>setConfirmAbandon(true)} onSettings={changeSettings} onExit={()=>{setPaused(true);navigate('home');}}/>}
       {screen==='game'&&run?.stage==='result'&&<ResultScreen run={run} onNext={()=>void startBattle(run.index+1)} onRestart={requestNew} onAbandon={()=>setConfirmAbandon(true)} onHome={()=>navigate('home')} onRanking={()=>navigate('ranking')} onRetry={()=>{if(run.ranked)changeRun({...run,ranked:{...run.ranked,status:'validating'}});}} auto={settings.auto} onAuto={auto=>changeSettings({...settings,auto})}/>}
       {screen==='debug'&&import.meta.env.DEV&&<Suspense fallback={<p>Carregando laboratório…</p>}><DebugScreen/></Suspense>}

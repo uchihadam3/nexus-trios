@@ -142,3 +142,36 @@
 .rv-album-funcoes{display:flex;justify-content:center;gap:3px;height:6px}
 .rv-album-funcoes i{width:6px;height:6px;border-radius:50%;background:var(--id-cor);box-shadow:0 0 4px var(--id-cor)}
 .cq-album-vazio{padding:24px 8px}
+
+/* o Desafio do Dia: três que faltam, fixos no dia */
+.cq-desafio{position:relative;margin:0 0 12px;padding:12px 12px 10px;border-radius:20px;overflow:hidden;background:radial-gradient(ellipse at 50% 0%,#a46bff38,transparent 70%),linear-gradient(165deg,#1d1438,#0e0a1c);box-shadow:inset 0 0 0 1.5px #b48aff66,0 0 26px #8a5aff22,0 10px 24px #0007;animation:gs-tile .4s .05s both}
+.cq-desafio::after{content:'';position:absolute;inset:0;background:linear-gradient(105deg,transparent 40%,#ffffff10 50%,transparent 60%);animation:cq-brilho 5.5s ease-in-out infinite;pointer-events:none}
+.cq-desafio-topo{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.cq-desafio-rotulo{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:900;letter-spacing:1.8px;color:#d4b8ff;text-shadow:0 0 10px #a46bff}
+.cq-desafio-rotulo svg{color:#ffd36b;filter:drop-shadow(0 0 4px #ffd36b)}
+.cq-desafio-pips{display:flex;gap:5px}
+.cq-desafio-pips i{width:22px;height:7px;border-radius:4px;background:#ffffff1a;box-shadow:inset 0 0 0 1px #b48aff55}
+.cq-desafio-pips i.feito{background:linear-gradient(90deg,#ffd36b,#fff1b0);box-shadow:0 0 8px #ffd36b}
+.cq-desafio-trio{display:flex;justify-content:center;gap:12px;margin:12px 0 8px}
+.cq-desafio-trio button{display:grid;justify-items:center;gap:4px;width:92px;padding:0;border:0;cursor:pointer;font:inherit;background:none;animation:cq-entra .4s calc(.15s + var(--i)*.1s) both}
+.cq-desafio-trio button:active{transform:scale(.94)}
+.cq-desafio-retrato{position:relative;display:block;width:70px;height:70px;border-radius:50%;box-shadow:0 0 0 2.5px #0e0a1c,0 0 0 4.5px #b48aff,0 0 18px #a46bff99;animation:cq-desafio-pulsa 1.8s calc(var(--i)*.3s) ease-in-out infinite}
+@keyframes cq-desafio-pulsa{50%{box-shadow:0 0 0 2.5px #0e0a1c,0 0 0 4.5px #e2ccff,0 0 28px #b48aff}}
+.cq-desafio-retrato .portrait{width:100%;height:100%;border-radius:50%;filter:grayscale(.55) brightness(.8)}
+.cq-desafio-trio b{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12px;font-weight:900;color:#f0e6ff}
+.cq-desafio-trio em{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:9px;font-size:10px;font-style:normal;font-weight:900;letter-spacing:.8px;color:#1a0f2e;background:linear-gradient(180deg,#e9d8ff,#b48aff);box-shadow:0 0 10px #b48aff88}
+.cq-desafio>p{margin:2px 4px 4px;text-align:center;font-size:11.5px;line-height:1.4;color:#b5a6d6}
+.cq-desafio>p b{color:#fff}
+.cq-desafio-relogio,.cq-desafio-fim small{display:flex;align-items:center;justify-content:center;gap:5px;font-size:11px;font-weight:800;color:#9d8cc4}
+.cq-desafio-fim{display:grid;justify-items:center;gap:5px;padding:14px 0 6px}
+.cq-desafio-fim svg{color:#ffd36b;filter:drop-shadow(0 0 10px #ffd36b)}
+.cq-desafio-fim b{font-size:16px;font-weight:900;color:#fff}
+.cq-desafio.completo{box-shadow:inset 0 0 0 1.5px #ffd36b66,0 0 26px #ffd36b22,0 10px 24px #0007}
+.cq-ficha-jogar{display:grid;justify-items:center;gap:1px;width:100%;margin-top:10px;min-height:56px;border-radius:16px;font-size:15px;font-weight:900}
+.cq-ficha-jogar svg{display:none}
+.cq-ficha-jogar small{font-size:11px;font-weight:800;opacity:.75}
+/* no draft: a faixa do desafio */
+.dv-desafio{display:flex;align-items:center;justify-content:center;gap:6px;margin:4px auto 8px;padding:6px 12px;max-width:min(100%,420px);border-radius:12px;font-size:11.5px;color:#e0d0ff;background:linear-gradient(90deg,#2a1a4a,#1a1030);box-shadow:inset 0 0 0 1px #b48aff66,0 0 14px #a46bff33}
+.dv-desafio svg{flex:none;color:#ffd36b}
+.dv-desafio b{color:#fff}
+.hv-cq-desafio{display:inline-flex;align-items:center;gap:3px;margin-left:6px;padding:1px 6px;border-radius:8px;font-size:10px;font-style:normal;font-weight:900;color:#1a0f2e;background:linear-gradient(180deg,#e9d8ff,#b48aff);box-shadow:0 0 8px #b48aff88;vertical-align:1px}
