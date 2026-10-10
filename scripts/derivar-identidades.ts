@@ -24,7 +24,7 @@ import { characters } from '../src/data/characters';
 import { statuses } from '../src/data/statuses';
 import type { Identidade } from '../src/presentation/identities';
 import { ordemDasIdentidades } from '../src/presentation/identities';
-import type { Character, Effect, StatusId, Target } from '../src/engine/types';
+import type { Character, Effect, Target } from '../src/engine/types';
 
 interface Medida { id: string; nome: string; [k: string]: number | string }
 const { medidas } = JSON.parse(readFileSync('docs/identidades-medidas.json', 'utf8')) as { medidas: Medida[] };
@@ -145,19 +145,27 @@ const avaliar = (c: Character): Map<Identidade, number> => {
   /* Mecânicas que poucos têm: a ficha garante, e a etiqueta vem antes de todas. */
   if (temEfeito(c, ({ e }) => e.kind === 'revive')) notas.set('Reviver', 1);
   if (c.renascer) notas.set('Renascer', 1);
-  if (temEfeito(c, ({ e }) => e.kind === 'status' && e.status === 'provoked')) notas.set('Provocar', 1);
-  if (temEfeito(c, ({ e }) => e.kind === 'lifesteal' || (e.kind === 'status' && e.status === 'vampirism'))) notas.set('Roubo de vida', 1);
-  if (temEfeito(c, ({ e }) => e.kind === 'status' && e.status === 'reflect')) notas.set('Refletir', 1);
-  if (temEfeito(c, ({ e }) => e.kind === 'status' && e.status === 'thorns')) notas.set('Espinhos', 1);
+  /*
+   * Pedido do jogador: "isso não são tags, isso são buffs e debuffs… tag é um conjunto: a pessoa é
+   * especializada em buff porque tem vários buffs diferentes. Um buff não especializa ninguém". Então
+   * um Status sozinho (Esquiva, Sono, Cegueira, Veneno, Barreira, Espinhos, Provocar…) não vira
+   * etiqueta: ele já entra na conta de Debuff, Controle, Dano contínuo, Buff, Proteção ou Tanque, que
+   * medem o conjunto. Ficam só as mecânicas que mudam o jeito de jogar e que poucos têm.
+   */
   if (temEfeito(c, ({ e }) => e.kind === 'cleanse')) notas.set('Purificar', 1);
   if (temEfeito(c, ({ e }) => e.kind === 'dispel')) notas.set('Dissipar', 1);
-  const TAG_DO_STATUS: [StatusId, Identidade][] = [['poison', 'Veneno'], ['bleed', 'Sangramento'], ['cursed', 'Maldição'], ['frozen', 'Congelar'], ['sleep', 'Sono'], ['blind', 'Cegueira'], ['barrier', 'Barreira']];
-  if (temEfeito(c, ({ e }) => e.kind === 'status' && e.status === 'evasion')) notas.set('Esquiva', 1);
-  if (c.ultimaResistencia) notas.set('Última resistência', 1);
-  if (temEfeito(c, ({ e }) => e.kind === 'status' && e.status === 'bomb')) notas.set('Marca explosiva', 1);
   if (temEfeito(c, ({ e }) => e.kind === 'copy')) notas.set('Copiar', 1);
   if (c.invocacao) notas.set('Invocação', 1);
-  for (const [s, tag] of TAG_DO_STATUS) if (temEfeito(c, ({ e }) => e.kind === 'status' && e.status === s)) notas.set(tag, 1);
+  /*
+   * Etiquetas de conjunto (pedido do jogador: "pode criar tags novas… dependendo do tipo de buff ou de
+   * mecânica que a pessoa usa… mas não pode usar um buff só para definir a tag"): só ganha quem tem
+   * DOIS OU MAIS do conjunto.
+   */
+  const temStatus = (s: string) => temEfeito(c, ({ e }) => e.kind === 'status' && e.status === s);
+  const males = ['poison', 'bleed', 'burning', 'cursed'].filter(temStatus).length;
+  if (males >= 2) notas.set('Aflições', 1);
+  const drenos = [temEfeito(c, ({ e }) => e.kind === 'lifesteal'), temStatus('vampirism'), temStatus('regen')].filter(Boolean).length;
+  if (drenos >= 2) notas.set('Dreno de vida', 1);
   return notas;
 };
 

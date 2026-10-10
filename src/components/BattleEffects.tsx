@@ -28,8 +28,8 @@ const SEM_FICHA:Partial<Record<Beat['event']['kind'],VfxFamily>>={interrupt:'ond
 const GIRO_DA_VARIANTE=[0,16,-12,8];
 /* Altura da faixa em relação ao medalhão. */
 /* Os objetos arremessados (o escudo do Capitão, o batarangue…) voam grandes, para dar para ver o que é. */
-const TAMANHO_DO_VOO:Record<string,number>={saraivada:1.25,escudo_voando:2.6,batarangue_voando:2.5,shuriken_voando:2.3,tiara_voando:2.5,dardo_voando:2.4,corvo_voando:2.6,reigun_bala:2.2,shotgun_rajada:2.2,barril_voando:2.4,fenix_voando:2.6,pedra_bloco:2.0,papel_bola:2.2};
-const ALTURA_DA_FAIXA:Record<string,number>={feixe:.36,feixe_pesado:.62,raio_faixa:.7,dreno:.42,dragao_faixa:.85,palma_faixa:.55};
+const TAMANHO_DO_VOO:Record<string,number>={saraivada:1.25,escudo_voando:2.6,batarangue_voando:2.5,shuriken_voando:2.3,tiara_voando:2.5,dardo_voando:2.4,corvo_voando:2.6,reigun_bala:2.2,shotgun_rajada:2.2,barril_voando:2.4,fenix_voando:2.6,pedra_bloco:2.0,papel_bola:2.2,bola_do_charizard:2.4,buster_bala:2.2,raio_copiado:2.2,carga_maxima_bala:2.6};
+const ALTURA_DA_FAIXA:Record<string,number>={feixe:.36,feixe_pesado:.62,raio_faixa:.7,dreno:.42,dragao_faixa:.85,palma_faixa:.55,makanko_faixa:.5,chamas_faixa:.75,calor_faixa:.42,diamante_faixa:.6,aurora_faixa:.78};
 
 const s=(x:number)=>`${x.toFixed(3)}s`;
 

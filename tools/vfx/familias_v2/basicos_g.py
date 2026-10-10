@@ -541,34 +541,6 @@ def spin_attack(T, t, rng):
 
 
 # ------------------------------------------------------------------ Mega Man
-def mega_buster(T, t, rng):
-    """Mega Buster: três bolinhas ovais de energia chegam em fila, uma atrás da outra, e cada uma
-    estala no alvo num estouro de quadradinhos de 8 bits que se espalham em oito direções."""
-    G, H = vazio(T)
-    env = apaga(t, 0.85, 1)
-    for t0, y in ((0.0, -0.04), (0.16, 0.04), (0.32, 0.0)):
-        u = rel(t, t0, t0 + 0.2)
-        if 0 < u < 1:
-            bx = -1.05 + 1.05 * u
-            G += (T.gauss(bx, y, 0.13, 0.085) * 1.7 + T.gauss(bx - 0.17, y, 0.08, 0.05) * 0.5 + T.gauss(bx - 0.3, y, 0.06, 0.035) * 0.25) * env
-            H += T.gauss(bx + 0.01, y, 0.07, 0.042) * 2.0 * env
-        # estouro de 8 bits
-        tt = rel(t, t0 + 0.2, t0 + 0.42)
-        if 0 < tt < 1:
-            k = 1 - tt
-            d = 0.08 + 0.36 * ease_out(tt, 2)
-            lado = 0.065 * (0.6 + 0.4 * k)
-            quad = []
-            for m in range(8):
-                a = m * TAU / 8
-                cx, cy = math.cos(a) * d, y + math.sin(a) * d
-                quad.append(([(cx - lado, cy - lado), (cx + lado, cy - lado), (cx + lado, cy + lado), (cx - lado, cy + lado)], 1))
-            Q = T.polys(quad, 0.0) * k
-            dk = 0.16 * (1 - rel(t, t0 + 0.2, t0 + 0.32))
-            dia = T.polys([([(0, y - dk), (dk, y), (0, y + dk), (-dk, y)], 1)], 0.0) if dk > 0.005 else T.zero()
-            G += (Q * 1.5 + T.blur(Q, 0.02) * 0.8 + dia * 1.5) * env
-            H += (Q * 0.8 + dia * 1.4) * env
-    return G, H
 
 
 # ------------------------------------------------------------------ Zero
@@ -675,7 +647,6 @@ REGISTRO = [
     ("duas_pistolas", duas_pistolas, GRANDE, "Lara: dois tiros alternados das duas pistolas (+x)", False),
     ("lamina_oculta", lamina_oculta, GRANDE, "Ezio: a lâmina salta do pulso e perfura, ondas da visão de águia", False),
     ("spin_attack", spin_attack, GRANDE, "Sonic: bola azul girando quica no alvo e volta", False),
-    ("mega_buster", mega_buster, GRANDE, "Mega Man: três bolinhas do buster estalando em quadradinhos (+x)", False),
     ("z_saber", z_saber, GRANDE, "Zero: meia-lua do sabre de energia", False),
     ("pisada_do_mario", pisada_do_mario, GRANDE, "Mario: a bota pisa, achata, estrelinhas e moeda", False),
 ]

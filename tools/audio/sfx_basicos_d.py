@@ -164,21 +164,6 @@ def punho_do_dragao(rng, v):
 
 
 # ------------------------------------------------------------------ Hyoga
-def po_de_diamante(rng, v):
-    x = _z(1.35)
-    # vento frio que sopra
-    n = n_de(0.9)
-    t = np.arange(n) / SR
-    poe(x, assobio(rng, n, 2500, 6000, 0.9, 0.35) * (0.7 + 0.3 * np.sin(2 * math.pi * 3 * t)) * sobe_e_some(n, 0.3, 1.2) * 0.45, 0.0)
-    poe(x, assobio(rng, n, 500, 1200, 1.0, 0.5) * sobe_e_some(n, 0.3, 1.4) * 0.25, 0.0)
-    # o pó de cristais: muitos tilintares cristalinos agudos
-    for _ in range(26):
-        f = nota(rng.choice([88, 91, 93, 95, 96, 98, 100]))
-        poe(x, modal(n_de(0.35), f, rng=rng, **CRISTAL) * env(n_de(0.35), 0.0008, 0.07) * rng.uniform(0.04, 0.09), rng.uniform(0.02, 0.5))
-    # congela
-    poe(x, B.gelo(rng, v) * 0.7, 0.3)
-    poe(x, estalo(rng, n_de(0.1), 3000, 12000, 0.006) * 0.6, 0.3)
-    return reverb(x, 0.6, 0.3, 10000)
 
 
 # ------------------------------------------------------------------ Shun
@@ -265,20 +250,6 @@ def tiara_lunar(rng, v):
 
 
 # ------------------------------------------------------------------ Charizard
-def garra_flamejante(rng, v):
-    x = _z(1.1)
-    for k in range(3):
-        n = n_de(0.16)
-        r = passa(ruido(rng, n), 1200, 6500, 2) * env(n, 0.002, 0.05) * 0.75
-        r += B._carne(rng, n, 0.03) * 0.35
-        poe(x, _whoosh(rng, 0.08, 700, 3500, 0.8, g=0.3), 0.025 * k)
-        poe(x, r, 0.05 + 0.03 * k)
-    poe(x, B._baque_seco(rng, n_de(0.25), 95, 0.07) * 0.6, 0.06)
-    # a chama acende nos riscos: "fuum" e o crepitar
-    n = n_de(0.25)
-    poe(x, assobio(rng, n, 200, 1800, 0.8, 0.5) * sobe_e_some(n, 0.25, 1.0) * 0.6, 0.1)
-    poe(x, B.fogo(rng, v) * 0.75, 0.12)
-    return reverb(x, 0.4, 0.18)
 
 
 # ------------------------------------------------------------------ Bill Cipher
@@ -315,9 +286,7 @@ SONS["carta-magica"] = (carta_magica, "básico de Yugi: carta virando, sininhos 
 SONS["carta-dragao"] = (carta_dragao, "básico de Kaiba: carta, carga e o rugido de energia do raio do dragão")
 SONS["meteoros-de-pegaso"] = (meteoros_de_pegaso, "básico de Seiya: rajada de dezenas de socos com zunido")
 SONS["punho-do-dragao"] = (punho_do_dragao, "básico de Shiryu: gancho subindo e o rugido de vento do dragão")
-SONS["po-de-diamante"] = (po_de_diamante, "básico de Hyoga: cristais tilintando, vento frio e gelo estalando")
 SONS["corrente-de-andromeda"] = (corrente_de_andromeda, "básico de Shun: elos tilintando e o estalo da ponta")
 SONS["rendicao"] = (rendicao, "básico de Shaka: sino tibetano e o pulso de luz")
 SONS["tiara-lunar"] = (tiara_lunar, "básico de Sailor Moon: disco girando que acerta com brilho mágico")
-SONS["garra-flamejante"] = (garra_flamejante, "básico de Charizard: três garras e a chama acendendo")
 SONS["chama-do-triangulo"] = (chama_do_triangulo, "básico de Bill Cipher: tilintar distorcido e chama azul estranha")

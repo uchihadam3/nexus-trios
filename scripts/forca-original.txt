@@ -164,7 +164,7 @@
   "pernalonga": -0.869,
   "peter": 0.178,
   "picapau": 0.14,
-  "piccolo": -0.92,
+  "piccolo": -0.36,
   "pikachu": -0.182,
   "plankton": -0.237,
   "popeye": -0.466,

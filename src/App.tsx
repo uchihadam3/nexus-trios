@@ -28,6 +28,7 @@ import { pontosDaJornada } from './engine/pontos';
 import {runDigest} from './engine/ranked';
 import {carregarCliente,googleConfigured,haSessaoOuRetorno,onlineCall,onlineConfigured} from './lib/online';
 import {criarAutenticacaoPreguicosa,type Conta} from './lib/auth';
+import { dicasLiberadas,ehDono } from './lib/dicas-liberadas';
 import {AccountScreen} from './screens/AccountScreen';
 import {FAMILIA_DA_INVOCACAO} from './presentation/vfx-atribuicao';
 import {efeitosDoJeito,somDoJeito} from './presentation/jeito-efeito';
@@ -312,8 +313,6 @@ export default function App(){
       finally{submission.current=false;}
     })();
   },[run?.stage,run?.index,run?.battle?.winner,run?.ranked?.status,run?.ranked?.id]);
-  /* Dicas de trio ligadas enquanto o trio é escolhido: a jornada inteira paga o custo (src/engine/pontos.ts) */
-  useEffect(()=>{if(settings.dicasDoTrio&&run?.stage==='draft'&&run.draft.team.length<3&&!run.dicas)changeRun({...run,dicas:true});},[settings.dicasDoTrio,run?.stage,run?.draft.team.length,run?.dicas]);
   useEffect(()=>{battleAudio.configure(settings);},[settings]);
   /* versão nova publicada enquanto a aba estava aberta (src/main.tsx): oferece recarregar */
   const [versaoNova,setVersaoNova]=useState(false);
@@ -335,6 +334,12 @@ export default function App(){
     const parar=autenticacao.observar((c:Conta|null)=>{setConta(c);});
     return ()=>{vivo=false;parar();};
   },[autenticacao]);
+  /* O botão das Dicas de trio: a conta do dono sempre; os outros depois de META_DAS_DICAS numa jornada (src/lib/dicas-liberadas.ts) */
+  const [dono,setDono]=useState(false);
+  useEffect(()=>{let vivo=true;void ehDono(conta?.email).then(d=>{if(vivo)setDono(d);});return ()=>{vivo=false;};},[conta?.email]);
+  const podeDicas=dicasLiberadas(dono,profile.recordePontos??0);
+  /* Dicas de trio ligadas enquanto o trio é escolhido: a jornada inteira paga o custo (src/engine/pontos.ts) */
+  useEffect(()=>{if(settings.dicasDoTrio&&podeDicas&&run?.stage==='draft'&&run.draft.team.length<3&&!run.dicas)changeRun({...run,dicas:true});},[settings.dicasDoTrio,podeDicas,run?.stage,run?.draft.team.length,run?.dicas]);
 
   const reset=()=>{resetStorage();setSettings(defaults);setProfile({journeys:0,victories:0,best:0,wins:0,recordePontos:0,escalaDosPontos:ESCALA_DOS_PONTOS});setRun(null);runRef.current=null;navigate('home');};
   return <div onPointerDownCapture={()=>void battleAudio.unlock()} onPointerUpCapture={()=>void battleAudio.unlock()} onTouchEndCapture={()=>void battleAudio.unlock()} onClickCapture={()=>void battleAudio.unlock()} onKeyDownCapture={e=>{if(e.key==='Enter'||e.key===' ')void battleAudio.unlock();}} className={`app ${settings.reducedMotion?'reduce-motion':''} ${screen==='game'&&run?.stage==='battle'?'in-battle':''}`}>
@@ -347,7 +352,7 @@ export default function App(){
       {screen==='conta'&&<AccountScreen autenticacao={autenticacao} conta={conta} profile={profile} conectado={onlineConfigured} google={googleConfigured} aoMudarPerfil={p=>{save('profile',p);setProfile(p);}}/>}
       {screen==='help'&&<HelpScreen onPlay={requestNew}/>}
       {screen==='settings'&&<SettingsScreen settings={settings} onChange={changeSettings} onReset={reset} onGaleria={()=>navigate('vfx')} ranking={onlineConfigured?{nome:profile.publicHandle,onEditar:()=>{setPendingStart(false);setDraftHandle(profile.publicHandle??'');setNameDialog(true);}}:undefined}/>}
-      {screen==='game'&&run?.stage==='draft'&&<DraftScreen draft={run.draft} primeiroRival={run.preparado||run.ranked&&run.ranked.mode!=='free'?run.encounters[0]:undefined} dicas={settings.dicasDoTrio} usouDicas={run.dicas===true} onDicas={ligar=>changeSettings({...settings,dicasDoTrio:ligar})} onPick={id=>changeRun({...run,draft:pickDraft(run.draft,id)})} onSkip={()=>changeRun({...run,draft:skipDraft(run.draft)})} onDetails={setDetails} onStart={()=>void startBattle(0)} onAbandon={()=>setConfirmAbandon(true)}/>}
+      {screen==='game'&&run?.stage==='draft'&&<DraftScreen draft={run.draft} primeiroRival={run.preparado||run.ranked&&run.ranked.mode!=='free'?run.encounters[0]:undefined} dicas={settings.dicasDoTrio&&podeDicas} podeDicas={podeDicas} usouDicas={run.dicas===true} onDicas={ligar=>changeSettings({...settings,dicasDoTrio:ligar})} onPick={id=>changeRun({...run,draft:pickDraft(run.draft,id)})} onSkip={()=>changeRun({...run,draft:skipDraft(run.draft)})} onDetails={setDetails} onStart={()=>void startBattle(0)} onAbandon={()=>setConfirmAbandon(true)}/>}
       {screen==='game'&&run?.stage==='battle'&&run.battle&&<BattleScreen battle={presentation&&direction.current?.battle===run.battle?presentation.battle:run.battle} beat={presentation&&direction.current?.battle===run.battle?presentation.beat:null} index={run.index} name={run.encounters[run.index].name} settings={settings} paused={paused||!!details}  onPause={()=>setPaused(!paused)} onAbandon={()=>setConfirmAbandon(true)} onSettings={changeSettings} onExit={()=>{setPaused(true);navigate('home');}}/>}
       {screen==='game'&&run?.stage==='result'&&<ResultScreen run={run} onNext={()=>void startBattle(run.index+1)} onRestart={requestNew} onAbandon={()=>setConfirmAbandon(true)} onHome={()=>navigate('home')} onRanking={()=>navigate('ranking')} onRetry={()=>{if(run.ranked)changeRun({...run,ranked:{...run.ranked,status:'validating'}});}} auto={settings.auto} onAuto={auto=>changeSettings({...settings,auto})}/>}
       {screen==='debug'&&import.meta.env.DEV&&<Suspense fallback={<p>Carregando laboratório…</p>}><DebugScreen/></Suspense>}

@@ -245,21 +245,6 @@ def spin_attack(rng, v):
 
 
 # ------------------------------------------------------------------ Mega Man
-def mega_buster(rng, v):
-    """Três "pew" retrô de 8 bits (onda quadrada caindo de tom) e um estalinho de ruído em cada acerto."""
-    x = _z(0.95)
-    for k in range(3):
-        em = k * 0.12
-        n = n_de(0.09)
-        f = varre(1500 + 60 * k, 380, n, 0.8)
-        pew = _quadrada(f, n) * env(n, 0.001, 0.05) * 0.4
-        poe(x, pew, em)
-        n = n_de(0.08)
-        # ruído "de console": amostras seguradas (som chiado e quadradinho)
-        passo = 6
-        bruto = np.repeat(rng.choice([-1.0, 1.0], n // passo + 1), passo)[:n]
-        poe(x, bruto * env(n, 0.001, 0.025) * 0.35 + _quadrada(np.full(n, 140.0), n) * env(n, 0.001, 0.03) * 0.25, em + 0.15)
-    return reverb(x, 0.4, 0.14, 7000)
 
 
 # ------------------------------------------------------------------ Zero
@@ -314,6 +299,5 @@ SONS["golpe-sobre-humano"] = (golpe_sobre_humano, "básico de Wesker: \"zip\" de
 SONS["duas-pistolas"] = (duas_pistolas, "básico de Lara: dois tiros rápidos de pistola e cartuchos tilintando")
 SONS["lamina-oculta"] = (lamina_oculta, "básico de Ezio: mola metálica \"shkt\", perfuração e o zumbido da visão de águia")
 SONS["spin-attack"] = (spin_attack, "básico de Sonic: bola girando e quique elástico")
-SONS["mega-buster"] = (mega_buster, "básico de Mega Man: três \"pew\" de 8 bits com estalinhos")
 SONS["z-saber"] = (z_saber, "básico de Zero: \"vwum\" do sabre de energia e o chiado do corte")
 SONS["pisada-do-mario"] = (pisada_do_mario, "básico de Mario: \"boing\" de pulo, pisada fofa e brilho de moeda")

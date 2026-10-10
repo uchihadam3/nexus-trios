@@ -29,7 +29,7 @@ export type Identidade =
   | 'Tanque' | 'Sobrevivência' | 'Proteção' | 'Cura' | 'Regeneração'
   | 'Controle' | 'Interrupção' | 'Ritmo' | 'Suporte' | 'Carga'
   | 'Buff' | 'Debuff' | 'Virada' | 'Preparação' | 'Transformação'
-  | 'Contra-ataque' | 'Especialista' | 'Reviver' | 'Renascer' | 'Provocar' | 'Roubo de vida' | 'Refletir' | 'Espinhos' | 'Purificar' | 'Dissipar' | 'Veneno' | 'Sangramento' | 'Maldição' | 'Congelar' | 'Sono' | 'Cegueira' | 'Barreira' | 'Esquiva' | 'Última resistência' | 'Marca explosiva' | 'Copiar' | 'Invocação';
+  | 'Contra-ataque' | 'Especialista' | 'Reviver' | 'Renascer' | 'Purificar' | 'Dissipar' | 'Copiar' | 'Invocação' | 'Aflições' | 'Dreno de vida';
 
 /*
  * A taxonomia da direção tinha 23 termos. Este arquivo tem 22.
@@ -66,33 +66,21 @@ export const explicacaoDaIdentidade: Record<Identidade, string> = {
   'Contra-ataque': 'Apanhar é o que carrega as habilidades dele.',
   'Especialista': 'Só age na situação certa, e aí resolve.',
   'Reviver': 'Levanta um aliado que caiu, uma vez por luta.',
-  'Veneno': 'Envenena: o rival perde Vida por segundo, e o veneno passa por Escudo e Protegido.',
-  'Sangramento': 'Faz sangrar: cada ação do rival custa Vida.',
-  'Maldição': 'Amaldiçoa: o rival recebe menos cura e menos Escudo.',
-  'Congelar': 'Congela: o rival não age, e o golpe que quebra o gelo entra mais forte.',
-  'Sono': 'Faz dormir: o rival não age até acordar com um golpe.',
-  'Cegueira': 'Cega: o rival erra parte dos ataques básicos.',
   'Invocação': 'Chama uma criatura que luta junto e ataca sozinha por alguns segundos.',
-  'Marca explosiva': 'Gruda bombas-relógio nos rivais: quando o tempo acaba, explodem (e somam).',
   'Copiar': 'Copia a última habilidade usada por um rival e a usa contra o trio dele.',
-  'Esquiva': 'Escapa de golpes: com Esquiva, parte dos golpes dos rivais passa longe (dano e debuff).',
-  'Última resistência': 'Uma vez por luta, o golpe que o derrubaria o deixa de pé com 1 de Vida.',
-  'Barreira': 'Põe Barreira no trio: o próximo debuff de um rival não entra.',
+  'Aflições': 'Especialista em males: espalha dois ou mais tipos (Veneno, Sangramento, Queimadura, Maldição) que vão tirando Vida.',
+  'Dreno de vida': 'Vive da Vida dos rivais: mais de um jeito de se curar batendo (Roubo de vida, Vampirismo, Regeneração).',
   'Purificar': 'Tira os debuffs do trio: quem estava travado volta a agir.',
   'Dissipar': 'Tira os buffs dos rivais: Protegido, Fortalecido, Refletir e companhia somem.',
-  'Roubo de vida': 'Os golpes dele curam: parte do dano que causa volta como Vida.',
-  'Refletir': 'Devolve parte de cada golpe recebido para quem bateu.',
-  'Espinhos': 'Quem bate se fere: cada golpe recebido devolve um dano fixo.',
-  'Provocar': 'Chama a briga: os rivais só conseguem mirar nele por alguns segundos.',
   'Renascer': 'Quando cai, volta sozinho uma vez, com parte da Vida.',
 };
 
 /** A ordem em que as identidades aparecem, quando o personagem tem várias. */
 export const ordemDasIdentidades: readonly Identidade[] = [
-  'Invocação', 'Copiar', 'Marca explosiva', 'Pressão', 'Explosão', 'Área', 'Dano contínuo', 'Finalização',
-  'Congelar', 'Sono', 'Cegueira', 'Controle', 'Interrupção', 'Veneno', 'Sangramento', 'Maldição', 'Debuff', 'Dissipar', 'Ritmo',
-  'Reviver', 'Purificar', 'Barreira', 'Cura', 'Proteção', 'Buff', 'Carga', 'Suporte',
-  'Esquiva', 'Última resistência', 'Provocar', 'Refletir', 'Espinhos', 'Roubo de vida', 'Renascer', 'Tanque', 'Regeneração', 'Sobrevivência',
+  'Invocação', 'Copiar', 'Aflições', 'Pressão', 'Explosão', 'Área', 'Dano contínuo', 'Finalização',
+  'Controle', 'Interrupção', 'Debuff', 'Dissipar', 'Ritmo',
+  'Reviver', 'Purificar', 'Cura', 'Proteção', 'Buff', 'Carga', 'Suporte',
+  'Renascer', 'Dreno de vida', 'Tanque', 'Regeneração', 'Sobrevivência',
   'Transformação', 'Contra-ataque', 'Preparação', 'Virada', 'Especialista',
 ];
 
@@ -100,7 +88,7 @@ export const ordemDasIdentidades: readonly Identidade[] = [
 export const familiaDaIdentidade: Record<Identidade, 'ataque' | 'atrapalha' | 'ajuda' | 'aguenta' | 'jeito'> = {
   'Pressão': 'ataque', 'Explosão': 'ataque', 'Área': 'ataque', 'Dano contínuo': 'ataque', 'Finalização': 'ataque',
   'Controle': 'atrapalha', 'Interrupção': 'atrapalha', 'Debuff': 'atrapalha', 'Ritmo': 'atrapalha',
-  'Reviver': 'ajuda', 'Purificar': 'ajuda', 'Dissipar': 'atrapalha', 'Barreira': 'ajuda', 'Esquiva': 'aguenta', 'Marca explosiva': 'ataque', 'Invocação': 'ataque', 'Copiar': 'ataque', 'Última resistência': 'aguenta', 'Veneno': 'atrapalha', 'Sangramento': 'atrapalha', 'Maldição': 'atrapalha', 'Congelar': 'atrapalha', 'Sono': 'atrapalha', 'Cegueira': 'atrapalha', 'Renascer': 'aguenta', 'Provocar': 'aguenta', 'Refletir': 'aguenta', 'Espinhos': 'aguenta', 'Roubo de vida': 'aguenta', 'Cura': 'ajuda', 'Proteção': 'ajuda', 'Buff': 'ajuda', 'Carga': 'ajuda', 'Suporte': 'ajuda',
+  'Reviver': 'ajuda', 'Purificar': 'ajuda', 'Dissipar': 'atrapalha', 'Invocação': 'ataque', 'Copiar': 'ataque', 'Aflições': 'atrapalha', 'Dreno de vida': 'aguenta', 'Renascer': 'aguenta', 'Cura': 'ajuda', 'Proteção': 'ajuda', 'Buff': 'ajuda', 'Carga': 'ajuda', 'Suporte': 'ajuda',
   'Tanque': 'aguenta', 'Regeneração': 'aguenta', 'Sobrevivência': 'aguenta',
   'Transformação': 'jeito', 'Contra-ataque': 'jeito', 'Preparação': 'jeito', 'Virada': 'jeito', 'Especialista': 'jeito',
 };
@@ -135,8 +123,8 @@ export const oQueAdiciona = (candidato: Character | string, trio: readonly (Char
  * curandeiro não ouve que lhe falta recuperação.
  */
 const LACUNAS: readonly { texto: string; cobertaPor: readonly Identidade[] }[] = [
-  { texto: 'Pouca proteção', cobertaPor: ['Proteção', 'Tanque', 'Provocar'] },
-  { texto: 'Pouca recuperação', cobertaPor: ['Cura', 'Regeneração', 'Reviver', 'Renascer', 'Roubo de vida'] },
+  { texto: 'Pouca proteção', cobertaPor: ['Proteção', 'Tanque'] },
+  { texto: 'Pouca recuperação', cobertaPor: ['Cura', 'Regeneração', 'Reviver', 'Renascer'] },
   { texto: 'Pouca interrupção', cobertaPor: ['Interrupção', 'Controle'] },
   { texto: 'Pouco dano concentrado', cobertaPor: ['Explosão', 'Finalização'] },
 ];
@@ -185,25 +173,13 @@ export const guiaDaIdentidade: Record<Identidade, GuiaDaIdentidade> = {
   'Preparação': { naLuta: ['Anuncia o golpe antes: aparece o Preparo.', 'Quando sai, o golpe é muito forte.'], combina: ['Proteção', 'Controle'], cuidado: 'Interrupção corta o golpe no meio do Preparo.' },
   'Transformação': { naLuta: ['Muda de forma ou fica mais forte no meio da luta.', 'O começo é mais fraco; o final é o melhor momento.'], combina: ['Tanque', 'Proteção'], cuidado: 'Explosão no começo derruba antes da transformação.' },
   'Contra-ataque': { naLuta: ['Cada golpe que recebe carrega as habilidades dele.', 'Quanto mais apanha, mais rápido revida.'], combina: ['Tanque', 'Regeneração'], cuidado: 'Controle e dano contínuo machucam sem dar Carga a ele.' },
+  'Aflições': { naLuta: ['Põe mais de um mal no rival: Veneno, Sangramento, Queimadura, Maldição.', 'Cada um tira Vida de um jeito, e juntos somam rápido.'], combina: ['Controle', 'Tanque'], cuidado: 'O dano vem devagar: contra rivais que se curam ou se limpam (Purificar), rende menos.' },
+  'Dreno de vida': { naLuta: ['Bate e se cura com o mesmo golpe, de mais de um jeito.', 'Quanto mais tempo luta, mais difícil de derrubar.'], combina: ['Proteção', 'Ritmo'], cuidado: 'Se não conseguir bater (preso, cego), não se cura.' },
   'Especialista': { naLuta: ['Espera a situação certa para agir.', 'Quando ela aparece, decide a luta.'], combina: ['Suporte', 'Carga'], cuidado: 'Se a situação não aparecer, ele faz pouco.' },
-  'Veneno': { naLuta: ['O rival perde Vida a cada segundo enquanto durar.', 'O veneno passa por dentro: Escudo e Protegido não seguram.'], combina: ['Tanque', 'Provocar'], cuidado: 'Purificar tira o veneno de uma vez.' },
-  'Sangramento': { naLuta: ['Cada ação do rival (golpe ou habilidade) custa Vida.', 'Quanto mais rápido o rival, mais ele sangra.'], combina: ['Ritmo', 'Pressão'], cuidado: 'Rival parado (Paralisado, Dormindo) não sangra.' },
-  'Maldição': { naLuta: ['O rival recebe menos cura e menos Escudo, de todo mundo.', 'Desmonta trios que vivem de cura.'], combina: ['Explosão', 'Finalização'], cuidado: 'Contra quem não se cura, vale pouco.' },
-  'Congelar': { naLuta: ['O rival fica preso no gelo e não age.', 'O golpe que quebra o gelo entra mais forte: guarde o golpe grande para ele.'], combina: ['Explosão', 'Finalização'], cuidado: 'Qualquer golpe direto quebra o gelo: golpes fracos desperdiçam o bônus.' },
-  'Sono': { naLuta: ['O rival dorme e não age até acordar.', 'Dura mais que o gelo, mas qualquer golpe direto acorda.'], combina: ['Dano contínuo', 'Preparação'], cuidado: 'Bater em quem dorme acorda: Queimadura e Veneno não acordam.' },
-  'Cegueira': { naLuta: ['O rival erra parte dos ataques básicos.', 'Atrapalha quem vive de golpe básico rápido.'], combina: ['Tanque', 'Provocar'], cuidado: 'Não atrapalha as habilidades.' },
   'Invocação': { naLuta: ['Chama uma criatura que ataca o rival mais ferido a cada 1,5 s.', 'Ela continua atacando mesmo com quem invocou travado.'], combina: ['Buff', 'Controle'], cuidado: 'Dissipar manda a criatura embora, e ela some se quem invocou cair.' },
-  'Marca explosiva': { naLuta: ['Gruda uma bomba-relógio no rival: quando o tempo acaba, explode com o dano guardado.', 'Várias marcas no mesmo rival somam numa explosão maior.'], combina: ['Controle', 'Provocar'], cuidado: 'Purificar desarma a bomba antes de explodir.' },
   'Copiar': { naLuta: ['Copia a última habilidade usada por um rival e a usa do lado dele, com parte da força.', 'Contra rivais de golpe grande, devolve o golpe grande.'], combina: ['Interrupção', 'Controle'], cuidado: 'Precisa que um rival use uma habilidade antes: no começo da luta, não tem o que copiar.' },
-  'Esquiva': { naLuta: ['Com Esquiva, parte dos golpes dos rivais passa longe: nem dano, nem debuff entram.', 'Vale contra golpes em todos também.'], combina: ['Provocar', 'Pressão'], cuidado: 'É sorte: um golpe grande que acerta dói igual. Dissipar tira a Esquiva.' },
-  'Última resistência': { naLuta: ['O golpe que o derrubaria o deixa com 1 de Vida e Protegido por um instante.', 'Uma vez por luta.'], combina: ['Cura', 'Regeneração'], cuidado: 'Com 1 de Vida, qualquer coisa derruba: precisa de cura logo. A Death Note não respeita.' },
-  'Barreira': { naLuta: ['O próximo debuff de um rival não entra no aliado.', 'Cada debuff anulado gasta uma Barreira.'], combina: ['Tanque', 'Controle'], cuidado: 'Não segura dano: só Status.' },
-  'Purificar': { naLuta: ['Tira os debuffs do trio, os que mais atrapalham primeiro: Paralisado, Silenciado, Preso…', 'Quem estava travado volta a agir na hora.'], combina: ['Tanque', 'Provocar'], cuidado: 'Só tira o que já está lá: contra rivais que não põem debuff, vale pouco.' },
+  'Purificar': { naLuta: ['Tira os debuffs do trio, os que mais atrapalham primeiro: Paralisado, Silenciado, Preso…', 'Quem estava travado volta a agir na hora.'], combina: ['Tanque'], cuidado: 'Só tira o que já está lá: contra rivais que não põem debuff, vale pouco.' },
   'Dissipar': { naLuta: ['Tira os buffs dos rivais, os que mais ajudam primeiro: Protegido, Refletir, Vampirismo, Fortalecido…', 'Desmonta a defesa antes do golpe grande do trio.'], combina: ['Explosão', 'Finalização'], cuidado: 'Não quebra Escudo: contra quem só se protege com Escudo, vale pouco.' },
-  'Roubo de vida': { naLuta: ['Os golpes curam quem bate: parte do dano volta como Vida.', 'Quanto mais ele acerta, mais tempo fica de pé.'], combina: ['Buff', 'Provocar'], cuidado: 'Se não acerta, não se cura: Lento, Paralisado e Enfraquecido cortam a cura junto com o dano.' },
-  'Refletir': { naLuta: ['Cada golpe recebido volta em parte para quem bateu, mesmo se o Escudo segurar.', 'Pune golpes grandes: quanto mais forte o golpe, mais volta.'], combina: ['Provocar', 'Tanque'], cuidado: 'Dura pouco: golpes em todos e Queimadura passam sem voltar.' },
-  'Espinhos': { naLuta: ['Quem bate leva um dano fixo a cada golpe.', 'Pune quem bate muitas vezes: golpes rápidos e em área se machucam mais.'], combina: ['Provocar', 'Proteção'], cuidado: 'Um golpe grande e raro quase não sente os espinhos.' },
-  'Provocar': { naLuta: ['Grita e deixa os rivais Provocados: o ataque básico e as habilidades de um alvo deles só vão nele.', 'Golpes em todos continuam iguais; se ele cair, a provocação acaba.'], combina: ['Cura', 'Proteção'], cuidado: 'Ele leva os golpes de todo mundo: precisa de Vida, Escudo ou cura para aguentar.' },
   'Reviver': { naLuta: ['Quando um aliado cai, a habilidade dele o levanta com parte da Vida.', 'Uma vez por luta — e cada lutador só volta uma vez.'], combina: ['Explosão', 'Pressão'], cuidado: 'Leva um tempo de Preparo: se for interrompido ou cair antes, o aliado fica no chão.' },
   'Renascer': { naLuta: ['Quando cai, fica em brasas por um instante e volta sozinho.', 'Volta com parte da Vida, uma vez por luta.'], combina: ['Tanque', 'Virada'], cuidado: 'A Death Note impede: quem é executado não renasce.' },
 };

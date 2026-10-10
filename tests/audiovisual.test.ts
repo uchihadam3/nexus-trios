@@ -62,7 +62,7 @@ describe('compact reusable audiovisual library',()=>{
   it('gives the famous skills the effect and colour people recognise',()=>{
     expect(profileFor('goku',0)?.family).toBe('kamehameha');
     const [h]=hsl(profileFor('goku',0)!.color);expect(h).toBeGreaterThan(185);expect(h).toBeLessThan(215);
-    expect(profileFor('superman',0)?.family).toBe('laser');expect(hsl(profileFor('superman',0)!.color)[0]).toBeLessThan(15);
+    expect(profileFor('superman',0)?.family).toBe('visao_de_calor');expect(hsl(profileFor('superman',0)!.color)[0]).toBeLessThan(15);
     expect(profileFor('pikachu',0)?.family).toBe('raio');
     expect(profileFor('spiderman',0)?.family).toBe('teia');
     expect(profileFor('light',2)?.family).toBe('death_note');
@@ -71,7 +71,7 @@ describe('compact reusable audiovisual library',()=>{
     expect(profileFor('beerus',0)?.family).toBe('toque_da_destruicao');expect(profileFor('sasuke',0)?.family).toBe('chidori');
     expect(profileFor('saitama',2)?.family).toBe('soco_serio');expect(profileFor('itachi',2)?.family).toBe('susanoo');
     expect(profileFor('ichigo',0)?.family).toBe('corte_de_energia');
-    expect(profileFor('charizard',0)?.family).toBe('sopro_de_fogo');
+    expect(profileFor('charizard',0)?.family).toBe('lanca_chamas');
     // a mesma família muda de cor com o personagem
     expect(profileFor('vegeta',0)?.family).toBe('kamehameha');expect(profileFor('vegeta',0)?.color).not.toBe(profileFor('goku',0)?.color);
   });

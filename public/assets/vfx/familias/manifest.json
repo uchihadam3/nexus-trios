@@ -209,6 +209,34 @@
   "laco": false,
   "bytes": 96158
  },
+ "aurora_faixa": {
+  "descricao": "Hyoga · o raio da Execução Aurora (faixa)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   512,
+   96
+  ],
+  "laco": true,
+  "bytes": 104614
+ },
+ "aurora_preparo": {
+  "descricao": "Hyoga · o círculo de gelo e a aurora acima da cabeça (laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 64266
+ },
  "bala_de_canhao": {
   "descricao": "bala de canhão em viagem (+x)",
   "quadros": 12,
@@ -433,6 +461,20 @@
   "laco": true,
   "bytes": 52078
  },
+ "bola_do_charizard": {
+  "descricao": "Charizard · a bola de fogo voando (laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 34958
+ },
  "bola_ki": {
   "descricao": "bola de ki em viagem (+x)",
   "quadros": 12,
@@ -545,6 +587,48 @@
   "laco": false,
   "bytes": 51608
  },
+ "buster_bala": {
+  "descricao": "Mega Man · os três tiros do Buster voando (laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 11742
+ },
+ "buster_carga": {
+  "descricao": "Mega Man · a carga do Buster juntando (laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 25692
+ },
+ "buster_impacto": {
+  "descricao": "Mega Man · os três tiros estourando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 20936
+ },
  "cajado_da_caveira": {
   "descricao": "Cajado da Caveira: o crânio de carneiro bate e solta faíscas mágicas num círculo",
   "quadros": 12,
@@ -558,6 +642,34 @@
   ],
   "laco": false,
   "bytes": 75454
+ },
+ "calor_faixa": {
+  "descricao": "Super-Homem · os dois raios da Visão de calor (faixa)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   512,
+   96
+  ],
+  "laco": true,
+  "bytes": 121002
+ },
+ "calor_impacto": {
+  "descricao": "Super-Homem · o ponto queimando, derretendo e soltando fumaça",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 42410
  },
  "canhao_de_braco": {
   "descricao": "Samus: bola de plasma do canhão, explosão pequena e anel (+x)",
@@ -628,6 +740,34 @@
   ],
   "laco": true,
   "bytes": 41132
+ },
+ "carga_maxima_bala": {
+  "descricao": "Mega Man · o tiro carregado voando (laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 10652
+ },
+ "carga_maxima_impacto": {
+  "descricao": "Mega Man · a explosão do tiro carregado",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 89064
  },
  "carga_roubada": {
   "descricao": "A Carga roubada enche a habilidade de quem roubou",
@@ -754,6 +894,20 @@
   ],
   "laco": false,
   "bytes": 39064
+ },
+ "chamas_faixa": {
+  "descricao": "Charizard · o jato do Lança-chamas até o rival (faixa)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   512,
+   96
+  ],
+  "laco": true,
+  "bytes": 176772
  },
  "chegada": {
   "descricao": "apoio chegando ao aliado",
@@ -1399,6 +1553,34 @@
   "laco": false,
   "bytes": 69212
  },
+ "diamante_faixa": {
+  "descricao": "Hyoga · o Pó de Diamante correndo até o rival (faixa)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   512,
+   96
+  ],
+  "laco": true,
+  "bytes": 187752
+ },
+ "diamante_impacto": {
+  "descricao": "Hyoga · as agulhas de gelo crescendo no rival",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 53114
+ },
  "disco": {
   "descricao": "disco girando em viagem (+x)",
   "quadros": 12,
@@ -1594,6 +1776,20 @@
   ],
   "laco": false,
   "bytes": 62508
+ },
+ "escudo_do_mentor": {
+  "descricao": "Piccolo · a capa passa na frente e a barreira de ki fecha",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 124582
  },
  "escudo_fisico": {
   "descricao": "brasão de escudo",
@@ -1889,6 +2085,20 @@
   "laco": false,
   "bytes": 42732
  },
+ "eu_te_seguro": {
+  "descricao": "Super-Homem · chega voando, abraça o aliado e a bolha acende",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 51918
+ },
  "execucao": {
   "descricao": "execução",
   "quadros": 12,
@@ -1902,6 +2112,20 @@
   ],
   "laco": false,
   "bytes": 51562
+ },
+ "execucao_aurora": {
+  "descricao": "Hyoga · o rival preso no cristal de gelo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 61084
  },
  "explosao": {
   "descricao": "explosão",
@@ -1930,6 +2154,20 @@
   ],
   "laco": false,
   "bytes": 64476
+ },
+ "explosao_de_fogo": {
+  "descricao": "Charizard · a estrela de fogo de cinco braços",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 104354
  },
  "explosao_grande": {
   "descricao": "explosão em cogumelo",
@@ -2197,6 +2435,20 @@
   "laco": false,
   "bytes": 44244
  },
+ "fogo_no_peito": {
+  "descricao": "Charizard · o fogo juntando na boca no Preparo (laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 73744
+ },
  "foguete": {
   "descricao": "foguete em viagem (+x)",
   "quadros": 12,
@@ -2281,8 +2533,8 @@
   "laco": false,
   "bytes": 49868
  },
- "garra_flamejante": {
-  "descricao": "Charizard: três garras de fogo com chamas nos riscos",
+ "garra_de_dragao": {
+  "descricao": "Charizard · as três garras de dragão rasgando",
   "quadros": 12,
   "grade": [
    3,
@@ -2293,7 +2545,7 @@
    192
   ],
   "laco": false,
-  "bytes": 86664
+  "bytes": 58112
  },
  "garras": {
   "descricao": "três rasgos de garra",
@@ -2967,6 +3219,20 @@
   "laco": false,
   "bytes": 68404
  },
+ "krypton_carga": {
+  "descricao": "Super-Homem · a luz do sol juntando nele (laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 94608
+ },
  "kunai_de_hiraishin": {
   "descricao": "Minato: kunai de três pontas, clarão do teleporte e o golpe",
   "quadros": 12,
@@ -3177,6 +3443,20 @@
   "laco": false,
   "bytes": 73798
  },
+ "lanca_chamas_impacto": {
+  "descricao": "Charizard · o fogo batendo e as chamas subindo no rival",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 59722
+ },
  "lanche": {
   "descricao": "mordida, vapor e coração",
   "quadros": 12,
@@ -3317,6 +3597,48 @@
   "laco": false,
   "bytes": 126240
  },
+ "makanko_carga": {
+  "descricao": "Piccolo · os dedos na testa e a espiral de ki apertando (laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 54216
+ },
+ "makanko_faixa": {
+  "descricao": "Piccolo · o raio do Makankosappo com a espiral girando (faixa)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   512,
+   96
+  ],
+  "laco": true,
+  "bytes": 70302
+ },
+ "makankosappo": {
+  "descricao": "Piccolo · Makankosappo: o raio fura o rival e sai pelas costas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 53162
+ },
  "maldicao": {
   "descricao": "maldição",
   "quadros": 12,
@@ -3456,20 +3778,6 @@
   ],
   "laco": false,
   "bytes": 83840
- },
- "mega_buster": {
-  "descricao": "Mega Man: três bolinhas do buster estalando em quadradinhos (+x)",
-  "quadros": 12,
-  "grade": [
-   3,
-   4
-  ],
-  "tamanho": [
-   192,
-   192
-  ],
-  "laco": false,
-  "bytes": 24132
  },
  "metal": {
   "descricao": "chapas de metal fechando",
@@ -3723,6 +4031,20 @@
   "laco": false,
   "bytes": 47270
  },
+ "olhos_brilhando": {
+  "descricao": "Super-Homem · os olhos acendendo no Preparo (laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 14528
+ },
  "omnislash": {
   "descricao": "Cloud · Omnislash: os cortes de todos os lados e o final",
   "quadros": 12,
@@ -3946,20 +4268,6 @@
   ],
   "laco": false,
   "bytes": 74736
- },
- "po_de_diamante": {
-  "descricao": "Hyoga: jato de cristais de gelo que congela o alvo",
-  "quadros": 12,
-  "grade": [
-   3,
-   4
-  ],
-  "tamanho": [
-   192,
-   192
-  ],
-  "laco": false,
-  "bytes": 60924
  },
  "portal": {
   "descricao": "portal",
@@ -4255,6 +4563,34 @@
   "laco": false,
   "bytes": 121504
  },
+ "raio_copiado": {
+  "descricao": "Mega Man · a esfera elétrica da arma copiada voando (laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 25244
+ },
+ "raio_copiado_impacto": {
+  "descricao": "Mega Man · a esfera estoura e fica crepitando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 69060
+ },
  "raio_de_gaia": {
   "descricao": "Raio de Gaia: cinco pontos de luz se unem num raio trançado que abre um planeta de luz",
   "quadros": 12,
@@ -4436,6 +4772,20 @@
   ],
   "laco": false,
   "bytes": 56320
+ },
+ "regeneracao_namekiana": {
+  "descricao": "Piccolo · as gotas voltam e o braço novo nasce",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 115520
  },
  "reigun_bala": {
   "descricao": "Yusuke · a bala do Reigun voando (laço)",
@@ -5557,6 +5907,20 @@
   "laco": false,
   "bytes": 48790
  },
+ "troca_de_arma": {
+  "descricao": "Mega Man · os dados juntando no braço e a troca de cor",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": false,
+  "bytes": 37656
+ },
  "tsunami": {
   "descricao": "onda gigante",
   "quadros": 12,
@@ -5584,6 +5948,20 @@
   ],
   "laco": false,
   "bytes": 93424
+ },
+ "ultimo_filho": {
+  "descricao": "Super-Homem · o soco supersônico com o estrondo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 84190
  },
  "vampirismo": {
   "descricao": "gotas de sangue em espiral e pulso de coração",
@@ -5710,5 +6088,33 @@
   ],
   "laco": false,
   "bytes": 56964
+ },
+ "zero_absoluto": {
+  "descricao": "Hyoga · o campo congelando com as estacas de gelo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 101792
+ },
+ "zero_preparo": {
+  "descricao": "Hyoga · o frio girando em volta dele (laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 60698
  }
 }

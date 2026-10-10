@@ -410,52 +410,6 @@ def _floco(cx, cy, r, ang):
     return segs
 
 
-def po_de_diamante(T, t, rng):
-    """Pó de Diamante: um jato de cristais de gelo em losango, girando e cintilando, vem da
-    esquerda; o alvo congela num cristal hexagonal com estrelas de gelo brilhando em volta."""
-    G, H = vazio(T)
-    env = apaga(t, 0.85, 1)
-    sub = np.random.default_rng(808)
-    cristais, brilhos = [], []
-    for j in range(30):
-        t0 = 0.4 * j / 30
-        tx, ty = sub.normal(0, 0.16), sub.normal(0, 0.16)
-        y0 = sub.uniform(-0.25, 0.25)
-        tam = sub.uniform(0.035, 0.06)
-        giro = sub.uniform(4, 9)
-        p = rel(t, t0, t0 + 0.2)
-        if 0 < p < 1:
-            x = -1.0 + (tx + 1.0) * p
-            y = y0 + (ty - y0) * p + 0.06 * math.sin(p * 7 + j)
-            a = giro * (t + p)
-            cristais.append(([(x + math.cos(a) * tam * 1.7, y + math.sin(a) * tam * 1.7), (x - math.sin(a) * tam * 0.7, y + math.cos(a) * tam * 0.7),
-                              (x - math.cos(a) * tam * 1.7, y - math.sin(a) * tam * 1.7), (x + math.sin(a) * tam * 0.7, y - math.cos(a) * tam * 0.7)], 1.0))
-            brilhos.append((x, y, 0.5 + 0.5 * math.sin(t * 40 + j * 2.3)))
-    C = T.polys(cristais, 0.003) if cristais else T.zero()
-    B = T.splats(brilhos, 0.02) if brilhos else T.zero()
-    vento = rastro_de_velocidade(T, rng, 12, 0.0, 0.7, 0.32, -0.25 + 0.6 * rel(t, 0, 0.45), largura=0.012, seed=88) * pulso(t, 0.0, 0.5)
-    cr = ease_out(rel(t, 0.32, 0.6), 2.2)
-    gelo, geloH = T.zero(), T.zero()
-    if cr > 0:
-        hexa = [(0.36 * cr * math.cos(math.pi / 6 + k * math.pi / 3), 0.42 * cr * math.sin(math.pi / 6 + k * math.pi / 3)) for k in range(6)]
-        gelo = T.polys([(hexa, 0.45)], 0.004) + T.polyline(_fechado(hexa), 0.02) * 1.1
-        for k in range(6):
-            gelo += T.polys([([(0, 0), hexa[k], hexa[(k + 1) % 6]], 0.12 * (k % 3))], 0.002)
-            geloH += T.polyline([(0, 0), hexa[k]], 0.008) * 0.7
-        geloH += T.polyline(_fechado(hexa), 0.008)
-    gelo = gelo * (1 - rel(t, 0.8, 1))
-    flocos, fl = [], T.zero()
-    for j, (fx, fy, r, a0) in enumerate(((-0.45, -0.4, 0.13, 0.0), (0.48, -0.32, 0.11, 0.3), (0.42, 0.42, 0.12, 0.1), (-0.4, 0.45, 0.1, 0.4), (0.0, -0.62, 0.09, 0.2))):
-        kk = back(rel(t, 0.45 + 0.06 * j, 0.6 + 0.06 * j), 2.0) * (1 - rel(t, 0.85, 1))
-        if kk > 0:
-            flocos += _floco(fx, fy, r * kk, a0 + t * 2)
-            fl += T.flare(fx, fy, 0.35 * kk, 0.0, 0.02) * pulso(t, 0.45 + 0.06 * j, 0.9)
-    F = T.lines(flocos, 0.014) if flocos else T.zero()
-    g, h = _clarao(T, pulso(t, 0.3, 0.6), 0, 0, 0.25, 0.8, ang=0.0)
-    G += (T.glow(C, 1.1, 1.0, 0.02) + B * 0.6 + vento * 0.7 + gelo * 1.1 + T.glow(F, 1.2, 0.8, 0.02) + g) * env
-    H += (C * 0.8 + B * 0.9 + geloH * 1.2 + F * 1.0 + fl * 0.9 + h) * env
-    return G, H
-
 
 # ------------------------------------------------------------------ Shun
 def corrente_de_andromeda(T, t, rng):
@@ -640,42 +594,6 @@ def tiara_lunar(T, t, rng):
 
 
 # ------------------------------------------------------------------ Charizard
-def garra_flamejante(T, t, rng):
-    """Garra flamejante: três garras de fogo rasgam o alvo em diagonal, uma após a outra, e nos
-    riscos ficam chamas que sobem e se apagam."""
-    G, H = vazio(T)
-    env = apaga(t, 0.85, 1)
-    cortes, fios = T.zero(), T.zero()
-    chamas = []
-    for k in range(3):
-        off = (k - 1) * 0.26
-        x1, y1, x2, y2 = -0.6 + off, -0.65, 0.5 + off, 0.6
-        a = 0.03 * k
-        p = ease_out(rel(t, a, a + 0.16), 2.4)
-        if p <= 0:
-            continue
-        fim = rel(t, 0.35, 0.75)
-        cortes += T.polys([(lamina(x1, y1, x2, y2, 0.07, p, fim), 1)], 0.004)
-        fios += T.polys([(lamina(x1, y1, x2, y2, 0.02, p, fim), 1)], 0.002)
-        for j in range(6):
-            u = 0.12 + 0.76 * j / 5
-            if u > p:
-                continue
-            fx, fy = x1 + (x2 - x1) * u, y1 + (y2 - y1) * u
-            nasce = a + 0.1 + 0.03 * j
-            alt = 0.4 * ease_out(rel(t, nasce, nasce + 0.2), 2) * (1 - 0.35 * rel(t, 0.6, 0.95)) * (0.75 + 0.3 * abs(math.sin(t * 21 + j * 1.9 + k)))
-            if alt > 0.01:
-                chamas.append((_chama(fx, fy + 0.03, alt, 0.055, t * 30 + j + k * 2, 0.9), 0.8 * (1 - rel(t, 0.62, 0.95))))
-    Ch = T.polys(chamas, 0.012) if chamas else T.zero()
-    g, h = _clarao(T, pulso(t, 0.08, 0.38), 0, 0, 0.2, 0.6, ang=0.8)
-    sub = np.random.default_rng(55)
-    brasas = []
-    for _ in range(16):
-        f = rel(t, 0.2 + sub.uniform(0, 0.25), 1.0)
-        brasas.append((sub.uniform(-0.55, 0.55) + 0.1 * f, sub.uniform(-0.2, 0.4) - 0.7 * f, math.sin(math.pi * f) * sub.uniform(0.4, 1)))
-    G += (T.glow(cortes, 1.0, 1.2, 0.025) + fios * 1.2 + Ch * 1.1 + g + T.splats(brasas, 0.012) * 1.2) * env
-    H += (fios * 1.6 + cortes * 0.3 + Ch * 0.35 + h + T.splats(brasas, 0.007)) * env
-    return G, H
 
 
 # ------------------------------------------------------------------ Bill Cipher
@@ -743,10 +661,8 @@ REGISTRO = [
     ("carta_dragao", carta_dragao, GRANDE, "Kaiba: carta vira e solta o raio branco do dragão", False),
     ("meteoros_de_pegaso", meteoros_de_pegaso, GRANDE, "Seiya: dezenas de socos-meteoro azuis riscando o alvo", False),
     ("punho_do_dragao", punho_do_dragao, GRANDE, "Shiryu: gancho que sobe com o dragão em espiral", False),
-    ("po_de_diamante", po_de_diamante, GRANDE, "Hyoga: jato de cristais de gelo que congela o alvo", False),
     ("corrente_de_andromeda", corrente_de_andromeda, GRANDE, "Shun: corrente em zigue-zague com ponta triangular", False),
     ("rendicao", rendicao, GRANDE, "Shaka: lótus dourada abre sobre a roda de luz", False),
     ("tiara_lunar", tiara_lunar, GRANDE, "Sailor Moon: tiara-disco com lua crescente que acerta com brilho", False),
-    ("garra_flamejante", garra_flamejante, GRANDE, "Charizard: três garras de fogo com chamas nos riscos", False),
     ("chama_do_triangulo", chama_do_triangulo, GRANDE, "Bill Cipher: triângulo de olho que derrama chama azul", False),
 ]

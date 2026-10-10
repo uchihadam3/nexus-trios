@@ -32,7 +32,7 @@ import { CUSTO_DAS_DICAS,formatarPontos } from '../engine/pontos';
  */
 const NIVEL=(n:number)=>n>=80?{rotulo:'ÓTIMO',cor:'#7dff9b'}:n>=55?{rotulo:'BOM',cor:'#c8f560'}:n>=35?{rotulo:'OK',cor:'#ffd166'}:{rotulo:'FRACO',cor:'#ff7a85'};
 const primeiroNome=(id:string)=>byId[id].name.split(/[ ,]/)[0];
-export function DraftScreen({draft,primeiroRival,dicas,usouDicas,onDicas,onPick,onSkip,onDetails,onStart,onAbandon}:{draft:Draft;primeiroRival?:Encounter;dicas:boolean;usouDicas:boolean;onDicas:(ligar:boolean)=>void;onPick:(id:string)=>void;onSkip:()=>void;onDetails:(id:string)=>void;onStart:()=>void;onAbandon:()=>void}){
+export function DraftScreen({draft,primeiroRival,dicas,podeDicas=true,usouDicas,onDicas,onPick,onSkip,onDetails,onStart,onAbandon}:{draft:Draft;primeiroRival?:Encounter;dicas:boolean;/** o botão só aparece para quem liberou as Dicas (src/lib/dicas-liberadas.ts) */podeDicas?:boolean;usouDicas:boolean;onDicas:(ligar:boolean)=>void;onPick:(id:string)=>void;onSkip:()=>void;onDetails:(id:string)=>void;onStart:()=>void;onAbandon:()=>void}){
   const full=draft.team.length===3,team=draft.team.map(id=>byId[id]);
   const doTrio=identidadesDoTrio(team),lacunas=lacunasDoTrio(team);
   const vez=draft.team.length;
@@ -49,7 +49,7 @@ export function DraftScreen({draft,primeiroRival,dicas,usouDicas,onDicas,onPick,
         {c?<><Portrait character={c}/><b>{c.name}</b></>:<><span>?</span><b>{i===vez?'escolha agora':`espaço ${i+1}`}</b></>}
       </div>;})}</div>
       {team.length>0&&<div className="dv-trio-faz"><IdentityChips ids={doTrio} trio={doTrio}/>{ligadas&&lacunas.length>0&&<small><TriangleAlert size={13}/>{lacunas.join(' · ')}</small>}</div>}
-      {(!full||usouDicas)&&<button className={`dv-dicas ${dicas?'ligado':''}`} role="switch" aria-checked={dicas} onClick={()=>onDicas(!dicas)} disabled={full}>
+      {(podeDicas&&!full||usouDicas)&&<button className={`dv-dicas ${dicas?'ligado':''}`} role="switch" aria-checked={dicas} onClick={()=>onDicas(!dicas)} disabled={full}>
         <span className="dv-dicas-lampada"><Lightbulb size={20}/></span>
         <span className="dv-dicas-texto"><b>DICAS DE TRIO</b><small>{dicas?<>ligadas · <em>−{formatarPontos(CUSTO_DAS_DICAS)} por luta</em></>:usouDicas?<>esta jornada já usou · <em>−{formatarPontos(CUSTO_DAS_DICAS)} por luta</em></>:'desligadas · pontos cheios'}</small></span>
         <span className="dv-dicas-chave" aria-hidden><i/></span>
