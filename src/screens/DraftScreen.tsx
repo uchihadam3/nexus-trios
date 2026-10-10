@@ -1,6 +1,6 @@
 import { useMemo,useState,type CSSProperties } from 'react';
 import { createPortal } from 'react-dom';
-import { ArrowRight,CircleCheck,Crown,Dices,Info,Lightbulb,Lock,LogOut,Sparkles,Swords,TriangleAlert,X } from 'lucide-react';
+import { ArrowRight,CircleCheck,Crown,Dices,Info,Lightbulb,LogOut,Sparkles,Swords,TriangleAlert,X } from 'lucide-react';
 import type { Draft,Encounter } from '../engine/campaign';
 import { byId } from '../data/characters';
 import { Portrait } from '../components/Portrait';
@@ -12,7 +12,6 @@ import { ComTermos } from '../components/Termos';
 import { draftConnection } from '../presentation/draft-connections';
 import { dicasDoDraft,type DicaDoCandidato } from '../presentation/dicas-do-trio';
 import { CUSTO_DAS_DICAS,formatarPontos } from '../engine/pontos';
-import { META_DAS_DICAS } from '../lib/dicas-liberadas';
 
 /*
  * A escolha do trio (remake).
@@ -33,7 +32,7 @@ import { META_DAS_DICAS } from '../lib/dicas-liberadas';
  */
 const NIVEL=(n:number)=>n>=80?{rotulo:'ÓTIMO',cor:'#7dff9b'}:n>=55?{rotulo:'BOM',cor:'#c8f560'}:n>=35?{rotulo:'OK',cor:'#ffd166'}:{rotulo:'FRACO',cor:'#ff7a85'};
 const primeiroNome=(id:string)=>byId[id].name.split(/[ ,]/)[0];
-export function DraftScreen({draft,primeiroRival,dicas,podeDicas=true,usouDicas,onDicas,onPick,onSkip,onDetails,onStart,onAbandon}:{draft:Draft;primeiroRival?:Encounter;dicas:boolean;/** o botão só aparece para quem liberou as Dicas (src/lib/dicas-liberadas.ts) */podeDicas?:boolean;usouDicas:boolean;onDicas:(ligar:boolean)=>void;onPick:(id:string)=>void;onSkip:()=>void;onDetails:(id:string)=>void;onStart:()=>void;onAbandon:()=>void}){
+export function DraftScreen({draft,primeiroRival,dicas,onPick,onSkip,onDetails,onStart,onAbandon}:{draft:Draft;primeiroRival?:Encounter;/** a jornada foi aberta com as Dicas de trio ligadas */dicas:boolean;onPick:(id:string)=>void;onSkip:()=>void;onDetails:(id:string)=>void;onStart:()=>void;onAbandon:()=>void}){
   const full=draft.team.length===3,team=draft.team.map(id=>byId[id]);
   const doTrio=identidadesDoTrio(team),lacunas=lacunasDoTrio(team);
   const vez=draft.team.length;
@@ -50,17 +49,11 @@ export function DraftScreen({draft,primeiroRival,dicas,podeDicas=true,usouDicas,
         {c?<><Portrait character={c}/><b>{c.name}</b></>:<><span>?</span><b>{i===vez?'escolha agora':`espaço ${i+1}`}</b></>}
       </div>;})}</div>
       {team.length>0&&<div className="dv-trio-faz"><IdentityChips ids={doTrio} trio={doTrio}/>{ligadas&&lacunas.length>0&&<small><TriangleAlert size={13}/>{lacunas.join(' · ')}</small>}</div>}
-      {podeDicas?(!full||usouDicas)&&<button className={`dv-dicas ${dicas?'ligado':''}`} role="switch" aria-checked={dicas} onClick={()=>onDicas(!dicas)} disabled={full}>
+      {/* as Dicas são decididas na tela inicial, antes da jornada (src/components/BotaoDicas.tsx): aqui só o aviso */}
+      {dicas&&<div className="dv-dicas ligado aviso" role="status">
         <span className="dv-dicas-lampada"><Lightbulb size={20}/></span>
-        <span className="dv-dicas-texto"><b>DICAS DE TRIO</b><small>{dicas?<>ligadas · <em>−{formatarPontos(CUSTO_DAS_DICAS)} por luta</em></>:usouDicas?<>esta jornada já usou · <em>−{formatarPontos(CUSTO_DAS_DICAS)} por luta</em></>:'desligadas · pontos cheios'}</small></span>
-        <span className="dv-dicas-chave" aria-hidden><i/></span>
-      </button>
-      /* trancado: aparece, mas só liga depois da meta numa jornada (src/lib/dicas-liberadas.ts) */
-      :!full&&<button className="dv-dicas trancado" role="switch" aria-checked={false} aria-disabled="true" disabled>
-        <span className="dv-dicas-lampada"><Lock size={18}/></span>
-        <span className="dv-dicas-texto"><b>DICAS DE TRIO</b><small>libera ao fazer <em>{formatarPontos(META_DAS_DICAS)} pontos</em> com um trio</small></span>
-        <span className="dv-dicas-chave" aria-hidden><i/></span>
-      </button>}
+        <span className="dv-dicas-texto"><b>DICAS DE TRIO</b><small>ligadas nesta jornada · <em>−{formatarPontos(CUSTO_DAS_DICAS)} por luta</em></small></span>
+      </div>}
     </header>
 
     {!full&&<div className="dv-cartas" key={draft.candidates.join('-')}>{draft.candidates.map((id,i)=>{
