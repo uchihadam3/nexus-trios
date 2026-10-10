@@ -33,6 +33,11 @@ npx -y supabase@2 functions deploy ranked-api --project-ref "$REF" --use-api --w
 EV="$(grep -oP "EPOCA_DO_RANKING='\K[^']+" "$RAIZ/src/engine/ranked.ts")"
 [[ "$EV" =~ ^[A-Za-z0-9_.-]+$ ]] || { echo "EPOCA_DO_RANKING não encontrada" >&2; exit 1; }
 SQL="do \$\$ declare r record; d date; begin for r in select * from public.ranked_runs where verified and engine_version >= '$EV' order by finished_at loop d := (r.finished_at at time zone 'America/Sao_Paulo')::date; perform public.registrar_no_top3(r.player_id, 'daily', d::text || '@$EV', r.team_ids, r.id, r.score, r.encounters_cleared, r.finished_at); perform public.registrar_no_top3(r.player_id, 'weekly', (d - (extract(isodow from d)::int - 1))::text || '@$EV', r.team_ids, r.id, r.score, r.encounters_cleared, r.finished_at); perform public.registrar_no_top3(r.player_id, 'season', 'geral@$EV', r.team_ids, r.id, r.score, r.encounters_cleared, r.finished_at); end loop; end \$\$; select count(*) as entradas from public.leaderboard_entries;"
+# Conquistas: toda jornada validada com as 10 lutas terminadas libera o trio
+# (também as feitas antes de as Conquistas existirem), e o total de cada conta
+# é refeito. Reaplicar é seguro: o que já está liberado fica com a data dele.
+# O mesmo SQL roda no teste com Postgres de verdade (tests/conquistas.sql.test.ts).
+SQL="$SQL $(cat "$RAIZ/scripts/conquistas.sql") select count(*) as conquistas from public.player_achievements where achievement_id like 'personagem:%';"
 jq -n --arg q "$SQL" '{query: $q}' | curl -sS --fail -X POST "https://api.supabase.com/v1/projects/$REF/database/query" \
   -H "Authorization: Bearer $SUPABASE_ACCESS_TOKEN" -H "Content-Type: application/json" --data-binary @-
 echo

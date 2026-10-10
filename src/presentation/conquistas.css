@@ -1,0 +1,137 @@
+/* ---------- Conquistas: os 250 personagens ---------- */
+.conquistas-tela{max-width:680px;margin:0 auto;padding-bottom:18px}
+
+/* o topo: o anel de quantos já foram liberados e o título do colecionador */
+.cq-heroi{position:relative;display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;gap:14px;margin:0 0 12px;padding:14px;border-radius:20px;overflow:hidden;
+  background:radial-gradient(ellipse at 18% 50%,color-mix(in srgb,var(--titulo),transparent 80%),transparent 60%),linear-gradient(165deg,#1d1a10,#100e09);
+  box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--titulo),transparent 55%),0 12px 26px #0007;animation:gs-tile .4s both}
+.cq-heroi::after{content:'';position:absolute;inset:-40% -10%;background:linear-gradient(105deg,transparent 40%,#ffffff12 50%,transparent 60%);animation:cq-brilho 5s ease-in-out infinite;pointer-events:none}
+@keyframes cq-brilho{0%,55%{transform:translateX(-60%)}100%{transform:translateX(60%)}}
+.cq-anel{position:relative;width:112px;height:112px}
+.cq-anel svg{width:100%;height:100%;transform:rotate(-90deg)}
+.cq-anel circle{fill:none;stroke-width:9}
+.cq-anel-fundo{stroke:#2a2516}
+.cq-anel-cheio{stroke:var(--titulo);stroke-linecap:round;filter:drop-shadow(0 0 5px var(--titulo));transition:stroke-dasharray 1s cubic-bezier(.2,.8,.2,1);animation:cq-enche 1.2s cubic-bezier(.2,.8,.2,1) both}
+@keyframes cq-enche{from{stroke-dasharray:0 300}}
+.cq-anel>span{position:absolute;inset:0;display:grid;place-content:center;justify-items:center;line-height:1}
+.cq-anel b{font-size:34px;font-weight:900;color:#fff;font-variant-numeric:tabular-nums;text-shadow:0 0 14px color-mix(in srgb,var(--titulo),transparent 40%)}
+.cq-anel small{margin-top:3px;font-size:10.5px;font-weight:800;color:#b9ab84}
+.cq-anel em{margin-top:4px;padding:2px 7px;border-radius:9px;font-size:10px;font-style:normal;font-weight:900;color:#1c1405;background:var(--titulo)}
+.cq-titulo{display:grid;gap:5px;min-width:0}
+.cq-nivel{justify-self:start;padding:3px 8px;border-radius:8px;font-size:10px;font-weight:900;letter-spacing:1.6px;color:var(--titulo);background:color-mix(in srgb,var(--titulo),transparent 86%);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--titulo),transparent 60%)}
+.cq-titulo strong{font-size:22px;font-weight:900;line-height:1.05;color:#fff}
+.cq-barra{height:9px;border-radius:6px;background:#0b0905;box-shadow:inset 0 0 0 1px #ffffff14;overflow:hidden}
+.cq-barra i{display:block;height:100%;border-radius:6px;background:linear-gradient(90deg,color-mix(in srgb,var(--titulo),#000 20%),var(--titulo),#fff8);box-shadow:0 0 10px var(--titulo);animation:cq-barra 1s .2s cubic-bezier(.2,.8,.2,1) both}
+@keyframes cq-barra{from{width:0}}
+.cq-titulo small{font-size:11.5px;color:#b9ab84}
+.cq-titulo small b{color:#fff}
+.cq-no-ranking{justify-self:start;display:flex;align-items:center;gap:6px;min-height:34px;margin-top:2px;padding:0 10px;border:0;border-radius:11px;cursor:pointer;font:inherit;font-size:11.5px;font-weight:800;color:#ffe39a;background:#0d0b06;box-shadow:inset 0 0 0 1px #ffd36b44}
+.cq-no-ranking b{color:#fff}
+
+/* as abas, cada uma com quantos já foram liberados e a barrinha */
+.cq-abas{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;padding:4px;margin-bottom:10px;border-radius:16px;background:#0a0f0c;box-shadow:inset 0 0 0 1px #ffffff14}
+.cq-abas button{position:relative;display:grid;justify-items:center;gap:1px;min-height:50px;padding:5px 2px 8px;border:0;border-radius:12px;cursor:pointer;font:inherit;color:#93a08f;background:transparent;overflow:hidden;transition:background .2s,color .2s}
+.cq-abas b{font-size:12.5px;font-weight:900}
+.cq-abas small{font-size:10.5px;font-weight:800;font-variant-numeric:tabular-nums;opacity:.85}
+.cq-abas i{position:absolute;left:8px;bottom:4px;height:3px;max-width:calc(100% - 16px);border-radius:3px;background:var(--aba);box-shadow:0 0 6px var(--aba)}
+.cq-abas button.ativo{color:#fff;background:linear-gradient(180deg,color-mix(in srgb,var(--aba),transparent 62%),color-mix(in srgb,var(--aba),transparent 86%));box-shadow:inset 0 0 0 1.5px color-mix(in srgb,var(--aba),transparent 30%),0 0 14px color-mix(in srgb,var(--aba),transparent 70%)}
+
+/* o álbum: páginas de 6 × 5 que passam de lado */
+.cq-album{padding:10px 8px 8px;border-radius:20px;background:radial-gradient(ellipse at 50% 0%,color-mix(in srgb,var(--aba),transparent 88%),transparent 70%),linear-gradient(170deg,#121a15,#0b100d);box-shadow:inset 0 0 0 1px #ffffff12}
+.cq-trilho{display:flex;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scrollbar-width:none;overscroll-behavior-x:contain}
+.cq-trilho::-webkit-scrollbar{display:none}
+.cq-pagina{flex:0 0 100%;scroll-snap-align:start;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));align-content:start;gap:8px 4px;padding:2px}
+.cq-carta{position:relative;display:grid;justify-items:center;gap:3px;min-width:0;padding:0;border:0;cursor:pointer;font:inherit;background:none;animation:cq-entra .35s calc(var(--i)*14ms) both}
+@keyframes cq-entra{from{transform:scale(.6);opacity:0}}
+.cq-carta:active{transform:scale(.92)}
+.cq-retrato{position:relative;display:block;width:100%;max-width:56px;aspect-ratio:1;border-radius:50%}
+.cq-retrato .portrait,.cq-retrato img{width:100%;height:100%;border-radius:50%;object-fit:cover}
+.cq-carta small{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:9.5px;font-weight:800;line-height:1.1}
+.cq-carta.bloqueada .portrait{filter:grayscale(1) brightness(.42) contrast(1.1)}
+.cq-carta.bloqueada .cq-retrato{box-shadow:0 0 0 2px #262c28}
+.cq-carta.bloqueada small{color:#5f6a62}
+.cq-cadeado{position:absolute;right:-1px;bottom:-1px;width:20px;height:20px;padding:3px;border-radius:50%;color:#9aa49d;background:#151b17;box-shadow:0 0 0 1.5px #2e3631}
+.cq-carta.liberada .cq-retrato{box-shadow:0 0 0 2px #0c120e,0 0 0 3.5px #ffd36b,0 0 12px color-mix(in srgb,var(--character),transparent 45%)}
+.cq-carta.liberada .cq-retrato::after{content:'';position:absolute;inset:0;border-radius:50%;background:linear-gradient(115deg,transparent 35%,#ffffff70 50%,transparent 65%);background-size:250% 100%;animation:cq-reflexo 3.6s calc(var(--i)*90ms) ease-in-out infinite;pointer-events:none}
+@keyframes cq-reflexo{0%,70%{background-position:130% 0}100%{background-position:-30% 0}}
+.cq-carta.liberada small{color:#f1e7c6}
+.cq-carta.novo .cq-retrato{animation:cq-pulsa 1.4s ease-in-out infinite}
+@keyframes cq-pulsa{50%{box-shadow:0 0 0 2px #0c120e,0 0 0 3.5px #fff3b0,0 0 22px #ffd36b}}
+.cq-novo{position:absolute;top:-5px;left:50%;transform:translateX(-50%);padding:1px 5px;border-radius:6px;font-size:8.5px;font-style:normal;font-weight:900;letter-spacing:.6px;color:#1c1405;background:#ffd36b;box-shadow:0 0 10px #ffd36b}
+.cq-paginas{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:8px}
+.cq-paginas button{display:grid;place-items:center;width:40px;height:34px;border:0;border-radius:11px;cursor:pointer;color:#e8f0e2;background:#ffffff0d;box-shadow:inset 0 0 0 1px #ffffff1a}
+.cq-paginas button:disabled{opacity:.3;cursor:default}
+.cq-paginas span{display:flex;gap:7px}
+.cq-paginas i{width:8px;height:8px;border-radius:50%;cursor:pointer;background:#ffffff26;transition:all .2s}
+.cq-paginas i.ativo{width:22px;border-radius:5px;background:var(--aba);box-shadow:0 0 8px var(--aba)}
+
+/* o desafio do dia: três que ainda faltam */
+.cq-sugestao{margin-top:12px;padding:12px;border-radius:18px;background:linear-gradient(165deg,#1a1430,#0e0b1a);box-shadow:inset 0 0 0 1px #b48aff44}
+.cq-sugestao-rotulo{display:flex;align-items:center;gap:6px;font-size:11px;font-weight:900;letter-spacing:1.6px;color:#c9a8ff}
+.cq-sugestao>div{display:flex;justify-content:center;gap:16px;margin:10px 0 6px}
+.cq-sugestao button{display:grid;justify-items:center;gap:4px;width:74px;padding:0;border:0;cursor:pointer;font:inherit;background:none}
+.cq-sugestao .portrait{width:58px;height:58px;border-radius:50%;filter:grayscale(.85) brightness(.6);box-shadow:0 0 0 2px #0e0b1a,0 0 0 3.5px #b48aff88}
+.cq-sugestao small{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:10.5px;font-weight:800;color:#d8c8ff}
+.cq-sugestao p{margin:0;text-align:center;font-size:11.5px;color:#a99cc8}
+.cq-sugestao p b{color:#fff}
+
+/* a ficha de um personagem */
+.cq-veu{position:fixed;inset:0;z-index:60;display:grid;place-items:center;padding:16px;background:#000b;backdrop-filter:blur(4px);animation:gs-veu .2s both}
+.cq-ficha{position:relative;display:grid;justify-items:center;gap:6px;width:min(330px,100%);padding:22px 18px 18px;border-radius:22px;text-align:center;background:radial-gradient(ellipse at 50% 20%,color-mix(in srgb,var(--character),transparent 72%),transparent 65%),linear-gradient(170deg,#18211b,#0d130f);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--character),transparent 55%),0 20px 50px #000a;animation:cq-ficha .35s cubic-bezier(.2,.9,.3,1.3) both}
+@keyframes cq-ficha{from{transform:scale(.8) translateY(20px);opacity:0}}
+.cq-fechar{position:absolute;top:10px;right:10px;display:grid;place-items:center;width:36px;height:36px;border:0;border-radius:50%;cursor:pointer;color:#cfd8ca;background:#ffffff12}
+.cq-ficha-retrato{position:relative;display:block;width:130px;height:130px;border-radius:50%}
+.cq-ficha-retrato .portrait{width:100%;height:100%;border-radius:50%}
+.cq-ficha.liberada .cq-ficha-retrato{box-shadow:0 0 0 3px #0d130f,0 0 0 6px #ffd36b,0 0 34px color-mix(in srgb,var(--character),transparent 30%)}
+.cq-ficha.bloqueada .cq-ficha-retrato .portrait{filter:grayscale(1) brightness(.4)}
+.cq-ficha.bloqueada .cq-ficha-retrato{box-shadow:0 0 0 3px #0d130f,0 0 0 5px #3a433d}
+.cq-ficha-retrato>svg{position:absolute;inset:0;margin:auto;color:#c7cfc9;filter:drop-shadow(0 2px 6px #000)}
+.cq-ficha-universo{margin-top:6px;font-size:10.5px;font-weight:900;letter-spacing:1.6px;text-transform:uppercase;color:var(--character)}
+.cq-ficha h2{margin:0;font-size:24px;font-weight:900}
+.cq-ficha p{margin:4px 0 0;font-size:13px;line-height:1.45;color:#bfcab9}
+.cq-ficha-ok{display:flex;align-items:center;gap:6px;color:#ffe39a!important}
+.cq-ficha p b{color:#fff}
+
+/* na tela de resultado: os que esta jornada liberou */
+.cq-liberadas{margin:14px auto 4px;max-width:420px;padding:12px;border-radius:18px;text-align:center;background:radial-gradient(ellipse at 50% 0%,#ffd36b2e,transparent 70%),linear-gradient(170deg,#211b0c,#120f07);box-shadow:inset 0 0 0 1px #ffd36b66,0 0 26px #ffd36b22;animation:cq-ficha .5s .3s cubic-bezier(.2,.9,.3,1.3) both}
+.cq-liberadas-rotulo{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:900;letter-spacing:1.8px;color:#ffd36b}
+.cq-liberadas>div{display:flex;justify-content:center;gap:14px;margin-top:10px}
+.cq-liberada{display:grid;justify-items:center;gap:5px;width:78px}
+.cq-liberada .portrait{width:62px;height:62px;border-radius:50%;box-shadow:0 0 0 2px #120f07,0 0 0 4px #ffd36b,0 0 18px color-mix(in srgb,var(--character),transparent 35%);animation:cq-colore 1.4s calc(.6s + var(--i)*.35s) both}
+@keyframes cq-colore{0%{filter:grayscale(1) brightness(.4);transform:scale(.85)}55%{filter:grayscale(0) brightness(1.5);transform:scale(1.12)}100%{filter:none;transform:none}}
+.cq-liberada small{font-size:11px;font-weight:800;color:#f1e7c6}
+
+/* o botão da tela inicial */
+.hv-menu .hv-conquistas{position:relative}
+.hv-conquistas .hv-mini-barra{position:absolute;left:12px;right:12px;bottom:7px;height:3px;border-radius:2px;background:#ffffff14;overflow:hidden}
+.hv-conquistas .hv-mini-barra i{display:block;height:100%;background:var(--tile);box-shadow:0 0 6px var(--tile)}
+
+/* o ranking de conquistas */
+.rk-abas.cinco{grid-template-columns:repeat(4,minmax(0,1fr)) minmax(0,1.45fr)}
+.rk-abas.cinco button{font-size:11px;letter-spacing:.3px}
+.rk-cq-total{display:grid;justify-items:center;line-height:1}
+.rk-cq-total b{font-size:16px;font-weight:900;color:var(--med,#ffe39a)}
+.rk-cq-total small{font-size:9.5px;font-weight:800;color:#a89c78}
+.rk-cq-barra{display:block;height:5px;margin-top:4px;border-radius:3px;background:#0a0f0c;overflow:hidden}
+.rk-cq-barra i{display:block;height:100%;border-radius:3px;background:linear-gradient(90deg,#c9963a,#ffd36b)}
+.rk-lista>button.rk-cq-linha{grid-template-columns:auto minmax(0,1fr) auto}
+
+/* a faixa das Conquistas na tela inicial */
+.hv-conquistas-faixa{position:relative;display:grid;grid-template-columns:auto minmax(0,1fr) auto auto;align-items:center;gap:10px;width:100%;margin:12px 0 2px;padding:10px 12px;border:0;border-radius:18px;cursor:pointer;text-align:left;font:inherit;color:#fff;overflow:hidden;
+  background:radial-gradient(ellipse at 10% 50%,color-mix(in srgb,var(--titulo),transparent 78%),transparent 60%),linear-gradient(165deg,#221c0d,#110e07);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--titulo),transparent 50%),0 8px 22px #0007;animation:gs-tile .4s .1s both}
+.hv-conquistas-faixa::after{content:'';position:absolute;inset:0;background:linear-gradient(105deg,transparent 40%,#ffffff14 50%,transparent 60%);animation:cq-brilho 4.5s ease-in-out infinite;pointer-events:none}
+.hv-conquistas-faixa:active{transform:scale(.98)}
+.hv-cq-icone{position:relative;display:grid;place-items:center;width:46px;height:46px;border-radius:50%;color:#1c1405;background:radial-gradient(circle at 35% 30%,#fff,var(--titulo) 55%,color-mix(in srgb,var(--titulo),#000 35%));box-shadow:0 0 16px color-mix(in srgb,var(--titulo),transparent 40%)}
+.hv-cq-icone em{position:absolute;top:-4px;right:-6px;min-width:20px;height:20px;padding:0 5px;border-radius:10px;font-size:11px;font-style:normal;font-weight:900;line-height:20px;text-align:center;color:#fff;background:#ff4a5a;box-shadow:0 0 0 2px #110e07,0 0 10px #ff4a5a;animation:cq-pulsa-selo 1.2s ease-in-out infinite}
+@keyframes cq-pulsa-selo{50%{transform:scale(1.15)}}
+.hv-cq-texto{display:grid;gap:3px;min-width:0}
+.hv-cq-texto b{font-size:13px;font-weight:900;letter-spacing:1.6px;color:var(--titulo)}
+.hv-cq-texto small{font-size:11.5px;color:#c9bd98}
+.hv-cq-texto strong{color:#fff;font-size:13px}
+.hv-cq-barra{display:block;height:5px;border-radius:3px;background:#0a0805;overflow:hidden}
+.hv-cq-barra i{display:block;height:100%;min-width:3px;border-radius:3px;background:linear-gradient(90deg,color-mix(in srgb,var(--titulo),#000 20%),var(--titulo));box-shadow:0 0 8px var(--titulo)}
+.hv-cq-ultimos{display:flex}
+.hv-cq-ultimos>span{display:block;width:30px;height:30px;border-radius:50%;overflow:hidden;box-shadow:0 0 0 2px #110e07,0 0 0 3.5px #ffd36b}
+.hv-cq-ultimos>span+span{margin-left:-9px}
+.hv-cq-ultimos .portrait,.hv-cq-ultimos img{width:100%;height:100%;object-fit:cover}
+.hv-conquistas-faixa>svg{color:var(--titulo)}

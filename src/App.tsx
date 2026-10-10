@@ -26,6 +26,8 @@ import { acumularRaioX,raioXVazio } from './engine/raio-x';
 import {emptyTally,tallyEvents} from './engine/progression';
 import { pontosDaJornada } from './engine/pontos';
 import {runDigest} from './engine/ranked';
+import {liberar} from './lib/conquistas';
+import {ConquistasScreen} from './screens/ConquistasScreen';
 import {carregarCliente,googleConfigured,haSessaoOuRetorno,onlineCall,onlineConfigured} from './lib/online';
 import {criarAutenticacaoPreguicosa,type Conta} from './lib/auth';
 import { dicasLiberadas,ehDono } from './lib/dicas-liberadas';
@@ -34,7 +36,7 @@ import {FAMILIA_DA_INVOCACAO} from './presentation/vfx-atribuicao';
 import {efeitosDoJeito,somDoJeito} from './presentation/jeito-efeito';
 const DebugScreen=lazy(()=>import('./screens/DebugScreen').then(m=>({default:m.DebugScreen})));
 const VfxLabScreen=lazy(()=>import('./screens/VfxLabScreen').then(m=>({default:m.VfxLabScreen})));
-type Screen='home'|'game'|'characters'|'ranking'|'conta'|'help'|'settings'|'debug'|'vfx';
+type Screen='home'|'game'|'characters'|'conquistas'|'ranking'|'conta'|'help'|'settings'|'debug'|'vfx';
 interface InstallEvent extends Event {prompt:()=>Promise<void>;userChoice:Promise<{outcome:string}>}
 /* Os avisos do jogo (remake): medalhão com o anel de runas na cor do assunto, título grande, botões grandes. */
 function InfoDialog({title,children,onClose,icone,cor='#c8f560'}:{title:string;children:React.ReactNode;onClose:()=>void;icone?:React.ReactNode;cor?:string}){
@@ -68,7 +70,9 @@ export default function App(){
     return createDirection(battle);
   };
   const changeSettings=(next:Settings)=>{battleAudio.configure(next);setSettings(next);save('settings',next);};
-  const navigate=(next:Screen)=>{if(next!=='game')setPaused(true);setScreen(next);setMenu(false);window.scrollTo(0,0);};
+  /* A aba em que o Ranking abre: vindo das Conquistas, já na de conquistas. */
+  const [rankingInicial,setRankingInicial]=useState<'daily'|'conquistas'>('daily');
+  const navigate=(next:Screen)=>{if(next!=='game')setPaused(true);if(next!=='ranking')setRankingInicial('daily');setScreen(next);setMenu(false);window.scrollTo(0,0);};
   /*
    * Um jogo só, e ele é ranqueado (pedido do jogador: "não existe casual e
    * ranqueada, tudo é ranqueado"). Com a conta conectada, falta só o nome
@@ -289,8 +293,10 @@ export default function App(){
           const won=d.battle.winner==='player',champion=won&&current.index===9;
           /* o objetivo do jogo: pontos. O recorde é o maior total de uma jornada. */
           const total=pontosDaJornada((next.summaries??[]).map(x=>({pontos:x.score,won:x.won})));
+          /* Terminou as 10 lutas: o trio libera as Conquistas de quem ainda não tinha (só a primeira vez conta). */
+          if(champion){const novas=liberar(loadProfile().conquistas??{},current.team).novas;if(novas.length)next={...next,conquistasNovas:novas};}
           setProfile(p=>{
-            const n={...p,best:Math.max(p.best,current.index+(won?1:0)),wins:p.wins+(won?1:0),victories:p.victories+Number(champion),champion:champion?[...current.team]:p.champion,recordePontos:Math.max(p.recordePontos??0,total)};
+            const n={...p,...(champion?{conquistas:liberar(p.conquistas??{},current.team).conquistas}:{}),best:Math.max(p.best,current.index+(won?1:0)),wins:p.wins+(won?1:0),victories:p.victories+Number(champion),champion:champion?[...current.team]:p.champion,recordePontos:Math.max(p.recordePontos??0,total)};
             save('profile',n);return n;
           });
           battleAudio.sound(won?'vitoria':'derrota',PRIORIDADE.grand);}
@@ -352,7 +358,8 @@ export default function App(){
     <main key={`${screen}-${screen==='game'?run?.stage??'idle':'page'}`} className={screen==='game'&&run?.stage==='battle'?'main battle-main screen-enter':'main screen-enter'}>
       {screen==='home'&&<Home profile={profile} run={run} conta={conta!==null&&conta.origem!=='convidado'} onPlay={requestNew} onContinue={()=>{if(run?.stage==='battle'&&run.battle){direction.current=directionFor(run);setPresentation({battle:direction.current.visible,beat:direction.current.active});}navigate('game');setPaused(run?.stage==='battle');}} onAbandon={()=>setConfirmAbandon(true)} onNavigate={navigate} onInstall={()=>void install()}/>}
       {screen==='characters'&&<CharactersScreen onDetails={setDetails}/>}
-      {screen==='ranking'&&<RankingScreen handle={profile.publicHandle} conta={conta!==null&&conta.origem!=='convidado'} onConta={()=>navigate('conta')} recorde={profile.recordePontos??0}/>}
+      {screen==='conquistas'&&<ConquistasScreen profile={profile} conta={conta!==null&&conta.origem!=='convidado'} onProfile={p=>{save('profile',p);setProfile(p);}} onRanking={()=>{setRankingInicial('conquistas');navigate('ranking');}}/>}
+      {screen==='ranking'&&<RankingScreen inicial={rankingInicial} handle={profile.publicHandle} conta={conta!==null&&conta.origem!=='convidado'} onConta={()=>navigate('conta')} recorde={profile.recordePontos??0}/>}
       {screen==='conta'&&<AccountScreen autenticacao={autenticacao} conta={conta} profile={profile} conectado={onlineConfigured} google={googleConfigured} aoMudarPerfil={p=>{save('profile',p);setProfile(p);}}/>}
       {screen==='help'&&<HelpScreen onPlay={requestNew}/>}
       {screen==='settings'&&<SettingsScreen settings={settings} onChange={changeSettings} onReset={reset} onGaleria={()=>navigate('vfx')} ranking={onlineConfigured?{nome:profile.publicHandle,onEditar:()=>{setPendingStart(false);setDraftHandle(profile.publicHandle??'');setNameDialog(true);}}:undefined}/>}

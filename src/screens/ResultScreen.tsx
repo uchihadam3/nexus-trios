@@ -1,4 +1,5 @@
 import { useEffect,useState,type CSSProperties,type ReactNode } from 'react';
+import { ConquistasLiberadas } from './ConquistasScreen';
 import { ArrowRight,RotateCcw,Home,Trophy,HeartPulse,TrendingUp,Shield,Crown,Sparkles,Medal,LogOut,Swords,Skull,Zap,Lightbulb } from 'lucide-react';
 import type { Run } from '../lib/storage';
 import { byId } from '../data/characters';
@@ -119,6 +120,8 @@ export function ResultScreen({run,onNext,onRestart,onAbandon,onHome,onRanking,on
           :<><span>Seu recorde</span><b>{formatarPontos(Math.max(recordeAntes,total))}</b>{recordeAntes>total&&<span>faltam {formatarPontos(recordeAntes-total)}</span>}</>}
       </div>
     </div>
+
+    {champion&&run.conquistasNovas?.length?<ConquistasLiberadas ids={run.conquistasNovas}/>:null}
 
     <ol className="rs-trilha" aria-label="As 10 lutas da jornada">{Array.from({length:10},(_,i)=>{const r=resumos.find(s=>s.index===i);const marca=r?(r.won?'ganhou':'perdeu'):i===run.index+1&&won?'proxima':'';
       return <li key={i} className={`${marca} ${i===run.index?'agora':''}`} title={r?`Luta ${i+1}: ${r.won?'+'+formatarPontos(r.score):'derrota'}`:`Luta ${i+1}`}>{i===9?<Crown size={12}/>:i+1}</li>;})}</ol>

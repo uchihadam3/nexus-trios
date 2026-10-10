@@ -92,6 +92,64 @@ async function board(userId:string,mode:Escopo,detailId?:string,pagina=0){
     pagina,total,temMais:inicio+POR_PAGINA<total};
 }
 
+/*
+ * Conquistas (pedido do jogador): uma por personagem. Terminar as 10 lutas de
+ * uma jornada validada libera os três do trio; quem já estava liberado fica
+ * como estava. Ficam em `player_achievements` (a tabela de conquistas da
+ * primeira migração, que estava sem uso), uma linha `personagem:<id>` por
+ * personagem, e uma linha `conquistas:total` com quantos a conta já liberou e
+ * quando chegou a esse número — é por ela que o ranking ordena (mais
+ * liberados primeiro; empatou, quem chegou antes).
+ */
+const PREFIXO='personagem:',TOTAL='conquistas:total';
+async function totalDeConquistas(userId:string){
+  const {count,error}=await admin.from('player_achievements').select('achievement_id',{count:'exact',head:true}).eq('player_id',userId).like('achievement_id',`${PREFIXO}%`);
+  if(error)throw error;return count??0;
+}
+async function registrarConquistas(userId:string,team:string[]){
+  const ids=team.map(id=>PREFIXO+id);
+  const {data:ja,error}=await admin.from('player_achievements').select('achievement_id').eq('player_id',userId).in('achievement_id',ids);if(error)throw error;
+  const tem=new Set((ja??[]).map(x=>x.achievement_id)),novas=team.filter(id=>!tem.has(PREFIXO+id));
+  const agora=new Date().toISOString();
+  if(novas.length){const {error:e}=await admin.from('player_achievements').upsert(novas.map(id=>({player_id:userId,achievement_id:PREFIXO+id,unlocked_at:agora,progress:1})),{onConflict:'player_id,achievement_id',ignoreDuplicates:true});if(e)throw e;}
+  const total=await totalDeConquistas(userId);
+  const {data:linha}=await admin.from('player_achievements').select('progress').eq('player_id',userId).eq('achievement_id',TOTAL).maybeSingle();
+  if(total>0&&(!linha||linha.progress!==total)){const {error:e}=await admin.from('player_achievements').upsert({player_id:userId,achievement_id:TOTAL,progress:total,unlocked_at:agora},{onConflict:'player_id,achievement_id'});if(e)throw e;}
+  return {novas,total};
+}
+async function minhasConquistas(userId:string){
+  const {data,error}=await admin.from('player_achievements').select('achievement_id,unlocked_at').eq('player_id',userId).like('achievement_id',`${PREFIXO}%`).order('unlocked_at',{ascending:true}).limit(1000);
+  if(error)throw error;
+  return (data??[]).map(x=>({id:String(x.achievement_id).slice(PREFIXO.length),data:x.unlocked_at as string})).filter(x=>characters.some(c=>c.id===x.id));
+}
+async function ultimasDe(userId:string){
+  const {data}=await admin.from('player_achievements').select('achievement_id').eq('player_id',userId).like('achievement_id',`${PREFIXO}%`).order('unlocked_at',{ascending:false}).limit(3);
+  return (data??[]).map(x=>String(x.achievement_id).slice(PREFIXO.length));
+}
+type LinhaDeConquista={player_id:string;progress:number;unlocked_at:string};
+async function rankingDeConquistas(userId:string,pagina=0){
+  const inicio=pagina*POR_PAGINA;
+  const {data,count,error}=await admin.from('player_achievements').select('player_id,progress,unlocked_at',{count:'exact'}).eq('achievement_id',TOTAL).gt('progress',0)
+    .order('progress',{ascending:false}).order('unlocked_at',{ascending:true}).order('player_id',{ascending:true}).range(inicio,inicio+POR_PAGINA-1);
+  if(error)throw error;
+  const rows=(data??[]) as LinhaDeConquista[],total=count??0;
+  const {data:minha}=await admin.from('player_achievements').select('player_id,progress,unlocked_at').eq('player_id',userId).eq('achievement_id',TOTAL).maybeSingle();
+  let minhaPosicao:number|null=null;
+  if(minha&&minha.progress>0){
+    const {count:frente,error:e}=await admin.from('player_achievements').select('player_id',{count:'exact',head:true}).eq('achievement_id',TOTAL)
+      .or(`progress.gt.${Number(minha.progress)},and(progress.eq.${Number(minha.progress)},unlocked_at.lt."${new Date(minha.unlocked_at).toISOString()}")`);
+    if(e)throw e;minhaPosicao=(frente??0)+1;
+  }
+  const ids=[...new Set([...rows.map(r=>r.player_id),...(minha?[userId]:[])])];
+  const names=ids.length?(await admin.from('players').select('id,handle').in('id',ids)).data??[]:[];
+  const handleOf=new Map(names.map(x=>[x.id,x.handle]));
+  // a vitrine (os últimos liberados) só no pódio e na própria conta
+  const vitrine=new Map<string,string[]>();
+  for(const id of [...rows.slice(0,pagina===0?3:0).map(r=>r.player_id),...(minha?[userId]:[])])if(!vitrine.has(id))vitrine.set(id,await ultimasDe(id));
+  const publico=(r:LinhaDeConquista,posicao:number)=>({position:posicao,id:r.player_id,handle:handleOf.get(r.player_id)??'Jogador',total:r.progress,date:r.unlocked_at,ultimos:vitrine.get(r.player_id)??[],mine:r.player_id===userId});
+  return {mode:'conquistas',de:characters.length,entries:rows.map((r,i)=>publico(r,inicio+i+1)),mine:minha&&minhaPosicao?publico(minha as LinhaDeConquista,minhaPosicao):null,pagina,total,temMais:inicio+POR_PAGINA<total};
+}
+
 Deno.serve(async (request:Request)=>{
   const origin=request.headers.get('origin')??'';
   if(origin&&!allowed.has(origin))return fail('Origem não permitida.',403,origin);
@@ -155,18 +213,25 @@ Deno.serve(async (request:Request)=>{
       const registrar=async(escopo:Escopo,chave:string)=>{const {data,error}=await admin.rpc('registrar_no_top3',{p_player:user.id,p_scope:escopo,p_period:chave,p_team:run.team_ids,p_run:run.id,p_score:verified.score,p_cleared:verified.encountersCleared});if(error)throw error;return data;};
       // um ranking só: a mesma jornada entra em Hoje, Semana e Geral (no dia e na semana em que foi validada)
       const top3={periodo:await registrar('daily',chaveDo('daily')),semana:await registrar('weekly',chaveDo('weekly')),temporada:await registrar('season',chaveDo('season'))};
+      // as 10 lutas terminadas liberam as Conquistas do trio (antes de validar, pelo mesmo motivo: reenviar é seguro)
+      const conquistas=verified.encountersCleared===10?await registrarConquistas(user.id,run.team_ids):null;
       const {data:saved,error:saveError}=await admin.from('ranked_runs').update({verified:true,finished_at:new Date().toISOString(),encounters_cleared:verified.encountersCleared,score:verified.score,summary:{highlights:verified.highlights,outcomes:verified.summaries.map(s=>s.won),livre,dicas},digest}).eq('id',run.id).eq('verified',false).select('id').maybeSingle();
       if(saveError)throw saveError;if(!saved)return fail('Jornada já enviada.',409,origin);
       const player=await profile(user.id),xp=(player?.xp??0)+30+verified.encountersCleared*30+(verified.encountersCleared===10?250:0);
       await admin.from('players').update({xp,nexus_level:Math.floor(Math.sqrt(xp/100))+1,updated_at:new Date().toISOString()}).eq('id',user.id);
       const daily=await board(user.id,'daily'),weekly=await board(user.id,'weekly'),season=await board(user.id,'season');
-      return json({verified:true,score:verified.score,progress:verified.encountersCleared,daily:daily.mine?.position??null,weekly:weekly.mine?.position??null,season:season.mine?.position??null,top3},200,origin);
+      return json({verified:true,score:verified.score,progress:verified.encountersCleared,daily:daily.mine?.position??null,weekly:weekly.mine?.position??null,season:season.mine?.position??null,top3,conquistas},200,origin);
     }
     /* "MEUS RECORDES: histórico completo." Todas as partidas validadas da conta. */
     if(input.action==='historico'){
       const {data,error}=await admin.from('ranked_runs').select('id,mode,period_key,score,encounters_cleared,team_ids,finished_at,summary').eq('player_id',user.id).eq('verified',true).order('finished_at',{ascending:false}).limit(100);
       if(error)throw error;
       return json({runs:(data??[]).map(r=>({id:r.id,mode:r.summary?.livre?'free':r.mode,period:r.period_key,score:r.score,progress:r.encounters_cleared,team:r.team_ids,date:r.finished_at,dicas:r.summary?.dicas===true}))},200,origin);
+    }
+    if(input.action==='conquistas')return json({conquistas:await minhasConquistas(user.id),de:characters.length},200,origin);
+    if(input.action==='leaderboard'&&input.mode==='conquistas'){
+      const pagina=typeof input.pagina==='number'&&Number.isInteger(input.pagina)&&input.pagina>=0&&input.pagina<10000?input.pagina:0;
+      return json(await rankingDeConquistas(user.id,pagina),200,origin);
     }
     if(input.action==='leaderboard'){
       const mode=input.mode==='weekly'?'weekly':input.mode==='season'?'season':'daily';

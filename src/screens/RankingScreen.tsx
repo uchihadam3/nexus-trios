@@ -1,12 +1,12 @@
 import {useEffect,useState,type CSSProperties} from 'react';
-import {Crown,Lightbulb,LogIn,Lock,Medal,Trophy,WifiOff,X} from 'lucide-react';
+import {Award,Crown,Lightbulb,LogIn,Lock,Medal,Trophy,WifiOff,X} from 'lucide-react';
 import {byId} from '../data/characters';
 import {Portrait} from '../components/Portrait';
 import {TelaTopo} from '../components/Casca';
-import {onlineCall,onlineConfigured,type Leaderboard,type MeusTop3,type PartidaDoHistorico,type PublicRun} from '../lib/online';
+import {onlineCall,onlineConfigured,type EntradaDeConquista,type Leaderboard,type MeusTop3,type PartidaDoHistorico,type PublicRun,type RankingDeConquistas} from '../lib/online';
 import {pontos,situacaoDasVagas} from '../lib/top3';
 
-const modes=[['daily','HOJE'],['weekly','SEMANA'],['season','GERAL'],['mine','MEUS']] as const;
+const modes=[['daily','HOJE'],['weekly','SEMANA'],['season','GERAL'],['mine','MEUS'],['conquistas','CONQUISTAS']] as const;
 type Modo=(typeof modes)[number][0];
 
 /*
@@ -21,15 +21,17 @@ type Modo=(typeof modes)[number][0];
  * entrega o ranking para quem tem conta: sem ela, a tela convida a entrar em
  * vez de parecer uma queda de conexão.
  */
-export function RankingScreen({handle,conta,onConta,recorde}:{handle?:string;conta:boolean;onConta:()=>void;recorde?:number}){
-  const [mode,setMode]=useState<Modo>('daily'),[board,setBoard]=useState<Leaderboard|null>(null),[historico,setHistorico]=useState<PartidaDoHistorico[]|null>(null),[loading,setLoading]=useState(false),[maisCarregando,setMaisCarregando]=useState(false),[error,setError]=useState('');
+export function RankingScreen({handle,conta,onConta,recorde,inicial='daily'}:{handle?:string;conta:boolean;onConta:()=>void;recorde?:number;inicial?:Modo}){
+  const [mode,setMode]=useState<Modo>(inicial),[cq,setCq]=useState<RankingDeConquistas|null>(null),[board,setBoard]=useState<Leaderboard|null>(null),[historico,setHistorico]=useState<PartidaDoHistorico[]|null>(null),[loading,setLoading]=useState(false),[maisCarregando,setMaisCarregando]=useState(false),[error,setError]=useState('');
   useEffect(()=>{if(!onlineConfigured||!conta)return;let active=true;setLoading(true);setError('');setHistorico(null);
     /*
      * "Meus" é o histórico completo, que só a função da FASE K entrega. Com a
      * função anterior, a ação não existe ("Ação desconhecida") e a aba volta a
      * mostrar o que mostrava: o melhor resultado da temporada.
      */
-    const pedido=mode==='mine'
+    const pedido=mode==='conquistas'
+      ?onlineCall<RankingDeConquistas>('leaderboard',{mode:'conquistas'}).then(r=>{if(active){setCq(r);setBoard(null);}})
+      :mode==='mine'
       ?onlineCall<{runs:PartidaDoHistorico[]}>('historico').then(r=>{if(active){setHistorico(r.runs);setBoard(null);}}).catch(e=>{if(e instanceof Error&&/desconhecida/i.test(e.message))return onlineCall<Leaderboard>('leaderboard',{mode:'season'}).then(b=>{if(active)setBoard(b);});throw e;})
       :onlineCall<Leaderboard>('leaderboard',{mode}).then(b=>{if(active)setBoard(b);});
     void pedido.then(()=>{if(active)setLoading(false);}).catch(e=>{if(active){setError(e instanceof Error?e.message:'Ranking indisponível.');setLoading(false);}});
@@ -39,17 +41,21 @@ export function RankingScreen({handle,conta,onConta,recorde}:{handle?:string;con
    * própria conta pode vir em duas páginas) são descartadas pelo id.
    */
   const verMais=async()=>{
+    if(mode==='conquistas'&&cq){setMaisCarregando(true);
+      try{const prox=await onlineCall<RankingDeConquistas>('leaderboard',{mode:'conquistas',pagina:cq.pagina+1});setCq(atual=>atual&&{...prox,mine:atual.mine,entries:[...atual.entries,...prox.entries.filter(e=>!atual.entries.some(x=>x.id===e.id))]});}
+      catch(e){setError(e instanceof Error?e.message:'Ranking indisponível.');}
+      finally{setMaisCarregando(false);}return;}
     if(!board||mode==='mine')return;setMaisCarregando(true);
     try{const prox=await onlineCall<Leaderboard>('leaderboard',{mode,pagina:(board.pagina??0)+1});
       setBoard(atual=>atual&&{...prox,entries:[...atual.entries,...prox.entries.filter(e=>!atual.entries.some(x=>x.id===e.id))]});}
     catch(e){setError(e instanceof Error?e.message:'Ranking indisponível.');}
     finally{setMaisCarregando(false);}
   };
-  const estado:EstadoDoPlacar=!onlineConfigured?{tipo:'desligado'}:!conta?{tipo:'sem-conta'}:error?{tipo:'erro',texto:error}:loading?{tipo:'carregando'}:historico?{tipo:'historico',partidas:historico}:{tipo:'placar',board};
+  const estado:EstadoDoPlacar=!onlineConfigured?{tipo:'desligado'}:!conta?{tipo:'sem-conta'}:error?{tipo:'erro',texto:error}:loading?{tipo:'carregando'}:historico?{tipo:'historico',partidas:historico}:mode==='conquistas'?{tipo:'conquistas',ranking:cq}:{tipo:'placar',board};
   return <Placar mode={mode} onMode={setMode} estado={estado} handle={handle} onConta={onConta} onMais={()=>void verMais()} maisCarregando={maisCarregando} recorde={recorde}/>;
 }
 
-export type EstadoDoPlacar={tipo:'desligado'|'sem-conta'|'carregando'}|{tipo:'erro';texto:string}|{tipo:'historico';partidas:PartidaDoHistorico[]}|{tipo:'placar';board:Leaderboard|null};
+export type EstadoDoPlacar={tipo:'desligado'|'sem-conta'|'carregando'}|{tipo:'erro';texto:string}|{tipo:'historico';partidas:PartidaDoHistorico[]}|{tipo:'placar';board:Leaderboard|null}|{tipo:'conquistas';ranking:RankingDeConquistas|null};
 
 const Trio=({team,tamanho=''}:{team:string[];tamanho?:string})=><span className={`rk-trio ${tamanho}`}>{team.map(id=>byId[id]&&<span key={id} style={{'--character':byId[id].color} as CSSProperties}><Portrait character={byId[id]}/></span>)}</span>;
 
@@ -62,16 +68,17 @@ export function Placar({mode,onMode,estado,handle,onConta,onMais,maisCarregando=
   const minhas=new Set([...(board?.meus?.entries??[]).map(m=>m.id),...(board?.mine?[board.mine.id]:[])]);
   const podio=mode==='mine'?[]:rows.slice(0,3),resto=mode==='mine'?rows:rows.slice(3);
   return <section className="ranking-screen ranking-v2">
-    <TelaTopo icone={<Trophy/>} cor="#ffd36b" rotulo="RANKING" titulo="Quem fez mais pontos"><p>Toda jornada é refeita pelo servidor antes de entrar.</p></TelaTopo>
+    <TelaTopo icone={mode==='conquistas'?<Award/>:<Trophy/>} cor="#ffd36b" rotulo="RANKING" titulo={mode==='conquistas'?'Quem liberou mais':'Quem fez mais pontos'}><p>{mode==='conquistas'?'Cada personagem com as 10 lutas terminadas vale uma conquista.':'Toda jornada é refeita pelo servidor antes de entrar.'}</p></TelaTopo>
     {/* o recorde deste aparelho; com conta, cada Jornada entra em Hoje, Semana e Geral ao mesmo tempo */}
     {recorde!==undefined&&<div className="rk-recorde-local"><Trophy size={16}/><span>Seu recorde na Jornada</span><b>{recorde.toLocaleString('pt-BR')}</b><small>pontos · neste aparelho</small></div>}
-    <div className="rk-abas" role="tablist">{modes.map(([value,label])=><button key={value} role="tab" aria-selected={mode===value} className={mode===value?'ativo':''} onClick={()=>{onMode(value);setSelected(null);}}>{label}</button>)}</div>
+    <div className="rk-abas cinco" role="tablist">{modes.map(([value,label])=><button key={value} role="tab" aria-selected={mode===value} className={mode===value?'ativo':''} onClick={()=>{onMode(value);setSelected(null);}}>{label}</button>)}</div>
 
     {estado.tipo==='desligado'?<div className="rk-bloqueio"><span className="rk-cadeado"><WifiOff size={30}/></span><b>Ranking desligado nesta versão</b><p>A Jornada casual continua funcionando sem internet.</p></div>
     :estado.tipo==='sem-conta'?<div className="rk-bloqueio"><span className="rk-cadeado"><Lock size={30}/></span><b>Entre para ver o placar</b><p>Com conta, toda Jornada vale ranking: entra em Hoje, Semana e Geral ao mesmo tempo. Você vê as posições e coloca seu trio na disputa.</p><button className="primary gs-cta" onClick={onConta}><LogIn size={18}/> Entrar ou criar conta</button></div>
     :estado.tipo==='erro'?<p role="alert" className="rk-aviso"><WifiOff size={18}/>{estado.texto}</p>
     :estado.tipo==='carregando'?<div className="rk-carregando" aria-label="Carregando resultados verificados">{[0,1,2,3].map(i=><i key={i} style={{'--i':i} as CSSProperties}/>)}</div>
     :estado.tipo==='historico'?<Historico partidas={estado.partidas}/>
+    :estado.tipo==='conquistas'?<PlacarDeConquistas ranking={estado.ranking} handle={handle} onMais={onMais} maisCarregando={maisCarregando}/>
     :<>
       {mode!=='mine'&&board?.meus&&<MeusTres meus={board.meus} onSelect={setSelected}/>}
       <p className="rk-contexto">{mode==='daily'?'Melhores de hoje':mode==='weekly'?'Melhores da semana':mode==='season'?'Melhores de todos os tempos':'Seu melhor resultado'} · {board?.period}{handle&&<> · <b>{handle}</b></>}</p>
@@ -126,3 +133,31 @@ function Historico({partidas}:{partidas:PartidaDoHistorico[]}){
 
 /* Quem montou o trio com as Dicas de trio aparece marcado no ranking (pedido do jogador). */
 function ComDicas(){return <span className="rk-dicas" title="Usou as Dicas de trio: cada luta perdeu pontos"><Lightbulb size={11}/>com dicas</span>;}
+
+/*
+ * O ranking de conquistas (pedido do jogador): quem liberou mais personagens.
+ * Empatou, quem chegou ao número antes. O pódio mostra os três últimos que
+ * cada um liberou; a linha da própria conta fica no topo e marcada.
+ */
+function PlacarDeConquistas({ranking,handle,onMais,maisCarregando}:{ranking:RankingDeConquistas|null;handle?:string;onMais:()=>void;maisCarregando:boolean}){
+  if(!ranking)return null;
+  const de=ranking.de,podio=ranking.entries.slice(0,3),resto=ranking.entries.slice(3);
+  const Linha=({e,i}:{e:EntradaDeConquista;i:number})=><button className={`rk-cq-linha ${e.mine?'mine':''}`} style={{'--i':Math.min(i,12)} as CSSProperties}>
+    <span className="rk-pos">{e.position}</span>
+    <span className="rk-quem"><b>{e.handle}</b><small>{Math.floor((e.total/de)*100)}% liberado</small><span className="rk-cq-barra"><i style={{width:`${(e.total/de)*100}%`}}/></span></span>
+    <span className="rk-cq-total"><b>{e.total}</b><small>de {de}</small></span>
+  </button>;
+  return <>
+    <p className="rk-contexto"><Award size={13}/> Quem liberou mais personagens · termine as 10 lutas com alguém para liberar{handle&&<> · <b>{handle}</b></>}</p>
+    {ranking.mine&&<div className="rk-meus"><span className="rk-meus-rotulo"><Award size={14}/>MINHA POSIÇÃO</span><div className="ranking-list rk-lista" style={{marginTop:8}}><Linha e={ranking.mine} i={0}/></div></div>}
+    {podio.length>0&&<div className="rk-podio">{[podio[1],podio[0],podio[2]].map((e,i)=>e&&<div key={e.id} className={`rk-degrau p${e.position} ${e.mine?'mine':''}`} style={{'--i':i} as CSSProperties}>
+      <span className="rk-coroa">{e.position===1?<Crown size={22}/>:<Medal size={18}/>}</span>
+      {e.ultimos.length>0&&<Trio team={e.ultimos}/>}
+      <b className="rk-nome">{e.handle}</b>
+      <span className="rk-cq-total"><b>{e.total}</b><small>de {de}</small></span>
+      <span className="rk-base">{e.position}</span>
+    </div>)}</div>}
+    <div className="ranking-list rk-lista">{resto.map((e,i)=><Linha key={e.id} e={e} i={i}/>)}{!ranking.entries.length&&<p className="rk-vazio">Ninguém liberou conquistas ainda. Termine as 10 lutas de uma Jornada e seja o primeiro!</p>}</div>
+    {ranking.temMais&&<button className="secondary rk-mais" disabled={maisCarregando} onClick={onMais}>{maisCarregando?'Carregando…':`Ver mais · ${ranking.entries.length} de ${pontos(ranking.total)}`}</button>}
+  </>;
+}

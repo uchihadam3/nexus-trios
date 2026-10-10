@@ -92,3 +92,6 @@ export interface MeusTop3 {entries:PublicRun[];vagas:number;precisaSuperar:numbe
 /* `pagina`, `total` e `temMais` vêm do ranking paginado (FASE L); a função anterior não manda. */
 export interface Leaderboard {mode:'daily'|'weekly'|'season';period:string;entries:PublicRun[];mine:PublicRun|null;details:PublicRun|null;meus?:MeusTop3;pagina?:number;total?:number;temMais?:boolean}
 export interface PartidaDoHistorico {id:string;mode:'daily'|'weekly'|'free';period:string;score:number;progress:number;team:string[];date:string;dicas?:boolean}
+/* O ranking de conquistas: quantos personagens cada conta liberou (os últimos liberados só no pódio e na própria conta). */
+export interface EntradaDeConquista {position:number;id:string;handle:string;total:number;date:string;ultimos:string[];mine:boolean}
+export interface RankingDeConquistas {mode:'conquistas';de:number;entries:EntradaDeConquista[];mine:EntradaDeConquista|null;pagina:number;total:number;temMais:boolean}

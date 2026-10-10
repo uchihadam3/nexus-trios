@@ -40,6 +40,6 @@ jobs:
       # A função do servidor roda em Deno, não em Node: o typecheck do
       # projeto não a enxerga. Sem isto, ela só seria conferida ao publicar.
       - run: npx -y deno@2 check supabase/functions/ranked-api/index.ts
-      - run: npx vitest run tests/top3.sql.test.ts
+      - run: npx vitest run tests/top3.sql.test.ts tests/conquistas.sql.test.ts
         env:
           NEXUS_PG_URL: postgres://postgres@localhost:5432/postgres
