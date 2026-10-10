@@ -1,5 +1,7 @@
 import { FAMILIA_DA_INVOCACAO } from '../src/presentation/vfx-atribuicao';
 import { FAMILIAS_DO_JEITO } from '../src/presentation/jeito-efeito';
+import { RENASCER_PROPRIO } from '../src/presentation/renascer-proprio';
+import { RENASCER } from '../src/data/mecanicas';
 import { describe,expect,it } from 'vitest';
 import { readFileSync,readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
@@ -56,9 +58,17 @@ describe('compact reusable audiovisual library',()=>{
     // não são de habilidade: as brasas aparecem no lutador caído (ArenaUnit) e a marca de
     // Provocado por cima de quem recebe o Status, seja qual for o golpe (BattleEffects)
     // e o espelho, os espinhos e as gotas de sangue sobre quem devolve o golpe ou rouba a Vida;
-    // o renascer é o fogo de quem volta sozinho (o beat de Renasceu); a esfera, a terra, o veneno, a onda de energia e o feixe pesado são
+    // o renascer é o fogo de quem volta sozinho (o beat de Renasceu), e cada um com Renascer tem a
+    // espera e a volta próprias (RENASCER_PROPRIO); a esfera, a terra, o veneno, a onda de energia e o feixe pesado são
     // as reservas dos golpes de energia, de pedra, de veneno/peste, de onda e de feixe sem família própria (vfxProfiles: ícones e nomes)
-    const SO_NA_ARENA=new Set(['esfera','terra','veneno','onda_de_energia','feixe_pesado','renascer','brasas_renascendo','provocar','reflexo','espinhos','vampirismo','dissipar','sono','cegueira','esquiva','ultima_resistencia','copia',...FAMILIAS_DO_JEITO,...Object.values(FAMILIA_DA_INVOCACAO)]);
+    const SO_NA_ARENA=new Set(['esfera','terra','veneno','onda_de_energia','feixe_pesado','renascer','brasas_renascendo','provocar','reflexo','espinhos','vampirismo','dissipar','sono','cegueira','esquiva','ultima_resistencia','copia',...FAMILIAS_DO_JEITO,...Object.values(FAMILIA_DA_INVOCACAO),...Object.values(RENASCER_PROPRIO).flatMap(r=>[r.espera,r.volta])]);
+    // quem tem Renascer não volta com a Fênix dos outros: tem as folhas e os sons dele
+    for(const id of Object.keys(RENASCER)){
+      const r=RENASCER_PROPRIO[id];
+      expect(r,`${id}: Renascer próprio`).toBeTruthy();
+      for(const f of [r!.espera,r!.volta])expect(FAMILIAS.includes(f as never),`${f} existe`).toBe(true);
+      for(const som of [`espera-${id}`,`volta-${id}`])expect(TODOS_OS_SONS.includes(som),`${som} existe`).toBe(true);
+    }
     for(const f of FAMILIAS)if(!SO_NA_ARENA.has(f))expect(uso.get(f)??0,`${f} usada`).toBeGreaterThan(0);
     for(const [f,n] of uso)expect(n/total,`${f} não domina`).toBeLessThan(.16);
   });

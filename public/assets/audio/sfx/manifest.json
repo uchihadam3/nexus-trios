@@ -2705,6 +2705,193 @@
    ],
    "bytes": 41631
   },
+  "espera-alucardcv": {
+   "arquivo": "espera-alucardcv.mp3",
+   "descricao": "Alucard caído: a névoa e os morcegos",
+   "versoes": [
+    0.0,
+    1.68,
+    3.418,
+    5.0439
+   ],
+   "duracoes": [
+    1.6,
+    1.658,
+    1.5459,
+    1.6244
+   ],
+   "bytes": 52058
+  },
+  "espera-cell": {
+   "arquivo": "espera-cell.mp3",
+   "descricao": "Cell caído: a célula pulsando",
+   "versoes": [
+    0.0,
+    1.68,
+    3.418,
+    5.0439
+   ],
+   "duracoes": [
+    1.6,
+    1.658,
+    1.5459,
+    1.6244
+   ],
+   "bytes": 47987
+  },
+  "espera-deadpool": {
+   "arquivo": "espera-deadpool.mp3",
+   "descricao": "Deadpool caído: os pedaços se regenerando e o assobio",
+   "versoes": [
+    0.0,
+    1.68,
+    3.418,
+    5.0439
+   ],
+   "duracoes": [
+    1.6,
+    1.658,
+    1.5459,
+    1.6244
+   ],
+   "bytes": 50593
+  },
+  "espera-ikki": {
+   "arquivo": "espera-ikki.mp3",
+   "descricao": "Ikki caído: as brasas das cinzas",
+   "versoes": [
+    0.0,
+    1.68,
+    3.418,
+    5.0439
+   ],
+   "duracoes": [
+    1.6,
+    1.658,
+    1.5459,
+    1.6244
+   ],
+   "bytes": 69200
+  },
+  "espera-jeangrey": {
+   "arquivo": "espera-jeangrey.mp3",
+   "descricao": "Jean caída: o halo telecinético",
+   "versoes": [
+    0.0,
+    1.68,
+    3.418,
+    5.0439
+   ],
+   "duracoes": [
+    1.6,
+    1.658,
+    1.5459,
+    1.6244
+   ],
+   "bytes": 56704
+  },
+  "espera-majinbuu": {
+   "arquivo": "espera-majinbuu.mp3",
+   "descricao": "Majin Boo caído: a gosma borbulhando",
+   "versoes": [
+    0.0,
+    1.68,
+    3.418,
+    5.0439
+   ],
+   "duracoes": [
+    1.6,
+    1.658,
+    1.5459,
+    1.6244
+   ],
+   "bytes": 62692
+  },
+  "espera-mario": {
+   "arquivo": "espera-mario.mp3",
+   "descricao": "Mario caído: o cogumelo pulando",
+   "versoes": [
+    0.0,
+    1.68,
+    3.418,
+    5.0439
+   ],
+   "duracoes": [
+    1.6,
+    1.658,
+    1.5459,
+    1.6244
+   ],
+   "bytes": 53344
+  },
+  "espera-mummra": {
+   "arquivo": "espera-mummra.mp3",
+   "descricao": "Mumm-Ra caído: o sarcófago e os sussurros",
+   "versoes": [
+    0.0,
+    1.68,
+    3.418,
+    5.0439
+   ],
+   "duracoes": [
+    1.6,
+    1.658,
+    1.5459,
+    1.6244
+   ],
+   "bytes": 57451
+  },
+  "espera-muzan": {
+   "arquivo": "espera-muzan.mp3",
+   "descricao": "Muzan caído: a carne pulsando",
+   "versoes": [
+    0.0,
+    1.68,
+    3.418,
+    5.0439
+   ],
+   "duracoes": [
+    1.6,
+    1.658,
+    1.5459,
+    1.6244
+   ],
+   "bytes": 48395
+  },
+  "espera-pain": {
+   "arquivo": "espera-pain.mp3",
+   "descricao": "Pain caído: o Rinnegan ondulando",
+   "versoes": [
+    0.0,
+    1.68,
+    3.418,
+    5.0439
+   ],
+   "duracoes": [
+    1.6,
+    1.658,
+    1.5459,
+    1.6244
+   ],
+   "bytes": 50726
+  },
+  "espera-wolverine": {
+   "arquivo": "espera-wolverine.mp3",
+   "descricao": "Wolverine caído: o vapor e o rosnado",
+   "versoes": [
+    0.0,
+    1.68,
+    3.418,
+    5.0439
+   ],
+   "duracoes": [
+    1.6,
+    1.658,
+    1.5459,
+    1.6244
+   ],
+   "bytes": 59276
+  },
   "espingarda": {
    "arquivo": "espingarda.mp3",
    "descricao": "família espingarda",
@@ -9419,6 +9606,193 @@
     1.8274
    ],
    "bytes": 58374
+  },
+  "volta-alucardcv": {
+   "arquivo": "volta-alucardcv.mp3",
+   "descricao": "Alucard se refaz: a revoada, a capa e o órgão",
+   "versoes": [
+    0.0,
+    2.48,
+    5.047,
+    7.4459
+   ],
+   "duracoes": [
+    2.4,
+    2.487,
+    2.3188,
+    2.4365
+   ],
+   "bytes": 74939
+  },
+  "volta-cell": {
+   "arquivo": "volta-cell.mp3",
+   "descricao": "Cell se refaz: as divisões e a aura",
+   "versoes": [
+    0.0,
+    2.28,
+    4.6398,
+    6.8454
+   ],
+   "duracoes": [
+    2.2,
+    2.2798,
+    2.1256,
+    2.2335
+   ],
+   "bytes": 76376
+  },
+  "volta-deadpool": {
+   "arquivo": "volta-deadpool.mp3",
+   "descricao": "Deadpool volta: squish, boing e as katanas",
+   "versoes": [
+    0.0,
+    1.98,
+    4.0289,
+    5.9446
+   ],
+   "duracoes": [
+    1.9,
+    1.9689,
+    1.8357,
+    1.9289
+   ],
+   "bytes": 79651
+  },
+  "volta-ikki": {
+   "arquivo": "volta-ikki.mp3",
+   "descricao": "Ikki volta: a Ave Fênix, o fogo e o grito",
+   "versoes": [
+    0.0,
+    2.266,
+    4.5686,
+    6.7672
+   ],
+   "duracoes": [
+    2.186,
+    2.2227,
+    2.1186,
+    2.2335
+   ],
+   "bytes": 86683
+  },
+  "volta-jeangrey": {
+   "arquivo": "volta-jeangrey.mp3",
+   "descricao": "Jean volta: a Força Fênix",
+   "versoes": [
+    0.0,
+    2.48,
+    5.047,
+    7.4459
+   ],
+   "duracoes": [
+    2.4,
+    2.487,
+    2.3188,
+    2.4365
+   ],
+   "bytes": 83480
+  },
+  "volta-majinbuu": {
+   "arquivo": "volta-majinbuu.mp3",
+   "descricao": "Majin Boo se refaz: as gotas, o boing e o vapor",
+   "versoes": [
+    0.0,
+    2.28,
+    4.6398,
+    6.8454
+   ],
+   "duracoes": [
+    2.2,
+    2.2798,
+    2.1256,
+    2.2335
+   ],
+   "bytes": 90132
+  },
+  "volta-mario": {
+   "arquivo": "volta-mario.mp3",
+   "descricao": "Mario volta: o arpejo, o pop e as moedas",
+   "versoes": [
+    0.0,
+    1.9181,
+    3.9015,
+    5.7606
+   ],
+   "duracoes": [
+    1.8381,
+    1.9034,
+    1.7791,
+    1.8599
+   ],
+   "bytes": 73851
+  },
+  "volta-mummra": {
+   "arquivo": "volta-mummra.mp3",
+   "descricao": "Mumm-Ra volta: a tampa, o coro e o trovão",
+   "versoes": [
+    0.0,
+    2.48,
+    5.047,
+    7.4459
+   ],
+   "duracoes": [
+    2.4,
+    2.487,
+    2.3188,
+    2.4365
+   ],
+   "bytes": 75006
+  },
+  "volta-muzan": {
+   "arquivo": "volta-muzan.mp3",
+   "descricao": "Muzan se remonta: os tentáculos e o rugido",
+   "versoes": [
+    0.0,
+    2.0245,
+    4.1334,
+    6.1315
+   ],
+   "duracoes": [
+    1.9445,
+    2.0289,
+    1.9181,
+    1.9761
+   ],
+   "bytes": 72081
+  },
+  "volta-pain": {
+   "arquivo": "volta-pain.mp3",
+   "descricao": "Pain volta: o Shinra Tensei",
+   "versoes": [
+    0.0,
+    2.48,
+    5.047,
+    7.4459
+   ],
+   "duracoes": [
+    2.4,
+    2.487,
+    2.3188,
+    2.4365
+   ],
+   "bytes": 78425
+  },
+  "volta-wolverine": {
+   "arquivo": "volta-wolverine.mp3",
+   "descricao": "Wolverine levanta: SNIKT",
+   "versoes": [
+    0.0,
+    1.88,
+    3.8253,
+    5.6444
+   ],
+   "duracoes": [
+    1.8,
+    1.8653,
+    1.7391,
+    1.783
+   ],
+   "bytes": 61016
   },
   "voo-de-impacto": {
    "arquivo": "voo-de-impacto.mp3",

@@ -2491,6 +2491,160 @@
   "laco": false,
   "bytes": 68472
  },
+ "espera_alucardcv": {
+  "descricao": "Alucard caído: a névoa vermelha e os morcegos em roda (laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": true,
+  "bytes": 61530
+ },
+ "espera_cell": {
+  "descricao": "Cell caído: uma célula só, pulsando e se dividindo (laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": true,
+  "bytes": 17934
+ },
+ "espera_deadpool": {
+  "descricao": "Deadpool caído: os pedaços tremendo e o balão \"…\" (laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": true,
+  "bytes": 30152
+ },
+ "espera_ikki": {
+  "descricao": "Ikki caído: as cinzas em brasa e a Fênix respirando (laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": true,
+  "bytes": 68018
+ },
+ "espera_jeangrey": {
+  "descricao": "Jean caída: o halo telecinético dourado e as estrelas (laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": true,
+  "bytes": 71646
+ },
+ "espera_majinbuu": {
+  "descricao": "Majin Boo caído: a poça de gosma rosa borbulhando (laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": true,
+  "bytes": 30734
+ },
+ "espera_mario": {
+  "descricao": "Mario caído: o cogumelo de uma vida pulando (laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": true,
+  "bytes": 12750
+ },
+ "espera_mummra": {
+  "descricao": "Mumm-Ra caído: o sarcófago aceso e os espíritos (laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": true,
+  "bytes": 21342
+ },
+ "espera_muzan": {
+  "descricao": "Muzan caído: a carne pulsando e os tentáculos (laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": true,
+  "bytes": 39124
+ },
+ "espera_pain": {
+  "descricao": "Pain caído: os anéis do Rinnegan e as hastes de chakra (laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": true,
+  "bytes": 44900
+ },
+ "espera_wolverine": {
+  "descricao": "Wolverine caído: o vapor e os cortes se fechando (laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": true,
+  "bytes": 36878
+ },
  "espingarda": {
   "descricao": "nove impactos espalhados",
   "quadros": 12,
@@ -8132,6 +8286,160 @@
   ],
   "laco": true,
   "bytes": 7926
+ },
+ "volta_alucardcv": {
+  "descricao": "Alucard se refaz: a névoa fecha, os morcegos mergulham, a capa abre",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 54936
+ },
+ "volta_cell": {
+  "descricao": "Cell se refaz: as células se multiplicam e formam o corpo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 66118
+ },
+ "volta_deadpool": {
+  "descricao": "Deadpool volta: os pedaços grudam, o estouro de quadrinho e as katanas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 57346
+ },
+ "volta_ikki": {
+  "descricao": "Ikki volta: a Ave Fênix sobe das cinzas e abre as asas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 76356
+ },
+ "volta_jeangrey": {
+  "descricao": "Jean volta: a Força Fênix cósmica de asas abertas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 92250
+ },
+ "volta_majinbuu": {
+  "descricao": "Majin Boo se refaz: as gotas se juntam e o vapor sai da cabeça",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 26772
+ },
+ "volta_mario": {
+  "descricao": "Mario volta: o cogumelo, o 1UP, as moedas e as estrelas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 29738
+ },
+ "volta_mummra": {
+  "descricao": "Mumm-Ra volta: a tampa do sarcófago abre e as faixas se soltam",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 74720
+ },
+ "volta_muzan": {
+  "descricao": "Muzan se remonta: os tentáculos se juntam e o olho acende",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 39338
+ },
+ "volta_pain": {
+  "descricao": "Pain volta: o Rinnegan abre, os seis corpos e o Shinra Tensei",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 80754
+ },
+ "volta_wolverine": {
+  "descricao": "Wolverine levanta: as três garras saem (snikt)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 33016
  },
  "voo_de_impacto": {
   "descricao": "Omni-Man · o voo supersônico e o estrondo",

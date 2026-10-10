@@ -7,6 +7,7 @@ import { SkillIcon } from './Icon';
 import { ArrowDown,HeartPulse,ShieldCheck,Sparkles,Zap } from 'lucide-react';
 import { statuses as statusCatalog } from '../data/statuses';
 import { familia,folha,profileFor,type VfxFamily,type VfxProfile } from '../presentation/vfxProfiles';
+import { RENASCER_PROPRIO } from '../presentation/renascer-proprio';
 import { efeitosDoJeito,VOO_DO_QUIQUE } from '../presentation/jeito-efeito';
 import { FAMILIA_DA_INVOCACAO } from '../presentation/vfx-atribuicao';
 
@@ -49,7 +50,9 @@ export function BattleEffects({battle,beat,anchors,enabled,reduced,medal=80}:{ba
   const character=source?byId[source.characterId]:null;
   const kind=beat?.event.kind;
   const perfil:VfxProfile|undefined=beat&&(kind==='basic'||kind==='skill'||kind==='cast')?profileFor(source?.characterId??'',beat.event.skill):undefined;
-  const chave:VfxFamily|undefined=perfil?.family??(kind==='summon'&&character?FAMILIA_DA_INVOCACAO[character.id]:undefined)??(kind?SEM_FICHA[kind]:undefined);
+  // quem renasce sozinho volta do jeito dele (a Fênix do Ikki, a gosma do Majin Boo, o cogumelo do Mario…)
+  const volta=kind==='revive'&&beat?.event.source===beat?.event.target&&character?RENASCER_PROPRIO[character.id]?.volta:undefined;
+  const chave:VfxFamily|undefined=perfil?.family??(kind==='summon'&&character?FAMILIA_DA_INVOCACAO[character.id]:undefined)??(volta as VfxFamily|undefined)??(kind?SEM_FICHA[kind]:undefined);
   const fam=chave?familia(chave):undefined;
   const cor=perfil?.color??character?.color??'#cfe6ff';
   const landed=beat?.impacted??false;

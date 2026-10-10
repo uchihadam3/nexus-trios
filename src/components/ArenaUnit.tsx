@@ -1,5 +1,5 @@
 import { useEffect,useRef,useState } from 'react';
-import { Flame,Hourglass,Shield,HeartPulse,Skull,Zap } from 'lucide-react';
+import { Hourglass,Shield,HeartPulse,Skull,Zap } from 'lucide-react';
 import { condicaoAtendida } from '../engine/battle';
 import type { Battle,Fighter,Status } from '../engine/types';
 import { passoAtual,revelado,type Beat } from '../presentation/director';
@@ -10,6 +10,8 @@ import { statuses } from '../data/statuses';
 import { Portrait } from './Portrait';
 import { AuxIcon,SkillIcon } from './Icon';
 import { StatusBadge } from './StatusBadge';
+import { EmblemaDoRenascer } from './EmblemaDoRenascer';
+import { RENASCER_PROPRIO } from '../presentation/renascer-proprio';
 import type { InspectTarget } from './BattleInspector';
 import type { UnitActing } from '../presentation/acting';
 
@@ -90,6 +92,8 @@ export function ArenaUnit({fighter:f,battle,beat,onInspect,numbers,threatened,li
   const out=f.hp<=0,critical=!out&&f.hp/f.maxHp<=P.criticalCondition;
   // caiu, mas vai renascer: fica em brasas em vez de "fora"
   const renascendo=out&&(f.renascendo??0)>0;
+  // o jeito próprio de cada um renascer: a cor, o rótulo, o ícone e a animação de espera
+  const proprio=RENASCER_PROPRIO[c.id];
   // Errou (Cego) aparece em quem bateu; Esquivou aparece em quem escapou
   const errou=impacted?beat?.events.find(e=>revelado(beat,e)&&e.kind==='miss'&&(e.label==='Esquivou'?e.target===f.uid:e.source===f.uid)):undefined;
   // a criatura invocada em campo: plaquinha com o nome, e pulso quando ela ataca
@@ -118,7 +122,7 @@ export function ArenaUnit({fighter:f,battle,beat,onInspect,numbers,threatened,li
   /* A atuação deste beat: estilo de quem age, reação de quem recebe, e para onde. */
   const atua=atuacao?[atuacao.act&&`actor act-${atuacao.act} act-${atuacao.parity}`,atuacao.react&&`reactor react-${atuacao.react}`].filter(Boolean).join(' '):'';
   const atuaStyle:Record<string,string>=atuacao?{'--act-dx':`${atuacao.dx.toFixed(1)}px`,'--act-dy':`${atuacao.dy.toFixed(1)}px`,'--act-ux':atuacao.ux.toFixed(3),'--act-uy':atuacao.uy.toFixed(3),'--beat-s':`${atuacao.seconds}s`,'--act-angle':`${(Math.atan2(atuacao.uy,atuacao.ux)*180/Math.PI).toFixed(1)}deg`}:{};
-  return <article className={`unit side-${f.side} ${marcas} ${atua}`} data-fighter={f.uid} data-slot={f.slot} data-combat-role={linkedSource&&linkedTarget?'both':linkedSource?'source':linkedTarget?'target':'idle'} style={{'--character':c.color,...atuaStyle} as React.CSSProperties}>
+  return <article className={`unit side-${f.side} ${marcas} ${atua}`} data-fighter={f.uid} data-slot={f.slot} data-combat-role={linkedSource&&linkedTarget?'both':linkedSource?'source':linkedTarget?'target':'idle'} style={{'--character':c.color,...(proprio?{'--rn-cor':proprio.cor,'--rn-fundo':proprio.fundo}:{}),...atuaStyle} as React.CSSProperties}>
     <div className="unit-medal">
       <span className="unit-fx" aria-hidden="true"/>
       {shield>0&&!out&&<span className="unit-escudo" aria-hidden="true"/>}
@@ -135,11 +139,11 @@ export function ArenaUnit({fighter:f,battle,beat,onInspect,numbers,threatened,li
         {threatened&&<span className="unit-brackets" aria-hidden="true"/>}
         {broken&&<span className="unit-break" aria-hidden="true">×</span>}
         {tempo&&<span className={`unit-tempo ${tempo.value!>0?'advanced':'delayed'}`} aria-label={tempo.label}><AuxIcon id={tempo.value!>0?'tempo-up':'tempo-down'} size={18}/></span>}
-        {renascendo&&<span className="unit-brasas" aria-hidden="true" style={{'--fx-img':`url(${folha('brasas_renascendo')})`} as React.CSSProperties}/>}
+        {renascendo&&<span className="unit-brasas" aria-hidden="true" style={{'--fx-img':`url(${folha(proprio?.espera??'brasas_renascendo')})`} as React.CSSProperties}/>}
         {/* o tempo até renascer: a barrinha enche em volta do medalhão */}
         {renascendo&&<svg className="renasce-ring" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="47" className="renasce-ring-trilho"/><circle cx="50" cy="50" r="47" pathLength="100" strokeDasharray={`${Math.min(100,Math.max(0,100*(1-(f.renascendo??0)/(c.renascer?.atraso||1))))} 100`}/></svg>}
         {out&&(renascendo
-          ?<span className="unit-ko unit-renasce" aria-label={`Renascendo em ${Math.ceil(f.renascendo??0)} segundos`}><Flame size={24}/><b>RENASCE</b><i className="renasce-segundos">{Math.ceil(f.renascendo??0)}s</i></span>
+          ?<span className="unit-ko unit-renasce" aria-label={`Renascendo em ${Math.ceil(f.renascendo??0)} segundos`}><EmblemaDoRenascer id={c.id} size={24}/><b>{proprio?.rotulo??'RENASCE'}</b><i className="renasce-segundos">{Math.ceil(f.renascendo??0)}s</i></span>
           :<span className="unit-ko" aria-label="Fora da luta"><Skull size={26}/><b>FORA</b></span>)}
         {levantou&&<span key={levantou.id} className="discovery-pop revive-pop">{levantou.label}</span>}
         {invocada&&<span className={`unit-invocada ${atacou?'atacou':''}`} title={`${c.invocacao??'Invocação'} · ${Math.ceil(invocada.remaining)} s`}><img src="/assets/statuses/summon.png" alt=""/><b>{c.invocacao??'Invocação'}</b><i>{Math.ceil(invocada.remaining)}s</i></span>}
@@ -154,7 +158,7 @@ export function ArenaUnit({fighter:f,battle,beat,onInspect,numbers,threatened,li
         {applied&&<span key={applied.id} className="status-pop">{applied.status&&<img src={`/assets/statuses/${applied.status}.png`} alt=""/>}{applied.label}</span>}
         {discovered&&<span key={discovered.id} className="discovery-pop">{discovered.label}</span>}
       </button>
-      {(out||advantageActive||critical||shield>0)&&<span className={`unit-flag ${out?'flag-out':advantageActive?'flag-advantage':critical?'flag-critical':'flag-shield'}`} aria-hidden="true">{renascendo?<Flame size={12}/>:out?<Skull size={12}/>:advantageActive?<AuxIcon id="domain" size={13}/>:critical?<HeartPulse size={12}/>:<Shield size={12}/>}</span>}
+      {(out||advantageActive||critical||shield>0)&&<span className={`unit-flag ${out?'flag-out':advantageActive?'flag-advantage':critical?'flag-critical':'flag-shield'}`} aria-hidden="true">{renascendo?<EmblemaDoRenascer id={c.id} size={12}/>:out?<Skull size={12}/>:advantageActive?<AuxIcon id="domain" size={13}/>:critical?<HeartPulse size={12}/>:<Shield size={12}/>}</span>}
       {preparing&&<div className="unit-cast"><AuxIcon id="preparing" size={13}/><span>{f.cast?c.skills[f.cast.skill].name:beat?.event.label}</span></div>}
       {/* a habilidade saindo, com ou sem Preparo: o nome aparece enquanto o golpe acontece */}
       {!preparing&&source&&beat?.event.kind==='skill'&&beat.event.skill!==undefined&&c.skills[beat.event.skill]&&<div key={beat.event.id} className="unit-cast unit-skill-name" style={{"--character":c.color} as React.CSSProperties}><SkillIcon type={c.skills[beat.event.skill].icon} size={15} characterId={c.id} skillId={c.skills[beat.event.skill].id}/><span>{c.skills[beat.event.skill].name}</span></div>}

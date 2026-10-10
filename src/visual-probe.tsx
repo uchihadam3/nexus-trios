@@ -28,7 +28,9 @@ const habIndex=habSlot===undefined||habSlot==='b'?undefined:Number(habSlot);
 const rivais=['goku','vegeta','hulk'].filter(x=>x!==habId).concat(['thor']).slice(0,3);
 /* `nomes`: os nomes mais longos do elenco, para ver se a arena aguenta. */
 const aliados=['sakura','naruto','gojo'].filter(x=>x!==habId).slice(0,2);
-const battle=hab?createBattle([habId,...aliados],rivais,99):scenario==='nomes'?createBattle(['coragem','raidenmk','capitaoplaneta'],['dannyphantom','lexluthor','sailormoon'],99):createBattle(['sakura','gojo','naruto'],['goku','vegeta','hulk'],99);
+/* `?scenario=renascendo&quem=majinbuu` (ou `renasce`): o Renascer próprio daquele personagem, caído no lugar do primeiro rival. */
+const quem=params.get('quem');
+const battle=hab?createBattle([habId,...aliados],rivais,99):quem?createBattle(['sakura','gojo','naruto'],[quem,'vegeta','hulk'],99):scenario==='nomes'?createBattle(['coragem','raidenmk','capitaoplaneta'],['dannyphantom','lexluthor','sailormoon'],99):createBattle(['sakura','gojo','naruto'],['goku','vegeta','hulk'],99);
 const [sakura,gojo,naruto,goku,vegeta,hulk]=battle.fighters;
 let source=sakura,target=goku,effects:Effect[]=[{kind:'damage',value:190}],selected=[goku],visual:Visual='impact';
 if(scenario==='heal'){source=sakura;target=naruto;target.hp-=240;effects=[{kind:'heal',value:170}];selected=[target];visual='shield';}
@@ -76,7 +78,7 @@ if(scenario==='status5'){
 if(scenario==='purificar'){naruto.statuses.push({id:'paralyzed',remaining:4,duration:4,intensity:1,source:goku.uid},{id:'slow',remaining:6,duration:6,intensity:.2,source:goku.uid});source=sakura;target=naruto;effects=[{kind:'cleanse',value:2}];selected=[naruto];}
 if(scenario==='dissipar'){goku.statuses.push({id:'protected',remaining:6,duration:6,intensity:.3,source:goku.uid},{id:'strengthened',remaining:6,duration:6,intensity:.2,source:goku.uid});source=gojo;target=goku;effects=[{kind:'damage',value:120},{kind:'dispel',value:2}];selected=[goku];}
 /* Reviver e Renascer: em brasas esperando, e a volta sozinho. */
-if(scenario==='renascendo'){vegeta.hp=0;vegeta.renascendo=1.6;source=sakura;target=goku;}
+if(scenario==='renascendo'){const caido=quem?goku:vegeta;caido.hp=0;caido.renascendo=1.6;source=sakura;target=quem?vegeta:goku;}
 const renasce=scenario==='renasce';
 if(renasce){goku.hp=0;goku.renascendo=.1;source=goku;target=goku;effects=[];selected=[];}
 let label:string=scenario,skillIndex:number|undefined=0;

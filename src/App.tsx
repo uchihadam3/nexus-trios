@@ -34,6 +34,7 @@ import { dicasLiberadas,ehDono } from './lib/dicas-liberadas';
 import {AccountScreen} from './screens/AccountScreen';
 import {FAMILIA_DA_INVOCACAO} from './presentation/vfx-atribuicao';
 import {efeitosDoJeito,somDoJeito} from './presentation/jeito-efeito';
+import {SOM_DA_ESPERA,SOM_DA_VOLTA} from './presentation/renascer-proprio';
 const DebugScreen=lazy(()=>import('./screens/DebugScreen').then(m=>({default:m.DebugScreen})));
 const VfxLabScreen=lazy(()=>import('./screens/VfxLabScreen').then(m=>({default:m.VfxLabScreen})));
 type Screen='home'|'game'|'characters'|'conquistas'|'ranking'|'conta'|'help'|'settings'|'debug'|'vfx';
@@ -212,11 +213,12 @@ export default function App(){
         if(cue.phase==='impact'&&d.active){
           // levantar/renascer: o som próprio por cima do golpe do beat
           const volta=d.active.events.find(e=>e.kind==='revive');
-          if(volta)battleAudio.sound(volta.source===volta.target?'renascer':'ressurreicao',PRIORIDADE.importante,0,volta.id,volta.source===volta.target?0:.12);
+          const quemVolta=volta?d.active.after.fighters.find(f=>f.uid===volta.source)?.characterId??'':'';
+          if(volta)battleAudio.sound(volta.source===volta.target?SOM_DA_VOLTA(quemVolta):'ressurreicao',PRIORIDADE.importante,0,volta.id,volta.source===volta.target?0:.12);
           if(volta&&d.active.event.kind==='revive')return;
           // caiu, mas vai renascer: as brasas começam a crepitar logo depois do nocaute
           const brasa=d.active.events.find(e=>e.kind==='ko'&&(d.active!.after.fighters.find(f=>f.uid===e.target)?.renascendo??0)>0);
-          if(brasa)battleAudio.sound('brasas-renascendo',PRIORIDADE.apoio,0,brasa.id,.45);
+          if(brasa)battleAudio.sound(SOM_DA_ESPERA(d.active.after.fighters.find(f=>f.uid===brasa.target)?.characterId??''),PRIORIDADE.apoio,0,brasa.id,.45);
           // provocou: o brado por cima do golpe
           const provocou=d.active.events.find(e=>e.kind==='status'&&e.status==='provoked');
           if(provocou)battleAudio.sound('provocar',PRIORIDADE.importante,0,provocou.id,.05);
