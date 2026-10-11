@@ -1,0 +1,120 @@
+/*
+ * O Livro de Combos (src/screens/LivroDeCombos.tsx): cabe na tela, sem scroll.
+ * As peças apagadas são pedras escuras com cadeado e só o nome; as acesas
+ * brilham na cor do combo, com a borda da raridade.
+ */
+.lc{--lc-alto:calc(100dvh - var(--lc-barra,62px) - 36px);display:grid;grid-template-rows:auto auto minmax(0,1fr) auto;gap:10px;height:var(--lc-alto);min-height:300px;max-width:980px;margin:0 auto;padding:10px 2px 0;overflow:hidden}
+@media (min-width:900px){.lc{--lc-barra:68px}}
+
+/* o topo: o anel do progresso e o título */
+.lc-topo{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;gap:12px;padding:10px 14px;border-radius:20px;
+  background:radial-gradient(ellipse at 8% 50%,#ffd36b26,transparent 55%),linear-gradient(165deg,#1d1a10,#0d1218);box-shadow:inset 0 0 0 1px #ffd36b40,0 10px 24px #0007;position:relative;overflow:hidden}
+.lc-topo::after{content:'';position:absolute;inset:0;background:linear-gradient(105deg,transparent 40%,#ffffff12 50%,transparent 60%);animation:cq-brilho 5s ease-in-out infinite;pointer-events:none}
+.lc-anel{--p:0;display:grid;place-items:center;width:54px;height:54px;border-radius:50%;color:#ffd36b;
+  background:radial-gradient(circle,#15120a 58%,transparent 60%),conic-gradient(#ffd36b calc(var(--p)*360deg),#ffffff1a 0);box-shadow:0 0 18px #ffd36b40}
+.lc-anel svg{filter:drop-shadow(0 0 6px #ffd36b)}
+.lc-titulo{display:grid;gap:3px;min-width:0}
+.lc-titulo h1{margin:0;font-size:1.05rem;font-weight:900;letter-spacing:2.4px;color:#ffd36b}
+.lc-titulo p{margin:0;font-size:.8rem;color:#d9ccaa}
+.lc-titulo p b{color:#fff;font-size:.95rem}
+.lc-titulo p span{color:#a39778}
+.lc-barra{display:block;height:5px;border-radius:3px;background:#0a0805;overflow:hidden}
+.lc-barra i{display:block;height:100%;min-width:3px;border-radius:3px;background:linear-gradient(90deg,#c9963a,#ffd36b);box-shadow:0 0 8px #ffd36b}
+
+/* as abas */
+.lc-abas{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.lc-abas button{position:relative;display:grid;justify-items:center;gap:1px;padding:7px 2px;border-radius:14px;border:1px solid #ffffff1a;background:#ffffff08;color:#b9c7d2;font:inherit;cursor:pointer}
+.lc-abas button span{font-size:.74rem;font-weight:900;letter-spacing:.3px}
+.lc-abas button small{font-size:.64rem;color:#8ea2b0}
+.lc-abas button.ativa{color:#fff;border-color:color-mix(in srgb,var(--aba) 70%,transparent);background:linear-gradient(170deg,color-mix(in srgb,var(--aba) 26%,transparent),#0f1a24);box-shadow:0 0 16px color-mix(in srgb,var(--aba) 25%,transparent)}
+.lc-abas button.ativa svg{color:var(--aba);filter:drop-shadow(0 0 5px var(--aba))}
+.lc-abas button em{position:absolute;top:-5px;right:-3px;min-width:18px;height:18px;padding:0 4px;border-radius:9px;font-size:10px;font-style:normal;font-weight:900;line-height:18px;color:#fff;background:#ff4a5a;box-shadow:0 0 0 2px #0b131b,0 0 10px #ff4a5a;animation:cq-pulsa-selo 1.2s ease-in-out infinite}
+
+/* a grade: uma página que cabe na tela */
+.lc-grade-caixa{position:relative;min-height:0;padding:2px;touch-action:pan-y;overflow:hidden}
+.lc-grade{display:grid;gap:8px;height:100%;align-content:stretch}
+.lc-grade.vem-direita{animation:lc-entra-d .32s cubic-bezier(.2,.8,.2,1) both}
+.lc-grade.vem-esquerda{animation:lc-entra-e .32s cubic-bezier(.2,.8,.2,1) both}
+@keyframes lc-entra-d{from{opacity:0;transform:translateX(26px)}}
+@keyframes lc-entra-e{from{opacity:0;transform:translateX(-26px)}}
+
+.lc-peca{--rc:#ffffff24;position:relative;display:grid;grid-template-rows:auto minmax(0,1fr);justify-items:center;align-content:center;gap:6px;min-width:0;min-height:0;padding:8px 6px;border-radius:16px;border:1px solid #ffffff12;font:inherit;text-align:center;cursor:pointer;overflow:hidden;
+  animation:lc-peca .38s calc(var(--i)*22ms) both}
+@keyframes lc-peca{from{opacity:0;transform:scale(.9)}}
+.lc-peca b{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font-size:.74rem;font-weight:800;line-height:1.2}
+.lc-selo{display:grid;place-items:center;width:38px;height:38px;border-radius:50%}
+.lc-peca:active{transform:scale(.96)}
+
+/* apagada: pedra escura, cadeado, só o nome */
+.lc-peca.apagada{background:repeating-linear-gradient(135deg,#ffffff05 0 6px,transparent 6px 12px),linear-gradient(170deg,#18212b,#0c1117);color:#7d8b97}
+.lc-peca.apagada .lc-selo{color:#5d6b77;background:#0a0f14;box-shadow:inset 0 0 0 1px #ffffff14,inset 0 -4px 10px #0008}
+.lc-peca.apagada b{color:#8d9aa5}
+.lc-peca.apagada.treme{animation:lc-treme .4s both}
+@keyframes lc-treme{20%{transform:translateX(-4px)}40%{transform:translateX(4px)}60%{transform:translateX(-3px)}80%{transform:translateX(2px)}}
+
+/* acesa: na cor do combo, borda na cor da raridade */
+.lc-peca.acesa{color:#fff;border-color:color-mix(in srgb,var(--rc) 70%,transparent);
+  background:radial-gradient(ellipse at 50% 18%,color-mix(in srgb,var(--cb) 30%,transparent),transparent 65%),linear-gradient(170deg,#16222e,#0b1118);box-shadow:inset 0 2px 0 color-mix(in srgb,var(--rc) 70%,transparent)}
+.lc-peca.acesa .lc-selo{color:#0c1218;background:radial-gradient(circle at 35% 30%,#fff,var(--cb) 55%,color-mix(in srgb,var(--cb),#000 35%));box-shadow:0 0 14px color-mix(in srgb,var(--cb) 60%,transparent)}
+.lc-peca.comum{--rc:#9fd3a8}.lc-peca.raro{--rc:#6fb8ff}.lc-peca.epico{--rc:#c58cff}.lc-peca.lendario{--rc:#ffd36b}
+.lc-peca.epico,.lc-peca.lendario{box-shadow:inset 0 2px 0 var(--rc),0 0 16px color-mix(in srgb,var(--rc) 25%,transparent)}
+.lc-peca.lendario::after{content:'';position:absolute;inset:0;background:linear-gradient(105deg,transparent 35%,#ffffff1c 50%,transparent 65%);animation:cq-brilho 3.8s ease-in-out infinite;pointer-events:none}
+.lc-peca.nova{animation:lc-peca .38s calc(var(--i)*22ms) both,lc-nova 1.6s .4s ease-in-out infinite}
+@keyframes lc-nova{50%{box-shadow:inset 0 2px 0 var(--rc),0 0 22px color-mix(in srgb,var(--cb) 55%,transparent)}}
+.lc-peca em{position:absolute;top:5px;right:5px;padding:1px 6px;border-radius:8px;font-size:.55rem;font-style:normal;font-weight:900;letter-spacing:.8px;color:#fff;background:#ff4a5a;box-shadow:0 0 8px #ff4a5a}
+
+/* o rodapé: páginas, ou a dica quando toca numa apagada */
+.lc-rodape{display:grid;place-items:center;min-height:42px;padding-bottom:4px}
+.lc-paginas{display:flex;align-items:center;gap:10px}
+.lc-seta{display:grid;place-items:center;width:38px;height:38px;border-radius:50%;border:1px solid #ffffff22;background:#ffffff0c;color:#fff;cursor:pointer}
+.lc-seta:disabled{opacity:.3;cursor:default}
+.lc-pontos{display:flex;gap:6px}
+.lc-pontos button{width:9px;height:9px;padding:0;border:0;border-radius:5px;background:#ffffff2a;cursor:pointer;transition:width .25s,background .25s}
+.lc-pontos button.ativo{width:24px;background:#ffd36b;box-shadow:0 0 8px #ffd36b}
+.lc-dica{display:flex;align-items:center;gap:6px;margin:0;padding:8px 12px;border-radius:12px;font-size:.78rem;color:#ffe6b0;background:#ffd36b14;border:1px solid #ffd36b40;animation:lc-peca .25s both}
+
+/* a ficha de um combo descoberto */
+.lc-veu{position:fixed;inset:0;z-index:80;display:grid;place-items:center;padding:16px;background:#050a0fcc;backdrop-filter:blur(4px);animation:lc-veu .2s both}
+@keyframes lc-veu{from{opacity:0}}
+.lc-ficha{position:relative;width:min(380px,100%);max-height:calc(100dvh - 32px);overflow:auto;animation:lc-ficha .36s cubic-bezier(.2,1.3,.4,1) both}
+@keyframes lc-ficha{from{opacity:0;transform:scale(.8) rotateY(70deg)}}
+.lc-ficha .cb-carta{margin:0;width:100%}
+.lc-ficha{border-radius:22px}
+.lc-ficha-brilho{position:absolute;top:10px;left:12px;z-index:2;color:#ffd36b;filter:drop-shadow(0 0 6px #ffd36b);animation:cq-pulsa-selo 1.6s ease-in-out infinite}
+.lc-fechar{position:absolute;top:8px;right:8px;z-index:2;display:grid;place-items:center;width:34px;height:34px;border-radius:50%;border:1px solid #ffffff2a;background:#0b131bcc;color:#fff;cursor:pointer}
+
+/* a faixa do Livro na tela inicial (ao lado das Conquistas) */
+.hv-faixas{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;width:100%;margin:12px 0 2px}
+.hv-faixas .hv-conquistas-faixa{margin:0;grid-template-columns:auto minmax(0,1fr);padding:9px 10px;gap:8px}
+.hv-faixas .hv-cq-ultimos,.hv-faixas .hv-conquistas-faixa>svg{display:none}
+.hv-faixas .hv-cq-icone{width:40px;height:40px}
+.hv-faixas .hv-cq-texto b{font-size:11.5px;letter-spacing:1.2px}
+.hv-faixas .hv-cq-texto small{font-size:10.5px;line-height:1.25}
+.hv-faixas .hv-cq-icone em{top:-6px;right:-4px}
+.hv-faixas .hv-conquistas-faixa{gap:12px}
+.hv-livro-faixa{--titulo:#8fd3ff;background:radial-gradient(ellipse at 10% 50%,#8fd3ff33,transparent 60%),linear-gradient(165deg,#0f1b26,#080e14)}
+@media (min-width:700px){.hv-faixas .hv-cq-ultimos{display:flex}.hv-faixas .hv-conquistas-faixa{grid-template-columns:auto minmax(0,1fr) auto}}
+
+/* o aviso na luta: combo descoberto */
+.cb-descoberta{position:absolute;left:50%;top:22%;z-index:30;display:grid;justify-items:center;gap:8px;width:min(440px,92%);padding:12px 14px;border-radius:18px;transform:translateX(-50%);cursor:pointer;
+  background:linear-gradient(170deg,#1d1a10f2,#0d1218f2);box-shadow:inset 0 0 0 1px #ffd36b66,0 0 30px #ffd36b33,0 14px 30px #000a;animation:cb-livro-abre .5s cubic-bezier(.2,1.3,.4,1) both}
+@keyframes cb-livro-abre{from{opacity:0;transform:translateX(-50%) scale(.7) rotateX(60deg)}}
+.cb-descoberta strong{display:flex;align-items:center;gap:6px;font-size:.92rem;font-weight:900;letter-spacing:1.6px;color:#ffd36b;text-shadow:0 0 10px #ffd36b88}
+.cb-descoberta-pecas{display:flex;flex-wrap:wrap;justify-content:center;gap:6px}
+.cb-descoberta-pecas>span{display:flex;align-items:center;gap:6px;padding:5px 10px;border-radius:12px;color:#fff;background:color-mix(in srgb,var(--cb) 22%,#0c1218);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--cb) 60%,transparent);animation:lc-peca .4s calc(.3s + var(--i)*.12s) both}
+.cb-descoberta-pecas>span svg{color:var(--cb);filter:drop-shadow(0 0 4px var(--cb))}
+.cb-descoberta-pecas small{font-size:.76rem;font-weight:800}
+.cb-descoberta-pecas em{font-size:.6rem;font-style:normal;font-weight:900;letter-spacing:.6px;padding:1px 6px;border-radius:6px;color:#ffd6de;background:#ff6b8a33}
+.cb-descoberta-dica{font-size:.7rem;color:#bba876}
+/* celular deitado: tudo mais baixo, e cada peça deitada (ícone ao lado do nome) */
+@media (max-height:520px){
+  .lc{gap:6px;padding-top:4px}
+  .lc-topo{padding:6px 12px;border-radius:16px}
+  .lc-anel{width:40px;height:40px}.lc-anel svg{width:18px;height:18px}
+  .lc-titulo h1{font-size:.92rem}.lc-titulo p span{display:none}
+  .lc-abas button{grid-auto-flow:column;align-items:center;gap:6px;padding:5px 4px}
+  .lc-peca{grid-template-rows:none;grid-template-columns:auto minmax(0,1fr);justify-items:start;align-items:center;text-align:left;padding:6px 8px;gap:8px}
+  .lc-selo{width:32px;height:32px}.lc-selo svg{width:16px;height:16px}
+  .lc-rodape{min-height:36px}.lc-seta{width:32px;height:32px}
+}
+@media (prefers-reduced-motion:reduce){.lc-peca,.lc-grade,.lc-ficha,.cb-descoberta,.lc-peca.nova{animation:none}}

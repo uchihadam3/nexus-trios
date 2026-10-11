@@ -24,7 +24,8 @@ export interface Profile {journeys:number;victories:number;best:number;wins:numb
   /** As conquistas liberadas neste aparelho (id do personagem → quando), src/lib/conquistas.ts. */conquistas?:Conquistas;
   /** As já vistas na tela de Conquistas: as outras aparecem com o selo NOVO. */conquistasVistas?:string[];
   /** Os três do Desafio do Dia, guardados para não mudarem durante o dia. */desafio?:Desafio;
-  /** Os combos que o jogador já ativou numa luta (o álbum do Livro de Combos). */combosDescobertos?:string[]}
+  /** Os combos que o jogador já descobriu (formou no trio ou viu o rival usar): acendem no Livro de Combos. */combosDescobertos?:string[];
+  /** Os descobertos que ele já abriu no Livro (os outros mostram NOVO). */combosVistos?:string[]}
 export const defaults:Settings={volume:P.audio.master,musicVolume:P.audio.music,effectsVolume:P.audio.effects,effects:true,speed:1,numbers:true,visualFeedbackVersion:2,reducedMotion:typeof matchMedia!=='undefined'&&matchMedia('(prefers-reduced-motion: reduce)').matches,auto:false,explanations:'normal',dicasDoTrio:false};
 const prefix='nexus-v1-';
 export let storageAvailable=true;

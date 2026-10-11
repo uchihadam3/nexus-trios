@@ -1,5 +1,5 @@
 import { useEffect, useState, type CSSProperties } from 'react';
-import { Anchor, Ban, BatteryCharging, Biohazard, Bomb, Castle, ChevronRight, CloudLightning, Crosshair, Droplet, Droplets, Dumbbell, EyeOff, Flame, Gem, Ghost, Globe, HeartPulse, Hourglass, Infinity as Infinito, Link2, Lock, Crown, Timer, TrendingDown, Skull, MoonStar, Shield, Heart, Wind, Copy, Battery, Mountain, Leaf, Moon, Rocket, ShieldAlert, ShieldHalf, ShieldPlus, Snowflake, Sparkles, Sprout, Sunrise, Swords, Target, Tornado, Users, VolumeX, Zap, type LucideIcon } from 'lucide-react';
+import { Anchor, Ban, BatteryCharging, Biohazard, Bomb, BookOpen, Castle, ChevronRight, CloudLightning, Crosshair, Droplet, Droplets, Dumbbell, EyeOff, Flame, Gem, Ghost, Globe, HeartPulse, Hourglass, Infinity as Infinito, Link2, Crown, Timer, TrendingDown, Skull, MoonStar, Shield, Heart, Wind, Copy, Battery, Mountain, Leaf, Moon, Rocket, ShieldAlert, ShieldHalf, ShieldPlus, Snowflake, Sparkles, Sprout, Sunrise, Swords, Target, Tornado, Users, VolumeX, Zap, type LucideIcon } from 'lucide-react';
 import { byId } from '../data/characters';
 import { DUPLAS_LENDARIAS, PECAS, PISO, REGRAS, TRIOS, UNIVERSO, bonusEfetivo, raridadeDe, type Raridade } from '../engine/combos';
 import type { Bonus, ComboAtivo, Pulso } from '../engine/types';
@@ -185,69 +185,68 @@ function Efeitos({ quem, bonus, pulso, nosRivais, id }: { quem: string; bonus: P
     {rivais && <li className="rivais"><b><TrendingDown size={12} />NOS RIVAIS, A LUTA TODA</b><span>{maiuscula(rivais)}</span></li>}
   </ul>;
 }
-type Aba = 'duplas' | 'trios' | 'universo' | 'lendarias';
-export function AlbumDeCombos({ descobertos }: { descobertos: readonly string[] }) {
-  const [aba, setAba] = useState<Aba>('duplas');
-  const aceso = (id: string) => descobertos.includes(id);
-  const universos = [{ id: 'universo-2', nome: 'Dupla do mesmo universo', quem: 'Dois personagens do mesmo universo (o que aparece no topo da ficha)', b: UNIVERSO.dois }, { id: 'universo-3', nome: 'Trio do mesmo universo', quem: 'Os três do mesmo universo (o que aparece no topo da ficha)', b: UNIVERSO.tres }];
-  const grupos: Record<Aba, string[]> = { duplas: REGRAS.map((r) => r.id), trios: TRIOS.map((t) => t.id), universo: universos.map((u) => u.id), lendarias: DUPLAS_LENDARIAS.map((l) => l.id) };
-  const todos = Object.values(grupos).flat(), achados = todos.filter(aceso).length;
-  const ABAS: { id: Aba; nome: string; icone: LucideIcon; dica: string }[] = [
-    { id: 'duplas', nome: 'Duplas', icone: Link2, dica: 'Um ajuda, o outro recebe. Leia as fichas: cada peça é algo que o personagem faz.' },
-    { id: 'trios', nome: 'Trios', icone: Castle, dica: 'Os três se completam, cada um numa peça. O bônus vai para o trio todo.' },
-    { id: 'universo', nome: 'Universo', icone: Globe, dica: 'Personagens do mesmo universo lutam melhor juntos. O trio inteiro vale muito mais que a dupla. Marvel e DC são divididas em equipes (X-Men, Vingadores, Liga da Justiça…): vale a equipe, que aparece no topo da ficha.' },
-    { id: 'lendarias', nome: 'Lendárias', icone: Crown, dica: 'Duplas de nome, da própria história. Juntar os dois no mesmo trio é raro, e vale a pena.' },
-  ];
-  const atual = ABAS.find((a) => a.id === aba)!;
-  return <div className="cb-album">
-    <div className="cb-album-topo"><b>{achados}<small>/{todos.length}</small></b><span><strong>COMBOS DESCOBERTOS</strong><small>Leia as fichas e monte o trio: o combo que você formar aparece no começo da luta e acende aqui.</small></span>
-      <span className="cb-album-barra"><i style={{ width: `${(100 * achados) / todos.length}%` }} /></span></div>
-    <div className="cb-legenda" aria-label="Raridade">{ORDEM_DA_RARIDADE.map((r) => <SeloDeRaridade key={r} r={r} />)}<small>quanto mais raro, mais difícil de montar — e mais forte</small></div>
-    <nav className="cb-abas" role="tablist">{ABAS.map((a) => { const Ic = a.icone, n = grupos[a.id].filter(aceso).length; return <button key={a.id} role="tab" aria-selected={aba === a.id} className={aba === a.id ? 'ativa' : ''} onClick={() => setAba(a.id)}><Ic size={15} /><span>{a.nome}</span><small>{n}/{grupos[a.id].length}</small></button>; })}</nav>
-    <p className="cb-aba-dica">{atual.dica}</p>
-    {aba === 'duplas' && ORDEM_DA_RARIDADE.filter((r) => REGRAS.some((x) => raridadeDe(x.id) === r)).map((rar) => <section key={rar} className={`cb-faixa ${rar}`}>
-      <h3 className="cb-album-secao"><SeloDeRaridade r={rar} /><small>{REGRAS.filter((x) => raridadeDe(x.id) === rar).filter((x) => aceso(x.id)).length}/{REGRAS.filter((x) => raridadeDe(x.id) === rar).length}</small></h3>
-      <div className="cb-album-grade">{REGRAS.filter((x) => raridadeDe(x.id) === rar).map((r, i) => {
-        const v = visual(r.id), Icone = v.icone;
-        return <article key={r.id} className={`cb-carta ${rar} ${aceso(r.id) ? 'acesa' : ''}`} style={{ '--cb': v.cor, '--i': i } as CSSProperties}>
-          <span className="cb-icone"><span className="cb-anel" aria-hidden /><Icone size={22} /></span>
-          <h3>{r.nome}</h3>
-          <dl><dt>Quem ajuda</dt><dd>Alguém que {PECAS[r.ajuda]}</dd><dt>Quem recebe</dt><dd>Alguém que {PECAS[r.ganha]}</dd></dl>
-          <Efeitos quem="Quem recebe" bonus={r.bonus} pulso={r.pulso} nosRivais={r.nosRivais} id={r.id} />
-          {!aceso(r.id) && <span className="cb-cadeado"><Lock size={12} />a descobrir</span>}
-        </article>;
-      })}</div>
-    </section>)}
-    {aba === 'trios' && <div className="cb-album-grade trios">{TRIOS.map((t, i) => {
-      const v = visual(t.id), Icone = v.icone;
-      return <article key={t.id} className={`cb-carta trio lendario ${aceso(t.id) ? 'acesa' : ''}`} style={{ '--cb': v.cor, '--i': i } as CSSProperties}>
-        <span className="cb-icone"><span className="cb-anel" aria-hidden /><Icone size={24} /></span>
-        <h3>{t.nome}</h3>
-        <ol className="cb-pecas-trio">{t.pecas.map((k) => <li key={k}>Alguém que {PECAS[k]}</li>)}</ol>
-        <Efeitos quem="O trio todo" bonus={t.bonus} pulso={t.pulso} nosRivais={t.nosRivais} id={t.id} />
-        {!aceso(t.id) && <span className="cb-cadeado"><Lock size={12} />a descobrir</span>}
-      </article>;
-    })}</div>}
-    {aba === 'universo' && <div className="cb-album-grade trios">{universos.map((u, i) => {
-      const v = visual(u.id), Icone = v.icone;
-      return <article key={u.id} className={`cb-carta ${raridadeDe(u.id)} ${aceso(u.id) ? 'acesa' : ''}`} style={{ '--cb': v.cor, '--i': i } as CSSProperties}>
-        <span className="cb-icone"><span className="cb-anel" aria-hidden /><Icone size={22} /></span>
-        <h3>{u.nome}</h3><SeloDeRaridade r={raridadeDe(u.id)} />
-        <dl><dt>Quem forma</dt><dd>{u.quem}</dd></dl>
-        <Efeitos quem={u.id === 'universo-3' ? 'Os três' : 'Os dois'} bonus={u.b} id={u.id} />
-        {!aceso(u.id) && <span className="cb-cadeado"><Lock size={12} />a descobrir</span>}
-      </article>;
-    })}</div>}
-    {aba === 'lendarias' && <div className="cb-album-grade trios">{DUPLAS_LENDARIAS.map((l, i) => {
-      const a = byId[l.a], b = byId[l.b];
-      if (!a || !b) return null;
-      return <article key={l.id} className={`cb-carta lenda lendario ${aceso(l.id) ? 'acesa' : ''}`} style={{ '--cb': '#ffd36b', '--i': i } as CSSProperties}>
-        <span className="cb-par"><Portrait character={a} /><Crown size={16} /><Portrait character={b} /></span>
-        <h3>{l.nome}</h3>
-        <small className="cb-par-nomes">{a.name} + {b.name}</small>
-        <Efeitos quem={l.so ? byId[l.so]?.name ?? '' : 'Os dois'} bonus={l.bonus} pulso={l.pulso} id={l.id} />
-        {!aceso(l.id) && <span className="cb-cadeado"><Lock size={12} />a descobrir</span>}
-      </article>;
-    })}</div>}
+/** Os tipos de combo, na ordem do Livro de Combos (src/screens/LivroDeCombos.tsx). */
+export type TipoDeCombo = 'duplas' | 'trios' | 'universo' | 'lendarias';
+const UNIVERSOS = [
+  { id: 'universo-2', nome: 'Dupla do mesmo universo', quem: 'Dois personagens do mesmo universo (o que aparece no topo da ficha)', b: UNIVERSO.dois },
+  { id: 'universo-3', nome: 'Trio do mesmo universo', quem: 'Os três do mesmo universo (o que aparece no topo da ficha)', b: UNIVERSO.tres },
+];
+/** Todos os combos do jogo, com o nome e o tipo (o Livro mostra só isso enquanto o combo não foi descoberto). */
+export const TODOS_OS_COMBOS: { id: string; nome: string; tipo: TipoDeCombo }[] = [
+  ...ORDEM_DA_RARIDADE.flatMap((r) => REGRAS.filter((x) => raridadeDe(x.id) === r).map((x) => ({ id: x.id, nome: x.nome, tipo: 'duplas' as const }))),
+  ...TRIOS.map((t) => ({ id: t.id, nome: t.nome, tipo: 'trios' as const })),
+  ...UNIVERSOS.map((u) => ({ id: u.id, nome: u.nome, tipo: 'universo' as const })),
+  ...DUPLAS_LENDARIAS.map((l) => ({ id: l.id, nome: l.nome, tipo: 'lendarias' as const })),
+];
+/** O ícone e a cor de um combo, e a raridade dele (para as peças do Livro). */
+export const visualDoCombo = (id: string) => ({ ...visual(id), raridade: raridadeDe(id), trio: ehTrio(id) });
+/**
+ * A carta completa de um combo pelo id (o Livro de Combos, depois de descoberto): raridade, o que forma o
+ * combo e o que ele faz — a luta toda, de tempo em tempo e nos rivais.
+ */
+export function CartaDoCombo({ id }: { id: string }) {
+  const v = visual(id), Icone = v.icone, rar = raridadeDe(id);
+  const regra = REGRAS.find((r) => r.id === id), trio = TRIOS.find((t) => t.id === id), lenda = DUPLAS_LENDARIAS.find((l) => l.id === id), uni = UNIVERSOS.find((u) => u.id === id);
+  const a = lenda && byId[lenda.a], b = lenda && byId[lenda.b];
+  const nome = regra?.nome ?? trio?.nome ?? lenda?.nome ?? uni?.nome ?? id;
+  return <article className={`cb-carta cb-ficha acesa ${rar} ${trio ? 'trio' : ''} ${lenda ? 'lenda' : ''}`} style={{ '--cb': lenda ? '#ffd36b' : v.cor } as CSSProperties}>
+    {a && b ? <span className="cb-par"><Portrait character={a} /><Crown size={16} /><Portrait character={b} /></span>
+      : <span className="cb-icone"><span className="cb-anel" aria-hidden /><Icone size={24} /></span>}
+    <h3>{nome}</h3>
+    <SeloDeRaridade r={rar} />
+    {regra && <dl><dt>Quem ajuda</dt><dd>Alguém que {PECAS[regra.ajuda]}</dd><dt>Quem recebe</dt><dd>Alguém que {PECAS[regra.ganha]}</dd></dl>}
+    {trio && <ol className="cb-pecas-trio">{trio.pecas.map((k) => <li key={k}>Alguém que {PECAS[k]}</li>)}</ol>}
+    {uni && <dl><dt>Quem forma</dt><dd>{uni.quem}</dd></dl>}
+    {a && b && <small className="cb-par-nomes">{a.name} + {b.name}</small>}
+    {regra && <Efeitos quem="Quem recebe" bonus={regra.bonus} pulso={regra.pulso} nosRivais={regra.nosRivais} id={id} />}
+    {trio && <Efeitos quem="O trio todo" bonus={trio.bonus} pulso={trio.pulso} nosRivais={trio.nosRivais} id={id} />}
+    {uni && <Efeitos quem={id === 'universo-3' ? 'Os três' : 'Os dois'} bonus={uni.b} id={id} />}
+    {lenda && <Efeitos quem={lenda.so ? byId[lenda.so]?.name ?? '' : 'Os dois'} bonus={lenda.bonus} pulso={lenda.pulso} id={id} />}
+  </article>;
+}
+/** O que uma luta pôs no Livro de Combos: os ids novos, e quais deles foram vistos no rival. */
+export interface NovosNoLivro { chave: string; ids: string[]; doRival: string[] }
+/**
+ * O aviso de descoberta (pedido do jogador: o combo "aparece que você liberou"): depois da abertura dos combos,
+ * um livro se abre com as peças novas — as do trio e as vistas no rival — e some sozinho.
+ */
+export function DescobertaNoLivro({ novos, comecando }: { novos: NovosNoLivro; comecando: boolean }) {
+  const [fase, setFase] = useState<'espera' | 'aberto' | 'fim'>(comecando ? 'espera' : 'fim');
+  useEffect(() => {
+    if (!comecando) return;
+    setFase('espera');
+    const a = window.setTimeout(() => setFase('aberto'), 2700), b = window.setTimeout(() => setFase('fim'), 6600);
+    return () => { clearTimeout(a); clearTimeout(b); };
+  }, [novos.chave]);
+  if (fase !== 'aberto') return null;
+  return <div className="cb-descoberta" role="status" onClick={() => setFase('fim')}>
+    <strong><BookOpen size={18} />{novos.ids.length === 1 ? 'COMBO DESCOBERTO!' : `${novos.ids.length} COMBOS DESCOBERTOS!`}</strong>
+    <span className="cb-descoberta-pecas">{novos.ids.map((id, i) => {
+      const v = visual(id), Icone = v.icone, combo = TODOS_OS_COMBOS.find((c) => c.id === id);
+      return <span key={id} className={`${raridadeDe(id)} ${novos.doRival.includes(id) ? 'rival' : ''}`} style={{ '--cb': v.cor, '--i': i } as CSSProperties}>
+        <Icone size={18} /><small>{combo?.nome ?? id}</small>{novos.doRival.includes(id) && <em>visto no rival</em>}
+      </span>;
+    })}</span>
+    <small className="cb-descoberta-dica">já está no seu Livro de Combos</small>
   </div>;
 }

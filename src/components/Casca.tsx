@@ -16,7 +16,7 @@ import { formatarPontos } from '../engine/pontos';
  * nos que abrem um cartão, o de fechar nos que fecham.
  */
 
-export type Destino='home'|'characters'|'conquistas'|'ranking'|'help'|'settings'|'conta';
+export type Destino='home'|'characters'|'conquistas'|'combos'|'ranking'|'help'|'settings'|'conta';
 
 const Fx=({nome,cor,ms,className,laco=true}:{nome:string;cor:string;ms:number;className:string;laco?:boolean})=>
   <span aria-hidden className={`uifx ${laco?'uifx-laco':''} ${className}`} style={{'--uifx-img':`url(/assets/ui/fx/${nome}.webp)`,'--uifx-cor':cor,'--uifx-dur':`${ms}ms`} as CSSProperties}/>;

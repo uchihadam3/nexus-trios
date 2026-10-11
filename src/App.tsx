@@ -8,6 +8,7 @@ import { RankingScreen } from './screens/RankingScreen';
 import { CharactersScreen } from './screens/Auxiliary';
 import { HelpScreen } from './screens/ComoJogar';
 import { SettingsScreen } from './screens/Ajustes';
+import { LivroDeCombos } from './screens/LivroDeCombos';
 import { CharacterModal } from './components/CharacterModal';
 import { Cabecalho,ToqueGlobal } from './components/Casca';
 import { byId,characters } from './data/characters';
@@ -16,6 +17,7 @@ import { candidates,generateCampaign,newDraft,pickDraft,skipDraft } from './engi
 import type { ResultadoTop3 } from './lib/top3';
 import { defaults,ESCALA_DOS_PONTOS,loadProfile,loadRun,loadSettings,resetStorage,save,storageAvailable } from './lib/storage';
 import type { Run,Settings } from './lib/storage';
+import type { NovosNoLivro } from './components/CombosDoTrio';
 import { PRIORIDADE,type Sound } from './audio/cues';
 import { battleAudio,faixaDaLuta } from './lib/audio';
 import { createDirection,restoreDirection,checkpointDirection,advanceDirection,type Direction,type Beat,type BeatTrace } from './presentation/director';
@@ -38,7 +40,7 @@ import {efeitosDoJeito,somDoJeito} from './presentation/jeito-efeito';
 import {SOM_DA_ESPERA,SOM_DA_VOLTA,SOM_DO_REVIVER} from './presentation/renascer-proprio';
 const DebugScreen=lazy(()=>import('./screens/DebugScreen').then(m=>({default:m.DebugScreen})));
 const VfxLabScreen=lazy(()=>import('./screens/VfxLabScreen').then(m=>({default:m.VfxLabScreen})));
-type Screen='home'|'game'|'characters'|'conquistas'|'ranking'|'conta'|'help'|'settings'|'debug'|'vfx';
+type Screen='home'|'game'|'characters'|'conquistas'|'combos'|'ranking'|'conta'|'help'|'settings'|'debug'|'vfx';
 interface InstallEvent extends Event {prompt:()=>Promise<void>;userChoice:Promise<{outcome:string}>}
 /* Os avisos do jogo (remake): medalhão com o anel de runas na cor do assunto, título grande, botões grandes. */
 function InfoDialog({title,children,onClose,icone,cor='#c8f560'}:{title:string;children:React.ReactNode;onClose:()=>void;icone?:React.ReactNode;cor?:string}){
@@ -194,9 +196,11 @@ export default function App(){
     const next={...current,seed,team,encounters,index,stage:'battle' as const,recorded:false,presentation:undefined,battleSynergies:[],raioX:raioXVazio(),telemetry:emptyTally(),ranked,battle:createBattle(team,encounter.team,seed+index*7919,encounter.scale)};
     direction.current=null;setPresentation(null);changeRun(next);setPaused(false);navigate('game');
     if(index===0)setProfile(p=>{const n={...p,journeys:p.journeys+1};save('profile',n);return n;});
-    /* os combos do trio entram no álbum (Livro de Combos) na primeira luta em que acendem */
-    const acesos=next.battle.combos?.player.map(c=>c.id)??[];
-    if(acesos.length)setProfile(p=>{const ja=p.combosDescobertos??[],novos=acesos.filter(id=>!ja.includes(id));if(!novos.length)return p;const n={...p,combosDescobertos:[...ja,...new Set(novos)]};save('profile',n);return n;});
+    /* Livro de Combos: um combo é descoberto quando o trio do jogador forma ele, ou quando ele vê o rival usar (pedido do jogador) */
+    const meus=next.battle.combos?.player.map(c=>c.id)??[],deles=next.battle.combos?.enemy.map(c=>c.id)??[];
+    const ja=profile.combosDescobertos??[],novos=[...new Set([...meus,...deles])].filter(id=>!ja.includes(id));
+    setNovosNoLivro(novos.length?{chave:`${index}-${next.battle.seed}`,ids:novos,doRival:novos.filter(id=>!meus.includes(id))}:null);
+    if(novos.length)setProfile(p=>{const antes=p.combosDescobertos??[],soma=novos.filter(id=>!antes.includes(id));if(!soma.length)return p;const n={...p,combosDescobertos:[...antes,...soma]};save('profile',n);return n;});
   };
   useEffect(()=>{
     const capture=(e:Event)=>{e.preventDefault();setInstallEvent(e as InstallEvent);};
@@ -403,6 +407,8 @@ export default function App(){
   useEffect(()=>{if(estavaLogado.current===false&&logado)navigate('home');if(contaPronta)estavaLogado.current=logado;},[logado,contaPronta]);
   const [nomeDaConta,setNomeDaConta]=useState<{id:string;handle:string|null}|null>(null);
   const [erroDaConta,setErroDaConta]=useState('');
+  /** Os combos que a luta de agora acabou de pôr no Livro (o aviso na abertura da luta). */
+  const [novosNoLivro,setNovosNoLivro]=useState<NovosNoLivro|null>(null);
   const buscaNome=async(c:Conta)=>{
     setErroDaConta('');
     try{
@@ -439,10 +445,11 @@ export default function App(){
       {screen==='conquistas'&&<ConquistasScreen profile={profile} conta={conta!==null&&conta.origem!=='convidado'} onProfile={muda=>setProfile(p=>{const n=muda(p);if(n!==p)save('profile',n);return n;})} onRanking={()=>{setRankingInicial('conquistas');navigate('ranking');}} onDesafio={jogarDesafio}/>}
       {screen==='ranking'&&<RankingScreen inicial={rankingInicial} handle={profile.publicHandle} conta={conta!==null&&conta.origem!=='convidado'} onConta={()=>navigate('conta')} recorde={profile.recordePontos??0}/>}
       {screen==='conta'&&<AccountScreen autenticacao={autenticacao} conta={conta} profile={profile} conectado={onlineConfigured} google={googleConfigured} aoMudarPerfil={p=>{save('profile',p);setProfile(p);}}/>}
-      {screen==='help'&&<HelpScreen onPlay={requestNew} descobertos={profile.combosDescobertos??[]}/>}
+      {screen==='help'&&<HelpScreen onPlay={requestNew}/>}
+      {screen==='combos'&&<LivroDeCombos descobertos={profile.combosDescobertos??[]} vistos={profile.combosVistos??[]} onVer={id=>setProfile(p=>{const ja=p.combosVistos??[];if(ja.includes(id))return p;const n={...p,combosVistos:[...ja,id]};save('profile',n);return n;})}/>}
       {screen==='settings'&&<SettingsScreen settings={settings} onChange={changeSettings} onReset={reset} onGaleria={()=>navigate('vfx')}/>}
       {screen==='game'&&run?.stage==='draft'&&<DraftScreen draft={run.draft} desafio={run.desafio} primeiroRival={run.preparado||run.ranked&&run.ranked.mode!=='free'?run.encounters[0]:undefined} dicas={settings.dicasDoTrio&&podeDicas} podeDicas={podeDicas} usouDicas={run.dicas===true} onDicas={ligar=>changeSettings({...settings,dicasDoTrio:ligar})} onPick={id=>changeRun({...run,draft:pickDraft(run.draft,id)})} onSkip={()=>changeRun({...run,draft:skipDraft(run.draft)})} onDetails={setDetails} onStart={()=>void startBattle(0)} onAbandon={()=>setConfirmAbandon(true)}/>}
-      {screen==='game'&&run?.stage==='battle'&&run.battle&&<BattleScreen battle={presentation&&direction.current?.battle===run.battle?presentation.battle:run.battle} beat={presentation&&direction.current?.battle===run.battle?presentation.beat:null} index={run.index} name={run.encounters[run.index].name} settings={settings} paused={paused||!!details}  onPause={()=>setPaused(!paused)} onAbandon={()=>setConfirmAbandon(true)} onSettings={changeSettings} onExit={()=>{setPaused(true);navigate('home');}}/>}
+      {screen==='game'&&run?.stage==='battle'&&run.battle&&<BattleScreen battle={presentation&&direction.current?.battle===run.battle?presentation.battle:run.battle} beat={presentation&&direction.current?.battle===run.battle?presentation.beat:null} index={run.index} name={run.encounters[run.index].name} settings={settings} paused={paused||!!details}  onPause={()=>setPaused(!paused)} onAbandon={()=>setConfirmAbandon(true)} onSettings={changeSettings} onExit={()=>{setPaused(true);navigate('home');}} novosNoLivro={novosNoLivro}/>}
       {screen==='game'&&run?.stage==='result'&&<ResultScreen run={run} onNext={()=>void startBattle(run.index+1)} onRestart={requestNew} onAbandon={()=>setConfirmAbandon(true)} onHome={()=>navigate('home')} onRanking={()=>navigate('ranking')} onRetry={()=>{if(run.ranked)changeRun({...run,ranked:{...run.ranked,status:'validating'}});}} auto={settings.auto} onAuto={auto=>changeSettings({...settings,auto})}/>}
       {screen==='debug'&&import.meta.env.DEV&&<Suspense fallback={<p>Carregando laboratório…</p>}><DebugScreen/></Suspense>}
       {screen==='vfx'&&<Suspense fallback={<p>Carregando galeria audiovisual…</p>}><VfxLabScreen/></Suspense>}

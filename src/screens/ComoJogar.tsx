@@ -1,7 +1,5 @@
 import { useState,type CSSProperties } from 'react';
 import { ArrowLeft,ArrowRight,CircleHelp,HeartPulse,Orbit,Play,Shield,Swords,Trophy,Users,Zap,Eye,Check } from 'lucide-react';
-import { COMBOS_POR_LUTADOR,COMBOS_POR_TRIO } from '../engine/combos';
-import { AlbumDeCombos } from '../components/CombosDoTrio';
 import { byId } from '../data/characters';
 import { Portrait } from '../components/Portrait';
 import { SkillIcon } from '../components/Icon';
@@ -51,14 +49,14 @@ const BASE:Termo[]=[
   {id:'inteligencia',nome:'Inteligência',cor:'#c3a2ff',rotulo:'DECISÕES',texto:'De 0 a 100: quanto melhor, mais o lutador escolhe o alvo e a hora certa sozinho.'},
 ];
 
-export function HelpScreen({onPlay,descobertos=[]}:{onPlay:()=>void;descobertos?:readonly string[]}){
-  const [aba,setAba]=useState<'passos'|'regras'|'combos'|'status'>('passos'),[passo,setPasso]=useState(0),[revisto,setRevisto]=useState(false);
+export function HelpScreen({onPlay}:{onPlay:()=>void}){
+  const [aba,setAba]=useState<'passos'|'regras'|'status'>('passos'),[passo,setPasso]=useState(0),[revisto,setRevisto]=useState(false);
   const mecanicas=[...BASE,...GLOSSARIO.filter(t=>!(t.id in statuses))];
   const doStatus=GLOSSARIO.filter(t=>t.id in statuses);
   const p=PASSOS[passo],ultimo=passo===PASSOS.length-1;
   return <section className="comojogar-v2">
     <TelaTopo icone={<CircleHelp/>} cor="#8fd3ff" rotulo="COMO JOGAR" titulo="Aprenda em 1 minuto"/>
-    <div className="cj-abas" role="tablist">{([['passos','Passo a passo'],['regras','Regras'],['combos','Combos'],['status','Status']] as const).map(([id,nome])=><button key={id} role="tab" aria-selected={aba===id} className={aba===id?'ativo':''} onClick={()=>setAba(id)}>{nome}</button>)}</div>
+    <div className="cj-abas" role="tablist">{([['passos','Passo a passo'],['regras','Regras'],['status','Status']] as const).map(([id,nome])=><button key={id} role="tab" aria-selected={aba===id} className={aba===id?'ativo':''} onClick={()=>setAba(id)}>{nome}</button>)}</div>
 
     {aba==='passos'&&<div className="cj-passo" style={{'--cj':p.cor} as CSSProperties}>
       <div className="cj-cena" key={passo}><Cena i={passo}/></div>
@@ -73,12 +71,6 @@ export function HelpScreen({onPlay,descobertos=[]}:{onPlay:()=>void;descobertos?
 
     {aba==='regras'&&<div className="cj-pecas">{mecanicas.map((t,i)=><TermoBotao key={t.id} termo={t} className="cj-peca"><span style={{'--i':i} as CSSProperties}><b>{t.nome}</b><small>{t.rotulo}</small></span></TermoBotao>)}</div>}
 
-    {/* o Livro de Combos como álbum (src/components/CombosDoTrio.tsx): o que cada um precisa, e os já descobertos acesos */}
-    {aba==='combos'&&<div className="cj-combos">
-      <p className="cj-combos-intro">Alguns personagens se ajudam. Se o seu trio tiver <b>quem ajuda</b> e <b>quem recebe</b>, forma um <b>combo</b>, e quem recebe fica mais forte a luta toda. Quando os três se completam, forma um <b>combo de trio</b>, mais difícil e mais forte: o bônus vai para o trio todo. Alguns combos agem <b>de tempo em tempo</b> na luta, e alguns enfraquecem os rivais. Quanto mais <b>raro</b> o combo, mais forte. E existem as <b>duplas lendárias</b>: pares da própria história. Na escolha do trio ninguém avisa: leia as fichas e descubra. Os rivais também formam os deles.</p>
-      <AlbumDeCombos descobertos={descobertos}/>
-      <p className="cj-combos-intro">Cada personagem recebe até {COMBOS_POR_LUTADOR} combos, e o trio forma até {COMBOS_POR_TRIO} combos de dupla, fora os de universo e os de trio.</p>
-    </div>}
     {aba==='status'&&<div className="cj-status">{(['positivo','negativo'] as const).map(tom=><div key={tom}>
       <h2 className={tom}>{tom==='positivo'?'BONS · ajudam quem recebe':'RUINS · atrapalham quem recebe'}</h2>
       <div className="cj-status-grade">{doStatus.filter(t=>statuses[t.id as keyof typeof statuses].tone===tom).map(t=><TermoBotao key={t.id} termo={t} className="cj-status-peca"><img src={`/assets/statuses/${t.id}.png`} alt="" width={40} height={40}/><b>{t.nome}</b></TermoBotao>)}</div>

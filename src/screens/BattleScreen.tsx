@@ -3,7 +3,7 @@ import { ComTermos } from '../components/Termos';
 import { UNICAS } from '../engine/unicas';
 import { battleAudio } from '../lib/audio';
 import { Pause,Play,FastForward,VolumeX,Volume2,SlidersHorizontal,Check,LogOut,ChevronLeft,ScrollText,Link2 } from 'lucide-react';
-import { AberturaDeCombos,FichaDoCombo,ListaDeCombos } from '../components/CombosDoTrio';
+import { AberturaDeCombos,DescobertaNoLivro,FichaDoCombo,ListaDeCombos,type NovosNoLivro } from '../components/CombosDoTrio';
 import { OrbesDeCombo } from '../components/OrbesDeCombo';
 import { Invocacoes } from '../components/Invocacoes';
 import { AuxIcon } from '../components/Icon';
@@ -22,7 +22,7 @@ import { BattleInspector,type InspectTarget } from '../components/BattleInspecto
 import { byId } from '../data/characters';
 import { statuses } from '../data/statuses';
 
-export function BattleScreen({battle,beat,index,name,settings,paused,onPause,onAbandon,onSettings,onExit}:{battle:Battle;beat:Beat|null;index:number;name:string;settings:Settings;paused:boolean;onPause:()=>void;onAbandon:()=>void;onSettings:(s:Settings)=>void;onExit?:()=>void}){
+export function BattleScreen({battle,beat,index,name,settings,paused,onPause,onAbandon,onSettings,onExit,novosNoLivro}:{battle:Battle;beat:Beat|null;index:number;name:string;settings:Settings;paused:boolean;onPause:()=>void;onAbandon:()=>void;onSettings:(s:Settings)=>void;onExit?:()=>void;novosNoLivro?:NovosNoLivro|null}){
   const arena=useRef<HTMLDivElement>(null),[anchors,setAnchors]=useState<Anchors>({}),[box,setBox]=useState({w:0,h:0,medal:80}),[mixer,setMixer]=useState(false),[historyOpen,setHistoryOpen]=useState(false),[combosAbertos,setCombosAbertos]=useState<false|Side>(false),[fichaDoCombo,setFichaDoCombo]=useState<ComboAtivo|null>(null),[inspect,setInspect]=useState<InspectTarget|null>(null),[tutorial,setTutorial]=useState(()=>{try{return index===0&&!localStorage.getItem('nexus-battle-guide-v1')?0:-1}catch{return -1}});
   /* Os sons dos seis lutadores chegam antes do primeiro golpe. */
   const elenco=battle.fighters.map(f=>f.characterId).join(',');
@@ -124,6 +124,8 @@ export function BattleScreen({battle,beat,index,name,settings,paused,onPause,onA
       <FloatingNumbers battle={battle} beat={beat} anchors={anchors} medal={box.medal} enabled={settings.numbers}/>
       {/* a abertura: os combos do trio entrando no começo da luta */}
       {battle.combos&&<AberturaDeCombos combos={battle.combos.player} chaveDaLuta={`${index}-${battle.seed}`} comecando={battle.time<1.5}/>}
+      {/* e o que a luta acabou de pôr no Livro de Combos (do trio ou visto no rival) */}
+      {novosNoLivro&&novosNoLivro.chave===`${index}-${battle.seed}`&&<DescobertaNoLivro novos={novosNoLivro} comecando={battle.time<1.5}/>}
       {paused&&<div className="paused-banner"><Pause size={16}/> BATALHA PAUSADA</div>}
     </div>
     <footer className="arena-controls">
