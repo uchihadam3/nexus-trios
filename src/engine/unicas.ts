@@ -533,13 +533,13 @@ const LOTE1: Record<string, Unica> = {
   },
   malenia: {
     nome: 'Podridão escarlate',
-    texto: 'Cura 12% de todo dano que causa. Ao ficar com metade da Vida pela primeira vez, floresce: todos os rivais ficam Envenenados (20 por segundo, 8 s).',
+    texto: 'Cura 7% de todo dano que causa. Ao ficar com metade da Vida pela primeira vez, floresce: todos os rivais ficam Envenenados (14 por segundo, 8 s).',
     ganchos: {
-      bateu(m, b, f, _alvo, dano) { m.cura(b, f, f, dano * 0.12, 'Podridão'); },
+      bateu(m, b, f, _alvo, dano) { m.cura(b, f, f, dano * 0.07, 'Podridão'); },
       apanhou(m, b, f) {
         if (u(f).flor || fracao(f) > 0.5) return;
         u(f).flor = 1;
-        m.efeitos(b, f, m.rivais(b, f), [st('poison', 20, 8)]);
+        m.efeitos(b, f, m.rivais(b, f), [st('poison', 14, 8)]);
         m.aviso(b, f, 'Florescer escarlate', f);
       },
     },

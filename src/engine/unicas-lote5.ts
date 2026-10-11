@@ -157,13 +157,13 @@ export const LOTE5: Record<string, Unica> = {
   },
   jill: {
     nome: 'Ervas de Raccoon City',
-    texto: 'Guarda ervas: ganha uma a cada 12 s (até 2). Abaixo de 40% de Vida, usa sozinha: cada erva cura 25%.',
+    texto: 'Guarda ervas: ganha uma a cada 16 s (até 2). Abaixo de 40% de Vida, usa sozinha: cada erva cura 15%.',
     ganchos: {
       passo(m, b, f, dt) {
-        if (relogio(f, 'erva', dt, 12, 12)) u(f).ervas = Math.min(2, (u(f).ervas ?? 0) + 1);
+        if (relogio(f, 'erva', dt, 16, 16)) u(f).ervas = Math.min(2, (u(f).ervas ?? 0) + 1);
         if ((u(f).ervas ?? 0) > 0 && fracao(f) < 0.4) {
           u(f).ervas! -= 1;
-          m.cura(b, f, f, f.maxHp * 0.25, 'Erva');
+          m.cura(b, f, f, f.maxHp * 0.15, 'Erva');
           m.aviso(b, f, 'Usou uma erva', f);
         }
       },
