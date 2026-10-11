@@ -136,7 +136,7 @@ function ajustaForca(c:Character,tanque:boolean,vidaDeTanque:number):Character{
     skills:c.skills.map((s,i)=>({...s,charge:s.charge.map(r=>({...r,amount:Math.round(r.amount*t.carga*100)/100})),preparation:Math.round(s.preparation*t.preparo*10)/10,effects:s.effects.map(ef(pesos[i]!))})) as Character['skills']};
 }
 const deBase:Character[] = [
- character({id:'goku',name:'Goku',universe:'Dragon Ball',color:'#f7a25e',symbol:'G',idea:'Quanto mais luta, mais forte fica.',vulnerability:'Grandes preparações expostas a interrupções.',hp:1100,interval:3.8,attack:66,visual:'beam',power:87,tags:['growth','burst'],trait:trait('Além do limite','Cada ação aumenta seu poder em 3%, até 80%.','action',[status('strengthened',.03,120)],'self',0),skills:[
+ character({id:'goku',name:'Goku',universe:'Dragon Ball',color:'#f7a25e',symbol:'G',idea:'Quanto mais luta, mais forte fica.',vulnerability:'Grandes preparações expostas a interrupções.',hp:1188,interval:3.8,attack:72,visual:'beam',power:87,tags:['growth','burst'],trait:trait('Além do limite','Cada ação aumenta seu poder em 3%, até 80%.','action',[status('strengthened',.03,120)],'self',0),skills:[
   skill('Kamehameha','beam','Prepara uma onda de 310 de dano.','Tempo + ações', [charge('time',3),charge('action',10)],[damage(310)],{preparation:3,cooldown:5}),
   skill('Kaioken','impact','Acelera suas ações em 35% por 9 s.','Dano recebido', [charge('received',14),charge('time',2)],[status('haste',.35,9,'self')]),
   skill('Instinto','shield','Proteção de 45% e escudo de 180.','Equipe em desvantagem', [charge('losing',7),charge('time',1.5)],[status('protected',.45,7,'self'),shield(180,'self')],{condition:'threatened',target:'self'})]}),
