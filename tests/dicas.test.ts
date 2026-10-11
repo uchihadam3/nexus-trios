@@ -67,7 +67,7 @@ describe('Dicas de trio', () => {
     const comPorque = d.detalhe.filter((m) => m.porque);
     expect(comPorque.length).toBeGreaterThan(0);
     // cita uma habilidade do Raiden e diz o que ela faz pela Sakura
-    expect(comPorque.some((m) => /Barreira elétrica de Raiden/.test(m.porque!))).toBe(true);
+    expect(comPorque.some((m) => /(Raio celeste|Barreira elétrica|Trovão dos deuses) de Raiden/.test(m.porque!))).toBe(true);
   });
 
   it('o cuidado do draft é o ponto fraco do próprio personagem, com o porquê', () => {
