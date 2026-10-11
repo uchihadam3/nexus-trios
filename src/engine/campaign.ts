@@ -1,7 +1,7 @@
 import { characters, byId } from '../data/characters';
 import { random, shuffle } from './random';
 import { FORCA, PESO_DA_LIGACAO } from '../data/forca-dos-rivais';
-import { LIGACOES_DOS_COMBOS, ligacoesDosCombos } from './combos';
+import { LIGACOES_DOS_COMBOS, idsDosCombos } from './combos';
 export interface Encounter {team:string[];name:string;power:number;scale:number}
 export interface Draft {team:string[];candidates:string[];skips:number;rng:number;banned?:string[]}
 export function candidates(draft:Draft,exclude:string[]=[]):string[]{return shuffle(characters.filter(c=>!draft.team.includes(c.id)&&!draft.banned?.includes(c.id)&&!exclude.includes(c.id)).map(c=>c.id),draft).slice(0,3);}
@@ -29,7 +29,14 @@ export function pickDraft(d:Draft,id:string):Draft{if(d.team.length>=3||!d.candi
  * Detalhes da calibração logo abaixo, em TRIOS_DA_LUTA.
  */
 /* A sinergia do trio: os combos acesos (src/engine/combos.ts), cada um com o peso medido nas lutas. */
-export function sinergiaDoTrio(team:readonly string[]):number{const l=ligacoesDosCombos(team);return LIGACOES_DOS_COMBOS.reduce((n,k)=>n+(l[k]??0)*(PESO_DA_LIGACAO[k]??0),0);}
+export function sinergiaDoTrio(team:readonly string[]):number{
+  // o mesmo que somar ligacoesDosCombos × PESO_DA_LIGACAO, na mesma ordem (o resultado sai idêntico, bit a bit), sem montar o objeto de 56 chaves: a campanha avalia milhares de trios
+  const conta=new Map<number,number>();
+  for(const id of idsDosCombos(team)){const i=ORDEM_DA_LIGACAO.get(id.startsWith('lenda-')?'lenda':id)!;conta.set(i,Math.min(2,(conta.get(i)??0)+1));}
+  let n=0;for(const i of [...conta.keys()].sort((a,b)=>a-b))n+=conta.get(i)!*(PESO_DA_LIGACAO[LIGACOES_DOS_COMBOS[i]!]??0);
+  return n;
+}
+const ORDEM_DA_LIGACAO=new Map(LIGACOES_DOS_COMBOS.map((l,i)=>[l,i]));
 export function forcaDoTrio(team:readonly string[]):number{return team.reduce((n,id)=>n+(FORCA[id]??0),0)+sinergiaDoTrio(team);}
 /*
  * A dificuldade é calibrada para quem escolhe bem (pedidos do jogador: a curva

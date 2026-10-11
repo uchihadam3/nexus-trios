@@ -344,6 +344,57 @@ export const LIGACOES_DOS_COMBOS: readonly string[] = [...REGRAS.map((r) => r.id
 export function ligacoesDosCombos(trio: readonly string[]): Record<string, number> {
   const n: Record<string, number> = Object.fromEntries(LIGACOES_DOS_COMBOS.map((l) => [l, 0]));
   // as duplas lendárias contam juntas (são muitas e cada uma aparece pouco)
-  for (const c of combosDoTrio(trio).combos) { const id = c.id.startsWith('lenda-') ? 'lenda' : c.id; n[id] = Math.min(2, (n[id] ?? 0) + 1); }
+  for (const c of idsDosCombos(trio)) { const id = c.startsWith('lenda-') ? 'lenda' : c; n[id] = Math.min(2, (n[id] ?? 0) + 1); }
   return n;
+}
+
+/**
+ * Só os ids dos combos acesos, na mesma ordem e com os mesmos limites de
+ * combosDoTrio, sem montar bônus nem textos. A campanha avalia milhares de
+ * trios por jornada (tests/combos-rapidos.test.ts confere que dá igual).
+ */
+export function idsDosCombos(trio: readonly string[]): string[] {
+  const ids: string[] = [], f = trio.map(pecasNumericas), recebidos = [0, 0, 0];
+  const { regras, trios } = indicesDasPecas();
+  let duplas = 0;
+  for (let r = 0; r < regras.length; r++) {
+    const ajuda = regras[r]![0], ganha = regras[r]![1];
+    for (let b = 0; b < f.length; b++) {
+      if (duplas >= COMBOS_POR_TRIO) break;
+      if (recebidos[b]! >= COMBOS_POR_LUTADOR || !f[b]![ganha]) continue;
+      let ok = false;
+      for (let a = 0; a < f.length; a++) if (a !== b && f[a]![ajuda]) { ok = true; break; }
+      if (!ok) continue;
+      recebidos[b]!++; duplas++; ids.push(REGRAS[r]!.id);
+    }
+  }
+  const grupos = trio.map((id) => { const c = byId[id]; return c ? grupoDoUniverso(c) : ''; });
+  for (let i = 0; i < grupos.length; i++) {
+    if (grupos.indexOf(grupos[i]!) !== i) continue;
+    let quantos = 0;
+    for (const g of grupos) if (g === grupos[i]) quantos++;
+    if (quantos >= 2) ids.push(quantos === 3 ? 'universo-3' : 'universo-2');
+  }
+  if (f.length === 3) {
+    for (let t = 0; t < trios.length; t++) {
+      const p = trios[t]!, a = f[0]!, b = f[1]!, c = f[2]!;
+      // as seis ordens do trio (ORDENS), escritas por extenso
+      if ((a[p[0]] && ((b[p[1]] && c[p[2]]) || (c[p[1]] && b[p[2]]))) || (b[p[0]] && ((a[p[1]] && c[p[2]]) || (c[p[1]] && a[p[2]]))) || (c[p[0]] && ((a[p[1]] && b[p[2]]) || (b[p[1]] && a[p[2]])))) ids.push(TRIOS[t]!.id);
+    }
+  }
+  for (const l of DUPLAS_LENDARIAS) if (trio.includes(l.a) && trio.includes(l.b)) ids.push(l.id);
+  return ids;
+}
+/* As peças de cada um como vetor de 0/1 (acesso por número em vez de por nome: ~10× mais rápido). */
+const CHAVES_DAS_PECAS = Object.keys(PECAS) as (keyof Feitio)[];
+const numericas = new Map<string, Uint8Array>();
+function pecasNumericas(id: string): Uint8Array {
+  let v = numericas.get(id);
+  if (!v) { const f = feitioDe(id); v = Uint8Array.from(CHAVES_DAS_PECAS, (k) => (f[k] ? 1 : 0)); numericas.set(id, v); }
+  return v;
+}
+let indices: { regras: [number, number][]; trios: [number, number, number][] } | null = null;
+function indicesDasPecas() {
+  const n = (k: keyof Feitio) => { const i = CHAVES_DAS_PECAS.indexOf(k); if (i < 0) throw new Error(`peça sem texto: ${k}`); return i; };
+  return (indices ??= { regras: REGRAS.map((r) => [n(r.ajuda), n(r.ganha)]), trios: TRIOS.map((t) => [n(t.pecas[0]), n(t.pecas[1]), n(t.pecas[2])]) });
 }

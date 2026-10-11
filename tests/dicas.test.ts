@@ -88,7 +88,7 @@ describe('Dicas de trio', () => {
   });
 
   it('o servidor desconta as dicas em cada luta jogada', () => {
-    const seed = 2024, livres = ids.filter((id) => !generateCampaign(seed).some((e) => e.team.includes(id)));
+    const seed = 2024, rivais = generateCampaign(seed), livres = ids.filter((id) => !rivais.some((e) => e.team.includes(id)));
     const trio = livres.slice(0, 3);
     const sem = replayRanked(trio, seed, true), com = replayRanked(trio, seed, true, true);
     expect(com.summaries.map((s) => s.won)).toEqual(sem.summaries.map((s) => s.won));
