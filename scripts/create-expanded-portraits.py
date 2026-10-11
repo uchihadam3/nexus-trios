@@ -13,6 +13,7 @@ import subprocess
 from pathlib import Path
 
 from PIL import Image, ImageFilter, ImageOps
+from portrait_framing import frame_for_circle
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCES = ROOT / 'assets/ai-source/portraits/grids'
@@ -109,14 +110,18 @@ def main() -> None:
                     art = image.crop((left, top, right, bottom)).convert('RGBA')
                 if character['id'] in {'kirby', 'donkeykong', 'finn'}:
                     art = keep_main_silhouette(art)
-                if art.getchannel('A').getextrema()[0] != 0:
+                framed = frame_for_circle(art, character['id'], 512)
+                if framed is None and art.getchannel('A').getextrema()[0] != 0:
                     raise ValueError(f'Grid must have true transparency: {source}')
                 bounds = art.getbbox()
                 if not bounds:
                     raise ValueError(f'Empty portrait: {character["id"]}')
-                art = ImageOps.contain(art.crop(bounds), (500, 500), Image.Resampling.LANCZOS)
-                canvas = Image.new('RGBA', (512, 512))
-                canvas.alpha_composite(art, ((512-art.width)//2, (512-art.height)//2))
+                if framed is not None:
+                    canvas = framed
+                else:
+                    art = ImageOps.contain(art.crop(bounds), (500, 500), Image.Resampling.LANCZOS)
+                    canvas = Image.new('RGBA', (512, 512))
+                    canvas.alpha_composite(art, ((512-art.width)//2, (512-art.height)//2))
                 digest = hashlib.sha256(canvas.tobytes()).hexdigest()
                 if digest in digests:
                     raise ValueError(f'Duplicate portrait: {character["id"]}')

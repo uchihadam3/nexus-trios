@@ -1,0 +1,34 @@
+[
+  {
+    "id": "bowser",
+    "source": "assets/ai-source/portraits/overrides/bowser.webp",
+    "original_attachment": "F2xe9HD6zPVwH7PDbRrhApf5agk69Vl7i1WZ3jOhXKKYtJ8TRtcmohJhQyuCJB8_6NqErkTG7lea_OtkpORxHpsYZZ_lUyE-7f9bwvOfhL7_AgmEQTgmicKlBhNjQjm1dW5LhzS6XFQZKm0NgIliYyLdNXgVNk3me3-B7DySx482_hIQRSn9OGc1_OMg_ZQv.jpeg",
+    "approval": "Replacement attached and explicitly selected by user on 2026-10-11",
+    "sha256": "85b31d5687721a605bcf8dffd2ced5d145e3061edc072ec1b8ab81de221ed99a",
+    "framing": "assets/portraits/circle-framing.json"
+  },
+  {
+    "id": "link",
+    "source": "assets/ai-source/portraits/overrides/link.webp",
+    "original_attachment": "Link.(Breath.of.the.Wild).full.2963275.jpg",
+    "approval": "Replacement attached and explicitly selected by user on 2026-10-11",
+    "sha256": "2bdb5115d471d8447dafc08a5f9866ca041dc11d377ecf70f3d3b30f68f489b2",
+    "framing": "assets/portraits/circle-framing.json"
+  },
+  {
+    "id": "mewtwo",
+    "source": "assets/ai-source/portraits/overrides/mewtwo.webp",
+    "original_attachment": "ghVBjjuz4aFmjRMAv9RBmaWZAJW_y7VPo_HSivjBniqMMZ7qbjXm28RnP1VnDJPNmY07eRGZ6HLqZ8viRPfi_LEK6nATyRckNwRAmDXSQieJdSGrOTal31E92fbcLO89flC7iFWak5z2Sm9O6cr61GtbuDI-WrGe49PoQDuGwBrOf5cUXPp3IrTrDIBMQQXF.jpeg",
+    "approval": "Replacement attached and explicitly selected by user on 2026-10-11",
+    "sha256": "bc1a2abc5bb2313ddbacc2fe55752b2fcf5f36bc0d86fc9d35157a57cf693e2d",
+    "framing": "assets/portraits/circle-framing.json"
+  },
+  {
+    "id": "pikachu",
+    "source": "assets/portraits/approved-generated/pikachu.webp",
+    "original_attachment": "Ld2xi4UL6EWSQH7f9ai3cj3jUbch4pqybyPYvbCTyd7wdZ58GjBLgUDaI6gIgChIgqcJ0WEMlYfoWifUd10XGGOYl303WEJLqeQhLBDO00jJ0QyJXIFQJwa1_fZB1u8lqJDUazNma229fb31koE-n2gTX0KAs50EKyTT8HyO1acXZG0xwSbL6oH_nUJ_zT-H.jpeg",
+    "approval": "Replacement attached and explicitly selected by user on 2026-10-11",
+    "sha256": "56d40d2233c33a08aa1b9da64549d8988f666f59b1eec66fc122a6332040bda3",
+    "framing": "assets/portraits/circle-framing.json"
+  }
+]

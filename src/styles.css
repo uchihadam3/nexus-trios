@@ -19,7 +19,7 @@
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto}}
 
 /* Keep the face prominent when user-supplied full-body art fills a portrait card. */
-.portrait img[data-portrait="pikachu"]{object-fit:contain}
+.portrait img[data-portrait="pikachu"]{object-fit:cover}
 .portrait img[data-portrait="captain"]{object-position:50% 8%;transform:scale(1.38);transform-origin:50% 8%}
 .portrait img[data-portrait="flash"]{object-position:50% 30%;transform:scale(1.14);transform-origin:50% 30%}
 .portrait img[data-portrait="hulk"]{object-position:46% 28%;transform:scale(1.12);transform-origin:46% 28%}

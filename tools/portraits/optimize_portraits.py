@@ -1,9 +1,12 @@
 #!/usr/bin/env python3
 """Rebuild the lightweight deployable WebP portrait set from reviewed sources."""
 from pathlib import Path
+import sys
 from PIL import Image, ImageOps
 
 ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(ROOT / 'scripts'))
+from portrait_framing import frame_for_circle
 SOURCE = ROOT / "assets/portraits/source"
 APPROVED_GENERATED = ROOT / "assets/portraits/approved-generated"
 OUTPUT = ROOT / "public/assets/portraits"
@@ -29,7 +32,10 @@ for name in GENERATED:
     source = approved_source if approved_source.exists() else SOURCE / f"{name}.webp"
     with Image.open(source) as image:
         rgba = image.convert("RGBA")
-        if name in ORIGINALS and not approved_source.exists():
+        framed = frame_for_circle(rgba, name, 768)
+        if framed is not None:
+            portrait = framed
+        elif name in ORIGINALS and not approved_source.exists():
             portrait = rgba.resize((768, 896), Image.Resampling.LANCZOS)
         else:
             if name in UPPER_BODY_CROP and not approved_source.exists():
