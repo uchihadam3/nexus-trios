@@ -85,7 +85,7 @@ export interface Ganchos {
   /** Os golpes de todo o trio dele nunca erram (enquanto ele está de pé). */
   trioNuncaErra?: boolean;
   /** Multiplica o Preparo das habilidades dele (0 = sai na hora). */
-  preparo?(f: Fighter): number;
+  preparo?(f: Fighter, indice: number): number;
   /** Escolhe o alvo do ataque básico dele (undefined = o de sempre). */
   alvoDoBasico?(m: Motor, b: Battle, f: Fighter): Fighter | undefined;
   /** Os golpes dele não acordam quem está Dormindo. */
@@ -114,10 +114,11 @@ export const maisForte = (m: Motor, b: Battle, f: Fighter) => m.rivais(b, f).sor
 export const maisFerido = (m: Motor, b: Battle, f: Fighter) => m.aliados(b, f).sort((x, y) => fracao(x) - fracao(y))[0];
 /** Um relógio que dispara a cada `cada` segundos (o primeiro depois de `primeiro`). */
 export function relogio(f: Fighter, chave: string, dt: number, cada: number, primeiro = cada): boolean {
-  const s = u(f);
-  s[chave] = (s[chave] ?? primeiro) - dt;
-  if (s[chave]! > 1e-6) return false;
-  s[chave] = s[chave]! + cada;
+  // a chave do relógio tem prefixo próprio: não pode colidir com um contador da mecânica de mesmo nome
+  const s = u(f), k = `relogio_${chave}`;
+  s[k] = (s[k] ?? primeiro) - dt;
+  if (s[k]! > 1e-6) return false;
+  s[k] = s[k]! + cada;
   return true;
 }
 

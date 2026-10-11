@@ -298,7 +298,7 @@ function damage(b:Battle,source:Fighter,target:Fighter,raw:number,direto=true,la
   // o golpe devolvido é o próprio golpe (ou o espinho fixo): Fortalecido e Enfraquecido de quem devolve não mexem nele
   const devolvido=label==='Refletido'||label==='Espinhos';
   // Veneno e Sangramento são por dentro: passam por Exposto, Protegido e Escudo
-  const interno=label==='Veneno'||label==='Sangramento';
+  const interno=label==='Veneno'||label==='Sangramento'||label==='Perfuração';
   // Mecânicas únicas: quem bate (e a aura dos aliados dele) e quem apanha (e a aura dos aliados dele)
   const g:Golpe={direto,label,habilidade:agindo===source.uid};
   let mCausa=1,mRecebe=unica(target)?.recebe?.(M,b,target,source,g)??1;
@@ -728,7 +728,7 @@ export function stepBattle(b:Battle,observe?:(snapshot:Battle)=>void):Battle {
       const selectedSkill=decideSkill(b,f);
       if(selectedSkill!==null){
         const i=selectedSkill,s=c.skills[i],list=targets(b,f,s.target,s.effects);
-        if(s.preparation>0){f.cast={skill:i,elapsed:0,duration:s.preparation*(1-(f.bonus?.preparo??0))*(unica(f)?.preparo?.(f)??1),targets:list.map(x=>x.uid)};emit(b,{kind:'cast',source:f.uid,target:list[0]?.uid,skill:i,label:s.name,visual:s.icon});for(const o of hostile(b,f))unica(o)?.viuPreparo?.(M,b,o,f,f.cast.duration);if(s.preparation>PREPARO_LEVE)for(const opponent of hostile(b,f))trigger(b,opponent,'enemyCast',f);}
+        if(s.preparation>0){f.cast={skill:i,elapsed:0,duration:s.preparation*(1-(f.bonus?.preparo??0))*(unica(f)?.preparo?.(f,i)??1),targets:list.map(x=>x.uid)};emit(b,{kind:'cast',source:f.uid,target:list[0]?.uid,skill:i,label:s.name,visual:s.icon});for(const o of hostile(b,f))unica(o)?.viuPreparo?.(M,b,o,f,f.cast.duration);if(s.preparation>PREPARO_LEVE)for(const opponent of hostile(b,f))trigger(b,opponent,'enemyCast',f);}
         else execute(b,f,i,list);
         resolve(b);observe?.(b);if(b.finished)break;
         continue;
