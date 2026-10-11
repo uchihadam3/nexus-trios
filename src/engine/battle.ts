@@ -707,7 +707,9 @@ export function stepBattle(b:Battle,observe?:(snapshot:Battle)=>void):Battle {
     f.statuses=f.statuses.filter(s=>s.remaining>0);f.shields.forEach(s=>s.remaining-=STEP);f.shields=f.shields.filter(s=>s.remaining>0&&s.amount>0);
     f.skills.forEach(s=>{s.cooldown=Math.max(0,s.cooldown-STEP);s.executing=Math.max(0,s.executing-STEP);});
     trigger(b,f,'time',undefined,STEP);trigger(b,f,'survived',undefined,STEP);
-    for(const p of f.pulsos??[]){p.falta-=STEP;if(p.falta<=1e-6){p.falta+=p.pulso.cada;applyEffects(b,f,targets(b,f,p.pulso.alvo,p.pulso.efeitos),p.pulso.efeitos);}}
+    for(const p of f.pulsos??[]){p.falta-=STEP;if(p.falta<=1e-6){p.falta+=p.pulso.cada;const alvos=targets(b,f,p.pulso.alvo,p.pulso.efeitos);
+      // o combo de tempo em tempo avisa quando dispara (a bolinha de combos pulsa e manda o rastro até quem recebe)
+      emit(b,{kind:'pulso',source:f.uid,target:alvos[0]?.uid,label:p.id});applyEffects(b,f,alvos,p.pulso.efeitos);}}
     if(f.traido)f.traido=Math.max(0,f.traido-STEP);
     if(alive(f))unica(f)?.passo?.(M,b,f,STEP);
     if(b.dominion*sign(f)<-3)trigger(b,f,'losing',undefined,STEP);else if(b.dominion*sign(f)>3)trigger(b,f,'winning',undefined,STEP);

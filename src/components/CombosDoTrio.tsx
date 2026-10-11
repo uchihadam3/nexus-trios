@@ -1,5 +1,5 @@
 import { useEffect, useState, type CSSProperties } from 'react';
-import { Anchor, Ban, BatteryCharging, Biohazard, Bomb, Castle, CloudLightning, Crosshair, Droplet, Droplets, Dumbbell, EyeOff, Flame, Gem, Ghost, Globe, HeartPulse, Hourglass, Infinity as Infinito, Link2, Lock, Crown, Timer, TrendingDown, Skull, MoonStar, Shield, Heart, Wind, Copy, Battery, Mountain, Leaf, Moon, Rocket, ShieldAlert, ShieldHalf, ShieldPlus, Snowflake, Sparkles, Sprout, Sunrise, Swords, Target, Tornado, Users, VolumeX, Zap, type LucideIcon } from 'lucide-react';
+import { Anchor, Ban, BatteryCharging, Biohazard, Bomb, Castle, ChevronRight, CloudLightning, Crosshair, Droplet, Droplets, Dumbbell, EyeOff, Flame, Gem, Ghost, Globe, HeartPulse, Hourglass, Infinity as Infinito, Link2, Lock, Crown, Timer, TrendingDown, Skull, MoonStar, Shield, Heart, Wind, Copy, Battery, Mountain, Leaf, Moon, Rocket, ShieldAlert, ShieldHalf, ShieldPlus, Snowflake, Sparkles, Sprout, Sunrise, Swords, Target, Tornado, Users, VolumeX, Zap, type LucideIcon } from 'lucide-react';
 import { byId } from '../data/characters';
 import { DUPLAS_LENDARIAS, PECAS, PISO, REGRAS, TRIOS, UNIVERSO, bonusEfetivo, raridadeDe, type Raridade } from '../engine/combos';
 import type { Bonus, ComboAtivo, Pulso } from '../engine/types';
@@ -121,10 +121,31 @@ export function MedalhaDeCombo({ combo, novo = false, i = 0 }: { combo: ComboAti
     {novo && <span className="cb-novo">NOVO!</span>}
   </li>;
 }
-/** A lista da luta (os dois lados), em medalhas. */
-export function ListaDeCombos({ combos, vazio }: { combos: ComboAtivo[]; vazio?: string }) {
+/** A lista da luta (os dois lados), em medalhas; com `onEscolher`, cada medalha abre a ficha do combo. */
+export function ListaDeCombos({ combos, vazio, onEscolher }: { combos: ComboAtivo[]; vazio?: string; onEscolher?: (c: ComboAtivo) => void }) {
   if (!combos.length) return vazio ? <p className="cb-vazio">{vazio}</p> : null;
-  return <ul className="cb-lista">{combos.map((c, i) => <MedalhaDeCombo key={chave(c)} combo={c} i={i} />)}</ul>;
+  return <ul className={`cb-lista ${onEscolher ? 'clicavel' : ''}`}>{combos.map((c, i) => onEscolher
+    ? <button key={chave(c)} type="button" className="cb-medalha-botao" onClick={() => onEscolher(c)} aria-label={`Ver a ficha de ${c.nome}`}><MedalhaDeCombo combo={c} i={i} /><ChevronRight className="cb-abrir" size={16} /></button>
+    : <MedalhaDeCombo key={chave(c)} combo={c} i={i} />)}</ul>;
+}
+/**
+ * A ficha completa de um combo ativo na luta, igual à carta do Livro de Combos: raridade, o que forma o
+ * combo, quem ajuda e quem recebe (com os retratos) e o que ele faz — a luta toda, de tempo em tempo e nos rivais.
+ */
+export function FichaDoCombo({ combo }: { combo: ComboAtivo }) {
+  const v = visual(combo.id), Icone = v.icone, rar = raridadeDe(combo.id);
+  const regra = REGRAS.find((r) => r.id === combo.id), trio = TRIOS.find((t) => t.id === combo.id), lenda = DUPLAS_LENDARIAS.find((l) => l.id === combo.id);
+  const quem = trio ? 'O trio todo' : combo.id.startsWith('universo') ? (combo.para.length === 3 ? 'Os três' : 'Os dois') : lenda ? (lenda.so ? byId[lenda.so]?.name ?? '' : 'Os dois') : 'Quem recebe';
+  return <article className={`cb-carta cb-ficha acesa ${rar} ${trio ? 'trio' : ''} ${lenda ? 'lenda' : ''}`} style={{ '--cb': lenda ? '#ffd36b' : v.cor } as CSSProperties}>
+    <span className="cb-icone"><span className="cb-anel" aria-hidden /><Icone size={24} /></span>
+    <h3>{combo.nome}</h3>
+    <SeloDeRaridade r={rar} />
+    <span className="cb-quem">{combo.id.startsWith('universo') || trio ? <Rostos ids={combo.de} /> : <><Rostos ids={combo.de} /><i aria-hidden>➜</i><Rostos ids={combo.para} /></>}</span>
+    {regra && <dl><dt>Quem ajuda</dt><dd>Alguém que {PECAS[regra.ajuda]}</dd><dt>Quem recebe</dt><dd>Alguém que {PECAS[regra.ganha]}</dd></dl>}
+    {trio && <ol className="cb-pecas-trio">{trio.pecas.map((k) => <li key={k}>Alguém que {PECAS[k]}</li>)}</ol>}
+    {lenda && <small className="cb-par-nomes">{byId[lenda.a]?.name} + {byId[lenda.b]?.name}</small>}
+    <Efeitos quem={quem} bonus={combo.bonus} pulso={combo.pulso} nosRivais={combo.nosRivais} id={combo.id} />
+  </article>;
 }
 /** A abertura da luta: "N COMBOS ATIVOS" e as medalhas entrando; some sozinha. */
 export function AberturaDeCombos({ combos, chaveDaLuta, comecando }: { combos: ComboAtivo[]; chaveDaLuta: string; /** só no começo da luta (voltar para uma luta no meio não repete) */ comecando: boolean }) {

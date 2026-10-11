@@ -3,10 +3,11 @@ import { ComTermos } from '../components/Termos';
 import { UNICAS } from '../engine/unicas';
 import { battleAudio } from '../lib/audio';
 import { Pause,Play,FastForward,VolumeX,Volume2,SlidersHorizontal,Check,LogOut,ChevronLeft,ScrollText,Link2 } from 'lucide-react';
-import { AberturaDeCombos,ListaDeCombos } from '../components/CombosDoTrio';
+import { AberturaDeCombos,FichaDoCombo,ListaDeCombos } from '../components/CombosDoTrio';
+import { OrbesDeCombo } from '../components/OrbesDeCombo';
 import { Invocacoes } from '../components/Invocacoes';
 import { AuxIcon } from '../components/Icon';
-import type { Battle } from '../engine/types';
+import type { Battle, ComboAtivo, Side } from '../engine/types';
 import type { Settings } from '../lib/storage';
 import type { Beat } from '../presentation/director';
 import { duracaoBase } from '../presentation/director';
@@ -22,7 +23,7 @@ import { byId } from '../data/characters';
 import { statuses } from '../data/statuses';
 
 export function BattleScreen({battle,beat,index,name,settings,paused,onPause,onAbandon,onSettings,onExit}:{battle:Battle;beat:Beat|null;index:number;name:string;settings:Settings;paused:boolean;onPause:()=>void;onAbandon:()=>void;onSettings:(s:Settings)=>void;onExit?:()=>void}){
-  const arena=useRef<HTMLDivElement>(null),[anchors,setAnchors]=useState<Anchors>({}),[box,setBox]=useState({w:0,h:0,medal:80}),[mixer,setMixer]=useState(false),[historyOpen,setHistoryOpen]=useState(false),[combosAbertos,setCombosAbertos]=useState(false),[inspect,setInspect]=useState<InspectTarget|null>(null),[tutorial,setTutorial]=useState(()=>{try{return index===0&&!localStorage.getItem('nexus-battle-guide-v1')?0:-1}catch{return -1}});
+  const arena=useRef<HTMLDivElement>(null),[anchors,setAnchors]=useState<Anchors>({}),[box,setBox]=useState({w:0,h:0,medal:80}),[mixer,setMixer]=useState(false),[historyOpen,setHistoryOpen]=useState(false),[combosAbertos,setCombosAbertos]=useState<false|Side>(false),[fichaDoCombo,setFichaDoCombo]=useState<ComboAtivo|null>(null),[inspect,setInspect]=useState<InspectTarget|null>(null),[tutorial,setTutorial]=useState(()=>{try{return index===0&&!localStorage.getItem('nexus-battle-guide-v1')?0:-1}catch{return -1}});
   /* Os sons dos seis lutadores chegam antes do primeiro golpe. */
   const elenco=battle.fighters.map(f=>f.characterId).join(',');
   useEffect(()=>{void battleAudio.precarregarLuta(elenco.split(','));},[elenco]);
@@ -109,8 +110,9 @@ export function BattleScreen({battle,beat,index,name,settings,paused,onPause,onA
       <div className="arena-floor" aria-hidden="true"><span className="floor-glow floor-rivals"/><span className="floor-glow floor-allies"/><span className="floor-ring ring-outer"/><span className="floor-ring ring-inner"/><span className="floor-lines"/></div>
       <div className="team team-rivals">{battle.fighters.filter(f=>f.side==='enemy').map(unit)}</div>
       <div className="arena-center"><span className="arena-versus" aria-hidden="true">VS</span><span className="arena-encounter">{name}</span>
-        {/* os combos de cada lado (src/engine/combos.ts): toque para ver */}
-        {battle.combos&&(battle.combos.player.length>0||battle.combos.enemy.length>0)&&<button className="arena-combos" onClick={()=>setCombosAbertos(true)}><Link2 size={13}/>Combos: você {battle.combos.player.length} · rivais {battle.combos.enemy.length}</button>}
+      {/* as bolinhas de combos (src/engine/combos.ts): uma de cada lado, nos cantos; tocar abre os combos daquele lado */}
+      {battle.combos&&<OrbesDeCombo battle={battle} anchors={anchors} reduzido={settings.reducedMotion} onAbrir={lado=>{setFichaDoCombo(null);setCombosAbertos(lado);}}/>}
+
         {settings.explanations!=='off'&&<div className="battle-hint"><span><i className="legend-circle"/><ComTermos texto="Próximo ataque"/></span><span><i className="legend-ready"/><ComTermos texto="Pronta"/></span><span><i className="legend-cast"/><ComTermos texto="Preparo"/></span></div>}
       </div>
       <div className="team team-allies">{battle.fighters.filter(f=>f.side==='player').map(unit)}</div>
@@ -132,7 +134,14 @@ export function BattleScreen({battle,beat,index,name,settings,paused,onPause,onA
     </footer>
     {historyOpen&&<aside className="battle-history"><div><strong><AuxIcon id="history" size={18}/> Momentos importantes</strong><button aria-label="Fechar histórico" onClick={()=>setHistoryOpen(false)}>×</button></div>{recent.length?recent.map(e=><p key={e.id}><ComTermos texto={historyText(e)}/></p>):<p>A luta ainda não teve momentos decisivos.</p>}</aside>}
     {mixer&&<div className="battle-mixer">{(['musicVolume','effectsVolume'] as const).map(key=><label key={key}>{key==='musicVolume'?'Música':'Efeitos'}<input type="range" min="0" max="100" value={settings[key]} onChange={e=>onSettings({...settings,[key]:Number(e.target.value)})}/></label>)}<label className="auto-label"><input type="checkbox" checked={settings.auto} onChange={e=>onSettings({...settings,auto:e.target.checked})}/>Próximo confronto automático</label></div>}
-    {combosAbertos&&battle.combos&&<aside className="battle-history battle-combos"><div><strong><Link2 size={18}/> Combos da luta</strong><button aria-label="Fechar combos" onClick={()=>setCombosAbertos(false)}>×</button></div><h3>SEU TRIO</h3><ListaDeCombos combos={battle.combos.player} vazio="Nenhum combo no seu trio."/><h3>RIVAIS</h3><ListaDeCombos combos={battle.combos.enemy} vazio="Nenhum combo no trio rival."/></aside>}
+    {combosAbertos&&battle.combos&&<aside className="battle-history battle-combos" aria-label="Combos da luta">
+      <div><strong><Link2 size={18}/> {fichaDoCombo?fichaDoCombo.nome:'Combos da luta'}</strong><button aria-label="Fechar combos" onClick={()=>{setCombosAbertos(false);setFichaDoCombo(null);}}>×</button></div>
+      {fichaDoCombo?<><button type="button" className="cb-voltar" onClick={()=>setFichaDoCombo(null)}>‹ Voltar para os combos</button><FichaDoCombo combo={fichaDoCombo}/></>:<>
+        <nav className="cb-lados" role="tablist">{(['player','enemy'] as Side[]).map(lado=><button key={lado} role="tab" aria-selected={combosAbertos===lado} className={`${lado} ${combosAbertos===lado?'ativa':''}`} onClick={()=>setCombosAbertos(lado)}>{lado==='player'?'VOCÊ':'RIVAL'}<b>{battle.combos![lado].length}</b></button>)}</nav>
+        <p className="cb-dica-lista">Toque num combo para ler a ficha completa.</p>
+        <ListaDeCombos combos={battle.combos[combosAbertos]} vazio={combosAbertos==='player'?'Nenhum combo no seu trio.':'Nenhum combo no trio rival.'} onEscolher={setFichaDoCombo}/>
+      </>}
+    </aside>}
     {inspect&&<BattleInspector target={inspect} battle={battle} onClose={()=>setInspect(null)} onSelect={setInspect}/>}
     {tutorial>=0&&<div className="battle-tutorial"><div><span><AuxIcon id="help" size={20}/> GUIA {tutorial+1}/5</span><button onClick={closeTutorial} aria-label="Pular guia"><Check size={17}/></button></div><p><b>{tutorialSteps[tutorial][0]}</b></p><p><ComTermos texto={tutorialSteps[tutorial][1]}/></p><button className="secondary" onClick={()=>tutorial===4?closeTutorial():setTutorial(tutorial+1)}>{tutorial===4?'Pronto. Assistir meu trio':'Entendi'}</button><button className="text-button" onClick={closeTutorial}>Pular guia</button></div>}
   </section>;
