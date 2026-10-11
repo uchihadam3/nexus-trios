@@ -62,7 +62,7 @@ export const VIDA_PELO_TRIO=0;
  * Um trio cheio de combos pode ficar acima de todos os rivais possíveis: aí as faixas já estão no topo e não
  * sobem mais. Para ele, a Vida dos rivais cresce com o quanto ele passa do topo (força acima do percentil 97).
  */
-export const VIDA_ACIMA_DO_TOPO=0.3;
+export const VIDA_ACIMA_DO_TOPO=0.45;
 /** Quantos trios rivais possíveis são sorteados para formar as faixas. */
 const AMOSTRA=900;
 export const ESCALAS=[.81,.83,.85,.85,.88,.91,.95,.96,.98,.98];
