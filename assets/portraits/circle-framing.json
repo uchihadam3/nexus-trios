@@ -3,5 +3,6 @@
   "link": {"centering": [0.43, 0.0], "zoom": 1.06},
   "lara": {"centering": [0.5, 0.0], "zoom": 1.0},
   "mewtwo": {"centering": [0.5, 0.15], "zoom": 1.3},
-  "pikachu": {"centering": [0.57, 0.4], "zoom": 1.04}
+  "pikachu": {"centering": [0.57, 0.4], "zoom": 1.04},
+  "skeletor": {"centering": [0.5, 0.0], "zoom": 1.2}
 }
