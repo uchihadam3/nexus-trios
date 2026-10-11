@@ -1,5 +1,6 @@
 import { X,HeartPulse,Clock3,Sparkles } from 'lucide-react';
 import { condicaoAtendida } from '../engine/battle';
+import { unicaDe } from '../engine/unicas';
 import type { Battle,Fighter,Status } from '../engine/types';
 import { byId } from '../data/characters';
 import { statuses } from '../data/statuses';
@@ -34,6 +35,7 @@ export function BattleInspector({target,battle,onClose,onSelect}:{target:Inspect
       <div className="inspector-title"><span className="inspector-avatar" style={{'--character':c.color} as React.CSSProperties}>{c.symbol}</span><div><small>{universoDaFicha(c)}</small><h3>{c.name}</h3></div></div>
       <div className="inspector-meta"><span><HeartPulse size={13}/>{health} de {f.maxHp} Vida</span><span><Clock3 size={13}/>{Math.max(0,100-f.action*100).toFixed(0)}% até o ataque básico</span></div>
       <p><strong>{c.trait.name}.</strong> <ComTermos texto={presentTrait(c.trait).effects.join(' · ')}/>. <ComTermos texto={presentTrait(c.trait).quando}/>.{c.renascer&&<> <ComTermos texto={(f.voltou?'Já renasceu nesta luta. ':'')+textoDoRenascer(c.renascer)}/>.</>}{c.ultimaResistencia&&<> <ComTermos texto={(f.resistiu?'Já usou nesta luta. ':'')+textoDaResistencia(c.ultimaResistencia)}/>.</>}{c.despercebido&&<> <ComTermos texto={textoDoDespercebido()}/>.</>}{c.isca&&<> <ComTermos texto={textoDaIsca(c.isca)}/>.</>}</p>
+      {unicaDe(c.id)&&<p className="bi-unica"><strong>Mecânica única · {unicaDe(c.id)!.nome}.</strong> <ComTermos texto={unicaDe(c.id)!.texto}/></p>}
       {/* O ataque básico com o que ele faz (o dano e os efeitos), como na ficha fora da luta. */}
       <p><strong>{c.basic.name}.</strong> <ComTermos texto={c.basic.effects.map(effect=>presentEffect(effect,c.basic.target)).join(' · ')+'.'}/>{c.basic.jeito&&<> <ComTermos texto={textoDoJeito(c.basic.jeito)+'.'}/></>}</p>
       <div className="inspector-skills">{c.skills.map((s,i)=><button key={s.id} onClick={()=>onSelect({kind:'skill',fighter:f,index:i})}><SkillIcon type={s.icon} characterId={c.id} skillId={s.id} size={19}/><span>{s.name}</span><small>{Math.round(f.skills[i].charge)}%</small></button>)}</div>

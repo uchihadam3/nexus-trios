@@ -1,4 +1,5 @@
 import { byId } from '../data/characters';
+import { UNICAS } from '../engine/unicas';
 import { STEP, stepBattle } from '../engine/battle';
 import type { Battle, BattleEvent } from '../engine/types';
 import { PRESENTATION as P } from './config';
@@ -27,6 +28,7 @@ export function familyOf(event:BattleEvent,battle:Battle):Family {
   if(event.kind==='shield'||event.kind==='block')return 'shield';
   if(event.kind==='miss'||event.kind==='summon')return 'physical';
   if(event.kind==='resist')return 'shield';
+  if(event.kind==='unica')return 'buff';
   if(event.status){if(event.status==='regen')return 'regen';if(event.status==='burning')return 'fire';if(['haste','strengthened','protected'].includes(event.status))return 'buff';if(['rooted','paralyzed'].includes(event.status))return 'prison';return 'debuff';}
   const f=battle.fighters.find(f=>f.uid===event.source),c=f?byId[f.characterId]:null;
   const effects=event.skill!==undefined?c?.skills[event.skill].effects:[];
@@ -95,7 +97,7 @@ const ehDaMecanica=(e:BattleEvent)=>['damage','heal','resist','shield','charge',
 function montaPassos(beat:Pick<Beat,'event'|'events'|'after'|'traco'|'base'>):Passo[]{
   const ator=beat.event.source,lado=beat.after.fighters.find(f=>f.uid===ator)?.side;
   const ladoDe=(uid?:string)=>beat.after.fighters.find(f=>f.uid===uid)?.side;
-  if(beat.traco){const f=beat.after.fighters.find(x=>x.uid===ator);return [{classe:'reacao',quem:ator,rotulo:f?byId[f.characterId].trait.name:undefined,eventos:beat.events.map(e=>e.id),em:0}];}
+  if(beat.traco){const f=beat.after.fighters.find(x=>x.uid===ator);return [{classe:'reacao',quem:ator,rotulo:f?(beat.event.kind==='unica'?UNICAS[f.characterId]?.nome:byId[f.characterId].trait.name):undefined,eventos:beat.events.map(e=>e.id),em:0}];}
   if(!['basic','skill'].includes(beat.event.kind)||!lado)return [{classe:'golpe',quem:ator,eventos:beat.events.map(e=>e.id),em:0}];
   const tracoDe=(uid:string)=>{const f=beat.after.fighters.find(x=>x.uid===uid);return f?byId[f.characterId].trait.name:undefined;};
   // o que a própria ação (habilidade ou básico) faz: o resto que sai de quem age é o traço dele
@@ -110,6 +112,12 @@ function montaPassos(beat:Pick<Beat,'event'|'events'|'after'|'traco'|'base'>):Pa
   for(const e of beat.events){
     // contabilidade (Carga, "pronto", sinergia) e ajustes nulos vão no passo que os causou
     const dono=e.kind==='block'?(e.attacker??ator):e.source;
+    // Mecânica única: um passo com o nome dela (o que ela causa em seguida anda junto)
+    if(e.kind==='unica'){
+      const f=beat.after.fighters.find(x=>x.uid===e.source),rotulo=f?UNICAS[f.characterId]?.nome:undefined;
+      if(!(atual?.classe==='reacao'&&atual.quem===e.source&&atual.rotulo===rotulo)){atual={classe:'reacao',quem:e.source,rotulo,eventos:[],em:0};passos.push(atual);}
+      atual.eventos.push(e.id);continue;
+    }
     // Refletir, Espinhos, Vampirismo e os jeitos de bater (Ricochete, Roubou Carga…): um passo com o nome da mecânica
     if(!ehDaMecanica(e)&&(CONTABIL.has(e.kind)||(e.kind==='tempo'&&Math.abs(e.value??0)<.005))){if(atual)atual.eventos.push(e.id);else soltos.push(e.id);continue;}
     if(ehDaMecanica(e)){
@@ -255,6 +263,9 @@ function collect(d:Direction,events:BattleEvent[],before:Battle,after:Battle,leg
     return;
   }
   if(principal&&!previous){d.queue.push(makeBeat(principal,events,before,after));return;}
+  // a Mecânica única disparando sozinha (relógio, reação) ganha um momento com o nome dela
+  const unica=!previous&&!legacy?events.find(e=>e.kind==='unica'&&e.label!=='Imune'):undefined;
+  if(unica){d.queue.push(makeBeat(unica,events,before,after,false,false,true));return;}
   // fora de uma ação, Status e Escudo só nascem de um traço disparando sozinho: ganha um momento próprio
   const traco=!previous&&!legacy?events.find(e=>e.kind==='status'||(e.kind==='shield'&&e.label==='Escudo')):undefined;
   if(traco){d.queue.push(makeBeat(traco,events,before,after,false,false,true));return;}

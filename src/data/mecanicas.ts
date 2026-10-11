@@ -338,7 +338,7 @@ export const INVOCACAO: Record<string, { habilidade: number; nome: string; dano:
 export const ULTIMA_RESISTENCIA: Record<string, { protegido: number; duracao: number }> = {
   naruto: { protegido: 0.5, duracao: 2.5 }, // "Nunca desistir"
   vegeta: { protegido: 0.5, duracao: 2.5 }, // "Não vou cair"
-  guts: { protegido: 0.5, duracao: 3 }, // sobrevive ao impossível
+  // guts: a Armadura do Berserker (src/engine/unicas.ts) é a última resistência dele, mais forte e com hora para acabar
   saitama: { protegido: 0.5, duracao: 2 }, // "Ainda aqui"
   invencivel: { protegido: 0.5, duracao: 2.5 }, // "Levantar de novo"
   coragem: { protegido: 0.6, duracao: 2.5 }, // morre de medo, mas não cai

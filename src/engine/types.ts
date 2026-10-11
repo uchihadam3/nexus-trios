@@ -69,6 +69,10 @@ export interface Fighter {
   cast:null|{skill:number;elapsed:number;duration:number;targets:string[]};
   investigation:Record<string,number>;discovered?:Record<string,'vulnerable'|'immune'>;traitTimer:number;
   storedEnergy:number;
+  /** Estado da Mecânica única (src/engine/unicas.ts). */
+  u?:Record<string,number>;
+  /** Segundos em que ataca os próprios aliados (Dobra de sangue da Katara). */
+  traido?:number;
   /** Renascer: segundos até voltar (enquanto caído). */
   renascendo?:number;resistiu?:boolean;
   /** Já voltou uma vez (renasceu ou foi levantado): não volta de novo. */
@@ -85,7 +89,7 @@ export interface Fighter {
     /** Aliados levantados (Reviver). */
     revives?:number};
 }
-export interface BattleEvent {id:number;time:number;kind:'basic'|'skill'|'cast'|'damage'|'heal'|'shield'|'status'|'interrupt'|'ko'|'synergy'|'charge'|'tempo'|'turn'|'ready'|'block'|'discovery'|'revive'|'cleanse'|'dispel'|'miss'|'resist'|'copy'|'summon';source:string;target?:string;skill?:number;label:string;value?:number;visual?:Visual;status?:StatusId;attacker?:string;
+export interface BattleEvent {id:number;time:number;kind:'basic'|'skill'|'cast'|'damage'|'heal'|'shield'|'status'|'interrupt'|'ko'|'synergy'|'charge'|'tempo'|'turn'|'ready'|'block'|'discovery'|'revive'|'cleanse'|'dispel'|'miss'|'resist'|'copy'|'summon'|'unica';source:string;target?:string;skill?:number;label:string;value?:number;visual?:Visual;status?:StatusId;attacker?:string;
   /** Purificar/Dissipar: os Status que saíram, na ordem. */
   removidos?:StatusId[]}
 export interface TargetDecision {time:number;actor:string;intent:TargetIntent;target:string;score:number;reasons:string[]}

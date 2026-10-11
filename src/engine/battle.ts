@@ -6,6 +6,7 @@ import { DOMINION as D, fracaoPorAlvo} from './dominion-config';
 import { alvosDoFerido } from './ferido';
 import type { Battle, BattleEvent, Effect, Fighter, JeitoDeBater, Side, Skill, StatusId, Target, Topic } from './types';
 import { chooseTarget, inferTargetIntent } from './targeting';
+import { UNICAS, type Golpe, type Motor } from './unicas';
 
 export const STEP=.1;
 const clamp=(n:number,lo=0,hi=1)=>Math.min(hi,Math.max(lo,n));
@@ -18,6 +19,20 @@ export const negativeStatuses=new Set<StatusId>((Object.keys(statuses) as Status
 const sign=(f:Fighter)=>f.side==='player'?1:-1;
 const pressure=(b:Battle,side:Side,points:number)=>{b.momentum=clamp(b.momentum+(side==='player'?1:-1)*points,-D.maxScore,D.maxScore);};
 export function emit(b:Battle,e:Omit<BattleEvent,'id'|'time'>){b.events.push({...e,id:b.nextEvent++,time:b.time});if(b.events.length>180)b.events.shift();}
+/* Mecânicas únicas (src/engine/unicas.ts): os ganchos de quem tem uma. */
+const unica=(f:Fighter)=>UNICAS[f.characterId]?.ganchos;
+/** Quem está usando uma habilidade agora (o golpe de uma habilidade conta como `habilidade` para as mecânicas). */
+let agindo:string|null=null;
+const M:Motor={
+  dano:(b,fonte,alvo,valor,direto=true,label='Impacto')=>damage(b,fonte,alvo,valor,direto,label),
+  cura:(b,fonte,alvo,valor,label)=>healing(b,fonte,alvo,valor,label),
+  efeitos:(b,fonte,alvos,efeitos)=>applyEffects(b,fonte,alvos,efeitos),
+  alvos:(b,f,regra,efeitos)=>targets(b,f,regra,efeitos??[]),
+  aliados:(b,f)=>friendly(b,f),rivais:(b,f)=>hostile(b,f),
+  intensidade:(f,s)=>intensity(f,s),
+  aviso:(b,f,texto,alvo,valor)=>emit(b,{kind:'unica',source:f.uid,target:(alvo??f).uid,label:texto,value:valor}),
+  sorte:(b)=>random(b),
+};
 
 export function createBattle(player:string[],enemy:string[],seed=Date.now(),enemyScale=1):Battle {
   if(player.length!==3||enemy.length!==3||new Set(player).size!==3||new Set(enemy).size!==3||[...player,...enemy].some(id=>!byId[id]))throw new Error('Cada equipe precisa de três personagens diferentes e válidos.');
@@ -34,6 +49,7 @@ export function createBattle(player:string[],enemy:string[],seed=Date.now(),enem
     const pulsos=(side==='player'?doJogador:doRival).combos.filter(k=>k.pulso&&k.dono===id).map(k=>({id:k.id,falta:k.pulso!.cada,pulso:k.pulso!}));
     b.fighters.push({uid:`${side}-${slot}`,characterId:id,side,slot,hp:maxHp,maxHp,bonus,...(pulsos.length?{pulsos}:{}),action:random(b)*.12,skills:c.skills.map(()=>({charge:0,cooldown:0,executing:0,uses:0})),statuses:[],shields:bonus.escudo>0?[{amount:Math.round(maxHp*bonus.escudo),remaining:ESCUDO_DO_COMBO,source:`${side}-${slot}`}]:[],cast:null,investigation:{},discovered:{},traitTimer:0,storedEnergy:0,stats:{damage:0,healing:0,protection:0,interrupts:0,skills:0,kills:0}});
   });
+  for(const f of b.fighters)unica(f)?.inicio?.(M,b,f);
   return b;
 }
 export function targets(b:Battle,actor:Fighter,rule:Target,effects:Effect[]=[],record=true):Fighter[] {
@@ -282,11 +298,16 @@ function damage(b:Battle,source:Fighter,target:Fighter,raw:number,direto=true,la
   const devolvido=label==='Refletido'||label==='Espinhos';
   // Veneno e Sangramento são por dentro: passam por Exposto, Protegido e Escudo
   const interno=label==='Veneno'||label==='Sangramento';
-  const outgoing=devolvido||interno?raw:raw*(1+intensity(source,'strengthened'))*(1-intensity(source,'weakened'))*(1+(source.bonus?.dano??0));
+  // Mecânicas únicas: quem bate (e a aura dos aliados dele) e quem apanha (e a aura dos aliados dele)
+  const g:Golpe={direto,label,habilidade:agindo===source.uid};
+  let mCausa=1,mRecebe=unica(target)?.recebe?.(M,b,target,source,g)??1;
+  if(!devolvido&&!interno){mCausa*=unica(source)?.causa?.(M,b,source,target,g)??1;for(const a of b.fighters)if(a.side===source.side&&alive(a))mCausa*=unica(a)?.causaAliado?.(M,b,a,source,target,g)??1;}
+  for(const a of b.fighters)if(a.side===target.side&&a!==target&&alive(a))mRecebe*=unica(a)?.recebeAliado?.(M,b,a,target,source,g)??1;
+  const outgoing=(devolvido||interno?raw:raw*(1+intensity(source,'strengthened'))*(1-intensity(source,'weakened'))*(1+(source.bonus?.dano??0)))*mCausa;
   // Congelado: o golpe direto quebra o gelo e entra mais forte
   const gelo=direto?intensity(target,'frozen'):0;
   if(gelo>0){target.statuses=target.statuses.filter(s=>s.id!=='frozen');label='Quebrou o gelo';}
-  const beforeProtection=interno?outgoing:outgoing*(1+intensity(target,'exposed'))*(1+gelo);
+  const beforeProtection=(interno?outgoing:outgoing*(1+intensity(target,'exposed'))*(1+gelo))*mRecebe;
   const protection=interno?0:intensity(target,'protected');
   let amount=beforeProtection*(1-protection)*(interno?1:1-(target.bonus?.defesa??0)),blocked=beforeProtection-amount;
   // só o que é por dentro (Veneno, Sangramento) passa pelo Escudo; Marcado não atravessa mais (pedido do jogador)
@@ -294,12 +315,21 @@ function damage(b:Battle,source:Fighter,target:Fighter,raw:number,direto=true,la
   if(!atravessaEscudo)for(const s of target.shields){const used=Math.min(s.amount,amount);s.amount-=used;amount-=used;blocked+=used;const owner=b.fighters.find(f=>f.uid===s.source);if(owner&&used>0){owner.stats.protection+=used;pressure(b,owner.side,D.event.usefulProtectionPerFullCondition*clamp(used/target.maxHp));emit(b,{kind:'block',source:owner.uid,target:target.uid,attacker:source.uid,label:'Bloqueio',value:used,visual:'shield'});trigger(b,owner,'protected',owner,used/100);}}
   target.shields=target.shields.filter(s=>s.amount>.01);
   if(protection>0){const owner=b.fighters.find(f=>f.uid===target.statuses.find(s=>s.id==='protected')?.source);if(owner){owner.stats.protection+=beforeProtection*protection;pressure(b,owner.side,D.event.usefulProtectionPerFullCondition*clamp(beforeProtection*protection/target.maxHp));emit(b,{kind:'block',source:owner.uid,target:target.uid,attacker:source.uid,label:'Proteção',value:beforeProtection*protection,visual:'shield'});trigger(b,owner,'protected',owner,beforeProtection*protection/100);}}
-  const hpBefore=target.hp;
+  let hpBefore=target.hp;
   // Última resistência: o golpe que derrubaria deixa com 1 de Vida, uma vez por luta
   // o combo "segura" dá a Última resistência a quem não tem (fica com 1 de Vida e Protegido 30% por 3 s)
   const resiste=byId[target.characterId].ultimaResistencia??((target.bonus?.segura??0)>0?{protegido:.3,duracao:3}:undefined);
   let resistiu=false;
   if(resiste&&!target.resistiu&&amount>=hpBefore&&hpBefore>1){amount=hpBefore-1;target.resistiu=true;resistiu=true;}
+  // Mecânicas únicas: o pacifista não derruba; ele mesmo ou um aliado pode segurar o golpe fatal
+  if(amount>=hpBefore&&hpBefore>0){
+    if(unica(source)?.poupa&&source.side!==target.side)amount=Math.max(0,hpBefore-1);
+    else{
+      let fica:number|null=null;
+      for(const a of [target,...b.fighters.filter(x=>x.side===target.side&&x!==target&&alive(x))]){fica=unica(a)?.salva?.(M,b,a,target,amount,source)??null;if(fica!==null)break;}
+      if(fica!==null){if(fica>=hpBefore){target.hp=Math.min(target.maxHp,fica);hpBefore=target.hp;amount=0;}else amount=hpBefore-Math.max(1,fica);}
+    }
+  }
   const dealt=Math.min(hpBefore,amount);target.hp=Math.max(0,hpBefore-dealt);source.stats.damage+=dealt;
   if(dealt>.01){
     // Dormindo: o golpe direto acorda
@@ -315,6 +345,9 @@ function damage(b:Battle,source:Fighter,target:Fighter,raw:number,direto=true,la
     for(const f of b.fighters){if(f.side===target.side&&f.uid!==target.uid)trigger(b,f,'allyHurt',target,dealt/100);if(f.side!==target.side)trigger(b,f,'enemyHurt',source,dealt/100);}
     const vampiro=direto&&source.side!==target.side?intensity(source,'vampirism'):0;
     if(vampiro>0&&alive(source))healing(b,source,source,dealt*Math.min(vampiro,statuses.vampirism.cap),'Vampirismo');
+    if(alive(source))unica(source)?.bateu?.(M,b,source,target,dealt,g);
+    if(alive(target))unica(target)?.apanhou?.(M,b,target,source,dealt,g);
+    for(const x of b.fighters)if(alive(x))unica(x)?.viu?.(M,b,x,source,target,dealt,g);
   }
   if(direto&&source.side!==target.side){
     devolve(b,target,source,beforeProtection*Math.min(intensity(target,'reflect'),statuses.reflect.cap),'Refletido');
@@ -333,11 +366,14 @@ function damage(b:Battle,source:Fighter,target:Fighter,raw:number,direto=true,la
     emit(b,{kind:'ko',source:source.uid,target:target.uid,label:`${byId[target.characterId].name} incapacitado`});
     const renascer=byId[target.characterId].renascer;
     if(renascer&&!target.voltou)target.renascendo=renascer.atraso;
+    unica(target)?.morreu?.(M,b,target,source);
+    for(const x of b.fighters)if(alive(x))unica(x)?.caiu?.(M,b,x,target,source);
   }
 }
 function healing(b:Battle,source:Fighter,target:Fighter,value:number,label='Recuperação'){
   if(!alive(target))return;
   value*=(1-Math.min(intensity(target,'cursed'),statuses.cursed.cap))*(1+(source.bonus?.cura??0));
+  value*=(unica(source)?.curaFeita?.(M,b,source,target)??1)*(unica(target)?.curaRecebida?.(M,b,target,source)??1);
   const used=Math.min(target.maxHp-target.hp,value);target.hp+=used;source.stats.healing+=used;
   if(used>.01){pressure(b,source.side,D.event.usefulHealingPerFullCondition*clamp(used/target.maxHp));emit(b,{kind:'heal',source:source.uid,target:target.uid,label,value:used});}
 }
@@ -403,6 +439,7 @@ export function applyEffects(b:Battle,source:Fighter,selected:Fighter[],effects:
   const decidido=new Map<string,boolean>();
   const escapou=(alvo:Fighter)=>{
     if(alvo.side===source.side||!alive(alvo))return false;
+    if(unica(source)?.nuncaErra)return false;
     if(!decidido.has(alvo.uid)){
       const chance=Math.min(intensity(alvo,'evasion'),statuses.evasion.cap);
       const sim=chance>0&&random(b)<chance;
@@ -449,6 +486,7 @@ export function applyEffects(b:Battle,source:Fighter,selected:Fighter[],effects:
           if(added>0){target.shields.push({amount:added,remaining:10,source:source.uid});emit(b,{kind:'shield',source:source.uid,target:target.uid,label:'Escudo',value:added,visual:'shield'});}break;
         }
         case 'status':{
+          if(unica(target)?.imune?.(target,effect.status)){emit(b,{kind:'unica',source:target.uid,target:target.uid,label:'Imune',status:effect.status});break;}
           // Barreira: o próximo debuff de um rival não entra
           const barreira=target.side!==source.side&&negativeStatuses.has(effect.status)?target.statuses.find(s=>s.id==='barrier'):undefined;
           if(barreira){barreira.intensity-=1;if(barreira.intensity<.5)target.statuses=target.statuses.filter(s=>s!==barreira);emit(b,{kind:'resist',source:target.uid,target:target.uid,label:'Barreira',status:effect.status});break;}
@@ -597,13 +635,17 @@ function decideSkill(b:Battle,f:Fighter):number|null {
 function execute(b:Battle,f:Fighter,index:number,selected:Fighter[]){
   const s=byId[f.characterId].skills[index],eventStart=b.nextEvent;
   emit(b,{kind:'skill',source:f.uid,target:selected[0]?.uid,skill:index,label:s.name,visual:s.icon});
+  unica(f)?.antes?.(M,b,f,index);
+  const quemAgia=agindo;agindo=f.uid;
   applyEffects(b,f,selected,s.effects);
+  agindo=quemAgia;
   sangra(b,f);
   const effective=b.events.some(e=>e.id>=eventStart&&(['damage','heal','block','interrupt','ko','synergy','revive','cleanse','dispel','copy'].includes(e.kind)||e.kind==='status'&&e.target!==f.uid));
   if(effective)pressure(b,f.side,s.preparation>=2.5?D.event.grandSkill:D.event.successfulSkill);
   f.stats.skills++;
   f.skills[index].uses=(f.skills[index].uses??0)+1;
   f.skills[index].charge=0;f.skills[index].cooldown=s.cooldown;f.skills[index].executing=.7;
+  if(alive(f))unica(f)?.usou?.(M,b,f,index);
 }
 export function updateDominion(b:Battle){
   const group=(side:Side)=>b.fighters.filter(f=>f.side===side);
@@ -662,6 +704,8 @@ export function stepBattle(b:Battle,observe?:(snapshot:Battle)=>void):Battle {
     f.skills.forEach(s=>{s.cooldown=Math.max(0,s.cooldown-STEP);s.executing=Math.max(0,s.executing-STEP);});
     trigger(b,f,'time',undefined,STEP);trigger(b,f,'survived',undefined,STEP);
     for(const p of f.pulsos??[]){p.falta-=STEP;if(p.falta<=1e-6){p.falta+=p.pulso.cada;applyEffects(b,f,targets(b,f,p.pulso.alvo,p.pulso.efeitos),p.pulso.efeitos);}}
+    if(f.traido)f.traido=Math.max(0,f.traido-STEP);
+    if(alive(f))unica(f)?.passo?.(M,b,f,STEP);
     if(b.dominion*sign(f)<-3)trigger(b,f,'losing',undefined,STEP);else if(b.dominion*sign(f)>3)trigger(b,f,'winning',undefined,STEP);
   }
   observe?.(b);
@@ -670,6 +714,7 @@ export function stepBattle(b:Battle,observe?:(snapshot:Battle)=>void):Battle {
     const c=byId[f.characterId];
     const rate=(1+intensity(f,'haste'))*(1-intensity(f,'slow'))*(1-intensity(f,'rooted'));
     if(intensity(f,'paralyzed')||intensity(f,'frozen')||intensity(f,'sleep'))continue;
+    if(unica(f)?.parado?.(f))continue;
     if(f.cast){
       f.cast.elapsed+=STEP*rate;
       if(f.cast.elapsed>=f.cast.duration){const cast=f.cast;f.cast=null;let list=cast.targets.map(id=>b.fighters.find(x=>x.uid===id)).filter((x):x is Fighter=>!!x&&alive(x));if(!list.length&&c.skills[cast.skill].condition!=='investigated')list=targets(b,f,c.skills[cast.skill].target,c.skills[cast.skill].effects);execute(b,f,cast.skill,list);resolve(b);observe?.(b);if(b.finished)break;}
@@ -679,22 +724,24 @@ export function stepBattle(b:Battle,observe?:(snapshot:Battle)=>void):Battle {
       const selectedSkill=decideSkill(b,f);
       if(selectedSkill!==null){
         const i=selectedSkill,s=c.skills[i],list=targets(b,f,s.target,s.effects);
-        if(s.preparation>0){f.cast={skill:i,elapsed:0,duration:s.preparation*(1-(f.bonus?.preparo??0)),targets:list.map(x=>x.uid)};emit(b,{kind:'cast',source:f.uid,target:list[0]?.uid,skill:i,label:s.name,visual:s.icon});if(s.preparation>PREPARO_LEVE)for(const opponent of hostile(b,f))trigger(b,opponent,'enemyCast',f);}
+        if(s.preparation>0){f.cast={skill:i,elapsed:0,duration:s.preparation*(1-(f.bonus?.preparo??0)),targets:list.map(x=>x.uid)};emit(b,{kind:'cast',source:f.uid,target:list[0]?.uid,skill:i,label:s.name,visual:s.icon});for(const o of hostile(b,f))unica(o)?.viuPreparo?.(M,b,o,f,f.cast.duration);if(s.preparation>PREPARO_LEVE)for(const opponent of hostile(b,f))trigger(b,opponent,'enemyCast',f);}
         else execute(b,f,i,list);
         resolve(b);observe?.(b);if(b.finished)break;
         continue;
       }
     }
-    f.action+=STEP*rate*(1+(f.bonus?.ritmo??0))/c.interval;
+    f.action+=STEP*rate*(1+(f.bonus?.ritmo??0))*(unica(f)?.ritmo?.(M,b,f)??1)/c.interval;
     if(f.action>=1){
       f.action-=1;
-      const selected=intensity(f,'confused')&&random(b)<.25?[f]:targets(b,f,c.basic.target,c.basic.effects);
+      // Dobra de sangue (Katara): enquanto dominado, o golpe vai num aliado dele
+      const traidos=f.traido?friendly(b,f).filter(x=>x!==f):[];
+      const selected=traidos.length?[traidos[Math.floor(random(b)*traidos.length)]!]:intensity(f,'confused')&&random(b)<.25?[f]:targets(b,f,c.basic.target,c.basic.effects);
       f.golpes=(f.golpes??0)+1;
       const jeito=c.basic.jeito,especial=jeito?.tipo==='serie'&&f.golpes%jeito.cada===0?jeito:undefined;
       emit(b,{kind:'basic',source:f.uid,target:selected[0]?.uid,label:especial?especial.nome:c.basic.name,visual:c.basic.visual});
       // Cego: o golpe pode passar longe
       const cego=intensity(f,'blind');
-      if(cego>0&&selected[0]&&selected[0].side!==f.side&&random(b)<Math.min(cego,statuses.blind.cap))emit(b,{kind:'miss',source:f.uid,target:selected[0].uid,label:'Errou'});
+      if(cego>0&&!unica(f)?.nuncaErra&&selected[0]&&selected[0].side!==f.side&&random(b)<Math.min(cego,statuses.blind.cap))emit(b,{kind:'miss',source:f.uid,target:selected[0].uid,label:'Errou'});
       else{
         const antes=f.stats.damage;
         // combo de ataque básico: o dano do golpe normal sobe (ou cai, se o combo do rival tira)

@@ -1,5 +1,6 @@
 import { useCallback,useEffect,useLayoutEffect,useRef,useState } from 'react';
 import { ComTermos } from '../components/Termos';
+import { UNICAS } from '../engine/unicas';
 import { battleAudio } from '../lib/audio';
 import { Pause,Play,FastForward,VolumeX,Volume2,SlidersHorizontal,Check,LogOut,ChevronLeft,ScrollText,Link2 } from 'lucide-react';
 import { AberturaDeCombos,ListaDeCombos } from '../components/CombosDoTrio';
@@ -60,7 +61,7 @@ export function BattleScreen({battle,beat,index,name,settings,paused,onPause,onA
   const actionTargets=new Set(links.map(link=>link.target));
   const actionSources=new Set(links.map(link=>link.source));
   if(beat&&!beat.impacted&&beat.event.target)threats.add(beat.event.target);
-  const recent=battle.events.filter(e=>['damage','heal','shield','status','interrupt','ko','revive','cleanse','dispel','miss','resist','copy','summon','block','discovery','turn','synergy'].includes(e.kind)&&(!['block','shield'].includes(e.kind)||(e.value??0)>=20)).slice(-12).reverse();
+  const recent=battle.events.filter(e=>['damage','heal','shield','status','interrupt','ko','revive','cleanse','dispel','miss','resist','copy','summon','block','discovery','turn','synergy','unica'].includes(e.kind)&&(!['block','shield'].includes(e.kind)||(e.value??0)>=20)).slice(-12).reverse();
   const sourceName=(uid:string)=>{const f=battle.fighters.find(x=>x.uid===uid);return f?byId[f.characterId].name:'Equipe'};
   const historyText=(event:Battle['events'][number])=>{
     const from=sourceName(event.source),to=event.target?sourceName(event.target):'';
@@ -71,6 +72,7 @@ export function BattleScreen({battle,beat,index,name,settings,paused,onPause,onA
     if(event.kind==='copy')return `${from} ${event.label.toLocaleLowerCase('pt-BR')} de ${to}`;
     if(event.kind==='damage'&&event.label==='Explosão')return `A Marca explosiva de ${from} explodiu em ${to}: ${Math.round(event.value??0)} de dano`;
     if(event.kind==='miss')return event.label==='Esquivou'?`${to} esquivou do golpe de ${from}`:`${from} errou o golpe em ${to}`;
+    if(event.kind==='unica'){const mec=UNICAS[battle.fighters.find(x=>x.uid===event.source)?.characterId??'']?.nome;if(event.label==='Imune')return `${from} é imune a ${event.status?statuses[event.status].name:'isso'}${mec?` (${mec})`:''}`;return `${from} · ${mec??'Mecânica única'}: ${event.label}${to&&to!==from?` → ${to}`:''}`;}
     if(event.kind==='resist'&&event.label==='Última resistência')return `${to||from} ficou de pé com 1 de Vida: Última resistência`;
     if(event.kind==='resist')return `A Barreira de ${to||from} anulou ${event.status?statuses[event.status].name:'o debuff'}`;
     if(event.kind==='cleanse'||event.kind==='dispel'){const nomes=(event.removidos??[]).map(id=>statuses[id].name).join(', ');return `${from} ${event.kind==='cleanse'?'purificou':'dissipou'} ${to}: ${nomes}`;}

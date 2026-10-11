@@ -16,7 +16,15 @@
 .fv-atributo em{display:block;height:100%;width:var(--fill);border-radius:99px;background:linear-gradient(90deg,color-mix(in srgb,var(--attr),#000 25%),var(--attr));box-shadow:0 0 10px color-mix(in srgb,var(--attr),transparent 50%);animation:fv-barra .8s .15s cubic-bezier(.2,1,.3,1) both}
 @keyframes fv-barra{from{width:0}}
 .fv-selo{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:850;letter-spacing:1.8px;color:#9fb39b}
-.fv-traco,.fv-basico,.fv-habilidade,.fv-fraco,.fv-aviso{border-radius:18px;padding:12px 14px}
+.fv-traco,.fv-basico,.fv-habilidade,.fv-fraco,.fv-aviso,.fv-unica{border-radius:18px;padding:12px 14px}
+/* Mecânica única: o cartão que chama mais atenção da ficha (só aquele personagem tem) */
+.fv-unica{position:relative;overflow:hidden;background:linear-gradient(135deg,#b06bff33,#ff6bb526 55%,#ffd36b1f);box-shadow:inset 0 0 0 1.5px #d39bff99,0 0 22px #b06bff33}
+.fv-unica::after{content:'';position:absolute;inset:-40% -10%;background:linear-gradient(100deg,transparent 40%,#ffffff22 50%,transparent 60%);animation:fv-brilho 4.5s ease-in-out infinite;pointer-events:none}
+@keyframes fv-brilho{0%,60%{transform:translateX(-60%)}100%{transform:translateX(60%)}}
+@media (prefers-reduced-motion:reduce){.fv-unica::after{animation:none;display:none}}
+.fv-unica .fv-selo{color:#e6c2ff;letter-spacing:.04em}
+.fv-unica h3{margin:4px 0 4px;font-size:19px;background:linear-gradient(90deg,#f3dcff,#ffd36b);-webkit-background-clip:text;background-clip:text;color:transparent}
+.fv-unica p{margin:0;font-size:14px;line-height:1.45;color:#f1e8ff}
 .fv-traco{background:linear-gradient(160deg,#ffd36b1f,#ffd36b08);box-shadow:inset 0 0 0 1px #ffd36b55}
 .fv-traco .fv-selo{color:#ffd36b}
 .fv-traco h3,.fv-basico h3{margin:4px 0 6px;font-size:18px}

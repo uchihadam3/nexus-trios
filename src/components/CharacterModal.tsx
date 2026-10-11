@@ -1,8 +1,9 @@
 import { useEffect,useRef,type CSSProperties } from 'react';
-import { X,HeartPulse,Gauge,Brain,Info,Sparkles,Swords,TriangleAlert,Zap,Hourglass,Snowflake,Target,Scissors,Bomb,TrendingDown,Turtle,Sword,Skull,Clock,Shuffle,Heart,Shield,Lock,Timer,BatteryCharging,ShieldPlus,HandHeart,Mountain,Rocket,Award,CircleCheck,type LucideIcon } from 'lucide-react';
+import { X, HeartPulse, Gauge, Brain, Info, Sparkles, Swords, TriangleAlert, Zap, Hourglass, Snowflake, Target, Scissors, Bomb, TrendingDown, Turtle, Sword, Skull, Clock, Shuffle, Heart, Shield, Lock, Timer, BatteryCharging, ShieldPlus, HandHeart, Mountain, Rocket, Award, CircleCheck, type LucideIcon, Crown } from 'lucide-react';
 import type { Character } from '../engine/types';
 import { characters } from '../data/characters';
 import { Portrait } from './Portrait';
+import { unicaDe } from '../engine/unicas';
 import { SkillIcon } from './Icon';
 import { EfeitosAgrupados } from './EfeitosAgrupados';
 import { presentEffect,presentSkill,presentTrait,targetNames,textoDaIsca,textoDaResistencia,textoDoDespercebido,textoDoJeito,textoDoRenascer } from '../engine/skill-descriptions';
@@ -57,6 +58,12 @@ export function CharacterModal({character:c,onClose}:{character:Character;onClos
       <Atributo icone={<Brain size={15}/>} nome="Inteligência" valor={`${intelligence} · ${intelligenceLabel(intelligence)}`} fracao={intelligence/100} cor="#8fd3ff"/>
     </div>
     {c.id==='light'&&<div className="fv-aviso"><Info size={17}/><p><strong>Como funciona a investigação</strong><br/>Ao chegar a 100 Investigação em um inimigo, Light descobre se ele é vulnerável ou imune à Death Note. A descoberta fica visível na batalha.</p></div>}
+
+    {unicaDe(c.id)&&<section className="fv-unica">
+      <span className="fv-selo"><Crown size={13}/>MECÂNICA ÚNICA · SÓ {c.name.toUpperCase()} TEM</span>
+      <h3>{unicaDe(c.id)!.nome}</h3>
+      <p><ComTermos texto={unicaDe(c.id)!.texto}/></p>
+    </section>}
 
     <section className="fv-traco">
       <span className="fv-selo"><Sparkles size={13}/>TRAÇO · SEMPRE ATIVO</span>
