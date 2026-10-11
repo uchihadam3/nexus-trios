@@ -635,17 +635,17 @@ export const LOTE9: Record<string, Unica> = {
   },
   capitaoplaneta: {
     nome: 'Pelos cinco anéis',
-    texto: 'Cada habilidade dele chama um anel, em ciclo: Terra (Escudo de 3% no trio), Fogo (rivais Queimando 2 s), Vento (rivais perdem 12% da ação), Água (cura 2% do trio) e Coração (trio Fortalecido 6% por 4 s).',
+    texto: 'Cada habilidade dele chama um anel, em ciclo: Terra (Escudo de 2% no trio), Fogo (rivais Queimando 2 s), Vento (rivais perdem 8% da ação), Água (cura 1,5% do trio) e Coração (trio Fortalecido 4% por 4 s).',
     ganchos: {
       usou(m, b, f) {
         const anel = (u(f).anel ?? 0) % 5; u(f).anel = anel + 1;
         const as = m.aliados(b, f), rs = m.rivais(b, f);
         m.aviso(b, f, ['Terra!', 'Fogo!', 'Vento!', 'Água!', 'Coração!'][anel]!, f);
-        if (anel === 0) for (const a of as) a.shields.push({ amount: a.maxHp * 0.03, remaining: 8, source: f.uid });
-        if (anel === 1) m.efeitos(b, f, rs, [st('burning', 4, 2)]);
-        if (anel === 2) for (const r of rs) r.action = Math.max(0, r.action - 0.12);
-        if (anel === 3) for (const a of as) m.cura(b, f, a, a.maxHp * 0.02, 'Água');
-        if (anel === 4) m.efeitos(b, f, as, [st('strengthened', 0.06, 4)]);
+        if (anel === 0) for (const a of as) a.shields.push({ amount: a.maxHp * 0.02, remaining: 8, source: f.uid });
+        if (anel === 1) m.efeitos(b, f, rs, [st('burning', 3, 2)]);
+        if (anel === 2) for (const r of rs) r.action = Math.max(0, r.action - 0.08);
+        if (anel === 3) for (const a of as) m.cura(b, f, a, a.maxHp * 0.015, 'Água');
+        if (anel === 4) m.efeitos(b, f, as, [st('strengthened', 0.04, 4)]);
       },
     },
   },

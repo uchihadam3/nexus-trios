@@ -545,7 +545,7 @@ export const LOTE8: Record<string, Unica> = {
   },
   rogue: {
     nome: 'Toque absorvente',
-    texto: 'O primeiro golpe direto em cada rival rouba o poder dele: aquele rival causa 7% a menos e Vampira causa 7% a mais (até 21%).',
+    texto: 'O primeiro golpe direto em cada rival rouba o poder dele: aquele rival causa 4% a menos e Vampira causa 4% a mais (até 12%).',
     ganchos: {
       bateu(m, b, f, alvo, _dano, g) {
         if (!g.direto) return;
@@ -554,8 +554,8 @@ export const LOTE8: Record<string, Unica> = {
         u(f)[k] = 1; u(f).roubos = (u(f).roubos ?? 0) + 1;
         m.aviso(b, f, 'Toque', alvo);
       },
-      causa: (_m, _b, f) => 1 + 0.07 * (u(f).roubos ?? 0),
-      recebeAliado: (_m, b, f, _aliado, fonte) => (u(f)[`toque${idx(b, fonte)}`] ? 0.93 : 1),
+      causa: (_m, _b, f) => 1 + 0.04 * (u(f).roubos ?? 0),
+      recebeAliado: (_m, b, f, _aliado, fonte) => (u(f)[`toque${idx(b, fonte)}`] ? 0.96 : 1),
     },
   },
   gambit: {

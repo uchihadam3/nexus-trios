@@ -167,16 +167,16 @@ export const LOTE6: Record<string, Unica> = {
   },
   saga: {
     nome: 'Duas vontades',
-    texto: 'Troca de personalidade a cada 15 s. Lado bom: o trio fica Protegido 15%. Lado mau: Saga causa 35% a mais e os rivais ficam Enfraquecidos 10%.',
+    texto: 'Troca de personalidade a cada 15 s. Lado bom: o trio fica Protegido 10%. Lado mau: Saga causa 20% a mais e os rivais ficam Enfraquecidos 6%.',
     ganchos: {
       passo(m, b, f, dt) {
         if (!relogio(f, 'vontade', dt, 15, 0.1)) return;
         const mau = (u(f).lado = ((u(f).lado ?? 1) + 1) % 2) === 1;
-        if (mau) m.efeitos(b, f, m.rivais(b, f), [st('weakened', 0.1, 15)]);
-        else m.efeitos(b, f, m.aliados(b, f), [st('protected', 0.15, 15)]);
+        if (mau) m.efeitos(b, f, m.rivais(b, f), [st('weakened', 0.06, 15)]);
+        else m.efeitos(b, f, m.aliados(b, f), [st('protected', 0.1, 15)]);
         m.aviso(b, f, mau ? 'Lado mau' : 'Lado bom', f);
       },
-      causa: (_m, _b, f) => (u(f).lado === 1 ? 1.35 : 1),
+      causa: (_m, _b, f) => (u(f).lado === 1 ? 1.2 : 1),
     },
   },
   docinho: {
