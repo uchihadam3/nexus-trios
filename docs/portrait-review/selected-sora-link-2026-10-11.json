@@ -1,0 +1,16 @@
+[
+  {
+    "id": "sora",
+    "source": "assets/ai-source/portraits/overrides/sora.webp",
+    "original_attachment": "109659-kingdom-hearts-sora-photos-free-transparent-image-hd.png",
+    "approval": "Selected by user via attached image on 2026-10-11",
+    "sha256": "fdf5b003ed47fb52099dd3ab746ef54da571b3357882c7986126d2346847aabd"
+  },
+  {
+    "id": "link",
+    "source": "assets/ai-source/portraits/overrides/link.webp",
+    "original_attachment": "Link.(Breath.of.the.Wild).1024.2278542.webp",
+    "approval": "Selected by user via attached image on 2026-10-11",
+    "sha256": "3e8cc5078fa201822a28dce255a163e0f21269c7ba935fb5e6cf9025eec6b41d"
+  }
+]
