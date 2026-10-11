@@ -1,4 +1,5 @@
 import { byId } from '../data/characters';
+import { COMBOS_DOS_RIVAIS, ESCUDO_DO_COMBO, FORCA_DOS_COMBOS, SEM_BONUS, combosDoTrio, type Bonus } from './combos';
 import { CHOQUE_DO_ELETRIFICADO, DEIXAM_VULNERAVEL, RITMO_DA_INVOCACAO, statuses } from '../data/statuses';
 import { random,shuffle } from './random';
 import { DOMINION as D, fracaoPorAlvo} from './dominion-config';
@@ -21,9 +22,17 @@ export function emit(b:Battle,e:Omit<BattleEvent,'id'|'time'>){b.events.push({..
 export function createBattle(player:string[],enemy:string[],seed=Date.now(),enemyScale=1):Battle {
   if(player.length!==3||enemy.length!==3||new Set(player).size!==3||new Set(enemy).size!==3||[...player,...enemy].some(id=>!byId[id]))throw new Error('Cada equipe precisa de três personagens diferentes e válidos.');
   const b:Battle={version:1,seed,rng:seed>>>0,time:0,fighters:[],dominion:0,momentum:0,events:[],nextEvent:1,winner:null,reason:'',finished:false,turns:0,lastLead:null};
+  // os combos do trio e o universo (src/engine/combos.ts): os dois lados ganham os seus
+  const doJogador=combosDoTrio(player),doRival=COMBOS_DOS_RIVAIS>0?combosDoTrio(enemy,FORCA_DOS_COMBOS*COMBOS_DOS_RIVAIS):{combos:[],bonus:Object.fromEntries(enemy.map(id=>[id,{...SEM_BONUS}])),nosRivais:{...SEM_BONUS}};
+  b.combos={player:doJogador.combos,enemy:doRival.combos};
   for(const side of ['player','enemy'] as Side[]) (side==='player'?player:enemy).forEach((id,slot)=>{
-    const c=byId[id], maxHp=Math.round(c.hp*(side==='enemy'?enemyScale:1));
-    b.fighters.push({uid:`${side}-${slot}`,characterId:id,side,slot,hp:maxHp,maxHp,action:random(b)*.12,skills:c.skills.map(()=>({charge:0,cooldown:0,executing:0,uses:0})),statuses:[],shields:[],cast:null,investigation:{},discovered:{},traitTimer:0,storedEnergy:0,stats:{damage:0,healing:0,protection:0,interrupts:0,skills:0,kills:0}});
+    // o bônus dos combos do próprio trio, menos o que os combos do outro trio tiram dele
+    const proprio=(side==='player'?doJogador:doRival).bonus[id]!,tirado=(side==='player'?doRival:doJogador).nosRivais;
+    const bonus=Object.fromEntries(Object.keys(proprio).map(k=>[k,proprio[k as keyof Bonus]-tirado[k as keyof Bonus]])) as unknown as Bonus;
+    const c=byId[id], maxHp=Math.round(c.hp*(side==='enemy'?enemyScale:1)*(1+bonus.vida));
+    // os combos de tempo em tempo que este lutador aplica (o primeiro sai depois de um intervalo inteiro)
+    const pulsos=(side==='player'?doJogador:doRival).combos.filter(k=>k.pulso&&k.dono===id).map(k=>({id:k.id,falta:k.pulso!.cada,pulso:k.pulso!}));
+    b.fighters.push({uid:`${side}-${slot}`,characterId:id,side,slot,hp:maxHp,maxHp,bonus,...(pulsos.length?{pulsos}:{}),action:random(b)*.12,skills:c.skills.map(()=>({charge:0,cooldown:0,executing:0,uses:0})),statuses:[],shields:bonus.escudo>0?[{amount:Math.round(maxHp*bonus.escudo),remaining:ESCUDO_DO_COMBO,source:`${side}-${slot}`}]:[],cast:null,investigation:{},discovered:{},traitTimer:0,storedEnergy:0,stats:{damage:0,healing:0,protection:0,interrupts:0,skills:0,kills:0}});
   });
   return b;
 }
@@ -160,7 +169,7 @@ function gain(b:Battle,f:Fighter,topic:Topic,amount:number,source?:Fighter){
   byId[f.characterId].skills.forEach((s,i)=>{
     const state=f.skills[i];
     if(state.cooldown>0||f.cast?.skill===i)return;
-    const delta=s.charge.filter(c=>c.on===topic).reduce((sum,c)=>sum+c.amount*amount,0);
+    const delta=s.charge.filter(c=>c.on===topic).reduce((sum,c)=>sum+c.amount*amount,0)*(1+(f.bonus?.carga??0));
     const before=state.charge;state.charge=clamp(state.charge+delta,0,100);
     if(before<100&&state.charge>=100)emit(b,{kind:'ready',source:f.uid,skill:i,label:s.name,visual:s.icon});
     if(delta>0&&state.charge>before&&topic!=='time'){
@@ -175,7 +184,7 @@ function trigger(b:Battle,f:Fighter,topic:Topic,source?:Fighter,amount=1){
   gain(b,f,topic,amount,source);
   const t=byId[f.characterId].trait;
   if(t.on===topic&&f.traitTimer<=0){
-    f.traitTimer=Math.max(t.cooldown,STEP);
+    f.traitTimer=Math.max(t.cooldown*(1-(f.bonus?.traco??0)),STEP);
     applyEffects(b,f,targets(b,f,t.target,t.effects),t.effects,amount);
   }
 }
@@ -273,13 +282,13 @@ function damage(b:Battle,source:Fighter,target:Fighter,raw:number,direto=true,la
   const devolvido=label==='Refletido'||label==='Espinhos';
   // Veneno e Sangramento são por dentro: passam por Exposto, Protegido e Escudo
   const interno=label==='Veneno'||label==='Sangramento';
-  const outgoing=devolvido||interno?raw:raw*(1+intensity(source,'strengthened'))*(1-intensity(source,'weakened'));
+  const outgoing=devolvido||interno?raw:raw*(1+intensity(source,'strengthened'))*(1-intensity(source,'weakened'))*(1+(source.bonus?.dano??0));
   // Congelado: o golpe direto quebra o gelo e entra mais forte
   const gelo=direto?intensity(target,'frozen'):0;
   if(gelo>0){target.statuses=target.statuses.filter(s=>s.id!=='frozen');label='Quebrou o gelo';}
   const beforeProtection=interno?outgoing:outgoing*(1+intensity(target,'exposed'))*(1+gelo);
   const protection=interno?0:intensity(target,'protected');
-  let amount=beforeProtection*(1-protection),blocked=beforeProtection-amount;
+  let amount=beforeProtection*(1-protection)*(interno?1:1-(target.bonus?.defesa??0)),blocked=beforeProtection-amount;
   // só o que é por dentro (Veneno, Sangramento) passa pelo Escudo; Marcado não atravessa mais (pedido do jogador)
   const atravessaEscudo=interno;
   if(!atravessaEscudo)for(const s of target.shields){const used=Math.min(s.amount,amount);s.amount-=used;amount-=used;blocked+=used;const owner=b.fighters.find(f=>f.uid===s.source);if(owner&&used>0){owner.stats.protection+=used;pressure(b,owner.side,D.event.usefulProtectionPerFullCondition*clamp(used/target.maxHp));emit(b,{kind:'block',source:owner.uid,target:target.uid,attacker:source.uid,label:'Bloqueio',value:used,visual:'shield'});trigger(b,owner,'protected',owner,used/100);}}
@@ -287,7 +296,8 @@ function damage(b:Battle,source:Fighter,target:Fighter,raw:number,direto=true,la
   if(protection>0){const owner=b.fighters.find(f=>f.uid===target.statuses.find(s=>s.id==='protected')?.source);if(owner){owner.stats.protection+=beforeProtection*protection;pressure(b,owner.side,D.event.usefulProtectionPerFullCondition*clamp(beforeProtection*protection/target.maxHp));emit(b,{kind:'block',source:owner.uid,target:target.uid,attacker:source.uid,label:'Proteção',value:beforeProtection*protection,visual:'shield'});trigger(b,owner,'protected',owner,beforeProtection*protection/100);}}
   const hpBefore=target.hp;
   // Última resistência: o golpe que derrubaria deixa com 1 de Vida, uma vez por luta
-  const resiste=byId[target.characterId].ultimaResistencia;
+  // o combo "segura" dá a Última resistência a quem não tem (fica com 1 de Vida e Protegido 30% por 3 s)
+  const resiste=byId[target.characterId].ultimaResistencia??((target.bonus?.segura??0)>0?{protegido:.3,duracao:3}:undefined);
   let resistiu=false;
   if(resiste&&!target.resistiu&&amount>=hpBefore&&hpBefore>1){amount=hpBefore-1;target.resistiu=true;resistiu=true;}
   const dealt=Math.min(hpBefore,amount);target.hp=Math.max(0,hpBefore-dealt);source.stats.damage+=dealt;
@@ -327,7 +337,7 @@ function damage(b:Battle,source:Fighter,target:Fighter,raw:number,direto=true,la
 }
 function healing(b:Battle,source:Fighter,target:Fighter,value:number,label='Recuperação'){
   if(!alive(target))return;
-  value*=1-Math.min(intensity(target,'cursed'),statuses.cursed.cap);
+  value*=(1-Math.min(intensity(target,'cursed'),statuses.cursed.cap))*(1+(source.bonus?.cura??0));
   const used=Math.min(target.maxHp-target.hp,value);target.hp+=used;source.stats.healing+=used;
   if(used>.01){pressure(b,source.side,D.event.usefulHealingPerFullCondition*clamp(used/target.maxHp));emit(b,{kind:'heal',source:source.uid,target:target.uid,label,value:used});}
 }
@@ -359,6 +369,8 @@ export function jeitoDeBater(b:Battle,f:Fighter,alvo:Fighter,j:JeitoDeBater,dano
     if(ferido.hp<ferido.maxHp)healing(b,f,ferido,dano*j.fracao,'Golpe que cura');
     return;
   }
+  // Roubo de vida no golpe: parte do dano volta como Vida para quem bateu (os vampiros)
+  if(j.tipo==='dreno'){if(dano>0&&f.hp<f.maxHp)healing(b,f,f,dano*j.fracao,'Roubo de vida');return;}
   if(j.tipo==='escudo'){
     if(dano<=0)return;
     f.shields.push({amount:dano*j.fracao,remaining:6,source:f.uid});
@@ -441,8 +453,10 @@ export function applyEffects(b:Battle,source:Fighter,selected:Fighter[],effects:
           const barreira=target.side!==source.side&&negativeStatuses.has(effect.status)?target.statuses.find(s=>s.id==='barrier'):undefined;
           if(barreira){barreira.intensity-=1;if(barreira.intensity<.5)target.statuses=target.statuses.filter(s=>s!==barreira);emit(b,{kind:'resist',source:target.uid,target:target.uid,label:'Barreira',status:effect.status});break;}
           const def=statuses[effect.status],existing=target.statuses.find(s=>s.id===effect.status);
-          if(existing){existing.remaining=Math.max(existing.remaining,effect.duration);existing.duration=Math.max(existing.duration??0,effect.duration);existing.intensity=Math.min(def.cap,def.stack==='add'?existing.intensity+effect.value:Math.max(existing.intensity,effect.value));existing.source=source.uid;}
-          else target.statuses.push({id:effect.status,remaining:effect.duration,duration:effect.duration,intensity:Math.min(def.cap,effect.value),source:source.uid});
+          // combos: os Status de quem tem "duracao" duram mais; os ruins em quem tem "resiste" duram menos
+          const fator=effect.status==='summon'||effect.status==='bomb'?1:(1+(source.bonus?.duracao??0))*(target.side!==source.side&&negativeStatuses.has(effect.status)?1-(target.bonus?.resiste??0):1),duracao:number=effect.duration*fator;
+          if(existing){existing.remaining=Math.max(existing.remaining,duracao);existing.duration=Math.max(existing.duration??0,duracao);existing.intensity=Math.min(def.cap,def.stack==='add'?existing.intensity+effect.value:Math.max(existing.intensity,effect.value));existing.source=source.uid;}
+          else target.statuses.push({id:effect.status,remaining:duracao,duration:duracao,intensity:Math.min(def.cap,effect.value),source:source.uid});
           /*
            * A duração vai no evento para o Raio-X não precisar adivinhá-la.
            *
@@ -452,13 +466,13 @@ export function applyEffects(b:Battle,source:Fighter,selected:Fighter[],effects:
            * seja, inventar causalidade, que é exatamente o que a direção
            * proibiu. Com ela, a resposta é exata.
            */
-          emit(b,{kind:'status',source:source.uid,target:target.uid,label:def.name,status:effect.status,value:effect.duration});
-          if(target.side!==source.side)source.stats.debuffs=(source.stats.debuffs??0)+effect.duration;else source.stats.buffs=(source.stats.buffs??0)+effect.duration;
+          emit(b,{kind:'status',source:source.uid,target:target.uid,label:def.name,status:effect.status,value:duracao});
+          if(target.side!==source.side)source.stats.debuffs=(source.stats.debuffs??0)+duracao;else source.stats.buffs=(source.stats.buffs??0)+duracao;
           if(target.side!==source.side){const weight=effect.status==='paralyzed'?1:effect.status==='rooted'?.65:effect.status==='slow'?.35:effect.status==='silenced'?.55:effect.status==='provoked'?.4:effect.status==='frozen'?.9:effect.status==='sleep'?.7:['blind','poison','bleed','cursed'].includes(effect.status)?.35:['exposed','marked','electric','burning'].includes(effect.status)?.3:0;if(weight)pressure(b,source.side,D.event.statusApplied*weight);}
           // Status events only charge observers; they cannot recursively execute other traits.
           const negative=target.side!==source.side&&negativeStatuses.has(effect.status);
           for(const f of friendly(b,source)){gain(b,f,'status',1,source);if(negative)gain(b,f,'negativeStatus',1,source);}
-          if(target.side!==source.side){for(const f of friendly(b,source)){const t=byId[f.characterId].trait;if((t.on==='status'||negative&&t.on==='negativeStatus')&&f.traitTimer<=0){f.traitTimer=Math.max(t.cooldown,STEP);applyEffects(b,f,targets(b,f,t.target),t.effects);}}}
+          if(target.side!==source.side){for(const f of friendly(b,source)){const t=byId[f.characterId].trait;if((t.on==='status'||negative&&t.on==='negativeStatus')&&f.traitTimer<=0){f.traitTimer=Math.max(t.cooldown*(1-(f.bonus?.traco??0)),STEP);applyEffects(b,f,targets(b,f,t.target),t.effects);}}}
           break;
         }
         case 'interrupt':{
@@ -647,6 +661,7 @@ export function stepBattle(b:Battle,observe?:(snapshot:Battle)=>void):Battle {
     f.statuses=f.statuses.filter(s=>s.remaining>0);f.shields.forEach(s=>s.remaining-=STEP);f.shields=f.shields.filter(s=>s.remaining>0&&s.amount>0);
     f.skills.forEach(s=>{s.cooldown=Math.max(0,s.cooldown-STEP);s.executing=Math.max(0,s.executing-STEP);});
     trigger(b,f,'time',undefined,STEP);trigger(b,f,'survived',undefined,STEP);
+    for(const p of f.pulsos??[]){p.falta-=STEP;if(p.falta<=1e-6){p.falta+=p.pulso.cada;applyEffects(b,f,targets(b,f,p.pulso.alvo,p.pulso.efeitos),p.pulso.efeitos);}}
     if(b.dominion*sign(f)<-3)trigger(b,f,'losing',undefined,STEP);else if(b.dominion*sign(f)>3)trigger(b,f,'winning',undefined,STEP);
   }
   observe?.(b);
@@ -664,13 +679,13 @@ export function stepBattle(b:Battle,observe?:(snapshot:Battle)=>void):Battle {
       const selectedSkill=decideSkill(b,f);
       if(selectedSkill!==null){
         const i=selectedSkill,s=c.skills[i],list=targets(b,f,s.target,s.effects);
-        if(s.preparation>0){f.cast={skill:i,elapsed:0,duration:s.preparation,targets:list.map(x=>x.uid)};emit(b,{kind:'cast',source:f.uid,target:list[0]?.uid,skill:i,label:s.name,visual:s.icon});if(s.preparation>PREPARO_LEVE)for(const opponent of hostile(b,f))trigger(b,opponent,'enemyCast',f);}
+        if(s.preparation>0){f.cast={skill:i,elapsed:0,duration:s.preparation*(1-(f.bonus?.preparo??0)),targets:list.map(x=>x.uid)};emit(b,{kind:'cast',source:f.uid,target:list[0]?.uid,skill:i,label:s.name,visual:s.icon});if(s.preparation>PREPARO_LEVE)for(const opponent of hostile(b,f))trigger(b,opponent,'enemyCast',f);}
         else execute(b,f,i,list);
         resolve(b);observe?.(b);if(b.finished)break;
         continue;
       }
     }
-    f.action+=STEP*rate/c.interval;
+    f.action+=STEP*rate*(1+(f.bonus?.ritmo??0))/c.interval;
     if(f.action>=1){
       f.action-=1;
       const selected=intensity(f,'confused')&&random(b)<.25?[f]:targets(b,f,c.basic.target,c.basic.effects);
@@ -682,7 +697,9 @@ export function stepBattle(b:Battle,observe?:(snapshot:Battle)=>void):Battle {
       if(cego>0&&selected[0]&&selected[0].side!==f.side&&random(b)<Math.min(cego,statuses.blind.cap))emit(b,{kind:'miss',source:f.uid,target:selected[0].uid,label:'Errou'});
       else{
         const antes=f.stats.damage;
-        applyEffects(b,f,selected,especial?golpeDaSerie(c.basic.effects,especial):c.basic.effects);
+        // combo de ataque básico: o dano do golpe normal sobe (ou cai, se o combo do rival tira)
+        const basicos=(especial?golpeDaSerie(c.basic.effects,especial):c.basic.effects).map(e=>e.kind==='damage'&&f.bonus?.basico?{...e,value:e.value*(1+f.bonus.basico)}:e);
+        applyEffects(b,f,selected,basicos);
         if(jeito&&selected[0]&&selected[0].side!==f.side)jeitoDeBater(b,f,selected[0],jeito,f.stats.damage-antes);
       }
       sangra(b,f);

@@ -2,7 +2,7 @@ import { characters } from '../data/characters';
 import type { Character } from '../engine/types';
 
 /*
- * Conquistas (pedido do jogador): uma para cada personagem, 250 no total.
+ * Conquistas (pedido do jogador): uma para cada personagem, 400 no total.
  *
  * Libera quando você termina as 10 lutas de uma Jornada com o personagem no
  * trio. Só a primeira vez conta: jogar de novo com quem já está liberado não
@@ -16,28 +16,35 @@ import type { Character } from '../engine/types';
 export type Conquistas = Record<string, string>;
 
 /* As abas da tela: cada universo cai em uma. */
-export type Aba = 'anime' | 'herois' | 'games' | 'desenhos';
+export type Aba = 'anime' | 'herois' | 'games' | 'desenhos' | 'filmes';
 export const ABAS: readonly { id: Aba; nome: string; cor: string }[] = [
   { id: 'anime', nome: 'Anime', cor: '#ff7a8a' },
   { id: 'herois', nome: 'Heróis', cor: '#6fb4ff' },
   { id: 'games', nome: 'Games', cor: '#8de06a' },
   { id: 'desenhos', nome: 'Desenhos', cor: '#ffc65a' },
+  // lote 7: filmes, terror e os deuses das mitologias
+  { id: 'filmes', nome: 'Filmes e Mitos', cor: '#c69aff' },
 ];
 const ANIME = new Set(['Dragon Ball', 'Naruto', 'One Piece', 'Jujutsu Kaisen', 'Death Note', 'Pokémon', 'One Punch Man', 'Demon Slayer', 'Bleach',
   'Attack on Titan', 'Hunter x Hunter', 'Fullmetal Alchemist', 'Berserk', 'JoJo', 'Chainsaw Man', 'Frieren', 'Spy x Family', 'Solo Leveling',
-  'Tokyo Ghoul', 'Yu-Gi-Oh!', 'Cavaleiros do Zodíaco', 'Yu Yu Hakusho', 'Sailor Moon']);
+  'Tokyo Ghoul', 'Yu-Gi-Oh!', 'Cavaleiros do Zodíaco', 'Yu Yu Hakusho', 'Sailor Moon', 'My Hero Academia', 'Mob Psycho 100', 'Slime', 'Overlord',
+  'Code Geass', 'Inuyasha', 'Samurai X', 'Fairy Tail', 'Black Clover', 'Re:Zero', 'Sword Art Online', 'Cowboy Bebop', 'Trigun', 'Dr. Stone']);
 const HEROIS = new Set(['Marvel', 'DC', 'Image', 'Dark Horse']);
 const GAMES = new Set(['Final Fantasy VII', 'God of War', 'The Legend of Zelda', 'Metroid', 'Devil May Cry', 'Bayonetta', 'Halo', 'DOOM', 'Metal Gear',
   'Metal Gear Rising', 'Resident Evil', 'Tomb Raider', "Assassin's Creed", 'Sonic the Hedgehog', 'Mega Man', 'Mega Man X', 'Super Mario',
   'Street Fighter', 'Mortal Kombat', 'Tekken', 'Kingdom Hearts', 'NieR: Automata', 'Sekiro', 'Elden Ring', 'Hitman', 'Warcraft', 'The Witcher',
-  'Dead Space', 'Half-Life', 'Ninja Gaiden', 'Silent Hill', 'Kirby', 'Donkey Kong', 'Castlevania', 'Prince of Persia']);
-export const abaDo = (c: Character): Aba => (ANIME.has(c.universe) ? 'anime' : HEROIS.has(c.universe) ? 'herois' : GAMES.has(c.universe) ? 'games' : 'desenhos');
+  'Dead Space', 'Half-Life', 'Ninja Gaiden', 'Silent Hill', 'Kirby', 'Donkey Kong', 'Castlevania', 'Prince of Persia', 'Minecraft', 'Pac-Man',
+  'Crash Bandicoot', 'Red Dead Redemption', 'The Last of Us', 'Undertale', 'Cuphead', 'Skyrim', 'Hollow Knight']);
+const FILMES = new Set(['Mitologia Grega', 'Mitologia Egípcia', 'Mitologia Nórdica', 'Sexta-Feira 13', 'A Hora do Pesadelo', 'Halloween', 'Brinquedo Assassino', 'It',
+  'Pânico', 'O Massacre da Serra Elétrica', 'Hellraiser', 'O Chamado', 'Invocação do Mal', 'Alien', 'Predador', 'Star Wars', 'Matrix', 'John Wick',
+  'O Exterminador do Futuro', 'RoboCop', 'Rambo', 'Indiana Jones', 'Piratas do Caribe', 'Harry Potter', 'O Senhor dos Anéis', 'Monsterverse', 'Shrek']);
+export const abaDo = (c: Character): Aba => (ANIME.has(c.universe) ? 'anime' : HEROIS.has(c.universe) ? 'herois' : GAMES.has(c.universe) ? 'games' : FILMES.has(c.universe) ? 'filmes' : 'desenhos');
 
 /* Os personagens de cada aba, agrupados por universo (os maiores primeiro) e, dentro dele, por nome. */
 export const PERSONAGENS_DA_ABA: Record<Aba, Character[]> = (() => {
   const tamanho = new Map<string, number>();
   for (const c of characters) tamanho.set(c.universe, (tamanho.get(c.universe) ?? 0) + 1);
-  const r = { anime: [], herois: [], games: [], desenhos: [] } as Record<Aba, Character[]>;
+  const r = { anime: [], herois: [], games: [], desenhos: [], filmes: [] } as Record<Aba, Character[]>;
   for (const c of characters) r[abaDo(c)].push(c);
   for (const lista of Object.values(r)) lista.sort((a, b) => tamanho.get(b.universe)! - tamanho.get(a.universe)! || a.universe.localeCompare(b.universe, 'pt-BR') || a.name.localeCompare(b.name, 'pt-BR'));
   return r;

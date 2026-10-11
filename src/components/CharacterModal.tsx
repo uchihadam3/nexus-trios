@@ -12,6 +12,7 @@ import { ComTermos,TermoBotao } from './Termos';
 import { termoPorId } from '../presentation/glossario';
 import { pontoFraco,type TipoDeFraqueza } from '../data/ponto-fraco';
 import { pontoForte,type TipoDeForca } from '../data/ponto-forte';
+import { universoDaFicha } from '../data/equipes';
 
 const ICONE_DA_FRAQUEZA:Record<TipoDeFraqueza,LucideIcon>={cai:TrendingDown,golpe:Skull,rara:Hourglass,espera:Clock,preparo:Scissors,demora:Timer,lento:Turtle,dano:Sword,espalha:Shuffle,apanhar:Bomb};
 const ICONE_DA_FORCA:Record<TipoDeForca,LucideIcon>={dano:Swords,nocaute:Skull,cura:Heart,escudo:Shield,controle:Lock,ritmo:Gauge,carga:BatteryCharging,corte:Scissors,reforco:ShieldPlus,reviver:HandHeart,aguenta:Mountain,agil:Sparkles,cedo:Rocket,rapido:Zap,equilibrado:Award};
@@ -47,7 +48,7 @@ export function CharacterModal({character:c,onClose}:{character:Character;onClos
     <button className="icon-button modal-close" aria-label="Fechar detalhes" onClick={onClose}><X size={20}/></button>
     <header className="fv-hero">
       <div className="fv-retrato"><Portrait character={c}/></div>
-      <div className="fv-titulo"><span className="fv-universo">{c.universe}</span><h2>{c.name}</h2><p>{c.idea}</p></div>
+      <div className="fv-titulo"><span className="fv-universo">{universoDaFicha(c)}</span><h2>{c.name}</h2><p>{c.idea}</p></div>
     </header>
     <IdentityChips ids={identidadesDe(c)}/>
     <div className="fv-atributos">

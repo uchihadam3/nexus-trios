@@ -21,6 +21,9 @@ const st = (status: StatusId, value: number, duration: number, target?: Target):
 
 type T = [nome: string, on: Topic, cooldown: number, target: Target, effects: Effect[]];
 export const TRACOS: Record<string, T> = {
+  // equilíbrio dos combos (pedido do jogador: ninguém acima de 7% no trio aleatório): o mesmo traço, mais espaçado e um pouco mais fraco
+  billcipher: ['Acordo', 'status', 3.1, 'enemyStrong', [st('exposed', 0.1, 7), st('confused', 0.09, 6)]],
+  jill: ['Resistência adquirida', 'allyHurt', 3.1, 'allyWeak', [cura(22, 'allyWeak'), st('regen', 4.5, 6, 'allyWeak')]],
   // ---------------------------------------------------------------- anime
   gohan: ['Potencial despertado', 'allyHurt', 4, 'self', [st('strengthened', 0.08, 5)]],
   ichigo: ['Instinto Hollow', 'received', 3, 'self', [sh(0.1), st('strengthened', 0.05, 5)]],
@@ -40,8 +43,11 @@ export const TRACOS: Record<string, T> = {
   roy: ['Faísca de oxigênio', 'dealt', 3, 'enemyWeak', [st('burning', 8, 4)]],
   jotaro: ['Yare yare daze', 'received', 3, 'enemyStrong', [dano(40, 'enemyStrong')]],
   dio: ['Tempo parado', 'enemyCast', 2, 'enemyCast', [sh(-0.08, 'enemyCast')]],
-  makima: ['Contrato de transferência', 'allyHurt', 3, 'self', [cura(15)]],
-  anya: ['Telepatia de alerta', 'allyHurt', 2, 'allyWeak', [sh(0.06, 'allyWeak')]],
+  deadpool: ['Ainda falando', 'time', 2, 'self', [cura(12), st('provoked', 1, 1, 'enemyStrong')]], // não cala a boca: o rival forte só quer bater nele (e ele se regenera)
+  makima: ['Contrato de transferência', 'received', 3, 'self', [cura(15), st('protected', 0.25, 3, 'self')]], // o golpe nela vai para um cidadão do contrato
+  // lê a mente do rival que se prepara e avisa o aliado: ele já sabe para onde desviar
+  professorx: ['Rede de coordenação', 'action', 1.5, 'allAllies', [ch(3), st('strengthened', 0.1, 2, 'allAllies')]], // o Cérebro liga as mentes: o trio age junto e acerta melhor
+  anya: ['Telepatia de alerta', 'enemyCast', 3, 'allyWeak', [st('evasion', 0.38, 3, 'allAllies'), st('exposed', 0.15, 3, 'enemyCast')]], // (Esquiva 30% → 38%, Exposto 12% → 15%: equilíbrio) lê a mente de quem prepara: avisa o trio inteiro e mostra onde bater
   yor: ['Golpe na veia', 'dealt', 3, 'enemyWeak', [st('bleed', 8, 5)]],
   cloud: ['Barra de Limite', 'received', 1.4, 'self', [{ kind: 'store', value: 27, cap: 433, target: 'self' }]],
   tifa: ['Combo crescente', 'dealt', 1.2, 'self', [sh(0.06, 'self')]],
@@ -50,7 +56,8 @@ export const TRACOS: Record<string, T> = {
   cell: ['Absorção perfeita', 'dealt', 1.8, 'self', [ch(5), cura(12)]],
   beerus: ['Deus da Destruição', 'enemyHurt', 2.5, 'enemyWeak', [st('marked', 0.12, 8)]],
   seiya: ['Cosmo que não se apaga', 'losing', 4, 'self', [cura(20)]],
-  shiryu: ['Defesa do Dragão', 'allyHurt', 4, 'allyWeak', [esc(53, 'allyWeak')]],
+  // o Escudo do Dragão: chama o golpe mais forte para si e segura
+  shiryu: ['Defesa do Dragão', 'allyHurt', 5, 'enemyStrong', [st('provoked', 1, 2.5, 'enemyStrong'), esc(45, 'self')]],
   shun: ['Rede de Andrômeda', 'negativeStatus', 3, 'enemyStrong', [st('rooted', 0.1, 4)]],
   camus: ['Rumo ao Zero Absoluto', 'time', 5, 'enemyStrong', [st('slow', 0.08, 5)]],
   hadescz: ['Domínio do submundo', 'time', 5, 'allEnemies', [st('cursed', 0.06, 6, 'allEnemies')]],
@@ -61,7 +68,7 @@ export const TRACOS: Record<string, T> = {
   charizard: ['Blaze', 'losing', 2, 'self', [st('strengthened', 0.08, 5)]],
   omniman: ['Sangue viltrumita', 'enemyHurt', 2.5, 'enemyWeak', [st('exposed', 0.08, 5)]],
   // ---------------------------------------------------------------- quadrinhos
-  scarletwitch: ['Magia do caos', 'action', 3, 'randomEnemy', [st('confused', 0.1, 3)]],
+  scarletwitch: ['Magia do caos', 'action', 3, 'randomEnemy', [dano(34, 'randomEnemy'), st('confused', 0.1, 3)]], // o caos também morde
   daredevil: ['Sentido de radar', 'enemyCast', 2, 'self', [sh(0.08)]],
   punisher: ['Arsenal sem fim', 'time', 5, 'self', [ch(10)]],
   ghostrider: ['Fogo do inferno', 'received', 2, 'enemyStrong', [st('burning', 10, 4, 'enemyStrong')]],
@@ -102,7 +109,8 @@ export const TRACOS: Record<string, T> = {
   kazuya: ['Gene do Diabo', 'losing', 3, 'self', [st('strengthened', 0.07, 6)]],
   tuob: ['Pod de apoio', 'time', 4, 'enemyStrong', [dano(30, 'enemyStrong')]],
   agent47: ['Na multidão', 'enemyCast', 2, 'enemyCast', [sh(-0.1, 'enemyCast')]],
-  kirby: ['Barriga sem fundo', 'dealt', 1.8, 'self', [ch(5), cura(17)]],
+  // divide a comida com quem está pior
+  kirby: ['Barriga sem fundo', 'dealt', 1.8, 'self', [ch(5), cura(17, 'allyWeak')]],
   donkeykong: ['Batida no peito', 'received', 3, 'self', [st('strengthened', 0.06, 5)]],
   simonbelmont: ['Água benta no bolso', 'time', 5, 'enemyStrong', [st('burning', 8, 4, 'enemyStrong')]],
   // ---------------------------------------------------------------- desenhos e outros
@@ -123,7 +131,8 @@ export const TRACOS: Record<string, T> = {
   frozone: ['Gelo instantâneo', 'allyHurt', 4, 'allyWeak', [esc(50, 'allyWeak')]],
   mulherelastica: ['Abraço elástico', 'allyHurt', 4, 'allyWeak', [esc(59, 'allyWeak')]],
   optimus: ['Proteger os humanos', 'allyHurt', 4, 'allyWeak', [esc(45, 'allyWeak')]],
-  popeye: ['Vontade de espinafre', 'received', 1.4, 'self', [{ kind: 'store', value: 28, cap: 458, target: 'self' }]],
+  // o espinafre guarda a força e fecha as feridas
+  popeye: ['Vontade de espinafre', 'received', 1.4, 'self', [{ kind: 'store', value: 28, cap: 458, target: 'self' }, st('regen', 6, 3)]],
   bobesponja: ['Esponja que absorve', 'received', 2, 'self', [cura(16)]],
   scooby: ['Scooby-lanche', 'losing', 3, 'self', [cura(18)]],
   mickey: ['Chapéu de feiticeiro', 'action', 3, 'self', [ch(5)]],
@@ -132,7 +141,7 @@ export const TRACOS: Record<string, T> = {
   rick: ['Portal de fuga', 'received', 4, 'self', [st('evasion', 0.12, 3)]],
   picapau: ['Ha-ha-ha-HA-ha!', 'enemyCast', 1.8, 'enemyCast', [st('confused', 0.1, 5), ch(5)]],
   patolino: ['Desprezível!', 'received', 3, 'self', [ch(8)]],
-  pernalonga: ['Buraco de coelho', 'received', 1.6, 'self', [sh(0.12, 'self'), cura(23)]],
+  pernalonga: ['Buraco de coelho', 'received', 1.6, 'self', [sh(0.12, 'self'), cura(23), st('evasion', 0.3, 1.6, 'self'), st('provoked', 1, 1.6, 'enemyStrong')]], // "O que é que há, velhinho?": chama o golpe e some no buraco
   tom: ['Perseguição sem fim', 'dealt', 3, 'enemyWeak', [st('marked', 0.08, 7)]],
   jerry: ['Esconderijo na parede', 'received', 1.6, 'self', [sh(0.12, 'self'), cura(21)]],
   pantera: ['Passo de veludo', 'enemyCast', 2, 'enemyCast', [sh(-0.1, 'enemyCast')]],

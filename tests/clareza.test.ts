@@ -30,8 +30,8 @@ const linhasDaFicha = (): { quem: string; onde: string; linha: string }[] =>
 describe('clareza da escrita pública', () => {
   const todas = linhasDaFicha();
 
-  it('cobre a ficha inteira dos 250', () => {
-    expect(characters).toHaveLength(250);
+  it('cobre a ficha inteira dos 400', () => {
+    expect(characters).toHaveLength(400);
     /* traço + 3 habilidades × (efeitos + carga): nunca menos que 4 linhas por lutador. */
     expect(todas.length).toBeGreaterThan(characters.length * 4);
   });

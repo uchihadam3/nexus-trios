@@ -76,12 +76,18 @@ describe('Arte local e composição',()=>{
     expect(sheetManifest.count).toBe(characters.length*3);
     expect(sheetManifest.pages).toHaveLength(characters.length);
     expect(sheetManifest.pages.every(page=>page.resolution[0]===512&&page.resolution[1]===176&&page.columns===3&&page.rows===1&&page.cell[0]===160&&page.cell[1]===160&&page.icons.length===3&&existsSync(new URL(page.sourceSheet.slice(1),root)))).toBe(true);
-    const expanded=manifest.skills.slice(300) as (typeof manifest.skills[number]&{artMethod:string})[];
+    /*
+     * Os 250 primeiros têm a arte final; os 150 dos lotes 6 e 7 (até 400) entram com ícone placeholder
+     * e esperam a arte que o jogador vai fazer a partir do nome de cada habilidade.
+     */
+    const comArte=new Set(characters.slice(0,250).map(c=>c.id));
+    const expanded=manifest.skills.filter(skill=>comArte.has(skill.character)).slice(300) as (typeof manifest.skills[number]&{artMethod:string})[];
     expect(expanded.filter(skill=>skill.artMethod==='AI sheet')).toHaveLength(447);
     expect(expanded.filter(skill=>skill.artMethod==='object illustration')).toHaveLength(3);
     expect(expanded.every(skill=>!('placeholder' in skill)&&['AI sheet','object illustration'].includes(skill.artMethod))).toBe(true);
-    expect(sheetManifest.pages.slice(100).every(page=>!('placeholder' in page))).toBe(true);
-    for(const character of characters.slice(100).filter(character=>character.id!=='mario')){
+    expect(sheetManifest.pages.slice(100,250).every(page=>!('placeholder' in page))).toBe(true);
+    expect(sheetManifest.pages.slice(250).every(page=>'placeholder' in page)).toBe(true);
+    for(const character of characters.slice(100,250).filter(character=>character.id!=='mario')){
       expect(existsSync(new URL(`../assets/ai-source/skills/${character.id}.png`,root)),character.id).toBe(true);
     }
   });

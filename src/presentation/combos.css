@@ -1,0 +1,142 @@
+/* Os combos do trio (src/components/CombosDoTrio.tsx): medalhas, abertura da luta e álbum. */
+
+/* a medalha de um combo */
+.cb-lista{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.cb-medalha{position:relative;display:flex;gap:10px;align-items:center;padding:8px 12px 8px 8px;border-radius:16px;text-align:left;
+  background:linear-gradient(100deg,color-mix(in srgb,var(--cb) 22%,#0b131b),#0b131b 70%);border:1px solid color-mix(in srgb,var(--cb) 55%,transparent);
+  box-shadow:inset 0 1px 0 #ffffff14;animation:cb-entra .55s cubic-bezier(.2,1.4,.4,1) both;animation-delay:calc(var(--i,0) * 90ms)}
+.cb-icone{position:relative;flex:none;display:grid;place-items:center;width:42px;height:42px;border-radius:50%;color:#0b131b;
+  background:radial-gradient(circle at 35% 30%,#fff 0,color-mix(in srgb,var(--cb) 85%,#fff) 30%,var(--cb) 62%,color-mix(in srgb,var(--cb) 55%,#000) 100%);
+  box-shadow:0 0 0 2px #0b131b,0 0 0 3px color-mix(in srgb,var(--cb) 70%,transparent),0 0 16px color-mix(in srgb,var(--cb) 60%,transparent)}
+.cb-icone svg{position:relative;z-index:1}
+.cb-anel{position:absolute;inset:-6px;border-radius:50%;border:2px dashed color-mix(in srgb,var(--cb) 70%,transparent);animation:cb-gira 9s linear infinite}
+.cb-texto{display:grid;gap:2px;min-width:0}
+.cb-texto b{font-size:.86rem;color:#fff;letter-spacing:.3px}
+.cb-texto small{font-size:.74rem;font-weight:700;color:color-mix(in srgb,var(--cb) 70%,#fff)}
+.cb-quem{display:flex;align-items:center;gap:5px;margin-top:2px}
+.cb-quem i{font-style:normal;font-size:.8rem;color:color-mix(in srgb,var(--cb) 80%,#fff)}
+.cb-rostos{display:flex}
+.cb-rostos>*{width:24px;height:24px;border-radius:50%;overflow:hidden;border:1.5px solid #0b131b;box-shadow:0 0 0 1px color-mix(in srgb,var(--cb) 60%,transparent)}
+.cb-rostos>*+*{margin-left:-7px}
+.cb-rostos img{width:100%;height:100%;object-fit:cover}
+.cb-novo{position:absolute;top:-8px;right:10px;padding:2px 8px;border-radius:99px;background:var(--cb);color:#0b131b;font-size:.62rem;font-weight:900;letter-spacing:1px;animation:cb-pulo 1.2s ease-in-out infinite}
+.cb-vazio{margin:0;font-size:.78rem;color:#9fb3c2}
+
+/* a abertura da luta: "N COMBOS ATIVOS" e as medalhas entrando */
+.cb-abertura{position:absolute;left:0;right:0;top:50%;margin-top:-80px;z-index:60;padding:14px 0 16px;background:linear-gradient(180deg,transparent,#060b10e6 22%,#060b10e6 78%,transparent);display:grid;justify-items:center;gap:10px;pointer-events:auto;cursor:pointer;animation:cb-abertura 2.6s ease-in-out both}
+.cb-abertura strong{display:flex;align-items:center;gap:8px;padding:6px 18px;border-radius:99px;font-size:1rem;font-weight:900;letter-spacing:3px;color:#0b131b;
+  background:linear-gradient(90deg,#c8f560,#ffe36b,#c8f560);background-size:200% 100%;box-shadow:0 0 26px #c8f56099;animation:cb-brilho 1.2s linear infinite}
+.cb-abertura-medalhas{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;max-width:92vw}
+.cb-abertura-medalhas>span{display:grid;justify-items:center;gap:4px;width:74px;animation:cb-voa .6s cubic-bezier(.2,1.5,.4,1) both;animation-delay:calc(200ms + var(--i,0) * 140ms)}
+.cb-abertura-medalhas svg{box-sizing:content-box;padding:10px;border-radius:50%;color:#0b131b;background:radial-gradient(circle at 35% 30%,#fff,var(--cb) 60%,color-mix(in srgb,var(--cb) 50%,#000));box-shadow:0 0 0 2px #0b131b,0 0 18px var(--cb)}
+.cb-abertura-medalhas small b{color:var(--cb)}
+.cb-abertura-medalhas small{font-size:.66rem;font-weight:800;text-align:center;line-height:1.15;color:#fff;text-shadow:0 1px 3px #000,0 0 8px #000}
+
+/* na luta: o botão e o painel */
+.arena-combos{margin-top:6px;display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:99px;border:1px solid #c8f56077;background:#0c1a12d9;color:#e6ffc4;font-size:.68rem;font-weight:800;pointer-events:auto;cursor:pointer}
+.battle-combos h3{margin:12px 0 8px;font-size:.68rem;letter-spacing:1.5px;color:#9fb3c2}
+
+/* o Livro de Combos (Como jogar → Combos) como álbum */
+.cj-combos{display:grid;gap:10px;max-width:640px;margin:0 auto;padding:0 2px}
+.cj-combos-intro{margin:2px 0;color:#c3d2dd;font-size:.86rem;line-height:1.45}
+.cb-album{display:grid;gap:12px}
+.cb-album-topo{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;align-items:center;padding:12px 14px;border-radius:18px;background:linear-gradient(110deg,#1b2a10,#0f1a24 60%);border:1px solid #c8f56055}
+.cb-album-topo>b{grid-row:span 2;font-size:2rem;font-weight:900;color:#c8f560;line-height:1}
+.cb-album-topo>b small{font-size:1rem;color:#9fb3c2}
+.cb-album-topo>span{display:grid;gap:2px}
+.cb-album-topo strong{font-size:.72rem;letter-spacing:2px;color:#fff}
+.cb-album-topo span small{font-size:.76rem;color:#c3d2dd;line-height:1.35}
+.cb-album-barra{grid-column:2;height:8px;border-radius:99px;background:#ffffff14;overflow:hidden}
+.cb-album-barra i{display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,#8fd14f,#c8f560,#ffe36b);box-shadow:0 0 10px #c8f560aa;transition:width .6s}
+.cb-album-grade{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.cb-carta{position:relative;display:grid;align-content:start;justify-items:center;gap:6px;padding:14px 10px 12px;border-radius:18px;text-align:center;
+  background:linear-gradient(170deg,#1a2430,#0d141c);border:1px solid #ffffff1c;animation:cb-entra .5s ease-out both;animation-delay:calc(var(--i,0) * 40ms)}
+.cb-carta h3{margin:4px 0 0;font-size:.9rem;color:#fff}
+.cb-carta dl{margin:0;display:grid;gap:2px;width:100%}
+.cb-carta dt{font-size:.6rem;font-weight:900;letter-spacing:1.2px;text-transform:uppercase;color:#9fb3c2;margin-top:4px}
+.cb-carta dd{margin:0;font-size:.76rem;line-height:1.35;color:#d7e3ec}
+.cb-carta-bonus{margin:4px 0 0;padding:3px 10px;border-radius:99px;font-size:.74rem;font-weight:800;color:#0b131b;background:color-mix(in srgb,var(--cb) 85%,#fff)}
+.cb-carta:not(.acesa) .cb-icone{filter:grayscale(1) brightness(.55);box-shadow:0 0 0 2px #0b131b,0 0 0 3px #ffffff30}
+.cb-carta:not(.acesa) .cb-anel{border-color:#ffffff30;animation:none}
+.cb-carta:not(.acesa) .cb-carta-bonus{background:#ffffff1f;color:#c3d2dd}
+.cb-carta.acesa{background:linear-gradient(170deg,color-mix(in srgb,var(--cb) 24%,#1a2430),#0d141c 70%);border-color:color-mix(in srgb,var(--cb) 65%,transparent);box-shadow:0 0 18px color-mix(in srgb,var(--cb) 30%,transparent)}
+.cb-carta.acesa::after{content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:linear-gradient(115deg,transparent 40%,#ffffff22 50%,transparent 60%);background-size:250% 100%;animation:cb-reflexo 3.5s ease-in-out infinite}
+.cb-cadeado{position:absolute;top:44px;left:50%;transform:translateX(-50%);z-index:2;white-space:nowrap;display:inline-flex;align-items:center;gap:3px;padding:2px 7px;border-radius:99px;background:#00000066;border:1px solid #ffffff24;font-size:.6rem;font-weight:800;color:#9fb3c2;text-transform:uppercase;letter-spacing:.6px}
+
+@keyframes cb-entra{from{opacity:0;transform:translateY(8px) scale(.94)}to{opacity:1;transform:none}}
+@keyframes cb-gira{to{transform:rotate(360deg)}}
+@keyframes cb-pulo{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+@keyframes cb-brilho{to{background-position:-200% 0}}
+@keyframes cb-voa{from{opacity:0;transform:translateY(40px) scale(.4) rotate(-20deg)}to{opacity:1;transform:none}}
+@keyframes cb-abertura{0%{opacity:0;transform:scale(.8)}12%{opacity:1;transform:scale(1.04)}20%,82%{opacity:1;transform:none}100%{opacity:0;transform:translateY(-14px)}}
+@keyframes cb-reflexo{0%,60%{background-position:150% 0}100%{background-position:-100% 0}}
+@media (prefers-reduced-motion:reduce){
+  .cb-medalha,.cb-carta,.cb-abertura,.cb-abertura-medalhas>span,.cb-novo,.cb-anel,.cb-abertura strong,.cb-carta.acesa::after{animation:none}
+}
+
+/* combos de trio: medalha dourada com anel triplo */
+.cb-medalha.trio{background:linear-gradient(100deg,color-mix(in srgb,var(--cb) 30%,#1a1408),#0b131b 75%);border:1.5px solid color-mix(in srgb,var(--cb) 75%,#ffd36b);box-shadow:0 0 16px color-mix(in srgb,var(--cb) 35%,transparent),inset 0 1px 0 #ffffff22}
+.cb-medalha.trio .cb-icone{width:48px;height:48px;box-shadow:0 0 0 2px #0b131b,0 0 0 3px #ffd36b,0 0 0 5px #0b131b,0 0 0 6px color-mix(in srgb,var(--cb) 80%,transparent),0 0 22px var(--cb)}
+.cb-texto b em{font-style:normal;margin-right:6px;padding:1px 6px;border-radius:6px;font-size:.6rem;letter-spacing:1.2px;vertical-align:2px;color:#1a1408;background:linear-gradient(90deg,#ffd36b,#fff1b8,#ffd36b)}
+.cb-abertura-medalhas>span.trio{width:86px}
+.cb-abertura-medalhas>span.trio svg{padding:13px;box-shadow:0 0 0 2px #0b131b,0 0 0 4px #ffd36b,0 0 0 6px #0b131b,0 0 24px var(--cb)}
+/* o álbum: as duas seções e as cartas de trio */
+.cb-album-secao{margin:6px 2px 0;display:grid;gap:2px}
+.cb-album-secao span{font-size:.74rem;font-weight:900;letter-spacing:2px;color:#fff}
+.cb-album-secao small{font-size:.76rem;font-weight:400;color:#9fb3c2}
+.cb-album-grade.trios{grid-template-columns:repeat(auto-fill,minmax(230px,1fr))}
+.cb-carta.trio{border:1.5px solid #ffd36b40;background:linear-gradient(170deg,#221c10,#0d141c 70%)}
+.cb-carta.trio.acesa{border-color:#ffd36bcc;box-shadow:0 0 22px color-mix(in srgb,var(--cb) 40%,transparent)}
+.cb-carta.trio .cb-icone{width:50px;height:50px}
+.cb-carta.trio .cb-cadeado{top:52px}
+.cb-pecas-trio{list-style:none;margin:2px 0 0;padding:0;display:grid;gap:5px;width:100%;counter-reset:peca;text-align:left}
+.cb-pecas-trio li{position:relative;padding:6px 8px 6px 34px;border-radius:10px;background:#ffffff0d;border:1px solid #ffffff14;font-size:.76rem;line-height:1.35;color:#d7e3ec;counter-increment:peca}
+.cb-pecas-trio li::before{content:counter(peca);position:absolute;left:8px;top:50%;transform:translateY(-50%);width:19px;height:19px;border-radius:50%;display:grid;place-items:center;font-size:.68rem;font-weight:900;color:#1a1408;background:color-mix(in srgb,var(--cb) 70%,#ffd36b)}
+.cb-carta.trio:not(.acesa) .cb-pecas-trio li::before{background:#ffffff30;color:#c3d2dd}
+
+/* Livro de Combos: raridade, abas, extras (combos v3) */
+.cb-raridade{display:inline-flex;align-items:center;gap:3px;padding:2px 8px;border-radius:99px;font-size:.6rem;font-weight:900;letter-spacing:1px;text-transform:uppercase;border:1px solid var(--rc);color:var(--rc);background:color-mix(in srgb,var(--rc) 14%,transparent)}
+.cb-raridade.comum,.cb-carta.comum{--rc:#9fd3a8}
+.cb-raridade.raro,.cb-carta.raro{--rc:#6fb8ff}
+.cb-raridade.epico,.cb-carta.epico{--rc:#c58cff}
+.cb-raridade.lendario,.cb-carta.lendario{--rc:#ffd36b}
+.cb-legenda{display:flex;flex-wrap:wrap;align-items:center;gap:6px;padding:0 2px}
+.cb-legenda small{flex-basis:100%;font-size:.72rem;color:#9fb3c2}
+.cb-abas{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;position:sticky;top:0;z-index:3;padding:4px 0;background:linear-gradient(#0b131bee,#0b131bcc)}
+.cb-abas button{display:grid;justify-items:center;gap:1px;padding:8px 4px;border-radius:14px;border:1px solid #ffffff1c;background:#ffffff0a;color:#c3d2dd;font:inherit;cursor:pointer;min-height:56px}
+.cb-abas button span{font-size:.74rem;font-weight:900;letter-spacing:.4px}
+.cb-abas button small{font-size:.62rem;color:#9fb3c2}
+.cb-abas button.ativa{background:linear-gradient(170deg,#c8f56033,#0f1a24);border-color:#c8f560aa;color:#fff;box-shadow:0 0 14px #c8f56033}
+.cb-aba-dica{margin:0 2px;font-size:.78rem;line-height:1.4;color:#c3d2dd}
+.cb-faixa{display:grid;gap:8px}
+.cb-faixa .cb-album-secao{display:flex;align-items:center;gap:8px}
+.cb-carta{border-top:3px solid color-mix(in srgb,var(--rc,#ffffff30) 70%,transparent)}
+.cb-carta.epico.acesa,.cb-carta.lendario.acesa{box-shadow:0 0 22px color-mix(in srgb,var(--rc) 35%,transparent)}
+.cb-extras{list-style:none;margin:2px 0 0;padding:0;display:grid;gap:4px;width:100%;text-align:left}
+.cb-extras li{display:flex;gap:6px;align-items:flex-start;padding:5px 8px;border-radius:10px;font-size:.72rem;line-height:1.35}
+.cb-extras li svg{flex:none;margin-top:1px}
+.cb-extras .pulso{background:#6fd0ff14;border:1px solid #6fd0ff40;color:#cfeeff}
+.cb-extras .rivais{background:#ff6b8a14;border:1px solid #ff6b8a40;color:#ffd6de}
+.cb-par{display:flex;align-items:center;gap:6px}
+.cb-par .portrait{width:48px;height:48px;flex:none;border-radius:50%;overflow:hidden;box-shadow:0 0 0 2px #ffd36b}
+.cb-par .portrait img{width:100%;height:100%;object-fit:cover}
+.cb-par svg{color:#ffd36b;filter:drop-shadow(0 0 6px #ffd36b)}
+.cb-par-nomes{font-size:.72rem;color:#c3d2dd}
+.cb-carta.lenda{background:linear-gradient(170deg,#2a2210,#0d141c 70%)}
+.cb-carta.lenda:not(.acesa) .cb-par{filter:grayscale(.85) brightness(.7)}
+@media (max-width:420px){.cb-abas button{min-height:52px;padding:6px 2px}.cb-abas button span{font-size:.68rem}}
+.cb-album .cb-cadeado{top:8px;left:auto;right:8px;transform:none}
+.cb-album .cb-carta{padding-top:22px}
+
+/* blocos do que o combo dá: A LUTA TODA / A CADA X s / NOS RIVAIS */
+.cb-efeitos{list-style:none;margin:4px 0 0;padding:0;display:grid;gap:5px;width:100%;text-align:left}
+.cb-efeitos li{display:grid;gap:2px;padding:6px 9px 7px;border-radius:11px;border:1px solid var(--ef);background:color-mix(in srgb,var(--ef) 12%,#0d141c)}
+.cb-efeitos li b{display:inline-flex;align-items:center;gap:4px;font-size:.58rem;font-weight:900;letter-spacing:1.1px;color:var(--ef)}
+.cb-efeitos li span{font-size:.78rem;line-height:1.35;color:#eef5fa;font-weight:600}
+.cb-efeitos li em{font-style:normal;color:#9fb3c2;font-weight:700}
+.cb-efeitos .sempre{--ef:#c8f560}
+.cb-efeitos .pulso{--ef:#6fd0ff}
+.cb-efeitos .rivais{--ef:#ff7a95}
+/* a carta ainda não descoberta não fica apagada: só o ícone fica cinza, o cadeado avisa */
+.cb-album .cb-carta:not(.acesa) .cb-efeitos li{opacity:1}
+.cb-carta.lenda:not(.acesa) .cb-par{filter:saturate(.8)}

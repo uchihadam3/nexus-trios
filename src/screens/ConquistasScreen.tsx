@@ -8,6 +8,7 @@ import {PERSONAGENS_DA_ABA,PULOS_DO_DESAFIO,TOTAL_DE_CONQUISTAS,ateMeiaNoite,des
 import {Album} from '../components/Album';
 import {onlineCall,onlineConfigured,type RankingDeConquistas} from '../lib/online';
 import type {Profile} from '../lib/storage';
+import { universoDaFicha } from '../data/equipes';
 
 /*
  * As Conquistas (pedido do jogador): todos os personagens, um por conquista.
@@ -91,7 +92,7 @@ export function ConquistasScreen({profile,conta,onProfile,onRanking,onDesafio}:{
       <div className={`cq-ficha ${conquistas[aberto.id]?'liberada':'bloqueada'}`} style={{'--character':aberto.color} as CSSProperties}>
         <button className="cq-fechar" onClick={()=>setAberto(null)} aria-label="Fechar"><X size={18}/></button>
         <span className="cq-ficha-retrato"><Portrait character={aberto}/>{!conquistas[aberto.id]&&<Lock size={26}/>}</span>
-        <small className="cq-ficha-universo">{aberto.universe}</small>
+        <small className="cq-ficha-universo">{universoDaFicha(aberto)}</small>
         <h2>{aberto.name}</h2>
         {conquistas[aberto.id]
           ?<p className="cq-ficha-ok"><Award size={16}/>Conquista liberada em <b>{data(conquistas[aberto.id]!)}</b></p>

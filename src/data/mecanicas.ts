@@ -10,11 +10,24 @@ import type { Character, Effect, StatusId, Target } from '../engine/types';
 /** Reviver: a habilidade (índice) levanta o aliado caído mais forte com esta fração da Vida. */
 export const REVIVER: Record<string, { habilidade: number; vida: number }> = {
   sailormoon: { habilidade: 2, vida: 0.4 }, // o Cristal de Prata devolve o trio à luta
-  sora: { habilidade: 1, vida: 0.35 }, // Cura (Vida+): levanta quem caiu
+  sora: { habilidade: 1, vida: 0.27 }, // Cura (Vida+): levanta quem caiu (35% → 27%: equilíbrio dos combos)
   arthas: { habilidade: 1, vida: 0.3 }, // Erguer os mortos
   jinwoo: { habilidade: 0, vida: 0.3 }, // Extração de sombra: "Levante-se"
   giorno: { habilidade: 0, vida: 0.35 }, // Gold Experience cria vida
-  jill: { habilidade: 0, vida: 0.3 }, // o kit de primeiros socorros põe o parceiro de pé
+  jill: { habilidade: 0, vida: 0.22 }, // o kit de primeiros socorros põe o parceiro de pé (30% → 22%: equilíbrio dos combos)
+  // pedido do jogador: mais quem revive, cada um com o jeito dele (o efeito e o som em renascer-proprio.ts)
+  hadescz: { habilidade: 0, vida: 0.3 }, // Elísios: o deus do submundo devolve a alma
+  scarletwitch: { habilidade: 0, vida: 0.3 }, // Hex de probabilidade: a realidade reescrita, ele não caiu
+  pain: { habilidade: 0, vida: 0.3 }, // Caminho Deva (os Seis Caminhos): o Rinne Tensei devolve as almas aos corpos
+  rick: { habilidade: 0, vida: 0.3 }, // Pistola de portal: um clone novo sai do portal
+  constantine: { habilidade: 0, vida: 0.3 }, // Pacto: um acordo com o além
+  // lotes 6 e 7 (até 400): os curandeiros de verdade levantam quem caiu
+  orihime: { habilidade: 2, vida: 0.3 }, // Rejeição total: desfaz a queda
+  aerith: { habilidade: 2, vida: 0.3 }, // Grande bênção
+  anubis: { habilidade: 1, vida: 0.3 }, // Guia das almas: traz de volta do submundo
+  isis: { habilidade: 2, vida: 0.3 }, // Ressurreição (ela devolveu a vida a Osíris)
+  tsunade: { habilidade: 2, vida: 0.3 }, // Força de cem selos
+  shera: { habilidade: 1, vida: 0.35 }, // Pela honra de Grayskull: a Espada da Proteção levanta o aliado
 };
 
 /** Renascer: ao cair, volta sozinho depois de `atraso` segundos com esta fração da Vida. */
@@ -29,6 +42,7 @@ export const RENASCER: Record<string, { vida: number; atraso: number }> = {
   wolverine: { vida: 0.3, atraso: 3 }, // o fator de cura não deixa ele ficar no chão
   alucardcv: { vida: 0.35, atraso: 2 }, // vira névoa e se refaz
   muzan: { vida: 0.3, atraso: 2.5 }, // o corpo se remonta de qualquer pedaço
+  pain: { vida: 0.35, atraso: 3 }, // os Seis Caminhos: outro corpo assume a luta
 };
 
 /**
@@ -178,6 +192,21 @@ type Ajuste = { habilidade: number; muda?: (e: Effect) => Effect; soma?: Effect[
 const valor = (kind: Effect['kind'], status: StatusId | undefined, f: (e: Effect) => Effect) => (e: Effect) =>
   e.kind === kind && (!status || (e.kind === 'status' && e.status === status)) ? f(e) : e;
 export const PEDIDOS_DO_JOGADOR: Record<string, Ajuste[]> = {
+  /*
+   * Uma peça de combo para os lutadores fracos que não formavam combo nenhum (pedido do jogador: "o personagem
+   * que tá fraco… coloca uma coisa de combo nele"), sempre com a cara dele: sangue, fogo, raio, dinamite.
+   */
+  power: [{ habilidade: 0, soma: [{ kind: 'status', status: 'bleed', value: 8, duration: 6 }] }], // Lança de sangue: Sangrando
+  denji: [{ habilidade: 0, soma: [{ kind: 'status', status: 'bleed', value: 10, duration: 5 }] }], // Serra motosserra: Sangrando
+  inosuke: [{ habilidade: 1, soma: [{ kind: 'status', status: 'bleed', value: 8, duration: 5 }] }], // Presas rasgantes: Sangrando
+  finn: [{ habilidade: 0, soma: [{ kind: 'status', status: 'bleed', value: 6, duration: 5 }] }], // Espada de sangue: Sangrando
+  tanjiro: [{ habilidade: 2, soma: [{ kind: 'status', status: 'burning', value: 10, duration: 6 }] }], // Hinokami Kagura: Queimando
+  trunks: [{ habilidade: 1, soma: [{ kind: 'status', status: 'burning', value: 10, duration: 6 }] }], // Burning Attack: Queimando
+  ryu: [{ habilidade: 0, soma: [{ kind: 'status', status: 'burning', value: 8, duration: 5 }] }], // Hadouken de fogo: Queimando
+  jin: [{ habilidade: 2, soma: [{ kind: 'status', status: 'electric', value: 0.12, duration: 5 }] }], // Gene do Diabo: Eletrizado
+  tom: [{ habilidade: 0, soma: [{ kind: 'status', status: 'bomb', value: 100, duration: 3 }] }], // Emboscada com dinamite: Marca explosiva
+  kurapika: [{ habilidade: 2, muda: valor('status', 'paralyzed', (e) => ({ ...e, duration: 1.5 } as Effect)) }], // Prisão de corrente: Paralisado 1,2 s → 1,5 s
+  luffy: [{ habilidade: 1, soma: [{ kind: 'status', status: 'evasion', value: 0.15, duration: 5, target: 'self' }] }], // Corpo de borracha: Esquiva
   goku: [
     // Kaioken: além do Acelerado 35% por 9 s, Fortalecido 20% por 9 s
     { habilidade: 1, soma: [{ kind: 'status', status: 'strengthened', value: 0.2, duration: 9, target: 'self' }] },
@@ -188,6 +217,49 @@ export const PEDIDOS_DO_JOGADOR: Record<string, Ajuste[]> = {
     { habilidade: 1, muda: (e) => (e.kind === 'interrupt' && e.mode === 'delay' ? { ...e, value: 3 } : e) }, // Bloqueio mental: atraso 1,7 s → 3 s
     { habilidade: 1, muda: valor('status', 'confused', (e) => ({ ...e, duration: 7 } as Effect)) }, // Confuso 5 s → 7 s
     { habilidade: 2, muda: valor('status', 'silenced', (e) => ({ ...e, duration: 5 } as Effect)) }, // Paralisia mental: Silenciado 3 s → 5 s
+  ],
+  /*
+   * Equilíbrio dos combos (pedido do jogador: ninguém acima de 7% no trio aleatório): estes já estavam no
+   * limite do ajuste de tempo e seguiam fortes demais. Os buffs e os controles mais fortes caem até 30%.
+   */
+  jill: [
+    { habilidade: 1, muda: valor('status', 'haste', (e) => ({ ...e, value: 0.13 } as Effect)) }, // Cobertura tática: Acelerado 18% → 13%
+    { habilidade: 1, muda: valor('status', 'strengthened', (e) => ({ ...e, value: 0.07 } as Effect)) }, // Fortalecido 10% → 7%
+    { habilidade: 2, muda: valor('status', 'protected', (e) => ({ ...e, value: 0.13 } as Effect)) }, // Resistência: Protegido 18% → 13%
+    { habilidade: 0, muda: valor('heal', undefined, (e) => ({ ...e, value: Math.round((e as { value: number }).value * 0.72) } as Effect)) }, // Kit: cura −28%
+    { habilidade: 2, muda: valor('heal', undefined, (e) => ({ ...e, value: Math.round((e as { value: number }).value * 0.73) } as Effect)) }, // Resistência: cura −27%
+    { habilidade: 2, muda: valor('status', 'haste', (e) => ({ ...e, value: 0.09 } as Effect)) }, // Resistência: Acelerado 12% → 9%
+  ],
+  sora: [
+    { habilidade: 1, muda: valor('status', 'haste', (e) => ({ ...e, value: 0.13 } as Effect)) }, // Cura: Acelerado 18% → 13%
+    { habilidade: 2, muda: valor('status', 'haste', (e) => ({ ...e, value: 0.14 } as Effect)) }, // Forma final: Acelerado 20% → 14%
+    { habilidade: 2, muda: valor('status', 'strengthened', (e) => ({ ...e, value: 0.1 } as Effect)) }, // Fortalecido 14% → 10%
+    { habilidade: 1, muda: valor('heal', undefined, (e) => ({ ...e, value: Math.round((e as { value: number }).value * 0.73) } as Effect)) }, // Cura: cura −27%
+    { habilidade: 2, muda: valor('heal', undefined, (e) => ({ ...e, value: Math.round((e as { value: number }).value * 0.72) } as Effect)) }, // Forma final: cura −28%
+  ],
+  capitaoplaneta: [
+    { habilidade: 0, muda: valor('status', 'protected', (e) => ({ ...e, value: 0.15 } as Effect)) }, // Poder dos Anéis: Protegido 20% → 15%
+    { habilidade: 2, muda: valor('status', 'strengthened', (e) => ({ ...e, value: 0.16 } as Effect)) }, // O poder é de vocês: Fortalecido 22% → 16%
+    { habilidade: 1, muda: valor('status', 'weakened', (e) => ({ ...e, value: 0.12 } as Effect)) }, // Força da natureza: Enfraquecido 16% → 12%
+    { habilidade: 1, muda: valor('status', 'slow', (e) => ({ ...e, value: 0.09 } as Effect)) }, // Lento 12% → 9%
+    { habilidade: 2, muda: valor('heal', undefined, (e) => ({ ...e, value: Math.round((e as { value: number }).value * 0.75) } as Effect)) }, // cura −25%
+  ],
+  billcipher: [
+    { habilidade: 2, muda: valor('status', 'confused', (e) => ({ ...e, value: 0.3, duration: 7 } as Effect)) }, // Olho que tudo vê: Confuso 40%/9 s → 30%/7 s
+    { habilidade: 1, muda: valor('status', 'protected', (e) => ({ ...e, value: 0.2 } as Effect)) }, // Realidade invertida: Protegido 28% → 20%
+    { habilidade: 1, muda: valor('shield', undefined, (e) => ({ ...e, value: Math.round((e as { value: number }).value * 0.73) } as Effect)) }, // Escudo −27%
+    { habilidade: 0, muda: valor('status', 'confused', (e) => ({ ...e, value: 0.26 } as Effect)) }, // Acordo: Confuso 35% → 26%
+  ],
+  shaka: [
+    { habilidade: 0, muda: valor('status', 'blind', (e) => ({ ...e, value: 0.33 } as Effect)) }, // Tesouro do Céu: Cego 45% → 33%
+    { habilidade: 2, muda: valor('status', 'silenced', (e) => ({ ...e, value: 0.3, duration: 6 } as Effect)) }, // Rendição: Silenciado 40%/8 s → 30%/6 s
+    { habilidade: 1, muda: valor('status', 'protected', (e) => ({ ...e, value: 0.2 } as Effect)) }, // Todo-poderoso: Protegido 28% → 20%
+    { habilidade: 1, muda: valor('shield', undefined, (e) => ({ ...e, value: Math.round((e as { value: number }).value * 0.74) } as Effect)) }, // Escudo −26%
+  ],
+  itachi: [
+    // Tsukuyomi: o Marcado chamava o trio inteiro para bater em quem dorme, e o golpe acorda (pedido do
+    // jogador: "não faz sentido"). Vira Enfraquecido: a mente quebrada pela ilusão, ele acorda causando menos dano.
+    { habilidade: 0, muda: valor('status', 'marked', (e) => ({ ...e, status: 'weakened' } as Effect)) },
   ],
 };
 
@@ -251,6 +323,15 @@ export const INVOCACAO: Record<string, { habilidade: number; nome: string; dano:
   mickey: { habilidade: 1, nome: 'Vassouras encantadas', dano: 35, duracao: 8, troca: 'confused' },
   plankton: { habilidade: 0, nome: 'Exército de clones', dano: 30, duracao: 8, troca: 'exposed' },
   krang: { habilidade: 0, nome: 'Androide de combate', dano: 50, duracao: 8, troca: 'rooted' },
+  // lotes 6 e 7 (até 400): os invocadores que faltavam
+  odin: { habilidade: 1, nome: 'Hugin e Munin', dano: 40, duracao: 8 },
+  hel: { habilidade: 1, nome: 'Exército de Helheim', dano: 45, duracao: 8 },
+  pennywise: { habilidade: 0, nome: 'Balões vermelhos', dano: 35, duracao: 8 },
+  dracula: { habilidade: 1, nome: 'Nuvem de morcegos', dano: 40, duracao: 8 },
+  agentsmith: { habilidade: 1, nome: 'Cópias do Smith', dano: 40, duracao: 8 },
+  ainz: { habilidade: 1, nome: 'Cavaleiro da Morte', dano: 55, duracao: 8 },
+  jiraiya: { habilidade: 1, nome: 'Gamabunta', dano: 55, duracao: 7 },
+  steve: { habilidade: 2, nome: 'Golem de ferro', dano: 50, duracao: 8 },
 };
 
 /** Última resistência: uma vez por luta, o golpe fatal deixa com 1 de Vida e Protegido por um instante. */
@@ -266,6 +347,7 @@ export const ULTIMA_RESISTENCIA: Record<string, { protegido: number; duracao: nu
 /** Ninguém suspeita dele: os rivais preferem outros alvos, menos quando ele está em Preparo (peso na escolha do alvo). */
 export const DESPERCEBIDO: Record<string, { peso: number }> = {
   light: { peso: 8 }, // "Kira não pode ser descoberto": o trio rival caça o aliado marcado e esquece dele
+  professorx: { peso: 6 }, // fica atrás do trio, na cadeira, conduzindo as mentes
 };
 
 /** Isca: quando um rival bate no aliado que ele marcou, ganha Investigação sobre esse rival. */

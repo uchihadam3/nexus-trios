@@ -25,8 +25,10 @@ describe('Direção sem alterar regras',()=>{
   // o número vem da ficha (com o ajuste de força do personagem), não de um valor fixo
   const dano=expansion.effects.find(e=>e.kind==='damage');
   expect(describeSkill(expansion)).toContain(String(dano&&'value' in dano?dano.value:''));
-  expect(describeSkillUse(expansion)).toContain('+3,4% por segundo');
-  expect(describeSkillUse(expansion)).toContain('Preparo: 5 s');
+  // a Carga por segundo e o Preparo vêm da ficha de agora (o equilíbrio mexe nos dois)
+  const fmt=(n:number)=>(Math.round(n*10)/10).toLocaleString('pt-BR');
+  expect(describeSkillUse(expansion)).toContain(`+${fmt(expansion.charge.find(r=>r.on==='time')!.amount)}% por segundo`);
+  expect(describeSkillUse(expansion)).toContain(`Preparo: ${fmt(expansion.preparation)} s`);
   expect(describeSkillUse(expansion)).toContain('Resfriamento: 14 s');
  });
  it('separa estado mecânico e visível em snapshots causais',()=>{

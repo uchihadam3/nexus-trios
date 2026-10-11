@@ -7,7 +7,7 @@ import { SkillIcon } from './Icon';
 import { ArrowDown,HeartPulse,ShieldCheck,Sparkles,Zap } from 'lucide-react';
 import { statuses as statusCatalog } from '../data/statuses';
 import { familia,folha,profileFor,type VfxFamily,type VfxProfile } from '../presentation/vfxProfiles';
-import { RENASCER_PROPRIO } from '../presentation/renascer-proprio';
+import { FAMILIA_DO_REVIVER, RENASCER_PROPRIO } from '../presentation/renascer-proprio';
 import { efeitosDoJeito,VOO_DO_QUIQUE } from '../presentation/jeito-efeito';
 import { FAMILIA_DA_INVOCACAO } from '../presentation/vfx-atribuicao';
 
@@ -244,7 +244,7 @@ export function BattleEffects({battle,beat,anchors,enabled,reduced,medal=80}:{ba
       // cada uma aparece no passo da cadeia em que acontece (a reação depois do golpe)
       for(const e of beat.events){
         if(!revelado(beat,e))continue;
-        if(e.kind==='revive'&&e.target&&e.source!==e.target)sobre(e.target,'ressurreicao',`rev-${id}-${e.target}`,.12);
+        if(e.kind==='revive'&&e.target&&e.source!==e.target)sobre(e.target,FAMILIA_DO_REVIVER(battle.fighters.find(f=>f.uid===e.source)?.characterId??''),`rev-${id}-${e.target}`,.12);
         if(e.kind==='cleanse'&&e.target)sobre(e.target,'purificacao',`pur-${id}-${e.id}`,.06);
         if(e.kind==='dispel'&&e.target)sobre(e.target,'dissipar',`dis-${id}-${e.id}`,.06);
         // os Status da parte 5 ganham o efeito deles ao entrar

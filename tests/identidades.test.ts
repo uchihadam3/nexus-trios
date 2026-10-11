@@ -27,8 +27,8 @@ describe('identidades públicas', () => {
    * Poucas e de verdade: de 1 a 3 etiquetas, e 4 só para a exceção. Com quatro
    * em quase todo mundo a carta dizia "faz de tudo".
    */
-  it('cobre os 250, com 1 a 3 cada (4 só como exceção)', () => {
-    expect(Object.keys(identidadesPorPersonagem)).toHaveLength(250);
+  it('cobre os 400, com 1 a 3 cada (4 só como exceção)', () => {
+    expect(Object.keys(identidadesPorPersonagem)).toHaveLength(400);
     for (const { c, ids } of todas) {
       expect(ids.length, `${c.name}: ${ids.join(', ')}`).toBeGreaterThanOrEqual(1);
       expect(ids.length, `${c.name}: ${ids.join(', ')}`).toBeLessThanOrEqual(4);
@@ -83,9 +83,9 @@ describe('identidades públicas', () => {
       combinacoes.set(chave, [...(combinacoes.get(chave) ?? []), c.name]);
     }
     expect(combinacoes.size).toBeGreaterThan(140);
-    /* Com etiqueta única para quem é bom numa coisa só, a mesma etiqueta solitária se repete mais — até 12. */
+    /* Com etiqueta única para quem é bom numa coisa só, a mesma etiqueta solitária se repete mais — até 12 em 250, 20 em 400. */
     const maior = [...combinacoes.values()].sort((a, b) => b.length - a.length)[0]!;
-    expect(maior.length, `combinação repetida demais: ${maior.join(', ')}`).toBeLessThanOrEqual(12);
+    expect(maior.length, `combinação repetida demais: ${maior.join(', ')}`).toBeLessThanOrEqual(20);
   });
 
   /*

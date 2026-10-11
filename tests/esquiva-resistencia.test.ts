@@ -10,7 +10,7 @@ describe('Esquiva', () => {
   it('está numa parte do elenco', () => {
     const n = Object.values(byId).filter((c) => c.skills.some((s) => s.effects.some((e) => e.kind === 'status' && e.status === 'evasion'))).length;
     expect(n).toBeGreaterThanOrEqual(5);
-    expect(n).toBeLessThanOrEqual(12);
+    expect(n).toBeLessThanOrEqual(32); // 400 no elenco: os evasivos dos lotes 6 e 7 (Neo, Sans, Spike…)
   });
 
   it('quem esquiva não leva nem o dano nem o debuff daquele golpe; às vezes leva', () => {

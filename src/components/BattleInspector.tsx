@@ -9,6 +9,7 @@ import { ComTermos,TermoBotao } from './Termos';
 import { termoPorId } from '../presentation/glossario';
 import { StatusBadge } from './StatusBadge';
 import { presentEffect,presentSkill,presentStatus,presentTrait,tetoDoStatus,textoDaIsca,textoDaResistencia,textoDoDespercebido,textoDoJeito,textoDoRenascer,valorAtualDoStatus } from '../engine/skill-descriptions';
+import { universoDaFicha } from '../data/equipes';
 
 export type InspectTarget={kind:'fighter';fighter:Fighter}|{kind:'skill';fighter:Fighter;index:number}|{kind:'status';fighter:Fighter;status:Status};
 export function BattleInspector({target,battle,onClose,onSelect}:{target:InspectTarget;battle:Battle;onClose:()=>void;onSelect:(target:InspectTarget)=>void}){
@@ -30,7 +31,7 @@ export function BattleInspector({target,battle,onClose,onSelect}:{target:Inspect
       <div className="inspector-meta"><span><HeartPulse size={13}/><ComTermos texto={`${Math.round(f.skills[skillIndex].charge)}% · ${f.skills[skillIndex].cooldown>0?`Resfriamento ${f.skills[skillIndex].cooldown.toFixed(1)} s`:f.cast?.skill===skillIndex?'Em Preparo':f.skills[skillIndex].charge>=100?(condicaoAtendida(battle,f,skill)?'Pronta':'Pronta · esperando a regra de uso'):'Carregando'}`}/></span><span><Clock3 size={13}/><ComTermos texto={`Preparo ${presentation!.preparation} · Resfriamento ${presentation!.cooldown}`}/></span></div>
       <div className="charge-explanation"><b><TermoBotao termo={termoPorId.carga!}/></b> <ComTermos texto={presentation!.charge.join(' · ')}/><br/><b><TermoBotao termo={termoPorId['usa-quando']!}/></b> <ComTermos texto={presentation!.useWhen}/></div>
     </>:<>
-      <div className="inspector-title"><span className="inspector-avatar" style={{'--character':c.color} as React.CSSProperties}>{c.symbol}</span><div><small>{c.universe}</small><h3>{c.name}</h3></div></div>
+      <div className="inspector-title"><span className="inspector-avatar" style={{'--character':c.color} as React.CSSProperties}>{c.symbol}</span><div><small>{universoDaFicha(c)}</small><h3>{c.name}</h3></div></div>
       <div className="inspector-meta"><span><HeartPulse size={13}/>{health} de {f.maxHp} Vida</span><span><Clock3 size={13}/>{Math.max(0,100-f.action*100).toFixed(0)}% até o ataque básico</span></div>
       <p><strong>{c.trait.name}.</strong> <ComTermos texto={presentTrait(c.trait).effects.join(' · ')}/>. <ComTermos texto={presentTrait(c.trait).quando}/>.{c.renascer&&<> <ComTermos texto={(f.voltou?'Já renasceu nesta luta. ':'')+textoDoRenascer(c.renascer)}/>.</>}{c.ultimaResistencia&&<> <ComTermos texto={(f.resistiu?'Já usou nesta luta. ':'')+textoDaResistencia(c.ultimaResistencia)}/>.</>}{c.despercebido&&<> <ComTermos texto={textoDoDespercebido()}/>.</>}{c.isca&&<> <ComTermos texto={textoDaIsca(c.isca)}/>.</>}</p>
       {/* O ataque básico com o que ele faz (o dano e os efeitos), como na ficha fora da luta. */}

@@ -3,8 +3,8 @@ import {characters} from '../src/data/characters';
 import {expandedCharacters,rosterDesignQuestions,rosterIdentityReviewGroups} from '../src/data/expanded-roster';
 import type {Effect} from '../src/engine/types';
 
-/** O tamanho atual do catálogo. Sobe a cada lote até 250. */
-const TOTAL=250;
+/** O tamanho atual do catálogo. Sobe a cada lote (250 → 300 → 400). */
+const TOTAL=400;
 
 describe('catálogo competitivo de personagens',()=>{
   /*
@@ -131,17 +131,17 @@ describe('identidade visual do catálogo',()=>{
 });
 
 /*
- * O contrato final do roster: exatamente 250.
+ * O contrato final do roster: exatamente 400 (eram 250; o jogador pediu os lotes 6 e 7).
  *
  * É o número que a direção fixou, e ele vale como contrato e não como meta.
  * Qualquer personagem a mais ou a menos falha aqui antes de chegar ao jogo.
  */
 describe('o catálogo fechado',()=>{
-  it('tem exatamente 250 personagens, sem id, nome ou cor repetidos',()=>{
-    expect(characters).toHaveLength(250);
-    expect(new Set(characters.map(c=>c.id)).size).toBe(250);
-    expect(new Set(characters.map(c=>c.name.toLocaleLowerCase())).size).toBe(250);
-    expect(new Set(characters.map(c=>c.color.toLowerCase())).size).toBe(250);
+  it('tem exatamente 400 personagens, sem id, nome ou cor repetidos',()=>{
+    expect(characters).toHaveLength(400);
+    expect(new Set(characters.map(c=>c.id)).size).toBe(400);
+    expect(new Set(characters.map(c=>c.name.toLocaleLowerCase())).size).toBe(400);
+    expect(new Set(characters.map(c=>c.color.toLowerCase())).size).toBe(400);
   });
 
   it('nenhum personagem foi substituído ou removido da lista aprovada',()=>{

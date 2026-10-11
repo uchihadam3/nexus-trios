@@ -4071,7 +4071,7 @@
    192
   ],
   "laco": false,
-  "bytes": 39616
+  "bytes": 37252
  },
  "inv_cao": {
   "descricao": "Cão divino: lobo de sombra que salta e morde",
@@ -4085,7 +4085,7 @@
    192
   ],
   "laco": false,
-  "bytes": 55594
+  "bytes": 56364
  },
  "inv_clones": {
   "descricao": "Exército de clones: enxame de Planktons",
@@ -4099,7 +4099,7 @@
    192
   ],
   "laco": false,
-  "bytes": 47780
+  "bytes": 38628
  },
  "inv_dragao": {
   "descricao": "Dragão Branco: cabeça do dragão e raio branco",
@@ -4113,7 +4113,7 @@
    192
   ],
   "laco": false,
-  "bytes": 57044
+  "bytes": 57334
  },
  "inv_feras": {
   "descricao": "Caminho Animal: feras saindo das nuvens",
@@ -4127,7 +4127,7 @@
    192
   ],
   "laco": false,
-  "bytes": 52054
+  "bytes": 42338
  },
  "inv_gomorrah": {
   "descricao": "Gomorrah: mandíbulas que se fecham",
@@ -4141,7 +4141,7 @@
    192
   ],
   "laco": false,
-  "bytes": 67388
+  "bytes": 60420
  },
  "inv_mago": {
   "descricao": "Mago Negro: círculo mágico e esfera escura",
@@ -4155,7 +4155,7 @@
    192
   ],
   "laco": false,
-  "bytes": 60000
+  "bytes": 63374
  },
  "inv_ora": {
   "descricao": "Star Platinum: chuva de socos",
@@ -4169,7 +4169,7 @@
    192
   ],
   "laco": false,
-  "bytes": 65188
+  "bytes": 28456
  },
  "inv_sombras": {
   "descricao": "Soldados das sombras: sobem do chão e cortam",
@@ -4183,7 +4183,7 @@
    192
   ],
   "laco": false,
-  "bytes": 47686
+  "bytes": 65946
  },
  "inv_vassouras": {
   "descricao": "Vassouras encantadas: batem e espirram água",
@@ -4197,7 +4197,7 @@
    192
   ],
   "laco": false,
-  "bytes": 37436
+  "bytes": 33012
  },
  "investida": {
   "descricao": "investida com linhas de velocidade",
@@ -4870,6 +4870,90 @@
   ],
   "laco": false,
   "bytes": 74048
+ },
+ "levanta_constantine": {
+  "descricao": "Constantine revive: o círculo ocultista, a fumaça do cigarro e o clarão do pacto",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 56794
+ },
+ "levanta_hadescz": {
+  "descricao": "Hades revive: o portal do submundo, as almas em espiral e a flor dos Elísios",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 48110
+ },
+ "levanta_pain": {
+  "descricao": "Pain revive (Rinne Tensei): as almas caem do céu como cometas e entram no corpo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 57616
+ },
+ "levanta_rick": {
+  "descricao": "Rick revive: o portal verde gira, o clone sai e o escaneamento desce",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 90246
+ },
+ "levanta_scarletwitch": {
+  "descricao": "Feiticeira revive: os fios do caos, o hex girando e a realidade estalando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 82882
+ },
+ "levanta_shera": {
+  "descricao": "She-Ra revive: a Espada da Proteção desce no feixe de luz e crava",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 45658
  },
  "limite_cloud": {
   "descricao": "Cloud · a aura do Limite no Preparo (laço)",

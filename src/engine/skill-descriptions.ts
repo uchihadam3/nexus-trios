@@ -23,7 +23,7 @@ export const targetNamesEm:Record<Target,string>={
   enemyCast:'no inimigo em Preparo',
   investigated:'no inimigo mais investigado',allyWeak:'no aliado mais ferido',allyFallen:'no aliado caído',
   self:'em si próprio',allEnemies:'em todos os inimigos',allAllies:'em todo o trio',
-  randomEnemy:'em um inimigo sorteado',leastInvestigated:'no inimigo menos investigado',allyStrongest:'no aliado com mais Vida',
+  randomEnemy:'em um inimigo aleatório',leastInvestigated:'no inimigo menos investigado',allyStrongest:'no aliado com mais Vida',
 };
 /*
  * O alvo dito pelo que ele é, não por uma metáfora.
@@ -43,7 +43,7 @@ export const targetNames:Record<Target,string>={
   enemyCast:'inimigo em Preparo',
   investigated:'inimigo mais investigado',allyWeak:'aliado mais ferido',allyFallen:'aliado caído',
   self:'o próprio personagem',allEnemies:'todos os inimigos',allAllies:'todo o trio',
-  randomEnemy:'um inimigo sorteado',leastInvestigated:'inimigo menos investigado',allyStrongest:'aliado com mais Vida',
+  randomEnemy:'um inimigo aleatório',leastInvestigated:'inimigo menos investigado',allyStrongest:'aliado com mais Vida',
 };
 export const topicNames:Record<Topic,string>={
   time:'por segundo',action:'ao atacar',dealt:'a cada 100 de dano causado',received:'a cada 100 de dano recebido',
@@ -454,6 +454,7 @@ export function textoDoJeito(j:JeitoDeBater):string{
     case 'largo':return `Pega também um segundo rival · ${pct(j.fracao)} do dano`;
     case 'cura':return `${pct(j.fracao)} do dano vira cura no aliado mais ferido`;
     case 'escudo':return `${pct(j.fracao)} do dano vira Escudo em si`;
+    case 'dreno':return `Roubo de vida: ${pct(j.fracao)} do dano volta como Vida`;
     case 'rouba':return `Rouba ${j.valor} de Carga`;
     case 'acelera':return `Cada golpe adianta a próxima ação em ${pct(j.valor)}`;
   }

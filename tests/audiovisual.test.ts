@@ -1,6 +1,6 @@
 import { FAMILIA_DA_INVOCACAO } from '../src/presentation/vfx-atribuicao';
 import { FAMILIAS_DO_JEITO } from '../src/presentation/jeito-efeito';
-import { RENASCER_PROPRIO } from '../src/presentation/renascer-proprio';
+import { RENASCER_PROPRIO, REVIVER_PROPRIO } from '../src/presentation/renascer-proprio';
 import { RENASCER } from '../src/data/mecanicas';
 import { describe,expect,it } from 'vitest';
 import { readFileSync,readdirSync } from 'node:fs';
@@ -62,7 +62,9 @@ describe('compact reusable audiovisual library',()=>{
     // o renascer é o fogo de quem volta sozinho (o beat de Renasceu), e cada um com Renascer tem a
     // espera e a volta próprias (RENASCER_PROPRIO); a esfera, a terra, o veneno, a onda de energia e o feixe pesado são
     // as reservas dos golpes de energia, de pedra, de veneno/peste, de onda e de feixe sem família própria (vfxProfiles: ícones e nomes)
-    const SO_NA_ARENA=new Set(['acido','sangue','maldicao','bloco_de_gelo','esfera','terra','veneno','onda_de_energia','feixe_pesado','renascer','brasas_renascendo','provocar','reflexo','espinhos','vampirismo','dissipar','sono','cegueira','esquiva','ultima_resistencia','copia',...FAMILIAS_DO_JEITO,...Object.values(FAMILIA_DA_INVOCACAO),...Object.values(RENASCER_PROPRIO).flatMap(r=>[r.espera,r.volta])]);
+    const SO_NA_ARENA=new Set(['acido','sangue','maldicao','bloco_de_gelo','esfera','terra','veneno','onda_de_energia','feixe_pesado','renascer','brasas_renascendo','provocar','reflexo','espinhos','vampirismo','dissipar','sono','cegueira','esquiva','ultima_resistencia','copia',...FAMILIAS_DO_JEITO,...Object.values(FAMILIA_DA_INVOCACAO),...Object.values(RENASCER_PROPRIO).flatMap(r=>[r.espera,r.volta]),
+      // quem levanta um aliado tem o efeito próprio dele sobre quem volta (renascer-proprio.ts: REVIVER_PROPRIO)
+      ...Object.values(REVIVER_PROPRIO)]);
     // quem tem Renascer não volta com a Fênix dos outros: tem as folhas e os sons dele
     for(const id of Object.keys(RENASCER)){
       const r=RENASCER_PROPRIO[id];

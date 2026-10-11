@@ -17,7 +17,7 @@
 import { appendFileSync, readFileSync, writeFileSync } from 'node:fs';
 import { characters } from '../src/data/characters';
 import { createBattle, stepBattle } from '../src/engine/battle';
-import { LIGACOES, ligacoesDoTrio } from '../src/engine/sinergia';
+import { LIGACOES_DOS_COMBOS as LIGACOES, ligacoesDosCombos as ligacoesDoTrio } from '../src/engine/combos';
 import { ENGINE_VERSION, rosterFingerprint } from '../src/engine/ranked';
 
 const ids = characters.map((c) => c.id);

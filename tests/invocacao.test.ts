@@ -15,7 +15,7 @@ describe('Invocação', () => {
   it('está numa parte do elenco, cada um com o nome da sua criatura', () => {
     const quemInvoca = Object.values(byId).filter((c) => c.skills.some((s) => s.effects.some((e) => e.kind === 'status' && e.status === 'summon')));
     expect(quemInvoca.length).toBeGreaterThanOrEqual(5);
-    expect(quemInvoca.length).toBeLessThanOrEqual(12);
+    expect(quemInvoca.length).toBeLessThanOrEqual(22); // 400 no elenco (invocadores faltavam)
     for (const c of quemInvoca) expect(c.invocacao, c.name).toBeTruthy();
   });
 

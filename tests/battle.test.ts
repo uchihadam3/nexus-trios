@@ -25,7 +25,7 @@ describe('Catálogo e seleção',()=>{
    for(const id of team)expect(enemies).not.toContain(id);
    for(const encounter of first)expect(new Set(encounter.team).size).toBe(3);
   }
- },90000);
+ },400000); // 400 no elenco: cada campanha sorteia em mais gente (~0,2 s cada)
  it('audita explicitamente uma repetição entre encontros como inválida',()=>{
   const encounters=generateCampaign(44,player).map(e=>({...e,team:[...e.team]}));
   encounters[1].team[0]=encounters[0].team[0];
@@ -115,7 +115,7 @@ describe('Motor independente',()=>{
   applyEffects(b,ally,[foe],[{kind:'status',status:'paralyzed',value:1,duration:2}]);
   expect(light.skills.some(s=>s.charge>0)).toBe(true);
  });
- it('cooldown bloqueia carga, e habilidade pronta espera alvo ferido',()=>{const b=createBattle(['deadpool','flash','captain'],enemy,3),d=b.fighters[0];d.skills[2].charge=100;d.skills[0].cooldown=10;for(let i=0;i<5;i++)stepBattle(b);expect(d.skills[2].charge).toBe(100);expect(d.skills[0].charge).toBe(0);d.hp=d.maxHp*.5;/* toda habilidade tem ao menos 0,5 s de Preparo */for(let i=0;i<6;i++)stepBattle(b);expect(d.skills[2].cooldown).toBeGreaterThan(0);expect(d.hp).toBeGreaterThan(d.maxHp*.5);});
+ it('cooldown bloqueia carga, e habilidade pronta espera alvo ferido',()=>{const b=createBattle(['deadpool','flash','captain'],enemy,3),d=b.fighters[0];d.skills[2].charge=100;d.skills[0].cooldown=10;for(let i=0;i<5;i++)stepBattle(b);expect(d.skills[2].charge).toBe(100);expect(d.skills[0].charge).toBe(0);d.hp=d.maxHp*.5;/* toda habilidade tem ao menos 0,5 s de Preparo (a do Deadpool tem 0,6 s): 8 passos cobrem */for(let i=0;i<8;i++)stepBattle(b);expect(d.skills[2].cooldown).toBeGreaterThan(0);expect(d.hp).toBeGreaterThan(d.maxHp*.5);});
  it('paralisia congela ação e preparação e expira',()=>{const b=createBattle(player,enemy,8),f=b.fighters[0];f.cast={skill:0,elapsed:1,duration:3,targets:[b.fighters[3].uid]};applyEffects(b,b.fighters[3],[f],[{kind:'status',status:'paralyzed',value:1,duration:1}]);for(let i=0;i<5;i++)stepBattle(b);expect(f.cast?.elapsed).toBe(1);for(let i=0;i<8;i++)stepBattle(b);expect(f.cast!.elapsed).toBeGreaterThan(1);});
  it('encerra imediatamente por incapacitação',()=>{const b=createBattle(player,enemy,8);b.fighters.filter(f=>f.side==='enemy').forEach(f=>f.hp=0);resolve(b);expect(b.finished).toBe(true);expect(b.winner).toBe('player');expect(b.time).toBe(0);});
  it('passa dos 120 segundos sem vitória por tempo ou Domínio',()=>{const b=createBattle(player,enemy,8);for(const f of b.fighters){f.maxHp=1e8;f.hp=1e8;if(f.side==='enemy')f.hp*=.8;}for(let i=0;i<1210;i++)stepBattle(b);expect(b.time).toBeGreaterThan(120);expect(b.finished).toBe(false);b.dominion=100;resolve(b);expect(b.finished).toBe(false);expect(b.winner).toBe(null);b.fighters.filter(f=>f.side==='enemy').forEach(f=>f.hp=0);resolve(b);expect(b.winner).toBe('player');expect(b.reason).toBe('Incapacitação da equipe');});

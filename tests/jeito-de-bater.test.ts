@@ -31,7 +31,7 @@ const golpes = (b: Battle, eu: Fighter, n: number): BattleEvent[] => {
 };
 
 describe('Ataque básico com nome e jeito próprios', () => {
-  it('os 250 têm nome, simples, e nunca o nome de uma habilidade do próprio personagem', () => {
+  it('os 400 têm nome, simples, e nunca o nome de uma habilidade do próprio personagem', () => {
     // pedido do jogador: "o ataque básico tem que ser coisa simples" — muitos são só "Soco" — e não pode
     // repetir uma habilidade (o Meteoro de Pégaso do Seiya era básico e habilidade ao mesmo tempo)
     for (const c of characters) {
@@ -47,7 +47,7 @@ describe('Ataque básico com nome e jeito próprios', () => {
     expect(com.length).toBeGreaterThanOrEqual(120);
     for (const c of com) expect(textoDoJeito(c.basic.jeito!).length, c.id).toBeGreaterThan(15);
     const tipos = new Set(com.map((c) => c.basic.jeito!.tipo));
-    expect([...tipos].sort()).toEqual(['acelera', 'cura', 'escudo', 'largo', 'ricochete', 'rouba', 'serie']);
+    expect([...tipos].sort()).toEqual(['acelera', 'cura', 'dreno', 'escudo', 'largo', 'ricochete', 'rouba', 'serie']);
   });
 
   it('série: o 3º golpe do Naruto sai especial e bate mais forte', () => {

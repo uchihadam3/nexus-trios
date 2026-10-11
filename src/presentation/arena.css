@@ -150,13 +150,6 @@
 .arena-v2 .unit-zz b{font-size:16px;margin-left:1px}.arena-v2 .unit-zz i{font-style:normal;font-size:19px;margin-left:1px}
 @keyframes zz-sobe{0%{transform:translateY(4px);opacity:.3}50%{opacity:1}100%{transform:translateY(-8px);opacity:.3}}
 .arena-v2 .unit .errou-pop{color:#e9eef2;border-color:#ffffff55;background:#22282ced;font-style:italic}
-.arena-v2 .unit-invocada{position:absolute;left:50%;bottom:4px;z-index:6;transform:translateX(-50%);display:flex;align-items:center;gap:3px;max-width:calc(var(--medal) + 30px);padding:2px 7px 2px 3px;border-radius:99px;background:#1c1430ee;border:1px solid #c9a2ff88;color:#efe4ff;font-size:9px;white-space:nowrap;pointer-events:none}
-.arena-v2 .unit-invocada img{width:14px;height:14px}
-.arena-v2 .unit-invocada b{overflow:hidden;text-overflow:ellipsis;font-weight:800}
-.arena-v2 .unit-invocada i{font-style:normal;opacity:.7}
-.arena-v2 .unit-invocada.atacou{animation:invocada-ataca .5s ease-out}
-@keyframes invocada-ataca{0%{box-shadow:0 0 0 0 #c9a2ff}40%{box-shadow:0 0 14px 3px #c9a2ffcc;scale:1.08}100%{box-shadow:none;scale:1}}
-@media (prefers-reduced-motion:reduce){.arena-v2 .unit-invocada.atacou{animation:none}}
 .arena-v2 .unit .copiou-pop{color:#ffe0e0;border-color:#ff7a7a99;background:#2c1212ed}
 .arena-v2 .unit .explodiu-pop{color:#fff0d8;border-color:#ff9d3ccc;background:#2e1a08ed;font-weight:900}
 .arena-v2 .unit .esquivou-pop{color:#e6fbff;border-color:#c8f7ff88;background:#14262bed;font-style:italic}
@@ -401,3 +394,20 @@
 /* Pronta, mas esperando a regra de uso: ampulheta no canto e brilho mais calmo. */
 .arena-v2 .ability.ready.is-waiting{filter:saturate(.75);box-shadow:0 0 0 1.5px #f4d47e88}
 .arena-v2 .ability-espera{position:absolute;right:-3px;top:-3px;z-index:3;display:grid;place-items:center;width:15px;height:15px;border-radius:50%;background:#2c2410;border:1px solid #f4d47e;color:#ffe9a8}
+
+/* as invocações como bolinha (src/components/Invocacoes.tsx) */
+.arena-v2 .invocacoes{position:absolute;inset:0;pointer-events:none;z-index:7}
+.arena-v2 .invocacao{position:absolute;transform:translate(-50%,-50%);border-radius:50%;filter:drop-shadow(0 0 6px color-mix(in srgb,var(--cor) 60%,transparent));animation:inv-chega .45s cubic-bezier(.2,1.6,.4,1) both}
+.arena-v2 .invocacao img{position:absolute;inset:3px;width:calc(100% - 6px);height:calc(100% - 6px);border-radius:50%;box-shadow:0 0 0 2px #0b131b}
+.arena-v2 .invocacao svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.arena-v2 .invocacao .inv-trilho{fill:none;stroke:#0b131bcc;stroke-width:3}
+.arena-v2 .invocacao .inv-carga{fill:none;stroke:var(--cor);stroke-width:3;stroke-linecap:round;filter:drop-shadow(0 0 3px var(--cor));transition:stroke-dasharray .1s linear}
+.arena-v2 .invocacao .inv-tempo{fill:none;stroke:color-mix(in srgb,var(--cor) 45%,#fff);stroke-width:1.2;opacity:.75}
+.arena-v2 .invocacao.ataca-perto{animation:inv-avanca var(--dur) cubic-bezier(.5,0,.4,1) both;z-index:9}
+.arena-v2 .invocacao.ataca-longe{animation:inv-tranco var(--dur) ease-out both}
+.arena-v2 .invocacao .inv-disparo{position:absolute;left:50%;top:50%;height:4px;margin-top:-2px;transform-origin:0 50%;border-radius:4px;background:linear-gradient(90deg,transparent,var(--cor) 30%,#fff);box-shadow:0 0 10px var(--cor);animation:inv-disparo var(--dur) ease-out both;pointer-events:none}
+@keyframes inv-chega{from{opacity:0;scale:.2}to{opacity:1;scale:1}}
+@keyframes inv-avanca{0%{translate:0 0;scale:1}45%{translate:var(--vx) var(--vy);scale:1.25}55%{translate:var(--vx) var(--vy);scale:1.1}100%{translate:0 0;scale:1}}
+@keyframes inv-tranco{0%{scale:1}20%{scale:1.22}40%{scale:.92}100%{scale:1}}
+@keyframes inv-disparo{0%{clip-path:inset(0 100% 0 0);opacity:1}45%{clip-path:inset(0 0 0 0);opacity:1}100%{clip-path:inset(0 0 0 70%);opacity:0}}
+@media (prefers-reduced-motion:reduce){.arena-v2 .invocacao,.arena-v2 .invocacao.ataca-perto,.arena-v2 .invocacao.ataca-longe,.arena-v2 .invocacao .inv-disparo{animation:none}}

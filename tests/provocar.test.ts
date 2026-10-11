@@ -15,7 +15,7 @@ const provocadores = Object.values(byId).filter((c) => c.skills.some((s) => s.ef
 describe('Provocar', () => {
   it('existe numa parte do elenco, quase sempre em quem aguenta (o Bart provoca por pirraça)', () => {
     expect(provocadores.length).toBeGreaterThanOrEqual(3);
-    expect(provocadores.length).toBeLessThanOrEqual(14);
+    expect(provocadores.length).toBeLessThanOrEqual(26); // 400 no elenco (tanques que provocam)
     const vidas = Object.values(byId).map((c) => c.hp).sort((a, b) => a - b);
     const mediana = vidas[Math.floor(vidas.length / 2)]!;
     expect(provocadores.filter((c) => c.hp > mediana).length / provocadores.length).toBeGreaterThanOrEqual(0.7);

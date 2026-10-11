@@ -25,7 +25,7 @@ APPROVALS = ROOT / 'src/data/expanded-portrait-approvals.json'
 
 def roster() -> list[dict[str, str]]:
     command = ("import {characters} from './src/data/characters.ts';"
-               "console.log(JSON.stringify(characters.slice(100).map(c=>({id:c.id,name:c.name}))))")
+               "console.log(JSON.stringify(characters.slice(100,250).map(c=>({id:c.id,name:c.name}))))")
     result = subprocess.run(['node', '--import', 'tsx', '--input-type=module', '-e', command],
                             cwd=ROOT, check=True, capture_output=True, text=True)
     return json.loads(result.stdout)

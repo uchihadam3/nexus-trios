@@ -3,7 +3,7 @@ import { characters } from '../src/data/characters';
 import { ABAS, PERSONAGENS_DA_ABA, PULOS_DO_DESAFIO, TOTAL_DE_CONQUISTAS, ateMeiaNoite, desafioDoDia, hoje, juntar, liberar, limpar, sugestao, tituloDe } from '../src/lib/conquistas';
 
 describe('Conquistas: uma por personagem', () => {
-  it('são 250, e cada personagem está em exatamente uma aba', () => {
+  it('são 400, e cada personagem está em exatamente uma aba', () => {
     expect(TOTAL_DE_CONQUISTAS).toBe(characters.length);
     const todos = ABAS.flatMap((a) => PERSONAGENS_DA_ABA[a.id].map((c) => c.id));
     expect(todos.length).toBe(characters.length);

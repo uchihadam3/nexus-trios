@@ -720,19 +720,15 @@ _MI5, _SOL5, _SI5, _RE6, _MI6, _SOL6, _SI6 = 76, 79, 83, 86, 88, 91, 95
 
 
 def reacao(rng, v):
-    """Um traço disparou no meio da ação de outro: um arranque de energia curto
-    (zum que sobe), duas notas rápidas subindo no tom da música e um brilho."""
-    n = n_de(0.55)
+    """Um traço disparou no meio da ação de outro. Toca toda hora na luta, então é discreto (pedido do
+    jogador: as duas notinhas agudas de antes incomodavam; escolhida a opção "pulso"): um "vum" macio —
+    baque grave abafado e um sopro curto subindo, sem nota aguda."""
+    n = n_de(0.4)
     x = np.zeros(n)
-    m = n_de(0.16)
-    t = np.arange(m) / SR
-    zum = np.sin(2 * math.pi * np.cumsum(varre(180, 900, m, 0.8)) / SR + 1.5 * np.sin(2 * math.pi * 90 * t)) * np.minimum(1, t / 0.01) * np.exp(-t / 0.09)
-    poe(x, satura(zum, 1.8) * 0.22, 0)
-    poe(x, _plink(_SI5, 0.25, 0.08, 6, 1.3) * 0.32, 0.07)
-    poe(x, _plink(_MI6, 0.35, 0.12, 6, 1.3) * 0.36, 0.12)
-    poe(x, passa(ruido(rng, n_de(0.2)), 4000, 11000, 2) * sobe_e_some(n_de(0.2), 0.3, 1.5) * 0.08, 0.1)
-    return reverb(x, 0.35, 0.2, 9000)
-
+    poe(x, baque(n_de(0.3), 120, 60, 0.07, 0.05) * 0.8, 0.0)
+    m = n_de(0.18)
+    poe(x, assobio(rng, m, 350, 1500, 1.4) * np.linspace(0.3, 1, m) * env(m, 0.03, 0.12) * 0.5, 0.0)
+    return reverb(x, 0.3, 0.18, 3500)
 
 def ui_clique(rng, v):
     """Toque comum: um "tic" macio de sintetizador, curtinho e afinado."""
@@ -868,7 +864,7 @@ ALVO_DB = {
     "cura": -24, "escudo": -23, "bloqueio": -19, "reforco": -24, "enfraquecer": -24, "renova-buff": -27, "renova-debuff": -26, "purificar": -25, "dreno": -23,
     "carga-pequena": -24, "carga-grande": -19, "pronto": -24, "preparo": -25, "toque": -26,
     "ui-clique": -27, "ui-confirma": -23, "ui-abrir": -27, "ui-fechar": -28, "ui-alternar": -28,
-    "ui-escolher": -21, "ui-arena": -18, "reacao": -21,
+    "ui-escolher": -21, "ui-arena": -18, "reacao": -23,
 }
 
 
@@ -906,7 +902,7 @@ def _registra_novos():
     SONS.update(sfx_familias.SONS_NOVOS)
     ALVO_DB.update(sfx_familias.ALVO_NOVO)
     # o som próprio de cada ataque básico (tools/audio/sfx_basicos_*.py), um módulo por lote
-    for modulo in [f"sfx_basicos_{letra}" for letra in "abcdefghij"] + ["sfx_madara", "sfx_viagens", "sfx_ninjas", "sfx_cloud_dk", "sfx_naruto_ikki_luffy", "sfx_toph_gon", "sfx_piccolo", "sfx_herois", "sfx_hulk", "sfx_aiolia_arthas", "sfx_aang_sakura", "sfx_ciclope_shaka_mummra", "sfx_sasuke_aranha_trunks_kuririn_kratos", "sfx_omniman_guts_rick", "sfx_rodada01", "sfx_rodada02", "sfx_rodada03", "sfx_rodada04", "sfx_rodada05", "sfx_renascer"]:
+    for modulo in [f"sfx_basicos_{letra}" for letra in "abcdefghij"] + ["sfx_madara", "sfx_viagens", "sfx_ninjas", "sfx_cloud_dk", "sfx_naruto_ikki_luffy", "sfx_toph_gon", "sfx_piccolo", "sfx_herois", "sfx_hulk", "sfx_aiolia_arthas", "sfx_aang_sakura", "sfx_ciclope_shaka_mummra", "sfx_sasuke_aranha_trunks_kuririn_kratos", "sfx_omniman_guts_rick", "sfx_rodada01", "sfx_rodada02", "sfx_rodada03", "sfx_rodada04", "sfx_rodada05", "sfx_renascer", "sfx_reviver"]:
         m = importlib.import_module(modulo)
         for nome, (fn, desc) in m.SONS.items():
             SONS[nome] = (fn, desc)

@@ -26,7 +26,7 @@ export interface Skill {
  */
 export type JeitoDeBater =
   | { tipo: 'serie'; cada: number; nome: string; mult?: number; status?: { status: StatusId; value: number; duration: number } }
-  | { tipo: 'ricochete' | 'largo' | 'cura' | 'escudo'; fracao: number }
+  | { tipo: 'ricochete' | 'largo' | 'cura' | 'escudo' | 'dreno'; fracao: number }
   | { tipo: 'rouba' | 'acelera'; valor: number };
 export interface Trait {name:string;description:string; on:Topic; cooldown:number; effects:Effect[]; target:Target}
 export interface Character {
@@ -47,6 +47,20 @@ export interface Character {
 export interface Status {id:StatusId;remaining:number;intensity:number;source:string;duration?:number}
 export interface Shield {amount:number;remaining:number;source:string}
 export interface SkillState {charge:number;cooldown:number;executing:number;uses:number;readySince?:number|null}
+/** O bônus dos combos do trio e do universo (src/engine/combos.ts), em frações: 0,15 = +15%. */
+/** O bônus dos combos num lutador. `escudo`: começa a luta com Escudo dessa fração da Vida. Nos rivais vem negativo (o combo que enfraquece o trio de lá). */
+export interface Bonus { dano: number; defesa: number; cura: number; carga: number; ritmo: number; vida: number; escudo: number;
+  /** Preparo das habilidades mais curto; Traço que volta mais rápido; ataque básico mais forte (frações). */
+  preparo: number; traco: number; basico: number;
+  /** Status que ele aplica duram mais; Status ruins nele duram menos; `segura` > 0: ganha a Última resistência. */
+  duracao: number; resiste: number; segura: number }
+/** Um combo aceso no trio: quem ajuda, quem ganha e o quê. */
+/** Um combo que age de tempo em tempo na luta: a cada `cada` segundos, quem tem o combo aplica `efeitos` em `alvo`. */
+/** `texto`: o que acontece, sem o "a cada X s" (a tela põe o título A CADA X s). */
+export interface Pulso { cada: number; alvo: Target; efeitos: Effect[]; texto: string }
+export interface ComboAtivo { id: string; nome: string; texto: string; de: string[]; para: string[]; bonus: Partial<Bonus>; nosRivais?: Partial<Bonus>;
+  /** O efeito de tempo em tempo, e quem do trio o aplica. */
+  pulso?: Pulso; dono?: string }
 export interface Fighter {
   uid:string;characterId:string;side:Side;slot:number;hp:number;maxHp:number;action:number;
   /** Ataques básicos dados (a série do jeito de bater conta por aqui). */
@@ -61,6 +75,10 @@ export interface Fighter {
   voltou?:boolean;
   /** Já levantou um aliado nesta luta (Reviver é uma vez por luta). */
   reviveu?:boolean;
+  /** Combos do trio e universo (src/engine/combos.ts). */
+  bonus?:Bonus;
+  /** Os combos de tempo em tempo deste lutador: quanto falta para o próximo. */
+  pulsos?:{id:string;falta:number;pulso:Pulso}[];
   stats:{damage:number;healing:number;protection:number;interrupts:number;skills:number;kills:number;
     /** Feitos que não viram número na tela (para os pontos): segundos de Status ruim no rival e bom no trio, ação adiantada/atrasada, Carga dada a aliados. Opcionais: lutas salvas antes não têm. */
     debuffs?:number;buffs?:number;tempo?:number;carga?:number;
@@ -75,6 +93,8 @@ export interface SkillDecision {time:number;actor:string;intelligence:number;can
 export interface Battle {
   version:1;seed:number;rng:number;time:number;fighters:Fighter[];dominion:number;momentum:number;events:BattleEvent[];nextEvent:number;
   winner:Side|null;reason:string;finished:boolean;turns:number;lastLead:Side|null;
+  /** Os combos acesos em cada trio (src/engine/combos.ts), para a tela mostrar. */
+  combos?:{player:ComboAtivo[];enemy:ComboAtivo[]};
   /** Viradas a favor do trio do jogador (as que contam pontos, como no ranking). */
   viradasDoTrio?:number;
   /** Optional for backward compatibility with battles saved by earlier builds. */

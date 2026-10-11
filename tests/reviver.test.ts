@@ -21,7 +21,7 @@ const renascem = Object.values(byId).filter((c) => c.renascer);
 describe('Reviver', () => {
   it('existe em poucos personagens, e a habilidade diz o que faz', () => {
     expect(revivedores.length).toBeGreaterThanOrEqual(2);
-    expect(revivedores.length).toBeLessThanOrEqual(10);
+    expect(revivedores.length).toBeLessThanOrEqual(20); // com 400 no elenco (eram 10 em 250)
   });
 
   for (const c of revivedores) {

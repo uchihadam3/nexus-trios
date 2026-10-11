@@ -35,7 +35,7 @@ import {AccountScreen} from './screens/AccountScreen';
 import {PortaoDaConta,type EtapaDoPortao} from './screens/PortaoDaConta';
 import {FAMILIA_DA_INVOCACAO} from './presentation/vfx-atribuicao';
 import {efeitosDoJeito,somDoJeito} from './presentation/jeito-efeito';
-import {SOM_DA_ESPERA,SOM_DA_VOLTA} from './presentation/renascer-proprio';
+import {SOM_DA_ESPERA,SOM_DA_VOLTA,SOM_DO_REVIVER} from './presentation/renascer-proprio';
 const DebugScreen=lazy(()=>import('./screens/DebugScreen').then(m=>({default:m.DebugScreen})));
 const VfxLabScreen=lazy(()=>import('./screens/VfxLabScreen').then(m=>({default:m.VfxLabScreen})));
 type Screen='home'|'game'|'characters'|'conquistas'|'ranking'|'conta'|'help'|'settings'|'debug'|'vfx';
@@ -169,7 +169,7 @@ export default function App(){
   });
   const startBattle=async(index:number)=>{
     const current=runRef.current;if(!current)return;
-    // os rivais ainda estão sendo sorteados (a prévia mostra "Sorteando os rivais…")
+    // os rivais ainda estão sendo sorteados (a prévia mostra "Escolhendo rivais aleatórios…")
     if(index===0&&current.stage==='draft'&&!current.preparado&&!(current.ranked&&current.ranked.mode!=='free'))return;
     const team=current.draft.team;
     let ranked=current.ranked,seed=current.seed,encounters=current.ranked||current.preparado?current.encounters:current.stage==='draft'?generateCampaign(current.seed,team):current.encounters;
@@ -194,6 +194,9 @@ export default function App(){
     const next={...current,seed,team,encounters,index,stage:'battle' as const,recorded:false,presentation:undefined,battleSynergies:[],raioX:raioXVazio(),telemetry:emptyTally(),ranked,battle:createBattle(team,encounter.team,seed+index*7919,encounter.scale)};
     direction.current=null;setPresentation(null);changeRun(next);setPaused(false);navigate('game');
     if(index===0)setProfile(p=>{const n={...p,journeys:p.journeys+1};save('profile',n);return n;});
+    /* os combos do trio entram no álbum (Livro de Combos) na primeira luta em que acendem */
+    const acesos=next.battle.combos?.player.map(c=>c.id)??[];
+    if(acesos.length)setProfile(p=>{const ja=p.combosDescobertos??[],novos=acesos.filter(id=>!ja.includes(id));if(!novos.length)return p;const n={...p,combosDescobertos:[...ja,...new Set(novos)]};save('profile',n);return n;});
   };
   useEffect(()=>{
     const capture=(e:Event)=>{e.preventDefault();setInstallEvent(e as InstallEvent);};
@@ -245,7 +248,7 @@ export default function App(){
           // levantar/renascer: o som próprio por cima do golpe do beat
           const volta=d.active.events.find(e=>e.kind==='revive');
           const quemVolta=volta?d.active.after.fighters.find(f=>f.uid===volta.source)?.characterId??'':'';
-          if(volta)battleAudio.sound(volta.source===volta.target?SOM_DA_VOLTA(quemVolta):'ressurreicao',PRIORIDADE.importante,0,volta.id,volta.source===volta.target?0:.12);
+          if(volta)battleAudio.sound(volta.source===volta.target?SOM_DA_VOLTA(quemVolta):SOM_DO_REVIVER(quemVolta) as Sound,PRIORIDADE.importante,0,volta.id,volta.source===volta.target?0:.12);
           if(volta&&d.active.event.kind==='revive')return;
           // caiu, mas vai renascer: as brasas começam a crepitar logo depois do nocaute
           const brasa=d.active.events.find(e=>e.kind==='ko'&&(d.active!.after.fighters.find(f=>f.uid===e.target)?.renascendo??0)>0);
@@ -436,7 +439,7 @@ export default function App(){
       {screen==='conquistas'&&<ConquistasScreen profile={profile} conta={conta!==null&&conta.origem!=='convidado'} onProfile={muda=>setProfile(p=>{const n=muda(p);if(n!==p)save('profile',n);return n;})} onRanking={()=>{setRankingInicial('conquistas');navigate('ranking');}} onDesafio={jogarDesafio}/>}
       {screen==='ranking'&&<RankingScreen inicial={rankingInicial} handle={profile.publicHandle} conta={conta!==null&&conta.origem!=='convidado'} onConta={()=>navigate('conta')} recorde={profile.recordePontos??0}/>}
       {screen==='conta'&&<AccountScreen autenticacao={autenticacao} conta={conta} profile={profile} conectado={onlineConfigured} google={googleConfigured} aoMudarPerfil={p=>{save('profile',p);setProfile(p);}}/>}
-      {screen==='help'&&<HelpScreen onPlay={requestNew}/>}
+      {screen==='help'&&<HelpScreen onPlay={requestNew} descobertos={profile.combosDescobertos??[]}/>}
       {screen==='settings'&&<SettingsScreen settings={settings} onChange={changeSettings} onReset={reset} onGaleria={()=>navigate('vfx')} ranking={onlineConfigured?{nome:profile.publicHandle,onEditar:()=>{setPendingStart(false);setDraftHandle(profile.publicHandle??'');setNameDialog(true);}}:undefined}/>}
       {screen==='game'&&run?.stage==='draft'&&<DraftScreen draft={run.draft} desafio={run.desafio} primeiroRival={run.preparado||run.ranked&&run.ranked.mode!=='free'?run.encounters[0]:undefined} dicas={settings.dicasDoTrio&&podeDicas} podeDicas={podeDicas} usouDicas={run.dicas===true} onDicas={ligar=>changeSettings({...settings,dicasDoTrio:ligar})} onPick={id=>changeRun({...run,draft:pickDraft(run.draft,id)})} onSkip={()=>changeRun({...run,draft:skipDraft(run.draft)})} onDetails={setDetails} onStart={()=>void startBattle(0)} onAbandon={()=>setConfirmAbandon(true)}/>}
       {screen==='game'&&run?.stage==='battle'&&run.battle&&<BattleScreen battle={presentation&&direction.current?.battle===run.battle?presentation.battle:run.battle} beat={presentation&&direction.current?.battle===run.battle?presentation.beat:null} index={run.index} name={run.encounters[run.index].name} settings={settings} paused={paused||!!details}  onPause={()=>setPaused(!paused)} onAbandon={()=>setConfirmAbandon(true)} onSettings={changeSettings} onExit={()=>{setPaused(true);navigate('home');}}/>}

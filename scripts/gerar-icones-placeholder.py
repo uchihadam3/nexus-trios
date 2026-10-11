@@ -108,6 +108,11 @@ def main() -> None:
     roster = ler_roster()
     manifesto_icones = json.loads((PUBLIC / "assets/skills/manifest.json").read_text())
     manifesto_folhas = json.loads((PUBLIC / "assets/sheets/skills/manifest.json").read_text())
+    # Os PNGs não vão para o git: placeholders já listados são redesenhados
+    # (a semente é fixa, então saem idênticos) para o build da CI tê-los.
+    refazer = {p["character"] for p in manifesto_folhas["pages"] if p.get("placeholder")}
+    manifesto_folhas["pages"] = [p for p in manifesto_folhas["pages"] if p["character"] not in refazer]
+    manifesto_icones["skills"] = [s for s in manifesto_icones["skills"] if s["character"] not in refazer]
     ja_tem = {p["character"] for p in manifesto_folhas["pages"]}
 
     largura = MARGIN * 2 + CELL * 3 + GUTTER * 2

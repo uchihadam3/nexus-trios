@@ -38,7 +38,7 @@ describe('Marca explosiva', () => {
   it('está em alguns personagens', () => {
     const n = Object.values(byId).filter((c) => c.skills.some((s) => s.effects.some((e) => e.kind === 'status' && e.status === 'bomb'))).length;
     expect(n).toBeGreaterThanOrEqual(3);
-    expect(n).toBeLessThanOrEqual(10);
+    expect(n).toBeLessThanOrEqual(16); // 400 no elenco (eram 10 em 250)
   });
 });
 
@@ -66,6 +66,6 @@ describe('Copiar habilidade', () => {
   it('está em poucos personagens', () => {
     const n = Object.values(byId).filter((c) => c.skills.some((s) => s.effects.some((e) => e.kind === 'copy'))).length;
     expect(n).toBeGreaterThanOrEqual(3);
-    expect(n).toBeLessThanOrEqual(8);
+    expect(n).toBeLessThanOrEqual(13); // 400 no elenco (eram 8 em 250)
   });
 });

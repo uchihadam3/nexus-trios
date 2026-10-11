@@ -30,7 +30,9 @@ const rivais=['goku','vegeta','hulk'].filter(x=>x!==habId).concat(['thor']).slic
 const aliados=['sakura','naruto','gojo'].filter(x=>x!==habId).slice(0,2);
 /* `?scenario=renascendo&quem=majinbuu` (ou `renasce`): o Renascer próprio daquele personagem, caído no lugar do primeiro rival. */
 const quem=params.get('quem');
-const battle=hab?createBattle([habId,...aliados],rivais,99):quem?createBattle(['sakura','gojo','naruto'],[quem,'vegeta','hulk'],99):scenario==='nomes'?createBattle(['coragem','raidenmk','capitaoplaneta'],['dannyphantom','lexluthor','sailormoon'],99):createBattle(['sakura','gojo','naruto'],['goku','vegeta','hulk'],99);
+/* `?inv=yugi`: a bolinha da invocação (src/components/Invocacoes.tsx) atacando, no seu trio e num rival que também invoca. */
+const inv=params.get('inv');
+const battle=inv?createBattle([inv,'gojo','naruto'],['goku','vegeta',inv==='kaiba'?'yugi':'kaiba'],99):hab?createBattle([habId,...aliados],rivais,99):quem?createBattle(['sakura','gojo','naruto'],[quem,'vegeta','hulk'],99):scenario==='nomes'?createBattle(['coragem','raidenmk','capitaoplaneta'],['dannyphantom','lexluthor','sailormoon'],99):createBattle(['sakura','gojo','naruto'],['goku','vegeta','hulk'],99);
 const [sakura,gojo,naruto,goku,vegeta,hulk]=battle.fighters;
 let source=sakura,target=goku,effects:Effect[]=[{kind:'damage',value:190}],selected=[goku],visual:Visual='impact';
 if(scenario==='heal'){source=sakura;target=naruto;target.hp-=240;effects=[{kind:'heal',value:170}];selected=[target];visual='shield';}
@@ -65,6 +67,7 @@ if(scenario==='estados'||scenario==='nomes'){
 if(scenario==='refletir'){goku.statuses.push({id:'reflect',remaining:6,duration:6,intensity:.35,source:goku.uid},{id:'thorns',remaining:6,duration:6,intensity:16,source:goku.uid});source=sakura;target=goku;effects=[{kind:'damage',value:190}];selected=[goku];}
 if(scenario==='vampiro'){sakura.hp-=300;sakura.statuses.push({id:'vampirism',remaining:8,duration:8,intensity:.3,source:sakura.uid});source=sakura;target=goku;effects=[{kind:'damage',value:220}];selected=[goku];}
 /* Invocação: a criatura em campo, com a plaquinha. */
+if(inv){for(const f of [sakura,hulk])f.statuses.push({id:'summon',remaining:5,duration:8,intensity:45,source:f.uid});source=sakura;target=goku;effects=[{kind:'damage',value:50}];selected=[goku];}
 if(scenario==='invocacao'){naruto.statuses.push({id:'summon',remaining:6,duration:8,intensity:40,source:naruto.uid});source=gojo;target=goku;effects=[];selected=[goku];}
 /* Status da parte 5 na arena: congelado, dormindo, envenenado, sangrando; e um golpe que erra. */
 if(scenario==='status5'){
@@ -100,7 +103,7 @@ if(hab){
 }
 // o jeito de bater do básico (Ricochete, Golpe largo, Roubou Carga…), como na luta
 const jeito=hab&&habIndex===undefined?byId[habId].basic.jeito:undefined;
-const before=structuredClone(battle),kind=hab?(habIndex===undefined?'basic':'skill'):scenario==='basic'||scenario==='energy'?'basic':'skill';
+const before=structuredClone(battle),kind=inv?'summon' as const:hab?(habIndex===undefined?'basic':'skill'):scenario==='basic'||scenario==='energy'?'basic':'skill';
 if(renasce){goku.hp=Math.round(goku.maxHp*.4);goku.renascendo=0;goku.voltou=true;battle.events.push({id:1001,time:0,kind:'revive',source:goku.uid,target:goku.uid,label:'Renasceu',value:goku.hp});}
 const event:BattleEvent=renasce?{id:1000,time:0,kind:'revive',source:goku.uid,target:goku.uid,label:'Renasceu',value:goku.hp}:{id:1000,time:0,kind,source:source.uid,target:target.uid,skill:kind==='skill'?(hab?skillIndex:0):undefined,label:kind==='basic'?(jeito?.tipo==='serie'?jeito.nome:hab?label:'Ataque básico'):label,visual};
 const danoAntes=source.stats.damage;

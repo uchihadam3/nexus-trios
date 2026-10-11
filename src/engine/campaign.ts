@@ -1,7 +1,7 @@
 import { characters, byId } from '../data/characters';
 import { random, shuffle } from './random';
 import { FORCA, PESO_DA_LIGACAO } from '../data/forca-dos-rivais';
-import { LIGACOES, ligacoesDoTrio } from './sinergia';
+import { LIGACOES_DOS_COMBOS, ligacoesDosCombos } from './combos';
 export interface Encounter {team:string[];name:string;power:number;scale:number}
 export interface Draft {team:string[];candidates:string[];skips:number;rng:number;banned?:string[]}
 export function candidates(draft:Draft,exclude:string[]=[]):string[]{return shuffle(characters.filter(c=>!draft.team.includes(c.id)&&!draft.banned?.includes(c.id)&&!exclude.includes(c.id)).map(c=>c.id),draft).slice(0,3);}
@@ -28,7 +28,8 @@ export function pickDraft(d:Draft,id:string):Draft{if(d.team.length>=3||!d.candi
  *
  * Detalhes da calibração logo abaixo, em TRIOS_DA_LUTA.
  */
-export function sinergiaDoTrio(team:readonly string[]):number{const l=ligacoesDoTrio(team);return LIGACOES.reduce((n,k)=>n+l[k]*(PESO_DA_LIGACAO[k]??0),0);}
+/* A sinergia do trio: os combos acesos (src/engine/combos.ts), cada um com o peso medido nas lutas. */
+export function sinergiaDoTrio(team:readonly string[]):number{const l=ligacoesDosCombos(team);return LIGACOES_DOS_COMBOS.reduce((n,k)=>n+(l[k]??0)*(PESO_DA_LIGACAO[k]??0),0);}
 export function forcaDoTrio(team:readonly string[]):number{return team.reduce((n,id)=>n+(FORCA[id]??0),0)+sinergiaDoTrio(team);}
 /*
  * A dificuldade é calibrada para quem escolhe bem (pedidos do jogador: a curva
@@ -47,7 +48,7 @@ export const TRIOS_DA_LUTA=[1,1,1,1,1,1,1,2,3];
 export const DIFICULDADE={triosDoChefe:400};
 /** Sinergia máxima do rival da luta i: SINERGIA_MAXIMA × (i+1)/10 (o chefe não tem teto). */
 export const SINERGIA_MAXIMA=0.4;
-export const ESCALAS=[.82,.84,.86,.86,.9,.93,.97,.98,1,1];
+export const ESCALAS=[.83,.85,.87,.87,.91,.94,.98,.99,1.01,1.01];
 const names=['Primeiro encontro','Novos rivais','O ritmo aumenta','Entre universos','Ponto de ruptura','Pressão crescente','Sem recuar','A última barreira','À altura das lendas','O confronto final'];
 const chave=(t:readonly string[])=>[...t].sort().join('|');
 /* `count` trios diferentes sorteados de `ids` (três índices ao acaso; rápido mesmo para milhares de trios). */

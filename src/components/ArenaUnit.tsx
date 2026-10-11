@@ -97,8 +97,6 @@ export function ArenaUnit({fighter:f,battle,beat,onInspect,numbers,threatened,li
   // Errou (Cego) aparece em quem bateu; Esquivou aparece em quem escapou
   const errou=impacted?beat?.events.find(e=>revelado(beat,e)&&e.kind==='miss'&&(e.label==='Esquivou'?e.target===f.uid:e.source===f.uid)):undefined;
   // a criatura invocada em campo: plaquinha com o nome, e pulso quando ela ataca
-  const invocada=!out?f.statuses.find(s=>s.id==='summon'):undefined;
-  const atacou=impacted&&beat?.event.kind==='summon'&&beat.event.source===f.uid;
   const copiou=impacted?beat?.events.find(e=>revelado(beat,e)&&e.source===f.uid&&e.kind==='copy'):undefined;
   const explodiu=impacted?beat?.events.find(e=>revelado(beat,e)&&e.target===f.uid&&e.kind==='damage'&&e.label==='Explosão'):undefined;
   const anulou=impacted?beat?.events.find(e=>revelado(beat,e)&&e.target===f.uid&&e.kind==='resist'):undefined;
@@ -112,7 +110,7 @@ export function ArenaUnit({fighter:f,battle,beat,onInspect,numbers,threatened,li
   const advantageRule=advantageSide===f.side?'winning':advantageSide?'losing':null;
   const advantageActive=!!advantageRule&&c.skills.some(skill=>skill.charge.some(rule=>rule.on===advantageRule));
   const basicStyle=source&&beat?.event.kind==='basic'?`basic-${beat.family}`:'';
-  const buffs=f.statuses.filter(s=>statuses[s.id].tone!=='negativo'),debuffs=f.statuses.filter(s=>statuses[s.id].tone==='negativo');
+  const buffs=f.statuses.filter(s=>s.id!=='summon'&&statuses[s.id].tone!=='negativo'),debuffs=f.statuses.filter(s=>statuses[s.id].tone==='negativo');
   const hpPct=Math.max(0,Math.min(100,100*f.hp/f.maxHp)),shieldPct=Math.min(100-hpPct,100*shield/f.maxHp);
   const marcas=[
     out&&'is-out',renascendo&&'is-renascendo',congelado&&'is-frozen',dormindo&&'is-asleep',levantou&&'is-revived',preparing&&'is-casting',hit&&'is-hit',acting&&'is-acting',basicStyle,critical&&'is-critical',
@@ -146,7 +144,7 @@ export function ArenaUnit({fighter:f,battle,beat,onInspect,numbers,threatened,li
           ?<span className="unit-ko unit-renasce" aria-label={`Renascendo em ${Math.ceil(f.renascendo??0)} segundos`}><EmblemaDoRenascer id={c.id} size={24}/><b>{proprio?.rotulo??'RENASCE'}</b><i className="renasce-segundos">{Math.ceil(f.renascendo??0)}s</i></span>
           :<span className="unit-ko" aria-label="Fora da luta"><Skull size={26}/><b>FORA</b></span>)}
         {levantou&&<span key={levantou.id} className="discovery-pop revive-pop">{levantou.label}</span>}
-        {invocada&&<span className={`unit-invocada ${atacou?'atacou':''}`} title={`${c.invocacao??'Invocação'} · ${Math.ceil(invocada.remaining)} s`}><img src="/assets/statuses/summon.png" alt=""/><b>{c.invocacao??'Invocação'}</b><i>{Math.ceil(invocada.remaining)}s</i></span>}
+        {/* a invocação virou bolinha própria ao lado (src/components/Invocacoes.tsx) */}
         {copiou&&<span key={`c${copiou.id}`} className="discovery-pop copiou-pop">{copiou.label}</span>}
         {explodiu&&<span key={`x${explodiu.id}`} className="discovery-pop explodiu-pop">Bum! A marca explodiu</span>}
         {dormindo&&<span className="unit-zz" aria-hidden="true">z<b>z</b><i>z</i></span>}

@@ -33,7 +33,8 @@ describe('linguagem pública e o catálogo inteiro',()=>{
         expect(p.charge.length,c.id).toBeLessThanOrEqual(s.charge.length);
         const somaNaFicha=p.charge.reduce((t,linha)=>t+Number(/\+([\d,]+)%/.exec(linha)![1]!.replace(',','.')),0);
         const somaNosDados=s.charge.reduce((t,r)=>t+r.amount,0);
-        expect(somaNaFicha,c.id).toBeCloseTo(somaNosDados,1);
+        // cada linha arredonda para uma casa (até 0,05 de diferença por linha): agregar não perde Carga
+        expect(Math.abs(somaNaFicha-somaNosDados),c.id).toBeLessThanOrEqual(0.05*p.charge.length+1e-9);
         expect(p.charge.every(x=>x.includes('%')),c.id).toBe(true);
         expect(p.target.length,c.id).toBeGreaterThan(4);
         expect(p.useWhen.length,c.id).toBeGreaterThan(10);

@@ -16,8 +16,8 @@ import type { Effect } from '../src/engine/types';
 const todas = characters.flatMap((c) => c.skills.map((s) => ({ c, s, p: presentSkill(s) })));
 
 describe('ficha agrupada por alvo', () => {
-  it('cobre as 750 habilidades', () => {
-    expect(todas).toHaveLength(750);
+  it('cobre as 1200 habilidades', () => {
+    expect(todas).toHaveLength(1200);
   });
 
   it('nenhum efeito some e nenhum aparece duas vezes', () => {

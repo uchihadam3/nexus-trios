@@ -83,7 +83,8 @@ def from_source(path: Path, column: int) -> Image.Image:
 
 def main() -> None:
     characters=roster()
-    assert len(characters)==250
+    # Do 250 em diante a arte ainda é placeholder (gerar-icones-placeholder.py).
+    assert len(characters)>=250
     icon_path=PUBLIC/'skills/manifest.json';sheet_path=PUBLIC/'sheets/skills/manifest.json'
     icons=json.loads(icon_path.read_text());sheets=json.loads(sheet_path.read_text())
     original={p['character'] for p in sheets['pages'] if not p.get('placeholder') and p['character'] in {c['id'] for c in characters[:100]}}
@@ -91,7 +92,7 @@ def main() -> None:
     skill_records={(item['character'],item['id']):item for item in icons['skills']}
     pages={page['character']:page for page in sheets['pages']}
     ai=0
-    for c in characters[100:]:
+    for c in characters[100:250]:
         source=SOURCES/f"{c['id']}.png"
         if not source.exists() and c['id']!='mario':
             raise FileNotFoundError(f'Missing original AI art for {c["name"]}: {source}')

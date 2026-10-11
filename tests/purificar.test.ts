@@ -14,7 +14,7 @@ describe('Purificar e Dissipar', () => {
     for (const tipo of ['cleanse', 'dispel'] as const) {
       const n = elenco.filter((c) => c.skills.some((s) => s.effects.some((e) => e.kind === tipo))).length;
       expect(n, tipo).toBeGreaterThanOrEqual(4);
-      expect(n, tipo).toBeLessThanOrEqual(12);
+      expect(n, tipo).toBeLessThanOrEqual(22); // 400 no elenco
     }
   });
 

@@ -12,6 +12,7 @@ import { ComTermos } from '../components/Termos';
 import { draftConnection } from '../presentation/draft-connections';
 import { BotaoDicas } from '../components/BotaoDicas';
 import { dicasDoDraft,type DicaDoCandidato } from '../presentation/dicas-do-trio';
+import { universoDaFicha } from '../data/equipes';
 
 /*
  * A escolha do trio (remake).
@@ -60,7 +61,7 @@ export function DraftScreen({draft,desafio,primeiroRival,dicas,podeDicas,usouDic
       const c=byId[id],trait=presentTrait(c.trait),novas=oQueAdiciona(c,team),conexao=ligadas?draftConnection(c,team):null,dica=conselhos.find(x=>x.id===id),nivel=dica&&NIVEL(dica.encaixe);
       return <article key={id} className={`dv-carta candidate-card ${dica?.melhor?'melhor':''}`} style={{'--character':c.color,'--i':i} as CSSProperties}>
         <button className="dv-retrato" onClick={()=>onDetails(id)} aria-label={`Ficha de ${c.name}`}>
-          <Portrait character={c}/><span className="dv-universo">{c.universe}</span><span className="dv-info"><Info size={16}/></span>
+          <Portrait character={c}/><span className="dv-universo">{universoDaFicha(c)}</span><span className="dv-info"><Info size={16}/></span>
           <h2>{c.name}</h2>
         </button>
         <div className="dv-corpo">
@@ -79,7 +80,7 @@ export function DraftScreen({draft,desafio,primeiroRival,dicas,podeDicas,usouDic
         </div>
       </article>;})}</div>}
 
-    {full&&!primeiroRival&&<div className="dv-rival dv-rival-sorteando" role="status"><span><Swords size={15}/>PRIMEIRA LUTA</span><b>Sorteando os rivais…</b></div>}
+    {full&&!primeiroRival&&<div className="dv-rival dv-rival-sorteando" role="status"><span><Swords size={15}/>PRIMEIRA LUTA</span><b>Escolhendo rivais aleatórios…</b></div>}
     {full&&primeiroRival&&<div className="dv-rival"><span><Swords size={15}/>PRIMEIRA LUTA</span><b>{primeiroRival.name}</b><div>{primeiroRival.team.map(id=><span key={id} style={{'--character':byId[id].color} as CSSProperties}><Portrait character={byId[id]}/><small>{byId[id].name}</small></span>)}</div></div>}
 
     {porque&&createPortal(<div className="dv-porque-fundo" onClick={()=>setPorque(null)}><div className="dv-porque" role="dialog" aria-modal="true" aria-label={`Por que ${byId[porque.id].name}`} style={{'--character':byId[porque.id].color,'--nivel':NIVEL(porque.encaixe).cor} as CSSProperties} onClick={e=>e.stopPropagation()}>

@@ -119,6 +119,8 @@ export function acumularRaioX(estado: EstadoRaioX, eventos: readonly BattleEvent
         const duracao = ev.value ?? 0;
         if (lado(ev.source) === lado(alvo)) {
           /* Apoio: só conta quando sai de um aliado para outro. */
+          /* Marcado num aliado é isca (o Light marca o mais forte para os rivais caçarem ele), não fogo amigo. */
+          if (id === 'marked') break;
           if (statuses[id].tone !== 'positivo') { ligar(ev.source, alvo, 'conflito', duracao); break; }
           if (id === 'haste') ligar(ev.source, alvo, 'aceleracao', duracao);
           else if (id === 'protected' && preparando.some((p) => p.uid === alvo)) {

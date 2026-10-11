@@ -40,3 +40,20 @@ export const RENASCER_PROPRIO: Record<string, RenascerProprio> = {
 
 export const SOM_DA_ESPERA = (id: string) => (RENASCER_PROPRIO[id] ? `espera-${id}` : 'brasas-renascendo');
 export const SOM_DA_VOLTA = (id: string) => (RENASCER_PROPRIO[id] ? `volta-${id}` : 'renascer');
+
+/*
+ * O reviver de cada um (pedido do jogador: "faz o efeito para eles reviverem únicos pra eles… tem que
+ * ter a ver com cada um"): quem levanta um aliado caído (src/data/mecanicas.ts → REVIVER) toca a
+ * animação dele sobre quem volta, e o som com o mesmo nome (com hífen). Quem não está aqui usa a
+ * Ressurreição de sempre.
+ */
+export const REVIVER_PROPRIO: Record<string, FamiliaNova> = {
+  hadescz: 'levanta_hadescz',
+  scarletwitch: 'levanta_scarletwitch',
+  pain: 'levanta_pain',
+  rick: 'levanta_rick',
+  constantine: 'levanta_constantine',
+  shera: 'levanta_shera',
+};
+export const FAMILIA_DO_REVIVER = (id: string): FamiliaNova => REVIVER_PROPRIO[id] ?? 'ressurreicao';
+export const SOM_DO_REVIVER = (id: string) => FAMILIA_DO_REVIVER(id).replace(/_/g, '-');

@@ -7,10 +7,14 @@ import { aplicaMecanicas } from './mecanicas';
 import { aplicaGolpesQueAtacam } from './golpes-que-atacam';
 import { aplicaBasico } from './basicos';
 import { aplicaTraco } from './tracos';
+import { aplicaAjusteDeKit } from './ajuste-de-kit';
 import { aplicaStatusDoNome } from './status-do-nome';
 import { aplicaCondicao } from './condicao';
 import { FATOR_DA_REGENERACAO,valorDaRegeneracao } from './regeneracao';
 import { AJUSTE_DE_FORCA, AJUSTE_DE_RITMO } from './ajuste-de-forca';
+import { PESO_DA_CONDICAO } from './peso-da-condicao';
+import { AJUSTE_DE_TEMPO, partesDoTempo } from './ajuste-de-tempo';
+import { FATOR_DA_FAMILIA } from './expanded-roster';
 
 const damage=(value:number,target?:Target):Effect=>({kind:'damage',value,target});
 const heal=(value:number,target:Target='self'):Effect=>({kind:'heal',value,target});
@@ -93,21 +97,43 @@ function ajustaRegeneracao(c:Character):Character{
  * guardada). A força de um lutador cresce com Vida × produção, então o
  * produto continua o mesmo: Vida × produção = m².
  */
-export const VIDA_DO_AJUSTE={tanque:{sobe:.2,desce:.15},outros:{sobe:.1,desce:.15}};
-export const PRODUCAO_MAXIMA_DO_AJUSTE=3.5;
+/*
+ * A trava dos números (pedido do jogador: "nada pode subir tanto… no máximo
+ * 40%, e se tentar fazer menos é melhor"). Antes, o ajuste chegava a ×3,5 no
+ * que o personagem produz: o Agente 47 tinha um tiro de 1.878 e o Yugi de
+ * 1.987, quando a mediana do elenco é 347. Agora:
+ *   - Vida: sobe no máximo 10% (tanque 15%) e desce no máximo 10%;
+ *   - dano, cura, Escudo e energia guardada: o fator final — o peso da condição
+ *     (src/data/condicao.ts) vezes o ajuste de força — fica entre ×0,7 e ×1,3.
+ * O que faltar para equilibrar sai do jeito do personagem (Carga, Preparo,
+ * traço, ataque básico, efeitos), não de número inflado.
+ */
+export const VIDA_DO_AJUSTE={tanque:{sobe:.15,desce:.1},outros:{sobe:.1,desce:.1}};
+export const FATOR_DOS_NUMEROS={min:.7,max:1.3};
+const travaNumero=(f:number)=>Math.max(FATOR_DOS_NUMEROS.min,Math.min(FATOR_DOS_NUMEROS.max,f));
 export function partesDoAjuste(m:number,tanque:boolean,teto=Infinity){
   const limite=tanque?VIDA_DO_AJUSTE.tanque:VIDA_DO_AJUSTE.outros;
   const vida=Math.max(1-limite.desce,Math.min(1+limite.sobe,teto,m));
-  return {vida,producao:Math.max(.35,Math.min(PRODUCAO_MAXIMA_DO_AJUSTE,m*m/vida))};
+  return {vida,producao:travaNumero(m*m/vida)};
 }
 function ajustaForca(c:Character,tanque:boolean,vidaDeTanque:number):Character{
   const m=AJUSTE_DE_FORCA[c.id]??1,ritmo=AJUSTE_DE_RITMO[c.id]??1;
-  if(m===1&&ritmo===1)return c;
+  const pesos=[0,1,2].map(i=>PESO_DA_CONDICAO[`${c.id}:${i}`]??1);
+  const fam0=FATOR_DA_FAMILIA[c.id];
+  if(m===1&&ritmo===1&&!AJUSTE_DE_TEMPO[c.id]&&pesos.every(x=>x===travaNumero(x))&&(!fam0||fam0.dano===travaNumero(fam0.dano)&&fam0.sustento===travaNumero(fam0.sustento)))return c;
   // quem não é tanque não chega à Vida de tanque
   const {vida,producao:p}=partesDoAjuste(m,tanque,tanque?Infinity:Math.max(1,(vidaDeTanque-1)/c.hp));
-  const ef=(e:Effect):Effect=>e.kind==='damage'||e.kind==='heal'||e.kind==='shield'?{...e,value:Math.round(e.value*p)}:e.kind==='store'?{...e,value:Math.round(e.value*p),cap:Math.round(e.cap*p)}:e;
-  return {...c,hp:Math.round(c.hp*vida),interval:Math.round(c.interval*ritmo*100)/100,basic:{...c.basic,effects:c.basic.effects.map(ef)},trait:{...c.trait,effects:c.trait.effects.map(ef)},
-    skills:c.skills.map(s=>({...s,effects:s.effects.map(ef)})) as Character['skills']};
+  // o valor já veio com o peso da condição e o fator da família: o fator total (família × peso × ajuste) fica dentro da trava
+  const fam=FATOR_DA_FAMILIA[c.id]??{dano:1,sustento:1};
+  const ef=(antes:number)=>(e:Effect):Effect=>{
+    const ja=antes*(e.kind==='damage'?fam.dano:e.kind==='heal'||e.kind==='shield'?fam.sustento:1),fator=travaNumero(ja*p)/ja;
+    return e.kind==='damage'||e.kind==='heal'||e.kind==='shield'?{...e,value:Math.round(e.value*fator)}:e.kind==='store'?{...e,value:Math.round(e.value*fator),cap:Math.round(e.cap*fator)}:e;
+  };
+  const basico=(e:Effect):Effect=>{const f=travaNumero(p);return e.kind==='damage'||e.kind==='heal'||e.kind==='shield'?{...e,value:Math.round(e.value*f)}:e.kind==='store'?{...e,value:Math.round(e.value*f),cap:Math.round(e.cap*f)}:e;};
+  // o ajuste de tempo (src/data/ajuste-de-tempo.ts): Carga, Preparo e ritmo, sem mexer em número
+  const t=partesDoTempo(AJUSTE_DE_TEMPO[c.id]??0);
+  return {...c,hp:Math.round(c.hp*vida),interval:Math.round(c.interval*ritmo*t.ritmo*100)/100,basic:{...c.basic,effects:c.basic.effects.map(basico)},trait:{...c.trait,effects:c.trait.effects.map(basico)},
+    skills:c.skills.map((s,i)=>({...s,charge:s.charge.map(r=>({...r,amount:Math.round(r.amount*t.carga*100)/100})),preparation:Math.round(s.preparation*t.preparo*10)/10,effects:s.effects.map(ef(pesos[i]!))})) as Character['skills']};
 }
 const deBase:Character[] = [
  character({id:'goku',name:'Goku',universe:'Dragon Ball',color:'#f7a25e',symbol:'G',idea:'Quanto mais luta, mais forte fica.',vulnerability:'Grandes preparações expostas a interrupções.',hp:1100,interval:3.8,attack:66,visual:'beam',power:87,tags:['growth','burst'],trait:trait('Além do limite','Cada ação aumenta seu poder em 3%, até 80%.','action',[status('strengthened',.03,120)],'self',0),skills:[
@@ -124,7 +150,7 @@ const deBase:Character[] = [
   skill('Manto da Kurama','shield','Protege, regenera e fortalece Naruto.','Aliados feridos + desvantagem',[charge('allyHurt',10),charge('losing',4)],[shield(250,'self'),status('regen',15,10,'self'),status('strengthened',.25,12,'self')],{target:'self'})]}),
  character({id:'sasuke',name:'Sasuke',universe:'Naruto',color:'#b299eb',symbol:'S',idea:'Encontra uma abertura. Pune sem hesitar.',vulnerability:'Depende de tempo e de vulnerabilidades.',hp:930,interval:3.6,attack:68,visual:'slash',power:83,tags:['control','exploit'],deathNoteCompatible:true,trait:trait('Sharingan','Ao observar uma preparação inimiga, carrega habilidades.','enemyCast',[{kind:'charge',value:10}]),skills:[
   skill('Chidori','bolt','Causa 240 de dano e paralisa por 1,2 s.','Ações + tempo',[charge('action',14),charge('time',3)],[damage(240),status('paralyzed',1,1.2)],{condition:'vulnerable'}),
-  skill('Amaterasu','psychic','Queima por 10 s e expõe o alvo.','Tempo',timed(4.5),[status('burning',16,10),status('exposed',.22,10)],{preparation:1.2}),
+  skill('Amaterasu','psychic','Causa 125 de dano, queima por 10 s e expõe o alvo.','Tempo',timed(4.5),[damage(120),status('burning',16,10),status('exposed',.22,10)],{preparation:1.2}), // o dano do golpe pedido pelo jogador: "tem que causar dano também"
   skill('Genjutsu','psychic','Cancela uma preparação e confunde por 6 s.','Status aplicados + tempo',[charge('status',12),charge('time',3)],[interrupt(),status('confused',1,6)],{target:'enemyCast',condition:'enemyCast',priority:5})]}),
  character({id:'luffy',name:'Luffy',universe:'One Piece',color:'#ef7c66',symbol:'L',idea:'Pressão que cresce a cada golpe.',vulnerability:'Controle prolongado quebra seu ritmo.',hp:1210,interval:2.8,attack:52,visual:'impact',power:84,tags:['tempo','growth'],deathNoteCompatible:true,trait:trait('Embalado','Cada ação acelera Luffy em 12% por 5 s.','action',[status('haste',.12,5)],'self',0),skills:[
   skill('Gatling','impact','Uma sequência de 210 de dano.','Ações',[charge('action',24)],[damage(210)]),
@@ -202,7 +228,7 @@ const deBase:Character[] = [
   skill('Azarath Metrion Zinthos','psychic','Silencia por 6 s e causa 140 de dano.','Tempo',timed(4.6),[status('silenced',1,6),damage(140)],{preparation:1}),
   skill('Manto de sombras','shield','Escudo de 230 e regeneração por 7 s.','Aliados feridos',[charge('allyHurt',22),charge('time',2)],[shield(230),status('regen',10,7)],{target:'allyWeak',condition:'threatened'}),
   skill('Alma sombria','psychic','Causa 160 de dano a todos e cancela preparações.','Efeitos aliados + tempo',[charge('status',10),charge('time',2.2)],[damage(160,'allEnemies'),{kind:'interrupt',mode:'cancel',value:1,target:'allEnemies'}],{preparation:3.2,target:'allEnemies',cooldown:9})]}),
- character({id:'thanos',name:'Thanos',universe:'Marvel',color:'#b89cd3',symbol:'T',idea:'Uma presença lenta e inevitável.',vulnerability:'Ações muito lentas podem ser controladas.',hp:1650,interval:5.8,attack:98,visual:'impact',power:96,tags:['durable','control'],trait:trait('Titã','A cada 8 s, recebe proteção de 20% por 5 s.','time',[status('protected',.2,5)],'self',8),skills:[
+ character({id:'thanos',name:'Thanos',universe:'Marvel',color:'#b89cd3',symbol:'T',idea:'Uma presença lenta e inevitável.',vulnerability:'Ações muito lentas podem ser controladas.',hp:1650,interval:5.8,attack:98,visual:'impact',power:96,tags:['durable','control'],trait:trait('Titã','A cada 6 s, recebe proteção de 20% por 5 s.','time',[status('protected',.2,5)],'self',6),skills:[
   skill('Joia do Poder','beam','Causa 340 de dano.','Tempo + ações',[charge('time',3),charge('action',15)],[damage(340)],{preparation:2.8}),
   skill('Joia do Tempo','wave','Retarda todos e reduz preparações pela metade.','Preparações inimigas + tempo',[charge('enemyCast',22),charge('time',3)],[status('slow',.4,8,'allEnemies'),{kind:'interrupt',mode:'reduce',value:.5,target:'allEnemies'}],{target:'allEnemies'}),
   skill('Equilíbrio','psychic','Causa 240 de dano a todos e enfraquece por 9 s.','Tempo em luta + dano causado',[charge('survived',2.8),charge('dealt',7)],[damage(240,'allEnemies'),status('weakened',.25,9,'allEnemies')],{preparation:4.5,target:'allEnemies',cooldown:14})]}),
@@ -233,5 +259,5 @@ function aplicaPedidos(c:Character):Character{
   }) as Character['skills'];
   return {...c,skills};
 }
-export const characters:Character[]=deBase.map(c=>ajustaForca(c,TANQUES.has(c.id),VIDA_DE_TANQUE)).map(ajustaRegeneracao).map(aplicaPedidos);
+export const characters:Character[]=deBase.map(c=>ajustaForca(c,TANQUES.has(c.id),VIDA_DE_TANQUE)).map(ajustaRegeneracao).map(aplicaPedidos).map(aplicaAjusteDeKit);
 export const byId:Record<string,Character> = Object.fromEntries(characters.map(c=>[c.id,c]));
