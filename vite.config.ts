@@ -18,5 +18,5 @@ export default defineConfig({
    * aqui e estourou os 5 s no CI. Cortar cenários resolveria o relógio e
    * estragaria a cobertura, que é justamente o ponto desses testes.
    */
-  test: { testTimeout: 30000 },
+  test: { testTimeout: 120000, maxWorkers: 2 },
 });
