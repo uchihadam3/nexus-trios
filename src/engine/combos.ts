@@ -241,8 +241,9 @@ export function quemFormaOTrio(trio: readonly string[], c: ComboDeTrio): string[
 }
 
 /* O mesmo universo: dois juntos e o trio inteiro. */
-// a dupla do mesmo universo vale pouco (um trio aleatório forma em ~9% das vezes); o trio inteiro vale muito
-export const UNIVERSO = { dois: { dano: 0.04, vida: 0.04 } as Partial<Bonus>, tres: { dano: 0.08, vida: 0.08 } as Partial<Bonus> };
+// a dupla do mesmo universo vale pouco (um trio aleatório forma em ~9% das vezes); o trio inteiro vale mais
+// (era o dobro: o trio de um universo só vencia a jornada 90–100% das vezes)
+export const UNIVERSO = { dois: { dano: 0.04, vida: 0.04 } as Partial<Bonus>, tres: { dano: 0.04, vida: 0.04 } as Partial<Bonus> };
 export const COMBOS_POR_LUTADOR = 2, COMBOS_POR_TRIO = 4;
 /** Escala de todos os combos (a alavanca da calibragem). */
 export const FORCA_DOS_COMBOS = 4.0;

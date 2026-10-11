@@ -44,21 +44,27 @@ export function forcaDoTrio(team:readonly string[]):number{return team.reduce((n
  * fraco dos dois vai para as lutas ímpares (1, 3, 5, 7, 9) e o mais forte para as pares (2, 4, 6, 8, 10):
  * a luta 10 é o mais forte dos dois sorteados entre os muito fortes, não o mais forte de todos.
  *
- * As faixas acompanham o trio do jogador (PUXA_DO_TRIO): quanto mais forte o trio, mais para cima elas vão —
- * mas só em parte, porque escolher bem tem que continuar valendo a pena. Sem trio (a Diária e a Semanal, os
+ * As faixas acompanham um pouco o trio do jogador (PUXA_DO_TRIO): quanto mais forte o trio, mais para cima
+ * elas vão — só um pouco, porque escolher bem tem que valer a pena (medido: o trio sorteado vence ~4% das
+ * jornadas, o de quem escolhe bem ~13%, o melhor ~40%). Sem trio (a Diária e a Semanal, os
  * mesmos rivais para todos), as faixas ficam no meio. ESCALAS é a Vida dos rivais (×) em cada luta.
  */
 /** O centro de cada faixa, em percentil da força dos rivais possíveis: muito fracos … muito fortes. */
-export const FAIXAS=[0.06,0.22,0.42,0.62,0.82];
+export const FAIXAS=[0.03,0.17,0.37,0.57,0.77];
 /** Meia largura de cada faixa (em percentil). */
 export const LARGURA_DA_FAIXA=0.1;
 /** Quanto as faixas sobem (ou descem) com a força do trio do jogador: 0 = nada, 1 = totalmente. */
-export const PUXA_DO_TRIO=1;
+export const PUXA_DO_TRIO=0.1;
 /** Quanto a Vida dos rivais acompanha a força do trio do jogador: ×(1 + VIDA_PELO_TRIO·(percentil − 0,5)). */
-export const VIDA_PELO_TRIO=0.3;
+export const VIDA_PELO_TRIO=0;
+/*
+ * Um trio cheio de combos pode ficar acima de todos os rivais possíveis: aí as faixas já estão no topo e não
+ * sobem mais. Para ele, a Vida dos rivais cresce com o quanto ele passa do topo (força acima do percentil 97).
+ */
+export const VIDA_ACIMA_DO_TOPO=0.25;
 /** Quantos trios rivais possíveis são sorteados para formar as faixas. */
 const AMOSTRA=900;
-export const ESCALAS=[.83,.85,.87,.87,.91,.94,.98,.99,1.01,1.01];
+export const ESCALAS=[.81,.83,.85,.85,.88,.91,.95,.96,.98,.98];
 const names=['Primeiro encontro','Novos rivais','O ritmo aumenta','Entre universos','Ponto de ruptura','Pressão crescente','Sem recuar','A última barreira','À altura das lendas','O confronto final'];
 const chave=(t:readonly string[])=>[...t].sort().join('|');
 /* `count` trios diferentes sorteados de `ids` (três índices ao acaso; rápido mesmo para milhares de trios). */
@@ -74,16 +80,14 @@ function sampledTeams(ids:string[],rng:{rng:number},count:number):string[][]{
   return [...found.values()];
 }
 type Candidato={team:string[];forca:number};
-/** A força dos três personagens, sem os combos. */
-const somaDoTrio=(team:readonly string[])=>team.reduce((n,id)=>n+(FORCA[id]??0),0);
 /*
- * Em que percentil da força dos rivais possíveis o trio do jogador está (0,5 sem trio). Conta só a força
- * dos personagens, não os combos: montar combo é vantagem de verdade e não pode deixar a campanha mais dura.
+ * Em que percentil da força dos rivais possíveis o trio do jogador está (0,5 sem trio). Conta os personagens e
+ * os combos (forcaDoTrio): com os combos de fora, um trio cheio deles vencia a jornada quase sempre (acima de 90%).
  */
 function percentilDoTrio(amostra:Candidato[],playerTeam:string[]):number{
   if(playerTeam.length!==3)return .5;
-  const f=somaDoTrio(playerTeam);
-  return amostra.filter(x=>somaDoTrio(x.team)<f).length/amostra.length;
+  const f=forcaDoTrio(playerTeam);
+  return amostra.filter(x=>x.forca<f).length/amostra.length;
 }
 export function generateCampaign(seed:number,playerTeam:string[]=[]):Encounter[]{
   const uniquePlayer=[...new Set(playerTeam)];
@@ -94,7 +98,9 @@ export function generateCampaign(seed:number,playerTeam:string[]=[]):Encounter[]
   const rng={rng:seed>>>0};
   // os rivais possíveis, do mais fraco ao mais forte
   const amostra=sampledTeams(eligible,rng,AMOSTRA).map(team=>({team,forca:forcaDoTrio(team)})).sort((a,b)=>a.forca-b.forca);
-  const percentil=percentilDoTrio(amostra,uniquePlayer),desloca=PUXA_DO_TRIO*(percentil-.5),vida=1+VIDA_PELO_TRIO*(percentil-.5);
+  const percentil=percentilDoTrio(amostra,uniquePlayer),desloca=PUXA_DO_TRIO*(percentil-.5);
+  const acima=uniquePlayer.length===3?Math.max(0,forcaDoTrio(uniquePlayer)-amostra[Math.floor(.97*amostra.length)]!.forca):0;
+  const vida=1+VIDA_PELO_TRIO*(percentil-.5)+VIDA_ACIMA_DO_TOPO*acima;
   const used=new Set(uniquePlayer),livre=(t:string[])=>t.every(id=>!used.has(id));
   const encounters:Encounter[]=new Array(10);
   FAIXAS.forEach((centro,f)=>{
