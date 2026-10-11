@@ -16,13 +16,13 @@ const vidaDoLado = (b: Battle, lado: string) => b.fighters.filter((x) => x.side 
 export const LOTE8: Record<string, Unica> = {
   vegeta: {
     nome: 'Zenkai e orgulho',
-    texto: 'Cada surra deixa o saiyajin mais forte: a primeira vez abaixo de 50% e de 25% da Vida, ganha 4% de Vida máxima e 4% de dano. Orgulhoso, a cura dos aliados vale metade nele.',
+    texto: 'Cada surra deixa o saiyajin mais forte: a primeira vez abaixo de 50% e de 25% da Vida, a Vida máxima sobe 4% e o dano, 4%. Orgulhoso, a cura dos aliados vale metade nele.',
     ganchos: {
       apanhou(m, b, f) {
         for (const [k, lim] of [['z50', 0.5], ['z25', 0.25]] as const) {
           if (u(f)[k] || fracao(f) >= lim) continue;
           u(f)[k] = 1; u(f).zenkai = (u(f).zenkai ?? 0) + 1;
-          const extra = f.maxHp * 0.04; f.maxHp += extra; f.hp += extra;
+          f.maxHp *= 1.04; // sobe o teto, não cura (não briga com a Última resistência)
           m.aviso(b, f, 'Zenkai!', f);
         }
       },

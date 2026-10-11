@@ -678,7 +678,11 @@ export function resolve(b:Battle){
   // renascer, a luta acaba e ele não volta
   const naLuta=(f:Fighter)=>alive(f);
   const p=b.fighters.some(f=>f.side==='player'&&naLuta(f)),e=b.fighters.some(f=>f.side==='enemy'&&naLuta(f));
-  if(!p||!e){b.finished=true;b.winner=p?'player':e?'enemy':null;b.reason='Incapacitação da equipe';return;}
+  if(!p||!e){
+    // os dois trios caíram no mesmo instante (o golpe que derruba o último rival também derruba quem bateu, no recuo):
+    // vence o lado que ficou de pé por último, contando pela ordem das quedas
+    const ultimaQueda=(lado:Side)=>{for(let i=b.events.length-1;i>=0;i--){const ev=b.events[i];if(ev.kind==='ko'&&b.fighters.find(f=>f.uid===ev.target)?.side===lado)return i;}return -1;};
+    b.finished=true;b.winner=p?'player':e?'enemy':ultimaQueda('player')>ultimaQueda('enemy')?'player':'enemy';b.reason='Incapacitação da equipe';return;}
   if(b.time>=TEMPO_MAXIMO){
     const vida=(lado:string)=>{const t=b.fighters.filter(f=>f.side===lado);return t.reduce((n,f)=>n+Math.max(0,f.hp)/f.maxHp,0)/t.length;};
     b.finished=true;b.winner=vida('player')>=vida('enemy')?'player':'enemy';b.reason='Tempo esgotado · decidida pela Vida';
