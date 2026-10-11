@@ -1,0 +1,668 @@
+[
+  {
+    "number": 1,
+    "id": "masterchief",
+    "name": "Master Chief",
+    "source": "assets/ai-source/portraits/overrides/masterchief.webp",
+    "sha256": "ea7621f7f5724ee3df0f2284a3787dc2159a4f6ea5aaba4169ff7d38c87c6d39",
+    "approved": true,
+    "note": ""
+  },
+  {
+    "number": 2,
+    "id": "peter",
+    "name": "Peter Griffin",
+    "source": "assets/ai-source/portraits/overrides/peter.webp",
+    "sha256": "a23e8e9650eb5476fb5cd64ef90f1fe04002ac57eb7dbe534412a7d772767867",
+    "approved": true,
+    "note": ""
+  },
+  {
+    "number": 3,
+    "id": "cartman",
+    "name": "Cartman",
+    "source": "assets/ai-source/portraits/overrides/cartman.webp",
+    "sha256": "199fa1f1561c8e88057cb76a84fae7849d498a115cf8a8bdbf552f3539a8d44d",
+    "approved": true,
+    "note": ""
+  },
+  {
+    "number": 4,
+    "id": "denji",
+    "name": "Denji",
+    "source": "assets/portraits/approved-generated/denji.webp",
+    "sha256": "869deeb2957aded4e37c355030ee3271c2e1f2059bfa5cf740dab547f31e2860",
+    "approved": true,
+    "note": ""
+  },
+  {
+    "number": 5,
+    "id": "zelda",
+    "name": "Zelda",
+    "source": "assets/ai-source/portraits/overrides/zelda.webp",
+    "sha256": "c331be11c5c486d5c8f38d72e95f736b3505bfec10612d3dd74ce1e8b8011dd2",
+    "approved": true,
+    "note": ""
+  },
+  {
+    "number": 6,
+    "id": "tifa",
+    "name": "Tifa",
+    "source": "assets/ai-source/portraits/overrides/tifa.webp",
+    "sha256": "2df5c6e8e7ebdf77f7e957e7499d952415bc15d8e67d993ca4278e3cc64f9546",
+    "approved": true,
+    "note": ""
+  },
+  {
+    "number": 7,
+    "id": "sephiroth",
+    "name": "Sephiroth",
+    "source": "assets/ai-source/portraits/overrides/sephiroth.webp",
+    "sha256": "17ff51a99891e09f58bf67e12eee2bc42a24cfb4ce34196328cb4bbc06fdb24d",
+    "approved": true,
+    "note": ""
+  },
+  {
+    "number": 8,
+    "id": "akuma",
+    "name": "Akuma",
+    "source": "assets/ai-source/portraits/overrides/akuma.webp",
+    "sha256": "a594488a9c0a9af7380827c4828ad72ec7e08e515d50da0a0f4b912f988dca2d",
+    "approved": true,
+    "note": ""
+  },
+  {
+    "number": 9,
+    "id": "scorpion",
+    "name": "Scorpion",
+    "source": "assets/ai-source/portraits/overrides/scorpion.webp",
+    "sha256": "a9a434b7e228ec1071c7294d4fd81bee8726a374a0c787e978e370c92ac52cd7",
+    "approved": true,
+    "note": ""
+  },
+  {
+    "number": 10,
+    "id": "snake",
+    "name": "Solid Snake",
+    "source": "assets/ai-source/portraits/overrides/snake.webp",
+    "sha256": "aeefc087060af3a0ac071a8083a50f0e7452b3d4836abcc8757e7431cbf59256",
+    "approved": true,
+    "note": ""
+  },
+  {
+    "number": 11,
+    "id": "wesker",
+    "name": "Wesker",
+    "source": "assets/ai-source/portraits/overrides/wesker.webp",
+    "sha256": "32b4ae8009a938e09a482d44e963b30a6490fc61c7469716b40d9c9a400f9d41",
+    "approved": true,
+    "note": ""
+  },
+  {
+    "number": 12,
+    "id": "jill",
+    "name": "Jill Valentine",
+    "source": "assets/ai-source/portraits/overrides/jill.webp",
+    "sha256": "b6510987f853c5e295b532c4c7da2737b762bbf26b3fd83f4681afb492b5294e",
+    "approved": true,
+    "note": ""
+  },
+  {
+    "number": 13,
+    "id": "leon",
+    "name": "Leon Kennedy",
+    "source": "assets/ai-source/portraits/overrides/leon.webp",
+    "sha256": "114ac1737afe73839414397ba6af420f0a5f7daf74b0fd75d146c60ebc6fce8f",
+    "approved": true,
+    "note": ""
+  },
+  {
+    "number": 14,
+    "id": "cloud",
+    "name": "Cloud",
+    "source": "assets/ai-source/portraits/overrides/cloud.webp",
+    "sha256": "96063a5dba82b4eee12f0aea8e1312797342e035253044607ec1b07bf894a5bb",
+    "approved": true,
+    "note": ""
+  },
+  {
+    "number": 15,
+    "id": "kratos",
+    "name": "Kratos",
+    "source": "assets/ai-source/portraits/overrides/kratos.webp",
+    "sha256": "6f8a22e18dcd7adcba68d676113fbfb73ff1b12a4a262a64d8032228b5511936",
+    "approved": true,
+    "note": ""
+  },
+  {
+    "number": 16,
+    "id": "sekiro",
+    "name": "Wolf (Sekiro)",
+    "source": "assets/ai-source/portraits/overrides/sekiro.webp",
+    "sha256": "dc3c1a22e270b0fac9265cc01b957f4890e706078331df620c1c1762d0385df9",
+    "approved": true,
+    "note": ""
+  },
+  {
+    "number": 17,
+    "id": "zeromm",
+    "name": "Zero",
+    "source": "assets/ai-source/portraits/overrides/zeromm.webp",
+    "sha256": "9afd1b07870a9aeca372506a7a135d6d81c75dd52c50ddcc44cc4b3535b570ad",
+    "approved": true,
+    "note": ""
+  },
+  {
+    "number": 18,
+    "id": "raidenmgr",
+    "name": "Raiden (Metal Gear)",
+    "source": "assets/ai-source/portraits/overrides/raidenmgr.webp",
+    "sha256": "8f961a651a97cdf13a79922e078d024b8ff15de94e55a226dafc55f5e492be86",
+    "approved": true,
+    "note": ""
+  },
+  {
+    "number": 19,
+    "id": "shiryu",
+    "name": "Shiryu",
+    "source": "assets/ai-source/portraits/overrides/shiryu.webp",
+    "sha256": "82d77b22a48bcc143e1fbe05a3323b6617fdcacfe5d9f33b82e902fa7da578b8",
+    "approved": true,
+    "note": ""
+  },
+  {
+    "number": 20,
+    "id": "hyoga",
+    "name": "Hyoga",
+    "source": "assets/ai-source/portraits/overrides/hyoga.webp",
+    "sha256": "5947f5d40230c8d62cbd7d3340c0bbe34e85765eb82a9e654d94e46ba9b4d73d",
+    "approved": true,
+    "note": ""
+  },
+  {
+    "number": 21,
+    "id": "shun",
+    "name": "Shun",
+    "source": "assets/ai-source/portraits/overrides/shun.webp",
+    "sha256": "f915e7e75874acf3f2d3f4aeb39afdc16642d61083a28910de3fa67c8d703aac",
+    "approved": true,
+    "note": ""
+  },
+  {
+    "number": 22,
+    "id": "ikki",
+    "name": "Ikki",
+    "source": "assets/ai-source/portraits/overrides/ikki.webp",
+    "sha256": "53c7a2fe10e949f9bfcf025faf12200fbb1f3e80503f25854456bd7f9eb82b6d",
+    "approved": true,
+    "note": ""
+  },
+  {
+    "number": 23,
+    "id": "saga",
+    "name": "Saga de Gêmeos",
+    "source": "assets/ai-source/portraits/overrides/saga.webp",
+    "sha256": "876801745e77e4c9eaaa8ab8237aa3d840a997bae7cabbc304ed6cff8ec5a76c",
+    "approved": true,
+    "note": ""
+  },
+  {
+    "number": 24,
+    "id": "shaka",
+    "name": "Shaka",
+    "source": "assets/ai-source/portraits/overrides/shaka.webp",
+    "sha256": "c77c4f65d1bc8a3ac2cad70eee096941775333e5d5d6d384a32924ee9bab78a7",
+    "approved": true,
+    "note": ""
+  },
+  {
+    "number": 25,
+    "id": "aiolia",
+    "name": "Aiolia",
+    "source": "assets/ai-source/portraits/overrides/aiolia.webp",
+    "sha256": "5042dda5fed07905c06b2775b4bc02488fe777d86be6e0327d65596ecc9fc381",
+    "approved": true,
+    "note": ""
+  },
+  {
+    "number": 26,
+    "id": "camus",
+    "name": "Camus",
+    "source": "assets/ai-source/portraits/overrides/camus.webp",
+    "sha256": "e41ecbf7aec5e1f9553966cc5e85d1c53e2fcfea826e0f3ff8e11e3e13905443",
+    "approved": true,
+    "note": ""
+  },
+  {
+    "number": 27,
+    "id": "hadescz",
+    "name": "Hades",
+    "source": "assets/ai-source/portraits/overrides/hadescz.webp",
+    "sha256": "593aebd2485f32db19a64b5b2a89a35b5e3020c81c8a06e1236501856df953a7",
+    "approved": true,
+    "note": ""
+  },
+  {
+    "number": 28,
+    "id": "broly",
+    "name": "Broly",
+    "source": "assets/ai-source/portraits/overrides/broly.webp",
+    "sha256": "e3d635d360f5e41d4f69fedb4909951631985c72862a597057eb01afe00fc5ad",
+    "approved": true,
+    "note": ""
+  },
+  {
+    "number": 29,
+    "id": "beerus",
+    "name": "Beerus",
+    "source": "assets/ai-source/portraits/overrides/beerus.webp",
+    "sha256": "f294f17e8e588bd0459b3f46c786068e4e900115881ec9c08b3772fb8c2c7d1f",
+    "approved": true,
+    "note": ""
+  },
+  {
+    "number": 30,
+    "id": "cell",
+    "name": "Cell",
+    "source": "assets/ai-source/portraits/overrides/cell.webp",
+    "sha256": "bb0cd8138981121142d2e906eb94167d35068312abbc20b24cb0e047c5553380",
+    "approved": true,
+    "note": ""
+  },
+  {
+    "number": 31,
+    "id": "kuririn",
+    "name": "Kuririn",
+    "source": "assets/ai-source/portraits/overrides/kuririn.webp",
+    "sha256": "5d892ff0884dfd9fb761708463ddd5b97630fed0a71cdcc6f034812c84f0b8e3",
+    "approved": true,
+    "note": ""
+  },
+  {
+    "number": 32,
+    "id": "majinbuu",
+    "name": "Majin Buu",
+    "source": "assets/ai-source/portraits/overrides/majinbuu.webp",
+    "sha256": "172817dbd956b81e9b2817aa69eedbd994ad3d26670ddfa69334d264357c8ac8",
+    "approved": true,
+    "note": ""
+  },
+  {
+    "number": 33,
+    "id": "piccolo",
+    "name": "Piccolo",
+    "source": "assets/portraits/approved-generated/piccolo.webp",
+    "sha256": "523e34518f4cd34bbb85cbd5887bb8e648029fcc9ce5f03a5dda976b8d4790de",
+    "approved": true,
+    "note": ""
+  },
+  {
+    "number": 34,
+    "id": "trunks",
+    "name": "Trunks",
+    "source": "assets/ai-source/portraits/overrides/trunks.webp",
+    "sha256": "fe041d807cef06f0ddea30a6c9cc8a9d4fd6c8559da8f6c1d9730ca5b943a33d",
+    "approved": true,
+    "note": ""
+  },
+  {
+    "number": 35,
+    "id": "madara",
+    "name": "Madara",
+    "source": "assets/ai-source/portraits/overrides/madara.webp",
+    "sha256": "5d306c949efe27b8e80979a504278937575b0f7b61bfaa138bb2b6bbaa16dcf2",
+    "approved": true,
+    "note": ""
+  },
+  {
+    "number": 36,
+    "id": "minato",
+    "name": "Minato",
+    "source": "assets/ai-source/portraits/overrides/minato.webp",
+    "sha256": "5f534dc670ea26c6d727c72893941b7554ced5f3b8bed312a47e1ee986a6e1a0",
+    "approved": true,
+    "note": ""
+  },
+  {
+    "number": 37,
+    "id": "pain",
+    "name": "Pain",
+    "source": "assets/ai-source/portraits/overrides/pain.webp",
+    "sha256": "b614336a0ed6c72ce80bbd0d6ef9c63392cf4a4103d3542a199fb68f81909667",
+    "approved": true,
+    "note": ""
+  },
+  {
+    "number": 38,
+    "id": "megaman",
+    "name": "Mega Man",
+    "source": "assets/ai-source/portraits/overrides/megaman.webp",
+    "sha256": "0185eba15032fc1064efb0d813bea534b2c9b943e1d11d8da9f9285027826841",
+    "approved": true,
+    "note": ""
+  },
+  {
+    "number": 39,
+    "id": "malenia",
+    "name": "Malenia",
+    "source": "assets/ai-source/portraits/overrides/malenia.webp",
+    "sha256": "2120377494d04d7fd358fe0594bb74f4f37f6f5efbcdfd99887034002b103956",
+    "approved": true,
+    "note": ""
+  },
+  {
+    "number": 40,
+    "id": "agent47",
+    "name": "Agente 47",
+    "source": "assets/ai-source/portraits/overrides/agent47.webp",
+    "sha256": "ddc3979c8a07433927c3a4fa54e933ee3104d43f378fb22bce2e1eb9c53a9631",
+    "approved": true,
+    "note": ""
+  },
+  {
+    "number": 41,
+    "id": "liukang",
+    "name": "Liu Kang",
+    "source": "assets/ai-source/portraits/overrides/liukang.webp",
+    "sha256": "c093f8262b2e1daf161939646ac1834c62ad636493a49cfa78a7852e8d04f802",
+    "approved": true,
+    "note": ""
+  },
+  {
+    "number": 42,
+    "id": "naruto",
+    "name": "Naruto",
+    "source": "assets/portraits/approved-generated/naruto.webp",
+    "sha256": "2e3118ceff5a0a9c71851034b2116ff07c89ed95bae6bf2cc31da884fccc14f9",
+    "approved": true,
+    "note": ""
+  },
+  {
+    "number": 43,
+    "id": "sasuke",
+    "name": "Sasuke",
+    "source": "assets/portraits/approved-generated/sasuke.webp",
+    "sha256": "511973173feb97f048d851823924fc2db14dfa0a49c0e917216f719422275915",
+    "approved": true,
+    "note": ""
+  },
+  {
+    "number": 44,
+    "id": "gojo",
+    "name": "Gojo",
+    "source": "assets/portraits/approved-generated/gojo.webp",
+    "sha256": "7e1ee2539998e7b989782162864b38e8f053223ab94665f7f2505a526e2e553b",
+    "approved": true,
+    "note": ""
+  },
+  {
+    "number": 45,
+    "id": "kazuya",
+    "name": "Kazuya",
+    "source": "assets/ai-source/portraits/overrides/kazuya.webp",
+    "sha256": "b98cd5c5c2be0bcf4a3c4bf37abcf35e0d701f5553427295656e71e6d54154f1",
+    "approved": true,
+    "note": ""
+  },
+  {
+    "number": 46,
+    "id": "dante",
+    "name": "Dante",
+    "source": "assets/ai-source/portraits/overrides/dante.webp",
+    "sha256": "cfdca8f7885314b4677c18b79ddadbf8f2cb59fbd99f40e295648488db70235a",
+    "approved": true,
+    "note": ""
+  },
+  {
+    "number": 47,
+    "id": "vergil",
+    "name": "Vergil",
+    "source": "assets/ai-source/portraits/overrides/vergil.webp",
+    "sha256": "42ddbfa8d7d0b5530323c6fadc81cc3e44d3047bc15ed5b4b1873d42116ab682",
+    "approved": true,
+    "note": ""
+  },
+  {
+    "number": 48,
+    "id": "bayonetta",
+    "name": "Bayonetta",
+    "source": "assets/ai-source/portraits/overrides/bayonetta.webp",
+    "sha256": "f7d6a29748d3e9b5ec1c66689882be11eb1afe71f8e0bd714c16f044c44fb209",
+    "approved": true,
+    "note": ""
+  },
+  {
+    "number": 49,
+    "id": "doomslayer",
+    "name": "Doom Slayer",
+    "source": "assets/ai-source/portraits/overrides/doomslayer.webp",
+    "sha256": "5b5ce5f5157c1f3c8d4e500a776319faa27b3b9e93916084eddbd38b6c71e960",
+    "approved": true,
+    "note": ""
+  },
+  {
+    "number": 50,
+    "id": "goku",
+    "name": "Goku",
+    "source": "assets/portraits/approved-generated/goku.webp",
+    "sha256": "c50c01c872a7dd7cc426f002f214e6bad0396fd7c4fbca149d48c51fbb6558ed",
+    "approved": true,
+    "note": ""
+  },
+  {
+    "number": 51,
+    "id": "vegeta",
+    "name": "Vegeta",
+    "source": "assets/portraits/approved-generated/vegeta.webp",
+    "sha256": "da74444cb6985ffa75dc26b7c2bf4592c05a7256ddf48a026390bf56174ecfe4",
+    "approved": true,
+    "note": ""
+  },
+  {
+    "number": 52,
+    "id": "saitama",
+    "name": "Saitama",
+    "source": "assets/portraits/approved-generated/saitama.webp",
+    "sha256": "8ae1ca1ed514efbcbd420862dc9b229b160e48a244346eb27cd0d7d897b557df",
+    "approved": true,
+    "note": ""
+  },
+  {
+    "number": 53,
+    "id": "light",
+    "name": "Light Yagami",
+    "source": "assets/portraits/approved-generated/light.webp",
+    "sha256": "bec1dd25ec934ea5673a1d724a7798b0e1ae1ceba0d1d7e2eb6482f52d0e482b",
+    "approved": true,
+    "note": ""
+  },
+  {
+    "number": 54,
+    "id": "gaara",
+    "name": "Gaara",
+    "source": "assets/ai-source/portraits/overrides/gaara.webp",
+    "sha256": "ffc5410eed3e6fdcf582ebe5050350ec16e9d0ef612e4decaa2f05374b7e316a",
+    "approved": true,
+    "note": ""
+  },
+  {
+    "number": 55,
+    "id": "levi",
+    "name": "Levi",
+    "source": "assets/portraits/approved-generated/levi.webp",
+    "sha256": "d44bb0d8e4e2010202ddd8ad734d66bb0d55cff771d9273059664ddc35d73ddb",
+    "approved": true,
+    "note": ""
+  },
+  {
+    "number": 56,
+    "id": "mikasa",
+    "name": "Mikasa",
+    "source": "assets/portraits/approved-generated/mikasa.webp",
+    "sha256": "a36ce186e5c43d77b54f156d6b5cbf35d00a0dee18fd9c1d7809ca89cb911d8f",
+    "approved": true,
+    "note": ""
+  },
+  {
+    "number": 57,
+    "id": "sonic",
+    "name": "Sonic",
+    "source": "assets/ai-source/portraits/overrides/sonic.webp",
+    "sha256": "269f82c7ade80e8904ef6d2f3fe807cc80748450a303957d5958ab8ee027e4ef",
+    "approved": true,
+    "note": ""
+  },
+  {
+    "number": 58,
+    "id": "shadowhh",
+    "name": "Shadow",
+    "source": "assets/ai-source/portraits/overrides/shadowhh.webp",
+    "sha256": "357b7d82365d30eee6240b22421139df283e8efcaeaa7745cd5387573ef729de",
+    "approved": true,
+    "note": ""
+  },
+  {
+    "number": 59,
+    "id": "bebop",
+    "name": "Bebop",
+    "source": "assets/ai-source/portraits/overrides/bebop.webp",
+    "sha256": "765e8cfe1a5611b8f9e2e89e5d1d9f012623df2e98331c9d7501e5ce0a387e5a",
+    "approved": true,
+    "note": ""
+  },
+  {
+    "number": 60,
+    "id": "caseyjones",
+    "name": "Casey Jones",
+    "source": "assets/ai-source/portraits/overrides/caseyjones.webp",
+    "sha256": "2a495e77f47b865808df0162c932efb2d491fdc03748203d82ce094c19fd8adf",
+    "approved": true,
+    "note": ""
+  },
+  {
+    "number": 61,
+    "id": "donatello",
+    "name": "Donatello",
+    "source": "assets/ai-source/portraits/overrides/donatello.webp",
+    "sha256": "25bdbf232ee3083c6c93f1d56cea6860f8ec918489762b297ee0abc8de61ddb1",
+    "approved": true,
+    "note": ""
+  },
+  {
+    "number": 62,
+    "id": "krang",
+    "name": "Krang",
+    "source": "assets/ai-source/portraits/overrides/krang.webp",
+    "sha256": "c8ba0814911c01b32643db35511f3dc09d504f61851d570b283345927abad002",
+    "approved": true,
+    "note": ""
+  },
+  {
+    "number": 63,
+    "id": "leonardo",
+    "name": "Leonardo",
+    "source": "assets/ai-source/portraits/overrides/leonardo.webp",
+    "sha256": "1dee0669dadb0fc00309c79450d00a1d54893d93aee02642a85ca5ff76dc0aa0",
+    "approved": true,
+    "note": ""
+  },
+  {
+    "number": 64,
+    "id": "splinter",
+    "name": "Mestre Splinter",
+    "source": "assets/ai-source/portraits/overrides/splinter.webp",
+    "sha256": "1b0b0c38d993cfcd6b373c52a81f99705b9cc2d6f7853dc723881e00960bc1a2",
+    "approved": true,
+    "note": ""
+  },
+  {
+    "number": 65,
+    "id": "michelangelo",
+    "name": "Michelangelo",
+    "source": "assets/ai-source/portraits/overrides/michelangelo.webp",
+    "sha256": "e38fbfaddd84fe91fa6adddc4956cef0749d06e018ecf586d11914906e1054b3",
+    "approved": true,
+    "note": ""
+  },
+  {
+    "number": 66,
+    "id": "raphael",
+    "name": "Raphael",
+    "source": "assets/ai-source/portraits/overrides/raphael.webp",
+    "sha256": "ab33ea90697c8ddb96eede56f0f2d444bafac0655ba8aa2b6f8eb3a26ab8acf5",
+    "approved": true,
+    "note": ""
+  },
+  {
+    "number": 67,
+    "id": "shredder",
+    "name": "Destruidor (Shredder)",
+    "source": "assets/ai-source/portraits/overrides/shredder.webp",
+    "sha256": "5221cf1b8d80c11d952a295ff4366b8651664cd5b4195048053d3bd60ba6dbe7",
+    "approved": true,
+    "note": ""
+  },
+  {
+    "number": 68,
+    "id": "liono",
+    "name": "Lion-O",
+    "source": "assets/ai-source/portraits/overrides/liono.webp",
+    "sha256": "344d22e589614dfaf760333e412f5e7f19ad0462fef008b3d9abcf9a63da307c",
+    "approved": true,
+    "note": "Símbolo retirado do peito; preservado na espada e no cinto."
+  },
+  {
+    "number": 69,
+    "id": "plankton",
+    "name": "Plankton",
+    "source": "assets/ai-source/portraits/overrides/plankton.webp",
+    "sha256": "4eaba1a68c083156c8fc81f12f9a62693fc9ca2be8f2a393e79f55ca3268bbda",
+    "approved": true,
+    "note": ""
+  },
+  {
+    "number": 70,
+    "id": "capitaoplaneta",
+    "name": "Capitão Planeta",
+    "source": "assets/ai-source/portraits/overrides/capitaoplaneta.webp",
+    "sha256": "84a7ee7c09bc3c3816a5fa99b76f865310b7264a3edab90fa6960e7c172cfd14",
+    "approved": true,
+    "note": ""
+  },
+  {
+    "number": 71,
+    "id": "coragem",
+    "name": "Coragem",
+    "source": "assets/ai-source/portraits/overrides/coragem.webp",
+    "sha256": "c8cc544328d6433beba4fc80632ae94b8808a0988969f81130df4ece6d02a791",
+    "approved": true,
+    "note": ""
+  },
+  {
+    "number": 72,
+    "id": "dannyphantom",
+    "name": "Danny Phantom",
+    "source": "assets/ai-source/portraits/overrides/dannyphantom.webp",
+    "sha256": "ddd6b4d5d02b6eea67ed4526bbabbf2edf02e2676566b7f536f742c94b717852",
+    "approved": true,
+    "note": ""
+  },
+  {
+    "number": 73,
+    "id": "tom",
+    "name": "Tom",
+    "source": "assets/ai-source/portraits/overrides/tom.webp",
+    "sha256": "d81de16546934aab701dfc5d89f7c897d4c844cc5c007aee4f26d711881db8aa",
+    "approved": true,
+    "note": ""
+  },
+  {
+    "number": 74,
+    "id": "jerry",
+    "name": "Jerry",
+    "source": "assets/ai-source/portraits/overrides/jerry.webp",
+    "sha256": "044911d302c36d07130701af057cc5e5a0e8f1802d236573c91a5939217c7b0a",
+    "approved": true,
+    "note": ""
+  }
+]

@@ -5,9 +5,11 @@ from PIL import Image, ImageOps
 
 ROOT = Path(__file__).resolve().parents[2]
 SOURCE = ROOT / "assets/portraits/source"
+APPROVED_GENERATED = ROOT / "assets/portraits/approved-generated"
 OUTPUT = ROOT / "public/assets/portraits"
 ORIGINALS = ("goku", "vegeta", "naruto", "sasuke", "luffy", "gojo", "light", "saitama")
-GENERATED = sorted(path.stem for path in SOURCE.glob("*.webp"))
+GENERATED = sorted({path.stem for directory in (SOURCE, APPROVED_GENERATED)
+                    for path in directory.glob("*.webp")})
 # Tall full-figure illustrations are framed at the waist for the small game cards.
 # Keep the untouched source so each crop can be revised independently.
 UPPER_BODY_CROP = {
@@ -23,13 +25,14 @@ UPPER_BODY_CROP = {
 }
 
 for name in GENERATED:
-    source = SOURCE / f"{name}.webp"
+    approved_source = APPROVED_GENERATED / f"{name}.webp"
+    source = approved_source if approved_source.exists() else SOURCE / f"{name}.webp"
     with Image.open(source) as image:
         rgba = image.convert("RGBA")
-        if name in ORIGINALS:
+        if name in ORIGINALS and not approved_source.exists():
             portrait = rgba.resize((768, 896), Image.Resampling.LANCZOS)
         else:
-            if name in UPPER_BODY_CROP:
+            if name in UPPER_BODY_CROP and not approved_source.exists():
                 rgba = rgba.crop((0, 0, rgba.width, round(rgba.height * UPPER_BODY_CROP[name])))
             artwork = ImageOps.contain(rgba, (768, 896), Image.Resampling.LANCZOS)
             portrait = Image.new("RGBA", (768, 896))

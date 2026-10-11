@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import json
 import hashlib
+from io import BytesIO
 import subprocess
 from pathlib import Path
 
@@ -120,7 +121,15 @@ def main() -> None:
                 if digest in digests:
                     raise ValueError(f'Duplicate portrait: {character["id"]}')
                 digests.add(digest)
-                canvas.save(DESTINATION / f"{character['id']}.webp", format='WEBP', quality=88, method=3)
+                # Encode fully before replacing the file used by tests and builds.
+                encoded = BytesIO()
+                canvas.save(encoded, format='WEBP', quality=88, method=3)
+                with Image.open(BytesIO(encoded.getvalue())) as verified:
+                    verified.verify()
+                destination = DESTINATION / f"{character['id']}.webp"
+                temporary = destination.with_suffix('.webp.tmp')
+                temporary.write_bytes(encoded.getvalue())
+                temporary.replace(destination)
         finally:
             if image is not None:
                 image.close()

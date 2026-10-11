@@ -35,7 +35,7 @@ const imagePortraits:Record<string,string>={
   rogue:'/assets/portraits/rogue.webp',jeangrey:'/assets/portraits/jeangrey.webp',cyclops:'/assets/portraits/cyclops.webp',
   yugi:'/assets/portraits/yugi.webp',kaiba:'/assets/portraits/kaiba.webp',kaneki:'/assets/portraits/kaneki.webp',jinwoo:'/assets/portraits/jinwoo.webp',
   yor:'/assets/portraits/yor.webp',loid:'/assets/portraits/loid.webp',anya:'/assets/portraits/anya.webp',frieren:'/assets/portraits/frieren.webp',
-  makima:'/assets/portraits/makima.webp',power:'/assets/portraits/power.webp',denji:'/assets/portraits/denji.jpg',giorno:'/assets/portraits/giorno.webp',
+  makima:'/assets/portraits/makima.webp',power:'/assets/portraits/power.webp',denji:'/assets/portraits/denji.webp',giorno:'/assets/portraits/giorno.webp',
   dio:'/assets/portraits/dio.webp',jotaro:'/assets/portraits/jotaro.webp',guts:'/assets/portraits/guts.webp',griffith:'/assets/portraits/griffith.webp',
   roy:'/assets/portraits/roy.webp',alphonse:'/assets/portraits/alphonse.webp',edward:'/assets/portraits/edward.webp',kurapika:'/assets/portraits/kurapika.webp',
   killua:'/assets/portraits/killua.webp',gon:'/assets/portraits/gon.webp',levi:'/assets/portraits/levi.webp',hisoka:'/assets/portraits/hisoka.webp',
