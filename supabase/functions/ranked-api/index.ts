@@ -168,9 +168,9 @@ Deno.serve(async (request:Request)=>{
       const handle=validHandle(input.handle);if(!handle)return fail('Use 3–16 letras, números, espaços ou _. Sem contato pessoal ou ofensa.',422,origin);
       const existing=await profile(user.id);
       if(existing&&existing.handle.toLowerCase()===handle.toLowerCase())return json({profile:{handle:existing.handle,xp:existing.xp,level:existing.nexus_level}},200,origin);
-      if(existing?.renamed_at&&Date.now()-new Date(existing.renamed_at).getTime()<30*86400000)return fail('Nome pode mudar uma vez a cada 30 dias.',429,origin);
-      const agora=new Date().toISOString();
-      const result=existing?await admin.from('players').update({handle,renamed_at:agora,updated_at:agora}).eq('id',user.id).select('handle,xp,nexus_level').single():await admin.from('players').insert({id:user.id,handle}).select('handle,xp,nexus_level').single();
+      // o nome do ranking é escolhido uma vez, ao criar a conta, e não muda mais (pedido do dono do jogo)
+      if(existing)return fail('O nome do ranking é escolhido uma vez e não pode ser mudado.',409,origin);
+      const result=await admin.from('players').insert({id:user.id,handle}).select('handle,xp,nexus_level').single();
       if(result.error){if(result.error.code==='23505')return fail('Este nome já está em uso.',409,origin);throw result.error;}
       return json({profile:{handle:result.data.handle,xp:result.data.xp,level:result.data.nexus_level}},200,origin);
     }

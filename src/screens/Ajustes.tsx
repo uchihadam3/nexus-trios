@@ -1,5 +1,5 @@
 import { useState,type CSSProperties,type ReactNode } from 'react';
-import { Volume2,Volume1,Music2,Zap,Sparkles,Hash,Wind,Gauge,Repeat,CircleHelp,Eye,Clapperboard,UserPen,RotateCcw,Settings2,Check } from 'lucide-react';
+import { Volume2,Volume1,Music2,Zap,Sparkles,Hash,Wind,Gauge,Repeat,CircleHelp,Eye,Clapperboard,RotateCcw,Settings2,Check } from 'lucide-react';
 import type { Settings } from '../lib/storage';
 import { TelaTopo } from '../components/Casca';
 import { battleAudio } from '../lib/audio';
@@ -10,7 +10,7 @@ import { battleAudio } from '../lib/audio';
  * Som em três barras grandes com o número ao lado; o visual e a sequência
  * automática como interruptores-cartão (tocar acende); velocidade e ajuda como
  * botões de escolha; e embaixo uma fileira de atalhos — rever o tutorial, a
- * galeria de efeitos, o nome no ranking e apagar os dados. Tudo cabe em pouco
+ * galeria de efeitos e apagar os dados. Tudo cabe em pouco
  * mais de uma tela no celular.
  */
 function Barra({icone,nome,valor,onChange,cor}:{icone:ReactNode;nome:string;valor:number;onChange:(v:number)=>void;cor:string}){
@@ -53,7 +53,7 @@ function TestarSom({settings:s}:{settings:Settings}){
   return <div className="aj-testar"><button type="button" onClick={()=>void testar()}><Volume1 size={18}/>Testar som</button>{aviso&&<p role="status">{aviso}</p>}</div>;
 }
 
-export function SettingsScreen({settings:s,onChange,onReset,onGaleria,ranking}:{settings:Settings;onChange:(s:Settings)=>void;onReset:()=>void;onGaleria:()=>void;ranking?:{nome?:string;onEditar:()=>void}}){
+export function SettingsScreen({settings:s,onChange,onReset,onGaleria}:{settings:Settings;onChange:(s:Settings)=>void;onReset:()=>void;onGaleria:()=>void}){
   const [confirm,setConfirm]=useState(false),[revisto,setRevisto]=useState(false);
   const muda=<K extends keyof Settings>(k:K,v:Settings[K])=>onChange({...s,[k]:v});
   return <section className="ajustes-v2">
@@ -86,7 +86,6 @@ export function SettingsScreen({settings:s,onChange,onReset,onGaleria,ranking}:{
     <div className="aj-atalhos">
       <button onClick={()=>{try{localStorage.removeItem('nexus-battle-guide-v1');setRevisto(true);}catch{return}}} style={{'--tile':'#8fd3ff'} as CSSProperties}>{revisto?<Check size={22}/>:<Eye size={22}/>}<b>{revisto?'Guia volta na próxima luta':'Rever tutorial'}</b></button>
       <button onClick={onGaleria} style={{'--tile':'#ffd36b'} as CSSProperties}><Clapperboard size={22}/><b>Galeria de efeitos</b></button>
-      {ranking&&<button onClick={ranking.onEditar} style={{'--tile':'#86e3a8'} as CSSProperties}><UserPen size={22}/><b>Nome no ranking</b><small>{ranking.nome??'ainda não escolhido'}</small></button>}
       <button className="aj-perigo" onClick={()=>setConfirm(true)} style={{'--tile':'#ff7a6b'} as CSSProperties}><RotateCcw size={22}/><b>Resetar dados</b></button>
     </div>
     {confirm&&<div className="aj-confirma" role="alertdialog" aria-label="Apagar dados locais?">
