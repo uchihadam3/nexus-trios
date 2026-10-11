@@ -31,7 +31,7 @@ export interface Motor {
   levanta(b: Battle, fonte: Fighter, alvo: Fighter, fracao: number): void;
 }
 /** De onde veio o golpe: `direto` = ataque ou habilidade (não Queimando, Veneno, devolvido…). */
-export interface Golpe { direto: boolean; label: string; habilidade: boolean }
+export interface Golpe { direto: boolean; label: string; habilidade: boolean; /** Qual habilidade (0, 1 ou 2), quando o golpe é de uma. */ indice?: number }
 
 export interface Ganchos {
   inicio?(m: Motor, b: Battle, f: Fighter): void;
@@ -47,6 +47,10 @@ export interface Ganchos {
   recebeAliado?(m: Motor, b: Battle, f: Fighter, aliado: Fighter, fonte: Fighter, g: Golpe): number;
   /** Multiplica a cura que ele recebe. */
   curaRecebida?(m: Motor, b: Battle, f: Fighter, fonte: Fighter): number;
+  /** Multiplica a cura que um rival dele recebe (ex.: impedir rivais de curar). */
+  curaNoRival?(m: Motor, b: Battle, f: Fighter, alvo: Fighter): number;
+  /** Ele desviou de um golpe com Esquiva. */
+  desviou?(m: Motor, b: Battle, f: Fighter, fonte: Fighter): void;
   /** Multiplica a cura que ele faz em `alvo`. */
   curaFeita?(m: Motor, b: Battle, f: Fighter, alvo: Fighter): number;
   /** Multiplica a velocidade com que a próxima ação enche. */
@@ -88,6 +92,8 @@ export interface Ganchos {
   preparo?(f: Fighter, indice: number): number;
   /** Escolhe o alvo do ataque básico dele (undefined = o de sempre). */
   alvoDoBasico?(m: Motor, b: Battle, f: Fighter): Fighter | undefined;
+  /** Os golpes diretos dele passam pelo Escudo e vão direto na Vida. */
+  atravessaEscudo?: boolean;
   /** Os golpes dele não acordam quem está Dormindo. */
   naoAcorda?: boolean;
   /** Os golpes dele nunca derrubam (deixam com 1 de Vida). */

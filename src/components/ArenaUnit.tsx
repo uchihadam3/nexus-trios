@@ -151,7 +151,7 @@ export function ArenaUnit({fighter:f,battle,beat,onInspect,numbers,threatened,li
         {errou&&<span key={`e${errou.id}`} className={`discovery-pop ${errou.label==='Esquivou'?'esquivou-pop':'errou-pop'}`}>{errou.label==='Esquivou'?'Esquivou!':'Errou!'}</span>}
         {anulou&&<span key={`a${anulou.id}`} className={`discovery-pop ${anulou.label==='Última resistência'?'resistiu-pop':'anulou-pop'}`}>{anulou.label==='Última resistência'?'Última resistência!':<>Barreira · anulou {anulou.status?statuses[anulou.status].name:'o debuff'}</>}</span>}
         {limpo&&!levantou&&<span key={`l${limpo.id}`} className={`discovery-pop ${limpo.kind==='cleanse'?'purifica-pop':'dissipa-pop'}`}>{limpo.label}{(limpo.removidos?.length??0)>0&&<> · {limpo.removidos!.map(id=>statuses[id].name).join(', ')}</>}</span>}
-        {reagindo&&<span key={`r${reagindo.eventos[0]??0}`} className="reacao-pop"><Zap size={11} strokeWidth={3}/>{reagindo.rotulo??'Reação'}</span>}
+        {/* rótulo vazio = combo de tempo em tempo: só o efeito aparece, sem selo com nome */}{reagindo&&reagindo.rotulo!==''&&<span key={`r${reagindo.eventos[0]??0}`} className="reacao-pop"><Zap size={11} strokeWidth={3}/>{reagindo.rotulo??'Reação'}</span>}
         {reagindo&&<span key={`a${reagindo.eventos[0]??0}`} className="reacao-anel" aria-hidden="true"/>}
         {applied&&<span key={applied.id} className="status-pop">{applied.status&&<img src={`/assets/statuses/${applied.status}.png`} alt=""/>}{applied.label}</span>}
         {discovered&&<span key={discovered.id} className="discovery-pop">{discovered.label}</span>}

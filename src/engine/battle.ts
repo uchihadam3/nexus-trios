@@ -22,7 +22,7 @@ export function emit(b:Battle,e:Omit<BattleEvent,'id'|'time'>){b.events.push({..
 /* Mecânicas únicas (src/engine/unicas.ts): os ganchos de quem tem uma. */
 const unica=(f:Fighter)=>UNICAS[f.characterId]?.ganchos;
 /** Quem está usando uma habilidade agora (o golpe de uma habilidade conta como `habilidade` para as mecânicas). */
-let agindo:string|null=null;
+let agindo:string|null=null,agindoIndice=-1;
 const M:Motor={
   dano:(b,fonte,alvo,valor,direto=true,label='Impacto')=>damage(b,fonte,alvo,valor,direto,label),
   cura:(b,fonte,alvo,valor,label)=>healing(b,fonte,alvo,valor,label),
@@ -300,7 +300,7 @@ function damage(b:Battle,source:Fighter,target:Fighter,raw:number,direto=true,la
   // Veneno e Sangramento são por dentro: passam por Exposto, Protegido e Escudo
   const interno=label==='Veneno'||label==='Sangramento'||label==='Perfuração';
   // Mecânicas únicas: quem bate (e a aura dos aliados dele) e quem apanha (e a aura dos aliados dele)
-  const g:Golpe={direto,label,habilidade:agindo===source.uid};
+  const g:Golpe={direto,label,habilidade:agindo===source.uid,...(agindo===source.uid?{indice:agindoIndice}:{})};
   let mCausa=1,mRecebe=unica(target)?.recebe?.(M,b,target,source,g)??1;
   if(!devolvido&&!interno){mCausa*=unica(source)?.causa?.(M,b,source,target,g)??1;for(const a of b.fighters)if(a.side===source.side&&alive(a))mCausa*=unica(a)?.causaAliado?.(M,b,a,source,target,g)??1;}
   for(const a of b.fighters)if(a.side===target.side&&a!==target&&alive(a))mRecebe*=unica(a)?.recebeAliado?.(M,b,a,target,source,g)??1;
@@ -314,7 +314,7 @@ function damage(b:Battle,source:Fighter,target:Fighter,raw:number,direto=true,la
   // Mecânicas únicas que põem teto no golpe (o Coração da Peach)
   for(const a of b.fighters)if(a.side===target.side&&alive(a)){const h=unica(a)?.limita;if(h){const antes=amount;amount=h(M,b,a,target,amount);blocked+=antes-amount;}}
   // só o que é por dentro (Veneno, Sangramento) passa pelo Escudo; Marcado não atravessa mais (pedido do jogador)
-  const atravessaEscudo=interno;
+  const atravessaEscudo=interno||(direto&&!!unica(source)?.atravessaEscudo);
   if(!atravessaEscudo)for(const s of target.shields){const used=Math.min(s.amount,amount);s.amount-=used;amount-=used;blocked+=used;const owner=b.fighters.find(f=>f.uid===s.source);if(owner&&used>0){owner.stats.protection+=used;pressure(b,owner.side,D.event.usefulProtectionPerFullCondition*clamp(used/target.maxHp));emit(b,{kind:'block',source:owner.uid,target:target.uid,attacker:source.uid,label:'Bloqueio',value:used,visual:'shield'});trigger(b,owner,'protected',owner,used/100);}}
   target.shields=target.shields.filter(s=>s.amount>.01);
   if(protection>0){const owner=b.fighters.find(f=>f.uid===target.statuses.find(s=>s.id==='protected')?.source);if(owner){owner.stats.protection+=beforeProtection*protection;pressure(b,owner.side,D.event.usefulProtectionPerFullCondition*clamp(beforeProtection*protection/target.maxHp));emit(b,{kind:'block',source:owner.uid,target:target.uid,attacker:source.uid,label:'Proteção',value:beforeProtection*protection,visual:'shield'});trigger(b,owner,'protected',owner,beforeProtection*protection/100);}}
@@ -377,6 +377,7 @@ function healing(b:Battle,source:Fighter,target:Fighter,value:number,label='Recu
   if(!alive(target))return;
   value*=(1-Math.min(intensity(target,'cursed'),statuses.cursed.cap))*(1+(source.bonus?.cura??0));
   value*=(unica(source)?.curaFeita?.(M,b,source,target)??1)*(unica(target)?.curaRecebida?.(M,b,target,source)??1);
+  for(const x of b.fighters)if(x.side!==target.side&&alive(x)){const h=unica(x)?.curaNoRival;if(h)value*=h(M,b,x,target);}
   const used=Math.min(target.maxHp-target.hp,value);target.hp+=used;source.stats.healing+=used;
   if(used>.01){pressure(b,source.side,D.event.usefulHealingPerFullCondition*clamp(used/target.maxHp));emit(b,{kind:'heal',source:source.uid,target:target.uid,label,value:used});}
 }
@@ -447,7 +448,7 @@ export function applyEffects(b:Battle,source:Fighter,selected:Fighter[],effects:
       const chance=Math.min(intensity(alvo,'evasion'),statuses.evasion.cap);
       const sim=chance>0&&random(b)<chance;
       decidido.set(alvo.uid,sim);
-      if(sim)emit(b,{kind:'miss',source:source.uid,target:alvo.uid,label:'Esquivou'});
+      if(sim){emit(b,{kind:'miss',source:source.uid,target:alvo.uid,label:'Esquivou'});unica(alvo)?.desviou?.(M,b,alvo,source);}
     }
     return decidido.get(alvo.uid)!;
   };
@@ -640,9 +641,9 @@ function execute(b:Battle,f:Fighter,index:number,selected:Fighter[]){
   const s=byId[f.characterId].skills[index],eventStart=b.nextEvent;
   emit(b,{kind:'skill',source:f.uid,target:selected[0]?.uid,skill:index,label:s.name,visual:s.icon});
   unica(f)?.antes?.(M,b,f,index);
-  const quemAgia=agindo;agindo=f.uid;
+  const quemAgia=agindo,indiceAntes=agindoIndice;agindo=f.uid;agindoIndice=index;
   applyEffects(b,f,selected,s.effects);
-  agindo=quemAgia;
+  agindo=quemAgia;agindoIndice=indiceAntes;
   sangra(b,f);
   const effective=b.events.some(e=>e.id>=eventStart&&(['damage','heal','block','interrupt','ko','synergy','revive','cleanse','dispel','copy'].includes(e.kind)||e.kind==='status'&&e.target!==f.uid));
   if(effective)pressure(b,f.side,s.preparation>=2.5?D.event.grandSkill:D.event.successfulSkill);
