@@ -92,8 +92,12 @@ def main() -> None:
     skill_records={(item['character'],item['id']):item for item in icons['skills']}
     pages={page['character']:page for page in sheets['pages']}
     ai=0
-    for c in characters[100:250]:
+    for index,c in enumerate(characters[100:],start=100):
         source=SOURCES/f"{c['id']}.png"
+        # do 251 em diante a arte é opcional: sem a tira em ai-source, fica o placeholder
+        if index>=250 and not source.exists():
+            if c['id'] in pages: pages[c['id']]['placeholder']=True  # a arte sumiu: o placeholder volta
+            continue
         if not source.exists() and c['id']!='mario':
             raise FileNotFoundError(f'Missing original AI art for {c["name"]}: {source}')
         source_size=Image.open(source).size if source.exists() else None
@@ -131,8 +135,8 @@ def main() -> None:
     icon_path.write_text(json.dumps(icons,ensure_ascii=False,indent=2)+'\n')
     sheet_path.write_text(json.dumps(sheets,ensure_ascii=False,indent=2)+'\n')
     objects=int(not (SOURCES/'mario.png').exists())
-    assert ai==149 and objects==1
-    print(f'Built 150 character sheets / 450 original icons ({ai} AI sheets, {objects} illustrated object sheet).')
+    assert ai>=149 and objects==1
+    print(f'Built {ai+objects} character sheets / {3*(ai+objects)} original icons ({ai} AI sheets, {objects} illustrated object sheet).')
 
 
 if __name__=='__main__': main()

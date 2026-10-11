@@ -72,7 +72,7 @@ describe('Arte local e composição',()=>{
     expect(pngs.every(png=>png.subarray(0,8).equals(Buffer.from([137,80,78,71,13,10,26,10])))).toBe(true);
     expect(pngs.every(png=>png.readUInt32BE(16)===128&&png.readUInt32BE(20)===128&&png[25]===6)).toBe(true);
     expect(manifest.skills.every(skill=>skill.sheet.startsWith('/assets/sheets/skills/pages/')&&skill.crop.width===128&&skill.crop.height===128)).toBe(true);
-    const sheetManifest=JSON.parse(readFileSync(new URL('assets/sheets/skills/manifest.json',root),'utf8')) as {count:number;pages:{sourceSheet:string;sheet:string;resolution:number[];columns:number;rows:number;cell:number[];icons:unknown[]}[]};
+    const sheetManifest=JSON.parse(readFileSync(new URL('assets/sheets/skills/manifest.json',root),'utf8')) as {count:number;pages:{character:string;sourceSheet:string;sheet:string;resolution:number[];columns:number;rows:number;cell:number[];icons:unknown[]}[]};
     expect(sheetManifest.count).toBe(characters.length*3);
     expect(sheetManifest.pages).toHaveLength(characters.length);
     expect(sheetManifest.pages.every(page=>page.resolution[0]===512&&page.resolution[1]===176&&page.columns===3&&page.rows===1&&page.cell[0]===160&&page.cell[1]===160&&page.icons.length===3&&existsSync(new URL(page.sourceSheet.slice(1),root)))).toBe(true);
@@ -86,7 +86,11 @@ describe('Arte local e composição',()=>{
     expect(expanded.filter(skill=>skill.artMethod==='object illustration')).toHaveLength(3);
     expect(expanded.every(skill=>!('placeholder' in skill)&&['AI sheet','object illustration'].includes(skill.artMethod))).toBe(true);
     expect(sheetManifest.pages.slice(100,250).every(page=>!('placeholder' in page))).toBe(true);
-    expect(sheetManifest.pages.slice(250).every(page=>'placeholder' in page)).toBe(true);
+    // do 251 em diante: placeholder até a tira do jogador chegar em ai-source; com a tira, vira folha de verdade
+    for(const page of sheetManifest.pages.slice(250)){
+      const temArte=existsSync(new URL(`../assets/ai-source/skills/${page.character}.png`,root));
+      expect('placeholder' in page,page.character).toBe(!temArte);
+    }
     for(const character of characters.slice(100,250).filter(character=>character.id!=='mario')){
       expect(existsSync(new URL(`../assets/ai-source/skills/${character.id}.png`,root)),character.id).toBe(true);
     }

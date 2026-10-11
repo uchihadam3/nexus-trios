@@ -166,7 +166,8 @@ def main() -> None:
         novos += 1
 
     manifesto_icones["count"] = len(manifesto_icones["skills"])
-    manifesto_folhas["count"] = sum(len(p["icons"]) for p in manifesto_folhas["pages"])
+    manifesto_folhas["icons"] = [i for p in manifesto_folhas["pages"] for i in p["icons"]]
+    manifesto_folhas["count"] = len(manifesto_folhas["icons"])
     (PUBLIC / "assets/skills/manifest.json").write_text(json.dumps(manifesto_icones, indent=2) + "\n")
     (PUBLIC / "assets/sheets/skills/manifest.json").write_text(json.dumps(manifesto_folhas, indent=2) + "\n")
     print(f"personagens novos com ícones placeholder: {novos}")

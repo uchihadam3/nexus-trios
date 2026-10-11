@@ -25,7 +25,7 @@ APPROVALS = ROOT / 'src/data/expanded-portrait-approvals.json'
 
 def roster() -> list[dict[str, str]]:
     command = ("import {characters} from './src/data/characters.ts';"
-               "console.log(JSON.stringify(characters.slice(100,250).map(c=>({id:c.id,name:c.name}))))")
+               "console.log(JSON.stringify(characters.slice(100).map(c=>({id:c.id,name:c.name}))))")
     result = subprocess.run(['node', '--import', 'tsx', '--input-type=module', '-e', command],
                             cwd=ROOT, check=True, capture_output=True, text=True)
     return json.loads(result.stdout)
@@ -66,7 +66,8 @@ def keep_main_silhouette(art: Image.Image) -> Image.Image:
 
 def main() -> None:
     characters = roster()
-    assert len(characters) == 150
+    # Os 150 primeiros (101–250) vêm das grades de 4; do 251 em diante, só de overrides/<id>.webp|png.
+    assert len(characters) >= 150
     approved = set(json.loads(APPROVALS.read_text()))
     assert approved <= {c['id'] for c in characters}
     DESTINATION.mkdir(parents=True, exist_ok=True)
@@ -74,7 +75,7 @@ def main() -> None:
         stale.unlink()
     digests = set()
     for group in range(38):
-        selected = [(slot, c) for slot, c in enumerate(characters[group*4:group*4+4])
+        selected = [(slot, c) for slot, c in enumerate(characters[group*4:min(group*4+4, 150)])
                     if c['id'] in approved]
         if not selected:
             continue
@@ -138,8 +139,29 @@ def main() -> None:
         finally:
             if image is not None:
                 image.close()
+    for character in characters[150:]:
+        if character['id'] not in approved:
+            continue
+        override = next((p for p in (OVERRIDES / f"{character['id']}.webp",
+                                      OVERRIDES / f"{character['id']}.png") if p.exists()), None)
+        if override is None:
+            raise FileNotFoundError(f"Missing portrait for {character['id']}: put it in {OVERRIDES}")
+        art = Image.open(override).convert('RGBA')
+        if art.getchannel('A').getextrema()[0] != 0:
+            raise ValueError(f'Portrait must have true transparency: {override}')
+        bounds = art.getbbox()
+        if not bounds:
+            raise ValueError(f'Empty portrait: {character["id"]}')
+        art = ImageOps.contain(art.crop(bounds), (500, 500), Image.Resampling.LANCZOS)
+        canvas = Image.new('RGBA', (512, 512))
+        canvas.alpha_composite(art, ((512-art.width)//2, (512-art.height)//2))
+        digest = hashlib.sha256(canvas.tobytes()).hexdigest()
+        if digest in digests:
+            raise ValueError(f'Duplicate portrait: {character["id"]}')
+        digests.add(digest)
+        canvas.save(DESTINATION / f"{character['id']}.webp", format='WEBP', quality=88, method=3)
     assert len(digests) == len(approved)
-    print(f'Built {len(approved)} reviewed portraits; {150-len(approved)} await correction.')
+    print(f'Built {len(approved)} reviewed portraits; {len(characters)-len(approved)} still use the placeholder.')
 
 
 if __name__ == '__main__':
