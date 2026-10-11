@@ -147,14 +147,15 @@ def main() -> None:
         if override is None:
             raise FileNotFoundError(f"Missing portrait for {character['id']}: put it in {OVERRIDES}")
         art = Image.open(override).convert('RGBA')
-        if art.getchannel('A').getextrema()[0] != 0:
-            raise ValueError(f'Portrait must have true transparency: {override}')
-        bounds = art.getbbox()
-        if not bounds:
-            raise ValueError(f'Empty portrait: {character["id"]}')
-        art = ImageOps.contain(art.crop(bounds), (500, 500), Image.Resampling.LANCZOS)
-        canvas = Image.new('RGBA', (512, 512))
-        canvas.alpha_composite(art, ((512-art.width)//2, (512-art.height)//2))
+        framed = frame_for_circle(art, character['id'], 512)
+        if framed is not None:
+            canvas = framed
+        else:
+            if art.getchannel('A').getextrema() != (255, 255):
+                raise ValueError(f'New portrait must fill the circle: {override}')
+            side = min(art.size)
+            left, top = (art.width-side)//2, (art.height-side)//2
+            canvas = art.crop((left, top, left+side, top+side)).resize((512, 512), Image.Resampling.LANCZOS)
         digest = hashlib.sha256(canvas.tobytes()).hexdigest()
         if digest in digests:
             raise ValueError(f'Duplicate portrait: {character["id"]}')
