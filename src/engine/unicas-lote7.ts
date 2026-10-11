@@ -369,11 +369,11 @@ export const LOTE7: Record<string, Unica> = {
   },
   zenitsu: {
     nome: 'Luta dormindo',
-    texto: 'Abaixo de metade da Vida, desmaia de medo e luta dormindo: nunca fica Dormindo nem Confuso e causa 50% a mais.',
+    texto: 'Abaixo de 65% da Vida, desmaia de medo e luta dormindo: nunca fica Dormindo nem Confuso e causa 60% a mais.',
     ganchos: {
       imune: (f, s) => (u(f).desmaio ?? 0) > 0 && (s === 'sleep' || s === 'confused'),
-      apanhou(m, b, f) { if (!u(f).desmaio && fracao(f) < 0.5) { u(f).desmaio = 1; m.aviso(b, f, 'Zzz… Primeira postura', f); } },
-      causa: (_m, _b, f) => (u(f).desmaio ? 1.5 : 1),
+      apanhou(m, b, f) { if (!u(f).desmaio && fracao(f) < 0.65) { u(f).desmaio = 1; m.aviso(b, f, 'Zzz… Primeira postura', f); } },
+      causa: (_m, _b, f) => (u(f).desmaio ? 1.6 : 1),
     },
   },
   loid: {

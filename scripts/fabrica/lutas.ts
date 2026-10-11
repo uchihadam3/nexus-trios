@@ -87,8 +87,8 @@ function jornadas() {
  * As metas de equilíbrio por personagem (pedido do jogador: aleatório 0,5–9,9%, bom 10–35%, melhor 15–70%):
  *   aleatório — X com dois parceiros sorteados;
  *   bom — o trio que um jogador bom montaria em volta de X na escolha (pela nota, procurando combo);
- *   melhor — dos mais fortes (FORTES, medidos nas jornadas sorteadas) + os do mesmo universo, as duplas que a
- *   nota acha melhores, peneiradas em jornadas, e a vencedora medida em jornadas novas.
+ *   melhor — dos mais fortes (FORTES, medidos nas jornadas sorteadas) + os do mesmo universo, as 10 duplas que a
+ *   nota acha melhores e mais 10 sorteadas um pouco abaixo, peneiradas em jornadas, e a vencedora medida em jornadas novas.
  */
 function dificuldade() {
   const ids = characters.map((c) => c.id), NJ = lutas;
@@ -127,7 +127,10 @@ function dificuldade() {
     for (let a = 0; a < ps.length; a++) for (let b = a + 1; b < ps.length; b++) pares.push([ps[a]!, ps[b]!, forcaDoTrio([x, ps[a]!, ps[b]!])]);
     pares.sort((p, q) => q[2] - p[2]);
     const conta = (t: string[], de: number, ate: number) => { let v = 0; for (let j = de; j < ate; j++) if (jornada(t, semente(j)) === 10) v++; return v; };
-    const peneira = pares.slice(0, 10).map(([a, b]) => ({ d: [a, b], v: conta([x, a, b], NJ, NJ + 8) })).sort((p, q) => q.v - p.v).slice(0, 3)
+    // os 10 de nota mais alta e 10 sorteados entre o 11º e o 150º: a campanha põe mais Vida nos rivais do trio que passa
+    // do topo, e o melhor trio de verdade nem sempre é o de nota mais alta
+    const outros = pares.slice(10, 150).sort(() => rnd() - 0.5).slice(0, 10);
+    const peneira = [...pares.slice(0, 10), ...outros].map(([a, b]) => ({ d: [a, b], v: conta([x, a, b], NJ, NJ + 8) })).sort((p, q) => q.v - p.v).slice(0, 3)
       .map((p) => ({ ...p, v: p.v + conta([x, ...p.d], NJ + 8, NJ + 24) })).sort((p, q) => q.v - p.v);
     const melhor = peneira[0]!.d, NM = Math.max(48, Math.round(NJ / 2));
     const vMel = conta([x, ...melhor], NJ + 24, NJ + 24 + NM);

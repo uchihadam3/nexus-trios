@@ -400,19 +400,20 @@ export const LOTE2: Record<string, Unica> = {
   },
   lawliet: {
     nome: 'Suspeito',
-    texto: 'Cada habilidade dele aumenta a suspeita sobre o rival mais forte (25 por vez). Em 100, L tem certeza: o trio todo causa 30% a mais nesse rival. Contra Light, a suspeita sobe o dobro.',
+    texto: 'Começa a luta já com 30 de suspeita sobre o rival mais forte, e cada habilidade dele soma mais 35. Em 100, L tem certeza: o trio todo causa 35% a mais nesse rival. Quando o culpado cai, L já começa a suspeitar do próximo (com 50). Contra Light, a suspeita sobe o dobro.',
     ganchos: {
       usou(m, b, f) {
         const s = u(f);
-        if (s.certeza !== undefined) return;
+        // o culpado caiu: o caso continua no próximo
+        if (s.certeza !== undefined) { if (vivo(b.fighters[s.certeza]!)) return; delete s.certeza; s.suspeita = 50; }
         const alvo = maisForte(m, b, f);
         if (!alvo) return;
         s.suspeito = idx(b, alvo);
-        s.suspeita = (s.suspeita ?? 0) + (alvo.characterId === 'light' ? 50 : 25);
+        s.suspeita = (s.suspeita ?? 30) + (alvo.characterId === 'light' ? 70 : 35);
         if (s.suspeita >= 100) { s.certeza = s.suspeito; m.aviso(b, f, 'É ele.', alvo); }
         else m.aviso(b, f, `Suspeita ${s.suspeita}%`, alvo, s.suspeita);
       },
-      causaAliado: (_m, b, f, _aliado, alvo) => (u(f).certeza !== undefined && u(f).certeza === idx(b, alvo) ? 1.3 : 1),
+      causaAliado: (_m, b, f, _aliado, alvo) => (u(f).certeza !== undefined && u(f).certeza === idx(b, alvo) ? 1.35 : 1),
     },
   },
   byakuya: {
@@ -433,15 +434,17 @@ export const LOTE2: Record<string, Unica> = {
   },
   nero: {
     nome: 'Devil Bringer',
-    texto: 'A cada 10 s, o braço do diabo agarra o rival que está preparando a habilidade mais longa e puxa: a preparação é cancelada.',
+    texto: 'A cada 8 s, o braço do diabo agarra e puxa: 90 de dano no rival que está preparando a habilidade mais longa, que perde a preparação. Se ninguém está preparando, puxa o rival mais forte (60 de dano).',
     ganchos: {
       passo(m, b, f) {
         if ((u(f).braco ?? 0) > b.time) return;
         const alvo = m.rivais(b, f).filter((r) => r.cast && r.cast.duration > 1).sort((x, y) => y.cast!.duration - x.cast!.duration)[0];
-        if (!alvo) return;
-        u(f).braco = b.time + 10;
-        alvo.cast = null;
-        m.aviso(b, f, 'Puxado!', alvo);
+        const forte = alvo ?? maisForte(m, b, f);
+        if (!forte) return;
+        u(f).braco = b.time + 8;
+        if (alvo) alvo.cast = null;
+        m.aviso(b, f, 'Puxado!', forte);
+        m.dano(b, f, forte, alvo ? 90 : 60, false, 'Devil Bringer');
       },
     },
   },

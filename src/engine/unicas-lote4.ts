@@ -359,7 +359,7 @@ export const LOTE4: Record<string, Unica> = {
   },
   creeper: {
     nome: 'Tssss… BOOM',
-    texto: 'A cada 15 s chia por 1,5 s (não age) e explode: 240 de dano no rival mais forte — mas perde 15% da própria Vida.',
+    texto: 'A cada 14 s chia por 1 s (não age) e explode: 280 de dano no rival mais forte e 80 nos outros — mas perde 10% da própria Vida.',
     ganchos: {
       passo(m, b, f, dt) {
         const s = u(f);
@@ -369,11 +369,12 @@ export const LOTE4: Record<string, Unica> = {
           s.chiando = 0;
           const a = maisForte(m, b, f);
           m.aviso(b, f, 'BOOM', a ?? f);
-          if (a) m.dano(b, f, a, 240, false, 'Explosão do Creeper');
-          f.hp = Math.max(1, f.hp - f.maxHp * 0.15);
+          if (a) m.dano(b, f, a, 280, false, 'Explosão do Creeper');
+          for (const r of m.rivais(b, f)) if (r !== a) m.dano(b, f, r, 80, false, 'Explosão do Creeper');
+          f.hp = Math.max(1, f.hp - f.maxHp * 0.1);
           return;
         }
-        if (relogio(f, 'tss', dt, 15, 8)) { s.chiando = 1.5; m.aviso(b, f, 'Tssss…', f); }
+        if (relogio(f, 'tss', dt, 14, 8)) { s.chiando = 1; m.aviso(b, f, 'Tssss…', f); }
       },
       parado: (f) => (u(f).chiando ?? 0) > 0,
     },
