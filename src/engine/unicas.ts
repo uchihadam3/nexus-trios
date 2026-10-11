@@ -10,6 +10,7 @@ import { LOTE4 } from './unicas-lote4';
 import { LOTE5 } from './unicas-lote5';
 import { LOTE6 } from './unicas-lote6';
 import { LOTE7 } from './unicas-lote7';
+import { LOTE8 } from './unicas-lote8';
 export type { Ganchos, Golpe, Motor, Unica } from './unicas-base';
 
 const LOTE1: Record<string, Unica> = {
@@ -630,5 +631,5 @@ const LOTE1: Record<string, Unica> = {
   },
 };
 
-export const UNICAS: Record<string, Unica> = { ...LOTE1, ...LOTE2, ...LOTE3, ...LOTE4, ...LOTE5, ...LOTE6, ...LOTE7 };
+export const UNICAS: Record<string, Unica> = { ...LOTE1, ...LOTE2, ...LOTE3, ...LOTE4, ...LOTE5, ...LOTE6, ...LOTE7, ...LOTE8 };
 export const unicaDe = (id: string): Unica | undefined => UNICAS[id];
