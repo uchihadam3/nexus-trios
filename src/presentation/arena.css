@@ -44,15 +44,15 @@
 .arena-v2 .hud-advantage{min-width:0;width:100%;max-width:640px;justify-self:center;display:grid;gap:5px}
 .arena-v2 .hud-advantage-labels{display:flex;align-items:center;justify-content:space-between;gap:6px;font-size:7.5px;font-weight:800;letter-spacing:1.3px;line-height:1}
 .arena-v2 .hud-advantage-labels span{white-space:nowrap;flex:0 0 auto}
-.arena-v2 .hud-advantage-labels span:first-child{color:var(--rival)}
-.arena-v2 .hud-advantage-labels span:last-child{color:var(--ally)}
+.arena-v2 .hud-advantage-labels span:first-child{color:var(--ally)}
+.arena-v2 .hud-advantage-labels span:last-child{color:var(--rival)}
 .arena-v2 .hud-advantage-labels strong{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:9.5px;letter-spacing:.3px;font-weight:750;color:#e9efe9}
 .arena-v2.lead-player .hud-advantage-labels strong{color:#b9ffe9}
 .arena-v2.lead-enemy .hud-advantage-labels strong{color:#ffc6cf}
 .arena-v2 .hud-advantage-track{position:relative;display:flex;height:9px;border-radius:99px;background:#0b1117;box-shadow:inset 0 1px 3px #000c,0 0 0 1px #ffffff14;overflow:visible}
 .arena-v2 .hud-advantage-rivals,.arena-v2 .hud-advantage-allies{display:block;height:100%;transition:width .55s cubic-bezier(.2,.75,.2,1)}
-.arena-v2 .hud-advantage-rivals{border-radius:99px 0 0 99px;background:linear-gradient(90deg,#6c2142,#f27d90)}
-.arena-v2 .hud-advantage-allies{border-radius:0 99px 99px 0;background:linear-gradient(90deg,#4fd1b4,#1c7f6d)}
+.arena-v2 .hud-advantage-allies{border-radius:99px 0 0 99px;background:linear-gradient(90deg,#1c7f6d,#4fd1b4)}
+.arena-v2 .hud-advantage-rivals{border-radius:0 99px 99px 0;background:linear-gradient(90deg,#f27d90,#6c2142)}
 .arena-v2 .hud-advantage-mid{position:absolute;left:50%;top:-3px;width:2px;height:15px;transform:translateX(-50%);background:#ffffff70;border-radius:2px}
 .arena-v2 .hud-advantage-front{position:absolute;left:var(--front);top:50%;width:15px;height:15px;transform:translate(-50%,-50%) rotate(45deg);border-radius:3px;background:#fffbe9;box-shadow:0 0 0 2px #0b1117,0 0 12px 2px #fff5c299;transition:left .55s cubic-bezier(.2,.75,.2,1)}
 .arena-v2.dominion-turn .hud-advantage-front{animation:hud-front-surge .8s ease-out 2}

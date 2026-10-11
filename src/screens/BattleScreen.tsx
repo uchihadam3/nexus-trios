@@ -55,7 +55,8 @@ export function BattleScreen({battle,beat,index,name,settings,paused,onPause,onA
   useLayoutEffect(()=>{measure();},[beat?.event.id,beat?.impacted,measure]);
   const lead=battle.dominion>3?'player':battle.dominion< -3?'enemy':'neutral';
   const label=lead==='player'?'Seu trio está à frente':lead==='enemy'?'Rivais estão à frente':'Disputa equilibrada';
-  const position=50-Math.min(48,Math.max(-48,battle.dominion*.48));
+  // a barra do topo: o seu trio (verde) à esquerda, como na arena; os rivais (vermelho) à direita
+  const position=50+Math.min(48,Math.max(-48,battle.dominion*.48));
   const turn=beat?.impacted&&beat.events.some(e=>e.kind==='turn');
   const threats=new Set(battle.fighters.flatMap(f=>f.cast?.targets??[]));
   const links=combatLinks(beat,battle);
@@ -98,9 +99,9 @@ export function BattleScreen({battle,beat,index,name,settings,paused,onPause,onA
       {onExit&&<button className="hud-button hud-exit" onClick={onExit} aria-label="Voltar ao início (a batalha fica pausada)"><ChevronLeft size={22}/></button>}
       <div className="hud-round" title={name}><small>CONFRONTO</small><b>{String(index+1).padStart(2,'0')}<i>/10</i></b></div>
       <div className="hud-advantage">
-        <div className="hud-advantage-labels"><span>RIVAIS</span><strong>{turn?'VIRADA!':label}</strong><span>SEU TRIO</span></div>
-        <div className="hud-advantage-track" role="meter" aria-label="Vantagem: negativo rivais, positivo seu trio" aria-valuenow={Math.round(battle.dominion)} aria-valuemin={-100} aria-valuemax={100}>
-          <span className="hud-advantage-rivals" style={{width:`${position}%`}}/><span className="hud-advantage-allies" style={{width:`${100-position}%`}}/>
+        <div className="hud-advantage-labels"><span>SEU TRIO</span><strong>{turn?'VIRADA!':label}</strong><span>RIVAIS</span></div>
+        <div className="hud-advantage-track" role="meter" aria-label="Vantagem: seu trio à esquerda, rivais à direita" aria-valuenow={Math.round(battle.dominion)} aria-valuemin={-100} aria-valuemax={100}>
+          <span className="hud-advantage-allies" style={{width:`${position}%`}}/><span className="hud-advantage-rivals" style={{width:`${100-position}%`}}/>
           <span className="hud-advantage-mid" aria-hidden="true"/><span className="hud-advantage-front" aria-hidden="true"/>
         </div>
       </div>

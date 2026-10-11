@@ -56,9 +56,11 @@ export function OrbesDeCombo({ battle, anchors, onAbrir, reduzido }: { battle: B
       const pulso = performance.now() - pulsando[lado] < 1300;
       return <button key={lado} type="button" className={`cb-orbe ${lado} ${n ? 'acesa' : 'apagada'} ${pulso ? 'pulsando' : ''}`}
         onClick={() => onAbrir(lado)} aria-label={`${lado === 'player' ? 'Seus combos' : 'Combos do rival'}: ${n}`}>
-        <span className="cb-orbe-nome">{lado === 'player' ? 'VOCÊ' : 'RIVAL'}</span>
-        <span className="cb-orbe-bola" ref={(el) => { bolas.current[lado] = el; }}><span className="cb-orbe-brilho" aria-hidden /><Link2 size={11} className="cb-orbe-icone" /><b key={`${n}-${pulsando[lado]}`}>{n}</b></span>
-        <span className="cb-orbe-legenda">{n === 1 ? 'COMBO' : 'COMBOS'}</span>
+        <span className="cb-orbe-bola" ref={(el) => { bolas.current[lado] = el; }}>
+          <Link2 size={12} className="cb-orbe-icone" />
+          <span className="cb-orbe-nome">{lado === 'player' ? 'VOCÊ' : 'RIVAL'}</span>
+          <b key={`${n}-${pulsando[lado]}`}>{n}</b>
+        </span>
       </button>;
     })}</div>
     {rastros.map((r) => <span key={r.id} className={`cb-rastro ${r.lado}`} aria-hidden

@@ -5,7 +5,7 @@
 .cb-medalha{position:relative;display:flex;gap:10px;align-items:center;padding:8px 12px 8px 8px;border-radius:16px;text-align:left;
   background:linear-gradient(100deg,color-mix(in srgb,var(--cb) 22%,#0b131b),#0b131b 70%);border:1px solid color-mix(in srgb,var(--cb) 55%,transparent);
   box-shadow:inset 0 1px 0 #ffffff14;animation:cb-entra .55s cubic-bezier(.2,1.4,.4,1) both;animation-delay:calc(var(--i,0) * 90ms)}
-.cb-icone{position:relative;flex:none;display:grid;place-items:center;width:42px;height:42px;border-radius:50%;color:#0b131b;
+.cb-icone{position:relative;flex:none;display:grid;place-items:center;width:38px;height:38px;border-radius:50%;color:#0b131b;
   background:radial-gradient(circle at 35% 30%,#fff 0,color-mix(in srgb,var(--cb) 85%,#fff) 30%,var(--cb) 62%,color-mix(in srgb,var(--cb) 55%,#000) 100%);
   box-shadow:0 0 0 2px #0b131b,0 0 0 3px color-mix(in srgb,var(--cb) 70%,transparent),0 0 16px color-mix(in srgb,var(--cb) 60%,transparent)}
 .cb-icone svg{position:relative;z-index:1}
@@ -141,41 +141,38 @@
 .cb-album .cb-carta:not(.acesa) .cb-efeitos li{opacity:1}
 .cb-carta.lenda:not(.acesa) .cb-par{filter:saturate(.8)}
 
-/* ───────── Bolinhas de combos na batalha (src/components/OrbesDeCombo.tsx) ───────── */
-.cb-orbes{position:absolute;z-index:6;left:50%;top:50%;transform:translate(-50%,-50%);display:flex;align-items:center;justify-content:space-between;gap:clamp(56px,9vw,120px);pointer-events:none}
-.cb-orbe{--cor1:#5fd8ff;--cor2:#2b6dff;--brilho:#7fe3ff;position:relative;display:flex;flex-direction:column;align-items:center;gap:2px;padding:0;border:0;background:none;color:#fff;cursor:pointer;pointer-events:auto;-webkit-tap-highlight-color:transparent}
-.cb-orbe.enemy{--cor1:#ff7a8e;--cor2:#d6284f;--brilho:#ff9fae}
-/* em pé: o seu trio fica embaixo e o rival em cima — a bolinha de cada um vai para o lado dele */
-@media not ((orientation:landscape) and (min-aspect-ratio:13/10)){.cb-orbes{flex-direction:column-reverse;gap:clamp(30px,6dvh,64px)}.cb-orbe{flex-direction:row;gap:6px}.cb-orbe-legenda{display:none}}
-.cb-orbe-nome,.cb-orbe-legenda{font-size:8.5px;font-weight:800;letter-spacing:.14em;line-height:1;text-shadow:0 1px 3px #000c}
-.cb-orbe-nome{color:color-mix(in srgb,var(--brilho) 85%,#fff)}
-.cb-orbe-legenda{color:#ffffffa6;font-size:7.5px}
-.cb-orbe-bola{position:relative;display:grid;place-items:center;width:42px;height:42px;border-radius:50%;
-  background:radial-gradient(circle at 34% 28%,#ffffffcc 0 7%,transparent 18%),radial-gradient(circle at 50% 60%,var(--cor1),var(--cor2) 72%,#0b0f22 100%);
-  box-shadow:0 0 0 2px #ffffff40,0 0 0 4px color-mix(in srgb,var(--cor2) 45%,transparent),0 0 18px color-mix(in srgb,var(--brilho) 70%,transparent),inset 0 -6px 12px #0006;
-  transition:filter .3s,opacity .3s,transform .2s}
-.cb-orbe-bola b{position:relative;font-size:19px;font-weight:900;line-height:1;text-shadow:0 2px 4px #0009;animation:cb-numero .45s cubic-bezier(.3,1.6,.5,1)}
-.cb-orbe-icone{position:absolute;top:5px;opacity:.75}
-.cb-orbe-brilho{position:absolute;inset:-6px;border-radius:50%;border:1.5px solid color-mix(in srgb,var(--brilho) 60%,transparent);opacity:0}
-.cb-orbe.acesa .cb-orbe-bola{animation:cb-respira 3.2s ease-in-out infinite}
-.cb-orbe.apagada .cb-orbe-bola{filter:grayscale(1) brightness(.55);opacity:.62;box-shadow:0 0 0 2px #ffffff26,inset 0 -6px 12px #0006}
-.cb-orbe.apagada .cb-orbe-nome{color:#ffffff8c}
-.cb-orbe:hover .cb-orbe-bola,.cb-orbe:focus-visible .cb-orbe-bola{transform:scale(1.08)}
-.cb-orbe:focus-visible{outline:none}.cb-orbe:focus-visible .cb-orbe-bola{box-shadow:0 0 0 3px #fff,0 0 18px var(--brilho)}
-.cb-orbe.pulsando .cb-orbe-bola{animation:cb-pulso 1.2s cubic-bezier(.2,.9,.3,1)}
-.cb-orbe.pulsando .cb-orbe-brilho{animation:cb-onda 1.2s ease-out}
-@keyframes cb-respira{0%,100%{box-shadow:0 0 0 2px #ffffff40,0 0 0 4px color-mix(in srgb,var(--cor2) 45%,transparent),0 0 14px color-mix(in srgb,var(--brilho) 55%,transparent),inset 0 -6px 12px #0006}50%{box-shadow:0 0 0 2px #ffffff55,0 0 0 4px color-mix(in srgb,var(--cor2) 60%,transparent),0 0 24px color-mix(in srgb,var(--brilho) 85%,transparent),inset 0 -6px 12px #0006}}
-@keyframes cb-pulso{0%{transform:scale(1)}18%{transform:scale(1.22);filter:brightness(1.5)}45%{transform:scale(.96)}100%{transform:scale(1)}}
-@keyframes cb-onda{0%{opacity:.95;transform:scale(.9)}100%{opacity:0;transform:scale(2.1)}}
-@keyframes cb-numero{0%{transform:scale(.4);opacity:0}100%{transform:scale(1);opacity:1}}
-/* o rastro: um cometa pequeno da bolinha até quem recebe o efeito do combo */
-.cb-rastro{--cor:#7fe3ff;position:absolute;z-index:5;left:var(--x1);top:var(--y1);width:9px;height:9px;margin:-4.5px 0 0 -4.5px;border-radius:50%;pointer-events:none;
-  background:radial-gradient(circle,#fff 0 30%,var(--cor) 60%,transparent 72%);box-shadow:0 0 10px 3px var(--cor);animation:cb-cometa .85s cubic-bezier(.45,0,.2,1) forwards}
+/* ───────── Combos na batalha (src/components/OrbesDeCombo.tsx) ─────────
+ * Pedido do jogador: discretas, "mais de fundo", sem chamar atenção — uma etiqueta comprida e baixa,
+ * com o lado, o elo e o número. Acesa com a cor do lado; apagada em cinza com 0. Quando um combo de
+ * tempo em tempo dispara, só um brilho suave na borda e um rastro fino até quem recebe.
+ */
+.cb-orbes{position:absolute;z-index:6;left:4px;right:4px;top:50%;transform:translateY(-50%);display:flex;align-items:center;justify-content:space-between;pointer-events:none}
+.cb-orbe{--cor:#7fe3ff;--brilho:#7fe3ff80;position:relative;display:flex;padding:0;border:0;background:none;color:#fff;cursor:pointer;pointer-events:auto;-webkit-tap-highlight-color:transparent}
+.cb-orbe.enemy{--cor:#ff9fae;--brilho:#ff9fae80}
+.cb-orbe-bola{position:relative;display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 4px 0 9px;border-radius:99px;
+  background:#0b1016b3;border:1px solid color-mix(in srgb,var(--cor) 40%,transparent);box-shadow:inset 0 1px 0 #ffffff0d;
+  backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);transition:opacity .3s,border-color .3s,box-shadow .3s}
+.cb-orbe.enemy .cb-orbe-bola{flex-direction:row-reverse;padding:0 9px 0 4px}
+.cb-orbe-icone{color:var(--cor);opacity:.8}
+.cb-orbe-nome{font-size:8.5px;font-weight:800;letter-spacing:.14em;line-height:1;color:color-mix(in srgb,var(--cor) 70%,#fff)}
+.cb-orbe-bola b{display:grid;place-items:center;min-width:19px;height:19px;padding:0 4px;border-radius:99px;font-size:11px;font-weight:900;line-height:1;
+  background:color-mix(in srgb,var(--cor) 26%,transparent);color:#fff;animation:cb-numero .35s ease-out}
+.cb-orbe.apagada .cb-orbe-bola{opacity:.45;border-color:#ffffff1f}
+.cb-orbe.apagada .cb-orbe-icone,.cb-orbe.apagada .cb-orbe-nome{color:#ffffff99}
+.cb-orbe.apagada .cb-orbe-bola b{background:#ffffff14;color:#ffffffb3}
+.cb-orbe:hover .cb-orbe-bola,.cb-orbe:focus-visible .cb-orbe-bola{opacity:1;border-color:var(--cor)}
+.cb-orbe:focus-visible{outline:none}
+.cb-orbe.pulsando .cb-orbe-bola{animation:cb-pulso 1.2s ease-out}
+@keyframes cb-pulso{0%,100%{box-shadow:inset 0 1px 0 #ffffff0d,0 0 0 0 #0000,0 0 0 0 #0000}25%{box-shadow:inset 0 1px 0 #ffffff0d,0 0 0 1px var(--cor),0 0 12px 1px var(--brilho)}}
+@keyframes cb-numero{0%{transform:scale(.6);opacity:0}100%{transform:scale(1);opacity:1}}
+/* o rastro: um ponto de luz fino da etiqueta até quem recebe o efeito do combo */
+.cb-rastro{--cor:#7fe3ff;position:absolute;z-index:5;left:var(--x1);top:var(--y1);width:6px;height:6px;margin:-3px 0 0 -3px;border-radius:50%;pointer-events:none;
+  background:#fff;box-shadow:0 0 6px 2px var(--cor);opacity:.85;animation:cb-cometa .8s cubic-bezier(.45,0,.2,1) forwards}
 .cb-rastro.enemy{--cor:#ff9fae}
-.cb-rastro::after{content:'';position:absolute;inset:-10px;border-radius:50%;border:2px solid var(--cor);opacity:0;animation:cb-chegou .85s ease-out forwards}
-@keyframes cb-cometa{0%{left:var(--x0);top:var(--y0);transform:scale(.6);opacity:0}12%{opacity:1}80%{left:var(--x1);top:var(--y1);transform:scale(1);opacity:1}100%{left:var(--x1);top:var(--y1);transform:scale(.3);opacity:0}}
-@keyframes cb-chegou{0%,72%{opacity:0;transform:scale(.4)}82%{opacity:.9}100%{opacity:0;transform:scale(1.8)}}
-@media (prefers-reduced-motion:reduce){.cb-orbe .cb-orbe-bola,.cb-orbe.pulsando .cb-orbe-bola{animation:none}.cb-orbe.pulsando .cb-orbe-bola{filter:brightness(1.35)}.cb-rastro{display:none}}
+.cb-rastro::after{content:'';position:absolute;inset:-7px;border-radius:50%;border:1.5px solid var(--cor);opacity:0;animation:cb-chegou .8s ease-out forwards}
+@keyframes cb-cometa{0%{left:var(--x0);top:var(--y0);opacity:0}15%{opacity:.85}82%{left:var(--x1);top:var(--y1);opacity:.85}100%{left:var(--x1);top:var(--y1);opacity:0}}
+@keyframes cb-chegou{0%,75%{opacity:0;transform:scale(.4)}85%{opacity:.6}100%{opacity:0;transform:scale(1.6)}}
+@media (prefers-reduced-motion:reduce){.cb-orbe.pulsando .cb-orbe-bola{animation:none;border-color:var(--cor)}.cb-rastro{display:none}}
 /* o painel dos combos da luta: abas Você / Rival e a ficha completa */
 .cb-lados{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:4px 0 6px}
 .cb-lados button{display:flex;align-items:center;justify-content:center;gap:8px;padding:8px;border-radius:12px;border:1px solid #ffffff1f;background:#ffffff0d;color:#ffffffb3;font-weight:800;letter-spacing:.08em;font-size:12px}
@@ -198,3 +195,13 @@
 .battle-combos .cb-ficha .cb-raridade{align-self:start}
 .battle-combos .cb-ficha>:not(.cb-icone):not(h3):not(.cb-raridade){grid-column:1/-1;width:100%}
 .battle-screen.arena-v2 .battle-history.battle-combos{max-height:72dvh}
+/*
+ * Deitado e no PC (pedido do jogador, com o X marcado no print): as etiquetas vão para os dois cantinhos
+ * de baixo, ao lado da barra de botões — a sua à esquerda do "Pausar", a do rival à direita do "Desistir" —,
+ * centralizadas no espaço vazio. Em pé ficam nas pontas da faixa do meio da arena.
+ */
+@media (orientation:landscape) and (min-aspect-ratio:13/10){
+  .cb-orbes{position:fixed;left:0;right:0;top:auto;bottom:0;transform:none;height:56px;display:grid;grid-template-columns:minmax(0,1fr) min(620px,70vw) minmax(0,1fr);align-items:center;justify-items:center;padding:0 0 env(safe-area-inset-bottom)}
+  .cb-orbe.player{grid-column:1}.cb-orbe.enemy{grid-column:3}
+}
+@media (orientation:landscape) and (min-aspect-ratio:13/10) and (max-height:500px){.cb-orbes{height:48px}}
