@@ -245,7 +245,7 @@ export function quemFormaOTrio(trio: readonly string[], c: ComboDeTrio): string[
 export const UNIVERSO = { dois: { dano: 0.04, vida: 0.04 } as Partial<Bonus>, tres: { dano: 0.08, vida: 0.08 } as Partial<Bonus> };
 export const COMBOS_POR_LUTADOR = 2, COMBOS_POR_TRIO = 4;
 /** Escala de todos os combos (a alavanca da calibragem). */
-export const FORCA_DOS_COMBOS = 3.0;
+export const FORCA_DOS_COMBOS = 4.0;
 /*
  * Os combos que um trio aleatório quase nunca forma (os de trio e os de universo) valem mais que os de dupla
  * (pedido do jogador: "quanto mais longe o bom ficar do aleatório, é a melhor coisa").

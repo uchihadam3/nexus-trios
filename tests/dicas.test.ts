@@ -45,7 +45,7 @@ describe('Dicas de trio', () => {
     const rnd = () => { r = (Math.imul(r, 1664525) + 1013904223) >>> 0; return r / 4294967296; };
     const sorteia = (fora: string[], n: number) => { const o: string[] = []; while (o.length < n) { const x = ids[Math.floor(rnd() * ids.length)]!; if (!o.includes(x) && !fora.includes(x)) o.push(x); } return o; };
     let comDica = 0, aoAcaso = 0;
-    for (let jogo = 0; jogo < 70; jogo++) {
+    for (let jogo = 0; jogo < 150; jogo++) {
       const rivais = sorteia([], 3);
       const dica: string[] = [], acaso: string[] = [];
       for (let vez = 0; vez < 3; vez++) {
@@ -59,7 +59,7 @@ describe('Dicas de trio', () => {
         if (luta.winner === 'player') { if (soma) comDica++; else aoAcaso++; }
       }
     }
-    expect(comDica).toBeGreaterThan(aoAcaso + 5);
+    expect(comDica).toBeGreaterThan(aoAcaso + 8);
   });
 
   it('a explicação diz o porquê com as habilidades de verdade', () => {
