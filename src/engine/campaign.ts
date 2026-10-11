@@ -44,9 +44,10 @@ export function forcaDoTrio(team:readonly string[]):number{return team.reduce((n
  * fraco dos dois vai para as lutas ímpares (1, 3, 5, 7, 9) e o mais forte para as pares (2, 4, 6, 8, 10):
  * a luta 10 é o mais forte dos dois sorteados entre os muito fortes, não o mais forte de todos.
  *
- * As faixas acompanham um pouco o trio do jogador (PUXA_DO_TRIO): quanto mais forte o trio, mais para cima
- * elas vão — só um pouco, porque escolher bem tem que valer a pena (medido: o trio sorteado vence ~4% das
- * jornadas, o de quem escolhe bem ~13%, o melhor ~40%). Sem trio (a Diária e a Semanal, os
+ * As faixas são as mesmas para todo trio (PUXA_DO_TRIO = 0): com a força medida em 2 milhões de lutas,
+ * puxar as faixas com o trio apagava a vantagem de escolher bem. Só o trio que passa de todos os rivais
+ * possíveis (cheio de combos) enfrenta rivais com mais Vida (VIDA_ACIMA_DO_TOPO). Medido em 40 personagens:
+ * o trio sorteado vence ~5% das jornadas, o de quem escolhe bem ~14% e o melhor ~40%. Sem trio (a Diária e a Semanal, os
  * mesmos rivais para todos), as faixas ficam no meio. ESCALAS é a Vida dos rivais (×) em cada luta.
  */
 /** O centro de cada faixa, em percentil da força dos rivais possíveis: muito fracos … muito fortes. */
@@ -54,14 +55,14 @@ export const FAIXAS=[0.03,0.17,0.37,0.57,0.77];
 /** Meia largura de cada faixa (em percentil). */
 export const LARGURA_DA_FAIXA=0.1;
 /** Quanto as faixas sobem (ou descem) com a força do trio do jogador: 0 = nada, 1 = totalmente. */
-export const PUXA_DO_TRIO=0.1;
+export const PUXA_DO_TRIO=0;
 /** Quanto a Vida dos rivais acompanha a força do trio do jogador: ×(1 + VIDA_PELO_TRIO·(percentil − 0,5)). */
 export const VIDA_PELO_TRIO=0;
 /*
  * Um trio cheio de combos pode ficar acima de todos os rivais possíveis: aí as faixas já estão no topo e não
  * sobem mais. Para ele, a Vida dos rivais cresce com o quanto ele passa do topo (força acima do percentil 97).
  */
-export const VIDA_ACIMA_DO_TOPO=0.25;
+export const VIDA_ACIMA_DO_TOPO=0.3;
 /** Quantos trios rivais possíveis são sorteados para formar as faixas. */
 const AMOSTRA=900;
 export const ESCALAS=[.81,.83,.85,.85,.88,.91,.95,.96,.98,.98];
