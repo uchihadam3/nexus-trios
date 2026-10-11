@@ -8,9 +8,9 @@ on:
   workflow_dispatch:
     inputs:
       plano:
-        description: 'aleatorio (trio x trio) ou pares (toda dupla com um terceiro)'
+        description: 'aleatorio (trio x trio), pares (toda dupla com um terceiro), jornada (trio sorteado, jornada inteira) ou dificuldade (metas por personagem)'
         type: choice
-        options: [aleatorio, pares]
+        options: [aleatorio, pares, jornada, dificuldade]
         default: pares
       lutas:
         description: 'lutas por processo (são 80 processos; 25000 = 2 milhões)'
@@ -18,6 +18,9 @@ on:
       semente:
         description: 'semente (mude para ter lutas novas)'
         default: '1'
+      fortes:
+        description: 'dificuldade: os ids mais fortes (vírgula), medidos com o plano jornada; vazio = tabela de força'
+        default: ''
 permissions:
   contents: write
 concurrency:
@@ -45,6 +48,7 @@ jobs:
           LUTAS: ${{ inputs.lutas }}
           SEMENTE: ${{ inputs.semente }}
           MAQUINA: ${{ matrix.maquina }}
+          FORTES: ${{ inputs.fortes }}
         run: |
           mkdir -p saida
           for i in 0 1 2 3; do
