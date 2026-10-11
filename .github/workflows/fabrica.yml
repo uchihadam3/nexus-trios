@@ -1,0 +1,84 @@
+name: Fábrica de simulação
+# Milhões de lutas para medir força solo, de dupla e de trio
+# (scripts/fabrica/lutas.ts). Só roda quando alguém dispara à mão:
+# 20 máquinas × 4 processos, e no fim junta tudo, compactado, no ramo
+# `fabrica-resultados` (rodadas/<run>-<plano>/lutas.txt.gz). Não mexe na main
+# nem publica nada.
+on:
+  workflow_dispatch:
+    inputs:
+      plano:
+        description: 'aleatorio (trio x trio) ou pares (toda dupla com um terceiro)'
+        type: choice
+        options: [aleatorio, pares]
+        default: pares
+      lutas:
+        description: 'lutas por processo (são 80 processos; 25000 = 2 milhões)'
+        default: '25000'
+      semente:
+        description: 'semente (mude para ter lutas novas)'
+        default: '1'
+permissions:
+  contents: write
+concurrency:
+  group: fabrica
+  cancel-in-progress: false
+jobs:
+  simular:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    strategy:
+      fail-fast: false
+      matrix:
+        maquina: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npx esbuild scripts/fabrica/lutas.ts --bundle --platform=node --format=esm --target=node22 --outfile=${{ runner.temp }}/lutas.mjs --log-level=warning
+      - name: Lutas (4 processos)
+        env:
+          PLANO: ${{ inputs.plano }}
+          LUTAS: ${{ inputs.lutas }}
+          SEMENTE: ${{ inputs.semente }}
+          MAQUINA: ${{ matrix.maquina }}
+        run: |
+          mkdir -p saida
+          for i in 0 1 2 3; do
+            node ${{ runner.temp }}/lutas.mjs "$PLANO" $((MAQUINA*4+i)) 80 "$LUTAS" "saida/parte-$((MAQUINA*4+i)).txt" "$SEMENTE" &
+          done
+          wait
+          wc -l saida/*.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: parte-${{ matrix.maquina }}
+          path: saida/*.txt
+          retention-days: 3
+  juntar:
+    needs: simular
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: parte-*
+          path: ${{ runner.temp }}/partes
+          merge-multiple: true
+      - name: Guarda no ramo fabrica-resultados
+        env:
+          DESTINO: rodadas/${{ github.run_id }}-${{ inputs.plano }}
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          if git fetch -q --depth 1 origin fabrica-resultados; then git switch -q -c fabrica-resultados FETCH_HEAD; else git switch -q --orphan fabrica-resultados; fi
+          mkdir -p "$DESTINO"
+          ls ${{ runner.temp }}/partes/*.txt | sort -V | xargs cat | gzip -9 > "$DESTINO/lutas.txt.gz"
+          grep -hv '^#' ${{ runner.temp }}/partes/*.txt | wc -l > "$DESTINO/total.txt"
+          echo "lutas: $(cat "$DESTINO/total.txt") · $(du -h "$DESTINO/lutas.txt.gz" | cut -f1)"
+          git add rodadas
+          git commit -q -m "Fábrica: $(cat "$DESTINO/total.txt") lutas (${{ inputs.plano }}, semente ${{ inputs.semente }})"
+          git push -q origin fabrica-resultados
