@@ -1,0 +1,39 @@
+[
+  {
+    "id": "bowser",
+    "approval": "Selected by user and confirmed with attached image on 2026-10-11",
+    "original_attachment": "iC7bqSnjWxpAYsJZefLx3faAs36FqLBFgcFsmndW2FDhHIC_3YESgAPDwql3lHZ4VEucAIFZ-Htf3rbz1nKq8TyHiH3z4mamDruCRSvi0bRRfQu0s-qV2tm1ZRifJQBfHHirHiVxbeIW2HJhmJrlvjmPWZa9eDTSSAsuuTZFp2YPudYOXMtwacuGzhHjJMrb.jpeg",
+    "source": "assets/ai-source/portraits/overrides/bowser.webp",
+    "sha256": "ac9dacf408ac52b2850fe6e2f3a85d8ff20081333b4069cb18e80e4cf57ac666",
+    "crop": null
+  },
+  {
+    "id": "pikachu",
+    "approval": "Selected by user and confirmed with attached image on 2026-10-11",
+    "original_attachment": "_eElHcGDNrIytmRU_sESIIkxmgTvvHxiO7e-pzEHpJXUiW6UchMmoVpUCnm3ZLejqm2wsFHVYL-rvHcn-LgHUBmVWFI3oYqZRfA18LApHst64X5VLRg4ngz12rY_l_4XbHRdOK09tuvyYVNNz-CLh6AgAkjkqrmETItgwsLfpi-KNVQIAByyeoOUm4SwMNPp.jpeg",
+    "source": "assets/portraits/approved-generated/pikachu.webp",
+    "sha256": "863e25c8c27082a80355658c6a059d20f73d93057758f8d13aebd11ef961d219",
+    "crop": [
+      0,
+      0,
+      400,
+      330
+    ]
+  },
+  {
+    "id": "mewtwo",
+    "approval": "Selected by user and confirmed with attached image on 2026-10-11",
+    "original_attachment": "KsyQmL3AHwBnUs-tRzPEiFnhyZnj16XVBAozjZlQaLr1yrLfjaetlgUqMymAo7BgQq1634L9ru31w-IrWBozrnno2KtdRzti4XRtPFdVA3ZCVze0afokGRfUpO1vHkfKAS2xiZOoWC0YpVnZslRssLBhDgru0t1MhSEyE_lvMpYWCzgchVYBlhRi2df51F37.jpeg",
+    "source": "assets/ai-source/portraits/overrides/mewtwo.webp",
+    "sha256": "5c125c368969af5b07d9b81c520324d5dde031d880857b7ccb7ed25765868cb7",
+    "crop": null
+  },
+  {
+    "id": "charizard",
+    "approval": "Selected by user and confirmed with attached image on 2026-10-11",
+    "original_attachment": "mhVFvMbI6xou6i_GkQj4XddUPzkDoevlspnOMAR7PWeMjxUS_YEjfJxbJKC6RGWhesvBpzp7-Je1BwOxIQOgLlpv0z2iNHtSPMJ4MUJeNdNby_qNC8Y4-0pXR6ziol4LCjrjUEMdfOULpX4jRsNCd0hozh04FgsfhNVS7lCOXDxfKcEJ1sKasZ85wcilLJRb.jpeg",
+    "source": "assets/ai-source/portraits/overrides/charizard.webp",
+    "sha256": "be14358e23f77852dd471a9e78e4df9f2b826ac66a6a4006f6f3527e4c3aa438",
+    "crop": null
+  }
+]
