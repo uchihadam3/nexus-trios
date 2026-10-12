@@ -852,6 +852,23 @@
    ],
    "bytes": 63867
   },
+  "atropelo": {
+   "arquivo": "atropelo.mp3",
+   "descricao": "Bebop: o atropelo",
+   "versoes": [
+    0.0,
+    2.28,
+    4.6398,
+    6.8454
+   ],
+   "duracoes": [
+    2.2,
+    2.2798,
+    2.1256,
+    2.2335
+   ],
+   "bytes": 69339
+  },
   "audicao-zenitsu": {
    "arquivo": "audicao-zenitsu.mp3",
    "descricao": "Zenitsu: o ouvido e o raio",
@@ -1277,6 +1294,23 @@
    ],
    "bytes": 77909
   },
+  "barriga-de-aco": {
+   "arquivo": "barriga-de-aco.mp3",
+   "descricao": "Homer: a barriga de aço",
+   "versoes": [
+    0.0,
+    1.238,
+    2.517,
+    3.7168
+   ],
+   "duracoes": [
+    1.158,
+    1.1989,
+    1.1199,
+    1.1752
+   ],
+   "bytes": 30281
+  },
   "barrigada": {
    "arquivo": "barrigada.mp3",
    "descricao": "básico do Homer: o ar do empurrão, o baque da pança e o \"bloing\" de gelatina",
@@ -1378,6 +1412,23 @@
     0.954
    ],
    "bytes": 38991
+  },
+  "bastao-giratorio": {
+   "arquivo": "bastao-giratorio.mp3",
+   "descricao": "Cheetara: o bastão giratório",
+   "versoes": [
+    0.0,
+    1.6138,
+    3.6627,
+    4.9825
+   ],
+   "duracoes": [
+    1.5338,
+    1.9689,
+    1.2398,
+    1.4622
+   ],
+   "bytes": 53158
   },
   "bastoes-eletricos": {
    "arquivo": "bastoes-eletricos.mp3",
@@ -1497,6 +1548,23 @@
     1.3198
    ],
    "bytes": 38898
+  },
+  "bebop-preparo": {
+   "arquivo": "bebop-preparo.mp3",
+   "descricao": "Bebop: o bufo (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 52409
   },
   "beerus-preparo": {
    "arquivo": "beerus-preparo.mp3",
@@ -3096,6 +3164,23 @@
    ],
    "bytes": 68336
   },
+  "cheetara-preparo": {
+   "arquivo": "cheetara-preparo.mp3",
+   "descricao": "Cheetara: o bastão estendido (Preparo)",
+   "versoes": [
+    0.0,
+    1.1852,
+    2.3932,
+    3.5497
+   ],
+   "duracoes": [
+    1.1052,
+    1.1279,
+    1.0765,
+    1.1304
+   ],
+   "bytes": 37180
+  },
   "chicote": {
    "arquivo": "chicote.mp3",
    "descricao": "família chicote",
@@ -3469,23 +3554,6 @@
     1.066
    ],
    "bytes": 51397
-  },
-  "chute-voador": {
-   "arquivo": "chute-voador.mp3",
-   "descricao": "família chute voador",
-   "versoes": [
-    0.0,
-    0.68,
-    1.3817,
-    2.0415
-   ],
-   "duracoes": [
-    0.6,
-    0.6217,
-    0.5797,
-    0.6091
-   ],
-   "bytes": 24859
   },
   "chuva-de-fogo": {
    "arquivo": "chuva-de-fogo.mp3",
@@ -4201,6 +4269,23 @@
    ],
    "bytes": 66913
   },
+  "corrida-felina": {
+   "arquivo": "corrida-felina.mp3",
+   "descricao": "Cheetara: a corrida felina",
+   "versoes": [
+    0.0,
+    1.7055,
+    3.7544,
+    5.3888
+   ],
+   "duracoes": [
+    1.6255,
+    1.9689,
+    1.5544,
+    1.6438
+   ],
+   "bytes": 53333
+  },
   "cortador-de-plasma": {
    "arquivo": "cortador-de-plasma.mp3",
    "descricao": "básico de Isaac: bipes da mira, pshew do plasma e chiado",
@@ -4608,6 +4693,23 @@
     2.0305
    ],
    "bytes": 73529
+  },
+  "d-oh": {
+   "arquivo": "d-oh.mp3",
+   "descricao": "Homer: D'oh!",
+   "versoes": [
+    0.0,
+    2.1046,
+    4.332,
+    6.3622
+   ],
+   "duracoes": [
+    2.0246,
+    2.1473,
+    1.9502,
+    2.03
+   ],
+   "bytes": 66376
   },
   "danca-da-bruxa": {
    "arquivo": "danca-da-bruxa.mp3",
@@ -5356,6 +5458,23 @@
     1.6244
    ],
    "bytes": 62065
+  },
+  "dominio-de-snake-mountain": {
+   "arquivo": "dominio-de-snake-mountain.mp3",
+   "descricao": "Esqueleto: o Domínio de Snake Mountain",
+   "versoes": [
+    0.0,
+    2.48,
+    5.047,
+    7.4383
+   ],
+   "duracoes": [
+    2.4,
+    2.487,
+    2.3113,
+    2.4203
+   ],
+   "bytes": 84337
   },
   "dominio-decepticon": {
    "arquivo": "dominio-decepticon.mp3",
@@ -6377,6 +6496,23 @@
    ],
    "bytes": 53744
   },
+  "espada-protetora": {
+   "arquivo": "espada-protetora.mp3",
+   "descricao": "She-Ra: a Espada Protetora",
+   "versoes": [
+    0.0,
+    1.5642,
+    3.1811,
+    4.6461
+   ],
+   "duracoes": [
+    1.4842,
+    1.5369,
+    1.3851,
+    1.5061
+   ],
+   "bytes": 50134
+  },
   "espadao": {
    "arquivo": "espadao.mp3",
    "descricao": "família espadao",
@@ -6682,6 +6818,23 @@
     1.2632
    ],
    "bytes": 47008
+  },
+  "esqueleto-preparo": {
+   "arquivo": "esqueleto-preparo.mp3",
+   "descricao": "Esqueleto: o Cajado da Caveira (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 61836
   },
   "esquiva": {
    "arquivo": "esquiva.mp3",
@@ -9080,6 +9233,23 @@
    ],
    "bytes": 57057
   },
+  "golpe-certeiro-cheetara": {
+   "arquivo": "golpe-certeiro-cheetara.mp3",
+   "descricao": "Cheetara: o golpe certeiro",
+   "versoes": [
+    0.0,
+    0.9871,
+    2.0584,
+    3.0639
+   ],
+   "duracoes": [
+    0.9071,
+    0.9913,
+    0.9256,
+    0.9677
+   ],
+   "bytes": 39311
+  },
   "golpe-cruzado": {
    "arquivo": "golpe-cruzado.mp3",
    "descricao": "Wesker: o golpe cruzado",
@@ -9096,6 +9266,23 @@
     1.5285
    ],
    "bytes": 49116
+  },
+  "golpe-da-princesa": {
+   "arquivo": "golpe-da-princesa.mp3",
+   "descricao": "She-Ra: o golpe da Princesa",
+   "versoes": [
+    0.0,
+    1.5598,
+    3.2283,
+    4.7391
+   ],
+   "duracoes": [
+    1.4798,
+    1.5885,
+    1.4307,
+    1.6191
+   ],
+   "bytes": 51037
   },
   "golpe-da-serie": {
    "arquivo": "golpe-da-serie.mp3",
@@ -9862,6 +10049,23 @@
    ],
    "bytes": 39225
   },
+  "homer-preparo": {
+   "arquivo": "homer-preparo.mp3",
+   "descricao": "Homer: a energia pulsando (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 50693
+  },
   "homing-attack": {
    "arquivo": "homing-attack.mp3",
    "descricao": "Sonic: o Homing Attack",
@@ -10303,6 +10507,23 @@
     1.5428
    ],
    "bytes": 48907
+  },
+  "investida-de-javali": {
+   "arquivo": "investida-de-javali.mp3",
+   "descricao": "Bebop: a investida de javali",
+   "versoes": [
+    0.0,
+    1.98,
+    4.0289,
+    5.9446
+   ],
+   "duracoes": [
+    1.9,
+    1.9689,
+    1.8357,
+    1.9289
+   ],
+   "bytes": 55800
   },
   "investida-do-cla": {
    "arquivo": "investida-do-cla.mp3",
@@ -11715,23 +11936,6 @@
    ],
    "bytes": 50019
   },
-  "lanche": {
-   "arquivo": "lanche.mp3",
-   "descricao": "família lanche",
-   "versoes": [
-    0.0,
-    1.1359,
-    2.301,
-    3.3943
-   ],
-   "duracoes": [
-    1.0559,
-    1.0851,
-    1.0133,
-    1.0716
-   ],
-   "bytes": 36557
-  },
   "lanterna-preparo": {
    "arquivo": "lanterna-preparo.mp3",
    "descricao": "Lanterna Verde: a lanterna zumbindo (antes do golpe)",
@@ -12191,6 +12395,23 @@
    ],
    "bytes": 50814
   },
+  "liono-preparo": {
+   "arquivo": "liono-preparo.mp3",
+   "descricao": "Lion-O: a espada crescendo (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 44240
+  },
   "liukang-preparo": {
    "arquivo": "liukang-preparo.mp3",
    "descricao": "Liu Kang: o fogo em espiral (Preparo)",
@@ -12428,6 +12649,23 @@
     1.0152
    ],
    "bytes": 38984
+  },
+  "maldicao-do-esqueleto": {
+   "arquivo": "maldicao-do-esqueleto.mp3",
+   "descricao": "Esqueleto: a maldição",
+   "versoes": [
+    0.0,
+    1.9115,
+    3.8335,
+    5.633
+   ],
+   "duracoes": [
+    1.8315,
+    1.8421,
+    1.7195,
+    1.8067
+   ],
+   "bytes": 58902
   },
   "malenia-preparo": {
    "arquivo": "malenia-preparo.mp3",
@@ -20844,6 +21082,23 @@
    ],
    "bytes": 37402
   },
+  "pancada-do-bebop": {
+   "arquivo": "pancada-do-bebop.mp3",
+   "descricao": "Bebop: a pancada",
+   "versoes": [
+    0.0,
+    1.4095,
+    2.8977,
+    4.2511
+   ],
+   "duracoes": [
+    1.3295,
+    1.4082,
+    1.2734,
+    1.46
+   ],
+   "bytes": 51140
+  },
   "pancada-final": {
    "arquivo": "pancada-final.mp3",
    "descricao": "Hellboy: a pancada final",
@@ -21030,6 +21285,23 @@
     1.3198
    ],
    "bytes": 49329
+  },
+  "pela-honra-de-grayskull": {
+   "arquivo": "pela-honra-de-grayskull.mp3",
+   "descricao": "She-Ra: Pela honra de Grayskull",
+   "versoes": [
+    0.0,
+    2.48,
+    5.047,
+    7.4459
+   ],
+   "duracoes": [
+    2.4,
+    2.487,
+    2.3188,
+    2.4365
+   ],
+   "bytes": 108693
   },
   "penance-stare": {
    "arquivo": "penance-stare.mp3",
@@ -21966,6 +22238,23 @@
    ],
    "bytes": 74178
   },
+  "provocacao-do-bart": {
+   "arquivo": "provocacao-do-bart.mp3",
+   "descricao": "Bart: a provocação",
+   "versoes": [
+    0.0,
+    1.3899,
+    2.8292,
+    4.1758
+   ],
+   "duracoes": [
+    1.3099,
+    1.3593,
+    1.2666,
+    1.3302
+   ],
+   "bytes": 60090
+  },
   "provocar": {
    "arquivo": "provocar.mp3",
    "descricao": "família provocar",
@@ -22747,23 +23036,6 @@
     1.0788
    ],
    "bytes": 44168
-  },
-  "raio-divino": {
-   "arquivo": "raio-divino.mp3",
-   "descricao": "família raio divino",
-   "versoes": [
-    0.0,
-    1.38,
-    2.8071,
-    4.1432
-   ],
-   "duracoes": [
-    1.3,
-    1.3471,
-    1.256,
-    1.3198
-   ],
-   "bytes": 50767
   },
   "raio-do-diabo": {
    "arquivo": "raio-do-diabo.mp3",
@@ -23887,6 +24159,23 @@
    ],
    "bytes": 56292
   },
+  "rosquinha": {
+   "arquivo": "rosquinha.mp3",
+   "descricao": "Homer: a rosquinha",
+   "versoes": [
+    0.0,
+    1.6805,
+    3.418,
+    5.0207
+   ],
+   "duracoes": [
+    1.6005,
+    1.6575,
+    1.5226,
+    1.6244
+   ],
+   "bytes": 39689
+  },
   "roubar-carga": {
    "arquivo": "roubar-carga.mp3",
    "descricao": "família roubar carga",
@@ -24685,6 +24974,23 @@
     1.4213
    ],
    "bytes": 80211
+  },
+  "shera-preparo": {
+   "arquivo": "shera-preparo.mp3",
+   "descricao": "She-Ra: a espada no alto (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 80448
   },
   "shinku-hadouken": {
    "arquivo": "shinku-hadouken.mp3",
@@ -26097,23 +26403,6 @@
    ],
    "bytes": 59080
   },
-  "tempestade": {
-   "arquivo": "tempestade.mp3",
-   "descricao": "família tempestade",
-   "versoes": [
-    0.0,
-    1.68,
-    3.418,
-    5.0439
-   ],
-   "duracoes": [
-    1.6,
-    1.658,
-    1.5459,
-    1.6244
-   ],
-   "bytes": 80095
-  },
   "tempestade-de-areia": {
    "arquivo": "tempestade-de-areia.mp3",
    "descricao": "Príncipe: a tempestade de areia",
@@ -26351,6 +26640,23 @@
     2.0305
    ],
    "bytes": 76645
+  },
+  "thunder-thunder": {
+   "arquivo": "thunder-thunder.mp3",
+   "descricao": "Lion-O: Thunder, Thunder!",
+   "versoes": [
+    0.0,
+    2.4267,
+    4.9737,
+    7.3725
+   ],
+   "duracoes": [
+    2.3467,
+    2.467,
+    2.3188,
+    2.4365
+   ],
+   "bytes": 78739
   },
   "tiara-lunar": {
    "arquivo": "tiara-lunar.mp3",
@@ -26793,6 +27099,23 @@
     1.2099
    ],
    "bytes": 46407
+  },
+  "travessura-maxima": {
+   "arquivo": "travessura-maxima.mp3",
+   "descricao": "Bart: a travessura máxima",
+   "versoes": [
+    0.0,
+    2.2428,
+    4.6026,
+    6.8082
+   ],
+   "duracoes": [
+    2.1628,
+    2.2798,
+    2.1256,
+    2.2335
+   ],
+   "bytes": 76998
   },
   "tremor-do-rei": {
    "arquivo": "tremor-do-rei.mp3",
@@ -27558,6 +27881,23 @@
     0.9137
    ],
    "bytes": 36566
+  },
+  "visao-alem-do-alcance": {
+   "arquivo": "visao-alem-do-alcance.mp3",
+   "descricao": "Lion-O: Visão além do alcance",
+   "versoes": [
+    0.0,
+    1.5085,
+    3.0677,
+    4.5289
+   ],
+   "duracoes": [
+    1.4285,
+    1.4792,
+    1.3812,
+    1.4498
+   ],
+   "bytes": 39498
   },
   "visao-de-calor": {
    "arquivo": "visao-de-calor.mp3",

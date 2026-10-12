@@ -671,6 +671,20 @@
   "laco": false,
   "bytes": 33350
  },
+ "atropelo": {
+  "descricao": "Bebop · as pisadas atravessando todos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 43842
+ },
  "audicao_zenitsu": {
   "descricao": "Zenitsu · as ondas de som e o risco de raio",
   "quadros": 12,
@@ -1035,6 +1049,20 @@
   "laco": false,
   "bytes": 24628
  },
+ "barriga_de_aco": {
+  "descricao": "Homer · a barrigada e a energia guardando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 37532
+ },
  "barrigada": {
   "descricao": "Barrigada do Homer: a barriga amassa no alvo e balança, ondas achatadas e estrelinhas",
   "quadros": 12,
@@ -1132,6 +1160,20 @@
   ],
   "laco": false,
   "bytes": 13824
+ },
+ "bastao_giratorio": {
+  "descricao": "Cheetara · o bastão girando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 23348
  },
  "bastoes_eletricos": {
   "descricao": "Básico do Asa Noturna: os dois bastões elétricos",
@@ -1244,6 +1286,20 @@
   ],
   "laco": true,
   "bytes": 18472
+ },
+ "bebop_preparo": {
+  "descricao": "Bebop · o bufo e as patadas (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 19112
  },
  "beerus_preparo": {
   "descricao": "Beerus · o sol sobre o dedo (Preparo, laço)",
@@ -2715,6 +2771,20 @@
   "laco": false,
   "bytes": 34548
  },
+ "cheetara_preparo": {
+  "descricao": "Cheetara · o bastão esticado (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 29168
+ },
  "chegada": {
   "descricao": "apoio chegando ao aliado",
   "quadros": 12,
@@ -3022,20 +3092,6 @@
   ],
   "laco": false,
   "bytes": 61934
- },
- "chute_voador": {
-  "descricao": "chute voador (diagonal)",
-  "quadros": 12,
-  "grade": [
-   3,
-   4
-  ],
-  "tamanho": [
-   192,
-   192
-  ],
-  "laco": false,
-  "bytes": 66136
  },
  "chuva_de_fogo": {
   "descricao": "Roy · as bolas de fogo caindo e as labaredas",
@@ -3653,6 +3709,20 @@
   "laco": false,
   "bytes": 42478
  },
+ "corrida_felina": {
+  "descricao": "Cheetara · o risco com as pintas de guepardo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 26758
+ },
  "cortador_de_plasma": {
   "descricao": "Isaac: mira de três pontos e lâmina de plasma",
   "quadros": 12,
@@ -4044,6 +4114,20 @@
   ],
   "laco": false,
   "bytes": 34380
+ },
+ "d_oh": {
+  "descricao": "Homer · o balão D'oh! e a energia solta",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 35590
  },
  "danca_da_bruxa": {
   "descricao": "Bayonetta · os chutes em giro e as borboletas",
@@ -4674,6 +4758,20 @@
   ],
   "laco": false,
   "bytes": 75780
+ },
+ "dominio_de_snake_mountain": {
+  "descricao": "Esqueleto · a montanha da serpente e os raios",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 53284
  },
  "dominio_decepticon": {
   "descricao": "Megatron · o símbolo Decepticon esmagando",
@@ -5501,6 +5599,20 @@
   "laco": false,
   "bytes": 21746
  },
+ "espada_protetora": {
+  "descricao": "She-Ra · a espada com a joia e o corte dourado",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 26050
+ },
  "espada_totsuka": {
   "descricao": "Itachi · o corte da Totsuka e o redemoinho de selamento no rival",
   "quadros": 12,
@@ -5794,6 +5906,20 @@
   ],
   "laco": false,
   "bytes": 49462
+ },
+ "esqueleto_preparo": {
+  "descricao": "Esqueleto · o Cajado da Caveira brilhando (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 23620
  },
  "esquiva": {
   "descricao": "vultos que escapam para os lados e riscos de vento",
@@ -7895,6 +8021,20 @@
   "laco": false,
   "bytes": 44950
  },
+ "golpe_certeiro_cheetara": {
+  "descricao": "Cheetara · a estocada reta e a estrela",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 27054
+ },
  "golpe_cruzado": {
   "descricao": "Wesker · os golpes em X e o sangue",
   "quadros": 12,
@@ -7908,6 +8048,20 @@
   ],
   "laco": false,
   "bytes": 21772
+ },
+ "golpe_da_princesa": {
+  "descricao": "She-Ra · as asas de luz e o chute",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 30534
  },
  "golpe_da_serie": {
   "descricao": "Série: os três pontos do combo e o golpe final",
@@ -8539,6 +8693,20 @@
   "laco": false,
   "bytes": 22646
  },
+ "homer_preparo": {
+  "descricao": "Homer · a energia pulsando e o vapor (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 17224
+ },
  "homing_attack": {
   "descricao": "Sonic · a bola azul e o anel",
   "quadros": 12,
@@ -8860,6 +9028,20 @@
   ],
   "laco": false,
   "bytes": 29350
+ },
+ "investida_de_javali": {
+  "descricao": "Bebop · as presas de javali e a poeira",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 37782
  },
  "investida_do_cla": {
   "descricao": "Destruidor · os ninjas do Clã convergindo",
@@ -9995,20 +10177,6 @@
   "laco": false,
   "bytes": 16450
  },
- "lanche": {
-  "descricao": "mordida, vapor e coração",
-  "quadros": 12,
-  "grade": [
-   3,
-   4
-  ],
-  "tamanho": [
-   192,
-   192
-  ],
-  "laco": false,
-  "bytes": 24090
- },
  "lanterna_preparo": {
   "descricao": "Lanterna Verde · a lanterna e o anel (Preparo, laço)",
   "quadros": 12,
@@ -10401,6 +10569,20 @@
   "laco": true,
   "bytes": 9590
  },
+ "liono_preparo": {
+  "descricao": "Lion-O · a espada crescendo e o olho (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 20830
+ },
  "liukang_preparo": {
   "descricao": "Liu Kang · o fogo em espiral (Preparo, laço)",
   "quadros": 12,
@@ -10610,6 +10792,20 @@
   ],
   "laco": false,
   "bytes": 83844
+ },
+ "maldicao_do_esqueleto": {
+  "descricao": "Esqueleto · a caveira verde e as correntes",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 29180
  },
  "malenia_preparo": {
   "descricao": "Malenia · o botão abrindo (Preparo, laço)",
@@ -17555,6 +17751,20 @@
   "laco": false,
   "bytes": 63258
  },
+ "pancada_do_bebop": {
+  "descricao": "Bebop · o soco e as placas de metal",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 38256
+ },
  "pancada_final": {
   "descricao": "Hellboy · o soco de pedra que racha o chão",
   "quadros": 12,
@@ -17750,6 +17960,20 @@
   ],
   "laco": false,
   "bytes": 33576
+ },
+ "pela_honra_de_grayskull": {
+  "descricao": "She-Ra · a espada erguida e a luz no trio",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 54556
  },
  "penance_stare": {
   "descricao": "Motoqueiro · os olhos, as espirais e as almas",
@@ -18507,6 +18731,20 @@
   "laco": false,
   "bytes": 53184
  },
+ "provocacao_do_bart": {
+  "descricao": "Bart · a pichação no ar",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 19502
+ },
  "provocar": {
   "descricao": "marca de raiva sobre o rival provocado, anéis se fechando",
   "quadros": 12,
@@ -19178,20 +19416,6 @@
   ],
   "laco": false,
   "bytes": 20888
- },
- "raio_divino": {
-  "descricao": "feixe do céu",
-  "quadros": 12,
-  "grade": [
-   3,
-   4
-  ],
-  "tamanho": [
-   192,
-   192
-  ],
-  "laco": false,
-  "bytes": 28964
  },
  "raio_do_diabo": {
   "descricao": "Kazuya · o laser da testa",
@@ -20075,6 +20299,20 @@
   "laco": true,
   "bytes": 4512
  },
+ "rosquinha": {
+  "descricao": "Homer · a rosquinha com granulado e a mordida",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 45314
+ },
  "roubar_carga": {
   "descricao": "Roubou Carga: a energia sai do rival",
   "quadros": 12,
@@ -20774,6 +21012,20 @@
   ],
   "laco": true,
   "bytes": 27576
+ },
+ "shera_preparo": {
+  "descricao": "She-Ra · a espada e as faíscas em espiral (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 13824
  },
  "shinku_hadouken": {
   "descricao": "Ryu · o feixe do Shinku Hadouken",
@@ -22049,20 +22301,6 @@
   "laco": false,
   "bytes": 27834
  },
- "tempestade": {
-  "descricao": "nuvem e raios de cima",
-  "quadros": 12,
-  "grade": [
-   3,
-   4
-  ],
-  "tamanho": [
-   192,
-   192
-  ],
-  "laco": false,
-  "bytes": 31074
- },
  "tempestade_de_areia": {
   "descricao": "Príncipe · a tempestade de areia",
   "quadros": 12,
@@ -22258,6 +22496,20 @@
   ],
   "laco": false,
   "bytes": 46738
+ },
+ "thunder_thunder": {
+  "descricao": "Lion-O · o símbolo do gato, os raios e o golpe",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 69414
  },
  "tiara_lunar": {
   "descricao": "Sailor Moon: tiara-disco com lua crescente que acerta com brilho",
@@ -22580,6 +22832,20 @@
   ],
   "laco": false,
   "bytes": 12388
+ },
+ "travessura_maxima": {
+  "descricao": "Bart · as bombinhas e a explosão",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 43874
  },
  "tremor_do_rei": {
   "descricao": "Bowser · a queda e o chão rachando",
@@ -23126,6 +23392,20 @@
   ],
   "laco": false,
   "bytes": 65596
+ },
+ "visao_alem_do_alcance": {
+  "descricao": "Lion-O · o Olho de Thundera e o feixe",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 24820
  },
  "visao_de_detetive": {
   "descricao": "Batman · a visão de detetive no rival",

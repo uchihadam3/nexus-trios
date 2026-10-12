@@ -9,21 +9,6 @@ from .base import (GRANDE, TAU, apaga, back, contorno, ease_out, estrela, faisca
                    lamina, poeira, pulso, rastro_de_velocidade, rel, smooth, some, vazio)
 
 
-def chute_voador(T, t, rng):
-    """Chute voador: rastro diagonal chegando do alto e estouro para a frente, em leque."""
-    G, H = vazio(T)
-    ang = math.atan2(0.55, 1.0)
-    chega = ease_out(rel(t, 0, 0.22), 2)
-    linhas = rastro_de_velocidade(T, rng, 9, ang, 0.7, 0.2, (1 - chega) * 0.55, seed=11) * apaga(t, 0.18, 0.5)
-    tt = rel(t, 0.18, 1)
-    clarao = T.flare(0, 0, 1.7, ang) * some(t, 0.18, 0.55, 1.1) * 2.6 + T.gauss(0, 0, 0.12) * some(t, 0.18, 0.5) * 2.5
-    frente = T.arc_band(0.22 + 0.5 * ease_out(tt, 2.2), 0.07, ang - 1.1, ang + 1.1, crescente=True) * (1 - tt) ** 1.2 * 1.6 * (t > 0.18)
-    fa = faiscas(T, rng, t, 22, 0.95, 0.035, cone=(ang - 0.75, ang + 0.75), gravidade=0.15, inicio=0.18)
-    G += T.glow(linhas, 1, 1.2, 0.02) + clarao + frente + T.glow(fa, 1, 1.3, 0.02)
-    H += linhas * 0.7 + clarao + fa * 0.8 + frente * 0.4
-    return G, H
-
-
 def bonk(T, t, rng):
     """Pancada de desenho animado: achata, sobe um galo de luz e estrelinhas giram em volta."""
     G, H = vazio(T)
@@ -386,7 +371,6 @@ def esticar(T, t, rng):
 
 
 REGISTRO = [
-    ("chute_voador", chute_voador, GRANDE, "chute voador (diagonal)", False),
     ("bonk", bonk, GRANDE, "pancada de desenho com estrelinhas", False),
     ("pow_cartoon", pow_cartoon, GRANDE, "balão POW de quadrinho", False),
     ("martelo", martelo, GRANDE, "martelada no chão", False),

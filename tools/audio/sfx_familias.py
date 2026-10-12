@@ -44,14 +44,6 @@ def _brilho(rng, seg, f0, g=0.2, tipo=CRISTAL):
 
 
 # ================================================================== corpo
-def chute_voador(rng, v):
-    x = _z(0.6)
-    poe(x, _whoosh(rng, 0.22, 400, 4000, 0.85), 0)
-    poe(x, B.soco_pesado(rng, v), 0.2, 0.9)
-    poe(x, estalo(rng, n_de(0.08), 2000, 8000, 0.006), 0.2, 0.6)
-    return x
-
-
 def pow_cartoon(rng, v):
     x = _z(0.6)
     poe(x, B.soco_pesado(rng, v), 0, 0.9)
@@ -385,15 +377,6 @@ def bloco_de_gelo(rng, v):
     return reverb(x, 0.4, 0.2, 7000)
 
 
-def tempestade(rng, v):
-    x = _z(1.6)
-    n = n_de(1.5)
-    poe(x, passa(rosa(rng, n), 40, 200, 2) * env(n, 0.2, 0.8) * 0.6, 0)
-    for k, a in enumerate((0.15, 0.38, 0.6)):
-        poe(x, B.raio(rng, v)[: n_de(0.6)] * (0.7 + 0.15 * k), a * 1.4)
-    return reverb(x, 0.8, 0.3, 4000)
-
-
 def areia(rng, v):
     n = n_de(1.3)
     x = passa(ruido(rng, n), 1500, 9000, 2) * sobe_e_some(n, 0.6, 1.3) * 0.6
@@ -470,17 +453,6 @@ def radiacao(rng, v):
     t = np.arange(n) / SR
     x += seno(np.full(n, 60.0), n) * 0.0 + satura(seno(np.full(n, 120.0), n), 3) * env(n, 0.1, 0.6, segura=0.4) * 0.15 * (0.7 + 0.3 * np.sin(2 * math.pi * 3 * t))
     return reverb(x, 0.3, 0.2)
-
-
-def raio_divino(rng, v):
-    x = _z(1.3)
-    poe(x, _tom(nota(96), nota(96), 0.15, 0.1, 0.12), 0)
-    n = n_de(1.0)
-    coro = sum(seno(nota(m) * (1 + 0.003 * np.sin(np.arange(n) / SR * 2 * math.pi * 5)), n) for m in (72, 76, 79, 84)) * env(n, 0.03, 0.6) * 0.07
-    poe(x, coro, 0.12)
-    poe(x, B.luz(rng, v)[: n_de(0.8)] * 0.7, 0.12)
-    poe(x, baque(n_de(0.4), 90, 45, 0.15, 0.3) * 0.6, 0.15)
-    return reverb(x, 0.8, 0.35)
 
 
 def rugido(rng, v):
@@ -606,16 +578,6 @@ def bencao(rng, v):
     for k in range(5):
         poe(x, _brilho(rng, 0.4, nota(rng.choice([88, 91, 96])), 0.06, SINO), 0.2 + k * 0.2)
     return reverb(x, 0.85, 0.4, 9000)
-
-
-def lanche(rng, v):
-    x = _z(1.1)
-    n = n_de(0.12)
-    poe(x, satura(passa(ruido(rng, n), 800, 5000, 2) * env(n, 0.001, 0.03), 2) * 0.6, 0)
-    poe(x, satura(passa(ruido(rng, n), 800, 5000, 2) * env(n, 0.001, 0.03), 2) * 0.5, 0.15)
-    for k, m in enumerate((72, 76, 79, 84)):
-        poe(x, seno(np.full(n_de(0.15), nota(m)), n_de(0.15)) * env(n_de(0.15), 0.005, 0.08) * 0.15, 0.35 + k * 0.08)
-    return reverb(x, 0.3, 0.15)
 
 
 def purificacao(rng, v):

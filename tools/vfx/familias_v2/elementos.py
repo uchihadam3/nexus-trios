@@ -40,24 +40,6 @@ def bloco_de_gelo(T, t, rng):
     return G, H
 
 
-def tempestade(T, t, rng):
-    """Tempestade: uma nuvem escurece o alto e raios grossos descem no alvo, um, dois, três."""
-    G, H = vazio(T)
-    env = janela(t, 0, 0.15) * apaga(t, 0.75, 1)
-    n = T.noise(np.random.default_rng(471), 0.07, 3)
-    nuvem = smooth(0.22 + 0.15 * n - np.abs(T.V + 0.55) * 1.6, 0, 0.15) * smooth(0.7 - np.abs(T.U), 0, 0.25)
-    raios = T.zero()
-    for k, (a0, x) in enumerate(((0.15, 0.0), (0.38, -0.2), (0.6, 0.18))):
-        if a0 <= t < a0 + 0.12:
-            sub = np.random.default_rng(int(t * 997) + k)
-            pts = jagged(sub, x + sub.uniform(-0.1, 0.1), -0.6, 0, 0.1, 6, 0.22)
-            raios += T.polyline(pts, 0.03, 1)
-    clarao = sum(T.gauss(0, 0.1, 0.13) * some(t, a0, a0 + 0.15) for a0 in (0.15, 0.38, 0.6)) * 2
-    G += (nuvem * 0.9 * (0.6 + 0.4 * np.clip(n, -1, 1)) + T.glow(raios, 1.6, 2, 0.025) + clarao) * env
-    H += (raios * 1.6 + clarao) * env
-    return G, H
-
-
 def _raio_ramificado(T, sub, x0, y0, ang, comp, largura, ramos=2, peso=1.0):
     """Um raio com galhos: o tronco quebrado e um ou dois galhos saindo do meio, mais finos."""
     x1, y1 = x0 + math.cos(ang) * comp, y0 + math.sin(ang) * comp
@@ -253,21 +235,6 @@ def radiacao(T, t, rng):
     return G, H
 
 
-def raio_divino(T, t, rng):
-    """Raio divino: um feixe estreito e afiado desce do céu, o chão se acende num círculo."""
-    G, H = vazio(T)
-    desce = ease_out(rel(t, 0.05, 0.2), 2)
-    env = apaga(t, 0.6, 1)
-    feixe = np.exp(-(T.U / (0.05 + 0.02 * math.sin(t * 50))) ** 2) * smooth(-1 + 1.5 * desce - T.V, -0.05, 0.05) * smooth(0.5 - T.V, 0, 0.05)
-    nucleo = np.exp(-(T.U / 0.015) ** 2) * smooth(-1 + 1.5 * desce - T.V, -0.05, 0.05) * smooth(0.5 - T.V, 0, 0.05)
-    aviso = np.exp(-(T.U / 0.008) ** 2) * janela(t, 0, 0.05) * (t < 0.15) * 0.8
-    circulo = (T.ring(0.38, 0.02, cy=0.48, squash=3.5) + T.ring(0.25, 0.012, cy=0.48, squash=3.5)) * janela(t, 0.15, 0.25) * 1.4
-    fa = faiscas(T, rng, t, 22, 0.7, 0.03, cone=(-math.pi + 0.3, -0.3), cy=0.45, inicio=0.2)
-    G += (feixe * 1.5 + nucleo * 1.5 + circulo) * env + aviso + fa
-    H += (nucleo * 2 + circulo * 0.5) * env + aviso
-    return G, H
-
-
 def rugido(T, t, rng):
     """Rugido: ondas de som em cone empurram o alvo, a imagem treme entre elas."""
     G, H = vazio(T)
@@ -285,7 +252,6 @@ def rugido(T, t, rng):
 
 REGISTRO = [
     ("bloco_de_gelo", bloco_de_gelo, GRANDE, "bloco de gelo prendendo", False),
-    ("tempestade", tempestade, GRANDE, "nuvem e raios de cima", False),
     ("areia", areia, GRANDE, "casulo de areia", False),
     ("espinhos_de_terra", espinhos_de_terra, GRANDE, "pontas de pedra em linha", False),
     ("metal", metal, GRANDE, "chapas de metal fechando", False),
@@ -295,6 +261,5 @@ REGISTRO = [
     ("acido", acido, GRANDE, "respingo de ácido", False),
     ("sangue", sangue, GRANDE, "respingo de sangue", False),
     ("radiacao", radiacao, GRANDE, "radiação pulsando", False),
-    ("raio_divino", raio_divino, GRANDE, "feixe do céu", False),
     ("rugido", rugido, GRANDE, "ondas de som em cone", False),
 ]

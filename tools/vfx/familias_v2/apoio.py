@@ -130,25 +130,6 @@ def bencao(T, t, rng):
     return G, H
 
 
-def lanche(T, t, rng):
-    """Lanche: uma mordida de luz, migalhas pulando, vapor quentinho e um coraçãozinho subindo."""
-    G, H = vazio(T)
-    env = apaga(t, 0.75, 1)
-    mordida = T.ring(0.2, 0.05) * (1 - smooth(T.U + 0.05, 0, 0.1) * smooth(T.V - 0.05, -0.2, 0.2) * 0) * pulso(t, 0, 0.35) * 1.4
-    migalhas = faiscas(T, rng, t, 14, 0.5, 0.03, cone=(-math.pi + 0.3, -0.3), gravidade=0.6)
-    vapor = T.zero()
-    for k in range(3):
-        x = (k - 1) * 0.15
-        pts = [(x + 0.04 * math.sin(v * 12 + t * 8 + k), 0.1 - v * 0.6) for v in np.linspace(0, 1, 20)]
-        vapor += T.polyline(pts, 0.015, 1) * pulso(t, 0.1 + 0.05 * k, 0.8)
-    u = rel(t, 0.3, 1)
-    hx, hy, hs = 0, -0.2 - 0.5 * u, 0.12
-    coracao = smooth(1 - (((T.U - hx) / hs) ** 2 + (-(T.V - hy) / hs - np.sqrt(np.abs((T.U - hx) / hs)) * 0.8 + 0.3) ** 2), 0, 0.3) * math.sin(math.pi * u)
-    G += (mordida + migalhas + T.blur(vapor, 0.01) * 0.8 + coracao * 1.4) * env
-    H += (coracao * 0.8 + migalhas * 0.5) * env
-    return G, H
-
-
 def purificar(T, t, rng):
     """Purificar: uma onda clara lava o corpo de cima a baixo e brilhos caem limpos."""
     G, H = vazio(T)
@@ -640,7 +621,6 @@ REGISTRO = [
     ("barreira_magica", barreira_magica, GRANDE, "cúpula de runas", False),
     ("resgate", resgate, GRANDE, "mergulho de resgate", False),
     ("bencao", bencao, GRANDE, "penas e halo", False),
-    ("lanche", lanche, GRANDE, "mordida, vapor e coração", False),
     ("purificar_onda", purificar, GRANDE, "onda que lava", False),
     ("enfraquecer", enfraquecer, GRANDE, "setas para baixo", False),
     ("lentidao", lentidao, GRANDE, "ampulheta", False),
