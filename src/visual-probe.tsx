@@ -33,7 +33,7 @@ const aliados=['sakura','naruto','gojo'].filter(x=>x!==habId).slice(0,2);
 const quem=params.get('quem');
 /* `?inv=yugi`: a bolinha da invocação (src/components/Invocacoes.tsx) atacando, no seu trio e num rival que também invoca. */
 const inv=params.get('inv');
-const battle=params.get('ativa')?createBattle([params.get('ativa')!,'gojo','naruto'],['goku','vegeta','hulk'],99):inv?createBattle([inv,'gojo','naruto'],['goku','vegeta',inv==='kaiba'?'yugi':'kaiba'],99):hab?createBattle([habId,...aliados],rivais,99):quem?createBattle(['sakura','gojo','naruto'],[quem,'vegeta','hulk'],99):scenario==='nomes'?createBattle(['coragem','raidenmk','capitaoplaneta'],['dannyphantom','lexluthor','sailormoon'],99):createBattle(['sakura','gojo','naruto'],['goku','vegeta','hulk'],99);
+const battle=params.get('ativa')?(params.get('lado')==='rival'?createBattle(['goku','vegeta','hulk'],[params.get('ativa')!,'gojo','naruto'],99):createBattle([params.get('ativa')!,'gojo','naruto'],['goku','vegeta','hulk'],99)):inv?createBattle([inv,'gojo','naruto'],['goku','vegeta',inv==='kaiba'?'yugi':'kaiba'],99):hab?createBattle([habId,...aliados],rivais,99):quem?createBattle(['sakura','gojo','naruto'],[quem,'vegeta','hulk'],99):scenario==='nomes'?createBattle(['coragem','raidenmk','capitaoplaneta'],['dannyphantom','lexluthor','sailormoon'],99):createBattle(['sakura','gojo','naruto'],['goku','vegeta','hulk'],99);
 const [sakura,gojo,naruto,goku,vegeta,hulk]=battle.fighters;
 let source=sakura,target=goku,effects:Effect[]=[{kind:'damage',value:190}],selected=[goku],visual:Visual='impact';
 if(scenario==='heal'){source=sakura;target=naruto;target.hp-=240;effects=[{kind:'heal',value:170}];selected=[target];visual='shield';}
@@ -142,13 +142,17 @@ const ativa=params.get('ativa');
 function Ativa(){
   const [clock,setClock]=useState({n:0,t:0});
   useEffect(()=>{let frame=0;const start=performance.now();const tick=(now:number)=>{const t=(now-start)/1000;setClock({n:Math.floor(t/3.4),t:t%3.4});frame=requestAnimationFrame(tick);};frame=requestAnimationFrame(tick);return ()=>cancelAnimationFrame(frame);},[]);
-  const quem=battle.fighters[0]!,unica=clock.n%2===1;
+  const quem=battle.fighters.find(x=>x.characterId===ativa)!,unica=clock.n%2===1;
   const ficha=byId[quem.characterId];
   const st=ficha.trait.effects.find((e)=>e.kind==='status');
   const ev:BattleEvent=unica?{id:3000+clock.n,time:0,kind:'unica',source:quem.uid,target:quem.uid,label:'Ativou'}
     :{id:3000+clock.n,time:0,kind:st?'status':'charge',source:quem.uid,target:quem.uid,label:st&&st.kind==='status'?statusesProbe[st.status].name:'Carga',...(st&&st.kind==='status'?{status:st.status,value:st.duration}:{value:5})};
   const passosA=montaPassos({event:ev,events:[ev],after:battle,traco:true,base:1.3});
   const live:Beat={event:ev,events:[ev],before:battle,after:battle,duration:1.3,base:1.3,family:'buff',grand:false,elapsed:Math.min(clock.t,1.3),impacted:true,etapa:1,etapas:[1],passos:passosA,traco:true};
-  return <BattleScreen battle={battle} beat={clock.t<1.3?live:null} index={0} name="Prova visual de combate" settings={settings} paused={false} onPause={()=>{}} onAbandon={()=>{}} onSettings={()=>{}}/>;
+  // `&junto=1`: logo depois do selo, o mesmo lutador solta uma habilidade (os dois avisos ao mesmo tempo)
+  const golpe:BattleEvent={id:5000+clock.n,time:0,kind:'skill',source:quem.uid,target:battle.fighters.find(x=>x.side!==quem.side)!.uid,skill:0,label:ficha.skills[0]!.name};
+  const solta:Beat={event:golpe,events:[golpe],before:battle,after:battle,duration:1.6,base:1.6,family:'buff',grand:false,elapsed:Math.min(clock.t-1.3,1.6),impacted:false};
+  const beatAgora=clock.t<1.3?live:params.get('junto')&&clock.t<2.9?solta:null;
+  return <BattleScreen battle={battle} beat={beatAgora} index={0} name="Prova visual de combate" settings={settings} paused={false} onPause={()=>{}} onAbandon={()=>{}} onSettings={()=>{}}/>;
 }
 createRoot(document.getElementById('root')!).render(<div className="app"><main className="main battle-main">{ativa?<Ativa/>:play?<Play/>:<BattleScreen battle={impacted?after:before} beat={beat} index={0} name="Prova visual de combate" settings={settings} paused={false} onPause={()=>{}} onAbandon={()=>{}} onSettings={()=>{}}/>}</main></div>);
