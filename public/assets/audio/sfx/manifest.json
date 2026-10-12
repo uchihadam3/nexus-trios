@@ -10525,6 +10525,278 @@
    ],
    "bytes": 47432
   },
+  "mu-batarangue": {
+   "arquivo": "mu-batarangue.mp3",
+   "descricao": "Batman: o batarangue",
+   "versoes": [
+    0.0,
+    1.1615,
+    2.401,
+    3.5527
+   ],
+   "duracoes": [
+    1.0815,
+    1.1595,
+    1.0717,
+    1.1362
+   ],
+   "bytes": 41479
+  },
+  "mu-bochechas": {
+   "arquivo": "mu-bochechas.mp3",
+   "descricao": "Pikachu: as bochechas elétricas",
+   "versoes": [
+    0.0,
+    1.195,
+    2.4106,
+    3.5513
+   ],
+   "duracoes": [
+    1.115,
+    1.1357,
+    1.0607,
+    1.1617
+   ],
+   "bytes": 58358
+  },
+  "mu-bomba-de-fumaca": {
+   "arquivo": "mu-bomba-de-fumaca.mp3",
+   "descricao": "Batman: a bomba de fumaça",
+   "versoes": [
+    0.0,
+    1.68,
+    3.418,
+    5.0439
+   ],
+   "duracoes": [
+    1.6,
+    1.658,
+    1.5459,
+    1.6244
+   ],
+   "bytes": 61943
+  },
+  "mu-borracha": {
+   "arquivo": "mu-borracha.mp3",
+   "descricao": "Luffy: a borracha",
+   "versoes": [
+    0.0,
+    1.3318,
+    2.7079,
+    3.9984
+   ],
+   "duracoes": [
+    1.2518,
+    1.2961,
+    1.2105,
+    1.2704
+   ],
+   "bytes": 30096
+  },
+  "mu-cada-vez-maior": {
+   "arquivo": "mu-cada-vez-maior.mp3",
+   "descricao": "Hulk: crescendo",
+   "versoes": [
+    0.0,
+    1.88,
+    3.8253,
+    5.6444
+   ],
+   "duracoes": [
+    1.8,
+    1.8653,
+    1.7391,
+    1.8274
+   ],
+   "bytes": 59838
+  },
+  "mu-gancho": {
+   "arquivo": "mu-gancho.mp3",
+   "descricao": "Batman: o gancho",
+   "versoes": [
+    0.0,
+    1.0733,
+    2.189,
+    3.2298
+   ],
+   "duracoes": [
+    0.9933,
+    1.0358,
+    0.9607,
+    1.109
+   ],
+   "bytes": 39746
+  },
+  "mu-garras-regeneram": {
+   "arquivo": "mu-garras-regeneram.mp3",
+   "descricao": "Wolverine: as garras e a cura",
+   "versoes": [
+    0.0,
+    1.4457,
+    2.8929,
+    4.2895
+   ],
+   "duracoes": [
+    1.3657,
+    1.3672,
+    1.3166,
+    1.3846
+   ],
+   "bytes": 59426
+  },
+  "mu-genki-dama": {
+   "arquivo": "mu-genki-dama.mp3",
+   "descricao": "Goku: a Genki Dama",
+   "versoes": [
+    0.0,
+    2.48,
+    5.047,
+    7.4459
+   ],
+   "duracoes": [
+    2.4,
+    2.487,
+    2.3188,
+    2.4365
+   ],
+   "bytes": 91897
+  },
+  "mu-kage-bunshin": {
+   "arquivo": "mu-kage-bunshin.mp3",
+   "descricao": "Naruto: os clones das sombras",
+   "versoes": [
+    0.0,
+    1.1899,
+    2.4428,
+    3.6352
+   ],
+   "duracoes": [
+    1.1099,
+    1.173,
+    1.1123,
+    1.1372
+   ],
+   "bytes": 43621
+  },
+  "mu-modo-serio": {
+   "arquivo": "mu-modo-serio.mp3",
+   "descricao": "Saitama: o soco sério",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 74855
+  },
+  "mu-sharingan": {
+   "arquivo": "mu-sharingan.mp3",
+   "descricao": "Sasuke: o Sharingan",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 46685
+  },
+  "mu-sopro-congelante": {
+   "arquivo": "mu-sopro-congelante.mp3",
+   "descricao": "Superman: o sopro congelante",
+   "versoes": [
+    0.0,
+    1.6696,
+    3.39,
+    4.9918
+   ],
+   "duracoes": [
+    1.5896,
+    1.6404,
+    1.5217,
+    1.5771
+   ],
+   "bytes": 68110
+  },
+  "mu-tedio": {
+   "arquivo": "mu-tedio.mp3",
+   "descricao": "Saitama: o tédio",
+   "versoes": [
+    0.0,
+    1.518,
+    3.1258,
+    4.5966
+   ],
+   "duracoes": [
+    1.438,
+    1.5278,
+    1.3908,
+    1.4369
+   ],
+   "bytes": 51647
+  },
+  "mu-teia": {
+   "arquivo": "mu-teia.mp3",
+   "descricao": "Homem-Aranha: a teia",
+   "versoes": [
+    0.0,
+    1.011,
+    2.0507,
+    3.0075
+   ],
+   "duracoes": [
+    0.931,
+    0.9598,
+    0.8767,
+    0.9679
+   ],
+   "bytes": 35446
+  },
+  "mu-vazio-infinito": {
+   "arquivo": "mu-vazio-infinito.mp3",
+   "descricao": "Gojo: o Vazio Infinito",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 70375
+  },
+  "mu-zenkai": {
+   "arquivo": "mu-zenkai.mp3",
+   "descricao": "Vegeta: o Zenkai",
+   "versoes": [
+    0.0,
+    1.7568,
+    3.4827,
+    5.1037
+   ],
+   "duracoes": [
+    1.6768,
+    1.6459,
+    1.541,
+    1.6843
+   ],
+   "bytes": 74913
+  },
   "muda": {
    "arquivo": "muda.mp3",
    "descricao": "família muda",

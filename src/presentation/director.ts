@@ -281,7 +281,6 @@ function ativacoesCheias(d:Direction,events:BattleEvent[],after:Battle):Set<stri
     if(e.kind!=='unica'||cheias.has(e.source))continue;
     const f=after.fighters.find(x=>x.uid===e.source);if(!f)continue;
     const vista=(d.unicaCheia??={})[e.source];
-    if(JEITO_DA_UNICA[f.characterId]==='sempre'&&vista!==undefined)continue;
     if(vista!==undefined&&after.time-vista<INTERVALO_DA_UNICA)continue;
     d.unicaCheia[e.source]=after.time;cheias.add(e.source);
   }

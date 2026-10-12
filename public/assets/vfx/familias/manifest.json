@@ -9029,6 +9029,230 @@
   "laco": false,
   "bytes": 92264
  },
+ "mu_batarangue": {
+  "descricao": "Batman · o batarangue girando e acertando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 11374
+ },
+ "mu_bochechas": {
+  "descricao": "Pikachu · as bochechas elétricas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 29908
+ },
+ "mu_bomba_de_fumaca": {
+  "descricao": "Batman · a nuvem de fumaça",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 27234
+ },
+ "mu_borracha": {
+  "descricao": "Luffy · os anéis de borracha esticando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 19970
+ },
+ "mu_cada_vez_maior": {
+  "descricao": "Hulk · as ondas de fúria e as rachaduras",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 44548
+ },
+ "mu_gancho": {
+  "descricao": "Batman · o gancho e o escudo do morcego",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 14156
+ },
+ "mu_garras_regeneram": {
+  "descricao": "Wolverine · as garras em X e a cura",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 23604
+ },
+ "mu_genki_dama": {
+  "descricao": "Goku · a Genki Dama descendo e explodindo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 69152
+ },
+ "mu_kage_bunshin": {
+  "descricao": "Naruto · as nuvens de fumaça e os clones",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 35214
+ },
+ "mu_modo_serio": {
+  "descricao": "Saitama · o soco sério e a onda gigante",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 55330
+ },
+ "mu_sharingan": {
+  "descricao": "Sasuke · o Sharingan girando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 39662
+ },
+ "mu_sopro_congelante": {
+  "descricao": "Superman · o sopro gelado",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 15208
+ },
+ "mu_tedio": {
+  "descricao": "Saitama · as bolhas do bocejo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 16062
+ },
+ "mu_teia": {
+  "descricao": "Homem-Aranha · a teia em rede",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 14288
+ },
+ "mu_vazio_infinito": {
+  "descricao": "Gojo · o céu de estrelas do domínio",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 45682
+ },
+ "mu_zenkai": {
+  "descricao": "Vegeta · a aura dourada, os raios e a cura do Zenkai",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 68412
+ },
  "mugen_tsukuyomi": {
   "descricao": "Mugen Tsukuyomi: a lua do Rinne Sharingan, os raios e os casulos de raízes",
   "quadros": 12,

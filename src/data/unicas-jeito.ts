@@ -1,9 +1,10 @@
 /*
  * Como cada Mecânica única aparece na luta (src/presentation/unicas-efeitos.ts):
  * - rara: dispara de vez em quando (1 vez por luta, a cada 15–20 s): toda ativação vira um momento próprio.
- * - sempre: age o tempo todo (a cada golpe): ativa uma vez no começo da luta; depois só o nome aparece.
+ * - sempre: age o tempo todo (a cada golpe): ativa também no começo da luta, como uma habilidade.
  * - condicional: liga quando algo acontece (Vida baixa, aliado ferido…): ativa quando dispara.
- * Se a mesma mecânica disparar de novo em menos de INTERVALO_DA_UNICA segundos, só o nome aparece.
+ * Todo aviso dela na luta (o "Modo sério" do Saitama, a Autodestruição do Cell) é uma ativação completa; se a
+ * mesma mecânica disparar de novo em menos de INTERVALO_DA_UNICA segundos, só o nome aparece.
  */
 export type JeitoDaUnica = 'rara' | 'sempre' | 'condicional';
 export const INTERVALO_DA_UNICA = 10;

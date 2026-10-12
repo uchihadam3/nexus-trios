@@ -285,7 +285,8 @@ export function BattleEffects({battle,beat,anchors,enabled,reduced,medal=80}:{ba
         if(e.kind!=='unica'||!passo.eventos.includes(e.id))continue;
         const dono=battle.fighters.find(f=>f.uid===e.source);if(!dono)continue;
         const ef=efeitoDaUnica(dono.characterId,e.label),f=familia(ef.familia);
-        const p=point(e.source),t=Math.min(medal*f.escala,Math.min(size.w,size.h)*.95);
+        // em quem a mecânica atinge (a Genki Dama no rival, a Teia no aliado); sem alvo, em quem ativou
+        const p=point(e.target??e.source),t=Math.min(medal*f.escala,Math.min(size.w,size.h)*.95);
         nodes.push(camada(f.impacto,{left:`${p.x}%`,top:`${p.y}%`,width:t,height:t,'--fx-cor':f.cor,'--ang':'0deg','--flip':1,'--dur':s(1.5),'--delay':s(sozinha?0:PREPARO_DA_UNICA)},'fxl-impacto fxl-sobre',`unica-${beat.event.id}-${e.id}`));
       }
     });
