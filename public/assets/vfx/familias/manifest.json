@@ -55,6 +55,20 @@
   "laco": false,
   "bytes": 74458
  },
+ "acidente_feliz": {
+  "descricao": "Pateta · o piano caindo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 37234
+ },
  "acido": {
   "descricao": "respingo de ácido",
   "quadros": 12,
@@ -223,6 +237,34 @@
   "laco": false,
   "bytes": 15824
  },
+ "ai_ai_ai": {
+  "descricao": "Pateta · o voo em espiral e o tombo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 27062
+ },
+ "alegria_contagiante": {
+  "descricao": "Mickey · as orelhas, as notas e o confete",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 32988
+ },
  "alerta_urgente": {
   "descricao": "Anya · os ! pulando e a bolha-escudo",
   "quadros": 12,
@@ -320,6 +362,20 @@
   ],
   "laco": false,
   "bytes": 51944
+ },
+ "ao_infinito_e_alem": {
+  "descricao": "Buzz Lightyear · o voo e a estrela",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 35418
  },
  "aparar_e_cortar": {
   "descricao": "Sekiro: faísca de aparar e contra-corte",
@@ -572,6 +628,20 @@
   ],
   "laco": false,
   "bytes": 24872
+ },
+ "ataque_de_furia": {
+  "descricao": "Pato Donald · a nuvem de briga",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 33350
  },
  "atracao": {
   "descricao": "tudo puxado para um ponto",
@@ -1791,6 +1861,20 @@
   "laco": false,
   "bytes": 20936
  },
+ "buzz_preparo": {
+  "descricao": "Buzz Lightyear · as asas e o foguete acendendo (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 30846
+ },
  "byakugou_cura": {
   "descricao": "Sakura · a luz verde da cura com o losango e as pétalas",
   "quadros": 12,
@@ -2519,6 +2603,20 @@
   "laco": false,
   "bytes": 10308
  },
+ "chapeu_de_feiticeiro": {
+  "descricao": "Mickey · o chapéu de feiticeiro e as estrelas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 58250
+ },
  "charge_beam": {
   "descricao": "Samus · a bola carregada e o impacto",
   "quadros": 12,
@@ -3134,20 +3232,6 @@
   ],
   "laco": false,
   "bytes": 22778
- },
- "confete": {
-  "descricao": "estouro de festa",
-  "quadros": 12,
-  "grade": [
-   3,
-   4
-  ],
-  "tamanho": [
-   192,
-   192
-  ],
-  "laco": false,
-  "bytes": 57050
  },
  "confusao": {
   "descricao": "interrogações girando",
@@ -4619,20 +4703,6 @@
   "laco": false,
   "bytes": 31196
  },
- "encanto": {
-  "descricao": "estrelas de encanto",
-  "quadros": 12,
-  "grade": [
-   3,
-   4
-  ],
-  "tamanho": [
-   192,
-   192
-  ],
-  "laco": false,
-  "bytes": 42484
- },
  "encolhimento": {
   "descricao": "Homem-Formiga · os anéis, o zigue-zague e os golpes",
   "quadros": 12,
@@ -5753,6 +5823,20 @@
   "laco": false,
   "bytes": 59096
  },
+ "experimento_626": {
+  "descricao": "Stitch · a rajada de plasma",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 29608
+ },
  "explosao": {
   "descricao": "explosão",
   "quadros": 12,
@@ -5822,6 +5906,20 @@
   ],
   "laco": false,
   "bytes": 104354
+ },
+ "explosao_de_raiva": {
+  "descricao": "Pato Donald · o vapor e a explosão vermelha",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 58726
  },
  "explosao_de_sangue": {
   "descricao": "Nezuko · as gotas que explodem em chamas rosa",
@@ -7839,6 +7937,20 @@
   "laco": false,
   "bytes": 34036
  },
+ "grito_indignado": {
+  "descricao": "Pato Donald · o balão serrilhado e o grito",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 17174
+ },
  "groot_preparo": {
   "descricao": "Groot · os braços fincados e as raízes (Preparo, laço)",
   "quadros": 12,
@@ -9575,6 +9687,20 @@
   "laco": true,
   "bytes": 9480
  },
+ "laser_do_braco": {
+  "descricao": "Buzz Lightyear · a mira e o laser vermelho",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 31234
+ },
  "lata_de_espinafre": {
   "descricao": "Popeye · a lata e o músculo",
   "quadros": 12,
@@ -10583,6 +10709,20 @@
   "laco": true,
   "bytes": 17356
  },
+ "mickey_preparo": {
+  "descricao": "Mickey · a luva acenando (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 46026
+ },
  "mikiri": {
   "descricao": "Sekiro · o pisão na lança e o kanji",
   "quadros": 12,
@@ -10751,6 +10891,20 @@
   "laco": false,
   "bytes": 55296
  },
+ "modo_de_combate": {
+  "descricao": "Buzz Lightyear · as asas abrindo e o pulso",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 39740
+ },
  "modo_kurama": {
   "descricao": "Naruto · o Manto da Kurama: chamas, caudas e o selo",
   "quadros": 12,
@@ -10820,6 +10974,20 @@
   ],
   "laco": false,
   "bytes": 35468
+ },
+ "mordida_de_stitch": {
+  "descricao": "Stitch · a bocarra mordendo todos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 33352
  },
  "mordida_predatoria": {
   "descricao": "Venom · a bocarra, a gosma e a cura",
@@ -17037,6 +17205,20 @@
   "laco": false,
   "bytes": 13694
  },
+ "pateta_preparo": {
+  "descricao": "Pateta · se equilibrando (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 10258
+ },
  "pe_de_cabra": {
   "descricao": "Gordon · o pé de cabra e o lambda",
   "quadros": 12,
@@ -17344,6 +17526,20 @@
   ],
   "laco": false,
   "bytes": 39544
+ },
+ "plano_do_xerife": {
+  "descricao": "Woody · a estrela de xerife sobre o trio",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 57772
  },
  "plano_improvisado": {
   "descricao": "Senhor das Estrelas · a fita, as notas e o tiro",
@@ -18100,6 +18296,20 @@
   ],
   "laco": false,
   "bytes": 13380
+ },
+ "quatro_bracos": {
+  "descricao": "Stitch · as quatro garras",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 23218
  },
  "quatro_punhos": {
   "descricao": "Básico do Goro: os quatro punhos",
@@ -20621,20 +20831,6 @@
   "laco": true,
   "bytes": 11876
  },
- "sorte": {
-  "descricao": "dados rolando",
-  "quadros": 12,
-  "grade": [
-   3,
-   4
-  ],
-  "tamanho": [
-   192,
-   192
-  ],
-  "laco": false,
-  "bytes": 29444
- },
  "sorte_de_cachorro": {
   "descricao": "Scooby-Doo · o barril e as caixas caindo",
   "quadros": 12,
@@ -20732,6 +20928,20 @@
   ],
   "laco": true,
   "bytes": 26050
+ },
+ "stitch_preparo": {
+  "descricao": "Stitch · as pistolas de plasma carregando (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 10946
  },
  "subzero_preparo": {
   "descricao": "Sub-Zero · o frio juntando (Preparo, laço)",
@@ -21531,6 +21741,20 @@
   "laco": false,
   "bytes": 31556
  },
+ "todos_juntos": {
+  "descricao": "Woody · o laço de corda abraçando o trio",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 63470
+ },
  "toque_absorvente": {
   "descricao": "Vampira: a mão toca e suga fios de vida do alvo",
   "quadros": 12,
@@ -21712,6 +21936,20 @@
   ],
   "laco": false,
   "bytes": 26760
+ },
+ "tropecao_do_pateta": {
+  "descricao": "Pateta · o escorregão e o chapéu voando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 24474
  },
  "tropeco": {
   "descricao": "Scooby-Doo · o rolamento e a interrogação",
@@ -22426,6 +22664,20 @@
   ],
   "laco": false,
   "bytes": 48236
+ },
+ "woody_preparo": {
+  "descricao": "Woody · a cordinha sendo puxada (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 25510
  },
  "xeque_light": {
   "descricao": "Light · o rei do xadrez e a marca",

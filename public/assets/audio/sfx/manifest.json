@@ -70,6 +70,23 @@
    ],
    "bytes": 54504
   },
+  "acidente-feliz": {
+   "arquivo": "acidente-feliz.mp3",
+   "descricao": "Pateta: o acidente feliz",
+   "versoes": [
+    0.0,
+    2.38,
+    4.8434,
+    7.1456
+   ],
+   "duracoes": [
+    2.3,
+    2.3834,
+    2.2222,
+    2.335
+   ],
+   "bytes": 58281
+  },
   "acido": {
    "arquivo": "acido.mp3",
    "descricao": "família acido",
@@ -274,6 +291,40 @@
    ],
    "bytes": 48809
   },
+  "ai-ai-ai": {
+   "arquivo": "ai-ai-ai.mp3",
+   "descricao": "Pateta: Ai-ai-ai!",
+   "versoes": [
+    0.0,
+    1.9705,
+    4.123,
+    6.1354
+   ],
+   "duracoes": [
+    1.8905,
+    2.0725,
+    1.9324,
+    1.9189
+   ],
+   "bytes": 56106
+  },
+  "alegria-contagiante": {
+   "arquivo": "alegria-contagiante.mp3",
+   "descricao": "Mickey: a alegria contagiante",
+   "versoes": [
+    0.0,
+    1.7282,
+    3.4476,
+    5.1053
+   ],
+   "duracoes": [
+    1.6482,
+    1.6394,
+    1.5777,
+    1.7056
+   ],
+   "bytes": 69972
+  },
   "alerta-urgente": {
    "arquivo": "alerta-urgente.mp3",
    "descricao": "Anya: os ! e a bolha-escudo",
@@ -409,6 +460,23 @@
     1.6244
    ],
    "bytes": 49336
+  },
+  "ao-infinito-e-alem": {
+   "arquivo": "ao-infinito-e-alem.mp3",
+   "descricao": "Buzz Lightyear: Ao infinito e além!",
+   "versoes": [
+    0.0,
+    2.0716,
+    4.4129,
+    6.4411
+   ],
+   "duracoes": [
+    1.9916,
+    2.2613,
+    1.9482,
+    2.1556
+   ],
+   "bytes": 73120
   },
   "aparar-e-cortar": {
    "arquivo": "aparar-e-cortar.mp3",
@@ -732,6 +800,23 @@
     2.0305
    ],
    "bytes": 62738
+  },
+  "ataque-de-furia": {
+   "arquivo": "ataque-de-furia.mp3",
+   "descricao": "Pato Donald: o ataque de fúria",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 63867
   },
   "atracao": {
    "arquivo": "atracao.mp3",
@@ -2042,6 +2127,23 @@
    ],
    "bytes": 48581
   },
+  "buzz-preparo": {
+   "arquivo": "buzz-preparo.mp3",
+   "descricao": "Buzz Lightyear: o foguete acendendo (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 48550
+  },
   "byakugou": {
    "arquivo": "byakugou.mp3",
    "descricao": "Byakugou: a cura grande no trio",
@@ -2858,6 +2960,23 @@
    ],
    "bytes": 57815
   },
+  "chapeu-de-feiticeiro": {
+   "arquivo": "chapeu-de-feiticeiro.mp3",
+   "descricao": "Mickey: o chapéu de feiticeiro",
+   "versoes": [
+    0.0,
+    2.0929,
+    4.2567,
+    6.3657
+   ],
+   "duracoes": [
+    2.0129,
+    2.0838,
+    2.029,
+    2.1306
+   ],
+   "bytes": 97858
+  },
   "charge-beam": {
    "arquivo": "charge-beam.mp3",
    "descricao": "Samus: o tiro carregado e o impacto",
@@ -3588,23 +3707,6 @@
     1.406
    ],
    "bytes": 74737
-  },
-  "confete": {
-   "arquivo": "confete.mp3",
-   "descricao": "família confete",
-   "versoes": [
-    0.0,
-    1.18,
-    2.3999,
-    3.5427
-   ],
-   "duracoes": [
-    1.1,
-    1.1399,
-    1.0628,
-    1.1167
-   ],
-   "bytes": 69357
   },
   "confusao": {
    "arquivo": "confusao.mp3",
@@ -5272,23 +5374,6 @@
    ],
    "bytes": 33375
   },
-  "encanto": {
-   "arquivo": "encanto.mp3",
-   "descricao": "família encanto",
-   "versoes": [
-    0.0,
-    1.28,
-    2.6035,
-    3.8429
-   ],
-   "duracoes": [
-    1.2,
-    1.2435,
-    1.1594,
-    1.2183
-   ],
-   "bytes": 45538
-  },
   "encolhimento": {
    "arquivo": "encolhimento.mp3",
    "descricao": "Homem-Formiga: encolhendo, o zigue-zague e os golpes",
@@ -6632,6 +6717,23 @@
    ],
    "bytes": 76808
   },
+  "experimento-626": {
+   "arquivo": "experimento-626.mp3",
+   "descricao": "Stitch: Experimento 626",
+   "versoes": [
+    0.0,
+    1.6686,
+    3.4266,
+    5.0799
+   ],
+   "duracoes": [
+    1.5886,
+    1.678,
+    1.5734,
+    1.6505
+   ],
+   "bytes": 55663
+  },
   "explosao": {
    "arquivo": "explosao.mp3",
    "descricao": "explosão",
@@ -6699,6 +6801,23 @@
     1.9707
    ],
    "bytes": 68763
+  },
+  "explosao-de-raiva": {
+   "arquivo": "explosao-de-raiva.mp3",
+   "descricao": "Pato Donald: a explosão de raiva",
+   "versoes": [
+    0.0,
+    2.2752,
+    4.6578,
+    6.8207
+   ],
+   "duracoes": [
+    2.1952,
+    2.3026,
+    2.083,
+    2.2773
+   ],
+   "bytes": 75680
   },
   "explosao-de-sangue": {
    "arquivo": "explosao-de-sangue.mp3",
@@ -9046,6 +9165,23 @@
    ],
    "bytes": 46161
   },
+  "grito-indignado": {
+   "arquivo": "grito-indignado.mp3",
+   "descricao": "Pato Donald: o grito indignado",
+   "versoes": [
+    0.0,
+    1.3225,
+    2.6499,
+    3.8749
+   ],
+   "duracoes": [
+    1.2425,
+    1.2474,
+    1.145,
+    1.1951
+   ],
+   "bytes": 43847
+  },
   "groot-preparo": {
    "arquivo": "groot-preparo.mp3",
    "descricao": "Groot: as raízes debaixo da terra (antes do golpe)",
@@ -11222,6 +11358,23 @@
    ],
    "bytes": 14055
   },
+  "laser-do-braco": {
+   "arquivo": "laser-do-braco.mp3",
+   "descricao": "Buzz Lightyear: o laser do braço",
+   "versoes": [
+    0.0,
+    1.2157,
+    2.5636,
+    3.8221
+   ],
+   "duracoes": [
+    1.1357,
+    1.2679,
+    1.1785,
+    1.2439
+   ],
+   "bytes": 47979
+  },
   "lata-de-espinafre": {
    "arquivo": "lata-de-espinafre.mp3",
    "descricao": "Popeye: a lata de espinafre",
@@ -12412,6 +12565,23 @@
    ],
    "bytes": 29175
   },
+  "mickey-preparo": {
+   "arquivo": "mickey-preparo.mp3",
+   "descricao": "Mickey: a luva acenando (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 63105
+  },
   "mikiri": {
    "arquivo": "mikiri.mp3",
    "descricao": "Sekiro: Mikiri",
@@ -12599,6 +12769,23 @@
    ],
    "bytes": 52883
   },
+  "modo-de-combate": {
+   "arquivo": "modo-de-combate.mp3",
+   "descricao": "Buzz Lightyear: o modo de combate",
+   "versoes": [
+    0.0,
+    1.4026,
+    2.8064,
+    4.1192
+   ],
+   "duracoes": [
+    1.3226,
+    1.3238,
+    1.2328,
+    1.329
+   ],
+   "bytes": 52666
+  },
   "modo-kurama": {
    "arquivo": "modo-kurama.mp3",
    "descricao": "Manto da Kurama: o rugido e o chakra em chamas",
@@ -12683,6 +12870,23 @@
     1.4431
    ],
    "bytes": 46320
+  },
+  "mordida-de-stitch": {
+   "arquivo": "mordida-de-stitch.mp3",
+   "descricao": "Stitch: a mordida",
+   "versoes": [
+    0.0,
+    1.2767,
+    2.5537,
+    3.7974
+   ],
+   "duracoes": [
+    1.1967,
+    1.197,
+    1.1637,
+    1.283
+   ],
+   "bytes": 43846
   },
   "mordida-predatoria": {
    "arquivo": "mordida-predatoria.mp3",
@@ -20232,6 +20436,23 @@
    ],
    "bytes": 57756
   },
+  "pateta-preparo": {
+   "arquivo": "pateta-preparo.mp3",
+   "descricao": "Pateta: se equilibrando (Preparo)",
+   "versoes": [
+    0.0,
+    1.4576,
+    2.9641,
+    4.3761
+   ],
+   "duracoes": [
+    1.3776,
+    1.4265,
+    1.332,
+    1.3981
+   ],
+   "bytes": 34547
+  },
   "pe-de-cabra": {
    "arquivo": "pe-de-cabra.mp3",
    "descricao": "Gordon: o pé de cabra",
@@ -20571,6 +20792,23 @@
     1.813
    ],
    "bytes": 64332
+  },
+  "plano-do-xerife": {
+   "arquivo": "plano-do-xerife.mp3",
+   "descricao": "Woody: o plano do xerife",
+   "versoes": [
+    0.0,
+    1.5791,
+    3.2081,
+    4.7725
+   ],
+   "duracoes": [
+    1.4991,
+    1.549,
+    1.4845,
+    1.5129
+   ],
+   "bytes": 53349
   },
   "plano-improvisado": {
    "arquivo": "plano-improvisado.mp3",
@@ -21523,6 +21761,23 @@
     1.7259
    ],
    "bytes": 87917
+  },
+  "quatro-bracos": {
+   "arquivo": "quatro-bracos.mp3",
+   "descricao": "Stitch: os quatro braços",
+   "versoes": [
+    0.0,
+    1.1458,
+    2.3288,
+    3.4396
+   ],
+   "duracoes": [
+    1.0658,
+    1.103,
+    1.0308,
+    1.0897
+   ],
+   "bytes": 41585
   },
   "quatro-punhos": {
    "arquivo": "quatro-punhos.mp3",
@@ -24482,23 +24737,6 @@
    ],
    "bytes": 59608
   },
-  "sorte": {
-   "arquivo": "sorte.mp3",
-   "descricao": "família sorte",
-   "versoes": [
-    0.0,
-    1.18,
-    2.3999,
-    3.5427
-   ],
-   "duracoes": [
-    1.1,
-    1.1399,
-    1.0628,
-    1.1167
-   ],
-   "bytes": 45997
-  },
   "sorte-de-cachorro": {
    "arquivo": "sorte-de-cachorro.mp3",
    "descricao": "Scooby-Doo: a sorte de cachorro",
@@ -24617,6 +24855,23 @@
     1.3198
    ],
    "bytes": 54504
+  },
+  "stitch-preparo": {
+   "arquivo": "stitch-preparo.mp3",
+   "descricao": "Stitch: as pistolas carregando (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 67267
   },
   "subzero-preparo": {
    "arquivo": "subzero-preparo.mp3",
@@ -25519,6 +25774,23 @@
    ],
    "bytes": 44857
   },
+  "todos-juntos": {
+   "arquivo": "todos-juntos.mp3",
+   "descricao": "Woody: todos juntos",
+   "versoes": [
+    0.0,
+    2.2263,
+    4.5293,
+    6.684
+   ],
+   "duracoes": [
+    2.1463,
+    2.2231,
+    2.0747,
+    2.1938
+   ],
+   "bytes": 69797
+  },
   "toque": {
    "arquivo": "toque.mp3",
    "descricao": "toque de interface",
@@ -25773,6 +26045,23 @@
     1.4005
    ],
    "bytes": 50789
+  },
+  "tropecao-do-pateta": {
+   "arquivo": "tropecao-do-pateta.mp3",
+   "descricao": "Pateta: o tropeção",
+   "versoes": [
+    0.0,
+    1.1475,
+    2.4006,
+    3.5342
+   ],
+   "duracoes": [
+    1.0675,
+    1.1731,
+    1.0536,
+    1.1588
+   ],
+   "bytes": 34408
   },
   "tropeco": {
    "arquivo": "tropeco.mp3",
@@ -26776,6 +27065,23 @@
     2.0305
    ],
    "bytes": 84845
+  },
+  "woody-preparo": {
+   "arquivo": "woody-preparo.mp3",
+   "descricao": "Woody: a cordinha (Preparo)",
+   "versoes": [
+    0.0,
+    1.4325,
+    2.9554,
+    4.3866
+   ],
+   "duracoes": [
+    1.3525,
+    1.4429,
+    1.3512,
+    1.3953
+   ],
+   "bytes": 57502
   },
   "xeque-light": {
    "arquivo": "xeque-light.mp3",

@@ -590,14 +590,6 @@ def sarcofago(rng, v):
     return x
 
 
-def encanto(rng, v):
-    x = _z(1.2)
-    for k, m in enumerate((84, 88, 91, 96, 91, 88, 96, 100)):
-        poe(x, _brilho(rng, 0.35, nota(m), 0.1, SINO), 0.05 + k * 0.06)
-    poe(x, _brilho(rng, 0.6, nota(96), 0.18, CRISTAL), 0.55)
-    return reverb(x, 0.7, 0.35, 9000)
-
-
 def clones(rng, v):
     x = _z(1.1)
     for k in range(5):
@@ -624,26 +616,6 @@ def fenda(rng, v):
     x += B.portal(rng, v)[:n] * 0.6 if len(B.portal(rng, v)) >= n else _corta(B.portal(rng, v), 1.3) * 0.6
     x += passa(rosa(rng, n), 40, 250, 2) * env(n, 0.1, 0.6) * 0.4
     return reverb(x, 0.7, 0.3, 3000)
-
-
-def sorte(rng, v):
-    x = _z(1.1)
-    for k in range(7):
-        m = n_de(0.06)
-        poe(x, baque(m, 600, 300, 0.01, 0.6) * 0.3 + estalo(rng, m, 1500, 5000, 0.005) * 0.3, k * 0.07 * (1 - k * 0.05))
-    for k, mm in enumerate((72, 76, 79, 84)):
-        poe(x, _brilho(rng, 0.3, nota(mm), 0.12, SINO), 0.55 + k * 0.06)
-    return reverb(x, 0.4, 0.2)
-
-
-def confete(rng, v):
-    x = _z(1.1)
-    n = n_de(0.15)
-    poe(x, baque(n, 300, 150, 0.03, 0.8) * 0.5 + passa(ruido(rng, n), 1000, 6000, 2) * env(n, 0.001, 0.03) * 0.6, 0)
-    poe(x, graos(rng, n_de(0.9), 60, 0.05, 0.8, 2500, 9000, 0.004) * 0.35, 0)
-    for k, mm in enumerate((79, 83, 86, 91)):
-        poe(x, _brilho(rng, 0.25, nota(mm), 0.08, SINO), 0.08 + k * 0.05)
-    return reverb(x, 0.4, 0.2)
 
 
 def confusao(rng, v):

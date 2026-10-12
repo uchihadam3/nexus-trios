@@ -84,30 +84,6 @@ def sarcofago(T, t, rng):
     return G, H
 
 
-def encanto(T, t, rng):
-    """Encanto: brilhos de estrela giram em espiral e pousam no alvo com um tilintar de luz."""
-    G, H = vazio(T)
-    env = apaga(t, 0.7, 1)
-    est = []
-    for k in range(10):
-        u = rel(t, k * 0.03, 0.55 + k * 0.03)
-        a = TAU * k / 10 + u * 5
-        r = 0.8 * (1 - u) + 0.08
-        x, y = math.cos(a) * r, math.sin(a) * r * 0.8
-        est.append((estrela(x, y, 0.06 * (1 - 0.4 * u), u * 4, 4, 0.35), math.sin(math.pi * u) + 0.01))
-    e = T.polys(est, 0.003)
-    rastro = []
-    for _ in range(40):
-        u = rng.uniform(0, 1)
-        a = rng.uniform(0, TAU) + u * 3
-        r = 0.8 * u
-        rastro.append((math.cos(a) * r, math.sin(a) * r * 0.8, (1 - u) * pulso(t, 0, 0.8) * rng.uniform(0.3, 1)))
-    pouso = T.gauss(0, 0, 0.12) * pulso(t, 0.45, 0.8) * 2 + T.flare(0, 0, 1.2, 0.4) * pulso(t, 0.5, 0.75) * 1.4
-    G += (T.glow(e, 1.4, 1, 0.02) + T.splats(rastro, 0.008) * 1.2) * env + pouso
-    H += (e + T.splats(rastro, 0.006) * 0.6) * env + pouso
-    return G, H
-
-
 def caveira(T, t, rng):
     """Caveira: uma caveira de luz surge sobre o alvo, abre a boca e se desfaz em fumaça."""
     G, H = vazio(T)
@@ -210,27 +186,6 @@ def sorte(T, t, rng):
     return G, H
 
 
-def confete(T, t, rng):
-    """Confete: um estouro de festa, pedacinhos girando e caindo devagar, serpentinas."""
-    G, H = vazio(T)
-    tt = rel(t, 0, 1)
-    pedacos = []
-    for _ in range(50):
-        a = rng.uniform(-math.pi, 0)
-        v = rng.uniform(0.4, 1)
-        x = math.cos(a) * v * ease_out(tt, 2.5)
-        y = math.sin(a) * v * ease_out(tt, 2.5) + 0.6 * tt * tt
-        g = rng.uniform(0, 6) + tt * rng.uniform(6, 14)
-        w = 0.025 * abs(math.cos(g)) + 0.004
-        pedacos.append(([(x - w, y - 0.02), (x + w, y - 0.02), (x + w, y + 0.02), (x - w, y + 0.02)], (1 - tt * 0.7) * rng.uniform(0.5, 1)))
-    p = T.polys(pedacos, 0.002)
-    serp = sum(T.polyline([(math.cos(a0) * u * 0.7 + 0.05 * math.sin(u * 20), math.sin(a0) * u * 0.6 + 0.3 * u * u) for u in np.linspace(0, ease_out(tt, 2), 20)], 0.01, 1) for a0 in (-2.4, -1.6, -0.8)) * (1 - tt)
-    estouro = T.gauss(0, 0, 0.12) * some(t, 0, 0.25) * 2.5
-    G += p * 1.5 + serp + estouro
-    H += p * 0.6 + estouro
-    return G, H
-
-
 def confusao(T, t, rng):
     """Confusão: pontos de interrogação e estrelinhas giram em volta da cabeça do alvo."""
     G, H = vazio(T)
@@ -270,12 +225,9 @@ REGISTRO = [
     ("olho", olho, GRANDE, "olho gigante se abrindo", False),
     ("runas", runas, GRANDE, "círculo de runas", False),
     ("sarcofago", sarcofago, GRANDE, "caixa negra fechando", False),
-    ("encanto", encanto, GRANDE, "estrelas de encanto", False),
     ("clones", clones, GRANDE, "silhuetas em leque", False),
     ("teleporte", teleporte, GRANDE, "implode e reaparece", False),
     ("fenda", fenda, GRANDE, "rasgo dimensional", False),
-    ("sorte", sorte, GRANDE, "dados rolando", False),
-    ("confete", confete, GRANDE, "estouro de festa", False),
     ("confusao", confusao, GRANDE, "interrogações girando", False),
     ("invocacao", invocacao, GRANDE, "silhueta invocada", False),
 ]
