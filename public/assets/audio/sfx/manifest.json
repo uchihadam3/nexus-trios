@@ -971,6 +971,23 @@
    ],
    "bytes": 52228
   },
+  "bengala-de-yoda": {
+   "arquivo": "bengala-de-yoda.mp3",
+   "descricao": "básico do Yoda: os pulinhos e a bengala",
+   "versoes": [
+    0.0,
+    1.28,
+    2.6035,
+    3.8429
+   ],
+   "duracoes": [
+    1.2,
+    1.2435,
+    1.1594,
+    1.2183
+   ],
+   "bytes": 45476
+  },
   "bicada": {
    "arquivo": "bicada.mp3",
    "descricao": "básico do Pica-Pau e do Patolino: bicadas rapidíssimas em madeira",
@@ -5255,6 +5272,23 @@
    ],
    "bytes": 40234
   },
+  "ganchos-de-corrente": {
+   "arquivo": "ganchos-de-corrente.mp3",
+   "descricao": "básico do Pinhead: o cubo e as correntes",
+   "versoes": [
+    0.0,
+    1.38,
+    2.8071,
+    4.1432
+   ],
+   "duracoes": [
+    1.3,
+    1.3471,
+    1.256,
+    1.3198
+   ],
+   "bytes": 52486
+  },
   "garra-da-leoa": {
    "arquivo": "garra-da-leoa.mp3",
    "descricao": "básico de Sekhmet: o rugido e o fogo",
@@ -5306,6 +5340,23 @@
    ],
    "bytes": 46725
   },
+  "garra-de-valak": {
+   "arquivo": "garra-de-valak.mp3",
+   "descricao": "básico da Valak: o sussurro e as unhas",
+   "versoes": [
+    0.0,
+    1.38,
+    2.8071,
+    4.1432
+   ],
+   "duracoes": [
+    1.3,
+    1.3471,
+    1.256,
+    1.3198
+   ],
+   "bytes": 44489
+  },
   "garra-do-falcao": {
    "arquivo": "garra-do-falcao.mp3",
    "descricao": "básico de Hórus: o falcão mergulhando",
@@ -5322,6 +5373,23 @@
     1.1348
    ],
    "bytes": 44695
+  },
+  "garra-xenomorfa": {
+   "arquivo": "garra-xenomorfa.mp3",
+   "descricao": "básico do Xenomorfo: o chiado e o ácido",
+   "versoes": [
+    0.0,
+    1.38,
+    2.8071,
+    4.1432
+   ],
+   "duracoes": [
+    1.3,
+    1.3471,
+    1.256,
+    1.3198
+   ],
+   "bytes": 57266
   },
   "garras": {
    "arquivo": "garras.mp3",
@@ -5679,6 +5747,23 @@
     1.6244
    ],
    "bytes": 62369
+  },
+  "golpe-por-tras": {
+   "arquivo": "golpe-por-tras.mp3",
+   "descricao": "básico do Ghostface: o telefone e a facada",
+   "versoes": [
+    0.0,
+    1.28,
+    2.6035,
+    3.8429
+   ],
+   "duracoes": [
+    1.2,
+    1.2435,
+    1.1594,
+    1.2183
+   ],
+   "bytes": 41726
   },
   "golpe-psiquico": {
    "arquivo": "golpe-psiquico.mp3",
@@ -7210,6 +7295,23 @@
    ],
    "bytes": 38085
   },
+  "laminas-de-pulso": {
+   "arquivo": "laminas-de-pulso.mp3",
+   "descricao": "básico do Predador: os cliques e as lâminas",
+   "versoes": [
+    0.0,
+    1.28,
+    2.6035,
+    3.8429
+   ],
+   "duracoes": [
+    1.2,
+    1.2435,
+    1.1594,
+    1.2183
+   ],
+   "bytes": 44322
+  },
   "laminas-em-x": {
    "arquivo": "laminas-em-x.mp3",
    "descricao": "Mikasa: as lâminas em X que quebram",
@@ -8433,6 +8535,23 @@
     0.842
    ],
    "bytes": 37205
+  },
+  "mordida-de-dracula": {
+   "arquivo": "mordida-de-dracula.mp3",
+   "descricao": "básico do Drácula: os morcegos e a mordida",
+   "versoes": [
+    0.0,
+    1.38,
+    2.8071,
+    4.1432
+   ],
+   "duracoes": [
+    1.3,
+    1.3471,
+    1.256,
+    1.3198
+   ],
+   "bytes": 53124
   },
   "mordida-de-pennywise": {
    "arquivo": "mordida-de-pennywise.mp3",
@@ -9998,6 +10117,23 @@
    ],
    "bytes": 41326
   },
+  "raio-da-forca": {
+   "arquivo": "raio-da-forca.mp3",
+   "descricao": "básico do Palpatine: o raio e a risada",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 55961
+  },
   "raio-de-apolo": {
    "arquivo": "raio-de-apolo.mp3",
    "descricao": "básico de Apolo: o sol e o feixe",
@@ -10916,6 +11052,40 @@
    ],
    "bytes": 38512
   },
+  "sabre-verde": {
+   "arquivo": "sabre-verde.mp3",
+   "descricao": "básico do Luke: o sabre verde",
+   "versoes": [
+    0.0,
+    1.28,
+    2.6035,
+    3.8429
+   ],
+   "duracoes": [
+    1.2,
+    1.2435,
+    1.1594,
+    1.2183
+   ],
+   "bytes": 45326
+  },
+  "sabre-vermelho": {
+   "arquivo": "sabre-vermelho.mp3",
+   "descricao": "básico do Vader: o sabre e a respiração",
+   "versoes": [
+    0.0,
+    1.4473,
+    2.978,
+    4.4107
+   ],
+   "duracoes": [
+    1.3673,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 60317
+  },
   "sais": {
    "arquivo": "sais.mp3",
    "descricao": "básico do Raphael: duas estocadas metálicas dos sais",
@@ -11205,6 +11375,23 @@
    ],
    "bytes": 79102
   },
+  "serra-eletrica": {
+   "arquivo": "serra-eletrica.mp3",
+   "descricao": "básico do Leatherface: a motosserra",
+   "versoes": [
+    0.0,
+    1.38,
+    2.8071,
+    4.1432
+   ],
+   "duracoes": [
+    1.3,
+    1.3471,
+    1.256,
+    1.3198
+   ],
+   "bytes": 66831
+  },
   "sharingan-kakashi": {
    "arquivo": "sharingan-kakashi.mp3",
    "descricao": "Sharingan do Kakashi: o olho abre, as vírgulas giram e o genjutsu estoura",
@@ -11460,6 +11647,23 @@
    ],
    "bytes": 47439
   },
+  "soco-de-neo": {
+   "arquivo": "soco-de-neo.mp3",
+   "descricao": "básico do Neo: a câmera lenta e o soco",
+   "versoes": [
+    0.0,
+    1.48,
+    2.9748,
+    4.4024
+   ],
+   "duracoes": [
+    1.4,
+    1.4148,
+    1.3476,
+    1.4126
+   ],
+   "bytes": 40940
+  },
   "soco-de-pym": {
    "arquivo": "soco-de-pym.mp3",
    "descricao": "básico de Homem-Formiga: \"zip\" de encolher e o soco que cresce",
@@ -11476,6 +11680,23 @@
     1.0152
    ],
    "bytes": 42040
+  },
+  "soco-do-agente": {
+   "arquivo": "soco-do-agente.mp3",
+   "descricao": "básico do Smith: o glitch e os socos",
+   "versoes": [
+    0.0,
+    1.2624,
+    2.4544,
+    3.6938
+   ],
+   "duracoes": [
+    1.1824,
+    1.112,
+    1.1594,
+    1.1195
+   ],
+   "bytes": 48998
   },
   "soco-do-diabo": {
    "arquivo": "soco-do-diabo.mp3",
@@ -12259,6 +12480,23 @@
    ],
    "bytes": 19219
   },
+  "tiro-de-john-wick": {
+   "arquivo": "tiro-de-john-wick.mp3",
+   "descricao": "básico do John Wick: o double tap",
+   "versoes": [
+    0.0,
+    1.38,
+    2.8071,
+    4.1432
+   ],
+   "duracoes": [
+    1.3,
+    1.3471,
+    1.256,
+    1.3198
+   ],
+   "bytes": 48735
+  },
   "tiro-do-buster": {
    "arquivo": "tiro-do-buster.mp3",
    "descricao": "Mega Buster: três tiros",
@@ -12394,6 +12632,23 @@
     1.4213
    ],
    "bytes": 54859
+  },
+  "toque-de-samara": {
+   "arquivo": "toque-de-samara.mp3",
+   "descricao": "básico da Samara: a TV e o toque",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 54832
   },
   "toque-do-devorador": {
    "arquivo": "toque-do-devorador.mp3",

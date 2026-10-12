@@ -811,6 +811,20 @@
   "laco": false,
   "bytes": 56000
  },
+ "bengala_de_yoda": {
+  "descricao": "Básico do Yoda: as cambalhotas e a bengala",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 10814
+ },
  "bicada": {
   "descricao": "Bicada-britadeira: o bico bate e volta, o buraco racha e as lascas voam",
   "quadros": 12,
@@ -4731,6 +4745,20 @@
   "laco": false,
   "bytes": 13520
  },
+ "ganchos_de_corrente": {
+  "descricao": "Básico do Pinhead: o cubo e as correntes com ganchos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 29076
+ },
  "garra_da_leoa": {
   "descricao": "Básico de Sekhmet: a patada em chamas",
   "quadros": 12,
@@ -4773,6 +4801,20 @@
   "laco": false,
   "bytes": 32372
  },
+ "garra_de_valak": {
+  "descricao": "Básico da Valak: a cruz invertida e as unhas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 14420
+ },
  "garra_do_falcao": {
   "descricao": "Básico de Hórus: as garras do falcão",
   "quadros": 12,
@@ -4786,6 +4828,20 @@
   ],
   "laco": false,
   "bytes": 16742
+ },
+ "garra_xenomorfa": {
+  "descricao": "Básico do Xenomorfo: a boca interna e o ácido",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 15814
  },
  "garras": {
   "descricao": "três rasgos de garra",
@@ -5094,6 +5150,20 @@
   ],
   "laco": false,
   "bytes": 104664
+ },
+ "golpe_por_tras": {
+  "descricao": "Básico do Ghostface: a máscara atrás e a facada",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 27230
  },
  "golpe_psiquico": {
   "descricao": "Professor X: ondas psíquicas fecham na cabeça e estouram",
@@ -6271,6 +6341,20 @@
   "laco": false,
   "bytes": 50126
  },
+ "laminas_de_pulso": {
+  "descricao": "Básico do Predador: a mira de três pontos e as lâminas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 29524
+ },
  "laminas_em_x": {
   "descricao": "Mikasa · o X das lâminas, as pontas que quebram e o cachecol",
   "quadros": 12,
@@ -7306,6 +7390,20 @@
   ],
   "laco": false,
   "bytes": 80544
+ },
+ "mordida_de_dracula": {
+  "descricao": "Básico do Drácula: os morcegos e as presas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 21044
  },
  "mordida_de_pennywise": {
   "descricao": "Básico do Pennywise: a boca de dentes e o balão",
@@ -8637,6 +8735,20 @@
   "laco": false,
   "bytes": 69060
  },
+ "raio_da_forca": {
+  "descricao": "Básico do Palpatine: o raio da Força",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 40686
+ },
  "raio_de_apolo": {
   "descricao": "Básico de Apolo: o sol e o feixe dourado",
   "quadros": 12,
@@ -9365,6 +9477,34 @@
   "laco": false,
   "bytes": 50360
  },
+ "sabre_verde": {
+  "descricao": "Básico do Luke: o sabre verde em X",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 21094
+ },
+ "sabre_vermelho": {
+  "descricao": "Básico do Vader: o sabre vermelho descendo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 21178
+ },
  "sais": {
   "descricao": "Sais do Raphael: dois sais estocam em sequência, cada um com clarão de três pontas",
   "quadros": 12,
@@ -9630,6 +9770,20 @@
   ],
   "laco": false,
   "bytes": 20284
+ },
+ "serra_eletrica": {
+  "descricao": "Básico do Leatherface: a motosserra balançando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 42152
  },
  "sharingan_ator": {
   "descricao": "Kakashi · o Sharingan acende nele",
@@ -9911,6 +10065,20 @@
   "laco": false,
   "bytes": 54886
  },
+ "soco_de_neo": {
+  "descricao": "Básico do Neo: o código e o soco em câmera lenta",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 33890
+ },
  "soco_de_pym": {
   "descricao": "Soco de Pym: o soco minúsculo que cresce",
   "quadros": 12,
@@ -9924,6 +10092,20 @@
   ],
   "laco": false,
   "bytes": 67826
+ },
+ "soco_do_agente": {
+  "descricao": "Básico do Smith: as cópias e o glitch",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 19964
  },
  "soco_do_diabo": {
   "descricao": "Kazuya: soco com raios do Gene do Diabo",
@@ -10639,6 +10821,20 @@
   "laco": true,
   "bytes": 7284
  },
+ "tiro_de_john_wick": {
+  "descricao": "Básico do John Wick: o double tap e o terceiro",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 13446
+ },
  "tiro_nervoso": {
   "descricao": "Básico do Morty: o tiro que erra e o de raspão",
   "quadros": 12,
@@ -10708,6 +10904,20 @@
   ],
   "laco": false,
   "bytes": 32670
+ },
+ "toque_de_samara": {
+  "descricao": "Básico da Samara: a estática, os cabelos e a mão",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 34990
  },
  "toque_do_devorador": {
   "descricao": "Galactus: mão cósmica fecha e suga a matéria em fragmentos",
