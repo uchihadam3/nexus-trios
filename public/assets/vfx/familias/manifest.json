@@ -9043,6 +9043,20 @@
   "laco": false,
   "bytes": 34866
  },
+ "mu_alvo": {
+  "descricao": "Agente 47 · a mira e o código de barras",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 18176
+ },
  "mu_aneis": {
   "descricao": "Sonic · os anéis se espalhando",
   "quadros": 12,
@@ -9281,6 +9295,20 @@
   "laco": false,
   "bytes": 50130
  },
+ "mu_chute": {
+  "descricao": "Kazuya · o arco do chute e as faíscas roxas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 30158
+ },
  "mu_cinetico": {
   "descricao": "Pantera Negra · a onda cinética roxa e as garras",
   "quadros": 12,
@@ -9294,6 +9322,20 @@
   ],
   "laco": false,
   "bytes": 52434
+ },
+ "mu_cogumelo": {
+  "descricao": "Mario · o Super Cogumelo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 30666
  },
  "mu_combo_tifa": {
   "descricao": "Tifa · os socos em sequência",
@@ -9351,6 +9393,20 @@
   "laco": false,
   "bytes": 49232
  },
+ "mu_corte_lento": {
+  "descricao": "Isaac · a mira do cortador de plasma",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 19286
+ },
  "mu_crescentes": {
   "descricao": "Cavaleiro da Lua · os crescentes de prata",
   "quadros": 12,
@@ -9364,6 +9420,20 @@
   ],
   "laco": false,
   "bytes": 34464
+ },
+ "mu_devil_jin": {
+  "descricao": "Jin · as asas do Devil e o raio da testa",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 29208
  },
  "mu_devorador": {
   "descricao": "Galactus · o planeta rachando e sugado para o alto",
@@ -9519,6 +9589,20 @@
   "laco": false,
   "bytes": 12190
  },
+ "mu_fatality": {
+  "descricao": "Sub-Zero · o bloco de gelo se partindo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 35498
+ },
  "mu_fator_cura": {
   "descricao": "Deadpool · as katanas cruzadas e as cruzes de cura",
   "quadros": 12,
@@ -9547,6 +9631,34 @@
   "laco": false,
   "bytes": 17460
  },
+ "mu_florescer": {
+  "descricao": "Malenia · a flor escarlate desabrochando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 75346
+ },
+ "mu_furia_bowser": {
+  "descricao": "Bowser · o casco de espinhos e o fogo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 47762
+ },
  "mu_furia_esparta": {
   "descricao": "Kratos · as Lâminas do Caos em chamas",
   "quadros": 12,
@@ -9560,6 +9672,20 @@
   ],
   "laco": false,
   "bytes": 75862
+ },
+ "mu_fusao": {
+  "descricao": "Sora · a Keyblade e as auras se juntando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 52096
  },
  "mu_gancho": {
   "descricao": "Batman · o gancho e o escudo do morcego",
@@ -9588,6 +9714,20 @@
   ],
   "laco": false,
   "bytes": 23604
+ },
+ "mu_gelida": {
+  "descricao": "Arthas · a Gélida puxando as almas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 34062
  },
  "mu_genki_dama": {
   "descricao": "Goku · a Genki Dama descendo e explodindo",
@@ -9630,6 +9770,34 @@
   ],
   "laco": false,
   "bytes": 14996
+ },
+ "mu_hadouken": {
+  "descricao": "Ryu · o Hadouken carregando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 42896
+ },
+ "mu_hev": {
+  "descricao": "Gordon · o lambda e a morfina",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 21120
  },
  "mu_hex": {
   "descricao": "Feiticeira Escarlate · os fios da magia do caos",
@@ -9813,6 +9981,20 @@
   "laco": false,
   "bytes": 69160
  },
+ "mu_messatsu": {
+  "descricao": "Akuma · o símbolo do Céu e a aura",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 85226
+ },
  "mu_mina": {
   "descricao": "Rocket · a mina piscando e explodindo",
   "quadros": 12,
@@ -9840,6 +10022,34 @@
   ],
   "laco": false,
   "bytes": 55330
+ },
+ "mu_mortal_kombat": {
+  "descricao": "Liu Kang · o dragão de fogo em espiral",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 47916
+ },
+ "mu_mutacoes": {
+  "descricao": "Geralt · o medalhão do lobo e o sinal Quen",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 33416
  },
  "mu_nivel": {
   "descricao": "Jinwoo · a janela do sistema: subiu de nível",
@@ -9883,6 +10093,20 @@
   "laco": false,
   "bytes": 105308
  },
+ "mu_pele_trovao": {
+  "descricao": "Raiden · os arcos de trovão na pele",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 66310
+ },
  "mu_planeta": {
   "descricao": "Surfista Prateado · a prancha e o planeta escolhido",
   "quadros": 12,
@@ -9925,6 +10149,20 @@
   "laco": false,
   "bytes": 74816
  },
+ "mu_postura": {
+  "descricao": "Sekiro · a postura quebrada e o golpe mortal",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 38874
+ },
  "mu_potencial": {
   "descricao": "Gohan · a aura afiada do potencial despertado",
   "quadros": 12,
@@ -9939,6 +10177,20 @@
   "laco": false,
   "bytes": 102874
  },
+ "mu_premio": {
+  "descricao": "Mega Man · o teletransporte e a arma adquirida",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 39186
+ },
  "mu_proximo": {
   "descricao": "Ezio · a lâmina oculta e a insígnia",
   "quadros": 12,
@@ -9952,6 +10204,20 @@
   ],
   "laco": false,
   "bytes": 13764
+ },
+ "mu_raikousen": {
+  "descricao": "Zero · o sabre e o Raikousen",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 29098
  },
  "mu_raio_de_gelo": {
   "descricao": "Samus · o raio de gelo e os cristais",
@@ -10093,6 +10359,20 @@
   "laco": false,
   "bytes": 15208
  },
+ "mu_spinning_bird": {
+  "descricao": "Chun-Li · o Spinning Bird Kick",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 31522
+ },
  "mu_strix": {
   "descricao": "Loid · a mira travando e as barras de Carga",
   "quadros": 12,
@@ -10232,6 +10512,20 @@
   ],
   "laco": false,
   "bytes": 45682
+ },
+ "mu_venha_ca": {
+  "descricao": "Scorpion · a lança na corda: Venha cá!",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 17644
  },
  "mu_waku": {
   "descricao": "Anya · as ondas da leitura de mente e as estrelinhas",

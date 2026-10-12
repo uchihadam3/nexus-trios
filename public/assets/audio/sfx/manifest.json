@@ -10542,6 +10542,23 @@
    ],
    "bytes": 69937
   },
+  "mu-alvo": {
+   "arquivo": "mu-alvo.mp3",
+   "descricao": "Agente 47: o alvo",
+   "versoes": [
+    0.0,
+    1.6139,
+    3.3059,
+    4.8841
+   ],
+   "duracoes": [
+    1.5339,
+    1.612,
+    1.4982,
+    1.571
+   ],
+   "bytes": 48892
+  },
   "mu-aneis": {
    "arquivo": "mu-aneis.mp3",
    "descricao": "Sonic: os anéis",
@@ -10831,6 +10848,23 @@
    ],
    "bytes": 68341
   },
+  "mu-chute": {
+   "arquivo": "mu-chute.mp3",
+   "descricao": "Kazuya: o chute",
+   "versoes": [
+    0.0,
+    1.88,
+    3.8253,
+    5.6444
+   ],
+   "duracoes": [
+    1.8,
+    1.8653,
+    1.7391,
+    1.8274
+   ],
+   "bytes": 86547
+  },
   "mu-cinetico": {
    "arquivo": "mu-cinetico.mp3",
    "descricao": "Pantera Negra: a onda cinética",
@@ -10847,6 +10881,23 @@
     1.9289
    ],
    "bytes": 69526
+  },
+  "mu-cogumelo": {
+   "arquivo": "mu-cogumelo.mp3",
+   "descricao": "Mario: o Super Cogumelo",
+   "versoes": [
+    0.0,
+    1.7704,
+    3.601,
+    5.3152
+   ],
+   "duracoes": [
+    1.6904,
+    1.7506,
+    1.6342,
+    1.7157
+   ],
+   "bytes": 66971
   },
   "mu-combo-tifa": {
    "arquivo": "mu-combo-tifa.mp3",
@@ -10916,6 +10967,23 @@
    ],
    "bytes": 64229
   },
+  "mu-corte-lento": {
+   "arquivo": "mu-corte-lento.mp3",
+   "descricao": "Isaac: o cortador de plasma",
+   "versoes": [
+    0.0,
+    1.7184,
+    3.5041,
+    5.181
+   ],
+   "duracoes": [
+    1.6384,
+    1.7056,
+    1.597,
+    1.6853
+   ],
+   "bytes": 65451
+  },
   "mu-crescentes": {
    "arquivo": "mu-crescentes.mp3",
    "descricao": "Cavaleiro da Lua: os crescentes",
@@ -10932,6 +11000,23 @@
     1.9289
    ],
    "bytes": 91720
+  },
+  "mu-devil-jin": {
+   "arquivo": "mu-devil-jin.mp3",
+   "descricao": "Jin: o Devil",
+   "versoes": [
+    0.0,
+    1.98,
+    4.0289,
+    5.9446
+   ],
+   "duracoes": [
+    1.9,
+    1.9689,
+    1.8357,
+    1.9289
+   ],
+   "bytes": 70394
   },
   "mu-devorador": {
    "arquivo": "mu-devorador.mp3",
@@ -11120,6 +11205,23 @@
    ],
    "bytes": 52843
   },
+  "mu-fatality": {
+   "arquivo": "mu-fatality.mp3",
+   "descricao": "Sub-Zero: o Fatality congelante",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 94687
+  },
   "mu-fator-cura": {
    "arquivo": "mu-fator-cura.mp3",
    "descricao": "Deadpool: as katanas e a cura",
@@ -11154,6 +11256,40 @@
    ],
    "bytes": 57663
   },
+  "mu-florescer": {
+   "arquivo": "mu-florescer.mp3",
+   "descricao": "Malenia: o Florescer escarlate",
+   "versoes": [
+    0.0,
+    2.18,
+    4.4361,
+    6.5451
+   ],
+   "duracoes": [
+    2.1,
+    2.1761,
+    2.029,
+    2.132
+   ],
+   "bytes": 97680
+  },
+  "mu-furia-bowser": {
+   "arquivo": "mu-furia-bowser.mp3",
+   "descricao": "Bowser: o rugido e o fogo",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 81326
+  },
   "mu-furia-esparta": {
    "arquivo": "mu-furia-esparta.mp3",
    "descricao": "Kratos: a fúria de Esparta",
@@ -11170,6 +11306,23 @@
     1.7427
    ],
    "bytes": 70756
+  },
+  "mu-fusao": {
+   "arquivo": "mu-fusao.mp3",
+   "descricao": "Sora: a Forma de fusão",
+   "versoes": [
+    0.0,
+    1.98,
+    4.0289,
+    5.9446
+   ],
+   "duracoes": [
+    1.9,
+    1.9689,
+    1.8357,
+    1.9289
+   ],
+   "bytes": 74617
   },
   "mu-gancho": {
    "arquivo": "mu-gancho.mp3",
@@ -11204,6 +11357,23 @@
     1.3846
    ],
    "bytes": 59426
+  },
+  "mu-gelida": {
+   "arquivo": "mu-gelida.mp3",
+   "descricao": "Arthas: a Gélida",
+   "versoes": [
+    0.0,
+    2.18,
+    4.4361,
+    6.5451
+   ],
+   "duracoes": [
+    2.1,
+    2.1761,
+    2.029,
+    2.132
+   ],
+   "bytes": 80804
   },
   "mu-genki-dama": {
    "arquivo": "mu-genki-dama.mp3",
@@ -11255,6 +11425,40 @@
     1.8013
    ],
    "bytes": 54000
+  },
+  "mu-hadouken": {
+   "arquivo": "mu-hadouken.mp3",
+   "descricao": "Ryu: o Hadouken carregando",
+   "versoes": [
+    0.0,
+    1.98,
+    4.0289,
+    5.9446
+   ],
+   "duracoes": [
+    1.9,
+    1.9689,
+    1.8357,
+    1.9289
+   ],
+   "bytes": 74121
+  },
+  "mu-hev": {
+   "arquivo": "mu-hev.mp3",
+   "descricao": "Gordon: o traje HEV",
+   "versoes": [
+    0.0,
+    1.98,
+    4.0289,
+    5.9446
+   ],
+   "duracoes": [
+    1.9,
+    1.9689,
+    1.8357,
+    1.9289
+   ],
+   "bytes": 60547
   },
   "mu-hex": {
    "arquivo": "mu-hex.mp3",
@@ -11477,6 +11681,23 @@
    ],
    "bytes": 79620
   },
+  "mu-messatsu": {
+   "arquivo": "mu-messatsu.mp3",
+   "descricao": "Akuma: o Messatsu",
+   "versoes": [
+    0.0,
+    2.18,
+    4.4361,
+    6.5451
+   ],
+   "duracoes": [
+    2.1,
+    2.1761,
+    2.029,
+    2.132
+   ],
+   "bytes": 66663
+  },
   "mu-mina": {
    "arquivo": "mu-mina.mp3",
    "descricao": "Rocket: a mina",
@@ -11510,6 +11731,40 @@
     2.0305
    ],
    "bytes": 74855
+  },
+  "mu-mortal-kombat": {
+   "arquivo": "mu-mortal-kombat.mp3",
+   "descricao": "Liu Kang: o dragão de fogo",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 71063
+  },
+  "mu-mutacoes": {
+   "arquivo": "mu-mutacoes.mp3",
+   "descricao": "Geralt: o medalhão e o Quen",
+   "versoes": [
+    0.0,
+    1.88,
+    3.8253,
+    5.6444
+   ],
+   "duracoes": [
+    1.8,
+    1.8653,
+    1.7391,
+    1.8274
+   ],
+   "bytes": 58367
   },
   "mu-nivel": {
    "arquivo": "mu-nivel.mp3",
@@ -11562,6 +11817,23 @@
    ],
    "bytes": 83141
   },
+  "mu-pele-trovao": {
+   "arquivo": "mu-pele-trovao.mp3",
+   "descricao": "Raiden: a pele de trovão",
+   "versoes": [
+    0.0,
+    1.98,
+    4.0289,
+    5.9446
+   ],
+   "duracoes": [
+    1.9,
+    1.9689,
+    1.8357,
+    1.9289
+   ],
+   "bytes": 106462
+  },
   "mu-planeta": {
    "arquivo": "mu-planeta.mp3",
    "descricao": "Surfista Prateado: a prancha e o planeta",
@@ -11613,6 +11885,23 @@
    ],
    "bytes": 93481
   },
+  "mu-postura": {
+   "arquivo": "mu-postura.mp3",
+   "descricao": "Sekiro: a postura quebrada",
+   "versoes": [
+    0.0,
+    1.98,
+    4.0289,
+    5.9446
+   ],
+   "duracoes": [
+    1.9,
+    1.9689,
+    1.8357,
+    1.9289
+   ],
+   "bytes": 63044
+  },
   "mu-potencial": {
    "arquivo": "mu-potencial.mp3",
    "descricao": "Gohan: o potencial despertado",
@@ -11630,6 +11919,23 @@
    ],
    "bytes": 80140
   },
+  "mu-premio": {
+   "arquivo": "mu-premio.mp3",
+   "descricao": "Mega Man: arma adquirida",
+   "versoes": [
+    0.0,
+    1.8191,
+    3.7002,
+    5.4454
+   ],
+   "duracoes": [
+    1.7391,
+    1.8011,
+    1.6652,
+    1.7651
+   ],
+   "bytes": 71757
+  },
   "mu-proximo": {
    "arquivo": "mu-proximo.mp3",
    "descricao": "Ezio: a lâmina oculta",
@@ -11646,6 +11952,23 @@
     1.9289
    ],
    "bytes": 70517
+  },
+  "mu-raikousen": {
+   "arquivo": "mu-raikousen.mp3",
+   "descricao": "Zero: o Raikousen",
+   "versoes": [
+    0.0,
+    1.6522,
+    3.4591,
+    5.1002
+   ],
+   "duracoes": [
+    1.5722,
+    1.727,
+    1.5611,
+    1.627
+   ],
+   "bytes": 79356
   },
   "mu-raio-de-gelo": {
    "arquivo": "mu-raio-de-gelo.mp3",
@@ -11817,6 +12140,23 @@
    ],
    "bytes": 68110
   },
+  "mu-spinning-bird": {
+   "arquivo": "mu-spinning-bird.mp3",
+   "descricao": "Chun-Li: o Spinning Bird Kick",
+   "versoes": [
+    0.0,
+    1.88,
+    3.8253,
+    5.6444
+   ],
+   "duracoes": [
+    1.8,
+    1.8653,
+    1.7391,
+    1.8274
+   ],
+   "bytes": 65646
+  },
   "mu-strix": {
    "arquivo": "mu-strix.mp3",
    "descricao": "Loid: a mira e as cargas",
@@ -11986,6 +12326,23 @@
     2.0305
    ],
    "bytes": 70375
+  },
+  "mu-venha-ca": {
+   "arquivo": "mu-venha-ca.mp3",
+   "descricao": "Scorpion: Venha cá!",
+   "versoes": [
+    0.0,
+    1.98,
+    4.0289,
+    5.9446
+   ],
+   "duracoes": [
+    1.9,
+    1.9689,
+    1.8357,
+    1.9289
+   ],
+   "bytes": 84072
   },
   "mu-waku": {
    "arquivo": "mu-waku.mp3",
