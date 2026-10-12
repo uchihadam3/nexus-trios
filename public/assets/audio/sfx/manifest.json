@@ -10525,6 +10525,23 @@
    ],
    "bytes": 47432
   },
+  "mu-aaaah": {
+   "arquivo": "mu-aaaah.mp3",
+   "descricao": "Coragem: o grito",
+   "versoes": [
+    0.0,
+    1.7843,
+    3.598,
+    5.3382
+   ],
+   "duracoes": [
+    1.7043,
+    1.7336,
+    1.6602,
+    1.7298
+   ],
+   "bytes": 66318
+  },
   "mu-abobora": {
    "arquivo": "mu-abobora.mp3",
    "descricao": "Duende Verde: a bomba-abóbora",
@@ -10593,6 +10610,23 @@
    ],
    "bytes": 52599
   },
+  "mu-acordo": {
+   "arquivo": "mu-acordo.mp3",
+   "descricao": "Bill Cipher: o acordo",
+   "versoes": [
+    0.0,
+    2.18,
+    4.4361,
+    6.5451
+   ],
+   "duracoes": [
+    2.1,
+    2.1761,
+    2.029,
+    2.132
+   ],
+   "bytes": 62074
+  },
   "mu-alvo": {
    "arquivo": "mu-alvo.mp3",
    "descricao": "Agente 47: o alvo",
@@ -10609,6 +10643,23 @@
     1.571
    ],
    "bytes": 48892
+  },
+  "mu-analise": {
+   "arquivo": "mu-analise.mp3",
+   "descricao": "Sailor Mercury: a análise",
+   "versoes": [
+    0.0,
+    1.98,
+    4.0289,
+    5.9446
+   ],
+   "duracoes": [
+    1.9,
+    1.9689,
+    1.8357,
+    1.9289
+   ],
+   "bytes": 76111
   },
   "mu-android": {
    "arquivo": "mu-android.mp3",
@@ -11035,6 +11086,23 @@
    ],
    "bytes": 68341
   },
+  "mu-chantagem": {
+   "arquivo": "mu-chantagem.mp3",
+   "descricao": "Cartman: a chantagem",
+   "versoes": [
+    0.0,
+    1.6496,
+    3.3609,
+    4.9675
+   ],
+   "duracoes": [
+    1.5696,
+    1.6313,
+    1.5266,
+    1.6101
+   ],
+   "bytes": 55605
+  },
   "mu-chute": {
    "arquivo": "mu-chute.mp3",
    "descricao": "Kazuya: o chute",
@@ -11051,6 +11119,23 @@
     1.8274
    ],
    "bytes": 86547
+  },
+  "mu-cinco-aneis": {
+   "arquivo": "mu-cinco-aneis.mp3",
+   "descricao": "Capitão Planeta: os cinco anéis",
+   "versoes": [
+    0.0,
+    2.28,
+    4.6398,
+    6.8454
+   ],
+   "duracoes": [
+    2.2,
+    2.2798,
+    2.1256,
+    2.2335
+   ],
+   "bytes": 77006
   },
   "mu-cinetico": {
    "arquivo": "mu-cinetico.mp3",
@@ -11170,6 +11255,23 @@
     1.8274
    ],
    "bytes": 72246
+  },
+  "mu-coracao-gelo": {
+   "arquivo": "mu-coracao-gelo.mp3",
+   "descricao": "Senhor Frio: o coração de gelo",
+   "versoes": [
+    0.0,
+    1.8946,
+    3.7967,
+    5.6365
+   ],
+   "duracoes": [
+    1.8146,
+    1.822,
+    1.7598,
+    1.8362
+   ],
+   "bytes": 88391
   },
   "mu-cordinha": {
    "arquivo": "mu-cordinha.mp3",
@@ -11358,6 +11460,23 @@
    ],
    "bytes": 76007
   },
+  "mu-dobra-sangue": {
+   "arquivo": "mu-dobra-sangue.mp3",
+   "descricao": "Katara: a dobra de sangue",
+   "versoes": [
+    0.0,
+    2.0649,
+    4.1907,
+    6.2031
+   ],
+   "duracoes": [
+    1.9849,
+    2.0458,
+    1.9324,
+    2.0246
+   ],
+   "bytes": 67511
+  },
   "mu-doombot": {
    "arquivo": "mu-doombot.mp3",
    "descricao": "Doutor Destino: o Doombot",
@@ -11408,6 +11527,23 @@
     2.0305
    ],
    "bytes": 66363
+  },
+  "mu-encolher": {
+   "arquivo": "mu-encolher.mp3",
+   "descricao": "Stewie: o raio de encolher",
+   "versoes": [
+    0.0,
+    1.98,
+    4.0289,
+    5.9446
+   ],
+   "duracoes": [
+    1.9,
+    1.9689,
+    1.8357,
+    1.9289
+   ],
+   "bytes": 49729
   },
   "mu-energia-absorvida": {
    "arquivo": "mu-energia-absorvida.mp3",
@@ -11698,6 +11834,23 @@
    ],
    "bytes": 52843
   },
+  "mu-fantasma": {
+   "arquivo": "mu-fantasma.mp3",
+   "descricao": "Gengar: o fantasma",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 60472
+  },
   "mu-fatality": {
    "arquivo": "mu-fatality.mp3",
    "descricao": "Sub-Zero: o Fatality congelante",
@@ -11800,6 +11953,23 @@
    ],
    "bytes": 70451
   },
+  "mu-formula": {
+   "arquivo": "mu-formula.mp3",
+   "descricao": "Plankton: a fórmula",
+   "versoes": [
+    0.0,
+    1.5544,
+    3.1245,
+    4.63
+   ],
+   "duracoes": [
+    1.4744,
+    1.49,
+    1.4255,
+    1.4581
+   ],
+   "bytes": 54408
+  },
   "mu-furacao": {
    "arquivo": "mu-furacao.mp3",
    "descricao": "Taz: o furacão",
@@ -11884,6 +12054,23 @@
     2.0305
    ],
    "bytes": 98747
+  },
+  "mu-galo": {
+   "arquivo": "mu-galo.mp3",
+   "descricao": "Peter: a briga com o galo",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 70463
   },
   "mu-gancho": {
    "arquivo": "mu-gancho.mp3",
@@ -12395,6 +12582,40 @@
    ],
    "bytes": 52794
   },
+  "mu-katsu": {
+   "arquivo": "mu-katsu.mp3",
+   "descricao": "Deidara: Katsu!",
+   "versoes": [
+    0.0,
+    2.28,
+    4.6398,
+    6.8454
+   ],
+   "duracoes": [
+    2.2,
+    2.2798,
+    2.1256,
+    2.2335
+   ],
+   "bytes": 82377
+  },
+  "mu-kikoho": {
+   "arquivo": "mu-kikoho.mp3",
+   "descricao": "Tenshinhan: o Kikoho",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 63291
+  },
   "mu-kuririn-nao": {
    "arquivo": "mu-kuririn-nao.mp3",
    "descricao": "Kuririn: a fúria dourada",
@@ -12428,6 +12649,23 @@
     1.9289
    ],
    "bytes": 67039
+  },
+  "mu-lamento": {
+   "arquivo": "mu-lamento.mp3",
+   "descricao": "Danny Phantom: o Lamento fantasma",
+   "versoes": [
+    0.0,
+    2.18,
+    4.4361,
+    6.5451
+   ],
+   "duracoes": [
+    2.1,
+    2.1761,
+    2.029,
+    2.132
+   ],
+   "bytes": 84123
   },
   "mu-lamina-magica": {
    "arquivo": "mu-lamina-magica.mp3",
@@ -12496,6 +12734,23 @@
     1.9289
    ],
    "bytes": 63307
+  },
+  "mu-mais-poder": {
+   "arquivo": "mu-mais-poder.mp3",
+   "descricao": "Mumm-Ra: mais poder",
+   "versoes": [
+    0.0,
+    2.28,
+    4.6398,
+    6.8454
+   ],
+   "duracoes": [
+    2.2,
+    2.2798,
+    2.1256,
+    2.2335
+   ],
+   "bytes": 84474
   },
   "mu-mana": {
    "arquivo": "mu-mana.mp3",
@@ -12650,6 +12905,23 @@
    ],
    "bytes": 72165
   },
+  "mu-nao-fui": {
+   "arquivo": "mu-nao-fui.mp3",
+   "descricao": "Bart: eu não fui",
+   "versoes": [
+    0.0,
+    1.7301,
+    3.56,
+    5.2352
+   ],
+   "duracoes": [
+    1.6501,
+    1.7499,
+    1.5952,
+    1.6748
+   ],
+   "bytes": 52330
+  },
   "mu-nivel": {
    "arquivo": "mu-nivel.mp3",
    "descricao": "Jinwoo: subiu de nível",
@@ -12735,6 +13007,23 @@
    ],
    "bytes": 65706
   },
+  "mu-parry": {
+   "arquivo": "mu-parry.mp3",
+   "descricao": "Ken: o parry",
+   "versoes": [
+    0.0,
+    1.9555,
+    4.0044,
+    5.9201
+   ],
+   "duracoes": [
+    1.8755,
+    1.9689,
+    1.8357,
+    1.9198
+   ],
+   "bytes": 69535
+  },
   "mu-pecados": {
    "arquivo": "mu-pecados.mp3",
    "descricao": "Motoqueiro Fantasma: a corrente em chamas",
@@ -12768,6 +13057,23 @@
     2.0305
    ],
    "bytes": 81065
+  },
+  "mu-pele-gelo": {
+   "arquivo": "mu-pele-gelo.mp3",
+   "descricao": "Homem de Gelo: a pele de gelo",
+   "versoes": [
+    0.0,
+    1.8554,
+    3.7334,
+    5.5556
+   ],
+   "duracoes": [
+    1.7754,
+    1.7979,
+    1.7422,
+    1.7692
+   ],
+   "bytes": 104148
   },
   "mu-pele-trovao": {
    "arquivo": "mu-pele-trovao.mp3",
@@ -12853,6 +13159,23 @@
     1.9289
    ],
    "bytes": 73528
+  },
+  "mu-plantas": {
+   "arquivo": "mu-plantas.mp3",
+   "descricao": "Hera Venenosa: as plantas",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 98585
   },
   "mu-poder-escondido": {
    "arquivo": "mu-poder-escondido.mp3",
@@ -13143,6 +13466,40 @@
    ],
    "bytes": 114081
   },
+  "mu-rejeitar": {
+   "arquivo": "mu-rejeitar.mp3",
+   "descricao": "Orihime: as Seis Flores",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 75220
+  },
+  "mu-robo-quebrou": {
+   "arquivo": "mu-robo-quebrou.mp3",
+   "descricao": "Macaco Louco: o robô quebrou",
+   "versoes": [
+    0.0,
+    1.5782,
+    3.1079,
+    4.6095
+   ],
+   "duracoes": [
+    1.4982,
+    1.4497,
+    1.4217,
+    1.4864
+   ],
+   "bytes": 55167
+  },
   "mu-rugido-leao": {
    "arquivo": "mu-rugido-leao.mp3",
    "descricao": "Aiolia: o rugido e o Relâmpago de Plasma",
@@ -13245,6 +13602,40 @@
    ],
    "bytes": 77587
   },
+  "mu-sem-folego": {
+   "arquivo": "mu-sem-folego.mp3",
+   "descricao": "Cheetara: sem fôlego",
+   "versoes": [
+    0.0,
+    1.98,
+    4.0289,
+    5.9446
+   ],
+   "duracoes": [
+    1.9,
+    1.9689,
+    1.8357,
+    1.9289
+   ],
+   "bytes": 81579
+  },
+  "mu-semente": {
+   "arquivo": "mu-semente.mp3",
+   "descricao": "Kurama: a semente",
+   "versoes": [
+    0.0,
+    1.6821,
+    3.375,
+    4.9608
+   ],
+   "duracoes": [
+    1.6021,
+    1.6129,
+    1.5058,
+    1.6654
+   ],
+   "bytes": 55217
+  },
   "mu-sharingan": {
    "arquivo": "mu-sharingan.mp3",
    "descricao": "Sasuke: o Sharingan",
@@ -13330,6 +13721,23 @@
    ],
    "bytes": 69957
   },
+  "mu-soneca": {
+   "arquivo": "mu-soneca.mp3",
+   "descricao": "Homer: a soneca",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 52561
+  },
   "mu-sopro-congelante": {
    "arquivo": "mu-sopro-congelante.mp3",
    "descricao": "Superman: o sopro congelante",
@@ -13380,6 +13788,23 @@
     1.5804
    ],
    "bytes": 52952
+  },
+  "mu-sumiu": {
+   "arquivo": "mu-sumiu.mp3",
+   "descricao": "Violeta: sumiu",
+   "versoes": [
+    0.0,
+    1.98,
+    4.0289,
+    5.9446
+   ],
+   "duracoes": [
+    1.9,
+    1.9689,
+    1.8357,
+    1.9289
+   ],
+   "bytes": 50670
   },
   "mu-tedio": {
    "arquivo": "mu-tedio.mp3",
@@ -13533,6 +13958,23 @@
     2.0305
    ],
    "bytes": 64797
+  },
+  "mu-ultima-oracao": {
+   "arquivo": "mu-ultima-oracao.mp3",
+   "descricao": "Aerith: a Última oração",
+   "versoes": [
+    0.0,
+    2.48,
+    5.047,
+    7.4459
+   ],
+   "duracoes": [
+    2.4,
+    2.487,
+    2.3188,
+    2.4365
+   ],
+   "bytes": 93644
   },
   "mu-unibeam": {
    "arquivo": "mu-unibeam.mp3",

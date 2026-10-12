@@ -9029,6 +9029,20 @@
   "laco": false,
   "bytes": 92264
  },
+ "mu_aaaah": {
+  "descricao": "Coragem · o grito",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 55404
+ },
  "mu_abobora": {
   "descricao": "Duende Verde · a bomba-abóbora explodindo",
   "quadros": 12,
@@ -9085,6 +9099,20 @@
   "laco": false,
   "bytes": 27584
  },
+ "mu_acordo": {
+  "descricao": "Bill Cipher · o olho e o fogo azul",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 43608
+ },
  "mu_alvo": {
   "descricao": "Agente 47 · a mira e o código de barras",
   "quadros": 12,
@@ -9098,6 +9126,20 @@
   ],
   "laco": false,
   "bytes": 18176
+ },
+ "mu_analise": {
+  "descricao": "Sailor Mercury · o visor e a análise",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 12290
  },
  "mu_android": {
   "descricao": "Krang · o cérebro na cúpula",
@@ -9449,6 +9491,20 @@
   "laco": false,
   "bytes": 50130
  },
+ "mu_chantagem": {
+  "descricao": "Cartman · o envelope e as moedas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 15254
+ },
  "mu_chute": {
   "descricao": "Kazuya · o arco do chute e as faíscas roxas",
   "quadros": 12,
@@ -9462,6 +9518,20 @@
   ],
   "laco": false,
   "bytes": 30158
+ },
+ "mu_cinco_aneis": {
+  "descricao": "Capitão Planeta · os cinco anéis",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 35946
  },
  "mu_cinetico": {
   "descricao": "Pantera Negra · a onda cinética roxa e as garras",
@@ -9560,6 +9630,20 @@
   ],
   "laco": false,
   "bytes": 16782
+ },
+ "mu_coracao_gelo": {
+  "descricao": "Senhor Frio · o coração de gelo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 23388
  },
  "mu_cordinha": {
   "descricao": "Woody · a cordinha, o chapéu e a estrela",
@@ -9715,6 +9799,20 @@
   "laco": false,
   "bytes": 26920
  },
+ "mu_dobra_sangue": {
+  "descricao": "Katara · a dobra de sangue",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 30398
+ },
  "mu_doombot": {
   "descricao": "Doutor Destino · o Doombot que se parte",
   "quadros": 12,
@@ -9756,6 +9854,20 @@
   ],
   "laco": false,
   "bytes": 68318
+ },
+ "mu_encolher": {
+  "descricao": "Stewie · o raio de encolher",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 27910
  },
  "mu_energia_absorvida": {
   "descricao": "Capitã Marvel · a estrela e as chamas de fótons",
@@ -9995,6 +10107,20 @@
   "laco": false,
   "bytes": 12190
  },
+ "mu_fantasma": {
+  "descricao": "Gengar · a bola sombria e o sorriso",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 34584
+ },
  "mu_fatality": {
   "descricao": "Sub-Zero · o bloco de gelo se partindo",
   "quadros": 12,
@@ -10079,6 +10205,20 @@
   "laco": false,
   "bytes": 32598
  },
+ "mu_formula": {
+  "descricao": "Plankton · a fórmula roubada",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 27166
+ },
  "mu_furacao": {
   "descricao": "Taz · o furacão",
   "quadros": 12,
@@ -10148,6 +10288,20 @@
   ],
   "laco": false,
   "bytes": 59286
+ },
+ "mu_galo": {
+  "descricao": "Peter · a briga com o galo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 39600
  },
  "mu_gancho": {
   "descricao": "Batman · o gancho e o escudo do morcego",
@@ -10569,6 +10723,34 @@
   "laco": false,
   "bytes": 22740
  },
+ "mu_katsu": {
+  "descricao": "Deidara · os pássaros de argila: Katsu!",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 49150
+ },
+ "mu_kikoho": {
+  "descricao": "Tenshinhan · o Kikoho",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 23348
+ },
  "mu_kuririn_nao": {
   "descricao": "Kuririn · os seis pontos e a fúria dourada",
   "quadros": 12,
@@ -10596,6 +10778,20 @@
   ],
   "laco": false,
   "bytes": 30916
+ },
+ "mu_lamento": {
+  "descricao": "Danny Phantom · o Lamento fantasma",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 32538
  },
  "mu_lamina_magica": {
   "descricao": "Samurai Jack · o corte único",
@@ -10652,6 +10848,20 @@
   ],
   "laco": false,
   "bytes": 61852
+ },
+ "mu_mais_poder": {
+  "descricao": "Mumm-Ra · as faixas e os olhos vermelhos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 83326
  },
  "mu_mana": {
   "descricao": "Frieren · o círculo mágico e as flores de mana",
@@ -10779,6 +10989,20 @@
   "laco": false,
   "bytes": 24338
  },
+ "mu_nao_fui": {
+  "descricao": "Bart · o skate e a seta",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 13706
+ },
  "mu_nivel": {
   "descricao": "Jinwoo · a janela do sistema: subiu de nível",
   "quadros": 12,
@@ -10849,6 +11073,20 @@
   "laco": false,
   "bytes": 53524
  },
+ "mu_parry": {
+  "descricao": "Ken · o parry e o Shoryuken",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 19756
+ },
  "mu_pecados": {
   "descricao": "Motoqueiro Fantasma · a corrente em chamas",
   "quadros": 12,
@@ -10876,6 +11114,20 @@
   ],
   "laco": false,
   "bytes": 22542
+ },
+ "mu_pele_gelo": {
+  "descricao": "Homem de Gelo · a armadura de cristais",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 42780
  },
  "mu_pele_trovao": {
   "descricao": "Raiden · os arcos de trovão na pele",
@@ -10946,6 +11198,20 @@
   ],
   "laco": false,
   "bytes": 34454
+ },
+ "mu_plantas": {
+  "descricao": "Hera Venenosa · as vinhas e os esporos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 48182
  },
  "mu_poder_escondido": {
   "descricao": "Salsicha · o 1% do poder",
@@ -11185,6 +11451,34 @@
   "laco": false,
   "bytes": 18914
  },
+ "mu_rejeitar": {
+  "descricao": "Orihime · o escudo das Seis Flores",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 41264
+ },
+ "mu_robo_quebrou": {
+  "descricao": "Macaco Louco · o robô se desmontando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 35504
+ },
  "mu_rugido_leao": {
   "descricao": "Aiolia · o Relâmpago de Plasma",
   "quadros": 12,
@@ -11269,6 +11563,34 @@
   "laco": false,
   "bytes": 21324
  },
+ "mu_sem_folego": {
+  "descricao": "Cheetara · a corrida e o fôlego acabando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 13738
+ },
+ "mu_semente": {
+  "descricao": "Kurama · a rosa e a semente",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 19300
+ },
  "mu_sharingan": {
   "descricao": "Sasuke · o Sharingan girando",
   "quadros": 12,
@@ -11339,6 +11661,20 @@
   "laco": false,
   "bytes": 40126
  },
+ "mu_soneca": {
+  "descricao": "Homer · a rosquinha e o ronco",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 16748
+ },
  "mu_sopro_congelante": {
   "descricao": "Superman · o sopro gelado",
   "quadros": 12,
@@ -11380,6 +11716,20 @@
   ],
   "laco": false,
   "bytes": 17614
+ },
+ "mu_sumiu": {
+  "descricao": "Violeta · o campo de força e a silhueta que some",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 35672
  },
  "mu_tedio": {
   "descricao": "Saitama · as bolhas do bocejo",
@@ -11506,6 +11856,20 @@
   ],
   "laco": false,
   "bytes": 56636
+ },
+ "mu_ultima_oracao": {
+  "descricao": "Aerith · a Última oração",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 40080
  },
  "mu_unibeam": {
   "descricao": "Homem de Ferro · o reator carregando e o Unibeam",
