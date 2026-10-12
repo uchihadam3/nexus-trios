@@ -427,6 +427,23 @@
    ],
    "bytes": 61147
   },
+  "arranhao-felino": {
+   "arquivo": "arranhao-felino.mp3",
+   "descricao": "básico da Mulher-Gato: o chicote e as unhas",
+   "versoes": [
+    0.0,
+    0.9885,
+    2.0084,
+    2.9794
+   ],
+   "duracoes": [
+    0.9085,
+    0.9399,
+    0.891,
+    0.8787
+   ],
+   "bytes": 36228
+  },
   "asa-negra": {
    "arquivo": "asa-negra.mp3",
    "descricao": "família asa negra",
@@ -1939,6 +1956,23 @@
     0.8633
    ],
    "bytes": 30584
+  },
+  "chute-da-viuva": {
+   "arquivo": "chute-da-viuva.mp3",
+   "descricao": "básico da Viúva Negra: o chute e o choque",
+   "versoes": [
+    0.0,
+    1.0649,
+    2.1812,
+    3.2124
+   ],
+   "duracoes": [
+    0.9849,
+    1.0363,
+    0.9513,
+    0.9804
+   ],
+   "bytes": 38007
   },
   "chute-de-sanji": {
    "arquivo": "chute-de-sanji.mp3",
@@ -3555,6 +3589,23 @@
    ],
    "bytes": 43422
   },
+  "esmagada-do-snorlax": {
+   "arquivo": "esmagada-do-snorlax.mp3",
+   "descricao": "básico do Snorlax: a barrigada e o ronco",
+   "versoes": [
+    0.0,
+    1.58,
+    3.2144,
+    4.7437
+   ],
+   "duracoes": [
+    1.5,
+    1.5544,
+    1.4493,
+    1.5228
+   ],
+   "bytes": 36703
+  },
   "esmagar": {
    "arquivo": "esmagar.mp3",
    "descricao": "esmagar",
@@ -4269,6 +4320,23 @@
    ],
    "bytes": 22164
   },
+  "facas-de-drax": {
+   "arquivo": "facas-de-drax.mp3",
+   "descricao": "básico do Drax: as duas facadas",
+   "versoes": [
+    0.0,
+    0.978,
+    1.9598,
+    2.8876
+   ],
+   "duracoes": [
+    0.898,
+    0.9017,
+    0.8478,
+    0.9932
+   ],
+   "bytes": 30512
+  },
   "facas-do-dio": {
    "arquivo": "facas-do-dio.mp3",
    "descricao": "Dio: as facas no tempo parado",
@@ -4506,6 +4574,23 @@
     0.3332
    ],
    "bytes": 16687
+  },
+  "flecha-do-gaviao": {
+   "arquivo": "flecha-do-gaviao.mp3",
+   "descricao": "básico do Gavião: o arco, a flecha e o estouro",
+   "versoes": [
+    0.0,
+    1.18,
+    2.3999,
+    3.5427
+   ],
+   "duracoes": [
+    1.1,
+    1.1399,
+    1.0628,
+    1.1167
+   ],
+   "bytes": 40874
   },
   "flor-de-lapela": {
    "arquivo": "flor-de-lapela.mp3",
@@ -5017,6 +5102,23 @@
    ],
    "bytes": 46495
   },
+  "gas-do-medo": {
+   "arquivo": "gas-do-medo.mp3",
+   "descricao": "básico do Espantalho: o gás e os gritos",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 55024
+  },
   "gear-fifth-nika": {
    "arquivo": "gear-fifth-nika.mp3",
    "descricao": "Gear Fifth: o tambor da libertação e as nuvens",
@@ -5084,6 +5186,23 @@
     1.3603
    ],
    "bytes": 58949
+  },
+  "godslayer": {
+   "arquivo": "godslayer.mp3",
+   "descricao": "básico da Gamora: a lâmina esticando",
+   "versoes": [
+    0.0,
+    1.0115,
+    2.0731,
+    3.0702
+   ],
+   "duracoes": [
+    0.9315,
+    0.9816,
+    0.9171,
+    0.97
+   ],
+   "bytes": 36820
   },
   "golpe-alienigena": {
    "arquivo": "golpe-alienigena.mp3",
@@ -6972,6 +7091,23 @@
    ],
    "bytes": 62472
   },
+  "leque-de-aco": {
+   "arquivo": "leque-de-aco.mp3",
+   "descricao": "básico da Kitana: o leque girando",
+   "versoes": [
+    0.0,
+    1.2633,
+    2.5426,
+    3.7356
+   ],
+   "duracoes": [
+    1.1833,
+    1.1993,
+    1.113,
+    1.1714
+   ],
+   "bytes": 49412
+  },
   "leque-gunbai": {
    "arquivo": "leque-gunbai.mp3",
    "descricao": "básico de Madara: abanada pesada do gunbai e a rajada de vento",
@@ -7329,6 +7465,23 @@
    ],
    "bytes": 38984
   },
+  "maletada": {
+   "arquivo": "maletada.mp3",
+   "descricao": "básico do Leorio: a maleta e os papéis",
+   "versoes": [
+    0.0,
+    1.0938,
+    2.2316,
+    3.3528
+   ],
+   "duracoes": [
+    1.0138,
+    1.0579,
+    1.0412,
+    1.0854
+   ],
+   "bytes": 51700
+  },
   "mangekyo-sasuke": {
    "arquivo": "mangekyo-sasuke.mp3",
    "descricao": "o Mangekyō acendendo",
@@ -7498,6 +7651,23 @@
     0.9741
    ],
    "bytes": 39464
+  },
+  "martelo-do-imperador": {
+   "arquivo": "martelo-do-imperador.mp3",
+   "descricao": "básico do Shao Kahn: a marreta no chão",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 52936
   },
   "martelo-e-prego": {
    "arquivo": "martelo-e-prego.mp3",
@@ -9420,6 +9590,23 @@
    ],
    "bytes": 49246
   },
+  "raio-de-mana": {
+   "arquivo": "raio-de-mana.mp3",
+   "descricao": "básico da Gwen: o raio e os hexágonos",
+   "versoes": [
+    0.0,
+    1.0966,
+    2.2841,
+    3.4061
+   ],
+   "duracoes": [
+    1.0166,
+    1.1075,
+    1.042,
+    1.0788
+   ],
+   "bytes": 44168
+  },
   "raio-divino": {
    "arquivo": "raio-divino.mp3",
    "descricao": "família raio divino",
@@ -10559,6 +10746,23 @@
    ],
    "bytes": 62303
   },
+  "senbonzakura-corte": {
+   "arquivo": "senbonzakura-corte.mp3",
+   "descricao": "básico do Byakuya: o corte e as pétalas",
+   "versoes": [
+    0.0,
+    1.38,
+    2.8071,
+    4.1432
+   ],
+   "duracoes": [
+    1.3,
+    1.3471,
+    1.256,
+    1.3198
+   ],
+   "bytes": 79102
+  },
   "sharingan-kakashi": {
    "arquivo": "sharingan-kakashi.mp3",
    "descricao": "Sharingan do Kakashi: o olho abre, as vírgulas giram e o genjutsu estoura",
@@ -10694,6 +10898,23 @@
     0.7614
    ],
    "bytes": 26479
+  },
+  "soco-bioeletrico": {
+   "arquivo": "soco-bioeletrico.mp3",
+   "descricao": "básico da Mulher-Aranha: o soco elétrico",
+   "versoes": [
+    0.0,
+    1.08,
+    2.1373,
+    3.1834
+   ],
+   "duracoes": [
+    1.0,
+    0.9773,
+    0.9662,
+    1.0069
+   ],
+   "bytes": 38398
   },
   "soco-casual": {
    "arquivo": "soco-casual.mp3",
@@ -10949,6 +11170,23 @@
     1.5228
    ],
    "bytes": 54989
+  },
+  "socos-supersonicos": {
+   "arquivo": "socos-supersonicos.mp3",
+   "descricao": "básico do Flecha: a rajada de socos",
+   "versoes": [
+    0.0,
+    1.08,
+    2.1963,
+    3.2424
+   ],
+   "duracoes": [
+    1.0,
+    1.0363,
+    0.9662,
+    1.0152
+   ],
+   "bytes": 44315
   },
   "sode-no-shirayuki": {
    "arquivo": "sode-no-shirayuki.mp3",
@@ -11238,6 +11476,23 @@
     0.8785
    ],
    "bytes": 34894
+  },
+  "tapao-estrela": {
+   "arquivo": "tapao-estrela.mp3",
+   "descricao": "básico do Patrick: o tapão mole",
+   "versoes": [
+    0.0,
+    1.1271,
+    2.2919,
+    3.3847
+   ],
+   "duracoes": [
+    1.0471,
+    1.0848,
+    1.0128,
+    1.0913
+   ],
+   "bytes": 39693
   },
   "teia": {
    "arquivo": "teia.mp3",

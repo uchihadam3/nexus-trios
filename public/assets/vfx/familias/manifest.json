@@ -321,6 +321,20 @@
   "laco": false,
   "bytes": 11782
  },
+ "arranhao_felino": {
+  "descricao": "Básico da Mulher-Gato: o chicote e as garras",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 12010
+ },
  "asa_negra": {
   "descricao": "asa e penas negras",
   "quadros": 12,
@@ -1763,6 +1777,20 @@
   "laco": false,
   "bytes": 15460
  },
+ "chute_da_viuva": {
+  "descricao": "Básico da Viúva Negra: o chute e o choque",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 23612
+ },
  "chute_de_sanji": {
   "descricao": "Básico do Sanji: o chute em arco e a fumaça",
   "quadros": 12,
@@ -3177,6 +3205,20 @@
   "laco": false,
   "bytes": 57198
  },
+ "esmagada_do_snorlax": {
+  "descricao": "Básico do Snorlax: a barriga caindo e os Z",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 49068
+ },
  "esmagar": {
   "descricao": "esmagar de cima",
   "quadros": 12,
@@ -3835,6 +3877,20 @@
   "laco": false,
   "bytes": 27396
  },
+ "facas_de_drax": {
+  "descricao": "Básico do Drax: as duas facas em X",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 7900
+ },
  "facas_do_dio": {
   "descricao": "Dio · as facas paradas no ar que voam juntas",
   "quadros": 12,
@@ -4114,6 +4170,20 @@
   ],
   "laco": true,
   "bytes": 6360
+ },
+ "flecha_do_gaviao": {
+  "descricao": "Básico do Gavião Arqueiro: a flecha e a ponta explosiva",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 18828
  },
  "flor_de_lapela": {
   "descricao": "Flor de lapela do Coringa: esguicho em arco que respinga, chia e borbulha",
@@ -4535,6 +4605,20 @@
   "laco": false,
   "bytes": 108932
  },
+ "gas_do_medo": {
+  "descricao": "Básico do Espantalho: o gás e os rostos de pavor",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 38948
+ },
  "gear_fifth_nika": {
   "descricao": "Luffy · Gear Fifth: nuvens, o sol do Nika e o tambor",
   "quadros": 12,
@@ -4590,6 +4674,20 @@
   ],
   "laco": false,
   "bytes": 33006
+ },
+ "godslayer": {
+  "descricao": "Básico da Gamora: a Godslayer esticando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 21720
  },
  "golpe_alienigena": {
   "descricao": "Golpe alienígena: a ampulheta do Omnitrix estoura em verde e o punho do alien acerta",
@@ -6075,6 +6173,20 @@
   "laco": false,
   "bytes": 44346
  },
+ "leque_de_aco": {
+  "descricao": "Básico da Kitana: o leque que vai e volta",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 18588
+ },
  "leque_gunbai": {
   "descricao": "Madara: o gunbai varre e solta uma parede de vento em leque",
   "quadros": 12,
@@ -6383,6 +6495,20 @@
   "laco": false,
   "bytes": 83844
  },
+ "maletada": {
+  "descricao": "Básico do Leorio: a maleta e os papéis",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 17692
+ },
  "mangekyo_sasuke": {
   "descricao": "Sasuke · o Mangekyō acendendo nele",
   "quadros": 12,
@@ -6508,6 +6634,20 @@
   ],
   "laco": false,
   "bytes": 52824
+ },
+ "martelo_do_imperador": {
+  "descricao": "Básico do Shao Kahn: a marreta e o chão rachado",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 33054
  },
  "martelo_e_prego": {
   "descricao": "Nobara: pregos cravam, o martelo bate e a ressonância estoura",
@@ -8161,6 +8301,20 @@
   "laco": false,
   "bytes": 80878
  },
+ "raio_de_mana": {
+  "descricao": "Básico da Gwen: o raio e os hexágonos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 20888
+ },
  "raio_divino": {
   "descricao": "feixe do céu",
   "quadros": 12,
@@ -9099,6 +9253,20 @@
   "laco": false,
   "bytes": 76862
  },
+ "senbonzakura_corte": {
+  "descricao": "Básico do Byakuya: o corte e as pétalas afiadas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 20284
+ },
  "sharingan_ator": {
   "descricao": "Kakashi · o Sharingan acende nele",
   "quadros": 12,
@@ -9280,6 +9448,20 @@
   ],
   "laco": false,
   "bytes": 37678
+ },
+ "soco_bioeletrico": {
+  "descricao": "Básico da Mulher-Aranha: o soco elétrico",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 20110
  },
  "soco_casual": {
   "descricao": "básico do Saitama: soquinho e, depois, o vendaval exagerado",
@@ -9476,6 +9658,20 @@
   ],
   "laco": false,
   "bytes": 69916
+ },
+ "socos_supersonicos": {
+  "descricao": "Básico do Flecha: a rajada de socos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 6530
  },
  "sode_no_shirayuki": {
   "descricao": "Rukia · a fita branca em espiral e a geada",
@@ -9714,6 +9910,20 @@
   ],
   "laco": false,
   "bytes": 16348
+ },
+ "tapao_estrela": {
+  "descricao": "Básico do Patrick: o tapão de estrela",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 20704
  },
  "teia_bola": {
   "descricao": "bola de teia em viagem (+x)",
