@@ -70,7 +70,7 @@ export const LOTE8: Record<string, Unica> = {
   },
   saitama: {
     nome: 'Tédio do herói',
-    texto: 'Começa causando 25% a menos. Depois de levar 4 golpes, causa 40% a mais até o fim.',
+    texto: 'Começa causando 25% a menos de dano. Depois de levar 4 golpes, causa 40% a mais de dano até o fim.',
     ganchos: {
       apanhou(m, b, f, _fonte, _dano, g) {
         if (!g.direto || (u(f).serio ?? 0) >= 4) return;
@@ -190,7 +190,7 @@ export const LOTE8: Record<string, Unica> = {
   },
   magneto: {
     nome: 'Polaridade',
-    texto: 'Troca a cada 10 s: rivais causam 15% a menos no trio, ou Magneto causa 25% a mais.',
+    texto: 'Troca a cada 10 s: rivais causam 15% a menos de dano no trio, ou Magneto causa 25% a mais de dano.',
     ganchos: {
       passo(m, b, f, dt) { if (relogio(f, 'polo', dt, 10)) { u(f).polo = u(f).polo ? 0 : 1; m.aviso(b, f, u(f).polo ? 'Repulsão' : 'Atração', f); } },
       causa: (_m, _b, f) => (u(f).polo ? 1.25 : 1),
@@ -242,7 +242,7 @@ export const LOTE8: Record<string, Unica> = {
   },
   itachi: {
     nome: 'Doença terminal',
-    texto: 'Perde 2% da Vida a cada 5 s, mas causa 25% a mais.',
+    texto: 'Perde 2% da Vida a cada 5 s, mas causa 25% a mais de dano.',
     ganchos: {
       passo(_m, _b, f, dt) { if (relogio(f, 'doenca', dt, 5)) f.hp = Math.max(1, f.hp - f.maxHp * 0.02); },
       causa: () => 1.25,
@@ -346,7 +346,7 @@ export const LOTE8: Record<string, Unica> = {
   },
   alphonse: {
     nome: 'Parede transmutada',
-    texto: 'Cada golpe direto que leva faz o próximo golpe no aliado mais ferido causar 30% a menos.',
+    texto: 'Cada golpe direto que leva faz o próximo golpe no aliado mais ferido causar 30% a menos de dano.',
     ganchos: {
       apanhou(_m, _b, f, _fonte, _dano, g) { if (g.direto) u(f).parede = 1; },
       recebeAliado(m, b, f, aliado, _fonte, g) {
@@ -359,7 +359,7 @@ export const LOTE8: Record<string, Unica> = {
   },
   roy: {
     nome: 'Alquimista das chamas',
-    texto: 'Todo 3º golpe direto deixa o alvo Queimando 2 s. Causa 8% a mais em quem está Queimando.',
+    texto: 'Todo 3º golpe direto deixa o alvo Queimando 2 s. Causa 8% a mais de dano em quem está Queimando.',
     ganchos: {
       causa: (_m, _b, _f, alvo, g) => (g.direto && alvo.statuses.some((s) => s.id === 'burning') ? 1.08 : 1),
       bateu(m, b, f, alvo, _dano, g) { if (g.direto && vivo(alvo) && (u(f).estalo = (u(f).estalo ?? 0) + 1) % 3 === 0) m.efeitos(b, f, [alvo], [st('burning', 5, 2)]); },
@@ -367,7 +367,7 @@ export const LOTE8: Record<string, Unica> = {
   },
   griffith: {
     nome: 'Eclipse',
-    texto: 'Abaixo de 25% da Vida (uma vez): tira 30% da Vida do aliado com mais Vida, se cura nesse tanto e causa 30% a mais.',
+    texto: 'Abaixo de 25% da Vida (uma vez): tira 30% da Vida do aliado com mais Vida, se cura nesse tanto e causa 30% a mais de dano.',
     ganchos: {
       apanhou(m, b, f) {
         if (u(f).femto || fracao(f) >= 0.25) return;
@@ -486,7 +486,7 @@ export const LOTE8: Record<string, Unica> = {
   },
   antman: {
     nome: 'Partículas Pym',
-    texto: 'Troca a cada 6 s: leva 40% a menos, ou causa 40% a mais e leva 20% a mais.',
+    texto: 'Troca a cada 6 s: leva 40% a menos, ou causa 40% a mais de dano e leva 20% a mais.',
     ganchos: {
       passo(m, b, f, dt) { if (relogio(f, 'pym', dt, 6)) { u(f).gigante = u(f).gigante ? 0 : 1; m.aviso(b, f, u(f).gigante ? 'Gigante' : 'Formiga', f); } },
       causa: (_m, _b, f) => (u(f).gigante ? 1.4 : 1),
@@ -500,7 +500,7 @@ export const LOTE8: Record<string, Unica> = {
   },
   blade: {
     nome: 'Caçador de vampiros',
-    texto: 'Causa 40% a mais em rivais que se curaram nos últimos 5 s.',
+    texto: 'Causa 40% a mais de dano em rivais que se curaram nos últimos 5 s.',
     ganchos: {
       curaNoRival(_m, b, f, alvo) { u(f)[`cura${idx(b, alvo)}`] = b.time; return 1; },
       causa: (_m, b, f, alvo) => ((u(f)[`cura${idx(b, alvo)}`] ?? -99) > b.time - 5 ? 1.4 : 1),
@@ -520,7 +520,7 @@ export const LOTE8: Record<string, Unica> = {
   },
   cyclops: {
     nome: 'Óculos de rubi',
-    texto: 'Se fosse ficar Cego, causa 60 de dano em todos os rivais. Feixe concentrado causa 30% a mais em quem tem Escudo.',
+    texto: 'Se fosse ficar Cego, causa 60 de dano em todos os rivais. Feixe concentrado causa 30% a mais de dano em quem tem Escudo.',
     ganchos: {
       pegouStatus(m, b, f, s) {
         if (s !== 'blind') return;
@@ -545,7 +545,7 @@ export const LOTE8: Record<string, Unica> = {
   },
   rogue: {
     nome: 'Poder emprestado',
-    texto: 'Primeiro golpe direto em cada rival: ele causa 4% a menos e ela 4% a mais (até 12%).',
+    texto: 'Primeiro golpe direto em cada rival: ele causa 4% a menos de dano e ela 4% a mais (até 12%).',
     ganchos: {
       bateu(m, b, f, alvo, _dano, g) {
         if (!g.direto) return;

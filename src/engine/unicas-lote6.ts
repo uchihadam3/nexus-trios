@@ -26,7 +26,7 @@ export const LOTE6: Record<string, Unica> = {
   },
   kurapika: {
     nome: 'Corrente do julgamento',
-    texto: 'Causa 60% a mais no rival mais forte; cada golpe em outro rival custa 4% da Vida dele.',
+    texto: 'Causa 60% a mais de dano no rival mais forte; cada golpe em outro rival custa 4% da Vida dele.',
     ganchos: {
       inicio(m, b, f) { const a = maisForte(m, b, f); if (a) { u(f).juramento = idx(b, a); m.aviso(b, f, 'Juramento', a); } },
       causa: (_m, b, f, alvo) => (u(f).juramento === idx(b, alvo) ? 1.6 : 1),
@@ -71,7 +71,7 @@ export const LOTE6: Record<string, Unica> = {
   },
   shadowhh: {
     nome: 'Sem inibidores',
-    texto: 'Abaixo de 40% da Vida: causa 50% a mais, mas perde 1,5% da Vida por segundo.',
+    texto: 'Abaixo de 40% da Vida: causa 50% a mais de dano, mas perde 1,5% da Vida por segundo.',
     ganchos: {
       passo(m, b, f, dt) {
         if (fracao(f) >= 0.4) return;
@@ -83,7 +83,7 @@ export const LOTE6: Record<string, Unica> = {
   },
   ikki: {
     nome: 'Das cinzas, mais forte',
-    texto: 'Depois de Renascer: causa 35% a mais e age 15% mais rápido até o fim.',
+    texto: 'Depois de Renascer: causa 35% a mais de dano e age 15% mais rápido até o fim.',
     ganchos: {
       passo(m, b, f) { if (f.voltou && !u(f).fenix) { u(f).fenix = 1; m.aviso(b, f, 'A Fênix voltou mais forte', f); } },
       causa: (_m, _b, f) => (u(f).fenix ? 1.35 : 1),
@@ -120,7 +120,7 @@ export const LOTE6: Record<string, Unica> = {
   },
   frieren: {
     nome: 'Mana guardada',
-    texto: 'Cada segundo sem usar habilidade: a próxima causa 5% a mais (até 60%).',
+    texto: 'Cada segundo sem usar habilidade: a próxima causa 5% a mais de dano (até 60%).',
     ganchos: {
       passo(_m, _b, f, dt) { u(f).mana = Math.min(12, (u(f).mana ?? 0) + dt); },
       causa: (_m, _b, f, _alvo, g) => (g.habilidade ? 1 + 0.05 * (u(f).mana ?? 0) : 1),
@@ -162,12 +162,12 @@ export const LOTE6: Record<string, Unica> = {
   },
   isaac: {
     nome: 'Corte no lento',
-    texto: 'Causa 40% a mais em quem está Lento.',
+    texto: 'Causa 40% a mais de dano em quem está Lento.',
     ganchos: { causa: (m, _b, _f, alvo) => (m.intensidade(alvo, 'slow') > 0 ? 1.4 : 1) },
   },
   saga: {
     nome: 'Lado bom, lado mau',
-    texto: 'Troca a cada 15 s: o trio fica Protegido 10%, ou Saga causa 20% a mais e os rivais ficam Enfraquecido 6%.',
+    texto: 'Troca a cada 15 s: o trio fica Protegido 10%, ou Saga causa 20% a mais de dano e os rivais ficam Enfraquecido 6%.',
     ganchos: {
       passo(m, b, f, dt) {
         if (!relogio(f, 'vontade', dt, 15, 0.1)) return;
@@ -212,7 +212,7 @@ export const LOTE6: Record<string, Unica> = {
   },
   yusuke: {
     nome: 'Briga de rua',
-    texto: 'Causa 40% a mais em quem bateu nele nos últimos 3 s.',
+    texto: 'Causa 40% a mais de dano em quem bateu nele nos últimos 3 s.',
     ganchos: {
       apanhou(_m, b, f, fonte, _dano, g) { if (g.direto) u(f)[`troco${idx(b, fonte)}`] = b.time + 3; },
       causa: (_m, b, f, alvo) => ((u(f)[`troco${idx(b, alvo)}`] ?? 0) > b.time ? 1.4 : 1),
@@ -244,7 +244,7 @@ export const LOTE6: Record<string, Unica> = {
   },
   kenpachi: {
     nome: 'Tapa-olho',
-    texto: 'Abaixo de 50% da Vida: causa 45% a mais, mas fica Exposto 15%.',
+    texto: 'Abaixo de 50% da Vida: causa 45% a mais de dano, mas fica Exposto 15%.',
     ganchos: {
       apanhou(m, b, f) {
         if (u(f).olho || fracao(f) >= 0.5) return;
@@ -270,7 +270,7 @@ export const LOTE6: Record<string, Unica> = {
   },
   kratos: {
     nome: 'Fúria de Esparta',
-    texto: 'Dar e levar golpes enche a fúria. Cheia: 6 s causando 50% a mais e curando 2% da Vida por segundo.',
+    texto: 'Dar e levar golpes enche a fúria. Cheia: 6 s causando 50% a mais de dano e curando 2% da Vida por segundo.',
     ganchos: {
       bateu(_m, _b, f, _alvo, dano) { u(f).furia = Math.min(100, (u(f).furia ?? 0) + dano / 10); },
       apanhou(_m, _b, f, _fonte, dano) { u(f).furia = Math.min(100, (u(f).furia ?? 0) + dano / 8); },
@@ -284,7 +284,7 @@ export const LOTE6: Record<string, Unica> = {
   },
   doomslayer: {
     nome: 'Rasgar e destroçar',
-    texto: 'Causa 10% a mais por rival de pé. Cada rival derrubado dá Escudo de 15% da Vida.',
+    texto: 'Causa 10% a mais de dano por rival de pé. Cada rival derrubado dá Escudo de 15% da Vida.',
     ganchos: {
       causa: (m, b, f) => 1 + 0.1 * m.rivais(b, f).length,
       caiu(m, b, f, quem, quemDerrubou) {
@@ -339,7 +339,7 @@ export const LOTE6: Record<string, Unica> = {
   },
   gohan: {
     nome: 'Fúria pelo amigo',
-    texto: 'Quando um aliado cai, causa 60% a mais até o fim.',
+    texto: 'Quando um aliado cai, causa 60% a mais de dano até o fim.',
     ganchos: {
       caiu(m, b, f, quem) { if (quem.side === f.side && !u(f).despertou) { u(f).despertou = 1; m.aviso(b, f, 'Potencial despertado', f); } },
       causa: (_m, _b, f) => (u(f).despertou ? 1.6 : 1),
@@ -438,7 +438,7 @@ export const LOTE6: Record<string, Unica> = {
   },
   billcipher: {
     nome: 'Pacto perigoso',
-    texto: 'Ele e o rival mais forte causam 30% a mais, mas esse rival leva o dobro de dano do Bill.',
+    texto: 'Ele e o rival mais forte causam 30% a mais de dano, mas esse rival leva o dobro de dano do Bill.',
     ganchos: {
       inicio(m, b, f) { const a = maisForte(m, b, f); if (a) { u(f).acordo = idx(b, a); m.efeitos(b, f, [a], [st('strengthened', 0.3, 999)]); m.aviso(b, f, 'Temos um acordo', a); } },
       causa: (_m, b, f, alvo) => 1.3 * (u(f).acordo === idx(b, alvo) ? 2 : 1),
@@ -484,8 +484,14 @@ export const LOTE6: Record<string, Unica> = {
   },
   ganondorf: {
     nome: 'Poder inabalável',
-    texto: 'Com mais de 50% da Vida, nenhum golpe o deixa abaixo de 1.',
-    ganchos: { salva: (_m, _b, f, alvo, dano) => (alvo === f && f.hp > f.maxHp * 0.5 && dano >= f.hp ? 1 : null) },
+    texto: 'Com mais de 10% da Vida, nenhum golpe o derruba: fica com 1 de Vida (o próximo golpe derruba).',
+    ganchos: {
+      salva(m, b, f, alvo, dano) {
+        if (alvo !== f || f.hp <= f.maxHp * 0.1 || dano < f.hp) return null;
+        m.aviso(b, f, 'Poder inabalável', f);
+        return 1;
+      },
+    },
   },
   subzero: {
     nome: 'Fatality congelante',
@@ -532,7 +538,7 @@ export const LOTE6: Record<string, Unica> = {
   },
   scooby: {
     nome: 'Coragem de biscoito',
-    texto: 'Tem 25% de Esquiva. A cada 15 s, causa 40% a mais por 5 s.',
+    texto: 'Tem 25% de Esquiva. A cada 15 s, causa 40% a mais de dano por 5 s.',
     ganchos: {
       inicio(m, b, f) { m.efeitos(b, f, [f], [st('evasion', 0.25, 999)]); },
       passo(m, b, f, dt) { if (relogio(f, 'lanche', dt, 15, 8)) { u(f).lanche = b.time + 5; m.aviso(b, f, 'Scooby-lanche!', f); } },
@@ -554,7 +560,7 @@ export const LOTE6: Record<string, Unica> = {
   },
   stewie: {
     nome: 'Raio de encolher',
-    texto: 'A cada 12 s, por 8 s, o rival mais forte causa 30% a menos e perde 15% da Vida máxima.',
+    texto: 'A cada 12 s, por 8 s, o rival mais forte causa 30% a menos de dano e perde 15% da Vida máxima.',
     ganchos: {
       passo(m, b, f, dt) {
         const s = u(f), alvo = b.fighters[s.encolhido ?? -1];
@@ -571,7 +577,7 @@ export const LOTE6: Record<string, Unica> = {
   },
   frieza: {
     nome: 'Prazer no sofrimento',
-    texto: 'Causa 30% a mais em rivais com Status ruim.',
+    texto: 'Causa 30% a mais de dano em rivais com Status ruim.',
     ganchos: { causa: (_m, _b, _f, alvo) => (temRuim(alvo) ? 1.3 : 1) },
   },
   carnage: {

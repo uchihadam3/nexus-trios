@@ -37,7 +37,7 @@ export const LOTE3: Record<string, Unica> = {
   },
   athena: {
     nome: 'Sabedoria compartilhada',
-    texto: 'Enquanto ela está de pé, o trio causa 5% a mais e enche a Carga 10% mais rápido.',
+    texto: 'Enquanto ela está de pé, o trio causa 5% a mais de dano e enche a Carga 10% mais rápido.',
     ganchos: {
       inicio(m, b, f) { for (const a of m.aliados(b, f)) if (a.bonus) { a.bonus.carga += 0.1; a.bonus.dano += 0.05; } },
       morreu(m, b, f) { for (const a of b.fighters) if (a.side === f.side && a.bonus) { a.bonus.carga -= 0.1; a.bonus.dano -= 0.05; } m.aviso(b, f, 'A sabedoria se foi', f); },
@@ -131,7 +131,7 @@ export const LOTE3: Record<string, Unica> = {
   },
   set: {
     nome: 'Tempestade do deserto',
-    texto: 'A cada 10 s, todos os rivais ficam Cego 2 s. Causa 30% a mais em quem está Cego.',
+    texto: 'A cada 10 s, todos os rivais ficam Cego 2 s. Causa 30% a mais de dano em quem está Cego.',
     ganchos: {
       passo(m, b, f, dt) { if (relogio(f, 'areia', dt, 10, 6)) { m.efeitos(b, f, m.rivais(b, f), [st('blind', 0.3, 2)]); m.aviso(b, f, 'Tempestade de areia', f); } },
       causa: (m, _b, _f, alvo) => (m.intensidade(alvo, 'blind') > 0 ? 1.3 : 1),
@@ -167,7 +167,7 @@ export const LOTE3: Record<string, Unica> = {
   },
   fenrir: {
     nome: 'Gleipnir',
-    texto: 'Nos primeiros 12 s causa 40% a menos. Depois, até o fim: 40% a mais e age 15% mais rápido.',
+    texto: 'Nos primeiros 12 s causa 40% a menos de dano. Depois, até o fim: 40% a mais e age 15% mais rápido.',
     ganchos: {
       passo(m, b, f) { if (!u(f).solto && b.time >= 12) { u(f).solto = 1; m.aviso(b, f, 'Correntes quebradas', f); } },
       causa: (_m, b) => (b.time < 12 ? 0.6 : 1.4),
@@ -239,7 +239,7 @@ export const LOTE3: Record<string, Unica> = {
   },
   pennywise: {
     nome: 'Come medo',
-    texto: 'Por rival com Status ruim: cura 5 por segundo e causa 6% a mais.',
+    texto: 'Por rival com Status ruim: cura 5 por segundo e causa 6% a mais de dano.',
     ganchos: {
       passo(m, b, f, dt) { const n = comMedo(m, b, f); if (n) curaContinua(m, b, f, f, 5 * n * dt, 'Come medo'); },
       causa: (m, b, f) => 1 + 0.06 * comMedo(m, b, f),
@@ -350,7 +350,7 @@ export const LOTE3: Record<string, Unica> = {
   },
   luke: {
     nome: 'Última esperança',
-    texto: 'Quando fica sozinho: cura 30% da Vida e causa 50% a mais até o fim.',
+    texto: 'Quando fica sozinho: cura 30% da Vida e causa 50% a mais de dano até o fim.',
     ganchos: {
       caiu(m, b, f, quem) {
         if (quem.side !== f.side || u(f).esperanca || m.aliados(b, f).length !== 1) return;
@@ -447,7 +447,7 @@ export const LOTE3: Record<string, Unica> = {
   },
   gandalf: {
     nome: 'O Branco',
-    texto: 'Ao cair, volta 12 s depois com 60% da Vida, causando 30% a mais.',
+    texto: 'Ao cair, volta 12 s depois com 60% da Vida, causando 30% a mais de dano.',
     ganchos: {
       morreu(m, b, f) { if (!f.voltou && !u(f).branco) { u(f).branco = 1; f.renascendo = 12; m.aviso(b, f, 'Ele vai voltar', f); } },
       passo(m, b, f) {

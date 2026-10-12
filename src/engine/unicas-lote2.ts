@@ -33,7 +33,7 @@ export const LOTE2: Record<string, Unica> = {
   },
   scarecrow: {
     nome: 'Medo',
-    texto: 'Quem ele acerta causa 25% a menos no trio dele por 6 s.',
+    texto: 'Quem ele acerta causa 25% a menos de dano no trio dele por 6 s.',
     ganchos: {
       bateu(_m, b, f, alvo, _dano, g) { if (g.direto) u(f)[`medo${idx(b, alvo)}`] = b.time + 6; },
       recebe: (_m, b, f, fonte) => ((u(f)[`medo${idx(b, fonte)}`] ?? 0) > b.time ? 0.75 : 1),
@@ -116,7 +116,7 @@ export const LOTE2: Record<string, Unica> = {
   },
   gamora: {
     nome: 'A mais perigosa da galáxia',
-    texto: 'Causa 35% a mais em quem está em Preparo.',
+    texto: 'Causa 35% a mais de dano em quem está em Preparo.',
     ganchos: { causa: (_m, _b, _f, alvo) => (alvo.cast ? 1.35 : 1) },
   },
   spiderwoman: {
@@ -184,7 +184,7 @@ export const LOTE2: Record<string, Unica> = {
   },
   luigi: {
     nome: 'Coragem de irmão',
-    texto: 'Causa 10% a menos. Quando um aliado cai: Acelerado 25% e 50% a mais de dano por 8 s.',
+    texto: 'Causa 10% a menos de dano. Quando um aliado cai: Acelerado 25% e 50% a mais de dano por 8 s.',
     ganchos: {
       caiu(m, b, f, quem) {
         if (quem.side !== f.side) return;
@@ -385,7 +385,7 @@ export const LOTE2: Record<string, Unica> = {
   },
   chopper: {
     nome: 'Sete formas',
-    texto: 'A cada 20 s, por 6 s, alterna: causa 30% a mais, Protegido 40%, ou age 40% mais rápido.',
+    texto: 'A cada 20 s, por 6 s, alterna: causa 30% a mais de dano, Protegido 40%, ou age 40% mais rápido.',
     ganchos: {
       passo(m, b, f, dt) {
         if (!relogio(f, 'bola', dt, 20, 12)) return;
@@ -400,7 +400,7 @@ export const LOTE2: Record<string, Unica> = {
   },
   lawliet: {
     nome: 'Suspeito',
-    texto: 'Cada habilidade soma suspeita no rival mais forte. Em 100, o trio causa 35% a mais nele. Contra Light, soma o dobro.',
+    texto: 'Cada habilidade soma suspeita no rival mais forte. Em 100, o trio causa 35% a mais de dano nele. Contra Light, soma o dobro.',
     ganchos: {
       usou(m, b, f) {
         const s = u(f);

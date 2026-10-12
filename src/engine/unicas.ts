@@ -18,7 +18,7 @@ const LOTE1: Record<string, Unica> = {
   /* ───────── Força bruta, cada um do seu jeito ───────── */
   drax: {
     nome: 'Vingança',
-    texto: 'Causa 60% a mais em quem derrubou um aliado. Não fica Confuso.',
+    texto: 'Causa 60% a mais de dano em quem derrubou um aliado. Não fica Confuso.',
     ganchos: {
       caiu(m, b, f, quem, quemDerrubou) {
         if (quem.side !== f.side || quemDerrubou.side === f.side) return;
@@ -44,7 +44,7 @@ const LOTE1: Record<string, Unica> = {
   },
   hercules: {
     nome: 'Caminho do herói',
-    texto: 'Cada habilidade soma 2, cada rival derrubado 4. Em 12: causa 35% a mais e recebe 25% a menos até o fim.',
+    texto: 'Cada habilidade soma 2, cada rival derrubado 4. Em 12: causa 35% a mais de dano e recebe 25% a menos até o fim.',
     ganchos: {
       usou(m, b, f) { trabalho(m, b, f, 2); },
       caiu(m, b, f, quem, quemDerrubou) { if (quemDerrubou === f && quem.side !== f.side) trabalho(m, b, f, 4); },
@@ -54,7 +54,7 @@ const LOTE1: Record<string, Unica> = {
   },
   allmight: {
     nome: 'Tempo limitado',
-    texto: 'Começa causando 40% a mais e perde 6% a cada 10 s, até 20% a menos. Abaixo de 30% da Vida (uma vez), a próxima habilidade causa o dobro.',
+    texto: 'Começa causando 40% a mais de dano e perde 6% a cada 10 s, até 20% a menos. Abaixo de 30% da Vida (uma vez), a próxima habilidade causa o dobro.',
     ganchos: {
       passo(_m, _b, f, dt) {
         const s = u(f);
@@ -85,7 +85,7 @@ const LOTE1: Record<string, Unica> = {
   },
   homer: {
     nome: 'Soneca',
-    texto: 'A cada 18 s, fica 3 s parado curando 4% por segundo. O golpe seguinte causa 80% a mais.',
+    texto: 'A cada 18 s, fica 3 s parado curando 4% por segundo. O golpe seguinte causa 80% a mais de dano.',
     ganchos: {
       passo(m, b, f, dt) {
         const s = u(f);
@@ -106,7 +106,7 @@ const LOTE1: Record<string, Unica> = {
   /* ───────── Caçadores ───────── */
   artemis: {
     nome: 'Flecha que nunca erra',
-    texto: 'Os golpes dela ignoram Esquiva e Cego. Causa 40% a mais em quem tem Esquiva, Barreira ou Invocação.',
+    texto: 'Os golpes dela ignoram Esquiva e Cego. Causa 40% a mais de dano em quem tem Esquiva, Barreira ou Invocação.',
     ganchos: {
       nuncaErra: true,
       causa: (m, _b, _f, alvo) => (m.intensidade(alvo, 'evasion') > 0 || m.intensidade(alvo, 'barrier') > 0 || m.intensidade(alvo, 'summon') > 0 ? 1.4 : 1),
@@ -201,7 +201,7 @@ const LOTE1: Record<string, Unica> = {
   },
   kenshin: {
     nome: 'Battōjutsu',
-    texto: 'Quando um rival começa um Preparo: +15 de Carga em todas as habilidades e a próxima causa 25% a mais.',
+    texto: 'Quando um rival começa um Preparo: +15 de Carga em todas as habilidades e a próxima causa 25% a mais de dano.',
     ganchos: {
       viuPreparo(m, b, f, quem) {
         if ((u(f).esperaSaque ?? 0) > b.time) return;
@@ -216,7 +216,7 @@ const LOTE1: Record<string, Unica> = {
   },
   vash: {
     nome: 'Pacifista',
-    texto: 'Não derruba ninguém (deixa com 1 de Vida). Causa 25% a mais e cada golpe deixa o alvo Enfraquecido 15% por 5 s.',
+    texto: 'Não derruba ninguém (deixa com 1 de Vida). Causa 25% a mais de dano e cada golpe deixa o alvo Enfraquecido 15% por 5 s.',
     ganchos: {
       poupa: true,
       causa: () => 1.25,
@@ -347,7 +347,7 @@ const LOTE1: Record<string, Unica> = {
   /* ───────── Transformações ───────── */
   jin: {
     nome: 'Gene Devil',
-    texto: 'Com 50% da Vida, até o fim: causa 20% a mais e ganha 15% de Esquiva.',
+    texto: 'Com 50% da Vida, até o fim: causa 20% a mais de dano e ganha 15% de Esquiva.',
     ganchos: {
       apanhou(m, b, f) {
         if (u(f).diabo || fracao(f) > 0.5) return;
@@ -375,7 +375,7 @@ const LOTE1: Record<string, Unica> = {
   },
   guts: {
     nome: 'Armadura do Berserker',
-    texto: 'Ao chegar a 0 de Vida, luta mais 6 s causando 50% a mais. Depois cai.',
+    texto: 'Ao chegar a 0 de Vida, luta mais 6 s causando 50% a mais de dano. Depois cai.',
     ganchos: {
       salva(m, b, f, alvo) {
         if (alvo !== f || u(f).berserk) return null;
@@ -410,7 +410,7 @@ const LOTE1: Record<string, Unica> = {
   },
   ra: {
     nome: 'Ciclo do sol',
-    texto: '20 s: causa 15% a mais e o trio cura 0,5% por segundo. Depois 10 s: causa 15% a menos e fica Protegido 20%.',
+    texto: '20 s: causa 15% a mais de dano e o trio cura 0,5% por segundo. Depois 10 s: causa 15% a menos de dano e fica Protegido 20%.',
     ganchos: {
       passo(m, b, f, dt) {
         const dia = b.time % 30 < 20, s = u(f);
@@ -466,7 +466,7 @@ const LOTE1: Record<string, Unica> = {
   },
   tenshinhan: {
     nome: 'Corpo no limite',
-    texto: 'A habilidade mais forte custa 15% da Vida dele, mas causa 80% a mais.',
+    texto: 'A habilidade mais forte custa 15% da Vida dele, mas causa 80% a mais de dano.',
     ganchos: {
       causa: (_m, _b, f, _alvo, g) => (g.habilidade && u(f).kikoho ? 1.8 : 1),
       antes(m, b, f, i) {
@@ -479,7 +479,7 @@ const LOTE1: Record<string, Unica> = {
   },
   sailormercury: {
     nome: 'Análise do inimigo',
-    texto: 'Enquanto ela está de pé, o trio causa 15% a mais no rival mais forte.',
+    texto: 'Enquanto ela está de pé, o trio causa 15% a mais de dano no rival mais forte.',
     ganchos: {
       inicio(m, b, f) {
         const alvo = maisForte(m, b, f);
@@ -495,7 +495,7 @@ const LOTE1: Record<string, Unica> = {
   },
   hellboy: {
     nome: 'Chifres serrados',
-    texto: 'Abaixo de 30% da Vida: causa 40% a mais e não fica Paralisado, Congelado nem Dormindo.',
+    texto: 'Abaixo de 30% da Vida: causa 40% a mais de dano e não fica Paralisado, Congelado nem Dormindo.',
     ganchos: {
       causa: (_m, _b, f) => (fracao(f) < 0.3 ? 1.4 : 1),
       imune: (f, s) => fracao(f) < 0.3 && (s === 'paralyzed' || s === 'frozen' || s === 'sleep'),
@@ -546,7 +546,7 @@ const LOTE1: Record<string, Unica> = {
   },
   tifa: {
     nome: 'Combo sem parar',
-    texto: 'Cada golpe seguido no mesmo rival causa 6% a mais (até 60%). Trocar de alvo zera.',
+    texto: 'Cada golpe seguido no mesmo rival causa 6% a mais de dano (até 60%). Trocar de alvo zera.',
     ganchos: {
       causa(_m, b, f, alvo, g) {
         if (!g.direto) return 1;

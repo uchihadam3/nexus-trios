@@ -96,7 +96,7 @@ export const LOTE5: Record<string, Unica> = {
   },
   daredevil: {
     nome: 'Sentido radar',
-    texto: 'Não fica Cego e Esquiva não funciona contra ele. Causa 25% a mais em quem tem menos de 50% da Vida.',
+    texto: 'Não fica Cego e Esquiva não funciona contra ele. Causa 25% a mais de dano em quem tem menos de 50% da Vida.',
     ganchos: {
       nuncaErra: true,
       imune: (_f, s) => s === 'blind',
@@ -123,7 +123,7 @@ export const LOTE5: Record<string, Unica> = {
   },
   samus: {
     nome: 'Raio de gelo e míssil',
-    texto: 'A cada 4 ataques básicos, deixa o alvo Congelado 1 s; o golpe seguinte nele causa 60% a mais.',
+    texto: 'A cada 4 ataques básicos, deixa o alvo Congelado 1 s; o golpe seguinte nele causa 60% a mais de dano.',
     ganchos: {
       bateu(m, b, f, alvo, _dano, g) {
         if (!g.direto || g.habilidade || !vivo(alvo)) return;
@@ -215,7 +215,7 @@ export const LOTE5: Record<string, Unica> = {
   },
   nemesis: {
     nome: 'Caçada implacável',
-    texto: 'Ataca o rival mais forte; cada golpe seguido nele causa 6% a mais (acumula até ele cair).',
+    texto: 'Ataca o rival mais forte; cada golpe seguido nele causa 6% a mais de dano (acumula até ele cair).',
     ganchos: {
       alvoDoBasico(m, b, f) {
         let v = b.fighters[u(f).caca ?? -1];

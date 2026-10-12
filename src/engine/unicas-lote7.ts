@@ -65,7 +65,7 @@ export const LOTE7: Record<string, Unica> = {
   },
   omniman: {
     nome: 'Orgulho viltrumita',
-    texto: 'Com mais Vida no trio que os rivais, causa 25% a mais; com menos, 15% a menos.',
+    texto: 'Com mais Vida no trio que os rivais, causa 25% a mais de dano; com menos, 15% a menos.',
     ganchos: { causa: (m, b, f) => (vidaDoTrio(m.aliados(b, f)) >= vidaDoTrio(m.rivais(b, f)) ? 1.25 : 0.85) },
   },
   marvin: {
@@ -204,7 +204,7 @@ export const LOTE7: Record<string, Unica> = {
   },
   liukang: {
     nome: 'Mortal Kombat',
-    texto: 'Sozinho contra um só rival: causa 40% a mais e recebe 20% a menos.',
+    texto: 'Sozinho contra um só rival: causa 40% a mais de dano e recebe 20% a menos.',
     ganchos: {
       causa: (m, b, f) => (m.aliados(b, f).length === 1 && m.rivais(b, f).length === 1 ? 1.4 : 1),
       recebe: (m, b, f) => (m.aliados(b, f).length === 1 && m.rivais(b, f).length === 1 ? 0.8 : 1),
@@ -227,7 +227,7 @@ export const LOTE7: Record<string, Unica> = {
   },
   leon: {
     nome: 'Na faca',
-    texto: 'Com todas as habilidades em Resfriamento, o ataque básico causa 50% a mais.',
+    texto: 'Com todas as habilidades em Resfriamento, o ataque básico causa 50% a mais de dano.',
     ganchos: { causa: (_m, _b, f, _alvo, g) => (g.direto && !g.habilidade && f.skills.every((s) => s.cooldown > 0 || s.charge < 100) && f.skills.some((s) => s.cooldown > 0) ? 1.5 : 1) },
   },
   hayabusa: {
@@ -305,7 +305,7 @@ export const LOTE7: Record<string, Unica> = {
   },
   azula: {
     nome: 'Prodígio instável',
-    texto: 'Acima de 70% da Vida causa 30% a mais. Abaixo de 30%, age 25% mais rápido, mas 1 em 5 golpes erra.',
+    texto: 'Acima de 70% da Vida causa 30% a mais de dano. Abaixo de 30%, age 25% mais rápido, mas 1 em 5 golpes erra.',
     ganchos: {
       causa: (m, b, f, _alvo, g) => (fracao(f) > 0.7 ? 1.3 : fracao(f) < 0.3 && g.direto && m.sorte(b) < 0.2 ? 0 : 1),
       ritmo: (_m, _b, f) => (fracao(f) < 0.3 ? 1.25 : 1),
@@ -360,7 +360,7 @@ export const LOTE7: Record<string, Unica> = {
   },
   mojojojo: {
     nome: 'Blindagem do robô',
-    texto: 'Começa com Escudo de 20% da Vida. Quando quebra, causa 10% a mais.',
+    texto: 'Começa com Escudo de 20% da Vida. Quando quebra, causa 10% a mais de dano.',
     ganchos: {
       inicio(_m, _b, f) { f.shields.push({ amount: f.maxHp * 0.2, remaining: 999, source: f.uid }); u(f).robo = 1; },
       passo(m, b, f) { if (u(f).robo === 1 && !f.shields.some((s) => s.remaining > 100)) { u(f).robo = 2; m.aviso(b, f, 'O robô quebrou!', f); } },
@@ -369,7 +369,7 @@ export const LOTE7: Record<string, Unica> = {
   },
   zenitsu: {
     nome: 'Luta dormindo',
-    texto: 'Abaixo de 65% da Vida: causa 60% a mais e não fica Dormindo nem Confuso.',
+    texto: 'Abaixo de 65% da Vida: causa 60% a mais de dano e não fica Dormindo nem Confuso.',
     ganchos: {
       imune: (f, s) => (u(f).desmaio ?? 0) > 0 && (s === 'sleep' || s === 'confused'),
       apanhou(m, b, f) { if (!u(f).desmaio && fracao(f) < 0.65) { u(f).desmaio = 1; m.aviso(b, f, 'Zzz… Primeira postura', f); } },
@@ -412,7 +412,7 @@ export const LOTE7: Record<string, Unica> = {
   },
   shera: {
     nome: 'Espada que muda',
-    texto: 'Cada habilidade alterna: 80 de Escudo, rival mais forte Preso 2 s, ou a próxima habilidade causa 50% a mais.',
+    texto: 'Cada habilidade alterna: 80 de Escudo, rival mais forte Preso 2 s, ou a próxima habilidade causa 50% a mais de dano.',
     ganchos: {
       usou(m, b, f) {
         const k = (u(f).forma ?? 0) % 3;
@@ -576,7 +576,7 @@ export const LOTE7: Record<string, Unica> = {
   },
   piccolo: {
     nome: 'Mentor',
-    texto: 'O aliado mais fraco causa 15% a mais e recebe 15% a menos.',
+    texto: 'O aliado mais fraco causa 15% a mais de dano e recebe 15% a menos.',
     ganchos: {
       inicio(m, b, f) {
         const a = m.aliados(b, f).filter((x) => x !== f).sort((x, y) => x.maxHp - y.maxHp)[0];

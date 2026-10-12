@@ -11,7 +11,7 @@ import { EfeitosAgrupados } from './EfeitosAgrupados';
 import { ComTermos,TermoBotao } from './Termos';
 import { termoPorId } from '../presentation/glossario';
 import { StatusBadge } from './StatusBadge';
-import { presentEffect,presentSkill,presentStatus,presentTrait,tetoDoStatus,textoDaIsca,textoDaResistencia,textoDoDespercebido,textoDoJeito,textoDoRenascer,valorAtualDoStatus } from '../engine/skill-descriptions';
+import { ativaQuando,presentEffect,presentSkill,presentStatus,presentTrait,tetoDoStatus,textoDaIsca,textoDaResistencia,textoDoDespercebido,textoDoJeito,textoDoRenascer,valorAtualDoStatus } from '../engine/skill-descriptions';
 import { universoDaFicha } from '../data/equipes';
 
 /*
@@ -77,7 +77,7 @@ function FichaDoLutador({battle,f,onSelect}:{battle:Battle;f:Fighter;onSelect:(t
       </section>}
       <section className="bi2-cartao traco" style={{'--i':4} as CSSProperties}>
         <span className="bi2-selo"><Flame size={12}/><TermoBotao termo={termoPorId.traco!}>Traço</TermoBotao></span>
-        <b>{c.trait.name}</b><p><ComTermos texto={`${traco.effects.join(' · ')}. ${traco.quando}.`}/></p>
+        <b>{c.trait.name}</b><p><ComTermos texto={`${traco.effects.join(' · ')}.`}/></p><p className="ativa-quando"><u>{ativaQuando(c.trait).rotulo}</u> <ComTermos texto={`${ativaQuando(c.trait).resto}.`}/></p>
         {extras.length>0&&<ul className="bi2-extras">{extras.map((x,i)=><li key={i}><ComTermos texto={x+'.'}/></li>)}</ul>}
       </section>
       <section className="bi2-cartao basico" style={{'--i':5} as CSSProperties}>

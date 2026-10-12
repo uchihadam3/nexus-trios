@@ -145,3 +145,6 @@
 .termo-card .termo-extra{position:relative;padding-left:30px;animation:bi2-carta .5s .2s cubic-bezier(.2,1.25,.4,1) both}
 .termo-card .termo-extra::before{content:'✦';position:absolute;left:11px;top:10px;color:var(--id-cor)}
 @media (prefers-reduced-motion:reduce){.termo-card::after,.termo-card .id-card-lead,.termo-card .termo-extra{animation:none}}
+/* a condição do traço como condição: "Ativa quando" sublinhado, numa linha própria */
+.bi2-cartao .ativa-quando{margin-top:6px;color:#ffe3a0;font-size:.95em}
+.ativa-quando u{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:3px;text-decoration-color:#ffd36b;font-weight:800;color:#ffd36b}

@@ -14,7 +14,7 @@ export const LOTE4: Record<string, Unica> = {
   /* ───────── Gigantes ───────── */
   kingkong: {
     nome: 'Briga de titãs',
-    texto: 'Causa 30% a mais em quem tem 1.200 ou mais de Vida máxima.',
+    texto: 'Causa 30% a mais de dano em quem tem 1.200 ou mais de Vida máxima.',
     ganchos: { causa: (_m, _b, _f, alvo) => (alvo.maxHp >= 1200 ? 1.3 : 1) },
   },
   shrek: {
@@ -107,7 +107,7 @@ export const LOTE4: Record<string, Unica> = {
   /* ───────── Anime ───────── */
   deku: {
     nome: 'Controle do One For All',
-    texto: 'Começa causando 10% a menos. Cada habilidade aumenta, até 50% a mais.',
+    texto: 'Começa causando 10% a menos de dano. Cada habilidade aumenta, até 50% a mais.',
     ganchos: {
       usou(m, b, f) { if ((u(f).porcento ?? 0) < 6) { u(f).porcento = (u(f).porcento ?? 0) + 1; m.aviso(b, f, `${5 + 8 * u(f).porcento!}%`, f); } },
       causa: (_m, _b, f) => 0.9 + 0.1 * (u(f).porcento ?? 0),
@@ -154,7 +154,7 @@ export const LOTE4: Record<string, Unica> = {
   },
   sesshomaru: {
     nome: 'Orgulho de youkai',
-    texto: 'Causa 30% a mais em quem tem mais de 70% da Vida, e 30% a menos abaixo de 30%. Não fica Provocado.',
+    texto: 'Causa 30% a mais de dano em quem tem mais de 70% da Vida, e 30% a menos de dano abaixo de 30%. Não fica Provocado.',
     ganchos: {
       causa: (_m, _b, _f, alvo) => (fracao(alvo) > 0.7 ? 1.3 : fracao(alvo) < 0.3 ? 0.7 : 1),
       imune: (_f, s) => s === 'provoked',
@@ -162,7 +162,7 @@ export const LOTE4: Record<string, Unica> = {
   },
   erza: {
     nome: 'Reequipar',
-    texto: 'A cada 8 s: abaixo de 50% da Vida fica Protegido 35%; acima, causa 30% a mais.',
+    texto: 'A cada 8 s: abaixo de 50% da Vida fica Protegido 35%; acima, causa 30% a mais de dano.',
     ganchos: {
       passo(m, b, f, dt) {
         if (!relogio(f, 'armadura', dt, 8, 0.1)) return;
@@ -191,7 +191,7 @@ export const LOTE4: Record<string, Unica> = {
   },
   rem: {
     nome: 'Fúria de oni',
-    texto: 'Com algum aliado abaixo de 30% da Vida: causa 35% a mais e age 20% mais rápido.',
+    texto: 'Com algum aliado abaixo de 30% da Vida: causa 35% a mais de dano e age 20% mais rápido.',
     ganchos: {
       causa: (m, b, f) => (m.aliados(b, f).some((a) => a !== f && fracao(a) < 0.3) ? 1.35 : 1),
       ritmo: (m, b, f) => (m.aliados(b, f).some((a) => a !== f && fracao(a) < 0.3) ? 1.2 : 1),
@@ -199,7 +199,7 @@ export const LOTE4: Record<string, Unica> = {
   },
   kirito: {
     nome: 'Jogador solo',
-    texto: 'Com o trio com menos Vida que os rivais: causa 15% a mais e age 25% mais rápido.',
+    texto: 'Com o trio com menos Vida que os rivais: causa 15% a mais de dano e age 25% mais rápido.',
     ganchos: {
       causa: (m, b, f) => (vidaDoTrio(m.aliados(b, f)) < vidaDoTrio(m.rivais(b, f)) ? 1.15 : 1),
       ritmo: (m, b, f) => (vidaDoTrio(m.aliados(b, f)) < vidaDoTrio(m.rivais(b, f)) ? 1.25 : 1),
@@ -236,7 +236,7 @@ export const LOTE4: Record<string, Unica> = {
   },
   jiraiya: {
     nome: 'Energia natural',
-    texto: 'A cada 15 s, fica 2 s parado e depois causa 40% a mais por 10 s.',
+    texto: 'A cada 15 s, fica 2 s parado e depois causa 40% a mais de dano por 10 s.',
     ganchos: {
       passo(m, b, f, dt) {
         if (!relogio(f, 'sabio', dt, 15, 8)) return;
@@ -381,7 +381,7 @@ export const LOTE4: Record<string, Unica> = {
   },
   pacman: {
     nome: 'Hora de comer',
-    texto: 'A cada 22 s, por 6 s: rivais Lento 20% e ele causa 60% a mais neles.',
+    texto: 'A cada 22 s, por 6 s: rivais Lento 20% e ele causa 60% a mais de dano neles.',
     ganchos: {
       passo(m, b, f, dt) {
         if (!relogio(f, 'pilula', dt, 22, 10)) return;

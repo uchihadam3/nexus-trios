@@ -20,7 +20,7 @@ const copiada = (b: Battle, f: Fighter): Ganchos | undefined => {
 export const LOTE9: Record<string, Unica> = {
   starlord: {
     nome: 'Doze por cento de um plano',
-    texto: 'Enquanto ele está de pé, 12% das habilidades do trio causam 60% a mais.',
+    texto: 'Enquanto ele está de pé, 12% das habilidades do trio causam 60% a mais de dano.',
     ganchos: { causaAliado: (m, b, _f, _aliado, _alvo, g) => (g.habilidade && g.direto && m.sorte(b) < 0.12 ? 1.6 : 1) },
   },
   groot: {
@@ -40,7 +40,7 @@ export const LOTE9: Record<string, Unica> = {
   },
   greenlantern: {
     nome: 'Bateria do anel',
-    texto: 'Cada habilidade gasta 20% do anel. Com carga, causa 15% a mais; sem carga, para 3 s para recarregar.',
+    texto: 'Cada habilidade gasta 20% do anel. Com carga, causa 15% a mais de dano; sem carga, para 3 s para recarregar.',
     ganchos: {
       inicio(_m, _b, f) { u(f).anel = 100; },
       usou(m, b, f) {
@@ -210,7 +210,7 @@ export const LOTE9: Record<string, Unica> = {
   },
   agent47: {
     nome: 'Alvo indefeso',
-    texto: 'Causa 50% a mais em quem está Dormindo, Paralisado, Confuso ou Congelado.',
+    texto: 'Causa 50% a mais de dano em quem está Dormindo, Paralisado, Confuso ou Congelado.',
     ganchos: { causa: (_m, _b, _f, alvo) => (alvo.statuses.some((s) => ATORDOADO.includes(s.id)) ? 1.5 : 1) },
   },
   arthas: {
@@ -300,7 +300,7 @@ export const LOTE9: Record<string, Unica> = {
   },
   simonbelmont: {
     nome: 'Vampire Killer',
-    texto: 'Causa 35% a mais em quem já voltou da queda ou tem Regeneração. Golpe direto tira a Regeneração.',
+    texto: 'Causa 35% a mais de dano em quem já voltou da queda ou tem Regeneração. Golpe direto tira a Regeneração.',
     ganchos: {
       causa: (_m, _b, _f, alvo) => (alvo.voltou || alvo.statuses.some((s) => s.id === 'regen') ? 1.35 : 1),
       bateu(_m, _b, _f, alvo, _dano, g) { if (g.direto) alvo.statuses = alvo.statuses.filter((s) => s.id !== 'regen'); },
@@ -443,7 +443,7 @@ export const LOTE9: Record<string, Unica> = {
   },
   lexluthor: {
     nome: 'Ódio dos heróis',
-    texto: 'Causa 25% a mais em rivais com Status bom.',
+    texto: 'Causa 25% a mais de dano em rivais com Status bom.',
     ganchos: { causa: (_m, _b, _f, alvo) => (alvo.statuses.some((s) => BUFFS.includes(s.id)) ? 1.25 : 1) },
   },
   donatello: {
@@ -478,7 +478,7 @@ export const LOTE9: Record<string, Unica> = {
   },
   ben10: {
     nome: 'Omnitrix',
-    texto: 'A cada 15 s sorteia: causa 20% a mais, golpes deixam Queimando, age 20% mais rápido, leva 15% a menos, ou nada.',
+    texto: 'A cada 15 s sorteia: causa 20% a mais de dano, golpes deixam Queimando, age 20% mais rápido, leva 15% a menos, ou nada.',
     ganchos: {
       passo(m, b, f, dt) {
         if (!relogio(f, 'omnitrix', dt, 15, 0)) return;
@@ -552,7 +552,7 @@ export const LOTE9: Record<string, Unica> = {
   },
   zuko: {
     nome: 'Imune a raio',
-    texto: 'Não fica Eletrificado: devolve 60 de dano em quem tentou. Causa 20% a mais em rivais Eletrificado.',
+    texto: 'Não fica Eletrificado: devolve 60 de dano em quem tentou. Causa 20% a mais de dano em rivais Eletrificado.',
     ganchos: {
       pegouStatus(m, b, f, s, fonte) {
         if (s !== 'electric') return;
@@ -651,7 +651,7 @@ export const LOTE9: Record<string, Unica> = {
   },
   bugiganga: {
     nome: 'Quem resolve é a Penny',
-    texto: 'Enquanto ele está de pé, o aliado que mais causou dano causa 15% a mais.',
+    texto: 'Enquanto ele está de pé, o aliado que mais causou dano causa 15% a mais de dano.',
     ganchos: {
       causaAliado(_m, b, f, aliado) {
         if (aliado === f) return 1;
@@ -662,7 +662,7 @@ export const LOTE9: Record<string, Unica> = {
   },
   galactus: {
     nome: 'Devorador de mundos',
-    texto: 'Quem tem menos Vida máxima que ele causa 8% a menos nele. Cada rival que cai: cura 8% da Vida.',
+    texto: 'Quem tem menos Vida máxima que ele causa 8% a menos de dano nele. Cada rival que cai: cura 8% da Vida.',
     ganchos: {
       recebe: (_m, _b, f, fonte) => (fonte.side !== f.side && fonte.maxHp < f.maxHp ? 0.92 : 1),
       caiu(m, b, f, quem) { if (quem.side !== f.side) { m.aviso(b, f, 'Devorado', quem); m.cura(b, f, f, f.maxHp * 0.08, 'Devorar'); } },

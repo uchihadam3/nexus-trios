@@ -62,3 +62,4 @@
 .fv-chips>span{display:inline-block;padding:6px 10px;border-radius:10px;background:#0a100c;box-shadow:inset 0 0 0 1px #ffffff14;font-size:13px;line-height:1.35;color:#e4f1dc}
 .fv-traco,.fv-basico,.fv-habilidade{min-width:0;overflow-wrap:anywhere}
 .ficha-v2 .character-sheet{overflow-x:hidden}
+.fv-traco small.ativa-quando{display:block;margin-top:8px;font-size:13px;color:#ffe3a0}

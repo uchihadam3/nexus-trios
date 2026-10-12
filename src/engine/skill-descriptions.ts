@@ -430,6 +430,26 @@ export function quandoAtiva(trait:Trait):{quando:string;limite:string}{
   const base=QUANDO_EVENTO[trait.on]??`Ao ${topicNames[trait.on]}`;
   return {quando:limite?`${base} · ${limite}`:base,limite};
 }
+/*
+ * A condição do traço como condição de verdade (pedido do jogador: "coloca ativa quando, sublinhado, pra pessoa
+ * entender"): o rótulo "Ativa quando" (ou "Ativa", nos de tempo) e o resto da frase, em minúscula.
+ */
+const ATIVA_QUANDO:Partial<Record<Topic,string>>={
+  action:'ele ataca',dealt:'ele causa dano',received:'ele recebe dano',
+  allyHurt:'um aliado recebe dano',enemyHurt:'um inimigo recebe dano',
+  interrupt:'ele interrompe um Preparo',status:'seu trio aplica um Status',
+  negativeStatus:'seu trio aplica um Status negativo em um inimigo',
+  protected:'o Escudo ou a Proteção dele bloqueia dano',enemyCast:'um inimigo começa um Preparo',
+};
+export function ativaQuando(trait:Trait):{rotulo:string;resto:string}{
+  const intervalo=secs(Math.max(trait.cooldown,PASSO_DO_MOTOR));
+  if(trait.on==='time'||trait.on==='survived')return {rotulo:'Ativa',resto:`a cada ${intervalo}`};
+  if(trait.on==='winning')return {rotulo:'Ativa quando',resto:`seu trio está à frente na Vantagem · a cada ${intervalo}`};
+  if(trait.on==='losing')return {rotulo:'Ativa quando',resto:`seu trio está atrás na Vantagem · a cada ${intervalo}`};
+  const {limite}=quandoAtiva(trait);
+  const base=ATIVA_QUANDO[trait.on]??topicNames[trait.on].replace(/^(ao|quando) /,'');
+  return {rotulo:'Ativa quando',resto:limite?`${base} · ${limite}`:base};
+}
 /** Última resistência (na ficha, fora do traço): o golpe fatal o deixa de pé uma vez. */
 export function textoDaResistencia(r:{protegido:number;duracao:number}):string{
   return `Última resistência · Protegido ${pct(r.protegido)} por ${r.duracao.toLocaleString('pt-BR')} s`;
