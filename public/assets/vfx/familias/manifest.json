@@ -9029,6 +9029,20 @@
   "laco": false,
   "bytes": 92264
  },
+ "mu_abobora": {
+  "descricao": "Duende Verde · a bomba-abóbora explodindo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 34866
+ },
  "mu_batarangue": {
   "descricao": "Batman · o batarangue girando e acertando",
   "quadros": 12,
@@ -9127,6 +9141,20 @@
   "laco": false,
   "bytes": 63338
  },
+ "mu_cacador": {
+  "descricao": "Blade · a glaive girando e os cortes",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 30376
+ },
  "mu_cada_vez_maior": {
   "descricao": "Hulk · as ondas de fúria e as rachaduras",
   "quadros": 12,
@@ -9141,6 +9169,62 @@
   "laco": false,
   "bytes": 44548
  },
+ "mu_carnificina": {
+  "descricao": "Carnificina · as lâminas vermelhas para todo lado",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 80826
+ },
+ "mu_carta_carregada": {
+  "descricao": "Gambit · a carta carregada explodindo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 45592
+ },
+ "mu_carta_yugi": {
+  "descricao": "Yugi · a carta virando e o Enigma do Milênio",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 50130
+ },
+ "mu_cinetico": {
+  "descricao": "Pantera Negra · a onda cinética roxa e as garras",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 52434
+ },
  "mu_copia": {
   "descricao": "Kakashi · o pergaminho do jutsu copiado",
   "quadros": 12,
@@ -9154,6 +9238,90 @@
   ],
   "laco": false,
   "bytes": 16782
+ },
+ "mu_corpo_novo": {
+  "descricao": "Ultron · o corpo novo se montando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 49232
+ },
+ "mu_crescentes": {
+  "descricao": "Cavaleiro da Lua · os crescentes de prata",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 34464
+ },
+ "mu_doombot": {
+  "descricao": "Doutor Destino · o Doombot que se parte",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 31416
+ },
+ "mu_elo_mental": {
+  "descricao": "Jean Grey · a Fênix e o elo mental",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 68318
+ },
+ "mu_energia_absorvida": {
+  "descricao": "Capitã Marvel · a estrela e as chamas de fótons",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 38614
+ },
+ "mu_espinho": {
+  "descricao": "Yor · o espinho dourado e as pétalas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 34840
  },
  "mu_estalo": {
   "descricao": "Thanos · o estalo e o pó ao vento",
@@ -9239,6 +9407,48 @@
   "laco": false,
   "bytes": 69152
  },
+ "mu_hex": {
+  "descricao": "Feiticeira Escarlate · os fios da magia do caos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 112380
+ },
+ "mu_ilusao": {
+  "descricao": "Loki · a imagem quebrando e os chifres",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 53248
+ },
+ "mu_interrogatorio": {
+  "descricao": "Justiceiro · a caveira e os tiros traçantes",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 13556
+ },
  "mu_joia": {
   "descricao": "Thanos · a Joia do Infinito encaixando",
   "quadros": 12,
@@ -9252,6 +9462,20 @@
   ],
   "laco": false,
   "bytes": 26440
+ },
+ "mu_joia_da_mente": {
+  "descricao": "Visão · a Joia da Mente e o leque de luz",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 44946
  },
  "mu_juntas": {
   "descricao": "Inosuke · as juntas soltando e as correntes partindo",
@@ -9280,6 +9504,20 @@
   ],
   "laco": false,
   "bytes": 35214
+ },
+ "mu_kakuja": {
+  "descricao": "Kaneki · os tentáculos de kagune e o olho de ghoul",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 22740
  },
  "mu_laco": {
   "descricao": "Mulher-Maravilha · o Laço da verdade apertando",
@@ -9323,6 +9561,20 @@
   "laco": false,
   "bytes": 61852
  },
+ "mu_mana": {
+  "descricao": "Frieren · o círculo mágico e as flores de mana",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 69160
+ },
  "mu_modo_serio": {
   "descricao": "Saitama · o soco sério e a onda gigante",
   "quadros": 12,
@@ -9336,6 +9588,48 @@
   ],
   "laco": false,
   "bytes": 55330
+ },
+ "mu_nivel": {
+  "descricao": "Jinwoo · a janela do sistema: subiu de nível",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 38064
+ },
+ "mu_olhos_azuis": {
+  "descricao": "Kaiba · a carta do Dragão Branco e o raio",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 36876
+ },
+ "mu_pecados": {
+  "descricao": "Motoqueiro Fantasma · a corrente em chamas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 105308
  },
  "mu_portal": {
   "descricao": "Doutor Estranho · o anel de faíscas do portal girando",
@@ -9364,6 +9658,20 @@
   ],
   "laco": false,
   "bytes": 102874
+ },
+ "mu_raio_rubi": {
+  "descricao": "Ciclope · o raio sem controle varrendo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 47194
  },
  "mu_rastro_flash": {
   "descricao": "Flash · os riscos de velocidade e o emblema do raio",
@@ -9421,6 +9729,20 @@
   "laco": false,
   "bytes": 39662
  },
+ "mu_simbionte": {
+  "descricao": "Venom · a gosma e a aranha branca",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 32984
+ },
  "mu_sofrimento": {
   "descricao": "Freeza · a Supernova crescendo e as esferas",
   "quadros": 12,
@@ -9449,6 +9771,20 @@
   "laco": false,
   "bytes": 15208
  },
+ "mu_strix": {
+  "descricao": "Loid · a mira travando e as barras de Carga",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 17614
+ },
  "mu_tedio": {
   "descricao": "Saitama · as bolhas do bocejo",
   "quadros": 12,
@@ -9476,6 +9812,20 @@
   ],
   "laco": false,
   "bytes": 14288
+ },
+ "mu_toque": {
+  "descricao": "Vampira · a energia roubada correndo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 41710
  },
  "mu_treino": {
   "descricao": "Piccolo · a capa pesada caindo e o ki do aluno",
@@ -9518,6 +9868,20 @@
   ],
   "laco": false,
   "bytes": 45682
+ },
+ "mu_waku": {
+  "descricao": "Anya · as ondas da leitura de mente e as estrelinhas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 25982
  },
  "mu_zenkai": {
   "descricao": "Vegeta · a aura dourada, os raios e a cura do Zenkai",

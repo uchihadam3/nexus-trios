@@ -10525,6 +10525,23 @@
    ],
    "bytes": 47432
   },
+  "mu-abobora": {
+   "arquivo": "mu-abobora.mp3",
+   "descricao": "Duende Verde: a bomba-abóbora",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 69937
+  },
   "mu-batarangue": {
    "arquivo": "mu-batarangue.mp3",
    "descricao": "Batman: o batarangue",
@@ -10644,6 +10661,23 @@
    ],
    "bytes": 61053
   },
+  "mu-cacador": {
+   "arquivo": "mu-cacador.mp3",
+   "descricao": "Blade: a glaive",
+   "versoes": [
+    0.0,
+    1.6366,
+    3.2667,
+    4.8171
+   ],
+   "duracoes": [
+    1.5566,
+    1.55,
+    1.4705,
+    1.542
+   ],
+   "bytes": 65865
+  },
   "mu-cada-vez-maior": {
    "arquivo": "mu-cada-vez-maior.mp3",
    "descricao": "Hulk: crescendo",
@@ -10661,6 +10695,74 @@
    ],
    "bytes": 59838
   },
+  "mu-carnificina": {
+   "arquivo": "mu-carnificina.mp3",
+   "descricao": "Carnificina: as lâminas",
+   "versoes": [
+    0.0,
+    1.8625,
+    3.7841,
+    5.5871
+   ],
+   "duracoes": [
+    1.7825,
+    1.8416,
+    1.723,
+    1.8048
+   ],
+   "bytes": 56895
+  },
+  "mu-carta-carregada": {
+   "arquivo": "mu-carta-carregada.mp3",
+   "descricao": "Gambit: a carta explodindo",
+   "versoes": [
+    0.0,
+    1.98,
+    4.0289,
+    5.9446
+   ],
+   "duracoes": [
+    1.9,
+    1.9689,
+    1.8357,
+    1.9289
+   ],
+   "bytes": 74788
+  },
+  "mu-carta-yugi": {
+   "arquivo": "mu-carta-yugi.mp3",
+   "descricao": "Yugi: a carta e o Enigma",
+   "versoes": [
+    0.0,
+    1.98,
+    4.0289,
+    5.9446
+   ],
+   "duracoes": [
+    1.9,
+    1.9689,
+    1.8357,
+    1.9289
+   ],
+   "bytes": 68341
+  },
+  "mu-cinetico": {
+   "arquivo": "mu-cinetico.mp3",
+   "descricao": "Pantera Negra: a onda cinética",
+   "versoes": [
+    0.0,
+    1.98,
+    4.0289,
+    5.9446
+   ],
+   "duracoes": [
+    1.9,
+    1.9689,
+    1.8357,
+    1.9289
+   ],
+   "bytes": 69526
+  },
   "mu-copia": {
    "arquivo": "mu-copia.mp3",
    "descricao": "Kakashi: o pergaminho e o selo",
@@ -10677,6 +10779,108 @@
     1.8274
    ],
    "bytes": 72246
+  },
+  "mu-corpo-novo": {
+   "arquivo": "mu-corpo-novo.mp3",
+   "descricao": "Ultron: o corpo novo",
+   "versoes": [
+    0.0,
+    1.98,
+    4.0289,
+    5.9446
+   ],
+   "duracoes": [
+    1.9,
+    1.9689,
+    1.8357,
+    1.9289
+   ],
+   "bytes": 64229
+  },
+  "mu-crescentes": {
+   "arquivo": "mu-crescentes.mp3",
+   "descricao": "Cavaleiro da Lua: os crescentes",
+   "versoes": [
+    0.0,
+    1.98,
+    4.0289,
+    5.9446
+   ],
+   "duracoes": [
+    1.9,
+    1.9689,
+    1.8357,
+    1.9289
+   ],
+   "bytes": 91720
+  },
+  "mu-doombot": {
+   "arquivo": "mu-doombot.mp3",
+   "descricao": "Doutor Destino: o Doombot",
+   "versoes": [
+    0.0,
+    1.5892,
+    3.2249,
+    4.764
+   ],
+   "duracoes": [
+    1.5092,
+    1.5557,
+    1.4591,
+    1.5872
+   ],
+   "bytes": 47542
+  },
+  "mu-elo-mental": {
+   "arquivo": "mu-elo-mental.mp3",
+   "descricao": "Jean Grey: a Fênix e o elo",
+   "versoes": [
+    0.0,
+    2.0208,
+    4.0534,
+    6.0657
+   ],
+   "duracoes": [
+    1.9408,
+    1.9525,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 66363
+  },
+  "mu-energia-absorvida": {
+   "arquivo": "mu-energia-absorvida.mp3",
+   "descricao": "Capitã Marvel: a energia absorvida",
+   "versoes": [
+    0.0,
+    1.98,
+    4.0289,
+    5.9446
+   ],
+   "duracoes": [
+    1.9,
+    1.9689,
+    1.8357,
+    1.9289
+   ],
+   "bytes": 73982
+  },
+  "mu-espinho": {
+   "arquivo": "mu-espinho.mp3",
+   "descricao": "Yor: o espinho cravando",
+   "versoes": [
+    0.0,
+    1.7024,
+    3.4071,
+    4.9987
+   ],
+   "duracoes": [
+    1.6224,
+    1.6246,
+    1.5116,
+    1.5794
+   ],
+   "bytes": 63585
   },
   "mu-estalo": {
    "arquivo": "mu-estalo.mp3",
@@ -10780,6 +10984,57 @@
    ],
    "bytes": 91897
   },
+  "mu-hex": {
+   "arquivo": "mu-hex.mp3",
+   "descricao": "Feiticeira Escarlate: o hex",
+   "versoes": [
+    0.0,
+    1.9198,
+    3.9687,
+    5.8845
+   ],
+   "duracoes": [
+    1.8398,
+    1.9689,
+    1.8357,
+    1.9289
+   ],
+   "bytes": 70816
+  },
+  "mu-ilusao": {
+   "arquivo": "mu-ilusao.mp3",
+   "descricao": "Loki: a ilusão quebrando",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 72081
+  },
+  "mu-interrogatorio": {
+   "arquivo": "mu-interrogatorio.mp3",
+   "descricao": "Justiceiro: o interrogatório",
+   "versoes": [
+    0.0,
+    1.98,
+    4.0289,
+    5.9446
+   ],
+   "duracoes": [
+    1.9,
+    1.9689,
+    1.8357,
+    1.9289
+   ],
+   "bytes": 68428
+  },
   "mu-joia": {
    "arquivo": "mu-joia.mp3",
    "descricao": "Thanos: a Joia do Infinito",
@@ -10796,6 +11051,23 @@
     1.8274
    ],
    "bytes": 64154
+  },
+  "mu-joia-da-mente": {
+   "arquivo": "mu-joia-da-mente.mp3",
+   "descricao": "Visão: a Joia da Mente",
+   "versoes": [
+    0.0,
+    1.98,
+    4.0289,
+    5.9446
+   ],
+   "duracoes": [
+    1.9,
+    1.9689,
+    1.8357,
+    1.9289
+   ],
+   "bytes": 61891
   },
   "mu-juntas": {
    "arquivo": "mu-juntas.mp3",
@@ -10830,6 +11102,23 @@
     1.1372
    ],
    "bytes": 43621
+  },
+  "mu-kakuja": {
+   "arquivo": "mu-kakuja.mp3",
+   "descricao": "Kaneki: os tentáculos de kagune",
+   "versoes": [
+    0.0,
+    1.5964,
+    3.2437,
+    4.788
+   ],
+   "duracoes": [
+    1.5164,
+    1.5673,
+    1.4643,
+    1.5376
+   ],
+   "bytes": 52794
   },
   "mu-laco": {
    "arquivo": "mu-laco.mp3",
@@ -10882,6 +11171,23 @@
    ],
    "bytes": 63307
   },
+  "mu-mana": {
+   "arquivo": "mu-mana.mp3",
+   "descricao": "Frieren: o círculo e as flores de mana",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 79620
+  },
   "mu-modo-serio": {
    "arquivo": "mu-modo-serio.mp3",
    "descricao": "Saitama: o soco sério",
@@ -10898,6 +11204,57 @@
     2.0305
    ],
    "bytes": 74855
+  },
+  "mu-nivel": {
+   "arquivo": "mu-nivel.mp3",
+   "descricao": "Jinwoo: subiu de nível",
+   "versoes": [
+    0.0,
+    1.98,
+    4.0289,
+    5.9446
+   ],
+   "duracoes": [
+    1.9,
+    1.9689,
+    1.8357,
+    1.9289
+   ],
+   "bytes": 57784
+  },
+  "mu-olhos-azuis": {
+   "arquivo": "mu-olhos-azuis.mp3",
+   "descricao": "Kaiba: o Dragão Branco",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 76757
+  },
+  "mu-pecados": {
+   "arquivo": "mu-pecados.mp3",
+   "descricao": "Motoqueiro Fantasma: a corrente em chamas",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2174,
+    6.1564
+   ],
+   "duracoes": [
+    2.0,
+    2.0574,
+    1.859,
+    2.0305
+   ],
+   "bytes": 83141
   },
   "mu-portal": {
    "arquivo": "mu-portal.mp3",
@@ -10932,6 +11289,23 @@
     1.9289
    ],
    "bytes": 80140
+  },
+  "mu-raio-rubi": {
+   "arquivo": "mu-raio-rubi.mp3",
+   "descricao": "Ciclope: o raio sem controle",
+   "versoes": [
+    0.0,
+    1.98,
+    4.0289,
+    5.9446
+   ],
+   "duracoes": [
+    1.9,
+    1.9689,
+    1.8357,
+    1.9289
+   ],
+   "bytes": 71090
   },
   "mu-rastro-flash": {
    "arquivo": "mu-rastro-flash.mp3",
@@ -11001,6 +11375,23 @@
    ],
    "bytes": 46685
   },
+  "mu-simbionte": {
+   "arquivo": "mu-simbionte.mp3",
+   "descricao": "Venom: o simbionte",
+   "versoes": [
+    0.0,
+    1.98,
+    4.0038,
+    5.9196
+   ],
+   "duracoes": [
+    1.9,
+    1.9438,
+    1.8357,
+    1.9289
+   ],
+   "bytes": 70454
+  },
   "mu-sofrimento": {
    "arquivo": "mu-sofrimento.mp3",
    "descricao": "Freeza: a Supernova e a cauda",
@@ -11035,6 +11426,23 @@
    ],
    "bytes": 68110
   },
+  "mu-strix": {
+   "arquivo": "mu-strix.mp3",
+   "descricao": "Loid: a mira e as cargas",
+   "versoes": [
+    0.0,
+    1.6372,
+    3.3298,
+    4.9153
+   ],
+   "duracoes": [
+    1.5572,
+    1.6126,
+    1.5055,
+    1.5804
+   ],
+   "bytes": 52952
+  },
   "mu-tedio": {
    "arquivo": "mu-tedio.mp3",
    "descricao": "Saitama: o tédio",
@@ -11068,6 +11476,23 @@
     0.9679
    ],
    "bytes": 35446
+  },
+  "mu-toque": {
+   "arquivo": "mu-toque.mp3",
+   "descricao": "Vampira: o poder roubado",
+   "versoes": [
+    0.0,
+    1.88,
+    3.8253,
+    5.6444
+   ],
+   "duracoes": [
+    1.8,
+    1.8653,
+    1.7391,
+    1.8274
+   ],
+   "bytes": 64486
   },
   "mu-treino": {
    "arquivo": "mu-treino.mp3",
@@ -11119,6 +11544,23 @@
     2.0305
    ],
    "bytes": 70375
+  },
+  "mu-waku": {
+   "arquivo": "mu-waku.mp3",
+   "descricao": "Anya: a leitura de mente",
+   "versoes": [
+    0.0,
+    1.7759,
+    3.598,
+    5.3196
+   ],
+   "duracoes": [
+    1.6959,
+    1.7421,
+    1.6416,
+    1.7259
+   ],
+   "bytes": 61391
   },
   "mu-zenkai": {
    "arquivo": "mu-zenkai.mp3",
