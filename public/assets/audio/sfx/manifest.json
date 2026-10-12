@@ -767,6 +767,23 @@
    ],
    "bytes": 20847
   },
+  "bastao-do-robin": {
+   "arquivo": "bastao-do-robin.mp3",
+   "descricao": "básico do Robin: o giro, os gomos e a estocada",
+   "versoes": [
+    0.0,
+    1.059,
+    2.0887,
+    3.0493
+   ],
+   "duracoes": [
+    0.979,
+    0.9497,
+    0.8806,
+    0.954
+   ],
+   "bytes": 38991
+  },
   "bastoes-em-cruz": {
    "arquivo": "bastoes-em-cruz.mp3",
    "descricao": "Demolidor: os bastões girando e batendo",
@@ -987,6 +1004,23 @@
     0.5076
    ],
    "bytes": 18866
+  },
+  "blue-rose": {
+   "arquivo": "blue-rose.mp3",
+   "descricao": "básico do Nero: os dois tiros juntos",
+   "versoes": [
+    0.0,
+    1.08,
+    2.1963,
+    3.2424
+   ],
+   "duracoes": [
+    1.0,
+    1.0363,
+    0.9662,
+    1.0152
+   ],
+   "bytes": 37944
   },
   "bochechas-pikachu": {
    "arquivo": "bochechas-pikachu.mp3",
@@ -1617,6 +1651,23 @@
    ],
    "bytes": 44583
   },
+  "caudas-giratorias": {
+   "arquivo": "caudas-giratorias.mp3",
+   "descricao": "básico do Tails: a hélice e os golpes",
+   "versoes": [
+    0.0,
+    1.1572,
+    2.3241,
+    3.4669
+   ],
+   "duracoes": [
+    1.0772,
+    1.0868,
+    1.0628,
+    1.1167
+   ],
+   "bytes": 42680
+  },
   "caveira": {
    "arquivo": "caveira.mp3",
    "descricao": "família caveira",
@@ -1804,6 +1855,23 @@
    ],
    "bytes": 56131
   },
+  "chifrada-do-chopper": {
+   "arquivo": "chifrada-do-chopper.mp3",
+   "descricao": "básico do Chopper: o tropel e a chifrada",
+   "versoes": [
+    0.0,
+    1.08,
+    2.1963,
+    3.2424
+   ],
+   "duracoes": [
+    1.0,
+    1.0363,
+    0.9662,
+    1.0152
+   ],
+   "bytes": 31988
+  },
   "choque-do-pikachu": {
    "arquivo": "choque-do-pikachu.mp3",
    "descricao": "básico de Pikachu: choque elétrico crepitante agudo",
@@ -1854,6 +1922,40 @@
     0.8629
    ],
    "bytes": 28579
+  },
+  "chute-capoeira": {
+   "arquivo": "chute-capoeira.mp3",
+   "descricao": "básico do L: o giro e o chute",
+   "versoes": [
+    0.0,
+    0.9321,
+    1.9277,
+    2.8742
+   ],
+   "duracoes": [
+    0.8521,
+    0.9156,
+    0.8665,
+    0.8633
+   ],
+   "bytes": 30584
+  },
+  "chute-de-sanji": {
+   "arquivo": "chute-de-sanji.mp3",
+   "descricao": "básico do Sanji: o chute e a fumaça",
+   "versoes": [
+    0.0,
+    1.18,
+    2.3691,
+    3.4598
+   ],
+   "duracoes": [
+    1.1,
+    1.1091,
+    1.0107,
+    1.1167
+   ],
+   "bytes": 37399
   },
   "chute-demoniaco": {
    "arquivo": "chute-demoniaco.mp3",
@@ -2024,6 +2126,23 @@
     1.6244
    ],
    "bytes": 48975
+  },
+  "clima-tact": {
+   "arquivo": "clima-tact.mp3",
+   "descricao": "básico da Nami: a nuvenzinha e o raio",
+   "versoes": [
+    0.0,
+    1.18,
+    2.3999,
+    3.5427
+   ],
+   "duracoes": [
+    1.1,
+    1.1399,
+    1.0628,
+    1.1167
+   ],
+   "bytes": 45147
   },
   "clones": {
    "arquivo": "clones.mp3",
@@ -2483,6 +2602,23 @@
     0.6294
    ],
    "bytes": 25294
+  },
+  "corte-santoryu": {
+   "arquivo": "corte-santoryu.mp3",
+   "descricao": "básico do Zoro: os três cortes",
+   "versoes": [
+    0.0,
+    0.9375,
+    1.9651,
+    2.8751
+   ],
+   "duracoes": [
+    0.8575,
+    0.9476,
+    0.83,
+    0.8913
+   ],
+   "bytes": 30847
   },
   "corte-selvagem": {
    "arquivo": "corte-selvagem.mp3",
@@ -7006,6 +7142,23 @@
    ],
    "bytes": 68461
   },
+  "livro-na-cabeca": {
+   "arquivo": "livro-na-cabeca.mp3",
+   "descricao": "básico da Velma: o livro e o tum",
+   "versoes": [
+    0.0,
+    1.1461,
+    2.188,
+    3.2974
+   ],
+   "duracoes": [
+    1.0661,
+    0.9619,
+    1.0294,
+    1.0597
+   ],
+   "bytes": 39330
+  },
   "lotus-shaka": {
    "arquivo": "lotus-shaka.mp3",
    "descricao": "a meditação do Shaka no Preparo",
@@ -7703,6 +7856,23 @@
    ],
    "bytes": 37205
   },
+  "mordida-vampira": {
+   "arquivo": "mordida-vampira.mp3",
+   "descricao": "básico da Marceline: a mordida e o vermelho chupado",
+   "versoes": [
+    0.0,
+    1.18,
+    2.3999,
+    3.5427
+   ],
+   "duracoes": [
+    1.1,
+    1.1399,
+    1.0628,
+    1.1167
+   ],
+   "bytes": 38267
+  },
   "motosserra": {
    "arquivo": "motosserra.mp3",
    "descricao": "família motosserra",
@@ -8042,6 +8212,23 @@
     1.7259
    ],
    "bytes": 42923
+  },
+  "ombrada": {
+   "arquivo": "ombrada.mp3",
+   "descricao": "básico do Fred: a trombada e a rede",
+   "versoes": [
+    0.0,
+    1.18,
+    2.3999,
+    3.5427
+   ],
+   "duracoes": [
+    1.1,
+    1.1399,
+    1.0628,
+    1.1167
+   ],
+   "bytes": 37756
   },
   "omnislash": {
    "arquivo": "omnislash.mp3",
@@ -8808,6 +8995,23 @@
    ],
    "bytes": 32707
   },
+  "pulo-do-luigi": {
+   "arquivo": "pulo-do-luigi.mp3",
+   "descricao": "básico do Luigi: o pulo e a pisada",
+   "versoes": [
+    0.0,
+    1.1798,
+    2.3461,
+    3.5059
+   ],
+   "duracoes": [
+    1.0998,
+    1.0863,
+    1.0798,
+    1.1395
+   ],
+   "bytes": 38307
+  },
   "pulso-emp": {
    "arquivo": "pulso-emp.mp3",
    "descricao": "família pulso emp",
@@ -8909,6 +9113,23 @@
     1.1167
    ],
    "bytes": 46011
+  },
+  "punho-espinhoso": {
+   "arquivo": "punho-espinhoso.mp3",
+   "descricao": "básico do Knuckles: o soco e as pedras",
+   "versoes": [
+    0.0,
+    1.18,
+    2.3999,
+    3.5427
+   ],
+   "duracoes": [
+    1.1,
+    1.1399,
+    1.0628,
+    1.1167
+   ],
+   "bytes": 44800
   },
   "punho-esticado": {
    "arquivo": "punho-esticado.mp3",
@@ -11001,6 +11222,23 @@
    ],
    "bytes": 14225
   },
+  "tapa-real": {
+   "arquivo": "tapa-real.mp3",
+   "descricao": "básico da Peach: o tapa estalado e os brilhos",
+   "versoes": [
+    0.0,
+    0.951,
+    1.9626,
+    2.8922
+   ],
+   "duracoes": [
+    0.871,
+    0.9315,
+    0.8497,
+    0.8785
+   ],
+   "bytes": 34894
+  },
   "teia": {
    "arquivo": "teia.mp3",
    "descricao": "família teia",
@@ -11306,6 +11544,23 @@
     1.1167
    ],
    "bytes": 45820
+  },
+  "tiro-nervoso": {
+   "arquivo": "tiro-nervoso.mp3",
+   "descricao": "básico do Morty: o tiro que erra e o de raspão",
+   "versoes": [
+    0.0,
+    1.1692,
+    2.3891,
+    3.5319
+   ],
+   "duracoes": [
+    1.0892,
+    1.1399,
+    1.0628,
+    1.1167
+   ],
+   "bytes": 34914
   },
   "tiro-preciso": {
    "arquivo": "tiro-preciso.mp3",

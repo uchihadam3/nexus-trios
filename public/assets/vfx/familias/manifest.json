@@ -629,6 +629,20 @@
   "laco": false,
   "bytes": 45154
  },
+ "bastao_do_robin": {
+  "descricao": "Básico do Robin: o bastão gira e estica",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 13824
+ },
  "bastoes_em_cruz": {
   "descricao": "Demolidor · os dois bastões em X",
   "quadros": 12,
@@ -810,6 +824,20 @@
   ],
   "laco": false,
   "bytes": 28502
+ },
+ "blue_rose": {
+  "descricao": "Básico do Nero: os dois tiros da Blue Rose",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 14108
  },
  "bochechas_pikachu": {
   "descricao": "Pikachu · as bochechas faiscando (ergue)",
@@ -1483,6 +1511,20 @@
   "laco": true,
   "bytes": 31100
  },
+ "caudas_giratorias": {
+  "descricao": "Básico do Tails: as duas caudas girando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 26144
+ },
  "caveira": {
   "descricao": "caveira de luz",
   "quadros": 12,
@@ -1665,6 +1707,20 @@
   "laco": true,
   "bytes": 75576
  },
+ "chifrada_do_chopper": {
+  "descricao": "Básico do Chopper: a galhada correndo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 21018
+ },
  "choque_do_pikachu": {
   "descricao": "básico do Pikachu: faíscas em zigue-zague e bochechas crepitando",
   "quadros": 12,
@@ -1692,6 +1748,34 @@
   ],
   "laco": false,
   "bytes": 35112
+ },
+ "chute_capoeira": {
+  "descricao": "Básico do L: o giro de ponta-cabeça",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 15460
+ },
+ "chute_de_sanji": {
+  "descricao": "Básico do Sanji: o chute em arco e a fumaça",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 21132
  },
  "chute_demoniaco": {
   "descricao": "Nezuko: chute em arco e o sangue explode em chamas",
@@ -1832,6 +1916,20 @@
   ],
   "laco": false,
   "bytes": 19224
+ },
+ "clima_tact": {
+  "descricao": "Básico da Nami: a nuvenzinha e o raio",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 18690
  },
  "clones": {
   "descricao": "silhuetas em leque",
@@ -2252,6 +2350,20 @@
   ],
   "laco": false,
   "bytes": 40488
+ },
+ "corte_santoryu": {
+  "descricao": "Básico do Zoro: os três cortes juntos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 25972
  },
  "corte_selvagem": {
   "descricao": "Kenpachi · três cortes serrilhados",
@@ -6103,6 +6215,20 @@
   "laco": true,
   "bytes": 64668
  },
+ "livro_na_cabeca": {
+  "descricao": "Básico da Velma: o livro voando e as estrelinhas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 12414
+ },
  "lotus_shaka": {
   "descricao": "Shaka · a mandala dourada girando (laço)",
   "quadros": 12,
@@ -6705,6 +6831,20 @@
   "laco": false,
   "bytes": 80544
  },
+ "mordida_vampira": {
+  "descricao": "Básico da Marceline: as presas e o vermelho chupado",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 18686
+ },
  "motosserra": {
   "descricao": "dentes de serra girando",
   "quadros": 12,
@@ -6928,6 +7068,20 @@
   ],
   "laco": false,
   "bytes": 37478
+ },
+ "ombrada": {
+  "descricao": "Básico do Fred: a ombrada e a rede",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 22114
  },
  "omnislash": {
   "descricao": "Cloud · Omnislash: os cortes de todos os lados e o final",
@@ -7615,6 +7769,20 @@
   "laco": false,
   "bytes": 75352
  },
+ "pulo_do_luigi": {
+  "descricao": "Básico do Luigi: o pulo alto e a pisada",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 20722
+ },
  "pulso_de_energia": {
   "descricao": "pulso de energia",
   "quadros": 12,
@@ -7712,6 +7880,20 @@
   ],
   "laco": false,
   "bytes": 26020
+ },
+ "punho_espinhoso": {
+  "descricao": "Básico do Knuckles: a luva de espinhos e as pedras",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 18888
  },
  "punho_esticado": {
   "descricao": "Básico do Jake: o braço de borracha e o boing",
@@ -9519,6 +9701,20 @@
   "laco": false,
   "bytes": 35174
  },
+ "tapa_real": {
+  "descricao": "Básico da Peach: a luva, o tapa e os brilhinhos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 16348
+ },
  "teia_bola": {
   "descricao": "bola de teia em viagem (+x)",
   "quadros": 12,
@@ -9840,6 +10036,20 @@
   ],
   "laco": true,
   "bytes": 7284
+ },
+ "tiro_nervoso": {
+  "descricao": "Básico do Morty: o tiro que erra e o de raspão",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 9646
  },
  "tiro_preciso": {
   "descricao": "mira travando e tiro",
