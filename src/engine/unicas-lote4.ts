@@ -120,14 +120,16 @@ export const LOTE4: Record<string, Unica> = {
   },
   rimuru: {
     nome: 'Corpo que se adapta',
-    texto: 'Depois de pegar o mesmo Status ruim 2 vezes, Rimuru Tempest fica imune a esse Status até o fim da luta.',
+    texto: 'Depois de pegar um Status ruim uma vez, Rimuru Tempest se adapta: fica imune a esse Status até o fim da luta.',
     ganchos: {
+      // pedido do jogador: "depois que é aplicado em você uma vez, você aprende e fica imune"
       pegouStatus(m, b, f, s) {
         const k = `visto_${s}`;
-        u(f)[k] = (u(f)[k] ?? 0) + 1;
-        if (u(f)[k] === 2) m.aviso(b, f, 'Analisado: imune', f);
+        if (u(f)[k]) return;
+        u(f)[k] = 1;
+        m.aviso(b, f, 'Analisado: imune', f);
       },
-      imune: (f, s) => (u(f)[`visto_${s}`] ?? 0) >= 2,
+      imune: (f, s) => (u(f)[`visto_${s}`] ?? 0) >= 1,
     },
   },
   ainz: {
