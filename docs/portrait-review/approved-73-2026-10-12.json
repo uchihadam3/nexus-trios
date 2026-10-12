@@ -1,0 +1,680 @@
+{
+  "date": "2026-10-12",
+  "approved_count": 73,
+  "entries": [
+    {
+      "id": "mrfreeze",
+      "selection": {
+        "type": "generated",
+        "filename": "exec-ea5cc576-d772-4b92-8573-ee871303cda1.png"
+      },
+      "source_sha256": "8f304ab892122fc3ab31003a7ee499850a3d5c41072bcd22fc5a463517c3b307",
+      "game_sha256": "1ac2df4a060f9c6ed6298847b04f192a150659fbcd07825b9e802cb0c7996952"
+    },
+    {
+      "id": "iceman",
+      "selection": {
+        "type": "generated",
+        "filename": "exec-2e47f918-26a4-4440-a624-d648868cbe7d.png"
+      },
+      "source_sha256": "bd529029c9498ba34a2c47554eac7ef31dc1d1813223b9018f60ed37e956b869",
+      "game_sha256": "3933e6b4faa91e2a42eb2352d8cf426bfba0e30268dbf22df37bfdbb4f96ad32"
+    },
+    {
+      "id": "heihachi",
+      "selection": {
+        "type": "generated",
+        "filename": "exec-1093e8dc-085d-4959-8736-cffc0a5aa580.png"
+      },
+      "source_sha256": "5dae5839dc130febf89716b544a94bc6745909252e2eabc3d178a94808903f3b",
+      "game_sha256": "3302ea54ddbe35c5952e505d412efeddf3ee58afe3baec2cb890f7762300b45b"
+    },
+    {
+      "id": "nero",
+      "selection": {
+        "type": "generated",
+        "filename": "exec-daed3e75-7042-43c1-a721-de942f0faf2c.png"
+      },
+      "source_sha256": "5e85fd31ff2f9f09c6a0c08f3d9f81aecd39ad4e48a06eaa49b88bd8adf5e2ce",
+      "game_sha256": "f3bf395b8f23c2a504972078457b8fdf129e24763de3a912c7bb060041954161"
+    },
+    {
+      "id": "kitana",
+      "selection": {
+        "type": "generated",
+        "filename": "exec-d47a9370-ac2d-481d-87e2-dd8e234dec0b.png"
+      },
+      "source_sha256": "cb5e662c5d858a345a79a0cd40254f902fa15af84558db97fff263035b3375e7",
+      "game_sha256": "54479a52cc512d3598f15d0a803cb1a19e226c3dfb42b98c304f76dcb5a7b47c"
+    },
+    {
+      "id": "shaokahn",
+      "selection": {
+        "type": "generated",
+        "filename": "exec-8630de56-7a22-4a5f-833b-2f9557a5801b.png"
+      },
+      "source_sha256": "50e7175a2490293ccc5b352b6195288cb754ac7971b491c200b8f718e9a75290",
+      "game_sha256": "9e0cdc68ab94b814d1be3074f570dbdd38173dadc5853fea2e69cc5251e9db17"
+    },
+    {
+      "id": "drax",
+      "selection": {
+        "type": "generated",
+        "filename": "exec-7df16964-76c0-4b62-b342-7dae65c2aed6.png"
+      },
+      "source_sha256": "67dc20574d259e257cb1832d2c4df9e1dc198d6af37f1399bf31e8c3d171e3b2",
+      "game_sha256": "11eb0f115a85c6c6e31dd6863c5a7f0c3626c34b360d804646d99a0ceb987000"
+    },
+    {
+      "id": "nightwing",
+      "selection": {
+        "type": "generated",
+        "filename": "exec-f264700f-8bfb-45e0-b4f2-7accc9b7db2d.png"
+      },
+      "source_sha256": "b6e6138b98077cd81b6903451b7e6aaf6e00be2ac58adff49fe50189d3f13686",
+      "game_sha256": "1f60eaa051d772d29f137f88b3c0d95cfc016958309eecd957a655537143984b"
+    },
+    {
+      "id": "yennefer",
+      "selection": {
+        "type": "generated",
+        "filename": "exec-c0a484a3-ce03-4470-a33f-348c2e898f37.png"
+      },
+      "source_sha256": "aa416ed2e8cd058735390949e781b079a8e8a78f8815775d4ee93e5b82901865",
+      "game_sha256": "00345eba8470376db0eea55503ade7af5050dc36d334a50f0c4be5ca77af266d"
+    },
+    {
+      "id": "nemesis",
+      "selection": {
+        "type": "generated",
+        "filename": "exec-e1bd73e0-d284-4c9a-a8a0-fb92ca0e9788.png"
+      },
+      "source_sha256": "870767735276bb710ae7d688b63c415d7cd11077cea43f72c796db9cbba0b720",
+      "game_sha256": "3f689912ae6f383e9457890f25ce8f9698584851170fd550dc2978f988ab7589"
+    },
+    {
+      "id": "athena",
+      "selection": {
+        "type": "generated",
+        "filename": "exec-e16578f8-03c4-4bac-a737-cac20cc89bb1.png"
+      },
+      "source_sha256": "914d3ede0bd37c4318893cbc64a8535e5580cd979456ab2343a7e18ed84212ed",
+      "game_sha256": "409020018e63b42dcda1d9c6e02a9b55c7963f4714bcc021f40c92035fca34a7"
+    },
+    {
+      "id": "medusa",
+      "selection": {
+        "type": "generated",
+        "filename": "exec-807add3b-486a-4436-95cf-30693466fe98.png"
+      },
+      "source_sha256": "4b6a17e4a29397aebf2eaef390eb6f673a2f92ab34a0fcbf1db5c560d6d81a89",
+      "game_sha256": "cb5eeb77aedfe140ee246620ecbf4bb484596ab40dcc5ad17084a988285570ba"
+    },
+    {
+      "id": "set",
+      "selection": {
+        "type": "generated",
+        "filename": "exec-3ea1cb81-d7a8-4d26-bb3b-0b4b7c154cb8.png"
+      },
+      "source_sha256": "f5928b41c77e4be6fa9706832b6cd201cf744bd58a185fffbd88ba1001a9aaa7",
+      "game_sha256": "f304febff1ce9f0fcffae17e8c71ab705502d7c05412873f37da7739f43b3443"
+    },
+    {
+      "id": "isis",
+      "selection": {
+        "type": "generated",
+        "filename": "exec-4b6859e1-f404-4959-bd37-ef3b5e974441.png"
+      },
+      "source_sha256": "044fd64eb695467429ef4aafc3800008a3724d8ec33d6d2ffb4df75ff83e8a3e",
+      "game_sha256": "344e5c00b4037655d5f1c8dba784cc0ad50b058e3c4722e445e5b699ed529deb"
+    },
+    {
+      "id": "horus",
+      "selection": {
+        "type": "generated",
+        "filename": "exec-55895d45-599a-45f5-9cc3-b66d9b564c9e.png"
+      },
+      "source_sha256": "764141c5f9b4ae2a1ae302ff02963d335130c6b3a1bfb358b19fbbdddd4d0ea3",
+      "game_sha256": "d884ca45285f46189d735c886bb2adc969453ca3287d9884a640c9cd19af9e75"
+    },
+    {
+      "id": "sekhmet",
+      "selection": {
+        "type": "generated",
+        "filename": "exec-f33a5f9e-93c9-4d98-a349-001ac3e04b74.png"
+      },
+      "source_sha256": "1c49a82a8aa6dbb529455d8f467148a4c649892d221b2768ee341a9f359011ae",
+      "game_sha256": "58342f8cb7c9ce3d0e3b5506ac276de8c1ba3bf5d06c9446e5b7fabbd544eb5b"
+    },
+    {
+      "id": "odin",
+      "selection": {
+        "type": "generated",
+        "filename": "exec-b41bc435-626d-43c9-9e3d-a523fe8e64bc.png"
+      },
+      "source_sha256": "0f656003efaf006f74ffe2b2935b52a1c90b0e724a4763bdad161a29d4ac14b9",
+      "game_sha256": "ea8fad02a80c0d8697d145e70d4c64a2b5c8a5a8d69758e041f8305f31876c17"
+    },
+    {
+      "id": "fenrir",
+      "selection": {
+        "type": "generated",
+        "filename": "exec-190b9779-ea3a-4d3e-937c-b7208ab4428b.png"
+      },
+      "source_sha256": "33845ebee4e246803afdff34fba4e1f83342153e701a7c6faac552a6925fdedd",
+      "game_sha256": "88d7603b5669a45e223dfb297e219e4e7e68ccc33f0852a74ae3547eb1b56edc"
+    },
+    {
+      "id": "hel",
+      "selection": {
+        "type": "generated",
+        "filename": "exec-f359bcd8-7ba3-4870-b0b6-a66a4bae371a.png"
+      },
+      "source_sha256": "943a423bb69f629b9fa2d1d927a81cc11b6fbd583c3eea22ef621deec5efefc4",
+      "game_sha256": "0cee332fafaa7f2ce14564edd7dcea58a9f3a596980e4a73aba8a7eab1bf3ef8"
+    },
+    {
+      "id": "jason",
+      "selection": {
+        "type": "generated",
+        "filename": "exec-95988ccf-c499-4805-bdc6-476e3860b5c1.png"
+      },
+      "source_sha256": "23fdc479d743ddd88445c9568f82db7821bebef5b0357a48039ddb473b7ae5d3",
+      "game_sha256": "771bff81785e170291d42c541189e42b071a3bec998563cab45a379d6c8215d1"
+    },
+    {
+      "id": "freddy",
+      "selection": {
+        "type": "generated",
+        "filename": "exec-b06c3c05-6ebe-4f87-86bf-ad498e1b4b24.png"
+      },
+      "source_sha256": "4cb6f640b706427c7542995068f16ce7c7f8f5ef32b0f8518f6b588c7588295a",
+      "game_sha256": "535405b03661b9e3c4327767f4252aacf7be877c74fd1543b42a379529481b35"
+    },
+    {
+      "id": "michaelmyers",
+      "selection": {
+        "type": "generated",
+        "filename": "exec-027babb9-4ae2-4626-a78b-cd22db2d20b1.png"
+      },
+      "source_sha256": "f9cf1f5b217d33deb3587b6fbfa1af826fabf8f923005574fdb248e0ce1ebbfe",
+      "game_sha256": "1f71f6dbe4e59bb90df00f34281e22eccd01df4e9db4abc0123a98f6e495b261"
+    },
+    {
+      "id": "chucky",
+      "selection": {
+        "type": "generated",
+        "filename": "exec-8a910a76-e32b-4b23-a2c9-27b6bfb0724b.png"
+      },
+      "source_sha256": "9319fe4fb1fb3ee1413bd1941e1393c08f53c455d88b26cc49a996a83cc6fe10",
+      "game_sha256": "ced249667b58a74236c5712a5c26ac29b888150009d5fa957590ab6fbd4dfc19"
+    },
+    {
+      "id": "ghostface",
+      "selection": {
+        "type": "generated",
+        "filename": "exec-c91179b7-a584-4224-8db2-9b065787721a.png"
+      },
+      "source_sha256": "81d6680e89ea16ea59df0b5aae03a8e7c07878b41b71a17b4a8eaa1e95aeb0d7",
+      "game_sha256": "e23f9a7ca5677cc217821122aed467a18103f7b7fb10d3619b0ae0b8f093455e"
+    },
+    {
+      "id": "leatherface",
+      "selection": {
+        "type": "generated",
+        "filename": "exec-0f622970-cfc1-4b61-acb4-c8ec24da44fa.png"
+      },
+      "source_sha256": "0f875a2c8b0c6e7e3180c6bddca18c926f0c023f1a4ac51a5e7b30602319a46f",
+      "game_sha256": "ed86f604809cf706df2edd83921de0c3a466ced8ec3638a0ac6861417505623d"
+    },
+    {
+      "id": "pinhead",
+      "selection": {
+        "type": "generated",
+        "filename": "exec-2991263d-5ee8-4083-8b47-8cd3fae55380.png"
+      },
+      "source_sha256": "e3677d83b29320474c5a44192e4d2a23cd73e13573fb247d0d1ceb92f75879c7",
+      "game_sha256": "02c93a9df6959f43a7d9d1c1c20ed24188227b43580b1351458b3da363583c98"
+    },
+    {
+      "id": "samara",
+      "selection": {
+        "type": "generated",
+        "filename": "exec-e591906d-abf3-4cfc-a44e-73acc04de7f6.png"
+      },
+      "source_sha256": "8107d1b559c6ac5fef6509d050be3b6a90d48d9255af23ec394974fad6f8ddad",
+      "game_sha256": "040ab3fc8033ed302a95a7446729296f29f37670606606dfe94018da93956e0f"
+    },
+    {
+      "id": "valak",
+      "selection": {
+        "type": "generated",
+        "filename": "exec-2d3e3edb-61f8-48c3-883f-101e0057e9c7.png"
+      },
+      "source_sha256": "87b68aff5becb68e6637135e73ea51f4d9b9b0dbb89568c12ea344d6a32e1baa",
+      "game_sha256": "bc7c6d2372ed5495af09651dd38d63530a73e3a0cd5b2de70f57db11fae18314"
+    },
+    {
+      "id": "dracula",
+      "selection": {
+        "type": "generated",
+        "filename": "exec-c82c00fb-30e7-48f2-8dd4-81204f13524d.png"
+      },
+      "source_sha256": "2d2bb470eceeb7bc896379bc2067da8df549aebaed1d48a08e7f1e1401ab4efe",
+      "game_sha256": "7f532c268cff3a490b5429b2c3c4e912f2116e933ced27f5bd2e7c1f662fb241"
+    },
+    {
+      "id": "predator",
+      "selection": {
+        "type": "generated",
+        "filename": "exec-5232f6c9-c734-4977-9772-be4e654903c2.png"
+      },
+      "source_sha256": "3edf728782df1c78e4b10c8d5b3f1ee579fe1eba610cb97cc994dd7a09191674",
+      "game_sha256": "37f9fe6016c4eaa38fd96a6095c26da39669085bfd591b62e4849b525ee06f38"
+    },
+    {
+      "id": "neo",
+      "selection": {
+        "type": "generated",
+        "filename": "exec-c52bbf9c-7be0-439a-8378-0b9632fe1b06.png"
+      },
+      "source_sha256": "1df81fa9e10b7367f5be1ce2fb9dfab1844bd93d4c5b83af7f3f67abcfe01cb4",
+      "game_sha256": "2479722b3244962fcddf0b09c6f5dc5cfa67622d223c605f4302e02d2c5f2eeb"
+    },
+    {
+      "id": "agentsmith",
+      "selection": {
+        "type": "generated",
+        "filename": "exec-d3802303-0664-4686-83a6-6cc6708aeeae.png"
+      },
+      "source_sha256": "b6725727d5e2499a8c1e6cc461dde3d765b67d19602a0c7ea7de3bdaddf92ae2",
+      "game_sha256": "ee03abb953bd77e4ad40d84c8f08a0524d29c9ddbdb268cfccda40d28094b388"
+    },
+    {
+      "id": "johnwick",
+      "selection": {
+        "type": "generated",
+        "filename": "exec-d6024cb8-fe82-4eed-a43c-4a10e4c1ab93.png"
+      },
+      "source_sha256": "8c354f783846a652c15ea8d1dbef6b596db9cd2be919a7385bcbf55fec129380",
+      "game_sha256": "41ba2885a3a63dcae34760c1b9cb7984470bf2734c334aa297981cb22833106f"
+    },
+    {
+      "id": "t800",
+      "selection": {
+        "type": "generated",
+        "filename": "exec-1de5f805-bab7-4260-b7e1-acf4bf54e535.png"
+      },
+      "source_sha256": "9a5520d6aff9967731128671767edb2b25f652ea45662861eeec795b29d7f852",
+      "game_sha256": "3112176554f03fad85908ad520aae6a02b34e5262911ec566cda697755e9ecf0"
+    },
+    {
+      "id": "robocop",
+      "selection": {
+        "type": "generated",
+        "filename": "exec-c5bd938d-c08d-44df-b528-de4066a633e4.png"
+      },
+      "source_sha256": "86edd85ac9737547e6bb84f1cacddb8383b68c1774b52d9d9789a1f92fb65d56",
+      "game_sha256": "48047c2c733085d986646a4ea674fa9cbd4c8a36a881f64ad61b28082bad2715"
+    },
+    {
+      "id": "rambo",
+      "selection": {
+        "type": "generated",
+        "filename": "exec-8f1a9d50-c336-4183-a5e7-f04d8fd60a59.png"
+      },
+      "source_sha256": "e82ef82b719b3d88e3cf739af405c85c61f002d14fe16b26d8526a3695faabb1",
+      "game_sha256": "62bbc10b3d74fd30268cd671f32e8e1e31479a58778cb99067eaed58ce78579c"
+    },
+    {
+      "id": "indianajones",
+      "selection": {
+        "type": "generated",
+        "filename": "exec-e9700de7-2af9-4e38-b4e5-18691a8cdf94.png"
+      },
+      "source_sha256": "11486a6117fb376b0dfc4c6cb339e13f4754929131681fbd80a8315643be38fe",
+      "game_sha256": "9a34b353e26b70674692166b3bc451477ba0585a556a2a1ac7bc571e6227d77a"
+    },
+    {
+      "id": "gandalf",
+      "selection": {
+        "type": "generated",
+        "filename": "exec-5e3e6ff5-c1f6-48b6-97b5-856d3108fc67.png"
+      },
+      "source_sha256": "ada29f1df003d993079b81c8f29b8236ade800c02d19cc834a564e4d47cb0b69",
+      "game_sha256": "51ccfbd3f6d3eccbb9be1c2372927de2c91b0d85fcd470fb9d74469cd1d7c0b4"
+    },
+    {
+      "id": "kingkong",
+      "selection": {
+        "type": "generated",
+        "filename": "exec-5b894519-6b0b-4e7a-8e0a-6fef65b22a6b.png"
+      },
+      "source_sha256": "505a7efdcb3e6a4b4721465794aedb5f8c312ad00665e0dded1f1ff473ed17c1",
+      "game_sha256": "d71fae2a09f3756b36de86768f777be14df7cbbf87950c2fa8d37add2e91d4ac"
+    },
+    {
+      "id": "steven",
+      "selection": {
+        "type": "generated",
+        "filename": "exec-f8531fcb-7419-4c71-abfc-4a8f51d850ea.png"
+      },
+      "source_sha256": "812087ffb7b6d70a21681f7da5cc96426af1005b59d68dda1e211de3092a1f5b",
+      "game_sha256": "1e0b98357bfeadabe0e1ba5671c6ff2c2384ae6089d8187c20a1d13f6510bba1"
+    },
+    {
+      "id": "garnet",
+      "selection": {
+        "type": "generated",
+        "filename": "exec-d51193cf-8d1d-4dcd-8d32-abed5dca2238.png"
+      },
+      "source_sha256": "ca8f2812cf3fa5da8e41a49ad51bee30d3980899da124418de4762eafd0bc0ec",
+      "game_sha256": "b3f0bab7cac743d5805a867441e3640a9202fa507a1a1002595525c5257e3f8d"
+    },
+    {
+      "id": "johnnybravo",
+      "selection": {
+        "type": "generated",
+        "filename": "exec-b1a6064a-a4f6-4fa0-9504-5b4715ea303a.png"
+      },
+      "source_sha256": "ea4758cdb58a2a905786f4812f95367a3a1e86d859f7f3a6ba1881c61a0b43e5",
+      "game_sha256": "93ad09492bca56643413918349cddd9bca03b1006a5a2f191075f1db71c24024"
+    },
+    {
+      "id": "dexter",
+      "selection": {
+        "type": "generated",
+        "filename": "exec-a6260ae7-89a4-4768-873b-946c0fa58311.png"
+      },
+      "source_sha256": "8f1f2efc11607254bc081bf8d57410d38e12bc42a72d21f36aa8b85f2e2f8ff9",
+      "game_sha256": "0b0d2b2b64f535b76d9b02868b61f910a64567f32d582bf49286e54737efc8ab"
+    },
+    {
+      "id": "aku",
+      "selection": {
+        "type": "generated",
+        "filename": "exec-76b34b9c-328d-4dd7-9544-a9851b5fa47d.png"
+      },
+      "source_sha256": "acc88b5621d6f7af26ccbcfd3e6b3c5aa39a06fbaf47655d138b1db264c36fff",
+      "game_sha256": "df4d424ab848b73440a80a18434bcd27f19bcc1726eafbbee4d2ed74b870fd0c"
+    },
+    {
+      "id": "vilgax",
+      "selection": {
+        "type": "generated",
+        "filename": "exec-83cab6be-b67e-4216-97b8-1427a25b1929.png"
+      },
+      "source_sha256": "163ee132b251442b19d18de5179c9ee400d749eb91de4f5c3efa37641729b166",
+      "game_sha256": "d2cf6da27c321cee2aec546763332f2d3cfadb8f2e8cf8b594ce0f28e7f0dde5"
+    },
+    {
+      "id": "cosmowanda",
+      "selection": {
+        "type": "generated",
+        "filename": "exec-4a7a9ca1-596b-4b79-8f95-dd4522841462.png"
+      },
+      "source_sha256": "25683b8bfcb0a63524714a4a89a270bb8b2bbf7e4d0dfa430fba6757f70a1fde",
+      "game_sha256": "337b72e792d5fd19276665e710bac66ba3f49f33f28902b2078623144cd0b3bf"
+    },
+    {
+      "id": "creeper",
+      "selection": {
+        "type": "generated",
+        "filename": "exec-1b3add1a-ea67-4ddb-88fe-1df75fcac06e.png"
+      },
+      "source_sha256": "9dc69c43728627c8e87ad663c019e8d8df76bdfccd1a7ea2c05a075054b8666b",
+      "game_sha256": "cf6894e9e0968d519791634ffce85dfb78f48d55eb7c25f1a678080f76742989"
+    },
+    {
+      "id": "pacman",
+      "selection": {
+        "type": "generated",
+        "filename": "exec-3be9a47e-cb67-455d-8d0f-4a3b5cd68d5e.png"
+      },
+      "source_sha256": "587ee522a560c1fa752b75587aeefcda9c4e343d29fe7d1068d40ab350468a05",
+      "game_sha256": "b7dde3605e643f17ac023b4eae996f3585e580826f5dd23eb8a2582685e70cef"
+    },
+    {
+      "id": "crash",
+      "selection": {
+        "type": "generated",
+        "filename": "exec-564fe9a1-9363-4486-8d0b-c9efb765f18b.png"
+      },
+      "source_sha256": "fbf9a44905ab2975c9af08b7f4f87644d99c4d242e2e330eedd4ae08217ae58d",
+      "game_sha256": "279a2ad1f180a153e4f1a38cd5f95c553d677f46916b1a9ff69ba73173a6fa7d"
+    },
+    {
+      "id": "arthurmorgan",
+      "selection": {
+        "type": "generated",
+        "filename": "exec-3dcf580a-b13d-4868-b7f0-6ed28a9cd9bf.png"
+      },
+      "source_sha256": "3f6000c7e55855c5290703269eb560b3674cfe70b0ff624ac2c60a2e0c5482f4",
+      "game_sha256": "fdb38e6cca8f310386b233742bf763867b62d417b33dade29953f7a76de1dd82"
+    },
+    {
+      "id": "ellie",
+      "selection": {
+        "type": "generated",
+        "filename": "exec-9af23bf3-4de7-448d-b690-9b06ce33dde3.png"
+      },
+      "source_sha256": "d6c59b84608d3cce7903cd953b6a90dd66ef8bc1d270b4fbc2be078473d33069",
+      "game_sha256": "f0869f8cc0c3647d4e99b959e91cde59196a82b037e2fd88c500c9c54c5ba046"
+    },
+    {
+      "id": "sans",
+      "selection": {
+        "type": "generated",
+        "filename": "exec-9e3a6322-c650-4c9d-bd73-0d54c1b65761.png"
+      },
+      "source_sha256": "08de6938ac4db0aebb31d12be4d70217a813934d277eb17e039a6829024a703b",
+      "game_sha256": "45bd60108f41763ecc111d41095bfe6175a83f9437a0cfd27d42515b041f6d5f"
+    },
+    {
+      "id": "cuphead",
+      "selection": {
+        "type": "generated",
+        "filename": "exec-50b9b0d6-afc2-4fe8-a68a-679cbba41fe9.png"
+      },
+      "source_sha256": "5fa5b40307a308a10f0289c1debc45604d87c6b8e92c96518a53561892709529",
+      "game_sha256": "45cf60b6870525f73a9c53338dcbd08d35ced793d1dc67867e0d0dfdcf29ee2e"
+    },
+    {
+      "id": "dovahkiin",
+      "selection": {
+        "type": "generated",
+        "filename": "exec-5b5df3dc-cfb1-49f6-8854-459235357086.png"
+      },
+      "source_sha256": "86cae82f1ca9c5ae333855accc22118688eeb2f23f0e3fc3553c42dae5ae8cf8",
+      "game_sha256": "0fc774639cb32617a0a7e625bc3b113248fb5704b6891f1f59d1cde7f44edb92"
+    },
+    {
+      "id": "hollowknight",
+      "selection": {
+        "type": "generated",
+        "filename": "exec-8c8cb4fd-ebc0-4d63-bace-c4fe1d91ba0e.png"
+      },
+      "source_sha256": "98751d94f714fa4606af160c3990f1a2df0ae438b7598131ec456a8f8feb8045",
+      "game_sha256": "de05470bb7805f469a3f2d0d186cc77d4f3321a97a6b12ebaf2ead69eaf48c18"
+    },
+    {
+      "id": "goro",
+      "selection": {
+        "type": "generated",
+        "filename": "exec-2f1eba20-9bdd-4104-8062-636fe4898244.png"
+      },
+      "source_sha256": "97d6aff127144fe2459dcf6307c8c1afa1377ebf5f89d2eae2e8a5a95253f6c3",
+      "game_sha256": "98ea94c6e0e30d7236dd1532ab30ce8f143b287dd7242fcea2020e0538f82fc5"
+    },
+    {
+      "id": "hinata",
+      "selection": {
+        "type": "approved_contact_sheet",
+        "sheet": "Nexus_Trios_Retratos_21-40.png",
+        "number": 22
+      },
+      "source_sha256": "27549450e1bcd2df3217860e03c8d7c08878ac062d1b3aed7d66dfa372019f8e",
+      "game_sha256": "27549450e1bcd2df3217860e03c8d7c08878ac062d1b3aed7d66dfa372019f8e"
+    },
+    {
+      "id": "tsunade",
+      "selection": {
+        "type": "approved_contact_sheet",
+        "sheet": "Nexus_Trios_Retratos_21-40.png",
+        "number": 24
+      },
+      "source_sha256": "1243341a578b1e7457ef31b89efea4370102c2c2d519821c6eddac4ba862e143",
+      "game_sha256": "1243341a578b1e7457ef31b89efea4370102c2c2d519821c6eddac4ba862e143"
+    },
+    {
+      "id": "sailormars",
+      "selection": {
+        "type": "approved_contact_sheet",
+        "sheet": "Nexus_Trios_Retratos_21-40.png",
+        "number": 25
+      },
+      "source_sha256": "f74bc7442b41703902640180cb86d2b514822f748fa3cb854dea75ee30b6e733",
+      "game_sha256": "f74bc7442b41703902640180cb86d2b514822f748fa3cb854dea75ee30b6e733"
+    },
+    {
+      "id": "kirito",
+      "selection": {
+        "type": "approved_contact_sheet",
+        "sheet": "Nexus_Trios_Retratos_21-40.png",
+        "number": 26
+      },
+      "source_sha256": "7a23312736d40c0fe50c63a230f07ed56a09f84c54226ae3f19be445d572a0bc",
+      "game_sha256": "7a23312736d40c0fe50c63a230f07ed56a09f84c54226ae3f19be445d572a0bc"
+    },
+    {
+      "id": "jiraiya",
+      "selection": {
+        "type": "approved_contact_sheet",
+        "sheet": "Nexus_Trios_Retratos_21-40.png",
+        "number": 27
+      },
+      "source_sha256": "919324f8a8b7c5ebf4cf3cbc1bebf4fb00edc40f21c81f719fce6f1d516e1420",
+      "game_sha256": "919324f8a8b7c5ebf4cf3cbc1bebf4fb00edc40f21c81f719fce6f1d516e1420"
+    },
+    {
+      "id": "senku",
+      "selection": {
+        "type": "approved_contact_sheet",
+        "sheet": "Nexus_Trios_Retratos_21-40.png",
+        "number": 28
+      },
+      "source_sha256": "7119e7249e96efe8b11162cd81d0d514aa04a0a4c41ec2194bc4dd85cb563dbb",
+      "game_sha256": "7119e7249e96efe8b11162cd81d0d514aa04a0a4c41ec2194bc4dd85cb563dbb"
+    },
+    {
+      "id": "zeus",
+      "selection": {
+        "type": "approved_contact_sheet",
+        "sheet": "Nexus_Trios_Retratos_21-40.png",
+        "number": 29
+      },
+      "source_sha256": "4a47eba6b5f490643824a0419936a3418b2df0a6c6f20410fb27e25fa4cacced",
+      "game_sha256": "4a47eba6b5f490643824a0419936a3418b2df0a6c6f20410fb27e25fa4cacced"
+    },
+    {
+      "id": "poseidon",
+      "selection": {
+        "type": "approved_contact_sheet",
+        "sheet": "Nexus_Trios_Retratos_21-40.png",
+        "number": 30
+      },
+      "source_sha256": "df5b8b552d9365ed2d66d910d014b4f7ef89b12c68831a3305eec40ed7301518",
+      "game_sha256": "df5b8b552d9365ed2d66d910d014b4f7ef89b12c68831a3305eec40ed7301518"
+    },
+    {
+      "id": "ares",
+      "selection": {
+        "type": "approved_contact_sheet",
+        "sheet": "Nexus_Trios_Retratos_21-40.png",
+        "number": 31
+      },
+      "source_sha256": "ccbe6c473b97d5f8eb9294a8ad2795e291c8662674b7b8e5dac321c45fcf8e08",
+      "game_sha256": "ccbe6c473b97d5f8eb9294a8ad2795e291c8662674b7b8e5dac321c45fcf8e08"
+    },
+    {
+      "id": "apollo",
+      "selection": {
+        "type": "approved_contact_sheet",
+        "sheet": "Nexus_Trios_Retratos_21-40.png",
+        "number": 32
+      },
+      "source_sha256": "47b981fdfdb692f4b837d1a5c91ff7030312b5dab4f9968a9584b3de77d1820e",
+      "game_sha256": "47b981fdfdb692f4b837d1a5c91ff7030312b5dab4f9968a9584b3de77d1820e"
+    },
+    {
+      "id": "artemis",
+      "selection": {
+        "type": "approved_contact_sheet",
+        "sheet": "Nexus_Trios_Retratos_21-40.png",
+        "number": 34
+      },
+      "source_sha256": "2393174d05577830f3dc1e9260b3181fa505e9febcf2276c175a02d653fe6da2",
+      "game_sha256": "2393174d05577830f3dc1e9260b3181fa505e9febcf2276c175a02d653fe6da2"
+    },
+    {
+      "id": "hermes",
+      "selection": {
+        "type": "approved_contact_sheet",
+        "sheet": "Nexus_Trios_Retratos_21-40.png",
+        "number": 35
+      },
+      "source_sha256": "e572a32c74a0565c182da2fc0810ff528d9bdddf527d983a95dacfd0542eb2e1",
+      "game_sha256": "e572a32c74a0565c182da2fc0810ff528d9bdddf527d983a95dacfd0542eb2e1"
+    },
+    {
+      "id": "aphrodite",
+      "selection": {
+        "type": "approved_contact_sheet",
+        "sheet": "Nexus_Trios_Retratos_21-40.png",
+        "number": 36
+      },
+      "source_sha256": "722ac6694ccfb969a8d3da16200b838b7fd565d44f96180d75c9bcb55aca37bc",
+      "game_sha256": "722ac6694ccfb969a8d3da16200b838b7fd565d44f96180d75c9bcb55aca37bc"
+    },
+    {
+      "id": "kronos",
+      "selection": {
+        "type": "approved_contact_sheet",
+        "sheet": "Nexus_Trios_Retratos_21-40.png",
+        "number": 37
+      },
+      "source_sha256": "cd49eda10e90322771be069a765c12acd14df41ed09bc82ccb0ee6b8e23ed197",
+      "game_sha256": "cd49eda10e90322771be069a765c12acd14df41ed09bc82ccb0ee6b8e23ed197"
+    },
+    {
+      "id": "hercules",
+      "selection": {
+        "type": "approved_contact_sheet",
+        "sheet": "Nexus_Trios_Retratos_21-40.png",
+        "number": 38
+      },
+      "source_sha256": "b0741e2d21985609216accfc0cecef42f7b82841f9bf1f1630baf0ac7ca6ac36",
+      "game_sha256": "b0741e2d21985609216accfc0cecef42f7b82841f9bf1f1630baf0ac7ca6ac36"
+    },
+    {
+      "id": "anubis",
+      "selection": {
+        "type": "approved_contact_sheet",
+        "sheet": "Nexus_Trios_Retratos_21-40.png",
+        "number": 39
+      },
+      "source_sha256": "fadf0b0906ca9b96b3fc5e180c314fedbef1f94781f7cec65e64c18bd165b554",
+      "game_sha256": "fadf0b0906ca9b96b3fc5e180c314fedbef1f94781f7cec65e64c18bd165b554"
+    },
+    {
+      "id": "ra",
+      "selection": {
+        "type": "approved_contact_sheet",
+        "sheet": "Nexus_Trios_Retratos_21-40.png",
+        "number": 40
+      },
+      "source_sha256": "f2c0c4aa03497c18c3704fdf028b199e53d6e240aebb4237e41c39094298930a",
+      "game_sha256": "f2c0c4aa03497c18c3704fdf028b199e53d6e240aebb4237e41c39094298930a"
+    }
+  ]
+}

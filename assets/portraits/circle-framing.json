@@ -54,5 +54,397 @@
       0.74
     ],
     "zoom": 1.08
+  },
+  "mrfreeze": {
+    "centering": [
+      0.5,
+      0.04
+    ],
+    "zoom": 1
+  },
+  "iceman": {
+    "centering": [
+      0.5,
+      0.04
+    ],
+    "zoom": 1
+  },
+  "heihachi": {
+    "centering": [
+      0.5,
+      0.04
+    ],
+    "zoom": 1
+  },
+  "nero": {
+    "centering": [
+      0.5,
+      0.04
+    ],
+    "zoom": 1
+  },
+  "kitana": {
+    "centering": [
+      0.5,
+      0.04
+    ],
+    "zoom": 1
+  },
+  "shaokahn": {
+    "centering": [
+      0.5,
+      0.04
+    ],
+    "zoom": 1
+  },
+  "drax": {
+    "centering": [
+      0.5,
+      0.04
+    ],
+    "zoom": 1
+  },
+  "nightwing": {
+    "centering": [
+      0.5,
+      0.04
+    ],
+    "zoom": 1
+  },
+  "yennefer": {
+    "centering": [
+      0.5,
+      0.04
+    ],
+    "zoom": 1
+  },
+  "nemesis": {
+    "centering": [
+      0.5,
+      0.04
+    ],
+    "zoom": 1
+  },
+  "athena": {
+    "centering": [
+      0.5,
+      0.04
+    ],
+    "zoom": 1
+  },
+  "medusa": {
+    "centering": [
+      0.5,
+      0.04
+    ],
+    "zoom": 1
+  },
+  "set": {
+    "centering": [
+      0.5,
+      0.04
+    ],
+    "zoom": 1
+  },
+  "isis": {
+    "centering": [
+      0.5,
+      0.04
+    ],
+    "zoom": 1
+  },
+  "horus": {
+    "centering": [
+      0.5,
+      0.04
+    ],
+    "zoom": 1
+  },
+  "sekhmet": {
+    "centering": [
+      0.5,
+      0.04
+    ],
+    "zoom": 1
+  },
+  "odin": {
+    "centering": [
+      0.5,
+      0.04
+    ],
+    "zoom": 1
+  },
+  "fenrir": {
+    "centering": [
+      0.5,
+      0.04
+    ],
+    "zoom": 1
+  },
+  "hel": {
+    "centering": [
+      0.5,
+      0.04
+    ],
+    "zoom": 1
+  },
+  "jason": {
+    "centering": [
+      0.5,
+      0.04
+    ],
+    "zoom": 1
+  },
+  "freddy": {
+    "centering": [
+      0.5,
+      0.04
+    ],
+    "zoom": 1
+  },
+  "michaelmyers": {
+    "centering": [
+      0.5,
+      0.04
+    ],
+    "zoom": 1
+  },
+  "chucky": {
+    "centering": [
+      0.5,
+      0.04
+    ],
+    "zoom": 1
+  },
+  "ghostface": {
+    "centering": [
+      0.5,
+      0.04
+    ],
+    "zoom": 1
+  },
+  "leatherface": {
+    "centering": [
+      0.5,
+      0.04
+    ],
+    "zoom": 1
+  },
+  "pinhead": {
+    "centering": [
+      0.5,
+      0.04
+    ],
+    "zoom": 1
+  },
+  "samara": {
+    "centering": [
+      0.5,
+      0.04
+    ],
+    "zoom": 1
+  },
+  "valak": {
+    "centering": [
+      0.5,
+      0.04
+    ],
+    "zoom": 1
+  },
+  "dracula": {
+    "centering": [
+      0.5,
+      0.04
+    ],
+    "zoom": 1
+  },
+  "predator": {
+    "centering": [
+      0.5,
+      0.04
+    ],
+    "zoom": 1
+  },
+  "neo": {
+    "centering": [
+      0.5,
+      0.04
+    ],
+    "zoom": 1
+  },
+  "agentsmith": {
+    "centering": [
+      0.5,
+      0.04
+    ],
+    "zoom": 1
+  },
+  "johnwick": {
+    "centering": [
+      0.5,
+      0.04
+    ],
+    "zoom": 1
+  },
+  "t800": {
+    "centering": [
+      0.5,
+      0.04
+    ],
+    "zoom": 1
+  },
+  "robocop": {
+    "centering": [
+      0.5,
+      0.04
+    ],
+    "zoom": 1
+  },
+  "rambo": {
+    "centering": [
+      0.5,
+      0.04
+    ],
+    "zoom": 1
+  },
+  "indianajones": {
+    "centering": [
+      0.5,
+      0.04
+    ],
+    "zoom": 1
+  },
+  "gandalf": {
+    "centering": [
+      0.5,
+      0.04
+    ],
+    "zoom": 1
+  },
+  "kingkong": {
+    "centering": [
+      0.5,
+      0.04
+    ],
+    "zoom": 1
+  },
+  "steven": {
+    "centering": [
+      0.5,
+      0.04
+    ],
+    "zoom": 1
+  },
+  "garnet": {
+    "centering": [
+      0.5,
+      0.04
+    ],
+    "zoom": 1
+  },
+  "johnnybravo": {
+    "centering": [
+      0.5,
+      0.04
+    ],
+    "zoom": 1
+  },
+  "dexter": {
+    "centering": [
+      0.5,
+      0.04
+    ],
+    "zoom": 1
+  },
+  "aku": {
+    "centering": [
+      0.5,
+      0.04
+    ],
+    "zoom": 1
+  },
+  "vilgax": {
+    "centering": [
+      0.5,
+      0.04
+    ],
+    "zoom": 1
+  },
+  "cosmowanda": {
+    "centering": [
+      0.5,
+      0.04
+    ],
+    "zoom": 1
+  },
+  "creeper": {
+    "centering": [
+      0.5,
+      0.04
+    ],
+    "zoom": 1
+  },
+  "pacman": {
+    "centering": [
+      0.5,
+      0.04
+    ],
+    "zoom": 1
+  },
+  "crash": {
+    "centering": [
+      0.5,
+      0.04
+    ],
+    "zoom": 1
+  },
+  "arthurmorgan": {
+    "centering": [
+      0.5,
+      0.04
+    ],
+    "zoom": 1
+  },
+  "ellie": {
+    "centering": [
+      0.5,
+      0.04
+    ],
+    "zoom": 1
+  },
+  "sans": {
+    "centering": [
+      0.5,
+      0.04
+    ],
+    "zoom": 1
+  },
+  "cuphead": {
+    "centering": [
+      0.5,
+      0.04
+    ],
+    "zoom": 1
+  },
+  "dovahkiin": {
+    "centering": [
+      0.5,
+      0.04
+    ],
+    "zoom": 1
+  },
+  "hollowknight": {
+    "centering": [
+      0.5,
+      0.04
+    ],
+    "zoom": 1
+  },
+  "goro": {
+    "centering": [
+      0.5,
+      0.04
+    ],
+    "zoom": 1
   }
 }
