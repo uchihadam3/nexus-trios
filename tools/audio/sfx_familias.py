@@ -295,15 +295,6 @@ def facas(rng, v):
     return x
 
 
-def foguete(rng, v):
-    x = _z(1.4)
-    n = n_de(0.5)
-    poe(x, passa(ruido(rng, n), 200, 3000, 2) * sobe_e_some(n, 0.6, 1.2) * 0.7, 0)
-    poe(x, B.explosao(rng, v), 0.45, 1.1)
-    poe(x, baque(n_de(0.8), 50, 25, 0.35, 0.3) * 0.8, 0.45)
-    return x
-
-
 def bomba(rng, v):
     x = _z(1.2)
     n = n_de(0.4)
@@ -375,14 +366,6 @@ def pilar(rng, v):
     return reverb(x, 0.7, 0.3)
 
 
-def atracao(rng, v):
-    n = n_de(1.0)
-    x = assobio(rng, n, 6000, 300, 0.5, 0.5) * env(n, 0.02, 0.6) * 0.8
-    x += _corta(_tom(nota(76), nota(52), 1.0, 0.6, 0.18, 0.5), 1.0)
-    poe(x, baque(n_de(0.3), 140, 60, 0.05, 0.3) * 0.5, 0.75)
-    return reverb(x, 0.5, 0.25)
-
-
 def dominio(rng, v):
     n = n_de(1.6)
     x = np.zeros(n)
@@ -402,13 +385,6 @@ def desintegrar(rng, v):
 
 
 # ================================================================== elementos
-def sopro_de_fogo(rng, v):
-    n = n_de(1.1)
-    x = passa(rosa(rng, n), 150, 3500, 2) * env(n, 0.05, 0.5, segura=0.4) * 0.8
-    x += graos(rng, n, 50, 0.05, 0.9, 1500, 6000, 0.003) * 0.3
-    return reverb(x, 0.4, 0.2, 4000)
-
-
 def bloco_de_gelo(rng, v):
     x = _z(1.1)
     for k in range(4):
@@ -427,14 +403,6 @@ def tempestade(rng, v):
     return reverb(x, 0.8, 0.3, 4000)
 
 
-def raio_em_cadeia(rng, v):
-    x = _z(1.1)
-    for k in range(3):
-        poe(x, B.raio(rng, v)[: n_de(0.35)] * 0.6, k * 0.13)
-        poe(x, _tom(nota(84 + 3 * k), nota(80 + 3 * k), 0.15, 0.08, 0.12), k * 0.13 + 0.05)
-    return x
-
-
 def areia(rng, v):
     n = n_de(1.3)
     x = passa(ruido(rng, n), 1500, 9000, 2) * sobe_e_some(n, 0.6, 1.3) * 0.6
@@ -448,14 +416,6 @@ def metal(rng, v):
     for k in range(4):
         poe(x, modal(n_de(0.5), rng.uniform(200, 400), rng=rng, **METAL) * env(n_de(0.5), 0.001, 0.25) * 0.4 + estalo(rng, n_de(0.5), 800, 4000, 0.01) * 0.3, k * 0.08)
     poe(x, _tom(150, 90, 0.5, 0.2, 0.3), 0.3)
-    return reverb(x, 0.5, 0.25)
-
-
-def tornado(rng, v):
-    n = n_de(1.4)
-    t = np.arange(n) / SR
-    x = assobio(rng, n, 400, 1800, 1.0, 0.5) * (0.6 + 0.4 * np.sin(2 * math.pi * 5 * t)) * env(n, 0.1, 0.6, segura=0.3) * 1.0
-    x += graos(rng, n, 30, 0.1, 1.2, 500, 3000, 0.008) * 0.3
     return reverb(x, 0.5, 0.25)
 
 
@@ -629,14 +589,6 @@ def grito_de_guerra(rng, v):
     for k, m in enumerate((60, 64, 67, 72)):
         poe(x, satura(seno(np.full(n_de(0.5), nota(m)), n_de(0.5)), 1.5) * env(n_de(0.5), 0.01, 0.3) * 0.1, 0.25 + k * 0.07)
     return reverb(x, 0.6, 0.3)
-
-
-def velocidade(rng, v):
-    x = _z(0.9)
-    for k in range(4):
-        poe(x, _whoosh(rng, 0.15, 1500, 6000, 0.6, g=0.4), k * 0.08)
-    poe(x, _tom(nota(72), nota(84), 0.3, 0.2, 0.12), 0.1)
-    return reverb(x, 0.4, 0.2)
 
 
 def escudo_tech(rng, v):

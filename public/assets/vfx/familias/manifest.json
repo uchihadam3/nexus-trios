@@ -531,6 +531,20 @@
   "laco": false,
   "bytes": 19914
  },
+ "armadilha_montada": {
+  "descricao": "Coiote · a luva de boxe na mola",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 22020
+ },
  "armadura_berserker": {
   "descricao": "Guts · a Armadura Berserker fechando",
   "quadros": 12,
@@ -656,20 +670,6 @@
   ],
   "laco": false,
   "bytes": 33350
- },
- "atracao": {
-  "descricao": "tudo puxado para um ponto",
-  "quadros": 12,
-  "grade": [
-   3,
-   4
-  ],
-  "tamanho": [
-   192,
-   192
-  ],
-  "laco": false,
-  "bytes": 96158
  },
  "audicao_zenitsu": {
   "descricao": "Zenitsu · as ondas de som e o risco de raio",
@@ -1329,6 +1329,20 @@
   "laco": false,
   "bytes": 57960
  },
+ "bico_afiado": {
+  "descricao": "Patolino · os bicos em todos os rivais",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 42956
+ },
  "bigorna": {
   "descricao": "Bigorna ACME: a sombra cresce, a bigorna cai, esmaga e levanta poeira",
   "quadros": 12,
@@ -1356,6 +1370,20 @@
   ],
   "laco": true,
   "bytes": 34920
+ },
+ "bip_bip": {
+  "descricao": "Papa-Léguas · o risco azul e a poeira",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 24810
  },
  "biscoito_scooby": {
   "descricao": "Scooby-Doo · o biscoito-osso e os corações",
@@ -2575,6 +2603,20 @@
   "laco": false,
   "bytes": 31338
  },
+ "cha_de_jasmim": {
+  "descricao": "Iroh · o bule, o vapor e as flores de jasmim",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 48522
+ },
  "chama_ben10": {
   "descricao": "Ben 10 · as bolas de fogo do Chama",
   "quadros": 12,
@@ -3162,6 +3204,20 @@
   ],
   "laco": false,
   "bytes": 19800
+ },
+ "coiote_preparo": {
+  "descricao": "Coiote · o pavio do foguete queimando (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 10490
  },
  "colapso_magneto": {
   "descricao": "Magneto · o metal esmagando o rival",
@@ -4185,6 +4241,20 @@
   "laco": false,
   "bytes": 20152
  },
+ "desastre_anunciado": {
+  "descricao": "Patolino · a bomba explodindo e o bico voando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 58420
+ },
  "descarga_real": {
   "descricao": "Pantera Negra · a esfera e a onda com os hexágonos",
   "quadros": 12,
@@ -4633,6 +4703,20 @@
   "laco": false,
   "bytes": 42340
  },
+ "dragao_do_oeste": {
+  "descricao": "Iroh · o sopro de fogo em cone",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 54678
+ },
  "dragao_faixa": {
   "descricao": "o dragão do Cólera do Dragão esticado até o alvo (faixa)",
   "quadros": 12,
@@ -4828,6 +4912,20 @@
   ],
   "laco": false,
   "bytes": 23046
+ },
+ "encomenda_acme": {
+  "descricao": "Coiote · a caixa ACME e a bomba presa",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 17922
  },
  "endurecimento_titan": {
   "descricao": "Eren · a casca de cristal hexagonal",
@@ -5893,6 +5991,20 @@
   "laco": false,
   "bytes": 87342
  },
+ "exijo_atencao": {
+  "descricao": "Patolino · o holofote e as exclamações",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 31130
+ },
  "exorcismo": {
   "descricao": "Constantine · a cruz e o demônio",
   "quadros": 12,
@@ -6747,20 +6859,6 @@
   "laco": true,
   "bytes": 73744
  },
- "foguete": {
-  "descricao": "foguete em viagem (+x)",
-  "quadros": 12,
-  "grade": [
-   3,
-   4
-  ],
-  "tamanho": [
-   160,
-   160
-  ],
-  "laco": true,
-  "bytes": 20324
- },
  "fome_de_ghoul": {
   "descricao": "Kaneki · o kakugan, as veias e a vida puxada",
   "quadros": 12,
@@ -6774,6 +6872,20 @@
   ],
   "laco": false,
   "bytes": 64840
+ },
+ "fome_sem_fim": {
+  "descricao": "Taz · o tornado sugando tudo e a mordida",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 56688
  },
  "forca_bruta": {
   "descricao": "Sr. Incrível · as mãos apertando como prensa",
@@ -8805,6 +8917,20 @@
   "laco": true,
   "bytes": 69844
  },
+ "iroh_preparo": {
+  "descricao": "Iroh · a respiração funda e as brasas (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 21876
+ },
  "izuna_otoshi": {
   "descricao": "Hayabusa · o rival girado e jogado no chão",
   "quadros": 12,
@@ -10695,6 +10821,20 @@
   "laco": true,
   "bytes": 17720
  },
+ "mastigar": {
+  "descricao": "Taz · a bocarra mastigando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 38640
+ },
  "matadora_guts": {
   "descricao": "Guts · o arco pesado da Matadora de Dragões",
   "quadros": 12,
@@ -10961,6 +11101,20 @@
   "laco": false,
   "bytes": 38610
  },
+ "mira_marciana": {
+  "descricao": "Marvin · o feixe verde com os anéis",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 31726
+ },
  "missil": {
   "descricao": "míssil em viagem (+x)",
   "quadros": 12,
@@ -11072,6 +11226,20 @@
   ],
   "laco": false,
   "bytes": 94614
+ },
+ "modulador_illudium": {
+  "descricao": "Marvin · o Modulador Illudium Q-36 e a mira",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 15940
  },
  "mordida": {
   "descricao": "dentes fechando",
@@ -17373,6 +17541,20 @@
   "laco": true,
   "bytes": 10258
  },
+ "patolino_preparo": {
+  "descricao": "Patolino · a bomba com o pavio queimando (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 27456
+ },
  "pe_de_cabra": {
   "descricao": "Gordon · o pé de cabra e o lambda",
   "quadros": 12,
@@ -17709,6 +17891,20 @@
   "laco": false,
   "bytes": 11892
  },
+ "plano_infalivel": {
+  "descricao": "Coiote · o foguete ACME e a explosão",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 49564
+ },
  "plano_que_plano": {
   "descricao": "Deadpool · tiros, granada e o BUM",
   "quadros": 12,
@@ -17792,6 +17988,20 @@
   ],
   "laco": false,
   "bytes": 45940
+ },
+ "poeira_na_pista": {
+  "descricao": "Papa-Léguas · a cortina de poeira",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 32396
  },
  "pontos_de_chakra": {
   "descricao": "Hinata · os oito trigramas e os pontos de chakra",
@@ -18829,20 +19039,6 @@
   "laco": false,
   "bytes": 25162
  },
- "raio_em_cadeia": {
-  "descricao": "raio pulando em cadeia",
-  "quadros": 12,
-  "grade": [
-   3,
-   4
-  ],
-  "tamanho": [
-   192,
-   192
-  ],
-  "laco": false,
-  "bytes": 51232
- },
  "raio_faixa": {
   "descricao": "raio entre dois pontos (faixa)",
   "quadros": 12,
@@ -19164,6 +19360,34 @@
   ],
   "laco": false,
   "bytes": 87914
+ },
+ "redemoinho_taz": {
+  "descricao": "Taz · o redemoinho marrom",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 30286
+ },
+ "redirecionar_do_iroh": {
+  "descricao": "Iroh · o raio dando a volta na barriga",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 22210
  },
  "redirecionar_relampago": {
   "descricao": "Zuko · o raio entrando e saindo pelas mãos",
@@ -21027,20 +21251,6 @@
   "laco": false,
   "bytes": 40428
  },
- "sopro_de_fogo": {
-  "descricao": "jato de fogo em cone",
-  "quadros": 12,
-  "grade": [
-   3,
-   4
-  ],
-  "tamanho": [
-   192,
-   192
-  ],
-  "laco": false,
-  "bytes": 97552
- },
  "sopro_flamejante": {
   "descricao": "Bowser · o sopro de fogo",
   "quadros": 12,
@@ -21418,6 +21628,20 @@
   ],
   "laco": false,
   "bytes": 20704
+ },
+ "taz_preparo": {
+  "descricao": "Taz · o redemoinho começando (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 11004
  },
  "teia_bola": {
   "descricao": "bola de teia em viagem (+x)",
@@ -22077,20 +22301,6 @@
   "laco": false,
   "bytes": 21366
  },
- "tornado": {
-  "descricao": "funil de tornado",
-  "quadros": 12,
-  "grade": [
-   3,
-   4
-  ],
-  "tamanho": [
-   192,
-   192
-  ],
-  "laco": false,
-  "bytes": 37490
- },
  "transmutacao_estelar": {
   "descricao": "Surfista Prateado · as cascas brilhantes no trio",
   "quadros": 12,
@@ -22483,20 +22693,6 @@
   "laco": false,
   "bytes": 129716
  },
- "velocidade": {
-  "descricao": "linhas de vento e asinhas",
-  "quadros": 12,
-  "grade": [
-   3,
-   4
-  ],
-  "tamanho": [
-   192,
-   192
-  ],
-  "laco": false,
-  "bytes": 29406
- },
  "velocidade_aura": {
   "descricao": "Killua · a aura elétrica nele",
   "quadros": 12,
@@ -22538,6 +22734,20 @@
   ],
   "laco": false,
   "bytes": 71774
+ },
+ "velocidade_impossivel": {
+  "descricao": "Papa-Léguas · as cópias correndo em laço",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 48942
  },
  "veneno": {
   "descricao": "nuvem tóxica",

@@ -140,26 +140,6 @@ def pilar(T, t, rng):
     return G, H
 
 
-def atracao(T, t, rng):
-    """Atração (Azul): tudo é puxado em espiral para um ponto, que se aperta e pulsa."""
-    G, H = vazio(T)
-    env = apaga(t, 0.7, 1)
-    pts, segs = [], []
-    for _ in range(40):
-        f = (rng.uniform(0, 1) + t * 1.5) % 1
-        a0 = rng.uniform(0, TAU)
-        d = 0.95 * (1 - f) ** 1.3 + 0.05
-        a = a0 + f * 2.5
-        d2 = 0.95 * (1 - max(0, f - 0.08)) ** 1.3 + 0.05
-        a2 = a0 + max(0, f - 0.08) * 2.5
-        segs.append((math.cos(a2) * d2, math.sin(a2) * d2, math.cos(a) * d, math.sin(a) * d, f))
-    riscos = T.tapered(segs, 0.02)
-    ponto = T.gauss(0, 0, 0.08 + 0.02 * math.sin(t * 40)) * 2.6 + T.ring(0.13, 0.02) * 1.2
-    G += (T.glow(riscos, 1, 1.1, 0.02) + ponto) * env
-    H += (riscos * 0.6 + ponto) * env
-    return G, H
-
-
 def dominio(T, t, rng):
     """Domínio: um círculo de céu infinito se abre, estrelas correndo para o centro e a borda acesa."""
     G, H = vazio(T)
@@ -210,7 +190,6 @@ REGISTRO = [
     ("gravidade", gravidade, GRANDE, "pressão de gravidade", False),
     ("pulso_emp", pulso_emp, GRANDE, "pulso eletromagnético", False),
     ("pilar", pilar, GRANDE, "pilar de energia subindo", False),
-    ("atracao", atracao, GRANDE, "tudo puxado para um ponto", False),
     ("dominio", dominio, GRANDE, "domínio de céu infinito", False),
     ("desintegrar", desintegrar, GRANDE, "desintegração em grãos", False),
 ]

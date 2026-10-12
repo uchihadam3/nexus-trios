@@ -351,7 +351,6 @@ REGISTRO = [
     ("teia_bola", teia_bola, MEDIA, "bola de teia em viagem (+x)", True),
     ("cartas_voando", cartas_voando, MEDIA, "cartas girando em viagem (+x)", True),
     ("facas_voando", facas_voando, MEDIA, "facas em viagem (+x)", True),
-    ("foguete", foguete, MEDIA, "foguete em viagem (+x)", True),
     ("bomba", bomba, MEDIA, "bomba com pavio em viagem (+x)", True),
     ("bala_de_canhao", bala_de_canhao, MEDIA, "bala de canhão em viagem (+x)", True),
     ("bola_ki", bola_ki, MEDIA, "bola de ki em viagem (+x)", True),

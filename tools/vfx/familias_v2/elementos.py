@@ -22,22 +22,6 @@ def _chama_em(T, t, seed, base, altura, largura, cx=0.0, vel=1.0):
     return chama, nucleo
 
 
-def sopro_de_fogo(T, t, rng):
-    """Sopro de fogo: um jato em cone vem de trás e envolve o alvo, com fumaça no fim."""
-    G, H = vazio(T)
-    chega = ease_out(rel(t, 0, 0.3), 2)
-    env = apaga(t, 0.55, 1)
-    n = np.roll(T.noise(np.random.default_rng(411), 0.06, 3), int(-t * T.W * 0.6), axis=1)
-    al, la = T.U, T.V
-    alcance = -1 + 1.8 * chega
-    cone = np.exp(-(la / (0.06 + 0.32 * np.clip(al + 1, 0, 2) * 0.5 + 0.06 * n)) ** 2) * smooth(alcance - al, -0.05, 0.25) * smooth(al + 1.05, 0, 0.3)
-    nucleo = np.exp(-(la / (0.03 + 0.1 * np.clip(al + 1, 0, 2) * 0.5)) ** 2) * smooth(alcance - 0.2 - al, -0.05, 0.25)
-    fumo = poeira(T, rng, t, 18, 0.5, -0.1, 0.4, 0.3, 0.05, inicio=0.4)
-    G += (cone * (1.2 + 0.5 * np.clip(n, -1, 1)) + nucleo) * env + fumo * 0.5
-    H += (nucleo * 1.5 + cone * 0.4) * env
-    return G, H
-
-
 def bloco_de_gelo(T, t, rng):
     """Bloco de gelo: um cristal prende o alvo, as faces brilham e rachaduras correm por dentro."""
     G, H = vazio(T)
@@ -71,25 +55,6 @@ def tempestade(T, t, rng):
     clarao = sum(T.gauss(0, 0.1, 0.13) * some(t, a0, a0 + 0.15) for a0 in (0.15, 0.38, 0.6)) * 2
     G += (nuvem * 0.9 * (0.6 + 0.4 * np.clip(n, -1, 1)) + T.glow(raios, 1.6, 2, 0.025) + clarao) * env
     H += (raios * 1.6 + clarao) * env
-    return G, H
-
-
-def raio_em_cadeia(T, t, rng):
-    """Raio em cadeia: a descarga pula de um ponto a outro, três saltos, com estalo em cada um."""
-    G, H = vazio(T)
-    nos = [(-0.75, -0.2), (-0.2, 0.25), (0.3, -0.3), (0.7, 0.2)]
-    sub = np.random.default_rng(int(t * 997) + 481)
-    lin, est = T.zero(), T.zero()
-    for k in range(3):
-        a0 = k * 0.13
-        if t < a0:
-            continue
-        (x1, y1), (x2, y2) = nos[k], nos[k + 1]
-        vida = apaga(t, a0 + 0.2, a0 + 0.55)
-        lin += T.polyline(jagged(sub, x1, y1, x2, y2, 5, 0.25), 0.018, 1) * vida
-        est += (T.gauss(x2, y2, 0.07) * 2 + T.flare(x2, y2, 0.6, sub.uniform(0, 3))) * some(t, a0 + 0.05, a0 + 0.4)
-    G += T.glow(lin, 1.5, 1.8, 0.02) + est
-    H += lin * 1.4 + est * 0.9
     return G, H
 
 
@@ -169,26 +134,6 @@ def metal(T, t, rng):
     clang = T.ring(0.2 + 0.4 * rel(t, 0.35, 0.8), 0.015) * pulso(t, 0.35, 0.8) * 1.3
     G += (ch + bo * 1.3 + reflexo * 1.4) * env + clang
     H += (bo * 0.9 + reflexo) * env + clang * 0.4
-    return G, H
-
-
-def tornado(T, t, rng):
-    """Tornado: um funil vertical girando, mais largo no alto, com detritos voando em volta."""
-    G, H = vazio(T)
-    env = janela(t, 0, 0.15) * apaga(t, 0.7, 1)
-    y = T.V
-    larg = 0.08 + 0.3 * np.clip((0.5 - y) / 1.3, 0, 1)
-    dentro = smooth(larg - np.abs(T.U), -0.02, 0.04) * smooth(0.55 - y, 0, 0.08) * smooth(y + 0.9, 0, 0.1)
-    listras = (0.5 + 0.5 * np.sin(T.U / np.maximum(larg, 0.05) * 3 + y * 12 - t * 30)) ** 2
-    funil = dentro * (0.35 + 0.65 * listras)
-    detritos = []
-    for _ in range(26):
-        h = rng.uniform(-0.8, 0.45)
-        l = 0.08 + 0.3 * max(0, (0.5 - h) / 1.3) + 0.08
-        a = rng.uniform(0, TAU) + t * 9
-        detritos.append((math.cos(a) * l, h + math.sin(a) * 0.04, rng.uniform(0.4, 1) * (math.sin(a) > -0.3)))
-    G += (funil * 1.3 + T.splats(detritos, 0.014) * 1.1) * env
-    H += (funil * listras * 0.4) * env
     return G, H
 
 
@@ -339,14 +284,11 @@ def rugido(T, t, rng):
 
 
 REGISTRO = [
-    ("sopro_de_fogo", sopro_de_fogo, GRANDE, "jato de fogo em cone", False),
     ("bloco_de_gelo", bloco_de_gelo, GRANDE, "bloco de gelo prendendo", False),
     ("tempestade", tempestade, GRANDE, "nuvem e raios de cima", False),
-    ("raio_em_cadeia", raio_em_cadeia, GRANDE, "raio pulando em cadeia", False),
     ("areia", areia, GRANDE, "casulo de areia", False),
     ("espinhos_de_terra", espinhos_de_terra, GRANDE, "pontas de pedra em linha", False),
     ("metal", metal, GRANDE, "chapas de metal fechando", False),
-    ("tornado", tornado, GRANDE, "funil de tornado", False),
     ("rajada_de_ar", rajada_de_ar, GRANDE, "arcos de vento", False),
     ("vinhas", vinhas, GRANDE, "vinhas enrolando", False),
     ("enxame", enxame, GRANDE, "enxame zumbindo", False),

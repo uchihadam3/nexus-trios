@@ -682,6 +682,23 @@
    ],
    "bytes": 67483
   },
+  "armadilha-montada": {
+   "arquivo": "armadilha-montada.mp3",
+   "descricao": "Coiote: a armadilha montada",
+   "versoes": [
+    0.0,
+    1.363,
+    2.7714,
+    4.08
+   ],
+   "duracoes": [
+    1.283,
+    1.3285,
+    1.2286,
+    1.3018
+   ],
+   "bytes": 35467
+  },
   "armadura-berserker": {
    "arquivo": "armadura-berserker.mp3",
    "descricao": "Armadura Berserker: as placas fechando e o rosnado",
@@ -834,23 +851,6 @@
     2.0305
    ],
    "bytes": 63867
-  },
-  "atracao": {
-   "arquivo": "atracao.mp3",
-   "descricao": "família atracao",
-   "versoes": [
-    0.0,
-    1.08,
-    2.1963,
-    3.2424
-   ],
-   "duracoes": [
-    1.0,
-    1.0363,
-    0.9662,
-    1.0152
-   ],
-   "bytes": 47493
   },
   "audicao-zenitsu": {
    "arquivo": "audicao-zenitsu.mp3",
@@ -1600,6 +1600,23 @@
    ],
    "bytes": 50504
   },
+  "bico-afiado": {
+   "arquivo": "bico-afiado.mp3",
+   "descricao": "Patolino: o bico afiado",
+   "versoes": [
+    0.0,
+    1.2686,
+    2.6152,
+    3.8394
+   ],
+   "duracoes": [
+    1.1886,
+    1.2666,
+    1.1442,
+    1.1471
+   ],
+   "bytes": 47327
+  },
   "bigorna": {
    "arquivo": "bigorna.mp3",
    "descricao": "básico do Coiote: assobio da queda, CLANG e poeira",
@@ -1633,6 +1650,23 @@
     1.4213
    ],
    "bytes": 55350
+  },
+  "bip-bip": {
+   "arquivo": "bip-bip.mp3",
+   "descricao": "Papa-Léguas: bip-bip",
+   "versoes": [
+    0.0,
+    1.0161,
+    2.16,
+    3.145
+   ],
+   "duracoes": [
+    0.9361,
+    1.064,
+    0.905,
+    0.9497
+   ],
+   "bytes": 34855
   },
   "biscoito-scooby": {
    "arquivo": "biscoito-scooby.mp3",
@@ -2943,6 +2977,23 @@
    ],
    "bytes": 76259
   },
+  "cha-de-jasmim": {
+   "arquivo": "cha-de-jasmim.mp3",
+   "descricao": "Iroh: o chá de jasmim",
+   "versoes": [
+    0.0,
+    2.18,
+    4.4361,
+    6.5451
+   ],
+   "duracoes": [
+    2.1,
+    2.1761,
+    2.029,
+    2.132
+   ],
+   "bytes": 74551
+  },
   "chama-ben10": {
    "arquivo": "chama-ben10.mp3",
    "descricao": "Ben 10: o Chama",
@@ -3639,6 +3690,23 @@
     1.8274
    ],
    "bytes": 56781
+  },
+  "coiote-preparo": {
+   "arquivo": "coiote-preparo.mp3",
+   "descricao": "Coiote: o pavio do foguete (Preparo)",
+   "versoes": [
+    0.0,
+    1.2422,
+    2.5272,
+    3.732
+   ],
+   "duracoes": [
+    1.1622,
+    1.205,
+    1.1248,
+    1.1485
+   ],
+   "bytes": 45729
   },
   "colapso-magneto": {
    "arquivo": "colapso-magneto.mp3",
@@ -4779,6 +4847,23 @@
    ],
    "bytes": 38128
   },
+  "desastre-anunciado": {
+   "arquivo": "desastre-anunciado.mp3",
+   "descricao": "Patolino: o desastre anunciado",
+   "versoes": [
+    0.0,
+    2.1854,
+    4.4296,
+    6.3705
+   ],
+   "duracoes": [
+    2.1054,
+    2.1643,
+    1.8609,
+    2.133
+   ],
+   "bytes": 71097
+  },
   "descarga-real": {
    "arquivo": "descarga-real.mp3",
    "descricao": "Pantera Negra: a energia apertando e explodindo",
@@ -5306,6 +5391,23 @@
    ],
    "bytes": 79764
   },
+  "dragao-do-oeste": {
+   "arquivo": "dragao-do-oeste.mp3",
+   "descricao": "Iroh: o Dragão do Oeste",
+   "versoes": [
+    0.0,
+    1.8926,
+    3.7916,
+    5.541
+   ],
+   "duracoes": [
+    1.8126,
+    1.819,
+    1.6694,
+    1.9497
+   ],
+   "bytes": 60454
+  },
   "dragao-flamejante": {
    "arquivo": "dragao-flamejante.mp3",
    "descricao": "Liu Kang: o dragão flamejante",
@@ -5526,6 +5628,23 @@
     1.6244
    ],
    "bytes": 61031
+  },
+  "encomenda-acme": {
+   "arquivo": "encomenda-acme.mp3",
+   "descricao": "Coiote: a encomenda ACME",
+   "versoes": [
+    0.0,
+    1.2148,
+    2.4697,
+    3.6218
+   ],
+   "duracoes": [
+    1.1348,
+    1.1749,
+    1.0721,
+    1.1516
+   ],
+   "bytes": 31324
   },
   "endurecimento-titan": {
    "arquivo": "endurecimento-titan.mp3",
@@ -6785,6 +6904,23 @@
    ],
    "bytes": 71658
   },
+  "exijo-atencao": {
+   "arquivo": "exijo-atencao.mp3",
+   "descricao": "Patolino: exijo atenção",
+   "versoes": [
+    0.0,
+    1.3833,
+    2.8128,
+    4.2021
+   ],
+   "duracoes": [
+    1.3033,
+    1.3495,
+    1.3093,
+    1.3742
+   ],
+   "bytes": 40744
+  },
   "exorcismo": {
    "arquivo": "exorcismo.mp3",
    "descricao": "Constantine: o exorcismo",
@@ -7686,23 +7822,6 @@
    ],
    "bytes": 67279
   },
-  "foguete": {
-   "arquivo": "foguete.mp3",
-   "descricao": "família foguete",
-   "versoes": [
-    0.0,
-    1.48,
-    3.0108,
-    4.4434
-   ],
-   "duracoes": [
-    1.4,
-    1.4508,
-    1.3527,
-    1.4213
-   ],
-   "bytes": 61307
-  },
   "fome-de-ghoul": {
    "arquivo": "fome-de-ghoul.mp3",
    "descricao": "Kaneki: o kakugan, o ar puxado e o coração",
@@ -7719,6 +7838,23 @@
     1.8274
    ],
    "bytes": 64565
+  },
+  "fome-sem-fim": {
+   "arquivo": "fome-sem-fim.mp3",
+   "descricao": "Taz: a fome sem fim",
+   "versoes": [
+    0.0,
+    1.8354,
+    3.4849,
+    5.7871
+   ],
+   "duracoes": [
+    1.7554,
+    1.5695,
+    2.2222,
+    1.6785
+   ],
+   "bytes": 57446
   },
   "forca-bruta": {
    "arquivo": "forca-bruta.mp3",
@@ -10236,6 +10372,23 @@
    ],
    "bytes": 49880
   },
+  "iroh-preparo": {
+   "arquivo": "iroh-preparo.mp3",
+   "descricao": "Iroh: a respiração funda (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4325
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3417,
+    1.4213
+   ],
+   "bytes": 56325
+  },
   "izuna-otoshi": {
    "arquivo": "izuna-otoshi.mp3",
    "descricao": "Hayabusa: Izuna Otoshi",
@@ -12531,6 +12684,23 @@
    ],
    "bytes": 54952
   },
+  "mastigar": {
+   "arquivo": "mastigar.mp3",
+   "descricao": "Taz: mastigar",
+   "versoes": [
+    0.0,
+    1.7326,
+    3.7815,
+    5.6434
+   ],
+   "duracoes": [
+    1.6526,
+    1.9689,
+    1.7819,
+    1.9289
+   ],
+   "bytes": 57710
+  },
   "matadora-guts": {
    "arquivo": "matadora-guts.mp3",
    "descricao": "Matadora de Dragões: o ferro enorme",
@@ -12837,6 +13007,23 @@
    ],
    "bytes": 57042
   },
+  "mira-marciana": {
+   "arquivo": "mira-marciana.mp3",
+   "descricao": "Marvin: a mira marciana",
+   "versoes": [
+    0.0,
+    1.3762,
+    2.7982,
+    4.1317
+   ],
+   "duracoes": [
+    1.2962,
+    1.342,
+    1.2535,
+    1.3155
+   ],
+   "bytes": 36639
+  },
   "missil": {
    "arquivo": "missil.mp3",
    "descricao": "míssil",
@@ -12972,6 +13159,23 @@
     1.8261
    ],
    "bytes": 74587
+  },
+  "modulador-illudium": {
+   "arquivo": "modulador-illudium.mp3",
+   "descricao": "Marvin: o Modulador Illudium",
+   "versoes": [
+    0.0,
+    1.5533,
+    3.1506,
+    4.6541
+   ],
+   "duracoes": [
+    1.4733,
+    1.5173,
+    1.4235,
+    1.4953
+   ],
+   "bytes": 55799
   },
   "mordida": {
    "arquivo": "mordida.mp3",
@@ -20623,6 +20827,23 @@
    ],
    "bytes": 34547
   },
+  "patolino-preparo": {
+   "arquivo": "patolino-preparo.mp3",
+   "descricao": "Patolino: o pavio (Preparo)",
+   "versoes": [
+    0.0,
+    0.5823,
+    1.2598,
+    1.8829
+   ],
+   "duracoes": [
+    0.5023,
+    0.5975,
+    0.5432,
+    0.5334
+   ],
+   "bytes": 24483
+  },
   "pe-de-cabra": {
    "arquivo": "pe-de-cabra.mp3",
    "descricao": "Gordon: o pé de cabra",
@@ -20997,6 +21218,23 @@
    ],
    "bytes": 40489
   },
+  "plano-infalivel": {
+   "arquivo": "plano-infalivel.mp3",
+   "descricao": "Coiote: o plano infalível",
+   "versoes": [
+    0.0,
+    2.3014,
+    4.5932,
+    6.7782
+   ],
+   "duracoes": [
+    2.2214,
+    2.2117,
+    2.105,
+    2.1661
+   ],
+   "bytes": 76173
+  },
   "plano-que-plano": {
    "arquivo": "plano-que-plano.mp3",
    "descricao": "Plano? Que plano?: tiros, granada e BUM",
@@ -21098,6 +21336,23 @@
     1.6244
    ],
    "bytes": 75451
+  },
+  "poeira-na-pista": {
+   "arquivo": "poeira-na-pista.mp3",
+   "descricao": "Papa-Léguas: a poeira na pista",
+   "versoes": [
+    0.0,
+    1.5446,
+    3.1415,
+    4.6385
+   ],
+   "duracoes": [
+    1.4646,
+    1.5169,
+    1.417,
+    1.4554
+   ],
+   "bytes": 54255
   },
   "pontos-de-chakra": {
    "arquivo": "pontos-de-chakra.mp3",
@@ -22340,23 +22595,6 @@
    ],
    "bytes": 48565
   },
-  "raio-em-cadeia": {
-   "arquivo": "raio-em-cadeia.mp3",
-   "descricao": "família raio em cadeia",
-   "versoes": [
-    0.0,
-    1.18,
-    2.3999,
-    3.5427
-   ],
-   "duracoes": [
-    1.1,
-    1.1399,
-    1.0628,
-    1.1167
-   ],
-   "bytes": 50986
-  },
   "raio-fantasma": {
    "arquivo": "raio-fantasma.mp3",
    "descricao": "básico do Danny Phantom: disparo de ectoplasma com zumbido etéreo e um \"uuuu\" fantasma",
@@ -22747,6 +22985,40 @@
     2.0305
    ],
    "bytes": 74331
+  },
+  "redemoinho-taz": {
+   "arquivo": "redemoinho-taz.mp3",
+   "descricao": "Taz: o redemoinho",
+   "versoes": [
+    0.0,
+    1.3422,
+    2.6728,
+    3.9729
+   ],
+   "duracoes": [
+    1.2622,
+    1.2506,
+    1.2202,
+    1.1785
+   ],
+   "bytes": 44477
+  },
+  "redirecionar-do-iroh": {
+   "arquivo": "redirecionar-do-iroh.mp3",
+   "descricao": "Iroh: redirecionar",
+   "versoes": [
+    0.0,
+    1.9828,
+    3.8174,
+    5.6303
+   ],
+   "duracoes": [
+    1.9028,
+    1.7547,
+    1.7329,
+    1.7257
+   ],
+   "bytes": 59309
   },
   "redirecionar-relampago": {
    "arquivo": "redirecionar-relampago.mp3",
@@ -24958,23 +25230,6 @@
    ],
    "bytes": 73163
   },
-  "sopro-de-fogo": {
-   "arquivo": "sopro-de-fogo.mp3",
-   "descricao": "família sopro de fogo",
-   "versoes": [
-    0.0,
-    1.18,
-    2.3999,
-    3.5427
-   ],
-   "duracoes": [
-    1.1,
-    1.1399,
-    1.0628,
-    1.1167
-   ],
-   "bytes": 46009
-  },
   "sopro-flamejante": {
    "arquivo": "sopro-flamejante.mp3",
    "descricao": "Bowser: o sopro flamejante",
@@ -25433,6 +25688,23 @@
     1.0913
    ],
    "bytes": 39693
+  },
+  "taz-preparo": {
+   "arquivo": "taz-preparo.mp3",
+   "descricao": "Taz: o redemoinho começando (Preparo)",
+   "versoes": [
+    0.0,
+    1.4704,
+    3.0011,
+    4.4314
+   ],
+   "duracoes": [
+    1.3904,
+    1.4508,
+    1.3502,
+    1.4213
+   ],
+   "bytes": 51685
   },
   "teia": {
    "arquivo": "teia.mp3",
@@ -26182,23 +26454,6 @@
    ],
    "bytes": 60269
   },
-  "tornado": {
-   "arquivo": "tornado.mp3",
-   "descricao": "família tornado",
-   "versoes": [
-    0.0,
-    1.48,
-    3.0108,
-    4.4434
-   ],
-   "duracoes": [
-    1.4,
-    1.4508,
-    1.3527,
-    1.4213
-   ],
-   "bytes": 59455
-  },
   "transformacao": {
    "arquivo": "transformacao.mp3",
    "descricao": "transformação",
@@ -26794,23 +27049,6 @@
    ],
    "bytes": 40688
   },
-  "velocidade": {
-   "arquivo": "velocidade.mp3",
-   "descricao": "família velocidade",
-   "versoes": [
-    0.0,
-    0.98,
-    1.9926,
-    2.9422
-   ],
-   "duracoes": [
-    0.9,
-    0.9326,
-    0.8695,
-    0.9137
-   ],
-   "bytes": 37066
-  },
   "velocidade-da-luz": {
    "arquivo": "velocidade-da-luz.mp3",
    "descricao": "Velocidade da Luz: os cortes de luz em sequência",
@@ -26844,6 +27082,23 @@
     2.0305
    ],
    "bytes": 101564
+  },
+  "velocidade-impossivel": {
+   "arquivo": "velocidade-impossivel.mp3",
+   "descricao": "Papa-Léguas: a velocidade impossível",
+   "versoes": [
+    0.0,
+    1.3231,
+    2.7188,
+    4.0485
+   ],
+   "duracoes": [
+    1.2431,
+    1.3157,
+    1.2497,
+    1.2924
+   ],
+   "bytes": 48047
   },
   "veneno": {
    "arquivo": "veneno.mp3",

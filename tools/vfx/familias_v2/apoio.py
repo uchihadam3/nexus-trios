@@ -53,28 +53,6 @@ def grito_de_guerra(T, t, rng):
     return G, H
 
 
-def velocidade(T, t, rng):
-    """Velocidade: linhas de vento passam rápido pelo corpo, duas asinhas de luz batem."""
-    G, H = vazio(T)
-    env = janela(t, 0, 0.12) * apaga(t, 0.75, 1)
-    linhas = []
-    sub = np.random.default_rng(711)
-    for k in range(12):
-        y = sub.uniform(-0.6, 0.5)
-        x = 0.9 - ((t * 2.5 + sub.uniform(0, 1)) % 1) * 2
-        linhas.append((x + 0.4, y, x, y, sub.uniform(0.4, 1)))
-    l = T.tapered(linhas, 0.018)
-    bate = 0.25 * math.sin(t * TAU * 4)
-    asas = T.zero()
-    for lado in (-1, 1):
-        for k in range(3):
-            a = -math.pi / 2 - lado * (0.5 + k * 0.3 + bate)
-            asas += T.polys([(lamina(lado * 0.15, -0.15, lado * 0.15 + math.cos(a) * (0.32 - k * 0.06), -0.15 + math.sin(a) * (0.32 - k * 0.06), 0.035), 1)], 0.004)
-    G += (l * 1.2 + asas * 1.2) * env
-    H += (l * 0.5 + asas * 0.6) * env
-    return G, H
-
-
 def escudo_tech(T, t, rng):
     """Escudo tecnológico: painéis hexagonais se encaixam um a um formando uma parede plana com varredura."""
     G, H = vazio(T)
@@ -670,7 +648,6 @@ REGISTRO = [
     ("brasas_renascendo", brasas_renascendo, GRANDE, "brasas sobre quem vai renascer (laço)", True),
     ("cura_em_area", cura_em_area, GRANDE, "cura em área com cruzes", False),
     ("grito_de_guerra", grito_de_guerra, GRANDE, "estandarte de raios e divisas", False),
-    ("velocidade", velocidade, GRANDE, "linhas de vento e asinhas", False),
     ("escudo_tech", escudo_tech, GRANDE, "parede de painéis hexagonais", False),
     ("barreira_magica", barreira_magica, GRANDE, "cúpula de runas", False),
     ("resgate", resgate, GRANDE, "mergulho de resgate", False),
