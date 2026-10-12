@@ -9057,6 +9057,34 @@
   "laco": false,
   "bytes": 28640
  },
+ "mu_achatado": {
+  "descricao": "Tom · a frigideira e o achatado",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 23686
+ },
+ "mu_acme": {
+  "descricao": "Coiote · a bigorna ACME",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 27584
+ },
  "mu_alvo": {
   "descricao": "Agente 47 · a mira e o código de barras",
   "quadros": 12,
@@ -9070,6 +9098,20 @@
   ],
   "laco": false,
   "bytes": 18176
+ },
+ "mu_android": {
+  "descricao": "Krang · o cérebro na cúpula",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 35860
  },
  "mu_aneis": {
   "descricao": "Sonic · os anéis se espalhando",
@@ -9126,6 +9168,20 @@
   ],
   "laco": false,
   "bytes": 35348
+ },
+ "mu_arremesso_carro": {
+  "descricao": "Sr. Incrível · o carro arremessado",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 30352
  },
  "mu_asa_negra": {
   "descricao": "Sephiroth · a asa negra e as penas",
@@ -9477,6 +9533,20 @@
   "laco": false,
   "bytes": 37798
  },
+ "mu_contra_golpe": {
+  "descricao": "Splinter · o contra-golpe",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 22244
+ },
  "mu_copia": {
   "descricao": "Kakashi · o pergaminho do jutsu copiado",
   "quadros": 12,
@@ -9490,6 +9560,20 @@
   ],
   "laco": false,
   "bytes": 16782
+ },
+ "mu_cordinha": {
+  "descricao": "Woody · a cordinha, o chapéu e a estrela",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 29296
  },
  "mu_corpo_novo": {
   "descricao": "Ultron · o corpo novo se montando",
@@ -9547,6 +9631,48 @@
   "laco": false,
   "bytes": 60430
  },
+ "mu_desastrado": {
+  "descricao": "Pateta · o tombo e as estrelinhas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 30332
+ },
+ "mu_desprevenido": {
+  "descricao": "Bebop · a investida",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 26656
+ },
+ "mu_destruir": {
+  "descricao": "Stitch · o escudo partido e as garrinhas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 40294
+ },
  "mu_devil_jin": {
   "descricao": "Jin · as asas do Devil e o raio da testa",
   "quadros": 12,
@@ -9575,6 +9701,20 @@
   "laco": false,
   "bytes": 46380
  },
+ "mu_diamante": {
+  "descricao": "Pantera Cor-de-Rosa · o diamante roubado",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 26920
+ },
  "mu_doombot": {
   "descricao": "Doutor Destino · o Doombot que se parte",
   "quadros": 12,
@@ -9588,6 +9728,20 @@
   ],
   "laco": false,
   "bytes": 31416
+ },
+ "mu_dragao_oeste": {
+  "descricao": "Iroh · o sopro do Dragão do Oeste",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 63964
  },
  "mu_elo_mental": {
   "descricao": "Jean Grey · a Fênix e o elo mental",
@@ -9673,6 +9827,20 @@
   "laco": false,
   "bytes": 14076
  },
+ "mu_espada_muda": {
+  "descricao": "She-Ra · a espada que muda",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 30916
+ },
  "mu_espinafre": {
   "descricao": "Popeye · o espinafre e a âncora",
   "quadros": 12,
@@ -9729,6 +9897,20 @@
   "laco": false,
   "bytes": 41194
  },
+ "mu_estado_avatar": {
+  "descricao": "Korra · os quatro elementos do Estado Avatar",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 65510
+ },
  "mu_estalo": {
   "descricao": "Thanos · o estalo e o pó ao vento",
   "quadros": 12,
@@ -9742,6 +9924,20 @@
   ],
   "laco": false,
   "bytes": 50146
+ },
+ "mu_estica": {
+  "descricao": "Mulher-Elástica · o corpo que estica",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 39568
  },
  "mu_estilo": {
   "descricao": "Dante · os disparos e o selo de estilo",
@@ -9883,6 +10079,20 @@
   "laco": false,
   "bytes": 32598
  },
+ "mu_furacao": {
+  "descricao": "Taz · o furacão",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 42316
+ },
  "mu_furia_bowser": {
   "descricao": "Bowser · o casco de espinhos e o fogo",
   "quadros": 12,
@@ -9953,6 +10163,20 @@
   "laco": false,
   "bytes": 14156
  },
+ "mu_garras_aco": {
+  "descricao": "Shredder · as garras de aço",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 20346
+ },
  "mu_garras_regeneram": {
   "descricao": "Wolverine · as garras em X e a cura",
   "quadros": 12,
@@ -9994,6 +10218,20 @@
   ],
   "laco": false,
   "bytes": 69152
+ },
+ "mu_goool": {
+  "descricao": "Casey Jones · o taco e o disco",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 19126
  },
  "mu_grayskull": {
   "descricao": "He-Man · a Espada do Poder e o raio",
@@ -10177,6 +10415,20 @@
   "laco": false,
   "bytes": 31436
  },
+ "mu_infinito": {
+  "descricao": "Buzz · as asas, o laser e o voo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 15596
+ },
  "mu_inibidores": {
   "descricao": "Shadow · os inibidores caindo e o caos",
   "quadros": 12,
@@ -10190,6 +10442,20 @@
   ],
   "laco": false,
   "bytes": 65644
+ },
+ "mu_instinto": {
+  "descricao": "Lion-O · o Olho de Thundera",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 38666
  },
  "mu_interrogatorio": {
   "descricao": "Justiceiro · a caveira e os tiros traçantes",
@@ -10260,6 +10526,20 @@
   ],
   "laco": false,
   "bytes": 27562
+ },
+ "mu_kaboom": {
+  "descricao": "Marvin · o KABOOM",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 61638
  },
  "mu_kage_bunshin": {
   "descricao": "Naruto · as nuvens de fumaça e os clones",
@@ -10513,6 +10793,20 @@
   "laco": false,
   "bytes": 38064
  },
+ "mu_nyeh": {
+  "descricao": "Esqueleto · o cajado do carneiro",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 59298
+ },
  "mu_odio_herois": {
   "descricao": "Lex Luthor · os cristais de kryptonita",
   "quadros": 12,
@@ -10680,6 +10974,20 @@
   ],
   "laco": false,
   "bytes": 72272
+ },
+ "mu_poeira": {
+  "descricao": "Papa-Léguas · a poeira",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 20558
  },
  "mu_portal": {
   "descricao": "Doutor Estranho · o anel de faíscas do portal girando",
@@ -10862,6 +11170,20 @@
   ],
   "laco": false,
   "bytes": 31746
+ },
+ "mu_redirecionado": {
+  "descricao": "Zuko · o raio redirecionado",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 18914
  },
  "mu_rugido_leao": {
   "descricao": "Aiolia · o Relâmpago de Plasma",
@@ -11087,6 +11409,34 @@
   "laco": false,
   "bytes": 14288
  },
+ "mu_temporada": {
+  "descricao": "Patolino · o tiro e o bico girando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 29060
+ },
+ "mu_terremoto": {
+  "descricao": "Toph · as pedras e o terremoto",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 53948
+ },
  "mu_terreno": {
   "descricao": "Lara · a armadilha de dentes fechando",
   "quadros": 12,
@@ -11100,6 +11450,20 @@
   ],
   "laco": false,
   "bytes": 13166
+ },
+ "mu_tombo": {
+  "descricao": "Jerry · o queijo e a marreta",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 31030
  },
  "mu_toque": {
   "descricao": "Vampira · a energia roubada correndo",
