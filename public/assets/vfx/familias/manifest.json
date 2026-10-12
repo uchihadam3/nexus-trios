@@ -9043,6 +9043,62 @@
   "laco": false,
   "bytes": 34866
  },
+ "mu_aneis": {
+  "descricao": "Sonic · os anéis se espalhando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 37226
+ },
+ "mu_anel_lanterna": {
+  "descricao": "Lanterna Verde · o símbolo e a bateria recarregando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 47148
+ },
+ "mu_armadura_doom": {
+  "descricao": "Doom Slayer · os fragmentos de armadura",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 35348
+ },
+ "mu_asa_negra": {
+  "descricao": "Sephiroth · a asa negra e as penas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 33808
+ },
  "mu_batarangue": {
   "descricao": "Batman · o batarangue girando e acertando",
   "quadros": 12,
@@ -9141,6 +9197,20 @@
   "laco": false,
   "bytes": 63338
  },
+ "mu_buster": {
+  "descricao": "Cloud · a Buster Sword rachando o chão",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 31140
+ },
  "mu_cacador": {
   "descricao": "Blade · a glaive girando e os cortes",
   "quadros": 12,
@@ -9225,6 +9295,34 @@
   "laco": false,
   "bytes": 52434
  },
+ "mu_combo_tifa": {
+  "descricao": "Tifa · os socos em sequência",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 32338
+ },
+ "mu_concentracao": {
+  "descricao": "Vergil · o Corte do Julgamento",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 79412
+ },
  "mu_copia": {
   "descricao": "Kakashi · o pergaminho do jutsu copiado",
   "quadros": 12,
@@ -9266,6 +9364,20 @@
   ],
   "laco": false,
   "bytes": 34464
+ },
+ "mu_devorador": {
+  "descricao": "Galactus · o planeta rachando e sugado para o alto",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 46380
  },
  "mu_doombot": {
   "descricao": "Doutor Destino · o Doombot que se parte",
@@ -9309,6 +9421,48 @@
   "laco": false,
   "bytes": 38614
  },
+ "mu_erva": {
+  "descricao": "Jill · a erva verde e a cura",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 34238
+ },
+ "mu_escudo_mjolnir": {
+  "descricao": "Master Chief · o escudo de energia recarregando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 32214
+ },
+ "mu_espada_mestra": {
+  "descricao": "Link · o feixe da Espada Mestra",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 14076
+ },
  "mu_espinho": {
   "descricao": "Yor · o espinho dourado e as pétalas",
   "quadros": 12,
@@ -9337,6 +9491,34 @@
   "laco": false,
   "bytes": 50146
  },
+ "mu_estilo": {
+  "descricao": "Dante · os disparos e o selo de estilo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 27622
+ },
+ "mu_faca": {
+  "descricao": "Leon · a faca e a faísca do aparo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 12190
+ },
  "mu_fator_cura": {
   "descricao": "Deadpool · as katanas cruzadas e as cruzes de cura",
   "quadros": 12,
@@ -9364,6 +9546,20 @@
   ],
   "laco": false,
   "bytes": 17460
+ },
+ "mu_furia_esparta": {
+  "descricao": "Kratos · as Lâminas do Caos em chamas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 75862
  },
  "mu_gancho": {
   "descricao": "Batman · o gancho e o escudo do morcego",
@@ -9407,6 +9603,34 @@
   "laco": false,
   "bytes": 69152
  },
+ "mu_groot": {
+  "descricao": "Groot · os galhos crescendo em cúpula",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 55090
+ },
+ "mu_hacker": {
+  "descricao": "Ciborgue · as trilhas de circuito e a varredura",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 14996
+ },
  "mu_hex": {
   "descricao": "Feiticeira Escarlate · os fios da magia do caos",
   "quadros": 12,
@@ -9434,6 +9658,20 @@
   ],
   "laco": false,
   "bytes": 53248
+ },
+ "mu_inibidores": {
+  "descricao": "Shadow · os inibidores caindo e o caos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 65644
  },
  "mu_interrogatorio": {
   "descricao": "Justiceiro · a caveira e os tiros traçantes",
@@ -9575,6 +9813,20 @@
   "laco": false,
   "bytes": 69160
  },
+ "mu_mina": {
+  "descricao": "Rocket · a mina piscando e explodindo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 33668
+ },
  "mu_modo_serio": {
   "descricao": "Saitama · o soco sério e a onda gigante",
   "quadros": 12,
@@ -9631,6 +9883,34 @@
   "laco": false,
   "bytes": 105308
  },
+ "mu_planeta": {
+  "descricao": "Surfista Prateado · a prancha e o planeta escolhido",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 34454
+ },
+ "mu_poder_inabalavel": {
+  "descricao": "Ganondorf · a Triforce do Poder",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 72272
+ },
  "mu_portal": {
   "descricao": "Doutor Estranho · o anel de faíscas do portal girando",
   "quadros": 12,
@@ -9658,6 +9938,34 @@
   ],
   "laco": false,
   "bytes": 102874
+ },
+ "mu_proximo": {
+  "descricao": "Ezio · a lâmina oculta e a insígnia",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 13764
+ },
+ "mu_raio_de_gelo": {
+  "descricao": "Samus · o raio de gelo e os cristais",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 29982
  },
  "mu_raio_rubi": {
   "descricao": "Ciclope · o raio sem controle varrendo",
@@ -9728,6 +10036,20 @@
   ],
   "laco": false,
   "bytes": 39662
+ },
+ "mu_shazam": {
+  "descricao": "Shazam · o raio do céu e o emblema",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 53202
  },
  "mu_simbionte": {
   "descricao": "Venom · a gosma e a aranha branca",
@@ -9813,6 +10135,20 @@
   "laco": false,
   "bytes": 14288
  },
+ "mu_terreno": {
+  "descricao": "Lara · a armadilha de dentes fechando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 13166
+ },
  "mu_toque": {
   "descricao": "Vampira · a energia roubada correndo",
   "quadros": 12,
@@ -9826,6 +10162,20 @@
   ],
   "laco": false,
   "bytes": 41710
+ },
+ "mu_tranquilizante": {
+  "descricao": "Snake · o alerta e o dardo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 10086
  },
  "mu_treino": {
   "descricao": "Piccolo · a capa pesada caindo e o ki do aluno",
@@ -9855,6 +10205,20 @@
   "laco": false,
   "bytes": 34296
  },
+ "mu_uroboros": {
+  "descricao": "Wesker · os tentáculos e os olhos vermelhos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 43654
+ },
  "mu_vazio_infinito": {
   "descricao": "Gojo · o céu de estrelas do domínio",
   "quadros": 12,
@@ -9882,6 +10246,34 @@
   ],
   "laco": false,
   "bytes": 25982
+ },
+ "mu_witch_time": {
+  "descricao": "Bayonetta · o relógio do Witch Time",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 56854
+ },
+ "mu_zandatsu": {
+  "descricao": "Raiden · o Modo Lâmina e o núcleo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 59844
  },
  "mu_zenkai": {
   "descricao": "Vegeta · a aura dourada, os raios e a cura do Zenkai",
