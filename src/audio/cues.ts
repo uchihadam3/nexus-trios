@@ -165,6 +165,10 @@ const ANTES_DA_NOVA: Partial<Record<FamiliaNova, { antes: Sound; saida?: Sound }
   forma_final: { antes: 'sora-preparo' },
   flor_escarlate: { antes: 'malenia-preparo' },
   tiro_planejado: { antes: 'agent47-preparo' },
+  sentenca: { antes: 'pyramidhead-preparo' },
+  tempestade_de_areia: { antes: 'prince-preparo' },
+  ataque_da_alma: { antes: 'alucard-preparo' },
+  cometa_de_pegaso: { antes: 'seiya-preparo' },
   despertar_gohan: { antes: 'aura-besta' },
   raio_mortal: { antes: 'raio-mortal-saida' },
   bola_da_morte: { antes: 'bola-da-morte-carga' },
@@ -211,11 +215,10 @@ export const SOM_DA_FAMILIA: Record<VfxFamily, SomDaFamilia> = {
   ...Object.fromEntries(NOVAS.map((k) => {
     const x = FAMILIAS_NOVAS[k] as { viagem?: string; faixa?: string; preparo?: string };
     // a saída (o que voa ou o feixe) usa a biblioteca; o impacto é o som da própria família
-    const saida: Sound | undefined = x.faixa === 'laser' ? 'feixe' : x.faixa ? 'feixe' : x.viagem === 'flecha' ? SOM_DA_NOVA('flecha')
-      : x.viagem === 'disco' ? SOM_DA_NOVA('disco') : x.viagem === 'bola_ki' ? 'disparo' : x.viagem ? 'disparo' : undefined;
+    const saida: Sound | undefined = x.faixa === 'laser' ? 'feixe' : x.faixa ? 'feixe' : x.viagem === 'flecha' ? SOM_DA_NOVA('flecha') : x.viagem === 'bola_ki' ? 'disparo' : x.viagem ? 'disparo' : undefined;
     const extra = ANTES_DA_NOVA[k];
     const preparo: Sound | undefined = extra?.antes ?? (x.preparo ? 'carga-grande' : undefined);
-    const impacto = k === 'flecha' ? 'cravar' : k === 'disco' ? 'ricochete' : SOM_DA_NOVA(k);
+    const impacto = k === 'flecha' ? 'cravar' : SOM_DA_NOVA(k);
     return [k, { saida: extra?.saida ?? saida, preparo, impacto, antes: extra?.antes }];
   })) as Record<FamiliaNova, SomDaFamilia>,
 };

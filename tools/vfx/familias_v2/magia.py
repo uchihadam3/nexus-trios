@@ -40,30 +40,6 @@ def hipnose(T, t, rng):
     return G, H
 
 
-def relogio(T, t, rng):
-    """Tempo: um mostrador de relógio surge, os ponteiros giram rápido e travam; a imagem ondula."""
-    G, H = vazio(T)
-    abre = back(rel(t, 0, 0.25), 1.2)
-    env = apaga(t, 0.75, 1)
-    r = 0.6 * abre + 0.01
-    aro = T.ring(r, 0.02) * 1.3 + T.ring(r * 0.9, 0.006) * 0.6
-    marcas = []
-    for k in range(12):
-        a = TAU * k / 12
-        l = 0.12 if k % 3 == 0 else 0.06
-        marcas.append((math.cos(a) * r * 0.88, math.sin(a) * r * 0.88, math.cos(a) * (r * 0.88 - l * abre), math.sin(a) * (r * 0.88 - l * abre), 1))
-    gira = ease_out(rel(t, 0.1, 0.55), 3) * TAU * 3
-    pont = [(0, 0, math.cos(gira - math.pi / 2) * r * 0.75, math.sin(gira - math.pi / 2) * r * 0.75, 1),
-            (0, 0, math.cos(gira / 12 - math.pi / 2 + 1) * r * 0.5, math.sin(gira / 12 - math.pi / 2 + 1) * r * 0.5, 1)]
-    m = T.lines(marcas, 0.012, 0.002)
-    p = T.lines(pont, 0.02, 0.002)
-    onda = T.ring(r * (1 + 0.4 * rel(t, 0.55, 0.9)), 0.03) * pulso(t, 0.55, 0.9) * 1.4
-    trava = T.gauss(0, 0, 0.06) * 2 * janela(t, 0.5, 0.55)
-    G += (T.glow(aro + m + p, 1.2, 1, 0.02) + trava) * env + onda
-    H += (aro * 0.5 + p + trava) * env
-    return G, H
-
-
 def runas(T, t, rng):
     """Runas: um círculo de símbolos se acende em volta do alvo e as runas sobem uma a uma."""
     G, H = vazio(T)
@@ -324,7 +300,6 @@ def invocacao(T, t, rng):
 REGISTRO = [
     ("olho", olho, GRANDE, "olho gigante se abrindo", False),
     ("hipnose", hipnose, GRANDE, "espiral hipnótica", False),
-    ("relogio", relogio, GRANDE, "mostrador de relógio", False),
     ("runas", runas, GRANDE, "círculo de runas", False),
     ("sarcofago", sarcofago, GRANDE, "caixa negra fechando", False),
     ("encanto", encanto, GRANDE, "estrelas de encanto", False),

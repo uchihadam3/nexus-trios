@@ -257,6 +257,23 @@
    ],
    "bytes": 43591
   },
+  "alucard-preparo": {
+   "arquivo": "alucard-preparo.mp3",
+   "descricao": "Alucard: as almas (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 25847
+  },
   "alvo-confirmado": {
    "arquivo": "alvo-confirmado.mp3",
    "descricao": "Justiceiro: o tiro de rifle e o impacto",
@@ -614,6 +631,23 @@
    ],
    "bytes": 36228
   },
+  "arte-do-vento": {
+   "arquivo": "arte-do-vento.mp3",
+   "descricao": "Hayabusa: a Arte do Vento",
+   "versoes": [
+    0.0,
+    1.5121,
+    3.1129,
+    4.5797
+   ],
+   "duracoes": [
+    1.4321,
+    1.5208,
+    1.3868,
+    1.4476
+   ],
+   "bytes": 54416
+  },
   "asas-de-isis": {
    "arquivo": "asas-de-isis.mp3",
    "descricao": "básico de Ísis: a asa e as penas",
@@ -647,6 +681,23 @@
     1.5877
    ],
    "bytes": 54422
+  },
+  "ataque-da-alma": {
+   "arquivo": "ataque-da-alma.mp3",
+   "descricao": "Alucard: o ataque da alma",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 62738
   },
   "atracao": {
    "arquivo": "atracao.mp3",
@@ -3147,6 +3198,23 @@
    ],
    "bytes": 83848
   },
+  "cometa-de-pegaso": {
+   "arquivo": "cometa-de-pegaso.mp3",
+   "descricao": "Seiya: o Cometa de Pégaso",
+   "versoes": [
+    0.0,
+    2.18,
+    4.4361,
+    6.5451
+   ],
+   "duracoes": [
+    2.1,
+    2.1761,
+    2.029,
+    2.132
+   ],
+   "bytes": 72943
+  },
   "computacao-preparo": {
    "arquivo": "computacao-preparo.mp3",
    "descricao": "Visão: os circuitos girando (antes do golpe)",
@@ -3333,6 +3401,23 @@
     1.1167
    ],
    "bytes": 40656
+  },
+  "copia-de-poder": {
+   "arquivo": "copia-de-poder.mp3",
+   "descricao": "Kirby: a cópia de poder",
+   "versoes": [
+    0.0,
+    1.5985,
+    3.2655,
+    4.8273
+   ],
+   "duracoes": [
+    1.5185,
+    1.587,
+    1.4818,
+    1.5425
+   ],
+   "bytes": 48775
   },
   "corpo-de-borracha": {
    "arquivo": "corpo-de-borracha.mp3",
@@ -3691,6 +3776,23 @@
    ],
    "bytes": 51503
   },
+  "cosmo-ardente": {
+   "arquivo": "cosmo-ardente.mp3",
+   "descricao": "Seiya: o cosmo ardente",
+   "versoes": [
+    0.0,
+    2.0309,
+    4.0837,
+    6.0086
+   ],
+   "duracoes": [
+    1.9509,
+    1.9729,
+    1.8448,
+    1.9149
+   ],
+   "bytes": 73562
+  },
   "cosmo-leao": {
    "arquivo": "cosmo-leao.mp3",
    "descricao": "o cosmo dourado do Aiolia subindo",
@@ -3775,6 +3877,23 @@
     1.7259
    ],
    "bytes": 54339
+  },
+  "cruz-arremessada": {
+   "arquivo": "cruz-arremessada.mp3",
+   "descricao": "Simon: a cruz",
+   "versoes": [
+    0.0,
+    1.8479,
+    3.7744,
+    5.5248
+   ],
+   "duracoes": [
+    1.7679,
+    1.8465,
+    1.6704,
+    1.8566
+   ],
+   "bytes": 66652
   },
   "cura": {
    "arquivo": "cura.mp3",
@@ -4268,23 +4387,6 @@
     1.8274
    ],
    "bytes": 65419
-  },
-  "disco": {
-   "arquivo": "disco.mp3",
-   "descricao": "família disco",
-   "versoes": [
-    0.0,
-    0.68,
-    1.3817,
-    2.0415
-   ],
-   "duracoes": [
-    0.6,
-    0.6217,
-    0.5797,
-    0.6091
-   ],
-   "bytes": 25327
   },
   "disco-solar": {
    "arquivo": "disco-solar.mp3",
@@ -6666,6 +6768,23 @@
    ],
    "bytes": 59264
   },
+  "forma-de-nevoa": {
+   "arquivo": "forma-de-nevoa.mp3",
+   "descricao": "Alucard: a forma de névoa",
+   "versoes": [
+    0.0,
+    1.8859,
+    3.7905,
+    5.5594
+   ],
+   "duracoes": [
+    1.8059,
+    1.8246,
+    1.6889,
+    1.757
+   ],
+   "bytes": 63353
+  },
   "forma-desperta": {
    "arquivo": "forma-desperta.mp3",
    "descricao": "Forma desperta: o grito e as faixas rasgando",
@@ -8264,6 +8383,23 @@
    ],
    "bytes": 61003
   },
+  "inalar": {
+   "arquivo": "inalar.mp3",
+   "descricao": "Kirby: inalar",
+   "versoes": [
+    0.0,
+    1.5659,
+    3.153,
+    4.6699
+   ],
+   "duracoes": [
+    1.4859,
+    1.5071,
+    1.4368,
+    1.477
+   ],
+   "bytes": 52448
+  },
   "instinto": {
    "arquivo": "instinto.mp3",
    "descricao": "família instinto",
@@ -8654,6 +8790,23 @@
     1.4213
    ],
    "bytes": 49880
+  },
+  "izuna-otoshi": {
+   "arquivo": "izuna-otoshi.mp3",
+   "descricao": "Hayabusa: Izuna Otoshi",
+   "versoes": [
+    0.0,
+    1.98,
+    4.0289,
+    5.9446
+   ],
+   "duracoes": [
+    1.9,
+    1.9689,
+    1.8357,
+    1.9289
+   ],
+   "bytes": 60396
   },
   "jajanken-papel": {
    "arquivo": "jajanken-papel.mp3",
@@ -9436,6 +9589,23 @@
     1.5041
    ],
    "bytes": 60738
+  },
+  "lamina-do-dragao": {
+   "arquivo": "lamina-do-dragao.mp3",
+   "descricao": "Hayabusa: a Lâmina do Dragão",
+   "versoes": [
+    0.0,
+    1.2007,
+    2.4607,
+    3.6834
+   ],
+   "duracoes": [
+    1.1207,
+    1.18,
+    1.1427,
+    1.1646
+   ],
+   "bytes": 49038
   },
   "lamina-eletrica": {
    "arquivo": "lamina-eletrica.mp3",
@@ -19365,6 +19535,23 @@
    ],
    "bytes": 44044
   },
+  "presenca-opressiva": {
+   "arquivo": "presenca-opressiva.mp3",
+   "descricao": "Cabeça de Pirâmide: a presença",
+   "versoes": [
+    0.0,
+    2.28,
+    4.6398,
+    6.8454
+   ],
+   "duracoes": [
+    2.2,
+    2.2798,
+    2.1256,
+    2.2335
+   ],
+   "bytes": 64365
+  },
   "primeira-postura": {
    "arquivo": "primeira-postura.mp3",
    "descricao": "Zenitsu: a cúpula elétrica no aliado",
@@ -19381,6 +19568,23 @@
     1.6244
    ],
    "bytes": 69643
+  },
+  "prince-preparo": {
+   "arquivo": "prince-preparo.mp3",
+   "descricao": "Príncipe: a areia (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 65931
   },
   "prisao": {
    "arquivo": "prisao.mp3",
@@ -19806,6 +20010,23 @@
     1.8274
    ],
    "bytes": 75633
+  },
+  "pyramidhead-preparo": {
+   "arquivo": "pyramidhead-preparo.mp3",
+   "descricao": "Cabeça de Pirâmide: a faca arrastada (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 68473
   },
   "quarta-parede": {
    "arquivo": "quarta-parede.mp3",
@@ -20521,6 +20742,23 @@
    ],
    "bytes": 42686
   },
+  "rebobinar": {
+   "arquivo": "rebobinar.mp3",
+   "descricao": "Príncipe: rebobinar",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2314,
+    6.2437
+   ],
+   "duracoes": [
+    2.0,
+    2.0714,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 74331
+  },
   "reflexo": {
    "arquivo": "reflexo.mp3",
    "descricao": "família reflexo",
@@ -20690,23 +20928,6 @@
     1.8274
    ],
    "bytes": 61119
-  },
-  "relogio": {
-   "arquivo": "relogio.mp3",
-   "descricao": "família relogio",
-   "versoes": [
-    0.0,
-    1.38,
-    2.8071,
-    4.1432
-   ],
-   "duracoes": [
-    1.3,
-    1.3471,
-    1.256,
-    1.3198
-   ],
-   "bytes": 60235
   },
   "renascer": {
    "arquivo": "renascer.mp3",
@@ -21541,6 +21762,23 @@
    ],
    "bytes": 69346
   },
+  "seiya-preparo": {
+   "arquivo": "seiya-preparo.mp3",
+   "descricao": "Seiya: o cosmo (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 54979
+  },
   "selo": {
    "arquivo": "selo.mp3",
    "descricao": "selo",
@@ -21625,6 +21863,23 @@
     1.3198
    ],
    "bytes": 79102
+  },
+  "sentenca": {
+   "arquivo": "sentenca.mp3",
+   "descricao": "Cabeça de Pirâmide: a sentença",
+   "versoes": [
+    0.0,
+    2.28,
+    4.6398,
+    6.8454
+   ],
+   "duracoes": [
+    2.2,
+    2.2798,
+    2.1256,
+    2.2335
+   ],
+   "bytes": 74079
   },
   "sephiroth-preparo": {
    "arquivo": "sephiroth-preparo.mp3",
@@ -22612,6 +22867,23 @@
    ],
    "bytes": 67492
   },
+  "super-inalacao": {
+   "arquivo": "super-inalacao.mp3",
+   "descricao": "Kirby: a super inalação",
+   "versoes": [
+    0.0,
+    1.9194,
+    3.9049,
+    5.8124
+   ],
+   "duracoes": [
+    1.8394,
+    1.9054,
+    1.8276,
+    1.7832
+   ],
+   "bytes": 63320
+  },
   "super-sonic": {
    "arquivo": "super-sonic.mp3",
    "descricao": "Sonic: o Super Sonic",
@@ -22985,6 +23257,23 @@
     1.6244
    ],
    "bytes": 80095
+  },
+  "tempestade-de-areia": {
+   "arquivo": "tempestade-de-areia.mp3",
+   "descricao": "Príncipe: a tempestade de areia",
+   "versoes": [
+    0.0,
+    2.18,
+    4.4361,
+    6.5451
+   ],
+   "duracoes": [
+    2.1,
+    2.1761,
+    2.029,
+    2.124
+   ],
+   "bytes": 76608
   },
   "tempestade-preparo": {
    "arquivo": "tempestade-preparo.mp3",
@@ -24039,6 +24328,23 @@
     1.8274
    ],
    "bytes": 54907
+  },
+  "vampire-killer": {
+   "arquivo": "vampire-killer.mp3",
+   "descricao": "Simon: o Vampire Killer",
+   "versoes": [
+    0.0,
+    1.5678,
+    3.2199,
+    4.7617
+   ],
+   "duracoes": [
+    1.4878,
+    1.5721,
+    1.4618,
+    1.5164
+   ],
+   "bytes": 59080
   },
   "vampirismo": {
    "arquivo": "vampirismo.mp3",

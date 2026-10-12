@@ -209,6 +209,20 @@
   "laco": false,
   "bytes": 35446
  },
+ "alucard_preparo": {
+  "descricao": "Alucard · as almas girando (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 21882
+ },
  "alvo_confirmado": {
   "descricao": "Justiceiro · a bala supersônica e o impacto",
   "quadros": 12,
@@ -475,6 +489,20 @@
   "laco": false,
   "bytes": 12010
  },
+ "arte_do_vento": {
+  "descricao": "Hayabusa · os redemoinhos ninja",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 20580
+ },
  "asas_de_isis": {
   "descricao": "Básico de Ísis: a asa e as penas douradas",
   "quadros": 12,
@@ -502,6 +530,20 @@
   ],
   "laco": false,
   "bytes": 34264
+ },
+ "ataque_da_alma": {
+  "descricao": "Alucard · as almas voando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 24872
  },
  "atracao": {
   "descricao": "tudo puxado para um ponto",
@@ -2771,6 +2813,20 @@
   "laco": true,
   "bytes": 27776
  },
+ "cometa_de_pegaso": {
+  "descricao": "Seiya · o Cometa de Pégaso",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 39206
+ },
  "computacao_preparo": {
   "descricao": "Visão · os anéis de circuito (Preparo, laço)",
   "quadros": 12,
@@ -2938,6 +2994,20 @@
   ],
   "laco": false,
   "bytes": 57104
+ },
+ "copia_de_poder": {
+  "descricao": "Kirby · o chapéu do poder",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 38970
  },
  "corpo_de_borracha": {
   "descricao": "Luffy · Corpo de borracha: estica e os golpes ricocheteiam",
@@ -3275,6 +3345,20 @@
   "laco": false,
   "bytes": 152864
  },
+ "cosmo_ardente": {
+  "descricao": "Seiya · o cosmo e a constelação",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 76368
+ },
  "cosmo_leao": {
   "descricao": "Aiolia · o cosmo dourado e a juba do leão (laço)",
   "quadros": 12,
@@ -3358,6 +3442,20 @@
   ],
   "laco": false,
   "bytes": 38666
+ },
+ "cruz_arremessada": {
+  "descricao": "Simon · a cruz bumerangue",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 22046
  },
  "cura": {
   "descricao": "cura",
@@ -3792,20 +3890,6 @@
   ],
   "laco": false,
   "bytes": 53114
- },
- "disco": {
-  "descricao": "disco girando em viagem (+x)",
-  "quadros": 12,
-  "grade": [
-   3,
-   4
-  ],
-  "tamanho": [
-   160,
-   160
-  ],
-  "laco": true,
-  "bytes": 14102
  },
  "disco_solar": {
   "descricao": "Básico de Rá: o Olho no disco e o raio que queima",
@@ -5893,6 +5977,20 @@
   "laco": false,
   "bytes": 19920
  },
+ "forma_de_nevoa": {
+  "descricao": "Alucard · a névoa e os morcegos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 45246
+ },
  "forma_devil": {
   "descricao": "Kazuya · as asas do Devil e o golpe",
   "quadros": 12,
@@ -7195,6 +7293,20 @@
   "laco": false,
   "bytes": 40254
  },
+ "inalar": {
+  "descricao": "Kirby · a boca puxando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 29314
+ },
  "instinto": {
   "descricao": "Instinto Superior: aura prateada e vultos",
   "quadros": 12,
@@ -7488,6 +7600,20 @@
   ],
   "laco": true,
   "bytes": 69844
+ },
+ "izuna_otoshi": {
+  "descricao": "Hayabusa · o rival girado e jogado no chão",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 30306
  },
  "jajanken_papel": {
   "descricao": "Gon · Jajanken: Papel explodindo",
@@ -8132,6 +8258,20 @@
   ],
   "laco": false,
   "bytes": 25008
+ },
+ "lamina_do_dragao": {
+  "descricao": "Hayabusa · o corte e o dragão",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 10576
  },
  "lamina_eletrica": {
   "descricao": "lâmina elétrica",
@@ -16351,6 +16491,20 @@
   "laco": false,
   "bytes": 33764
  },
+ "presenca_opressiva": {
+  "descricao": "Cabeça de Pirâmide · o capacete e a névoa",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 82858
+ },
  "primeira_postura": {
   "descricao": "Zenitsu · a cúpula elétrica no aliado",
   "quadros": 12,
@@ -16364,6 +16518,20 @@
   ],
   "laco": false,
   "bytes": 50114
+ },
+ "prince_preparo": {
+  "descricao": "Príncipe · a Adaga e a areia (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 32142
  },
  "prisao": {
   "descricao": "prisão de barras",
@@ -16686,6 +16854,20 @@
   ],
   "laco": false,
   "bytes": 35298
+ },
+ "pyramidhead_preparo": {
+  "descricao": "Cabeça de Pirâmide · a faca arrastada (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 18566
  },
  "quarta_parede": {
   "descricao": "Deadpool · o quadro do gibi quebrando",
@@ -17317,6 +17499,20 @@
   "laco": false,
   "bytes": 60576
  },
+ "rebobinar": {
+  "descricao": "Príncipe · o relógio ao contrário e a areia",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 87914
+ },
  "reflexo": {
   "descricao": "escudo de espelho hexagonal que devolve o golpe",
   "quadros": 12,
@@ -17456,20 +17652,6 @@
   ],
   "laco": false,
   "bytes": 28344
- },
- "relogio": {
-  "descricao": "mostrador de relógio",
-  "quadros": 12,
-  "grade": [
-   3,
-   4
-  ],
-  "tamanho": [
-   192,
-   192
-  ],
-  "laco": false,
-  "bytes": 66486
  },
  "renascer": {
   "descricao": "asas de fogo: renasce das cinzas",
@@ -17652,20 +17834,6 @@
   ],
   "laco": false,
   "bytes": 50246
- },
- "ricochete": {
-  "descricao": "estalo de ricochete",
-  "quadros": 12,
-  "grade": [
-   3,
-   4
-  ],
-  "tamanho": [
-   192,
-   192
-  ],
-  "laco": false,
-  "bytes": 69510
  },
  "ricochete_optico": {
   "descricao": "Ciclope · o quique do raio em cada rival",
@@ -18157,6 +18325,20 @@
   "laco": false,
   "bytes": 7928
  },
+ "seiya_preparo": {
+  "descricao": "Seiya · o cosmo virando esfera (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 27524
+ },
  "selo": {
   "descricao": "círculo mágico",
   "quadros": 12,
@@ -18226,6 +18408,20 @@
   ],
   "laco": false,
   "bytes": 20284
+ },
+ "sentenca": {
+  "descricao": "Cabeça de Pirâmide · a Grande Faca descendo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 30578
  },
  "sephiroth_preparo": {
   "descricao": "Sephiroth · a asa negra única (Preparo, laço)",
@@ -19095,6 +19291,20 @@
   "laco": true,
   "bytes": 23180
  },
+ "super_inalacao": {
+  "descricao": "Kirby · o redemoinho e a estrela",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 54412
+ },
  "super_sonic": {
   "descricao": "Sonic · a explosão dourada",
   "quadros": 12,
@@ -19472,6 +19682,20 @@
   ],
   "laco": false,
   "bytes": 31074
+ },
+ "tempestade_de_areia": {
+  "descricao": "Príncipe · a tempestade de areia",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 85346
  },
  "tempestade_preparo": {
   "descricao": "Tempestade · os olhos brancos e as nuvens (Preparo, laço)",
@@ -20214,6 +20438,20 @@
   ],
   "laco": false,
   "bytes": 49622
+ },
+ "vampire_killer": {
+  "descricao": "Simon · o chicote de corrente",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 11242
  },
  "vampirismo": {
   "descricao": "gotas de sangue em espiral e pulso de coração",

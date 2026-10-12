@@ -237,13 +237,6 @@ def lamina_de_agua(rng, v):
     return x
 
 
-def disco(rng, v):
-    n = n_de(0.6)
-    t = np.arange(n) / SR
-    zumbido = assobio(rng, n, 900, 1600, 1.0, 0.3) * (0.6 + 0.4 * np.sin(2 * math.pi * 18 * t)) * sobe_e_some(n, 0.6, 1.4) * 0.6
-    return zumbido + modal(n, 1300, rng=rng, **METAL) * env(n, 0.001, 0.3) * 0.06
-
-
 def ricochete(rng, v):
     x = _z(0.8)
     n = n_de(0.7)
@@ -673,16 +666,6 @@ def hipnose(rng, v):
     x *= 0.6 + 0.4 * np.sin(2 * math.pi * 6 * t)
     x += seno(varre(nota(81), nota(69), n, 0.5), n) * env(n, 0.1, 0.6) * 0.08
     return reverb(x, 0.7, 0.35)
-
-
-def relogio(rng, v):
-    x = _z(1.3)
-    for k in range(10):
-        m = n_de(0.05)
-        poe(x, modal(m, 3000 if k % 2 else 2400, rng=rng, razoes=[1, 2.4], quedas=[0.01, 0.006]) * 0.4, 0.06 + k * 0.05 * (1 - k * 0.04))
-    poe(x, modal(n_de(1.0), nota(72), rng=rng, **SINO) * env(n_de(1.0), 0.001, 0.6) * 0.3, 0.6)
-    poe(x, assobio(rng, n_de(0.5), 3000, 300, 0.6, 0.5) * env(n_de(0.5), 0.01, 0.3) * 0.4, 0.62)
-    return reverb(x, 0.6, 0.3)
 
 
 def runas(rng, v):

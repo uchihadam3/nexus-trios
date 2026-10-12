@@ -199,33 +199,6 @@ def lamina_de_agua(T, t, rng):
     return G, H
 
 
-def disco(T, t, rng):
-    """Disco arremessado em viagem: aro girando com borrão de movimento e faíscas atrás (aponta +x)."""
-    G, H = vazio(T)
-    giro = t * TAU * 3
-    aro = T.ring(0.34, 0.035, squash=1.9) + T.ring(0.2, 0.02, squash=1.9) * 0.7
-    raios = T.zero()
-    for k in range(3):
-        a = giro + TAU * k / 3
-        raios += T.lines([(0, 0, math.cos(a) * 0.34, math.sin(a) * 0.34 / 1.9, 1)], 0.014, 0.003)
-    borrao = T.blur(np.roll(aro, -6, axis=1), 0.02) * 0.6
-    rastro = np.exp(-(T.V / 0.07) ** 2) * smooth(-T.U, 0.25, 0.95) * smooth(T.U + 1, 0, 0.3) * 0.5
-    G += T.glow(aro + raios * 0.7, 1.2, 1, 0.02) + borrao + rastro
-    H += aro * 0.8 + raios * 0.5
-    return G, H
-
-
-def ricochete(T, t, rng):
-    """Ricochete: estalo metálico, anel rápido e faíscas em V, como algo que bate e volta."""
-    G, H = vazio(T)
-    clarao = T.flare(0, 0, 1.6, 0.8) * some(t, 0, 0.35) * 2.6 + T.gauss(0, 0, 0.1) * some(t, 0, 0.3) * 3
-    anel = sum(T.ring(0.08 + 0.5 * ease_out(rel(t, k * 0.06, 0.5 + k * 0.06), 2.5), 0.015) * pulso(t, k * 0.06, 0.5 + k * 0.06) for k in range(3)) * 1.4
-    fa = faiscas(T, rng, t, 18, 0.9, 0.032, cone=(-2.4, -1.6), gravidade=0.25) + faiscas(T, rng, t, 18, 0.9, 0.032, cone=(-1.2, -0.4), gravidade=0.25)
-    G += clarao + anel + T.glow(fa, 1, 1.2, 0.02)
-    H += clarao + anel * 0.4 + fa * 0.8
-    return G, H
-
-
 def florete(T, t, rng):
     """Florete: cinco estocadas finas e rápidas em ângulos diferentes, cada uma com um ponto de luz."""
     G, H = vazio(T)
@@ -256,7 +229,5 @@ REGISTRO = [
     ("lamina_sombria", lamina_sombria, GRANDE, "lâmina sombria", False),
     ("motosserra", motosserra, GRANDE, "dentes de serra girando", False),
     ("lamina_de_agua", lamina_de_agua, GRANDE, "fita de água em espiral", False),
-    ("disco", disco, MEDIA, "disco girando em viagem (+x)", True),
-    ("ricochete", ricochete, GRANDE, "estalo de ricochete", False),
     ("florete", florete, GRANDE, "estocadas finas em sequência", False),
 ]
