@@ -153,6 +153,20 @@
   "laco": false,
   "bytes": 41122
  },
+ "agulhas_de_cabelo": {
+  "descricao": "Básico do Jiraiya: as agulhas de cabelo e o soco",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 15824
+ },
  "alerta_urgente": {
   "descricao": "Anya · os ! pulando e a bolha-escudo",
   "quadros": 12,
@@ -2001,6 +2015,20 @@
   "laco": false,
   "bytes": 21132
  },
+ "chute_de_spike": {
+  "descricao": "Básico do Spike: o chute fluido e a fumaça",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 18054
+ },
  "chute_demoniaco": {
   "descricao": "Nezuko: chute em arco e o sangue explode em chamas",
   "quadros": 12,
@@ -3415,6 +3443,20 @@
   "laco": true,
   "bytes": 7916
  },
+ "escudo_rosa": {
+  "descricao": "Básico do Steven: o escudo com a rosa",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 21842
+ },
  "escudo_serafim": {
   "descricao": "Doutor Estranho · a mandala do Escudo de Serafim",
   "quadros": 12,
@@ -3498,6 +3540,20 @@
   ],
   "laco": false,
   "bytes": 48634
+ },
+ "espada_anti_magia": {
+  "descricao": "Básico do Asta: a espada larga e a antimagia",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 22230
  },
  "espada_de_alucard": {
   "descricao": "Alucard: corte elegante que vira morcegos",
@@ -3610,6 +3666,20 @@
   ],
   "laco": false,
   "bytes": 19092
+ },
+ "espadas_duplas": {
+  "descricao": "Básico do Kirito: os dois cortes em X",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 20748
  },
  "espera_alucardcv": {
   "descricao": "Alucard caído: a névoa vermelha e os morcegos em roda (laço)",
@@ -4730,6 +4800,20 @@
   ],
   "laco": false,
   "bytes": 75270
+ },
+ "frasco_de_senku": {
+  "descricao": "Básico do Senku: o frasco e a reação",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 16614
  },
  "frenesi_de_sangue": {
   "descricao": "Denji · três motosserras cortando e o sangue",
@@ -7055,6 +7139,20 @@
   "laco": false,
   "bytes": 50912
  },
+ "maca_de_rem": {
+  "descricao": "Básico da Rem: a maça girando na corrente",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 20884
+ },
  "machadada": {
   "descricao": "Básico do Jason: o machado descendo",
   "quadros": 12,
@@ -7236,6 +7334,20 @@
   ],
   "laco": false,
   "bytes": 62206
+ },
+ "manopla_de_garnet": {
+  "descricao": "Básico da Garnet: as duas manoplas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 18510
  },
  "manopla_joias": {
   "descricao": "Thanos · as seis joias acendendo (Preparo, laço)",
@@ -8063,6 +8175,20 @@
   "laco": true,
   "bytes": 226784
  },
+ "palma_gentil": {
+  "descricao": "Básico da Hinata: o Byakugan e a palma",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 15074
+ },
  "palma_impacto": {
   "descricao": "Killua · o raio estourando no rival",
   "quadros": 12,
@@ -8230,6 +8356,20 @@
   ],
   "laco": false,
   "bytes": 19622
+ },
+ "pergaminho_de_fogo": {
+  "descricao": "Básico da Sailor Mars: o ofuda e o fogo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 13734
  },
  "petalas": {
   "descricao": "flor e pétalas",
@@ -9043,6 +9183,20 @@
   "laco": false,
   "bytes": 40686
  },
+ "raio_de_aku": {
+  "descricao": "Básico do Aku: os olhos de laser",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 19634
+ },
  "raio_de_apolo": {
   "descricao": "Básico de Apolo: o sol e o feixe dourado",
   "quadros": 12,
@@ -9056,6 +9210,20 @@
   ],
   "laco": false,
   "bytes": 27244
+ },
+ "raio_de_dexter": {
+  "descricao": "Básico do Dexter: a arma de raio",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 14008
  },
  "raio_de_gaia": {
   "descricao": "Raio de Gaia: cinco pontos de luz se unem num raio trançado que abre um planeta de luz",
@@ -10401,6 +10569,20 @@
   "laco": false,
   "bytes": 33332
  },
+ "soco_de_johnny": {
+  "descricao": "Básico do Johnny Bravo: o brilho e o soco",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 14798
+ },
  "soco_de_kong": {
   "descricao": "Básico do Kong: o peito e os punhos de cima",
   "quadros": 12,
@@ -10456,6 +10638,20 @@
   ],
   "laco": false,
   "bytes": 67826
+ },
+ "soco_de_tsunade": {
+  "descricao": "Básico da Tsunade: o soco que racha o chão",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 39500
  },
  "soco_do_agente": {
   "descricao": "Básico do Smith: as cópias e o glitch",
@@ -11240,6 +11436,20 @@
   ],
   "laco": false,
   "bytes": 13446
+ },
+ "tiro_de_vash": {
+  "descricao": "Básico do Vash: o tiro e a pena",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 14178
  },
  "tiro_do_exterminador": {
   "descricao": "Básico do T-800: a mira vermelha e a espingarda",

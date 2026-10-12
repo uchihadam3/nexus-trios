@@ -189,6 +189,23 @@
    ],
    "bytes": 65981
   },
+  "agulhas-de-cabelo": {
+   "arquivo": "agulhas-de-cabelo.mp3",
+   "descricao": "básico do Jiraiya: as agulhas e o soco",
+   "versoes": [
+    0.0,
+    1.244,
+    2.5588,
+    3.792
+   ],
+   "duracoes": [
+    1.164,
+    1.2348,
+    1.1532,
+    1.2038
+   ],
+   "bytes": 48809
+  },
   "alerta-urgente": {
    "arquivo": "alerta-urgente.mp3",
    "descricao": "Anya: os ! e a bolha-escudo",
@@ -2229,6 +2246,23 @@
    ],
    "bytes": 37399
   },
+  "chute-de-spike": {
+   "arquivo": "chute-de-spike.mp3",
+   "descricao": "básico do Spike: o isqueiro e o chute",
+   "versoes": [
+    0.0,
+    1.28,
+    2.6035,
+    3.8429
+   ],
+   "duracoes": [
+    1.2,
+    1.2435,
+    1.1594,
+    1.2183
+   ],
+   "bytes": 46407
+  },
   "chute-demoniaco": {
    "arquivo": "chute-demoniaco.mp3",
    "descricao": "básico de Nezuko: chute e o sangue acendendo em chamas",
@@ -3844,6 +3878,23 @@
    ],
    "bytes": 23108
   },
+  "escudo-rosa": {
+   "arquivo": "escudo-rosa.mp3",
+   "descricao": "básico do Steven: o escudo de cristal",
+   "versoes": [
+    0.0,
+    1.3456,
+    2.7358,
+    4.048
+   ],
+   "duracoes": [
+    1.2656,
+    1.3101,
+    1.2323,
+    1.2478
+   ],
+   "bytes": 41452
+  },
   "escudo-serafim": {
    "arquivo": "escudo-serafim.mp3",
    "descricao": "Escudo de Serafim: o acorde e as runas",
@@ -3945,6 +3996,23 @@
     0.8122
    ],
    "bytes": 35771
+  },
+  "espada-anti-magia": {
+   "arquivo": "espada-anti-magia.mp3",
+   "descricao": "básico do Asta: a espada e a antimagia",
+   "versoes": [
+    0.0,
+    1.3627,
+    2.7021,
+    3.8692
+   ],
+   "duracoes": [
+    1.2827,
+    1.2594,
+    1.0871,
+    1.3198
+   ],
+   "bytes": 38000
   },
   "espada-de-alucard": {
    "arquivo": "espada-de-alucard.mp3",
@@ -4064,6 +4132,23 @@
     1.3198
    ],
    "bytes": 49145
+  },
+  "espadas-duplas": {
+   "arquivo": "espadas-duplas.mp3",
+   "descricao": "básico do Kirito: os dois cortes",
+   "versoes": [
+    0.0,
+    1.1516,
+    2.2718,
+    3.3237
+   ],
+   "duracoes": [
+    1.0716,
+    1.0402,
+    0.9718,
+    1.0063
+   ],
+   "bytes": 38769
   },
   "espera-alucardcv": {
    "arquivo": "espera-alucardcv.mp3",
@@ -5271,6 +5356,23 @@
     1.9289
    ],
    "bytes": 71996
+  },
+  "frasco-de-senku": {
+   "arquivo": "frasco-de-senku.mp3",
+   "descricao": "básico do Senku: o vidro e a reação",
+   "versoes": [
+    0.0,
+    1.4516,
+    2.9295,
+    4.3006
+   ],
+   "duracoes": [
+    1.3716,
+    1.3979,
+    1.2911,
+    1.3702
+   ],
+   "bytes": 58262
   },
   "frenesi-de-sangue": {
    "arquivo": "frenesi-de-sangue.mp3",
@@ -8162,6 +8264,23 @@
    ],
    "bytes": 52104
   },
+  "maca-de-rem": {
+   "arquivo": "maca-de-rem.mp3",
+   "descricao": "básico da Rem: a corrente e a maça",
+   "versoes": [
+    0.0,
+    1.2436,
+    2.6546,
+    3.9906
+   ],
+   "duracoes": [
+    1.1636,
+    1.331,
+    1.256,
+    1.3198
+   ],
+   "bytes": 49956
+  },
   "machadada": {
    "arquivo": "machadada.mp3",
    "descricao": "básico do Jason: o sussurro e o machado",
@@ -8365,6 +8484,23 @@
     1.3198
    ],
    "bytes": 49997
+  },
+  "manopla-de-garnet": {
+   "arquivo": "manopla-de-garnet.mp3",
+   "descricao": "básico da Garnet: as manoplas",
+   "versoes": [
+    0.0,
+    1.1231,
+    2.4466,
+    3.4748
+   ],
+   "duracoes": [
+    1.0431,
+    1.2435,
+    0.9482,
+    1.1145
+   ],
+   "bytes": 34746
   },
   "manopla-joias": {
    "arquivo": "manopla-joias.mp3",
@@ -9369,6 +9505,23 @@
    ],
    "bytes": 36147
   },
+  "palma-gentil": {
+   "arquivo": "palma-gentil.mp3",
+   "descricao": "básico da Hinata: o Byakugan e a palma",
+   "versoes": [
+    0.0,
+    1.2478,
+    2.5713,
+    3.8107
+   ],
+   "duracoes": [
+    1.1678,
+    1.2435,
+    1.1594,
+    1.2183
+   ],
+   "bytes": 36862
+  },
   "palma-relampago": {
    "arquivo": "palma-relampago.mp3",
    "descricao": "Palma relâmpago: o raio rasgando e o trovão",
@@ -9521,6 +9674,23 @@
     1.5228
    ],
    "bytes": 52934
+  },
+  "pergaminho-de-fogo": {
+   "arquivo": "pergaminho-de-fogo.mp3",
+   "descricao": "básico da Sailor Mars: o selo e o fogo",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 58093
   },
   "petalas": {
    "arquivo": "petalas.mp3",
@@ -10491,6 +10661,23 @@
    ],
    "bytes": 55961
   },
+  "raio-de-aku": {
+   "arquivo": "raio-de-aku.mp3",
+   "descricao": "básico do Aku: a risada e os lasers",
+   "versoes": [
+    0.0,
+    1.291,
+    2.6948,
+    3.9855
+   ],
+   "duracoes": [
+    1.211,
+    1.3238,
+    1.2107,
+    1.2785
+   ],
+   "bytes": 43695
+  },
   "raio-de-apolo": {
    "arquivo": "raio-de-apolo.mp3",
    "descricao": "básico de Apolo: o sol e o feixe",
@@ -10507,6 +10694,23 @@
     1.1636
    ],
    "bytes": 44364
+  },
+  "raio-de-dexter": {
+   "arquivo": "raio-de-dexter.mp3",
+   "descricao": "básico do Dexter: a arma de raio",
+   "versoes": [
+    0.0,
+    1.1902,
+    2.4539,
+    3.5949
+   ],
+   "duracoes": [
+    1.1102,
+    1.1837,
+    1.0611,
+    1.2183
+   ],
+   "bytes": 40669
   },
   "raio-de-gaia": {
    "arquivo": "raio-de-gaia.mp3",
@@ -12055,6 +12259,23 @@
    ],
    "bytes": 41803
   },
+  "soco-de-johnny": {
+   "arquivo": "soco-de-johnny.mp3",
+   "descricao": "básico do Johnny Bravo: o brilho e o soco",
+   "versoes": [
+    0.0,
+    1.1893,
+    2.4344,
+    3.5774
+   ],
+   "duracoes": [
+    1.1093,
+    1.1651,
+    1.0629,
+    1.0828
+   ],
+   "bytes": 39646
+  },
   "soco-de-kong": {
    "arquivo": "soco-de-kong.mp3",
    "descricao": "básico do Kong: o peito e os punhos",
@@ -12122,6 +12343,23 @@
     1.0152
    ],
    "bytes": 42040
+  },
+  "soco-de-tsunade": {
+   "arquivo": "soco-de-tsunade.mp3",
+   "descricao": "básico da Tsunade: o soco e o chão rachando",
+   "versoes": [
+    0.0,
+    1.58,
+    3.2144,
+    4.7437
+   ],
+   "duracoes": [
+    1.5,
+    1.5544,
+    1.4493,
+    1.5228
+   ],
+   "bytes": 51932
   },
   "soco-do-agente": {
    "arquivo": "soco-do-agente.mp3",
@@ -12989,6 +13227,23 @@
     1.3198
    ],
    "bytes": 48735
+  },
+  "tiro-de-vash": {
+   "arquivo": "tiro-de-vash.mp3",
+   "descricao": "básico do Vash: o revólver e a pena",
+   "versoes": [
+    0.0,
+    1.38,
+    2.8071,
+    4.1432
+   ],
+   "duracoes": [
+    1.3,
+    1.3471,
+    1.256,
+    1.3198
+   ],
+   "bytes": 55907
   },
   "tiro-do-buster": {
    "arquivo": "tiro-do-buster.mp3",
