@@ -18,7 +18,7 @@ const POR_GRUPO: Partial<Record<string, Distancia>> = { 'físico': 'perto', cort
 /* Efeitos que fogem da regra do grupo. */
 const DO_EFEITO: Partial<Record<VfxFamily, Distancia>> = {
   // alcançam de longe: chicote, corrente, laço, braço que estica, tentáculo, rugido, onda de corte
-  chicote: 'longe', corrente: 'longe', laco: 'longe', esticar: 'longe', braco_namekiano: 'longe',
+  chicote: 'longe', vampire_killer: 'longe', corrente: 'longe', laco: 'longe', esticar: 'longe', braco_namekiano: 'longe',
   tentaculos: 'longe', tentaculo_simbionte: 'longe', kagune: 'longe', rugido: 'longe', corte_de_energia: 'longe',
   gadget_surpresa: 'longe', bigorna: 'longe', dedo_apontado: 'longe', punho_transmutado: 'longe', desmanche: 'longe',
   corte_dimensional: 'longe', inv_androide: 'longe',
