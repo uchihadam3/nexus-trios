@@ -5,7 +5,7 @@ import { BattleScreen } from './screens/BattleScreen';
 import { applyEffects,createBattle,jeitoDeBater } from './engine/battle';
 import { byId } from './data/characters';
 import type { BattleEvent,Effect,Visual } from './engine/types';
-import type { Beat } from './presentation/director';
+import { montaPassos,visivelNaEtapa,type Beat } from './presentation/director';
 import { defaults } from './lib/storage';
 import './styles.css';
 import './presentation/battle.css';
@@ -119,11 +119,16 @@ const settings={...defaults,volume:0,musicVolume:0,effectsVolume:0,numbers:true,
  * A duração segue o tipo da ação, como no jogo.
  */
 const play=params.get('play')==='1';
-const durationFor=kind==='basic'?PRESENTATION.normalSeconds:PRESENTATION.skillSeconds;
+const baseFor=kind==='basic'?PRESENTATION.normalSeconds:PRESENTATION.skillSeconds;
+// a mesma cadeia da luta (dano → debuff → buff, e o que cai no próprio trio espera quem bateu voltar)
+const passos=montaPassos({event,events,after,base:baseFor});
+const durationFor=baseFor+(passos.at(-1)?.em??0);
 function Play(){
   const [clock,setClock]=useState({id:1000,t:0});
   useEffect(()=>{let frame=0,start=performance.now(),id=1000;const tick=(now:number)=>{let t=(now-start)/1000;if(t>durationFor+.5){start=now;t=0;id+=1;}setClock({id,t});frame=requestAnimationFrame(tick);};frame=requestAnimationFrame(tick);return ()=>cancelAnimationFrame(frame);},[]);
-  const hit=clock.t>=durationFor*PRESENTATION.impactAt,live:Beat={...beat,event:{...event,id:clock.id},duration:durationFor,elapsed:Math.min(clock.t,durationFor),impacted:hit};
-  return <BattleScreen battle={hit?after:before} beat={clock.t<=durationFor?live:null} index={0} name="Prova visual de combate" settings={settings} paused={false} onPause={()=>{}} onAbandon={()=>{}} onSettings={()=>{}}/>;
+  const impacto=baseFor*PRESENTATION.impactAt,hit=clock.t>=impacto,elapsed=Math.min(clock.t,durationFor);
+  let etapa=0;if(hit){etapa=1;while(etapa<passos.length&&elapsed>=impacto+passos[etapa]!.em-1e-8)etapa++;}
+  const live:Beat={...beat,event:{...event,id:clock.id},duration:durationFor,base:baseFor,passos,etapas:passos.map((_,k)=>k+1),etapa,elapsed,impacted:hit};
+  return <BattleScreen battle={hit?visivelNaEtapa(live,etapa):before} beat={clock.t<=durationFor?live:null} index={0} name="Prova visual de combate" settings={settings} paused={false} onPause={()=>{}} onAbandon={()=>{}} onSettings={()=>{}}/>;
 }
 createRoot(document.getElementById('root')!).render(<div className="app"><main className="main battle-main">{play?<Play/>:<BattleScreen battle={impacted?after:before} beat={beat} index={0} name="Prova visual de combate" settings={settings} paused={false} onPause={()=>{}} onAbandon={()=>{}} onSettings={()=>{}}/>}</main></div>);

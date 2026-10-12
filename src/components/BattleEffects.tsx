@@ -220,6 +220,8 @@ export function BattleEffects({battle,beat,anchors,enabled,reduced,medal=80}:{ba
         if(noCentro&&rivais.includes(uid))return;
         if(soQuique.has(uid))return;
         if(ataca&&ladoDe(uid)===lado){
+          // o que cai no próprio trio só aparece no passo dele, depois que quem bateu voltou para o lugar
+          if(!beat.events.some(e=>e.target===uid&&e.source===beat.event.source&&revelado(beat,e)))return;
           // a família tem o desenho próprio do que ela faz no trio (a muralha da Toph na frente de cada aliado)
           if(fam.noAliado){
             const p=point(uid),t=Math.min(medal*fam.escala,Math.min(size.w,size.h)*.92);
