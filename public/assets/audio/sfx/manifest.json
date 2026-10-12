@@ -750,6 +750,23 @@
    ],
    "bytes": 52629
   },
+  "baralho-explosivo": {
+   "arquivo": "baralho-explosivo.mp3",
+   "descricao": "Gambit: o leque e as explosões",
+   "versoes": [
+    0.0,
+    1.68,
+    3.418,
+    5.0439
+   ],
+   "duracoes": [
+    1.6,
+    1.658,
+    1.5459,
+    1.6244
+   ],
+   "bytes": 62934
+  },
   "barreira-anula": {
    "arquivo": "barreira-anula.mp3",
    "descricao": "família barreira anula",
@@ -851,6 +868,23 @@
     0.6091
    ],
    "bytes": 20847
+  },
+  "bastao-cinetico": {
+   "arquivo": "bastao-cinetico.mp3",
+   "descricao": "Gambit: o bastão e as cartas detonando",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 68207
   },
   "bastao-do-robin": {
    "arquivo": "bastao-do-robin.mp3",
@@ -1786,6 +1820,23 @@
     1.1167
    ],
    "bytes": 42115
+  },
+  "carta-carregada": {
+   "arquivo": "carta-carregada.mp3",
+   "descricao": "Gambit: a carta carregada e os tiques",
+   "versoes": [
+    0.0,
+    1.68,
+    3.3864,
+    5.0123
+   ],
+   "duracoes": [
+    1.6,
+    1.6264,
+    1.5459,
+    1.5951
+   ],
+   "bytes": 55169
   },
   "carta-dragao": {
    "arquivo": "carta-dragao.mp3",
@@ -3096,6 +3147,23 @@
    ],
    "bytes": 14181
   },
+  "crescente-de-prata": {
+   "arquivo": "crescente-de-prata.mp3",
+   "descricao": "Cavaleiro da Lua: os três dardos de prata",
+   "versoes": [
+    0.0,
+    1.381,
+    2.8548,
+    4.2294
+   ],
+   "duracoes": [
+    1.301,
+    1.3938,
+    1.2946,
+    1.3836
+   ],
+   "bytes": 56361
+  },
   "crueldade-freeza": {
    "arquivo": "crueldade-freeza.mp3",
    "descricao": "Crueldade calculada: a pressão e a pancada",
@@ -3911,6 +3979,23 @@
     0.7399
    ],
    "bytes": 25926
+  },
+  "escudo-mental": {
+   "arquivo": "escudo-mental.mp3",
+   "descricao": "Jean Grey: o zumbido e a cúpula",
+   "versoes": [
+    0.0,
+    1.58,
+    3.2144,
+    4.7437
+   ],
+   "duracoes": [
+    1.5,
+    1.5544,
+    1.4493,
+    1.5228
+   ],
+   "bytes": 40587
   },
   "escudo-ricochete": {
    "arquivo": "escudo-ricochete.mp3",
@@ -5119,23 +5204,6 @@
    ],
    "bytes": 47316
   },
-  "fenix": {
-   "arquivo": "fenix.mp3",
-   "descricao": "família fenix",
-   "versoes": [
-    0.0,
-    1.48,
-    3.0108,
-    4.4434
-   ],
-   "duracoes": [
-    1.4,
-    1.4508,
-    1.3527,
-    1.4213
-   ],
-   "bytes": 67228
-  },
   "fenix-asas": {
    "arquivo": "fenix-asas.mp3",
    "descricao": "as asas de fogo abrindo no Ikki",
@@ -5152,6 +5220,40 @@
     1.0152
    ],
    "bytes": 52836
+  },
+  "fenix-desperta": {
+   "arquivo": "fenix-desperta.mp3",
+   "descricao": "Jean Grey: o grito da Fênix e a explosão",
+   "versoes": [
+    0.0,
+    2.28,
+    4.6398,
+    6.8454
+   ],
+   "duracoes": [
+    2.2,
+    2.2798,
+    2.1256,
+    2.2335
+   ],
+   "bytes": 79419
+  },
+  "fenix-preparo": {
+   "arquivo": "fenix-preparo.mp3",
+   "descricao": "Jean Grey: o fogo subindo (antes do golpe)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 57245
   },
   "final-flash": {
    "arquivo": "final-flash.mp3",
@@ -5425,6 +5527,23 @@
    ],
    "bytes": 63023
   },
+  "forca-roubada": {
+   "arquivo": "forca-roubada.mp3",
+   "descricao": "Vampira: o voo e o soco",
+   "versoes": [
+    0.0,
+    1.5293,
+    3.1356,
+    4.6649
+   ],
+   "duracoes": [
+    1.4493,
+    1.5263,
+    1.4493,
+    1.5165
+   ],
+   "bytes": 59264
+  },
   "forma-desperta": {
    "arquivo": "forma-desperta.mp3",
    "descricao": "Forma desperta: o grito e as faixas rasgando",
@@ -5696,6 +5815,23 @@
     1.1167
    ],
    "bytes": 43176
+  },
+  "gambit-preparo": {
+   "arquivo": "gambit-preparo.mp3",
+   "descricao": "Gambit: as cartas embaralhando (antes do golpe)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 93985
   },
   "gancho": {
    "arquivo": "gancho.mp3",
@@ -7278,6 +7414,23 @@
    ],
    "bytes": 116714
   },
+  "julgamento-de-khonshu": {
+   "arquivo": "julgamento-de-khonshu.mp3",
+   "descricao": "Cavaleiro da Lua: a lua, o grito e as colunas",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 64893
+  },
   "kagune": {
    "arquivo": "kagune.mp3",
    "descricao": "básico de Kaneki: tentáculos de carne esticando e quatro perfurações",
@@ -7481,6 +7634,23 @@
     1.3198
    ],
    "bytes": 58809
+  },
+  "khonshu-preparo": {
+   "arquivo": "khonshu-preparo.mp3",
+   "descricao": "Cavaleiro da Lua: o coro da lua (antes do golpe)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 49076
   },
   "kiai-invisivel": {
    "arquivo": "kiai-invisivel.mp3",
@@ -8383,23 +8553,6 @@
    ],
    "bytes": 69636
   },
-  "lua": {
-   "arquivo": "lua.mp3",
-   "descricao": "família lua",
-   "versoes": [
-    0.0,
-    1.48,
-    3.0108,
-    4.4434
-   ],
-   "duracoes": [
-    1.4,
-    1.4508,
-    1.3527,
-    1.4213
-   ],
-   "bytes": 59952
-  },
   "luz": {
    "arquivo": "luz.mp3",
    "descricao": "luz sagrada",
@@ -8689,6 +8842,23 @@
    ],
    "bytes": 62727
   },
+  "manto-lunar": {
+   "arquivo": "manto-lunar.mp3",
+   "descricao": "Cavaleiro da Lua: a capa, as faixas e o tom tonto",
+   "versoes": [
+    0.0,
+    1.68,
+    3.418,
+    5.0252
+   ],
+   "duracoes": [
+    1.6,
+    1.658,
+    1.5272,
+    1.5676
+   ],
+   "bytes": 54748
+  },
   "mao-da-perdicao": {
    "arquivo": "mao-da-perdicao.mp3",
    "descricao": "básico de Hellboy: pedra pesada esmagando e cascalho",
@@ -8926,6 +9096,40 @@
     1.4213
    ],
    "bytes": 37782
+  },
+  "memoria-emprestada": {
+   "arquivo": "memoria-emprestada.mp3",
+   "descricao": "Vampira: os poderes copiados em fila",
+   "versoes": [
+    0.0,
+    1.88,
+    3.7927,
+    5.6118
+   ],
+   "duracoes": [
+    1.8,
+    1.8327,
+    1.7391,
+    1.8274
+   ],
+   "bytes": 72543
+  },
+  "memoria-preparo": {
+   "arquivo": "memoria-preparo.mp3",
+   "descricao": "Vampira: os ecos das memórias (antes do golpe)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 54785
   },
   "metal": {
    "arquivo": "metal.mp3",
@@ -9335,6 +9539,23 @@
    ],
    "bytes": 71555
   },
+  "muralha-telecinetica": {
+   "arquivo": "muralha-telecinetica.mp3",
+   "descricao": "Jean Grey: a parede e os destroços parando",
+   "versoes": [
+    0.0,
+    1.58,
+    3.2144,
+    4.7437
+   ],
+   "duracoes": [
+    1.5,
+    1.5544,
+    1.4493,
+    1.5228
+   ],
+   "bytes": 41990
+  },
   "nao-vou-cair": {
    "arquivo": "nao-vou-cair.mp3",
    "descricao": "Não vou cair: o grito e a aura de Super Saiyajin",
@@ -9521,6 +9742,23 @@
     1.2183
    ],
    "bytes": 42253
+  },
+  "olho-da-tempestade": {
+   "arquivo": "olho-da-tempestade.mp3",
+   "descricao": "Tempestade: o furacão e os raios",
+   "versoes": [
+    0.0,
+    2.28,
+    4.6398,
+    6.8454
+   ],
+   "duracoes": [
+    2.2,
+    2.2798,
+    2.1256,
+    2.2335
+   ],
+   "bytes": 75810
   },
   "olhos-brilhando": {
    "arquivo": "olhos-brilhando.mp3",
@@ -11171,6 +11409,23 @@
    ],
    "bytes": 49689
   },
+  "rajada-de-vento": {
+   "arquivo": "rajada-de-vento.mp3",
+   "descricao": "Tempestade: o vento forte",
+   "versoes": [
+    0.0,
+    1.68,
+    3.418,
+    5.0439
+   ],
+   "duracoes": [
+    1.6,
+    1.658,
+    1.5459,
+    1.6244
+   ],
+   "bytes": 61959
+  },
   "rajada-do-aang": {
    "arquivo": "rajada-do-aang.mp3",
    "descricao": "Rajada de ar: a bola de vento e o estouro",
@@ -11425,6 +11680,23 @@
     1.4033
    ],
    "bytes": 82466
+  },
+  "relampago-em-cadeia": {
+   "arquivo": "relampago-em-cadeia.mp3",
+   "descricao": "Tempestade: o raio que salta",
+   "versoes": [
+    0.0,
+    1.88,
+    3.8253,
+    5.6444
+   ],
+   "duracoes": [
+    1.8,
+    1.8653,
+    1.7391,
+    1.8274
+   ],
+   "bytes": 61119
   },
   "relogio": {
    "arquivo": "relogio.mp3",
@@ -13261,6 +13533,23 @@
     1.6244
    ],
    "bytes": 80095
+  },
+  "tempestade-preparo": {
+   "arquivo": "tempestade-preparo.mp3",
+   "descricao": "Tempestade: o vento girando (antes do golpe)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 50927
   },
   "tempestade-thor": {
    "arquivo": "tempestade-thor.mp3",

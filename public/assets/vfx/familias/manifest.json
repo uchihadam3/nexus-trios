@@ -615,6 +615,20 @@
   "laco": true,
   "bytes": 39718
  },
+ "baralho_explosivo": {
+  "descricao": "Gambit · o leque de cartas que explode",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 22204
+ },
  "barreira_magica": {
   "descricao": "cúpula de runas",
   "quadros": 12,
@@ -698,6 +712,20 @@
   ],
   "laco": false,
   "bytes": 45154
+ },
+ "bastao_cinetico": {
+  "descricao": "Gambit · o bastão, a onda e as cartas detonando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 44516
  },
  "bastao_do_robin": {
   "descricao": "Básico do Robin: o bastão gira e estica",
@@ -1608,6 +1636,20 @@
   ],
   "laco": false,
   "bytes": 58808
+ },
+ "carta_carregada": {
+  "descricao": "Gambit · a carta carregada que gruda",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 14128
  },
  "carta_dragao": {
   "descricao": "Kaiba: carta vira e solta o raio branco do dragão",
@@ -2799,6 +2841,20 @@
   "laco": true,
   "bytes": 26758
  },
+ "crescente_de_prata": {
+  "descricao": "Cavaleiro da Lua · os três dardos em meia-lua",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 19102
+ },
  "crueldade_freeza": {
   "descricao": "Freeza · a mão invisível apertando",
   "quadros": 12,
@@ -3470,6 +3526,20 @@
   ],
   "laco": false,
   "bytes": 46296
+ },
+ "escudo_mental": {
+  "descricao": "Jean Grey · a cúpula psíquica e os hexágonos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 46042
  },
  "escudo_ricochete": {
   "descricao": "Capitão América · o clang do escudo",
@@ -4591,20 +4661,6 @@
   "laco": false,
   "bytes": 43936
  },
- "fenix": {
-  "descricao": "asas de fogo",
-  "quadros": 12,
-  "grade": [
-   3,
-   4
-  ],
-  "tamanho": [
-   192,
-   192
-  ],
-  "laco": false,
-  "bytes": 61000
- },
  "fenix_asas": {
   "descricao": "Ikki · as asas de fogo abrindo nele",
   "quadros": 12,
@@ -4619,6 +4675,20 @@
   "laco": false,
   "bytes": 57740
  },
+ "fenix_desperta": {
+  "descricao": "Jean Grey · a Fênix mergulha e a explosão",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 58284
+ },
  "fenix_explosao": {
   "descricao": "Ikki · a fênix estourando em fogo e penas",
   "quadros": 12,
@@ -4632,6 +4702,20 @@
   ],
   "laco": false,
   "bytes": 108376
+ },
+ "fenix_preparo": {
+  "descricao": "Jean Grey · as asas de fogo (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 30318
  },
  "fenix_voando": {
   "descricao": "Ikki · a fênix de fogo voando (laço)",
@@ -4871,6 +4955,20 @@
   "laco": false,
   "bytes": 75270
  },
+ "forca_roubada": {
+  "descricao": "Vampira · o soco com a força roubada",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 19920
+ },
  "frasco_de_senku": {
   "descricao": "Básico do Senku: o frasco e a reação",
   "quadros": 12,
@@ -5094,6 +5192,20 @@
   ],
   "laco": false,
   "bytes": 99266
+ },
+ "gambit_preparo": {
+  "descricao": "Gambit · as cartas embaralhando (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 18006
  },
  "gancho": {
   "descricao": "golpe para cima",
@@ -6341,6 +6453,20 @@
   "laco": false,
   "bytes": 59060
  },
+ "julgamento_de_khonshu": {
+  "descricao": "Cavaleiro da Lua · a lua, Khonshu e as colunas de luar",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 65112
+ },
  "kagune": {
   "descricao": "Kaneki: quatro kagune segmentados descem e perfuram",
   "quadros": 12,
@@ -6480,6 +6606,20 @@
   ],
   "laco": false,
   "bytes": 89186
+ },
+ "khonshu_preparo": {
+  "descricao": "Cavaleiro da Lua · as fases da lua e o ankh (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 47334
  },
  "kiai_invisivel": {
   "descricao": "Básico do Tenshinhan: o terceiro olho e o kiai",
@@ -7237,20 +7377,6 @@
   "laco": true,
   "bytes": 46028
  },
- "lua": {
-  "descricao": "meia-lua acesa",
-  "quadros": 12,
-  "grade": [
-   3,
-   4
-  ],
-  "tamanho": [
-   192,
-   192
-  ],
-  "laco": false,
-  "bytes": 96900
- },
  "luz": {
   "descricao": "pilar de luz",
   "quadros": 12,
@@ -7503,6 +7629,20 @@
   "laco": false,
   "bytes": 58746
  },
+ "manto_lunar": {
+  "descricao": "Cavaleiro da Lua · a capa, as faixas e o olho de Khonshu",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 27472
+ },
  "mao_da_perdicao": {
   "descricao": "Hellboy: o punho de pedra desce e esmaga com cascalho",
   "quadros": 12,
@@ -7698,6 +7838,34 @@
   ],
   "laco": false,
   "bytes": 83840
+ },
+ "memoria_emprestada": {
+  "descricao": "Vampira · os poderes copiados em fila",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 32110
+ },
+ "memoria_preparo": {
+  "descricao": "Vampira · a mecha branca e as memórias (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 24906
  },
  "metal": {
   "descricao": "chapas de metal fechando",
@@ -8021,6 +8189,20 @@
   "laco": false,
   "bytes": 49484
  },
+ "muralha_telecinetica": {
+  "descricao": "Jean Grey · a parede e os destroços parados",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 22242
+ },
  "nen_gon": {
   "descricao": "Gon · a aura juntando no punho (laço)",
   "quadros": 12,
@@ -8146,6 +8328,20 @@
   ],
   "laco": false,
   "bytes": 47270
+ },
+ "olho_da_tempestade": {
+  "descricao": "Tempestade · o anel de nuvens e os raios",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 64666
  },
  "olhos_brilhando": {
   "descricao": "Super-Homem · os olhos acendendo no Preparo (laço)",
@@ -9631,6 +9827,20 @@
   "laco": false,
   "bytes": 54116
  },
+ "rajada_de_vento": {
+  "descricao": "Tempestade · as correntes de vento e os redemoinhos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 15712
+ },
  "rasengan_impacto": {
   "descricao": "Naruto · o Rasengan perfurando em espiral",
   "quadros": 12,
@@ -9812,6 +10022,20 @@
   ],
   "laco": false,
   "bytes": 109460
+ },
+ "relampago_em_cadeia": {
+  "descricao": "Tempestade · o raio saltando de um em um",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 28344
  },
  "relogio": {
   "descricao": "mostrador de relógio",
@@ -11450,6 +11674,20 @@
   ],
   "laco": false,
   "bytes": 31074
+ },
+ "tempestade_preparo": {
+  "descricao": "Tempestade · os olhos brancos e as nuvens (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 60136
  },
  "tempestade_thor": {
   "descricao": "Thor · a nuvem e os raios em cada rival",

@@ -516,18 +516,6 @@ def sopro_de_fogo(rng, v):
     return reverb(x, 0.4, 0.2, 4000)
 
 
-def fenix(rng, v):
-    x = _z(1.4)
-    n = n_de(0.7)
-    t = np.arange(n) / SR
-    grito = seno(varre(nota(84), nota(90), n, 0.4) * (1 + 0.02 * np.sin(2 * math.pi * 9 * t)), n) * env(n, 0.05, 0.4) * 0.25
-    grito += seno(varre(nota(91), nota(97), n, 0.4), n) * env(n, 0.05, 0.3) * 0.1
-    poe(x, grito, 0)
-    poe(x, B.fogo(rng, v), 0.2, 0.9)
-    poe(x, _whoosh(rng, 0.4, 300, 2500, 0.6, g=0.6), 0.1)
-    return reverb(x, 0.6, 0.3)
-
-
 def dragao(rng, v):
     x = _z(1.6)
     n = n_de(0.9)
@@ -689,15 +677,6 @@ def radiacao(rng, v):
     t = np.arange(n) / SR
     x += seno(np.full(n, 60.0), n) * 0.0 + satura(seno(np.full(n, 120.0), n), 3) * env(n, 0.1, 0.6, segura=0.4) * 0.15 * (0.7 + 0.3 * np.sin(2 * math.pi * 3 * t))
     return reverb(x, 0.3, 0.2)
-
-
-def lua(rng, v):
-    n = n_de(1.4)
-    x = np.zeros(n)
-    for k, m in enumerate((69, 76, 81)):
-        poe(x, modal(n_de(1.2), nota(m), rng=rng, **CRISTAL) * env(n_de(1.2), 0.08, 0.7) * 0.15, k * 0.1)
-    x += assobio(rng, n, 3000, 6000, 1.0, 0.3) * env(n, 0.2, 0.6) * 0.15
-    return reverb(x, 0.85, 0.4, 8000)
 
 
 def raio_divino(rng, v):
@@ -1978,7 +1957,7 @@ SONS_NOVOS = {
 # volume pela prioridade: habilidades no nível dos golpes; apoio e status mais baixos
 _BAIXO = {"brasas-renascendo", "cura-em-area", "regeneracao", "grito-de-guerra", "velocidade", "escudo-tech", "barreira-magica", "armadura", "resgate",
           "bencao", "lanche", "purificacao", "enfraquecimento", "lentidao", "marca", "silencio", "medo", "exposto", "hipnose",
-          "encanto", "runas", "lua", "petalas", "regeneracao", "confusao", "estrela-invencivel", "disco", "flecha"}
+          "encanto", "runas", "petalas", "regeneracao", "confusao", "estrela-invencivel", "disco", "flecha"}
 _ALTO = {"copia", "esquiva", "ultima-resistencia", "sono", "cegueira", "errou", "barreira-anula", "dissipar", "reflexo", "espinhos", "vampirismo", "provocar", "renascer", "ressurreicao", "soco-serio", "supernova", "kamehameha", "canhao-de-energia", "foguete", "tempestade", "punho-gigante", "pisao",
          "martelo", "espadao", "buraco-negro", "tsunami", "transformacao-v2", "dragao", "dominio"}
 _ANTES = {"esfera-espiral-carga": "a esfera girando", "kamehameha-carga": "carga do Kamehameha",

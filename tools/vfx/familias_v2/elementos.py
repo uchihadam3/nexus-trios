@@ -6,7 +6,7 @@ import math
 import numpy as np
 
 from .base import (FAIXA, GRANDE, TAU, _subindo, apaga, back, ease_in, ease_out, faiscas, girado, jagged, janela,
-                   lamina, poeira, pulso, rel, smooth, some, vazio)
+                   poeira, pulso, rel, smooth, some, vazio)
 
 
 def _chama_em(T, t, seed, base, altura, largura, cx=0.0, vel=1.0):
@@ -53,33 +53,6 @@ def sopro_de_fogo(T, t, rng):
     fumo = poeira(T, rng, t, 18, 0.5, -0.1, 0.4, 0.3, 0.05, inicio=0.4)
     G += (cone * (1.2 + 0.5 * np.clip(n, -1, 1)) + nucleo) * env + fumo * 0.5
     H += (nucleo * 1.5 + cone * 0.4) * env
-    return G, H
-
-
-def fenix(T, t, rng):
-    """Fênix: duas asas de fogo se abrem do alvo e batem uma vez, com penas de brasa caindo."""
-    G, H = vazio(T)
-    abre = back(rel(t, 0, 0.35), 1.3)
-    bate = 0.15 * math.sin(rel(t, 0.35, 0.8) * math.pi)
-    env = apaga(t, 0.6, 1)
-    asas, nucleo = T.zero(), T.zero()
-    for lado in (-1, 1):
-        for k in range(5):
-            a = -0.2 - k * 0.22 + bate
-            comp = (0.55 + 0.25 * (k == 1)) * abre
-            x1, y1 = lado * 0.08, 0.0
-            x2, y2 = lado * math.cos(a) * comp, math.sin(a) * comp * 0.9 - 0.05
-            asas += T.polys([(lamina(x1, y1, x2, y2, 0.06 + 0.02 * (k < 2)), 1 - 0.12 * k)], 0.01)
-            nucleo += T.polys([(lamina(x1, y1, x2 * 0.7, y2 * 0.7, 0.02), 1)], 0.005)
-    n = _subindo(T, 421, t, 0.05, 1.2)
-    asas = asas * (0.7 + 0.3 * np.clip(n, -1, 1))
-    corpo = T.gauss(0, 0.05, 0.08, 0.16) * 1.8
-    penas = []
-    for _ in range(24):
-        f = (rng.uniform(0, 1) + t) % 1
-        penas.append((rng.uniform(-0.7, 0.7), -0.3 + f * 0.9, math.sin(math.pi * f) * rng.uniform(0.3, 1)))
-    G += (T.glow(asas, 1.2, 1.2, 0.03) + corpo + T.splats(penas, 0.012)) * env
-    H += (nucleo * 1.2 + corpo * 0.9) * env
     return G, H
 
 
@@ -460,23 +433,6 @@ def radiacao(T, t, rng):
     return G, H
 
 
-def lua(T, t, rng):
-    """Lua: uma meia-lua grande se acende sobre o alvo, com halo frio e estrelas em volta."""
-    G, H = vazio(T)
-    abre = ease_out(rel(t, 0, 0.35), 2)
-    env = apaga(t, 0.7, 1)
-    r = 0.42 * abre + 0.01
-    disco = smooth(r - np.hypot(T.U, T.V + 0.05), -0.01, 0.02)
-    sombra = smooth(r * 0.92 - np.hypot(T.U - r * 0.45, T.V + 0.05 - r * 0.1), -0.01, 0.02)
-    crescente = disco * (1 - sombra)
-    halo = T.ring(r * 1.25, 0.06, cy=-0.05) * 0.6 + T.gauss(0, -0.05, r * 0.85 + 0.01) * 0.3
-    sub = np.random.default_rng(541)
-    est = sum(T.flare(sub.uniform(-0.8, 0.8), sub.uniform(-0.8, 0.8), 0.25, 0.4) * pulso((t * 2 + sub.uniform(0, 1)) % 1, 0, 1) for _ in range(9))
-    G += (crescente * 1.6 + halo + est) * env
-    H += (crescente * 1.2 + est * 0.8) * env
-    return G, H
-
-
 def raio_divino(T, t, rng):
     """Raio divino: um feixe estreito e afiado desce do céu, o chão se acende num círculo."""
     G, H = vazio(T)
@@ -510,7 +466,6 @@ def rugido(T, t, rng):
 REGISTRO = [
     ("labareda", labareda, GRANDE, "coluna de fogo", False),
     ("sopro_de_fogo", sopro_de_fogo, GRANDE, "jato de fogo em cone", False),
-    ("fenix", fenix, GRANDE, "asas de fogo", False),
     ("dragao", dragao, GRANDE, "dragão serpenteando", False),
     ("nevasca", nevasca, GRANDE, "flocos em redemoinho", False),
     ("bloco_de_gelo", bloco_de_gelo, GRANDE, "bloco de gelo prendendo", False),
@@ -529,7 +484,6 @@ REGISTRO = [
     ("acido", acido, GRANDE, "respingo de ácido", False),
     ("sangue", sangue, GRANDE, "respingo de sangue", False),
     ("radiacao", radiacao, GRANDE, "radiação pulsando", False),
-    ("lua", lua, GRANDE, "meia-lua acesa", False),
     ("raio_divino", raio_divino, GRANDE, "feixe do céu", False),
     ("rugido", rugido, GRANDE, "ondas de som em cone", False),
 ]
