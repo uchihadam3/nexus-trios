@@ -20,7 +20,7 @@
  * personagens que poderiam entrar.
  */
 import { byId, characters } from '../data/characters';
-import { AJUSTE_DAS_DUPLAS, ALFABETO_DAS_DUPLAS } from '../data/duplas-ajuste';
+import { AJUSTE_DAS_DUPLAS, ALFABETO_DAS_DUPLAS, PASSO_DAS_DUPLAS } from '../data/duplas-ajuste';
 import { DUPLAS } from '../data/duplas-medidas';
 import { FORCA, PESO_DA_LIGACAO } from '../data/forca-dos-rivais';
 import { pontoFraco, type TipoDeFraqueza } from '../data/ponto-fraco';
@@ -71,7 +71,7 @@ const chaveDoCombo = (c: { id: string; de: string[]; para: string[] }) => `${c.i
  * de um fazem pelas do outro sem ser combo, medido nas lutas. Um caractere por dupla, na ordem do elenco.
  */
 const POSICAO = new Map(characters.map((c, i) => [c.id, i])), TOTAL = characters.length;
-const VALOR = new Map([...ALFABETO_DAS_DUPLAS].map((ch, i) => [ch, (i - 32) * 0.03]));
+const VALOR = new Map([...ALFABETO_DAS_DUPLAS].map((ch, i) => [ch, (i - 32) * PASSO_DAS_DUPLAS]));
 export function ajusteDaDupla(a: string, b: string): number {
   let i = POSICAO.get(a), j = POSICAO.get(b);
   if (i === undefined || j === undefined || i === j) return 0;
