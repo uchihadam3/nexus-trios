@@ -89,15 +89,27 @@ export function ArenaUnit({fighter:f,battle,beat,onInspect,numbers,threatened,li
    * muito rápido… poderia ficar um pouquinho mais de tempo na cabeça deles… e tivesse efeito"). Não segura a luta: o
    * passo da cadeia segue no ritmo de sempre, só o selo continua à vista.
    */
-  const [selo,setSelo]=useState<{chave:string;rotulo:string;tipo:'unica'|'traco'|'mecanica';inicio:number}|null>(null);
+  const [selo,setSelo]=useState<{chave:string;rotulo:string;tipo:'unica'|'traco'|'mecanica';inicio:number;adiado?:boolean;sumindo?:boolean}|null>(null);
   const chaveDoSelo=reagindo&&reagindo.rotulo?`${beat?.event.id??0}-${reagindo.eventos[0]??0}`:null;
+  // partindo para o ataque (habilidade ou básico): a cabeça fica limpa (pedido do jogador: "quando eles vão fazer o
+  // ataque, o negócio já sumiu da cabeça deles")
+  const atacando=!!source&&['basic','skill'].includes(beat?.event.kind??'');
   useEffect(()=>{
     if(!chaveDoSelo||!reagindo?.rotulo)return;
     const rotulo=reagindo.rotulo,tipo=rotulo===unicaDe(c.id)?.nome?'unica':rotulo===c.trait.name?'traco':'mecanica';
-    setSelo({chave:chaveDoSelo,rotulo,tipo,inicio:performance.now()});
-    const t=setTimeout(()=>setSelo(x=>x?.chave===chaveDoSelo?null:x),2400);
-    return ()=>clearTimeout(t);
+    // o traço que dispara no meio do próprio ataque espera ele voltar para o lugar
+    setSelo({chave:chaveDoSelo,rotulo,tipo,inicio:performance.now(),adiado:atacando});
   },[chaveDoSelo]);
+  useEffect(()=>{
+    if(!selo)return;
+    if(selo.adiado){ if(!atacando)setSelo({...selo,adiado:false,inicio:performance.now()}); return; }
+    // já estava na cabeça quando ele partiu para o ataque: some rapidinho e não volta
+    if(atacando&&!selo.sumindo){ setSelo({...selo,sumindo:true}); return; }
+    const chave=selo.chave,falta=selo.sumindo?220:Math.max(0,2400-(performance.now()-selo.inicio));
+    const t=setTimeout(()=>setSelo(x=>x?.chave===chave?null:x),falta);
+    return ()=>clearTimeout(t);
+  },[selo?.chave,selo?.adiado,selo?.sumindo,atacando]);
+  const seloVisivel=selo&&!selo.adiado?selo:null;
   const discovered=impacted?beat?.events.find(e=>revelado(beat,e)&&e.target===f.uid&&e.kind==='discovery'):undefined;
   const knocked=impacted?beat?.events.find(e=>revelado(beat,e)&&e.target===f.uid&&e.kind==='ko'):undefined;
   const broken=impacted?beat?.events.find(e=>revelado(beat,e)&&e.target===f.uid&&e.kind==='interrupt'):undefined;
@@ -171,16 +183,16 @@ export function ArenaUnit({fighter:f,battle,beat,onInspect,numbers,threatened,li
         {anulou&&<span key={`a${anulou.id}`} className={`discovery-pop ${anulou.label==='Última resistência'?'resistiu-pop':'anulou-pop'}`}>{anulou.label==='Última resistência'?'Última resistência!':<>Barreira · anulou {anulou.status?statuses[anulou.status].name:'o debuff'}</>}</span>}
         {limpo&&!levantou&&<span key={`l${limpo.id}`} className={`discovery-pop ${limpo.kind==='cleanse'?'purifica-pop':'dissipa-pop'}`}>{limpo.label}{(limpo.removidos?.length??0)>0&&<> · {limpo.removidos!.map(id=>statuses[id].name).join(', ')}</>}</span>}
         {/* rótulo vazio = combo de tempo em tempo: só o efeito aparece, sem selo com nome */}
-        {selo&&!comNome&&<Selo key={`r${selo.chave}`} selo={selo}/>}
-        {selo&&selo.tipo!=='mecanica'&&<span key={`fx${selo.chave}`} className={`aura-ativa aura-${selo.tipo}`} aria-hidden="true"><i/><i/><i/><i/><i/><i/><i/><i/></span>}
+        {seloVisivel&&!comNome&&<Selo key={`r${seloVisivel.chave}`} selo={seloVisivel}/>}
+        {seloVisivel&&seloVisivel.tipo!=='mecanica'&&<span key={`fx${seloVisivel.chave}`} className={`aura-ativa aura-${seloVisivel.tipo}${seloVisivel.sumindo?' sumindo':''}`} aria-hidden="true"><i/><i/><i/><i/><i/><i/><i/><i/></span>}
         {reagindo&&<span key={`a${reagindo.eventos[0]??0}`} className="reacao-anel" aria-hidden="true"/>}
         {applied&&<span key={applied.id} className="status-pop">{applied.status&&<img src={`/assets/statuses/${applied.status}.png`} alt=""/>}{applied.label}</span>}
         {discovered&&<span key={discovered.id} className="discovery-pop">{discovered.label}</span>}
       </button>
       {(out||advantageActive||critical||shield>0)&&<span className={`unit-flag ${out?'flag-out':advantageActive?'flag-advantage':critical?'flag-critical':'flag-shield'}`} aria-hidden="true">{renascendo?<EmblemaDoRenascer id={c.id} size={12}/>:out?<Skull size={12}/>:advantageActive?<AuxIcon id="domain" size={13}/>:critical?<HeartPulse size={12}/>:<Shield size={12}/>}</span>}
-      {preparing&&<div className="unit-cast"><AuxIcon id="preparing" size={13}/><span>{f.cast?c.skills[f.cast.skill].name:beat?.event.label}</span>{selo&&<Selo key={`p${selo.chave}`} selo={selo}/>}</div>}
+      {preparing&&<div className="unit-cast"><AuxIcon id="preparing" size={13}/><span>{f.cast?c.skills[f.cast.skill].name:beat?.event.label}</span>{seloVisivel&&<Selo key={`p${seloVisivel.chave}`} selo={seloVisivel}/>}</div>}
       {/* a habilidade saindo, com ou sem Preparo: o nome aparece enquanto o golpe acontece */}
-      {!preparing&&source&&beat?.event.kind==='skill'&&beat.event.skill!==undefined&&c.skills[beat.event.skill]&&<div key={beat.event.id} className="unit-cast unit-skill-name" style={{"--character":c.color} as React.CSSProperties}><SkillIcon type={c.skills[beat.event.skill].icon} size={15} characterId={c.id} skillId={c.skills[beat.event.skill].id}/><span>{c.skills[beat.event.skill].name}</span>{selo&&<Selo key={`h${selo.chave}`} selo={selo}/>}</div>}
+      {!preparing&&source&&beat?.event.kind==='skill'&&beat.event.skill!==undefined&&c.skills[beat.event.skill]&&<div key={beat.event.id} className="unit-cast unit-skill-name" style={{"--character":c.color} as React.CSSProperties}><SkillIcon type={c.skills[beat.event.skill].icon} size={15} characterId={c.id} skillId={c.skills[beat.event.skill].id}/><span>{c.skills[beat.event.skill].name}</span>{seloVisivel&&<Selo key={`h${seloVisivel.chave}`} selo={seloVisivel}/>}</div>}
       {broken&&<div className="unit-interrupt"><AuxIcon id="interrupt" size={13}/>{broken.label.includes('atrasada')?'ATRASADO':'INTERROMPIDO'}</div>}
       {tempo&&<span className="unit-tempo-reason">{tempo.label}</span>}
     </div>
@@ -224,9 +236,9 @@ export function ArenaUnit({fighter:f,battle,beat,onInspect,numbers,threatened,li
  * empilhado em cima do nome (pedido do jogador: "se tiver um, o outro aparece em cima desse… e não do lado"). Ao trocar
  * de lugar ele continua de onde estava, sem dar o pulo de entrada de novo.
  */
-function Selo({selo}:{selo:{rotulo:string;tipo:'unica'|'traco'|'mecanica';inicio:number}}){
+function Selo({selo}:{selo:{rotulo:string;tipo:'unica'|'traco'|'mecanica';inicio:number;sumindo?:boolean}}){
   const [atraso]=useState(()=>Math.min(2.4,Math.max(0,(performance.now()-selo.inicio)/1000)));
-  return <span className={`reacao-pop selo-${selo.tipo}`} style={atraso>.05?{animationDelay:`-${atraso.toFixed(2)}s`}:undefined} aria-label={`${selo.tipo==='unica'?'Mecânica única':selo.tipo==='traco'?'Traço':'Mecânica'}: ${selo.rotulo}`}>
+  return <span className={`reacao-pop selo-${selo.tipo}${selo.sumindo?' sumindo':''}`} style={atraso>.05?{animationDelay:`-${atraso.toFixed(2)}s`}:undefined} aria-label={`${selo.tipo==='unica'?'Mecânica única':selo.tipo==='traco'?'Traço':'Mecânica'}: ${selo.rotulo}`}>
     <b>{selo.tipo==='unica'?<Sparkles size={11} strokeWidth={3}/>:selo.tipo==='traco'?<Flame size={11} strokeWidth={3}/>:<Zap size={11} strokeWidth={3}/>}{selo.rotulo}</b>
   </span>;
 }

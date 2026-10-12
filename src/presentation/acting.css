@@ -123,3 +123,8 @@
 /* Selo junto do nome da habilidade: empilhado logo em cima do nome, onde quer que o nome esteja (em cima, embaixo ou
  * ao lado do retrato), nunca ao lado dele. */
 .arena-v2 .unit .unit-cast .reacao-pop{top:auto;bottom:calc(100% + 4px);left:50%;max-width:calc(var(--medal,80px) + 60px)}
+/* partiu para o ataque: o selo e a aura somem rapidinho */
+.arena-v2 .unit .reacao-pop.sumindo{animation:selo-some .22s ease-in both!important}
+.arena-v2 .unit .aura-ativa.sumindo{animation:aura-some .22s ease-in both!important}
+@keyframes selo-some{to{opacity:0;transform:translate(-50%,-6px) scale(.9)}}
+@keyframes aura-some{to{opacity:0;transform:scale(.9)}}
