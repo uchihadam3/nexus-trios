@@ -35,24 +35,6 @@ def cura_em_area(T, t, rng):
     return G, H
 
 
-def grito_de_guerra(T, t, rng):
-    """Grito de guerra: um estandarte de raios se abre, divisas sobem e o aliado brilha."""
-    G, H = vazio(T)
-    env = apaga(t, 0.7, 1)
-    abre = back(rel(t, 0, 0.3), 1.4)
-    raios = (np.abs(np.cos(T.ANG * 7)) ** 16) * np.exp(-(T.RAD / (0.5 * abre + 0.01)) ** 2) * smooth(T.RAD, 0.1, 0.2) * 1.3
-    divisas = []
-    for k in range(4):
-        u = ((t * 1.3 + k / 4) % 1)
-        y = 0.4 - u * 1.0
-        divisas.append(([(-0.18, y + 0.08), (0, y - 0.04), (0.18, y + 0.08), (0.18, y + 0.14), (0, y + 0.02), (-0.18, y + 0.14)], math.sin(math.pi * u)))
-    d = T.polys(divisas, 0.003)
-    flash = T.gauss(0, 0, 0.18) * pulso(t, 0, 0.35) * 2.2
-    G += (raios + d * 1.4 + flash) * env
-    H += (raios * 0.4 + d * 0.9 + flash) * env
-    return G, H
-
-
 def barreira_magica(T, t, rng):
     """Barreira mágica: uma cúpula de runas gira em volta do aliado e pulsa quando fecha."""
     G, H = vazio(T)
@@ -65,23 +47,6 @@ def barreira_magica(T, t, rng):
     pulsa = T.ring(r * (1 + 0.15 * rel(t, 0.3, 0.6)), 0.03) * pulso(t, 0.3, 0.6) * 1.3
     G += (domo + borda + runas + pulsa) * env
     H += (borda * 0.6 + runas * 0.8) * env
-    return G, H
-
-
-def resgate(T, t, rng):
-    """Resgate: um rastro curvo mergulha até o aliado, o pega e sobe num brilho protetor."""
-    G, H = vazio(T)
-    p = ease_out(rel(t, 0, 0.35), 2)
-    pts = []
-    for k in range(40):
-        u = k / 39 * p
-        a = math.pi * 1.1 + u * math.pi * 0.9
-        pts.append((math.cos(a) * 0.6, -0.1 + math.sin(a) * -0.5 + 0.4))
-    rastro = T.polyline(pts, 0.03, 1) * apaga(t, 0.4, 0.8)
-    pega = (T.ring(0.25 + 0.15 * rel(t, 0.35, 0.7), 0.025) + T.gauss(0, 0, 0.18) * 0.6) * pulso(t, 0.3, 0.85) * 1.4
-    est = T.polys([(estrela(math.cos(a) * 0.35, math.sin(a) * 0.35, 0.05, a, 4, 0.35), 1) for a in (t * 4 + k * TAU / 4 for k in range(4))], 0.003) * pulso(t, 0.35, 0.9)
-    G += T.glow(rastro, 1.2, 1, 0.02) + pega + est * 1.2
-    H += rastro * 0.6 + pega * 0.4 + est * 0.6
     return G, H
 
 
@@ -152,27 +117,6 @@ def marca(T, t, rng):
     trava = T.ring(0.55, 0.02) * pulso(t, 0.3, 0.55) * 1.4
     G += (aneis * 1.3 + c * 1.3 + ponto) * env + trava
     H += (aneis * 0.5 + c * 0.6 + ponto) * env
-    return G, H
-
-
-def medo(T, t, rng):
-    """Medo: sombras com olhos se aproximam do alvo, ele treme e uma gota de suor cai."""
-    G, H = vazio(T)
-    env = janela(t, 0, 0.15) * apaga(t, 0.75, 1)
-    perto = ease_out(rel(t, 0, 0.6), 2)
-    olhos = T.zero()
-    for k in range(4):
-        a = TAU * k / 4 + 0.6
-        r = 0.85 - 0.35 * perto
-        x, y = math.cos(a) * r, math.sin(a) * r * 0.8
-        pisca = 1 if (t * 5 + k) % 1 > 0.1 else 0.1
-        olhos += (T.gauss(x - 0.05, y, 0.022) + T.gauss(x + 0.05, y, 0.022)) * pisca
-        olhos += T.gauss(x, y + 0.08, 0.12, 0.14) * 0.25
-    treme = 0.02 * math.sin(t * 80)
-    gota_y = -0.35 + 0.3 * rel(t, 0.3, 0.8)
-    gota = T.gauss(0.22 + treme, gota_y, 0.03, 0.045) * pulso(t, 0.3, 0.85) * 1.5
-    G += (olhos * 1.8 + gota) * env
-    H += olhos * 1.2 * env
     return G, H
 
 
@@ -573,12 +517,9 @@ REGISTRO = [
     ("provocar", provocar, GRANDE, "marca de raiva sobre o rival provocado, anéis se fechando", False),
     ("brasas_renascendo", brasas_renascendo, GRANDE, "brasas sobre quem vai renascer (laço)", True),
     ("cura_em_area", cura_em_area, GRANDE, "cura em área com cruzes", False),
-    ("grito_de_guerra", grito_de_guerra, GRANDE, "estandarte de raios e divisas", False),
     ("barreira_magica", barreira_magica, GRANDE, "cúpula de runas", False),
-    ("resgate", resgate, GRANDE, "mergulho de resgate", False),
     ("bencao", bencao, GRANDE, "penas e halo", False),
     ("purificar_onda", purificar, GRANDE, "onda que lava", False),
     ("lentidao", lentidao, GRANDE, "ampulheta", False),
-    ("medo", medo, GRANDE, "olhos na sombra", False),
     ("estrela_invencivel", estrela_invencivel, GRANDE, "estrela invencível", False),
 ]

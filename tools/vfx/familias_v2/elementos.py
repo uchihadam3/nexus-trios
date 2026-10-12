@@ -137,30 +137,6 @@ def rajada_de_ar(T, t, rng):
     return G, H
 
 
-def vinhas(T, t, rng):
-    """Vinhas: ramos brotam do chão, enrolam o alvo em espiral e soltam folhas."""
-    G, H = vazio(T)
-    cresce = ease_out(rel(t, 0, 0.5), 1.8)
-    env = apaga(t, 0.75, 1)
-    ramos, folhas = T.zero(), []
-    for k in range(3):
-        fase = TAU * k / 3
-        pts = []
-        for j in range(50):
-            u = j / 49 * cresce
-            y = 0.55 - u * 1.2
-            r = 0.28 + 0.05 * math.sin(u * 7)
-            a = fase + u * 9
-            pts.append((math.cos(a) * r, y + math.sin(a) * 0.05))
-            if j % 12 == 6 and u > 0:
-                folhas.append((math.cos(a) * (r + 0.06), y, 1))
-        ramos += T.polyline(pts, 0.022, 1)
-    f = T.splats(folhas, 0.03)
-    G += (T.glow(ramos, 1, 1, 0.02) + f * 1.3) * env
-    H += (ramos * 0.4 + f * 0.6) * env
-    return G, H
-
-
 def enxame(T, t, rng):
     """Enxame: dezenas de pontinhos zumbindo em nuvem, envolvendo o alvo e se espalhando."""
     G, H = vazio(T)
@@ -235,31 +211,14 @@ def radiacao(T, t, rng):
     return G, H
 
 
-def rugido(T, t, rng):
-    """Rugido: ondas de som em cone empurram o alvo, a imagem treme entre elas."""
-    G, H = vazio(T)
-    env = apaga(t, 0.65, 1)
-    ondas = T.zero()
-    for k in range(6):
-        u = (t * 1.6 + k / 6) % 1
-        ondas += T.arc_band(0.15 + 0.85 * u, 0.025 + 0.02 * u, -0.6, 0.6, cx=-0.75, crescente=True) * math.sin(math.pi * u)
-    treme = 0.03 * math.sin(t * 60)
-    clarao = T.gauss(-0.75, 0, 0.12) * 1.2
-    G += (T.warp(ondas, treme, 0) * 1.6 + clarao) * env * janela(t, 0, 0.1)
-    H += ondas * 0.4 * env
-    return G, H
-
-
 REGISTRO = [
     ("bloco_de_gelo", bloco_de_gelo, GRANDE, "bloco de gelo prendendo", False),
     ("areia", areia, GRANDE, "casulo de areia", False),
     ("espinhos_de_terra", espinhos_de_terra, GRANDE, "pontas de pedra em linha", False),
     ("metal", metal, GRANDE, "chapas de metal fechando", False),
     ("rajada_de_ar", rajada_de_ar, GRANDE, "arcos de vento", False),
-    ("vinhas", vinhas, GRANDE, "vinhas enrolando", False),
     ("enxame", enxame, GRANDE, "enxame zumbindo", False),
     ("acido", acido, GRANDE, "respingo de ácido", False),
     ("sangue", sangue, GRANDE, "respingo de sangue", False),
     ("radiacao", radiacao, GRANDE, "radiação pulsando", False),
-    ("rugido", rugido, GRANDE, "ondas de som em cone", False),
 ]

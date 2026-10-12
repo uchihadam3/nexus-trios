@@ -94,9 +94,10 @@ const T: Record<string, string> = {
   shera: 'espada_protetora pela_honra_de_grayskull golpe_da_princesa', liono: 'espada_de_augurio visao_alem_do_alcance thunder_thunder', cheetara: 'bastao_giratorio corrida_felina golpe_certeiro_cheetara',
   mummra: 'antigos_espiritos forma_desperta retorno_ao_sarcofago', homer: 'barriga_de_aco rosquinha d_oh', bart: 'estilingue provocacao_do_bart travessura_maxima',
   peter: 'briga_com_o_galo ideia_terrivel nhe_he_he', stewie: 'raio_de_controle plano_mirabolante dominacao_mundial', cartman: 'respeitem_minha_autoridade chantagem plano_egoista',
-  billcipher: 'acordo_de_bill realidade_invertida olho_que_tudo_ve', plankton: 'inv_clones plano_z roubar_a_formula', mojojojo: 'punho_gigante laser rugido',
-  capitaoplaneta: 'barreira_magica vinhas grito_de_guerra', bugiganga: 'esticar rajada_de_ar confusao', dannyphantom: 'raio_fantasma teleporte rugido',
-  coragem: 'medo resgate bencao',
+  billcipher: 'acordo_de_bill realidade_invertida olho_que_tudo_ve', plankton: 'inv_clones plano_z roubar_a_formula', mojojojo: 'robo_gigante_mojo raio_adaptador discurso_interminavel',
+  capitaoplaneta: 'poder_dos_aneis forca_da_natureza o_poder_e_de_voces', bugiganga: 'braco_extensivel rajada_de_ar vai_vai_bugiganga', dannyphantom: 'raio_fantasma intangibilidade lamento_fantasma',
+  coragem: 'grito_de_pavor correr_para_o_perigo bencao',
+  mrfreeze: 'pistola_de_gelo armadura_de_gelo zero_absoluto_frio',
 };
 
 export const FAMILIA_DA_HABILIDADE: Record<string, VfxFamily> = Object.fromEntries(

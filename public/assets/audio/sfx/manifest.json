@@ -767,6 +767,23 @@
    ],
    "bytes": 56559
   },
+  "armadura-de-gelo": {
+   "arquivo": "armadura-de-gelo.mp3",
+   "descricao": "Senhor Frio: a armadura de gelo",
+   "versoes": [
+    0.0,
+    1.7847,
+    3.6731,
+    5.3552
+   ],
+   "duracoes": [
+    1.7047,
+    1.8084,
+    1.6021,
+    1.7673
+   ],
+   "bytes": 85157
+  },
   "arranhao-felino": {
    "arquivo": "arranhao-felino.mp3",
    "descricao": "básico da Mulher-Gato: o chicote e as unhas",
@@ -2144,6 +2161,23 @@
    ],
    "bytes": 54747
   },
+  "braco-extensivel": {
+   "arquivo": "braco-extensivel.mp3",
+   "descricao": "Inspetor Bugiganga: o braço extensível",
+   "versoes": [
+    0.0,
+    1.0836,
+    2.3107,
+    3.4622
+   ],
+   "duracoes": [
+    1.0036,
+    1.1471,
+    1.0714,
+    1.0184
+   ],
+   "bytes": 45716
+  },
   "braco-namekiano": {
    "arquivo": "braco-namekiano.mp3",
    "descricao": "básico de Piccolo: esticar elástico e orgânico, pancada e o braço voltando",
@@ -2211,6 +2245,23 @@
     1.4213
    ],
    "bytes": 53324
+  },
+  "bugiganga-preparo": {
+   "arquivo": "bugiganga-preparo.mp3",
+   "descricao": "Inspetor Bugiganga: o chapéu-hélice (Preparo)",
+   "versoes": [
+    0.0,
+    1.339,
+    2.7656,
+    4.0832
+   ],
+   "duracoes": [
+    1.259,
+    1.3466,
+    1.2376,
+    1.3457
+   ],
+   "bytes": 50090
   },
   "bungee-gum": {
    "arquivo": "bungee-gum.mp3",
@@ -2704,6 +2755,23 @@
     1.6652
    ],
    "bytes": 61961
+  },
+  "capitao-preparo": {
+   "arquivo": "capitao-preparo.mp3",
+   "descricao": "Capitão Planeta: os raios se juntando (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 68564
   },
   "carga-grande": {
    "arquivo": "carga-grande.mp3",
@@ -3980,23 +4048,6 @@
    ],
    "bytes": 74737
   },
-  "confusao": {
-   "arquivo": "confusao.mp3",
-   "descricao": "família confusao",
-   "versoes": [
-    0.0,
-    1.28,
-    2.6035,
-    3.8429
-   ],
-   "duracoes": [
-    1.2,
-    1.2435,
-    1.1594,
-    1.2183
-   ],
-   "bytes": 37496
-  },
   "confusao-total": {
    "arquivo": "confusao-total.mp3",
    "descricao": "Pica-Pau: a confusão total",
@@ -4319,6 +4370,23 @@
     1.3958
    ],
    "bytes": 60181
+  },
+  "correr-para-o-perigo": {
+   "arquivo": "correr-para-o-perigo.mp3",
+   "descricao": "Coragem: correr para o perigo",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 71436
   },
   "correria": {
    "arquivo": "correria.mp3",
@@ -4813,6 +4881,23 @@
    ],
    "bytes": 81386
   },
+  "danny-preparo": {
+   "arquivo": "danny-preparo.mp3",
+   "descricao": "Danny Phantom: a transformação (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 61206
+  },
   "dante-preparo": {
    "arquivo": "dante-preparo.mp3",
    "descricao": "Dante: a eletricidade e o rosnado (antes do golpe)",
@@ -5305,6 +5390,23 @@
     1.3198
    ],
    "bytes": 48338
+  },
+  "discurso-interminavel": {
+   "arquivo": "discurso-interminavel.mp3",
+   "descricao": "Macaco Louco: o discurso interminável",
+   "versoes": [
+    0.0,
+    2.3512,
+    4.7836,
+    7.0589
+   ],
+   "duracoes": [
+    2.2712,
+    2.3524,
+    2.1954,
+    2.3053
+   ],
+   "bytes": 82633
   },
   "disfarce": {
    "arquivo": "disfarce.mp3",
@@ -8094,6 +8196,23 @@
    ],
    "bytes": 57898
   },
+  "forca-da-natureza": {
+   "arquivo": "forca-da-natureza.mp3",
+   "descricao": "Capitão Planeta: a força da natureza",
+   "versoes": [
+    0.0,
+    1.4075,
+    2.9412,
+    4.3934
+   ],
+   "duracoes": [
+    1.3275,
+    1.4537,
+    1.3723,
+    1.733
+   ],
+   "bytes": 52936
+  },
   "forca-de-aceleracao": {
    "arquivo": "forca-de-aceleracao.mp3",
    "descricao": "Além do tempo: a Força de Aceleração",
@@ -8331,6 +8450,23 @@
     1.3198
    ],
    "bytes": 39321
+  },
+  "frio-preparo": {
+   "arquivo": "frio-preparo.mp3",
+   "descricao": "Senhor Frio: a pistola carregando (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 68301
   },
   "frostmourne": {
    "arquivo": "frostmourne.mp3",
@@ -9743,22 +9879,22 @@
    ],
    "bytes": 26872
   },
-  "grito-de-guerra": {
-   "arquivo": "grito-de-guerra.mp3",
-   "descricao": "família grito de guerra",
+  "grito-de-pavor": {
+   "arquivo": "grito-de-pavor.mp3",
+   "descricao": "Coragem: o grito de pavor",
    "versoes": [
     0.0,
-    1.38,
-    2.8071,
-    4.1432
+    2.043,
+    4.1561,
+    6.1338
    ],
    "duracoes": [
-    1.3,
-    1.3471,
-    1.256,
-    1.3198
+    1.963,
+    2.0331,
+    1.8976,
+    1.9924
    ],
-   "bytes": 46161
+   "bytes": 64777
   },
   "grito-indignado": {
    "arquivo": "grito-indignado.mp3",
@@ -10252,6 +10388,23 @@
     1.6244
    ],
    "bytes": 51021
+  },
+  "intangibilidade": {
+   "arquivo": "intangibilidade.mp3",
+   "descricao": "Danny Phantom: a intangibilidade",
+   "versoes": [
+    0.0,
+    2.053,
+    4.1877,
+    6.1967
+   ],
+   "duracoes": [
+    1.973,
+    2.0548,
+    1.9289,
+    2.0305
+   ],
+   "bytes": 71957
   },
   "interrupcao": {
    "arquivo": "interrupcao.mp3",
@@ -11561,6 +11714,23 @@
     1.1167
    ],
    "bytes": 41939
+  },
+  "lamento-fantasma": {
+   "arquivo": "lamento-fantasma.mp3",
+   "descricao": "Danny Phantom: o lamento fantasma",
+   "versoes": [
+    0.0,
+    2.48,
+    5.047,
+    7.4459
+   ],
+   "duracoes": [
+    2.4,
+    2.487,
+    2.3188,
+    2.4365
+   ],
+   "bytes": 83979
   },
   "lamina-de-agua": {
    "arquivo": "lamina-de-agua.mp3",
@@ -13126,23 +13296,6 @@
    ],
    "bytes": 62789
   },
-  "medo": {
-   "arquivo": "medo.mp3",
-   "descricao": "família medo",
-   "versoes": [
-    0.0,
-    1.48,
-    3.0108,
-    4.4434
-   ],
-   "duracoes": [
-    1.4,
-    1.4508,
-    1.3527,
-    1.4213
-   ],
-   "bytes": 37782
-  },
   "megatron-preparo": {
    "arquivo": "megatron-preparo.mp3",
    "descricao": "Megatron: o canhão carregando (Preparo)",
@@ -13550,6 +13703,23 @@
     1.4953
    ],
    "bytes": 55799
+  },
+  "mojo-preparo": {
+   "arquivo": "mojo-preparo.mp3",
+   "descricao": "Macaco Louco: o discurso começando (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 56968
   },
   "mordida": {
    "arquivo": "mordida.mp3",
@@ -20759,6 +20929,23 @@
    ],
    "bytes": 40638
   },
+  "o-poder-e-de-voces": {
+   "arquivo": "o-poder-e-de-voces.mp3",
+   "descricao": "Capitão Planeta: O poder é de vocês",
+   "versoes": [
+    0.0,
+    2.416,
+    4.9157,
+    7.2243
+   ],
+   "duracoes": [
+    2.336,
+    2.4197,
+    2.2285,
+    2.34
+   ],
+   "bytes": 70783
+  },
   "olfato-tanjiro": {
    "arquivo": "olfato-tanjiro.mp3",
    "descricao": "Tanjiro: a fungada e o fio do cheiro",
@@ -21575,6 +21762,23 @@
    ],
    "bytes": 70030
   },
+  "pistola-de-gelo": {
+   "arquivo": "pistola-de-gelo.mp3",
+   "descricao": "Senhor Frio: a pistola de gelo",
+   "versoes": [
+    0.0,
+    1.521,
+    3.0762,
+    4.5216
+   ],
+   "duracoes": [
+    1.441,
+    1.4752,
+    1.3654,
+    1.4266
+   ],
+   "bytes": 69005
+  },
   "pistola-de-megamente": {
    "arquivo": "pistola-de-megamente.mp3",
    "descricao": "básico do Megamente: o raio e o cubinho",
@@ -21897,6 +22101,23 @@
     1.8059
    ],
    "bytes": 53587
+  },
+  "poder-dos-aneis": {
+   "arquivo": "poder-dos-aneis.mp3",
+   "descricao": "Capitão Planeta: o poder dos anéis",
+   "versoes": [
+    0.0,
+    2.28,
+    4.6398,
+    6.8454
+   ],
+   "duracoes": [
+    2.2,
+    2.2798,
+    2.1256,
+    2.2335
+   ],
+   "bytes": 67384
   },
   "poeira-de-diamante": {
    "arquivo": "poeira-de-diamante.mp3",
@@ -22646,23 +22867,6 @@
    ],
    "bytes": 47588
   },
-  "punho-gigante": {
-   "arquivo": "punho-gigante.mp3",
-   "descricao": "família punho gigante",
-   "versoes": [
-    0.0,
-    1.08,
-    2.1963,
-    3.2424
-   ],
-   "duracoes": [
-    1.0,
-    1.0363,
-    0.9662,
-    1.0152
-   ],
-   "bytes": 40612
-  },
   "punho-heroico": {
    "arquivo": "punho-heroico.mp3",
    "descricao": "Finn: o punho heroico",
@@ -23002,6 +23206,23 @@
     0.6091
    ],
    "bytes": 41326
+  },
+  "raio-adaptador": {
+   "arquivo": "raio-adaptador.mp3",
+   "descricao": "Macaco Louco: o raio adaptador",
+   "versoes": [
+    0.0,
+    1.3993,
+    2.8454,
+    4.2013
+   ],
+   "duracoes": [
+    1.3193,
+    1.3661,
+    1.2759,
+    1.3389
+   ],
+   "bytes": 37756
   },
   "raio-celeste": {
    "arquivo": "raio-celeste.mp3",
@@ -24023,23 +24244,6 @@
    ],
    "bytes": 53154
   },
-  "resgate": {
-   "arquivo": "resgate.mp3",
-   "descricao": "família resgate",
-   "versoes": [
-    0.0,
-    1.18,
-    2.3999,
-    3.5427
-   ],
-   "duracoes": [
-    1.1,
-    1.1399,
-    1.0628,
-    1.1167
-   ],
-   "bytes": 37599
-  },
   "resgate-elastico": {
    "arquivo": "resgate-elastico.mp3",
    "descricao": "Mulher-Elástica: o resgate",
@@ -24312,6 +24516,23 @@
    ],
    "bytes": 59493
   },
+  "robo-gigante-mojo": {
+   "arquivo": "robo-gigante-mojo.mp3",
+   "descricao": "Macaco Louco: o robô gigante",
+   "versoes": [
+    0.0,
+    2.0362,
+    4.1531,
+    6.1121
+   ],
+   "duracoes": [
+    1.9562,
+    2.0369,
+    1.879,
+    1.9408
+   ],
+   "bytes": 63544
+  },
   "rocket-preparo": {
    "arquivo": "rocket-preparo.mp3",
    "descricao": "Rocket: as peças encaixando (antes do golpe)",
@@ -24379,23 +24600,6 @@
     0.9122
    ],
    "bytes": 31587
-  },
-  "rugido": {
-   "arquivo": "rugido.mp3",
-   "descricao": "família rugido",
-   "versoes": [
-    0.0,
-    1.18,
-    2.3999,
-    3.5427
-   ],
-   "duracoes": [
-    1.1,
-    1.1399,
-    1.0628,
-    1.1167
-   ],
-   "bytes": 43493
   },
   "rugido-da-fundacao": {
    "arquivo": "rugido-da-fundacao.mp3",
@@ -26573,23 +26777,6 @@
    ],
    "bytes": 52389
   },
-  "teleporte": {
-   "arquivo": "teleporte.mp3",
-   "descricao": "família teleporte",
-   "versoes": [
-    0.0,
-    1.08,
-    2.1963,
-    3.2424
-   ],
-   "duracoes": [
-    1.0,
-    1.0363,
-    0.9662,
-    1.0152
-   ],
-   "bytes": 39376
-  },
   "teleporte-infernal": {
    "arquivo": "teleporte-infernal.mp3",
    "descricao": "Scorpion: o teleporte infernal",
@@ -27797,6 +27984,23 @@
    ],
    "bytes": 54907
   },
+  "vai-vai-bugiganga": {
+   "arquivo": "vai-vai-bugiganga.mp3",
+   "descricao": "Inspetor Bugiganga: Vai, vai, Bugiganga!",
+   "versoes": [
+    0.0,
+    1.5179,
+    3.0866,
+    4.5268
+   ],
+   "duracoes": [
+    1.4379,
+    1.4886,
+    1.3603,
+    1.5213
+   ],
+   "bytes": 48942
+  },
   "vampire-killer": {
    "arquivo": "vampire-killer.mp3",
    "descricao": "Simon: o Vampire Killer",
@@ -28051,23 +28255,6 @@
     1.4213
    ],
    "bytes": 49185
-  },
-  "vinhas": {
-   "arquivo": "vinhas.mp3",
-   "descricao": "família vinhas",
-   "versoes": [
-    0.0,
-    1.28,
-    2.6035,
-    3.8429
-   ],
-   "duracoes": [
-    1.2,
-    1.2435,
-    1.1594,
-    1.2183
-   ],
-   "bytes": 53616
   },
   "virada": {
    "arquivo": "virada.mp3",
@@ -28612,6 +28799,23 @@
     2.2335
    ],
    "bytes": 87902
+  },
+  "zero-absoluto-frio": {
+   "arquivo": "zero-absoluto-frio.mp3",
+   "descricao": "Senhor Frio: o zero absoluto",
+   "versoes": [
+    0.0,
+    2.1516,
+    4.3962,
+    6.4796
+   ],
+   "duracoes": [
+    2.0716,
+    2.1646,
+    2.0034,
+    2.0724
+   ],
+   "bytes": 81779
   },
   "zero-point": {
    "arquivo": "zero-point.mp3",

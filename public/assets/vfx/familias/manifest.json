@@ -601,6 +601,20 @@
   "laco": false,
   "bytes": 16802
  },
+ "armadura_de_gelo": {
+  "descricao": "Senhor Frio · as placas de cristal",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 43218
+ },
  "arranhao_felino": {
   "descricao": "Básico da Mulher-Gato: o chicote e as garras",
   "quadros": 12,
@@ -1833,6 +1847,20 @@
   "laco": false,
   "bytes": 25750
  },
+ "braco_extensivel": {
+  "descricao": "Inspetor Bugiganga · o braço de gomos e a garra",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 17264
+ },
  "braco_namekiano": {
   "descricao": "básico do Piccolo: o braço verde estica e acerta",
   "quadros": 12,
@@ -1888,6 +1916,20 @@
   ],
   "laco": true,
   "bytes": 25208
+ },
+ "bugiganga_preparo": {
+  "descricao": "Inspetor Bugiganga · o chapéu-hélice (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 5304
  },
  "bungee_gum": {
   "descricao": "Hisoka · o chiclete rosa que gruda e estica",
@@ -2350,6 +2392,20 @@
   ],
   "laco": false,
   "bytes": 26834
+ },
+ "capitao_preparo": {
+  "descricao": "Capitão Planeta · os cinco raios se juntando (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 10400
  },
  "carga": {
   "descricao": "preparo: energia convergindo",
@@ -3457,20 +3513,6 @@
   "laco": false,
   "bytes": 22778
  },
- "confusao": {
-  "descricao": "interrogações girando",
-  "quadros": 12,
-  "grade": [
-   3,
-   4
-  ],
-  "tamanho": [
-   192,
-   192
-  ],
-  "laco": false,
-  "bytes": 27884
- },
  "confusao_total": {
   "descricao": "Pica-Pau · as penas e as estrelinhas",
   "quadros": 12,
@@ -3750,6 +3792,20 @@
   ],
   "laco": false,
   "bytes": 39384
+ },
+ "correr_para_o_perigo": {
+  "descricao": "Coragem · a corrida suada e a bolha no trio",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 36250
  },
  "correria": {
   "descricao": "Salsicha · a nuvem de poeira e as pegadas",
@@ -4213,6 +4269,20 @@
   "laco": false,
   "bytes": 39174
  },
+ "danny_preparo": {
+  "descricao": "Danny Phantom · os anéis da transformação (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 13772
+ },
  "dante_preparo": {
   "descricao": "Dante · os raios e as asas de demônio (Preparo, laço)",
   "quadros": 12,
@@ -4646,6 +4716,20 @@
   ],
   "laco": false,
   "bytes": 28538
+ },
+ "discurso_interminavel": {
+  "descricao": "Macaco Louco · os balões de fala sem fim",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 37838
  },
  "disfarce": {
   "descricao": "Agente 47 · o terno e a seringa",
@@ -7069,6 +7153,20 @@
   "laco": false,
   "bytes": 23682
  },
+ "forca_da_natureza": {
+  "descricao": "Capitão Planeta · as folhas e as raízes",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 38506
+ },
  "forca_de_aceleracao": {
   "descricao": "Flash · a Força de Aceleração no aliado",
   "quadros": 12,
@@ -7250,6 +7348,20 @@
   ],
   "laco": false,
   "bytes": 57022
+ },
+ "frio_preparo": {
+  "descricao": "Senhor Frio · o capacete e a pistola carregando (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 23104
  },
  "frostmourne": {
   "descricao": "Arthas: corte rúnico gelado com runas e cristais",
@@ -8399,8 +8511,8 @@
   "laco": false,
   "bytes": 101176
  },
- "grito_de_guerra": {
-  "descricao": "estandarte de raios e divisas",
+ "grito_de_pavor": {
+  "descricao": "Coragem · o grito tremido e o coração",
   "quadros": 12,
   "grade": [
    3,
@@ -8411,7 +8523,7 @@
    192
   ],
   "laco": false,
-  "bytes": 116754
+  "bytes": 24932
  },
  "grito_hulk": {
   "descricao": "Hulk · o rugido saindo dele em arcos",
@@ -8832,6 +8944,20 @@
   ],
   "laco": false,
   "bytes": 55116
+ },
+ "intangibilidade": {
+  "descricao": "Danny Phantom · o contorno fantasma e o escudo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 42452
  },
  "inv_androide": {
   "descricao": "Androide de combate: soco-foguete",
@@ -9882,6 +10008,20 @@
   ],
   "laco": false,
   "bytes": 30566
+ },
+ "lamento_fantasma": {
+  "descricao": "Danny Phantom · o grito fantasma em cone",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 27520
  },
  "lamina_de_agua": {
   "descricao": "fita de água em espiral",
@@ -11185,20 +11325,6 @@
   "laco": false,
   "bytes": 50644
  },
- "medo": {
-  "descricao": "olhos na sombra",
-  "quadros": 12,
-  "grade": [
-   3,
-   4
-  ],
-  "tamanho": [
-   192,
-   192
-  ],
-  "laco": false,
-  "bytes": 83840
- },
  "megatron_preparo": {
   "descricao": "Megatron · o canhão de fusão carregando (Preparo, laço)",
   "quadros": 12,
@@ -11548,6 +11674,20 @@
   ],
   "laco": false,
   "bytes": 15940
+ },
+ "mojo_preparo": {
+  "descricao": "Macaco Louco · o capacete e os balões (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 20466
  },
  "mordida": {
   "descricao": "dentes fechando",
@@ -17429,6 +17569,20 @@
   "laco": false,
   "bytes": 56778
  },
+ "o_poder_e_de_voces": {
+  "descricao": "Capitão Planeta · o planeta e a luz",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 73598
+ },
  "olfato_tanjiro": {
   "descricao": "Tanjiro · o fio da abertura (o cheiro até o ponto fraco)",
   "quadros": 12,
@@ -18199,6 +18353,20 @@
   "laco": false,
   "bytes": 60574
  },
+ "pistola_de_gelo": {
+  "descricao": "Senhor Frio · o feixe e o bloco de gelo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 19302
+ },
  "pistola_de_megamente": {
   "descricao": "Básico do Megamente: a pistola desidratadora e o cubo",
   "quadros": 12,
@@ -18464,6 +18632,20 @@
   ],
   "laco": false,
   "bytes": 45940
+ },
+ "poder_dos_aneis": {
+  "descricao": "Capitão Planeta · os cinco anéis e o escudo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 36138
  },
  "poeira_na_pista": {
   "descricao": "Papa-Léguas · a cortina de poeira",
@@ -19053,20 +19235,6 @@
   "laco": false,
   "bytes": 102118
  },
- "punho_gigante": {
-  "descricao": "silhueta de punho gigante",
-  "quadros": 12,
-  "grade": [
-   3,
-   4
-  ],
-  "tamanho": [
-   192,
-   192
-  ],
-  "laco": false,
-  "bytes": 78934
- },
  "punho_heroico": {
   "descricao": "Finn · o punho e as estrelinhas",
   "quadros": 12,
@@ -19346,6 +19514,20 @@
   ],
   "laco": false,
   "bytes": 121504
+ },
+ "raio_adaptador": {
+  "descricao": "Macaco Louco · o raio do capacete e o escudo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 24150
  },
  "raio_celeste": {
   "descricao": "Raiden · os raios do céu",
@@ -20187,20 +20369,6 @@
   "laco": false,
   "bytes": 33748
  },
- "resgate": {
-  "descricao": "mergulho de resgate",
-  "quadros": 12,
-  "grade": [
-   3,
-   4
-  ],
-  "tamanho": [
-   192,
-   192
-  ],
-  "laco": false,
-  "bytes": 46072
- },
  "resgate_elastico": {
   "descricao": "Mulher-Elástica · o braço que agarra e puxa",
   "quadros": 12,
@@ -20397,6 +20565,20 @@
   "laco": false,
   "bytes": 55598
  },
+ "robo_gigante_mojo": {
+  "descricao": "Macaco Louco · o punho do robô gigante",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 32870
+ },
  "rocha": {
   "descricao": "pedra em viagem (+x)",
   "quadros": 12,
@@ -20466,20 +20648,6 @@
   ],
   "laco": false,
   "bytes": 27688
- },
- "rugido": {
-  "descricao": "ondas de som em cone",
-  "quadros": 12,
-  "grade": [
-   3,
-   4
-  ],
-  "tamanho": [
-   192,
-   192
-  ],
-  "laco": false,
-  "bytes": 46664
  },
  "rugido_da_fundacao": {
   "descricao": "Eren · as pegadas dos colossais, o vapor e o choque",
@@ -22427,20 +22595,6 @@
   "laco": false,
   "bytes": 36898
  },
- "teleporte": {
-  "descricao": "implode e reaparece",
-  "quadros": 12,
-  "grade": [
-   3,
-   4
-  ],
-  "tamanho": [
-   192,
-   192
-  ],
-  "laco": false,
-  "bytes": 37032
- },
  "teleporte_infernal": {
   "descricao": "Scorpion · o fogo que some e volta",
   "quadros": 12,
@@ -23309,6 +23463,20 @@
   "laco": false,
   "bytes": 49622
  },
+ "vai_vai_bugiganga": {
+  "descricao": "Inspetor Bugiganga · as engenhocas para todo lado",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 25756
+ },
  "vampire_killer": {
   "descricao": "Simon · o chicote de corrente",
   "quadros": 12,
@@ -23532,20 +23700,6 @@
   ],
   "laco": true,
   "bytes": 24178
- },
- "vinhas": {
-  "descricao": "vinhas enrolando",
-  "quadros": 12,
-  "grade": [
-   3,
-   4
-  ],
-  "tamanho": [
-   192,
-   192
-  ],
-  "laco": false,
-  "bytes": 65596
  },
  "visao_alem_do_alcance": {
   "descricao": "Lion-O · o Olho de Thundera e o feixe",
@@ -23952,6 +24106,20 @@
   ],
   "laco": false,
   "bytes": 101792
+ },
+ "zero_absoluto_frio": {
+  "descricao": "Senhor Frio · a onda de frio e os flocos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 54310
  },
  "zero_point": {
   "descricao": "Gordon · o canhão gravitacional",

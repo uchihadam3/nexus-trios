@@ -61,14 +61,6 @@ def investida(rng, v):
     return x
 
 
-def punho_gigante(rng, v):
-    x = _z(1.0)
-    poe(x, _tom(nota(40), nota(52), 0.35, 0.3, 0.35), 0)
-    poe(x, _whoosh(rng, 0.32, 150, 1800, 0.95, g=0.7), 0)
-    poe(x, B.esmagar(rng, v), 0.3, 1.0)
-    return x
-
-
 def soco_serio(rng, v):
     x = _z(1.5)
     poe(x, B.soco_leve(rng, v), 0, 0.6)
@@ -364,17 +356,6 @@ def rajada_de_ar(rng, v):
     return reverb(x, 0.4, 0.2)
 
 
-def vinhas(rng, v):
-    n = n_de(1.2)
-    x = np.zeros(n)
-    for k in range(18):
-        m = n_de(0.06)
-        poe(x, passa(ruido(rng, m), 600, 3000, 2) * env(m, 0.005, 0.03) * 0.5, rng.uniform(0, 0.8))
-    x += passa(rosa(rng, n), 150, 800, 2) * sobe_e_some(n, 0.5, 1.4) * 0.4
-    poe(x, B.prisao(rng, v)[: n_de(0.5)] * 0.4, 0.6)
-    return reverb(x, 0.35, 0.2)
-
-
 def enxame(rng, v):
     n = n_de(1.3)
     t = np.arange(n) / SR
@@ -418,15 +399,6 @@ def radiacao(rng, v):
     return reverb(x, 0.3, 0.2)
 
 
-def rugido(rng, v):
-    n = n_de(1.1)
-    t = np.arange(n) / SR
-    x = satura(passa(rosa(rng, n), 80, 1400, 2) * (0.7 + 0.3 * np.sin(2 * math.pi * 23 * t)), 3) * sobe_e_some(n, 0.25, 1.3) * 1.0
-    x += seno(varre(110, 70, n, 0.6), n) * env(n, 0.05, 0.6) * 0.3
-    return reverb(x, 0.6, 0.25)
-
-
-# ================================================================== magia
 def olho(rng, v):
     n = n_de(1.2)
     x = _corta(_tom(nota(48), nota(55), 0.4, 0.3, 0.3), 1.2)
@@ -452,24 +424,6 @@ def sarcofago(rng, v):
     return x
 
 
-def teleporte(rng, v):
-    x = _z(1.0)
-    poe(x, _tom(nota(84), nota(60), 0.25, 0.2, 0.25, 0.4), 0)
-    poe(x, assobio(rng, n_de(0.25), 6000, 600, 0.6, 0.4) * env(n_de(0.25), 0.005, 0.15) * 0.5, 0)
-    poe(x, _tom(nota(60), nota(84), 0.2, 0.15, 0.25, 0.6), 0.35)
-    poe(x, estalo(rng, n_de(0.1), 1500, 8000, 0.006) * 0.6, 0.35)
-    return reverb(x, 0.5, 0.25)
-
-
-def confusao(rng, v):
-    n = n_de(1.2)
-    t = np.arange(n) / SR
-    x = np.sin(2 * math.pi * np.cumsum(500 + 250 * np.sin(2 * math.pi * 3 * t)) / SR) * env(n, 0.05, 0.6) * 0.15
-    for k in range(4):
-        poe(x, _brilho(rng, 0.25, nota(84 + (k % 2) * 5), 0.08, SINO), 0.1 + k * 0.18)
-    return reverb(x, 0.5, 0.25)
-
-
 def invocacao(rng, v):
     x = _z(1.5)
     poe(x, B.selo(rng, v)[: n_de(0.7)] * 0.6, 0)
@@ -487,32 +441,12 @@ def cura_em_area(rng, v):
     return reverb(x, 0.8, 0.4, 9000)
 
 
-def grito_de_guerra(rng, v):
-    x = _z(1.3)
-    n = n_de(0.8)
-    t = np.arange(n) / SR
-    voz = satura(passa(rosa(rng, n), 200, 2500, 2) * (0.8 + 0.2 * np.sin(2 * math.pi * 30 * t)), 2) * sobe_e_some(n, 0.25, 1.2) * 0.6
-    poe(x, voz, 0)
-    for k, m in enumerate((60, 64, 67, 72)):
-        poe(x, satura(seno(np.full(n_de(0.5), nota(m)), n_de(0.5)), 1.5) * env(n_de(0.5), 0.01, 0.3) * 0.1, 0.25 + k * 0.07)
-    return reverb(x, 0.6, 0.3)
-
-
 def barreira_magica(rng, v):
     x = _z(1.4)
     poe(x, B.escudo(rng, v)[: n_de(0.8)] * 0.6, 0)
     for k, m in enumerate((67, 74, 79)):
         poe(x, modal(n_de(1.0), nota(m), rng=rng, **CRISTAL) * env(n_de(1.0), 0.05, 0.6) * 0.12, 0.1 + k * 0.1)
     return reverb(x, 0.7, 0.35)
-
-
-def resgate(rng, v):
-    x = _z(1.1)
-    poe(x, _whoosh(rng, 0.35, 3000, 400, 0.6, g=0.6), 0)
-    poe(x, _whoosh(rng, 0.3, 400, 3000, 0.4, g=0.5), 0.35)
-    for k, m in enumerate((76, 81, 84)):
-        poe(x, _brilho(rng, 0.4, nota(m), 0.1, SINO), 0.4 + k * 0.06)
-    return reverb(x, 0.5, 0.25)
 
 
 def bencao(rng, v):
@@ -541,15 +475,6 @@ def lentidao(rng, v):
     x += passa(ruido(rng, n), 2500, 7000, 2) * env(n, 0.2, 0.6, segura=0.3) * 0.08
     x += seno(varre(nota(60), nota(48), n, 0.5), n) * env(n, 0.1, 0.8) * 0.12
     return reverb(x, 0.5, 0.25)
-
-
-def medo(rng, v):
-    n = n_de(1.4)
-    t = np.arange(n) / SR
-    x = (seno(np.full(n, nota(62)), n) + seno(np.full(n, nota(63)), n)) * env(n, 0.2, 0.7, segura=0.3) * 0.08
-    x += passa(rosa(rng, n), 100, 600, 2) * (0.5 + 0.5 * np.sin(2 * math.pi * 1.5 * t)) * env(n, 0.1, 0.7) * 0.3
-    poe(x, _tom(nota(84), nota(72), 0.3, 0.2, 0.08), 0.6)
-    return reverb(x, 0.8, 0.4, 3000)
 
 
 def estrela_invencivel(rng, v):

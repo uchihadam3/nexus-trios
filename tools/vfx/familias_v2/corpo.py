@@ -104,31 +104,6 @@ def investida(T, t, rng):
     return G, H
 
 
-def punho_gigante(T, t, rng):
-    """Punho gigante: um punho de luz (dedos dobrados, polegar por cima) cresce até o alvo e estoura."""
-    G, H = vazio(T)
-    s = 0.35 + 0.7 * ease_out(rel(t, 0, 0.3), 2.5)
-    env = apaga(t, 0.35, 0.7)
-    u, v = T.U / s, T.V / s
-    corpo = smooth(1 - ((u / 0.5) ** 4 + ((v - 0.05) / 0.42) ** 4), 0, 0.12)
-    borda = corpo * (1 - smooth(1 - ((u / 0.44) ** 4 + ((v - 0.05) / 0.36) ** 4), 0, 0.12))
-    divisas = T.zero()
-    for k in range(1, 4):
-        x = (-0.5 + k * 0.25) * s
-        divisas += np.exp(-((T.U - x) / (0.012 * s)) ** 2) * smooth(-T.V, 0.02 * s, 0.1 * s) * corpo
-    juntas = T.zero()
-    for k in range(4):
-        juntas += T.gauss((-0.375 + k * 0.25) * s, -0.3 * s, 0.06 * s, 0.035 * s)
-    polegar = smooth(1 - (((u + 0.08) / 0.38) ** 2 + ((v - 0.12) / 0.1) ** 2), 0, 0.2)
-    polegar_b = polegar * (1 - smooth(1 - (((u + 0.08) / 0.33) ** 2 + ((v - 0.12) / 0.06) ** 2), 0, 0.2))
-    tt = rel(t, 0.3, 1)
-    estouro = T.gauss(0, 0, 0.2 + 0.1 * tt) * some(t, 0.3, 0.65) * 3 + T.ring(0.2 + 0.65 * ease_out(tt, 2), 0.05 * (1 - tt) + 0.01) * (1 - tt) ** 1.3 * 1.6 * (t > 0.3)
-    fa = faiscas(T, rng, t, 24, 0.95, 0.04, gravidade=0.2, inicio=0.3)
-    G += (corpo * 0.35 + borda * 1.6 + divisas * 1.1 + juntas * 0.8 + polegar_b * 1.3) * env + estouro + T.glow(fa, 1, 1.2, 0.02)
-    H += (borda * 0.7 + juntas * 0.5 + polegar_b * 0.5) * env + estouro + fa * 0.7
-    return G, H
-
-
 def soco_serio(T, t, rng):
     """Soco sério: um sopro gigante para a frente que abre o céu, anéis de pressão e nuvens rasgadas."""
     G, H = vazio(T)
@@ -375,7 +350,6 @@ REGISTRO = [
     ("pow_cartoon", pow_cartoon, GRANDE, "balão POW de quadrinho", False),
     ("martelo", martelo, GRANDE, "martelada no chão", False),
     ("investida", investida, GRANDE, "investida com linhas de velocidade", False),
-    ("punho_gigante", punho_gigante, GRANDE, "silhueta de punho gigante", False),
     ("soco_serio", soco_serio, GRANDE, "sopro gigante para a frente", False),
     ("faisca_negra", faisca_negra, GRANDE, "faísca negra (raios grossos)", False),
     ("chicote", chicote, GRANDE, "chicote estalando", False),

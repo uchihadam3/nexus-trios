@@ -104,23 +104,6 @@ def caveira(T, t, rng):
     return G, H
 
 
-def teleporte(T, t, rng):
-    """Teleporte: a luz implode num risco vertical, some, e reaparece explodindo do lado."""
-    G, H = vazio(T)
-    fecha = ease_in(rel(t, 0, 0.25), 2)
-    risco = np.exp(-(T.U / (0.25 * (1 - fecha) + 0.01)) ** 2) * smooth(0.5 - np.abs(T.V), 0, 0.2) * (t < 0.3) * (0.4 + fecha)
-    tt = rel(t, 0.35, 1)
-    volta = (T.ring(0.05 + 0.6 * ease_out(tt, 2.5), 0.02) * (1 - tt) * 1.6 + T.gauss(0, 0, 0.1) * some(t, 0.35, 0.6) * 2.5) * (t > 0.35)
-    linhas = []
-    for k in range(10):
-        a = TAU * k / 10
-        r0, r1 = 0.1 + 0.4 * tt, 0.2 + 0.6 * tt
-        linhas.append((math.cos(a) * r0, math.sin(a) * r0, math.cos(a) * r1, math.sin(a) * r1, (1 - tt) * (t > 0.35)))
-    G += risco * 1.6 + volta + T.lines(linhas, 0.012, 0.002)
-    H += risco + volta
-    return G, H
-
-
 def sorte(T, t, rng):
     """Sorte: dois dados rolam e quicam, trevos e estrelinhas pulam quando param."""
     G, H = vazio(T)
@@ -149,24 +132,6 @@ def sorte(T, t, rng):
     return G, H
 
 
-def confusao(T, t, rng):
-    """Confusão: pontos de interrogação e estrelinhas giram em volta da cabeça do alvo."""
-    G, H = vazio(T)
-    env = janela(t, 0, 0.15) * apaga(t, 0.75, 1)
-    acc = T.zero()
-    for k in range(3):
-        a = TAU * k / 3 + t * TAU * 1.2
-        x, y = math.cos(a) * 0.4, -0.4 + math.sin(a) * 0.12
-        s = 0.11 * (0.8 + 0.25 * (math.sin(a) > 0))
-        pts = [(x + s * 0.6 * math.cos(b), y - s * 0.4 + s * 0.6 * math.sin(b)) for b in np.linspace(math.pi, TAU + 0.6, 14)]
-        pts += [(x + s * 0.1, y + s * 0.5)]
-        acc += T.polyline(pts, 0.02, 1) + T.gauss(x + s * 0.1, y + s * 0.95, 0.018) * 1.5
-    est = T.polys([(estrela(math.cos(a) * 0.4, -0.4 + math.sin(a) * 0.12, 0.05, a, 5), 1) for a in (TAU * (k + 0.5) / 3 + t * TAU * 1.2 for k in range(3))], 0.003)
-    G += (T.glow(acc, 1.3, 1, 0.02) + est * 1.2) * env
-    H += (acc * 0.8 + est * 0.6) * env
-    return G, H
-
-
 def invocacao(T, t, rng):
     """Invocação: um círculo se abre no chão e uma silhueta de luz sobe dele, com faíscas."""
     G, H = vazio(T)
@@ -188,7 +153,5 @@ REGISTRO = [
     ("olho", olho, GRANDE, "olho gigante se abrindo", False),
     ("runas", runas, GRANDE, "círculo de runas", False),
     ("sarcofago", sarcofago, GRANDE, "caixa negra fechando", False),
-    ("teleporte", teleporte, GRANDE, "implode e reaparece", False),
-    ("confusao", confusao, GRANDE, "interrogações girando", False),
     ("invocacao", invocacao, GRANDE, "silhueta invocada", False),
 ]
