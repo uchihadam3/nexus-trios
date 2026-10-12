@@ -657,6 +657,20 @@
   "laco": false,
   "bytes": 13824
  },
+ "bastoes_eletricos": {
+  "descricao": "Básico do Asa Noturna: os dois bastões elétricos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 11810
+ },
  "bastoes_em_cruz": {
   "descricao": "Demolidor · os dois bastões em X",
   "quadros": 12,
@@ -754,6 +768,20 @@
   ],
   "laco": true,
   "bytes": 18472
+ },
+ "beijo_soprado": {
+  "descricao": "Básico de Afrodite: os lábios e os corações",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 9194
  },
  "bencao": {
   "descricao": "penas e halo",
@@ -1034,6 +1062,20 @@
   ],
   "laco": false,
   "bytes": 49348
+ },
+ "bote_da_medusa": {
+  "descricao": "Básico da Medusa: o bote e a pedra",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 33322
  },
  "bracelete": {
   "descricao": "Golpe de bracelete: braceletes em X e o soco",
@@ -1748,6 +1790,20 @@
   ],
   "laco": false,
   "bytes": 73658
+ },
+ "chute_alado": {
+  "descricao": "Básico de Hermes: a sandália alada",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 13724
  },
  "chute_basico": {
   "descricao": "Chute simples: o pé sobe em arco, acerta com estrela e anel de choque e volta",
@@ -3065,6 +3121,20 @@
   "laco": false,
   "bytes": 118304
  },
+ "escudada_de_atena": {
+  "descricao": "Básico de Atena: o escudo batendo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 24204
+ },
  "escudo": {
   "descricao": "cúpula de escudo",
   "quadros": 12,
@@ -3919,6 +3989,34 @@
   "laco": true,
   "bytes": 7578
  },
+ "faisca_arcana": {
+  "descricao": "Básico da Yennefer: a centelha violeta",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 12946
+ },
+ "faisca_de_zeus": {
+  "descricao": "Básico de Zeus: o raio arremessado",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 22144
+ },
  "faisca_negra": {
   "descricao": "faísca negra (raios grossos)",
   "quadros": 12,
@@ -4184,6 +4282,20 @@
   ],
   "laco": false,
   "bytes": 18828
+ },
+ "flecha_lunar": {
+  "descricao": "Básico de Ártemis: a lua e a flecha de prata",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 14246
  },
  "flor_de_lapela": {
   "descricao": "Flor de lapela do Coringa: esguicho em arco que respinga, chia e borbulha",
@@ -4506,6 +4618,20 @@
   ],
   "laco": false,
   "bytes": 49868
+ },
+ "gancho_de_mabel": {
+  "descricao": "Básico da Mabel: o gancho e o glitter",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 13520
  },
  "garra_de_dragao": {
   "descricao": "Charizard · as três garras de dragão rasgando",
@@ -5501,6 +5627,20 @@
   "laco": false,
   "bytes": 59402
  },
+ "jato_do_tridente": {
+  "descricao": "Básico de Poseidon: os três jatos do tridente",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 15012
+ },
  "joia_do_tempo": {
   "descricao": "Thanos · a Joia do Tempo e a areia lenta",
   "quadros": 12,
@@ -6047,6 +6187,20 @@
   "laco": false,
   "bytes": 59722
  },
+ "lanca_de_ares": {
+  "descricao": "Básico de Ares: a lança e a fúria",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 16446
+ },
  "lanca_de_pedra": {
   "descricao": "Edward · as palmas, os raios e a lança de pedra",
   "quadros": 12,
@@ -6088,6 +6242,20 @@
   ],
   "laco": false,
   "bytes": 24090
+ },
+ "lanternada": {
+  "descricao": "Básico do Dipper: o facho da lanterna e a pancada",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 18848
  },
  "laser": {
   "descricao": "laser fino (faixa)",
@@ -8287,6 +8455,20 @@
   "laco": false,
   "bytes": 69060
  },
+ "raio_de_apolo": {
+  "descricao": "Básico de Apolo: o sol e o feixe dourado",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 27244
+ },
  "raio_de_gaia": {
   "descricao": "Raio de Gaia: cinco pontos de luz se unem num raio trançado que abre um planeta de luz",
   "quadros": 12,
@@ -9575,6 +9757,20 @@
   "laco": false,
   "bytes": 53850
  },
+ "soco_do_nemesis": {
+  "descricao": "Básico do Nêmesis: o punho com tentáculos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 22594
+ },
  "soco_do_stand": {
   "descricao": "Soco do Stand de Jotaro: punho fantasma com vultos e eco",
   "quadros": 12,
@@ -10316,6 +10512,20 @@
   ],
   "laco": false,
   "bytes": 100364
+ },
+ "toque_do_tempo": {
+  "descricao": "Básico de Cronos: o relógio para trás e a areia",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 21366
  },
  "tornado": {
   "descricao": "funil de tornado",

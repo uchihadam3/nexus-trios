@@ -801,6 +801,23 @@
    ],
    "bytes": 38991
   },
+  "bastoes-eletricos": {
+   "arquivo": "bastoes-eletricos.mp3",
+   "descricao": "básico do Asa Noturna: os bastões e o choque",
+   "versoes": [
+    0.0,
+    1.08,
+    2.1963,
+    3.2424
+   ],
+   "duracoes": [
+    1.0,
+    1.0363,
+    0.9662,
+    1.0152
+   ],
+   "bytes": 36148
+  },
   "bastoes-em-cruz": {
    "arquivo": "bastoes-em-cruz.mp3",
    "descricao": "Demolidor: os bastões girando e batendo",
@@ -902,6 +919,23 @@
     1.3198
    ],
    "bytes": 38898
+  },
+  "beijo-soprado": {
+   "arquivo": "beijo-soprado.mp3",
+   "descricao": "básico de Afrodite: o beijo e os corações",
+   "versoes": [
+    0.0,
+    1.28,
+    2.6035,
+    3.8429
+   ],
+   "duracoes": [
+    1.2,
+    1.2435,
+    1.1594,
+    1.2183
+   ],
+   "bytes": 45615
   },
   "bencao": {
    "arquivo": "bencao.mp3",
@@ -1174,6 +1208,23 @@
     0.7569
    ],
    "bytes": 23841
+  },
+  "bote-da-medusa": {
+   "arquivo": "bote-da-medusa.mp3",
+   "descricao": "básico da Medusa: o sibilo e a pedra",
+   "versoes": [
+    0.0,
+    1.38,
+    2.8071,
+    4.1432
+   ],
+   "duracoes": [
+    1.3,
+    1.3471,
+    1.256,
+    1.3198
+   ],
+   "bytes": 60822
   },
   "bracelete": {
    "arquivo": "bracelete.mp3",
@@ -1922,6 +1973,23 @@
     1.7259
    ],
    "bytes": 64982
+  },
+  "chute-alado": {
+   "arquivo": "chute-alado.mp3",
+   "descricao": "básico de Hermes: as asinhas e o chute",
+   "versoes": [
+    0.0,
+    0.91,
+    1.8106,
+    2.665
+   ],
+   "duracoes": [
+    0.83,
+    0.8205,
+    0.7745,
+    0.828
+   ],
+   "bytes": 31404
   },
   "chute-basico": {
    "arquivo": "chute-basico.mp3",
@@ -3419,6 +3487,23 @@
    ],
    "bytes": 21811
   },
+  "escudada-de-atena": {
+   "arquivo": "escudada-de-atena.mp3",
+   "descricao": "básico de Atena: o escudo de bronze",
+   "versoes": [
+    0.0,
+    1.28,
+    2.6035,
+    3.8429
+   ],
+   "duracoes": [
+    1.2,
+    1.2435,
+    1.1594,
+    1.2183
+   ],
+   "bytes": 36943
+  },
   "escudo": {
    "arquivo": "escudo.mp3",
    "descricao": "Escudo",
@@ -4354,6 +4439,40 @@
    ],
    "bytes": 62946
   },
+  "faisca-arcana": {
+   "arquivo": "faisca-arcana.mp3",
+   "descricao": "básico da Yennefer: a centelha",
+   "versoes": [
+    0.0,
+    1.08,
+    2.1963,
+    3.2424
+   ],
+   "duracoes": [
+    1.0,
+    1.0363,
+    0.9662,
+    1.0152
+   ],
+   "bytes": 42156
+  },
+  "faisca-de-zeus": {
+   "arquivo": "faisca-de-zeus.mp3",
+   "descricao": "básico de Zeus: o trovão",
+   "versoes": [
+    0.0,
+    1.28,
+    2.6035,
+    3.8429
+   ],
+   "duracoes": [
+    1.2,
+    1.2435,
+    1.1594,
+    1.2183
+   ],
+   "bytes": 45115
+  },
   "faisca-negra": {
    "arquivo": "faisca-negra.mp3",
    "descricao": "família faisca negra",
@@ -4591,6 +4710,23 @@
     1.1167
    ],
    "bytes": 40874
+  },
+  "flecha-lunar": {
+   "arquivo": "flecha-lunar.mp3",
+   "descricao": "básico de Ártemis: a flecha de prata",
+   "versoes": [
+    0.0,
+    1.18,
+    2.3999,
+    3.5427
+   ],
+   "duracoes": [
+    1.1,
+    1.1399,
+    1.0628,
+    1.1167
+   ],
+   "bytes": 43946
   },
   "flor-de-lapela": {
    "arquivo": "flor-de-lapela.mp3",
@@ -4982,6 +5118,23 @@
     0.5076
    ],
    "bytes": 20524
+  },
+  "gancho-de-mabel": {
+   "arquivo": "gancho-de-mabel.mp3",
+   "descricao": "básico da Mabel: o gancho e o glitter",
+   "versoes": [
+    0.0,
+    1.0712,
+    2.1706,
+    3.2041
+   ],
+   "duracoes": [
+    0.9912,
+    1.0194,
+    0.9534,
+    1.0201
+   ],
+   "bytes": 40234
   },
   "garra-de-dragao": {
    "arquivo": "garra-de-dragao.mp3",
@@ -6258,6 +6411,23 @@
    ],
    "bytes": 52016
   },
+  "jato-do-tridente": {
+   "arquivo": "jato-do-tridente.mp3",
+   "descricao": "básico de Poseidon: os jatos de água",
+   "versoes": [
+    0.0,
+    1.18,
+    2.3999,
+    3.5427
+   ],
+   "duracoes": [
+    1.1,
+    1.1399,
+    1.0628,
+    1.1167
+   ],
+   "bytes": 39641
+  },
   "joia-do-tempo": {
    "arquivo": "joia-do-tempo.mp3",
    "descricao": "Joia do Tempo: o som esticando e a areia",
@@ -6938,6 +7108,23 @@
    ],
    "bytes": 77270
   },
+  "lanca-de-ares": {
+   "arquivo": "lanca-de-ares.mp3",
+   "descricao": "básico de Ares: o grito e a lança",
+   "versoes": [
+    0.0,
+    1.0668,
+    2.1187,
+    3.1146
+   ],
+   "duracoes": [
+    0.9868,
+    0.9718,
+    0.9159,
+    0.9245
+   ],
+   "bytes": 32859
+  },
   "lanca-de-pedra": {
    "arquivo": "lanca-de-pedra.mp3",
    "descricao": "Edward: as palmas e a lança de pedra",
@@ -7005,6 +7192,23 @@
     1.0716
    ],
    "bytes": 36557
+  },
+  "lanternada": {
+   "arquivo": "lanternada.mp3",
+   "descricao": "básico do Dipper: a lanterna e o tonc",
+   "versoes": [
+    0.0,
+    1.11,
+    2.2365,
+    3.2973
+   ],
+   "duracoes": [
+    1.03,
+    1.0465,
+    0.9808,
+    1.0118
+   ],
+   "bytes": 38272
   },
   "laser": {
    "arquivo": "laser.mp3",
@@ -9573,6 +9777,23 @@
    ],
    "bytes": 41326
   },
+  "raio-de-apolo": {
+   "arquivo": "raio-de-apolo.mp3",
+   "descricao": "básico de Apolo: o sol e o feixe",
+   "versoes": [
+    0.0,
+    1.2397,
+    2.5632,
+    3.7439
+   ],
+   "duracoes": [
+    1.1597,
+    1.2435,
+    1.1007,
+    1.1636
+   ],
+   "bytes": 44364
+  },
   "raio-de-gaia": {
    "arquivo": "raio-de-gaia.mp3",
    "descricao": "básico do Capitão Planeta: cinco notas de cristal que viram um raio limpo e brilhante",
@@ -11052,6 +11273,23 @@
    ],
    "bytes": 35612
   },
+  "soco-do-nemesis": {
+   "arquivo": "soco-do-nemesis.mp3",
+   "descricao": "básico do Nêmesis: o grunhido e o soco",
+   "versoes": [
+    0.0,
+    1.28,
+    2.6035,
+    3.8429
+   ],
+   "duracoes": [
+    1.2,
+    1.2435,
+    1.1594,
+    1.2183
+   ],
+   "bytes": 34410
+  },
   "soco-do-stand": {
    "arquivo": "soco-do-stand.mp3",
    "descricao": "básico de Jotaro: soco pesado com eco fantasmagórico",
@@ -11918,6 +12156,23 @@
     1.4721
    ],
    "bytes": 72977
+  },
+  "toque-do-tempo": {
+   "arquivo": "toque-do-tempo.mp3",
+   "descricao": "básico de Cronos: o relógio para trás",
+   "versoes": [
+    0.0,
+    1.38,
+    2.8071,
+    4.1432
+   ],
+   "duracoes": [
+    1.3,
+    1.3471,
+    1.256,
+    1.3198
+   ],
+   "bytes": 60269
   },
   "tornado": {
    "arquivo": "tornado.mp3",
