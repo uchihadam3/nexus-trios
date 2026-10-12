@@ -433,6 +433,34 @@
   "laco": true,
   "bytes": 6982
  },
+ "bankai_ichigo": {
+  "descricao": "Ichigo · o Getsuga preto de borda vermelha",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 51516
+ },
+ "bankai_preparo": {
+  "descricao": "Ichigo · a pressão do Bankai em espiral (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 39718
+ },
  "barreira_magica": {
   "descricao": "cúpula de runas",
   "quadros": 12,
@@ -1468,6 +1496,20 @@
   ],
   "laco": false,
   "bytes": 41274
+ },
+ "cleave": {
+  "descricao": "Sukuna · a medida e o corte único que parte o alvo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 19224
  },
  "clones": {
   "descricao": "silhuetas em leque",
@@ -3877,6 +3919,20 @@
   "laco": false,
   "bytes": 74714
  },
+ "grampo_de_cabelo": {
+  "descricao": "Nobara · os pregos explodem em sequência",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 41594
+ },
  "grande_faca": {
   "descricao": "Pyramid Head: faca arrastada e golpe pesado",
   "quadros": 12,
@@ -4324,6 +4380,20 @@
   ],
   "laco": false,
   "bytes": 44308
+ },
+ "jardim_das_sombras": {
+  "descricao": "Megumi · a poça de sombra e as mãos que fecham",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 53326
  },
  "joia_do_tempo": {
   "descricao": "Thanos · a Joia do Tempo e a areia lenta",
@@ -5249,6 +5319,20 @@
   "laco": false,
   "bytes": 57224
  },
+ "mascara_hollow": {
+  "descricao": "Ichigo · a máscara Hollow e a pressão espiritual",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 69258
+ },
  "masenko": {
   "descricao": "Gohan · o Masenko estourando",
   "quadros": 12,
@@ -5598,6 +5682,20 @@
   ],
   "laco": false,
   "bytes": 80962
+ },
+ "nue": {
+  "descricao": "Megumi · as asas do Nue e os raios em três pontos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 82062
  },
  "nunchakus": {
   "descricao": "Nunchakus do Michelangelo: giram na corrente e batem duas vezes",
@@ -6088,6 +6186,20 @@
   ],
   "laco": false,
   "bytes": 97662
+ },
+ "pregos_amaldicoados": {
+  "descricao": "Nobara · três pregos cravam e a energia prende",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 21080
  },
  "presas_rasgantes": {
   "descricao": "Inosuke · as duas lâminas lascadas em X",
@@ -6887,6 +6999,20 @@
   "laco": false,
   "bytes": 65090
  },
+ "ressonancia_amaldicoada": {
+  "descricao": "Nobara · o boneco de palha e os anéis de ressonância",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 59240
+ },
  "ressurreicao": {
   "descricao": "feixe de luz que levanta o aliado caído",
   "quadros": 12,
@@ -7124,6 +7250,34 @@
   ],
   "laco": false,
   "bytes": 33030
+ },
+ "santuario_maligno": {
+  "descricao": "Sukuna · o santuário e os cortes em toda a área",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 114992
+ },
+ "santuario_preparo": {
+  "descricao": "Sukuna · o selo e o santuário se formando (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 33086
  },
  "saque_do_trovao": {
   "descricao": "Zenitsu: risco de relâmpago horizontal e o raio em ziguezague",
@@ -8748,6 +8902,20 @@
   ],
   "laco": false,
   "bytes": 33016
+ },
+ "vontade_indomavel": {
+  "descricao": "Yuji · o anel do Preparo trinca e estoura com o soco",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 53298
  },
  "voo_de_impacto": {
   "descricao": "Omni-Man · o voo supersônico e o estrondo",

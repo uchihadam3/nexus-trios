@@ -500,6 +500,17 @@ export const FAMILIAS_NOVAS = {
   chicotes_de_carne: n({ nome: 'Chicotes de carne', grupo: 'especial', impacto: 'chicotes_de_carne', escala: 2.3, tempo: 1.0, cor: '#d42a48', tinta: 'fixa' }),
   sangue_corruptor: n({ nome: 'Sangue corruptor', grupo: 'magia', impacto: 'sangue_corruptor', escala: 2.3, tempo: 1.0, cor: '#d42a48', tinta: 'fixa' }),
   adaptacao_demoniaca: n({ nome: 'Adaptação demoníaca', grupo: 'especial', impacto: 'adaptacao_demoniaca', escala: 2.3, tempo: 1.0, cor: '#d42a48', tinta: 'fixa' }),
+  // rodada 6: Yuji, Megumi, Nobara, Sukuna e Ichigo (tools/vfx/familias_v2/rodada06.py)
+  vontade_indomavel: n({ nome: 'Vontade indomável', grupo: 'físico', impacto: 'vontade_indomavel', escala: 2.3, tempo: 1.0, cor: '#ff8a5a', tinta: 'fixa' }),
+  nue: n({ nome: 'Nue', grupo: 'energia', impacto: 'nue', escala: 2.5, tempo: 1.0, cor: '#9fc0ff', tinta: 'fixa' }),
+  jardim_das_sombras: n({ nome: 'Jardim das sombras', grupo: 'magia', impacto: 'jardim_das_sombras', escala: 2.3, tempo: 1.0, cor: '#7a8cd8', tinta: 'fixa' }),
+  pregos_amaldicoados: n({ nome: 'Pregos amaldiçoados', grupo: 'projétil', impacto: 'pregos_amaldicoados', escala: 2.3, tempo: 1.0, cor: '#e8785a', tinta: 'fixa' }),
+  ressonancia_amaldicoada: n({ nome: 'Ressonância', grupo: 'magia', impacto: 'ressonancia_amaldicoada', escala: 2.5, tempo: 1.0, cor: '#e85a8a', tinta: 'fixa' }),
+  grampo_de_cabelo: n({ nome: 'Grampo de cabelo', grupo: 'elemento', impacto: 'grampo_de_cabelo', escala: 2.3, tempo: 1.0, cor: '#ffa05a', tinta: 'fixa' }),
+  cleave: n({ nome: 'Cleave', grupo: 'corte', impacto: 'cleave', escala: 2.3, tempo: 1.0, cor: '#ff4a5a', tinta: 'fixa' }),
+  santuario_maligno: n({ nome: 'Santuário maligno', grupo: 'corte', preparo: 'santuario_preparo', impacto: 'santuario_maligno', escala: 2.6, tempo: 1.0, cor: '#e8323e', tinta: 'fixa' }),
+  mascara_hollow: n({ nome: 'Máscara Hollow', grupo: 'especial', impacto: 'mascara_hollow', escala: 2.3, tempo: 1.0, cor: '#ff4a4a', tinta: 'fixa' }),
+  bankai_ichigo: n({ nome: 'Bankai', grupo: 'corte', preparo: 'bankai_preparo', impacto: 'bankai_ichigo', escala: 2.5, tempo: 1.0, cor: '#e83a4a', tinta: 'fixa' }),
   mugen_tsukuyomi: n({ nome: 'Mugen Tsukuyomi', grupo: 'especial', impacto: 'mugen_tsukuyomi', noCentro: true, escala: 2.6, tempo: 1.0, cor: '#ff4a5a', tinta: 'fixa' }),
 } as const satisfies Record<string, Familia>;
 
