@@ -9043,6 +9043,20 @@
   "laco": false,
   "bytes": 55404
  },
+ "mu_abalador": {
+  "descricao": "Poseidon · o tridente e as ondas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 36016
+ },
  "mu_abobora": {
   "descricao": "Duende Verde · a bomba-abóbora explodindo",
   "quadros": 12,
@@ -9127,6 +9141,20 @@
   "laco": false,
   "bytes": 16128
  },
+ "mu_alegria": {
+  "descricao": "Mabel · a estrela cadente e o arco-íris",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 29182
+ },
  "mu_aljava": {
   "descricao": "Gavião Arqueiro · as flechas de truque",
   "quadros": 12,
@@ -9140,6 +9168,20 @@
   ],
   "laco": false,
   "bytes": 22524
+ },
+ "mu_alma_pesada": {
+  "descricao": "Anúbis · a balança do coração e da pena",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 18012
  },
  "mu_alvo": {
   "descricao": "Agente 47 · a mira e o código de barras",
@@ -9519,6 +9561,20 @@
   "laco": false,
   "bytes": 26944
  },
+ "mu_caos": {
+  "descricao": "Yennefer · a magia do caos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 51348
+ },
  "mu_carnificina": {
   "descricao": "Carnificina · as lâminas vermelhas para todo lado",
   "quadros": 12,
@@ -9617,6 +9673,20 @@
   "laco": false,
   "bytes": 30158
  },
+ "mu_ciclo_sol": {
+  "descricao": "Rá · o disco do sol",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 44262
+ },
  "mu_cinco_aneis": {
   "descricao": "Capitão Planeta · os cinco anéis",
   "quadros": 12,
@@ -9686,6 +9756,20 @@
   ],
   "laco": false,
   "bytes": 32338
+ },
+ "mu_come_medo": {
+  "descricao": "Pennywise · o balão e as luzes mortas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 25760
  },
  "mu_concentracao": {
   "descricao": "Vergil · o Corte do Julgamento",
@@ -9827,6 +9911,20 @@
   "laco": false,
   "bytes": 19286
  },
+ "mu_corvos_odin": {
+  "descricao": "Odin · os corvos e a Gungnir",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 20886
+ },
  "mu_crescentes": {
   "descricao": "Cavaleiro da Lua · os crescentes de prata",
   "quadros": 12,
@@ -9855,6 +9953,20 @@
   "laco": false,
   "bytes": 60430
  },
+ "mu_damballa": {
+  "descricao": "Chucky · o vodu e os raios",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 47660
+ },
  "mu_danca_branca": {
   "descricao": "Rukia · o círculo e o pilar de gelo",
   "quadros": 12,
@@ -9882,6 +9994,20 @@
   ],
   "laco": false,
   "bytes": 30332
+ },
+ "mu_desequilibrio": {
+  "descricao": "Asa Noturna · os bastões e o pássaro azul",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 23910
  },
  "mu_desmascarar": {
   "descricao": "Velma · a lupa e a máscara caindo",
@@ -9967,6 +10093,20 @@
   "laco": false,
   "bytes": 26920
  },
+ "mu_diario": {
+  "descricao": "Dipper · o diário e o pinheiro",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 34430
+ },
  "mu_disable": {
   "descricao": "Mewtwo · o Disable",
   "quadros": 12,
@@ -9980,6 +10120,20 @@
   ],
   "laco": false,
   "bytes": 54808
+ },
+ "mu_discordia": {
+  "descricao": "Afrodite · o pomo da discórdia",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 28862
  },
  "mu_disfarce": {
   "descricao": "Viúva Negra · a ampulheta e as pulseiras",
@@ -10443,6 +10597,34 @@
   "laco": false,
   "bytes": 17460
  },
+ "mu_flecha_certeira": {
+  "descricao": "Ártemis · o arco da lua e o alvo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 18632
+ },
+ "mu_flechas_sol": {
+  "descricao": "Apolo · o sol e a flecha dourada",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 29188
+ },
  "mu_florescer": {
   "descricao": "Malenia · a flor escarlate desabrochando",
   "quadros": 12,
@@ -10652,6 +10834,20 @@
   ],
   "laco": false,
   "bytes": 69152
+ },
+ "mu_gleipnir": {
+  "descricao": "Fenrir · as correntes quebrando e o uivo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 26974
  },
  "mu_goool": {
   "descricao": "Casey Jones · o taco e o disco",
@@ -11213,6 +11409,20 @@
   "laco": false,
   "bytes": 61852
  },
+ "mu_mais_guerra": {
+  "descricao": "Ares · a lança, o escudo e as chamas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 36736
+ },
  "mu_mais_poder": {
   "descricao": "Mumm-Ra · as faixas e os olhos vermelhos",
   "quadros": 12,
@@ -11268,6 +11478,20 @@
   ],
   "laco": false,
   "bytes": 57938
+ },
+ "mu_mensageiro": {
+  "descricao": "Hermes · o caduceu e a velocidade",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 23962
  },
  "mu_messatsu": {
   "descricao": "Akuma · o símbolo do Céu e a aura",
@@ -11352,6 +11576,20 @@
   ],
   "laco": false,
   "bytes": 47916
+ },
+ "mu_morto_vivo": {
+  "descricao": "Hel · as chamas verdes e a mão de osso",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 28394
  },
  "mu_mutacoes": {
   "descricao": "Geralt · o medalhão do lobo e o sinal Quen",
@@ -11899,6 +12137,20 @@
   "laco": false,
   "bytes": 29982
  },
+ "mu_raio_olimpo": {
+  "descricao": "Zeus · o raio do Olimpo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 42262
+ },
  "mu_raio_rubi": {
   "descricao": "Ciclope · o raio sem controle varrendo",
   "quadros": 12,
@@ -12038,6 +12290,20 @@
   ],
   "laco": false,
   "bytes": 84388
+ },
+ "mu_sabedoria": {
+  "descricao": "Atena · a coruja e os ramos de oliveira",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 25652
  },
  "mu_sacrificio": {
   "descricao": "Genos · o núcleo que explode",
@@ -12249,6 +12515,20 @@
   "laco": false,
   "bytes": 19768
  },
+ "mu_sonho": {
+  "descricao": "Freddy · a luva de lâminas e o pesadelo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 26898
+ },
  "mu_sopro_congelante": {
   "descricao": "Superman · o sopro gelado",
   "quadros": 12,
@@ -12276,6 +12556,20 @@
   ],
   "laco": false,
   "bytes": 31522
+ },
+ "mu_stars": {
+  "descricao": "Nemesis · o foguete e os tentáculos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 26330
  },
  "mu_strix": {
   "descricao": "Loid · a mira travando e as barras de Carga",
@@ -12375,6 +12669,34 @@
   "laco": false,
   "bytes": 58236
  },
+ "mu_tempestade_areia": {
+  "descricao": "Set · a tempestade de areia",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 57906
+ },
+ "mu_tempo_voltou": {
+  "descricao": "Cronos · o relógio voltando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 21968
+ },
  "mu_temporada": {
   "descricao": "Patolino · o tiro e o bico girando",
   "quadros": 12,
@@ -12444,6 +12766,20 @@
   ],
   "laco": false,
   "bytes": 41710
+ },
+ "mu_trabalhos": {
+  "descricao": "Hércules · a clava e os doze trabalhos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 36732
  },
  "mu_tranquilizante": {
   "descricao": "Snake · o alerta e o dardo",
@@ -12640,6 +12976,34 @@
   ],
   "laco": false,
   "bytes": 33456
+ },
+ "mu_virou_pedra": {
+  "descricao": "Medusa · as cobras e o olhar de pedra",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 34170
+ },
+ "mu_vitima": {
+  "descricao": "Michael Myers · a faca e a respiração",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 22712
  },
  "mu_vrrrum": {
   "descricao": "Denji · as motosserras",

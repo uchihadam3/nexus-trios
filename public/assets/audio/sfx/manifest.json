@@ -10542,6 +10542,23 @@
    ],
    "bytes": 66318
   },
+  "mu-abalador": {
+   "arquivo": "mu-abalador.mp3",
+   "descricao": "Poseidon: o tridente",
+   "versoes": [
+    0.0,
+    2.18,
+    4.4361,
+    6.5451
+   ],
+   "duracoes": [
+    2.1,
+    2.1761,
+    2.029,
+    2.132
+   ],
+   "bytes": 71673
+  },
   "mu-abobora": {
    "arquivo": "mu-abobora.mp3",
    "descricao": "Duende Verde: a bomba-abóbora",
@@ -10644,6 +10661,23 @@
    ],
    "bytes": 74858
   },
+  "mu-alegria": {
+   "arquivo": "mu-alegria.mp3",
+   "descricao": "Mabel: a alegria",
+   "versoes": [
+    0.0,
+    1.9738,
+    3.9969,
+    5.825
+   ],
+   "duracoes": [
+    1.8938,
+    1.9431,
+    1.7481,
+    1.8652
+   ],
+   "bytes": 105837
+  },
   "mu-aljava": {
    "arquivo": "mu-aljava.mp3",
    "descricao": "Gavião Arqueiro: as flechas",
@@ -10660,6 +10694,23 @@
     2.0305
    ],
    "bytes": 87891
+  },
+  "mu-alma-pesada": {
+   "arquivo": "mu-alma-pesada.mp3",
+   "descricao": "Anúbis: a alma pesada",
+   "versoes": [
+    0.0,
+    2.28,
+    4.6398,
+    6.8454
+   ],
+   "duracoes": [
+    2.2,
+    2.2798,
+    2.1256,
+    2.2335
+   ],
+   "bytes": 45355
   },
   "mu-alvo": {
    "arquivo": "mu-alvo.mp3",
@@ -11120,6 +11171,23 @@
    ],
    "bytes": 77784
   },
+  "mu-caos": {
+   "arquivo": "mu-caos.mp3",
+   "descricao": "Yennefer: o caos",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 73315
+  },
   "mu-carnificina": {
    "arquivo": "mu-carnificina.mp3",
    "descricao": "Carnificina: as lâminas",
@@ -11239,6 +11307,23 @@
    ],
    "bytes": 86547
   },
+  "mu-ciclo-sol": {
+   "arquivo": "mu-ciclo-sol.mp3",
+   "descricao": "Rá: o ciclo do sol",
+   "versoes": [
+    0.0,
+    2.28,
+    4.6398,
+    6.8454
+   ],
+   "duracoes": [
+    2.2,
+    2.2798,
+    2.1256,
+    2.2335
+   ],
+   "bytes": 63334
+  },
   "mu-cinco-aneis": {
    "arquivo": "mu-cinco-aneis.mp3",
    "descricao": "Capitão Planeta: os cinco anéis",
@@ -11323,6 +11408,23 @@
     1.8274
    ],
    "bytes": 64583
+  },
+  "mu-come-medo": {
+   "arquivo": "mu-come-medo.mp3",
+   "descricao": "Pennywise: come medo",
+   "versoes": [
+    0.0,
+    2.18,
+    4.4361,
+    6.5451
+   ],
+   "duracoes": [
+    2.1,
+    2.1761,
+    2.029,
+    2.132
+   ],
+   "bytes": 73903
   },
   "mu-concentracao": {
    "arquivo": "mu-concentracao.mp3",
@@ -11494,6 +11596,23 @@
    ],
    "bytes": 65451
   },
+  "mu-corvos-odin": {
+   "arquivo": "mu-corvos-odin.mp3",
+   "descricao": "Odin: os corvos",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 74878
+  },
   "mu-crescentes": {
    "arquivo": "mu-crescentes.mp3",
    "descricao": "Cavaleiro da Lua: os crescentes",
@@ -11528,6 +11647,23 @@
    ],
    "bytes": 86799
   },
+  "mu-damballa": {
+   "arquivo": "mu-damballa.mp3",
+   "descricao": "Chucky: Damballa",
+   "versoes": [
+    0.0,
+    2.18,
+    4.4361,
+    6.5451
+   ],
+   "duracoes": [
+    2.1,
+    2.1761,
+    2.029,
+    2.132
+   ],
+   "bytes": 59120
+  },
   "mu-danca-branca": {
    "arquivo": "mu-danca-branca.mp3",
    "descricao": "Rukia: a Dança branca",
@@ -11561,6 +11697,23 @@
     1.5908
    ],
    "bytes": 49523
+  },
+  "mu-desequilibrio": {
+   "arquivo": "mu-desequilibrio.mp3",
+   "descricao": "Asa Noturna: os bastões",
+   "versoes": [
+    0.0,
+    1.9442,
+    3.9114,
+    5.7898
+   ],
+   "duracoes": [
+    1.8642,
+    1.8872,
+    1.7985,
+    1.9072
+   ],
+   "bytes": 71028
   },
   "mu-desmascarar": {
    "arquivo": "mu-desmascarar.mp3",
@@ -11664,6 +11817,23 @@
    ],
    "bytes": 76007
   },
+  "mu-diario": {
+   "arquivo": "mu-diario.mp3",
+   "descricao": "Dipper: o diário",
+   "versoes": [
+    0.0,
+    2.0003,
+    4.1273,
+    6.0931
+   ],
+   "duracoes": [
+    1.9203,
+    2.047,
+    1.8858,
+    2.0265
+   ],
+   "bytes": 66954
+  },
   "mu-disable": {
    "arquivo": "mu-disable.mp3",
    "descricao": "Mewtwo: o Disable",
@@ -11680,6 +11850,23 @@
     1.9289
    ],
    "bytes": 44108
+  },
+  "mu-discordia": {
+   "arquivo": "mu-discordia.mp3",
+   "descricao": "Afrodite: a discórdia",
+   "versoes": [
+    0.0,
+    1.9784,
+    4.0246,
+    5.9407
+   ],
+   "duracoes": [
+    1.8984,
+    1.9662,
+    1.8361,
+    1.9519
+   ],
+   "bytes": 60921
   },
   "mu-disfarce": {
    "arquivo": "mu-disfarce.mp3",
@@ -12242,6 +12429,40 @@
    ],
    "bytes": 57663
   },
+  "mu-flecha-certeira": {
+   "arquivo": "mu-flecha-certeira.mp3",
+   "descricao": "Ártemis: a flecha certeira",
+   "versoes": [
+    0.0,
+    1.98,
+    4.0289,
+    5.9446
+   ],
+   "duracoes": [
+    1.9,
+    1.9689,
+    1.8357,
+    1.9289
+   ],
+   "bytes": 60899
+  },
+  "mu-flechas-sol": {
+   "arquivo": "mu-flechas-sol.mp3",
+   "descricao": "Apolo: as flechas de sol",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 71856
+  },
   "mu-florescer": {
    "arquivo": "mu-florescer.mp3",
    "descricao": "Malenia: o Florescer escarlate",
@@ -12496,6 +12717,23 @@
     2.4365
    ],
    "bytes": 91897
+  },
+  "mu-gleipnir": {
+   "arquivo": "mu-gleipnir.mp3",
+   "descricao": "Fenrir: Gleipnir",
+   "versoes": [
+    0.0,
+    2.28,
+    4.6398,
+    6.8454
+   ],
+   "duracoes": [
+    2.2,
+    2.2798,
+    2.1256,
+    2.2335
+   ],
+   "bytes": 90609
   },
   "mu-goool": {
    "arquivo": "mu-goool.mp3",
@@ -13177,6 +13415,23 @@
    ],
    "bytes": 63307
   },
+  "mu-mais-guerra": {
+   "arquivo": "mu-mais-guerra.mp3",
+   "descricao": "Ares: a guerra",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 71545
+  },
   "mu-mais-poder": {
    "arquivo": "mu-mais-poder.mp3",
    "descricao": "Mumm-Ra: mais poder",
@@ -13244,6 +13499,23 @@
     2.132
    ],
    "bytes": 82092
+  },
+  "mu-mensageiro": {
+   "arquivo": "mu-mensageiro.mp3",
+   "descricao": "Hermes: o mensageiro",
+   "versoes": [
+    0.0,
+    1.7018,
+    3.4577,
+    5.1265
+   ],
+   "duracoes": [
+    1.6218,
+    1.6759,
+    1.5888,
+    1.6382
+   ],
+   "bytes": 73280
   },
   "mu-messatsu": {
    "arquivo": "mu-messatsu.mp3",
@@ -13346,6 +13618,23 @@
     2.0305
    ],
    "bytes": 71063
+  },
+  "mu-morto-vivo": {
+   "arquivo": "mu-morto-vivo.mp3",
+   "descricao": "Hel: o morto-vivo",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 75267
   },
   "mu-mutacoes": {
    "arquivo": "mu-mutacoes.mp3",
@@ -14010,6 +14299,23 @@
    ],
    "bytes": 78007
   },
+  "mu-raio-olimpo": {
+   "arquivo": "mu-raio-olimpo.mp3",
+   "descricao": "Zeus: o raio do Olimpo",
+   "versoes": [
+    0.0,
+    2.18,
+    4.4361,
+    6.5451
+   ],
+   "duracoes": [
+    2.1,
+    2.1761,
+    2.029,
+    2.132
+   ],
+   "bytes": 60987
+  },
   "mu-raio-rubi": {
    "arquivo": "mu-raio-rubi.mp3",
    "descricao": "Ciclope: o raio sem controle",
@@ -14179,6 +14485,23 @@
     1.9544
    ],
    "bytes": 113081
+  },
+  "mu-sabedoria": {
+   "arquivo": "mu-sabedoria.mp3",
+   "descricao": "Atena: a sabedoria",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 49341
   },
   "mu-sacrificio": {
    "arquivo": "mu-sacrificio.mp3",
@@ -14435,6 +14758,23 @@
    ],
    "bytes": 71282
   },
+  "mu-sonho": {
+   "arquivo": "mu-sonho.mp3",
+   "descricao": "Freddy: o sonho",
+   "versoes": [
+    0.0,
+    1.9266,
+    3.9865,
+    5.9204
+   ],
+   "duracoes": [
+    1.8466,
+    1.9799,
+    1.8539,
+    1.8672
+   ],
+   "bytes": 66690
+  },
   "mu-sopro-congelante": {
    "arquivo": "mu-sopro-congelante.mp3",
    "descricao": "Superman: o sopro congelante",
@@ -14468,6 +14808,23 @@
     1.8274
    ],
    "bytes": 65646
+  },
+  "mu-stars": {
+   "arquivo": "mu-stars.mp3",
+   "descricao": "Nemesis: STARS",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0013
+   ],
+   "bytes": 72617
   },
   "mu-strix": {
    "arquivo": "mu-strix.mp3",
@@ -14588,6 +14945,40 @@
    ],
    "bytes": 107775
   },
+  "mu-tempestade-areia": {
+   "arquivo": "mu-tempestade-areia.mp3",
+   "descricao": "Set: a tempestade de areia",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 97443
+  },
+  "mu-tempo-voltou": {
+   "arquivo": "mu-tempo-voltou.mp3",
+   "descricao": "Cronos: o tempo voltou",
+   "versoes": [
+    0.0,
+    2.18,
+    4.4361,
+    6.5451
+   ],
+   "duracoes": [
+    2.1,
+    2.1761,
+    2.029,
+    2.132
+   ],
+   "bytes": 87182
+  },
   "mu-temporada": {
    "arquivo": "mu-temporada.mp3",
    "descricao": "Patolino: o tiro",
@@ -14672,6 +15063,23 @@
     1.8274
    ],
    "bytes": 64486
+  },
+  "mu-trabalhos": {
+   "arquivo": "mu-trabalhos.mp3",
+   "descricao": "Hércules: os trabalhos",
+   "versoes": [
+    0.0,
+    2.18,
+    4.4361,
+    6.5451
+   ],
+   "duracoes": [
+    2.1,
+    2.1761,
+    2.029,
+    2.132
+   ],
+   "bytes": 57180
   },
   "mu-tranquilizante": {
    "arquivo": "mu-tranquilizante.mp3",
@@ -14910,6 +15318,40 @@
     1.9289
    ],
    "bytes": 76653
+  },
+  "mu-virou-pedra": {
+   "arquivo": "mu-virou-pedra.mp3",
+   "descricao": "Medusa: virou pedra",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 94825
+  },
+  "mu-vitima": {
+   "arquivo": "mu-vitima.mp3",
+   "descricao": "Michael Myers: a vítima",
+   "versoes": [
+    0.0,
+    1.9221,
+    3.918,
+    5.8304
+   ],
+   "duracoes": [
+    1.8421,
+    1.9159,
+    1.8324,
+    1.8945
+   ],
+   "bytes": 61685
   },
   "mu-vrrrum": {
    "arquivo": "mu-vrrrum.mp3",
