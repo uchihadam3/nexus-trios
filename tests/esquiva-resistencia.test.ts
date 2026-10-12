@@ -42,8 +42,11 @@ describe('Última resistência', () => {
       const b = createBattle([c.id, 'sakura', 'gojo'], ['vegeta', 'hulk', 'thor'], 3);
       const eu = quem(b, c.id), rival = quem(b, 'vegeta');
       eu.hp = 50; eu.shields = []; eu.statuses = [];
+      const antes = b.events.length;
       applyEffects(b, rival, [eu], [{ kind: 'damage', value: 9999 }]);
-      expect(eu.hp).toBe(1);
+      // fica com 1 de Vida; uma Mecânica única que cura ao ficar com pouca Vida (o Zenkai do Vegeta) soma por cima
+      const curas = b.events.slice(antes).filter((e) => e.kind === 'heal' && e.target === eu.uid).reduce((s, e) => s + (e.value ?? 0), 0);
+      expect(eu.hp).toBeCloseTo(1 + curas, 5);
       expect(eu.statuses.some((s) => s.id === 'protected')).toBe(true);
       expect(b.events.some((e) => e.kind === 'resist' && e.label === 'Última resistência')).toBe(true);
       eu.statuses = [];
