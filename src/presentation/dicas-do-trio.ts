@@ -156,23 +156,23 @@ function motivosDe(c: string, time: string[], encaixe = 50): MotivoOrdenado[] {
     // o que a dupla rende além dos combos, medido: as habilidades de um ajudam (ou atrapalham) as do outro
     for (const m of time) {
       const z = ajusteDaDupla(c, m);
-      if (z >= 0.2) motivos.push({ texto: `Rende mais junto com ${nome(m)} do que os dois separados`, tom: 'bom', grupo: 'trio', ordem: 26 + z * 10, porque: `Medido nas lutas: além dos combos, as habilidades de ${nome(c)} e ${nome(m)} se ajudam — a dupla vence uns ${pontos(z)} pontos a mais do que o esperado`, resumo: `rende mais com ${nome(m)}` });
+      if (z >= 0.2) motivos.push({ texto: `Rende mais junto com ${nome(m)} do que os dois separados`, tom: 'bom', grupo: 'trio', ordem: 26 + z * 10, porque: `Além dos combos, as habilidades de ${nome(c)} e ${nome(m)} se ajudam — a dupla vence uns ${pontos(z)} pontos a mais do que o esperado`, resumo: `rende mais com ${nome(m)}` });
       // o que atrapalha já está descontado na porcentagem: só vira aviso para quem encaixa mal (pedido do jogador:
       // "como ele pode ser melhor que 89% e ainda ser uma escolha ruim?")
-      else if (z <= -0.12 && mal) motivos.push({ texto: `Com ${nome(m)} rende menos do que parece`, tom: 'alerta', grupo: 'trio', ordem: contra + 1 - z, porque: `Medido nas lutas: as habilidades de ${nome(c)} e ${nome(m)} atrapalham uma à outra — a dupla vence uns ${pontos(z)} pontos a menos do que o esperado`, resumo: `rende menos com ${nome(m)}` });
+      else if (z <= -0.12 && mal) motivos.push({ texto: `Com ${nome(m)} rende menos do que parece`, tom: 'alerta', grupo: 'trio', ordem: contra + 1 - z, porque: `As habilidades de ${nome(c)} e ${nome(m)} atrapalham uma à outra — a dupla vence uns ${pontos(z)} pontos a menos do que o esperado`, resumo: `rende menos com ${nome(m)}` });
     }
     // a dupla medida: com quem já está no trio, se for uma das três melhores dele (ou dele com o candidato)
     for (const m of time) {
       const ida = DUPLAS[c]?.parceiros.find(([p]) => p === m), volta = DUPLAS[m]?.parceiros.find(([p]) => p === c);
       const r = ida?.[1] ?? volta?.[1];
-      if (r !== undefined) motivos.push({ texto: `Dupla de ouro com ${nome(m)}: juntos vencem ${pct(r)} das lutas`, tom: 'bom', grupo: 'trio', ordem: 28, porque: `Medido: ${nome(c)} e ${nome(m)} estão entre as três melhores duplas ${ida ? `de ${nome(c)}` : `de ${nome(m)}`}`, resumo: `dupla de ouro com ${nome(m)}` });
+      if (r !== undefined) motivos.push({ texto: `Dupla de ouro com ${nome(m)}: juntos vencem ${pct(r)} das lutas`, tom: 'bom', grupo: 'trio', ordem: 28, porque: `${nome(c)} e ${nome(m)} estão entre as três melhores duplas ${ida ? `de ${nome(c)}` : `de ${nome(m)}`}`, resumo: `dupla de ouro com ${nome(m)}` });
     }
   }
   // a força dele, medida: o trio com ele vence quanto, e em que posição isso o põe no elenco
   const solo = DUPLAS[c]?.solo;
   if (solo !== undefined) {
     const p = percentil(SOLOS, solo);
-    if (p >= 70) motivos.push({ texto: `Forte em qualquer trio: com ${nome(c)}, o trio vence ${pct(solo)} das lutas`, tom: 'bom', grupo: 'dele', ordem: time.length ? 9 : 25, porque: `Mais que ${p}% do elenco, com dois parceiros quaisquer (medido em 4 milhões de lutas)`, resumo: 'forte em qualquer trio' });
+    if (p >= 70) motivos.push({ texto: `Forte em qualquer trio: com ${nome(c)}, o trio vence ${pct(solo)} das lutas`, tom: 'bom', grupo: 'dele', ordem: time.length ? 9 : 25, porque: `Mais que ${p}% do elenco, com dois parceiros quaisquer`, resumo: 'forte em qualquer trio' });
     // fraco sozinho, mas encaixando bem neste trio: é justamente por isso que vale a pena (não é aviso)
     else if (p < 12 && time.length && encaixe >= 60) motivos.push({ texto: `Sozinho é fraco, mas com ${trio} encaixa bem`, tom: 'bom', grupo: 'trio', ordem: 8, porque: `Com dois parceiros quaisquer, o trio dele vence só ${pct(solo)} das lutas; com este trio ele rende bem mais` });
     else if (p < 12 || (mal && p < 30)) motivos.push({ texto: `Sozinho rende pouco: precisa de parceiros que combinem`, tom: 'alerta', grupo: 'dele', ordem: mal ? contra : time.length ? 1 : 17, porque: `Com dois parceiros quaisquer, o trio com ${nome(c)} vence ${pct(solo)} das lutas, menos que ${100 - p}% do elenco`, resumo: 'rende pouco sozinho' });
@@ -180,7 +180,7 @@ function motivosDe(c: string, time: string[], encaixe = 50): MotivoOrdenado[] {
   // sem trio ainda: com quem ele vence mais
   if (!time.length && DUPLAS[c]?.parceiros.length) {
     const ps = DUPLAS[c]!.parceiros;
-    motivos.push({ texto: `Combina mais com ${lista3(ps.map(([p]) => nome(p)))}`, tom: 'bom', grupo: 'dele', ordem: 18, porque: `As duplas que mais vencem, medidas: ${ps.map(([p, r]) => `com ${nome(p)}, ${pct(r)}`).join('; ')}`, resumo: `combina com ${lista3(ps.map(([p]) => nome(p)))}` });
+    motivos.push({ texto: `Combina mais com ${lista3(ps.map(([p]) => nome(p)))}`, tom: 'bom', grupo: 'dele', ordem: 18, porque: `As duplas que mais vencem: ${ps.map(([p, r]) => `com ${nome(p)}, ${pct(r)}`).join('; ')}`, resumo: `combina com ${lista3(ps.map(([p]) => nome(p)))}` });
   }
   // combinações com quem já está no trio, das que mais ganham lutas para as que menos
   for (const m of time) {
