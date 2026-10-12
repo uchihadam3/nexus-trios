@@ -349,6 +349,20 @@
   "laco": false,
   "bytes": 33500
  },
+ "asas_de_isis": {
+  "descricao": "Básico de Ísis: a asa e as penas douradas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 25966
+ },
  "atracao": {
   "descricao": "tudo puxado para um ponto",
   "quadros": 12,
@@ -1637,6 +1651,34 @@
   "laco": false,
   "bytes": 51808
  },
+ "cetro_de_anubis": {
+  "descricao": "Básico de Anúbis: o cetro e a balança",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 17518
+ },
+ "cetro_de_set": {
+  "descricao": "Básico de Set: o cetro e o redemoinho de areia",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 31338
+ },
  "chama_do_triangulo": {
   "descricao": "Bill Cipher: triângulo de olho que derrama chama azul",
   "quadros": 12,
@@ -2715,6 +2757,20 @@
   "laco": true,
   "bytes": 12780
  },
+ "dentada_de_fenrir": {
+  "descricao": "Básico de Fenrir: a dentada e a corrente partida",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 20152
+ },
  "descarga_real": {
   "descricao": "Pantera Negra · a esfera e a onda com os hexágonos",
   "quadros": 12,
@@ -2868,6 +2924,20 @@
   ],
   "laco": true,
   "bytes": 14102
+ },
+ "disco_solar": {
+  "descricao": "Básico de Rá: o Olho no disco e o raio que queima",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 28538
  },
  "disparo_arcano": {
   "descricao": "Disparo arcano: mandala de runas e faíscas arcanas",
@@ -3947,6 +4017,34 @@
   "laco": false,
   "bytes": 27396
  },
+ "facada_de_myers": {
+  "descricao": "Básico do Myers: a faca erguida",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 15072
+ },
+ "facadinha_do_chucky": {
+  "descricao": "Básico do Chucky: as facadinhas frenéticas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 6250
+ },
  "facas_de_drax": {
   "descricao": "Básico do Drax: as duas facas em X",
   "quadros": 12,
@@ -4633,6 +4731,20 @@
   "laco": false,
   "bytes": 13520
  },
+ "garra_da_leoa": {
+  "descricao": "Básico de Sekhmet: a patada em chamas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 21586
+ },
  "garra_de_dragao": {
   "descricao": "Charizard · as três garras de dragão rasgando",
   "quadros": 12,
@@ -4646,6 +4758,34 @@
   ],
   "laco": false,
   "bytes": 58112
+ },
+ "garra_de_freddy": {
+  "descricao": "Básico do Freddy: as quatro lâminas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 32372
+ },
+ "garra_do_falcao": {
+  "descricao": "Básico de Hórus: as garras do falcão",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 16742
  },
  "garras": {
   "descricao": "três rasgos de garra",
@@ -5108,6 +5248,20 @@
   ],
   "laco": false,
   "bytes": 44102
+ },
+ "gungnir": {
+  "descricao": "Básico de Odin: a Gungnir e as runas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 18818
  },
  "habito_cinetico": {
   "descricao": "Pantera Negra · a malha de vibranium absorvendo",
@@ -6551,6 +6705,20 @@
   "laco": false,
   "bytes": 50912
  },
+ "machadada": {
+  "descricao": "Básico do Jason: o machado descendo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 17834
+ },
  "machado_de_energon": {
   "descricao": "Machado de energon: o machado de energia desce num arco pesado e crava no alvo",
   "quadros": 12,
@@ -7138,6 +7306,20 @@
   ],
   "laco": false,
   "bytes": 80544
+ },
+ "mordida_de_pennywise": {
+  "descricao": "Básico do Pennywise: a boca de dentes e o balão",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 35468
  },
  "mordida_vampira": {
   "descricao": "Básico da Marceline: as presas e o vermelho chupado",
@@ -9701,6 +9883,20 @@
   "laco": false,
   "bytes": 113486
  },
+ "soco_de_hercules": {
+  "descricao": "Básico de Hércules: o soco divino e o louro",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 33332
+ },
  "soco_de_marinheiro": {
   "descricao": "Soco de marinheiro: o braço gira como manivela, soco com estrelas e âncora estampada",
   "quadros": 12,
@@ -10498,6 +10694,20 @@
   ],
   "laco": false,
   "bytes": 52060
+ },
+ "toque_de_hel": {
+  "descricao": "Básico de Hel: a mão de osso e o gelo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 32670
  },
  "toque_do_devorador": {
   "descricao": "Galactus: mão cósmica fecha e suga a matéria em fragmentos",

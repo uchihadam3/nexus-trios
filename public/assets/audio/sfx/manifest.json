@@ -461,6 +461,23 @@
    ],
    "bytes": 48136
   },
+  "asas-de-isis": {
+   "arquivo": "asas-de-isis.mp3",
+   "descricao": "básico de Ísis: a asa e as penas",
+   "versoes": [
+    0.0,
+    1.38,
+    2.8071,
+    4.1432
+   ],
+   "duracoes": [
+    1.3,
+    1.3471,
+    1.256,
+    1.3198
+   ],
+   "bytes": 45413
+  },
   "atracao": {
    "arquivo": "atracao.mp3",
    "descricao": "família atracao",
@@ -1804,6 +1821,40 @@
    ],
    "bytes": 67486
   },
+  "cetro-de-anubis": {
+   "arquivo": "cetro-de-anubis.mp3",
+   "descricao": "básico de Anúbis: o cetro e a balança",
+   "versoes": [
+    0.0,
+    1.38,
+    2.8071,
+    4.1432
+   ],
+   "duracoes": [
+    1.3,
+    1.3471,
+    1.256,
+    1.3198
+   ],
+   "bytes": 46364
+  },
+  "cetro-de-set": {
+   "arquivo": "cetro-de-set.mp3",
+   "descricao": "básico de Set: a areia girando",
+   "versoes": [
+    0.0,
+    1.38,
+    2.8071,
+    4.1432
+   ],
+   "duracoes": [
+    1.3,
+    1.3471,
+    1.256,
+    1.3198
+   ],
+   "bytes": 76259
+  },
   "chama-do-triangulo": {
    "arquivo": "chama-do-triangulo.mp3",
    "descricao": "básico de Bill Cipher: tilintar distorcido e chama azul estranha",
@@ -2977,6 +3028,23 @@
    ],
    "bytes": 40149
   },
+  "dentada-de-fenrir": {
+   "arquivo": "dentada-de-fenrir.mp3",
+   "descricao": "básico de Fenrir: a mordida e a corrente",
+   "versoes": [
+    0.0,
+    1.11,
+    2.2663,
+    3.2808
+   ],
+   "duracoes": [
+    1.03,
+    1.0763,
+    0.9345,
+    0.9595
+   ],
+   "bytes": 36794
+  },
   "derrota": {
    "arquivo": "derrota.mp3",
    "descricao": "derrota",
@@ -3146,6 +3214,23 @@
     0.6091
    ],
    "bytes": 25327
+  },
+  "disco-solar": {
+   "arquivo": "disco-solar.mp3",
+   "descricao": "básico de Rá: o sol e o fogo",
+   "versoes": [
+    0.0,
+    1.38,
+    2.8071,
+    4.1432
+   ],
+   "duracoes": [
+    1.3,
+    1.3471,
+    1.256,
+    1.3198
+   ],
+   "bytes": 48338
   },
   "disparo": {
    "arquivo": "disparo.mp3",
@@ -4388,6 +4473,40 @@
    ],
    "bytes": 52346
   },
+  "facada-de-myers": {
+   "arquivo": "facada-de-myers.mp3",
+   "descricao": "básico do Myers: as notas e a facada",
+   "versoes": [
+    0.0,
+    1.3293,
+    2.6936,
+    4.0296
+   ],
+   "duracoes": [
+    1.2493,
+    1.2843,
+    1.256,
+    1.2683
+   ],
+   "bytes": 43684
+  },
+  "facadinha-do-chucky": {
+   "arquivo": "facadinha-do-chucky.mp3",
+   "descricao": "básico do Chucky: a risadinha e as facadas",
+   "versoes": [
+    0.0,
+    1.2087,
+    2.5322,
+    3.7717
+   ],
+   "duracoes": [
+    1.1287,
+    1.2435,
+    1.1594,
+    1.1126
+   ],
+   "bytes": 41153
+  },
   "facas": {
    "arquivo": "facas.mp3",
    "descricao": "família facas",
@@ -5136,6 +5255,23 @@
    ],
    "bytes": 40234
   },
+  "garra-da-leoa": {
+   "arquivo": "garra-da-leoa.mp3",
+   "descricao": "básico de Sekhmet: o rugido e o fogo",
+   "versoes": [
+    0.0,
+    1.3596,
+    2.7453,
+    4.0813
+   ],
+   "duracoes": [
+    1.2796,
+    1.3057,
+    1.256,
+    1.3054
+   ],
+   "bytes": 48356
+  },
   "garra-de-dragao": {
    "arquivo": "garra-de-dragao.mp3",
    "descricao": "Garra de dragão: os três rasgos com fogo",
@@ -5152,6 +5288,40 @@
     1.1592
    ],
    "bytes": 41873
+  },
+  "garra-de-freddy": {
+   "arquivo": "garra-de-freddy.mp3",
+   "descricao": "básico do Freddy: as lâminas e a cantiga",
+   "versoes": [
+    0.0,
+    1.38,
+    2.8071,
+    4.1432
+   ],
+   "duracoes": [
+    1.3,
+    1.3471,
+    1.256,
+    1.3198
+   ],
+   "bytes": 46725
+  },
+  "garra-do-falcao": {
+   "arquivo": "garra-do-falcao.mp3",
+   "descricao": "básico de Hórus: o falcão mergulhando",
+   "versoes": [
+    0.0,
+    1.1213,
+    2.2472,
+    3.3952
+   ],
+   "duracoes": [
+    1.0413,
+    1.0459,
+    1.068,
+    1.1348
+   ],
+   "bytes": 44695
   },
   "garras": {
    "arquivo": "garras.mp3",
@@ -5713,6 +5883,23 @@
     1.2183
    ],
    "bytes": 50806
+  },
+  "gungnir": {
+   "arquivo": "gungnir.mp3",
+   "descricao": "básico de Odin: a lança rúnica",
+   "versoes": [
+    0.0,
+    1.336,
+    2.7157,
+    3.9578
+   ],
+   "duracoes": [
+    1.256,
+    1.2997,
+    1.1622,
+    1.2819
+   ],
+   "bytes": 42066
   },
   "habito-cinetico": {
    "arquivo": "habito-cinetico.mp3",
@@ -7550,6 +7737,23 @@
    ],
    "bytes": 52104
   },
+  "machadada": {
+   "arquivo": "machadada.mp3",
+   "descricao": "básico do Jason: o sussurro e o machado",
+   "versoes": [
+    0.0,
+    1.3909,
+    2.9217,
+    4.3543
+   ],
+   "duracoes": [
+    1.3109,
+    1.4508,
+    1.3527,
+    1.3561
+   ],
+   "bytes": 47359
+  },
   "machado-de-energon": {
    "arquivo": "machado-de-energon.mp3",
    "descricao": "básico do Optimus: zumbido de energia e corte pesado",
@@ -8229,6 +8433,23 @@
     0.842
    ],
    "bytes": 37205
+  },
+  "mordida-de-pennywise": {
+   "arquivo": "mordida-de-pennywise.mp3",
+   "descricao": "básico do Pennywise: a gargalhada e o chomp",
+   "versoes": [
+    0.0,
+    1.4938,
+    2.9668,
+    4.4139
+   ],
+   "duracoes": [
+    1.4138,
+    1.393,
+    1.367,
+    1.4431
+   ],
+   "bytes": 46320
   },
   "mordida-vampira": {
    "arquivo": "mordida-vampira.mp3",
@@ -11205,6 +11426,23 @@
    ],
    "bytes": 53987
   },
+  "soco-de-hercules": {
+   "arquivo": "soco-de-hercules.mp3",
+   "descricao": "básico de Hércules: o soco divino",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 41803
+  },
   "soco-de-marinheiro": {
    "arquivo": "soco-de-marinheiro.mp3",
    "descricao": "básico do Popeye: manivela cômica e o soco com estrelinhas",
@@ -12139,6 +12377,23 @@
     1.2183
    ],
    "bytes": 52506
+  },
+  "toque-de-hel": {
+   "arquivo": "toque-de-hel.mp3",
+   "descricao": "básico de Hel: os ossos e o frio",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 54859
   },
   "toque-do-devorador": {
    "arquivo": "toque-do-devorador.mp3",
