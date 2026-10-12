@@ -188,7 +188,7 @@ export const TIRA_STATUS: Record<string, TiraStatus> = {
  * Ajustes pedidos pelo jogador, número a número. Ficam aqui (e não nas regras
  * de estilo de expanded-roster.ts) para ninguém mais ser mexido junto.
  */
-type Ajuste = { habilidade: number; muda?: (e: Effect) => Effect; soma?: Effect[] };
+type Ajuste = { habilidade: number; muda?: (e: Effect) => Effect; soma?: Effect[]; /** Status que saem da habilidade. */ tira?: StatusId[] };
 const valor = (kind: Effect['kind'], status: StatusId | undefined, f: (e: Effect) => Effect) => (e: Effect) =>
   e.kind === kind && (!status || (e.kind === 'status' && e.status === status)) ? f(e) : e;
 export const PEDIDOS_DO_JOGADOR: Record<string, Ajuste[]> = {
@@ -246,6 +246,12 @@ export const PEDIDOS_DO_JOGADOR: Record<string, Ajuste[]> = {
   ],
   billcipher: [
     { habilidade: 2, muda: valor('status', 'confused', (e) => ({ ...e, value: 0.3, duration: 7 } as Effect)) }, // Olho que tudo vê: Confuso 40%/9 s → 30%/7 s
+    /*
+     * O Bill Cipher estava em 74 dos 400 melhores trios (o 2º, 32): em trio de controle (Madara, Pinhead) o Olho que
+     * tudo vê enche com cada Status do trio e trava os rivais. Sem o Silenciado em todos e com −25% de dano, os trios
+     * dele caem de 98,8% para 92,5% de vitória por luta; ele com parceiros sorteados, de 50,5% para 43,8%.
+     */
+    { habilidade: 2, tira: ['silenced'], muda: valor('damage', undefined, (e) => ({ ...e, value: Math.round((e as { value: number }).value * 0.75) } as Effect)) },
     { habilidade: 1, muda: valor('status', 'protected', (e) => ({ ...e, value: 0.2 } as Effect)) }, // Realidade invertida: Protegido 28% → 20%
     { habilidade: 1, muda: valor('shield', undefined, (e) => ({ ...e, value: Math.round((e as { value: number }).value * 0.73) } as Effect)) }, // Escudo −27%
     { habilidade: 0, muda: valor('status', 'confused', (e) => ({ ...e, value: 0.26 } as Effect)) }, // Acordo: Confuso 35% → 26%
@@ -276,7 +282,7 @@ const mudancasDe = (id: string): Map<number, Mudanca[]> => {
   ]);
   // o roubo de vida vem depois do dano: cura pelo que a habilidade causou
   if (roubo) poe(roubo.habilidade, (e) => [...e.filter(semStatus(roubo.troca)), { kind: 'lifesteal', value: roubo.fracao }]);
-  for (const a of PEDIDOS_DO_JOGADOR[id] ?? []) poe(a.habilidade, (e) => [...(a.muda ? e.map(a.muda) : e), ...(a.soma ?? [])]);
+  for (const a of PEDIDOS_DO_JOGADOR[id] ?? []) poe(a.habilidade, (e) => [...(a.muda ? e.map(a.muda) : e).filter((x) => !(x.kind === 'status' && a.tira?.includes(x.status))), ...(a.soma ?? [])]);
   const inv = INVOCACAO[id];
   if (inv) poe(inv.habilidade, (e) => [...e.filter(semStatus(inv.troca)), { kind: 'status', status: 'summon', value: inv.dano, duration: inv.duracao, target: 'self', rotulo: inv.nome }]);
   const copiar = COPIAR[id];
