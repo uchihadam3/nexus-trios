@@ -274,6 +274,23 @@
    ],
    "bytes": 70144
   },
+  "analise-preditiva": {
+   "arquivo": "analise-preditiva.mp3",
+   "descricao": "Ultron: a varredura, os dados e a mira",
+   "versoes": [
+    0.0,
+    1.2526,
+    2.5152,
+    3.7594
+   ],
+   "duracoes": [
+    1.1726,
+    1.1826,
+    1.1642,
+    1.2218
+   ],
+   "bytes": 36027
+  },
   "antigos-espiritos": {
    "arquivo": "antigos-espiritos.mp3",
    "descricao": "Antigos Espíritos: os espíritos uivando",
@@ -1344,6 +1361,23 @@
     1.2183
    ],
    "bytes": 68163
+  },
+  "bomba-abobora": {
+   "arquivo": "bomba-abobora.mp3",
+   "descricao": "Duende Verde: a risada e a explosão",
+   "versoes": [
+    0.0,
+    1.88,
+    3.8253,
+    5.6444
+   ],
+   "duracoes": [
+    1.8,
+    1.8653,
+    1.7391,
+    1.8274
+   ],
+   "bytes": 63920
   },
   "bonk": {
    "arquivo": "bonk.mp3",
@@ -3317,6 +3351,23 @@
    ],
    "bytes": 55680
   },
+  "danca-de-distracao": {
+   "arquivo": "danca-de-distracao.mp3",
+   "descricao": "Senhor das Estrelas: a batida de disco",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 81386
+  },
   "dardo-crescente": {
    "arquivo": "dardo-crescente.mp3",
    "descricao": "básico do Cavaleiro da Lua: três dardos girando que cravam seco, e o sopro frio da lua",
@@ -3606,6 +3657,23 @@
    ],
    "bytes": 79346
   },
+  "devorador-preparo": {
+   "arquivo": "devorador-preparo.mp3",
+   "descricao": "Galactus: tudo sendo sugado (antes do golpe)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 54045
+  },
   "dia-todo": {
    "arquivo": "dia-todo.mp3",
    "descricao": "Eu posso o dia todo: o escudo e a determinação",
@@ -3810,6 +3878,40 @@
    ],
    "bytes": 34761
   },
+  "dreno-planetario": {
+   "arquivo": "dreno-planetario.mp3",
+   "descricao": "Galactus: o planeta sugado e a mão",
+   "versoes": [
+    0.0,
+    1.88,
+    3.8253,
+    5.6444
+   ],
+   "duracoes": [
+    1.8,
+    1.8653,
+    1.7391,
+    1.8274
+   ],
+   "bytes": 54049
+  },
+  "drones-de-defesa": {
+   "arquivo": "drones-de-defesa.mp3",
+   "descricao": "Ultron: os drones e os escudos",
+   "versoes": [
+    0.0,
+    1.3847,
+    2.8139,
+    4.153
+   ],
+   "duracoes": [
+    1.3047,
+    1.3493,
+    1.259,
+    1.3241
+   ],
+   "bytes": 44349
+  },
   "duas-pistolas": {
    "arquivo": "duas-pistolas.mp3",
    "descricao": "básico de Lara: dois tiros rápidos de pistola e cartuchos tilintando",
@@ -3826,6 +3928,23 @@
     1.0152
    ],
    "bytes": 35781
+  },
+  "duende-preparo": {
+   "arquivo": "duende-preparo.mp3",
+   "descricao": "Duende Verde: os jatos e a risada (antes do golpe)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 57486
   },
   "eclipse-preparo": {
    "arquivo": "eclipse-preparo.mp3",
@@ -4914,6 +5033,23 @@
     1.6244
    ],
    "bytes": 51965
+  },
+  "evolucao-autonoma": {
+   "arquivo": "evolucao-autonoma.mp3",
+   "descricao": "Ultron: os circuitos e o raio",
+   "versoes": [
+    0.0,
+    1.5368,
+    3.1643,
+    4.5968
+   ],
+   "duracoes": [
+    1.4568,
+    1.5475,
+    1.3525,
+    1.4102
+   ],
+   "bytes": 69206
   },
   "execucao-aurora": {
    "arquivo": "execucao-aurora.mp3",
@@ -6257,6 +6393,23 @@
     1.1167
    ],
    "bytes": 46495
+  },
+  "gas-do-duende": {
+   "arquivo": "gas-do-duende.mp3",
+   "descricao": "Duende Verde: o gás e os gemidos",
+   "versoes": [
+    0.0,
+    1.88,
+    3.8253,
+    5.6444
+   ],
+   "duracoes": [
+    1.8,
+    1.8653,
+    1.7391,
+    1.8274
+   ],
+   "bytes": 63049
   },
   "gas-do-medo": {
    "arquivo": "gas-do-medo.mp3",
@@ -10491,6 +10644,23 @@
    ],
    "bytes": 64332
   },
+  "plano-improvisado": {
+   "arquivo": "plano-improvisado.mp3",
+   "descricao": "Senhor das Estrelas: a fita, o rock e o tiro",
+   "versoes": [
+    0.0,
+    1.2295,
+    2.4694,
+    3.673
+   ],
+   "duracoes": [
+    1.1495,
+    1.1599,
+    1.1237,
+    1.1568
+   ],
+   "bytes": 40489
+  },
   "plano-que-plano": {
    "arquivo": "plano-que-plano.mp3",
    "descricao": "Plano? Que plano?: tiros, granada e BUM",
@@ -10660,6 +10830,23 @@
     2.335
    ],
    "bytes": 88943
+  },
+  "prancha-armadilhada": {
+   "arquivo": "prancha-armadilhada.mp3",
+   "descricao": "Duende Verde: o rasante, as lâminas e a carga",
+   "versoes": [
+    0.0,
+    1.88,
+    3.8253,
+    5.6444
+   ],
+   "duracoes": [
+    1.8,
+    1.8653,
+    1.7391,
+    1.8274
+   ],
+   "bytes": 66514
   },
   "precisao-absoluta": {
    "arquivo": "precisao-absoluta.mp3",
@@ -11579,6 +11766,23 @@
    ],
    "bytes": 48664
   },
+  "rajada-cosmica": {
+   "arquivo": "rajada-cosmica.mp3",
+   "descricao": "Surfista Prateado: o raio prateado",
+   "versoes": [
+    0.0,
+    1.4842,
+    3.0496,
+    4.5115
+   ],
+   "duracoes": [
+    1.4042,
+    1.4854,
+    1.3819,
+    1.4584
+   ],
+   "bytes": 68364
+  },
   "rajada-de-ar": {
    "arquivo": "rajada-de-ar.mp3",
    "descricao": "família rajada de ar",
@@ -11663,6 +11867,23 @@
     1.5228
    ],
    "bytes": 52927
+  },
+  "rajada-do-poder-cosmico": {
+   "arquivo": "rajada-do-poder-cosmico.mp3",
+   "descricao": "Galactus: a voz e as colunas",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 65662
   },
   "rasengan": {
    "arquivo": "rasengan.mp3",
@@ -13517,6 +13738,40 @@
    ],
    "bytes": 62687
   },
+  "surfe-dimensional": {
+   "arquivo": "surfe-dimensional.mp3",
+   "descricao": "Surfista Prateado: o rasgo no espaço e o impacto",
+   "versoes": [
+    0.0,
+    1.4784,
+    3.1559,
+    4.648
+   ],
+   "duracoes": [
+    1.3984,
+    1.5975,
+    1.4121,
+    1.4777
+   ],
+   "bytes": 49897
+  },
+  "surfista-preparo": {
+   "arquivo": "surfista-preparo.mp3",
+   "descricao": "Surfista Prateado: a prancha zunindo (antes do golpe)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 57693
+  },
   "susanoo": {
    "arquivo": "susanoo.mp3",
    "descricao": "Susanoo: a espada Totsuka descendo, o corte e o selamento",
@@ -14299,6 +14554,23 @@
    ],
    "bytes": 63689
   },
+  "transmutacao-estelar": {
+   "arquivo": "transmutacao-estelar.mp3",
+   "descricao": "Surfista Prateado: as cascas de cristal",
+   "versoes": [
+    0.0,
+    1.4506,
+    2.9434,
+    4.4192
+   ],
+   "duracoes": [
+    1.3706,
+    1.4128,
+    1.3959,
+    1.3844
+   ],
+   "bytes": 72345
+  },
   "tridente": {
    "arquivo": "tridente.mp3",
    "descricao": "básico de Aquaman: estocada metálica do tridente e respingo de água",
@@ -14621,6 +14893,23 @@
     2.0305
    ],
    "bytes": 70728
+  },
+  "ultron-preparo": {
+   "arquivo": "ultron-preparo.mp3",
+   "descricao": "Ultron: a máquina pensando (antes do golpe)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 47902
   },
   "unibeam-carga": {
    "arquivo": "unibeam-carga.mp3",

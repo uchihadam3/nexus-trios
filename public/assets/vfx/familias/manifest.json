@@ -223,6 +223,20 @@
   "laco": false,
   "bytes": 31180
  },
+ "analise_preditiva": {
+  "descricao": "Ultron · o olho de varredura, a mira e os dados",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 14308
+ },
  "aparar_e_cortar": {
   "descricao": "Sekiro: faísca de aparar e contra-corte",
   "quadros": 12,
@@ -1174,6 +1188,20 @@
   ],
   "laco": true,
   "bytes": 38340
+ },
+ "bomba_abobora": {
+  "descricao": "Duende Verde · a abóbora rindo e a explosão",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 28672
  },
  "bonk": {
   "descricao": "pancada de desenho com estrelinhas",
@@ -2981,6 +3009,20 @@
   "laco": false,
   "bytes": 57618
  },
+ "danca_de_distracao": {
+  "descricao": "Senhor das Estrelas · a pista de dança e os tontos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 39174
+ },
  "dardo_crescente": {
   "descricao": "Dardos crescentes do Cavaleiro da Lua: três luas de prata cravam girando e a lua cheia acende",
   "quadros": 12,
@@ -3219,6 +3261,20 @@
   "laco": false,
   "bytes": 40346
  },
+ "devorador_preparo": {
+  "descricao": "Galactus · as mãos e a energia sugada (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 38260
+ },
  "dia_todo": {
   "descricao": "Capitão América · o escudo erguido e a cura",
   "quadros": 12,
@@ -3415,6 +3471,34 @@
   "laco": true,
   "bytes": 149188
  },
+ "dreno_planetario": {
+  "descricao": "Galactus · o planeta e a mão que suga",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 33058
+ },
+ "drones_de_defesa": {
+  "descricao": "Ultron · os drones e os escudos de hexágonos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 28400
+ },
  "duas_pistolas": {
   "descricao": "Lara: dois tiros alternados das duas pistolas (+x)",
   "quadros": 12,
@@ -3428,6 +3512,20 @@
   ],
   "laco": false,
   "bytes": 39134
+ },
+ "duende_preparo": {
+  "descricao": "Duende Verde · o planador pairando (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 19898
  },
  "eclipse_preparo": {
   "descricao": "Griffith · o eclipse se formando (Preparo, laço)",
@@ -4324,6 +4422,20 @@
   ],
   "laco": false,
   "bytes": 51918
+ },
+ "evolucao_autonoma": {
+  "descricao": "Ultron · os circuitos reescritos e o raio que corta",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 12502
  },
  "execucao": {
   "descricao": "execução",
@@ -5556,6 +5668,20 @@
   ],
   "laco": false,
   "bytes": 108932
+ },
+ "gas_do_duende": {
+  "descricao": "Duende Verde · o gás verde com as caras",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 61282
  },
  "gas_do_medo": {
   "descricao": "Básico do Espantalho: o gás e os rostos de pavor",
@@ -9029,6 +9155,20 @@
   "laco": false,
   "bytes": 39544
  },
+ "plano_improvisado": {
+  "descricao": "Senhor das Estrelas · a fita, as notas e o tiro",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 11892
+ },
  "plano_que_plano": {
   "descricao": "Deadpool · tiros, granada e o BUM",
   "quadros": 12,
@@ -9182,6 +9322,20 @@
   ],
   "laco": false,
   "bytes": 97662
+ },
+ "prancha_armadilhada": {
+  "descricao": "Duende Verde · o rasante com as lâminas e a carga",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 38166
  },
  "precisao_absoluta": {
   "descricao": "Jotaro · o dedo estelar e as estrelinhas",
@@ -9967,6 +10121,20 @@
   "laco": false,
   "bytes": 36558
  },
+ "rajada_cosmica": {
+  "descricao": "Surfista Prateado · o raio prateado e a marca",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 12468
+ },
  "rajada_de_ar": {
   "descricao": "arcos de vento",
   "quadros": 12,
@@ -10022,6 +10190,20 @@
   ],
   "laco": false,
   "bytes": 15712
+ },
+ "rajada_do_poder_cosmico": {
+  "descricao": "Galactus · o elmo e as colunas cósmicas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 12954
  },
  "rasengan_impacto": {
   "descricao": "Naruto · o Rasengan perfurando em espiral",
@@ -11591,6 +11773,34 @@
   "laco": false,
   "bytes": 184744
  },
+ "surfe_dimensional": {
+  "descricao": "Surfista Prateado · a prancha rasgando o espaço",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 18080
+ },
+ "surfista_preparo": {
+  "descricao": "Surfista Prateado · a prancha e o rastro (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 11234
+ },
  "susanoo_itachi": {
   "descricao": "Itachi · o Susanoo aparece em cima dele e desce a espada Totsuka",
   "quadros": 12,
@@ -12263,6 +12473,20 @@
   "laco": false,
   "bytes": 119654
  },
+ "transmutacao_estelar": {
+  "descricao": "Surfista Prateado · as cascas brilhantes no trio",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 39274
+ },
  "tridente": {
   "descricao": "Aquaman: estocada do tridente com espiral e respingo de água",
   "quadros": 12,
@@ -12444,6 +12668,20 @@
   ],
   "laco": false,
   "bytes": 84190
+ },
+ "ultron_preparo": {
+  "descricao": "Ultron · o rosto de metal e os circuitos (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 13996
  },
  "unibeam_carga": {
   "descricao": "Homem de Ferro · o reator carregando (Preparo, laço)",
