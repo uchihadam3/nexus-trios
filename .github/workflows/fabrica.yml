@@ -8,21 +8,25 @@ on:
   workflow_dispatch:
     inputs:
       plano:
-        description: 'aleatorio (trio x trio), pares (toda dupla com um terceiro), jornada (trio sorteado, jornada inteira) ou dificuldade (metas por personagem)'
+        description: 'aleatorio (trio x trio), pares (toda dupla com um terceiro), jornada (trio sorteado, jornada inteira), dificuldade (metas por personagem) ou trios (todos os trios, 1 milhão por lote)'
         type: choice
-        options: [aleatorio, pares, jornada, dificuldade]
+        options: [aleatorio, pares, jornada, dificuldade, trios]
         default: pares
       lutas:
-        description: 'lutas por processo (são 80 processos; 25000 = 2 milhões)'
+        description: 'lutas por processo (são 80 processos; 25000 = 2 milhões); no plano trios, lutas por trio'
         default: '25000'
       semente:
         description: 'semente (mude para ter lutas novas)'
         default: '1'
+      ate:
+        description: 'trios: o último lote (a semente é o lote atual; ao terminar, a rodada dispara o próximo até este)'
+        default: ''
       fortes:
         description: 'dificuldade: os ids mais fortes (vírgula), medidos com o plano jornada; vazio = tabela de força'
         default: ''
 permissions:
   contents: write
+  actions: write
 concurrency:
   group: fabrica
   cancel-in-progress: false
@@ -86,3 +90,8 @@ jobs:
           git add rodadas
           git commit -q -m "Fábrica: $(cat "$DESTINO/total.txt") lutas (${{ inputs.plano }}, semente ${{ inputs.semente }})"
           git push -q origin fabrica-resultados
+      - name: Próximo lote de trios
+        if: inputs.plano == 'trios' && inputs.ate != '' && fromJSON(inputs.semente) < fromJSON(inputs.ate)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run fabrica.yml --ref "${{ github.ref_name }}" -f plano=trios -f lutas="${{ inputs.lutas }}" -f semente="$(( ${{ inputs.semente }} + 1 ))" -f ate="${{ inputs.ate }}"

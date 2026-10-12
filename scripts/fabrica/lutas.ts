@@ -18,7 +18,11 @@
  *
  * Cada linha (lutas): a1 a2 a3 b1 b2 b3 v (índices do elenco; v = 1 se o trio a venceu).
  * Cada linha (jornada): a1 a2 a3 v (v = lutas vencidas, 0 a 10).
+ *   trios        TODOS os trios do elenco, um lote de 1 milhão por rodada (semente = número do lote, 0 a 10):
+ *              cada trio faz <lutas> lutas contra trios sorteados (pedido do jogador: "pega 1 milhão de
+ *              trios e faz os testes com eles… até terminar")
  * Cada linha (dificuldade): JSON {id, aleatorio, bom, melhor, dupla}.
+ * Cada linha (trios): i j k v (índices do trio; v = lutas vencidas de <lutas>).
  * A primeira linha (# ...) diz o motor e o elenco, para não misturar medidas.
  */
 import { writeFileSync, appendFileSync } from 'node:fs';
@@ -32,21 +36,22 @@ import { FORCA } from '../../src/data/forca-dos-rivais';
 const [plano, parteTxt, partesTxt, lutasTxt, saida, sementeTxt = '0'] = process.argv.slice(2);
 const parte = Number(parteTxt), partes = Number(partesTxt), lutas = Number(lutasTxt), semente = Number(sementeTxt), semente0 = semente;
 if (!plano || !saida || !(partes > 0) || !(parte >= 0 && parte < partes) || !(lutas > 0)) {
-  console.error('uso: lutas <aleatorio|pares|jornada|dificuldade> <parte> <partes> <lutas> <saida.txt> [semente]');
+  console.error('uso: lutas <aleatorio|pares|jornada|dificuldade|trios> <parte> <partes> <lutas> <saida.txt> [semente]');
   process.exit(1);
 }
 const N = characters.length;
 let r = (Math.imul(parte + 1, 2654435761) ^ Math.imul(semente + 7, 40503) ^ (plano === 'pares' ? 0x9e3779b9 : 0)) >>> 0;
 const rnd = () => { r = (Math.imul(r, 1664525) + 1013904223) >>> 0; return r / 4294967296; };
+const LOTE_DE_TRIOS = 1_000_000;
 const sorteia = (fora: Set<number>) => { let i: number; do i = Math.floor(rnd() * N); while (fora.has(i)); fora.add(i); return i; };
 
 /* As duplas desta parte (pares): a k-ésima dupla da lista vai para a parte k % partes. */
 const duplas: [number, number][] = [];
 if (plano === 'pares') { let k = 0; for (let i = 0; i < N; i++) for (let j = i + 1; j < N; j++, k++) if (k % partes === parte) duplas.push([i, j]); }
-else if (!['aleatorio', 'jornada', 'dificuldade'].includes(plano)) { console.error(`plano desconhecido: ${plano}`); process.exit(1); }
+else if (!['aleatorio', 'jornada', 'dificuldade', 'trios'].includes(plano)) { console.error(`plano desconhecido: ${plano}`); process.exit(1); }
 
 writeFileSync(saida, `# motor ${ENGINE_VERSION} elenco ${rosterFingerprint()} plano ${plano} parte ${parte}/${partes} semente ${semente}\n`);
-if (plano === 'jornada' || plano === 'dificuldade') { (plano === 'jornada' ? jornadas : dificuldade)(); process.exit(0); }
+if (plano === 'jornada' || plano === 'dificuldade' || plano === 'trios') { ({ jornada: jornadas, dificuldade, trios })[plano](); process.exit(0); }
 let buffer = '', feitas = 0;
 const inicio = Date.now();
 for (let n = 0; n < lutas; n++) {
@@ -65,6 +70,31 @@ for (let n = 0; n < lutas; n++) {
 appendFileSync(saida, buffer);
 console.log(`parte ${parte}: pronto, ${feitas} lutas em ${((Date.now() - inicio) / 1000).toFixed(0)} s`);
 
+/* Os trios do lote `semente` (o g-ésimo trio na ordem i < j < k), divididos entre as partes; cada um faz `lutas` lutas. */
+function trios() {
+  const de = semente * LOTE_DE_TRIOS, ate = de + LOTE_DE_TRIOS;
+  let g = 0, buf = '', feitos = 0;
+  const inicio = Date.now();
+  for (let i = 0; i < N && g < ate; i++) for (let j = i + 1; j < N && g < ate; j++) {
+    const nk = N - j - 1;
+    if (g + nk <= de) { g += nk; continue; }
+    for (let k = j + 1; k < N; k++, g++) {
+      if (g < de || g >= ate || g % partes !== parte) continue;
+      let v = 0;
+      for (let n = 0; n < lutas; n++) {
+        const fora = new Set([i, j, k]), b = [sorteia(fora), sorteia(fora), sorteia(fora)];
+        const luta = createBattle([i, j, k].map((x) => characters[x]!.id), b.map((x) => characters[x]!.id), Math.floor(rnd() * 2 ** 31), 1);
+        for (let t = 0; t < 9000 && !luta.finished; t++) stepBattle(luta);
+        if (luta.winner === 'player') v++;
+      }
+      buf += `${i} ${j} ${k} ${v}\n`;
+      if (++feitos % 500 === 0) { appendFileSync(saida, buf); buf = ''; }
+      if (feitos % 2500 === 0) console.log(`parte ${parte}: ${feitos} trios · ${((Date.now() - inicio) / 1000).toFixed(0)} s`);
+    }
+  }
+  appendFileSync(saida, buf);
+  console.log(`parte ${parte}: pronto, ${feitos} trios do lote ${semente}`);
+}
 /* A jornada inteira, como o jogador joga: quantas das 10 lutas o trio vence. */
 function jornada(team: string[], seed: number) {
   for (const [i, e] of generateCampaign(seed, team).entries()) {
