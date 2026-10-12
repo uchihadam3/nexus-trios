@@ -138,3 +138,8 @@ button.dv-espaco:focus-visible{outline:2px solid #c8f560;outline-offset:4px;bord
 
 /* o porquê de cada combinação, com as habilidades de verdade */
 .dv-porque-como{display:block;margin-top:3px;font-size:12.5px;line-height:1.4;font-weight:500;color:#c5d6c9}
+/* o "Por quê?": a parte da combinação com o trio e a parte do próprio personagem, separadas */
+.dv-porque-grupo{display:grid;gap:8px}
+.dv-porque-grupo h3{margin:4px 2px 0;font-size:10.5px;font-weight:900;letter-spacing:1.4px;text-transform:uppercase;color:#9fb3a3}
+.dv-porque-grupo.dele{padding:10px;border-radius:16px;background:#ffffff06;box-shadow:inset 0 0 0 1px #ffffff12}
+.dv-porque-grupo.dele h3{margin-top:0;color:color-mix(in srgb,var(--character),#fff 35%)}

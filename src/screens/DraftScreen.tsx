@@ -87,7 +87,11 @@ export function DraftScreen({draft,desafio,primeiroRival,dicas,podeDicas,usouDic
       <button className="dv-porque-fechar" onClick={()=>setPorque(null)} aria-label="Fechar"><X size={18}/></button>
       <div className="dv-porque-cabeca"><Portrait character={byId[porque.id]}/><div><span>{porque.melhor?<><Crown size={12}/>MELHOR ESCOLHA</>:'DICA DO TÉCNICO'}</span><h2>{byId[porque.id].name}</h2></div></div>
       <div className="dv-porque-encaixe"><b>{porque.encaixe}%</b><p>{team.length?<>Combina com <strong>{comQuem}</strong> melhor do que {porque.encaixe}% dos personagens que poderiam entrar agora.</>:<>Mais forte, sozinho, do que {porque.encaixe}% do elenco.</>}</p></div>
-      <ul>{porque.detalhe.map(m=><li key={m.texto} className={m.tom}>{m.tom==='bom'?<CircleCheck size={15}/>:<TriangleAlert size={15}/>}<span>{m.texto}{m.porque&&<small className="dv-porque-como">{m.porque}.</small>}</span></li>)}</ul>
+      {/* o que é da combinação com o trio e o que é do próprio personagem (vale em qualquer trio), separados */}
+      {(team.length?[['trio',`Com ${comQuem}`],['dele',`Do próprio ${primeiroNome(porque.id)} · vale em qualquer trio`]] as const:[['dele','']] as const).map(([g,titulo])=>{
+        const itens=porque.detalhe.filter(m=>team.length?(m.grupo??'trio')===g:true);
+        return itens.length?<div key={g} className={`dv-porque-grupo ${g}`}>{titulo&&<h3>{titulo}</h3>}
+          <ul>{itens.map(m=><li key={m.texto} className={m.tom}>{m.tom==='bom'?<CircleCheck size={15}/>:<TriangleAlert size={15}/>}<span>{m.texto}{m.porque&&<small className="dv-porque-como">{m.porque}.</small>}</span></li>)}</ul></div>:null;})}
       <p className="dv-porque-licao">{team.length?'Dica: o trio vence junto. Procure quem cura e protege os de pouca Vida e quem enche a Carga dos golpes grandes.':'Dica: comece por alguém forte. Depois, o técnico procura quem combina com ele.'}</p>
       <button className="dv-escolher" onClick={()=>{const id=porque.id;setPorque(null);onPick(id);}}>ESCOLHER {primeiroNome(porque.id).toUpperCase()}</button>
     </div></div>,document.body)}
