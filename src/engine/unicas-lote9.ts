@@ -90,7 +90,7 @@ export const LOTE9: Record<string, Unica> = {
     },
   },
   bayonetta: {
-    nome: 'Witch Time',
+    nome: 'Desvio perfeito',
     texto: 'A cada 18 s, desvia do próximo golpe direto e deixa todos os rivais Lento 25% por 1,5 s.',
     ganchos: {
       passo(_m, _b, f, dt) { if (relogio(f, 'bruxa', dt, 18, 6)) u(f).bruxa = 1; },
@@ -124,12 +124,12 @@ export const LOTE9: Record<string, Unica> = {
     ganchos: { bateu(m, b, f, alvo, _dano, g) { if (g.direto && vivo(alvo) && m.sorte(b) < 0.125) { m.aviso(b, f, 'Zzz', alvo); m.efeitos(b, f, [alvo], [st('sleep', 1, 1.2)]); } } },
   },
   lara: {
-    nome: 'Armadilha de cabo',
+    nome: 'Terreno preparado',
     texto: '1 em 3 rivais que a acertam com ataque básico ficam Preso 1 s.',
     ganchos: { apanhou(m, b, f, fonte, _dano, g) { if (g.direto && !g.habilidade && vivo(fonte) && m.sorte(b) < 1 / 3) m.efeitos(b, f, [fonte], [st('rooted', 1, 1)]); } },
   },
   megaman: {
-    nome: 'Arma adquirida',
+    nome: 'Prêmio do chefe',
     texto: 'Cada rival que cai dá um bônus sorteado até o fim: Fortalecido, Acelerado ou Protegido 15%.',
     ganchos: {
       caiu(m, b, f, quem) {
@@ -162,7 +162,7 @@ export const LOTE9: Record<string, Unica> = {
     },
   },
   scorpion: {
-    nome: 'Venha cá!',
+    nome: 'Puxão infernal',
     texto: 'A cada 12 s, o rival mais perto de agir perde toda a ação e leva 40 de dano.',
     ganchos: {
       passo(m, b, f, dt) {
@@ -187,7 +187,7 @@ export const LOTE9: Record<string, Unica> = {
     },
   },
   sekiro: {
-    nome: 'Postura',
+    nome: 'Quebra de postura',
     texto: 'Cada golpe direto enche 20 na postura do rival. Em 100: rival Paralisado 1,5 s e o próximo golpe nele causa o dobro.',
     ganchos: {
       bateu(m, b, f, alvo, _dano, g) {
@@ -307,7 +307,7 @@ export const LOTE9: Record<string, Unica> = {
     },
   },
   majinbuu: {
-    nome: 'Absorção',
+    nome: 'Come e copia',
     texto: 'Ao derrubar um rival, copia o forte dele: +15% de dano, 1% de cura por segundo, ou leva 15% a menos.',
     ganchos: {
       caiu(m, b, f, quem, quemDerrubou) {
@@ -334,7 +334,7 @@ export const LOTE9: Record<string, Unica> = {
     },
   },
   aiolia: {
-    nome: 'Rugido do Leão',
+    nome: 'Orgulho do leão',
     texto: 'Cada rival que cai deixa os outros Enfraquecido 15% por 4 s.',
     ganchos: {
       caiu(m, b, f, quem) {
@@ -347,12 +347,12 @@ export const LOTE9: Record<string, Unica> = {
     },
   },
   hadescz: {
-    nome: 'Juízo dos mortos',
+    nome: 'Ninguém volta',
     texto: 'Enquanto ele está de pé, rival que cai não volta: nem Renascer nem Reviver.',
     ganchos: { caiu(m, b, f, quem) { if (quem.side !== f.side && !quem.voltou) { quem.voltou = true; quem.renascendo = 0; m.aviso(b, f, 'Juízo', quem); } } },
   },
   madara: {
-    nome: 'Meteoro',
+    nome: 'Chuva de meteoros',
     texto: 'A cada 20 s: 120 de dano divididos entre os rivais de pé.',
     ganchos: {
       passo(m, b, f, dt) {
@@ -430,7 +430,7 @@ export const LOTE9: Record<string, Unica> = {
     },
   },
   coringa: {
-    nome: 'Piada final',
+    nome: 'Última risada',
     texto: 'Quando ele cai, todos de pé (dos dois lados) ficam Confuso 2 s.',
     ganchos: {
       morreu(m, b, f) {
@@ -447,7 +447,7 @@ export const LOTE9: Record<string, Unica> = {
     ganchos: { causa: (_m, _b, _f, alvo) => (alvo.statuses.some((s) => BUFFS.includes(s.id)) ? 1.25 : 1) },
   },
   donatello: {
-    nome: 'Campo de contenção',
+    nome: 'Armadilha tecnológica',
     texto: 'A cada 15 s, o rival mais perto de agir fica Preso 2 s.',
     ganchos: {
       passo(m, b, f, dt) {
@@ -520,7 +520,7 @@ export const LOTE9: Record<string, Unica> = {
     },
   },
   mickey: {
-    nome: 'Vassouras encantadas',
+    nome: 'Aprendiz de feiticeiro',
     texto: 'Cada habilidade dele cria uma vassoura (até 4). A cada 3 s, cada uma causa 10 de dano num rival.',
     ganchos: {
       usou(m, b, f) { if ((u(f).vassouras ?? 0) < 4) { u(f).vassouras = (u(f).vassouras ?? 0) + 1; m.aviso(b, f, 'Vassoura!', f, u(f).vassouras); } },
@@ -551,7 +551,7 @@ export const LOTE9: Record<string, Unica> = {
     ganchos: { limita: (_m, _b, f, alvo, valor) => (alvo === f && valor > f.maxHp * 0.1 ? valor * 0.75 : valor) },
   },
   zuko: {
-    nome: 'Redirecionar relâmpago',
+    nome: 'Imune a raio',
     texto: 'Não fica Eletrificado: devolve 60 de dano em quem tentou. Causa 20% a mais em rivais Eletrificado.',
     ganchos: {
       pegouStatus(m, b, f, s, fonte) {
@@ -575,7 +575,7 @@ export const LOTE9: Record<string, Unica> = {
     },
   },
   coiote: {
-    nome: 'Encomenda ACME',
+    nome: 'Catálogo ACME',
     texto: 'A cada 15 s sorteia: +50% de ação, 80 de dano no rival mais forte, rouba o Escudo de um rival, ou 60 em todos os rivais (e 40 nele).',
     ganchos: {
       passo(m, b, f, dt) {
@@ -593,7 +593,7 @@ export const LOTE9: Record<string, Unica> = {
     },
   },
   papaleguas: {
-    nome: 'Poeira na pista',
+    nome: 'Comendo poeira',
     texto: 'Metade dos golpes diretos deixa o alvo Cego 1 s.',
     ganchos: { bateu(m, b, f, alvo, _dano, g) { if (g.direto && vivo(alvo) && m.sorte(b) < 0.5) m.efeitos(b, f, [alvo], [st('blind', 0.3, 1)]); } },
   },
@@ -603,7 +603,7 @@ export const LOTE9: Record<string, Unica> = {
     ganchos: { causa: (_m, _b, f, alvo) => 1 + Math.min(0.4, Math.max(0, (alvo.maxHp - f.maxHp) / 100) * 0.03) },
   },
   shredder: {
-    nome: 'Garras de aço',
+    nome: 'Corte que sangra',
     texto: 'No 4º golpe direto no mesmo rival, ele fica Sangrando (25 por s, 3 s).',
     ganchos: {
       bateu(m, b, f, alvo, _dano, g) {
@@ -626,7 +626,7 @@ export const LOTE9: Record<string, Unica> = {
     },
   },
   liono: {
-    nome: 'Visão além do alcance',
+    nome: 'Instinto de caçador',
     texto: 'O ataque básico vai no rival mais perto de agir, com 25% a mais.',
     ganchos: {
       alvoDoBasico: (m, b, f) => m.rivais(b, f).sort((x, y) => y.action - x.action)[0],
@@ -669,7 +669,7 @@ export const LOTE9: Record<string, Unica> = {
     },
   },
   dannyphantom: {
-    nome: 'Lamento fantasma',
+    nome: 'Último grito',
     texto: 'Abaixo de 30% da Vida (uma vez): 150 de dano em todos os rivais, e fica Paralisado 2 s.',
     ganchos: {
       apanhou(m, b, f) {

@@ -56,7 +56,7 @@ export const LOTE2: Record<string, Unica> = {
     },
   },
   robin: {
-    nome: 'Ataque em dupla',
+    nome: 'Sempre junto',
     texto: 'Quando um aliado acerta um rival, Robin causa 30 de dano nele (a cada 2 s).',
     ganchos: {
       viu(m, b, f, fonte, alvo, _dano, g) {
@@ -148,7 +148,7 @@ export const LOTE2: Record<string, Unica> = {
     },
   },
   marceline: {
-    nome: 'Sede de vermelho',
+    nome: 'Rainha vampira',
     texto: 'A cada 8 s: o rival mais ferido perde 6% da Vida máxima e ela cura esse tanto.',
     ganchos: {
       passo(m, b, f, dt) {
@@ -237,7 +237,7 @@ export const LOTE2: Record<string, Unica> = {
     },
   },
   dipper: {
-    nome: 'Diário 3',
+    nome: 'Pesquisa paranormal',
     texto: 'A primeira habilidade dele no rival mais forte causa o triplo.',
     ganchos: {
       inicio(m, b, f) { const a = maisForte(m, b, f); if (a) { u(f).diario = idx(b, a); m.aviso(b, f, 'Está no diário', a); } },
@@ -305,7 +305,7 @@ export const LOTE2: Record<string, Unica> = {
     },
   },
   snorlax: {
-    nome: 'Descansar',
+    nome: 'Soneca pesada',
     texto: 'Abaixo de 30% da Vida (uma vez): 4 s parado levando metade do dano, e volta com 60%.',
     ganchos: {
       apanhou(m, b, f) {
@@ -324,7 +324,7 @@ export const LOTE2: Record<string, Unica> = {
     },
   },
   patrick: {
-    nome: 'Debaixo da pedra',
+    nome: 'Esconderijo',
     texto: 'Não fica Confuso nem Silenciado. A cada 15 s, 2 s sem agir e sem levar dano.',
     ganchos: {
       imune: (_f, s) => s === 'confused' || s === 'silenced',
@@ -364,7 +364,7 @@ export const LOTE2: Record<string, Unica> = {
     },
   },
   kurama: {
-    nome: 'Semente da morte',
+    nome: 'Planta que espera',
     texto: 'Quem o acerta, 8 s depois: 120 de dano e Preso 2 s.',
     ganchos: {
       apanhou(_m, b, f, fonte, _dano, g) {
@@ -384,7 +384,7 @@ export const LOTE2: Record<string, Unica> = {
     },
   },
   chopper: {
-    nome: 'Rumble Ball',
+    nome: 'Sete formas',
     texto: 'A cada 20 s, por 6 s, alterna: causa 30% a mais, Protegido 40%, ou age 40% mais rápido.',
     ganchos: {
       passo(m, b, f, dt) {
@@ -433,7 +433,7 @@ export const LOTE2: Record<string, Unica> = {
     },
   },
   nero: {
-    nome: 'Devil Bringer',
+    nome: 'Braço demoníaco',
     texto: 'A cada 8 s: 90 de dano em quem está no Preparo mais longo, que perde o Preparo. Sem Preparo, 60 no rival mais forte.',
     ganchos: {
       passo(m, b, f) {

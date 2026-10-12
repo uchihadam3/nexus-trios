@@ -22,8 +22,8 @@ const st = (status: StatusId, value: number, duration: number, target?: Target):
 type T = [nome: string, on: Topic, cooldown: number, target: Target, effects: Effect[]];
 export const TRACOS: Record<string, T> = {
   // equilíbrio dos combos (pedido do jogador: ninguém acima de 7% no trio aleatório): o mesmo traço, mais espaçado e um pouco mais fraco
-  billcipher: ['Acordo', 'status', 3.1, 'enemyStrong', [st('exposed', 0.1, 7), st('confused', 0.09, 6)]],
-  jill: ['Resistência adquirida', 'allyHurt', 3.1, 'allyWeak', [cura(22, 'allyWeak'), st('regen', 4.5, 6, 'allyWeak')]],
+  billcipher: ['Triângulo dos sonhos', 'status', 3.1, 'enemyStrong', [st('exposed', 0.1, 7), st('confused', 0.09, 6)]],
+  jill: ['Primeiros socorros', 'allyHurt', 3.1, 'allyWeak', [cura(22, 'allyWeak'), st('regen', 4.5, 6, 'allyWeak')]],
   // ---------------------------------------------------------------- anime
   gohan: ['Potencial despertado', 'allyHurt', 4, 'self', [st('strengthened', 0.08, 5)]],
   ichigo: ['Instinto Hollow', 'received', 3, 'self', [sh(0.1), st('strengthened', 0.05, 5)]],
@@ -83,7 +83,7 @@ export const TRACOS: Record<string, T> = {
   rocket: ['Engenhoca improvisada', 'time', 5, 'enemyStrong', [dano(30, 'enemyStrong')]],
   aquaman: ['Chamado do mar', 'time', 6, 'enemyStrong', [st('slow', 0.08, 4, 'enemyStrong')]],
   cyborg: ['Dados da Torre', 'enemyCast', 1, 'self', [ch(5)]],
-  shazam: ['Sabedoria de Salomão', 'time', 6, 'self', [ch(10)]],
+  shazam: ['Palavra mágica', 'time', 6, 'self', [ch(10)]],
   darkseid: ['Olhar Ômega', 'time', 5, 'enemyStrong', [st('exposed', 0.08, 6, 'enemyStrong')]],
   lexluthor: ['Gênio estrategista', 'enemyCast', 2, 'self', [esc(40)]],
   arlequina: ['Loucura imprevisível', 'received', 2, 'self', [sh(0.12)]],
@@ -118,7 +118,7 @@ export const TRACOS: Record<string, T> = {
   shera: ['Honra de Grayskull', 'allyHurt', 4, 'allyWeak', [esc(50, 'allyWeak')]],
   skeletor: ['Montanha da Serpente', 'time', 5, 'allEnemies', [st('weakened', 0.06, 6, 'allEnemies')]],
   cheetara: ['Sexto sentido', 'received', 2, 'self', [sh(0.1)]],
-  leonardo: ['Formação!', 'allyHurt', 3, 'allAllies', [sh(0.04, 'allAllies')]],
+  leonardo: ['Olho de líder', 'allyHurt', 3, 'allAllies', [sh(0.04, 'allAllies')]],
   raphael: ['Cabeça quente', 'received', 2, 'self', [st('strengthened', 0.05, 5)]],
   shredder: ['Mestre do Clã do Pé', 'dealt', 1, 'self', [ch(3)]],
   splinter: ['Sabedoria do mestre', 'received', 2, 'enemyStrong', [dano(53, 'enemyStrong'), st('exposed', 0.08, 5, 'enemyStrong')]],
@@ -127,7 +127,7 @@ export const TRACOS: Record<string, T> = {
   korra: ['Conexão com Raava', 'time', 6, 'self', [ch(10)]],
   zuko: ['Honra restaurada', 'losing', 3, 'self', [ch(10)]],
   azula: ['Perfeição', 'dealt', 2, 'self', [sh(0.06)]],
-  iroh: ['Chá de jasmim', 'time', 6, 'allAllies', [cura(12, 'allAllies')]],
+  iroh: ['Hora do chá', 'time', 6, 'allAllies', [cura(12, 'allAllies')]],
   frozone: ['Gelo instantâneo', 'allyHurt', 4, 'allyWeak', [esc(50, 'allyWeak')]],
   mulherelastica: ['Abraço elástico', 'allyHurt', 4, 'allyWeak', [esc(59, 'allyWeak')]],
   optimus: ['Proteger os humanos', 'allyHurt', 4, 'allyWeak', [esc(45, 'allyWeak')]],
@@ -135,18 +135,18 @@ export const TRACOS: Record<string, T> = {
   popeye: ['Vontade de espinafre', 'received', 1.4, 'self', [{ kind: 'store', value: 28, cap: 458, target: 'self' }, st('regen', 6, 3)]],
   bobesponja: ['Esponja que absorve', 'received', 2, 'self', [cura(16)]],
   scooby: ['Scooby-lanche', 'losing', 3, 'self', [cura(18)]],
-  mickey: ['Chapéu de feiticeiro', 'action', 3, 'self', [ch(5)]],
-  donald: ['Ataque de fúria', 'received', 2, 'self', [sh(0.1)]],
+  mickey: ['Faísca mágica', 'action', 3, 'self', [ch(5)]],
+  donald: ['Pato bravo', 'received', 2, 'self', [sh(0.1)]],
   woody: ['Amigo de verdade', 'allyHurt', 2, 'allyWeak', [cura(15, 'allyWeak')]],
   rick: ['Portal de fuga', 'received', 4, 'self', [st('evasion', 0.12, 3)]],
   picapau: ['Ha-ha-ha-HA-ha!', 'enemyCast', 1.8, 'enemyCast', [st('confused', 0.1, 5), ch(5)]],
   patolino: ['Desprezível!', 'received', 3, 'self', [ch(8)]],
-  pernalonga: ['Buraco de coelho', 'received', 1.6, 'self', [sh(0.12, 'self'), cura(23), st('evasion', 0.3, 1.6, 'self'), st('provoked', 1, 1.6, 'enemyStrong')]], // "O que é que há, velhinho?": chama o golpe e some no buraco
+  pernalonga: ['Qual é, doutor?', 'received', 1.6, 'self', [sh(0.12, 'self'), cura(23), st('evasion', 0.3, 1.6, 'self'), st('provoked', 1, 1.6, 'enemyStrong')]], // "O que é que há, velhinho?": chama o golpe e some no buraco
   tom: ['Perseguição sem fim', 'dealt', 3, 'enemyWeak', [st('marked', 0.08, 7)]],
   jerry: ['Esconderijo na parede', 'received', 1.6, 'self', [sh(0.12, 'self'), cura(21)]],
   pantera: ['Passo de veludo', 'enemyCast', 2, 'enemyCast', [sh(-0.1, 'enemyCast')]],
-  marvin: ['Mira marciana', 'time', 5, 'enemyStrong', [st('marked', 0.09, 9)]],
-  cartman: ['Respeitem minha autoridade', 'losing', 2, 'enemyStrong', [st('weakened', 0.06, 5, 'enemyStrong')]],
+  marvin: ['Alvo na Terra', 'time', 5, 'enemyStrong', [st('marked', 0.09, 9)]],
+  cartman: ['Mimado', 'losing', 2, 'enemyStrong', [st('weakened', 0.06, 5, 'enemyStrong')]],
   mojojojo: ['Plano maligno', 'enemyCast', 2, 'self', [ch(6)]],
 };
 

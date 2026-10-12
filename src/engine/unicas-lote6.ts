@@ -150,7 +150,7 @@ export const LOTE6: Record<string, Unica> = {
     },
   },
   ezio: {
-    nome: 'Execução em cadeia',
+    nome: 'Um atrás do outro',
     texto: 'Ao derrubar um rival, ataca de novo na hora.',
     ganchos: {
       caiu(m, b, f, quem, quemDerrubou) {
@@ -161,12 +161,12 @@ export const LOTE6: Record<string, Unica> = {
     },
   },
   isaac: {
-    nome: 'Desmembramento',
+    nome: 'Corte no lento',
     texto: 'Causa 40% a mais em quem está Lento.',
     ganchos: { causa: (m, _b, _f, alvo) => (m.intensidade(alvo, 'slow') > 0 ? 1.4 : 1) },
   },
   saga: {
-    nome: 'Duas vontades',
+    nome: 'Lado bom, lado mau',
     texto: 'Troca a cada 15 s: o trio fica Protegido 10%, ou Saga causa 20% a mais e os rivais ficam Enfraquecido 6%.',
     ganchos: {
       passo(m, b, f, dt) {
@@ -189,7 +189,7 @@ export const LOTE6: Record<string, Unica> = {
     },
   },
   caseyjones: {
-    nome: 'Goooool!',
+    nome: 'Taco na cabeça',
     texto: 'A cada 5 golpes diretos, o alvo perde toda a ação.',
     ganchos: {
       bateu(m, b, f, alvo, _dano, g) {
@@ -219,7 +219,7 @@ export const LOTE6: Record<string, Unica> = {
     },
   },
   sailormoon: {
-    nome: 'Cristal de Prata',
+    nome: 'Poder do amor',
     texto: 'Uma vez: aliado que cai volta com 50% da Vida, e ela perde metade da Vida.',
     ganchos: {
       caiu(m, b, f, quem) {
@@ -232,7 +232,7 @@ export const LOTE6: Record<string, Unica> = {
     },
   },
   coragem: {
-    nome: 'Grito de pavor',
+    nome: 'Medo contagiante',
     texto: 'Golpe de mais de 15% da Vida nele deixa todos os rivais Lento 20% por 2 s.',
     ganchos: {
       apanhou(m, b, f, _fonte, dano) {
@@ -256,7 +256,7 @@ export const LOTE6: Record<string, Unica> = {
     },
   },
   yor: {
-    nome: 'Jardim noturno',
+    nome: 'Golpe na mais fraca',
     texto: 'A cada 12 s: 120 de dano no rival com menos Vida, ignorando Escudo e Protegido.',
     ganchos: {
       passo(m, b, f, dt) {
@@ -317,7 +317,7 @@ export const LOTE6: Record<string, Unica> = {
     },
   },
   leonardo: {
-    nome: 'Formação!',
+    nome: 'Trio unido',
     texto: 'Com os 3 do trio de pé, todos recebem 12% a menos.',
     ganchos: {
       recebe: (m, b, f) => (m.aliados(b, f).length === 3 ? 0.88 : 1),
@@ -338,7 +338,7 @@ export const LOTE6: Record<string, Unica> = {
     },
   },
   gohan: {
-    nome: 'Potencial despertado',
+    nome: 'Fúria pelo amigo',
     texto: 'Quando um aliado cai, causa 60% a mais até o fim.',
     ganchos: {
       caiu(m, b, f, quem) { if (quem.side === f.side && !u(f).despertou) { u(f).despertou = 1; m.aviso(b, f, 'Potencial despertado', f); } },
@@ -346,7 +346,7 @@ export const LOTE6: Record<string, Unica> = {
     },
   },
   ichigo: {
-    nome: 'Máscara Hollow',
+    nome: 'Hollow interior',
     texto: 'Abaixo de 40% da Vida, por 8 s: age 50% mais rápido e cura 15% do dano que causa (uma vez).',
     ganchos: {
       apanhou(m, b, f) { if (!u(f).mascara && fracao(f) < 0.4) { u(f).mascara = b.time + 8; m.aviso(b, f, 'Máscara Hollow', f); } },
@@ -355,7 +355,7 @@ export const LOTE6: Record<string, Unica> = {
     },
   },
   denji: {
-    nome: 'Puxar a corda',
+    nome: 'Coração de motosserra',
     texto: 'Abaixo de 30% da Vida (uma vez): volta a 50% e fica Fortalecido 25% por 8 s.',
     ganchos: {
       apanhou(m, b, f) {
@@ -437,7 +437,7 @@ export const LOTE6: Record<string, Unica> = {
     ganchos: { morreu(m, b, f) { if (!f.voltou && !u(f).achatado) { u(f).achatado = 1; f.renascendo = 6; m.aviso(b, f, 'Achatado…', f); } } },
   },
   billcipher: {
-    nome: 'Acordo',
+    nome: 'Pacto perigoso',
     texto: 'Ele e o rival mais forte causam 30% a mais, mas esse rival leva o dobro de dano do Bill.',
     ganchos: {
       inicio(m, b, f) { const a = maisForte(m, b, f); if (a) { u(f).acordo = idx(b, a); m.efeitos(b, f, [a], [st('strengthened', 0.3, 999)]); m.aviso(b, f, 'Temos um acordo', a); } },
@@ -483,7 +483,7 @@ export const LOTE6: Record<string, Unica> = {
     },
   },
   ganondorf: {
-    nome: 'Triforce do Poder',
+    nome: 'Poder inabalável',
     texto: 'Com mais de 50% da Vida, nenhum golpe o deixa abaixo de 1.',
     ganchos: { salva: (_m, _b, f, alvo, dano) => (alvo === f && f.hp > f.maxHp * 0.5 && dano >= f.hp ? 1 : null) },
   },
@@ -500,7 +500,7 @@ export const LOTE6: Record<string, Unica> = {
     },
   },
   frozone: {
-    nome: 'Rampa de gelo',
+    nome: 'Pista escorregadia',
     texto: 'Com algum rival Lento, o trio age 12% mais rápido.',
     ganchos: {
       passo(m, b, f, dt) {
@@ -511,7 +511,7 @@ export const LOTE6: Record<string, Unica> = {
     },
   },
   cartman: {
-    nome: 'Chantagem',
+    nome: 'Ninguém mexe comigo',
     texto: 'A cada 15 s, por 5 s, o rival mais forte não consegue machucá-lo.',
     ganchos: {
       passo(m, b, f, dt) { if (relogio(f, 'chantagem', dt, 15, 6)) { const a = maisForte(m, b, f); if (a) { u(f).chantagem = idx(b, a); u(f).ate = b.time + 5; m.aviso(b, f, 'Chantagem', a); } } },
@@ -519,7 +519,7 @@ export const LOTE6: Record<string, Unica> = {
     },
   },
   beerus: {
-    nome: 'Hakai',
+    nome: 'Apagar os bônus',
     texto: 'Aos 20 s (uma vez), os rivais perdem Escudo, Status bons e Invocação.',
     ganchos: {
       passo(m, b, f) {
@@ -531,7 +531,7 @@ export const LOTE6: Record<string, Unica> = {
     },
   },
   scooby: {
-    nome: 'Scooby-lanche',
+    nome: 'Coragem de biscoito',
     texto: 'Tem 25% de Esquiva. A cada 15 s, causa 40% a mais por 5 s.',
     ganchos: {
       inicio(m, b, f) { m.efeitos(b, f, [f], [st('evasion', 0.25, 999)]); },
@@ -548,7 +548,7 @@ export const LOTE6: Record<string, Unica> = {
     },
   },
   bebop: {
-    nome: 'Atropelo',
+    nome: 'Pega desprevenido',
     texto: 'Causa até 50% a mais em quem acabou de agir.',
     ganchos: { causa: (_m, _b, _f, alvo, g) => (g.direto ? 1 + 0.5 * (1 - alvo.action) : 1) },
   },
@@ -570,7 +570,7 @@ export const LOTE6: Record<string, Unica> = {
     },
   },
   frieza: {
-    nome: 'Crueldade',
+    nome: 'Prazer no sofrimento',
     texto: 'Causa 30% a mais em rivais com Status ruim.',
     ganchos: { causa: (_m, _b, _f, alvo) => (temRuim(alvo) ? 1.3 : 1) },
   },
@@ -596,7 +596,7 @@ export const LOTE6: Record<string, Unica> = {
     },
   },
   zeromm: {
-    nome: 'Raikousen',
+    nome: 'Raio a cada três',
     texto: 'A cada 3 habilidades, a próxima sai sem Preparo e deixa o alvo Eletrificado.',
     ganchos: {
       usou(m, b, f) {

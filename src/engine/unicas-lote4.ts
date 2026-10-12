@@ -37,7 +37,7 @@ export const LOTE4: Record<string, Unica> = {
     },
   },
   maleficent: {
-    nome: 'Forma de dragão',
+    nome: 'Fúria da fada',
     texto: 'Abaixo de 40% da Vida, até o fim: +30% de Vida máxima (cura essa diferença) e golpes diretos deixam Queimando.',
     ganchos: {
       apanhou(m, b, f) {
@@ -96,7 +96,7 @@ export const LOTE4: Record<string, Unica> = {
     },
   },
   ursula: {
-    nome: 'Roubar a voz',
+    nome: 'Contrato marinho',
     texto: 'Enquanto ela está de pé, a habilidade mais forte do rival mais forte nunca enche.',
     ganchos: {
       inicio(m, b, f) { const a = maisForte(m, b, f); if (a) { u(f).voz = idx(b, a); m.aviso(b, f, 'Voz roubada', a); } },
@@ -114,12 +114,12 @@ export const LOTE4: Record<string, Unica> = {
     },
   },
   bakugo: {
-    nome: 'Suor de nitroglicerina',
+    nome: 'Explosões crescentes',
     texto: '+1% de dano a cada 2 s de luta (até 40%).',
     ganchos: { causa: (_m, b) => 1 + Math.min(0.4, b.time / 200) },
   },
   rimuru: {
-    nome: 'Grande Sábio',
+    nome: 'Corpo que se adapta',
     texto: 'Depois de pegar o mesmo Status ruim 2 vezes, fica imune a ele.',
     ganchos: {
       pegouStatus(m, b, f, s) {
@@ -131,12 +131,12 @@ export const LOTE4: Record<string, Unica> = {
     },
   },
   ainz: {
-    nome: 'Supremo de Nazarick',
+    nome: 'Corpo de morto-vivo',
     texto: 'Status ruins de menos de 3 s não pegam nele.',
     ganchos: { imune: (_f, s, duracao) => duracao < 3 && !BONS.includes(s) },
   },
   lelouch: {
-    nome: 'Geass',
+    nome: 'Ordem absoluta',
     texto: 'A cada 15 s, os Status bons do rival mais forte passam para o aliado mais ferido.',
     ganchos: {
       passo(m, b, f, dt) {
@@ -153,7 +153,7 @@ export const LOTE4: Record<string, Unica> = {
     },
   },
   sesshomaru: {
-    nome: 'Desprezo',
+    nome: 'Orgulho de youkai',
     texto: 'Causa 30% a mais em quem tem mais de 70% da Vida, e 30% a menos abaixo de 30%. Não fica Provocado.',
     ganchos: {
       causa: (_m, _b, _f, alvo) => (fracao(alvo) > 0.7 ? 1.3 : fracao(alvo) < 0.3 ? 0.7 : 1),
@@ -176,7 +176,7 @@ export const LOTE4: Record<string, Unica> = {
     },
   },
   asta: {
-    nome: 'Antimagia',
+    nome: 'Corpo sem magia',
     texto: 'Não fica Silenciado, Amaldiçoado nem Confuso. Cada golpe direto tira 1 Status bom do alvo.',
     ganchos: {
       imune: (_f, s) => s === 'silenced' || s === 'cursed' || s === 'confused',
@@ -235,7 +235,7 @@ export const LOTE4: Record<string, Unica> = {
     },
   },
   jiraiya: {
-    nome: 'Modo Sábio',
+    nome: 'Energia natural',
     texto: 'A cada 15 s, fica 2 s parado e depois causa 40% a mais por 10 s.',
     ganchos: {
       passo(m, b, f, dt) {
@@ -268,7 +268,7 @@ export const LOTE4: Record<string, Unica> = {
     },
   },
   steven: {
-    nome: 'Escudo da Rosa',
+    nome: 'Proteção que fica',
     texto: 'Os Escudos que ele dá não somem com o tempo, só quando quebram.',
     ganchos: {
       passo(_m, b, f) { for (const x of b.fighters) for (const s of x.shields) if (s.source === f.uid) s.remaining = Math.max(s.remaining, 5); },
@@ -288,7 +288,7 @@ export const LOTE4: Record<string, Unica> = {
     },
   },
   aku: {
-    nome: 'Portal do tempo',
+    nome: 'Jogado no futuro',
     texto: 'Abaixo de 25% da Vida (uma vez), o rival mais forte fica Paralisado 8 s.',
     ganchos: {
       apanhou(m, b, f) {
@@ -302,7 +302,7 @@ export const LOTE4: Record<string, Unica> = {
     },
   },
   megamind: {
-    nome: 'Plano mestre',
+    nome: 'Gênio do mal',
     texto: 'Sorteia no começo: sem dano direto nos primeiros 10 s, +40% de Vida máxima, ou rival mais forte Enfraquecido 30% por 15 s.',
     ganchos: {
       inicio(m, b, f) {
@@ -324,7 +324,7 @@ export const LOTE4: Record<string, Unica> = {
     },
   },
   cosmowanda: {
-    nome: 'Desejo do Timmy',
+    nome: 'Padrinhos mágicos',
     texto: 'A cada 12 s, a habilidade do trio mais perto de ficar Pronta enche na hora.',
     ganchos: {
       passo(m, b, f, dt) {
@@ -380,7 +380,7 @@ export const LOTE4: Record<string, Unica> = {
     },
   },
   pacman: {
-    nome: 'Pílula de poder',
+    nome: 'Hora de comer',
     texto: 'A cada 22 s, por 6 s: rivais Lento 20% e ele causa 60% a mais neles.',
     ganchos: {
       passo(m, b, f, dt) {
@@ -393,7 +393,7 @@ export const LOTE4: Record<string, Unica> = {
     },
   },
   crash: {
-    nome: 'Aku Aku',
+    nome: 'Máscara protetora',
     texto: 'O próximo golpe que levaria não pega. Ganha mais um a cada 20 s; com 3, fica 5 s sem levar dano.',
     ganchos: {
       inicio(_m, _b, f) { u(f).mascaras = 1; },
@@ -413,7 +413,7 @@ export const LOTE4: Record<string, Unica> = {
     },
   },
   arthurmorgan: {
-    nome: 'Dead Eye',
+    nome: 'Mira certeira',
     texto: 'A cada 18 s: 3 tiros de 60 nos rivais com menos Vida.',
     ganchos: {
       passo(m, b, f, dt) {

@@ -43,7 +43,7 @@ const LOTE1: Record<string, Unica> = {
     },
   },
   hercules: {
-    nome: 'Doze trabalhos',
+    nome: 'Caminho do herói',
     texto: 'Cada habilidade soma 2, cada rival derrubado 4. Em 12: causa 35% a mais e recebe 25% a menos até o fim.',
     ganchos: {
       usou(m, b, f) { trabalho(m, b, f, 2); },
@@ -184,7 +184,7 @@ const LOTE1: Record<string, Unica> = {
     },
   },
   inuyasha: {
-    nome: 'Ferida do vento',
+    nome: 'Tessaiga carregada',
     texto: 'Guarda 25% do dano que o trio leva (até 500). A habilidade mais forte solta tudo no rival mais forte.',
     ganchos: {
       viu(_m, _b, f, fonte, alvo, dano) {
@@ -331,7 +331,7 @@ const LOTE1: Record<string, Unica> = {
     },
   },
   hollowknight: {
-    nome: 'Alma',
+    nome: 'Foco da alma',
     texto: 'Cada golpe dado enche a Alma. Cheia e abaixo de 60% da Vida: 1 s parado e cura 25%.',
     ganchos: {
       bateu(_m, _b, f, _alvo, dano, g) { if (g.direto) u(f).alma = Math.min(100, (u(f).alma ?? 0) + dano / 6); },
@@ -391,7 +391,7 @@ const LOTE1: Record<string, Unica> = {
     },
   },
   todoroki: {
-    nome: 'Metade e metade',
+    nome: 'Gelo e fogo',
     texto: 'Habilidades alternam Lento e Queimando. Rival com os dois leva 180 de dano e perde ambos.',
     ganchos: {
       usou(m, b, f) {
@@ -465,7 +465,7 @@ const LOTE1: Record<string, Unica> = {
     },
   },
   tenshinhan: {
-    nome: 'Kikōhō',
+    nome: 'Corpo no limite',
     texto: 'A habilidade mais forte custa 15% da Vida dele, mas causa 80% a mais.',
     ganchos: {
       causa: (_m, _b, f, _alvo, g) => (g.habilidade && u(f).kikoho ? 1.8 : 1),
@@ -478,7 +478,7 @@ const LOTE1: Record<string, Unica> = {
     },
   },
   sailormercury: {
-    nome: 'Computador de Mercúrio',
+    nome: 'Análise do inimigo',
     texto: 'Enquanto ela está de pé, o trio causa 15% a mais no rival mais forte.',
     ganchos: {
       inicio(m, b, f) {
@@ -518,7 +518,7 @@ const LOTE1: Record<string, Unica> = {
     },
   },
   stitch: {
-    nome: 'Experimento 626',
+    nome: 'Destruir tudo',
     texto: 'Os golpes dele tiram Escudo, Barreira e Invocação do alvo.',
     ganchos: {
       bateu(m, b, f, alvo, _dano, g) {
@@ -545,7 +545,7 @@ const LOTE1: Record<string, Unica> = {
     },
   },
   tifa: {
-    nome: 'Combo crescente',
+    nome: 'Combo sem parar',
     texto: 'Cada golpe seguido no mesmo rival causa 6% a mais (até 60%). Trocar de alvo zera.',
     ganchos: {
       causa(_m, b, f, alvo, g) {
@@ -595,7 +595,7 @@ const LOTE1: Record<string, Unica> = {
     },
   },
   garnet: {
-    nome: 'Visão do futuro',
+    nome: 'Previsão',
     texto: 'Quando um rival começa um Preparo de 2,5 s ou mais, o trio fica Protegido 40% até sair (a cada 20 s).',
     ganchos: {
       viuPreparo(m, b, f, quem, preparo) {
@@ -607,7 +607,7 @@ const LOTE1: Record<string, Unica> = {
     },
   },
   nami: {
-    nome: 'Clima-Tact',
+    nome: 'Clima a favor',
     texto: 'A cada 15 s alterna: trio Acelerado 15% por 4 s, rivais Lento 15% por 4 s, ou 70 de dano no rival mais forte.',
     ganchos: {
       passo(m, b, f, dt) {

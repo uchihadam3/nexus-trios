@@ -72,7 +72,7 @@ export const LOTE5: Record<string, Unica> = {
     },
   },
   raidenmgr: {
-    nome: 'Zandatsu',
+    nome: 'Cortar e tomar',
     texto: 'Ao derrubar um rival: cura 25% da Vida e fica Acelerado 30% por 6 s.',
     ganchos: {
       caiu(m, b, f, quem, quemDerrubou) {
@@ -138,7 +138,7 @@ export const LOTE5: Record<string, Unica> = {
     },
   },
   hisoka: {
-    nome: 'Bungee Gum',
+    nome: 'Dor compartilhada',
     texto: 'Liga os 2 rivais mais fortes: dano do trio em um passa 30% para o outro.',
     ganchos: {
       inicio(m, b, f) {
@@ -170,7 +170,7 @@ export const LOTE5: Record<string, Unica> = {
     },
   },
   megatron: {
-    nome: 'Canhão de fusão',
+    nome: 'Tiro devastador',
     texto: 'A cada 3 habilidades: 150 de dano em todos os rivais, e fica 2 s parado.',
     ganchos: {
       usou(m, b, f) {
@@ -189,7 +189,7 @@ export const LOTE5: Record<string, Unica> = {
     ganchos: { apanhou(m, b, f, fonte, _dano, g) { if (g.direto && vivo(fonte) && fonte.side !== f.side) m.efeitos(b, f, [fonte], [st('burning', 15, 3)]); } },
   },
   constantine: {
-    nome: 'Exorcismo',
+    nome: 'Expulsar demônios',
     texto: 'A cada 10 s, tira Invocação e Regeneração dos rivais; cada uma tirada vira 60 de dano.',
     ganchos: {
       passo(m, b, f, dt) {
@@ -205,7 +205,7 @@ export const LOTE5: Record<string, Unica> = {
     },
   },
   yennefer: {
-    nome: 'Magia do caos',
+    nome: 'Feitiçaria instável',
     texto: '1 em 4 habilidades dela causa o dobro.',
     ganchos: {
       antes(m, b, f) { u(f).caos = m.sorte(b) < 0.25 ? 1 : 0; if (u(f).caos) m.aviso(b, f, 'Caos!', f); },
@@ -214,7 +214,7 @@ export const LOTE5: Record<string, Unica> = {
     },
   },
   nemesis: {
-    nome: 'STARS!',
+    nome: 'Caçada implacável',
     texto: 'Ataca o rival mais forte; cada golpe seguido nele causa 6% a mais (acumula até ele cair).',
     ganchos: {
       alvoDoBasico(m, b, f) {

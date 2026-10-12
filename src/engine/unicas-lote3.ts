@@ -84,7 +84,7 @@ export const LOTE3: Record<string, Unica> = {
     },
   },
   medusa: {
-    nome: 'Olhar de pedra',
+    nome: 'Quem olha, para',
     texto: '1 em 5 que a atacam ficam Paralisado 2 s.',
     ganchos: {
       apanhou(m, b, f, fonte, _dano, g) {
@@ -118,7 +118,7 @@ export const LOTE3: Record<string, Unica> = {
 
   /* ───────── Egito e Nórdicos ───────── */
   anubis: {
-    nome: 'Guia das almas',
+    nome: 'Ganha com a morte',
     texto: 'Cada rival que cai: +10% de Vida máxima e cura 10%.',
     ganchos: {
       caiu(m, b, f, quem) {
@@ -138,7 +138,7 @@ export const LOTE3: Record<string, Unica> = {
     },
   },
   horus: {
-    nome: 'Olho que tudo vê',
+    nome: 'Olhar do falcão',
     texto: 'Enquanto ele está de pé, os golpes do trio ignoram Esquiva e Cego.',
     ganchos: { trioNuncaErra: true },
   },
@@ -175,7 +175,7 @@ export const LOTE3: Record<string, Unica> = {
     },
   },
   hel: {
-    nome: 'Exército dos mortos',
+    nome: 'Rainha dos mortos',
     texto: 'Aliado que cai volta com 30% da Vida, mas cai de novo 8 s depois.',
     ganchos: {
       caiu(m, b, f, quem) {
@@ -300,7 +300,7 @@ export const LOTE3: Record<string, Unica> = {
     },
   },
   valak: {
-    nome: 'Aparição',
+    nome: 'Ataque das sombras',
     texto: 'A cada 10 s, o próximo golpe no rival com menos Vida causa o dobro e o deixa Confuso 2 s.',
     ganchos: {
       passo(m, b, f, dt) { if (relogio(f, 'aparece', dt, 10, 6)) { const a = maisFraco(m, b, f); if (a) { u(f).atras = idx(b, a); m.aviso(b, f, 'Atrás de você', a); } } },
@@ -374,7 +374,7 @@ export const LOTE3: Record<string, Unica> = {
     },
   },
   johnwick: {
-    nome: 'Baba Yaga',
+    nome: 'Foco absoluto',
     texto: 'Cada rival que ele derruba deixa todas as habilidades dele Pronta.',
     ganchos: {
       caiu(m, b, f, quem, quemDerrubou) {
@@ -398,7 +398,7 @@ export const LOTE3: Record<string, Unica> = {
     ganchos: { causa: (m, b, f) => 1 + 0.12 * (3 - m.aliados(b, f).length + Math.max(0, m.rivais(b, f).length - 1)) },
   },
   indianajones: {
-    nome: 'Chicotada',
+    nome: 'Desarme',
     texto: 'A cada 8 s, o rival mais forte perde Fortalecido e Escudo e fica Enfraquecido 25% por 4 s.',
     ganchos: {
       passo(m, b, f, dt) {
@@ -434,7 +434,7 @@ export const LOTE3: Record<string, Unica> = {
     },
   },
   voldemort: {
-    nome: 'Horcruxes',
+    nome: 'Alma partida',
     texto: '3 vezes, com um aliado de pé: o golpe que o derrubaria o deixa com 1 de Vida.',
     ganchos: {
       salva(m, b, f, alvo) {

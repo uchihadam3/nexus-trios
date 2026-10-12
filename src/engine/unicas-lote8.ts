@@ -40,7 +40,7 @@ export const LOTE8: Record<string, Unica> = {
     },
   },
   luffy: {
-    nome: 'Corpo de borracha',
+    nome: 'Borracha que devolve',
     texto: 'Leva 30% a menos de ataques básicos, e 15% do golpe volta em quem bateu.',
     ganchos: {
       recebe: (_m, _b, _f, _fonte, g) => (g.direto && !g.habilidade ? 0.7 : 1),
@@ -81,7 +81,7 @@ export const LOTE8: Record<string, Unica> = {
     },
   },
   wolverine: {
-    nome: 'Fator de cura',
+    nome: 'Ferida que fecha',
     texto: '3 s depois de levar um golpe, recupera 25% do dano dele.',
     ganchos: {
       apanhou(_m, b, f, _fonte, dano) {
@@ -124,7 +124,7 @@ export const LOTE8: Record<string, Unica> = {
     },
   },
   spiderman: {
-    nome: 'Sentido aranha',
+    nome: 'Rede de segurança',
     texto: 'Aliado abaixo de 25% da Vida ganha Escudo de 10% da Vida dele (uma vez por aliado).',
     ganchos: {
       viu(m, b, f, _fonte, alvo) {
@@ -146,7 +146,7 @@ export const LOTE8: Record<string, Unica> = {
     },
   },
   strange: {
-    nome: 'Portais',
+    nome: 'Desvio dimensional',
     texto: 'A cada 25 s, a próxima habilidade rival no trio faz metade, e a outra metade vai em outro rival.',
     ganchos: {
       passo(m, b, f, dt) { if (relogio(f, 'portal', dt, 25, 10)) { u(f).portal = 1; m.aviso(b, f, 'Portal aberto', f); } },
@@ -163,7 +163,7 @@ export const LOTE8: Record<string, Unica> = {
     },
   },
   flash: {
-    nome: 'Força de aceleração',
+    nome: 'Rastro de velocidade',
     texto: 'Cada ataque básico dele adianta 8% a ação de um aliado.',
     ganchos: {
       bateu(m, b, f, _alvo, _dano, g) {
@@ -175,7 +175,7 @@ export const LOTE8: Record<string, Unica> = {
     },
   },
   wonderwoman: {
-    nome: 'Laço da verdade',
+    nome: 'Verdade revelada',
     texto: 'O primeiro rival que ela acerta perde a Esquiva e leva 10% a mais do trio.',
     ganchos: {
       bateu(m, b, f, alvo, _dano, g) { if (g.direto && !u(f).laco && vivo(alvo)) { u(f).laco = idx(b, alvo) + 1; m.aviso(b, f, 'Laço da verdade', alvo); } },
@@ -184,7 +184,7 @@ export const LOTE8: Record<string, Unica> = {
     },
   },
   captain: {
-    nome: 'Avante!',
+    nome: 'Líder que inspira',
     texto: 'Cada habilidade dele dá 15% de ação aos outros dois.',
     ganchos: { usou(m, b, f) { for (const a of m.aliados(b, f)) if (a !== f) a.action = Math.min(1, a.action + 0.15); } },
   },
@@ -272,7 +272,7 @@ export const LOTE8: Record<string, Unica> = {
     },
   },
   muzan: {
-    nome: 'Chicotes de carne',
+    nome: 'Braços por toda parte',
     texto: 'O ataque básico acerta os 3 rivais, com 45% em cada.',
     ganchos: {
       causa: (_m, _b, _f, _alvo, g) => (g.direto && !g.habilidade ? 0.45 : 1),
@@ -299,7 +299,7 @@ export const LOTE8: Record<string, Unica> = {
     },
   },
   aizen: {
-    nome: 'Kyoka Suigetsu',
+    nome: 'Tudo é ilusão',
     texto: 'A cada 20 s, o próximo golpe direto nele não faz nada, e quem bateu fica Confuso 1 s.',
     ganchos: {
       passo(_m, _b, f, dt) { if (relogio(f, 'ilusao', dt, 20, 6)) u(f).ilusao = 1; },
@@ -321,7 +321,7 @@ export const LOTE8: Record<string, Unica> = {
     },
   },
   gon: {
-    nome: 'Jajanken',
+    nome: 'Pedra, papel, tesoura',
     texto: 'O básico alterna: 50% mais forte, acerta mais um rival (50%), ou 25 de dano em todos.',
     ganchos: {
       causa: (_m, _b, f, _alvo, g) => (g.direto && !g.habilidade && (u(f).jan ?? 0) % 3 === 0 ? 1.5 : 1),
@@ -335,7 +335,7 @@ export const LOTE8: Record<string, Unica> = {
     },
   },
   killua: {
-    nome: 'Godspeed',
+    nome: 'Reflexo relâmpago',
     texto: 'Quando um rival começa um Preparo, ganha 25% de ação.',
     ganchos: { viuPreparo(_m, _b, f) { f.action = Math.min(1, f.action + 0.25); } },
   },
@@ -494,7 +494,7 @@ export const LOTE8: Record<string, Unica> = {
     },
   },
   ghostrider: {
-    nome: 'Olhar de penitência',
+    nome: 'Peso dos pecados',
     texto: 'Causa +1% para cada 60 de dano que o alvo já causou na luta (até 50%).',
     ganchos: { causa: (_m, _b, _f, alvo) => 1 + Math.min(0.5, alvo.stats.damage / 6000) },
   },
@@ -544,7 +544,7 @@ export const LOTE8: Record<string, Unica> = {
     },
   },
   rogue: {
-    nome: 'Toque absorvente',
+    nome: 'Poder emprestado',
     texto: 'Primeiro golpe direto em cada rival: ele causa 4% a menos e ela 4% a mais (até 12%).',
     ganchos: {
       bateu(m, b, f, alvo, _dano, g) {
