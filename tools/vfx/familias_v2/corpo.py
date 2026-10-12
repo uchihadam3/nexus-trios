@@ -24,20 +24,6 @@ def chute_voador(T, t, rng):
     return G, H
 
 
-def chute_giratorio(T, t, rng):
-    """Chute giratório: arco baixo dando volta e meia em perspectiva, poeira no chão."""
-    G, H = vazio(T)
-    giro = t * TAU * 1.5
-    env = apaga(t, 0.6, 1)
-    arco = T.arc_band(0.62, 0.11, -math.pi + giro, -math.pi + giro + 2.6, squash=0.32, cy=0.18, taper=1.4) * env
-    eco = T.arc_band(0.5, 0.05, -math.pi + giro - 0.6, -math.pi + giro + 1.6, squash=0.32, cy=0.18) * env * 0.5
-    ch = poeira(T, rng, t, 26, 0, 0.35, 0.8, 0.15, 0.035)
-    clarao = T.gauss(0.45, 0.1, 0.13) * pulso(t, 0.25, 0.55) * 2.4 + T.flare(0.45, 0.1, 1.2, 0.3) * pulso(t, 0.25, 0.5) * 2
-    G += T.glow(arco + eco, 1.2, 1.2, 0.02) + ch * 0.8 + clarao
-    H += arco * 0.8 + clarao + ch * 0.2
-    return G, H
-
-
 def bonk(T, t, rng):
     """Pancada de desenho animado: achata, sobe um galo de luz e estrelinhas giram em volta."""
     G, H = vazio(T)
@@ -466,7 +452,6 @@ def esticar(T, t, rng):
 
 REGISTRO = [
     ("chute_voador", chute_voador, GRANDE, "chute voador (diagonal)", False),
-    ("chute_giratorio", chute_giratorio, GRANDE, "chute giratório baixo", False),
     ("bonk", bonk, GRANDE, "pancada de desenho com estrelinhas", False),
     ("pow_cartoon", pow_cartoon, GRANDE, "balão POW de quadrinho", False),
     ("martelo", martelo, GRANDE, "martelada no chão", False),
@@ -475,7 +460,6 @@ REGISTRO = [
     ("punho_gigante", punho_gigante, GRANDE, "silhueta de punho gigante", False),
     ("soco_serio", soco_serio, GRANDE, "sopro gigante para a frente", False),
     ("faisca_negra", faisca_negra, GRANDE, "faísca negra (raios grossos)", False),
-    ("corrente", corrente, GRANDE, "corrente que voa e se enrola no alvo", False),
     ("chicote", chicote, GRANDE, "chicote estalando", False),
     ("garras", garras, GRANDE, "três rasgos de garra", False),
     ("mordida", mordida, GRANDE, "dentes fechando", False),

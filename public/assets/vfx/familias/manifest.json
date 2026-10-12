@@ -993,6 +993,20 @@
   "laco": false,
   "bytes": 45154
  },
+ "bastao_bo": {
+  "descricao": "Donatello · o bastão em hélice",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 24808
+ },
  "bastao_cinetico": {
   "descricao": "Gambit · o bastão, a onda e as cartas detonando",
   "quadros": 12,
@@ -1244,6 +1258,20 @@
   ],
   "laco": false,
   "bytes": 33230
+ },
+ "blefe_infernal": {
+  "descricao": "Constantine · as cartas de tarô",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 31264
  },
  "blindagem_de_combate": {
   "descricao": "Doom Slayer · as placas da armadura encaixando",
@@ -1861,6 +1889,20 @@
   "laco": false,
   "bytes": 42410
  },
+ "campo_de_contencao": {
+  "descricao": "Donatello · a grade de laser",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 23622
+ },
  "campo_incendiado": {
   "descricao": "Roy · o anel de fogo e a coluna que detona",
   "quadros": 12,
@@ -2014,6 +2056,20 @@
   ],
   "laco": false,
   "bytes": 56554
+ },
+ "capa_viva": {
+  "descricao": "Spawn · a capa viva em tiras",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 26834
  },
  "carga": {
   "descricao": "preparo: energia convergindo",
@@ -2224,20 +2280,6 @@
   ],
   "laco": false,
   "bytes": 26144
- },
- "caveira": {
-  "descricao": "caveira de luz",
-  "quadros": 12,
-  "grade": [
-   3,
-   4
-  ],
-  "tamanho": [
-   192,
-   192
-  ],
-  "laco": false,
-  "bytes": 63584
  },
  "cegueira": {
   "descricao": "clarão que ofusca, com véu",
@@ -2714,20 +2756,6 @@
   ],
   "laco": false,
   "bytes": 59904
- },
- "chute_giratorio": {
-  "descricao": "chute giratório baixo",
-  "quadros": 12,
-  "grade": [
-   3,
-   4
-  ],
-  "tamanho": [
-   192,
-   192
-  ],
-  "laco": false,
-  "bytes": 46596
  },
  "chute_relampago": {
   "descricao": "Chun-Li: leque de chutes rápidos em borrão",
@@ -3233,20 +3261,6 @@
   "laco": false,
   "bytes": 61252
  },
- "corrente": {
-  "descricao": "corrente que voa e se enrola no alvo",
-  "quadros": 12,
-  "grade": [
-   3,
-   4
-  ],
-  "tamanho": [
-   192,
-   192
-  ],
-  "laco": false,
-  "bytes": 57600
- },
  "corrente_de_andromeda": {
   "descricao": "Shun: corrente em zigue-zague com ponta triangular",
   "quadros": 12,
@@ -3344,6 +3358,20 @@
   ],
   "laco": false,
   "bytes": 35706
+ },
+ "correntes_necroplasmicas": {
+  "descricao": "Spawn · as correntes verdes",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 39384
  },
  "cortador_de_plasma": {
   "descricao": "Isaac: mira de três pontos e lâmina de plasma",
@@ -4198,6 +4226,20 @@
   ],
   "laco": false,
   "bytes": 91240
+ },
+ "dispositivo_tatico": {
+  "descricao": "Donatello · o aparelho piscando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 20030
  },
  "dissipar": {
   "descricao": "anel de proteção do rival que racha e se desfaz",
@@ -5501,6 +5543,20 @@
   "laco": false,
   "bytes": 87342
  },
+ "exorcismo": {
+  "descricao": "Constantine · a cruz e o demônio",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 18792
+ },
  "expelliarmus": {
   "descricao": "Básico do Harry: o feitiço vermelho",
   "quadros": 12,
@@ -6033,6 +6089,20 @@
   "laco": false,
   "bytes": 22894
  },
+ "festa_surpresa": {
+  "descricao": "Michelangelo · os balões, o confete e a pizza",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 33428
+ },
  "final_flash_carga": {
   "descricao": "Vegeta · os braços abertos juntando o Final Flash (ergue)",
   "quadros": 12,
@@ -6243,6 +6313,20 @@
   "laco": false,
   "bytes": 8672
  },
+ "fogo_do_inferno": {
+  "descricao": "Spawn · a rajada de fogo verde",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 37872
+ },
  "fogo_no_peito": {
   "descricao": "Charizard · o fogo juntando na boca no Preparo (laço)",
   "quadros": 12,
@@ -6396,6 +6480,20 @@
   ],
   "laco": false,
   "bytes": 27200
+ },
+ "formacao": {
+  "descricao": "Leonardo · as bandanas e as setas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 15994
  },
  "frasco_de_senku": {
   "descricao": "Básico do Senku: o frasco e a reação",
@@ -7110,6 +7208,20 @@
   ],
   "laco": false,
   "bytes": 21178
+ },
+ "giro_maluco": {
+  "descricao": "Michelangelo · os nunchakus e as estrelinhas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 16516
  },
  "godslayer": {
   "descricao": "Básico da Gamora: a Godslayer esticando",
@@ -7965,6 +8077,20 @@
   "laco": false,
   "bytes": 33012
  },
+ "invencivel_preparo": {
+  "descricao": "Invencível · se erguendo (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 36560
+ },
  "inverno_absoluto": {
   "descricao": "Sub-Zero · o raio e os cristais",
   "quadros": 12,
@@ -8007,6 +8133,20 @@
   "laco": false,
   "bytes": 29350
  },
+ "investida_do_lider": {
+  "descricao": "Leonardo · o avanço e o corte final",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 24068
+ },
  "investida_elegante": {
   "descricao": "Yor · o chute alto girando e as pétalas",
   "quadros": 12,
@@ -8021,6 +8161,20 @@
   "laco": false,
   "bytes": 23858
  },
+ "investida_furiosa": {
+  "descricao": "Raphael · os sais girando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 44094
+ },
  "investida_inosuke": {
   "descricao": "Inosuke · a cabeça do javali e os cortes loucos",
   "quadros": 12,
@@ -8034,6 +8188,20 @@
   ],
   "laco": false,
   "bytes": 36426
+ },
+ "investida_orbital": {
+  "descricao": "Invencível · o voo do céu e o impacto",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 31930
  },
  "investigacao_light": {
   "descricao": "Light · a mira e a leitura do rival",
@@ -8440,6 +8608,20 @@
   ],
   "laco": false,
   "bytes": 44332
+ },
+ "katanas_gemeas": {
+  "descricao": "Leonardo · as katanas em X",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 19734
  },
  "kazuya_preparo": {
   "descricao": "Kazuya · os raios subindo (Preparo, laço)",
@@ -9197,6 +9379,20 @@
   "laco": true,
   "bytes": 7100
  },
+ "leonardo_preparo": {
+  "descricao": "Leonardo · a guarda das katanas (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 14722
+ },
  "leque_de_aco": {
   "descricao": "Básico da Kitana: o leque que vai e volta",
   "quadros": 12,
@@ -9308,6 +9504,20 @@
   ],
   "laco": false,
   "bytes": 45658
+ },
+ "levantar_de_novo": {
+  "descricao": "Invencível · o soco de quem levantou",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 42602
  },
  "levi_preparo": {
   "descricao": "Levi · as lâminas invertidas e o gás (Preparo, laço)",
@@ -16365,6 +16575,20 @@
   "laco": false,
   "bytes": 22762
  },
+ "pacto": {
+  "descricao": "Constantine · o pentagrama e a fumaça",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 50264
+ },
  "palma_faixa": {
   "descricao": "Killua · o raio da Palma relâmpago até o rival (faixa)",
   "quadros": 12,
@@ -16560,20 +16784,6 @@
   ],
   "laco": true,
   "bytes": 16320
- },
- "pentagrama": {
-  "descricao": "pentagrama infernal",
-  "quadros": 12,
-  "grade": [
-   3,
-   4
-  ],
-  "tamanho": [
-   192,
-   192
-  ],
-  "laco": false,
-  "bytes": 44270
  },
  "percepcao_espacial": {
   "descricao": "Inosuke · as vibrações do chão e o X",
@@ -19081,6 +19291,20 @@
   "laco": false,
   "bytes": 76862
  },
+ "sem_recuo": {
+  "descricao": "Raphael · o soco com a aura de raiva",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 40556
+ },
  "senbonzakura_corte": {
   "descricao": "Básico do Byakuya: o corte e as pétalas afiadas",
   "quadros": 12,
@@ -19753,6 +19977,20 @@
   "laco": false,
   "bytes": 125132
  },
+ "soco_supersonico": {
+  "descricao": "Invencível · o soco e o cone de som",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 14200
+ },
  "soco_titanico": {
   "descricao": "Eren: punho de titã, impacto colossal e vapor subindo",
   "quadros": 12,
@@ -19920,6 +20158,20 @@
   ],
   "laco": false,
   "bytes": 29444
+ },
+ "spawn_preparo": {
+  "descricao": "Spawn · os olhos e o fogo verde (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 22348
  },
  "spin_attack": {
   "descricao": "Sonic: bola azul girando quica no alvo e volta",

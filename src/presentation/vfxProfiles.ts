@@ -250,7 +250,7 @@ const COR_ICONICA: Record<string, string> = {
 
 export function corDoEfeito(k: VfxFamily, personagem: Character, chave: string, nome: string): string {
   const fam = familia(k);
-  const escura = ['sombra', 'execucao', 'lamina_sombria', 'amaterasu', 'buraco_negro', 'caveira', 'medo'].includes(k);
+  const escura = ['sombra', 'execucao', 'lamina_sombria', 'amaterasu', 'buraco_negro', 'medo'].includes(k);
   const iconica = COR_ICONICA[`${personagem.id}:${chave}`];
   if (iconica) return legivel(iconica, escura);
   const doNome = COR_DO_NOME.find(([re]) => re.test(normaliza(nome)))?.[1];

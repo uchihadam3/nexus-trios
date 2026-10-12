@@ -1209,6 +1209,23 @@
    ],
    "bytes": 20847
   },
+  "bastao-bo": {
+   "arquivo": "bastao-bo.mp3",
+   "descricao": "Donatello: o bastão bo",
+   "versoes": [
+    0.0,
+    1.98,
+    4.0289,
+    5.9446
+   ],
+   "duracoes": [
+    1.9,
+    1.9689,
+    1.8357,
+    1.9289
+   ],
+   "bytes": 63803
+  },
   "bastao-cinetico": {
    "arquivo": "bastao-cinetico.mp3",
    "descricao": "Gambit: o bastão e as cartas detonando",
@@ -1497,6 +1514,23 @@
     0.9644
    ],
    "bytes": 39440
+  },
+  "blefe-infernal": {
+   "arquivo": "blefe-infernal.mp3",
+   "descricao": "Constantine: o blefe infernal",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 75819
   },
   "blindagem-de-combate": {
    "arquivo": "blindagem-de-combate.mp3",
@@ -2093,6 +2127,23 @@
    ],
    "bytes": 40100
   },
+  "campo-de-contencao": {
+   "arquivo": "campo-de-contencao.mp3",
+   "descricao": "Donatello: o campo de contenção",
+   "versoes": [
+    0.0,
+    1.4833,
+    3.0469,
+    4.4233
+   ],
+   "duracoes": [
+    1.4033,
+    1.4836,
+    1.2964,
+    1.4244
+   ],
+   "bytes": 61244
+  },
   "campo-incendiado": {
    "arquivo": "campo-incendiado.mp3",
    "descricao": "Roy: o fogo correndo e a detonação",
@@ -2296,6 +2347,23 @@
     1.5228
    ],
    "bytes": 54011
+  },
+  "capa-viva": {
+   "arquivo": "capa-viva.mp3",
+   "descricao": "Spawn: a capa viva",
+   "versoes": [
+    0.0,
+    1.7408,
+    3.5319,
+    5.1929
+   ],
+   "duracoes": [
+    1.6608,
+    1.711,
+    1.5811,
+    1.6652
+   ],
+   "bytes": 61961
   },
   "carga-grande": {
    "arquivo": "carga-grande.mp3",
@@ -2517,23 +2585,6 @@
     1.1167
    ],
    "bytes": 42680
-  },
-  "caveira": {
-   "arquivo": "caveira.mp3",
-   "descricao": "família caveira",
-   "versoes": [
-    0.0,
-    1.38,
-    2.8071,
-    4.1432
-   ],
-   "duracoes": [
-    1.3,
-    1.3471,
-    1.256,
-    1.3198
-   ],
-   "bytes": 44894
   },
   "cegueira": {
    "arquivo": "cegueira.mp3",
@@ -3095,23 +3146,6 @@
     1.4213
    ],
    "bytes": 57547
-  },
-  "chute-giratorio": {
-   "arquivo": "chute-giratorio.mp3",
-   "descricao": "família chute giratorio",
-   "versoes": [
-    0.0,
-    0.73,
-    1.4824,
-    2.1914
-   ],
-   "duracoes": [
-    0.65,
-    0.6724,
-    0.629,
-    0.6594
-   ],
-   "bytes": 25605
   },
   "chute-relampago": {
    "arquivo": "chute-relampago.mp3",
@@ -3691,23 +3725,6 @@
    ],
    "bytes": 46236
   },
-  "corrente": {
-   "arquivo": "corrente.mp3",
-   "descricao": "família corrente",
-   "versoes": [
-    0.0,
-    1.18,
-    2.3999,
-    3.5427
-   ],
-   "duracoes": [
-    1.1,
-    1.1399,
-    1.0628,
-    1.1167
-   ],
-   "bytes": 51183
-  },
   "corrente-de-andromeda": {
    "arquivo": "corrente-de-andromeda.mp3",
    "descricao": "básico de Shun: elos tilintando e o estalo da ponta",
@@ -3826,6 +3843,23 @@
     1.6485
    ],
    "bytes": 70534
+  },
+  "correntes-necroplasmicas": {
+   "arquivo": "correntes-necroplasmicas.mp3",
+   "descricao": "Spawn: as correntes",
+   "versoes": [
+    0.0,
+    1.4811,
+    3.0758,
+    4.4978
+   ],
+   "duracoes": [
+    1.4011,
+    1.5147,
+    1.342,
+    1.3958
+   ],
+   "bytes": 60181
   },
   "cortador-de-plasma": {
    "arquivo": "cortador-de-plasma.mp3",
@@ -4778,6 +4812,23 @@
     1.2183
    ],
    "bytes": 62555
+  },
+  "dispositivo-tatico": {
+   "arquivo": "dispositivo-tatico.mp3",
+   "descricao": "Donatello: o dispositivo tático",
+   "versoes": [
+    0.0,
+    1.1788,
+    2.4932,
+    3.689
+   ],
+   "duracoes": [
+    1.0988,
+    1.2344,
+    1.1158,
+    1.2099
+   ],
+   "bytes": 43464
   },
   "dissipar": {
    "arquivo": "dissipar.mp3",
@@ -6326,6 +6377,23 @@
    ],
    "bytes": 71658
   },
+  "exorcismo": {
+   "arquivo": "exorcismo.mp3",
+   "descricao": "Constantine: o exorcismo",
+   "versoes": [
+    0.0,
+    2.18,
+    4.4361,
+    6.5451
+   ],
+   "duracoes": [
+    2.1,
+    2.1761,
+    2.029,
+    2.132
+   ],
+   "bytes": 51702
+  },
   "expelliarmus": {
    "arquivo": "expelliarmus.mp3",
    "descricao": "básico do Harry: o feitiço vermelho",
@@ -6836,6 +6904,23 @@
    ],
    "bytes": 44879
   },
+  "festa-surpresa": {
+   "arquivo": "festa-surpresa.mp3",
+   "descricao": "Michelangelo: a festa surpresa",
+   "versoes": [
+    0.0,
+    1.3372,
+    2.6933,
+    4.0079
+   ],
+   "duracoes": [
+    1.2572,
+    1.2761,
+    1.2346,
+    1.2582
+   ],
+   "bytes": 52749
+  },
   "final-flash": {
    "arquivo": "final-flash.mp3",
    "descricao": "Final Flash: a explosão gigante",
@@ -7091,6 +7176,23 @@
    ],
    "bytes": 66462
   },
+  "fogo-do-inferno": {
+   "arquivo": "fogo-do-inferno.mp3",
+   "descricao": "Spawn: o fogo do inferno",
+   "versoes": [
+    0.0,
+    1.9611,
+    3.8522,
+    5.5865
+   ],
+   "duracoes": [
+    1.8811,
+    1.8111,
+    1.6543,
+    1.8303
+   ],
+   "bytes": 60729
+  },
   "fogo-no-peito": {
    "arquivo": "fogo-no-peito.mp3",
    "descricao": "o fogo juntando na boca do Charizard",
@@ -7294,6 +7396,23 @@
     2.335
    ],
    "bytes": 76259
+  },
+  "formacao": {
+   "arquivo": "formacao.mp3",
+   "descricao": "Leonardo: a formação",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 64003
   },
   "frasco-de-senku": {
    "arquivo": "frasco-de-senku.mp3",
@@ -8144,6 +8263,23 @@
     1.1654
    ],
    "bytes": 42077
+  },
+  "giro-maluco": {
+   "arquivo": "giro-maluco.mp3",
+   "descricao": "Michelangelo: o giro maluco",
+   "versoes": [
+    0.0,
+    1.4608,
+    2.983,
+    4.424
+   ],
+   "duracoes": [
+    1.3808,
+    1.4422,
+    1.361,
+    1.3558
+   ],
+   "bytes": 54061
   },
   "godslayer": {
    "arquivo": "godslayer.mp3",
@@ -9233,6 +9369,23 @@
    ],
    "bytes": 72120
   },
+  "invencivel-preparo": {
+   "arquivo": "invencivel-preparo.mp3",
+   "descricao": "Invencível: se erguendo (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 47266
+  },
   "inverno-absoluto": {
    "arquivo": "inverno-absoluto.mp3",
    "descricao": "Sub-Zero: o inverno absoluto",
@@ -9284,6 +9437,23 @@
    ],
    "bytes": 48907
   },
+  "investida-do-lider": {
+   "arquivo": "investida-do-lider.mp3",
+   "descricao": "Leonardo: a investida do líder",
+   "versoes": [
+    0.0,
+    1.5509,
+    3.1543,
+    4.6566
+   ],
+   "duracoes": [
+    1.4709,
+    1.5234,
+    1.4223,
+    1.4929
+   ],
+   "bytes": 57134
+  },
   "investida-elegante": {
    "arquivo": "investida-elegante.mp3",
    "descricao": "Yor: o chute girando e as pétalas",
@@ -9301,6 +9471,23 @@
    ],
    "bytes": 70983
   },
+  "investida-furiosa": {
+   "arquivo": "investida-furiosa.mp3",
+   "descricao": "Raphael: a investida furiosa",
+   "versoes": [
+    0.0,
+    1.4362,
+    2.9041,
+    4.2955
+   ],
+   "duracoes": [
+    1.3562,
+    1.3879,
+    1.3113,
+    1.332
+   ],
+   "bytes": 46122
+  },
   "investida-inosuke": {
    "arquivo": "investida-inosuke.mp3",
    "descricao": "Inosuke: a investida do javali",
@@ -9317,6 +9504,23 @@
     2.0305
    ],
    "bytes": 66946
+  },
+  "investida-orbital": {
+   "arquivo": "investida-orbital.mp3",
+   "descricao": "Invencível: a investida orbital",
+   "versoes": [
+    0.0,
+    2.18,
+    4.4361,
+    6.5451
+   ],
+   "duracoes": [
+    2.1,
+    2.1761,
+    2.029,
+    2.132
+   ],
+   "bytes": 73619
   },
   "investigacao-light": {
    "arquivo": "investigacao-light.mp3",
@@ -9861,6 +10065,23 @@
     1.066
    ],
    "bytes": 44094
+  },
+  "katanas-gemeas": {
+   "arquivo": "katanas-gemeas.mp3",
+   "descricao": "Leonardo: as katanas gêmeas",
+   "versoes": [
+    0.0,
+    1.0405,
+    2.1211,
+    3.1835
+   ],
+   "duracoes": [
+    0.9605,
+    1.0006,
+    0.9824,
+    1.0035
+   ],
+   "bytes": 43244
   },
   "kazuya-preparo": {
    "arquivo": "kazuya-preparo.mp3",
@@ -10746,6 +10967,23 @@
    ],
    "bytes": 48511
   },
+  "leonardo-preparo": {
+   "arquivo": "leonardo-preparo.mp3",
+   "descricao": "Leonardo: a guarda (Preparo)",
+   "versoes": [
+    0.0,
+    1.3077,
+    2.6527,
+    3.9122
+   ],
+   "duracoes": [
+    1.2277,
+    1.265,
+    1.1795,
+    1.2589
+   ],
+   "bytes": 52715
+  },
   "leque-de-aco": {
    "arquivo": "leque-de-aco.mp3",
    "descricao": "básico da Kitana: o leque girando",
@@ -10881,6 +11119,23 @@
     1.4213
    ],
    "bytes": 45758
+  },
+  "levantar-de-novo": {
+   "arquivo": "levantar-de-novo.mp3",
+   "descricao": "Invencível: levantar de novo",
+   "versoes": [
+    0.0,
+    2.28,
+    4.6398,
+    6.8454
+   ],
+   "duracoes": [
+    2.2,
+    2.2798,
+    2.1256,
+    2.2335
+   ],
+   "bytes": 71166
   },
   "levi-preparo": {
    "arquivo": "levi-preparo.mp3",
@@ -19450,6 +19705,23 @@
    ],
    "bytes": 77701
   },
+  "pacto": {
+   "arquivo": "pacto.mp3",
+   "descricao": "Constantine: o pacto",
+   "versoes": [
+    0.0,
+    2.0729,
+    4.1754,
+    6.1544
+   ],
+   "duracoes": [
+    1.9929,
+    2.0225,
+    1.899,
+    1.8762
+   ],
+   "bytes": 76542
+  },
   "palma-gentil": {
    "arquivo": "palma-gentil.mp3",
    "descricao": "básico da Hinata: o Byakugan e a palma",
@@ -19619,23 +19891,6 @@
     1.4213
    ],
    "bytes": 54355
-  },
-  "pentagrama": {
-   "arquivo": "pentagrama.mp3",
-   "descricao": "família pentagrama",
-   "versoes": [
-    0.0,
-    1.48,
-    3.0108,
-    4.4434
-   ],
-   "duracoes": [
-    1.4,
-    1.4508,
-    1.3527,
-    1.4213
-   ],
-   "bytes": 76078
   },
   "percepcao-espacial": {
    "arquivo": "percepcao-espacial.mp3",
@@ -22680,6 +22935,23 @@
    ],
    "bytes": 62303
   },
+  "sem-recuo": {
+   "arquivo": "sem-recuo.mp3",
+   "descricao": "Raphael: sem recuo",
+   "versoes": [
+    0.0,
+    1.7528,
+    3.5659,
+    5.4358
+   ],
+   "duracoes": [
+    1.6728,
+    1.7332,
+    1.7899,
+    1.7547
+   ],
+   "bytes": 50483
+  },
   "senbonzakura-corte": {
    "arquivo": "senbonzakura-corte.mp3",
    "descricao": "básico do Byakuya: o corte e as pétalas",
@@ -23445,6 +23717,23 @@
    ],
    "bytes": 57639
   },
+  "soco-supersonico": {
+   "arquivo": "soco-supersonico.mp3",
+   "descricao": "Invencível: o soco supersônico",
+   "versoes": [
+    0.0,
+    1.4977,
+    3.0194,
+    4.464
+   ],
+   "duracoes": [
+    1.4177,
+    1.4416,
+    1.3646,
+    1.3923
+   ],
+   "bytes": 45631
+  },
   "soco-titanico": {
    "arquivo": "soco-titanico.mp3",
    "descricao": "básico de Eren: soco de titã grave e pesado e o chiado do vapor",
@@ -23631,6 +23920,23 @@
     1.1167
    ],
    "bytes": 45997
+  },
+  "spawn-preparo": {
+   "arquivo": "spawn-preparo.mp3",
+   "descricao": "Spawn: o necroplasma (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 52734
   },
   "spin-attack": {
    "arquivo": "spin-attack.mp3",

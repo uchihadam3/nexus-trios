@@ -52,15 +52,6 @@ def chute_voador(rng, v):
     return x
 
 
-def chute_giratorio(rng, v):
-    x = _z(0.7)
-    for k in range(2):
-        poe(x, _whoosh(rng, 0.18, 600 + 300 * k, 2600, 0.6, g=0.6), k * 0.14)
-    poe(x, B.soco_leve(rng, v), 0.3, 1.0)
-    poe(x, passa(rosa(rng, n_de(0.3)), 200, 1500, 2) * env(n_de(0.3), 0.01, 0.12) * 0.3, 0.32)
-    return x
-
-
 def pow_cartoon(rng, v):
     x = _z(0.6)
     poe(x, B.soco_pesado(rng, v), 0, 0.9)
@@ -638,18 +629,6 @@ def encanto(rng, v):
     return reverb(x, 0.7, 0.35, 9000)
 
 
-def caveira(rng, v):
-    n = n_de(1.3)
-    x = passa(rosa(rng, n), 100, 1200, 2) * sobe_e_some(n, 0.35, 1.3) * 0.6
-    x += _corta(_tom(nota(45), nota(38), 1.0, 0.6, 0.2), 1.3)
-    t = np.arange(n) / SR
-    riso = np.zeros(n)
-    for k in range(5):
-        m = n_de(0.08)
-        poe(riso, seno(varre(nota(57), nota(52), m), m) * env(m, 0.005, 0.04) * 0.15, 0.3 + k * 0.1)
-    return reverb(x + riso, 0.7, 0.35, 2500)
-
-
 def clones(rng, v):
     x = _z(1.1)
     for k in range(5):
@@ -705,16 +684,6 @@ def confusao(rng, v):
     for k in range(4):
         poe(x, _brilho(rng, 0.25, nota(84 + (k % 2) * 5), 0.08, SINO), 0.1 + k * 0.18)
     return reverb(x, 0.5, 0.25)
-
-
-def pentagrama(rng, v):
-    x = _z(1.4)
-    n = n_de(0.6)
-    poe(x, passa(ruido(rng, n), 800, 4000, 2) * env(n, 0.01, 0.3) * 0.3, 0)
-    for k, m in enumerate((38, 44, 50)):
-        poe(x, satura(seno(np.full(n_de(1.0), nota(m)), n_de(1.0)), 2) * env(n_de(1.0), 0.1, 0.5) * 0.12, 0.1 + k * 0.1)
-    poe(x, B.fogo(rng, v)[: n_de(0.8)] * 0.6, 0.45)
-    return reverb(x, 0.7, 0.3, 3000)
 
 
 def invocacao(rng, v):
@@ -870,20 +839,6 @@ def _tilim(rng, seg=0.06, lo=2200, hi=7000):
     return x / 5 ** 0.5 + passa(ruido(rng, n), 3000, 9000, 2) * env(n, 0.0002, 0.003) * 0.6
 
 
-def corrente(rng, v):
-    """Corrente: o chacoalhar dos elos voando, o "zip" passando, e o aperto em volta do alvo."""
-    x = _z(1.1)
-    voa = n_de(0.5)
-    poe(x, assobio(rng, voa, 600, 3500, 1.2, 0.5) * sobe_e_some(voa, 0.7, 1.4) * 0.35, 0)
-    for _ in range(46):                                                        # elos chacoalhando no voo
-        poe(x, _tilim(rng) * rng.uniform(0.08, 0.22), rng.uniform(0.0, 0.5) ** 0.8)
-    for _ in range(28):                                                        # enrolando e apertando
-        poe(x, _tilim(rng, 0.08, 1500, 5000) * rng.uniform(0.15, 0.32), 0.5 + rng.uniform(0, 0.16))
-    poe(x, B._placa_de_metal(rng, n_de(0.3), 300, 4000, 30, 0.06) * 0.35 + B._baque_seco(rng, n_de(0.3), 110, 0.05) * 0.5, 0.62)
-    return reverb(x, 0.3, 0.14)
-
-
-# ================================================================== golpes icônicos (sons de verdade)
 def _faiscas(rng, n, taxa0, taxa1, lo=1500, hi=11000, forca=1.0):
     """Estalos de arco elétrico: impulsos em tempos aleatórios, com força de cauda longa
     (a maioria fraca, de vez em quando um estalo bem forte), como faísca de verdade."""

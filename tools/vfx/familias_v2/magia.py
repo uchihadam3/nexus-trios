@@ -249,37 +249,6 @@ def confusao(T, t, rng):
     return G, H
 
 
-def pentagrama(T, t, rng):
-    """Pentagrama: um círculo infernal se desenha no chão, as pontas acendem e chamas sobem."""
-    G, H = vazio(T)
-    env = apaga(t, 0.75, 1)
-    sq = 0.4
-    prog = rel(t, 0, 0.4)
-    aro = T.ring(0.68, 0.014, cy=0.3, squash=1 / sq) * janela(t, 0, 0.15) * 1.4
-    pts = []
-    for k in range(6):
-        a = -math.pi / 2 + TAU * (k * 2 % 5) / 5
-        pts.append((math.cos(a) * 0.66, 0.3 + math.sin(a) * 0.66 * sq))
-    tracado = []
-    n_tot = 5 * 10
-    n = int(prog * n_tot)
-    for k in range(5):
-        (ax, ay), (bx, by) = pts[k], pts[k + 1]
-        for j in range(10):
-            if len(tracado) <= n:
-                u = j / 9
-                tracado.append((ax + (bx - ax) * u, ay + (by - ay) * u))
-    linha = T.polyline(tracado, 0.012, 1)
-    chamas = T.zero()
-    for k in range(5):
-        x, y = pts[k]
-        c = np.exp(-((T.U - x) / 0.05) ** 2) * smooth(y - T.V, 0, 0.02) * smooth(T.V - y + 0.3 * janela(t, 0.4, 0.55), 0, 0.15)
-        chamas += c * (0.6 + 0.4 * _subindo(T, 641 + k, t, 0.04, 1.5).clip(-1, 1))
-    G += (aro + T.glow(linha, 1.3, 1.2, 0.02) + chamas * 1.2) * env
-    H += (linha + chamas * 0.4) * env
-    return G, H
-
-
 def invocacao(T, t, rng):
     """Invocação: um círculo se abre no chão e uma silhueta de luz sobe dele, com faíscas."""
     G, H = vazio(T)
@@ -302,13 +271,11 @@ REGISTRO = [
     ("runas", runas, GRANDE, "círculo de runas", False),
     ("sarcofago", sarcofago, GRANDE, "caixa negra fechando", False),
     ("encanto", encanto, GRANDE, "estrelas de encanto", False),
-    ("caveira", caveira, GRANDE, "caveira de luz", False),
     ("clones", clones, GRANDE, "silhuetas em leque", False),
     ("teleporte", teleporte, GRANDE, "implode e reaparece", False),
     ("fenda", fenda, GRANDE, "rasgo dimensional", False),
     ("sorte", sorte, GRANDE, "dados rolando", False),
     ("confete", confete, GRANDE, "estouro de festa", False),
     ("confusao", confusao, GRANDE, "interrogações girando", False),
-    ("pentagrama", pentagrama, GRANDE, "pentagrama infernal", False),
     ("invocacao", invocacao, GRANDE, "silhueta invocada", False),
 ]
