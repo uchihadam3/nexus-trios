@@ -1091,6 +1091,20 @@
   "laco": false,
   "bytes": 42410
  },
+ "campo_incendiado": {
+  "descricao": "Roy · o anel de fogo e a coluna que detona",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 33978
+ },
  "campo_magneto": {
   "descricao": "Magneto · o campo e os pedaços de metal (Preparo, laço)",
   "quadros": 12,
@@ -1525,6 +1539,20 @@
   "laco": false,
   "bytes": 66136
  },
+ "chuva_de_fogo": {
+  "descricao": "Roy · as bolas de fogo caindo e as labaredas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 28206
+ },
  "chuva_de_meteoros": {
   "descricao": "meteoros caindo",
   "quadros": 12,
@@ -1636,6 +1664,20 @@
   ],
   "laco": false,
   "bytes": 58698
+ },
+ "comando_da_banda": {
+  "descricao": "Griffith · a bandeira do Bando do Falcão",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 20632
  },
  "cometa": {
   "descricao": "luz que corre pela linha de ação (+x)",
@@ -2211,6 +2253,20 @@
   "laco": false,
   "bytes": 96874
  },
+ "destino_ascendente": {
+  "descricao": "Griffith · o sol negro e as asas de Femto",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 62522
+ },
  "deus_do_trovao": {
   "descricao": "Thor · o raio gigante do céu",
   "quadros": 12,
@@ -2406,6 +2462,20 @@
   ],
   "laco": false,
   "bytes": 39134
+ },
+ "eclipse_preparo": {
+  "descricao": "Griffith · o eclipse se formando (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 25852
  },
  "encanto": {
   "descricao": "estrelas de encanto",
@@ -3121,6 +3191,20 @@
   "laco": false,
   "bytes": 87342
  },
+ "experiencia_dourada": {
+  "descricao": "Giorno · as flores desabrochando e a luz",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 59096
+ },
  "explosao": {
   "descricao": "explosão",
   "quadros": 12,
@@ -3218,6 +3302,20 @@
   ],
   "laco": false,
   "bytes": 27396
+ },
+ "facas_do_dio": {
+  "descricao": "Dio · as facas paradas no ar que voam juntas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 38000
  },
  "facas_voando": {
   "descricao": "facas em viagem (+x)",
@@ -4296,6 +4394,20 @@
   ],
   "laco": false,
   "bytes": 37002
+ },
+ "ignicao_preparo": {
+  "descricao": "Roy · o círculo da salamandra na luva (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 47918
  },
  "impeto_amazona": {
   "descricao": "Mulher-Maravilha · escudo, espada e a estrela",
@@ -6187,6 +6299,20 @@
   "laco": false,
   "bytes": 83768
  },
+ "ouro_preparo": {
+  "descricao": "Giorno · a aura dourada e a joaninha (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 17512
+ },
  "palma_faixa": {
   "descricao": "Killua · o raio da Palma relâmpago até o rival (faixa)",
   "quadros": 12,
@@ -6550,6 +6676,20 @@
   ],
   "laco": false,
   "bytes": 97662
+ },
+ "precisao_absoluta": {
+  "descricao": "Jotaro · o dedo estelar e as estrelinhas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 14608
  },
  "pregos_amaldicoados": {
   "descricao": "Nobara · três pregos cravam e a energia prende",
@@ -7124,6 +7264,20 @@
   ],
   "laco": false,
   "bytes": 72336
+ },
+ "reflexo_de_dano": {
+  "descricao": "Giorno · as vinhas, as folhas e a joaninha",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 71800
  },
  "reforco": {
   "descricao": "reforço",
@@ -8287,6 +8441,20 @@
   "laco": false,
   "bytes": 56814
  },
+ "star_preparo": {
+  "descricao": "Jotaro · a aura e as estrelas (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 26050
+ },
  "supernova": {
   "descricao": "sol que explode",
   "quadros": 12,
@@ -8650,6 +8818,20 @@
   ],
   "laco": false,
   "bytes": 23304
+ },
+ "the_world_jotaro": {
+  "descricao": "Jotaro · a bolha do tempo parado e os golpes",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 46738
  },
  "tiara_lunar": {
   "descricao": "Sailor Moon: tiara-disco com lua crescente que acerta com brilho",
@@ -9141,6 +9323,20 @@
   "laco": false,
   "bytes": 41046
  },
+ "visao_de_falcao": {
+  "descricao": "Griffith · o falcão mergulhando e a mira",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 21930
+ },
  "visao_sismica": {
   "descricao": "Toph · Visão sísmica: as ondas, o contorno e a terra prendendo",
   "quadros": 12,
@@ -9378,6 +9574,34 @@
   ],
   "laco": false,
   "bytes": 56964
+ },
+ "za_warudo": {
+  "descricao": "Dio · a esfera do relógio e o rolo compressor",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 63184
+ },
+ "za_warudo_preparo": {
+  "descricao": "Dio · o relógio dourado batendo (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 15912
  },
  "zero_absoluto": {
   "descricao": "Hyoga · o campo congelando com as estacas de gelo",

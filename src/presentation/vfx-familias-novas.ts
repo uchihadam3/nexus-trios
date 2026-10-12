@@ -539,6 +539,18 @@ export const FAMILIAS_NOVAS = {
   armadura_de_aco: n({ nome: 'Armadura de aço', grupo: 'apoio', impacto: 'armadura_de_aco', escala: 2.3, tempo: 1.0, cor: '#c8d0d8', tinta: 'fixa' }),
   circulo_protetor: n({ nome: 'Círculo protetor', grupo: 'apoio', impacto: 'circulo_protetor', escala: 2.3, tempo: 1.0, cor: '#8ad8ff', tinta: 'fixa' }),
   barreira_transmutada: n({ nome: 'Barreira transmutada', grupo: 'apoio', impacto: 'barreira_transmutada', escala: 2.4, tempo: 1.0, cor: '#9ac8f0', tinta: 'fixa' }),
+  // rodada 9: Roy, Griffith, Jotaro, Dio e Giorno (tools/vfx/familias_v2/rodada09.py)
+  chuva_de_fogo: n({ nome: 'Chuva de fogo', grupo: 'elemento', impacto: 'chuva_de_fogo', escala: 2.5, tempo: 1.0, cor: '#ff8a3a', tinta: 'fixa' }),
+  campo_incendiado: n({ nome: 'Campo incendiado', grupo: 'elemento', preparo: 'ignicao_preparo', impacto: 'campo_incendiado', escala: 2.4, tempo: 1.0, cor: '#ff7a2a', tinta: 'fixa' }),
+  visao_de_falcao: n({ nome: 'Visão de falcão', grupo: 'magia', impacto: 'visao_de_falcao', escala: 2.3, tempo: 1.0, cor: '#e8e4f0', tinta: 'fixa' }),
+  comando_da_banda: n({ nome: 'Comando da Banda', grupo: 'apoio', impacto: 'comando_da_banda', escala: 2.3, tempo: 1.0, cor: '#e8dcc8', tinta: 'fixa' }),
+  destino_ascendente: n({ nome: 'Destino ascendente', grupo: 'especial', preparo: 'eclipse_preparo', impacto: 'destino_ascendente', escala: 2.6, tempo: 1.0, cor: '#e84a5a', tinta: 'fixa' }),
+  precisao_absoluta: n({ nome: 'Precisão absoluta', grupo: 'físico', impacto: 'precisao_absoluta', escala: 2.3, tempo: 1.0, cor: '#9ab0ff', tinta: 'fixa' }),
+  the_world_jotaro: n({ nome: 'The World', grupo: 'especial', preparo: 'star_preparo', impacto: 'the_world_jotaro', escala: 2.6, tempo: 1.0, cor: '#8aa0ff', tinta: 'fixa' }),
+  facas_do_dio: n({ nome: 'Facas voadoras', grupo: 'projétil', impacto: 'facas_do_dio', escala: 2.4, tempo: 1.0, cor: '#ffd36a', tinta: 'fixa' }),
+  za_warudo: n({ nome: 'O Mundo', grupo: 'especial', preparo: 'za_warudo_preparo', impacto: 'za_warudo', escala: 2.6, tempo: 1.0, cor: '#ffc84a', tinta: 'fixa' }),
+  reflexo_de_dano: n({ nome: 'Reflexo de dano', grupo: 'apoio', impacto: 'reflexo_de_dano', escala: 2.3, tempo: 1.0, cor: '#ffd84a', tinta: 'fixa' }),
+  experiencia_dourada: n({ nome: 'Experiência dourada', grupo: 'apoio', preparo: 'ouro_preparo', impacto: 'experiencia_dourada', escala: 2.5, tempo: 1.0, cor: '#ffe07a', tinta: 'fixa' }),
   mugen_tsukuyomi: n({ nome: 'Mugen Tsukuyomi', grupo: 'especial', impacto: 'mugen_tsukuyomi', noCentro: true, escala: 2.6, tempo: 1.0, cor: '#ff4a5a', tinta: 'fixa' }),
 } as const satisfies Record<string, Familia>;
 
