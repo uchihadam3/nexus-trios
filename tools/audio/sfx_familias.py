@@ -984,15 +984,6 @@ def medo(rng, v):
     return reverb(x, 0.8, 0.4, 3000)
 
 
-def exposto(rng, v):
-    x = _z(1.0)
-    for k in range(4):
-        poe(x, modal(n_de(0.3), rng.uniform(2000, 3500), rng=rng, **VIDRO) * env(n_de(0.3), 0.001, 0.12) * 0.2, 0.1 + k * 0.03)
-    poe(x, estalo(rng, n_de(0.2), 1500, 9000, 0.02) * 0.6, 0.1)
-    poe(x, graos(rng, n_de(0.6), 20, 0.0, 0.5, 2000, 8000, 0.004) * 0.35, 0.3)
-    return reverb(x, 0.4, 0.2)
-
-
 def estrela_invencivel(rng, v):
     x = _z(1.4)
     escala = (72, 76, 79, 84, 79, 84, 88, 91)
@@ -1948,7 +1939,7 @@ SONS_NOVOS = {
 }
 # volume pela prioridade: habilidades no nível dos golpes; apoio e status mais baixos
 _BAIXO = {"brasas-renascendo", "cura-em-area", "regeneracao", "grito-de-guerra", "velocidade", "escudo-tech", "barreira-magica", "armadura", "resgate",
-          "bencao", "lanche", "purificacao", "enfraquecimento", "lentidao", "marca", "silencio", "medo", "exposto", "hipnose",
+          "bencao", "lanche", "purificacao", "enfraquecimento", "lentidao", "marca", "silencio", "medo", "hipnose",
           "encanto", "runas", "petalas", "regeneracao", "confusao", "estrela-invencivel", "disco", "flecha"}
 _ALTO = {"copia", "esquiva", "ultima-resistencia", "sono", "cegueira", "errou", "barreira-anula", "dissipar", "reflexo", "espinhos", "vampirismo", "provocar", "renascer", "ressurreicao", "soco-serio", "supernova", "kamehameha", "canhao-de-energia", "foguete", "tempestade", "punho-gigante", "pisao",
          "martelo", "espadao", "buraco-negro", "transformacao-v2", "dragao", "dominio"}

@@ -3,6 +3,8 @@ import { UNICAS } from '../engine/unicas';
 import { STEP, stepBattle } from '../engine/battle';
 import type { Battle, BattleEvent } from '../engine/types';
 import { PRESENTATION as P } from './config';
+import { QUADRO_DO_GOLPE } from './golpe-das-folhas';
+import { familia, profileFor } from './vfxProfiles';
 
 export type Family='physical'|'energy'|'electric'|'fire'|'magic'|'dark'|'psychic'|'slash'|'prison'|'shield'|'heal'|'regen'|'buff'|'debuff'|'interrupt'|'ko'|'turn'|'grand';
 export interface Beat {event:BattleEvent;events:BattleEvent[];before:Battle;after:Battle;duration:number;family:Family;grand:boolean;elapsed:number;impacted:boolean;periodic?:boolean;trace?:BeatTrace;
@@ -15,10 +17,15 @@ export interface Beat {event:BattleEvent;events:BattleEvent[];before:Battle;afte
   /** Um traço disparou sozinho, fora da ação de alguém (fica com um passo de reação). */
   traco?:boolean;
   /** Duração sem as etapas (o ritmo fixo da ação). */
-  base?:number}
+  base?:number;
+  /** Quanto antes do impacto a folha do golpe (e o som dela) começa, para o golpe desenhado cair junto do número. */
+  antecipa?:number;
+  /** A folha do golpe já começou (a deixa 'golpe' já saiu). */
+  golpeou?:boolean}
 export interface Direction {battle:Battle;visible:Battle;queue:Beat[];active:Beat|null;simIdle:number;complete:boolean;serial:number;signals:BattleEvent[]}
 export interface PresentationCheckpoint {version?:2;battleTime:number;nextEvent:number;rng:number;visibleNextEvent:number;activeEventId:number|null;activeElapsed:number;impacted:boolean;serial:number;simIdle?:number}
-export interface Cue {event:BattleEvent;family:Family;phase:'start'|'impact';grand:boolean}
+/** 'golpe': a folha do golpe (e o som dela) começa antes do impacto; o impacto que vem depois traz `antecipado`. */
+export interface Cue {event:BattleEvent;family:Family;phase:'start'|'golpe'|'impact';grand:boolean;antecipado?:boolean}
 export interface BeatTrace {eventId:number;kind:BattleEvent['kind'];duration:number;realStart:number;realImpact:number|null;realFinish:number|null;speed:number;queueLength:number;battleTime:number;source:string;haste:number;slow:number;rooted:number;shifts:{target:string;value:number}[]}
 export function familyOf(event:BattleEvent,battle:Battle):Family {
   if(event.kind==='ko'||event.kind==='turn'||event.kind==='interrupt')return event.kind;
@@ -254,7 +261,32 @@ function makeBeat(event:BattleEvent,events:BattleEvent[],before:Battle,after:Bat
   beat.etapas=beat.passos.map((_,k)=>k+1);
   const ultimo=beat.passos.at(-1)!;
   beat.duration+=ultimo.em;
+  beat.antecipa=antecipaDoGolpe(beat);
   return beat;
+}
+/*
+ * O golpe desenhado cai junto do número (pedido do jogador: "o dano tá aparecendo antes da animação … tem que ser
+ * no impacto da animação o dano aparecer"). Muitas folhas contam o golpe inteiro — a onda sobe e só quebra no
+ * quadro 6, o punho desce e só bate no quadro 3 —, então a folha e o som dela começam antes do impacto, o bastante
+ * para o quadro do golpe (QUADRO_DO_GOLPE) chegar no instante em que o número sai. As contas da duração da folha
+ * são as mesmas do BattleEffects.
+ */
+export function antecipaDoGolpe(beat:Beat):number{
+  if((beat.event.kind!=='basic'&&beat.event.kind!=='skill')||beat.periodic||beat.traco)return 0;
+  const ator=beat.after.fighters.find(f=>f.uid===beat.event.source);
+  const perfil=ator?profileFor(ator.characterId,beat.event.skill):undefined;
+  if(!perfil)return 0;
+  const fam=familia(perfil.family),quadro=QUADRO_DO_GOLPE[fam.impacto]??0;
+  // a varredura e o golpe que quica já têm a hora certa de bater em cada alvo
+  if(!quadro||fam.varre||fam.encadeia)return 0;
+  const viaja=!!perfil.travel&&!!beat.event.target&&beat.event.target!==beat.event.source;
+  const dur=Math.max(.42,beat.duration*(1-P.impactAt)*fam.tempo),pula=viaja&&fam.pula?fam.pula:0,folha=dur/(1-pula);
+  let antes=Math.max(0,quadro/12*folha-pula*folha);
+  // o objeto que voa chega no impacto: a folha só pode começar um instante antes de ele chegar
+  if(viaja)antes=Math.min(antes,.2);
+  antes=Math.min(antes,duracaoBase(beat)*P.impactAt*.9);
+  // menos que dois quadros não se vê: a folha sai junto do impacto
+  return antes>=.1?antes:0;
 }
 function collect(d:Direction,events:BattleEvent[],before:Battle,after:Battle,legacy=false,previous=false){
   if(!events.length)return;
@@ -330,6 +362,7 @@ export function restoreDirection(initial:Battle,saved:Battle,checkpoint:Presenta
     d.active=d.queue[index];d.queue=d.queue.slice(index+1);
     d.active.elapsed=Math.min(d.active.duration,Math.max(0,checkpoint.activeElapsed));
     d.active.impacted=checkpoint.impacted;
+    d.active.golpeou=checkpoint.impacted;
     if(d.active.impacted)d.active.etapa=etapaNoTempo(d.active);
     d.visible=d.active.impacted?visivelNaEtapa(d.active,d.active.etapa!):d.active.before;
   }else{
@@ -354,12 +387,19 @@ export function advanceDirection(d:Direction,seconds:number,onCue?:(cue:Cue)=>vo
     const limit=beat.impacted?beat.duration:impacto;
     beat.elapsed=Math.min(limit,beat.elapsed+elapsed);
     const etapas=beat.etapas??[1];
+    // a folha do golpe começa antes, para o golpe desenhado cair no impacto (sempre sai antes da deixa do impacto)
+    if(!beat.golpeou&&beat.antecipa&&beat.elapsed>=impacto-beat.antecipa-1e-8){
+      beat.golpeou=true;
+      onCue?.({event:beat.event,family:beat.family,phase:'golpe',grand:beat.grand});
+      return;
+    }
     if(!beat.impacted&&beat.elapsed>=limit-1e-8){
       beat.impacted=true;beat.etapa=etapas[0];
       if(beat.trace)beat.trace.realImpact=performance.now();
       d.visible=visivelNaEtapa(beat,beat.etapa!);
       d.signals.push(...beat.events.filter(e=>etapaDoEvento(beat,e)<=beat.etapa!));
-      onCue?.({event:beat.event,family:beat.family,phase:'impact',grand:beat.grand});
+      beat.golpeou=true;
+      onCue?.({event:beat.event,family:beat.family,phase:'impact',grand:beat.grand,antecipado:!!beat.antecipa});
     }else if(beat.impacted&&(beat.etapa??1)<etapas.at(-1)!&&beat.elapsed>=impacto+(beat.passos?.[beat.etapa!]?.em??0)-1e-8){
       /* o próximo passo da cadeia: um efeito por vez, cada um na sua hora */
       const anterior=beat.etapa!;beat.etapa=anterior+1;

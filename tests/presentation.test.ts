@@ -68,6 +68,8 @@ describe('Direção sem alterar regras',()=>{
   for(let frame=0;frame<20000&&!d.complete;frame++){
    advanceDirection(d,.04,cue=>{
     const beat=d.active!;
+    // a folha do golpe começa antes do impacto, mas nada visível muda nela
+    if(cue.phase==='golpe'){expect(d.visible).toEqual(beat.before);return;}
     if(cue.phase==='start'){
      expect(d.visible).toEqual(beat.before);
      expect(beat.before.time).toBeGreaterThanOrEqual(lastTime-1e-6);
@@ -95,7 +97,7 @@ describe('Direção sem alterar regras',()=>{
   for(let frame=0;frame<20000&&!d.complete;frame++){
    advanceDirection(d,.04,cue=>{
     if(cue.phase==='start')starts.push({...d.active!,events:[...d.active!.events]});
-    else impacts.push(cue.event.id);
+    else if(cue.phase==='impact')impacts.push(cue.event.id);
    },frame%100<50?1:2);
    const fresh=d.battle.events.filter(e=>e.id>lastId);
    actions.push(...fresh.filter(e=>e.kind==='basic'||e.kind==='skill'||e.kind==='cast').map(e=>e.id));
@@ -246,11 +248,12 @@ describe('Direção sem alterar regras',()=>{
   const d=createDirection(createBattle(a,b,42));
   let starts=0,impacts=0,previousId=0,finishes=0;
   for(let frame=0;frame<20000&&!d.complete;frame++){
-    const cues:('start'|'impact')[]=[];
+    const cues:('start'|'golpe'|'impact')[]=[];
     const seconds=frame%5===0?1:.04;
     const finishing=d.active?.impacted&&d.active.elapsed+Math.min(P.renderIntervalMs/1000,seconds)*2>=d.active.duration-1e-8;
     advanceDirection(d,seconds,cue=>{
     cues.push(cue.phase);
+    if(cue.phase==='golpe'){expect(starts).toBe(impacts+1);expect(d.visible).toEqual(d.active!.before);return;}
     if(cue.phase==='start'){
      expect(starts).toBe(impacts);
      expect(cue.event.id).toBeGreaterThan(previousId);
@@ -268,6 +271,25 @@ describe('Direção sem alterar regras',()=>{
   expect(starts).toBe(impacts);
   expect(starts).toBeGreaterThan(50);
   expect(finishes).toBeGreaterThan(50);
+ });
+ it('o golpe desenhado cai junto do número: a folha começa antes e o quadro do golpe chega no impacto',()=>{
+  // pedido do jogador: "o dano tá aparecendo antes da animação … tem que ser no impacto da animação o dano aparecer"
+  const d=createDirection(createBattle(['aquaman','rocket','greenlantern'],b,7));
+  let antecipados=0;
+  for(let frame=0;frame<30000&&!d.complete;frame++){
+   let golpeEm:number|null=null;
+   advanceDirection(d,.04,cue=>{
+    const beat=d.active!;
+    if(cue.phase==='golpe'){golpeEm=beat.elapsed;expect(beat.impacted).toBe(false);expect(d.visible).toEqual(beat.before);}
+    if(cue.phase==='impact'&&beat.antecipa){
+     antecipados++;expect(cue.antecipado).toBe(true);expect(beat.golpeou).toBe(true);
+     const impacto=duracaoBase(beat)*P.impactAt;
+     expect(beat.antecipa).toBeLessThanOrEqual(impacto*.9+1e-9);
+    }
+   });
+   if(golpeEm!==null){const beat=d.active!;expect(duracaoBase(beat)*P.impactAt-golpeEm).toBeLessThanOrEqual(beat.antecipa!+1e-6);}
+  }
+  expect(antecipados).toBeGreaterThan(0);
  });
  it('atualizar a página retoma a fila e o HP visível no mesmo Beat causal',()=>{
   for(const phase of ['before','after'] as const){

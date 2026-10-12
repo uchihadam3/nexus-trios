@@ -713,6 +713,20 @@
   "laco": false,
   "bytes": 70042
  },
+ "barreira_sagrada": {
+  "descricao": "Zelda · os cristais de diamante no trio",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 24500
+ },
  "barreira_transmutada": {
   "descricao": "Alphonse · as cúpulas de pedra em volta do trio",
   "quadros": 12,
@@ -2337,6 +2351,20 @@
   "laco": false,
   "bytes": 41274
  },
+ "chuva_de_socos": {
+  "descricao": "Tifa · a sequência de socos com rastro",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 17302
+ },
  "ciborgue_preparo": {
   "descricao": "Ciborgue · o braço virando canhão (Preparo, laço)",
   "quadros": 12,
@@ -2896,6 +2924,20 @@
   ],
   "laco": false,
   "bytes": 39672
+ },
+ "corte_sombrio": {
+  "descricao": "Sephiroth · o corte longuíssimo e as penas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 20964
  },
  "corte_vertical": {
   "descricao": "corte vertical",
@@ -3835,6 +3877,20 @@
   "laco": false,
   "bytes": 46296
  },
+ "escudo_hyliano": {
+  "descricao": "Link · o Escudo Hyliano, as faíscas e o corte",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 11564
+ },
  "escudo_mental": {
   "descricao": "Jean Grey · a cúpula psíquica e os hexágonos",
   "quadros": 12,
@@ -4703,6 +4759,20 @@
   "laco": false,
   "bytes": 38900
  },
+ "explosao_final": {
+  "descricao": "Tifa · o soco no chão, a coluna e a onda",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 34354
+ },
  "explosao_grande": {
   "descricao": "explosão em cogumelo",
   "quadros": 12,
@@ -4744,20 +4814,6 @@
   ],
   "laco": false,
   "bytes": 126480
- },
- "exposto": {
-  "descricao": "guarda trincando",
-  "quadros": 12,
-  "grade": [
-   3,
-   4
-  ],
-  "tamanho": [
-   192,
-   192
-  ],
-  "laco": false,
-  "bytes": 27396
  },
  "facada_de_myers": {
   "descricao": "Básico do Myers: a faca erguida",
@@ -5137,6 +5193,20 @@
   "laco": true,
   "bytes": 6360
  },
+ "flecha_de_luz": {
+  "descricao": "Zelda · a flecha de luz e o selo de silêncio",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 15248
+ },
  "flecha_do_gaviao": {
   "descricao": "Básico do Gavião Arqueiro: a flecha e a ponta explosiva",
   "quadros": 12,
@@ -5290,6 +5360,20 @@
   ],
   "laco": false,
   "bytes": 34546
+ },
+ "forca_de_hercules": {
+  "descricao": "Shazam · o punho dourado e o escudo de força",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 27172
  },
  "forca_monstruosa": {
   "descricao": "Sakura · o soco que racha o chão, com as pétalas",
@@ -5963,6 +6047,20 @@
   "laco": false,
   "bytes": 91262
  },
+ "golpe_de_abertura": {
+  "descricao": "Tifa · os jabs, o gancho e a guarda trincando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 20004
+ },
  "golpe_de_ferrao": {
   "descricao": "Básico do Cavaleiro: o Ferrão e a Alma",
   "quadros": 12,
@@ -6032,6 +6130,20 @@
   ],
   "laco": false,
   "bytes": 61588
+ },
+ "golpe_giratorio": {
+  "descricao": "Link · o giro de 360° e o estouro",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 28334
  },
  "golpe_largo": {
   "descricao": "Golpe largo: varrida que pega dois",
@@ -6312,6 +6424,20 @@
   ],
   "laco": true,
   "bytes": 60272
+ },
+ "heartless_angel": {
+  "descricao": "Sephiroth · a asa enorme e a luz drenada",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 39498
  },
  "hex_de_probabilidade": {
   "descricao": "Feiticeira · os fios, o redemoinho e o sinal",
@@ -7740,6 +7866,20 @@
   ],
   "laco": false,
   "bytes": 15256
+ },
+ "link_preparo": {
+  "descricao": "Link · a espada carregando (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 9590
  },
  "livro_na_cabeca": {
   "descricao": "Básico da Velma: o livro voando e as estrelinhas",
@@ -10233,6 +10373,20 @@
   "laco": false,
   "bytes": 63246
  },
+ "raio_magico": {
+  "descricao": "Shazam · o raio dourado e o símbolo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 27420
+ },
  "raio_mortal": {
   "descricao": "Freeza · o furo do Raio mortal",
   "quadros": 12,
@@ -10989,6 +11143,20 @@
   "laco": false,
   "bytes": 50360
  },
+ "sabedoria_de_salomao": {
+  "descricao": "Shazam · o pergaminho e o Preparo quebrando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 18608
+ },
  "sabre_verde": {
   "descricao": "Básico do Luke: o sabre verde em X",
   "quadros": 12,
@@ -11269,6 +11437,20 @@
   "laco": false,
   "bytes": 11844
  },
+ "selo_da_luz": {
+  "descricao": "Zelda · o círculo com a Triforce e o clarão",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 24060
+ },
  "sem_piedade": {
   "descricao": "Omni-Man · a surra, pancada atrás de pancada",
   "quadros": 12,
@@ -11296,6 +11478,20 @@
   ],
   "laco": false,
   "bytes": 20284
+ },
+ "sephiroth_preparo": {
+  "descricao": "Sephiroth · a asa negra única (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 27752
  },
  "serra_eletrica": {
   "descricao": "Básico do Leatherface: a motosserra balançando",
@@ -11338,6 +11534,20 @@
   ],
   "laco": false,
   "bytes": 75142
+ },
+ "shazam_preparo": {
+  "descricao": "Shazam · as letras S-H-A-Z-A-M (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 27576
  },
  "shoryuken": {
   "descricao": "Shoryuken: o soco que sobe em espiral",
@@ -12501,6 +12711,20 @@
   "laco": true,
   "bytes": 20784
  },
+ "tifa_preparo": {
+  "descricao": "Tifa · os punhos e a energia subindo (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 10414
+ },
  "tiro": {
   "descricao": "traçante em viagem (+x)",
   "quadros": 12,
@@ -13438,6 +13662,20 @@
   ],
   "laco": true,
   "bytes": 15912
+ },
+ "zelda_preparo": {
+  "descricao": "Zelda · o arco de luz e a flecha (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 5656
  },
  "zero_absoluto": {
   "descricao": "Hyoga · o campo congelando com as estacas de gelo",

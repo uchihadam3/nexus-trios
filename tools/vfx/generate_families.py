@@ -1286,6 +1286,9 @@ def main(argv):
         manifesto[nome] = {"descricao": descricao, "quadros": FRAMES, "grade": [COLS, ROWS], "tamanho": [T.w, T.h], "laco": laco, "bytes": destino.stat().st_size}
         print(f"{nome:18s} {destino.stat().st_size / 1024:6.1f} KB  {descricao}")
     manifest_path.write_text(json.dumps(dict(sorted(manifesto.items())), indent=1, ensure_ascii=False) + "\n")
+    # o quadro do golpe de cada folha (o número de dano cai nele)
+    import golpe_das_folhas
+    golpe_das_folhas.main()
 
 
 if __name__ == "__main__":

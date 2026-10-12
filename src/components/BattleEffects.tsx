@@ -56,6 +56,8 @@ export function BattleEffects({battle,beat,anchors,enabled,reduced,medal=80}:{ba
   const fam=chave?familia(chave):undefined;
   const cor=perfil?.color??character?.color??'#cfe6ff';
   const landed=beat?.impacted??false;
+  // a folha do golpe começa um pouco antes do impacto, para o golpe desenhado cair junto do número (director: antecipaDoGolpe)
+  const golpeando=landed||(!reduced&&!!beat?.golpeou);
   const area=isAreaBeat(beat,battle);
   const D=beat?.duration??2,I=P.impactAt;
   const p1=beat?point(beat.event.source):{x:50,y:50};
@@ -73,7 +75,7 @@ export function BattleEffects({battle,beat,anchors,enabled,reduced,medal=80}:{ba
   // a criatura invocada ataca os rivais; o Status de invocação em quem invocou não ganha a criatura em cima dele
   const criatura=!!chave&&chave.startsWith('inv_');
   const alvos=beat?[...new Set(beat.events.filter(e=>e.target&&['damage','status','interrupt','shield','heal','ko','block','revive','cleanse','dispel'].includes(e.kind)&&!(criatura&&e.target===beat.event.source&&e.kind==='status')).map(e=>e.target!))].slice(0,3):[];
-  if(beat&&landed&&!alvos.length&&kind!=='turn'&&kind!=='cast')alvos.push(alvoPrincipal??beat.event.source);
+  if(beat&&golpeando&&!alvos.length&&kind!=='turn'&&kind!=='cast')alvos.push(alvoPrincipal??beat.event.source);
 
   /*
    * Varredura (pedido do jogador: "a rajada do Ciclope tá saindo do lado, tinha que sair dele e cortar
@@ -165,7 +167,7 @@ export function BattleEffects({battle,beat,anchors,enabled,reduced,medal=80}:{ba
       nodes.push(camada(fam.faixa,{left:`${p1.x}%`,top:`${p1.y}%`,width:dist,height:h,'--ang':`${ang}deg`,'--faixa':s(D*.78),'--faixa-delay':s(D*I*.55)},'fxl-laco fxl-faixa',`faixa-${id}`));
     }
     // impacto: em cada alvo, depois do contato
-    if(landed){
+    if(golpeando){
       const dur=reduced?.35:Math.max(.42,D*(1-I)*fam.tempo);
       const giroBase=(fam.giro??0)+GIRO_DA_VARIANTE[perfil?.variant??0];
       // efeitos que contam a mecânica por cima da família do golpe: quem foi levantado por um
@@ -237,8 +239,8 @@ export function BattleEffects({battle,beat,anchors,enabled,reduced,medal=80}:{ba
         const espelho=!fam.aponta&&vx<-1?-1:1;
         const giro=fam.aponta?direcao:giroBase*espelho;
         const t=Math.min(medal*(perfil?.scale??fam.escala)*(beat.grand?1.25:1)*(area&&i>0?.9:1),Math.min(size.w,size.h)*.92);
-        // o clarão do contato vem por baixo, no alvo principal
-        if(fam.acento&&i===0&&!reduced)nodes.push(camada(fam.acento,{left:`${p.x}%`,top:`${p.y}%`,width:t*.62,height:t*.62,'--ang':`${direcao}deg`,'--dur':s(Math.max(.35,dur*.6))},'fxl-impacto fxl-acento',`ac-${id}-${uid}`));
+        // o clarão do contato vem por baixo, no alvo principal, na hora do golpe
+        if(fam.acento&&i===0&&!reduced&&landed)nodes.push(camada(fam.acento,{left:`${p.x}%`,top:`${p.y}%`,width:t*.62,height:t*.62,'--ang':`${direcao}deg`,'--dur':s(Math.max(.35,dur*.6))},'fxl-impacto fxl-acento',`ac-${id}-${uid}`));
         // o objeto já voou até aqui: pula o começo da folha, que mostrava ele chegando
         const pula=vai&&fam.pula?fam.pula:0,durDaFolha=dur/(1-pula);
         nodes.push(camada(fam.impacto,{left:`${p.x}%`,top:`${p.y}%`,width:t,height:t,'--ang':`${giro}deg`,'--flip':espelho,'--dur':s(durDaFolha),'--delay':s(((varredura??cadeia)?.passa[uid]??(area?i*.07:0))-pula*durDaFolha)},`fxl-impacto ${reduced?'fxl-parado':''}`,`imp-${id}-${uid}`));
@@ -263,7 +265,7 @@ export function BattleEffects({battle,beat,anchors,enabled,reduced,medal=80}:{ba
         if(e.kind==='heal'&&(e.label==='Vampirismo'||e.label==='Roubo de vida')&&e.target)sobre(e.target,'vampirismo',`vamp-${id}-${e.id}`,.1);
       }
       // os jeitos de bater: o quique, a varrida, o fim da série, a cura, a Carga roubada, a guarda e o relógio
-      for(const x of efeitosDoJeito(beat.event,beat.events,beat.after.fighters))if(x.evento===beat.event||revelado(beat,x.evento))sobre(x.alvo,x.familia,`jeito-${id}-${x.familia}-${x.evento.id}`,x.atraso);
+      if(landed)for(const x of efeitosDoJeito(beat.event,beat.events,beat.after.fighters))if(x.evento===beat.event||revelado(beat,x.evento))sobre(x.alvo,x.familia,`jeito-${id}-${x.familia}-${x.evento.id}`,x.atraso);
     }
   }
 

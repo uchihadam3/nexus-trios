@@ -328,31 +328,6 @@ def medo(T, t, rng):
     return G, H
 
 
-def exposto(T, t, rng):
-    """Exposto: a guarda do alvo trinca como vidro e os cacos caem, deixando um brilho fraco."""
-    G, H = vazio(T)
-    env = apaga(t, 0.75, 1)
-    casca = T.ring(0.42, 0.025) * (1 - rel(t, 0.25, 0.4)) * 1.4
-    sub = np.random.default_rng(741)
-    rach = T.zero()
-    for k in range(8):
-        a = TAU * k / 8 + sub.uniform(-0.2, 0.2)
-        rach += T.polyline(jagged(sub, 0, 0, math.cos(a) * 0.42, math.sin(a) * 0.42, 3, 0.25), 0.01, 1)
-    rach *= janela(t, 0.1, 0.2) * (1 - rel(t, 0.3, 0.45))
-    tt = rel(t, 0.3, 1)
-    cacos = []
-    for k in range(12):
-        a = TAU * k / 12 + sub.uniform(-0.2, 0.2)
-        x = math.cos(a) * (0.42 + 0.2 * tt)
-        y = math.sin(a) * (0.42 + 0.2 * tt) + 0.9 * tt * tt
-        s = 0.05
-        g = a + tt * 6
-        cacos.append(([(x + math.cos(g) * s, y + math.sin(g) * s), (x + math.cos(g + 2.3) * s, y + math.sin(g + 2.3) * s), (x + math.cos(g + 4) * s * 0.7, y + math.sin(g + 4) * s * 0.7)], (1 - tt) * (t > 0.3)))
-    G += (casca + rach * 1.4 + T.polys(cacos, 0.003) * 1.3) * env
-    H += (rach + casca * 0.4) * env
-    return G, H
-
-
 def estrela_invencivel(T, t, rng):
     """Estrela invencível: uma estrela grande pulsa e solta faíscas em arco-íris girando em volta."""
     G, H = vazio(T)
@@ -766,6 +741,5 @@ REGISTRO = [
     ("marca", marca, GRANDE, "alvo travando", False),
     ("silencio", silencio, GRANDE, "som cortado", False),
     ("medo", medo, GRANDE, "olhos na sombra", False),
-    ("exposto", exposto, GRANDE, "guarda trincando", False),
     ("estrela_invencivel", estrela_invencivel, GRANDE, "estrela invencível", False),
 ]

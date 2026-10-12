@@ -41,9 +41,9 @@ describe('compact reusable audiovisual library',()=>{
     expect(decodificado/Object.keys(familias).length).toBeLessThan(2_000_000);
     expect(readdirSync(resolve(root,'public/assets/vfx')).filter(x=>x.endsWith('.webp'))).toEqual(['arena.webp']);
   });
-  it('maps every basic and skill to one of the 150–800 families (signature skills and the own basic attack of each character), all of them used, none dominating',()=>{
-    // o teto subiu de 500 para 800: cada um dos 250 ganha efeitos próprios (rodadas de cinco), três por personagem
-    expect(FAMILIAS.length).toBeGreaterThanOrEqual(150);expect(FAMILIAS.length).toBeLessThanOrEqual(800);
+  it('maps every basic and skill to one of the 150–1600 families (signature skills and the own basic attack of each character), all of them used, none dominating',()=>{
+    // o teto subiu de 500 para 800 e depois para 1600: cada um dos 400 ganha efeitos próprios (rodadas de cinco), três por personagem, o Preparo e o ataque básico
+    expect(FAMILIAS.length).toBeGreaterThanOrEqual(150);expect(FAMILIAS.length).toBeLessThanOrEqual(1600);
     const uso=new Map<string,number>();let total=0;
     for(const character of characters){
       for(const index of [undefined,0,1,2] as const){

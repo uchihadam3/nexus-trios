@@ -302,8 +302,13 @@ class BattleAudio {
       return;
     }
     if(event.kind==='cast'||event.kind==='turn')return;
-    if(grand){this.sound('grand-impacto',PRIORIDADE.grand,panAlvo,chave);if(som)this.sound(som.impacto,PRIORIDADE.importante,panAlvo,chave+1);return;}
-    if(som)this.sound(som.impacto,apoio?PRIORIDADE.apoio:event.kind==='skill'?PRIORIDADE.habilidade:PRIORIDADE.basico,panAlvo,chave);
+    // o som do golpe começa junto da folha dele (antes do impacto, quando o golpe desenhado cai mais tarde na folha)
+    if(phase==='golpe'){
+      if(som)this.sound(som.impacto,grand?PRIORIDADE.importante:apoio?PRIORIDADE.apoio:event.kind==='skill'?PRIORIDADE.habilidade:PRIORIDADE.basico,panAlvo,grand?chave+1:chave);
+      return;
+    }
+    if(grand)this.sound('grand-impacto',PRIORIDADE.grand,panAlvo,chave);
+    if(som&&!cue.antecipado)this.sound(som.impacto,grand?PRIORIDADE.importante:apoio?PRIORIDADE.apoio:event.kind==='skill'?PRIORIDADE.habilidade:PRIORIDADE.basico,panAlvo,grand?chave+1:chave);
   }
   private posicaoDaMusica(){const base=this.stemBuffers[0];return this.running&&this.ctx&&this.musicStartedAt&&base&&this.stemSources[0]?posicaoNoLaco(this.musicOffset,Math.max(0,this.ctx.currentTime-this.musicStartedAt),base.duration,FAIXAS[this.faixa].laco):this.musicOffset;}
   get status(){const base=this.stemBuffers[0];const trackSeconds=this.posicaoDaMusica();return {state:this.ctx?.state??'locked',musicRunning:this.running,mode:this.stemSources.length?'stems':'synth',faixa:this.faixa,stemsPlaying:this.stemSources.filter(Boolean).length,musicSeconds:base?.duration??0,trackSeconds,activeCues:this.vozes.length,loadedCues:this.buffers.size,step:this.step};}

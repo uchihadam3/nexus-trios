@@ -5,7 +5,7 @@ import { BattleScreen } from './screens/BattleScreen';
 import { applyEffects,createBattle,jeitoDeBater } from './engine/battle';
 import { byId } from './data/characters';
 import type { BattleEvent,Effect,Visual } from './engine/types';
-import { montaPassos,visivelNaEtapa,type Beat } from './presentation/director';
+import { antecipaDoGolpe,montaPassos,visivelNaEtapa,type Beat } from './presentation/director';
 import { defaults } from './lib/storage';
 import './styles.css';
 import './presentation/battle.css';
@@ -129,6 +129,8 @@ function Play(){
   const impacto=baseFor*PRESENTATION.impactAt,hit=clock.t>=impacto,elapsed=Math.min(clock.t,durationFor);
   let etapa=0;if(hit){etapa=1;while(etapa<passos.length&&elapsed>=impacto+passos[etapa]!.em-1e-8)etapa++;}
   const live:Beat={...beat,event:{...event,id:clock.id},duration:durationFor,base:baseFor,passos,etapas:passos.map((_,k)=>k+1),etapa,elapsed,impacted:hit};
+  // como na luta: a folha do golpe começa antes, para o golpe desenhado cair junto do número
+  live.antecipa=antecipaDoGolpe(live);live.golpeou=hit||(!!live.antecipa&&clock.t>=impacto-live.antecipa);
   return <BattleScreen battle={hit?visivelNaEtapa(live,etapa):before} beat={clock.t<=durationFor?live:null} index={0} name="Prova visual de combate" settings={settings} paused={false} onPause={()=>{}} onAbandon={()=>{}} onSettings={()=>{}}/>;
 }
 createRoot(document.getElementById('root')!).render(<div className="app"><main className="main battle-main">{play?<Play/>:<BattleScreen battle={impacted?after:before} beat={beat} index={0} name="Prova visual de combate" settings={settings} paused={false} onPause={()=>{}} onAbandon={()=>{}} onSettings={()=>{}}/>}</main></div>);
