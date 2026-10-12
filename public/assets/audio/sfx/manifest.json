@@ -1481,6 +1481,23 @@
    ],
    "bytes": 59434
   },
+  "centopeia": {
+   "arquivo": "centopeia.mp3",
+   "descricao": "Kaneki: os gomos estalando, a cravada e o sangue sugado",
+   "versoes": [
+    0.0,
+    1.6791,
+    3.3138,
+    4.8343
+   ],
+   "duracoes": [
+    1.5991,
+    1.5547,
+    1.4405,
+    1.5198
+   ],
+   "bytes": 67486
+  },
   "chama-do-triangulo": {
    "arquivo": "chama-do-triangulo.mp3",
    "descricao": "básico de Bill Cipher: tilintar distorcido e chama azul estranha",
@@ -1854,6 +1871,23 @@
     1.9289
    ],
    "bytes": 65874
+  },
+  "comando-avancem": {
+   "arquivo": "comando-avancem.mp3",
+   "descricao": "Jinwoo: os olhos acendendo e o exército avançando",
+   "versoes": [
+    0.0,
+    1.98,
+    4.0289,
+    5.9446
+   ],
+   "duracoes": [
+    1.9,
+    1.9689,
+    1.8357,
+    1.9289
+   ],
+   "bytes": 56241
   },
   "comando-da-banda": {
    "arquivo": "comando-da-banda.mp3",
@@ -3351,6 +3385,23 @@
    ],
    "bytes": 28530
   },
+  "espinho-preparo": {
+   "arquivo": "espinho-preparo.mp3",
+   "descricao": "Yor: os ramos e os estiletes (antes do golpe)",
+   "versoes": [
+    0.0,
+    1.38,
+    2.8071,
+    4.1432
+   ],
+   "duracoes": [
+    1.3,
+    1.3471,
+    1.256,
+    1.3198
+   ],
+   "bytes": 59487
+  },
   "espinhos": {
    "arquivo": "espinhos.mp3",
    "descricao": "família espinhos",
@@ -4013,6 +4064,23 @@
     1.4213
    ],
    "bytes": 61307
+  },
+  "fome-de-ghoul": {
+   "arquivo": "fome-de-ghoul.mp3",
+   "descricao": "Kaneki: o kakugan, o ar puxado e o coração",
+   "versoes": [
+    0.0,
+    1.88,
+    3.8253,
+    5.6444
+   ],
+   "duracoes": [
+    1.8,
+    1.8653,
+    1.7391,
+    1.8274
+   ],
+   "bytes": 64565
   },
   "forca-de-aceleracao": {
    "arquivo": "forca-de-aceleracao.mp3",
@@ -4966,6 +5034,23 @@
    ],
    "bytes": 42046
   },
+  "identidade-falsa": {
+   "arquivo": "identidade-falsa.mp3",
+   "descricao": "Loid: a máscara rasgando e a mira travando",
+   "versoes": [
+    0.0,
+    1.6045,
+    3.2649,
+    4.8547
+   ],
+   "duracoes": [
+    1.5245,
+    1.5804,
+    1.5098,
+    1.5492
+   ],
+   "bytes": 51377
+  },
   "ignicao-preparo": {
    "arquivo": "ignicao-preparo.mp3",
    "descricao": "Roy: a luva e o ar esquentando (antes do golpe)",
@@ -5272,6 +5357,23 @@
    ],
    "bytes": 28771
   },
+  "investida-elegante": {
+   "arquivo": "investida-elegante.mp3",
+   "descricao": "Yor: o chute girando e as pétalas",
+   "versoes": [
+    0.0,
+    1.4516,
+    2.9181,
+    4.2601
+   ],
+   "duracoes": [
+    1.3716,
+    1.3865,
+    1.262,
+    1.3698
+   ],
+   "bytes": 70983
+  },
   "investida-inosuke": {
    "arquivo": "investida-inosuke.mp3",
    "descricao": "Inosuke: a investida do javali",
@@ -5425,6 +5527,23 @@
    ],
    "bytes": 53910
   },
+  "jardim-noturno": {
+   "arquivo": "jardim-noturno.mp3",
+   "descricao": "Yor: os estiletes em X e a rosa abrindo",
+   "versoes": [
+    0.0,
+    1.88,
+    3.8253,
+    5.6444
+   ],
+   "duracoes": [
+    1.8,
+    1.8653,
+    1.7391,
+    1.8274
+   ],
+   "bytes": 95994
+  },
   "joia-do-tempo": {
    "arquivo": "joia-do-tempo.mp3",
    "descricao": "Joia do Tempo: o som esticando e a areia",
@@ -5475,6 +5594,23 @@
     1.8274
    ],
    "bytes": 78603
+  },
+  "kakuja-preparo": {
+   "arquivo": "kakuja-preparo.mp3",
+   "descricao": "Kaneki: os tentáculos saindo e o rosnado (antes do golpe)",
+   "versoes": [
+    0.0,
+    1.38,
+    2.8071,
+    4.1432
+   ],
+   "duracoes": [
+    1.3,
+    1.3471,
+    1.256,
+    1.3198
+   ],
+   "bytes": 50538
   },
   "kame-kuririn": {
    "arquivo": "kame-kuririn.mp3",
@@ -7193,6 +7329,23 @@
    ],
    "bytes": 51167
   },
+  "neutralizacao-silenciosa": {
+   "arquivo": "neutralizacao-silenciosa.mp3",
+   "descricao": "Loid: o tiro abafado e o Preparo quebrando",
+   "versoes": [
+    0.0,
+    1.2337,
+    2.4792,
+    3.7982
+   ],
+   "duracoes": [
+    1.1537,
+    1.1655,
+    1.239,
+    1.1931
+   ],
+   "bytes": 57046
+  },
   "nevasca": {
    "arquivo": "nevasca.mp3",
    "descricao": "família nevasca",
@@ -7652,6 +7805,23 @@
    ],
    "bytes": 51087
   },
+  "plano-de-fuga": {
+   "arquivo": "plano-de-fuga.mp3",
+   "descricao": "Loid: a bomba de fumaça e a fuga",
+   "versoes": [
+    0.0,
+    1.7185,
+    3.5884,
+    5.4102
+   ],
+   "duracoes": [
+    1.6385,
+    1.79,
+    1.7418,
+    1.813
+   ],
+   "bytes": 64332
+  },
   "plano-que-plano": {
    "arquivo": "plano-que-plano.mp3",
    "descricao": "Plano? Que plano?: tiros, granada e BUM",
@@ -7872,6 +8042,23 @@
     1.8274
    ],
    "bytes": 62501
+  },
+  "preparar-o-duelo": {
+   "arquivo": "preparar-o-duelo.mp3",
+   "descricao": "Yugi: o Enigma, o leque de cartas e a Carga",
+   "versoes": [
+    0.0,
+    1.8126,
+    3.74,
+    5.544
+   ],
+   "duracoes": [
+    1.7326,
+    1.8474,
+    1.724,
+    1.8059
+   ],
+   "bytes": 72160
   },
   "preparo": {
    "arquivo": "preparo.mp3",

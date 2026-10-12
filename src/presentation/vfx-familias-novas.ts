@@ -564,6 +564,15 @@ export const FAMILIAS_NOVAS = {
   leitura_mental: n({ nome: 'Leitura mental', grupo: 'magia', impacto: 'leitura_mental', escala: 2.3, tempo: 1.0, cor: '#ffa8d8', tinta: 'fixa' }),
   alerta_urgente: n({ nome: 'Alerta urgente', grupo: 'apoio', impacto: 'alerta_urgente', escala: 2.3, tempo: 1.0, cor: '#ffc8e0', tinta: 'fixa' }),
   plano_secreto: n({ nome: 'Plano secreto', grupo: 'especial', impacto: 'plano_secreto', escala: 2.3, tempo: 1.0, cor: '#ff8aa8', tinta: 'fixa' }),
+  identidade_falsa: n({ nome: 'Identidade falsa', grupo: 'especial', impacto: 'identidade_falsa', escala: 2.3, tempo: 1.0, cor: '#8fe3c8', tinta: 'fixa' }),
+  neutralizacao_silenciosa: n({ nome: 'Neutralização silenciosa', grupo: 'especial', impacto: 'neutralizacao_silenciosa', escala: 2.3, tempo: 1.0, cor: '#d8e4ff', tinta: 'fixa' }),
+  plano_de_fuga: n({ nome: 'Plano de fuga', grupo: 'apoio', impacto: 'plano_de_fuga', escala: 2.4, tempo: 1.0, cor: '#c4d4dc', tinta: 'fixa' }),
+  investida_elegante: n({ nome: 'Investida elegante', grupo: 'corte', impacto: 'investida_elegante', escala: 2.3, tempo: 1.0, cor: '#ff6b8a', tinta: 'fixa' }),
+  jardim_noturno: n({ nome: 'Jardim noturno', grupo: 'corte', preparo: 'espinho_preparo', impacto: 'jardim_noturno', escala: 2.4, tempo: 1.0, cor: '#ff5c7a', tinta: 'fixa' }),
+  comando_avancem: n({ nome: 'Comando: avancem', grupo: 'especial', impacto: 'comando_avancem', escala: 2.4, tempo: 1.0, cor: '#9a7bff', tinta: 'fixa' }),
+  fome_de_ghoul: n({ nome: 'Fome crescente', grupo: 'apoio', impacto: 'fome_de_ghoul', escala: 2.3, tempo: 1.0, cor: '#ff3a50', tinta: 'fixa' }),
+  centopeia: n({ nome: 'Centípede', grupo: 'especial', preparo: 'kakuja_preparo', impacto: 'centopeia', escala: 2.4, tempo: 1.0, cor: '#ff4a5c', tinta: 'fixa' }),
+  preparar_o_duelo: n({ nome: 'Preparar o duelo', grupo: 'magia', impacto: 'preparar_o_duelo', escala: 2.3, tempo: 1.0, cor: '#ffcf5a', tinta: 'fixa' }),
   mugen_tsukuyomi: n({ nome: 'Mugen Tsukuyomi', grupo: 'especial', impacto: 'mugen_tsukuyomi', noCentro: true, escala: 2.6, tempo: 1.0, cor: '#ff4a5a', tinta: 'fixa' }),
 } as const satisfies Record<string, Familia>;
 

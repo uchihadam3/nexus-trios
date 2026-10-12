@@ -1371,6 +1371,20 @@
   "laco": false,
   "bytes": 35922
  },
+ "centopeia": {
+  "descricao": "Kaneki · o kagune centopeia crava e suga",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 51808
+ },
  "chama_do_triangulo": {
   "descricao": "Bill Cipher: triângulo de olho que derrama chama azul",
   "quadros": 12,
@@ -1692,6 +1706,20 @@
   ],
   "laco": false,
   "bytes": 58698
+ },
+ "comando_avancem": {
+  "descricao": "Jinwoo · os olhos das sombras e o avanço",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 54244
  },
  "comando_da_banda": {
   "descricao": "Griffith · a bandeira do Bando do Falcão",
@@ -3023,6 +3051,20 @@
   "laco": false,
   "bytes": 37272
  },
+ "espinho_preparo": {
+  "descricao": "Yor · os ramos de espinho e os estiletes (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 9534
+ },
  "espinhos": {
   "descricao": "pontas que brotam do corpo e recolhem",
   "quadros": 12,
@@ -3708,6 +3750,20 @@
   ],
   "laco": true,
   "bytes": 20324
+ },
+ "fome_de_ghoul": {
+  "descricao": "Kaneki · o kakugan, as veias e a vida puxada",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 64840
  },
  "forca_de_aceleracao": {
   "descricao": "Flash · a Força de Aceleração no aliado",
@@ -4479,6 +4535,20 @@
   "laco": false,
   "bytes": 37002
  },
+ "identidade_falsa": {
+  "descricao": "Loid · a máscara rasga e a mira do espião fecha",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 32072
+ },
  "ignicao_preparo": {
   "descricao": "Roy · o círculo da salamandra na luva (Preparo, laço)",
   "quadros": 12,
@@ -4689,6 +4759,20 @@
   "laco": false,
   "bytes": 55146
  },
+ "investida_elegante": {
+  "descricao": "Yor · o chute alto girando e as pétalas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 23858
+ },
  "investida_inosuke": {
   "descricao": "Inosuke · a cabeça do javali e os cortes loucos",
   "quadros": 12,
@@ -4815,6 +4899,20 @@
   "laco": false,
   "bytes": 53326
  },
+ "jardim_noturno": {
+  "descricao": "Yor · os estiletes em X e a rosa escura",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 32758
+ },
  "joia_do_tempo": {
   "descricao": "Thanos · a Joia do Tempo e a areia lenta",
   "quadros": 12,
@@ -4856,6 +4954,20 @@
   ],
   "laco": false,
   "bytes": 87790
+ },
+ "kakuja_preparo": {
+  "descricao": "Kaneki · os quatro tentáculos rinkaku (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 58840
  },
  "kame_faixa_kuririn": {
   "descricao": "Kuririn · o feixe do Kamehameha (faixa)",
@@ -6243,6 +6355,20 @@
   "laco": true,
   "bytes": 43632
  },
+ "neutralizacao_silenciosa": {
+  "descricao": "Loid · o tiro com silenciador e o Preparo quebrado",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 16360
+ },
  "nevasca": {
   "descricao": "flocos em redemoinho",
   "quadros": 12,
@@ -6691,6 +6817,20 @@
   "laco": true,
   "bytes": 140520
  },
+ "plano_de_fuga": {
+  "descricao": "Loid · a bomba de fumaça e as setas da fuga",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 39544
+ },
  "plano_que_plano": {
   "descricao": "Deadpool · tiros, granada e o BUM",
   "quadros": 12,
@@ -6886,6 +7026,20 @@
   ],
   "laco": false,
   "bytes": 47232
+ },
+ "preparar_o_duelo": {
+  "descricao": "Yugi · o Enigma do Milênio e o leque de cartas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 42258
  },
  "presas_rasgantes": {
   "descricao": "Inosuke · as duas lâminas lascadas em X",

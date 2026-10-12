@@ -107,6 +107,8 @@ const ANTES_DA_NOVA: Partial<Record<FamiliaNova, { antes: Sound; saida?: Sound }
   experiencia_dourada: { antes: 'ouro-preparo' },
   premio_de_sangue: { antes: 'power-preparo' },
   magia_preparada: { antes: 'frieren-preparo' },
+  jardim_noturno: { antes: 'espinho-preparo' },
+  centopeia: { antes: 'kakuja-preparo' },
   despertar_gohan: { antes: 'aura-besta' },
   raio_mortal: { antes: 'raio-mortal-saida' },
   bola_da_morte: { antes: 'bola-da-morte-carga' },
