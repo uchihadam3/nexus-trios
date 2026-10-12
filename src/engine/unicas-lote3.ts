@@ -1,7 +1,7 @@
 /*
  * Mecânicas únicas — lote 3: deuses, terror e filmes.
  */
-import { CONTROLES, curaContinua, fracao, maisFerido, maisForte, relogio, st, u, vivo, type Motor, type Unica } from './unicas-base';
+import { avisoACada, CONTROLES, curaContinua, fracao, maisFerido, maisForte, quandoVira, relogio, st, u, vivo, type Motor, type Unica } from './unicas-base';
 import type { Battle, Effect, Fighter } from './types';
 
 const idx = (b: Battle, f: Fighter) => b.fighters.indexOf(f);
@@ -140,12 +140,13 @@ export const LOTE3: Record<string, Unica> = {
   horus: {
     nome: 'Olhar do falcão',
     texto: 'Enquanto Hórus está de pé, os golpes de todo o trio de Hórus nunca erram: passam por Esquiva e Cego.',
-    ganchos: { trioNuncaErra: true },
+    ganchos: { trioNuncaErra: true, inicio(m, b, f) { m.aviso(b, f, 'Olhar do falcão', f); } },
   },
   sekhmet: {
     nome: 'Cheiro de sangue',
     texto: 'Enquanto algum rival estiver Sangrando, Sekhmet age 30% mais rápido e cura 10% do dano que causa.',
     ganchos: {
+      passo(m, b, f) { quandoVira(m, b, f, 'sangue', m.rivais(b, f).some((r) => m.intensidade(r, 'bleed') > 0), 'Cheiro de sangue', f); },
       ritmo: (m, b, f) => (m.rivais(b, f).some((r) => m.intensidade(r, 'bleed') > 0) ? 1.3 : 1),
       bateu(m, b, f, _alvo, dano) { if (m.rivais(b, f).some((r) => m.intensidade(r, 'bleed') > 0)) m.cura(b, f, f, dano * 0.1, 'Cheiro de sangue'); },
     },
@@ -199,7 +200,13 @@ export const LOTE3: Record<string, Unica> = {
   jason: {
     nome: 'Implacável',
     texto: 'Nenhum golpe tira mais de 150 de Vida de Jason Voorhees de uma vez.',
-    ganchos: { limita: (_m, _b, f, alvo, valor) => (alvo === f ? Math.min(valor, 150) : valor) },
+    ganchos: {
+      limita(m, b, f, alvo, valor) {
+        if (alvo !== f || valor <= 150) return valor;
+        avisoACada(m, b, f, 'implacavel', 6, 'Implacável', f);
+        return 150;
+      },
+    },
   },
   freddy: {
     nome: 'Dentro do sonho',
@@ -395,7 +402,11 @@ export const LOTE3: Record<string, Unica> = {
   rambo: {
     nome: 'Exército de um homem só',
     texto: 'Rambo causa +12% de dano para cada aliado caído e para cada rival de pé além do primeiro (com os 3 rivais de pé: +24%).',
-    ganchos: { causa: (m, b, f) => 1 + 0.12 * (3 - m.aliados(b, f).length + Math.max(0, m.rivais(b, f).length - 1)) },
+    ganchos: {
+      inicio(m, b, f) { m.aviso(b, f, 'Exército de um homem só', f); },
+      caiu(m, b, f, quem) { if (quem.side === f.side) m.aviso(b, f, 'Exército de um homem só', f); },
+      causa: (m, b, f) => 1 + 0.12 * (3 - m.aliados(b, f).length + Math.max(0, m.rivais(b, f).length - 1)),
+    },
   },
   indianajones: {
     nome: 'Desarme',

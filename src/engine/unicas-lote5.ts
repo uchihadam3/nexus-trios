@@ -101,6 +101,7 @@ export const LOTE5: Record<string, Unica> = {
       nuncaErra: true,
       imune: (_f, s) => s === 'blind',
       causa: (_m, _b, _f, alvo) => (fracao(alvo) < 0.5 ? 1.25 : 1),
+      bateu(m, b, f, alvo, _dano, g) { if (g.direto && fracao(alvo) < 0.5 && !u(f).radar) { u(f).radar = 1; m.aviso(b, f, 'Sentido radar', alvo); } },
     },
   },
   arlequina: {

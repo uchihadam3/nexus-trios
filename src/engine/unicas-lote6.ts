@@ -1,7 +1,7 @@
 /*
  * Mecânicas únicas — lote 6: os antigos que mais se pareciam com alguém.
  */
-import { curaContinua, fracao, maisFerido, maisForte, relogio, st, u, vivo, type Motor, type Unica } from './unicas-base';
+import { curaContinua, fracao, maisFerido, maisForte, quandoVira, relogio, st, u, vivo, type Motor, type Unica } from './unicas-base';
 import { byId } from '../data/characters';
 import type { Battle, Effect, Fighter, StatusId } from './types';
 
@@ -21,6 +21,10 @@ export const LOTE6: Record<string, Unica> = {
         if (!g.direto || u(f)[`nuca${idx(b, alvo)}`]) return 1;
         u(f)[`nuca${idx(b, alvo)}`] = 1;
         return 2;
+      },
+      bateu(m, b, f, alvo, _dano, g) {
+        const k = `nucaAviso${idx(b, alvo)}`;
+        if (g.direto && u(f)[`nuca${idx(b, alvo)}`] && !u(f)[k]) { u(f)[k] = 1; m.aviso(b, f, 'Corte na nuca', alvo); }
       },
     },
   },
@@ -312,7 +316,7 @@ export const LOTE6: Record<string, Unica> = {
       passo(m, b, f, dt) {
         if (!relogio(f, 'pod', dt, 5, 3)) return;
         const a = maisForte(m, b, f);
-        if (a) m.dano(b, f, a, 22, false, 'Pod');
+        if (a) { m.aviso(b, f, 'Pod 042', a); m.dano(b, f, a, 22, false, 'Pod'); }
       },
     },
   },
@@ -320,6 +324,7 @@ export const LOTE6: Record<string, Unica> = {
     nome: 'Trio unido',
     texto: 'Enquanto os 3 do trio de Leonardo estiverem de pé, todos do trio recebem −12% de dano.',
     ganchos: {
+      inicio(m, b, f) { m.aviso(b, f, 'Trio unido', f); },
       recebe: (m, b, f) => (m.aliados(b, f).length === 3 ? 0.88 : 1),
       recebeAliado: (m, b, f) => (m.aliados(b, f).length === 3 ? 0.88 : 1),
     },
@@ -510,7 +515,9 @@ export const LOTE6: Record<string, Unica> = {
     texto: 'Enquanto algum rival estiver Lento, Gelado age 12% mais rápido, e os aliados de Gelado também agem mais rápido.',
     ganchos: {
       passo(m, b, f, dt) {
-        if (!m.rivais(b, f).some((r) => m.intensidade(r, 'slow') > 0)) return;
+        const pista = m.rivais(b, f).some((r) => m.intensidade(r, 'slow') > 0);
+        quandoVira(m, b, f, 'pista', pista, 'Pista escorregadia', f);
+        if (!pista) return;
         for (const a of m.aliados(b, f)) if (a !== f) a.action = Math.min(1, a.action + dt * 0.035);
       },
       ritmo: (m, b, f) => (m.rivais(b, f).some((r) => m.intensidade(r, 'slow') > 0) ? 1.12 : 1),

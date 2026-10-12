@@ -1,7 +1,7 @@
 /*
  * Mecânicas únicas — lote 7: mais 55 antigos (Sephiroth, Hulk, Sonic, Goku, Sasuke, Homem de Ferro…).
  */
-import { CONTROLES, fracao, maisFerido, maisForte, relogio, st, u, vivo, type Motor, type Unica } from './unicas-base';
+import { avisoACada, CONTROLES, fracao, maisFerido, maisForte, quandoVira, relogio, st, u, vivo, type Motor, type Unica } from './unicas-base';
 import type { Battle, Fighter } from './types';
 
 const idx = (b: Battle, f: Fighter) => b.fighters.indexOf(f);
@@ -61,7 +61,13 @@ export const LOTE7: Record<string, Unica> = {
   darkseid: {
     nome: 'Sem esperança',
     texto: 'Enquanto Darkseid está de pé, rivais com menos de 30% da Vida não recebem cura nenhuma.',
-    ganchos: { curaNoRival: (_m, _b, _f, alvo) => (fracao(alvo) < 0.3 ? 0 : 1) },
+    ganchos: {
+      curaNoRival(m, b, f, alvo) {
+        if (fracao(alvo) >= 0.3) return 1;
+        avisoACada(m, b, f, 'esperanca', 8, 'Sem esperança', alvo);
+        return 0;
+      },
+    },
   },
   omniman: {
     nome: 'Orgulho viltrumita',
@@ -90,6 +96,7 @@ export const LOTE7: Record<string, Unica> = {
         if (!g.direto || alvo === f || alvo.side !== f.side || fonte.side === f.side || !vivo(fonte)) return;
         if (maisFerido(m, b, f) !== alvo || (u(f).corte ?? 0) > b.time) return;
         u(f).corte = b.time + 4;
+        avisoACada(m, b, f, 'protege', 8, 'Ninguém toca neles', fonte);
         m.dano(b, f, fonte, 60, false, 'Proteger quem importa');
       },
     },
@@ -140,7 +147,7 @@ export const LOTE7: Record<string, Unica> = {
     nome: 'Areia que se refaz',
     texto: 'Gaara começa com Escudo de areia de 10% da Vida máxima. Depois de 5 s sem levar golpe, a areia se refaz: +0,6% da Vida máxima de Escudo por segundo, até 10%.',
     ganchos: {
-      inicio(_m, _b, f) { f.shields.push({ amount: f.maxHp * 0.1, remaining: 999, source: f.uid }); },
+      inicio(m, b, f) { f.shields.push({ amount: f.maxHp * 0.1, remaining: 999, source: f.uid }); m.aviso(b, f, 'Areia que se refaz', f); },
       apanhou(_m, b, f) { u(f).quieto = b.time + 5; },
       passo(_m, b, f, dt) {
         if ((u(f).quieto ?? 0) > b.time) return;
@@ -217,6 +224,8 @@ export const LOTE7: Record<string, Unica> = {
       passo(m, b, f, dt) {
         if (!relogio(f, 'raios', dt, 3, 3)) return;
         const rs = m.rivais(b, f);
+        const eletrificado = rs.find((x) => m.intensidade(x, 'electric') > 0);
+        if (eletrificado) avisoACada(m, b, f, 'tempestade', 9, 'Tempestade que pula', eletrificado);
         for (const r of rs.filter((x) => m.intensidade(x, 'electric') > 0)) {
           m.dano(b, f, r, 15, false, 'Tempestade');
           const outro = rs.find((x) => x !== r && m.intensidade(x, 'electric') <= 0);
@@ -307,6 +316,10 @@ export const LOTE7: Record<string, Unica> = {
     nome: 'Prodígio instável',
     texto: 'Com mais de 70% da Vida, Azula causa +30% de dano. Com menos de 30% da Vida, Azula age 25% mais rápido, mas cada golpe tem 20% de chance de errar.',
     ganchos: {
+      passo(m, b, f) {
+        quandoVira(m, b, f, 'prodigio', fracao(f) > 0.7, 'Prodígio', f);
+        quandoVira(m, b, f, 'instavel', fracao(f) < 0.3, 'Instável', f);
+      },
       causa: (m, b, f, _alvo, g) => (fracao(f) > 0.7 ? 1.3 : fracao(f) < 0.3 && g.direto && m.sorte(b) < 0.2 ? 0 : 1),
       ritmo: (_m, _b, f) => (fracao(f) < 0.3 ? 1.25 : 1),
     },
@@ -322,7 +335,13 @@ export const LOTE7: Record<string, Unica> = {
   shun: {
     nome: 'Corrente que intercepta',
     texto: 'Todo golpe acima de 120 de dano em alguém do trio de Shun chega com 40 a menos.',
-    ganchos: { limita: (_m, _b, _f, _alvo, valor) => (valor > 120 ? valor - 40 : valor) },
+    ganchos: {
+      limita(m, b, f, alvo, valor) {
+        if (valor <= 120) return valor;
+        avisoACada(m, b, f, 'corrente', 6, 'Corrente que intercepta', alvo);
+        return valor - 40;
+      },
+    },
   },
   picapau: {
     nome: 'Impossível ignorar',
@@ -399,6 +418,7 @@ export const LOTE7: Record<string, Unica> = {
       inicio(_m, _b, f) { u(f).necro = 600; },
       passo(m, b, f, dt) {
         if (fracao(f) >= 0.5 || (u(f).necro ?? 0) <= 0) return;
+        if (!u(f).necroAviso) { u(f).necroAviso = 1; m.aviso(b, f, 'Necroplasma', f); }
         const c = Math.min(u(f).necro!, f.maxHp * 0.02 * dt);
         u(f).necro! -= c;
         m.cura(b, f, f, c, 'Necroplasma');
@@ -553,6 +573,7 @@ export const LOTE7: Record<string, Unica> = {
         if (!relogio(f, 'familiar', dt, 10, 6)) return;
         const a = maisForte(m, b, f);
         if (!a) return;
+        m.aviso(b, f, 'Familiar', a);
         m.dano(b, f, a, 25, false, 'Familiar');
         m.cura(b, f, f, 25, 'Familiar');
       },

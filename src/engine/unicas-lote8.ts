@@ -2,7 +2,7 @@
  * Mecânicas únicas — lote 8: os clássicos que faltavam (Vegeta, Naruto, Luffy,
  * Gojo, Batman, Thanos, Itachi, os X-Men…).
  */
-import { curaContinua, fracao, maisFerido, maisForte, relogio, st, u, vivo, type Motor, type Unica } from './unicas-base';
+import { avisoACada, curaContinua, fracao, maisFerido, maisForte, relogio, st, u, vivo, type Motor, type Unica } from './unicas-base';
 import type { Battle, Fighter, StatusId } from './types';
 
 const idx = (b: Battle, f: Fighter) => b.fighters.indexOf(f);
@@ -210,6 +210,7 @@ export const LOTE8: Record<string, Unica> = {
       viu(m, b, f, fonte, alvo, dano, g) {
         if (!g.direto || alvo === f || alvo.side !== f.side || fonte.side === f.side || !vivo(alvo) || (u(f).empatia ?? 0) > b.time) return;
         u(f).empatia = b.time + 3;
+        avisoACada(m, b, f, 'empatia', 8, 'Cura empática', alvo);
         m.cura(b, f, alvo, dano * 0.4, 'Empatia');
         f.hp = Math.max(1, f.hp - dano * 0.2);
       },
@@ -245,6 +246,7 @@ export const LOTE8: Record<string, Unica> = {
     nome: 'Doença terminal',
     texto: 'Itachi Uchiha causa +25% de dano, mas perde 2% da Vida máxima a cada 5 s (sem cair por isso).',
     ganchos: {
+      inicio(m, b, f) { m.aviso(b, f, 'Doença terminal', f); },
       passo(_m, _b, f, dt) { if (relogio(f, 'doenca', dt, 5)) f.hp = Math.max(1, f.hp - f.maxHp * 0.02); },
       causa: () => 1.25,
     },
@@ -255,7 +257,7 @@ export const LOTE8: Record<string, Unica> = {
     ganchos: {
       curaFeita(m, b, f, alvo) {
         const k = `medica${idx(b, alvo)}`;
-        if ((u(f)[k] ?? 0) <= b.time) { u(f)[k] = b.time + 4; m.efeitos(b, f, [alvo], [st('protected', 0.1, 2)]); }
+        if ((u(f)[k] ?? 0) <= b.time) { u(f)[k] = b.time + 4; avisoACada(m, b, f, 'medica', 8, 'Médica de campo', alvo); m.efeitos(b, f, [alvo], [st('protected', 0.1, 2)]); }
         return 1;
       },
     },
@@ -576,10 +578,10 @@ export const LOTE8: Record<string, Unica> = {
     nome: 'Cérebro',
     texto: 'A cada 4 s, o Professor Xavier adianta em 15% a barra do Próximo ataque de quem do trio estiver mais atrasado (pode ser o próprio Xavier).',
     ganchos: {
-      passo(_m, b, f, dt) {
+      passo(m, b, f, dt) {
         if (!relogio(f, 'cerebro', dt, 4)) return;
         const a = b.fighters.filter((x) => x.side === f.side && vivo(x)).sort((x, y) => x.action - y.action)[0];
-        if (a) a.action = Math.min(1, a.action + 0.15);
+        if (a) { avisoACada(m, b, f, 'cerebro', 12, 'Cérebro', a); a.action = Math.min(1, a.action + 0.15); }
       },
     },
   },

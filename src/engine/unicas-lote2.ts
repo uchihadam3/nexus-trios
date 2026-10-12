@@ -2,7 +2,7 @@
  * Mecânicas únicas — lote 2: Gotham e Marvel de rua, desenhos, anime e
  * games. Cada uma é a cara do personagem e não se repete em nenhum outro.
  */
-import { fracao, maisFerido, maisForte, relogio, st, u, vivo, type Unica } from './unicas-base';
+import { avisoACada, fracao, maisFerido, maisForte, quandoVira, relogio, st, u, vivo, type Unica } from './unicas-base';
 import { byId } from '../data/characters';
 import type { Battle, Fighter, StatusId } from './types';
 
@@ -63,6 +63,7 @@ export const LOTE2: Record<string, Unica> = {
         if (fonte === f || fonte.side !== f.side || alvo.side === f.side || !g.direto || !vivo(alvo)) return;
         if ((u(f).dupla ?? 0) > b.time) return;
         u(f).dupla = b.time + 2;
+        avisoACada(m, b, f, 'dupla', 8, 'Sempre junto', alvo);
         m.dano(b, f, alvo, 30, false, 'Ataque em dupla');
       },
     },
@@ -143,6 +144,7 @@ export const LOTE2: Record<string, Unica> = {
       viu(m, b, f, fonte, alvo, dano, g) {
         if (!u(f).esticar || alvo === f || alvo.side !== f.side || g.label === 'Esticou') return;
         u(f).esticar = 0;
+        avisoACada(m, b, f, 'estica', 8, 'Estica e protege', alvo);
         m.dano(b, fonte, f, (dano * 0.3) / 0.7, false, 'Esticou');
       },
     },
@@ -530,7 +532,9 @@ export const LOTE2: Record<string, Unica> = {
     nome: 'Radiação',
     texto: 'Enquanto Godzilla está de pé, cada rival perde 0,4% da Vida máxima por segundo. Quanto menos Vida Godzilla tem, mais a radiação queima: até 1,2% por segundo quando Godzilla está quase caindo.',
     ganchos: {
+      inicio(m, b, f) { m.aviso(b, f, 'Radiação', f); },
       passo(m, b, f, dt) {
+        quandoVira(m, b, f, 'radiacao', fracao(f) < 0.5, 'A radiação queima', f);
         const taxa = 0.004 + 0.008 * (1 - fracao(f));
         for (const r of m.rivais(b, f)) m.dano(b, f, r, r.maxHp * taxa * dt, false, 'Radiação');
       },

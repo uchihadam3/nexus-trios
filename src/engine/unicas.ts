@@ -3,7 +3,7 @@
  * do Light. Os tipos e as funções auxiliares estão em unicas-base.ts; cada lote
  * de personagens fica no seu arquivo.
  */
-import { BUFFS, CONTROLES, curaContinua, fracao, maisFerido, maisForte, relogio, st, trabalho, u, vivo, type Unica } from './unicas-base';
+import { avisoACada, BUFFS, CONTROLES, curaContinua, fracao, maisFerido, maisForte, quandoVira, relogio, st, trabalho, u, vivo, type Unica } from './unicas-base';
 import { LOTE2 } from './unicas-lote2';
 import { LOTE3 } from './unicas-lote3';
 import { LOTE4 } from './unicas-lote4';
@@ -443,7 +443,13 @@ const LOTE1: Record<string, Unica> = {
   leorio: {
     nome: 'Futuro médico',
     texto: 'As curas de Leorio valem o dobro em quem está com menos de 35% da Vida.',
-    ganchos: { curaFeita: (_m, _b, _f, alvo) => (fracao(alvo) < 0.35 ? 2 : 1) },
+    ganchos: {
+      curaFeita(m, b, f, alvo) {
+        if (fracao(alvo) >= 0.35) return 1;
+        avisoACada(m, b, f, 'medico', 8, 'Futuro médico', alvo);
+        return 2;
+      },
+    },
   },
   aerith: {
     nome: 'Última oração',
@@ -461,7 +467,11 @@ const LOTE1: Record<string, Unica> = {
     nome: 'Asas protetoras',
     texto: 'Enquanto Ísis está de pé, os aliados de Ísis com menos de 30% da Vida recebem −40% de dano (não vale para a própria Ísis).',
     ganchos: {
-      recebeAliado: (_m, _b, f, aliado) => (aliado !== f && fracao(aliado) < 0.3 ? 0.6 : 1),
+      recebeAliado(m, b, f, aliado) {
+        if (aliado === f || fracao(aliado) >= 0.3) return 1;
+        avisoACada(m, b, f, 'asas', 8, 'Asas protetoras', aliado);
+        return 0.6;
+      },
     },
   },
   tenshinhan: {
@@ -497,6 +507,7 @@ const LOTE1: Record<string, Unica> = {
     nome: 'Chifres serrados',
     texto: 'Com menos de 30% da Vida: Hellboy causa +40% de dano e não fica Paralisado, Congelado nem Dormindo.',
     ganchos: {
+      passo(m, b, f) { quandoVira(m, b, f, 'chifres', fracao(f) < 0.3, 'Chifres serrados', f); },
       causa: (_m, _b, f) => (fracao(f) < 0.3 ? 1.4 : 1),
       imune: (f, s) => fracao(f) < 0.3 && (s === 'paralyzed' || s === 'frozen' || s === 'sleep'),
     },

@@ -1,7 +1,7 @@
 /*
  * Mecânicas únicas — lote 4: Disney, anime, desenhos e games.
  */
-import { curaContinua, fracao, maisFerido, maisForte, relogio, st, u, vivo, type Motor, type Unica } from './unicas-base';
+import { curaContinua, fracao, maisFerido, maisForte, quandoVira, relogio, st, u, vivo, type Motor, type Unica } from './unicas-base';
 import type { Battle, Effect, Fighter, StatusId } from './types';
 
 const idx = (b: Battle, f: Fighter) => b.fighters.indexOf(f);
@@ -116,7 +116,13 @@ export const LOTE4: Record<string, Unica> = {
   bakugo: {
     nome: 'Explosões crescentes',
     texto: 'Katsuki Bakugo ganha +1% de dano a cada 2 s de luta (até +40%, aos 80 s).',
-    ganchos: { causa: (_m, b) => 1 + Math.min(0.4, b.time / 200) },
+    ganchos: {
+      passo(m, b, f) {
+        const n = Math.min(4, Math.floor(b.time / 20));
+        if (n > (u(f).explosoes ?? 0)) { u(f).explosoes = n; m.aviso(b, f, `Explosões +${n * 10}%`, f); }
+      },
+      causa: (_m, b) => 1 + Math.min(0.4, b.time / 200),
+    },
   },
   rimuru: {
     nome: 'Corpo que se adapta',
@@ -159,6 +165,7 @@ export const LOTE4: Record<string, Unica> = {
     texto: 'Sesshomaru causa +30% de dano em rivais com mais de 70% da Vida e −30% de dano em rivais com menos de 30% da Vida. Sesshomaru nunca fica Provocado.',
     ganchos: {
       causa: (_m, _b, _f, alvo) => (fracao(alvo) > 0.7 ? 1.3 : fracao(alvo) < 0.3 ? 0.7 : 1),
+      bateu(m, b, f, alvo, _dano, g) { if (g.direto && !u(f).orgulho) { u(f).orgulho = 1; m.aviso(b, f, 'Orgulho de youkai', alvo); } },
       imune: (_f, s) => s === 'provoked',
     },
   },
@@ -195,6 +202,7 @@ export const LOTE4: Record<string, Unica> = {
     nome: 'Fúria de oni',
     texto: 'Enquanto algum aliado de Rem estiver com menos de 30% da Vida, Rem causa +35% de dano e age 20% mais rápido.',
     ganchos: {
+      passo(m, b, f) { quandoVira(m, b, f, 'oni', m.aliados(b, f).some((a) => a !== f && fracao(a) < 0.3), 'Fúria de oni', f); },
       causa: (m, b, f) => (m.aliados(b, f).some((a) => a !== f && fracao(a) < 0.3) ? 1.35 : 1),
       ritmo: (m, b, f) => (m.aliados(b, f).some((a) => a !== f && fracao(a) < 0.3) ? 1.2 : 1),
     },
@@ -203,6 +211,7 @@ export const LOTE4: Record<string, Unica> = {
     nome: 'Jogador solo',
     texto: 'Enquanto o trio de Kirito tiver menos Vida (em %) que os rivais, Kirito causa +15% de dano e age 25% mais rápido.',
     ganchos: {
+      passo(m, b, f) { quandoVira(m, b, f, 'solo', vidaDoTrio(m.aliados(b, f)) < vidaDoTrio(m.rivais(b, f)), 'Jogador solo', f); },
       causa: (m, b, f) => (vidaDoTrio(m.aliados(b, f)) < vidaDoTrio(m.rivais(b, f)) ? 1.15 : 1),
       ritmo: (m, b, f) => (vidaDoTrio(m.aliados(b, f)) < vidaDoTrio(m.rivais(b, f)) ? 1.25 : 1),
     },

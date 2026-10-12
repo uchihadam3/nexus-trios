@@ -2,7 +2,7 @@
  * Mecânicas únicas — lote 9: os últimos 54 (Kirby, Link, Dante, Sekiro,
  * Coringa, Optimus, Mario…). Com este lote, todo personagem tem a dele.
  */
-import { BUFFS, fracao, maisForte, relogio, st, u, vivo, type Ganchos, type Unica } from './unicas-base';
+import { avisoACada, BUFFS, fracao, maisForte, relogio, st, u, vivo, type Ganchos, type Unica } from './unicas-base';
 import type { Battle, Fighter, StatusId } from './types';
 
 const idx = (b: Battle, f: Fighter) => b.fighters.indexOf(f);
@@ -21,7 +21,13 @@ export const LOTE9: Record<string, Unica> = {
   starlord: {
     nome: 'Doze por cento de um plano',
     texto: 'Enquanto o Senhor das Estrelas está de pé, cada habilidade do trio tem 12% de chance de causar +60% de dano.',
-    ganchos: { causaAliado: (m, b, _f, _aliado, _alvo, g) => (g.habilidade && g.direto && m.sorte(b) < 0.12 ? 1.6 : 1) },
+    ganchos: {
+      causaAliado(m, b, f, aliado, _alvo, g) {
+        if (!(g.habilidade && g.direto && m.sorte(b) < 0.12)) return 1;
+        m.aviso(b, f, 'Doze por cento', aliado);
+        return 1.6;
+      },
+    },
   },
   groot: {
     nome: 'Galhos que protegem',
@@ -656,9 +662,10 @@ export const LOTE9: Record<string, Unica> = {
     nome: 'Quem resolve é a Penny',
     texto: 'Enquanto o Inspetor Bugiganga está de pé, o aliado que mais causou dano na luta (sem contar o Bugiganga) causa +15% de dano.',
     ganchos: {
-      causaAliado(_m, b, f, aliado) {
+      causaAliado(m, b, f, aliado) {
         if (aliado === f) return 1;
         const melhor = b.fighters.filter((x) => x.side === f.side && x !== f && vivo(x)).sort((x, y) => y.stats.damage - x.stats.damage)[0];
+        if (melhor === aliado) avisoACada(m, b, f, 'penny', 15, 'Quem resolve é a Penny', aliado);
         return melhor === aliado ? 1.15 : 1;
       },
     },

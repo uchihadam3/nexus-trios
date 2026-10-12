@@ -145,6 +145,19 @@ export const BUFFS: StatusId[] = ['barrier', 'evasion', 'protected', 'reflect', 
 export const maisForte = (m: Motor, b: Battle, f: Fighter) => m.rivais(b, f).sort((x, y) => y.hp - x.hp)[0];
 /** O aliado mais ferido (em fração da Vida). */
 export const maisFerido = (m: Motor, b: Battle, f: Fighter) => m.aliados(b, f).sort((x, y) => fracao(x) - fracao(y))[0];
+/** Mostra o aviso só quando a condição passa a valer (de falso para verdadeiro). Só aparece: não muda a luta. */
+export function quandoVira(m: Motor, b: Battle, f: Fighter, chave: string, agora: boolean, texto: string, alvo?: Fighter): void {
+  const s = u(f), k = `vira_${chave}`, antes = !!s[k];
+  s[k] = agora ? 1 : 0;
+  if (agora && !antes) m.aviso(b, f, texto, alvo);
+}
+/** Mostra o aviso no máximo 1 vez a cada `cada` segundos. Só aparece: não muda a luta. */
+export function avisoACada(m: Motor, b: Battle, f: Fighter, chave: string, cada: number, texto: string, alvo?: Fighter): void {
+  const s = u(f), k = `aviso_${chave}`;
+  if (s[k] !== undefined && s[k]! > b.time) return;
+  s[k] = b.time + cada;
+  m.aviso(b, f, texto, alvo);
+}
 /** Um relógio que dispara a cada `cada` segundos (o primeiro depois de `primeiro`). */
 export function relogio(f: Fighter, chave: string, dt: number, cada: number, primeiro = cada): boolean {
   // a chave do relógio tem prefixo próprio: não pode colidir com um contador da mecânica de mesmo nome
