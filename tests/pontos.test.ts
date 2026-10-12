@@ -33,8 +33,9 @@ describe('pontos', () => {
   it('todo personagem tem o seu fator de pontos, dentro do limite (rode scripts/equilibrar-pontos.ts se mudar o elenco)', () => {
     for (const c of characters) {
       expect(FATOR_DE_PONTOS[c.id], c.id).toBeDefined();
-      expect(FATOR_DE_PONTOS[c.id]).toBeGreaterThanOrEqual(0.5);
-      expect(FATOR_DE_PONTOS[c.id]).toBeLessThanOrEqual(2);
+      // os mesmos limites de scripts/equilibrar-pontos.ts (medido pela fatia nos pontos do trio)
+      expect(FATOR_DE_PONTOS[c.id]).toBeGreaterThanOrEqual(0.3);
+      expect(FATOR_DE_PONTOS[c.id]).toBeLessThanOrEqual(3);
     }
   });
 });
