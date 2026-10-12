@@ -83,6 +83,20 @@
   "laco": false,
   "bytes": 27580
  },
+ "acordo_de_bill": {
+  "descricao": "Bill Cipher · o aperto de mão com a chama azul",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 21416
+ },
  "adaga_de_kamish": {
   "descricao": "Jinwoo: dois cortes de adaga em X e fumaça de sombra subindo",
   "quadros": 12,
@@ -1413,6 +1427,20 @@
   "laco": false,
   "bytes": 53582
  },
+ "bill_preparo": {
+  "descricao": "Bill Cipher · o triângulo e os tijolos flutuando (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 44162
+ },
  "binario_preparo": {
   "descricao": "Capitã Marvel · o corpo em chamas cósmicas (Preparo, laço)",
   "quadros": 12,
@@ -1707,20 +1735,6 @@
   "laco": false,
   "bytes": 26486
  },
- "bomba": {
-  "descricao": "bomba com pavio em viagem (+x)",
-  "quadros": 12,
-  "grade": [
-   3,
-   4
-  ],
-  "tamanho": [
-   160,
-   160
-  ],
-  "laco": true,
-  "bytes": 38340
- },
  "bomba_abobora": {
   "descricao": "Duende Verde · a abóbora rindo e a explosão",
   "quadros": 12,
@@ -1846,6 +1860,20 @@
   ],
   "laco": true,
   "bytes": 44302
+ },
+ "briga_com_o_galo": {
+  "descricao": "Peter Griffin · a briga com as penas do galo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 35790
  },
  "broly_preparo": {
   "descricao": "Broly · a esfera crescendo (Preparo, laço)",
@@ -2505,6 +2533,20 @@
   "laco": true,
   "bytes": 31100
  },
+ "cartman_preparo": {
+  "descricao": "Eric Cartman · as mãos se esfregando (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 17178
+ },
  "cauda_de_godzilla": {
   "descricao": "Básico do Godzilla: a cauda com as placas",
   "quadros": 12,
@@ -2714,6 +2756,20 @@
   ],
   "laco": true,
   "bytes": 176772
+ },
+ "chantagem": {
+  "descricao": "Eric Cartman · as fotos voando e o escudo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 24956
  },
  "chaos_control": {
   "descricao": "Shadow · o relógio que para",
@@ -4745,8 +4801,8 @@
   "laco": false,
   "bytes": 19112
  },
- "dominio": {
-  "descricao": "domínio de céu infinito",
+ "dominacao_mundial": {
+  "descricao": "Stewie Griffin · o globo na mira e a luz no trio",
   "quadros": 12,
   "grade": [
    3,
@@ -4757,7 +4813,7 @@
    192
   ],
   "laco": false,
-  "bytes": 75780
+  "bytes": 57178
  },
  "dominio_de_snake_mountain": {
   "descricao": "Esqueleto · a montanha da serpente e os raios",
@@ -5067,20 +5123,6 @@
   "laco": false,
   "bytes": 97668
  },
- "enfraquecer": {
-  "descricao": "setas para baixo",
-  "quadros": 12,
-  "grade": [
-   3,
-   4
-  ],
-  "tamanho": [
-   192,
-   192
-  ],
-  "laco": false,
-  "bytes": 59182
- },
  "engano_perfeito": {
   "descricao": "Loki · as cópias quebrando e a adaga",
   "quadros": 12,
@@ -5374,20 +5416,6 @@
   ],
   "laco": false,
   "bytes": 98824
- },
- "escudo_tech": {
-  "descricao": "parede de painéis hexagonais",
-  "quadros": 12,
-  "grade": [
-   3,
-   4
-  ],
-  "tamanho": [
-   192,
-   192
-  ],
-  "laco": false,
-  "bytes": 48668
  },
  "escudo_voando": {
   "descricao": "o escudo do Capitão girando em voo (+x)",
@@ -6257,20 +6285,6 @@
   "laco": false,
   "bytes": 125476
  },
- "explosao_cartoon": {
-  "descricao": "explosão de desenho animado",
-  "quadros": 12,
-  "grade": [
-   3,
-   4
-  ],
-  "tamanho": [
-   192,
-   192
-  ],
-  "laco": false,
-  "bytes": 64476
- },
  "explosao_de_bakugo": {
   "descricao": "Básico do Bakugo: as duas explosões das palmas",
   "quadros": 12,
@@ -6662,20 +6676,6 @@
   ],
   "laco": true,
   "bytes": 128658
- },
- "fenda": {
-  "descricao": "rasgo dimensional",
-  "quadros": 12,
-  "grade": [
-   3,
-   4
-  ],
-  "tamanho": [
-   192,
-   192
-  ],
-  "laco": false,
-  "bytes": 43936
  },
  "fenix_asas": {
   "descricao": "Ikki · as asas de fogo abrindo nele",
@@ -7769,20 +7769,6 @@
   "laco": false,
   "bytes": 45708
  },
- "gas": {
-  "descricao": "nuvem de gás",
-  "quadros": 12,
-  "grade": [
-   3,
-   4
-  ],
-  "tamanho": [
-   192,
-   192
-  ],
-  "laco": false,
-  "bytes": 108932
- },
  "gas_do_duende": {
   "descricao": "Duende Verde · o gás verde com as caras",
   "quadros": 12,
@@ -8734,6 +8720,20 @@
   ],
   "laco": false,
   "bytes": 90474
+ },
+ "ideia_terrivel": {
+  "descricao": "Peter Griffin · a lâmpada que vira bomba",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 26294
  },
  "identidade_falsa": {
   "descricao": "Loid · a máscara rasga e a mira do espião fecha",
@@ -17387,6 +17387,20 @@
   "laco": false,
   "bytes": 16360
  },
+ "nhe_he_he": {
+  "descricao": "Peter Griffin · a risada em ondas e o tombo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 29990
+ },
  "nue": {
   "descricao": "Megumi · as asas do Nue e os raios em três pontos",
   "quadros": 12,
@@ -17484,6 +17498,20 @@
   ],
   "laco": false,
   "bytes": 64666
+ },
+ "olho_que_tudo_ve": {
+  "descricao": "Bill Cipher · o olho no céu e os feixes",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 36376
  },
  "olhos_brilhando": {
   "descricao": "Super-Homem · os olhos acendendo no Preparo (laço)",
@@ -18059,6 +18087,20 @@
   "laco": false,
   "bytes": 11058
  },
+ "peter_preparo": {
+  "descricao": "Peter Griffin · a barriga sacudindo na risada (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 8116
+ },
  "piada_final": {
   "descricao": "Coringa · a caixa-surpresa",
   "quadros": 12,
@@ -18171,6 +18213,20 @@
   "laco": false,
   "bytes": 17144
  },
+ "plankton_preparo": {
+  "descricao": "Plankton · o olho apertado e as antenas (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 9354
+ },
  "plano_b": {
   "descricao": "Rick · a explosão do plasma",
   "quadros": 12,
@@ -18255,6 +18311,20 @@
   "laco": false,
   "bytes": 57772
  },
+ "plano_egoista": {
+  "descricao": "Eric Cartman · a nuvem verde de gás",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 31732
+ },
  "plano_improvisado": {
   "descricao": "Senhor das Estrelas · a fita, as notas e o tiro",
   "quadros": 12,
@@ -18282,6 +18352,20 @@
   ],
   "laco": false,
   "bytes": 49564
+ },
+ "plano_mirabolante": {
+  "descricao": "Stewie Griffin · a planta e os escudos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 22832
  },
  "plano_que_plano": {
   "descricao": "Deadpool · tiros, granada e o BUM",
@@ -18324,6 +18408,20 @@
   ],
   "laco": false,
   "bytes": 21032
+ },
+ "plano_z": {
+  "descricao": "Plankton · a antena e o pulso",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 52682
  },
  "plasma_faixa": {
   "descricao": "Aiolia · os raios do Relâmpago de Plasma (faixa)",
@@ -18814,20 +18912,6 @@
   ],
   "laco": false,
   "bytes": 97726
- },
- "pulso_emp": {
-  "descricao": "pulso eletromagnético",
-  "quadros": 12,
-  "grade": [
-   3,
-   4
-  ],
-  "tamanho": [
-   192,
-   192
-  ],
-  "laco": false,
-  "bytes": 91250
  },
  "punho_amaldicoado": {
   "descricao": "básico do Yuji: Black Flash, faíscas negras e o espaço rachando",
@@ -19347,6 +19431,20 @@
   "laco": false,
   "bytes": 27244
  },
+ "raio_de_controle": {
+  "descricao": "Stewie Griffin · a pistola e os anéis de controle",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 18460
+ },
  "raio_de_dexter": {
   "descricao": "Básico do Dexter: a arma de raio",
   "quadros": 12,
@@ -19738,6 +19836,20 @@
   ],
   "laco": false,
   "bytes": 30188
+ },
+ "realidade_invertida": {
+  "descricao": "Bill Cipher · o triângulo virando e o escudo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 29564
  },
  "rebellion_e_ebony": {
   "descricao": "Dante: corte largo de espadão e dois tiros de pistola",
@@ -20131,6 +20243,20 @@
   "laco": false,
   "bytes": 50750
  },
+ "respeitem_minha_autoridade": {
+  "descricao": "Eric Cartman · o distintivo e o grito",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 25118
+ },
  "respiracao_da_agua": {
   "descricao": "Tanjiro · a Roda d'Água com as ondas japonesas",
   "quadros": 12,
@@ -20312,6 +20438,20 @@
   ],
   "laco": false,
   "bytes": 45314
+ },
+ "roubar_a_formula": {
+  "descricao": "Plankton · as garrafinhas da fórmula puxadas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 27256
  },
  "roubar_carga": {
   "descricao": "Roubou Carga: a energia sai do rival",
@@ -21838,6 +21978,20 @@
   ],
   "laco": true,
   "bytes": 26050
+ },
+ "stewie_preparo": {
+  "descricao": "Stewie Griffin · as engrenagens do plano (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 42782
  },
  "stitch_preparo": {
   "descricao": "Stitch · as pistolas de plasma carregando (Preparo, laço)",

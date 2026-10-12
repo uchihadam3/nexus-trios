@@ -121,24 +121,6 @@ def teleporte(T, t, rng):
     return G, H
 
 
-def fenda(T, t, rng):
-    """Fenda dimensional: o ar rasga numa linha que se abre em olho, borda acesa e vazio dentro."""
-    G, H = vazio(T)
-    abre = ease_out(rel(t, 0.1, 0.4), 2) * (1 - ease_in(rel(t, 0.7, 0.95), 2))
-    risca = ease_out(rel(t, 0, 0.12), 2)
-    al, la = girado(T, -0.5)
-    comp = 0.75 * risca
-    perfil = (0.2 * abre + 0.01) * np.sqrt(np.clip(1 - (al / max(comp, 0.01)) ** 2, 0, 1))
-    dentro = smooth(perfil - np.abs(la), 0, 0.02)
-    borda = np.exp(-((np.abs(la) - perfil) / 0.012) ** 2) * (np.abs(al) < comp)
-    n = T.noise(np.random.default_rng(631), 0.04, 2)
-    estrelas = (n > 1.8).astype(np.float32) * dentro
-    fa = faiscas(T, rng, t, 14, 0.5, 0.025, inicio=0.05)
-    G += borda * 1.8 + dentro * 0.25 + estrelas + fa * 0.7
-    H += borda * 1.2 + estrelas * 0.6
-    return G, H
-
-
 def sorte(T, t, rng):
     """Sorte: dois dados rolam e quicam, trevos e estrelinhas pulam quando param."""
     G, H = vazio(T)
@@ -207,7 +189,6 @@ REGISTRO = [
     ("runas", runas, GRANDE, "círculo de runas", False),
     ("sarcofago", sarcofago, GRANDE, "caixa negra fechando", False),
     ("teleporte", teleporte, GRANDE, "implode e reaparece", False),
-    ("fenda", fenda, GRANDE, "rasgo dimensional", False),
     ("confusao", confusao, GRANDE, "interrogações girando", False),
     ("invocacao", invocacao, GRANDE, "silhueta invocada", False),
 ]

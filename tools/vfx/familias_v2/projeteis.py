@@ -294,43 +294,6 @@ def explosao_grande(T, t, rng):
     return G, H
 
 
-def explosao_cartoon(T, t, rng):
-    """Explosão de desenho: bolotas de fumaça redondas saltam em volta de um clarão e murcham em puff."""
-    G, H = vazio(T)
-    sub = np.random.default_rng(211)
-    cresce = max(0.05, back(rel(t, 0, 0.3), 1.5))
-    murcha = 1 - 0.75 * ease_out(rel(t, 0.5, 1), 2)
-    bolas, bordas = T.zero(), T.zero()
-    for k in range(8):
-        a = TAU * k / 8 + sub.uniform(-0.25, 0.25)
-        d = sub.uniform(0.28, 0.5) * cresce
-        r = sub.uniform(0.11, 0.17) * cresce * murcha
-        x, y = math.cos(a) * d, math.sin(a) * d * 0.85 - 0.15 * rel(t, 0.3, 1)
-        c = smooth(r - np.hypot(T.U - x, T.V - y), -0.01, 0.01)
-        bolas = np.maximum(bolas, c)
-        bordas += np.exp(-((np.hypot(T.U - x, T.V - y) - r) / 0.012) ** 2)
-    centro = smooth(0.24 * cresce * murcha - T.RAD, -0.01, 0.01)
-    flash = T.gauss(0, 0, 0.22) * some(t, 0, 0.35) * 3
-    env = apaga(t, 0.6, 1)
-    G += (bolas * 0.55 + bordas * 1.3 + centro * 0.8) * env + flash
-    H += (bordas * 0.4 + centro * 0.6) * env + flash
-    return G, H
-
-
-def gas(T, t, rng):
-    """Nuvem de gás: massa rolando e se espalhando, redemoinhos internos que demoram a sumir."""
-    G, H = vazio(T)
-    cresce = ease_out(rel(t, 0, 0.5), 2)
-    n = T.noise(np.random.default_rng(221), 0.06, 3)
-    gira = T.warp(n, np.sin(T.V * 4 + t * 3) * 0.06, np.cos(T.U * 4 + t * 3) * 0.06)
-    massa = smooth(-T.RAD + 0.25 + 0.5 * cresce + 0.12 * gira, -0.05, 0.12)
-    redemo = np.exp(-((np.mod(T.ANG + T.RAD * 6 - t * 4, TAU / 3) - 0.6) / 0.25) ** 2) * massa * 0.5
-    env = apaga(t, 0.65, 1)
-    G += (massa * (0.6 + 0.3 * np.clip(gira, -1, 1)) + redemo) * env
-    H += redemo * 0.3 * env
-    return G, H
-
-
 def queimadura(T, t, rng):
     """Queimadura de laser: ponto incandescente, brilho que pulsa e fiapos de fumaça subindo."""
     G, H = vazio(T)
@@ -351,7 +314,6 @@ REGISTRO = [
     ("teia_bola", teia_bola, MEDIA, "bola de teia em viagem (+x)", True),
     ("cartas_voando", cartas_voando, MEDIA, "cartas girando em viagem (+x)", True),
     ("facas_voando", facas_voando, MEDIA, "facas em viagem (+x)", True),
-    ("bomba", bomba, MEDIA, "bomba com pavio em viagem (+x)", True),
     ("bala_de_canhao", bala_de_canhao, MEDIA, "bala de canhão em viagem (+x)", True),
     ("bola_ki", bola_ki, MEDIA, "bola de ki em viagem (+x)", True),
     ("carga_ki", carga_ki, MEDIA, "preparo: ki estalando", True),
@@ -363,7 +325,5 @@ REGISTRO = [
     ("bolhas", bolhas, GRANDE, "bolhas subindo e estourando", False),
     ("cartas_explosivas", cartas_explosivas, GRANDE, "cartas que estouram", False),
     ("explosao_grande", explosao_grande, GRANDE, "explosão em cogumelo", False),
-    ("explosao_cartoon", explosao_cartoon, GRANDE, "explosão de desenho animado", False),
-    ("gas", gas, GRANDE, "nuvem de gás", False),
     ("queimadura", queimadura, GRANDE, "ponto queimando", False),
 ]

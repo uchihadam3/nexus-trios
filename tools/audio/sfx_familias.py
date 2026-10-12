@@ -278,30 +278,12 @@ def facas(rng, v):
     return x
 
 
-def bomba(rng, v):
-    x = _z(1.2)
-    n = n_de(0.4)
-    poe(x, graos(rng, n, 40, 0, 0.38, 3000, 9000, 0.002) * 0.4, 0)
-    poe(x, B.explosao(rng, v), 0.38, 1.0)
-    poe(x, _tom(nota(60), nota(55), 0.3, 0.2, 0.1), 0.45)
-    return x
-
-
 def canhao(rng, v):
     x = _z(1.3)
     poe(x, baque(n_de(0.5), 70, 35, 0.15, 0.6) * 0.8, 0)
     poe(x, _whoosh(rng, 0.3, 1200, 300, 0.4, g=0.5), 0.05)
     poe(x, B.explosao(rng, v), 0.32, 1.1)
     return x
-
-
-def gas(rng, v):
-    n = n_de(1.1)
-    x = passa(rosa(rng, n), 600, 6000, 2) * env(n, 0.05, 0.5) * 0.5
-    t = np.arange(n) / SR
-    x *= 0.7 + 0.3 * np.sin(2 * math.pi * 4 * t)
-    x += graos(rng, n, 12, 0.1, 0.9, 300, 900, 0.02) * 0.3
-    return reverb(x, 0.4, 0.2)
 
 
 def laser(rng, v):
@@ -332,31 +314,12 @@ def gravidade(rng, v):
     return reverb(x, 0.6, 0.2, 2500)
 
 
-def pulso_emp(rng, v):
-    n = n_de(0.8)
-    t = np.arange(n) / SR
-    x = np.sign(np.sin(2 * math.pi * varre(800, 60, n, 0.6).cumsum() / SR)) * env(n, 0.001, 0.25) * 0.25
-    x += graos(rng, n, 30, 0.0, 0.5, 2000, 8000, 0.002) * 0.5
-    x *= (np.sin(2 * math.pi * 40 * t) > -0.3)
-    return reverb(x, 0.3, 0.2)
-
-
 def pilar(rng, v):
     n = n_de(1.3)
     x = assobio(rng, n, 150, 5000, 0.7, 0.5) * env(n, 0.05, 0.6) * 0.8
     x += satura(seno(varre(70, 120, n, 0.6), n), 3) * env(n, 0.03, 0.6) * 0.35
     poe(x, baque(n_de(0.5), 70, 35, 0.2, 0.3) * 0.8, 0)
     return reverb(x, 0.7, 0.3)
-
-
-def dominio(rng, v):
-    n = n_de(1.6)
-    x = np.zeros(n)
-    for k, m in enumerate((48, 55, 60, 63, 67)):
-        poe(x, seno(nota(m), n_de(1.4)) * env(n_de(1.4), 0.2, 0.9) * 0.08, k * 0.04)
-    x += assobio(rng, n, 8000, 200, 0.6, 0.5) * env(n, 0.05, 0.6) * 0.4
-    poe(x, baque(n_de(0.4), 60, 30, 0.2, 0.2) * 0.8, 0)
-    return reverb(x, 0.9, 0.45, 6000)
 
 
 def desintegrar(rng, v):
@@ -498,15 +461,6 @@ def teleporte(rng, v):
     return reverb(x, 0.5, 0.25)
 
 
-def fenda(rng, v):
-    n = n_de(1.3)
-    x = np.zeros(n)
-    poe(x, passa(ruido(rng, n_de(0.2)), 1000, 9000, 2) * env(n_de(0.2), 0.001, 0.08) * 0.7, 0)
-    x += B.portal(rng, v)[:n] * 0.6 if len(B.portal(rng, v)) >= n else _corta(B.portal(rng, v), 1.3) * 0.6
-    x += passa(rosa(rng, n), 40, 250, 2) * env(n, 0.1, 0.6) * 0.4
-    return reverb(x, 0.7, 0.3, 3000)
-
-
 def confusao(rng, v):
     n = n_de(1.2)
     t = np.arange(n) / SR
@@ -544,15 +498,6 @@ def grito_de_guerra(rng, v):
     return reverb(x, 0.6, 0.3)
 
 
-def escudo_tech(rng, v):
-    x = _z(1.1)
-    for k in range(8):
-        poe(x, seno(np.full(n_de(0.05), 1800 + 150 * k), n_de(0.05)) * env(n_de(0.05), 0.001, 0.02) * 0.15, k * 0.04)
-    n = n_de(0.8)
-    poe(x, satura(seno(np.full(n, 110.0), n), 3) * env(n, 0.05, 0.4) * 0.15 + passa(ruido(rng, n), 3000, 8000, 2) * env(n, 0.05, 0.3) * 0.1, 0.3)
-    return reverb(x, 0.4, 0.2)
-
-
 def barreira_magica(rng, v):
     x = _z(1.4)
     poe(x, B.escudo(rng, v)[: n_de(0.8)] * 0.6, 0)
@@ -586,14 +531,6 @@ def purificacao(rng, v):
     for k, m in enumerate((84, 88, 91, 96)):
         poe(x, _brilho(rng, 0.5, nota(m), 0.1, CRISTAL), 0.1 + k * 0.1)
     return reverb(x, 0.8, 0.4, 10000)
-
-
-def enfraquecimento(rng, v):
-    x = _z(1.2)
-    for k, m in enumerate((67, 63, 60, 55)):
-        poe(x, satura(seno(varre(nota(m), nota(m - 1), n_de(0.3)), n_de(0.3)), 1.5) * env(n_de(0.3), 0.01, 0.15) * 0.15, k * 0.12)
-    poe(x, passa(rosa(rng, n_de(1.0)), 80, 500, 2) * env(n_de(1.0), 0.05, 0.5) * 0.3, 0)
-    return reverb(x, 0.5, 0.25, 2500)
 
 
 def lentidao(rng, v):

@@ -99,31 +99,6 @@ def supernova(T, t, rng):
     return G, H
 
 
-def pulso_emp(T, t, rng):
-    """Pulso eletromagnético: quadrados que crescem girando, barras de falha e estalos."""
-    G, H = vazio(T)
-    acc = T.zero()
-    for k in range(3):
-        u = rel(t, k * 0.1, 0.6 + k * 0.1)
-        if u <= 0 or u >= 1:
-            continue
-        s = 0.1 + 0.75 * ease_out(u, 2)
-        a = 0.2 * k + u * 0.5
-        c, sn = math.cos(a), math.sin(a)
-        pts = [(c * x - sn * y, sn * x + c * y) for x, y in ((-s, -s), (s, -s), (s, s), (-s, s), (-s, -s))]
-        acc += T.polyline(pts, 0.016, 1) * (1 - u)
-    sub = np.random.default_rng(int(t * 30) + 331)
-    falhas = T.zero()
-    for _ in range(4):
-        y = sub.uniform(-0.6, 0.6)
-        falhas += np.exp(-((T.V - y) / 0.015) ** 2) * smooth(0.5 - np.abs(T.U - sub.uniform(-0.3, 0.3)), 0, 0.05)
-    falhas *= pulso(t, 0, 0.7)
-    flash = T.gauss(0, 0, 0.15) * some(t, 0, 0.3) * 2.5
-    G += T.glow(acc, 1.3, 1, 0.02) + falhas * 1.2 + flash
-    H += acc * 0.6 + falhas * 0.6 + flash
-    return G, H
-
-
 def pilar(T, t, rng):
     """Pilar de energia: coluna nasce do chão e sobe além do quadro, anéis subindo por ela."""
     G, H = vazio(T)
@@ -137,28 +112,6 @@ def pilar(T, t, rng):
     fa = faiscas(T, rng, t, 20, 0.6, 0.03, cone=(-math.pi + 0.3, -0.3), cy=0.45)
     G += (coluna * 1.3 + nucleo * 1.2 + aneis * 1.1 + base) * env + fa
     H += (nucleo * 1.4 + aneis * 0.3) * env
-    return G, H
-
-
-def dominio(T, t, rng):
-    """Domínio: um círculo de céu infinito se abre, estrelas correndo para o centro e a borda acesa."""
-    G, H = vazio(T)
-    abre = ease_out(rel(t, 0, 0.35), 2.5)
-    env = apaga(t, 0.75, 1)
-    r = 0.85 * abre
-    dentro = smooth(r - T.RAD, -0.01, 0.03)
-    borda = T.ring(r, 0.025) * 1.6 + T.ring(r * 0.94, 0.008) * 0.8
-    sub = np.random.default_rng(351)
-    est = []
-    for _ in range(60):
-        a = sub.uniform(0, TAU)
-        f = (sub.uniform(0, 1) + t * 0.8) % 1
-        d = r * (1 - f)
-        est.append((math.cos(a) * d, math.sin(a) * d, f * sub.uniform(0.4, 1)))
-    estrelas = T.splats(est, 0.008) * dentro
-    veu = dentro * 0.15
-    G += (borda + estrelas * 1.6 + veu) * env
-    H += (borda * 0.7 + estrelas) * env
     return G, H
 
 
@@ -188,8 +141,6 @@ REGISTRO = [
     ("esfera_espiral", esfera_espiral, GRANDE, "esfera em espiral moendo", False),
     ("buraco_negro", buraco_negro, GRANDE, "buraco negro sugando", False),
     ("gravidade", gravidade, GRANDE, "pressão de gravidade", False),
-    ("pulso_emp", pulso_emp, GRANDE, "pulso eletromagnético", False),
     ("pilar", pilar, GRANDE, "pilar de energia subindo", False),
-    ("dominio", dominio, GRANDE, "domínio de céu infinito", False),
     ("desintegrar", desintegrar, GRANDE, "desintegração em grãos", False),
 ]

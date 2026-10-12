@@ -93,8 +93,8 @@ const T: Record<string, string> = {
   caseyjones: 'taco_de_hoquei sequencia_bruta gooool', bebop: 'investida_de_javali pancada_do_bebop atropelo', skeletor: 'cajado_da_caveira maldicao_do_esqueleto dominio_de_snake_mountain',
   shera: 'espada_protetora pela_honra_de_grayskull golpe_da_princesa', liono: 'espada_de_augurio visao_alem_do_alcance thunder_thunder', cheetara: 'bastao_giratorio corrida_felina golpe_certeiro_cheetara',
   mummra: 'antigos_espiritos forma_desperta retorno_ao_sarcofago', homer: 'barriga_de_aco rosquinha d_oh', bart: 'estilingue provocacao_do_bart travessura_maxima',
-  peter: 'pow_cartoon bomba confusao', stewie: 'laser escudo_tech dominio', cartman: 'rugido enfraquecimento gas',
-  billcipher: 'runas fenda olho', plankton: 'inv_clones pulso_emp -', mojojojo: 'punho_gigante laser rugido',
+  peter: 'briga_com_o_galo ideia_terrivel nhe_he_he', stewie: 'raio_de_controle plano_mirabolante dominacao_mundial', cartman: 'respeitem_minha_autoridade chantagem plano_egoista',
+  billcipher: 'acordo_de_bill realidade_invertida olho_que_tudo_ve', plankton: 'inv_clones plano_z roubar_a_formula', mojojojo: 'punho_gigante laser rugido',
   capitaoplaneta: 'barreira_magica vinhas grito_de_guerra', bugiganga: 'esticar rajada_de_ar confusao', dannyphantom: 'raio_fantasma teleporte rugido',
   coragem: 'medo resgate bencao',
 };

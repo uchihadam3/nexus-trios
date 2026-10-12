@@ -104,6 +104,23 @@
    ],
    "bytes": 59196
   },
+  "acordo-de-bill": {
+   "arquivo": "acordo-de-bill.mp3",
+   "descricao": "Bill Cipher: o acordo",
+   "versoes": [
+    0.0,
+    1.9764,
+    3.9853,
+    5.8378
+   ],
+   "duracoes": [
+    1.8964,
+    1.9289,
+    1.7725,
+    1.8523
+   ],
+   "bytes": 65075
+  },
   "adaga-de-kamish": {
    "arquivo": "adaga-de-kamish.mp3",
    "descricao": "básico de Jinwoo: dois cortes de adaga e o sussurro da sombra",
@@ -1702,6 +1719,23 @@
    ],
    "bytes": 50395
   },
+  "bill-preparo": {
+   "arquivo": "bill-preparo.mp3",
+   "descricao": "Bill Cipher: o triângulo pulsando (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 61937
+  },
   "binario-preparo": {
    "arquivo": "binario-preparo.mp3",
    "descricao": "Capitã Marvel: as chamas cósmicas (antes do golpe)",
@@ -1991,23 +2025,6 @@
    ],
    "bytes": 60312
   },
-  "bomba": {
-   "arquivo": "bomba.mp3",
-   "descricao": "família bomba",
-   "versoes": [
-    0.0,
-    1.28,
-    2.6035,
-    3.8429
-   ],
-   "duracoes": [
-    1.2,
-    1.2435,
-    1.1594,
-    1.2183
-   ],
-   "bytes": 68163
-  },
   "bomba-abobora": {
    "arquivo": "bomba-abobora.mp3",
    "descricao": "Duende Verde: a risada e a explosão",
@@ -2160,6 +2177,23 @@
     1.0152
    ],
    "bytes": 40775
+  },
+  "briga-com-o-galo": {
+   "arquivo": "briga-com-o-galo.mp3",
+   "descricao": "Peter Griffin: a briga com o galo",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 67572
   },
   "broly-preparo": {
    "arquivo": "broly-preparo.mp3",
@@ -2858,6 +2892,23 @@
    ],
    "bytes": 44583
   },
+  "cartman-preparo": {
+   "arquivo": "cartman-preparo.mp3",
+   "descricao": "Eric Cartman: as mãos se esfregando (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 54040
+  },
   "cauda-de-godzilla": {
    "arquivo": "cauda-de-godzilla.mp3",
    "descricao": "básico do Godzilla: o rugido e a cauda",
@@ -3095,6 +3146,23 @@
     1.4213
    ],
    "bytes": 66596
+  },
+  "chantagem": {
+   "arquivo": "chantagem.mp3",
+   "descricao": "Eric Cartman: a chantagem",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 65589
   },
   "chaos-control": {
    "arquivo": "chaos-control.mp3",
@@ -5442,22 +5510,22 @@
    ],
    "bytes": 64598
   },
-  "dominio": {
-   "arquivo": "dominio.mp3",
-   "descricao": "família dominio",
+  "dominacao-mundial": {
+   "arquivo": "dominacao-mundial.mp3",
+   "descricao": "Stewie Griffin: a dominação mundial",
    "versoes": [
     0.0,
-    1.68,
-    3.418,
-    5.0439
+    2.3445,
+    4.7559,
+    7.0248
    ],
    "duracoes": [
-    1.6,
-    1.658,
-    1.5459,
-    1.6244
+    2.2645,
+    2.3314,
+    2.1889,
+    2.2985
    ],
-   "bytes": 62065
+   "bytes": 59977
   },
   "dominio-de-snake-mountain": {
    "arquivo": "dominio-de-snake-mountain.mp3",
@@ -5833,23 +5901,6 @@
    ],
    "bytes": 30621
   },
-  "enfraquecimento": {
-   "arquivo": "enfraquecimento.mp3",
-   "descricao": "família enfraquecimento",
-   "versoes": [
-    0.0,
-    1.28,
-    2.6035,
-    3.8429
-   ],
-   "duracoes": [
-    1.2,
-    1.2435,
-    1.1594,
-    1.2183
-   ],
-   "bytes": 34699
-  },
   "engano-perfeito": {
    "arquivo": "engano-perfeito.mp3",
    "descricao": "Loki: as cópias quebrando e a adaga",
@@ -6223,23 +6274,6 @@
     1.7402
    ],
    "bytes": 60548
-  },
-  "escudo-tech": {
-   "arquivo": "escudo-tech.mp3",
-   "descricao": "família escudo tech",
-   "versoes": [
-    0.0,
-    1.18,
-    2.3999,
-    3.5427
-   ],
-   "duracoes": [
-    1.1,
-    1.1399,
-    1.0628,
-    1.1167
-   ],
-   "bytes": 45934
   },
   "esfera-da-destruicao": {
    "arquivo": "esfera-da-destruicao.mp3",
@@ -7618,23 +7652,6 @@
    ],
    "bytes": 52904
   },
-  "fenda": {
-   "arquivo": "fenda.mp3",
-   "descricao": "família fenda",
-   "versoes": [
-    0.0,
-    1.38,
-    2.8071,
-    4.1432
-   ],
-   "duracoes": [
-    1.3,
-    1.3471,
-    1.256,
-    1.3198
-   ],
-   "bytes": 47316
-  },
   "fenix-asas": {
    "arquivo": "fenix-asas.mp3",
    "descricao": "as asas de fogo abrindo no Ikki",
@@ -8927,23 +8944,6 @@
    ],
    "bytes": 52699
   },
-  "gas": {
-   "arquivo": "gas.mp3",
-   "descricao": "família gas",
-   "versoes": [
-    0.0,
-    1.18,
-    2.3999,
-    3.5427
-   ],
-   "duracoes": [
-    1.1,
-    1.1399,
-    1.0628,
-    1.1167
-   ],
-   "bytes": 46495
-  },
   "gas-do-duende": {
    "arquivo": "gas-do-duende.mp3",
    "descricao": "Duende Verde: o gás e os gemidos",
@@ -10099,6 +10099,23 @@
     2.1067
    ],
    "bytes": 70868
+  },
+  "ideia-terrivel": {
+   "arquivo": "ideia-terrivel.mp3",
+   "descricao": "Peter Griffin: a ideia terrível",
+   "versoes": [
+    0.0,
+    2.208,
+    4.5539,
+    6.6808
+   ],
+   "duracoes": [
+    2.128,
+    2.2659,
+    2.0468,
+    2.2193
+   ],
+   "bytes": 69003
   },
   "identidade-falsa": {
    "arquivo": "identidade-falsa.mp3",
@@ -20674,6 +20691,23 @@
    ],
    "bytes": 57046
   },
+  "nhe-he-he": {
+   "arquivo": "nhe-he-he.mp3",
+   "descricao": "Peter Griffin: Nhé-hé-hé",
+   "versoes": [
+    0.0,
+    2.0723,
+    4.1817,
+    6.1815
+   ],
+   "duracoes": [
+    1.9923,
+    2.0294,
+    1.9198,
+    2.001
+   ],
+   "bytes": 75589
+  },
   "nocaute": {
    "arquivo": "nocaute.mp3",
    "descricao": "nocaute",
@@ -20809,6 +20843,23 @@
     2.2335
    ],
    "bytes": 75810
+  },
+  "olho-que-tudo-ve": {
+   "arquivo": "olho-que-tudo-ve.mp3",
+   "descricao": "Bill Cipher: o olho que tudo vê",
+   "versoes": [
+    0.0,
+    2.4415,
+    4.8864,
+    7.249
+   ],
+   "duracoes": [
+    2.3615,
+    2.365,
+    2.2826,
+    2.3175
+   ],
+   "bytes": 61292
   },
   "olhos-brilhando": {
    "arquivo": "olhos-brilhando.mp3",
@@ -21405,6 +21456,23 @@
    ],
    "bytes": 38790
   },
+  "peter-preparo": {
+   "arquivo": "peter-preparo.mp3",
+   "descricao": "Peter Griffin: a risadinha (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 57735
+  },
   "piada-final": {
    "arquivo": "piada-final.mp3",
    "descricao": "Coringa: a piada final",
@@ -21541,6 +21609,23 @@
    ],
    "bytes": 59468
   },
+  "plankton-preparo": {
+   "arquivo": "plankton-preparo.mp3",
+   "descricao": "Plankton: as antenas (Preparo)",
+   "versoes": [
+    0.0,
+    1.3478,
+    2.7405,
+    4.0384
+   ],
+   "duracoes": [
+    1.2678,
+    1.3127,
+    1.2179,
+    1.2749
+   ],
+   "bytes": 41662
+  },
   "plano-b": {
    "arquivo": "plano-b.mp3",
    "descricao": "Plano B: a explosão do plasma",
@@ -21643,6 +21728,23 @@
    ],
    "bytes": 53349
   },
+  "plano-egoista": {
+   "arquivo": "plano-egoista.mp3",
+   "descricao": "Eric Cartman: o plano egoísta",
+   "versoes": [
+    0.0,
+    1.9059,
+    3.8587,
+    5.7202
+   ],
+   "duracoes": [
+    1.8259,
+    1.8728,
+    1.7815,
+    1.8861
+   ],
+   "bytes": 63880
+  },
   "plano-improvisado": {
    "arquivo": "plano-improvisado.mp3",
    "descricao": "Senhor das Estrelas: a fita, o rock e o tiro",
@@ -21676,6 +21778,23 @@
     2.1661
    ],
    "bytes": 76173
+  },
+  "plano-mirabolante": {
+   "arquivo": "plano-mirabolante.mp3",
+   "descricao": "Stewie Griffin: o plano mirabolante",
+   "versoes": [
+    0.0,
+    1.3807,
+    2.7954,
+    4.0802
+   ],
+   "duracoes": [
+    1.3007,
+    1.3347,
+    1.2048,
+    1.2288
+   ],
+   "bytes": 54480
   },
   "plano-que-plano": {
    "arquivo": "plano-que-plano.mp3",
@@ -21727,6 +21846,23 @@
     1.5136
    ],
    "bytes": 53486
+  },
+  "plano-z": {
+   "arquivo": "plano-z.mp3",
+   "descricao": "Plankton: o Plano Z",
+   "versoes": [
+    0.0,
+    1.2666,
+    2.5825,
+    3.8084
+   ],
+   "duracoes": [
+    1.1866,
+    1.2359,
+    1.1459,
+    1.1795
+   ],
+   "bytes": 48829
   },
   "po-de-diamante": {
    "arquivo": "po-de-diamante.mp3",
@@ -22340,23 +22476,6 @@
    ],
    "bytes": 38307
   },
-  "pulso-emp": {
-   "arquivo": "pulso-emp.mp3",
-   "descricao": "família pulso emp",
-   "versoes": [
-    0.0,
-    0.88,
-    1.789,
-    2.6419
-   ],
-   "duracoes": [
-    0.8,
-    0.829,
-    0.7729,
-    0.8122
-   ],
-   "bytes": 68377
-  },
   "punho-amaldicoado": {
    "arquivo": "punho-amaldicoado.mp3",
    "descricao": "básico de Yuji: impacto com estalo distorcido do Black Flash",
@@ -22952,6 +23071,23 @@
    ],
    "bytes": 44364
   },
+  "raio-de-controle": {
+   "arquivo": "raio-de-controle.mp3",
+   "descricao": "Stewie Griffin: o raio de controle",
+   "versoes": [
+    0.0,
+    1.8073,
+    3.6762,
+    5.4261
+   ],
+   "duracoes": [
+    1.7273,
+    1.7889,
+    1.6699,
+    1.7532
+   ],
+   "bytes": 43806
+  },
   "raio-de-dexter": {
    "arquivo": "raio-de-dexter.mp3",
    "descricao": "básico do Dexter: a arma de raio",
@@ -23427,6 +23563,23 @@
     0.4061
    ],
    "bytes": 13188
+  },
+  "realidade-invertida": {
+   "arquivo": "realidade-invertida.mp3",
+   "descricao": "Bill Cipher: a realidade invertida",
+   "versoes": [
+    0.0,
+    1.5865,
+    3.1826,
+    4.6648
+   ],
+   "duracoes": [
+    1.5065,
+    1.5161,
+    1.4022,
+    1.542
+   ],
+   "bytes": 54731
   },
   "rebellion-e-ebony": {
    "arquivo": "rebellion-e-ebony.mp3",
@@ -23938,6 +24091,23 @@
    ],
    "bytes": 69107
   },
+  "respeitem-minha-autoridade": {
+   "arquivo": "respeitem-minha-autoridade.mp3",
+   "descricao": "Eric Cartman: Respeitem minha autoridade",
+   "versoes": [
+    0.0,
+    1.4679,
+    2.985,
+    4.4069
+   ],
+   "duracoes": [
+    1.3879,
+    1.4371,
+    1.342,
+    1.4085
+   ],
+   "bytes": 43358
+  },
   "respiracao-da-agua": {
    "arquivo": "respiracao-da-agua.mp3",
    "descricao": "Tanjiro: a Roda d'Água",
@@ -24175,6 +24345,23 @@
     1.6244
    ],
    "bytes": 39689
+  },
+  "roubar-a-formula": {
+   "arquivo": "roubar-a-formula.mp3",
+   "descricao": "Plankton: roubar a fórmula",
+   "versoes": [
+    0.0,
+    1.858,
+    3.7793,
+    5.5769
+   ],
+   "duracoes": [
+    1.778,
+    1.8414,
+    1.7176,
+    1.7471
+   ],
+   "bytes": 57051
   },
   "roubar-carga": {
    "arquivo": "roubar-carga.mp3",
@@ -25926,6 +26113,23 @@
     1.3198
    ],
    "bytes": 54504
+  },
+  "stewie-preparo": {
+   "arquivo": "stewie-preparo.mp3",
+   "descricao": "Stewie Griffin: as engrenagens (Preparo)",
+   "versoes": [
+    0.0,
+    1.4599,
+    2.9906,
+    4.422
+   ],
+   "duracoes": [
+    1.3799,
+    1.4508,
+    1.3513,
+    1.4051
+   ],
+   "bytes": 56829
   },
   "stitch-preparo": {
    "arquivo": "stitch-preparo.mp3",

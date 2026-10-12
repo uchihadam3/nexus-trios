@@ -53,32 +53,6 @@ def grito_de_guerra(T, t, rng):
     return G, H
 
 
-def escudo_tech(T, t, rng):
-    """Escudo tecnológico: painéis hexagonais se encaixam um a um formando uma parede plana com varredura."""
-    G, H = vazio(T)
-    env = apaga(t, 0.75, 1)
-    s = 0.13
-    paineis, bordas = [], []
-    k = 0
-    for i in range(-2, 3):
-        for j in range(-3, 4):
-            cx = j * s * 1.5
-            cy = i * s * math.sqrt(3) + (j % 2) * s * math.sqrt(3) / 2
-            if abs(cx) > 0.55 or abs(cy) > 0.62:
-                continue
-            u = back(rel(t, 0.03 * k % 0.35, 0.03 * k % 0.35 + 0.15), 1.3)
-            k += 7
-            hexa = [(cx + math.cos(TAU * m / 6) * s * 0.92 * u, cy + math.sin(TAU * m / 6) * s * 0.92 * u) for m in range(6)]
-            paineis.append((hexa, 0.5))
-            bordas.append(hexa + [hexa[0]])
-    p = T.polys(paineis, 0.003)
-    b = sum(T.polyline(h, 0.008, 1) for h in bordas)
-    varre = np.exp(-((T.V - (-0.7 + 1.4 * ((t * 1.5) % 1))) / 0.04) ** 2) * smooth(0.6 - np.abs(T.U), 0, 0.05) * janela(t, 0.3, 0.4)
-    G += (p * 0.6 + b * 1.2 + varre * 0.8 * (p > 0.1)) * env
-    H += (b * 0.6 + varre * 0.4 * (p > 0.1)) * env
-    return G, H
-
-
 def barreira_magica(T, t, rng):
     """Barreira mágica: uma cúpula de runas gira em volta do aliado e pulsa quando fecha."""
     G, H = vazio(T)
@@ -140,23 +114,6 @@ def purificar(T, t, rng):
     bril = sum(T.flare(rng.uniform(-0.4, 0.4), rng.uniform(-0.6, 0.4), 0.3, 0.4) * pulso((t * 2 + rng.uniform(0, 1)) % 1, 0, 1) for _ in range(8))
     G += (onda + bril) * env
     H += (onda * 0.8 + bril * 0.8) * env
-    return G, H
-
-
-def enfraquecer(T, t, rng):
-    """Enfraquecer: setas para baixo caem pelo corpo e uma névoa cinza pesa em volta."""
-    G, H = vazio(T)
-    env = janela(t, 0, 0.12) * apaga(t, 0.75, 1)
-    setas = []
-    for k in range(5):
-        u = ((t * 1.2 + (0.1, 0.6, 0.3, 0.85, 0.45)[k]) % 1)
-        x = (k - 2) * 0.17
-        y = -0.5 + u * 1.0
-        setas.append(([(x - 0.08, y), (x + 0.08, y), (x + 0.08, y + 0.06), (x + 0.15, y + 0.06), (x, y + 0.18), (x - 0.15, y + 0.06), (x - 0.08, y + 0.06)], math.sin(math.pi * u)))
-    s = T.polys(setas, 0.003)
-    nevoa = T.gauss(0, 0.2, 0.4, 0.3) * 0.35 * (0.7 + 0.3 * T.noise(np.random.default_rng(731), 0.08, 2))
-    G += (s * 1.3 + nevoa) * env
-    H += s * 0.5 * env
     return G, H
 
 
@@ -617,12 +574,10 @@ REGISTRO = [
     ("brasas_renascendo", brasas_renascendo, GRANDE, "brasas sobre quem vai renascer (laço)", True),
     ("cura_em_area", cura_em_area, GRANDE, "cura em área com cruzes", False),
     ("grito_de_guerra", grito_de_guerra, GRANDE, "estandarte de raios e divisas", False),
-    ("escudo_tech", escudo_tech, GRANDE, "parede de painéis hexagonais", False),
     ("barreira_magica", barreira_magica, GRANDE, "cúpula de runas", False),
     ("resgate", resgate, GRANDE, "mergulho de resgate", False),
     ("bencao", bencao, GRANDE, "penas e halo", False),
     ("purificar_onda", purificar, GRANDE, "onda que lava", False),
-    ("enfraquecer", enfraquecer, GRANDE, "setas para baixo", False),
     ("lentidao", lentidao, GRANDE, "ampulheta", False),
     ("medo", medo, GRANDE, "olhos na sombra", False),
     ("estrela_invencivel", estrela_invencivel, GRANDE, "estrela invencível", False),
