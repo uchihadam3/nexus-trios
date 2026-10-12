@@ -1,4 +1,18 @@
 {
+ "absorcao_cosmica": {
+  "descricao": "Capitã Marvel · a energia absorvida e a aura",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 77670
+ },
  "acelera": {
   "descricao": "Acelerou: setas, vultos e o relógio que dá a volta",
   "quadros": 12,
@@ -152,6 +166,20 @@
   ],
   "laco": false,
   "bytes": 35446
+ },
+ "alvo_confirmado": {
+  "descricao": "Justiceiro · a bala supersônica e o impacto",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 48746
  },
  "amaterasu": {
   "descricao": "Sasuke · as chamas negras do Amaterasu",
@@ -587,6 +615,20 @@
   "laco": false,
   "bytes": 45154
  },
+ "bastoes_em_cruz": {
+  "descricao": "Demolidor · os dois bastões em X",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 22004
+ },
  "batarangue": {
   "descricao": "Batarangue: o morcego girando que crava no alvo",
   "quadros": 12,
@@ -712,6 +754,20 @@
   ],
   "laco": false,
   "bytes": 53582
+ },
+ "binario_preparo": {
+  "descricao": "Capitã Marvel · o corpo em chamas cósmicas (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 34920
  },
  "blasters_elementais": {
   "descricao": "Senhor das Estrelas: dois blasters alternando tiros de plasma",
@@ -1076,6 +1132,34 @@
   ],
   "laco": true,
   "bytes": 35702
+ },
+ "caca_preparo": {
+  "descricao": "Blade · a glaive girando e a lua (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 9350
+ },
+ "cacada_noturna": {
+  "descricao": "Blade · a glaive em volta e o X final",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 36330
  },
  "cajado_da_caveira": {
   "descricao": "Cajado da Caveira: o crânio de carneiro bate e solta faíscas mágicas num círculo",
@@ -1819,6 +1903,20 @@
   "laco": false,
   "bytes": 27884
  },
+ "contra_ataque_cego": {
+  "descricao": "Demolidor · a rajada de golpes e o final",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 35788
+ },
  "contra_buster": {
   "descricao": "Cloud · o contra-ataque: corte horizontal pesado",
   "quadros": 12,
@@ -2322,6 +2420,20 @@
   ],
   "laco": false,
   "bytes": 70982
+ },
+ "demolidor_preparo": {
+  "descricao": "Demolidor · os chifres e o radar (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 12780
  },
  "descarga_real": {
   "descricao": "Pantera Negra · a esfera e a onda com os hexágonos",
@@ -3400,6 +3512,20 @@
   ],
   "laco": false,
   "bytes": 88696
+ },
+ "explosao_binaria": {
+  "descricao": "Capitã Marvel · a estrela de oito pontas gigante",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 125476
  },
  "explosao_cartoon": {
   "descricao": "explosão de desenho animado",
@@ -5417,6 +5543,20 @@
   "laco": false,
   "bytes": 43062
  },
+ "lamina_de_prata": {
+  "descricao": "Blade · o corte de prata e o sangue de volta",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 25008
+ },
  "lamina_eletrica": {
   "descricao": "lâmina elétrica",
   "quadros": 12,
@@ -6327,6 +6467,20 @@
   "laco": true,
   "bytes": 58114
  },
+ "mira_fria": {
+  "descricao": "Justiceiro · a luneta trava e a caveira",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 38610
+ },
  "missil": {
   "descricao": "míssil em viagem (+x)",
   "quadros": 12,
@@ -6579,6 +6733,20 @@
   "laco": false,
   "bytes": 32516
  },
+ "olhar_de_penitencia": {
+  "descricao": "Motoqueiro · a caveira em chamas e a onda de fogo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 51240
+ },
  "olho": {
   "descricao": "olho gigante se abrindo",
   "quadros": 12,
@@ -6830,6 +6998,34 @@
   ],
   "laco": false,
   "bytes": 33576
+ },
+ "penance_stare": {
+  "descricao": "Motoqueiro · os olhos, as espirais e as almas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 51708
+ },
+ "penitencia_preparo": {
+  "descricao": "Motoqueiro · a caveira e as chamas (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 16320
  },
  "pentagrama": {
   "descricao": "pentagrama infernal",
@@ -7475,6 +7671,20 @@
   "laco": false,
   "bytes": 47388
  },
+ "radar_sensorial": {
+  "descricao": "Demolidor · as ondas do radar e o contorno",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 44958
+ },
  "radiacao": {
   "descricao": "radiação pulsando",
   "quadros": 12,
@@ -7685,6 +7895,20 @@
   "laco": false,
   "bytes": 98838
  },
+ "rajada_binaria": {
+  "descricao": "Capitã Marvel · os dois raios de fóton e a bola",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 36558
+ },
  "rajada_de_ar": {
   "descricao": "arcos de vento",
   "quadros": 12,
@@ -7740,6 +7964,20 @@
   ],
   "laco": true,
   "bytes": 31176
+ },
+ "rastreio_vampirico": {
+  "descricao": "Blade · o rastro de sangue, as presas e a marca",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 21176
  },
  "rebellion_e_ebony": {
   "descricao": "Dante: corte largo de espadão e dois tiros de pistola",
@@ -8608,6 +8846,20 @@
   ],
   "laco": false,
   "bytes": 37090
+ },
+ "sniper_preparo": {
+  "descricao": "Justiceiro · a luneta respirando (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 17972
  },
  "so_um_arranhao": {
   "descricao": "Deadpool · o band-aid e a regeneração",

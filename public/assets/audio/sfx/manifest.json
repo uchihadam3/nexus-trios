@@ -2,6 +2,23 @@
  "taxa": 44100,
  "versoes": 4,
  "sons": {
+  "absorcao-cosmica": {
+   "arquivo": "absorcao-cosmica.mp3",
+   "descricao": "Capitã Marvel: a energia sugada e a aura",
+   "versoes": [
+    0.0,
+    1.88,
+    3.8253,
+    5.6444
+   ],
+   "duracoes": [
+    1.8,
+    1.8653,
+    1.7391,
+    1.8274
+   ],
+   "bytes": 68148
+  },
   "acelera": {
    "arquivo": "acelera.mp3",
    "descricao": "família acelera",
@@ -188,6 +205,23 @@
     1.411
    ],
    "bytes": 43591
+  },
+  "alvo-confirmado": {
+   "arquivo": "alvo-confirmado.mp3",
+   "descricao": "Justiceiro: o tiro de rifle e o impacto",
+   "versoes": [
+    0.0,
+    1.8901,
+    3.9664,
+    5.8922
+   ],
+   "duracoes": [
+    1.8101,
+    1.9963,
+    1.8458,
+    1.8332
+   ],
+   "bytes": 61807
   },
   "amaterasu": {
    "arquivo": "amaterasu.mp3",
@@ -716,6 +750,23 @@
    ],
    "bytes": 20847
   },
+  "bastoes-em-cruz": {
+   "arquivo": "bastoes-em-cruz.mp3",
+   "descricao": "Demolidor: os bastões girando e batendo",
+   "versoes": [
+    0.0,
+    1.3343,
+    2.7156,
+    4.06
+   ],
+   "duracoes": [
+    1.2543,
+    1.3013,
+    1.2644,
+    1.3232
+   ],
+   "bytes": 43142
+  },
   "batarangue": {
    "arquivo": "batarangue.mp3",
    "descricao": "básico de Batman: assobio do batarangue girando e o \"tchak\" quando crava",
@@ -851,6 +902,23 @@
     1.4213
    ],
    "bytes": 50395
+  },
+  "binario-preparo": {
+   "arquivo": "binario-preparo.mp3",
+   "descricao": "Capitã Marvel: as chamas cósmicas (antes do golpe)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 55350
   },
   "blasters-elementais": {
    "arquivo": "blasters-elementais.mp3",
@@ -1174,6 +1242,40 @@
     1.3198
    ],
    "bytes": 43476
+  },
+  "caca-preparo": {
+   "arquivo": "caca-preparo.mp3",
+   "descricao": "Blade: a glaive girando (antes do golpe)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 60515
+  },
+  "cacada-noturna": {
+   "arquivo": "cacada-noturna.mp3",
+   "descricao": "Blade: a glaive cortando e o X final",
+   "versoes": [
+    0.0,
+    1.723,
+    3.4822,
+    5.1518
+   ],
+   "duracoes": [
+    1.643,
+    1.6792,
+    1.5896,
+    1.6684
+   ],
+   "bytes": 64841
   },
   "cajado-da-caveira": {
    "arquivo": "cajado-da-caveira.mp3",
@@ -1991,6 +2093,23 @@
    ],
    "bytes": 37496
   },
+  "contra-ataque-cego": {
+   "arquivo": "contra-ataque-cego.mp3",
+   "descricao": "Demolidor: a rajada de golpes e o final",
+   "versoes": [
+    0.0,
+    1.88,
+    3.8253,
+    5.6444
+   ],
+   "duracoes": [
+    1.8,
+    1.8653,
+    1.7391,
+    1.8274
+   ],
+   "bytes": 58437
+  },
   "controle-de-chakra": {
    "arquivo": "controle-de-chakra.mp3",
    "descricao": "Controle de chakra: o chakra apertando no punho",
@@ -2500,6 +2619,23 @@
     1.4213
    ],
    "bytes": 38947
+  },
+  "demolidor-preparo": {
+   "arquivo": "demolidor-preparo.mp3",
+   "descricao": "Demolidor: o radar e os corações (antes do golpe)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 40149
   },
   "derrota": {
    "arquivo": "derrota.mp3",
@@ -3775,6 +3911,23 @@
     1.1167
    ],
    "bytes": 51052
+  },
+  "explosao-binaria": {
+   "arquivo": "explosao-binaria.mp3",
+   "descricao": "Capitã Marvel: a estrela explodindo e os choques",
+   "versoes": [
+    0.0,
+    2.28,
+    4.6398,
+    6.767
+   ],
+   "duracoes": [
+    2.2,
+    2.2798,
+    2.0472,
+    2.2335
+   ],
+   "bytes": 77349
   },
   "explosao-de-fogo": {
    "arquivo": "explosao-de-fogo.mp3",
@@ -6156,6 +6309,23 @@
    ],
    "bytes": 48731
   },
+  "lamina-de-prata": {
+   "arquivo": "lamina-de-prata.mp3",
+   "descricao": "Blade: a espada de prata e o sangue de volta",
+   "versoes": [
+    0.0,
+    1.5601,
+    3.1532,
+    4.6892
+   ],
+   "duracoes": [
+    1.4801,
+    1.5131,
+    1.456,
+    1.5041
+   ],
+   "bytes": 60738
+  },
   "lamina-eletrica": {
    "arquivo": "lamina-eletrica.mp3",
    "descricao": "família lamina eletrica",
@@ -7244,6 +7414,23 @@
    ],
    "bytes": 50180
   },
+  "mira-fria": {
+   "arquivo": "mira-fria.mp3",
+   "descricao": "Justiceiro: a luneta ajustando e travando",
+   "versoes": [
+    0.0,
+    1.4754,
+    3.0002,
+    4.4544
+   ],
+   "duracoes": [
+    1.3954,
+    1.4448,
+    1.3742,
+    1.4163
+   ],
+   "bytes": 57042
+  },
   "missil": {
    "arquivo": "missil.mp3",
    "descricao": "míssil",
@@ -7618,6 +7805,23 @@
    ],
    "bytes": 43856
   },
+  "olhar-de-penitencia": {
+   "arquivo": "olhar-de-penitencia.mp3",
+   "descricao": "Motoqueiro: a caveira em chamas e a onda de fogo",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 74784
+  },
   "olho": {
    "arquivo": "olho.mp3",
    "descricao": "família olho",
@@ -7821,6 +8025,40 @@
     1.3198
    ],
    "bytes": 49329
+  },
+  "penance-stare": {
+   "arquivo": "penance-stare.mp3",
+   "descricao": "Motoqueiro: os olhos, a espiral e as almas",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 67040
+  },
+  "penitencia-preparo": {
+   "arquivo": "penitencia-preparo.mp3",
+   "descricao": "Motoqueiro: o fogo e o motor (antes do golpe)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 54355
   },
   "pentagrama": {
    "arquivo": "pentagrama.mp3",
@@ -8621,6 +8859,23 @@
    ],
    "bytes": 31995
   },
+  "radar-sensorial": {
+   "arquivo": "radar-sensorial.mp3",
+   "descricao": "Demolidor: as ondas do radar e o coração",
+   "versoes": [
+    0.0,
+    1.88,
+    3.8253,
+    5.6444
+   ],
+   "duracoes": [
+    1.8,
+    1.8653,
+    1.7391,
+    1.8274
+   ],
+   "bytes": 51116
+  },
   "radiacao": {
    "arquivo": "radiacao.mp3",
    "descricao": "família radiacao",
@@ -8808,6 +9063,23 @@
    ],
    "bytes": 46959
   },
+  "rajada-binaria": {
+   "arquivo": "rajada-binaria.mp3",
+   "descricao": "Capitã Marvel: os dois raios de fóton e os choques",
+   "versoes": [
+    0.0,
+    1.3493,
+    2.7264,
+    4.0184
+   ],
+   "duracoes": [
+    1.2693,
+    1.2971,
+    1.212,
+    1.2999
+   ],
+   "bytes": 48664
+  },
   "rajada-de-ar": {
    "arquivo": "rajada-de-ar.mp3",
    "descricao": "família rajada de ar",
@@ -8892,6 +9164,23 @@
     1.1167
    ],
    "bytes": 54611
+  },
+  "rastreio-vampirico": {
+   "arquivo": "rastreio-vampirico.mp3",
+   "descricao": "Blade: o farejar, as presas e a marca",
+   "versoes": [
+    0.0,
+    1.4752,
+    2.9717,
+    4.3897
+   ],
+   "duracoes": [
+    1.3952,
+    1.4165,
+    1.338,
+    1.4152
+   ],
+   "bytes": 60958
   },
   "reacao": {
    "arquivo": "reacao.mp3",
@@ -9895,6 +10184,23 @@
     0.9437
    ],
    "bytes": 25366
+  },
+  "sniper-preparo": {
+   "arquivo": "sniper-preparo.mp3",
+   "descricao": "Justiceiro: a respiração e o ferrolho (antes do tiro)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 51900
   },
   "so-um-arranhao": {
    "arquivo": "so-um-arranhao.mp3",
