@@ -2001,6 +2001,20 @@
   "laco": true,
   "bytes": 176772
  },
+ "charge_beam": {
+  "descricao": "Samus · a bola carregada e o impacto",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 34548
+ },
  "chegada": {
   "descricao": "apoio chegando ao aliado",
   "quadros": 12,
@@ -3135,6 +3149,20 @@
   "laco": false,
   "bytes": 57618
  },
+ "danca_da_bruxa": {
+  "descricao": "Bayonetta · os chutes em giro e as borboletas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 13942
+ },
  "danca_de_distracao": {
   "descricao": "Senhor das Estrelas · a pista de dança e os tontos",
   "quadros": 12,
@@ -3148,6 +3176,20 @@
   ],
   "laco": false,
   "bytes": 39174
+ },
+ "dante_preparo": {
+  "descricao": "Dante · os raios e as asas de demônio (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 27458
  },
  "dardo_crescente": {
   "descricao": "Dardos crescentes do Cavaleiro da Lua: três luas de prata cravam girando e a lua cheia acende",
@@ -3386,6 +3428,20 @@
   ],
   "laco": false,
   "bytes": 40346
+ },
+ "devil_trigger": {
+  "descricao": "Dante · as asas, o Stinger e a explosão",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 49214
  },
  "devorador_preparo": {
   "descricao": "Galactus · as mãos e a energia sugada (Preparo, laço)",
@@ -3652,6 +3708,20 @@
   ],
   "laco": true,
   "bytes": 19898
+ },
+ "ebony_e_ivory": {
+  "descricao": "Dante · a saraivada das duas pistolas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 17016
  },
  "eclipse_preparo": {
   "descricao": "Griffith · o eclipse se formando (Preparo, laço)",
@@ -5683,6 +5753,20 @@
   "laco": false,
   "bytes": 29076
  },
+ "ganondorf_preparo": {
+  "descricao": "Ganondorf · o punho de trevas e a Força (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 15852
+ },
  "garra_da_leoa": {
   "descricao": "Básico de Sekhmet: a patada em chamas",
   "quadros": 12,
@@ -6956,6 +7040,34 @@
   ],
   "laco": false,
   "bytes": 59060
+ },
+ "judgement_cut_end": {
+  "descricao": "Vergil · os cortes no campo inteiro e os cacos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 56550
+ },
+ "juizo_do_rei": {
+  "descricao": "Ganondorf · as colunas de trevas e o selo que cala",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 36124
  },
  "julgamento_de_khonshu": {
   "descricao": "Cavaleiro da Lua · a lua, Khonshu e as colunas de luar",
@@ -8581,6 +8693,20 @@
   "laco": false,
   "bytes": 37346
  },
+ "missil_de_contencao": {
+  "descricao": "Samus · o míssil, a explosão e o anel de lentidão",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 35398
+ },
  "mjolnir_impacto": {
   "descricao": "Thor · o martelo batendo e o trovão",
   "quadros": 12,
@@ -9546,6 +9672,20 @@
   ],
   "laco": true,
   "bytes": 217142
+ },
+ "poder_da_triade": {
+  "descricao": "Ganondorf · o triângulo da Força, a sombra e o escudo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 45940
  },
  "portal": {
   "descricao": "portal",
@@ -11226,6 +11366,20 @@
   ],
   "laco": false,
   "bytes": 58888
+ },
+ "samus_preparo": {
+  "descricao": "Samus · o canhão carregando (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 25724
  },
  "sangue": {
   "descricao": "respingo de sangue",
@@ -12935,6 +13089,20 @@
   "laco": false,
   "bytes": 39274
  },
+ "trava_de_mira": {
+  "descricao": "Samus · a mira do visor travando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 12388
+ },
  "tridente": {
   "descricao": "Aquaman: estocada do tridente com espiral e respingo de água",
   "quadros": 12,
@@ -13313,6 +13481,20 @@
   "laco": false,
   "bytes": 53370
  },
+ "vergil_preparo": {
+  "descricao": "Vergil · a bainha e as espadas girando (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 17672
+ },
  "vermelho_bola": {
   "descricao": "Gojo · a bola do Vermelho voando (laço)",
   "quadros": 12,
@@ -13607,6 +13789,20 @@
   "laco": false,
   "bytes": 62520
  },
+ "witch_time": {
+  "descricao": "Bayonetta · o relógio roxo e a onda de tempo lento",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 48236
+ },
  "xeque_light": {
   "descricao": "Light · o rei do xadrez e a marca",
   "quadros": 12,
@@ -13620,6 +13816,20 @@
   ],
   "laco": false,
   "bytes": 28976
+ },
+ "yamato": {
+  "descricao": "Vergil · o saque, os cortes e as espadas espectrais",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 25948
  },
  "z_saber": {
   "descricao": "Zero: meia-lua do sabre de energia",

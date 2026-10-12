@@ -2229,6 +2229,23 @@
    ],
    "bytes": 66596
   },
+  "charge-beam": {
+   "arquivo": "charge-beam.mp3",
+   "descricao": "Samus: o tiro carregado e o impacto",
+   "versoes": [
+    0.0,
+    1.88,
+    3.8253,
+    5.6444
+   ],
+   "duracoes": [
+    1.8,
+    1.8653,
+    1.7391,
+    1.8274
+   ],
+   "bytes": 68336
+  },
   "chicote": {
    "arquivo": "chicote.mp3",
    "descricao": "família chicote",
@@ -3504,6 +3521,23 @@
    ],
    "bytes": 55680
   },
+  "danca-da-bruxa": {
+   "arquivo": "danca-da-bruxa.mp3",
+   "descricao": "Bayonetta: os chutes, os tiros e as borboletas",
+   "versoes": [
+    0.0,
+    1.58,
+    3.2144,
+    4.7437
+   ],
+   "duracoes": [
+    1.5,
+    1.5544,
+    1.4493,
+    1.5228
+   ],
+   "bytes": 58578
+  },
   "danca-de-distracao": {
    "arquivo": "danca-de-distracao.mp3",
    "descricao": "Senhor das Estrelas: a batida de disco",
@@ -3520,6 +3554,23 @@
     2.0305
    ],
    "bytes": 81386
+  },
+  "dante-preparo": {
+   "arquivo": "dante-preparo.mp3",
+   "descricao": "Dante: a eletricidade e o rosnado (antes do golpe)",
+   "versoes": [
+    0.0,
+    1.68,
+    3.418,
+    5.0439
+   ],
+   "duracoes": [
+    1.6,
+    1.658,
+    1.5459,
+    1.6244
+   ],
+   "bytes": 88963
   },
   "dardo-crescente": {
    "arquivo": "dardo-crescente.mp3",
@@ -3810,6 +3861,23 @@
    ],
    "bytes": 79346
   },
+  "devil-trigger": {
+   "arquivo": "devil-trigger.mp3",
+   "descricao": "Dante: o rugido, o Stinger e a explosão",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 72061
+  },
   "devorador-preparo": {
    "arquivo": "devorador-preparo.mp3",
    "descricao": "Galactus: tudo sendo sugado (antes do golpe)",
@@ -4098,6 +4166,23 @@
     1.4213
    ],
    "bytes": 57486
+  },
+  "ebony-e-ivory": {
+   "arquivo": "ebony-e-ivory.mp3",
+   "descricao": "Dante: a saraivada das duas pistolas",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 58604
   },
   "eclipse-preparo": {
    "arquivo": "eclipse-preparo.mp3",
@@ -6411,6 +6496,23 @@
    ],
    "bytes": 52486
   },
+  "ganondorf-preparo": {
+   "arquivo": "ganondorf-preparo.mp3",
+   "descricao": "Ganondorf: o coro sombrio no punho (antes do golpe)",
+   "versoes": [
+    0.0,
+    1.68,
+    3.418,
+    5.0439
+   ],
+   "duracoes": [
+    1.6,
+    1.658,
+    1.5459,
+    1.6244
+   ],
+   "bytes": 75839
+  },
   "garra-da-leoa": {
    "arquivo": "garra-da-leoa.mp3",
    "descricao": "básico de Sekhmet: o rugido e o fogo",
@@ -8025,6 +8127,40 @@
     2.0305
    ],
    "bytes": 116714
+  },
+  "judgement-cut-end": {
+   "arquivo": "judgement-cut-end.mp3",
+   "descricao": "Vergil: os cortes e o vidro se partindo",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 115478
+  },
+  "juizo-do-rei": {
+   "arquivo": "juizo-do-rei.mp3",
+   "descricao": "Ganondorf: as três colunas de trevas e o gongo",
+   "versoes": [
+    0.0,
+    2.28,
+    4.6274,
+    6.833
+   ],
+   "duracoes": [
+    2.2,
+    2.2674,
+    2.1256,
+    2.2335
+   ],
+   "bytes": 70352
   },
   "julgamento-de-khonshu": {
    "arquivo": "julgamento-de-khonshu.mp3",
@@ -9981,6 +10117,23 @@
    ],
    "bytes": 65379
   },
+  "missil-de-contencao": {
+   "arquivo": "missil-de-contencao.mp3",
+   "descricao": "Samus: o míssil e a explosão",
+   "versoes": [
+    0.0,
+    1.88,
+    3.8253,
+    5.6444
+   ],
+   "duracoes": [
+    1.8,
+    1.8653,
+    1.7391,
+    1.8274
+   ],
+   "bytes": 63934
+  },
   "mjolnir-impacto": {
    "arquivo": "mjolnir-impacto.mp3",
    "descricao": "Mjolnir: a pancada e o trovão",
@@ -11102,6 +11255,23 @@
     1.5136
    ],
    "bytes": 53486
+  },
+  "poder-da-triade": {
+   "arquivo": "poder-da-triade.mp3",
+   "descricao": "Ganondorf: o acorde da Força, a sombra e o escudo",
+   "versoes": [
+    0.0,
+    1.88,
+    3.7981,
+    5.6172
+   ],
+   "duracoes": [
+    1.8,
+    1.8381,
+    1.7391,
+    1.8059
+   ],
+   "bytes": 53587
   },
   "poeira-de-diamante": {
    "arquivo": "poeira-de-diamante.mp3",
@@ -13177,6 +13347,23 @@
    ],
    "bytes": 63673
   },
+  "samus-preparo": {
+   "arquivo": "samus-preparo.mp3",
+   "descricao": "Samus: o canhão carregando (antes do golpe)",
+   "versoes": [
+    0.0,
+    1.68,
+    3.418,
+    5.0439
+   ],
+   "duracoes": [
+    1.6,
+    1.658,
+    1.5459,
+    1.6244
+   ],
+   "bytes": 78203
+  },
   "sangue": {
    "arquivo": "sangue.mp3",
    "descricao": "família sangue",
@@ -15115,6 +15302,23 @@
    ],
    "bytes": 72345
   },
+  "trava-de-mira": {
+   "arquivo": "trava-de-mira.mp3",
+   "descricao": "Samus: os bipes do visor e a trava",
+   "versoes": [
+    0.0,
+    1.2722,
+    2.5868,
+    3.8197
+   ],
+   "duracoes": [
+    1.1922,
+    1.2346,
+    1.1529,
+    1.2099
+   ],
+   "bytes": 46407
+  },
   "tridente": {
    "arquivo": "tridente.mp3",
    "descricao": "básico de Aquaman: estocada metálica do tridente e respingo de água",
@@ -15659,6 +15863,23 @@
    ],
    "bytes": 40002
   },
+  "vergil-preparo": {
+   "arquivo": "vergil-preparo.mp3",
+   "descricao": "Vergil: a lâmina saindo da bainha (antes do golpe)",
+   "versoes": [
+    0.0,
+    1.68,
+    3.418,
+    5.0439
+   ],
+   "duracoes": [
+    1.6,
+    1.658,
+    1.5459,
+    1.6244
+   ],
+   "bytes": 73536
+  },
   "vermelho-gojo": {
    "arquivo": "vermelho-gojo.mp3",
    "descricao": "Vermelho: o estouro que empurra",
@@ -16067,6 +16288,23 @@
    ],
    "bytes": 54676
   },
+  "witch-time": {
+   "arquivo": "witch-time.mp3",
+   "descricao": "Bayonetta: o relógio desacelerando",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 84845
+  },
   "xeque-light": {
    "arquivo": "xeque-light.mp3",
    "descricao": "Tudo conforme o plano: a peça no tabuleiro",
@@ -16083,6 +16321,23 @@
     1.9289
    ],
    "bytes": 50931
+  },
+  "yamato": {
+   "arquivo": "yamato.mp3",
+   "descricao": "Vergil: o clique da bainha e os cortes",
+   "versoes": [
+    0.0,
+    1.416,
+    2.9307,
+    4.3749
+   ],
+   "duracoes": [
+    1.336,
+    1.4347,
+    1.3641,
+    1.4203
+   ],
+   "bytes": 67841
   },
   "z-saber": {
    "arquivo": "z-saber.mp3",
