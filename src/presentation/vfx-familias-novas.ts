@@ -525,6 +525,20 @@ export const FAMILIAS_NOVAS = {
   manobra_odm: n({ nome: 'Equipamento de manobra', grupo: 'corte', impacto: 'manobra_odm', escala: 2.3, tempo: 1.0, cor: '#c8d8e8', tinta: 'fixa' }),
   laminas_em_x: n({ nome: 'Lâminas em X', grupo: 'corte', impacto: 'laminas_em_x', escala: 2.3, tempo: 1.0, cor: '#e8505a', tinta: 'fixa' }),
   golpe_na_nuca: n({ nome: 'Golpe na nuca', grupo: 'corte', impacto: 'golpe_na_nuca', escala: 2.3, tempo: 1.0, cor: '#d8e4f0', tinta: 'fixa' }),
+  // rodada 8: Levi, Hisoka, Kurapika, Edward e Alphonse (tools/vfx/familias_v2/rodada08.py)
+  leitura_de_abertura: n({ nome: 'Leitura de abertura', grupo: 'corte', impacto: 'leitura_de_abertura', escala: 2.3, tempo: 1.0, cor: '#d8e4f0', tinta: 'fixa' }),
+  giro_de_levi: n({ nome: 'Giro cortante', grupo: 'corte', impacto: 'giro_de_levi', escala: 2.4, tempo: 1.0, cor: '#c8d8e8', tinta: 'fixa' }),
+  execucao_relampago: n({ nome: 'Execução relâmpago', grupo: 'corte', preparo: 'levi_preparo', impacto: 'execucao_relampago', escala: 2.4, tempo: 1.0, cor: '#e8f0ff', tinta: 'fixa' }),
+  bungee_gum: n({ nome: 'Bungee Gum', grupo: 'especial', impacto: 'bungee_gum', escala: 2.3, tempo: 1.0, cor: '#ff7ac8', tinta: 'fixa' }),
+  textura_surpresa: n({ nome: 'Textura surpresa', grupo: 'projétil', impacto: 'textura_surpresa', escala: 2.3, tempo: 1.0, cor: '#ff8ab0', tinta: 'fixa' }),
+  corrente_de_captura: n({ nome: 'Corrente de captura', grupo: 'especial', impacto: 'corrente_de_captura', escala: 2.3, tempo: 1.0, cor: '#c8d0e0', tinta: 'fixa' }),
+  corrente_do_julgamento: n({ nome: 'Corrente do julgamento', grupo: 'especial', impacto: 'corrente_do_julgamento', escala: 2.3, tempo: 1.0, cor: '#ffd07a', tinta: 'fixa' }),
+  olhos_escarlates: n({ nome: 'Olhos escarlates', grupo: 'magia', impacto: 'olhos_escarlates', escala: 2.3, tempo: 1.0, cor: '#ff3a4a', tinta: 'fixa' }),
+  lanca_de_pedra: n({ nome: 'Lança de pedra', grupo: 'elemento', impacto: 'lanca_de_pedra', escala: 2.3, tempo: 1.0, cor: '#7ac0ff', tinta: 'fixa' }),
+  muralha_alquimica: n({ nome: 'Muralha alquímica', grupo: 'apoio', impacto: 'muralha_alquimica', escala: 2.3, tempo: 1.0, cor: '#8ac8ff', tinta: 'fixa' }),
+  armadura_de_aco: n({ nome: 'Armadura de aço', grupo: 'apoio', impacto: 'armadura_de_aco', escala: 2.3, tempo: 1.0, cor: '#c8d0d8', tinta: 'fixa' }),
+  circulo_protetor: n({ nome: 'Círculo protetor', grupo: 'apoio', impacto: 'circulo_protetor', escala: 2.3, tempo: 1.0, cor: '#8ad8ff', tinta: 'fixa' }),
+  barreira_transmutada: n({ nome: 'Barreira transmutada', grupo: 'apoio', impacto: 'barreira_transmutada', escala: 2.4, tempo: 1.0, cor: '#9ac8f0', tinta: 'fixa' }),
   mugen_tsukuyomi: n({ nome: 'Mugen Tsukuyomi', grupo: 'especial', impacto: 'mugen_tsukuyomi', noCentro: true, escala: 2.6, tempo: 1.0, cor: '#ff4a5a', tinta: 'fixa' }),
 } as const satisfies Record<string, Familia>;
 

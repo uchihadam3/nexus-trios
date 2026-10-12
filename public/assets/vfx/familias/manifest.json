@@ -237,6 +237,20 @@
   "laco": false,
   "bytes": 59308
  },
+ "armadura_de_aco": {
+  "descricao": "Alphonse · as placas de aço com rebites",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 11782
+ },
  "asa_negra": {
   "descricao": "asa e penas negras",
   "quadros": 12,
@@ -474,6 +488,20 @@
   ],
   "laco": false,
   "bytes": 70042
+ },
+ "barreira_transmutada": {
+  "descricao": "Alphonse · as cúpulas de pedra em volta do trio",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 24628
  },
  "barrigada": {
   "descricao": "Barrigada do Homer: a barriga amassa no alvo e balança, ondas achatadas e estrelinhas",
@@ -894,6 +922,20 @@
   ],
   "laco": true,
   "bytes": 44302
+ },
+ "bungee_gum": {
+  "descricao": "Hisoka · o chiclete rosa que gruda e estica",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 16562
  },
  "buraco_negro": {
   "descricao": "buraco negro sugando",
@@ -1511,6 +1553,20 @@
   "laco": false,
   "bytes": 40920
  },
+ "circulo_protetor": {
+  "descricao": "Alphonse · o círculo de transmutação e a luz",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 53708
+ },
  "cleave": {
   "descricao": "Sukuna · a medida e o corte único que parte o alvo",
   "quadros": 12,
@@ -1706,6 +1762,34 @@
   ],
   "laco": false,
   "bytes": 43632
+ },
+ "corrente_de_captura": {
+  "descricao": "Kurapika · os elos que se enrolam e o cadeado",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 49814
+ },
+ "corrente_do_julgamento": {
+  "descricao": "Kurapika · a ponta no coração e o anel",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 25766
  },
  "corrente_flamejante": {
   "descricao": "Corrente flamejante: a corrente em chamas que enrola",
@@ -3023,6 +3107,20 @@
   "laco": false,
   "bytes": 61084
  },
+ "execucao_relampago": {
+  "descricao": "Levi · o clarão e os cortes de uma vez",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 87342
+ },
  "explosao": {
   "descricao": "explosão",
   "quadros": 12,
@@ -3792,6 +3890,20 @@
   ],
   "laco": false,
   "bytes": 72250
+ },
+ "giro_de_levi": {
+  "descricao": "Levi · o redemoinho de lâminas em espiral",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 33006
  },
  "golpe_alienigena": {
   "descricao": "Golpe alienígena: a ampulheta do Omnitrix estoura em verde e o punho do alien acerta",
@@ -4997,6 +5109,20 @@
   "laco": false,
   "bytes": 59722
  },
+ "lanca_de_pedra": {
+  "descricao": "Edward · as palmas, os raios e a lança de pedra",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 22058
+ },
  "lanche": {
   "descricao": "mordida, vapor e coração",
   "quadros": 12,
@@ -5052,6 +5178,20 @@
   ],
   "laco": true,
   "bytes": 36142
+ },
+ "leitura_de_abertura": {
+  "descricao": "Levi · os pontos fracos piscam e o corte certeiro",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 13928
  },
  "lentidao": {
   "descricao": "ampulheta",
@@ -5164,6 +5304,20 @@
   ],
   "laco": false,
   "bytes": 45658
+ },
+ "levi_preparo": {
+  "descricao": "Levi · as lâminas invertidas e o gás (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 26160
  },
  "limitador_preparo": {
   "descricao": "Kenpachi · a pressão em labaredas (Preparo, laço)",
@@ -5809,6 +5963,20 @@
   "laco": false,
   "bytes": 70728
  },
+ "muralha_alquimica": {
+  "descricao": "Edward · o muro de tijolos e os espinhos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 26630
+ },
  "muralha_de_metal": {
   "descricao": "Magneto · as vigas formando a muralha",
   "quadros": 12,
@@ -5920,6 +6088,20 @@
   ],
   "laco": true,
   "bytes": 14528
+ },
+ "olhos_escarlates": {
+  "descricao": "Kurapika · os olhos vermelhos e o pulso",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 37478
  },
  "omnislash": {
   "descricao": "Cloud · Omnislash: os cortes de todos os lados e o final",
@@ -8454,6 +8636,20 @@
   ],
   "laco": false,
   "bytes": 86208
+ },
+ "textura_surpresa": {
+  "descricao": "Hisoka · a carta que crava e descasca",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 23304
  },
  "tiara_lunar": {
   "descricao": "Sailor Moon: tiara-disco com lua crescente que acerta com brilho",

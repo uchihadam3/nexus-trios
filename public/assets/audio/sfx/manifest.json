@@ -325,6 +325,23 @@
    ],
    "bytes": 66844
   },
+  "armadura-de-aco": {
+   "arquivo": "armadura-de-aco.mp3",
+   "descricao": "Alphonse: as placas de armadura",
+   "versoes": [
+    0.0,
+    1.68,
+    3.418,
+    5.0439
+   ],
+   "duracoes": [
+    1.6,
+    1.658,
+    1.5459,
+    1.6244
+   ],
+   "bytes": 61147
+  },
   "asa-negra": {
    "arquivo": "asa-negra.mp3",
    "descricao": "família asa negra",
@@ -596,6 +613,23 @@
     1.4213
    ],
    "bytes": 56544
+  },
+  "barreira-transmutada": {
+   "arquivo": "barreira-transmutada.mp3",
+   "descricao": "Alphonse: as cúpulas de pedra",
+   "versoes": [
+    0.0,
+    1.98,
+    4.0289,
+    5.9446
+   ],
+   "duracoes": [
+    1.9,
+    1.9689,
+    1.8357,
+    1.9289
+   ],
+   "bytes": 77909
   },
   "barrigada": {
    "arquivo": "barrigada.mp3",
@@ -1004,6 +1038,23 @@
     1.0152
    ],
    "bytes": 40775
+  },
+  "bungee-gum": {
+   "arquivo": "bungee-gum.mp3",
+   "descricao": "Hisoka: o chiclete que gruda e estica",
+   "versoes": [
+    0.0,
+    1.4772,
+    2.9984,
+    4.4243
+   ],
+   "duracoes": [
+    1.3972,
+    1.4411,
+    1.3459,
+    1.4181
+   ],
+   "bytes": 42670
   },
   "buraco-negro": {
    "arquivo": "buraco-negro.mp3",
@@ -1634,6 +1685,23 @@
    ],
    "bytes": 87366
   },
+  "circulo-protetor": {
+   "arquivo": "circulo-protetor.mp3",
+   "descricao": "Alphonse: o círculo de transmutação",
+   "versoes": [
+    0.0,
+    1.88,
+    3.8253,
+    5.6444
+   ],
+   "duracoes": [
+    1.8,
+    1.8653,
+    1.7391,
+    1.8274
+   ],
+   "bytes": 84513
+  },
   "cleave": {
    "arquivo": "cleave.mp3",
    "descricao": "Sukuna: a medida e o corte único",
@@ -1837,6 +1905,40 @@
     1.0152
    ],
    "bytes": 45866
+  },
+  "corrente-de-captura": {
+   "arquivo": "corrente-de-captura.mp3",
+   "descricao": "Kurapika: a corrente que enrola e trava",
+   "versoes": [
+    0.0,
+    1.6477,
+    3.3469,
+    4.9362
+   ],
+   "duracoes": [
+    1.5677,
+    1.6192,
+    1.5093,
+    1.5887
+   ],
+   "bytes": 73842
+  },
+  "corrente-do-julgamento": {
+   "arquivo": "corrente-do-julgamento.mp3",
+   "descricao": "Kurapika: a ponta no coração e a promessa",
+   "versoes": [
+    0.0,
+    1.78,
+    3.6217,
+    5.3441
+   ],
+   "duracoes": [
+    1.7,
+    1.7617,
+    1.6425,
+    1.7259
+   ],
+   "bytes": 58123
   },
   "corrente-flamejante": {
    "arquivo": "corrente-flamejante.mp3",
@@ -3317,6 +3419,23 @@
    ],
    "bytes": 81892
   },
+  "execucao-relampago": {
+   "arquivo": "execucao-relampago.mp3",
+   "descricao": "Levi: os cortes de uma vez e o vapor",
+   "versoes": [
+    0.0,
+    1.88,
+    3.8253,
+    5.6432
+   ],
+   "duracoes": [
+    1.8,
+    1.8653,
+    1.7379,
+    1.8274
+   ],
+   "bytes": 71658
+  },
   "explosao": {
    "arquivo": "explosao.mp3",
    "descricao": "explosão",
@@ -4115,6 +4234,23 @@
     1.9289
    ],
    "bytes": 65411
+  },
+  "giro-de-levi": {
+   "arquivo": "giro-de-levi.mp3",
+   "descricao": "Levi: o gás e o giro de lâminas",
+   "versoes": [
+    0.0,
+    1.4196,
+    2.8494,
+    4.2015
+   ],
+   "duracoes": [
+    1.3396,
+    1.3497,
+    1.2721,
+    1.3603
+   ],
+   "bytes": 58949
   },
   "golpe-alienigena": {
    "arquivo": "golpe-alienigena.mp3",
@@ -5663,6 +5799,23 @@
    ],
    "bytes": 77270
   },
+  "lanca-de-pedra": {
+   "arquivo": "lanca-de-pedra.mp3",
+   "descricao": "Edward: as palmas e a lança de pedra",
+   "versoes": [
+    0.0,
+    1.7326,
+    3.4358,
+    5.098
+   ],
+   "duracoes": [
+    1.6526,
+    1.6233,
+    1.5822,
+    1.5887
+   ],
+   "bytes": 72084
+  },
   "lancar-teia": {
    "arquivo": "lancar-teia.mp3",
    "descricao": "Lançar teia: o thwip e a rede grudando",
@@ -5730,6 +5883,23 @@
     0.2538
    ],
    "bytes": 14055
+  },
+  "leitura-de-abertura": {
+   "arquivo": "leitura-de-abertura.mp3",
+   "descricao": "Levi: os pontos achados e o corte certeiro",
+   "versoes": [
+    0.0,
+    1.3327,
+    2.7396,
+    4.0516
+   ],
+   "duracoes": [
+    1.2527,
+    1.3269,
+    1.232,
+    1.3114
+   ],
+   "bytes": 49355
   },
   "lentidao": {
    "arquivo": "lentidao.mp3",
@@ -5866,6 +6036,23 @@
     1.4213
    ],
    "bytes": 45758
+  },
+  "levi-preparo": {
+   "arquivo": "levi-preparo.mp3",
+   "descricao": "Levi: as lâminas e o gás (antes do golpe)",
+   "versoes": [
+    0.0,
+    1.28,
+    2.6035,
+    3.8429
+   ],
+   "duracoes": [
+    1.2,
+    1.2435,
+    1.1594,
+    1.2183
+   ],
+   "bytes": 61868
   },
   "limitador-preparo": {
    "arquivo": "limitador-preparo.mp3",
@@ -6632,6 +6819,23 @@
    ],
    "bytes": 35090
   },
+  "muralha-alquimica": {
+   "arquivo": "muralha-alquimica.mp3",
+   "descricao": "Edward: o muro subindo e os espinhos",
+   "versoes": [
+    0.0,
+    1.88,
+    3.8253,
+    5.6444
+   ],
+   "duracoes": [
+    1.8,
+    1.8653,
+    1.7391,
+    1.8274
+   ],
+   "bytes": 75898
+  },
   "muralha-de-metal": {
    "arquivo": "muralha-de-metal.mp3",
    "descricao": "Muralha de metal: as vigas empilhando",
@@ -6818,6 +7022,23 @@
     2.0305
    ],
    "bytes": 87744
+  },
+  "olhos-escarlates": {
+   "arquivo": "olhos-escarlates.mp3",
+   "descricao": "Kurapika: os olhos acendendo e a pressão",
+   "versoes": [
+    0.0,
+    1.78,
+    3.6217,
+    5.3441
+   ],
+   "duracoes": [
+    1.7,
+    1.7617,
+    1.6425,
+    1.7259
+   ],
+   "bytes": 42923
   },
   "omnislash": {
    "arquivo": "omnislash.mp3",
@@ -9623,6 +9844,23 @@
     2.132
    ],
    "bytes": 59965
+  },
+  "textura-surpresa": {
+   "arquivo": "textura-surpresa.mp3",
+   "descricao": "Hisoka: a carta, o descascar e a surpresa",
+   "versoes": [
+    0.0,
+    1.58,
+    3.2144,
+    4.7437
+   ],
+   "duracoes": [
+    1.5,
+    1.5544,
+    1.4493,
+    1.5228
+   ],
+   "bytes": 63743
   },
   "tiara-lunar": {
    "arquivo": "tiara-lunar.mp3",

@@ -99,6 +99,7 @@ const ANTES_DA_NOVA: Partial<Record<FamiliaNova, { antes: Sound; saida?: Sound }
   hakka_no_togame: { antes: 'hakka-preparo' },
   retirar_o_limitador: { antes: 'limitador-preparo' },
   rugido_da_fundacao: { antes: 'fundacao-preparo' },
+  execucao_relampago: { antes: 'levi-preparo' },
   despertar_gohan: { antes: 'aura-besta' },
   raio_mortal: { antes: 'raio-mortal-saida' },
   bola_da_morte: { antes: 'bola-da-morte-carga' },
