@@ -569,14 +569,6 @@ def raio_em_cadeia(rng, v):
     return x
 
 
-def tsunami(rng, v):
-    n = n_de(1.6)
-    x = passa(rosa(rng, n), 60, 2500, 2) * sobe_e_some(n, 0.55, 1.4) * 1.0
-    poe(x, B.agua(rng, v) * 0.9, 0.7)
-    poe(x, baque(n_de(0.6), 60, 30, 0.3, 0.2) * 0.7, 0.8)
-    return reverb(x, 0.7, 0.3, 3500)
-
-
 def areia(rng, v):
     n = n_de(1.3)
     x = passa(ruido(rng, n), 1500, 9000, 2) * sobe_e_some(n, 0.6, 1.3) * 0.6
@@ -1959,7 +1951,7 @@ _BAIXO = {"brasas-renascendo", "cura-em-area", "regeneracao", "grito-de-guerra",
           "bencao", "lanche", "purificacao", "enfraquecimento", "lentidao", "marca", "silencio", "medo", "exposto", "hipnose",
           "encanto", "runas", "petalas", "regeneracao", "confusao", "estrela-invencivel", "disco", "flecha"}
 _ALTO = {"copia", "esquiva", "ultima-resistencia", "sono", "cegueira", "errou", "barreira-anula", "dissipar", "reflexo", "espinhos", "vampirismo", "provocar", "renascer", "ressurreicao", "soco-serio", "supernova", "kamehameha", "canhao-de-energia", "foguete", "tempestade", "punho-gigante", "pisao",
-         "martelo", "espadao", "buraco-negro", "tsunami", "transformacao-v2", "dragao", "dominio"}
+         "martelo", "espadao", "buraco-negro", "transformacao-v2", "dragao", "dominio"}
 _ANTES = {"esfera-espiral-carga": "a esfera girando", "kamehameha-carga": "carga do Kamehameha",
           "kamehameha-feixe": "o feixe saindo", "marretada-giro": "a marreta subindo"}
 for _k, _d in _ANTES.items():

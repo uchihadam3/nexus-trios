@@ -83,6 +83,20 @@
   "laco": false,
   "bytes": 41542
  },
+ "adaptacao_de_sistema": {
+  "descricao": "Ciborgue · o pulso, a estática e o raio",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 19916
+ },
  "adaptacao_demoniaca": {
   "descricao": "Muzan · a carne fecha, as bocas e o olho",
   "quadros": 12,
@@ -251,6 +265,20 @@
   "laco": false,
   "bytes": 79598
  },
+ "aquaman_preparo": {
+  "descricao": "Aquaman · o tridente, a água e os tubarões (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 11996
+ },
  "areia": {
   "descricao": "casulo de areia",
   "quadros": 12,
@@ -306,6 +334,20 @@
   ],
   "laco": false,
   "bytes": 82660
+ },
+ "armadilha_explosiva": {
+  "descricao": "Rocket · a minazinha piscando e a fumaça colorida",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 19914
  },
  "armadura": {
   "descricao": "placas de armadura",
@@ -2295,6 +2337,20 @@
   "laco": false,
   "bytes": 41274
  },
+ "ciborgue_preparo": {
+  "descricao": "Ciborgue · o braço virando canhão (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 3594
+ },
  "circulo_de_gelo": {
   "descricao": "Rukia · o círculo no chão e a coluna de gelo",
   "quadros": 12,
@@ -2435,6 +2491,20 @@
   "laco": false,
   "bytes": 20632
  },
+ "comando_dos_mares": {
+  "descricao": "Aquaman · a onda gigante com os tubarões quebrando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 31830
+ },
  "cometa": {
   "descricao": "luz que corre pela linha de ação (+x)",
   "quadros": 12,
@@ -2504,6 +2574,20 @@
   ],
   "laco": false,
   "bytes": 27884
+ },
+ "construto_adaptavel": {
+  "descricao": "Lanterna Verde · o martelo, a lâmina e o míssil",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 18032
  },
  "contra_ataque_cego": {
   "descricao": "Demolidor · a rajada de golpes e o final",
@@ -3695,6 +3779,20 @@
   "laco": false,
   "bytes": 74492
  },
+ "escudo_de_vontade": {
+  "descricao": "Lanterna Verde · o construto de escudo com o símbolo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 16060
+ },
  "escudo_do_capitao": {
   "descricao": "Escudo arremessado: o escudo da estrela que quica",
   "quadros": 12,
@@ -4408,6 +4506,20 @@
   ],
   "laco": false,
   "bytes": 42732
+ },
+ "eu_sou_groot": {
+  "descricao": "Groot · as raízes até o trio e os ramos com flores",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 22348
  },
  "eu_te_seguro": {
   "descricao": "Super-Homem · chega voando, abraça o aliado e a bolha acende",
@@ -6103,6 +6215,20 @@
   "laco": false,
   "bytes": 34036
  },
+ "groot_preparo": {
+  "descricao": "Groot · os braços fincados e as raízes (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 7398
+ },
  "guarda_buster": {
   "descricao": "Cloud · a guarda com a Buster Sword de pé (nele)",
   "quadros": 12,
@@ -7335,6 +7461,20 @@
   "laco": false,
   "bytes": 24090
  },
+ "lanterna_preparo": {
+  "descricao": "Lanterna Verde · a lanterna e o anel (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 12114
+ },
  "lanternada": {
   "descricao": "Básico do Dipper: o facho da lanterna e a pancada",
   "quadros": 12,
@@ -7951,6 +8091,20 @@
   "laco": false,
   "bytes": 58624
  },
+ "mare_puxante": {
+  "descricao": "Aquaman · a onda que puxa e as bolhas no trio",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 37406
+ },
  "marretada": {
   "descricao": "marreta de desenho batendo",
   "quadros": 12,
@@ -8273,6 +8427,20 @@
   "laco": true,
   "bytes": 17664
  },
+ "missil_caseiro": {
+  "descricao": "Rocket · o míssil remendado em zigue-zague",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 37346
+ },
  "mjolnir_impacto": {
   "descricao": "Thor · o martelo batendo e o trovão",
   "quadros": 12,
@@ -8454,6 +8622,20 @@
   ],
   "laco": false,
   "bytes": 26630
+ },
+ "muralha_de_galhos": {
+  "descricao": "Groot · os galhos trançados, as folhas e os espinhos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 22938
  },
  "muralha_de_metal": {
   "descricao": "Magneto · as vigas formando a muralha",
@@ -9603,6 +9785,20 @@
   "laco": false,
   "bytes": 26020
  },
+ "punho_esmeralda": {
+  "descricao": "Lanterna Verde · o punho de construto e a jaula",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 8020
+ },
  "punho_espinhoso": {
   "descricao": "Básico do Knuckles: a luva de espinhos e as pedras",
   "quadros": 12,
@@ -10092,6 +10288,20 @@
   ],
   "laco": false,
   "bytes": 45152
+ },
+ "raizes_de_captura": {
+  "descricao": "Groot · as raízes rompendo o chão e enlaçando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 22938
  },
  "rajada_aang": {
   "descricao": "Aang · o vento estourando no rival",
@@ -10666,6 +10876,20 @@
   ],
   "laco": true,
   "bytes": 18958
+ },
+ "rocket_preparo": {
+  "descricao": "Rocket · o canhão montando peça por peça (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 4512
  },
  "roubar_carga": {
   "descricao": "Roubou Carga: a energia sai do rival",
@@ -12599,20 +12823,6 @@
   "laco": false,
   "bytes": 50422
  },
- "tsunami": {
-  "descricao": "onda gigante",
-  "quadros": 12,
-  "grade": [
-   3,
-   4
-  ],
-  "tamanho": [
-   192,
-   192
-  ],
-  "laco": false,
-  "bytes": 48600
- },
  "ultima_resistencia": {
   "descricao": "pulso dourado, chão rachando e coluna de luz",
   "quadros": 12,
@@ -12752,6 +12962,20 @@
   ],
   "laco": false,
   "bytes": 21468
+ },
+ "varredura_tatica": {
+  "descricao": "Ciborgue · o olho, a varredura e a grade",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 13076
  },
  "vazio_infinito": {
   "descricao": "Gojo · o Vazio Infinito",

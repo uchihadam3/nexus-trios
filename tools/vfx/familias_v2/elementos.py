@@ -189,26 +189,6 @@ def _raio_ramificado(T, sub, x0, y0, ang, comp, largura, ramos=2, peso=1.0):
     return a
 
 
-def tsunami(T, t, rng):
-    """Tsunami: uma onda alta entra pela esquerda, a crista quebra em espuma sobre o alvo."""
-    G, H = vazio(T)
-    p = ease_out(rel(t, 0, 0.55), 1.8)
-    env = apaga(t, 0.65, 1)
-    frente = -1.1 + 1.6 * p
-    n = np.roll(T.noise(np.random.default_rng(501), 0.05, 3), int(t * 40), axis=1)
-    altura = 0.85 * np.exp(-((T.U - frente) / 0.45) ** 2) * smooth(frente + 0.2 - T.U, 0, 0.6) + 0.25 * smooth(frente - T.U, 0, 1)
-    agua = smooth(T.V - (0.5 - altura) - 0.04 * n, -0.02, 0.06) * smooth(0.6 - T.V, 0, 0.05)
-    crista = np.exp(-((T.V - (0.5 - altura)) / 0.03) ** 2) * smooth(altura, 0.15, 0.5)
-    espuma = []
-    for _ in range(40):
-        x = frente + rng.uniform(-0.25, 0.15)
-        y = 0.5 - 0.85 * math.exp(-((x - frente) / 0.45) ** 2) + rng.uniform(-0.08, 0.05)
-        espuma.append((x, y, rng.uniform(0.3, 1) * janela(t, 0.2, 0.4)))
-    G += (agua * (0.6 + 0.2 * n) + crista * 1.6 + T.splats(espuma, 0.014)) * env
-    H += (crista * 1.2 + T.splats(espuma, 0.01) * 0.8) * env
-    return G, H
-
-
 def areia(T, t, rng):
     """Areia: grãos girando e subindo em volta do alvo até fecharem num casulo."""
     G, H = vazio(T)
@@ -472,7 +452,6 @@ REGISTRO = [
     ("espinho_de_gelo", espinho_de_gelo, GRANDE, "lanças de gelo do chão", False),
     ("tempestade", tempestade, GRANDE, "nuvem e raios de cima", False),
     ("raio_em_cadeia", raio_em_cadeia, GRANDE, "raio pulando em cadeia", False),
-    ("tsunami", tsunami, GRANDE, "onda gigante", False),
     ("areia", areia, GRANDE, "casulo de areia", False),
     ("espinhos_de_terra", espinhos_de_terra, GRANDE, "pontas de pedra em linha", False),
     ("metal", metal, GRANDE, "chapas de metal fechando", False),
