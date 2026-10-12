@@ -104,6 +104,12 @@ const T: Record<string, string> = {
   tenshinhan: 'taiyoken_tenshinhan golpe_de_quatro_bracos kikoho',
   deidara: 'aranhas_de_argila passaro_de_argila c4_karura',
   violet: 'campo_de_forca invisibilidade_violeta esfera_de_forca',
+  orihime: 'santen_kesshun souten_kisshun rejeicao_total',
+  aerith: 'cura_de_aerith esna grande_bencao',
+  katara: 'chicote_de_agua_katara cura_com_agua prisao_de_gelo_katara',
+  sailormercury: 'nevoa_de_bolhas spray_de_bolhas rapsodia_aquatica',
+  kurama: 'chicote_de_rosas planta_comedora arvore_da_ilusao',
+  ken: 'hadouken_ken tatsumaki_ken shinryuken',
 };
 
 export const FAMILIA_DA_HABILIDADE: Record<string, VfxFamily> = Object.fromEntries(

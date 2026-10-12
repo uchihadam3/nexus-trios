@@ -167,6 +167,20 @@
   "laco": false,
   "bytes": 63436
  },
+ "aerith_preparo": {
+  "descricao": "Aerith · a prece e a matéria branca (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 37454
+ },
  "agent47_preparo": {
   "descricao": "Agente 47 · a luneta (Preparo, laço)",
   "quadros": 12,
@@ -656,6 +670,20 @@
   ],
   "laco": false,
   "bytes": 20580
+ },
+ "arvore_da_ilusao": {
+  "descricao": "Kurama · a árvore de galhos e as espirais",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 30178
  },
  "asas_de_isis": {
   "descricao": "Básico de Ísis: a asa e as penas douradas",
@@ -3009,6 +3037,20 @@
   "laco": false,
   "bytes": 18368
  },
+ "chicote_de_agua_katara": {
+  "descricao": "Katara · o chicote de água",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 17678
+ },
  "chicote_de_fogo": {
   "descricao": "Zuko · o chicote de fogo",
   "quadros": 12,
@@ -3050,6 +3092,20 @@
   ],
   "laco": false,
   "bytes": 23996
+ },
+ "chicote_de_rosas": {
+  "descricao": "Kurama · o chicote de espinhos e as pétalas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 14652
  },
  "chicote_de_vinha": {
   "descricao": "Básico da Hera Venenosa: a vinha com folhas e os esporos",
@@ -4268,6 +4324,34 @@
   ],
   "laco": false,
   "bytes": 63294
+ },
+ "cura_com_agua": {
+  "descricao": "Katara · a luva de água curando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 34304
+ },
+ "cura_de_aerith": {
+  "descricao": "Aerith · a matéria verde e as flores de luz",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 58756
  },
  "cura_em_area": {
   "descricao": "cura em área com cruzes",
@@ -5696,6 +5780,20 @@
   ],
   "laco": false,
   "bytes": 48634
+ },
+ "esna": {
+  "descricao": "Aerith · os anéis de luz e a fita",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 49284
  },
  "espada_anti_magia": {
   "descricao": "Básico do Asta: a espada larga e a antimagia",
@@ -8637,6 +8735,20 @@
   "laco": false,
   "bytes": 41594
  },
+ "grande_bencao": {
+  "descricao": "Aerith · a chuva de penas e o pilar sagrado",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 60596
+ },
  "grande_faca": {
   "descricao": "Pyramid Head: faca arrastada e golpe pesado",
   "quadros": 12,
@@ -8790,6 +8902,20 @@
   ],
   "laco": true,
   "bytes": 22032
+ },
+ "hadouken_ken": {
+  "descricao": "Ken · as mãos juntas e a bola de energia",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 19216
  },
  "hadouken_ryu": {
   "descricao": "Ryu · o Hadouken",
@@ -9939,6 +10065,20 @@
   "laco": false,
   "bytes": 19734
  },
+ "katara_preparo": {
+  "descricao": "Katara · a água subindo em espiral (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 7532
+ },
  "kazuya_preparo": {
   "descricao": "Kazuya · os raios subindo (Preparo, laço)",
   "quadros": 12,
@@ -9952,6 +10092,20 @@
   ],
   "laco": true,
   "bytes": 59208
+ },
+ "ken_preparo": {
+  "descricao": "Ken · o punho pegando fogo (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 6730
  },
  "keyblade": {
   "descricao": "Sora: golpe de chave-espada com estrelinhas",
@@ -10148,6 +10302,20 @@
   ],
   "laco": false,
   "bytes": 40760
+ },
+ "kurama_preparo": {
+  "descricao": "Kurama · a rosa girando e as pétalas (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 15686
  },
  "kusanagi": {
   "descricao": "Sasuke: corte fino de katana com estalos de Chidori na lâmina",
@@ -11604,6 +11772,20 @@
   ],
   "laco": true,
   "bytes": 24906
+ },
+ "mercury_preparo": {
+  "descricao": "Sailor Mercury · o símbolo e o anel de água (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 11782
  },
  "metal": {
   "descricao": "chapas de metal fechando",
@@ -17779,6 +17961,20 @@
   "laco": false,
   "bytes": 16360
  },
+ "nevoa_de_bolhas": {
+  "descricao": "Sailor Mercury · a névoa de bolhas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 57916
+ },
  "nhe_he_he": {
   "descricao": "Peter Griffin · a risada em ondas e o tombo",
   "quadros": 12,
@@ -18072,6 +18268,20 @@
   ],
   "laco": false,
   "bytes": 83768
+ },
+ "orihime_preparo": {
+  "descricao": "Orihime · os grampos de flor brilhando (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 17156
  },
  "ossos_de_sans": {
   "descricao": "Básico do Sans: o olho azul e os ossos",
@@ -18857,6 +19067,20 @@
   "laco": false,
   "bytes": 52682
  },
+ "planta_comedora": {
+  "descricao": "Kurama · a planta carnívora mordendo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 23066
+ },
  "plasma_faixa": {
   "descricao": "Aiolia · os raios do Relâmpago de Plasma (faixa)",
   "quadros": 12,
@@ -19248,6 +19472,20 @@
   ],
   "laco": false,
   "bytes": 53638
+ },
+ "prisao_de_gelo_katara": {
+  "descricao": "Katara · a água virando gelo no rival",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 17832
  },
  "prisao_magnetica": {
   "descricao": "Magneto · os aros de metal prendendo",
@@ -20257,6 +20495,20 @@
   "laco": false,
   "bytes": 35464
  },
+ "rapsodia_aquatica": {
+  "descricao": "Sailor Mercury · a harpa e a onda que congela",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 22530
+ },
  "rasengan_impacto": {
   "descricao": "Naruto · o Rasengan perfurando em espiral",
   "quadros": 12,
@@ -20536,6 +20788,20 @@
   ],
   "laco": false,
   "bytes": 94526
+ },
+ "rejeicao_total": {
+  "descricao": "Orihime · a cúpula girando ao contrário",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 56516
  },
  "relampago_de_azula": {
   "descricao": "Azula · o relâmpago azul dos dedos",
@@ -21181,6 +21447,20 @@
   "laco": false,
   "bytes": 33030
  },
+ "santen_kesshun": {
+  "descricao": "Orihime · as três fadas e o escudo em triângulo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 15386
+ },
  "santuario_maligno": {
   "descricao": "Sukuna · o santuário e os cortes em toda a área",
   "quadros": 12,
@@ -21642,6 +21922,20 @@
   ],
   "laco": false,
   "bytes": 32232
+ },
+ "shinryuken": {
+  "descricao": "Ken · o gancho em espiral de fogo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 55846
  },
  "shoryuken": {
   "descricao": "Shoryuken: o soco que sobe em espiral",
@@ -22357,6 +22651,20 @@
   "laco": false,
   "bytes": 30438
  },
+ "souten_kisshun": {
+  "descricao": "Orihime · a cúpula oval que cura",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 27674
+ },
  "spawn_preparo": {
   "descricao": "Spawn · os olhos e o fogo verde (Preparo, laço)",
   "quadros": 12,
@@ -22412,6 +22720,20 @@
   ],
   "laco": false,
   "bytes": 19932
+ },
+ "spray_de_bolhas": {
+  "descricao": "Sailor Mercury · o jato de bolhas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 21152
  },
  "ssss_do_creeper": {
   "descricao": "Básico do Creeper: pisca e explode em blocos",
@@ -22748,6 +23070,20 @@
   ],
   "laco": false,
   "bytes": 20704
+ },
+ "tatsumaki_ken": {
+  "descricao": "Ken · o chute giratório de fogo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 34714
  },
  "taz_preparo": {
   "descricao": "Taz · o redemoinho começando (Preparo, laço)",
