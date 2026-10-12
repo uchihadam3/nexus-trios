@@ -116,7 +116,8 @@ const MUTUO: Record<string, (a: string, b: string) => string> = {
   'protege-vinganca': (a, b) => `${a} e ${b} se seguram de pé e crescem apanhando`,
 };
 
-function motivosDe(c: string, time: string[]): MotivoOrdenado[] {
+/* `encaixe`: a porcentagem final dele (já com tudo descontado), para não avisar de algo que ela já conta */
+function motivosDe(c: string, time: string[], encaixe = 50): MotivoOrdenado[] {
   const motivos: MotivoOrdenado[] = [];
   /*
    * Os combos de verdade que ele acende com quem já está no trio (os que a luta usa), dos que mais ganham
@@ -134,7 +135,9 @@ function motivosDe(c: string, time: string[]): MotivoOrdenado[] {
     for (const m of time) {
       const z = ajusteDaDupla(c, m);
       if (z >= 0.2) motivos.push({ texto: `Rende mais junto com ${nome(m)} do que os dois separados`, tom: 'bom', ordem: 26 + z * 10, porque: `Medido nas lutas: além dos combos, as habilidades de ${nome(c)} e ${nome(m)} se ajudam — a dupla vence uns ${pontos(z)} pontos a mais do que o esperado`, resumo: `rende mais com ${nome(m)}` });
-      else if (z <= -0.2) motivos.push({ texto: `Com ${nome(m)} rende menos do que parece`, tom: 'alerta', ordem: 2 - z, porque: `Medido nas lutas: as habilidades de ${nome(c)} e ${nome(m)} atrapalham uma à outra — a dupla vence uns ${pontos(z)} pontos a menos do que o esperado` });
+      // o que atrapalha já está descontado na porcentagem: só vira aviso para quem encaixa mal (pedido do jogador:
+      // "como ele pode ser melhor que 89% e ainda ser uma escolha ruim?")
+      else if (z <= -0.2 && encaixe < 60) motivos.push({ texto: `Com ${nome(m)} rende menos do que parece`, tom: 'alerta', ordem: 2 - z, porque: `Medido nas lutas: as habilidades de ${nome(c)} e ${nome(m)} atrapalham uma à outra — a dupla vence uns ${pontos(z)} pontos a menos do que o esperado (já descontado na porcentagem)` });
     }
     // a dupla medida: com quem já está no trio, se for uma das três melhores dele (ou dele com o candidato)
     for (const m of time) {
@@ -149,7 +152,11 @@ function motivosDe(c: string, time: string[]): MotivoOrdenado[] {
     const p = percentil(SOLOS, solo);
     if (p >= 70) motivos.push({ texto: `Forte em qualquer trio: com ${nome(c)}, o trio vence ${pct(solo)} das lutas`, tom: 'bom', ordem: time.length ? 9 : 25, porque: `Mais que ${p}% do elenco, com dois parceiros quaisquer (medido em 4 milhões de lutas)`, resumo: 'forte em qualquer trio' });
     // só para quem é fraco de verdade: a maioria fica perto da metade
-    else if (p < 12) motivos.push({ texto: `Sozinho rende pouco: precisa de parceiros que combinem`, tom: 'alerta', ordem: time.length ? 1 : 17, porque: `Com dois parceiros quaisquer, o trio vence ${pct(solo)} das lutas, menos que ${100 - p}% do elenco` });
+    else if (p < 12) {
+      // fraco sozinho, mas encaixando bem neste trio: é justamente por isso que vale a pena (não é aviso)
+      if (time.length && encaixe >= 60) motivos.push({ texto: `Sozinho é fraco, mas com ${lista3(time.map(nome))} encaixa bem`, tom: 'bom', ordem: 8, porque: `Com dois parceiros quaisquer, o trio dele vence só ${pct(solo)} das lutas; com este trio ele rende bem mais` });
+      else motivos.push({ texto: `Sozinho rende pouco: precisa de parceiros que combinem`, tom: 'alerta', ordem: time.length ? 1 : 17, porque: `Com dois parceiros quaisquer, o trio vence ${pct(solo)} das lutas, menos que ${100 - p}% do elenco` });
+    }
   }
   // sem trio ainda: com quem ele vence mais
   if (!time.length && DUPLAS[c]?.parceiros.length) {
@@ -212,7 +219,7 @@ export function dicasDoDraft(candidatos: string[], time: string[], fora: string[
   const pool = characters.map((c) => c.id).filter((id) => !time.includes(id) && !fora.includes(id)).map(nota).sort((a, b) => a - b);
   const lista = candidatos.map((id) => {
     const encaixe = Math.min(99, percentil(pool, nota(id)));
-    const motivos = motivosDe(id, time);
+    const motivos = motivosDe(id, time, encaixe);
     const resumo = resumoDe(id, motivos);
     // um candidato que encaixa mal começa pelo aviso, mesmo tendo alguma combinação
     if (time.length && encaixe < 35) motivos.unshift({ texto: `Encaixa pouco: há opções bem melhores para este trio`, tom: 'alerta', ordem: 99 });
