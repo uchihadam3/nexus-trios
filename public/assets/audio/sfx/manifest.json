@@ -376,6 +376,23 @@
    ],
    "bytes": 36027
   },
+  "anti-vida": {
+   "arquivo": "anti-vida.mp3",
+   "descricao": "Darkseid: a Equação Anti-Vida",
+   "versoes": [
+    0.0,
+    2.28,
+    4.6398,
+    6.8454
+   ],
+   "duracoes": [
+    2.2,
+    2.2798,
+    2.1256,
+    2.2335
+   ],
+   "bytes": 77250
+  },
   "antigos-espiritos": {
    "arquivo": "antigos-espiritos.mp3",
    "descricao": "Antigos Espíritos: os espíritos uivando",
@@ -2195,6 +2212,23 @@
    ],
    "bytes": 54517
   },
+  "canhao-incinerador": {
+   "arquivo": "canhao-incinerador.mp3",
+   "descricao": "Genos: o canhão incinerador",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2205,
+    5.9936
+   ],
+   "duracoes": [
+    2.0,
+    2.0605,
+    1.6931,
+    1.7679
+   ],
+   "bytes": 62847
+  },
   "canhao-sonico": {
    "arquivo": "canhao-sonico.mp3",
    "descricao": "básico de Ciborgue: onda sônica pulsante batendo no alvo",
@@ -2415,6 +2449,23 @@
     1.3198
    ],
    "bytes": 69895
+  },
+  "carta-marcada": {
+   "arquivo": "carta-marcada.mp3",
+   "descricao": "Coringa: a carta marcada",
+   "versoes": [
+    0.0,
+    1.3161,
+    2.7114,
+    4.021
+   ],
+   "duracoes": [
+    1.2361,
+    1.3153,
+    1.2296,
+    1.292
+   ],
+   "bytes": 51056
   },
   "cartas": {
    "arquivo": "cartas.mp3",
@@ -4150,6 +4201,23 @@
    ],
    "bytes": 55680
   },
+  "cura-lunar": {
+   "arquivo": "cura-lunar.mp3",
+   "descricao": "Sailor Moon: a cura lunar",
+   "versoes": [
+    0.0,
+    2.28,
+    4.6398,
+    6.8454
+   ],
+   "duracoes": [
+    2.2,
+    2.2798,
+    2.1256,
+    2.2335
+   ],
+   "bytes": 82036
+  },
   "cura-sora": {
    "arquivo": "cura-sora.mp3",
    "descricao": "Sora: Cura",
@@ -4234,6 +4302,23 @@
     1.1675
    ],
    "bytes": 41038
+  },
+  "darkseid-preparo": {
+   "arquivo": "darkseid-preparo.mp3",
+   "descricao": "Darkseid: a equação (Preparo)",
+   "versoes": [
+    0.0,
+    1.58,
+    3.2144,
+    4.7437
+   ],
+   "duracoes": [
+    1.5,
+    1.5544,
+    1.4493,
+    1.5228
+   ],
+   "bytes": 58586
   },
   "dead-eye": {
    "arquivo": "dead-eye.mp3",
@@ -4796,22 +4881,22 @@
    ],
    "bytes": 80894
   },
-  "dragao": {
-   "arquivo": "dragao.mp3",
-   "descricao": "família dragao",
+  "dragao-das-trevas": {
+   "arquivo": "dragao-das-trevas.mp3",
+   "descricao": "Hiei: o Dragão das Trevas",
    "versoes": [
     0.0,
-    1.68,
-    3.418,
-    5.0439
+    2.38,
+    4.8434,
+    7.1456
    ],
    "duracoes": [
-    1.6,
-    1.658,
-    1.5459,
-    1.6244
+    2.3,
+    2.3834,
+    2.2222,
+    2.335
    ],
-   "bytes": 61940
+   "bytes": 79764
   },
   "dragao-flamejante": {
    "arquivo": "dragao-flamejante.mp3",
@@ -5594,6 +5679,23 @@
     1.1167
    ],
    "bytes": 39451
+  },
+  "espada-de-fogo-hiei": {
+   "arquivo": "espada-de-fogo-hiei.mp3",
+   "descricao": "Hiei: a espada de fogo",
+   "versoes": [
+    0.0,
+    1.3544,
+    2.7923,
+    4.1753
+   ],
+   "duracoes": [
+    1.2744,
+    1.3579,
+    1.303,
+    1.3379
+   ],
+   "bytes": 47082
   },
   "espada-do-futuro": {
    "arquivo": "espada-do-futuro.mp3",
@@ -6631,6 +6733,23 @@
     1.5819
    ],
    "bytes": 60035
+  },
+  "feixe-omega": {
+   "arquivo": "feixe-omega.mp3",
+   "descricao": "Darkseid: o Feixe Ômega",
+   "versoes": [
+    0.0,
+    1.7283,
+    3.5152,
+    5.1887
+   ],
+   "duracoes": [
+    1.6483,
+    1.7069,
+    1.5935,
+    1.7037
+   ],
+   "bytes": 52904
   },
   "fenda": {
    "arquivo": "fenda.mp3",
@@ -7839,6 +7958,23 @@
    ],
    "bytes": 55024
   },
+  "gas-do-riso": {
+   "arquivo": "gas-do-riso.mp3",
+   "descricao": "Coringa: o gás do riso",
+   "versoes": [
+    0.0,
+    1.7043,
+    3.4236,
+    5.0356
+   ],
+   "duracoes": [
+    1.6243,
+    1.6393,
+    1.532,
+    1.6096
+   ],
+   "bytes": 59720
+  },
   "gear-fifth-nika": {
    "arquivo": "gear-fifth-nika.mp3",
    "descricao": "Gear Fifth: o tambor da libertação e as nuvens",
@@ -7940,6 +8076,23 @@
     1.9289
    ],
    "bytes": 65411
+  },
+  "genos-preparo": {
+   "arquivo": "genos-preparo.mp3",
+   "descricao": "Genos: o núcleo (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 52112
   },
   "gigantic-roar": {
    "arquivo": "gigantic-roar.mp3",
@@ -8638,6 +8791,23 @@
    ],
    "bytes": 70565
   },
+  "hiei-preparo": {
+   "arquivo": "hiei-preparo.mp3",
+   "descricao": "Hiei: as chamas negras (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 52449
+  },
   "hinokami-kagura": {
    "arquivo": "hinokami-kagura.mp3",
    "descricao": "Tanjiro: a Dança do Deus do Fogo",
@@ -8671,23 +8841,6 @@
     1.2183
    ],
    "bytes": 61739
-  },
-  "hipnose": {
-   "arquivo": "hipnose.mp3",
-   "descricao": "família hipnose",
-   "versoes": [
-    0.0,
-    1.38,
-    2.8071,
-    4.1432
-   ],
-   "duracoes": [
-    1.3,
-    1.3471,
-    1.256,
-    1.3198
-   ],
-   "bytes": 23845
   },
   "hiraishin": {
    "arquivo": "hiraishin.mp3",
@@ -9266,6 +9419,23 @@
     1.9289
    ],
    "bytes": 60396
+  },
+  "jagan": {
+   "arquivo": "jagan.mp3",
+   "descricao": "Hiei: o Jagan",
+   "versoes": [
+    0.0,
+    2.0522,
+    4.1375,
+    6.1499
+   ],
+   "duracoes": [
+    1.9722,
+    2.0054,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 64100
   },
   "jajanken-papel": {
    "arquivo": "jajanken-papel.mp3",
@@ -11255,6 +11425,23 @@
     1.6007
    ],
    "bytes": 55619
+  },
+  "marreta-arlequina": {
+   "arquivo": "marreta-arlequina.mp3",
+   "descricao": "Arlequina: a marreta",
+   "versoes": [
+    0.0,
+    1.2649,
+    2.5937,
+    3.8194
+   ],
+   "duracoes": [
+    1.1849,
+    1.2487,
+    1.1457,
+    1.2024
+   ],
+   "bytes": 40646
   },
   "marretada": {
    "arquivo": "marretada.mp3",
@@ -19501,6 +19688,23 @@
    ],
    "bytes": 38790
   },
+  "piada-final": {
+   "arquivo": "piada-final.mp3",
+   "descricao": "Coringa: a piada final",
+   "versoes": [
+    0.0,
+    2.28,
+    4.6398,
+    6.8454
+   ],
+   "duracoes": [
+    2.2,
+    2.2798,
+    2.1256,
+    2.2335
+   ],
+   "bytes": 70591
+  },
   "pilar": {
    "arquivo": "pilar.mp3",
    "descricao": "família pilar",
@@ -19517,6 +19721,23 @@
     1.3198
    ],
    "bytes": 46109
+  },
+  "pirueta": {
+   "arquivo": "pirueta.mp3",
+   "descricao": "Arlequina: a pirueta",
+   "versoes": [
+    0.0,
+    1.5182,
+    3.0875,
+    4.5581
+   ],
+   "duracoes": [
+    1.4382,
+    1.4893,
+    1.3906,
+    1.4596
+   ],
+   "bytes": 51201
   },
   "pisada-do-mario": {
    "arquivo": "pisada-do-mario.mp3",
@@ -19636,6 +19857,23 @@
     1.3198
    ],
    "bytes": 51087
+  },
+  "plano-calculado": {
+   "arquivo": "plano-calculado.mp3",
+   "descricao": "Lex Luthor: o plano calculado",
+   "versoes": [
+    0.0,
+    1.6024,
+    3.2259,
+    4.7322
+   ],
+   "duracoes": [
+    1.5224,
+    1.5436,
+    1.4263,
+    1.5098
+   ],
+   "bytes": 59420
   },
   "plano-de-contingencia": {
    "arquivo": "plano-de-contingencia.mp3",
@@ -21166,6 +21404,23 @@
     1.3198
    ],
    "bytes": 49689
+  },
+  "rajada-de-misseis": {
+   "arquivo": "rajada-de-misseis.mp3",
+   "descricao": "Genos: a rajada de mísseis",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 74399
   },
   "rajada-de-vento": {
    "arquivo": "rajada-de-vento.mp3",
@@ -22748,6 +23003,23 @@
    ],
    "bytes": 68897
   },
+  "sobrecarga-genos": {
+   "arquivo": "sobrecarga-genos.mp3",
+   "descricao": "Genos: a sobrecarga",
+   "versoes": [
+    0.0,
+    2.28,
+    4.6398,
+    6.8454
+   ],
+   "duracoes": [
+    2.2,
+    2.2798,
+    2.1256,
+    2.2335
+   ],
+   "bytes": 71104
+  },
   "soco-basico": {
    "arquivo": "soco-basico.mp3",
    "descricao": "básico de quem só dá um soco: o ar cortado e a pancada seca",
@@ -23563,6 +23835,23 @@
     1.4213
    ],
    "bytes": 57693
+  },
+  "surpresa-explosiva": {
+   "arquivo": "surpresa-explosiva.mp3",
+   "descricao": "Arlequina: a surpresa explosiva",
+   "versoes": [
+    0.0,
+    2.18,
+    4.4361,
+    6.5451
+   ],
+   "duracoes": [
+    2.1,
+    2.1761,
+    2.029,
+    2.132
+   ],
+   "bytes": 67275
   },
   "susanoo": {
    "arquivo": "susanoo.mp3",

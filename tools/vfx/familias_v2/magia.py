@@ -299,7 +299,6 @@ def invocacao(T, t, rng):
 
 REGISTRO = [
     ("olho", olho, GRANDE, "olho gigante se abrindo", False),
-    ("hipnose", hipnose, GRANDE, "espiral hipnótica", False),
     ("runas", runas, GRANDE, "círculo de runas", False),
     ("sarcofago", sarcofago, GRANDE, "caixa negra fechando", False),
     ("encanto", encanto, GRANDE, "estrelas de encanto", False),

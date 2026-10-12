@@ -456,16 +456,6 @@ def sopro_de_fogo(rng, v):
     return reverb(x, 0.4, 0.2, 4000)
 
 
-def dragao(rng, v):
-    x = _z(1.6)
-    n = n_de(0.9)
-    t = np.arange(n) / SR
-    rugido = satura(passa(rosa(rng, n), 120, 1500, 2) * (0.7 + 0.3 * np.sin(2 * math.pi * 13 * t)), 2.5) * sobe_e_some(n, 0.5, 1.4) * 0.8
-    poe(x, rugido, 0)
-    poe(x, B.explosao(rng, v)[: n_de(0.7)] * 0.8, 0.6)
-    return reverb(x, 0.6, 0.25)
-
-
 def nevasca(rng, v):
     n = n_de(1.3)
     t = np.arange(n) / SR
@@ -621,15 +611,6 @@ def olho(rng, v):
     poe(x, B.psiquico(rng, v)[: n_de(0.9)] * 0.6, 0.2)
     poe(x, _brilho(rng, 0.4, nota(88), 0.12), 0.25)
     return reverb(x, 0.6, 0.3)
-
-
-def hipnose(rng, v):
-    n = n_de(1.3)
-    t = np.arange(n) / SR
-    x = (seno(np.full(n, nota(69)), n) + seno(np.full(n, nota(69) * 1.012), n)) * env(n, 0.1, 0.6, segura=0.4) * 0.12
-    x *= 0.6 + 0.4 * np.sin(2 * math.pi * 6 * t)
-    x += seno(varre(nota(81), nota(69), n, 0.5), n) * env(n, 0.1, 0.6) * 0.08
-    return reverb(x, 0.7, 0.35)
 
 
 def runas(rng, v):

@@ -307,6 +307,20 @@
   "laco": false,
   "bytes": 14308
  },
+ "anti_vida": {
+  "descricao": "Darkseid · a Equação Anti-Vida",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 51944
+ },
  "aparar_e_cortar": {
   "descricao": "Sekiro: faísca de aparar e contra-corte",
   "quadros": 12,
@@ -1931,6 +1945,20 @@
   "laco": true,
   "bytes": 26642
  },
+ "canhao_incinerador": {
+  "descricao": "Genos · o fogo largo dos canhões",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 64176
+ },
  "canhao_sonico": {
   "descricao": "Ciborgue: arcos de onda sonora em sequência",
   "quadros": 12,
@@ -2126,6 +2154,20 @@
   ],
   "laco": false,
   "bytes": 70758
+ },
+ "carta_marcada": {
+  "descricao": "Coringa · a carta girando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 13038
  },
  "cartas_explosivas": {
   "descricao": "cartas que estouram",
@@ -3667,6 +3709,20 @@
   "laco": false,
   "bytes": 57618
  },
+ "cura_lunar": {
+  "descricao": "Sailor Moon · o cetro e as luas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 53234
+ },
  "cura_sora": {
   "descricao": "Sora · a flor e as folhas",
   "quadros": 12,
@@ -3750,6 +3806,20 @@
   ],
   "laco": true,
   "bytes": 22864
+ },
+ "darkseid_preparo": {
+  "descricao": "Darkseid · a equação girando (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 17206
  },
  "dead_eye": {
   "descricao": "Básico do Arthur Morgan: os X do Dead Eye",
@@ -4213,8 +4283,8 @@
   "laco": true,
   "bytes": 16976
  },
- "dragao": {
-  "descricao": "dragão serpenteando",
+ "dragao_das_trevas": {
+  "descricao": "Hiei · o dragão das chamas negras",
   "quadros": 12,
   "grade": [
    3,
@@ -4225,7 +4295,7 @@
    192
   ],
   "laco": false,
-  "bytes": 55672
+  "bytes": 42340
  },
  "dragao_faixa": {
   "descricao": "o dragão do Cólera do Dragão esticado até o alvo (faixa)",
@@ -4856,6 +4926,20 @@
   ],
   "laco": false,
   "bytes": 20446
+ },
+ "espada_de_fogo_hiei": {
+  "descricao": "Hiei · a espada de chamas negras",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 12934
  },
  "espada_do_futuro": {
   "descricao": "Trunks · os cortes em grade da espada",
@@ -5822,6 +5906,20 @@
   ],
   "laco": true,
   "bytes": 141660
+ },
+ "feixe_omega": {
+  "descricao": "Darkseid · os feixes Ômega em curva",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 29178
  },
  "feixe_pesado": {
   "descricao": "feixe largo (faixa)",
@@ -6859,6 +6957,20 @@
   "laco": false,
   "bytes": 38948
  },
+ "gas_do_riso": {
+  "descricao": "Coringa · o gás do riso",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 35412
+ },
  "gear_fifth_nika": {
   "descricao": "Luffy · Gear Fifth: nuvens, o sol do Nika e o tambor",
   "quadros": 12,
@@ -6942,6 +7054,20 @@
   ],
   "laco": false,
   "bytes": 72250
+ },
+ "genos_preparo": {
+  "descricao": "Genos · o núcleo e o vapor (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 37570
  },
  "gigantic_roar": {
   "descricao": "Broly · o rugido em ondas",
@@ -7517,6 +7643,20 @@
   "laco": false,
   "bytes": 41836
  },
+ "hiei_preparo": {
+  "descricao": "Hiei · o braço enfaixado (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 20016
+ },
  "hinokami_kagura": {
   "descricao": "Tanjiro · a Dança do Deus do Fogo: o halo de chamas e o corte",
   "quadros": 12,
@@ -7544,20 +7684,6 @@
   ],
   "laco": true,
   "bytes": 26076
- },
- "hipnose": {
-  "descricao": "espiral hipnótica",
-  "quadros": 12,
-  "grade": [
-   3,
-   4
-  ],
-  "tamanho": [
-   192,
-   192
-  ],
-  "laco": false,
-  "bytes": 73684
  },
  "hiraishin": {
   "descricao": "Minato · o Deus do Trovão Voador",
@@ -7992,6 +8118,20 @@
   ],
   "laco": false,
   "bytes": 30306
+ },
+ "jagan": {
+  "descricao": "Hiei · o terceiro olho",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 11746
  },
  "jajanken_papel": {
   "descricao": "Gon · Jajanken: Papel explodindo",
@@ -9630,6 +9770,20 @@
   ],
   "laco": false,
   "bytes": 37406
+ },
+ "marreta_arlequina": {
+  "descricao": "Arlequina · a marreta e as estrelinhas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 20538
  },
  "marretada": {
   "descricao": "marreta de desenho batendo",
@@ -16463,6 +16617,20 @@
   "laco": false,
   "bytes": 11058
  },
+ "piada_final": {
+  "descricao": "Coringa · a caixa-surpresa",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 21858
+ },
  "pilar": {
   "descricao": "pilar de energia subindo",
   "quadros": 12,
@@ -16476,6 +16644,20 @@
   ],
   "laco": false,
   "bytes": 44548
+ },
+ "pirueta": {
+  "descricao": "Arlequina · a pirueta com as fitas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 19304
  },
  "pisada_do_mario": {
   "descricao": "Mario: a bota pisa, achata, estrelinhas e moeda",
@@ -16574,6 +16756,20 @@
   ],
   "laco": true,
   "bytes": 140520
+ },
+ "plano_calculado": {
+  "descricao": "Lex Luthor · a prancheta e a mira",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 17504
  },
  "plano_de_contingencia": {
   "descricao": "Doutor Destino · os lasers e o círculo explodindo",
@@ -17876,6 +18072,20 @@
   ],
   "laco": false,
   "bytes": 54116
+ },
+ "rajada_de_misseis": {
+  "descricao": "Genos · os mísseis",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 36350
  },
  "rajada_de_vento": {
   "descricao": "Tempestade · as correntes de vento e os redemoinhos",
@@ -19193,6 +19403,20 @@
   "laco": false,
   "bytes": 44054
  },
+ "sobrecarga_genos": {
+  "descricao": "Genos · o feixe incandescente",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 24246
+ },
  "soco": {
   "descricao": "impacto leve",
   "quadros": 12,
@@ -19864,6 +20088,20 @@
   ],
   "laco": true,
   "bytes": 11234
+ },
+ "surpresa_explosiva": {
+  "descricao": "Arlequina · as bombinhas de coração",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 35638
  },
  "susanoo_itachi": {
   "descricao": "Itachi · o Susanoo aparece em cima dele e desce a espada Totsuka",

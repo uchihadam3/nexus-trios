@@ -56,31 +56,6 @@ def sopro_de_fogo(T, t, rng):
     return G, H
 
 
-def dragao(T, t, rng):
-    """Dragão: um corpo serpenteando chega em espiral, a cabeça morde o alvo e estoura."""
-    G, H = vazio(T)
-    p = ease_out(rel(t, 0, 0.45), 1.6)
-    env = apaga(t, 0.6, 1)
-    pts = []
-    for k in range(60):
-        u = k / 59
-        s = p - (1 - u) * 0.55
-        if s < 0:
-            continue
-        a = s * 5.5
-        r = 0.85 * (1 - s) + 0.05
-        pts.append((math.cos(a) * r, math.sin(a) * r * 0.7, u))
-    corpo = T.zero()
-    for (x1, y1, u1), (x2, y2, u2) in zip(pts, pts[1:]):
-        corpo += T.lines([(x1, y1, x2, y2, 1)], 0.02 + 0.07 * u2, 0.01)
-    cabeca = T.gauss(pts[-1][0], pts[-1][1], 0.09) * 2 if pts else T.zero()
-    tt = rel(t, 0.42, 1)
-    estouro = T.gauss(0, 0, 0.18 + 0.15 * tt) * some(t, 0.42, 0.7) * 2.6 + T.ring(0.1 + 0.6 * ease_out(tt, 2), 0.03) * (1 - tt) ** 1.3 * 1.5 * (t > 0.42)
-    G += (T.glow(np.clip(corpo, 0, 1.5), 1, 1.2, 0.03) + cabeca) * env + estouro
-    H += (np.clip(corpo, 0, 1) * 0.5 + cabeca * 0.8) * env + estouro
-    return G, H
-
-
 def nevasca(T, t, rng):
     """Nevasca: flocos girando num redemoinho largo, véu de frio e geada no chão."""
     G, H = vazio(T)
@@ -401,7 +376,6 @@ def rugido(T, t, rng):
 REGISTRO = [
     ("labareda", labareda, GRANDE, "coluna de fogo", False),
     ("sopro_de_fogo", sopro_de_fogo, GRANDE, "jato de fogo em cone", False),
-    ("dragao", dragao, GRANDE, "dragão serpenteando", False),
     ("nevasca", nevasca, GRANDE, "flocos em redemoinho", False),
     ("bloco_de_gelo", bloco_de_gelo, GRANDE, "bloco de gelo prendendo", False),
     ("tempestade", tempestade, GRANDE, "nuvem e raios de cima", False),
