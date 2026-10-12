@@ -16,33 +16,6 @@ def _rasgo(T, x1, y1, x2, y2, larg, p, fim):
     return corpo, fio
 
 
-def corte_vertical(T, t, rng):
-    """Corte vertical: a lâmina desce reto de cima a baixo, o rasgo fica e faíscas saem para os lados."""
-    G, H = vazio(T)
-    p = ease_out(rel(t, 0, 0.18), 2.5)
-    corpo, fio = _rasgo(T, 0.05, -0.9, -0.05, 0.9, 0.09, p, rel(t, 0.3, 0.95))
-    clarao = T.gauss(0, 0, 0.1, 0.4) * pulso(t, 0.08, 0.4) * 1.8
-    fa = faiscas(T, rng, t, 22, 0.7, 0.03, cone=(-0.5, 0.5), gravidade=0.3, inicio=0.12) + faiscas(T, rng, t, 22, 0.7, 0.03, cone=(math.pi - 0.5, math.pi + 0.5), gravidade=0.3, inicio=0.12)
-    G += T.glow(corpo, 1.1, 1.2, 0.025) + fio * 1.3 + clarao + T.glow(fa, 1, 1.1, 0.02)
-    H += fio * 1.5 + corpo * 0.3 + clarao + fa * 0.6
-    return G, H
-
-
-def iaido(T, t, rng):
-    """Saque rápido: um risco finíssimo aparece de uma vez; um instante depois o alvo se abre num clarão."""
-    G, H = vazio(T)
-    linha = np.exp(-((T.V + 0.1 * T.U) / 0.006) ** 2) * smooth(-np.abs(T.U), -0.95, -0.7) * (t < 0.42) * janela(t, 0, 0.04)
-    tt = rel(t, 0.38, 1)
-    on = t >= 0.38
-    abre = 0.02 + 0.22 * ease_out(tt, 2)
-    metades = (np.exp(-((T.V + 0.1 * T.U - abre) / 0.012) ** 2) + np.exp(-((T.V + 0.1 * T.U + abre) / 0.012) ** 2)) * smooth(-np.abs(T.U), -0.95, -0.6) * (1 - tt) ** 1.3 * on
-    clarao = T.gauss(0, 0, 0.5, 0.08) * some(t, 0.38, 0.65) * 3.2 + T.flare(0, 0, 2.2, -0.1) * some(t, 0.38, 0.6) * 2.5
-    fa = faiscas(T, rng, t, 26, 0.9, 0.03, cone=(-0.5, 0.5), gravidade=0.25, inicio=0.38)
-    G += linha * 2.5 + metades * 1.6 + clarao + T.glow(fa, 1, 1.1, 0.02)
-    H += linha * 2.5 + metades + clarao + fa * 0.6
-    return G, H
-
-
 def mil_cortes(T, t, rng):
     """Mil cortes: dezenas de riscos finos em todas as direções, um atrás do outro, e um X final."""
     G, H = vazio(T)
@@ -220,8 +193,6 @@ def florete(T, t, rng):
 
 
 REGISTRO = [
-    ("corte_vertical", corte_vertical, GRANDE, "corte vertical", False),
-    ("iaido", iaido, GRANDE, "saque rápido com clarão atrasado", False),
     ("mil_cortes", mil_cortes, GRANDE, "mil cortes e X final", False),
     ("espadao", espadao, GRANDE, "espadão que racha o chão", False),
     ("lamina_de_fogo", lamina_de_fogo, GRANDE, "lâmina de fogo", False),

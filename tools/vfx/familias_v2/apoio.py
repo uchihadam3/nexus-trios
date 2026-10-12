@@ -133,25 +133,6 @@ def escudo_fisico(T, t, rng):
     return G, H
 
 
-def armadura(T, t, rng):
-    """Armadura: placas de metal fecham sobre o corpo de baixo para cima, com um reflexo correndo."""
-    G, H = vazio(T)
-    env = apaga(t, 0.75, 1)
-    placas, bordas = [], T.zero()
-    for k in range(5):
-        y = 0.45 - k * 0.2
-        u = back(rel(t, k * 0.06, k * 0.06 + 0.2), 1.4)
-        w = (0.34 - abs(k - 2) * 0.03) * u
-        pl = [(-w, y), (w, y), (w * 0.92, y - 0.17), (-w * 0.92, y - 0.17)]
-        placas.append((pl, 0.6))
-        bordas += T.polyline(pl + [pl[0]], 0.012, 1)
-    p = T.polys(placas, 0.003)
-    reflexo = np.exp(-((T.U + T.V * 0.4 - (-0.8 + 1.6 * rel(t, 0.4, 0.7))) / 0.05) ** 2) * (p > 0.1) * 1.2
-    G += (p * 0.5 + bordas * 1.3 + reflexo) * env
-    H += (bordas * 0.6 + reflexo) * env
-    return G, H
-
-
 def resgate(T, t, rng):
     """Resgate: um rastro curvo mergulha até o aliado, o pega e sobe num brilho protetor."""
     G, H = vazio(T)
@@ -710,7 +691,6 @@ REGISTRO = [
     ("escudo_tech", escudo_tech, GRANDE, "parede de painéis hexagonais", False),
     ("barreira_magica", barreira_magica, GRANDE, "cúpula de runas", False),
     ("escudo_fisico", escudo_fisico, GRANDE, "brasão de escudo", False),
-    ("armadura", armadura, GRANDE, "placas de armadura", False),
     ("resgate", resgate, GRANDE, "mergulho de resgate", False),
     ("bencao", bencao, GRANDE, "penas e halo", False),
     ("lanche", lanche, GRANDE, "mordida, vapor e coração", False),

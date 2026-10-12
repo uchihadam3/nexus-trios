@@ -461,20 +461,6 @@
   "laco": false,
   "bytes": 19914
  },
- "armadura": {
-  "descricao": "placas de armadura",
-  "quadros": 12,
-  "grade": [
-   3,
-   4
-  ],
-  "tamanho": [
-   192,
-   192
-  ],
-  "laco": false,
-  "bytes": 17238
- },
  "armadura_berserker": {
   "descricao": "Guts · a Armadura Berserker fechando",
   "quadros": 12,
@@ -1175,6 +1161,20 @@
   "laco": false,
   "bytes": 9194
  },
+ "ben10_preparo": {
+  "descricao": "Ben 10 · o Omnitrix girando (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 40838
+ },
  "bencao": {
   "descricao": "penas e halo",
   "quadros": 12,
@@ -1664,6 +1664,20 @@
   ],
   "laco": false,
   "bytes": 16562
+ },
+ "buraco_de_coelho": {
+  "descricao": "Pernalonga · o buraco e a terra",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 21338
  },
  "buraco_negro": {
   "descricao": "buraco negro sugando",
@@ -2407,6 +2421,20 @@
   "laco": false,
   "bytes": 31338
  },
+ "chama_ben10": {
+  "descricao": "Ben 10 · as bolas de fogo do Chama",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 38558
+ },
  "chama_do_triangulo": {
   "descricao": "Bill Cipher: triângulo de olho que derrama chama azul",
   "quadros": 12,
@@ -3107,6 +3135,20 @@
   "laco": false,
   "bytes": 27884
  },
+ "confusao_total": {
+  "descricao": "Pica-Pau · as penas e as estrelinhas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 30806
+ },
  "construto_adaptavel": {
   "descricao": "Lanterna Verde · o martelo, a lâmina e o míssil",
   "quadros": 12,
@@ -3429,6 +3471,20 @@
   "laco": false,
   "bytes": 40710
  },
+ "corte_decisivo": {
+  "descricao": "Samurai Jack · o corte num instante",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 16250
+ },
  "corte_dimensional": {
   "descricao": "Vergil: esfera de cortes em volta do alvo que se parte",
   "quadros": 12,
@@ -3526,20 +3582,6 @@
   ],
   "laco": false,
   "bytes": 20964
- },
- "corte_vertical": {
-  "descricao": "corte vertical",
-  "quadros": 12,
-  "grade": [
-   3,
-   4
-  ],
-  "tamanho": [
-   192,
-   192
-  ],
-  "laco": false,
-  "bytes": 50218
  },
  "corvo_da_alma": {
   "descricao": "Energia da alma: o corvo escuro que mergulha",
@@ -4212,6 +4254,20 @@
   ],
   "laco": false,
   "bytes": 15376
+ },
+ "disfarce_pernalonga": {
+  "descricao": "Pernalonga · a fumaça e a peruca",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 30916
  },
  "disparo_arcano": {
   "descricao": "Disparo arcano: mandala de runas e faíscas arcanas",
@@ -4996,6 +5052,20 @@
   ],
   "laco": false,
   "bytes": 88292
+ },
+ "espada_do_poder": {
+  "descricao": "He-Man · a espada e os raios",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 24966
  },
  "espada_mestra": {
   "descricao": "Link: arco de espada azul-claro e o reflexo dos três triângulos",
@@ -6607,6 +6677,20 @@
   "laco": false,
   "bytes": 53254
  },
+ "furacao_de_socos": {
+  "descricao": "Popeye · o braço-hélice e os socos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 24750
+ },
  "furia_espartana": {
   "descricao": "Kratos · a pancada rápida da Fúria",
   "quadros": 12,
@@ -7321,6 +7405,20 @@
   "laco": false,
   "bytes": 13392
  },
+ "golpe_de_grayskull": {
+  "descricao": "He-Man · Grayskull e o golpe",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 36536
+ },
  "golpe_de_panico": {
   "descricao": "Golpe de pânico de Anya: tapinhas, suor, '!' e estrelinhas",
   "quadros": 12,
@@ -7741,6 +7839,34 @@
   "laco": false,
   "bytes": 39498
  },
+ "hellboy_preparo": {
+  "descricao": "Hellboy · a Mão da Perdição erguida (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 15262
+ },
+ "heman_preparo": {
+  "descricao": "He-Man · a espada puxando os raios (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 13258
+ },
  "hex_de_probabilidade": {
   "descricao": "Feiticeira · os fios, o redemoinho e o sinal",
   "quadros": 12,
@@ -7838,20 +7964,6 @@
   ],
   "laco": false,
   "bytes": 90474
- },
- "iaido": {
-  "descricao": "saque rápido com clarão atrasado",
-  "quadros": 12,
-  "grade": [
-   3,
-   4
-  ],
-  "tamanho": [
-   192,
-   192
-  ],
-  "laco": false,
-  "bytes": 37002
  },
  "identidade_falsa": {
   "descricao": "Loid · a máscara rasga e a mira do espião fecha",
@@ -8287,6 +8399,20 @@
   "laco": false,
   "bytes": 30306
  },
+ "jack_preparo": {
+  "descricao": "Samurai Jack · a mão na empunhadura (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 2466
+ },
  "jagan": {
   "descricao": "Hiei · o terceiro olho",
   "quadros": 12,
@@ -8609,6 +8735,20 @@
   "laco": false,
   "bytes": 44332
  },
+ "katana_magica": {
+  "descricao": "Samurai Jack · o corte dourado",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 9840
+ },
  "katanas_gemeas": {
   "descricao": "Leonardo · as katanas em X",
   "quadros": 12,
@@ -8832,20 +8972,6 @@
   ],
   "laco": false,
   "bytes": 47938
- },
- "labareda": {
-  "descricao": "coluna de fogo",
-  "quadros": 12,
-  "grade": [
-   3,
-   4
-  ],
-  "tamanho": [
-   192,
-   192
-  ],
-  "laco": false,
-  "bytes": 71108
  },
  "laco": {
   "descricao": "Laço: a laçada gira, voa, cai em volta do alvo e aperta",
@@ -9308,6 +9434,20 @@
   ],
   "laco": true,
   "bytes": 9480
+ },
+ "lata_de_espinafre": {
+  "descricao": "Popeye · a lata e o músculo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 26886
  },
  "leao_dourado": {
   "descricao": "Aiolia · o Rugido do Leão voando (laço)",
@@ -16645,6 +16785,20 @@
   "laco": false,
   "bytes": 63258
  },
+ "pancada_final": {
+  "descricao": "Hellboy · o soco de pedra que racha o chão",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 29634
+ },
  "papel_bola": {
   "descricao": "Gon · a bola de aura do Papel voando (laço)",
   "quadros": 12,
@@ -17205,6 +17359,20 @@
   "laco": false,
   "bytes": 58688
  },
+ "postura_serena": {
+  "descricao": "Samurai Jack · a meditação e as folhas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 60528
+ },
  "pow_cartoon": {
   "descricao": "balão POW de quadrinho",
   "quadros": 12,
@@ -17750,6 +17918,20 @@
   ],
   "laco": false,
   "bytes": 16918
+ },
+ "que_que_ha_velhinho": {
+  "descricao": "Pernalonga · a cenoura e a bigorna",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 21290
  },
  "queimadura": {
   "descricao": "ponto queimando",
@@ -18744,6 +18926,20 @@
   ],
   "laco": false,
   "bytes": 86222
+ },
+ "risada_irritante": {
+  "descricao": "Pica-Pau · as notas da risada",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 14624
  },
  "ritmo_eletrico": {
   "descricao": "Killua · Ritmo elétrico: as imagens giram e fecham com as garras",
@@ -20593,6 +20789,20 @@
   "laco": true,
   "bytes": 12238
  },
+ "teimosia": {
+  "descricao": "Hellboy · os chifres e a casca de pedra",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 61778
+ },
  "telecinese": {
   "descricao": "telecinese",
   "quadros": 12,
@@ -21936,6 +22146,20 @@
   ],
   "laco": false,
   "bytes": 28976
+ },
+ "xlr8": {
+  "descricao": "Ben 10 · o borrão do XLR8",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 25208
  },
  "yamato": {
   "descricao": "Vergil · o saque, os cortes e as espadas espectrais",

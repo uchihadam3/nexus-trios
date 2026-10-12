@@ -22,24 +22,6 @@ def _chama_em(T, t, seed, base, altura, largura, cx=0.0, vel=1.0):
     return chama, nucleo
 
 
-def labareda(T, t, rng):
-    """Labareda: uma coluna de fogo explode do chão até o alto e desaba em brasas."""
-    G, H = vazio(T)
-    sobe = ease_out(rel(t, 0, 0.25), 2)
-    env = apaga(t, 0.55, 1)
-    c, n = _chama_em(T, t, 401, 0.55, 0.2 + 1.3 * sobe, 0.32)
-    c2, n2 = _chama_em(T, t, 402, 0.55, 0.15 + 0.7 * sobe, 0.18, -0.25)
-    c3, n3 = _chama_em(T, t, 403, 0.55, 0.15 + 0.75 * sobe, 0.18, 0.25)
-    brasas = []
-    for _ in range(30):
-        f = (rng.uniform(0, 1) + t * 1.6) % 1
-        brasas.append((rng.uniform(-0.4, 0.4), 0.5 - f * 1.3, (1 - f) * rng.uniform(0.3, 1)))
-    anel = T.ring(0.2 + 0.5 * sobe, 0.04, cy=0.55, squash=3.5) * (1 - t) * 1.3
-    G += (np.maximum.reduce([c, c2, c3]) * 2.0 + T.splats(brasas, 0.01) * 1.1) * env + anel
-    H += (np.maximum.reduce([n, n2, n3]) * 1.6 + T.splats(brasas, 0.008) * 0.8) * env
-    return G, H
-
-
 def sopro_de_fogo(T, t, rng):
     """Sopro de fogo: um jato em cone vem de trás e envolve o alvo, com fumaça no fim."""
     G, H = vazio(T)
@@ -374,7 +356,6 @@ def rugido(T, t, rng):
 
 
 REGISTRO = [
-    ("labareda", labareda, GRANDE, "coluna de fogo", False),
     ("sopro_de_fogo", sopro_de_fogo, GRANDE, "jato de fogo em cone", False),
     ("nevasca", nevasca, GRANDE, "flocos em redemoinho", False),
     ("bloco_de_gelo", bloco_de_gelo, GRANDE, "bloco de gelo prendendo", False),

@@ -165,12 +165,6 @@ def esticar(rng, v):
 
 
 # ================================================================== cortes
-def corte_vertical(rng, v):
-    x = B.corte(rng, v)
-    poe(x, baque(n_de(0.2), 140, 70, 0.04, 0.2) * 0.4, 0.12)
-    return x
-
-
 def mil_cortes(rng, v):
     x = _z(1.1)
     for k in range(10):
@@ -432,14 +426,6 @@ def desintegrar(rng, v):
 
 
 # ================================================================== elementos
-def labareda(rng, v):
-    x = _z(1.2)
-    poe(x, assobio(rng, n_de(0.4), 200, 2000, 0.6, 0.6) * env(n_de(0.4), 0.005, 0.3) * 0.7, 0)
-    poe(x, B.fogo(rng, v), 0.02, 1.1)
-    poe(x, baque(n_de(0.4), 80, 40, 0.15, 0.3) * 0.6, 0)
-    return x
-
-
 def sopro_de_fogo(rng, v):
     n = n_de(1.1)
     x = passa(rosa(rng, n), 150, 3500, 2) * env(n, 0.05, 0.5, segura=0.4) * 0.8
@@ -739,14 +725,6 @@ def barreira_magica(rng, v):
     return reverb(x, 0.7, 0.35)
 
 
-def armadura(rng, v):
-    x = _z(1.1)
-    for k in range(5):
-        poe(x, modal(n_de(0.25), rng.uniform(400, 600) * (1 + k * 0.1), rng=rng, **METAL) * env(n_de(0.25), 0.001, 0.1) * 0.25 + baque(n_de(0.25), 200, 100, 0.03, 0.4) * 0.3, k * 0.07)
-    poe(x, _brilho(rng, 0.5, nota(91), 0.1, CRISTAL), 0.45)
-    return reverb(x, 0.4, 0.2)
-
-
 def resgate(rng, v):
     x = _z(1.1)
     poe(x, _whoosh(rng, 0.35, 3000, 400, 0.6, g=0.6), 0)
@@ -1032,17 +1010,6 @@ def escudo_fisico(rng, v):
     return x
 
 
-def iaido(rng, v):
-    """Saque rápido: a lâmina deslizando na bainha, o "shing" curto e o corte."""
-    x = _z(1.0)
-    n = n_de(0.18)
-    poe(x, passa(ruido(rng, n), 3000, 10000, 2) * sobe_e_some(n, 0.8, 1.5) * 0.4, 0)
-    poe(x, B._lamina_curta(rng, n_de(0.3), rng.uniform(2800, 3400)) * 0.3, 0.17)
-    poe(x, B.corte_pesado(rng, v), 0.38, 0.9)
-    return x
-
-
-# ================================================================== reviver e renascer
 def ressurreicao(rng, v):
     """Reviver: o ar se abre (descida de luz), um coro sobe, sinos em cascata e um brilho
     com batida de coração no instante em que o aliado se levanta."""

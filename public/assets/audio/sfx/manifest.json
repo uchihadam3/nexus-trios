@@ -597,23 +597,6 @@
    ],
    "bytes": 67483
   },
-  "armadura": {
-   "arquivo": "armadura.mp3",
-   "descricao": "família armadura",
-   "versoes": [
-    0.0,
-    1.18,
-    2.3999,
-    3.5427
-   ],
-   "duracoes": [
-    1.1,
-    1.1399,
-    1.0628,
-    1.1167
-   ],
-   "bytes": 38471
-  },
   "armadura-berserker": {
    "arquivo": "armadura-berserker.mp3",
    "descricao": "Armadura Berserker: as placas fechando e o rosnado",
@@ -1413,6 +1396,23 @@
    ],
    "bytes": 45615
   },
+  "ben10-preparo": {
+   "arquivo": "ben10-preparo.mp3",
+   "descricao": "Ben 10: o Omnitrix (Preparo)",
+   "versoes": [
+    0.0,
+    1.3952,
+    2.865,
+    4.214
+   ],
+   "duracoes": [
+    1.3152,
+    1.3898,
+    1.2689,
+    1.3346
+   ],
+   "bytes": 51179
+  },
   "bencao": {
    "arquivo": "bencao.mp3",
    "descricao": "família bencao",
@@ -1939,6 +1939,23 @@
     1.4181
    ],
    "bytes": 42670
+  },
+  "buraco-de-coelho": {
+   "arquivo": "buraco-de-coelho.mp3",
+   "descricao": "Pernalonga: o buraco de coelho",
+   "versoes": [
+    0.0,
+    1.0894,
+    2.1988,
+    3.2556
+   ],
+   "duracoes": [
+    1.0094,
+    1.0294,
+    0.9767,
+    1.033
+   ],
+   "bytes": 34142
   },
   "buraco-negro": {
    "arquivo": "buraco-negro.mp3",
@@ -2738,6 +2755,23 @@
     1.3198
    ],
    "bytes": 76259
+  },
+  "chama-ben10": {
+   "arquivo": "chama-ben10.mp3",
+   "descricao": "Ben 10: o Chama",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    1.7868
+   ],
+   "bytes": 63647
   },
   "chama-do-triangulo": {
    "arquivo": "chama-do-triangulo.mp3",
@@ -3555,6 +3589,23 @@
    ],
    "bytes": 37496
   },
+  "confusao-total": {
+   "arquivo": "confusao-total.mp3",
+   "descricao": "Pica-Pau: a confusão total",
+   "versoes": [
+    0.0,
+    1.6273,
+    3.2412,
+    4.7862
+   ],
+   "duracoes": [
+    1.5473,
+    1.534,
+    1.4649,
+    1.5606
+   ],
+   "bytes": 71271
+  },
   "construto-adaptavel": {
    "arquivo": "construto-adaptavel.mp3",
    "descricao": "Lanterna Verde: as formas e o impacto",
@@ -3895,6 +3946,23 @@
    ],
    "bytes": 20195
   },
+  "corte-decisivo": {
+   "arquivo": "corte-decisivo.mp3",
+   "descricao": "Samurai Jack: o corte decisivo",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 67997
+  },
   "corte-dimensional": {
    "arquivo": "corte-dimensional.mp3",
    "descricao": "básico de Vergil: cortes múltiplos no espaço, \"tchk\" da bainha e o espaço se partindo",
@@ -4030,23 +4098,6 @@
     1.8274
    ],
    "bytes": 67490
-  },
-  "corte-vertical": {
-   "arquivo": "corte-vertical.mp3",
-   "descricao": "família corte vertical",
-   "versoes": [
-    0.0,
-    0.58,
-    1.1781,
-    1.7412
-   ],
-   "duracoes": [
-    0.5,
-    0.5181,
-    0.4831,
-    0.5076
-   ],
-   "bytes": 22222
   },
   "corvo-da-alma": {
    "arquivo": "corvo-da-alma.mp3",
@@ -4778,6 +4829,23 @@
     1.661
    ],
    "bytes": 62212
+  },
+  "disfarce-pernalonga": {
+   "arquivo": "disfarce-pernalonga.mp3",
+   "descricao": "Pernalonga: o disfarce",
+   "versoes": [
+    0.0,
+    1.2319,
+    2.518,
+    3.7124
+   ],
+   "duracoes": [
+    1.1519,
+    1.2061,
+    1.1143,
+    1.1818
+   ],
+   "bytes": 38687
   },
   "disparo": {
    "arquivo": "disparo.mp3",
@@ -5764,6 +5832,23 @@
     1.3873
    ],
    "bytes": 55106
+  },
+  "espada-do-poder": {
+   "arquivo": "espada-do-poder.mp3",
+   "descricao": "He-Man: a Espada do Poder",
+   "versoes": [
+    0.0,
+    1.6448,
+    3.2496,
+    4.903
+   ],
+   "duracoes": [
+    1.5648,
+    1.5248,
+    1.5734,
+    1.6656
+   ],
+   "bytes": 57424
   },
   "espada-mestra": {
    "arquivo": "espada-mestra.mp3",
@@ -7550,6 +7635,23 @@
    ],
    "bytes": 64064
   },
+  "furacao-de-socos": {
+   "arquivo": "furacao-de-socos.mp3",
+   "descricao": "Popeye: o furacão de socos",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 63156
+  },
   "furia-espartana": {
    "arquivo": "furia-espartana.mp3",
    "descricao": "a pancada da Fúria",
@@ -8400,6 +8502,23 @@
    ],
    "bytes": 41700
   },
+  "golpe-de-grayskull": {
+   "arquivo": "golpe-de-grayskull.mp3",
+   "descricao": "He-Man: o golpe de Grayskull",
+   "versoes": [
+    0.0,
+    2.38,
+    4.8434,
+    7.1456
+   ],
+   "duracoes": [
+    2.3,
+    2.3834,
+    2.2222,
+    2.335
+   ],
+   "bytes": 71999
+  },
   "golpe-de-panico": {
    "arquivo": "golpe-de-panico.mp3",
    "descricao": "básico de Anya: tapinhas cômicos, 'boing' e estrelinhas",
@@ -8910,6 +9029,40 @@
    ],
    "bytes": 85975
   },
+  "hellboy-preparo": {
+   "arquivo": "hellboy-preparo.mp3",
+   "descricao": "Hellboy: a Mão da Perdição (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 28473
+  },
+  "heman-preparo": {
+   "arquivo": "heman-preparo.mp3",
+   "descricao": "He-Man: Grayskull (Preparo)",
+   "versoes": [
+    0.0,
+    1.58,
+    3.2144,
+    4.7437
+   ],
+   "duracoes": [
+    1.5,
+    1.5544,
+    1.4493,
+    1.5228
+   ],
+   "bytes": 73270
+  },
   "hex-de-probabilidade": {
    "arquivo": "hex-de-probabilidade.mp3",
    "descricao": "Feiticeira: os fios, o redemoinho e o sinal",
@@ -9028,23 +9181,6 @@
     2.1067
    ],
    "bytes": 70868
-  },
-  "iaido": {
-   "arquivo": "iaido.mp3",
-   "descricao": "família iaido",
-   "versoes": [
-    0.0,
-    1.08,
-    2.1963,
-    3.2424
-   ],
-   "duracoes": [
-    1.0,
-    1.0363,
-    0.9662,
-    1.0152
-   ],
-   "bytes": 42046
   },
   "identidade-falsa": {
    "arquivo": "identidade-falsa.mp3",
@@ -9624,6 +9760,23 @@
    ],
    "bytes": 60396
   },
+  "jack-preparo": {
+   "arquivo": "jack-preparo.mp3",
+   "descricao": "Samurai Jack: o silêncio (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 51528
+  },
   "jagan": {
    "arquivo": "jagan.mp3",
    "descricao": "Hiei: o Jagan",
@@ -10066,6 +10219,23 @@
    ],
    "bytes": 44094
   },
+  "katana-magica": {
+   "arquivo": "katana-magica.mp3",
+   "descricao": "Samurai Jack: a katana mágica",
+   "versoes": [
+    0.0,
+    1.195,
+    2.447,
+    3.6647
+   ],
+   "duracoes": [
+    1.115,
+    1.172,
+    1.1378,
+    1.1533
+   ],
+   "bytes": 47682
+  },
   "katanas-gemeas": {
    "arquivo": "katanas-gemeas.mp3",
    "descricao": "Leonardo: as katanas gêmeas",
@@ -10286,23 +10456,6 @@
     2.0305
    ],
    "bytes": 63846
-  },
-  "labareda": {
-   "arquivo": "labareda.mp3",
-   "descricao": "família labareda",
-   "versoes": [
-    0.0,
-    0.9799,
-    1.9915,
-    2.942
-   ],
-   "duracoes": [
-    0.8999,
-    0.9315,
-    0.8706,
-    0.9132
-   ],
-   "bytes": 55173
   },
   "laco": {
    "arquivo": "laco.mp3",
@@ -10898,6 +11051,23 @@
     0.2538
    ],
    "bytes": 14055
+  },
+  "lata-de-espinafre": {
+   "arquivo": "lata-de-espinafre.mp3",
+   "descricao": "Popeye: a lata de espinafre",
+   "versoes": [
+    0.0,
+    1.51,
+    3.078,
+    4.54
+   ],
+   "duracoes": [
+    1.43,
+    1.488,
+    1.382,
+    1.4298
+   ],
+   "bytes": 50805
   },
   "leitura-de-abertura": {
    "arquivo": "leitura-de-abertura.mp3",
@@ -19773,6 +19943,23 @@
    ],
    "bytes": 37402
   },
+  "pancada-final": {
+   "arquivo": "pancada-final.mp3",
+   "descricao": "Hellboy: a pancada final",
+   "versoes": [
+    0.0,
+    2.28,
+    4.6398,
+    6.8454
+   ],
+   "duracoes": [
+    2.2,
+    2.2798,
+    2.1256,
+    2.2335
+   ],
+   "bytes": 70855
+  },
   "paralisia-mental": {
    "arquivo": "paralisia-mental.mp3",
    "descricao": "Professor Xavier: a onda e o silêncio",
@@ -20384,6 +20571,23 @@
     1.3933
    ],
    "bytes": 41695
+  },
+  "postura-serena": {
+   "arquivo": "postura-serena.mp3",
+   "descricao": "Samurai Jack: a postura serena",
+   "versoes": [
+    0.0,
+    2.28,
+    4.6398,
+    6.8454
+   ],
+   "duracoes": [
+    2.2,
+    2.2798,
+    2.1256,
+    2.2335
+   ],
+   "bytes": 78223
   },
   "pow-cartoon": {
    "arquivo": "pow-cartoon.mp3",
@@ -21098,6 +21302,23 @@
     1.3198
    ],
    "bytes": 40154
+  },
+  "que-que-ha-velhinho": {
+   "arquivo": "que-que-ha-velhinho.mp3",
+   "descricao": "Pernalonga: O que é que há, velhinho?",
+   "versoes": [
+    0.0,
+    1.5671,
+    3.168,
+    4.6095
+   ],
+   "duracoes": [
+    1.4871,
+    1.5209,
+    1.3615,
+    1.4293
+   ],
+   "bytes": 48937
   },
   "quique": {
    "arquivo": "quique.mp3",
@@ -22322,6 +22543,23 @@
     1.4213
    ],
    "bytes": 51345
+  },
+  "risada-irritante": {
+   "arquivo": "risada-irritante.mp3",
+   "descricao": "Pica-Pau: a risada",
+   "versoes": [
+    0.0,
+    1.2715,
+    2.5852,
+    3.8174
+   ],
+   "duracoes": [
+    1.1915,
+    1.2337,
+    1.1522,
+    1.2092
+   ],
+   "bytes": 42265
   },
   "ritmo-eletrico": {
    "arquivo": "ritmo-eletrico.mp3",
@@ -24380,6 +24618,23 @@
    ],
    "bytes": 36175
   },
+  "teimosia": {
+   "arquivo": "teimosia.mp3",
+   "descricao": "Hellboy: a teimosia",
+   "versoes": [
+    0.0,
+    1.98,
+    4.0289,
+    5.9446
+   ],
+   "duracoes": [
+    1.9,
+    1.9689,
+    1.8357,
+    1.9289
+   ],
+   "bytes": 60241
+  },
   "telecinese-escarlate": {
    "arquivo": "telecinese-escarlate.mp3",
    "descricao": "Feiticeira: as faixas agarrando e apertando",
@@ -26181,6 +26436,23 @@
     1.9289
    ],
    "bytes": 50931
+  },
+  "xlr8": {
+   "arquivo": "xlr8.mp3",
+   "descricao": "Ben 10: o XLR8",
+   "versoes": [
+    0.0,
+    1.3039,
+    2.6512,
+    3.9885
+   ],
+   "duracoes": [
+    1.2239,
+    1.2672,
+    1.2573,
+    1.2897
+   ],
+   "bytes": 49270
   },
   "yamato": {
    "arquivo": "yamato.mp3",
