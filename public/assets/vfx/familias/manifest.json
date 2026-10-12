@@ -1497,6 +1497,20 @@
   "laco": false,
   "bytes": 49802
  },
+ "canivete_de_ellie": {
+  "descricao": "Básico da Ellie: o canivete",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 11384
+ },
  "caos_preparo": {
   "descricao": "Feiticeira · a tiara e os fios nas mãos (Preparo, laço)",
   "quadros": 12,
@@ -1930,6 +1944,20 @@
   ],
   "laco": false,
   "bytes": 21018
+ },
+ "chomp_do_pacman": {
+  "descricao": "Básico do Pac-Man: as pastilhas e a mordida",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 13396
  },
  "choque_do_pikachu": {
   "descricao": "básico do Pikachu: faíscas em zigue-zague e bochechas crepitando",
@@ -2841,6 +2869,20 @@
   "laco": true,
   "bytes": 22864
  },
+ "dead_eye": {
+  "descricao": "Básico do Arthur Morgan: os X do Dead Eye",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 19192
+ },
  "death_note": {
   "descricao": "Death Note: o nome escrito e o coração que para",
   "quadros": 12,
@@ -2868,6 +2910,20 @@
   ],
   "laco": false,
   "bytes": 70982
+ },
+ "dedo_de_ervilha": {
+  "descricao": "Básico do Cuphead: as ervilhas do dedo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 11056
  },
  "demolidor_preparo": {
   "descricao": "Demolidor · os chifres e o radar (Preparo, laço)",
@@ -3582,6 +3638,20 @@
   ],
   "laco": false,
   "bytes": 52064
+ },
+ "espada_de_diamante": {
+  "descricao": "Básico do Steve: a espada de diamante em pixels",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 20446
  },
  "espada_do_futuro": {
   "descricao": "Trunks · os cortes em grade da espada",
@@ -4941,6 +5011,20 @@
   "laco": false,
   "bytes": 52488
  },
+ "fus_ro_dah": {
+  "descricao": "Básico do Dovahkiin: as três palavras do Thu'um",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 20754
+ },
  "gadget_rick": {
   "descricao": "Rick · a invenção explodindo no meio dos rivais",
   "quadros": 12,
@@ -5333,6 +5417,20 @@
   "laco": false,
   "bytes": 33006
  },
+ "giro_do_crash": {
+  "descricao": "Básico do Crash: o tornado e as frutas Wumpa",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 21178
+ },
  "godslayer": {
   "descricao": "Básico da Gamora: a Godslayer esticando",
   "quadros": 12,
@@ -5388,6 +5486,20 @@
   ],
   "laco": false,
   "bytes": 91262
+ },
+ "golpe_de_ferrao": {
+  "descricao": "Básico do Cavaleiro: o Ferrão e a Alma",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 13392
  },
  "golpe_de_panico": {
   "descricao": "Golpe de pânico de Anya: tapinhas, suor, '!' e estrelinhas",
@@ -7083,6 +7195,20 @@
   "laco": true,
   "bytes": 64668
  },
+ "lingua_de_yoshi": {
+  "descricao": "Básico do Yoshi: a língua e o ovo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 15256
+ },
  "livro_na_cabeca": {
   "descricao": "Básico da Velma: o livro voando e as estrelinhas",
   "quadros": 12,
@@ -8147,6 +8273,20 @@
   "laco": false,
   "bytes": 83768
  },
+ "ossos_de_sans": {
+  "descricao": "Básico do Sans: o olho azul e os ossos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 14200
+ },
  "ouro_preparo": {
   "descricao": "Giorno · a aura dourada e a joaninha (Preparo, laço)",
   "quadros": 12,
@@ -8454,6 +8594,20 @@
   ],
   "laco": false,
   "bytes": 81428
+ },
+ "pistola_de_megamente": {
+  "descricao": "Básico do Megamente: a pistola desidratadora e o cubo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 17144
  },
  "plano_b": {
   "descricao": "Rick · a explosão do plasma",
@@ -8791,6 +8945,20 @@
   "laco": false,
   "bytes": 75352
  },
+ "puf_das_varinhas": {
+  "descricao": "Básico de Cosmo e Wanda: as varinhas e o puf",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 19374
+ },
  "pulo_do_luigi": {
   "descricao": "Básico do Luigi: o pulo alto e a pisada",
   "quadros": 12,
@@ -9042,6 +9210,20 @@
   ],
   "laco": false,
   "bytes": 13380
+ },
+ "quatro_punhos": {
+  "descricao": "Básico do Goro: os quatro punhos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 16918
  },
  "queimadura": {
   "descricao": "ponto queimando",
@@ -10653,6 +10835,20 @@
   "laco": false,
   "bytes": 39500
  },
+ "soco_de_vilgax": {
+  "descricao": "Básico do Vilgax: o punho e os tentáculos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 28268
+ },
  "soco_do_agente": {
   "descricao": "Básico do Smith: as cópias e o glitch",
   "quadros": 12,
@@ -10918,6 +11114,20 @@
   ],
   "laco": false,
   "bytes": 56814
+ },
+ "ssss_do_creeper": {
+  "descricao": "Básico do Creeper: pisca e explode em blocos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 43354
  },
  "star_preparo": {
   "descricao": "Jotaro · a aura e as estrelas (Preparo, laço)",
