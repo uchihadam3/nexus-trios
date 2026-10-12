@@ -1833,6 +1833,20 @@
   "laco": false,
   "bytes": 13926
  },
+ "chicote_de_luz": {
+  "descricao": "Básico do Sesshomaru: o chicote de luz e o veneno",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 23996
+ },
  "chicote_de_vinha": {
   "descricao": "Básico da Hera Venenosa: a vinha com folhas e os esporos",
   "quadros": 12,
@@ -2939,6 +2953,20 @@
   "laco": false,
   "bytes": 62522
  },
+ "detroit_smash": {
+  "descricao": "Básico do All Might: o punho e o vento do Smash",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 21464
+ },
  "deus_do_trovao": {
   "descricao": "Thor · o raio gigante do céu",
   "quadros": 12,
@@ -3190,6 +3218,20 @@
   ],
   "laco": false,
   "bytes": 29004
+ },
+ "empurrao_psiquico": {
+  "descricao": "Básico do Mob: a aura e a onda",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 31196
  },
  "encanto": {
   "descricao": "estrelas de encanto",
@@ -3554,6 +3596,20 @@
   ],
   "laco": false,
   "bytes": 68472
+ },
+ "espadas_de_erza": {
+  "descricao": "Básico da Erza: as espadas em roda",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 19092
  },
  "espera_alucardcv": {
   "descricao": "Alucard caído: a névoa vermelha e os morcegos em roda (laço)",
@@ -4058,6 +4114,20 @@
   ],
   "laco": false,
   "bytes": 64476
+ },
+ "explosao_de_bakugo": {
+  "descricao": "Básico do Bakugo: as duas explosões das palmas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 39910
  },
  "explosao_de_fogo": {
   "descricao": "Charizard · a estrela de fogo de cinco braços",
@@ -4717,6 +4787,20 @@
   "laco": false,
   "bytes": 74812
  },
+ "full_cowl": {
+  "descricao": "Básico do Deku: o Full Cowl e o soco",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 23310
+ },
  "fundacao_preparo": {
   "descricao": "Eren · o raio da transformação e o vapor (Preparo, laço)",
   "quadros": 12,
@@ -5025,6 +5109,20 @@
   "laco": false,
   "bytes": 64734
  },
+ "garras_de_ferro": {
+  "descricao": "Básico do Inuyasha: as cinco garras",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 30212
+ },
  "garras_de_killua": {
   "descricao": "Garras de Killua: três riscos de garra feitos de relâmpago",
   "quadros": 12,
@@ -5081,6 +5179,20 @@
   "laco": false,
   "bytes": 91006
  },
+ "geass_tiro": {
+  "descricao": "Básico do Lelouch: o Geass e o tiro",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 14538
+ },
  "gelo": {
   "descricao": "cristais de gelo",
   "quadros": 12,
@@ -5094,6 +5206,20 @@
   ],
   "laco": false,
   "bytes": 119326
+ },
+ "gelo_e_fogo": {
+  "descricao": "Básico do Todoroki: os espinhos de gelo e a chama",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 28910
  },
  "genjutsu_sasuke": {
   "descricao": "Sasuke · o Sharingan gigante e a confusão",
@@ -5976,6 +6102,20 @@
   ],
   "laco": false,
   "bytes": 59402
+ },
+ "jato_do_slime": {
+  "descricao": "Básico do Rimuru: a gota e a lâmina d'água",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 15856
  },
  "jato_do_tridente": {
   "descricao": "Básico de Poseidon: os três jatos do tridente",
@@ -7138,6 +7278,20 @@
   ],
   "laco": false,
   "bytes": 76868
+ },
+ "mao_ossuda": {
+  "descricao": "Básico do Jack Skellington: a mão de osso agarrando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 26430
  },
  "marca": {
   "descricao": "alvo travando",
@@ -9029,6 +9183,20 @@
   "laco": true,
   "bytes": 5460
  },
+ "raio_negativo": {
+  "descricao": "Básico do Ainz: o círculo e o raio negativo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 22008
+ },
  "raio_solar": {
   "descricao": "Visão · a Joia da Mente e o raio solar",
   "quadros": 12,
@@ -9686,6 +9854,20 @@
   ],
   "laco": false,
   "bytes": 52434
+ },
+ "sakabato": {
+  "descricao": "Básico do Kenshin: o saque da sakabatō",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 15228
  },
  "salvamento_aranha": {
   "descricao": "Homem-Aranha · chega balançando e cobre o aliado de teia",
@@ -10359,6 +10541,20 @@
   "laco": false,
   "bytes": 81114
  },
+ "soco_flamejante_natsu": {
+  "descricao": "Básico do Natsu: o punho de fogo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 27450
+ },
  "soco_giratorio": {
   "descricao": "Donkey Kong · Soco giratório: o braço gira e o punho gigante acerta",
   "quadros": 12,
@@ -10876,6 +11072,20 @@
   ],
   "laco": false,
   "bytes": 51662
+ },
+ "tentaculo_de_ursula": {
+  "descricao": "Básico da Úrsula: o tentáculo e a tinta",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 23572
  },
  "tentaculo_simbionte": {
   "descricao": "Venom: tentáculos lisos chicoteiam e enrolam o alvo",

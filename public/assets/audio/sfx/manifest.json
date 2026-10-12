@@ -2008,6 +2008,23 @@
    ],
    "bytes": 40829
   },
+  "chicote-de-luz": {
+   "arquivo": "chicote-de-luz.mp3",
+   "descricao": "básico do Sesshomaru: o chicote e o veneno",
+   "versoes": [
+    0.0,
+    1.3313,
+    2.6239,
+    3.8617
+   ],
+   "duracoes": [
+    1.2513,
+    1.2127,
+    1.1578,
+    1.314
+   ],
+   "bytes": 47812
+  },
   "chicote-de-vinha": {
    "arquivo": "chicote-de-vinha.mp3",
    "descricao": "básico da Hera: as folhas, o estalo e os esporos",
@@ -3266,6 +3283,23 @@
    ],
    "bytes": 59714
   },
+  "detroit-smash": {
+   "arquivo": "detroit-smash.mp3",
+   "descricao": "básico do All Might: o soco e o vendaval",
+   "versoes": [
+    0.0,
+    1.58,
+    3.2144,
+    4.7437
+   ],
+   "duracoes": [
+    1.5,
+    1.5544,
+    1.4493,
+    1.5228
+   ],
+   "bytes": 52719
+  },
   "deus-do-trovao": {
    "arquivo": "deus-do-trovao.mp3",
    "descricao": "Deus do Trovão: o raio gigante",
@@ -3537,6 +3571,23 @@
     1.0152
    ],
    "bytes": 28260
+  },
+  "empurrao-psiquico": {
+   "arquivo": "empurrao-psiquico.mp3",
+   "descricao": "básico do Mob: a vibração e o empurrão",
+   "versoes": [
+    0.0,
+    1.38,
+    2.8071,
+    4.1432
+   ],
+   "duracoes": [
+    1.3,
+    1.3471,
+    1.256,
+    1.3198
+   ],
+   "bytes": 33375
   },
   "encanto": {
    "arquivo": "encanto.mp3",
@@ -3996,6 +4047,23 @@
     1.1167
    ],
    "bytes": 41631
+  },
+  "espadas-de-erza": {
+   "arquivo": "espadas-de-erza.mp3",
+   "descricao": "básico da Erza: as espadas em roda",
+   "versoes": [
+    0.0,
+    1.38,
+    2.8071,
+    4.1432
+   ],
+   "duracoes": [
+    1.3,
+    1.3471,
+    1.256,
+    1.3198
+   ],
+   "bytes": 49145
   },
   "espera-alucardcv": {
    "arquivo": "espera-alucardcv.mp3",
@@ -4557,6 +4625,23 @@
     2.2335
    ],
    "bytes": 77349
+  },
+  "explosao-de-bakugo": {
+   "arquivo": "explosao-de-bakugo.mp3",
+   "descricao": "básico do Bakugo: os dois estouros",
+   "versoes": [
+    0.0,
+    1.38,
+    2.8071,
+    4.1432
+   ],
+   "duracoes": [
+    1.3,
+    1.3471,
+    1.256,
+    1.3198
+   ],
+   "bytes": 46873
   },
   "explosao-de-fogo": {
    "arquivo": "explosao-de-fogo.mp3",
@@ -5255,6 +5340,23 @@
    ],
    "bytes": 58330
   },
+  "full-cowl": {
+   "arquivo": "full-cowl.mp3",
+   "descricao": "básico do Deku: os raios e o Smash",
+   "versoes": [
+    0.0,
+    1.1822,
+    2.3687,
+    3.4642
+   ],
+   "duracoes": [
+    1.1022,
+    1.1065,
+    1.0155,
+    1.0424
+   ],
+   "bytes": 40426
+  },
   "fundacao-preparo": {
    "arquivo": "fundacao-preparo.mp3",
    "descricao": "Eren: o raio da transformação e o vapor (antes do golpe)",
@@ -5612,6 +5714,23 @@
    ],
    "bytes": 54927
   },
+  "garras-de-ferro": {
+   "arquivo": "garras-de-ferro.mp3",
+   "descricao": "básico do Inuyasha: as cinco garras",
+   "versoes": [
+    0.0,
+    0.9002,
+    1.8378,
+    2.7264
+   ],
+   "duracoes": [
+    0.8202,
+    0.8577,
+    0.8086,
+    0.841
+   ],
+   "bytes": 30797
+  },
   "garras-de-killua": {
    "arquivo": "garras-de-killua.mp3",
    "descricao": "básico de Killua: três cortes rápidos com estalos de choque e crepitar elétrico",
@@ -5680,6 +5799,23 @@
    ],
    "bytes": 74600
   },
+  "geass-tiro": {
+   "arquivo": "geass-tiro.mp3",
+   "descricao": "básico do Lelouch: o Geass e o tiro",
+   "versoes": [
+    0.0,
+    1.28,
+    2.6035,
+    3.8429
+   ],
+   "duracoes": [
+    1.2,
+    1.2435,
+    1.1594,
+    1.2183
+   ],
+   "bytes": 41878
+  },
   "gelo": {
    "arquivo": "gelo.mp3",
    "descricao": "gelo",
@@ -5696,6 +5832,23 @@
     0.9137
    ],
    "bytes": 46961
+  },
+  "gelo-e-fogo": {
+   "arquivo": "gelo-e-fogo.mp3",
+   "descricao": "básico do Todoroki: o gelo rompendo",
+   "versoes": [
+    0.0,
+    1.2707,
+    2.6152,
+    3.8607
+   ],
+   "duracoes": [
+    1.1907,
+    1.2646,
+    1.1655,
+    1.1939
+   ],
+   "bytes": 47706
   },
   "genjutsu-sasuke": {
    "arquivo": "genjutsu-sasuke.mp3",
@@ -6835,6 +6988,23 @@
     1.0152
    ],
    "bytes": 52016
+  },
+  "jato-do-slime": {
+   "arquivo": "jato-do-slime.mp3",
+   "descricao": "básico do Rimuru: o blop e o jato",
+   "versoes": [
+    0.0,
+    1.1257,
+    2.2959,
+    3.393
+   ],
+   "duracoes": [
+    1.0457,
+    1.0902,
+    1.0171,
+    1.0607
+   ],
+   "bytes": 40240
   },
   "jato-do-tridente": {
    "arquivo": "jato-do-tridente.mp3",
@@ -8246,6 +8416,23 @@
     1.3198
    ],
    "bytes": 55961
+  },
+  "mao-ossuda": {
+   "arquivo": "mao-ossuda.mp3",
+   "descricao": "básico do Jack Skellington: os ossos e o agarrão",
+   "versoes": [
+    0.0,
+    1.38,
+    2.8071,
+    4.1432
+   ],
+   "duracoes": [
+    1.3,
+    1.3471,
+    1.256,
+    1.3198
+   ],
+   "bytes": 50266
   },
   "marca": {
    "arquivo": "marca.mp3",
@@ -10457,6 +10644,23 @@
    ],
    "bytes": 21538
   },
+  "raio-negativo": {
+   "arquivo": "raio-negativo.mp3",
+   "descricao": "básico do Ainz: o círculo e o raio negativo",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 50930
+  },
   "raio-solar": {
    "arquivo": "raio-solar.mp3",
    "descricao": "Visão: a Joia da Mente e o raio solar",
@@ -11307,6 +11511,23 @@
    ],
    "bytes": 37989
   },
+  "sakabato": {
+   "arquivo": "sakabato.mp3",
+   "descricao": "básico do Kenshin: o saque",
+   "versoes": [
+    0.0,
+    0.9551,
+    1.992,
+    2.9585
+   ],
+   "duracoes": [
+    0.8751,
+    0.957,
+    0.8865,
+    0.9203
+   ],
+   "bytes": 34051
+  },
   "salvamento-aranha": {
    "arquivo": "salvamento-aranha.mp3",
    "descricao": "Salvamento: o balanço na teia e o escudo",
@@ -12004,6 +12225,23 @@
    ],
    "bytes": 46717
   },
+  "soco-flamejante-natsu": {
+   "arquivo": "soco-flamejante-natsu.mp3",
+   "descricao": "básico do Natsu: o punho de fogo",
+   "versoes": [
+    0.0,
+    1.38,
+    2.8071,
+    4.1432
+   ],
+   "duracoes": [
+    1.3,
+    1.3471,
+    1.256,
+    1.3198
+   ],
+   "bytes": 47756
+  },
   "soco-giratorio": {
    "arquivo": "soco-giratorio.mp3",
    "descricao": "Soco giratório do Donkey Kong: o braço girando e o soco gigante",
@@ -12564,6 +12802,23 @@
     2.0305
    ],
    "bytes": 85691
+  },
+  "tentaculo-de-ursula": {
+   "arquivo": "tentaculo-de-ursula.mp3",
+   "descricao": "básico da Úrsula: o tentáculo e a tinta",
+   "versoes": [
+    0.0,
+    1.3365,
+    2.7636,
+    4.0561
+   ],
+   "duracoes": [
+    1.2565,
+    1.3471,
+    1.2125,
+    1.3198
+   ],
+   "bytes": 45428
   },
   "tentaculo-simbionte": {
    "arquivo": "tentaculo-simbionte.mp3",
