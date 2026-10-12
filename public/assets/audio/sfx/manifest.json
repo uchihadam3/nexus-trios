@@ -10627,6 +10627,23 @@
    ],
    "bytes": 62074
   },
+  "mu-agora-e-meu": {
+   "arquivo": "mu-agora-e-meu.mp3",
+   "descricao": "Makima: o domínio",
+   "versoes": [
+    0.0,
+    2.18,
+    4.4361,
+    6.5451
+   ],
+   "duracoes": [
+    2.1,
+    2.1761,
+    2.029,
+    2.132
+   ],
+   "bytes": 74858
+  },
   "mu-alvo": {
    "arquivo": "mu-alvo.mp3",
    "descricao": "Agente 47: o alvo",
@@ -10814,6 +10831,23 @@
    ],
    "bytes": 41479
   },
+  "mu-berserker": {
+   "arquivo": "mu-berserker.mp3",
+   "descricao": "Guts: o Berserker",
+   "versoes": [
+    0.0,
+    2.18,
+    4.4361,
+    6.5451
+   ],
+   "duracoes": [
+    2.1,
+    2.1761,
+    2.029,
+    2.132
+   ],
+   "bytes": 88441
+  },
   "mu-black-flash": {
    "arquivo": "mu-black-flash.mp3",
    "descricao": "Yuji: o Black Flash",
@@ -10967,6 +11001,23 @@
    ],
    "bytes": 81617
   },
+  "mu-bungee-gum": {
+   "arquivo": "mu-bungee-gum.mp3",
+   "descricao": "Hisoka: a Bungee Gum",
+   "versoes": [
+    0.0,
+    1.8508,
+    3.7372,
+    5.5172
+   ],
+   "duracoes": [
+    1.7708,
+    1.8063,
+    1.7001,
+    1.8077
+   ],
+   "bytes": 53818
+  },
   "mu-buster": {
    "arquivo": "mu-buster.mp3",
    "descricao": "Cloud: a Buster Sword",
@@ -11085,6 +11136,23 @@
     1.9289
    ],
    "bytes": 68341
+  },
+  "mu-chamas-roy": {
+   "arquivo": "mu-chamas-roy.mp3",
+   "descricao": "Roy: o estalo e as chamas",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 73328
   },
   "mu-chantagem": {
    "arquivo": "mu-chantagem.mp3",
@@ -11358,6 +11426,23 @@
    ],
    "bytes": 86799
   },
+  "mu-danca-branca": {
+   "arquivo": "mu-danca-branca.mp3",
+   "descricao": "Rukia: a Dança branca",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 88983
+  },
   "mu-desastrado": {
    "arquivo": "mu-desastrado.mp3",
    "descricao": "Pateta: o tombo",
@@ -11460,6 +11545,23 @@
    ],
    "bytes": 76007
   },
+  "mu-disable": {
+   "arquivo": "mu-disable.mp3",
+   "descricao": "Mewtwo: o Disable",
+   "versoes": [
+    0.0,
+    1.98,
+    4.0289,
+    5.9446
+   ],
+   "duracoes": [
+    1.9,
+    1.9689,
+    1.8357,
+    1.9289
+   ],
+   "bytes": 44108
+  },
   "mu-dobra-sangue": {
    "arquivo": "mu-dobra-sangue.mp3",
    "descricao": "Katara: a dobra de sangue",
@@ -11511,6 +11613,23 @@
    ],
    "bytes": 76057
   },
+  "mu-eclipse": {
+   "arquivo": "mu-eclipse.mp3",
+   "descricao": "Griffith: o Eclipse",
+   "versoes": [
+    0.0,
+    2.38,
+    4.8434,
+    7.1456
+   ],
+   "duracoes": [
+    2.3,
+    2.3834,
+    2.2222,
+    2.335
+   ],
+   "bytes": 77419
+  },
   "mu-elo-mental": {
    "arquivo": "mu-elo-mental.mp3",
    "descricao": "Jean Grey: a Fênix e o elo",
@@ -11545,6 +11664,23 @@
    ],
    "bytes": 49729
   },
+  "mu-endurecer": {
+   "arquivo": "mu-endurecer.mp3",
+   "descricao": "Eren: o endurecimento",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 102736
+  },
   "mu-energia-absorvida": {
    "arquivo": "mu-energia-absorvida.mp3",
    "descricao": "Capitã Marvel: a energia absorvida",
@@ -11578,6 +11714,23 @@
     1.8274
    ],
    "bytes": 52563
+  },
+  "mu-escondida": {
+   "arquivo": "mu-escondida.mp3",
+   "descricao": "Power: o martelo de sangue",
+   "versoes": [
+    0.0,
+    1.777,
+    3.6103,
+    5.3706
+   ],
+   "duracoes": [
+    1.697,
+    1.7533,
+    1.6802,
+    1.7733
+   ],
+   "bytes": 51227
   },
   "mu-escudo-dragao": {
    "arquivo": "mu-escudo-dragao.mp3",
@@ -12327,6 +12480,23 @@
    ],
    "bytes": 70816
   },
+  "mu-hollow": {
+   "arquivo": "mu-hollow.mp3",
+   "descricao": "Ichigo: a máscara Hollow",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 84722
+  },
   "mu-ilusao": {
    "arquivo": "mu-ilusao.mp3",
    "descricao": "Loki: a ilusão quebrando",
@@ -12343,6 +12513,23 @@
     2.0305
    ],
    "bytes": 72081
+  },
+  "mu-ilusao-aizen": {
+   "arquivo": "mu-ilusao-aizen.mp3",
+   "descricao": "Aizen: a ilusão",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 65525
   },
   "mu-imprevisivel": {
    "arquivo": "mu-imprevisivel.mp3",
@@ -12530,6 +12717,23 @@
     1.7649
    ],
    "bytes": 78599
+  },
+  "mu-juramento": {
+   "arquivo": "mu-juramento.mp3",
+   "descricao": "Kurapika: o juramento",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 86846
   },
   "mu-kaboom": {
    "arquivo": "mu-kaboom.mp3",
@@ -13007,6 +13211,23 @@
    ],
    "bytes": 65706
   },
+  "mu-parede": {
+   "arquivo": "mu-parede.mp3",
+   "descricao": "Alphonse: a parede",
+   "versoes": [
+    0.0,
+    2.08,
+    4.1078,
+    5.9252
+   ],
+   "duracoes": [
+    2.0,
+    1.9478,
+    1.7374,
+    2.0305
+   ],
+   "bytes": 54065
+  },
   "mu-parry": {
    "arquivo": "mu-parry.mp3",
    "descricao": "Ken: o parry",
@@ -13040,6 +13261,23 @@
     2.0305
    ],
    "bytes": 83141
+  },
+  "mu-pedra-papel": {
+   "arquivo": "mu-pedra-papel.mp3",
+   "descricao": "Gon: o Jajanken",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 70866
   },
   "mu-pegaso": {
    "arquivo": "mu-pegaso.mp3",
@@ -13091,6 +13329,23 @@
     1.9289
    ],
    "bytes": 106462
+  },
+  "mu-penhasco": {
+   "arquivo": "mu-penhasco.mp3",
+   "descricao": "Heihachi: do penhasco",
+   "versoes": [
+    0.0,
+    1.4944,
+    3.0394,
+    4.4319
+   ],
+   "duracoes": [
+    1.4144,
+    1.4651,
+    1.3125,
+    1.4002
+   ],
+   "bytes": 61869
   },
   "mu-pernalonga": {
    "arquivo": "mu-pernalonga.mp3",
@@ -13398,6 +13653,23 @@
    ],
    "bytes": 79356
   },
+  "mu-rainha-vampira": {
+   "arquivo": "mu-rainha-vampira.mp3",
+   "descricao": "Marceline: a rainha vampira",
+   "versoes": [
+    0.0,
+    1.8692,
+    3.7174,
+    5.5768
+   ],
+   "duracoes": [
+    1.7892,
+    1.7681,
+    1.7795,
+    1.7957
+   ],
+   "bytes": 59930
+  },
   "mu-raio-de-gelo": {
    "arquivo": "mu-raio-de-gelo.mp3",
    "descricao": "Samus: o raio de gelo",
@@ -13482,6 +13754,40 @@
     2.0305
    ],
    "bytes": 75220
+  },
+  "mu-relampago": {
+   "arquivo": "mu-relampago.mp3",
+   "descricao": "Killua: o Godspeed",
+   "versoes": [
+    0.0,
+    1.5625,
+    3.2331,
+    4.8301
+   ],
+   "duracoes": [
+    1.4825,
+    1.5906,
+    1.5171,
+    1.5811
+   ],
+   "bytes": 101594
+  },
+  "mu-road-roller": {
+   "arquivo": "mu-road-roller.mp3",
+   "descricao": "Dio: ROAD ROLLER DA",
+   "versoes": [
+    0.0,
+    2.28,
+    4.6398,
+    6.8454
+   ],
+   "duracoes": [
+    2.2,
+    2.2798,
+    2.1256,
+    2.2335
+   ],
+   "bytes": 81879
   },
   "mu-robo-quebrou": {
    "arquivo": "mu-robo-quebrou.mp3",
@@ -13806,6 +14112,23 @@
    ],
    "bytes": 50670
   },
+  "mu-tapa-olho": {
+   "arquivo": "mu-tapa-olho.mp3",
+   "descricao": "Kenpachi: sem tapa-olho",
+   "versoes": [
+    0.0,
+    2.18,
+    4.4361,
+    6.5451
+   ],
+   "duracoes": [
+    2.1,
+    2.1761,
+    2.029,
+    2.132
+   ],
+   "bytes": 81445
+  },
   "mu-tedio": {
    "arquivo": "mu-tedio.mp3",
    "descricao": "Saitama: o tédio",
@@ -13839,6 +14162,23 @@
     0.9679
    ],
    "bytes": 35446
+  },
+  "mu-tempestade": {
+   "arquivo": "mu-tempestade.mp3",
+   "descricao": "Thor: o Mjolnir e os trovões",
+   "versoes": [
+    0.0,
+    2.18,
+    4.4361,
+    6.5451
+   ],
+   "duracoes": [
+    2.1,
+    2.1761,
+    2.029,
+    2.132
+   ],
+   "bytes": 107775
   },
   "mu-temporada": {
    "arquivo": "mu-temporada.mp3",
@@ -13941,6 +14281,23 @@
     1.9289
    ],
    "bytes": 50449
+  },
+  "mu-transmutacao": {
+   "arquivo": "mu-transmutacao.mp3",
+   "descricao": "Edward: a transmutação",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2036,
+    6.216
+   ],
+   "duracoes": [
+    2.0,
+    2.0436,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 87713
   },
   "mu-treino": {
    "arquivo": "mu-treino.mp3",
@@ -14078,6 +14435,23 @@
    ],
    "bytes": 84072
   },
+  "mu-vida-demais": {
+   "arquivo": "mu-vida-demais.mp3",
+   "descricao": "Giorno: a vida",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 84363
+  },
   "mu-viltrumita": {
    "arquivo": "mu-viltrumita.mp3",
    "descricao": "Invencível: o estrondo sônico",
@@ -14094,6 +14468,23 @@
     1.9289
    ],
    "bytes": 67500
+  },
+  "mu-vrrrum": {
+   "arquivo": "mu-vrrrum.mp3",
+   "descricao": "Denji: as motosserras",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 93344
   },
   "mu-waku": {
    "arquivo": "mu-waku.mp3",
@@ -14128,6 +14519,23 @@
     2.0305
    ],
    "bytes": 83896
+  },
+  "mu-za-warudo-jotaro": {
+   "arquivo": "mu-za-warudo-jotaro.mp3",
+   "descricao": "Jotaro: Za Warudo",
+   "versoes": [
+    0.0,
+    2.38,
+    4.8434,
+    7.1456
+   ],
+   "duracoes": [
+    2.3,
+    2.3834,
+    2.2222,
+    2.335
+   ],
+   "bytes": 86064
   },
   "mu-zandatsu": {
    "arquivo": "mu-zandatsu.mp3",

@@ -9113,6 +9113,20 @@
   "laco": false,
   "bytes": 43608
  },
+ "mu_agora_e_meu": {
+  "descricao": "Makima · os olhos de anéis e a corrente",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 16128
+ },
  "mu_alvo": {
   "descricao": "Agente 47 · a mira e o código de barras",
   "quadros": 12,
@@ -9267,6 +9281,20 @@
   "laco": false,
   "bytes": 11374
  },
+ "mu_berserker": {
+  "descricao": "Guts · a Marca e a Armadura do Berserker",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 41690
+ },
  "mu_black_flash": {
   "descricao": "Yuji · o Black Flash rachando o espaço",
   "quadros": 12,
@@ -9393,6 +9421,20 @@
   "laco": false,
   "bytes": 25432
  },
+ "mu_bungee_gum": {
+  "descricao": "Hisoka · a Bungee Gum e os naipes",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 15812
+ },
  "mu_buster": {
   "descricao": "Cloud · a Buster Sword rachando o chão",
   "quadros": 12,
@@ -9490,6 +9532,20 @@
   ],
   "laco": false,
   "bytes": 50130
+ },
+ "mu_chamas_roy": {
+  "descricao": "Roy · o estalo e as explosões",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 45060
  },
  "mu_chantagem": {
   "descricao": "Cartman · o envelope e as moedas",
@@ -9715,6 +9771,20 @@
   "laco": false,
   "bytes": 60430
  },
+ "mu_danca_branca": {
+  "descricao": "Rukia · o círculo e o pilar de gelo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 34890
+ },
  "mu_desastrado": {
   "descricao": "Pateta · o tombo e as estrelinhas",
   "quadros": 12,
@@ -9799,6 +9869,20 @@
   "laco": false,
   "bytes": 26920
  },
+ "mu_disable": {
+  "descricao": "Mewtwo · o Disable",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 54808
+ },
  "mu_dobra_sangue": {
   "descricao": "Katara · a dobra de sangue",
   "quadros": 12,
@@ -9841,6 +9925,20 @@
   "laco": false,
   "bytes": 63964
  },
+ "mu_eclipse": {
+  "descricao": "Griffith · o Eclipse",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 38676
+ },
  "mu_elo_mental": {
   "descricao": "Jean Grey · a Fênix e o elo mental",
   "quadros": 12,
@@ -9869,6 +9967,20 @@
   "laco": false,
   "bytes": 27910
  },
+ "mu_endurecer": {
+  "descricao": "Eren · as placas de cristal",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 37130
+ },
  "mu_energia_absorvida": {
   "descricao": "Capitã Marvel · a estrela e as chamas de fótons",
   "quadros": 12,
@@ -9896,6 +10008,20 @@
   ],
   "laco": false,
   "bytes": 34238
+ },
+ "mu_escondida": {
+  "descricao": "Power · os chifres e o martelo de sangue",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 29622
  },
  "mu_escudo_dragao": {
   "descricao": "Shiryu · o Escudo do Dragão",
@@ -10513,6 +10639,20 @@
   "laco": false,
   "bytes": 112380
  },
+ "mu_hollow": {
+  "descricao": "Ichigo · a máscara Hollow",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 65454
+ },
  "mu_ilusao": {
   "descricao": "Loki · a imagem quebrando e os chifres",
   "quadros": 12,
@@ -10526,6 +10666,20 @@
   ],
   "laco": false,
   "bytes": 53248
+ },
+ "mu_ilusao_aizen": {
+  "descricao": "Aizen · o espelho rachando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 33146
  },
  "mu_imprevisivel": {
   "descricao": "Arlequina · o martelão e os corações",
@@ -10680,6 +10834,20 @@
   ],
   "laco": false,
   "bytes": 27562
+ },
+ "mu_juramento": {
+  "descricao": "Kurapika · as correntes e os olhos escarlates",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 32806
  },
  "mu_kaboom": {
   "descricao": "Marvin · o KABOOM",
@@ -11073,6 +11241,20 @@
   "laco": false,
   "bytes": 53524
  },
+ "mu_parede": {
+  "descricao": "Alphonse · o muro de pedra",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 24266
+ },
  "mu_parry": {
   "descricao": "Ken · o parry e o Shoryuken",
   "quadros": 12,
@@ -11100,6 +11282,20 @@
   ],
   "laco": false,
   "bytes": 105308
+ },
+ "mu_pedra_papel": {
+  "descricao": "Gon · o Jajanken",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 65516
  },
  "mu_pegaso": {
   "descricao": "Seiya · a constelação e os meteoros de Pégaso",
@@ -11142,6 +11338,20 @@
   ],
   "laco": false,
   "bytes": 66310
+ },
+ "mu_penhasco": {
+  "descricao": "Heihachi · o punho que joga do penhasco",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 19884
  },
  "mu_pernalonga": {
   "descricao": "Pernalonga · a cenoura e o buraco",
@@ -11395,6 +11605,20 @@
   "laco": false,
   "bytes": 29098
  },
+ "mu_rainha_vampira": {
+  "descricao": "Marceline · as presas e o vermelho sugado",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 26406
+ },
  "mu_raio_de_gelo": {
   "descricao": "Samus · o raio de gelo e os cristais",
   "quadros": 12,
@@ -11464,6 +11688,34 @@
   ],
   "laco": false,
   "bytes": 41264
+ },
+ "mu_relampago": {
+  "descricao": "Killua · o Godspeed",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 73376
+ },
+ "mu_road_roller": {
+  "descricao": "Dio · o Road Roller",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 45392
  },
  "mu_robo_quebrou": {
   "descricao": "Macaco Louco · o robô se desmontando",
@@ -11731,6 +11983,20 @@
   "laco": false,
   "bytes": 35672
  },
+ "mu_tapa_olho": {
+  "descricao": "Kenpachi · o tapa-olho e a pressão espiritual",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 69332
+ },
  "mu_tedio": {
   "descricao": "Saitama · as bolhas do bocejo",
   "quadros": 12,
@@ -11758,6 +12024,20 @@
   ],
   "laco": false,
   "bytes": 14288
+ },
+ "mu_tempestade": {
+  "descricao": "Thor · o Mjolnir e os raios do céu",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 58236
  },
  "mu_temporada": {
   "descricao": "Patolino · o tiro e o bico girando",
@@ -11842,6 +12122,20 @@
   ],
   "laco": false,
   "bytes": 10086
+ },
+ "mu_transmutacao": {
+  "descricao": "Edward · a transmutação e as lanças de pedra",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 30230
  },
  "mu_treino": {
   "descricao": "Piccolo · a capa pesada caindo e o ki do aluno",
@@ -11955,6 +12249,20 @@
   "laco": false,
   "bytes": 17644
  },
+ "mu_vida_demais": {
+  "descricao": "Giorno · a vida brotando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 24868
+ },
  "mu_viltrumita": {
   "descricao": "Invencível · subindo com o estrondo sônico",
   "quadros": 12,
@@ -11968,6 +12276,20 @@
   ],
   "laco": false,
   "bytes": 30118
+ },
+ "mu_vrrrum": {
+  "descricao": "Denji · as motosserras",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 13828
  },
  "mu_waku": {
   "descricao": "Anya · as ondas da leitura de mente e as estrelinhas",
@@ -11996,6 +12318,20 @@
   ],
   "laco": false,
   "bytes": 56854
+ },
+ "mu_za_warudo_jotaro": {
+  "descricao": "Jotaro · o tempo parado",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 59156
  },
  "mu_zandatsu": {
   "descricao": "Raiden · o Modo Lâmina e o núcleo",
