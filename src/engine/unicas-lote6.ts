@@ -1,7 +1,7 @@
 /*
  * Mecânicas únicas — lote 6: os antigos que mais se pareciam com alguém.
  */
-import { fracao, maisFerido, maisForte, relogio, st, u, vivo, type Motor, type Unica } from './unicas-base';
+import { curaContinua, fracao, maisFerido, maisForte, relogio, st, u, vivo, type Motor, type Unica } from './unicas-base';
 import { byId } from '../data/characters';
 import type { Battle, Effect, Fighter, StatusId } from './types';
 
@@ -65,7 +65,7 @@ export const LOTE6: Record<string, Unica> = {
     nome: 'Uroboros',
     texto: 'Abaixo de 30% da Vida: recupera 3% por segundo, mas o ataque básico vai em rivais aleatórios.',
     ganchos: {
-      passo(m, b, f, dt) { if (fracao(f) < 0.3) { if (!u(f).virus) { u(f).virus = 1; m.aviso(b, f, 'Uroboros', f); } m.cura(b, f, f, f.maxHp * 0.03 * dt, 'Uroboros'); } },
+      passo(m, b, f, dt) { if (fracao(f) < 0.3) { if (!u(f).virus) { u(f).virus = 1; m.aviso(b, f, 'Uroboros', f); } curaContinua(m, b, f, f, f.maxHp * 0.03 * dt, 'Uroboros'); } },
       alvoDoBasico(m, b, f) { if (fracao(f) >= 0.3) return undefined; const rs = m.rivais(b, f); return rs[Math.floor(m.sorte(b) * rs.length)]; },
     },
   },
@@ -276,7 +276,7 @@ export const LOTE6: Record<string, Unica> = {
       apanhou(_m, _b, f, _fonte, dano) { u(f).furia = Math.min(100, (u(f).furia ?? 0) + dano / 8); },
       passo(m, b, f, dt) {
         const s = u(f);
-        if ((s.ate ?? 0) > b.time) { m.cura(b, f, f, f.maxHp * 0.02 * dt, 'Fúria'); return; }
+        if ((s.ate ?? 0) > b.time) { curaContinua(m, b, f, f, f.maxHp * 0.02 * dt, 'Fúria'); return; }
         if ((s.furia ?? 0) >= 100) { s.furia = 0; s.ate = b.time + 6; m.aviso(b, f, 'Fúria de Esparta', f); }
       },
       causa: (_m, b, f) => ((u(f).ate ?? 0) > b.time ? 1.5 : 1),

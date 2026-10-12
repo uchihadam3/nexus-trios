@@ -111,6 +111,33 @@ export function trabalho(m: Motor, b: Battle, f: Fighter, n: number) {
   if (s.trabalhos >= 12) { s.deus = 1; m.aviso(b, f, 'Semideus!', f); }
   else m.aviso(b, f, `Trabalhos ${s.trabalhos}/12`, f, s.trabalhos);
 }
+/*
+ * Cura que corre o tempo todo (um tanto por segundo): junta e entrega a cada `cada` s, numa cura só.
+ * Curar a cada passo da luta fazia ~6 curas por segundo — cada uma com som e número na tela (pedido do
+ * jogador: "tem um barulho do Deadpool muito chato"). O total curado é o mesmo.
+ */
+export function curaContinua(m: Motor, b: Battle, f: Fighter, alvo: Fighter, valor: number, rotulo: string, cada = 2) {
+  const s = u(f), chave = `cura|${rotulo}|${alvo.uid}`;
+  s[chave] = (s[chave] ?? 0) + valor;
+  s[`${chave}|u`] = b.time;
+  if ((s[`${chave}|t`] ??= b.time) + cada > b.time + 1e-9) return;
+  s[`${chave}|t`] = b.time;
+  entrega(m, b, f, chave);
+}
+function entrega(m: Motor, b: Battle, f: Fighter, chave: string) {
+  const s = u(f), total = s[chave] ?? 0, [, rotulo, uid] = chave.split('|'), alvo = b.fighters.find((x) => x.uid === uid);
+  s[chave] = 0;
+  if (total > 0 && alvo && vivo(alvo)) m.cura(b, f, alvo, total, rotulo!);
+}
+/* Chamado a cada passo, depois dos ganchos: a cura contínua que parou neste passo (a janela acabou) entrega o resto. */
+export function liberaCuras(m: Motor, b: Battle, f: Fighter) {
+  const s = f.u;
+  if (!s) return;
+  for (const chave of Object.keys(s)) {
+    if (!chave.startsWith('cura|') || chave.split('|').length !== 3 || !(s[chave]! > 0)) continue;
+    if ((s[`${chave}|u`] ?? 0) < b.time - 1e-9) { entrega(m, b, f, chave); delete s[`${chave}|t`]; }
+  }
+}
 export const st = (status: StatusId, value: number, duration: number, target?: Target): Effect => ({ kind: 'status', status, value, duration, target });
 export const CONTROLES: StatusId[] = ['paralyzed', 'frozen', 'sleep', 'confused', 'silenced', 'slow', 'rooted'];
 export const BUFFS: StatusId[] = ['barrier', 'evasion', 'protected', 'reflect', 'vampirism', 'strengthened', 'haste', 'thorns', 'regen'];

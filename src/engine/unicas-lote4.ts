@@ -1,7 +1,7 @@
 /*
  * Mecânicas únicas — lote 4: Disney, anime, desenhos e games.
  */
-import { fracao, maisFerido, maisForte, relogio, st, u, vivo, type Motor, type Unica } from './unicas-base';
+import { curaContinua, fracao, maisFerido, maisForte, relogio, st, u, vivo, type Motor, type Unica } from './unicas-base';
 import type { Battle, Effect, Fighter, StatusId } from './types';
 
 const idx = (b: Battle, f: Fighter) => b.fighters.indexOf(f);
@@ -252,7 +252,7 @@ export const LOTE4: Record<string, Unica> = {
     texto: 'Abaixo de 25% da Vida (uma vez), por 6 s: cura 6% por segundo e não pode cair.',
     ganchos: {
       apanhou(m, b, f) { if (!u(f).selo && fracao(f) < 0.25) { u(f).selo = b.time + 6; m.aviso(b, f, 'Byakugō', f); } },
-      passo(m, b, f, dt) { if ((u(f).selo ?? 0) > b.time) m.cura(b, f, f, f.maxHp * 0.06 * dt, 'Byakugō'); },
+      passo(m, b, f, dt) { if ((u(f).selo ?? 0) > b.time) curaContinua(m, b, f, f, f.maxHp * 0.06 * dt, 'Byakugō'); },
       salva: (_m, b, f, alvo) => (alvo === f && (u(f).selo ?? 0) > b.time ? 1 : null),
     },
   },

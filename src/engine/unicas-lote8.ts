@@ -2,7 +2,7 @@
  * Mecânicas únicas — lote 8: os clássicos que faltavam (Vegeta, Naruto, Luffy,
  * Gojo, Batman, Thanos, Itachi, os X-Men…).
  */
-import { fracao, maisFerido, maisForte, relogio, st, u, vivo, type Motor, type Unica } from './unicas-base';
+import { curaContinua, fracao, maisFerido, maisForte, relogio, st, u, vivo, type Motor, type Unica } from './unicas-base';
 import type { Battle, Fighter, StatusId } from './types';
 
 const idx = (b: Battle, f: Fighter) => b.fighters.indexOf(f);
@@ -200,7 +200,7 @@ export const LOTE8: Record<string, Unica> = {
   deadpool: {
     nome: 'Fator de cura absurdo',
     texto: 'Cura 0,5% da Vida por segundo para cada 20% de Vida perdida.',
-    ganchos: { passo(m, b, f, dt) { const n = Math.floor((1 - fracao(f)) * 5); if (n > 0) m.cura(b, f, f, f.maxHp * 0.005 * n * dt, 'Fator de cura'); } },
+    ganchos: { passo(m, b, f, dt) { const n = Math.floor((1 - fracao(f)) * 5); if (n > 0) curaContinua(m, b, f, f, f.maxHp * 0.005 * n * dt, 'Fator de cura'); } },
   },
   raven: {
     nome: 'Cura empática',

@@ -1,7 +1,7 @@
 /*
  * Mecânicas únicas — lote 3: deuses, terror e filmes.
  */
-import { CONTROLES, fracao, maisFerido, maisForte, relogio, st, u, vivo, type Motor, type Unica } from './unicas-base';
+import { CONTROLES, curaContinua, fracao, maisFerido, maisForte, relogio, st, u, vivo, type Motor, type Unica } from './unicas-base';
 import type { Battle, Effect, Fighter } from './types';
 
 const idx = (b: Battle, f: Fighter) => b.fighters.indexOf(f);
@@ -241,7 +241,7 @@ export const LOTE3: Record<string, Unica> = {
     nome: 'Come medo',
     texto: 'Por rival com Status ruim: cura 5 por segundo e causa 6% a mais.',
     ganchos: {
-      passo(m, b, f, dt) { const n = comMedo(m, b, f); if (n) m.cura(b, f, f, 5 * n * dt, 'Come medo'); },
+      passo(m, b, f, dt) { const n = comMedo(m, b, f); if (n) curaContinua(m, b, f, f, 5 * n * dt, 'Come medo'); },
       causa: (m, b, f) => 1 + 0.06 * comMedo(m, b, f),
     },
   },

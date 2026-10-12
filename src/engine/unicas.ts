@@ -3,7 +3,7 @@
  * do Light. Os tipos e as funções auxiliares estão em unicas-base.ts; cada lote
  * de personagens fica no seu arquivo.
  */
-import { BUFFS, CONTROLES, fracao, maisFerido, maisForte, relogio, st, trabalho, u, vivo, type Unica } from './unicas-base';
+import { BUFFS, CONTROLES, curaContinua, fracao, maisFerido, maisForte, relogio, st, trabalho, u, vivo, type Unica } from './unicas-base';
 import { LOTE2 } from './unicas-lote2';
 import { LOTE3 } from './unicas-lote3';
 import { LOTE4 } from './unicas-lote4';
@@ -91,7 +91,7 @@ const LOTE1: Record<string, Unica> = {
         const s = u(f);
         if (s.dormindo) {
           s.dormindo -= dt;
-          m.cura(b, f, f, f.maxHp * 0.04 * dt, 'Soneca');
+          curaContinua(m, b, f, f, f.maxHp * 0.04 * dt, 'Soneca');
           if (s.dormindo <= 1e-6) { s.dormindo = 0; s.acordou = 1; m.aviso(b, f, "D'oh!", f); }
           return;
         }
@@ -414,7 +414,7 @@ const LOTE1: Record<string, Unica> = {
     ganchos: {
       passo(m, b, f, dt) {
         const dia = b.time % 30 < 20, s = u(f);
-        if (dia) for (const a of m.aliados(b, f)) m.cura(b, f, a, a.maxHp * 0.005 * dt, 'Sol');
+        if (dia) for (const a of m.aliados(b, f)) curaContinua(m, b, f, a, a.maxHp * 0.005 * dt, 'Sol');
         if ((s.dia ?? 1) !== (dia ? 1 : 0)) {
           s.dia = dia ? 1 : 0;
           if (!dia) m.efeitos(b, f, [f], [st('protected', 0.2, 10)]);
@@ -513,7 +513,7 @@ const LOTE1: Record<string, Unica> = {
     nome: 'Simbionte',
     texto: 'Recupera 1% da Vida por segundo. Queimando causa o dobro nele.',
     ganchos: {
-      passo(m, b, f, dt) { m.cura(b, f, f, f.maxHp * 0.01 * dt, 'Simbionte'); },
+      passo(m, b, f, dt) { curaContinua(m, b, f, f, f.maxHp * 0.01 * dt, 'Simbionte'); },
       recebe: (m, _b, f, _fonte, g) => (!g.direto && g.label === 'Impacto' && m.intensidade(f, 'burning') > 0 ? 2 : 1),
     },
   },

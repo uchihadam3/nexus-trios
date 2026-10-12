@@ -7,6 +7,7 @@ import { alvosDoFerido } from './ferido';
 import type { Battle, BattleEvent, Effect, Fighter, JeitoDeBater, Side, Skill, StatusId, Target, Topic } from './types';
 import { chooseTarget, inferTargetIntent } from './targeting';
 import { UNICAS, type Golpe, type Motor } from './unicas';
+import { liberaCuras } from './unicas-base';
 
 export const STEP=.1;
 const clamp=(n:number,lo=0,hi=1)=>Math.min(hi,Math.max(lo,n));
@@ -717,6 +718,7 @@ export function stepBattle(b:Battle,observe?:(snapshot:Battle)=>void):Battle {
       emit(b,{kind:'pulso',source:f.uid,target:alvos[0]?.uid,label:p.id});applyEffects(b,f,alvos,p.pulso.efeitos);}}
     if(f.traido)f.traido=Math.max(0,f.traido-STEP);
     if(alive(f))unica(f)?.passo?.(M,b,f,STEP);
+    if(f.u)liberaCuras(M,b,f);
     if(b.dominion*sign(f)<-3)trigger(b,f,'losing',undefined,STEP);else if(b.dominion*sign(f)>3)trigger(b,f,'winning',undefined,STEP);
   }
   observe?.(b);
