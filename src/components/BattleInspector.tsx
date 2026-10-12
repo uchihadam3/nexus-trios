@@ -100,7 +100,7 @@ function FichaDaHabilidade({battle,f,i,onSelect}:{battle:Battle;f:Fighter;i:numb
       <div className="bi2-nome">
         <small>{c.name} · Habilidade {i+1}</small>
         <h3>{skill.name}</h3>
-        <span className={`bi2-estado ${e.classe}`}><Ic size={13}/><ComTermos texto={e.rotulo}/></span>
+        <span className={`bi2-situacao ${e.classe}`}><Ic size={13}/><ComTermos texto={e.rotulo}/></span>
       </div>
     </header>
     <section className="bi2-cartao faz" style={{'--i':0} as CSSProperties}>
@@ -135,7 +135,7 @@ function FichaDoStatus({battle,f,s,onSelect}:{battle:Battle;f:Fighter;s:Status;o
       <div className="bi2-nome">
         <small>{bom?'Status bom':'Status ruim'} · {c.name}</small>
         <h3>{info.name}</h3>
-        <span className="bi2-estado"><Clock3 size={13}/>{fmt(s.remaining)} s restantes</span>
+        <span className="bi2-situacao"><Clock3 size={13}/>{fmt(s.remaining)} s restantes</span>
       </div>
     </header>
     {v&&<div className="bi2-valor" style={{'--i':0} as CSSProperties}><b>{v}</b><span>{teto?`agora · soma até ${teto}`:'agora'}</span></div>}
