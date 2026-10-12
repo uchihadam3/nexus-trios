@@ -181,7 +181,7 @@ function motivosDe(c: string, time: string[], encaixe = 50): MotivoOrdenado[] {
     if (!time.some(aguenta) && aguenta(c)) motivos.push({ texto: `Seu trio ainda não tem quem segure dano: ${nome(c)} aguenta`, tom: 'bom', ordem: 14, resumo: 'segura o dano que o trio não aguenta' });
     if (!time.some((m) => papelDe(m).cuida) && papelDe(c).cuida) motivos.push({ texto: `Ninguém do trio cura ou protege: ${nome(c)} faz isso`, tom: 'bom', ordem: 13, resumo: 'traz a cura que falta' });
     if (!time.some((m) => papelDe(m).forte) && papelDe(c).forte) motivos.push({ texto: `Traz o dano forte que falta no trio`, tom: 'bom', ordem: 12, resumo: 'traz o dano forte que falta' });
-    if (time.every((m) => papelDe(m).fragil) && papelDe(c).fragil && !papelDe(c).cuida) motivos.push({ texto: `Mais um de pouca Vida: o trio pode cair rápido`, tom: 'alerta', ordem: 11 });
+    if (time.every((m) => papelDe(m).fragil) && papelDe(c).fragil && !papelDe(c).cuida && encaixe < 60) motivos.push({ texto: `Mais um de pouca Vida: o trio pode cair rápido`, tom: 'alerta', ordem: 11 });
   }
   /*
    * O porquê de ele ser forte, medido (pedido do jogador: "você fala por que é fraco, mas não fala por
@@ -215,7 +215,9 @@ function resumoDe(c: string, motivos: MotivoOrdenado[]): MotivoOrdenado | undefi
 
 /** As dicas para os candidatos da vez. `fora`: quem não pode entrar (o trio e os banidos). */
 export function dicasDoDraft(candidatos: string[], time: string[], fora: string[] = []): DicaDoCandidato[] {
-  const nota = (id: string) => (time.length ? notaDoTrio([...time, id]) : FORCA[id] ?? 0);
+  // sem trio ainda: quanto o trio com ele vence com dois parceiros quaisquer (medido, com os combos) — a mesma
+  // medida do "Forte em qualquer trio" e do "Sozinho rende pouco", para a porcentagem e o texto não se contradizerem
+  const nota = (id: string) => (time.length ? notaDoTrio([...time, id]) : DUPLAS[id]?.solo ?? 0.5 + (FORCA[id] ?? 0) / 10);
   const pool = characters.map((c) => c.id).filter((id) => !time.includes(id) && !fora.includes(id)).map(nota).sort((a, b) => a - b);
   const lista = candidatos.map((id) => {
     const encaixe = Math.min(99, percentil(pool, nota(id)));
@@ -223,8 +225,13 @@ export function dicasDoDraft(candidatos: string[], time: string[], fora: string[
     const resumo = resumoDe(id, motivos);
     // um candidato que encaixa mal começa pelo aviso, mesmo tendo alguma combinação
     if (time.length && encaixe < 35) motivos.unshift({ texto: `Encaixa pouco: há opções bem melhores para este trio`, tom: 'alerta', ordem: 99 });
+    // sem trio ainda e mais fraco que a maioria: o aviso vem primeiro, dizendo com quem ele vale a pena
+    else if (!time.length && encaixe < 35 && !motivos.some((m) => m.texto.startsWith('Sozinho rende pouco'))) {
+      const ps = DUPLAS[id]?.parceiros.map(([p]) => nome(p)) ?? [];
+      motivos.unshift({ texto: `Sozinho é mais fraco que a maioria${ps.length ? `: vale a pena com ${lista3(ps)}` : ''}`, tom: 'alerta', ordem: 99 });
+    }
     // o "escolha porque" só para quem encaixa bem (para quem encaixa pouco, o aviso vem primeiro)
-    const detalhe = resumo && !(time.length && encaixe < 35) ? [resumo, ...motivos] : motivos;
+    const detalhe = resumo && encaixe >= 35 ? [resumo, ...motivos] : motivos;
     const limpa = (l: typeof motivos) => l.map(({ texto, tom }) => ({ texto, tom }));
     // na explicação maior, cada combinação vem com o porquê (a habilidade que liga a outra)
     const explica = (l: typeof motivos) => l.map(({ texto, tom, porque }) => ({ texto, tom, ...(porque ? { porque } : {}) }));
