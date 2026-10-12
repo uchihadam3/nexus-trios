@@ -10797,6 +10797,23 @@
    ],
    "bytes": 52222
   },
+  "mu-anulou": {
+   "arquivo": "mu-anulou.mp3",
+   "descricao": "Asta: anulou",
+   "versoes": [
+    0.0,
+    1.6255,
+    3.2982,
+    4.8653
+   ],
+   "duracoes": [
+    1.5455,
+    1.5927,
+    1.487,
+    1.5247
+   ],
+   "bytes": 45444
+  },
   "mu-areias": {
    "arquivo": "mu-areias.mp3",
    "descricao": "Príncipe da Pérsia: as Areias do Tempo",
@@ -10899,6 +10916,23 @@
    ],
    "bytes": 78311
   },
+  "mu-bakuryuha": {
+   "arquivo": "mu-bakuryuha.mp3",
+   "descricao": "Inuyasha: Bakuryuha",
+   "versoes": [
+    0.0,
+    2.1181,
+    4.2941,
+    6.3406
+   ],
+   "duracoes": [
+    2.0381,
+    2.096,
+    1.9664,
+    2.1286
+   ],
+   "bytes": 74946
+  },
   "mu-banana": {
    "arquivo": "mu-banana.mp3",
    "descricao": "Donkey Kong: a casca de banana",
@@ -10932,6 +10966,23 @@
     1.1362
    ],
    "bytes": 41479
+  },
+  "mu-battojutsu": {
+   "arquivo": "mu-battojutsu.mp3",
+   "descricao": "Kenshin: o battojutsu",
+   "versoes": [
+    0.0,
+    1.6857,
+    3.507,
+    5.1693
+   ],
+   "duracoes": [
+    1.6057,
+    1.7413,
+    1.5822,
+    1.6506
+   ],
+   "bytes": 58227
   },
   "mu-berserker": {
    "arquivo": "mu-berserker.mp3",
@@ -11290,6 +11341,40 @@
    ],
    "bytes": 68341
   },
+  "mu-cebola": {
+   "arquivo": "mu-cebola.mp3",
+   "descricao": "Shrek: a cebola",
+   "versoes": [
+    0.0,
+    1.6934,
+    3.4101,
+    5.0498
+   ],
+   "duracoes": [
+    1.6134,
+    1.6366,
+    1.5598,
+    1.6375
+   ],
+   "bytes": 52969
+  },
+  "mu-cem-por-cento": {
+   "arquivo": "mu-cem-por-cento.mp3",
+   "descricao": "Mob: 100%",
+   "versoes": [
+    0.0,
+    2.38,
+    4.8434,
+    7.1456
+   ],
+   "duracoes": [
+    2.3,
+    2.3834,
+    2.2222,
+    2.335
+   ],
+   "bytes": 71591
+  },
   "mu-chamas-roy": {
    "arquivo": "mu-chamas-roy.mp3",
    "descricao": "Roy: o estalo e as chamas",
@@ -11323,6 +11408,23 @@
     1.6101
    ],
    "bytes": 55605
+  },
+  "mu-choque-termico": {
+   "arquivo": "mu-choque-termico.mp3",
+   "descricao": "Todoroki: o choque térmico",
+   "versoes": [
+    0.0,
+    1.9439,
+    4.0118,
+    5.9601
+   ],
+   "duracoes": [
+    1.8639,
+    1.988,
+    1.8683,
+    1.9777
+   ],
+   "bytes": 85616
   },
   "mu-chute": {
    "arquivo": "mu-chute.mp3",
@@ -11442,6 +11544,23 @@
     1.8274
    ],
    "bytes": 64583
+  },
+  "mu-come-fogo": {
+   "arquivo": "mu-come-fogo.mp3",
+   "descricao": "Natsu: come o fogo",
+   "versoes": [
+    0.0,
+    2.2493,
+    4.59,
+    6.7956
+   ],
+   "duracoes": [
+    2.1693,
+    2.2607,
+    2.1256,
+    2.2171
+   ],
+   "bytes": 80121
   },
   "mu-come-medo": {
    "arquivo": "mu-come-medo.mp3",
@@ -11612,6 +11731,23 @@
     2.0305
    ],
    "bytes": 52295
+  },
+  "mu-corpo-morto": {
+   "arquivo": "mu-corpo-morto.mp3",
+   "descricao": "Ainz: o corpo morto-vivo",
+   "versoes": [
+    0.0,
+    2.38,
+    4.8434,
+    7.1456
+   ],
+   "duracoes": [
+    2.3,
+    2.3834,
+    2.2222,
+    2.335
+   ],
+   "bytes": 72730
   },
   "mu-corpo-novo": {
    "arquivo": "mu-corpo-novo.mp3",
@@ -11799,6 +11935,23 @@
     1.5908
    ],
    "bytes": 49523
+  },
+  "mu-desejo": {
+   "arquivo": "mu-desejo.mp3",
+   "descricao": "Gênio: o desejo",
+   "versoes": [
+    0.0,
+    2.1719,
+    4.4029,
+    6.4839
+   ],
+   "duracoes": [
+    2.0919,
+    2.151,
+    2.0009,
+    2.101
+   ],
+   "bytes": 81512
   },
   "mu-desequilibrio": {
    "arquivo": "mu-desequilibrio.mp3",
@@ -12037,6 +12190,23 @@
     1.5872
    ],
    "bytes": 47542
+  },
+  "mu-dragao-malevola": {
+   "arquivo": "mu-dragao-malevola.mp3",
+   "descricao": "Malévola: o dragão",
+   "versoes": [
+    0.0,
+    2.165,
+    4.431,
+    6.6366
+   ],
+   "duracoes": [
+    2.085,
+    2.186,
+    2.1256,
+    2.0509
+   ],
+   "bytes": 65822
   },
   "mu-dragao-oeste": {
    "arquivo": "mu-dragao-oeste.mp3",
@@ -12854,6 +13024,23 @@
    ],
    "bytes": 59426
   },
+  "mu-geass": {
+   "arquivo": "mu-geass.mp3",
+   "descricao": "Lelouch: o Geass",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 61000
+  },
   "mu-gelida": {
    "arquivo": "mu-gelida.mp3",
    "descricao": "Arthas: a Gélida",
@@ -13092,6 +13279,23 @@
    ],
    "bytes": 70816
   },
+  "mu-hienas": {
+   "arquivo": "mu-hienas.mp3",
+   "descricao": "Scar: as hienas",
+   "versoes": [
+    0.0,
+    1.6177,
+    3.2313,
+    4.7632
+   ],
+   "duracoes": [
+    1.5377,
+    1.5337,
+    1.4519,
+    1.572
+   ],
+   "bytes": 57610
+  },
   "mu-hollow": {
    "arquivo": "mu-hollow.mp3",
    "descricao": "Ichigo: a máscara Hollow",
@@ -13194,6 +13398,23 @@
    ],
    "bytes": 61893
   },
+  "mu-imune": {
+   "arquivo": "mu-imune.mp3",
+   "descricao": "Rimuru: imune",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 60302
+  },
   "mu-inalar": {
    "arquivo": "mu-inalar.mp3",
    "descricao": "Kirby: inalando",
@@ -13278,6 +13499,23 @@
     1.9289
    ],
    "bytes": 68428
+  },
+  "mu-invento": {
+   "arquivo": "mu-invento.mp3",
+   "descricao": "Senku: o invento",
+   "versoes": [
+    0.0,
+    2.18,
+    4.4361,
+    6.5451
+   ],
+   "duracoes": [
+    2.1,
+    2.1761,
+    2.029,
+    2.132
+   ],
+   "bytes": 75405
   },
   "mu-inversao": {
    "arquivo": "mu-inversao.mp3",
@@ -13601,6 +13839,23 @@
     1.8274
    ],
    "bytes": 49112
+  },
+  "mu-livre-estou": {
+   "arquivo": "mu-livre-estou.mp3",
+   "descricao": "Elsa: livre estou",
+   "versoes": [
+    0.0,
+    2.28,
+    4.6398,
+    6.8454
+   ],
+   "duracoes": [
+    2.2,
+    2.2798,
+    2.1256,
+    2.2335
+   ],
+   "bytes": 123980
   },
   "mu-mahoraga": {
    "arquivo": "mu-mahoraga.mp3",
@@ -14044,6 +14299,23 @@
    ],
    "bytes": 76757
   },
+  "mu-one-for-all": {
+   "arquivo": "mu-one-for-all.mp3",
+   "descricao": "Deku: One For All",
+   "versoes": [
+    0.0,
+    1.6402,
+    3.3998,
+    4.9881
+   ],
+   "duracoes": [
+    1.5602,
+    1.6796,
+    1.5084,
+    1.5848
+   ],
+   "bytes": 99246
+  },
   "mu-orgulho-viltrumita": {
    "arquivo": "mu-orgulho-viltrumita.mp3",
    "descricao": "Omni-Man: o soco e a cratera",
@@ -14077,6 +14349,23 @@
     1.8594
    ],
    "bytes": 59207
+  },
+  "mu-pacifista": {
+   "arquivo": "mu-pacifista.mp3",
+   "descricao": "Vash: o pacifista",
+   "versoes": [
+    0.0,
+    2.18,
+    4.4361,
+    6.5433
+   ],
+   "duracoes": [
+    2.1,
+    2.1761,
+    2.0271,
+    2.132
+   ],
+   "bytes": 80566
   },
   "mu-parede": {
    "arquivo": "mu-parede.mp3",
@@ -14333,6 +14622,23 @@
    ],
    "bytes": 98585
   },
+  "mu-plus-ultra": {
+   "arquivo": "mu-plus-ultra.mp3",
+   "descricao": "All Might: Plus Ultra",
+   "versoes": [
+    0.0,
+    2.38,
+    4.8434,
+    7.1456
+   ],
+   "duracoes": [
+    2.3,
+    2.3834,
+    2.2222,
+    2.335
+   ],
+   "bytes": 74401
+  },
   "mu-poder-escondido": {
    "arquivo": "mu-poder-escondido.mp3",
    "descricao": "Salsicha: o poder escondido",
@@ -14468,6 +14774,23 @@
     1.7651
    ],
    "bytes": 71757
+  },
+  "mu-presentes": {
+   "arquivo": "mu-presentes.mp3",
+   "descricao": "Jack Esqueleto: os presentes",
+   "versoes": [
+    0.0,
+    2.18,
+    4.4361,
+    6.5451
+   ],
+   "duracoes": [
+    2.1,
+    2.1761,
+    2.029,
+    2.132
+   ],
+   "bytes": 70171
   },
   "mu-primeiro": {
    "arquivo": "mu-primeiro.mp3",
@@ -14910,6 +15233,23 @@
     1.9252
    ],
    "bytes": 58753
+  },
+  "mu-seja-agua": {
+   "arquivo": "mu-seja-agua.mp3",
+   "descricao": "Spike: seja água",
+   "versoes": [
+    0.0,
+    2.18,
+    4.4361,
+    6.5451
+   ],
+   "duracoes": [
+    2.1,
+    2.1761,
+    2.029,
+    2.132
+   ],
+   "bytes": 68311
   },
   "mu-selo-ceifador": {
    "arquivo": "mu-selo-ceifador.mp3",
@@ -15387,6 +15727,23 @@
    ],
    "bytes": 42530
   },
+  "mu-tita": {
+   "arquivo": "mu-tita.mp3",
+   "descricao": "King Kong: o titã",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 73679
+  },
   "mu-tombo": {
    "arquivo": "mu-tombo.mp3",
    "descricao": "Jerry: a marreta",
@@ -15726,6 +16083,23 @@
     1.8945
    ],
    "bytes": 61685
+  },
+  "mu-voz-roubada": {
+   "arquivo": "mu-voz-roubada.mp3",
+   "descricao": "Úrsula: a voz roubada",
+   "versoes": [
+    0.0,
+    2.28,
+    4.6398,
+    6.8454
+   ],
+   "duracoes": [
+    2.2,
+    2.2798,
+    2.1256,
+    2.2335
+   ],
+   "bytes": 66185
   },
   "mu-vrrrum": {
    "arquivo": "mu-vrrrum.mp3",
