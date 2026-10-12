@@ -265,6 +265,20 @@
   "laco": false,
   "bytes": 79598
  },
+ "apoio_do_pod": {
+  "descricao": "2B · a rajada do Pod",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 14538
+ },
  "aquaman_preparo": {
   "descricao": "Aquaman · o tridente, a água e os tubarões (Preparo, laço)",
   "quadros": 12,
@@ -446,20 +460,6 @@
   ],
   "laco": false,
   "bytes": 12010
- },
- "asa_negra": {
-  "descricao": "asa e penas negras",
-  "quadros": 12,
-  "grade": [
-   3,
-   4
-  ],
-  "tamanho": [
-   192,
-   192
-  ],
-  "laco": false,
-  "bytes": 33500
  },
  "asas_de_isis": {
   "descricao": "Básico de Ísis: a asa e as penas douradas",
@@ -754,6 +754,20 @@
   ],
   "laco": false,
   "bytes": 22204
+ },
+ "barreira_eletrica": {
+  "descricao": "Raiden · a cúpula elétrica",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 53280
  },
  "barreira_magica": {
   "descricao": "cúpula de runas",
@@ -1230,6 +1244,20 @@
   ],
   "laco": true,
   "bytes": 52078
+ },
+ "bola_de_fogo_liukang": {
+  "descricao": "Liu Kang · a bola de fogo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 19888
  },
  "bola_de_neve": {
   "descricao": "Básico do Homem de Gelo: a bola de neve espatifando",
@@ -2799,6 +2827,20 @@
   "laco": false,
   "bytes": 18032
  },
+ "contra_ataque": {
+  "descricao": "Jin · o aparo e o chute",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 23200
+ },
  "contra_ataque_cego": {
   "descricao": "Demolidor · a rajada de golpes e o final",
   "quadros": 12,
@@ -3331,6 +3373,20 @@
   "laco": false,
   "bytes": 57618
  },
+ "cura_sora": {
+  "descricao": "Sora · a flor e as folhas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 34380
+ },
  "danca_da_bruxa": {
   "descricao": "Bayonetta · os chutes em giro e as borboletas",
   "quadros": 12,
@@ -3848,6 +3904,20 @@
   ],
   "laco": true,
   "bytes": 79104
+ },
+ "dragao_flamejante": {
+  "descricao": "Liu Kang · o dragão de fogo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 30772
  },
  "dreno": {
   "descricao": "transferência de energia (faixa)",
@@ -5753,6 +5823,34 @@
   "laco": false,
   "bytes": 19920
  },
+ "forma_devil": {
+  "descricao": "Kazuya · as asas do Devil e o golpe",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 55036
+ },
+ "forma_final": {
+  "descricao": "Sora · as duas chaves-espada",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 57052
+ },
  "frasco_de_senku": {
   "descricao": "Básico do Senku: o frasco e a reação",
   "quadros": 12,
@@ -6312,6 +6410,20 @@
   ],
   "laco": false,
   "bytes": 28910
+ },
+ "gene_do_diabo": {
+  "descricao": "Jin · as asas e o raio da testa",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 45080
  },
  "genjutsu_sasuke": {
   "descricao": "Sasuke · o Sharingan gigante e a confusão",
@@ -7573,6 +7685,20 @@
   "laco": false,
   "bytes": 44332
  },
+ "kazuya_preparo": {
+  "descricao": "Kazuya · os raios subindo (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 59208
+ },
  "keyblade": {
   "descricao": "Sora: golpe de chave-espada com estrelinhas",
   "quadros": 12,
@@ -7950,6 +8076,20 @@
   ],
   "laco": false,
   "bytes": 36704
+ },
+ "lamina_virtuosa": {
+  "descricao": "2B · o giro com as fitas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 11422
  },
  "lamina_viva": {
   "descricao": "Carnificina: lâminas vivas retorcidas rasgam em quatro ângulos",
@@ -8454,6 +8594,20 @@
   ],
   "laco": true,
   "bytes": 9590
+ },
+ "liukang_preparo": {
+  "descricao": "Liu Kang · o fogo em espiral (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 31096
  },
  "livro_na_cabeca": {
   "descricao": "Básico da Velma: o livro voando e as estrelinhas",
@@ -9224,6 +9378,20 @@
   ],
   "laco": true,
   "bytes": 37200
+ },
+ "modo_berserk": {
+  "descricao": "2B · a aura e a espada grande",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 55296
  },
  "modo_kurama": {
   "descricao": "Naruto · o Manto da Kurama: chamas, caudas e o selo",
@@ -15651,6 +15819,20 @@
   "laco": false,
   "bytes": 81428
  },
+ "pisao_demoniaco": {
+  "descricao": "Kazuya · o pisão e os raios roxos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 60574
+ },
  "pistola_de_megamente": {
   "descricao": "Básico do Megamente: a pistola desidratadora e o cubo",
   "quadros": 12,
@@ -15888,6 +16070,20 @@
   ],
   "laco": false,
   "bytes": 29794
+ },
+ "postura_mishima": {
+  "descricao": "Jin · a guarda e o brilho",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 58688
  },
  "pow_cartoon": {
   "descricao": "balão POW de quadrinho",
@@ -16449,6 +16645,20 @@
   "laco": true,
   "bytes": 13618
  },
+ "raidenmk_preparo": {
+  "descricao": "Raiden · os olhos e as faíscas (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 8868
+ },
  "raikiri_impacto": {
   "descricao": "Kakashi · Raikiri: a mão de raio atravessa o rival",
   "quadros": 12,
@@ -16504,6 +16714,20 @@
   ],
   "laco": false,
   "bytes": 121504
+ },
+ "raio_celeste": {
+  "descricao": "Raiden · os raios do céu",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 34496
  },
  "raio_copiado": {
   "descricao": "Mega Man · a esfera elétrica da arma copiada voando (laço)",
@@ -16644,6 +16868,20 @@
   ],
   "laco": false,
   "bytes": 28964
+ },
+ "raio_do_diabo": {
+  "descricao": "Kazuya · o laser da testa",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 25162
  },
  "raio_em_cadeia": {
   "descricao": "raio pulando em cadeia",
@@ -18563,6 +18801,20 @@
   "laco": false,
   "bytes": 69656
  },
+ "sora_preparo": {
+  "descricao": "Sora · a coroa e a chave girando (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 11876
+ },
  "sorte": {
   "descricao": "dados rolando",
   "quadros": 12,
@@ -19584,6 +19836,20 @@
   ],
   "laco": true,
   "bytes": 51266
+ },
+ "trovao_dos_deuses": {
+  "descricao": "Raiden · a tempestade inteira",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 60556
  },
  "trovao_faixa": {
   "descricao": "Pikachu · o raio do Choque do Trovão (faixa)",

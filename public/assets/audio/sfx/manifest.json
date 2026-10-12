@@ -342,6 +342,23 @@
    ],
    "bytes": 45027
   },
+  "apoio-do-pod": {
+   "arquivo": "apoio-do-pod.mp3",
+   "descricao": "2B: o apoio do Pod",
+   "versoes": [
+    0.0,
+    1.98,
+    4.0289,
+    5.9446
+   ],
+   "duracoes": [
+    1.9,
+    1.9689,
+    1.8357,
+    1.9289
+   ],
+   "bytes": 62667
+  },
   "aquaman-preparo": {
    "arquivo": "aquaman-preparo.mp3",
    "descricao": "Aquaman: a água girando (antes do golpe)",
@@ -579,23 +596,6 @@
     0.8787
    ],
    "bytes": 36228
-  },
-  "asa-negra": {
-   "arquivo": "asa-negra.mp3",
-   "descricao": "família asa negra",
-   "versoes": [
-    0.0,
-    1.38,
-    2.8071,
-    4.1432
-   ],
-   "duracoes": [
-    1.3,
-    1.3471,
-    1.256,
-    1.3198
-   ],
-   "bytes": 48136
   },
   "asas-de-isis": {
    "arquivo": "asas-de-isis.mp3",
@@ -936,6 +936,23 @@
     0.9137
    ],
    "bytes": 35638
+  },
+  "barreira-eletrica": {
+   "arquivo": "barreira-eletrica.mp3",
+   "descricao": "Raiden: a barreira elétrica",
+   "versoes": [
+    0.0,
+    1.8691,
+    3.844,
+    5.6169
+   ],
+   "duracoes": [
+    1.7891,
+    1.8949,
+    1.6929,
+    1.8183
+   ],
+   "bytes": 100888
   },
   "barreira-magica": {
    "arquivo": "barreira-magica.mp3",
@@ -1446,6 +1463,23 @@
     1.6244
    ],
    "bytes": 57661
+  },
+  "bola-de-fogo-liukang": {
+   "arquivo": "bola-de-fogo-liukang.mp3",
+   "descricao": "Liu Kang: a bola de fogo",
+   "versoes": [
+    0.0,
+    1.98,
+    3.9102,
+    5.6515
+   ],
+   "duracoes": [
+    1.9,
+    1.8502,
+    1.6613,
+    1.6885
+   ],
+   "bytes": 62740
   },
   "bola-de-neve": {
    "arquivo": "bola-de-neve.mp3",
@@ -3181,6 +3215,23 @@
    ],
    "bytes": 42599
   },
+  "contra-ataque": {
+   "arquivo": "contra-ataque.mp3",
+   "descricao": "Jin: o contra-ataque",
+   "versoes": [
+    0.0,
+    1.3668,
+    2.9093,
+    4.3546
+   ],
+   "duracoes": [
+    1.2868,
+    1.4625,
+    1.3653,
+    1.3708
+   ],
+   "bytes": 47027
+  },
   "contra-ataque-cego": {
    "arquivo": "contra-ataque-cego.mp3",
    "descricao": "Demolidor: a rajada de golpes e o final",
@@ -3741,6 +3792,23 @@
     1.5228
    ],
    "bytes": 55680
+  },
+  "cura-sora": {
+   "arquivo": "cura-sora.mp3",
+   "descricao": "Sora: Cura",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2224
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9099,
+    2.0305
+   ],
+   "bytes": 73529
   },
   "danca-da-bruxa": {
    "arquivo": "danca-da-bruxa.mp3",
@@ -4336,6 +4404,23 @@
     1.6244
    ],
    "bytes": 61940
+  },
+  "dragao-flamejante": {
+   "arquivo": "dragao-flamejante.mp3",
+   "descricao": "Liu Kang: o dragão flamejante",
+   "versoes": [
+    0.0,
+    2.28,
+    4.6398,
+    6.8454
+   ],
+   "duracoes": [
+    2.2,
+    2.2798,
+    2.1256,
+    2.2335
+   ],
+   "bytes": 76741
   },
   "dreno": {
    "arquivo": "dreno.mp3",
@@ -6513,6 +6598,40 @@
    ],
    "bytes": 71996
   },
+  "forma-devil": {
+   "arquivo": "forma-devil.mp3",
+   "descricao": "Kazuya: a Forma Devil",
+   "versoes": [
+    0.0,
+    2.28,
+    4.6398,
+    6.8454
+   ],
+   "duracoes": [
+    2.2,
+    2.2798,
+    2.1256,
+    2.2335
+   ],
+   "bytes": 68765
+  },
+  "forma-final": {
+   "arquivo": "forma-final.mp3",
+   "descricao": "Sora: a Forma final",
+   "versoes": [
+    0.0,
+    2.28,
+    4.6398,
+    6.8454
+   ],
+   "duracoes": [
+    2.2,
+    2.2798,
+    2.1256,
+    2.2335
+   ],
+   "bytes": 75370
+  },
   "frasco-de-senku": {
    "arquivo": "frasco-de-senku.mp3",
    "descricao": "básico do Senku: o vidro e a reação",
@@ -7175,6 +7294,23 @@
     1.1939
    ],
    "bytes": 47706
+  },
+  "gene-do-diabo": {
+   "arquivo": "gene-do-diabo.mp3",
+   "descricao": "Jin: o Gene do Diabo",
+   "versoes": [
+    0.0,
+    1.6035,
+    3.3705,
+    4.889
+   ],
+   "duracoes": [
+    1.5235,
+    1.687,
+    1.4385,
+    1.6122
+   ],
+   "bytes": 63114
   },
   "genjutsu-sasuke": {
    "arquivo": "genjutsu-sasuke.mp3",
@@ -8808,6 +8944,23 @@
    ],
    "bytes": 44094
   },
+  "kazuya-preparo": {
+   "arquivo": "kazuya-preparo.mp3",
+   "descricao": "Kazuya: os raios (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 91716
+  },
   "keyblade": {
    "arquivo": "keyblade.mp3",
    "descricao": "básico de Sora: golpe da chave-espada e brilho mágico",
@@ -9232,6 +9385,23 @@
     1.0152
    ],
    "bytes": 38337
+  },
+  "lamina-virtuosa": {
+   "arquivo": "lamina-virtuosa.mp3",
+   "descricao": "2B: a lâmina virtuosa",
+   "versoes": [
+    0.0,
+    1.637,
+    3.3293,
+    4.9149
+   ],
+   "duracoes": [
+    1.557,
+    1.6123,
+    1.5055,
+    1.5568
+   ],
+   "bytes": 62889
   },
   "lamina-viva": {
    "arquivo": "lamina-viva.mp3",
@@ -9844,6 +10014,23 @@
     1.4213
    ],
    "bytes": 50814
+  },
+  "liukang-preparo": {
+   "arquivo": "liukang-preparo.mp3",
+   "descricao": "Liu Kang: o fogo em espiral (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 52867
   },
   "livro-na-cabeca": {
    "arquivo": "livro-na-cabeca.mp3",
@@ -10745,6 +10932,23 @@
     0.8122
    ],
    "bytes": 32960
+  },
+  "modo-berserk": {
+   "arquivo": "modo-berserk.mp3",
+   "descricao": "2B: o modo berserk",
+   "versoes": [
+    0.0,
+    1.7917,
+    3.5756,
+    5.2506
+   ],
+   "duracoes": [
+    1.7117,
+    1.7038,
+    1.595,
+    1.7374
+   ],
+   "bytes": 52883
   },
   "modo-kurama": {
    "arquivo": "modo-kurama.mp3",
@@ -18498,6 +18702,23 @@
    ],
    "bytes": 45502
   },
+  "pisao-demoniaco": {
+   "arquivo": "pisao-demoniaco.mp3",
+   "descricao": "Kazuya: o pisão demoníaco",
+   "versoes": [
+    0.0,
+    1.98,
+    4.0289,
+    5.9446
+   ],
+   "duracoes": [
+    1.9,
+    1.9689,
+    1.8357,
+    1.9289
+   ],
+   "bytes": 70030
+  },
   "pistola-de-megamente": {
    "arquivo": "pistola-de-megamente.mp3",
    "descricao": "básico do Megamente: o raio e o cubinho",
@@ -18786,6 +19007,23 @@
     1.5228
    ],
    "bytes": 65969
+  },
+  "postura-mishima": {
+   "arquivo": "postura-mishima.mp3",
+   "descricao": "Jin: a postura Mishima",
+   "versoes": [
+    0.0,
+    1.3646,
+    2.8662,
+    4.2816
+   ],
+   "duracoes": [
+    1.2846,
+    1.4216,
+    1.3354,
+    1.3933
+   ],
+   "bytes": 41695
   },
   "pow-cartoon": {
    "arquivo": "pow-cartoon.mp3",
@@ -19501,6 +19739,23 @@
    ],
    "bytes": 62073
   },
+  "raidenmk-preparo": {
+   "arquivo": "raidenmk-preparo.mp3",
+   "descricao": "Raiden: os olhos (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 93615
+  },
   "raikiri": {
    "arquivo": "raikiri.mp3",
    "descricao": "Raikiri: os mil pássaros, o golpe que atravessa e o trovão",
@@ -19568,6 +19823,23 @@
     0.6091
    ],
    "bytes": 41326
+  },
+  "raio-celeste": {
+   "arquivo": "raio-celeste.mp3",
+   "descricao": "Raiden: o raio celeste",
+   "versoes": [
+    0.0,
+    1.3817,
+    2.8812,
+    4.2745
+   ],
+   "duracoes": [
+    1.3017,
+    1.4195,
+    1.3133,
+    1.4096
+   ],
+   "bytes": 57614
   },
   "raio-da-forca": {
    "arquivo": "raio-da-forca.mp3",
@@ -19704,6 +19976,23 @@
     1.3198
    ],
    "bytes": 50767
+  },
+  "raio-do-diabo": {
+   "arquivo": "raio-do-diabo.mp3",
+   "descricao": "Kazuya: o raio do diabo",
+   "versoes": [
+    0.0,
+    1.4671,
+    2.9835,
+    4.4048
+   ],
+   "duracoes": [
+    1.3871,
+    1.4364,
+    1.3413,
+    1.4185
+   ],
+   "bytes": 48565
   },
   "raio-em-cadeia": {
    "arquivo": "raio-em-cadeia.mp3",
@@ -21966,6 +22255,23 @@
    ],
    "bytes": 66939
   },
+  "sora-preparo": {
+   "arquivo": "sora-preparo.mp3",
+   "descricao": "Sora: a chave girando (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 59608
+  },
   "sorte": {
    "arquivo": "sorte.mp3",
    "descricao": "família sorte",
@@ -23172,6 +23478,23 @@
     1.6244
    ],
    "bytes": 62381
+  },
+  "trovao-dos-deuses": {
+   "arquivo": "trovao-dos-deuses.mp3",
+   "descricao": "Raiden: o trovão dos deuses",
+   "versoes": [
+    0.0,
+    2.48,
+    5.047,
+    7.4459
+   ],
+   "duracoes": [
+    2.4,
+    2.487,
+    2.3188,
+    2.3798
+   ],
+   "bytes": 89344
   },
   "trovao-feixe": {
    "arquivo": "trovao-feixe.mp3",

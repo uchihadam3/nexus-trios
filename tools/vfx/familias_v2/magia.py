@@ -321,28 +321,6 @@ def invocacao(T, t, rng):
     return G, H
 
 
-def asa_negra(T, t, rng):
-    """Asa negra: uma asa única se abre e penas escuras caem cortando o ar em volta do alvo."""
-    G, H = vazio(T)
-    abre = ease_out(rel(t, 0, 0.3), 2)
-    env = apaga(t, 0.75, 1)
-    asa = T.zero()
-    for k in range(6):
-        a = -1.9 + k * 0.25
-        comp = (0.7 - k * 0.05) * abre
-        asa += T.polys([(lamina(0.15, -0.1, 0.15 + math.cos(a) * comp, -0.1 + math.sin(a) * comp, 0.07), 1)], 0.006)
-    penas = []
-    for _ in range(18):
-        f = (rng.uniform(0, 1) + t * 0.9) % 1
-        x = rng.uniform(-0.8, 0.8) + 0.1 * math.sin(f * 8)
-        y = -0.8 + f * 1.5
-        a = 0.6 * math.sin(f * 10 + x * 5)
-        penas.append((lamina(x - math.cos(a) * 0.07, y - math.sin(a) * 0.07, x + math.cos(a) * 0.07, y + math.sin(a) * 0.07, 0.025), math.sin(math.pi * f) * janela(t, 0.15, 0.35)))
-    G += (asa * 1.1 + T.polys(penas, 0.003) * 1.2) * env
-    H += asa * 0.3 * env
-    return G, H
-
-
 REGISTRO = [
     ("olho", olho, GRANDE, "olho gigante se abrindo", False),
     ("hipnose", hipnose, GRANDE, "espiral hipnótica", False),
@@ -359,5 +337,4 @@ REGISTRO = [
     ("confusao", confusao, GRANDE, "interrogações girando", False),
     ("pentagrama", pentagrama, GRANDE, "pentagrama infernal", False),
     ("invocacao", invocacao, GRANDE, "silhueta invocada", False),
-    ("asa_negra", asa_negra, GRANDE, "asa e penas negras", False),
 ]

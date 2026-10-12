@@ -815,16 +815,6 @@ def invocacao(rng, v):
     return x
 
 
-def asa_negra(rng, v):
-    x = _z(1.3)
-    for k in range(3):
-        poe(x, passa(rosa(rng, n_de(0.3)), 200, 2000, 2) * sobe_e_some(n_de(0.3), 0.4, 1.5) * 0.6, k * 0.12)
-    poe(x, B.corte(rng, v) * 0.6, 0.3)
-    poe(x, _corta(_tom(nota(50), nota(43), 0.9, 0.5, 0.15), 0.9), 0.3)
-    return reverb(x, 0.7, 0.35, 3000)
-
-
-# ================================================================== apoio
 def cura_em_area(rng, v):
     x = _z(1.5)
     for k, m in enumerate((72, 76, 79, 84, 88)):
