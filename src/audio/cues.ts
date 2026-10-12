@@ -36,7 +36,6 @@ export type Sound = typeof SONS[number] | (string & { readonly __somNovo?: never
 const ANTES_DA_NOVA: Partial<Record<FamiliaNova, { antes: Sound; saida?: Sound }>> = {
   esfera_espiral: { antes: 'esfera-espiral-carga' },
   kamehameha: { antes: 'kamehameha-carga', saida: 'kamehameha-feixe' },
-  marretada: { antes: 'marretada-giro' },
   susanoo_perfeito: { antes: 'susanoo-manto' },
   raikiri: { antes: 'raikiri-mao' },
   reigun: { antes: 'reigun-carga' },
@@ -205,6 +204,9 @@ const ANTES_DA_NOVA: Partial<Record<FamiliaNova, { antes: Sound; saida?: Sound }
   desastre_anunciado: { antes: 'patolino-preparo' },
   fome_sem_fim: { antes: 'taz-preparo' },
   plano_infalivel: { antes: 'coiote-preparo' },
+  pata_certeira: { antes: 'tom-preparo' },
+  golpe_do_mestre: { antes: 'shredder-preparo' },
+  dimensao_x: { antes: 'krang-preparo' },
   despertar_gohan: { antes: 'aura-besta' },
   raio_mortal: { antes: 'raio-mortal-saida' },
   bola_da_morte: { antes: 'bola-da-morte-carga' },

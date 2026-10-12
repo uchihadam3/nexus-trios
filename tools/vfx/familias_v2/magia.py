@@ -104,25 +104,6 @@ def caveira(T, t, rng):
     return G, H
 
 
-def clones(T, t, rng):
-    """Clones: silhuetas iguais aparecem em leque em volta do alvo, piscam e somem uma a uma."""
-    G, H = vazio(T)
-    acc = T.zero()
-    for k in range(5):
-        a = -math.pi / 2 + (k - 2) * 0.55
-        d = 0.5 * ease_out(rel(t, k * 0.04, 0.3 + k * 0.04), 2)
-        x, y = math.cos(a) * d, 0.1 + math.sin(a) * d * 0.4
-        vida = janela(t, k * 0.04, 0.1 + k * 0.04) * apaga(t, 0.5 + k * 0.08, 0.7 + k * 0.08)
-        cabeca = T.gauss(x, y - 0.25, 0.07)
-        tronco = T.gauss(x, y + 0.02, 0.1, 0.18)
-        sil = smooth(cabeca + tronco, 0.45, 0.6)
-        acc += (sil * 0.35 + sil * (1 - smooth(T.blur(sil, 0.015), 0.8, 0.97)) * 1.4) * vida
-    puff = sum(poeira(T, rng, t, 8, math.cos(-math.pi / 2 + (k - 2) * 0.55) * 0.5, 0.1, 0.2, 0.1, 0.03, inicio=0.5 + k * 0.08) for k in range(5))
-    G += acc + puff * 0.6
-    H += acc * 0.4
-    return G, H
-
-
 def teleporte(T, t, rng):
     """Teleporte: a luz implode num risco vertical, some, e reaparece explodindo do lado."""
     G, H = vazio(T)
@@ -225,7 +206,6 @@ REGISTRO = [
     ("olho", olho, GRANDE, "olho gigante se abrindo", False),
     ("runas", runas, GRANDE, "círculo de runas", False),
     ("sarcofago", sarcofago, GRANDE, "caixa negra fechando", False),
-    ("clones", clones, GRANDE, "silhuetas em leque", False),
     ("teleporte", teleporte, GRANDE, "implode e reaparece", False),
     ("fenda", fenda, GRANDE, "rasgo dimensional", False),
     ("confusao", confusao, GRANDE, "interrogações girando", False),

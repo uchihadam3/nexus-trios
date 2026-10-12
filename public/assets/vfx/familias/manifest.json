@@ -3163,20 +3163,6 @@
   "laco": false,
   "bytes": 24110
  },
- "clones": {
-  "descricao": "silhuetas em leque",
-  "quadros": 12,
-  "grade": [
-   3,
-   4
-  ],
-  "tamanho": [
-   192,
-   192
-  ],
-  "laco": false,
-  "bytes": 43174
- },
  "clones_naruto": {
   "descricao": "Naruto · Clones das sombras: fumaça, clones e a espiral",
   "quadros": 12,
@@ -3288,6 +3274,20 @@
   ],
   "laco": false,
   "bytes": 31830
+ },
+ "comando_remoto": {
+  "descricao": "Krang · as ondas do cérebro e o escudo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 25516
  },
  "cometa": {
   "descricao": "luz que corre pela linha de ação (+x)",
@@ -4479,6 +4479,20 @@
   "laco": false,
   "bytes": 53114
  },
+ "dimensao_x": {
+  "descricao": "Krang · o portal roxo da Dimensão X",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 52718
+ },
  "disco_solar": {
   "descricao": "Básico de Rá: o Olho no disco e o raio que queima",
   "quadros": 12,
@@ -4871,6 +4885,20 @@
   "laco": false,
   "bytes": 61798
  },
+ "emboscada_do_tom": {
+  "descricao": "Tom · a frigideira e a marca",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 20274
+ },
  "empurrao_de_campo": {
   "descricao": "Básico da Violeta: a bolha de força empurrando",
   "quadros": 12,
@@ -5010,6 +5038,20 @@
   ],
   "laco": false,
   "bytes": 118304
+ },
+ "esconderijo": {
+  "descricao": "Jerry · o buraquinho na parede",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 22590
  },
  "escudada_de_atena": {
   "descricao": "Básico de Atena: o escudo batendo",
@@ -7545,6 +7587,20 @@
   "laco": false,
   "bytes": 64734
  },
+ "garras_de_aco": {
+  "descricao": "Destruidor · os três riscos da manopla",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 20288
+ },
  "garras_de_ferro": {
   "descricao": "Básico do Inuyasha: as cinco garras",
   "quadros": 12,
@@ -7951,6 +8007,20 @@
   "laco": false,
   "bytes": 38846
  },
+ "golpe_do_mestre": {
+  "descricao": "Destruidor · a rajada de cortes",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 34572
+ },
  "golpe_do_potencial": {
   "descricao": "básico do Gohan: soco com aura branca e raios do SSJ2",
   "quadros": 12,
@@ -8118,6 +8188,20 @@
   ],
   "laco": false,
   "bytes": 74714
+ },
+ "gooool": {
+  "descricao": "Casey Jones · a tacada, o disco e a rede",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 33242
  },
  "gou_hadouken": {
   "descricao": "Akuma · o Hadouken sombrio",
@@ -8776,6 +8860,20 @@
   ],
   "laco": false,
   "bytes": 29350
+ },
+ "investida_do_cla": {
+  "descricao": "Destruidor · os ninjas do Clã convergindo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 21298
  },
  "investida_do_lider": {
   "descricao": "Leonardo · o avanço e o corte final",
@@ -9448,6 +9546,20 @@
   ],
   "laco": false,
   "bytes": 24674
+ },
+ "krang_preparo": {
+  "descricao": "Krang · o cérebro pulsando (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 17112
  },
  "krypton_carga": {
   "descricao": "Super-Homem · a luz do sol juntando nele (laço)",
@@ -10219,6 +10331,20 @@
   "laco": true,
   "bytes": 26160
  },
+ "licao_final": {
+  "descricao": "Mestre Splinter · a bengalada e as estrelinhas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 19582
+ },
  "limitador_preparo": {
   "descricao": "Kenpachi · a pressão em labaredas (Preparo, laço)",
   "quadros": 12,
@@ -10681,8 +10807,8 @@
   "laco": false,
   "bytes": 20538
  },
- "marretada": {
-  "descricao": "marreta de desenho batendo",
+ "martelada": {
+  "descricao": "Jerry · o martelo enorme e as estrelinhas",
   "quadros": 12,
   "grade": [
    3,
@@ -10693,7 +10819,7 @@
    192
   ],
   "laco": false,
-  "bytes": 68182
+  "bytes": 35168
  },
  "martelo": {
   "descricao": "martelada no chão",
@@ -11030,20 +11156,6 @@
   ],
   "laco": false,
   "bytes": 19860
- },
- "mil_cortes": {
-  "descricao": "mil cortes e X final",
-  "quadros": 12,
-  "grade": [
-   3,
-   4
-  ],
-  "tamanho": [
-   192,
-   192
-  ],
-  "laco": false,
-  "bytes": 84656
  },
  "mil_golpes_flash": {
   "descricao": "Flash · os socos rápidos com raios",
@@ -17513,6 +17625,34 @@
   "laco": false,
   "bytes": 38572
  },
+ "passo_silencioso": {
+  "descricao": "Pantera Cor-de-Rosa · as pegadas e o som riscado",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 22054
+ },
+ "pata_certeira": {
+  "descricao": "Tom · os três arranhões e a marca da pata",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 23626
+ },
  "patada_de_scar": {
   "descricao": "Básico do Scar: a patada com as garras",
   "quadros": 12,
@@ -17666,6 +17806,20 @@
   ],
   "laco": false,
   "bytes": 13734
+ },
+ "perseguicao": {
+  "descricao": "Tom · as pegadas e a poeira da perseguição",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 26154
  },
  "petalas_cortantes": {
   "descricao": "Básico do Kurama: as pétalas em espiral cortando",
@@ -18086,6 +18240,20 @@
   ],
   "laco": false,
   "bytes": 29794
+ },
+ "postura_do_rato": {
+  "descricao": "Mestre Splinter · o rabo em círculo e a meditação",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 54832
  },
  "postura_mishima": {
   "descricao": "Jin · a guarda e o brilho",
@@ -19333,6 +19501,20 @@
   "laco": false,
   "bytes": 21176
  },
+ "ratoeira_invertida": {
+  "descricao": "Jerry · a ratoeira fechando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 30188
+ },
  "rebellion_e_ebony": {
   "descricao": "Dante: corte largo de espadão e dois tiros de pistola",
   "quadros": 12,
@@ -19402,6 +19584,20 @@
   ],
   "laco": false,
   "bytes": 18812
+ },
+ "redirecionar_splinter": {
+  "descricao": "Mestre Splinter · a bengala desviando o golpe",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 24748
  },
  "reflexo": {
   "descricao": "escudo de espelho hexagonal que devolve o golpe",
@@ -20467,6 +20663,20 @@
   "laco": true,
   "bytes": 27752
  },
+ "sequencia_bruta": {
+  "descricao": "Casey Jones · o taco e os socos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 31624
+ },
  "sequencia_final": {
   "descricao": "Zero · o corte em meia-lua e os raios",
   "quadros": 12,
@@ -20621,6 +20831,20 @@
   "laco": true,
   "bytes": 40448
  },
+ "shredder_preparo": {
+  "descricao": "Destruidor · a manopla erguida (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 35796
+ },
  "shun_goku_satsu": {
   "descricao": "Shun Goku Satsu: golpes no escuro e o 天",
   "quadros": 12,
@@ -20662,20 +20886,6 @@
   ],
   "laco": true,
   "bytes": 9916
- },
- "silencio": {
-  "descricao": "som cortado",
-  "quadros": 12,
-  "grade": [
-   3,
-   4
-  ],
-  "tamanho": [
-   192,
-   192
-  ],
-  "laco": false,
-  "bytes": 37090
  },
  "simbionte_faminto": {
   "descricao": "Venom · os tentáculos engolindo e a aranha",
@@ -21405,6 +21615,20 @@
   "laco": true,
   "bytes": 23180
  },
+ "sumico": {
+  "descricao": "Pantera Cor-de-Rosa · a fumaça e as interrogações",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 29860
+ },
  "super_inalacao": {
   "descricao": "Kirby · o redemoinho e a estrela",
   "quadros": 12,
@@ -21558,6 +21782,20 @@
   ],
   "laco": false,
   "bytes": 43638
+ },
+ "taco_de_hoquei": {
+  "descricao": "Casey Jones · o taco e o disco",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 16112
  },
  "taiyoken": {
   "descricao": "Kuririn · o clarão solar no campo",
@@ -22217,6 +22455,20 @@
   "laco": false,
   "bytes": 63470
  },
+ "tom_preparo": {
+  "descricao": "Tom · as unhas afiando (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 33014
+ },
  "toque_absorvente": {
   "descricao": "Vampira: a mão toca e suga fios de vida do alvo",
   "quadros": 12,
@@ -22384,6 +22636,20 @@
   ],
   "laco": false,
   "bytes": 26760
+ },
+ "troca_discreta": {
+  "descricao": "Pantera Cor-de-Rosa · as silhuetas trocando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 27102
  },
  "tropecao_do_pateta": {
   "descricao": "Pateta · o escorregão e o chapéu voando",

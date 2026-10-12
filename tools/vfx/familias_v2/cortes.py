@@ -16,30 +16,6 @@ def _rasgo(T, x1, y1, x2, y2, larg, p, fim):
     return corpo, fio
 
 
-def mil_cortes(T, t, rng):
-    """Mil cortes: dezenas de riscos finos em todas as direções, um atrás do outro, e um X final."""
-    G, H = vazio(T)
-    sub = np.random.default_rng(91)
-    acc = T.zero()
-    for k in range(16):
-        a0 = 0.03 + k * 0.035
-        ang = sub.uniform(0, math.pi)
-        r = sub.uniform(0.5, 0.85)
-        cx, cy = sub.uniform(-0.2, 0.2), sub.uniform(-0.2, 0.2)
-        x1, y1 = cx - math.cos(ang) * r, cy - math.sin(ang) * r
-        x2, y2 = cx + math.cos(ang) * r, cy + math.sin(ang) * r
-        p = ease_out(rel(t, a0, a0 + 0.06), 2)
-        if p <= 0:
-            continue
-        acc += T.polys([(lamina(x1, y1, x2, y2, 0.025, p, inicio=rel(t, a0 + 0.08, a0 + 0.22)), 1)], 0.002)
-    xp = ease_out(rel(t, 0.62, 0.72), 2)
-    xis = sum(T.polys([(lamina(-0.75 * sx, -0.75, 0.75 * sx, 0.75, 0.07, xp, inicio=rel(t, 0.8, 1)), 1)], 0.003) for sx in (1, -1)) if xp > 0 else T.zero()
-    clarao = T.gauss(0, 0, 0.25) * pulso(t, 0.6, 0.9) * 2.4
-    G += T.glow(acc, 1.3, 1, 0.015) + T.glow(xis, 1.2, 1.3, 0.025) + clarao
-    H += acc * 1.2 + xis + clarao
-    return G, H
-
-
 def espadao(T, t, rng):
     """Espadão: arco largo e pesado, o chão racha embaixo e blocos voam."""
     G, H = vazio(T)
@@ -174,7 +150,6 @@ def florete(T, t, rng):
 
 
 REGISTRO = [
-    ("mil_cortes", mil_cortes, GRANDE, "mil cortes e X final", False),
     ("espadao", espadao, GRANDE, "espadão que racha o chão", False),
     ("lamina_eletrica", lamina_eletrica, GRANDE, "lâmina elétrica", False),
     ("lamina_sombria", lamina_sombria, GRANDE, "lâmina sombria", False),

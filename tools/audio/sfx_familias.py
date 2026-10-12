@@ -165,15 +165,6 @@ def esticar(rng, v):
 
 
 # ================================================================== cortes
-def mil_cortes(rng, v):
-    x = _z(1.1)
-    for k in range(10):
-        n = n_de(0.08)
-        poe(x, passa(ruido(rng, n), 3000, 11000, 2) * env(n, 0.0005, 0.015) * 0.5 + modal(n, rng.uniform(2500, 4000), rng=rng, **METAL) * env(n, 0.001, 0.04) * 0.12, 0.03 + k * 0.055)
-    poe(x, B.corte_pesado(rng, v), 0.62, 0.9)
-    return x
-
-
 def espadao(rng, v):
     x = _z(1.1)
     poe(x, _whoosh(rng, 0.3, 200, 1800, 0.85, g=1.0), 0)
@@ -526,16 +517,6 @@ def sarcofago(rng, v):
     return x
 
 
-def clones(rng, v):
-    x = _z(1.1)
-    for k in range(5):
-        m = n_de(0.15)
-        poe(x, passa(ruido(rng, m), 1500, 7000, 2) * sobe_e_some(m, 0.3, 2) * 0.4 + _tom(nota(76 + k * 2), nota(80 + k * 2), 0.15, 0.06, 0.08), k * 0.05)
-    for k in range(5):
-        poe(x, passa(rosa(rng, n_de(0.2)), 400, 3000, 2) * env(n_de(0.2), 0.005, 0.06) * 0.3, 0.55 + k * 0.08)
-    return reverb(x, 0.4, 0.2)
-
-
 def teleporte(rng, v):
     x = _z(1.0)
     poe(x, _tom(nota(84), nota(60), 0.25, 0.2, 0.25, 0.4), 0)
@@ -661,15 +642,6 @@ def lentidao(rng, v):
     x += passa(ruido(rng, n), 2500, 7000, 2) * env(n, 0.2, 0.6, segura=0.3) * 0.08
     x += seno(varre(nota(60), nota(48), n, 0.5), n) * env(n, 0.1, 0.8) * 0.12
     return reverb(x, 0.5, 0.25)
-
-
-def silencio(rng, v):
-    x = _z(1.0)
-    n = n_de(0.3)
-    poe(x, seno(np.full(n, nota(76)), n) * env(n, 0.01, 0.15) * 0.15, 0)
-    poe(x, passa(ruido(rng, n_de(0.08)), 2000, 9000, 2) * env(n_de(0.08), 0.001, 0.01) * 0.8, 0.28)
-    poe(x, passa(rosa(rng, n_de(0.6)), 60, 300, 2) * env(n_de(0.6), 0.05, 0.3) * 0.2, 0.3)
-    return x
 
 
 def medo(rng, v):
@@ -829,38 +801,6 @@ def _madeira_oca(rng, n, f0):
     for r, q, g in ((1.0, 0.11, 1.0), (2.63, 0.05, 0.55), (4.1, 0.03, 0.35), (5.9, 0.02, 0.22), (8.3, 0.012, 0.15)):
         x += np.sin(2 * math.pi * f0 * r * rng.uniform(0.985, 1.015) * t) * np.exp(-t / q) * g
     return x + passa(ruido(rng, n), 800, 5000, 2) * env(n, 0.0003, 0.008) * 0.8
-
-
-def marretada_giro(rng, v):
-    """Antes do golpe: a marreta sobe (apito de desenho subindo) e desce num "fuuum" pesado."""
-    x = _z(0.75)
-    n = n_de(0.38)
-    t = np.arange(n) / SR
-    apito = np.sin(2 * math.pi * np.cumsum(varre(500, 1500, n, 1.1) * (1 + 0.012 * np.sin(2 * math.pi * 7 * t))) / SR)
-    poe(x, apito * env(n, 0.03, 0.3, segura=0.6) * 0.18, 0)
-    poe(x, _whoosh(rng, 0.32, 1600, 220, 0.75, 1.5, 1.0), 0.4)
-    return reverb(x, 0.25, 0.1)
-
-
-def marretada(rng, v):
-    """A marretada de desenho: BONK oco de madeira, o peso, o achatamento e a mola "doing" no fim."""
-    x = _z(1.15)
-    n = n_de(0.5)
-    poe(x, _madeira_oca(rng, n, rng.uniform(150, 175)) * 0.75, 0)
-    poe(x, B.esmagar(rng, v)[: n_de(0.6)] * 0.65, 0)
-    m = n_de(0.08)
-    poe(x, satura(passa(ruido(rng, m), 300, 1800, 2) * env(m, 0.001, 0.03), 3) * 0.5, 0.005)        # o "esmagou"
-    m = n_de(0.62)
-    tt = np.arange(m) / SR
-    f = 190 * (1 + 0.18 * np.sin(2 * math.pi * 16 * tt) * np.exp(-tt / 0.35))
-    doing = np.sin(2 * math.pi * np.cumsum(f) / SR) + 0.35 * np.sin(4 * math.pi * np.cumsum(f) / SR)
-    poe(x, doing * env(m, 0.004, 0.3) * 0.22, 0.12)
-    for k in range(3):                                                                              # passarinhos tontos
-        m = n_de(0.09)
-        tt = np.arange(m) / SR
-        piu = np.sin(2 * math.pi * np.cumsum(varre(2600, 3600, m, 0.6) * (1 + 0.06 * np.sin(2 * math.pi * 45 * tt))) / SR)
-        poe(x, piu * env(m, 0.004, 0.04) * 0.06, 0.5 + k * 0.13)
-    return reverb(x, 0.3, 0.14)
 
 
 def bonk(rng, v):
@@ -1607,7 +1547,7 @@ _BAIXO = {"brasas-renascendo", "cura-em-area", "regeneracao", "grito-de-guerra",
 _ALTO = {"copia", "esquiva", "ultima-resistencia", "sono", "cegueira", "errou", "barreira-anula", "dissipar", "reflexo", "espinhos", "vampirismo", "provocar", "renascer", "ressurreicao", "soco-serio", "supernova", "kamehameha", "canhao-de-energia", "foguete", "tempestade", "punho-gigante", "pisao",
          "martelo", "espadao", "buraco-negro", "dragao", "dominio"}
 _ANTES = {"esfera-espiral-carga": "a esfera girando", "kamehameha-carga": "carga do Kamehameha",
-          "kamehameha-feixe": "o feixe saindo", "marretada-giro": "a marreta subindo"}
+          "kamehameha-feixe": "o feixe saindo"}
 for _k, _d in _ANTES.items():
     SONS_NOVOS[_k] = (SONS_NOVOS[_k][0], _d)
 _ALTO |= {"marretada", "kamehameha-feixe"}

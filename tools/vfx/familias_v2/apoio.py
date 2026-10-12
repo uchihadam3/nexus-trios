@@ -217,18 +217,6 @@ def marca(T, t, rng):
     return G, H
 
 
-def silencio(T, t, rng):
-    """Silêncio: ondas de som saem da boca e são cortadas por um risco; ficam paradas no ar."""
-    G, H = vazio(T)
-    env = janela(t, 0, 0.12) * apaga(t, 0.75, 1)
-    ondas = sum(T.arc_band(0.18 + 0.12 * k, 0.02, -0.7, 0.7, cx=-0.2) * (1 - 0.2 * k) for k in range(3)) * (1 - 0.6 * janela(t, 0.3, 0.45))
-    corte = T.polys([(lamina(-0.45, 0.4, 0.45, -0.4, 0.035, ease_out(rel(t, 0.25, 0.4), 2)), 1)], 0.003)
-    aro = T.ring(0.55, 0.025) * janela(t, 0.25, 0.4)
-    G += (ondas * 1.2 + corte * 1.5 + aro * 1.3) * env
-    H += (corte * 0.9 + aro * 0.5) * env
-    return G, H
-
-
 def medo(T, t, rng):
     """Medo: sombras com olhos se aproximam do alvo, ele treme e uma gota de suor cai."""
     G, H = vazio(T)
@@ -656,7 +644,6 @@ REGISTRO = [
     ("purificar_onda", purificar, GRANDE, "onda que lava", False),
     ("enfraquecer", enfraquecer, GRANDE, "setas para baixo", False),
     ("lentidao", lentidao, GRANDE, "ampulheta", False),
-    ("silencio", silencio, GRANDE, "som cortado", False),
     ("medo", medo, GRANDE, "olhos na sombra", False),
     ("estrela_invencivel", estrela_invencivel, GRANDE, "estrela invencível", False),
 ]
