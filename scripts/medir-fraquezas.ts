@@ -21,8 +21,10 @@
  * partir disso em scripts/escrever-fraquezas.ts.
  *
  * Uso: LUTAS=20000 npx tsx scripts/medir-fraquezas.ts
+ * Em paralelo: SEMENTE=k PARCIAL=parte-k.json (uma por processo) e depois
+ * JUNTAR=parte-0.json,parte-1.json,… para somar as partes e escrever o resultado.
  */
-import { writeFileSync } from 'node:fs';
+import { readFileSync, writeFileSync } from 'node:fs';
 
 import { characters } from '../src/data/characters';
 import { createBattle, stepBattle } from '../src/engine/battle';
@@ -61,7 +63,8 @@ const acc = new Map<string, Acumulado>(characters.map((c) => [c.id, {
 }]));
 
 /* Gerador simples e determinístico para sortear os trios. */
-let semente = 20261008;
+const SEMENTE = Number(process.env.SEMENTE ?? 0);
+let semente = 20261008 + SEMENTE * 7919;
 const sorteio = () => { semente = (Math.imul(semente, 1664525) + 1013904223) >>> 0; return semente / 4294967296; };
 const trio = (fora: Set<string>) => {
   const ids: string[] = [];
@@ -70,9 +73,19 @@ const trio = (fora: Set<string>) => {
 };
 
 const inicio = Date.now();
-for (let luta = 0; luta < LUTAS; luta += 1) {
+/* soma uma parte (o acumulado cru de outro processo) neste acumulado */
+const soma = (alvo: Record<string, unknown>, de: Record<string, unknown>) => {
+  for (const [k, v] of Object.entries(de)) {
+    if (typeof v === 'number') alvo[k] = ((alvo[k] as number | undefined) ?? 0) + v;
+    else if (v && typeof v === 'object') soma(((alvo[k] ??= Array.isArray(v) ? [] : {}) as Record<string, unknown>), v as Record<string, unknown>);
+  }
+};
+const partes = process.env.JUNTAR ? process.env.JUNTAR.split(',') : [];
+for (const f of partes) for (const m of JSON.parse(readFileSync(f, 'utf8')) as Acumulado[]) { const a = acc.get(m.id); if (a) soma(a as unknown as Record<string, unknown>, { ...m, id: undefined } as unknown as Record<string, unknown>); }
+const total = partes.length ? 0 : LUTAS;
+for (let luta = 0; luta < total; luta += 1) {
   const a = trio(new Set()), b0 = trio(new Set(a));
-  const b = createBattle(a, b0, luta + 1);
+  const b = createBattle(a, b0, luta + 1 + SEMENTE * 1000003);
   const idsDoLado = { player: new Set(a.flatMap((id) => identidadesDe(id))), enemy: new Set(b0.flatMap((id) => identidadesDe(id))) };
   let visto = -1, primeiraQueda: string | null = null;
   const danoNoBeat = new Map<string, { tempo: number; valor: number }>();
@@ -145,6 +158,8 @@ for (let luta = 0; luta < LUTAS; luta += 1) {
   if (luta % 2000 === 1999) console.log(`${luta + 1} lutas · ${((Date.now() - inicio) / 1000).toFixed(0)} s`);
 }
 
+if (process.env.PARCIAL) { writeFileSync(process.env.PARCIAL, JSON.stringify([...acc.values()])); console.log(`parte pronta: ${LUTAS} lutas`); process.exit(0); }
+const lutasTotais = partes.length ? Math.round([...acc.values()].reduce((n, m) => n + m.lutas, 0) / 6) : LUTAS;
 const saida = [...acc.values()].map((m) => ({
   ...m,
   vitorias: +(m.vitorias / m.lutas).toFixed(4),
@@ -169,5 +184,5 @@ const saida = [...acc.values()].map((m) => ({
   semHabilidade: +(1 - m.lutasComHabilidade / m.lutas).toFixed(4),
   contra: Object.fromEntries(Object.entries(m.contra).map(([k, [n, v]]) => [k, { lutas: n, vitorias: +(v / n).toFixed(4) }])),
 }));
-writeFileSync('docs/fraquezas-medidas.json', JSON.stringify({ lutas: LUTAS, medidas: saida }, null, 1) + '\n');
-console.log(`pronto: ${LUTAS} lutas em ${((Date.now() - inicio) / 1000).toFixed(0)} s`);
+writeFileSync('docs/fraquezas-medidas.json', JSON.stringify({ lutas: lutasTotais, medidas: saida }, null, 1) + '\n');
+console.log(`pronto: ${lutasTotais} lutas em ${((Date.now() - inicio) / 1000).toFixed(0)} s`);

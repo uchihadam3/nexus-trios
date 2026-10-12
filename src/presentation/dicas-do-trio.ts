@@ -8,8 +8,10 @@
  * menos: −10 mil por luta da jornada (src/engine/pontos.ts).
  *
  * Tudo vem do que foi medido em lutas simuladas, não de opinião:
- *   - a força de cada personagem e o peso de cada combinação
- *     (src/data/forca-dos-rivais.ts, scripts/medir-forca.ts);
+ *   - a força de cada personagem e o peso de cada combo, em 4 milhões de lutas
+ *     (src/data/forca-dos-rivais.ts), e quanto cada um vence sozinho e com quem
+ *     vence mais (src/data/duplas-medidas.ts);
+ *   - os combos que o candidato forma com o trio (src/engine/combos.ts);
  *   - os papéis lidos dos kits (src/engine/sinergia.ts): quem dá Carga, quem
  *     cura e protege, quem é frágil, quem bate forte, quem cresce apanhando…
  *
@@ -18,14 +20,18 @@
  * personagens que poderiam entrar.
  */
 import { byId, characters } from '../data/characters';
+import { DUPLAS } from '../data/duplas-medidas';
 import { FORCA, PESO_DA_LIGACAO } from '../data/forca-dos-rivais';
 import { pontoFraco } from '../data/ponto-fraco';
 import { pontoForte } from '../data/ponto-forte';
 import { forcaDoTrio } from '../engine/campaign';
+import { combosDoTrio } from '../engine/combos';
 import { papelDe } from '../engine/sinergia';
 import { porQue } from './porque';
 
 export interface Motivo { texto: string; tom: 'bom' | 'alerta'; /** o porquê, com as habilidades (na explicação maior) */ porque?: string }
+/* `resumo`: o motivo em poucas palavras, para a frase "Escolha X porque …, … e …" */
+type MotivoOrdenado = Motivo & { ordem: number; resumo?: string };
 export interface DicaDoCandidato {
   id: string;
   /** 0–100: combina melhor com o trio do que esta % do elenco disponível */
@@ -37,12 +43,21 @@ export interface DicaDoCandidato {
   detalhe: Motivo[];
 }
 
-const nome = (id: string) => byId[id]!.name.split(/[ ,]/)[0]!;
+/* o primeiro nome; se outro personagem tem o mesmo (Capitão Planeta, Capitão América), as duas primeiras palavras */
+const PRIMEIRO = (id: string) => byId[id]!.name.split(/[ ,]/)[0]!;
+const REPETIDOS = new Set(characters.map((c) => PRIMEIRO(c.id)).filter((n, i, l) => l.indexOf(n) !== i));
+const nome = (id: string) => (REPETIDOS.has(PRIMEIRO(id)) ? byId[id]!.name.split(/[ ,]/).slice(0, 2).join(' ') : PRIMEIRO(id));
 /* "É o primeiro a cair…" vira "é o primeiro a cair…" depois dos dois-pontos; nome de habilidade fica como está */
 const minuscula = (t: string) => (/^(É|Só|Bate|Em|A|Fica|Derruba|Corta|Põe|Solta|Adianta|As|Mantém|Segura|Nenhum) /.test(t) ? t.charAt(0).toLowerCase() + t.slice(1) : t);
 const VIDAS = characters.map((c) => c.hp).sort((a, b) => a - b);
 const VIDA_MEDIANA = VIDAS[Math.floor(VIDAS.length / 2)]!;
 const percentil = (lista: number[], x: number) => Math.round((100 * lista.filter((v) => v < x).length) / Math.max(1, lista.length));
+
+/* quanto o trio com ele vence (com dois parceiros quaisquer), e em que posição isso o põe no elenco */
+const SOLOS = Object.values(DUPLAS).map((d) => d.solo).sort((a, b) => a - b);
+const pct = (x: number) => `${Math.round(100 * x)}%`;
+const lista3 = (l: string[]) => (l.length > 1 ? `${l.slice(0, -1).join(', ')} e ${l.at(-1)}` : l[0] ?? '');
+const chaveDoCombo = (c: { id: string; de: string[]; para: string[] }) => `${c.id}|${[...c.de, ...c.para].sort().join(',')}`;
 
 const aguenta = (id: string) => byId[id]!.hp >= VIDA_MEDIANA * 1.12 || papelDe(id).cuida;
 
@@ -79,8 +94,40 @@ const MUTUO: Record<string, (a: string, b: string) => string> = {
   'protege-vinganca': (a, b) => `${a} e ${b} se seguram de pé e crescem apanhando`,
 };
 
-function motivosDe(c: string, time: string[]): (Motivo & { ordem: number })[] {
-  const motivos: (Motivo & { ordem: number })[] = [];
+function motivosDe(c: string, time: string[]): MotivoOrdenado[] {
+  const motivos: MotivoOrdenado[] = [];
+  /*
+   * Os combos de verdade que ele acende com quem já está no trio (os que a luta usa), dos que mais ganham
+   * lutas para os que menos (o peso medido em 4 milhões de lutas).
+   */
+  if (time.length) {
+    const antes = new Set(combosDoTrio(time).combos.map(chaveDoCombo));
+    const novos = combosDoTrio([...time, c]).combos.filter((x) => !antes.has(chaveDoCombo(x)));
+    for (const x of novos) {
+      const com = [...new Set([...x.de, ...x.para])].filter((id) => id !== c).map(nome);
+      const peso = PESO_DA_LIGACAO[x.id.startsWith('lenda-') ? 'lenda' : x.id] ?? 0.3;
+      motivos.push({ texto: `Forma o combo ${x.nome}${com.length ? ` com ${lista3(com)}` : ''}`, tom: 'bom', ordem: 30 + peso * 20, porque: `${x.nome}: ${x.texto}`, resumo: `combo ${x.nome}` });
+    }
+    // a dupla medida: com quem já está no trio, se for uma das três melhores dele (ou dele com o candidato)
+    for (const m of time) {
+      const ida = DUPLAS[c]?.parceiros.find(([p]) => p === m), volta = DUPLAS[m]?.parceiros.find(([p]) => p === c);
+      const r = ida?.[1] ?? volta?.[1];
+      if (r !== undefined) motivos.push({ texto: `Dupla de ouro com ${nome(m)}: juntos vencem ${pct(r)} das lutas`, tom: 'bom', ordem: 28, porque: `Medido: ${nome(c)} e ${nome(m)} estão entre as três melhores duplas ${ida ? `de ${nome(c)}` : `de ${nome(m)}`}`, resumo: `dupla de ouro com ${nome(m)}` });
+    }
+  }
+  // a força dele, medida: o trio com ele vence quanto, e em que posição isso o põe no elenco
+  const solo = DUPLAS[c]?.solo;
+  if (solo !== undefined) {
+    const p = percentil(SOLOS, solo);
+    if (p >= 70) motivos.push({ texto: `Forte em qualquer trio: com ${nome(c)}, o trio vence ${pct(solo)} das lutas`, tom: 'bom', ordem: time.length ? 9 : 25, porque: `Mais que ${p}% do elenco, com dois parceiros quaisquer (medido em 4 milhões de lutas)`, resumo: 'forte em qualquer trio' });
+    // só para quem é fraco de verdade: a maioria fica perto da metade
+    else if (p < 12) motivos.push({ texto: `Sozinho rende pouco: precisa de parceiros que combinem`, tom: 'alerta', ordem: time.length ? 1 : 17, porque: `Com dois parceiros quaisquer, o trio vence ${pct(solo)} das lutas, menos que ${100 - p}% do elenco` });
+  }
+  // sem trio ainda: com quem ele vence mais
+  if (!time.length && DUPLAS[c]?.parceiros.length) {
+    const ps = DUPLAS[c]!.parceiros;
+    motivos.push({ texto: `Combina mais com ${lista3(ps.map(([p]) => nome(p)))}`, tom: 'bom', ordem: 18, porque: `As duplas que mais vencem, medidas: ${ps.map(([p, r]) => `com ${nome(p)}, ${pct(r)}`).join('; ')}`, resumo: `combina com ${lista3(ps.map(([p]) => nome(p)))}` });
+  }
   // combinações com quem já está no trio, das que mais ganham lutas para as que menos
   for (const m of time) {
     const ida = combinacoes(c, m), volta = combinacoes(m, c);
@@ -96,9 +143,9 @@ function motivosDe(c: string, time: string[]): (Motivo & { ordem: number })[] {
   }
   // o que falta no trio
   if (time.length) {
-    if (!time.some(aguenta) && aguenta(c)) motivos.push({ texto: `Seu trio ainda não tem quem segure dano: ${nome(c)} aguenta`, tom: 'bom', ordem: 14 });
-    if (!time.some((m) => papelDe(m).cuida) && papelDe(c).cuida) motivos.push({ texto: `Ninguém do trio cura ou protege: ${nome(c)} faz isso`, tom: 'bom', ordem: 13 });
-    if (!time.some((m) => papelDe(m).forte) && papelDe(c).forte) motivos.push({ texto: `Traz o dano forte que falta no trio`, tom: 'bom', ordem: 12 });
+    if (!time.some(aguenta) && aguenta(c)) motivos.push({ texto: `Seu trio ainda não tem quem segure dano: ${nome(c)} aguenta`, tom: 'bom', ordem: 14, resumo: 'segura o dano que o trio não aguenta' });
+    if (!time.some((m) => papelDe(m).cuida) && papelDe(c).cuida) motivos.push({ texto: `Ninguém do trio cura ou protege: ${nome(c)} faz isso`, tom: 'bom', ordem: 13, resumo: 'traz a cura que falta' });
+    if (!time.some((m) => papelDe(m).forte) && papelDe(c).forte) motivos.push({ texto: `Traz o dano forte que falta no trio`, tom: 'bom', ordem: 12, resumo: 'traz o dano forte que falta' });
     if (time.every((m) => papelDe(m).fragil) && papelDe(c).fragil && !papelDe(c).cuida) motivos.push({ texto: `Mais um de pouca Vida: o trio pode cair rápido`, tom: 'alerta', ordem: 11 });
   }
   /*
@@ -107,10 +154,28 @@ function motivosDe(c: string, time: string[]): (Motivo & { ordem: number })[] {
    * o ponto forte dele, com a habilidade que faz isso; e o ponto fraco entra uma vez só, como cuidado.
    */
   const fortes = pontoForte(byId[c]!);
-  fortes.forEach((f, i) => motivos.push({ texto: `${f.rotulo}: ${minuscula(f.motivo)}`, tom: 'bom', ordem: (time.length ? 6 : 20) - i * 3 }));
+  fortes.forEach((f, i) => motivos.push({ texto: `${f.rotulo}: ${minuscula(f.motivo)}`, tom: 'bom', ordem: (time.length ? 6 : 20) - i * 3, resumo: f.rotulo.charAt(0).toLowerCase() + f.rotulo.slice(1) }));
   const fraco = pontoFraco(byId[c]!)[0];
   if (fraco) motivos.push({ texto: `Cuidado: ${fraco.rotulo.charAt(0).toLowerCase()}${fraco.rotulo.slice(1)} — ${minuscula(fraco.motivo)}`, tom: 'alerta', ordem: time.length ? 0.5 : 16 });
-  return motivos.sort((a, b) => b.ordem - a.ordem);
+  // os motivos repetidos (o mesmo combo por dois caminhos) ficam uma vez só
+  const vistos = new Set<string>();
+  return motivos.sort((a, b) => b.ordem - a.ordem).filter((m) => (vistos.has(m.texto) ? false : (vistos.add(m.texto), true)));
+}
+
+/*
+ * "Por que escolher Vegeta: combo Dupla de Dragon Ball · dupla de ouro com Goku · traz o dano forte que falta"
+ * (pedido do jogador: "é melhor por causa disso, disso e disso"). No máximo dois combos, para variar os motivos.
+ */
+function resumoDe(c: string, motivos: MotivoOrdenado[]): MotivoOrdenado | undefined {
+  const razoes: string[] = [];
+  for (const m of motivos) {
+    if (m.tom !== 'bom' || !m.resumo || razoes.includes(m.resumo)) continue;
+    if (m.resumo.startsWith('combo ') && razoes.filter((r) => r.startsWith('combo ')).length >= 2) continue;
+    razoes.push(m.resumo);
+    if (razoes.length === 3) break;
+  }
+  if (!razoes.length) return undefined;
+  return { texto: `Por que escolher ${nome(c)}: ${razoes.join(' · ')}`, tom: 'bom', ordem: 100 };
 }
 
 /** As dicas para os candidatos da vez. `fora`: quem não pode entrar (o trio e os banidos). */
@@ -120,9 +185,11 @@ export function dicasDoDraft(candidatos: string[], time: string[], fora: string[
   const lista = candidatos.map((id) => {
     const encaixe = Math.min(99, percentil(pool, nota(id)));
     const motivos = motivosDe(id, time);
+    const resumo = resumoDe(id, motivos);
     // um candidato que encaixa mal começa pelo aviso, mesmo tendo alguma combinação
     if (time.length && encaixe < 35) motivos.unshift({ texto: `Encaixa pouco: há opções bem melhores para este trio`, tom: 'alerta', ordem: 99 });
-    const detalhe = motivos;
+    // o "escolha porque" só para quem encaixa bem (para quem encaixa pouco, o aviso vem primeiro)
+    const detalhe = resumo && !(time.length && encaixe < 35) ? [resumo, ...motivos] : motivos;
     const limpa = (l: typeof motivos) => l.map(({ texto, tom }) => ({ texto, tom }));
     // na explicação maior, cada combinação vem com o porquê (a habilidade que liga a outra)
     const explica = (l: typeof motivos) => l.map(({ texto, tom, porque }) => ({ texto, tom, ...(porque ? { porque } : {}) }));
