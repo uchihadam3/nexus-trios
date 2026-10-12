@@ -563,6 +563,40 @@
    ],
    "bytes": 89602
   },
+  "auto9": {
+   "arquivo": "auto9.mp3",
+   "descricao": "básico do RoboCop: os servos e a rajada de três",
+   "versoes": [
+    0.0,
+    1.28,
+    2.6035,
+    3.8429
+   ],
+   "duracoes": [
+    1.2,
+    1.2435,
+    1.1594,
+    1.2183
+   ],
+   "bytes": 47132
+  },
+  "avada-verde": {
+   "arquivo": "avada-verde.mp3",
+   "descricao": "básico do Voldemort: o jato verde e o sibilo",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 52918
+  },
   "avante": {
    "arquivo": "avante.mp3",
    "descricao": "Avante: a fanfarra e o vento",
@@ -1464,6 +1498,23 @@
    ],
    "bytes": 64841
   },
+  "cajado-branco": {
+   "arquivo": "cajado-branco.mp3",
+   "descricao": "básico do Gandalf: o cajado no chão e a luz",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 51375
+  },
   "cajado-da-caveira": {
    "arquivo": "cajado-da-caveira.mp3",
    "descricao": "básico do Esqueleto: pancada do cajado e magia sinistra",
@@ -1753,6 +1804,23 @@
    ],
    "bytes": 44583
   },
+  "cauda-de-godzilla": {
+   "arquivo": "cauda-de-godzilla.mp3",
+   "descricao": "básico do Godzilla: o rugido e a cauda",
+   "versoes": [
+    0.0,
+    1.68,
+    3.418,
+    5.0439
+   ],
+   "duracoes": [
+    1.6,
+    1.658,
+    1.5459,
+    1.6244
+   ],
+   "bytes": 47517
+  },
   "caudas-giratorias": {
    "arquivo": "caudas-giratorias.mp3",
    "descricao": "básico do Tails: a hélice e os golpes",
@@ -1922,6 +1990,23 @@
     1.0152
    ],
    "bytes": 39237
+  },
+  "chicote-de-indy": {
+   "arquivo": "chicote-de-indy.mp3",
+   "descricao": "básico do Indy: o chicote e o soco",
+   "versoes": [
+    0.0,
+    1.18,
+    2.3969,
+    3.5397
+   ],
+   "duracoes": [
+    1.1,
+    1.1369,
+    1.0628,
+    1.1167
+   ],
+   "bytes": 40829
   },
   "chicote-de-vinha": {
    "arquivo": "chicote-de-vinha.mp3",
@@ -3878,6 +3963,23 @@
    ],
    "bytes": 51857
   },
+  "espada-pirata": {
+   "arquivo": "espada-pirata.mp3",
+   "descricao": "básico do Jack Sparrow: os cortes e a bússola",
+   "versoes": [
+    0.0,
+    1.3649,
+    2.7504,
+    4.0864
+   ],
+   "duracoes": [
+    1.2849,
+    1.3055,
+    1.256,
+    1.227
+   ],
+   "bytes": 53744
+  },
   "espadao": {
    "arquivo": "espadao.mp3",
    "descricao": "família espadao",
@@ -4235,6 +4337,23 @@
    ],
    "bytes": 58732
   },
+  "estalo-do-genio": {
+   "arquivo": "estalo-do-genio.mp3",
+   "descricao": "básico do Gênio: o estalo e a mola",
+   "versoes": [
+    0.0,
+    1.1632,
+    2.309,
+    3.3849
+   ],
+   "duracoes": [
+    1.0832,
+    1.0658,
+    0.9959,
+    1.1423
+   ],
+   "bytes": 40606
+  },
   "estalo-thanos": {
    "arquivo": "estalo-thanos.mp3",
    "descricao": "Equilíbrio: o estalo e o pó",
@@ -4370,6 +4489,23 @@
     1.8274
    ],
    "bytes": 71658
+  },
+  "expelliarmus": {
+   "arquivo": "expelliarmus.mp3",
+   "descricao": "básico do Harry: o feitiço vermelho",
+   "versoes": [
+    0.0,
+    1.28,
+    2.6035,
+    3.8429
+   ],
+   "duracoes": [
+    1.2,
+    1.2435,
+    1.1594,
+    1.2183
+   ],
+   "bytes": 44117
   },
   "experiencia-dourada": {
    "arquivo": "experiencia-dourada.mp3",
@@ -4863,6 +4999,23 @@
     1.1167
    ],
    "bytes": 43946
+  },
+  "floco-de-elsa": {
+   "arquivo": "floco-de-elsa.mp3",
+   "descricao": "básico da Elsa: o cristal e o estouro",
+   "versoes": [
+    0.0,
+    1.38,
+    2.8071,
+    4.1432
+   ],
+   "duracoes": [
+    1.3,
+    1.3471,
+    1.256,
+    1.3198
+   ],
+   "bytes": 53490
   },
   "flor-de-lapela": {
    "arquivo": "flor-de-lapela.mp3",
@@ -9080,6 +9233,23 @@
    ],
    "bytes": 45761
   },
+  "patada-de-scar": {
+   "arquivo": "patada-de-scar.mp3",
+   "descricao": "básico do Scar: o rosnado e as garras",
+   "versoes": [
+    0.0,
+    1.2999,
+    2.7268,
+    4.0628
+   ],
+   "duracoes": [
+    1.2199,
+    1.3469,
+    1.256,
+    1.3198
+   ],
+   "bytes": 57756
+  },
   "pedra-da-toph": {
    "arquivo": "pedra-da-toph.mp3",
    "descricao": "básico da Toph: a pisada, o bloco voando e a pedra se partindo",
@@ -10168,6 +10338,23 @@
    ],
    "bytes": 49246
   },
+  "raio-de-malevola": {
+   "arquivo": "raio-de-malevola.mp3",
+   "descricao": "básico da Malévola: o fogo verde e os espinhos",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 51565
+  },
   "raio-de-mana": {
    "arquivo": "raio-de-mana.mp3",
    "descricao": "básico da Gwen: o raio e os hexágonos",
@@ -10337,6 +10524,23 @@
     1.5228
    ],
    "bytes": 53766
+  },
+  "rajada-de-fuzil": {
+   "arquivo": "rajada-de-fuzil.mp3",
+   "descricao": "básico do Rambo: a rajada de fuzil",
+   "versoes": [
+    0.0,
+    1.38,
+    2.8071,
+    4.1432
+   ],
+   "duracoes": [
+    1.3,
+    1.3471,
+    1.256,
+    1.3198
+   ],
+   "bytes": 49689
   },
   "rajada-do-aang": {
    "arquivo": "rajada-do-aang.mp3",
@@ -11630,6 +11834,23 @@
    ],
    "bytes": 41803
   },
+  "soco-de-kong": {
+   "arquivo": "soco-de-kong.mp3",
+   "descricao": "básico do Kong: o peito e os punhos",
+   "versoes": [
+    0.0,
+    1.58,
+    3.2144,
+    4.7437
+   ],
+   "duracoes": [
+    1.5,
+    1.5544,
+    1.4493,
+    1.5228
+   ],
+   "bytes": 43016
+  },
   "soco-de-marinheiro": {
    "arquivo": "soco-de-marinheiro.mp3",
    "descricao": "básico do Popeye: manivela cômica e o soco com estrelinhas",
@@ -12157,6 +12378,23 @@
    ],
    "bytes": 14225
   },
+  "tapa-de-ogro": {
+   "arquivo": "tapa-de-ogro.mp3",
+   "descricao": "básico do Shrek: o tapa e o arroto",
+   "versoes": [
+    0.0,
+    1.2491,
+    2.501,
+    3.6932
+   ],
+   "duracoes": [
+    1.1691,
+    1.1719,
+    1.1122,
+    1.174
+   ],
+   "bytes": 41451
+  },
   "tapa-real": {
    "arquivo": "tapa-real.mp3",
    "descricao": "básico da Peach: o tapa estalado e os brilhos",
@@ -12513,6 +12751,23 @@
     1.1167
    ],
    "bytes": 45820
+  },
+  "tiro-do-exterminador": {
+   "arquivo": "tiro-do-exterminador.mp3",
+   "descricao": "básico do T-800: o HUD e a espingarda",
+   "versoes": [
+    0.0,
+    1.38,
+    2.8071,
+    4.1432
+   ],
+   "duracoes": [
+    1.3,
+    1.3471,
+    1.256,
+    1.3198
+   ],
+   "bytes": 47760
   },
   "tiro-nervoso": {
    "arquivo": "tiro-nervoso.mp3",

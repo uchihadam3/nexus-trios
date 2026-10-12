@@ -447,6 +447,34 @@
   "laco": true,
   "bytes": 64266
  },
+ "auto9": {
+  "descricao": "Básico do RoboCop: a grade da mira e a rajada de três",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 15022
+ },
+ "avada_verde": {
+  "descricao": "Básico do Voldemort: o jato verde e a Marca",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 29850
+ },
  "avante": {
   "descricao": "Capitão América · a estrela e o vento do Avante",
   "quadros": 12,
@@ -1315,6 +1343,20 @@
   "laco": false,
   "bytes": 36330
  },
+ "cajado_branco": {
+  "descricao": "Básico do Gandalf: o cajado no chão e a luz",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 41056
+ },
  "cajado_da_caveira": {
   "descricao": "Cajado da Caveira: o crânio de carneiro bate e solta faíscas mágicas num círculo",
   "quadros": 12,
@@ -1595,6 +1637,20 @@
   "laco": true,
   "bytes": 31100
  },
+ "cauda_de_godzilla": {
+  "descricao": "Básico do Godzilla: a cauda com as placas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 30302
+ },
  "caudas_giratorias": {
   "descricao": "Básico do Tails: as duas caudas girando",
   "quadros": 12,
@@ -1762,6 +1818,20 @@
   ],
   "laco": false,
   "bytes": 18368
+ },
+ "chicote_de_indy": {
+  "descricao": "Básico do Indiana Jones: o chicote e o soco",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 13926
  },
  "chicote_de_vinha": {
   "descricao": "Básico da Hera Venenosa: a vinha com folhas e os esporos",
@@ -3443,6 +3513,20 @@
   "laco": false,
   "bytes": 53748
  },
+ "espada_pirata": {
+  "descricao": "Básico do Jack Sparrow: os cortes tortos e a bússola",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 21746
+ },
  "espada_totsuka": {
   "descricao": "Itachi · o corte da Totsuka e o redemoinho de selamento no rival",
   "quadros": 12,
@@ -3751,6 +3835,20 @@
   "laco": false,
   "bytes": 62126
  },
+ "estalo_do_genio": {
+  "descricao": "Básico do Gênio: o estalo e a luva de boxe",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 24338
+ },
  "estalo_thanos": {
   "descricao": "Thanos · o estalo e o pó",
   "quadros": 12,
@@ -3890,6 +3988,20 @@
   ],
   "laco": false,
   "bytes": 87342
+ },
+ "expelliarmus": {
+  "descricao": "Básico do Harry: o feitiço vermelho",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 15434
  },
  "experiencia_dourada": {
   "descricao": "Giorno · as flores desabrochando e a luz",
@@ -4408,6 +4520,20 @@
   ],
   "laco": false,
   "bytes": 14246
+ },
+ "floco_de_elsa": {
+  "descricao": "Básico da Elsa: o floco de neve girando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 22290
  },
  "flor_de_lapela": {
   "descricao": "Flor de lapela do Coringa: esguicho em arco que respinga, chia e borbulha",
@@ -7839,6 +7965,20 @@
   "laco": false,
   "bytes": 38572
  },
+ "patada_de_scar": {
+  "descricao": "Básico do Scar: a patada com as garras",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 13694
+ },
  "pedra_bloco": {
   "descricao": "Toph · o bloco de pedra voando (laço, básico)",
   "quadros": 12,
@@ -8777,6 +8917,20 @@
   "laco": false,
   "bytes": 80878
  },
+ "raio_de_malevola": {
+  "descricao": "Básico da Malévola: o fogo verde e os espinhos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 18572
+ },
  "raio_de_mana": {
   "descricao": "Básico da Gwen: o raio e os hexágonos",
   "quadros": 12,
@@ -8930,6 +9084,20 @@
   ],
   "laco": false,
   "bytes": 31612
+ },
+ "rajada_de_fuzil": {
+  "descricao": "Básico do Rambo: a rajada e os cartuchos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 13042
  },
  "rajada_de_golpes": {
   "descricao": "vários golpes",
@@ -10051,6 +10219,20 @@
   "laco": false,
   "bytes": 33332
  },
+ "soco_de_kong": {
+  "descricao": "Básico do Kong: o peito e os punhos de cima",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 22134
+ },
  "soco_de_marinheiro": {
   "descricao": "Soco de marinheiro: o braço gira como manivela, soco com estrelas e âncora estampada",
   "quadros": 12,
@@ -10471,6 +10653,20 @@
   "laco": false,
   "bytes": 35174
  },
+ "tapa_de_ogro": {
+  "descricao": "Básico do Shrek: o tapa, a lama e o arroto",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 25136
+ },
  "tapa_real": {
   "descricao": "Básico da Peach: a luva, o tapa e os brilhinhos",
   "quadros": 12,
@@ -10834,6 +11030,20 @@
   ],
   "laco": false,
   "bytes": 13446
+ },
+ "tiro_do_exterminador": {
+  "descricao": "Básico do T-800: a mira vermelha e a espingarda",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 21264
  },
  "tiro_nervoso": {
   "descricao": "Básico do Morty: o tiro que erra e o de raspão",
