@@ -9141,6 +9141,20 @@
   "laco": false,
   "bytes": 16128
  },
+ "mu_aku_aku": {
+  "descricao": "Crash · a máscara Aku Aku",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 78552
+ },
  "mu_alegria": {
   "descricao": "Mabel · a estrela cadente e o arco-íris",
   "quadros": 12,
@@ -9294,6 +9308,20 @@
   ],
   "laco": false,
   "bytes": 21186
+ },
+ "mu_armadura_aprende": {
+  "descricao": "Vilgax · a armadura que aprende",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 32688
  },
  "mu_armadura_doom": {
   "descricao": "Doom Slayer · os fragmentos de armadura",
@@ -9575,6 +9603,20 @@
   "laco": false,
   "bytes": 31140
  },
+ "mu_byakugo": {
+  "descricao": "Tsunade · o Byakugō",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 57916
+ },
  "mu_cacador": {
   "descricao": "Blade · a glaive girando e os cortes",
   "quadros": 12,
@@ -9630,6 +9672,20 @@
   ],
   "laco": false,
   "bytes": 26944
+ },
+ "mu_cantada": {
+  "descricao": "Johnny Bravo · a cantada",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 24766
  },
  "mu_caos": {
   "descricao": "Yennefer · a magia do caos",
@@ -10093,6 +10149,34 @@
   "laco": false,
   "bytes": 20886
  },
+ "mu_crafting": {
+  "descricao": "Steve · a mesa de trabalho",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 26506
+ },
+ "mu_creeper_boom": {
+  "descricao": "Creeper · o BOOM",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 34238
+ },
  "mu_crescentes": {
   "descricao": "Cavaleiro da Lua · os crescentes de prata",
   "quadros": 12,
@@ -10163,6 +10247,34 @@
   "laco": false,
   "bytes": 34890
  },
+ "mu_dead_eye": {
+  "descricao": "Arthur Morgan · o Dead Eye",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 70254
+ },
+ "mu_dee_dee": {
+  "descricao": "Dexter · o laboratório",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 43244
+ },
  "mu_desarmado": {
   "descricao": "Indiana Jones · o chicote e o chapéu",
   "quadros": 12,
@@ -10204,6 +10316,20 @@
   ],
   "laco": false,
   "bytes": 31426
+ },
+ "mu_desejo_realizado": {
+  "descricao": "Cosmo e Wanda · as varinhas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 32250
  },
  "mu_desequilibrio": {
   "descricao": "Asa Noturna · os bastões e o pássaro azul",
@@ -10274,6 +10400,20 @@
   ],
   "laco": false,
   "bytes": 36372
+ },
+ "mu_desviou_sans": {
+  "descricao": "Sans · o olho azul e o osso",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 37476
  },
  "mu_devil_jin": {
   "descricao": "Jin · as asas do Devil e o raio da testa",
@@ -10513,6 +10653,20 @@
   "laco": false,
   "bytes": 38614
  },
+ "mu_energia_natural": {
+  "descricao": "Jiraiya · a energia natural",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 49602
+ },
  "mu_equilibrio": {
   "descricao": "Yoda · o sabre e o equilíbrio da Força",
   "quadros": 12,
@@ -10596,6 +10750,20 @@
   ],
   "laco": false,
   "bytes": 32214
+ },
+ "mu_escudo_rosa": {
+  "descricao": "Steven · o escudo rosa",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 43186
  },
  "mu_espada_mestra": {
   "descricao": "Link · o feixe da Espada Mestra",
@@ -10919,6 +11087,20 @@
   "laco": false,
   "bytes": 75346
  },
+ "mu_foco_alma": {
+  "descricao": "O Cavaleiro · o foco da alma",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 38286
+ },
  "mu_fogo_espalha": {
   "descricao": "Charizard · o fogo que se espalha",
   "quadros": 12,
@@ -10932,6 +11114,20 @@
   ],
   "laco": false,
   "bytes": 32598
+ },
+ "mu_fogo_sagrado": {
+  "descricao": "Sailor Mars · o fogo sagrado",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 40080
  },
  "mu_formula": {
   "descricao": "Plankton · a fórmula roubada",
@@ -11003,6 +11199,20 @@
   "laco": false,
   "bytes": 75862
  },
+ "mu_fus_ro_dah": {
+  "descricao": "Dovahkiin · Fus Ro Dah",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 26602
+ },
  "mu_fusao": {
   "descricao": "Sora · a Keyblade e as auras se juntando",
   "quadros": 12,
@@ -11018,7 +11228,7 @@
   "bytes": 52096
  },
  "mu_futuro": {
-  "descricao": "Trunks · a fenda do tempo",
+  "descricao": "Garnet · a visão do futuro",
   "quadros": 12,
   "grade": [
    3,
@@ -11029,7 +11239,7 @@
    192
   ],
   "laco": false,
-  "bytes": 59286
+  "bytes": 23526
  },
  "mu_galo": {
   "descricao": "Peter · a briga com o galo",
@@ -11506,6 +11716,20 @@
   ],
   "laco": false,
   "bytes": 40184
+ },
+ "mu_jogado_ao_futuro": {
+  "descricao": "Aku · o portal do tempo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 116310
  },
  "mu_joia": {
   "descricao": "Thanos · a Joia do Infinito encaixando",
@@ -12179,6 +12403,20 @@
   "laco": false,
   "bytes": 25990
  },
+ "mu_ovo_yoshi": {
+  "descricao": "Yoshi · a língua e o ovo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 21508
+ },
  "mu_pacifista": {
   "descricao": "Vash · as balas paradas e as penas",
   "quadros": 12,
@@ -12612,6 +12850,20 @@
   ],
   "laco": false,
   "bytes": 21368
+ },
+ "mu_quatro_bracos": {
+  "descricao": "Goro · os quatro braços",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 30900
  },
  "mu_raikousen": {
   "descricao": "Zero · o sabre e o Raikousen",
@@ -13173,6 +13425,34 @@
   "laco": false,
   "bytes": 35672
  },
+ "mu_super_carta": {
+  "descricao": "Cuphead · as cartas e o parry",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 17698
+ },
+ "mu_suprimentos": {
+  "descricao": "Ellie · os suprimentos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 13002
+ },
  "mu_suspeita": {
   "descricao": "L · o L e a barra da suspeita",
   "quadros": 12,
@@ -13634,6 +13914,20 @@
   ],
   "laco": false,
   "bytes": 13828
+ },
+ "mu_waka": {
+  "descricao": "Pac-Man · waka waka",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 19160
  },
  "mu_waku": {
   "descricao": "Anya · as ondas da leitura de mente e as estrelinhas",

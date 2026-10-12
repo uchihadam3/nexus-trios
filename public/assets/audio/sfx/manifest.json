@@ -10661,6 +10661,23 @@
    ],
    "bytes": 74858
   },
+  "mu-aku-aku": {
+   "arquivo": "mu-aku-aku.mp3",
+   "descricao": "Crash: Aku Aku",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 63692
+  },
   "mu-alegria": {
    "arquivo": "mu-alegria.mp3",
    "descricao": "Mabel: a alegria",
@@ -10847,6 +10864,23 @@
     1.9289
    ],
    "bytes": 61882
+  },
+  "mu-armadura-aprende": {
+   "arquivo": "mu-armadura-aprende.mp3",
+   "descricao": "Vilgax: a armadura",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 62130
   },
   "mu-armadura-doom": {
    "arquivo": "mu-armadura-doom.mp3",
@@ -11188,6 +11222,23 @@
    ],
    "bytes": 61126
   },
+  "mu-byakugo": {
+   "arquivo": "mu-byakugo.mp3",
+   "descricao": "Tsunade: o Byakugō",
+   "versoes": [
+    0.0,
+    2.28,
+    4.6398,
+    6.8454
+   ],
+   "duracoes": [
+    2.2,
+    2.2798,
+    2.1256,
+    2.2335
+   ],
+   "bytes": 69941
+  },
   "mu-cacador": {
    "arquivo": "mu-cacador.mp3",
    "descricao": "Blade: a glaive",
@@ -11255,6 +11306,23 @@
     2.132
    ],
    "bytes": 77784
+  },
+  "mu-cantada": {
+   "arquivo": "mu-cantada.mp3",
+   "descricao": "Johnny Bravo: a cantada",
+   "versoes": [
+    0.0,
+    1.5014,
+    3.0534,
+    4.5078
+   ],
+   "duracoes": [
+    1.4214,
+    1.4719,
+    1.3744,
+    1.443
+   ],
+   "bytes": 47682
   },
   "mu-caos": {
    "arquivo": "mu-caos.mp3",
@@ -11817,6 +11885,40 @@
    ],
    "bytes": 74878
   },
+  "mu-crafting": {
+   "arquivo": "mu-crafting.mp3",
+   "descricao": "Steve: crafting",
+   "versoes": [
+    0.0,
+    1.434,
+    2.8721,
+    4.2997
+   ],
+   "duracoes": [
+    1.354,
+    1.3581,
+    1.3476,
+    1.3434
+   ],
+   "bytes": 44595
+  },
+  "mu-creeper-boom": {
+   "arquivo": "mu-creeper-boom.mp3",
+   "descricao": "Creeper: BOOM",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 73325
+  },
   "mu-crescentes": {
    "arquivo": "mu-crescentes.mp3",
    "descricao": "Cavaleiro da Lua: os crescentes",
@@ -11902,6 +12004,40 @@
    ],
    "bytes": 88983
   },
+  "mu-dead-eye": {
+   "arquivo": "mu-dead-eye.mp3",
+   "descricao": "Arthur Morgan: Dead Eye",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 70626
+  },
+  "mu-dee-dee": {
+   "arquivo": "mu-dee-dee.mp3",
+   "descricao": "Dexter: o laboratório",
+   "versoes": [
+    0.0,
+    1.5784,
+    3.1409,
+    4.6389
+   ],
+   "duracoes": [
+    1.4984,
+    1.4825,
+    1.418,
+    1.5527
+   ],
+   "bytes": 61503
+  },
   "mu-desarmado": {
    "arquivo": "mu-desarmado.mp3",
    "descricao": "Indiana Jones: o chicote",
@@ -11952,6 +12088,23 @@
     2.101
    ],
    "bytes": 81512
+  },
+  "mu-desejo-realizado": {
+   "arquivo": "mu-desejo-realizado.mp3",
+   "descricao": "Cosmo e Wanda: o desejo",
+   "versoes": [
+    0.0,
+    1.9438,
+    3.858,
+    5.7482
+   ],
+   "duracoes": [
+    1.8638,
+    1.8342,
+    1.8103,
+    1.8016
+   ],
+   "bytes": 64418
   },
   "mu-desequilibrio": {
    "arquivo": "mu-desequilibrio.mp3",
@@ -12037,6 +12190,23 @@
     2.132
    ],
    "bytes": 70851
+  },
+  "mu-desviou-sans": {
+   "arquivo": "mu-desviou-sans.mp3",
+   "descricao": "Sans: desviou",
+   "versoes": [
+    0.0,
+    1.3609,
+    2.7118,
+    3.9474
+   ],
+   "duracoes": [
+    1.2809,
+    1.2709,
+    1.1556,
+    1.2494
+   ],
+   "bytes": 47716
   },
   "mu-devil-jin": {
    "arquivo": "mu-devil-jin.mp3",
@@ -12327,6 +12497,23 @@
    ],
    "bytes": 73982
   },
+  "mu-energia-natural": {
+   "arquivo": "mu-energia-natural.mp3",
+   "descricao": "Jiraiya: a energia natural",
+   "versoes": [
+    0.0,
+    2.28,
+    4.6398,
+    6.8454
+   ],
+   "duracoes": [
+    2.2,
+    2.2798,
+    2.1256,
+    2.2335
+   ],
+   "bytes": 73064
+  },
   "mu-equilibrio": {
    "arquivo": "mu-equilibrio.mp3",
    "descricao": "Yoda: o equilíbrio",
@@ -12428,6 +12615,23 @@
     1.8274
    ],
    "bytes": 75611
+  },
+  "mu-escudo-rosa": {
+   "arquivo": "mu-escudo-rosa.mp3",
+   "descricao": "Steven: o escudo rosa",
+   "versoes": [
+    0.0,
+    2.062,
+    4.1949,
+    6.1909
+   ],
+   "duracoes": [
+    1.982,
+    2.0528,
+    1.916,
+    2.0305
+   ],
+   "bytes": 57746
   },
   "mu-espada-mestra": {
    "arquivo": "mu-espada-mestra.mp3",
@@ -12820,6 +13024,23 @@
    ],
    "bytes": 97680
   },
+  "mu-foco-alma": {
+   "arquivo": "mu-foco-alma.mp3",
+   "descricao": "O Cavaleiro: o foco",
+   "versoes": [
+    0.0,
+    1.9017,
+    3.9585,
+    5.7721
+   ],
+   "duracoes": [
+    1.8217,
+    1.9768,
+    1.7336,
+    1.849
+   ],
+   "bytes": 67936
+  },
   "mu-fogo-espalha": {
    "arquivo": "mu-fogo-espalha.mp3",
    "descricao": "Charizard: o fogo que se espalha",
@@ -12836,6 +13057,23 @@
     1.9641
    ],
    "bytes": 70451
+  },
+  "mu-fogo-sagrado": {
+   "arquivo": "mu-fogo-sagrado.mp3",
+   "descricao": "Sailor Mars: o fogo sagrado",
+   "versoes": [
+    0.0,
+    1.9797,
+    3.9947,
+    5.8525
+   ],
+   "duracoes": [
+    1.8997,
+    1.935,
+    1.7778,
+    1.8692
+   ],
+   "bytes": 65380
   },
   "mu-formula": {
    "arquivo": "mu-formula.mp3",
@@ -12922,6 +13160,23 @@
    ],
    "bytes": 70756
   },
+  "mu-fus-ro-dah": {
+   "arquivo": "mu-fus-ro-dah.mp3",
+   "descricao": "Dovahkiin: Fus Ro Dah",
+   "versoes": [
+    0.0,
+    2.28,
+    4.6398,
+    6.8454
+   ],
+   "duracoes": [
+    2.2,
+    2.2798,
+    2.1256,
+    2.2335
+   ],
+   "bytes": 72473
+  },
   "mu-fusao": {
    "arquivo": "mu-fusao.mp3",
    "descricao": "Sora: a Forma de fusão",
@@ -12941,20 +13196,20 @@
   },
   "mu-futuro": {
    "arquivo": "mu-futuro.mp3",
-   "descricao": "Trunks: a fenda do tempo",
+   "descricao": "Garnet: a visão do futuro",
    "versoes": [
     0.0,
-    2.08,
-    4.2325,
-    6.2449
+    2.18,
+    4.4361,
+    6.5451
    ],
    "duracoes": [
-    2.0,
-    2.0725,
-    1.9324,
-    2.0305
+    2.1,
+    2.1761,
+    2.029,
+    2.132
    ],
-   "bytes": 98747
+   "bytes": 67685
   },
   "mu-galo": {
    "arquivo": "mu-galo.mp3",
@@ -13533,6 +13788,23 @@
     1.6466
    ],
    "bytes": 60734
+  },
+  "mu-jogado-ao-futuro": {
+   "arquivo": "mu-jogado-ao-futuro.mp3",
+   "descricao": "Aku: o portal do tempo",
+   "versoes": [
+    0.0,
+    2.38,
+    4.8434,
+    7.1456
+   ],
+   "duracoes": [
+    2.3,
+    2.3834,
+    2.2222,
+    2.335
+   ],
+   "bytes": 78638
   },
   "mu-joia": {
    "arquivo": "mu-joia.mp3",
@@ -14350,6 +14622,23 @@
    ],
    "bytes": 59207
   },
+  "mu-ovo-yoshi": {
+   "arquivo": "mu-ovo-yoshi.mp3",
+   "descricao": "Yoshi: o ovo",
+   "versoes": [
+    0.0,
+    1.3919,
+    2.8296,
+    4.1778
+   ],
+   "duracoes": [
+    1.3119,
+    1.3578,
+    1.2682,
+    1.3251
+   ],
+   "bytes": 38016
+  },
   "mu-pacifista": {
    "arquivo": "mu-pacifista.mp3",
    "descricao": "Vash: o pacifista",
@@ -14876,6 +15165,23 @@
     1.9289
    ],
    "bytes": 61948
+  },
+  "mu-quatro-bracos": {
+   "arquivo": "mu-quatro-bracos.mp3",
+   "descricao": "Goro: os quatro braços",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 74255
   },
   "mu-raikousen": {
    "arquivo": "mu-raikousen.mp3",
@@ -15557,6 +15863,40 @@
    ],
    "bytes": 50670
   },
+  "mu-super-carta": {
+   "arquivo": "mu-super-carta.mp3",
+   "descricao": "Cuphead: Super",
+   "versoes": [
+    0.0,
+    1.3548,
+    2.7545,
+    4.0888
+   ],
+   "duracoes": [
+    1.2748,
+    1.3198,
+    1.2542,
+    1.3165
+   ],
+   "bytes": 49056
+  },
+  "mu-suprimentos": {
+   "arquivo": "mu-suprimentos.mp3",
+   "descricao": "Ellie: os suprimentos",
+   "versoes": [
+    0.0,
+    1.6256,
+    3.2824,
+    4.8641
+   ],
+   "duracoes": [
+    1.5456,
+    1.5768,
+    1.5017,
+    1.5765
+   ],
+   "bytes": 68293
+  },
   "mu-suspeita": {
    "arquivo": "mu-suspeita.mp3",
    "descricao": "L: a suspeita",
@@ -16117,6 +16457,23 @@
     2.0305
    ],
    "bytes": 93344
+  },
+  "mu-waka": {
+   "arquivo": "mu-waka.mp3",
+   "descricao": "Pac-Man: waka waka",
+   "versoes": [
+    0.0,
+    1.9919,
+    4.0521,
+    5.9803
+   ],
+   "duracoes": [
+    1.9119,
+    1.9802,
+    1.8483,
+    1.9406
+   ],
+   "bytes": 56758
   },
   "mu-waku": {
    "arquivo": "mu-waku.mp3",
