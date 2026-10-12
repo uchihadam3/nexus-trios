@@ -116,23 +116,6 @@ def barreira_magica(T, t, rng):
     return G, H
 
 
-def escudo_fisico(T, t, rng):
-    """Escudo de mão: um brasão grande aparece na frente, o golpe bate e faíscas desviam."""
-    G, H = vazio(T)
-    env = apaga(t, 0.65, 1)
-    s = back(rel(t, 0, 0.2), 1.6)
-    pts = [(-0.38 * s, -0.42 * s), (0.38 * s, -0.42 * s), (0.36 * s, 0.05 * s), (0, 0.48 * s), (-0.36 * s, 0.05 * s)]
-    corpo = T.polys([(pts, 1)], 0.004)
-    borda = T.polyline(pts + [pts[0]], 0.025, 1)
-    emblema = T.polys([(estrela(0, -0.02 * s, 0.16 * s, -math.pi / 2, 5, 0.45), 1)], 0.003)
-    tt = rel(t, 0.25, 1)
-    choque = (T.flare(0, -0.05, 1.4, 0.7) * 2 + T.gauss(0, -0.05, 0.08) * 2) * some(t, 0.25, 0.55)
-    fa = faiscas(T, rng, t, 18, 0.8, 0.03, cone=(-2.6, -0.5), gravidade=0.3, inicio=0.25)
-    G += (corpo * 0.35 + borda * 1.5 + emblema * 0.9) * env + choque + fa
-    H += (borda * 0.7 + emblema * 0.5) * env + choque + fa * 0.6
-    return G, H
-
-
 def resgate(T, t, rng):
     """Resgate: um rastro curvo mergulha até o aliado, o pega e sobe num brilho protetor."""
     G, H = vazio(T)
@@ -690,7 +673,6 @@ REGISTRO = [
     ("velocidade", velocidade, GRANDE, "linhas de vento e asinhas", False),
     ("escudo_tech", escudo_tech, GRANDE, "parede de painéis hexagonais", False),
     ("barreira_magica", barreira_magica, GRANDE, "cúpula de runas", False),
-    ("escudo_fisico", escudo_fisico, GRANDE, "brasão de escudo", False),
     ("resgate", resgate, GRANDE, "mergulho de resgate", False),
     ("bencao", bencao, GRANDE, "penas e halo", False),
     ("lanche", lanche, GRANDE, "mordida, vapor e coração", False),

@@ -251,6 +251,20 @@
   "laco": false,
   "bytes": 27062
  },
+ "alcance_elastico": {
+  "descricao": "Mulher-Elástica · o braço esticando até o aliado",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 32216
+ },
  "alegria_contagiante": {
   "descricao": "Mickey · as orelhas, as notas e o confete",
   "quadros": 12,
@@ -880,6 +894,20 @@
   ],
   "laco": false,
   "bytes": 98022
+ },
+ "azula_preparo": {
+  "descricao": "Azula · a chama azul girando nos dedos (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 34096
  },
  "bala_de_canhao": {
   "descricao": "bala de canhão em viagem (+x)",
@@ -1945,6 +1973,20 @@
   "laco": false,
   "bytes": 41890
  },
+ "cade_meu_supertraje": {
+  "descricao": "Gelado · a nevasca e os blocos de gelo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 65896
+ },
  "cajado_branco": {
   "descricao": "Básico do Gandalf: o cajado no chão e a luz",
   "quadros": 12,
@@ -2672,6 +2714,20 @@
   ],
   "laco": false,
   "bytes": 18368
+ },
+ "chicote_de_fogo": {
+  "descricao": "Zuko · o chicote de fogo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 18766
  },
  "chicote_de_indy": {
   "descricao": "Básico do Indiana Jones: o chicote e o soco",
@@ -4479,6 +4535,48 @@
   "laco": false,
   "bytes": 54350
  },
+ "dobra_de_fogo": {
+  "descricao": "Korra · os chutes de fogo em arco",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 33368
+ },
+ "dobra_de_terra": {
+  "descricao": "Korra · as colunas de pedra e a rocha",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 23822
+ },
+ "dois_espadachins": {
+  "descricao": "Zuko · o X das duas espadas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 19112
+ },
  "dominio": {
   "descricao": "domínio de céu infinito",
   "quadros": 12,
@@ -4660,6 +4758,20 @@
   ],
   "laco": true,
   "bytes": 25852
+ },
+ "elastica_preparo": {
+  "descricao": "Mulher-Elástica · os braços como mola (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 38922
  },
  "elisios": {
   "descricao": "Hades · os campos Elísios",
@@ -4927,8 +5039,8 @@
   "laco": false,
   "bytes": 124582
  },
- "escudo_fisico": {
-  "descricao": "brasão de escudo",
+ "escudo_flexivel": {
+  "descricao": "Mulher-Elástica · o paraquedas de borracha",
   "quadros": 12,
   "grade": [
    3,
@@ -4939,7 +5051,7 @@
    192
   ],
   "laco": false,
-  "bytes": 46296
+  "bytes": 48032
  },
  "escudo_hyliano": {
   "descricao": "Link · o Escudo Hyliano, as faíscas e o corte",
@@ -6663,6 +6775,20 @@
   "laco": false,
   "bytes": 64840
  },
+ "forca_bruta": {
+  "descricao": "Sr. Incrível · as mãos apertando como prensa",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 23682
+ },
  "forca_de_aceleracao": {
   "descricao": "Flash · a Força de Aceleração no aliado",
   "quadros": 12,
@@ -6858,6 +6984,20 @@
   ],
   "laco": false,
   "bytes": 74812
+ },
+ "frozone_preparo": {
+  "descricao": "Gelado · as mãos geladas e os cristais (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 27386
  },
  "fuga_desesperada": {
   "descricao": "Salsicha · as pernas-roda e a poeira",
@@ -7685,6 +7825,20 @@
   "laco": false,
   "bytes": 47670
  },
+ "golpe_do_incrivel": {
+  "descricao": "Sr. Incrível · o punho gigante e o símbolo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 38846
+ },
  "golpe_do_potencial": {
   "descricao": "básico do Gohan: soco com aura branca e raios do SSJ2",
   "quadros": 12,
@@ -8272,6 +8426,20 @@
   ],
   "laco": false,
   "bytes": 29314
+ },
+ "incrivel_preparo": {
+  "descricao": "Sr. Incrível · os punhos e o símbolo (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 20688
  },
  "instinto": {
   "descricao": "Instinto Superior: aura prateada e vultos",
@@ -9308,20 +9476,6 @@
   ],
   "laco": false,
   "bytes": 78590
- },
- "lamina_de_fogo": {
-  "descricao": "lâmina de fogo",
-  "quadros": 12,
-  "grade": [
-   3,
-   4
-  ],
-  "tamanho": [
-   192,
-   192
-  ],
-  "laco": false,
-  "bytes": 43062
  },
  "lamina_de_miquella": {
   "descricao": "Malenia · o arco duplo e a vida voltando",
@@ -16757,20 +16911,6 @@
   "laco": false,
   "bytes": 16360
  },
- "nevasca": {
-  "descricao": "flocos em redemoinho",
-  "quadros": 12,
-  "grade": [
-   3,
-   4
-  ],
-  "tamanho": [
-   192,
-   192
-  ],
-  "laco": false,
-  "bytes": 80962
- },
  "nue": {
   "descricao": "Megumi · as asas do Nue e os raios em três pontos",
   "quadros": 12,
@@ -17176,6 +17316,20 @@
   ],
   "laco": false,
   "bytes": 55936
+ },
+ "parede_congelada": {
+  "descricao": "Gelado · a parede de gelo subindo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 75186
  },
  "passo_lateral": {
   "descricao": "Saitama · a capa varrendo e virando escudo",
@@ -17820,6 +17974,20 @@
   ],
   "laco": false,
   "bytes": 14608
+ },
+ "precisao_cruel": {
+  "descricao": "Azula · a linha de fogo azul num ponto só",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 28238
  },
  "pregos_amaldicoados": {
   "descricao": "Nobara · três pregos cravam e a energia prende",
@@ -18913,6 +19081,20 @@
   "laco": false,
   "bytes": 12954
  },
+ "rampa_de_gelo": {
+  "descricao": "Gelado · a rampa de gelo no ar",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 35464
+ },
  "rasengan_impacto": {
   "descricao": "Naruto · o Rasengan perfurando em espiral",
   "quadros": 12,
@@ -18982,6 +19164,20 @@
   ],
   "laco": false,
   "bytes": 87914
+ },
+ "redirecionar_relampago": {
+  "descricao": "Zuko · o raio entrando e saindo pelas mãos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 18812
  },
  "reflexo": {
   "descricao": "escudo de espelho hexagonal que devolve o golpe",
@@ -19109,6 +19305,20 @@
   "laco": false,
   "bytes": 94526
  },
+ "relampago_de_azula": {
+  "descricao": "Azula · o relâmpago azul dos dedos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 45518
+ },
  "relampago_de_plasma": {
   "descricao": "Aiolia · os raios acertando o rival",
   "quadros": 12,
@@ -19234,6 +19444,20 @@
   ],
   "laco": false,
   "bytes": 46072
+ },
+ "resgate_elastico": {
+  "descricao": "Mulher-Elástica · o braço que agarra e puxa",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 36218
  },
  "resgate_flash": {
   "descricao": "Flash · o raio dando a volta no aliado",
@@ -19836,6 +20060,20 @@
   ],
   "laco": true,
   "bytes": 12994
+ },
+ "segurar_o_impacto": {
+  "descricao": "Sr. Incrível · o símbolo na frente do trio",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 43184
  },
  "seis_dobras": {
   "descricao": "Zenitsu · seis riscos de raio de seis lados",
@@ -22846,5 +23084,19 @@
   ],
   "laco": true,
   "bytes": 11368
+ },
+ "zuko_preparo": {
+  "descricao": "Zuko · as duas espadas cruzadas (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 21040
  }
 }

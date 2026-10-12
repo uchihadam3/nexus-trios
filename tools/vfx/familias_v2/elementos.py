@@ -38,23 +38,6 @@ def sopro_de_fogo(T, t, rng):
     return G, H
 
 
-def nevasca(T, t, rng):
-    """Nevasca: flocos girando num redemoinho largo, véu de frio e geada no chão."""
-    G, H = vazio(T)
-    env = janela(t, 0, 0.15) * apaga(t, 0.7, 1)
-    flocos = []
-    for _ in range(70):
-        r0 = rng.uniform(0.1, 0.85)
-        a = rng.uniform(0, TAU) + t * (3.2 - 2 * r0)
-        flocos.append((math.cos(a) * r0, math.sin(a) * r0 * 0.6 + 0.1 * math.sin(a * 3), rng.uniform(0.3, 1)))
-    f = T.splats(flocos, 0.011)
-    veu = np.exp(-(T.RAD / 0.38) ** 2) * 0.3 * (0.7 + 0.3 * T.noise(np.random.default_rng(441), 0.08, 2))
-    geada = T.ring(0.5, 0.06, cy=0.45, squash=3.5) * 0.8 * janela(t, 0.2, 0.5)
-    G += (f * 1.5 + veu + geada) * env
-    H += (f * 1.0 + geada * 0.3) * env
-    return G, H
-
-
 def bloco_de_gelo(T, t, rng):
     """Bloco de gelo: um cristal prende o alvo, as faces brilham e rachaduras correm por dentro."""
     G, H = vazio(T)
@@ -357,7 +340,6 @@ def rugido(T, t, rng):
 
 REGISTRO = [
     ("sopro_de_fogo", sopro_de_fogo, GRANDE, "jato de fogo em cone", False),
-    ("nevasca", nevasca, GRANDE, "flocos em redemoinho", False),
     ("bloco_de_gelo", bloco_de_gelo, GRANDE, "bloco de gelo prendendo", False),
     ("tempestade", tempestade, GRANDE, "nuvem e raios de cima", False),
     ("raio_em_cadeia", raio_em_cadeia, GRANDE, "raio pulando em cadeia", False),

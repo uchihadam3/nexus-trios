@@ -182,13 +182,6 @@ def espadao(rng, v):
     return x
 
 
-def lamina_de_fogo(rng, v):
-    x = B.corte(rng, v)
-    x = np.concatenate([x, np.zeros(n_de(0.4))])
-    poe(x, B.fogo(rng, v)[: n_de(0.7)] * 0.6, 0.1)
-    return x
-
-
 def lamina_eletrica(rng, v):
     x = B.corte(rng, v)
     x = np.concatenate([x, np.zeros(n_de(0.3))])
@@ -416,15 +409,6 @@ def sopro_de_fogo(rng, v):
     return reverb(x, 0.4, 0.2, 4000)
 
 
-def nevasca(rng, v):
-    n = n_de(1.3)
-    t = np.arange(n) / SR
-    x = assobio(rng, n, 2500, 1200, 1.0, 0.6) * (0.6 + 0.4 * np.sin(2 * math.pi * 2.5 * t)) * env(n, 0.1, 0.6, segura=0.3) * 0.8
-    x += graos(rng, n, 50, 0.1, 1.1, 5000, 11000, 0.002) * 0.3
-    poe(x, B.gelo(rng, v)[: n_de(0.5)] * 0.4, 0.3)
-    return reverb(x, 0.6, 0.3, 7000)
-
-
 def bloco_de_gelo(rng, v):
     x = _z(1.1)
     for k in range(4):
@@ -457,14 +441,6 @@ def areia(rng, v):
     x += graos(rng, n, 120, 0.0, 1.2, 3000, 10000, 0.002) * 0.4
     poe(x, baque(n_de(0.4), 90, 45, 0.15, 0.2) * 0.6, 0.85)
     return reverb(x, 0.4, 0.2)
-
-
-def espinhos_de_terra(rng, v):
-    x = _z(1.1)
-    for k in range(6):
-        poe(x, B.terra(rng, v)[: n_de(0.35)] * 0.5, k * 0.05)
-    poe(x, B.terremoto(rng, v)[: n_de(0.9)] * 0.4, 0)
-    return x
 
 
 def metal(rng, v):
@@ -953,15 +929,6 @@ def martelo(rng, v):
     poe(x, _whoosh(rng, 0.15, 1800, 300, 0.5), 0)
     poe(x, B.esmagar(rng, v), 0.13, 0.85)
     poe(x, B._placa_de_metal(rng, n_de(0.5), 120, 3000, 60, 0.12) * 0.45, 0.13)
-    return x
-
-
-def escudo_fisico(rng, v):
-    """Ergue o escudo de mão: o ar do braço, o escudo encaixando com um "tonc" metálico abafado."""
-    x = _z(0.9)
-    poe(x, _whoosh(rng, 0.2, 500, 2000, 0.6, g=0.3), 0)
-    poe(x, B.bloqueio(rng, v) * 0.9, 0.2)
-    poe(x, passa(rosa(rng, n_de(0.3)), 80, 400, 2) * env(n_de(0.3), 0.002, 0.08) * 0.4, 0.2)
     return x
 
 

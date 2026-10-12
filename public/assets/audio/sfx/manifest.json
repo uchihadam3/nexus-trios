@@ -308,6 +308,23 @@
    ],
    "bytes": 56106
   },
+  "alcance-elastico": {
+   "arquivo": "alcance-elastico.mp3",
+   "descricao": "Mulher-Elástica: o alcance elástico",
+   "versoes": [
+    0.0,
+    1.6068,
+    3.2412,
+    4.7726
+   ],
+   "duracoes": [
+    1.5268,
+    1.5544,
+    1.4514,
+    1.5565
+   ],
+   "bytes": 41874
+  },
   "alegria-contagiante": {
    "arquivo": "alegria-contagiante.mp3",
    "descricao": "Mickey: a alegria contagiante",
@@ -1089,6 +1106,23 @@
     1.6244
    ],
    "bytes": 54682
+  },
+  "azula-preparo": {
+   "arquivo": "azula-preparo.mp3",
+   "descricao": "Azula: a chama azul nos dedos (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 60396
   },
   "bankai-ichigo": {
    "arquivo": "bankai-ichigo.mp3",
@@ -2229,6 +2263,23 @@
    ],
    "bytes": 43086
   },
+  "cade-meu-supertraje": {
+   "arquivo": "cade-meu-supertraje.mp3",
+   "descricao": "Gelado: Cadê meu supertraje?",
+   "versoes": [
+    0.0,
+    1.748,
+    3.5245,
+    5.2108
+   ],
+   "duracoes": [
+    1.668,
+    1.6965,
+    1.6063,
+    1.6265
+   ],
+   "bytes": 64336
+  },
   "cajado-branco": {
    "arquivo": "cajado-branco.mp3",
    "descricao": "básico do Gandalf: o cajado no chão e a luz",
@@ -3027,6 +3078,23 @@
     1.0152
    ],
    "bytes": 39237
+  },
+  "chicote-de-fogo": {
+   "arquivo": "chicote-de-fogo.mp3",
+   "descricao": "Zuko: o chicote de fogo",
+   "versoes": [
+    0.0,
+    1.0684,
+    2.2249,
+    3.3914
+   ],
+   "duracoes": [
+    0.9884,
+    1.0765,
+    1.0865,
+    1.071
+   ],
+   "bytes": 38357
   },
   "chicote-de-indy": {
    "arquivo": "chicote-de-indy.mp3",
@@ -5119,6 +5187,57 @@
    ],
    "bytes": 63807
   },
+  "dobra-de-fogo": {
+   "arquivo": "dobra-de-fogo.mp3",
+   "descricao": "Korra: a dobra de fogo",
+   "versoes": [
+    0.0,
+    1.5716,
+    3.2587,
+    4.6926
+   ],
+   "duracoes": [
+    1.4916,
+    1.6071,
+    1.3539,
+    1.5226
+   ],
+   "bytes": 48897
+  },
+  "dobra-de-terra": {
+   "arquivo": "dobra-de-terra.mp3",
+   "descricao": "Korra: a dobra de terra",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 63991
+  },
+  "dois-espadachins": {
+   "arquivo": "dois-espadachins.mp3",
+   "descricao": "Zuko: dois espadachins",
+   "versoes": [
+    0.0,
+    1.4788,
+    2.9307,
+    4.3215
+   ],
+   "duracoes": [
+    1.3988,
+    1.3718,
+    1.3109,
+    1.3843
+   ],
+   "bytes": 64598
+  },
   "dominio": {
    "arquivo": "dominio.mp3",
    "descricao": "família dominio",
@@ -5322,6 +5441,23 @@
     1.3198
    ],
    "bytes": 45289
+  },
+  "elastica-preparo": {
+   "arquivo": "elastica-preparo.mp3",
+   "descricao": "Mulher-Elástica: a mola (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 40153
   },
   "elisios": {
    "arquivo": "elisios.mp3",
@@ -5680,22 +5816,22 @@
    ],
    "bytes": 50590
   },
-  "escudo-fisico": {
-   "arquivo": "escudo-fisico.mp3",
-   "descricao": "família escudo fisico",
+  "escudo-flexivel": {
+   "arquivo": "escudo-flexivel.mp3",
+   "descricao": "Mulher-Elástica: o escudo flexível",
    "versoes": [
     0.0,
-    0.8034,
-    1.631,
-    2.4159
+    2.08,
+    4.2325,
+    6.2449
    ],
    "duracoes": [
-    0.7234,
-    0.7476,
-    0.7049,
-    0.7399
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
    ],
-   "bytes": 25926
+   "bytes": 51776
   },
   "escudo-hyliano": {
    "arquivo": "escudo-hyliano.mp3",
@@ -6359,23 +6495,6 @@
     0.8681
    ],
    "bytes": 35604
-  },
-  "espinhos-de-terra": {
-   "arquivo": "espinhos-de-terra.mp3",
-   "descricao": "família espinhos de terra",
-   "versoes": [
-    0.0,
-    1.18,
-    2.3999,
-    3.5427
-   ],
-   "duracoes": [
-    1.1,
-    1.1399,
-    1.0628,
-    1.1167
-   ],
-   "bytes": 42932
   },
   "espremer": {
    "arquivo": "espremer.mp3",
@@ -7601,6 +7720,23 @@
    ],
    "bytes": 64565
   },
+  "forca-bruta": {
+   "arquivo": "forca-bruta.mp3",
+   "descricao": "Sr. Incrível: a força bruta",
+   "versoes": [
+    0.0,
+    1.7584,
+    3.5872,
+    5.411
+   ],
+   "duracoes": [
+    1.6784,
+    1.7488,
+    1.7439,
+    1.6254
+   ],
+   "bytes": 57898
+  },
   "forca-de-aceleracao": {
    "arquivo": "forca-de-aceleracao.mp3",
    "descricao": "Além do tempo: a Força de Aceleração",
@@ -7855,6 +7991,23 @@
     1.5228
    ],
    "bytes": 58330
+  },
+  "frozone-preparo": {
+   "arquivo": "frozone-preparo.mp3",
+   "descricao": "Gelado: as mãos geladas (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 74892
   },
   "fuga-desesperada": {
    "arquivo": "fuga-desesperada.mp3",
@@ -8842,6 +8995,23 @@
    ],
    "bytes": 36233
   },
+  "golpe-do-incrivel": {
+   "arquivo": "golpe-do-incrivel.mp3",
+   "descricao": "Sr. Incrível: o golpe do Incrível",
+   "versoes": [
+    0.0,
+    2.348,
+    4.6438,
+    6.7108
+   ],
+   "duracoes": [
+    2.268,
+    2.2158,
+    1.987,
+    2.0588
+   ],
+   "bytes": 68533
+  },
   "golpe-do-potencial": {
    "arquivo": "golpe-do-potencial.mp3",
    "descricao": "básico de Gohan: soco pesado com chiado elétrico do SSJ2",
@@ -9572,6 +9742,23 @@
     1.477
    ],
    "bytes": 52448
+  },
+  "incrivel-preparo": {
+   "arquivo": "incrivel-preparo.mp3",
+   "descricao": "Sr. Incrível: os punhos (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 43632
   },
   "instinto": {
    "arquivo": "instinto.mp3",
@@ -10864,23 +11051,6 @@
     0.8218
    ],
    "bytes": 36541
-  },
-  "lamina-de-fogo": {
-   "arquivo": "lamina-de-fogo.mp3",
-   "descricao": "família lamina de fogo",
-   "versoes": [
-    0.0,
-    0.91,
-    1.849,
-    2.7319
-   ],
-   "duracoes": [
-    0.83,
-    0.859,
-    0.8029,
-    0.8422
-   ],
-   "bytes": 48731
   },
   "lamina-de-miquella": {
    "arquivo": "lamina-de-miquella.mp3",
@@ -19943,23 +20113,6 @@
    ],
    "bytes": 57046
   },
-  "nevasca": {
-   "arquivo": "nevasca.mp3",
-   "descricao": "família nevasca",
-   "versoes": [
-    0.0,
-    1.38,
-    2.8071,
-    4.1432
-   ],
-   "duracoes": [
-    1.3,
-    1.3471,
-    1.256,
-    1.3198
-   ],
-   "bytes": 72047
-  },
   "nocaute": {
    "arquivo": "nocaute.mp3",
    "descricao": "nocaute",
@@ -20401,6 +20554,23 @@
     1.8274
    ],
    "bytes": 51384
+  },
+  "parede-congelada": {
+   "arquivo": "parede-congelada.mp3",
+   "descricao": "Gelado: a parede congelada",
+   "versoes": [
+    0.0,
+    1.4298,
+    2.9323,
+    4.3484
+   ],
+   "duracoes": [
+    1.3498,
+    1.4225,
+    1.3361,
+    1.4952
+   ],
+   "bytes": 61784
   },
   "passo-lateral": {
    "arquivo": "passo-lateral.mp3",
@@ -21132,6 +21302,23 @@
     1.0891
    ],
    "bytes": 37515
+  },
+  "precisao-cruel": {
+   "arquivo": "precisao-cruel.mp3",
+   "descricao": "Azula: a precisão cruel",
+   "versoes": [
+    0.0,
+    1.8735,
+    3.7479,
+    5.567
+   ],
+   "duracoes": [
+    1.7935,
+    1.7944,
+    1.7391,
+    1.7785
+   ],
+   "bytes": 64311
   },
   "pregos-amaldicoados": {
    "arquivo": "pregos-amaldicoados.mp3",
@@ -22442,6 +22629,23 @@
    ],
    "bytes": 65662
   },
+  "rampa-de-gelo": {
+   "arquivo": "rampa-de-gelo.mp3",
+   "descricao": "Gelado: a rampa de gelo",
+   "versoes": [
+    0.0,
+    1.5449,
+    3.1416,
+    4.686
+   ],
+   "duracoes": [
+    1.4649,
+    1.5168,
+    1.4644,
+    1.549
+   ],
+   "bytes": 61976
+  },
   "rasengan": {
    "arquivo": "rasengan.mp3",
    "descricao": "Rasengan: o giro, a broca e o estouro",
@@ -22543,6 +22747,23 @@
     2.0305
    ],
    "bytes": 74331
+  },
+  "redirecionar-relampago": {
+   "arquivo": "redirecionar-relampago.mp3",
+   "descricao": "Zuko: redirecionar o relâmpago",
+   "versoes": [
+    0.0,
+    1.9325,
+    3.729,
+    5.502
+   ],
+   "duracoes": [
+    1.8525,
+    1.7165,
+    1.6929,
+    1.7978
+   ],
+   "bytes": 57690
   },
   "reflexo": {
    "arquivo": "reflexo.mp3",
@@ -22696,6 +22917,23 @@
     1.0152
    ],
    "bytes": 52309
+  },
+  "relampago-de-azula": {
+   "arquivo": "relampago-de-azula.mp3",
+   "descricao": "Azula: o relâmpago",
+   "versoes": [
+    0.0,
+    1.4419,
+    2.9525,
+    4.4305
+   ],
+   "duracoes": [
+    1.3619,
+    1.4306,
+    1.398,
+    1.4913
+   ],
+   "bytes": 43144
   },
   "relampago-de-plasma": {
    "arquivo": "relampago-de-plasma.mp3",
@@ -22883,6 +23121,23 @@
     1.1167
    ],
    "bytes": 37599
+  },
+  "resgate-elastico": {
+   "arquivo": "resgate-elastico.mp3",
+   "descricao": "Mulher-Elástica: o resgate",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2233
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9108,
+    2.0305
+   ],
+   "bytes": 51064
   },
   "resgate-flash": {
    "arquivo": "resgate-flash.mp3",
@@ -23614,6 +23869,23 @@
     1.4213
    ],
    "bytes": 60906
+  },
+  "segurar-o-impacto": {
+   "arquivo": "segurar-o-impacto.mp3",
+   "descricao": "Sr. Incrível: segurar o impacto",
+   "versoes": [
+    0.0,
+    2.18,
+    4.4361,
+    6.5451
+   ],
+   "duracoes": [
+    2.1,
+    2.1761,
+    2.029,
+    2.132
+   ],
+   "bytes": 63646
   },
   "seis-dobras": {
    "arquivo": "seis-dobras.mp3",
@@ -27286,6 +27558,23 @@
     1.4213
    ],
    "bytes": 26887
+  },
+  "zuko-preparo": {
+   "arquivo": "zuko-preparo.mp3",
+   "descricao": "Zuko: as espadas cruzadas (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 70329
   }
  }
 }

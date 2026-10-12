@@ -72,25 +72,6 @@ def _arco_corte(T, t, a0=-2.4, span=2.6, raio=0.62, larg=0.12, dur=0.25):
     return T.arc_band(raio, larg, a0, a0 + span * p + 0.01, squash=0.75, crescente=True), p
 
 
-def lamina_de_fogo(T, t, rng):
-    """Lâmina de fogo: o arco do corte pega fogo; as chamas sobem do rastro e brasas caem."""
-    G, H = vazio(T)
-    arco, p = _arco_corte(T, t)
-    env = apaga(t, 0.5, 1)
-    n = _subindo(T, 111, t, 0.05, 1.2)
-    sobe = T.warp(arco, n * 0.0, -0.12 * rel(t, 0.1, 1) - 0.04 * np.abs(n))
-    chama = np.maximum(arco, sobe * 0.9) * (0.7 + 0.3 * np.clip(n, -1, 1))
-    brasas = []
-    for _ in range(26):
-        f = (rng.uniform(0, 1) + t * 1.3) % 1
-        a = rng.uniform(-2.4, -2.4 + 2.6 * p)
-        brasas.append((math.cos(a) * 0.62 + rng.uniform(-0.05, 0.05), math.sin(a) * 0.62 * 0.75 - f * 0.4, (1 - f) * rng.uniform(0.3, 1)))
-    br = T.splats(brasas, 0.01)
-    G += T.glow(chama, 1.2, 1.3, 0.03) * env + br * 1.2
-    H += arco * 0.9 * env + br * 0.8
-    return G, H
-
-
 def lamina_eletrica(T, t, rng):
     """Lâmina elétrica: o corte corre com raios pulando ao longo do fio."""
     G, H = vazio(T)
@@ -195,7 +176,6 @@ def florete(T, t, rng):
 REGISTRO = [
     ("mil_cortes", mil_cortes, GRANDE, "mil cortes e X final", False),
     ("espadao", espadao, GRANDE, "espadão que racha o chão", False),
-    ("lamina_de_fogo", lamina_de_fogo, GRANDE, "lâmina de fogo", False),
     ("lamina_eletrica", lamina_eletrica, GRANDE, "lâmina elétrica", False),
     ("lamina_sombria", lamina_sombria, GRANDE, "lâmina sombria", False),
     ("motosserra", motosserra, GRANDE, "dentes de serra girando", False),
