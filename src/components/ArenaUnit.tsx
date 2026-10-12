@@ -111,7 +111,9 @@ export function ArenaUnit({fighter:f,battle,beat,onInspect,numbers,threatened,li
   const advantageActive=!!advantageRule&&c.skills.some(skill=>skill.charge.some(rule=>rule.on===advantageRule));
   const basicStyle=source&&beat?.event.kind==='basic'?`basic-${beat.family}`:'';
   const buffs=f.statuses.filter(s=>s.id!=='summon'&&statuses[s.id].tone!=='negativo'),debuffs=f.statuses.filter(s=>statuses[s.id].tone==='negativo');
-  const hpPct=Math.max(0,Math.min(100,100*f.hp/f.maxHp)),shieldPct=Math.min(100-hpPct,100*shield/f.maxHp);
+  const hpPct=Math.max(0,Math.min(100,100*f.hp/f.maxHp)),shieldPct=Math.min(100,100*shield/f.maxHp),
+    // sem espaço depois da vida, o escudo encosta na ponta direita da barra e fica por cima da vida: o dano o come da esquerda para a direita
+    shieldLeft=Math.min(hpPct,100-shieldPct),shieldPorCima=shieldLeft<hpPct-0.5;
   const marcas=[
     out&&'is-out',renascendo&&'is-renascendo',congelado&&'is-frozen',dormindo&&'is-asleep',levantou&&'is-revived',preparing&&'is-casting',hit&&'is-hit',acting&&'is-acting',basicStyle,critical&&'is-critical',
     (shielded||blocked)&&'is-helped',linkedSource&&'is-source',linkedTarget&&'is-target',knocked&&'is-newly-out',
@@ -167,7 +169,7 @@ export function ArenaUnit({fighter:f,battle,beat,onInspect,numbers,threatened,li
     <div className="unit-vitals">
       <div className="unit-bar" role="progressbar" aria-label={`Vida de ${c.name}`} aria-valuenow={Math.round(f.hp)} aria-valuemax={f.maxHp} aria-valuemin={0}>
         <span className="unit-bar-hp" style={{width:`${hpPct}%`}}/>
-        {shieldPct>0&&<span className="unit-bar-shield" style={{left:`${hpPct}%`,width:`${shieldPct}%`}}/>}
+        {shieldPct>0&&<span className={`unit-bar-shield${shieldPorCima?' por-cima':''}`} style={{left:`${shieldLeft}%`,width:`${shieldPct}%`}}/>}
       </div>
       <div className="unit-meta"><span>{renascendo?'RENASCENDO':out?'FORA DA LUTA':critical?'VIDA BAIXA':shield>0?<><Shield size={9}/>{Math.ceil(shield)}</>:'VIDA'}</span>{numbers&&!out&&<b>{Math.ceil(f.hp)}</b>}</div>
       {knowledge&&<span className={`light-knowledge ${knowledge}`}>{knowledge==='vulnerable'?'Vulnerável à Death Note':'Imune à execução'}</span>}

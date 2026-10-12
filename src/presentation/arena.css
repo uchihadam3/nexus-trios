@@ -178,7 +178,8 @@
 .arena-v2 .unit-bar{position:relative;height:8px;border-radius:99px;background:#0a1015;box-shadow:inset 0 1px 2px #000,0 0 0 1px #ffffff1f;overflow:hidden}
 .arena-v2 .unit-bar-hp{position:absolute;left:0;top:0;bottom:0;border-radius:99px;background:linear-gradient(90deg,var(--team-deep),var(--team));box-shadow:inset 0 1px #ffffff55;transition:width .45s cubic-bezier(.2,.75,.2,1)}
 .arena-v2 .unit-bar:after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent 0 calc(20% - 1px),#0a101599 calc(20% - 1px) 20%);pointer-events:none}
-.arena-v2 .unit-bar-shield{position:absolute;top:0;bottom:0;background:repeating-linear-gradient(-45deg,#e8f6ff 0 3px,#a9d3ff 3px 6px);box-shadow:0 0 6px #bfe2ff;transition:width .35s,left .45s}
+.arena-v2 .unit-bar-shield{position:absolute;top:0;bottom:0;background:repeating-linear-gradient(-45deg,#e8f6ff 0 3px,#a9d3ff 3px 6px);box-shadow:0 0 6px #bfe2ff;z-index:1;transition:width .35s,left .35s}
+.arena-v2 .unit-bar-shield.por-cima{border-radius:0 99px 99px 0;background:repeating-linear-gradient(-45deg,#f4fbffee 0 3px,#a9d3ffcc 3px 6px);box-shadow:-2px 0 0 #fff,-4px 0 6px #bfe2ffaa,0 0 6px #bfe2ff}
 .arena-v2 .is-critical .unit-bar-hp{background:linear-gradient(90deg,#8a1f2a,#ff6a6a);animation:hp-critical 1s ease-in-out infinite}
 @keyframes hp-critical{50%{filter:brightness(1.4)}}
 .arena-v2 .unit-meta{display:flex;justify-content:space-between;align-items:center;gap:4px;font-size:8.5px;font-weight:700;letter-spacing:.6px;color:var(--muted);line-height:1}
