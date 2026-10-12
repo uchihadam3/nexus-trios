@@ -208,7 +208,6 @@ REGISTRO = [
     ("esfera_espiral", esfera_espiral, GRANDE, "esfera em espiral moendo", False),
     ("buraco_negro", buraco_negro, GRANDE, "buraco negro sugando", False),
     ("gravidade", gravidade, GRANDE, "pressão de gravidade", False),
-    ("supernova", supernova, GRANDE, "sol que explode", False),
     ("pulso_emp", pulso_emp, GRANDE, "pulso eletromagnético", False),
     ("pilar", pilar, GRANDE, "pilar de energia subindo", False),
     ("atracao", atracao, GRANDE, "tudo puxado para um ponto", False),

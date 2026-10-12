@@ -184,23 +184,6 @@ def feixe_ki(T, t, rng):
     return G, H
 
 
-def canhao_de_energia(T, t, rng):
-    """Canhão de energia: feixe muito largo com anéis de compressão correndo para o alvo (faixa)."""
-    G, H = vazio(T)
-    larg = 0.08
-    perfil = np.exp(-np.abs(T.V / larg) ** 3)
-    nucleo = np.exp(-(T.V / (larg * 0.45)) ** 2)
-    aneis = T.zero()
-    for k in range(5):
-        x = -1 + ((t + k / 5) % 1) * 2
-        aneis += np.exp(-((T.U - x) / 0.012) ** 2) * smooth(-np.abs(T.V), -larg * 1.6, -larg * 0.9) * 0.9
-    ponta = smooth(T.U, -0.99, -0.9) * smooth(-T.U, -0.99, -0.95)
-    G += (perfil * 1.6 + nucleo * 1.2 + aneis) * ponta
-    H += (nucleo * 1.6 + aneis * 0.5) * ponta
-    return G, H
-
-
-# ------------------------------------------------------------------ impactos
 def cravar(T, t, rng):
     """Cravar: um baque seco, a haste tremendo no alvo e lascas para trás."""
     G, H = vazio(T)
@@ -375,7 +358,6 @@ REGISTRO = [
     ("carga_ki", carga_ki, MEDIA, "preparo: ki estalando", True),
     ("laser", laser, FAIXA, "laser fino (faixa)", True),
     ("feixe_ki", feixe_ki, FAIXA, "feixe de ki com hélice (faixa)", True),
-    ("canhao_de_energia", canhao_de_energia, FAIXA, "canhão de energia (faixa)", True),
     ("cravar", cravar, GRANDE, "flecha cravando", False),
     ("espingarda", espingarda, GRANDE, "nove impactos espalhados", False),
     ("teia_rede", teia_rede, GRANDE, "rede de teia", False),

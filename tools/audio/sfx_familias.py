@@ -349,14 +349,6 @@ def laser(rng, v):
 
 
 # ================================================================== energia
-def canhao_de_energia(rng, v):
-    x = _z(1.3)
-    n = n_de(1.0)
-    poe(x, satura(seno(varre(60, 90, n, 0.5), n), 4) * env(n, 0.01, 0.6, segura=0.4) * 0.5 + B.feixe(rng, v)[:n] * 0.6, 0)
-    poe(x, B.explosao(rng, v)[: n_de(0.5)] * 0.7, 0.8)
-    return x
-
-
 def buraco_negro(rng, v):
     n = n_de(1.4)
     x = assobio(rng, n, 4000, 80, 0.6, 0.6) * env(n, 0.05, 0.7) * 0.7
@@ -371,15 +363,6 @@ def gravidade(rng, v):
     x = satura(seno(varre(80, 40, n, 0.7), n), 3) * env(n, 0.03, 0.6) * (0.7 + 0.3 * np.sin(2 * math.pi * 6 * t)) * 0.6
     poe(x, baque(n_de(0.6), 55, 28, 0.3, 0.3) * 1.0, 0.15)
     return reverb(x, 0.6, 0.2, 2500)
-
-
-def supernova(rng, v):
-    x = _z(1.6)
-    n = n_de(0.5)
-    poe(x, assobio(rng, n, 200, 6000, 1.5, 0.5) * sobe_e_some(n, 0.95, 1.2) * 0.6, 0)
-    poe(x, B.explosao(rng, v), 0.45, 1.2)
-    poe(x, modal(n_de(1.0), nota(84), rng=rng, **SINO) * env(n_de(1.0), 0.01, 0.6) * 0.2, 0.45)
-    return reverb(x, 0.8, 0.3)
 
 
 def pulso_emp(rng, v):

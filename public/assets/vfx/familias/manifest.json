@@ -685,6 +685,20 @@
   "laco": false,
   "bytes": 15022
  },
+ "autobots_avante": {
+  "descricao": "Optimus Prime · o símbolo Autobot e a onda no trio",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 64600
+ },
  "avada_verde": {
   "descricao": "Básico do Voldemort: o jato verde e a Marca",
   "quadros": 12,
@@ -1244,6 +1258,20 @@
   ],
   "laco": true,
   "bytes": 34920
+ },
+ "biscoito_scooby": {
+  "descricao": "Scooby-Doo · o biscoito-osso e os corações",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 39790
  },
  "blasters_elementais": {
   "descricao": "Senhor das Estrelas: dois blasters alternando tiros de plasma",
@@ -1987,19 +2015,19 @@
   "laco": false,
   "bytes": 61472
  },
- "canhao_de_energia": {
-  "descricao": "canhão de energia (faixa)",
+ "canhao_de_fusao": {
+  "descricao": "Megatron · o feixe roxo varrendo os rivais",
   "quadros": 12,
   "grade": [
    3,
    4
   ],
   "tamanho": [
-   512,
-   96
+   192,
+   192
   ],
-  "laco": true,
-  "bytes": 26642
+  "laco": false,
+  "bytes": 27904
  },
  "canhao_incinerador": {
   "descricao": "Genos · o fogo largo dos canhões",
@@ -3415,6 +3443,20 @@
   "laco": false,
   "bytes": 39384
  },
+ "correria": {
+  "descricao": "Salsicha · a nuvem de poeira e as pegadas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 42478
+ },
  "cortador_de_plasma": {
   "descricao": "Isaac: mira de três pontos e lâmina de plasma",
   "quadros": 12,
@@ -4367,6 +4409,20 @@
   "laco": false,
   "bytes": 75780
  },
+ "dominio_decepticon": {
+  "descricao": "Megatron · o símbolo Decepticon esmagando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 33430
+ },
  "doomslayer_preparo": {
   "descricao": "Doom Slayer · o punho em chamas e as runas (Preparo, laço)",
   "quadros": 12,
@@ -4731,6 +4787,20 @@
   "laco": false,
   "bytes": 51062
  },
+ "escudo_de_energon": {
+  "descricao": "Optimus Prime · o escudo hexagonal de energon",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 43410
+ },
  "escudo_de_vontade": {
   "descricao": "Lanterna Verde · o construto de escudo com o símbolo",
   "quadros": 12,
@@ -5038,6 +5108,20 @@
   ],
   "laco": false,
   "bytes": 12934
+ },
+ "espada_de_sangue": {
+  "descricao": "Finn · o corte vermelho e as gotas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 22482
  },
  "espada_do_futuro": {
   "descricao": "Trunks · os cortes em grade da espada",
@@ -5374,6 +5458,20 @@
   ],
   "laco": false,
   "bytes": 44936
+ },
+ "espremer": {
+  "descricao": "Bob Esponja · a esponja espremida e as bolhas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 49462
  },
  "esquiva": {
   "descricao": "vultos que escapam para os lados e riscos de vento",
@@ -5809,6 +5907,20 @@
   "laco": false,
   "bytes": 126480
  },
+ "explosao_verde": {
+  "descricao": "Docinho · a bola verde que estoura",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 61286
+ },
  "faca_de_combate": {
   "descricao": "Leon · os cortes em X e o Preparo quebrando",
   "quadros": 12,
@@ -6214,6 +6326,20 @@
   ],
   "laco": false,
   "bytes": 115878
+ },
+ "finn_preparo": {
+  "descricao": "Finn · a espada no alto e as faíscas (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 14230
  },
  "flecha": {
   "descricao": "flecha em viagem (+x)",
@@ -6634,6 +6760,20 @@
   ],
   "laco": false,
   "bytes": 74812
+ },
+ "fuga_desesperada": {
+  "descricao": "Salsicha · as pernas-roda e a poeira",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 23888
  },
  "full_cowl": {
   "descricao": "Básico do Deku: o Full Cowl e o soco",
@@ -10289,6 +10429,20 @@
   "laco": false,
   "bytes": 38488
  },
+ "matematico": {
+  "descricao": "Finn · a explosão de estrelas do Matemático!",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 50644
+ },
  "medo": {
   "descricao": "olhos na sombra",
   "quadros": 12,
@@ -10302,6 +10456,20 @@
   ],
   "laco": false,
   "bytes": 83840
+ },
+ "megatron_preparo": {
+  "descricao": "Megatron · o canhão de fusão carregando (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 18118
  },
  "memoria_emprestada": {
   "descricao": "Vampira · os poderes copiados em fila",
@@ -16645,6 +16813,20 @@
   "laco": false,
   "bytes": 36870
  },
+ "optimus_preparo": {
+  "descricao": "Optimus Prime · a Matriz da Liderança acesa (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 17668
+ },
  "orbe": {
   "descricao": "esfera de energia em viagem (+x)",
   "quadros": 12,
@@ -17821,6 +18003,20 @@
   "laco": false,
   "bytes": 78934
  },
+ "punho_heroico": {
+  "descricao": "Finn · o punho e as estrelinhas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 24308
+ },
  "punho_lendario": {
   "descricao": "básico do Broly: soco brutal, aura verde explodindo e rachaduras",
   "quadros": 12,
@@ -18773,6 +18969,20 @@
   "laco": false,
   "bytes": 119348
  },
+ "rendicao_decepticon": {
+  "descricao": "Megatron · a onda roxa que esmaga todos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 53538
+ },
  "repulsor_stark_voo": {
   "descricao": "Homem de Ferro · o repulsor voando (laço)",
   "quadros": 12,
@@ -18912,6 +19122,20 @@
   ],
   "laco": false,
   "bytes": 43020
+ },
+ "rifle_ion": {
+  "descricao": "Optimus Prime · o feixe azul de íons",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 26166
  },
  "rinnegan": {
   "descricao": "Pain: olho do Rinnegan e ondas de repulsão para fora",
@@ -19207,6 +19431,20 @@
   "laco": true,
   "bytes": 25724
  },
+ "sanduiche_gigante": {
+  "descricao": "Salsicha · o sanduíche de muitos andares",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 32422
+ },
  "sangue": {
   "descricao": "respingo de sangue",
   "quadros": 12,
@@ -19360,6 +19598,20 @@
   ],
   "laco": false,
   "bytes": 12034
+ },
+ "scooby_preparo": {
+  "descricao": "Scooby-Doo · tremendo de medo (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 24968
  },
  "scorpion_preparo": {
   "descricao": "Scorpion · a caveira em chamas (Preparo, laço)",
@@ -19556,6 +19808,20 @@
   ],
   "laco": false,
   "bytes": 41332
+ },
+ "sequencia_furiosa": {
+  "descricao": "Docinho · os socos de vários lados",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 40896
  },
  "serra_eletrica": {
   "descricao": "Básico do Leatherface: a motosserra balançando",
@@ -20159,6 +20425,20 @@
   "laco": false,
   "bytes": 55662
  },
+ "soco_relampago": {
+  "descricao": "Docinho · o rastro verde e o soco",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 24032
+ },
  "soco_serio": {
   "descricao": "sopro gigante para a frente",
   "quadros": 12,
@@ -20355,6 +20635,20 @@
   "laco": false,
   "bytes": 29444
  },
+ "sorte_de_cachorro": {
+  "descricao": "Scooby-Doo · o barril e as caixas caindo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 30438
+ },
  "spawn_preparo": {
   "descricao": "Spawn · os olhos e o fogo verde (Preparo, laço)",
   "quadros": 12,
@@ -20480,20 +20774,6 @@
   ],
   "laco": false,
   "bytes": 29454
- },
- "supernova": {
-  "descricao": "sol que explode",
-  "quadros": 12,
-  "grade": [
-   3,
-   4
-  ],
-  "tamanho": [
-   192,
-   192
-  ],
-  "laco": false,
-  "bytes": 184744
  },
  "supremacia_wesker": {
   "descricao": "Wesker · os olhos vermelhos e o soco",
@@ -21432,6 +21712,20 @@
   ],
   "laco": false,
   "bytes": 26760
+ },
+ "tropeco": {
+  "descricao": "Scooby-Doo · o rolamento e a interrogação",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 25786
  },
  "trovao_chamado": {
   "descricao": "Thor · os raios caindo nele (Preparo, laço)",

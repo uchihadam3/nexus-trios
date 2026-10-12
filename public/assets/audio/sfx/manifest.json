@@ -852,6 +852,23 @@
    ],
    "bytes": 47132
   },
+  "autobots-avante": {
+   "arquivo": "autobots-avante.mp3",
+   "descricao": "Optimus Prime: Autobots, avante",
+   "versoes": [
+    0.0,
+    2.2855,
+    4.5978,
+    6.761
+   ],
+   "duracoes": [
+    2.2055,
+    2.2323,
+    2.0832,
+    2.2964
+   ],
+   "bytes": 74609
+  },
   "avada-verde": {
    "arquivo": "avada-verde.mp3",
    "descricao": "básico do Voldemort: o jato verde e o sibilo",
@@ -1497,6 +1514,23 @@
     1.4213
    ],
    "bytes": 55350
+  },
+  "biscoito-scooby": {
+   "arquivo": "biscoito-scooby.mp3",
+   "descricao": "Scooby-Doo: o Biscoito Scooby",
+   "versoes": [
+    0.0,
+    1.7009,
+    3.523,
+    5.166
+   ],
+   "duracoes": [
+    1.6209,
+    1.7422,
+    1.5629,
+    1.7593
+   ],
+   "bytes": 43052
   },
   "blasters-elementais": {
    "arquivo": "blasters-elementais.mp3",
@@ -2263,22 +2297,22 @@
    ],
    "bytes": 46500
   },
-  "canhao-de-energia": {
-   "arquivo": "canhao-de-energia.mp3",
-   "descricao": "família canhao de energia",
+  "canhao-de-fusao": {
+   "arquivo": "canhao-de-fusao.mp3",
+   "descricao": "Megatron: o canhão de fusão",
    "versoes": [
     0.0,
-    1.38,
-    2.8071,
-    4.1432
+    2.18,
+    4.4361,
+    6.5451
    ],
    "duracoes": [
-    1.3,
-    1.3471,
-    1.256,
-    1.3198
+    2.1,
+    2.1761,
+    2.029,
+    2.132
    ],
-   "bytes": 54517
+   "bytes": 60348
   },
   "canhao-incinerador": {
    "arquivo": "canhao-incinerador.mp3",
@@ -3912,6 +3946,23 @@
    ],
    "bytes": 60181
   },
+  "correria": {
+   "arquivo": "correria.mp3",
+   "descricao": "Salsicha: a correria",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 66913
+  },
   "cortador-de-plasma": {
    "arquivo": "cortador-de-plasma.mp3",
    "descricao": "básico de Isaac: bipes da mira, pshew do plasma e chiado",
@@ -4983,6 +5034,23 @@
    ],
    "bytes": 62065
   },
+  "dominio-decepticon": {
+   "arquivo": "dominio-decepticon.mp3",
+   "descricao": "Megatron: o domínio Decepticon",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 54925
+  },
   "doomslayer-preparo": {
    "arquivo": "doomslayer-preparo.mp3",
    "descricao": "Doom Slayer: o punho em chamas (antes do golpe)",
@@ -5442,6 +5510,23 @@
    ],
    "bytes": 47023
   },
+  "escudo-de-energon": {
+   "arquivo": "escudo-de-energon.mp3",
+   "descricao": "Optimus Prime: o escudo de energon",
+   "versoes": [
+    0.0,
+    1.3747,
+    2.7955,
+    4.1278
+   ],
+   "duracoes": [
+    1.2947,
+    1.3408,
+    1.2522,
+    1.3142
+   ],
+   "bytes": 55626
+  },
   "escudo-de-vontade": {
    "arquivo": "escudo-de-vontade.mp3",
    "descricao": "Lanterna Verde: o anel e o construto",
@@ -5816,6 +5901,23 @@
    ],
    "bytes": 47082
   },
+  "espada-de-sangue": {
+   "arquivo": "espada-de-sangue.mp3",
+   "descricao": "Finn: a espada de sangue",
+   "versoes": [
+    0.0,
+    1.1943,
+    2.4832,
+    3.6922
+   ],
+   "duracoes": [
+    1.1143,
+    1.2089,
+    1.129,
+    1.2067
+   ],
+   "bytes": 42629
+  },
   "espada-do-futuro": {
    "arquivo": "espada-do-futuro.mp3",
    "descricao": "Espada do futuro: os oito cortes",
@@ -6189,6 +6291,23 @@
     1.1167
    ],
    "bytes": 42932
+  },
+  "espremer": {
+   "arquivo": "espremer.mp3",
+   "descricao": "Bob Esponja: espremer",
+   "versoes": [
+    0.0,
+    1.3366,
+    2.7232,
+    3.9967
+   ],
+   "duracoes": [
+    1.2566,
+    1.3065,
+    1.1936,
+    1.2632
+   ],
+   "bytes": 47008
   },
   "esquiva": {
    "arquivo": "esquiva.mp3",
@@ -6649,6 +6768,23 @@
    ],
    "bytes": 86756
   },
+  "explosao-verde": {
+   "arquivo": "explosao-verde.mp3",
+   "descricao": "Docinho: a explosão verde",
+   "versoes": [
+    0.0,
+    2.1167,
+    4.1981,
+    6.1437
+   ],
+   "duracoes": [
+    2.0367,
+    2.0014,
+    1.8656,
+    1.996
+   ],
+   "bytes": 60992
+  },
   "faca-de-combate": {
    "arquivo": "faca-de-combate.mp3",
    "descricao": "Leon: os cortes, o aparo e o Preparo quebrando",
@@ -7056,6 +7192,23 @@
     1.3198
    ],
    "bytes": 51242
+  },
+  "finn-preparo": {
+   "arquivo": "finn-preparo.mp3",
+   "descricao": "Finn: a espada no alto (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 76174
   },
   "flecha": {
    "arquivo": "flecha.mp3",
@@ -7583,6 +7736,23 @@
     1.5228
    ],
    "bytes": 58330
+  },
+  "fuga-desesperada": {
+   "arquivo": "fuga-desesperada.mp3",
+   "descricao": "Salsicha: a fuga desesperada",
+   "versoes": [
+    0.0,
+    1.98,
+    4.0289,
+    5.9446
+   ],
+   "duracoes": [
+    1.9,
+    1.9689,
+    1.8357,
+    1.9289
+   ],
+   "bytes": 65446
   },
   "full-cowl": {
    "arquivo": "full-cowl.mp3",
@@ -12055,6 +12225,23 @@
    ],
    "bytes": 53714
   },
+  "matematico": {
+   "arquivo": "matematico.mp3",
+   "descricao": "Finn: Matemático!",
+   "versoes": [
+    0.0,
+    1.8051,
+    3.6641,
+    5.3433
+   ],
+   "duracoes": [
+    1.7251,
+    1.7789,
+    1.5992,
+    1.7811
+   ],
+   "bytes": 62789
+  },
   "medo": {
    "arquivo": "medo.mp3",
    "descricao": "família medo",
@@ -12071,6 +12258,23 @@
     1.4213
    ],
    "bytes": 37782
+  },
+  "megatron-preparo": {
+   "arquivo": "megatron-preparo.mp3",
+   "descricao": "Megatron: o canhão carregando (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 65974
   },
   "memoria-emprestada": {
    "arquivo": "memoria-emprestada.mp3",
@@ -19824,6 +20028,23 @@
    ],
    "bytes": 70729
   },
+  "optimus-preparo": {
+   "arquivo": "optimus-preparo.mp3",
+   "descricao": "Optimus Prime: a Matriz (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 41189
+  },
   "ossos-de-sans": {
    "arquivo": "ossos-de-sans.mp3",
    "descricao": "básico do Sans: o olho e os ossos",
@@ -21167,6 +21388,23 @@
    ],
    "bytes": 40612
   },
+  "punho-heroico": {
+   "arquivo": "punho-heroico.mp3",
+   "descricao": "Finn: o punho heroico",
+   "versoes": [
+    0.0,
+    1.4259,
+    2.8988,
+    4.3081
+   ],
+   "duracoes": [
+    1.3459,
+    1.3929,
+    1.3293,
+    1.3979
+   ],
+   "bytes": 44989
+  },
   "punho-lendario": {
    "arquivo": "punho-lendario.mp3",
    "descricao": "básico de Broly: soco grave, saturado e esmagador, com pedras caindo",
@@ -22289,6 +22527,23 @@
    ],
    "bytes": 61775
   },
+  "rendicao-decepticon": {
+   "arquivo": "rendicao-decepticon.mp3",
+   "descricao": "Megatron: a rendição",
+   "versoes": [
+    0.0,
+    2.48,
+    5.047,
+    7.4459
+   ],
+   "duracoes": [
+    2.4,
+    2.487,
+    2.3188,
+    2.4365
+   ],
+   "bytes": 76001
+  },
   "renova-buff": {
    "arquivo": "renova-buff.mp3",
    "descricao": "buff renovado",
@@ -22526,6 +22781,23 @@
     1.1847
    ],
    "bytes": 45139
+  },
+  "rifle-ion": {
+   "arquivo": "rifle-ion.mp3",
+   "descricao": "Optimus Prime: o rifle íon",
+   "versoes": [
+    0.0,
+    1.4269,
+    2.9015,
+    4.2839
+   ],
+   "duracoes": [
+    1.3469,
+    1.3946,
+    1.3023,
+    1.3669
+   ],
+   "bytes": 42388
   },
   "rinnegan": {
    "arquivo": "rinnegan.mp3",
@@ -22867,6 +23139,23 @@
    ],
    "bytes": 78203
   },
+  "sanduiche-gigante": {
+   "arquivo": "sanduiche-gigante.mp3",
+   "descricao": "Salsicha: o sanduíche gigante",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 65542
+  },
   "sangue": {
    "arquivo": "sangue.mp3",
    "descricao": "família sangue",
@@ -23036,6 +23325,23 @@
     2.0305
    ],
    "bytes": 67189
+  },
+  "scooby-preparo": {
+   "arquivo": "scooby-preparo.mp3",
+   "descricao": "Scooby-Doo: o medo (Preparo)",
+   "versoes": [
+    0.0,
+    1.4142,
+    2.899,
+    4.2404
+   ],
+   "duracoes": [
+    1.3342,
+    1.4048,
+    1.2614,
+    1.3808
+   ],
+   "bytes": 63425
   },
   "scorpion-preparo": {
    "arquivo": "scorpion-preparo.mp3",
@@ -23257,6 +23563,23 @@
     1.8315
    ],
    "bytes": 79972
+  },
+  "sequencia-furiosa": {
+   "arquivo": "sequencia-furiosa.mp3",
+   "descricao": "Docinho: a sequência furiosa",
+   "versoes": [
+    0.0,
+    1.98,
+    4.0289,
+    5.9446
+   ],
+   "duracoes": [
+    1.9,
+    1.9689,
+    1.8357,
+    1.9289
+   ],
+   "bytes": 70167
   },
   "serra-eletrica": {
    "arquivo": "serra-eletrica.mp3",
@@ -23938,6 +24261,23 @@
    ],
    "bytes": 19265
   },
+  "soco-relampago": {
+   "arquivo": "soco-relampago.mp3",
+   "descricao": "Docinho: o soco relâmpago",
+   "versoes": [
+    0.0,
+    0.9968,
+    2.0256,
+    2.9933
+   ],
+   "duracoes": [
+    0.9168,
+    0.9489,
+    0.8877,
+    0.9307
+   ],
+   "bytes": 34385
+  },
   "soco-serio": {
    "arquivo": "soco-serio.mp3",
    "descricao": "família soco serio",
@@ -24159,6 +24499,23 @@
    ],
    "bytes": 45997
   },
+  "sorte-de-cachorro": {
+   "arquivo": "sorte-de-cachorro.mp3",
+   "descricao": "Scooby-Doo: a sorte de cachorro",
+   "versoes": [
+    0.0,
+    1.7339,
+    3.6631,
+    5.5811
+   ],
+   "duracoes": [
+    1.6539,
+    1.8492,
+    1.838,
+    1.8118
+   ],
+   "bytes": 57952
+  },
   "spawn-preparo": {
    "arquivo": "spawn-preparo.mp3",
    "descricao": "Spawn: o necroplasma (Preparo)",
@@ -24311,23 +24668,6 @@
     2.2335
    ],
    "bytes": 75712
-  },
-  "supernova": {
-   "arquivo": "supernova.mp3",
-   "descricao": "família supernova",
-   "versoes": [
-    0.0,
-    1.68,
-    3.418,
-    5.0439
-   ],
-   "duracoes": [
-    1.6,
-    1.658,
-    1.5459,
-    1.6244
-   ],
-   "bytes": 62687
   },
   "supremacia-wesker": {
    "arquivo": "supremacia-wesker.mp3",
@@ -25433,6 +25773,23 @@
     1.4005
    ],
    "bytes": 50789
+  },
+  "tropeco": {
+   "arquivo": "tropeco.mp3",
+   "descricao": "Scooby-Doo: o tropeço",
+   "versoes": [
+    0.0,
+    1.98,
+    4.0289,
+    5.9446
+   ],
+   "duracoes": [
+    1.9,
+    1.9689,
+    1.8357,
+    1.9289
+   ],
+   "bytes": 59440
   },
   "trovao-chamado": {
    "arquivo": "trovao-chamado.mp3",
