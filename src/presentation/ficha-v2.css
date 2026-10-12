@@ -1,65 +1,51 @@
-/* Ficha do lutador (remake). */
-.ficha-v2 .character-sheet{display:grid;gap:12px;padding:18px 16px 20px;background:radial-gradient(ellipse 90% 260px at 30% 0%,color-mix(in srgb,var(--character),transparent 80%),transparent 100%),linear-gradient(180deg,#121b16,#0d1411)}
-.fv-hero{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:center;padding-right:40px}
-.fv-retrato{width:104px;height:104px;border-radius:26px;overflow:hidden;box-shadow:0 0 0 3px #0c140f,0 0 0 5px color-mix(in srgb,var(--character),transparent 25%),0 0 30px color-mix(in srgb,var(--character),transparent 55%);animation:fv-retrato .5s cubic-bezier(.2,1.5,.4,1) both}
-.fv-retrato .portrait{width:100%;height:100%}
-@keyframes fv-retrato{from{scale:.6;opacity:0;rotate:-8deg}to{scale:1;opacity:1;rotate:0deg}}
-.fv-universo{font-size:10.5px;font-weight:850;letter-spacing:2px;color:color-mix(in srgb,var(--character),#fff 30%)}
-.fv-titulo h2{margin:2px 0 4px;font-size:clamp(24px,7vw,32px);line-height:1;font-weight:900;letter-spacing:-.5px}
-.fv-titulo p{margin:0;font-size:13px;line-height:1.4;color:#b9c9b5}
-.fv-atributos{display:grid;gap:7px}
-.fv-atributo{display:grid;grid-template-columns:auto auto 1fr;grid-template-areas:'icone nome valor' 'barra barra barra';align-items:center;gap:4px 8px}
-.fv-attr-icone{grid-area:icone;display:grid;place-items:center;width:24px;height:24px;border-radius:8px;color:var(--attr);background:color-mix(in srgb,var(--attr),#0d1411 82%)}
-.fv-attr-nome{grid-area:nome;font-size:12.5px;font-weight:800;color:#dfe9db}
-.fv-atributo b{grid-area:valor;justify-self:end;font-size:12.5px;color:#b9c9b5;font-weight:700}
-.fv-atributo i{grid-area:barra;height:8px;border-radius:99px;background:#ffffff12;overflow:hidden}
-.fv-atributo em{display:block;height:100%;width:var(--fill);border-radius:99px;background:linear-gradient(90deg,color-mix(in srgb,var(--attr),#000 25%),var(--attr));box-shadow:0 0 10px color-mix(in srgb,var(--attr),transparent 50%);animation:fv-barra .8s .15s cubic-bezier(.2,1,.3,1) both}
-@keyframes fv-barra{from{width:0}}
-.fv-selo{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:850;letter-spacing:1.8px;color:#9fb39b}
-.fv-traco,.fv-basico,.fv-habilidade,.fv-fraco,.fv-aviso,.fv-unica{border-radius:18px;padding:12px 14px}
-/* Mecânica única: o cartão que chama mais atenção da ficha (só aquele personagem tem) */
-.fv-unica{position:relative;overflow:hidden;background:linear-gradient(135deg,#b06bff33,#ff6bb526 55%,#ffd36b1f);box-shadow:inset 0 0 0 1.5px #d39bff99,0 0 22px #b06bff33}
-.fv-unica::after{content:'';position:absolute;inset:-40% -10%;background:linear-gradient(100deg,transparent 40%,#ffffff22 50%,transparent 60%);animation:fv-brilho 4.5s ease-in-out infinite;pointer-events:none}
-@keyframes fv-brilho{0%,60%{transform:translateX(-60%)}100%{transform:translateX(60%)}}
-@media (prefers-reduced-motion:reduce){.fv-unica::after{animation:none;display:none}}
-.fv-unica .fv-selo{color:#e6c2ff;letter-spacing:.04em}
-.fv-unica h3{margin:4px 0 4px;font-size:19px;background:linear-gradient(90deg,#f3dcff,#ffd36b);-webkit-background-clip:text;background-clip:text;color:transparent}
-.fv-unica p{margin:0;font-size:14px;line-height:1.45;color:#f1e8ff}
-.fv-traco{background:linear-gradient(160deg,#ffd36b1f,#ffd36b08);box-shadow:inset 0 0 0 1px #ffd36b55}
-.fv-traco .fv-selo{color:#ffd36b}
-.fv-traco h3,.fv-basico h3{margin:4px 0 6px;font-size:18px}
-.fv-chips .fv-jeito{background:#ffb4702a;box-shadow:inset 0 0 0 1px #ffb47055}
-.fv-traco small{color:#d9c48a}
-.fv-basico{background:#101915;box-shadow:inset 0 0 0 1px #ffffff12}
-.fv-habilidades{display:grid;gap:10px;min-width:0}
-.fv-habilidade{display:grid;gap:8px;background:#101915;box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--character),transparent 70%)}
-.fv-habilidade>header{display:flex;align-items:center;gap:12px}
-.fv-icone{display:grid;place-items:center;width:60px;height:60px;border-radius:16px;background:#0a100c;box-shadow:inset 0 0 0 1px #ffffff1a,0 0 16px color-mix(in srgb,var(--character),transparent 70%)}
-.fv-habilidade h3{margin:2px 0 0;font-size:18px}
-.fv-regras{display:grid;gap:6px;padding-top:6px;border-top:1px solid #ffffff10}
-.fv-regra{display:grid;grid-template-columns:auto auto 1fr;gap:6px;align-items:start;font-size:12.5px;line-height:1.4;color:#c9d7c4}
-.fv-regra svg{margin-top:2px;color:#b8e282}
-.fv-regra b{color:#b8e282}
-.fv-pilulas{display:flex;flex-wrap:wrap;gap:6px}
-.fv-pilulas>span{display:inline-flex;align-items:center;gap:5px;padding:5px 10px;border-radius:99px;background:#0a100c;box-shadow:inset 0 0 0 1px #ffffff14;font-size:12px;color:#cfdcc9}
-.fv-pilulas>span b{color:#fff}
-.fv-fraco{display:flex;flex-direction:column;gap:8px;background:linear-gradient(160deg,#ff8a7a1c,#ff8a7a08);box-shadow:inset 0 0 0 1px #ff8a7a55;color:#f3c9c0}
-.fv-fraco .fv-selo{color:#ff9d8f}
-.fv-fraco ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
-.fv-fraco li{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-.fv-fraco-contra{display:inline-flex;align-items:center;gap:5px;padding:4px 10px 4px 8px;border-radius:999px;background:#ff8a7a26;box-shadow:inset 0 0 0 1px #ff8a7a66;color:#ffd6cf;font-size:13px;font-weight:800;white-space:nowrap}
-.fv-fraco-contra svg{color:#ff8a7a}
-.fv-fraco-motivo{font-size:12.5px;color:#e9c4bd;line-height:1.3}
-.fv-forte{background:linear-gradient(160deg,#7ae0a01c,#7ae0a008);box-shadow:inset 0 0 0 1px #7ae0a055;color:#c6f0d4}
-.fv-forte .fv-selo{color:#8ff0b0}
-.fv-forte .fv-fraco-contra{background:#7ae0a026;box-shadow:inset 0 0 0 1px #7ae0a066;color:#d4f7e0}
-.fv-forte .fv-fraco-contra svg{color:#7ae0a0}
-.fv-forte .fv-fraco-motivo{color:#c4e9d0}
-.fv-aviso{display:flex;gap:10px;background:#8fd3ff12;box-shadow:inset 0 0 0 1px #8fd3ff44}
-@media (prefers-reduced-motion:reduce){.fv-retrato,.fv-atributo em{animation:none}}
+/*
+ * A ficha do lutador (src/components/CharacterModal.tsx) no mesmo desenho da
+ * ficha da batalha: as peças vêm de inspetor-v2.css (.bi2-*); aqui fica só a
+ * caixa do diálogo e o que a ficha tem a mais (a frase, os atributos e os
+ * pontos forte e fraco).
+ */
+.character-modal.ficha-v3{
+  width:min(460px,calc(100vw - 16px));max-height:min(90dvh,760px);padding:0;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:none;
+  border:0;border-radius:24px;color:#eef5e8;
+  background:linear-gradient(168deg,#19261f,#0e1512 70%);
+  box-shadow:0 20px 80px #000a;
+  animation:bi2-entra .42s cubic-bezier(.2,1.25,.35,1) both
+}
+.character-modal.ficha-v3::-webkit-scrollbar{display:none}
+.ficha-v3 .modal-inner.bi2{position:relative;padding:14px 14px 16px;border-radius:24px;box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--cor),transparent 55%);background:radial-gradient(130% 170px at 0% 0%,color-mix(in srgb,var(--cor),transparent 70%),transparent 72%)}
+/* a faixa de cima, na cor do personagem */
+.ficha-v3 .modal-inner.bi2::before{content:'';display:block;height:3px;margin:-14px 22px 11px;border-radius:0 0 4px 4px;background:linear-gradient(90deg,var(--cor),color-mix(in srgb,var(--cor),#fff 45%));box-shadow:0 0 12px var(--cor)}
+.ficha-v3 .bi2-nome h2{margin:2px 0 0;font-size:24px;line-height:1.08;font-weight:900;letter-spacing:-.4px;text-shadow:0 2px 12px #0008}
+.ficha-v3 .bi2-retrato{--ring:color-mix(in srgb,var(--cor),#fff 25%);width:92px;height:92px}
+.ficha-v3 .bi2-anel{--ring:color-mix(in srgb,var(--cor),#fff 35%)}
+.fv3-ideia{margin:5px 0 0;font-size:12.5px;line-height:1.4;color:#b9c9b5}
+.ficha-v3 .role-chips{margin:0}
 
-.fv-chips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}
-.fv-chips>span{display:inline-block;padding:6px 10px;border-radius:10px;background:#0a100c;box-shadow:inset 0 0 0 1px #ffffff14;font-size:13px;line-height:1.35;color:#e4f1dc}
-.fv-traco,.fv-basico,.fv-habilidade{min-width:0;overflow-wrap:anywhere}
-.ficha-v2 .character-sheet{overflow-x:hidden}
-.fv-traco small.ativa-quando{display:block;margin-top:8px;font-size:13px;color:#ffe3a0}
+/* os atributos medidos contra o elenco inteiro, no desenho da barra de Vida da batalha */
+.fv3-barras{display:grid;gap:6px}
+.fv3-barras .bi2-barra{height:22px;margin-top:0}
+.fv3-barras .bi2-barra>span b{margin-left:auto;padding-left:6px}
+.bi2-barra.mente>i{background:linear-gradient(90deg,#2b7fb8,#8fd3ff);box-shadow:0 0 10px #8fd3ff77}
+.bi2-barra.mente>span b{margin-left:auto;margin-right:5px}
+.fv3-barras .bi2-barra.ritmo>i{transition:none}
+
+/* os cartões a mais */
+.bi2-cartao.aviso{--selo:#8fd3ff}
+.bi2-cartao.forte{--selo:#8ff0b0}
+.bi2-cartao.fraco{--selo:#ff9d8f}
+.fv3-pontos{list-style:none;margin:6px 0 0;padding:0;display:grid;gap:7px}
+.fv3-pontos li{display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px}
+.fv3-pontos li>span{display:inline-flex;align-items:center;gap:5px;padding:4px 10px 4px 8px;border-radius:99px;background:color-mix(in srgb,var(--selo),transparent 84%);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--selo),transparent 55%);color:#fff;font-size:12.5px;font-weight:800;white-space:nowrap}
+.fv3-pontos li>span svg{color:var(--selo)}
+.fv3-pontos li>small{font-size:12.5px;line-height:1.35;color:#d0ddca}
+.ficha-v3 .bi2-hab{cursor:pointer}
+.ficha-v3 .bi2-hab>small{letter-spacing:.8px;font-size:10px}
+.ficha-v3 .bi2-situacao{max-width:100%;white-space:normal;line-height:1.3}
+
+@media (max-width:380px){
+  .ficha-v3 .bi2-nome h2{font-size:20px}
+  .ficha-v3 .bi2-retrato{width:74px;height:74px}
+}
+@media (prefers-reduced-motion:reduce){
+  .character-modal.ficha-v3,.ficha-v3 *,.ficha-v3 *::before,.ficha-v3 *::after{animation:none!important}
+}

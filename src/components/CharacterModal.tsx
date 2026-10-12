@@ -1,5 +1,5 @@
-import { useEffect,useRef,type CSSProperties } from 'react';
-import { X, HeartPulse, Gauge, Brain, Info, Sparkles, Swords, TriangleAlert, Zap, Hourglass, Snowflake, Target, Scissors, Bomb, TrendingDown, Turtle, Sword, Skull, Clock, Shuffle, Heart, Shield, Lock, Timer, BatteryCharging, ShieldPlus, HandHeart, Mountain, Rocket, Award, CircleCheck, type LucideIcon, Crown } from 'lucide-react';
+import { useEffect,useRef,useState,type CSSProperties } from 'react';
+import { X, HeartPulse, Gauge, Brain, Info, Sparkles, Swords, TriangleAlert, Zap, Hourglass, Snowflake, Target, Scissors, Bomb, TrendingDown, Turtle, Sword, Skull, Clock, Shuffle, Heart, Shield, Lock, Timer, BatteryCharging, ShieldPlus, HandHeart, Mountain, Rocket, Award, CircleCheck, Flame, ChevronLeft, type LucideIcon } from 'lucide-react';
 import type { Character } from '../engine/types';
 import { characters } from '../data/characters';
 import { Portrait } from './Portrait';
@@ -25,85 +25,115 @@ export function intelligenceLabel(value:number){
 /* A régua dos atributos é o elenco inteiro: a barra cheia é o maior do jogo. */
 const VIDA_MAX=Math.max(...characters.map(c=>c.hp));
 const INTERVALO_MIN=Math.min(...characters.map(c=>c.interval)),INTERVALO_MAX=Math.max(...characters.map(c=>c.interval));
-
-function Atributo({icone,nome,valor,fracao,cor}:{icone:React.ReactNode;nome:string;valor:string;fracao:number;cor:string}){
-  return <div className="fv-atributo" style={{'--attr':cor,'--fill':`${Math.round(Math.max(.06,Math.min(1,fracao))*100)}%`} as CSSProperties}>
-    <span className="fv-attr-icone">{icone}</span><span className="fv-attr-nome">{nome}</span><b>{valor}</b><i aria-hidden><em/></i>
-  </div>;
-}
+const pct=(x:number)=>Math.round(Math.max(.06,Math.min(1,x))*100);
 
 /*
- * A ficha do lutador (remake).
- *
- * Topo com retrato grande e brilho na cor do personagem, as etiquetas, três
- * barras de atributo medidas contra o elenco inteiro, o traço num cartão
- * dourado ("sempre ativo"), o básico numa linha, as habilidades em cartões
- * com ícone grande e selos de Carga, Preparo e Resfriamento, e o ponto fraco
- * num cartão vermelho. Os termos do jogo continuam tocáveis.
+ * A ficha do lutador, no mesmo desenho da ficha da batalha (pedido do jogador:
+ * "tem que deixar a ficha do personagem igual da batalha, que da batalha tá
+ * bonita"). Mesmas peças de src/components/BattleInspector.tsx e
+ * inspetor-v2.css: o retrato no anel, as barras, as três habilidades em botões
+ * que abrem a ficha da habilidade (com a fileira para trocar e voltar), e os
+ * cartões com selo colorido. Aqui não há luta: os anéis ficam cheios e as barras
+ * medem o personagem contra o elenco inteiro.
  */
 export function CharacterModal({character:c,onClose}:{character:Character;onClose:()=>void}){
-  const ref=useRef<HTMLDialogElement>(null),trait=presentTrait(c.trait);
+  const ref=useRef<HTMLDialogElement>(null);
+  const [hab,setHab]=useState(-1);
   useEffect(()=>{ref.current?.showModal();return()=>ref.current?.close();},[]);
-  const intelligence=c.intelligence??50;
-  return <dialog ref={ref} className="character-modal ficha-v2" onCancel={onClose} onClick={e=>{if(e.target===e.currentTarget)onClose();}}><div className="modal-inner character-sheet" style={{'--character':c.color} as CSSProperties}>
-    <button className="icon-button modal-close" aria-label="Fechar detalhes" onClick={onClose}><X size={20}/></button>
-    <header className="fv-hero">
-      <div className="fv-retrato"><Portrait character={c}/></div>
-      <div className="fv-titulo"><span className="fv-universo">{universoDaFicha(c)}</span><h2>{c.name}</h2><p>{c.idea}</p></div>
+  useEffect(()=>{ref.current?.scrollTo?.({top:0});},[hab]);
+  return <dialog ref={ref} className="character-modal ficha-v3" onCancel={onClose} onClick={e=>{if(e.target===e.currentTarget)onClose();}}>
+    <div key={hab} className="modal-inner bi2" style={{'--cor':c.color} as CSSProperties}>
+      <button className="bi2-fechar" aria-label="Fechar detalhes" onClick={onClose}><X size={18}/></button>
+      {hab>=0?<FichaDaHabilidade c={c} i={hab} onSelect={setHab}/>:<FichaDoLutador c={c} onSelect={setHab}/>}
+    </div>
+  </dialog>;
+}
+
+function FichaDoLutador({c,onSelect}:{c:Character;onSelect:(i:number)=>void}){
+  const traco=presentTrait(c.trait),unica=unicaDe(c.id),intelligence=c.intelligence??50,quando=ativaQuando(c.trait,c.name);
+  const extras=[c.renascer&&textoDoRenascer(c.renascer),c.ultimaResistencia&&textoDaResistencia(c.ultimaResistencia),c.despercebido&&textoDoDespercebido(),c.isca&&textoDaIsca(c.isca)].filter((x):x is string=>!!x);
+  const basico=c.basic.effects.map(effect=>presentEffect(effect,c.basic.target)).join(' · ');
+  const fracaoDoRitmo=1-(c.interval-INTERVALO_MIN)/(INTERVALO_MAX-INTERVALO_MIN)*.9;
+  return <>
+    <header className="bi2-topo">
+      <div className="bi2-retrato" style={{'--p':100} as CSSProperties}><Portrait character={c}/></div>
+      <div className="bi2-nome">
+        <small>{universoDaFicha(c)}</small>
+        <h2>{c.name}</h2>
+        <p className="fv3-ideia">{c.idea}</p>
+      </div>
     </header>
     <IdentityChips ids={identidadesDe(c)}/>
-    <div className="fv-atributos">
-      <Atributo icone={<HeartPulse size={15}/>} nome="Vida" valor={c.hp.toLocaleString('pt-BR')} fracao={c.hp/VIDA_MAX} cor="#86e3a8"/>
-      <Atributo icone={<Gauge size={15}/>} nome="Velocidade" valor={`ataca a cada ${c.interval.toLocaleString('pt-BR')} s`} fracao={1-(c.interval-INTERVALO_MIN)/(INTERVALO_MAX-INTERVALO_MIN)*.9} cor="#ffd36b"/>
-      <Atributo icone={<Brain size={15}/>} nome="Inteligência" valor={`${intelligence} · ${intelligenceLabel(intelligence)}`} fracao={intelligence/100} cor="#8fd3ff"/>
+    <div className="fv3-barras">
+      <div className="bi2-barra vida" style={{'--p':pct(c.hp/VIDA_MAX)} as CSSProperties}><i/><span><HeartPulse size={13}/>Vida<b>{c.hp.toLocaleString('pt-BR')}</b></span></div>
+      <div className="bi2-barra ritmo" style={{'--p':pct(fracaoDoRitmo)} as CSSProperties}><i/><span><Gauge size={13}/>Ataca a cada<b>{c.interval.toLocaleString('pt-BR')} s</b></span></div>
+      <div className="bi2-barra mente" style={{'--p':pct(intelligence/100)} as CSSProperties}><i/><span><Brain size={13}/>Inteligência<b>{intelligence}</b>{intelligenceLabel(intelligence)}</span></div>
     </div>
-    {c.id==='light'&&<div className="fv-aviso"><Info size={17}/><p><strong>Como funciona a investigação</strong><br/>Ao chegar a 100 Investigação em um rival, Light descobre se ele é vulnerável ou imune à Death Note. A descoberta fica visível na batalha.</p></div>}
+    <div className="bi2-habs">{c.skills.map((s,i)=><button key={s.id} className="bi2-hab" style={{'--i':i} as CSSProperties} onClick={()=>onSelect(i)}>
+      <span className="bi2-anel" style={{'--p':100} as CSSProperties}><SkillIcon type={s.icon} characterId={c.id} skillId={s.id} size={24}/></span>
+      <b>{s.name}</b><small>HABILIDADE {i+1}</small>
+    </button>)}</div>
+    <div className="bi2-cartoes">
+      {c.id==='light'&&<section className="bi2-cartao aviso" style={{'--i':3} as CSSProperties}>
+        <span className="bi2-selo"><Info size={12}/>Como funciona a investigação</span>
+        <p>Ao chegar a 100 Investigação em um rival, Light descobre se o rival é vulnerável ou imune à Death Note. A descoberta fica visível na batalha.</p>
+      </section>}
+      {unica&&<section className="bi2-cartao unica" style={{'--i':3} as CSSProperties}>
+        <span className="bi2-selo"><Sparkles size={12}/><TermoBotao termo={termoPorId['mecanica-unica']!}>Mecânica única</TermoBotao> · só {c.name} tem</span>
+        <b>{unica.nome}</b><p><ComTermos texto={unica.texto}/></p>
+      </section>}
+      <section className="bi2-cartao traco" style={{'--i':4} as CSSProperties}>
+        <span className="bi2-selo"><Flame size={12}/><TermoBotao termo={termoPorId.traco!}>Traço</TermoBotao></span>
+        <b>{c.trait.name}</b><p><ComTermos texto={`${traco.effects.join(' · ')}.`}/></p><p className="ativa-quando"><u>{quando.rotulo}</u> <ComTermos texto={`${quando.resto}.`}/></p>
+        {extras.length>0&&<ul className="bi2-extras">{extras.map((x,i)=><li key={i}><ComTermos texto={x+'.'}/></li>)}</ul>}
+      </section>
+      <section className="bi2-cartao basico" style={{'--i':5} as CSSProperties}>
+        <span className="bi2-selo"><Swords size={12}/><TermoBotao termo={termoPorId['ataque-basico']!}>Ataque básico</TermoBotao> · {targetNames[c.basic.target]}</span>
+        <b>{c.basic.name}</b><p><ComTermos texto={basico+'.'}/>{c.basic.jeito&&<> <ComTermos texto={textoDoJeito(c.basic.jeito)+'.'}/></>}</p>
+      </section>
+      {/* o que ele faz melhor que o elenco, e com qual habilidade */}
+      <section className="bi2-cartao forte" style={{'--i':6} as CSSProperties} aria-label="Ponto forte">
+        <span className="bi2-selo"><CircleCheck size={12}/>Ponto forte</span>
+        <ul className="fv3-pontos">{pontoForte(c).map(x=>{const Icone=ICONE_DA_FORCA[x.tipo];return <li key={x.tipo}><span><Icone size={14} strokeWidth={2.4}/>{x.rotulo}</span><small>{x.motivo}</small></li>;})}</ul>
+      </section>
+      {/* curto: o que ele não consegue fazer, e por quê em poucas palavras */}
+      <section className="bi2-cartao fraco" style={{'--i':7} as CSSProperties} aria-label="Ponto fraco">
+        <span className="bi2-selo"><TriangleAlert size={12}/>Ponto fraco</span>
+        <ul className="fv3-pontos">{pontoFraco(c).map(x=>{const Icone=ICONE_DA_FRAQUEZA[x.tipo];return <li key={x.tipo}><span><Icone size={14} strokeWidth={2.4}/>{x.rotulo}</span><small>{x.motivo}</small></li>;})}</ul>
+      </section>
+    </div>
+  </>;
+}
 
-    {unicaDe(c.id)&&<section className="fv-unica">
-      <span className="fv-selo"><Crown size={13}/>MECÂNICA ÚNICA · SÓ {c.name.toUpperCase()} TEM</span>
-      <h3>{unicaDe(c.id)!.nome}</h3>
-      <p><ComTermos texto={unicaDe(c.id)!.texto}/></p>
-    </section>}
-
-    <section className="fv-traco">
-      <span className="fv-selo"><Sparkles size={13}/>TRAÇO · SEMPRE ATIVO</span>
-      <h3>{c.trait.name}</h3>
-      <div className="fv-chips">{trait.effects.map((effect,i)=><span key={i}><ComTermos texto={effect}/></span>)}{c.renascer&&<span className="fv-renasce"><ComTermos texto={textoDoRenascer(c.renascer)}/></span>}{c.ultimaResistencia&&<span className="fv-renasce"><ComTermos texto={textoDaResistencia(c.ultimaResistencia)}/></span>}{c.despercebido&&<span className="fv-renasce"><ComTermos texto={textoDoDespercebido()}/></span>}{c.isca&&<span className="fv-renasce"><ComTermos texto={textoDaIsca(c.isca)}/></span>}</div>
-      <small className="ativa-quando"><u>{ativaQuando(c.trait,c.name).rotulo}</u> {ativaQuando(c.trait,c.name).resto}</small>
-    </section>
-
-    <section className="fv-basico">
-      <span className="fv-selo"><Swords size={13}/>ATAQUE BÁSICO · {targetNames[c.basic.target]}</span>
-      <h3>{c.basic.name}</h3>
-      <div className="fv-chips">{c.basic.effects.map((effect,i)=><span key={i}><ComTermos texto={presentEffect(effect,c.basic.target)}/></span>)}{c.basic.jeito&&<span className="fv-jeito"><ComTermos texto={textoDoJeito(c.basic.jeito)}/></span>}</div>
-    </section>
-
-    <div className="fv-habilidades">{c.skills.map((s,i)=>{const p=presentSkill(s);return <article key={s.id} className="fv-habilidade">
-      <header><span className="fv-icone"><SkillIcon type={s.icon} characterId={c.id} skillId={s.id} size={52}/></span><div><span className="fv-selo">HABILIDADE {i+1}</span><h3>{s.name}</h3></div></header>
-      <EfeitosAgrupados grupos={p.grupos}/>
-      {p.mostrarAlvo&&<div className="fv-regra"><Target size={13}/><b>Alvo</b> {p.target}</div>}
-      <div className="fv-regras">
-        <div className="fv-regra"><Zap size={14}/><b><TermoBotao termo={termoPorId.carga!}/></b><span>{p.charge.join(' · ')}</span></div>
-        <div className="fv-regra"><Target size={14}/><b><TermoBotao termo={termoPorId['usa-quando']!}/></b><span>{p.useWhen}</span></div>
-        <div className="fv-pilulas"><span><Hourglass size={13}/><TermoBotao termo={termoPorId.preparo!}/> <b>{p.preparation}</b></span><span><Snowflake size={13}/><TermoBotao termo={termoPorId.resfriamento!}/> <b>{p.cooldown}</b></span></div>
+function FichaDaHabilidade({c,i,onSelect}:{c:Character;i:number;onSelect:(i:number)=>void}){
+  const skill=c.skills[i],p=presentSkill(skill);
+  return <>
+    <header className="bi2-topo hab">
+      <span className="bi2-anel grande" style={{'--p':100} as CSSProperties}><SkillIcon type={skill.icon} characterId={c.id} skillId={skill.id} size={40}/></span>
+      <div className="bi2-nome">
+        <small>{c.name} · Habilidade {i+1}</small>
+        <h2>{skill.name}</h2>
+        {p.mostrarAlvo&&<span className="bi2-situacao"><Target size={13}/>{p.target}</span>}
       </div>
-    </article>;})}</div>
-
-    {/* o que ele faz melhor que o elenco, e com qual habilidade */}
-    <section className="fv-fraco fv-forte" aria-label="Ponto forte">
-      <span className="fv-selo"><CircleCheck size={13}/>PONTO FORTE</span>
-      <ul>{pontoForte(c).map(x=>{const Icone=ICONE_DA_FORCA[x.tipo];return <li key={x.tipo}>
-        <span className="fv-fraco-contra"><Icone size={15} strokeWidth={2.4}/>{x.rotulo}</span>
-        <span className="fv-fraco-motivo">{x.motivo}</span>
-      </li>;})}</ul>
+    </header>
+    <section className="bi2-cartao faz" style={{'--i':0} as CSSProperties}>
+      <span className="bi2-selo"><Zap size={12}/>O que faz</span>
+      <EfeitosAgrupados grupos={p.grupos}/>
     </section>
-    {/* curto: o que ele não consegue fazer, e por quê em poucas palavras */}
-    <section className="fv-fraco" aria-label="Ponto fraco">
-      <span className="fv-selo"><TriangleAlert size={13}/>PONTO FRACO</span>
-      <ul>{pontoFraco(c).map(x=>{const Icone=ICONE_DA_FRAQUEZA[x.tipo];return <li key={x.tipo}>
-        <span className="fv-fraco-contra"><Icone size={15} strokeWidth={2.4}/>{x.rotulo}</span>
-        <span className="fv-fraco-motivo">{x.motivo}</span>
-      </li>;})}</ul>
+    <div className="bi2-numeros">
+      <span style={{'--i':1} as CSSProperties}><Hourglass size={15}/><TermoBotao termo={termoPorId.preparo!}/><b>{p.preparation}</b></span>
+      <span style={{'--i':2} as CSSProperties}><Snowflake size={15}/><TermoBotao termo={termoPorId.resfriamento!}/><b>{p.cooldown}</b></span>
+    </div>
+    <section className="bi2-cartao carga" style={{'--i':3} as CSSProperties}>
+      <span className="bi2-selo"><Flame size={12}/><TermoBotao termo={termoPorId.carga!}>Como enche</TermoBotao></span>
+      <div className="bi2-fontes">{p.charge.map((x,k)=><span key={k}><ComTermos texto={x}/></span>)}</div>
+      {p.useWhen&&!/^ficar pronta$/i.test(p.useWhen)&&<p className="bi2-quando"><TermoBotao termo={termoPorId['usa-quando']!}/> <ComTermos texto={p.useWhen}/></p>}
     </section>
-  </div></dialog>;
+    <nav className="bi2-trilha" aria-label="Trocar de ficha">
+      <button className="bi2-voltar" onClick={()=>onSelect(-1)} aria-label={`Voltar para ${c.name}`}><ChevronLeft size={16}/><span className="bi2-mini"><Portrait character={c}/></span></button>
+      {c.skills.map((s,k)=><button key={s.id} className={`bi2-aba ${k===i?'ativa':''}`} onClick={()=>onSelect(k)} aria-label={s.name} aria-current={k===i}>
+        <span className="bi2-anel" style={{'--p':100} as CSSProperties}><SkillIcon type={s.icon} characterId={c.id} skillId={s.id} size={20}/></span>
+      </button>)}
+    </nav>
+  </>;
 }

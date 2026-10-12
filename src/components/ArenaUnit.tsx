@@ -1,11 +1,12 @@
 import { useEffect,useRef,useState } from 'react';
-import { Hourglass,Shield,HeartPulse,Skull,Zap } from 'lucide-react';
+import { Flame,Hourglass,Shield,HeartPulse,Skull,Sparkles,Zap } from 'lucide-react';
 import { condicaoAtendida } from '../engine/battle';
 import type { Battle,Fighter,Status } from '../engine/types';
 import { passoAtual,revelado,type Beat } from '../presentation/director';
 import { PRESENTATION as P } from '../presentation/config';
 import { folha } from '../presentation/vfxProfiles';
 import { byId } from '../data/characters';
+import { unicaDe } from '../engine/unicas';
 import { statuses } from '../data/statuses';
 import { Portrait } from './Portrait';
 import { AuxIcon,SkillIcon } from './Icon';
@@ -83,6 +84,20 @@ export function ArenaUnit({fighter:f,battle,beat,onInspect,numbers,threatened,li
   const applied=impacted&&beat?[...beat.events].reverse().find(e=>revelado(beat,e)&&e.target===f.uid&&e.kind==='status'):undefined;
   // este lutador está reagindo agora (o traço dele disparou no meio da ação de outro)
   const passo=passoAtual(beat),reagindo=passo?.classe==='reacao'&&passo.quem===f.uid?passo:undefined;
+  /*
+   * O selo do traço e da Mecânica única fica um tempo na cabeça, com efeito no retrato (pedido do jogador: "aparece
+   * muito rápido… poderia ficar um pouquinho mais de tempo na cabeça deles… e tivesse efeito"). Não segura a luta: o
+   * passo da cadeia segue no ritmo de sempre, só o selo continua à vista.
+   */
+  const [selo,setSelo]=useState<{chave:string;rotulo:string;tipo:'unica'|'traco'|'mecanica'}|null>(null);
+  const chaveDoSelo=reagindo&&reagindo.rotulo?`${beat?.event.id??0}-${reagindo.eventos[0]??0}`:null;
+  useEffect(()=>{
+    if(!chaveDoSelo||!reagindo?.rotulo)return;
+    const rotulo=reagindo.rotulo,tipo=rotulo===unicaDe(c.id)?.nome?'unica':rotulo===c.trait.name?'traco':'mecanica';
+    setSelo({chave:chaveDoSelo,rotulo,tipo});
+    const t=setTimeout(()=>setSelo(x=>x?.chave===chaveDoSelo?null:x),2400);
+    return ()=>clearTimeout(t);
+  },[chaveDoSelo]);
   const discovered=impacted?beat?.events.find(e=>revelado(beat,e)&&e.target===f.uid&&e.kind==='discovery'):undefined;
   const knocked=impacted?beat?.events.find(e=>revelado(beat,e)&&e.target===f.uid&&e.kind==='ko'):undefined;
   const broken=impacted?beat?.events.find(e=>revelado(beat,e)&&e.target===f.uid&&e.kind==='interrupt'):undefined;
@@ -153,7 +168,9 @@ export function ArenaUnit({fighter:f,battle,beat,onInspect,numbers,threatened,li
         {errou&&<span key={`e${errou.id}`} className={`discovery-pop ${errou.label==='Esquivou'?'esquivou-pop':'errou-pop'}`}>{errou.label==='Esquivou'?'Esquivou!':'Errou!'}</span>}
         {anulou&&<span key={`a${anulou.id}`} className={`discovery-pop ${anulou.label==='Última resistência'?'resistiu-pop':'anulou-pop'}`}>{anulou.label==='Última resistência'?'Última resistência!':<>Barreira · anulou {anulou.status?statuses[anulou.status].name:'o debuff'}</>}</span>}
         {limpo&&!levantou&&<span key={`l${limpo.id}`} className={`discovery-pop ${limpo.kind==='cleanse'?'purifica-pop':'dissipa-pop'}`}>{limpo.label}{(limpo.removidos?.length??0)>0&&<> · {limpo.removidos!.map(id=>statuses[id].name).join(', ')}</>}</span>}
-        {/* rótulo vazio = combo de tempo em tempo: só o efeito aparece, sem selo com nome */}{reagindo&&reagindo.rotulo!==''&&<span key={`r${reagindo.eventos[0]??0}`} className="reacao-pop"><Zap size={11} strokeWidth={3}/>{reagindo.rotulo??'Reação'}</span>}
+        {/* rótulo vazio = combo de tempo em tempo: só o efeito aparece, sem selo com nome */}
+        {selo&&<span key={`r${selo.chave}`} className={`reacao-pop selo-${selo.tipo}`} aria-label={`${selo.tipo==='unica'?'Mecânica única':selo.tipo==='traco'?'Traço':'Mecânica'}: ${selo.rotulo}`}><b>{selo.tipo==='unica'?<Sparkles size={11} strokeWidth={3}/>:selo.tipo==='traco'?<Flame size={11} strokeWidth={3}/>:<Zap size={11} strokeWidth={3}/>}{selo.rotulo}</b></span>}
+        {selo&&selo.tipo!=='mecanica'&&<span key={`fx${selo.chave}`} className={`aura-ativa aura-${selo.tipo}`} aria-hidden="true"><i/><i/><i/><i/><i/><i/><i/><i/></span>}
         {reagindo&&<span key={`a${reagindo.eventos[0]??0}`} className="reacao-anel" aria-hidden="true"/>}
         {applied&&<span key={applied.id} className="status-pop">{applied.status&&<img src={`/assets/statuses/${applied.status}.png`} alt=""/>}{applied.label}</span>}
         {discovered&&<span key={discovered.id} className="discovery-pop">{discovered.label}</span>}

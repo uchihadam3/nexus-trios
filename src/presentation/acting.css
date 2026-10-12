@@ -97,3 +97,26 @@
 .arena-v2 .unit .reacao-pop svg{flex:none;color:#ffe066}
 @keyframes reage-pop{0%{opacity:0;transform:translate(-50%,8px) scale(.6)}30%{opacity:1;transform:translate(-50%,0) scale(1.08)}45%{transform:translate(-50%,0) scale(1)}85%{opacity:1}100%{opacity:.85;transform:translate(-50%,-4px)}}
 @media (prefers-reduced-motion:reduce){.arena-v2 .unit .reacao-anel{display:none}.arena-v2 .unit .reacao-pop{animation:none}}
+
+/* O selo do traço (dourado) e da Mecânica única (roxo) fica ~2,4 s na cabeça, com a aura no retrato
+ * (pedido do jogador: "aparece muito rápido… seria bacana se tivesse um efeito"). */
+/* do mesmo tamanho do nome da habilidade (pedido do jogador: "tá um pouco grande"): uma linha, e a cor diz o que é */
+.arena-v2 .unit .reacao-pop.selo-unica,.arena-v2 .unit .reacao-pop.selo-traco{--selo:#ffd36b;border-color:var(--selo);background:linear-gradient(180deg,color-mix(in srgb,var(--selo) 38%,#101820),#101820f0);box-shadow:0 0 12px color-mix(in srgb,var(--selo) 65%,transparent);animation:selo-vida calc(2.4s * var(--motion-scale,1)) cubic-bezier(.2,1.2,.4,1) both}
+.arena-v2 .unit .reacao-pop.selo-unica{--selo:#c58bff}
+.arena-v2 .unit .reacao-pop b{display:contents}
+.arena-v2 .unit .reacao-pop.selo-unica svg,.arena-v2 .unit .reacao-pop.selo-traco svg{color:var(--selo)}
+@keyframes selo-vida{0%{opacity:0;transform:translate(-50%,6px) scale(.6)}12%{opacity:1;transform:translate(-50%,0) scale(1.06)}20%{transform:translate(-50%,0) scale(1)}82%{opacity:1;transform:translate(-50%,-2px) scale(1)}100%{opacity:0;transform:translate(-50%,-10px) scale(.96)}}
+.arena-v2 .unit .aura-ativa{--aura:#ffd36b;position:absolute;inset:-5%;z-index:4;border-radius:50%;pointer-events:none;animation:aura-vida calc(1.8s * var(--motion-scale,1)) ease-out both}
+.arena-v2 .unit .aura-ativa.aura-unica{--aura:#c58bff}
+.arena-v2 .unit .aura-ativa::before{content:'';position:absolute;inset:0;border-radius:50%;border:2px dashed var(--aura);box-shadow:0 0 10px var(--aura),inset 0 0 10px color-mix(in srgb,var(--aura) 60%,transparent);animation:aura-gira calc(1.8s * var(--motion-scale,1)) linear both}
+.arena-v2 .unit .aura-ativa::after{content:'';position:absolute;inset:14%;border-radius:50%;background:radial-gradient(circle,color-mix(in srgb,var(--aura) 55%,transparent) 0%,transparent 70%);animation:aura-pulsa calc(.9s * var(--motion-scale,1)) ease-out 2 both}
+.arena-v2 .unit .aura-ativa i{position:absolute;bottom:18%;width:4px;height:4px;border-radius:50%;background:#fff;box-shadow:0 0 6px 2px var(--aura);opacity:0;animation:aura-faisca calc(1.2s * var(--motion-scale,1)) ease-out both}
+.arena-v2 .unit .aura-ativa i:nth-child(1){left:18%;animation-delay:0s}.arena-v2 .unit .aura-ativa i:nth-child(2){left:30%;animation-delay:.15s}
+.arena-v2 .unit .aura-ativa i:nth-child(3){left:44%;animation-delay:.05s}.arena-v2 .unit .aura-ativa i:nth-child(4){left:56%;animation-delay:.25s}
+.arena-v2 .unit .aura-ativa i:nth-child(5){left:68%;animation-delay:.1s}.arena-v2 .unit .aura-ativa i:nth-child(6){left:80%;animation-delay:.3s}
+.arena-v2 .unit .aura-ativa i:nth-child(7){left:36%;animation-delay:.4s}.arena-v2 .unit .aura-ativa i:nth-child(8){left:62%;animation-delay:.45s}
+@keyframes aura-vida{0%{opacity:0;transform:scale(.7)}15%{opacity:1;transform:scale(1.05)}70%{opacity:1}100%{opacity:0;transform:scale(1.15)}}
+@keyframes aura-gira{0%{transform:rotate(0)}100%{transform:rotate(200deg)}}
+@keyframes aura-pulsa{0%{opacity:0;transform:scale(.6)}35%{opacity:1}100%{opacity:0;transform:scale(1.25)}}
+@keyframes aura-faisca{0%{opacity:0;transform:translateY(0) scale(.6)}20%{opacity:1}100%{opacity:0;transform:translateY(-110%) scale(1.1)}}
+@media (prefers-reduced-motion:reduce){.arena-v2 .unit .aura-ativa{display:none}.arena-v2 .unit .reacao-pop.selo-unica,.arena-v2 .unit .reacao-pop.selo-traco{animation:none}}

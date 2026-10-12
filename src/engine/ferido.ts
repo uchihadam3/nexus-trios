@@ -21,7 +21,7 @@ export function alvosDoFerido(s: Skill): Target[] {
 /** Como a ficha diz de quem é a Vida que precisa estar abaixo de 78%. */
 export function textoDoFerido(s: Skill): string {
   const alvos = alvosDoFerido(s);
-  if (alvos.every((t) => t === 'self')) return 'ele mesmo estiver com menos de 78% de Vida';
-  if (alvos.some((t) => DO_TRIO.includes(t))) return 'um aliado (ou ele mesmo) estiver com menos de 78% de Vida';
+  if (alvos.every((t) => t === 'self')) return 'estiver com menos de 78% de Vida';
+  if (alvos.some((t) => DO_TRIO.includes(t))) return 'alguém do trio estiver com menos de 78% de Vida';
   return 'o rival estiver com menos de 78% de Vida';
 }
