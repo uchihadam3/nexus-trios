@@ -237,6 +237,20 @@
   "laco": false,
   "bytes": 99266
  },
+ "argila_explosiva": {
+  "descricao": "Básico do Deidara: o passarinho de argila e o Katsu",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 53126
+ },
  "arma_da_gravidade": {
   "descricao": "Gordon: feixe puxa a caixa e a lança no alvo",
   "quadros": 12,
@@ -881,6 +895,20 @@
   "laco": true,
   "bytes": 52078
  },
+ "bola_de_neve": {
+  "descricao": "Básico do Homem de Gelo: a bola de neve espatifando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 20282
+ },
  "bola_do_charizard": {
   "descricao": "Charizard · a bola de fogo voando (laço)",
   "quadros": 12,
@@ -922,6 +950,20 @@
   ],
   "laco": false,
   "bytes": 47106
+ },
+ "bolhas_de_mercurio": {
+  "descricao": "Básico da Sailor Mercury: as bolhas e a névoa fria",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 26486
  },
  "bomba": {
   "descricao": "bomba com pavio em viagem (+x)",
@@ -1174,6 +1216,20 @@
   ],
   "laco": false,
   "bytes": 75454
+ },
+ "cajado_da_cetra": {
+  "descricao": "Básico da Aerith: o cajado e as luzes da Corrente da Vida",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 22868
  },
  "calor_faixa": {
   "descricao": "Super-Homem · os dois raios da Visão de calor (faixa)",
@@ -1538,6 +1594,34 @@
   ],
   "laco": false,
   "bytes": 51818
+ },
+ "chicote_de_agua": {
+  "descricao": "Básico da Katara: a fita de água e as gotas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 18368
+ },
+ "chicote_de_vinha": {
+  "descricao": "Básico da Hera Venenosa: a vinha com folhas e os esporos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 22524
  },
  "chicotes_de_carne": {
   "descricao": "Muzan · os chicotes de carne com espinhos",
@@ -2742,6 +2826,20 @@
   ],
   "laco": true,
   "bytes": 25852
+ },
+ "empurrao_de_campo": {
+  "descricao": "Básico da Violeta: a bolha de força empurrando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 29004
  },
  "encanto": {
   "descricao": "estrelas de encanto",
@@ -5179,6 +5277,20 @@
   "laco": false,
   "bytes": 32758
  },
+ "jato_criogenico": {
+  "descricao": "Básico do Senhor Frio: o jato frio e os cristais",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 59402
+ },
  "joia_do_tempo": {
   "descricao": "Thanos · a Joia do Tempo e a areia lenta",
   "quadros": 12,
@@ -5332,6 +5444,20 @@
   ],
   "laco": false,
   "bytes": 89186
+ },
+ "kiai_invisivel": {
+  "descricao": "Básico do Tenshinhan: o terceiro olho e o kiai",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 16968
  },
  "kienzan_corte": {
   "descricao": "Kuririn · o disco atravessando e o corte fino",
@@ -5514,6 +5640,20 @@
   ],
   "laco": false,
   "bytes": 35044
+ },
+ "lambida_fantasma": {
+  "descricao": "Básico do Gengar: a lambida, a baba e o arrepio",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 30566
  },
  "lamina_de_agua": {
   "descricao": "fita de água em espiral",
@@ -7069,6 +7209,20 @@
   "laco": false,
   "bytes": 33480
  },
+ "petalas_cortantes": {
+  "descricao": "Básico do Kurama: as pétalas em espiral cortando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 11058
+ },
  "pilar": {
   "descricao": "pilar de energia subindo",
   "quadros": 12,
@@ -7544,6 +7698,48 @@
   ],
   "laco": false,
   "bytes": 74138
+ },
+ "punho_do_trovao": {
+  "descricao": "Básico do Heihachi: o gancho e o trovão",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 26020
+ },
+ "punho_esticado": {
+  "descricao": "Básico do Jake: o braço de borracha e o boing",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 18076
+ },
+ "punho_flamejante_ken": {
+  "descricao": "Básico do Ken: o soco em chamas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 22582
  },
  "punho_fotonico": {
   "descricao": "Punho fotônico: o punho em luz e a estrela de oito pontas",
@@ -9798,6 +9994,20 @@
   ],
   "laco": false,
   "bytes": 64204
+ },
+ "tsubaki": {
+  "descricao": "Básico da Orihime: a flor do grampo e o Tsubaki cortando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 20918
  },
  "tsukuyomi": {
   "descricao": "Itachi · o Tsukuyomi e o Mangekyō",

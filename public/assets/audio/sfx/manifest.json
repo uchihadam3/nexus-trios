@@ -308,6 +308,23 @@
    ],
    "bytes": 73088
   },
+  "argila-explosiva": {
+   "arquivo": "argila-explosiva.mp3",
+   "descricao": "básico do Deidara: as asas e o Katsu",
+   "versoes": [
+    0.0,
+    1.18,
+    2.3999,
+    3.5427
+   ],
+   "duracoes": [
+    1.1,
+    1.1399,
+    1.0628,
+    1.1167
+   ],
+   "bytes": 46069
+  },
   "arma-adquirida": {
    "arquivo": "arma-adquirida.mp3",
    "descricao": "Arma adquirida: a esfera elétrica",
@@ -1022,6 +1039,23 @@
    ],
    "bytes": 57661
   },
+  "bola-de-neve": {
+   "arquivo": "bola-de-neve.mp3",
+   "descricao": "básico do Homem de Gelo: a bola de neve espatifando",
+   "versoes": [
+    0.0,
+    1.08,
+    2.1963,
+    3.2332
+   ],
+   "duracoes": [
+    1.0,
+    1.0363,
+    0.957,
+    1.0152
+   ],
+   "bytes": 36985
+  },
   "bolhas": {
    "arquivo": "bolhas.mp3",
    "descricao": "família bolhas",
@@ -1038,6 +1072,23 @@
     0.9137
    ],
    "bytes": 30361
+  },
+  "bolhas-de-mercurio": {
+   "arquivo": "bolhas-de-mercurio.mp3",
+   "descricao": "básico da Sailor Mercury: as bolhas estourando",
+   "versoes": [
+    0.0,
+    1.18,
+    2.3999,
+    3.5427
+   ],
+   "duracoes": [
+    1.1,
+    1.1399,
+    1.0628,
+    1.1167
+   ],
+   "bytes": 60312
   },
   "bomba": {
    "arquivo": "bomba.mp3",
@@ -1293,6 +1344,23 @@
     1.269
    ],
    "bytes": 44266
+  },
+  "cajado-da-cetra": {
+   "arquivo": "cajado-da-cetra.mp3",
+   "descricao": "básico da Aerith: o cajado e as luzinhas",
+   "versoes": [
+    0.0,
+    1.18,
+    2.3999,
+    3.5427
+   ],
+   "duracoes": [
+    1.1,
+    1.1399,
+    1.0628,
+    1.1167
+   ],
+   "bytes": 40100
   },
   "campo-incendiado": {
    "arquivo": "campo-incendiado.mp3",
@@ -1650,6 +1718,40 @@
     0.6091
    ],
    "bytes": 25058
+  },
+  "chicote-de-agua": {
+   "arquivo": "chicote-de-agua.mp3",
+   "descricao": "básico da Katara: a água e as gotas",
+   "versoes": [
+    0.0,
+    1.08,
+    2.1963,
+    3.2424
+   ],
+   "duracoes": [
+    1.0,
+    1.0363,
+    0.9662,
+    1.0152
+   ],
+   "bytes": 39237
+  },
+  "chicote-de-vinha": {
+   "arquivo": "chicote-de-vinha.mp3",
+   "descricao": "básico da Hera: as folhas, o estalo e os esporos",
+   "versoes": [
+    0.0,
+    1.08,
+    2.1963,
+    3.2424
+   ],
+   "duracoes": [
+    1.0,
+    1.0363,
+    0.9662,
+    1.0152
+   ],
+   "bytes": 45991
   },
   "chicotes-de-carne": {
    "arquivo": "chicotes-de-carne.mp3",
@@ -2993,6 +3095,23 @@
     1.3198
    ],
    "bytes": 45289
+  },
+  "empurrao-de-campo": {
+   "arquivo": "empurrao-de-campo.mp3",
+   "descricao": "básico da Violeta: a bolha e o empurrão",
+   "versoes": [
+    0.0,
+    1.08,
+    2.1963,
+    3.2424
+   ],
+   "duracoes": [
+    1.0,
+    1.0363,
+    0.9662,
+    1.0152
+   ],
+   "bytes": 28260
   },
   "encanto": {
    "arquivo": "encanto.mp3",
@@ -5867,6 +5986,23 @@
    ],
    "bytes": 95994
   },
+  "jato-criogenico": {
+   "arquivo": "jato-criogenico.mp3",
+   "descricao": "básico do Senhor Frio: o jato frio e o gelo",
+   "versoes": [
+    0.0,
+    1.08,
+    2.1963,
+    3.2424
+   ],
+   "duracoes": [
+    1.0,
+    1.0363,
+    0.9662,
+    1.0152
+   ],
+   "bytes": 52016
+  },
   "joia-do-tempo": {
    "arquivo": "joia-do-tempo.mp3",
    "descricao": "Joia do Tempo: o som esticando e a areia",
@@ -6088,6 +6224,23 @@
    ],
    "bytes": 58809
   },
+  "kiai-invisivel": {
+   "arquivo": "kiai-invisivel.mp3",
+   "descricao": "básico do Tenshinhan: o kiai e o baque",
+   "versoes": [
+    0.0,
+    1.08,
+    2.1963,
+    3.2424
+   ],
+   "duracoes": [
+    1.0,
+    1.0363,
+    0.9662,
+    1.0152
+   ],
+   "bytes": 29880
+  },
   "kienzan": {
    "arquivo": "kienzan.mp3",
    "descricao": "Kienzan: o disco serrando",
@@ -6274,6 +6427,23 @@
     1.8274
    ],
    "bytes": 74918
+  },
+  "lambida-fantasma": {
+   "arquivo": "lambida-fantasma.mp3",
+   "descricao": "básico do Gengar: a lambida e a risadinha",
+   "versoes": [
+    0.0,
+    1.18,
+    2.3999,
+    3.5427
+   ],
+   "duracoes": [
+    1.1,
+    1.1399,
+    1.0628,
+    1.1167
+   ],
+   "bytes": 41939
   },
   "lamina-de-agua": {
    "arquivo": "lamina-de-agua.mp3",
@@ -8111,6 +8281,23 @@
    ],
    "bytes": 54472
   },
+  "petalas-cortantes": {
+   "arquivo": "petalas-cortantes.mp3",
+   "descricao": "básico do Kurama: as pétalas cortando",
+   "versoes": [
+    0.0,
+    0.9773,
+    1.979,
+    2.94
+   ],
+   "duracoes": [
+    0.8973,
+    0.9217,
+    0.8811,
+    0.9322
+   ],
+   "bytes": 38790
+  },
   "pilar": {
    "arquivo": "pilar.mp3",
    "descricao": "família pilar",
@@ -8705,6 +8892,57 @@
     1.3705
    ],
    "bytes": 47027
+  },
+  "punho-do-trovao": {
+   "arquivo": "punho-do-trovao.mp3",
+   "descricao": "básico do Heihachi: o gancho e o trovão",
+   "versoes": [
+    0.0,
+    1.18,
+    2.3999,
+    3.5427
+   ],
+   "duracoes": [
+    1.1,
+    1.1399,
+    1.0628,
+    1.1167
+   ],
+   "bytes": 46011
+  },
+  "punho-esticado": {
+   "arquivo": "punho-esticado.mp3",
+   "descricao": "básico do Jake: o elástico e o boing",
+   "versoes": [
+    0.0,
+    1.18,
+    2.3999,
+    3.5284
+   ],
+   "duracoes": [
+    1.1,
+    1.1399,
+    1.0485,
+    1.1167
+   ],
+   "bytes": 30283
+  },
+  "punho-flamejante-ken": {
+   "arquivo": "punho-flamejante-ken.mp3",
+   "descricao": "básico do Ken: o soco em chamas",
+   "versoes": [
+    0.0,
+    1.08,
+    2.1963,
+    3.2424
+   ],
+   "duracoes": [
+    1.0,
+    1.0363,
+    0.9662,
+    1.0152
+   ],
+   "bytes": 51505
   },
   "punho-fotonico": {
    "arquivo": "punho-fotonico.mp3",
@@ -11289,6 +11527,23 @@
     0.9137
    ],
    "bytes": 39737
+  },
+  "tsubaki": {
+   "arquivo": "tsubaki.mp3",
+   "descricao": "básico da Orihime: o sininho e o corte de luz",
+   "versoes": [
+    0.0,
+    1.08,
+    2.1963,
+    3.2424
+   ],
+   "duracoes": [
+    1.0,
+    1.0363,
+    0.9662,
+    1.0021
+   ],
+   "bytes": 39193
   },
   "tsukuyomi": {
    "arquivo": "tsukuyomi.mp3",
