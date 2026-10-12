@@ -9043,6 +9043,20 @@
   "laco": false,
   "bytes": 34866
  },
+ "mu_absorcao": {
+  "descricao": "Majin Boo · a gosma rosa que absorve",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 28640
+ },
  "mu_alvo": {
   "descricao": "Agente 47 · a mira e o código de barras",
   "quadros": 12,
@@ -9085,6 +9099,20 @@
   "laco": false,
   "bytes": 47148
  },
+ "mu_areias": {
+  "descricao": "Príncipe da Pérsia · a ampulheta das Areias do Tempo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 61146
+ },
  "mu_armadura_doom": {
   "descricao": "Doom Slayer · os fragmentos de armadura",
   "quadros": 12,
@@ -9112,6 +9140,20 @@
   ],
   "laco": false,
   "bytes": 33808
+ },
+ "mu_banana": {
+  "descricao": "Donkey Kong · a casca de banana",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 21586
  },
  "mu_batarangue": {
   "descricao": "Batman · o batarangue girando e acertando",
@@ -9210,6 +9252,20 @@
   ],
   "laco": false,
   "bytes": 63338
+ },
+ "mu_briga_de_rua": {
+  "descricao": "Yusuke · a Arma Espiritual",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 16078
  },
  "mu_buster": {
   "descricao": "Cloud · a Buster Sword rachando o chão",
@@ -9505,6 +9561,20 @@
   "laco": false,
   "bytes": 34238
  },
+ "mu_escudo_dragao": {
+  "descricao": "Shiryu · o Escudo do Dragão",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 54218
+ },
  "mu_escudo_mjolnir": {
   "descricao": "Master Chief · o escudo de energia recarregando",
   "quadros": 12,
@@ -9547,6 +9617,20 @@
   "laco": false,
   "bytes": 34840
  },
+ "mu_esquife": {
+  "descricao": "Camus · o Esquife de Gelo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 41194
+ },
  "mu_estalo": {
   "descricao": "Thanos · o estalo e o pó ao vento",
   "quadros": 12,
@@ -9574,6 +9658,20 @@
   ],
   "laco": false,
   "bytes": 27622
+ },
+ "mu_evoluiu": {
+  "descricao": "Garou · o Punho da Água Corrente",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 23330
  },
  "mu_faca": {
   "descricao": "Leon · a faca e a faísca do aparo",
@@ -9617,6 +9715,20 @@
   "laco": false,
   "bytes": 36964
  },
+ "mu_fenix_ikki": {
+  "descricao": "Ikki · as asas de fogo da Fênix",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 88968
+ },
  "mu_fio": {
   "descricao": "Tanjiro · o fio vermelho da abertura e o corte d'água",
   "quadros": 12,
@@ -9644,6 +9756,20 @@
   ],
   "laco": false,
   "bytes": 75346
+ },
+ "mu_fogo_espalha": {
+  "descricao": "Charizard · o fogo que se espalha",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 32598
  },
  "mu_furia_bowser": {
   "descricao": "Bowser · o casco de espinhos e o fogo",
@@ -9686,6 +9812,20 @@
   ],
   "laco": false,
   "bytes": 52096
+ },
+ "mu_futuro": {
+  "descricao": "Trunks · a fenda do tempo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 59286
  },
  "mu_gancho": {
   "descricao": "Batman · o gancho e o escudo do morcego",
@@ -9785,6 +9925,20 @@
   "laco": false,
   "bytes": 42896
  },
+ "mu_hakai": {
+  "descricao": "Beerus · o Hakai",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 35740
+ },
  "mu_hev": {
   "descricao": "Gordon · o lambda e a morfina",
   "quadros": 12,
@@ -9826,6 +9980,20 @@
   ],
   "laco": false,
   "bytes": 53248
+ },
+ "mu_inalar": {
+  "descricao": "Kirby · o redemoinho que inala",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 31436
  },
  "mu_inibidores": {
   "descricao": "Shadow · os inibidores caindo e o caos",
@@ -9883,6 +10051,20 @@
   "laco": false,
   "bytes": 44946
  },
+ "mu_juizo": {
+  "descricao": "Hades · o eclipse negro do juízo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 38224
+ },
  "mu_juntas": {
   "descricao": "Inosuke · as juntas soltando e as correntes partindo",
   "quadros": 12,
@@ -9925,6 +10107,20 @@
   "laco": false,
   "bytes": 22740
  },
+ "mu_kuririn_nao": {
+  "descricao": "Kuririn · os seis pontos e a fúria dourada",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 67182
+ },
  "mu_laco": {
   "descricao": "Mulher-Maravilha · o Laço da verdade apertando",
   "quadros": 12,
@@ -9938,6 +10134,20 @@
   ],
   "laco": false,
   "bytes": 30916
+ },
+ "mu_lendario": {
+  "descricao": "Broly · a aura lendária",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 63582
  },
  "mu_lider": {
   "descricao": "Capitão América · o escudo de estrela e as setas",
@@ -9995,6 +10205,20 @@
   "laco": false,
   "bytes": 85226
  },
+ "mu_meteoro": {
+  "descricao": "Madara · o meteoro em chamas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 45404
+ },
  "mu_mina": {
   "descricao": "Rocket · a mina piscando e explodindo",
   "quadros": 12,
@@ -10051,6 +10275,20 @@
   "laco": false,
   "bytes": 33416
  },
+ "mu_nao_estava_la": {
+  "descricao": "Hiei · as imagens para trás e o Jagan",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 24338
+ },
  "mu_nivel": {
   "descricao": "Jinwoo · a janela do sistema: subiu de nível",
   "quadros": 12,
@@ -10092,6 +10330,20 @@
   ],
   "laco": false,
   "bytes": 105308
+ },
+ "mu_pegaso": {
+  "descricao": "Seiya · a constelação e os meteoros de Pégaso",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 22542
  },
  "mu_pele_trovao": {
   "descricao": "Raiden · os arcos de trovão na pele",
@@ -10191,6 +10443,20 @@
   "laco": false,
   "bytes": 39186
  },
+ "mu_primeiro": {
+  "descricao": "Hayabusa · as shurikens e o corte",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 21438
+ },
  "mu_proximo": {
   "descricao": "Ezio · a lâmina oculta e a insígnia",
   "quadros": 12,
@@ -10204,6 +10470,20 @@
   ],
   "laco": false,
   "bytes": 13764
+ },
+ "mu_punicao": {
+  "descricao": "Cabeça de Pirâmide · o capacete e a Grande Faca",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 49252
  },
  "mu_raikousen": {
   "descricao": "Zero · o sabre e o Raikousen",
@@ -10261,6 +10541,34 @@
   "laco": false,
   "bytes": 31746
  },
+ "mu_rugido_leao": {
+  "descricao": "Aiolia · o Relâmpago de Plasma",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 84388
+ },
+ "mu_sacrificio": {
+  "descricao": "Genos · o núcleo que explode",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 40192
+ },
  "mu_sangue": {
   "descricao": "Nezuko · as chamas rosadas do Sangue explosivo",
   "quadros": 12,
@@ -10289,6 +10597,20 @@
   "laco": false,
   "bytes": 30446
  },
+ "mu_selo_ceifador": {
+  "descricao": "Minato · os kunais e o selo do Ceifador",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 21324
+ },
  "mu_sharingan": {
   "descricao": "Sasuke · o Sharingan girando",
   "quadros": 12,
@@ -10316,6 +10638,20 @@
   ],
   "laco": false,
   "bytes": 53202
+ },
+ "mu_shinra_tensei": {
+  "descricao": "Pain · o Shinra Tensei",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 41908
  },
  "mu_simbionte": {
   "descricao": "Venom · a gosma e a aranha branca",
@@ -10499,6 +10835,20 @@
   "laco": false,
   "bytes": 43654
  },
+ "mu_vampire_killer": {
+  "descricao": "Simon Belmont · o chicote e a cruz",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 38864
+ },
  "mu_vazio_infinito": {
   "descricao": "Gojo · o céu de estrelas do domínio",
   "quadros": 12,
@@ -10582,6 +10932,20 @@
   ],
   "laco": false,
   "bytes": 68412
+ },
+ "mu_zero_absoluto": {
+  "descricao": "Hyoga · o Pó de Diamante e a aurora",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 51514
  },
  "mu_zzz": {
   "descricao": "Zenitsu · os Z e o relâmpago da Primeira postura",

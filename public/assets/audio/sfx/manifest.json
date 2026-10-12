@@ -10542,6 +10542,23 @@
    ],
    "bytes": 69937
   },
+  "mu-absorcao": {
+   "arquivo": "mu-absorcao.mp3",
+   "descricao": "Majin Boo: a absorção",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 84096
+  },
   "mu-alvo": {
    "arquivo": "mu-alvo.mp3",
    "descricao": "Agente 47: o alvo",
@@ -10593,6 +10610,23 @@
    ],
    "bytes": 52222
   },
+  "mu-areias": {
+   "arquivo": "mu-areias.mp3",
+   "descricao": "Príncipe da Pérsia: as Areias do Tempo",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 108674
+  },
   "mu-armadura-doom": {
    "arquivo": "mu-armadura-doom.mp3",
    "descricao": "Doom Slayer: a armadura",
@@ -10626,6 +10660,23 @@
     2.0305
    ],
    "bytes": 71946
+  },
+  "mu-banana": {
+   "arquivo": "mu-banana.mp3",
+   "descricao": "Donkey Kong: a casca de banana",
+   "versoes": [
+    0.0,
+    1.88,
+    3.8253,
+    5.6444
+   ],
+   "duracoes": [
+    1.8,
+    1.8653,
+    1.7391,
+    1.8274
+   ],
+   "bytes": 63383
   },
   "mu-batarangue": {
    "arquivo": "mu-batarangue.mp3",
@@ -10745,6 +10796,23 @@
     1.667
    ],
    "bytes": 61053
+  },
+  "mu-briga-de-rua": {
+   "arquivo": "mu-briga-de-rua.mp3",
+   "descricao": "Yusuke: a Arma Espiritual",
+   "versoes": [
+    0.0,
+    1.98,
+    4.0289,
+    5.9446
+   ],
+   "duracoes": [
+    1.9,
+    1.9689,
+    1.8357,
+    1.9289
+   ],
+   "bytes": 71245
   },
   "mu-buster": {
    "arquivo": "mu-buster.mp3",
@@ -11103,6 +11171,23 @@
    ],
    "bytes": 52563
   },
+  "mu-escudo-dragao": {
+   "arquivo": "mu-escudo-dragao.mp3",
+   "descricao": "Shiryu: o Escudo do Dragão",
+   "versoes": [
+    0.0,
+    1.98,
+    4.0289,
+    5.9446
+   ],
+   "duracoes": [
+    1.9,
+    1.9689,
+    1.8357,
+    1.9289
+   ],
+   "bytes": 73011
+  },
   "mu-escudo-mjolnir": {
    "arquivo": "mu-escudo-mjolnir.mp3",
    "descricao": "Master Chief: o escudo recarregando",
@@ -11154,6 +11239,23 @@
    ],
    "bytes": 63585
   },
+  "mu-esquife": {
+   "arquivo": "mu-esquife.mp3",
+   "descricao": "Camus: o Esquife de Gelo",
+   "versoes": [
+    0.0,
+    2.18,
+    4.4361,
+    6.5451
+   ],
+   "duracoes": [
+    2.1,
+    2.1761,
+    2.029,
+    2.132
+   ],
+   "bytes": 119164
+  },
   "mu-estalo": {
    "arquivo": "mu-estalo.mp3",
    "descricao": "Thanos: o estalo",
@@ -11187,6 +11289,23 @@
     1.4927
    ],
    "bytes": 56651
+  },
+  "mu-evoluiu": {
+   "arquivo": "mu-evoluiu.mp3",
+   "descricao": "Garou: a evolução",
+   "versoes": [
+    0.0,
+    1.98,
+    4.0289,
+    5.9446
+   ],
+   "duracoes": [
+    1.9,
+    1.9689,
+    1.8357,
+    1.9289
+   ],
+   "bytes": 71616
   },
   "mu-faca": {
    "arquivo": "mu-faca.mp3",
@@ -11239,6 +11358,23 @@
    ],
    "bytes": 77894
   },
+  "mu-fenix-ikki": {
+   "arquivo": "mu-fenix-ikki.mp3",
+   "descricao": "Ikki: a Fênix",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2077,
+    6.2201
+   ],
+   "duracoes": [
+    2.0,
+    2.0477,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 66932
+  },
   "mu-fio": {
    "arquivo": "mu-fio.mp3",
    "descricao": "Tanjiro: o fio e o corte d'água",
@@ -11272,6 +11408,23 @@
     2.132
    ],
    "bytes": 97680
+  },
+  "mu-fogo-espalha": {
+   "arquivo": "mu-fogo-espalha.mp3",
+   "descricao": "Charizard: o fogo que se espalha",
+   "versoes": [
+    0.0,
+    1.9948,
+    4.057,
+    6.0104
+   ],
+   "duracoes": [
+    1.9148,
+    1.9822,
+    1.8734,
+    1.9641
+   ],
+   "bytes": 70451
   },
   "mu-furia-bowser": {
    "arquivo": "mu-furia-bowser.mp3",
@@ -11323,6 +11476,23 @@
     1.9289
    ],
    "bytes": 74617
+  },
+  "mu-futuro": {
+   "arquivo": "mu-futuro.mp3",
+   "descricao": "Trunks: a fenda do tempo",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 98747
   },
   "mu-gancho": {
    "arquivo": "mu-gancho.mp3",
@@ -11443,6 +11613,23 @@
    ],
    "bytes": 74121
   },
+  "mu-hakai": {
+   "arquivo": "mu-hakai.mp3",
+   "descricao": "Beerus: o Hakai",
+   "versoes": [
+    0.0,
+    2.28,
+    4.6398,
+    6.8454
+   ],
+   "duracoes": [
+    2.2,
+    2.2798,
+    2.1256,
+    2.2335
+   ],
+   "bytes": 80710
+  },
   "mu-hev": {
    "arquivo": "mu-hev.mp3",
    "descricao": "Gordon: o traje HEV",
@@ -11493,6 +11680,23 @@
     2.0305
    ],
    "bytes": 72081
+  },
+  "mu-inalar": {
+   "arquivo": "mu-inalar.mp3",
+   "descricao": "Kirby: inalando",
+   "versoes": [
+    0.0,
+    1.98,
+    4.0289,
+    5.9446
+   ],
+   "duracoes": [
+    1.9,
+    1.9689,
+    1.8357,
+    1.9289
+   ],
+   "bytes": 70918
   },
   "mu-inibidores": {
    "arquivo": "mu-inibidores.mp3",
@@ -11562,6 +11766,23 @@
    ],
    "bytes": 61891
   },
+  "mu-juizo": {
+   "arquivo": "mu-juizo.mp3",
+   "descricao": "Hades: o juízo",
+   "versoes": [
+    0.0,
+    2.18,
+    4.4361,
+    6.5451
+   ],
+   "duracoes": [
+    2.1,
+    2.1761,
+    2.029,
+    2.132
+   ],
+   "bytes": 76863
+  },
   "mu-juntas": {
    "arquivo": "mu-juntas.mp3",
    "descricao": "Inosuke: as juntas soltando",
@@ -11613,6 +11834,23 @@
    ],
    "bytes": 52794
   },
+  "mu-kuririn-nao": {
+   "arquivo": "mu-kuririn-nao.mp3",
+   "descricao": "Kuririn: a fúria dourada",
+   "versoes": [
+    0.0,
+    2.28,
+    4.6398,
+    6.8454
+   ],
+   "duracoes": [
+    2.2,
+    2.2798,
+    2.1256,
+    2.2335
+   ],
+   "bytes": 70117
+  },
   "mu-laco": {
    "arquivo": "mu-laco.mp3",
    "descricao": "Mulher-Maravilha: o Laço da verdade",
@@ -11629,6 +11867,23 @@
     1.9289
    ],
    "bytes": 67039
+  },
+  "mu-lendario": {
+   "arquivo": "mu-lendario.mp3",
+   "descricao": "Broly: a aura lendária",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 101912
   },
   "mu-lider": {
    "arquivo": "mu-lider.mp3",
@@ -11698,6 +11953,23 @@
    ],
    "bytes": 66663
   },
+  "mu-meteoro": {
+   "arquivo": "mu-meteoro.mp3",
+   "descricao": "Madara: o meteoro",
+   "versoes": [
+    0.0,
+    2.48,
+    5.047,
+    7.4459
+   ],
+   "duracoes": [
+    2.4,
+    2.487,
+    2.3188,
+    2.4365
+   ],
+   "bytes": 86870
+  },
   "mu-mina": {
    "arquivo": "mu-mina.mp3",
    "descricao": "Rocket: a mina",
@@ -11766,6 +12038,23 @@
    ],
    "bytes": 58367
   },
+  "mu-nao-estava-la": {
+   "arquivo": "mu-nao-estava-la.mp3",
+   "descricao": "Hiei: não estava lá",
+   "versoes": [
+    0.0,
+    1.98,
+    4.0289,
+    5.9446
+   ],
+   "duracoes": [
+    1.9,
+    1.9689,
+    1.8357,
+    1.9289
+   ],
+   "bytes": 72165
+  },
   "mu-nivel": {
    "arquivo": "mu-nivel.mp3",
    "descricao": "Jinwoo: subiu de nível",
@@ -11816,6 +12105,23 @@
     2.0305
    ],
    "bytes": 83141
+  },
+  "mu-pegaso": {
+   "arquivo": "mu-pegaso.mp3",
+   "descricao": "Seiya: os Meteoros de Pégaso",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 81065
   },
   "mu-pele-trovao": {
    "arquivo": "mu-pele-trovao.mp3",
@@ -11936,6 +12242,23 @@
    ],
    "bytes": 71757
   },
+  "mu-primeiro": {
+   "arquivo": "mu-primeiro.mp3",
+   "descricao": "Hayabusa: as shurikens e o corte",
+   "versoes": [
+    0.0,
+    1.3737,
+    2.8067,
+    4.1535
+   ],
+   "duracoes": [
+    1.2937,
+    1.353,
+    1.2668,
+    1.3162
+   ],
+   "bytes": 62944
+  },
   "mu-proximo": {
    "arquivo": "mu-proximo.mp3",
    "descricao": "Ezio: a lâmina oculta",
@@ -11952,6 +12275,23 @@
     1.9289
    ],
    "bytes": 70517
+  },
+  "mu-punicao": {
+   "arquivo": "mu-punicao.mp3",
+   "descricao": "Cabeça de Pirâmide: a faca arrastando",
+   "versoes": [
+    0.0,
+    2.28,
+    4.6398,
+    6.8454
+   ],
+   "duracoes": [
+    2.2,
+    2.2798,
+    2.1256,
+    2.2335
+   ],
+   "bytes": 69700
   },
   "mu-raikousen": {
    "arquivo": "mu-raikousen.mp3",
@@ -12021,6 +12361,40 @@
    ],
    "bytes": 59162
   },
+  "mu-rugido-leao": {
+   "arquivo": "mu-rugido-leao.mp3",
+   "descricao": "Aiolia: o rugido e o Relâmpago de Plasma",
+   "versoes": [
+    0.0,
+    1.9896,
+    4.1059,
+    6.1182
+   ],
+   "duracoes": [
+    1.9096,
+    2.0363,
+    1.9324,
+    1.9544
+   ],
+   "bytes": 113081
+  },
+  "mu-sacrificio": {
+   "arquivo": "mu-sacrificio.mp3",
+   "descricao": "Genos: o sacrifício",
+   "versoes": [
+    0.0,
+    2.28,
+    4.6398,
+    6.8454
+   ],
+   "duracoes": [
+    2.2,
+    2.2798,
+    2.1256,
+    2.2335
+   ],
+   "bytes": 73323
+  },
   "mu-sangue": {
    "arquivo": "mu-sangue.mp3",
    "descricao": "Nezuko: o sangue pegando fogo",
@@ -12055,6 +12429,23 @@
    ],
    "bytes": 67266
   },
+  "mu-selo-ceifador": {
+   "arquivo": "mu-selo-ceifador.mp3",
+   "descricao": "Minato: o Selo do Ceifador",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 77587
+  },
   "mu-sharingan": {
    "arquivo": "mu-sharingan.mp3",
    "descricao": "Sasuke: o Sharingan",
@@ -12088,6 +12479,23 @@
     2.0305
    ],
    "bytes": 77353
+  },
+  "mu-shinra-tensei": {
+   "arquivo": "mu-shinra-tensei.mp3",
+   "descricao": "Pain: o Shinra Tensei",
+   "versoes": [
+    0.0,
+    2.28,
+    4.6398,
+    6.8454
+   ],
+   "duracoes": [
+    2.2,
+    2.2798,
+    2.1256,
+    2.2335
+   ],
+   "bytes": 73481
   },
   "mu-simbionte": {
    "arquivo": "mu-simbionte.mp3",
@@ -12310,6 +12718,23 @@
    ],
    "bytes": 47737
   },
+  "mu-vampire-killer": {
+   "arquivo": "mu-vampire-killer.mp3",
+   "descricao": "Simon: o chicote e a cruz",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 79820
+  },
   "mu-vazio-infinito": {
    "arquivo": "mu-vazio-infinito.mp3",
    "descricao": "Gojo: o Vazio Infinito",
@@ -12411,6 +12836,23 @@
     1.6843
    ],
    "bytes": 74913
+  },
+  "mu-zero-absoluto": {
+   "arquivo": "mu-zero-absoluto.mp3",
+   "descricao": "Hyoga: o Pó de Diamante",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 95363
   },
   "mu-zzz": {
    "arquivo": "mu-zzz.mp3",
