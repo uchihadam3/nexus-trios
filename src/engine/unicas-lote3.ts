@@ -12,7 +12,7 @@ export const LOTE3: Record<string, Unica> = {
   /* ───────── Olimpo ───────── */
   zeus: {
     nome: 'Ira do Olimpo',
-    texto: 'Zeus guarda rancor: anota quem mais feriu o trio dele. A cada 9 s, um raio de 90 cai nesse insolente.',
+    texto: 'A cada 9 s: 90 de dano em quem mais feriu o trio dele.',
     ganchos: {
       viu(_m, b, f, fonte, alvo, dano) { if (alvo.side === f.side && fonte.side !== f.side) u(f)[`ira${idx(b, fonte)}`] = (u(f)[`ira${idx(b, fonte)}`] ?? 0) + dano; },
       passo(m, b, f, dt) {
@@ -26,7 +26,7 @@ export const LOTE3: Record<string, Unica> = {
   },
   poseidon: {
     nome: 'Abalador da terra',
-    texto: 'A cada 15 s, o tridente bate no chão e a terra treme: todos os rivais perdem metade da barra de ação.',
+    texto: 'A cada 15 s, todos os rivais perdem metade da ação.',
     ganchos: {
       passo(m, b, f, dt) {
         if (!relogio(f, 'tremor', dt, 15, 8)) return;
@@ -37,7 +37,7 @@ export const LOTE3: Record<string, Unica> = {
   },
   athena: {
     nome: 'Sabedoria compartilhada',
-    texto: 'Enquanto Atena está de pé, o trio todo pensa melhor: causa 5% a mais e as habilidades enchem 10% mais rápido.',
+    texto: 'Enquanto ela está de pé, o trio causa 5% a mais e enche a Carga 10% mais rápido.',
     ganchos: {
       inicio(m, b, f) { for (const a of m.aliados(b, f)) if (a.bonus) { a.bonus.carga += 0.1; a.bonus.dano += 0.05; } },
       morreu(m, b, f) { for (const a of b.fighters) if (a.side === f.side && a.bonus) { a.bonus.carga -= 0.1; a.bonus.dano -= 0.05; } m.aviso(b, f, 'A sabedoria se foi', f); },
@@ -45,7 +45,7 @@ export const LOTE3: Record<string, Unica> = {
   },
   ares: {
     nome: 'Deus da guerra',
-    texto: 'A guerra o alimenta: cada lutador que cai — de qualquer lado — dá 12% a mais de dano a Ares até o fim da luta.',
+    texto: 'Cada lutador que cai (de qualquer lado): +12% de dano até o fim.',
     ganchos: {
       caiu(m, b, f) { u(f).guerra = Math.min(6, (u(f).guerra ?? 0) + 1); m.aviso(b, f, 'Mais guerra', f, u(f).guerra); },
       causa: (_m, _b, f) => 1 + 0.12 * (u(f).guerra ?? 0),
@@ -53,7 +53,7 @@ export const LOTE3: Record<string, Unica> = {
   },
   apollo: {
     nome: 'Flechas de sol',
-    texto: 'Alterna as flechas: a cada 2 ataques básicos, um cura o aliado mais ferido em 60 em vez de causar dano.',
+    texto: 'A cada 2 ataques básicos, um cura 60 no aliado mais ferido em vez de causar dano.',
     ganchos: {
       causa(m, b, f, _alvo, g) {
         if (!g.direto || g.habilidade) return 1;
@@ -67,12 +67,12 @@ export const LOTE3: Record<string, Unica> = {
   },
   hermes: {
     nome: 'Mensageiro veloz',
-    texto: 'Nunca espera: as habilidades dele não têm Preparo, saem na hora.',
+    texto: 'As habilidades dele saem sem Preparo.',
     ganchos: { preparo: () => 0 },
   },
   aphrodite: {
     nome: 'Pomo da discórdia',
-    texto: 'A cada 10 s, faz dois rivais brigarem por ela: o rival mais forte acerta outro rival com 80 de dano.',
+    texto: 'A cada 10 s, o rival mais forte causa 80 de dano em outro rival.',
     ganchos: {
       passo(m, b, f, dt) {
         if (!relogio(f, 'pomo', dt, 10, 7)) return;
@@ -85,7 +85,7 @@ export const LOTE3: Record<string, Unica> = {
   },
   medusa: {
     nome: 'Olhar de pedra',
-    texto: 'Quem a ataca de frente olha nos olhos dela: 1 em 5 vira pedra (Paralisado 2 s).',
+    texto: '1 em 5 que a atacam ficam Paralisado 2 s.',
     ganchos: {
       apanhou(m, b, f, fonte, _dano, g) {
         if (!g.direto || !vivo(fonte) || m.sorte(b) >= 0.2) return;
@@ -96,7 +96,7 @@ export const LOTE3: Record<string, Unica> = {
   },
   kronos: {
     nome: 'Voltar no tempo',
-    texto: 'Uma vez por luta, ao ficar abaixo de 30% de Vida, volta no tempo: a Vida dele volta a ser o que era 10 s atrás.',
+    texto: 'Abaixo de 30% da Vida (uma vez), volta à Vida que tinha 10 s antes.',
     ganchos: {
       passo(_m, b, f) {
         const s = u(f), seg = Math.floor(b.time);
@@ -119,7 +119,7 @@ export const LOTE3: Record<string, Unica> = {
   /* ───────── Egito e Nórdicos ───────── */
   anubis: {
     nome: 'Guia das almas',
-    texto: 'Cada rival que cai tem a alma levada por Anúbis: a Vida máxima dele sobe 10% e ele cura 10%.',
+    texto: 'Cada rival que cai: +10% de Vida máxima e cura 10%.',
     ganchos: {
       caiu(m, b, f, quem) {
         if (quem.side === f.side) return;
@@ -131,7 +131,7 @@ export const LOTE3: Record<string, Unica> = {
   },
   set: {
     nome: 'Tempestade do deserto',
-    texto: 'A cada 10 s, uma tempestade de areia Cega todos os rivais por 2 s. Set causa 30% a mais em quem está Cego.',
+    texto: 'A cada 10 s, todos os rivais ficam Cego 2 s. Causa 30% a mais em quem está Cego.',
     ganchos: {
       passo(m, b, f, dt) { if (relogio(f, 'areia', dt, 10, 6)) { m.efeitos(b, f, m.rivais(b, f), [st('blind', 0.3, 2)]); m.aviso(b, f, 'Tempestade de areia', f); } },
       causa: (m, _b, _f, alvo) => (m.intensidade(alvo, 'blind') > 0 ? 1.3 : 1),
@@ -139,12 +139,12 @@ export const LOTE3: Record<string, Unica> = {
   },
   horus: {
     nome: 'Olho que tudo vê',
-    texto: 'Enquanto Hórus está de pé, nada se esconde do trio dele: os golpes de todos os três passam por Esquiva e Cego.',
+    texto: 'Enquanto ele está de pé, os golpes do trio ignoram Esquiva e Cego.',
     ganchos: { trioNuncaErra: true },
   },
   sekhmet: {
     nome: 'Cheiro de sangue',
-    texto: 'Quando algum rival está Sangrando, a leoa enlouquece: age 30% mais rápido e cura 10% de todo dano que causa.',
+    texto: 'Com algum rival Sangrando: age 30% mais rápido e cura 10% do dano que causa.',
     ganchos: {
       ritmo: (m, b, f) => (m.rivais(b, f).some((r) => m.intensidade(r, 'bleed') > 0) ? 1.3 : 1),
       bateu(m, b, f, _alvo, dano) { if (m.rivais(b, f).some((r) => m.intensidade(r, 'bleed') > 0)) m.cura(b, f, f, dano * 0.1, 'Cheiro de sangue'); },
@@ -152,7 +152,7 @@ export const LOTE3: Record<string, Unica> = {
   },
   odin: {
     nome: 'Os corvos contam tudo',
-    texto: 'A cada 10 s, Hugin e Munin descobrem a habilidade mais perto de sair entre os rivais e a atrapalham: ela perde 30 de Carga.',
+    texto: 'A cada 10 s, a habilidade rival mais perto de sair perde 30 de Carga.',
     ganchos: {
       passo(m, b, f, dt) {
         if (!relogio(f, 'corvos', dt, 10, 6)) return;
@@ -167,7 +167,7 @@ export const LOTE3: Record<string, Unica> = {
   },
   fenrir: {
     nome: 'Gleipnir',
-    texto: 'Começa acorrentado: nos primeiros 12 s causa 40% a menos. Aí as correntes quebram: Ragnarök! Até o fim da luta causa 40% a mais e age 15% mais rápido.',
+    texto: 'Nos primeiros 12 s causa 40% a menos. Depois, até o fim: 40% a mais e age 15% mais rápido.',
     ganchos: {
       passo(m, b, f) { if (!u(f).solto && b.time >= 12) { u(f).solto = 1; m.aviso(b, f, 'Correntes quebradas', f); } },
       causa: (_m, b) => (b.time < 12 ? 0.6 : 1.4),
@@ -176,7 +176,7 @@ export const LOTE3: Record<string, Unica> = {
   },
   hel: {
     nome: 'Exército dos mortos',
-    texto: 'Cada aliado que cai volta como morto-vivo com 30% da Vida — mas o corpo desaba de novo 8 s depois.',
+    texto: 'Aliado que cai volta com 30% da Vida, mas cai de novo 8 s depois.',
     ganchos: {
       caiu(m, b, f, quem) {
         if (quem.side !== f.side || quem.voltou || (quem.renascendo ?? 0) > 0) return;
@@ -198,12 +198,12 @@ export const LOTE3: Record<string, Unica> = {
   /* ───────── Terror ───────── */
   jason: {
     nome: 'Implacável',
-    texto: 'Nada derruba Jason de uma vez: nenhum golpe tira mais de 150 de Vida dele.',
+    texto: 'Nenhum golpe tira mais de 150 de Vida dele.',
     ganchos: { limita: (_m, _b, f, alvo, valor) => (alvo === f ? Math.min(valor, 150) : valor) },
   },
   freddy: {
     nome: 'Dentro do sonho',
-    texto: 'No sonho, Freddy manda: os golpes dele não acordam quem está Dormindo e causam o dobro em quem dorme.',
+    texto: 'Os golpes dele não acordam quem está Dormindo e causam o dobro em quem dorme.',
     ganchos: {
       naoAcorda: true,
       causa: (m, _b, _f, alvo) => (m.intensidade(alvo, 'sleep') > 0 ? 2 : 1),
@@ -211,7 +211,7 @@ export const LOTE3: Record<string, Unica> = {
   },
   michaelmyers: {
     nome: 'A perseguição',
-    texto: 'Escolhe uma vítima — o rival mais fraco — e só ataca ela, causando 50% a mais. Quando ela cai, escolhe a próxima.',
+    texto: 'Só ataca o rival mais fraco, com 50% a mais. Quando ele cai, passa ao próximo.',
     ganchos: {
       alvoDoBasico(m, b, f) {
         let v = b.fighters[u(f).vitima ?? -1];
@@ -223,7 +223,7 @@ export const LOTE3: Record<string, Unica> = {
   },
   chucky: {
     nome: 'Troca de alma',
-    texto: 'Uma vez por luta, abaixo de 20% de Vida, recita o vodu: troca de Vida com o rival mais saudável (em porcentagem; fica com no máximo 60%).',
+    texto: 'Abaixo de 20% da Vida (uma vez), troca de Vida (em %) com o rival mais saudável, até 60%.',
     ganchos: {
       apanhou(m, b, f) {
         if (u(f).trocou || fracao(f) >= 0.2) return;
@@ -239,7 +239,7 @@ export const LOTE3: Record<string, Unica> = {
   },
   pennywise: {
     nome: 'Come medo',
-    texto: 'Se alimenta do medo: para cada rival com algum Status ruim, cura 5 de Vida por segundo e causa 6% a mais.',
+    texto: 'Por rival com Status ruim: cura 5 por segundo e causa 6% a mais.',
     ganchos: {
       passo(m, b, f, dt) { const n = comMedo(m, b, f); if (n) m.cura(b, f, f, 5 * n * dt, 'Come medo'); },
       causa: (m, b, f) => 1 + 0.06 * comMedo(m, b, f),
@@ -247,7 +247,7 @@ export const LOTE3: Record<string, Unica> = {
   },
   ghostface: {
     nome: 'Dois assassinos',
-    texto: 'Sempre são dois: a cada 3 ataques básicos, o outro Ghostface aparece e acerta outro rival com metade do golpe.',
+    texto: 'A cada 3 ataques básicos, acerta também outro rival com metade.',
     ganchos: {
       bateu(m, b, f, alvo, dano, g) {
         if (!g.direto || g.habilidade) return;
@@ -262,7 +262,7 @@ export const LOTE3: Record<string, Unica> = {
   },
   leatherface: {
     nome: 'Corte que não fecha',
-    texto: 'A motosserra deixa marca: cada golpe direto dele corta 25 da Vida máxima do alvo (até metade).',
+    texto: 'Cada golpe direto tira 25 da Vida máxima do alvo (até metade).',
     ganchos: {
       bateu(_m, _b, _f, alvo, _dano, g) {
         if (!g.direto || !vivo(alvo)) return;
@@ -275,7 +275,7 @@ export const LOTE3: Record<string, Unica> = {
   },
   pinhead: {
     nome: 'A caixa se abre',
-    texto: 'Quando um rival chega a 30% de Vida, a Caixa de Lemarchand se abre para ele: correntes com ganchos o prendem — Paralisado 3 s e Sangrando 25 por segundo por 6 s. Uma vez por rival.',
+    texto: 'Rival que chega a 30% da Vida fica Paralisado 3 s e Sangrando (25 por s, 6 s). Uma vez por rival.',
     ganchos: {
       viu(m, b, f, _fonte, alvo) {
         if (alvo.side === f.side || !vivo(alvo) || fracao(alvo) >= 0.3 || u(f)[`caixa${idx(b, alvo)}`]) return;
@@ -287,7 +287,7 @@ export const LOTE3: Record<string, Unica> = {
   },
   samara: {
     nome: 'Sete dias',
-    texto: 'No começo da luta, o rival mais forte assiste à fita. Cada "dia" dura 5 s; no 7º dia (35 s), se Samara ainda estiver de pé, ela sai da TV e ele cai. Derrubar a Samara antes quebra a maldição.',
+    texto: 'Se ela estiver de pé aos 35 s, o rival mais forte cai. Derrubá-la antes desfaz.',
     ganchos: {
       inicio(m, b, f) { const a = maisForte(m, b, f); if (a) { u(f).fita = idx(b, a); m.aviso(b, f, 'Sete dias…', a); } },
       passo(m, b, f) {
@@ -301,7 +301,7 @@ export const LOTE3: Record<string, Unica> = {
   },
   valak: {
     nome: 'Aparição',
-    texto: 'A cada 10 s some e reaparece atrás do rival com menos Vida: o próximo golpe nele causa o dobro e o deixa Confuso por 2 s.',
+    texto: 'A cada 10 s, o próximo golpe no rival com menos Vida causa o dobro e o deixa Confuso 2 s.',
     ganchos: {
       passo(m, b, f, dt) { if (relogio(f, 'aparece', dt, 10, 6)) { const a = maisFraco(m, b, f); if (a) { u(f).atras = idx(b, a); m.aviso(b, f, 'Atrás de você', a); } } },
       causa: (_m, b, f, alvo, g) => (g.direto && u(f).atras === idx(b, alvo) ? 2 : 1),
@@ -310,7 +310,7 @@ export const LOTE3: Record<string, Unica> = {
   },
   dracula: {
     nome: 'Névoa',
-    texto: 'Uma vez por luta, abaixo de 30% de Vida, vira névoa por 4 s: não leva dano nem ataca, e cura 15% da Vida.',
+    texto: 'Abaixo de 30% da Vida (uma vez), por 4 s: não leva dano nem ataca, e cura 15%.',
     ganchos: {
       apanhou(m, b, f) {
         if (u(f).nevoa || fracao(f) >= 0.3) return;
@@ -324,7 +324,7 @@ export const LOTE3: Record<string, Unica> = {
   },
   xenomorph: {
     nome: 'Colmeia',
-    texto: 'Cada rival que ele derruba vira hospedeiro: nasce uma cria que luta ao lado dele por 20 s.',
+    texto: 'Cada rival que ele derruba vira uma cria que luta ao lado dele por 20 s.',
     ganchos: {
       caiu(m, b, f, quem, quemDerrubou) {
         if (quemDerrubou !== f || quem.side === f.side) return;
@@ -337,7 +337,7 @@ export const LOTE3: Record<string, Unica> = {
   /* ───────── Filmes ───────── */
   yoda: {
     nome: 'Equilíbrio da Força',
-    texto: 'A cada 12 s, equilibra a luta: se o trio dele está com menos Vida que o rival, cura 8% de todos; se está com mais, dá Barreira a todos.',
+    texto: 'A cada 12 s: se o trio tem menos Vida que os rivais, cura 8% de todos; se tem mais, dá Barreira a todos.',
     ganchos: {
       passo(m, b, f, dt) {
         if (!relogio(f, 'forca', dt, 12, 8)) return;
@@ -350,7 +350,7 @@ export const LOTE3: Record<string, Unica> = {
   },
   luke: {
     nome: 'Última esperança',
-    texto: 'Quando fica sozinho, a esperança acende: cura 30% da Vida e causa 50% a mais até o fim da luta.',
+    texto: 'Quando fica sozinho: cura 30% da Vida e causa 50% a mais até o fim.',
     ganchos: {
       caiu(m, b, f, quem) {
         if (quem.side !== f.side || u(f).esperanca || m.aliados(b, f).length !== 1) return;
@@ -363,7 +363,7 @@ export const LOTE3: Record<string, Unica> = {
   },
   agentsmith: {
     nome: 'Mais de mim',
-    texto: 'A cada 12 s, faz mais uma cópia de si (até 3). As cópias lutam ao lado dele: quanto mais cópias, mais forte o ataque delas.',
+    texto: 'A cada 12 s, cria uma cópia (até 3) que luta junto. Mais cópias, ataques mais fortes.',
     ganchos: {
       passo(m, b, f, dt) {
         if (!relogio(f, 'copias', dt, 12, 8)) return;
@@ -375,7 +375,7 @@ export const LOTE3: Record<string, Unica> = {
   },
   johnwick: {
     nome: 'Baba Yaga',
-    texto: 'Cada rival que ele derruba recarrega a arma: todas as habilidades dele ficam prontas na hora.',
+    texto: 'Cada rival que ele derruba deixa todas as habilidades dele Pronta.',
     ganchos: {
       caiu(m, b, f, quem, quemDerrubou) {
         if (quemDerrubou !== f || quem.side === f.side) return;
@@ -386,7 +386,7 @@ export const LOTE3: Record<string, Unica> = {
   },
   robocop: {
     nome: 'Corpo de metal',
-    texto: 'Metal não sangra: nunca fica Sangrando, Envenenado nem Queimando. Mas é pesado: age 10% mais devagar.',
+    texto: 'Não fica Sangrando, Envenenado nem Queimando, mas age 10% mais devagar.',
     ganchos: {
       imune: (_f, s) => s === 'bleed' || s === 'poison' || s === 'burning',
       ritmo: () => 0.9,
@@ -394,12 +394,12 @@ export const LOTE3: Record<string, Unica> = {
   },
   rambo: {
     nome: 'Exército de um homem só',
-    texto: 'Quanto pior a situação, mais perigoso: causa 12% a mais por aliado caído e por rival de pé além do primeiro.',
+    texto: '+12% de dano por aliado caído e por rival de pé além do primeiro.',
     ganchos: { causa: (m, b, f) => 1 + 0.12 * (3 - m.aliados(b, f).length + Math.max(0, m.rivais(b, f).length - 1)) },
   },
   indianajones: {
     nome: 'Chicotada',
-    texto: 'A cada 8 s, o chicote desarma o rival mais forte: tira o Fortalecido e o Escudo dele e o deixa Enfraquecido 25% por 4 s.',
+    texto: 'A cada 8 s, o rival mais forte perde Fortalecido e Escudo e fica Enfraquecido 25% por 4 s.',
     ganchos: {
       passo(m, b, f, dt) {
         if (!relogio(f, 'chicote', dt, 8, 5)) return;
@@ -414,7 +414,7 @@ export const LOTE3: Record<string, Unica> = {
   },
   jacksparrow: {
     nome: 'Parlay!',
-    texto: 'Uma vez por luta, abaixo de 30% de Vida, pede negociação: por 3 s nenhum golpe o acerta.',
+    texto: 'Abaixo de 30% da Vida (uma vez), nenhum golpe o acerta por 3 s.',
     ganchos: {
       apanhou(m, b, f) { if (!u(f).parlay && fracao(f) < 0.3) { u(f).parlay = b.time + 3; m.aviso(b, f, 'Parlay!', f); } },
       recebe: (_m, b, f) => ((u(f).parlay ?? 0) > b.time ? 0 : 1),
@@ -422,7 +422,7 @@ export const LOTE3: Record<string, Unica> = {
   },
   harrypotter: {
     nome: 'Proteção da mãe',
-    texto: 'O primeiro golpe que derrubaria Harry ricocheteia: ele não leva nada, e quem lançou leva o golpe inteiro.',
+    texto: 'O primeiro golpe que o derrubaria volta inteiro em quem lançou.',
     ganchos: {
       salva(m, b, f, alvo, dano, fonte) {
         if (alvo !== f || u(f).mae) return null;
@@ -435,7 +435,7 @@ export const LOTE3: Record<string, Unica> = {
   },
   voldemort: {
     nome: 'Horcruxes',
-    texto: 'A alma está guardada em pedaços: enquanto houver um aliado de pé, o golpe que derrubaria Voldemort destrói uma horcrux e ele fica com 1 de Vida (3 horcruxes).',
+    texto: '3 vezes, com um aliado de pé: o golpe que o derrubaria o deixa com 1 de Vida.',
     ganchos: {
       salva(m, b, f, alvo) {
         if (alvo !== f || (u(f).horcrux ?? 0) >= 3 || m.aliados(b, f).length < 2) return null;
@@ -447,7 +447,7 @@ export const LOTE3: Record<string, Unica> = {
   },
   gandalf: {
     nome: 'O Branco',
-    texto: 'Ao cair, não acabou: volta 12 s depois como Gandalf, o Branco — com 60% da Vida e causando 30% a mais.',
+    texto: 'Ao cair, volta 12 s depois com 60% da Vida, causando 30% a mais.',
     ganchos: {
       morreu(m, b, f) { if (!f.voltou && !u(f).branco) { u(f).branco = 1; f.renascendo = 12; m.aviso(b, f, 'Ele vai voltar', f); } },
       passo(m, b, f) {
