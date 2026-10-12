@@ -111,6 +111,20 @@
   "laco": false,
   "bytes": 63436
  },
+ "agent47_preparo": {
+  "descricao": "Agente 47 · a luneta (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 9970
+ },
  "agilidade_pikachu": {
   "descricao": "Pikachu · os rastros de Agilidade no aliado",
   "quadros": 12,
@@ -3513,6 +3527,20 @@
   "laco": false,
   "bytes": 11056
  },
+ "deflexao_sekiro": {
+  "descricao": "Sekiro · a deflexão e a faísca",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 28694
+ },
  "demolidor_preparo": {
   "descricao": "Demolidor · os chifres e o radar (Preparo, laço)",
   "quadros": 12,
@@ -3596,6 +3624,20 @@
   ],
   "laco": false,
   "bytes": 69212
+ },
+ "desmembramento": {
+  "descricao": "Isaac · o cortador de plasma",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 22982
  },
  "despertar_gohan": {
   "descricao": "Gohan · o soco desperto",
@@ -3778,6 +3820,20 @@
   ],
   "laco": false,
   "bytes": 28538
+ },
+ "disfarce": {
+  "descricao": "Agente 47 · o terno e a seringa",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 15376
  },
  "disparo_arcano": {
   "descricao": "Disparo arcano: mandala de runas e faíscas arcanas",
@@ -5669,6 +5725,20 @@
   "laco": false,
   "bytes": 47954
  },
+ "flor_escarlate": {
+  "descricao": "Malenia · a flor escarlate explodindo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 58600
+ },
  "florete": {
   "descricao": "estocadas finas em sequência",
   "quadros": 12,
@@ -6313,6 +6383,20 @@
   "laco": false,
   "bytes": 79238
  },
+ "garrote": {
+  "descricao": "Agente 47 · o fio apertando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 45708
+ },
  "gas": {
   "descricao": "nuvem de gás",
   "quadros": 12,
@@ -6648,6 +6732,20 @@
   ],
   "laco": false,
   "bytes": 51926
+ },
+ "golpe_mortal": {
+  "descricao": "Sekiro · o golpe mortal",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 27004
  },
  "golpe_na_nuca": {
   "descricao": "Mikasa · a queda em espiral e o corte na nuca",
@@ -8007,6 +8105,20 @@
   "laco": false,
   "bytes": 43062
  },
+ "lamina_de_miquella": {
+  "descricao": "Malenia · o arco duplo e a vida voltando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 14750
+ },
  "lamina_de_prata": {
   "descricao": "Blade · o corte de prata e o sangue de volta",
   "quadros": 12,
@@ -8805,6 +8917,20 @@
   "laco": false,
   "bytes": 83844
  },
+ "malenia_preparo": {
+  "descricao": "Malenia · o botão abrindo (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 30390
+ },
  "maletada": {
   "descricao": "Básico do Leorio: a maleta e os papéis",
   "quadros": 12,
@@ -9238,6 +9364,20 @@
   ],
   "laco": false,
   "bytes": 79500
+ },
+ "mikiri": {
+  "descricao": "Sekiro · o pisão na lança e o kanji",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 19860
  },
  "mil_cortes": {
   "descricao": "mil cortes e X final",
@@ -15623,6 +15763,20 @@
   "laco": false,
   "bytes": 13694
  },
+ "pe_de_cabra": {
+  "descricao": "Gordon · o pé de cabra e o lambda",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 20066
+ },
  "pedra_bloco": {
   "descricao": "Toph · o bloco de pedra voando (laço, básico)",
   "quadros": 12,
@@ -15734,20 +15888,6 @@
   ],
   "laco": false,
   "bytes": 13734
- },
- "petalas": {
-  "descricao": "flor e pétalas",
-  "quadros": 12,
-  "grade": [
-   3,
-   4
-  ],
-  "tamanho": [
-   192,
-   192
-  ],
-  "laco": false,
-  "bytes": 33480
  },
  "petalas_cortantes": {
   "descricao": "Básico do Kurama: as pétalas em espiral cortando",
@@ -18311,6 +18451,48 @@
   "laco": false,
   "bytes": 65686
  },
+ "sinal_de_axii": {
+  "descricao": "Geralt · o sinal Axii e o transe",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 24318
+ },
+ "sinal_de_igni": {
+  "descricao": "Geralt · o sinal Igni e o fogo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 44092
+ },
+ "sinal_de_quen": {
+  "descricao": "Geralt · o sinal Quen e a bolha",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 49634
+ },
  "sniper_preparo": {
   "descricao": "Justiceiro · a luneta respirando (Preparo, laço)",
   "quadros": 12,
@@ -19599,8 +19781,8 @@
   "laco": false,
   "bytes": 27888
  },
- "tiro_preciso": {
-  "descricao": "mira travando e tiro",
+ "tiro_planejado": {
+  "descricao": "Agente 47 · o tiro de precisão",
   "quadros": 12,
   "grade": [
    3,
@@ -19611,7 +19793,7 @@
    192
   ],
   "laco": false,
-  "bytes": 40450
+  "bytes": 19716
  },
  "toasty": {
   "descricao": "Scorpion · o fogo do inferno da caveira",
@@ -20620,6 +20802,20 @@
   ],
   "laco": false,
   "bytes": 101792
+ },
+ "zero_point": {
+  "descricao": "Gordon · o canhão gravitacional",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 23986
  },
  "zero_preparo": {
   "descricao": "Hyoga · o frio girando em volta dele (laço)",

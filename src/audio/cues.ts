@@ -163,6 +163,8 @@ const ANTES_DA_NOVA: Partial<Record<FamiliaNova, { antes: Sound; saida?: Sound }
   trovao_dos_deuses: { antes: 'raidenmk-preparo' },
   forma_devil: { antes: 'kazuya-preparo' },
   forma_final: { antes: 'sora-preparo' },
+  flor_escarlate: { antes: 'malenia-preparo' },
+  tiro_planejado: { antes: 'agent47-preparo' },
   despertar_gohan: { antes: 'aura-besta' },
   raio_mortal: { antes: 'raio-mortal-saida' },
   bola_da_morte: { antes: 'bola-da-morte-carga' },

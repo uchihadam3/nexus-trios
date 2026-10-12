@@ -138,6 +138,23 @@
    ],
    "bytes": 62431
   },
+  "agent47-preparo": {
+   "arquivo": "agent47-preparo.mp3",
+   "descricao": "Agente 47: a luneta (Preparo)",
+   "versoes": [
+    0.0,
+    1.2633,
+    2.6293,
+    3.8812
+   ],
+   "duracoes": [
+    1.1833,
+    1.2859,
+    1.172,
+    1.2541
+   ],
+   "bytes": 44019
+  },
   "agilidade-pikachu": {
    "arquivo": "agilidade-pikachu.mp3",
    "descricao": "Agilidade: os rastros correndo em volta",
@@ -3946,6 +3963,23 @@
    ],
    "bytes": 41209
   },
+  "deflexao-sekiro": {
+   "arquivo": "deflexao-sekiro.mp3",
+   "descricao": "Sekiro: a deflexão",
+   "versoes": [
+    0.0,
+    1.0721,
+    2.2458,
+    3.2446
+   ],
+   "duracoes": [
+    0.9921,
+    1.0937,
+    0.9188,
+    1.0094
+   ],
+   "bytes": 40305
+  },
   "demolidor-preparo": {
    "arquivo": "demolidor-preparo.mp3",
    "descricao": "Demolidor: o radar e os corações (antes do golpe)",
@@ -4064,6 +4098,23 @@
     0.7736
    ],
    "bytes": 41990
+  },
+  "desmembramento": {
+   "arquivo": "desmembramento.mp3",
+   "descricao": "Isaac: o desmembramento",
+   "versoes": [
+    0.0,
+    1.98,
+    4.0289,
+    5.9446
+   ],
+   "duracoes": [
+    1.9,
+    1.9689,
+    1.8357,
+    1.9289
+   ],
+   "bytes": 55796
   },
   "despertar-gohan": {
    "arquivo": "despertar-gohan.mp3",
@@ -4251,6 +4302,23 @@
     1.3198
    ],
    "bytes": 48338
+  },
+  "disfarce": {
+   "arquivo": "disfarce.mp3",
+   "descricao": "Agente 47: o disfarce",
+   "versoes": [
+    0.0,
+    1.8224,
+    3.6538,
+    5.4243
+   ],
+   "duracoes": [
+    1.7424,
+    1.7514,
+    1.6904,
+    1.661
+   ],
+   "bytes": 62212
   },
   "disparo": {
    "arquivo": "disparo.mp3",
@@ -6394,6 +6462,23 @@
    ],
    "bytes": 57484
   },
+  "flor-escarlate": {
+   "arquivo": "flor-escarlate.mp3",
+   "descricao": "Malenia: a flor escarlate",
+   "versoes": [
+    0.0,
+    2.28,
+    4.6398,
+    6.8454
+   ],
+   "duracoes": [
+    2.2,
+    2.2798,
+    2.1256,
+    2.2335
+   ],
+   "bytes": 69639
+  },
   "florete": {
    "arquivo": "florete.mp3",
    "descricao": "família florete",
@@ -7176,6 +7261,23 @@
    ],
    "bytes": 44101
   },
+  "garrote": {
+   "arquivo": "garrote.mp3",
+   "descricao": "Agente 47: o garrote",
+   "versoes": [
+    0.0,
+    1.5312,
+    3.073,
+    4.5561
+   ],
+   "duracoes": [
+    1.4512,
+    1.4617,
+    1.4031,
+    1.4329
+   ],
+   "bytes": 52699
+  },
   "gas": {
    "arquivo": "gas.mp3",
    "descricao": "família gas",
@@ -7583,6 +7685,23 @@
     1.2026
    ],
    "bytes": 38323
+  },
+  "golpe-mortal": {
+   "arquivo": "golpe-mortal.mp3",
+   "descricao": "Sekiro: o golpe mortal",
+   "versoes": [
+    0.0,
+    1.5394,
+    3.2083,
+    4.8038
+   ],
+   "duracoes": [
+    1.4594,
+    1.5889,
+    1.5156,
+    1.518
+   ],
+   "bytes": 53497
   },
   "golpe-na-nuca": {
    "arquivo": "golpe-na-nuca.mp3",
@@ -9284,6 +9403,23 @@
    ],
    "bytes": 48731
   },
+  "lamina-de-miquella": {
+   "arquivo": "lamina-de-miquella.mp3",
+   "descricao": "Malenia: a lâmina protética",
+   "versoes": [
+    0.0,
+    1.7619,
+    3.5829,
+    5.3028
+   ],
+   "duracoes": [
+    1.6819,
+    1.741,
+    1.6399,
+    1.6957
+   ],
+   "bytes": 66335
+  },
   "lamina-de-prata": {
    "arquivo": "lamina-de-prata.mp3",
    "descricao": "Blade: a espada de prata e o sangue de volta",
@@ -10253,6 +10389,23 @@
    ],
    "bytes": 38984
   },
+  "malenia-preparo": {
+   "arquivo": "malenia-preparo.mp3",
+   "descricao": "Malenia: a flor abrindo (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 55181
+  },
   "maletada": {
    "arquivo": "maletada.mp3",
    "descricao": "básico do Leorio: a maleta e os papéis",
@@ -10779,6 +10932,23 @@
     1.1167
    ],
    "bytes": 45661
+  },
+  "mikiri": {
+   "arquivo": "mikiri.mp3",
+   "descricao": "Sekiro: Mikiri",
+   "versoes": [
+    0.0,
+    1.3611,
+    2.7561,
+    4.0642
+   ],
+   "duracoes": [
+    1.2811,
+    1.315,
+    1.2281,
+    1.2891
+   ],
+   "bytes": 42420
   },
   "mil-cortes": {
    "arquivo": "mil-cortes.mp3",
@@ -18515,6 +18685,23 @@
    ],
    "bytes": 57756
   },
+  "pe-de-cabra": {
+   "arquivo": "pe-de-cabra.mp3",
+   "descricao": "Gordon: o pé de cabra",
+   "versoes": [
+    0.0,
+    1.5193,
+    3.0903,
+    4.5619
+   ],
+   "duracoes": [
+    1.4393,
+    1.491,
+    1.3917,
+    1.4612
+   ],
+   "bytes": 49843
+  },
   "pedra-da-toph": {
    "arquivo": "pedra-da-toph.mp3",
    "descricao": "básico da Toph: a pisada, o bloco voando e a pedra se partindo",
@@ -18616,23 +18803,6 @@
     1.4213
    ],
    "bytes": 58093
-  },
-  "petalas": {
-   "arquivo": "petalas.mp3",
-   "descricao": "família petalas",
-   "versoes": [
-    0.0,
-    1.28,
-    2.6035,
-    3.8429
-   ],
-   "duracoes": [
-    1.2,
-    1.2435,
-    1.1594,
-    1.2183
-   ],
-   "bytes": 54472
   },
   "petalas-cortantes": {
    "arquivo": "petalas-cortantes.mp3",
@@ -21660,6 +21830,57 @@
    ],
    "bytes": 62212
   },
+  "sinal-de-axii": {
+   "arquivo": "sinal-de-axii.mp3",
+   "descricao": "Geralt: Axii",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 66907
+  },
+  "sinal-de-igni": {
+   "arquivo": "sinal-de-igni.mp3",
+   "descricao": "Geralt: Igni",
+   "versoes": [
+    0.0,
+    1.7099,
+    3.5288,
+    5.3068
+   ],
+   "duracoes": [
+    1.6299,
+    1.7388,
+    1.698,
+    1.6933
+   ],
+   "bytes": 60829
+  },
+  "sinal-de-quen": {
+   "arquivo": "sinal-de-quen.mp3",
+   "descricao": "Geralt: Quen",
+   "versoes": [
+    0.0,
+    1.8132,
+    3.6982,
+    5.4967
+   ],
+   "duracoes": [
+    1.7332,
+    1.805,
+    1.7185,
+    1.7688
+   ],
+   "bytes": 75450
+  },
   "sniper-preparo": {
    "arquivo": "sniper-preparo.mp3",
    "descricao": "Justiceiro: a respiração e o ferrolho (antes do tiro)",
@@ -23139,22 +23360,22 @@
    ],
    "bytes": 50296
   },
-  "tiro-preciso": {
-   "arquivo": "tiro-preciso.mp3",
-   "descricao": "família tiro preciso",
+  "tiro-planejado": {
+   "arquivo": "tiro-planejado.mp3",
+   "descricao": "Agente 47: o tiro planejado",
    "versoes": [
     0.0,
-    0.98,
-    1.9926,
-    2.9422
+    1.5681,
+    3.226,
+    4.7573
    ],
    "duracoes": [
-    0.9,
-    0.9326,
-    0.8695,
-    0.9137
+    1.4881,
+    1.5779,
+    1.4513,
+    1.4659
    ],
-   "bytes": 35312
+   "bytes": 51221
   },
   "toasty": {
    "arquivo": "toasty.mp3",
@@ -24566,6 +24787,23 @@
     2.2335
    ],
    "bytes": 87902
+  },
+  "zero-point": {
+   "arquivo": "zero-point.mp3",
+   "descricao": "Gordon: o Zero-point",
+   "versoes": [
+    0.0,
+    2.07,
+    4.2225,
+    6.209
+   ],
+   "duracoes": [
+    1.99,
+    2.0725,
+    1.9065,
+    1.9201
+   ],
+   "bytes": 54635
   },
   "zero-preparo": {
    "arquivo": "zero-preparo.mp3",

@@ -279,15 +279,6 @@ def cravar(rng, v):
     return reverb(x, 0.2, 0.1)
 
 
-def tiro_preciso(rng, v):
-    x = _z(0.9)
-    n = n_de(0.2)
-    poe(x, estalo(rng, n, 2000, 6000, 0.003) * 0.4, 0)
-    poe(x, estalo(rng, n, 2000, 6000, 0.003) * 0.4, 0.08)
-    poe(x, B.tiro(rng, v), 0.25, 1.1)
-    return reverb(x, 0.6, 0.3, 5000)
-
-
 def espingarda(rng, v):
     x = _z(0.9)
     n = n_de(0.6)
@@ -602,14 +593,6 @@ def vinhas(rng, v):
     x += passa(rosa(rng, n), 150, 800, 2) * sobe_e_some(n, 0.5, 1.4) * 0.4
     poe(x, B.prisao(rng, v)[: n_de(0.5)] * 0.4, 0.6)
     return reverb(x, 0.35, 0.2)
-
-
-def petalas(rng, v):
-    n = n_de(1.2)
-    x = assobio(rng, n, 2000, 4000, 1.0, 0.4) * sobe_e_some(n, 0.4, 1.4) * 0.4
-    for k, m in enumerate((79, 83, 86, 91)):
-        poe(x, _brilho(rng, 0.5, nota(m), 0.12, SINO), 0.05 + k * 0.08)
-    return reverb(x, 0.6, 0.35, 8000)
 
 
 def enxame(rng, v):

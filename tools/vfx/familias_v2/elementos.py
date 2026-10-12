@@ -316,29 +316,6 @@ def vinhas(T, t, rng):
     return G, H
 
 
-def petalas(T, t, rng):
-    """Pétalas: uma flor abre no alvo e as pétalas se soltam num redemoinho."""
-    G, H = vazio(T)
-    abre = ease_out(rel(t, 0, 0.3), 2)
-    env = apaga(t, 0.7, 1)
-    flor = T.zero()
-    for k in range(6):
-        a = TAU * k / 6 + t * 0.5
-        cx, cy = math.cos(a) * 0.18 * abre, math.sin(a) * 0.18 * abre
-        al, la = girado(T, a, cx, cy)
-        flor += np.exp(-((al / 0.16) ** 2 + (la / 0.07) ** 2)) * (1 - rel(t, 0.35, 0.7))
-    voam = []
-    for _ in range(36):
-        a0 = rng.uniform(0, TAU)
-        u = rel(t, 0.3 + rng.uniform(0, 0.2), 1)
-        r = 0.15 + 0.7 * u
-        a = a0 + u * 3
-        voam.append((math.cos(a) * r, math.sin(a) * r * 0.7 - 0.2 * u, (1 - u) * (u > 0) * rng.uniform(0.5, 1)))
-    G += (flor * 1.4 + T.splats(voam, 0.016) * 1.3 + T.gauss(0, 0, 0.06) * abre * 1.5) * env
-    H += (flor * 0.5 + T.gauss(0, 0, 0.05) * abre) * env
-    return G, H
-
-
 def enxame(T, t, rng):
     """Enxame: dezenas de pontinhos zumbindo em nuvem, envolvendo o alvo e se espalhando."""
     G, H = vazio(T)
@@ -458,7 +435,6 @@ REGISTRO = [
     ("tornado", tornado, GRANDE, "funil de tornado", False),
     ("rajada_de_ar", rajada_de_ar, GRANDE, "arcos de vento", False),
     ("vinhas", vinhas, GRANDE, "vinhas enrolando", False),
-    ("petalas", petalas, GRANDE, "flor e pétalas", False),
     ("enxame", enxame, GRANDE, "enxame zumbindo", False),
     ("acido", acido, GRANDE, "respingo de ácido", False),
     ("sangue", sangue, GRANDE, "respingo de sangue", False),

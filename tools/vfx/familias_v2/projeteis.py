@@ -213,22 +213,6 @@ def cravar(T, t, rng):
     return G, H
 
 
-def tiro_preciso(T, t, rng):
-    """Tiro de precisão: a mira trava num ponto, estala, e um furo de luz estoura."""
-    G, H = vazio(T)
-    fecha = ease_out(rel(t, 0, 0.25), 2.5)
-    r = 0.6 - 0.35 * fecha
-    mira = T.ring(r, 0.012) * apaga(t, 0.3, 0.6) * 1.3
-    marcas = T.lines([(r + 0.08, 0, r - 0.05, 0, 1), (-r - 0.08, 0, -r + 0.05, 0, 1), (0, r + 0.08, 0, r - 0.05, 1), (0, -r - 0.08, 0, -r + 0.05, 1)], 0.014, 0.002) * apaga(t, 0.3, 0.6)
-    tt = rel(t, 0.28, 1)
-    furo = (T.gauss(0, 0, 0.05) * 3 + T.flare(0, 0, 1.2, 0.785)) * some(t, 0.28, 0.6) * 1.5
-    anel = T.ring(0.05 + 0.4 * ease_out(tt, 3), 0.012) * (1 - tt) ** 1.5 * 1.5 * (t > 0.28)
-    fa = faiscas(T, rng, t, 16, 0.6, 0.025, inicio=0.28)
-    G += mira + marcas + furo + anel + T.glow(fa, 1, 1, 0.02)
-    H += marcas * 0.6 + furo + fa * 0.6
-    return G, H
-
-
 def espingarda(T, t, rng):
     """Espingarda: nove impactos pequenos espalhados num cone, quase juntos, e fumaça."""
     G, H = vazio(T)
@@ -393,7 +377,6 @@ REGISTRO = [
     ("feixe_ki", feixe_ki, FAIXA, "feixe de ki com hélice (faixa)", True),
     ("canhao_de_energia", canhao_de_energia, FAIXA, "canhão de energia (faixa)", True),
     ("cravar", cravar, GRANDE, "flecha cravando", False),
-    ("tiro_preciso", tiro_preciso, GRANDE, "mira travando e tiro", False),
     ("espingarda", espingarda, GRANDE, "nove impactos espalhados", False),
     ("teia_rede", teia_rede, GRANDE, "rede de teia", False),
     ("bolhas", bolhas, GRANDE, "bolhas subindo e estourando", False),
