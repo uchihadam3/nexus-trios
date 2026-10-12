@@ -119,9 +119,9 @@ function jornadas() {
  *   aleatório — X com dois parceiros sorteados;
  *   bom — o trio que um jogador bom montaria em volta de X na escolha (pela nota, procurando combo);
  *   melhor — os 20 trios com X que mais venceram de verdade no plano trios (candidatos-do-melhor.json: todos os
- *   10,6 milhões de trios, a sorte de 10 lutas descontada), peneirados em jornadas, e o vencedor medido em jornadas
- *   novas. Sem a lista (elenco novo), volta à busca antiga: as 10 duplas de nota mais alta entre os mais fortes
- *   (FORTES) e os do mesmo universo, e mais 10 sorteadas um pouco abaixo.
+ *   10,6 milhões de trios, a sorte de 10 lutas descontada) e mais os 20 da busca pela nota (as 10 duplas de nota mais
+ *   alta entre os mais fortes — FORTES — e os do mesmo universo, e 10 sorteadas um pouco abaixo), peneirados em
+ *   jornadas, e o vencedor medido em jornadas novas.
  */
 function dificuldade() {
   const ids = characters.map((c) => c.id), NJ = lutas;
@@ -157,17 +157,16 @@ function dificuldade() {
     const conta = (t: string[], de: number, ate: number) => { let v = 0; for (let j = de; j < ate; j++) if (jornada(t, semente(j)) === 10) v++; return v; };
     // os 20 trios com X que mais venceram nas lutas de verdade (plano trios); só sem a lista, a busca antiga pela nota
     const medidos = ((CANDIDATOS as Record<string, [string, string][]>)[x] ?? []).filter(([a, b]) => ids.includes(a) && ids.includes(b));
-    let candidatos: [string, string][] = medidos.slice(0, 20);
-    if (!candidatos.length) {
-      const uni = characters.find((c) => c.id === x)?.universe;
-      const ps = [...new Set([...fortes, ...ids.filter((c) => uni && characters.find((z) => z.id === c)?.universe === uni)])].filter((c) => c !== x);
-      const pares: [string, string, number][] = [];
-      for (let a = 0; a < ps.length; a++) for (let b = a + 1; b < ps.length; b++) pares.push([ps[a]!, ps[b]!, forcaDoTrio([x, ps[a]!, ps[b]!])]);
-      pares.sort((p, q) => q[2] - p[2]);
-      // os 10 de nota mais alta e 10 sorteados entre o 11º e o 150º: a campanha põe mais Vida nos rivais do trio que passa
-      // do topo, e o melhor trio de verdade nem sempre é o de nota mais alta
-      candidatos = [...pares.slice(0, 10), ...pares.slice(10, 150).sort(() => rnd() - 0.5).slice(0, 10)].map(([a, b]) => [a, b]);
-    }
+    const uni = characters.find((c) => c.id === x)?.universe;
+    const ps = [...new Set([...fortes, ...ids.filter((c) => uni && characters.find((z) => z.id === c)?.universe === uni)])].filter((c) => c !== x);
+    const pares: [string, string, number][] = [];
+    for (let a = 0; a < ps.length; a++) for (let b = a + 1; b < ps.length; b++) pares.push([ps[a]!, ps[b]!, forcaDoTrio([x, ps[a]!, ps[b]!])]);
+    pares.sort((p, q) => q[2] - p[2]);
+    // da nota: os 10 de nota mais alta e 10 sorteados entre o 11º e o 150º — a campanha põe mais Vida nos rivais do trio
+    // que passa do topo, e o trio que mais vence luta avulsa pode ser justamente o que mais sofre com isso
+    const pelaNota: [string, string][] = [...pares.slice(0, 10), ...pares.slice(10, 150).sort(() => rnd() - 0.5).slice(0, 10)].map(([a, b]) => [a, b]);
+    const vistos = new Set<string>();
+    const candidatos = [...medidos.slice(0, 20), ...pelaNota].filter(([a, b]) => { const k = [a, b].sort().join('|'); if (vistos.has(k)) return false; vistos.add(k); return true; });
     const peneira = candidatos.map(([a, b]) => ({ d: [a, b], v: conta([x, a, b], NJ, NJ + 8) })).sort((p, q) => q.v - p.v).slice(0, 3)
       .map((p) => ({ ...p, v: p.v + conta([x, ...p.d], NJ + 8, NJ + 24) })).sort((p, q) => q.v - p.v);
     const melhor = peneira[0]!.d, NM = Math.max(48, Math.round(NJ / 2));
