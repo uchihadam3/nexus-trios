@@ -9281,6 +9281,20 @@
   "laco": false,
   "bytes": 34156
  },
+ "mu_areia": {
+  "descricao": "Gaara · a areia",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 59264
+ },
  "mu_areias": {
   "descricao": "Príncipe da Pérsia · a ampulheta das Areias do Tempo",
   "quadros": 12,
@@ -9785,6 +9799,20 @@
   "laco": false,
   "bytes": 98404
  },
+ "mu_cerebro": {
+  "descricao": "Professor X · o Cérebro",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 67380
+ },
  "mu_chamas_roy": {
   "descricao": "Roy · o estalo e as explosões",
   "quadros": 12,
@@ -10107,6 +10135,20 @@
   "laco": false,
   "bytes": 49232
  },
+ "mu_corrente_intercepta": {
+  "descricao": "Shun · a corrente de Andrômeda",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 41796
+ },
  "mu_corte_fundo": {
   "descricao": "Leatherface · a motosserra roncando",
   "quadros": 12,
@@ -10134,6 +10176,20 @@
   ],
   "laco": false,
   "bytes": 19286
+ },
+ "mu_corte_na_nuca": {
+  "descricao": "Levi · o giro e o corte na nuca",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 19794
  },
  "mu_corvos_odin": {
   "descricao": "Odin · os corvos e a Gungnir",
@@ -10527,6 +10583,34 @@
   "laco": false,
   "bytes": 30398
  },
+ "mu_doenca_terminal": {
+  "descricao": "Itachi · o sangue e os corvos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 25360
+ },
+ "mu_dois_lados": {
+  "descricao": "Saga · os dois lados",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 59282
+ },
  "mu_doombot": {
   "descricao": "Doutor Destino · o Doombot que se parte",
   "quadros": 12,
@@ -10540,6 +10624,20 @@
   ],
   "laco": false,
   "bytes": 31416
+ },
+ "mu_doze_por_cento": {
+  "descricao": "Senhor das Estrelas · 12% de um plano",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 9600
  },
  "mu_dragao_malevola": {
   "descricao": "Malévola · os chifres e o fogo verde",
@@ -10596,6 +10694,20 @@
   ],
   "laco": false,
   "bytes": 68318
+ },
+ "mu_empatia": {
+  "descricao": "Ravena · a cura empática",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 41208
  },
  "mu_encanto": {
   "descricao": "Mulher-Aranha · o feromônio e a rajada",
@@ -10974,6 +11086,20 @@
   ],
   "laco": false,
   "bytes": 12190
+ },
+ "mu_familiar": {
+  "descricao": "Alucard · o familiar",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 34230
  },
  "mu_fantasma": {
   "descricao": "Gengar · a bola sombria e o sorriso",
@@ -12067,6 +12193,20 @@
   "laco": false,
   "bytes": 69160
  },
+ "mu_mares": {
+  "descricao": "Aquaman · as marés",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 27526
+ },
  "mu_matriz": {
   "descricao": "Optimus Prime · a Matriz da Liderança",
   "quadros": 12,
@@ -12080,6 +12220,20 @@
   ],
   "laco": false,
   "bytes": 62362
+ },
+ "mu_medica_de_campo": {
+  "descricao": "Sakura · a mão que cura",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 72350
  },
  "mu_medo": {
   "descricao": "Espantalho · o gás do medo",
@@ -12263,6 +12417,20 @@
   "laco": false,
   "bytes": 13706
  },
+ "mu_necroplasma": {
+  "descricao": "Spawn · as correntes e a capa",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 75984
+ },
  "mu_nevoa": {
   "descricao": "Drácula · a névoa e os morcegos",
   "quadros": 12,
@@ -12276,6 +12444,20 @@
   ],
   "laco": false,
   "bytes": 45030
+ },
+ "mu_ninguem_toca": {
+  "descricao": "Mikasa · as duas lâminas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 16612
  },
  "mu_nivel": {
   "descricao": "Jinwoo · a janela do sistema: subiu de nível",
@@ -12473,6 +12655,20 @@
   "laco": false,
   "bytes": 19756
  },
+ "mu_particulas_pym": {
+  "descricao": "Homem-Formiga · as partículas Pym",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 28582
+ },
  "mu_pecados": {
   "descricao": "Motoqueiro Fantasma · a corrente em chamas",
   "quadros": 12,
@@ -12655,6 +12851,20 @@
   "laco": false,
   "bytes": 20500
  },
+ "mu_pod_042": {
+  "descricao": "2B · o Pod 042",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 18084
+ },
  "mu_poder_escondido": {
   "descricao": "Salsicha · o 1% do poder",
   "quadros": 12,
@@ -12696,6 +12906,20 @@
   ],
   "laco": false,
   "bytes": 20558
+ },
+ "mu_polaridade": {
+  "descricao": "Magneto · o campo magnético",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 51564
  },
  "mu_portal": {
   "descricao": "Doutor Estranho · o anel de faíscas do portal girando",
@@ -13047,6 +13271,20 @@
   "laco": false,
   "bytes": 40308
  },
+ "mu_rendicao_sentidos": {
+  "descricao": "Shaka · a rendição dos sentidos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 71006
+ },
  "mu_road_roller": {
   "descricao": "Dio · o Road Roller",
   "quadros": 12,
@@ -13187,6 +13425,34 @@
   "laco": false,
   "bytes": 21324
  },
+ "mu_selo_da_luz": {
+  "descricao": "Zelda · a Triforce",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 42988
+ },
+ "mu_sem_esperanca": {
+  "descricao": "Darkseid · os olhos ômega",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 12002
+ },
  "mu_sem_folego": {
   "descricao": "Cheetara · a corrida e o fôlego acabando",
   "quadros": 12,
@@ -13214,6 +13480,20 @@
   ],
   "laco": false,
   "bytes": 19300
+ },
+ "mu_sentido_radar": {
+  "descricao": "Demolidor · o radar",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 41574
  },
  "mu_sete_dias": {
   "descricao": "Samara · a TV, o anel e os cabelos",
@@ -13537,6 +13817,20 @@
   "laco": false,
   "bytes": 57906
  },
+ "mu_tempestade_pula": {
+  "descricao": "Tempestade · o raio que pula",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 26556
+ },
  "mu_tempo_voltou": {
   "descricao": "Cronos · o relógio voltando",
   "quadros": 12,
@@ -13690,6 +13984,20 @@
   ],
   "laco": false,
   "bytes": 56636
+ },
+ "mu_trio_unido": {
+  "descricao": "Leonardo · o trio unido",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 37660
  },
  "mu_trofeu": {
   "descricao": "Predador · a mira de três pontos e a camuflagem",

@@ -10831,6 +10831,23 @@
    ],
    "bytes": 45444
   },
+  "mu-areia": {
+   "arquivo": "mu-areia.mp3",
+   "descricao": "Gaara: a areia",
+   "versoes": [
+    0.0,
+    1.6685,
+    3.443,
+    5.1053
+   ],
+   "duracoes": [
+    1.5885,
+    1.6945,
+    1.5823,
+    1.6126
+   ],
+   "bytes": 60266
+  },
   "mu-areias": {
    "arquivo": "mu-areias.mp3",
    "descricao": "Príncipe da Pérsia: as Areias do Tempo",
@@ -11443,6 +11460,23 @@
    ],
    "bytes": 71591
   },
+  "mu-cerebro": {
+   "arquivo": "mu-cerebro.mp3",
+   "descricao": "Professor X: o Cérebro",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 50593
+  },
   "mu-chamas-roy": {
    "arquivo": "mu-chamas-roy.mp3",
    "descricao": "Roy: o estalo e as chamas",
@@ -11834,6 +11868,23 @@
    ],
    "bytes": 64229
   },
+  "mu-corrente-intercepta": {
+   "arquivo": "mu-corrente-intercepta.mp3",
+   "descricao": "Shun: a corrente",
+   "versoes": [
+    0.0,
+    1.644,
+    3.3502,
+    4.9426
+   ],
+   "duracoes": [
+    1.564,
+    1.6262,
+    1.5124,
+    1.5937
+   ],
+   "bytes": 63842
+  },
   "mu-corte-fundo": {
    "arquivo": "mu-corte-fundo.mp3",
    "descricao": "Leatherface: a motosserra",
@@ -11867,6 +11918,23 @@
     1.6853
    ],
    "bytes": 65451
+  },
+  "mu-corte-na-nuca": {
+   "arquivo": "mu-corte-na-nuca.mp3",
+   "descricao": "Levi: o corte na nuca",
+   "versoes": [
+    0.0,
+    1.4565,
+    2.9617,
+    4.3632
+   ],
+   "duracoes": [
+    1.3765,
+    1.4252,
+    1.3215,
+    1.3971
+   ],
+   "bytes": 61291
   },
   "mu-corvos-odin": {
    "arquivo": "mu-corvos-odin.mp3",
@@ -12344,6 +12412,40 @@
    ],
    "bytes": 67511
   },
+  "mu-doenca-terminal": {
+   "arquivo": "mu-doenca-terminal.mp3",
+   "descricao": "Itachi: a doença",
+   "versoes": [
+    0.0,
+    1.9629,
+    4.0031,
+    5.8797
+   ],
+   "duracoes": [
+    1.8829,
+    1.9601,
+    1.7966,
+    1.9001
+   ],
+   "bytes": 73859
+  },
+  "mu-dois-lados": {
+   "arquivo": "mu-dois-lados.mp3",
+   "descricao": "Saga: os dois lados",
+   "versoes": [
+    0.0,
+    2.28,
+    4.6398,
+    6.8454
+   ],
+   "duracoes": [
+    2.2,
+    2.2798,
+    2.1256,
+    2.2335
+   ],
+   "bytes": 58077
+  },
   "mu-doombot": {
    "arquivo": "mu-doombot.mp3",
    "descricao": "Doutor Destino: o Doombot",
@@ -12360,6 +12462,23 @@
     1.5872
    ],
    "bytes": 47542
+  },
+  "mu-doze-por-cento": {
+   "arquivo": "mu-doze-por-cento.mp3",
+   "descricao": "Senhor das Estrelas: 12%",
+   "versoes": [
+    0.0,
+    1.2694,
+    2.577,
+    3.8301
+   ],
+   "duracoes": [
+    1.1894,
+    1.2276,
+    1.1731,
+    1.1499
+   ],
+   "bytes": 50314
   },
   "mu-dragao-malevola": {
    "arquivo": "mu-dragao-malevola.mp3",
@@ -12428,6 +12547,23 @@
     2.0305
    ],
    "bytes": 66363
+  },
+  "mu-empatia": {
+   "arquivo": "mu-empatia.mp3",
+   "descricao": "Ravena: a empatia",
+   "versoes": [
+    0.0,
+    2.0323,
+    4.1084,
+    6.0205
+   ],
+   "duracoes": [
+    1.9523,
+    1.9961,
+    1.8322,
+    1.9717
+   ],
+   "bytes": 61264
   },
   "mu-encanto": {
    "arquivo": "mu-encanto.mp3",
@@ -12887,6 +13023,23 @@
     1.341
    ],
    "bytes": 52843
+  },
+  "mu-familiar": {
+   "arquivo": "mu-familiar.mp3",
+   "descricao": "Alucard: o familiar",
+   "versoes": [
+    0.0,
+    1.5957,
+    3.3404,
+    4.9544
+   ],
+   "duracoes": [
+    1.5157,
+    1.6647,
+    1.534,
+    1.584
+   ],
+   "bytes": 63055
   },
   "mu-fantasma": {
    "arquivo": "mu-fantasma.mp3",
@@ -14214,6 +14367,23 @@
    ],
    "bytes": 79620
   },
+  "mu-mares": {
+   "arquivo": "mu-mares.mp3",
+   "descricao": "Aquaman: as marés",
+   "versoes": [
+    0.0,
+    2.28,
+    4.6398,
+    6.8234
+   ],
+   "duracoes": [
+    2.2,
+    2.2798,
+    2.1037,
+    2.2065
+   ],
+   "bytes": 78614
+  },
   "mu-matriz": {
    "arquivo": "mu-matriz.mp3",
    "descricao": "Optimus: a Matriz",
@@ -14230,6 +14400,23 @@
     2.132
    ],
    "bytes": 74864
+  },
+  "mu-medica-de-campo": {
+   "arquivo": "mu-medica-de-campo.mp3",
+   "descricao": "Sakura: a médica",
+   "versoes": [
+    0.0,
+    1.9585,
+    3.901,
+    5.7822
+   ],
+   "duracoes": [
+    1.8785,
+    1.8625,
+    1.8012,
+    1.9067
+   ],
+   "bytes": 54563
   },
   "mu-medo": {
    "arquivo": "mu-medo.mp3",
@@ -14452,6 +14639,23 @@
    ],
    "bytes": 52330
   },
+  "mu-necroplasma": {
+   "arquivo": "mu-necroplasma.mp3",
+   "descricao": "Spawn: o necroplasma",
+   "versoes": [
+    0.0,
+    1.8064,
+    3.5996,
+    5.3482
+   ],
+   "duracoes": [
+    1.7264,
+    1.7131,
+    1.6687,
+    1.7247
+   ],
+   "bytes": 65900
+  },
   "mu-nevoa": {
    "arquivo": "mu-nevoa.mp3",
    "descricao": "Drácula: a névoa",
@@ -14468,6 +14672,23 @@
     2.0305
    ],
    "bytes": 77453
+  },
+  "mu-ninguem-toca": {
+   "arquivo": "mu-ninguem-toca.mp3",
+   "descricao": "Mikasa: ninguém toca neles",
+   "versoes": [
+    0.0,
+    1.1533,
+    2.3544,
+    3.4784
+   ],
+   "duracoes": [
+    1.0733,
+    1.1211,
+    1.0441,
+    1.0974
+   ],
+   "bytes": 51986
   },
   "mu-nivel": {
    "arquivo": "mu-nivel.mp3",
@@ -14707,6 +14928,23 @@
    ],
    "bytes": 69535
   },
+  "mu-particulas-pym": {
+   "arquivo": "mu-particulas-pym.mp3",
+   "descricao": "Homem-Formiga: as partículas",
+   "versoes": [
+    0.0,
+    1.7506,
+    3.5613,
+    5.2565
+   ],
+   "duracoes": [
+    1.6706,
+    1.7307,
+    1.6151,
+    1.6957
+   ],
+   "bytes": 91440
+  },
   "mu-pecados": {
    "arquivo": "mu-pecados.mp3",
    "descricao": "Motoqueiro Fantasma: a corrente em chamas",
@@ -14928,6 +15166,23 @@
    ],
    "bytes": 74401
   },
+  "mu-pod-042": {
+   "arquivo": "mu-pod-042.mp3",
+   "descricao": "2B: o Pod",
+   "versoes": [
+    0.0,
+    1.4882,
+    3.0707,
+    4.5146
+   ],
+   "duracoes": [
+    1.4082,
+    1.5025,
+    1.3639,
+    1.427
+   ],
+   "bytes": 54926
+  },
   "mu-poder-escondido": {
    "arquivo": "mu-poder-escondido.mp3",
    "descricao": "Salsicha: o poder escondido",
@@ -14978,6 +15233,23 @@
     1.8007
    ],
    "bytes": 59609
+  },
+  "mu-polaridade": {
+   "arquivo": "mu-polaridade.mp3",
+   "descricao": "Magneto: a polaridade",
+   "versoes": [
+    0.0,
+    1.7885,
+    3.6473,
+    5.4036
+   ],
+   "duracoes": [
+    1.7085,
+    1.7788,
+    1.6763,
+    1.7401
+   ],
+   "bytes": 59878
   },
   "mu-portal": {
    "arquivo": "mu-portal.mp3",
@@ -15404,6 +15676,23 @@
    ],
    "bytes": 106455
   },
+  "mu-rendicao-sentidos": {
+   "arquivo": "mu-rendicao-sentidos.mp3",
+   "descricao": "Shaka: os sentidos",
+   "versoes": [
+    0.0,
+    2.48,
+    5.047,
+    7.4459
+   ],
+   "duracoes": [
+    2.4,
+    2.487,
+    2.3188,
+    2.4365
+   ],
+   "bytes": 66311
+  },
   "mu-road-roller": {
    "arquivo": "mu-road-roller.mp3",
    "descricao": "Dio: ROAD ROLLER DA",
@@ -15574,6 +15863,40 @@
    ],
    "bytes": 77587
   },
+  "mu-selo-da-luz": {
+   "arquivo": "mu-selo-da-luz.mp3",
+   "descricao": "Zelda: o selo",
+   "versoes": [
+    0.0,
+    2.18,
+    4.4361,
+    6.5451
+   ],
+   "duracoes": [
+    2.1,
+    2.1761,
+    2.029,
+    2.132
+   ],
+   "bytes": 66424
+  },
+  "mu-sem-esperanca": {
+   "arquivo": "mu-sem-esperanca.mp3",
+   "descricao": "Darkseid: sem esperança",
+   "versoes": [
+    0.0,
+    2.0272,
+    4.0602,
+    6.066
+   ],
+   "duracoes": [
+    1.9472,
+    1.953,
+    1.9258,
+    1.9668
+   ],
+   "bytes": 48281
+  },
   "mu-sem-folego": {
    "arquivo": "mu-sem-folego.mp3",
    "descricao": "Cheetara: sem fôlego",
@@ -15607,6 +15930,23 @@
     1.6654
    ],
    "bytes": 55217
+  },
+  "mu-sentido-radar": {
+   "arquivo": "mu-sentido-radar.mp3",
+   "descricao": "Demolidor: o radar",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 76254
   },
   "mu-sete-dias": {
    "arquivo": "mu-sete-dias.mp3",
@@ -15999,6 +16339,23 @@
    ],
    "bytes": 97443
   },
+  "mu-tempestade-pula": {
+   "arquivo": "mu-tempestade-pula.mp3",
+   "descricao": "Tempestade: o raio",
+   "versoes": [
+    0.0,
+    1.6236,
+    3.32,
+    4.934
+   ],
+   "duracoes": [
+    1.5436,
+    1.6164,
+    1.534,
+    1.4859
+   ],
+   "bytes": 64549
+  },
   "mu-tempo-voltou": {
    "arquivo": "mu-tempo-voltou.mp3",
    "descricao": "Cronos: o tempo voltou",
@@ -16185,6 +16542,23 @@
     2.0305
    ],
    "bytes": 64797
+  },
+  "mu-trio-unido": {
+   "arquivo": "mu-trio-unido.mp3",
+   "descricao": "Leonardo: o trio unido",
+   "versoes": [
+    0.0,
+    1.9116,
+    3.8886,
+    5.7524
+   ],
+   "duracoes": [
+    1.8316,
+    1.897,
+    1.7838,
+    1.8591
+   ],
+   "bytes": 64251
   },
   "mu-trofeu": {
    "arquivo": "mu-trofeu.mp3",
