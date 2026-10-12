@@ -9127,6 +9127,20 @@
   "laco": false,
   "bytes": 16128
  },
+ "mu_aljava": {
+  "descricao": "Gavião Arqueiro · as flechas de truque",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 22524
+ },
  "mu_alvo": {
   "descricao": "Agente 47 · a mira e o código de barras",
   "quadros": 12,
@@ -9210,6 +9224,20 @@
   ],
   "laco": false,
   "bytes": 61146
+ },
+ "mu_armadilha": {
+  "descricao": "Fred · a rede da armadilha",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 21186
  },
  "mu_armadura_doom": {
   "descricao": "Doom Slayer · os fragmentos de armadura",
@@ -9505,6 +9533,20 @@
   "laco": false,
   "bytes": 80826
  },
+ "mu_carona": {
+  "descricao": "Tails · as caudas em hélice",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 33406
+ },
  "mu_carta_carregada": {
   "descricao": "Gambit · a carta carregada explodindo",
   "quadros": 12,
@@ -9602,6 +9644,20 @@
   ],
   "laco": false,
   "bytes": 52434
+ },
+ "mu_clima": {
+  "descricao": "Nami · o bastão do clima e o raio",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 22230
  },
  "mu_cogumelo": {
   "descricao": "Mario · o Super Cogumelo",
@@ -9701,6 +9757,34 @@
   "laco": false,
   "bytes": 23388
  },
+ "mu_coracao_peach": {
+  "descricao": "Peach · a coroa e os corações",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 23630
+ },
+ "mu_coragem_luigi": {
+  "descricao": "Luigi · a lanterna e a coragem",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 35764
+ },
  "mu_cordinha": {
   "descricao": "Woody · a cordinha, o chapéu e a estrela",
   "quadros": 12,
@@ -9799,6 +9883,20 @@
   "laco": false,
   "bytes": 30332
  },
+ "mu_desmascarar": {
+  "descricao": "Velma · a lupa e a máscara caindo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 20040
+ },
  "mu_desprevenido": {
   "descricao": "Bebop · a investida",
   "quadros": 12,
@@ -9883,6 +9981,20 @@
   "laco": false,
   "bytes": 54808
  },
+ "mu_disfarce": {
+  "descricao": "Viúva Negra · a ampulheta e as pulseiras",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 20000
+ },
  "mu_dobra_sangue": {
   "descricao": "Katara · a dobra de sangue",
   "quadros": 12,
@@ -9953,6 +10065,20 @@
   "laco": false,
   "bytes": 68318
  },
+ "mu_encanto": {
+  "descricao": "Mulher-Aranha · o feromônio e a rajada",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 27710
+ },
  "mu_encolher": {
   "descricao": "Stewie · o raio de encolher",
   "quadros": 12,
@@ -10008,6 +10134,20 @@
   ],
   "laco": false,
   "bytes": 34238
+ },
+ "mu_esconderijo": {
+  "descricao": "Patrick · debaixo da pedra",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 18520
  },
  "mu_escondida": {
   "descricao": "Power · os chifres e o martelo de sangue",
@@ -10344,6 +10484,20 @@
   ],
   "laco": false,
   "bytes": 27166
+ },
+ "mu_fraco": {
+  "descricao": "Shao Kahn · o martelo da ira",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 35696
  },
  "mu_furacao": {
   "descricao": "Taz · o furacão",
@@ -10779,6 +10933,20 @@
   "laco": false,
   "bytes": 13556
  },
+ "mu_inversao": {
+  "descricao": "Gwen · o feitiço de inversão",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 40184
+ },
  "mu_joia": {
   "descricao": "Thanos · a Joia do Infinito encaixando",
   "quadros": 12,
@@ -10947,6 +11115,20 @@
   "laco": false,
   "bytes": 30916
  },
+ "mu_ladra": {
+  "descricao": "Mulher-Gato · as garras e as joias",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 13892
+ },
  "mu_lamento": {
   "descricao": "Danny Phantom · o Lamento fantasma",
   "quadros": 12,
@@ -10988,6 +11170,20 @@
   ],
   "laco": false,
   "bytes": 63582
+ },
+ "mu_leque": {
+  "descricao": "Kitana · os leques de aço",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 18726
  },
  "mu_lider": {
   "descricao": "Capitão América · o escudo de estrela e as setas",
@@ -11059,6 +11255,20 @@
   "laco": false,
   "bytes": 62362
  },
+ "mu_medo": {
+  "descricao": "Espantalho · o gás do medo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 57938
+ },
  "mu_messatsu": {
   "descricao": "Akuma · o símbolo do Céu e a aura",
   "quadros": 12,
@@ -11086,6 +11296,20 @@
   ],
   "laco": false,
   "bytes": 45404
+ },
+ "mu_mil_laminas": {
+  "descricao": "Byakuya · o Senbonzakura",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 81360
  },
  "mu_mina": {
   "descricao": "Rocket · a mina piscando e explodindo",
@@ -11142,6 +11366,20 @@
   ],
   "laco": false,
   "bytes": 33416
+ },
+ "mu_nada_aconteceu": {
+  "descricao": "Zoro · os três cortes e a névoa",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 36434
  },
  "mu_nao_estava_la": {
   "descricao": "Hiei · as imagens para trás e o Jagan",
@@ -11352,6 +11590,20 @@
   ],
   "laco": false,
   "bytes": 19884
+ },
+ "mu_perigosa": {
+  "descricao": "Gamora · os cortes da espada",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 15636
  },
  "mu_pernalonga": {
   "descricao": "Pernalonga · a cenoura e o buraco",
@@ -11577,6 +11829,20 @@
   "laco": false,
   "bytes": 49252
  },
+ "mu_puxado": {
+  "descricao": "Nero · a mão demoníaca",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 19870
+ },
  "mu_quaaack": {
   "descricao": "Pato Donald · o ataque de nervos",
   "quadros": 12,
@@ -11647,6 +11913,20 @@
   "laco": false,
   "bytes": 47194
  },
+ "mu_rapido_demais": {
+  "descricao": "Flecha · o rastro de supervelocidade",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 26158
+ },
  "mu_rastro_flash": {
   "descricao": "Flash · os riscos de velocidade e o emblema do raio",
   "quadros": 12,
@@ -11674,6 +11954,20 @@
   ],
   "laco": false,
   "bytes": 18914
+ },
+ "mu_refeicao": {
+  "descricao": "Sanji · o prato servido e a perna em fogo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 25186
  },
  "mu_rejeitar": {
   "descricao": "Orihime · o escudo das Seis Flores",
@@ -11899,6 +12193,20 @@
   "laco": false,
   "bytes": 32984
  },
+ "mu_soco_carregado": {
+  "descricao": "Knuckles · o soco carregado",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 39286
+ },
  "mu_sofrimento": {
   "descricao": "Freeza · a Supernova crescendo e as esferas",
   "quadros": 12,
@@ -11926,6 +12234,20 @@
   ],
   "laco": false,
   "bytes": 16748
+ },
+ "mu_soneca_pesada": {
+  "descricao": "Snorlax · a soneca pesada",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 19768
  },
  "mu_sopro_congelante": {
   "descricao": "Superman · o sopro gelado",
@@ -11982,6 +12304,20 @@
   ],
   "laco": false,
   "bytes": 35672
+ },
+ "mu_suspeita": {
+  "descricao": "L · o L e a barra da suspeita",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 7598
  },
  "mu_tapa_olho": {
   "descricao": "Kenpachi · o tapa-olho e a pressão espiritual",
@@ -12151,6 +12487,20 @@
   "laco": false,
   "bytes": 56636
  },
+ "mu_tropecou": {
+  "descricao": "Morty · o tropeço",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 20852
+ },
  "mu_ultima_oracao": {
   "descricao": "Aerith · a Última oração",
   "quadros": 12,
@@ -12276,6 +12626,20 @@
   ],
   "laco": false,
   "bytes": 30118
+ },
+ "mu_vinganca": {
+  "descricao": "Drax · as facas e as tatuagens",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 33456
  },
  "mu_vrrrum": {
   "descricao": "Denji · as motosserras",

@@ -10644,6 +10644,23 @@
    ],
    "bytes": 74858
   },
+  "mu-aljava": {
+   "arquivo": "mu-aljava.mp3",
+   "descricao": "Gavião Arqueiro: as flechas",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 87891
+  },
   "mu-alvo": {
    "arquivo": "mu-alvo.mp3",
    "descricao": "Agente 47: o alvo",
@@ -10745,6 +10762,23 @@
     2.0305
    ],
    "bytes": 108674
+  },
+  "mu-armadilha": {
+   "arquivo": "mu-armadilha.mp3",
+   "descricao": "Fred: a armadilha",
+   "versoes": [
+    0.0,
+    1.98,
+    4.0289,
+    5.9446
+   ],
+   "duracoes": [
+    1.9,
+    1.9689,
+    1.8357,
+    1.9289
+   ],
+   "bytes": 61882
   },
   "mu-armadura-doom": {
    "arquivo": "mu-armadura-doom.mp3",
@@ -11103,6 +11137,23 @@
    ],
    "bytes": 56895
   },
+  "mu-carona": {
+   "arquivo": "mu-carona.mp3",
+   "descricao": "Tails: a carona",
+   "versoes": [
+    0.0,
+    1.7889,
+    3.6463,
+    5.3425
+   ],
+   "duracoes": [
+    1.7089,
+    1.7774,
+    1.6162,
+    1.7232
+   ],
+   "bytes": 65961
+  },
   "mu-carta-carregada": {
    "arquivo": "mu-carta-carregada.mp3",
    "descricao": "Gambit: a carta explodindo",
@@ -11221,6 +11272,23 @@
     1.9289
    ],
    "bytes": 69526
+  },
+  "mu-clima": {
+   "arquivo": "mu-clima.mp3",
+   "descricao": "Nami: o clima",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 66543
   },
   "mu-cogumelo": {
    "arquivo": "mu-cogumelo.mp3",
@@ -11341,6 +11409,40 @@
    ],
    "bytes": 88391
   },
+  "mu-coracao-peach": {
+   "arquivo": "mu-coracao-peach.mp3",
+   "descricao": "Peach: os corações",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 70763
+  },
+  "mu-coragem-luigi": {
+   "arquivo": "mu-coragem-luigi.mp3",
+   "descricao": "Luigi: a coragem",
+   "versoes": [
+    0.0,
+    1.583,
+    3.2194,
+    4.718
+   ],
+   "duracoes": [
+    1.503,
+    1.5564,
+    1.4187,
+    1.4846
+   ],
+   "bytes": 53149
+  },
   "mu-cordinha": {
    "arquivo": "mu-cordinha.mp3",
    "descricao": "Woody: a cordinha",
@@ -11460,6 +11562,23 @@
    ],
    "bytes": 49523
   },
+  "mu-desmascarar": {
+   "arquivo": "mu-desmascarar.mp3",
+   "descricao": "Velma: desmascarado",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 56168
+  },
   "mu-desprevenido": {
    "arquivo": "mu-desprevenido.mp3",
    "descricao": "Bebop: a investida",
@@ -11562,6 +11681,23 @@
    ],
    "bytes": 44108
   },
+  "mu-disfarce": {
+   "arquivo": "mu-disfarce.mp3",
+   "descricao": "Viúva Negra: o disfarce",
+   "versoes": [
+    0.0,
+    1.8395,
+    3.7518,
+    5.5499
+   ],
+   "duracoes": [
+    1.7595,
+    1.8323,
+    1.7181,
+    1.8936
+   ],
+   "bytes": 105805
+  },
   "mu-dobra-sangue": {
    "arquivo": "mu-dobra-sangue.mp3",
    "descricao": "Katara: a dobra de sangue",
@@ -11647,6 +11783,23 @@
    ],
    "bytes": 66363
   },
+  "mu-encanto": {
+   "arquivo": "mu-encanto.mp3",
+   "descricao": "Mulher-Aranha: o encanto",
+   "versoes": [
+    0.0,
+    1.98,
+    4.0289,
+    5.9446
+   ],
+   "duracoes": [
+    1.9,
+    1.9689,
+    1.8357,
+    1.9289
+   ],
+   "bytes": 54297
+  },
   "mu-encolher": {
    "arquivo": "mu-encolher.mp3",
    "descricao": "Stewie: o raio de encolher",
@@ -11714,6 +11867,23 @@
     1.8274
    ],
    "bytes": 52563
+  },
+  "mu-esconderijo": {
+   "arquivo": "mu-esconderijo.mp3",
+   "descricao": "Patrick: debaixo da pedra",
+   "versoes": [
+    0.0,
+    1.98,
+    4.0289,
+    5.9446
+   ],
+   "duracoes": [
+    1.9,
+    1.9689,
+    1.8357,
+    1.9289
+   ],
+   "bytes": 55322
   },
   "mu-escondida": {
    "arquivo": "mu-escondida.mp3",
@@ -12122,6 +12292,23 @@
     1.4581
    ],
    "bytes": 54408
+  },
+  "mu-fraco": {
+   "arquivo": "mu-fraco.mp3",
+   "descricao": "Shao Kahn: você é fraco",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 61846
   },
   "mu-furacao": {
    "arquivo": "mu-furacao.mp3",
@@ -12650,6 +12837,23 @@
    ],
    "bytes": 68428
   },
+  "mu-inversao": {
+   "arquivo": "mu-inversao.mp3",
+   "descricao": "Gwen: a inversão",
+   "versoes": [
+    0.0,
+    1.7045,
+    3.4644,
+    5.0997
+   ],
+   "duracoes": [
+    1.6245,
+    1.6799,
+    1.5552,
+    1.6466
+   ],
+   "bytes": 60734
+  },
   "mu-joia": {
    "arquivo": "mu-joia.mp3",
    "descricao": "Thanos: a Joia do Infinito",
@@ -12854,6 +13058,23 @@
    ],
    "bytes": 67039
   },
+  "mu-ladra": {
+   "arquivo": "mu-ladra.mp3",
+   "descricao": "Mulher-Gato: a ladra",
+   "versoes": [
+    0.0,
+    1.8037,
+    3.7131,
+    5.5012
+   ],
+   "duracoes": [
+    1.7237,
+    1.8294,
+    1.7081,
+    1.7679
+   ],
+   "bytes": 67118
+  },
   "mu-lamento": {
    "arquivo": "mu-lamento.mp3",
    "descricao": "Danny Phantom: o Lamento fantasma",
@@ -12904,6 +13125,23 @@
     2.0305
    ],
    "bytes": 101912
+  },
+  "mu-leque": {
+   "arquivo": "mu-leque.mp3",
+   "descricao": "Kitana: os leques",
+   "versoes": [
+    0.0,
+    1.9167,
+    3.8599,
+    5.6718
+   ],
+   "duracoes": [
+    1.8367,
+    1.8632,
+    1.732,
+    1.8728
+   ],
+   "bytes": 79152
   },
   "mu-lider": {
    "arquivo": "mu-lider.mp3",
@@ -12990,6 +13228,23 @@
    ],
    "bytes": 74864
   },
+  "mu-medo": {
+   "arquivo": "mu-medo.mp3",
+   "descricao": "Espantalho: o medo",
+   "versoes": [
+    0.0,
+    2.18,
+    4.4361,
+    6.5451
+   ],
+   "duracoes": [
+    2.1,
+    2.1761,
+    2.029,
+    2.132
+   ],
+   "bytes": 82092
+  },
   "mu-messatsu": {
    "arquivo": "mu-messatsu.mp3",
    "descricao": "Akuma: o Messatsu",
@@ -13023,6 +13278,23 @@
     2.4365
    ],
    "bytes": 86870
+  },
+  "mu-mil-laminas": {
+   "arquivo": "mu-mil-laminas.mp3",
+   "descricao": "Byakuya: Senbonzakura",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 117853
   },
   "mu-mina": {
    "arquivo": "mu-mina.mp3",
@@ -13091,6 +13363,23 @@
     1.8274
    ],
    "bytes": 58367
+  },
+  "mu-nada-aconteceu": {
+   "arquivo": "mu-nada-aconteceu.mp3",
+   "descricao": "Zoro: nada aconteceu",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 64603
   },
   "mu-nao-estava-la": {
    "arquivo": "mu-nao-estava-la.mp3",
@@ -13346,6 +13635,23 @@
     1.4002
    ],
    "bytes": 61869
+  },
+  "mu-perigosa": {
+   "arquivo": "mu-perigosa.mp3",
+   "descricao": "Gamora: os cortes",
+   "versoes": [
+    0.0,
+    1.6911,
+    3.4693,
+    5.1485
+   ],
+   "duracoes": [
+    1.6111,
+    1.6983,
+    1.5992,
+    1.6824
+   ],
+   "bytes": 67365
   },
   "mu-pernalonga": {
    "arquivo": "mu-pernalonga.mp3",
@@ -13619,6 +13925,23 @@
    ],
    "bytes": 69700
   },
+  "mu-puxado": {
+   "arquivo": "mu-puxado.mp3",
+   "descricao": "Nero: puxado",
+   "versoes": [
+    0.0,
+    1.98,
+    4.0289,
+    5.9446
+   ],
+   "duracoes": [
+    1.9,
+    1.9689,
+    1.8357,
+    1.9289
+   ],
+   "bytes": 68370
+  },
   "mu-quaaack": {
    "arquivo": "mu-quaaack.mp3",
    "descricao": "Pato Donald: QUAAACK",
@@ -13704,6 +14027,23 @@
    ],
    "bytes": 71090
   },
+  "mu-rapido-demais": {
+   "arquivo": "mu-rapido-demais.mp3",
+   "descricao": "Flecha: rápido demais",
+   "versoes": [
+    0.0,
+    1.7218,
+    3.5019,
+    5.2107
+   ],
+   "duracoes": [
+    1.6418,
+    1.7001,
+    1.6288,
+    1.6776
+   ],
+   "bytes": 66094
+  },
   "mu-rastro-flash": {
    "arquivo": "mu-rastro-flash.mp3",
    "descricao": "Flash: o rastro de velocidade",
@@ -13737,6 +14077,23 @@
     1.9289
    ],
    "bytes": 114081
+  },
+  "mu-refeicao": {
+   "arquivo": "mu-refeicao.mp3",
+   "descricao": "Sanji: a refeição",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 82036
   },
   "mu-rejeitar": {
    "arquivo": "mu-rejeitar.mp3",
@@ -14010,6 +14367,23 @@
    ],
    "bytes": 70454
   },
+  "mu-soco-carregado": {
+   "arquivo": "mu-soco-carregado.mp3",
+   "descricao": "Knuckles: o soco carregado",
+   "versoes": [
+    0.0,
+    1.98,
+    4.0289,
+    5.9446
+   ],
+   "duracoes": [
+    1.9,
+    1.9689,
+    1.8357,
+    1.9289
+   ],
+   "bytes": 62521
+  },
   "mu-sofrimento": {
    "arquivo": "mu-sofrimento.mp3",
    "descricao": "Freeza: a Supernova e a cauda",
@@ -14043,6 +14417,23 @@
     2.0305
    ],
    "bytes": 52561
+  },
+  "mu-soneca-pesada": {
+   "arquivo": "mu-soneca-pesada.mp3",
+   "descricao": "Snorlax: a soneca",
+   "versoes": [
+    0.0,
+    2.28,
+    4.6398,
+    6.8454
+   ],
+   "duracoes": [
+    2.2,
+    2.2798,
+    2.1256,
+    2.2335
+   ],
+   "bytes": 71282
   },
   "mu-sopro-congelante": {
    "arquivo": "mu-sopro-congelante.mp3",
@@ -14111,6 +14502,23 @@
     1.9289
    ],
    "bytes": 50670
+  },
+  "mu-suspeita": {
+   "arquivo": "mu-suspeita.mp3",
+   "descricao": "L: a suspeita",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 47400
   },
   "mu-tapa-olho": {
    "arquivo": "mu-tapa-olho.mp3",
@@ -14316,6 +14724,23 @@
    ],
    "bytes": 64797
   },
+  "mu-tropecou": {
+   "arquivo": "mu-tropecou.mp3",
+   "descricao": "Morty: tropeçou",
+   "versoes": [
+    0.0,
+    1.5082,
+    3.067,
+    4.5279
+   ],
+   "duracoes": [
+    1.4282,
+    1.4788,
+    1.3809,
+    1.4495
+   ],
+   "bytes": 43238
+  },
   "mu-ultima-oracao": {
    "arquivo": "mu-ultima-oracao.mp3",
    "descricao": "Aerith: a Última oração",
@@ -14468,6 +14893,23 @@
     1.9289
    ],
    "bytes": 67500
+  },
+  "mu-vinganca": {
+   "arquivo": "mu-vinganca.mp3",
+   "descricao": "Drax: a vingança",
+   "versoes": [
+    0.0,
+    1.98,
+    4.0289,
+    5.9446
+   ],
+   "duracoes": [
+    1.9,
+    1.9689,
+    1.8357,
+    1.9289
+   ],
+   "bytes": 76653
   },
   "mu-vrrrum": {
    "arquivo": "mu-vrrrum.mp3",
