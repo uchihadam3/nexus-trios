@@ -335,6 +335,20 @@
   "laco": false,
   "bytes": 11782
  },
+ "armadura_de_doom": {
+  "descricao": "Doutor Destino · a grade, a mira e o raio",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 16802
+ },
  "arranhao_felino": {
   "descricao": "Básico da Mulher-Gato: o chicote e as garras",
   "quadros": 12,
@@ -964,6 +978,20 @@
   ],
   "laco": false,
   "bytes": 28502
+ },
+ "bloqueio_mental": {
+  "descricao": "Professor Xavier · os anéis psíquicos e a intenção quebrando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 16272
  },
  "blue_rose": {
   "descricao": "Básico do Nero: os dois tiros da Blue Rose",
@@ -1637,6 +1665,34 @@
   "laco": false,
   "bytes": 58808
  },
+ "carnificina_preparo": {
+  "descricao": "Carnificina · os tentáculos-lâmina (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 52338
+ },
+ "carnificina_total": {
+  "descricao": "Carnificina · as lâminas e os machados de todo lado",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 33134
+ },
  "carta_carregada": {
   "descricao": "Gambit · a carta carregada que gruda",
   "quadros": 12,
@@ -1790,6 +1846,20 @@
   ],
   "laco": false,
   "bytes": 51808
+ },
+ "cerebro_preparo": {
+  "descricao": "Professor Xavier · o capacete do Cérebro (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 18116
  },
  "cetro_de_anubis": {
   "descricao": "Básico de Anúbis: o cetro e a balança",
@@ -2463,6 +2533,20 @@
   "laco": false,
   "bytes": 24288
  },
+ "coordenacao_mental": {
+  "descricao": "Professor Xavier · as ondas e os fios ligando o trio",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 33874
+ },
  "copia": {
   "descricao": "linhas de leitura, vírgulas girando e a forma copiada piscando",
   "quadros": 12,
@@ -3093,6 +3177,20 @@
   "laco": false,
   "bytes": 62522
  },
+ "destino_preparo": {
+  "descricao": "Doutor Destino · a máscara e as runas (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 31774
+ },
  "detroit_smash": {
   "descricao": "Básico do All Might: o punho e o vento do Smash",
   "quadros": 12,
@@ -3428,6 +3526,20 @@
   ],
   "laco": false,
   "bytes": 59182
+ },
+ "engano_perfeito": {
+  "descricao": "Loki · as cópias quebrando e a adaga",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 16672
  },
  "enxame": {
   "descricao": "enxame zumbindo",
@@ -4730,6 +4842,20 @@
   ],
   "laco": true,
   "bytes": 28926
+ },
+ "ferida_aberta": {
+  "descricao": "Carnificina · os chicotes em X e a ferida",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 22894
  },
  "final_flash_carga": {
   "descricao": "Vegeta · os braços abertos juntando o Final Flash (ergue)",
@@ -7363,6 +7489,20 @@
   "laco": false,
   "bytes": 12414
  },
+ "loki_preparo": {
+  "descricao": "Loki · o elmo e as cópias (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 25630
+ },
  "lotus_shaka": {
   "descricao": "Shaka · a mandala dourada girando (laço)",
   "quadros": 12,
@@ -8105,6 +8245,20 @@
   "laco": false,
   "bytes": 35468
  },
+ "mordida_predatoria": {
+  "descricao": "Venom · a bocarra, a gosma e a cura",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 39814
+ },
  "mordida_vampira": {
   "descricao": "Básico da Marceline: as presas e o vermelho chupado",
   "quadros": 12,
@@ -8567,6 +8721,20 @@
   "laco": true,
   "bytes": 38538
  },
+ "paralisia_mental": {
+  "descricao": "Professor Xavier · a onda e os rivais presos e calados",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 55936
+ },
  "passo_lateral": {
   "descricao": "Saitama · a capa varrendo e virando escudo",
   "quadros": 12,
@@ -8832,6 +9000,20 @@
   ],
   "laco": true,
   "bytes": 140520
+ },
+ "plano_de_contingencia": {
+  "descricao": "Doutor Destino · os lasers e o círculo explodindo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 95522
  },
  "plano_de_fuga": {
   "descricao": "Loid · a bomba de fumaça e as setas da fuga",
@@ -10275,6 +10457,20 @@
   "laco": false,
   "bytes": 82804
  },
+ "ritual_latveriano": {
+  "descricao": "Doutor Destino · o círculo místico e os raios verdes",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 55598
+ },
  "rocha": {
   "descricao": "pedra em viagem (+x)",
   "quadros": 12,
@@ -10834,6 +11030,20 @@
   ],
   "laco": false,
   "bytes": 37090
+ },
+ "simbionte_faminto": {
+  "descricao": "Venom · os tentáculos engolindo e a aranha",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 65686
  },
  "sniper_preparo": {
   "descricao": "Justiceiro · a luneta respirando (Preparo, laço)",
@@ -12081,6 +12291,20 @@
   "laco": false,
   "bytes": 37656
  },
+ "troca_de_lugar": {
+  "descricao": "Loki · as silhuetas trocando e a mira perdida",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 26760
+ },
  "trovao_chamado": {
   "descricao": "Thor · os raios caindo nele (Preparo, laço)",
   "quadros": 12,
@@ -12374,6 +12598,20 @@
   ],
   "laco": false,
   "bytes": 62214
+ },
+ "venom_preparo": {
+  "descricao": "Venom · a gosma e os olhos brancos (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 25308
  },
  "vento": {
   "descricao": "redemoinho de vento",
