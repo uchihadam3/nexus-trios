@@ -9253,6 +9253,20 @@
   "laco": false,
   "bytes": 63338
  },
+ "mu_bravo": {
+  "descricao": "Raphael · os sais e o símbolo de raiva",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 35520
+ },
  "mu_briga_de_rua": {
   "descricao": "Yusuke · a Arma Espiritual",
   "quadros": 12,
@@ -9266,6 +9280,20 @@
   ],
   "laco": false,
   "bytes": 16078
+ },
+ "mu_briguenta": {
+  "descricao": "Docinho · o rastro verde e o soco",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 25432
  },
  "mu_buster": {
   "descricao": "Cloud · a Buster Sword rachando o chão",
@@ -9308,6 +9336,20 @@
   ],
   "laco": false,
   "bytes": 44548
+ },
+ "mu_canhao_fusao": {
+  "descricao": "Megatron · o canhão de fusão",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 26944
  },
  "mu_carnificina": {
   "descricao": "Carnificina · as lâminas vermelhas para todo lado",
@@ -9421,6 +9463,20 @@
   "laco": false,
   "bytes": 79412
  },
+ "mu_contencao": {
+  "descricao": "Donatello · o campo de contenção",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 37798
+ },
  "mu_copia": {
   "descricao": "Kakashi · o pergaminho do jutsu copiado",
   "quadros": 12,
@@ -9476,6 +9532,20 @@
   ],
   "laco": false,
   "bytes": 34464
+ },
+ "mu_cristal_prata": {
+  "descricao": "Sailor Moon · a lua e o Cristal de Prata",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 60430
  },
  "mu_devil_jin": {
   "descricao": "Jin · as asas do Devil e o raio da testa",
@@ -9603,6 +9673,20 @@
   "laco": false,
   "bytes": 14076
  },
+ "mu_espinafre": {
+  "descricao": "Popeye · o espinafre e a âncora",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 27272
+ },
  "mu_espinho": {
   "descricao": "Yor · o espinho dourado e as pétalas",
   "quadros": 12,
@@ -9616,6 +9700,20 @@
   ],
   "laco": false,
   "bytes": 34840
+ },
+ "mu_esponja": {
+  "descricao": "Bob Esponja · as bolhas e a cura",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 23154
  },
  "mu_esquife": {
   "descricao": "Camus · o Esquife de Gelo",
@@ -9672,6 +9770,20 @@
   ],
   "laco": false,
   "bytes": 23330
+ },
+ "mu_exorcismo": {
+  "descricao": "Constantine · o pentagrama e a fumaça",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 56622
  },
  "mu_faca": {
   "descricao": "Leon · a faca e a faísca do aparo",
@@ -9883,6 +9995,20 @@
   "laco": false,
   "bytes": 69152
  },
+ "mu_grayskull": {
+  "descricao": "He-Man · a Espada do Poder e o raio",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 40470
+ },
  "mu_groot": {
   "descricao": "Groot · os galhos crescendo em cúpula",
   "quadros": 12,
@@ -9925,6 +10051,20 @@
   "laco": false,
   "bytes": 42896
  },
+ "mu_hahaha": {
+  "descricao": "Coringa · a carta e o gás do riso",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 38400
+ },
  "mu_hakai": {
   "descricao": "Beerus · o Hakai",
   "quadros": 12,
@@ -9938,6 +10078,20 @@
   ],
   "laco": false,
   "bytes": 35740
+ },
+ "mu_heroi_finn": {
+  "descricao": "Finn · o chapéu e a espada",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 23750
  },
  "mu_hev": {
   "descricao": "Gordon · o lambda e a morfina",
@@ -9980,6 +10134,34 @@
   ],
   "laco": false,
   "bytes": 53248
+ },
+ "mu_imprevisivel": {
+  "descricao": "Arlequina · o martelão e os corações",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 31382
+ },
+ "mu_improviso": {
+  "descricao": "Michelangelo · o nunchaku e a pizza",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 11676
  },
  "mu_inalar": {
   "descricao": "Kirby · o redemoinho que inala",
@@ -10135,6 +10317,20 @@
   "laco": false,
   "bytes": 30916
  },
+ "mu_lamina_magica": {
+  "descricao": "Samurai Jack · o corte único",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 18196
+ },
  "mu_lendario": {
   "descricao": "Broly · a aura lendária",
   "quadros": 12,
@@ -10190,6 +10386,20 @@
   ],
   "laco": false,
   "bytes": 69160
+ },
+ "mu_matriz": {
+  "descricao": "Optimus Prime · a Matriz da Liderança",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 62362
  },
  "mu_messatsu": {
   "descricao": "Akuma · o símbolo do Céu e a aura",
@@ -10303,6 +10513,20 @@
   "laco": false,
   "bytes": 38064
  },
+ "mu_odio_herois": {
+  "descricao": "Lex Luthor · os cristais de kryptonita",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 49632
+ },
  "mu_olhos_azuis": {
   "descricao": "Kaiba · a carta do Dragão Branco e o raio",
   "quadros": 12,
@@ -10316,6 +10540,20 @@
   ],
   "laco": false,
   "bytes": 36876
+ },
+ "mu_orgulho_viltrumita": {
+  "descricao": "Omni-Man · o soco e a cratera",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 53524
  },
  "mu_pecados": {
   "descricao": "Motoqueiro Fantasma · a corrente em chamas",
@@ -10359,6 +10597,48 @@
   "laco": false,
   "bytes": 66310
  },
+ "mu_pernalonga": {
+  "descricao": "Pernalonga · a cenoura e o buraco",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 17462
+ },
+ "mu_pica_pau": {
+  "descricao": "Pica-Pau · as bicadas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 17162
+ },
+ "mu_planador": {
+  "descricao": "Aang · as espirais de ar e o planador",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 42652
+ },
  "mu_planeta": {
   "descricao": "Surfista Prateado · a prancha e o planeta escolhido",
   "quadros": 12,
@@ -10372,6 +10652,20 @@
   ],
   "laco": false,
   "bytes": 34454
+ },
+ "mu_poder_escondido": {
+  "descricao": "Salsicha · o 1% do poder",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 77702
  },
  "mu_poder_inabalavel": {
   "descricao": "Ganondorf · a Triforce do Poder",
@@ -10400,6 +10694,20 @@
   ],
   "laco": false,
   "bytes": 74816
+ },
+ "mu_portal_rick": {
+  "descricao": "Rick · o portal verde",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 83144
  },
  "mu_postura": {
   "descricao": "Sekiro · a postura quebrada e o golpe mortal",
@@ -10484,6 +10792,20 @@
   ],
   "laco": false,
   "bytes": 49252
+ },
+ "mu_quaaack": {
+  "descricao": "Pato Donald · o ataque de nervos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 21368
  },
  "mu_raikousen": {
   "descricao": "Zero · o sabre e o Raikousen",
@@ -10596,6 +10918,20 @@
   ],
   "laco": false,
   "bytes": 30446
+ },
+ "mu_scooby_lanche": {
+  "descricao": "Scooby-Doo · o Scooby-lanche",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 20830
  },
  "mu_selo_ceifador": {
   "descricao": "Minato · os kunais e o selo do Ceifador",
@@ -10849,6 +11185,20 @@
   "laco": false,
   "bytes": 38864
  },
+ "mu_vassoura": {
+  "descricao": "Mickey · as vassouras encantadas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 29898
+ },
  "mu_vazio_infinito": {
   "descricao": "Gojo · o céu de estrelas do domínio",
   "quadros": 12,
@@ -10876,6 +11226,20 @@
   ],
   "laco": false,
   "bytes": 17644
+ },
+ "mu_viltrumita": {
+  "descricao": "Invencível · subindo com o estrondo sônico",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 30118
  },
  "mu_waku": {
   "descricao": "Anya · as ondas da leitura de mente e as estrelinhas",

@@ -10797,6 +10797,23 @@
    ],
    "bytes": 61053
   },
+  "mu-bravo": {
+   "arquivo": "mu-bravo.mp3",
+   "descricao": "Raphael: os sais e a raiva",
+   "versoes": [
+    0.0,
+    1.88,
+    3.8253,
+    5.6444
+   ],
+   "duracoes": [
+    1.8,
+    1.8653,
+    1.7391,
+    1.8274
+   ],
+   "bytes": 72770
+  },
   "mu-briga-de-rua": {
    "arquivo": "mu-briga-de-rua.mp3",
    "descricao": "Yusuke: a Arma Espiritual",
@@ -10813,6 +10830,23 @@
     1.9289
    ],
    "bytes": 71245
+  },
+  "mu-briguenta": {
+   "arquivo": "mu-briguenta.mp3",
+   "descricao": "Docinho: o soco",
+   "versoes": [
+    0.0,
+    1.7876,
+    3.6666,
+    5.4857
+   ],
+   "duracoes": [
+    1.7076,
+    1.799,
+    1.7391,
+    1.723
+   ],
+   "bytes": 81617
   },
   "mu-buster": {
    "arquivo": "mu-buster.mp3",
@@ -10864,6 +10898,23 @@
     1.8274
    ],
    "bytes": 59838
+  },
+  "mu-canhao-fusao": {
+   "arquivo": "mu-canhao-fusao.mp3",
+   "descricao": "Megatron: o canhão de fusão",
+   "versoes": [
+    0.0,
+    2.18,
+    4.4361,
+    6.5451
+   ],
+   "duracoes": [
+    2.1,
+    2.1761,
+    2.029,
+    2.132
+   ],
+   "bytes": 77784
   },
   "mu-carnificina": {
    "arquivo": "mu-carnificina.mp3",
@@ -11001,6 +11052,23 @@
    ],
    "bytes": 84949
   },
+  "mu-contencao": {
+   "arquivo": "mu-contencao.mp3",
+   "descricao": "Donatello: o campo de contenção",
+   "versoes": [
+    0.0,
+    1.98,
+    4.0289,
+    5.9446
+   ],
+   "duracoes": [
+    1.9,
+    1.9689,
+    1.8357,
+    1.9289
+   ],
+   "bytes": 52683
+  },
   "mu-copia": {
    "arquivo": "mu-copia.mp3",
    "descricao": "Kakashi: o pergaminho e o selo",
@@ -11068,6 +11136,23 @@
     1.9289
    ],
    "bytes": 91720
+  },
+  "mu-cristal-prata": {
+   "arquivo": "mu-cristal-prata.mp3",
+   "descricao": "Sailor Moon: o Cristal de Prata",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 86799
   },
   "mu-devil-jin": {
    "arquivo": "mu-devil-jin.mp3",
@@ -11222,6 +11307,23 @@
    ],
    "bytes": 75875
   },
+  "mu-espinafre": {
+   "arquivo": "mu-espinafre.mp3",
+   "descricao": "Popeye: o espinafre",
+   "versoes": [
+    0.0,
+    2.0495,
+    4.1168,
+    6.1007
+   ],
+   "duracoes": [
+    1.9695,
+    1.9873,
+    1.9039,
+    1.9527
+   ],
+   "bytes": 57470
+  },
   "mu-espinho": {
    "arquivo": "mu-espinho.mp3",
    "descricao": "Yor: o espinho cravando",
@@ -11238,6 +11340,23 @@
     1.5794
    ],
    "bytes": 63585
+  },
+  "mu-esponja": {
+   "arquivo": "mu-esponja.mp3",
+   "descricao": "Bob Esponja: as bolhas",
+   "versoes": [
+    0.0,
+    1.98,
+    4.0289,
+    5.9446
+   ],
+   "duracoes": [
+    1.9,
+    1.9689,
+    1.8357,
+    1.9289
+   ],
+   "bytes": 61453
   },
   "mu-esquife": {
    "arquivo": "mu-esquife.mp3",
@@ -11306,6 +11425,23 @@
     1.9289
    ],
    "bytes": 71616
+  },
+  "mu-exorcismo": {
+   "arquivo": "mu-exorcismo.mp3",
+   "descricao": "Constantine: o exorcismo",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 65909
   },
   "mu-faca": {
    "arquivo": "mu-faca.mp3",
@@ -11562,6 +11698,23 @@
    ],
    "bytes": 91897
   },
+  "mu-grayskull": {
+   "arquivo": "mu-grayskull.mp3",
+   "descricao": "He-Man: o poder de Grayskull",
+   "versoes": [
+    0.0,
+    2.28,
+    4.6398,
+    6.8454
+   ],
+   "duracoes": [
+    2.2,
+    2.2798,
+    2.1256,
+    2.2335
+   ],
+   "bytes": 63859
+  },
   "mu-groot": {
    "arquivo": "mu-groot.mp3",
    "descricao": "Groot: os galhos crescendo",
@@ -11613,6 +11766,23 @@
    ],
    "bytes": 74121
   },
+  "mu-hahaha": {
+   "arquivo": "mu-hahaha.mp3",
+   "descricao": "Coringa: a risada",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 91312
+  },
   "mu-hakai": {
    "arquivo": "mu-hakai.mp3",
    "descricao": "Beerus: o Hakai",
@@ -11629,6 +11799,23 @@
     2.2335
    ],
    "bytes": 80710
+  },
+  "mu-heroi-finn": {
+   "arquivo": "mu-heroi-finn.mp3",
+   "descricao": "Finn: o herói",
+   "versoes": [
+    0.0,
+    1.6614,
+    3.3975,
+    5.0119
+   ],
+   "duracoes": [
+    1.5814,
+    1.6561,
+    1.5344,
+    1.6245
+   ],
+   "bytes": 56253
   },
   "mu-hev": {
    "arquivo": "mu-hev.mp3",
@@ -11680,6 +11867,40 @@
     2.0305
    ],
    "bytes": 72081
+  },
+  "mu-imprevisivel": {
+   "arquivo": "mu-imprevisivel.mp3",
+   "descricao": "Arlequina: o martelão",
+   "versoes": [
+    0.0,
+    1.98,
+    3.933,
+    5.826
+   ],
+   "duracoes": [
+    1.9,
+    1.873,
+    1.813,
+    1.8855
+   ],
+   "bytes": 81815
+  },
+  "mu-improviso": {
+   "arquivo": "mu-improviso.mp3",
+   "descricao": "Michelangelo: o nunchaku e a pizza",
+   "versoes": [
+    0.0,
+    1.5365,
+    3.1833,
+    4.6939
+   ],
+   "duracoes": [
+    1.4565,
+    1.5668,
+    1.4306,
+    1.5017
+   ],
+   "bytes": 61893
   },
   "mu-inalar": {
    "arquivo": "mu-inalar.mp3",
@@ -11868,6 +12089,23 @@
    ],
    "bytes": 67039
   },
+  "mu-lamina-magica": {
+   "arquivo": "mu-lamina-magica.mp3",
+   "descricao": "Samurai Jack: o corte",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 74059
+  },
   "mu-lendario": {
    "arquivo": "mu-lendario.mp3",
    "descricao": "Broly: a aura lendária",
@@ -11935,6 +12173,23 @@
     2.0305
    ],
    "bytes": 79620
+  },
+  "mu-matriz": {
+   "arquivo": "mu-matriz.mp3",
+   "descricao": "Optimus: a Matriz",
+   "versoes": [
+    0.0,
+    2.18,
+    4.4361,
+    6.5451
+   ],
+   "duracoes": [
+    2.1,
+    2.1761,
+    2.029,
+    2.132
+   ],
+   "bytes": 74864
   },
   "mu-messatsu": {
    "arquivo": "mu-messatsu.mp3",
@@ -12072,6 +12327,23 @@
    ],
    "bytes": 57784
   },
+  "mu-odio-herois": {
+   "arquivo": "mu-odio-herois.mp3",
+   "descricao": "Lex Luthor: a kryptonita",
+   "versoes": [
+    0.0,
+    1.98,
+    4.0289,
+    5.9446
+   ],
+   "duracoes": [
+    1.9,
+    1.9689,
+    1.8357,
+    1.9289
+   ],
+   "bytes": 100213
+  },
   "mu-olhos-azuis": {
    "arquivo": "mu-olhos-azuis.mp3",
    "descricao": "Kaiba: o Dragão Branco",
@@ -12088,6 +12360,23 @@
     2.0305
    ],
    "bytes": 76757
+  },
+  "mu-orgulho-viltrumita": {
+   "arquivo": "mu-orgulho-viltrumita.mp3",
+   "descricao": "Omni-Man: o soco e a cratera",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 65706
   },
   "mu-pecados": {
    "arquivo": "mu-pecados.mp3",
@@ -12140,6 +12429,57 @@
    ],
    "bytes": 106462
   },
+  "mu-pernalonga": {
+   "arquivo": "mu-pernalonga.mp3",
+   "descricao": "Pernalonga: a cenoura",
+   "versoes": [
+    0.0,
+    1.6741,
+    3.4087,
+    5.0222
+   ],
+   "duracoes": [
+    1.5941,
+    1.6546,
+    1.5335,
+    1.5805
+   ],
+   "bytes": 59157
+  },
+  "mu-pica-pau": {
+   "arquivo": "mu-pica-pau.mp3",
+   "descricao": "Pica-Pau: as bicadas",
+   "versoes": [
+    0.0,
+    1.7361,
+    3.5078,
+    5.1888
+   ],
+   "duracoes": [
+    1.6561,
+    1.6917,
+    1.6011,
+    1.6579
+   ],
+   "bytes": 62516
+  },
+  "mu-planador": {
+   "arquivo": "mu-planador.mp3",
+   "descricao": "Aang: o ar",
+   "versoes": [
+    0.0,
+    1.9685,
+    3.9502,
+    5.8453
+   ],
+   "duracoes": [
+    1.8885,
+    1.9017,
+    1.8151,
+    1.9289
+   ],
+   "bytes": 72218
+  },
   "mu-planeta": {
    "arquivo": "mu-planeta.mp3",
    "descricao": "Surfista Prateado: a prancha e o planeta",
@@ -12156,6 +12496,23 @@
     1.9289
    ],
    "bytes": 73528
+  },
+  "mu-poder-escondido": {
+   "arquivo": "mu-poder-escondido.mp3",
+   "descricao": "Salsicha: o poder escondido",
+   "versoes": [
+    0.0,
+    2.28,
+    4.6398,
+    6.8454
+   ],
+   "duracoes": [
+    2.2,
+    2.2798,
+    2.1256,
+    2.2335
+   ],
+   "bytes": 102432
   },
   "mu-poder-inabalavel": {
    "arquivo": "mu-poder-inabalavel.mp3",
@@ -12190,6 +12547,23 @@
     1.9289
    ],
    "bytes": 93481
+  },
+  "mu-portal-rick": {
+   "arquivo": "mu-portal-rick.mp3",
+   "descricao": "Rick: o portal",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 70550
   },
   "mu-postura": {
    "arquivo": "mu-postura.mp3",
@@ -12292,6 +12666,23 @@
     2.2335
    ],
    "bytes": 69700
+  },
+  "mu-quaaack": {
+   "arquivo": "mu-quaaack.mp3",
+   "descricao": "Pato Donald: QUAAACK",
+   "versoes": [
+    0.0,
+    1.98,
+    4.0289,
+    5.9446
+   ],
+   "duracoes": [
+    1.9,
+    1.9689,
+    1.8357,
+    1.9289
+   ],
+   "bytes": 61948
   },
   "mu-raikousen": {
    "arquivo": "mu-raikousen.mp3",
@@ -12428,6 +12819,23 @@
     1.8968
    ],
    "bytes": 67266
+  },
+  "mu-scooby-lanche": {
+   "arquivo": "mu-scooby-lanche.mp3",
+   "descricao": "Scooby: o Scooby-lanche",
+   "versoes": [
+    0.0,
+    1.9798,
+    4.0273,
+    5.9195
+   ],
+   "duracoes": [
+    1.8998,
+    1.9676,
+    1.8122,
+    1.9252
+   ],
+   "bytes": 58753
   },
   "mu-selo-ceifador": {
    "arquivo": "mu-selo-ceifador.mp3",
@@ -12735,6 +13143,23 @@
    ],
    "bytes": 79820
   },
+  "mu-vassoura": {
+   "arquivo": "mu-vassoura.mp3",
+   "descricao": "Mickey: as vassouras",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 79792
+  },
   "mu-vazio-infinito": {
    "arquivo": "mu-vazio-infinito.mp3",
    "descricao": "Gojo: o Vazio Infinito",
@@ -12768,6 +13193,23 @@
     1.9289
    ],
    "bytes": 84072
+  },
+  "mu-viltrumita": {
+   "arquivo": "mu-viltrumita.mp3",
+   "descricao": "Invencível: o estrondo sônico",
+   "versoes": [
+    0.0,
+    1.98,
+    4.0289,
+    5.9446
+   ],
+   "duracoes": [
+    1.9,
+    1.9689,
+    1.8357,
+    1.9289
+   ],
+   "bytes": 67500
   },
   "mu-waku": {
    "arquivo": "mu-waku.mp3",
