@@ -573,6 +573,16 @@ export const FAMILIAS_NOVAS = {
   fome_de_ghoul: n({ nome: 'Fome crescente', grupo: 'apoio', impacto: 'fome_de_ghoul', escala: 2.3, tempo: 1.0, cor: '#ff3a50', tinta: 'fixa' }),
   centopeia: n({ nome: 'Centípede', grupo: 'especial', preparo: 'kakuja_preparo', impacto: 'centopeia', escala: 2.4, tempo: 1.0, cor: '#ff4a5c', tinta: 'fixa' }),
   preparar_o_duelo: n({ nome: 'Preparar o duelo', grupo: 'magia', impacto: 'preparar_o_duelo', escala: 2.3, tempo: 1.0, cor: '#ffcf5a', tinta: 'fixa' }),
+  explosao_ultimate: n({ nome: 'Ultimate Burst', grupo: 'energia', preparo: 'ultimate_preparo', impacto: 'explosao_ultimate', escala: 2.6, tempo: 1.0, cor: '#a8e0ff', tinta: 'fixa' }),
+  habito_cinetico: n({ nome: 'Hábito cinético', grupo: 'apoio', impacto: 'habito_cinetico', escala: 2.3, tempo: 1.0, cor: '#b48cff', tinta: 'fixa' }),
+  descarga_real: n({ nome: 'Descarga real', grupo: 'energia', preparo: 'vibranio_preparo', impacto: 'descarga_real', escala: 2.5, tempo: 1.0, cor: '#a070ff', tinta: 'fixa' }),
+  hex_de_probabilidade: n({ nome: 'Hex de probabilidade', grupo: 'magia', impacto: 'hex_de_probabilidade', escala: 2.3, tempo: 1.0, cor: '#ff4a6a', tinta: 'fixa' }),
+  telecinese_escarlate: n({ nome: 'Telecinese', grupo: 'magia', impacto: 'telecinese_escarlate', escala: 2.3, tempo: 1.0, cor: '#ff3a5a', tinta: 'fixa' }),
+  distorcao_do_caos: n({ nome: 'Distorção do caos', grupo: 'magia', preparo: 'caos_preparo', impacto: 'distorcao_do_caos', escala: 2.5, tempo: 1.0, cor: '#ff3050', tinta: 'fixa' }),
+  faseamento: n({ nome: 'Faseamento', grupo: 'apoio', impacto: 'faseamento', escala: 2.3, tempo: 1.0, cor: '#9ff0d0', tinta: 'fixa' }),
+  raio_solar: n({ nome: 'Raio solar', grupo: 'energia', impacto: 'raio_solar', escala: 2.4, tempo: 1.0, cor: '#ffe27a', tinta: 'fixa' }),
+  computacao_sintetica: n({ nome: 'Computação sintética', grupo: 'energia', preparo: 'computacao_preparo', impacto: 'computacao_sintetica', escala: 2.3, tempo: 1.0, cor: '#9fe8ff', tinta: 'fixa' }),
+  encolhimento: n({ nome: 'Encolhimento', grupo: 'especial', impacto: 'encolhimento', escala: 2.3, tempo: 1.0, cor: '#ff6a5a', tinta: 'fixa' }),
   mugen_tsukuyomi: n({ nome: 'Mugen Tsukuyomi', grupo: 'especial', impacto: 'mugen_tsukuyomi', noCentro: true, escala: 2.6, tempo: 1.0, cor: '#ff4a5a', tinta: 'fixa' }),
 } as const satisfies Record<string, Familia>;
 
