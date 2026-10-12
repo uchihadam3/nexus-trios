@@ -484,7 +484,7 @@ export const LOTE6: Record<string, Unica> = {
   },
   ganondorf: {
     nome: 'Poder inabalável',
-    texto: 'Com mais de 10% da Vida, nenhum golpe derruba Ganondorf: o golpe que derrubaria deixa Ganondorf com 1 de Vida (e o próximo golpe derruba).',
+    texto: 'Com mais de 10% da Vida, nenhum golpe derruba Ganondorf: o golpe que derrubaria deixa Ganondorf com 1 de Vida.',
     ganchos: {
       salva(m, b, f, alvo, dano) {
         if (alvo !== f || f.hp <= f.maxHp * 0.1 || dano < f.hp) return null;
