@@ -57,7 +57,7 @@ export function CharacterModal({character:c,onClose}:{character:Character;onClos
       <Atributo icone={<Gauge size={15}/>} nome="Velocidade" valor={`ataca a cada ${c.interval.toLocaleString('pt-BR')} s`} fracao={1-(c.interval-INTERVALO_MIN)/(INTERVALO_MAX-INTERVALO_MIN)*.9} cor="#ffd36b"/>
       <Atributo icone={<Brain size={15}/>} nome="Inteligência" valor={`${intelligence} · ${intelligenceLabel(intelligence)}`} fracao={intelligence/100} cor="#8fd3ff"/>
     </div>
-    {c.id==='light'&&<div className="fv-aviso"><Info size={17}/><p><strong>Como funciona a investigação</strong><br/>Ao chegar a 100 Investigação em um inimigo, Light descobre se ele é vulnerável ou imune à Death Note. A descoberta fica visível na batalha.</p></div>}
+    {c.id==='light'&&<div className="fv-aviso"><Info size={17}/><p><strong>Como funciona a investigação</strong><br/>Ao chegar a 100 Investigação em um rival, Light descobre se ele é vulnerável ou imune à Death Note. A descoberta fica visível na batalha.</p></div>}
 
     {unicaDe(c.id)&&<section className="fv-unica">
       <span className="fv-selo"><Crown size={13}/>MECÂNICA ÚNICA · SÓ {c.name.toUpperCase()} TEM</span>
@@ -69,7 +69,7 @@ export function CharacterModal({character:c,onClose}:{character:Character;onClos
       <span className="fv-selo"><Sparkles size={13}/>TRAÇO · SEMPRE ATIVO</span>
       <h3>{c.trait.name}</h3>
       <div className="fv-chips">{trait.effects.map((effect,i)=><span key={i}><ComTermos texto={effect}/></span>)}{c.renascer&&<span className="fv-renasce"><ComTermos texto={textoDoRenascer(c.renascer)}/></span>}{c.ultimaResistencia&&<span className="fv-renasce"><ComTermos texto={textoDaResistencia(c.ultimaResistencia)}/></span>}{c.despercebido&&<span className="fv-renasce"><ComTermos texto={textoDoDespercebido()}/></span>}{c.isca&&<span className="fv-renasce"><ComTermos texto={textoDaIsca(c.isca)}/></span>}</div>
-      <small className="ativa-quando"><u>{ativaQuando(c.trait).rotulo}</u> {ativaQuando(c.trait).resto}</small>
+      <small className="ativa-quando"><u>{ativaQuando(c.trait,c.name).rotulo}</u> {ativaQuando(c.trait,c.name).resto}</small>
     </section>
 
     <section className="fv-basico">

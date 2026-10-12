@@ -148,3 +148,6 @@
 /* a condição do traço como condição: "Ativa quando" sublinhado, numa linha própria */
 .bi2-cartao .ativa-quando{margin-top:6px;color:#ffe3a0;font-size:.95em}
 .ativa-quando u{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:3px;text-decoration-color:#ffd36b;font-weight:800;color:#ffd36b}
+/* A energia guardada agora, na habilidade que a libera */
+.bi2-energia{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:8px 0 0;padding:7px 10px;border-radius:10px;background:rgba(255,211,107,.12);border:1px solid rgba(255,211,107,.35);font-size:13px}
+.bi2-energia b{color:#ffd36b;font-variant-numeric:tabular-nums;white-space:nowrap}

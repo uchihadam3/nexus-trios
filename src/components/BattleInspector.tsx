@@ -52,7 +52,7 @@ export function BattleInspector({target,battle,onClose,onSelect}:{target:Inspect
 }
 
 function FichaDoLutador({battle,f,onSelect}:{battle:Battle;f:Fighter;onSelect:(t:InspectTarget)=>void}){
-  const c=byId[f.characterId],vida=Math.max(0,Math.round(f.hp)),fracao=Math.max(0,f.hp)/f.maxHp,escudo=Math.round(f.shields.reduce((t,s)=>t+s.amount,0));
+  const c=byId[f.characterId],vida=Math.max(0,Math.min(Math.round(f.hp),Math.round(f.maxHp))),fracao=Math.max(0,f.hp)/f.maxHp,escudo=Math.round(f.shields.reduce((t,s)=>t+s.amount,0));
   const traco=presentTrait(c.trait),unica=unicaDe(c.id);
   const extras=[c.renascer&&(f.voltou?'Já renasceu nesta luta. ':'')+textoDoRenascer(c.renascer),c.ultimaResistencia&&(f.resistiu?'Já usou nesta luta. ':'')+textoDaResistencia(c.ultimaResistencia),c.despercebido&&textoDoDespercebido(),c.isca&&textoDaIsca(c.isca)].filter((x):x is string=>!!x);
   const basico=c.basic.effects.map(effect=>presentEffect(effect,c.basic.target)).join(' · ');
@@ -62,7 +62,7 @@ function FichaDoLutador({battle,f,onSelect}:{battle:Battle;f:Fighter;onSelect:(t
       <div className="bi2-nome">
         <small>{universoDaFicha(c)}</small>
         <h3>{c.name}</h3>
-        <div className="bi2-barra vida" style={{'--p':fracao*100} as CSSProperties}><i/><span><HeartPulse size={13}/><b>{vida}</b>/{f.maxHp}{escudo>0&&<em><ShieldHalf size={12}/><TermoBotao termo={termoPorId.escudo!}>{escudo}</TermoBotao></em>}</span></div>
+        <div className="bi2-barra vida" style={{'--p':fracao*100} as CSSProperties}><i/><span><HeartPulse size={13}/><b>{vida}</b>/{Math.round(f.maxHp)}{escudo>0&&<em><ShieldHalf size={12}/><TermoBotao termo={termoPorId.escudo!}>{escudo}</TermoBotao></em>}</span></div>
         <div className="bi2-barra ritmo" style={{'--p':Math.min(1,Math.max(0,f.action))*100} as CSSProperties}><i/><span><Clock3 size={13}/><TermoBotao termo={termoPorId['ataque-basico']!}>Próximo ataque</TermoBotao></span></div>
       </div>
     </header>
@@ -77,7 +77,7 @@ function FichaDoLutador({battle,f,onSelect}:{battle:Battle;f:Fighter;onSelect:(t
       </section>}
       <section className="bi2-cartao traco" style={{'--i':4} as CSSProperties}>
         <span className="bi2-selo"><Flame size={12}/><TermoBotao termo={termoPorId.traco!}>Traço</TermoBotao></span>
-        <b>{c.trait.name}</b><p><ComTermos texto={`${traco.effects.join(' · ')}.`}/></p><p className="ativa-quando"><u>{ativaQuando(c.trait).rotulo}</u> <ComTermos texto={`${ativaQuando(c.trait).resto}.`}/></p>
+        <b>{c.trait.name}</b><p><ComTermos texto={`${traco.effects.join(' · ')}.`}/></p><p className="ativa-quando"><u>{ativaQuando(c.trait,c.name).rotulo}</u> <ComTermos texto={`${ativaQuando(c.trait,c.name).resto}.`}/></p>
         {extras.length>0&&<ul className="bi2-extras">{extras.map((x,i)=><li key={i}><ComTermos texto={x+'.'}/></li>)}</ul>}
       </section>
       <section className="bi2-cartao basico" style={{'--i':5} as CSSProperties}>
@@ -106,6 +106,8 @@ function FichaDaHabilidade({battle,f,i,onSelect}:{battle:Battle;f:Fighter;i:numb
     <section className="bi2-cartao faz" style={{'--i':0} as CSSProperties}>
       <span className="bi2-selo"><Zap size={12}/>O que faz</span>
       <EfeitosAgrupados grupos={p.grupos}/>
+      {/* quanto a habilidade soltaria agora (pedido do jogador: "podia mostrar quanta energia tá guardada") */}
+      {skill.effects.map((ef,k)=>ef.kind==='release'&&<p key={k} className="bi2-energia"><ComTermos texto={`Energia guardada agora: ${Math.round(f.storedEnergy??0)}`}/><b>{Math.round((f.storedEnergy??0)*ef.multiplier)} de dano</b></p>)}
     </section>
     <div className="bi2-numeros">
       <span style={{'--i':1} as CSSProperties}><Hourglass size={15}/><TermoBotao termo={termoPorId.preparo!}/><b>{p.preparation}</b></span>

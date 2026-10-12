@@ -167,7 +167,7 @@ export function ArenaUnit({fighter:f,battle,beat,onInspect,numbers,threatened,li
     </div>
     <div className="unit-name"><button className="fighter-name" onClick={()=>onInspect({kind:'fighter',fighter:f})}>{c.name}</button></div>
     <div className="unit-vitals">
-      <div className="unit-bar" role="progressbar" aria-label={`Vida de ${c.name}`} aria-valuenow={Math.round(f.hp)} aria-valuemax={f.maxHp} aria-valuemin={0}>
+      <div className="unit-bar" role="progressbar" aria-label={`Vida de ${c.name}`} aria-valuenow={Math.round(f.hp)} aria-valuemax={Math.round(f.maxHp)} aria-valuemin={0}>
         <span className="unit-bar-hp" style={{width:`${hpPct}%`}}/>
         {shieldPct>0&&<span className={`unit-bar-shield${shieldPorCima?' por-cima':''}`} style={{left:`${shieldLeft}%`,width:`${shieldPct}%`}}/>}
       </div>

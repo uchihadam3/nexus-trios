@@ -71,7 +71,7 @@ describe('ficha agrupada por alvo', () => {
       { kind: 'release', multiplier: 1.2, target: 'allEnemies' },
     ];
     const grupos = agruparEfeitos(efeitos, 'enemyWeak');
-    expect(grupos[0]).toMatchObject({ titulo: 'No inimigo mais ferido' });
+    expect(grupos[0]).toMatchObject({ titulo: 'No rival mais ferido' });
     expect(grupos[0].linhas).toHaveLength(1);
     const semCabecalho = grupos.find((g) => g.titulo === '');
     expect(semCabecalho?.linhas.map((l) => l.texto)).toEqual([
@@ -85,7 +85,7 @@ describe('ficha agrupada por alvo', () => {
       { kind: 'heal', value: 50, target: 'allAllies' },
       { kind: 'status', status: 'exposed', value: 0.12, duration: 5 },
     ], 'enemyWeak');
-    expect(grupos.map((g) => g.titulo)).toEqual(['No inimigo mais ferido', 'Em todo o trio']);
+    expect(grupos.map((g) => g.titulo)).toEqual(['No rival mais ferido', 'Em todo o trio']);
     expect(grupos[0].linhas).toHaveLength(2);
   });
 

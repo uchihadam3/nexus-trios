@@ -15,7 +15,8 @@ import { describe, expect, it } from 'vitest';
 
 import { characters } from '../src/data/characters';
 import { statuses } from '../src/data/statuses';
-import { cargasLegiveis, describeCharge, presentSkill, presentStatus, presentTrait, targetNames, targetNamesEm } from '../src/engine/skill-descriptions';
+import { ativaQuando, cargasLegiveis, describeCharge, presentSkill, presentStatus, presentTrait, targetNames, targetNamesEm } from '../src/engine/skill-descriptions';
+import { unicaDe } from '../src/engine/unicas';
 
 /** Toda linha que o jogador lê na ficha: traço, básico e as três habilidades. */
 const linhasDaFicha = (): { quem: string; onde: string; linha: string }[] =>
@@ -255,5 +256,38 @@ describe('as telas não guardam números de roster escritos à mão', () => {
     const padrao = /['`"][^'`"\n]*\b(estado|estados)\b[^'`"\n]*['`"]/gi;
     const presos = fontes.flatMap(({ f, texto }) => [...texto.matchAll(padrao)].map((m) => `${f}: ${m[0]}`));
     expect(presos).toEqual([]);
+  });
+});
+
+/*
+ * O padrão de escrita (pedido do jogador: "você tem que padronizar uma forma de escrita que seja fácil de entender
+ * … a pessoa vai bater o olho e entender"). Vale para a Mecânica única, o traço e as habilidades dos 400:
+ *
+ * - quem faz é dito pelo nome, nunca "ele"/"ela" solto ("Ativa quando ele recebe dano. Ele quem?");
+ * - chance é porcentagem, nunca "1 em 3" ("um em três o quê?");
+ * - condição de Vida diz o lado: "com 40% da Vida ou menos", nunca "com 40% da Vida" sozinho;
+ * - todo Status com intensidade diz quanto, entre parênteses: "Acelerado (30% mais rápido) por 8 s";
+ * - bônus de dano com sinal: "+80% de dano", nunca "80% a mais".
+ */
+describe('o padrão de escrita', () => {
+  const unicas = characters.flatMap((c) => { const u = unicaDe(c.id); return u ? [{ quem: c.name, onde: u.nome, linha: u.texto }] : []; });
+  const tracos = characters.flatMap((c) => [
+    ...presentTrait(c.trait).effects.map((linha) => ({ quem: c.name, onde: c.trait.name, linha })),
+    { quem: c.name, onde: `${c.trait.name} (quando)`, linha: ativaQuando(c.trait, c.name).resto },
+  ]);
+  const habilidades = characters.flatMap((c) => c.skills.flatMap((s) => presentSkill(s).effects.map((linha) => ({ quem: c.name, onde: s.name, linha }))));
+  const todas = [...unicas, ...tracos, ...habilidades];
+  const COM_VALOR = Object.entries(statuses).filter(([id]) => !['paralyzed', 'confused', 'silenced', 'marked', 'provoked', 'sleep', 'summon', 'bomb'].includes(id)).map(([, d]) => d.name);
+  const falha = (padrao: RegExp, linhas = todas) => linhas.filter((l) => padrao.test(l.linha)).map((l) => `${l.quem} · ${l.onde} · ${l.linha}`);
+
+  it('cobre as mecânicas únicas', () => { expect(unicas.length).toBeGreaterThan(390); });
+  it('diz quem faz pelo nome, nunca "ele" ou "ela" solto', () => { expect(falha(/\b(ele|ela|Ele|Ela)\b/)).toEqual([]); });
+  it('chance é porcentagem, nunca "1 em 3"', () => { expect(falha(/\b\d+ em \d+\b/)).toEqual([]); });
+  it('condição de Vida diz se é "ou menos" ou "ou mais"', () => { expect(falha(/\b[Cc]om \d+(,\d+)?% da Vida(?! (ou|máxima))/)).toEqual([]); });
+  it('bônus de dano com sinal, nunca "80% a mais"', () => { expect(falha(/\d+% a (mais|menos)\b/)).toEqual([]); });
+  it('todo Status com intensidade diz quanto', () => {
+    // "Fortalecido 40%" ou "Acelerado por 8 s": o nome do Status sem o quanto, entre parênteses
+    const sem = new RegExp(`\\b(${COM_VALOR.join('|')}) (\\d|por \\d)`);
+    expect(falha(sem)).toEqual([]);
   });
 });

@@ -45,7 +45,7 @@ const BASE:Termo[]=[
   {id:'vida',nome:'Vida',cor:'#86e3a8',rotulo:'SOBREVIVER',texto:'Quando chega a zero, o lutador sai da luta. A Vida que sobra no fim vale pontos.'},
   {id:'basico',nome:'Ataque básico',cor:'#ff9a76',rotulo:'RITMO',texto:'O golpe de sempre, com o nome e o jeito de cada lutador: uns quicam no segundo rival, uns pegam dois, uns curam o aliado, roubam Carga ou fecham um combo no 3º golpe. O círculo em volta do retrato mostra quanto falta para o próximo.'},
   {id:'vantagem',nome:'Vantagem',cor:'#8fd3ff',rotulo:'QUEM DOMINA',texto:'A barra do topo mostra quem está controlando a luta. Algumas habilidades reagem a ela; virar o jogo dá pontos.'},
-  {id:'investigacao',nome:'Investigação',cor:'#f4d47e',rotulo:'ESTUDAR O RIVAL',texto:'Alguns lutadores estudam um inimigo por vez. Ao chegar a 100, abrem uma habilidade que só funciona contra quem foi estudado.'},
+  {id:'investigacao',nome:'Investigação',cor:'#f4d47e',rotulo:'ESTUDAR O RIVAL',texto:'Alguns lutadores estudam um rival por vez. Ao chegar a 100, abrem uma habilidade que só funciona contra quem foi estudado.'},
   {id:'inteligencia',nome:'Inteligência',cor:'#c3a2ff',rotulo:'DECISÕES',texto:'De 0 a 100: quanto melhor, mais o lutador escolhe o alvo e a hora certa sozinho.'},
 ];
 

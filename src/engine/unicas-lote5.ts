@@ -11,7 +11,7 @@ const PROVOCACOES: StatusId[] = ['provoked', 'weakened', 'slow', 'exposed', 'mar
 export const LOTE5: Record<string, Unica> = {
   seiya: {
     nome: 'Armadura de Pégaso',
-    texto: 'Cada habilidade que o acerta dá 40 de Escudo.',
+    texto: 'Cada habilidade que acerta Seiya dá a Seiya 40 de Escudo por 10 s.',
     ganchos: {
       apanhou(m, b, f, fonte, _dano, g) {
         if (!g.habilidade || !vivo(f)) return;
@@ -22,7 +22,7 @@ export const LOTE5: Record<string, Unica> = {
   },
   raphael: {
     nome: 'Esquentado',
-    texto: 'Cada vez que fica Provocado, Enfraquecido, Lento, Exposto ou Marcado: +15% de dano por 6 s (acumula).',
+    texto: 'Cada vez que Raphael fica Provocado, Enfraquecido, Lento, Exposto ou Marcado, Raphael ganha +15% de dano por 6 s (soma até 6 vezes).',
     ganchos: {
       pegouStatus(m, b, f, s) {
         if (!PROVOCACOES.includes(s)) return;
@@ -36,12 +36,12 @@ export const LOTE5: Record<string, Unica> = {
   },
   kazuya: {
     nome: 'Chute que empurra',
-    texto: 'Cada golpe direto tira 15% da ação do alvo.',
+    texto: 'Cada golpe de Kazuya Mishima tira 15% da barra do Próximo ataque do alvo.',
     ganchos: { bateu(_m, _b, _f, alvo, _dano, g) { if (g.direto && vivo(alvo)) alvo.action = Math.max(0, alvo.action - 0.15); } },
   },
   bart: {
     nome: 'Eu não fui!',
-    texto: '1 em 4 golpes nele vão num aliado de quem bateu.',
+    texto: 'Cada golpe em Bart Simpson tem 25% de chance de virar culpa de outro: Bart recupera o dano que levou, e um aliado de quem bateu leva esse dano no lugar.',
     ganchos: {
       apanhou(m, b, f, fonte, dano, g) {
         if (!g.direto || dano < 1 || m.sorte(b) >= 0.25) return;
@@ -55,12 +55,12 @@ export const LOTE5: Record<string, Unica> = {
   },
   cloud: {
     nome: 'Buster Sword',
-    texto: 'Os golpes dele ignoram metade do Protegido do alvo.',
+    texto: 'Os golpes de Cloud Strife ignoram metade do Protegido do alvo.',
     ganchos: { causa: (m, _b, _f, alvo) => { const p = m.intensidade(alvo, 'protected'); return p > 0 ? (1 - p / 2) / (1 - p) : 1; } },
   },
   akuma: {
     nome: 'Satsui no Hadō',
-    texto: 'Cada rival que derruba: +15% de dano, mas −5% de Vida máxima.',
+    texto: 'Cada rival que Akuma derruba: +15% de dano até o fim da luta, mas −5% de Vida máxima.',
     ganchos: {
       caiu(m, b, f, quem, quemDerrubou) {
         if (quemDerrubou !== f || quem.side === f.side) return;
@@ -73,7 +73,7 @@ export const LOTE5: Record<string, Unica> = {
   },
   raidenmgr: {
     nome: 'Cortar e tomar',
-    texto: 'Ao derrubar um rival: cura 25% da Vida e fica Acelerado 30% por 6 s.',
+    texto: 'Quando Raiden derruba um rival: cura 25% da Vida máxima e fica Acelerado (30% mais rápido) por 6 s.',
     ganchos: {
       caiu(m, b, f, quem, quemDerrubou) {
         if (quemDerrubou !== f || quem.side === f.side) return;
@@ -85,7 +85,7 @@ export const LOTE5: Record<string, Unica> = {
   },
   jotaro: {
     nome: 'Za Warudo',
-    texto: 'A cada 20 s, todos os rivais ficam Paralisado 2 s.',
+    texto: 'A cada 20 s, Jotaro Kujo para o tempo: todos os rivais ficam Paralisado por 2 s.',
     ganchos: {
       passo(m, b, f, dt) {
         if (!relogio(f, 'tempo', dt, 20, 12)) return;
@@ -96,7 +96,7 @@ export const LOTE5: Record<string, Unica> = {
   },
   daredevil: {
     nome: 'Sentido radar',
-    texto: 'Não fica Cego e Esquiva não funciona contra ele. Causa 25% a mais de dano em quem tem menos de 50% da Vida.',
+    texto: 'O Demolidor nunca fica Cego, e os golpes do Demolidor passam por Esquiva. O Demolidor causa +25% de dano em rivais com menos de 50% da Vida.',
     ganchos: {
       nuncaErra: true,
       imune: (_f, s) => s === 'blind',
@@ -105,7 +105,7 @@ export const LOTE5: Record<string, Unica> = {
   },
   arlequina: {
     nome: 'Imprevisível',
-    texto: 'Cada golpe direto sorteia: 80% a mais de dano, cura 30, deixa o alvo Confuso 2 s, ou nada.',
+    texto: 'Cada golpe da Arlequina sorteia uma surpresa (25% de chance cada): +80% de dano nesse golpe; Arlequina cura 30 de Vida; o alvo fica Confuso por 2 s; ou nada acontece.',
     ganchos: {
       causa(m, b, f, _alvo, g) {
         if (!g.direto) return 1;
@@ -123,7 +123,7 @@ export const LOTE5: Record<string, Unica> = {
   },
   samus: {
     nome: 'Raio de gelo e míssil',
-    texto: 'A cada 4 ataques básicos, deixa o alvo Congelado 1 s; o golpe seguinte nele causa 60% a mais de dano.',
+    texto: 'A cada 4 ataques básicos, Samus Aran congela o alvo: Congelado (+20% de dano no golpe que quebra o gelo) por 1 s, e o golpe seguinte de Samus nesse rival causa +60% de dano.',
     ganchos: {
       bateu(m, b, f, alvo, _dano, g) {
         if (!g.direto || g.habilidade || !vivo(alvo)) return;
@@ -139,7 +139,7 @@ export const LOTE5: Record<string, Unica> = {
   },
   hisoka: {
     nome: 'Dor compartilhada',
-    texto: 'Liga os 2 rivais mais fortes: dano do trio em um passa 30% para o outro.',
+    texto: 'No começo da luta, Hisoka gruda os 2 rivais com mais Vida: 30% de todo dano que o trio de Hisoka causa em um deles também vai para o outro.',
     ganchos: {
       inicio(m, b, f) {
         const rs = m.rivais(b, f).sort((x, y) => y.hp - x.hp);
@@ -157,7 +157,7 @@ export const LOTE5: Record<string, Unica> = {
   },
   jill: {
     nome: 'Ervas de Raccoon City',
-    texto: 'Ganha uma erva a cada 16 s (até 2). Abaixo de 40% da Vida, cada erva cura 15%.',
+    texto: 'Jill Valentine ganha 1 erva a cada 16 s (guarda até 2). Com menos de 40% da Vida, Jill usa as ervas: cada erva cura 15% da Vida máxima.',
     ganchos: {
       passo(m, b, f, dt) {
         if (relogio(f, 'erva', dt, 16, 16)) u(f).ervas = Math.min(2, (u(f).ervas ?? 0) + 1);
@@ -171,7 +171,7 @@ export const LOTE5: Record<string, Unica> = {
   },
   megatron: {
     nome: 'Tiro devastador',
-    texto: 'A cada 3 habilidades: 150 de dano em todos os rivais, e fica 2 s parado.',
+    texto: 'A cada 3 habilidades que Megatron usa, o Canhão de fusão dispara: 150 de dano em cada rival, e Megatron fica 2 s parado esfriando.',
     ganchos: {
       usou(m, b, f) {
         u(f).calor = (u(f).calor ?? 0) + 1;
@@ -185,12 +185,12 @@ export const LOTE5: Record<string, Unica> = {
   },
   nezuko: {
     nome: 'Sangue explosivo',
-    texto: 'Quem a acerta com golpe direto fica Queimando (15 por s, 3 s).',
+    texto: 'Quem acerta Nezuko Kamado com ataque ou habilidade fica Queimando (−15 de Vida por segundo) por 3 s.',
     ganchos: { apanhou(m, b, f, fonte, _dano, g) { if (g.direto && vivo(fonte) && fonte.side !== f.side) m.efeitos(b, f, [fonte], [st('burning', 15, 3)]); } },
   },
   constantine: {
     nome: 'Expulsar demônios',
-    texto: 'A cada 10 s, tira Invocação e Regeneração dos rivais; cada uma tirada vira 60 de dano.',
+    texto: 'A cada 10 s, Constantine expulsa dos rivais a Invocação e a Regeneração. Cada uma tirada causa 60 de dano no rival que a tinha.',
     ganchos: {
       passo(m, b, f, dt) {
         if (!relogio(f, 'exorcismo', dt, 10, 6)) return;
@@ -206,7 +206,7 @@ export const LOTE5: Record<string, Unica> = {
   },
   yennefer: {
     nome: 'Feitiçaria instável',
-    texto: '1 em 4 habilidades dela causa o dobro.',
+    texto: 'Cada habilidade de Yennefer tem 25% de chance de causar o dobro de dano.',
     ganchos: {
       antes(m, b, f) { u(f).caos = m.sorte(b) < 0.25 ? 1 : 0; if (u(f).caos) m.aviso(b, f, 'Caos!', f); },
       causa: (_m, _b, f, _alvo, g) => (g.habilidade && u(f).caos ? 2 : 1),
@@ -215,7 +215,7 @@ export const LOTE5: Record<string, Unica> = {
   },
   nemesis: {
     nome: 'Caçada implacável',
-    texto: 'Ataca o rival mais forte; cada golpe seguido nele causa 6% a mais de dano (acumula até ele cair).',
+    texto: 'O ataque básico de Nemesis persegue o rival com mais Vida até esse rival cair. Cada golpe seguido nele causa +6% de dano a mais que o anterior (até +60%).',
     ganchos: {
       alvoDoBasico(m, b, f) {
         let v = b.fighters[u(f).caca ?? -1];

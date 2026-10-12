@@ -13,17 +13,17 @@ const secs=(v:number)=>`${n(v)} s`;
  * a frase ficar inteira: "Aplica Fortalecido em si próprio".
  */
 export const targetNamesEm:Record<Target,string>={
-  enemyWeak:'no inimigo mais ferido',enemyStrong:'no inimigo mais forte',
+  enemyWeak:'no rival mais ferido',enemyStrong:'no rival mais forte',
   /*
    * "Preparo" é a palavra que o jogo já ensina — está na ficha de toda
    * habilidade, no anel dourado da batalha e no guia. Como cabeçalho, "no
    * inimigo que está preparando uma habilidade" quebrava em duas linhas no
    * celular para dizer a mesma coisa.
    */
-  enemyCast:'no inimigo em Preparo',
-  investigated:'no inimigo mais investigado',allyWeak:'no aliado mais ferido',allyFallen:'no aliado caído',
-  self:'em si próprio',allEnemies:'em todos os inimigos',allAllies:'em todo o trio',
-  randomEnemy:'em um inimigo aleatório',leastInvestigated:'no inimigo menos investigado',allyStrongest:'no aliado com mais Vida',
+  enemyCast:'no rival em Preparo',
+  investigated:'no rival mais investigado',allyWeak:'no aliado mais ferido',allyFallen:'no aliado caído',
+  self:'em si próprio',allEnemies:'em todos os rivais',allAllies:'em todo o trio',
+  randomEnemy:'em um rival aleatório',leastInvestigated:'no rival menos investigado',allyStrongest:'no aliado com mais Vida',
 };
 /*
  * O alvo dito pelo que ele é, não por uma metáfora.
@@ -39,18 +39,18 @@ export const targetNamesEm:Record<Target,string>={
  * quem estivesse prestes a agir, e ela persegue o mais forte.
  */
 export const targetNames:Record<Target,string>={
-  enemyWeak:'inimigo mais ferido',enemyStrong:'inimigo mais forte',
-  enemyCast:'inimigo em Preparo',
-  investigated:'inimigo mais investigado',allyWeak:'aliado mais ferido',allyFallen:'aliado caído',
-  self:'o próprio personagem',allEnemies:'todos os inimigos',allAllies:'todo o trio',
-  randomEnemy:'um inimigo aleatório',leastInvestigated:'inimigo menos investigado',allyStrongest:'aliado com mais Vida',
+  enemyWeak:'rival mais ferido',enemyStrong:'rival mais forte',
+  enemyCast:'rival em Preparo',
+  investigated:'rival mais investigado',allyWeak:'aliado mais ferido',allyFallen:'aliado caído',
+  self:'o próprio personagem',allEnemies:'todos os rivais',allAllies:'todo o trio',
+  randomEnemy:'um rival aleatório',leastInvestigated:'rival menos investigado',allyStrongest:'aliado com mais Vida',
 };
 export const topicNames:Record<Topic,string>={
   time:'por segundo',action:'ao atacar',dealt:'a cada 100 de dano causado',received:'a cada 100 de dano recebido',
-  allyHurt:'a cada 100 de dano sofrido por um aliado',enemyHurt:'a cada 100 de dano sofrido por um inimigo',
+  allyHurt:'a cada 100 de dano sofrido por um aliado',enemyHurt:'a cada 100 de dano sofrido por um rival',
   interrupt:'ao interromper um Preparo',status:'quando seu trio aplica qualquer Status',
-  negativeStatus:'quando seu trio aplica um Status negativo em um inimigo',
-  protected:'a cada 100 de dano bloqueado',enemyCast:'quando um inimigo começa o Preparo',
+  negativeStatus:'quando seu trio aplica um Status negativo em um rival',
+  protected:'a cada 100 de dano bloqueado',enemyCast:'quando um rival começa o Preparo',
   survived:'por segundo enquanto estiver na luta',losing:'por segundo enquanto seu trio estiver atrás na Vantagem',
   winning:'por segundo enquanto seu trio estiver à frente na Vantagem',
 };
@@ -336,7 +336,7 @@ export function presentEffect(effect:Effect,defaultTarget:Target,modo:ModoDeAlvo
     case 'interrupt':return effect.mode==='cancel'?`Interrompe o Preparo${target}`:effect.mode==='delay'?`Atrasa o Preparo em ${secs(effect.value)}${target}`:`Reduz ${pct(effect.value)} do Preparo${target}`;
     case 'shift':return `${effect.value>=0?'Adianta':'Atrasa'} ${pct(Math.abs(effect.value))} do próximo ataque${target}`;
     case 'investigate':return `+${n(effect.value)} Investigação${target}`;
-    case 'revive':return `Levanta um aliado caído com ${pct(effect.value)} da Vida`;
+    case 'revive':return `Levanta um aliado caído com ${pct(effect.value)} da Vida máxima`;
     case 'lifesteal':return `Roubo de vida · ${pct(effect.value)} do dano`;
     case 'cleanse':return `Purifica ${effect.value>1?`até ${n(effect.value)} debuffs`:'1 debuff'}${target}`;
     case 'copy':return `Copia a última habilidade · ${pct(effect.value)} da força`;
@@ -344,7 +344,15 @@ export function presentEffect(effect:Effect,defaultTarget:Target,modo:ModoDeAlvo
     case 'deathnote':return 'Com 100 Investigação: elimina o alvo; contra imune, 110 de dano e Exposto +55% por 14 s';
     case 'charge':return `+${n(effect.value)}% de Carga para habilidades${target}`;
     case 'store':return `Guarda ${n(effect.value)} de energia (até ${n(effect.cap)})`;
-    case 'release':return `Libera energia guardada ×${n(effect.multiplier)}, dividida entre os inimigos vivos`;
+    /*
+     * A energia vai para os alvos da habilidade: num alvo só, inteira nele; em área, dividida entre os vivos
+     * (pedido do jogador: "ela não divide, né? Ela só vai no inimigo mais forte. Por que tá escrito isso?").
+     */
+    case 'release':{
+      const alvo=effect.target??defaultTarget;
+      const area=alvo==='allEnemies';
+      return `Libera a energia guardada ×${n(effect.multiplier)} como dano ${area?'dividido entre todos os rivais vivos':targetNamesEm[alvo]}`;
+    }
   }
 }
 export function presentSkill(skill:Skill):SkillPresentation {
@@ -363,11 +371,11 @@ export function presentSkill(skill:Skill):SkillPresentation {
      */
     always:'ficar pronta',
     injured:'o alvo estiver com menos de 78% de Vida', // a ficha usa textoDoFerido (de quem é a Vida)
-    enemyCast:'um inimigo estiver preparando uma habilidade',
-    threatened:'um aliado tiver menos de 85% de Vida ou um inimigo começar o Preparo',
+    enemyCast:'um rival estiver preparando uma habilidade',
+    threatened:'um aliado tiver menos de 85% de Vida ou um rival começar o Preparo',
     investigated:'houver um alvo conhecido com 100 Investigação',
     // a lista dos Status que contam fica no termo clicável "vulnerável", não na ficha
-    vulnerable:'um inimigo estiver vulnerável',
+    vulnerable:'um rival estiver vulnerável',
     storedEnergy:'houver energia guardada',
   };
   /*
@@ -414,10 +422,10 @@ export function presentSkill(skill:Skill):SkillPresentation {
  */
 const QUANDO_EVENTO:Partial<Record<Topic,string>>={
   action:'Ao atacar',dealt:'Ao causar dano',received:'Ao receber dano',
-  allyHurt:'Quando um aliado recebe dano',enemyHurt:'Quando um inimigo recebe dano',
+  allyHurt:'Quando um aliado recebe dano',enemyHurt:'Quando um rival recebe dano',
   interrupt:'Ao interromper um Preparo',status:'Quando seu trio aplica um Status',
-  negativeStatus:'Quando seu trio aplica um Status negativo em um inimigo',
-  protected:'Quando o Escudo ou a Proteção dele bloqueia dano',enemyCast:'Quando um inimigo começa um Preparo',
+  negativeStatus:'Quando seu trio aplica um Status negativo em um rival',
+  protected:'Ao bloquear dano com Escudo ou Protegido',enemyCast:'Quando um rival começa um Preparo',
 };
 const PASSO_DO_MOTOR=.1;
 const DANO_PROPORCIONAL=new Set<Topic>(['dealt','received','allyHurt','enemyHurt','protected']);
@@ -434,20 +442,24 @@ export function quandoAtiva(trait:Trait):{quando:string;limite:string}{
  * A condição do traço como condição de verdade (pedido do jogador: "coloca ativa quando, sublinhado, pra pessoa
  * entender"): o rótulo "Ativa quando" (ou "Ativa", nos de tempo) e o resto da frase, em minúscula.
  */
-const ATIVA_QUANDO:Partial<Record<Topic,string>>={
-  action:'ele ataca',dealt:'ele causa dano',received:'ele recebe dano',
-  allyHurt:'um aliado recebe dano',enemyHurt:'um inimigo recebe dano',
-  interrupt:'ele interrompe um Preparo',status:'seu trio aplica um Status',
-  negativeStatus:'seu trio aplica um Status negativo em um inimigo',
-  protected:'o Escudo ou a Proteção dele bloqueia dano',enemyCast:'um inimigo começa um Preparo',
-};
-export function ativaQuando(trait:Trait):{rotulo:string;resto:string}{
+/*
+ * Quem faz, sempre pelo nome (pedido do jogador: "Ativa quando ele recebe dano. Ele quem? … quando você recebe
+ * dano? Não dá pra entender de quem é").
+ */
+const ATIVA_QUANDO=(nome:string):Partial<Record<Topic,string>>=>({
+  action:`${nome} ataca`,dealt:`${nome} causa dano`,received:`${nome} recebe dano`,
+  allyHurt:`um aliado de ${nome} recebe dano`,enemyHurt:'um rival recebe dano',
+  interrupt:`${nome} interrompe um Preparo`,status:`o trio de ${nome} aplica um Status`,
+  negativeStatus:`o trio de ${nome} aplica um Status negativo em um rival`,
+  protected:`${nome} bloqueia dano com Escudo ou Protegido`,enemyCast:'um rival começa um Preparo',
+});
+export function ativaQuando(trait:Trait,nome='o personagem'):{rotulo:string;resto:string}{
   const intervalo=secs(Math.max(trait.cooldown,PASSO_DO_MOTOR));
   if(trait.on==='time'||trait.on==='survived')return {rotulo:'Ativa',resto:`a cada ${intervalo}`};
-  if(trait.on==='winning')return {rotulo:'Ativa quando',resto:`seu trio está à frente na Vantagem · a cada ${intervalo}`};
-  if(trait.on==='losing')return {rotulo:'Ativa quando',resto:`seu trio está atrás na Vantagem · a cada ${intervalo}`};
+  if(trait.on==='winning')return {rotulo:'Ativa quando',resto:`o trio de ${nome} está à frente na Vantagem · a cada ${intervalo}`};
+  if(trait.on==='losing')return {rotulo:'Ativa quando',resto:`o trio de ${nome} está atrás na Vantagem · a cada ${intervalo}`};
   const {limite}=quandoAtiva(trait);
-  const base=ATIVA_QUANDO[trait.on]??topicNames[trait.on].replace(/^(ao|quando) /,'');
+  const base=ATIVA_QUANDO(nome)[trait.on]??topicNames[trait.on].replace(/^(ao|quando) /,'');
   return {rotulo:'Ativa quando',resto:limite?`${base} · ${limite}`:base};
 }
 /** Última resistência (na ficha, fora do traço): o golpe fatal o deixa de pé uma vez. */
@@ -486,8 +498,8 @@ export function textoDoRenascer(r:{vida:number;atraso:number}):string{
 export function presentTrait(trait:Trait):TraitPresentation {
   const effects=trait.effects.map(effect=>{
     const texto=presentEffect(effect,trait.target);
-    // só a energia armazenada cresce com o tamanho do golpe
-    return effect.kind==='store'&&DANO_PROPORCIONAL.has(trait.on)?`${texto}, a cada 100 de dano`:texto;
+    // só a energia armazenada cresce com o tamanho do golpe; e diz de qual dano ("a cada 100 de dano recebido")
+    return effect.kind==='store'&&DANO_PROPORCIONAL.has(trait.on)?`${texto}, ${topicNames[trait.on]}`:texto;
   });
   const {quando,limite}=quandoAtiva(trait);
   return {summary:effects[0]??'Sem efeito',quando,trigger:quando.charAt(0).toLowerCase()+quando.slice(1),frequency:limite,effects};

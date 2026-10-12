@@ -14,17 +14,17 @@ export const LOTE4: Record<string, Unica> = {
   /* ───────── Gigantes ───────── */
   kingkong: {
     nome: 'Briga de titãs',
-    texto: 'Causa 30% a mais de dano em quem tem 1.200 ou mais de Vida máxima.',
+    texto: 'King Kong causa +30% de dano em rivais com 1.200 ou mais de Vida máxima.',
     ganchos: { causa: (_m, _b, _f, alvo) => (alvo.maxHp >= 1200 ? 1.3 : 1) },
   },
   shrek: {
     nome: 'Camadas de cebola',
-    texto: 'A cada 25% de Vida perdida, recebe 12% a menos (até 3 vezes).',
+    texto: 'A cada 25% de Vida que Shrek perde, Shrek recebe −12% de dano (até 3 vezes: −36%, com 25% da Vida ou menos).',
     ganchos: { recebe: (_m, _b, f) => 1 - 0.12 * Math.min(3, Math.floor((1 - fracao(f)) / 0.25)) },
   },
   elsa: {
     nome: 'Livre estou',
-    texto: 'Não fica Lento nem Congelado. Com 50% da Vida (uma vez): Barreira no trio e rivais Lento 25% por 6 s.',
+    texto: 'Elsa nunca fica Lento nem Congelado. Com 50% da Vida ou menos (1 vez por luta): todo o trio de Elsa ganha Barreira (anula 1 debuff) por 8 s, e todos os rivais ficam Lento (25% mais lento) por 6 s.',
     ganchos: {
       imune: (_f, s) => s === 'slow' || s === 'frozen',
       apanhou(m, b, f) {
@@ -38,7 +38,7 @@ export const LOTE4: Record<string, Unica> = {
   },
   maleficent: {
     nome: 'Fúria da fada',
-    texto: 'Abaixo de 40% da Vida, até o fim: +30% de Vida máxima (cura essa diferença) e golpes diretos deixam Queimando.',
+    texto: 'Com menos de 40% da Vida (1 vez por luta), Malévola vira dragão até o fim da luta: ganha +30% de Vida máxima (e cura essa diferença), e cada golpe de Malévola deixa o alvo Queimando (−12 de Vida por segundo) por 3 s.',
     ganchos: {
       apanhou(m, b, f) {
         if (u(f).dragao || fracao(f) >= 0.4) return;
@@ -53,7 +53,7 @@ export const LOTE4: Record<string, Unica> = {
   },
   genie: {
     nome: 'Três desejos',
-    texto: 'Aos 15, 30 e 45 s, o que o trio mais precisa: levanta um aliado caído (40%), cura 30% do mais ferido, ou trio Fortalecido 25% por 8 s.',
+    texto: 'Aos 15, 30 e 45 s de luta, o Gênio realiza um desejo, o que o trio mais precisar: levanta um aliado caído com 40% da Vida máxima; se ninguém caiu, cura 30% da Vida máxima do aliado mais ferido (se esse aliado tiver menos de 50% da Vida); se não, todo o trio fica Fortalecido (+25% de dano) por 8 s.',
     ganchos: {
       passo(m, b, f) {
         const s = u(f);
@@ -70,7 +70,7 @@ export const LOTE4: Record<string, Unica> = {
   },
   scar: {
     nome: 'As hienas',
-    texto: 'A cada 10 s: três golpes de 25 no rival mais ferido.',
+    texto: 'A cada 10 s, as hienas de Scar atacam o rival mais ferido: 3 golpes de 25 de dano.',
     ganchos: {
       passo(m, b, f, dt) {
         if (!relogio(f, 'hienas', dt, 10, 6)) return;
@@ -83,7 +83,7 @@ export const LOTE4: Record<string, Unica> = {
   },
   jackskellington: {
     nome: 'Natal roubado',
-    texto: 'A cada 15 s: um aliado ganha um Status bom surpresa e um rival ganha Marca explosiva de 60.',
+    texto: 'A cada 15 s, Jack Esqueleto entrega presentes. Um aliado aleatório ganha um Status bom surpresa: Fortalecido (+25% de dano), Acelerado (25% mais rápido), Protegido (−30% de dano recebido) ou Regeneração (+15 de Vida por segundo) por 6 s, ou Barreira (anula 1 debuff) por 8 s. Um rival aleatório ganha Marca explosiva (60 de dano) que explode em 4 s.',
     ganchos: {
       passo(m, b, f, dt) {
         if (!relogio(f, 'natal', dt, 15, 8)) return;
@@ -97,7 +97,7 @@ export const LOTE4: Record<string, Unica> = {
   },
   ursula: {
     nome: 'Contrato marinho',
-    texto: 'Enquanto ela está de pé, a habilidade mais forte do rival mais forte nunca enche.',
+    texto: 'No começo da luta, Úrsula rouba a voz do rival com mais Vida: enquanto Úrsula estiver de pé, a 3ª habilidade desse rival nunca enche a Carga.',
     ganchos: {
       inicio(m, b, f) { const a = maisForte(m, b, f); if (a) { u(f).voz = idx(b, a); m.aviso(b, f, 'Voz roubada', a); } },
       passo(_m, b, f) { const a = b.fighters[u(f).voz ?? -1]; if (a && vivo(a)) a.skills[2]!.charge = 0; },
@@ -107,7 +107,7 @@ export const LOTE4: Record<string, Unica> = {
   /* ───────── Anime ───────── */
   deku: {
     nome: 'Controle do One For All',
-    texto: 'Começa causando 10% a menos de dano. Cada habilidade aumenta, até 50% a mais.',
+    texto: 'Izuku Midoriya começa com −10% de dano e ganha +10% a cada habilidade que usa, até +50% (depois de 6 habilidades).',
     ganchos: {
       usou(m, b, f) { if ((u(f).porcento ?? 0) < 6) { u(f).porcento = (u(f).porcento ?? 0) + 1; m.aviso(b, f, `${5 + 8 * u(f).porcento!}%`, f); } },
       causa: (_m, _b, f) => 0.9 + 0.1 * (u(f).porcento ?? 0),
@@ -115,12 +115,12 @@ export const LOTE4: Record<string, Unica> = {
   },
   bakugo: {
     nome: 'Explosões crescentes',
-    texto: '+1% de dano a cada 2 s de luta (até 40%).',
+    texto: 'Katsuki Bakugo ganha +1% de dano a cada 2 s de luta (até +40%, aos 80 s).',
     ganchos: { causa: (_m, b) => 1 + Math.min(0.4, b.time / 200) },
   },
   rimuru: {
     nome: 'Corpo que se adapta',
-    texto: 'Depois de pegar o mesmo Status ruim 2 vezes, fica imune a ele.',
+    texto: 'Depois de pegar o mesmo Status ruim 2 vezes, Rimuru Tempest fica imune a esse Status até o fim da luta.',
     ganchos: {
       pegouStatus(m, b, f, s) {
         const k = `visto_${s}`;
@@ -132,12 +132,12 @@ export const LOTE4: Record<string, Unica> = {
   },
   ainz: {
     nome: 'Corpo de morto-vivo',
-    texto: 'Status ruins de menos de 3 s não pegam nele.',
+    texto: 'Status ruins que durariam menos de 3 s não pegam em Ainz Ooal Gown.',
     ganchos: { imune: (_f, s, duracao) => duracao < 3 && !BONS.includes(s) },
   },
   lelouch: {
     nome: 'Ordem absoluta',
-    texto: 'A cada 15 s, os Status bons do rival mais forte passam para o aliado mais ferido.',
+    texto: 'A cada 15 s, Lelouch rouba todos os Status bons de um rival (o primeiro que tiver algum) e os passa para o aliado mais ferido.',
     ganchos: {
       passo(m, b, f, dt) {
         if (!relogio(f, 'geass', dt, 15, 10)) return;
@@ -154,7 +154,7 @@ export const LOTE4: Record<string, Unica> = {
   },
   sesshomaru: {
     nome: 'Orgulho de youkai',
-    texto: 'Causa 30% a mais de dano em quem tem mais de 70% da Vida, e 30% a menos de dano abaixo de 30%. Não fica Provocado.',
+    texto: 'Sesshomaru causa +30% de dano em rivais com mais de 70% da Vida e −30% de dano em rivais com menos de 30% da Vida. Sesshomaru nunca fica Provocado.',
     ganchos: {
       causa: (_m, _b, _f, alvo) => (fracao(alvo) > 0.7 ? 1.3 : fracao(alvo) < 0.3 ? 0.7 : 1),
       imune: (_f, s) => s === 'provoked',
@@ -162,7 +162,7 @@ export const LOTE4: Record<string, Unica> = {
   },
   erza: {
     nome: 'Reequipar',
-    texto: 'A cada 8 s: abaixo de 50% da Vida fica Protegido 35%; acima, causa 30% a mais de dano.',
+    texto: 'A cada 8 s, Erza Scarlet troca de armadura conforme a Vida. Com menos de 50% da Vida: Armadura de Adamantina (fica Protegido (−35% de dano recebido) por 8 s). Com 50% da Vida ou mais: Armadura do Purgatório (+30% de dano enquanto Erza estiver com essa armadura).',
     ganchos: {
       passo(m, b, f, dt) {
         if (!relogio(f, 'armadura', dt, 8, 0.1)) return;
@@ -177,7 +177,7 @@ export const LOTE4: Record<string, Unica> = {
   },
   asta: {
     nome: 'Corpo sem magia',
-    texto: 'Não fica Silenciado, Amaldiçoado nem Confuso. Cada golpe direto tira 1 Status bom do alvo.',
+    texto: 'Asta nunca fica Silenciado, Amaldiçoado nem Confuso. Cada golpe de Asta tira 1 Status bom do alvo.',
     ganchos: {
       imune: (_f, s) => s === 'silenced' || s === 'cursed' || s === 'confused',
       bateu(m, b, f, alvo, _dano, g) {
@@ -191,7 +191,7 @@ export const LOTE4: Record<string, Unica> = {
   },
   rem: {
     nome: 'Fúria de oni',
-    texto: 'Com algum aliado abaixo de 30% da Vida: causa 35% a mais de dano e age 20% mais rápido.',
+    texto: 'Enquanto algum aliado de Rem estiver com menos de 30% da Vida, Rem causa +35% de dano e age 20% mais rápido.',
     ganchos: {
       causa: (m, b, f) => (m.aliados(b, f).some((a) => a !== f && fracao(a) < 0.3) ? 1.35 : 1),
       ritmo: (m, b, f) => (m.aliados(b, f).some((a) => a !== f && fracao(a) < 0.3) ? 1.2 : 1),
@@ -199,7 +199,7 @@ export const LOTE4: Record<string, Unica> = {
   },
   kirito: {
     nome: 'Jogador solo',
-    texto: 'Com o trio com menos Vida que os rivais: causa 15% a mais de dano e age 25% mais rápido.',
+    texto: 'Enquanto o trio de Kirito tiver menos Vida (em %) que os rivais, Kirito causa +15% de dano e age 25% mais rápido.',
     ganchos: {
       causa: (m, b, f) => (vidaDoTrio(m.aliados(b, f)) < vidaDoTrio(m.rivais(b, f)) ? 1.15 : 1),
       ritmo: (m, b, f) => (vidaDoTrio(m.aliados(b, f)) < vidaDoTrio(m.rivais(b, f)) ? 1.25 : 1),
@@ -207,7 +207,7 @@ export const LOTE4: Record<string, Unica> = {
   },
   senku: {
     nome: 'Dez bilhões por cento',
-    texto: 'A cada 10 s, alterna: cura 10% de todos, +20 de Carga no trio, 60 de dano em todos os rivais, ou rival mais forte Exposto 15% por 6 s.',
+    texto: 'A cada 10 s, Senku faz um invento, nesta ordem. Remédio: todo o trio cura 10% da Vida máxima. Bateria: +20% de Carga nas habilidades de todo o trio. Pólvora: 60 de dano em cada rival. Lente: o rival com mais Vida fica Exposto (+15% de dano recebido) por 6 s.',
     ganchos: {
       passo(m, b, f, dt) {
         if (!relogio(f, 'ciencia', dt, 10, 6)) return;
@@ -222,7 +222,7 @@ export const LOTE4: Record<string, Unica> = {
   },
   hinata: {
     nome: 'Pontos de chakra',
-    texto: 'Cada golpe direto faz a Carga do alvo encher 5% mais devagar (até 30%).',
+    texto: 'Cada golpe de Hinata Hyuga fecha um ponto de chakra do alvo: a Carga desse rival passa a encher 5% mais devagar (até 6 pontos: 30% mais devagar).',
     ganchos: {
       bateu(m, b, f, alvo, _dano, g) {
         if (!g.direto || !vivo(alvo) || !alvo.bonus) return;
@@ -236,7 +236,7 @@ export const LOTE4: Record<string, Unica> = {
   },
   jiraiya: {
     nome: 'Energia natural',
-    texto: 'A cada 15 s, fica 2 s parado e depois causa 40% a mais de dano por 10 s.',
+    texto: 'A cada 15 s, Jiraiya medita 2 s parado e depois causa +40% de dano por 10 s.',
     ganchos: {
       passo(m, b, f, dt) {
         if (!relogio(f, 'sabio', dt, 15, 8)) return;
@@ -249,7 +249,7 @@ export const LOTE4: Record<string, Unica> = {
   },
   tsunade: {
     nome: 'Byakugō',
-    texto: 'Abaixo de 25% da Vida (uma vez), por 6 s: cura 6% por segundo e não pode cair.',
+    texto: 'Com menos de 25% da Vida (1 vez por luta): por 6 s, Tsunade cura 6% da Vida máxima por segundo e não pode cair.',
     ganchos: {
       apanhou(m, b, f) { if (!u(f).selo && fracao(f) < 0.25) { u(f).selo = b.time + 6; m.aviso(b, f, 'Byakugō', f); } },
       passo(m, b, f, dt) { if ((u(f).selo ?? 0) > b.time) curaContinua(m, b, f, f, f.maxHp * 0.06 * dt, 'Byakugō'); },
@@ -258,7 +258,7 @@ export const LOTE4: Record<string, Unica> = {
   },
   sailormars: {
     nome: 'Fogo sagrado',
-    texto: 'O dano de Queimando nos rivais cura o aliado mais ferido em metade.',
+    texto: 'Todo dano de Queimando nos rivais cura o aliado mais ferido de Sailor Mars em metade desse dano.',
     ganchos: {
       viu(m, b, f, _fonte, alvo, dano, g) {
         if (alvo.side === f.side || g.direto || g.label !== 'Impacto' || m.intensidade(alvo, 'burning') <= 0) return;
@@ -269,14 +269,14 @@ export const LOTE4: Record<string, Unica> = {
   },
   steven: {
     nome: 'Proteção que fica',
-    texto: 'Os Escudos que ele dá não somem com o tempo, só quando quebram.',
+    texto: 'Os Escudos que Steven Universo dá não acabam com o tempo: só somem quando quebram.',
     ganchos: {
       passo(_m, b, f) { for (const x of b.fighters) for (const s of x.shields) if (s.source === f.uid) s.remaining = Math.max(s.remaining, 5); },
     },
   },
   dexter: {
     nome: 'Dee Dee!',
-    texto: 'A cada 10 s: +25 de Carga em todas as habilidades; 1 em 4 vezes, fica 2 s parado.',
+    texto: 'A cada 10 s, Dexter tenta um invento: 75% de chance de dar +25% de Carga em todas as habilidades de Dexter; 25% de chance de a Dee Dee bagunçar tudo e Dexter ficar 2 s parado.',
     ganchos: {
       passo(m, b, f, dt) {
         if (!relogio(f, 'lab', dt, 10, 6)) return;
@@ -289,7 +289,7 @@ export const LOTE4: Record<string, Unica> = {
   },
   aku: {
     nome: 'Jogado no futuro',
-    texto: 'Abaixo de 25% da Vida (uma vez), o rival mais forte fica Paralisado 8 s.',
+    texto: 'Com menos de 25% da Vida (1 vez por luta): Aku manda o rival com mais Vida para o futuro, e esse rival fica Paralisado por 8 s.',
     ganchos: {
       apanhou(m, b, f) {
         if (u(f).portal || fracao(f) >= 0.25) return;
@@ -303,7 +303,7 @@ export const LOTE4: Record<string, Unica> = {
   },
   megamind: {
     nome: 'Gênio do mal',
-    texto: 'Sorteia no começo: sem dano direto nos primeiros 10 s, +40% de Vida máxima, ou rival mais forte Enfraquecido 30% por 15 s.',
+    texto: 'No começo da luta, Megamente sorteia 1 de 3 planos (33% de chance cada). Disfarce: não recebe dano de ataques nem de habilidades nos primeiros 10 s. Mecha: +40% de Vida máxima. Desidratar: o rival com mais Vida fica Enfraquecido (−30% de dano) por 15 s.',
     ganchos: {
       inicio(m, b, f) {
         const plano = Math.floor(m.sorte(b) * 3);
@@ -317,7 +317,7 @@ export const LOTE4: Record<string, Unica> = {
   },
   vilgax: {
     nome: 'Armadura que aprende',
-    texto: 'Cada golpe que leva de um rival: recebe 4% a menos desse rival (até 40%).',
+    texto: 'Cada golpe que Vilgax recebe de um rival ensina a armadura: Vilgax passa a receber −4% de dano desse rival (até 10 golpes: −40%).',
     ganchos: {
       apanhou(_m, b, f, fonte, _dano, g) { if (g.direto) { const k = `estudo${idx(b, fonte)}`; u(f)[k] = Math.min(10, (u(f)[k] ?? 0) + 1); } },
       recebe: (_m, b, f, fonte) => 1 - 0.04 * (u(f)[`estudo${idx(b, fonte)}`] ?? 0),
@@ -325,7 +325,7 @@ export const LOTE4: Record<string, Unica> = {
   },
   cosmowanda: {
     nome: 'Padrinhos mágicos',
-    texto: 'A cada 12 s, a habilidade do trio mais perto de ficar Pronta enche na hora.',
+    texto: 'A cada 12 s, Cosmo e Wanda realizam um desejo: a habilidade do trio com mais Carga (fora do Resfriamento) fica pronta na hora.',
     ganchos: {
       passo(m, b, f, dt) {
         if (!relogio(f, 'desejo', dt, 12, 8)) return;
@@ -341,7 +341,7 @@ export const LOTE4: Record<string, Unica> = {
   /* ───────── Games ───────── */
   steve: {
     nome: 'Crafting',
-    texto: 'A cada 8 golpes diretos, ganha em ordem: Protegido 25% até o fim, +30% de dano, e um golem que luta junto.',
+    texto: 'A cada 8 golpes, Steve fabrica uma peça, nesta ordem. Armadura de diamante: fica Protegido (−25% de dano recebido) até o fim da luta. Espada de diamante: +30% de dano até o fim da luta. Golem de ferro: Invocação até o fim da luta, que ataca um rival a cada 1,5 s com 45 de dano por ataque.',
     ganchos: {
       bateu(m, b, f, _alvo, _dano, g) {
         if (!g.direto) return;
@@ -359,7 +359,7 @@ export const LOTE4: Record<string, Unica> = {
   },
   creeper: {
     nome: 'Tssss… BOOM',
-    texto: 'A cada 14 s, fica 1 s parado e explode: 280 no rival mais forte e 80 nos outros; perde 10% da Vida.',
+    texto: 'A cada 14 s, o Creeper chia 1 s parado e explode: 280 de dano no rival com mais Vida e 80 nos outros rivais. A explosão custa 10% da Vida máxima do Creeper (sem cair por isso).',
     ganchos: {
       passo(m, b, f, dt) {
         const s = u(f);
@@ -381,7 +381,7 @@ export const LOTE4: Record<string, Unica> = {
   },
   pacman: {
     nome: 'Hora de comer',
-    texto: 'A cada 22 s, por 6 s: rivais Lento 20% e ele causa 60% a mais de dano neles.',
+    texto: 'A cada 22 s, Pac-Man come uma pílula de poder por 6 s: todos os rivais ficam Lento (20% mais lento), e Pac-Man causa +60% de dano.',
     ganchos: {
       passo(m, b, f, dt) {
         if (!relogio(f, 'pilula', dt, 22, 10)) return;
@@ -394,7 +394,7 @@ export const LOTE4: Record<string, Unica> = {
   },
   crash: {
     nome: 'Máscara protetora',
-    texto: 'O próximo golpe que levaria não pega. Ganha mais um a cada 20 s; com 3, fica 5 s sem levar dano.',
+    texto: 'Crash Bandicoot começa com 1 máscara Aku Aku: cada máscara anula o próximo ataque ou habilidade que Crash receberia. A cada 20 s, Crash ganha mais 1 máscara; ao juntar 3, as máscaras viram 5 s sem receber dano nenhum.',
     ganchos: {
       inicio(_m, _b, f) { u(f).mascaras = 1; },
       passo(m, b, f, dt) {
@@ -414,7 +414,7 @@ export const LOTE4: Record<string, Unica> = {
   },
   arthurmorgan: {
     nome: 'Mira certeira',
-    texto: 'A cada 18 s: 3 tiros de 60 nos rivais com menos Vida.',
+    texto: 'A cada 18 s, Arthur Morgan usa o Dead Eye: 3 tiros de 60 de dano, cada um no rival com menos Vida naquele momento.',
     ganchos: {
       passo(m, b, f, dt) {
         if (!relogio(f, 'deadeye', dt, 18, 10)) return;
@@ -425,7 +425,7 @@ export const LOTE4: Record<string, Unica> = {
   },
   ellie: {
     nome: 'Pegar o que sobrou',
-    texto: 'Quando um aliado cai: cura 20% da Vida e +25 de Carga em todas as habilidades.',
+    texto: 'Quando um aliado cai, Ellie pega os suprimentos: cura 20% da Vida máxima e ganha +25% de Carga em todas as habilidades.',
     ganchos: {
       caiu(m, b, f, quem) {
         if (quem.side !== f.side) return;
@@ -437,7 +437,7 @@ export const LOTE4: Record<string, Unica> = {
   },
   sans: {
     nome: 'Esquiva preguiçosa',
-    texto: 'Começa desviando de 70% dos golpes diretos; cada desvio tira 15%. Volta ao normal a cada 10 s.',
+    texto: 'Sans tem 70% de chance de desviar de cada ataque ou habilidade, e cada desvio baixa essa chance em 15 pontos. A cada 10 s, Sans descansa e a chance volta a 70%.',
     ganchos: {
       passo(_m, _b, f, dt) { if (relogio(f, 'descanso', dt, 10, 10)) u(f).cansaco = 0; },
       recebe(m, b, f, fonte, g) {
@@ -452,7 +452,7 @@ export const LOTE4: Record<string, Unica> = {
   },
   dovahkiin: {
     nome: 'Devorador de almas',
-    texto: 'A cada 12 s: 50 de dano em todos os rivais, mais 50 por rival já derrubado.',
+    texto: 'A cada 12 s, Dovahkiin grita o Fus Ro Dah: 50 de dano em cada rival, mais 50 para cada rival que já caiu na luta.',
     ganchos: {
       caiu(m, b, f, quem) { if (quem.side !== f.side) { u(f).gritos = (u(f).gritos ?? 1) + 1; m.aviso(b, f, 'Alma absorvida', quem); } },
       passo(m, b, f, dt) {
@@ -465,7 +465,7 @@ export const LOTE4: Record<string, Unica> = {
   },
   yoshi: {
     nome: 'Engole e bota ovo',
-    texto: 'A cada 12 s, o rival mais fraco fica Paralisado 2 s e depois leva 90 de dano.',
+    texto: 'A cada 12 s, Yoshi engole o rival com menos Vida: esse rival fica Paralisado por 2 s e depois sai como ovo, levando 90 de dano.',
     ganchos: {
       passo(m, b, f, dt) {
         const s = u(f), preso = b.fighters[s.engolido ?? -1];
