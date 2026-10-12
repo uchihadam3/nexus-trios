@@ -44,7 +44,7 @@ const imagePortraits:Record<string,string>={
   roy:'/assets/portraits/roy.webp',alphonse:'/assets/portraits/alphonse.webp',edward:'/assets/portraits/edward.webp',kurapika:'/assets/portraits/kurapika.webp',
   killua:'/assets/portraits/killua.webp',gon:'/assets/portraits/gon.webp',levi:'/assets/portraits/levi.webp',hisoka:'/assets/portraits/hisoka.webp',
   mikasa:'/assets/portraits/mikasa.webp',eren:'/assets/portraits/eren.webp',kenpachi:'/assets/portraits/kenpachi.webp',aizen:'/assets/portraits/aizen.webp',
-  rukia:'/assets/portraits/rukia.webp',ichigo:'/assets/portraits/ichigo.png',sukuna:'/assets/portraits/sukuna.webp',nobara:'/assets/portraits/nobara.webp',
+  rukia:'/assets/portraits/rukia.webp',ichigo:'/assets/portraits/ichigo.webp',sukuna:'/assets/portraits/sukuna.webp',nobara:'/assets/portraits/nobara.webp',
   megumi:'/assets/portraits/megumi.webp',yuji:'/assets/portraits/yuji.webp',muzan:'/assets/portraits/muzan.webp',inosuke:'/assets/portraits/inosuke.webp',
   zenitsu:'/assets/portraits/zenitsu.webp',nezuko:'/assets/portraits/nezuko.webp',tanjiro:'/assets/portraits/tanjiro.webp',sakura:'/assets/portraits/sakura.webp',
   itachi:'/assets/portraits/itachi.webp',kakashi:'/assets/portraits/kakashi.webp',frieza:'/assets/portraits/frieza.webp',piccolo:'/assets/portraits/piccolo.webp',gohan:'/assets/portraits/gohan.webp',
