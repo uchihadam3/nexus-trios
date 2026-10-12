@@ -862,7 +862,7 @@ export const pontosFortes: Record<string, PontoForteMedido[]> = {
   "rukia": [{"tipo":"agil","rotulo":"Habilidades sem parar","motivo":"Solta 3,2 habilidades por luta"}],
   "aizen": [{"tipo":"controle","rotulo":"Atrapalha os rivais","motivo":"O traço Mente inalcançável deixa os rivais Confuso e Silenciado"}],
   "kenpachi": [{"tipo":"reforco","rotulo":"Sempre reforçado","motivo":"Mantém Status bons em si e no trio quase a luta toda"}],
-  "eren": [{"tipo":"escudo","rotulo":"Escudo forte","motivo":" endurecer segura uns 740 de dano por luta com Escudo"}],
+  "eren": [{"tipo":"escudo","rotulo":"Escudo forte","motivo":"Endurecer segura uns 740 de dano por luta com Escudo"}],
   "mikasa": [{"tipo":"ritmo","rotulo":"Dita o ritmo","motivo":"Adianta a vez do trio e atrasa a dos rivais"}],
   "levi": [{"tipo":"ritmo","rotulo":"Dita o ritmo","motivo":"Adianta a vez do trio e atrasa a dos rivais"},{"tipo":"rapido","rotulo":"Ataque rápido","motivo":"Corte sai a cada 2,17 s"}],
   "gon": [{"tipo":"nocaute","rotulo":"Finalizador","motivo":"Derruba 1 rival por luta, mais que quase todo o elenco"}],

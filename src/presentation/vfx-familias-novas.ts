@@ -511,6 +511,20 @@ export const FAMILIAS_NOVAS = {
   santuario_maligno: n({ nome: 'Santuário maligno', grupo: 'corte', preparo: 'santuario_preparo', impacto: 'santuario_maligno', escala: 2.6, tempo: 1.0, cor: '#e8323e', tinta: 'fixa' }),
   mascara_hollow: n({ nome: 'Máscara Hollow', grupo: 'especial', impacto: 'mascara_hollow', escala: 2.3, tempo: 1.0, cor: '#ff4a4a', tinta: 'fixa' }),
   bankai_ichigo: n({ nome: 'Bankai', grupo: 'corte', preparo: 'bankai_preparo', impacto: 'bankai_ichigo', escala: 2.5, tempo: 1.0, cor: '#e83a4a', tinta: 'fixa' }),
+  // rodada 7: Rukia, Aizen, Kenpachi, Eren e Mikasa (tools/vfx/familias_v2/rodada07.py)
+  sode_no_shirayuki: n({ nome: 'Sode no Shirayuki', grupo: 'elemento', impacto: 'sode_no_shirayuki', escala: 2.3, tempo: 1.0, cor: '#bfe6ff', tinta: 'fixa' }),
+  circulo_de_gelo: n({ nome: 'Círculo de gelo', grupo: 'elemento', impacto: 'circulo_de_gelo', escala: 2.3, tempo: 1.0, cor: '#9fdcff', tinta: 'fixa' }),
+  hakka_no_togame: n({ nome: 'Hakka no Togame', grupo: 'elemento', preparo: 'hakka_preparo', impacto: 'hakka_no_togame', escala: 2.4, tempo: 1.0, cor: '#c8ecff', tinta: 'fixa' }),
+  kyoka_suigetsu: n({ nome: 'Kyoka Suigetsu', grupo: 'magia', impacto: 'kyoka_suigetsu', escala: 2.4, tempo: 1.0, cor: '#c8a8ff', tinta: 'fixa' }),
+  plano_revelado: n({ nome: 'Plano revelado', grupo: 'corte', impacto: 'plano_revelado', escala: 2.3, tempo: 1.0, cor: '#d8c0ff', tinta: 'fixa' }),
+  instinto_de_batalha: n({ nome: 'Instinto de batalha', grupo: 'corte', impacto: 'instinto_de_batalha', escala: 2.3, tempo: 1.0, cor: '#ffd84a', tinta: 'fixa' }),
+  corte_selvagem: n({ nome: 'Corte selvagem', grupo: 'corte', impacto: 'corte_selvagem', escala: 2.3, tempo: 1.0, cor: '#ffc04a', tinta: 'fixa' }),
+  retirar_o_limitador: n({ nome: 'Retirar o limitador', grupo: 'corte', preparo: 'limitador_preparo', impacto: 'retirar_o_limitador', escala: 2.5, tempo: 1.0, cor: '#ffd84a', tinta: 'fixa' }),
+  endurecimento_titan: n({ nome: 'Endurecer', grupo: 'apoio', impacto: 'endurecimento_titan', escala: 2.3, tempo: 1.0, cor: '#a8e0ff', tinta: 'fixa' }),
+  rugido_da_fundacao: n({ nome: 'Rugido da fundação', grupo: 'especial', preparo: 'fundacao_preparo', impacto: 'rugido_da_fundacao', escala: 2.6, tempo: 1.0, cor: '#ffc86a', tinta: 'fixa' }),
+  manobra_odm: n({ nome: 'Equipamento de manobra', grupo: 'corte', impacto: 'manobra_odm', escala: 2.3, tempo: 1.0, cor: '#c8d8e8', tinta: 'fixa' }),
+  laminas_em_x: n({ nome: 'Lâminas em X', grupo: 'corte', impacto: 'laminas_em_x', escala: 2.3, tempo: 1.0, cor: '#e8505a', tinta: 'fixa' }),
+  golpe_na_nuca: n({ nome: 'Golpe na nuca', grupo: 'corte', impacto: 'golpe_na_nuca', escala: 2.3, tempo: 1.0, cor: '#d8e4f0', tinta: 'fixa' }),
   mugen_tsukuyomi: n({ nome: 'Mugen Tsukuyomi', grupo: 'especial', impacto: 'mugen_tsukuyomi', noCentro: true, escala: 2.6, tempo: 1.0, cor: '#ff4a5a', tinta: 'fixa' }),
 } as const satisfies Record<string, Familia>;
 

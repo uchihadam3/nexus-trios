@@ -29,4 +29,14 @@ describe('nomes do kit', () => {
     expect(tracos.filter((t, i) => tracos.indexOf(t) !== i)).toEqual([]);
     expect(unicas.filter((t, i) => unicas.indexOf(t) !== i)).toEqual([]);
   });
+
+  it('os nomes começam com maiúscula e não têm espaço sobrando (o Eren tinha " endurecer")', () => {
+    const tortos: string[] = [];
+    for (const c of characters) {
+      const u = unicaDe(c.id);
+      for (const n of [...(u ? [u.nome] : []), c.trait.name, c.basic.name, ...c.skills.map((s) => s.name)])
+        if (n !== n.trim() || /\s{2}/.test(n) || /^[a-zà-ú]/.test(n)) tortos.push(`${c.name}: "${n}"`);
+    }
+    expect(tortos).toEqual([]);
+  });
 });

@@ -1497,6 +1497,20 @@
   "laco": false,
   "bytes": 41274
  },
+ "circulo_de_gelo": {
+  "descricao": "Rukia · o círculo no chão e a coluna de gelo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 40920
+ },
  "cleave": {
   "descricao": "Sukuna · a medida e o corte único que parte o alvo",
   "quadros": 12,
@@ -1804,6 +1818,20 @@
   ],
   "laco": false,
   "bytes": 40488
+ },
+ "corte_selvagem": {
+  "descricao": "Kenpachi · três cortes serrilhados",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 39672
  },
  "corte_vertical": {
   "descricao": "corte vertical",
@@ -2308,6 +2336,20 @@
   ],
   "laco": false,
   "bytes": 42484
+ },
+ "endurecimento_titan": {
+  "descricao": "Eren · a casca de cristal hexagonal",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 97668
  },
  "enfraquecer": {
   "descricao": "setas para baixo",
@@ -3471,6 +3513,20 @@
   "laco": false,
   "bytes": 74812
  },
+ "fundacao_preparo": {
+  "descricao": "Eren · o raio da transformação e o vapor (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 53998
+ },
  "furia_espartana": {
   "descricao": "Kratos · a pancada rápida da Fúria",
   "quadros": 12,
@@ -3849,6 +3905,20 @@
   "laco": false,
   "bytes": 51926
  },
+ "golpe_na_nuca": {
+  "descricao": "Mikasa · a queda em espiral e o corte na nuca",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 22802
+ },
  "golpe_pesado": {
   "descricao": "impacto pesado",
   "quadros": 12,
@@ -4017,6 +4087,34 @@
   "laco": false,
   "bytes": 44102
  },
+ "hakka_no_togame": {
+  "descricao": "Rukia · a flor de gelo que fecha e trinca",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 85326
+ },
+ "hakka_preparo": {
+  "descricao": "Rukia · a névoa fria e os flocos (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 60272
+ },
  "hinokami_kagura": {
   "descricao": "Tanjiro · a Dança do Deus do Fogo: o halo de chamas e o corte",
   "quadros": 12,
@@ -4114,6 +4212,20 @@
   ],
   "laco": false,
   "bytes": 89532
+ },
+ "instinto_de_batalha": {
+  "descricao": "Kenpachi · o golpe e a caveira amarela",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 55116
  },
  "inv_androide": {
   "descricao": "Androide de combate: soco-foguete",
@@ -4633,6 +4745,20 @@
   "laco": false,
   "bytes": 61662
  },
+ "kyoka_suigetsu": {
+  "descricao": "Aizen · a lua, o reflexo na água e as pétalas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 47938
+ },
  "labareda": {
   "descricao": "coluna de fogo",
   "quadros": 12,
@@ -4800,6 +4926,20 @@
   ],
   "laco": false,
   "bytes": 50126
+ },
+ "laminas_em_x": {
+  "descricao": "Mikasa · o X das lâminas, as pontas que quebram e o cachecol",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 27444
  },
  "laminas_kratos": {
   "descricao": "Kratos · as Lâminas do Caos nas correntes",
@@ -5025,6 +5165,20 @@
   "laco": false,
   "bytes": 45658
  },
+ "limitador_preparo": {
+  "descricao": "Kenpachi · a pressão em labaredas (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 58088
+ },
  "limite_cloud": {
   "descricao": "Cloud · a aura do Limite no Preparo (laço)",
   "quadros": 12,
@@ -5192,6 +5346,20 @@
   ],
   "laco": false,
   "bytes": 32414
+ },
+ "manobra_odm": {
+  "descricao": "Mikasa · os cabos, o gás e o corte giratório",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 22226
  },
  "manopla": {
   "descricao": "Punho do Titã: a manopla e as seis joias",
@@ -6088,6 +6256,20 @@
   ],
   "laco": false,
   "bytes": 35146
+ },
+ "plano_revelado": {
+  "descricao": "Aizen · o vidro que trinca e a estocada por trás",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 28200
  },
  "plasma_faixa": {
   "descricao": "Aiolia · os raios do Relâmpago de Plasma (faixa)",
@@ -7027,6 +7209,20 @@
   "laco": false,
   "bytes": 69288
  },
+ "retirar_o_limitador": {
+  "descricao": "Kenpachi · a coluna de pressão e o corte com as duas mãos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 50246
+ },
  "ricochete": {
   "descricao": "estalo de ricochete",
   "quadros": 12,
@@ -7124,6 +7320,20 @@
   ],
   "laco": false,
   "bytes": 46664
+ },
+ "rugido_da_fundacao": {
+  "descricao": "Eren · as pegadas dos colossais, o vapor e o choque",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 88302
  },
  "rugido_do_hulk": {
   "descricao": "Hulk · as ondas do rugido chegando, o rival treme",
@@ -7796,6 +8006,20 @@
   ],
   "laco": false,
   "bytes": 69916
+ },
+ "sode_no_shirayuki": {
+  "descricao": "Rukia · a fita branca em espiral e a geada",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 67038
  },
  "sombra": {
   "descricao": "tentáculos de sombra",
