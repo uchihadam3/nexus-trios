@@ -9323,6 +9323,20 @@
   "laco": false,
   "bytes": 33808
  },
+ "mu_atras": {
+  "descricao": "Valak · a silhueta atrás de você",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 12272
+ },
  "mu_banana": {
   "descricao": "Donkey Kong · a casca de banana",
   "quadros": 12,
@@ -9546,6 +9560,20 @@
   ],
   "laco": false,
   "bytes": 44548
+ },
+ "mu_caixa": {
+  "descricao": "Pinhead · a caixa e as correntes de gancho",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 29786
  },
  "mu_canhao_fusao": {
   "descricao": "Megatron · o canhão de fusão",
@@ -9883,6 +9911,20 @@
   "laco": false,
   "bytes": 29296
  },
+ "mu_corpo_metal": {
+  "descricao": "RoboCop · o visor e as placas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 11286
+ },
  "mu_corpo_novo": {
   "descricao": "Ultron · o corpo novo se montando",
   "quadros": 12,
@@ -9896,6 +9938,20 @@
   ],
   "laco": false,
   "bytes": 49232
+ },
+ "mu_corte_fundo": {
+  "descricao": "Leatherface · a motosserra roncando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 21266
  },
  "mu_corte_lento": {
   "descricao": "Isaac · a mira do cortador de plasma",
@@ -9939,6 +9995,20 @@
   "laco": false,
   "bytes": 34464
  },
+ "mu_cria": {
+  "descricao": "Xenomorfo · o ovo abrindo e a mandíbula",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 17930
+ },
  "mu_cristal_prata": {
   "descricao": "Sailor Moon · a lua e o Cristal de Prata",
   "quadros": 12,
@@ -9980,6 +10050,20 @@
   ],
   "laco": false,
   "bytes": 34890
+ },
+ "mu_desarmado": {
+  "descricao": "Indiana Jones · o chicote e o chapéu",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 17338
  },
  "mu_desastrado": {
   "descricao": "Pateta · o tombo e as estrelinhas",
@@ -10050,6 +10134,20 @@
   ],
   "laco": false,
   "bytes": 40294
+ },
+ "mu_desviou": {
+  "descricao": "Neo · as balas lentas e o código",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 36372
  },
  "mu_devil_jin": {
   "descricao": "Jin · as asas do Devil e o raio da testa",
@@ -10275,6 +10373,20 @@
   "laco": false,
   "bytes": 38614
  },
+ "mu_equilibrio": {
+  "descricao": "Yoda · o sabre e o equilíbrio da Força",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 17666
+ },
  "mu_erva": {
   "descricao": "Jill · a erva verde e a cura",
   "quadros": 12,
@@ -10485,6 +10597,20 @@
   "laco": false,
   "bytes": 27622
  },
+ "mu_estrangulamento": {
+  "descricao": "Darth Vader · o estrangulamento da Força",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 39738
+ },
  "mu_evoluiu": {
   "descricao": "Garou · o Punho da Água Corrente",
   "quadros": 12,
@@ -10512,6 +10638,20 @@
   ],
   "laco": false,
   "bytes": 56622
+ },
+ "mu_exterminador": {
+  "descricao": "T-800 · o olho vermelho e a mira",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 11274
  },
  "mu_faca": {
   "descricao": "Leon · a faca e a faísca do aparo",
@@ -10849,6 +10989,20 @@
   "laco": false,
   "bytes": 26974
  },
+ "mu_golpe_voltou": {
+  "descricao": "Harry Potter · a proteção que devolve",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 33406
+ },
  "mu_goool": {
   "descricao": "Casey Jones · o taco e o disco",
   "quadros": 12,
@@ -11002,6 +11156,20 @@
   ],
   "laco": false,
   "bytes": 65454
+ },
+ "mu_horcrux": {
+  "descricao": "Voldemort · a Horcrux destruída",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 20264
  },
  "mu_ilusao": {
   "descricao": "Loki · a imagem quebrando e os chifres",
@@ -11437,6 +11605,20 @@
   "laco": false,
   "bytes": 83326
  },
+ "mu_mais_smith": {
+  "descricao": "Agente Smith · os óculos e as cópias",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 10960
+ },
  "mu_mana": {
   "descricao": "Frieren · o círculo mágico e as flores de mana",
   "quadros": 12,
@@ -11647,6 +11829,20 @@
   "laco": false,
   "bytes": 13706
  },
+ "mu_nevoa": {
+  "descricao": "Drácula · a névoa e os morcegos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 45030
+ },
  "mu_nivel": {
   "descricao": "Jinwoo · a janela do sistema: subiu de nível",
   "quadros": 12,
@@ -11661,6 +11857,20 @@
   "laco": false,
   "bytes": 38064
  },
+ "mu_nova_esperanca": {
+  "descricao": "Luke · os dois sóis e o sabre",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 14876
+ },
  "mu_nyeh": {
   "descricao": "Esqueleto · o cajado do carneiro",
   "quadros": 12,
@@ -11674,6 +11884,20 @@
   ],
   "laco": false,
   "bytes": 59298
+ },
+ "mu_o_branco": {
+  "descricao": "Gandalf · o cajado e a luz branca",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 89840
  },
  "mu_odio_herois": {
   "descricao": "Lex Luthor · os cristais de kryptonita",
@@ -11717,6 +11941,20 @@
   "laco": false,
   "bytes": 53524
  },
+ "mu_outro_ghostface": {
+  "descricao": "Ghostface · as duas máscaras e as facas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 25990
+ },
  "mu_parede": {
   "descricao": "Alphonse · o muro de pedra",
   "quadros": 12,
@@ -11730,6 +11968,20 @@
   ],
   "laco": false,
   "bytes": 24266
+ },
+ "mu_parlay": {
+  "descricao": "Jack Sparrow · a bússola e as moedas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 25038
  },
  "mu_parry": {
   "descricao": "Ken · o parry e o Shoryuken",
@@ -12193,6 +12445,20 @@
   "laco": false,
   "bytes": 31746
  },
+ "mu_recarregou": {
+  "descricao": "John Wick · a recarga e os tiros",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 25266
+ },
  "mu_redirecionado": {
   "descricao": "Zuko · o raio redirecionado",
   "quadros": 12,
@@ -12248,6 +12514,20 @@
   ],
   "laco": false,
   "bytes": 73376
+ },
+ "mu_relampago_cadeia": {
+  "descricao": "Palpatine · o relâmpago em cadeia",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 40308
  },
  "mu_road_roller": {
   "descricao": "Dio · o Road Roller",
@@ -12402,6 +12682,20 @@
   ],
   "laco": false,
   "bytes": 19300
+ },
+ "mu_sete_dias": {
+  "descricao": "Samara · a TV, o anel e os cabelos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 21348
  },
  "mu_sharingan": {
   "descricao": "Sasuke · o Sharingan girando",
@@ -12822,6 +13116,20 @@
   ],
   "laco": false,
   "bytes": 56636
+ },
+ "mu_trofeu": {
+  "descricao": "Predador · a mira de três pontos e a camuflagem",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 36108
  },
  "mu_tropecou": {
   "descricao": "Morty · o tropeço",

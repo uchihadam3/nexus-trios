@@ -10882,6 +10882,23 @@
    ],
    "bytes": 71946
   },
+  "mu-atras": {
+   "arquivo": "mu-atras.mp3",
+   "descricao": "Valak: atrás de você",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 78311
+  },
   "mu-banana": {
    "arquivo": "mu-banana.mp3",
    "descricao": "Donkey Kong: a casca de banana",
@@ -11153,6 +11170,23 @@
     1.8274
    ],
    "bytes": 59838
+  },
+  "mu-caixa": {
+   "arquivo": "mu-caixa.mp3",
+   "descricao": "Pinhead: a caixa se abre",
+   "versoes": [
+    0.0,
+    2.28,
+    4.6398,
+    6.8454
+   ],
+   "duracoes": [
+    2.2,
+    2.2798,
+    2.1256,
+    2.2335
+   ],
+   "bytes": 94574
   },
   "mu-canhao-fusao": {
    "arquivo": "mu-canhao-fusao.mp3",
@@ -11562,6 +11596,23 @@
    ],
    "bytes": 67482
   },
+  "mu-corpo-metal": {
+   "arquivo": "mu-corpo-metal.mp3",
+   "descricao": "RoboCop: o corpo de metal",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 52295
+  },
   "mu-corpo-novo": {
    "arquivo": "mu-corpo-novo.mp3",
    "descricao": "Ultron: o corpo novo",
@@ -11578,6 +11629,23 @@
     1.9289
    ],
    "bytes": 64229
+  },
+  "mu-corte-fundo": {
+   "arquivo": "mu-corte-fundo.mp3",
+   "descricao": "Leatherface: a motosserra",
+   "versoes": [
+    0.0,
+    2.0473,
+    4.1826,
+    6.1418
+   ],
+   "duracoes": [
+    1.9673,
+    2.0553,
+    1.8792,
+    2.0305
+   ],
+   "bytes": 74634
   },
   "mu-corte-lento": {
    "arquivo": "mu-corte-lento.mp3",
@@ -11630,6 +11698,23 @@
    ],
    "bytes": 91720
   },
+  "mu-cria": {
+   "arquivo": "mu-cria.mp3",
+   "descricao": "Xenomorfo: a cria",
+   "versoes": [
+    0.0,
+    1.98,
+    4.0289,
+    5.9446
+   ],
+   "duracoes": [
+    1.9,
+    1.9689,
+    1.8357,
+    1.9289
+   ],
+   "bytes": 63990
+  },
   "mu-cristal-prata": {
    "arquivo": "mu-cristal-prata.mp3",
    "descricao": "Sailor Moon: o Cristal de Prata",
@@ -11680,6 +11765,23 @@
     2.0305
    ],
    "bytes": 88983
+  },
+  "mu-desarmado": {
+   "arquivo": "mu-desarmado.mp3",
+   "descricao": "Indiana Jones: o chicote",
+   "versoes": [
+    0.0,
+    2.0201,
+    4.0199,
+    5.9736
+   ],
+   "duracoes": [
+    1.9401,
+    1.9198,
+    1.8737,
+    1.9673
+   ],
+   "bytes": 59014
   },
   "mu-desastrado": {
    "arquivo": "mu-desastrado.mp3",
@@ -11765,6 +11867,23 @@
     1.3091
    ],
    "bytes": 48708
+  },
+  "mu-desviou": {
+   "arquivo": "mu-desviou.mp3",
+   "descricao": "Neo: desviou",
+   "versoes": [
+    0.0,
+    2.18,
+    4.4361,
+    6.5451
+   ],
+   "duracoes": [
+    2.1,
+    2.1761,
+    2.029,
+    2.132
+   ],
+   "bytes": 70851
   },
   "mu-devil-jin": {
    "arquivo": "mu-devil-jin.mp3",
@@ -12038,6 +12157,23 @@
    ],
    "bytes": 73982
   },
+  "mu-equilibrio": {
+   "arquivo": "mu-equilibrio.mp3",
+   "descricao": "Yoda: o equilíbrio",
+   "versoes": [
+    0.0,
+    2.18,
+    4.4361,
+    6.5451
+   ],
+   "duracoes": [
+    2.1,
+    2.1761,
+    2.029,
+    2.132
+   ],
+   "bytes": 74177
+  },
   "mu-erva": {
    "arquivo": "mu-erva.mp3",
    "descricao": "Jill: a erva",
@@ -12293,6 +12429,23 @@
    ],
    "bytes": 56651
   },
+  "mu-estrangulamento": {
+   "arquivo": "mu-estrangulamento.mp3",
+   "descricao": "Darth Vader: o estrangulamento",
+   "versoes": [
+    0.0,
+    2.0503,
+    4.2546,
+    6.3177
+   ],
+   "duracoes": [
+    1.9703,
+    2.1243,
+    1.9831,
+    2.0108
+   ],
+   "bytes": 67309
+  },
   "mu-evoluiu": {
    "arquivo": "mu-evoluiu.mp3",
    "descricao": "Garou: a evolução",
@@ -12326,6 +12479,23 @@
     2.0305
    ],
    "bytes": 65909
+  },
+  "mu-exterminador": {
+   "arquivo": "mu-exterminador.mp3",
+   "descricao": "T-800: o exterminador",
+   "versoes": [
+    0.0,
+    1.9993,
+    4.0672,
+    6.0026
+   ],
+   "duracoes": [
+    1.9193,
+    1.9878,
+    1.8554,
+    1.9481
+   ],
+   "bytes": 70683
   },
   "mu-faca": {
    "arquivo": "mu-faca.mp3",
@@ -12735,6 +12905,23 @@
    ],
    "bytes": 90609
   },
+  "mu-golpe-voltou": {
+   "arquivo": "mu-golpe-voltou.mp3",
+   "descricao": "Harry Potter: a proteção",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 69840
+  },
   "mu-goool": {
    "arquivo": "mu-goool.mp3",
    "descricao": "Casey Jones: o taco",
@@ -12921,6 +13108,23 @@
     2.0305
    ],
    "bytes": 84722
+  },
+  "mu-horcrux": {
+   "arquivo": "mu-horcrux.mp3",
+   "descricao": "Voldemort: a Horcrux",
+   "versoes": [
+    0.0,
+    2.28,
+    4.6398,
+    6.8454
+   ],
+   "duracoes": [
+    2.2,
+    2.2798,
+    2.1256,
+    2.2335
+   ],
+   "bytes": 70024
   },
   "mu-ilusao": {
    "arquivo": "mu-ilusao.mp3",
@@ -13449,6 +13653,23 @@
    ],
    "bytes": 84474
   },
+  "mu-mais-smith": {
+   "arquivo": "mu-mais-smith.mp3",
+   "descricao": "Agente Smith: mais um",
+   "versoes": [
+    0.0,
+    2.18,
+    4.4361,
+    6.5451
+   ],
+   "duracoes": [
+    2.1,
+    2.1761,
+    2.029,
+    2.132
+   ],
+   "bytes": 61027
+  },
   "mu-mana": {
    "arquivo": "mu-mana.mp3",
    "descricao": "Frieren: o círculo e as flores de mana",
@@ -13704,6 +13925,23 @@
    ],
    "bytes": 52330
   },
+  "mu-nevoa": {
+   "arquivo": "mu-nevoa.mp3",
+   "descricao": "Drácula: a névoa",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 77453
+  },
   "mu-nivel": {
    "arquivo": "mu-nivel.mp3",
    "descricao": "Jinwoo: subiu de nível",
@@ -13721,6 +13959,23 @@
    ],
    "bytes": 57784
   },
+  "mu-nova-esperanca": {
+   "arquivo": "mu-nova-esperanca.mp3",
+   "descricao": "Luke: a nova esperança",
+   "versoes": [
+    0.0,
+    2.28,
+    4.6398,
+    6.8454
+   ],
+   "duracoes": [
+    2.2,
+    2.2798,
+    2.1256,
+    2.2335
+   ],
+   "bytes": 75701
+  },
   "mu-nyeh": {
    "arquivo": "mu-nyeh.mp3",
    "descricao": "Esqueleto: Nyeh!",
@@ -13737,6 +13992,23 @@
     1.9289
    ],
    "bytes": 103067
+  },
+  "mu-o-branco": {
+   "arquivo": "mu-o-branco.mp3",
+   "descricao": "Gandalf: o Branco",
+   "versoes": [
+    0.0,
+    2.48,
+    5.047,
+    7.4459
+   ],
+   "duracoes": [
+    2.4,
+    2.487,
+    2.3188,
+    2.4365
+   ],
+   "bytes": 84188
   },
   "mu-odio-herois": {
    "arquivo": "mu-odio-herois.mp3",
@@ -13789,6 +14061,23 @@
    ],
    "bytes": 65706
   },
+  "mu-outro-ghostface": {
+   "arquivo": "mu-outro-ghostface.mp3",
+   "descricao": "Ghostface: o outro Ghostface",
+   "versoes": [
+    0.0,
+    1.89,
+    3.8193,
+    5.6593
+   ],
+   "duracoes": [
+    1.81,
+    1.8493,
+    1.76,
+    1.8594
+   ],
+   "bytes": 59207
+  },
   "mu-parede": {
    "arquivo": "mu-parede.mp3",
    "descricao": "Alphonse: a parede",
@@ -13805,6 +14094,23 @@
     2.0305
    ],
    "bytes": 54065
+  },
+  "mu-parlay": {
+   "arquivo": "mu-parlay.mp3",
+   "descricao": "Jack Sparrow: Parlay",
+   "versoes": [
+    0.0,
+    1.9263,
+    3.9319,
+    5.7842
+   ],
+   "duracoes": [
+    1.8463,
+    1.9256,
+    1.7724,
+    1.874
+   ],
+   "bytes": 72914
   },
   "mu-parry": {
    "arquivo": "mu-parry.mp3",
@@ -14367,6 +14673,23 @@
    ],
    "bytes": 59162
   },
+  "mu-recarregou": {
+   "arquivo": "mu-recarregou.mp3",
+   "descricao": "John Wick: recarregou",
+   "versoes": [
+    0.0,
+    1.9765,
+    4.0254,
+    5.9411
+   ],
+   "duracoes": [
+    1.8965,
+    1.9689,
+    1.8357,
+    1.8977
+   ],
+   "bytes": 67793
+  },
   "mu-redirecionado": {
    "arquivo": "mu-redirecionado.mp3",
    "descricao": "Zuko: o raio redirecionado",
@@ -14434,6 +14757,23 @@
     1.5811
    ],
    "bytes": 101594
+  },
+  "mu-relampago-cadeia": {
+   "arquivo": "mu-relampago-cadeia.mp3",
+   "descricao": "Palpatine: o relâmpago",
+   "versoes": [
+    0.0,
+    1.893,
+    3.8229,
+    5.618
+   ],
+   "duracoes": [
+    1.813,
+    1.8499,
+    1.7151,
+    1.8868
+   ],
+   "bytes": 106455
   },
   "mu-road-roller": {
    "arquivo": "mu-road-roller.mp3",
@@ -14621,6 +14961,23 @@
     1.6654
    ],
    "bytes": 55217
+  },
+  "mu-sete-dias": {
+   "arquivo": "mu-sete-dias.mp3",
+   "descricao": "Samara: sete dias",
+   "versoes": [
+    0.0,
+    2.28,
+    4.6398,
+    6.8454
+   ],
+   "duracoes": [
+    2.2,
+    2.2798,
+    2.1256,
+    2.2335
+   ],
+   "bytes": 83992
   },
   "mu-sharingan": {
    "arquivo": "mu-sharingan.mp3",
@@ -15131,6 +15488,23 @@
     2.0305
    ],
    "bytes": 64797
+  },
+  "mu-trofeu": {
+   "arquivo": "mu-trofeu.mp3",
+   "descricao": "Predador: a mira",
+   "versoes": [
+    0.0,
+    1.6896,
+    3.4872,
+    5.1975
+   ],
+   "duracoes": [
+    1.6096,
+    1.7176,
+    1.6303,
+    1.7134
+   ],
+   "bytes": 57338
   },
   "mu-tropecou": {
    "arquivo": "mu-tropecou.mp3",
