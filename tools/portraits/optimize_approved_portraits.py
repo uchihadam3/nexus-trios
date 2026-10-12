@@ -18,17 +18,24 @@ PORTRAITS = {
     "carnage": ("jpg", None),
     "cyborg": ("jpg", (330, 0, 1590, 1080)),
 }
+FILL_FRAME = {"wolverine", "cyborg", "scarletwitch"}
 
 for name, (extension, crop) in PORTRAITS.items():
     with Image.open(SOURCE / f"{name}.{extension}") as original:
         image = original.convert("RGBA")
         if crop:
             image = image.crop(crop)
-        artwork = ImageOps.contain(image, SIZE, Image.Resampling.LANCZOS)
-        # Transparent Batman retains the game's own portrait background.
-        color = (0, 0, 0, 0) if name == "batman" else (31, 38, 55, 255)
-        portrait = Image.new("RGBA", SIZE, color)
-        portrait.alpha_composite(artwork, ((SIZE[0] - artwork.width) // 2, max(0, (SIZE[1] - artwork.height) // 3)))
+        if name in FILL_FRAME:
+            # These three wide/square originals left a dark empty strip below
+            # the artwork in the character card. A sharp crop fills the frame.
+            portrait = ImageOps.fit(image, SIZE, Image.Resampling.LANCZOS,
+                                    centering=(0.5, 0.35))
+        else:
+            artwork = ImageOps.contain(image, SIZE, Image.Resampling.LANCZOS)
+            # Transparent Batman retains the game's own portrait background.
+            color = (0, 0, 0, 0) if name == "batman" else (31, 38, 55, 255)
+            portrait = Image.new("RGBA", SIZE, color)
+            portrait.alpha_composite(artwork, ((SIZE[0] - artwork.width) // 2, max(0, (SIZE[1] - artwork.height) // 3)))
         portrait.save(OUTPUT / f"{name}.webp", "WEBP", quality=88, method=5)
 
 print(f"Prepared {len(PORTRAITS)} approved portraits.")
