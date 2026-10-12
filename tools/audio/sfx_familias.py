@@ -422,14 +422,6 @@ def cosmico(rng, v):
     return reverb(x, 0.85, 0.4, 7000)
 
 
-def chuva_de_meteoros(rng, v):
-    x = _z(1.3)
-    for k in range(8):
-        poe(x, _whoosh(rng, 0.14, 4000, 800, 0.8, g=0.35), k * 0.06)
-        poe(x, B.explosao(rng, v)[: n_de(0.3)] * 0.3, k * 0.06 + 0.13)
-    return x
-
-
 def supernova(rng, v):
     x = _z(1.6)
     n = n_de(0.5)

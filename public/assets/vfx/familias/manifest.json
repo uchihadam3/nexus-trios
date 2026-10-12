@@ -279,6 +279,20 @@
   "laco": true,
   "bytes": 11996
  },
+ "arco_recurvo": {
+  "descricao": "Lara · o arco, a flecha e a marca",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 12202
+ },
  "areia": {
   "descricao": "casulo de areia",
   "quadros": 12,
@@ -334,6 +348,20 @@
   ],
   "laco": false,
   "bytes": 82660
+ },
+ "armadilha_de_cabo": {
+  "descricao": "Lara · o cabo enrolando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 11552
  },
  "armadilha_explosiva": {
   "descricao": "Rocket · a minazinha piscando e a fumaça colorida",
@@ -2071,6 +2099,34 @@
   "laco": true,
   "bytes": 176772
  },
+ "chaos_control": {
+  "descricao": "Shadow · o relógio que para",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 47162
+ },
+ "chaos_spear": {
+  "descricao": "Shadow · as lanças do Caos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 10308
+ },
  "charge_beam": {
   "descricao": "Samus · a bola carregada e o impacto",
   "quadros": 12,
@@ -2421,20 +2477,6 @@
   "laco": false,
   "bytes": 28206
  },
- "chuva_de_meteoros": {
-  "descricao": "meteoros caindo",
-  "quadros": 12,
-  "grade": [
-   3,
-   4
-  ],
-  "tamanho": [
-   192,
-   192
-  ],
-  "laco": false,
-  "bytes": 41274
- },
  "chuva_de_socos": {
   "descricao": "Tifa · a sequência de socos com rastro",
   "quadros": 12,
@@ -2546,6 +2588,20 @@
   ],
   "laco": false,
   "bytes": 54008
+ },
+ "cobertura_tatica": {
+  "descricao": "Jill · o sinal de mão e as setas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 19800
  },
  "colapso_magneto": {
   "descricao": "Magneto · o metal esmagando o rival",
@@ -3414,6 +3470,20 @@
   ],
   "laco": false,
   "bytes": 73436
+ },
+ "deslocamento_wesker": {
+  "descricao": "Wesker · o borrão em zigue-zague",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 19072
  },
  "desmanche": {
   "descricao": "básico do Sukuna: cortes finos em grade aparecendo de uma vez",
@@ -4815,6 +4885,20 @@
   "laco": false,
   "bytes": 61084
  },
+ "execucao_em_cadeia": {
+  "descricao": "Ezio · os saltos e a águia",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 34044
+ },
  "execucao_relampago": {
   "descricao": "Levi · o clarão e os cortes de uma vez",
   "quadros": 12,
@@ -5444,6 +5528,20 @@
   ],
   "laco": false,
   "bytes": 22290
+ },
+ "flor_de_fogo": {
+  "descricao": "Mario · a flor e as bolas de fogo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 24748
  },
  "flor_de_lapela": {
   "descricao": "Flor de lapela do Coringa: esguicho em arco que respinga, chia e borbulha",
@@ -6257,6 +6355,20 @@
   "laco": false,
   "bytes": 44950
  },
+ "golpe_cruzado": {
+  "descricao": "Wesker · os golpes em X e o sangue",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 21772
+ },
  "golpe_da_serie": {
   "descricao": "Série: os três pontos do combo e o golpe final",
   "quadros": 12,
@@ -6719,6 +6831,20 @@
   "laco": false,
   "bytes": 73684
  },
+ "homing_attack": {
+  "descricao": "Sonic · a bola azul e o anel",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 28092
+ },
  "hulk_esmaga": {
   "descricao": "Hulk · Esmagar: os dois punhos do alto, a cratera e as estrelinhas",
   "quadros": 12,
@@ -7167,6 +7293,20 @@
   "laco": false,
   "bytes": 15012
  },
+ "jill_preparo": {
+  "descricao": "Jill · a seringa enchendo (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 2558
+ },
  "joia_do_tempo": {
   "descricao": "Thanos · a Joia do Tempo e a areia lenta",
   "quadros": 12,
@@ -7432,6 +7572,20 @@
   ],
   "laco": false,
   "bytes": 32122
+ },
+ "kit_primeiros_socorros": {
+  "descricao": "Jill · a maleta e o spray de cura",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 24674
  },
  "krypton_carga": {
   "descricao": "Super-Homem · a luz do sol juntando nele (laço)",
@@ -7783,6 +7937,20 @@
   "laco": false,
   "bytes": 59722
  },
+ "lanca_das_esmeraldas": {
+  "descricao": "Shadow · a chuva de lanças",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 29654
+ },
  "lanca_de_ares": {
   "descricao": "Básico de Ares: a lança e a fúria",
   "quadros": 12,
@@ -7866,6 +8034,20 @@
   ],
   "laco": false,
   "bytes": 18848
+ },
+ "lara_preparo": {
+  "descricao": "Lara · a mira respirando (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 11268
  },
  "laser": {
   "descricao": "laser fino (faixa)",
@@ -14643,6 +14825,20 @@
   "laco": false,
   "bytes": 119672
  },
+ "multidao": {
+  "descricao": "Ezio · a multidão de capuzes",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 32346
+ },
  "mumm_ra_desperta": {
   "descricao": "Mumm-Ra · as faixas soltando e a aura escura",
   "quadros": 12,
@@ -16155,6 +16351,20 @@
   "laco": true,
   "bytes": 77920
  },
+ "raikousen": {
+  "descricao": "Zero · o avanço relâmpago",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 16712
+ },
  "raio": {
   "descricao": "descarga elétrica",
   "quadros": 12,
@@ -16869,6 +17079,20 @@
   "laco": false,
   "bytes": 32342
  },
+ "resistencia_adquirida": {
+  "descricao": "Jill · o DNA e o escudo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 50750
+ },
  "respiracao_da_agua": {
   "descricao": "Tanjiro · a Roda d'Água com as ondas japonesas",
   "quadros": 12,
@@ -17485,6 +17709,20 @@
   "laco": true,
   "bytes": 27752
  },
+ "sequencia_final": {
+  "descricao": "Zero · o corte em meia-lua e os raios",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 41332
+ },
  "serra_eletrica": {
   "descricao": "Básico do Leatherface: a motosserra balançando",
   "quadros": 12,
@@ -17498,6 +17736,20 @@
   ],
   "laco": false,
   "bytes": 42152
+ },
+ "shadow_preparo": {
+  "descricao": "Shadow · a Esmeralda pulsando (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 26814
  },
  "sharingan_ator": {
   "descricao": "Kakashi · o Sharingan acende nele",
@@ -18087,6 +18339,20 @@
   "laco": false,
   "bytes": 97720
  },
+ "sonic_preparo": {
+  "descricao": "Sonic · as Esmeraldas girando (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 40002
+ },
  "sono": {
   "descricao": "névoa lilás e três Z subindo",
   "quadros": 12,
@@ -18185,6 +18451,20 @@
   "laco": true,
   "bytes": 26050
  },
+ "super_sonic": {
+  "descricao": "Sonic · a explosão dourada",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 29454
+ },
  "supernova": {
   "descricao": "sol que explode",
   "quadros": 12,
@@ -18198,6 +18478,20 @@
   ],
   "laco": false,
   "bytes": 184744
+ },
+ "supremacia_wesker": {
+  "descricao": "Wesker · os olhos vermelhos e o soco",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 25990
  },
  "surfe_dimensional": {
   "descricao": "Surfista Prateado · a prancha rasgando o espaço",
@@ -18814,6 +19108,20 @@
   ],
   "laco": false,
   "bytes": 9646
+ },
+ "tiro_perfeito": {
+  "descricao": "Lara · o tiro perfeito",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 27888
  },
  "tiro_preciso": {
   "descricao": "mira travando e tiro",
@@ -19808,5 +20116,19 @@
   ],
   "laco": true,
   "bytes": 60698
+ },
+ "zeromm_preparo": {
+  "descricao": "Zero · o Z-Saber carregando (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 11368
  }
 }

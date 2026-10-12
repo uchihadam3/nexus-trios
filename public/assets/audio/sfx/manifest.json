@@ -359,6 +359,23 @@
    ],
    "bytes": 58826
   },
+  "arco-recurvo": {
+   "arquivo": "arco-recurvo.mp3",
+   "descricao": "Lara: o arco recurvo",
+   "versoes": [
+    0.0,
+    1.4881,
+    3.0844,
+    4.4964
+   ],
+   "duracoes": [
+    1.4081,
+    1.5163,
+    1.332,
+    1.486
+   ],
+   "bytes": 46676
+  },
   "areia": {
    "arquivo": "areia.mp3",
    "descricao": "família areia",
@@ -443,6 +460,23 @@
     1.3198
    ],
    "bytes": 59502
+  },
+  "armadilha-de-cabo": {
+   "arquivo": "armadilha-de-cabo.mp3",
+   "descricao": "Lara: a armadilha de cabo",
+   "versoes": [
+    0.0,
+    1.257,
+    2.5485,
+    3.7761
+   ],
+   "duracoes": [
+    1.177,
+    1.2115,
+    1.1476,
+    1.2419
+   ],
+   "bytes": 50171
   },
   "armadilha-explosiva": {
    "arquivo": "armadilha-explosiva.mp3",
@@ -2314,6 +2348,40 @@
    ],
    "bytes": 66596
   },
+  "chaos-control": {
+   "arquivo": "chaos-control.mp3",
+   "descricao": "Shadow: Chaos Control",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 70092
+  },
+  "chaos-spear": {
+   "arquivo": "chaos-spear.mp3",
+   "descricao": "Shadow: Chaos Spear",
+   "versoes": [
+    0.0,
+    1.4281,
+    2.8367,
+    4.083
+   ],
+   "duracoes": [
+    1.3481,
+    1.3286,
+    1.1663,
+    1.2761
+   ],
+   "bytes": 57815
+  },
   "charge-beam": {
    "arquivo": "charge-beam.mp3",
    "descricao": "Samus: o tiro carregado e o impacto",
@@ -2739,23 +2807,6 @@
    ],
    "bytes": 64132
   },
-  "chuva-de-meteoros": {
-   "arquivo": "chuva-de-meteoros.mp3",
-   "descricao": "família chuva de meteoros",
-   "versoes": [
-    0.0,
-    1.38,
-    2.8071,
-    4.1432
-   ],
-   "duracoes": [
-    1.3,
-    1.3471,
-    1.256,
-    1.3198
-   ],
-   "bytes": 43595
-  },
   "chuva-de-socos": {
    "arquivo": "chuva-de-socos.mp3",
    "descricao": "Tifa: os oito socos rápidos",
@@ -2891,6 +2942,23 @@
     1.6244
    ],
    "bytes": 52397
+  },
+  "cobertura-tatica": {
+   "arquivo": "cobertura-tatica.mp3",
+   "descricao": "Jill: a cobertura tática",
+   "versoes": [
+    0.0,
+    1.88,
+    3.8253,
+    5.6444
+   ],
+   "duracoes": [
+    1.8,
+    1.8653,
+    1.7391,
+    1.8274
+   ],
+   "bytes": 56781
   },
   "colapso-magneto": {
    "arquivo": "colapso-magneto.mp3",
@@ -3843,6 +3911,23 @@
     1.3198
    ],
    "bytes": 93362
+  },
+  "deslocamento-wesker": {
+   "arquivo": "deslocamento-wesker.mp3",
+   "descricao": "Wesker: o deslocamento",
+   "versoes": [
+    0.0,
+    1.1732,
+    2.3912,
+    3.5383
+   ],
+   "duracoes": [
+    1.0932,
+    1.138,
+    1.0671,
+    1.1173
+   ],
+   "bytes": 47081
   },
   "desmanche": {
    "arquivo": "desmanche.mp3",
@@ -5493,6 +5578,23 @@
    ],
    "bytes": 81892
   },
+  "execucao-em-cadeia": {
+   "arquivo": "execucao-em-cadeia.mp3",
+   "descricao": "Ezio: a execução em cadeia",
+   "versoes": [
+    0.0,
+    1.5582,
+    3.141,
+    4.6573
+   ],
+   "duracoes": [
+    1.4782,
+    1.5028,
+    1.4363,
+    1.7944
+   ],
+   "bytes": 52816
+  },
   "execucao-relampago": {
    "arquivo": "execucao-relampago.mp3",
    "descricao": "Levi: os cortes de uma vez e o vapor",
@@ -6121,6 +6223,23 @@
     1.3198
    ],
    "bytes": 53490
+  },
+  "flor-de-fogo": {
+   "arquivo": "flor-de-fogo.mp3",
+   "descricao": "Mario: a flor de fogo",
+   "versoes": [
+    0.0,
+    1.6882,
+    3.4335,
+    5.0684
+   ],
+   "duracoes": [
+    1.6082,
+    1.6654,
+    1.5549,
+    1.6319
+   ],
+   "bytes": 58191
   },
   "flor-de-lapela": {
    "arquivo": "flor-de-lapela.mp3",
@@ -7108,6 +7227,23 @@
    ],
    "bytes": 57057
   },
+  "golpe-cruzado": {
+   "arquivo": "golpe-cruzado.mp3",
+   "descricao": "Wesker: o golpe cruzado",
+   "versoes": [
+    0.0,
+    1.4468,
+    3.1389,
+    4.7935
+   ],
+   "duracoes": [
+    1.3668,
+    1.6121,
+    1.5746,
+    1.5285
+   ],
+   "bytes": 49116
+  },
   "golpe-da-serie": {
    "arquivo": "golpe-da-serie.mp3",
    "descricao": "família golpe da serie",
@@ -7685,6 +7821,23 @@
     1.3198
    ],
    "bytes": 23845
+  },
+  "homing-attack": {
+   "arquivo": "homing-attack.mp3",
+   "descricao": "Sonic: o Homing Attack",
+   "versoes": [
+    0.0,
+    1.3404,
+    2.7175,
+    4.0708
+   ],
+   "duracoes": [
+    1.2604,
+    1.2971,
+    1.2733,
+    1.2718
+   ],
+   "bytes": 46605
   },
   "hulk-esmaga": {
    "arquivo": "hulk-esmaga.mp3",
@@ -8281,6 +8434,23 @@
    ],
    "bytes": 39641
   },
+  "jill-preparo": {
+   "arquivo": "jill-preparo.mp3",
+   "descricao": "Jill: a seringa (Preparo)",
+   "versoes": [
+    0.0,
+    1.28,
+    2.6035,
+    3.8429
+   ],
+   "duracoes": [
+    1.2,
+    1.2435,
+    1.1594,
+    1.2183
+   ],
+   "bytes": 46316
+  },
   "joia-do-tempo": {
    "arquivo": "joia-do-tempo.mp3",
    "descricao": "Joia do Tempo: o som esticando e a areia",
@@ -8603,6 +8773,23 @@
     1.5624
    ],
    "bytes": 68105
+  },
+  "kit-primeiros-socorros": {
+   "arquivo": "kit-primeiros-socorros.mp3",
+   "descricao": "Jill: o kit de primeiros socorros",
+   "versoes": [
+    0.0,
+    1.7707,
+    3.6016,
+    5.2601
+   ],
+   "duracoes": [
+    1.6907,
+    1.7509,
+    1.5785,
+    1.6572
+   ],
+   "bytes": 69649
   },
   "krypton-carga": {
    "arquivo": "krypton-carga.mp3",
@@ -9046,6 +9233,23 @@
    ],
    "bytes": 77270
   },
+  "lanca-das-esmeraldas": {
+   "arquivo": "lanca-das-esmeraldas.mp3",
+   "descricao": "Shadow: a Lança das Esmeraldas",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 65637
+  },
   "lanca-de-ares": {
    "arquivo": "lanca-de-ares.mp3",
    "descricao": "básico de Ares: o grito e a lança",
@@ -9164,6 +9368,23 @@
     1.0118
    ],
    "bytes": 38272
+  },
+  "lara-preparo": {
+   "arquivo": "lara-preparo.mp3",
+   "descricao": "Lara: a mira (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 48134
   },
   "laser": {
    "arquivo": "laser.mp3",
@@ -17376,6 +17597,23 @@
    ],
    "bytes": 35090
   },
+  "multidao": {
+   "arquivo": "multidao.mp3",
+   "descricao": "Ezio: a multidão",
+   "versoes": [
+    0.0,
+    1.8072,
+    3.71,
+    5.4383
+   ],
+   "duracoes": [
+    1.7272,
+    1.8228,
+    1.6482,
+    1.7656
+   ],
+   "bytes": 61096
+  },
   "muralha-alquimica": {
    "arquivo": "muralha-alquimica.mp3",
    "descricao": "Edward: o muro subindo e os espinhos",
@@ -19161,6 +19399,23 @@
    ],
    "bytes": 65374
   },
+  "raikousen": {
+   "arquivo": "raikousen.mp3",
+   "descricao": "Zero: Raikousen",
+   "versoes": [
+    0.0,
+    1.2064,
+    2.467,
+    3.6265
+   ],
+   "duracoes": [
+    1.1264,
+    1.1806,
+    1.0795,
+    1.153
+   ],
+   "bytes": 49191
+  },
   "raio": {
    "arquivo": "raio.mp3",
    "descricao": "raio",
@@ -20028,6 +20283,23 @@
    ],
    "bytes": 50409
   },
+  "resistencia-adquirida": {
+   "arquivo": "resistencia-adquirida.mp3",
+   "descricao": "Jill: a resistência adquirida",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 69107
+  },
   "respiracao-da-agua": {
    "arquivo": "respiracao-da-agua.mp3",
    "descricao": "Tanjiro: a Roda d'Água",
@@ -20742,6 +21014,23 @@
    ],
    "bytes": 55585
   },
+  "sequencia-final": {
+   "arquivo": "sequencia-final.mp3",
+   "descricao": "Zero: a sequência final",
+   "versoes": [
+    0.0,
+    1.8134,
+    3.6576,
+    5.5497
+   ],
+   "duracoes": [
+    1.7334,
+    1.7642,
+    1.8121,
+    1.8315
+   ],
+   "bytes": 79972
+  },
   "serra-eletrica": {
    "arquivo": "serra-eletrica.mp3",
    "descricao": "básico do Leatherface: a motosserra",
@@ -20758,6 +21047,23 @@
     1.3198
    ],
    "bytes": 66831
+  },
+  "shadow-preparo": {
+   "arquivo": "shadow-preparo.mp3",
+   "descricao": "Shadow: a Esmeralda (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 37285
   },
   "sharingan-kakashi": {
    "arquivo": "sharingan-kakashi.mp3",
@@ -21405,6 +21711,23 @@
    ],
    "bytes": 33472
   },
+  "sonic-preparo": {
+   "arquivo": "sonic-preparo.mp3",
+   "descricao": "Sonic: as Esmeraldas (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 54683
+  },
   "sono": {
    "arquivo": "sono.mp3",
    "descricao": "família sono",
@@ -21524,6 +21847,23 @@
    ],
    "bytes": 54504
   },
+  "super-sonic": {
+   "arquivo": "super-sonic.mp3",
+   "descricao": "Sonic: o Super Sonic",
+   "versoes": [
+    0.0,
+    2.28,
+    4.6398,
+    6.8454
+   ],
+   "duracoes": [
+    2.2,
+    2.2798,
+    2.1256,
+    2.2335
+   ],
+   "bytes": 75712
+  },
   "supernova": {
    "arquivo": "supernova.mp3",
    "descricao": "família supernova",
@@ -21540,6 +21880,23 @@
     1.6244
    ],
    "bytes": 62687
+  },
+  "supremacia-wesker": {
+   "arquivo": "supremacia-wesker.mp3",
+   "descricao": "Wesker: a supremacia",
+   "versoes": [
+    0.0,
+    1.98,
+    4.0289,
+    5.9446
+   ],
+   "duracoes": [
+    1.9,
+    1.9689,
+    1.8357,
+    1.9289
+   ],
+   "bytes": 60398
   },
   "surfe-dimensional": {
    "arquivo": "surfe-dimensional.mp3",
@@ -22203,6 +22560,23 @@
     1.1167
    ],
    "bytes": 34914
+  },
+  "tiro-perfeito": {
+   "arquivo": "tiro-perfeito.mp3",
+   "descricao": "Lara: o tiro perfeito",
+   "versoes": [
+    0.0,
+    1.5394,
+    3.0771,
+    4.5439
+   ],
+   "duracoes": [
+    1.4594,
+    1.4578,
+    1.3868,
+    1.4374
+   ],
+   "bytes": 50296
   },
   "tiro-preciso": {
    "arquivo": "tiro-preciso.mp3",
@@ -23597,6 +23971,23 @@
     2.335
    ],
    "bytes": 83517
+  },
+  "zeromm-preparo": {
+   "arquivo": "zeromm-preparo.mp3",
+   "descricao": "Zero: o Z-Saber (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 26887
   }
  }
 }

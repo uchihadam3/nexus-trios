@@ -104,28 +104,6 @@ def cosmico(T, t, rng):
     return G, H
 
 
-def chuva_de_meteoros(T, t, rng):
-    """Chuva de meteoros: riscos diagonais caem em sequência e cada um estoura onde bate."""
-    G, H = vazio(T)
-    sub = np.random.default_rng(321)
-    acc = T.zero()
-    for k in range(10):
-        a0 = k * 0.06
-        x, y = sub.uniform(-0.55, 0.55), sub.uniform(-0.1, 0.45)
-        p = ease_in(rel(t, a0, a0 + 0.14), 1.5)
-        if t < a0:
-            continue
-        if p < 1:
-            hx, hy = x - 0.7 * (1 - p), y - 0.9 * (1 - p)
-            acc += T.tapered([(hx - 0.25, hy - 0.32, hx, hy, 1)], 0.04) + T.gauss(hx, hy, 0.03) * 1.5
-        else:
-            u = rel(t, a0 + 0.14, a0 + 0.45)
-            acc += (T.gauss(x, y, 0.06) * 2 + T.ring(0.04 + 0.16 * u, 0.012, x, y)) * (1 - u)
-    G += T.glow(acc, 1.1, 1, 0.02)
-    H += acc * 0.9
-    return G, H
-
-
 def supernova(T, t, rng):
     """Supernova: um sol branco nasce, raios longos giram e uma casca de luz se expande."""
     G, H = vazio(T)
@@ -281,7 +259,6 @@ REGISTRO = [
     ("buraco_negro", buraco_negro, GRANDE, "buraco negro sugando", False),
     ("gravidade", gravidade, GRANDE, "pressão de gravidade", False),
     ("cosmico", cosmico, GRANDE, "galáxia girando", False),
-    ("chuva_de_meteoros", chuva_de_meteoros, GRANDE, "meteoros caindo", False),
     ("supernova", supernova, GRANDE, "sol que explode", False),
     ("pulso_emp", pulso_emp, GRANDE, "pulso eletromagnético", False),
     ("pilar", pilar, GRANDE, "pilar de energia subindo", False),
