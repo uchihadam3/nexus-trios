@@ -16,17 +16,18 @@ const vidaDoLado = (b: Battle, lado: string) => b.fighters.filter((x) => x.side 
 export const LOTE8: Record<string, Unica> = {
   vegeta: {
     nome: 'Zenkai e orgulho',
-    texto: 'Quando Vegeta fica com menos de 50% da Vida, e de novo com menos de 25% (1 vez cada): +4% de Vida máxima e +4% de dano até o fim da luta. Vegeta recebe só metade da cura que vem dos aliados.',
+    texto: 'Quando Vegeta fica com menos de 50% da Vida, e de novo com menos de 25% (1 vez cada, ainda de pé): Vegeta recupera 10% da Vida máxima e causa +10% de dano até o fim da luta (até +20%). Vegeta recebe só metade da cura que vem dos aliados.',
     ganchos: {
       apanhou(m, b, f) {
         for (const [k, lim] of [['z50', 0.5], ['z25', 0.25]] as const) {
-          if (u(f)[k] || fracao(f) >= lim) continue;
+          if (u(f)[k] || !vivo(f) || fracao(f) >= lim) continue;
           u(f)[k] = 1; u(f).zenkai = (u(f).zenkai ?? 0) + 1;
-          f.maxHp *= 1.04; // sobe o teto, não cura (não briga com a Última resistência)
           m.aviso(b, f, 'Zenkai!', f);
+          // pedido do jogador: "+4%… parece tão pouco" — agora cura 10% e dá +10% de dano a cada vez
+          m.cura(b, f, f, f.maxHp * 0.1, 'Zenkai');
         }
       },
-      causa: (_m, _b, f) => 1 + 0.04 * (u(f).zenkai ?? 0),
+      causa: (_m, _b, f) => 1 + 0.1 * (u(f).zenkai ?? 0),
       curaRecebida: (_m, _b, f, fonte) => (fonte === f ? 1 : 0.5),
     },
   },

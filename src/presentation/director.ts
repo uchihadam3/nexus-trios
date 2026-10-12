@@ -88,15 +88,17 @@ function duration(event:BattleEvent,grand:boolean){
 export type ClasseDoPasso='golpe'|'reacao'|'rival'|'aliado'|'unica';
 export interface Passo {classe:ClasseDoPasso;/** quem age neste passo */quem:string;/** nome do traço, numa reação */rotulo?:string;eventos:number[];/** segundos depois do impacto */em:number}
 /** Quanto cada passo fica na tela antes do próximo (o tempo de ler o que aconteceu). */
-export const TEMPO_DO_PASSO:Record<ClasseDoPasso,number>={golpe:.42,reacao:.58,rival:.4,aliado:.4,unica:1.6};
+export const TEMPO_DO_PASSO:Record<ClasseDoPasso,number>={golpe:.42,reacao:.58,rival:.4,aliado:.4,unica:1.85};
+/** A mini preparação da Mecânica única: o nome aparece e a energia junta antes de ela disparar (pedido do jogador: "tipo 0,2 segundos… só pra mostrar o nome"). */
+export const PREPARO_DA_UNICA=.25;
 /** Fração do golpe em que quem foi até o alvo já está de volta no lugar (acting-motion.css). */
 export const VOLTA_DO_GOLPE=.9;
 /** O máximo que a cadeia inteira pode alongar um golpe (lutas com muitas reações não arrastam). */
 const CADEIA_MAXIMA=2.6;
 /** Quanto dura um traço que dispara sozinho (o nome aparece, o efeito entra, a luta segue). */
 const TEMPO_DO_TRACO=1.3;
-/** A Mecânica única ativando sozinha como uma habilidade: o nome, a luta esperando e o efeito dela. */
-const TEMPO_DA_UNICA=2.0;
+/** A Mecânica única ativando sozinha como uma habilidade: a mini preparação até o impacto, e o efeito dela depois. */
+const TEMPO_DA_UNICA=PREPARO_DA_UNICA/.48,DEPOIS_DA_UNICA=1.6;
 /** Mantido para quem ainda mede pelo intervalo antigo. */
 export const INTERVALO_DA_ETAPA=TEMPO_DO_PASSO.rival;
 const CONTABIL=new Set<BattleEvent['kind']>(['charge','synergy','ready','discovery','basic','skill','cast','turn']);
@@ -290,12 +292,13 @@ function makeBeat(event:BattleEvent,events:BattleEvent[],before:Battle,after:Bat
   const prep=actor&&event.skill!==undefined?byId[actor.characterId].skills[event.skill].preparation:0;
   const grand=event.kind==='skill'&&prep>=P.grandPreparation;
   const auxiliary=event.kind==='ready'||event.kind==='status';
-  const seconds=traco?(event.kind==='unica'&&cheias?.has(event.source)?TEMPO_DA_UNICA:TEMPO_DO_TRACO):previous?(periodic?.55:auxiliary?.5:duration(event,grand)):periodic?P.periodicSeconds:duration(event,grand);
+  const unicaSozinha=traco&&event.kind==='unica'&&!!cheias?.has(event.source);
+  const seconds=traco?(unicaSozinha?TEMPO_DA_UNICA:TEMPO_DO_TRACO):previous?(periodic?.55:auxiliary?.5:duration(event,grand)):periodic?P.periodicSeconds:duration(event,grand);
   const beat:Beat={event,events,before,after,duration:seconds,family:familyOf(event,after),grand,elapsed:0,impacted:false,periodic,etapa:0,base:seconds,traco};
   beat.passos=montaPassos(beat,cheias);
   beat.etapas=beat.passos.map((_,k)=>k+1);
   const ultimo=beat.passos.at(-1)!;
-  beat.duration+=ultimo.em;
+  beat.duration+=ultimo.em+(unicaSozinha?DEPOIS_DA_UNICA:0);
   beat.antecipa=antecipaDoGolpe(beat);
   return beat;
 }

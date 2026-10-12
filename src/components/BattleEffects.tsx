@@ -8,6 +8,7 @@ import { ArrowDown,HeartPulse,ShieldCheck,Sparkles,Zap } from 'lucide-react';
 import { statuses as statusCatalog } from '../data/statuses';
 import { familia,folha,profileFor,type VfxFamily,type VfxProfile } from '../presentation/vfxProfiles';
 import { efeitoDaUnica } from '../presentation/unicas-efeitos';
+import { PREPARO_DA_UNICA } from '../presentation/director';
 import { FAMILIA_DO_REVIVER, RENASCER_PROPRIO } from '../presentation/renascer-proprio';
 import { efeitosDoJeito,VOO_DO_QUIQUE } from '../presentation/jeito-efeito';
 import { FAMILIA_DA_INVOCACAO } from '../presentation/vfx-atribuicao';
@@ -278,13 +279,14 @@ export function BattleEffects({battle,beat,anchors,enabled,reduced,medal=80}:{ba
     const sozinha=!!beat.traco&&beat.passos?.[0]?.classe==='unica';
     (beat.passos??[]).forEach((passo,k)=>{
       if(passo.classe!=='unica')return;
-      if(!sozinha&&!(beat.impacted&&(beat.etapa??0)>k))return;
+      // sozinha: dispara no impacto, depois da mini preparação; no meio de um golpe: no passo dela, depois da mini preparação
+      if(sozinha?!beat.impacted:!(beat.impacted&&(beat.etapa??0)>k))return;
       for(const e of beat.events){
         if(e.kind!=='unica'||!passo.eventos.includes(e.id))continue;
         const dono=battle.fighters.find(f=>f.uid===e.source);if(!dono)continue;
         const ef=efeitoDaUnica(dono.characterId,e.label),f=familia(ef.familia);
         const p=point(e.source),t=Math.min(medal*f.escala,Math.min(size.w,size.h)*.95);
-        nodes.push(camada(f.impacto,{left:`${p.x}%`,top:`${p.y}%`,width:t,height:t,'--fx-cor':f.cor,'--ang':'0deg','--flip':1,'--dur':s(1.5),'--delay':s(sozinha?.3:0)},'fxl-impacto fxl-sobre',`unica-${beat.event.id}-${e.id}`));
+        nodes.push(camada(f.impacto,{left:`${p.x}%`,top:`${p.y}%`,width:t,height:t,'--fx-cor':f.cor,'--ang':'0deg','--flip':1,'--dur':s(1.5),'--delay':s(sozinha?0:PREPARO_DA_UNICA)},'fxl-impacto fxl-sobre',`unica-${beat.event.id}-${e.id}`));
       }
     });
   }

@@ -16,7 +16,9 @@ describe('Autodestruição do Cell', () => {
         stepBattle(b);
         for (const e of b.events.filter((x) => x.id >= visto)) {
           if (e.kind === 'unica' && e.source === cell.uid && e.label === 'Vai explodir!') {
-            expect(cell.hp, `semente ${semente}: armou com o Cell de pé`).toBeGreaterThan(0);
+            // armou de pé: se no fim do passo ele está caído, foi um golpe depois do aviso que o derrubou
+            const novos = b.events.filter((x) => x.id >= visto);
+            if (cell.hp <= 0) expect(novos.some((x) => x.kind === 'ko' && x.target === cell.uid && x.id > e.id), `semente ${semente}: armou com o Cell de pé`).toBe(true);
             armou++; armadoEm = e.id; caiuDepois = false;
           }
           if (e.kind === 'ko' && e.target === cell.uid && armadoEm > 0) { caiuDepois = true; cancelou++; }

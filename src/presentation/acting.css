@@ -134,3 +134,15 @@
 .arena-v2 .unit-cast.unit-unica-name svg{color:#ffd36b;flex:none}
 .arena-v2 .unit .aura-ativa.aura-longa{animation-duration:calc(2.2s * var(--motion-scale,1))}
 .arena-v2 .unit .aura-ativa.aura-longa::before{animation:aura-gira calc(2.2s * var(--motion-scale,1)) linear infinite}
+/* A mini preparação da Mecânica única (0,25 s): o anel roxo fecha no retrato, as faíscas correm para o centro e o
+ * retrato cresce um pouco — aí ela dispara. */
+.arena-v2 .unit .unica-carga{position:absolute;inset:-28%;z-index:5;border-radius:50%;pointer-events:none}
+.arena-v2 .unit .unica-carga::before{content:'';position:absolute;inset:0;border-radius:50%;border:3px solid #d6b0ff;box-shadow:0 0 18px #b06bff,inset 0 0 18px #b06bff88;animation:unica-fecha calc(.3s * var(--motion-scale,1)) cubic-bezier(.5,0,.8,.6) both}
+.arena-v2 .unit .unica-carga i{position:absolute;left:50%;top:50%;width:7px;height:7px;margin:-3.5px;border-radius:50%;background:#fff;box-shadow:0 0 8px 3px #c58bff;animation:unica-junta calc(.3s * var(--motion-scale,1)) ease-in both}
+.arena-v2 .unit .unica-carga i:nth-child(1){--a:0deg}.arena-v2 .unit .unica-carga i:nth-child(2){--a:60deg}.arena-v2 .unit .unica-carga i:nth-child(3){--a:120deg}
+.arena-v2 .unit .unica-carga i:nth-child(4){--a:180deg}.arena-v2 .unit .unica-carga i:nth-child(5){--a:240deg}.arena-v2 .unit .unica-carga i:nth-child(6){--a:300deg}
+@keyframes unica-fecha{0%{opacity:0;transform:scale(1.25)}35%{opacity:1}100%{opacity:0;transform:scale(.55)}}
+@keyframes unica-junta{0%{opacity:0;transform:rotate(var(--a)) translateY(calc(var(--medal,80px) * -.75))}30%{opacity:1}100%{opacity:0;transform:rotate(calc(var(--a) + 90deg)) translateY(0)}}
+.arena-v2 .unit:has(.unica-carga) .unit-medal>button{animation:unica-pulsa calc(.55s * var(--motion-scale,1)) ease-out both}
+@keyframes unica-pulsa{0%{transform:scale(1)}45%{transform:scale(1.1);filter:brightness(1.35)}100%{transform:scale(1);filter:none}}
+@media (prefers-reduced-motion:reduce){.arena-v2 .unit .unica-carga{display:none}}

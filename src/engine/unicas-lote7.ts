@@ -503,7 +503,7 @@ export const LOTE7: Record<string, Unica> = {
   },
   goku: {
     nome: 'Genki Dama',
-    texto: 'Aos 30 s de luta (1 vez por luta), Goku lança a Genki Dama no rival com mais Vida: 40 de dano para cada lutador de pé (dos dois trios).',
+    texto: 'Aos 30 s de luta (1 vez por luta), Goku lança a Genki Dama no rival com mais Vida: 60 de dano para cada lutador de pé (dos dois trios).',
     ganchos: {
       passo(m, b, f) {
         if (u(f).genki || b.time < 30) return;
@@ -512,7 +512,8 @@ export const LOTE7: Record<string, Unica> = {
         if (!a) return;
         const n = b.fighters.filter(vivo).length;
         m.aviso(b, f, 'Genki Dama!', a, n);
-        m.dano(b, f, a, 40 * n, false, 'Genki Dama');
+        // pedido do jogador: "40 de dano por personagem… achei que tava um pouco fraco"
+        m.dano(b, f, a, 60 * n, false, 'Genki Dama');
       },
     },
   },

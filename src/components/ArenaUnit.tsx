@@ -195,6 +195,8 @@ export function ArenaUnit({fighter:f,battle,beat,onInspect,numbers,threatened,li
         {seloVisivel&&seloVisivel.tipo!=='mecanica'&&<span key={`fx${seloVisivel.chave}`} className={`aura-ativa aura-${seloVisivel.tipo}${seloVisivel.sumindo?' sumindo':''}`} aria-hidden="true"><i/><i/><i/><i/><i/><i/><i/><i/></span>}
         {reagindo&&<span key={`a${reagindo.eventos[0]??0}`} className="reacao-anel" aria-hidden="true"/>}
         {ativando&&<span key={`ua${beat?.event.id??0}-${ativando.eventos[0]??0}`} className="aura-ativa aura-unica aura-longa" aria-hidden="true"><i/><i/><i/><i/><i/><i/><i/><i/></span>}
+        {/* a mini preparação: a energia roxa junta no retrato antes de a mecânica disparar */}
+        {ativando&&<span key={`uc${beat?.event.id??0}-${ativando.eventos[0]??0}`} className="unica-carga" aria-hidden="true"><i/><i/><i/><i/><i/><i/></span>}
         {applied&&<span key={applied.id} className="status-pop">{applied.status&&<img src={`/assets/statuses/${applied.status}.png`} alt=""/>}{applied.label}</span>}
         {discovered&&<span key={discovered.id} className="discovery-pop">{discovered.label}</span>}
       </button>
