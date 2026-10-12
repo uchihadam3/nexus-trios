@@ -475,6 +475,20 @@
   "laco": false,
   "bytes": 25966
  },
+ "ashura_senku": {
+  "descricao": "Akuma · o deslizar fantasma",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 34264
+ },
  "atracao": {
   "descricao": "tudo puxado para um ponto",
   "quadros": 12,
@@ -1342,6 +1356,20 @@
   ],
   "laco": false,
   "bytes": 33322
+ },
+ "bowser_preparo": {
+  "descricao": "Bowser · no ar, a sombra crescendo (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 21784
  },
  "bracelete": {
   "descricao": "Golpe de bracelete: braceletes em X e o soco",
@@ -2560,6 +2588,20 @@
   ],
   "laco": false,
   "bytes": 18690
+ },
+ "clone_congelado": {
+  "descricao": "Sub-Zero · o clone de gelo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 24110
  },
  "clones": {
   "descricao": "silhuetas em leque",
@@ -6593,6 +6635,20 @@
   "laco": false,
   "bytes": 74714
  },
+ "gou_hadouken": {
+  "descricao": "Akuma · o Hadouken sombrio",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 16692
+ },
  "grampo_de_cabelo": {
   "descricao": "Nobara · os pregos explodem em sequência",
   "quadros": 12,
@@ -6732,6 +6788,20 @@
   ],
   "laco": false,
   "bytes": 82694
+ },
+ "hadouken_ryu": {
+  "descricao": "Ryu · o Hadouken",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 21568
  },
  "hakka_no_togame": {
   "descricao": "Rukia · a flor de gelo que fecha e trinca",
@@ -7083,6 +7153,20 @@
   "laco": false,
   "bytes": 33012
  },
+ "inverno_absoluto": {
+  "descricao": "Sub-Zero · o raio e os cristais",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 22912
+ },
  "investida": {
   "descricao": "investida com linhas de velocidade",
   "quadros": 12,
@@ -7096,6 +7180,20 @@
   ],
   "laco": false,
   "bytes": 55146
+ },
+ "investida_de_casco": {
+  "descricao": "Bowser · o casco girando e o tranco",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 29350
  },
  "investida_elegante": {
   "descricao": "Yor · o chute alto girando e as pétalas",
@@ -7573,6 +7671,20 @@
   "laco": false,
   "bytes": 32122
  },
+ "kikosho": {
+  "descricao": "Chun-Li · a bola de energia que explode",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 54496
+ },
  "kit_primeiros_socorros": {
   "descricao": "Jill · a maleta e o spray de cura",
   "quadros": 12,
@@ -7964,6 +8076,20 @@
   ],
   "laco": false,
   "bytes": 16446
+ },
+ "lanca_de_gelo": {
+  "descricao": "Sub-Zero · a lança de gelo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 19816
  },
  "lanca_de_pedra": {
   "descricao": "Edward · as palmas, os raios e a lança de pedra",
@@ -17345,6 +17471,20 @@
   "laco": false,
   "bytes": 50360
  },
+ "ryu_preparo": {
+  "descricao": "Ryu · a energia entre as mãos (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 26652
+ },
  "sabedoria_de_salomao": {
   "descricao": "Shazam · o pergaminho e o Preparo quebrando",
   "quadros": 12,
@@ -17583,6 +17723,20 @@
   "laco": true,
   "bytes": 58776
  },
+ "scorpion_preparo": {
+  "descricao": "Scorpion · a caveira em chamas (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 12994
+ },
  "seis_dobras": {
   "descricao": "Zenitsu · seis riscos de raio de seis lados",
   "quadros": 12,
@@ -17792,6 +17946,20 @@
   ],
   "laco": true,
   "bytes": 27576
+ },
+ "shinku_hadouken": {
+  "descricao": "Ryu · o feixe do Shinku Hadouken",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 32232
  },
  "shoryuken": {
   "descricao": "Shoryuken: o soco que sobe em espiral",
@@ -18381,6 +18549,20 @@
   "laco": false,
   "bytes": 97552
  },
+ "sopro_flamejante": {
+  "descricao": "Bowser · o sopro de fogo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 69656
+ },
  "sorte": {
   "descricao": "dados rolando",
   "quadros": 12,
@@ -18423,6 +18605,20 @@
   "laco": false,
   "bytes": 56814
  },
+ "spinning_bird_kick": {
+  "descricao": "Chun-Li · a hélice de pernas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 19932
+ },
  "ssss_do_creeper": {
   "descricao": "Básico do Creeper: pisca e explode em blocos",
   "quadros": 12,
@@ -18450,6 +18646,20 @@
   ],
   "laco": true,
   "bytes": 26050
+ },
+ "subzero_preparo": {
+  "descricao": "Sub-Zero · o frio juntando (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 23180
  },
  "super_sonic": {
   "descricao": "Sonic · a explosão dourada",
@@ -18801,6 +19011,20 @@
   "laco": false,
   "bytes": 37032
  },
+ "teleporte_infernal": {
+  "descricao": "Scorpion · o fogo que some e volta",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 27834
+ },
  "tempestade": {
   "descricao": "nuvem e raios de cima",
   "quadros": 12,
@@ -19137,6 +19361,20 @@
   "laco": false,
   "bytes": 40450
  },
+ "toasty": {
+  "descricao": "Scorpion · o fogo do inferno da caveira",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 31556
+ },
  "toque_absorvente": {
   "descricao": "Vampira: a mão toca e suga fios de vida do alvo",
   "quadros": 12,
@@ -19276,6 +19514,20 @@
   ],
   "laco": false,
   "bytes": 12388
+ },
+ "tremor_do_rei": {
+  "descricao": "Bowser · a queda e o chão rachando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 42106
  },
  "tridente": {
   "descricao": "Aquaman: estocada do tridente com espiral e respingo de água",

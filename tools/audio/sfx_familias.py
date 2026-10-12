@@ -380,14 +380,6 @@ def laser(rng, v):
 
 
 # ================================================================== energia
-def hadouken(rng, v):
-    x = _z(0.9)
-    poe(x, _tom(nota(48), nota(60), 0.15, 0.1, 0.3), 0)
-    poe(x, B.disparo(rng, v), 0.05, 0.8)
-    poe(x, B.impacto_energia(rng, v), 0.35, 0.9)
-    return x
-
-
 def canhao_de_energia(rng, v):
     x = _z(1.3)
     n = n_de(1.0)
