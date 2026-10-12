@@ -11,7 +11,7 @@
  * usam esta força; tests/forca-atualizada.test.ts falha se um personagem ou
  * o motor mudar sem medir de novo.
  */
-export const MEDIDA_COM = { motor: "nexus-256.0", elenco: "fnv1a-e4bec30d" };
+export const MEDIDA_COM = { motor: "nexus-256.0", elenco: "fnv1a-336250b9" };
 
 export const FORCA: Record<string, number> = {
   "aang": -0.081,
