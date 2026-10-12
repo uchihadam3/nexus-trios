@@ -1,0 +1,147 @@
+/*
+ * O detalhe rápido da batalha, refeito (src/components/BattleInspector.tsx).
+ * Mesmo desenho para lutador, habilidade e Status: anel com o estado de agora
+ * no topo, cartões curtos com selo colorido embaixo, tudo entrando em cascata.
+ */
+.battle-inspector.bi2{
+  --lado:#7ae0a0;
+  width:min(460px,calc(100vw - 16px));bottom:10px;padding:14px 14px 12px;
+  max-height:min(64dvh,580px);overflow-y:auto;overscroll-behavior:contain;scrollbar-width:none;
+  border:0;border-radius:24px;color:#eef5e8;
+  background:radial-gradient(130% 150px at 0% 0%,color-mix(in srgb,var(--cor),transparent 70%),transparent 72%),linear-gradient(168deg,#19261f,#0e1512 70%);
+  box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--cor),transparent 55%),0 -10px 40px #0009,0 0 34px color-mix(in srgb,var(--cor),transparent 82%);
+  animation:bi2-entra .42s cubic-bezier(.2,1.25,.35,1) both
+}
+.battle-inspector.bi2.rival{--lado:#ff8a8a}
+.battle-inspector.bi2::-webkit-scrollbar{display:none}
+/* a faixa de cima, na cor do personagem indo para a cor do lado (verde: seu trio, vermelho: rival) */
+.battle-inspector.bi2::before{content:'';position:sticky;display:block;top:-14px;height:3px;margin:-14px 22px 11px;border-radius:0 0 4px 4px;background:linear-gradient(90deg,var(--cor),var(--lado));box-shadow:0 0 12px var(--lado);z-index:2}
+@keyframes bi2-entra{from{opacity:0;translate:0 28px;scale:.95}to{opacity:1;translate:0 0;scale:1}}
+.bi2>*+*{margin-top:10px}
+.bi2 .bi2-fechar{position:absolute;top:12px;right:12px;width:34px;height:34px;border-radius:12px;background:#ffffff12;color:#dfe9db;z-index:3;transition:background .15s,transform .15s}
+.bi2 .bi2-fechar:active{transform:scale(.9)}
+/* termos tocáveis aparecem como tocáveis: na cor do termo, com o sublinhado pontilhado */
+.bi2 .termo{color:color-mix(in srgb,var(--termo-cor,#b8e282),#fff 50%);font-weight:700}
+
+/* ---------- topo ---------- */
+.bi2-topo{display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px;align-items:center;padding-right:38px}
+.bi2-nome small{display:block;font-size:10px;font-weight:850;letter-spacing:1.6px;text-transform:uppercase;color:color-mix(in srgb,var(--cor),#fff 45%);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bi2-nome h3{margin:2px 0 0;font-size:22px;line-height:1.08;font-weight:900;letter-spacing:-.4px;text-shadow:0 2px 12px #0008}
+.bi2-retrato{--ring:#5fe39a;position:relative;width:78px;height:78px;padding:4px;border-radius:50%;background:conic-gradient(var(--ring) calc(var(--p)*1%),#ffffff16 0);box-shadow:0 0 22px color-mix(in srgb,var(--ring),transparent 65%);animation:bi2-pop .5s .05s cubic-bezier(.2,1.6,.4,1) both;transition:--p .4s}
+.bi2-retrato.perigo{--ring:#ff6a6a;animation:bi2-pop .5s .05s cubic-bezier(.2,1.6,.4,1) both,bi2-perigo 1.1s ease-in-out infinite}
+.bi2-retrato .portrait{width:100%;height:100%;border-radius:50%;overflow:hidden;box-shadow:0 0 0 3px #0e1512}
+.bi2-retrato .portrait img{width:100%;height:100%;object-fit:cover}
+@keyframes bi2-pop{from{scale:.55;opacity:0;rotate:-10deg}to{scale:1;opacity:1;rotate:0deg}}
+@keyframes bi2-perigo{50%{box-shadow:0 0 30px #ff6a6aaa}}
+
+.bi2-barra{position:relative;height:21px;margin-top:6px;border-radius:99px;background:#ffffff10;overflow:hidden;box-shadow:inset 0 1px 3px #0007}
+.bi2-barra>i{position:absolute;inset:0 auto 0 0;width:calc(var(--p)*1%);border-radius:inherit;background:linear-gradient(90deg,#26a865,#7af0ad);box-shadow:0 0 12px #5fe39a88;transition:width .45s cubic-bezier(.2,1,.3,1);animation:bi2-enche .8s .15s cubic-bezier(.2,1,.3,1) both}
+.bi2-barra>i::after{content:'';position:absolute;inset:0;background:linear-gradient(100deg,transparent 30%,#ffffff40 50%,transparent 70%);background-size:220% 100%;animation:bi2-reflexo 2.6s linear infinite}
+.bi2-barra.ritmo{height:18px;margin-top:5px}
+.bi2-barra.ritmo>i{background:linear-gradient(90deg,#c08a1c,#ffd36b);box-shadow:0 0 10px #ffd36b77;transition:width .12s linear}
+.bi2-barra>span{position:relative;z-index:1;display:flex;align-items:center;gap:5px;height:100%;padding:0 9px;font-size:11.5px;font-weight:700;color:#f4fbef;text-shadow:0 1px 3px #000c;white-space:nowrap}
+.bi2-barra>span b{font-size:13px;font-weight:900}
+.bi2-barra>span em{display:inline-flex;align-items:center;gap:3px;margin-left:auto;font-style:normal;color:#bfe6ff}
+.bi2-barra .termo{color:#fff7dc}
+@keyframes bi2-enche{from{width:0}}
+@keyframes bi2-reflexo{from{background-position:120% 0}to{background-position:-120% 0}}
+
+/* ---------- cartões ---------- */
+.bi2-cartoes{display:grid;gap:8px}
+.bi2-cartao{--selo:color-mix(in srgb,var(--cor),#fff 40%);position:relative;overflow:hidden;padding:10px 12px 11px 15px;border-radius:16px;background:linear-gradient(160deg,color-mix(in srgb,var(--selo),transparent 88%),#ffffff05);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--selo),transparent 70%);animation:bi2-carta .5s calc(.08s + var(--i,0)*70ms) cubic-bezier(.2,1.25,.4,1) both}
+.bi2-cartao::before{content:'';position:absolute;left:0;top:10px;bottom:10px;width:3px;border-radius:0 3px 3px 0;background:var(--selo);box-shadow:0 0 10px var(--selo)}
+@keyframes bi2-carta{from{opacity:0;translate:0 14px;scale:.97}to{opacity:1;translate:0 0;scale:1}}
+.bi2-selo{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:900;letter-spacing:1.4px;text-transform:uppercase;color:var(--selo)}
+.bi2 .bi2-selo .termo{color:inherit;font-weight:900;text-transform:inherit;letter-spacing:inherit}
+.bi2-cartao>b{display:block;margin:3px 0 2px;font-size:16.5px;font-weight:850;line-height:1.2}
+.bi2-cartao p{margin:0;font-size:13.5px;line-height:1.45;color:#d9e6d4}
+.bi2-cartao.unica{--selo:#e0b3ff;background:linear-gradient(135deg,#b06bff38,#ff6bb526 55%,#ffd36b1c);box-shadow:inset 0 0 0 1.5px #d39bff8c,0 0 20px #b06bff2e}
+.bi2-cartao.unica>b{background:linear-gradient(90deg,#f6e6ff,#ffd36b);-webkit-background-clip:text;background-clip:text;color:transparent}
+.bi2-cartao.unica::after{content:'';position:absolute;inset:-40% -10%;background:linear-gradient(100deg,transparent 40%,#ffffff24 50%,transparent 60%);animation:bi2-brilho 4.5s ease-in-out infinite;pointer-events:none}
+@keyframes bi2-brilho{0%,55%{transform:translateX(-65%)}100%{transform:translateX(65%)}}
+.bi2-cartao.traco{--selo:#ffd36b}
+.bi2-cartao.basico{--selo:#ff9a76}
+.bi2-cartao.carga{--selo:#b8e282}
+.bi2-extras{list-style:none;margin:7px 0 0;padding:0;display:grid;gap:5px}
+.bi2-extras li{position:relative;padding:6px 10px 6px 26px;border-radius:10px;background:#ff9a3a14;box-shadow:inset 0 0 0 1px #ff9a3a40;font-size:12.5px;line-height:1.4;color:#f3dcc6}
+.bi2-extras li::before{content:'✦';position:absolute;left:9px;top:6px;color:#ffb36b}
+
+/* ---------- habilidades (anéis de Carga) ---------- */
+.bi2-habs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.bi2-hab{display:grid;justify-items:center;align-content:start;gap:5px;min-width:0;padding:10px 6px 9px;border-radius:16px;background:#ffffff07;box-shadow:inset 0 0 0 1px #ffffff14;color:#eef5e8;text-align:center;animation:bi2-carta .5s calc(.08s + var(--i,0)*70ms) cubic-bezier(.2,1.25,.4,1) both;transition:transform .15s,background .15s}
+.bi2-hab:active{transform:scale(.95)}
+.bi2-hab>b{font-size:11.5px;font-weight:800;line-height:1.2;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.bi2-hab>small{font-size:11px;font-weight:800;color:var(--ring,#b8e282)}
+.bi2-anel{--ring:#b8e282;--grossura:4px;display:grid;place-items:center;flex:none;width:48px;height:48px;border-radius:50%;background:radial-gradient(closest-side,#0e1613 calc(100% - var(--grossura)),transparent calc(100% - var(--grossura) + 1px)),conic-gradient(var(--ring) calc(var(--p)*1%),#ffffff18 0);transition:box-shadow .2s}
+.bi2-anel.grande{--grossura:5px;width:76px;height:76px;animation:bi2-pop .5s .05s cubic-bezier(.2,1.6,.4,1) both}
+.bi2-anel .status-badge{width:46px;height:46px;flex-basis:46px}
+.pronta{--ring:#dbf88c}.prepara{--ring:#f4d47e}.descansa{--ring:#9fc3e0}.espera{--ring:#c3a2ff}
+.bi2-hab.pronta,.bi2-hab.prepara{background:color-mix(in srgb,var(--ring),transparent 90%);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--ring),transparent 50%)}
+.bi2-hab.pronta>.bi2-anel,.bi2-anel.grande.pronta{animation:bi2-pronta 1.2s ease-in-out infinite}
+.bi2-anel.grande.pronta{animation:bi2-pop .5s .05s cubic-bezier(.2,1.6,.4,1) both,bi2-pronta 1.2s .6s ease-in-out infinite}
+.bi2-hab.descansa>.bi2-anel{opacity:.6}
+@keyframes bi2-pronta{50%{box-shadow:0 0 18px color-mix(in srgb,var(--ring),transparent 30%)}}
+
+.bi2-estado{--ring:#b8e282;display:inline-flex;align-items:center;gap:5px;margin-top:6px;padding:4px 10px;border-radius:99px;font-size:12px;font-weight:800;color:var(--ring);background:color-mix(in srgb,var(--ring),transparent 86%);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--ring),transparent 60%)}
+.bi2-estado.pronta{animation:bi2-pronta 1.2s ease-in-out infinite}
+.bi2 .bi2-estado .termo{color:inherit}
+
+/* ---------- ficha da habilidade ---------- */
+.bi2-cartao.faz .efeitos-agrupados{margin:6px 0 0}
+.bi2 .grupo-alvo{font-size:10px}
+.bi2 .efeito-corpo{font-size:13.5px}
+.bi2 .efeito-duracao{font-size:11.5px}
+.bi2-numeros{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.bi2-numeros>span{display:flex;align-items:center;gap:7px;padding:9px 12px;border-radius:14px;background:#ffffff08;box-shadow:inset 0 0 0 1px #ffffff12;font-size:12.5px;color:#cfdcc9;animation:bi2-carta .5s calc(.08s + var(--i,0)*70ms) cubic-bezier(.2,1.25,.4,1) both}
+.bi2-numeros>span>svg{color:#f4d47e}
+.bi2-numeros>span:nth-child(2)>svg{color:#9fc3e0}
+.bi2-numeros>span>b{margin-left:auto;font-size:15px;font-weight:900;color:#fff}
+.bi2-fontes{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.bi2-fontes>span{padding:5px 10px;border-radius:99px;background:#b8e2821c;box-shadow:inset 0 0 0 1px #b8e2824d;font-size:12.5px;font-weight:700;line-height:1.3;color:#e6f6d3}
+.bi2-quando{margin-top:8px!important;font-size:12.5px!important}
+.bi2 .bi2-quando>.termo:first-child{color:#d5bfff;font-weight:900}
+
+/* ---------- a fileira que troca de ficha ---------- */
+.bi2-trilha{display:flex;align-items:center;gap:8px;padding-top:10px;border-top:1px solid #ffffff10}
+.bi2-voltar,.bi2-de-quem{display:inline-flex;align-items:center;gap:4px;min-height:42px;padding:4px 10px 4px 6px;border-radius:99px;background:#ffffff0c;box-shadow:inset 0 0 0 1px #ffffff14;color:#dfe9db}
+.bi2-de-quem{gap:8px;margin-left:auto;text-align:left}
+.bi2-de-quem small{display:block;font-size:10px;color:#9fb39b}
+.bi2-de-quem b{font-size:13px}
+.bi2-mini{display:block;width:32px;height:32px;border-radius:50%;overflow:hidden;box-shadow:0 0 0 2px color-mix(in srgb,var(--cor),transparent 40%)}
+.bi2-mini .portrait{width:100%;height:100%}
+.bi2-mini .portrait img{width:100%;height:100%;object-fit:cover}
+.bi2-aba{display:grid;place-items:center;padding:2px;border-radius:50%;opacity:.5;transition:opacity .2s,transform .2s}
+.bi2-aba .bi2-anel{width:42px;height:42px}
+.bi2-aba.ativa{opacity:1;transform:scale(1.1)}
+.bi2-aba.ativa .bi2-anel{box-shadow:0 0 0 2px #0e1512,0 0 0 4px color-mix(in srgb,var(--cor),#fff 30%)}
+
+/* ---------- Status ---------- */
+.bi2-topo.status :is(.bi2-anel,.bi2-estado){--ring:var(--st)}
+.bi2-topo.status.bom .bi2-nome small{color:#8ff0b0}
+.bi2-topo.status.ruim .bi2-nome small{color:#ff9d8f}
+.bi2-valor{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 10px;padding:6px 14px;border-radius:14px;background:#ffffff07;animation:bi2-carta .5s .08s cubic-bezier(.2,1.25,.4,1) both}
+.bi2-valor b{white-space:nowrap;font-size:26px;font-weight:900;color:#fff;font-variant-numeric:tabular-nums;text-shadow:0 0 18px #ffffff40}
+.bi2-valor span{font-size:12.5px;color:#a9bfb0}
+.bi2-status-lista{display:flex;flex-wrap:wrap;gap:6px}
+.bi2-status{--tom:#7ae0a0;display:inline-flex;align-items:center;gap:6px;min-height:38px;padding:3px 11px 3px 4px;border-radius:99px;background:color-mix(in srgb,var(--tom),transparent 88%);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--tom),transparent 60%);color:#eef5e8;font-size:12.5px;font-weight:700}
+.bi2-status.ruim{--tom:#ff8a7a}
+.bi2-status>b{color:#fff3c4;font-variant-numeric:tabular-nums}
+.bi2-status>small{color:#a9bfb0;font-variant-numeric:tabular-nums}
+
+@media (max-width:380px){
+  .bi2-nome h3{font-size:19px}
+  .bi2-retrato,.bi2-anel.grande{width:66px;height:66px}
+  .bi2-cartao p,.bi2 .efeito-corpo{font-size:13px}
+}
+@media (prefers-reduced-motion:reduce){
+  .battle-inspector.bi2,.bi2 *,.bi2 *::before,.bi2 *::after{animation:none!important}
+}
+
+/* O cartão do termo (o que abre ao tocar num termo): mais vivo, com o reflexo passando. */
+.termo-card{overflow:hidden}
+.termo-card::after{content:'';position:absolute;inset:-50% -20%;background:linear-gradient(100deg,transparent 42%,#ffffff1c 50%,transparent 58%);animation:bi2-brilho 4s .3s ease-in-out infinite;pointer-events:none}
+.termo-card .id-card-family{display:inline-block;padding:3px 9px;border-radius:99px;background:color-mix(in srgb,var(--id-cor),transparent 84%);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--id-cor),transparent 55%);letter-spacing:1.4px}
+.termo-card .id-card-lead{animation:bi2-carta .5s .12s cubic-bezier(.2,1.25,.4,1) both}
+.termo-card .termo-extra{position:relative;padding-left:30px;animation:bi2-carta .5s .2s cubic-bezier(.2,1.25,.4,1) both}
+.termo-card .termo-extra::before{content:'✦';position:absolute;left:11px;top:10px;color:var(--id-cor)}
+@media (prefers-reduced-motion:reduce){.termo-card::after,.termo-card .id-card-lead,.termo-card .termo-extra{animation:none}}

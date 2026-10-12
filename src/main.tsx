@@ -20,6 +20,7 @@ import './presentation/telas-v2.css';
 import './presentation/conquistas.css';
 import './presentation/portao.css';
 import './presentation/combos.css';
+import './presentation/inspetor-v2.css';
 import './presentation/livro.css';
 createRoot(document.getElementById('root')!).render(<App/>);
 /*
