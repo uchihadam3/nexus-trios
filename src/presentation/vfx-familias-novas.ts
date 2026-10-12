@@ -63,9 +63,7 @@ export const FAMILIAS_NOVAS = {
   supernova: n({ nome: 'Supernova', grupo: 'energia', impacto: 'supernova', escala: 2.4, tempo: 0.9, cor: '#fff0b0' }),
   pulso_emp: n({ nome: 'Pulso eletromagnético', grupo: 'energia', impacto: 'pulso_emp', escala: 2.0, tempo: 0.8, cor: '#7fe7ff', tinta: 'elemento' }),
   pilar: n({ nome: 'Pilar de energia', grupo: 'energia', impacto: 'pilar', escala: 2.2, tempo: 0.9 }),
-  transformacao: n({ nome: 'Transformação', grupo: 'energia', impacto: 'transformacao', escala: 2.2, tempo: 0.95, cor: '#ffe66b' }),
   atracao: n({ nome: 'Atração', grupo: 'energia', impacto: 'atracao', escala: 2.1, tempo: 0.9, cor: '#4aa8ff' }),
-  repulsao: n({ nome: 'Repulsão', grupo: 'energia', impacto: 'repulsao', escala: 2.2, tempo: 0.8, cor: '#ff4a4a' }),
   dominio: n({ nome: 'Domínio', grupo: 'especial', impacto: 'dominio', escala: 2.4, tempo: 0.95, cor: '#b48cff' }),
   desintegrar: n({ nome: 'Desintegrar', grupo: 'especial', impacto: 'desintegrar', escala: 2.1, tempo: 0.95, cor: '#c7a2ff', tinta: 'fixa' }),
   // ------------------------------------------------------------ elementos
@@ -106,7 +104,6 @@ export const FAMILIAS_NOVAS = {
   susanoo: n({ nome: 'Susanoo', grupo: 'especial', preparo: 'susanoo_itachi_forma', noAtor: 'susanoo_itachi', impacto: 'espada_totsuka', escala: 2.4, tempo: 1.0, cor: '#ff3b3b', tinta: 'fixa' }),
   // ------------------------------------------------------------ apoio e Status
   cura_em_area: n({ nome: 'Cura em área', grupo: 'apoio', impacto: 'cura_em_area', escala: 2.0, tempo: 0.95, cor: '#7dffb0', tinta: 'fixa' }),
-  regeneracao: n({ nome: 'Regeneração', grupo: 'apoio', impacto: 'regeneracao', escala: 1.9, tempo: 0.95, cor: '#7dffb0', tinta: 'fixa' }),
   grito_de_guerra: n({ nome: 'Grito de guerra', grupo: 'apoio', impacto: 'grito_de_guerra', escala: 2.0, tempo: 0.9, cor: '#ffd36b', tinta: 'elemento' }),
   velocidade: n({ nome: 'Velocidade', grupo: 'apoio', impacto: 'velocidade', escala: 1.9, tempo: 0.9, cor: '#bff5e4', tinta: 'elemento' }),
   escudo_tech: n({ nome: 'Escudo tecnológico', grupo: 'apoio', impacto: 'escudo_tech', escala: 1.8, tempo: 0.95, cor: '#7fe7ff', tinta: 'elemento' }),
@@ -772,6 +769,22 @@ export const FAMILIAS_NOVAS = {
   juizo_dos_mortos: n({ nome: 'Juízo dos mortos', grupo: 'magia', preparo: 'hades_preparo', impacto: 'juizo_dos_mortos', escala: 2.5, tempo: 1.0, cor: '#8a6aff', tinta: 'fixa' }),
   hiraishin: n({ nome: 'Hiraishin', grupo: 'especial', impacto: 'hiraishin', escala: 2.3, tempo: 1.0, cor: '#ffe060', tinta: 'fixa' }),
   marca_voadora: n({ nome: 'Marca voadora', grupo: 'projétil', impacto: 'marca_voadora', escala: 2.3, tempo: 1.0, cor: '#ffd040', tinta: 'fixa' }),
+  defesa_absoluta: n({ nome: 'Defesa absoluta', grupo: 'apoio', impacto: 'defesa_absoluta', escala: 2.3, tempo: 1.0, cor: '#e0b070', tinta: 'fixa' }),
+  escudo_de_areia: n({ nome: 'Escudo de areia', grupo: 'apoio', impacto: 'escudo_de_areia', escala: 2.3, tempo: 1.0, cor: '#e0b070', tinta: 'fixa' }),
+  funeral_do_deserto: n({ nome: 'Funeral do deserto', grupo: 'elemento', preparo: 'gaara_preparo', impacto: 'funeral_do_deserto', escala: 2.5, tempo: 1.0, cor: '#d4a060', tinta: 'fixa' }),
+  absorcao_cell: n({ nome: 'Absorção', grupo: 'especial', impacto: 'absorcao_cell', escala: 2.3, tempo: 1.0, cor: '#7ae07a', tinta: 'fixa' }),
+  regeneracao_celular: n({ nome: 'Regeneração celular', grupo: 'apoio', impacto: 'regeneracao_celular', escala: 2.3, tempo: 1.0, cor: '#7ae07a', tinta: 'fixa' }),
+  forma_perfeita: n({ nome: 'Forma perfeita', grupo: 'energia', preparo: 'cell_preparo', impacto: 'forma_perfeita', escala: 2.5, tempo: 1.0, cor: '#6ab0ff', tinta: 'fixa' }),
+  eraser_cannon: n({ nome: 'Eraser Cannon', grupo: 'energia', impacto: 'eraser_cannon', escala: 2.3, tempo: 1.0, cor: '#7aff6a', tinta: 'fixa' }),
+  furia_lendaria: n({ nome: 'Fúria lendária', grupo: 'energia', impacto: 'furia_lendaria', escala: 2.3, tempo: 1.0, cor: '#7aff6a', tinta: 'fixa' }),
+  gigantic_roar: n({ nome: 'Gigantic Roar', grupo: 'energia', preparo: 'broly_preparo', impacto: 'gigantic_roar', escala: 2.5, tempo: 1.0, cor: '#9aff7a', tinta: 'fixa' }),
+  esfera_da_destruicao: n({ nome: 'Esfera da destruição', grupo: 'energia', impacto: 'esfera_da_destruicao', escala: 2.3, tempo: 1.0, cor: '#c87aff', tinta: 'fixa' }),
+  ira_do_deus: n({ nome: 'Ira do deus', grupo: 'energia', preparo: 'beerus_preparo', impacto: 'ira_do_deus', escala: 2.5, tempo: 1.0, cor: '#ff9a3a', tinta: 'fixa' }),
+  psiquico_mewtwo: n({ nome: 'Psíquico', grupo: 'magia', impacto: 'psiquico_mewtwo', escala: 2.3, tempo: 1.0, cor: '#c89aff', tinta: 'fixa' }),
+  barreira_mewtwo: n({ nome: 'Barreira', grupo: 'apoio', impacto: 'barreira_mewtwo', escala: 2.3, tempo: 1.0, cor: '#c89aff', tinta: 'fixa' }),
+  tempestade_mental: n({ nome: 'Tempestade mental', grupo: 'magia', preparo: 'mewtwo_preparo', impacto: 'tempestade_mental', escala: 2.5, tempo: 1.0, cor: '#b07aff', tinta: 'fixa' }),
+  contra_fluxo: n({ nome: 'Contra-fluxo', grupo: 'físico', impacto: 'contra_fluxo', escala: 2.3, tempo: 1.0, cor: '#8ac8ff', tinta: 'fixa' }),
+  cacador_de_herois: n({ nome: 'Caçador de heróis', grupo: 'corte', impacto: 'cacador_de_herois', escala: 2.3, tempo: 1.0, cor: '#c8c8d0', tinta: 'fixa' }),
   mu_genki_dama: n({ nome: 'Genki Dama', grupo: 'especial', impacto: 'mu_genki_dama', escala: 3.0, tempo: 1.0, cor: '#6ac8ff', tinta: 'fixa' }),
   mu_zenkai: n({ nome: 'Zenkai', grupo: 'especial', impacto: 'mu_zenkai', escala: 2.6, tempo: 1.0, cor: '#ffd84a', tinta: 'fixa' }),
   mu_kage_bunshin: n({ nome: 'Kage Bunshin', grupo: 'especial', impacto: 'mu_kage_bunshin', escala: 2.8, tempo: 1.0, cor: '#ffa64a', tinta: 'fixa' }),
@@ -1328,7 +1341,7 @@ export const FAMILIAS_NOVAS = {
 export type FamiliaNova = keyof typeof FAMILIAS_NOVAS;
 
 /** O som próprio de cada família nova (nome do arquivo em public/assets/audio/sfx). */
-export const SOM_DA_NOVA = (k: FamiliaNova): string => (k === 'transformacao' ? 'transformacao-v2' : k.replace(/_/g, '-'));
+export const SOM_DA_NOVA = (k: FamiliaNova): string => k.replace(/_/g, '-');
 
 /** Estas acontecem no alvo, sem nada voando até ele. */
 export const NOVAS_NO_ALVO = new Set<FamiliaNova>(['ressurreicao', 'renascer', 'brasas_renascendo', 'espera_ikki', 'volta_ikki', 'espera_jeangrey', 'volta_jeangrey', 'espera_deadpool', 'volta_deadpool', 'espera_majinbuu', 'volta_majinbuu', 'espera_mummra', 'volta_mummra', 'espera_cell', 'volta_cell', 'espera_mario', 'volta_mario', 'espera_wolverine', 'volta_wolverine', 'espera_alucardcv', 'volta_alucardcv', 'espera_muzan', 'volta_muzan', 'espera_pain', 'volta_pain', 'levanta_hadescz', 'levanta_scarletwitch', 'levanta_pain', 'levanta_rick', 'levanta_constantine', 'levanta_shera', 'provocar', 'copia', 'esquiva', 'ultima_resistencia', 'sono', 'cegueira', 'dissipar', 'reflexo', 'espinhos', 'vampirismo', 'olho', 'hipnose', 'runas', 'sarcofago', 'encanto', 'caveira', 'clones',

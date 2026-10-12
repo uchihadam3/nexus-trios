@@ -13,6 +13,20 @@
   "laco": false,
   "bytes": 55146
  },
+ "absorcao_cell": {
+  "descricao": "Cell · a cauda sugando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 15892
+ },
  "absorcao_cosmica": {
   "descricao": "Capitã Marvel · a energia absorvida e a aura",
   "quadros": 12,
@@ -867,6 +881,20 @@
   "laco": false,
   "bytes": 70042
  },
+ "barreira_mewtwo": {
+  "descricao": "Mewtwo · a barreira de hexágonos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 41518
+ },
  "barreira_sagrada": {
   "descricao": "Zelda · os cristais de diamante no trio",
   "quadros": 12,
@@ -1090,6 +1118,20 @@
   ],
   "laco": true,
   "bytes": 18472
+ },
+ "beerus_preparo": {
+  "descricao": "Beerus · o sol sobre o dedo (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 43948
  },
  "beijo_soprado": {
   "descricao": "Básico de Afrodite: os lábios e os corações",
@@ -1553,6 +1595,20 @@
   "laco": true,
   "bytes": 44302
  },
+ "broly_preparo": {
+  "descricao": "Broly · a esfera crescendo (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 25208
+ },
  "bungee_gum": {
   "descricao": "Hisoka · o chiclete rosa que gruda e estica",
   "quadros": 12,
@@ -1706,6 +1762,20 @@
   ],
   "laco": false,
   "bytes": 36330
+ },
+ "cacador_de_herois": {
+  "descricao": "Garou · as garras em X",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 41890
  },
  "cajado_branco": {
   "descricao": "Básico do Gandalf: o cajado no chão e a luz",
@@ -2182,6 +2252,20 @@
   ],
   "laco": false,
   "bytes": 51976
+ },
+ "cell_preparo": {
+  "descricao": "Cell · as asas e a aura (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 57872
  },
  "centopeia": {
   "descricao": "Kaneki · o kagune centopeia crava e suga",
@@ -3009,6 +3093,20 @@
   "laco": false,
   "bytes": 30830
  },
+ "contra_fluxo": {
+  "descricao": "Garou · o desvio e o contra-ataque",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 17212
+ },
  "controle_de_chakra": {
   "descricao": "Sakura · o chakra apertando no punho",
   "quadros": 12,
@@ -3709,6 +3807,20 @@
   "laco": false,
   "bytes": 11056
  },
+ "defesa_absoluta": {
+  "descricao": "Gaara · a parede de areia",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 61418
+ },
  "deflexao_sekiro": {
   "descricao": "Sekiro · a deflexão e a faísca",
   "quadros": 12,
@@ -4367,6 +4479,20 @@
   "laco": false,
   "bytes": 40408
  },
+ "eraser_cannon": {
+  "descricao": "Broly · a esfera que explode enorme",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 36224
+ },
  "erguer_os_mortos": {
   "descricao": "Arthas · as mãos de osso sobem e fecham o escudo",
   "quadros": 12,
@@ -4408,6 +4534,20 @@
   ],
   "laco": false,
   "bytes": 74492
+ },
+ "escudo_de_areia": {
+  "descricao": "Gaara · a armadura de areia",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 66568
  },
  "escudo_de_energia": {
   "descricao": "Master Chief · a bolha dourada de hexágonos",
@@ -4604,6 +4744,20 @@
   ],
   "laco": true,
   "bytes": 18660
+ },
+ "esfera_da_destruicao": {
+  "descricao": "Beerus · a esfera da destruição",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 25560
  },
  "esfera_espiral": {
   "descricao": "esfera em espiral moendo",
@@ -6131,6 +6285,20 @@
   "laco": false,
   "bytes": 57052
  },
+ "forma_perfeita": {
+  "descricao": "Cell · o Kamehameha em leque",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 27200
+ },
  "frasco_de_senku": {
   "descricao": "Básico do Senku: o frasco e a reação",
   "quadros": 12,
@@ -6229,6 +6397,20 @@
   "laco": true,
   "bytes": 53998
  },
+ "funeral_do_deserto": {
+  "descricao": "Gaara · o funeral do deserto",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 53254
+ },
  "furia_espartana": {
   "descricao": "Kratos · a pancada rápida da Fúria",
   "quadros": 12,
@@ -6271,6 +6453,20 @@
   "laco": false,
   "bytes": 52488
  },
+ "furia_lendaria": {
+  "descricao": "Broly · a aura do Lendário",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 86280
+ },
  "fus_ro_dah": {
   "descricao": "Básico do Dovahkiin: as três palavras do Thu'um",
   "quadros": 12,
@@ -6284,6 +6480,20 @@
   ],
   "laco": false,
   "bytes": 20754
+ },
+ "gaara_preparo": {
+  "descricao": "Gaara · a cabaça e a areia (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 34080
  },
  "gadget_rick": {
   "descricao": "Rick · a invenção explodindo no meio dos rivais",
@@ -6732,6 +6942,20 @@
   ],
   "laco": false,
   "bytes": 72250
+ },
+ "gigantic_roar": {
+  "descricao": "Broly · o rugido em ondas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 39342
  },
  "giro_de_levi": {
   "descricao": "Levi · o redemoinho de lâminas em espiral",
@@ -7712,6 +7936,20 @@
   ],
   "laco": false,
   "bytes": 54134
+ },
+ "ira_do_deus": {
+  "descricao": "Beerus · o sol de destruição caindo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 80336
  },
  "ira_dos_deuses": {
   "descricao": "Kratos · a rachadura e a coluna de fogo",
@@ -9658,6 +9896,20 @@
   ],
   "laco": false,
   "bytes": 79500
+ },
+ "mewtwo_preparo": {
+  "descricao": "Mewtwo · os olhos e a energia (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 17356
  },
  "mikiri": {
   "descricao": "Sekiro · o pisão na lança e o kanji",
@@ -16771,6 +17023,20 @@
   "laco": false,
   "bytes": 75352
  },
+ "psiquico_mewtwo": {
+  "descricao": "Mewtwo · a onda psíquica",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 33324
+ },
  "puf_das_varinhas": {
   "descricao": "Básico de Cosmo e Wanda: as varinhas e o puf",
   "quadros": 12,
@@ -17751,8 +18017,8 @@
   "laco": false,
   "bytes": 80974
  },
- "regeneracao": {
-  "descricao": "folhas subindo em espiral",
+ "regeneracao_celular": {
+  "descricao": "Cell · as células se refazendo",
   "quadros": 12,
   "grade": [
    3,
@@ -17763,7 +18029,7 @@
    192
   ],
   "laco": false,
-  "bytes": 56320
+  "bytes": 69780
  },
  "regeneracao_namekiana": {
   "descricao": "Piccolo · as gotas voltam e o braço novo nasce",
@@ -17904,20 +18170,6 @@
   ],
   "laco": false,
   "bytes": 119348
- },
- "repulsao": {
-  "descricao": "estouro para fora",
-  "quadros": 12,
-  "grade": [
-   3,
-   4
-  ],
-  "tamanho": [
-   192,
-   192
-  ],
-  "laco": false,
-  "bytes": 117304
  },
  "repulsor_stark_voo": {
   "descricao": "Homem de Ferro · o repulsor voando (laço)",
@@ -19935,6 +20187,20 @@
   "laco": false,
   "bytes": 85346
  },
+ "tempestade_mental": {
+  "descricao": "Mewtwo · a tempestade psíquica",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 59274
+ },
  "tempestade_nebular": {
   "descricao": "Shun · o vento rosa em volta",
   "quadros": 12,
@@ -20382,20 +20648,6 @@
   ],
   "laco": false,
   "bytes": 37490
- },
- "transformacao": {
-  "descricao": "aura de transformação",
-  "quadros": 12,
-  "grade": [
-   3,
-   4
-  ],
-  "tamanho": [
-   192,
-   192
-  ],
-  "laco": false,
-  "bytes": 119654
  },
  "transmutacao_estelar": {
   "descricao": "Surfista Prateado · as cascas brilhantes no trio",

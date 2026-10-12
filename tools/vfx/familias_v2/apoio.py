@@ -35,26 +35,6 @@ def cura_em_area(T, t, rng):
     return G, H
 
 
-def regeneracao(T, t, rng):
-    """Regeneração: folhas e pontos verdes sobem em espiral lenta em volta do corpo."""
-    G, H = vazio(T)
-    env = janela(t, 0, 0.15) * apaga(t, 0.75, 1)
-    folhas = []
-    for k in range(12):
-        f = (k / 12 + t * 0.8) % 1
-        a = f * TAU * 1.5 + k
-        x, y = math.cos(a) * 0.38, 0.5 - f * 1.1
-        ang = a + math.pi / 2
-        folhas.append((lamina(x - math.cos(ang) * 0.05, y - math.sin(ang) * 0.05, x + math.cos(ang) * 0.05, y + math.sin(ang) * 0.05, 0.025), math.sin(math.pi * f) * (0.5 + 0.5 * (math.sin(a) > 0))))
-    pts = []
-    for _ in range(30):
-        f = (rng.uniform(0, 1) + t * 0.7) % 1
-        pts.append((rng.uniform(-0.3, 0.3), 0.45 - f * 1.0, math.sin(math.pi * f) * rng.uniform(0.3, 1)))
-    G += (T.polys(folhas, 0.003) * 1.4 + T.splats(pts, 0.01) + T.gauss(0, 0.05, 0.22, 0.4) * 0.3) * env
-    H += (T.polys(folhas, 0.003) * 0.5 + T.splats(pts, 0.008) * 0.6) * env
-    return G, H
-
-
 def grito_de_guerra(T, t, rng):
     """Grito de guerra: um estandarte de raios se abre, divisas sobem e o aliado brilha."""
     G, H = vazio(T)
@@ -725,7 +705,6 @@ REGISTRO = [
     ("provocar", provocar, GRANDE, "marca de raiva sobre o rival provocado, anéis se fechando", False),
     ("brasas_renascendo", brasas_renascendo, GRANDE, "brasas sobre quem vai renascer (laço)", True),
     ("cura_em_area", cura_em_area, GRANDE, "cura em área com cruzes", False),
-    ("regeneracao", regeneracao, GRANDE, "folhas subindo em espiral", False),
     ("grito_de_guerra", grito_de_guerra, GRANDE, "estandarte de raios e divisas", False),
     ("velocidade", velocidade, GRANDE, "linhas de vento e asinhas", False),
     ("escudo_tech", escudo_tech, GRANDE, "parede de painéis hexagonais", False),

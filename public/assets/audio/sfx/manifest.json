@@ -19,6 +19,23 @@
    ],
    "bytes": 45794
   },
+  "absorcao-cell": {
+   "arquivo": "absorcao-cell.mp3",
+   "descricao": "Cell: a absorção",
+   "versoes": [
+    0.0,
+    1.4419,
+    3.0041,
+    4.4643
+   ],
+   "duracoes": [
+    1.3619,
+    1.4822,
+    1.3801,
+    1.4156
+   ],
+   "bytes": 50668
+  },
   "absorcao-cosmica": {
    "arquivo": "absorcao-cosmica.mp3",
    "descricao": "Capitã Marvel: a energia sugada e a aura",
@@ -1073,6 +1090,23 @@
    ],
    "bytes": 56544
   },
+  "barreira-mewtwo": {
+   "arquivo": "barreira-mewtwo.mp3",
+   "descricao": "Mewtwo: a barreira",
+   "versoes": [
+    0.0,
+    1.956,
+    3.9789,
+    5.8946
+   ],
+   "duracoes": [
+    1.876,
+    1.9429,
+    1.8357,
+    1.9032
+   ],
+   "bytes": 62804
+  },
   "barreira-sagrada": {
    "arquivo": "barreira-sagrada.mp3",
    "descricao": "Zelda: os cristais e o acorde",
@@ -1310,6 +1344,23 @@
     1.3198
    ],
    "bytes": 38898
+  },
+  "beerus-preparo": {
+   "arquivo": "beerus-preparo.mp3",
+   "descricao": "Beerus: o sol (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 29878
   },
   "beijo-soprado": {
    "arquivo": "beijo-soprado.mp3",
@@ -1804,6 +1855,23 @@
    ],
    "bytes": 40775
   },
+  "broly-preparo": {
+   "arquivo": "broly-preparo.mp3",
+   "descricao": "Broly: a esfera (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 53324
+  },
   "bungee-gum": {
    "arquivo": "bungee-gum.mp3",
    "descricao": "Hisoka: o chiclete que gruda e estica",
@@ -1939,6 +2007,23 @@
     1.6684
    ],
    "bytes": 64841
+  },
+  "cacador-de-herois": {
+   "arquivo": "cacador-de-herois.mp3",
+   "descricao": "Garou: o caçador de heróis",
+   "versoes": [
+    0.0,
+    1.2918,
+    2.6264,
+    3.8784
+   ],
+   "duracoes": [
+    1.2118,
+    1.2546,
+    1.172,
+    1.2299
+   ],
+   "bytes": 43086
   },
   "cajado-branco": {
    "arquivo": "cajado-branco.mp3",
@@ -2466,6 +2551,23 @@
     1.8274
    ],
    "bytes": 58581
+  },
+  "cell-preparo": {
+   "arquivo": "cell-preparo.mp3",
+   "descricao": "Cell: as asas (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 53065
   },
   "centopeia": {
    "arquivo": "centopeia.mp3",
@@ -3419,6 +3521,23 @@
    ],
    "bytes": 58437
   },
+  "contra-fluxo": {
+   "arquivo": "contra-fluxo.mp3",
+   "descricao": "Garou: o contra-fluxo",
+   "versoes": [
+    0.0,
+    1.4488,
+    2.9526,
+    4.3345
+   ],
+   "duracoes": [
+    1.3688,
+    1.4238,
+    1.3019,
+    1.3565
+   ],
+   "bytes": 47450
+  },
   "controle-de-chakra": {
    "arquivo": "controle-de-chakra.mp3",
    "descricao": "Controle de chakra: o chakra apertando no punho",
@@ -4183,6 +4302,23 @@
     1.1167
    ],
    "bytes": 41209
+  },
+  "defesa-absoluta": {
+   "arquivo": "defesa-absoluta.mp3",
+   "descricao": "Gaara: a defesa absoluta",
+   "versoes": [
+    0.0,
+    1.4857,
+    2.9836,
+    4.347
+   ],
+   "duracoes": [
+    1.4057,
+    1.418,
+    1.2834,
+    1.4177
+   ],
+   "bytes": 51242
   },
   "deflexao-sekiro": {
    "arquivo": "deflexao-sekiro.mp3",
@@ -4983,6 +5119,23 @@
    ],
    "bytes": 23221
   },
+  "eraser-cannon": {
+   "arquivo": "eraser-cannon.mp3",
+   "descricao": "Broly: Eraser Cannon",
+   "versoes": [
+    0.0,
+    2.18,
+    4.4361,
+    6.5451
+   ],
+   "duracoes": [
+    2.1,
+    2.1761,
+    2.029,
+    2.132
+   ],
+   "bytes": 65935
+  },
   "erguer-os-mortos": {
    "arquivo": "erguer-os-mortos.mp3",
    "descricao": "Erguer os mortos: os ossos subindo e o escudo",
@@ -5050,6 +5203,23 @@
     0.8122
    ],
    "bytes": 27396
+  },
+  "escudo-de-areia": {
+   "arquivo": "escudo-de-areia.mp3",
+   "descricao": "Gaara: o escudo de areia",
+   "versoes": [
+    0.0,
+    1.5372,
+    3.1299,
+    4.6069
+   ],
+   "duracoes": [
+    1.4572,
+    1.5127,
+    1.397,
+    1.4828
+   ],
+   "bytes": 53708
   },
   "escudo-de-energia": {
    "arquivo": "escudo-de-energia.mp3",
@@ -5271,6 +5441,23 @@
     1.1167
    ],
    "bytes": 45934
+  },
+  "esfera-da-destruicao": {
+   "arquivo": "esfera-da-destruicao.mp3",
+   "descricao": "Beerus: a esfera da destruição",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 61021
   },
   "esfera-espiral": {
    "arquivo": "esfera-espiral.mp3",
@@ -6972,6 +7159,23 @@
    ],
    "bytes": 75370
   },
+  "forma-perfeita": {
+   "arquivo": "forma-perfeita.mp3",
+   "descricao": "Cell: a forma perfeita",
+   "versoes": [
+    0.0,
+    2.38,
+    4.8434,
+    7.1456
+   ],
+   "duracoes": [
+    2.3,
+    2.3834,
+    2.2222,
+    2.335
+   ],
+   "bytes": 76259
+  },
   "frasco-de-senku": {
    "arquivo": "frasco-de-senku.mp3",
    "descricao": "básico do Senku: o vidro e a reação",
@@ -7091,6 +7295,23 @@
    ],
    "bytes": 57496
   },
+  "funeral-do-deserto": {
+   "arquivo": "funeral-do-deserto.mp3",
+   "descricao": "Gaara: o funeral do deserto",
+   "versoes": [
+    0.0,
+    1.8467,
+    3.7581,
+    5.613
+   ],
+   "duracoes": [
+    1.7667,
+    1.8314,
+    1.7749,
+    1.8824
+   ],
+   "bytes": 64064
+  },
   "furia-espartana": {
    "arquivo": "furia-espartana.mp3",
    "descricao": "a pancada da Fúria",
@@ -7142,6 +7363,23 @@
    ],
    "bytes": 42473
   },
+  "furia-lendaria": {
+   "arquivo": "furia-lendaria.mp3",
+   "descricao": "Broly: a fúria lendária",
+   "versoes": [
+    0.0,
+    2.28,
+    4.6398,
+    6.8454
+   ],
+   "duracoes": [
+    2.2,
+    2.2798,
+    2.1256,
+    2.2335
+   ],
+   "bytes": 81034
+  },
   "fus-ro-dah": {
    "arquivo": "fus-ro-dah.mp3",
    "descricao": "básico do Dovahkiin: o Thu'um",
@@ -7158,6 +7396,23 @@
     1.6244
    ],
    "bytes": 50186
+  },
+  "gaara-preparo": {
+   "arquivo": "gaara-preparo.mp3",
+   "descricao": "Gaara: a cabaça (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 61074
   },
   "gadget-surpresa": {
    "arquivo": "gadget-surpresa.mp3",
@@ -7685,6 +7940,23 @@
     1.9289
    ],
    "bytes": 65411
+  },
+  "gigantic-roar": {
+   "arquivo": "gigantic-roar.mp3",
+   "descricao": "Broly: Gigantic Roar",
+   "versoes": [
+    0.0,
+    2.48,
+    5.047,
+    7.4459
+   ],
+   "duracoes": [
+    2.4,
+    2.487,
+    2.3188,
+    2.4365
+   ],
+   "bytes": 91115
   },
   "giro-de-levi": {
    "arquivo": "giro-de-levi.mp3",
@@ -8926,6 +9198,23 @@
     1.4005
    ],
    "bytes": 47615
+  },
+  "ira-do-deus": {
+   "arquivo": "ira-do-deus.mp3",
+   "descricao": "Beerus: a ira do deus",
+   "versoes": [
+    0.0,
+    2.68,
+    5.4543,
+    8.0463
+   ],
+   "duracoes": [
+    2.6,
+    2.6943,
+    2.5121,
+    2.6396
+   ],
+   "bytes": 85687
   },
   "ira-dos-deuses": {
    "arquivo": "ira-dos-deuses.mp3",
@@ -11289,6 +11578,23 @@
     1.1167
    ],
    "bytes": 45661
+  },
+  "mewtwo-preparo": {
+   "arquivo": "mewtwo-preparo.mp3",
+   "descricao": "Mewtwo: os olhos (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 29175
   },
   "mikiri": {
    "arquivo": "mikiri.mp3",
@@ -19909,6 +20215,23 @@
    ],
    "bytes": 32707
   },
+  "psiquico-mewtwo": {
+   "arquivo": "psiquico-mewtwo.mp3",
+   "descricao": "Mewtwo: Psíquico",
+   "versoes": [
+    0.0,
+    1.98,
+    4.0289,
+    5.9446
+   ],
+   "duracoes": [
+    1.9,
+    1.9689,
+    1.8357,
+    1.9289
+   ],
+   "bytes": 40075
+  },
   "puf-das-varinhas": {
    "arquivo": "puf-das-varinhas.mp3",
    "descricao": "básico de Cosmo e Wanda: as varinhas e o puf",
@@ -21048,22 +21371,22 @@
    ],
    "bytes": 43517
   },
-  "regeneracao": {
-   "arquivo": "regeneracao.mp3",
-   "descricao": "família regeneracao",
+  "regeneracao-celular": {
+   "arquivo": "regeneracao-celular.mp3",
+   "descricao": "Cell: a regeneração",
    "versoes": [
     0.0,
-    1.48,
-    3.0108,
-    4.4434
+    1.6847,
+    3.4298,
+    5.0198
    ],
    "duracoes": [
-    1.4,
-    1.4508,
-    1.3527,
-    1.4213
+    1.6047,
+    1.6651,
+    1.51,
+    1.6257
    ],
-   "bytes": 46734
+   "bytes": 58650
   },
   "regeneracao-namekiana": {
    "arquivo": "regeneracao-namekiana.mp3",
@@ -21268,23 +21591,6 @@
     0.5076
    ],
    "bytes": 14257
-  },
-  "repulsao": {
-   "arquivo": "repulsao.mp3",
-   "descricao": "família repulsao",
-   "versoes": [
-    0.0,
-    1.18,
-    2.3999,
-    3.5427
-   ],
-   "duracoes": [
-    1.1,
-    1.1399,
-    1.0628,
-    1.1167
-   ],
-   "bytes": 45352
   },
   "repulsor-saida": {
    "arquivo": "repulsor-saida.mp3",
@@ -23564,6 +23870,23 @@
    ],
    "bytes": 76608
   },
+  "tempestade-mental": {
+   "arquivo": "tempestade-mental.mp3",
+   "descricao": "Mewtwo: a tempestade mental",
+   "versoes": [
+    0.0,
+    1.9688,
+    4.0048,
+    5.9314
+   ],
+   "duracoes": [
+    1.8888,
+    1.956,
+    1.8466,
+    1.939
+   ],
+   "bytes": 64322
+  },
   "tempestade-nebular": {
    "arquivo": "tempestade-nebular.mp3",
    "descricao": "Shun: a tempestade nebular",
@@ -24158,23 +24481,6 @@
     1.4213
    ],
    "bytes": 46189
-  },
-  "transformacao-v2": {
-   "arquivo": "transformacao-v2.mp3",
-   "descricao": "família transformacao v2",
-   "versoes": [
-    0.0,
-    1.71,
-    3.478,
-    5.1339
-   ],
-   "duracoes": [
-    1.63,
-    1.688,
-    1.5759,
-    1.6544
-   ],
-   "bytes": 63689
   },
   "transmutacao-estelar": {
    "arquivo": "transmutacao-estelar.mp3",

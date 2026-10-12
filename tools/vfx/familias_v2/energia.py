@@ -140,25 +140,6 @@ def pilar(T, t, rng):
     return G, H
 
 
-def transformacao(T, t, rng):
-    """Transformação: aura em chamas sobe em volta, anéis de poder se abrem e um estouro final."""
-    G, H = vazio(T)
-    env = apaga(t, 0.75, 1)
-    n = _subindo(T, 341, t, 0.05, 1.6)
-    corpo = np.hypot(T.U / 0.38, (T.V - 0.05) / 0.62)
-    aura = smooth(1.0 + 0.25 * n * smooth(-T.V, -0.3, 0.6) - corpo, -0.05, 0.15) * (1 - smooth(0.75 - corpo, 0, 0.2) * 0.6)
-    aura *= (0.7 + 0.3 * np.clip(n, -1, 1)) * janela(t, 0, 0.2)
-    aneis = sum(T.ring(0.2 + 0.7 * rel(t, k * 0.15, 0.5 + k * 0.15), 0.02, cy=0.4, squash=3.2) * pulso(t, k * 0.15, 0.5 + k * 0.15) for k in range(4))
-    estouro = T.gauss(0, 0, 0.28) * pulso(t, 0.5, 0.75) * 2 + T.ring(0.2 + 0.7 * rel(t, 0.5, 0.9), 0.04) * pulso(t, 0.5, 0.95) * 1.4
-    fa = []
-    for _ in range(26):
-        f = (rng.uniform(0, 1) + t * 1.4) % 1
-        fa.append((rng.uniform(-0.4, 0.4), 0.5 - f * 1.3, (1 - f) * rng.uniform(0.4, 1)))
-    G += (aura * 1.3 + T.splats(fa, 0.012)) * env + aneis * 1.2 + estouro
-    H += (aura * 0.5 + T.splats(fa, 0.01) * 0.7) * env + estouro
-    return G, H
-
-
 def atracao(T, t, rng):
     """Atração (Azul): tudo é puxado em espiral para um ponto, que se aperta e pulsa."""
     G, H = vazio(T)
@@ -176,19 +157,6 @@ def atracao(T, t, rng):
     ponto = T.gauss(0, 0, 0.08 + 0.02 * math.sin(t * 40)) * 2.6 + T.ring(0.13, 0.02) * 1.2
     G += (T.glow(riscos, 1, 1.1, 0.02) + ponto) * env
     H += (riscos * 0.6 + ponto) * env
-    return G, H
-
-
-def repulsao(T, t, rng):
-    """Repulsão (Vermelho): um ponto vermelho estoura para fora em ondas e espinhos de força."""
-    G, H = vazio(T)
-    tt = rel(t, 0.12, 1)
-    ponto = T.gauss(0, 0, 0.07) * (1 + 2 * rel(t, 0, 0.12)) * (t < 0.2) * 2
-    ondas = sum(T.ring(0.1 + 0.85 * ease_out(rel(t, 0.12 + k * 0.06, 0.8 + k * 0.06), 2.4), 0.04 - 0.01 * k) * pulso(t, 0.12 + k * 0.06, 0.85 + k * 0.06) for k in range(3)) * 1.5
-    espinhos = (np.abs(np.cos(T.ANG * 6)) ** 20) * np.exp(-((T.RAD - 0.3 - 0.5 * ease_out(tt, 2)) / 0.15) ** 2) * (1 - tt) * 1.8 * (t > 0.12)
-    flash = T.gauss(0, 0, 0.3) * some(t, 0.12, 0.35) * 3
-    G += ponto + ondas + espinhos + flash
-    H += ponto + ondas * 0.4 + espinhos * 0.6 + flash
     return G, H
 
 
@@ -243,9 +211,7 @@ REGISTRO = [
     ("supernova", supernova, GRANDE, "sol que explode", False),
     ("pulso_emp", pulso_emp, GRANDE, "pulso eletromagnético", False),
     ("pilar", pilar, GRANDE, "pilar de energia subindo", False),
-    ("transformacao", transformacao, GRANDE, "aura de transformação", False),
     ("atracao", atracao, GRANDE, "tudo puxado para um ponto", False),
-    ("repulsao", repulsao, GRANDE, "estouro para fora", False),
     ("dominio", dominio, GRANDE, "domínio de céu infinito", False),
     ("desintegrar", desintegrar, GRANDE, "desintegração em grãos", False),
 ]

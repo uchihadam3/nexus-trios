@@ -414,30 +414,12 @@ def pilar(rng, v):
     return reverb(x, 0.7, 0.3)
 
 
-def transformacao_v2(rng, v):
-    x = _z(1.8)
-    n = n_de(1.2)
-    t = np.arange(n) / SR
-    rugido = satura(passa(rosa(rng, n), 100, 1200, 2) * (0.6 + 0.4 * np.sin(2 * math.pi * 7 * t)), 2) * env(n, 0.1, 0.5, segura=0.4) * 0.7
-    poe(x, rugido + B.carga_grande(rng, v)[:n] * 0.5, 0)
-    poe(x, B.explosao(rng, v)[: n_de(0.6)] * 0.9, 1.0)
-    return x
-
-
 def atracao(rng, v):
     n = n_de(1.0)
     x = assobio(rng, n, 6000, 300, 0.5, 0.5) * env(n, 0.02, 0.6) * 0.8
     x += _corta(_tom(nota(76), nota(52), 1.0, 0.6, 0.18, 0.5), 1.0)
     poe(x, baque(n_de(0.3), 140, 60, 0.05, 0.3) * 0.5, 0.75)
     return reverb(x, 0.5, 0.25)
-
-
-def repulsao(rng, v):
-    x = _z(1.1)
-    poe(x, _tom(nota(84), nota(96), 0.12, 0.08, 0.25), 0)
-    poe(x, B.explosao(rng, v), 0.12, 1.0)
-    poe(x, assobio(rng, n_de(0.8), 300, 6000, 0.5, 0.5) * env(n_de(0.8), 0.005, 0.3) * 0.6, 0.12)
-    return x
 
 
 def dominio(rng, v):
@@ -769,16 +751,6 @@ def cura_em_area(rng, v):
         poe(x, modal(n_de(1.0), nota(m), rng=rng, **SINO) * env(n_de(1.0), 0.01, 0.6) * 0.12, k * 0.08)
     poe(x, assobio(rng, n_de(1.0), 1500, 5000, 0.8, 0.4) * env(n_de(1.0), 0.1, 0.5) * 0.25, 0)
     return reverb(x, 0.8, 0.4, 9000)
-
-
-def regeneracao(rng, v):
-    n = n_de(1.4)
-    t = np.arange(n) / SR
-    x = np.zeros(n)
-    for k in range(10):
-        poe(x, _brilho(rng, 0.3, nota(rng.choice([76, 79, 81, 84, 88])), 0.07, SINO), k * 0.12)
-    x += seno(np.full(n, nota(64)), n) * env(n, 0.2, 0.8, segura=0.3) * 0.06 * (0.7 + 0.3 * np.sin(2 * math.pi * 2 * t))
-    return reverb(x, 0.7, 0.35, 8000)
 
 
 def grito_de_guerra(rng, v):
@@ -1856,7 +1828,7 @@ _BAIXO = {"brasas-renascendo", "cura-em-area", "regeneracao", "grito-de-guerra",
           "bencao", "lanche", "purificacao", "enfraquecimento", "lentidao", "marca", "silencio", "medo", "hipnose",
           "encanto", "runas", "petalas", "regeneracao", "confusao", "estrela-invencivel", "disco", "flecha"}
 _ALTO = {"copia", "esquiva", "ultima-resistencia", "sono", "cegueira", "errou", "barreira-anula", "dissipar", "reflexo", "espinhos", "vampirismo", "provocar", "renascer", "ressurreicao", "soco-serio", "supernova", "kamehameha", "canhao-de-energia", "foguete", "tempestade", "punho-gigante", "pisao",
-         "martelo", "espadao", "buraco-negro", "transformacao-v2", "dragao", "dominio"}
+         "martelo", "espadao", "buraco-negro", "dragao", "dominio"}
 _ANTES = {"esfera-espiral-carga": "a esfera girando", "kamehameha-carga": "carga do Kamehameha",
           "kamehameha-feixe": "o feixe saindo", "marretada-giro": "a marreta subindo"}
 for _k, _d in _ANTES.items():
