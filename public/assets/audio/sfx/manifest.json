@@ -10950,6 +10950,23 @@
    ],
    "bytes": 71946
   },
+  "mu-asas-protetoras": {
+   "arquivo": "mu-asas-protetoras.mp3",
+   "descricao": "Ísis: as asas",
+   "versoes": [
+    0.0,
+    2.18,
+    4.4361,
+    6.5451
+   ],
+   "duracoes": [
+    2.1,
+    2.1761,
+    2.029,
+    2.132
+   ],
+   "bytes": 63844
+  },
   "mu-atras": {
    "arquivo": "mu-atras.mp3",
    "descricao": "Valak: atrás de você",
@@ -11510,6 +11527,40 @@
     1.6101
    ],
    "bytes": 55605
+  },
+  "mu-cheiro-de-sangue": {
+   "arquivo": "mu-cheiro-de-sangue.mp3",
+   "descricao": "Sekhmet: o sangue",
+   "versoes": [
+    0.0,
+    1.5685,
+    3.2992,
+    4.818
+   ],
+   "duracoes": [
+    1.4885,
+    1.6506,
+    1.4389,
+    1.5028
+   ],
+   "bytes": 56620
+  },
+  "mu-chifres-serrados": {
+   "arquivo": "mu-chifres-serrados.mp3",
+   "descricao": "Hellboy: os chifres serrados",
+   "versoes": [
+    0.0,
+    1.5176,
+    3.1707,
+    4.6715
+   ],
+   "duracoes": [
+    1.4376,
+    1.5731,
+    1.4207,
+    1.4655
+   ],
+   "bytes": 47750
   },
   "mu-choque-termico": {
    "arquivo": "mu-choque-termico.mp3",
@@ -12922,6 +12973,23 @@
    ],
    "bytes": 38936
   },
+  "mu-estica-jake": {
+   "arquivo": "mu-estica-jake.mp3",
+   "descricao": "Jake: estica",
+   "versoes": [
+    0.0,
+    1.4408,
+    2.9299,
+    4.3257
+   ],
+   "duracoes": [
+    1.3608,
+    1.4091,
+    1.3158,
+    1.3811
+   ],
+   "bytes": 33508
+  },
   "mu-estilo": {
    "arquivo": "mu-estilo.mp3",
    "descricao": "Dante: o estilo",
@@ -12973,6 +13041,23 @@
    ],
    "bytes": 71616
   },
+  "mu-exercito": {
+   "arquivo": "mu-exercito.mp3",
+   "descricao": "Rambo: o exército",
+   "versoes": [
+    0.0,
+    2.18,
+    4.4361,
+    6.5451
+   ],
+   "duracoes": [
+    2.1,
+    2.1761,
+    2.029,
+    2.132
+   ],
+   "bytes": 74831
+  },
   "mu-exorcismo": {
    "arquivo": "mu-exorcismo.mp3",
    "descricao": "Constantine: o exorcismo",
@@ -12989,6 +13074,23 @@
     2.0305
    ],
    "bytes": 65909
+  },
+  "mu-explosoes": {
+   "arquivo": "mu-explosoes.mp3",
+   "descricao": "Bakugo: as explosões",
+   "versoes": [
+    0.0,
+    2.08,
+    4.1154,
+    6.1278
+   ],
+   "duracoes": [
+    2.0,
+    1.9554,
+    1.9324,
+    1.924
+   ],
+   "bytes": 64657
   },
   "mu-exterminador": {
    "arquivo": "mu-exterminador.mp3",
@@ -13313,6 +13415,23 @@
    ],
    "bytes": 70756
   },
+  "mu-furia-oni": {
+   "arquivo": "mu-furia-oni.mp3",
+   "descricao": "Rem: a fúria",
+   "versoes": [
+    0.0,
+    2.0263,
+    4.122,
+    6.1627
+   ],
+   "duracoes": [
+    1.9463,
+    2.0157,
+    1.9607,
+    2.0584
+   ],
+   "bytes": 65303
+  },
   "mu-fus-ro-dah": {
    "arquivo": "mu-fus-ro-dah.mp3",
    "descricao": "Dovahkiin: Fus Ro Dah",
@@ -13363,6 +13482,23 @@
     2.132
    ],
    "bytes": 67685
+  },
+  "mu-futuro-medico": {
+   "arquivo": "mu-futuro-medico.mp3",
+   "descricao": "Leorio: o médico",
+   "versoes": [
+    0.0,
+    1.5282,
+    3.1156,
+    4.5965
+   ],
+   "duracoes": [
+    1.4482,
+    1.5074,
+    1.401,
+    1.4774
+   ],
+   "bytes": 48727
   },
   "mu-galo": {
    "arquivo": "mu-galo.mp3",
@@ -13772,6 +13908,23 @@
    ],
    "bytes": 65525
   },
+  "mu-implacavel": {
+   "arquivo": "mu-implacavel.mp3",
+   "descricao": "Jason: implacável",
+   "versoes": [
+    0.0,
+    2.0789,
+    4.2872,
+    6.353
+   ],
+   "duracoes": [
+    1.9989,
+    2.1283,
+    1.9858,
+    2.132
+   ],
+   "bytes": 76528
+  },
   "mu-imprevisivel": {
    "arquivo": "mu-imprevisivel.mp3",
    "descricao": "Arlequina: o martelão",
@@ -13958,6 +14111,23 @@
     2.335
    ],
    "bytes": 78638
+  },
+  "mu-jogador-solo": {
+   "arquivo": "mu-jogador-solo.mp3",
+   "descricao": "Kirito: o solo",
+   "versoes": [
+    0.0,
+    1.8344,
+    3.7262,
+    5.4877
+   ],
+   "duracoes": [
+    1.7544,
+    1.8118,
+    1.6815,
+    1.7921
+   ],
+   "bytes": 68373
   },
   "mu-joia": {
    "arquivo": "mu-joia.mp3",
@@ -14775,6 +14945,23 @@
    ],
    "bytes": 100213
   },
+  "mu-olho-de-horus": {
+   "arquivo": "mu-olho-de-horus.mp3",
+   "descricao": "Hórus: o olho",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 57174
+  },
   "mu-olhos-azuis": {
    "arquivo": "mu-olhos-azuis.mp3",
    "descricao": "Kaiba: o Dragão Branco",
@@ -14791,6 +14978,23 @@
     2.0305
    ],
    "bytes": 76757
+  },
+  "mu-omnitrix": {
+   "arquivo": "mu-omnitrix.mp3",
+   "descricao": "Ben 10: o Omnitrix",
+   "versoes": [
+    0.0,
+    1.9085,
+    3.8733,
+    5.7528
+   ],
+   "duracoes": [
+    1.8285,
+    1.8848,
+    1.7995,
+    1.7411
+   ],
+   "bytes": 70054
   },
   "mu-one-for-all": {
    "arquivo": "mu-one-for-all.mp3",
@@ -14825,6 +15029,23 @@
     2.0305
    ],
    "bytes": 65706
+  },
+  "mu-orgulho-youkai": {
+   "arquivo": "mu-orgulho-youkai.mp3",
+   "descricao": "Sesshomaru: o orgulho",
+   "versoes": [
+    0.0,
+    1.8218,
+    3.7573,
+    5.4988
+   ],
+   "duracoes": [
+    1.7418,
+    1.8555,
+    1.6615,
+    1.7798
+   ],
+   "bytes": 65980
   },
   "mu-outro-ghostface": {
    "arquivo": "mu-outro-ghostface.mp3",
@@ -15047,6 +15268,23 @@
    ],
    "bytes": 61869
   },
+  "mu-penny": {
+   "arquivo": "mu-penny.mp3",
+   "descricao": "Bugiganga: a Penny",
+   "versoes": [
+    0.0,
+    1.5266,
+    3.1046,
+    4.5833
+   ],
+   "duracoes": [
+    1.4466,
+    1.498,
+    1.3987,
+    1.4682
+   ],
+   "bytes": 54064
+  },
   "mu-perigosa": {
    "arquivo": "mu-perigosa.mp3",
    "descricao": "Gamora: os cortes",
@@ -15098,6 +15336,23 @@
    ],
    "bytes": 62516
   },
+  "mu-pista-gelo": {
+   "arquivo": "mu-pista-gelo.mp3",
+   "descricao": "Gelado: a pista",
+   "versoes": [
+    0.0,
+    1.6748,
+    3.4216,
+    5.0192
+   ],
+   "duracoes": [
+    1.5948,
+    1.6668,
+    1.5176,
+    1.6253
+   ],
+   "bytes": 84941
+  },
   "mu-planador": {
    "arquivo": "mu-planador.mp3",
    "descricao": "Aang: o ar",
@@ -15131,6 +15386,23 @@
     1.9289
    ],
    "bytes": 73528
+  },
+  "mu-plano-mestre": {
+   "arquivo": "mu-plano-mestre.mp3",
+   "descricao": "Megamente: o plano",
+   "versoes": [
+    0.0,
+    1.8294,
+    3.6778,
+    5.4157
+   ],
+   "duracoes": [
+    1.7494,
+    1.7684,
+    1.6579,
+    1.8085
+   ],
+   "bytes": 70330
   },
   "mu-plantas": {
    "arquivo": "mu-plantas.mp3",
@@ -15370,6 +15642,23 @@
    ],
    "bytes": 62944
   },
+  "mu-prodigio-instavel": {
+   "arquivo": "mu-prodigio-instavel.mp3",
+   "descricao": "Azula: o prodígio",
+   "versoes": [
+    0.0,
+    1.7145,
+    3.4439,
+    5.1132
+   ],
+   "duracoes": [
+    1.6345,
+    1.6494,
+    1.5893,
+    1.7223
+   ],
+   "bytes": 70350
+  },
   "mu-proximo": {
    "arquivo": "mu-proximo.mp3",
    "descricao": "Ezio: a lâmina oculta",
@@ -15454,6 +15743,23 @@
     2.0305
    ],
    "bytes": 74255
+  },
+  "mu-radiacao": {
+   "arquivo": "mu-radiacao.mp3",
+   "descricao": "Godzilla: a radiação",
+   "versoes": [
+    0.0,
+    2.48,
+    5.047,
+    7.4268
+   ],
+   "duracoes": [
+    2.4,
+    2.487,
+    2.2998,
+    2.4365
+   ],
+   "bytes": 116630
   },
   "mu-raikousen": {
    "arquivo": "mu-raikousen.mp3",
@@ -15608,6 +15914,23 @@
    ],
    "bytes": 114081
   },
+  "mu-reequipar": {
+   "arquivo": "mu-reequipar.mp3",
+   "descricao": "Erza: reequipar",
+   "versoes": [
+    0.0,
+    1.3981,
+    2.882,
+    4.2612
+   ],
+   "duracoes": [
+    1.3181,
+    1.4039,
+    1.2992,
+    1.4332
+   ],
+   "bytes": 56800
+  },
   "mu-refeicao": {
    "arquivo": "mu-refeicao.mp3",
    "descricao": "Sanji: a refeição",
@@ -15743,6 +16066,23 @@
     1.9544
    ],
    "bytes": 113081
+  },
+  "mu-rumble-ball": {
+   "arquivo": "mu-rumble-ball.mp3",
+   "descricao": "Chopper: a Rumble Ball",
+   "versoes": [
+    0.0,
+    1.6029,
+    3.259,
+    4.7628
+   ],
+   "duracoes": [
+    1.5229,
+    1.5761,
+    1.4237,
+    1.4788
+   ],
+   "bytes": 47025
   },
   "mu-sabedoria": {
    "arquivo": "mu-sabedoria.mp3",
@@ -15930,6 +16270,23 @@
     1.6654
    ],
    "bytes": 55217
+  },
+  "mu-sempre-junto": {
+   "arquivo": "mu-sempre-junto.mp3",
+   "descricao": "Robin: sempre junto",
+   "versoes": [
+    0.0,
+    1.5112,
+    3.0731,
+    4.5368
+   ],
+   "duracoes": [
+    1.4312,
+    1.4818,
+    1.3837,
+    1.4525
+   ],
+   "bytes": 49536
   },
   "mu-sentido-radar": {
    "arquivo": "mu-sentido-radar.mp3",

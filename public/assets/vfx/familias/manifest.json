@@ -9379,6 +9379,20 @@
   "laco": false,
   "bytes": 33808
  },
+ "mu_asas_protetoras": {
+  "descricao": "Ísis · as asas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 81322
+ },
  "mu_atras": {
   "descricao": "Valak · a silhueta atrás de você",
   "quadros": 12,
@@ -9840,6 +9854,34 @@
   ],
   "laco": false,
   "bytes": 15254
+ },
+ "mu_cheiro_de_sangue": {
+  "descricao": "Sekhmet · o sangue e as garras",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 23520
+ },
+ "mu_chifres_serrados": {
+  "descricao": "Hellboy · os chifres e o punho",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 62638
  },
  "mu_choque_termico": {
   "descricao": "Todoroki · gelo e fogo",
@@ -11003,6 +11045,20 @@
   "laco": false,
   "bytes": 39568
  },
+ "mu_estica_jake": {
+  "descricao": "Jake · estica e protege",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 32394
+ },
  "mu_estilo": {
   "descricao": "Dante · os disparos e o selo de estilo",
   "quadros": 12,
@@ -11045,6 +11101,20 @@
   "laco": false,
   "bytes": 23330
  },
+ "mu_exercito": {
+  "descricao": "Rambo · as balas e a flecha",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 16516
+ },
  "mu_exorcismo": {
   "descricao": "Constantine · o pentagrama e a fumaça",
   "quadros": 12,
@@ -11058,6 +11128,20 @@
   ],
   "laco": false,
   "bytes": 56622
+ },
+ "mu_explosoes": {
+  "descricao": "Bakugo · as explosões crescentes",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 44264
  },
  "mu_exterminador": {
   "descricao": "T-800 · o olho vermelho e a mira",
@@ -11325,6 +11409,20 @@
   "laco": false,
   "bytes": 75862
  },
+ "mu_furia_oni": {
+  "descricao": "Rem · o chifre e a bola de ferro",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 57018
+ },
  "mu_fus_ro_dah": {
   "descricao": "Dovahkiin · Fus Ro Dah",
   "quadros": 12,
@@ -11366,6 +11464,20 @@
   ],
   "laco": false,
   "bytes": 23526
+ },
+ "mu_futuro_medico": {
+  "descricao": "Leorio · a maleta e a cruz",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 19042
  },
  "mu_galo": {
   "descricao": "Peter · a briga com o galo",
@@ -11703,6 +11815,20 @@
   "laco": false,
   "bytes": 33146
  },
+ "mu_implacavel": {
+  "descricao": "Jason · a máscara e o facão",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 16700
+ },
  "mu_imprevisivel": {
   "descricao": "Arlequina · o martelão e os corações",
   "quadros": 12,
@@ -11856,6 +11982,20 @@
   ],
   "laco": false,
   "bytes": 116310
+ },
+ "mu_jogador_solo": {
+  "descricao": "Kirito · as duas espadas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 43222
  },
  "mu_joia": {
   "descricao": "Thanos · a Joia do Infinito encaixando",
@@ -12529,6 +12669,20 @@
   "laco": false,
   "bytes": 49632
  },
+ "mu_olho_de_horus": {
+  "descricao": "Hórus · o olho e a mira",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 13464
+ },
  "mu_olhos_azuis": {
   "descricao": "Kaiba · a carta do Dragão Branco e o raio",
   "quadros": 12,
@@ -12542,6 +12696,20 @@
   ],
   "laco": false,
   "bytes": 36876
+ },
+ "mu_omnitrix": {
+  "descricao": "Ben 10 · o Omnitrix",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 43194
  },
  "mu_one_for_all": {
   "descricao": "Deku · os raios verdes do One For All",
@@ -12570,6 +12738,20 @@
   ],
   "laco": false,
   "bytes": 53524
+ },
+ "mu_orgulho_youkai": {
+  "descricao": "Sesshomaru · a lua e o chicote",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 55246
  },
  "mu_outro_ghostface": {
   "descricao": "Ghostface · as duas máscaras e as facas",
@@ -12753,6 +12935,20 @@
   "laco": false,
   "bytes": 19884
  },
+ "mu_penny": {
+  "descricao": "Bugiganga · o livro da Penny",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 12264
+ },
  "mu_perigosa": {
   "descricao": "Gamora · os cortes da espada",
   "quadros": 12,
@@ -12795,6 +12991,20 @@
   "laco": false,
   "bytes": 17162
  },
+ "mu_pista_gelo": {
+  "descricao": "Gelado · a pista de gelo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 25108
+ },
  "mu_planador": {
   "descricao": "Aang · as espirais de ar e o planador",
   "quadros": 12,
@@ -12822,6 +13032,20 @@
   ],
   "laco": false,
   "bytes": 34454
+ },
+ "mu_plano_mestre": {
+  "descricao": "Megamente · a lousa do plano",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 40558
  },
  "mu_plantas": {
   "descricao": "Hera Venenosa · as vinhas e os esporos",
@@ -13019,6 +13243,20 @@
   "laco": false,
   "bytes": 21438
  },
+ "mu_prodigio_instavel": {
+  "descricao": "Azula · o fogo azul instável",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 30350
+ },
  "mu_proximo": {
   "descricao": "Ezio · a lâmina oculta e a insígnia",
   "quadros": 12,
@@ -13088,6 +13326,20 @@
   ],
   "laco": false,
   "bytes": 30900
+ },
+ "mu_radiacao": {
+  "descricao": "Godzilla · as placas e o raio",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 43042
  },
  "mu_raikousen": {
   "descricao": "Zero · o sabre e o Raikousen",
@@ -13215,6 +13467,20 @@
   "laco": false,
   "bytes": 18914
  },
+ "mu_reequipar": {
+  "descricao": "Erza · as armaduras e as espadas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 56936
+ },
  "mu_refeicao": {
   "descricao": "Sanji · o prato servido e a perna em fogo",
   "quadros": 12,
@@ -13326,6 +13592,20 @@
   ],
   "laco": false,
   "bytes": 84388
+ },
+ "mu_rumble_ball": {
+  "descricao": "Chopper · a Rumble Ball",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 23336
  },
  "mu_sabedoria": {
   "descricao": "Atena · a coruja e os ramos de oliveira",
@@ -13480,6 +13760,20 @@
   ],
   "laco": false,
   "bytes": 19300
+ },
+ "mu_sempre_junto": {
+  "descricao": "Robin · o bastão e o R",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 20292
  },
  "mu_sentido_radar": {
   "descricao": "Demolidor · o radar",
