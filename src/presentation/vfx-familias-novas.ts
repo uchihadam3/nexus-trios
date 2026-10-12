@@ -551,6 +551,19 @@ export const FAMILIAS_NOVAS = {
   za_warudo: n({ nome: 'O Mundo', grupo: 'especial', preparo: 'za_warudo_preparo', impacto: 'za_warudo', escala: 2.6, tempo: 1.0, cor: '#ffc84a', tinta: 'fixa' }),
   reflexo_de_dano: n({ nome: 'Reflexo de dano', grupo: 'apoio', impacto: 'reflexo_de_dano', escala: 2.3, tempo: 1.0, cor: '#ffd84a', tinta: 'fixa' }),
   experiencia_dourada: n({ nome: 'Experiência dourada', grupo: 'apoio', preparo: 'ouro_preparo', impacto: 'experiencia_dourada', escala: 2.5, tempo: 1.0, cor: '#ffe07a', tinta: 'fixa' }),
+  // rodada 10: Denji, Power, Makima, Frieren e Anya (tools/vfx/familias_v2/rodada10.py)
+  puxar_a_corda: n({ nome: 'Puxar a corda', grupo: 'corte', impacto: 'puxar_a_corda', escala: 2.3, tempo: 1.0, cor: '#ff8a5a', tinta: 'fixa' }),
+  frenesi_de_sangue: n({ nome: 'Frenesi de sangue', grupo: 'corte', impacto: 'frenesi_de_sangue', escala: 2.4, tempo: 1.0, cor: '#ff5a4a', tinta: 'fixa' }),
+  lanca_de_sangue: n({ nome: 'Lança de sangue', grupo: 'projétil', impacto: 'lanca_de_sangue', escala: 2.3, tempo: 1.0, cor: '#ff3a4a', tinta: 'fixa' }),
+  premio_de_sangue: n({ nome: 'Prêmio de sangue', grupo: 'especial', preparo: 'power_preparo', impacto: 'premio_de_sangue', escala: 2.4, tempo: 1.0, cor: '#ff4a5a', tinta: 'fixa' }),
+  olhar_de_comando: n({ nome: 'Olhar de comando', grupo: 'magia', impacto: 'olhar_de_comando', escala: 2.3, tempo: 1.0, cor: '#ffd86a', tinta: 'fixa' }),
+  corrente_de_obediencia: n({ nome: 'Corrente de obediência', grupo: 'especial', impacto: 'corrente_de_obediencia', escala: 2.3, tempo: 1.0, cor: '#e8a0a0', tinta: 'fixa' }),
+  controle_total: n({ nome: 'Controle total', grupo: 'magia', impacto: 'controle_total', escala: 2.4, tempo: 1.0, cor: '#ff7a8a', tinta: 'fixa' }),
+  analise_de_mana: n({ nome: 'Análise de mana', grupo: 'magia', impacto: 'analise_de_mana', escala: 2.3, tempo: 1.0, cor: '#a8c8ff', tinta: 'fixa' }),
+  magia_preparada: n({ nome: 'Magia preparada', grupo: 'magia', preparo: 'frieren_preparo', impacto: 'magia_preparada', escala: 2.4, tempo: 1.0, cor: '#c8d8ff', tinta: 'fixa' }),
+  leitura_mental: n({ nome: 'Leitura mental', grupo: 'magia', impacto: 'leitura_mental', escala: 2.3, tempo: 1.0, cor: '#ffa8d8', tinta: 'fixa' }),
+  alerta_urgente: n({ nome: 'Alerta urgente', grupo: 'apoio', impacto: 'alerta_urgente', escala: 2.3, tempo: 1.0, cor: '#ffc8e0', tinta: 'fixa' }),
+  plano_secreto: n({ nome: 'Plano secreto', grupo: 'especial', impacto: 'plano_secreto', escala: 2.3, tempo: 1.0, cor: '#ff8aa8', tinta: 'fixa' }),
   mugen_tsukuyomi: n({ nome: 'Mugen Tsukuyomi', grupo: 'especial', impacto: 'mugen_tsukuyomi', noCentro: true, escala: 2.6, tempo: 1.0, cor: '#ff4a5a', tinta: 'fixa' }),
 } as const satisfies Record<string, Familia>;
 

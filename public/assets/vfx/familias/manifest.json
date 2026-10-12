@@ -139,6 +139,20 @@
   "laco": false,
   "bytes": 41122
  },
+ "alerta_urgente": {
+  "descricao": "Anya · os ! pulando e a bolha-escudo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 35446
+ },
  "amaterasu": {
   "descricao": "Sasuke · as chamas negras do Amaterasu",
   "quadros": 12,
@@ -152,6 +166,20 @@
   ],
   "laco": false,
   "bytes": 79460
+ },
+ "analise_de_mana": {
+  "descricao": "Frieren · o círculo, o feixe e a chama de mana",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 31180
  },
  "aparar_e_cortar": {
   "descricao": "Sekiro: faísca de aparar e contra-corte",
@@ -1749,6 +1777,20 @@
   "laco": false,
   "bytes": 70372
  },
+ "controle_total": {
+  "descricao": "Makima · o bang e a pressão que esmaga",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 24288
+ },
  "copia": {
   "descricao": "linhas de leitura, vírgulas girando e a forma copiada piscando",
   "quadros": 12,
@@ -1818,6 +1860,20 @@
   ],
   "laco": false,
   "bytes": 49814
+ },
+ "corrente_de_obediencia": {
+  "descricao": "Makima · a guia e a coleira que fecha",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 12576
  },
  "corrente_do_julgamento": {
   "descricao": "Kurapika · a ponta no coração e o anel",
@@ -3681,6 +3737,34 @@
   "laco": false,
   "bytes": 75270
  },
+ "frenesi_de_sangue": {
+  "descricao": "Denji · três motosserras cortando e o sangue",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 43904
+ },
+ "frieren_preparo": {
+  "descricao": "Frieren · os círculos empilhados (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 11550
+ },
  "frigideira": {
   "descricao": "Frigideira: acerta de lado com um BONG, treme em ondas e estrelinhas",
   "quadros": 12,
@@ -5235,6 +5319,20 @@
   "laco": false,
   "bytes": 22058
  },
+ "lanca_de_sangue": {
+  "descricao": "Power · as gotas viram a lança e cravam",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 16450
+ },
  "lanche": {
   "descricao": "mordida, vapor e coração",
   "quadros": 12,
@@ -5304,6 +5402,20 @@
   ],
   "laco": false,
   "bytes": 13928
+ },
+ "leitura_mental": {
+  "descricao": "Anya · as ondas, o balão com ? e as estrelinhas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 26768
  },
  "lentidao": {
   "descricao": "ampulheta",
@@ -5528,6 +5640,20 @@
   ],
   "laco": false,
   "bytes": 126240
+ },
+ "magia_preparada": {
+  "descricao": "Frieren · os círculos no ar e os feixes juntos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 46446
  },
  "mais_forte_ainda": {
   "descricao": "Hulk · Mais forte ainda: o gancho de baixo para cima",
@@ -6173,6 +6299,20 @@
   "laco": false,
   "bytes": 23636
  },
+ "olhar_de_comando": {
+  "descricao": "Makima · o olho de anéis e a ordem",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 32516
+ },
  "olho": {
   "descricao": "olho gigante se abrindo",
   "quadros": 12,
@@ -6579,6 +6719,20 @@
   "laco": false,
   "bytes": 28200
  },
+ "plano_secreto": {
+  "descricao": "Anya · o plano tracejado e o carimbo de X",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 21032
+ },
  "plasma_faixa": {
   "descricao": "Aiolia · os raios do Relâmpago de Plasma (faixa)",
   "quadros": 12,
@@ -6663,6 +6817,20 @@
   "laco": false,
   "bytes": 129142
  },
+ "power_preparo": {
+  "descricao": "Power · o sangue girando e os chifres (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 16144
+ },
  "praga_da_carne": {
   "descricao": "Arthas · a névoa da peste com caveiras e gelo",
   "quadros": 12,
@@ -6704,6 +6872,20 @@
   ],
   "laco": false,
   "bytes": 21080
+ },
+ "premio_de_sangue": {
+  "descricao": "Power · a coroa de espinhos de sangue",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 47232
  },
  "presas_rasgantes": {
   "descricao": "Inosuke · as duas lâminas lascadas em X",
@@ -6942,6 +7124,20 @@
   ],
   "laco": false,
   "bytes": 60826
+ },
+ "puxar_a_corda": {
+  "descricao": "Denji · a cordinha, a fumaça e a serra saltando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 35298
  },
  "quarta_parede": {
   "descricao": "Deadpool · o quadro do gibi quebrando",
