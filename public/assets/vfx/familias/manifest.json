@@ -559,6 +559,20 @@
   "laco": false,
   "bytes": 29850
  },
+ "avanco_brutal": {
+  "descricao": "Doom Slayer · a investida e o soco brutal",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 29538
+ },
  "avante": {
   "descricao": "Capitão América · a estrela e o vento do Avante",
   "quadros": 12,
@@ -1034,6 +1048,20 @@
   ],
   "laco": false,
   "bytes": 33230
+ },
+ "blindagem_de_combate": {
+  "descricao": "Doom Slayer · as placas da armadura encaixando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 16606
  },
  "bloco_de_gelo": {
   "descricao": "bloco de gelo prendendo",
@@ -1594,6 +1622,20 @@
   ],
   "laco": true,
   "bytes": 26386
+ },
+ "camuflagem": {
+  "descricao": "Snake · a caixa, a camuflagem e o tiro",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 4820
  },
  "canhao_de_braco": {
   "descricao": "Samus: bola de plasma do canhão, explosão pequena e anel (+x)",
@@ -2883,6 +2925,20 @@
   "laco": false,
   "bytes": 108900
  },
+ "corte_em_sequencia": {
+  "descricao": "Raiden · os cortes em sequência",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 19404
+ },
  "corte_final": {
   "descricao": "Trunks · o corte vertical gigante",
   "quadros": 12,
@@ -3611,6 +3667,20 @@
   "laco": false,
   "bytes": 75780
  },
+ "doomslayer_preparo": {
+  "descricao": "Doom Slayer · o punho em chamas e as runas (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 16976
+ },
  "dragao": {
   "descricao": "dragão serpenteando",
   "quadros": 12,
@@ -3890,6 +3960,20 @@
   ],
   "laco": false,
   "bytes": 74492
+ },
+ "escudo_de_energia": {
+  "descricao": "Master Chief · a bolha dourada de hexágonos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 51062
  },
  "escudo_de_vontade": {
   "descricao": "Lanterna Verde · o construto de escudo com o símbolo",
@@ -4885,6 +4969,20 @@
   "laco": false,
   "bytes": 126480
  },
+ "faca_de_combate": {
+  "descricao": "Leon · os cortes em X e o Preparo quebrando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 13538
+ },
  "facada_de_myers": {
   "descricao": "Básico do Myers: a faca erguida",
   "quadros": 12,
@@ -5374,6 +5472,20 @@
   ],
   "laco": false,
   "bytes": 44244
+ },
+ "fogo_de_supressao": {
+  "descricao": "Master Chief · a rajada do fuzil e as setas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 8672
  },
  "fogo_no_peito": {
   "descricao": "Charizard · o fogo juntando na boca no Preparo (laço)",
@@ -7811,6 +7923,20 @@
   "laco": false,
   "bytes": 44346
  },
+ "leon_preparo": {
+  "descricao": "Leon · a faca sacada (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 7100
+ },
  "leque_de_aco": {
   "descricao": "Básico da Kitana: o leque que vai e volta",
   "quadros": 12,
@@ -8483,6 +8609,20 @@
   "laco": false,
   "bytes": 11512
  },
+ "masterchief_preparo": {
+  "descricao": "Master Chief · o escudo enchendo (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 17720
+ },
  "matadora_guts": {
   "descricao": "Guts · o arco pesado da Matadora de Dragões",
   "quadros": 12,
@@ -8650,6 +8790,20 @@
   ],
   "laco": true,
   "bytes": 58114
+ },
+ "mira_firme": {
+  "descricao": "Leon · o laser e a mira travando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 12508
  },
  "mira_fria": {
   "descricao": "Justiceiro · a luneta trava e a caveira",
@@ -9168,6 +9322,20 @@
   ],
   "laco": false,
   "bytes": 40184
+ },
+ "onda_sismica": {
+  "descricao": "Doom Slayer · as rachaduras, o fogo e as pedras",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 36870
  },
  "orbe": {
   "descricao": "esfera de energia em viagem (+x)",
@@ -9743,6 +9911,20 @@
   "laco": false,
   "bytes": 51178
  },
+ "posicao_firme": {
+  "descricao": "Master Chief · o pisão e a onda de choque",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 29794
+ },
  "pow_cartoon": {
   "descricao": "balão POW de quadrinho",
   "quadros": 12,
@@ -10288,6 +10470,20 @@
   ],
   "laco": false,
   "bytes": 85794
+ },
+ "raiden_preparo": {
+  "descricao": "Raiden · o Modo lâmina (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 13618
  },
  "raikiri_impacto": {
   "descricao": "Kakashi · Raikiri: a mão de raio atravessa o rival",
@@ -12893,6 +13089,20 @@
   "laco": true,
   "bytes": 7284
  },
+ "tiro_de_flanco": {
+  "descricao": "Snake · a mira laser e o tiro silenciado",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 11650
+ },
  "tiro_de_john_wick": {
   "descricao": "Básico do John Wick: o double tap e o terceiro",
   "quadros": 12,
@@ -12934,6 +13144,20 @@
   ],
   "laco": false,
   "bytes": 21264
+ },
+ "tiro_na_cabeca": {
+  "descricao": "Leon · o tiro na cabeça e o rival zonzo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 12126
  },
  "tiro_nervoso": {
   "descricao": "Básico do Morty: o tiro que erra e o de raspão",
@@ -13872,6 +14096,20 @@
   ],
   "laco": true,
   "bytes": 15912
+ },
+ "zandatsu": {
+  "descricao": "Raiden · o plano do corte e a explosão elétrica",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 50004
  },
  "zelda_preparo": {
   "descricao": "Zelda · o arco de luz e a flecha (Preparo, laço)",
