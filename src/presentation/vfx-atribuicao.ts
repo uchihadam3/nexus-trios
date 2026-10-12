@@ -98,6 +98,12 @@ const T: Record<string, string> = {
   capitaoplaneta: 'poder_dos_aneis forca_da_natureza o_poder_e_de_voces', bugiganga: 'braco_extensivel rajada_de_ar vai_vai_bugiganga', dannyphantom: 'raio_fantasma intangibilidade lamento_fantasma',
   coragem: 'grito_de_pavor correr_para_o_perigo bencao',
   mrfreeze: 'pistola_de_gelo armadura_de_gelo zero_absoluto_frio',
+  poisonivy: 'beijo_venenoso raizes_estranguladoras jardim_toxico',
+  iceman: 'rajada_congelante muralha_de_gelo era_glacial',
+  gengar: 'hipnose_gengar bola_sombria comedor_de_sonhos',
+  tenshinhan: 'taiyoken_tenshinhan golpe_de_quatro_bracos kikoho',
+  deidara: 'aranhas_de_argila passaro_de_argila c4_karura',
+  violet: 'campo_de_forca invisibilidade_violeta esfera_de_forca',
 };
 
 export const FAMILIA_DA_HABILIDADE: Record<string, VfxFamily> = Object.fromEntries(

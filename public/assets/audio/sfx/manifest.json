@@ -563,6 +563,23 @@
    ],
    "bytes": 58826
   },
+  "aranhas-de-argila": {
+   "arquivo": "aranhas-de-argila.mp3",
+   "descricao": "Deidara: as aranhas de argila",
+   "versoes": [
+    0.0,
+    1.2325,
+    2.5657,
+    3.8129
+   ],
+   "duracoes": [
+    1.1525,
+    1.2532,
+    1.1672,
+    1.2284
+   ],
+   "bytes": 65944
+  },
   "arco-recurvo": {
    "arquivo": "arco-recurvo.mp3",
    "descricao": "Lara: o arco recurvo",
@@ -1634,6 +1651,23 @@
    ],
    "bytes": 45615
   },
+  "beijo-venenoso": {
+   "arquivo": "beijo-venenoso.mp3",
+   "descricao": "Hera Venenosa: o beijo venenoso",
+   "versoes": [
+    0.0,
+    1.5655,
+    3.2035,
+    4.7191
+   ],
+   "duracoes": [
+    1.4855,
+    1.558,
+    1.4356,
+    1.5076
+   ],
+   "bytes": 50938
+  },
   "ben10-preparo": {
    "arquivo": "ben10-preparo.mp3",
    "descricao": "Ben 10: o Omnitrix (Preparo)",
@@ -2007,6 +2041,23 @@
     1.0152
    ],
    "bytes": 36985
+  },
+  "bola-sombria": {
+   "arquivo": "bola-sombria.mp3",
+   "descricao": "Gengar: a bola sombria",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 64681
   },
   "bolhas": {
    "arquivo": "bolhas.mp3",
@@ -2399,6 +2450,23 @@
    ],
    "bytes": 43476
   },
+  "c4-karura": {
+   "arquivo": "c4-karura.mp3",
+   "descricao": "Deidara: C4 Karura",
+   "versoes": [
+    0.0,
+    2.2817,
+    4.622,
+    6.8169
+   ],
+   "duracoes": [
+    2.2017,
+    2.2602,
+    2.1149,
+    2.3537
+   ],
+   "bytes": 79141
+  },
   "caca-preparo": {
    "arquivo": "caca-preparo.mp3",
    "descricao": "Blade: a glaive girando (antes do golpe)",
@@ -2534,6 +2602,23 @@
     1.4244
    ],
    "bytes": 61244
+  },
+  "campo-de-forca": {
+   "arquivo": "campo-de-forca.mp3",
+   "descricao": "Violeta: o campo de força",
+   "versoes": [
+    0.0,
+    1.8075,
+    3.6511,
+    5.3781
+   ],
+   "duracoes": [
+    1.7275,
+    1.7636,
+    1.647,
+    1.7554
+   ],
+   "bytes": 51325
   },
   "campo-incendiado": {
    "arquivo": "campo-incendiado.mp3",
@@ -3997,6 +4082,23 @@
    ],
    "bytes": 44968
   },
+  "comedor-de-sonhos": {
+   "arquivo": "comedor-de-sonhos.mp3",
+   "descricao": "Gengar: o comedor de sonhos",
+   "versoes": [
+    0.0,
+    2.28,
+    4.6398,
+    6.8454
+   ],
+   "duracoes": [
+    2.2,
+    2.2798,
+    2.1256,
+    2.2335
+   ],
+   "bytes": 69561
+  },
   "cometa-de-pegaso": {
    "arquivo": "cometa-de-pegaso.mp3",
    "descricao": "Seiya: o Cometa de Pégaso",
@@ -5051,6 +5153,23 @@
    ],
    "bytes": 40305
   },
+  "deidara-preparo": {
+   "arquivo": "deidara-preparo.mp3",
+   "descricao": "Deidara: a argila sendo moldada (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 54596
+  },
   "demolidor-preparo": {
    "arquivo": "demolidor-preparo.mp3",
    "descricao": "Demolidor: o radar e os corações (antes do golpe)",
@@ -6037,6 +6156,23 @@
    ],
    "bytes": 23221
   },
+  "era-glacial": {
+   "arquivo": "era-glacial.mp3",
+   "descricao": "Homem de Gelo: a era glacial",
+   "versoes": [
+    0.0,
+    2.2859,
+    4.7009,
+    6.9999
+   ],
+   "duracoes": [
+    2.2059,
+    2.3349,
+    2.219,
+    2.2464
+   ],
+   "bytes": 77900
+  },
   "eraser-cannon": {
    "arquivo": "eraser-cannon.mp3",
    "descricao": "Broly: Eraser Cannon",
@@ -6393,6 +6529,23 @@
     2.0305
    ],
    "bytes": 61021
+  },
+  "esfera-de-forca": {
+   "arquivo": "esfera-de-forca.mp3",
+   "descricao": "Violeta: a esfera de força",
+   "versoes": [
+    0.0,
+    1.6808,
+    3.3589,
+    4.9311
+   ],
+   "duracoes": [
+    1.6008,
+    1.5981,
+    1.4922,
+    1.5001
+   ],
+   "bytes": 47046
   },
   "esfera-espiral": {
    "arquivo": "esfera-espiral.mp3",
@@ -9216,6 +9369,23 @@
    ],
    "bytes": 63114
   },
+  "gengar-preparo": {
+   "arquivo": "gengar-preparo.mp3",
+   "descricao": "Gengar: a risadinha na sombra (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 42139
+  },
   "genjutsu-sasuke": {
    "arquivo": "genjutsu-sasuke.mp3",
    "descricao": "Genjutsu: o mundo se torcendo",
@@ -9504,6 +9674,23 @@
     1.2644
    ],
    "bytes": 49566
+  },
+  "golpe-de-quatro-bracos": {
+   "arquivo": "golpe-de-quatro-bracos.mp3",
+   "descricao": "Tenshinhan: o golpe de quatro braços",
+   "versoes": [
+    0.0,
+    1.5073,
+    3.0473,
+    4.4907
+   ],
+   "duracoes": [
+    1.4273,
+    1.4601,
+    1.3634,
+    1.4311
+   ],
+   "bytes": 43252
   },
   "golpe-do-espiao": {
    "arquivo": "golpe-do-espiao.mp3",
@@ -10100,6 +10287,23 @@
    ],
    "bytes": 73270
   },
+  "hera-preparo": {
+   "arquivo": "hera-preparo.mp3",
+   "descricao": "Hera Venenosa: a flor abrindo (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 64754
+  },
   "hex-de-probabilidade": {
    "arquivo": "hex-de-probabilidade.mp3",
    "descricao": "Feiticeira: os fios, o redemoinho e o sinal",
@@ -10168,6 +10372,23 @@
    ],
    "bytes": 61739
   },
+  "hipnose-gengar": {
+   "arquivo": "hipnose-gengar.mp3",
+   "descricao": "Gengar: a hipnose",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 54667
+  },
   "hiraishin": {
    "arquivo": "hiraishin.mp3",
    "descricao": "Minato: Hiraishin",
@@ -10235,6 +10456,23 @@
     2.1067
    ],
    "bytes": 70868
+  },
+  "iceman-preparo": {
+   "arquivo": "iceman-preparo.mp3",
+   "descricao": "Homem de Gelo: o corpo virando gelo (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 75252
   },
   "ideia-terrivel": {
    "arquivo": "ideia-terrivel.mp3",
@@ -10814,6 +11052,23 @@
    ],
    "bytes": 71292
   },
+  "invisibilidade-violeta": {
+   "arquivo": "invisibilidade-violeta.mp3",
+   "descricao": "Violeta: a invisibilidade",
+   "versoes": [
+    0.0,
+    1.4376,
+    2.9451,
+    4.3839
+   ],
+   "duracoes": [
+    1.3576,
+    1.4275,
+    1.3588,
+    1.4977
+   ],
+   "bytes": 64820
+  },
   "invocacao": {
    "arquivo": "invocacao.mp3",
    "descricao": "família invocacao",
@@ -11034,6 +11289,23 @@
     1.8274
    ],
    "bytes": 95994
+  },
+  "jardim-toxico": {
+   "arquivo": "jardim-toxico.mp3",
+   "descricao": "Hera Venenosa: o jardim tóxico",
+   "versoes": [
+    0.0,
+    1.9724,
+    3.9498,
+    5.848
+   ],
+   "duracoes": [
+    1.8924,
+    1.8974,
+    1.8183,
+    1.9267
+   ],
+   "bytes": 63022
   },
   "jato-criogenico": {
    "arquivo": "jato-criogenico.mp3",
@@ -11493,6 +11765,23 @@
     1.5624
    ],
    "bytes": 68105
+  },
+  "kikoho": {
+   "arquivo": "kikoho.mp3",
+   "descricao": "Tenshinhan: Kikoho",
+   "versoes": [
+    0.0,
+    2.48,
+    5.0256,
+    7.4244
+   ],
+   "duracoes": [
+    2.4,
+    2.4656,
+    2.3188,
+    2.4139
+   ],
+   "bytes": 78664
   },
   "kikosho": {
    "arquivo": "kikosho.mp3",
@@ -20759,6 +21048,23 @@
    ],
    "bytes": 51645
   },
+  "muralha-de-gelo": {
+   "arquivo": "muralha-de-gelo.mp3",
+   "descricao": "Homem de Gelo: a muralha de gelo",
+   "versoes": [
+    0.0,
+    2.08,
+    4.14,
+    5.7822
+   ],
+   "duracoes": [
+    2.0,
+    1.98,
+    1.5622,
+    2.0274
+   ],
+   "bytes": 62372
+  },
   "muralha-de-metal": {
    "arquivo": "muralha-de-metal.mp3",
    "descricao": "Muralha de metal: as vigas empilhando",
@@ -21387,6 +21693,23 @@
     1.4952
    ],
    "bytes": 61784
+  },
+  "passaro-de-argila": {
+   "arquivo": "passaro-de-argila.mp3",
+   "descricao": "Deidara: o pássaro de argila",
+   "versoes": [
+    0.0,
+    2.28,
+    4.6398,
+    6.8454
+   ],
+   "duracoes": [
+    2.2,
+    2.2798,
+    2.1256,
+    2.2335
+   ],
+   "bytes": 80585
   },
   "passo-lateral": {
    "arquivo": "passo-lateral.mp3",
@@ -23530,6 +23853,23 @@
    ],
    "bytes": 54751
   },
+  "raizes-estranguladoras": {
+   "arquivo": "raizes-estranguladoras.mp3",
+   "descricao": "Hera Venenosa: as raízes estranguladoras",
+   "versoes": [
+    0.0,
+    1.4413,
+    2.9128,
+    4.3058
+   ],
+   "duracoes": [
+    1.3613,
+    1.3915,
+    1.313,
+    1.3683
+   ],
+   "bytes": 51254
+  },
   "rajada-binaria": {
    "arquivo": "rajada-binaria.mp3",
    "descricao": "Capitã Marvel: os dois raios de fóton e os choques",
@@ -23546,6 +23886,23 @@
     1.2999
    ],
    "bytes": 48664
+  },
+  "rajada-congelante": {
+   "arquivo": "rajada-congelante.mp3",
+   "descricao": "Homem de Gelo: a rajada congelante",
+   "versoes": [
+    0.0,
+    1.545,
+    3.1464,
+    4.6402
+   ],
+   "duracoes": [
+    1.465,
+    1.5214,
+    1.4139,
+    1.5578
+   ],
+   "bytes": 60703
   },
   "rajada-cosmica": {
    "arquivo": "rajada-cosmica.mp3",
@@ -26624,6 +26981,23 @@
    ],
    "bytes": 14225
   },
+  "taiyoken-tenshinhan": {
+   "arquivo": "taiyoken-tenshinhan.mp3",
+   "descricao": "Tenshinhan: Taiyoken",
+   "versoes": [
+    0.0,
+    1.9449,
+    3.9278,
+    5.7393
+   ],
+   "duracoes": [
+    1.8649,
+    1.9029,
+    1.7315,
+    1.8237
+   ],
+   "bytes": 76071
+  },
   "tapa-de-ogro": {
    "arquivo": "tapa-de-ogro.mp3",
    "descricao": "básico do Shrek: o tapa e o arroto",
@@ -26895,6 +27269,23 @@
     2.0305
    ],
    "bytes": 85691
+  },
+  "tenshinhan-preparo": {
+   "arquivo": "tenshinhan-preparo.mp3",
+   "descricao": "Tenshinhan: as mãos em triângulo (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 63773
   },
   "tentaculo-de-ursula": {
    "arquivo": "tentaculo-de-ursula.mp3",
@@ -28255,6 +28646,23 @@
     1.4213
    ],
    "bytes": 49185
+  },
+  "violeta-preparo": {
+   "arquivo": "violeta-preparo.mp3",
+   "descricao": "Violeta: as mãos formando a esfera (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 24963
   },
   "virada": {
    "arquivo": "virada.mp3",

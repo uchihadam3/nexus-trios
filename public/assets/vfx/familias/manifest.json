@@ -447,6 +447,20 @@
   "laco": true,
   "bytes": 11996
  },
+ "aranhas_de_argila": {
+  "descricao": "Deidara · as aranhinhas de argila",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 14864
+ },
  "arco_recurvo": {
   "descricao": "Lara · o arco, a flecha e a marca",
   "quadros": 12,
@@ -1357,6 +1371,20 @@
   "laco": false,
   "bytes": 9194
  },
+ "beijo_venenoso": {
+  "descricao": "Hera Venenosa · os lábios e os corações de veneno",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 18754
+ },
  "ben10_preparo": {
   "descricao": "Ben 10 · o Omnitrix girando (Preparo, laço)",
   "quadros": 12,
@@ -1720,6 +1748,20 @@
   ],
   "laco": true,
   "bytes": 43590
+ },
+ "bola_sombria": {
+  "descricao": "Gengar · a bola de sombra",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 26254
  },
  "bolhas": {
   "descricao": "bolhas subindo e estourando",
@@ -2085,6 +2127,20 @@
   "laco": true,
   "bytes": 35702
  },
+ "c4_karura": {
+  "descricao": "Deidara · a nuvem de minibombas e o Katsu!",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 40456
+ },
  "caca_preparo": {
   "descricao": "Blade · a glaive girando e a lua (Preparo, laço)",
   "quadros": 12,
@@ -2224,6 +2280,20 @@
   ],
   "laco": false,
   "bytes": 23622
+ },
+ "campo_de_forca": {
+  "descricao": "Violeta · a bolha roxa no trio",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 39566
  },
  "campo_incendiado": {
   "descricao": "Roy · o anel de fogo e a coluna que detona",
@@ -3457,6 +3527,20 @@
   "laco": false,
   "bytes": 25516
  },
+ "comedor_de_sonhos": {
+  "descricao": "Gengar · a bolha de sonho sugada",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 28332
+ },
  "cometa": {
   "descricao": "luz que corre pela linha de ação (+x)",
   "quadros": 12,
@@ -4423,6 +4507,20 @@
   "laco": false,
   "bytes": 28694
  },
+ "deidara_preparo": {
+  "descricao": "Deidara · as bocas das mãos moldando (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 6160
+ },
  "demolidor_preparo": {
   "descricao": "Demolidor · os chifres e o radar (Preparo, laço)",
   "quadros": 12,
@@ -5235,6 +5333,20 @@
   "laco": false,
   "bytes": 40408
  },
+ "era_glacial": {
+  "descricao": "Homem de Gelo · as geleiras pontudas em todos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 69278
+ },
  "eraser_cannon": {
   "descricao": "Broly · a esfera que explode enorme",
   "quadros": 12,
@@ -5528,6 +5640,20 @@
   ],
   "laco": false,
   "bytes": 25560
+ },
+ "esfera_de_forca": {
+  "descricao": "Violeta · a esfera rolando e prendendo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 26606
  },
  "esfera_espiral": {
   "descricao": "esfera em espiral moendo",
@@ -7993,6 +8119,20 @@
   "laco": false,
   "bytes": 45080
  },
+ "gengar_preparo": {
+  "descricao": "Gengar · o sorriso e os olhos vermelhos (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 6352
+ },
  "genjutsu_sasuke": {
   "descricao": "Sasuke · o Sharingan gigante e a confusão",
   "quadros": 12,
@@ -8230,6 +8370,20 @@
   ],
   "laco": false,
   "bytes": 42084
+ },
+ "golpe_de_quatro_bracos": {
+  "descricao": "Tenshinhan · os quatro punhos juntos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 26078
  },
  "golpe_do_espiao": {
   "descricao": "Golpe do espião de Loid: retícula de mira e cutelada precisa",
@@ -8721,6 +8875,20 @@
   "laco": true,
   "bytes": 13258
  },
+ "hera_preparo": {
+  "descricao": "Hera Venenosa · a flor soltando esporos (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 16092
+ },
  "hex_de_probabilidade": {
   "descricao": "Feiticeira · os fios, o redemoinho e o sinal",
   "quadros": 12,
@@ -8777,6 +8945,20 @@
   "laco": true,
   "bytes": 26076
  },
+ "hipnose_gengar": {
+  "descricao": "Gengar · os olhos em espiral e o Zzz",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 21498
+ },
  "hiraishin": {
   "descricao": "Minato · o Deus do Trovão Voador",
   "quadros": 12,
@@ -8832,6 +9014,20 @@
   ],
   "laco": false,
   "bytes": 90474
+ },
+ "iceman_preparo": {
+  "descricao": "Homem de Gelo · os cristais crescendo (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 14390
  },
  "ideia_terrivel": {
   "descricao": "Peter Griffin · a lâmpada que vira bomba",
@@ -9267,6 +9463,20 @@
   "laco": false,
   "bytes": 21328
  },
+ "invisibilidade_violeta": {
+  "descricao": "Violeta · o contorno sumindo em pontinhos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 21560
+ },
  "invocacao": {
   "descricao": "silhueta invocada",
   "quadros": 12,
@@ -9448,6 +9658,20 @@
   ],
   "laco": false,
   "bytes": 32758
+ },
+ "jardim_toxico": {
+  "descricao": "Hera Venenosa · as flores gigantes e os esporos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 55656
  },
  "jato_criogenico": {
   "descricao": "Básico do Senhor Frio: o jato frio e os cristais",
@@ -9826,6 +10050,20 @@
   ],
   "laco": false,
   "bytes": 32122
+ },
+ "kikoho": {
+  "descricao": "Tenshinhan · o triângulo de energia caindo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 44564
  },
  "kikosho": {
   "descricao": "Chun-Li · a bola de energia que explode",
@@ -17471,6 +17709,20 @@
   "laco": false,
   "bytes": 22938
  },
+ "muralha_de_gelo": {
+  "descricao": "Homem de Gelo · a muralha de gelo na frente do trio",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 23208
+ },
  "muralha_de_metal": {
   "descricao": "Magneto · as vigas formando a muralha",
   "quadros": 12,
@@ -18002,6 +18254,20 @@
   ],
   "laco": false,
   "bytes": 75186
+ },
+ "passaro_de_argila": {
+  "descricao": "Deidara · o pássaro soltando as bombinhas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 37258
  },
  "passo_lateral": {
   "descricao": "Saitama · a capa varrendo e virando escudo",
@@ -19823,6 +20089,20 @@
   "laco": false,
   "bytes": 22938
  },
+ "raizes_estranguladoras": {
+  "descricao": "Hera Venenosa · as raízes se enrolando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 15552
+ },
  "rajada_aang": {
   "descricao": "Aang · o vento estourando no rival",
   "quadros": 12,
@@ -19850,6 +20130,20 @@
   ],
   "laco": false,
   "bytes": 36558
+ },
+ "rajada_congelante": {
+  "descricao": "Homem de Gelo · o jato de gelo e a neve",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 25168
  },
  "rajada_cosmica": {
   "descricao": "Surfista Prateado · o raio prateado e a marca",
@@ -22399,6 +22693,20 @@
   "laco": false,
   "bytes": 35174
  },
+ "taiyoken_tenshinhan": {
+  "descricao": "Tenshinhan · o clarão do Sol",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 62286
+ },
  "tapa_de_ogro": {
   "descricao": "Básico do Shrek: o tapa, a lama e o arroto",
   "quadros": 12,
@@ -22692,6 +23000,20 @@
   ],
   "laco": false,
   "bytes": 51662
+ },
+ "tenshinhan_preparo": {
+  "descricao": "Tenshinhan · as mãos em triângulo (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 12636
  },
  "tentaculo_de_ursula": {
   "descricao": "Básico da Úrsula: o tentáculo e a tinta",
@@ -23700,6 +24022,20 @@
   ],
   "laco": true,
   "bytes": 24178
+ },
+ "violeta_preparo": {
+  "descricao": "Violeta · as mãos formando a esfera (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 5638
  },
  "visao_alem_do_alcance": {
   "descricao": "Lion-O · o Olho de Thundera e o feixe",
