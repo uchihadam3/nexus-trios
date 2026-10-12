@@ -255,8 +255,8 @@ function Selo({selo}:{selo:{rotulo:string;tipo:'unica'|'traco'|'mecanica';inicio
   </span>;
 }
 
-/** O nome da ativação: o aviso dela quando tem efeito próprio (o "Vai explodir!" do Cell), senão o nome da mecânica. */
+/** O nome da ativação: o aviso dela quando a mecânica tem efeito próprio (o "Vai explodir!" do Cell, o "Black Flash" do Yuji), senão o nome da mecânica. */
 function nomeDaAtivacao(beat:Beat|null|undefined,passo:{eventos:number[];rotulo?:string},personagem:string){
   const aviso=beat?.events.find(e=>e.kind==='unica'&&passo.eventos.includes(e.id))?.label;
-  return aviso&&EFEITO_DA_UNICA[personagem]?.[aviso]?aviso:passo.rotulo;
+  return aviso&&EFEITO_DA_UNICA[personagem]?aviso:passo.rotulo;
 }

@@ -9043,6 +9043,20 @@
   "laco": false,
   "bytes": 11374
  },
+ "mu_black_flash": {
+  "descricao": "Yuji · o Black Flash rachando o espaço",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 79422
+ },
  "mu_bochechas": {
   "descricao": "Pikachu · as bochechas elétricas",
   "quadros": 12,
@@ -9071,6 +9085,20 @@
   "laco": false,
   "bytes": 27234
  },
+ "mu_boneca": {
+  "descricao": "Nobara · a boneca de palha, o prego e a martelada",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 43114
+ },
  "mu_borracha": {
   "descricao": "Luffy · os anéis de borracha esticando",
   "quadros": 12,
@@ -9085,6 +9113,20 @@
   "laco": false,
   "bytes": 19970
  },
+ "mu_bracos": {
+  "descricao": "Muzan · os braços-chicote para todo lado",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 63338
+ },
  "mu_cada_vez_maior": {
   "descricao": "Hulk · as ondas de fúria e as rachaduras",
   "quadros": 12,
@@ -9098,6 +9140,62 @@
   ],
   "laco": false,
   "bytes": 44548
+ },
+ "mu_copia": {
+  "descricao": "Kakashi · o pergaminho do jutsu copiado",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 16782
+ },
+ "mu_estalo": {
+  "descricao": "Thanos · o estalo e o pó ao vento",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 50146
+ },
+ "mu_fator_cura": {
+  "descricao": "Deadpool · as katanas cruzadas e as cruzes de cura",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 36964
+ },
+ "mu_fio": {
+  "descricao": "Tanjiro · o fio vermelho da abertura e o corte d'água",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 17460
  },
  "mu_gancho": {
   "descricao": "Batman · o gancho e o escudo do morcego",
@@ -9141,6 +9239,34 @@
   "laco": false,
   "bytes": 69152
  },
+ "mu_joia": {
+  "descricao": "Thanos · a Joia do Infinito encaixando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 26440
+ },
+ "mu_juntas": {
+  "descricao": "Inosuke · as juntas soltando e as correntes partindo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 27562
+ },
  "mu_kage_bunshin": {
   "descricao": "Naruto · as nuvens de fumaça e os clones",
   "quadros": 12,
@@ -9154,6 +9280,48 @@
   ],
   "laco": false,
   "bytes": 35214
+ },
+ "mu_laco": {
+  "descricao": "Mulher-Maravilha · o Laço da verdade apertando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 30916
+ },
+ "mu_lider": {
+  "descricao": "Capitão América · o escudo de estrela e as setas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 28442
+ },
+ "mu_mahoraga": {
+  "descricao": "Megumi · a roda de Mahoraga girando um dente",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 61852
  },
  "mu_modo_serio": {
   "descricao": "Saitama · o soco sério e a onda gigante",
@@ -9169,6 +9337,76 @@
   "laco": false,
   "bytes": 55330
  },
+ "mu_portal": {
+  "descricao": "Doutor Estranho · o anel de faíscas do portal girando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 74816
+ },
+ "mu_potencial": {
+  "descricao": "Gohan · a aura afiada do potencial despertado",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 102874
+ },
+ "mu_rastro_flash": {
+  "descricao": "Flash · os riscos de velocidade e o emblema do raio",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 31746
+ },
+ "mu_sangue": {
+  "descricao": "Nezuko · as chamas rosadas do Sangue explosivo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 60038
+ },
+ "mu_santuario": {
+  "descricao": "Sukuna · o Santuário malevolente e os cortes",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 30446
+ },
  "mu_sharingan": {
   "descricao": "Sasuke · o Sharingan girando",
   "quadros": 12,
@@ -9182,6 +9420,20 @@
   ],
   "laco": false,
   "bytes": 39662
+ },
+ "mu_sofrimento": {
+  "descricao": "Freeza · a Supernova crescendo e as esferas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 40126
  },
  "mu_sopro_congelante": {
   "descricao": "Superman · o sopro gelado",
@@ -9225,6 +9477,34 @@
   "laco": false,
   "bytes": 14288
  },
+ "mu_treino": {
+  "descricao": "Piccolo · a capa pesada caindo e o ki do aluno",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 56636
+ },
+ "mu_unibeam": {
+  "descricao": "Homem de Ferro · o reator carregando e o Unibeam",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 34296
+ },
  "mu_vazio_infinito": {
   "descricao": "Gojo · o céu de estrelas do domínio",
   "quadros": 12,
@@ -9252,6 +9532,20 @@
   ],
   "laco": false,
   "bytes": 68412
+ },
+ "mu_zzz": {
+  "descricao": "Zenitsu · os Z e o relâmpago da Primeira postura",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 22886
  },
  "mugen_tsukuyomi": {
   "descricao": "Mugen Tsukuyomi: a lua do Rinne Sharingan, os raios e os casulos de raízes",
