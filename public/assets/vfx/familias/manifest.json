@@ -1959,6 +1959,34 @@
   "laco": false,
   "bytes": 35922
  },
+ "cell_autodestruicao": {
+  "descricao": "Cell · o clarão e a cúpula da Autodestruição",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 76872
+ },
+ "cell_contagem": {
+  "descricao": "Cell · o corpo inchando de luz e a contagem",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 51976
+ },
  "centopeia": {
   "descricao": "Kaneki · o kagune centopeia crava e suga",
   "quadros": 12,
@@ -9855,6 +9883,20 @@
   "laco": false,
   "bytes": 45940
  },
+ "pontos_de_chakra": {
+  "descricao": "Hinata · os oito trigramas e os pontos de chakra",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 32884
+ },
  "portal": {
   "descricao": "portal",
   "quadros": 12,
@@ -13550,6 +13592,20 @@
   ],
   "laco": false,
   "bytes": 58052
+ },
+ "unica_ativa": {
+  "descricao": "Mecânica única · o círculo de runas abrindo (ativação)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 49622
  },
  "vampirismo": {
   "descricao": "gotas de sangue em espiral e pulso de coração",

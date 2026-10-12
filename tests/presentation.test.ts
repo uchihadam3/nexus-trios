@@ -161,7 +161,7 @@ describe('Direção sem alterar regras',()=>{
     if(!beat?.passos||!['basic','skill'].includes(beat.event.kind))continue;
     if(!vistos.has(beat.event.id)){
      vistos.add(beat.event.id);
-     const proprios=beat.passos.filter(x=>x.classe!=='reacao');
+     const proprios=beat.passos.filter(x=>x.classe!=='reacao'&&x.classe!=='unica');
      // de quem age: golpe → rival → aliado, e o golpe abre a cadeia
      expect(proprios.map(x=>ORDEM[x.classe as keyof typeof ORDEM])).toEqual([...proprios.map(x=>ORDEM[x.classe as keyof typeof ORDEM])].sort());
      if(beat.passos.some(x=>x.classe==='golpe'))expect(beat.passos[0]!.classe).toBe('golpe');

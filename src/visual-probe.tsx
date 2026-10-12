@@ -6,7 +6,7 @@ import { applyEffects,createBattle,jeitoDeBater } from './engine/battle';
 import { byId } from './data/characters';
 import { statuses as statusesProbe } from './data/statuses';
 import type { BattleEvent,Effect,Visual } from './engine/types';
-import { antecipaDoGolpe,montaPassos,visivelNaEtapa,type Beat } from './presentation/director';
+import { advanceDirection,antecipaDoGolpe,createDirection,montaPassos,visivelNaEtapa,type Beat,type Direction } from './presentation/director';
 import { defaults } from './lib/storage';
 import './styles.css';
 import './presentation/battle.css';
@@ -155,4 +155,24 @@ function Ativa(){
   const beatAgora=clock.t<1.3?live:params.get('junto')&&clock.t<2.9?solta:null;
   return <BattleScreen battle={battle} beat={beatAgora} index={0} name="Prova visual de combate" settings={settings} paused={false} onPause={()=>{}} onAbandon={()=>{}} onSettings={()=>{}}/>;
 }
-createRoot(document.getElementById('root')!).render(<div className="app"><main className="main battle-main">{ativa?<Ativa/>:play?<Play/>:<BattleScreen battle={impacted?after:before} beat={beat} index={0} name="Prova visual de combate" settings={settings} paused={false} onPause={()=>{}} onAbandon={()=>{}} onSettings={()=>{}}/>}</main></div>);
+/*
+ * `?luta=a,b,c&contra=x,y,z&semente=N&ate=id`: uma luta de verdade, com o diretor da luta. Com `ate`, avança rápido
+ * (sem desenhar) até a Mecânica única desse personagem ativar como uma habilidade, e mostra dali em diante.
+ */
+const luta=params.get('luta');
+function Luta(){
+  const [d]=useState<Direction>(()=>{
+    const dd=createDirection(createBattle(luta!.split(','),(params.get('contra')??'goku,vegeta,hulk').split(','),Number(params.get('semente')??7)));
+    const ate=params.get('ate');
+    if(ate)for(let k=0;k<60000&&!dd.complete;k++){
+      const a=dd.active;
+      if(a&&a.passos?.some(x=>x.classe==='unica'&&dd.battle.fighters.find(f=>f.uid===x.quem)?.characterId===ate)&&a.elapsed<.05)break;
+      advanceDirection(dd,.04);
+    }
+    return dd;
+  });
+  const [,setN]=useState(0);
+  useEffect(()=>{let frame=0,last=performance.now();const tick=(now:number)=>{advanceDirection(d,Math.min(.1,(now-last)/1000));last=now;setN(n=>n+1);frame=requestAnimationFrame(tick);};frame=requestAnimationFrame(tick);return ()=>cancelAnimationFrame(frame);},[d]);
+  return <BattleScreen battle={d.visible} beat={d.active?{...d.active}:null} index={0} name="Prova visual de combate" settings={settings} paused={false} onPause={()=>{}} onAbandon={()=>{}} onSettings={()=>{}}/>;
+}
+createRoot(document.getElementById('root')!).render(<div className="app"><main className="main battle-main">{luta?<Luta/>:ativa?<Ativa/>:play?<Play/>:<BattleScreen battle={impacted?after:before} beat={beat} index={0} name="Prova visual de combate" settings={settings} paused={false} onPause={()=>{}} onAbandon={()=>{}} onSettings={()=>{}}/>}</main></div>);

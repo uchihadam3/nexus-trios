@@ -5,6 +5,7 @@ import type { Battle, BattleEvent } from '../engine/types';
 import { PRESENTATION as P } from './config';
 import { QUADRO_DO_GOLPE } from './golpe-das-folhas';
 import { familia, profileFor } from './vfxProfiles';
+import { INTERVALO_DA_UNICA, JEITO_DA_UNICA } from './unicas-efeitos';
 
 export type Family='physical'|'energy'|'electric'|'fire'|'magic'|'dark'|'psychic'|'slash'|'prison'|'shield'|'heal'|'regen'|'buff'|'debuff'|'interrupt'|'ko'|'turn'|'grand';
 export interface Beat {event:BattleEvent;events:BattleEvent[];before:Battle;after:Battle;duration:number;family:Family;grand:boolean;elapsed:number;impacted:boolean;periodic?:boolean;trace?:BeatTrace;
@@ -22,7 +23,7 @@ export interface Beat {event:BattleEvent;events:BattleEvent[];before:Battle;afte
   antecipa?:number;
   /** A folha do golpe já começou (a deixa 'golpe' já saiu). */
   golpeou?:boolean}
-export interface Direction {battle:Battle;visible:Battle;queue:Beat[];active:Beat|null;simIdle:number;complete:boolean;serial:number;signals:BattleEvent[]}
+export interface Direction {battle:Battle;visible:Battle;queue:Beat[];active:Beat|null;simIdle:number;complete:boolean;serial:number;signals:BattleEvent[];/** quando cada lutador teve a última ativação completa da Mecânica única */unicaCheia?:Record<string,number>}
 export interface PresentationCheckpoint {version?:2;battleTime:number;nextEvent:number;rng:number;visibleNextEvent:number;activeEventId:number|null;activeElapsed:number;impacted:boolean;serial:number;simIdle?:number}
 /** 'golpe': a folha do golpe (e o som dela) começa antes do impacto; o impacto que vem depois traz `antecipado`. */
 export interface Cue {event:BattleEvent;family:Family;phase:'start'|'golpe'|'impact';grand:boolean;antecipado?:boolean}
@@ -84,16 +85,18 @@ function duration(event:BattleEvent,grand:boolean){
  * um evento a mais: a mira da IA usa o contador de eventos como semente) — é
  * só a ordem e o tempo em que a tela revela o que já aconteceu.
  */
-export type ClasseDoPasso='golpe'|'reacao'|'rival'|'aliado';
+export type ClasseDoPasso='golpe'|'reacao'|'rival'|'aliado'|'unica';
 export interface Passo {classe:ClasseDoPasso;/** quem age neste passo */quem:string;/** nome do traço, numa reação */rotulo?:string;eventos:number[];/** segundos depois do impacto */em:number}
 /** Quanto cada passo fica na tela antes do próximo (o tempo de ler o que aconteceu). */
-export const TEMPO_DO_PASSO:Record<ClasseDoPasso,number>={golpe:.42,reacao:.58,rival:.4,aliado:.4};
+export const TEMPO_DO_PASSO:Record<ClasseDoPasso,number>={golpe:.42,reacao:.58,rival:.4,aliado:.4,unica:1.6};
 /** Fração do golpe em que quem foi até o alvo já está de volta no lugar (acting-motion.css). */
 export const VOLTA_DO_GOLPE=.9;
 /** O máximo que a cadeia inteira pode alongar um golpe (lutas com muitas reações não arrastam). */
 const CADEIA_MAXIMA=2.6;
 /** Quanto dura um traço que dispara sozinho (o nome aparece, o efeito entra, a luta segue). */
 const TEMPO_DO_TRACO=1.3;
+/** A Mecânica única ativando sozinha como uma habilidade: o nome, a luta esperando e o efeito dela. */
+const TEMPO_DA_UNICA=2.0;
 /** Mantido para quem ainda mede pelo intervalo antigo. */
 export const INTERVALO_DA_ETAPA=TEMPO_DO_PASSO.rival;
 const CONTABIL=new Set<BattleEvent['kind']>(['charge','synergy','ready','discovery','basic','skill','cast','turn']);
@@ -101,10 +104,10 @@ const DO_GOLPE=new Set<BattleEvent['kind']>(['damage','block','interrupt','ko'])
 /* Reações que vêm de uma mecânica, não do traço: o passo leva o nome dela. */
 export const ROTULO_DA_MECANICA:Record<string,string>={Refletido:'Refletir',Espinhos:'Espinhos',Vampirismo:'Vampirismo',Sangramento:'Sangramento',Barreira:'Barreira','Última resistência':'Última resistência',Ricochete:'Ricochete','Golpe largo':'Golpe largo','Golpe que cura':'Golpe que cura','Guarda do golpe':'Guarda do golpe','Roubou Carga':'Roubou Carga',Acelerou:'Acelerou'};
 const ehDaMecanica=(e:BattleEvent)=>['damage','heal','resist','shield','charge','tempo'].includes(e.kind)&&e.label in ROTULO_DA_MECANICA;
-export function montaPassos(beat:Pick<Beat,'event'|'events'|'after'|'traco'|'base'>):Passo[]{
+export function montaPassos(beat:Pick<Beat,'event'|'events'|'after'|'traco'|'base'>,cheias?:ReadonlySet<string>):Passo[]{
   const ator=beat.event.source,lado=beat.after.fighters.find(f=>f.uid===ator)?.side;
   const ladoDe=(uid?:string)=>beat.after.fighters.find(f=>f.uid===uid)?.side;
-  if(beat.traco){const f=beat.after.fighters.find(x=>x.uid===ator);return [{classe:'reacao',quem:ator,rotulo:f?(beat.event.kind==='unica'?UNICAS[f.characterId]?.nome:beat.event.kind==='pulso'?'':byId[f.characterId].trait.name):undefined,eventos:beat.events.map(e=>e.id),em:0}];}
+  if(beat.traco){const f=beat.after.fighters.find(x=>x.uid===ator);return [{classe:beat.event.kind==='unica'&&cheias?.has(ator)?'unica':'reacao',quem:ator,rotulo:f?(beat.event.kind==='unica'?UNICAS[f.characterId]?.nome:beat.event.kind==='pulso'?'':byId[f.characterId].trait.name):undefined,eventos:beat.events.map(e=>e.id),em:0}];}
   if(!['basic','skill'].includes(beat.event.kind)||!lado)return [{classe:'golpe',quem:ator,eventos:beat.events.map(e=>e.id),em:0}];
   const tracoDe=(uid:string)=>{const f=beat.after.fighters.find(x=>x.uid===uid);return f?byId[f.characterId].trait.name:undefined;};
   // o que a própria ação (habilidade ou básico) faz: o resto que sai de quem age é o traço dele
@@ -124,8 +127,12 @@ export function montaPassos(beat:Pick<Beat,'event'|'events'|'after'|'traco'|'bas
     // quem quiser ler toca na etiqueta de combos)
     if(e.kind==='unica'||e.kind==='pulso'){
       const f=beat.after.fighters.find(x=>x.uid===e.source),rotulo=e.kind==='pulso'?'':f?UNICAS[f.characterId]?.nome:undefined;
-      if(!(atual?.classe==='reacao'&&atual.quem===e.source&&atual.rotulo===rotulo)){atual={classe:'reacao',quem:e.source,rotulo,eventos:[],em:0};passos.push(atual);}
-      atual.eventos.push(e.id);continue;
+      // a ativação completa (src/presentation/unicas-efeitos.ts): um passo longo, como uma habilidade
+      const classe:ClasseDoPasso=e.kind==='unica'&&cheias?.has(e.source)?'unica':'reacao';
+      const ultimo=atual as Passo|null;
+      if(ultimo&&ultimo.classe===classe&&ultimo.quem===e.source&&ultimo.rotulo===rotulo)ultimo.eventos.push(e.id);
+      else{atual={classe,quem:e.source,rotulo,eventos:[e.id],em:0};passos.push(atual);}
+      continue;
     }
     // Refletir, Espinhos, Vampirismo e os jeitos de bater (Ricochete, Roubou Carga…): um passo com o nome da mecânica
     if(!ehDaMecanica(e)&&(CONTABIL.has(e.kind)||(e.kind==='tempo'&&Math.abs(e.value??0)<.005))){if(atual)atual.eventos.push(e.id);else soltos.push(e.id);continue;}
@@ -155,10 +162,10 @@ export function montaPassos(beat:Pick<Beat,'event'|'events'|'after'|'traco'|'bas
    * causou, logo depois dele; reações de antes do primeiro passo de quem age
    * (um traço que dispara ao agir) vêm logo depois do golpe.
    */
-  const ORDEM:Record<ClasseDoPasso,number>={golpe:0,rival:1,aliado:2,reacao:9};
+  const ORDEM:Record<ClasseDoPasso,number>={golpe:0,rival:1,aliado:2,reacao:9,unica:9};
   const blocos:Passo[][]=[];let antes:Passo[]=[];
   for(const x of passos){
-    if(x.classe==='reacao'){if(blocos.length)blocos.at(-1)!.push(x);else antes.push(x);}
+    if(x.classe==='reacao'||x.classe==='unica'){if(blocos.length)blocos.at(-1)!.push(x);else antes.push(x);}
     else blocos.push([x]);
   }
   blocos.sort((a,b)=>ORDEM[a[0]!.classe]-ORDEM[b[0]!.classe]);
@@ -168,14 +175,15 @@ export function montaPassos(beat:Pick<Beat,'event'|'events'|'after'|'traco'|'bas
   passos[0]!.eventos.unshift(...soltos);
   // o tempo de cada passo depois do impacto, comprimido se a cadeia ficar longa
   const intervalos=passos.slice(0,-1).map(x=>TEMPO_DO_PASSO[x.classe]);
-  const total=intervalos.reduce((a,b)=>a+b,0),escala=total>CADEIA_MAXIMA?CADEIA_MAXIMA/total:1;
-  let t=0;passos.forEach((x,k)=>{x.em=t;t+=(intervalos[k]??0)*escala;});
+  // a ativação da Mecânica única não encurta: é o momento dela (a cadeia comprime só o resto)
+  const total=intervalos.reduce((a,b,k)=>a+(passos[k]!.classe==='unica'?0:b),0),escala=total>CADEIA_MAXIMA?CADEIA_MAXIMA/total:1;
+  let t=0;passos.forEach((x,k)=>{x.em=t;t+=(intervalos[k]??0)*(x.classe==='unica'?1:escala);});
   // depois de um golpe, o que cai no próprio trio (cura, Escudo, reforço, o traço em quem agiu) espera
   // quem bateu voltar para o lugar: antes, o efeito saía com o personagem ainda no caminho de volta
   const bateu=passos[0]?.classe==='golpe'&&beat.events.some(e=>e.kind==='damage'&&e.source===ator&&ladoDe(e.target)!==lado);
   // o que alguém do meu trio (quem bateu ou um aliado) faz em alguém do meu trio: sem alvo, é nele mesmo
   const noMeuTrio=(x:Passo)=>ladoDe(x.quem)===lado&&x.eventos.some(id=>{const e=beat.events.find(y=>y.id===id);return !!e&&ladoDe(e.target??e.source)===lado&&(ehDaMecanica(e)||!CONTABIL.has(e.kind));});
-  const k=bateu?passos.findIndex((x,i)=>i>0&&(x.classe==='aliado'||(x.classe==='reacao'&&noMeuTrio(x)))):-1;
+  const k=bateu?passos.findIndex((x,i)=>i>0&&(x.classe==='aliado'||((x.classe==='reacao'||x.classe==='unica')&&noMeuTrio(x)))):-1;
   const volta=(VOLTA_DO_GOLPE-P.impactAt)*(beat.base??0);
   if(k>0&&passos[k]!.em<volta){const atraso=volta-passos[k]!.em;for(let i=k;i<passos.length;i++)passos[i]!.em+=atraso;}
   return passos;
@@ -248,16 +256,43 @@ function etapaNoTempo(beat:Beat):number{
 }
 
 export function createDirection(battle:Battle):Direction {
-  return {battle,visible:structuredClone(battle),queue:[],active:null,simIdle:0,complete:false,serial:0,signals:[]};
+  const d:Direction={battle,visible:structuredClone(battle),queue:[],active:null,simIdle:0,complete:false,serial:0,signals:[],unicaCheia:{}};
+  /*
+   * As Mecânicas únicas que ficam sempre ativas ativam no começo da luta, como uma habilidade (pedido do
+   * jogador: "se já começa ativa, no começo da batalha já mostra ele ativando… aparecendo o nome dele"). O aviso
+   * é só da apresentação: não entra na luta (a numeração dos eventos da luta escolhe alvos), e o número dele fica
+   * entre 0 e 1, antes do primeiro evento de verdade.
+   */
+  if(battle.time===0&&battle.nextEvent<=1)battle.fighters.forEach((f,i)=>{
+    const u=UNICAS[f.characterId];if(!u||JEITO_DA_UNICA[f.characterId]!=='sempre')return;
+    const aviso:BattleEvent={id:(i+1)/10,time:0,kind:'unica',source:f.uid,target:f.uid,label:u.nome};
+    const antes=structuredClone(battle);
+    d.unicaCheia![f.uid]=0;
+    d.queue.push(makeBeat(aviso,[aviso],antes,antes,false,false,true,new Set([f.uid])));
+  });
+  return d;
 }
-function makeBeat(event:BattleEvent,events:BattleEvent[],before:Battle,after:Battle,periodic=false,previous=false,traco=false):Beat {
+/** Quem tem a ativação completa da Mecânica única neste momento (a regra está em unicas-efeitos.ts). */
+function ativacoesCheias(d:Direction,events:BattleEvent[],after:Battle):Set<string>{
+  const cheias=new Set<string>();
+  for(const e of events){
+    if(e.kind!=='unica'||cheias.has(e.source))continue;
+    const f=after.fighters.find(x=>x.uid===e.source);if(!f)continue;
+    const vista=(d.unicaCheia??={})[e.source];
+    if(JEITO_DA_UNICA[f.characterId]==='sempre'&&vista!==undefined)continue;
+    if(vista!==undefined&&after.time-vista<INTERVALO_DA_UNICA)continue;
+    d.unicaCheia[e.source]=after.time;cheias.add(e.source);
+  }
+  return cheias;
+}
+function makeBeat(event:BattleEvent,events:BattleEvent[],before:Battle,after:Battle,periodic=false,previous=false,traco=false,cheias?:ReadonlySet<string>):Beat {
   const actor=after.fighters.find(f=>f.uid===event.source);
   const prep=actor&&event.skill!==undefined?byId[actor.characterId].skills[event.skill].preparation:0;
   const grand=event.kind==='skill'&&prep>=P.grandPreparation;
   const auxiliary=event.kind==='ready'||event.kind==='status';
-  const seconds=traco?TEMPO_DO_TRACO:previous?(periodic?.55:auxiliary?.5:duration(event,grand)):periodic?P.periodicSeconds:duration(event,grand);
+  const seconds=traco?(event.kind==='unica'&&cheias?.has(event.source)?TEMPO_DA_UNICA:TEMPO_DO_TRACO):previous?(periodic?.55:auxiliary?.5:duration(event,grand)):periodic?P.periodicSeconds:duration(event,grand);
   const beat:Beat={event,events,before,after,duration:seconds,family:familyOf(event,after),grand,elapsed:0,impacted:false,periodic,etapa:0,base:seconds,traco};
-  beat.passos=montaPassos(beat);
+  beat.passos=montaPassos(beat,cheias);
   beat.etapas=beat.passos.map((_,k)=>k+1);
   const ultimo=beat.passos.at(-1)!;
   beat.duration+=ultimo.em;
@@ -293,14 +328,15 @@ function collect(d:Direction,events:BattleEvent[],before:Battle,after:Battle,leg
   // Every observer callback is a chronological boundary: one action and its
   // consequences, or periodic effects. Never merge across an action boundary.
   const principal=focus(events);
+  const cheias=!previous&&!legacy?ativacoesCheias(d,events,after):undefined;
   if(principal&&['basic','skill','cast'].includes(principal.kind)){
-    d.queue.push(makeBeat(principal,events,before,after));
+    d.queue.push(makeBeat(principal,events,before,after,false,false,false,cheias));
     return;
   }
-  if(principal&&!previous){d.queue.push(makeBeat(principal,events,before,after));return;}
+  if(principal&&!previous){d.queue.push(makeBeat(principal,events,before,after,false,false,false,cheias));return;}
   // a Mecânica única disparando sozinha (relógio, reação) ganha um momento com o nome dela
   const unica=!previous&&!legacy?events.find(e=>(e.kind==='unica'&&e.label!=='Imune')||e.kind==='pulso'):undefined;
-  if(unica){d.queue.push(makeBeat(unica,events,before,after,false,false,true));return;}
+  if(unica){d.queue.push(makeBeat(unica,events,before,after,false,false,true,cheias));return;}
   // fora de uma ação, Status e Escudo só nascem de um traço disparando sozinho: ganha um momento próprio
   const traco=!previous&&!legacy?events.find(e=>e.kind==='status'||(e.kind==='shield'&&e.label==='Escudo')):undefined;
   if(traco){d.queue.push(makeBeat(traco,events,before,after,false,false,true));return;}

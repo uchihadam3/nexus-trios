@@ -20,6 +20,7 @@ import type { Run,Settings } from './lib/storage';
 import type { NovosNoLivro } from './components/CombosDoTrio';
 import { PRIORIDADE,type Sound } from './audio/cues';
 import { battleAudio,faixaDaLuta } from './lib/audio';
+import { efeitoDaUnica } from './presentation/unicas-efeitos';
 import { createDirection,restoreDirection,checkpointDirection,advanceDirection,type Direction,type Beat,type BeatTrace } from './presentation/director';
 import { PRESENTATION as P } from './presentation/config';
 import type { Battle, BattleEvent } from './engine/types';
@@ -62,7 +63,7 @@ export default function App(){
   const runRef=useRef(run),lastSave=useRef(0);runRef.current=run;
   const direction=useRef<Direction|null>(null);
   const [presentation,setPresentation]=useState<{battle:Battle;beat:Beat|null}|null>(null);
-  const lastAudio=useRef(0),lastDominionSound=useRef(0),passoTocado=useRef({beat:-1,passo:1}),divida=useRef(0);
+  const lastAudio=useRef(0),lastDominionSound=useRef(0),passoTocado=useRef({beat:-1,passo:1}),unicaTocada=useRef<number|null>(null),divida=useRef(0);
   const changeRun=(next:Run|null)=>{runRef.current=next;setRun(next);save('run',next);};
   const directionFor=(current:Run)=>{
     const battle=current.battle!;
@@ -299,11 +300,24 @@ export default function App(){
       if(Math.abs(d.visible.dominion-lastDominionSound.current)>=20){if(!mudo)battleAudio.sound('toque',PRIORIDADE.interface);lastDominionSound.current=d.visible.dominion;}
       // cada passo da cadeia (depois do golpe) tem o seu som: reação, debuff, buff, cura, escudo
       const ativo=d.active;
+      // a Mecânica única ativando sozinha: o som dela sai junto do efeito, logo depois do nome (não espera o impacto)
+      if(ativo?.traco&&ativo.passos?.[0]?.classe==='unica'&&unicaTocada.current!==ativo.event.id&&!mudo){
+        unicaTocada.current=ativo.event.id;
+        const dono=ativo.after.fighters.find(f=>f.uid===ativo.event.source);
+        if(dono)battleAudio.sound(efeitoDaUnica(dono.characterId,ativo.event.label).som as Sound,PRIORIDADE.habilidade,0,ativo.event.id*10+7,.3);
+      }
       if(ativo?.impacted&&ativo.passos&&ativo.etapa&&!mudo){
         const visto=passoTocado.current.beat===ativo.event.id?passoTocado.current.passo:0;
         // o primeiro passo já tem o som do golpe; um traço sozinho começa direto na reação
-        for(let k=Math.max(ativo.passos[0]?.classe==='reacao'?1:2,visto+1);k<=ativo.etapa;k++){
+        for(let k=Math.max(ativo.passos[0]?.classe==='reacao'||ativo.passos[0]?.classe==='unica'?1:2,visto+1);k<=ativo.etapa;k++){
           const passo=ativo.passos[k-1];if(!passo)continue;
+          // a ativação completa da Mecânica única toca o som próprio dela (a sozinha já tocou acima)
+          if(passo.classe==='unica'){
+            if(ativo.traco)continue;
+            const ev=ativo.events.find(e=>e.kind==='unica'&&passo.eventos.includes(e.id)),dono=ativo.after.fighters.find(f=>f.uid===passo.quem);
+            if(ev&&dono)battleAudio.sound(efeitoDaUnica(dono.characterId,ev.label).som as Sound,PRIORIDADE.habilidade,0,ativo.event.id*10+k);
+            continue;
+          }
           const eventos=ativo.events.filter(e=>passo.eventos.includes(e.id));
           // buff ou debuff que o alvo já tinha só renova o tempo: som curto e macio, não o de entrar (pedido do jogador)
           const status=eventos.filter(e=>e.kind==='status');

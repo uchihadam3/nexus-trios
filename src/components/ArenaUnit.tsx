@@ -7,6 +7,7 @@ import { PRESENTATION as P } from '../presentation/config';
 import { folha } from '../presentation/vfxProfiles';
 import { byId } from '../data/characters';
 import { unicaDe } from '../engine/unicas';
+import { EFEITO_DA_UNICA } from '../presentation/unicas-efeitos';
 import { statuses } from '../data/statuses';
 import { Portrait } from './Portrait';
 import { AuxIcon,SkillIcon } from './Icon';
@@ -85,6 +86,13 @@ export function ArenaUnit({fighter:f,battle,beat,onInspect,numbers,threatened,li
   // este lutador está reagindo agora (o traço dele disparou no meio da ação de outro)
   const passo=passoAtual(beat),reagindo=passo?.classe==='reacao'&&passo.quem===f.uid?passo:undefined;
   /*
+   * A Mecânica única ativando como uma habilidade (pedido do jogador: "aparecer o nome na cabeça, o tempo parar…
+   * ele ativa"): o nome dela na cabeça, no lugar do nome da habilidade, durante o momento dela. Sozinha (sem golpe
+   * em volta), o nome já aparece no começo, enquanto ela "carrega".
+   */
+  const ativando=beat?.traco&&beat.passos?.[0]?.classe==='unica'&&beat.event.source===f.uid?beat.passos[0]
+    :passo?.classe==='unica'&&passo.quem===f.uid?passo:undefined;
+  /*
    * O selo do traço e da Mecânica única fica um tempo na cabeça, com efeito no retrato (pedido do jogador: "aparece
    * muito rápido… poderia ficar um pouquinho mais de tempo na cabeça deles… e tivesse efeito"). Não segura a luta: o
    * passo da cadeia segue no ritmo de sempre, só o selo continua à vista.
@@ -150,7 +158,7 @@ export function ArenaUnit({fighter:f,battle,beat,onInspect,numbers,threatened,li
   const atua=atuacao?[atuacao.act&&`actor act-${atuacao.act} act-${atuacao.parity}`,atuacao.react&&`reactor react-${atuacao.react}`].filter(Boolean).join(' '):'';
   const atuaStyle:Record<string,string>=atuacao?{'--act-dx':`${atuacao.dx.toFixed(1)}px`,'--act-dy':`${atuacao.dy.toFixed(1)}px`,'--act-ux':atuacao.ux.toFixed(3),'--act-uy':atuacao.uy.toFixed(3),'--beat-s':`${atuacao.seconds}s`,'--act-angle':`${(Math.atan2(atuacao.uy,atuacao.ux)*180/Math.PI).toFixed(1)}deg`}:{};
   // o nome da habilidade (ou do Preparo) está à vista: o selo do traço vai junto, empilhado em cima do nome (nunca do lado)
-  const comNome=preparing||(!!source&&beat?.event.kind==='skill'&&beat.event.skill!==undefined&&!!c.skills[beat.event.skill]);
+  const comNome=!ativando&&(preparing||(!!source&&beat?.event.kind==='skill'&&beat.event.skill!==undefined&&!!c.skills[beat.event.skill]));
   return <article className={`unit side-${f.side} ${marcas} ${atua}`} data-fighter={f.uid} data-slot={f.slot} data-combat-role={linkedSource&&linkedTarget?'both':linkedSource?'source':linkedTarget?'target':'idle'} style={{'--character':c.color,...(proprio?{'--rn-cor':proprio.cor,'--rn-fundo':proprio.fundo}:{}),...atuaStyle} as React.CSSProperties}>
     <div className="unit-medal">
       <span className="unit-fx" aria-hidden="true"/>
@@ -186,13 +194,15 @@ export function ArenaUnit({fighter:f,battle,beat,onInspect,numbers,threatened,li
         {seloVisivel&&!comNome&&<Selo key={`r${seloVisivel.chave}`} selo={seloVisivel}/>}
         {seloVisivel&&seloVisivel.tipo!=='mecanica'&&<span key={`fx${seloVisivel.chave}`} className={`aura-ativa aura-${seloVisivel.tipo}${seloVisivel.sumindo?' sumindo':''}`} aria-hidden="true"><i/><i/><i/><i/><i/><i/><i/><i/></span>}
         {reagindo&&<span key={`a${reagindo.eventos[0]??0}`} className="reacao-anel" aria-hidden="true"/>}
+        {ativando&&<span key={`ua${beat?.event.id??0}-${ativando.eventos[0]??0}`} className="aura-ativa aura-unica aura-longa" aria-hidden="true"><i/><i/><i/><i/><i/><i/><i/><i/></span>}
         {applied&&<span key={applied.id} className="status-pop">{applied.status&&<img src={`/assets/statuses/${applied.status}.png`} alt=""/>}{applied.label}</span>}
         {discovered&&<span key={discovered.id} className="discovery-pop">{discovered.label}</span>}
       </button>
       {(out||advantageActive||critical||shield>0)&&<span className={`unit-flag ${out?'flag-out':advantageActive?'flag-advantage':critical?'flag-critical':'flag-shield'}`} aria-hidden="true">{renascendo?<EmblemaDoRenascer id={c.id} size={12}/>:out?<Skull size={12}/>:advantageActive?<AuxIcon id="domain" size={13}/>:critical?<HeartPulse size={12}/>:<Shield size={12}/>}</span>}
-      {preparing&&<div className="unit-cast"><AuxIcon id="preparing" size={13}/><span>{f.cast?c.skills[f.cast.skill].name:beat?.event.label}</span>{seloVisivel&&<Selo key={`p${seloVisivel.chave}`} selo={seloVisivel}/>}</div>}
+      {ativando&&<div key={`un${beat?.event.id??0}-${ativando.eventos[0]??0}`} className="unit-cast unit-skill-name unit-unica-name"><Sparkles size={14} strokeWidth={2.6}/><span>{nomeDaAtivacao(beat,ativando,c.id)}</span></div>}
+      {!ativando&&preparing&&<div className="unit-cast"><AuxIcon id="preparing" size={13}/><span>{f.cast?c.skills[f.cast.skill].name:beat?.event.label}</span>{seloVisivel&&<Selo key={`p${seloVisivel.chave}`} selo={seloVisivel}/>}</div>}
       {/* a habilidade saindo, com ou sem Preparo: o nome aparece enquanto o golpe acontece */}
-      {!preparing&&source&&beat?.event.kind==='skill'&&beat.event.skill!==undefined&&c.skills[beat.event.skill]&&<div key={beat.event.id} className="unit-cast unit-skill-name" style={{"--character":c.color} as React.CSSProperties}><SkillIcon type={c.skills[beat.event.skill].icon} size={15} characterId={c.id} skillId={c.skills[beat.event.skill].id}/><span>{c.skills[beat.event.skill].name}</span>{seloVisivel&&<Selo key={`h${seloVisivel.chave}`} selo={seloVisivel}/>}</div>}
+      {!ativando&&!preparing&&source&&beat?.event.kind==='skill'&&beat.event.skill!==undefined&&c.skills[beat.event.skill]&&<div key={beat.event.id} className="unit-cast unit-skill-name" style={{"--character":c.color} as React.CSSProperties}><SkillIcon type={c.skills[beat.event.skill].icon} size={15} characterId={c.id} skillId={c.skills[beat.event.skill].id}/><span>{c.skills[beat.event.skill].name}</span>{seloVisivel&&<Selo key={`h${seloVisivel.chave}`} selo={seloVisivel}/>}</div>}
       {broken&&<div className="unit-interrupt"><AuxIcon id="interrupt" size={13}/>{broken.label.includes('atrasada')?'ATRASADO':'INTERROMPIDO'}</div>}
       {tempo&&<span className="unit-tempo-reason">{tempo.label}</span>}
     </div>
@@ -241,4 +251,10 @@ function Selo({selo}:{selo:{rotulo:string;tipo:'unica'|'traco'|'mecanica';inicio
   return <span className={`reacao-pop selo-${selo.tipo}${selo.sumindo?' sumindo':''}`} style={atraso>.05?{animationDelay:`-${atraso.toFixed(2)}s`}:undefined} aria-label={`${selo.tipo==='unica'?'Mecânica única':selo.tipo==='traco'?'Traço':'Mecânica'}: ${selo.rotulo}`}>
     <b>{selo.tipo==='unica'?<Sparkles size={11} strokeWidth={3}/>:selo.tipo==='traco'?<Flame size={11} strokeWidth={3}/>:<Zap size={11} strokeWidth={3}/>}{selo.rotulo}</b>
   </span>;
+}
+
+/** O nome da ativação: o aviso dela quando tem efeito próprio (o "Vai explodir!" do Cell), senão o nome da mecânica. */
+function nomeDaAtivacao(beat:Beat|null|undefined,passo:{eventos:number[];rotulo?:string},personagem:string){
+  const aviso=beat?.events.find(e=>e.kind==='unica'&&passo.eventos.includes(e.id))?.label;
+  return aviso&&EFEITO_DA_UNICA[personagem]?.[aviso]?aviso:passo.rotulo;
 }

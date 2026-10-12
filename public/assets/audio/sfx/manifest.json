@@ -2195,6 +2195,40 @@
    ],
    "bytes": 59434
   },
+  "cell-autodestruicao": {
+   "arquivo": "cell-autodestruicao.mp3",
+   "descricao": "Cell: o estrondo da Autodestruição",
+   "versoes": [
+    0.0,
+    2.48,
+    5.047,
+    7.4459
+   ],
+   "duracoes": [
+    2.4,
+    2.487,
+    2.3188,
+    2.4365
+   ],
+   "bytes": 90151
+  },
+  "cell-contagem": {
+   "arquivo": "cell-contagem.mp3",
+   "descricao": "Cell: o zumbido inchando e a contagem",
+   "versoes": [
+    0.0,
+    1.88,
+    3.8253,
+    5.6444
+   ],
+   "duracoes": [
+    1.8,
+    1.8653,
+    1.7391,
+    1.8274
+   ],
+   "bytes": 58581
+  },
   "centopeia": {
    "arquivo": "centopeia.mp3",
    "descricao": "Kaneki: os gomos estalando, a cravada e o sangue sugado",
@@ -11494,6 +11528,23 @@
    ],
    "bytes": 75451
   },
+  "pontos-de-chakra": {
+   "arquivo": "pontos-de-chakra.mp3",
+   "descricao": "Hinata: o Byakugan, os pontos e as palmas",
+   "versoes": [
+    0.0,
+    1.88,
+    3.8188,
+    5.6379
+   ],
+   "duracoes": [
+    1.8,
+    1.8588,
+    1.7391,
+    1.8274
+   ],
+   "bytes": 59974
+  },
   "portal": {
    "arquivo": "portal.mp3",
    "descricao": "portal",
@@ -15964,6 +16015,23 @@
     1.6244
    ],
    "bytes": 60223
+  },
+  "unica-ativa": {
+   "arquivo": "unica-ativa.mp3",
+   "descricao": "Mecânica única: o acorde e as runas acendendo (ativação)",
+   "versoes": [
+    0.0,
+    1.88,
+    3.8253,
+    5.6444
+   ],
+   "duracoes": [
+    1.8,
+    1.8653,
+    1.7391,
+    1.8274
+   ],
+   "bytes": 54907
   },
   "vampirismo": {
    "arquivo": "vampirismo.mp3",

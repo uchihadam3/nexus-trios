@@ -7,6 +7,7 @@ import { SkillIcon } from './Icon';
 import { ArrowDown,HeartPulse,ShieldCheck,Sparkles,Zap } from 'lucide-react';
 import { statuses as statusCatalog } from '../data/statuses';
 import { familia,folha,profileFor,type VfxFamily,type VfxProfile } from '../presentation/vfxProfiles';
+import { efeitoDaUnica } from '../presentation/unicas-efeitos';
 import { FAMILIA_DO_REVIVER, RENASCER_PROPRIO } from '../presentation/renascer-proprio';
 import { efeitosDoJeito,VOO_DO_QUIQUE } from '../presentation/jeito-efeito';
 import { FAMILIA_DA_INVOCACAO } from '../presentation/vfx-atribuicao';
@@ -269,6 +270,24 @@ export function BattleEffects({battle,beat,anchors,enabled,reduced,medal=80}:{ba
     }
   }
 
+  /*
+   * A Mecânica única ativando como uma habilidade: o efeito próprio dela (ou o círculo de runas) em quem ativou,
+   * no passo dela. Sozinha, o efeito entra logo depois do nome, para o golpe dela cair no impacto.
+   */
+  if(enabled&&beat&&size.w>0&&!reduced){
+    const sozinha=!!beat.traco&&beat.passos?.[0]?.classe==='unica';
+    (beat.passos??[]).forEach((passo,k)=>{
+      if(passo.classe!=='unica')return;
+      if(!sozinha&&!(beat.impacted&&(beat.etapa??0)>k))return;
+      for(const e of beat.events){
+        if(e.kind!=='unica'||!passo.eventos.includes(e.id))continue;
+        const dono=battle.fighters.find(f=>f.uid===e.source);if(!dono)continue;
+        const ef=efeitoDaUnica(dono.characterId,e.label),f=familia(ef.familia);
+        const p=point(e.source),t=Math.min(medal*f.escala,Math.min(size.w,size.h)*.95);
+        nodes.push(camada(f.impacto,{left:`${p.x}%`,top:`${p.y}%`,width:t,height:t,'--fx-cor':f.cor,'--ang':'0deg','--flip':1,'--dur':s(1.5),'--delay':s(sozinha?.3:0)},'fxl-impacto fxl-sobre',`unica-${beat.event.id}-${e.id}`));
+      }
+    });
+  }
   const outcomes=(beat?.impacted?beat.events:[]).filter(e=>e.target===beat?.event.target&&['damage','status','interrupt','shield','block','heal'].includes(e.kind)).slice(0,3);
   const outcome=(event:typeof outcomes[number])=>event.kind==='damage'?{label:'Dano',icon:Zap}:event.kind==='interrupt'?{label:'Interrompido',icon:ArrowDown}:event.kind==='status'?{label:event.status?statusCatalog[event.status].name:'Efeito',icon:Sparkles}:event.kind==='heal'?{label:'Recuperação',icon:HeartPulse}:{label:'Protegido',icon:ShieldCheck};
   const style={'--fx-cor':cor,'--fx-color':character?.color??'#d2f276'} as CSSProperties;

@@ -680,6 +680,11 @@ export const FAMILIAS_NOVAS = {
   mira_firme: n({ nome: 'Mira firme', grupo: 'especial', impacto: 'mira_firme', escala: 2.3, tempo: 1.0, cor: '#ff4a4a', tinta: 'fixa' }),
   tiro_na_cabeca: n({ nome: 'Tiro na cabeça', grupo: 'energia', impacto: 'tiro_na_cabeca', escala: 2.3, tempo: 1.0, cor: '#e8c070', tinta: 'fixa' }),
   faca_de_combate: n({ nome: 'Faca de combate', grupo: 'corte', preparo: 'leon_preparo', impacto: 'faca_de_combate', escala: 2.5, tempo: 1.0, cor: '#d8d8e8', tinta: 'fixa' }),
+  // As Mecânicas únicas ativando como uma habilidade (src/presentation/unicas-efeitos.ts)
+  unica_ativa: n({ nome: 'Mecânica única', grupo: 'especial', impacto: 'unica_ativa', escala: 2.4, tempo: 1.0, cor: '#c58bff', tinta: 'fixa' }),
+  cell_contagem: n({ nome: 'Vai explodir!', grupo: 'especial', impacto: 'cell_contagem', escala: 2.4, tempo: 1.0, cor: '#b8ff6a', tinta: 'fixa' }),
+  cell_autodestruicao: n({ nome: 'Autodestruição', grupo: 'especial', impacto: 'cell_autodestruicao', escala: 3.2, tempo: 1.0, cor: '#e8ffb0', tinta: 'fixa' }),
+  pontos_de_chakra: n({ nome: 'Pontos de chakra', grupo: 'especial', impacto: 'pontos_de_chakra', escala: 2.6, tempo: 1.0, cor: '#b8a0ff', tinta: 'fixa' }),
   jato_criogenico: n({ nome: 'Jato gelado', grupo: 'físico', impacto: 'jato_criogenico', escala: 1.9, tempo: 1.0, cor: '#a8e8ff', tinta: 'fixa' }),
   chicote_de_vinha: n({ nome: 'Chicote de vinha', grupo: 'físico', impacto: 'chicote_de_vinha', escala: 1.9, tempo: 1.0, cor: '#7ae07a', tinta: 'fixa' }),
   bola_de_neve: n({ nome: 'Bola de neve', grupo: 'físico', impacto: 'bola_de_neve', escala: 1.9, tempo: 1.0, cor: '#e0f4ff', tinta: 'fixa' }),

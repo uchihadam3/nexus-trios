@@ -128,3 +128,9 @@
 .arena-v2 .unit .aura-ativa.sumindo{animation:aura-some .22s ease-in both!important}
 @keyframes selo-some{to{opacity:0;transform:translate(-50%,-6px) scale(.9)}}
 @keyframes aura-some{to{opacity:0;transform:scale(.9)}}
+/* A Mecânica única ativando como uma habilidade: o nome dela no lugar do nome da habilidade, em roxo, e a aura
+ * roxa no retrato o tempo todo do momento dela. */
+.arena-v2 .unit-cast.unit-unica-name{--character:#a86bff;background:linear-gradient(180deg,#5a2a9af2,#2a1048f2);border-color:#d6b0ff;color:#fff;box-shadow:0 0 16px #b06bff99,0 4px 12px #000b}
+.arena-v2 .unit-cast.unit-unica-name svg{color:#ffd36b;flex:none}
+.arena-v2 .unit .aura-ativa.aura-longa{animation-duration:calc(2.2s * var(--motion-scale,1))}
+.arena-v2 .unit .aura-ativa.aura-longa::before{animation:aura-gira calc(2.2s * var(--motion-scale,1)) linear infinite}
