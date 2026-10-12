@@ -3,6 +3,11 @@
 
 The approval list is shared with the game. Unreviewed or incorrect portraits
 keep their existing placeholders until their grids are corrected.
+
+Approved portraits can also arrive already finished (public/assets/portraits/
+expanded/<id>.webp committed without a grid or override): those are kept as
+they are. A finished file that is missing, empty or not a valid WebP only
+produces a warning; the game falls back to the placeholder until it arrives.
 """
 from __future__ import annotations
 
@@ -64,6 +69,22 @@ def keep_main_silhouette(art: Image.Image) -> Image.Image:
     return art
 
 
+def prebuilt(character_id: str) -> Image.Image | None:
+    """The finished portrait already in the repository, if it is a real WebP."""
+    path = DESTINATION / f'{character_id}.webp'
+    try:
+        data = path.read_bytes()
+        if len(data) < 12 or data[:4] != b'RIFF' or data[8:12] != b'WEBP':
+            return None
+        with Image.open(BytesIO(data)) as check:
+            check.verify()
+        image = Image.open(BytesIO(data))
+        image.load()
+        return image.convert('RGBA')
+    except (OSError, ValueError):
+        return None
+
+
 def main() -> None:
     characters = roster()
     # Os 150 primeiros (101–250) vêm das grades de 4; do 251 em diante, só de overrides/<id>.webp|png.
@@ -71,19 +92,39 @@ def main() -> None:
     approved = set(json.loads(APPROVALS.read_text()))
     assert approved <= {c['id'] for c in characters}
     DESTINATION.mkdir(parents=True, exist_ok=True)
+    # only portraits that are no longer approved are stale; finished files sent without a source stay
     for stale in DESTINATION.glob('*.webp'):
-        stale.unlink()
+        if stale.stem not in approved:
+            stale.unlink()
     digests = set()
+    kept: list[str] = []
+    pending: list[str] = []
+
+    def keep_finished(character_id: str) -> None:
+        finished = prebuilt(character_id)
+        if finished is None:
+            pending.append(character_id)
+            return
+        digest = hashlib.sha256(finished.tobytes()).hexdigest()
+        if digest in digests:
+            raise ValueError(f'Duplicate portrait: {character_id}')
+        digests.add(digest)
+        kept.append(character_id)
     for group in range(38):
         selected = [(slot, c) for slot, c in enumerate(characters[group*4:min(group*4+4, 150)])
                     if c['id'] in approved]
         if not selected:
             continue
         source = SOURCES / f'{group:03d}.webp'
-        if not source.exists() and any(not (OVERRIDES / f"{c['id']}.png").exists()
-                                       and not (OVERRIDES / f"{c['id']}.webp").exists()
-                                       for _, c in selected):
-            raise FileNotFoundError(f'Missing four-character portrait grid: {source}')
+        has_override = lambda c: (OVERRIDES / f"{c['id']}.png").exists() or (OVERRIDES / f"{c['id']}.webp").exists()
+        if not source.exists():
+            # without the grid, the ones with no override keep the finished file (or wait for it)
+            for _, c in selected:
+                if not has_override(c):
+                    keep_finished(c['id'])
+            selected = [(slot, c) for slot, c in selected if has_override(c)]
+            if not selected:
+                continue
         image = Image.open(source) if source.exists() else None
         try:
             if image is not None:
@@ -145,7 +186,8 @@ def main() -> None:
         override = next((p for p in (OVERRIDES / f"{character['id']}.webp",
                                       OVERRIDES / f"{character['id']}.png") if p.exists()), None)
         if override is None:
-            raise FileNotFoundError(f"Missing portrait for {character['id']}: put it in {OVERRIDES}")
+            keep_finished(character['id'])
+            continue
         art = Image.open(override).convert('RGBA')
         framed = frame_for_circle(art, character['id'], 512)
         if framed is not None:
@@ -161,8 +203,13 @@ def main() -> None:
             raise ValueError(f'Duplicate portrait: {character["id"]}')
         digests.add(digest)
         canvas.save(DESTINATION / f"{character['id']}.webp", format='WEBP', quality=88, method=3)
-    assert len(digests) == len(approved)
-    print(f'Built {len(approved)} reviewed portraits; {len(characters)-len(approved)} still use the placeholder.')
+    for character_id in pending:
+        # an empty or broken file would show as a broken image: remove it, the game uses the placeholder
+        (DESTINATION / f'{character_id}.webp').unlink(missing_ok=True)
+        print(f'WARNING: approved portrait for {character_id} is missing or not a valid WebP; using the placeholder until it arrives.')
+    built = len(digests) - len(kept)
+    print(f'Built {built} reviewed portraits, kept {len(kept)} finished ones; {len(pending)} pending; '
+          f'{len(characters)-len(approved)} not approved use the placeholder.')
 
 
 if __name__ == '__main__':

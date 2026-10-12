@@ -1,9 +1,15 @@
 import { useState } from 'react';
 import type { Character } from '../engine/types';
 export function Portrait({character:c,className=''}:{character:Character;className?:string}){
-  const [failed,setFailed]=useState(false);
+  /*
+   * Se o retrato não abrir (um retrato aprovado que ainda está chegando), usa o provisório do personagem e,
+   * se nem ele abrir, o desenho abaixo.
+   */
+  const provisorio=`/assets/portraits/placeholder-${c.id}.svg`;
+  const [tentativa,setTentativa]=useState(0);
+  const src=tentativa===0?c.portrait:provisorio,failed=tentativa>=2||(tentativa===1&&c.portrait===provisorio);
   return <div className={`portrait ${className}`} style={{'--character':c.color} as React.CSSProperties}>
-    {!failed&&<img src={c.portrait} data-portrait={c.id} alt="" loading="lazy" decoding="async" onError={()=>setFailed(true)}/>}
+    {!failed&&<img key={src} src={src} data-portrait={c.id} alt="" loading="lazy" decoding="async" onError={()=>setTentativa(t=>t+1)}/>}
     {failed&&<svg className="portrait-art" viewBox="0 0 240 300" aria-hidden="true">
       <defs><linearGradient id={`g-${c.id}-${className.replaceAll(' ','')}`} x2="1" y2="1"><stop stopColor={c.color} stopOpacity=".6"/><stop offset="1" stopColor={c.color} stopOpacity=".05"/></linearGradient></defs>
       <circle cx="120" cy="115" r="90" fill="none" stroke={c.color} opacity=".2"/><circle cx="120" cy="115" r="73" fill="none" stroke={c.color} opacity=".12"/>
