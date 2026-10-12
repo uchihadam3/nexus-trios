@@ -20,6 +20,7 @@
  * personagens que poderiam entrar.
  */
 import { byId, characters } from '../data/characters';
+import { AJUSTE_DAS_DUPLAS, ALFABETO_DAS_DUPLAS } from '../data/duplas-ajuste';
 import { DUPLAS } from '../data/duplas-medidas';
 import { FORCA, PESO_DA_LIGACAO } from '../data/forca-dos-rivais';
 import { pontoFraco } from '../data/ponto-fraco';
@@ -58,6 +59,27 @@ const SOLOS = Object.values(DUPLAS).map((d) => d.solo).sort((a, b) => a - b);
 const pct = (x: number) => `${Math.round(100 * x)}%`;
 const lista3 = (l: string[]) => (l.length > 1 ? `${l.slice(0, -1).join(', ')} e ${l.at(-1)}` : l[0] ?? '');
 const chaveDoCombo = (c: { id: string; de: string[]; para: string[] }) => `${c.id}|${[...c.de, ...c.para].sort().join(',')}`;
+
+/*
+ * O quanto a dupla rende além da força dos dois e dos combos (src/data/duplas-ajuste.ts): o que as habilidades
+ * de um fazem pelas do outro sem ser combo, medido nas lutas. Um caractere por dupla, na ordem do elenco.
+ */
+const POSICAO = new Map(characters.map((c, i) => [c.id, i])), TOTAL = characters.length;
+const VALOR = new Map([...ALFABETO_DAS_DUPLAS].map((ch, i) => [ch, (i - 32) * 0.03]));
+export function ajusteDaDupla(a: string, b: string): number {
+  let i = POSICAO.get(a), j = POSICAO.get(b);
+  if (i === undefined || j === undefined || i === j) return 0;
+  if (i > j) [i, j] = [j, i];
+  return VALOR.get(AJUSTE_DAS_DUPLAS[i * TOTAL - (i * (i + 1)) / 2 + (j - i - 1)]!) ?? 0;
+}
+/** A nota de um trio (ou dupla) para as Dicas: a força, os combos e o que cada dupla rende junta. */
+export function notaDoTrio(team: readonly string[]): number {
+  let n = forcaDoTrio(team);
+  for (let a = 0; a < team.length; a++) for (let b = a + 1; b < team.length; b++) n += ajusteDaDupla(team[a]!, team[b]!);
+  return n;
+}
+/* de logit para pontos de vitória, perto de 50% (para a explicação) */
+const pontos = (z: number) => Math.round(25 * Math.abs(z));
 
 const aguenta = (id: string) => byId[id]!.hp >= VIDA_MEDIANA * 1.12 || papelDe(id).cuida;
 
@@ -107,6 +129,12 @@ function motivosDe(c: string, time: string[]): MotivoOrdenado[] {
       const com = [...new Set([...x.de, ...x.para])].filter((id) => id !== c).map(nome);
       const peso = PESO_DA_LIGACAO[x.id.startsWith('lenda-') ? 'lenda' : x.id] ?? 0.3;
       motivos.push({ texto: `Forma o combo ${x.nome}${com.length ? ` com ${lista3(com)}` : ''}`, tom: 'bom', ordem: 30 + peso * 20, porque: `${x.nome}: ${x.texto}`, resumo: `combo ${x.nome}` });
+    }
+    // o que a dupla rende além dos combos, medido: as habilidades de um ajudam (ou atrapalham) as do outro
+    for (const m of time) {
+      const z = ajusteDaDupla(c, m);
+      if (z >= 0.2) motivos.push({ texto: `Rende mais junto com ${nome(m)} do que os dois separados`, tom: 'bom', ordem: 26 + z * 10, porque: `Medido nas lutas: além dos combos, as habilidades de ${nome(c)} e ${nome(m)} se ajudam — a dupla vence uns ${pontos(z)} pontos a mais do que o esperado`, resumo: `rende mais com ${nome(m)}` });
+      else if (z <= -0.2) motivos.push({ texto: `Com ${nome(m)} rende menos do que parece`, tom: 'alerta', ordem: 2 - z, porque: `Medido nas lutas: as habilidades de ${nome(c)} e ${nome(m)} atrapalham uma à outra — a dupla vence uns ${pontos(z)} pontos a menos do que o esperado` });
     }
     // a dupla medida: com quem já está no trio, se for uma das três melhores dele (ou dele com o candidato)
     for (const m of time) {
@@ -180,7 +208,7 @@ function resumoDe(c: string, motivos: MotivoOrdenado[]): MotivoOrdenado | undefi
 
 /** As dicas para os candidatos da vez. `fora`: quem não pode entrar (o trio e os banidos). */
 export function dicasDoDraft(candidatos: string[], time: string[], fora: string[] = []): DicaDoCandidato[] {
-  const nota = (id: string) => (time.length ? forcaDoTrio([...time, id]) : FORCA[id] ?? 0);
+  const nota = (id: string) => (time.length ? notaDoTrio([...time, id]) : FORCA[id] ?? 0);
   const pool = characters.map((c) => c.id).filter((id) => !time.includes(id) && !fora.includes(id)).map(nota).sort((a, b) => a - b);
   const lista = candidatos.map((id) => {
     const encaixe = Math.min(99, percentil(pool, nota(id)));

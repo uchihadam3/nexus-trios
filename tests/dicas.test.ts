@@ -1,11 +1,11 @@
 import { describe, expect, it } from 'vitest';
 import { byId, characters } from '../src/data/characters';
-import { forcaDoTrio, generateCampaign, newDraft } from '../src/engine/campaign';
+import { generateCampaign, newDraft } from '../src/engine/campaign';
 import { CUSTO_DAS_DICAS, pontosDaLuta } from '../src/engine/pontos';
 import { replayRanked } from '../src/engine/ranked';
 import { createBattle, stepBattle } from '../src/engine/battle';
 import { pontoFraco } from '../src/data/ponto-fraco';
-import { dicasDoDraft } from '../src/presentation/dicas-do-trio';
+import { dicasDoDraft, notaDoTrio } from '../src/presentation/dicas-do-trio';
 
 const ids = characters.map((c) => c.id);
 
@@ -30,7 +30,7 @@ describe('Dicas de trio', () => {
   it('pensa no trio inteiro: a melhor escolha é a que deixa o trio mais forte com todos que já estão nele', () => {
     const time = ['naruto', 'sakura'], candidatos = ids.filter((id) => !time.includes(id)).slice(0, 3);
     const melhor = dicasDoDraft(candidatos, time).find((x) => x.melhor)!.id;
-    const nota = (id: string) => forcaDoTrio([...time, id]);
+    const nota = (id: string) => notaDoTrio([...time, id]);
     expect(Math.max(...candidatos.map(nota))).toBe(nota(melhor));
   });
 
