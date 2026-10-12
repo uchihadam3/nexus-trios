@@ -388,16 +388,6 @@ def gravidade(rng, v):
     return reverb(x, 0.6, 0.2, 2500)
 
 
-def cosmico(rng, v):
-    n = n_de(1.3)
-    x = np.zeros(n)
-    for k, m in enumerate((60, 67, 72, 79)):
-        poe(x, modal(n_de(1.0), nota(m), rng=rng, **SINO) * env(n_de(1.0), 0.05, 0.6) * 0.12, k * 0.06)
-    x += passa(rosa(rng, n), 2000, 9000, 2) * env(n, 0.1, 0.6) * 0.15
-    poe(x, B.impacto_energia(rng, v)[: n_de(0.4)] * 0.6, 0.2)
-    return reverb(x, 0.85, 0.4, 7000)
-
-
 def supernova(rng, v):
     x = _z(1.6)
     n = n_de(0.5)
@@ -510,14 +500,6 @@ def bloco_de_gelo(rng, v):
     poe(x, baque(n_de(0.4), 160, 80, 0.08, 0.3) * 0.5, 0.25)
     poe(x, graos(rng, n_de(0.6), 15, 0.3, 0.5, 2500, 8000, 0.004) * 0.4, 0.2)
     return reverb(x, 0.4, 0.2, 7000)
-
-
-def espinho_de_gelo(rng, v):
-    x = _z(1.0)
-    for k in range(5):
-        poe(x, B.gelo(rng, v)[: n_de(0.3)] * 0.35 + estalo(rng, n_de(0.3), 1500, 7000, 0.006) * 0.4, k * 0.05)
-    poe(x, baque(n_de(0.5), 120, 55, 0.1, 0.3) * 0.6, 0)
-    return x
 
 
 def tempestade(rng, v):
@@ -896,14 +878,6 @@ def lentidao(rng, v):
     x += passa(ruido(rng, n), 2500, 7000, 2) * env(n, 0.2, 0.6, segura=0.3) * 0.08
     x += seno(varre(nota(60), nota(48), n, 0.5), n) * env(n, 0.1, 0.8) * 0.12
     return reverb(x, 0.5, 0.25)
-
-
-def marca(rng, v):
-    x = _z(0.9)
-    poe(x, seno(varre(1500, 1500, n_de(0.25)), n_de(0.25)) * env(n_de(0.25), 0.005, 0.1) * 0.12, 0)
-    poe(x, seno(varre(2000, 2000, n_de(0.1)), n_de(0.1)) * env(n_de(0.1), 0.002, 0.05) * 0.15, 0.25)
-    poe(x, baque(n_de(0.25), 300, 150, 0.03, 0.8) * 0.4 + estalo(rng, n_de(0.25), 2000, 8000, 0.004) * 0.5, 0.32)
-    return reverb(x, 0.3, 0.15)
 
 
 def silencio(rng, v):

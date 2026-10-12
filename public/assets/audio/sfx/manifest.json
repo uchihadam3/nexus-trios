@@ -2,6 +2,23 @@
  "taxa": 44100,
  "versoes": 4,
  "sons": {
+  "absorcao-boo": {
+   "arquivo": "absorcao-boo.mp3",
+   "descricao": "Boo: a absorção",
+   "versoes": [
+    0.0,
+    1.8468,
+    3.7565,
+    5.5445
+   ],
+   "duracoes": [
+    1.7668,
+    1.8298,
+    1.708,
+    1.7932
+   ],
+   "bytes": 45794
+  },
   "absorcao-cosmica": {
    "arquivo": "absorcao-cosmica.mp3",
    "descricao": "Capitã Marvel: a energia sugada e a aura",
@@ -766,6 +783,23 @@
     1.4213
    ],
    "bytes": 53613
+  },
+  "aurora-de-camus": {
+   "arquivo": "aurora-de-camus.mp3",
+   "descricao": "Camus: a Execução Aurora",
+   "versoes": [
+    0.0,
+    2.38,
+    4.8434,
+    7.1456
+   ],
+   "duracoes": [
+    2.3,
+    2.3834,
+    2.2222,
+    2.335
+   ],
+   "bytes": 85499
   },
   "aurora-preparo": {
    "arquivo": "aurora-preparo.mp3",
@@ -1651,6 +1685,23 @@
    ],
    "bytes": 23841
   },
+  "boo-preparo": {
+   "arquivo": "boo-preparo.mp3",
+   "descricao": "Boo: o corpo borbulhando (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 46989
+  },
   "bote-da-medusa": {
    "arquivo": "bote-da-medusa.mp3",
    "descricao": "básico da Medusa: o sibilo e a pedra",
@@ -1990,6 +2041,23 @@
     1.2247
    ],
    "bytes": 38048
+  },
+  "camus-preparo": {
+   "arquivo": "camus-preparo.mp3",
+   "descricao": "Camus: o frio (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 64515
   },
   "canhao": {
    "arquivo": "canhao.mp3",
@@ -2994,6 +3062,23 @@
    ],
    "bytes": 87366
   },
+  "circulo-polar": {
+   "arquivo": "circulo-polar.mp3",
+   "descricao": "Camus: o Círculo Polar",
+   "versoes": [
+    0.0,
+    1.6051,
+    3.2086,
+    4.7632
+   ],
+   "duracoes": [
+    1.5251,
+    1.5235,
+    1.4746,
+    1.4605
+   ],
+   "bytes": 58804
+  },
   "circulo-protetor": {
    "arquivo": "circulo-protetor.mp3",
    "descricao": "Alphonse: o círculo de transmutação",
@@ -3538,6 +3623,40 @@
    ],
    "bytes": 70183
   },
+  "corrente-interceptadora": {
+   "arquivo": "corrente-interceptadora.mp3",
+   "descricao": "Shun: a corrente interceptadora",
+   "versoes": [
+    0.0,
+    1.1452,
+    2.2573,
+    3.3052
+   ],
+   "duracoes": [
+    1.0652,
+    1.0321,
+    0.9679,
+    1.0125
+   ],
+   "bytes": 44185
+  },
+  "corrente-nebular": {
+   "arquivo": "corrente-nebular.mp3",
+   "descricao": "Shun: a corrente nebular",
+   "versoes": [
+    0.0,
+    1.7097,
+    3.4568,
+    5.1042
+   ],
+   "duracoes": [
+    1.6297,
+    1.6671,
+    1.5674,
+    1.6485
+   ],
+   "bytes": 70534
+  },
   "cortador-de-plasma": {
    "arquivo": "cortador-de-plasma.mp3",
    "descricao": "básico de Isaac: bipes da mira, pshew do plasma e chiado",
@@ -3758,23 +3877,6 @@
     1.8274
    ],
    "bytes": 64739
-  },
-  "cosmico": {
-   "arquivo": "cosmico.mp3",
-   "descricao": "família cosmico",
-   "versoes": [
-    0.0,
-    1.38,
-    2.8071,
-    4.1432
-   ],
-   "duracoes": [
-    1.3,
-    1.3471,
-    1.256,
-    1.3198
-   ],
-   "bytes": 51503
   },
   "cosmo-ardente": {
    "arquivo": "cosmo-ardente.mp3",
@@ -4711,6 +4813,23 @@
    ],
    "bytes": 45289
   },
+  "elisios": {
+   "arquivo": "elisios.mp3",
+   "descricao": "Hades: Elísios",
+   "versoes": [
+    0.0,
+    2.28,
+    4.6398,
+    6.8454
+   ],
+   "duracoes": [
+    2.2,
+    2.2798,
+    2.1256,
+    2.2335
+   ],
+   "bytes": 72695
+  },
   "empurrao-de-campo": {
    "arquivo": "empurrao-de-campo.mp3",
    "descricao": "básico da Violeta: a bolha e o empurrão",
@@ -4982,6 +5101,23 @@
     1.4066
    ],
    "bytes": 45198
+  },
+  "escudo-do-dragao": {
+   "arquivo": "escudo-do-dragao.mp3",
+   "descricao": "Shiryu: o escudo do dragão",
+   "versoes": [
+    0.0,
+    1.4962,
+    3.0792,
+    4.4926
+   ],
+   "duracoes": [
+    1.4162,
+    1.503,
+    1.3335,
+    1.424
+   ],
+   "bytes": 49335
   },
   "escudo-do-mentor": {
    "arquivo": "escudo-do-mentor.mp3",
@@ -5578,23 +5714,6 @@
    ],
    "bytes": 31919
   },
-  "espinho-de-gelo": {
-   "arquivo": "espinho-de-gelo.mp3",
-   "descricao": "família espinho de gelo",
-   "versoes": [
-    0.0,
-    0.61,
-    1.2381,
-    1.8312
-   ],
-   "duracoes": [
-    0.53,
-    0.5481,
-    0.5131,
-    0.5376
-   ],
-   "bytes": 28530
-  },
   "espinho-preparo": {
    "arquivo": "espinho-preparo.mp3",
    "descricao": "Yor: os ramos e os estiletes (antes do golpe)",
@@ -6053,6 +6172,23 @@
     2.2335
    ],
    "bytes": 78217
+  },
+  "explosao-galactica": {
+   "arquivo": "explosao-galactica.mp3",
+   "descricao": "Saga: a Explosão Galáctica",
+   "versoes": [
+    0.0,
+    2.48,
+    5.047,
+    7.4459
+   ],
+   "duracoes": [
+    2.4,
+    2.487,
+    2.3188,
+    2.4365
+   ],
+   "bytes": 81948
   },
   "explosao-ultimate": {
    "arquivo": "explosao-ultimate.mp3",
@@ -8128,6 +8264,23 @@
    ],
    "bytes": 50867
   },
+  "hades-preparo": {
+   "arquivo": "hades-preparo.mp3",
+   "descricao": "Hades: a espada (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 24651
+  },
   "hadouken-ryu": {
    "arquivo": "hadouken-ryu.mp3",
    "descricao": "Ryu: Hadouken",
@@ -8263,6 +8416,23 @@
     1.3198
    ],
    "bytes": 23845
+  },
+  "hiraishin": {
+   "arquivo": "hiraishin.mp3",
+   "descricao": "Minato: Hiraishin",
+   "versoes": [
+    0.0,
+    0.9741,
+    1.9904,
+    2.9621
+   ],
+   "duracoes": [
+    0.8941,
+    0.9362,
+    0.8917,
+    0.9802
+   ],
+   "bytes": 39225
   },
   "homing-attack": {
    "arquivo": "homing-attack.mp3",
@@ -9011,6 +9181,23 @@
     2.2335
    ],
    "bytes": 70352
+  },
+  "juizo-dos-mortos": {
+   "arquivo": "juizo-dos-mortos.mp3",
+   "descricao": "Hades: o juízo dos mortos",
+   "versoes": [
+    0.0,
+    2.48,
+    5.047,
+    7.4459
+   ],
+   "duracoes": [
+    2.4,
+    2.487,
+    2.3188,
+    2.4365
+   ],
+   "bytes": 71370
   },
   "julgamento-de-khonshu": {
    "arquivo": "julgamento-de-khonshu.mp3",
@@ -10746,22 +10933,22 @@
    ],
    "bytes": 50266
   },
-  "marca": {
-   "arquivo": "marca.mp3",
-   "descricao": "família marca",
+  "marca-voadora": {
+   "arquivo": "marca-voadora.mp3",
+   "descricao": "Minato: a marca voadora",
    "versoes": [
     0.0,
-    0.98,
-    1.9926,
-    2.9422
+    1.4315,
+    2.8745,
+    4.1998
    ],
    "duracoes": [
-    0.9,
-    0.9326,
-    0.8695,
-    0.9137
+    1.3515,
+    1.363,
+    1.2453,
+    1.3049
    ],
-   "bytes": 26169
+   "bytes": 56168
   },
   "mare-puxante": {
    "arquivo": "mare-puxante.mp3",
@@ -18753,6 +18940,23 @@
    ],
    "bytes": 36147
   },
+  "outra-dimensao": {
+   "arquivo": "outra-dimensao.mp3",
+   "descricao": "Saga: Outra Dimensão",
+   "versoes": [
+    0.0,
+    2.18,
+    4.4361,
+    6.5451
+   ],
+   "duracoes": [
+    2.1,
+    2.1761,
+    2.029,
+    2.132
+   ],
+   "bytes": 77701
+  },
   "palma-gentil": {
    "arquivo": "palma-gentil.mp3",
    "descricao": "básico da Hinata: o Byakugan e a palma",
@@ -19228,6 +19432,23 @@
     1.5136
    ],
    "bytes": 53486
+  },
+  "po-de-diamante": {
+   "arquivo": "po-de-diamante.mp3",
+   "descricao": "Camus: o Pó de Diamante",
+   "versoes": [
+    0.0,
+    1.6833,
+    3.4776,
+    5.1345
+   ],
+   "duracoes": [
+    1.6033,
+    1.7143,
+    1.5769,
+    1.6462
+   ],
+   "bytes": 80762
   },
   "poder-da-triade": {
    "arquivo": "poder-da-triade.mp3",
@@ -20300,6 +20521,23 @@
    ],
    "bytes": 40669
   },
+  "raio-de-doce": {
+   "arquivo": "raio-de-doce.mp3",
+   "descricao": "Boo: o raio de doce",
+   "versoes": [
+    0.0,
+    1.4606,
+    2.9384,
+    4.3251
+   ],
+   "duracoes": [
+    1.3806,
+    1.3978,
+    1.3067,
+    1.3716
+   ],
+   "bytes": 42601
+  },
   "raio-de-gaia": {
    "arquivo": "raio-de-gaia.mp3",
    "descricao": "básico do Capitão Planeta: cinco notas de cristal que viram um raio limpo e brilhante",
@@ -20843,6 +21081,23 @@
     1.8274
    ],
    "bytes": 71435
+  },
+  "regeneracao-total": {
+   "arquivo": "regeneracao-total.mp3",
+   "descricao": "Boo: a regeneração total",
+   "versoes": [
+    0.0,
+    1.6968,
+    3.3725,
+    5.0156
+   ],
+   "duracoes": [
+    1.6168,
+    1.5958,
+    1.5631,
+    1.6409
+   ],
+   "bytes": 50237
   },
   "rei-shotgun": {
    "arquivo": "rei-shotgun.mp3",
@@ -21710,6 +21965,23 @@
     2.0305
    ],
    "bytes": 59575
+  },
+  "sata-imperial": {
+   "arquivo": "sata-imperial.mp3",
+   "descricao": "Saga: Satã Imperial",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 67189
   },
   "scorpion-preparo": {
    "arquivo": "scorpion-preparo.mp3",
@@ -22697,6 +22969,23 @@
    ],
    "bytes": 54774
   },
+  "sono-eterno": {
+   "arquivo": "sono-eterno.mp3",
+   "descricao": "Hades: o sono eterno",
+   "versoes": [
+    0.0,
+    2.28,
+    4.6398,
+    6.8454
+   ],
+   "duracoes": [
+    2.2,
+    2.2798,
+    2.1256,
+    2.2335
+   ],
+   "bytes": 73163
+  },
   "sopro-de-fogo": {
    "arquivo": "sopro-de-fogo.mp3",
    "descricao": "família sopro de fogo",
@@ -23274,6 +23563,23 @@
     2.124
    ],
    "bytes": 76608
+  },
+  "tempestade-nebular": {
+   "arquivo": "tempestade-nebular.mp3",
+   "descricao": "Shun: a tempestade nebular",
+   "versoes": [
+    0.0,
+    2.18,
+    4.4361,
+    6.5451
+   ],
+   "duracoes": [
+    2.1,
+    2.1761,
+    2.029,
+    2.0739
+   ],
+   "bytes": 77122
   },
   "tempestade-preparo": {
    "arquivo": "tempestade-preparo.mp3",

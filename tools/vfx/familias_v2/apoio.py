@@ -738,7 +738,6 @@ REGISTRO = [
     ("purificar_onda", purificar, GRANDE, "onda que lava", False),
     ("enfraquecer", enfraquecer, GRANDE, "setas para baixo", False),
     ("lentidao", lentidao, GRANDE, "ampulheta", False),
-    ("marca", marca, GRANDE, "alvo travando", False),
     ("silencio", silencio, GRANDE, "som cortado", False),
     ("medo", medo, GRANDE, "olhos na sombra", False),
     ("estrela_invencivel", estrela_invencivel, GRANDE, "estrela invencível", False),

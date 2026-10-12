@@ -86,24 +86,6 @@ def gravidade(T, t, rng):
     return G, H
 
 
-def cosmico(T, t, rng):
-    """Cosmos: uma galáxia de dois braços gira no alvo, estrelas piscando em volta."""
-    G, H = vazio(T)
-    abre = ease_out(rel(t, 0, 0.35), 2)
-    env = apaga(t, 0.65, 1)
-    r = T.RAD / max(abre, 0.05)
-    bracos = (0.5 + 0.5 * np.cos(2 * T.ANG - r * 6 + t * 5)) ** 4 * np.exp(-(r / 0.7) ** 2) * (r > 0.04)
-    nucleo = T.gauss(0, 0, 0.1 * abre + 0.01) * 2.4
-    sub = np.random.default_rng(311)
-    est = T.zero()
-    for k in range(14):
-        x, y = sub.uniform(-0.85, 0.85), sub.uniform(-0.85, 0.85)
-        est += T.flare(x, y, 0.25, 0.4) * pulso((t * 2 + sub.uniform(0, 1)) % 1, 0, 1) * 0.9
-    G += (bracos * 1.5 + nucleo + est) * env
-    H += (nucleo + bracos * 0.5 + est * 0.8) * env
-    return G, H
-
-
 def supernova(T, t, rng):
     """Supernova: um sol branco nasce, raios longos giram e uma casca de luz se expande."""
     G, H = vazio(T)
@@ -258,7 +240,6 @@ REGISTRO = [
     ("esfera_espiral", esfera_espiral, GRANDE, "esfera em espiral moendo", False),
     ("buraco_negro", buraco_negro, GRANDE, "buraco negro sugando", False),
     ("gravidade", gravidade, GRANDE, "pressão de gravidade", False),
-    ("cosmico", cosmico, GRANDE, "galáxia girando", False),
     ("supernova", supernova, GRANDE, "sol que explode", False),
     ("pulso_emp", pulso_emp, GRANDE, "pulso eletromagnético", False),
     ("pilar", pilar, GRANDE, "pilar de energia subindo", False),

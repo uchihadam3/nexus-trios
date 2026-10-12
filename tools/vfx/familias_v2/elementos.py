@@ -116,28 +116,6 @@ def bloco_de_gelo(T, t, rng):
     return G, H
 
 
-def espinho_de_gelo(T, t, rng):
-    """Espinho de gelo: lanças de cristal rompem o chão sob o alvo em sequência."""
-    G, H = vazio(T)
-    env = apaga(t, 0.65, 1)
-    sub = np.random.default_rng(461)
-    lancas, arestas = [], []
-    for k in range(5):
-        x = (k - 2) * 0.17 + sub.uniform(-0.04, 0.04)
-        h = (0.75 - abs(k - 2) * 0.15) * back(rel(t, 0.04 * k, 0.2 + 0.04 * k), 1.6)
-        w = 0.07 + 0.02 * (k == 2)
-        incl = (k - 2) * 0.06
-        topo = (x + incl * h, 0.5 - h)
-        lancas.append(([(x - w, 0.5), topo, (x + w, 0.5)], 1))
-        arestas.append((x, 0.5, topo[0], topo[1], 1))
-    l = T.polys(lancas, 0.004)
-    a = T.lines(arestas, 0.008, 0.002)
-    poe = poeira(T, rng, t, 16, 0, 0.5, 0.6, 0.15, 0.03)
-    G += (l * 0.9 + a * 1.4 + poe * 0.7) * env
-    H += (a * 1.1 + l * 0.3) * env
-    return G, H
-
-
 def tempestade(T, t, rng):
     """Tempestade: uma nuvem escurece o alto e raios grossos descem no alvo, um, dois, três."""
     G, H = vazio(T)
@@ -426,7 +404,6 @@ REGISTRO = [
     ("dragao", dragao, GRANDE, "dragão serpenteando", False),
     ("nevasca", nevasca, GRANDE, "flocos em redemoinho", False),
     ("bloco_de_gelo", bloco_de_gelo, GRANDE, "bloco de gelo prendendo", False),
-    ("espinho_de_gelo", espinho_de_gelo, GRANDE, "lanças de gelo do chão", False),
     ("tempestade", tempestade, GRANDE, "nuvem e raios de cima", False),
     ("raio_em_cadeia", raio_em_cadeia, GRANDE, "raio pulando em cadeia", False),
     ("areia", areia, GRANDE, "casulo de areia", False),
