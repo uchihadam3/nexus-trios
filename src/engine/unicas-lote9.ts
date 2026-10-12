@@ -378,11 +378,14 @@ export const LOTE9: Record<string, Unica> = {
   },
   cell: {
     nome: 'Autodestruição',
-    texto: 'Com menos de 20% da Vida (1 vez por luta): 3 s depois, Cell explode. Cada rival leva dano igual a 18% da Vida máxima de Cell, e Cell fica com 1 de Vida.',
+    texto: 'Com menos de 20% da Vida, ainda de pé (1 vez por luta): 3 s depois, Cell explode. Cada rival leva dano igual a 18% da Vida máxima de Cell, e Cell fica com 1 de Vida. Se Cell cair antes, não explode e pode tentar de novo depois de renascer.',
     ganchos: {
-      apanhou(m, b, f) { if (!u(f).bomba && fracao(f) < 0.2) { u(f).bomba = b.time + 3; m.aviso(b, f, 'Vai explodir!', f); } },
+      // só arma com o Cell de pé, entre 1 de Vida e 20% (o golpe que derruba não arma: aí é o Renascer)
+      apanhou(m, b, f) { if (!u(f).bomba && vivo(f) && fracao(f) < 0.2) { u(f).bomba = b.time + 3; m.aviso(b, f, 'Vai explodir!', f); } },
+      // caiu durante a contagem: a explosão não sai e não conta como usada (depois de renascer, pode armar de novo)
+      morreu(_m, _b, f) { if ((u(f).bomba ?? 0) > 0) u(f).bomba = 0; },
       passo(m, b, f) {
-        if (!u(f).bomba || u(f).bomba! < 0 || b.time < u(f).bomba!) return;
+        if (!u(f).bomba || u(f).bomba! < 0 || b.time < u(f).bomba! || !vivo(f)) return;
         u(f).bomba = -1;
         m.aviso(b, f, 'Autodestruição', f);
         for (const r of m.rivais(b, f)) m.dano(b, f, r, f.maxHp * 0.18, false, 'Explosão');
