@@ -67,6 +67,10 @@ export const VISUAL_DO_COMBO: Record<string, { icone: LucideIcon; cor: string }>
   'trio-muralha': { icone: Castle, cor: '#7fe0b0' },
   'trio-imortais': { icone: Infinito, cor: '#ffe27a' },
 };
+/** Artes individuais do Livro de Combos. As próximas podem entrar neste mapa sem mexer na lógica do livro. */
+export const ARTES_DO_COMBO: Record<string, { fundo: string; selo: string }> = {
+  'gelo-fogo': { fundo: '/assets/combos/choque-termico-bg.webp', selo: '/assets/combos/choque-termico-selo.webp' },
+};
 const ehTrio = (id: string) => id.startsWith('trio-');
 const visual = (id: string) => VISUAL_DO_COMBO[id] ?? (id.startsWith('lenda-') ? { icone: Crown, cor: '#ffd36b' } : { icone: Link2, cor: '#c8f560' });
 const pct = (v: number) => `${Math.round(v * 100)}%`;
@@ -205,13 +209,13 @@ export const visualDoCombo = (id: string) => ({ ...visual(id), raridade: raridad
  * combo e o que ele faz — a luta toda, de tempo em tempo e nos rivais.
  */
 export function CartaDoCombo({ id }: { id: string }) {
-  const v = visual(id), Icone = v.icone, rar = raridadeDe(id);
+  const v = visual(id), Icone = v.icone, arte = ARTES_DO_COMBO[id], rar = raridadeDe(id);
   const regra = REGRAS.find((r) => r.id === id), trio = TRIOS.find((t) => t.id === id), lenda = DUPLAS_LENDARIAS.find((l) => l.id === id), uni = UNIVERSOS.find((u) => u.id === id);
   const a = lenda && byId[lenda.a], b = lenda && byId[lenda.b];
   const nome = regra?.nome ?? trio?.nome ?? lenda?.nome ?? uni?.nome ?? id;
   return <article className={`cb-carta cb-ficha acesa ${rar} ${trio ? 'trio' : ''} ${lenda ? 'lenda' : ''}`} style={{ '--cb': lenda ? '#ffd36b' : v.cor } as CSSProperties}>
     {a && b ? <span className="cb-par"><Portrait character={a} /><Crown size={16} /><Portrait character={b} /></span>
-      : <span className="cb-icone"><span className="cb-anel" aria-hidden /><Icone size={24} /></span>}
+      : <span className="cb-icone"><span className="cb-anel" aria-hidden />{arte ? <img className="cb-icone-arte" src={arte.selo} alt="" /> : <Icone size={24} />}</span>}
     <h3>{nome}</h3>
     <SeloDeRaridade r={rar} />
     {regra && <dl><dt>Quem ajuda</dt><dd>Alguém que {PECAS[regra.ajuda]}</dd><dt>Quem recebe</dt><dd>Alguém que {PECAS[regra.ganha]}</dd></dl>}

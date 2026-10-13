@@ -1,6 +1,6 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState, type CSSProperties } from 'react';
 import { BookOpen, Castle, ChevronLeft, ChevronRight, Crown, Globe, Link2, Lock, Sparkles, X, type LucideIcon } from 'lucide-react';
-import { CartaDoCombo, TODOS_OS_COMBOS, visualDoCombo, type TipoDeCombo } from '../components/CombosDoTrio';
+import { ARTES_DO_COMBO, CartaDoCombo, TODOS_OS_COMBOS, visualDoCombo, type TipoDeCombo } from '../components/CombosDoTrio';
 
 /*
  * O Livro de Combos (pedido do jogador: sair do "Como jogar" e ficar na tela
@@ -112,11 +112,11 @@ export function LivroDeCombos({ descobertos, vistos, onVer }: { descobertos: rea
         <div className="lc-trilho" ref={trilho} onScroll={(e) => { const t = e.currentTarget, p = Math.round(t.scrollLeft / Math.max(1, t.clientWidth)); if (p !== pagina) setPagina(p); }}>
           {folhas.map((folha, fi) => <div key={`${aba}-${fi}`} className="lc-grade" style={{ gridTemplateColumns: `repeat(${grade.colunas},minmax(0,1fr))`, gridTemplateRows: `repeat(${grade.linhas},minmax(0,1fr))` }}>
             {folha.map((c, i) => {
-              const v = visualDoCombo(c.id), Icone = v.icone, on = aceso(c.id), novo = on && !vistosAoAbrir.has(c.id);
-              return <button key={c.id} type="button" className={`lc-peca ${on ? `acesa ${v.raridade}` : 'apagada'} ${novo ? 'nova' : ''} ${trancado === c.id ? 'treme' : ''}`}
-                style={{ '--cb': c.tipo === 'lendarias' ? '#ffd36b' : v.cor, '--i': i } as CSSProperties} onClick={() => abre(c.id)}
+              const v = visualDoCombo(c.id), Icone = v.icone, arte = ARTES_DO_COMBO[c.id], on = aceso(c.id), novo = on && !vistosAoAbrir.has(c.id);
+              return <button key={c.id} type="button" data-combo={c.id} className={`lc-peca ${arte ? 'com-arte' : ''} ${on ? `acesa ${v.raridade}` : 'apagada'} ${novo ? 'nova' : ''} ${trancado === c.id ? 'treme' : ''}`}
+                style={{ '--cb': c.tipo === 'lendarias' ? '#ffd36b' : v.cor, '--i': i, '--combo-fundo': arte ? `url("${arte.fundo}")` : undefined } as CSSProperties} onClick={() => abre(c.id)}
                 aria-label={on ? `${c.nome}: ver a ficha` : `${c.nome}: ainda não descoberto`}>
-                <span className="lc-selo">{on ? <Icone size={20} /> : <Lock size={16} />}</span>
+                <span className="lc-selo">{arte ? <><img className="lc-selo-arte" src={arte.selo} alt="" />{!on && <Lock className="lc-selo-cadeado" size={12} />}</> : on ? <Icone size={20} /> : <Lock size={16} />}</span>
                 <b>{c.nome}</b>
                 {novo && <em>NOVO</em>}
               </button>;

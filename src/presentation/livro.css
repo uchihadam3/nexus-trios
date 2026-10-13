@@ -128,3 +128,13 @@
   .lc-rodape{min-height:36px;padding-top:4px}.lc-seta{width:34px;height:30px}
 }
 @media (prefers-reduced-motion:reduce){.lc-peca,.lc-topo,.lc-abas,.lc-album,.lc-anel-cheio,.lc-barra i,.lc-ficha,.cb-descoberta,.lc-peca.nova,.lc-peca.acesa .lc-selo::after,.lc-topo::after{animation:none}.lc-trilho{scroll-behavior:auto}}
+
+/* Choque térmico: arte aparece como pista escura antes da descoberta e se revela com a cor do combo. */
+.lc-peca.com-arte::before{content:'';position:absolute;inset:0;z-index:0;background:linear-gradient(180deg,#0610195c 0%,#0710185c 42%,#071018ed 100%),var(--combo-fundo) center 45%/cover;pointer-events:none}
+.lc-peca.com-arte .lc-selo,.lc-peca.com-arte b,.lc-peca.com-arte em{z-index:1}
+.lc-peca.com-arte.apagada::before{filter:grayscale(1) brightness(.4);opacity:.8}
+.lc-peca.com-arte.acesa .lc-selo{background:radial-gradient(circle at 38% 30%,#253b4b,#08131b 70%)}
+.lc-selo-arte{width:94%;height:94%;object-fit:contain;filter:drop-shadow(0 0 4px #80dcff80)}
+.lc-peca.apagada .lc-selo-arte{filter:grayscale(1) brightness(.55)}
+.lc-selo-cadeado{position:absolute;right:-5px;bottom:-4px;z-index:2;box-sizing:content-box;padding:3px;border-radius:50%;color:#e3ebf2;background:#111a23;border:1px solid #9fb3c2}
+.cb-icone-arte{position:relative;z-index:1;width:92%;height:92%;object-fit:contain;filter:drop-shadow(0 0 6px #7fd8ff88)}
