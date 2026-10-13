@@ -1986,6 +1986,15 @@ export const FAMILIAS_NOVAS = {
   soco_de_rua_yusuke: n({ nome: 'Soco de rua', grupo: 'físico', aponta: true, impacto: 'soco_de_rua_yusuke', escala: 2.0, tempo: 1.0, cor: '#6fa8ff', tinta: 'fixa' }),
   soco_omega: n({ nome: 'Soco Ômega', grupo: 'físico', aponta: true, impacto: 'soco_omega', escala: 2.1, tempo: 1.0, cor: '#ef5a5a', tinta: 'fixa' }),
   soco_de_necroplasma: n({ nome: 'Soco de necroplasma', grupo: 'físico', aponta: true, impacto: 'soco_de_necroplasma', escala: 2.0, tempo: 1.0, cor: '#6fe07a', tinta: 'fixa' }),
+  // o ataque básico de cada personagem com animação e som próprios (tools/vfx/familias_v2/basicos_*.py)
+  soco_do_invencivel: n({ nome: 'Soco do Invencível', grupo: 'físico', aponta: true, impacto: 'soco_do_invencivel', escala: 2.0, tempo: 1.0, cor: '#7fb0ff', tinta: 'fixa' }),
+  soco_de_sai_raphael: n({ nome: 'Soco com o sai', grupo: 'físico', aponta: true, impacto: 'soco_de_sai_raphael', escala: 2.0, tempo: 1.0, cor: '#ef6a6a', tinta: 'fixa' }),
+  tapa_do_picapau: n({ nome: 'Tapa de desenho', grupo: 'físico', aponta: true, impacto: 'tapa_do_picapau', escala: 2.0, tempo: 1.0, cor: '#ef6a5a', tinta: 'fixa' }),
+  soco_do_omnitrix: n({ nome: 'Soco do Omnitrix', grupo: 'físico', aponta: true, impacto: 'soco_do_omnitrix', escala: 2.0, tempo: 1.0, cor: '#6fe08a', tinta: 'fixa' }),
+  soco_de_eternia: n({ nome: 'Soco de Eternia', grupo: 'físico', aponta: true, impacto: 'soco_de_eternia', escala: 2.0, tempo: 1.0, cor: '#f5c24a', tinta: 'fixa' }),
+  soco_da_ancora_popeye: n({ nome: 'Soco da âncora', grupo: 'físico', aponta: true, impacto: 'soco_da_ancora_popeye', escala: 2.0, tempo: 1.0, cor: '#6fb8d8', tinta: 'fixa' }),
+  soquinho_de_esponja: n({ nome: 'Soquinho de esponja', grupo: 'físico', aponta: true, impacto: 'soquinho_de_esponja', escala: 2.0, tempo: 1.0, cor: '#f5d24a', tinta: 'fixa' }),
+  soco_decepticon: n({ nome: 'Soco Decepticon', grupo: 'físico', aponta: true, impacto: 'soco_decepticon', escala: 2.1, tempo: 1.0, cor: '#b08cf0', tinta: 'fixa' }),
 } as const satisfies Record<string, Familia>;
 
 export type FamiliaNova = keyof typeof FAMILIAS_NOVAS;
@@ -2008,7 +2017,8 @@ export const NOVAS_NO_ALVO = new Set<FamiliaNova>(['ressurreicao', 'renascer', '
   'toque_vampirico_dio', 'soco_da_vida_giorno', 'soco_serrilhado', 'punho_de_sangue_power', 'soco_formiga', 'soco_de_osso_em_chamas', 'soco_de_luva_da_vampira', 'patada_simbionte',
   'soco_de_metal_ultron', 'soco_do_duende', 'pancada_colossal_galactus', 'soco_de_madeira_groot', 'soco_da_mare', 'soco_de_construto', 'soco_cibernetico', 'soco_relampago_shazam',
   'soco_de_pegaso', 'soco_do_cisne', 'soco_da_fenix', 'soco_de_gemeos', 'soco_do_leao_dourado', 'soco_de_ferro_destino', 'socos_de_luva_tifa', 'grande_faca_piramide',
-  'soquinho_estrelado_kirby', 'peteleco_divino', 'pancada_psiquica_mewtwo', 'punho_da_correnteza', 'soco_de_aco_genos', 'soco_de_rua_yusuke', 'soco_omega', 'soco_de_necroplasma']);
+  'soquinho_estrelado_kirby', 'peteleco_divino', 'pancada_psiquica_mewtwo', 'punho_da_correnteza', 'soco_de_aco_genos', 'soco_de_rua_yusuke', 'soco_omega', 'soco_de_necroplasma',
+  'soco_do_invencivel', 'soco_de_sai_raphael', 'tapa_do_picapau', 'soco_do_omnitrix', 'soco_de_eternia', 'soco_da_ancora_popeye', 'soquinho_de_esponja', 'soco_decepticon']);
 
 /** Bons para o ataque básico do personagem (quando ele já usa a família numa habilidade). */
 export const NOVAS_DE_BASICO = new Set<FamiliaNova>(['garras', 'chicote', 'bastao', 'mordida', 'tentaculos', 'florete',

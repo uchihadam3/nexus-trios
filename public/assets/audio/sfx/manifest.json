@@ -34478,6 +34478,23 @@
    ],
    "bytes": 29059
   },
+  "soco-da-ancora-popeye": {
+   "arquivo": "soco-da-ancora-popeye.mp3",
+   "descricao": "básico de Popeye: o soco de moinho e o tuuut de navio",
+   "versoes": [
+    0.0,
+    1.0525,
+    2.1289,
+    3.1041
+   ],
+   "duracoes": [
+    0.9725,
+    0.9963,
+    0.8953,
+    1.0596
+   ],
+   "bytes": 32129
+  },
   "soco-da-corrente": {
    "arquivo": "soco-da-corrente.mp3",
    "descricao": "básico de Kurapika: a corrente tilintando e o soco",
@@ -34749,6 +34766,23 @@
     0.9041
    ],
    "bytes": 32789
+  },
+  "soco-de-eternia": {
+   "arquivo": "soco-de-eternia.mp3",
+   "descricao": "básico de He-Man: o soco largo com o brilho de poder",
+   "versoes": [
+    0.0,
+    1.0102,
+    2.0855,
+    3.2766
+   ],
+   "duracoes": [
+    0.9302,
+    0.9953,
+    1.1111,
+    0.9798
+   ],
+   "bytes": 31569
   },
   "soco-de-ferro-destino": {
    "arquivo": "soco-de-ferro-destino.mp3",
@@ -35022,6 +35056,23 @@
    ],
    "bytes": 33338
   },
+  "soco-de-sai-raphael": {
+   "arquivo": "soco-de-sai-raphael.mp3",
+   "descricao": "básico de Raphael: o soco com o cabo do sai",
+   "versoes": [
+    0.0,
+    0.9838,
+    1.812,
+    2.7394
+   ],
+   "duracoes": [
+    0.9038,
+    0.7482,
+    0.8474,
+    0.9048
+   ],
+   "bytes": 30215
+  },
   "soco-de-tsunade": {
    "arquivo": "soco-de-tsunade.mp3",
    "descricao": "básico da Tsunade: o soco e o chão rachando",
@@ -35055,6 +35106,23 @@
     1.5228
    ],
    "bytes": 43988
+  },
+  "soco-decepticon": {
+   "arquivo": "soco-decepticon.mp3",
+   "descricao": "básico de Megatron: o servo e o soco de metal pesado",
+   "versoes": [
+    0.0,
+    1.33,
+    2.6826,
+    3.8285
+   ],
+   "duracoes": [
+    1.25,
+    1.2726,
+    1.0659,
+    1.269
+   ],
+   "bytes": 44715
   },
   "soco-divergente": {
    "arquivo": "soco-divergente.mp3",
@@ -35209,6 +35277,23 @@
    ],
    "bytes": 35612
   },
+  "soco-do-invencivel": {
+   "arquivo": "soco-do-invencivel.mp3",
+   "descricao": "básico de Invencível: o estrondo sônico e o soco",
+   "versoes": [
+    0.0,
+    1.13,
+    2.2981,
+    3.3926
+   ],
+   "duracoes": [
+    1.05,
+    1.0881,
+    1.0145,
+    1.066
+   ],
+   "bytes": 32510
+  },
   "soco-do-leao-dourado": {
    "arquivo": "soco-do-leao-dourado.mp3",
    "descricao": "básico de Aiolia: o soco e o rugido curto",
@@ -35276,6 +35361,23 @@
     1.2183
    ],
    "bytes": 34410
+  },
+  "soco-do-omnitrix": {
+   "arquivo": "soco-do-omnitrix.mp3",
+   "descricao": "básico de Ben 10: o bip do Omnitrix e o estalo verde",
+   "versoes": [
+    0.0,
+    0.9404,
+    2.0567,
+    3.1029
+   ],
+   "duracoes": [
+    0.8604,
+    1.0363,
+    0.9662,
+    0.8391
+   ],
+   "bytes": 34564
   },
   "soco-do-principe": {
    "arquivo": "soco-do-principe.mp3",
@@ -35940,6 +36042,23 @@
    ],
    "bytes": 66939
   },
+  "soquinho-de-esponja": {
+   "arquivo": "soquinho-de-esponja.mp3",
+   "descricao": "básico de Bob Esponja: o soquinho fofo e as bolhas",
+   "versoes": [
+    0.0,
+    0.8361,
+    1.7066,
+    2.5654
+   ],
+   "duracoes": [
+    0.7561,
+    0.7905,
+    0.7789,
+    0.8169
+   ],
+   "bytes": 27127
+  },
   "soquinho-estrelado-kirby": {
    "arquivo": "soquinho-estrelado-kirby.mp3",
    "descricao": "básico de Kirby: o pof fofo e o plim da estrela",
@@ -36602,6 +36721,23 @@
     1.174
    ],
    "bytes": 41451
+  },
+  "tapa-do-picapau": {
+   "arquivo": "tapa-do-picapau.mp3",
+   "descricao": "básico de Pica-Pau: o tapa estalado e os passarinhos",
+   "versoes": [
+    0.0,
+    0.7726,
+    1.5692,
+    2.3198
+   ],
+   "duracoes": [
+    0.6926,
+    0.7166,
+    0.6706,
+    0.7025
+   ],
+   "bytes": 26292
   },
   "tapa-real": {
    "arquivo": "tapa-real.mp3",

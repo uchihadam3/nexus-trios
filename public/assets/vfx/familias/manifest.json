@@ -28881,6 +28881,20 @@
   "laco": false,
   "bytes": 22152
  },
+ "soco_da_ancora_popeye": {
+  "descricao": "básico do Popeye: o antebraço com a âncora e as estrelas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 34776
+ },
  "soco_da_corrente": {
   "descricao": "básico do Kurapika: o punho enrolado na corrente e os elos estalando",
   "quadros": 12,
@@ -29104,6 +29118,20 @@
   ],
   "laco": false,
   "bytes": 32528
+ },
+ "soco_de_eternia": {
+  "descricao": "básico do He-Man: a braçadeira de Eternia e o sol de raios",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 37796
  },
  "soco_de_ferro_destino": {
   "descricao": "básico do Doutor Destino: a manopla de ferro e o selo verde",
@@ -29329,6 +29357,20 @@
   "laco": false,
   "bytes": 32612
  },
+ "soco_de_sai_raphael": {
+  "descricao": "básico do Raphael: o punho de três dedos com o sai",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 14850
+ },
  "soco_de_tsunade": {
   "descricao": "Básico da Tsunade: o soco que racha o chão",
   "quadros": 12,
@@ -29356,6 +29398,20 @@
   ],
   "laco": false,
   "bytes": 28268
+ },
+ "soco_decepticon": {
+  "descricao": "básico do Megatron: o punho de metal pontudo e o energon",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 32508
  },
  "soco_divergente": {
   "descricao": "básico do Yuji: o Punho Divergente, com o segundo impacto atrasado",
@@ -29483,6 +29539,20 @@
   "laco": false,
   "bytes": 53850
  },
+ "soco_do_invencivel": {
+  "descricao": "básico do Invencível: o soco voando e o cone do estrondo sônico",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 31592
+ },
  "soco_do_leao_dourado": {
   "descricao": "básico do Aiolia: o soco e a juba dourada abrindo",
   "quadros": 12,
@@ -29538,6 +29608,20 @@
   ],
   "laco": false,
   "bytes": 22594
+ },
+ "soco_do_omnitrix": {
+  "descricao": "básico do Ben 10: o Omnitrix piscando e o estalo verde",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 19060
  },
  "soco_do_principe": {
   "descricao": "básico do Vegeta: a luva branca, o ki azul estalando e a estrela afiada",
@@ -30070,6 +30154,20 @@
   ],
   "laco": false,
   "bytes": 69656
+ },
+ "soquinho_de_esponja": {
+  "descricao": "básico do Bob Esponja: o punho quadrado furadinho e as bolhas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 20596
  },
  "soquinho_estrelado_kirby": {
   "descricao": "básico do Kirby: o bracinho redondo e a estrela que pula",
@@ -30616,6 +30714,20 @@
   ],
   "laco": false,
   "bytes": 25136
+ },
+ "tapa_do_picapau": {
+  "descricao": "básico do Pica-Pau: o tapa de desenho e a marca da mão",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 20264
  },
  "tapa_real": {
   "descricao": "Básico da Peach: a luva, o tapa e os brilhinhos",
