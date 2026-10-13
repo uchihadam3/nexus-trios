@@ -1147,6 +1147,20 @@
   "laco": false,
   "bytes": 22204
  },
+ "barreira_de_mana": {
+  "descricao": "Gwen · as colmeias de mana no trio",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 44488
+ },
  "barreira_eletrica": {
   "descricao": "Raiden · a cúpula elétrica",
   "quadros": 12,
@@ -3219,6 +3233,20 @@
   "laco": false,
   "bytes": 34548
  },
+ "chave_de_pernas": {
+  "descricao": "Viúva Negra · a tesoura de pernas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 26510
+ },
  "cheetara_preparo": {
   "descricao": "Cheetara · o bastão esticado (Preparo, laço)",
   "quadros": 12,
@@ -3457,6 +3485,20 @@
   "laco": false,
   "bytes": 73658
  },
+ "choque_total": {
+  "descricao": "Mulher-Aranha · o raio enorme",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 51098
+ },
  "chute_alado": {
   "descricao": "Básico de Hermes: a sandália alada",
   "quadros": 12,
@@ -3582,6 +3624,20 @@
   ],
   "laco": false,
   "bytes": 61934
+ },
+ "chuva_de_flechas": {
+  "descricao": "Gavião Arqueiro · a chuva de flechas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 37342
  },
  "chuva_de_fogo": {
   "descricao": "Roy · as bolas de fogo caindo e as labaredas",
@@ -5529,6 +5585,20 @@
   "laco": false,
   "bytes": 30772
  },
+ "drax_preparo": {
+  "descricao": "Drax · os punhos e as tatuagens pulsando (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 9554
+ },
  "dreno": {
   "descricao": "transferência de energia (faixa)",
   "quadros": 12,
@@ -6845,6 +6915,20 @@
   "laco": false,
   "bytes": 61084
  },
+ "execucao_de_gamora": {
+  "descricao": "Gamora · o corte que demora e abre",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 40838
+ },
  "execucao_em_cadeia": {
   "descricao": "Ezio · os saltos e a águia",
   "quadros": 12,
@@ -7180,6 +7264,20 @@
   ],
   "laco": false,
   "bytes": 38000
+ },
+ "facas_gemeas": {
+  "descricao": "Drax · as facas em X",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 28938
  },
  "facas_voando": {
   "descricao": "facas em viagem (+x)",
@@ -7559,6 +7657,20 @@
   "laco": false,
   "bytes": 15248
  },
+ "flecha_de_rede": {
+  "descricao": "Gavião Arqueiro · a flecha que vira rede",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 18338
+ },
  "flecha_do_gaviao": {
   "descricao": "Básico do Gavião Arqueiro: a flecha e a ponta explosiva",
   "quadros": 12,
@@ -7572,6 +7684,20 @@
   ],
   "laco": false,
   "bytes": 18828
+ },
+ "flecha_explosiva": {
+  "descricao": "Gavião Arqueiro · a flecha que pisca",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 11830
  },
  "flecha_lunar": {
   "descricao": "Básico de Ártemis: a lua e a flecha de prata",
@@ -8273,6 +8399,20 @@
   "laco": true,
   "bytes": 18006
  },
+ "gamora_preparo": {
+  "descricao": "Gamora · o brilho correndo pela lâmina (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 12410
+ },
  "gancho": {
   "descricao": "golpe para cima",
   "quadros": 12,
@@ -8567,6 +8707,20 @@
   "laco": false,
   "bytes": 35412
  },
+ "gaviao_preparo": {
+  "descricao": "Gavião Arqueiro · o arco puxado (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 6304
+ },
  "gear_fifth_nika": {
   "descricao": "Luffy · Gear Fifth: nuvens, o sol do Nika e o tambor",
   "quadros": 12,
@@ -8776,6 +8930,34 @@
   ],
   "laco": false,
   "bytes": 21720
+ },
+ "godslayer_corte": {
+  "descricao": "Gamora · a Godslayer abrindo e cortando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 18786
+ },
+ "golpe_acrobatico": {
+  "descricao": "Gamora · o mortal e o calcanhar",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 22444
  },
  "golpe_alienigena": {
   "descricao": "Golpe alienígena: a ampulheta do Omnitrix estoura em verde e o punho do alien acerta",
@@ -9225,6 +9407,20 @@
   "laco": false,
   "bytes": 101176
  },
+ "grito_de_drax": {
+  "descricao": "Drax · as tatuagens e o grito",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 48332
+ },
  "grito_de_panico": {
   "descricao": "Morty · o grito em ondas e o suor",
   "quadros": 12,
@@ -9336,6 +9532,20 @@
   ],
   "laco": false,
   "bytes": 18818
+ },
+ "gwen_preparo": {
+  "descricao": "Gwen · as runas hexagonais girando (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 19472
  },
  "habito_cinetico": {
   "descricao": "Pantera Negra · a malha de vibranium absorvendo",
@@ -11829,6 +12039,20 @@
   "laco": true,
   "bytes": 46028
  },
+ "lucubra": {
+  "descricao": "Gwen · a Lucubra varrendo os rivais",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 56992
+ },
  "luigi_preparo": {
   "descricao": "Luigi · a cabeça baixa tremendo (Preparo, laço)",
   "quadros": 12,
@@ -12683,6 +12907,20 @@
   "laco": false,
   "bytes": 47892
  },
+ "missao_cumprida": {
+  "descricao": "Viúva Negra · os bastões cruzados",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 31066
+ },
  "missil": {
   "descricao": "míssil em viagem (+x)",
   "quadros": 12,
@@ -12878,6 +13116,20 @@
   ],
   "laco": false,
   "bytes": 80544
+ },
+ "mordida_da_viuva": {
+  "descricao": "Viúva Negra · os discos elétricos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 19686
  },
  "mordida_de_dracula": {
   "descricao": "Básico do Drácula: os morcegos e as presas",
@@ -18619,6 +18871,20 @@
   "laco": false,
   "bytes": 119672
  },
+ "mulher_aranha_preparo": {
+  "descricao": "Mulher-Aranha · as mãos estalando (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 25632
+ },
  "multidao": {
   "descricao": "Ezio · a multidão de capuzes",
   "quadros": 12,
@@ -18828,6 +19094,20 @@
   ],
   "laco": false,
   "bytes": 56778
+ },
+ "o_destruidor": {
+  "descricao": "Drax · o soco que racha o chão",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 54366
  },
  "o_poder_e_de_voces": {
   "descricao": "Capitão Planeta · o planeta e a luz",
@@ -21419,6 +21699,20 @@
   "laco": false,
   "bytes": 12734
  },
+ "rajada_de_mana": {
+  "descricao": "Gwen · o feixe de hexágonos de mana",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 24664
+ },
  "rajada_de_misseis": {
   "descricao": "Genos · os mísseis",
   "quadros": 12,
@@ -21460,6 +21754,20 @@
   ],
   "laco": false,
   "bytes": 12954
+ },
+ "rajada_venenosa": {
+  "descricao": "Mulher-Aranha · a rajada bioelétrica",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 31530
  },
  "rampa_de_gelo": {
   "descricao": "Gelado · a rampa de gelo no ar",
@@ -25731,6 +26039,20 @@
   "laco": true,
   "bytes": 7926
  },
+ "viuva_preparo": {
+  "descricao": "Viúva Negra · a ampulheta e os bastões (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 18660
+ },
  "volta_alucardcv": {
   "descricao": "Alucard se refaz: a névoa fecha, os morcegos mergulham, a capa abre",
   "quadros": 12,
@@ -25926,6 +26248,20 @@
   ],
   "laco": false,
   "bytes": 39788
+ },
+ "voo_planado": {
+  "descricao": "Mulher-Aranha · as asas de teia",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 24388
  },
  "witch_time": {
   "descricao": "Bayonetta · o relógio roxo e a onda de tempo lento",

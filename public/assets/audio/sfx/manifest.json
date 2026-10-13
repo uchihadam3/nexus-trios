@@ -1413,6 +1413,23 @@
    ],
    "bytes": 35638
   },
+  "barreira-de-mana": {
+   "arquivo": "barreira-de-mana.mp3",
+   "descricao": "Gwen: a barreira de mana",
+   "versoes": [
+    0.0,
+    1.9729,
+    4.0365,
+    5.939
+   ],
+   "duracoes": [
+    1.8929,
+    1.9836,
+    1.8225,
+    1.9175
+   ],
+   "bytes": 65263
+  },
   "barreira-eletrica": {
    "arquivo": "barreira-eletrica.mp3",
    "descricao": "Raiden: a barreira elétrica",
@@ -3708,6 +3725,23 @@
    ],
    "bytes": 68336
   },
+  "chave-de-pernas": {
+   "arquivo": "chave-de-pernas.mp3",
+   "descricao": "Viúva Negra: a chave de pernas",
+   "versoes": [
+    0.0,
+    1.98,
+    3.6167,
+    5.4101
+   ],
+   "duracoes": [
+    1.9,
+    1.5567,
+    1.7134,
+    1.5107
+   ],
+   "bytes": 51788
+  },
   "cheetara-preparo": {
    "arquivo": "cheetara-preparo.mp3",
    "descricao": "Cheetara: o bastão estendido (Preparo)",
@@ -3997,6 +4031,23 @@
    ],
    "bytes": 64982
   },
+  "choque-total": {
+   "arquivo": "choque-total.mp3",
+   "descricao": "Mulher-Aranha: o choque total",
+   "versoes": [
+    0.0,
+    2.3312,
+    4.7946,
+    7.0968
+   ],
+   "duracoes": [
+    2.2512,
+    2.3834,
+    2.2222,
+    2.3185
+   ],
+   "bytes": 79032
+  },
   "chute-alado": {
    "arquivo": "chute-alado.mp3",
    "descricao": "básico de Hermes: as asinhas e o chute",
@@ -4149,6 +4200,23 @@
     1.066
    ],
    "bytes": 51397
+  },
+  "chuva-de-flechas": {
+   "arquivo": "chuva-de-flechas.mp3",
+   "descricao": "Gavião Arqueiro: a chuva de flechas",
+   "versoes": [
+    0.0,
+    2.48,
+    5.047,
+    7.4459
+   ],
+   "duracoes": [
+    2.4,
+    2.487,
+    2.3188,
+    2.4365
+   ],
+   "bytes": 83711
   },
   "chuva-de-fogo": {
    "arquivo": "chuva-de-fogo.mp3",
@@ -6377,6 +6445,23 @@
    ],
    "bytes": 76741
   },
+  "drax-preparo": {
+   "arquivo": "drax-preparo.mp3",
+   "descricao": "Drax: os punhos apertando (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 45144
+  },
   "dreno": {
    "arquivo": "dreno.mp3",
    "descricao": "dreno",
@@ -7941,6 +8026,23 @@
    ],
    "bytes": 81892
   },
+  "execucao-de-gamora": {
+   "arquivo": "execucao-de-gamora.mp3",
+   "descricao": "Gamora: a execução",
+   "versoes": [
+    0.0,
+    2.28,
+    4.6398,
+    6.8454
+   ],
+   "duracoes": [
+    2.2,
+    2.2798,
+    2.1256,
+    2.2335
+   ],
+   "bytes": 80055
+  },
   "execucao-em-cadeia": {
    "arquivo": "execucao-em-cadeia.mp3",
    "descricao": "Ezio: a execução em cadeia",
@@ -8332,6 +8434,23 @@
    ],
    "bytes": 62946
   },
+  "facas-gemeas": {
+   "arquivo": "facas-gemeas.mp3",
+   "descricao": "Drax: as facas gêmeas",
+   "versoes": [
+    0.0,
+    1.6614,
+    3.335,
+    4.9166
+   ],
+   "duracoes": [
+    1.5814,
+    1.5936,
+    1.5016,
+    1.5933
+   ],
+   "bytes": 58112
+  },
   "faisca-arcana": {
    "arquivo": "faisca-arcana.mp3",
    "descricao": "básico da Yennefer: a centelha",
@@ -8689,6 +8808,23 @@
    ],
    "bytes": 64946
   },
+  "flecha-de-rede": {
+   "arquivo": "flecha-de-rede.mp3",
+   "descricao": "Gavião Arqueiro: a flecha de rede",
+   "versoes": [
+    0.0,
+    1.2321,
+    2.5464,
+    3.731
+   ],
+   "duracoes": [
+    1.1521,
+    1.2343,
+    1.1046,
+    1.1795
+   ],
+   "bytes": 47287
+  },
   "flecha-do-gaviao": {
    "arquivo": "flecha-do-gaviao.mp3",
    "descricao": "básico do Gavião: o arco, a flecha e o estouro",
@@ -8705,6 +8841,23 @@
     1.1167
    ],
    "bytes": 40874
+  },
+  "flecha-explosiva": {
+   "arquivo": "flecha-explosiva.mp3",
+   "descricao": "Gavião Arqueiro: a flecha explosiva",
+   "versoes": [
+    0.0,
+    1.217,
+    2.4747,
+    3.6559
+   ],
+   "duracoes": [
+    1.137,
+    1.1777,
+    1.1012,
+    1.1556
+   ],
+   "bytes": 41609
   },
   "flecha-lunar": {
    "arquivo": "flecha-lunar.mp3",
@@ -9556,6 +9709,23 @@
    ],
    "bytes": 93985
   },
+  "gamora-preparo": {
+   "arquivo": "gamora-preparo.mp3",
+   "descricao": "Gamora: o brilho na lâmina (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 80466
+  },
   "gancho": {
    "arquivo": "gancho.mp3",
    "descricao": "golpe para cima",
@@ -9913,6 +10083,23 @@
    ],
    "bytes": 59720
   },
+  "gaviao-preparo": {
+   "arquivo": "gaviao-preparo.mp3",
+   "descricao": "Gavião Arqueiro: o arco puxado (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 53933
+  },
   "gear-fifth-nika": {
    "arquivo": "gear-fifth-nika.mp3",
    "descricao": "Gear Fifth: o tambor da libertação e as nuvens",
@@ -10167,6 +10354,40 @@
     0.97
    ],
    "bytes": 36820
+  },
+  "godslayer-corte": {
+   "arquivo": "godslayer-corte.mp3",
+   "descricao": "Gamora: a Godslayer",
+   "versoes": [
+    0.0,
+    1.4179,
+    2.8563,
+    4.2121
+   ],
+   "duracoes": [
+    1.3379,
+    1.3584,
+    1.2759,
+    1.3315
+   ],
+   "bytes": 52634
+  },
+  "golpe-acrobatico": {
+   "arquivo": "golpe-acrobatico.mp3",
+   "descricao": "Gamora: o golpe acrobático",
+   "versoes": [
+    0.0,
+    1.3627,
+    2.7709,
+    4.1037
+   ],
+   "duracoes": [
+    1.2827,
+    1.3281,
+    1.2529,
+    1.3149
+   ],
+   "bytes": 40988
   },
   "golpe-alienigena": {
    "arquivo": "golpe-alienigena.mp3",
@@ -10746,6 +10967,23 @@
    ],
    "bytes": 26872
   },
+  "grito-de-drax": {
+   "arquivo": "grito-de-drax.mp3",
+   "descricao": "Drax: o grito de guerra",
+   "versoes": [
+    0.0,
+    2.28,
+    4.6398,
+    6.8454
+   ],
+   "duracoes": [
+    2.2,
+    2.2798,
+    2.1256,
+    2.2335
+   ],
+   "bytes": 83476
+  },
   "grito-de-panico": {
    "arquivo": "grito-de-panico.mp3",
    "descricao": "Morty: o grito de pânico",
@@ -10847,6 +11085,23 @@
     1.2819
    ],
    "bytes": 42066
+  },
+  "gwen-preparo": {
+   "arquivo": "gwen-preparo.mp3",
+   "descricao": "Gwen: o feitiço recitado (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 51235
   },
   "habito-cinetico": {
    "arquivo": "habito-cinetico.mp3",
@@ -13942,6 +14197,23 @@
    ],
    "bytes": 69636
   },
+  "lucubra": {
+   "arquivo": "lucubra.mp3",
+   "descricao": "Gwen: Lucubra",
+   "versoes": [
+    0.0,
+    2.4266,
+    4.9937,
+    7.3417
+   ],
+   "duracoes": [
+    2.3466,
+    2.487,
+    2.268,
+    2.4257
+   ],
+   "bytes": 75610
+  },
   "luigi-preparo": {
    "arquivo": "luigi-preparo.mp3",
    "descricao": "Luigi: carregando o míssil (Preparo)",
@@ -14928,6 +15200,23 @@
    ],
    "bytes": 47797
   },
+  "missao-cumprida": {
+   "arquivo": "missao-cumprida.mp3",
+   "descricao": "Viúva Negra: missão cumprida",
+   "versoes": [
+    0.0,
+    1.952,
+    3.862,
+    5.7707
+   ],
+   "duracoes": [
+    1.872,
+    1.83,
+    1.8287,
+    1.8435
+   ],
+   "bytes": 68361
+  },
   "missil": {
    "arquivo": "missil.mp3",
    "descricao": "míssil",
@@ -15165,6 +15454,23 @@
     0.842
    ],
    "bytes": 37205
+  },
+  "mordida-da-viuva": {
+   "arquivo": "mordida-da-viuva.mp3",
+   "descricao": "Viúva Negra: a mordida da viúva",
+   "versoes": [
+    0.0,
+    1.5781,
+    3.2548,
+    4.7368
+   ],
+   "duracoes": [
+    1.4981,
+    1.5967,
+    1.402,
+    1.496
+   ],
+   "bytes": 85432
   },
   "mordida-de-dracula": {
    "arquivo": "mordida-de-dracula.mp3",
@@ -22153,6 +22459,23 @@
    ],
    "bytes": 73762
   },
+  "mulher-aranha-preparo": {
+   "arquivo": "mulher-aranha-preparo.mp3",
+   "descricao": "Mulher-Aranha: as mãos estalando (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 66627
+  },
   "multi-golpe": {
    "arquivo": "multi-golpe.mp3",
    "descricao": "rajada de golpes",
@@ -22458,6 +22781,23 @@
     0.9644
    ],
    "bytes": 40638
+  },
+  "o-destruidor": {
+   "arquivo": "o-destruidor.mp3",
+   "descricao": "Drax: O Destruidor",
+   "versoes": [
+    0.0,
+    2.38,
+    4.8434,
+    7.1456
+   ],
+   "duracoes": [
+    2.3,
+    2.3834,
+    2.2222,
+    2.335
+   ],
+   "bytes": 75599
   },
   "o-poder-e-de-voces": {
    "arquivo": "o-poder-e-de-voces.mp3",
@@ -25451,6 +25791,23 @@
    ],
    "bytes": 56486
   },
+  "rajada-de-mana": {
+   "arquivo": "rajada-de-mana.mp3",
+   "descricao": "Gwen: a rajada de mana",
+   "versoes": [
+    0.0,
+    1.7179,
+    3.4947,
+    5.1586
+   ],
+   "duracoes": [
+    1.6379,
+    1.6968,
+    1.5839,
+    1.6144
+   ],
+   "bytes": 54517
+  },
   "rajada-de-misseis": {
    "arquivo": "rajada-de-misseis.mp3",
    "descricao": "Genos: a rajada de mísseis",
@@ -25518,6 +25875,23 @@
     2.0305
    ],
    "bytes": 65662
+  },
+  "rajada-venenosa": {
+   "arquivo": "rajada-venenosa.mp3",
+   "descricao": "Mulher-Aranha: a rajada venenosa",
+   "versoes": [
+    0.0,
+    1.5091,
+    3.0958,
+    4.5666
+   ],
+   "duracoes": [
+    1.4291,
+    1.5067,
+    1.3908,
+    1.4613
+   ],
+   "bytes": 55056
   },
   "rampa-de-gelo": {
    "arquivo": "rampa-de-gelo.mp3",
@@ -30772,6 +31146,23 @@
    ],
    "bytes": 58374
   },
+  "viuva-preparo": {
+   "arquivo": "viuva-preparo.mp3",
+   "descricao": "Viúva Negra: os bastões faiscando (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 66199
+  },
   "volta-alucardcv": {
    "arquivo": "volta-alucardcv.mp3",
    "descricao": "Alucard se refaz: a revoada, a capa e o órgão",
@@ -31009,6 +31400,23 @@
     1.2936
    ],
    "bytes": 55144
+  },
+  "voo-planado": {
+   "arquivo": "voo-planado.mp3",
+   "descricao": "Mulher-Aranha: o voo planado",
+   "versoes": [
+    0.0,
+    1.4393,
+    2.9261,
+    4.2929
+   ],
+   "duracoes": [
+    1.3593,
+    1.4068,
+    1.2868,
+    1.3655
+   ],
+   "bytes": 50737
   },
   "witch-time": {
    "arquivo": "witch-time.mp3",

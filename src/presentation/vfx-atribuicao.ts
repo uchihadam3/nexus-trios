@@ -134,6 +134,12 @@ const T: Record<string, string> = {
   snorlax: 'pancada_snorlax descansar giga_impacto',
   patrick: 'abraco_esmagador debaixo_da_pedra isso_e_burrice',
   dash: 'soco_veloz corrida_na_agua furacao_flecha',
+  gwen: 'rajada_de_mana barreira_de_mana lucubra',
+  blackwidow: 'mordida_da_viuva chave_de_pernas missao_cumprida',
+  hawkeye: 'flecha_explosiva flecha_de_rede chuva_de_flechas',
+  gamora: 'godslayer_corte golpe_acrobatico execucao_de_gamora',
+  drax: 'facas_gemeas grito_de_drax o_destruidor',
+  spiderwoman: 'rajada_venenosa voo_planado choque_total',
 };
 
 export const FAMILIA_DA_HABILIDADE: Record<string, VfxFamily> = Object.fromEntries(
