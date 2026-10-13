@@ -410,6 +410,23 @@
    ],
    "bytes": 56106
   },
+  "ainz-preparo": {
+   "arquivo": "ainz-preparo.mp3",
+   "descricao": "Ainz: o relógio e o coro (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 60180
+  },
   "alcance-elastico": {
    "arquivo": "alcance-elastico.mp3",
    "descricao": "Mulher-Elástica: o alcance elástico",
@@ -1583,6 +1600,23 @@
    ],
    "bytes": 53573
   },
+  "bakugo-preparo": {
+   "arquivo": "bakugo-preparo.mp3",
+   "descricao": "Bakugo: girando nas explosões (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 56038
+  },
   "baloes-vermelhos": {
    "arquivo": "baloes-vermelhos.mp3",
    "descricao": "Pennywise: os balões vermelhos",
@@ -1752,6 +1786,23 @@
     1.9032
    ],
    "bytes": 62804
+  },
+  "barreira-psiquica-mob": {
+   "arquivo": "barreira-psiquica-mob.mp3",
+   "descricao": "Mob: barreira psíquica",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 52288
   },
   "barreira-sagrada": {
    "arquivo": "barreira-sagrada.mp3",
@@ -4014,6 +4065,23 @@
    ],
    "bytes": 53065
   },
+  "cem-por-cento": {
+   "arquivo": "cem-por-cento.mp3",
+   "descricao": "Mob: 100%",
+   "versoes": [
+    0.0,
+    2.98,
+    6.0652,
+    8.9471
+   ],
+   "duracoes": [
+    2.9,
+    3.0052,
+    2.8019,
+    2.9441
+   ],
+   "bytes": 98420
+  },
   "centopeia": {
    "arquivo": "centopeia.mp3",
    "descricao": "Kaneki: os gomos estalando, a cravada e o sangue sugado",
@@ -4166,6 +4234,23 @@
     1.4213
    ],
    "bytes": 66596
+  },
+  "chama-esquerda": {
+   "arquivo": "chama-esquerda.mp3",
+   "descricao": "Todoroki: chama esquerda",
+   "versoes": [
+    0.0,
+    2.0569,
+    4.0292,
+    5.9319
+   ],
+   "duracoes": [
+    1.9769,
+    1.8924,
+    1.8227,
+    1.8559
+   ],
+   "bytes": 65406
   },
   "chantagem": {
    "arquivo": "chantagem.mp3",
@@ -5731,6 +5816,23 @@
    ],
    "bytes": 20195
   },
+  "corte-de-agua": {
+   "arquivo": "corte-de-agua.mp3",
+   "descricao": "Rimuru: corte de água",
+   "versoes": [
+    0.0,
+    1.9797,
+    4.0235,
+    5.937
+   ],
+   "duracoes": [
+    1.8997,
+    1.9638,
+    1.8334,
+    1.9017
+   ],
+   "bytes": 75214
+  },
   "corte-decisivo": {
    "arquivo": "corte-decisivo.mp3",
    "descricao": "Samurai Jack: o corte decisivo",
@@ -6920,6 +7022,23 @@
     1.4213
    ],
    "bytes": 54045
+  },
+  "devorar-rimuru": {
+   "arquivo": "devorar-rimuru.mp3",
+   "descricao": "Rimuru: devorar",
+   "versoes": [
+    0.0,
+    1.9321,
+    3.8711,
+    5.6825
+   ],
+   "duracoes": [
+    1.8521,
+    1.859,
+    1.7314,
+    1.8728
+   ],
+   "bytes": 57011
   },
   "dia-todo": {
    "arquivo": "dia-todo.mp3",
@@ -9488,6 +9607,23 @@
    ],
    "bytes": 51052
   },
+  "explosao-bakugo": {
+   "arquivo": "explosao-bakugo.mp3",
+   "descricao": "Bakugo: explosão",
+   "versoes": [
+    0.0,
+    1.7786,
+    3.5821,
+    5.2496
+   ],
+   "duracoes": [
+    1.6986,
+    1.7235,
+    1.5875,
+    1.7976
+   ],
+   "bytes": 61688
+  },
   "explosao-binaria": {
    "arquivo": "explosao-binaria.mp3",
    "descricao": "Capitã Marvel: a estrela explodindo e os choques",
@@ -11885,6 +12021,23 @@
    ],
    "bytes": 74600
   },
+  "geass-lelouch": {
+   "arquivo": "geass-lelouch.mp3",
+   "descricao": "Lelouch: Geass",
+   "versoes": [
+    0.0,
+    2.28,
+    4.6398,
+    6.8454
+   ],
+   "duracoes": [
+    2.2,
+    2.2798,
+    2.1256,
+    2.2335
+   ],
+   "bytes": 74563
+  },
   "geass-tiro": {
    "arquivo": "geass-tiro.mp3",
    "descricao": "básico do Lelouch: o Geass e o tiro",
@@ -12735,6 +12888,23 @@
    ],
    "bytes": 67787
   },
+  "granada-bakugo": {
+   "arquivo": "granada-bakugo.mp3",
+   "descricao": "Bakugo: granada",
+   "versoes": [
+    0.0,
+    1.9225,
+    3.9019,
+    5.8186
+   ],
+   "duracoes": [
+    1.8425,
+    1.8993,
+    1.8368,
+    1.9024
+   ],
+   "bytes": 65331
+  },
   "grand-carga": {
    "arquivo": "grand-carga.mp3",
    "descricao": "grande habilidade carregando",
@@ -12819,6 +12989,23 @@
     1.5859
    ],
    "bytes": 59211
+  },
+  "grande-sabio": {
+   "arquivo": "grande-sabio.mp3",
+   "descricao": "Rimuru: Grande Sábio",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 70514
   },
   "gravidade": {
    "arquivo": "gravidade.mp3",
@@ -13482,6 +13669,23 @@
     1.4213
    ],
    "bytes": 52367
+  },
+  "howitzer-impact": {
+   "arquivo": "howitzer-impact.mp3",
+   "descricao": "Bakugo: Howitzer Impact",
+   "versoes": [
+    0.0,
+    2.98,
+    6.0652,
+    8.9471
+   ],
+   "duracoes": [
+    2.9,
+    3.0052,
+    2.8019,
+    2.9441
+   ],
+   "bytes": 101900
   },
   "hulk-esmaga": {
    "arquivo": "hulk-esmaga.mp3",
@@ -14196,6 +14400,23 @@
     1.4005
    ],
    "bytes": 47615
+  },
+  "invocar-mortos": {
+   "arquivo": "invocar-mortos.mp3",
+   "descricao": "Ainz: invocar mortos",
+   "versoes": [
+    0.0,
+    2.58,
+    5.2507,
+    7.7461
+   ],
+   "duracoes": [
+    2.5,
+    2.5907,
+    2.4154,
+    2.538
+   ],
+   "bytes": 77009
   },
   "ira-do-deus": {
    "arquivo": "ira-do-deus.mp3",
@@ -16067,6 +16288,23 @@
    ],
    "bytes": 55300
   },
+  "lelouch-preparo": {
+   "arquivo": "lelouch-preparo.mp3",
+   "descricao": "Lelouch: o rei e o Geass (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 45210
+  },
   "lentidao": {
    "arquivo": "lentidao.mp3",
    "descricao": "família lentidao",
@@ -17902,6 +18140,23 @@
     0.8122
    ],
    "bytes": 32960
+  },
+  "mob-preparo": {
+   "arquivo": "mob-preparo.mp3",
+   "descricao": "Mob: a emoção subindo (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 47160
   },
   "modo-berserk": {
    "arquivo": "modo-berserk.mp3",
@@ -25264,6 +25519,23 @@
    ],
    "bytes": 79034
   },
+  "muralha-de-gelo-todoroki": {
+   "arquivo": "muralha-de-gelo-todoroki.mp3",
+   "descricao": "Todoroki: muralha de gelo",
+   "versoes": [
+    0.0,
+    2.28,
+    4.6398,
+    6.8454
+   ],
+   "duracoes": [
+    2.2,
+    2.2798,
+    2.1256,
+    2.2335
+   ],
+   "bytes": 96730
+  },
   "muralha-de-metal": {
    "arquivo": "muralha-de-metal.mp3",
    "descricao": "Muralha de metal: as vigas empilhando",
@@ -25654,6 +25926,23 @@
     2.538
    ],
    "bytes": 81005
+  },
+  "o-fim-de-toda-vida": {
+   "arquivo": "o-fim-de-toda-vida.mp3",
+   "descricao": "Ainz: The Goal of All Life Is Death",
+   "versoes": [
+    0.0,
+    3.08,
+    6.2688,
+    9.2473
+   ],
+   "duracoes": [
+    3.0,
+    3.1088,
+    2.8985,
+    3.0457
+   ],
+   "bytes": 119292
   },
   "o-poder-e-de-voces": {
    "arquivo": "o-poder-e-de-voces.mp3",
@@ -27286,6 +27575,23 @@
     1.2922
    ],
    "bytes": 45098
+  },
+  "ponto-de-fusao": {
+   "arquivo": "ponto-de-fusao.mp3",
+   "descricao": "Todoroki: ponto de fusão",
+   "versoes": [
+    0.0,
+    2.88,
+    5.8615,
+    8.6468
+   ],
+   "duracoes": [
+    2.8,
+    2.9015,
+    2.7053,
+    2.8426
+   ],
+   "bytes": 118314
   },
   "pontos-de-chakra": {
    "arquivo": "pontos-de-chakra.mp3",
@@ -30159,6 +30465,23 @@
     1.3669
    ],
    "bytes": 42388
+  },
+  "rimuru-preparo": {
+   "arquivo": "rimuru-preparo.mp3",
+   "descricao": "Rimuru: a água girando (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 54584
   },
   "rinnegan": {
    "arquivo": "rinnegan.mp3",
@@ -33305,6 +33628,23 @@
    ],
    "bytes": 52389
   },
+  "telecinese-mob": {
+   "arquivo": "telecinese-mob.mp3",
+   "descricao": "Mob: telecinese",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 67474
+  },
   "teleporte-infernal": {
    "arquivo": "teleporte-infernal.mp3",
    "descricao": "Scorpion: o teleporte infernal",
@@ -33968,6 +34308,23 @@
    ],
    "bytes": 44857
   },
+  "todoroki-preparo": {
+   "arquivo": "todoroki-preparo.mp3",
+   "descricao": "Todoroki: gelo e fogo (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 89294
+  },
   "todos-juntos": {
    "arquivo": "todos-juntos.mp3",
    "descricao": "Woody: todos juntos",
@@ -34069,6 +34426,23 @@
     2.0305
    ],
    "bytes": 67952
+  },
+  "toque-da-morte-ainz": {
+   "arquivo": "toque-da-morte-ainz.mp3",
+   "descricao": "Ainz: toque da morte",
+   "versoes": [
+    0.0,
+    2.18,
+    4.4361,
+    6.5451
+   ],
+   "duracoes": [
+    2.1,
+    2.1761,
+    2.029,
+    2.132
+   ],
+   "bytes": 69696
   },
   "toque-de-hel": {
    "arquivo": "toque-de-hel.mp3",
@@ -35787,6 +36161,23 @@
    ],
    "bytes": 57502
   },
+  "xadrez": {
+   "arquivo": "xadrez.mp3",
+   "descricao": "Lelouch: xadrez",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 60247
+  },
   "xenomorfo-preparo": {
    "arquivo": "xenomorfo-preparo.mp3",
    "descricao": "Xenomorfo: o chiado (Preparo)",
@@ -35820,6 +36211,23 @@
     1.9289
    ],
    "bytes": 50931
+  },
+  "xeque-mate": {
+   "arquivo": "xeque-mate.mp3",
+   "descricao": "Lelouch: xeque-mate",
+   "versoes": [
+    0.0,
+    2.48,
+    5.047,
+    7.4459
+   ],
+   "duracoes": [
+    2.4,
+    2.487,
+    2.3188,
+    2.4365
+   ],
+   "bytes": 74846
   },
   "xlr8": {
    "arquivo": "xlr8.mp3",

@@ -206,6 +206,12 @@ const T: Record<string, string> = {
   ursula: 'roubar_a_voz tentaculos_de_ursula tridente_da_bruxa',
   deku: 'delaware_smash full_cowl_corpo united_states_of_smash_deku',
   allmight: 'texas_smash estou_aqui united_states_of_smash_allmight',
+  bakugo: 'explosao_bakugo granada_bakugo howitzer_impact',
+  todoroki: 'muralha_de_gelo_todoroki chama_esquerda ponto_de_fusao',
+  mob: 'telecinese_mob barreira_psiquica_mob cem_por_cento',
+  rimuru: 'devorar_rimuru grande_sabio corte_de_agua',
+  ainz: 'toque_da_morte_ainz invocar_mortos o_fim_de_toda_vida',
+  lelouch: 'geass_lelouch xadrez xeque_mate',
 };
 
 export const FAMILIA_DA_HABILIDADE: Record<string, VfxFamily> = Object.fromEntries(

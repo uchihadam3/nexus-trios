@@ -335,6 +335,20 @@
   "laco": false,
   "bytes": 27062
  },
+ "ainz_preparo": {
+  "descricao": "Ainz · a caveira e as runas (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 7338
+ },
  "alcance_elastico": {
   "descricao": "Mulher-Elástica · o braço esticando até o aliado",
   "quadros": 12,
@@ -1287,6 +1301,20 @@
   "laco": false,
   "bytes": 26112
  },
+ "bakugo_preparo": {
+  "descricao": "Bakugo · girando nas explosões (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 36088
+ },
  "bala_de_canhao": {
   "descricao": "bala de canhão em viagem (+x)",
   "quadros": 12,
@@ -1426,6 +1454,20 @@
   ],
   "laco": false,
   "bytes": 41518
+ },
+ "barreira_psiquica_mob": {
+  "descricao": "Mob · a cúpula psíquica",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 33350
  },
  "barreira_sagrada": {
   "descricao": "Zelda · os cristais de diamante no trio",
@@ -3457,6 +3499,20 @@
   "laco": true,
   "bytes": 57872
  },
+ "cem_por_cento": {
+  "descricao": "Mob · a coluna de energia e as ondas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 66676
+ },
  "centopeia": {
   "descricao": "Kaneki · o kagune centopeia crava e suga",
   "quadros": 12,
@@ -3582,6 +3638,20 @@
   ],
   "laco": false,
   "bytes": 57072
+ },
+ "chama_esquerda": {
+  "descricao": "Todoroki · o jato de fogo da mão esquerda",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 36446
  },
  "chamas_faixa": {
   "descricao": "Charizard · o jato do Lança-chamas até o rival (faixa)",
@@ -4927,6 +4997,20 @@
   "laco": false,
   "bytes": 36548
  },
+ "corte_de_agua": {
+  "descricao": "Rimuru · a lâmina de água e os respingos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 18904
+ },
  "corte_de_energia": {
   "descricao": "lâmina de energia (+x)",
   "quadros": 12,
@@ -5948,6 +6032,20 @@
   ],
   "laco": true,
   "bytes": 38260
+ },
+ "devorar_rimuru": {
+  "descricao": "Rimuru · o slime engolindo a habilidade",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 28776
  },
  "dia_todo": {
   "descricao": "Capitão América · o escudo erguido e a cura",
@@ -8119,6 +8217,20 @@
   "laco": false,
   "bytes": 88696
  },
+ "explosao_bakugo": {
+  "descricao": "Bakugo · a palma e a explosão",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 50844
+ },
  "explosao_binaria": {
   "descricao": "Capitã Marvel · a estrela de oito pontas gigante",
   "quadros": 12,
@@ -10191,6 +10303,20 @@
   "laco": false,
   "bytes": 91006
  },
+ "geass_lelouch": {
+  "descricao": "Lelouch · o selo do Geass voando de olho a olho",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 21022
+ },
  "geass_tiro": {
   "descricao": "Básico do Lelouch: o Geass e o tiro",
   "quadros": 12,
@@ -10891,6 +11017,20 @@
   "laco": false,
   "bytes": 41594
  },
+ "granada_bakugo": {
+  "descricao": "Bakugo · a manopla e a bomba marcada",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 21146
+ },
  "grande_bencao": {
   "descricao": "Aerith · a chuva de penas e o pilar sagrado",
   "quadros": 12,
@@ -10932,6 +11072,20 @@
   ],
   "laco": false,
   "bytes": 25456
+ },
+ "grande_sabio": {
+  "descricao": "Rimuru · os painéis do Grande Sábio",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 33716
  },
  "gravidade": {
   "descricao": "pressão de gravidade",
@@ -11507,6 +11661,20 @@
   "laco": true,
   "bytes": 11692
  },
+ "howitzer_impact": {
+  "descricao": "Bakugo · o tornado de explosões",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 59604
+ },
  "hulk_esmaga": {
   "descricao": "Hulk · Esmagar: os dois punhos do alto, a cratera e as estrelinhas",
   "quadros": 12,
@@ -12052,6 +12220,20 @@
   ],
   "laco": false,
   "bytes": 54134
+ },
+ "invocar_mortos": {
+  "descricao": "Ainz · o círculo e o Cavaleiro da Morte",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 39444
  },
  "ira_do_deus": {
   "descricao": "Beerus · o sol de destruição caindo",
@@ -13578,6 +13760,20 @@
   ],
   "laco": false,
   "bytes": 26768
+ },
+ "lelouch_preparo": {
+  "descricao": "Lelouch · o rei e o Geass (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 16718
  },
  "lentidao": {
   "descricao": "ampulheta",
@@ -15132,6 +15328,20 @@
   ],
   "laco": true,
   "bytes": 37200
+ },
+ "mob_preparo": {
+  "descricao": "Mob · a aura e o % piscando (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 36762
  },
  "modo_berserk": {
   "descricao": "2B · a aura e a espada grande",
@@ -21181,6 +21391,20 @@
   "laco": false,
   "bytes": 30464
  },
+ "muralha_de_gelo_todoroki": {
+  "descricao": "Todoroki · a geleira subindo pelo chão",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 47502
+ },
  "muralha_de_metal": {
   "descricao": "Magneto · as vigas formando a muralha",
   "quadros": 12,
@@ -21460,6 +21684,20 @@
   ],
   "laco": false,
   "bytes": 34226
+ },
+ "o_fim_de_toda_vida": {
+  "descricao": "Ainz · o relógio e a onda da morte",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 47406
  },
  "o_poder_e_de_voces": {
   "descricao": "Capitão Planeta · o planeta e a luz",
@@ -22888,6 +23126,20 @@
   ],
   "laco": false,
   "bytes": 41824
+ },
+ "ponto_de_fusao": {
+  "descricao": "Todoroki · o gelo, o fogo e o vapor",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 70374
  },
  "pontos_de_chakra": {
   "descricao": "Hinata · os oito trigramas e os pontos de chakra",
@@ -25212,6 +25464,20 @@
   ],
   "laco": false,
   "bytes": 26166
+ },
+ "rimuru_preparo": {
+  "descricao": "Rimuru · as gotas e a lâmina de água (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 18024
  },
  "rinnegan": {
   "descricao": "Pain: olho do Rinnegan e ondas de repulsão para fora",
@@ -27971,6 +28237,20 @@
   "laco": false,
   "bytes": 36898
  },
+ "telecinese_mob": {
+  "descricao": "Mob · as pedras voando e a energia enchendo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 45674
+ },
  "teleporte_infernal": {
   "descricao": "Scorpion · o fogo que some e volta",
   "quadros": 12,
@@ -28503,6 +28783,20 @@
   "laco": false,
   "bytes": 31556
  },
+ "todoroki_preparo": {
+  "descricao": "Todoroki · metade gelo, metade fogo (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 23142
+ },
  "todos_juntos": {
   "descricao": "Woody · o laço de corda abraçando o trio",
   "quadros": 12,
@@ -28572,6 +28866,20 @@
   ],
   "laco": false,
   "bytes": 26042
+ },
+ "toque_da_morte_ainz": {
+  "descricao": "Ainz · a mão de esqueleto e o selo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 47540
  },
  "toque_de_hel": {
   "descricao": "Básico de Hel: a mão de osso e o gelo",
@@ -29861,6 +30169,20 @@
   "laco": true,
   "bytes": 25510
  },
+ "xadrez": {
+  "descricao": "Lelouch · o tabuleiro e as peças",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 45074
+ },
  "xenomorfo_preparo": {
   "descricao": "Xenomorfo · a cauda erguida (Preparo, laço)",
   "quadros": 12,
@@ -29888,6 +30210,20 @@
   ],
   "laco": false,
   "bytes": 28976
+ },
+ "xeque_mate": {
+  "descricao": "Lelouch · o rei rival tombando e o feixe",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 38094
  },
  "xlr8": {
   "descricao": "Ben 10 · o borrão do XLR8",
