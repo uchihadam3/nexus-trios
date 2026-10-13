@@ -5,7 +5,9 @@ import type { Battle, BattleEvent } from '../engine/types';
 import { PRESENTATION as P } from './config';
 import { QUADRO_DO_GOLPE } from './golpe-das-folhas';
 import { familia, profileFor } from './vfxProfiles';
-import { INTERVALO_DA_UNICA, JEITO_DA_UNICA, VOO_DA_UNICA, entregaDaUnica } from './unicas-efeitos';
+import { INTERVALO_DA_UNICA, JEITO_DA_UNICA } from './unicas-efeitos';
+import { fasesDoEvento, pausaDoGolpe, type PausaDaUnica } from './ativacao-da-unica';
+export { ladoDaUnica, vooDaUnica } from './ativacao-da-unica';
 
 export type Family='physical'|'energy'|'electric'|'fire'|'magic'|'dark'|'psychic'|'slash'|'prison'|'shield'|'heal'|'regen'|'buff'|'debuff'|'interrupt'|'ko'|'turn'|'grand';
 export interface Beat {event:BattleEvent;events:BattleEvent[];before:Battle;after:Battle;duration:number;family:Family;grand:boolean;elapsed:number;impacted:boolean;periodic?:boolean;trace?:BeatTrace;
@@ -22,7 +24,9 @@ export interface Beat {event:BattleEvent;events:BattleEvent[];before:Battle;afte
   /** Quanto antes do impacto a folha do golpe (e o som dela) começa, para o golpe desenhado cair junto do número. */
   antecipa?:number;
   /** A folha do golpe já começou (a deixa 'golpe' já saiu). */
-  golpeou?:boolean}
+  golpeou?:boolean;
+  /** O golpe para no meio do caminho e quem foi atacado responde com a Mecânica única (src/presentation/ativacao-da-unica.ts). */
+  pausa?:PausaDaUnica}
 export interface Direction {battle:Battle;visible:Battle;queue:Beat[];active:Beat|null;simIdle:number;complete:boolean;serial:number;signals:BattleEvent[];/** quando cada lutador teve a última ativação completa da Mecânica única */unicaCheia?:Record<string,number>}
 export interface PresentationCheckpoint {version?:2;battleTime:number;nextEvent:number;rng:number;visibleNextEvent:number;activeEventId:number|null;activeElapsed:number;impacted:boolean;serial:number;simIdle?:number}
 /** 'golpe': a folha do golpe (e o som dela) começa antes do impacto; o impacto que vem depois traz `antecipado`. */
@@ -86,13 +90,12 @@ function duration(event:BattleEvent,grand:boolean){
  * só a ordem e o tempo em que a tela revela o que já aconteceu.
  */
 export type ClasseDoPasso='golpe'|'reacao'|'rival'|'aliado'|'unica';
-export interface Passo {classe:ClasseDoPasso;/** quem age neste passo */quem:string;/** nome do traço, numa reação */rotulo?:string;eventos:number[];/** segundos depois do impacto */em:number}
+export interface Passo {classe:ClasseDoPasso;/** quem age neste passo */quem:string;/** nome do traço, numa reação */rotulo?:string;eventos:number[];/** segundos depois do impacto */em:number;/** a Mecânica única já ativou na pausa do golpe: aqui só cai o resultado, sem o nome de novo */antecipada?:boolean}
 /** Quanto cada passo fica na tela antes do próximo (o tempo de ler o que aconteceu). */
 export const TEMPO_DO_PASSO:Record<ClasseDoPasso,number>={golpe:.42,reacao:.58,rival:.4,aliado:.4,unica:1.85};
 /**
- * A mini preparação da Mecânica única: o nome aparece e a energia junta antes de ela disparar (pedido do jogador:
- * "tipo 0,2 segundos… só pra mostrar o nome"; depois, "aumentar pra 0,5, igual as skills de preparo… acho que fica
- * mais legal"). É o mesmo Preparo curto das habilidades (PREPARO_LEVE).
+ * A mini preparação da Mecânica única no meio da cadeia de um golpe. Sozinha ou na pausa do golpe, ela tem as fases
+ * de uma habilidade e o Preparo de cada personagem (src/presentation/ativacao-da-unica.ts).
  */
 export const PREPARO_DA_UNICA=.5;
 /** Fração do golpe em que quem foi até o alvo já está de volta no lugar (acting-motion.css). */
@@ -101,8 +104,8 @@ export const VOLTA_DO_GOLPE=.9;
 const CADEIA_MAXIMA=2.6;
 /** Quanto dura um traço que dispara sozinho (o nome aparece, o efeito entra, a luta segue). */
 const TEMPO_DO_TRACO=1.3;
-/** A Mecânica única ativando sozinha como uma habilidade: a mini preparação até o impacto, e o efeito dela depois. */
-const TEMPO_DA_UNICA=PREPARO_DA_UNICA/.48,DEPOIS_DA_UNICA=1.6;
+/** A Mecânica única ativando sozinha: depois do impacto, o efeito dela fica à vista este tanto. */
+const DEPOIS_DA_UNICA=2.2;
 /** Mantido para quem ainda mede pelo intervalo antigo. */
 export const INTERVALO_DA_ETAPA=TEMPO_DO_PASSO.rival;
 const CONTABIL=new Set<BattleEvent['kind']>(['charge','synergy','ready','discovery','basic','skill','cast','turn']);
@@ -290,33 +293,28 @@ function ativacoesCheias(d:Direction,events:BattleEvent[],after:Battle):Set<stri
   }
   return cheias;
 }
-/** De quem a Mecânica única atinge, visto por quem ativou: o rival, um aliado ou ela mesma. */
-export function ladoDaUnica(e:BattleEvent,b:Battle):'rival'|'aliado'|'si'{
-  if(!e.target||e.target===e.source)return 'si';
-  const de=b.fighters.find(f=>f.uid===e.source),para=b.fighters.find(f=>f.uid===e.target);
-  return de&&para&&de.side===para.side?'aliado':'rival';
-}
-/** Quanto a Mecânica única leva para chegar no alvo depois do preparo dela (o projétil voando, o feixe crescendo). */
-export function vooDaUnica(e:BattleEvent,b:Battle){
-  const f=b.fighters.find(x=>x.uid===e.source);
-  if(!f)return 0;
-  const ent=entregaDaUnica(f.characterId,ladoDaUnica(e,b));
-  return ent.area||(e.target&&e.target!==e.source)?VOO_DA_UNICA[ent.modo]:0;
-}
 function makeBeat(event:BattleEvent,events:BattleEvent[],before:Battle,after:Battle,periodic=false,previous=false,traco=false,cheias?:ReadonlySet<string>):Beat {
   const actor=after.fighters.find(f=>f.uid===event.source);
   const prep=actor&&event.skill!==undefined?byId[actor.characterId].skills[event.skill].preparation:0;
   const grand=event.kind==='skill'&&prep>=P.grandPreparation;
   const auxiliary=event.kind==='ready'||event.kind==='status';
   const unicaSozinha=traco&&event.kind==='unica'&&!!cheias?.has(event.source);
-  // sozinha, o impacto espera o preparo dela e a viagem até o alvo: o número aparece quando o golpe chega
-  const seconds=traco?(unicaSozinha?TEMPO_DA_UNICA+vooDaUnica(event,after)/P.impactAt:TEMPO_DO_TRACO):previous?(periodic?.55:auxiliary?.5:duration(event,grand)):periodic?P.periodicSeconds:duration(event,grand);
+  // sozinha, o impacto espera as fases dela (concentra, nome, carga, solta) e a viagem até o alvo: o número aparece quando o golpe chega
+  const fases=unicaSozinha?fasesDoEvento(event,after):undefined;
+  const seconds=traco?(fases?fases.impactoEm/P.impactAt:TEMPO_DO_TRACO):previous?(periodic?.55:auxiliary?.5:duration(event,grand)):periodic?P.periodicSeconds:duration(event,grand);
   const beat:Beat={event,events,before,after,duration:seconds,family:familyOf(event,after),grand,elapsed:0,impacted:false,periodic,etapa:0,base:seconds,traco};
   beat.passos=montaPassos(beat,cheias);
   beat.etapas=beat.passos.map((_,k)=>k+1);
-  const ultimo=beat.passos.at(-1)!;
-  beat.duration+=ultimo.em+(unicaSozinha?DEPOIS_DA_UNICA:0);
   beat.antecipa=antecipaDoGolpe(beat);
+  // quem foi atacado responde antes de o golpe cair: na cadeia fica só o resultado, num passo curto
+  beat.pausa=cheias?pausaDoGolpe(beat,seconds*P.impactAt,beat.antecipa):undefined;
+  if(beat.pausa){
+    const passos=beat.passos,k=beat.pausa.passo,corte=passos[k+1]?TEMPO_DO_PASSO.unica-TEMPO_DO_PASSO.reacao:0;
+    passos[k]!.antecipada=true;
+    for(let i=k+1;i<passos.length;i++)passos[i]!.em=Math.max(passos[i-1]!.em,passos[i]!.em-corte);
+  }
+  const ultimo=beat.passos.at(-1)!;
+  beat.duration+=ultimo.em+(fases?Math.max(0,DEPOIS_DA_UNICA-(seconds-fases.impactoEm)):0);
   return beat;
 }
 /*
@@ -419,6 +417,8 @@ export function restoreDirection(initial:Battle,saved:Battle,checkpoint:Presenta
     d.active.elapsed=Math.min(d.active.duration,Math.max(0,checkpoint.activeElapsed));
     d.active.impacted=checkpoint.impacted;
     d.active.golpeou=checkpoint.impacted;
+    // voltando no meio de um golpe que já passou do ponto da pausa: a resposta já foi vista
+    if(d.active.pausa&&d.active.elapsed>=d.active.pausa.em-1e-8)d.active.pausa.t=d.active.pausa.dura;
     if(d.active.impacted)d.active.etapa=etapaNoTempo(d.active);
     d.visible=d.active.impacted?visivelNaEtapa(d.active,d.active.etapa!):d.active.before;
   }else{
@@ -441,7 +441,13 @@ export function advanceDirection(d:Direction,seconds:number,onCue?:(cue:Cue)=>vo
     const beat=d.active;
     const impacto=duracaoBase(beat)*P.impactAt;
     const limit=beat.impacted?beat.duration:impacto;
-    beat.elapsed=Math.min(limit,beat.elapsed+elapsed);
+    /*
+     * A pausa do golpe: chegando no ponto dela, o golpe fica parado e só o tempo da ativação de quem foi atacado
+     * corre (concentra, nome, carga, a defesa aparecendo). Depois o golpe continua de onde parou.
+     */
+    const pausa=beat.pausa,pausando=!!pausa&&!beat.impacted&&pausa.t<pausa.dura;
+    if(pausando&&beat.elapsed>=pausa.em-1e-8){pausa.t=Math.min(pausa.dura,pausa.t+elapsed);return;}
+    beat.elapsed=Math.min(limit,beat.elapsed+elapsed,pausando?pausa.em:Infinity);
     const etapas=beat.etapas??[1];
     // a folha do golpe começa antes, para o golpe desenhado cair no impacto (sempre sai antes da deixa do impacto)
     if(!beat.golpeou&&beat.antecipa&&beat.elapsed>=impacto-beat.antecipa-1e-8){

@@ -11,8 +11,10 @@
  * saem daqui: direção em pixels até o alvo, distância, duração do beat.
  */
 import type { Battle } from '../engine/types';
+import { PRESENTATION as P } from './config';
 import { ladoDaUnica, type Beat } from './director';
 import { entregaDaUnica } from './unicas-efeitos';
+import { ativacaoNaTela, type AtivacaoNaTela } from './ativacao-da-unica';
 import { combatLinks } from './combat-links';
 import { distanciaDoGolpe } from './distancia';
 import { profileFor } from './vfxProfiles';
@@ -32,6 +34,8 @@ export interface UnitActing {
   seconds: number;
   /** Alterna a cada beat, para a animação recomeçar mesmo com o mesmo estilo. */
   parity: 'a' | 'b';
+  /** O golpe parou no meio do caminho: quem foi atacado está respondendo com a Mecânica única. */
+  pausado?: boolean;
 }
 
 export interface Medida { anchors: Record<string, { x: number; y: number }>; w: number; h: number; medal: number }
@@ -43,10 +47,12 @@ function estiloDeQuemAge(beat: Beat, battle: Battle, area: boolean): ActStyle | 
   const { event } = beat;
   if (event.kind === 'cast') return 'cast';
   if (event.kind === 'interrupt') return 'interrupt';
-  // a Mecânica única de perto: quem ativou vai até o alvo, como numa habilidade corpo a corpo (src/presentation/unicas-efeitos.ts)
+  // a Mecânica única: concentra como no Preparo de uma habilidade; ao soltar, vai até o alvo (de perto), dispara
+  // (de longe), manda a ajuda (aliado) ou lança no alvo (src/presentation/ativacao-da-unica.ts)
   if (event.kind === 'unica' && beat.traco) {
-    const dono = battle.fighters.find((f) => f.uid === event.source);
-    return dono && entregaDaUnica(dono.characterId, ladoDaUnica(event, battle)).modo === 'corpo' ? 'melee' : undefined;
+    const at = ativacaoNaTela(beat, event.source);
+    if (!at) return undefined;
+    return estiloDaAtivacao(at, beat, battle);
   }
   if (event.kind !== 'basic' && event.kind !== 'skill') return undefined;
   const links = combatLinks(beat, battle).filter((l) => l.source === event.source);
@@ -61,6 +67,22 @@ function estiloDeQuemAge(beat: Beat, battle: Battle, area: boolean): ActStyle | 
   if (distancia) return distancia === 'perto' ? 'melee' : 'ranged';
   if (profile?.travel || VIAJAM.has(beat.family)) return 'ranged';
   return 'melee';
+}
+
+function estiloDaAtivacao(at: AtivacaoNaTela, beat: Beat, battle: Battle): ActStyle | undefined {
+  if (at.t < at.fases.soltaEm || at.pausa) return 'cast';
+  const e = at.evento ?? beat.event, dono = battle.fighters.find((f) => f.uid === e.source);
+  const ent = dono ? entregaDaUnica(dono.characterId, ladoDaUnica(e, battle)) : undefined;
+  if (!ent || ent.modo === 'si') return at.fases.preparo > 0 ? 'cast' : undefined;
+  if (ent.modo === 'corpo') return 'melee';
+  if (ent.modo === 'aliado') return 'support';
+  if (ent.modo === 'alvo') return 'curse';
+  return 'ranged';
+}
+/** Quanto dura o movimento de quem ativa: a subida da concentração, ou da soltura até o impacto. */
+function segundosDaAtivacao(at: AtivacaoNaTela, act: ActStyle): number {
+  if (act === 'cast') return Math.max(0.9, at.fases.nomeEm * 4);
+  return Math.max(0.5, (at.fases.impactoEm - at.fases.soltaEm) / P.impactAt);
 }
 
 function reacaoDoAlvo(beat: Beat, battle: Battle, uid: string): ReactStyle | undefined {
@@ -120,8 +142,13 @@ export function atuacao(beat: Beat | null, battle: Battle, medida: Medida, area:
       dx = ux * ate; dy = uy * ate;
     }
     // o movimento de quem age dura o golpe, não a cadeia toda: ele volta ao lugar antes da cura no aliado
-    out[beat.event.source] = { act, dx, dy, ux, uy, seconds: beat.base ?? beat.duration, parity };
+    const at = beat.traco && beat.event.kind === 'unica' ? ativacaoNaTela(beat, beat.event.source) : undefined;
+    const pausa = beat.pausa, parado = !!pausa && !beat.impacted && beat.elapsed >= pausa.em - 1e-8 && pausa.t < pausa.dura;
+    out[beat.event.source] = { act, dx, dy, ux, uy, seconds: at ? segundosDaAtivacao(at, act) : beat.base ?? beat.duration, parity, pausado: parado };
   }
+  // a pausa do golpe: quem foi atacado concentra e ativa enquanto o golpe do rival espera
+  const resposta = beat.pausa ? ativacaoNaTela(beat, beat.pausa.quem) : undefined;
+  if (resposta && beat.pausa) out[beat.pausa.quem] = { act: 'cast', dx: 0, dy: 0, ux: 0, uy: 0, seconds: segundosDaAtivacao(resposta, 'cast'), parity: beat.pausa.evento.id % 2 ? 'a' : 'b' };
 
   for (const f of battle.fighters) {
     if (f.uid === beat.event.source) continue;

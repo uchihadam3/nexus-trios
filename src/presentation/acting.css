@@ -146,3 +146,11 @@
 .arena-v2 .unit:has(.unica-carga) .unit-medal>button{animation:unica-pulsa calc(.55s * var(--motion-scale,1)) ease-out both}
 @keyframes unica-pulsa{0%{transform:scale(1)}45%{transform:scale(1.1);filter:brightness(1.35)}100%{transform:scale(1);filter:none}}
 @media (prefers-reduced-motion:reduce){.arena-v2 .unit .unica-carga{display:none}}
+/* a energia juntando no retrato fica em laço enquanto a Mecânica única concentra e carrega (src/presentation/ativacao-da-unica.ts) */
+.arena-v2 .unit .unica-carga::before,.arena-v2 .unit .unica-carga i{animation-iteration-count:infinite;animation-duration:calc(.55s * var(--motion-scale,1))}
+/* a pausa do golpe: quem atacou fica parado no meio do caminho, meio apagado, enquanto o atacado responde */
+/* (!important: o movimento de quem age vem num atalho `animation:` mais específico, que volta o estado para "rodando") */
+.arena-v2 .act-pausado .unit-medal,.arena-v2 .act-pausado .unit-medal *,.arena-v2 .act-pausado .unit-medal *::before,.arena-v2 .act-pausado .unit-medal *::after{animation-play-state:paused!important}
+.arena-v2 .unit .fighter-portrait{transition:filter .18s}
+.arena-v2 .act-pausado .fighter-portrait{filter:saturate(.55) brightness(.8)}
+.battle-effects.golpe-pausado .fxl:not(.fx-da-unica),.battle-effects.golpe-pausado .fxl:not(.fx-da-unica)::before,.battle-effects.golpe-pausado .fxl:not(.fx-da-unica)::after{animation-play-state:paused!important}

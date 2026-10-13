@@ -2,7 +2,8 @@ import { useEffect,useRef,useState } from 'react';
 import { Flame,Hourglass,Shield,HeartPulse,Skull,Sparkles,Zap } from 'lucide-react';
 import { condicaoAtendida } from '../engine/battle';
 import type { Battle,Fighter,Status } from '../engine/types';
-import { PREPARO_DA_UNICA,passoAtual,revelado,type Beat } from '../presentation/director';
+import { passoAtual,revelado,type Beat } from '../presentation/director';
+import { ativacaoNaTela } from '../presentation/ativacao-da-unica';
 import { PRESENTATION as P } from '../presentation/config';
 import { folha } from '../presentation/vfxProfiles';
 import { byId } from '../data/characters';
@@ -91,17 +92,22 @@ export function ArenaUnit({fighter:f,battle,beat,onInspect,numbers,threatened,li
    * ele ativa"): o nome dela na cabeça, no lugar do nome da habilidade, durante o momento dela. Sozinha (sem golpe
    * em volta), o nome já aparece no começo, enquanto ela "carrega".
    */
-  const ativando=beat?.traco&&beat.passos?.[0]?.classe==='unica'&&beat.event.source===f.uid?beat.passos[0]
-    :passo?.classe==='unica'&&passo.quem===f.uid?passo:undefined;
-  // sozinha, ela prepara antes igual a uma habilidade (src/presentation/preparo-da-unica.ts): anel, nome e o ícone de preparo
-  const preparandoUnica=!!ativando&&!!beat?.traco&&!impacted;
+  const at=ativacaoNaTela(beat,f.uid);
+  const ativando=at?.passo??(passo?.classe==='unica'&&passo.quem===f.uid&&!passo.antecipada?passo:undefined);
+  /*
+   * Sozinha (ou respondendo a um golpe), ela tem as fases de uma habilidade (src/presentation/ativacao-da-unica.ts):
+   * concentra sem nome, o nome aparece com o ícone de preparo e o anel enche, e aí ela solta com o nome dela.
+   */
+  const fase=at?(at.t<at.fases.nomeEm?'concentra':at.t<at.fases.soltaEm?'carga':'solta'):undefined;
+  const preparandoUnica=fase==='concentra'||fase==='carga';
+  const anelDaUnica=at&&fase==='carga'?Math.min(100,100*(at.t-at.fases.nomeEm)/Math.max(.01,at.fases.soltaEm-at.fases.nomeEm)):0;
   /*
    * A bolinha da Mecânica única (pedido do jogador: "um iconezinho… ela carregando ali, igual a habilidade faz"):
    * sempre ativa fica acesa; a de relógio ("a cada 10 s") enche com o tempo que falta; ao ativar, enche no Preparo
    * dela e acende.
    */
   const unica=unicaDe(c.id),jeito=JEITO_DA_UNICA[c.id];
-  const cargaDaUnica=ativando?(preparandoUnica?Math.min(100,100*(beat?.elapsed??0)/PREPARO_DA_UNICA):100)
+  const cargaDaUnica=ativando?(at&&preparandoUnica?Math.min(100,100*at.t/Math.max(.01,at.fases.soltaEm)):100)
     :jeito==='sempre'?100:Math.round(100*(cargaDoRelogio(f)??0));
   /*
    * O selo do traço e da Mecânica única fica um tempo na cabeça, com efeito no retrato (pedido do jogador: "aparece
@@ -173,7 +179,7 @@ export function ArenaUnit({fighter:f,battle,beat,onInspect,numbers,threatened,li
     broken&&'is-broken',threatened&&'is-threatened',ring>=P.nearAction&&'is-near',tempo&&'is-tempo',reagindo&&'is-reacting',
   ].filter(Boolean).join(' ');
   /* A atuação deste beat: estilo de quem age, reação de quem recebe, e para onde. */
-  const atua=atuacao?[atuacao.act&&`actor act-${atuacao.act} act-${atuacao.parity}`,atuacao.react&&`reactor react-${atuacao.react}`].filter(Boolean).join(' '):'';
+  const atua=atuacao?[atuacao.act&&`actor act-${atuacao.act} act-${atuacao.parity}`,atuacao.react&&`reactor react-${atuacao.react}`,atuacao.pausado&&'act-pausado'].filter(Boolean).join(' '):'';
   const atuaStyle:Record<string,string>=atuacao?{'--act-dx':`${atuacao.dx.toFixed(1)}px`,'--act-dy':`${atuacao.dy.toFixed(1)}px`,'--act-ux':atuacao.ux.toFixed(3),'--act-uy':atuacao.uy.toFixed(3),'--beat-s':`${atuacao.seconds}s`,'--act-angle':`${(Math.atan2(atuacao.uy,atuacao.ux)*180/Math.PI).toFixed(1)}deg`}:{};
   // o nome da habilidade (ou do Preparo) está à vista: o selo do traço e da mecânica espera ele sair (um nome por vez)
   const comNome=!ativando&&(preparing||(!!source&&beat?.event.kind==='skill'&&beat.event.skill!==undefined&&!!c.skills[beat.event.skill]));
@@ -190,7 +196,7 @@ export function ArenaUnit({fighter:f,battle,beat,onInspect,numbers,threatened,li
           <circle cx="50" cy="50" r="47" className="attack-ring-ticks" pathLength="100" strokeDasharray=".4 9.6"/>
           <circle cx="50" cy="50" r="47" className="attack-ring-fill" pathLength="100" strokeDasharray={`${Math.min(100,ring*100)} 100`}/>
         </svg>
-        {preparing&&<svg className="prep-ring" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="41" pathLength="100" strokeDasharray={`${preparandoUnica?Math.min(100,100*(beat?.elapsed??0)/PREPARO_DA_UNICA):f.cast?Math.max(0,100*f.cast.elapsed/f.cast.duration):0} 100`}/></svg>}
+        {preparing&&<svg className="prep-ring" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="41" pathLength="100" strokeDasharray={`${preparandoUnica?anelDaUnica:f.cast?Math.max(0,100*f.cast.elapsed/f.cast.duration):0} 100`}/></svg>}
         {/* a bolinha da Mecânica única, como uma quarta habilidade: enche com o relógio dela e acende ao ativar */}
         {unica&&!out&&<span className={`unica-bolinha${jeito==='sempre'?' sempre':''}${ativando?' ativando':''}${cargaDaUnica>=100&&!ativando?' cheia':''}`} aria-hidden="true">
           <svg className="ub-anel" viewBox="0 0 36 36"><circle cx="18" cy="18" r="15.5" className="ub-trilho"/><circle cx="18" cy="18" r="15.5" pathLength="100" className="ub-carga" strokeDasharray={`${cargaDaUnica} 100`}/></svg>
@@ -219,12 +225,12 @@ export function ArenaUnit({fighter:f,battle,beat,onInspect,numbers,threatened,li
         {reagindo&&<span key={`a${reagindo.eventos[0]??0}`} className="reacao-anel" aria-hidden="true"/>}
         {ativando&&!preparandoUnica&&<span key={`ua${beat?.event.id??0}-${ativando.eventos[0]??0}`} className="aura-ativa aura-unica aura-longa" aria-hidden="true"><i/><i/><i/><i/><i/><i/><i/><i/></span>}
         {/* a mini preparação: a energia roxa junta no retrato antes de a mecânica disparar */}
-        {ativando&&<span key={`uc${beat?.event.id??0}-${ativando.eventos[0]??0}`} className="unica-carga" aria-hidden="true"><i/><i/><i/><i/><i/><i/></span>}
+        {ativando&&(!at||preparandoUnica)&&<span key={`uc${beat?.event.id??0}-${ativando.eventos[0]??0}`} className="unica-carga" aria-hidden="true"><i/><i/><i/><i/><i/><i/></span>}
         {applied&&<span key={applied.id} className="status-pop">{applied.status&&<img src={`/assets/statuses/${applied.status}.png`} alt=""/>}{applied.label}</span>}
         {discovered&&<span key={discovered.id} className="discovery-pop">{discovered.label}</span>}
       </button>
       {(out||advantageActive||critical||shield>0)&&<span className={`unit-flag ${out?'flag-out':advantageActive?'flag-advantage':critical?'flag-critical':'flag-shield'}`} aria-hidden="true">{renascendo?<EmblemaDoRenascer id={c.id} size={12}/>:out?<Skull size={12}/>:advantageActive?<AuxIcon id="domain" size={13}/>:critical?<HeartPulse size={12}/>:<Shield size={12}/>}</span>}
-      {ativando&&preparandoUnica&&<div key={`up${beat?.event.id??0}-${ativando.eventos[0]??0}`} className="unit-cast"><AuxIcon id="preparing" size={13}/><span>{nomeDaAtivacao(beat,ativando,c.id)}</span></div>}
+      {ativando&&fase==='carga'&&<div key={`up${beat?.event.id??0}-${ativando.eventos[0]??0}`} className="unit-cast"><AuxIcon id="preparing" size={13}/><span>{nomeDaAtivacao(beat,ativando,c.id)}</span></div>}
       {ativando&&!preparandoUnica&&<div key={`un${beat?.event.id??0}-${ativando.eventos[0]??0}`} className="unit-cast unit-skill-name unit-unica-name"><Sparkles size={14} strokeWidth={2.6}/><span>{nomeDaAtivacao(beat,ativando,c.id)}</span></div>}
       {!ativando&&preparing&&<div className="unit-cast"><AuxIcon id="preparing" size={13}/><span>{f.cast?c.skills[f.cast.skill].name:beat?.event.label}</span></div>}
       {/* a habilidade saindo, com ou sem Preparo: o nome aparece enquanto o golpe acontece */}

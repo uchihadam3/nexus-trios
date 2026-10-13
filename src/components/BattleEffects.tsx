@@ -9,6 +9,7 @@ import { statuses as statusCatalog } from '../data/statuses';
 import { familia,folha,profileFor,type VfxFamily,type VfxProfile } from '../presentation/vfxProfiles';
 import { VOO_DA_UNICA,efeitoDaUnica,entregaDaUnica } from '../presentation/unicas-efeitos';
 import { PREPARO_DA_UNICA,ladoDaUnica } from '../presentation/director';
+import { ativacaoNaTela } from '../presentation/ativacao-da-unica';
 import { preparoDaUnica } from '../presentation/preparo-da-unica';
 import { FAMILIA_DO_REVIVER, RENASCER_PROPRIO } from '../presentation/renascer-proprio';
 import { efeitosDoJeito,VOO_DO_QUIQUE } from '../presentation/jeito-efeito';
@@ -286,8 +287,10 @@ export function BattleEffects({battle,beat,anchors,enabled,reduced,medal=80}:{ba
     /** Em quem a Mecânica única cai: os rivais de pé, numa de área; senão o alvo do aviso. */
     const alvosDaUnica=(e:typeof beat.event)=>{
       const dono=battle.fighters.find(f=>f.uid===e.source);
-      if(dono&&entregaDaUnica(dono.characterId,ladoDaUnica(e,battle)).area)return battle.fighters.filter(f=>f.side!==dono.side&&f.hp>0).map(f=>f.uid);
-      return [e.target??e.source];
+      const ent=dono?entregaDaUnica(dono.characterId,ladoDaUnica(e,battle)):undefined;
+      if(dono&&ent?.area)return battle.fighters.filter(f=>f.side!==dono.side&&f.hp>0).map(f=>f.uid);
+      // a de si mesmo (a Armadura de Pégaso) cai em quem ativou, mesmo quando o aviso aponta quem bateu
+      return [ent?.modo==='si'?e.source:e.target??e.source];
     };
     const entregaAteOAlvo=(e:typeof beat.event,chave:string|number,comeca:number)=>{
       const dono=battle.fighters.find(f=>f.uid===e.source);if(!dono)return;
@@ -301,49 +304,71 @@ export function BattleEffects({battle,beat,anchors,enabled,reduced,medal=80}:{ba
       const de=point(e.source),para=point(alvo),qa=px(de),qb=px(para),vx=qb.x-qa.x,vy=qb.y-qa.y,ang=Math.atan2(vy,vx)*180/Math.PI;
       if((ent.modo==='voa'||ent.modo==='aliado')&&ent.viagem){
         const t=medal*(TAMANHO_DO_VOO[ent.viagem]??1.05)*(ent.modo==='aliado'?.75:1);
-        nodes.push(camada(ent.viagem,{left:`${de.x}%`,top:`${de.y}%`,width:t,height:t,'--fx-cor':cor,'--dx':`${vx}px`,'--dy':`${vy}px`,'--ang':`${ang}deg`,'--voo':s(voo),'--voo-delay':s(comeca)},'fxl-laco fxl-voo',`unica-voo-${chave}`));
+        nodes.push(camada(ent.viagem,{left:`${de.x}%`,top:`${de.y}%`,width:t,height:t,'--fx-cor':cor,'--dx':`${vx}px`,'--dy':`${vy}px`,'--ang':`${ang}deg`,'--voo':s(voo),'--voo-delay':s(comeca)},'fx-da-unica fxl-laco fxl-voo',`unica-voo-${chave}`));
       }
       // cai: vem de cima, em pé sobre o alvo, e despenca nele (o meteoro, a bigorna)
       if(ent.modo==='cai'&&ent.viagem){
         const t=medal*(TAMANHO_DO_VOO[ent.viagem]??1.05)*1.2,altura=Math.min(qb.y+medal,medal*3.2);
-        nodes.push(camada(ent.viagem,{left:`${para.x}%`,top:`calc(${para.y}% - ${Math.round(altura)}px)`,width:t,height:t,'--fx-cor':cor,'--dx':'0px','--dy':`${Math.round(altura)}px`,'--ang':'90deg','--voo':s(voo),'--voo-delay':s(comeca)},'fxl-laco fxl-voo',`unica-cai-${chave}`));
+        nodes.push(camada(ent.viagem,{left:`${para.x}%`,top:`calc(${para.y}% - ${Math.round(altura)}px)`,width:t,height:t,'--fx-cor':cor,'--dx':'0px','--dy':`${Math.round(altura)}px`,'--ang':'90deg','--voo':s(voo),'--voo-delay':s(comeca)},'fx-da-unica fxl-laco fxl-voo',`unica-cai-${chave}`));
       }
       if(ent.modo==='raio'&&ent.faixa){
         const h=medal*(ALTURA_DA_FAIXA[ent.faixa]??.4);
-        nodes.push(camada(ent.faixa,{left:`${de.x}%`,top:`${de.y}%`,width:Math.hypot(vx,vy),height:h,'--fx-cor':cor,'--ang':`${ang}deg`,'--faixa':s(voo+.6),'--faixa-delay':s(comeca)},'fxl-laco fxl-faixa',`unica-faixa-${chave}`));
+        nodes.push(camada(ent.faixa,{left:`${de.x}%`,top:`${de.y}%`,width:Math.hypot(vx,vy),height:h,'--fx-cor':cor,'--ang':`${ang}deg`,'--faixa':s(voo+.6),'--faixa-delay':s(comeca)},'fx-da-unica fxl-laco fxl-faixa',`unica-faixa-${chave}`));
       }
     };
-    // o preparo dela, igual ao de uma habilidade: a folha de preparo do próprio personagem em laço sobre ele
-    const dono=sozinha&&!beat.impacted?battle.fighters.find(f=>f.uid===beat.event.source):undefined;
-    if(dono){
-      const p=point(dono.uid),t=medal*1.9,ent=entregaDaUnica(dono.characterId,ladoDaUnica(beat.event,battle));
-      nodes.push(camada(ent.preparo??preparoDaUnica(dono.characterId).folha,{left:`${p.x}%`,top:`${p.y}%`,width:t,height:t},'fxl-laco',`unica-prep-${beat.event.id}`));
-      entregaAteOAlvo(beat.event,beat.event.id,PREPARO_DA_UNICA);
+    /*
+     * As fases da ativação (src/presentation/ativacao-da-unica.ts), sozinha ou na pausa do golpe de um rival: a folha
+     * de preparo em laço enquanto concentra e carrega; ao soltar, a entrega sai e o efeito cai quando ela chega.
+     */
+    const efeitoNoAlvo=(e:typeof beat.event,atraso:number)=>{
+      const dono=battle.fighters.find(f=>f.uid===e.source);if(!dono)return;
+      const f=familia(efeitoDaUnica(dono.characterId,e.label).familia),t=Math.min(medal*f.escala,Math.min(size.w,size.h)*.95);
+      for(const alvo of alvosDaUnica(e)){
+        const p=point(alvo);
+        nodes.push(camada(f.impacto,{left:`${p.x}%`,top:`${p.y}%`,width:t,height:t,'--fx-cor':f.cor,'--ang':'0deg','--flip':1,'--dur':s(1.5),'--delay':s(atraso)},'fxl-impacto fxl-sobre fx-da-unica',`unica-${beat.event.id}-${e.id}-${alvo}`));
+      }
+    };
+    const quemAtiva=sozinha?beat.event.source:beat.pausa?.quem;
+    const at=quemAtiva?ativacaoNaTela(beat,quemAtiva):undefined;
+    if(at&&quemAtiva){
+      const dono=battle.fighters.find(f=>f.uid===quemAtiva),e=at.evento??beat.event;
+      if(dono&&at.t<at.fases.soltaEm){
+        const p=point(dono.uid),t=medal*1.9,ent=entregaDaUnica(dono.characterId,ladoDaUnica(e,battle));
+        nodes.push(camada(ent.preparo??preparoDaUnica(dono.characterId).folha,{left:`${p.x}%`,top:`${p.y}%`,width:t,height:t},'fxl-laco fx-da-unica',`unica-prep-${beat.event.id}-${e.id}`));
+      }
+      // sozinha, a entrega sai na hora de soltar; na pausa, a de si mesmo (a armadura) aparece antes de o golpe cair
+      if(!at.pausa&&at.t>=at.fases.vooEm)entregaAteOAlvo(e,`${beat.event.id}-${e.id}`,0);
+      const deSi=!!dono&&(ladoDaUnica(e,battle)==='si'||entregaDaUnica(dono.characterId,ladoDaUnica(e,battle)).modo==='si');
+      if(at.pausa&&deSi&&at.t>=at.fases.impactoEm)efeitoNoAlvo(e,0);
     }
     (beat.passos??[]).forEach((passo,k)=>{
       if(passo.classe!=='unica')return;
-      // sozinha: dispara no impacto, depois da mini preparação; no meio de um golpe: no passo dela, depois da mini preparação
+      // sozinha: dispara no impacto, depois das fases dela; no meio de um golpe: no passo dela
       if(sozinha?!beat.impacted:!(beat.impacted&&(beat.etapa??0)>k))return;
       for(const e of beat.events){
         if(e.kind!=='unica'||!passo.eventos.includes(e.id))continue;
         const dono=battle.fighters.find(f=>f.uid===e.source);if(!dono)continue;
-        const ef=efeitoDaUnica(dono.characterId,e.label),f=familia(ef.familia);
-        // no meio de um golpe: depois da mini preparação, ela viaja até o alvo como na ativação sozinha
-        const voo=sozinha?0:VOO_DA_UNICA[entregaDaUnica(dono.characterId,ladoDaUnica(e,battle)).modo];
-        if(!sozinha)entregaAteOAlvo(e,`${beat.event.id}-${e.id}`,PREPARO_DA_UNICA);
-        // em quem a mecânica atinge (a Genki Dama no rival, a Teia no aliado); sem alvo, em quem ativou
-        const t=Math.min(medal*f.escala,Math.min(size.w,size.h)*.95);
-        for(const alvo of alvosDaUnica(e)){
-          const p=point(alvo);
-          nodes.push(camada(f.impacto,{left:`${p.x}%`,top:`${p.y}%`,width:t,height:t,'--fx-cor':f.cor,'--ang':'0deg','--flip':1,'--dur':s(1.5),'--delay':s(sozinha?0:PREPARO_DA_UNICA+voo)},'fxl-impacto fxl-sobre',`unica-${beat.event.id}-${e.id}-${alvo}`));
+        const ent=entregaDaUnica(dono.characterId,ladoDaUnica(e,battle));
+        if(sozinha){efeitoNoAlvo(e,0);continue;}
+        // já ativou na pausa do golpe: a de si mesmo continua à vista; a que vai no rival (o troco) sai agora, sem preparo
+        if(passo.antecipada){
+          if(ent.modo==='si'||ladoDaUnica(e,battle)==='si'){efeitoNoAlvo(e,0);continue;}
+          entregaAteOAlvo(e,`${beat.event.id}-${e.id}`,0);
+          efeitoNoAlvo(e,ent.area||(e.target&&e.target!==e.source)?VOO_DA_UNICA[ent.modo]:0);
+          continue;
         }
+        // no meio de um golpe: depois da mini preparação, ela viaja até o alvo como na ativação sozinha
+        entregaAteOAlvo(e,`${beat.event.id}-${e.id}`,PREPARO_DA_UNICA);
+        efeitoNoAlvo(e,PREPARO_DA_UNICA+VOO_DA_UNICA[ent.modo]);
       }
     });
   }
   const outcomes=(beat?.impacted?beat.events:[]).filter(e=>e.target===beat?.event.target&&['damage','status','interrupt','shield','block','heal'].includes(e.kind)).slice(0,3);
   const outcome=(event:typeof outcomes[number])=>event.kind==='damage'?{label:'Dano',icon:Zap}:event.kind==='interrupt'?{label:'Interrompido',icon:ArrowDown}:event.kind==='status'?{label:event.status?statusCatalog[event.status].name:'Efeito',icon:Sparkles}:event.kind==='heal'?{label:'Recuperação',icon:HeartPulse}:{label:'Protegido',icon:ShieldCheck};
   const style={'--fx-cor':cor,'--fx-color':character?.color??'#d2f276'} as CSSProperties;
-  return <div ref={root} className={`battle-effects directed-effects ${beat?.grand?'grand-event':''} ${reduced?'reduced':''}`} aria-hidden="true" style={style} data-familia={chave}>
+  // o golpe parado no meio do caminho: as folhas dele esperam a resposta do atacado
+  const pausado=!!beat?.pausa&&!beat.impacted&&beat.elapsed>=beat.pausa.em-1e-8&&beat.pausa.t<beat.pausa.dura;
+  return <div ref={root} className={`battle-effects directed-effects ${beat?.grand?'grand-event':''} ${reduced?'reduced':''} ${pausado?'golpe-pausado':''}`} aria-hidden="true" style={style} data-familia={chave}>
     {nodes}
     {beat&&!beat.periodic&&beat.event.kind==='turn'&&<div className={`action-title ${landed?'landed':''} ${beat.grand?'title-grand':''}`} key={beat.event.id}><SkillIcon type={beat.event.visual??'impact'} size={20} characterId={source?.characterId} skillId={source&&beat.event.skill!==undefined?character?.skills[beat.event.skill]?.id:undefined}/><div><small>{beat.event.kind==='turn'?(beat.event.source.startsWith('player')?'SEU TRIO':'RIVAIS'):character?.name??'NEXUS'}</small><strong>{beat.event.kind==='turn'?'VIRADA!':beat.event.label}</strong>{outcomes.length>0&&<span className="action-outcomes">{outcomes.slice(0,2).map(e=>{const x=outcome(e),Icon=x.icon;return <i key={e.id}><Icon size={12}/>{x.label}</i>;})}</span>}</div></div>}
   </div>;

@@ -27,3 +27,18 @@ describe('Mecânica única chega no alvo como uma habilidade', () => {
     expect(entregaDaUnica('personagem-sem-entrega', 'si').modo).toBe('si');
   });
 });
+
+describe('fases da ativação da Mecânica única', () => {
+  it('concentra, mostra o nome, carrega e solta, nessa ordem; o reflexo é instantâneo', async () => {
+    const { fasesDaUnica, preparoProprio } = await import('../src/presentation/ativacao-da-unica');
+    const genki = fasesDaUnica('goku', 0.55);
+    expect(preparoProprio('goku')).toBe(0.5);
+    expect(genki.nomeEm).toBeGreaterThan(0);
+    expect(genki.soltaEm).toBeGreaterThan(genki.nomeEm);
+    expect(genki.impactoEm).toBeCloseTo(genki.vooEm + 0.55);
+    const valak = fasesDaUnica('valak', 0);
+    expect(valak.nomeEm).toBe(0);
+    expect(valak.soltaEm).toBe(0);
+    expect(fasesDaUnica('seiya', 0).soltaEm).toBeLessThan(genki.soltaEm);
+  });
+});
