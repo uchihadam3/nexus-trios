@@ -4,6 +4,7 @@ import { RITMO_DA_INVOCACAO } from '../data/statuses';
 import type { Battle } from '../engine/types';
 import type { Beat } from '../presentation/director';
 import { fallbackPoint, type Anchors } from './BattleEffects';
+import { Portrait } from './Portrait';
 
 /*
  * A invocação como bolinha (pedido do jogador: "quando eles invocar aparecer uma bolinha… menorzinha…
@@ -20,7 +21,7 @@ export const DE_PERTO = new Set(['megumi', 'jinwoo', 'bayonetta', 'jotaro', 'pai
 export const COR_DA_INVOCACAO: Record<string, string> = {
   megumi: '#e8eef8', jinwoo: '#9a6cff', yugi: '#9a6cff', kaiba: '#7fc8ff', bayonetta: '#ff4a6e',
   jotaro: '#8aa2ff', pain: '#d8b080', mickey: '#e8c070', plankton: '#7fe07f', krang: '#ff8ac8',
-  agentsmith: '#5ae08a', xenomorph: '#8ab8c0', steve: '#d8d4c8', makima: '#ff9060',
+  naruto: '#ffb04c', agentsmith: '#5ae08a', xenomorph: '#8ab8c0', steve: '#d8d4c8', makima: '#ff9060',
 };
 /** Onde a bolinha fica, em px a partir do centro do medalhão de quem invocou. */
 // sempre na diagonal da frente, virada para o meio do campo (pedido do jogador): no seu trio, em cima à
@@ -33,8 +34,13 @@ export const posicaoDaInvocacao = (lado: 'player' | 'enemy', medal: number) => (
  * num arco em volta do medalhão (longe da invocação grande e da bolinha da mecânica). No relógio do ataque delas,
  * cada uma dá o bote para o lado dos rivais e volta.
  */
-export const MINIATURAS: Record<string, { k: string; max: number; relogio: string }> = {
+// relogio: o bote sai quando esse relógio da mecânica dá a volta; sem relógio, o bote acompanha o ataque básico de quem
+// invocou. menos: quantas já aparecem na invocação grande (as cópias do Smith). retrato: a miniatura é o próprio
+// personagem (os clones do Naruto).
+export const MINIATURAS: Record<string, { k: string; max: number; relogio?: string; menos?: number; retrato?: boolean }> = {
   mickey: { k: 'vassouras', max: 4, relogio: 'relogio_vassoura' },
+  agentsmith: { k: 'copias', max: 3, menos: 1 },
+  naruto: { k: 'clones', max: 2, retrato: true },
 };
 /** O arco das miniaturas, em graus da tela (0 = direita, −90 = em cima): por cima no seu trio, por baixo nos rivais. */
 const ARCO_DAS_MINIATURAS = [-150, -122, -94, -66];
@@ -48,17 +54,22 @@ export function Invocacoes({ battle, beat, anchors, box, velocidade }: { battle:
   const rm = Math.max(7, Math.round(r / 2));
   return <div className="invocacoes" aria-hidden>
     {battle.fighters.flatMap((f) => {
-      const mini = f.hp > 0 ? MINIATURAS[f.characterId] : undefined, n = mini ? Math.min(mini.max, Math.floor(f.u?.[mini.k] ?? 0)) : 0;
-      if (!mini || !n) return [];
-      const p = anchors[f.uid] ?? fallbackPoint(f.uid), falta = f.u?.[mini.relogio] ?? 99, volta = f.u?.[`${mini.relogio}_volta`] ?? 3;
-      // o bote: logo depois que o relógio dá a volta (é quando elas batem)
-      const bote = volta - falta < 0.5;
+      const mini = f.hp > 0 ? MINIATURAS[f.characterId] : undefined;
+      // as cópias do Smith só existem com a invocação de pé
+      const n = !mini || (mini.menos && !f.statuses.some((x) => x.id === 'summon')) ? 0 : Math.min(mini.max, Math.floor(f.u?.[mini.k] ?? 0)) - (mini.menos ?? 0);
+      if (!mini || n <= 0) return [];
+      const p = anchors[f.uid] ?? fallbackPoint(f.uid);
+      // o bote: logo depois que o relógio dá a volta (é quando elas batem), ou junto do ataque de quem invocou
+      const bote = mini.relogio
+        ? (f.u?.[`${mini.relogio}_volta`] ?? 3) - (f.u?.[mini.relogio] ?? 99) < 0.5
+        : !!beat && beat.event.source === f.uid && (beat.event.kind === 'basic' || beat.event.kind === 'summon');
+      const ch = byId[f.characterId];
       const cor = COR_DA_INVOCACAO[f.characterId] ?? '#c9a2ff';
       return Array.from({ length: n }, (_, i) => {
         const { dx, dy } = posicaoDaMiniatura(f.side, i, box.medal);
-        return <div key={`${f.uid}-mini-${i}`} className={`invocacao miniatura ${f.side}${bote ? ' bote' : ''}`}
+        return <div key={`${f.uid}-mini-${i}`} className={`invocacao miniatura ${f.side}${bote ? ' bote' : ''}${mini.retrato ? ' retrato' : ''}`}
           style={{ left: `calc(${p.x}% + ${dx}px)`, top: `calc(${p.y}% + ${dy}px)`, width: rm * 2, height: rm * 2, '--cor': cor, '--atraso': `${i * 0.07}s` } as CSSProperties}>
-          <img src={`/assets/invocacoes/${f.characterId}.webp`} alt="" />
+          {mini.retrato && ch ? <Portrait character={ch} /> : <img src={`/assets/invocacoes/${f.characterId}.webp`} alt="" />}
         </div>;
       });
     })}

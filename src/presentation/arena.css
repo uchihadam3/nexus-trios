@@ -413,6 +413,10 @@
 @keyframes inv-disparo{0%{clip-path:inset(0 100% 0 0);opacity:1}45%{clip-path:inset(0 0 0 0);opacity:1}100%{clip-path:inset(0 0 0 70%);opacity:0}}
 .arena-v2 .invocacao.miniatura{z-index:6;filter:drop-shadow(0 0 4px color-mix(in srgb,var(--cor) 70%,transparent));box-shadow:0 0 0 1.5px color-mix(in srgb,var(--cor) 80%,#fff)}
 .arena-v2 .invocacao.miniatura img{inset:1.5px;width:calc(100% - 3px);height:calc(100% - 3px);box-shadow:none}
+.arena-v2 .invocacao.miniatura.retrato{overflow:hidden}
+.arena-v2 .invocacao.miniatura.retrato .portrait,.arena-v2 .invocacao.miniatura.retrato .portrait img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:50%}
+/* o clone é feito de chakra: um véu da cor por cima do retrato */
+.arena-v2 .invocacao.miniatura.retrato::after{content:'';position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle,transparent 45%,color-mix(in srgb,var(--cor) 45%,transparent));mix-blend-mode:screen}
 .arena-v2 .invocacao.miniatura.bote{animation:inv-bote .5s cubic-bezier(.4,0,.3,1) var(--atraso) both}
 .arena-v2 .invocacao.miniatura.enemy.bote{animation-name:inv-bote-baixo}
 @keyframes inv-bote{0%{transform:translate(-50%,-50%)}40%{transform:translate(-50%,calc(-50% - 16px)) rotate(-25deg) scale(1.25)}100%{transform:translate(-50%,-50%)}}
