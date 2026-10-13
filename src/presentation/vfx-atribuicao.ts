@@ -176,6 +176,12 @@ const T: Record<string, string> = {
   leatherface: 'motosserra_de_leatherface danca_da_serra massacre_da_serra',
   pinhead: 'correntes_com_ganchos dor_e_prazer caixa_de_lemarchand',
   samara: 'maldicao_de_sete_dias estatica_de_samara sai_da_tv',
+  valak: 'aparicao_de_valak sombra_profana possessao',
+  dracula: 'mordida_do_conde nuvem_de_morcegos fogo_infernal',
+  xenomorph: 'segunda_mandibula emboscada_xenomorfa cauda_perfurante',
+  predator: 'canhao_de_plasma camuflagem_predador trofeu',
+  darthvader: 'esganadura_da_forca sabre_vermelho_vader lado_sombrio',
+  yoda: 'empurrao_da_forca escudo_da_forca sabre_do_mestre',
 };
 
 export const FAMILIA_DA_HABILIDADE: Record<string, VfxFamily> = Object.fromEntries(

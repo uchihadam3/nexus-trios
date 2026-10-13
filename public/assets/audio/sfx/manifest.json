@@ -614,6 +614,23 @@
    ],
    "bytes": 45027
   },
+  "aparicao-de-valak": {
+   "arquivo": "aparicao-de-valak.mp3",
+   "descricao": "Valak: a aparição",
+   "versoes": [
+    0.0,
+    2.48,
+    5.047,
+    7.4459
+   ],
+   "duracoes": [
+    2.4,
+    2.487,
+    2.3188,
+    2.4365
+   ],
+   "bytes": 84601
+  },
   "apoio-do-pod": {
    "arquivo": "apoio-do-pod.mp3",
    "descricao": "2B: o apoio do Pod",
@@ -3232,6 +3249,23 @@
    ],
    "bytes": 38048
   },
+  "camuflagem-predador": {
+   "arquivo": "camuflagem-predador.mp3",
+   "descricao": "Predador: a camuflagem",
+   "versoes": [
+    0.0,
+    1.9785,
+    3.9598,
+    5.8285
+   ],
+   "duracoes": [
+    1.8985,
+    1.9013,
+    1.7887,
+    1.9209
+   ],
+   "bytes": 79967
+  },
   "camus-preparo": {
    "arquivo": "camus-preparo.mp3",
    "descricao": "Camus: o frio (Preparo)",
@@ -3333,6 +3367,23 @@
     2.132
    ],
    "bytes": 60348
+  },
+  "canhao-de-plasma": {
+   "arquivo": "canhao-de-plasma.mp3",
+   "descricao": "Predador: o canhão de plasma",
+   "versoes": [
+    0.0,
+    2.1478,
+    4.3615,
+    6.4704
+   ],
+   "duracoes": [
+    2.0678,
+    2.1337,
+    2.029,
+    2.1007
+   ],
+   "bytes": 66679
   },
   "canhao-incinerador": {
    "arquivo": "canhao-incinerador.mp3",
@@ -3707,6 +3758,23 @@
     1.6244
    ],
    "bytes": 47517
+  },
+  "cauda-perfurante": {
+   "arquivo": "cauda-perfurante.mp3",
+   "descricao": "Xenomorfo: a cauda perfurante",
+   "versoes": [
+    0.0,
+    1.849,
+    3.7329,
+    5.3445
+   ],
+   "duracoes": [
+    1.769,
+    1.8039,
+    1.5317,
+    1.79
+   ],
+   "bytes": 61906
   },
   "caudas-giratorias": {
    "arquivo": "caudas-giratorias.mp3",
@@ -7006,6 +7074,23 @@
    ],
    "bytes": 80913
   },
+  "dracula-preparo": {
+   "arquivo": "dracula-preparo.mp3",
+   "descricao": "Drácula: o órgão sombrio (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 56956
+  },
   "dragao-das-trevas": {
    "arquivo": "dragao-das-trevas.mp3",
    "descricao": "Hiei: o Dragão das Trevas",
@@ -7260,6 +7345,40 @@
     1.3732
    ],
    "bytes": 47325
+  },
+  "emboscada-xenomorfa": {
+   "arquivo": "emboscada-xenomorfa.mp3",
+   "descricao": "Xenomorfo: a emboscada",
+   "versoes": [
+    0.0,
+    2.1279,
+    4.3331,
+    6.4091
+   ],
+   "duracoes": [
+    2.0479,
+    2.1252,
+    1.996,
+    2.0761
+   ],
+   "bytes": 69774
+  },
+  "empurrao-da-forca": {
+   "arquivo": "empurrao-da-forca.mp3",
+   "descricao": "Yoda: o empurrão da Força",
+   "versoes": [
+    0.0,
+    1.9182,
+    3.9022,
+    5.759
+   ],
+   "duracoes": [
+    1.8382,
+    1.904,
+    1.7768,
+    1.8658
+   ],
+   "bytes": 53914
   },
   "empurrao-de-campo": {
    "arquivo": "empurrao-de-campo.mp3",
@@ -7566,6 +7685,23 @@
     0.8122
    ],
    "bytes": 27396
+  },
+  "escudo-da-forca": {
+   "arquivo": "escudo-da-forca.mp3",
+   "descricao": "Yoda: o escudo da Força",
+   "versoes": [
+    0.0,
+    2.28,
+    4.6398,
+    6.8454
+   ],
+   "duracoes": [
+    2.2,
+    2.2798,
+    2.1256,
+    2.2335
+   ],
+   "bytes": 61018
   },
   "escudo-de-areia": {
    "arquivo": "escudo-de-areia.mp3",
@@ -7906,6 +8042,23 @@
     0.9137
    ],
    "bytes": 43422
+  },
+  "esganadura-da-forca": {
+   "arquivo": "esganadura-da-forca.mp3",
+   "descricao": "Darth Vader: a esganadura da Força",
+   "versoes": [
+    0.0,
+    2.2617,
+    4.6215,
+    6.8154
+   ],
+   "duracoes": [
+    2.1817,
+    2.2798,
+    2.1138,
+    2.1405
+   ],
+   "bytes": 77213
   },
   "esmagada-do-snorlax": {
    "arquivo": "esmagada-do-snorlax.mp3",
@@ -9912,6 +10065,23 @@
     1.8303
    ],
    "bytes": 60729
+  },
+  "fogo-infernal": {
+   "arquivo": "fogo-infernal.mp3",
+   "descricao": "Drácula: o fogo infernal",
+   "versoes": [
+    0.0,
+    2.48,
+    5.047,
+    7.4459
+   ],
+   "duracoes": [
+    2.4,
+    2.487,
+    2.3188,
+    2.4365
+   ],
+   "bytes": 77991
   },
   "fogo-no-peito": {
    "arquivo": "fogo-no-peito.mp3",
@@ -14486,6 +14656,23 @@
    ],
    "bytes": 74918
   },
+  "lado-sombrio": {
+   "arquivo": "lado-sombrio.mp3",
+   "descricao": "Darth Vader: o lado sombrio",
+   "versoes": [
+    0.0,
+    2.471,
+    5.0381,
+    7.4369
+   ],
+   "duracoes": [
+    2.391,
+    2.487,
+    2.3188,
+    2.4365
+   ],
+   "bytes": 95747
+  },
   "lambida-fantasma": {
    "arquivo": "lambida-fantasma.mp3",
    "descricao": "básico do Gengar: a lambida e a risadinha",
@@ -17137,6 +17324,23 @@
     1.283
    ],
    "bytes": 43846
+  },
+  "mordida-do-conde": {
+   "arquivo": "mordida-do-conde.mp3",
+   "descricao": "Drácula: a mordida do conde",
+   "versoes": [
+    0.0,
+    1.938,
+    3.9426,
+    5.819
+   ],
+   "duracoes": [
+    1.858,
+    1.9246,
+    1.7964,
+    1.7584
+   ],
+   "bytes": 62133
   },
   "mordida-predatoria": {
    "arquivo": "mordida-predatoria.mp3",
@@ -24465,6 +24669,23 @@
    ],
    "bytes": 40638
   },
+  "nuvem-de-morcegos": {
+   "arquivo": "nuvem-de-morcegos.mp3",
+   "descricao": "Drácula: a nuvem de morcegos",
+   "versoes": [
+    0.0,
+    1.9599,
+    3.9807,
+    5.844
+   ],
+   "duracoes": [
+    1.8799,
+    1.9409,
+    1.7832,
+    1.8738
+   ],
+   "bytes": 66732
+  },
   "nuvem-do-medo": {
    "arquivo": "nuvem-do-medo.mp3",
    "descricao": "Espantalho: o gás do medo",
@@ -26080,6 +26301,23 @@
    ],
    "bytes": 43494
   },
+  "possessao": {
+   "arquivo": "possessao.mp3",
+   "descricao": "Valak: a possessão",
+   "versoes": [
+    0.0,
+    2.48,
+    5.047,
+    7.4459
+   ],
+   "duracoes": [
+    2.4,
+    2.487,
+    2.3188,
+    2.4365
+   ],
+   "bytes": 73700
+  },
   "postura-de-guarda": {
    "arquivo": "postura-de-guarda.mp3",
    "descricao": "Postura de guarda: o bloqueio de metal e o contra-ataque",
@@ -26266,6 +26504,23 @@
     1.7785
    ],
    "bytes": 64311
+  },
+  "predador-preparo": {
+   "arquivo": "predador-preparo.mp3",
+   "descricao": "Predador: o disco abrindo (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 65810
   },
   "pregos-amaldicoados": {
    "arquivo": "pregos-amaldicoados.mp3",
@@ -29089,6 +29344,23 @@
    ],
    "bytes": 75536
   },
+  "sabre-do-mestre": {
+   "arquivo": "sabre-do-mestre.mp3",
+   "descricao": "Yoda: o sabre do mestre",
+   "versoes": [
+    0.0,
+    2.28,
+    4.6398,
+    6.8454
+   ],
+   "duracoes": [
+    2.2,
+    2.2798,
+    2.1256,
+    2.2335
+   ],
+   "bytes": 72067
+  },
   "sabre-verde": {
    "arquivo": "sabre-verde.mp3",
    "descricao": "básico do Luke: o sabre verde",
@@ -29122,6 +29394,23 @@
     1.4213
    ],
    "bytes": 60317
+  },
+  "sabre-vermelho-vader": {
+   "arquivo": "sabre-vermelho-vader.mp3",
+   "descricao": "Darth Vader: o sabre vermelho",
+   "versoes": [
+    0.0,
+    1.5648,
+    3.1455,
+    4.6264
+   ],
+   "duracoes": [
+    1.4848,
+    1.5007,
+    1.4009,
+    1.4501
+   ],
+   "bytes": 53450
   },
   "sai-da-tv": {
    "arquivo": "sai-da-tv.mp3",
@@ -29496,6 +29785,23 @@
     1.4213
    ],
    "bytes": 60906
+  },
+  "segunda-mandibula": {
+   "arquivo": "segunda-mandibula.mp3",
+   "descricao": "Xenomorfo: a segunda mandíbula",
+   "versoes": [
+    0.0,
+    1.52,
+    3.0143,
+    4.5173
+   ],
+   "duracoes": [
+    1.44,
+    1.4143,
+    1.423,
+    1.3652
+   ],
+   "bytes": 54491
   },
   "segurar-o-impacto": {
    "arquivo": "segurar-o-impacto.mp3",
@@ -30771,6 +31077,23 @@
     1.0152
    ],
    "bytes": 33472
+  },
+  "sombra-profana": {
+   "arquivo": "sombra-profana.mp3",
+   "descricao": "Valak: a sombra profana",
+   "versoes": [
+    0.0,
+    2.28,
+    4.6398,
+    6.8454
+   ],
+   "duracoes": [
+    2.2,
+    2.2798,
+    2.1256,
+    2.2335
+   ],
+   "bytes": 71578
   },
   "sombrinha": {
    "arquivo": "sombrinha.mp3",
@@ -32523,6 +32846,23 @@
    ],
    "bytes": 51429
   },
+  "trofeu": {
+   "arquivo": "trofeu.mp3",
+   "descricao": "Predador: o troféu",
+   "versoes": [
+    0.0,
+    2.2101,
+    4.4766,
+    6.6253
+   ],
+   "duracoes": [
+    2.1301,
+    2.1865,
+    2.0687,
+    2.1221
+   ],
+   "bytes": 77681
+  },
   "tropecao-do-pateta": {
    "arquivo": "tropecao-do-pateta.mp3",
    "descricao": "Pateta: o tropeção",
@@ -32931,6 +33271,23 @@
    ],
    "bytes": 54907
   },
+  "vader-preparo": {
+   "arquivo": "vader-preparo.mp3",
+   "descricao": "Darth Vader: a respiração (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 54046
+  },
   "vai-vai-bugiganga": {
    "arquivo": "vai-vai-bugiganga.mp3",
    "descricao": "Inspetor Bugiganga: Vai, vai, Bugiganga!",
@@ -32947,6 +33304,23 @@
     1.5213
    ],
    "bytes": 48942
+  },
+  "valak-preparo": {
+   "arquivo": "valak-preparo.mp3",
+   "descricao": "Valak: o sussurro em latim (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 62960
   },
   "vamos-nos-separar": {
    "arquivo": "vamos-nos-separar.mp3",
@@ -33764,6 +34138,23 @@
    ],
    "bytes": 57502
   },
+  "xenomorfo-preparo": {
+   "arquivo": "xenomorfo-preparo.mp3",
+   "descricao": "Xenomorfo: o chiado (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 55640
+  },
   "xeque-light": {
    "arquivo": "xeque-light.mp3",
    "descricao": "Tudo conforme o plano: a peça no tabuleiro",
@@ -33831,6 +34222,23 @@
     1.4213
    ],
    "bytes": 45692
+  },
+  "yoda-preparo": {
+   "arquivo": "yoda-preparo.mp3",
+   "descricao": "Yoda: a meditação (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 44093
   },
   "z-saber": {
    "arquivo": "z-saber.mp3",

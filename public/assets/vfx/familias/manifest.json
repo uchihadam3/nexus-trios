@@ -489,6 +489,20 @@
   "laco": false,
   "bytes": 79598
  },
+ "aparicao_de_valak": {
+  "descricao": "Valak · a freira surgindo no escuro",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 35550
+ },
  "apoio_do_pod": {
   "descricao": "2B · a rajada do Pod",
   "quadros": 12,
@@ -2799,6 +2813,20 @@
   "laco": false,
   "bytes": 4820
  },
+ "camuflagem_predador": {
+  "descricao": "Predador · a camuflagem",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 24426
+ },
  "camus_preparo": {
   "descricao": "Camus · as mãos em jarro (Preparo, laço)",
   "quadros": 12,
@@ -2868,6 +2896,20 @@
   ],
   "laco": false,
   "bytes": 27904
+ },
+ "canhao_de_plasma": {
+  "descricao": "Predador · os três pontos e o plasma",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 25290
  },
  "canhao_incinerador": {
   "descricao": "Genos · o fogo largo dos canhões",
@@ -3204,6 +3246,20 @@
   ],
   "laco": false,
   "bytes": 30302
+ },
+ "cauda_perfurante": {
+  "descricao": "Xenomorfo · a cauda atravessando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 29982
  },
  "caudas_giratorias": {
   "descricao": "Básico do Tails: as duas caudas girando",
@@ -6033,6 +6089,20 @@
   "laco": false,
   "bytes": 35980
  },
+ "dracula_preparo": {
+  "descricao": "Drácula · a capa e o fogo girando (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 16914
+ },
  "dragao_das_trevas": {
   "descricao": "Hiei · o dragão das chamas negras",
   "quadros": 12,
@@ -6257,6 +6327,34 @@
   "laco": false,
   "bytes": 20274
  },
+ "emboscada_xenomorfa": {
+  "descricao": "Xenomorfo · o sensor e a sombra",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 12014
+ },
+ "empurrao_da_forca": {
+  "descricao": "Yoda · a onda da Força",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 20240
+ },
  "empurrao_de_campo": {
   "descricao": "Básico da Violeta: a bolha de força empurrando",
   "quadros": 12,
@@ -6480,6 +6578,20 @@
   ],
   "laco": false,
   "bytes": 74492
+ },
+ "escudo_da_forca": {
+  "descricao": "Yoda · as bolhas da Força",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 44584
  },
  "escudo_de_areia": {
   "descricao": "Gaara · a armadura de areia",
@@ -6760,6 +6872,20 @@
   ],
   "laco": false,
   "bytes": 57198
+ },
+ "esganadura_da_forca": {
+  "descricao": "Darth Vader · a mão fechando e o rival suspenso",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 22058
  },
  "esmagada_do_snorlax": {
   "descricao": "Básico do Snorlax: a barriga caindo e os Z",
@@ -8566,6 +8692,20 @@
   ],
   "laco": false,
   "bytes": 37872
+ },
+ "fogo_infernal": {
+  "descricao": "Drácula · as colunas de fogo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 73670
  },
  "fogo_no_peito": {
   "descricao": "Charizard · o fogo juntando na boca no Preparo (laço)",
@@ -12291,6 +12431,20 @@
   "laco": false,
   "bytes": 35044
  },
+ "lado_sombrio": {
+  "descricao": "Darth Vader · os relâmpagos e o corte",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 31662
+ },
  "lambida_fantasma": {
   "descricao": "Básico do Gengar: a lambida, a baba e o arrepio",
   "quadros": 12,
@@ -14502,6 +14656,20 @@
   ],
   "laco": false,
   "bytes": 33352
+ },
+ "mordida_do_conde": {
+  "descricao": "Drácula · a capa, as presas e o sangue voltando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 25740
  },
  "mordida_predatoria": {
   "descricao": "Venom · a bocarra, a gosma e a cura",
@@ -20481,6 +20649,20 @@
   "laco": false,
   "bytes": 56778
  },
+ "nuvem_de_morcegos": {
+  "descricao": "Drácula · a nuvem de morcegos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 25894
+ },
  "nuvem_do_medo": {
   "descricao": "Espantalho · as nuvens do gás do medo",
   "quadros": 12,
@@ -21923,6 +22105,20 @@
   "laco": false,
   "bytes": 29794
  },
+ "possessao": {
+  "descricao": "Valak · a sombra entrando no rival",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 36512
+ },
  "postura_demoniaca": {
   "descricao": "Heihachi · a aura escura e os chifres",
   "quadros": 12,
@@ -22062,6 +22258,20 @@
   ],
   "laco": false,
   "bytes": 28238
+ },
+ "predador_preparo": {
+  "descricao": "Predador · o disco abrindo (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 12626
  },
  "pregos_amaldicoados": {
   "descricao": "Nobara · três pregos cravam e a energia prende",
@@ -24345,6 +24555,20 @@
   "laco": false,
   "bytes": 18608
  },
+ "sabre_do_mestre": {
+  "descricao": "Yoda · o sabre girando e os cortes",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 26268
+ },
  "sabre_verde": {
   "descricao": "Básico do Luke: o sabre verde em X",
   "quadros": 12,
@@ -24372,6 +24596,20 @@
   ],
   "laco": false,
   "bytes": 21178
+ },
+ "sabre_vermelho_vader": {
+  "descricao": "Darth Vader · o sabre vermelho",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 20536
  },
  "sai_da_tv": {
   "descricao": "Samara · a mão saindo da TV",
@@ -24694,6 +24932,20 @@
   ],
   "laco": true,
   "bytes": 12994
+ },
+ "segunda_mandibula": {
+  "descricao": "Xenomorfo · a segunda boca",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 24088
  },
  "segurar_o_impacto": {
   "descricao": "Sr. Incrível · o símbolo na frente do trio",
@@ -25814,6 +26066,20 @@
   ],
   "laco": false,
   "bytes": 97720
+ },
+ "sombra_profana": {
+  "descricao": "Valak · o hábito e a cruz virada",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 62104
  },
  "sombrinha": {
   "descricao": "Princesa Peach · a sombrinha abrindo",
@@ -27285,6 +27551,20 @@
   "laco": false,
   "bytes": 27102
  },
+ "trofeu": {
+  "descricao": "Predador · o disco voando e voltando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 29920
+ },
  "tropecao_do_pateta": {
   "descricao": "Pateta · o escorregão e o chapéu voando",
   "quadros": 12,
@@ -27537,6 +27817,20 @@
   "laco": false,
   "bytes": 49622
  },
+ "vader_preparo": {
+  "descricao": "Darth Vader · o sabre erguido e a respiração (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 6408
+ },
  "vai_vai_bugiganga": {
   "descricao": "Inspetor Bugiganga · as engenhocas para todo lado",
   "quadros": 12,
@@ -27550,6 +27844,20 @@
   ],
   "laco": false,
   "bytes": 25756
+ },
+ "valak_preparo": {
+  "descricao": "Valak · a cruz virada e os olhos (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 10802
  },
  "vamos_nos_separar": {
   "descricao": "Fred · as setas se separando",
@@ -28195,6 +28503,20 @@
   "laco": true,
   "bytes": 25510
  },
+ "xenomorfo_preparo": {
+  "descricao": "Xenomorfo · a cauda erguida (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 13908
+ },
  "xeque_light": {
   "descricao": "Light · o rei do xadrez e a marca",
   "quadros": 12,
@@ -28250,6 +28572,20 @@
   ],
   "laco": true,
   "bytes": 25760
+ },
+ "yoda_preparo": {
+  "descricao": "Yoda · a meditação e as pedras (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 15812
  },
  "z_saber": {
   "descricao": "Zero: meia-lua do sabre de energia",
