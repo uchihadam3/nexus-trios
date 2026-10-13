@@ -447,6 +447,20 @@
   "laco": false,
   "bytes": 51944
  },
+ "anubis_preparo": {
+  "descricao": "Anúbis · a balança das almas (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 11260
+ },
  "ao_infinito_e_alem": {
   "descricao": "Buzz Lightyear · o voo e a estrela",
   "quadros": 12,
@@ -1693,6 +1707,20 @@
   "laco": false,
   "bytes": 56000
  },
+ "bencao_de_isis": {
+  "descricao": "Ísis · as asas e a luz turquesa",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 66064
+ },
  "bengala_de_yoda": {
   "descricao": "Básico do Yoda: as cambalhotas e a bengala",
   "quadros": 12,
@@ -2631,6 +2659,20 @@
   "laco": false,
   "bytes": 22868
  },
+ "cajado_do_juizo": {
+  "descricao": "Anúbis · o cajado de chacal e o selo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 25750
+ },
  "calor_faixa": {
   "descricao": "Super-Homem · os dois raios da Visão de calor (faixa)",
   "quadros": 12,
@@ -3275,6 +3317,20 @@
   "laco": false,
   "bytes": 31338
  },
+ "cetro_do_caos": {
+  "descricao": "Set · o cetro da besta e a rachadura",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 21554
+ },
  "cha_de_jasmim": {
   "descricao": "Iroh · o bule, o vapor e as flores de jasmim",
   "quadros": 12,
@@ -3904,6 +3960,20 @@
   ],
   "laco": false,
   "bytes": 53708
+ },
+ "clarao_de_ra": {
+  "descricao": "Rá · o olho do sol e o clarão",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 39506
  },
  "clava_de_hercules": {
   "descricao": "Hércules · a clava em chamas",
@@ -8721,6 +8791,34 @@
   "laco": false,
   "bytes": 41342
  },
+ "furia_da_leoa": {
+  "descricao": "Sekhmet · o salto e a vida voltando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 29612
+ },
+ "furia_de_ra": {
+  "descricao": "Rá · os raios de sol em leque",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 62096
+ },
  "furia_de_zeus": {
   "descricao": "Zeus · os raios caindo seguidos",
   "quadros": 12,
@@ -9113,6 +9211,20 @@
   "laco": false,
   "bytes": 64734
  },
+ "garras_da_leoa": {
+  "descricao": "Sekhmet · as patas rasgando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 20654
+ },
  "garras_de_aco": {
   "descricao": "Destruidor · os três riscos da manopla",
   "quadros": 12,
@@ -9154,6 +9266,20 @@
   ],
   "laco": false,
   "bytes": 79238
+ },
+ "garras_do_falcao": {
+  "descricao": "Hórus · o mergulho e as garras",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 24342
  },
  "garras_felinas": {
   "descricao": "Mulher-Gato · as garras em X",
@@ -10079,6 +10205,20 @@
   "laco": false,
   "bytes": 44102
  },
+ "guia_das_almas": {
+  "descricao": "Anúbis · a alma voltando pelo portal",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 27888
+ },
  "gungnir": {
   "descricao": "Básico de Odin: a Gungnir e as runas",
   "quadros": 12,
@@ -10400,6 +10540,20 @@
   ],
   "laco": false,
   "bytes": 28092
+ },
+ "horus_preparo": {
+  "descricao": "Hórus · o falcão e o olho (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 11692
  },
  "hulk_esmaga": {
   "descricao": "Hulk · Esmagar: os dois punhos do alto, a cratera e as estrelinhas",
@@ -10961,6 +11115,20 @@
   "laco": true,
   "bytes": 21876
  },
+ "isis_preparo": {
+  "descricao": "Ísis · as asas em volta do ankh (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 14566
+ },
  "isso_e_burrice": {
   "descricao": "Patrick · as besteiras e as interrogações",
   "quadros": 12,
@@ -11240,6 +11408,20 @@
   ],
   "laco": false,
   "bytes": 44052
+ },
+ "julgamento_de_anubis": {
+  "descricao": "Anúbis · a balança pesando no rival",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 36096
  },
  "julgamento_de_khonshu": {
   "descricao": "Cavaleiro da Lua · a lua, Khonshu e as colunas de luar",
@@ -19963,6 +20145,20 @@
   "laco": false,
   "bytes": 64666
  },
+ "olho_de_horus": {
+  "descricao": "Hórus · o Olho de Hórus e a mira",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 20456
+ },
  "olho_que_tudo_ve": {
   "descricao": "Bill Cipher · o olho no céu e os feixes",
   "quadros": 12,
@@ -21839,6 +22035,20 @@
   "laco": false,
   "bytes": 89404
  },
+ "purificacao_de_isis": {
+  "descricao": "Ísis · o ankh sobre o trio",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 49490
+ },
  "purificar_onda": {
   "descricao": "onda que lava",
   "quadros": 12,
@@ -21964,6 +22174,20 @@
   ],
   "laco": false,
   "bytes": 47388
+ },
+ "ra_preparo": {
+  "descricao": "Rá · o disco solar e a serpente (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 17686
  },
  "radar_sensorial": {
   "descricao": "Demolidor · as ondas do radar e o contorno",
@@ -22412,6 +22636,20 @@
   ],
   "laco": false,
   "bytes": 45152
+ },
+ "raio_solar_ra": {
+  "descricao": "Rá · o feixe do disco solar",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 30472
  },
  "raizes_de_captura": {
   "descricao": "Groot · as raízes rompendo o chão e enlaçando",
@@ -23197,6 +23435,20 @@
   "laco": false,
   "bytes": 69288
  },
+ "ressurreicao_de_isis": {
+  "descricao": "Ísis · o ankh gigante levantando o aliado",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 70952
+ },
  "retirar_o_limitador": {
   "descricao": "Kenpachi · a coluna de pressão e o corte com as duas mãos",
   "quadros": 12,
@@ -23420,6 +23672,20 @@
   ],
   "laco": false,
   "bytes": 88302
+ },
+ "rugido_de_sekhmet": {
+  "descricao": "Sekhmet · a leoa rugindo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 25228
  },
  "rugido_do_hulk": {
   "descricao": "Hulk · as ondas do rugido chegando, o rival treme",
@@ -23911,6 +24177,20 @@
   "laco": true,
   "bytes": 27524
  },
+ "sekhmet_preparo": {
+  "descricao": "Sekhmet · a juba em chamas (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 26268
+ },
  "selo": {
   "descricao": "círculo mágico",
   "quadros": 12,
@@ -24106,6 +24386,20 @@
   ],
   "laco": false,
   "bytes": 42152
+ },
+ "set_preparo": {
+  "descricao": "Set · a adaga escondida (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 11834
  },
  "shadow_preparo": {
   "descricao": "Shadow · a Esmeralda pulsando (Preparo, laço)",
@@ -25661,6 +25955,20 @@
   "laco": false,
   "bytes": 85346
  },
+ "tempestade_de_areia_set": {
+  "descricao": "Set · os redemoinhos de areia",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 46304
+ },
  "tempestade_mental": {
   "descricao": "Mewtwo · a tempestade psíquica",
   "quadros": 12,
@@ -26206,6 +26514,20 @@
   ],
   "laco": false,
   "bytes": 21366
+ },
+ "traicao_de_set": {
+  "descricao": "Set · a facada pelas costas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 26326
  },
  "transmutacao_estelar": {
   "descricao": "Surfista Prateado · as cascas brilhantes no trio",
@@ -27158,6 +27480,20 @@
   ],
   "laco": false,
   "bytes": 39788
+ },
+ "voo_do_falcao": {
+  "descricao": "Hórus · o falcão de luz mergulhando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 39622
  },
  "voo_planado": {
   "descricao": "Mulher-Aranha · as asas de teia",

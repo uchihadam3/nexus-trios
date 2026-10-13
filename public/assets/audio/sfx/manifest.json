@@ -563,6 +563,23 @@
    ],
    "bytes": 49336
   },
+  "anubis-preparo": {
+   "arquivo": "anubis-preparo.mp3",
+   "descricao": "Anúbis: a balança (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 47009
+  },
   "ao-infinito-e-alem": {
    "arquivo": "ao-infinito-e-alem.mp3",
    "descricao": "Buzz Lightyear: Ao infinito e além!",
@@ -2042,6 +2059,23 @@
    ],
    "bytes": 52228
   },
+  "bencao-de-isis": {
+   "arquivo": "bencao-de-isis.mp3",
+   "descricao": "Ísis: a bênção",
+   "versoes": [
+    0.0,
+    1.9739,
+    3.9283,
+    5.7728
+   ],
+   "duracoes": [
+    1.8939,
+    1.8744,
+    1.7645,
+    1.9051
+   ],
+   "bytes": 62745
+  },
   "bengala-de-yoda": {
    "arquivo": "bengala-de-yoda.mp3",
    "descricao": "básico do Yoda: os pulinhos e a bengala",
@@ -3062,6 +3096,23 @@
    ],
    "bytes": 40100
   },
+  "cajado-do-juizo": {
+   "arquivo": "cajado-do-juizo.mp3",
+   "descricao": "Anúbis: o cajado do juízo",
+   "versoes": [
+    0.0,
+    2.0545,
+    4.207,
+    6.1959
+   ],
+   "duracoes": [
+    1.9745,
+    2.0725,
+    1.9089,
+    1.9732
+   ],
+   "bytes": 59988
+  },
   "campo-de-contencao": {
    "arquivo": "campo-de-contencao.mp3",
    "descricao": "Donatello: o campo de contenção",
@@ -3792,6 +3843,23 @@
     1.3198
    ],
    "bytes": 76259
+  },
+  "cetro-do-caos": {
+   "arquivo": "cetro-do-caos.mp3",
+   "descricao": "Set: o cetro de Set",
+   "versoes": [
+    0.0,
+    1.6541,
+    3.3898,
+    4.9797
+   ],
+   "duracoes": [
+    1.5741,
+    1.6557,
+    1.5098,
+    1.6159
+   ],
+   "bytes": 52841
   },
   "cha-de-jasmim": {
    "arquivo": "cha-de-jasmim.mp3",
@@ -4540,6 +4608,23 @@
     1.8274
    ],
    "bytes": 84513
+  },
+  "clarao-de-ra": {
+   "arquivo": "clarao-de-ra.mp3",
+   "descricao": "Rá: o clarão",
+   "versoes": [
+    0.0,
+    2.2198,
+    4.5361,
+    6.6968
+   ],
+   "duracoes": [
+    2.1398,
+    2.2363,
+    2.0807,
+    2.1865
+   ],
+   "bytes": 80751
   },
   "clava-de-hercules": {
    "arquivo": "clava-de-hercules.mp3",
@@ -10117,6 +10202,40 @@
    ],
    "bytes": 59865
   },
+  "furia-da-leoa": {
+   "arquivo": "furia-da-leoa.mp3",
+   "descricao": "Sekhmet: a fúria da leoa",
+   "versoes": [
+    0.0,
+    1.5186,
+    3.1323,
+    4.6166
+   ],
+   "duracoes": [
+    1.4386,
+    1.5337,
+    1.4043,
+    1.4943
+   ],
+   "bytes": 51807
+  },
+  "furia-de-ra": {
+   "arquivo": "furia-de-ra.mp3",
+   "descricao": "Rá: a fúria de Rá",
+   "versoes": [
+    0.0,
+    2.48,
+    5.047,
+    7.4459
+   ],
+   "duracoes": [
+    2.4,
+    2.487,
+    2.3188,
+    2.4365
+   ],
+   "bytes": 79431
+  },
   "furia-de-zeus": {
    "arquivo": "furia-de-zeus.mp3",
    "descricao": "Zeus: a fúria de Zeus",
@@ -10576,6 +10695,23 @@
    ],
    "bytes": 54927
   },
+  "garras-da-leoa": {
+   "arquivo": "garras-da-leoa.mp3",
+   "descricao": "Sekhmet: as garras da leoa",
+   "versoes": [
+    0.0,
+    1.1324,
+    2.3434,
+    3.4452
+   ],
+   "duracoes": [
+    1.0524,
+    1.1309,
+    1.0219,
+    1.0579
+   ],
+   "bytes": 37278
+  },
   "garras-de-aco": {
    "arquivo": "garras-de-aco.mp3",
    "descricao": "Destruidor: as garras de aço",
@@ -10626,6 +10762,23 @@
     0.8547
    ],
    "bytes": 44101
+  },
+  "garras-do-falcao": {
+   "arquivo": "garras-do-falcao.mp3",
+   "descricao": "Hórus: as garras do falcão",
+   "versoes": [
+    0.0,
+    1.3708,
+    2.7761,
+    4.1429
+   ],
+   "duracoes": [
+    1.2908,
+    1.3254,
+    1.2868,
+    1.3224
+   ],
+   "bytes": 48413
   },
   "garras-felinas": {
    "arquivo": "garras-felinas.mp3",
@@ -11749,6 +11902,23 @@
    ],
    "bytes": 50806
   },
+  "guia-das-almas": {
+   "arquivo": "guia-das-almas.mp3",
+   "descricao": "Anúbis: o guia das almas",
+   "versoes": [
+    0.0,
+    2.48,
+    5.047,
+    7.4459
+   ],
+   "duracoes": [
+    2.4,
+    2.487,
+    2.3188,
+    2.4365
+   ],
+   "bytes": 83316
+  },
   "gungnir": {
    "arquivo": "gungnir.mp3",
    "descricao": "básico de Odin: a lança rúnica",
@@ -12139,6 +12309,23 @@
     1.2718
    ],
    "bytes": 46605
+  },
+  "horus-preparo": {
+   "arquivo": "horus-preparo.mp3",
+   "descricao": "Hórus: as asas (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 52367
   },
   "hulk-esmaga": {
    "arquivo": "hulk-esmaga.mp3",
@@ -12871,6 +13058,23 @@
    ],
    "bytes": 56325
   },
+  "isis-preparo": {
+   "arquivo": "isis-preparo.mp3",
+   "descricao": "Ísis: as asas e o ankh (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 47570
+  },
   "isso-e-burrice": {
    "arquivo": "isso-e-burrice.mp3",
    "descricao": "Patrick: Isso é burrice",
@@ -13210,6 +13414,23 @@
     2.4365
    ],
    "bytes": 71370
+  },
+  "julgamento-de-anubis": {
+   "arquivo": "julgamento-de-anubis.mp3",
+   "descricao": "Anúbis: o julgamento",
+   "versoes": [
+    0.0,
+    2.38,
+    4.8434,
+    7.1456
+   ],
+   "duracoes": [
+    2.3,
+    2.3834,
+    2.2222,
+    2.335
+   ],
+   "bytes": 76782
   },
   "julgamento-de-khonshu": {
    "arquivo": "julgamento-de-khonshu.mp3",
@@ -23836,6 +24057,23 @@
    ],
    "bytes": 75810
   },
+  "olho-de-horus": {
+   "arquivo": "olho-de-horus.mp3",
+   "descricao": "Hórus: o olho que tudo vê",
+   "versoes": [
+    0.0,
+    1.9465,
+    3.9624,
+    5.8469
+   ],
+   "duracoes": [
+    1.8665,
+    1.9359,
+    1.8045,
+    1.8974
+   ],
+   "bytes": 55537
+  },
   "olho-que-tudo-ve": {
    "arquivo": "olho-que-tudo-ve.mp3",
    "descricao": "Bill Cipher: o olho que tudo vê",
@@ -26046,6 +26284,23 @@
    ],
    "bytes": 61392
   },
+  "purificacao-de-isis": {
+   "arquivo": "purificacao-de-isis.mp3",
+   "descricao": "Ísis: a purificação",
+   "versoes": [
+    0.0,
+    2.17,
+    4.4155,
+    6.5159
+   ],
+   "duracoes": [
+    2.09,
+    2.1655,
+    2.0204,
+    2.0558
+   ],
+   "bytes": 60953
+  },
   "purificar": {
    "arquivo": "purificar.mp3",
    "descricao": "purificar",
@@ -26181,6 +26436,23 @@
     0.8279
    ],
    "bytes": 31995
+  },
+  "ra-preparo": {
+   "arquivo": "ra-preparo.mp3",
+   "descricao": "Rá: o sol crescendo (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 53783
   },
   "radar-sensorial": {
    "arquivo": "radar-sensorial.mp3",
@@ -26674,6 +26946,23 @@
     1.28
    ],
    "bytes": 46959
+  },
+  "raio-solar-ra": {
+   "arquivo": "raio-solar-ra.mp3",
+   "descricao": "Rá: o raio solar",
+   "versoes": [
+    0.0,
+    1.7664,
+    3.6124,
+    5.3262
+   ],
+   "duracoes": [
+    1.6864,
+    1.766,
+    1.6337,
+    1.726
+   ],
+   "bytes": 59039
   },
   "raizes-de-captura": {
    "arquivo": "raizes-de-captura.mp3",
@@ -27678,6 +27967,23 @@
    ],
    "bytes": 84200
   },
+  "ressurreicao-de-isis": {
+   "arquivo": "ressurreicao-de-isis.mp3",
+   "descricao": "Ísis: a ressurreição",
+   "versoes": [
+    0.0,
+    2.68,
+    5.4543,
+    8.0463
+   ],
+   "duracoes": [
+    2.6,
+    2.6943,
+    2.5121,
+    2.6396
+   ],
+   "bytes": 72428
+  },
   "retirar-o-limitador": {
    "arquivo": "retirar-o-limitador.mp3",
    "descricao": "Kenpachi: a pressão explode e o corte com as duas mãos",
@@ -27966,6 +28272,23 @@
     2.4365
    ],
    "bytes": 90400
+  },
+  "rugido-de-sekhmet": {
+   "arquivo": "rugido-de-sekhmet.mp3",
+   "descricao": "Sekhmet: o rugido",
+   "versoes": [
+    0.0,
+    2.28,
+    4.6398,
+    6.8454
+   ],
+   "duracoes": [
+    2.2,
+    2.2798,
+    2.1256,
+    2.2335
+   ],
+   "bytes": 86508
   },
   "rugido-do-hulk": {
    "arquivo": "rugido-do-hulk.mp3",
@@ -28528,6 +28851,23 @@
    ],
    "bytes": 54979
   },
+  "sekhmet-preparo": {
+   "arquivo": "sekhmet-preparo.mp3",
+   "descricao": "Sekhmet: a juba em chamas (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 52850
+  },
   "selo": {
    "arquivo": "selo.mp3",
    "descricao": "selo",
@@ -28765,6 +29105,23 @@
     1.3198
    ],
    "bytes": 66831
+  },
+  "set-preparo": {
+   "arquivo": "set-preparo.mp3",
+   "descricao": "Set: a adaga escondida (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 60818
   },
   "shadow-preparo": {
    "arquivo": "shadow-preparo.mp3",
@@ -30500,6 +30857,23 @@
    ],
    "bytes": 76608
   },
+  "tempestade-de-areia-set": {
+   "arquivo": "tempestade-de-areia-set.mp3",
+   "descricao": "Set: a tempestade de areia",
+   "versoes": [
+    0.0,
+    2.2407,
+    4.4902,
+    6.6049
+   ],
+   "duracoes": [
+    2.1607,
+    2.1696,
+    2.0346,
+    2.1254
+   ],
+   "bytes": 76634
+  },
   "tempestade-mental": {
    "arquivo": "tempestade-mental.mp3",
    "descricao": "Mewtwo: a tempestade mental",
@@ -31196,6 +31570,23 @@
     1.3198
    ],
    "bytes": 60269
+  },
+  "traicao-de-set": {
+   "arquivo": "traicao-de-set.mp3",
+   "descricao": "Set: a traição",
+   "versoes": [
+    0.0,
+    1.6447,
+    3.33,
+    4.9229
+   ],
+   "duracoes": [
+    1.5647,
+    1.6053,
+    1.5129,
+    1.5652
+   ],
+   "bytes": 56176
   },
   "transformacao": {
    "arquivo": "transformacao.mp3",
@@ -32505,6 +32896,23 @@
     1.2936
    ],
    "bytes": 55144
+  },
+  "voo-do-falcao": {
+   "arquivo": "voo-do-falcao.mp3",
+   "descricao": "Hórus: o voo do falcão",
+   "versoes": [
+    0.0,
+    2.1712,
+    4.531,
+    6.6115
+   ],
+   "duracoes": [
+    2.0912,
+    2.2798,
+    2.0005,
+    2.2241
+   ],
+   "bytes": 76660
   },
   "voo-planado": {
    "arquivo": "voo-planado.mp3",

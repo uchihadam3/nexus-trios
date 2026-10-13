@@ -158,6 +158,12 @@ const T: Record<string, string> = {
   medusa: 'mordida_de_serpente olhar_de_pedra petrificacao',
   kronos: 'foice_do_tempo atraso_de_cronos era_de_ouro',
   hercules: 'clava_de_hercules desafio_de_hercules forca_de_semideus',
+  anubis: 'cajado_do_juizo guia_das_almas julgamento_de_anubis',
+  ra: 'raio_solar_ra clarao_de_ra furia_de_ra',
+  set: 'tempestade_de_areia_set cetro_do_caos traicao_de_set',
+  isis: 'bencao_de_isis purificacao_de_isis ressurreicao_de_isis',
+  horus: 'garras_do_falcao olho_de_horus voo_do_falcao',
+  sekhmet: 'garras_da_leoa rugido_de_sekhmet furia_da_leoa',
 };
 
 export const FAMILIA_DA_HABILIDADE: Record<string, VfxFamily> = Object.fromEntries(
