@@ -461,6 +461,20 @@
   "laco": false,
   "bytes": 14538
  },
+ "apolo_preparo": {
+  "descricao": "Apolo · o sol nascendo (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 7960
+ },
  "aquaman_preparo": {
   "descricao": "Aquaman · o tridente, a água e os tubarões (Preparo, laço)",
   "quadros": 12,
@@ -516,6 +530,20 @@
   ],
   "laco": false,
   "bytes": 99266
+ },
+ "ares_preparo": {
+  "descricao": "Ares · a espada arrastando (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 23110
  },
  "argila_explosiva": {
   "descricao": "Básico do Deidara: o passarinho de argila e o Katsu",
@@ -2869,6 +2897,20 @@
   "laco": false,
   "bytes": 33134
  },
+ "carruagem_do_sol": {
+  "descricao": "Apolo · o sol cruzando e o fogo chovendo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 44424
+ },
  "carta_carregada": {
   "descricao": "Gambit · a carta carregada que gruda",
   "quadros": 12,
@@ -4325,6 +4367,20 @@
   "laco": false,
   "bytes": 39384
  },
+ "correnteza": {
+  "descricao": "Poseidon · a corrente e os redemoinhos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 22502
+ },
  "correr_para_o_perigo": {
   "descricao": "Coragem · a corrida suada e a bolha no trio",
   "quadros": 12,
@@ -4758,6 +4814,20 @@
   ],
   "laco": false,
   "bytes": 58756
+ },
+ "cura_de_apolo": {
+  "descricao": "Apolo · o sol e as notas da lira",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 45796
  },
  "cura_em_area": {
   "descricao": "cura em área com cruzes",
@@ -5795,6 +5865,20 @@
   "laco": true,
   "bytes": 25852
  },
+ "egide": {
+  "descricao": "Zeus · a Égide sobre o trio",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 48832
+ },
  "elastica_preparo": {
   "descricao": "Mulher-Elástica · os braços como mola (Preparo, laço)",
   "quadros": 12,
@@ -6046,6 +6130,20 @@
   ],
   "laco": false,
   "bytes": 66568
+ },
+ "escudo_de_atena": {
+  "descricao": "Atena · os escudos da coruja",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 36880
  },
  "escudo_de_energia": {
   "descricao": "Master Chief · a bolha dourada de hexágonos",
@@ -6354,6 +6452,20 @@
   ],
   "laco": false,
   "bytes": 22230
+ },
+ "espada_da_guerra": {
+  "descricao": "Ares · a espada larga e as brasas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 28938
  },
  "espada_de_alucard": {
   "descricao": "Alucard: corte elegante que vira morcegos",
@@ -6942,6 +7054,20 @@
   ],
   "laco": false,
   "bytes": 41052
+ },
+ "estrategia_divina": {
+  "descricao": "Atena · a coruja e as linhas do trio",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 24612
  },
  "estrela_invencivel": {
   "descricao": "estrela invencível",
@@ -7783,6 +7909,20 @@
   "laco": false,
   "bytes": 18338
  },
+ "flecha_de_sol": {
+  "descricao": "Apolo · a flecha de sol",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 29662
+ },
  "flecha_do_gaviao": {
   "descricao": "Básico do Gavião Arqueiro: a flecha e a ponta explosiva",
   "quadros": 12,
@@ -8356,6 +8496,20 @@
   ],
   "laco": false,
   "bytes": 41342
+ },
+ "furia_de_zeus": {
+  "descricao": "Zeus · os raios caindo seguidos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 66464
  },
  "furia_espartana": {
   "descricao": "Kratos · a pancada rápida da Fúria",
@@ -9574,6 +9728,20 @@
   ],
   "laco": false,
   "bytes": 101176
+ },
+ "grito_de_batalha_ares": {
+  "descricao": "Ares · o elmo e o grito",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 50962
  },
  "grito_de_drax": {
   "descricao": "Drax · as tatuagens e o grito",
@@ -11633,6 +11801,20 @@
   "laco": false,
   "bytes": 59722
  },
+ "lanca_da_sabedoria": {
+  "descricao": "Atena · a lança e as folhas de oliveira",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 20882
+ },
  "lanca_das_esmeraldas": {
   "descricao": "Shadow · a chuva de lanças",
   "quadros": 12,
@@ -11716,6 +11898,20 @@
   ],
   "laco": false,
   "bytes": 16450
+ },
+ "lanca_foguetes": {
+  "descricao": "Nêmesis · o foguete e a marca",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 27100
  },
  "lanterna_de_dipper": {
   "descricao": "Dipper · o cone da lanterna",
@@ -12641,6 +12837,20 @@
   "laco": false,
   "bytes": 37406
  },
+ "maremoto": {
+  "descricao": "Poseidon · a onda gigante",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 37696
+ },
  "marreta_arlequina": {
   "descricao": "Arlequina · a marreta e as estrelinhas",
   "quadros": 12,
@@ -12794,6 +13004,20 @@
   ],
   "laco": false,
   "bytes": 11512
+ },
+ "massacre_de_ares": {
+  "descricao": "Ares · o chão rachando em vermelho",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 48000
  },
  "masterchief_preparo": {
   "descricao": "Master Chief · o escudo enchendo (Preparo, laço)",
@@ -19221,6 +19445,20 @@
   "laco": true,
   "bytes": 12142
  },
+ "nemesis_preparo": {
+  "descricao": "Nêmesis · a sombra e os passos (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 18474
+ },
  "nen_gon": {
   "descricao": "Gon · a aura juntando no punho (laço)",
   "quadros": 12,
@@ -20089,6 +20327,20 @@
   "laco": false,
   "bytes": 26154
  },
+ "perseguicao_sem_fim": {
+  "descricao": "Nêmesis · as pegadas e o soco",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 40414
+ },
  "pesadelo_vivo": {
   "descricao": "Espantalho · o rosto do pesadelo",
   "quadros": 12,
@@ -20634,6 +20886,20 @@
   ],
   "laco": false,
   "bytes": 51178
+ },
+ "poseidon_preparo": {
+  "descricao": "Poseidon · a água subindo no tridente (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 12990
  },
  "posicao_firme": {
   "descricao": "Master Chief · o pisão e a onda de choque",
@@ -21726,6 +21992,20 @@
   ],
   "laco": false,
   "bytes": 60122
+ },
+ "raio_do_olimpo": {
+  "descricao": "Zeus · o raio arremessado",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 18586
  },
  "raio_faixa": {
   "descricao": "raio entre dois pontos (faixa)",
@@ -25171,6 +25451,20 @@
   "laco": false,
   "bytes": 23572
  },
+ "tentaculo_do_nemesis": {
+  "descricao": "Nêmesis · o tentáculo enrolando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 24322
+ },
  "tentaculo_simbionte": {
   "descricao": "Venom: tentáculos lisos chicoteiam e enrolam o alvo",
   "quadros": 12,
@@ -25674,6 +25968,20 @@
   ],
   "laco": false,
   "bytes": 48790
+ },
+ "tridente_de_poseidon": {
+  "descricao": "Poseidon · o tridente e o jato",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 20424
  },
  "troca_de_arma": {
   "descricao": "Mega Man · os dados juntando no braço e a troca de cor",
@@ -26766,6 +27074,20 @@
   ],
   "laco": true,
   "bytes": 11368
+ },
+ "zeus_preparo": {
+  "descricao": "Zeus · as nuvens e o raio na mão (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 23724
  },
  "zoro_preparo": {
   "descricao": "Zoro · as três espadas e a sombra (Preparo, laço)",

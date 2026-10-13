@@ -146,6 +146,12 @@ const T: Record<string, string> = {
   dipper: 'consultar_o_diario lanterna_de_dipper misterio_resolvido',
   mabel: '- glitter mabel_mania',
   yennefer: 'raio_arcano_yen barreira_de_yennefer dissipar_de_yennefer',
+  nemesis: 'tentaculo_do_nemesis lanca_foguetes perseguicao_sem_fim',
+  zeus: 'raio_do_olimpo egide furia_de_zeus',
+  poseidon: 'tridente_de_poseidon correnteza maremoto',
+  athena: 'escudo_de_atena lanca_da_sabedoria estrategia_divina',
+  ares: 'espada_da_guerra grito_de_batalha_ares massacre_de_ares',
+  apollo: 'flecha_de_sol cura_de_apolo carruagem_do_sol',
 };
 
 export const FAMILIA_DA_HABILIDADE: Record<string, VfxFamily> = Object.fromEntries(

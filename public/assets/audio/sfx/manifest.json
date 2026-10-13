@@ -580,6 +580,23 @@
    ],
    "bytes": 62667
   },
+  "apolo-preparo": {
+   "arquivo": "apolo-preparo.mp3",
+   "descricao": "Apolo: o sol nascendo (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 28109
+  },
   "aquaman-preparo": {
    "arquivo": "aquaman-preparo.mp3",
    "descricao": "Aquaman: a água girando (antes do golpe)",
@@ -647,6 +664,23 @@
     1.3198
    ],
    "bytes": 73088
+  },
+  "ares-preparo": {
+   "arquivo": "ares-preparo.mp3",
+   "descricao": "Ares: a espada arrastando (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 55348
   },
   "argila-explosiva": {
    "arquivo": "argila-explosiva.mp3",
@@ -3317,6 +3351,23 @@
    ],
    "bytes": 58587
   },
+  "carruagem-do-sol": {
+   "arquivo": "carruagem-do-sol.mp3",
+   "descricao": "Apolo: a carruagem do sol",
+   "versoes": [
+    0.0,
+    2.48,
+    4.9659,
+    7.3647
+   ],
+   "duracoes": [
+    2.4,
+    2.4059,
+    2.3188,
+    2.2955
+   ],
+   "bytes": 78220
+  },
   "carta-carregada": {
    "arquivo": "carta-carregada.mp3",
    "descricao": "Gambit: a carta carregada e os tiques",
@@ -5017,6 +5068,23 @@
    ],
    "bytes": 60181
   },
+  "correnteza": {
+   "arquivo": "correnteza.mp3",
+   "descricao": "Poseidon: a correnteza",
+   "versoes": [
+    0.0,
+    2.0678,
+    4.162,
+    6.1697
+   ],
+   "duracoes": [
+    1.9878,
+    2.0142,
+    1.9277,
+    2.0062
+   ],
+   "bytes": 68670
+  },
   "correr-para-o-perigo": {
    "arquivo": "correr-para-o-perigo.mp3",
    "descricao": "Coragem: correr para o perigo",
@@ -5475,6 +5543,23 @@
     2.0305
    ],
    "bytes": 67543
+  },
+  "cura-de-apolo": {
+   "arquivo": "cura-de-apolo.mp3",
+   "descricao": "Apolo: a cura de Apolo",
+   "versoes": [
+    0.0,
+    2.2664,
+    4.5422,
+    6.7008
+   ],
+   "duracoes": [
+    2.1864,
+    2.1958,
+    2.0786,
+    2.2335
+   ],
+   "bytes": 70930
   },
   "cura-em-area": {
    "arquivo": "cura-em-area.mp3",
@@ -6700,6 +6785,23 @@
    ],
    "bytes": 45289
   },
+  "egide": {
+   "arquivo": "egide.mp3",
+   "descricao": "Zeus: a Égide",
+   "versoes": [
+    0.0,
+    1.9276,
+    4.0066,
+    5.9535
+   ],
+   "duracoes": [
+    1.8476,
+    1.999,
+    1.8669,
+    1.961
+   ],
+   "bytes": 55050
+  },
   "elastica-preparo": {
    "arquivo": "elastica-preparo.mp3",
    "descricao": "Mulher-Elástica: a mola (Preparo)",
@@ -7039,6 +7141,23 @@
     1.4828
    ],
    "bytes": 53708
+  },
+  "escudo-de-atena": {
+   "arquivo": "escudo-de-atena.mp3",
+   "descricao": "Atena: o escudo de Atena",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 59818
   },
   "escudo-de-energia": {
    "arquivo": "escudo-de-energia.mp3",
@@ -7413,6 +7532,23 @@
     1.3198
    ],
    "bytes": 38000
+  },
+  "espada-da-guerra": {
+   "arquivo": "espada-da-guerra.mp3",
+   "descricao": "Ares: a espada da guerra",
+   "versoes": [
+    0.0,
+    1.4396,
+    2.8554,
+    4.2535
+   ],
+   "duracoes": [
+    1.3596,
+    1.3357,
+    1.3181,
+    1.3795
+   ],
+   "bytes": 50731
   },
   "espada-de-alucard": {
    "arquivo": "espada-de-alucard.mp3",
@@ -8076,6 +8212,23 @@
     0.4061
    ],
    "bytes": 18228
+  },
+  "estrategia-divina": {
+   "arquivo": "estrategia-divina.mp3",
+   "descricao": "Atena: a estratégia divina",
+   "versoes": [
+    0.0,
+    1.9332,
+    3.9324,
+    5.8058
+   ],
+   "duracoes": [
+    1.8532,
+    1.9193,
+    1.7933,
+    1.8808
+   ],
+   "bytes": 59311
   },
   "estrela-invencivel": {
    "arquivo": "estrela-invencivel.mp3",
@@ -8961,6 +9114,23 @@
    ],
    "bytes": 47287
   },
+  "flecha-de-sol": {
+   "arquivo": "flecha-de-sol.mp3",
+   "descricao": "Apolo: a flecha de sol",
+   "versoes": [
+    0.0,
+    1.5956,
+    3.2547,
+    4.8001
+   ],
+   "duracoes": [
+    1.5156,
+    1.5791,
+    1.4654,
+    1.5477
+   ],
+   "bytes": 52506
+  },
   "flecha-do-gaviao": {
    "arquivo": "flecha-do-gaviao.mp3",
    "descricao": "básico do Gavião: o arco, a flecha e o estouro",
@@ -9674,6 +9844,23 @@
     1.7506
    ],
    "bytes": 59865
+  },
+  "furia-de-zeus": {
+   "arquivo": "furia-de-zeus.mp3",
+   "descricao": "Zeus: a fúria de Zeus",
+   "versoes": [
+    0.0,
+    2.48,
+    5.047,
+    7.4459
+   ],
+   "duracoes": [
+    2.4,
+    2.487,
+    2.3188,
+    2.4365
+   ],
+   "bytes": 79535
   },
   "furia-espartana": {
    "arquivo": "furia-espartana.mp3",
@@ -11170,6 +11357,23 @@
     1.1167
    ],
    "bytes": 26872
+  },
+  "grito-de-batalha-ares": {
+   "arquivo": "grito-de-batalha-ares.mp3",
+   "descricao": "Ares: o grito de batalha",
+   "versoes": [
+    0.0,
+    2.28,
+    4.6398,
+    6.8454
+   ],
+   "duracoes": [
+    2.2,
+    2.2798,
+    2.1256,
+    2.2335
+   ],
+   "bytes": 65219
   },
   "grito-de-drax": {
    "arquivo": "grito-de-drax.mp3",
@@ -13704,6 +13908,23 @@
    ],
    "bytes": 77270
   },
+  "lanca-da-sabedoria": {
+   "arquivo": "lanca-da-sabedoria.mp3",
+   "descricao": "Atena: a lança da sabedoria",
+   "versoes": [
+    0.0,
+    1.4583,
+    2.9736,
+    4.4078
+   ],
+   "duracoes": [
+    1.3783,
+    1.4353,
+    1.3542,
+    1.3664
+   ],
+   "bytes": 53409
+  },
   "lanca-das-esmeraldas": {
    "arquivo": "lanca-das-esmeraldas.mp3",
    "descricao": "Shadow: a Lança das Esmeraldas",
@@ -13805,6 +14026,23 @@
     1.3963
    ],
    "bytes": 43574
+  },
+  "lanca-foguetes": {
+   "arquivo": "lanca-foguetes.mp3",
+   "descricao": "Nêmesis: o lança-foguetes",
+   "versoes": [
+    0.0,
+    2.18,
+    4.4361,
+    6.5451
+   ],
+   "duracoes": [
+    2.1,
+    2.1761,
+    2.029,
+    2.132
+   ],
+   "bytes": 71819
   },
   "lancar-teia": {
    "arquivo": "lancar-teia.mp3",
@@ -14911,6 +15149,23 @@
    ],
    "bytes": 55619
   },
+  "maremoto": {
+   "arquivo": "maremoto.mp3",
+   "descricao": "Poseidon: o maremoto",
+   "versoes": [
+    0.0,
+    2.58,
+    5.2507,
+    7.7461
+   ],
+   "duracoes": [
+    2.5,
+    2.5907,
+    2.4154,
+    2.538
+   ],
+   "bytes": 88225
+  },
   "marreta-arlequina": {
    "arquivo": "marreta-arlequina.mp3",
    "descricao": "Arlequina: a marreta",
@@ -15080,6 +15335,23 @@
     0.8122
    ],
    "bytes": 34476
+  },
+  "massacre-de-ares": {
+   "arquivo": "massacre-de-ares.mp3",
+   "descricao": "Ares: o massacre",
+   "versoes": [
+    0.0,
+    2.48,
+    5.047,
+    7.4459
+   ],
+   "duracoes": [
+    2.4,
+    2.487,
+    2.3188,
+    2.4131
+   ],
+   "bytes": 78456
   },
   "masterchief-preparo": {
    "arquivo": "masterchief-preparo.mp3",
@@ -22918,6 +23190,23 @@
    ],
    "bytes": 74859
   },
+  "nemesis-preparo": {
+   "arquivo": "nemesis-preparo.mp3",
+   "descricao": "Nêmesis: o rosnado e os passos (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 47158
+  },
   "nen-gon": {
    "arquivo": "nen-gon.mp3",
    "descricao": "a aura do Gon juntando no punho",
@@ -23887,6 +24176,23 @@
    ],
    "bytes": 71938
   },
+  "perseguicao-sem-fim": {
+   "arquivo": "perseguicao-sem-fim.mp3",
+   "descricao": "Nêmesis: a perseguição sem fim",
+   "versoes": [
+    0.0,
+    2.38,
+    4.8434,
+    7.1456
+   ],
+   "duracoes": [
+    2.3,
+    2.3834,
+    2.2222,
+    2.335
+   ],
+   "bytes": 78798
+  },
   "pesadelo-vivo": {
    "arquivo": "pesadelo-vivo.mp3",
    "descricao": "Espantalho: o pesadelo vivo",
@@ -24515,6 +24821,23 @@
     1.7153
    ],
    "bytes": 68546
+  },
+  "poseidon-preparo": {
+   "arquivo": "poseidon-preparo.mp3",
+   "descricao": "Poseidon: a água subindo (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 53533
   },
   "posicao-firme": {
    "arquivo": "posicao-firme.mp3",
@@ -25858,6 +26181,23 @@
     2.335
    ],
    "bytes": 75830
+  },
+  "raio-do-olimpo": {
+   "arquivo": "raio-do-olimpo.mp3",
+   "descricao": "Zeus: o raio do Olimpo",
+   "versoes": [
+    0.0,
+    2.08,
+    4.1838,
+    6.0863
+   ],
+   "duracoes": [
+    2.0,
+    2.0238,
+    1.8226,
+    1.9834
+   ],
+   "bytes": 73518
   },
   "raio-fantasma": {
    "arquivo": "raio-fantasma.mp3",
@@ -29905,6 +30245,23 @@
    ],
    "bytes": 45428
   },
+  "tentaculo-do-nemesis": {
+   "arquivo": "tentaculo-do-nemesis.mp3",
+   "descricao": "Nêmesis: o tentáculo",
+   "versoes": [
+    0.0,
+    1.7976,
+    3.6979,
+    5.3144
+   ],
+   "duracoes": [
+    1.7176,
+    1.8204,
+    1.5365,
+    1.6146
+   ],
+   "bytes": 54630
+  },
   "tentaculo-simbionte": {
    "arquivo": "tentaculo-simbionte.mp3",
    "descricao": "básico de Venom: tentáculos viscosos, chicotada e aperto molhado",
@@ -30567,6 +30924,23 @@
     1.0152
    ],
    "bytes": 39162
+  },
+  "tridente-de-poseidon": {
+   "arquivo": "tridente-de-poseidon.mp3",
+   "descricao": "Poseidon: o tridente",
+   "versoes": [
+    0.0,
+    1.4912,
+    3.1678,
+    4.6457
+   ],
+   "duracoes": [
+    1.4112,
+    1.5965,
+    1.3979,
+    1.4919
+   ],
+   "bytes": 52113
   },
   "troca-de-arma": {
    "arquivo": "troca-de-arma.mp3",
@@ -32029,6 +32403,23 @@
     1.4213
    ],
    "bytes": 26887
+  },
+  "zeus-preparo": {
+   "arquivo": "zeus-preparo.mp3",
+   "descricao": "Zeus: a tempestade se juntando (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 48174
   },
   "zoro-preparo": {
    "arquivo": "zoro-preparo.mp3",
