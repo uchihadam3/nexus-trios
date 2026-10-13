@@ -3,8 +3,8 @@ import {Award,CheckCircle2,Crown,Lightbulb,LogIn,Lock,Medal,ShieldCheck,Trophy,W
 import {byId} from '../data/characters';
 import {Portrait} from '../components/Portrait';
 import {TelaTopo} from '../components/Casca';
-import {onlineCall,onlineConfigured,type EntradaDeConquista,type Leaderboard,type MeusTop3,type PartidaDoHistorico,type PublicRun,type RankingDeConquistas} from '../lib/online';
-import {pontos,situacaoDasVagas} from '../lib/top3';
+import {onlineCall,onlineConfigured,type EntradaDeConquista,type Leaderboard,type PartidaDoHistorico,type PublicRun,type RankingDeConquistas} from '../lib/online';
+import {pontos} from '../lib/top3';
 
 const modes=[['daily','HOJE'],['weekly','SEMANA'],['season','GERAL'],['mine','MEUS'],['conquistas','CONQUISTAS']] as const;
 type Modo=(typeof modes)[number][0];
@@ -80,7 +80,6 @@ export function Placar({mode,onMode,estado,handle,onConta,onMais,maisCarregando=
     :estado.tipo==='historico'?<Historico partidas={estado.partidas}/>
     :estado.tipo==='conquistas'?<PlacarDeConquistas ranking={estado.ranking} handle={handle} onMais={onMais} maisCarregando={maisCarregando}/>
     :<>
-      {mode!=='mine'&&board?.meus&&<MeusTres meus={board.meus} onSelect={setSelected}/>}
       <p className="rk-contexto">{mode==='daily'?'Melhores de hoje':mode==='weekly'?'Melhores da semana':mode==='season'?'Melhores de todos os tempos':'Seu melhor resultado'} · {board?.period}{handle&&<> · <b>{handle}</b></>}</p>
       {podio.length>0&&<div className="rk-podio">{[podio[1],podio[0],podio[2]].map((row,i)=>row&&<button key={row.id} className={`rk-degrau p${row.position} ${minhas.has(row.id)?'mine':''}`} style={{'--i':i} as CSSProperties} onClick={()=>setSelected(row)}>
         <span className="rk-coroa">{row.position===1?<Crown size={22}/>:<Medal size={18}/>}</span>
@@ -150,18 +149,6 @@ function PainelDoDono({onValidou}:{onValidou:()=>void}){
   </div>;
 }
 
-/*
- * "MEUS 3 MELHORES TRIOS": os três, com retratos e pontuação, e embaixo o que
- * falta — "1 vaga livre." ou "Próxima entrada precisa superar 1.400."
- */
-function MeusTres({meus,onSelect}:{meus:MeusTop3;onSelect:(r:PublicRun)=>void}){
-  return <div className="meus-tres rk-meus"><span className="rk-meus-rotulo"><Crown size={14}/>MEUS 3 MELHORES TRIOS</span>
-    {meus.entries.length?<ol>{meus.entries.map(e=><li key={e.id}><button onClick={()=>onSelect(e)}><Trio team={e.team} tamanho="mini"/><span>#{e.position}</span><b>{pontos(e.score)}</b></button></li>)}{Array.from({length:Math.max(0,3-meus.entries.length)},(_,i)=><li key={`vaga-${i}`} className="rk-vaga"><span>vaga livre</span></li>)}</ol>
-      :<p>Você ainda não tem trio neste ranking.</p>}
-    <small>{situacaoDasVagas(meus.vagas,meus.precisaSuperar)}</small></div>;
-}
-
-/* "MEUS": o histórico completo. Toda partida validada, da mais recente. */
 function Historico({partidas}:{partidas:PartidaDoHistorico[]}){
   if(!partidas.length)return <p className="rk-vazio">Você ainda não tem Jornada validada no ranking. Jogue com a conta conectada: no fim, ela entra sozinha.</p>;
   return <><p className="rk-contexto">Todas as suas jornadas validadas · {partidas.length}</p><div className="ranking-list rk-lista historico">{partidas.map(p=><div key={p.id} className="historico-linha"><span className="rk-quem"><b>{new Date(p.date).toLocaleDateString('pt-BR')}</b><small>{p.progress}/10 lutas</small>{p.dicas&&<ComDicas/>}</span><Trio team={p.team} tamanho="mini"/><strong>{pontos(p.score)}</strong></div>)}</div></>;
