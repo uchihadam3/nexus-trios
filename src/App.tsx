@@ -21,7 +21,7 @@ import type { NovosNoLivro } from './components/CombosDoTrio';
 import { PRIORIDADE,type Sound } from './audio/cues';
 import { battleAudio,faixaDaLuta } from './lib/audio';
 import { efeitoDaUnica } from './presentation/unicas-efeitos';
-import { createDirection,restoreDirection,checkpointDirection,advanceDirection,PREPARO_DA_UNICA,type Direction,type Beat,type BeatTrace } from './presentation/director';
+import { createDirection,restoreDirection,checkpointDirection,advanceDirection,type Direction,type Beat,type BeatTrace } from './presentation/director';
 import { fasesDoEvento } from './presentation/ativacao-da-unica';
 import { preparoDaUnica } from './presentation/preparo-da-unica';
 import { PRESENTATION as P } from './presentation/config';
@@ -66,7 +66,7 @@ export default function App(){
   const runRef=useRef(run),lastSave=useRef(0);runRef.current=run;
   const direction=useRef<Direction|null>(null);
   const [presentation,setPresentation]=useState<{battle:Battle;beat:Beat|null}|null>(null);
-  const lastAudio=useRef(0),lastDominionSound=useRef(0),passoTocado=useRef({beat:-1,passo:1}),unicaTocada=useRef<number|null>(null),divida=useRef(0);
+  const lastAudio=useRef(0),lastDominionSound=useRef(0),passoTocado=useRef({beat:-1,passo:1}),unicaTocada=useRef<number|null>(null),pausasTocadas=useRef(new Set<string>()),divida=useRef(0);
   const changeRun=(next:Run|null)=>{runRef.current=next;setRun(next);save('run',next);};
   const directionFor=(current:Run)=>{
     const battle=current.battle!;
@@ -309,15 +309,16 @@ export default function App(){
         const dono=ativo.after.fighters.find(f=>f.uid===ativo.event.source);
         // o preparo soa como o de uma habilidade (o som de carregar do personagem) e o efeito dela sai no fim dele
         if(dono)battleAudio.sound(preparoDaUnica(dono.characterId).som,PRIORIDADE.habilidade,0,ativo.event.id*10+6);
-        if(dono)battleAudio.sound(efeitoDaUnica(dono.characterId,ativo.event.label).som as Sound,PRIORIDADE.habilidade,0,ativo.event.id*10+7,fasesDoEvento(ativo.event,ativo.after).soltaEm);
+        if(dono)battleAudio.sound(efeitoDaUnica(dono.characterId,ativo.event.label).som as Sound,PRIORIDADE.habilidade,0,ativo.event.id*10+7,fasesDoEvento(ativo.event,ativo.after,ativo).soltaEm);
       }
-      // a resposta na pausa do golpe: o som de carregar quando ela começa e o efeito dela quando solta
-      const pausa=ativo?.pausa;
-      if(ativo&&pausa&&pausa.t>0&&unicaTocada.current!==ativo.event.id+.5&&!mudo){
-        unicaTocada.current=ativo.event.id+.5;
-        const dono=ativo.after.fighters.find(f=>f.uid===pausa.quem);
-        if(dono&&pausa.fases.preparo>0)battleAudio.sound(preparoDaUnica(dono.characterId).som,PRIORIDADE.habilidade,0,ativo.event.id*10+6);
-        if(dono)battleAudio.sound(efeitoDaUnica(dono.characterId,pausa.evento.label).som as Sound,PRIORIDADE.habilidade,0,ativo.event.id*10+7,Math.max(0,pausa.fases.soltaEm-pausa.t));
+      // cada pausa do golpe (alguém ativando antes de ele cair): o som de carregar quando ela começa e o efeito dela quando solta
+      for(const pausa of ativo?.pausas??[]){
+        const chave=`${ativo!.event.id}-${pausa.evento.id}`;
+        if(pausa.t<=0||pausasTocadas.current.has(chave)||mudo)continue;
+        pausasTocadas.current.add(chave);if(pausasTocadas.current.size>40)pausasTocadas.current.delete(pausasTocadas.current.values().next().value!);
+        const dono=ativo!.after.fighters.find(f=>f.uid===pausa.quem);
+        if(dono&&pausa.fases.preparo>0)battleAudio.sound(preparoDaUnica(dono.characterId).som,PRIORIDADE.habilidade,0,ativo!.event.id*10+6);
+        if(dono)battleAudio.sound(efeitoDaUnica(dono.characterId,pausa.evento.label).som as Sound,PRIORIDADE.habilidade,0,ativo!.event.id*10+7,Math.max(0,pausa.fases.soltaEm-pausa.t));
       }
       if(ativo?.impacted&&ativo.passos&&ativo.etapa&&!mudo){
         const visto=passoTocado.current.beat===ativo.event.id?passoTocado.current.passo:0;
@@ -327,10 +328,17 @@ export default function App(){
           // a ativação completa da Mecânica única toca o som próprio dela (a sozinha já tocou acima)
           if(passo.classe==='unica'){
             if(ativo.traco||passo.antecipada)continue;
+            // no meio da cadeia: as mesmas fases da sozinha (carrega e solta)
             const ev=ativo.events.find(e=>e.kind==='unica'&&passo.eventos.includes(e.id)),dono=ativo.after.fighters.find(f=>f.uid===passo.quem);
-            if(ev&&dono)battleAudio.sound(efeitoDaUnica(dono.characterId,ev.label).som as Sound,PRIORIDADE.habilidade,0,ativo.event.id*10+k,PREPARO_DA_UNICA);
+            if(ev&&dono){
+              const fases=fasesDoEvento(ev,ativo.after,ativo);
+              if(fases.preparo>0)battleAudio.sound(preparoDaUnica(dono.characterId).som,PRIORIDADE.habilidade,0,ativo.event.id*10+k);
+              battleAudio.sound(efeitoDaUnica(dono.characterId,ev.label).som as Sound,PRIORIDADE.habilidade,0,ativo.event.id*10+k+5,fases.soltaEm);
+            }
             continue;
           }
+          // o resultado da Mecânica única já soou com ela
+          if(passo.resultado)continue;
           const eventos=ativo.events.filter(e=>passo.eventos.includes(e.id));
           // buff ou debuff que o alvo já tinha só renova o tempo: som curto e macio, não o de entrar (pedido do jogador)
           const status=eventos.filter(e=>e.kind==='status');

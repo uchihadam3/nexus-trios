@@ -154,3 +154,4 @@
 .arena-v2 .unit .fighter-portrait{transition:filter .18s}
 .arena-v2 .act-pausado .fighter-portrait{filter:saturate(.55) brightness(.8)}
 .battle-effects.golpe-pausado .fxl:not(.fx-da-unica),.battle-effects.golpe-pausado .fxl:not(.fx-da-unica)::before,.battle-effects.golpe-pausado .fxl:not(.fx-da-unica)::after{animation-play-state:paused!important}
+.battle-effects.golpe-antes .fxl:not(.fx-da-unica){visibility:hidden}

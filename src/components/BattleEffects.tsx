@@ -8,8 +8,7 @@ import { ArrowDown,HeartPulse,ShieldCheck,Sparkles,Zap } from 'lucide-react';
 import { statuses as statusCatalog } from '../data/statuses';
 import { familia,folha,profileFor,type VfxFamily,type VfxProfile } from '../presentation/vfxProfiles';
 import { VOO_DA_UNICA,efeitoDaUnica,entregaDaUnica } from '../presentation/unicas-efeitos';
-import { PREPARO_DA_UNICA,ladoDaUnica } from '../presentation/director';
-import { ativacaoNaTela } from '../presentation/ativacao-da-unica';
+import { ativacaoNaTela,entregaDoEvento,golpeParado } from '../presentation/ativacao-da-unica';
 import { preparoDaUnica } from '../presentation/preparo-da-unica';
 import { FAMILIA_DO_REVIVER, RENASCER_PROPRIO } from '../presentation/renascer-proprio';
 import { efeitosDoJeito,VOO_DO_QUIQUE } from '../presentation/jeito-efeito';
@@ -278,25 +277,18 @@ export function BattleEffects({battle,beat,anchors,enabled,reduced,medal=80}:{ba
    * no passo dela. Sozinha, o efeito entra logo depois do nome, para o golpe dela cair no impacto.
    */
   if(enabled&&beat&&size.w>0&&!reduced){
-    const sozinha=!!beat.traco&&beat.passos?.[0]?.classe==='unica';
     /*
      * A Mecânica única chega no alvo como uma habilidade (src/presentation/unicas-efeitos.ts): o projétil sai de
      * quem ativou e voa até ele, o feixe cresce até ele, a cura viaja até o aliado. Começa no fim do preparo e
      * chega no impacto. De perto, quem vai até o alvo é o próprio personagem (src/presentation/acting.ts).
      */
-    /** Em quem a Mecânica única cai: os rivais de pé, numa de área; senão o alvo do aviso. */
-    const alvosDaUnica=(e:typeof beat.event)=>{
-      const dono=battle.fighters.find(f=>f.uid===e.source);
-      const ent=dono?entregaDaUnica(dono.characterId,ladoDaUnica(e,battle)):undefined;
-      if(dono&&ent?.area)return battle.fighters.filter(f=>f.side!==dono.side&&f.hp>0).map(f=>f.uid);
-      // a de si mesmo (a Armadura de Pégaso) cai em quem ativou, mesmo quando o aviso aponta quem bateu
-      return [ent?.modo==='si'?e.source:e.target??e.source];
-    };
+    /** Em quem a Mecânica única cai de verdade (src/presentation/ativacao-da-unica.ts: destinoDaUnica). */
+    const alvosDaUnica=(e:typeof beat.event)=>entregaDoEvento(e,battle,beat).destino.alvos;
     const entregaAteOAlvo=(e:typeof beat.event,chave:string|number,comeca:number)=>{
       const dono=battle.fighters.find(f=>f.uid===e.source);if(!dono)return;
-      const ent=entregaDaUnica(dono.characterId,ladoDaUnica(e,battle));
-      if(!ent.area&&(!e.target||e.target===e.source))return;
-      for(const alvo of alvosDaUnica(e))entregaAte(e,dono.characterId,ent,alvo,`${chave}-${alvo}`,comeca);
+      const ent=entregaDoEvento(e,battle,beat);
+      if(ent.modo==='si')return;
+      for(const alvo of ent.destino.alvos)if(alvo!==e.source)entregaAte(e,dono.characterId,ent,alvo,`${chave}-${alvo}`,comeca);
     };
     const entregaAte=(e:typeof beat.event,personagem:string,ent:ReturnType<typeof entregaDaUnica>,alvo:string,chave:string,comeca:number)=>{
       const voo=VOO_DA_UNICA[ent.modo];
@@ -328,38 +320,40 @@ export function BattleEffects({battle,beat,anchors,enabled,reduced,medal=80}:{ba
         nodes.push(camada(f.impacto,{left:`${p.x}%`,top:`${p.y}%`,width:t,height:t,'--fx-cor':f.cor,'--ang':'0deg','--flip':1,'--dur':s(1.5),'--delay':s(atraso)},'fxl-impacto fxl-sobre fx-da-unica',`unica-${beat.event.id}-${e.id}-${alvo}`));
       }
     };
-    const quemAtiva=sozinha?beat.event.source:beat.pausa?.quem;
-    const at=quemAtiva?ativacaoNaTela(beat,quemAtiva):undefined;
-    if(at&&quemAtiva){
-      const dono=battle.fighters.find(f=>f.uid===quemAtiva),e=at.evento??beat.event;
-      if(dono&&at.t<at.fases.soltaEm){
-        const p=point(dono.uid),t=medal*1.9,ent=entregaDaUnica(dono.characterId,ladoDaUnica(e,battle));
+    /*
+     * Quem está ativando agora (sozinha, na pausa do golpe ou no meio da cadeia de um golpe): a folha de preparo em
+     * laço enquanto concentra e carrega; ao soltar, a entrega sai e o efeito cai quando ela chega. Na pausa de quem
+     * foi atingido, a de si mesmo (a armadura) aparece antes de o golpe cair; a que vai no rival espera o golpe.
+     */
+    const emAndamento=new Set<number>();
+    for(const dono of battle.fighters){
+      const at=ativacaoNaTela(beat,dono.uid);if(!at)continue;
+      const e=at.evento??beat.event,ent=entregaDoEvento(e,battle,beat);
+      const deSi=ent.modo==='si'||ent.destino.lado==='si',espera=at.pausa&&!deSi&&!beat.pausas?.find(x=>x.evento.id===e.id)?.propria;
+      emAndamento.add(e.id);
+      if(at.t<at.fases.soltaEm){
+        const p=point(dono.uid),t=medal*1.9;
         nodes.push(camada(ent.preparo??preparoDaUnica(dono.characterId).folha,{left:`${p.x}%`,top:`${p.y}%`,width:t,height:t},'fxl-laco fx-da-unica',`unica-prep-${beat.event.id}-${e.id}`));
       }
-      // sozinha, a entrega sai na hora de soltar; na pausa, a de si mesmo (a armadura) aparece antes de o golpe cair
-      if(!at.pausa&&at.t>=at.fases.vooEm)entregaAteOAlvo(e,`${beat.event.id}-${e.id}`,0);
-      const deSi=!!dono&&(ladoDaUnica(e,battle)==='si'||entregaDaUnica(dono.characterId,ladoDaUnica(e,battle)).modo==='si');
-      if(at.pausa&&deSi&&at.t>=at.fases.impactoEm)efeitoNoAlvo(e,0);
+      if(espera)continue;
+      if(at.t>=at.fases.vooEm)entregaAteOAlvo(e,`${beat.event.id}-${e.id}`,0);
+      if(at.t>=at.fases.impactoEm)efeitoNoAlvo(e,0);
     }
     (beat.passos??[]).forEach((passo,k)=>{
-      if(passo.classe!=='unica')return;
-      // sozinha: dispara no impacto, depois das fases dela; no meio de um golpe: no passo dela
-      if(sozinha?!beat.impacted:!(beat.impacted&&(beat.etapa??0)>k))return;
+      if(passo.classe!=='unica'||!beat.impacted||(beat.etapa??0)<=k)return;
       for(const e of beat.events){
-        if(e.kind!=='unica'||!passo.eventos.includes(e.id))continue;
+        if(e.kind!=='unica'||!passo.eventos.includes(e.id)||emAndamento.has(e.id))continue;
         const dono=battle.fighters.find(f=>f.uid===e.source);if(!dono)continue;
-        const ent=entregaDaUnica(dono.characterId,ladoDaUnica(e,battle));
-        if(sozinha){efeitoNoAlvo(e,0);continue;}
-        // já ativou na pausa do golpe: a de si mesmo continua à vista; a que vai no rival (o troco) sai agora, sem preparo
-        if(passo.antecipada){
-          if(ent.modo==='si'||ladoDaUnica(e,battle)==='si'){efeitoNoAlvo(e,0);continue;}
-          entregaAteOAlvo(e,`${beat.event.id}-${e.id}`,0);
-          efeitoNoAlvo(e,ent.area||(e.target&&e.target!==e.source)?VOO_DA_UNICA[ent.modo]:0);
+        const ent=entregaDoEvento(e,battle,beat),deSi=ent.modo==='si'||ent.destino.lado==='si';
+        const propria=!!beat.pausas?.find(x=>x.evento.id===e.id)?.propria;
+        // ativou na pausa de quem foi atingido e vai no rival (o troco): sai agora que o golpe caiu
+        if(passo.antecipada&&!deSi&&!propria){
+          entregaAteOAlvo(e,`${beat.event.id}-${e.id}-troco`,0);
+          efeitoNoAlvo(e,VOO_DA_UNICA[ent.modo]);
           continue;
         }
-        // no meio de um golpe: depois da mini preparação, ela viaja até o alvo como na ativação sozinha
-        entregaAteOAlvo(e,`${beat.event.id}-${e.id}`,PREPARO_DA_UNICA);
-        efeitoNoAlvo(e,PREPARO_DA_UNICA+VOO_DA_UNICA[ent.modo]);
+        // já chegou: o efeito dela continua à vista até o fim do beat
+        efeitoNoAlvo(e,0);
       }
     });
   }
@@ -367,8 +361,9 @@ export function BattleEffects({battle,beat,anchors,enabled,reduced,medal=80}:{ba
   const outcome=(event:typeof outcomes[number])=>event.kind==='damage'?{label:'Dano',icon:Zap}:event.kind==='interrupt'?{label:'Interrompido',icon:ArrowDown}:event.kind==='status'?{label:event.status?statusCatalog[event.status].name:'Efeito',icon:Sparkles}:event.kind==='heal'?{label:'Recuperação',icon:HeartPulse}:{label:'Protegido',icon:ShieldCheck};
   const style={'--fx-cor':cor,'--fx-color':character?.color??'#d2f276'} as CSSProperties;
   // o golpe parado no meio do caminho: as folhas dele esperam a resposta do atacado
-  const pausado=!!beat?.pausa&&!beat.impacted&&beat.elapsed>=beat.pausa.em-1e-8&&beat.pausa.t<beat.pausa.dura;
-  return <div ref={root} className={`battle-effects directed-effects ${beat?.grand?'grand-event':''} ${reduced?'reduced':''} ${pausado?'golpe-pausado':''}`} aria-hidden="true" style={style} data-familia={chave}>
+  // (o atacante ativando antes de partir: as folhas do golpe nem aparecem ainda)
+  const parada=golpeParado(beat);
+  return <div ref={root} className={`battle-effects directed-effects ${beat?.grand?'grand-event':''} ${reduced?'reduced':''} ${parada?'golpe-pausado':''} ${parada?.propria?'golpe-antes':''}`} aria-hidden="true" style={style} data-familia={chave}>
     {nodes}
     {beat&&!beat.periodic&&beat.event.kind==='turn'&&<div className={`action-title ${landed?'landed':''} ${beat.grand?'title-grand':''}`} key={beat.event.id}><SkillIcon type={beat.event.visual??'impact'} size={20} characterId={source?.characterId} skillId={source&&beat.event.skill!==undefined?character?.skills[beat.event.skill]?.id:undefined}/><div><small>{beat.event.kind==='turn'?(beat.event.source.startsWith('player')?'SEU TRIO':'RIVAIS'):character?.name??'NEXUS'}</small><strong>{beat.event.kind==='turn'?'VIRADA!':beat.event.label}</strong>{outcomes.length>0&&<span className="action-outcomes">{outcomes.slice(0,2).map(e=>{const x=outcome(e),Icon=x.icon;return <i key={e.id}><Icon size={12}/>{x.label}</i>;})}</span>}</div></div>}
   </div>;

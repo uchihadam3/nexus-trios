@@ -6,7 +6,7 @@ import { PRESENTATION as P } from './config';
 import { QUADRO_DO_GOLPE } from './golpe-das-folhas';
 import { familia, profileFor } from './vfxProfiles';
 import { INTERVALO_DA_UNICA, JEITO_DA_UNICA } from './unicas-efeitos';
-import { fasesDoEvento, pausaDoGolpe, type PausaDaUnica } from './ativacao-da-unica';
+import { fasesDoEvento, golpeParado, pausasDoGolpe, type PausaDaUnica } from './ativacao-da-unica';
 export { ladoDaUnica, vooDaUnica } from './ativacao-da-unica';
 
 export type Family='physical'|'energy'|'electric'|'fire'|'magic'|'dark'|'psychic'|'slash'|'prison'|'shield'|'heal'|'regen'|'buff'|'debuff'|'interrupt'|'ko'|'turn'|'grand';
@@ -25,8 +25,8 @@ export interface Beat {event:BattleEvent;events:BattleEvent[];before:Battle;afte
   antecipa?:number;
   /** A folha do golpe já começou (a deixa 'golpe' já saiu). */
   golpeou?:boolean;
-  /** O golpe para no meio do caminho e quem foi atacado responde com a Mecânica única (src/presentation/ativacao-da-unica.ts). */
-  pausa?:PausaDaUnica}
+  /** O golpe para e alguém ativa a Mecânica única antes de ele cair (src/presentation/ativacao-da-unica.ts). */
+  pausas?:PausaDaUnica[]}
 export interface Direction {battle:Battle;visible:Battle;queue:Beat[];active:Beat|null;simIdle:number;complete:boolean;serial:number;signals:BattleEvent[];/** quando cada lutador teve a última ativação completa da Mecânica única */unicaCheia?:Record<string,number>}
 export interface PresentationCheckpoint {version?:2;battleTime:number;nextEvent:number;rng:number;visibleNextEvent:number;activeEventId:number|null;activeElapsed:number;impacted:boolean;serial:number;simIdle?:number}
 /** 'golpe': a folha do golpe (e o som dela) começa antes do impacto; o impacto que vem depois traz `antecipado`. */
@@ -90,7 +90,7 @@ function duration(event:BattleEvent,grand:boolean){
  * só a ordem e o tempo em que a tela revela o que já aconteceu.
  */
 export type ClasseDoPasso='golpe'|'reacao'|'rival'|'aliado'|'unica';
-export interface Passo {classe:ClasseDoPasso;/** quem age neste passo */quem:string;/** nome do traço, numa reação */rotulo?:string;eventos:number[];/** segundos depois do impacto */em:number;/** a Mecânica única já ativou na pausa do golpe: aqui só cai o resultado, sem o nome de novo */antecipada?:boolean}
+export interface Passo {classe:ClasseDoPasso;/** quem age neste passo */quem:string;/** nome do traço, numa reação */rotulo?:string;eventos:number[];/** segundos depois do impacto */em:number;/** a Mecânica única já ativou na pausa do golpe: aqui só cai o resultado, sem o nome de novo */antecipada?:boolean;/** o efeito da Mecânica única do passo anterior (o dano, a cura, o Status que ela causou), sem selo de traço */resultado?:boolean}
 /** Quanto cada passo fica na tela antes do próximo (o tempo de ler o que aconteceu). */
 export const TEMPO_DO_PASSO:Record<ClasseDoPasso,number>={golpe:.42,reacao:.58,rival:.4,aliado:.4,unica:1.85};
 /**
@@ -128,6 +128,8 @@ export function montaPassos(beat:Pick<Beat,'event'|'events'|'after'|'traco'|'bas
     :e.kind==='tempo'?efeitos.some(x=>x.kind==='shift'):true;
   const passos:Passo[]=[],doAtor=new Map<ClasseDoPasso,Passo>(),soltos:number[]=[];
   let atual:Passo|null=null;
+  // a ativação completa aberta agora e o passo com o resultado dela
+  let unicaAberta:Passo|null=null,resultado:Passo|null=null;
   for(const e of beat.events){
     // contabilidade (Carga, "pronto", sinergia) e ajustes nulos vão no passo que os causou
     const dono=e.kind==='block'?(e.attacker??ator):e.source;
@@ -141,8 +143,16 @@ export function montaPassos(beat:Pick<Beat,'event'|'events'|'after'|'traco'|'bas
       const ultimo=atual as Passo|null;
       if(ultimo&&ultimo.classe===classe&&ultimo.quem===e.source&&ultimo.rotulo===rotulo)ultimo.eventos.push(e.id);
       else{atual={classe,quem:e.source,rotulo,eventos:[e.id],em:0};passos.push(atual);}
+      unicaAberta=classe==='unica'?atual:null;resultado=null;
       continue;
     }
+    // o que a Mecânica única causa logo depois do aviso (o dano, a cura, o Status) é o resultado dela: aparece quando
+    // o efeito dela chega, sem o selo do traço (antes, o nome do traço aparecia em cima do efeito da mecânica)
+    if(unicaAberta&&(atual===unicaAberta||atual===resultado)&&dono===unicaAberta.quem&&!CONTABIL.has(e.kind)&&!ehDaMecanica(e)&&!(dono===ator&&DO_GOLPE.has(e.kind))){
+      if(!resultado){resultado={classe:'reacao',quem:dono,rotulo:'',eventos:[],em:0,resultado:true};passos.push(resultado);}
+      resultado.eventos.push(e.id);atual=resultado;continue;
+    }
+    if(!CONTABIL.has(e.kind)||ehDaMecanica(e)){unicaAberta=null;resultado=null;}
     // Refletir, Espinhos, Vampirismo e os jeitos de bater (Ricochete, Roubou Carga…): um passo com o nome da mecânica
     if(!ehDaMecanica(e)&&(CONTABIL.has(e.kind)||(e.kind==='tempo'&&Math.abs(e.value??0)<.005))){if(atual)atual.eventos.push(e.id);else soltos.push(e.id);continue;}
     if(ehDaMecanica(e)){
@@ -182,11 +192,31 @@ export function montaPassos(beat:Pick<Beat,'event'|'events'|'after'|'traco'|'bas
   passos.length=0;passos.push(...blocos.flat(),...antes);
   if(!passos.length)passos.push({classe:'golpe',quem:ator,eventos:[],em:0});
   passos[0]!.eventos.unshift(...soltos);
-  // o tempo de cada passo depois do impacto, comprimido se a cadeia ficar longa
-  const intervalos=passos.slice(0,-1).map(x=>TEMPO_DO_PASSO[x.classe]);
+  tempoDosPassos(passos,beat);
+  return passos;
+}
+/** Depois de o efeito da Mecânica única chegar (no meio da cadeia), quanto ele fica à vista. */
+const DEPOIS_NA_CADEIA=1.0;
+/**
+ * O tempo de cada passo depois do impacto, comprimido se a cadeia ficar longa. A Mecânica única no meio da cadeia
+ * tem as fases dela (concentra, nome, carga, solta) e o resultado aparece quando o efeito chega; ela não encurta.
+ * Devolve quanto o beat ainda precisa depois do último passo.
+ */
+export function tempoDosPassos(passos:Passo[],beat:Pick<Beat,'event'|'events'|'after'|'base'>):number{
+  const ator=beat.event.source,lado=beat.after.fighters.find(f=>f.uid===ator)?.side;
+  const ladoDe=(uid?:string)=>beat.after.fighters.find(f=>f.uid===uid)?.side;
+  const fasesDe=(x:Passo)=>{const e=beat.events.find(y=>y.kind==='unica'&&x.eventos.includes(y.id));return e?fasesDoEvento(e,beat.after,{events:beat.events,after:beat.after,passos,traco:false}):undefined;};
+  const daUnica=(k:number)=>{const x=passos[k]!;return x.classe==='unica'&&!x.antecipada||!!x.resultado&&passos[k-1]?.classe==='unica'&&!passos[k-1]!.antecipada;};
+  const intervalo=(k:number)=>{
+    const x=passos[k]!;
+    if(x.classe==='unica'){if(x.antecipada)return .05;const f=fasesDe(x);return (f?.impactoEm??PREPARO_DA_UNICA)+(passos[k+1]?.resultado?0:DEPOIS_NA_CADEIA);}
+    if(x.resultado&&daUnica(k))return DEPOIS_NA_CADEIA;
+    return TEMPO_DO_PASSO[x.resultado?'reacao':x.classe];
+  };
+  const intervalos=passos.slice(0,-1).map((_,k)=>intervalo(k));
   // a ativação da Mecânica única não encurta: é o momento dela (a cadeia comprime só o resto)
-  const total=intervalos.reduce((a,b,k)=>a+(passos[k]!.classe==='unica'?0:b),0),escala=total>CADEIA_MAXIMA?CADEIA_MAXIMA/total:1;
-  let t=0;passos.forEach((x,k)=>{x.em=t;t+=(intervalos[k]??0)*(x.classe==='unica'?1:escala);});
+  const total=intervalos.reduce((a,b,k)=>a+(daUnica(k)?0:b),0),escala=total>CADEIA_MAXIMA?CADEIA_MAXIMA/total:1;
+  let t=0;passos.forEach((x,k)=>{x.em=t;t+=(intervalos[k]??0)*(daUnica(k)?1:escala);});
   // depois de um golpe, o que cai no próprio trio (cura, Escudo, reforço, o traço em quem agiu) espera
   // quem bateu voltar para o lugar: antes, o efeito saía com o personagem ainda no caminho de volta
   const bateu=passos[0]?.classe==='golpe'&&beat.events.some(e=>e.kind==='damage'&&e.source===ator&&ladoDe(e.target)!==lado);
@@ -195,7 +225,12 @@ export function montaPassos(beat:Pick<Beat,'event'|'events'|'after'|'traco'|'bas
   const k=bateu?passos.findIndex((x,i)=>i>0&&(x.classe==='aliado'||((x.classe==='reacao'||x.classe==='unica')&&noMeuTrio(x)))):-1;
   const volta=(VOLTA_DO_GOLPE-P.impactAt)*(beat.base??0);
   if(k>0&&passos[k]!.em<volta){const atraso=volta-passos[k]!.em;for(let i=k;i<passos.length;i++)passos[i]!.em+=atraso;}
-  return passos;
+  // a última ainda precisa do tempo dela
+  const n=passos.length-1,ultimo=passos[n];
+  if(!ultimo)return 0;
+  if(ultimo.classe==='unica'&&!ultimo.antecipada)return (fasesDe(ultimo)?.impactoEm??0)+DEPOIS_NA_CADEIA;
+  if(daUnica(n))return DEPOIS_NA_CADEIA;
+  return 0;
 }
 /** Em que passo (1, 2, 3…) o evento aparece. Eventos fora da lista do beat aparecem no primeiro. */
 export function etapaDoEvento(beat:Pick<Beat,'event'|'after'>&{passos?:Passo[]},e:BattleEvent):number{
@@ -300,21 +335,20 @@ function makeBeat(event:BattleEvent,events:BattleEvent[],before:Battle,after:Bat
   const auxiliary=event.kind==='ready'||event.kind==='status';
   const unicaSozinha=traco&&event.kind==='unica'&&!!cheias?.has(event.source);
   // sozinha, o impacto espera as fases dela (concentra, nome, carga, solta) e a viagem até o alvo: o número aparece quando o golpe chega
-  const fases=unicaSozinha?fasesDoEvento(event,after):undefined;
+  const fases=unicaSozinha?fasesDoEvento(event,after,{events,after,traco:true}):undefined;
   const seconds=traco?(fases?fases.impactoEm/P.impactAt:TEMPO_DO_TRACO):previous?(periodic?.55:auxiliary?.5:duration(event,grand)):periodic?P.periodicSeconds:duration(event,grand);
   const beat:Beat={event,events,before,after,duration:seconds,family:familyOf(event,after),grand,elapsed:0,impacted:false,periodic,etapa:0,base:seconds,traco};
   beat.passos=montaPassos(beat,cheias);
   beat.etapas=beat.passos.map((_,k)=>k+1);
   beat.antecipa=antecipaDoGolpe(beat);
-  // quem foi atacado responde antes de o golpe cair: na cadeia fica só o resultado, num passo curto
-  beat.pausa=cheias?pausaDoGolpe(beat,seconds*P.impactAt,beat.antecipa):undefined;
-  if(beat.pausa){
-    const passos=beat.passos,k=beat.pausa.passo,corte=passos[k+1]?TEMPO_DO_PASSO.unica-TEMPO_DO_PASSO.reacao:0;
-    passos[k]!.antecipada=true;
-    for(let i=k+1;i<passos.length;i++)passos[i]!.em=Math.max(passos[i-1]!.em,passos[i]!.em-corte);
-  }
+  // quem ativa antes de o golpe cair (o atacante antes de partir, quem é atingido no meio do caminho): na cadeia
+  // fica só o resultado
+  const pausas=cheias&&!traco?pausasDoGolpe(beat,seconds*P.impactAt,beat.antecipa):[];
+  let cauda=traco?0:-1;
+  if(pausas.length){beat.pausas=pausas;for(const p of pausas)beat.passos[p.passo]!.antecipada=true;cauda=tempoDosPassos(beat.passos,beat);}
+  else if(!traco)cauda=tempoDosPassos(beat.passos,beat);
   const ultimo=beat.passos.at(-1)!;
-  beat.duration+=ultimo.em+(fases?Math.max(0,DEPOIS_DA_UNICA-(seconds-fases.impactoEm)):0);
+  beat.duration+=ultimo.em+Math.max(0,cauda)+(fases?Math.max(0,DEPOIS_DA_UNICA-(seconds-fases.impactoEm)):0);
   return beat;
 }
 /*
@@ -418,7 +452,7 @@ export function restoreDirection(initial:Battle,saved:Battle,checkpoint:Presenta
     d.active.impacted=checkpoint.impacted;
     d.active.golpeou=checkpoint.impacted;
     // voltando no meio de um golpe que já passou do ponto da pausa: a resposta já foi vista
-    if(d.active.pausa&&d.active.elapsed>=d.active.pausa.em-1e-8)d.active.pausa.t=d.active.pausa.dura;
+    for(const p of d.active.pausas??[])if(d.active.elapsed>=p.em-1e-8&&(d.active.elapsed>p.em+1e-8||d.active.impacted))p.t=p.dura;
     if(d.active.impacted)d.active.etapa=etapaNoTempo(d.active);
     d.visible=d.active.impacted?visivelNaEtapa(d.active,d.active.etapa!):d.active.before;
   }else{
@@ -445,9 +479,10 @@ export function advanceDirection(d:Direction,seconds:number,onCue?:(cue:Cue)=>vo
      * A pausa do golpe: chegando no ponto dela, o golpe fica parado e só o tempo da ativação de quem foi atacado
      * corre (concentra, nome, carga, a defesa aparecendo). Depois o golpe continua de onde parou.
      */
-    const pausa=beat.pausa,pausando=!!pausa&&!beat.impacted&&pausa.t<pausa.dura;
-    if(pausando&&beat.elapsed>=pausa.em-1e-8){pausa.t=Math.min(pausa.dura,pausa.t+elapsed);return;}
-    beat.elapsed=Math.min(limit,beat.elapsed+elapsed,pausando?pausa.em:Infinity);
+    const parada=golpeParado(beat);
+    if(parada){parada.t=Math.min(parada.dura,parada.t+elapsed);return;}
+    const proxima=!beat.impacted?beat.pausas?.find(x=>x.t<x.dura):undefined;
+    beat.elapsed=Math.min(limit,beat.elapsed+elapsed,proxima?proxima.em:Infinity);
     const etapas=beat.etapas??[1];
     // a folha do golpe começa antes, para o golpe desenhado cair no impacto (sempre sai antes da deixa do impacto)
     if(!beat.golpeou&&beat.antecipa&&beat.elapsed>=impacto-beat.antecipa-1e-8){
