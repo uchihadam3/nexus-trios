@@ -236,6 +236,12 @@ const T: Record<string, string> = {
   vilgax: 'tentaculos_vilgax armadura_de_batalha_vilgax soco_planetario',
   cosmowanda: 'desejo_de_forca desejo_de_protecao desejo_do_timmy',
   steve: 'espada_de_diamante_steve muro_de_blocos golem_de_ferro_steve',
+  creeper: 'chiado_creeper camuflagem_verde explosao_creeper',
+  pacman: 'comer_pacman pilula_de_poder comer_fantasma',
+  crash: 'giro_crash aku_aku_mascara caixa_de_nitro',
+  arthurmorgan: 'dead_eye_arthur laco_arthur revolver_arthur',
+  ellie: 'canivete_ellie furtividade_ellie arco_silencioso',
+  sans: 'ossos_sans desviar_sans gaster_blaster',
 };
 
 export const FAMILIA_DA_HABILIDADE: Record<string, VfxFamily> = Object.fromEntries(

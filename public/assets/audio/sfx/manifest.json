@@ -427,6 +427,23 @@
    ],
    "bytes": 60180
   },
+  "aku-aku-mascara": {
+   "arquivo": "aku-aku-mascara.mp3",
+   "descricao": "Crash: Aku Aku",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 60683
+  },
   "aku-preparo": {
    "arquivo": "aku-preparo.mp3",
    "descricao": "Aku: o redemoinho escuro (Preparo)",
@@ -800,6 +817,23 @@
     1.486
    ],
    "bytes": 46676
+  },
+  "arco-silencioso": {
+   "arquivo": "arco-silencioso.mp3",
+   "descricao": "Ellie: arco silencioso",
+   "versoes": [
+    0.0,
+    1.7076,
+    3.4465,
+    5.1001
+   ],
+   "duracoes": [
+    1.6276,
+    1.6589,
+    1.5736,
+    1.652
+   ],
+   "bytes": 50566
   },
   "areia": {
    "arquivo": "areia.mp3",
@@ -1225,6 +1259,23 @@
     1.4213
    ],
    "bytes": 56934
+  },
+  "arthur-preparo": {
+   "arquivo": "arthur-preparo.mp3",
+   "descricao": "Arthur Morgan: o revólver armando (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 61485
   },
   "arvore-da-ilusao": {
    "arquivo": "arvore-da-ilusao.mp3",
@@ -3521,6 +3572,23 @@
    ],
    "bytes": 106396
   },
+  "caixa-de-nitro": {
+   "arquivo": "caixa-de-nitro.mp3",
+   "descricao": "Crash: caixa de nitro",
+   "versoes": [
+    0.0,
+    2.28,
+    4.6398,
+    6.8454
+   ],
+   "duracoes": [
+    2.2,
+    2.2798,
+    2.1256,
+    2.2335
+   ],
+   "bytes": 75126
+  },
   "cajado-branco": {
    "arquivo": "cajado-branco.mp3",
    "descricao": "básico do Gandalf: o cajado no chão e a luz",
@@ -3691,6 +3759,23 @@
    ],
    "bytes": 79967
   },
+  "camuflagem-verde": {
+   "arquivo": "camuflagem-verde.mp3",
+   "descricao": "Creeper: camuflagem verde",
+   "versoes": [
+    0.0,
+    1.5349,
+    3.1882,
+    4.7061
+   ],
+   "duracoes": [
+    1.4549,
+    1.5733,
+    1.4378,
+    1.4867
+   ],
+   "bytes": 59815
+  },
   "camus-preparo": {
    "arquivo": "camus-preparo.mp3",
    "descricao": "Camus: o frio (Preparo)",
@@ -3860,6 +3945,23 @@
     0.9657
    ],
    "bytes": 36266
+  },
+  "canivete-ellie": {
+   "arquivo": "canivete-ellie.mp3",
+   "descricao": "Ellie: canivete",
+   "versoes": [
+    0.0,
+    1.6707,
+    3.7196,
+    5.6354
+   ],
+   "duracoes": [
+    1.5907,
+    1.9689,
+    1.8357,
+    1.9289
+   ],
+   "bytes": 57822
   },
   "caos-preparo": {
    "arquivo": "caos-preparo.mp3",
@@ -4608,6 +4710,23 @@
     1.1304
    ],
    "bytes": 37180
+  },
+  "chiado-creeper": {
+   "arquivo": "chiado-creeper.mp3",
+   "descricao": "Creeper: chiado",
+   "versoes": [
+    0.0,
+    1.6126,
+    3.3159,
+    4.9181
+   ],
+   "duracoes": [
+    1.5326,
+    1.6233,
+    1.5221,
+    1.5796
+   ],
+   "bytes": 76146
   },
   "chicotada": {
    "arquivo": "chicotada.mp3",
@@ -5510,6 +5629,40 @@
    ],
    "bytes": 69561
   },
+  "comer-fantasma": {
+   "arquivo": "comer-fantasma.mp3",
+   "descricao": "Pac-Man: comer fantasma",
+   "versoes": [
+    0.0,
+    1.7312,
+    3.5213,
+    5.1977
+   ],
+   "duracoes": [
+    1.6512,
+    1.71,
+    1.5964,
+    1.6759
+   ],
+   "bytes": 69676
+  },
+  "comer-pacman": {
+   "arquivo": "comer-pacman.mp3",
+   "descricao": "Pac-Man: comer",
+   "versoes": [
+    0.0,
+    1.3248,
+    2.6936,
+    3.9773
+   ],
+   "duracoes": [
+    1.2448,
+    1.2888,
+    1.2037,
+    1.2633
+   ],
+   "bytes": 56974
+  },
   "cometa-de-pegaso": {
    "arquivo": "cometa-de-pegaso.mp3",
    "descricao": "Seiya: o Cometa de Pégaso",
@@ -6394,6 +6547,23 @@
    ],
    "bytes": 14181
   },
+  "creeper-preparo": {
+   "arquivo": "creeper-preparo.mp3",
+   "descricao": "Creeper: o chiado crescendo (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 82334
+  },
   "crescente-de-prata": {
    "arquivo": "crescente-de-prata.mp3",
    "descricao": "Cavaleiro da Lua: os três dardos de prata",
@@ -6784,6 +6954,23 @@
     1.5228
    ],
    "bytes": 58573
+  },
+  "dead-eye-arthur": {
+   "arquivo": "dead-eye-arthur.mp3",
+   "descricao": "Arthur Morgan: Dead Eye",
+   "versoes": [
+    0.0,
+    2.28,
+    4.6398,
+    6.8454
+   ],
+   "duracoes": [
+    2.2,
+    2.2798,
+    2.1256,
+    2.2335
+   ],
+   "bytes": 79453
   },
   "death-note": {
    "arquivo": "death-note.mp3",
@@ -7277,6 +7464,23 @@
     1.4213
    ],
    "bytes": 24651
+  },
+  "desviar-sans": {
+   "arquivo": "desviar-sans.mp3",
+   "descricao": "Sans: desviar",
+   "versoes": [
+    0.0,
+    1.3358,
+    2.7002,
+    4.0006
+   ],
+   "duracoes": [
+    1.2558,
+    1.2844,
+    1.2205,
+    1.2909
+   ],
+   "bytes": 45065
   },
   "detroit-smash": {
    "arquivo": "detroit-smash.mp3",
@@ -8076,6 +8280,23 @@
     2.2335
    ],
    "bytes": 72695
+  },
+  "ellie-preparo": {
+   "arquivo": "ellie-preparo.mp3",
+   "descricao": "Ellie: o arco esticando (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 24337
   },
   "elsa-preparo": {
    "arquivo": "elsa-preparo.mp3",
@@ -10083,6 +10304,23 @@
    ],
    "bytes": 77349
   },
+  "explosao-creeper": {
+   "arquivo": "explosao-creeper.mp3",
+   "descricao": "Creeper: explosão",
+   "versoes": [
+    0.0,
+    2.78,
+    5.6579,
+    8.3466
+   ],
+   "duracoes": [
+    2.7,
+    2.7979,
+    2.6087,
+    2.7411
+   ],
+   "bytes": 96940
+  },
   "explosao-de-bakugo": {
    "arquivo": "explosao-de-bakugo.mp3",
    "descricao": "básico do Bakugo: os dois estouros",
@@ -11936,6 +12174,23 @@
    ],
    "bytes": 81034
   },
+  "furtividade-ellie": {
+   "arquivo": "furtividade-ellie.mp3",
+   "descricao": "Ellie: furtividade",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 72454
+  },
   "fus-ro-dah": {
    "arquivo": "fus-ro-dah.mp3",
    "descricao": "básico do Dovahkiin: o Thu'um",
@@ -12616,6 +12871,23 @@
    ],
    "bytes": 59720
   },
+  "gaster-blaster": {
+   "arquivo": "gaster-blaster.mp3",
+   "descricao": "Sans: Gaster Blaster",
+   "versoes": [
+    0.0,
+    2.68,
+    5.4543,
+    8.0463
+   ],
+   "duracoes": [
+    2.6,
+    2.6943,
+    2.5121,
+    2.6396
+   ],
+   "bytes": 85736
+  },
   "gaviao-preparo": {
    "arquivo": "gaviao-preparo.mp3",
    "descricao": "Gavião Arqueiro: o arco puxado (Preparo)",
@@ -12870,6 +13142,23 @@
     2.4365
    ],
    "bytes": 91115
+  },
+  "giro-crash": {
+   "arquivo": "giro-crash.mp3",
+   "descricao": "Crash: giro",
+   "versoes": [
+    0.0,
+    1.8191,
+    3.6099,
+    5.1997
+   ],
+   "duracoes": [
+    1.7391,
+    1.7108,
+    1.5098,
+    2.132
+   ],
+   "bytes": 59848
   },
   "giro-de-cauda": {
    "arquivo": "giro-de-cauda.mp3",
@@ -16355,6 +16644,23 @@
     1.066
    ],
    "bytes": 49283
+  },
+  "laco-arthur": {
+   "arquivo": "laco-arthur.mp3",
+   "descricao": "Arthur Morgan: laço",
+   "versoes": [
+    0.0,
+    1.6377,
+    3.3533,
+    4.9946
+   ],
+   "duracoes": [
+    1.5577,
+    1.6356,
+    1.5613,
+    1.6057
+   ],
+   "bytes": 56267
   },
   "laco-da-verdade": {
    "arquivo": "laco-da-verdade.mp3",
@@ -27304,6 +27610,23 @@
    ],
    "bytes": 39863
   },
+  "ossos-sans": {
+   "arquivo": "ossos-sans.mp3",
+   "descricao": "Sans: ossos",
+   "versoes": [
+    0.0,
+    2.18,
+    4.4361,
+    6.5451
+   ],
+   "duracoes": [
+    2.1,
+    2.1761,
+    2.029,
+    2.132
+   ],
+   "bytes": 63602
+  },
   "ouro-preparo": {
    "arquivo": "ouro-preparo.mp3",
    "descricao": "Giorno: o acorde dourado (antes do golpe)",
@@ -27337,6 +27660,23 @@
     2.132
    ],
    "bytes": 77701
+  },
+  "pacman-preparo": {
+   "arquivo": "pacman-preparo.mp3",
+   "descricao": "Pac-Man: o labirinto (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 68322
   },
   "pacto": {
    "arquivo": "pacto.mp3",
@@ -28034,6 +28374,23 @@
     1.3198
    ],
    "bytes": 46109
+  },
+  "pilula-de-poder": {
+   "arquivo": "pilula-de-poder.mp3",
+   "descricao": "Pac-Man: pílula de poder",
+   "versoes": [
+    0.0,
+    1.9487,
+    3.9641,
+    5.8506
+   ],
+   "duracoes": [
+    1.8687,
+    1.9354,
+    1.8065,
+    1.8967
+   ],
+   "bytes": 71650
   },
   "pinhead-preparo": {
    "arquivo": "pinhead-preparo.mp3",
@@ -31622,6 +31979,23 @@
    ],
    "bytes": 81897
   },
+  "revolver-arthur": {
+   "arquivo": "revolver-arthur.mp3",
+   "descricao": "Arthur Morgan: revólver",
+   "versoes": [
+    0.0,
+    2.48,
+    5.047,
+    7.4459
+   ],
+   "duracoes": [
+    2.4,
+    2.487,
+    2.3188,
+    2.4365
+   ],
+   "bytes": 93732
+  },
   "ricochete": {
    "arquivo": "ricochete.mp3",
    "descricao": "família ricochete",
@@ -32505,6 +32879,23 @@
     1.4213
    ],
    "bytes": 52470
+  },
+  "sans-preparo": {
+   "arquivo": "sans-preparo.mp3",
+   "descricao": "Sans: o olho azul (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 44772
   },
   "santen-kesshun": {
    "arquivo": "santen-kesshun.mp3",

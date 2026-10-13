@@ -349,6 +349,20 @@
   "laco": true,
   "bytes": 7338
  },
+ "aku_aku_mascara": {
+  "descricao": "Crash · a máscara Aku Aku",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 29972
+ },
  "aku_preparo": {
   "descricao": "Aku · os olhos e o redemoinho (Preparo, laço)",
   "quadros": 12,
@@ -642,6 +656,20 @@
   ],
   "laco": false,
   "bytes": 12202
+ },
+ "arco_silencioso": {
+  "descricao": "Ellie · a flecha silenciosa",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 16512
  },
  "areia": {
   "descricao": "casulo de areia",
@@ -978,6 +1006,20 @@
   ],
   "laco": true,
   "bytes": 16528
+ },
+ "arthur_preparo": {
+  "descricao": "Arthur Morgan · o revólver e o chapéu (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 7562
  },
  "arvore_da_ilusao": {
   "descricao": "Kurama · a árvore de galhos e as espirais",
@@ -3009,6 +3051,20 @@
   "laco": false,
   "bytes": 34420
  },
+ "caixa_de_nitro": {
+  "descricao": "Crash · a caixa de Nitro explodindo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 32120
+ },
  "cajado_branco": {
   "descricao": "Básico do Gandalf: o cajado no chão e a luz",
   "quadros": 12,
@@ -3177,6 +3233,20 @@
   "laco": false,
   "bytes": 24426
  },
+ "camuflagem_verde": {
+  "descricao": "Creeper · os pixels sumindo no mato",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 34590
+ },
  "camus_preparo": {
   "descricao": "Camus · as mãos em jarro (Preparo, laço)",
   "quadros": 12,
@@ -3302,6 +3372,20 @@
   ],
   "laco": false,
   "bytes": 11384
+ },
+ "canivete_ellie": {
+  "descricao": "Ellie · o canivete rápido",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 18208
  },
  "caos_preparo": {
   "descricao": "Feiticeira · a tiara e os fios nas mãos (Preparo, laço)",
@@ -3974,6 +4058,20 @@
   ],
   "laco": false,
   "bytes": 53020
+ },
+ "chiado_creeper": {
+  "descricao": "Creeper · o chiado e a marca piscando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 24558
  },
  "chicotada": {
   "descricao": "Indiana Jones · o chicote enrolando",
@@ -4702,6 +4800,34 @@
   ],
   "laco": false,
   "bytes": 28332
+ },
+ "comer_fantasma": {
+  "descricao": "Pac-Man · o fantasma azul engolido",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 27294
+ },
+ "comer_pacman": {
+  "descricao": "Pac-Man · a mordida e a vida voltando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 17478
  },
  "cometa": {
   "descricao": "luz que corre pela linha de ação (+x)",
@@ -5501,6 +5627,20 @@
   "laco": false,
   "bytes": 34178
  },
+ "creeper_preparo": {
+  "descricao": "Creeper · inchando e piscando (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 16874
+ },
  "crescente": {
   "descricao": "onda em meia-lua em viagem (+x)",
   "quadros": 12,
@@ -5850,6 +5990,20 @@
   ],
   "laco": false,
   "bytes": 19192
+ },
+ "dead_eye_arthur": {
+  "descricao": "Arthur Morgan · a tela sépia e os X",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 51536
  },
  "death_note": {
   "descricao": "Death Note: o nome escrito e o coração que para",
@@ -6242,6 +6396,20 @@
   ],
   "laco": true,
   "bytes": 31774
+ },
+ "desviar_sans": {
+  "descricao": "Sans · deslizando com o sorrisão",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 21032
  },
  "detroit_smash": {
   "descricao": "Básico do All Might: o punho e o vento do Smash",
@@ -6928,6 +7096,20 @@
   ],
   "laco": false,
   "bytes": 61798
+ },
+ "ellie_preparo": {
+  "descricao": "Ellie · o arco puxado (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 3524
  },
  "elsa_preparo": {
   "descricao": "Elsa · o floco gigante girando (Preparo, laço)",
@@ -8609,6 +8791,20 @@
   "laco": false,
   "bytes": 125476
  },
+ "explosao_creeper": {
+  "descricao": "Creeper · a explosão de pixels",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 74912
+ },
  "explosao_de_bakugo": {
   "descricao": "Básico do Bakugo: as duas explosões das palmas",
   "quadros": 12,
@@ -10219,6 +10415,20 @@
   "laco": false,
   "bytes": 86280
  },
+ "furtividade_ellie": {
+  "descricao": "Ellie · agachada no mato e a audição",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 33092
+ },
  "fus_ro_dah": {
   "descricao": "Básico do Dovahkiin: as três palavras do Thu'um",
   "quadros": 12,
@@ -10793,6 +11003,20 @@
   "laco": false,
   "bytes": 35412
  },
+ "gaster_blaster": {
+  "descricao": "Sans · as caveiras e o raio",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 56302
+ },
  "gaviao_preparo": {
   "descricao": "Gavião Arqueiro · o arco puxado (Preparo, laço)",
   "quadros": 12,
@@ -11002,6 +11226,20 @@
   ],
   "laco": false,
   "bytes": 39342
+ },
+ "giro_crash": {
+  "descricao": "Crash · o redemoinho do giro",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 38534
  },
  "giro_de_cauda": {
   "descricao": "Tails · as duas caudas girando",
@@ -13830,6 +14068,20 @@
   ],
   "laco": false,
   "bytes": 35620
+ },
+ "laco_arthur": {
+  "descricao": "Arthur Morgan · o laço girando e prendendo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 6092
  },
  "laco_da_verdade": {
   "descricao": "Mulher-Maravilha · a laçada apertando o rival",
@@ -22847,6 +23099,20 @@
   "laco": false,
   "bytes": 14200
  },
+ "ossos_sans": {
+  "descricao": "Sans · as fileiras de ossos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 26196
+ },
  "ouro_preparo": {
   "descricao": "Giorno · a aura dourada e a joaninha (Preparo, laço)",
   "quadros": 12,
@@ -22874,6 +23140,20 @@
   ],
   "laco": false,
   "bytes": 22762
+ },
+ "pacman_preparo": {
+  "descricao": "Pac-Man · o labirinto e as bolinhas (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 5812
  },
  "pacto": {
   "descricao": "Constantine · o pentagrama e a fumaça",
@@ -23504,6 +23784,20 @@
   ],
   "laco": false,
   "bytes": 44548
+ },
+ "pilula_de_poder": {
+  "descricao": "Pac-Man · a pílula e o Pac-Man crescendo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 24468
  },
  "pinhead_preparo": {
   "descricao": "Pinhead · a caixa girando (Preparo, laço)",
@@ -26431,6 +26725,20 @@
   "laco": false,
   "bytes": 50246
  },
+ "revolver_arthur": {
+  "descricao": "Arthur Morgan · os tiros em sequência",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 37402
+ },
  "ricochete_optico": {
   "descricao": "Ciclope · o quique do raio em cada rival",
   "quadros": 12,
@@ -27158,6 +27466,20 @@
   ],
   "laco": true,
   "bytes": 8834
+ },
+ "sans_preparo": {
+  "descricao": "Sans · o olho azul e o Gaster Blaster (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 12172
  },
  "santen_kesshun": {
   "descricao": "Orihime · as três fadas e o escudo em triângulo",
