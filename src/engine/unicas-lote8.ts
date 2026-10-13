@@ -235,10 +235,10 @@ export const LOTE8: Record<string, Unica> = {
     nome: 'Ninja que copia',
     texto: 'Cada habilidade rival que acerta Kakashi Hatake dá +15% de Carga à habilidade mais vazia de Kakashi.',
     ganchos: {
-      apanhou(_m, _b, f, fonte, _dano, g) {
+      apanhou(m, b, f, fonte, _dano, g) {
         if (!g.habilidade || fonte.side === f.side) return;
         const s = [...f.skills].sort((x, y) => x.charge - y.charge)[0];
-        if (s) s.charge = Math.min(100, s.charge + 15);
+        if (s) { s.charge = Math.min(100, s.charge + 15); m.aviso(b, f, 'Copiou', fonte); }
       },
     },
   },
@@ -340,7 +340,7 @@ export const LOTE8: Record<string, Unica> = {
   killua: {
     nome: 'Reflexo relâmpago',
     texto: 'Quando um rival começa um Preparo, Killua Zoldyck ganha 25% da barra do Próximo ataque.',
-    ganchos: { viuPreparo(_m, _b, f) { f.action = Math.min(1, f.action + 0.25); } },
+    ganchos: { viuPreparo(m, b, f) { f.action = Math.min(1, f.action + 0.25); m.aviso(b, f, 'Reflexo relâmpago', f); } },
   },
   edward: {
     nome: 'Transmutação sem círculo',
@@ -365,7 +365,7 @@ export const LOTE8: Record<string, Unica> = {
     texto: 'Todo 3º golpe de Roy Mustang deixa o alvo Queimando (−5 de Vida por segundo) por 2 s. Roy causa +8% de dano em quem está Queimando.',
     ganchos: {
       causa: (_m, _b, _f, alvo, g) => (g.direto && alvo.statuses.some((s) => s.id === 'burning') ? 1.08 : 1),
-      bateu(m, b, f, alvo, _dano, g) { if (g.direto && vivo(alvo) && (u(f).estalo = (u(f).estalo ?? 0) + 1) % 3 === 0) m.efeitos(b, f, [alvo], [st('burning', 5, 2)]); },
+      bateu(m, b, f, alvo, _dano, g) { if (g.direto && vivo(alvo) && (u(f).estalo = (u(f).estalo ?? 0) + 1) % 3 === 0) { m.aviso(b, f, 'Estalo de chamas', alvo); m.efeitos(b, f, [alvo], [st('burning', 5, 2)]); } },
     },
   },
   griffith: {
@@ -538,9 +538,10 @@ export const LOTE8: Record<string, Unica> = {
     nome: 'Elo mental',
     texto: 'Quando um golpe tiraria mais de 15% da Vida máxima de um aliado de Jean Grey, Jean segura metade desse dano: o aliado leva só a outra metade, e Jean perde 80% da parte que segurou (sem cair por isso).',
     ganchos: {
-      limita(_m, _b, f, alvo, valor) {
+      limita(m, b, f, alvo, valor) {
         if (alvo === f || !vivo(f) || valor <= alvo.maxHp * 0.15) return valor;
         const parte = valor / 2;
+        m.aviso(b, f, 'Elo mental', alvo);
         f.hp = Math.max(1, f.hp - parte * 0.8);
         return valor - parte;
       },

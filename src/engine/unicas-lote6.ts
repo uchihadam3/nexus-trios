@@ -377,7 +377,7 @@ export const LOTE6: Record<string, Unica> = {
     texto: 'O Shinku Hadouken de Ryu demora o dobro do Preparo para sair, mas causa o triplo de dano.',
     ganchos: {
       preparo: (_f, i) => (i === 2 ? 2 : 1),
-      antes(_m, _b, f, i) { u(f).denjin = i === 2 ? 1 : 0; },
+      antes(m, b, f, i) { u(f).denjin = i === 2 ? 1 : 0; if (i === 2) m.aviso(b, f, 'Hadouken carregado', f); },
       causa: (_m, _b, f, _alvo, g) => (g.habilidade && u(f).denjin ? 3 : 1),
       usou(_m, _b, f) { u(f).denjin = 0; },
     },

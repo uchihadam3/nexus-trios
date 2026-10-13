@@ -89,8 +89,12 @@ export type ClasseDoPasso='golpe'|'reacao'|'rival'|'aliado'|'unica';
 export interface Passo {classe:ClasseDoPasso;/** quem age neste passo */quem:string;/** nome do traço, numa reação */rotulo?:string;eventos:number[];/** segundos depois do impacto */em:number}
 /** Quanto cada passo fica na tela antes do próximo (o tempo de ler o que aconteceu). */
 export const TEMPO_DO_PASSO:Record<ClasseDoPasso,number>={golpe:.42,reacao:.58,rival:.4,aliado:.4,unica:1.85};
-/** A mini preparação da Mecânica única: o nome aparece e a energia junta antes de ela disparar (pedido do jogador: "tipo 0,2 segundos… só pra mostrar o nome"). */
-export const PREPARO_DA_UNICA=.25;
+/**
+ * A mini preparação da Mecânica única: o nome aparece e a energia junta antes de ela disparar (pedido do jogador:
+ * "tipo 0,2 segundos… só pra mostrar o nome"; depois, "aumentar pra 0,5, igual as skills de preparo… acho que fica
+ * mais legal"). É o mesmo Preparo curto das habilidades (PREPARO_LEVE).
+ */
+export const PREPARO_DA_UNICA=.5;
 /** Fração do golpe em que quem foi até o alvo já está de volta no lugar (acting-motion.css). */
 export const VOLTA_DO_GOLPE=.9;
 /** O máximo que a cadeia inteira pode alongar um golpe (lutas com muitas reações não arrastam). */

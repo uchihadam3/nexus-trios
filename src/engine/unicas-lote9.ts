@@ -420,6 +420,7 @@ export const LOTE9: Record<string, Unica> = {
       bateu(m, b, f, alvo, _dano, g) {
         if (!g.habilidade || !g.direto || (u(f).fogo ?? 0) > b.time) return;
         u(f).fogo = b.time + 0.5;
+        m.aviso(b, f, 'Fogo que se espalha', alvo);
         m.efeitos(b, f, m.rivais(b, f).filter((r) => r !== alvo), [st('burning', 6, 2)]);
       },
     },

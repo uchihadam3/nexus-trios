@@ -213,6 +213,7 @@ export const LOTE7: Record<string, Unica> = {
     nome: 'Mortal Kombat',
     texto: 'Quando Liu Kang fica sozinho contra um só rival: +40% de dano e −20% de dano recebido.',
     ganchos: {
+      passo(m, b, f) { quandoVira(m, b, f, 'kombat', m.aliados(b, f).length === 1 && m.rivais(b, f).length === 1, 'Mortal Kombat', f); },
       causa: (m, b, f) => (m.aliados(b, f).length === 1 && m.rivais(b, f).length === 1 ? 1.4 : 1),
       recebe: (m, b, f) => (m.aliados(b, f).length === 1 && m.rivais(b, f).length === 1 ? 0.8 : 1),
     },
@@ -237,7 +238,10 @@ export const LOTE7: Record<string, Unica> = {
   leon: {
     nome: 'Na faca',
     texto: 'Quando todas as habilidades de Leon S. Kennedy estão em Resfriamento ou ainda carregando (e pelo menos uma está em Resfriamento), o ataque básico de Leon causa +50% de dano.',
-    ganchos: { causa: (_m, _b, f, _alvo, g) => (g.direto && !g.habilidade && f.skills.every((s) => s.cooldown > 0 || s.charge < 100) && f.skills.some((s) => s.cooldown > 0) ? 1.5 : 1) },
+    ganchos: {
+      passo(m, b, f) { quandoVira(m, b, f, 'faca', f.skills.every((s) => s.cooldown > 0 || s.charge < 100) && f.skills.some((s) => s.cooldown > 0), 'Na faca', f); },
+      causa: (_m, _b, f, _alvo, g) => (g.direto && !g.habilidade && f.skills.every((s) => s.cooldown > 0 || s.charge < 100) && f.skills.some((s) => s.cooldown > 0) ? 1.5 : 1),
+    },
   },
   hayabusa: {
     nome: 'Primeiro a agir',

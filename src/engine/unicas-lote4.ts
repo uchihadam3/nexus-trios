@@ -20,7 +20,15 @@ export const LOTE4: Record<string, Unica> = {
   shrek: {
     nome: 'Camadas de cebola',
     texto: 'A cada 25% de Vida que Shrek perde, Shrek recebe −12% de dano (até 3 vezes: −36%, com 25% da Vida ou menos).',
-    ganchos: { recebe: (_m, _b, f) => 1 - 0.12 * Math.min(3, Math.floor((1 - fracao(f)) / 0.25)) },
+    ganchos: {
+      passo(m, b, f) {
+        // cada camada nova que cai mostra a mecânica ativando; curar fecha a camada de novo
+        const n = Math.min(3, Math.floor((1 - fracao(f)) / 0.25));
+        if (n > (u(f).camada ?? 0)) m.aviso(b, f, `Camada ${n}`, f);
+        u(f).camada = n;
+      },
+      recebe: (_m, _b, f) => 1 - 0.12 * Math.min(3, Math.floor((1 - fracao(f)) / 0.25)),
+    },
   },
   elsa: {
     nome: 'Livre estou',

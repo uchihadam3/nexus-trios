@@ -270,10 +270,10 @@ export const LOTE2: Record<string, Unica> = {
     nome: 'Rápido demais',
     texto: 'A cada 4 ataques básicos, Flecha Pêra ataca de novo na hora.',
     ganchos: {
-      bateu(_m, _b, f, _alvo, _dano, g) {
+      bateu(m, b, f, _alvo, _dano, g) {
         if (!g.direto || g.habilidade) return;
         u(f).golpes = (u(f).golpes ?? 0) + 1;
-        if (u(f).golpes! % 4 === 0) f.action = 1;
+        if (u(f).golpes! % 4 === 0) { f.action = 1; m.aviso(b, f, 'Rápido demais', f); }
       },
     },
   },
@@ -450,7 +450,7 @@ export const LOTE2: Record<string, Unica> = {
     nome: 'Mil lâminas',
     texto: 'Depois de cada habilidade, Byakuya Kuchiki solta 10 pétalas-lâmina ao longo de 3 s: cada uma causa 12 de dano em um rival aleatório.',
     ganchos: {
-      usou(_m, _b, f) { u(f).petalas = (u(f).petalas ?? 0) + 10; },
+      usou(m, b, f) { u(f).petalas = (u(f).petalas ?? 0) + 10; m.aviso(b, f, 'Mil lâminas', f); },
       passo(m, b, f, dt) {
         const s = u(f);
         if (!s.petalas) return;

@@ -60,7 +60,7 @@ export const LOTE3: Record<string, Unica> = {
         u(f).flecha = ((u(f).flecha ?? 0) + 1) % 2;
         if (u(f).flecha !== 0) return 1;
         const a = maisFerido(m, b, f);
-        if (a) m.cura(b, f, a, 60, 'Flecha de sol');
+        if (a) { m.aviso(b, f, 'Flecha de sol', a); m.cura(b, f, a, 60, 'Flecha de sol'); }
         return 0;
       },
     },
