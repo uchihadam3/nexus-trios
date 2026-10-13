@@ -172,14 +172,14 @@ export const LOTE5: Record<string, Unica> = {
   },
   megatron: {
     nome: 'Tiro devastador',
-    texto: 'A cada 3 habilidades que Megatron usa, o Canhão de fusão dispara: 150 de dano em cada rival, e Megatron fica 2 s parado esfriando.',
+    texto: 'A cada 3 habilidades que Megatron usa, sai o Tiro devastador: 150 de dano em cada rival, e Megatron fica 2 s parado esfriando.',
     ganchos: {
       usou(m, b, f) {
         u(f).calor = (u(f).calor ?? 0) + 1;
         if (u(f).calor! < 3) return;
         u(f).calor = 0; u(f).esfria = b.time + 2;
-        m.aviso(b, f, 'Canhão de fusão', f);
-        for (const r of m.rivais(b, f)) m.dano(b, f, r, 150, false, 'Canhão de fusão');
+        m.aviso(b, f, 'Tiro devastador', f);
+        for (const r of m.rivais(b, f)) m.dano(b, f, r, 150, false, 'Tiro devastador');
       },
       parado: (f, b) => (u(f).esfria ?? 0) > b.time,
     },

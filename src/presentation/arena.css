@@ -412,3 +412,23 @@
 @keyframes inv-tranco{0%{scale:1}20%{scale:1.22}40%{scale:.92}100%{scale:1}}
 @keyframes inv-disparo{0%{clip-path:inset(0 100% 0 0);opacity:1}45%{clip-path:inset(0 0 0 0);opacity:1}100%{clip-path:inset(0 0 0 70%);opacity:0}}
 @media (prefers-reduced-motion:reduce){.arena-v2 .invocacao,.arena-v2 .invocacao.ataca-perto,.arena-v2 .invocacao.ataca-longe,.arena-v2 .invocacao .inv-disparo{animation:none}}
+
+/* A bolinha da Mecânica única (src/components/ArenaUnit.tsx): do lado de fora do retrato, quase encostando no anel
+   dele (2px) — à esquerda, um pouco acima nos rivais (abaixo da barra de Vida) e um pouco abaixo no seu trio. Enche como uma habilidade e acende ao ativar. */
+.unica-bolinha{--ub:30px;--raio:calc(47% + 2px + var(--ub) / 2);position:absolute;left:calc(50% - var(--raio) * .85 - var(--ub) / 2);z-index:4;width:var(--ub);height:var(--ub);display:grid;place-items:center;border-radius:50%;
+  background:radial-gradient(circle at 35% 30%,#4b2a78 0%,#26133f 55%,#140a24 100%);color:#e7d2ff;
+  box-shadow:inset 0 1px 0 #ffffff26,inset 0 -2px 4px #0008,0 0 0 1.5px #0d0816,0 3px 8px #000b;pointer-events:none;transition:filter .3s,transform .3s,box-shadow .3s}
+.side-enemy .unica-bolinha{top:calc(50% - var(--raio) * .53 - var(--ub) / 2)}
+.side-player .unica-bolinha{top:calc(50% + var(--raio) * .53 - var(--ub) / 2)}
+.unica-bolinha .ub-anel{position:absolute;inset:-1px;width:calc(100% + 2px);height:calc(100% + 2px);transform:rotate(-90deg)}
+.unica-bolinha .ub-trilho{fill:none;stroke:#c58bff2e;stroke-width:3.2}
+.unica-bolinha .ub-carga{fill:none;stroke:#cf9bff;stroke-width:3.2;stroke-linecap:round;filter:drop-shadow(0 0 2px #c58bff);transition:stroke-dasharray .25s linear}
+.unica-bolinha>.lucide{position:relative;width:14px;height:14px;opacity:.5;filter:drop-shadow(0 0 3px #b77cff)}
+.unica-bolinha.sempre>.lucide,.unica-bolinha.cheia>.lucide{opacity:1;color:#f6ecff}
+.unica-bolinha.sempre{box-shadow:inset 0 1px 0 #ffffff26,inset 0 -2px 4px #0008,0 0 0 1.5px #0d0816,0 0 10px #b77cff88,0 3px 8px #000b}
+.unica-bolinha.cheia{animation:ub-pulsa 1.4s ease-in-out infinite}
+.unica-bolinha.ativando{transform:scale(1.22);color:#fff;background:radial-gradient(circle at 35% 30%,#9a5cff 0%,#5a2a9e 55%,#2a1050 100%);
+  box-shadow:inset 0 1px 0 #fff5,0 0 0 1.5px #0d0816,0 0 16px #c58bffee,0 0 30px #9a5cff77}
+.unica-bolinha.ativando>.lucide{opacity:1}
+@keyframes ub-pulsa{50%{box-shadow:inset 0 1px 0 #ffffff26,inset 0 -2px 4px #0008,0 0 0 1.5px #0d0816,0 0 14px #c58bffaa,0 3px 8px #000b}}
+@media (prefers-reduced-motion:reduce){.unica-bolinha{transition:none}.unica-bolinha.ativando{transform:none}.unica-bolinha.cheia{animation:none}}

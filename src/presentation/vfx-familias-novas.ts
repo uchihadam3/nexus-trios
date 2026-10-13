@@ -1531,7 +1531,7 @@ export const FAMILIAS_NOVAS = {
   mu_scooby_lanche: n({ nome: 'Scooby-lanche!', grupo: 'especial', impacto: 'mu_scooby_lanche', escala: 2.6, tempo: 1.0, cor: '#d8a060', tinta: 'fixa' }),
   mu_portal_rick: n({ nome: 'Portal', grupo: 'especial', impacto: 'mu_portal_rick', escala: 2.8, tempo: 1.0, cor: '#7aff5a', tinta: 'fixa' }),
   mu_heroi_finn: n({ nome: 'Ei, briga comigo!', grupo: 'especial', impacto: 'mu_heroi_finn', escala: 2.6, tempo: 1.0, cor: '#8ad0ff', tinta: 'fixa' }),
-  mu_canhao_fusao: n({ nome: 'Canhão de fusão', grupo: 'especial', impacto: 'mu_canhao_fusao', escala: 3.0, tempo: 1.0, cor: '#b07aff', tinta: 'fixa' }),
+  mu_canhao_fusao: n({ nome: 'Tiro devastador', grupo: 'especial', impacto: 'mu_canhao_fusao', escala: 3.0, tempo: 1.0, cor: '#b07aff', tinta: 'fixa' }),
   mu_briguenta: n({ nome: 'Briguenta', grupo: 'especial', impacto: 'mu_briguenta', escala: 2.6, tempo: 1.0, cor: '#7aff7a', tinta: 'fixa' }),
   mu_vassoura: n({ nome: 'Vassoura!', grupo: 'especial', impacto: 'mu_vassoura', escala: 2.8, tempo: 1.0, cor: '#8ab0ff', tinta: 'fixa' }),
   mu_quaaack: n({ nome: 'QUAAACK!', grupo: 'especial', impacto: 'mu_quaaack', escala: 2.6, tempo: 1.0, cor: '#7ab8ff', tinta: 'fixa' }),

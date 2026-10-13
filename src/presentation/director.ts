@@ -5,7 +5,7 @@ import type { Battle, BattleEvent } from '../engine/types';
 import { PRESENTATION as P } from './config';
 import { QUADRO_DO_GOLPE } from './golpe-das-folhas';
 import { familia, profileFor } from './vfxProfiles';
-import { INTERVALO_DA_UNICA, JEITO_DA_UNICA } from './unicas-efeitos';
+import { INTERVALO_DA_UNICA, JEITO_DA_UNICA, VOO_DA_UNICA, entregaDaUnica } from './unicas-efeitos';
 
 export type Family='physical'|'energy'|'electric'|'fire'|'magic'|'dark'|'psychic'|'slash'|'prison'|'shield'|'heal'|'regen'|'buff'|'debuff'|'interrupt'|'ko'|'turn'|'grand';
 export interface Beat {event:BattleEvent;events:BattleEvent[];before:Battle;after:Battle;duration:number;family:Family;grand:boolean;elapsed:number;impacted:boolean;periodic?:boolean;trace?:BeatTrace;
@@ -290,13 +290,27 @@ function ativacoesCheias(d:Direction,events:BattleEvent[],after:Battle):Set<stri
   }
   return cheias;
 }
+/** De quem a Mecânica única atinge, visto por quem ativou: o rival, um aliado ou ela mesma. */
+export function ladoDaUnica(e:BattleEvent,b:Battle):'rival'|'aliado'|'si'{
+  if(!e.target||e.target===e.source)return 'si';
+  const de=b.fighters.find(f=>f.uid===e.source),para=b.fighters.find(f=>f.uid===e.target);
+  return de&&para&&de.side===para.side?'aliado':'rival';
+}
+/** Quanto a Mecânica única leva para chegar no alvo depois do preparo dela (o projétil voando, o feixe crescendo). */
+export function vooDaUnica(e:BattleEvent,b:Battle){
+  const f=b.fighters.find(x=>x.uid===e.source);
+  if(!f)return 0;
+  const ent=entregaDaUnica(f.characterId,ladoDaUnica(e,b));
+  return ent.area||(e.target&&e.target!==e.source)?VOO_DA_UNICA[ent.modo]:0;
+}
 function makeBeat(event:BattleEvent,events:BattleEvent[],before:Battle,after:Battle,periodic=false,previous=false,traco=false,cheias?:ReadonlySet<string>):Beat {
   const actor=after.fighters.find(f=>f.uid===event.source);
   const prep=actor&&event.skill!==undefined?byId[actor.characterId].skills[event.skill].preparation:0;
   const grand=event.kind==='skill'&&prep>=P.grandPreparation;
   const auxiliary=event.kind==='ready'||event.kind==='status';
   const unicaSozinha=traco&&event.kind==='unica'&&!!cheias?.has(event.source);
-  const seconds=traco?(unicaSozinha?TEMPO_DA_UNICA:TEMPO_DO_TRACO):previous?(periodic?.55:auxiliary?.5:duration(event,grand)):periodic?P.periodicSeconds:duration(event,grand);
+  // sozinha, o impacto espera o preparo dela e a viagem até o alvo: o número aparece quando o golpe chega
+  const seconds=traco?(unicaSozinha?TEMPO_DA_UNICA+vooDaUnica(event,after)/P.impactAt:TEMPO_DO_TRACO):previous?(periodic?.55:auxiliary?.5:duration(event,grand)):periodic?P.periodicSeconds:duration(event,grand);
   const beat:Beat={event,events,before,after,duration:seconds,family:familyOf(event,after),grand,elapsed:0,impacted:false,periodic,etapa:0,base:seconds,traco};
   beat.passos=montaPassos(beat,cheias);
   beat.etapas=beat.passos.map((_,k)=>k+1);

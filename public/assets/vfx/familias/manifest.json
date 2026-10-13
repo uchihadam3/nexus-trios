@@ -11339,6 +11339,34 @@
   "laco": false,
   "bytes": 72250
  },
+ "genki_dama_reune": {
+  "descricao": "Goku · a Genki Dama se formando em cima dele (laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": true,
+  "bytes": 57150
+ },
+ "genki_dama_voo": {
+  "descricao": "Goku · a Genki Dama voando até o alvo (laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 87364
+ },
  "genos_preparo": {
   "descricao": "Genos · o núcleo e o vapor (Preparo, laço)",
   "quadros": 12,

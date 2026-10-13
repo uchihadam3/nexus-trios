@@ -7,8 +7,8 @@ import { SkillIcon } from './Icon';
 import { ArrowDown,HeartPulse,ShieldCheck,Sparkles,Zap } from 'lucide-react';
 import { statuses as statusCatalog } from '../data/statuses';
 import { familia,folha,profileFor,type VfxFamily,type VfxProfile } from '../presentation/vfxProfiles';
-import { efeitoDaUnica } from '../presentation/unicas-efeitos';
-import { PREPARO_DA_UNICA } from '../presentation/director';
+import { VOO_DA_UNICA,efeitoDaUnica,entregaDaUnica } from '../presentation/unicas-efeitos';
+import { PREPARO_DA_UNICA,ladoDaUnica } from '../presentation/director';
 import { preparoDaUnica } from '../presentation/preparo-da-unica';
 import { FAMILIA_DO_REVIVER, RENASCER_PROPRIO } from '../presentation/renascer-proprio';
 import { efeitosDoJeito,VOO_DO_QUIQUE } from '../presentation/jeito-efeito';
@@ -32,7 +32,7 @@ const SEM_FICHA:Partial<Record<Beat['event']['kind'],VfxFamily>>={interrupt:'ond
 const GIRO_DA_VARIANTE=[0,16,-12,8];
 /* Altura da faixa em relação ao medalhão. */
 /* Os objetos arremessados (o escudo do Capitão, o batarangue…) voam grandes, para dar para ver o que é. */
-const TAMANHO_DO_VOO:Record<string,number>={vermelho_bola:1.6,onda_choque_voo:1.9,laser_curto:1.7,portal_bala:1.9,teia_voando:2.0,teia_impacto_bola:2.1,burning_bola:2.3,kienzan_disco:2.4,saraivada:1.25,escudo_voando:2.6,batarangue_voando:2.5,batarangue_eletrico_voo:2.4,mjolnir_voando:2.4,laco_dourado_voo:2.4,bola_da_morte_voo:2.8,corvos_itachi_voo:2.4,repulsor_stark_voo:2.0,escudo_ricochete_voo:2.2,shuriken_voando:2.3,tiara_voando:2.5,dardo_voando:2.4,corvo_voando:2.6,reigun_bala:2.2,shotgun_rajada:2.2,barril_voando:2.4,fenix_voando:2.6,pedra_bloco:2.0,papel_bola:2.2,bola_do_charizard:2.4,buster_bala:2.2,raio_copiado:2.2,carga_maxima_bala:2.6,leao_dourado:2.6,bola_de_ar:2.4};
+const TAMANHO_DO_VOO:Record<string,number>={genki_dama_voo:2.2,vermelho_bola:1.6,onda_choque_voo:1.9,laser_curto:1.7,portal_bala:1.9,teia_voando:2.0,teia_impacto_bola:2.1,burning_bola:2.3,kienzan_disco:2.4,saraivada:1.25,escudo_voando:2.6,batarangue_voando:2.5,batarangue_eletrico_voo:2.4,mjolnir_voando:2.4,laco_dourado_voo:2.4,bola_da_morte_voo:2.8,corvos_itachi_voo:2.4,repulsor_stark_voo:2.0,escudo_ricochete_voo:2.2,shuriken_voando:2.3,tiara_voando:2.5,dardo_voando:2.4,corvo_voando:2.6,reigun_bala:2.2,shotgun_rajada:2.2,barril_voando:2.4,fenix_voando:2.6,pedra_bloco:2.0,papel_bola:2.2,bola_do_charizard:2.4,buster_bala:2.2,raio_copiado:2.2,carga_maxima_bala:2.6,leao_dourado:2.6,bola_de_ar:2.4};
 const ALTURA_DA_FAIXA:Record<string,number>={feixe:.36,feixe_pesado:.62,raio_faixa:.7,dreno:.42,dragao_faixa:.85,palma_faixa:.55,makanko_faixa:.5,chamas_faixa:.75,calor_faixa:.42,diamante_faixa:.6,aurora_faixa:.78,plasma_faixa:.7,feixe_ciclope:.6,unibeam_faixa:.8,raio_mortal_faixa:.25,kame_faixa_kuririn:.75,plano_b_faixa:.8,galick_faixa:.7,final_flash_faixa:1.0,trovao_faixa:.55};
 
 const s=(x:number)=>`${x.toFixed(3)}s`;
@@ -278,11 +278,47 @@ export function BattleEffects({battle,beat,anchors,enabled,reduced,medal=80}:{ba
    */
   if(enabled&&beat&&size.w>0&&!reduced){
     const sozinha=!!beat.traco&&beat.passos?.[0]?.classe==='unica';
+    /*
+     * A Mecânica única chega no alvo como uma habilidade (src/presentation/unicas-efeitos.ts): o projétil sai de
+     * quem ativou e voa até ele, o feixe cresce até ele, a cura viaja até o aliado. Começa no fim do preparo e
+     * chega no impacto. De perto, quem vai até o alvo é o próprio personagem (src/presentation/acting.ts).
+     */
+    /** Em quem a Mecânica única cai: os rivais de pé, numa de área; senão o alvo do aviso. */
+    const alvosDaUnica=(e:typeof beat.event)=>{
+      const dono=battle.fighters.find(f=>f.uid===e.source);
+      if(dono&&entregaDaUnica(dono.characterId,ladoDaUnica(e,battle)).area)return battle.fighters.filter(f=>f.side!==dono.side&&f.hp>0).map(f=>f.uid);
+      return [e.target??e.source];
+    };
+    const entregaAteOAlvo=(e:typeof beat.event,chave:string|number,comeca:number)=>{
+      const dono=battle.fighters.find(f=>f.uid===e.source);if(!dono)return;
+      const ent=entregaDaUnica(dono.characterId,ladoDaUnica(e,battle));
+      if(!ent.area&&(!e.target||e.target===e.source))return;
+      for(const alvo of alvosDaUnica(e))entregaAte(e,dono.characterId,ent,alvo,`${chave}-${alvo}`,comeca);
+    };
+    const entregaAte=(e:typeof beat.event,personagem:string,ent:ReturnType<typeof entregaDaUnica>,alvo:string,chave:string,comeca:number)=>{
+      const voo=VOO_DA_UNICA[ent.modo];
+      const cor=familia(efeitoDaUnica(personagem,e.label).familia).cor;
+      const de=point(e.source),para=point(alvo),qa=px(de),qb=px(para),vx=qb.x-qa.x,vy=qb.y-qa.y,ang=Math.atan2(vy,vx)*180/Math.PI;
+      if((ent.modo==='voa'||ent.modo==='aliado')&&ent.viagem){
+        const t=medal*(TAMANHO_DO_VOO[ent.viagem]??1.05)*(ent.modo==='aliado'?.75:1);
+        nodes.push(camada(ent.viagem,{left:`${de.x}%`,top:`${de.y}%`,width:t,height:t,'--fx-cor':cor,'--dx':`${vx}px`,'--dy':`${vy}px`,'--ang':`${ang}deg`,'--voo':s(voo),'--voo-delay':s(comeca)},'fxl-laco fxl-voo',`unica-voo-${chave}`));
+      }
+      // cai: vem de cima, em pé sobre o alvo, e despenca nele (o meteoro, a bigorna)
+      if(ent.modo==='cai'&&ent.viagem){
+        const t=medal*(TAMANHO_DO_VOO[ent.viagem]??1.05)*1.2,altura=Math.min(qb.y+medal,medal*3.2);
+        nodes.push(camada(ent.viagem,{left:`${para.x}%`,top:`calc(${para.y}% - ${Math.round(altura)}px)`,width:t,height:t,'--fx-cor':cor,'--dx':'0px','--dy':`${Math.round(altura)}px`,'--ang':'90deg','--voo':s(voo),'--voo-delay':s(comeca)},'fxl-laco fxl-voo',`unica-cai-${chave}`));
+      }
+      if(ent.modo==='raio'&&ent.faixa){
+        const h=medal*(ALTURA_DA_FAIXA[ent.faixa]??.4);
+        nodes.push(camada(ent.faixa,{left:`${de.x}%`,top:`${de.y}%`,width:Math.hypot(vx,vy),height:h,'--fx-cor':cor,'--ang':`${ang}deg`,'--faixa':s(voo+.6),'--faixa-delay':s(comeca)},'fxl-laco fxl-faixa',`unica-faixa-${chave}`));
+      }
+    };
     // o preparo dela, igual ao de uma habilidade: a folha de preparo do próprio personagem em laço sobre ele
     const dono=sozinha&&!beat.impacted?battle.fighters.find(f=>f.uid===beat.event.source):undefined;
     if(dono){
-      const p=point(dono.uid),t=medal*1.9;
-      nodes.push(camada(preparoDaUnica(dono.characterId).folha,{left:`${p.x}%`,top:`${p.y}%`,width:t,height:t},'fxl-laco',`unica-prep-${beat.event.id}`));
+      const p=point(dono.uid),t=medal*1.9,ent=entregaDaUnica(dono.characterId,ladoDaUnica(beat.event,battle));
+      nodes.push(camada(ent.preparo??preparoDaUnica(dono.characterId).folha,{left:`${p.x}%`,top:`${p.y}%`,width:t,height:t},'fxl-laco',`unica-prep-${beat.event.id}`));
+      entregaAteOAlvo(beat.event,beat.event.id,PREPARO_DA_UNICA);
     }
     (beat.passos??[]).forEach((passo,k)=>{
       if(passo.classe!=='unica')return;
@@ -292,9 +328,15 @@ export function BattleEffects({battle,beat,anchors,enabled,reduced,medal=80}:{ba
         if(e.kind!=='unica'||!passo.eventos.includes(e.id))continue;
         const dono=battle.fighters.find(f=>f.uid===e.source);if(!dono)continue;
         const ef=efeitoDaUnica(dono.characterId,e.label),f=familia(ef.familia);
+        // no meio de um golpe: depois da mini preparação, ela viaja até o alvo como na ativação sozinha
+        const voo=sozinha?0:VOO_DA_UNICA[entregaDaUnica(dono.characterId,ladoDaUnica(e,battle)).modo];
+        if(!sozinha)entregaAteOAlvo(e,`${beat.event.id}-${e.id}`,PREPARO_DA_UNICA);
         // em quem a mecânica atinge (a Genki Dama no rival, a Teia no aliado); sem alvo, em quem ativou
-        const p=point(e.target??e.source),t=Math.min(medal*f.escala,Math.min(size.w,size.h)*.95);
-        nodes.push(camada(f.impacto,{left:`${p.x}%`,top:`${p.y}%`,width:t,height:t,'--fx-cor':f.cor,'--ang':'0deg','--flip':1,'--dur':s(1.5),'--delay':s(sozinha?0:PREPARO_DA_UNICA)},'fxl-impacto fxl-sobre',`unica-${beat.event.id}-${e.id}`));
+        const t=Math.min(medal*f.escala,Math.min(size.w,size.h)*.95);
+        for(const alvo of alvosDaUnica(e)){
+          const p=point(alvo);
+          nodes.push(camada(f.impacto,{left:`${p.x}%`,top:`${p.y}%`,width:t,height:t,'--fx-cor':f.cor,'--ang':'0deg','--flip':1,'--dur':s(1.5),'--delay':s(sozinha?0:PREPARO_DA_UNICA+voo)},'fxl-impacto fxl-sobre',`unica-${beat.event.id}-${e.id}-${alvo}`));
+        }
       }
     });
   }

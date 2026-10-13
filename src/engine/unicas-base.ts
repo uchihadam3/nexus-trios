@@ -162,9 +162,12 @@ export function avisoACada(m: Motor, b: Battle, f: Fighter, chave: string, cada:
 export function relogio(f: Fighter, chave: string, dt: number, cada: number, primeiro = cada): boolean {
   // a chave do relógio tem prefixo próprio: não pode colidir com um contador da mecânica de mesmo nome
   const s = u(f), k = `relogio_${chave}`;
+  // o tamanho da volta atual: só a tela usa, para encher a bolinha da mecânica (src/components/ArenaUnit.tsx)
+  if (s[k] === undefined) s[`${k}_volta`] = primeiro;
   s[k] = (s[k] ?? primeiro) - dt;
   if (s[k]! > 1e-6) return false;
   s[k] = s[k]! + cada;
+  s[`${k}_volta`] = cada;
   return true;
 }
 

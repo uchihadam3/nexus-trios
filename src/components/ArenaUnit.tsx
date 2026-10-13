@@ -7,6 +7,7 @@ import { PRESENTATION as P } from '../presentation/config';
 import { folha } from '../presentation/vfxProfiles';
 import { byId } from '../data/characters';
 import { unicaDe } from '../engine/unicas';
+import { JEITO_DA_UNICA } from '../data/unicas-jeito';
 import { EFEITO_DA_UNICA } from '../presentation/unicas-efeitos';
 import { statuses } from '../data/statuses';
 import { Portrait } from './Portrait';
@@ -95,6 +96,14 @@ export function ArenaUnit({fighter:f,battle,beat,onInspect,numbers,threatened,li
   // sozinha, ela prepara antes igual a uma habilidade (src/presentation/preparo-da-unica.ts): anel, nome e o ícone de preparo
   const preparandoUnica=!!ativando&&!!beat?.traco&&!impacted;
   /*
+   * A bolinha da Mecânica única (pedido do jogador: "um iconezinho… ela carregando ali, igual a habilidade faz"):
+   * sempre ativa fica acesa; a de relógio ("a cada 10 s") enche com o tempo que falta; ao ativar, enche no Preparo
+   * dela e acende.
+   */
+  const unica=unicaDe(c.id),jeito=JEITO_DA_UNICA[c.id];
+  const cargaDaUnica=ativando?(preparandoUnica?Math.min(100,100*(beat?.elapsed??0)/PREPARO_DA_UNICA):100)
+    :jeito==='sempre'?100:Math.round(100*(cargaDoRelogio(f)??0));
+  /*
    * O selo do traço e da Mecânica única fica um tempo na cabeça, com efeito no retrato (pedido do jogador: "aparece
    * muito rápido… poderia ficar um pouquinho mais de tempo na cabeça deles… e tivesse efeito"). Não segura a luta: o
    * passo da cadeia segue no ritmo de sempre, só o selo continua à vista.
@@ -104,21 +113,28 @@ export function ArenaUnit({fighter:f,battle,beat,onInspect,numbers,threatened,li
   // partindo para o ataque (habilidade ou básico): a cabeça fica limpa (pedido do jogador: "quando eles vão fazer o
   // ataque, o negócio já sumiu da cabeça deles")
   const atacando=!!source&&['basic','skill'].includes(beat?.event.kind??'');
+  /*
+   * A Mecânica única e o traço são como uma quarta habilidade (pedido do jogador: "nunca ativa as duas ao mesmo
+   * tempo… é sempre só um nomezinho lá"): enquanto o nome de uma habilidade está na cabeça (Preparo ou a habilidade
+   * saindo), o selo espera; depois aparece sozinho.
+   */
+  const comHabilidade=!!f.cast||(!!source&&['cast','skill'].includes(beat?.event.kind??''));
+  const ocupado=atacando||comHabilidade;
   useEffect(()=>{
     if(!chaveDoSelo||!reagindo?.rotulo)return;
     const rotulo=reagindo.rotulo,tipo=rotulo===unicaDe(c.id)?.nome?'unica':rotulo===c.trait.name?'traco':'mecanica';
     // o traço que dispara no meio do próprio ataque espera ele voltar para o lugar
-    setSelo({chave:chaveDoSelo,rotulo,tipo,inicio:performance.now(),adiado:atacando});
+    setSelo({chave:chaveDoSelo,rotulo,tipo,inicio:performance.now(),adiado:ocupado});
   },[chaveDoSelo]);
   useEffect(()=>{
     if(!selo)return;
-    if(selo.adiado){ if(!atacando)setSelo({...selo,adiado:false,inicio:performance.now()}); return; }
-    // já estava na cabeça quando ele partiu para o ataque: some rapidinho e não volta
-    if(atacando&&!selo.sumindo){ setSelo({...selo,sumindo:true}); return; }
+    if(selo.adiado){ if(!ocupado)setSelo({...selo,adiado:false,inicio:performance.now()}); return; }
+    // já estava na cabeça quando ele partiu para o ataque ou começou a preparar uma habilidade: some rapidinho e não volta
+    if(ocupado&&!selo.sumindo){ setSelo({...selo,sumindo:true}); return; }
     const chave=selo.chave,falta=selo.sumindo?220:Math.max(0,2400-(performance.now()-selo.inicio));
     const t=setTimeout(()=>setSelo(x=>x?.chave===chave?null:x),falta);
     return ()=>clearTimeout(t);
-  },[selo?.chave,selo?.adiado,selo?.sumindo,atacando]);
+  },[selo?.chave,selo?.adiado,selo?.sumindo,ocupado]);
   const seloVisivel=selo&&!selo.adiado?selo:null;
   const discovered=impacted?beat?.events.find(e=>revelado(beat,e)&&e.target===f.uid&&e.kind==='discovery'):undefined;
   const knocked=impacted?beat?.events.find(e=>revelado(beat,e)&&e.target===f.uid&&e.kind==='ko'):undefined;
@@ -159,7 +175,7 @@ export function ArenaUnit({fighter:f,battle,beat,onInspect,numbers,threatened,li
   /* A atuação deste beat: estilo de quem age, reação de quem recebe, e para onde. */
   const atua=atuacao?[atuacao.act&&`actor act-${atuacao.act} act-${atuacao.parity}`,atuacao.react&&`reactor react-${atuacao.react}`].filter(Boolean).join(' '):'';
   const atuaStyle:Record<string,string>=atuacao?{'--act-dx':`${atuacao.dx.toFixed(1)}px`,'--act-dy':`${atuacao.dy.toFixed(1)}px`,'--act-ux':atuacao.ux.toFixed(3),'--act-uy':atuacao.uy.toFixed(3),'--beat-s':`${atuacao.seconds}s`,'--act-angle':`${(Math.atan2(atuacao.uy,atuacao.ux)*180/Math.PI).toFixed(1)}deg`}:{};
-  // o nome da habilidade (ou do Preparo) está à vista: o selo do traço vai junto, empilhado em cima do nome (nunca do lado)
+  // o nome da habilidade (ou do Preparo) está à vista: o selo do traço e da mecânica espera ele sair (um nome por vez)
   const comNome=!ativando&&(preparing||(!!source&&beat?.event.kind==='skill'&&beat.event.skill!==undefined&&!!c.skills[beat.event.skill]));
   return <article className={`unit side-${f.side} ${marcas} ${atua}`} data-fighter={f.uid} data-slot={f.slot} data-combat-role={linkedSource&&linkedTarget?'both':linkedSource?'source':linkedTarget?'target':'idle'} style={{'--character':c.color,...(proprio?{'--rn-cor':proprio.cor,'--rn-fundo':proprio.fundo}:{}),...atuaStyle} as React.CSSProperties}>
     <div className="unit-medal">
@@ -174,7 +190,12 @@ export function ArenaUnit({fighter:f,battle,beat,onInspect,numbers,threatened,li
           <circle cx="50" cy="50" r="47" className="attack-ring-ticks" pathLength="100" strokeDasharray=".4 9.6"/>
           <circle cx="50" cy="50" r="47" className="attack-ring-fill" pathLength="100" strokeDasharray={`${Math.min(100,ring*100)} 100`}/>
         </svg>
-        {preparing&&<svg className="prep-ring" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="41" pathLength="100" strokeDasharray={`${f.cast?Math.max(0,100*f.cast.elapsed/f.cast.duration):preparandoUnica?Math.min(100,100*(beat?.elapsed??0)/PREPARO_DA_UNICA):0} 100`}/></svg>}
+        {preparing&&<svg className="prep-ring" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="41" pathLength="100" strokeDasharray={`${preparandoUnica?Math.min(100,100*(beat?.elapsed??0)/PREPARO_DA_UNICA):f.cast?Math.max(0,100*f.cast.elapsed/f.cast.duration):0} 100`}/></svg>}
+        {/* a bolinha da Mecânica única, como uma quarta habilidade: enche com o relógio dela e acende ao ativar */}
+        {unica&&!out&&<span className={`unica-bolinha${jeito==='sempre'?' sempre':''}${ativando?' ativando':''}${cargaDaUnica>=100&&!ativando?' cheia':''}`} aria-hidden="true">
+          <svg className="ub-anel" viewBox="0 0 36 36"><circle cx="18" cy="18" r="15.5" className="ub-trilho"/><circle cx="18" cy="18" r="15.5" pathLength="100" className="ub-carga" strokeDasharray={`${cargaDaUnica} 100`}/></svg>
+          <Sparkles size={14} strokeWidth={2.4}/>
+        </span>}
         {threatened&&<span className="unit-brackets" aria-hidden="true"/>}
         {broken&&<span className="unit-break" aria-hidden="true">×</span>}
         {tempo&&<span className={`unit-tempo ${tempo.value!>0?'advanced':'delayed'}`} aria-label={tempo.label}><AuxIcon id={tempo.value!>0?'tempo-up':'tempo-down'} size={18}/></span>}
@@ -205,9 +226,9 @@ export function ArenaUnit({fighter:f,battle,beat,onInspect,numbers,threatened,li
       {(out||advantageActive||critical||shield>0)&&<span className={`unit-flag ${out?'flag-out':advantageActive?'flag-advantage':critical?'flag-critical':'flag-shield'}`} aria-hidden="true">{renascendo?<EmblemaDoRenascer id={c.id} size={12}/>:out?<Skull size={12}/>:advantageActive?<AuxIcon id="domain" size={13}/>:critical?<HeartPulse size={12}/>:<Shield size={12}/>}</span>}
       {ativando&&preparandoUnica&&<div key={`up${beat?.event.id??0}-${ativando.eventos[0]??0}`} className="unit-cast"><AuxIcon id="preparing" size={13}/><span>{nomeDaAtivacao(beat,ativando,c.id)}</span></div>}
       {ativando&&!preparandoUnica&&<div key={`un${beat?.event.id??0}-${ativando.eventos[0]??0}`} className="unit-cast unit-skill-name unit-unica-name"><Sparkles size={14} strokeWidth={2.6}/><span>{nomeDaAtivacao(beat,ativando,c.id)}</span></div>}
-      {!ativando&&preparing&&<div className="unit-cast"><AuxIcon id="preparing" size={13}/><span>{f.cast?c.skills[f.cast.skill].name:beat?.event.label}</span>{seloVisivel&&<Selo key={`p${seloVisivel.chave}`} selo={seloVisivel}/>}</div>}
+      {!ativando&&preparing&&<div className="unit-cast"><AuxIcon id="preparing" size={13}/><span>{f.cast?c.skills[f.cast.skill].name:beat?.event.label}</span></div>}
       {/* a habilidade saindo, com ou sem Preparo: o nome aparece enquanto o golpe acontece */}
-      {!ativando&&!preparing&&source&&beat?.event.kind==='skill'&&beat.event.skill!==undefined&&c.skills[beat.event.skill]&&<div key={beat.event.id} className="unit-cast unit-skill-name" style={{"--character":c.color} as React.CSSProperties}><SkillIcon type={c.skills[beat.event.skill].icon} size={15} characterId={c.id} skillId={c.skills[beat.event.skill].id}/><span>{c.skills[beat.event.skill].name}</span>{seloVisivel&&<Selo key={`h${seloVisivel.chave}`} selo={seloVisivel}/>}</div>}
+      {!ativando&&!preparing&&source&&beat?.event.kind==='skill'&&beat.event.skill!==undefined&&c.skills[beat.event.skill]&&<div key={beat.event.id} className="unit-cast unit-skill-name" style={{"--character":c.color} as React.CSSProperties}><SkillIcon type={c.skills[beat.event.skill].icon} size={15} characterId={c.id} skillId={c.skills[beat.event.skill].id}/><span>{c.skills[beat.event.skill].name}</span></div>}
       {broken&&<div className="unit-interrupt"><AuxIcon id="interrupt" size={13}/>{broken.label.includes('atrasada')?'ATRASADO':'INTERROMPIDO'}</div>}
       {tempo&&<span className="unit-tempo-reason">{tempo.label}</span>}
     </div>
@@ -259,6 +280,13 @@ function Selo({selo}:{selo:{rotulo:string;tipo:'unica'|'traco'|'mecanica';inicio
 }
 
 /** O nome da ativação: o aviso dela quando a mecânica tem efeito próprio (o "Vai explodir!" do Cell, o "Black Flash" do Yuji), senão o nome da mecânica. */
+/** Quanto do relógio da mecânica já passou (0 a 1), ou null se ela não anda por tempo. */
+function cargaDoRelogio(f:Fighter){
+  const s=f.u;if(!s)return null;let carga:number|null=null;
+  for(const k in s){if(!k.startsWith('relogio_')||k.endsWith('_volta'))continue;const volta=s[`${k}_volta`];if(!volta)continue;
+    const p=Math.min(1,Math.max(0,1-s[k]!/volta));carga=carga===null?p:Math.max(carga,p);}
+  return carga;
+}
 function nomeDaAtivacao(beat:Beat|null|undefined,passo:{eventos:number[];rotulo?:string},personagem:string){
   const aviso=beat?.events.find(e=>e.kind==='unica'&&passo.eventos.includes(e.id))?.label;
   return aviso&&EFEITO_DA_UNICA[personagem]?aviso:passo.rotulo;

@@ -11,7 +11,8 @@
  * saem daqui: direção em pixels até o alvo, distância, duração do beat.
  */
 import type { Battle } from '../engine/types';
-import type { Beat } from './director';
+import { ladoDaUnica, type Beat } from './director';
+import { entregaDaUnica } from './unicas-efeitos';
 import { combatLinks } from './combat-links';
 import { distanciaDoGolpe } from './distancia';
 import { profileFor } from './vfxProfiles';
@@ -42,6 +43,11 @@ function estiloDeQuemAge(beat: Beat, battle: Battle, area: boolean): ActStyle | 
   const { event } = beat;
   if (event.kind === 'cast') return 'cast';
   if (event.kind === 'interrupt') return 'interrupt';
+  // a Mecânica única de perto: quem ativou vai até o alvo, como numa habilidade corpo a corpo (src/presentation/unicas-efeitos.ts)
+  if (event.kind === 'unica' && beat.traco) {
+    const dono = battle.fighters.find((f) => f.uid === event.source);
+    return dono && entregaDaUnica(dono.characterId, ladoDaUnica(event, battle)).modo === 'corpo' ? 'melee' : undefined;
+  }
   if (event.kind !== 'basic' && event.kind !== 'skill') return undefined;
   const links = combatLinks(beat, battle).filter((l) => l.source === event.source);
   const ataca = links.some((l) => l.kind === 'attack' || l.kind === 'interrupt');

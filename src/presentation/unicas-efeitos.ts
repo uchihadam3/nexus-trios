@@ -420,6 +420,183 @@ export const EFEITO_DA_UNICA: Record<string, Record<string, { familia: VfxFamily
 };
 
 /** O efeito de uma ativação: o próprio dela, ou o círculo de runas de quem ainda não tem. */
+/*
+ * Como a Mecânica única chega no alvo, igual a uma habilidade (pedido do jogador: "a Genki Dama tem que sair do
+ * Goku e ir até no inimigo… se é longa distância, faz longa distância; é um projétil, é um raio, é uma cura, é de
+ * perto, o personagem tem que ir até ele; é uma defesa, uma armadura…").
+ *
+ * - voa: um projétil sai de quem ativou e voa até o alvo (a Genki Dama, o Batarangue);
+ * - raio: um feixe cresce de quem ativou até o alvo;
+ * - corpo: quem ativou vai até o alvo e bate de perto;
+ * - aliado: a cura ou a proteção viaja até o aliado;
+ * - si: em quem ativou (aura, armadura, transformação);
+ * - alvo: acontece no próprio alvo, sem nada viajando (a maldição, o olhar, o golpe que já está acertando);
+ * - cai: vem de cima e cai no alvo (o meteoro, a bigorna).
+ *
+ * Sem nada aqui, o jeito sai do que a mecânica faz: no rival, voa; no aliado, viaja até ele; sem alvo, em si.
+ */
+export type ModoDaEntrega = 'voa' | 'raio' | 'corpo' | 'aliado' | 'si' | 'alvo' | 'cai';
+export interface Entrega {
+  modo: ModoDaEntrega;
+  /** o que voa (uma folha em laço) */
+  viagem?: string;
+  /** o feixe (uma folha em laço, esticada de quem ativou até o alvo) */
+  faixa?: string;
+  /** a preparação própria (a Genki Dama se formando em cima do Goku), no lugar da do personagem */
+  preparo?: string;
+  /** atinge todos os rivais: viaja até cada um (o Tiro devastador do Megatron, o Fus Ro Dah) */
+  area?: boolean;
+}
+/** Quanto a entrega leva, do fim do preparo até o impacto. */
+export const VOO_DA_UNICA: Record<ModoDaEntrega, number> = { voa: 0.55, raio: 0.32, corpo: 0.3, aliado: 0.45, si: 0, alvo: 0, cai: 0.5 };
+export const ENTREGA_DA_UNICA: Record<string, Partial<Entrega>> = {
+  goku: { modo: 'voa', viagem: 'genki_dama_voo', preparo: 'genki_dama_reune' },
+  megatron: { modo: 'raio', faixa: 'feixe_pesado', preparo: 'megatron_preparo', area: true },
+  sasuke: { modo: 'raio', faixa: 'laser' },
+  light: { modo: 'alvo' },
+  pikachu: { modo: 'raio', faixa: 'trovao_faixa' },
+  batman: { modo: 'voa', viagem: 'batarangue_voando' },
+  strange: { modo: 'voa', viagem: 'portal_bala' },
+  wonderwoman: { modo: 'voa', viagem: 'laco_dourado_voo' },
+  ironman: { modo: 'raio', faixa: 'unibeam_faixa' },
+  kakashi: { modo: 'alvo' },
+  tanjiro: { modo: 'raio', faixa: 'feixe' },
+  yuji: { modo: 'alvo' },
+  rukia: { modo: 'raio', faixa: 'diamante_faixa' },
+  aizen: { modo: 'alvo' },
+  mikasa: { modo: 'corpo' },
+  levi: { modo: 'alvo' },
+  hisoka: { modo: 'raio', faixa: 'feixe' },
+  kurapika: { modo: 'raio', faixa: 'dreno' },
+  roy: { modo: 'alvo' },
+  dio: { modo: 'cai', viagem: 'pedra_bloco' },
+  makima: { modo: 'alvo' },
+  yor: { modo: 'corpo' },
+  yugi: { modo: 'voa', viagem: 'bola_ki' },
+  kaiba: { modo: 'raio', faixa: 'feixe_pesado' },
+  daredevil: { modo: 'alvo' },
+  punisher: { modo: 'corpo' },
+  moonknight: { modo: 'voa', viagem: 'crescente' },
+  storm: { modo: 'raio', faixa: 'raio_faixa' },
+  rogue: { modo: 'alvo' },
+  loki: { modo: 'alvo' },
+  silversurfer: { modo: 'raio', faixa: 'feixe' },
+  galactus: { modo: 'alvo' },
+  rocket: { modo: 'alvo' },
+  cyborg: { modo: 'raio', faixa: 'laser' },
+  samus: { modo: 'voa', viagem: 'estilhaco' },
+  snake: { modo: 'voa', viagem: 'tiro' },
+  raidenmgr: { modo: 'alvo' },
+  sonic: { modo: 'alvo' },
+  zeromm: { modo: 'raio', faixa: 'raio_faixa' },
+  scorpion: { modo: 'raio', faixa: 'feixe' },
+  subzero: { modo: 'alvo' },
+  tuob: { modo: 'voa', viagem: 'laser_curto' },
+  sekiro: { modo: 'alvo' },
+  kirby: { modo: 'raio', faixa: 'dreno' },
+  donkeykong: { modo: 'alvo' },
+  alucardcv: { modo: 'voa', viagem: 'corvo_voando' },
+  seiya: { modo: 'si' },
+  majinbuu: { modo: 'raio', faixa: 'dreno' },
+  shiryu: { modo: 'si' },
+  hyoga: { modo: 'raio', faixa: 'diamante_faixa' },
+  shaka: { modo: 'alvo' },
+  camus: { modo: 'raio', faixa: 'aurora_faixa' },
+  hadescz: { modo: 'alvo' },
+  madara: { modo: 'cai', viagem: 'bola_de_fogo', area: true },
+  minato: { modo: 'alvo' },
+  mewtwo: { modo: 'raio', faixa: 'feixe' },
+  charizard: { modo: 'alvo' },
+  garou: { modo: 'si' },
+  hiei: { modo: 'si' },
+  coringa: { modo: 'alvo' },
+  darkseid: { modo: 'alvo' },
+  donatello: { modo: 'raio', faixa: 'laser' },
+  constantine: { modo: 'raio', faixa: 'feixe' },
+  rick: { modo: 'voa', viagem: 'portal_bala' },
+  finn: { modo: 'alvo' },
+  donald: { modo: 'corpo' },
+  stitch: { modo: 'alvo' },
+  woody: { modo: 'alvo' },
+  srincrivel: { modo: 'voa', viagem: 'pedra_bloco' },
+  toph: { modo: 'alvo' },
+  patolino: { modo: 'alvo' },
+  coiote: { modo: 'cai', viagem: 'pedra_bloco' },
+  marvin: { modo: 'raio', faixa: 'laser' },
+  pantera: { modo: 'raio', faixa: 'dreno' },
+  shredder: { modo: 'alvo' },
+  caseyjones: { modo: 'alvo' },
+  shera: { modo: 'voa', viagem: 'laco_dourado_voo' },
+  peter: { modo: 'corpo' },
+  stewie: { modo: 'raio', faixa: 'laser' },
+  cartman: { modo: 'alvo' },
+  billcipher: { modo: 'raio', faixa: 'dreno' },
+  plankton: { modo: 'raio', faixa: 'dreno' },
+  katara: { modo: 'raio', faixa: 'dreno' },
+  sailormercury: { modo: 'raio', faixa: 'laser' },
+  kurama: { modo: 'alvo' },
+  ken: { modo: 'alvo' },
+  heihachi: { modo: 'corpo' },
+  marceline: { modo: 'raio', faixa: 'dreno' },
+  robin: { modo: 'voa', viagem: 'batarangue_voando' },
+  nero: { modo: 'raio', faixa: 'feixe' },
+  lawliet: { modo: 'alvo' },
+  morty: { modo: 'si' },
+  velma: { modo: 'alvo' },
+  fred: { modo: 'alvo' },
+  kitana: { modo: 'voa', viagem: 'kienzan_disco' },
+  gwen: { modo: 'raio', faixa: 'feixe' },
+  blackwidow: { modo: 'alvo' },
+  drax: { modo: 'alvo' },
+  catwoman: { modo: 'alvo' },
+  nightwing: { modo: 'alvo' },
+  dipper: { modo: 'alvo' },
+  nemesis: { modo: 'alvo' },
+  zeus: { modo: 'raio', faixa: 'trovao_faixa' },
+  medusa: { modo: 'raio', faixa: 'feixe' },
+  anubis: { modo: 'si' },
+  odin: { modo: 'voa', viagem: 'corvo_voando' },
+  michaelmyers: { modo: 'alvo' },
+  chucky: { modo: 'raio', faixa: 'dreno' },
+  ghostface: { modo: 'alvo' },
+  pinhead: { modo: 'raio', faixa: 'dreno' },
+  samara: { modo: 'alvo' },
+  valak: { modo: 'alvo' },
+  xenomorph: { modo: 'alvo' },
+  darthvader: { modo: 'alvo' },
+  neo: { modo: 'si' },
+  indianajones: { modo: 'raio', faixa: 'feixe' },
+  harrypotter: { modo: 'raio', faixa: 'feixe' },
+  scar: { modo: 'alvo' },
+  ursula: { modo: 'raio', faixa: 'dreno' },
+  todoroki: { modo: 'raio', faixa: 'feixe' },
+  lelouch: { modo: 'raio', faixa: 'laser' },
+  inuyasha: { modo: 'raio', faixa: 'feixe_pesado' },
+  sesshomaru: { modo: 'alvo' },
+  kenshin: { modo: 'si' },
+  asta: { modo: 'alvo' },
+  hinata: { modo: 'alvo' },
+  garnet: { modo: 'si' },
+  johnnybravo: { modo: 'alvo' },
+  aku: { modo: 'alvo' },
+  creeper: { modo: 'corpo' },
+  crash: { modo: 'si' },
+  sans: { modo: 'si' },
+  cuphead: { modo: 'raio', faixa: 'feixe_pesado' },
+  dovahkiin: { modo: 'voa', viagem: 'onda_choque_voo', area: true },
+  goro: { modo: 'si' },
+  yoshi: { modo: 'raio', faixa: 'dreno' },
+};
+/** O jeito da entrega de uma ativação: `lado` é de quem a mecânica atinge, visto por quem ativou. */
+export function entregaDaUnica(personagem: string, lado: 'rival' | 'aliado' | 'si'): Entrega {
+  const dela = ENTREGA_DA_UNICA[personagem];
+  if (dela?.area && dela.modo && dela.modo !== 'si') return { modo: dela.modo, viagem: dela.viagem ?? 'orbe', faixa: dela.faixa ?? 'feixe', preparo: dela.preparo, area: true };
+  if (lado === 'si' || dela?.modo === 'si') return { modo: 'si', preparo: dela?.preparo };
+  if (dela?.modo === 'alvo') return { modo: 'alvo', preparo: dela.preparo };
+  const modo: ModoDaEntrega = dela?.modo ? (lado === 'aliado' && dela.modo !== 'aliado' ? 'aliado' : dela.modo) : lado === 'rival' ? 'voa' : 'aliado';
+  return { modo, viagem: dela?.viagem ?? 'orbe', faixa: dela?.faixa ?? 'feixe', preparo: dela?.preparo };
+}
+
 export function efeitoDaUnica(personagem: string, aviso: string): { familia: VfxFamily; som: string } {
   const dela = EFEITO_DA_UNICA[personagem];
   return dela?.[aviso] ?? dela?.['*'] ?? { familia: 'unica_ativa', som: 'unica-ativa' };
