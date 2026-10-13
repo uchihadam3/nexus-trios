@@ -2,7 +2,7 @@ import { useEffect,useRef,useState } from 'react';
 import { Flame,Hourglass,Shield,HeartPulse,Skull,Sparkles,Zap } from 'lucide-react';
 import { condicaoAtendida } from '../engine/battle';
 import type { Battle,Fighter,Status } from '../engine/types';
-import { passoAtual,revelado,type Beat } from '../presentation/director';
+import { PREPARO_DA_UNICA,passoAtual,revelado,type Beat } from '../presentation/director';
 import { PRESENTATION as P } from '../presentation/config';
 import { folha } from '../presentation/vfxProfiles';
 import { byId } from '../data/characters';
@@ -92,6 +92,8 @@ export function ArenaUnit({fighter:f,battle,beat,onInspect,numbers,threatened,li
    */
   const ativando=beat?.traco&&beat.passos?.[0]?.classe==='unica'&&beat.event.source===f.uid?beat.passos[0]
     :passo?.classe==='unica'&&passo.quem===f.uid?passo:undefined;
+  // sozinha, ela prepara antes igual a uma habilidade (src/presentation/preparo-da-unica.ts): anel, nome e o ícone de preparo
+  const preparandoUnica=!!ativando&&!!beat?.traco&&!impacted;
   /*
    * O selo do traço e da Mecânica única fica um tempo na cabeça, com efeito no retrato (pedido do jogador: "aparece
    * muito rápido… poderia ficar um pouquinho mais de tempo na cabeça deles… e tivesse efeito"). Não segura a luta: o
@@ -123,7 +125,7 @@ export function ArenaUnit({fighter:f,battle,beat,onInspect,numbers,threatened,li
   const broken=impacted?beat?.events.find(e=>revelado(beat,e)&&e.target===f.uid&&e.kind==='interrupt'):undefined;
   const tempo=impacted?beat?.events.find(e=>revelado(beat,e)&&e.target===f.uid&&e.kind==='tempo'):undefined;
   const acting=source&&['basic','skill'].includes(beat?.event.kind??'');
-  const preparing=!!f.cast||(source&&beat?.event.kind==='cast');
+  const preparing=!!f.cast||(source&&beat?.event.kind==='cast')||preparandoUnica;
   const out=f.hp<=0,critical=!out&&f.hp/f.maxHp<=P.criticalCondition;
   // caiu, mas vai renascer: fica em brasas em vez de "fora"
   const renascendo=out&&(f.renascendo??0)>0;
@@ -172,7 +174,7 @@ export function ArenaUnit({fighter:f,battle,beat,onInspect,numbers,threatened,li
           <circle cx="50" cy="50" r="47" className="attack-ring-ticks" pathLength="100" strokeDasharray=".4 9.6"/>
           <circle cx="50" cy="50" r="47" className="attack-ring-fill" pathLength="100" strokeDasharray={`${Math.min(100,ring*100)} 100`}/>
         </svg>
-        {preparing&&<svg className="prep-ring" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="41" pathLength="100" strokeDasharray={`${f.cast?Math.max(0,100*f.cast.elapsed/f.cast.duration):0} 100`}/></svg>}
+        {preparing&&<svg className="prep-ring" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="41" pathLength="100" strokeDasharray={`${f.cast?Math.max(0,100*f.cast.elapsed/f.cast.duration):preparandoUnica?Math.min(100,100*(beat?.elapsed??0)/PREPARO_DA_UNICA):0} 100`}/></svg>}
         {threatened&&<span className="unit-brackets" aria-hidden="true"/>}
         {broken&&<span className="unit-break" aria-hidden="true">×</span>}
         {tempo&&<span className={`unit-tempo ${tempo.value!>0?'advanced':'delayed'}`} aria-label={tempo.label}><AuxIcon id={tempo.value!>0?'tempo-up':'tempo-down'} size={18}/></span>}
@@ -194,14 +196,15 @@ export function ArenaUnit({fighter:f,battle,beat,onInspect,numbers,threatened,li
         {seloVisivel&&!comNome&&<Selo key={`r${seloVisivel.chave}`} selo={seloVisivel}/>}
         {seloVisivel&&seloVisivel.tipo!=='mecanica'&&<span key={`fx${seloVisivel.chave}`} className={`aura-ativa aura-${seloVisivel.tipo}${seloVisivel.sumindo?' sumindo':''}`} aria-hidden="true"><i/><i/><i/><i/><i/><i/><i/><i/></span>}
         {reagindo&&<span key={`a${reagindo.eventos[0]??0}`} className="reacao-anel" aria-hidden="true"/>}
-        {ativando&&<span key={`ua${beat?.event.id??0}-${ativando.eventos[0]??0}`} className="aura-ativa aura-unica aura-longa" aria-hidden="true"><i/><i/><i/><i/><i/><i/><i/><i/></span>}
+        {ativando&&!preparandoUnica&&<span key={`ua${beat?.event.id??0}-${ativando.eventos[0]??0}`} className="aura-ativa aura-unica aura-longa" aria-hidden="true"><i/><i/><i/><i/><i/><i/><i/><i/></span>}
         {/* a mini preparação: a energia roxa junta no retrato antes de a mecânica disparar */}
         {ativando&&<span key={`uc${beat?.event.id??0}-${ativando.eventos[0]??0}`} className="unica-carga" aria-hidden="true"><i/><i/><i/><i/><i/><i/></span>}
         {applied&&<span key={applied.id} className="status-pop">{applied.status&&<img src={`/assets/statuses/${applied.status}.png`} alt=""/>}{applied.label}</span>}
         {discovered&&<span key={discovered.id} className="discovery-pop">{discovered.label}</span>}
       </button>
       {(out||advantageActive||critical||shield>0)&&<span className={`unit-flag ${out?'flag-out':advantageActive?'flag-advantage':critical?'flag-critical':'flag-shield'}`} aria-hidden="true">{renascendo?<EmblemaDoRenascer id={c.id} size={12}/>:out?<Skull size={12}/>:advantageActive?<AuxIcon id="domain" size={13}/>:critical?<HeartPulse size={12}/>:<Shield size={12}/>}</span>}
-      {ativando&&<div key={`un${beat?.event.id??0}-${ativando.eventos[0]??0}`} className="unit-cast unit-skill-name unit-unica-name"><Sparkles size={14} strokeWidth={2.6}/><span>{nomeDaAtivacao(beat,ativando,c.id)}</span></div>}
+      {ativando&&preparandoUnica&&<div key={`up${beat?.event.id??0}-${ativando.eventos[0]??0}`} className="unit-cast"><AuxIcon id="preparing" size={13}/><span>{nomeDaAtivacao(beat,ativando,c.id)}</span></div>}
+      {ativando&&!preparandoUnica&&<div key={`un${beat?.event.id??0}-${ativando.eventos[0]??0}`} className="unit-cast unit-skill-name unit-unica-name"><Sparkles size={14} strokeWidth={2.6}/><span>{nomeDaAtivacao(beat,ativando,c.id)}</span></div>}
       {!ativando&&preparing&&<div className="unit-cast"><AuxIcon id="preparing" size={13}/><span>{f.cast?c.skills[f.cast.skill].name:beat?.event.label}</span>{seloVisivel&&<Selo key={`p${seloVisivel.chave}`} selo={seloVisivel}/>}</div>}
       {/* a habilidade saindo, com ou sem Preparo: o nome aparece enquanto o golpe acontece */}
       {!ativando&&!preparing&&source&&beat?.event.kind==='skill'&&beat.event.skill!==undefined&&c.skills[beat.event.skill]&&<div key={beat.event.id} className="unit-cast unit-skill-name" style={{"--character":c.color} as React.CSSProperties}><SkillIcon type={c.skills[beat.event.skill].icon} size={15} characterId={c.id} skillId={c.skills[beat.event.skill].id}/><span>{c.skills[beat.event.skill].name}</span>{seloVisivel&&<Selo key={`h${seloVisivel.chave}`} selo={seloVisivel}/>}</div>}

@@ -22,6 +22,7 @@ import { PRIORIDADE,type Sound } from './audio/cues';
 import { battleAudio,faixaDaLuta } from './lib/audio';
 import { efeitoDaUnica } from './presentation/unicas-efeitos';
 import { createDirection,restoreDirection,checkpointDirection,advanceDirection,PREPARO_DA_UNICA,type Direction,type Beat,type BeatTrace } from './presentation/director';
+import { preparoDaUnica } from './presentation/preparo-da-unica';
 import { PRESENTATION as P } from './presentation/config';
 import type { Battle, BattleEvent } from './engine/types';
 import { addSynergies,summarizeBattle } from './engine/run-summary';
@@ -304,6 +305,8 @@ export default function App(){
       if(ativo?.traco&&ativo.passos?.[0]?.classe==='unica'&&unicaTocada.current!==ativo.event.id&&!mudo){
         unicaTocada.current=ativo.event.id;
         const dono=ativo.after.fighters.find(f=>f.uid===ativo.event.source);
+        // o preparo soa como o de uma habilidade (o som de carregar do personagem) e o efeito dela sai no fim dele
+        if(dono)battleAudio.sound(preparoDaUnica(dono.characterId).som,PRIORIDADE.habilidade,0,ativo.event.id*10+6);
         if(dono)battleAudio.sound(efeitoDaUnica(dono.characterId,ativo.event.label).som as Sound,PRIORIDADE.habilidade,0,ativo.event.id*10+7,PREPARO_DA_UNICA);
       }
       if(ativo?.impacted&&ativo.passos&&ativo.etapa&&!mudo){

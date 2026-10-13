@@ -9,6 +9,7 @@ import { statuses as statusCatalog } from '../data/statuses';
 import { familia,folha,profileFor,type VfxFamily,type VfxProfile } from '../presentation/vfxProfiles';
 import { efeitoDaUnica } from '../presentation/unicas-efeitos';
 import { PREPARO_DA_UNICA } from '../presentation/director';
+import { preparoDaUnica } from '../presentation/preparo-da-unica';
 import { FAMILIA_DO_REVIVER, RENASCER_PROPRIO } from '../presentation/renascer-proprio';
 import { efeitosDoJeito,VOO_DO_QUIQUE } from '../presentation/jeito-efeito';
 import { FAMILIA_DA_INVOCACAO } from '../presentation/vfx-atribuicao';
@@ -277,6 +278,12 @@ export function BattleEffects({battle,beat,anchors,enabled,reduced,medal=80}:{ba
    */
   if(enabled&&beat&&size.w>0&&!reduced){
     const sozinha=!!beat.traco&&beat.passos?.[0]?.classe==='unica';
+    // o preparo dela, igual ao de uma habilidade: a folha de preparo do próprio personagem em laço sobre ele
+    const dono=sozinha&&!beat.impacted?battle.fighters.find(f=>f.uid===beat.event.source):undefined;
+    if(dono){
+      const p=point(dono.uid),t=medal*1.9;
+      nodes.push(camada(preparoDaUnica(dono.characterId).folha,{left:`${p.x}%`,top:`${p.y}%`,width:t,height:t},'fxl-laco',`unica-prep-${beat.event.id}`));
+    }
     (beat.passos??[]).forEach((passo,k)=>{
       if(passo.classe!=='unica')return;
       // sozinha: dispara no impacto, depois da mini preparação; no meio de um golpe: no passo dela, depois da mini preparação
