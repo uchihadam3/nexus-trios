@@ -17024,7 +17024,7 @@
   "bytes": 28640
  },
  "mu_achatado": {
-  "descricao": "Tom · a frigideira e o achatado",
+  "descricao": "Tom · achatado que volta à forma com molas",
   "quadros": 12,
   "grade": [
    3,
@@ -17035,7 +17035,7 @@
    192
   ],
   "laco": false,
-  "bytes": 23686
+  "bytes": 11326
  },
  "mu_acme": {
   "descricao": "Coiote · a bigorna ACME",
@@ -17360,7 +17360,7 @@
   "bytes": 25188
  },
  "mu_banana": {
-  "descricao": "Donkey Kong · a casca de banana",
+  "descricao": "Donkey Kong · a casca de banana caindo e o escorregão",
   "quadros": 12,
   "grade": [
    3,
@@ -17371,7 +17371,7 @@
    192
   ],
   "laco": false,
-  "bytes": 21586
+  "bytes": 10106
  },
  "mu_batarangue": {
   "descricao": "Batman · o batarangue cravando e as faíscas",
@@ -17780,7 +17780,7 @@
   "bytes": 45060
  },
  "mu_chantagem": {
-  "descricao": "Cartman · o envelope e as moedas",
+  "descricao": "Cartman · o envelope da chantagem e o cadeado fechando",
   "quadros": 12,
   "grade": [
    3,
@@ -17791,7 +17791,7 @@
    192
   ],
   "laco": false,
-  "bytes": 15254
+  "bytes": 4900
  },
  "mu_cheiro_de_sangue": {
   "descricao": "Sekhmet · o sangue e as garras",
@@ -17906,7 +17906,7 @@
   "bytes": 22230
  },
  "mu_cogumelo": {
-  "descricao": "Mario · o Super Cogumelo",
+  "descricao": "Mario · o Super Cogumelo pulando e o crescer em degraus",
   "quadros": 12,
   "grade": [
    3,
@@ -17917,7 +17917,7 @@
    192
   ],
   "laco": false,
-  "bytes": 30666
+  "bytes": 33114
  },
  "mu_combo_tifa": {
   "descricao": "Tifa · os socos em sequência",
@@ -17990,7 +17990,7 @@
   "bytes": 37798
  },
  "mu_contra_golpe": {
-  "descricao": "Splinter · o contra-golpe",
+  "descricao": "Mestre Splinter · o bastão varrendo e a seta do contra-golpe",
   "quadros": 12,
   "grade": [
    3,
@@ -18001,7 +18001,7 @@
    192
   ],
   "laco": false,
-  "bytes": 22244
+  "bytes": 11990
  },
  "mu_copia": {
   "descricao": "Kakashi · o pergaminho do jutsu copiado",
@@ -18046,7 +18046,7 @@
   "bytes": 23630
  },
  "mu_coragem_luigi": {
-  "descricao": "Luigi · a lanterna e a coragem",
+  "descricao": "Luigi · a chama verde da coragem e o boné com L",
   "quadros": 12,
   "grade": [
    3,
@@ -18057,7 +18057,7 @@
    192
   ],
   "laco": false,
-  "bytes": 35764
+  "bytes": 32726
  },
  "mu_cordinha": {
   "descricao": "Woody · a cordinha, o chapéu e a estrela",
@@ -18326,7 +18326,7 @@
   "bytes": 17338
  },
  "mu_desastrado": {
-  "descricao": "Pateta · o tombo e as estrelinhas",
+  "descricao": "Pateta · o bonk e as estrelas de tontura",
   "quadros": 12,
   "grade": [
    3,
@@ -18337,7 +18337,7 @@
    192
   ],
   "laco": false,
-  "bytes": 30332
+  "bytes": 15792
  },
  "mu_desejo": {
   "descricao": "Gênio · a lâmpada e a fumaça",
@@ -18984,7 +18984,7 @@
   "bytes": 39568
  },
  "mu_estica_jake": {
-  "descricao": "Jake · estica e protege",
+  "descricao": "Jake · o corpo esticando em arco por cima do trio",
   "quadros": 12,
   "grade": [
    3,
@@ -18995,7 +18995,7 @@
    192
   ],
   "laco": false,
-  "bytes": 32394
+  "bytes": 16802
  },
  "mu_estilo": {
   "descricao": "Dante · os disparos e o selo de estilo",
@@ -19026,7 +19026,7 @@
   "bytes": 25738
  },
  "mu_evoluiu": {
-  "descricao": "Garou · o Punho da Água Corrente",
+  "descricao": "Garou · as escamas cobrindo e a seta de evolução",
   "quadros": 12,
   "grade": [
    3,
@@ -19037,7 +19037,7 @@
    192
   ],
   "laco": false,
-  "bytes": 23330
+  "bytes": 10762
  },
  "mu_exercito": {
   "descricao": "Rambo · as balas e a flecha",
@@ -19096,7 +19096,7 @@
   "bytes": 11274
  },
  "mu_faca": {
-  "descricao": "Leon · a faca e a faísca do aparo",
+  "descricao": "Leon · a faca girando e o corte em X",
   "quadros": 12,
   "grade": [
    3,
@@ -19107,7 +19107,7 @@
    192
   ],
   "laco": false,
-  "bytes": 12190
+  "bytes": 18750
  },
  "mu_familiar": {
   "descricao": "Alucard · o familiar",
@@ -19278,7 +19278,7 @@
   "bytes": 40080
  },
  "mu_formula": {
-  "descricao": "Plankton · a fórmula roubada",
+  "descricao": "Plankton · o frasco sugando as gotas de Carga",
   "quadros": 12,
   "grade": [
    3,
@@ -19289,7 +19289,7 @@
    192
   ],
   "laco": false,
-  "bytes": 27166
+  "bytes": 22432
  },
  "mu_fraco": {
   "descricao": "Shao Kahn · o martelo da ira",
@@ -19418,7 +19418,7 @@
   "bytes": 19042
  },
  "mu_galo": {
-  "descricao": "Peter · a briga com o galo",
+  "descricao": "Peter Griffin · a nuvem de briga com estrelas",
   "quadros": 12,
   "grade": [
    3,
@@ -19429,7 +19429,7 @@
    192
   ],
   "laco": false,
-  "bytes": 39600
+  "bytes": 48530
  },
  "mu_gancho": {
   "descricao": "Batman · o cabo do gancho e o escudo do morcego",
@@ -19544,7 +19544,7 @@
   "bytes": 55644
  },
  "mu_goool": {
-  "descricao": "Casey Jones · o taco e o disco",
+  "descricao": "Casey Jones · o taco rodando e a pancada com o disco",
   "quadros": 12,
   "grade": [
    3,
@@ -19555,7 +19555,7 @@
    192
   ],
   "laco": false,
-  "bytes": 19126
+  "bytes": 11042
  },
  "mu_grayskull": {
   "descricao": "He-Man · a Espada do Poder e o raio",
@@ -19782,7 +19782,7 @@
   "bytes": 31382
  },
  "mu_improviso": {
-  "descricao": "Michelangelo · o nunchaku e a pizza",
+  "descricao": "Michelangelo · os nunchakus girando e os dados do dano",
   "quadros": 12,
   "grade": [
    3,
@@ -19793,7 +19793,7 @@
    192
   ],
   "laco": false,
-  "bytes": 11676
+  "bytes": 10720
  },
  "mu_imune": {
   "descricao": "Rimuru · o slime e a análise",
@@ -19824,7 +19824,7 @@
   "bytes": 31436
  },
  "mu_infinito": {
-  "descricao": "Buzz · as asas, o laser e o voo",
+  "descricao": "Buzz · o rastro do voo desenhando o infinito",
   "quadros": 12,
   "grade": [
    3,
@@ -19835,10 +19835,10 @@
    192
   ],
   "laco": false,
-  "bytes": 15596
+  "bytes": 9346
  },
  "mu_inibidores": {
-  "descricao": "Shadow · os inibidores caindo e o caos",
+  "descricao": "Shadow · os anéis inibidores voando e a aura explodindo",
   "quadros": 12,
   "grade": [
    3,
@@ -19849,7 +19849,7 @@
    192
   ],
   "laco": false,
-  "bytes": 65644
+  "bytes": 34892
  },
  "mu_instinto": {
   "descricao": "Lion-O · o Olho de Thundera",
@@ -20062,7 +20062,7 @@
   "bytes": 49150
  },
  "mu_kikoho": {
-  "descricao": "Tenshinhan · o Kikoho",
+  "descricao": "Tenshinhan · o triângulo e o Kikoho esmagando",
   "quadros": 12,
   "grade": [
    3,
@@ -20073,10 +20073,10 @@
    192
   ],
   "laco": false,
-  "bytes": 23348
+  "bytes": 14802
  },
  "mu_kuririn_nao": {
-  "descricao": "Kuririn · os seis pontos e a fúria dourada",
+  "descricao": "Kuririn · a explosão e as auras de raiva dos aliados",
   "quadros": 12,
   "grade": [
    3,
@@ -20087,7 +20087,7 @@
    192
   ],
   "laco": false,
-  "bytes": 67182
+  "bytes": 44134
  },
  "mu_laco": {
   "descricao": "Mulher-Maravilha · o Laço da verdade apertando",
@@ -20482,7 +20482,7 @@
   "bytes": 24338
  },
  "mu_nao_fui": {
-  "descricao": "Bart · o skate e a seta",
+  "descricao": "Bart · a seta da culpa apontando para o lado",
   "quadros": 12,
   "grade": [
    3,
@@ -20493,7 +20493,7 @@
    192
   ],
   "laco": false,
-  "bytes": 13706
+  "bytes": 10912
  },
  "mu_necroplasma": {
   "descricao": "Spawn · as correntes e a capa",
@@ -20776,7 +20776,7 @@
   "bytes": 25038
  },
  "mu_parry": {
-  "descricao": "Ken · o parry e o Shoryuken",
+  "descricao": "Ken Masters · o lampejo azul do parry e a chama do troco",
   "quadros": 12,
   "grade": [
    3,
@@ -20787,7 +20787,7 @@
    192
   ],
   "laco": false,
-  "bytes": 19756
+  "bytes": 20824
  },
  "mu_particulas_pym": {
   "descricao": "Homem-Formiga · as partículas Pym",
@@ -20874,7 +20874,7 @@
   "bytes": 66310
  },
  "mu_penhasco": {
-  "descricao": "Heihachi · o punho que joga do penhasco",
+  "descricao": "Heihachi · a beira do penhasco quebrando e a queda",
   "quadros": 12,
   "grade": [
    3,
@@ -20885,10 +20885,10 @@
    192
   ],
   "laco": false,
-  "bytes": 19884
+  "bytes": 7494
  },
  "mu_penny": {
-  "descricao": "Bugiganga · o livro da Penny",
+  "descricao": "Bugiganga · o livro-computador da Penny e a mira",
   "quadros": 12,
   "grade": [
    3,
@@ -20899,7 +20899,7 @@
    192
   ],
   "laco": false,
-  "bytes": 12264
+  "bytes": 9560
  },
  "mu_perigosa": {
   "descricao": "Gamora · os cortes da espada",
@@ -21518,7 +21518,7 @@
   "bytes": 45392
  },
  "mu_robo_quebrou": {
-  "descricao": "Macaco Louco · o robô se desmontando",
+  "descricao": "Macaco Louco · a cúpula do robô rachando em pedaços",
   "quadros": 12,
   "grade": [
    3,
@@ -21529,7 +21529,7 @@
    192
   ],
   "laco": false,
-  "bytes": 35504
+  "bytes": 11442
  },
  "mu_rugido_leao": {
   "descricao": "Aiolia · o Relâmpago de Plasma",
@@ -21616,7 +21616,7 @@
   "bytes": 30446
  },
  "mu_scooby_lanche": {
-  "descricao": "Scooby-Doo · o Scooby-lanche",
+  "descricao": "Scooby · o biscoito mordido e os farelos",
   "quadros": 12,
   "grade": [
    3,
@@ -21627,7 +21627,7 @@
    192
   ],
   "laco": false,
-  "bytes": 20830
+  "bytes": 14830
  },
  "mu_seja_agua": {
   "descricao": "Spike · seja água",
@@ -21714,7 +21714,7 @@
   "bytes": 19300
  },
  "mu_sempre_junto": {
-  "descricao": "Robin · o bastão e o R",
+  "descricao": "Robin · os dois pássaros-rangues chegando juntos",
   "quadros": 12,
   "grade": [
    3,
@@ -21725,7 +21725,7 @@
    192
   ],
   "laco": false,
-  "bytes": 20292
+  "bytes": 10416
  },
  "mu_sentido_radar": {
   "descricao": "Demolidor · o radar",
@@ -21924,7 +21924,7 @@
   "bytes": 26330
  },
  "mu_strix": {
-  "descricao": "Loid · a mira travando e as barras de Carga",
+  "descricao": "Loid · o dossiê da Operação Strix e a Carga subindo",
   "quadros": 12,
   "grade": [
    3,
@@ -21935,7 +21935,7 @@
    192
   ],
   "laco": false,
-  "bytes": 17614
+  "bytes": 19170
  },
  "mu_sumiu": {
   "descricao": "Violeta · o campo de força e a silhueta que some",
@@ -22120,7 +22120,7 @@
   "bytes": 53948
  },
  "mu_terreno": {
-  "descricao": "Lara · a armadilha de dentes fechando",
+  "descricao": "Lara · o laço da armadilha fechando e prendendo",
   "quadros": 12,
   "grade": [
    3,
@@ -22131,7 +22131,7 @@
    192
   ],
   "laco": false,
-  "bytes": 13166
+  "bytes": 11682
  },
  "mu_tita": {
   "descricao": "King Kong · os punhos no peito",
@@ -22190,7 +22190,7 @@
   "bytes": 36732
  },
  "mu_tranquilizante": {
-  "descricao": "Snake · o alerta e o dardo",
+  "descricao": "Solid Snake · o dardo e os Z do sono subindo",
   "quadros": 12,
   "grade": [
    3,
@@ -22201,7 +22201,7 @@
    192
   ],
   "laco": false,
-  "bytes": 10086
+  "bytes": 6220
  },
  "mu_transmutacao": {
   "descricao": "Edward · a transmutação e as lanças de pedra",
