@@ -423,7 +423,11 @@
    dele (2px) — à esquerda, um pouco acima nos rivais (abaixo da barra de Vida) e um pouco abaixo no seu trio. Enche como uma habilidade e acende ao ativar. */
 .unica-bolinha{--ub:30px;--raio:calc(47% + 2px + var(--ub) / 2);position:absolute;left:calc(50% - var(--raio) * .72 - var(--ub) / 2);z-index:4;width:var(--ub);height:var(--ub);display:grid;place-items:center;border-radius:50%;
   background:radial-gradient(circle at 35% 30%,#4b2a78 0%,#26133f 55%,#140a24 100%);color:#e7d2ff;
-  box-shadow:inset 0 1px 0 #ffffff26,inset 0 -2px 4px #0008,0 0 0 1.5px #0d0816,0 3px 8px #000b;pointer-events:none;transition:filter .3s,transform .3s,box-shadow .3s}
+  box-shadow:inset 0 1px 0 #ffffff26,inset 0 -2px 4px #0008,0 0 0 1.5px #0d0816,0 3px 8px #000b;pointer-events:auto;cursor:pointer;transition:filter .3s,transform .3s,box-shadow .3s}
+/* tocar na bolinha abre a ficha da mecânica: a área de toque passa um pouco da bolinha */
+.unica-bolinha::before{content:'';position:absolute;inset:-7px;border-radius:50%}
+.unica-bolinha:active{transform:scale(.9)}
+.unica-bolinha:focus-visible{outline:2px solid var(--ub-cor);outline-offset:3px}
 .side-enemy .unica-bolinha{top:calc(50% - var(--raio) * .69 - var(--ub) / 2)}
 .side-player .unica-bolinha{top:calc(50% + var(--raio) * .69 - var(--ub) / 2)}
 /* em pé, as duas na mesma altura em volta do retrato: a do rival abaixo da Vida, a do trio acima do nome */

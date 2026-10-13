@@ -202,7 +202,8 @@ export function ArenaUnit({fighter:f,battle,beat,onInspect,numbers,threatened,li
         </svg>
         {preparing&&<svg className="prep-ring" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="41" pathLength="100" strokeDasharray={`${preparandoUnica?anelDaUnica:f.cast?Math.max(0,100*f.cast.elapsed/f.cast.duration):0} 100`}/></svg>}
         {/* a bolinha da Mecânica única, como uma quarta habilidade: enche com o relógio dela e acende ao ativar */}
-        {unica&&!out&&<span className={`unica-bolinha ub-${ativando?'ativando':bolinha.luz}${ativando?' ativando':''}`} style={corDaUnica?{'--ub-cor':corDaUnica} as React.CSSProperties:undefined} aria-hidden="true">
+        {unica&&!out&&<span className={`unica-bolinha ub-${ativando?'ativando':bolinha.luz}${ativando?' ativando':''}`} style={corDaUnica?{'--ub-cor':corDaUnica} as React.CSSProperties:undefined} role="button" tabIndex={0} aria-label={`Mecânica única de ${c.name}: ${unica.nome}`}
+          onClick={e=>{e.stopPropagation();onInspect({kind:'unica',fighter:f});}} onKeyDown={e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();e.stopPropagation();onInspect({kind:'unica',fighter:f});}}}>
           <svg className="ub-anel" viewBox="0 0 36 36">{bolinha.pontos&&!ativando
             /* as pilhas: o anel vira gomos, um por pilha, e cada pilha acende o seu */
             ?Array.from({length:bolinha.pontos.max},(_,i)=>{const n=bolinha.pontos!.max;return <circle key={i} cx="18" cy="18" r="15.5" pathLength="100" className={`ub-gomo${i<bolinha.pontos!.tem?' cheio':''}`} strokeDasharray={`${100/n-(n>1?7:0)} 100`} strokeDashoffset={-(i*100/n+(n>1?3.5:0))}/>;})
