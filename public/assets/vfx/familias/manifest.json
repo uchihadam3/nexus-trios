@@ -18102,7 +18102,7 @@
   "bytes": 65508
  },
  "mu_corpo_novo": {
-  "descricao": "Ultron · o corpo novo se montando",
+  "descricao": "Ultron · as placas montando o rosto e os olhos acendendo",
   "quadros": 12,
   "grade": [
    3,
@@ -18113,7 +18113,7 @@
    192
   ],
   "laco": false,
-  "bytes": 49232
+  "bytes": 12288
  },
  "mu_corrente_intercepta": {
   "descricao": "Shun · a corrente de Andrômeda",
@@ -18606,7 +18606,7 @@
   "bytes": 31416
  },
  "mu_doze_por_cento": {
-  "descricao": "Senhor das Estrelas · 12% de um plano",
+  "descricao": "Senhor das Estrelas · a roleta parando nos 12%",
   "quadros": 12,
   "grade": [
    3,
@@ -18617,7 +18617,7 @@
    192
   ],
   "laco": false,
-  "bytes": 9600
+  "bytes": 19238
  },
  "mu_dragao_malevola": {
   "descricao": "Malévola · os chifres e o fogo verde",
@@ -19614,7 +19614,7 @@
   "bytes": 42896
  },
  "mu_hahaha": {
-  "descricao": "Coringa · a carta e o gás do riso",
+  "descricao": "Coringa · os sorrisos gargalhando, confete e espirais",
   "quadros": 12,
   "grade": [
    3,
@@ -19625,7 +19625,7 @@
    192
   ],
   "laco": false,
-  "bytes": 38400
+  "bytes": 31262
  },
  "mu_hakai": {
   "descricao": "Beerus · o Hakai",
@@ -19866,7 +19866,7 @@
   "bytes": 38666
  },
  "mu_interrogatorio": {
-  "descricao": "Justiceiro · a caveira e os tiros traçantes",
+  "descricao": "Justiceiro · a caveira, o soco e a Carga caindo",
   "quadros": 12,
   "grade": [
    3,
@@ -19877,7 +19877,7 @@
    192
   ],
   "laco": false,
-  "bytes": 13556
+  "bytes": 18420
  },
  "mu_invento": {
   "descricao": "Senku · o frasco e a engrenagem",
@@ -20034,7 +20034,7 @@
   "bytes": 35214
  },
  "mu_kakuja": {
-  "descricao": "Kaneki · os tentáculos de kagune e o olho de ghoul",
+  "descricao": "Kaneki · os tentáculos do kagune e o sangue voltando",
   "quadros": 12,
   "grade": [
    3,
@@ -20045,7 +20045,7 @@
    192
   ],
   "laco": false,
-  "bytes": 22740
+  "bytes": 52470
  },
  "mu_katsu": {
   "descricao": "Deidara · os pássaros de argila: Katsu!",
@@ -20395,7 +20395,7 @@
    192
   ],
   "laco": false,
-  "bytes": 33668
+  "bytes": 33302
  },
  "mu_modo_serio": {
   "descricao": "Saitama · os olhos sérios, a aura subindo e a onda de choque",
@@ -21672,7 +21672,7 @@
   "bytes": 42988
  },
  "mu_sem_esperanca": {
-  "descricao": "Darkseid · os olhos ômega",
+  "descricao": "Darkseid · o Ômega e as cruzes de cura quebrando",
   "quadros": 12,
   "grade": [
    3,
@@ -21683,7 +21683,7 @@
    192
   ],
   "laco": false,
-  "bytes": 12002
+  "bytes": 15560
  },
  "mu_sem_folego": {
   "descricao": "Cheetara · a corrida e o fôlego acabando",
