@@ -1430,6 +1430,23 @@
    ],
    "bytes": 65263
   },
+  "barreira-de-yennefer": {
+   "arquivo": "barreira-de-yennefer.mp3",
+   "descricao": "Yennefer: a barreira mágica",
+   "versoes": [
+    0.0,
+    2.18,
+    4.4361,
+    6.5451
+   ],
+   "duracoes": [
+    2.1,
+    2.1761,
+    2.029,
+    2.132
+   ],
+   "bytes": 59035
+  },
   "barreira-eletrica": {
    "arquivo": "barreira-eletrica.mp3",
    "descricao": "Raiden: a barreira elétrica",
@@ -1667,6 +1684,23 @@
     0.9784
    ],
    "bytes": 36762
+  },
+  "bastoes-de-choque": {
+   "arquivo": "bastoes-de-choque.mp3",
+   "descricao": "Asa Noturna: os bastões elétricos",
+   "versoes": [
+    0.0,
+    1.6795,
+    3.4138,
+    4.9167
+   ],
+   "duracoes": [
+    1.5995,
+    1.6543,
+    1.4229,
+    1.5721
+   ],
+   "bytes": 80885
   },
   "bastoes-eletricos": {
    "arquivo": "bastoes-eletricos.mp3",
@@ -3776,6 +3810,23 @@
    ],
    "bytes": 25058
   },
+  "chicote-da-gata": {
+   "arquivo": "chicote-da-gata.mp3",
+   "descricao": "Mulher-Gato: o chicote",
+   "versoes": [
+    0.0,
+    1.1221,
+    2.3553,
+    3.4505
+   ],
+   "duracoes": [
+    1.0421,
+    1.1532,
+    1.0152,
+    1.0387
+   ],
+   "bytes": 41838
+  },
   "chicote-de-agua": {
    "arquivo": "chicote-de-agua.mp3",
    "descricao": "básico da Katara: a água e as gotas",
@@ -4524,6 +4575,23 @@
    ],
    "bytes": 44968
   },
+  "combo-do-asa-noturna": {
+   "arquivo": "combo-do-asa-noturna.mp3",
+   "descricao": "Asa Noturna: o combo",
+   "versoes": [
+    0.0,
+    2.18,
+    4.4361,
+    6.5451
+   ],
+   "duracoes": [
+    2.1,
+    2.1761,
+    2.029,
+    2.132
+   ],
+   "bytes": 108233
+  },
   "comedor-de-sonhos": {
    "arquivo": "comedor-de-sonhos.mp3",
    "descricao": "Gengar: o comedor de sonhos",
@@ -4642,6 +4710,23 @@
     1.4984
    ],
    "bytes": 42599
+  },
+  "consultar-o-diario": {
+   "arquivo": "consultar-o-diario.mp3",
+   "descricao": "Dipper: consultar o diário",
+   "versoes": [
+    0.0,
+    1.5366,
+    3.1523,
+    4.6015
+   ],
+   "duracoes": [
+    1.4566,
+    1.5357,
+    1.3691,
+    1.4478
+   ],
+   "bytes": 50403
   },
   "contra-ataque": {
    "arquivo": "contra-ataque.mp3",
@@ -6088,6 +6173,23 @@
    ],
    "bytes": 75143
   },
+  "dipper-preparo": {
+   "arquivo": "dipper-preparo.mp3",
+   "descricao": "Dipper: o diário folheando (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 62644
+  },
   "disco-solar": {
    "arquivo": "disco-solar.mp3",
    "descricao": "básico de Rá: o sol e o fogo",
@@ -6223,6 +6325,23 @@
     1.2183
    ],
    "bytes": 51100
+  },
+  "dissipar-de-yennefer": {
+   "arquivo": "dissipar-de-yennefer.mp3",
+   "descricao": "Yennefer: Dissipar",
+   "versoes": [
+    0.0,
+    2.38,
+    4.8434,
+    7.1456
+   ],
+   "duracoes": [
+    2.3,
+    2.3834,
+    2.2222,
+    2.3124
+   ],
+   "bytes": 71240
   },
   "distorcao": {
    "arquivo": "distorcao.mp3",
@@ -7515,6 +7634,23 @@
     1.0063
    ],
    "bytes": 38769
+  },
+  "espantalho-preparo": {
+   "arquivo": "espantalho-preparo.mp3",
+   "descricao": "Espantalho: a respiração e o gás (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 52613
   },
   "espera-alucardcv": {
    "arquivo": "espera-alucardcv.mp3",
@@ -9046,6 +9182,23 @@
    ],
    "bytes": 67279
   },
+  "foice-do-espantalho": {
+   "arquivo": "foice-do-espantalho.mp3",
+   "descricao": "Espantalho: a foice",
+   "versoes": [
+    0.0,
+    1.505,
+    3.0286,
+    4.4777
+   ],
+   "duracoes": [
+    1.425,
+    1.4436,
+    1.3691,
+    1.4376
+   ],
+   "bytes": 50996
+  },
   "fome-de-ghoul": {
    "arquivo": "fome-de-ghoul.mp3",
    "descricao": "Kaneki: o kakugan, o ar puxado e o coração",
@@ -10015,6 +10168,23 @@
    ],
    "bytes": 44101
   },
+  "garras-felinas": {
+   "arquivo": "garras-felinas.mp3",
+   "descricao": "Mulher-Gato: as garras",
+   "versoes": [
+    0.0,
+    1.2164,
+    2.4641,
+    3.643
+   ],
+   "duracoes": [
+    1.1364,
+    1.1677,
+    1.0989,
+    1.1605
+   ],
+   "bytes": 40090
+  },
   "garrote": {
    "arquivo": "garrote.mp3",
    "descricao": "Agente 47: o garrote",
@@ -10337,6 +10507,23 @@
     1.3558
    ],
    "bytes": 54061
+  },
+  "glitter": {
+   "arquivo": "glitter.mp3",
+   "descricao": "Mabel: o glitter",
+   "versoes": [
+    0.0,
+    1.5042,
+    2.9828,
+    4.3883
+   ],
+   "duracoes": [
+    1.4242,
+    1.3987,
+    1.3254,
+    1.4098
+   ],
+   "bytes": 51033
   },
   "godslayer": {
    "arquivo": "godslayer.mp3",
@@ -10949,6 +11136,23 @@
     1.5228
    ],
    "bytes": 58903
+  },
+  "grande-roubo": {
+   "arquivo": "grande-roubo.mp3",
+   "descricao": "Mulher-Gato: o grande roubo",
+   "versoes": [
+    0.0,
+    1.6479,
+    3.303,
+    4.9041
+   ],
+   "duracoes": [
+    1.5679,
+    1.5751,
+    1.5211,
+    1.5859
+   ],
+   "bytes": 59211
   },
   "gravidade": {
    "arquivo": "gravidade.mp3",
@@ -13619,6 +13823,23 @@
    ],
    "bytes": 50019
   },
+  "lanterna-de-dipper": {
+   "arquivo": "lanterna-de-dipper.mp3",
+   "descricao": "Dipper: a lanterna",
+   "versoes": [
+    0.0,
+    0.9977,
+    2.0196,
+    2.9798
+   ],
+   "duracoes": [
+    0.9177,
+    0.9419,
+    0.8802,
+    0.9233
+   ],
+   "bytes": 34346
+  },
   "lanterna-preparo": {
    "arquivo": "lanterna-preparo.mp3",
    "descricao": "Lanterna Verde: a lanterna zumbindo (antes do golpe)",
@@ -14264,6 +14485,23 @@
     1.2183
    ],
    "bytes": 52104
+  },
+  "mabel-mania": {
+   "arquivo": "mabel-mania.mp3",
+   "descricao": "Mabel: Mabel mania",
+   "versoes": [
+    0.0,
+    1.887,
+    3.8415,
+    5.6913
+   ],
+   "duracoes": [
+    1.807,
+    1.8745,
+    1.7698,
+    1.8581
+   ],
+   "bytes": 62920
   },
   "maca-de-rem": {
    "arquivo": "maca-de-rem.mp3",
@@ -15284,6 +15522,23 @@
     1.8879
    ],
    "bytes": 66765
+  },
+  "misterio-resolvido": {
+   "arquivo": "misterio-resolvido.mp3",
+   "descricao": "Dipper: mistério resolvido",
+   "versoes": [
+    0.0,
+    1.9954,
+    3.9857,
+    5.8588
+   ],
+   "duracoes": [
+    1.9154,
+    1.9104,
+    1.793,
+    1.8824
+   ],
+   "bytes": 57432
   },
   "mjolnir-impacto": {
    "arquivo": "mjolnir-impacto.mp3",
@@ -22476,6 +22731,23 @@
    ],
    "bytes": 66627
   },
+  "mulher-gato-preparo": {
+   "arquivo": "mulher-gato-preparo.mp3",
+   "descricao": "Mulher-Gato: o ronronar no escuro (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4115
+   ],
+   "bytes": 42129
+  },
   "multi-golpe": {
    "arquivo": "multi-golpe.mp3",
    "descricao": "rajada de golpes",
@@ -22781,6 +23053,23 @@
     0.9644
    ],
    "bytes": 40638
+  },
+  "nuvem-do-medo": {
+   "arquivo": "nuvem-do-medo.mp3",
+   "descricao": "Espantalho: o gás do medo",
+   "versoes": [
+    0.0,
+    2.38,
+    4.8434,
+    7.1456
+   ],
+   "duracoes": [
+    2.3,
+    2.3834,
+    2.2222,
+    2.335
+   ],
+   "bytes": 85900
   },
   "o-destruidor": {
    "arquivo": "o-destruidor.mp3",
@@ -23597,6 +23886,23 @@
     2.0305
    ],
    "bytes": 71938
+  },
+  "pesadelo-vivo": {
+   "arquivo": "pesadelo-vivo.mp3",
+   "descricao": "Espantalho: o pesadelo vivo",
+   "versoes": [
+    0.0,
+    2.48,
+    5.047,
+    7.4459
+   ],
+   "duracoes": [
+    2.4,
+    2.487,
+    2.3188,
+    2.4365
+   ],
+   "bytes": 79858
   },
   "petalas-cortantes": {
    "arquivo": "petalas-cortantes.mp3",
@@ -25331,6 +25637,23 @@
     1.3389
    ],
    "bytes": 37756
+  },
+  "raio-arcano-yen": {
+   "arquivo": "raio-arcano-yen.mp3",
+   "descricao": "Yennefer: o raio arcano",
+   "versoes": [
+    0.0,
+    1.8393,
+    3.711,
+    5.4275
+   ],
+   "duracoes": [
+    1.7593,
+    1.7916,
+    1.6365,
+    1.7378
+   ],
+   "bytes": 66044
   },
   "raio-celeste": {
    "arquivo": "raio-celeste.mp3",
@@ -27099,6 +27422,23 @@
     0.9203
    ],
    "bytes": 34051
+  },
+  "salto-mortal": {
+   "arquivo": "salto-mortal.mp3",
+   "descricao": "Asa Noturna: o salto mortal",
+   "versoes": [
+    0.0,
+    1.5907,
+    3.2351,
+    4.7758
+   ],
+   "duracoes": [
+    1.5107,
+    1.5644,
+    1.4607,
+    1.5334
+   ],
+   "bytes": 55832
   },
   "salvamento-aranha": {
    "arquivo": "salvamento-aranha.mp3",
@@ -31502,6 +31842,23 @@
     1.4203
    ],
    "bytes": 67841
+  },
+  "yennefer-preparo": {
+   "arquivo": "yennefer-preparo.mp3",
+   "descricao": "Yennefer: o caos nas mãos (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 45692
   },
   "z-saber": {
    "arquivo": "z-saber.mp3",

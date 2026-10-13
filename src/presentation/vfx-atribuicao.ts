@@ -140,6 +140,12 @@ const T: Record<string, string> = {
   gamora: 'godslayer_corte golpe_acrobatico execucao_de_gamora',
   drax: 'facas_gemeas grito_de_drax o_destruidor',
   spiderwoman: 'rajada_venenosa voo_planado choque_total',
+  catwoman: 'garras_felinas chicote_da_gata grande_roubo',
+  scarecrow: 'nuvem_do_medo foice_do_espantalho pesadelo_vivo',
+  nightwing: 'bastoes_de_choque salto_mortal combo_do_asa_noturna',
+  dipper: 'consultar_o_diario lanterna_de_dipper misterio_resolvido',
+  mabel: '- glitter mabel_mania',
+  yennefer: 'raio_arcano_yen barreira_de_yennefer dissipar_de_yennefer',
 };
 
 export const FAMILIA_DA_HABILIDADE: Record<string, VfxFamily> = Object.fromEntries(

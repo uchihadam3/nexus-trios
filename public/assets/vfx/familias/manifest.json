@@ -1161,6 +1161,20 @@
   "laco": false,
   "bytes": 44488
  },
+ "barreira_de_yennefer": {
+  "descricao": "Yennefer · as cúpulas de runas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 43762
+ },
  "barreira_eletrica": {
   "descricao": "Raiden · a cúpula elétrica",
   "quadros": 12,
@@ -1370,6 +1384,20 @@
   ],
   "laco": false,
   "bytes": 17140
+ },
+ "bastoes_de_choque": {
+  "descricao": "Asa Noturna · os bastões e o choque",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 26432
  },
  "bastoes_eletricos": {
   "descricao": "Básico do Asa Noturna: os dois bastões elétricos",
@@ -3289,6 +3317,20 @@
   "laco": false,
   "bytes": 51818
  },
+ "chicote_da_gata": {
+  "descricao": "Mulher-Gato · o chicote enrolando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 16580
+ },
  "chicote_de_agua": {
   "descricao": "Básico da Katara: a fita de água e as gotas",
   "quadros": 12,
@@ -3891,6 +3933,20 @@
   "laco": false,
   "bytes": 25516
  },
+ "combo_do_asa_noturna": {
+  "descricao": "Asa Noturna · o combo de bastões",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 35652
+ },
  "comedor_de_sonhos": {
   "descricao": "Gengar · a bolha de sonho sugada",
   "quadros": 12,
@@ -4002,6 +4058,20 @@
   ],
   "laco": false,
   "bytes": 18032
+ },
+ "consultar_o_diario": {
+  "descricao": "Dipper · o diário e a lupa",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 23884
  },
  "contra_ataque": {
   "descricao": "Jin · o aparo e o chute",
@@ -5291,6 +5361,20 @@
   "laco": false,
   "bytes": 52718
  },
+ "dipper_preparo": {
+  "descricao": "Dipper · o diário folheando (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 9888
+ },
  "disco_solar": {
   "descricao": "Básico de Rá: o Olho no disco e o raio que queima",
   "quadros": 12,
@@ -5388,6 +5472,20 @@
   ],
   "laco": false,
   "bytes": 69986
+ },
+ "dissipar_de_yennefer": {
+  "descricao": "Yennefer · as runas arrancando os buffs",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 60210
  },
  "distorcao": {
   "descricao": "distorção",
@@ -6452,6 +6550,20 @@
   ],
   "laco": false,
   "bytes": 20748
+ },
+ "espantalho_preparo": {
+  "descricao": "Espantalho · a foice e o gás rodando (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 21420
  },
  "espera_alucardcv": {
   "descricao": "Alucard caído: a névoa vermelha e os morcegos em roda (laço)",
@@ -7853,6 +7965,20 @@
   "laco": true,
   "bytes": 73744
  },
+ "foice_do_espantalho": {
+  "descricao": "Espantalho · a foice em meia-lua",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 20604
+ },
  "fome_de_ghoul": {
   "descricao": "Kaneki · o kakugan, as veias e a vida puxada",
   "quadros": 12,
@@ -8651,6 +8777,20 @@
   "laco": false,
   "bytes": 79238
  },
+ "garras_felinas": {
+  "descricao": "Mulher-Gato · as garras em X",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 25234
+ },
  "garrote": {
   "descricao": "Agente 47 · o fio apertando",
   "quadros": 12,
@@ -8916,6 +9056,20 @@
   ],
   "laco": false,
   "bytes": 16516
+ },
+ "glitter": {
+  "descricao": "Mabel · o canhão de glitter",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 37536
  },
  "godslayer": {
   "descricao": "Básico da Gamora: a Godslayer esticando",
@@ -9392,6 +9546,20 @@
   ],
   "laco": false,
   "bytes": 68118
+ },
+ "grande_roubo": {
+  "descricao": "Mulher-Gato · a joia arrancada",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 25456
  },
  "gravidade": {
   "descricao": "pressão de gravidade",
@@ -11549,6 +11717,20 @@
   "laco": false,
   "bytes": 16450
  },
+ "lanterna_de_dipper": {
+  "descricao": "Dipper · o cone da lanterna",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 34808
+ },
  "lanterna_preparo": {
   "descricao": "Lanterna Verde · a lanterna e o anel (Preparo, laço)",
   "quadros": 12,
@@ -12094,6 +12276,20 @@
   ],
   "laco": false,
   "bytes": 50912
+ },
+ "mabel_mania": {
+  "descricao": "Mabel · o arco-íris e os corações",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 30624
  },
  "maca_de_rem": {
   "descricao": "Básico da Rem: a maça girando na corrente",
@@ -12976,6 +13172,20 @@
   ],
   "laco": false,
   "bytes": 37794
+ },
+ "misterio_resolvido": {
+  "descricao": "Dipper · a roda de símbolos e o feixe",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 58980
  },
  "mjolnir_impacto": {
   "descricao": "Thor · o martelo batendo e o trovão",
@@ -18885,6 +19095,20 @@
   "laco": true,
   "bytes": 25632
  },
+ "mulher_gato_preparo": {
+  "descricao": "Mulher-Gato · os olhos de gato no escuro (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 8116
+ },
  "multidao": {
   "descricao": "Ezio · a multidão de capuzes",
   "quadros": 12,
@@ -19094,6 +19318,20 @@
   ],
   "laco": false,
   "bytes": 56778
+ },
+ "nuvem_do_medo": {
+  "descricao": "Espantalho · as nuvens do gás do medo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 30578
  },
  "o_destruidor": {
   "descricao": "Drax · o soco que racha o chão",
@@ -19850,6 +20088,20 @@
   ],
   "laco": false,
   "bytes": 26154
+ },
+ "pesadelo_vivo": {
+  "descricao": "Espantalho · o rosto do pesadelo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 56038
  },
  "petalas_cortantes": {
   "descricao": "Básico do Kurama: as pétalas em espiral cortando",
@@ -21264,6 +21516,20 @@
   ],
   "laco": false,
   "bytes": 24150
+ },
+ "raio_arcano_yen": {
+  "descricao": "Yennefer · a obsidiana e o raio violeta",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 31708
  },
  "raio_celeste": {
   "descricao": "Raiden · os raios do céu",
@@ -22706,6 +22972,20 @@
   ],
   "laco": false,
   "bytes": 15228
+ },
+ "salto_mortal": {
+  "descricao": "Asa Noturna · os mortais e o pássaro",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 15616
  },
  "salvamento_aranha": {
   "descricao": "Homem-Aranha · chega balançando e cobre o aliado de teia",
@@ -26332,6 +26612,20 @@
   ],
   "laco": false,
   "bytes": 25948
+ },
+ "yennefer_preparo": {
+  "descricao": "Yennefer · o caos rodando nas mãos (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 25760
  },
  "z_saber": {
   "descricao": "Zero: meia-lua do sabre de energia",
