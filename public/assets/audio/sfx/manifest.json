@@ -3215,6 +3215,23 @@
    ],
    "bytes": 64515
   },
+  "cancao-de-ninar": {
+   "arquivo": "cancao-de-ninar.mp3",
+   "descricao": "Freddy: a canção de ninar",
+   "versoes": [
+    0.0,
+    2.48,
+    5.047,
+    7.4459
+   ],
+   "duracoes": [
+    2.4,
+    2.487,
+    2.3188,
+    2.4365
+   ],
+   "bytes": 95008
+  },
   "canhao": {
    "arquivo": "canhao.mp3",
    "descricao": "família canhao",
@@ -5594,6 +5611,23 @@
     1.8274
    ],
    "bytes": 64739
+  },
+  "corvos-de-odin": {
+   "arquivo": "corvos-de-odin.mp3",
+   "descricao": "Odin: os corvos de Odin",
+   "versoes": [
+    0.0,
+    1.9745,
+    3.9938,
+    5.9176
+   ],
+   "duracoes": [
+    1.8945,
+    1.9393,
+    1.8438,
+    1.8704
+   ],
+   "bytes": 68347
   },
   "cosmo-ardente": {
    "arquivo": "cosmo-ardente.mp3",
@@ -8672,6 +8706,23 @@
    ],
    "bytes": 71658
   },
+  "exercito-dos-mortos": {
+   "arquivo": "exercito-dos-mortos.mp3",
+   "descricao": "Hel: o exército dos mortos",
+   "versoes": [
+    0.0,
+    2.48,
+    5.047,
+    7.4459
+   ],
+   "duracoes": [
+    2.4,
+    2.487,
+    2.3188,
+    2.4365
+   ],
+   "bytes": 76588
+  },
   "exijo-atencao": {
    "arquivo": "exijo-atencao.mp3",
    "descricao": "Patolino: exijo atenção",
@@ -8944,6 +8995,23 @@
    ],
    "bytes": 72206
   },
+  "faca-de-cozinha": {
+   "arquivo": "faca-de-cozinha.mp3",
+   "descricao": "Michael Myers: a faca de cozinha",
+   "versoes": [
+    0.0,
+    1.5858,
+    3.1783,
+    4.6707
+   ],
+   "duracoes": [
+    1.5058,
+    1.5125,
+    1.4124,
+    1.4982
+   ],
+   "bytes": 48796
+  },
   "facada-de-myers": {
    "arquivo": "facada-de-myers.mp3",
    "descricao": "básico do Myers: as notas e a facada",
@@ -8977,6 +9045,23 @@
     1.1126
    ],
    "bytes": 41153
+  },
+  "facao-de-jason": {
+   "arquivo": "facao-de-jason.mp3",
+   "descricao": "Jason: o facão",
+   "versoes": [
+    0.0,
+    1.3791,
+    2.8041,
+    4.0668
+   ],
+   "duracoes": [
+    1.2991,
+    1.345,
+    1.1827,
+    1.2446
+   ],
+   "bytes": 43450
   },
   "facas": {
    "arquivo": "facas.mp3",
@@ -9266,6 +9351,23 @@
     1.4213
    ],
    "bytes": 57245
+  },
+  "fenrir-preparo": {
+   "arquivo": "fenrir-preparo.mp3",
+   "descricao": "Fenrir: a corrente esticando (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 52782
   },
   "ferida-aberta": {
    "arquivo": "ferida-aberta.mp3",
@@ -9998,6 +10100,23 @@
    ],
    "bytes": 58262
   },
+  "freddy-preparo": {
+   "arquivo": "freddy-preparo.mp3",
+   "descricao": "Freddy: a luva raspando (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 53041
+  },
   "frenesi-de-sangue": {
    "arquivo": "frenesi-de-sangue.mp3",
    "descricao": "Denji: a motosserra a toda e os cortes",
@@ -10048,6 +10167,23 @@
     1.3198
    ],
    "bytes": 39321
+  },
+  "frio-de-helheim": {
+   "arquivo": "frio-de-helheim.mp3",
+   "descricao": "Hel: o frio de Helheim",
+   "versoes": [
+    0.0,
+    2.262,
+    4.6026,
+    6.8566
+   ],
+   "duracoes": [
+    2.182,
+    2.2606,
+    2.174,
+    2.1631
+   ],
+   "bytes": 83974
   },
   "frio-preparo": {
    "arquivo": "frio-preparo.mp3",
@@ -10575,6 +10711,23 @@
     1.3198
    ],
    "bytes": 46725
+  },
+  "garra-de-laminas": {
+   "arquivo": "garra-de-laminas.mp3",
+   "descricao": "Freddy: a garra de lâminas",
+   "versoes": [
+    0.0,
+    1.391,
+    2.8172,
+    4.1647
+   ],
+   "duracoes": [
+    1.311,
+    1.3462,
+    1.2675,
+    1.3301
+   ],
+   "bytes": 50335
   },
   "garra-de-valak": {
    "arquivo": "garra-de-valak.mp3",
@@ -11936,6 +12089,23 @@
    ],
    "bytes": 42066
   },
+  "gungnir-de-odin": {
+   "arquivo": "gungnir-de-odin.mp3",
+   "descricao": "Odin: a Gungnir",
+   "versoes": [
+    0.0,
+    1.7557,
+    3.5762,
+    5.2759
+   ],
+   "duracoes": [
+    1.6757,
+    1.7406,
+    1.6196,
+    1.718
+   ],
+   "bytes": 55782
+  },
   "gwen-preparo": {
    "arquivo": "gwen-preparo.mp3",
    "descricao": "Gwen: o feitiço recitado (Preparo)",
@@ -12088,6 +12258,23 @@
     1.4118
    ],
    "bytes": 59028
+  },
+  "hel-preparo": {
+   "arquivo": "hel-preparo.mp3",
+   "descricao": "Hel: a névoa fria (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 58659
   },
   "hell-memories": {
    "arquivo": "hell-memories.mp3",
@@ -13278,6 +13465,23 @@
     1.9267
    ],
    "bytes": 63022
+  },
+  "jason-preparo": {
+   "arquivo": "jason-preparo.mp3",
+   "descricao": "Jason: o ki-ki-ki ma-ma-ma (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 62879
   },
   "jato-criogenico": {
    "arquivo": "jato-criogenico.mp3",
@@ -16559,6 +16763,23 @@
     1.3198
    ],
    "bytes": 53124
+  },
+  "mordida-de-fenrir": {
+   "arquivo": "mordida-de-fenrir.mp3",
+   "descricao": "Fenrir: a mordida",
+   "versoes": [
+    0.0,
+    1.2159,
+    2.5185,
+    3.7022
+   ],
+   "duracoes": [
+    1.1359,
+    1.2226,
+    1.1037,
+    1.217
+   ],
+   "bytes": 41805
   },
   "mordida-de-marceline": {
    "arquivo": "mordida-de-marceline.mp3",
@@ -23717,6 +23938,23 @@
    ],
    "bytes": 41990
   },
+  "myers-preparo": {
+   "arquivo": "myers-preparo.mp3",
+   "descricao": "Michael Myers: o tema (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 53313
+  },
   "nami-preparo": {
    "arquivo": "nami-preparo.mp3",
    "descricao": "Nami: o bastão de clima (Preparo)",
@@ -23869,6 +24107,23 @@
     1.1167
    ],
    "bytes": 41852
+  },
+  "noite-de-halloween": {
+   "arquivo": "noite-de-halloween.mp3",
+   "descricao": "Michael Myers: a noite de Halloween",
+   "versoes": [
+    0.0,
+    2.3748,
+    4.8075,
+    7.1303
+   ],
+   "duracoes": [
+    2.2948,
+    2.3528,
+    2.2428,
+    2.4251
+   ],
+   "bytes": 76737
   },
   "nue": {
    "arquivo": "nue.mp3",
@@ -24787,6 +25042,23 @@
     2.335
    ],
    "bytes": 78798
+  },
+  "pesadelo-de-freddy": {
+   "arquivo": "pesadelo-de-freddy.mp3",
+   "descricao": "Freddy: o pesadelo",
+   "versoes": [
+    0.0,
+    2.1091,
+    4.4102,
+    6.4072
+   ],
+   "duracoes": [
+    2.0291,
+    2.2212,
+    1.917,
+    2.065
+   ],
+   "bytes": 67517
   },
   "pesadelo-vivo": {
    "arquivo": "pesadelo-vivo.mp3",
@@ -26488,6 +26760,23 @@
    ],
    "bytes": 97457
   },
+  "ragnarok": {
+   "arquivo": "ragnarok.mp3",
+   "descricao": "Fenrir: Ragnarök",
+   "versoes": [
+    0.0,
+    2.48,
+    5.047,
+    7.4459
+   ],
+   "duracoes": [
+    2.4,
+    2.487,
+    2.3188,
+    2.4365
+   ],
+   "bytes": 79942
+  },
   "raiden-preparo": {
    "arquivo": "raiden-preparo.mp3",
    "descricao": "Raiden: o Modo lâmina (antes do golpe)",
@@ -27933,6 +28222,23 @@
    ],
    "bytes": 62918
   },
+  "respiracao-na-mascara": {
+   "arquivo": "respiracao-na-mascara.mp3",
+   "descricao": "Michael Myers: a respiração na máscara",
+   "versoes": [
+    0.0,
+    2.4642,
+    5.0312,
+    7.3853
+   ],
+   "duracoes": [
+    2.3842,
+    2.487,
+    2.2741,
+    2.3808
+   ],
+   "bytes": 80890
+  },
   "ressonancia-amaldicoada": {
    "arquivo": "ressonancia-amaldicoada.mp3",
    "descricao": "Nobara: a martelada e a ressonância",
@@ -28391,6 +28697,23 @@
     1.4213
    ],
    "bytes": 55058
+  },
+  "sabedoria-de-asgard": {
+   "arquivo": "sabedoria-de-asgard.mp3",
+   "descricao": "Odin: a sabedoria de Asgard",
+   "versoes": [
+    0.0,
+    2.38,
+    4.8434,
+    7.1456
+   ],
+   "duracoes": [
+    2.3,
+    2.3834,
+    2.2222,
+    2.335
+   ],
+   "bytes": 64708
   },
   "sabedoria-de-salomao": {
    "arquivo": "sabedoria-de-salomao.mp3",
@@ -29122,6 +29445,23 @@
     1.4213
    ],
    "bytes": 60818
+  },
+  "sexta-feira-13": {
+   "arquivo": "sexta-feira-13.mp3",
+   "descricao": "Jason: Sexta-feira 13",
+   "versoes": [
+    0.0,
+    2.38,
+    4.8434,
+    7.1456
+   ],
+   "duracoes": [
+    2.3,
+    2.3834,
+    2.2222,
+    2.335
+   ],
+   "bytes": 74864
   },
   "shadow-preparo": {
    "arquivo": "shadow-preparo.mp3",
@@ -31503,6 +31843,23 @@
    ],
    "bytes": 52506
   },
+  "toque-da-morte": {
+   "arquivo": "toque-da-morte.mp3",
+   "descricao": "Hel: o toque da morte",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 67952
+  },
   "toque-de-hel": {
    "arquivo": "toque-de-hel.mp3",
    "descricao": "básico de Hel: os ossos e o frio",
@@ -32012,6 +32369,23 @@
     0.2843
    ],
    "bytes": 10226
+  },
+  "uivo-de-fenrir": {
+   "arquivo": "uivo-de-fenrir.mp3",
+   "descricao": "Fenrir: o uivo",
+   "versoes": [
+    0.0,
+    2.48,
+    5.047,
+    7.4459
+   ],
+   "duracoes": [
+    2.4,
+    2.487,
+    2.3188,
+    2.4365
+   ],
+   "bytes": 89907
   },
   "ultima-resistencia": {
    "arquivo": "ultima-resistencia.mp3",
@@ -32709,6 +33083,23 @@
     1.9289
    ],
    "bytes": 79651
+  },
+  "volta-do-lago": {
+   "arquivo": "volta-do-lago.mp3",
+   "descricao": "Jason: a volta do lago",
+   "versoes": [
+    0.0,
+    2.28,
+    4.6398,
+    6.8454
+   ],
+   "duracoes": [
+    2.2,
+    2.2798,
+    2.1256,
+    2.2335
+   ],
+   "bytes": 71345
   },
   "volta-ikki": {
    "arquivo": "volta-ikki.mp3",

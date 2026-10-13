@@ -2785,6 +2785,20 @@
   "laco": true,
   "bytes": 26656
  },
+ "cancao_de_ninar": {
+  "descricao": "Freddy · as notas e o sono",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 17778
+ },
  "canhao_de_braco": {
   "descricao": "Samus: bola de plasma do canhão, explosão pequena e anel (+x)",
   "quadros": 12,
@@ -4828,6 +4842,20 @@
   ],
   "laco": false,
   "bytes": 91322
+ },
+ "corvos_de_odin": {
+  "descricao": "Odin · Hugin e Munin",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 15354
  },
  "corvos_itachi_voo": {
   "descricao": "Itachi · o bando de corvos de perfil voando (laço)",
@@ -7447,6 +7475,20 @@
   "laco": false,
   "bytes": 87342
  },
+ "exercito_dos_mortos": {
+  "descricao": "Hel · as mãos subindo do chão",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 28128
+ },
  "exijo_atencao": {
   "descricao": "Patolino · o holofote e as exclamações",
   "quadros": 12,
@@ -7699,6 +7741,20 @@
   "laco": false,
   "bytes": 13538
  },
+ "faca_de_cozinha": {
+  "descricao": "Michael Myers · a faca descendo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 16132
+ },
  "facada_de_myers": {
   "descricao": "Básico do Myers: a faca erguida",
   "quadros": 12,
@@ -7726,6 +7782,20 @@
   ],
   "laco": false,
   "bytes": 6250
+ },
+ "facao_de_jason": {
+  "descricao": "Jason · o facão e o sangue",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 21326
  },
  "facas_de_drax": {
   "descricao": "Básico do Drax: as duas facas em X",
@@ -8034,6 +8104,20 @@
   ],
   "laco": true,
   "bytes": 28926
+ },
+ "fenrir_preparo": {
+  "descricao": "Fenrir · a corrente Gleipnir arrebentando (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 9086
  },
  "ferida_aberta": {
   "descricao": "Carnificina · os chicotes em X e a ferida",
@@ -8623,6 +8707,20 @@
   "laco": false,
   "bytes": 16614
  },
+ "freddy_preparo": {
+  "descricao": "Freddy · o chapéu e a luva raspando (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 8596
+ },
  "frenesi_de_sangue": {
   "descricao": "Denji · três motosserras cortando e o sangue",
   "quadros": 12,
@@ -8664,6 +8762,20 @@
   ],
   "laco": false,
   "bytes": 57022
+ },
+ "frio_de_helheim": {
+  "descricao": "Hel · o gelo crescendo nos rivais",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 58264
  },
  "frio_preparo": {
   "descricao": "Senhor Frio · o capacete e a pistola carregando (Preparo, laço)",
@@ -9112,6 +9224,20 @@
   ],
   "laco": false,
   "bytes": 32372
+ },
+ "garra_de_laminas": {
+  "descricao": "Freddy · a luva de lâminas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 22146
  },
  "garra_de_valak": {
   "descricao": "Básico da Valak: a cruz invertida e as unhas",
@@ -10233,6 +10359,20 @@
   "laco": false,
   "bytes": 18818
  },
+ "gungnir_de_odin": {
+  "descricao": "Odin · a Gungnir com as runas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 24366
+ },
  "gwen_preparo": {
   "descricao": "Gwen · as runas hexagonais girando (Preparo, laço)",
   "quadros": 12,
@@ -10358,6 +10498,20 @@
   ],
   "laco": true,
   "bytes": 11802
+ },
+ "hel_preparo": {
+  "descricao": "Hel · a coroa e a névoa fria (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 19580
  },
  "hell_memories": {
   "descricao": "Sanji · as chamas do inferno em todos",
@@ -11296,6 +11450,20 @@
   ],
   "laco": false,
   "bytes": 55656
+ },
+ "jason_preparo": {
+  "descricao": "Jason · a máscara e o \"ki-ki-ki\" (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 13436
  },
  "jato_criogenico": {
   "descricao": "Básico do Senhor Frio: o jato frio e os cristais",
@@ -14026,6 +14194,20 @@
   ],
   "laco": false,
   "bytes": 21044
+ },
+ "mordida_de_fenrir": {
+  "descricao": "Fenrir · as mandíbulas fechando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 21900
  },
  "mordida_de_marceline": {
   "descricao": "Marceline · as presas e a vida voltando",
@@ -19893,6 +20075,20 @@
   "laco": false,
   "bytes": 22242
  },
+ "myers_preparo": {
+  "descricao": "Michael Myers · a abóbora e a silhueta (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 13434
+ },
  "nami_preparo": {
   "descricao": "Nami · o bastão girando as bolhas (Preparo, laço)",
   "quadros": 12,
@@ -19990,6 +20186,20 @@
   ],
   "laco": false,
   "bytes": 29990
+ },
+ "noite_de_halloween": {
+  "descricao": "Michael Myers · as abóboras e o golpe final",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 46454
  },
  "nue": {
   "descricao": "Megumi · as asas do Nue e os raios em três pontos",
@@ -20830,6 +21040,20 @@
   ],
   "laco": false,
   "bytes": 40414
+ },
+ "pesadelo_de_freddy": {
+  "descricao": "Freddy · a garra gigante do pesadelo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 31842
  },
  "pesadelo_vivo": {
   "descricao": "Espantalho · o rosto do pesadelo",
@@ -22217,6 +22441,20 @@
   "laco": false,
   "bytes": 85794
  },
+ "ragnarok": {
+  "descricao": "Fenrir · o lobo gigante saltando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 45006
+ },
  "raiden_preparo": {
   "descricao": "Raiden · o Modo lâmina (Preparo, laço)",
   "quadros": 12,
@@ -23407,6 +23645,20 @@
   "laco": false,
   "bytes": 65090
  },
+ "respiracao_na_mascara": {
+  "descricao": "Michael Myers · a máscara e a respiração",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 17382
+ },
  "ressonancia_amaldicoada": {
   "descricao": "Nobara · o boneco de palha e os anéis de ressonância",
   "quadros": 12,
@@ -23770,6 +24022,20 @@
   ],
   "laco": true,
   "bytes": 26652
+ },
+ "sabedoria_de_asgard": {
+  "descricao": "Odin · o olho e as runas no trio",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 16662
  },
  "sabedoria_de_salomao": {
   "descricao": "Shazam · o pergaminho e o Preparo quebrando",
@@ -24400,6 +24666,20 @@
   ],
   "laco": true,
   "bytes": 11834
+ },
+ "sexta_feira_13": {
+  "descricao": "Jason · os golpes sob a lua",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 42862
  },
  "shadow_preparo": {
   "descricao": "Shadow · a Esmeralda pulsando (Preparo, laço)",
@@ -26459,6 +26739,20 @@
   "laco": false,
   "bytes": 52060
  },
+ "toque_da_morte": {
+  "descricao": "Hel · a mão e a caveira",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 26042
+ },
  "toque_de_hel": {
   "descricao": "Básico de Hel: a mão de osso e o gelo",
   "quadros": 12,
@@ -26780,6 +27074,20 @@
   ],
   "laco": false,
   "bytes": 50422
+ },
+ "uivo_de_fenrir": {
+  "descricao": "Fenrir · o uivo para a lua",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 26538
  },
  "ultima_resistencia": {
   "descricao": "pulso dourado, chão rachando e coluna de luz",
@@ -27326,6 +27634,20 @@
   ],
   "laco": false,
   "bytes": 57346
+ },
+ "volta_do_lago": {
+  "descricao": "Jason · a máscara emergindo do lago",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 42742
  },
  "volta_ikki": {
   "descricao": "Ikki volta: a Ave Fênix sobe das cinzas e abre as asas",

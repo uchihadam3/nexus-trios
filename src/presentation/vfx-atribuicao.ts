@@ -164,6 +164,12 @@ const T: Record<string, string> = {
   isis: 'bencao_de_isis purificacao_de_isis ressurreicao_de_isis',
   horus: 'garras_do_falcao olho_de_horus voo_do_falcao',
   sekhmet: 'garras_da_leoa rugido_de_sekhmet furia_da_leoa',
+  odin: 'gungnir_de_odin corvos_de_odin sabedoria_de_asgard',
+  fenrir: 'mordida_de_fenrir uivo_de_fenrir ragnarok',
+  hel: 'toque_da_morte exercito_dos_mortos frio_de_helheim',
+  jason: 'facao_de_jason volta_do_lago sexta_feira_13',
+  freddy: 'cancao_de_ninar garra_de_laminas pesadelo_de_freddy',
+  michaelmyers: 'faca_de_cozinha respiracao_na_mascara noite_de_halloween',
 };
 
 export const FAMILIA_DA_HABILIDADE: Record<string, VfxFamily> = Object.fromEntries(
