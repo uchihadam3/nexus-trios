@@ -427,6 +427,23 @@
    ],
    "bytes": 60180
   },
+  "aku-preparo": {
+   "arquivo": "aku-preparo.mp3",
+   "descricao": "Aku: o redemoinho escuro (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 48519
+  },
   "alcance-elastico": {
    "arquivo": "alcance-elastico.mp3",
    "descricao": "Mulher-Elástica: o alcance elástico",
@@ -869,6 +886,23 @@
    ],
    "bytes": 52699
   },
+  "arma-de-desidratar": {
+   "arquivo": "arma-de-desidratar.mp3",
+   "descricao": "Megamente: arma de desidratar",
+   "versoes": [
+    0.0,
+    1.6003,
+    3.2545,
+    4.8031
+   ],
+   "duracoes": [
+    1.5203,
+    1.5742,
+    1.4686,
+    1.5429
+   ],
+   "bytes": 50980
+  },
   "arma-de-laser-morty": {
    "arquivo": "arma-de-laser-morty.mp3",
    "descricao": "Morty: a arma de laser",
@@ -1038,6 +1072,23 @@
     2.132
    ],
    "bytes": 64735
+  },
+  "armadura-de-batalha-vilgax": {
+   "arquivo": "armadura-de-batalha-vilgax.mp3",
+   "descricao": "Vilgax: armadura de batalha",
+   "versoes": [
+    0.0,
+    2.18,
+    4.4361,
+    6.5451
+   ],
+   "duracoes": [
+    2.1,
+    2.1761,
+    2.029,
+    2.132
+   ],
+   "bytes": 65324
   },
   "armadura-de-doom": {
    "arquivo": "armadura-de-doom.mp3",
@@ -6275,6 +6326,23 @@
    ],
    "bytes": 87575
   },
+  "cosmowanda-preparo": {
+   "arquivo": "cosmowanda-preparo.mp3",
+   "descricao": "Cosmo e Wanda: as varinhas (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 62520
+  },
   "couraca": {
    "arquivo": "couraca.mp3",
    "descricao": "Godzilla: a couraça",
@@ -7023,6 +7091,57 @@
    ],
    "bytes": 44159
   },
+  "desejo-de-forca": {
+   "arquivo": "desejo-de-forca.mp3",
+   "descricao": "Cosmo e Wanda: desejo de força",
+   "versoes": [
+    0.0,
+    2.0779,
+    4.2525,
+    6.2447
+   ],
+   "duracoes": [
+    1.9979,
+    2.0946,
+    1.9122,
+    1.9907
+   ],
+   "bytes": 66232
+  },
+  "desejo-de-protecao": {
+   "arquivo": "desejo-de-protecao.mp3",
+   "descricao": "Cosmo e Wanda: desejo de proteção",
+   "versoes": [
+    0.0,
+    2.18,
+    4.4361,
+    6.5451
+   ],
+   "duracoes": [
+    2.1,
+    2.1761,
+    2.029,
+    2.132
+   ],
+   "bytes": 72958
+  },
+  "desejo-do-timmy": {
+   "arquivo": "desejo-do-timmy.mp3",
+   "descricao": "Cosmo e Wanda: desejo do Timmy",
+   "versoes": [
+    0.0,
+    2.1286,
+    4.3104,
+    6.3366
+   ],
+   "duracoes": [
+    2.0486,
+    2.1018,
+    1.9462,
+    2.1069
+   ],
+   "bytes": 63494
+  },
   "desintegrar": {
    "arquivo": "desintegrar.mp3",
    "descricao": "família desintegrar",
@@ -7261,6 +7380,23 @@
    ],
    "bytes": 57011
   },
+  "dexter-preparo": {
+   "arquivo": "dexter-preparo.mp3",
+   "descricao": "Dexter: o controle do robô (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 50219
+  },
   "dia-todo": {
    "arquivo": "dia-todo.mp3",
    "descricao": "Eu posso o dia todo: o escudo e a determinação",
@@ -7379,6 +7515,23 @@
     1.661
    ],
    "bytes": 62212
+  },
+  "disfarce-megamente": {
+   "arquivo": "disfarce-megamente.mp3",
+   "descricao": "Megamente: disfarce",
+   "versoes": [
+    0.0,
+    1.6882,
+    3.4343,
+    5.0243
+   ],
+   "duracoes": [
+    1.6082,
+    1.6661,
+    1.51,
+    1.5706
+   ],
+   "bytes": 70237
   },
   "disfarce-pernalonga": {
    "arquivo": "disfarce-pernalonga.mp3",
@@ -8875,6 +9028,23 @@
     1.1167
    ],
    "bytes": 39451
+  },
+  "espada-de-diamante-steve": {
+   "arquivo": "espada-de-diamante-steve.mp3",
+   "descricao": "Steve: espada de diamante",
+   "versoes": [
+    0.0,
+    1.1746,
+    2.3929,
+    3.5359
+   ],
+   "duracoes": [
+    1.0946,
+    1.1383,
+    1.063,
+    1.117
+   ],
+   "bytes": 37256
   },
   "espada-de-fogo-hiei": {
    "arquivo": "espada-de-fogo-hiei.mp3",
@@ -11341,6 +11511,23 @@
    ],
    "bytes": 76259
   },
+  "forma-sem-forma": {
+   "arquivo": "forma-sem-forma.mp3",
+   "descricao": "Aku: forma sem forma",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 63336
+  },
   "formacao": {
    "arquivo": "formacao.mp3",
    "descricao": "Leonardo: a formação",
@@ -12616,6 +12803,23 @@
    ],
    "bytes": 52112
   },
+  "gerador-de-carga": {
+   "arquivo": "gerador-de-carga.mp3",
+   "descricao": "Dexter: gerador de Carga",
+   "versoes": [
+    0.0,
+    1.611,
+    3.2745,
+    4.8331
+   ],
+   "duracoes": [
+    1.531,
+    1.5836,
+    1.4786,
+    1.5539
+   ],
+   "bytes": 58149
+  },
   "ghostface-preparo": {
    "arquivo": "ghostface-preparo.mp3",
    "descricao": "Ghostface: a respiração (Preparo)",
@@ -12819,6 +13023,23 @@
     1.4213
    ],
    "bytes": 52441
+  },
+  "golem-de-ferro-steve": {
+   "arquivo": "golem-de-ferro-steve.mp3",
+   "descricao": "Steve: golem de ferro",
+   "versoes": [
+    0.0,
+    2.28,
+    4.6398,
+    6.8454
+   ],
+   "duracoes": [
+    2.2,
+    2.2798,
+    2.1256,
+    2.2335
+   ],
+   "bytes": 68665
   },
   "golpe-acrobatico": {
    "arquivo": "golpe-acrobatico.mp3",
@@ -18361,6 +18582,23 @@
     1.4213
    ],
    "bytes": 78713
+  },
+  "megamente-preparo": {
+   "arquivo": "megamente-preparo.mp3",
+   "descricao": "Megamente: as engrenagens (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 59644
   },
   "megatron-preparo": {
    "arquivo": "megatron-preparo.mp3",
@@ -26250,6 +26488,23 @@
    ],
    "bytes": 41990
   },
+  "muro-de-blocos": {
+   "arquivo": "muro-de-blocos.mp3",
+   "descricao": "Steve: muro de blocos",
+   "versoes": [
+    0.0,
+    1.8052,
+    3.6667,
+    5.4491
+   ],
+   "duracoes": [
+    1.7252,
+    1.7814,
+    1.7024,
+    1.8028
+   ],
+   "bytes": 56444
+  },
   "muro-de-espinhos": {
    "arquivo": "muro-de-espinhos.mp3",
    "descricao": "Malévola: o muro de espinhos",
@@ -26844,6 +27099,23 @@
     2.0305
    ],
    "bytes": 87744
+  },
+  "olhos-de-laser-aku": {
+   "arquivo": "olhos-de-laser-aku.mp3",
+   "descricao": "Aku: olhos de laser",
+   "versoes": [
+    0.0,
+    2.18,
+    4.4361,
+    6.5451
+   ],
+   "duracoes": [
+    2.1,
+    2.1761,
+    2.029,
+    2.132
+   ],
+   "bytes": 60713
   },
   "olhos-escarlates": {
    "arquivo": "olhos-escarlates.mp3",
@@ -28408,6 +28680,23 @@
     1.0152
    ],
    "bytes": 35669
+  },
+  "portal-do-tempo-aku": {
+   "arquivo": "portal-do-tempo-aku.mp3",
+   "descricao": "Aku: portal do tempo",
+   "versoes": [
+    0.0,
+    2.98,
+    6.0652,
+    8.9471
+   ],
+   "duracoes": [
+    2.9,
+    3.0052,
+    2.8019,
+    2.9441
+   ],
+   "bytes": 101607
   },
   "portal-estranho": {
    "arquivo": "portal-estranho.mp3",
@@ -29990,6 +30279,23 @@
    ],
    "bytes": 48565
   },
+  "raio-do-laboratorio": {
+   "arquivo": "raio-do-laboratorio.mp3",
+   "descricao": "Dexter: raio do laboratório",
+   "versoes": [
+    0.0,
+    1.6235,
+    3.3345,
+    4.9423
+   ],
+   "duracoes": [
+    1.5435,
+    1.631,
+    1.5278,
+    1.5844
+   ],
+   "bytes": 70824
+  },
   "raio-do-mishima": {
    "arquivo": "raio-do-mishima.mp3",
    "descricao": "Heihachi: o raio do Mishima",
@@ -31486,6 +31792,23 @@
    ],
    "bytes": 55102
   },
+  "robo-gigante-dexter": {
+   "arquivo": "robo-gigante-dexter.mp3",
+   "descricao": "Dexter: robô gigante",
+   "versoes": [
+    0.0,
+    2.68,
+    5.4543,
+    8.0463
+   ],
+   "duracoes": [
+    2.6,
+    2.6943,
+    2.5121,
+    2.6396
+   ],
+   "bytes": 76986
+  },
   "robo-gigante-mojo": {
    "arquivo": "robo-gigante-mojo.mp3",
    "descricao": "Macaco Louco: o robô gigante",
@@ -31502,6 +31825,23 @@
     1.9408
    ],
    "bytes": 63544
+  },
+  "robo-mecha": {
+   "arquivo": "robo-mecha.mp3",
+   "descricao": "Megamente: robô mecha",
+   "versoes": [
+    0.0,
+    2.38,
+    4.8434,
+    7.1456
+   ],
+   "duracoes": [
+    2.3,
+    2.3834,
+    2.2222,
+    2.335
+   ],
+   "bytes": 76366
   },
   "robocop-preparo": {
    "arquivo": "robocop-preparo.mp3",
@@ -33662,6 +34002,23 @@
    ],
    "bytes": 19265
   },
+  "soco-planetario": {
+   "arquivo": "soco-planetario.mp3",
+   "descricao": "Vilgax: soco planetário",
+   "versoes": [
+    0.0,
+    2.68,
+    5.4543,
+    8.0463
+   ],
+   "duracoes": [
+    2.6,
+    2.6943,
+    2.5121,
+    2.6396
+   ],
+   "bytes": 86890
+  },
   "soco-relampago": {
    "arquivo": "soco-relampago.mp3",
    "descricao": "Docinho: o soco relâmpago",
@@ -35004,6 +35361,23 @@
     2.0475
    ],
    "bytes": 64938
+  },
+  "tentaculos-vilgax": {
+   "arquivo": "tentaculos-vilgax.mp3",
+   "descricao": "Vilgax: tentáculos",
+   "versoes": [
+    0.0,
+    1.9914,
+    4.0588,
+    6.0925
+   ],
+   "duracoes": [
+    1.9114,
+    1.9874,
+    1.9537,
+    2.0004
+   ],
+   "bytes": 62053
   },
   "terra": {
    "arquivo": "terra.mp3",
@@ -36789,6 +37163,23 @@
     1.4213
    ],
    "bytes": 49185
+  },
+  "vilgax-preparo": {
+   "arquivo": "vilgax-preparo.mp3",
+   "descricao": "Vilgax: o punho cerrando (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 59111
   },
   "violeta-preparo": {
    "arquivo": "violeta-preparo.mp3",

@@ -230,6 +230,12 @@ const T: Record<string, string> = {
   steven: 'escudo_da_rosa saliva_curativa bolha_de_steven',
   garnet: 'futuro_previsto manoplas_garnet fusao_perfeita',
   johnnybravo: 'pose_johnny soco_de_karate musculos_de_aco',
+  dexter: 'raio_do_laboratorio gerador_de_carga robo_gigante_dexter',
+  aku: 'olhos_de_laser_aku forma_sem_forma portal_do_tempo_aku',
+  megamind: 'arma_de_desidratar disfarce_megamente robo_mecha',
+  vilgax: 'tentaculos_vilgax armadura_de_batalha_vilgax soco_planetario',
+  cosmowanda: 'desejo_de_forca desejo_de_protecao desejo_do_timmy',
+  steve: 'espada_de_diamante_steve muro_de_blocos golem_de_ferro_steve',
 };
 
 export const FAMILIA_DA_HABILIDADE: Record<string, VfxFamily> = Object.fromEntries(

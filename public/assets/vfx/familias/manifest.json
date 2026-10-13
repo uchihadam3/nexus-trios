@@ -349,6 +349,20 @@
   "laco": true,
   "bytes": 7338
  },
+ "aku_preparo": {
+  "descricao": "Aku · os olhos e o redemoinho (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 17938
+ },
  "alcance_elastico": {
   "descricao": "Mulher-Elástica · o braço esticando até o aliado",
   "quadros": 12,
@@ -685,6 +699,20 @@
   "laco": false,
   "bytes": 48994
  },
+ "arma_de_desidratar": {
+  "descricao": "Megamente · o raio e o cubinho",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 20942
+ },
  "arma_de_laser_morty": {
   "descricao": "Morty · a arma tremendo e o tiro verde",
   "quadros": 12,
@@ -824,6 +852,20 @@
   ],
   "laco": false,
   "bytes": 41310
+ },
+ "armadura_de_batalha_vilgax": {
+  "descricao": "Vilgax · as placas fechando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 36010
  },
  "armadura_de_doom": {
   "descricao": "Doutor Destino · a grade, a mira e o raio",
@@ -5403,6 +5445,20 @@
   "laco": true,
   "bytes": 102378
  },
+ "cosmowanda_preparo": {
+  "descricao": "Cosmo e Wanda · as varinhas e as estrelas (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 12376
+ },
  "couraca": {
   "descricao": "Godzilla · as placas acesas e a couraça",
   "quadros": 12,
@@ -6033,6 +6089,48 @@
   "laco": false,
   "bytes": 31822
  },
+ "desejo_de_forca": {
+  "descricao": "Cosmo e Wanda · o puf e os músculos de luz",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 24930
+ },
+ "desejo_de_protecao": {
+  "descricao": "Cosmo e Wanda · as coroas e as bolhas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 38728
+ },
+ "desejo_do_timmy": {
+  "descricao": "Cosmo e Wanda · os puf nos rivais",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 32622
+ },
  "desintegrar": {
   "descricao": "desintegração em grãos",
   "quadros": 12,
@@ -6229,6 +6327,20 @@
   "laco": false,
   "bytes": 28776
  },
+ "dexter_preparo": {
+  "descricao": "Dexter · o controle e as barras (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 2616
+ },
  "dia_todo": {
   "descricao": "Capitão América · o escudo erguido e a cura",
   "quadros": 12,
@@ -6354,6 +6466,20 @@
   ],
   "laco": false,
   "bytes": 15376
+ },
+ "disfarce_megamente": {
+  "descricao": "Megamente · o relógio e o holograma",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 7626
  },
  "disfarce_pernalonga": {
   "descricao": "Pernalonga · a fumaça e a peruca",
@@ -7558,6 +7684,20 @@
   ],
   "laco": false,
   "bytes": 20446
+ },
+ "espada_de_diamante_steve": {
+  "descricao": "Steve · a espada de pixels",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 20174
  },
  "espada_de_fogo_hiei": {
   "descricao": "Hiei · a espada de chamas negras",
@@ -9729,6 +9869,20 @@
   "laco": false,
   "bytes": 27200
  },
+ "forma_sem_forma": {
+  "descricao": "Aku · o corpo de sombra se desfazendo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 44680
+ },
  "formacao": {
   "descricao": "Leonardo · as bandanas e as setas",
   "quadros": 12,
@@ -10793,6 +10947,20 @@
   "laco": true,
   "bytes": 37570
  },
+ "gerador_de_carga": {
+  "descricao": "Dexter · o gerador e os raios no trio",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 21828
+ },
  "ghostface_preparo": {
   "descricao": "Ghostface · a máscara e o manto (Preparo, laço)",
   "quadros": 12,
@@ -10960,6 +11128,20 @@
   ],
   "laco": true,
   "bytes": 9474
+ },
+ "golem_de_ferro_steve": {
+  "descricao": "Steve · os blocos formando o Golem",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 24892
  },
  "golpe_acrobatico": {
   "descricao": "Gamora · o mortal e o calcanhar",
@@ -15496,6 +15678,20 @@
   ],
   "laco": true,
   "bytes": 14334
+ },
+ "megamente_preparo": {
+  "descricao": "Megamente · a cabeçona e as engrenagens (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 23170
  },
  "megatron_preparo": {
   "descricao": "Megatron · o canhão de fusão carregando (Preparo, laço)",
@@ -21979,6 +22175,20 @@
   "laco": false,
   "bytes": 22242
  },
+ "muro_de_blocos": {
+  "descricao": "Steve · os blocos caindo e empilhando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 23482
+ },
  "muro_de_espinhos": {
   "descricao": "Malévola · os galhos de espinhos",
   "quadros": 12,
@@ -22440,6 +22650,20 @@
   ],
   "laco": true,
   "bytes": 14528
+ },
+ "olhos_de_laser_aku": {
+  "descricao": "Aku · os olhos de fogo e os lasers",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 29300
  },
  "olhos_escarlates": {
   "descricao": "Kurapika · os olhos vermelhos e o pulso",
@@ -23827,6 +24051,20 @@
   "laco": true,
   "bytes": 13086
  },
+ "portal_do_tempo_aku": {
+  "descricao": "Aku · o portal do tempo puxando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 72046
+ },
  "portal_estranho": {
   "descricao": "Doutor Estranho · o portal de faíscas",
   "quadros": 12,
@@ -25129,6 +25367,20 @@
   "laco": false,
   "bytes": 25162
  },
+ "raio_do_laboratorio": {
+  "descricao": "Dexter · a pistola de raio e o choque",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 29870
+ },
  "raio_do_mishima": {
   "descricao": "Heihachi · o raio enorme",
   "quadros": 12,
@@ -26305,6 +26557,20 @@
   "laco": true,
   "bytes": 11562
  },
+ "robo_gigante_dexter": {
+  "descricao": "Dexter · o punho do robô descendo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 29194
+ },
  "robo_gigante_mojo": {
   "descricao": "Macaco Louco · o punho do robô gigante",
   "quadros": 12,
@@ -26318,6 +26584,20 @@
   ],
   "laco": false,
   "bytes": 32870
+ },
+ "robo_mecha": {
+  "descricao": "Megamente · o braço do mecha e a garra",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 32382
  },
  "robocop_preparo": {
   "descricao": "RoboCop · o visor varrendo (Preparo, laço)",
@@ -28181,6 +28461,20 @@
   "laco": false,
   "bytes": 55662
  },
+ "soco_planetario": {
+  "descricao": "Vilgax · o soco e a cratera",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 46388
+ },
  "soco_relampago": {
   "descricao": "Docinho · o rastro verde e o soco",
   "quadros": 12,
@@ -29370,6 +29664,20 @@
   ],
   "laco": false,
   "bytes": 39272
+ },
+ "tentaculos_vilgax": {
+  "descricao": "Vilgax · os tentáculos agarrando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 25394
  },
  "terra": {
   "descricao": "pedras rompendo o chão",
@@ -30728,6 +31036,20 @@
   ],
   "laco": true,
   "bytes": 24178
+ },
+ "vilgax_preparo": {
+  "descricao": "Vilgax · o punho e as veias (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 13752
  },
  "violeta_preparo": {
   "descricao": "Violeta · as mãos formando a esfera (Preparo, laço)",
