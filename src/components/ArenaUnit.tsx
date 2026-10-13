@@ -9,7 +9,7 @@ import { folha } from '../presentation/vfxProfiles';
 import { byId } from '../data/characters';
 import { unicaDe } from '../engine/unicas';
 import { JEITO_DA_UNICA } from '../data/unicas-jeito';
-import { EFEITO_DA_UNICA } from '../presentation/unicas-efeitos';
+import { EFEITO_DA_UNICA,MEDIDOR_DA_UNICA } from '../presentation/unicas-efeitos';
 import { statuses } from '../data/statuses';
 import { Portrait } from './Portrait';
 import { AuxIcon,SkillIcon } from './Icon';
@@ -107,8 +107,9 @@ export function ArenaUnit({fighter:f,battle,beat,onInspect,numbers,threatened,li
    * dela e acende.
    */
   const unica=unicaDe(c.id),jeito=JEITO_DA_UNICA[c.id];
+  const medidor=MEDIDOR_DA_UNICA[c.id];
   const cargaDaUnica=ativando?(at&&preparandoUnica?Math.min(100,100*at.t/Math.max(.01,at.fases.soltaEm)):100)
-    :jeito==='sempre'?100:Math.round(100*(cargaDoRelogio(f)??0));
+    :medidor?Math.min(100,Math.round(100*medidor.carga(f))):jeito==='sempre'?100:Math.round(100*(cargaDoRelogio(f)??0));
   /*
    * O selo do traço e da Mecânica única fica um tempo na cabeça, com efeito no retrato (pedido do jogador: "aparece
    * muito rápido… poderia ficar um pouquinho mais de tempo na cabeça deles… e tivesse efeito"). Não segura a luta: o
@@ -200,7 +201,7 @@ export function ArenaUnit({fighter:f,battle,beat,onInspect,numbers,threatened,li
         {/* a bolinha da Mecânica única, como uma quarta habilidade: enche com o relógio dela e acende ao ativar */}
         {unica&&!out&&<span className={`unica-bolinha${jeito==='sempre'?' sempre':''}${ativando?' ativando':''}${cargaDaUnica>=100&&!ativando?' cheia':''}`} aria-hidden="true">
           <svg className="ub-anel" viewBox="0 0 36 36"><circle cx="18" cy="18" r="15.5" className="ub-trilho"/><circle cx="18" cy="18" r="15.5" pathLength="100" className="ub-carga" strokeDasharray={`${cargaDaUnica} 100`}/></svg>
-          <Sparkles size={14} strokeWidth={2.4}/>
+          {medidor?.numero&&!ativando?<b className="ub-numero">{cargaDaUnica}</b>:<Sparkles size={14} strokeWidth={2.4}/>}
         </span>}
         {threatened&&<span className="unit-brackets" aria-hidden="true"/>}
         {broken&&<span className="unit-break" aria-hidden="true">×</span>}
