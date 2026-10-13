@@ -38,6 +38,24 @@ describe('Mecânicas únicas', () => {
     expect(goku.hp).toBe(0);
   });
 
+  it('Light escreve um nome na página do relógio quando fica com pouca Vida, uma vez por luta', () => {
+    const b = createBattle(['light', 'goku', 'batman'], ['naruto', 'thanos', 'hulk'], 9);
+    const light = lutador(b, 'light'), naruto = lutador(b, 'naruto');
+    light.investigation[naruto.uid] = 60;
+    roda(b, 1);
+    expect(naruto.hp).toBeGreaterThan(0);
+    light.hp = Math.round(light.maxHp * 0.2);
+    stepBattle(b);
+    expect(naruto.hp).toBe(0);
+    expect(b.events.some((e) => e.kind === 'unica' && e.label === 'Página no relógio')).toBe(true);
+    // só uma vez por luta
+    const thanos = lutador(b, 'thanos');
+    light.investigation[thanos.uid] = 99;
+    const vidaThanos = thanos.hp;
+    stepBattle(b);
+    expect(thanos.hp).toBeGreaterThan(vidaThanos - 200);
+  });
+
   it('Vash nunca derruba ninguém', () => {
     const b = createBattle(['vash', 'naruto', 'goku'], ['saitama', 'thanos', 'hulk'], 9);
     const vash = lutador(b, 'vash'), thanos = lutador(b, 'thanos');

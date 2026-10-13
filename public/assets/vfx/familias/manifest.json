@@ -1063,6 +1063,20 @@
   "laco": false,
   "bytes": 15022
  },
+ "auto_9": {
+  "descricao": "RoboCop · a Auto-9 e a mira do visor",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 22522
+ },
  "autobots_avante": {
   "descricao": "Optimus Prime · o símbolo Autobot e a onda no trio",
   "quadros": 12,
@@ -1076,6 +1090,20 @@
   ],
   "laco": false,
   "bytes": 64600
+ },
+ "avada_kedavra": {
+  "descricao": "Voldemort · o raio verde da morte",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 47606
  },
  "avada_verde": {
   "descricao": "Básico do Voldemort: o jato verde e a Marca",
@@ -2449,6 +2477,20 @@
   "laco": true,
   "bytes": 11524
  },
+ "bussola_magica": {
+  "descricao": "Jack Sparrow · a bússola apontando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 25348
+ },
  "buster_bala": {
   "descricao": "Mega Man · os três tiros do Buster voando (laço)",
   "quadros": 12,
@@ -3610,6 +3652,20 @@
   ],
   "laco": false,
   "bytes": 53020
+ },
+ "chicotada": {
+  "descricao": "Indiana Jones · o chicote enrolando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 14808
  },
  "chicote": {
   "descricao": "chicote estalando",
@@ -5109,6 +5165,20 @@
   "laco": true,
   "bytes": 21918
  },
+ "crucio": {
+  "descricao": "Voldemort · o raio de dor",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 25060
+ },
  "crueldade_freeza": {
   "descricao": "Freeza · a mão invisível apertando",
   "quadros": 12,
@@ -6368,6 +6438,20 @@
   ],
   "laco": false,
   "bytes": 20274
+ },
+ "emboscada_na_selva": {
+  "descricao": "Rambo · as armadilhas e as folhas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 41386
  },
  "emboscada_xenomorfa": {
   "descricao": "Xenomorfo · o sensor e a sombra",
@@ -7825,6 +7909,20 @@
   "laco": false,
   "bytes": 18792
  },
+ "expecto_patronum": {
+  "descricao": "Harry Potter · o cervo prateado",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 40764
+ },
  "expelliarmus": {
   "descricao": "Básico do Harry: o feitiço vermelho",
   "quadros": 12,
@@ -7838,6 +7936,20 @@
   ],
   "laco": false,
   "bytes": 15434
+ },
+ "expelliarmus_harry": {
+  "descricao": "Harry Potter · o raio vermelho e os buffs voando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 18184
  },
  "experiencia_dourada": {
   "descricao": "Giorno · as flores desabrochando e a luz",
@@ -8062,6 +8174,20 @@
   ],
   "laco": false,
   "bytes": 16132
+ },
+ "faca_de_sobrevivencia": {
+  "descricao": "Rambo · a faca serrilhada girando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 22814
  },
  "facada_de_myers": {
   "descricao": "Básico do Myers: a faca erguida",
@@ -8636,6 +8762,20 @@
   ],
   "laco": false,
   "bytes": 11830
+ },
+ "flecha_explosiva_rambo": {
+  "descricao": "Rambo · a flecha com a ponta piscando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 13266
  },
  "flecha_lunar": {
   "descricao": "Básico de Ártemis: a lua e a flecha de prata",
@@ -10849,6 +10989,20 @@
   "laco": true,
   "bytes": 60272
  },
+ "harry_preparo": {
+  "descricao": "Harry Potter · a varinha e a névoa prateada (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 5566
+ },
  "hasta_la_vista": {
   "descricao": "T-800 · o tiro com toda a energia",
   "quadros": 12,
@@ -11171,6 +11325,20 @@
   "laco": true,
   "bytes": 47918
  },
+ "imperius": {
+  "descricao": "Voldemort · os fios de marionete",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 19484
+ },
  "impeto_amazona": {
   "descricao": "Mulher-Maravilha · escudo, espada e a estrela",
   "quadros": 12,
@@ -11212,6 +11380,20 @@
   ],
   "laco": true,
   "bytes": 20688
+ },
+ "indy_preparo": {
+  "descricao": "Indiana Jones · o chapéu e o ídolo (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 12512
  },
  "instinto": {
   "descricao": "Instinto Superior: aura prateada e vultos",
@@ -18661,6 +18843,20 @@
   "laco": false,
   "bytes": 21092
  },
+ "mu_pagina_no_relogio": {
+  "descricao": "Light · a página escondida no relógio (Mecânica única)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 21132
+ },
  "mu_parede": {
   "descricao": "Alphonse · o muro de pedra",
   "quadros": 12,
@@ -21559,6 +21755,20 @@
   "laco": false,
   "bytes": 54016
  },
+ "pedra_rolando": {
+  "descricao": "Indiana Jones · a pedra gigante rolando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 45874
+ },
  "pedregulho_toph": {
   "descricao": "Toph · a pedra da Muralha esmagando o rival",
   "quadros": 12,
@@ -21656,6 +21866,20 @@
   ],
   "laco": false,
   "bytes": 13734
+ },
+ "perola_negra": {
+  "descricao": "Jack Sparrow · o navio e os canhões",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 40382
  },
  "perseguicao": {
   "descricao": "Tom · as pegadas e a poeira da perseguição",
@@ -21894,6 +22118,20 @@
   ],
   "laco": false,
   "bytes": 17144
+ },
+ "pistola_de_um_tiro": {
+  "descricao": "Jack Sparrow · a pistola de um tiro",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 32498
  },
  "plankton_preparo": {
   "descricao": "Plankton · o olho apertado e as antenas (Preparo, laço)",
@@ -22636,6 +22874,34 @@
   ],
   "laco": false,
   "bytes": 77130
+ },
+ "proteger_o_inocente": {
+  "descricao": "RoboCop · as diretrizes e o escudo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 18496
+ },
+ "protego": {
+  "descricao": "Harry Potter · os escudos transparentes",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 24796
  },
  "protocolo_de_protecao": {
   "descricao": "Homem de Ferro · as placas hexagonais no aliado",
@@ -23813,6 +24079,20 @@
   "laco": false,
   "bytes": 31530
  },
+ "rambo_preparo": {
+  "descricao": "Rambo · a faixa e os olhos no mato (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 20474
+ },
  "rampa_de_gelo": {
   "descricao": "Gelado · a rampa de gelo no ar",
   "quadros": 12,
@@ -24205,6 +24485,20 @@
   "laco": false,
   "bytes": 28344
  },
+ "reliquia": {
+  "descricao": "Indiana Jones · o ídolo e a luz no trio",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 70992
+ },
  "renascer": {
   "descricao": "asas de fogo: renasce das cinzas",
   "quadros": 12,
@@ -24554,6 +24848,20 @@
   ],
   "laco": false,
   "bytes": 32870
+ },
+ "robocop_preparo": {
+  "descricao": "RoboCop · o visor varrendo (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 2762
  },
  "rocha": {
   "descricao": "pedra em viagem (+x)",
@@ -26458,6 +26766,20 @@
   ],
   "laco": false,
   "bytes": 27674
+ },
+ "sparrow_preparo": {
+  "descricao": "Jack Sparrow · o chapéu e o vento (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 6740
  },
  "spawn_preparo": {
   "descricao": "Spawn · os olhos e o fogo verde (Preparo, laço)",
@@ -28545,6 +28867,20 @@
   "laco": true,
   "bytes": 18660
  },
+ "vivo_ou_morto": {
+  "descricao": "RoboCop · a mira travando e a rajada",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 45410
+ },
  "vodu": {
   "descricao": "Chucky · o alfinete no boneco",
   "quadros": 12,
@@ -28558,6 +28894,20 @@
   ],
   "laco": false,
   "bytes": 31456
+ },
+ "voldemort_preparo": {
+  "descricao": "Voldemort · a varinha e a Marca Negra (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 7438
  },
  "volta_alucardcv": {
   "descricao": "Alucard se refaz: a névoa fecha, os morcegos mergulham, a capa abre",

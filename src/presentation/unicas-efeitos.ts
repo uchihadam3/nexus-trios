@@ -416,6 +416,7 @@ export const EFEITO_DA_UNICA: Record<string, Record<string, { familia: VfxFamily
   rem: { '*': { familia: 'mu_furia_oni', som: 'mu-furia-oni' } },
   kirito: { '*': { familia: 'mu_jogador_solo', som: 'mu-jogador-solo' } },
   megamind: { '*': { familia: 'mu_plano_mestre', som: 'mu-plano-mestre' } },
+  light: { '*': { familia: 'mu_pagina_no_relogio', som: 'mu-pagina-no-relogio' } },
 };
 
 /** O efeito de uma ativação: o próprio dela, ou o círculo de runas de quem ainda não tem. */

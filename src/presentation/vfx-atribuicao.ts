@@ -188,6 +188,12 @@ const T: Record<string, string> = {
   agentsmith: 'soco_do_agente_smith copias_do_smith assimilar',
   johnwick: 'tiro_na_testa_wick lapis excomunicado',
   t800: 'escopeta_t800 eu_voltarei hasta_la_vista',
+  robocop: 'auto_9 proteger_o_inocente vivo_ou_morto',
+  rambo: 'flecha_explosiva_rambo faca_de_sobrevivencia emboscada_na_selva',
+  indianajones: 'chicotada pedra_rolando reliquia',
+  jacksparrow: 'bussola_magica pistola_de_um_tiro perola_negra',
+  harrypotter: 'expelliarmus_harry protego expecto_patronum',
+  voldemort: 'crucio imperius avada_kedavra',
 };
 
 export const FAMILIA_DA_HABILIDADE: Record<string, VfxFamily> = Object.fromEntries(

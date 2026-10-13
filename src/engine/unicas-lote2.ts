@@ -418,6 +418,34 @@ export const LOTE2: Record<string, Unica> = {
       causaAliado: (_m, b, f, _aliado, alvo) => (u(f).certeza !== undefined && u(f).certeza === idx(b, alvo) ? 1.35 : 1),
     },
   },
+  light: {
+    nome: 'Página no relógio',
+    texto: 'Uma vez por luta, quando Light fica com menos de 30% da Vida, ele escreve um nome no pedaço do Death Note escondido no relógio: o rival mais investigado cai na hora se tiver 60 ou mais de Investigação. Se esse rival for imune (ou tiver menos de 60), leva 110 de dano e fica Exposto (+55% de dano recebido) por 14 s.',
+    ganchos: {
+      passo(m, b, f) {
+        const s = u(f);
+        if (s.relogio || !vivo(f) || fracao(f) >= 0.3) return;
+        const rs = m.rivais(b, f);
+        if (!rs.length) return;
+        s.relogio = 1;
+        // o rival mais investigado (no empate, o com mais Vida)
+        const alvo = rs.reduce((a, r) => {
+          const ia = f.investigation[a.uid] ?? 0, ir = f.investigation[r.uid] ?? 0;
+          return ir > ia || (ir === ia && r.hp > a.hp) ? r : a;
+        });
+        m.aviso(b, f, 'Página no relógio', alvo);
+        const antes = f.investigation[alvo.uid] ?? 0;
+        if (antes >= 60 && byId[alvo.characterId]!.deathNoteCompatible) {
+          // a sentença é a mesma do Death Note (que pede a investigação completa)
+          f.investigation[alvo.uid] = 100;
+          m.efeitos(b, f, [alvo], [{ kind: 'deathnote', value: 0 }]);
+          if (vivo(alvo)) f.investigation[alvo.uid] = antes;
+        } else {
+          m.efeitos(b, f, [alvo], [st('exposed', 0.55, 14), { kind: 'damage', value: 110 }]);
+        }
+      },
+    },
+  },
   byakuya: {
     nome: 'Mil lâminas',
     texto: 'Depois de cada habilidade, Byakuya Kuchiki solta 10 pétalas-lâmina ao longo de 3 s: cada uma causa 12 de dano em um rival aleatório.',

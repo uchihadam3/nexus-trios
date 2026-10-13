@@ -207,6 +207,7 @@ export const JEITO_DA_UNICA: Record<string, JeitoDaUnica> = {
   kuririn: 'sempre',
   lara: 'sempre',
   lawliet: 'sempre',
+  light: 'condicional',
   leatherface: 'sempre',
   lelouch: 'rara',
   leon: 'sempre',
