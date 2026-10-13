@@ -1995,6 +1995,15 @@ export const FAMILIAS_NOVAS = {
   soco_da_ancora_popeye: n({ nome: 'Soco da âncora', grupo: 'físico', aponta: true, impacto: 'soco_da_ancora_popeye', escala: 2.0, tempo: 1.0, cor: '#6fb8d8', tinta: 'fixa' }),
   soquinho_de_esponja: n({ nome: 'Soquinho de esponja', grupo: 'físico', aponta: true, impacto: 'soquinho_de_esponja', escala: 2.0, tempo: 1.0, cor: '#f5d24a', tinta: 'fixa' }),
   soco_decepticon: n({ nome: 'Soco Decepticon', grupo: 'físico', aponta: true, impacto: 'soco_decepticon', escala: 2.1, tempo: 1.0, cor: '#b08cf0', tinta: 'fixa' }),
+  // o ataque básico de cada personagem com animação e som próprios (tools/vfx/familias_v2/basicos_*.py)
+  soco_superpoderosa: n({ nome: 'Soco superpoderoso', grupo: 'físico', aponta: true, impacto: 'soco_superpoderosa', escala: 2.0, tempo: 1.0, cor: '#6fe08a', tinta: 'fixa' }),
+  soco_musical_mickey: n({ nome: 'Soco musical', grupo: 'físico', aponta: true, impacto: 'soco_musical_mickey', escala: 2.0, tempo: 1.0, cor: '#ef6a6a', tinta: 'fixa' }),
+  golpe_de_carate_buzz: n({ nome: 'Golpe de caratê', grupo: 'físico', aponta: true, impacto: 'golpe_de_carate_buzz', escala: 2.0, tempo: 1.0, cor: '#a98cf0', tinta: 'fixa' }),
+  soco_do_xerife: n({ nome: 'Soco do xerife', grupo: 'físico', aponta: true, impacto: 'soco_do_xerife', escala: 2.0, tempo: 1.0, cor: '#f5c24a', tinta: 'fixa' }),
+  soco_de_rampa_de_gelo: n({ nome: 'Soco deslizando', grupo: 'físico', aponta: true, impacto: 'soco_de_rampa_de_gelo', escala: 2.0, tempo: 1.0, cor: '#7fc8f0', tinta: 'fixa' }),
+  palma_de_fogo_iroh: n({ nome: 'Palma de fogo', grupo: 'físico', aponta: true, impacto: 'palma_de_fogo_iroh', escala: 2.0, tempo: 1.0, cor: '#ff9a4d', tinta: 'fixa' }),
+  soco_de_laminas_destruidor: n({ nome: 'Manopla de lâminas', grupo: 'corte', aponta: true, impacto: 'soco_de_laminas_destruidor', escala: 2.0, tempo: 1.0, cor: '#b0b8d0', tinta: 'fixa' }),
+  soco_de_hoquei: n({ nome: 'Soco de hóquei', grupo: 'físico', aponta: true, impacto: 'soco_de_hoquei', escala: 2.0, tempo: 1.0, cor: '#d8b06a', tinta: 'fixa' }),
 } as const satisfies Record<string, Familia>;
 
 export type FamiliaNova = keyof typeof FAMILIAS_NOVAS;
@@ -2018,7 +2027,8 @@ export const NOVAS_NO_ALVO = new Set<FamiliaNova>(['ressurreicao', 'renascer', '
   'soco_de_metal_ultron', 'soco_do_duende', 'pancada_colossal_galactus', 'soco_de_madeira_groot', 'soco_da_mare', 'soco_de_construto', 'soco_cibernetico', 'soco_relampago_shazam',
   'soco_de_pegaso', 'soco_do_cisne', 'soco_da_fenix', 'soco_de_gemeos', 'soco_do_leao_dourado', 'soco_de_ferro_destino', 'socos_de_luva_tifa', 'grande_faca_piramide',
   'soquinho_estrelado_kirby', 'peteleco_divino', 'pancada_psiquica_mewtwo', 'punho_da_correnteza', 'soco_de_aco_genos', 'soco_de_rua_yusuke', 'soco_omega', 'soco_de_necroplasma',
-  'soco_do_invencivel', 'soco_de_sai_raphael', 'tapa_do_picapau', 'soco_do_omnitrix', 'soco_de_eternia', 'soco_da_ancora_popeye', 'soquinho_de_esponja', 'soco_decepticon']);
+  'soco_do_invencivel', 'soco_de_sai_raphael', 'tapa_do_picapau', 'soco_do_omnitrix', 'soco_de_eternia', 'soco_da_ancora_popeye', 'soquinho_de_esponja', 'soco_decepticon',
+  'soco_superpoderosa', 'soco_musical_mickey', 'golpe_de_carate_buzz', 'soco_do_xerife', 'soco_de_rampa_de_gelo', 'palma_de_fogo_iroh', 'soco_de_laminas_destruidor', 'soco_de_hoquei']);
 
 /** Bons para o ataque básico do personagem (quando ele já usa a família numa habilidade). */
 export const NOVAS_DE_BASICO = new Set<FamiliaNova>(['garras', 'chicote', 'bastao', 'mordida', 'tentaculos', 'florete',

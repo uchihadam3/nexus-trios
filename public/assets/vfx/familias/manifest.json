@@ -11703,6 +11703,20 @@
   "laco": false,
   "bytes": 20004
  },
+ "golpe_de_carate_buzz": {
+  "descricao": "básico do Buzz: a mão reta de caratê caindo de cima",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 23528
+ },
  "golpe_de_ferrao": {
   "descricao": "Básico do Cavaleiro: o Ferrão e a Alma",
   "quadros": 12,
@@ -23463,6 +23477,20 @@
   "laco": false,
   "bytes": 50264
  },
+ "palma_de_fogo_iroh": {
+  "descricao": "básico do Iroh: a palma aberta e a chama em espiral",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 24808
+ },
  "palma_faixa": {
   "descricao": "Killua · o raio da Palma relâmpago até o rival (faixa)",
   "quadros": 12,
@@ -29175,6 +29203,20 @@
   "laco": false,
   "bytes": 33332
  },
+ "soco_de_hoquei": {
+  "descricao": "básico do Casey Jones: a luva de hóquei e o disco voando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 25122
+ },
  "soco_de_johnny": {
   "descricao": "Básico do Johnny Bravo: o brilho e o soco",
   "quadros": 12,
@@ -29216,6 +29258,20 @@
   ],
   "laco": false,
   "bytes": 22134
+ },
+ "soco_de_laminas_destruidor": {
+  "descricao": "básico do Destruidor: a manopla de lâminas e os três cortes",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 22660
  },
  "soco_de_luva_da_vampira": {
   "descricao": "básico da Vampira: a luva comprida, o rastro de voo e os dois anéis",
@@ -29342,6 +29398,20 @@
   ],
   "laco": false,
   "bytes": 67826
+ },
+ "soco_de_rampa_de_gelo": {
+  "descricao": "básico do Gelado: deslizando na rampa de gelo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 29962
  },
  "soco_de_rua_yusuke": {
   "descricao": "básico do Yusuke: soco de rua de mão enfaixada",
@@ -29665,6 +29735,20 @@
   "laco": false,
   "bytes": 36606
  },
+ "soco_do_xerife": {
+  "descricao": "básico do Woody: o punho xadrez e a estrela de xerife",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 18922
+ },
  "soco_eletrico_jin": {
   "descricao": "básico do Jin: o soco de caratê e a faísca elétrica azul",
   "quadros": 12,
@@ -29819,6 +29903,20 @@
   "laco": false,
   "bytes": 42490
  },
+ "soco_musical_mickey": {
+  "descricao": "básico do Mickey: a luva branca e as notinhas musicais",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 27548
+ },
  "soco_omega": {
   "descricao": "básico do Darkseid: o punho de pedra e o Ω vermelho",
   "quadros": 12,
@@ -29916,6 +30014,20 @@
   ],
   "laco": false,
   "bytes": 25464
+ },
+ "soco_superpoderosa": {
+  "descricao": "básico da Docinho: o punhinho voando com o rastro de cor",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 22416
  },
  "soco_supersonico": {
   "descricao": "Invencível · o soco e o cone de som",

@@ -13721,6 +13721,23 @@
    ],
    "bytes": 51729
   },
+  "golpe-de-carate-buzz": {
+   "arquivo": "golpe-de-carate-buzz.mp3",
+   "descricao": "básico de Buzz: o golpe de caratê e o brilho espacial",
+   "versoes": [
+    0.0,
+    0.7326,
+    1.5995,
+    2.3832
+   ],
+   "duracoes": [
+    0.6526,
+    0.7869,
+    0.7036,
+    0.8307
+   ],
+   "bytes": 28343
+  },
   "golpe-de-ferrao": {
    "arquivo": "golpe-de-ferrao.mp3",
    "descricao": "básico do Cavaleiro: o Ferrão e a Alma",
@@ -28052,6 +28069,23 @@
    ],
    "bytes": 76542
   },
+  "palma-de-fogo-iroh": {
+   "arquivo": "palma-de-fogo-iroh.mp3",
+   "descricao": "básico de Iroh: o fogo manso soprando e a palma",
+   "versoes": [
+    0.0,
+    1.0859,
+    2.2321,
+    3.2906
+   ],
+   "duracoes": [
+    1.0059,
+    1.0662,
+    0.9785,
+    1.0547
+   ],
+   "bytes": 41446
+  },
   "palma-gentil": {
    "arquivo": "palma-gentil.mp3",
    "descricao": "básico da Hinata: o Byakugan e a palma",
@@ -34835,6 +34869,23 @@
    ],
    "bytes": 41803
   },
+  "soco-de-hoquei": {
+   "arquivo": "soco-de-hoquei.mp3",
+   "descricao": "básico de Casey Jones: o soco e o disco voando",
+   "versoes": [
+    0.0,
+    1.1162,
+    2.0643,
+    3.0483
+   ],
+   "duracoes": [
+    1.0362,
+    0.8681,
+    0.904,
+    0.8214
+   ],
+   "bytes": 30546
+  },
   "soco-de-johnny": {
    "arquivo": "soco-de-johnny.mp3",
    "descricao": "básico do Johnny Bravo: o brilho e o soco",
@@ -34885,6 +34936,23 @@
     1.5228
    ],
    "bytes": 43016
+  },
+  "soco-de-laminas-destruidor": {
+   "arquivo": "soco-de-laminas-destruidor.mp3",
+   "descricao": "básico de Destruidor: as lâminas raspando",
+   "versoes": [
+    0.0,
+    0.9086,
+    1.9861,
+    2.9857
+   ],
+   "duracoes": [
+    0.8286,
+    0.9976,
+    0.9195,
+    1.015
+   ],
+   "bytes": 33419
   },
   "soco-de-luva-da-vampira": {
    "arquivo": "soco-de-luva-da-vampira.mp3",
@@ -35038,6 +35106,23 @@
     1.0152
    ],
    "bytes": 42040
+  },
+  "soco-de-rampa-de-gelo": {
+   "arquivo": "soco-de-rampa-de-gelo.mp3",
+   "descricao": "básico de Gelado: o gelo deslizando e os cristais",
+   "versoes": [
+    0.0,
+    0.9902,
+    2.004,
+    2.8785
+   ],
+   "duracoes": [
+    0.9102,
+    0.9338,
+    0.7945,
+    0.9249
+   ],
+   "bytes": 34158
   },
   "soco-de-rua-yusuke": {
    "arquivo": "soco-de-rua-yusuke.mp3",
@@ -35430,6 +35515,23 @@
    ],
    "bytes": 71156
   },
+  "soco-do-xerife": {
+   "arquivo": "soco-do-xerife.mp3",
+   "descricao": "básico de Woody: o soco de pano e o brilho da estrela",
+   "versoes": [
+    0.0,
+    0.9803,
+    1.9419,
+    2.8395
+   ],
+   "duracoes": [
+    0.9003,
+    0.8816,
+    0.8176,
+    0.8263
+   ],
+   "bytes": 28242
+  },
   "soco-eletrico-jin": {
    "arquivo": "soco-eletrico-jin.mp3",
    "descricao": "básico de Jin: o soco de caratê e o estalo elétrico",
@@ -35634,6 +35736,23 @@
    ],
    "bytes": 13675
   },
+  "soco-musical-mickey": {
+   "arquivo": "soco-musical-mickey.mp3",
+   "descricao": "básico de Mickey: o soco borrachudo e as notinhas",
+   "versoes": [
+    0.0,
+    0.9974,
+    1.9858,
+    2.8941
+   ],
+   "duracoes": [
+    0.9174,
+    0.9085,
+    0.8283,
+    0.8906
+   ],
+   "bytes": 26912
+  },
   "soco-omega": {
    "arquivo": "soco-omega.mp3",
    "descricao": "básico de Darkseid: o soco pesado e o acorde grave",
@@ -35769,6 +35888,23 @@
     1.0152
    ],
    "bytes": 29791
+  },
+  "soco-superpoderosa": {
+   "arquivo": "soco-superpoderosa.mp3",
+   "descricao": "básico de Docinho: o zunido de voo e o pow",
+   "versoes": [
+    0.0,
+    0.7845,
+    1.5704,
+    2.4522
+   ],
+   "duracoes": [
+    0.7045,
+    0.7059,
+    0.8018,
+    0.7238
+   ],
+   "bytes": 26630
   },
   "soco-supersonico": {
    "arquivo": "soco-supersonico.mp3",
