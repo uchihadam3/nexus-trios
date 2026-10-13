@@ -25,6 +25,12 @@
  * trio que junta dois ou três curandeiros passava de 55 mil por luta, e a jornada dele chegava a
  * 2,4 milhões, o dobro dos outros trios fortes (pedido do jogador: "abaixa um pouco os curandeiros").
  *
+ * E os feitos da luta toda (dano, nocautes, cura e proteção, habilidades, Status/ritmo/Carga) contam inteiros
+ * até LUTA.cheio; acima disso, só LUTA.acima de cada ponto. Uma luta normal dá uns 30 mil de feitos (99% abaixo
+ * de 57 mil) e dura uns 30 s; o trio de três curandeiros que ninguém consegue derrubar arrastava a luta por mais de
+ * 200 s, somando buffs, Carga e habilidades o tempo todo (180 mil por luta, 3 milhões na jornada). Os pontos vêm do
+ * que o trio faz, não de quanto tempo ele enrola.
+ *
  * Também contam: manter o trio vivo (Vida que sobrou e quem ficou de pé) e
  * virar o Domínio. Os feitos crescem com a altura da jornada (luta 10 ×1,45).
  * A jornada é a soma das lutas; a derrota encerra, mas os pontos dela ficam.
@@ -87,6 +93,10 @@ export const PONTOS = {
 export const APOIO = { cheio: 15_000, acima: 0.2 } as const;
 export const apoioDaLuta = (bruto: number) => (bruto <= APOIO.cheio ? bruto : APOIO.cheio + (bruto - APOIO.cheio) * APOIO.acima);
 
+/** Os feitos da luta (já com o fator de cada personagem e o corte da cura): inteiros até `cheio`, e daí para cima só `acima` de cada ponto. */
+export const LUTA = { cheio: 45_000, acima: 0.1 } as const;
+export const feitosDaLuta = (bruto: number) => (bruto <= LUTA.cheio ? bruto : LUTA.cheio + (bruto - LUTA.cheio) * LUTA.acima);
+
 /** O que cada luta custa a quem montou o trio com as Dicas de trio ligadas. */
 export const CUSTO_DAS_DICAS = 10_000;
 
@@ -118,12 +128,16 @@ export function pontosDaLuta(battle: Battle, indice = 0, dicas = false): PontosD
     const x = feitosDoLutador(f);
     for (const k of Object.keys(soma) as (keyof typeof soma)[]) soma[k] += x[k] * fator;
   }
+  soma.apoio = apoioDaLuta(soma.apoio);
+  // o corte da luta longa vale igual para cada tipo de feito, e a ficha mostra a parte de cada um
+  const bruto = soma.dano + soma.nocautes + soma.apoio + soma.jogadas + soma.efeitos;
+  const corte = bruto > 0 ? feitosDaLuta(bruto) / bruto : 1;
   const brutas: [ParcelaId, string, number][] = [
-    ['dano', 'Dano causado', soma.dano * m],
-    ['nocautes', 'Nocautes', soma.nocautes * m],
-    ['apoio', 'Cura e proteção', apoioDaLuta(soma.apoio) * m],
-    ['jogadas', 'Habilidades e cortes', soma.jogadas * m],
-    ['efeitos', 'Status, ritmo e Carga', soma.efeitos * m],
+    ['dano', 'Dano causado', soma.dano * corte * m],
+    ['nocautes', 'Nocautes', soma.nocautes * corte * m],
+    ['apoio', 'Cura e proteção', soma.apoio * corte * m],
+    ['jogadas', 'Habilidades e cortes', soma.jogadas * corte * m],
+    ['efeitos', 'Status, ritmo e Carga', soma.efeitos * corte * m],
     ['viradas', 'Viradas', Math.min(PONTOS.viradasMaximo, (battle.viradasDoTrio ?? 0) * PONTOS.porVirada) * m],
     ['vida', `Trio vivo · ${de_pe} de pé`, (vidaMedia * PONTOS.vidaMaxima + de_pe * PONTOS.porSobrevivente) * m],
     ['vitoria', 'Vitória', venceu ? PONTOS.vitoria : 0],

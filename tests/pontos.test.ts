@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { replayRanked } from '../src/engine/ranked';
 import { generateCampaign } from '../src/engine/campaign';
 import { createBattle, stepBattle } from '../src/engine/battle';
-import { APOIO, apoioDaLuta, pontosDaJornada, pontosDaLuta } from '../src/engine/pontos';
+import { APOIO, LUTA, apoioDaLuta, feitosDaLuta, pontosDaJornada, pontosDaLuta } from '../src/engine/pontos';
 import { characters } from '../src/data/characters';
 import { FATOR_DE_PONTOS } from '../src/data/pontos-por-personagem';
 
@@ -36,6 +36,14 @@ describe('pontos', () => {
     // o trio de três curandeiros (uns 58 mil por luta) passa a contar menos da metade
     expect(apoioDaLuta(58_000)).toBeCloseTo(APOIO.cheio + 43_000 * APOIO.acima);
     expect(apoioDaLuta(58_000) / 58_000).toBeLessThan(0.5);
+  });
+
+  it('a luta que se arrasta não rende feitos sem fim', () => {
+    expect(feitosDaLuta(30_000)).toBe(30_000);
+    expect(feitosDaLuta(LUTA.cheio)).toBe(LUTA.cheio);
+    // a luta de 200 s do trio de curandeiros (uns 180 mil de feitos) passa a contar pouco mais que uma luta cheia
+    expect(feitosDaLuta(180_000)).toBeCloseTo(LUTA.cheio + 135_000 * LUTA.acima);
+    expect(feitosDaLuta(180_000)).toBeLessThan(2 * LUTA.cheio);
   });
 
   it('todo personagem tem o seu fator de pontos, dentro do limite (rode scripts/equilibrar-pontos.ts se mudar o elenco)', () => {
