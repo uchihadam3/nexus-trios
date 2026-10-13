@@ -573,6 +573,20 @@
   "laco": false,
   "bytes": 19914
  },
+ "armadilha_logica": {
+  "descricao": "L · o tabuleiro se fechando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 11280
+ },
  "armadilha_montada": {
   "descricao": "Coiote · a luva de boxe na mola",
   "quadros": 12,
@@ -712,6 +726,20 @@
   ],
   "laco": false,
   "bytes": 34264
+ },
+ "asura": {
+  "descricao": "Zoro · os nove cortes do demônio",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 54350
  },
  "ataque_da_alma": {
   "descricao": "Alucard · as almas voando",
@@ -1819,6 +1847,20 @@
   "laco": false,
   "bytes": 20282
  },
+ "bola_de_trovao": {
+  "descricao": "Nami · a nuvem soltando o raio",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 22464
+ },
  "bola_do_charizard": {
   "descricao": "Charizard · a bola de fogo voando (laço)",
   "quadros": 12,
@@ -2785,6 +2827,20 @@
   "laco": true,
   "bytes": 17178
  },
+ "caso_resolvido": {
+  "descricao": "L · as pistas convergindo e o visto",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 26810
+ },
  "cauda_de_godzilla": {
   "descricao": "Básico do Godzilla: a cauda com as placas",
   "quadros": 12,
@@ -3275,6 +3331,20 @@
   "laco": false,
   "bytes": 13396
  },
+ "chopper_preparo": {
+  "descricao": "Chopper · a Rumble Ball pulsando (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 17182
+ },
  "choque_do_pikachu": {
   "descricao": "básico do Pikachu: faíscas em zigue-zague e bochechas crepitando",
   "quadros": 12,
@@ -3736,6 +3806,20 @@
   ],
   "laco": false,
   "bytes": 22778
+ },
+ "concasser": {
+  "descricao": "Sanji · o chute como machado",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 28272
  },
  "confusao_total": {
   "descricao": "Pica-Pau · as penas e as estrelinhas",
@@ -4885,6 +4969,20 @@
   "laco": false,
   "bytes": 40346
  },
+ "devil_bringer": {
+  "descricao": "Nero · o braço fantasma agarrando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 31688
+ },
  "devil_trigger": {
   "descricao": "Dante · as asas, o Stinger e a explosão",
   "quadros": 12,
@@ -4926,6 +5024,20 @@
   ],
   "laco": false,
   "bytes": 41498
+ },
+ "diable_jambe": {
+  "descricao": "Sanji · a perna em brasa girando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 23964
  },
  "diamante_faixa": {
   "descricao": "Hyoga · o Pó de Diamante correndo até o rival (faixa)",
@@ -9099,6 +9211,20 @@
   "laco": true,
   "bytes": 11802
  },
+ "hell_memories": {
+  "descricao": "Sanji · as chamas do inferno em todos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 63030
+ },
  "hellboy_preparo": {
   "descricao": "Hellboy · a Mão da Perdição erguida (Preparo, laço)",
   "quadros": 12,
@@ -9700,6 +9826,20 @@
   ],
   "laco": false,
   "bytes": 31930
+ },
+ "investigacao": {
+  "descricao": "L · a lupa e as pistas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 25962
  },
  "investigacao_light": {
   "descricao": "Light · a mira e a leitura do rival",
@@ -10498,6 +10638,20 @@
   ],
   "laco": false,
   "bytes": 47938
+ },
+ "l_preparo": {
+  "descricao": "L · a torre de cubos de açúcar (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 4344
  },
  "laco": {
   "descricao": "Laço: a laçada gira, voa, cai em volta do alvo e aperta",
@@ -12151,6 +12305,20 @@
   "laco": false,
   "bytes": 31726
  },
+ "miragem": {
+  "descricao": "Nami · o ar tremendo e as cópias",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 47892
+ },
  "missil": {
   "descricao": "míssil em viagem (+x)",
   "quadros": 12,
@@ -12304,6 +12472,20 @@
   ],
   "laco": true,
   "bytes": 20466
+ },
+ "monster_point": {
+  "descricao": "Chopper · o monstro e o soco enorme",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 55766
  },
  "mordida": {
   "descricao": "dentes fechando",
@@ -18143,6 +18325,20 @@
   "laco": false,
   "bytes": 22242
  },
+ "nami_preparo": {
+  "descricao": "Nami · o bastão girando as bolhas (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 12142
+ },
  "nen_gon": {
   "descricao": "Gon · a aura juntando no punho (laço)",
   "quadros": 12,
@@ -18156,6 +18352,20 @@
   ],
   "laco": true,
   "bytes": 43632
+ },
+ "nero_preparo": {
+  "descricao": "Nero · a Red Queen roncando (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 22158
  },
  "neutralizacao_silenciosa": {
   "descricao": "Loid · o tiro com silenciador e o Preparo quebrado",
@@ -18436,6 +18646,20 @@
   ],
   "laco": false,
   "bytes": 36870
+ },
+ "oni_giri": {
+  "descricao": "Zoro · as três espadas cruzando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 22680
  },
  "optimus_preparo": {
   "descricao": "Optimus Prime · a Matriz da Liderança acesa (Preparo, laço)",
@@ -20901,6 +21125,20 @@
   "laco": false,
   "bytes": 87914
  },
+ "red_queen": {
+  "descricao": "Nero · o corte com as chamas do acelerador",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 18964
+ },
  "redemoinho_taz": {
   "descricao": "Taz · o redemoinho marrom",
   "quadros": 12,
@@ -21559,6 +21797,20 @@
   "laco": false,
   "bytes": 142508
  },
+ "rumble_ball": {
+  "descricao": "Chopper · a pílula e o corpo inchando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 43156
+ },
  "runa_lich": {
   "descricao": "Arthas · as runas girando no Preparo (laço)",
   "quadros": 12,
@@ -21754,6 +22006,20 @@
   ],
   "laco": false,
   "bytes": 33030
+ },
+ "sanji_preparo": {
+  "descricao": "Sanji · o cigarro e a perna pegando fogo (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 8834
  },
  "santen_kesshun": {
   "descricao": "Orihime · as três fadas e o escudo em triângulo",
@@ -22286,6 +22552,20 @@
   ],
   "laco": true,
   "bytes": 40448
+ },
+ "showdown": {
+  "descricao": "Nero · os cortes, os tiros e o golpe final",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 41774
  },
  "shredder_preparo": {
   "descricao": "Destruidor · a manopla erguida (Preparo, laço)",
@@ -23407,6 +23687,20 @@
   "laco": false,
   "bytes": 34714
  },
+ "tatsumaki_zoro": {
+  "descricao": "Zoro · o tornado de cortes",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 29600
+ },
  "taz_preparo": {
   "descricao": "Taz · o redemoinho começando (Preparo, laço)",
   "quadros": 12,
@@ -23644,6 +23938,20 @@
   ],
   "laco": false,
   "bytes": 25778
+ },
+ "tempo_do_trovao": {
+  "descricao": "Nami · a nuvem negra e os raios em todos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 60270
  },
  "tenho_a_forca": {
   "descricao": "Eu tenho a força: raios na espada erguida",
@@ -24106,6 +24414,20 @@
   ],
   "laco": false,
   "bytes": 39274
+ },
+ "tratamento_de_campo": {
+  "descricao": "Chopper · a maleta e a cruz de médico",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 41432
  },
  "trava_de_mira": {
   "descricao": "Samus · a mira do visor travando",
@@ -25170,6 +25492,20 @@
   ],
   "laco": true,
   "bytes": 11368
+ },
+ "zoro_preparo": {
+  "descricao": "Zoro · as três espadas e a sombra (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 21028
  },
  "zuko_preparo": {
   "descricao": "Zuko · as duas espadas cruzadas (Preparo, laço)",

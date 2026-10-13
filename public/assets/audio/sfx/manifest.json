@@ -733,6 +733,23 @@
    ],
    "bytes": 67483
   },
+  "armadilha-logica": {
+   "arquivo": "armadilha-logica.mp3",
+   "descricao": "L: a armadilha lógica",
+   "versoes": [
+    0.0,
+    1.5428,
+    2.9949,
+    4.3877
+   ],
+   "duracoes": [
+    1.4628,
+    1.3721,
+    1.3128,
+    1.3317
+   ],
+   "bytes": 51374
+  },
   "armadilha-montada": {
    "arquivo": "armadilha-montada.mp3",
    "descricao": "Coiote: a armadilha montada",
@@ -902,6 +919,23 @@
     1.5877
    ],
    "bytes": 54422
+  },
+  "asura": {
+   "arquivo": "asura.mp3",
+   "descricao": "Zoro: Asura",
+   "versoes": [
+    0.0,
+    2.48,
+    5.047,
+    7.4459
+   ],
+   "duracoes": [
+    2.4,
+    2.487,
+    2.3188,
+    2.4365
+   ],
+   "bytes": 77966
   },
   "ataque-da-alma": {
    "arquivo": "ataque-da-alma.mp3",
@@ -2161,6 +2195,23 @@
    ],
    "bytes": 36985
   },
+  "bola-de-trovao": {
+   "arquivo": "bola-de-trovao.mp3",
+   "descricao": "Nami: a bola de trovão",
+   "versoes": [
+    0.0,
+    1.6788,
+    3.338,
+    4.8566
+   ],
+   "duracoes": [
+    1.5988,
+    1.5792,
+    1.4386,
+    1.5326
+   ],
+   "bytes": 49294
+  },
   "bola-sombria": {
    "arquivo": "bola-sombria.mp3",
    "descricao": "Gengar: a bola sombria",
@@ -3198,6 +3249,23 @@
    ],
    "bytes": 54040
   },
+  "caso-resolvido": {
+   "arquivo": "caso-resolvido.mp3",
+   "descricao": "L: caso resolvido",
+   "versoes": [
+    0.0,
+    2.28,
+    4.6398,
+    6.8454
+   ],
+   "duracoes": [
+    2.2,
+    2.2798,
+    2.1256,
+    2.2335
+   ],
+   "bytes": 58086
+  },
   "cauda-de-godzilla": {
    "arquivo": "cauda-de-godzilla.mp3",
    "descricao": "básico do Godzilla: o rugido e a cauda",
@@ -3759,6 +3827,23 @@
    ],
    "bytes": 36923
   },
+  "chopper-preparo": {
+   "arquivo": "chopper-preparo.mp3",
+   "descricao": "Chopper: o coração forte (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 51989
+  },
   "choque-do-pikachu": {
    "arquivo": "choque-do-pikachu.mp3",
    "descricao": "básico de Pikachu: choque elétrico crepitante agudo",
@@ -4319,6 +4404,23 @@
     1.406
    ],
    "bytes": 74737
+  },
+  "concasser": {
+   "arquivo": "concasser.mp3",
+   "descricao": "Sanji: Concasser",
+   "versoes": [
+    0.0,
+    1.6714,
+    3.24,
+    4.7699
+   ],
+   "duracoes": [
+    1.5914,
+    1.4886,
+    1.4499,
+    1.4283
+   ],
+   "bytes": 45068
   },
   "confusao-total": {
    "arquivo": "confusao-total.mp3",
@@ -5629,6 +5731,23 @@
    ],
    "bytes": 79346
   },
+  "devil-bringer": {
+   "arquivo": "devil-bringer.mp3",
+   "descricao": "Nero: Devil Bringer",
+   "versoes": [
+    0.0,
+    1.566,
+    3.1849,
+    4.7017
+   ],
+   "duracoes": [
+    1.486,
+    1.5388,
+    1.4368,
+    1.5082
+   ],
+   "bytes": 46001
+  },
   "devil-trigger": {
    "arquivo": "devil-trigger.mp3",
    "descricao": "Dante: o rugido, o Stinger e a explosão",
@@ -5679,6 +5798,23 @@
     1.8274
    ],
    "bytes": 65419
+  },
+  "diable-jambe": {
+   "arquivo": "diable-jambe.mp3",
+   "descricao": "Sanji: Diable Jambe",
+   "versoes": [
+    0.0,
+    1.6984,
+    3.5457,
+    5.2311
+   ],
+   "duracoes": [
+    1.6184,
+    1.7673,
+    1.6054,
+    1.7435
+   ],
+   "bytes": 59811
   },
   "dimensao-x": {
    "arquivo": "dimensao-x.mp3",
@@ -10559,6 +10695,23 @@
    ],
    "bytes": 59028
   },
+  "hell-memories": {
+   "arquivo": "hell-memories.mp3",
+   "descricao": "Sanji: Hell Memories",
+   "versoes": [
+    0.0,
+    2.48,
+    4.9759,
+    7.3747
+   ],
+   "duracoes": [
+    2.4,
+    2.4159,
+    2.3188,
+    2.3293
+   ],
+   "bytes": 73991
+  },
   "hellboy-preparo": {
    "arquivo": "hellboy-preparo.mp3",
    "descricao": "Hellboy: a Mão da Perdição (Preparo)",
@@ -11340,6 +11493,23 @@
     2.132
    ],
    "bytes": 73619
+  },
+  "investigacao": {
+   "arquivo": "investigacao.mp3",
+   "descricao": "L: a investigação",
+   "versoes": [
+    0.0,
+    1.7756,
+    3.6611,
+    5.3819
+   ],
+   "duracoes": [
+    1.6956,
+    1.8055,
+    1.6407,
+    1.7151
+   ],
+   "bytes": 65669
   },
   "investigacao-light": {
    "arquivo": "investigacao-light.mp3",
@@ -12309,6 +12479,23 @@
     2.0305
    ],
    "bytes": 63846
+  },
+  "l-preparo": {
+   "arquivo": "l-preparo.mp3",
+   "descricao": "L: os cubos de açúcar (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 54500
   },
   "laco": {
    "arquivo": "laco.mp3",
@@ -14282,6 +14469,23 @@
    ],
    "bytes": 36639
   },
+  "miragem": {
+   "arquivo": "miragem.mp3",
+   "descricao": "Nami: a miragem",
+   "versoes": [
+    0.0,
+    1.817,
+    3.6959,
+    5.4552
+   ],
+   "duracoes": [
+    1.737,
+    1.7989,
+    1.6793,
+    1.763
+   ],
+   "bytes": 47797
+  },
   "missil": {
    "arquivo": "missil.mp3",
    "descricao": "míssil",
@@ -14468,6 +14672,23 @@
     1.4213
    ],
    "bytes": 56968
+  },
+  "monster-point": {
+   "arquivo": "monster-point.mp3",
+   "descricao": "Chopper: Monster Point",
+   "versoes": [
+    0.0,
+    2.3112,
+    4.7306,
+    6.8974
+   ],
+   "duracoes": [
+    2.2312,
+    2.3394,
+    2.0868,
+    2.1974
+   ],
+   "bytes": 73858
   },
   "mordida": {
    "arquivo": "mordida.mp3",
@@ -21592,6 +21813,23 @@
    ],
    "bytes": 41990
   },
+  "nami-preparo": {
+   "arquivo": "nami-preparo.mp3",
+   "descricao": "Nami: o bastão de clima (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 53488
+  },
   "nao-vou-cair": {
    "arquivo": "nao-vou-cair.mp3",
    "descricao": "Não vou cair: o grito e a aura de Super Saiyajin",
@@ -21625,6 +21863,23 @@
     1.3198
    ],
    "bytes": 51167
+  },
+  "nero-preparo": {
+   "arquivo": "nero-preparo.mp3",
+   "descricao": "Nero: a Red Queen roncando (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 50747
   },
   "neutralizacao-silenciosa": {
    "arquivo": "neutralizacao-silenciosa.mp3",
@@ -21982,6 +22237,23 @@
     1.9959
    ],
    "bytes": 70729
+  },
+  "oni-giri": {
+   "arquivo": "oni-giri.mp3",
+   "descricao": "Zoro: Oni Giri",
+   "versoes": [
+    0.0,
+    1.5683,
+    3.1894,
+    4.7081
+   ],
+   "duracoes": [
+    1.4883,
+    1.5411,
+    1.4387,
+    1.5102
+   ],
+   "bytes": 56992
   },
   "optimus-preparo": {
    "arquivo": "optimus-preparo.mp3",
@@ -24856,6 +25128,23 @@
    ],
    "bytes": 74331
   },
+  "red-queen": {
+   "arquivo": "red-queen.mp3",
+   "descricao": "Nero: Red Queen",
+   "versoes": [
+    0.0,
+    1.4004,
+    2.818,
+    4.1476
+   ],
+   "duracoes": [
+    1.3204,
+    1.3376,
+    1.2496,
+    1.3392
+   ],
+   "bytes": 44153
+  },
   "redemoinho-taz": {
    "arquivo": "redemoinho-taz.mp3",
    "descricao": "Taz: o redemoinho",
@@ -25706,6 +25995,23 @@
    ],
    "bytes": 85199
   },
+  "rumble-ball": {
+   "arquivo": "rumble-ball.mp3",
+   "descricao": "Chopper: a Rumble Ball",
+   "versoes": [
+    0.0,
+    1.6997,
+    3.4571,
+    5.1031
+   ],
+   "duracoes": [
+    1.6197,
+    1.6774,
+    1.566,
+    1.6439
+   ],
+   "bytes": 40585
+  },
   "runa-lich": {
    "arquivo": "runa-lich.mp3",
    "descricao": "as runas da Frostmourne girando",
@@ -25943,6 +26249,23 @@
     1.2117
    ],
    "bytes": 38318
+  },
+  "sanji-preparo": {
+   "arquivo": "sanji-preparo.mp3",
+   "descricao": "Sanji: a perna pegando fogo (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 52470
   },
   "santen-kesshun": {
    "arquivo": "santen-kesshun.mp3",
@@ -26504,6 +26827,23 @@
     1.29
    ],
    "bytes": 52277
+  },
+  "showdown": {
+   "arquivo": "showdown.mp3",
+   "descricao": "Nero: Showdown",
+   "versoes": [
+    0.0,
+    2.3082,
+    4.7336,
+    7.0358
+   ],
+   "duracoes": [
+    2.2282,
+    2.3454,
+    2.2222,
+    2.335
+   ],
+   "bytes": 81046
   },
   "shredder-preparo": {
    "arquivo": "shredder-preparo.mp3",
@@ -27848,6 +28188,23 @@
    ],
    "bytes": 50228
   },
+  "tatsumaki-zoro": {
+   "arquivo": "tatsumaki-zoro.mp3",
+   "descricao": "Zoro: Tatsumaki",
+   "versoes": [
+    0.0,
+    1.558,
+    3.1989,
+    4.662
+   ],
+   "duracoes": [
+    1.478,
+    1.5609,
+    1.3831,
+    1.5536
+   ],
+   "bytes": 57610
+  },
   "taz-preparo": {
    "arquivo": "taz-preparo.mp3",
    "descricao": "Taz: o redemoinho começando (Preparo)",
@@ -28051,6 +28408,23 @@
     2.4365
    ],
    "bytes": 96185
+  },
+  "tempo-do-trovao": {
+   "arquivo": "tempo-do-trovao.mp3",
+   "descricao": "Nami: o tempo do trovão",
+   "versoes": [
+    0.0,
+    2.4558,
+    4.9266,
+    7.2633
+   ],
+   "duracoes": [
+    2.3758,
+    2.3908,
+    2.2568,
+    2.2559
+   ],
+   "bytes": 72343
   },
   "tenho-a-forca": {
    "arquivo": "tenho-a-forca.mp3",
@@ -28663,6 +29037,23 @@
     1.3844
    ],
    "bytes": 72345
+  },
+  "tratamento-de-campo": {
+   "arquivo": "tratamento-de-campo.mp3",
+   "descricao": "Chopper: o tratamento de campo",
+   "versoes": [
+    0.0,
+    1.5662,
+    3.17,
+    4.687
+   ],
+   "duracoes": [
+    1.4862,
+    1.5239,
+    1.437,
+    1.5083
+   ],
+   "bytes": 53485
   },
   "trava-de-mira": {
    "arquivo": "trava-de-mira.mp3",
@@ -30091,6 +30482,23 @@
     1.4213
    ],
    "bytes": 26887
+  },
+  "zoro-preparo": {
+   "arquivo": "zoro-preparo.mp3",
+   "descricao": "Zoro: a aura do Asura (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 52153
   },
   "zuko-preparo": {
    "arquivo": "zuko-preparo.mp3",

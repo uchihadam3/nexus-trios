@@ -116,6 +116,12 @@ const T: Record<string, string> = {
   robin: 'bastao_retratil batarangue_robin ataque_em_dupla',
   luigi: 'bola_de_fogo_verde poltergust missil_luigi',
   peach: 'sombrinha bolo_de_cura vibe_da_princesa',
+  zoro: 'oni_giri tatsumaki_zoro asura',
+  nami: 'bola_de_trovao miragem tempo_do_trovao',
+  sanji: 'concasser diable_jambe hell_memories',
+  chopper: 'tratamento_de_campo rumble_ball monster_point',
+  nero: 'red_queen devil_bringer showdown',
+  lawliet: 'investigacao armadilha_logica caso_resolvido',
 };
 
 export const FAMILIA_DA_HABILIDADE: Record<string, VfxFamily> = Object.fromEntries(
