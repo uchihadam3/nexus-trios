@@ -72,6 +72,27 @@
 .rs-ajuda.tipo-controle .rs-ajuda-numero b,.rs-ajuda.tipo-preparo-protegido .rs-ajuda-numero b{color:#c3a2ff}
 .rs-ajuda.tipo-finalizacao .rs-ajuda-numero b,.rs-ajuda.tipo-alvo-preparado .rs-ajuda-numero b{color:#ff9a76}
 
+/* a nota da ajuda: régua de seis gomos (vermelho → dourado), selo com o nome e a comparação com outras lutas */
+.rs-ajuda.com-nota{grid-template-areas:'dupla numero' 'texto texto' 'nota nota'}
+.nota-0{--nota:#ff5a64}.nota-1{--nota:#ff9a4a}.nota-2{--nota:#ffd34a}.nota-3{--nota:#b8e282}.nota-4{--nota:#4fe3a0}.nota-5{--nota:#ffd36b}
+.rs-ajuda.com-nota{box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--nota),transparent 72%),inset 4px 0 0 var(--nota);background:linear-gradient(100deg,color-mix(in srgb,var(--nota) 9%,#111a15),#111a15 55%)}
+.rs-ajuda.nota-5{box-shadow:inset 0 0 0 1.5px #ffd36b99,inset 4px 0 0 #ffd36b,0 0 18px #ffd36b33;position:relative;overflow:hidden}
+.rs-ajuda.nota-5::after{content:'';position:absolute;inset:-40% -20%;background:linear-gradient(105deg,transparent 42%,#fff3c455 50%,transparent 58%);animation:rs-nota-brilho 3.2s ease-in-out infinite;pointer-events:none}
+@keyframes rs-nota-brilho{0%,45%{transform:translateX(-70%)}100%{transform:translateX(70%)}}
+.rs-nota{grid-area:nota;display:grid;grid-template-columns:1fr auto;grid-template-areas:'regua selo' 'compara compara';align-items:center;gap:5px 10px;margin-top:2px;padding-top:8px;border-top:1px dashed #ffffff14}
+.rs-nota-regua{grid-area:regua;display:grid;grid-template-columns:repeat(6,1fr);gap:3px}
+.rs-nota-regua i{height:8px;border-radius:4px;background:#ffffff12;box-shadow:inset 0 0 0 1px #ffffff0c}
+.rs-nota-regua i:nth-child(1){--g:#ff5a64}.rs-nota-regua i:nth-child(2){--g:#ff9a4a}.rs-nota-regua i:nth-child(3){--g:#ffd34a}
+.rs-nota-regua i:nth-child(4){--g:#b8e282}.rs-nota-regua i:nth-child(5){--g:#4fe3a0}.rs-nota-regua i:nth-child(6){--g:#ffd36b}
+.rs-nota-regua i.acesa{background:var(--g);box-shadow:0 0 8px color-mix(in srgb,var(--g),transparent 45%);animation:rs-gomo .35s calc(.35s + var(--i,0) * .12s + var(--k) * .07s) cubic-bezier(.2,1.6,.4,1) both}
+@keyframes rs-gomo{0%{transform:scaleX(.2);opacity:0}100%{transform:scaleX(1);opacity:1}}
+.rs-nota-selo{grid-area:selo;display:inline-flex;align-items:center;gap:5px;padding:4px 10px 4px 8px;border-radius:99px;font-size:12px;font-weight:900;letter-spacing:.3px;text-transform:uppercase;white-space:nowrap;color:#10140f;background:var(--nota);box-shadow:0 0 14px color-mix(in srgb,var(--nota),transparent 55%),inset 0 1px 0 #ffffff66;animation:rs-carimbo .5s calc(.55s + var(--i,0) * .12s) cubic-bezier(.2,1.8,.4,1) both}
+.nota-0 .rs-nota-selo,.nota-1 .rs-nota-selo{color:#fff}
+.nota-5 .rs-nota-selo{background:linear-gradient(135deg,#fff3c4,#ffd36b 45%,#e9a93a);color:#3a2606}
+@keyframes rs-carimbo{0%{transform:scale(2.2) rotate(-8deg);opacity:0}60%{transform:scale(.92) rotate(2deg);opacity:1}100%{transform:scale(1) rotate(0)}}
+.rs-nota-compara{grid-area:compara;font-size:11px;color:color-mix(in srgb,var(--nota),#cfdcc9 55%)}
+@media (prefers-reduced-motion:reduce){.rs-nota-regua i.acesa,.rs-nota-selo,.rs-ajuda.nota-5::after{animation:none}}
+
 .rs-ranqueada{display:grid;gap:4px;padding:12px 14px;border-radius:16px;background:#101a16;box-shadow:inset 0 0 0 1px #8fd3ff44;font-size:13px}
 .rs-ranqueada strong{font-size:11px;letter-spacing:2px;color:#8fd3ff}
 .rs-ranqueada.fora{box-shadow:inset 0 0 0 1px #ffb86b55}

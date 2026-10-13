@@ -1,12 +1,13 @@
 import { useEffect,useState,type CSSProperties,type ReactNode } from 'react';
 import { ConquistasLiberadas } from './ConquistasScreen';
-import { ArrowRight,RotateCcw,Home,Trophy,HeartPulse,TrendingUp,Shield,Crown,Sparkles,Medal,LogOut,Swords,Skull,Zap,Lightbulb } from 'lucide-react';
+import { ArrowRight,RotateCcw,Home,Trophy,HeartPulse,TrendingUp,Shield,Crown,Sparkles,Medal,LogOut,Swords,Skull,Zap,Lightbulb,ThumbsDown,ThumbsUp,ArrowDown,Minus,Flame,type LucideIcon } from 'lucide-react';
 import type { Run } from '../lib/storage';
 import { byId } from '../data/characters';
 import { Portrait } from '../components/Portrait';
 import { summarizeBattle } from '../engine/run-summary';
 import { formatarPontos,pontosDaJornada,pontosDaLuta } from '../engine/pontos';
 import { lerRaioX,quemAbsorveu,type Direcao } from '../engine/raio-x';
+import { avaliarAjuda,avaliarDirecao,NOMES_DAS_NOTAS,type AvaliacaoDaAjuda } from '../engine/nota-da-ajuda';
 import { mensagemDoTop3,type ResultadoTop3 } from '../lib/top3';
 import { battleAudio } from '../lib/audio';
 import { PRIORIDADE } from '../audio/cues';
@@ -49,6 +50,21 @@ function Fx({nome,cor,ms=900,laco=false,className=''}:{nome:string;cor:string;ms
 }
 
 interface Parcela {rotulo:string;valor:number;icone:ReactNode}
+
+/*
+ * A nota da ajuda (pedido do jogador: "foi boa essa ajuda? … bater o olho e entender na hora"): uma régua de seis
+ * gomos, do vermelho ao dourado, que enche até a nota; o selo com o nome e o ícone; e quanto ela ficou acima das
+ * ajudas iguais em outras lutas (src/engine/nota-da-ajuda.ts).
+ */
+const ICONE_DA_NOTA:LucideIcon[]=[ThumbsDown,ArrowDown,Minus,ThumbsUp,Flame,Crown];
+function NotaDaAjuda({av,i}:{av:AvaliacaoDaAjuda;i:number}){
+  const Ic=ICONE_DA_NOTA[av.nota]!;
+  return <div className={`rs-nota nota-${av.nota}`} style={{'--i':i} as CSSProperties}>
+    <span className="rs-nota-regua" aria-hidden="true">{NOMES_DAS_NOTAS.map((_,k)=><i key={k} className={k<=av.nota?'acesa':''} style={{'--k':k} as CSSProperties}/>)}</span>
+    <span className="rs-nota-selo"><Ic size={13} strokeWidth={2.6}/>{NOMES_DAS_NOTAS[av.nota]}</span>
+    <small className="rs-nota-compara">{av.melhorQue>=50?`Melhor que ${av.melhorQue}% das ajudas desse tipo`:av.melhorQue>0?`Só melhor que ${av.melhorQue}% das ajudas desse tipo`:'Das menores ajudas desse tipo'}</small>
+  </div>;
+}
 
 export function ResultScreen({run,onNext,onRestart,onAbandon,onHome,onRanking,onRetry,auto,onAuto}:{run:Run;onNext:()=>void;onRestart:()=>void;onAbandon:()=>void;onHome:()=>void;onRanking?:()=>void;onRetry?:()=>void;auto:boolean;onAuto:(v:boolean)=>void}){
   const b=run.battle!,won=b.winner==='player',champion=won&&run.index===9,fimDaJornada=champion||!won;
@@ -128,15 +144,17 @@ export function ResultScreen({run,onNext,onRestart,onAbandon,onHome,onRanking,on
 
     {(ajudas.length>0||pressao)&&<section className="rs-ajudas" aria-label="Quem ajudou quem">
       <h2>Quem ajudou quem</h2>
-      <div>{ajudas.map(d=>{const de=lutador(d.de),para=lutador(d.para);if(!de||!para)return null;return <article key={`${d.de}-${d.para}`} className={`rs-ajuda tipo-${d.tipo}`}>
+      <div>{ajudas.map((d,i)=>{const de=lutador(d.de),para=lutador(d.para);if(!de||!para)return null;const av=avaliarDirecao(d);return <article key={`${d.de}-${d.para}`} className={`rs-ajuda tipo-${d.tipo} ${av?`com-nota nota-${av.nota}`:''}`}>
         <div className="rs-dupla"><span style={{'--character':de.color} as CSSProperties}><Portrait character={de} className="tiny"/></span><ArrowRight size={14}/><span style={{'--character':para.color} as CSSProperties}><Portrait character={para} className="tiny"/></span></div>
         <div className="rs-ajuda-numero"><b>{d.destaque!.numero}</b><small>{d.destaque!.rotulo}</small></div>
         <p><b>{de.name.split(/[ ,]/)[0]}</b> {d.frase}</p>
+        {av&&<NotaDaAjuda av={av} i={i}/>}
       </article>;})}
-      {pressao&&(()=>{const quem=lutador(pressao.uid);return quem?<article className="rs-ajuda tipo-pressao">
+      {pressao&&(()=>{const quem=lutador(pressao.uid),av=avaliarAjuda('pressao',pressao.dano);return quem?<article className={`rs-ajuda tipo-pressao ${av?`com-nota nota-${av.nota}`:''}`}>
         <div className="rs-dupla"><span style={{'--character':quem.color} as CSSProperties}><Portrait character={quem} className="tiny"/></span><Shield size={16}/></div>
         <div className="rs-ajuda-numero"><b>{Math.round(pressao.parte*100)}%</b><small>do dano levado</small></div>
-        <p><b>{quem.name.split(/[ ,]/)[0]}</b> segurou a pressão pelo trio</p>
+        <p><b>{quem.name.split(/[ ,]/)[0]}</b> segurou a pressão pelo trio · {pressao.dano.toLocaleString('pt-BR')} de dano</p>
+        {av&&<NotaDaAjuda av={av} i={ajudas.length}/>}
       </article>:null;})()}
       </div>
     </section>}
