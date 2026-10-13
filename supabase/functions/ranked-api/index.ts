@@ -239,7 +239,8 @@ Deno.serve(async (request:Request)=>{
       if('score' in input)return fail('O servidor calcula a pontuação.',422,origin);
       const {data:run,error}=await admin.from('ranked_runs').select('*').eq('id',input.runId).eq('player_id',user.id).maybeSingle();if(error)throw error;
       if(!run)return fail('Jornada inexistente.',404,origin);if(run.verified)return fail('Jornada já validada.',409,origin);
-      if(new Date(run.expires_at).getTime()<Date.now())return fail('Jornada expirada.',410,origin);
+      // o aparelho reenvia sozinho o que não chegou (src/lib/envios-pendentes.ts): vale até 7 dias depois de começar
+      if(new Date(run.started_at).getTime()<Date.now()-DIAS_PENDENTES*86400000)return fail('Jornada expirada.',410,origin);
       return json(await validar(run,input.dicas===true,input.digest),200,origin);
     }
     /*

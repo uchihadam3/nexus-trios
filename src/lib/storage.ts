@@ -29,7 +29,7 @@ export interface Profile {journeys:number;victories:number;best:number;wins:numb
 export const defaults:Settings={volume:P.audio.master,musicVolume:P.audio.music,effectsVolume:P.audio.effects,effects:true,speed:1,numbers:true,visualFeedbackVersion:2,reducedMotion:typeof matchMedia!=='undefined'&&matchMedia('(prefers-reduced-motion: reduce)').matches,auto:false,explanations:'normal',dicasDoTrio:false};
 const prefix='nexus-v1-';
 export let storageAvailable=true;
-function read(key:string):unknown{try{return JSON.parse(localStorage.getItem(prefix+key)??'null');}catch{return null;}}
+export function read(key:string):unknown{try{return JSON.parse(localStorage.getItem(prefix+key)??'null');}catch{return null;}}
 export function save(key:string,value:unknown){try{localStorage.setItem(prefix+key,JSON.stringify(value));storageAvailable=true;}catch{storageAvailable=false;}}
 export function loadSettings():Settings{const raw=read('settings');if(!raw||typeof raw!=='object')return defaults;const x=raw as Partial<Settings>;return {volume:typeof x.volume==='number'?Math.max(0,Math.min(100,x.volume)):P.audio.master,musicVolume:typeof x.musicVolume==='number'?Math.max(0,Math.min(100,x.musicVolume)):P.audio.music,effectsVolume:typeof x.effectsVolume==='number'?Math.max(0,Math.min(100,x.effectsVolume)):P.audio.effects,effects:typeof x.effects==='boolean'?x.effects:true,speed:x.speed===2?2:1,numbers:x.visualFeedbackVersion===2?x.numbers!==false:true,visualFeedbackVersion:2,reducedMotion:typeof x.reducedMotion==='boolean'?x.reducedMotion:defaults.reducedMotion,auto:x.auto===true,explanations:x.explanations==='detailed'||x.explanations==='off'?x.explanations:'normal',dicasDoTrio:x.dicasDoTrio===true};}
 /**

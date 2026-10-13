@@ -35,6 +35,7 @@ import {ConquistasScreen} from './screens/ConquistasScreen';
 import {carregarCliente,googleConfigured,haSessaoOuRetorno,onlineCall,onlineConfigured} from './lib/online';
 import {criarAutenticacaoPreguicosa,validarHandle,type Conta} from './lib/auth';
 import { dicasLiberadas,ehDono } from './lib/dicas-liberadas';
+import { guardarEnvio,recusaDefinitiva,reenviarPendentes } from './lib/envios-pendentes';
 import {AccountScreen} from './screens/AccountScreen';
 import {PortaoDaConta,type EtapaDoPortao} from './screens/PortaoDaConta';
 import {FAMILIA_DA_INVOCACAO} from './presentation/vfx-atribuicao';
@@ -382,7 +383,10 @@ export default function App(){
     void (async()=>{
       try{const digest=await runDigest(id,run.team,run.seed,(run.summaries??[]).map(s=>s.won));const result=await onlineCall<{score:number;daily:number|null;weekly:number|null;season:number|null;top3?:{periodo?:ResultadoTop3;temporada?:ResultadoTop3}}>('submit',{runId:id,digest,dicas:run.dicas===true});
         const latest=runRef.current;if(latest?.ranked?.id===id)changeRun({...latest,ranked:{...latest.ranked,status:'verified',score:result.score,daily:result.daily,weekly:result.weekly,season:result.season,top3:result.top3,error:undefined}});
-      }catch(error){const latest=runRef.current;if(latest?.ranked?.id===id)changeRun({...latest,ranked:{...latest.ranked,status:'failed',error:error instanceof Error?error.message:'Falha na validação.'}});}
+      }catch(error){const msg=error instanceof Error?error.message:'Falha na validação.';
+        // falhou por rede ou servidor: fica guardada e é reenviada sozinha ao abrir o jogo (src/lib/envios-pendentes.ts)
+        if(!recusaDefinitiva(msg))void runDigest(id,run.team,run.seed,(run.summaries??[]).map(s=>s.won)).then(digest=>guardarEnvio({runId:id,digest,dicas:run.dicas===true,em:new Date().toISOString()}));
+        const latest=runRef.current;if(latest?.ranked?.id===id)changeRun({...latest,ranked:{...latest.ranked,status:'failed',error:msg}});}
       finally{submission.current=false;}
     })();
   },[run?.stage,run?.index,run?.battle?.winner,run?.ranked?.status,run?.ranked?.id]);
@@ -437,6 +441,8 @@ export default function App(){
     }catch(error){setErroDaConta(error instanceof Error?error.message:'Sem conexão com o servidor.');}
   };
   useEffect(()=>{if(onlineConfigured&&logado&&conta&&nomeDaConta?.id!==conta.id)void buscaNome(conta);},[logado,conta?.id]);
+  /* jornadas terminadas que não chegaram ao servidor: reenviadas ao abrir o jogo com a conta (src/lib/envios-pendentes.ts) */
+  useEffect(()=>{if(onlineConfigured&&logado&&conta)void reenviarPendentes(e=>onlineCall('submit',{runId:e.runId,digest:e.digest,dicas:e.dicas}));},[logado,conta?.id]);
   const escolheNome=async(handle:string):Promise<string|null>=>{
     if(!conta)return 'Entre na conta primeiro.';
     try{const r=await onlineCall<{profile:{handle:string}}>('profile',{handle});setProfile(p=>{const n={...p,publicHandle:r.profile.handle};save('profile',n);return n;});setNomeDaConta({id:conta.id,handle:r.profile.handle});return null;}
