@@ -682,6 +682,23 @@
    ],
    "bytes": 52699
   },
+  "arma-de-laser-morty": {
+   "arquivo": "arma-de-laser-morty.mp3",
+   "descricao": "Morty: a arma de laser",
+   "versoes": [
+    0.0,
+    1.0204,
+    2.0735,
+    3.0137
+   ],
+   "duracoes": [
+    0.9404,
+    0.9731,
+    0.8602,
+    0.954
+   ],
+   "bytes": 27265
+  },
   "arma-grande": {
    "arquivo": "arma-grande.mp3",
    "descricao": "básico de Rocket: carga, tranco de canhão pesado e explosão",
@@ -766,6 +783,23 @@
     1.3018
    ],
    "bytes": 35467
+  },
+  "armadilha-perfeita": {
+   "arquivo": "armadilha-perfeita.mp3",
+   "descricao": "Fred: a armadilha perfeita",
+   "versoes": [
+    0.0,
+    1.7237,
+    3.5126,
+    5.1578
+   ],
+   "duracoes": [
+    1.6437,
+    1.709,
+    1.5652,
+    1.6247
+   ],
+   "bytes": 54726
   },
   "armadura-berserker": {
    "arquivo": "armadura-berserker.mp3",
@@ -1974,6 +2008,23 @@
    ],
    "bytes": 43052
   },
+  "bisturi-de-nen": {
+   "arquivo": "bisturi-de-nen.mp3",
+   "descricao": "Leorio: o bisturi de Nen",
+   "versoes": [
+    0.0,
+    1.3383,
+    2.7625,
+    4.0977
+   ],
+   "duracoes": [
+    1.2583,
+    1.3442,
+    1.2552,
+    1.3653
+   ],
+   "bytes": 47328
+  },
   "blasters-elementais": {
    "arquivo": "blasters-elementais.mp3",
    "descricao": "básico de Senhor das Estrelas: pew pew retrô alternado e estouros",
@@ -2722,6 +2773,23 @@
    ],
    "bytes": 64336
   },
+  "cade-meus-oculos": {
+   "arquivo": "cade-meus-oculos.mp3",
+   "descricao": "Velma: Cadê meus óculos?",
+   "versoes": [
+    0.0,
+    1.1998,
+    2.4945,
+    3.71
+   ],
+   "duracoes": [
+    1.1198,
+    1.2147,
+    1.1354,
+    1.1907
+   ],
+   "bytes": 33572
+  },
   "cajado-branco": {
    "arquivo": "cajado-branco.mp3",
    "descricao": "básico do Gandalf: o cajado no chão e a luz",
@@ -2908,6 +2976,23 @@
     1.0452
    ],
    "bytes": 46500
+  },
+  "canhao-de-energia-tails": {
+   "arquivo": "canhao-de-energia-tails.mp3",
+   "descricao": "Tails: o canhão de energia",
+   "versoes": [
+    0.0,
+    1.5008,
+    3.0427,
+    4.4941
+   ],
+   "duracoes": [
+    1.4208,
+    1.4619,
+    1.3714,
+    1.5133
+   ],
+   "bytes": 42759
   },
   "canhao-de-fusao": {
    "arquivo": "canhao-de-fusao.mp3",
@@ -6564,6 +6649,23 @@
    ],
    "bytes": 21811
   },
+  "escavar": {
+   "arquivo": "escavar.mp3",
+   "descricao": "Knuckles: escavar",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 59596
+  },
   "esconderijo": {
    "arquivo": "esconderijo.mp3",
    "descricao": "Jerry: o esconderijo",
@@ -9828,6 +9930,23 @@
    ],
    "bytes": 91115
   },
+  "giro-de-cauda": {
+   "arquivo": "giro-de-cauda.mp3",
+   "descricao": "Tails: o giro de cauda",
+   "versoes": [
+    0.0,
+    1.98,
+    4.0289,
+    5.9446
+   ],
+   "duracoes": [
+    1.9,
+    1.9689,
+    1.8357,
+    1.9289
+   ],
+   "bytes": 58337
+  },
   "giro-de-levi": {
    "arquivo": "giro-de-levi.mp3",
    "descricao": "Levi: o gás e o giro de lâminas",
@@ -10473,6 +10592,23 @@
     1.1167
    ],
    "bytes": 26872
+  },
+  "grito-de-panico": {
+   "arquivo": "grito-de-panico.mp3",
+   "descricao": "Morty: o grito de pânico",
+   "versoes": [
+    0.0,
+    1.6814,
+    3.4146,
+    5.0183
+   ],
+   "duracoes": [
+    1.6014,
+    1.6532,
+    1.5237,
+    1.6253
+   ],
+   "bytes": 58808
   },
   "grito-de-pavor": {
    "arquivo": "grito-de-pavor.mp3",
@@ -12361,6 +12497,23 @@
    ],
    "bytes": 69649
   },
+  "knuckles-preparo": {
+   "arquivo": "knuckles-preparo.mp3",
+   "descricao": "Knuckles: as pedras flutuando (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 44832
+  },
   "krang-preparo": {
    "arquivo": "krang-preparo.mp3",
    "descricao": "Krang: o cérebro pulsando (Preparo)",
@@ -13194,6 +13347,23 @@
    ],
    "bytes": 52715
   },
+  "leorio-preparo": {
+   "arquivo": "leorio-preparo.mp3",
+   "descricao": "Leorio: o bisturi brilhando (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 65723
+  },
   "leque-de-aco": {
    "arquivo": "leque-de-aco.mp3",
    "descricao": "básico da Kitana: o leque girando",
@@ -13550,6 +13720,23 @@
     1.4213
    ],
    "bytes": 26809
+  },
+  "lupa-da-velma": {
+   "arquivo": "lupa-da-velma.mp3",
+   "descricao": "Velma: a lupa",
+   "versoes": [
+    0.0,
+    1.4907,
+    3.0337,
+    4.498
+   ],
+   "duracoes": [
+    1.4107,
+    1.463,
+    1.3843,
+    1.4341
+   ],
+   "bytes": 56383
   },
   "luz": {
    "arquivo": "luz.mp3",
@@ -14825,6 +15012,40 @@
     1.1167
    ],
    "bytes": 38267
+  },
+  "morty-mau": {
+   "arquivo": "morty-mau.mp3",
+   "descricao": "Morty: Morty mau",
+   "versoes": [
+    0.0,
+    2.2531,
+    4.6128,
+    6.7449
+   ],
+   "duracoes": [
+    2.1731,
+    2.2798,
+    2.0521,
+    2.2057
+   ],
+   "bytes": 69035
+  },
+  "morty-preparo": {
+   "arquivo": "morty-preparo.mp3",
+   "descricao": "Morty: o Morty mau (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 40257
   },
   "motosserra": {
    "arquivo": "motosserra.mp3",
@@ -23683,6 +23904,23 @@
    ],
    "bytes": 69643
   },
+  "primeiros-socorros": {
+   "arquivo": "primeiros-socorros.mp3",
+   "descricao": "Leorio: os primeiros socorros",
+   "versoes": [
+    0.0,
+    1.7631,
+    3.605,
+    5.2842
+   ],
+   "duracoes": [
+    1.6831,
+    1.7619,
+    1.5992,
+    1.7368
+   ],
+   "bytes": 61494
+  },
   "prince-preparo": {
    "arquivo": "prince-preparo.mp3",
    "descricao": "Príncipe: a areia (Preparo)",
@@ -25144,6 +25382,23 @@
     1.3392
    ],
    "bytes": 44153
+  },
+  "rede-do-fred": {
+   "arquivo": "rede-do-fred.mp3",
+   "descricao": "Fred: a rede",
+   "versoes": [
+    0.0,
+    1.2701,
+    2.6374,
+    3.9067
+   ],
+   "duracoes": [
+    1.1901,
+    1.2873,
+    1.1893,
+    1.2118
+   ],
+   "bytes": 44264
   },
   "redemoinho-taz": {
    "arquivo": "redemoinho-taz.mp3",
@@ -27338,6 +27593,40 @@
    ],
    "bytes": 46289
   },
+  "soco-do-terremoto": {
+   "arquivo": "soco-do-terremoto.mp3",
+   "descricao": "Knuckles: o soco do terremoto",
+   "versoes": [
+    0.0,
+    2.25,
+    4.7134,
+    7.0156
+   ],
+   "duracoes": [
+    2.17,
+    2.3834,
+    2.2222,
+    2.335
+   ],
+   "bytes": 71156
+  },
+  "soco-espinhoso": {
+   "arquivo": "soco-espinhoso.mp3",
+   "descricao": "Knuckles: o soco espinhoso",
+   "versoes": [
+    0.0,
+    1.3805,
+    2.8069,
+    4.1441
+   ],
+   "duracoes": [
+    1.3005,
+    1.3464,
+    1.2572,
+    1.3393
+   ],
+   "bytes": 41475
+  },
   "soco-espiritual": {
    "arquivo": "soco-espiritual.mp3",
    "descricao": "Soco espiritual do Yusuke: a energia no punho e o golpe pesado",
@@ -27473,6 +27762,23 @@
     1.3923
    ],
    "bytes": 45631
+  },
+  "soco-teletransportado": {
+   "arquivo": "soco-teletransportado.mp3",
+   "descricao": "Leorio: o soco teletransportado",
+   "versoes": [
+    0.0,
+    1.6722,
+    3.401,
+    5.0203
+   ],
+   "duracoes": [
+    1.5922,
+    1.6488,
+    1.5393,
+    1.6161
+   ],
+   "bytes": 44705
   },
   "soco-titanico": {
    "arquivo": "soco-titanico.mp3",
@@ -28069,6 +28375,23 @@
    ],
    "bytes": 37572
   },
+  "tails-preparo": {
+   "arquivo": "tails-preparo.mp3",
+   "descricao": "Tails: o canhão carregando (Preparo)",
+   "versoes": [
+    0.0,
+    1.4346,
+    2.8805,
+    4.2431
+   ],
+   "duracoes": [
+    1.3546,
+    1.3659,
+    1.2826,
+    1.3399
+   ],
+   "bytes": 53571
+  },
   "taiyoken": {
    "arquivo": "taiyoken.mp3",
    "descricao": "Taiyoken: o clarão que cega",
@@ -28646,6 +28969,23 @@
     1.4213
    ],
    "bytes": 45233
+  },
+  "tirar-a-mascara": {
+   "arquivo": "tirar-a-mascara.mp3",
+   "descricao": "Velma: tirar a máscara",
+   "versoes": [
+    0.0,
+    1.8924,
+    3.9324,
+    5.8378
+   ],
+   "duracoes": [
+    1.8124,
+    1.96,
+    1.8254,
+    1.9156
+   ],
+   "bytes": 57360
   },
   "tiro": {
    "arquivo": "tiro.mp3",
@@ -29582,6 +29922,23 @@
    ],
    "bytes": 48942
   },
+  "vamos-nos-separar": {
+   "arquivo": "vamos-nos-separar.mp3",
+   "descricao": "Fred: Vamos nos separar",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    1.9619
+   ],
+   "bytes": 58424
+  },
   "vampire-killer": {
    "arquivo": "vampire-killer.mp3",
    "descricao": "Simon: o Vampire Killer",
@@ -29666,6 +30023,23 @@
     1.0152
    ],
    "bytes": 40688
+  },
+  "velma-preparo": {
+   "arquivo": "velma-preparo.mp3",
+   "descricao": "Velma: o raciocínio (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 40797
   },
   "velocidade-da-luz": {
    "arquivo": "velocidade-da-luz.mp3",
@@ -30227,6 +30601,23 @@
     1.7467
    ],
    "bytes": 54676
+  },
+  "voo-de-resgate": {
+   "arquivo": "voo-de-resgate.mp3",
+   "descricao": "Tails: o voo de resgate",
+   "versoes": [
+    0.0,
+    1.3556,
+    2.8076,
+    4.1573
+   ],
+   "duracoes": [
+    1.2756,
+    1.372,
+    1.2697,
+    1.2936
+   ],
+   "bytes": 55144
   },
   "witch-time": {
    "arquivo": "witch-time.mp3",

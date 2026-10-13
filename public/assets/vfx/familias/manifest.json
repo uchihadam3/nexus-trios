@@ -531,6 +531,20 @@
   "laco": false,
   "bytes": 48994
  },
+ "arma_de_laser_morty": {
+  "descricao": "Morty · a arma tremendo e o tiro verde",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 19450
+ },
  "arma_grande": {
   "descricao": "Rocket: carga, tranco e bola de plasma que explode",
   "quadros": 12,
@@ -600,6 +614,20 @@
   ],
   "laco": false,
   "bytes": 22020
+ },
+ "armadilha_perfeita": {
+  "descricao": "Fred · a gaiola caindo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 20004
  },
  "armadura_berserker": {
   "descricao": "Guts · a Armadura Berserker fechando",
@@ -1637,6 +1665,20 @@
   "laco": false,
   "bytes": 39790
  },
+ "bisturi_de_nen": {
+  "descricao": "Leorio · o corte fino do bisturi",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 18630
+ },
  "blasters_elementais": {
   "descricao": "Senhor das Estrelas: dois blasters alternando tiros de plasma",
   "quadros": 12,
@@ -2351,6 +2393,20 @@
   "laco": false,
   "bytes": 65896
  },
+ "cade_meus_oculos": {
+  "descricao": "Velma · os óculos caindo e a vista embaçada",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 20396
+ },
  "cajado_branco": {
   "descricao": "Básico do Gandalf: o cajado no chão e a luz",
   "quadros": 12,
@@ -2518,6 +2574,20 @@
   ],
   "laco": false,
   "bytes": 61472
+ },
+ "canhao_de_energia_tails": {
+  "descricao": "Tails · o tiro de energia",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 36564
  },
  "canhao_de_fusao": {
   "descricao": "Megatron · o feixe roxo varrendo os rivais",
@@ -5655,6 +5725,20 @@
   "laco": false,
   "bytes": 118304
  },
+ "escavar": {
+  "descricao": "Knuckles · a terra subindo e o monte",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 18612
+ },
  "esconderijo": {
   "descricao": "Jerry · o buraquinho na parede",
   "quadros": 12,
@@ -8497,6 +8581,20 @@
   "laco": false,
   "bytes": 39342
  },
+ "giro_de_cauda": {
+  "descricao": "Tails · as duas caudas girando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 32940
+ },
  "giro_de_levi": {
   "descricao": "Levi · o redemoinho de lâminas em espiral",
   "quadros": 12,
@@ -9000,6 +9098,20 @@
   ],
   "laco": false,
   "bytes": 101176
+ },
+ "grito_de_panico": {
+  "descricao": "Morty · o grito em ondas e o suor",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 17262
  },
  "grito_de_pavor": {
   "descricao": "Coragem · o grito tremido e o coração",
@@ -10541,6 +10653,20 @@
   "laco": false,
   "bytes": 24674
  },
+ "knuckles_preparo": {
+  "descricao": "Knuckles · o punho e as pedras (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 7802
+ },
  "krang_preparo": {
   "descricao": "Krang · o cérebro pulsando (Preparo, laço)",
   "quadros": 12,
@@ -11213,6 +11339,20 @@
   "laco": true,
   "bytes": 14722
  },
+ "leorio_preparo": {
+  "descricao": "Leorio · o bisturi brilhando (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 8150
+ },
  "leque_de_aco": {
   "descricao": "Básico da Kitana: o leque que vai e volta",
   "quadros": 12,
@@ -11506,6 +11646,20 @@
   ],
   "laco": true,
   "bytes": 15872
+ },
+ "lupa_da_velma": {
+  "descricao": "Velma · a lupa e a exclamação",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 16848
  },
  "luz": {
   "descricao": "pilar de luz",
@@ -12598,6 +12752,34 @@
   ],
   "laco": false,
   "bytes": 18686
+ },
+ "morty_mau": {
+  "descricao": "Morty · o espiral e o feixe do Morty mau",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 26152
+ },
+ "morty_preparo": {
+  "descricao": "Morty · o tapa-olho e o olho frio (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 5958
  },
  "motosserra": {
   "descricao": "dentes de serra girando",
@@ -19921,6 +20103,20 @@
   "laco": false,
   "bytes": 50114
  },
+ "primeiros_socorros": {
+  "descricao": "Leorio · a maleta, a faixa e a cruz",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 29142
+ },
  "prince_preparo": {
   "descricao": "Príncipe · a Adaga e a areia (Preparo, laço)",
   "quadros": 12,
@@ -21138,6 +21334,20 @@
   ],
   "laco": false,
   "bytes": 18964
+ },
+ "rede_do_fred": {
+  "descricao": "Fred · a rede caindo no rival",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 17580
  },
  "redemoinho_taz": {
   "descricao": "Taz · o redemoinho marrom",
@@ -23001,6 +23211,34 @@
   "laco": false,
   "bytes": 65634
  },
+ "soco_do_terremoto": {
+  "descricao": "Knuckles · o soco no chão e as rachaduras",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 36606
+ },
+ "soco_espinhoso": {
+  "descricao": "Knuckles · a luva com espinhos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 19830
+ },
  "soco_espiritual": {
   "descricao": "Yusuke · Soco espiritual com a aura azul",
   "quadros": 12,
@@ -23084,6 +23322,20 @@
   ],
   "laco": false,
   "bytes": 14200
+ },
+ "soco_teletransportado": {
+  "descricao": "Leorio · os portais e o punho",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 27710
  },
  "soco_titanico": {
   "descricao": "Eren: punho de titã, impacto colossal e vapor subindo",
@@ -23588,6 +23840,20 @@
   ],
   "laco": false,
   "bytes": 16112
+ },
+ "tails_preparo": {
+  "descricao": "Tails · a engrenagem e a carga (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 9874
  },
  "taiyoken": {
   "descricao": "Kuririn · o clarão solar no campo",
@@ -24148,6 +24414,20 @@
   ],
   "laco": true,
   "bytes": 10414
+ },
+ "tirar_a_mascara": {
+  "descricao": "Velma · a máscara voando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 19414
  },
  "tiro": {
   "descricao": "traçante em viagem (+x)",
@@ -24779,6 +25059,20 @@
   "laco": false,
   "bytes": 25756
  },
+ "vamos_nos_separar": {
+  "descricao": "Fred · as setas se separando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 40632
+ },
  "vampire_killer": {
   "descricao": "Simon · o chicote de corrente",
   "quadros": 12,
@@ -24848,6 +25142,20 @@
   ],
   "laco": false,
   "bytes": 129716
+ },
+ "velma_preparo": {
+  "descricao": "Velma · o dedo apontando (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 3448
  },
  "velocidade_aura": {
   "descricao": "Killua · a aura elétrica nele",
@@ -25282,6 +25590,20 @@
   ],
   "laco": false,
   "bytes": 62520
+ },
+ "voo_de_resgate": {
+  "descricao": "Tails · o voo e os anéis no trio",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 39788
  },
  "witch_time": {
   "descricao": "Bayonetta · o relógio roxo e a onda de tempo lento",

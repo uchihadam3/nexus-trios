@@ -122,6 +122,12 @@ const T: Record<string, string> = {
   chopper: 'tratamento_de_campo rumble_ball monster_point',
   nero: 'red_queen devil_bringer showdown',
   lawliet: 'investigacao armadilha_logica caso_resolvido',
+  morty: 'arma_de_laser_morty grito_de_panico morty_mau',
+  tails: 'giro_de_cauda voo_de_resgate canhao_de_energia_tails',
+  knuckles: 'soco_espinhoso escavar soco_do_terremoto',
+  velma: 'lupa_da_velma cade_meus_oculos tirar_a_mascara',
+  fred: 'rede_do_fred vamos_nos_separar armadilha_perfeita',
+  leorio: 'soco_teletransportado primeiros_socorros bisturi_de_nen',
 };
 
 export const FAMILIA_DA_HABILIDADE: Record<string, VfxFamily> = Object.fromEntries(
