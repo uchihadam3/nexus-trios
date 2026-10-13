@@ -1,0 +1,26 @@
+name: Diagnostico do ranking (somente leitura)
+on:
+  push:
+    branches: [diagnostico-ranking]
+permissions:
+  contents: read
+jobs:
+  ler:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+      REF: hzfavpcchfzlggwdbiqd
+    steps:
+      - name: Consultas
+        run: |
+          q() { jq -n --arg q "$1" '{query:$q, read_only:true}' | curl -sS -X POST "https://api.supabase.com/v1/projects/$REF/database/query" -H "Authorization: Bearer $SUPABASE_ACCESS_TOKEN" -H 'content-type: application/json' --data @- | jq -c 'if type=="array" then .[] else . end'; echo; }
+          echo "== contas"; q "select count(*) as contas from public.players"
+          echo "== jornadas por conta (handle, versao)"; q "select p.handle, r.engine_version, count(*) as iniciadas, count(*) filter (where r.verified) as validadas, count(*) filter (where not r.verified and r.expires_at < now()) as perdidas, max(r.started_at) as ultima from public.ranked_runs r join public.players p on p.id=r.player_id where r.started_at > now()-interval '10 days' group by 1,2 order by max(r.started_at) desc limit 80"
+          echo "== entradas no ranking por chave"; q "select scope, period_key, count(*) as entradas, count(distinct player_id) as contas from public.leaderboard_entries group by 1,2 order by 2 desc limit 30"
+          echo "== validadas por versao"; q "select engine_version, count(*) filter (where verified) as validadas, count(*) as total, max(started_at) as ultima from public.ranked_runs group by 1 order by max(started_at) desc limit 15"
+      - name: Respostas da funcao (ultimas 24h)
+        run: |
+          S=$(date -u -d '-24 hours' +%Y-%m-%dT%H:%M:%SZ); E=$(date -u +%Y-%m-%dT%H:%M:%SZ)
+          SQL="select r.status_code, count(*) as n from function_edge_logs cross join unnest(metadata) as m cross join unnest(m.response) as r group by 1 order by 2 desc"
+          curl -sS -G "https://api.supabase.com/v1/projects/$REF/analytics/endpoints/logs.all" -H "Authorization: Bearer $SUPABASE_ACCESS_TOKEN" --data-urlencode "sql=$SQL" --data-urlencode "iso_timestamp_start=$S" --data-urlencode "iso_timestamp_end=$E" | jq -c '.result // .' | head -c 3000; echo
