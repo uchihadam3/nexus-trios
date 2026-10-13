@@ -2407,6 +2407,20 @@
   "laco": false,
   "bytes": 26254
  },
+ "bolha_de_steven": {
+  "descricao": "Steven · a bolha prendendo o rival",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 24808
+ },
  "bolhas": {
   "descricao": "bolhas subindo e estourando",
   "quadros": 12,
@@ -7125,6 +7139,20 @@
   "laco": false,
   "bytes": 44584
  },
+ "escudo_da_rosa": {
+  "descricao": "Steven · o escudo e a rosa abrindo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 75156
+ },
  "escudo_de_areia": {
   "descricao": "Gaara · a armadura de areia",
   "quadros": 12,
@@ -9225,6 +9253,20 @@
   "laco": false,
   "bytes": 13266
  },
+ "flecha_flamejante_de_marte": {
+  "descricao": "Sailor Mars · a flecha de fogo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 36642
+ },
  "flecha_lunar": {
   "descricao": "Básico de Ártemis: a lua e a flecha de prata",
   "quadros": 12,
@@ -9350,6 +9392,20 @@
   ],
   "laco": false,
   "bytes": 31030
+ },
+ "fogo_de_marte": {
+  "descricao": "Sailor Mars · o fogo em espiral",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 29806
  },
  "fogo_de_supressao": {
   "descricao": "Master Chief · a rajada do fuzil e as setas",
@@ -9504,6 +9560,20 @@
   ],
   "laco": false,
   "bytes": 34546
+ },
+ "forca_de_cem_selos": {
+  "descricao": "Tsunade · as marcas e a luz levantando o aliado",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 37330
  },
  "forca_de_hercules": {
   "descricao": "Shazam · o punho dourado e o escudo de força",
@@ -10009,6 +10079,34 @@
   "laco": false,
   "bytes": 20754
  },
+ "fusao_perfeita": {
+  "descricao": "Garnet · as manoplas gigantes e os raios",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 43814
+ },
+ "futuro_previsto": {
+  "descricao": "Garnet · o terceiro olho e as linhas do futuro",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 23810
+ },
  "gaara_preparo": {
   "descricao": "Gaara · a cabaça e a areia (Preparo, laço)",
   "quadros": 12,
@@ -10190,6 +10288,20 @@
   ],
   "laco": true,
   "bytes": 15852
+ },
+ "garnet_preparo": {
+  "descricao": "Garnet · as duas gemas se juntando (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 17028
  },
  "garra_da_leoa": {
   "descricao": "Básico de Sekhmet: a patada em chamas",
@@ -12515,6 +12627,20 @@
   "laco": false,
   "bytes": 54134
  },
+ "invocacao_gamabunta": {
+  "descricao": "Jiraiya · o selo, a fumaça e o sapo gigante",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 30430
+ },
  "invocar_mortos": {
   "descricao": "Ainz · o círculo e o Cavaleiro da Morte",
   "quadros": 12,
@@ -12864,6 +12990,34 @@
   ],
   "laco": true,
   "bytes": 2558
+ },
+ "jiraiya_preparo": {
+  "descricao": "Jiraiya · o sapo e o óleo borbulhando (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 25542
+ },
+ "johnny_preparo": {
+  "descricao": "Johnny Bravo · os bíceps e os óculos (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 13550
  },
  "joia_do_tempo": {
   "descricao": "Thanos · a Joia do Tempo e a areia lenta",
@@ -14936,6 +15090,20 @@
   ],
   "laco": true,
   "bytes": 28690
+ },
+ "manoplas_garnet": {
+  "descricao": "Garnet · as manoplas e o choque",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 21886
  },
  "manto_de_sombras": {
   "descricao": "Ravena · o manto de capuz no aliado",
@@ -21825,6 +21993,20 @@
   "laco": false,
   "bytes": 44556
  },
+ "musculos_de_aco": {
+  "descricao": "Johnny Bravo · os bíceps e o soco",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 32628
+ },
  "myers_preparo": {
   "descricao": "Michael Myers · a abóbora e a silhueta (Preparo, laço)",
   "quadros": 12,
@@ -21965,6 +22147,20 @@
   "laco": false,
   "bytes": 29990
  },
+ "ninjutsu_medico": {
+  "descricao": "Tsunade · as mãos verdes de chakra",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 36866
+ },
  "noite_das_bruxas": {
   "descricao": "Jack Esqueleto · a lua, os morcegos e as abóboras",
   "quadros": 12,
@@ -22104,6 +22300,20 @@
   ],
   "laco": false,
   "bytes": 73598
+ },
+ "oleo_de_sapo_em_chamas": {
+  "descricao": "Jiraiya · o óleo e o fogo varrendo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 51340
  },
  "olfato_tanjiro": {
   "descricao": "Tanjiro · o fio da abertura (o cheiro até o ponto fraco)",
@@ -22917,6 +23127,20 @@
   "laco": false,
   "bytes": 13734
  },
+ "pergaminho_sagrado": {
+  "descricao": "Sailor Mars · os pergaminhos e o círculo sagrado",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 38804
+ },
  "perola_negra": {
   "descricao": "Jack Sparrow · o navio e os canhões",
   "quadros": 12,
@@ -23630,6 +23854,20 @@
   ],
   "laco": false,
   "bytes": 51178
+ },
+ "pose_johnny": {
+  "descricao": "Johnny Bravo · a pose e os corações",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 27408
  },
  "poseidon_preparo": {
   "descricao": "Poseidon · a água subindo no tridente (Preparo, laço)",
@@ -25311,6 +25549,20 @@
   "laco": false,
   "bytes": 88276
  },
+ "rasengan_jiraiya": {
+  "descricao": "Jiraiya · o Rasengan e o estouro",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 34190
+ },
  "rasengan_mao": {
   "descricao": "Naruto · o Rasengan girando na mão (laço)",
   "quadros": 12,
@@ -26445,6 +26697,20 @@
   "laco": false,
   "bytes": 37620
  },
+ "sailormars_preparo": {
+  "descricao": "Sailor Mars · o arco de fogo puxado (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 17736
+ },
  "sais": {
   "descricao": "Sais do Raphael: dois sais estocam em sequência, cada um com clarão de três pontas",
   "quadros": 12,
@@ -26472,6 +26738,20 @@
   ],
   "laco": false,
   "bytes": 15228
+ },
+ "saliva_curativa": {
+  "descricao": "Steven · a gota e os brilhinhos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 34556
  },
  "salto_mortal": {
   "descricao": "Asa Noturna · os mortais e o pássaro",
@@ -27579,6 +27859,20 @@
   "laco": false,
   "bytes": 75304
  },
+ "soco_de_cem_toneladas": {
+  "descricao": "Tsunade · o soco e o chão rachando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 36982
+ },
  "soco_de_chakra": {
   "descricao": "Sakura: soco com estouro de chakra e o chão rachando",
   "quadros": 12,
@@ -27620,6 +27914,20 @@
   ],
   "laco": false,
   "bytes": 14798
+ },
+ "soco_de_karate": {
+  "descricao": "Johnny Bravo · o golpe de karatê",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 16906
  },
  "soco_de_kong": {
   "descricao": "Básico do Kong: o peito e os punhos de cima",
@@ -28292,6 +28600,20 @@
   ],
   "laco": false,
   "bytes": 40922
+ },
+ "steven_preparo": {
+  "descricao": "Steven · a bolha crescendo (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 18506
  },
  "stewie_preparo": {
   "descricao": "Stewie Griffin · as engrenagens do plano (Preparo, laço)",
@@ -29860,6 +30182,20 @@
   ],
   "laco": false,
   "bytes": 50422
+ },
+ "tsunade_preparo": {
+  "descricao": "Tsunade · o losango e as marcas (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 13486
  },
  "tudo_conforme_o_plano": {
   "descricao": "Palpatine · o capuz e as peças",

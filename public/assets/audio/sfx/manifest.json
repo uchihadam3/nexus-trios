@@ -2841,6 +2841,23 @@
    ],
    "bytes": 64681
   },
+  "bolha-de-steven": {
+   "arquivo": "bolha-de-steven.mp3",
+   "descricao": "Steven: bolha",
+   "versoes": [
+    0.0,
+    1.9496,
+    3.963,
+    5.8248
+   ],
+   "duracoes": [
+    1.8696,
+    1.9333,
+    1.7818,
+    1.8554
+   ],
+   "bytes": 57683
+  },
   "bolhas": {
    "arquivo": "bolhas.mp3",
    "descricao": "família bolhas",
@@ -8349,6 +8366,23 @@
    ],
    "bytes": 61018
   },
+  "escudo-da-rosa": {
+   "arquivo": "escudo-da-rosa.mp3",
+   "descricao": "Steven: escudo da Rosa",
+   "versoes": [
+    0.0,
+    2.18,
+    4.4361,
+    6.5451
+   ],
+   "duracoes": [
+    2.1,
+    2.1761,
+    2.029,
+    2.132
+   ],
+   "bytes": 62901
+  },
   "escudo-de-areia": {
    "arquivo": "escudo-de-areia.mp3",
    "descricao": "Gaara: o escudo de areia",
@@ -10712,6 +10746,23 @@
    ],
    "bytes": 45703
   },
+  "flecha-flamejante-de-marte": {
+   "arquivo": "flecha-flamejante-de-marte.mp3",
+   "descricao": "Sailor Mars: flecha flamejante",
+   "versoes": [
+    0.0,
+    2.58,
+    5.2507,
+    7.7461
+   ],
+   "duracoes": [
+    2.5,
+    2.5907,
+    2.4154,
+    2.538
+   ],
+   "bytes": 83232
+  },
   "flecha-lunar": {
    "arquivo": "flecha-lunar.mp3",
    "descricao": "básico de Ártemis: a flecha de prata",
@@ -10864,6 +10915,23 @@
     2.0729
    ],
    "bytes": 73893
+  },
+  "fogo-de-marte": {
+   "arquivo": "fogo-de-marte.mp3",
+   "descricao": "Sailor Mars: fogo de Marte",
+   "versoes": [
+    0.0,
+    2.0,
+    4.1085,
+    6.0684
+   ],
+   "duracoes": [
+    1.92,
+    2.0285,
+    1.88,
+    2.017
+   ],
+   "bytes": 65184
   },
   "fogo-de-supressao": {
    "arquivo": "fogo-de-supressao.mp3",
@@ -11051,6 +11119,23 @@
     1.8274
    ],
    "bytes": 75762
+  },
+  "forca-de-cem-selos": {
+   "arquivo": "forca-de-cem-selos.mp3",
+   "descricao": "Tsunade: força de cem selos",
+   "versoes": [
+    0.0,
+    2.88,
+    5.8615,
+    8.6468
+   ],
+   "duracoes": [
+    2.8,
+    2.9015,
+    2.7053,
+    2.8426
+   ],
+   "bytes": 90564
   },
   "forca-de-hercules": {
    "arquivo": "forca-de-hercules.mp3",
@@ -11681,6 +11766,40 @@
    ],
    "bytes": 50186
   },
+  "fusao-perfeita": {
+   "arquivo": "fusao-perfeita.mp3",
+   "descricao": "Garnet: fusão perfeita",
+   "versoes": [
+    0.0,
+    2.68,
+    5.4543,
+    8.0463
+   ],
+   "duracoes": [
+    2.6,
+    2.6943,
+    2.5121,
+    2.6396
+   ],
+   "bytes": 88365
+  },
+  "futuro-previsto": {
+   "arquivo": "futuro-previsto.mp3",
+   "descricao": "Garnet: futuro previsto",
+   "versoes": [
+    0.0,
+    2.18,
+    4.4361,
+    6.5451
+   ],
+   "duracoes": [
+    2.1,
+    2.1761,
+    2.029,
+    2.132
+   ],
+   "bytes": 65314
+  },
   "gaara-preparo": {
    "arquivo": "gaara-preparo.mp3",
    "descricao": "Gaara: a cabaça (Preparo)",
@@ -11884,6 +12003,23 @@
     1.6244
    ],
    "bytes": 75839
+  },
+  "garnet-preparo": {
+   "arquivo": "garnet-preparo.mp3",
+   "descricao": "Garnet: as gemas se juntando (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 37200
   },
   "garra-da-leoa": {
    "arquivo": "garra-da-leoa.mp3",
@@ -14758,6 +14894,23 @@
    ],
    "bytes": 47615
   },
+  "invocacao-gamabunta": {
+   "arquivo": "invocacao-gamabunta.mp3",
+   "descricao": "Jiraiya: invocação Gamabunta",
+   "versoes": [
+    0.0,
+    2.58,
+    5.2507,
+    7.7461
+   ],
+   "duracoes": [
+    2.5,
+    2.5907,
+    2.4154,
+    2.538
+   ],
+   "bytes": 86666
+  },
   "invocar-mortos": {
    "arquivo": "invocar-mortos.mp3",
    "descricao": "Ainz: invocar mortos",
@@ -15182,6 +15335,40 @@
     1.2183
    ],
    "bytes": 46316
+  },
+  "jiraiya-preparo": {
+   "arquivo": "jiraiya-preparo.mp3",
+   "descricao": "Jiraiya: o sapinho e o óleo (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 51454
+  },
+  "johnny-preparo": {
+   "arquivo": "johnny-preparo.mp3",
+   "descricao": "Johnny Bravo: os músculos (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 49457
   },
   "joia-do-tempo": {
    "arquivo": "joia-do-tempo.mp3",
@@ -17698,6 +17885,23 @@
     1.8274
    ],
    "bytes": 71719
+  },
+  "manoplas-garnet": {
+   "arquivo": "manoplas-garnet.mp3",
+   "descricao": "Garnet: manoplas",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 74967
   },
   "manto-de-sombras": {
    "arquivo": "manto-de-sombras.mp3",
@@ -26063,6 +26267,23 @@
    ],
    "bytes": 62191
   },
+  "musculos-de-aco": {
+   "arquivo": "musculos-de-aco.mp3",
+   "descricao": "Johnny Bravo: músculos de aço",
+   "versoes": [
+    0.0,
+    2.48,
+    5.047,
+    7.4459
+   ],
+   "duracoes": [
+    2.4,
+    2.487,
+    2.3188,
+    2.4365
+   ],
+   "bytes": 82712
+  },
   "myers-preparo": {
    "arquivo": "myers-preparo.mp3",
    "descricao": "Michael Myers: o tema (Preparo)",
@@ -26250,6 +26471,23 @@
    ],
    "bytes": 75589
   },
+  "ninjutsu-medico": {
+   "arquivo": "ninjutsu-medico.mp3",
+   "descricao": "Tsunade: ninjutsu médico",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 56608
+  },
   "nocaute": {
    "arquivo": "nocaute.mp3",
    "descricao": "nocaute",
@@ -26436,6 +26674,23 @@
     2.34
    ],
    "bytes": 70783
+  },
+  "oleo-de-sapo-em-chamas": {
+   "arquivo": "oleo-de-sapo-em-chamas.mp3",
+   "descricao": "Jiraiya: óleo de sapo em chamas",
+   "versoes": [
+    0.0,
+    2.78,
+    5.6579,
+    8.3466
+   ],
+   "duracoes": [
+    2.7,
+    2.7979,
+    2.6087,
+    2.7411
+   ],
+   "bytes": 95910
   },
   "olfato-tanjiro": {
    "arquivo": "olfato-tanjiro.mp3",
@@ -27321,6 +27576,23 @@
    ],
    "bytes": 58093
   },
+  "pergaminho-sagrado": {
+   "arquivo": "pergaminho-sagrado.mp3",
+   "descricao": "Sailor Mars: pergaminho sagrado",
+   "versoes": [
+    0.0,
+    2.18,
+    4.4361,
+    6.5451
+   ],
+   "duracoes": [
+    2.1,
+    2.1761,
+    2.029,
+    2.132
+   ],
+   "bytes": 81751
+  },
   "perola-negra": {
    "arquivo": "perola-negra.mp3",
    "descricao": "Jack Sparrow: a Pérola Negra",
@@ -28153,6 +28425,23 @@
     1.7153
    ],
    "bytes": 68546
+  },
+  "pose-johnny": {
+   "arquivo": "pose-johnny.mp3",
+   "descricao": "Johnny Bravo: pose",
+   "versoes": [
+    0.0,
+    2.1075,
+    4.3636,
+    6.4726
+   ],
+   "duracoes": [
+    2.0275,
+    2.1761,
+    2.029,
+    2.0974
+   ],
+   "bytes": 64513
   },
   "poseidon-preparo": {
    "arquivo": "poseidon-preparo.mp3",
@@ -30194,6 +30483,23 @@
    ],
    "bytes": 72971
   },
+  "rasengan-jiraiya": {
+   "arquivo": "rasengan-jiraiya.mp3",
+   "descricao": "Jiraiya: Rasengan",
+   "versoes": [
+    0.0,
+    2.18,
+    4.4361,
+    6.5451
+   ],
+   "duracoes": [
+    2.1,
+    2.1761,
+    2.029,
+    2.132
+   ],
+   "bytes": 74999
+  },
   "rasengan-mao": {
    "arquivo": "rasengan-mao.mp3",
    "descricao": "o Rasengan girando na mão, no Preparo",
@@ -31639,6 +31945,23 @@
    ],
    "bytes": 82457
   },
+  "sailormars-preparo": {
+   "arquivo": "sailormars-preparo.mp3",
+   "descricao": "Sailor Mars: o arco de fogo (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 55196
+  },
   "sais": {
    "arquivo": "sais.mp3",
    "descricao": "básico do Raphael: duas estocadas metálicas dos sais",
@@ -31672,6 +31995,23 @@
     0.9203
    ],
    "bytes": 34051
+  },
+  "saliva-curativa": {
+   "arquivo": "saliva-curativa.mp3",
+   "descricao": "Steven: saliva curativa",
+   "versoes": [
+    0.0,
+    1.98,
+    4.0289,
+    5.9446
+   ],
+   "duracoes": [
+    1.9,
+    1.9689,
+    1.8357,
+    1.9289
+   ],
+   "bytes": 73679
   },
   "salto-mortal": {
    "arquivo": "salto-mortal.mp3",
@@ -32897,6 +33237,23 @@
    ],
    "bytes": 40869
   },
+  "soco-de-cem-toneladas": {
+   "arquivo": "soco-de-cem-toneladas.mp3",
+   "descricao": "Tsunade: soco de cem toneladas",
+   "versoes": [
+    0.0,
+    2.38,
+    4.8434,
+    7.1456
+   ],
+   "duracoes": [
+    2.3,
+    2.3834,
+    2.2222,
+    2.335
+   ],
+   "bytes": 76862
+  },
   "soco-de-chakra": {
    "arquivo": "soco-de-chakra.mp3",
    "descricao": "básico de Sakura: soco gigantesco e o chão rachando",
@@ -32947,6 +33304,23 @@
     1.0828
    ],
    "bytes": 39646
+  },
+  "soco-de-karate": {
+   "arquivo": "soco-de-karate.mp3",
+   "descricao": "Johnny Bravo: soco de karatê",
+   "versoes": [
+    0.0,
+    1.4884,
+    3.1225,
+    4.5645
+   ],
+   "duracoes": [
+    1.4084,
+    1.5541,
+    1.362,
+    1.3988
+   ],
+   "bytes": 44654
   },
   "soco-de-kong": {
    "arquivo": "soco-de-kong.mp3",
@@ -33780,6 +34154,23 @@
     2.5657
    ],
    "bytes": 91106
+  },
+  "steven-preparo": {
+   "arquivo": "steven-preparo.mp3",
+   "descricao": "Steven: a bolha crescendo (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 27355
   },
   "stewie-preparo": {
    "arquivo": "stewie-preparo.mp3",
@@ -35633,6 +36024,23 @@
     2.0305
    ],
    "bytes": 57002
+  },
+  "tsunade-preparo": {
+   "arquivo": "tsunade-preparo.mp3",
+   "descricao": "Tsunade: o selo da testa (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 37738
   },
   "tudo-conforme-o-plano": {
    "arquivo": "tudo-conforme-o-plano.mp3",

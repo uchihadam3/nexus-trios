@@ -224,6 +224,12 @@ const T: Record<string, string> = {
   vash: 'tiro_desarmante tufao_humanoide braco_de_anjo',
   senku: 'remedio_senku bateria_senku polvora_senku',
   hinata: 'punho_suave rotacao_hinata sessenta_e_quatro_palmas',
+  jiraiya: 'rasengan_jiraiya invocacao_gamabunta oleo_de_sapo_em_chamas',
+  tsunade: 'soco_de_cem_toneladas ninjutsu_medico forca_de_cem_selos',
+  sailormars: 'fogo_de_marte pergaminho_sagrado flecha_flamejante_de_marte',
+  steven: 'escudo_da_rosa saliva_curativa bolha_de_steven',
+  garnet: 'futuro_previsto manoplas_garnet fusao_perfeita',
+  johnnybravo: 'pose_johnny soco_de_karate musculos_de_aco',
 };
 
 export const FAMILIA_DA_HABILIDADE: Record<string, VfxFamily> = Object.fromEntries(
