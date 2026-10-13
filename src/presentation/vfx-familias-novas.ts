@@ -1968,6 +1968,15 @@ export const FAMILIAS_NOVAS = {
   soco_de_construto: n({ nome: 'Construto do anel', grupo: 'físico', aponta: true, impacto: 'soco_de_construto', escala: 2.1, tempo: 1.0, cor: '#6fe08a', tinta: 'fixa' }),
   soco_cibernetico: n({ nome: 'Soco cibernético', grupo: 'físico', aponta: true, impacto: 'soco_cibernetico', escala: 2.0, tempo: 1.0, cor: '#6fb6ff', tinta: 'fixa' }),
   soco_relampago_shazam: n({ nome: 'Soco do relâmpago', grupo: 'físico', aponta: true, impacto: 'soco_relampago_shazam', escala: 2.0, tempo: 1.0, cor: '#f5c542', tinta: 'fixa' }),
+  // o ataque básico de cada personagem com animação e som próprios (tools/vfx/familias_v2/basicos_*.py)
+  soco_de_pegaso: n({ nome: 'Soco de Pégaso', grupo: 'físico', aponta: true, impacto: 'soco_de_pegaso', escala: 2.0, tempo: 1.0, cor: '#7fb6ff', tinta: 'fixa' }),
+  soco_do_cisne: n({ nome: 'Soco do Cisne', grupo: 'físico', aponta: true, impacto: 'soco_do_cisne', escala: 2.0, tempo: 1.0, cor: '#7ad1ff', tinta: 'fixa' }),
+  soco_da_fenix: n({ nome: 'Soco da Fênix', grupo: 'físico', aponta: true, impacto: 'soco_da_fenix', escala: 2.0, tempo: 1.0, cor: '#ff8a4d', tinta: 'fixa' }),
+  soco_de_gemeos: n({ nome: 'Soco de Gêmeos', grupo: 'físico', aponta: true, impacto: 'soco_de_gemeos', escala: 2.0, tempo: 1.0, cor: '#a98cf0', tinta: 'fixa' }),
+  soco_do_leao_dourado: n({ nome: 'Soco do Leão', grupo: 'físico', aponta: true, impacto: 'soco_do_leao_dourado', escala: 2.0, tempo: 1.0, cor: '#f5c24a', tinta: 'fixa' }),
+  soco_de_ferro_destino: n({ nome: 'Soco de ferro', grupo: 'físico', aponta: true, impacto: 'soco_de_ferro_destino', escala: 2.0, tempo: 1.0, cor: '#6fd38a', tinta: 'fixa' }),
+  socos_de_luva_tifa: n({ nome: 'Socos de luva', grupo: 'físico', aponta: true, impacto: 'socos_de_luva_tifa', escala: 2.0, tempo: 1.0, cor: '#f08aa0', tinta: 'fixa' }),
+  grande_faca_piramide: n({ nome: 'Grande Faca', grupo: 'corte', aponta: true, impacto: 'grande_faca_piramide', escala: 2.1, tempo: 1.0, cor: '#d08a6a', tinta: 'fixa' }),
 } as const satisfies Record<string, Familia>;
 
 export type FamiliaNova = keyof typeof FAMILIAS_NOVAS;
@@ -1988,7 +1997,8 @@ export const NOVAS_NO_ALVO = new Set<FamiliaNova>(['ressurreicao', 'renascer', '
   'jab_de_luva_vermelha', 'soco_divergente', 'soco_das_sombras', 'golpe_de_mao_sukuna', 'soco_endurecido', 'soco_do_gon', 'soco_da_corrente', 'soco_de_automail',
   'dois_jabs_kuririn', 'soco_espartano', 'soco_das_trevas_ganondorf', 'soco_cqc', 'soco_do_mario', 'soco_glacial', 'soco_da_faixa_vermelha', 'soco_eletrico_jin',
   'toque_vampirico_dio', 'soco_da_vida_giorno', 'soco_serrilhado', 'punho_de_sangue_power', 'soco_formiga', 'soco_de_osso_em_chamas', 'soco_de_luva_da_vampira', 'patada_simbionte',
-  'soco_de_metal_ultron', 'soco_do_duende', 'pancada_colossal_galactus', 'soco_de_madeira_groot', 'soco_da_mare', 'soco_de_construto', 'soco_cibernetico', 'soco_relampago_shazam']);
+  'soco_de_metal_ultron', 'soco_do_duende', 'pancada_colossal_galactus', 'soco_de_madeira_groot', 'soco_da_mare', 'soco_de_construto', 'soco_cibernetico', 'soco_relampago_shazam',
+  'soco_de_pegaso', 'soco_do_cisne', 'soco_da_fenix', 'soco_de_gemeos', 'soco_do_leao_dourado', 'soco_de_ferro_destino', 'socos_de_luva_tifa', 'grande_faca_piramide']);
 
 /** Bons para o ataque básico do personagem (quando ele já usa a família numa habilidade). */
 export const NOVAS_DE_BASICO = new Set<FamiliaNova>(['garras', 'chicote', 'bastao', 'mordida', 'tentaculos', 'florete',

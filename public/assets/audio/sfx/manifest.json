@@ -14214,6 +14214,23 @@
    ],
    "bytes": 58903
   },
+  "grande-faca-piramide": {
+   "arquivo": "grande-faca-piramide.mp3",
+   "descricao": "básico de Cabeça de Pirâmide: a lâmina pesada arrastando e batendo",
+   "versoes": [
+    0.0,
+    1.3038,
+    2.7163,
+    4.1006
+   ],
+   "duracoes": [
+    1.2238,
+    1.3325,
+    1.3043,
+    1.3705
+   ],
+   "bytes": 52607
+  },
   "grande-roubo": {
    "arquivo": "grande-roubo.mp3",
    "descricao": "Mulher-Gato: o grande roubo",
@@ -34444,6 +34461,23 @@
    ],
    "bytes": 29400
   },
+  "soco-da-fenix": {
+   "arquivo": "soco-da-fenix.mp3",
+   "descricao": "básico de Ikki: o soco em chamas e as brasas",
+   "versoes": [
+    0.0,
+    1.0175,
+    2.2373,
+    3.3801
+   ],
+   "duracoes": [
+    0.9375,
+    1.1399,
+    1.0628,
+    1.1167
+   ],
+   "bytes": 48203
+  },
   "soco-da-manopla": {
    "arquivo": "soco-da-manopla.mp3",
    "descricao": "básico de Thanos: soco grave, o chão rachando e o brilho das Joias",
@@ -34648,6 +34682,40 @@
    ],
    "bytes": 32789
   },
+  "soco-de-ferro-destino": {
+   "arquivo": "soco-de-ferro-destino.mp3",
+   "descricao": "básico de Doutor Destino: o metal e o zumbido da magia",
+   "versoes": [
+    0.0,
+    1.0763,
+    2.2109,
+    3.269
+   ],
+   "duracoes": [
+    0.9963,
+    1.0546,
+    0.9781,
+    1.1675
+   ],
+   "bytes": 34608
+  },
+  "soco-de-gemeos": {
+   "arquivo": "soco-de-gemeos.mp3",
+   "descricao": "básico de Saga: os dois socos e o eco cósmico",
+   "versoes": [
+    0.0,
+    1.23,
+    2.5017,
+    3.6928
+   ],
+   "duracoes": [
+    1.15,
+    1.1917,
+    1.1111,
+    1.1675
+   ],
+   "bytes": 41978
+  },
   "soco-de-hercules": {
    "arquivo": "soco-de-hercules.mp3",
    "descricao": "básico de Hércules: o soco divino",
@@ -34818,6 +34886,23 @@
    ],
    "bytes": 47236
   },
+  "soco-de-pegaso": {
+   "arquivo": "soco-de-pegaso.mp3",
+   "descricao": "básico de Seiya: soco de armadura e o bater de asas",
+   "versoes": [
+    0.0,
+    1.0622,
+    2.2225,
+    3.317
+   ],
+   "duracoes": [
+    0.9822,
+    1.0803,
+    1.0145,
+    0.8727
+   ],
+   "bytes": 34389
+  },
   "soco-de-pym": {
    "arquivo": "soco-de-pym.mp3",
    "descricao": "básico de Homem-Formiga: \"zip\" de encolher e o soco que cresce",
@@ -34920,6 +35005,23 @@
    ],
    "bytes": 35760
   },
+  "soco-do-cisne": {
+   "arquivo": "soco-do-cisne.mp3",
+   "descricao": "básico de Hyoga: o frio e os cristais de gelo tilintando",
+   "versoes": [
+    0.0,
+    0.9644,
+    1.9681,
+    2.8871
+   ],
+   "duracoes": [
+    0.8844,
+    0.9237,
+    0.839,
+    0.914
+   ],
+   "bytes": 32023
+  },
   "soco-do-diabo": {
    "arquivo": "soco-do-diabo.mp3",
    "descricao": "básico de Kazuya: soco pesado e estalo elétrico grave",
@@ -35004,6 +35106,23 @@
     1.1167
    ],
    "bytes": 35612
+  },
+  "soco-do-leao-dourado": {
+   "arquivo": "soco-do-leao-dourado.mp3",
+   "descricao": "básico de Aiolia: o soco e o rugido curto",
+   "versoes": [
+    0.0,
+    1.08,
+    2.1963,
+    3.1361
+   ],
+   "duracoes": [
+    1.0,
+    1.0363,
+    0.8598,
+    0.9027
+   ],
+   "bytes": 31136
   },
   "soco-do-mario": {
    "arquivo": "soco-do-mario.mp3",
@@ -35514,6 +35633,23 @@
     0.9137
    ],
    "bytes": 37197
+  },
+  "socos-de-luva-tifa": {
+   "arquivo": "socos-de-luva-tifa.mp3",
+   "descricao": "básico de Tifa: três socos curtos de luva",
+   "versoes": [
+    0.0,
+    1.08,
+    2.1963,
+    3.2424
+   ],
+   "duracoes": [
+    1.0,
+    1.0363,
+    0.9662,
+    1.0152
+   ],
+   "bytes": 35156
   },
   "socos-supersonicos": {
    "arquivo": "socos-supersonicos.mp3",

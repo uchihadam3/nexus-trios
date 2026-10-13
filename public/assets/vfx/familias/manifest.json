@@ -12081,6 +12081,20 @@
   "laco": false,
   "bytes": 68118
  },
+ "grande_faca_piramide": {
+  "descricao": "básico do Cabeça de Pirâmide: a Grande Faca descendo pesada",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 48290
+ },
  "grande_roubo": {
   "descricao": "Mulher-Gato · a joia arrancada",
   "quadros": 12,
@@ -28853,6 +28867,20 @@
   "laco": false,
   "bytes": 29896
  },
+ "soco_da_fenix": {
+  "descricao": "básico do Ikki: o punho em chamas e as plumas de fogo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 33198
+ },
  "soco_da_manopla": {
   "descricao": "básico do Thanos: a Manopla do Infinito com as Joias e o chão rachando",
   "quadros": 12,
@@ -29021,6 +29049,34 @@
   "laco": false,
   "bytes": 32528
  },
+ "soco_de_ferro_destino": {
+  "descricao": "básico do Doutor Destino: a manopla de ferro e o selo verde",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 41722
+ },
+ "soco_de_gemeos": {
+  "descricao": "básico do Saga: os dois punhos de Gêmeos e a galáxia",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 30666
+ },
  "soco_de_hercules": {
   "descricao": "Básico de Hércules: o soco divino e o louro",
   "quadros": 12,
@@ -29161,6 +29217,20 @@
   "laco": false,
   "bytes": 38672
  },
+ "soco_de_pegaso": {
+  "descricao": "básico do Seiya: a manopla de bronze e as penas de Pégaso",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 26192
+ },
  "soco_de_pym": {
   "descricao": "Soco de Pym: o soco minúsculo que cresce",
   "quadros": 12,
@@ -29245,6 +29315,20 @@
   "laco": false,
   "bytes": 26020
  },
+ "soco_do_cisne": {
+  "descricao": "básico do Hyoga: o soco gelado e os flocos de neve",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 37294
+ },
  "soco_do_diabo": {
   "descricao": "Kazuya: soco com raios do Gene do Diabo",
   "quadros": 12,
@@ -29314,6 +29398,20 @@
   ],
   "laco": false,
   "bytes": 53850
+ },
+ "soco_do_leao_dourado": {
+  "descricao": "básico do Aiolia: o soco e a juba dourada abrindo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 31500
  },
  "soco_do_mario": {
   "descricao": "básico do Mario: a luva branca, a estrelinha e a moedinha",
@@ -29720,6 +29818,20 @@
   ],
   "laco": false,
   "bytes": 69916
+ },
+ "socos_de_luva_tifa": {
+  "descricao": "básico da Tifa: três socos curtos de luva",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 23308
  },
  "socos_supersonicos": {
   "descricao": "Básico do Flecha: a rajada de socos",
