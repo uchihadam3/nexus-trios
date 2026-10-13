@@ -23701,6 +23701,20 @@
   "laco": false,
   "bytes": 13694
  },
+ "patada_simbionte": {
+  "descricao": "básico do Venom: a pata com garras e os fios de gosma",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 25394
+ },
  "pateta_preparo": {
   "descricao": "Pateta · se equilibrando (Preparo, laço)",
   "quadros": 12,
@@ -25254,6 +25268,20 @@
   ],
   "laco": false,
   "bytes": 95276
+ },
+ "punho_de_sangue_power": {
+  "descricao": "básico da Power: espinhos de sangue nos nós dos dedos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 27052
  },
  "punho_divergente": {
   "descricao": "Punho divergente: o soco e o impacto atrasado",
@@ -28825,6 +28853,20 @@
   "laco": false,
   "bytes": 113544
  },
+ "soco_da_vida_giorno": {
+  "descricao": "básico do Giorno: o soco e a planta com flores brotando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 27018
+ },
  "soco_das_sombras": {
   "descricao": "básico do Megumi: o punho sai da sombra e espirra tinta escura",
   "quadros": 12,
@@ -28979,6 +29021,20 @@
   "laco": false,
   "bytes": 22134
  },
+ "soco_de_luva_da_vampira": {
+  "descricao": "básico da Vampira: a luva comprida, o rastro de voo e os dois anéis",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 36686
+ },
  "soco_de_marinheiro": {
   "descricao": "Soco de marinheiro: o braço gira como manivela, soco com estrelas e âncora estampada",
   "quadros": 12,
@@ -29006,6 +29062,20 @@
   ],
   "laco": false,
   "bytes": 33890
+ },
+ "soco_de_osso_em_chamas": {
+  "descricao": "básico do Motoqueiro Fantasma: punho de osso em chamas e brasas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 38672
  },
  "soco_de_pym": {
   "descricao": "Soco de Pym: o soco minúsculo que cresce",
@@ -29315,6 +29385,20 @@
   "laco": false,
   "bytes": 27450
  },
+ "soco_formiga": {
+  "descricao": "básico do Homem-Formiga: o punho minúsculo que fica gigante",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 38708
+ },
  "soco_gigante_kong": {
   "descricao": "King Kong · o punho gigante",
   "quadros": 12,
@@ -29426,6 +29510,20 @@
   ],
   "laco": false,
   "bytes": 125132
+ },
+ "soco_serrilhado": {
+  "descricao": "básico do Denji: os dentes da serra no braço e o sangue espirrando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 25464
  },
  "soco_supersonico": {
   "descricao": "Invencível · o soco e o cone de som",
@@ -31148,6 +31246,20 @@
   ],
   "laco": false,
   "bytes": 21366
+ },
+ "toque_vampirico_dio": {
+  "descricao": "básico do DIO: a mão em garra que crava e puxa o sangue",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 27838
  },
  "traicao_de_set": {
   "descricao": "Set · a facada pelas costas",

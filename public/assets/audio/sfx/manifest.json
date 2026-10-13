@@ -28307,6 +28307,23 @@
    ],
    "bytes": 57756
   },
+  "patada-simbionte": {
+   "arquivo": "patada-simbionte.mp3",
+   "descricao": "básico de Venom: o tapa pesado e a gosma estalando",
+   "versoes": [
+    0.0,
+    1.1787,
+    2.3086,
+    3.4514
+   ],
+   "duracoes": [
+    1.0987,
+    1.0499,
+    1.0628,
+    0.9981
+   ],
+   "bytes": 32353
+  },
   "pateta-preparo": {
    "arquivo": "pateta-preparo.mp3",
    "descricao": "Pateta: se equilibrando (Preparo)",
@@ -30176,6 +30193,23 @@
     1.3198
    ],
    "bytes": 51104
+  },
+  "punho-de-sangue-power": {
+   "arquivo": "punho-de-sangue-power.mp3",
+   "descricao": "básico de Power: o sangue endurecendo e o soco",
+   "versoes": [
+    0.0,
+    0.9445,
+    1.9068,
+    2.7711
+   ],
+   "duracoes": [
+    0.8645,
+    0.8823,
+    0.7843,
+    0.8933
+   ],
+   "bytes": 31355
   },
   "punho-divergente": {
    "arquivo": "punho-divergente.mp3",
@@ -34410,6 +34444,23 @@
    ],
    "bytes": 54537
   },
+  "soco-da-vida-giorno": {
+   "arquivo": "soco-da-vida-giorno.mp3",
+   "descricao": "básico de Giorno: o soco, o broto e o brilho das flores",
+   "versoes": [
+    0.0,
+    1.0714,
+    2.2912,
+    3.3528
+   ],
+   "duracoes": [
+    0.9914,
+    1.1399,
+    0.9815,
+    0.9961
+   ],
+   "bytes": 47461
+  },
   "soco-das-sombras": {
    "arquivo": "soco-das-sombras.mp3",
    "descricao": "básico de Megumi: a sombra borbulhando, o soco e os respingos",
@@ -34597,6 +34648,23 @@
    ],
    "bytes": 43016
   },
+  "soco-de-luva-da-vampira": {
+   "arquivo": "soco-de-luva-da-vampira.mp3",
+   "descricao": "básico de Vampira: o rasante e o soco com força emprestada",
+   "versoes": [
+    0.0,
+    1.1009,
+    2.1573,
+    3.1511
+   ],
+   "duracoes": [
+    1.0209,
+    0.9764,
+    0.9138,
+    0.913
+   ],
+   "bytes": 28990
+  },
   "soco-de-marinheiro": {
    "arquivo": "soco-de-marinheiro.mp3",
    "descricao": "básico do Popeye: manivela cômica e o soco com estrelinhas",
@@ -34630,6 +34698,23 @@
     1.4126
    ],
    "bytes": 40940
+  },
+  "soco-de-osso-em-chamas": {
+   "arquivo": "soco-de-osso-em-chamas.mp3",
+   "descricao": "básico de Motoqueiro Fantasma: fogo rugindo e ossos estalando",
+   "versoes": [
+    0.0,
+    1.18,
+    2.2615,
+    3.3294
+   ],
+   "duracoes": [
+    1.1,
+    1.0015,
+    0.9879,
+    1.1167
+   ],
+   "bytes": 47236
   },
   "soco-de-pym": {
    "arquivo": "soco-de-pym.mp3",
@@ -35005,6 +35090,23 @@
    ],
    "bytes": 47756
   },
+  "soco-formiga": {
+   "arquivo": "soco-formiga.mp3",
+   "descricao": "básico de Homem-Formiga: o piu do punho minúsculo virando estrondo",
+   "versoes": [
+    0.0,
+    1.18,
+    2.2433,
+    3.3861
+   ],
+   "duracoes": [
+    1.1,
+    0.9833,
+    1.0628,
+    1.1167
+   ],
+   "bytes": 33577
+  },
   "soco-gigante-kong": {
    "arquivo": "soco-gigante-kong.mp3",
    "descricao": "King Kong: o soco gigante",
@@ -35174,6 +35276,23 @@
     1.5228
    ],
    "bytes": 57639
+  },
+  "soco-serrilhado": {
+   "arquivo": "soco-serrilhado.mp3",
+   "descricao": "básico de Denji: o ronco curto da serra, o soco e o sangue",
+   "versoes": [
+    0.0,
+    0.8583,
+    1.8704,
+    2.7639
+   ],
+   "duracoes": [
+    0.7783,
+    0.9321,
+    0.8135,
+    1.0152
+   ],
+   "bytes": 29791
   },
   "soco-supersonico": {
    "arquivo": "soco-supersonico.mp3",
@@ -37197,6 +37316,23 @@
     1.3198
    ],
    "bytes": 60269
+  },
+  "toque-vampirico-dio": {
+   "arquivo": "toque-vampirico-dio.mp3",
+   "descricao": "básico de DIO: o aperto e o sangue sendo sugado",
+   "versoes": [
+    0.0,
+    1.2252,
+    2.4969,
+    3.651
+   ],
+   "duracoes": [
+    1.1452,
+    1.1917,
+    1.074,
+    1.1623
+   ],
+   "bytes": 38226
   },
   "traicao-de-set": {
    "arquivo": "traicao-de-set.mp3",
