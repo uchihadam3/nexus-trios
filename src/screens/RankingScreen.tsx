@@ -1,5 +1,5 @@
-import {useEffect,useState,type CSSProperties} from 'react';
-import {Award,Crown,Lightbulb,LogIn,Lock,Medal,Trophy,WifiOff,X} from 'lucide-react';
+import {useEffect,useState,type CSSProperties,type ReactNode} from 'react';
+import {Award,CheckCircle2,Crown,Lightbulb,LogIn,Lock,Medal,ShieldCheck,Trophy,WifiOff,X} from 'lucide-react';
 import {byId} from '../data/characters';
 import {Portrait} from '../components/Portrait';
 import {TelaTopo} from '../components/Casca';
@@ -21,8 +21,8 @@ type Modo=(typeof modes)[number][0];
  * entrega o ranking para quem tem conta: sem ela, a tela convida a entrar em
  * vez de parecer uma queda de conexão.
  */
-export function RankingScreen({handle,conta,onConta,recorde,inicial='daily'}:{handle?:string;conta:boolean;onConta:()=>void;recorde?:number;inicial?:Modo}){
-  const [mode,setMode]=useState<Modo>(inicial),[cq,setCq]=useState<RankingDeConquistas|null>(null),[board,setBoard]=useState<Leaderboard|null>(null),[historico,setHistorico]=useState<PartidaDoHistorico[]|null>(null),[loading,setLoading]=useState(false),[maisCarregando,setMaisCarregando]=useState(false),[error,setError]=useState('');
+export function RankingScreen({handle,conta,onConta,recorde,inicial='daily',dono=false}:{handle?:string;conta:boolean;onConta:()=>void;recorde?:number;inicial?:Modo;/** a conta do dono do jogo vê as jornadas sem validar (src/lib/dicas-liberadas.ts) */dono?:boolean}){
+  const [mode,setMode]=useState<Modo>(inicial),[cq,setCq]=useState<RankingDeConquistas|null>(null),[board,setBoard]=useState<Leaderboard|null>(null),[historico,setHistorico]=useState<PartidaDoHistorico[]|null>(null),[loading,setLoading]=useState(false),[maisCarregando,setMaisCarregando]=useState(false),[error,setError]=useState(''),[recarga,setRecarga]=useState(0);
   useEffect(()=>{if(!onlineConfigured||!conta)return;let active=true;setLoading(true);setError('');setHistorico(null);
     /*
      * "Meus" é o histórico completo, que só a função da FASE K entrega. Com a
@@ -35,7 +35,7 @@ export function RankingScreen({handle,conta,onConta,recorde,inicial='daily'}:{ha
       ?onlineCall<{runs:PartidaDoHistorico[]}>('historico').then(r=>{if(active){setHistorico(r.runs);setBoard(null);}}).catch(e=>{if(e instanceof Error&&/desconhecida/i.test(e.message))return onlineCall<Leaderboard>('leaderboard',{mode:'season'}).then(b=>{if(active)setBoard(b);});throw e;})
       :onlineCall<Leaderboard>('leaderboard',{mode}).then(b=>{if(active)setBoard(b);});
     void pedido.then(()=>{if(active)setLoading(false);}).catch(e=>{if(active){setError(e instanceof Error?e.message:'Ranking indisponível.');setLoading(false);}});
-    return()=>{active=false};},[mode,conta]);
+    return()=>{active=false};},[mode,conta,recarga]);
   /*
    * "Ver mais": a próxima página entra no fim da lista. Linhas repetidas (a
    * própria conta pode vir em duas páginas) são descartadas pelo id.
@@ -52,7 +52,7 @@ export function RankingScreen({handle,conta,onConta,recorde,inicial='daily'}:{ha
     finally{setMaisCarregando(false);}
   };
   const estado:EstadoDoPlacar=!onlineConfigured?{tipo:'desligado'}:!conta?{tipo:'sem-conta'}:error?{tipo:'erro',texto:error}:loading?{tipo:'carregando'}:historico?{tipo:'historico',partidas:historico}:mode==='conquistas'?{tipo:'conquistas',ranking:cq}:{tipo:'placar',board};
-  return <Placar mode={mode} onMode={setMode} estado={estado} handle={handle} onConta={onConta} onMais={()=>void verMais()} maisCarregando={maisCarregando} recorde={recorde}/>;
+  return <Placar mode={mode} onMode={setMode} estado={estado} handle={handle} onConta={onConta} onMais={()=>void verMais()} maisCarregando={maisCarregando} recorde={recorde} extra={dono&&conta&&onlineConfigured?<PainelDoDono onValidou={()=>setRecarga(n=>n+1)}/>:null}/>;
 }
 
 export type EstadoDoPlacar={tipo:'desligado'|'sem-conta'|'carregando'}|{tipo:'erro';texto:string}|{tipo:'historico';partidas:PartidaDoHistorico[]}|{tipo:'placar';board:Leaderboard|null}|{tipo:'conquistas';ranking:RankingDeConquistas|null};
@@ -60,7 +60,7 @@ export type EstadoDoPlacar={tipo:'desligado'|'sem-conta'|'carregando'}|{tipo:'er
 const Trio=({team,tamanho=''}:{team:string[];tamanho?:string})=><span className={`rk-trio ${tamanho}`}>{team.map(id=>byId[id]&&<span key={id} style={{'--character':byId[id].color} as CSSProperties}><Portrait character={byId[id]}/></span>)}</span>;
 
 /** O desenho do ranking, sem rede: a tela de verdade e o banco de provas usam o mesmo. */
-export function Placar({mode,onMode,estado,handle,onConta,onMais,maisCarregando=false,recorde}:{mode:Modo;onMode:(m:Modo)=>void;estado:EstadoDoPlacar;handle?:string;onConta:()=>void;onMais:()=>void;maisCarregando?:boolean;recorde?:number}){
+export function Placar({mode,onMode,estado,handle,onConta,onMais,maisCarregando=false,recorde,extra}:{mode:Modo;onMode:(m:Modo)=>void;estado:EstadoDoPlacar;handle?:string;onConta:()=>void;onMais:()=>void;maisCarregando?:boolean;recorde?:number;extra?:ReactNode}){
   const [selected,setSelected]=useState<PublicRun|null>(null);
   const board=estado.tipo==='placar'?estado.board:null;
   const rows=mode==='mine'?(board?.mine?[board.mine]:[]):board?.entries??[];
@@ -111,7 +111,43 @@ export function Placar({mode,onMode,estado,handle,onConta,onMais,maisCarregando=
         <small className="rk-cartao-rodape">Desafio {selected.seed} · {new Date(selected.date).toLocaleDateString('pt-BR')} · {selected.engineVersion}</small>
       </div>
     </div>}
+    {extra}
   </section>;
+}
+
+/*
+ * Jornadas sem validar (pedido do dono do jogo: "você consegue ver quem tá
+ * jogando e quem não foi validado e validar essa pessoa"). Só aparece na
+ * conta do dono, e o servidor confere de novo (ação `pendentes`). Cada
+ * jornada é refeita pelo servidor, uma por vez, e entra com o resultado dele.
+ * Uma jornada abandonada no meio também aparece aqui: validada, ela conta o
+ * que o trio faria nas 10 lutas.
+ */
+type Pendente={id:string;handle:string;team:string[];date:string;meu:boolean};
+function PainelDoDono({onValidou}:{onValidou:()=>void}){
+  const [aberto,setAberto]=useState(false),[lista,setLista]=useState<Pendente[]|null>(null),[dias,setDias]=useState(7),[ocupado,setOcupado]=useState(''),[aviso,setAviso]=useState('');
+  const carregar=()=>{setAviso('');void onlineCall<{dias:number;runs:Pendente[]}>('pendentes').then(r=>{setLista(r.runs);setDias(r.dias);}).catch(e=>setAviso(e instanceof Error?e.message:'Não deu para carregar.'));};
+  useEffect(()=>{if(aberto&&!lista)carregar();},[aberto]);
+  const validar=async(ids:string[])=>{
+    let feitas=0;
+    for(const id of ids){setOcupado(id);
+      try{await onlineCall('validar-pendente',{runId:id});feitas++;setLista(l=>l&&l.filter(x=>x.id!==id));}
+      catch(e){const msg=e instanceof Error?e.message:'';if(/já/i.test(msg))setLista(l=>l&&l.filter(x=>x.id!==id));else{setAviso(`Parou numa jornada: ${msg||'erro'}`);break;}}}
+    setOcupado('');if(feitas){setAviso(`${feitas} jornada${feitas>1?'s':''} validada${feitas>1?'s':''}.`);onValidou();}
+  };
+  const pessoas=lista?[...new Set(lista.map(x=>x.handle))]:[];
+  return <div className="rk-dono">
+    <button className="secondary rk-dono-abre" onClick={()=>setAberto(a=>!a)}><ShieldCheck size={16}/>Jornadas sem validar{lista?` · ${lista.length}`:''}</button>
+    {aberto&&<div className="rk-dono-corpo">
+      <small>Últimos {dias} dias · só a sua conta vê isto. Cada jornada é refeita pelo servidor e entra com o resultado dele.</small>
+      {aviso&&<p className="rk-dono-aviso">{aviso}</p>}
+      {!lista?<p className="rk-dono-aviso">Carregando…</p>:!lista.length?<p className="rk-dono-aviso"><CheckCircle2 size={14}/>Nenhuma jornada esperando.</p>:<>
+        <p className="rk-dono-aviso">{pessoas.length} pessoa{pessoas.length>1?'s':''}: {pessoas.join(', ')}</p>
+        <button className="primary" disabled={!!ocupado} onClick={()=>void validar(lista.map(x=>x.id))}>{ocupado?'Validando…':`Validar todas (${lista.length})`}</button>
+        <ol className="ranking-list rk-lista">{lista.map(x=><li key={x.id}><Trio team={x.team} tamanho="mini"/><span><b>{x.handle}</b><small>{new Date(x.date).toLocaleString('pt-BR',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'})}</small></span><button className="secondary" disabled={!!ocupado} onClick={()=>void validar([x.id])}>{ocupado===x.id?'…':'Validar'}</button></li>)}</ol>
+      </>}
+    </div>}
+  </div>;
 }
 
 /*
