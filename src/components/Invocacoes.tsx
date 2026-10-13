@@ -16,10 +16,11 @@ import { fallbackPoint, type Anchors } from './BattleEffects';
  * longe dá o tranco e o efeito da criatura sai dela (BattleEffects). Um arco fino por fora mostra o
  * tempo que falta.
  */
-export const DE_PERTO = new Set(['megumi', 'jinwoo', 'bayonetta', 'jotaro', 'pain', 'mickey', 'plankton']);
+export const DE_PERTO = new Set(['megumi', 'jinwoo', 'bayonetta', 'jotaro', 'pain', 'mickey', 'plankton', 'agentsmith', 'xenomorph', 'steve', 'makima']);
 export const COR_DA_INVOCACAO: Record<string, string> = {
   megumi: '#e8eef8', jinwoo: '#9a6cff', yugi: '#9a6cff', kaiba: '#7fc8ff', bayonetta: '#ff4a6e',
   jotaro: '#8aa2ff', pain: '#d8b080', mickey: '#e8c070', plankton: '#7fe07f', krang: '#ff8ac8',
+  agentsmith: '#5ae08a', xenomorph: '#8ab8c0', steve: '#d8d4c8', makima: '#ff9060',
 };
 /** Onde a bolinha fica, em px a partir do centro do medalhão de quem invocou. */
 // sempre na diagonal da frente, virada para o meio do campo (pedido do jogador): no seu trio, em cima à

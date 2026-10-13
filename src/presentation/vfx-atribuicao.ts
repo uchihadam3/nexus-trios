@@ -261,6 +261,8 @@ export const FAMILIA_DA_HABILIDADE: Record<string, VfxFamily> = Object.fromEntri
 export const FAMILIA_DA_INVOCACAO: Record<string, VfxFamily> = {
   megumi: 'inv_cao', jinwoo: 'inv_sombras', yugi: 'inv_mago', kaiba: 'inv_dragao', bayonetta: 'inv_gomorrah',
   jotaro: 'inv_ora', pain: 'inv_feras', mickey: 'inv_vassouras', plankton: 'inv_clones', krang: 'inv_androide',
+  // quem invoca pela Mecânica única: o ataque da bolinha usa o efeito (e o som) da habilidade que bate com ela
+  agentsmith: 'copias_do_smith', xenomorph: 'segunda_mandibula', steve: 'golem_de_ferro_steve', makima: 'corrente_de_obediencia',
 };
 
 /*

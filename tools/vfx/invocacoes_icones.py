@@ -258,16 +258,92 @@ def androide(im):
     brilho(im, 0.50, 0.24, 0.022, (255, 80, 80, 255))
 
 
+def smiths(im):
+    """As cópias do Agente Smith (mecânica única): três cabeças de terno e óculos escuros, a da frente maior,
+    com as linhas verdes do código atrás."""
+    for k, x in enumerate((0.22, 0.34, 0.50, 0.66, 0.78)):
+        linha(im, [(x, 0.10 + 0.05 * k % 3), (x, 0.30 + 0.06 * (k % 2))], (60, 220, 110, 140), 0.012)
+    def smith(cx, cy, e, base):
+        terno = [(cx - 0.20 * e, cy + 0.34 * e), (cx - 0.16 * e, cy + 0.14 * e), (cx - 0.06 * e, cy + 0.10 * e),
+                 (cx + 0.06 * e, cy + 0.10 * e), (cx + 0.16 * e, cy + 0.14 * e), (cx + 0.20 * e, cy + 0.34 * e)]
+        silhueta(im, terno, "#2a2e36", largura=0.014 * e)
+        linha(im, [(cx - 0.03 * e, cy + 0.11 * e), (cx, cy + 0.20 * e), (cx + 0.03 * e, cy + 0.11 * e)], (230, 230, 235, 255), 0.02 * e)
+        cabeca = arco(cx, cy - 0.02 * e, 0.09 * e, 0.12 * e, 0, math.tau, 24)
+        silhueta(im, cabeca, base, largura=0.012 * e)
+        silhueta(im, [(cx - 0.10 * e, cy - 0.10 * e), (cx + 0.10 * e, cy - 0.10 * e), (cx + 0.09 * e, cy - 0.07 * e), (cx - 0.09 * e, cy - 0.07 * e)], "#3a3226", largura=0.008 * e)
+        for sx in (-1, 1):
+            lente = [(cx + sx * 0.015 * e, cy - 0.04 * e), (cx + sx * 0.085 * e, cy - 0.04 * e), (cx + sx * 0.075 * e, cy + 0.0 * e), (cx + sx * 0.025 * e, cy + 0.0 * e)]
+            silhueta(im, lente, "#101418", largura=0.006 * e)
+        linha(im, [(cx - 0.015 * e, cy - 0.035 * e), (cx + 0.015 * e, cy - 0.035 * e)], (16, 20, 24, 255), 0.008 * e)
+    smith(0.30, 0.50, 0.8, "#d8b8a0")
+    smith(0.70, 0.50, 0.8, "#d8b8a0")
+    smith(0.50, 0.54, 1.15, "#e8c8b0")
+    brilho(im, 0.43, 0.48, 0.012, (120, 255, 160, 255))
+
+
+def cria_alien(im):
+    """A cria do Xenomorfo (mecânica única): a cabeça alongada e brilhante, a boca com os dentes e a língua
+    interna."""
+    cabeca = [(0.20, 0.62), (0.26, 0.48), (0.38, 0.38), (0.56, 0.30), (0.76, 0.22), (0.88, 0.22), (0.84, 0.30),
+              (0.66, 0.42), (0.56, 0.54), (0.50, 0.66), (0.40, 0.76), (0.28, 0.76)]
+    silhueta(im, cabeca, "#3a4a52")
+    linha(im, [(0.36, 0.42), (0.56, 0.33), (0.78, 0.25)], (150, 190, 200, 200), 0.014)
+    for k in range(5):
+        x = 0.26 + 0.035 * k
+        linha(im, [(x, 0.64), (x + 0.012, 0.70)], (230, 235, 220, 255), 0.012)
+    linha(im, [(0.22, 0.66), (0.40, 0.66)], (10, 14, 16, 255), 0.02)
+    brilho(im, 0.34, 0.67, 0.016, (160, 255, 200, 255))
+
+
+def golem(im):
+    """O Golem de ferro do Steve (mecânica única): o corpo em blocos, os braços compridos, a flor no ombro e
+    os olhos acesos."""
+    corpo = [(0.32, 0.42), (0.68, 0.42), (0.70, 0.78), (0.30, 0.78)]
+    cabeca = [(0.40, 0.18), (0.60, 0.18), (0.60, 0.40), (0.40, 0.40)]
+    nariz = [(0.48, 0.30), (0.52, 0.30), (0.52, 0.40), (0.48, 0.40)]
+    braco1 = [(0.18, 0.44), (0.30, 0.44), (0.30, 0.82), (0.18, 0.82)]
+    braco2 = [(0.70, 0.44), (0.82, 0.44), (0.82, 0.82), (0.70, 0.82)]
+    silhueta(im, braco1, "#b8b4a8")
+    silhueta(im, braco2, "#b8b4a8")
+    silhueta(im, corpo, "#d0ccc0")
+    silhueta(im, cabeca, "#dcd8cc")
+    silhueta(im, nariz, "#c4c0b4", largura=0.008)
+    linha(im, [(0.36, 0.56), (0.64, 0.56)], (120, 150, 80, 255), 0.03)
+    disco(im, 0.76, 0.46, 0.03, (230, 70, 70, 255))
+    brilho(im, 0.45, 0.28, 0.018, (255, 80, 60, 255))
+    brilho(im, 0.55, 0.28, 0.018, (255, 80, 60, 255))
+
+
+def dominado(im):
+    """O rival dominado pela Makima (mecânica única): a corrente presa à coleira e os olhos de anéis
+    concêntricos dela por cima."""
+    for k in range(6):
+        cx, cy = 0.22 + 0.11 * k, 0.70 - 0.05 * k
+        im2 = Image.new("RGBA", (S, S), (0, 0, 0, 0))
+        ImageDraw.Draw(im2).ellipse([(cx - 0.05) * S, (cy - 0.03) * S, (cx + 0.05) * S, (cy + 0.03) * S], outline=(200, 190, 170, 255), width=int(0.018 * S))
+        im.alpha_composite(im2)
+    coleira = arco(0.80, 0.42, 0.10, 0.06, 0, math.tau, 24)
+    silhueta(im, coleira, "#8a2a2a", largura=0.012)
+    for sx in (0.36, 0.62):
+        for r, c in ((0.085, (250, 220, 120, 255)), (0.065, (200, 120, 40, 255)), (0.045, (250, 220, 120, 255)), (0.025, (120, 50, 20, 255))):
+            disco(im, sx, 0.34, r, c)
+    brilho(im, 0.36, 0.34, 0.01, (255, 240, 200, 255))
+    brilho(im, 0.62, 0.34, 0.01, (255, 240, 200, 255))
+
+
 CRIATURAS = {
     "megumi": (cao, "#e8eef8"), "jinwoo": (sombras, "#7a4cff"), "yugi": (mago, "#8a5cff"), "kaiba": (dragao, "#7fc8ff"),
     "bayonetta": (gomorrah, "#c0304e"), "jotaro": (ora, "#6f8cff"), "pain": (feras, "#c8a070"),
     "mickey": (vassouras, "#e0b060"), "plankton": (clones, "#6fd06f"), "krang": (androide, "#ff8ac8"),
+    # quem invoca pela Mecânica única (pedido do jogador: "o Agente Smith… cria um clone que é uma invocação… tem que
+    # invocar uma bolinha igual os invocadores")
+    "agentsmith": (smiths, "#3ad070"), "xenomorph": (cria_alien, "#5a8a90"), "steve": (golem, "#c8c4b8"), "makima": (dominado, "#d06040"),
 }
 
 
 def main():
     OUT.mkdir(parents=True, exist_ok=True)
-    folha = Image.new("RGBA", (160 * 5, 160 * 2), (40, 44, 56, 255))
+    folha = Image.new("RGBA", (160 * 5, 160 * 3), (40, 44, 56, 255))
     for k, (id_, (fn, base)) in enumerate(CRIATURAS.items()):
         im = fundo(base)
         fn(im)
