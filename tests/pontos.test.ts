@@ -2,7 +2,8 @@ import { describe, expect, it } from 'vitest';
 import { replayRanked } from '../src/engine/ranked';
 import { generateCampaign } from '../src/engine/campaign';
 import { createBattle, stepBattle } from '../src/engine/battle';
-import { APOIO, LUTA, apoioDaLuta, feitosDaLuta, pontosDaJornada, pontosDaLuta } from '../src/engine/pontos';
+import { LUTA, PESO_DA_CURA_ALVO, feitosDaLuta, pontosDaJornada, pontosDaLuta } from '../src/engine/pontos';
+import { PESO_DA_CURA } from '../src/data/peso-da-cura';
 import { characters } from '../src/data/characters';
 import { FATOR_DE_PONTOS } from '../src/data/pontos-por-personagem';
 
@@ -30,20 +31,26 @@ describe('pontos', () => {
     expect(conferidas).toBeGreaterThan(10);
   }, 60000);
 
-  it('cura e proteção contam inteiras numa luta normal e só um pouco do que passa disso', () => {
-    expect(apoioDaLuta(5_000)).toBe(5_000);
-    expect(apoioDaLuta(APOIO.cheio)).toBe(APOIO.cheio);
-    // o trio de três curandeiros (uns 58 mil por luta) passa a contar menos da metade
-    expect(apoioDaLuta(58_000)).toBeCloseTo(APOIO.cheio + 43_000 * APOIO.acima);
-    expect(apoioDaLuta(58_000) / 58_000).toBeLessThan(0.5);
+  it('a cura não tem teto: só quem cura muito mais que os outros tem um peso próprio nela', () => {
+    expect(PESO_DA_CURA_ALVO).toBeGreaterThan(0);
+    for (const [id, peso] of Object.entries(PESO_DA_CURA)) {
+      expect(characters.some((c) => c.id === id), id).toBe(true);
+      expect(peso, id).toBeGreaterThan(0);
+      expect(peso, id).toBeLessThan(1);
+    }
+    // os curandeiros que mais curam têm peso; quem quase não cura conta inteiro
+    expect(PESO_DA_CURA.orihime).toBeLessThan(0.5);
+    expect(PESO_DA_CURA.sailormoon).toBeLessThan(0.5);
+    expect(PESO_DA_CURA.goku).toBeUndefined();
   });
 
-  it('a luta que se arrasta não rende feitos sem fim', () => {
+  it('a luta que se arrasta rende menos por segundo, mas ainda rende', () => {
     expect(feitosDaLuta(30_000)).toBe(30_000);
     expect(feitosDaLuta(LUTA.cheio)).toBe(LUTA.cheio);
-    // a luta de 200 s do trio de curandeiros (uns 180 mil de feitos) passa a contar pouco mais que uma luta cheia
-    expect(feitosDaLuta(180_000)).toBeCloseTo(LUTA.cheio + 135_000 * LUTA.acima);
-    expect(feitosDaLuta(180_000)).toBeLessThan(2 * LUTA.cheio);
+    // a luta de 200 s do trio de curandeiros (uns 180 mil de feitos) vale bem mais que uma luta cheia, mas não 5 vezes
+    expect(feitosDaLuta(180_000)).toBeCloseTo(LUTA.cheio + 145_000 * LUTA.acima);
+    expect(feitosDaLuta(180_000)).toBeGreaterThan(2 * LUTA.cheio);
+    expect(feitosDaLuta(180_000)).toBeLessThan(180_000 / 1.8);
   });
 
   it('todo personagem tem o seu fator de pontos, dentro do limite (rode scripts/equilibrar-pontos.ts se mudar o elenco)', () => {

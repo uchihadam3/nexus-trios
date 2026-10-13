@@ -20,16 +20,19 @@
  * gera muito, para baixo — então o jogo típico de qualquer personagem rende
  * parecido, e jogar acima disso rende mais.
  *
- * Cura e proteção contam inteiras até APOIO.cheio por luta; acima disso, só APOIO.acima de cada
- * ponto. Numa luta normal o trio soma uns 5 mil disso (99% das lutas ficam abaixo de 30 mil), mas um
- * trio que junta dois ou três curandeiros passava de 55 mil por luta, e a jornada dele chegava a
- * 2,4 milhões, o dobro dos outros trios fortes (pedido do jogador: "abaixa um pouco os curandeiros").
+ * Cura e proteção contam inteiras, sem teto na luta (pedido do jogador: "eu não queria limitar desse jeito…
+ * reduzir os pontos de alguns personagens, o tanto de ponto que eles fazem curando e protegendo"): quem cura ou
+ * protege muito mais que os outros tem um peso próprio nisso (src/data/peso-da-cura.ts, scripts/peso-da-cura.ts),
+ * que traz a média dele por luta para PESO_DA_CURA_ALVO. Numa luta normal isso tira pouco (a Orihime, a que mais
+ * cura, perde uns 6% da jornada média e continua entre as que mais pontuam).
  *
- * E os feitos da luta toda (dano, nocautes, cura e proteção, habilidades, Status/ritmo/Carga) contam inteiros
- * até LUTA.cheio; acima disso, só LUTA.acima de cada ponto. Uma luta normal dá uns 30 mil de feitos (99% abaixo
- * de 57 mil) e dura uns 30 s; o trio de três curandeiros que ninguém consegue derrubar arrastava a luta por mais de
- * 200 s, somando buffs, Carga e habilidades o tempo todo (180 mil por luta, 3 milhões na jornada). Os pontos vêm do
- * que o trio faz, não de quanto tempo ele enrola.
+ * E a luta que se arrasta rende menos por segundo: os feitos da luta toda contam inteiros até LUTA.cheio e, acima
+ * disso, LUTA.acima de cada ponto. Uma luta normal dá uns 30 mil de feitos e dura uns 30 s; o trio de curandeiros
+ * que ninguém derruba arrasta a luta por 100–300 s e passava de 5 milhões na jornada. Com LUTA.acima em 42% (era
+ * 10%), a luta longa ainda vale muito: 2 milhões fica difícil mas possível para os trios mais fortes (1 jornada em
+ * ~9) e 2,5 milhões só com muita sorte (1 em ~3.000), sem facilitar o 1,4 milhão das Dicas (pedido do jogador:
+ * "chegar até uns 2 milhões, difícil, mas consegue… 2 milhões e meio… muita sorte… sem ficar mais fácil pra chegar
+ * no 1 milhão e 400").
  *
  * Também contam: manter o trio vivo (Vida que sobrou e quem ficou de pé) e
  * virar o Domínio. Os feitos crescem com a altura da jornada (luta 10 ×1,45).
@@ -43,6 +46,7 @@
  */
 import type { Battle, Fighter } from './types';
 import { FATOR_DE_PONTOS } from '../data/pontos-por-personagem';
+import { PESO_DA_CURA } from '../data/peso-da-cura';
 
 export type ParcelaId = 'dano' | 'nocautes' | 'apoio' | 'jogadas' | 'efeitos' | 'viradas' | 'vida' | 'vitoria' | 'ajuda';
 export interface Parcela { id: ParcelaId; rotulo: string; valor: number }
@@ -89,12 +93,11 @@ export const PONTOS = {
   porLuta: 0.05,
 } as const;
 
-/** Cura e proteção da luta (já com o fator de cada personagem): inteiras até `cheio`, e daí para cima só `acima` de cada ponto. */
-export const APOIO = { cheio: 15_000, acima: 0.2 } as const;
-export const apoioDaLuta = (bruto: number) => (bruto <= APOIO.cheio ? bruto : APOIO.cheio + (bruto - APOIO.cheio) * APOIO.acima);
+/** A média de cura e proteção por luta (em pontos, já com o fator) a que o peso de cada curandeiro leva. */
+export const PESO_DA_CURA_ALVO = 3_000;
 
-/** Os feitos da luta (já com o fator de cada personagem e o corte da cura): inteiros até `cheio`, e daí para cima só `acima` de cada ponto. */
-export const LUTA = { cheio: 45_000, acima: 0.1 } as const;
+/** Os feitos da luta (já com o fator e o peso da cura de cada personagem): inteiros até `cheio`, e daí para cima `acima` de cada ponto. */
+export const LUTA = { cheio: 35_000, acima: 0.42 } as const;
 export const feitosDaLuta = (bruto: number) => (bruto <= LUTA.cheio ? bruto : LUTA.cheio + (bruto - LUTA.cheio) * LUTA.acima);
 
 /** O que cada luta custa a quem montou o trio com as Dicas de trio ligadas. */
@@ -102,14 +105,14 @@ export const CUSTO_DAS_DICAS = 10_000;
 
 export const multiplicadorDaLuta = (indice: number) => 1 + PONTOS.porLuta * Math.max(0, indice);
 
-/** Os feitos de um lutador, por tipo, sem o fator do personagem (usado também para medir o fator). */
+/** Os feitos de um lutador, por tipo, sem o fator do personagem (usado também para medir o fator); a cura e a proteção já com o peso dele. */
 export function feitosDoLutador(f: Fighter): Record<'dano' | 'nocautes' | 'apoio' | 'jogadas' | 'efeitos', number> {
   const s = f.stats;
   const investigacao = Object.values(f.investigation ?? {}).reduce((n, v) => n + v, 0);
   return {
     dano: s.damage * FEITOS.porDano,
     nocautes: s.kills * FEITOS.porNocaute,
-    apoio: (s.healing + s.protection) * FEITOS.porApoio,
+    apoio: (s.healing + s.protection) * FEITOS.porApoio * (PESO_DA_CURA[f.characterId] ?? 1),
     jogadas: s.skills * FEITOS.porHabilidade + s.interrupts * FEITOS.porCorte,
     efeitos: (s.debuffs ?? 0) * FEITOS.porDebuff + (s.buffs ?? 0) * FEITOS.porBuff + (s.tempo ?? 0) * FEITOS.porTempo
       + (s.carga ?? 0) * FEITOS.porCarga + investigacao * FEITOS.porInvestigacao,
@@ -128,8 +131,7 @@ export function pontosDaLuta(battle: Battle, indice = 0, dicas = false): PontosD
     const x = feitosDoLutador(f);
     for (const k of Object.keys(soma) as (keyof typeof soma)[]) soma[k] += x[k] * fator;
   }
-  soma.apoio = apoioDaLuta(soma.apoio);
-  // o corte da luta longa vale igual para cada tipo de feito, e a ficha mostra a parte de cada um
+  // o que a luta longa rende a menos vale igual para cada tipo de feito, e a ficha mostra a parte de cada um
   const bruto = soma.dano + soma.nocautes + soma.apoio + soma.jogadas + soma.efeitos;
   const corte = bruto > 0 ? feitosDaLuta(bruto) / bruto : 1;
   const brutas: [ParcelaId, string, number][] = [
