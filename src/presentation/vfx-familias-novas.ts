@@ -1977,6 +1977,15 @@ export const FAMILIAS_NOVAS = {
   soco_de_ferro_destino: n({ nome: 'Soco de ferro', grupo: 'físico', aponta: true, impacto: 'soco_de_ferro_destino', escala: 2.0, tempo: 1.0, cor: '#6fd38a', tinta: 'fixa' }),
   socos_de_luva_tifa: n({ nome: 'Socos de luva', grupo: 'físico', aponta: true, impacto: 'socos_de_luva_tifa', escala: 2.0, tempo: 1.0, cor: '#f08aa0', tinta: 'fixa' }),
   grande_faca_piramide: n({ nome: 'Grande Faca', grupo: 'corte', aponta: true, impacto: 'grande_faca_piramide', escala: 2.1, tempo: 1.0, cor: '#d08a6a', tinta: 'fixa' }),
+  // o ataque básico de cada personagem com animação e som próprios (tools/vfx/familias_v2/basicos_*.py)
+  soquinho_estrelado_kirby: n({ nome: 'Soquinho estrelado', grupo: 'físico', aponta: true, impacto: 'soquinho_estrelado_kirby', escala: 2.0, tempo: 1.0, cor: '#ff7aac', tinta: 'fixa' }),
+  peteleco_divino: n({ nome: 'Peteleco', grupo: 'físico', aponta: true, impacto: 'peteleco_divino', escala: 2.1, tempo: 1.0, cor: '#b48cf0', tinta: 'fixa' }),
+  pancada_psiquica_mewtwo: n({ nome: 'Pancada psíquica', grupo: 'magia', aponta: true, impacto: 'pancada_psiquica_mewtwo', escala: 2.0, tempo: 1.0, cor: '#c08cf0', tinta: 'fixa' }),
+  punho_da_correnteza: n({ nome: 'Punho da Correnteza', grupo: 'físico', aponta: true, impacto: 'punho_da_correnteza', escala: 2.0, tempo: 1.0, cor: '#7abeff', tinta: 'fixa' }),
+  soco_de_aco_genos: n({ nome: 'Soco de aço', grupo: 'físico', aponta: true, impacto: 'soco_de_aco_genos', escala: 2.0, tempo: 1.0, cor: '#ffa05a', tinta: 'fixa' }),
+  soco_de_rua_yusuke: n({ nome: 'Soco de rua', grupo: 'físico', aponta: true, impacto: 'soco_de_rua_yusuke', escala: 2.0, tempo: 1.0, cor: '#6fa8ff', tinta: 'fixa' }),
+  soco_omega: n({ nome: 'Soco Ômega', grupo: 'físico', aponta: true, impacto: 'soco_omega', escala: 2.1, tempo: 1.0, cor: '#ef5a5a', tinta: 'fixa' }),
+  soco_de_necroplasma: n({ nome: 'Soco de necroplasma', grupo: 'físico', aponta: true, impacto: 'soco_de_necroplasma', escala: 2.0, tempo: 1.0, cor: '#6fe07a', tinta: 'fixa' }),
 } as const satisfies Record<string, Familia>;
 
 export type FamiliaNova = keyof typeof FAMILIAS_NOVAS;
@@ -1998,7 +2007,8 @@ export const NOVAS_NO_ALVO = new Set<FamiliaNova>(['ressurreicao', 'renascer', '
   'dois_jabs_kuririn', 'soco_espartano', 'soco_das_trevas_ganondorf', 'soco_cqc', 'soco_do_mario', 'soco_glacial', 'soco_da_faixa_vermelha', 'soco_eletrico_jin',
   'toque_vampirico_dio', 'soco_da_vida_giorno', 'soco_serrilhado', 'punho_de_sangue_power', 'soco_formiga', 'soco_de_osso_em_chamas', 'soco_de_luva_da_vampira', 'patada_simbionte',
   'soco_de_metal_ultron', 'soco_do_duende', 'pancada_colossal_galactus', 'soco_de_madeira_groot', 'soco_da_mare', 'soco_de_construto', 'soco_cibernetico', 'soco_relampago_shazam',
-  'soco_de_pegaso', 'soco_do_cisne', 'soco_da_fenix', 'soco_de_gemeos', 'soco_do_leao_dourado', 'soco_de_ferro_destino', 'socos_de_luva_tifa', 'grande_faca_piramide']);
+  'soco_de_pegaso', 'soco_do_cisne', 'soco_da_fenix', 'soco_de_gemeos', 'soco_do_leao_dourado', 'soco_de_ferro_destino', 'socos_de_luva_tifa', 'grande_faca_piramide',
+  'soquinho_estrelado_kirby', 'peteleco_divino', 'pancada_psiquica_mewtwo', 'punho_da_correnteza', 'soco_de_aco_genos', 'soco_de_rua_yusuke', 'soco_omega', 'soco_de_necroplasma']);
 
 /** Bons para o ataque básico do personagem (quando ele já usa a família numa habilidade). */
 export const NOVAS_DE_BASICO = new Set<FamiliaNova>(['garras', 'chicote', 'bastao', 'mordida', 'tentaculos', 'florete',

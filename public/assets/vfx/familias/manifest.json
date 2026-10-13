@@ -23575,6 +23575,20 @@
   "laco": false,
   "bytes": 29634
  },
+ "pancada_psiquica_mewtwo": {
+  "descricao": "básico do Mewtwo: a palma empurrando com ondas psíquicas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 22862
+ },
  "pancada_snorlax": {
   "descricao": "Snorlax · a barriga e a pancada",
   "quadros": 12,
@@ -24050,6 +24064,20 @@
   ],
   "laco": false,
   "bytes": 11058
+ },
+ "peteleco_divino": {
+  "descricao": "básico do Beerus: o peteleco e o anel de choque desproporcional",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 37824
  },
  "peter_preparo": {
   "descricao": "Peter Griffin · a barriga sacudindo na risada (Preparo, laço)",
@@ -25282,6 +25310,20 @@
   ],
   "laco": false,
   "bytes": 109096
+ },
+ "punho_da_correnteza": {
+  "descricao": "básico do Garou: o Punho da Correnteza fluindo e o redemoinho",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 27548
  },
  "punho_de_apokolips": {
   "descricao": "Darkseid: punho pesado, rachaduras, Ômega e feixes",
@@ -28979,6 +29021,20 @@
   "laco": false,
   "bytes": 75304
  },
+ "soco_de_aco_genos": {
+  "descricao": "básico do Genos: punho de aço, aberturas de calor e vapor",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 31952
+ },
  "soco_de_armadura": {
   "descricao": "básico do Homem de Ferro: manopla com propulsores, clang e faíscas",
   "quadros": 12,
@@ -29189,6 +29245,20 @@
   "laco": false,
   "bytes": 19270
  },
+ "soco_de_necroplasma": {
+  "descricao": "básico do Spawn: a corrente e o fogo verde de necroplasma",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 33978
+ },
  "soco_de_neo": {
   "descricao": "Básico do Neo: o código e o soco em câmera lenta",
   "quadros": 12,
@@ -29244,6 +29314,20 @@
   ],
   "laco": false,
   "bytes": 67826
+ },
+ "soco_de_rua_yusuke": {
+  "descricao": "básico do Yusuke: soco de rua de mão enfaixada",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 32612
  },
  "soco_de_tsunade": {
   "descricao": "Básico da Tsunade: o soco que racha o chão",
@@ -29651,6 +29735,20 @@
   "laco": false,
   "bytes": 42490
  },
+ "soco_omega": {
+  "descricao": "básico do Darkseid: o punho de pedra e o Ω vermelho",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 38734
+ },
  "soco_planetario": {
   "descricao": "Vilgax · o soco e a cratera",
   "quadros": 12,
@@ -29972,6 +30070,20 @@
   ],
   "laco": false,
   "bytes": 69656
+ },
+ "soquinho_estrelado_kirby": {
+  "descricao": "básico do Kirby: o bracinho redondo e a estrela que pula",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 24624
  },
  "sora_preparo": {
   "descricao": "Sora · a coroa e a chave girando (Preparo, laço)",

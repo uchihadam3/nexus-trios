@@ -28171,6 +28171,23 @@
    ],
    "bytes": 70855
   },
+  "pancada-psiquica-mewtwo": {
+   "arquivo": "pancada-psiquica-mewtwo.mp3",
+   "descricao": "básico de Mewtwo: o zumbido psíquico e a pancada",
+   "versoes": [
+    0.0,
+    1.23,
+    2.3761,
+    3.5672
+   ],
+   "duracoes": [
+    1.15,
+    1.0661,
+    1.1111,
+    1.1675
+   ],
+   "bytes": 31458
+  },
   "pancada-snorlax": {
    "arquivo": "pancada-snorlax.mp3",
    "descricao": "Snorlax: a pancada",
@@ -28697,6 +28714,23 @@
     0.9322
    ],
    "bytes": 38790
+  },
+  "peteleco-divino": {
+   "arquivo": "peteleco-divino.mp3",
+   "descricao": "básico de Beerus: o estalinho do dedo e o estrondo desproporcional",
+   "versoes": [
+    0.0,
+    1.28,
+    2.6035,
+    3.8429
+   ],
+   "duracoes": [
+    1.2,
+    1.2435,
+    1.1594,
+    1.2183
+   ],
+   "bytes": 34243
   },
   "peter-preparo": {
    "arquivo": "peter-preparo.mp3",
@@ -30210,6 +30244,23 @@
     0.9137
    ],
    "bytes": 33718
+  },
+  "punho-da-correnteza": {
+   "arquivo": "punho-da-correnteza.mp3",
+   "descricao": "básico de Garou: o ar fluindo e girando no soco",
+   "versoes": [
+    0.0,
+    1.043,
+    2.1927,
+    3.1872
+   ],
+   "duracoes": [
+    0.963,
+    1.0697,
+    0.9145,
+    0.8619
+   ],
+   "bytes": 32311
   },
   "punho-de-apokolips": {
    "arquivo": "punho-de-apokolips.mp3",
@@ -34597,6 +34648,23 @@
    ],
    "bytes": 40869
   },
+  "soco-de-aco-genos": {
+   "arquivo": "soco-de-aco-genos.mp3",
+   "descricao": "básico de Genos: o vapor e o soco de aço",
+   "versoes": [
+    0.0,
+    1.0112,
+    2.108,
+    3.0577
+   ],
+   "duracoes": [
+    0.9312,
+    1.0168,
+    0.8697,
+    0.8723
+   ],
+   "bytes": 32323
+  },
   "soco-de-armadura": {
    "arquivo": "soco-de-armadura.mp3",
    "descricao": "básico de Homem de Ferro: servo, propulsor e o clang da manopla",
@@ -34852,6 +34920,23 @@
    ],
    "bytes": 31946
   },
+  "soco-de-necroplasma": {
+   "arquivo": "soco-de-necroplasma.mp3",
+   "descricao": "básico de Spawn: as correntes e o fogo verde",
+   "versoes": [
+    0.0,
+    1.18,
+    2.3999,
+    3.5069
+   ],
+   "duracoes": [
+    1.1,
+    1.1399,
+    1.027,
+    1.1167
+   ],
+   "bytes": 35590
+  },
   "soco-de-neo": {
    "arquivo": "soco-de-neo.mp3",
    "descricao": "básico do Neo: a câmera lenta e o soco",
@@ -34919,6 +35004,23 @@
     1.0152
    ],
    "bytes": 42040
+  },
+  "soco-de-rua-yusuke": {
+   "arquivo": "soco-de-rua-yusuke.mp3",
+   "descricao": "básico de Yusuke: o soco de rua e as faíscas espirituais",
+   "versoes": [
+    0.0,
+    0.9523,
+    2.0685,
+    3.1147
+   ],
+   "duracoes": [
+    0.8723,
+    1.0363,
+    0.9662,
+    1.0152
+   ],
+   "bytes": 33338
   },
   "soco-de-tsunade": {
    "arquivo": "soco-de-tsunade.mp3",
@@ -35430,6 +35532,23 @@
    ],
    "bytes": 13675
   },
+  "soco-omega": {
+   "arquivo": "soco-omega.mp3",
+   "descricao": "básico de Darkseid: o soco pesado e o acorde grave",
+   "versoes": [
+    0.0,
+    1.2918,
+    2.6267,
+    3.9627
+   ],
+   "duracoes": [
+    1.2118,
+    1.2548,
+    1.256,
+    1.2303
+   ],
+   "bytes": 36325
+  },
   "soco-pesado": {
    "arquivo": "soco-pesado.mp3",
    "descricao": "golpe pesado",
@@ -35820,6 +35939,23 @@
     1.8543
    ],
    "bytes": 66939
+  },
+  "soquinho-estrelado-kirby": {
+   "arquivo": "soquinho-estrelado-kirby.mp3",
+   "descricao": "básico de Kirby: o pof fofo e o plim da estrela",
+   "versoes": [
+    0.0,
+    0.8081,
+    1.6402,
+    2.4235
+   ],
+   "duracoes": [
+    0.7281,
+    0.7521,
+    0.7033,
+    0.7157
+   ],
+   "bytes": 26063
   },
   "sora-preparo": {
    "arquivo": "sora-preparo.mp3",
