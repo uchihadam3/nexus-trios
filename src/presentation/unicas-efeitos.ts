@@ -594,7 +594,9 @@ export function entregaDaUnica(personagem: string, lado: 'rival' | 'aliado' | 's
   if (lado === 'si' || dela?.modo === 'si') return { modo: 'si', preparo: dela?.preparo };
   if (dela?.modo === 'alvo') return { modo: 'alvo', preparo: dela.preparo };
   const modo: ModoDaEntrega = dela?.modo ? (lado === 'aliado' && dela.modo !== 'aliado' ? 'aliado' : dela.modo) : lado === 'rival' ? 'voa' : 'aliado';
-  return { modo, viagem: dela?.viagem ?? 'orbe', faixa: dela?.faixa ?? 'feixe', preparo: dela?.preparo };
+  // indo para um aliado, a ajuda viaja como energia (o batarangue não voa até o aliado do Batman)
+  const doAliado = modo === 'aliado' && dela?.modo !== 'aliado';
+  return { modo, viagem: doAliado ? 'orbe' : (dela?.viagem ?? 'orbe'), faixa: dela?.faixa ?? 'feixe', preparo: dela?.preparo };
 }
 
 export function efeitoDaUnica(personagem: string, aviso: string): { familia: VfxFamily; som: string } {

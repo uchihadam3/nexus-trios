@@ -17066,7 +17066,7 @@
   "bytes": 43608
  },
  "mu_agora_e_meu": {
-  "descricao": "Makima · os olhos de anéis e a corrente",
+  "descricao": "Makima · o olho de anéis e a corrente que prende",
   "quadros": 12,
   "grade": [
    3,
@@ -17077,7 +17077,7 @@
    192
   ],
   "laco": false,
-  "bytes": 16128
+  "bytes": 19102
  },
  "mu_aku_aku": {
   "descricao": "Crash · a máscara Aku Aku",
@@ -17374,7 +17374,7 @@
   "bytes": 21586
  },
  "mu_batarangue": {
-  "descricao": "Batman · o batarangue girando e acertando",
+  "descricao": "Batman · o batarangue cravando e as faíscas",
   "quadros": 12,
   "grade": [
    3,
@@ -17385,7 +17385,7 @@
    192
   ],
   "laco": false,
-  "bytes": 11374
+  "bytes": 19000
  },
  "mu_battojutsu": {
   "descricao": "Kenshin · o saque da espada",
@@ -17444,7 +17444,7 @@
   "bytes": 29908
  },
  "mu_bomba_de_fumaca": {
-  "descricao": "Batman · a nuvem de fumaça",
+  "descricao": "Batman · a fumaça densa se espalhando",
   "quadros": 12,
   "grade": [
    3,
@@ -17455,7 +17455,7 @@
    192
   ],
   "laco": false,
-  "bytes": 27234
+  "bytes": 63328
  },
  "mu_boneca": {
   "descricao": "Nobara · a boneca de palha, o prego e a martelada",
@@ -18564,7 +18564,7 @@
   "bytes": 30398
  },
  "mu_doenca_terminal": {
-  "descricao": "Itachi · o sangue e os corvos",
+  "descricao": "Itachi · o tomoe, a tosse de sangue e os corvos",
   "quadros": 12,
   "grade": [
    3,
@@ -18575,7 +18575,7 @@
    192
   ],
   "laco": false,
-  "bytes": 25360
+  "bytes": 20932
  },
  "mu_dois_lados": {
   "descricao": "Saga · os dois lados",
@@ -18718,7 +18718,7 @@
   "bytes": 27910
  },
  "mu_endurecer": {
-  "descricao": "Eren · as placas de cristal",
+  "descricao": "Eren · as placas de cristal fechando em volta",
   "quadros": 12,
   "grade": [
    3,
@@ -18729,7 +18729,7 @@
    192
   ],
   "laco": false,
-  "bytes": 37130
+  "bytes": 27826
  },
  "mu_energia_absorvida": {
   "descricao": "Capitã Marvel · a estrela e as chamas de fótons",
@@ -19432,7 +19432,7 @@
   "bytes": 39600
  },
  "mu_gancho": {
-  "descricao": "Batman · o gancho e o escudo do morcego",
+  "descricao": "Batman · o cabo do gancho e o escudo do morcego",
   "quadros": 12,
   "grade": [
    3,
@@ -19443,7 +19443,7 @@
    192
   ],
   "laco": false,
-  "bytes": 14156
+  "bytes": 34470
  },
  "mu_garras_aco": {
   "descricao": "Shredder · as garras de aço",
@@ -19978,7 +19978,7 @@
   "bytes": 38224
  },
  "mu_juntas": {
-  "descricao": "Inosuke · as juntas soltando e as correntes partindo",
+  "descricao": "Inosuke · as correntes arrebentando elo por elo",
   "quadros": 12,
   "grade": [
    3,
@@ -19989,7 +19989,7 @@
    192
   ],
   "laco": false,
-  "bytes": 27562
+  "bytes": 24210
  },
  "mu_juramento": {
   "descricao": "Kurapika · as correntes e os olhos escarlates",
@@ -20398,7 +20398,7 @@
   "bytes": 33668
  },
  "mu_modo_serio": {
-  "descricao": "Saitama · o soco sério e a onda gigante",
+  "descricao": "Saitama · os olhos sérios, a aura subindo e a onda de choque",
   "quadros": 12,
   "grade": [
    3,
@@ -20409,7 +20409,7 @@
    192
   ],
   "laco": false,
-  "bytes": 55330
+  "bytes": 36570
  },
  "mu_mortal_kombat": {
   "descricao": "Liu Kang · o dragão de fogo em espiral",
@@ -20734,7 +20734,7 @@
   "bytes": 21092
  },
  "mu_pagina_no_relogio": {
-  "descricao": "Light · a página escondida no relógio (Mecânica única)",
+  "descricao": "Light · o relógio abre, o nome é escrito e o coração para",
   "quadros": 12,
   "grade": [
    3,
@@ -20745,7 +20745,7 @@
    192
   ],
   "laco": false,
-  "bytes": 21132
+  "bytes": 36038
  },
  "mu_parede": {
   "descricao": "Alphonse · o muro de pedra",
