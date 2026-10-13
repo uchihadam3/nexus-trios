@@ -1,4 +1,18 @@
 {
+ "abraco_de_ogro": {
+  "descricao": "Shrek · os braços verdes e o escudo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 24418
+ },
  "abraco_do_amor": {
   "descricao": "Afrodite · a concha e as pétalas",
   "quadros": 12,
@@ -796,6 +810,20 @@
   ],
   "laco": false,
   "bytes": 12010
+ },
+ "arroto": {
+  "descricao": "Shrek · o arroto e as moscas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 20276
  },
  "arte_do_vento": {
   "descricao": "Hayabusa · os redemoinhos ninja",
@@ -1664,6 +1692,20 @@
   ],
   "laco": true,
   "bytes": 22470
+ },
+ "bater_no_peito": {
+  "descricao": "King Kong · as batidas no peito",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 40684
  },
  "batida_do_gorila": {
   "descricao": "Donkey Kong · Batida do gorila: rachaduras, ondas e pedras",
@@ -5095,6 +5137,20 @@
   "laco": true,
   "bytes": 102378
  },
+ "couraca": {
+  "descricao": "Godzilla · as placas acesas e a couraça",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 29898
+ },
  "cqc": {
   "descricao": "Snake: '!' de alerta, agarrão, giro no ar e queda com poeira",
   "quadros": 12,
@@ -6424,6 +6480,20 @@
   ],
   "laco": false,
   "bytes": 61798
+ },
+ "elsa_preparo": {
+  "descricao": "Elsa · o floco gigante girando (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 30646
  },
  "emboscada_do_tom": {
   "descricao": "Tom · a frigideira e a marca",
@@ -9099,6 +9169,20 @@
   "laco": false,
   "bytes": 19920
  },
+ "forma_de_dragao": {
+  "descricao": "Malévola · o dragão e o fogo verde",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 49620
+ },
  "forma_de_morcego": {
   "descricao": "Marceline · as asas de morcego varrendo",
   "quadros": 12,
@@ -9659,6 +9743,20 @@
   "laco": false,
   "bytes": 29076
  },
+ "gandalf_preparo": {
+  "descricao": "Gandalf · o chapéu, o cajado e a espada (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 10228
+ },
  "ganondorf_preparo": {
   "descricao": "Ganondorf · o punho de trevas e a Força (Preparo, laço)",
   "quadros": 12,
@@ -10191,6 +10289,20 @@
   "laco": false,
   "bytes": 16516
  },
+ "glamdring": {
+  "descricao": "Gandalf · a Glamdring em arco",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 30898
+ },
  "glitter": {
   "descricao": "Mabel · o canhão de glitter",
   "quadros": 12,
@@ -10232,6 +10344,20 @@
   ],
   "laco": false,
   "bytes": 18786
+ },
+ "godzilla_preparo": {
+  "descricao": "Godzilla · as placas acendendo (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 9474
  },
  "golpe_acrobatico": {
   "descricao": "Gamora · o mortal e o calcanhar",
@@ -11605,6 +11731,20 @@
   "laco": false,
   "bytes": 22912
  },
+ "inverno_eterno": {
+  "descricao": "Elsa · a nevasca e o gelo nos rivais",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 39708
+ },
  "investida": {
   "descricao": "investida com linhas de velocidade",
   "quadros": 12,
@@ -12542,6 +12682,20 @@
   ],
   "laco": true,
   "bytes": 7802
+ },
+ "kong_preparo": {
+  "descricao": "King Kong · o machado de energia (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 9726
  },
  "krang_preparo": {
   "descricao": "Krang · o cérebro pulsando (Preparo, laço)",
@@ -13719,6 +13873,20 @@
   "laco": false,
   "bytes": 50912
  },
+ "luz_de_gandalf": {
+  "descricao": "Gandalf · o cajado como um sol branco",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 28164
+ },
  "luzes_da_morte": {
   "descricao": "Pennywise · as luzes na boca",
   "quadros": 12,
@@ -13788,6 +13956,20 @@
   ],
   "laco": false,
   "bytes": 50010
+ },
+ "machado_de_kong": {
+  "descricao": "King Kong · o machado rachando o chão",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 44364
  },
  "magia_do_caos": {
   "descricao": "Raio de caos: fios em espiral que estouram",
@@ -13915,6 +14097,20 @@
   "laco": false,
   "bytes": 29180
  },
+ "maldicao_do_sono": {
+  "descricao": "Malévola · o fogo verde e o fuso",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 21846
+ },
  "malenia_preparo": {
   "descricao": "Malenia · o botão abrindo (Preparo, laço)",
   "quadros": 12,
@@ -13942,6 +14138,20 @@
   ],
   "laco": false,
   "bytes": 17692
+ },
+ "malevola_preparo": {
+  "descricao": "Malévola · os chifres e o fogo no cajado (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 12016
  },
  "mangekyo_sasuke": {
   "descricao": "Sasuke · o Mangekyō acendendo nele",
@@ -20803,6 +21013,20 @@
   "laco": false,
   "bytes": 23208
  },
+ "muralha_de_gelo_elsa": {
+  "descricao": "Elsa · os cristais na frente do trio",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 30464
+ },
  "muralha_de_metal": {
   "descricao": "Magneto · as vigas formando a muralha",
   "quadros": 12,
@@ -20830,6 +21054,20 @@
   ],
   "laco": false,
   "bytes": 22242
+ },
+ "muro_de_espinhos": {
+  "descricao": "Malévola · os galhos de espinhos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 44556
  },
  "myers_preparo": {
   "descricao": "Michael Myers · a abóbora e a silhueta (Preparo, laço)",
@@ -22076,6 +22314,20 @@
   ],
   "laco": false,
   "bytes": 81428
+ },
+ "pisao_de_godzilla": {
+  "descricao": "Godzilla · a pata e o chão tremendo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 32462
  },
  "pisao_demoniaco": {
   "descricao": "Kazuya · o pisão e os raios roxos",
@@ -23981,6 +24233,20 @@
   "laco": false,
   "bytes": 13042
  },
+ "rajada_de_gelo_elsa": {
+  "descricao": "Elsa · o raio de gelo e os cristais",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 21950
+ },
  "rajada_de_golpes": {
   "descricao": "vários golpes",
   "quadros": 12,
@@ -25003,6 +25269,20 @@
   "laco": false,
   "bytes": 142508
  },
+ "rugido_do_pantano": {
+  "descricao": "Shrek · o rugido e o pântano subindo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 28584
+ },
  "rumble_ball": {
   "descricao": "Chopper · a pílula e o corpo inchando",
   "quadros": 12,
@@ -25969,6 +26249,20 @@
   "laco": true,
   "bytes": 35796
  },
+ "shrek_preparo": {
+  "descricao": "Shrek · as orelhas e as bolhas (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 15210
+ },
  "shun_goku_satsu": {
   "descricao": "Shun Goku Satsu: golpes no escuro e o 天",
   "quadros": 12,
@@ -26487,6 +26781,20 @@
   "laco": false,
   "bytes": 27450
  },
+ "soco_gigante_kong": {
+  "descricao": "King Kong · o punho gigante",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 30870
+ },
  "soco_giratorio": {
   "descricao": "Donkey Kong · Soco giratório: o braço gira e o punho gigante acerta",
   "quadros": 12,
@@ -26710,6 +27018,20 @@
   ],
   "laco": false,
   "bytes": 40428
+ },
+ "sopro_atomico": {
+  "descricao": "Godzilla · o raio atômico varrendo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 39966
  },
  "sopro_flamejante": {
   "descricao": "Bowser · o sopro de fogo",
@@ -28880,6 +29202,20 @@
   ],
   "laco": false,
   "bytes": 45410
+ },
+ "voce_nao_vai_passar": {
+  "descricao": "Gandalf · o cajado e a parede de luz",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 37528
  },
  "vodu": {
   "descricao": "Chucky · o alfinete no boneco",

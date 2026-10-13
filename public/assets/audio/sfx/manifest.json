@@ -2,6 +2,23 @@
  "taxa": 44100,
  "versoes": 4,
  "sons": {
+  "abraco-de-ogro": {
+   "arquivo": "abraco-de-ogro.mp3",
+   "descricao": "Shrek: o abraço de ogro",
+   "versoes": [
+    0.0,
+    1.3726,
+    2.7907,
+    4.1235
+   ],
+   "duracoes": [
+    1.2926,
+    1.338,
+    1.2529,
+    1.3781
+   ],
+   "bytes": 38469
+  },
   "abraco-do-amor": {
    "arquivo": "abraco-do-amor.mp3",
    "descricao": "Afrodite: o abraço do amor",
@@ -1005,6 +1022,23 @@
    ],
    "bytes": 36228
   },
+  "arroto": {
+   "arquivo": "arroto.mp3",
+   "descricao": "Shrek: o arroto",
+   "versoes": [
+    0.0,
+    2.38,
+    4.8434,
+    7.1456
+   ],
+   "duracoes": [
+    2.3,
+    2.3834,
+    2.2222,
+    2.0125
+   ],
+   "bytes": 76282
+  },
   "arte-do-vento": {
    "arquivo": "arte-do-vento.mp3",
    "descricao": "Hayabusa: a Arte do Vento",
@@ -2007,6 +2041,23 @@
     1.5379
    ],
    "bytes": 60063
+  },
+  "bater-no-peito": {
+   "arquivo": "bater-no-peito.mp3",
+   "descricao": "King Kong: bater no peito",
+   "versoes": [
+    0.0,
+    2.48,
+    5.047,
+    7.4459
+   ],
+   "duracoes": [
+    2.4,
+    2.487,
+    2.3188,
+    2.4365
+   ],
+   "bytes": 83275
   },
   "batida-do-gorila": {
    "arquivo": "batida-do-gorila.mp3",
@@ -5901,6 +5952,23 @@
    ],
    "bytes": 87575
   },
+  "couraca": {
+   "arquivo": "couraca.mp3",
+   "descricao": "Godzilla: a couraça",
+   "versoes": [
+    0.0,
+    2.18,
+    4.4361,
+    6.5451
+   ],
+   "duracoes": [
+    2.1,
+    2.1761,
+    2.029,
+    2.132
+   ],
+   "bytes": 56572
+  },
   "cqc": {
    "arquivo": "cqc.mp3",
    "descricao": "básico de Snake: agarrão, giro e queda pesada no chão",
@@ -7464,6 +7532,23 @@
     2.2335
    ],
    "bytes": 72695
+  },
+  "elsa-preparo": {
+   "arquivo": "elsa-preparo.mp3",
+   "descricao": "Elsa: o floco gigante (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 57537
   },
   "emboscada-do-tom": {
    "arquivo": "emboscada-do-tom.mp3",
@@ -10559,6 +10644,23 @@
    ],
    "bytes": 59264
   },
+  "forma-de-dragao": {
+   "arquivo": "forma-de-dragao.mp3",
+   "descricao": "Malévola: a forma de dragão",
+   "versoes": [
+    0.0,
+    2.68,
+    5.4543,
+    8.0463
+   ],
+   "duracoes": [
+    2.6,
+    2.6943,
+    2.5121,
+    2.6396
+   ],
+   "bytes": 93398
+  },
   "forma-de-morcego": {
    "arquivo": "forma-de-morcego.mp3",
    "descricao": "Marceline: a forma de morcego",
@@ -11239,6 +11341,23 @@
    ],
    "bytes": 52486
   },
+  "gandalf-preparo": {
+   "arquivo": "gandalf-preparo.mp3",
+   "descricao": "Gandalf: a espada élfica (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 43813
+  },
   "ganondorf-preparo": {
    "arquivo": "ganondorf-preparo.mp3",
    "descricao": "Ganondorf: o coro sombrio no punho (antes do golpe)",
@@ -11885,6 +12004,23 @@
    ],
    "bytes": 54061
   },
+  "glamdring": {
+   "arquivo": "glamdring.mp3",
+   "descricao": "Gandalf: Glamdring",
+   "versoes": [
+    0.0,
+    1.6754,
+    3.4076,
+    5.0887
+   ],
+   "duracoes": [
+    1.5954,
+    1.6522,
+    1.6011,
+    1.681
+   ],
+   "bytes": 57055
+  },
   "glitter": {
    "arquivo": "glitter.mp3",
    "descricao": "Mabel: o glitter",
@@ -11935,6 +12071,23 @@
     1.3315
    ],
    "bytes": 52634
+  },
+  "godzilla-preparo": {
+   "arquivo": "godzilla-preparo.mp3",
+   "descricao": "Godzilla: as placas carregando (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 52441
   },
   "golpe-acrobatico": {
    "arquivo": "golpe-acrobatico.mp3",
@@ -13653,6 +13806,23 @@
    ],
    "bytes": 63340
   },
+  "inverno-eterno": {
+   "arquivo": "inverno-eterno.mp3",
+   "descricao": "Elsa: o inverno eterno",
+   "versoes": [
+    0.0,
+    2.68,
+    5.4543,
+    8.0463
+   ],
+   "duracoes": [
+    2.6,
+    2.6943,
+    2.5121,
+    2.6396
+   ],
+   "bytes": 100853
+  },
   "investida": {
    "arquivo": "investida.mp3",
    "descricao": "família investida",
@@ -14791,6 +14961,23 @@
     1.4213
    ],
    "bytes": 44832
+  },
+  "kong-preparo": {
+   "arquivo": "kong-preparo.mp3",
+   "descricao": "King Kong: o machado de energia (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4393
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3486,
+    1.4213
+   ],
+   "bytes": 49737
   },
   "krang-preparo": {
    "arquivo": "krang-preparo.mp3",
@@ -16237,6 +16424,23 @@
    ],
    "bytes": 52104
   },
+  "luz-de-gandalf": {
+   "arquivo": "luz-de-gandalf.mp3",
+   "descricao": "Gandalf: a luz de Gandalf",
+   "versoes": [
+    0.0,
+    2.48,
+    5.047,
+    7.4459
+   ],
+   "duracoes": [
+    2.4,
+    2.487,
+    2.3188,
+    2.4365
+   ],
+   "bytes": 79139
+  },
   "luzes-da-morte": {
    "arquivo": "luzes-da-morte.mp3",
    "descricao": "Pennywise: as luzes da morte",
@@ -16321,6 +16525,23 @@
     1.1167
    ],
    "bytes": 45061
+  },
+  "machado-de-kong": {
+   "arquivo": "machado-de-kong.mp3",
+   "descricao": "King Kong: o machado de Kong",
+   "versoes": [
+    0.0,
+    2.48,
+    5.047,
+    7.4459
+   ],
+   "duracoes": [
+    2.4,
+    2.487,
+    2.3188,
+    2.3193
+   ],
+   "bytes": 77073
   },
   "magia-do-caos": {
    "arquivo": "magia-do-caos.mp3",
@@ -16458,6 +16679,23 @@
    ],
    "bytes": 58902
   },
+  "maldicao-do-sono": {
+   "arquivo": "maldicao-do-sono.mp3",
+   "descricao": "Malévola: a maldição do sono",
+   "versoes": [
+    0.0,
+    2.48,
+    5.047,
+    7.4459
+   ],
+   "duracoes": [
+    2.4,
+    2.487,
+    2.3188,
+    2.4365
+   ],
+   "bytes": 81777
+  },
   "malenia-preparo": {
    "arquivo": "malenia-preparo.mp3",
    "descricao": "Malenia: a flor abrindo (Preparo)",
@@ -16491,6 +16729,23 @@
     1.0854
    ],
    "bytes": 51700
+  },
+  "malevola-preparo": {
+   "arquivo": "malevola-preparo.mp3",
+   "descricao": "Malévola: o fogo verde no cajado (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 55802
   },
   "mangekyo-sasuke": {
    "arquivo": "mangekyo-sasuke.mp3",
@@ -24805,6 +25060,23 @@
    ],
    "bytes": 62372
   },
+  "muralha-de-gelo-elsa": {
+   "arquivo": "muralha-de-gelo-elsa.mp3",
+   "descricao": "Elsa: a muralha de gelo",
+   "versoes": [
+    0.0,
+    1.6923,
+    3.5133,
+    5.2315
+   ],
+   "duracoes": [
+    1.6123,
+    1.741,
+    1.6382,
+    1.6208
+   ],
+   "bytes": 79034
+  },
   "muralha-de-metal": {
    "arquivo": "muralha-de-metal.mp3",
    "descricao": "Muralha de metal: as vigas empilhando",
@@ -24855,6 +25127,23 @@
     1.5228
    ],
    "bytes": 41990
+  },
+  "muro-de-espinhos": {
+   "arquivo": "muro-de-espinhos.mp3",
+   "descricao": "Malévola: o muro de espinhos",
+   "versoes": [
+    0.0,
+    1.7526,
+    3.625,
+    5.4635
+   ],
+   "duracoes": [
+    1.6726,
+    1.7924,
+    1.7585,
+    1.8069
+   ],
+   "bytes": 62191
   },
   "myers-preparo": {
    "arquivo": "myers-preparo.mp3",
@@ -26283,6 +26572,23 @@
     1.0152
    ],
    "bytes": 45502
+  },
+  "pisao-de-godzilla": {
+   "arquivo": "pisao-de-godzilla.mp3",
+   "descricao": "Godzilla: o pisão",
+   "versoes": [
+    0.0,
+    2.48,
+    5.047,
+    7.4459
+   ],
+   "duracoes": [
+    2.4,
+    2.487,
+    2.3188,
+    2.4365
+   ],
+   "bytes": 76264
   },
   "pisao-demoniaco": {
    "arquivo": "pisao-demoniaco.mp3",
@@ -28579,6 +28885,23 @@
    ],
    "bytes": 49689
   },
+  "rajada-de-gelo-elsa": {
+   "arquivo": "rajada-de-gelo-elsa.mp3",
+   "descricao": "Elsa: a rajada de gelo",
+   "versoes": [
+    0.0,
+    1.873,
+    3.8672,
+    5.7863
+   ],
+   "duracoes": [
+    1.793,
+    1.9142,
+    1.8391,
+    1.9078
+   ],
+   "bytes": 81389
+  },
   "rajada-de-leque": {
    "arquivo": "rajada-de-leque.mp3",
    "descricao": "Kitana: a rajada de leque",
@@ -29888,6 +30211,23 @@
    ],
    "bytes": 85199
   },
+  "rugido-do-pantano": {
+   "arquivo": "rugido-do-pantano.mp3",
+   "descricao": "Shrek: o rugido do pântano",
+   "versoes": [
+    0.0,
+    2.09,
+    4.2213,
+    6.146
+   ],
+   "duracoes": [
+    2.01,
+    2.0513,
+    1.8447,
+    1.9964
+   ],
+   "bytes": 69767
+  },
   "rumble-ball": {
    "arquivo": "rumble-ball.mp3",
    "descricao": "Chopper: a Rumble Ball",
@@ -30976,6 +31316,23 @@
    ],
    "bytes": 58979
   },
+  "shrek-preparo": {
+   "arquivo": "shrek-preparo.mp3",
+   "descricao": "Shrek: as orelhas e o pântano (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 42860
+  },
   "shun-goku-satsu": {
    "arquivo": "shun-goku-satsu.mp3",
    "descricao": "família shun goku satsu",
@@ -31571,6 +31928,23 @@
    ],
    "bytes": 47756
   },
+  "soco-gigante-kong": {
+   "arquivo": "soco-gigante-kong.mp3",
+   "descricao": "King Kong: o soco gigante",
+   "versoes": [
+    0.0,
+    2.28,
+    4.6398,
+    6.8454
+   ],
+   "duracoes": [
+    2.2,
+    2.2798,
+    2.1256,
+    2.2091
+   ],
+   "bytes": 69519
+  },
   "soco-giratorio": {
    "arquivo": "soco-giratorio.mp3",
    "descricao": "Soco giratório do Donkey Kong: o braço girando e o soco gigante",
@@ -31859,6 +32233,23 @@
     2.2335
    ],
    "bytes": 73163
+  },
+  "sopro-atomico": {
+   "arquivo": "sopro-atomico.mp3",
+   "descricao": "Godzilla: o sopro atômico",
+   "versoes": [
+    0.0,
+    2.68,
+    5.4543,
+    8.0463
+   ],
+   "duracoes": [
+    2.6,
+    2.6943,
+    2.5121,
+    2.6396
+   ],
+   "bytes": 92424
   },
   "sopro-flamejante": {
    "arquivo": "sopro-flamejante.mp3",
@@ -34596,6 +34987,23 @@
     1.7999
    ],
    "bytes": 60486
+  },
+  "voce-nao-vai-passar": {
+   "arquivo": "voce-nao-vai-passar.mp3",
+   "descricao": "Gandalf: você não vai passar",
+   "versoes": [
+    0.0,
+    2.38,
+    4.8434,
+    7.1456
+   ],
+   "duracoes": [
+    2.3,
+    2.3834,
+    2.2222,
+    2.335
+   ],
+   "bytes": 69250
   },
   "vodu": {
    "arquivo": "vodu.mp3",

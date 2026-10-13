@@ -194,6 +194,12 @@ const T: Record<string, string> = {
   jacksparrow: 'bussola_magica pistola_de_um_tiro perola_negra',
   harrypotter: 'expelliarmus_harry protego expecto_patronum',
   voldemort: 'crucio imperius avada_kedavra',
+  gandalf: 'voce_nao_vai_passar luz_de_gandalf glamdring',
+  godzilla: 'pisao_de_godzilla couraca sopro_atomico',
+  kingkong: 'soco_gigante_kong bater_no_peito machado_de_kong',
+  shrek: 'arroto abraco_de_ogro rugido_do_pantano',
+  elsa: 'rajada_de_gelo_elsa muralha_de_gelo_elsa inverno_eterno',
+  maleficent: 'maldicao_do_sono muro_de_espinhos forma_de_dragao',
 };
 
 export const FAMILIA_DA_HABILIDADE: Record<string, VfxFamily> = Object.fromEntries(
