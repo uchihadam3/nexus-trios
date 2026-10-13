@@ -8043,6 +8043,23 @@
    ],
    "bytes": 64598
   },
+  "dois-jabs-kuririn": {
+   "arquivo": "dois-jabs-kuririn.mp3",
+   "descricao": "básico de Kuririn: dois jabs rápidos",
+   "versoes": [
+    0.0,
+    0.88,
+    1.789,
+    2.6419
+   ],
+   "duracoes": [
+    0.8,
+    0.829,
+    0.7729,
+    0.8122
+   ],
+   "bytes": 29321
+  },
   "dominacao-mundial": {
    "arquivo": "dominacao-mundial.mp3",
    "descricao": "Stewie Griffin: a dominação mundial",
@@ -34308,6 +34325,23 @@
    ],
    "bytes": 61752
   },
+  "soco-cqc": {
+   "arquivo": "soco-cqc.mp3",
+   "descricao": "básico de Snake: jab de CQC e o tlin do alerta",
+   "versoes": [
+    0.0,
+    0.98,
+    1.9926,
+    2.8321
+   ],
+   "duracoes": [
+    0.9,
+    0.9326,
+    0.7594,
+    0.9137
+   ],
+   "bytes": 29059
+  },
   "soco-da-corrente": {
    "arquivo": "soco-da-corrente.mp3",
    "descricao": "básico de Kurapika: a corrente tilintando e o soco",
@@ -34324,6 +34358,23 @@
     0.8102
    ],
    "bytes": 30860
+  },
+  "soco-da-faixa-vermelha": {
+   "arquivo": "soco-da-faixa-vermelha.mp3",
+   "descricao": "básico de Liu Kang: a faixa chicoteando e o soco de kung fu",
+   "versoes": [
+    0.0,
+    0.93,
+    1.8908,
+    2.7921
+   ],
+   "duracoes": [
+    0.85,
+    0.8808,
+    0.8212,
+    0.8629
+   ],
+   "bytes": 29400
   },
   "soco-da-manopla": {
    "arquivo": "soco-da-manopla.mp3",
@@ -34375,6 +34426,23 @@
     0.8967
    ],
    "bytes": 32129
+  },
+  "soco-das-trevas-ganondorf": {
+   "arquivo": "soco-das-trevas-ganondorf.mp3",
+   "descricao": "básico de Ganondorf: chamas escuras rugindo e o estouro",
+   "versoes": [
+    0.0,
+    1.23,
+    2.5017,
+    3.6928
+   ],
+   "duracoes": [
+    1.15,
+    1.1917,
+    1.1111,
+    1.1675
+   ],
+   "bytes": 35442
   },
   "soco-de-aco": {
    "arquivo": "soco-de-aco.mp3",
@@ -34733,6 +34801,23 @@
    ],
    "bytes": 35612
   },
+  "soco-do-mario": {
+   "arquivo": "soco-do-mario.mp3",
+   "descricao": "básico de Mario: o soco de desenho e o plim da moedinha",
+   "versoes": [
+    0.0,
+    0.8094,
+    1.7469,
+    2.5327
+   ],
+   "duracoes": [
+    0.7294,
+    0.8575,
+    0.7058,
+    0.7771
+   ],
+   "bytes": 26766
+  },
   "soco-do-naruto": {
    "arquivo": "soco-do-naruto.mp3",
    "descricao": "básico de Naruto: o soco, a espiral girando e o puf de fumaça",
@@ -34818,6 +34903,23 @@
    ],
    "bytes": 71156
   },
+  "soco-eletrico-jin": {
+   "arquivo": "soco-eletrico-jin.mp3",
+   "descricao": "básico de Jin: o soco de caratê e o estalo elétrico",
+   "versoes": [
+    0.0,
+    0.7563,
+    1.7689,
+    2.6588
+   ],
+   "duracoes": [
+    0.6763,
+    0.9326,
+    0.8099,
+    0.7951
+   ],
+   "bytes": 33371
+  },
   "soco-endurecido": {
    "arquivo": "soco-endurecido.mp3",
    "descricao": "básico de Eren: o cristal estalando, o soco duro e as lascas tilintando",
@@ -34834,6 +34936,23 @@
     1.066
    ],
    "bytes": 39596
+  },
+  "soco-espartano": {
+   "arquivo": "soco-espartano.mp3",
+   "descricao": "básico de Kratos: soco pesado e o cascalho caindo",
+   "versoes": [
+    0.0,
+    1.279,
+    2.6025,
+    3.842
+   ],
+   "duracoes": [
+    1.199,
+    1.2435,
+    1.1594,
+    1.2183
+   ],
+   "bytes": 42924
   },
   "soco-espinhoso": {
    "arquivo": "soco-espinhoso.mp3",
@@ -34919,6 +35038,23 @@
     1.4071
    ],
    "bytes": 39807
+  },
+  "soco-glacial": {
+   "arquivo": "soco-glacial.mp3",
+   "descricao": "básico de Sub-Zero: o frio soprando e o gelo quebrando",
+   "versoes": [
+    0.0,
+    1.22,
+    2.4293,
+    3.5854
+   ],
+   "duracoes": [
+    1.14,
+    1.1293,
+    1.0761,
+    1.1621
+   ],
+   "bytes": 43878
   },
   "soco-infinito": {
    "arquivo": "soco-infinito.mp3",

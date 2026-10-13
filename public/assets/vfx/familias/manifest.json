@@ -6887,6 +6887,20 @@
   "laco": false,
   "bytes": 19112
  },
+ "dois_jabs_kuririn": {
+  "descricao": "básico do Kuririn: dois jabs rápidos com estalinhos de ki",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 23748
+ },
  "dominacao_mundial": {
   "descricao": "Stewie Griffin · o globo na mira e a luz no trio",
   "quadros": 12,
@@ -28741,6 +28755,20 @@
   "laco": false,
   "bytes": 86792
  },
+ "soco_cqc": {
+  "descricao": "básico do Snake: o jab de CQC e o ! de alerta",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 22152
+ },
  "soco_da_corrente": {
   "descricao": "básico do Kurapika: o punho enrolado na corrente e os elos estalando",
   "quadros": 12,
@@ -28754,6 +28782,20 @@
   ],
   "laco": false,
   "bytes": 29666
+ },
+ "soco_da_faixa_vermelha": {
+  "descricao": "básico do Liu Kang: o soco reto com a faixa voando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 29896
  },
  "soco_da_manopla": {
   "descricao": "básico do Thanos: a Manopla do Infinito com as Joias e o chão rachando",
@@ -28796,6 +28838,20 @@
   ],
   "laco": false,
   "bytes": 39408
+ },
+ "soco_das_trevas_ganondorf": {
+  "descricao": "básico do Ganondorf: o punho em chamas escuras e o círculo de fogo negro",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 48108
  },
  "soco_de_aco": {
   "descricao": "Soco de aço: barreira do som e anéis de choque",
@@ -29091,6 +29147,20 @@
   "laco": false,
   "bytes": 53850
  },
+ "soco_do_mario": {
+  "descricao": "básico do Mario: a luva branca, a estrelinha e a moedinha",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 26114
+ },
  "soco_do_naruto": {
   "descricao": "básico do Naruto: a manga larga, a espiral do Uzumaki e o puf de fumaça",
   "quadros": 12,
@@ -29161,6 +29231,20 @@
   "laco": false,
   "bytes": 36606
  },
+ "soco_eletrico_jin": {
+  "descricao": "básico do Jin: o soco de caratê e a faísca elétrica azul",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 34762
+ },
  "soco_endurecido": {
   "descricao": "básico do Eren: o punho cristaliza e solta lascas",
   "quadros": 12,
@@ -29174,6 +29258,20 @@
   ],
   "laco": false,
   "bytes": 31424
+ },
+ "soco_espartano": {
+  "descricao": "básico do Kratos: o braço enfaixado, a fúria e as pedras voando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 46112
  },
  "soco_espinhoso": {
   "descricao": "Knuckles · a luva com espinhos",
@@ -29244,6 +29342,20 @@
   ],
   "laco": false,
   "bytes": 55662
+ },
+ "soco_glacial": {
+  "descricao": "básico do Sub-Zero: o punho de gelo e os espinhos que quebram",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 37034
  },
  "soco_infinito": {
   "descricao": "básico do Gojo: o punho para no Infinito e entra de uma vez",
