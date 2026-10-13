@@ -295,5 +295,6 @@ function cargaDoRelogio(f:Fighter){
 }
 function nomeDaAtivacao(beat:Beat|null|undefined,passo:{eventos:number[];rotulo?:string},personagem:string){
   const aviso=beat?.events.find(e=>e.kind==='unica'&&passo.eventos.includes(e.id))?.label;
-  return aviso&&EFEITO_DA_UNICA[personagem]?aviso:passo.rotulo;
+  // o escudo de imunidade (a Capitã Marvel absorvendo o raio) mostra o nome da mecânica, não "Imune"
+  return aviso&&aviso!=='Imune'&&EFEITO_DA_UNICA[personagem]?aviso:passo.rotulo;
 }

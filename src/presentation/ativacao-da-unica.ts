@@ -24,13 +24,16 @@ import { ENTREGA_DA_UNICA, VOO_DA_UNICA, entregaDaUnica, type ModoDaEntrega } fr
 /** O Preparo de cada um, na mesma escala do Preparo das habilidades (0 = instantâneo). */
 export const PREPARO_PROPRIO: Record<string, number> = {
   // reflexos: o nome e o efeito saem juntos
-  valak: 0, neo: 0, sans: 0, sekiro: 0, minato: 0, crash: 0, sonic: 0, kenshin: 0, hiei: 0,
+  valak: 0, neo: 0, sans: 0, sekiro: 0, minato: 0, crash: 0, sonic: 0, kenshin: 0, hiei: 0, hayabusa: 0, pernalonga: 0,
+  // as que deixaram de ser 'sempre' e ativam na hora (pedido do jogador: "rápido… nada demorado")
+  kurama: 0.1, natsu: 0.1, jinwoo: 0.1, yuji: 0.1, captainmarvel: 0.1, doctordoom: 0.1, scarletwitch: 0.1, chunli: 0.1,
+  doomslayer: 0.1, snake: 0.1, bart: 0.1, splinter: 0.1, pateta: 0.1, zuko: 0.1, silversurfer: 0.2, samara: 0.2,
   // respostas rápidas ao golpe e golpes de surpresa
   seiya: 0.2, shiryu: 0.1, garou: 0.1, saitama: 0.1, ghostface: 0.1, jason: 0.1, michaelmyers: 0.1, batman: 0.1,
   levi: 0.1, daredevil: 0.1, morty: 0.1, harrypotter: 0.1, xenomorph: 0.1, catwoman: 0.1, blackwidow: 0.1,
   lelouch: 0.2, aizen: 0.2, kakashi: 0.2, coringa: 0.2, yor: 0.2, mikasa: 0.2,
   // o que precisa juntar energia de verdade
-  goku: 0.5, megatron: 0.5, madara: 0.5, dovahkiin: 0.5, galactus: 0.5, light: 0.5, kaiba: 0.5, darkseid: 0.4,
+  goku: 0.5, megatron: 0.5, madara: 0.5, dovahkiin: 0.5, galactus: 0.2, light: 0.5, kaiba: 0.5, darkseid: 0.4,
   inuyasha: 0.4, cuphead: 0.4, zeus: 0.4, storm: 0.4, ironman: 0.4, mewtwo: 0.4, odin: 0.4, hadescz: 0.4, ursula: 0.4,
 };
 const PREPARO_DO_MODO: Record<ModoDaEntrega, number> = { si: 0.2, corpo: 0.2, alvo: 0.3, voa: 0.3, aliado: 0.3, raio: 0.4, cai: 0.5 };
@@ -133,8 +136,22 @@ export function fasesDoEvento(e: BattleEvent, b: Battle, beat?: BeatDaUnica): Fa
  *    caminho, ela ativa, e o golpe continua.
  */
 export interface PausaDaUnica { quem: string; evento: BattleEvent; passo: number; em: number; dura: number; t: number; fases: FasesDaUnica; propria: boolean }
-/** Depois de o efeito aparecer, quanto ele fica à vista antes de o golpe continuar. */
-const RESPIRO_DA_PAUSA = 0.45;
+/** Depois de o efeito aparecer, quanto ele fica à vista antes de o golpe continuar (num reflexo, quase nada). */
+const RESPIRO_DA_PAUSA = 0.45, RESPIRO_DO_REFLEXO = 0.2;
+/**
+ * Quem escapa do golpe (pedido do jogador sobre o Hiei: "mexe rapidinho… e o personagem erra… quase instantâneo"): na
+ * pausa, em vez de concentrar, o personagem desvia para o lado num piscar.
+ */
+export const DESVIA_NA_UNICA = new Set(['hiei', 'sans', 'neo']);
+/**
+ * Avisos que só mostram o nome, sem a ativação completa: a semente do Kurama plantada (ela ativa de verdade quando
+ * brota, 8 s depois) e a contagem dos dias da Samara.
+ */
+export function soONome(personagem: string, aviso: string): boolean {
+  if (personagem === 'kurama') return aviso === 'Semente plantada';
+  if (personagem === 'samara') return aviso.startsWith('Dia ');
+  return false;
+}
 export function pausasDoGolpe(beat: Pick<Beat, 'event' | 'events' | 'after' | 'passos' | 'traco'>, impacto: number, antecipa: number): PausaDaUnica[] {
   if (beat.event.kind !== 'basic' && beat.event.kind !== 'skill') return [];
   const ladoDe = (uid?: string) => beat.after.fighters.find((f) => f.uid === uid)?.side;
@@ -153,7 +170,7 @@ export function pausasDoGolpe(beat: Pick<Beat, 'event' | 'events' | 'after' | 'p
     const propria = p.quem === atacante;
     if (propria ? !antes : !(antes || (atingidos.has(p.quem) && !caiu.has(p.quem) && ladoDe(p.quem) !== ladoDe(atacante)))) return;
     const fases = fasesDoEvento(evento, beat.after, beat);
-    pausas.push({ quem: p.quem, evento, passo: k, em: propria ? 0 : meio, dura: fases.impactoEm + RESPIRO_DA_PAUSA, t: 0, fases, propria });
+    pausas.push({ quem: p.quem, evento, passo: k, em: propria ? 0 : meio, dura: fases.impactoEm + (fases.preparo <= 0 ? RESPIRO_DO_REFLEXO : RESPIRO_DA_PAUSA), t: 0, fases, propria });
   });
   return pausas.sort((a, b) => a.em - b.em);
 }

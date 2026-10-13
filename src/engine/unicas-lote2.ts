@@ -369,9 +369,11 @@ export const LOTE2: Record<string, Unica> = {
     nome: 'Planta que espera',
     texto: 'Quem acerta Kurama com ataque ou habilidade recebe uma semente: 8 s depois, a semente brota, causa 120 de dano e deixa esse rival Preso (65% mais lento) por 2 s. Cada rival carrega só 1 semente por vez.',
     ganchos: {
-      apanhou(_m, b, f, fonte, _dano, g) {
+      apanhou(m, b, f, fonte, _dano, g) {
         if (!g.direto || fonte.side === f.side || u(f)[`semente${idx(b, fonte)}`]) return;
         u(f)[`semente${idx(b, fonte)}`] = b.time + 8;
+        // só o nome aparece agora; a ativação de verdade é quando ela brota (src/presentation/ativacao-da-unica.ts)
+        m.aviso(b, f, 'Semente plantada', fonte);
       },
       passo(m, b, f) {
         for (const r of m.rivais(b, f)) {

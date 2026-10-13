@@ -630,7 +630,7 @@ export const LOTE8: Record<string, Unica> = {
         if (r) { u(f).planeta = idx(b, r); m.aviso(b, f, 'Planeta escolhido', r); }
       },
       causa: (_m, b, f, alvo) => (u(f).planeta === idx(b, alvo) ? 1.2 : 1),
-      caiu(m, b, f, quem) { if (u(f).planeta === idx(b, quem)) m.cura(b, f, f, f.maxHp * 0.15, 'Arauto'); },
+      caiu(m, b, f, quem) { if (u(f).planeta === idx(b, quem)) { m.aviso(b, f, 'Planeta devorado', f); m.cura(b, f, f, f.maxHp * 0.15, 'Arauto'); } },
     },
   },
 };

@@ -248,7 +248,7 @@ export const LOTE7: Record<string, Unica> = {
     texto: 'Ryu Hayabusa começa a luta com a barra do Próximo ataque cheia. Cada rival que cai enche essa barra de novo.',
     ganchos: {
       inicio(_m, _b, f) { f.action = 1; },
-      caiu(_m, _b, f, quem) { if (quem.side !== f.side) f.action = 1; },
+      caiu(m, b, f, quem) { if (quem.side !== f.side) { f.action = 1; m.aviso(b, f, 'Primeiro a agir', f); } },
     },
   },
   hiei: {
@@ -520,6 +520,7 @@ export const LOTE7: Record<string, Unica> = {
     ganchos: {
       apanhou(m, b, f, fonte, _dano, g) {
         if (!g.direto || fonte.side === f.side || !vivo(fonte) || m.sorte(b) >= 1 / 3) return;
+        m.aviso(b, f, 'Contra-golpe', fonte);
         m.efeitos(b, f, [fonte], [st('exposed', 0.1, 3)]);
         m.dano(b, f, fonte, 50, false, 'Contra-ataque');
       },

@@ -13,12 +13,12 @@
 import type { Battle } from '../engine/types';
 import { PRESENTATION as P } from './config';
 import type { Beat } from './director';
-import { ativacaoNaTela, entregaDoEvento, golpeParado, type AtivacaoNaTela } from './ativacao-da-unica';
+import { DESVIA_NA_UNICA, ativacaoNaTela, entregaDoEvento, golpeParado, type AtivacaoNaTela } from './ativacao-da-unica';
 import { combatLinks } from './combat-links';
 import { distanciaDoGolpe } from './distancia';
 import { profileFor } from './vfxProfiles';
 
-export type ActStyle = 'melee' | 'ranged' | 'area' | 'support' | 'curse' | 'cast' | 'interrupt';
+export type ActStyle = 'melee' | 'ranged' | 'area' | 'support' | 'curse' | 'cast' | 'interrupt' | 'esquiva';
 export type ReactStyle = 'hit' | 'hit-heavy' | 'block' | 'heal' | 'shield' | 'buff' | 'curse' | 'broken' | 'fall';
 
 export interface UnitActing {
@@ -64,6 +64,8 @@ function estiloDeQuemAge(beat: Beat, battle: Battle, area: boolean): ActStyle | 
 }
 
 function estiloDaAtivacao(at: AtivacaoNaTela, beat: Beat, battle: Battle): ActStyle | undefined {
+  const dono = battle.fighters.find((f) => f.uid === at.passo.quem);
+  if (at.pausa && dono && DESVIA_NA_UNICA.has(dono.characterId)) return 'esquiva';
   if (at.t < at.fases.soltaEm || at.pausa) return 'cast';
   const e = at.evento ?? beat.event;
   const ent = entregaDoEvento(e, battle, beat);
@@ -75,6 +77,7 @@ function estiloDaAtivacao(at: AtivacaoNaTela, beat: Beat, battle: Battle): ActSt
 }
 /** Quanto dura o movimento de quem ativa: a subida da concentração, ou da soltura até o impacto. */
 function segundosDaAtivacao(at: AtivacaoNaTela, act: ActStyle): number {
+  if (act === 'esquiva') return 0.45;
   if (act === 'cast') return Math.max(0.9, at.fases.nomeEm * 4);
   return Math.max(0.5, (at.fases.impactoEm - at.fases.soltaEm) / P.impactAt);
 }

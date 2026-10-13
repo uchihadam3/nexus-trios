@@ -155,3 +155,9 @@
 .arena-v2 .act-pausado .fighter-portrait{filter:saturate(.55) brightness(.8)}
 .battle-effects.golpe-pausado .fxl:not(.fx-da-unica),.battle-effects.golpe-pausado .fxl:not(.fx-da-unica)::before,.battle-effects.golpe-pausado .fxl:not(.fx-da-unica)::after{animation-play-state:paused!important}
 .battle-effects.golpe-antes .fxl:not(.fx-da-unica){visibility:hidden}
+/* o desvio relâmpago (Hiei): some para o lado num piscar, deixando um rastro, e volta */
+@keyframes act-esquiva{0%{transform:translate(0,0);opacity:1}18%{transform:translate(calc(var(--esq,1) * 26px),-6px);opacity:.35}55%{transform:translate(calc(var(--esq,1) * 30px),-4px);opacity:.55}100%{transform:translate(0,0);opacity:1}}
+.arena-v2 .act-esquiva .unit-medal{animation:act-esquiva calc(var(--beat-s) * var(--motion-scale,1)) cubic-bezier(.2,.9,.3,1) both}
+.arena-v2 .side-enemy.act-esquiva .unit-medal{--esq:-1}
+.arena-v2 .act-esquiva .unit-medal::after{content:'';position:absolute;inset:8%;border-radius:50%;box-shadow:0 0 0 3px #ffffff55,0 0 18px #b0e0ff99;animation:esquiva-rastro calc(var(--beat-s) * var(--motion-scale,1)) ease-out both;pointer-events:none}
+@keyframes esquiva-rastro{0%{opacity:.9;transform:scale(1)}100%{opacity:0;transform:scale(1.3)}}
