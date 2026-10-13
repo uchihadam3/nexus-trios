@@ -24,6 +24,7 @@ import { byId } from '../data/characters';
 import type { Character, Effect, Skill, Target, Visual } from '../engine/types';
 import { FAMILIAS_NOVAS, NOVAS_DE_BASICO, NOVAS_NO_ALVO, type FamiliaNova } from './vfx-familias-novas';
 import { FAMILIA_DA_HABILIDADE, FAMILIA_DO_BASICO } from './vfx-atribuicao';
+import { ENTREGA_DA_UNICA } from './unicas-efeitos';
 
 export type Grupo = 'físico' | 'corte' | 'projétil' | 'energia' | 'elemento' | 'magia' | 'apoio' | 'especial';
 
@@ -141,7 +142,9 @@ export const FOLHAS_DA_LINHA = ['cometa', 'mira', 'chegada'] as const;
 export const folhasUsadas = (): string[] => [...new Set([...FAMILIAS.flatMap((k) => {
   const x = familia(k);
   return [x.impacto, x.viagem, x.faixa, x.preparo, x.acento, x.noAtor, x.atravessa, x.ergue, x.noAliado].filter((s): s is string => !!s);
-}), ...FOLHAS_DA_LINHA])].sort();
+}), ...FOLHAS_DA_LINHA,
+// a entrega das Mecânicas únicas (a Genki Dama se formando e voando, o feixe do Megatron)
+...Object.values(ENTREGA_DA_UNICA).flatMap((e) => [e.viagem, e.faixa, e.preparo].filter((s): s is string => !!s))])].sort();
 
 export const folha = (nome: string) => `/assets/vfx/familias/${nome}.webp`;
 

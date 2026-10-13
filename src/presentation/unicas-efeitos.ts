@@ -355,7 +355,7 @@ export const EFEITO_DA_UNICA: Record<string, Record<string, { familia: VfxFamily
   tsunade: { '*': { familia: 'mu_byakugo', som: 'mu-byakugo' } },
   sailormars: { '*': { familia: 'mu_fogo_sagrado', som: 'mu-fogo-sagrado' } },
   steven: { '*': { familia: 'mu_escudo_rosa', som: 'mu-escudo-rosa' } },
-  garnet: { '*': { familia: 'mu_futuro', som: 'mu-futuro' } },
+  garnet: { '*': { familia: 'mu_previsao', som: 'mu-previsao' } },
   johnnybravo: { '*': { familia: 'mu_cantada', som: 'mu-cantada' } },
   dexter: { '*': { familia: 'mu_dee_dee', som: 'mu-dee-dee' } },
   aku: { '*': { familia: 'mu_jogado_ao_futuro', som: 'mu-jogado-ao-futuro' } },

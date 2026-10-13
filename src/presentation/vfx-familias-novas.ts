@@ -1502,6 +1502,7 @@ export const FAMILIAS_NOVAS = {
   mu_shinra_tensei: n({ nome: 'Shinra Tensei', grupo: 'especial', impacto: 'mu_shinra_tensei', escala: 3.2, tempo: 1.0, cor: '#c0a0ff', tinta: 'fixa' }),
   mu_selo_ceifador: n({ nome: 'Selo do Ceifador', grupo: 'especial', impacto: 'mu_selo_ceifador', escala: 2.8, tempo: 1.0, cor: '#ffe08a', tinta: 'fixa' }),
   mu_futuro: n({ nome: 'Eu vim do futuro', grupo: 'especial', impacto: 'mu_futuro', escala: 2.8, tempo: 1.0, cor: '#a8c8ff', tinta: 'fixa' }),
+  mu_previsao: n({ nome: 'Previsão', grupo: 'especial', impacto: 'mu_previsao', escala: 2.8, tempo: 1.0, cor: '#e07aff', tinta: 'fixa' }),
   mu_lendario: n({ nome: 'Lendário que cresce', grupo: 'especial', impacto: 'mu_lendario', escala: 3.0, tempo: 1.0, cor: '#7aff5a', tinta: 'fixa' }),
   mu_hakai: n({ nome: 'Hakai', grupo: 'especial', impacto: 'mu_hakai', escala: 3.0, tempo: 1.0, cor: '#b07aff', tinta: 'fixa' }),
   mu_fogo_espalha: n({ nome: 'Fogo que se espalha', grupo: 'especial', impacto: 'mu_fogo_espalha', escala: 2.8, tempo: 1.0, cor: '#ff7a2a', tinta: 'fixa' }),

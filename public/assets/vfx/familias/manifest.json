@@ -17206,7 +17206,7 @@
   "bytes": 47148
  },
  "mu_anulou": {
-  "descricao": "Asta · a espada da antimagia",
+  "descricao": "Asta · o círculo mágico partido pela espada negra",
   "quadros": 12,
   "grade": [
    3,
@@ -17217,7 +17217,7 @@
    192
   ],
   "laco": false,
-  "bytes": 34156
+  "bytes": 28224
  },
  "mu_areia": {
   "descricao": "Gaara · a areia",
@@ -17388,7 +17388,7 @@
   "bytes": 19000
  },
  "mu_battojutsu": {
-  "descricao": "Kenshin · o saque da espada",
+  "descricao": "Kenshin · o saque relâmpago e a cicatriz em X",
   "quadros": 12,
   "grade": [
    3,
@@ -17399,7 +17399,7 @@
    192
   ],
   "laco": false,
-  "bytes": 3582
+  "bytes": 9158
  },
  "mu_berserker": {
   "descricao": "Guts · a Marca e a Armadura do Berserker",
@@ -18074,7 +18074,7 @@
   "bytes": 29296
  },
  "mu_corpo_metal": {
-  "descricao": "RoboCop · o visor e as placas",
+  "descricao": "RoboCop · as placas de metal e o visor varrendo",
   "quadros": 12,
   "grade": [
    3,
@@ -18085,7 +18085,7 @@
    192
   ],
   "laco": false,
-  "bytes": 11286
+  "bytes": 5668
  },
  "mu_corpo_morto": {
   "descricao": "Ainz · o crânio e o círculo mágico",
@@ -18228,7 +18228,7 @@
   "bytes": 34464
  },
  "mu_cria": {
-  "descricao": "Xenomorfo · o ovo abrindo e a mandíbula",
+  "descricao": "Xenomorfo · o ovo abrindo e a cria saindo",
   "quadros": 12,
   "grade": [
    3,
@@ -18239,7 +18239,7 @@
    192
   ],
   "laco": false,
-  "bytes": 17930
+  "bytes": 22950
  },
  "mu_cristal_prata": {
   "descricao": "Sailor Moon · a lua e o Cristal de Prata",
@@ -18368,7 +18368,7 @@
   "bytes": 32250
  },
  "mu_desequilibrio": {
-  "descricao": "Asa Noturna · os bastões e o pássaro azul",
+  "descricao": "Asa Noturna · o trapézio e o ponteiro atrasando",
   "quadros": 12,
   "grade": [
    3,
@@ -18379,7 +18379,7 @@
    192
   ],
   "laco": false,
-  "bytes": 23910
+  "bytes": 9612
  },
  "mu_desmascarar": {
   "descricao": "Velma · a lupa e a máscara caindo",
@@ -18536,7 +18536,7 @@
   "bytes": 28862
  },
  "mu_disfarce": {
-  "descricao": "Viúva Negra · a ampulheta e as pulseiras",
+  "descricao": "Viúva Negra · a silhueta sumindo e a ampulheta",
   "quadros": 12,
   "grade": [
    3,
@@ -18547,7 +18547,7 @@
    192
   ],
   "laco": false,
-  "bytes": 20000
+  "bytes": 9308
  },
  "mu_dobra_sangue": {
   "descricao": "Katara · a dobra de sangue",
@@ -18788,7 +18788,7 @@
   "bytes": 34238
  },
  "mu_esconderijo": {
-  "descricao": "Patrick · debaixo da pedra",
+  "descricao": "Patrick · a pedra descendo por cima",
   "quadros": 12,
   "grade": [
    3,
@@ -18799,7 +18799,7 @@
    192
   ],
   "laco": false,
-  "bytes": 18520
+  "bytes": 11236
  },
  "mu_escondida": {
   "descricao": "Power · os chifres e o martelo de sangue",
@@ -18844,7 +18844,7 @@
   "bytes": 32214
  },
  "mu_escudo_rosa": {
-  "descricao": "Steven · o escudo rosa",
+  "descricao": "Steven · o escudo da Rosa abrindo em pétalas",
   "quadros": 12,
   "grade": [
    3,
@@ -18855,7 +18855,7 @@
    192
   ],
   "laco": false,
-  "bytes": 43186
+  "bytes": 43492
  },
  "mu_espada_mestra": {
   "descricao": "Link · o feixe da Espada Mestra",
@@ -19040,7 +19040,7 @@
   "bytes": 10762
  },
  "mu_exercito": {
-  "descricao": "Rambo · as balas e a flecha",
+  "descricao": "Rambo · a rajada de clarões e as cápsulas",
   "quadros": 12,
   "grade": [
    3,
@@ -19051,7 +19051,7 @@
    192
   ],
   "laco": false,
-  "bytes": 16516
+  "bytes": 21892
  },
  "mu_exorcismo": {
   "descricao": "Constantine · o pentagrama e a fumaça",
@@ -19362,7 +19362,7 @@
   "bytes": 57018
  },
  "mu_fus_ro_dah": {
-  "descricao": "Dovahkiin · Fus Ro Dah",
+  "descricao": "Dovahkiin · as três palavras e as ondas do grito",
   "quadros": 12,
   "grade": [
    3,
@@ -19373,7 +19373,7 @@
    192
   ],
   "laco": false,
-  "bytes": 26602
+  "bytes": 17324
  },
  "mu_fusao": {
   "descricao": "Sora · a Keyblade e as auras se juntando",
@@ -19390,7 +19390,7 @@
   "bytes": 52096
  },
  "mu_futuro": {
-  "descricao": "Garnet · a visão do futuro",
+  "descricao": "Trunks · o relógio para trás e o portal do tempo",
   "quadros": 12,
   "grade": [
    3,
@@ -19401,7 +19401,7 @@
    192
   ],
   "laco": false,
-  "bytes": 23526
+  "bytes": 30916
  },
  "mu_futuro_medico": {
   "descricao": "Leorio · a maleta e a cruz",
@@ -19684,7 +19684,7 @@
   "bytes": 112380
  },
  "mu_hienas": {
-  "descricao": "Scar · os olhos e as garras das hienas",
+  "descricao": "Scar · as três mordidas das hienas",
   "quadros": 12,
   "grade": [
    3,
@@ -19695,7 +19695,7 @@
    192
   ],
   "laco": false,
-  "bytes": 19696
+  "bytes": 10704
  },
  "mu_hollow": {
   "descricao": "Ichigo · a máscara Hollow",
@@ -19922,7 +19922,7 @@
   "bytes": 116310
  },
  "mu_jogador_solo": {
-  "descricao": "Kirito · as duas espadas",
+  "descricao": "Kirito · as duas espadas e a rajada de estrelas",
   "quadros": 12,
   "grade": [
    3,
@@ -19933,7 +19933,7 @@
    192
   ],
   "laco": false,
-  "bytes": 43222
+  "bytes": 9940
  },
  "mu_joia": {
   "descricao": "Thanos · a Joia do Infinito encaixando",
@@ -20104,7 +20104,7 @@
   "bytes": 30916
  },
  "mu_ladra": {
-  "descricao": "Mulher-Gato · as garras e as joias",
+  "descricao": "Mulher-Gato · o chicote e a joia sendo puxada",
   "quadros": 12,
   "grade": [
    3,
@@ -20115,7 +20115,7 @@
    192
   ],
   "laco": false,
-  "bytes": 13892
+  "bytes": 9714
  },
  "mu_lamento": {
   "descricao": "Danny Phantom · o Lamento fantasma",
@@ -20160,7 +20160,7 @@
   "bytes": 63582
  },
  "mu_leque": {
-  "descricao": "Kitana · os leques de aço",
+  "descricao": "Kitana · o leque abrindo e a rajada levantando",
   "quadros": 12,
   "grade": [
    3,
@@ -20171,7 +20171,7 @@
    192
   ],
   "laco": false,
-  "bytes": 18726
+  "bytes": 25024
  },
  "mu_lider": {
   "descricao": "Capitão América · o escudo de estrela e as setas",
@@ -20244,7 +20244,7 @@
   "bytes": 83326
  },
  "mu_mais_smith": {
-  "descricao": "Agente Smith · os óculos e as cópias",
+  "descricao": "Agente Smith · os óculos se multiplicando no código",
   "quadros": 12,
   "grade": [
    3,
@@ -20255,7 +20255,7 @@
    192
   ],
   "laco": false,
-  "bytes": 10960
+  "bytes": 8900
  },
  "mu_mana": {
   "descricao": "Frieren · o círculo mágico e as flores de mana",
@@ -20552,7 +20552,7 @@
   "bytes": 38064
  },
  "mu_nova_esperanca": {
-  "descricao": "Luke · os dois sóis e o sabre",
+  "descricao": "Luke · o sabre verde acendendo",
   "quadros": 12,
   "grade": [
    3,
@@ -20563,7 +20563,7 @@
    192
   ],
   "laco": false,
-  "bytes": 14876
+  "bytes": 17224
  },
  "mu_nyeh": {
   "descricao": "Esqueleto · o cajado do carneiro",
@@ -20678,7 +20678,7 @@
   "bytes": 53524
  },
  "mu_orgulho_youkai": {
-  "descricao": "Sesshomaru · a lua e o chicote",
+  "descricao": "Sesshomaru · a lua crescente e o chicote de luz",
   "quadros": 12,
   "grade": [
    3,
@@ -20689,7 +20689,7 @@
    192
   ],
   "laco": false,
-  "bytes": 55246
+  "bytes": 17734
  },
  "mu_outro_ghostface": {
   "descricao": "Ghostface · a outra máscara e o corte em X",
@@ -20720,7 +20720,7 @@
   "bytes": 21508
  },
  "mu_pacifista": {
-  "descricao": "Vash · as balas paradas e as penas",
+  "descricao": "Vash · a bala parando e o símbolo da paz",
   "quadros": 12,
   "grade": [
    3,
@@ -20731,7 +20731,7 @@
    192
   ],
   "laco": false,
-  "bytes": 21092
+  "bytes": 19610
  },
  "mu_pagina_no_relogio": {
   "descricao": "Light · o relógio abre, o nome é escrito e o coração para",
@@ -20986,7 +20986,7 @@
   "bytes": 34454
  },
  "mu_plano_mestre": {
-  "descricao": "Megamente · a lousa do plano",
+  "descricao": "Megamente · os três planos e o escolhido",
   "quadros": 12,
   "grade": [
    3,
@@ -20997,7 +20997,7 @@
    192
   ],
   "laco": false,
-  "bytes": 40558
+  "bytes": 9298
  },
  "mu_plantas": {
   "descricao": "Hera Venenosa · as vinhas e os esporos",
@@ -21168,7 +21168,7 @@
   "bytes": 39186
  },
  "mu_presentes": {
-  "descricao": "Jack Esqueleto · os presentes e a lua",
+  "descricao": "Jack Esqueleto · o presente abrindo e a espiral",
   "quadros": 12,
   "grade": [
    3,
@@ -21179,7 +21179,21 @@
    192
   ],
   "laco": false,
-  "bytes": 32414
+  "bytes": 13758
+ },
+ "mu_previsao": {
+  "descricao": "Garnet · o terceiro olho e as linhas do futuro",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 17524
  },
  "mu_primeiro": {
   "descricao": "Hayabusa · as shurikens e o corte",
@@ -21266,7 +21280,7 @@
   "bytes": 21368
  },
  "mu_quatro_bracos": {
-  "descricao": "Goro · os quatro braços",
+  "descricao": "Goro · os quatro braços travando o golpe",
   "quadros": 12,
   "grade": [
    3,
@@ -21277,10 +21291,10 @@
    192
   ],
   "laco": false,
-  "bytes": 30900
+  "bytes": 23184
  },
  "mu_radiacao": {
-  "descricao": "Godzilla · as placas e o raio",
+  "descricao": "Godzilla · o símbolo de radiação girando",
   "quadros": 12,
   "grade": [
    3,
@@ -21291,7 +21305,7 @@
    192
   ],
   "laco": false,
-  "bytes": 43042
+  "bytes": 57374
  },
  "mu_raikousen": {
   "descricao": "Zero · o sabre e o Raikousen",
@@ -21392,7 +21406,7 @@
   "bytes": 31746
  },
  "mu_recarregou": {
-  "descricao": "John Wick · a recarga e os tiros",
+  "descricao": "John Wick · o pente subindo e as cápsulas voando",
   "quadros": 12,
   "grade": [
    3,
@@ -21403,7 +21417,7 @@
    192
   ],
   "laco": false,
-  "bytes": 25266
+  "bytes": 6854
  },
  "mu_redirecionado": {
   "descricao": "Zuko · o raio redirecionado",
@@ -21910,7 +21924,7 @@
   "bytes": 31522
  },
  "mu_stars": {
-  "descricao": "Nemesis · o foguete e os tentáculos",
+  "descricao": "Nemesis · a mira de caça e o tentáculo",
   "quadros": 12,
   "grade": [
    3,
@@ -21921,7 +21935,7 @@
    192
   ],
   "laco": false,
-  "bytes": 26330
+  "bytes": 15734
  },
  "mu_strix": {
   "descricao": "Loid · o dossiê da Operação Strix e a Carga subindo",
@@ -21966,7 +21980,7 @@
   "bytes": 17698
  },
  "mu_suprimentos": {
-  "descricao": "Ellie · os suprimentos",
+  "descricao": "Ellie · a caixa de suprimentos e a cruz",
   "quadros": 12,
   "grade": [
    3,
@@ -21977,10 +21991,10 @@
    192
   ],
   "laco": false,
-  "bytes": 13002
+  "bytes": 8334
  },
  "mu_suspeita": {
-  "descricao": "L · o L e a barra da suspeita",
+  "descricao": "L · a lupa passando e o medidor de Suspeita enchendo",
   "quadros": 12,
   "grade": [
    3,
@@ -21991,10 +22005,10 @@
    192
   ],
   "laco": false,
-  "bytes": 7598
+  "bytes": 16888
  },
  "mu_tapa_olho": {
-  "descricao": "Kenpachi · o tapa-olho e a pressão espiritual",
+  "descricao": "Kenpachi · o tapa-olho voando e a pressão explodindo",
   "quadros": 12,
   "grade": [
    3,
@@ -22005,7 +22019,7 @@
    192
   ],
   "laco": false,
-  "bytes": 69332
+  "bytes": 42116
  },
  "mu_tedio": {
   "descricao": "Saitama · as bolhas do bocejo",
@@ -22134,7 +22148,7 @@
   "bytes": 11682
  },
  "mu_tita": {
-  "descricao": "King Kong · os punhos no peito",
+  "descricao": "King Kong · os punhos no peito e as ondas de choque",
   "quadros": 12,
   "grade": [
    3,
@@ -22145,7 +22159,7 @@
    192
   ],
   "laco": false,
-  "bytes": 25178
+  "bytes": 29180
  },
  "mu_tombo": {
   "descricao": "Jerry · o queijo e a marreta",

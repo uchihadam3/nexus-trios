@@ -23039,20 +23039,20 @@
   },
   "mu-futuro": {
    "arquivo": "mu-futuro.mp3",
-   "descricao": "Garnet: a visão do futuro",
+   "descricao": "Trunks: a fenda do tempo",
    "versoes": [
     0.0,
-    2.18,
-    4.4361,
-    6.5451
+    2.08,
+    4.2325,
+    6.2449
    ],
    "duracoes": [
-    2.1,
-    2.1761,
-    2.029,
-    2.132
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
    ],
-   "bytes": 67685
+   "bytes": 98747
   },
   "mu-futuro-medico": {
    "arquivo": "mu-futuro-medico.mp3",
@@ -25212,6 +25212,23 @@
     2.132
    ],
    "bytes": 70171
+  },
+  "mu-previsao": {
+   "arquivo": "mu-previsao.mp3",
+   "descricao": "Garnet: a visão do futuro",
+   "versoes": [
+    0.0,
+    2.18,
+    4.4361,
+    6.5451
+   ],
+   "duracoes": [
+    2.1,
+    2.1761,
+    2.029,
+    2.132
+   ],
+   "bytes": 67345
   },
   "mu-primeiro": {
    "arquivo": "mu-primeiro.mp3",

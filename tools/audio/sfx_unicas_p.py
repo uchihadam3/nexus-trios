@@ -268,7 +268,7 @@ SONS: dict = {
     "mu-byakugo": (byakugo, "Tsunade: o Byakugō"),
     "mu-fogo-sagrado": (fogo_sagrado, "Sailor Mars: o fogo sagrado"),
     "mu-escudo-rosa": (escudo_rosa, "Steven: o escudo rosa"),
-    "mu-futuro": (futuro, "Garnet: a visão do futuro"),
+    "mu-previsao": (futuro, "Garnet: a visão do futuro"),
     "mu-cantada": (cantada, "Johnny Bravo: a cantada"),
     "mu-dee-dee": (dee_dee, "Dexter: o laboratório"),
     "mu-jogado-ao-futuro": (jogado_ao_futuro, "Aku: o portal do tempo"),
