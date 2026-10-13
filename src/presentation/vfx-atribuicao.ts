@@ -200,6 +200,12 @@ const T: Record<string, string> = {
   shrek: 'arroto abraco_de_ogro rugido_do_pantano',
   elsa: 'rajada_de_gelo_elsa muralha_de_gelo_elsa inverno_eterno',
   maleficent: 'maldicao_do_sono muro_de_espinhos forma_de_dragao',
+  genie: 'primeiro_desejo segundo_desejo poder_cosmico',
+  scar: 'hienas garras_de_leao longa_vida_ao_rei',
+  jackskellington: 'susto fogo_de_abobora noite_das_bruxas',
+  ursula: 'roubar_a_voz tentaculos_de_ursula tridente_da_bruxa',
+  deku: 'delaware_smash full_cowl_corpo united_states_of_smash_deku',
+  allmight: 'texas_smash estou_aqui united_states_of_smash_allmight',
 };
 
 export const FAMILIA_DA_HABILIDADE: Record<string, VfxFamily> = Object.fromEntries(

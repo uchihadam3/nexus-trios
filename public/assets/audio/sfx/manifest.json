@@ -461,6 +461,23 @@
    ],
    "bytes": 43591
   },
+  "allmight-preparo": {
+   "arquivo": "allmight-preparo.mp3",
+   "descricao": "All Might: o One For All (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 53547
+  },
   "alucard-preparo": {
    "arquivo": "alucard-preparo.mp3",
    "descricao": "Alucard: as almas (Preparo)",
@@ -6513,6 +6530,40 @@
    ],
    "bytes": 54596
   },
+  "deku-preparo": {
+   "arquivo": "deku-preparo.mp3",
+   "descricao": "Deku: o braço carregando (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 81927
+  },
+  "delaware-smash": {
+   "arquivo": "delaware-smash.mp3",
+   "descricao": "Deku: Delaware Smash",
+   "versoes": [
+    0.0,
+    1.858,
+    3.9079,
+    5.7374
+   ],
+   "duracoes": [
+    1.778,
+    1.9699,
+    1.7496,
+    1.9845
+   ],
+   "bytes": 63839
+  },
   "demolidor-preparo": {
    "arquivo": "demolidor-preparo.mp3",
    "descricao": "Demolidor: o radar e os corações (antes do golpe)",
@@ -9080,6 +9131,23 @@
    ],
    "bytes": 18228
   },
+  "estou-aqui": {
+   "arquivo": "estou-aqui.mp3",
+   "descricao": "All Might: estou aqui!",
+   "versoes": [
+    0.0,
+    2.48,
+    5.047,
+    7.4459
+   ],
+   "duracoes": [
+    2.4,
+    2.487,
+    2.3188,
+    2.4365
+   ],
+   "bytes": 77108
+  },
   "estrategia-divina": {
    "arquivo": "estrategia-divina.mp3",
    "descricao": "Atena: a estratégia divina",
@@ -10389,6 +10457,23 @@
    ],
    "bytes": 47270
   },
+  "fogo-de-abobora": {
+   "arquivo": "fogo-de-abobora.mp3",
+   "descricao": "Jack Esqueleto: fogo de abóbora",
+   "versoes": [
+    0.0,
+    2.077,
+    4.3132,
+    6.352
+   ],
+   "duracoes": [
+    1.997,
+    2.1563,
+    1.9587,
+    2.0729
+   ],
+   "bytes": 73893
+  },
   "fogo-de-supressao": {
    "arquivo": "fogo-de-supressao.mp3",
    "descricao": "Master Chief: a rajada do fuzil",
@@ -10966,6 +11051,23 @@
     1.0424
    ],
    "bytes": 40426
+  },
+  "full-cowl-corpo": {
+   "arquivo": "full-cowl-corpo.mp3",
+   "descricao": "Deku: Full Cowl",
+   "versoes": [
+    0.0,
+    1.777,
+    3.6172,
+    5.296
+   ],
+   "duracoes": [
+    1.697,
+    1.7602,
+    1.5987,
+    1.7174
+   ],
+   "bytes": 81938
   },
   "fundacao-preparo": {
    "arquivo": "fundacao-preparo.mp3",
@@ -11630,6 +11732,23 @@
    ],
    "bytes": 44101
   },
+  "garras-de-leao": {
+   "arquivo": "garras-de-leao.mp3",
+   "descricao": "Scar: garras de leão",
+   "versoes": [
+    0.0,
+    1.4429,
+    2.9526,
+    4.338
+   ],
+   "duracoes": [
+    1.3629,
+    1.4297,
+    1.3053,
+    1.4011
+   ],
+   "bytes": 50095
+  },
   "garras-do-falcao": {
    "arquivo": "garras-do-falcao.mp3",
    "descricao": "Hórus: as garras do falcão",
@@ -11850,6 +11969,23 @@
     1.4213
    ],
    "bytes": 42139
+  },
+  "genio-preparo": {
+   "arquivo": "genio-preparo.mp3",
+   "descricao": "Gênio: a lâmpada esfregada (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 68293
   },
   "genjutsu-sasuke": {
    "arquivo": "genjutsu-sasuke.mp3",
@@ -13211,6 +13347,23 @@
    ],
    "bytes": 52449
   },
+  "hienas": {
+   "arquivo": "hienas.mp3",
+   "descricao": "Scar: as hienas",
+   "versoes": [
+    0.0,
+    2.38,
+    4.8434,
+    7.1456
+   ],
+   "duracoes": [
+    2.3,
+    2.3834,
+    2.2222,
+    2.335
+   ],
+   "bytes": 80768
+  },
   "hinokami-kagura": {
    "arquivo": "hinokami-kagura.mp3",
    "descricao": "Tanjiro: a Dança do Deus do Fogo",
@@ -14162,6 +14315,23 @@
     1.9289
    ],
    "bytes": 60396
+  },
+  "jack-esqueleto-preparo": {
+   "arquivo": "jack-esqueleto-preparo.mp3",
+   "descricao": "Jack Esqueleto: a noite chegando (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 58920
   },
   "jack-preparo": {
    "arquivo": "jack-preparo.mp3",
@@ -16321,6 +16491,23 @@
     1.4213
    ],
    "bytes": 52615
+  },
+  "longa-vida-ao-rei": {
+   "arquivo": "longa-vida-ao-rei.mp3",
+   "descricao": "Scar: longa vida ao rei",
+   "versoes": [
+    0.0,
+    2.78,
+    5.6579,
+    8.3466
+   ],
+   "duracoes": [
+    2.7,
+    2.7979,
+    2.6087,
+    2.7411
+   ],
+   "bytes": 97424
   },
   "lotus-shaka": {
    "arquivo": "lotus-shaka.mp3",
@@ -25332,6 +25519,23 @@
    ],
    "bytes": 41852
   },
+  "noite-das-bruxas": {
+   "arquivo": "noite-das-bruxas.mp3",
+   "descricao": "Jack Esqueleto: noite das bruxas",
+   "versoes": [
+    0.0,
+    2.88,
+    5.8615,
+    8.6468
+   ],
+   "duracoes": [
+    2.8,
+    2.9015,
+    2.7053,
+    2.8426
+   ],
+   "bytes": 99287
+  },
   "noite-de-halloween": {
    "arquivo": "noite-de-halloween.mp3",
    "descricao": "Michael Myers: a noite de Halloween",
@@ -26964,6 +27168,23 @@
    ],
    "bytes": 80762
   },
+  "poder-cosmico": {
+   "arquivo": "poder-cosmico.mp3",
+   "descricao": "Gênio: poder cósmico",
+   "versoes": [
+    0.0,
+    2.38,
+    4.8434,
+    7.1456
+   ],
+   "duracoes": [
+    2.3,
+    2.3834,
+    2.2222,
+    2.335
+   ],
+   "bytes": 74333
+  },
   "poder-da-triade": {
    "arquivo": "poder-da-triade.mp3",
    "descricao": "Ganondorf: o acorde da Força, a sombra e o escudo",
@@ -27490,6 +27711,23 @@
     1.6244
    ],
    "bytes": 69643
+  },
+  "primeiro-desejo": {
+   "arquivo": "primeiro-desejo.mp3",
+   "descricao": "Gênio: o primeiro desejo",
+   "versoes": [
+    0.0,
+    2.28,
+    4.6398,
+    6.8454
+   ],
+   "duracoes": [
+    2.2,
+    2.2798,
+    2.1256,
+    2.2335
+   ],
+   "bytes": 84237
   },
   "primeiros-socorros": {
    "arquivo": "primeiros-socorros.mp3",
@@ -30109,6 +30347,23 @@
    ],
    "bytes": 57051
   },
+  "roubar-a-voz": {
+   "arquivo": "roubar-a-voz.mp3",
+   "descricao": "Úrsula: roubar a voz",
+   "versoes": [
+    0.0,
+    2.48,
+    5.047,
+    7.4459
+   ],
+   "duracoes": [
+    2.4,
+    2.487,
+    2.3188,
+    2.4365
+   ],
+   "bytes": 79308
+  },
   "roubar-carga": {
    "arquivo": "roubar-carga.mp3",
    "descricao": "família roubar carga",
@@ -30755,6 +31010,23 @@
    ],
    "bytes": 67189
   },
+  "scar-preparo": {
+   "arquivo": "scar-preparo.mp3",
+   "descricao": "Scar: o rosnado sombrio (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 68455
+  },
   "scooby-preparo": {
    "arquivo": "scooby-preparo.mp3",
    "descricao": "Scooby-Doo: o medo (Preparo)",
@@ -30805,6 +31077,23 @@
     1.3652
    ],
    "bytes": 54491
+  },
+  "segundo-desejo": {
+   "arquivo": "segundo-desejo.mp3",
+   "descricao": "Gênio: o segundo desejo",
+   "versoes": [
+    0.0,
+    2.38,
+    4.8434,
+    7.1456
+   ],
+   "duracoes": [
+    2.3,
+    2.3834,
+    2.2222,
+    2.335
+   ],
+   "bytes": 76892
   },
   "segurar-o-impacto": {
    "arquivo": "segurar-o-impacto.mp3",
@@ -32693,6 +32982,23 @@
    ],
    "bytes": 66690
   },
+  "susto": {
+   "arquivo": "susto.mp3",
+   "descricao": "Jack Esqueleto: o susto",
+   "versoes": [
+    0.0,
+    2.18,
+    4.4361,
+    6.5451
+   ],
+   "duracoes": [
+    2.1,
+    2.1761,
+    2.029,
+    2.132
+   ],
+   "bytes": 58223
+  },
   "t800-preparo": {
    "arquivo": "t800-preparo.mp3",
    "descricao": "T-800: a visão computando (Preparo)",
@@ -33237,6 +33543,23 @@
    ],
    "bytes": 29746
   },
+  "tentaculos-de-ursula": {
+   "arquivo": "tentaculos-de-ursula.mp3",
+   "descricao": "Úrsula: os tentáculos",
+   "versoes": [
+    0.0,
+    2.0323,
+    4.2805,
+    6.2924
+   ],
+   "duracoes": [
+    1.9523,
+    2.1682,
+    1.9319,
+    2.0475
+   ],
+   "bytes": 64938
+  },
   "terra": {
    "arquivo": "terra.mp3",
    "descricao": "terra",
@@ -33287,6 +33610,23 @@
     2.132
    ],
    "bytes": 59965
+  },
+  "texas-smash": {
+   "arquivo": "texas-smash.mp3",
+   "descricao": "All Might: Texas Smash",
+   "versoes": [
+    0.0,
+    1.9887,
+    4.1635,
+    6.0064
+   ],
+   "duracoes": [
+    1.9087,
+    2.0948,
+    1.7629,
+    2.0379
+   ],
+   "bytes": 64374
   },
   "textura-surpresa": {
    "arquivo": "textura-surpresa.mp3",
@@ -33934,6 +34274,23 @@
    ],
    "bytes": 39162
   },
+  "tridente-da-bruxa": {
+   "arquivo": "tridente-da-bruxa.mp3",
+   "descricao": "Úrsula: tridente da bruxa",
+   "versoes": [
+    0.0,
+    2.88,
+    5.8615,
+    8.6468
+   ],
+   "duracoes": [
+    2.8,
+    2.9015,
+    2.7053,
+    2.8426
+   ],
+   "bytes": 98147
+  },
   "tridente-de-poseidon": {
    "arquivo": "tridente-de-poseidon.mp3",
    "descricao": "Poseidon: o tridente",
@@ -34443,6 +34800,57 @@
     1.8274
    ],
    "bytes": 54907
+  },
+  "united-states-of-smash-allmight": {
+   "arquivo": "united-states-of-smash-allmight.mp3",
+   "descricao": "All Might: United States of Smash",
+   "versoes": [
+    0.0,
+    2.98,
+    6.0652,
+    8.9471
+   ],
+   "duracoes": [
+    2.9,
+    3.0052,
+    2.8019,
+    2.9441
+   ],
+   "bytes": 98159
+  },
+  "united-states-of-smash-deku": {
+   "arquivo": "united-states-of-smash-deku.mp3",
+   "descricao": "Deku: United States of Smash",
+   "versoes": [
+    0.0,
+    2.78,
+    5.6579,
+    8.3466
+   ],
+   "duracoes": [
+    2.7,
+    2.7979,
+    2.6087,
+    2.7411
+   ],
+   "bytes": 97936
+  },
+  "ursula-preparo": {
+   "arquivo": "ursula-preparo.mp3",
+   "descricao": "Úrsula: o tridente zumbindo (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 50492
   },
   "vader-preparo": {
    "arquivo": "vader-preparo.mp3",

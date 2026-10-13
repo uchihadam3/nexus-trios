@@ -64,8 +64,9 @@ describe('compact reusable audiovisual library',()=>{
     // espera e a volta próprias (RENASCER_PROPRIO); a esfera, a terra, o veneno, a onda de energia e o feixe pesado são
     // as reservas dos golpes de energia, de pedra, de veneno/peste, de onda e de feixe sem família própria (vfxProfiles: ícones e nomes);
     // a execução é a reserva do golpe de execução (o Death Note e os nomes com "execu"), e o dreno a dos
-    // golpes que sugam (os nomes com "dreno", "absorver", "roubar"…)
-    const SO_NA_ARENA=new Set(['acido','sangue','maldicao','bloco_de_gelo','cura_em_area','esfera','terra','veneno','onda_de_energia','feixe_pesado','renascer','brasas_renascendo','provocar','reflexo','espinhos','vampirismo','dissipar','sono','cegueira','esquiva','ultima_resistencia','copia','purificacao','barreira_magica','execucao','dreno',...FAMILIAS_DO_JEITO,...Object.values(FAMILIA_DA_INVOCACAO),...Object.values(RENASCER_PROPRIO).flatMap(r=>[r.espera,r.volta]),
+    // golpes que sugam (os nomes com "dreno", "absorver", "roubar"…); o esmagar, a dos golpes de cima para baixo
+    // (os nomes com "smash", "martelo", "pisão"…) que ainda não têm efeito próprio
+    const SO_NA_ARENA=new Set(['acido','sangue','maldicao','bloco_de_gelo','cura_em_area','esfera','terra','veneno','onda_de_energia','feixe_pesado','renascer','brasas_renascendo','provocar','reflexo','espinhos','vampirismo','dissipar','sono','cegueira','esquiva','ultima_resistencia','copia','purificacao','barreira_magica','execucao','dreno','esmagar',...FAMILIAS_DO_JEITO,...Object.values(FAMILIA_DA_INVOCACAO),...Object.values(RENASCER_PROPRIO).flatMap(r=>[r.espera,r.volta]),
       // quem levanta um aliado tem o efeito próprio dele sobre quem volta (renascer-proprio.ts: REVIVER_PROPRIO)
       ...Object.values(REVIVER_PROPRIO),
       // a Mecânica única ativando como uma habilidade (unicas-efeitos.ts): o efeito dela em quem ativou

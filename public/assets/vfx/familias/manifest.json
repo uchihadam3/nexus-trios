@@ -377,6 +377,20 @@
   "laco": false,
   "bytes": 35446
  },
+ "allmight_preparo": {
+  "descricao": "All Might · as mechas e a aura dourada (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 24900
+ },
  "alucard_preparo": {
   "descricao": "Alucard · as almas girando (Preparo, laço)",
   "quadros": 12,
@@ -5627,6 +5641,34 @@
   "laco": true,
   "bytes": 6160
  },
+ "deku_preparo": {
+  "descricao": "Deku · o braço carregando raios (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 11550
+ },
+ "delaware_smash": {
+  "descricao": "Deku · o peteleco e a pressão do ar",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 24384
+ },
  "demolidor_preparo": {
   "descricao": "Demolidor · os chifres e o radar (Preparo, laço)",
   "quadros": 12,
@@ -7769,6 +7811,20 @@
   "laco": false,
   "bytes": 41052
  },
+ "estou_aqui": {
+  "descricao": "All Might · as mechas, o sorriso e o sol",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 60142
+ },
  "estrategia_divina": {
   "descricao": "Atena · a coruja e as linhas do trio",
   "quadros": 12,
@@ -8959,6 +9015,20 @@
   "laco": false,
   "bytes": 44244
  },
+ "fogo_de_abobora": {
+  "descricao": "Jack Esqueleto · a abóbora acesa voando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 31030
+ },
  "fogo_de_supressao": {
   "descricao": "Master Chief · a rajada do fuzil e as setas",
   "quadros": 12,
@@ -9420,6 +9490,20 @@
   ],
   "laco": false,
   "bytes": 23310
+ },
+ "full_cowl_corpo": {
+  "descricao": "Deku · os raios verdes pelo corpo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 48054
  },
  "fundacao_preparo": {
   "descricao": "Eren · o raio da transformação e o vapor (Preparo, laço)",
@@ -9981,6 +10065,20 @@
   "laco": false,
   "bytes": 79238
  },
+ "garras_de_leao": {
+  "descricao": "Scar · as garras em X",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 34222
+ },
  "garras_do_falcao": {
   "descricao": "Hórus · o mergulho e as garras",
   "quadros": 12,
@@ -10162,6 +10260,20 @@
   ],
   "laco": true,
   "bytes": 6352
+ },
+ "genio_preparo": {
+  "descricao": "Gênio · a lâmpada sendo esfregada (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 23188
  },
  "genjutsu_sasuke": {
   "descricao": "Sasuke · o Sharingan gigante e a confusão",
@@ -11283,6 +11395,20 @@
   "laco": true,
   "bytes": 20016
  },
+ "hienas": {
+  "descricao": "Scar · as três hienas correndo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 32196
+ },
  "hinokami_kagura": {
   "descricao": "Tanjiro · a Dança do Deus do Fogo: o halo de chamas e o corte",
   "quadros": 12,
@@ -12024,6 +12150,20 @@
   ],
   "laco": false,
   "bytes": 30306
+ },
+ "jack_esqueleto_preparo": {
+  "descricao": "Jack Esqueleto · a lua, a caveira e os morcegos (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 15242
  },
  "jack_preparo": {
   "descricao": "Samurai Jack · a mão na empunhadura (Preparo, laço)",
@@ -13788,6 +13928,20 @@
   ],
   "laco": true,
   "bytes": 25630
+ },
+ "longa_vida_ao_rei": {
+  "descricao": "Scar · a pata, a coroa partida e a queda",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 41024
  },
  "lotus_shaka": {
   "descricao": "Shaka · a mandala dourada girando (laço)",
@@ -21195,6 +21349,20 @@
   "laco": false,
   "bytes": 29990
  },
+ "noite_das_bruxas": {
+  "descricao": "Jack Esqueleto · a lua, os morcegos e as abóboras",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 55500
+ },
  "noite_de_halloween": {
   "descricao": "Michael Myers · as abóboras e o golpe final",
   "quadros": 12,
@@ -22637,6 +22805,20 @@
   "laco": false,
   "bytes": 26028
  },
+ "poder_cosmico": {
+  "descricao": "Gênio · o punho azul gigante e as estrelas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 47036
+ },
  "poder_da_triade": {
   "descricao": "Ganondorf · o triângulo da Força, a sombra e o escudo",
   "quadros": 12,
@@ -23056,6 +23238,20 @@
   ],
   "laco": false,
   "bytes": 50114
+ },
+ "primeiro_desejo": {
+  "descricao": "Gênio · a lâmpada e a fumaça correndo no trio",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 25696
  },
  "primeiros_socorros": {
   "descricao": "Leorio · a maleta, a faixa e a cruz",
@@ -25185,6 +25381,20 @@
   "laco": false,
   "bytes": 27256
  },
+ "roubar_a_voz": {
+  "descricao": "Úrsula · a concha puxando a voz",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 25948
+ },
  "roubar_carga": {
   "descricao": "Roubou Carga: a energia sai do rival",
   "quadros": 12,
@@ -25731,6 +25941,20 @@
   "laco": false,
   "bytes": 12034
  },
+ "scar_preparo": {
+  "descricao": "Scar · os olhos verdes e a cicatriz (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 18564
+ },
  "scooby_preparo": {
   "descricao": "Scooby-Doo · tremendo de medo (Preparo, laço)",
   "quadros": 12,
@@ -25772,6 +25996,20 @@
   ],
   "laco": false,
   "bytes": 24088
+ },
+ "segundo_desejo": {
+  "descricao": "Gênio · os braços de fumaça e os escudos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 51230
  },
  "segurar_o_impacto": {
   "descricao": "Sr. Incrível · o símbolo na frente do trio",
@@ -27397,6 +27635,20 @@
   "laco": false,
   "bytes": 69634
  },
+ "susto": {
+  "descricao": "Jack Esqueleto · a caveira e o BU!",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 26812
+ },
  "t800_preparo": {
   "descricao": "T-800 · a visão vermelha (Preparo, laço)",
   "quadros": 12,
@@ -27915,6 +28167,20 @@
   "laco": false,
   "bytes": 60374
  },
+ "tentaculos_de_ursula": {
+  "descricao": "Úrsula · os tentáculos enrolando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 39272
+ },
  "terra": {
   "descricao": "pedras rompendo o chão",
   "quadros": 12,
@@ -27956,6 +28222,20 @@
   ],
   "laco": false,
   "bytes": 86208
+ },
+ "texas_smash": {
+  "descricao": "All Might · o soco e a rajada reta",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 19260
  },
  "textura_surpresa": {
   "descricao": "Hisoka · a carta que crava e descasca",
@@ -28447,6 +28727,20 @@
   "laco": false,
   "bytes": 48790
  },
+ "tridente_da_bruxa": {
+  "descricao": "Úrsula · o redemoinho e a onda gigante",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 34990
+ },
  "tridente_de_poseidon": {
   "descricao": "Poseidon · o tridente e o jato",
   "quadros": 12,
@@ -28782,6 +29076,48 @@
   ],
   "laco": false,
   "bytes": 49622
+ },
+ "united_states_of_smash_allmight": {
+  "descricao": "All Might · o punho do alto, as listras e o tornado",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 65586
+ },
+ "united_states_of_smash_deku": {
+  "descricao": "Deku · o punho de raios e o tornado",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 65786
+ },
+ "ursula_preparo": {
+  "descricao": "Úrsula · o tridente e as moreias (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 15094
  },
  "vader_preparo": {
   "descricao": "Darth Vader · o sabre erguido e a respiração (Preparo, laço)",
