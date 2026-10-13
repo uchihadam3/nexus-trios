@@ -420,7 +420,7 @@ export const LOTE2: Record<string, Unica> = {
   },
   light: {
     nome: 'Página no relógio',
-    texto: 'Uma vez por luta, quando Light fica com menos de 30% da Vida, ele escreve um nome no pedaço do Death Note escondido no relógio: o rival mais investigado cai na hora se tiver 60 ou mais de Investigação. Se esse rival for imune (ou tiver menos de 60), leva 110 de dano e fica Exposto (+55% de dano recebido) por 14 s.',
+    texto: 'Uma vez por luta, quando Light fica com menos de 30% da Vida, Light escreve um nome no pedaço do Death Note escondido no relógio: o rival mais investigado cai na hora se tiver 60 ou mais de Investigação. Se esse rival for imune (ou tiver menos de 60), leva 110 de dano e fica Exposto (+55% de dano recebido) por 14 s.',
     ganchos: {
       passo(m, b, f) {
         const s = u(f);
