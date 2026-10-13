@@ -212,6 +212,12 @@ const T: Record<string, string> = {
   rimuru: 'devorar_rimuru grande_sabio corte_de_agua',
   ainz: 'toque_da_morte_ainz invocar_mortos o_fim_de_toda_vida',
   lelouch: 'geass_lelouch xadrez xeque_mate',
+  inuyasha: 'garras_de_aco_inuyasha tessaiga ferida_do_vento',
+  sesshomaru: 'garras_venenosas chicote_de_luz_sesshomaru bakusaiga',
+  kenshin: 'postura_kenshin batoujutsu amakakeru',
+  natsu: 'punho_do_dragao_de_fogo rugido_do_dragao_natsu lotus_carmesim',
+  erza: 'armadura_do_ceu armadura_de_adamantina armadura_do_purgatorio',
+  asta: 'matadora_de_demonios golpe_antimagia black_asta',
 };
 
 export const FAMILIA_DA_HABILIDADE: Record<string, VfxFamily> = Object.fromEntries(

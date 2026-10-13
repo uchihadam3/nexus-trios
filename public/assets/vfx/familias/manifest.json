@@ -433,6 +433,20 @@
   "laco": false,
   "bytes": 48746
  },
+ "amakakeru": {
+  "descricao": "Kenshin · o passo, o corte e o vácuo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 34618
+ },
  "amaterasu": {
   "descricao": "Sasuke · as chamas negras do Amaterasu",
   "quadros": 12,
@@ -797,6 +811,20 @@
   "laco": false,
   "bytes": 11782
  },
+ "armadura_de_adamantina": {
+  "descricao": "Erza · os dois escudos se juntando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 41310
+ },
  "armadura_de_doom": {
   "descricao": "Doutor Destino · a grade, a mira e o raio",
   "quadros": 12,
@@ -824,6 +852,34 @@
   ],
   "laco": false,
   "bytes": 43218
+ },
+ "armadura_do_ceu": {
+  "descricao": "Erza · as asas e a chuva de espadas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 35310
+ },
+ "armadura_do_purgatorio": {
+  "descricao": "Erza · a clava de espinhos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 38400
  },
  "arranhao_felino": {
   "descricao": "Básico da Mulher-Gato: o chicote e as garras",
@@ -936,6 +992,20 @@
   ],
   "laco": false,
   "bytes": 38448
+ },
+ "asta_preparo": {
+  "descricao": "Asta · a asa negra (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 18968
  },
  "asura": {
   "descricao": "Zoro · os nove cortes do demônio",
@@ -1314,6 +1384,20 @@
   ],
   "laco": true,
   "bytes": 36088
+ },
+ "bakusaiga": {
+  "descricao": "Sesshomaru · o corte e o veneno se espalhando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 31360
  },
  "bala_de_canhao": {
   "descricao": "bala de canhão em viagem (+x)",
@@ -1791,6 +1875,20 @@
   "laco": true,
   "bytes": 18472
  },
+ "batoujutsu": {
+  "descricao": "Kenshin · o saque num relâmpago",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 21030
+ },
  "bebop_preparo": {
   "descricao": "Bebop · o bufo e as patadas (Preparo, laço)",
   "quadros": 12,
@@ -2014,6 +2112,20 @@
   ],
   "laco": false,
   "bytes": 18630
+ },
+ "black_asta": {
+  "descricao": "Asta · a asa negra e os cortes em todos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 46326
  },
  "blasters_elementais": {
   "descricao": "Senhor das Estrelas: dois blasters alternando tiros de plasma",
@@ -3890,6 +4002,20 @@
   ],
   "laco": false,
   "bytes": 23996
+ },
+ "chicote_de_luz_sesshomaru": {
+  "descricao": "Sesshomaru · o chicote de luz enrolando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 25726
  },
  "chicote_de_rosas": {
   "descricao": "Kurama · o chicote de espinhos e as pétalas",
@@ -6859,6 +6985,20 @@
   "laco": false,
   "bytes": 118304
  },
+ "erza_preparo": {
+  "descricao": "Erza · as espadas girando no círculo (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 22276
+ },
  "escavar": {
   "descricao": "Knuckles · a terra subindo e o monte",
   "quadros": 12,
@@ -8833,6 +8973,20 @@
   "laco": false,
   "bytes": 22894
  },
+ "ferida_do_vento": {
+  "descricao": "Inuyasha · as cinco garras de vento",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 52146
+ },
  "festa_surpresa": {
   "descricao": "Michelangelo · os balões, o confete e a pizza",
   "quadros": 12,
@@ -10149,6 +10303,20 @@
   "laco": false,
   "bytes": 20288
  },
+ "garras_de_aco_inuyasha": {
+  "descricao": "Inuyasha · as garras em X e o sangue",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 30434
+ },
  "garras_de_ferro": {
   "descricao": "Básico do Inuyasha: as cinco garras",
   "quadros": 12,
@@ -10218,6 +10386,20 @@
   ],
   "laco": false,
   "bytes": 25234
+ },
+ "garras_venenosas": {
+  "descricao": "Sesshomaru · a garra pingando veneno",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 37036
  },
  "garrote": {
   "descricao": "Agente 47 · o fio apertando",
@@ -10624,6 +10806,20 @@
   ],
   "laco": false,
   "bytes": 74682
+ },
+ "golpe_antimagia": {
+  "descricao": "Asta · o corte e os selos quebrando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 30644
  },
  "golpe_ascendente": {
   "descricao": "Cloud · Golpe ascendente: a Buster Sword sobe num arco",
@@ -11857,6 +12053,20 @@
   "laco": false,
   "bytes": 42452
  },
+ "inuyasha_preparo": {
+  "descricao": "Inuyasha · a Tessaiga e o vento (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 11814
+ },
  "inv_androide": {
   "descricao": "Androide de combate: soco-foguete",
   "quadros": 12,
@@ -12836,6 +13046,20 @@
   ],
   "laco": true,
   "bytes": 6730
+ },
+ "kenshin_preparo": {
+  "descricao": "Kenshin · a bainha brilhando (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 17718
  },
  "keyblade": {
   "descricao": "Sora: golpe de chave-espada com estrelinhas",
@@ -14139,6 +14363,20 @@
   "laco": false,
   "bytes": 41024
  },
+ "lotus_carmesim": {
+  "descricao": "Natsu · a lótus de fogo abrindo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 53270
+ },
  "lotus_shaka": {
   "descricao": "Shaka · a mandala dourada girando (laço)",
   "quadros": 12,
@@ -14894,6 +15132,20 @@
   ],
   "laco": false,
   "bytes": 38640
+ },
+ "matadora_de_demonios": {
+  "descricao": "Asta · a espada negra cortando a magia",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 32024
  },
  "matadora_guts": {
   "descricao": "Guts · o arco pesado da Matadora de Dragões",
@@ -21475,6 +21727,20 @@
   "laco": true,
   "bytes": 12142
  },
+ "natsu_preparo": {
+  "descricao": "Natsu · as chamas nas duas mãos (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 23168
+ },
  "nemesis_preparo": {
   "descricao": "Nêmesis · a sombra e os passos (Preparo, laço)",
   "quadros": 12,
@@ -23281,6 +23547,20 @@
   "laco": false,
   "bytes": 54832
  },
+ "postura_kenshin": {
+  "descricao": "Kenshin · a espada na bainha e a aura",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 49920
+ },
  "postura_mishima": {
   "descricao": "Jin · a guarda e o brilho",
   "quadros": 12,
@@ -23784,6 +24064,20 @@
   ],
   "laco": false,
   "bytes": 74138
+ },
+ "punho_do_dragao_de_fogo": {
+  "descricao": "Natsu · o punho em chamas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 31684
  },
  "punho_do_trovao": {
   "descricao": "Básico do Heihachi: o gancho e o trovão",
@@ -25717,6 +26011,20 @@
   "laco": false,
   "bytes": 25228
  },
+ "rugido_do_dragao_natsu": {
+  "descricao": "Natsu · o rugido de fogo em cone",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 45120
+ },
  "rugido_do_hulk": {
   "descricao": "Hulk · as ondas do rugido chegando, o rival treme",
   "quadros": 12,
@@ -26556,6 +26864,20 @@
   ],
   "laco": false,
   "bytes": 42152
+ },
+ "sesshomaru_preparo": {
+  "descricao": "Sesshomaru · a lua e a Bakusaiga (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 21162
  },
  "set_preparo": {
   "descricao": "Set · a adaga escondida (Preparo, laço)",
@@ -28502,6 +28824,20 @@
   ],
   "laco": false,
   "bytes": 86208
+ },
+ "tessaiga": {
+  "descricao": "Inuyasha · a Tessaiga crescendo e o corte",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 33776
  },
  "texas_smash": {
   "descricao": "All Might · o soco e a rajada reta",

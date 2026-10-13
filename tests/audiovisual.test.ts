@@ -8,6 +8,7 @@ import { readFileSync,readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { SOM_DA_FAMILIA,TODOS_OS_SONS,type Manifesto } from '../src/audio/cues';
 import { FAMILIAS,VFX_FAMILIES,folhasUsadas,hsl,profileFor } from '../src/presentation/vfxProfiles';
+import { FAMILIAS_NOVAS } from '../src/presentation/vfx-familias-novas';
 import { characters } from '../src/data/characters';
 import { FAIXAS,LACO_DA_MUSICA,faixaDaLuta,posicaoNoLaco } from '../src/lib/audio';
 
@@ -65,8 +66,11 @@ describe('compact reusable audiovisual library',()=>{
     // as reservas dos golpes de energia, de pedra, de veneno/peste, de onda e de feixe sem família própria (vfxProfiles: ícones e nomes);
     // a execução é a reserva do golpe de execução (o Death Note e os nomes com "execu"), e o dreno a dos
     // golpes que sugam (os nomes com "dreno", "absorver", "roubar"…); o esmagar, a dos golpes de cima para baixo
-    // (os nomes com "smash", "martelo", "pisão"…) e o míssil, a dos projéteis que explodem, quando ainda não têm efeito próprio
-    const SO_NA_ARENA=new Set(['acido','sangue','maldicao','bloco_de_gelo','cura_em_area','esfera','terra','veneno','onda_de_energia','feixe_pesado','renascer','brasas_renascendo','provocar','reflexo','espinhos','vampirismo','dissipar','sono','cegueira','esquiva','ultima_resistencia','copia','purificacao','barreira_magica','execucao','dreno','esmagar','missil',...FAMILIAS_DO_JEITO,...Object.values(FAMILIA_DA_INVOCACAO),...Object.values(RENASCER_PROPRIO).flatMap(r=>[r.espera,r.volta]),
+    // (os nomes com "smash", "martelo", "pisão"…), o míssil a dos projéteis que explodem e a onda de choque a dos
+    // golpes que empurram em onda, quando ainda não têm efeito próprio. Do mesmo jeito, toda família original
+    // (vfxProfiles: ORIGINAIS) é reserva: é com elas que o jogo dá efeito ao golpe sem família própria (pelo nome e
+    // pelo ícone), então ficam mesmo quando as rodadas dão a cada personagem o efeito dele; a conta abaixo vale para as novas
+    const SO_NA_ARENA=new Set(['acido','sangue','maldicao','bloco_de_gelo','cura_em_area','esfera','terra','veneno','onda_de_energia','feixe_pesado','renascer','brasas_renascendo','provocar','reflexo','espinhos','vampirismo','dissipar','sono','cegueira','esquiva','ultima_resistencia','copia','purificacao','barreira_magica','execucao','dreno','esmagar','missil','onda_de_choque',...FAMILIAS.filter(f=>!(f in FAMILIAS_NOVAS)),...FAMILIAS_DO_JEITO,...Object.values(FAMILIA_DA_INVOCACAO),...Object.values(RENASCER_PROPRIO).flatMap(r=>[r.espera,r.volta]),
       // quem levanta um aliado tem o efeito próprio dele sobre quem volta (renascer-proprio.ts: REVIVER_PROPRIO)
       ...Object.values(REVIVER_PROPRIO),
       // a Mecânica única ativando como uma habilidade (unicas-efeitos.ts): o efeito dela em quem ativou

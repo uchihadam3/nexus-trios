@@ -529,6 +529,23 @@
    ],
    "bytes": 61807
   },
+  "amakakeru": {
+   "arquivo": "amakakeru.mp3",
+   "descricao": "Kenshin: Amakakeru",
+   "versoes": [
+    0.0,
+    2.48,
+    5.047,
+    7.4459
+   ],
+   "duracoes": [
+    2.4,
+    2.487,
+    2.3188,
+    2.4365
+   ],
+   "bytes": 80758
+  },
   "amaterasu": {
    "arquivo": "amaterasu.mp3",
    "descricao": "Amaterasu: as chamas negras que não se apagam",
@@ -1005,6 +1022,23 @@
    ],
    "bytes": 61147
   },
+  "armadura-de-adamantina": {
+   "arquivo": "armadura-de-adamantina.mp3",
+   "descricao": "Erza: armadura de adamantina",
+   "versoes": [
+    0.0,
+    2.18,
+    4.4361,
+    6.5451
+   ],
+   "duracoes": [
+    2.1,
+    2.1761,
+    2.029,
+    2.132
+   ],
+   "bytes": 64735
+  },
   "armadura-de-doom": {
    "arquivo": "armadura-de-doom.mp3",
    "descricao": "Doutor Destino: a análise, o raio e o escudo",
@@ -1038,6 +1072,40 @@
     1.7673
    ],
    "bytes": 85157
+  },
+  "armadura-do-ceu": {
+   "arquivo": "armadura-do-ceu.mp3",
+   "descricao": "Erza: armadura do céu",
+   "versoes": [
+    0.0,
+    2.58,
+    5.2507,
+    7.7461
+   ],
+   "duracoes": [
+    2.5,
+    2.5907,
+    2.4154,
+    2.538
+   ],
+   "bytes": 84770
+  },
+  "armadura-do-purgatorio": {
+   "arquivo": "armadura-do-purgatorio.mp3",
+   "descricao": "Erza: armadura do purgatório",
+   "versoes": [
+    0.0,
+    2.58,
+    5.2507,
+    7.7461
+   ],
+   "duracoes": [
+    2.5,
+    2.5907,
+    2.4154,
+    2.538
+   ],
+   "bytes": 80944
   },
   "arranhao-felino": {
    "arquivo": "arranhao-felino.mp3",
@@ -1174,6 +1242,23 @@
     1.9763
    ],
    "bytes": 60226
+  },
+  "asta-preparo": {
+   "arquivo": "asta-preparo.mp3",
+   "descricao": "Asta: o braço do demônio (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 50689
   },
   "asura": {
    "arquivo": "asura.mp3",
@@ -1616,6 +1701,23 @@
     1.4213
    ],
    "bytes": 56038
+  },
+  "bakusaiga": {
+   "arquivo": "bakusaiga.mp3",
+   "descricao": "Sesshomaru: Bakusaiga",
+   "versoes": [
+    0.0,
+    2.557,
+    5.2276,
+    7.7231
+   ],
+   "duracoes": [
+    2.477,
+    2.5907,
+    2.4154,
+    2.5159
+   ],
+   "bytes": 86651
   },
   "baloes-vermelhos": {
    "arquivo": "baloes-vermelhos.mp3",
@@ -2161,6 +2263,23 @@
    ],
    "bytes": 38898
   },
+  "batoujutsu": {
+   "arquivo": "batoujutsu.mp3",
+   "descricao": "Kenshin: Batoujutsu",
+   "versoes": [
+    0.0,
+    1.5635,
+    3.1799,
+    4.6945
+   ],
+   "duracoes": [
+    1.4835,
+    1.5364,
+    1.4346,
+    1.517
+   ],
+   "bytes": 56909
+  },
   "bebop-preparo": {
    "arquivo": "bebop-preparo.mp3",
    "descricao": "Bebop: o bufo (Preparo)",
@@ -2432,6 +2551,23 @@
     1.3653
    ],
    "bytes": 47328
+  },
+  "black-asta": {
+   "arquivo": "black-asta.mp3",
+   "descricao": "Asta: Black Asta",
+   "versoes": [
+    0.0,
+    2.78,
+    5.6579,
+    8.3466
+   ],
+   "duracoes": [
+    2.7,
+    2.7979,
+    2.6087,
+    2.7411
+   ],
+   "bytes": 98752
   },
   "blasters-elementais": {
    "arquivo": "blasters-elementais.mp3",
@@ -4506,6 +4642,23 @@
     1.314
    ],
    "bytes": 47812
+  },
+  "chicote-de-luz-sesshomaru": {
+   "arquivo": "chicote-de-luz-sesshomaru.mp3",
+   "descricao": "Sesshomaru: chicote de luz",
+   "versoes": [
+    0.0,
+    1.4047,
+    2.9011,
+    4.3038
+   ],
+   "duracoes": [
+    1.3247,
+    1.4164,
+    1.3227,
+    1.38
+   ],
+   "bytes": 44119
   },
   "chicote-de-rosas": {
    "arquivo": "chicote-de-rosas.mp3",
@@ -8026,6 +8179,23 @@
    ],
    "bytes": 21811
   },
+  "erza-preparo": {
+   "arquivo": "erza-preparo.mp3",
+   "descricao": "Erza: as espadas girando (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 60668
+  },
   "escavar": {
    "arquivo": "escavar.mp3",
    "descricao": "Knuckles: escavar",
@@ -10236,6 +10406,23 @@
    ],
    "bytes": 44879
   },
+  "ferida-do-vento": {
+   "arquivo": "ferida-do-vento.mp3",
+   "descricao": "Inuyasha: Ferida do Vento",
+   "versoes": [
+    0.0,
+    2.78,
+    5.6579,
+    8.3466
+   ],
+   "duracoes": [
+    2.7,
+    2.7979,
+    2.6087,
+    2.7411
+   ],
+   "bytes": 92009
+  },
   "festa-surpresa": {
    "arquivo": "festa-surpresa.mp3",
    "descricao": "Michelangelo: a festa surpresa",
@@ -11834,6 +12021,23 @@
    ],
    "bytes": 42494
   },
+  "garras-de-aco-inuyasha": {
+   "arquivo": "garras-de-aco-inuyasha.mp3",
+   "descricao": "Inuyasha: garras de aço",
+   "versoes": [
+    0.0,
+    1.4524,
+    3.0592,
+    4.4776
+   ],
+   "duracoes": [
+    1.3724,
+    1.5268,
+    1.3383,
+    1.4778
+   ],
+   "bytes": 50563
+  },
   "garras-de-ferro": {
    "arquivo": "garras-de-ferro.mp3",
    "descricao": "básico do Inuyasha: as cinco garras",
@@ -11918,6 +12122,23 @@
     1.1605
    ],
    "bytes": 40090
+  },
+  "garras-venenosas": {
+   "arquivo": "garras-venenosas.mp3",
+   "descricao": "Sesshomaru: garras venenosas",
+   "versoes": [
+    0.0,
+    1.4896,
+    3.027,
+    4.4659
+   ],
+   "duracoes": [
+    1.4096,
+    1.4574,
+    1.3589,
+    1.4643
+   ],
+   "bytes": 56295
   },
   "garrote": {
    "arquivo": "garrote.mp3",
@@ -12411,6 +12632,23 @@
     1.0152
    ],
    "bytes": 36594
+  },
+  "golpe-antimagia": {
+   "arquivo": "golpe-antimagia.mp3",
+   "descricao": "Asta: golpe antimagia",
+   "versoes": [
+    0.0,
+    1.7061,
+    3.4889,
+    5.1862
+   ],
+   "duracoes": [
+    1.6261,
+    1.7028,
+    1.6173,
+    1.6157
+   ],
+   "bytes": 56752
   },
   "golpe-ascendente": {
    "arquivo": "golpe-ascendente.mp3",
@@ -13942,6 +14180,23 @@
    ],
    "bytes": 32390
   },
+  "inuyasha-preparo": {
+   "arquivo": "inuyasha-preparo.mp3",
+   "descricao": "Inuyasha: a Tessaiga erguida (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 56307
+  },
   "inv-androide": {
    "arquivo": "inv-androide.mp3",
    "descricao": "família inv androide",
@@ -15199,6 +15454,23 @@
     1.4213
    ],
    "bytes": 51187
+  },
+  "kenshin-preparo": {
+   "arquivo": "kenshin-preparo.mp3",
+   "descricao": "Kenshin: a lâmina na bainha (Preparo)",
+   "versoes": [
+    0.0,
+    1.47,
+    2.9705,
+    4.3857
+   ],
+   "duracoes": [
+    1.39,
+    1.4205,
+    1.3352,
+    1.4127
+   ],
+   "bytes": 44516
   },
   "keyblade": {
    "arquivo": "keyblade.mp3",
@@ -16747,6 +17019,23 @@
    ],
    "bytes": 97424
   },
+  "lotus-carmesim": {
+   "arquivo": "lotus-carmesim.mp3",
+   "descricao": "Natsu: lótus carmesim",
+   "versoes": [
+    0.0,
+    2.88,
+    5.8615,
+    8.6468
+   ],
+   "duracoes": [
+    2.8,
+    2.9015,
+    2.7053,
+    2.8426
+   ],
+   "bytes": 98260
+  },
   "lotus-shaka": {
    "arquivo": "lotus-shaka.mp3",
    "descricao": "a meditação do Shaka no Preparo",
@@ -17630,6 +17919,23 @@
     1.9289
    ],
    "bytes": 57710
+  },
+  "matadora-de-demonios": {
+   "arquivo": "matadora-de-demonios.mp3",
+   "descricao": "Asta: matadora de demônios",
+   "versoes": [
+    0.0,
+    1.9921,
+    4.0754,
+    6.0171
+   ],
+   "duracoes": [
+    1.9121,
+    2.0033,
+    1.8617,
+    1.9548
+   ],
+   "bytes": 71635
   },
   "matadora-guts": {
    "arquivo": "matadora-guts.mp3",
@@ -25655,6 +25961,23 @@
    ],
    "bytes": 74859
   },
+  "natsu-preparo": {
+   "arquivo": "natsu-preparo.mp3",
+   "descricao": "Natsu: as chamas nas mãos (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 55054
+  },
   "nemesis-preparo": {
    "arquivo": "nemesis-preparo.mp3",
    "descricao": "Nêmesis: o rosnado e os passos (Preparo)",
@@ -27746,6 +28069,23 @@
    ],
    "bytes": 76629
   },
+  "postura-kenshin": {
+   "arquivo": "postura-kenshin.mp3",
+   "descricao": "Kenshin: postura",
+   "versoes": [
+    0.0,
+    1.6561,
+    3.382,
+    5.023
+   ],
+   "duracoes": [
+    1.5761,
+    1.6459,
+    1.561,
+    1.5782
+   ],
+   "bytes": 52594
+  },
   "postura-mishima": {
    "arquivo": "postura-mishima.mp3",
    "descricao": "Jin: a postura Mishima",
@@ -28391,6 +28731,23 @@
     1.3705
    ],
    "bytes": 47027
+  },
+  "punho-do-dragao-de-fogo": {
+   "arquivo": "punho-do-dragao-de-fogo.mp3",
+   "descricao": "Natsu: punho do dragão de fogo",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    1.9935
+   ],
+   "bytes": 68369
   },
   "punho-do-trovao": {
    "arquivo": "punho-do-trovao.mp3",
@@ -30755,6 +31112,23 @@
    ],
    "bytes": 86508
   },
+  "rugido-do-dragao-natsu": {
+   "arquivo": "rugido-do-dragao-natsu.mp3",
+   "descricao": "Natsu: rugido do dragão",
+   "versoes": [
+    0.0,
+    2.3059,
+    4.7232,
+    6.9788
+   ],
+   "duracoes": [
+    2.2259,
+    2.3373,
+    2.1756,
+    2.2099
+   ],
+   "bytes": 77938
+  },
   "rugido-do-hulk": {
    "arquivo": "rugido-do-hulk.mp3",
    "descricao": "Rugido: o urro longo e grave",
@@ -31740,6 +32114,23 @@
     1.3198
    ],
    "bytes": 66831
+  },
+  "sesshomaru-preparo": {
+   "arquivo": "sesshomaru-preparo.mp3",
+   "descricao": "Sesshomaru: a Bakusaiga pulsando (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 48052
   },
   "set-preparo": {
    "arquivo": "set-preparo.mp3",
@@ -33950,6 +34341,23 @@
     2.132
    ],
    "bytes": 59965
+  },
+  "tessaiga": {
+   "arquivo": "tessaiga.mp3",
+   "descricao": "Inuyasha: Tessaiga",
+   "versoes": [
+    0.0,
+    2.28,
+    4.6398,
+    6.8454
+   ],
+   "duracoes": [
+    2.2,
+    2.2798,
+    2.1256,
+    2.2335
+   ],
+   "bytes": 67643
   },
   "texas-smash": {
    "arquivo": "texas-smash.mp3",
