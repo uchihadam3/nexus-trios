@@ -182,6 +182,12 @@ const T: Record<string, string> = {
   predator: 'canhao_de_plasma camuflagem_predador trofeu',
   darthvader: 'esganadura_da_forca sabre_vermelho_vader lado_sombrio',
   yoda: 'empurrao_da_forca escudo_da_forca sabre_do_mestre',
+  luke: 'sabre_verde_luke defletir tiro_na_trincheira',
+  palpatine: 'raio_da_forca_palpatine tudo_conforme_o_plano poder_ilimitado',
+  neo: 'kung_fu parar_as_balas o_escolhido',
+  agentsmith: 'soco_do_agente_smith copias_do_smith assimilar',
+  johnwick: 'tiro_na_testa_wick lapis excomunicado',
+  t800: 'escopeta_t800 eu_voltarei hasta_la_vista',
 };
 
 export const FAMILIA_DA_HABILIDADE: Record<string, VfxFamily> = Object.fromEntries(

@@ -867,6 +867,20 @@
   "laco": false,
   "bytes": 34264
  },
+ "assimilar": {
+  "descricao": "Agente Smith · o código passando para ele",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 38448
+ },
  "asura": {
   "descricao": "Zoro · os nove cortes do demônio",
   "quadros": 12,
@@ -4535,6 +4549,20 @@
   "laco": false,
   "bytes": 38970
  },
+ "copias_do_smith": {
+  "descricao": "Agente Smith · as cópias surgindo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 32274
+ },
  "corpo_de_borracha": {
   "descricao": "Luffy · Corpo de borracha: estica e os golpes ricocheteiam",
   "quadros": 12,
@@ -5430,6 +5458,20 @@
   ],
   "laco": false,
   "bytes": 61418
+ },
+ "defletir": {
+  "descricao": "Luke · o sabre devolvendo os tiros",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 24376
  },
  "deflexao_sekiro": {
   "descricao": "Sekiro · a deflexão e a faísca",
@@ -6551,6 +6593,20 @@
   "laco": false,
   "bytes": 22590
  },
+ "escopeta_t800": {
+  "descricao": "T-800 · a escopeta e os chumbos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 24252
+ },
  "escudada_de_atena": {
   "descricao": "Básico de Atena: o escudo batendo",
   "quadros": 12,
@@ -7615,6 +7671,20 @@
   "laco": false,
   "bytes": 51918
  },
+ "eu_voltarei": {
+  "descricao": "T-800 · o crânio de metal e a placa",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 15808
+ },
  "evolucao_autonoma": {
   "descricao": "Ultron · os circuitos reescritos e o raio que corta",
   "quadros": 12,
@@ -7628,6 +7698,20 @@
   ],
   "laco": false,
   "bytes": 12502
+ },
+ "excomunicado": {
+  "descricao": "John Wick · a rajada e os cartuchos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 50338
  },
  "execucao": {
   "descricao": "execução",
@@ -10765,6 +10849,20 @@
   "laco": true,
   "bytes": 60272
  },
+ "hasta_la_vista": {
+  "descricao": "T-800 · o tiro com toda a energia",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 48748
+ },
  "heartless_angel": {
   "descricao": "Sephiroth · a asa enorme e a luz drenada",
   "quadros": 12,
@@ -12319,6 +12417,20 @@
   "laco": false,
   "bytes": 40760
  },
+ "kung_fu": {
+  "descricao": "Neo · o código e os golpes",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 38886
+ },
  "kurama_preparo": {
   "descricao": "Kurama · a rosa girando e as pétalas (Preparo, laço)",
   "quadros": 12,
@@ -12851,6 +12963,20 @@
   "laco": false,
   "bytes": 18848
  },
+ "lapis": {
+  "descricao": "John Wick · o lápis girando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 16162
+ },
  "lara_preparo": {
   "descricao": "Lara · a mira respirando (Preparo, laço)",
   "quadros": 12,
@@ -13368,6 +13494,20 @@
   ],
   "laco": true,
   "bytes": 15872
+ },
+ "luke_preparo": {
+  "descricao": "Luke · a mira do X-Wing (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 5194
  },
  "lupa_da_velma": {
   "descricao": "Velma · a lupa e a exclamação",
@@ -20551,6 +20691,20 @@
   "laco": true,
   "bytes": 43632
  },
+ "neo_preparo": {
+  "descricao": "Neo · o código escorrendo (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 19642
+ },
  "nero_preparo": {
   "descricao": "Nero · a Red Queen roncando (Preparo, laço)",
   "quadros": 12,
@@ -20690,6 +20844,20 @@
   ],
   "laco": false,
   "bytes": 54366
+ },
+ "o_escolhido": {
+  "descricao": "Neo · o rival se desfazendo em código",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 34226
  },
  "o_poder_e_de_voces": {
   "descricao": "Capitão Planeta · o planeta e a luz",
@@ -21097,6 +21265,20 @@
   "laco": false,
   "bytes": 106802
  },
+ "palpatine_preparo": {
+  "descricao": "Palpatine · a eletricidade entre as mãos (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 18176
+ },
  "pancada_de_sangue": {
   "descricao": "Pancada de sangue de Power: martelo de sangue e gotas espirrando",
   "quadros": 12,
@@ -21180,6 +21362,20 @@
   ],
   "laco": false,
   "bytes": 55936
+ },
+ "parar_as_balas": {
+  "descricao": "Neo · as balas paradas no ar",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 14090
  },
  "parede_congelada": {
   "descricao": "Gelado · a parede de gelo subindo",
@@ -21978,6 +22174,20 @@
   ],
   "laco": false,
   "bytes": 36138
+ },
+ "poder_ilimitado": {
+  "descricao": "Palpatine · a tempestade de relâmpagos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 52264
  },
  "poeira_na_pista": {
   "descricao": "Papa-Léguas · a cortina de poeira",
@@ -23112,6 +23322,20 @@
   ],
   "laco": false,
   "bytes": 40686
+ },
+ "raio_da_forca_palpatine": {
+  "descricao": "Palpatine · os relâmpagos da Força",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 50400
  },
  "raio_de_aku": {
   "descricao": "Básico do Aku: os olhos de laser",
@@ -24583,6 +24807,20 @@
   "laco": false,
   "bytes": 21094
  },
+ "sabre_verde_luke": {
+  "descricao": "Luke · o sabre verde",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 23822
+ },
  "sabre_vermelho": {
   "descricao": "Básico do Vader: o sabre vermelho descendo",
   "quadros": 12,
@@ -25521,6 +25759,20 @@
   "laco": false,
   "bytes": 49634
  },
+ "smith_preparo": {
+  "descricao": "Agente Smith · a mão escorrendo código (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 14930
+ },
  "sniper_preparo": {
   "descricao": "Justiceiro · a luneta respirando (Preparo, laço)",
   "quadros": 12,
@@ -25800,6 +26052,20 @@
   ],
   "laco": false,
   "bytes": 19964
+ },
+ "soco_do_agente_smith": {
+  "descricao": "Agente Smith · o soco de terno",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 26020
  },
  "soco_do_diabo": {
   "descricao": "Kazuya: soco com raios do Gene do Diabo",
@@ -26486,6 +26752,20 @@
   ],
   "laco": false,
   "bytes": 69634
+ },
+ "t800_preparo": {
+  "descricao": "T-800 · a visão vermelha (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 15250
  },
  "taco_de_beisebol": {
   "descricao": "Taco de beisebol da Arlequina: giro com rastro, CRACK, estrelinhas e um coração",
@@ -27215,6 +27495,34 @@
   "laco": false,
   "bytes": 12126
  },
+ "tiro_na_testa_wick": {
+  "descricao": "John Wick · o tiro e a mira",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 15720
+ },
+ "tiro_na_trincheira": {
+  "descricao": "Luke · os torpedos de prótons",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 37212
+ },
  "tiro_nervoso": {
   "descricao": "Básico do Morty: o tiro que erra e o de raspão",
   "quadros": 12,
@@ -27676,6 +27984,20 @@
   ],
   "laco": false,
   "bytes": 50422
+ },
+ "tudo_conforme_o_plano": {
+  "descricao": "Palpatine · o capuz e as peças",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 16494
  },
  "uivo_de_fenrir": {
   "descricao": "Fenrir · o uivo para a lua",
@@ -28474,6 +28796,20 @@
   ],
   "laco": false,
   "bytes": 24388
+ },
+ "wick_preparo": {
+  "descricao": "John Wick · a moeda de ouro (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 7734
  },
  "witch_time": {
   "descricao": "Bayonetta · o relógio roxo e a onda de tempo lento",
