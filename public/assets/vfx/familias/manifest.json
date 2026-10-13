@@ -11717,6 +11717,20 @@
   "laco": false,
   "bytes": 36536
  },
+ "golpe_de_mao_sukuna": {
+  "descricao": "básico do Sukuna: a mão em faca e o risco fino no ar",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 22702
+ },
  "golpe_de_panico": {
   "descricao": "Golpe de pânico de Anya: tapinhas, suor, '!' e estrelinhas",
   "quadros": 12,
@@ -13382,6 +13396,20 @@
   ],
   "laco": false,
   "bytes": 30306
+ },
+ "jab_de_luva_vermelha": {
+  "descricao": "básico do Saitama: o jab de luva vermelha e o POW de quadrinho",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 26984
  },
  "jack_esqueleto_preparo": {
   "descricao": "Jack Esqueleto · a lua, a caveira e os morcegos (Preparo, laço)",
@@ -28713,6 +28741,20 @@
   "laco": false,
   "bytes": 86792
  },
+ "soco_da_corrente": {
+  "descricao": "básico do Kurapika: o punho enrolado na corrente e os elos estalando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 29666
+ },
  "soco_da_manopla": {
   "descricao": "básico do Thanos: a Manopla do Infinito com as Joias e o chão rachando",
   "quadros": 12,
@@ -28741,6 +28783,20 @@
   "laco": false,
   "bytes": 113544
  },
+ "soco_das_sombras": {
+  "descricao": "básico do Megumi: o punho sai da sombra e espirra tinta escura",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 39408
+ },
  "soco_de_aco": {
   "descricao": "Soco de aço: barreira do som e anéis de choque",
   "quadros": 12,
@@ -28768,6 +28824,20 @@
   ],
   "laco": false,
   "bytes": 23922
+ },
+ "soco_de_automail": {
+  "descricao": "básico do Edward: o braço de automail, faíscas e a alquimia estalando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 30474
  },
  "soco_de_cem_toneladas": {
   "descricao": "Tsunade · o soco e o chão rachando",
@@ -28923,6 +28993,20 @@
   "laco": false,
   "bytes": 28268
  },
+ "soco_divergente": {
+  "descricao": "básico do Yuji: o Punho Divergente, com o segundo impacto atrasado",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 39064
+ },
  "soco_do_agente": {
   "descricao": "Básico do Smith: as cópias e o glitch",
   "quadros": 12,
@@ -28978,6 +29062,20 @@
   ],
   "laco": false,
   "bytes": 32458
+ },
+ "soco_do_gon": {
+  "descricao": "básico do Gon: a aura de Nen em labaredas e o estouro redondo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 44494
  },
  "soco_do_hulk": {
   "descricao": "Hulk · o soco enorme e a onda de choque para os lados",
@@ -29062,6 +29160,20 @@
   ],
   "laco": false,
   "bytes": 36606
+ },
+ "soco_endurecido": {
+  "descricao": "básico do Eren: o punho cristaliza e solta lascas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 31424
  },
  "soco_espinhoso": {
   "descricao": "Knuckles · a luva com espinhos",

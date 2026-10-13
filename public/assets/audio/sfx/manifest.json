@@ -13738,6 +13738,23 @@
    ],
    "bytes": 71999
   },
+  "golpe-de-mao-sukuna": {
+   "arquivo": "golpe-de-mao-sukuna.mp3",
+   "descricao": "básico de Sukuna: a mão em faca rasgando o ar e o estalo seco",
+   "versoes": [
+    0.0,
+    0.647,
+    1.3698,
+    1.9722
+   ],
+   "duracoes": [
+    0.567,
+    0.6428,
+    0.5224,
+    0.5679
+   ],
+   "bytes": 24463
+  },
   "golpe-de-panico": {
    "arquivo": "golpe-de-panico.mp3",
    "descricao": "básico de Anya: tapinhas cômicos, 'boing' e estrelinhas",
@@ -15811,6 +15828,23 @@
     1.9289
    ],
    "bytes": 60396
+  },
+  "jab-de-luva-vermelha": {
+   "arquivo": "jab-de-luva-vermelha.mp3",
+   "descricao": "básico de Saitama: jab abafado de luva e o pow de desenho",
+   "versoes": [
+    0.0,
+    0.7217,
+    1.4456,
+    2.2129
+   ],
+   "duracoes": [
+    0.6417,
+    0.6439,
+    0.6873,
+    0.6176
+   ],
+   "bytes": 21348
   },
   "jack-esqueleto-preparo": {
    "arquivo": "jack-esqueleto-preparo.mp3",
@@ -34274,6 +34308,23 @@
    ],
    "bytes": 61752
   },
+  "soco-da-corrente": {
+   "arquivo": "soco-da-corrente.mp3",
+   "descricao": "básico de Kurapika: a corrente tilintando e o soco",
+   "versoes": [
+    0.0,
+    0.8466,
+    1.8143,
+    2.7688
+   ],
+   "duracoes": [
+    0.7666,
+    0.8878,
+    0.8744,
+    0.8102
+   ],
+   "bytes": 30860
+  },
   "soco-da-manopla": {
    "arquivo": "soco-da-manopla.mp3",
    "descricao": "básico de Thanos: soco grave, o chão rachando e o brilho das Joias",
@@ -34308,6 +34359,23 @@
    ],
    "bytes": 54537
   },
+  "soco-das-sombras": {
+   "arquivo": "soco-das-sombras.mp3",
+   "descricao": "básico de Megumi: a sombra borbulhando, o soco e os respingos",
+   "versoes": [
+    0.0,
+    1.0137,
+    2.13,
+    3.0805
+   ],
+   "duracoes": [
+    0.9337,
+    1.0363,
+    0.8705,
+    0.8967
+   ],
+   "bytes": 32129
+  },
   "soco-de-aco": {
    "arquivo": "soco-de-aco.mp3",
    "descricao": "básico de Superman: estrondo sônico duplo e o soco pesado",
@@ -34341,6 +34409,23 @@
     1.0152
    ],
    "bytes": 45524
+  },
+  "soco-de-automail": {
+   "arquivo": "soco-de-automail.mp3",
+   "descricao": "básico de Edward: o metal rangendo, o soco de aço e a alquimia estalando",
+   "versoes": [
+    0.0,
+    0.9654,
+    1.9524,
+    2.9127
+   ],
+   "duracoes": [
+    0.8854,
+    0.907,
+    0.8803,
+    1.0152
+   ],
+   "bytes": 32306
   },
   "soco-de-cem-toneladas": {
    "arquivo": "soco-de-cem-toneladas.mp3",
@@ -34529,6 +34614,23 @@
    ],
    "bytes": 43988
   },
+  "soco-divergente": {
+   "arquivo": "soco-divergente.mp3",
+   "descricao": "básico de Yuji: o soco e o segundo impacto atrasado",
+   "versoes": [
+    0.0,
+    1.03,
+    2.0944,
+    3.0923
+   ],
+   "duracoes": [
+    0.95,
+    0.9844,
+    0.9179,
+    0.9644
+   ],
+   "bytes": 32342
+  },
   "soco-do-agente": {
    "arquivo": "soco-do-agente.mp3",
    "descricao": "básico do Smith: o glitch e os socos",
@@ -34596,6 +34698,23 @@
     0.9644
    ],
    "bytes": 31346
+  },
+  "soco-do-gon": {
+   "arquivo": "soco-do-gon.mp3",
+   "descricao": "básico de Gon: a aura de Nen chiando e o soco cheio",
+   "versoes": [
+    0.0,
+    1.03,
+    2.0944,
+    3.0923
+   ],
+   "duracoes": [
+    0.95,
+    0.9844,
+    0.9179,
+    0.9644
+   ],
+   "bytes": 31739
   },
   "soco-do-hulk": {
    "arquivo": "soco-do-hulk.mp3",
@@ -34698,6 +34817,23 @@
     2.335
    ],
    "bytes": 71156
+  },
+  "soco-endurecido": {
+   "arquivo": "soco-endurecido.mp3",
+   "descricao": "básico de Eren: o cristal estalando, o soco duro e as lascas tilintando",
+   "versoes": [
+    0.0,
+    1.0677,
+    2.2358,
+    3.3302
+   ],
+   "duracoes": [
+    0.9877,
+    1.0881,
+    1.0145,
+    1.066
+   ],
+   "bytes": 39596
   },
   "soco-espinhoso": {
    "arquivo": "soco-espinhoso.mp3",
