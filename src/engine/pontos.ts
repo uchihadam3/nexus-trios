@@ -20,6 +20,11 @@
  * gera muito, para baixo — então o jogo típico de qualquer personagem rende
  * parecido, e jogar acima disso rende mais.
  *
+ * Cura e proteção contam inteiras até APOIO.cheio por luta; acima disso, só APOIO.acima de cada
+ * ponto. Numa luta normal o trio soma uns 5 mil disso (99% das lutas ficam abaixo de 30 mil), mas um
+ * trio que junta dois ou três curandeiros passava de 55 mil por luta, e a jornada dele chegava a
+ * 2,4 milhões, o dobro dos outros trios fortes (pedido do jogador: "abaixa um pouco os curandeiros").
+ *
  * Também contam: manter o trio vivo (Vida que sobrou e quem ficou de pé) e
  * virar o Domínio. Os feitos crescem com a altura da jornada (luta 10 ×1,45).
  * A jornada é a soma das lutas; a derrota encerra, mas os pontos dela ficam.
@@ -78,6 +83,10 @@ export const PONTOS = {
   porLuta: 0.05,
 } as const;
 
+/** Cura e proteção da luta (já com o fator de cada personagem): inteiras até `cheio`, e daí para cima só `acima` de cada ponto. */
+export const APOIO = { cheio: 15_000, acima: 0.2 } as const;
+export const apoioDaLuta = (bruto: number) => (bruto <= APOIO.cheio ? bruto : APOIO.cheio + (bruto - APOIO.cheio) * APOIO.acima);
+
 /** O que cada luta custa a quem montou o trio com as Dicas de trio ligadas. */
 export const CUSTO_DAS_DICAS = 10_000;
 
@@ -112,7 +121,7 @@ export function pontosDaLuta(battle: Battle, indice = 0, dicas = false): PontosD
   const brutas: [ParcelaId, string, number][] = [
     ['dano', 'Dano causado', soma.dano * m],
     ['nocautes', 'Nocautes', soma.nocautes * m],
-    ['apoio', 'Cura e proteção', soma.apoio * m],
+    ['apoio', 'Cura e proteção', apoioDaLuta(soma.apoio) * m],
     ['jogadas', 'Habilidades e cortes', soma.jogadas * m],
     ['efeitos', 'Status, ritmo e Carga', soma.efeitos * m],
     ['viradas', 'Viradas', Math.min(PONTOS.viradasMaximo, (battle.viradasDoTrio ?? 0) * PONTOS.porVirada) * m],

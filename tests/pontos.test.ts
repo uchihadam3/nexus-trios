@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { replayRanked } from '../src/engine/ranked';
 import { generateCampaign } from '../src/engine/campaign';
 import { createBattle, stepBattle } from '../src/engine/battle';
-import { pontosDaJornada, pontosDaLuta } from '../src/engine/pontos';
+import { APOIO, apoioDaLuta, pontosDaJornada, pontosDaLuta } from '../src/engine/pontos';
 import { characters } from '../src/data/characters';
 import { FATOR_DE_PONTOS } from '../src/data/pontos-por-personagem';
 
@@ -29,6 +29,14 @@ describe('pontos', () => {
     }
     expect(conferidas).toBeGreaterThan(10);
   }, 60000);
+
+  it('cura e proteção contam inteiras numa luta normal e só um pouco do que passa disso', () => {
+    expect(apoioDaLuta(5_000)).toBe(5_000);
+    expect(apoioDaLuta(APOIO.cheio)).toBe(APOIO.cheio);
+    // o trio de três curandeiros (uns 58 mil por luta) passa a contar menos da metade
+    expect(apoioDaLuta(58_000)).toBeCloseTo(APOIO.cheio + 43_000 * APOIO.acima);
+    expect(apoioDaLuta(58_000) / 58_000).toBeLessThan(0.5);
+  });
 
   it('todo personagem tem o seu fator de pontos, dentro do limite (rode scripts/equilibrar-pontos.ts se mudar o elenco)', () => {
     for (const c of characters) {
