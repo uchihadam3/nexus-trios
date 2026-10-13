@@ -2,6 +2,23 @@
  "taxa": 44100,
  "versoes": 4,
  "sons": {
+  "abraco-do-amor": {
+   "arquivo": "abraco-do-amor.mp3",
+   "descricao": "Afrodite: o abraço do amor",
+   "versoes": [
+    0.0,
+    2.2466,
+    4.5715,
+    6.7602
+   ],
+   "duracoes": [
+    2.1666,
+    2.245,
+    2.1086,
+    2.2061
+   ],
+   "bytes": 70294
+  },
   "abraco-esmagador": {
    "arquivo": "abraco-esmagador.mp3",
    "descricao": "Patrick: o abraço esmagador",
@@ -239,6 +256,23 @@
     1.4213
    ],
    "bytes": 45321
+  },
+  "afrodite-preparo": {
+   "arquivo": "afrodite-preparo.mp3",
+   "descricao": "Afrodite: o coração batendo (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 50157
   },
   "agent47-preparo": {
    "arquivo": "agent47-preparo.mp3",
@@ -954,6 +988,23 @@
    ],
    "bytes": 54416
   },
+  "artemis-preparo": {
+   "arquivo": "artemis-preparo.mp3",
+   "descricao": "Ártemis: o arco sob a lua (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 56934
+  },
   "arvore-da-ilusao": {
    "arquivo": "arvore-da-ilusao.mp3",
    "descricao": "Kurama: a árvore da ilusão",
@@ -1072,6 +1123,23 @@
     1.1013
    ],
    "bytes": 38166
+  },
+  "atraso-de-cronos": {
+   "arquivo": "atraso-de-cronos.mp3",
+   "descricao": "Cronos: o atraso",
+   "versoes": [
+    0.0,
+    1.6842,
+    3.4199,
+    5.0511
+   ],
+   "duracoes": [
+    1.6042,
+    1.6557,
+    1.5512,
+    1.575
+   ],
+   "bytes": 58590
   },
   "atropelo": {
    "arquivo": "atropelo.mp3",
@@ -2841,6 +2909,23 @@
    ],
    "bytes": 60515
   },
+  "cacada-da-lua": {
+   "arquivo": "cacada-da-lua.mp3",
+   "descricao": "Ártemis: a caçada da lua",
+   "versoes": [
+    0.0,
+    2.38,
+    4.8434,
+    7.1456
+   ],
+   "duracoes": [
+    2.3,
+    2.3834,
+    2.2222,
+    2.335
+   ],
+   "bytes": 75446
+  },
   "cacada-noturna": {
    "arquivo": "cacada-noturna.mp3",
    "descricao": "Blade: a glaive cortando e o X final",
@@ -2908,6 +2993,23 @@
     1.1907
    ],
    "bytes": 33572
+  },
+  "caduceu": {
+   "arquivo": "caduceu.mp3",
+   "descricao": "Hermes: o caduceu",
+   "versoes": [
+    0.0,
+    1.3978,
+    2.8424,
+    4.2214
+   ],
+   "duracoes": [
+    1.3178,
+    1.3646,
+    1.299,
+    1.3634
+   ],
+   "bytes": 47285
   },
   "cajado-branco": {
    "arquivo": "cajado-branco.mp3",
@@ -3639,6 +3741,23 @@
     1.4213
    ],
    "bytes": 28759
+  },
+  "cervo-sagrado": {
+   "arquivo": "cervo-sagrado.mp3",
+   "descricao": "Ártemis: o cervo sagrado",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 73336
   },
   "cetro-de-anubis": {
    "arquivo": "cetro-de-anubis.mp3",
@@ -4421,6 +4540,23 @@
     1.8274
    ],
    "bytes": 84513
+  },
+  "clava-de-hercules": {
+   "arquivo": "clava-de-hercules.mp3",
+   "descricao": "Hércules: a clava",
+   "versoes": [
+    0.0,
+    2.18,
+    4.4361,
+    6.5451
+   ],
+   "duracoes": [
+    2.1,
+    2.1761,
+    2.029,
+    2.0979
+   ],
+   "bytes": 71809
   },
   "cleave": {
    "arquivo": "cleave.mp3",
@@ -5459,6 +5595,23 @@
    ],
    "bytes": 56361
   },
+  "cronos-preparo": {
+   "arquivo": "cronos-preparo.mp3",
+   "descricao": "Cronos: o tique-taque (Preparo)",
+   "versoes": [
+    0.0,
+    1.4627,
+    2.8796,
+    4.2965
+   ],
+   "duracoes": [
+    1.3827,
+    1.3369,
+    1.3369,
+    1.3539
+   ],
+   "bytes": 51206
+  },
   "crueldade-freeza": {
    "arquivo": "crueldade-freeza.mp3",
    "descricao": "Crueldade calculada: a pressão e a pancada",
@@ -5935,6 +6088,23 @@
    ],
    "bytes": 38128
   },
+  "desafio-de-hercules": {
+   "arquivo": "desafio-de-hercules.mp3",
+   "descricao": "Hércules: o desafio",
+   "versoes": [
+    0.0,
+    2.28,
+    4.6398,
+    6.8454
+   ],
+   "duracoes": [
+    2.2,
+    2.2798,
+    2.1256,
+    2.2335
+   ],
+   "bytes": 75632
+  },
   "desastre-anunciado": {
    "arquivo": "desastre-anunciado.mp3",
    "descricao": "Patolino: o desastre anunciado",
@@ -5985,6 +6155,23 @@
     2.0305
    ],
    "bytes": 63614
+  },
+  "desejo": {
+   "arquivo": "desejo.mp3",
+   "descricao": "Afrodite: o desejo",
+   "versoes": [
+    0.0,
+    1.5903,
+    3.2341,
+    4.7736
+   ],
+   "duracoes": [
+    1.5103,
+    1.5638,
+    1.4595,
+    1.5518
+   ],
+   "bytes": 44159
   },
   "desintegrar": {
    "arquivo": "desintegrar.mp3",
@@ -6887,6 +7074,23 @@
    ],
    "bytes": 33375
   },
+  "encanto-de-afrodite": {
+   "arquivo": "encanto-de-afrodite.mp3",
+   "descricao": "Afrodite: o encanto",
+   "versoes": [
+    0.0,
+    1.3614,
+    2.7766,
+    4.1571
+   ],
+   "duracoes": [
+    1.2814,
+    1.3353,
+    1.3004,
+    1.2962
+   ],
+   "bytes": 47645
+  },
   "encolhimento": {
    "arquivo": "encolhimento.mp3",
    "descricao": "Homem-Formiga: encolhendo, o zigue-zague e os golpes",
@@ -6988,6 +7192,23 @@
     1.3198
    ],
    "bytes": 23221
+  },
+  "era-de-ouro": {
+   "arquivo": "era-de-ouro.mp3",
+   "descricao": "Cronos: a era de ouro",
+   "versoes": [
+    0.0,
+    2.0246,
+    4.1496,
+    6.0502
+   ],
+   "duracoes": [
+    1.9446,
+    2.045,
+    1.8206,
+    1.9573
+   ],
+   "bytes": 80434
   },
   "era-glacial": {
    "arquivo": "era-glacial.mp3",
@@ -9097,6 +9318,23 @@
    ],
    "bytes": 64946
   },
+  "flecha-de-prata": {
+   "arquivo": "flecha-de-prata.mp3",
+   "descricao": "Ártemis: a flecha de prata",
+   "versoes": [
+    0.0,
+    1.7377,
+    3.5027,
+    5.1558
+   ],
+   "duracoes": [
+    1.6577,
+    1.685,
+    1.5731,
+    1.5996
+   ],
+   "bytes": 66896
+  },
   "flecha-de-rede": {
    "arquivo": "flecha-de-rede.mp3",
    "descricao": "Gavião Arqueiro: a flecha de rede",
@@ -9369,6 +9607,23 @@
    ],
    "bytes": 50996
   },
+  "foice-do-tempo": {
+   "arquivo": "foice-do-tempo.mp3",
+   "descricao": "Cronos: a foice do tempo",
+   "versoes": [
+    0.0,
+    2.037,
+    4.1445,
+    6.1167
+   ],
+   "duracoes": [
+    1.957,
+    2.0275,
+    1.8922,
+    1.9241
+   ],
+   "bytes": 73261
+  },
   "fome-de-ghoul": {
    "arquivo": "fome-de-ghoul.mp3",
    "descricao": "Kaneki: o kakugan, o ar puxado e o coração",
@@ -9470,6 +9725,23 @@
     1.6244
    ],
    "bytes": 47254
+  },
+  "forca-de-semideus": {
+   "arquivo": "forca-de-semideus.mp3",
+   "descricao": "Hércules: a força de semideus",
+   "versoes": [
+    0.0,
+    2.48,
+    5.047,
+    7.4459
+   ],
+   "duracoes": [
+    2.4,
+    2.487,
+    2.3188,
+    2.4365
+   ],
+   "bytes": 75612
   },
   "forca-monstruosa": {
    "arquivo": "forca-monstruosa.mp3",
@@ -11714,6 +11986,23 @@
     1.4213
    ],
    "bytes": 64754
+  },
+  "hercules-preparo": {
+   "arquivo": "hercules-preparo.mp3",
+   "descricao": "Hércules: o esforço (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 44997
   },
   "hex-de-probabilidade": {
    "arquivo": "hex-de-probabilidade.mp3",
@@ -15421,6 +15710,23 @@
    ],
    "bytes": 62789
   },
+  "medusa-preparo": {
+   "arquivo": "medusa-preparo.mp3",
+   "descricao": "Medusa: as serpentes sibilando (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 78713
+  },
   "megatron-preparo": {
    "arquivo": "megatron-preparo.mp3",
    "descricao": "Megatron: o canhão carregando (Preparo)",
@@ -15471,6 +15777,23 @@
     1.4213
    ],
    "bytes": 54785
+  },
+  "mensagem-dos-deuses": {
+   "arquivo": "mensagem-dos-deuses.mp3",
+   "descricao": "Hermes: a mensagem dos deuses",
+   "versoes": [
+    0.0,
+    1.494,
+    3.0683,
+    4.5313
+   ],
+   "duracoes": [
+    1.414,
+    1.4943,
+    1.383,
+    1.4317
+   ],
+   "bytes": 55891
   },
   "mercury-preparo": {
    "arquivo": "mercury-preparo.mp3",
@@ -16049,6 +16372,23 @@
     1.4431
    ],
    "bytes": 46320
+  },
+  "mordida-de-serpente": {
+   "arquivo": "mordida-de-serpente.mp3",
+   "descricao": "Medusa: a mordida de serpente",
+   "versoes": [
+    0.0,
+    1.7998,
+    3.8487,
+    5.7644
+   ],
+   "duracoes": [
+    1.7198,
+    1.9689,
+    1.8357,
+    1.9289
+   ],
+   "bytes": 67215
   },
   "mordida-de-stitch": {
    "arquivo": "mordida-de-stitch.mp3",
@@ -23428,6 +23768,23 @@
    ],
    "bytes": 43856
   },
+  "olhar-de-pedra": {
+   "arquivo": "olhar-de-pedra.mp3",
+   "descricao": "Medusa: o olhar de pedra",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    1.9529
+   ],
+   "bytes": 58854
+  },
   "olhar-de-penitencia": {
    "arquivo": "olhar-de-penitencia.mp3",
    "descricao": "Motoqueiro: a caveira em chamas e a onda de fogo",
@@ -24243,6 +24600,23 @@
     1.4213
    ],
    "bytes": 57735
+  },
+  "petrificacao": {
+   "arquivo": "petrificacao.mp3",
+   "descricao": "Medusa: a petrificação",
+   "versoes": [
+    0.0,
+    2.48,
+    5.047,
+    7.4459
+   ],
+   "duracoes": [
+    2.4,
+    2.487,
+    2.3188,
+    2.4365
+   ],
+   "bytes": 80192
   },
   "piada-final": {
    "arquivo": "piada-final.mp3",
@@ -27558,6 +27932,23 @@
     0.9122
    ],
    "bytes": 31587
+  },
+  "roubo-divino": {
+   "arquivo": "roubo-divino.mp3",
+   "descricao": "Hermes: o roubo divino",
+   "versoes": [
+    0.0,
+    1.1432,
+    2.3414,
+    3.5153
+   ],
+   "duracoes": [
+    1.0632,
+    1.1183,
+    1.0939,
+    1.0962
+   ],
+   "bytes": 43411
   },
   "rugido-da-fundacao": {
    "arquivo": "rugido-da-fundacao.mp3",

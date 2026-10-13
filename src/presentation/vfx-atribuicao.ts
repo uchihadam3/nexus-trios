@@ -152,6 +152,12 @@ const T: Record<string, string> = {
   athena: 'escudo_de_atena lanca_da_sabedoria estrategia_divina',
   ares: 'espada_da_guerra grito_de_batalha_ares massacre_de_ares',
   apollo: 'flecha_de_sol cura_de_apolo carruagem_do_sol',
+  artemis: 'flecha_de_prata cervo_sagrado cacada_da_lua',
+  hermes: 'caduceu mensagem_dos_deuses roubo_divino',
+  aphrodite: 'encanto_de_afrodite abraco_do_amor desejo',
+  medusa: 'mordida_de_serpente olhar_de_pedra petrificacao',
+  kronos: 'foice_do_tempo atraso_de_cronos era_de_ouro',
+  hercules: 'clava_de_hercules desafio_de_hercules forca_de_semideus',
 };
 
 export const FAMILIA_DA_HABILIDADE: Record<string, VfxFamily> = Object.fromEntries(

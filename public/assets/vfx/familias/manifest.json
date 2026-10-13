@@ -1,4 +1,18 @@
 {
+ "abraco_do_amor": {
+  "descricao": "Afrodite · a concha e as pétalas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 51080
+ },
  "abraco_esmagador": {
   "descricao": "Patrick · os braços apertando",
   "quadros": 12,
@@ -194,6 +208,20 @@
   ],
   "laco": true,
   "bytes": 37454
+ },
+ "afrodite_preparo": {
+  "descricao": "Afrodite · o coração pulsando (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 16470
  },
  "agent47_preparo": {
   "descricao": "Agente 47 · a luneta (Preparo, laço)",
@@ -755,6 +783,20 @@
   "laco": false,
   "bytes": 20580
  },
+ "artemis_preparo": {
+  "descricao": "Ártemis · a lua e o arco puxado (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 16528
+ },
  "arvore_da_ilusao": {
   "descricao": "Kurama · a árvore de galhos e as espirais",
   "quadros": 12,
@@ -852,6 +894,20 @@
   ],
   "laco": false,
   "bytes": 30006
+ },
+ "atraso_de_cronos": {
+  "descricao": "Cronos · os ponteiros voltando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 20652
  },
  "atropelo": {
   "descricao": "Bebop · as pisadas atravessando todos",
@@ -2449,6 +2505,20 @@
   "laco": true,
   "bytes": 9350
  },
+ "cacada_da_lua": {
+  "descricao": "Ártemis · a lua cheia e o feixe de luar",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 55658
+ },
  "cacada_noturna": {
   "descricao": "Blade · a glaive em volta e o X final",
   "quadros": 12,
@@ -2504,6 +2574,20 @@
   ],
   "laco": false,
   "bytes": 20396
+ },
+ "caduceu": {
+  "descricao": "Hermes · o caduceu e a tontura",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 25944
  },
  "cajado_branco": {
   "descricao": "Básico do Gandalf: o cajado no chão e a luz",
@@ -3148,6 +3232,20 @@
   ],
   "laco": true,
   "bytes": 18116
+ },
+ "cervo_sagrado": {
+  "descricao": "Ártemis · o cervo de luz saltando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 32690
  },
  "cetro_de_anubis": {
   "descricao": "Básico de Anúbis: o cetro e a balança",
@@ -3806,6 +3904,20 @@
   ],
   "laco": false,
   "bytes": 53708
+ },
+ "clava_de_hercules": {
+  "descricao": "Hércules · a clava em chamas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 34106
  },
  "cleave": {
   "descricao": "Sukuna · a medida e o corte único que parte o alvo",
@@ -4745,6 +4857,20 @@
   "laco": false,
   "bytes": 19102
  },
+ "cronos_preparo": {
+  "descricao": "Cronos · a ampulheta e as engrenagens (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 21918
+ },
  "crueldade_freeza": {
   "descricao": "Freeza · a mão invisível apertando",
   "quadros": 12,
@@ -5137,6 +5263,20 @@
   "laco": false,
   "bytes": 20152
  },
+ "desafio_de_hercules": {
+  "descricao": "Hércules · a pele de leão e o desafio",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 49692
+ },
  "desastre_anunciado": {
   "descricao": "Patolino · a bomba explodindo e o bico voando",
   "quadros": 12,
@@ -5178,6 +5318,20 @@
   ],
   "laco": false,
   "bytes": 76324
+ },
+ "desejo": {
+  "descricao": "Afrodite · o coração gigante rachando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 31822
  },
  "desintegrar": {
   "descricao": "desintegração em grãos",
@@ -5949,6 +6103,20 @@
   "laco": false,
   "bytes": 31196
  },
+ "encanto_de_afrodite": {
+  "descricao": "Afrodite · os corações rodando nos rivais",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 27934
+ },
  "encolhimento": {
   "descricao": "Homem-Formiga · os anéis, o zigue-zague e os golpes",
   "quadros": 12,
@@ -6018,6 +6186,20 @@
   ],
   "laco": false,
   "bytes": 40408
+ },
+ "era_de_ouro": {
+  "descricao": "Cronos · o relógio dourado correndo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 52182
  },
  "era_glacial": {
   "descricao": "Homem de Gelo · as geleiras pontudas em todos",
@@ -7895,6 +8077,20 @@
   "laco": false,
   "bytes": 15248
  },
+ "flecha_de_prata": {
+  "descricao": "Ártemis · a flecha de prata e a mira da lua",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 18014
+ },
  "flecha_de_rede": {
   "descricao": "Gavião Arqueiro · a flecha que vira rede",
   "quadros": 12,
@@ -8119,6 +8315,20 @@
   "laco": false,
   "bytes": 20604
  },
+ "foice_do_tempo": {
+  "descricao": "Cronos · a foice e o relógio",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 25802
+ },
  "fome_de_ghoul": {
   "descricao": "Kaneki · o kakugan, as veias e a vida puxada",
   "quadros": 12,
@@ -8202,6 +8412,20 @@
   ],
   "laco": false,
   "bytes": 27172
+ },
+ "forca_de_semideus": {
+  "descricao": "Hércules · o soco de semideus",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 62288
  },
  "forca_monstruosa": {
   "descricao": "Sakura · o soco que racha o chão, com as pétalas",
@@ -10050,6 +10274,20 @@
   ],
   "laco": true,
   "bytes": 16092
+ },
+ "hercules_preparo": {
+  "descricao": "Hércules · os músculos acendendo (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 26510
  },
  "hex_de_probabilidade": {
   "descricao": "Feiticeira · os fios, o redemoinho e o sinal",
@@ -13075,6 +13313,20 @@
   "laco": false,
   "bytes": 50644
  },
+ "medusa_preparo": {
+  "descricao": "Medusa · as serpentes agitadas (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 14334
+ },
  "megatron_preparo": {
   "descricao": "Megatron · o canhão de fusão carregando (Preparo, laço)",
   "quadros": 12,
@@ -13116,6 +13368,20 @@
   ],
   "laco": true,
   "bytes": 24906
+ },
+ "mensagem_dos_deuses": {
+  "descricao": "Hermes · o pergaminho alado e as penas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 22124
  },
  "mercury_preparo": {
   "descricao": "Sailor Mercury · o símbolo e o anel de água (Preparo, laço)",
@@ -13606,6 +13872,20 @@
   ],
   "laco": false,
   "bytes": 35468
+ },
+ "mordida_de_serpente": {
+  "descricao": "Medusa · o bote das serpentes",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 23846
  },
  "mordida_de_stitch": {
   "descricao": "Stitch · a bocarra mordendo todos",
@@ -19627,6 +19907,20 @@
   "laco": false,
   "bytes": 32516
  },
+ "olhar_de_pedra": {
+  "descricao": "Medusa · o olhar que vira pedra",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 29492
+ },
  "olhar_de_penitencia": {
   "descricao": "Motoqueiro · a caveira em chamas e a onda de fogo",
   "quadros": 12,
@@ -20382,6 +20676,20 @@
   ],
   "laco": true,
   "bytes": 8116
+ },
+ "petrificacao": {
+  "descricao": "Medusa · a pedra subindo em todos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 51358
  },
  "piada_final": {
   "descricao": "Coringa · a caixa-surpresa",
@@ -23084,6 +23392,20 @@
   ],
   "laco": false,
   "bytes": 27688
+ },
+ "roubo_divino": {
+  "descricao": "Hermes · o vulto alado levando os buffs",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 15956
  },
  "rugido_da_fundacao": {
   "descricao": "Eren · as pegadas dos colossais, o vapor e o choque",
