@@ -27,9 +27,41 @@ export const COR_DA_INVOCACAO: Record<string, string> = {
 // direita; nos rivais (que ficam no alto), embaixo à esquerda
 export const posicaoDaInvocacao = (lado: 'player' | 'enemy', medal: number) => (lado === 'player' ? { dx: medal * 0.6, dy: -medal * 0.44 } : { dx: -medal * 0.6, dy: medal * 0.44 });
 
+/*
+ * As miniaturas da Mecânica única (pedido do jogador: "o Mickey… invoca até quatro pequenininhas… uma menor pela
+ * metade do tamanho… em volta dele"): quem junta criaturas pela mecânica mostra cada uma como uma bolinha pela metade,
+ * num arco em volta do medalhão (longe da invocação grande e da bolinha da mecânica). No relógio do ataque delas,
+ * cada uma dá o bote para o lado dos rivais e volta.
+ */
+export const MINIATURAS: Record<string, { k: string; max: number; relogio: string }> = {
+  mickey: { k: 'vassouras', max: 4, relogio: 'relogio_vassoura' },
+};
+/** O arco das miniaturas, em graus da tela (0 = direita, −90 = em cima): por cima no seu trio, por baixo nos rivais. */
+const ARCO_DAS_MINIATURAS = [-150, -122, -94, -66];
+export const posicaoDaMiniatura = (lado: 'player' | 'enemy', i: number, medal: number) => {
+  const a = ((ARCO_DAS_MINIATURAS[i] ?? -90) + (lado === 'enemy' ? 180 : 0)) * Math.PI / 180;
+  return { dx: Math.cos(a) * medal * 0.6, dy: Math.sin(a) * medal * 0.6 };
+};
+
 export function Invocacoes({ battle, beat, anchors, box, velocidade }: { battle: Battle; beat: Beat | null; anchors: Anchors; box: { w: number; h: number; medal: number }; velocidade: number }) {
   const r = Math.round(box.medal * 0.25), C = 2 * Math.PI * (r - 3);
+  const rm = Math.max(7, Math.round(r / 2));
   return <div className="invocacoes" aria-hidden>
+    {battle.fighters.flatMap((f) => {
+      const mini = f.hp > 0 ? MINIATURAS[f.characterId] : undefined, n = mini ? Math.min(mini.max, Math.floor(f.u?.[mini.k] ?? 0)) : 0;
+      if (!mini || !n) return [];
+      const p = anchors[f.uid] ?? fallbackPoint(f.uid), falta = f.u?.[mini.relogio] ?? 99, volta = f.u?.[`${mini.relogio}_volta`] ?? 3;
+      // o bote: logo depois que o relógio dá a volta (é quando elas batem)
+      const bote = volta - falta < 0.5;
+      const cor = COR_DA_INVOCACAO[f.characterId] ?? '#c9a2ff';
+      return Array.from({ length: n }, (_, i) => {
+        const { dx, dy } = posicaoDaMiniatura(f.side, i, box.medal);
+        return <div key={`${f.uid}-mini-${i}`} className={`invocacao miniatura ${f.side}${bote ? ' bote' : ''}`}
+          style={{ left: `calc(${p.x}% + ${dx}px)`, top: `calc(${p.y}% + ${dy}px)`, width: rm * 2, height: rm * 2, '--cor': cor, '--atraso': `${i * 0.07}s` } as CSSProperties}>
+          <img src={`/assets/invocacoes/${f.characterId}.webp`} alt="" />
+        </div>;
+      });
+    })}
     {battle.fighters.map((f) => {
       const s = f.hp > 0 ? f.statuses.find((x) => x.id === 'summon') : undefined;
       if (!s) return null;

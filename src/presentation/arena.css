@@ -411,7 +411,13 @@
 @keyframes inv-avanca{0%{translate:0 0;scale:1}45%{translate:var(--vx) var(--vy);scale:1.25}55%{translate:var(--vx) var(--vy);scale:1.1}100%{translate:0 0;scale:1}}
 @keyframes inv-tranco{0%{scale:1}20%{scale:1.22}40%{scale:.92}100%{scale:1}}
 @keyframes inv-disparo{0%{clip-path:inset(0 100% 0 0);opacity:1}45%{clip-path:inset(0 0 0 0);opacity:1}100%{clip-path:inset(0 0 0 70%);opacity:0}}
-@media (prefers-reduced-motion:reduce){.arena-v2 .invocacao,.arena-v2 .invocacao.ataca-perto,.arena-v2 .invocacao.ataca-longe,.arena-v2 .invocacao .inv-disparo{animation:none}}
+.arena-v2 .invocacao.miniatura{z-index:6;filter:drop-shadow(0 0 4px color-mix(in srgb,var(--cor) 70%,transparent));box-shadow:0 0 0 1.5px color-mix(in srgb,var(--cor) 80%,#fff)}
+.arena-v2 .invocacao.miniatura img{inset:1.5px;width:calc(100% - 3px);height:calc(100% - 3px);box-shadow:none}
+.arena-v2 .invocacao.miniatura.bote{animation:inv-bote .5s cubic-bezier(.4,0,.3,1) var(--atraso) both}
+.arena-v2 .invocacao.miniatura.enemy.bote{animation-name:inv-bote-baixo}
+@keyframes inv-bote{0%{transform:translate(-50%,-50%)}40%{transform:translate(-50%,calc(-50% - 16px)) rotate(-25deg) scale(1.25)}100%{transform:translate(-50%,-50%)}}
+@keyframes inv-bote-baixo{0%{transform:translate(-50%,-50%)}40%{transform:translate(-50%,calc(-50% + 16px)) rotate(25deg) scale(1.25)}100%{transform:translate(-50%,-50%)}}
+@media (prefers-reduced-motion:reduce){.arena-v2 .invocacao,.arena-v2 .invocacao.miniatura.bote,.arena-v2 .invocacao.ataca-perto,.arena-v2 .invocacao.ataca-longe,.arena-v2 .invocacao .inv-disparo{animation:none}}
 
 /* A bolinha da Mecânica única (src/components/ArenaUnit.tsx): do lado de fora do retrato, quase encostando no anel
    dele (2px) — à esquerda, um pouco acima nos rivais (abaixo da barra de Vida) e um pouco abaixo no seu trio. Enche como uma habilidade e acende ao ativar. */
@@ -420,6 +426,10 @@
   box-shadow:inset 0 1px 0 #ffffff26,inset 0 -2px 4px #0008,0 0 0 1.5px #0d0816,0 3px 8px #000b;pointer-events:none;transition:filter .3s,transform .3s,box-shadow .3s}
 .side-enemy .unica-bolinha{top:calc(50% - var(--raio) * .69 - var(--ub) / 2)}
 .side-player .unica-bolinha{top:calc(50% + var(--raio) * .69 - var(--ub) / 2)}
+/* em pé, as duas na mesma altura em volta do retrato: a do rival abaixo da Vida, a do trio acima do nome */
+@media (orientation:portrait){.unica-bolinha{left:calc(50% - var(--raio) * .76 - var(--ub) / 2)}
+  .side-enemy .unica-bolinha{top:calc(50% - var(--raio) * .55 - var(--ub) / 2)}.side-player .unica-bolinha{top:calc(50% + var(--raio) * .55 - var(--ub) / 2)}}
+@media (orientation:portrait){.unit[data-slot="0"] .unica-bolinha{margin-left:8px}}
 .unica-bolinha .ub-anel{position:absolute;inset:-1px;width:calc(100% + 2px);height:calc(100% + 2px);transform:rotate(-90deg)}
 .unica-bolinha .ub-trilho{fill:none;stroke:#c58bff2e;stroke-width:3.2}
 .unica-bolinha .ub-carga{fill:none;stroke:#cf9bff;stroke-width:3.2;stroke-linecap:round;filter:drop-shadow(0 0 2px #c58bff);transition:stroke-dasharray .25s linear}
