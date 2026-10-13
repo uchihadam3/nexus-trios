@@ -288,7 +288,7 @@ export const JEITO_DA_UNICA: Record<string, JeitoDaUnica> = {
   pennywise: 'sempre',
   pernalonga: 'condicional',
   peter: 'rara',
-  picapau: 'sempre',
+  picapau: 'condicional',
   piccolo: 'condicional',
   pikachu: 'condicional',
   pinhead: 'rara',

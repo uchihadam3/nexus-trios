@@ -349,8 +349,21 @@ export const LOTE7: Record<string, Unica> = {
   },
   picapau: {
     nome: 'Impossível ignorar',
-    texto: 'Quem acerta o Pica-Pau com ataque ou habilidade fica Provocado (só mira no Pica-Pau) por 2 s.',
-    ganchos: { apanhou(m, b, f, fonte, _dano, g) { if (g.direto && vivo(fonte) && fonte.side !== f.side) m.efeitos(b, f, [fonte], [st('provoked', 1, 2)]); } },
+    // pedido do jogador: com pouca Vida, só atrair os golpes era uma desvantagem. Ele continua irritando, mas escorrega:
+    // enquanto provoca, ganha Esquiva, e cada golpe de que escapa vira uma bicada em quem errou.
+    texto: 'Quem acerta o Pica-Pau com ataque ou habilidade fica Provocado (só mira no Pica-Pau) por 2 s, e o Pica-Pau ganha Esquiva (15% de chance de escapar) por 2 s. Cada golpe de que o Pica-Pau escapa vira uma bicada: 25 de dano em quem errou.',
+    ganchos: {
+      apanhou(m, b, f, fonte, _dano, g) {
+        if (!g.direto || !vivo(fonte) || fonte.side === f.side) return;
+        m.efeitos(b, f, [fonte], [st('provoked', 1, 2)]);
+        m.efeitos(b, f, [f], [st('evasion', 0.15, 2)]);
+      },
+      desviou(m, b, f, fonte) {
+        if (!vivo(fonte) || fonte.side === f.side) return;
+        m.aviso(b, f, 'Ha-ha-ha-HA-ha!', fonte);
+        m.dano(b, f, fonte, 25, false, 'Bicada');
+      },
+    },
   },
   salsicha: {
     nome: 'Poder escondido',
