@@ -218,6 +218,12 @@ const T: Record<string, string> = {
   natsu: 'punho_do_dragao_de_fogo rugido_do_dragao_natsu lotus_carmesim',
   erza: 'armadura_do_ceu armadura_de_adamantina armadura_do_purgatorio',
   asta: 'matadora_de_demonios golpe_antimagia black_asta',
+  rem: 'maca_de_ferro cura_de_agua_rem forma_de_oni',
+  kirito: 'vorpal_strike parry_kirito starburst_stream',
+  spike: 'jeet_kune_do esquiva_spike tiro_final',
+  vash: 'tiro_desarmante tufao_humanoide braco_de_anjo',
+  senku: 'remedio_senku bateria_senku polvora_senku',
+  hinata: 'punho_suave rotacao_hinata sessenta_e_quatro_palmas',
 };
 
 export const FAMILIA_DA_HABILIDADE: Record<string, VfxFamily> = Object.fromEntries(

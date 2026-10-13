@@ -1847,6 +1847,20 @@
   "laco": false,
   "bytes": 40684
  },
+ "bateria_senku": {
+  "descricao": "Senku · a bateria e os fios no trio",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 15596
+ },
  "batida_do_gorila": {
   "descricao": "Donkey Kong · Batida do gorila: rachaduras, ondas e pedras",
   "quadros": 12,
@@ -2532,6 +2546,20 @@
   ],
   "laco": false,
   "bytes": 25750
+ },
+ "braco_de_anjo": {
+  "descricao": "Vash · as asas de luz e o raio gigante",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 68504
  },
  "braco_extensivel": {
   "descricao": "Inspetor Bugiganga · o braço de gomos e a garra",
@@ -5529,6 +5557,20 @@
   "laco": false,
   "bytes": 58756
  },
+ "cura_de_agua_rem": {
+  "descricao": "Rem · a água girando e as gotas curando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 47770
+ },
  "cura_de_apolo": {
   "descricao": "Apolo · o sol e as notas da lira",
   "quadros": 12,
@@ -7923,6 +7965,20 @@
   "laco": false,
   "bytes": 74172
  },
+ "esquiva_spike": {
+  "descricao": "Spike · inclinando e as balas de raspão",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 25522
+ },
  "estado_avatar": {
   "descricao": "Estado Avatar: olhos acesos, vento e quatro orbes",
   "quadros": 12,
@@ -9546,6 +9602,20 @@
   ],
   "laco": false,
   "bytes": 45246
+ },
+ "forma_de_oni": {
+  "descricao": "Rem · o chifre e a maça esmagando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 52242
  },
  "forma_devil": {
   "descricao": "Kazuya · as asas do Devil e o golpe",
@@ -11759,6 +11829,20 @@
   "laco": false,
   "bytes": 32196
  },
+ "hinata_preparo": {
+  "descricao": "Hinata · o Byakugan e o trigrama (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 16102
+ },
  "hinokami_kagura": {
   "descricao": "Tanjiro · a Dança do Deus do Fogo: o halo de chamas e o corte",
   "quadros": 12,
@@ -12753,6 +12837,20 @@
   "laco": false,
   "bytes": 15012
  },
+ "jeet_kune_do": {
+  "descricao": "Spike · o chamado e o chute",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 20722
+ },
  "jill_preparo": {
   "descricao": "Jill · a seringa enchendo (Preparo, laço)",
   "quadros": 12,
@@ -13186,6 +13284,20 @@
   ],
   "laco": false,
   "bytes": 54496
+ },
+ "kirito_preparo": {
+  "descricao": "Kirito · as duas espadas brilhando (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 14430
  },
  "kit_primeiros_socorros": {
   "descricao": "Jill · a maleta e o spray de cura",
@@ -14502,6 +14614,20 @@
   ],
   "laco": false,
   "bytes": 30624
+ },
+ "maca_de_ferro": {
+  "descricao": "Rem · a maça girando na corrente",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 35304
  },
  "maca_de_rem": {
   "descricao": "Básico da Rem: a maça girando na corrente",
@@ -22497,6 +22623,20 @@
   "laco": false,
   "bytes": 75186
  },
+ "parry_kirito": {
+  "descricao": "Kirito · as espadas cruzadas e as faíscas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 43304
+ },
  "passaro_de_argila": {
   "descricao": "Deidara · o pássaro soltando as bombinhas",
   "quadros": 12,
@@ -23393,6 +23533,20 @@
   "laco": false,
   "bytes": 41824
  },
+ "polvora_senku": {
+  "descricao": "Senku · o pavio e as explosões",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 51894
+ },
  "ponto_de_fusao": {
   "descricao": "Todoroki · o gelo, o fogo e o vapor",
   "quadros": 12,
@@ -24204,6 +24358,20 @@
   ],
   "laco": false,
   "bytes": 104096
+ },
+ "punho_suave": {
+  "descricao": "Hinata · a palma e os pontos de chakra",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 30874
  },
  "punho_transmutado": {
   "descricao": "Punho transmutado de Edward: círculo de alquimia e punho de pedra que sobe",
@@ -25507,6 +25675,34 @@
   "laco": false,
   "bytes": 70992
  },
+ "rem_preparo": {
+  "descricao": "Rem · o chifre de oni e a aura (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 27856
+ },
+ "remedio_senku": {
+  "descricao": "Senku · o frasco de remédio e a cura",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 23672
+ },
  "renascer": {
   "descricao": "asas de fogo: renasce das cinzas",
   "quadros": 12,
@@ -25926,6 +26122,20 @@
   ],
   "laco": false,
   "bytes": 45314
+ },
+ "rotacao_hinata": {
+  "descricao": "Hinata · a cúpula girando e o golpe voltando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 38402
  },
  "roubar_a_formula": {
   "descricao": "Plankton · as garrafinhas da fórmula puxadas",
@@ -26781,6 +26991,20 @@
   "laco": false,
   "bytes": 58156
  },
+ "senku_preparo": {
+  "descricao": "Senku · o frasco e as contas (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 10316
+ },
  "sentenca": {
   "descricao": "Cabeça de Pirâmide · a Grande Faca descendo",
   "quadros": 12,
@@ -26864,6 +27088,20 @@
   ],
   "laco": false,
   "bytes": 42152
+ },
+ "sessenta_e_quatro_palmas": {
+  "descricao": "Hinata · as 64 palmas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 31164
  },
  "sesshomaru_preparo": {
   "descricao": "Sesshomaru · a lua e a Bakusaiga (Preparo, laço)",
@@ -27943,6 +28181,20 @@
   "laco": true,
   "bytes": 22348
  },
+ "spike_preparo": {
+  "descricao": "Spike · a Jericho e o cigarro (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 8818
+ },
  "spin_attack": {
   "descricao": "Sonic: bola azul girando quica no alvo e volta",
   "quadros": 12,
@@ -28026,6 +28278,20 @@
   ],
   "laco": true,
   "bytes": 26050
+ },
+ "starburst_stream": {
+  "descricao": "Kirito · as 16 estocadas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 40922
  },
  "stewie_preparo": {
   "descricao": "Stewie Griffin · as engrenagens do plano (Preparo, laço)",
@@ -29007,6 +29273,20 @@
   "laco": false,
   "bytes": 14178
  },
+ "tiro_desarmante": {
+  "descricao": "Vash · a arma do rival voando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 21896
+ },
  "tiro_do_exterminador": {
   "descricao": "Básico do T-800: a mira vermelha e a espingarda",
   "quadros": 12,
@@ -29020,6 +29300,20 @@
   ],
   "laco": false,
   "bytes": 21264
+ },
+ "tiro_final": {
+  "descricao": "Spike · o tiro único e a fumaça",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 30488
  },
  "tiro_na_cabeca": {
   "descricao": "Leon · o tiro na cabeça e o rival zonzo",
@@ -29581,6 +29875,20 @@
   "laco": false,
   "bytes": 16494
  },
+ "tufao_humanoide": {
+  "descricao": "Vash · o casaco girando e as balas desviando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 16168
+ },
  "uivo_de_fenrir": {
   "descricao": "Fenrir · o uivo para a lua",
   "quadros": 12,
@@ -29874,6 +30182,20 @@
   ],
   "laco": false,
   "bytes": 13076
+ },
+ "vash_preparo": {
+  "descricao": "Vash · o braço-canhão e as penas (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 13480
  },
  "vazio_infinito": {
   "descricao": "Gojo · o Vazio Infinito",
@@ -30462,6 +30784,20 @@
   ],
   "laco": false,
   "bytes": 24388
+ },
+ "vorpal_strike": {
+  "descricao": "Kirito · a estocada que atravessa",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 20778
  },
  "wick_preparo": {
   "descricao": "John Wick · a moeda de ouro (Preparo, laço)",

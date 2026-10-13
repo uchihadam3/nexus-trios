@@ -2229,6 +2229,23 @@
    ],
    "bytes": 83275
   },
+  "bateria-senku": {
+   "arquivo": "bateria-senku.mp3",
+   "descricao": "Senku: bateria",
+   "versoes": [
+    0.0,
+    1.484,
+    3.1146,
+    4.552
+   ],
+   "duracoes": [
+    1.404,
+    1.5505,
+    1.3575,
+    1.4505
+   ],
+   "bytes": 54703
+  },
   "batida-do-gorila": {
    "arquivo": "batida-do-gorila.mp3",
    "descricao": "Batida do gorila: o chão rachando e as pedras caindo",
@@ -2993,6 +3010,23 @@
     1.5278
    ],
    "bytes": 54747
+  },
+  "braco-de-anjo": {
+   "arquivo": "braco-de-anjo.mp3",
+   "descricao": "Vash: braço de anjo",
+   "versoes": [
+    0.0,
+    2.98,
+    6.0652,
+    8.9471
+   ],
+   "duracoes": [
+    2.9,
+    3.0052,
+    2.8019,
+    2.9441
+   ],
+   "bytes": 99661
   },
   "braco-extensivel": {
    "arquivo": "braco-extensivel.mp3",
@@ -6411,6 +6445,23 @@
    ],
    "bytes": 67543
   },
+  "cura-de-agua-rem": {
+   "arquivo": "cura-de-agua-rem.mp3",
+   "descricao": "Rem: cura de água",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 72443
+  },
   "cura-de-apolo": {
    "arquivo": "cura-de-apolo.mp3",
    "descricao": "Apolo: a cura de Apolo",
@@ -9267,6 +9318,23 @@
    ],
    "bytes": 24302
   },
+  "esquiva-spike": {
+   "arquivo": "esquiva-spike.mp3",
+   "descricao": "Spike: esquiva",
+   "versoes": [
+    0.0,
+    1.3773,
+    2.7704,
+    4.0865
+   ],
+   "duracoes": [
+    1.2973,
+    1.3131,
+    1.2361,
+    1.328
+   ],
+   "bytes": 44914
+  },
   "estado-avatar": {
    "arquivo": "estado-avatar.mp3",
    "descricao": "família estado avatar",
@@ -11102,6 +11170,23 @@
     1.757
    ],
    "bytes": 63353
+  },
+  "forma-de-oni": {
+   "arquivo": "forma-de-oni.mp3",
+   "descricao": "Rem: forma de oni",
+   "versoes": [
+    0.0,
+    2.58,
+    5.2507,
+    7.7461
+   ],
+   "duracoes": [
+    2.5,
+    2.5907,
+    2.4154,
+    2.538
+   ],
+   "bytes": 87767
   },
   "forma-desperta": {
    "arquivo": "forma-desperta.mp3",
@@ -13789,6 +13874,23 @@
    ],
    "bytes": 80768
   },
+  "hinata-preparo": {
+   "arquivo": "hinata-preparo.mp3",
+   "descricao": "Hinata: o Byakugan (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 36441
+  },
   "hinokami-kagura": {
    "arquivo": "hinokami-kagura.mp3",
    "descricao": "Tanjiro: a Dança do Deus do Fogo",
@@ -15047,6 +15149,23 @@
    ],
    "bytes": 39641
   },
+  "jeet-kune-do": {
+   "arquivo": "jeet-kune-do.mp3",
+   "descricao": "Spike: Jeet Kune Do",
+   "versoes": [
+    0.0,
+    1.549,
+    3.15,
+    4.6497
+   ],
+   "duracoes": [
+    1.469,
+    1.521,
+    1.4197,
+    1.5842
+   ],
+   "bytes": 47107
+  },
   "jill-preparo": {
    "arquivo": "jill-preparo.mp3",
    "descricao": "Jill: a seringa (Preparo)",
@@ -15573,6 +15692,23 @@
     2.0305
    ],
    "bytes": 70155
+  },
+  "kirito-preparo": {
+   "arquivo": "kirito-preparo.mp3",
+   "descricao": "Kirito: as duas espadas (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 30631
   },
   "kit-primeiros-socorros": {
    "arquivo": "kit-primeiros-socorros.mp3",
@@ -17188,6 +17324,23 @@
     1.8581
    ],
    "bytes": 62920
+  },
+  "maca-de-ferro": {
+   "arquivo": "maca-de-ferro.mp3",
+   "descricao": "Rem: maça de ferro",
+   "versoes": [
+    0.0,
+    2.18,
+    4.4361,
+    6.5451
+   ],
+   "duracoes": [
+    2.1,
+    2.1761,
+    2.029,
+    2.132
+   ],
+   "bytes": 60884
   },
   "maca-de-rem": {
    "arquivo": "maca-de-rem.mp3",
@@ -26845,6 +26998,23 @@
    ],
    "bytes": 61784
   },
+  "parry-kirito": {
+   "arquivo": "parry-kirito.mp3",
+   "descricao": "Kirito: parry",
+   "versoes": [
+    0.0,
+    1.4734,
+    3.0002,
+    4.4216
+   ],
+   "duracoes": [
+    1.3934,
+    1.4467,
+    1.3414,
+    1.4102
+   ],
+   "bytes": 55857
+  },
   "passaro-de-argila": {
    "arquivo": "passaro-de-argila.mp3",
    "descricao": "Deidara: o pássaro de argila",
@@ -27899,6 +28069,23 @@
    ],
    "bytes": 45098
   },
+  "polvora-senku": {
+   "arquivo": "polvora-senku.mp3",
+   "descricao": "Senku: pólvora",
+   "versoes": [
+    0.0,
+    2.88,
+    5.8615,
+    8.6468
+   ],
+   "duracoes": [
+    2.8,
+    2.9015,
+    2.7053,
+    2.8426
+   ],
+   "bytes": 99579
+  },
   "ponto-de-fusao": {
    "arquivo": "ponto-de-fusao.mp3",
    "descricao": "Todoroki: ponto de fusão",
@@ -28901,6 +29088,23 @@
     1.3198
    ],
    "bytes": 46697
+  },
+  "punho-suave": {
+   "arquivo": "punho-suave.mp3",
+   "descricao": "Hinata: punho suave",
+   "versoes": [
+    0.0,
+    1.2994,
+    2.6801,
+    4.0364
+   ],
+   "duracoes": [
+    1.2194,
+    1.3007,
+    1.2762,
+    1.3543
+   ],
+   "bytes": 41771
   },
   "punho-transmutado": {
    "arquivo": "punho-transmutado.mp3",
@@ -30449,6 +30653,40 @@
    ],
    "bytes": 69848
   },
+  "rem-preparo": {
+   "arquivo": "rem-preparo.mp3",
+   "descricao": "Rem: o chifre de oni (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 51976
+  },
+  "remedio-senku": {
+   "arquivo": "remedio-senku.mp3",
+   "descricao": "Senku: remédio",
+   "versoes": [
+    0.0,
+    1.98,
+    4.0289,
+    5.9446
+   ],
+   "duracoes": [
+    1.9,
+    1.9689,
+    1.8357,
+    1.9289
+   ],
+   "bytes": 63365
+  },
   "renascer": {
    "arquivo": "renascer.mp3",
    "descricao": "família renascer",
@@ -31009,6 +31247,23 @@
     1.6244
    ],
    "bytes": 39689
+  },
+  "rotacao-hinata": {
+   "arquivo": "rotacao-hinata.mp3",
+   "descricao": "Hinata: rotação",
+   "versoes": [
+    0.0,
+    1.995,
+    3.8877,
+    5.7506
+   ],
+   "duracoes": [
+    1.915,
+    1.8127,
+    1.7829,
+    1.8425
+   ],
+   "bytes": 67241
   },
   "roubar-a-formula": {
    "arquivo": "roubar-a-formula.mp3",
@@ -32013,6 +32268,23 @@
    ],
    "bytes": 86097
   },
+  "senku-preparo": {
+   "arquivo": "senku-preparo.mp3",
+   "descricao": "Senku: a ciência (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 55635
+  },
   "sentenca": {
    "arquivo": "sentenca.mp3",
    "descricao": "Cabeça de Pirâmide: a sentença",
@@ -32114,6 +32386,23 @@
     1.3198
    ],
    "bytes": 66831
+  },
+  "sessenta-e-quatro-palmas": {
+   "arquivo": "sessenta-e-quatro-palmas.mp3",
+   "descricao": "Hinata: 64 palmas",
+   "versoes": [
+    0.0,
+    2.0836,
+    4.3332,
+    6.3502
+   ],
+   "duracoes": [
+    2.0036,
+    2.1697,
+    1.937,
+    2.034
+   ],
+   "bytes": 68603
   },
   "sesshomaru-preparo": {
    "arquivo": "sesshomaru-preparo.mp3",
@@ -33356,6 +33645,23 @@
    ],
    "bytes": 52734
   },
+  "spike-preparo": {
+   "arquivo": "spike-preparo.mp3",
+   "descricao": "Spike: a Jericho armando (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 55068
+  },
   "spin-attack": {
    "arquivo": "spin-attack.mp3",
    "descricao": "básico de Sonic: bola girando e quique elástico",
@@ -33457,6 +33763,23 @@
     1.3198
    ],
    "bytes": 54504
+  },
+  "starburst-stream": {
+   "arquivo": "starburst-stream.mp3",
+   "descricao": "Kirito: Starburst Stream",
+   "versoes": [
+    0.0,
+    2.6372,
+    5.3807,
+    7.9461
+   ],
+   "duracoes": [
+    2.5572,
+    2.6635,
+    2.4854,
+    2.5657
+   ],
+   "bytes": 91106
   },
   "stewie-preparo": {
    "arquivo": "stewie-preparo.mp3",
@@ -34546,6 +34869,23 @@
    ],
    "bytes": 55907
   },
+  "tiro-desarmante": {
+   "arquivo": "tiro-desarmante.mp3",
+   "descricao": "Vash: tiro desarmante",
+   "versoes": [
+    0.0,
+    1.982,
+    4.0431,
+    5.9949
+   ],
+   "duracoes": [
+    1.902,
+    1.9811,
+    1.8719,
+    1.96
+   ],
+   "bytes": 63911
+  },
   "tiro-do-buster": {
    "arquivo": "tiro-do-buster.mp3",
    "descricao": "Mega Buster: três tiros",
@@ -34579,6 +34919,23 @@
     1.3198
    ],
    "bytes": 47760
+  },
+  "tiro-final": {
+   "arquivo": "tiro-final.mp3",
+   "descricao": "Spike: tiro final",
+   "versoes": [
+    0.0,
+    2.38,
+    4.8434,
+    7.1456
+   ],
+   "duracoes": [
+    2.3,
+    2.3834,
+    2.2222,
+    2.335
+   ],
+   "bytes": 89041
   },
   "tiro-na-cabeca": {
    "arquivo": "tiro-na-cabeca.mp3",
@@ -35294,6 +35651,23 @@
    ],
    "bytes": 82247
   },
+  "tufao-humanoide": {
+   "arquivo": "tufao-humanoide.mp3",
+   "descricao": "Vash: tufão humanoide",
+   "versoes": [
+    0.0,
+    1.5592,
+    3.1773,
+    4.693
+   ],
+   "duracoes": [
+    1.4792,
+    1.5382,
+    1.4356,
+    1.5402
+   ],
+   "bytes": 52485
+  },
   "ui-abrir": {
    "arquivo": "ui-abrir.mp3",
    "descricao": "abrir cartão ou menu",
@@ -35752,6 +36126,23 @@
     1.1563
    ],
    "bytes": 37673
+  },
+  "vash-preparo": {
+   "arquivo": "vash-preparo.mp3",
+   "descricao": "Vash: o braço-canhão (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 47314
   },
   "vazio-infinito": {
    "arquivo": "vazio-infinito.mp3",
@@ -36517,6 +36908,23 @@
     1.3655
    ],
    "bytes": 50737
+  },
+  "vorpal-strike": {
+   "arquivo": "vorpal-strike.mp3",
+   "descricao": "Kirito: Vorpal Strike",
+   "versoes": [
+    0.0,
+    1.7218,
+    3.4015,
+    4.9912
+   ],
+   "duracoes": [
+    1.6418,
+    1.5997,
+    1.5097,
+    1.6355
+   ],
+   "bytes": 52847
   },
   "wick-preparo": {
    "arquivo": "wick-preparo.mp3",
