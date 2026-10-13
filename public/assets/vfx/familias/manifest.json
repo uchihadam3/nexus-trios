@@ -1,4 +1,18 @@
 {
+ "abraco_esmagador": {
+  "descricao": "Patrick · os braços apertando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 13216
+ },
  "absorcao_boo": {
   "descricao": "Boo · a gosma sendo absorvida",
   "quadros": 12,
@@ -2323,6 +2337,20 @@
   "laco": true,
   "bytes": 35702
  },
+ "byakuya_preparo": {
+  "descricao": "Byakuya · a espada virando pétalas (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 20228
+ },
  "c4_karura": {
   "descricao": "Deidara · a nuvem de minibombas e o Katsu!",
   "quadros": 12,
@@ -4213,6 +4241,20 @@
   "laco": false,
   "bytes": 26758
  },
+ "corrida_na_agua": {
+  "descricao": "Flecha · correndo sobre a água",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 13826
+ },
  "cortador_de_plasma": {
   "descricao": "Isaac: mira de três pontos e lâmina de plasma",
   "quadros": 12,
@@ -4675,6 +4717,20 @@
   "laco": false,
   "bytes": 39174
  },
+ "danku": {
+  "descricao": "Byakuya · a parede de luz",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 8102
+ },
  "danny_preparo": {
   "descricao": "Danny Phantom · os anéis da transformação (Preparo, laço)",
   "quadros": 12,
@@ -4772,6 +4828,20 @@
   ],
   "laco": false,
   "bytes": 54228
+ },
+ "debaixo_da_pedra": {
+  "descricao": "Patrick · a pedra levantando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 17952
  },
  "dedo_apontado": {
   "descricao": "Dedo apontado de Makima: pressão invisível e estouro em 'bang'",
@@ -4884,6 +4954,20 @@
   ],
   "laco": false,
   "bytes": 58420
+ },
+ "descansar": {
+  "descricao": "Snorlax · o sono e as bolhas de cura",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 66096
  },
  "descarga_real": {
   "descricao": "Pantera Negra · a esfera e a onda com os hexágonos",
@@ -7167,6 +7251,20 @@
   "laco": false,
   "bytes": 61952
  },
+ "fatality_do_leque": {
+  "descricao": "Kitana · o leque girando como serra",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 27604
+ },
  "fator_de_cura": {
   "descricao": "Wolverine · os cortes fechando (fator de cura)",
   "quadros": 12,
@@ -7993,6 +8091,20 @@
   "laco": false,
   "bytes": 24750
  },
+ "furacao_flecha": {
+  "descricao": "Flecha · o furacão em volta de todos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 41342
+ },
  "furia_espartana": {
   "descricao": "Kratos · a pancada rápida da Fúria",
   "quadros": 12,
@@ -8566,6 +8678,20 @@
   ],
   "laco": true,
   "bytes": 37570
+ },
+ "giga_impacto": {
+  "descricao": "Snorlax · o corpanzil caindo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 69378
  },
  "gigantic_roar": {
   "descricao": "Broly · o rugido em ondas",
@@ -10051,6 +10177,20 @@
   "laco": true,
   "bytes": 21876
  },
+ "isso_e_burrice": {
+  "descricao": "Patrick · as besteiras e as interrogações",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 19646
+ },
  "izuna_otoshi": {
   "descricao": "Hayabusa · o rival girado e jogado no chão",
   "quadros": 12,
@@ -10344,6 +10484,20 @@
   ],
   "laco": false,
   "bytes": 91120
+ },
+ "kahn_preparo": {
+  "descricao": "Shao Kahn · a lança erguida (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 8072
  },
  "kaioken": {
   "descricao": "Kaioken: aura de fogo carmesim",
@@ -10652,6 +10806,20 @@
   ],
   "laco": false,
   "bytes": 24674
+ },
+ "kitana_preparo": {
+  "descricao": "Kitana · os dois leques cruzados (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 8870
  },
  "knuckles_preparo": {
   "descricao": "Knuckles · o punho e as pedras (Preparo, laço)",
@@ -11129,6 +11297,20 @@
   "laco": false,
   "bytes": 19816
  },
+ "lanca_de_kahn": {
+  "descricao": "Shao Kahn · a lança atravessando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 23440
+ },
  "lanca_de_pedra": {
   "descricao": "Edward · as palmas, os raios e a lança de pedra",
   "quadros": 12,
@@ -11352,6 +11534,20 @@
   ],
   "laco": true,
   "bytes": 8150
+ },
+ "leque_cortante": {
+  "descricao": "Kitana · o leque de aço em arco",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 23462
  },
  "leque_de_aco": {
   "descricao": "Básico da Kitana: o leque que vai e volta",
@@ -12066,6 +12262,20 @@
   ],
   "laco": false,
   "bytes": 52824
+ },
+ "martelo_de_guerra": {
+  "descricao": "Shao Kahn · o martelo de guerra descendo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 35200
  },
  "martelo_do_imperador": {
   "descricao": "Básico do Shao Kahn: a marreta e o chão rachado",
@@ -19039,6 +19249,20 @@
   "laco": false,
   "bytes": 29634
  },
+ "pancada_snorlax": {
+  "descricao": "Snorlax · a barriga e a pancada",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 31726
+ },
  "papel_bola": {
   "descricao": "Gon · a bola de aura do Papel voando (laço)",
   "quadros": 12,
@@ -19178,6 +19402,20 @@
   ],
   "laco": true,
   "bytes": 27456
+ },
+ "patrick_preparo": {
+  "descricao": "Patrick · o balão de pensamento vazio (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 2396
  },
  "pe_de_cabra": {
   "descricao": "Gordon · o pé de cabra e o lambda",
@@ -20187,6 +20425,20 @@
   "laco": false,
   "bytes": 53184
  },
+ "provocacao_de_kahn": {
+  "descricao": "Shao Kahn · o elmo de caveira e as ondas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 34730
+ },
  "provocacao_do_bart": {
   "descricao": "Bart · a pichação no ar",
   "quadros": 12,
@@ -21152,6 +21404,20 @@
   ],
   "laco": false,
   "bytes": 54116
+ },
+ "rajada_de_leque": {
+  "descricao": "Kitana · o redemoinho do leque",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 12734
  },
  "rajada_de_misseis": {
   "descricao": "Genos · os mísseis",
@@ -22525,6 +22791,20 @@
   "laco": false,
   "bytes": 40556
  },
+ "senbonzakura": {
+  "descricao": "Byakuya · as mil pétalas cortantes",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 43902
+ },
  "senbonzakura_corte": {
   "descricao": "Básico do Byakuya: o corte e as pétalas afiadas",
   "quadros": 12,
@@ -22538,6 +22818,20 @@
   ],
   "laco": false,
   "bytes": 20284
+ },
+ "senkei": {
+  "descricao": "Byakuya · o círculo de espadas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 58156
  },
  "sentenca": {
   "descricao": "Cabeça de Pirâmide · a Grande Faca descendo",
@@ -22902,6 +23196,20 @@
   ],
   "laco": true,
   "bytes": 17972
+ },
+ "snorlax_preparo": {
+  "descricao": "Snorlax · o corpo quicando (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 14900
  },
  "so_um_arranhao": {
   "descricao": "Deadpool · o band-aid e a regeneração",
@@ -23350,6 +23658,20 @@
   ],
   "laco": false,
   "bytes": 80620
+ },
+ "soco_veloz": {
+  "descricao": "Flecha · os socos supersônicos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 17484
  },
  "soco_viltrumita": {
   "descricao": "Omni-Man · o soco com as ondas de choque",

@@ -128,6 +128,12 @@ const T: Record<string, string> = {
   velma: 'lupa_da_velma cade_meus_oculos tirar_a_mascara',
   fred: 'rede_do_fred vamos_nos_separar armadilha_perfeita',
   leorio: 'soco_teletransportado primeiros_socorros bisturi_de_nen',
+  byakuya: 'senbonzakura danku senkei',
+  kitana: 'leque_cortante rajada_de_leque fatality_do_leque',
+  shaokahn: 'martelo_de_guerra provocacao_de_kahn lanca_de_kahn',
+  snorlax: 'pancada_snorlax descansar giga_impacto',
+  patrick: 'abraco_esmagador debaixo_da_pedra isso_e_burrice',
+  dash: 'soco_veloz corrida_na_agua furacao_flecha',
 };
 
 export const FAMILIA_DA_HABILIDADE: Record<string, VfxFamily> = Object.fromEntries(
