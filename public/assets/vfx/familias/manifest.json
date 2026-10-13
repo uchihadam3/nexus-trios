@@ -23505,6 +23505,20 @@
   "laco": true,
   "bytes": 18176
  },
+ "pancada_colossal_galactus": {
+  "descricao": "básico do Galactus: punho gigante e estrelas cósmicas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 62844
+ },
  "pancada_de_sangue": {
   "descricao": "Pancada de sangue de Power: martelo de sangue e gotas espirrando",
   "quadros": 12,
@@ -28783,6 +28797,20 @@
   "laco": false,
   "bytes": 86792
  },
+ "soco_cibernetico": {
+  "descricao": "básico do Ciborgue: braço de circuito e os pixels saltando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 23244
+ },
  "soco_cqc": {
   "descricao": "básico do Snake: o jab de CQC e o ! de alerta",
   "quadros": 12,
@@ -28838,6 +28866,20 @@
   ],
   "laco": false,
   "bytes": 54228
+ },
+ "soco_da_mare": {
+  "descricao": "básico do Aquaman: a faixa de água e a coroa de respingos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 32512
  },
  "soco_da_vida": {
   "descricao": "Soco da vida de Giorno: galhos, folhas e a joaninha dourada",
@@ -28965,6 +29007,20 @@
   "laco": false,
   "bytes": 113486
  },
+ "soco_de_construto": {
+  "descricao": "básico do Lanterna Verde: a luva gigante de luz do anel",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 32528
+ },
  "soco_de_hercules": {
   "descricao": "Básico de Hércules: o soco divino e o louro",
   "quadros": 12,
@@ -29035,6 +29091,20 @@
   "laco": false,
   "bytes": 36686
  },
+ "soco_de_madeira_groot": {
+  "descricao": "básico do Groot: punho de madeira, lascas e folhas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 26276
+ },
  "soco_de_marinheiro": {
   "descricao": "Soco de marinheiro: o braço gira como manivela, soco com estrelas e âncora estampada",
   "quadros": 12,
@@ -29048,6 +29118,20 @@
   ],
   "laco": false,
   "bytes": 54886
+ },
+ "soco_de_metal_ultron": {
+  "descricao": "básico do Ultron: punho cromado, núcleo vermelho e trilhas de circuito",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 19270
  },
  "soco_de_neo": {
   "descricao": "Básico do Neo: o código e o soco em câmera lenta",
@@ -29174,6 +29258,20 @@
   ],
   "laco": false,
   "bytes": 100482
+ },
+ "soco_do_duende": {
+  "descricao": "básico do Duende Verde: luva de barbatanas e fumaça verde",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 41952
  },
  "soco_do_gohan": {
   "descricao": "básico do Gohan: soco calmo, aura branca no braço e dois anéis de ar",
@@ -29482,6 +29580,20 @@
   ],
   "laco": false,
   "bytes": 24032
+ },
+ "soco_relampago_shazam": {
+  "descricao": "básico do Shazam: o soco e o raio do emblema",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 30580
  },
  "soco_saiyajin": {
   "descricao": "básico do Goku: munhequeira azul, ki dourado no punho e a onda de ar com poeira",

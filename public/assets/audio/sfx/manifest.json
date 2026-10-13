@@ -28086,6 +28086,23 @@
    ],
    "bytes": 96066
   },
+  "pancada-colossal-galactus": {
+   "arquivo": "pancada-colossal-galactus.mp3",
+   "descricao": "básico de Galactus: a pancada cósmica enorme",
+   "versoes": [
+    0.0,
+    1.43,
+    2.7087,
+    3.9929
+   ],
+   "duracoes": [
+    1.35,
+    1.1987,
+    1.2042,
+    1.3705
+   ],
+   "bytes": 39232
+  },
   "pancada-de-sangue": {
    "arquivo": "pancada-de-sangue.mp3",
    "descricao": "básico de Power: pancada molhada, esguicho e gotas pingando",
@@ -34359,6 +34376,23 @@
    ],
    "bytes": 61752
   },
+  "soco-cibernetico": {
+   "arquivo": "soco-cibernetico.mp3",
+   "descricao": "básico de Ciborgue: o soco de metal e os bips digitais",
+   "versoes": [
+    0.0,
+    0.7932,
+    1.6122,
+    2.5294
+   ],
+   "duracoes": [
+    0.7132,
+    0.739,
+    0.8371,
+    0.8015
+   ],
+   "bytes": 28739
+  },
   "soco-cqc": {
    "arquivo": "soco-cqc.mp3",
    "descricao": "básico de Snake: jab de CQC e o tlin do alerta",
@@ -34426,6 +34460,23 @@
     1.2048
    ],
    "bytes": 35027
+  },
+  "soco-da-mare": {
+   "arquivo": "soco-da-mare.mp3",
+   "descricao": "básico de Aquaman: a água chiando e espirrando",
+   "versoes": [
+    0.0,
+    1.1383,
+    2.3094,
+    3.4522
+   ],
+   "duracoes": [
+    1.0583,
+    1.091,
+    1.0628,
+    1.1167
+   ],
+   "bytes": 41373
   },
   "soco-da-vida": {
    "arquivo": "soco-da-vida.mp3",
@@ -34580,6 +34631,23 @@
    ],
    "bytes": 53987
   },
+  "soco-de-construto": {
+   "arquivo": "soco-de-construto.mp3",
+   "descricao": "básico de Lanterna Verde: o zumbido do anel e a luva de luz",
+   "versoes": [
+    0.0,
+    1.0322,
+    2.1488,
+    3.0583
+   ],
+   "duracoes": [
+    0.9522,
+    1.0366,
+    0.8294,
+    0.9041
+   ],
+   "bytes": 32789
+  },
   "soco-de-hercules": {
    "arquivo": "soco-de-hercules.mp3",
    "descricao": "básico de Hércules: o soco divino",
@@ -34665,6 +34733,23 @@
    ],
    "bytes": 28990
   },
+  "soco-de-madeira-groot": {
+   "arquivo": "soco-de-madeira-groot.mp3",
+   "descricao": "básico de Groot: a madeira estalando e as folhas",
+   "versoes": [
+    0.0,
+    1.1003,
+    2.0326,
+    2.9519
+   ],
+   "duracoes": [
+    1.0203,
+    0.8523,
+    0.8392,
+    0.9341
+   ],
+   "bytes": 39657
+  },
   "soco-de-marinheiro": {
    "arquivo": "soco-de-marinheiro.mp3",
    "descricao": "básico do Popeye: manivela cômica e o soco com estrelinhas",
@@ -34681,6 +34766,23 @@
     1.1675
    ],
    "bytes": 47439
+  },
+  "soco-de-metal-ultron": {
+   "arquivo": "soco-de-metal-ultron.mp3",
+   "descricao": "básico de Ultron: soco de metal e os bips dos circuitos",
+   "versoes": [
+    0.0,
+    0.9785,
+    1.9521,
+    2.9445
+   ],
+   "duracoes": [
+    0.8985,
+    0.8936,
+    0.9124,
+    0.8735
+   ],
+   "bytes": 31946
   },
   "soco-de-neo": {
    "arquivo": "soco-de-neo.mp3",
@@ -34834,6 +34936,23 @@
     1.1744
    ],
    "bytes": 48420
+  },
+  "soco-do-duende": {
+   "arquivo": "soco-do-duende.mp3",
+   "descricao": "básico de Duende Verde: o soco, as faíscas e a baforada",
+   "versoes": [
+    0.0,
+    1.08,
+    2.168,
+    3.2058
+   ],
+   "duracoes": [
+    1.0,
+    1.008,
+    0.9578,
+    1.0152
+   ],
+   "bytes": 33122
   },
   "soco-do-gohan": {
    "arquivo": "soco-do-gohan.mp3",
@@ -35242,6 +35361,23 @@
     0.9307
    ],
    "bytes": 34385
+  },
+  "soco-relampago-shazam": {
+   "arquivo": "soco-relampago-shazam.mp3",
+   "descricao": "básico de Shazam: o soco e o trovão curto",
+   "versoes": [
+    0.0,
+    1.13,
+    2.2981,
+    3.3926
+   ],
+   "duracoes": [
+    1.05,
+    1.0881,
+    1.0145,
+    1.066
+   ],
+   "bytes": 37010
   },
   "soco-saiyajin": {
    "arquivo": "soco-saiyajin.mp3",

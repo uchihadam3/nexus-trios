@@ -1959,6 +1959,15 @@ export const FAMILIAS_NOVAS = {
   soco_de_osso_em_chamas: n({ nome: 'Punho em chamas', grupo: 'físico', aponta: true, impacto: 'soco_de_osso_em_chamas', escala: 2.0, tempo: 1.0, cor: '#ffa04d', tinta: 'fixa' }),
   soco_de_luva_da_vampira: n({ nome: 'Soco emprestado', grupo: 'físico', aponta: true, impacto: 'soco_de_luva_da_vampira', escala: 2.0, tempo: 1.0, cor: '#8fd27a', tinta: 'fixa' }),
   patada_simbionte: n({ nome: 'Patada do simbionte', grupo: 'físico', aponta: true, impacto: 'patada_simbionte', escala: 2.1, tempo: 1.0, cor: '#9aa6c8', tinta: 'fixa' }),
+  // o ataque básico de cada personagem com animação e som próprios (tools/vfx/familias_v2/basicos_*.py)
+  soco_de_metal_ultron: n({ nome: 'Soco de metal', grupo: 'físico', aponta: true, impacto: 'soco_de_metal_ultron', escala: 2.0, tempo: 1.0, cor: '#ef6a6a', tinta: 'fixa' }),
+  soco_do_duende: n({ nome: 'Soco do Duende', grupo: 'físico', aponta: true, impacto: 'soco_do_duende', escala: 2.0, tempo: 1.0, cor: '#8fd36a', tinta: 'fixa' }),
+  pancada_colossal_galactus: n({ nome: 'Pancada colossal', grupo: 'físico', aponta: true, impacto: 'pancada_colossal_galactus', escala: 2.3, tempo: 1.0, cor: '#b08cf0', tinta: 'fixa' }),
+  soco_de_madeira_groot: n({ nome: 'Soco de madeira', grupo: 'físico', aponta: true, impacto: 'soco_de_madeira_groot', escala: 2.0, tempo: 1.0, cor: '#c9a06a', tinta: 'fixa' }),
+  soco_da_mare: n({ nome: 'Soco da maré', grupo: 'físico', aponta: true, impacto: 'soco_da_mare', escala: 2.0, tempo: 1.0, cor: '#5fc8d8', tinta: 'fixa' }),
+  soco_de_construto: n({ nome: 'Construto do anel', grupo: 'físico', aponta: true, impacto: 'soco_de_construto', escala: 2.1, tempo: 1.0, cor: '#6fe08a', tinta: 'fixa' }),
+  soco_cibernetico: n({ nome: 'Soco cibernético', grupo: 'físico', aponta: true, impacto: 'soco_cibernetico', escala: 2.0, tempo: 1.0, cor: '#6fb6ff', tinta: 'fixa' }),
+  soco_relampago_shazam: n({ nome: 'Soco do relâmpago', grupo: 'físico', aponta: true, impacto: 'soco_relampago_shazam', escala: 2.0, tempo: 1.0, cor: '#f5c542', tinta: 'fixa' }),
 } as const satisfies Record<string, Familia>;
 
 export type FamiliaNova = keyof typeof FAMILIAS_NOVAS;
@@ -1978,7 +1987,8 @@ export const NOVAS_NO_ALVO = new Set<FamiliaNova>(['ressurreicao', 'renascer', '
   'soco_saiyajin', 'soco_do_principe', 'soco_do_naruto', 'soco_infinito', 'soco_veloz_flash', 'soco_de_armadura', 'soco_da_manopla', 'soco_do_gohan',
   'jab_de_luva_vermelha', 'soco_divergente', 'soco_das_sombras', 'golpe_de_mao_sukuna', 'soco_endurecido', 'soco_do_gon', 'soco_da_corrente', 'soco_de_automail',
   'dois_jabs_kuririn', 'soco_espartano', 'soco_das_trevas_ganondorf', 'soco_cqc', 'soco_do_mario', 'soco_glacial', 'soco_da_faixa_vermelha', 'soco_eletrico_jin',
-  'toque_vampirico_dio', 'soco_da_vida_giorno', 'soco_serrilhado', 'punho_de_sangue_power', 'soco_formiga', 'soco_de_osso_em_chamas', 'soco_de_luva_da_vampira', 'patada_simbionte']);
+  'toque_vampirico_dio', 'soco_da_vida_giorno', 'soco_serrilhado', 'punho_de_sangue_power', 'soco_formiga', 'soco_de_osso_em_chamas', 'soco_de_luva_da_vampira', 'patada_simbionte',
+  'soco_de_metal_ultron', 'soco_do_duende', 'pancada_colossal_galactus', 'soco_de_madeira_groot', 'soco_da_mare', 'soco_de_construto', 'soco_cibernetico', 'soco_relampago_shazam']);
 
 /** Bons para o ataque básico do personagem (quando ele já usa a família numa habilidade). */
 export const NOVAS_DE_BASICO = new Set<FamiliaNova>(['garras', 'chicote', 'bastao', 'mordida', 'tentaculos', 'florete',
