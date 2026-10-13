@@ -17332,7 +17332,7 @@
   "bytes": 81322
  },
  "mu_atras": {
-  "descricao": "Valak · a silhueta atrás de você",
+  "descricao": "Valak · a freira surgindo da sombra, olhos acesos e a cruz",
   "quadros": 12,
   "grade": [
    3,
@@ -17343,7 +17343,7 @@
    192
   ],
   "laco": false,
-  "bytes": 12272
+  "bytes": 36898
  },
  "mu_bakuryuha": {
   "descricao": "Inuyasha · a Tessaiga e os redemoinhos",
@@ -19012,7 +19012,7 @@
   "bytes": 27622
  },
  "mu_estrangulamento": {
-  "descricao": "Darth Vader · o estrangulamento da Força",
+  "descricao": "Darth Vader · a mão da Força fechando em volta do alvo",
   "quadros": 12,
   "grade": [
    3,
@@ -19023,7 +19023,7 @@
    192
   ],
   "laco": false,
-  "bytes": 39738
+  "bytes": 25738
  },
  "mu_evoluiu": {
   "descricao": "Garou · o Punho da Água Corrente",
@@ -19530,7 +19530,7 @@
   "bytes": 26974
  },
  "mu_golpe_voltou": {
-  "descricao": "Harry Potter · a proteção que devolve",
+  "descricao": "Harry Potter · o escudo da mãe e o golpe voltando",
   "quadros": 12,
   "grade": [
    3,
@@ -19541,7 +19541,7 @@
    192
   ],
   "laco": false,
-  "bytes": 33406
+  "bytes": 55644
  },
  "mu_goool": {
   "descricao": "Casey Jones · o taco e o disco",
@@ -19712,7 +19712,7 @@
   "bytes": 65454
  },
  "mu_horcrux": {
-  "descricao": "Voldemort · a Horcrux destruída",
+  "descricao": "Voldemort · a horcrux rachando em cacos e a fumaça de cobra",
   "quadros": 12,
   "grade": [
    3,
@@ -19723,7 +19723,7 @@
    192
   ],
   "laco": false,
-  "bytes": 20264
+  "bytes": 17008
  },
  "mu_ilusao": {
   "descricao": "Loki · a imagem quebrando e os chifres",
@@ -19754,7 +19754,7 @@
   "bytes": 33146
  },
  "mu_implacavel": {
-  "descricao": "Jason · a máscara e o facão",
+  "descricao": "Jason · a máscara e o golpe que para no limite",
   "quadros": 12,
   "grade": [
    3,
@@ -19765,7 +19765,7 @@
    192
   ],
   "laco": false,
-  "bytes": 16700
+  "bytes": 19736
  },
  "mu_imprevisivel": {
   "descricao": "Arlequina · o martelão e os corações",
@@ -20692,7 +20692,7 @@
   "bytes": 55246
  },
  "mu_outro_ghostface": {
-  "descricao": "Ghostface · as duas máscaras e as facas",
+  "descricao": "Ghostface · a outra máscara e o corte em X",
   "quadros": 12,
   "grade": [
    3,
@@ -20703,7 +20703,7 @@
    192
   ],
   "laco": false,
-  "bytes": 25990
+  "bytes": 11472
  },
  "mu_ovo_yoshi": {
   "descricao": "Yoshi · a língua e o ovo",
@@ -21742,7 +21742,7 @@
   "bytes": 41574
  },
  "mu_sete_dias": {
-  "descricao": "Samara · a TV, o anel e os cabelos",
+  "descricao": "Samara · a TV de chiado, o anel e o cabelo escorrendo",
   "quadros": 12,
   "grade": [
    3,
@@ -21753,7 +21753,7 @@
    192
   ],
   "laco": false,
-  "bytes": 21348
+  "bytes": 40288
  },
  "mu_sharingan": {
   "descricao": "Sasuke · o Sharingan girando",
@@ -22428,7 +22428,7 @@
   "bytes": 34170
  },
  "mu_vitima": {
-  "descricao": "Michael Myers · a faca e a respiração",
+  "descricao": "Michael Myers · a silhueta atrás do alvo e a faca brilhando",
   "quadros": 12,
   "grade": [
    3,
@@ -22439,7 +22439,7 @@
    192
   ],
   "laco": false,
-  "bytes": 22712
+  "bytes": 24938
  },
  "mu_voz_roubada": {
   "descricao": "Úrsula · a concha e a voz roubada",
