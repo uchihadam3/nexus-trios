@@ -937,6 +937,23 @@
    ],
    "bytes": 63867
   },
+  "ataque-em-dupla": {
+   "arquivo": "ataque-em-dupla.mp3",
+   "descricao": "Robin: o ataque em dupla",
+   "versoes": [
+    0.0,
+    1.1651,
+    2.4258,
+    3.6443
+   ],
+   "duracoes": [
+    1.0851,
+    1.1807,
+    1.1385,
+    1.1013
+   ],
+   "bytes": 38166
+  },
   "atropelo": {
    "arquivo": "atropelo.mp3",
    "descricao": "Bebop: o atropelo",
@@ -1225,6 +1242,23 @@
     1.4213
    ],
    "bytes": 60396
+  },
+  "baixo-machado": {
+   "arquivo": "baixo-machado.mp3",
+   "descricao": "Marceline: o baixo-machado",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 53573
   },
   "bankai-ichigo": {
    "arquivo": "bankai-ichigo.mp3",
@@ -1515,6 +1549,23 @@
    ],
    "bytes": 53158
   },
+  "bastao-retratil": {
+   "arquivo": "bastao-retratil.mp3",
+   "descricao": "Robin: o bastão retrátil",
+   "versoes": [
+    0.0,
+    1.0084,
+    2.2561,
+    3.3378
+   ],
+   "duracoes": [
+    0.9284,
+    1.1678,
+    1.0017,
+    0.9784
+   ],
+   "bytes": 36762
+  },
   "bastoes-eletricos": {
    "arquivo": "bastoes-eletricos.mp3",
    "descricao": "básico do Asa Noturna: os bastões e o choque",
@@ -1599,6 +1650,23 @@
     0.6091
    ],
    "bytes": 24075
+  },
+  "batarangue-robin": {
+   "arquivo": "batarangue-robin.mp3",
+   "descricao": "Robin: o batarangue",
+   "versoes": [
+    0.0,
+    1.5634,
+    3.2379,
+    4.77
+   ],
+   "duracoes": [
+    1.4834,
+    1.5946,
+    1.452,
+    1.5379
+   ],
+   "bytes": 60063
   },
   "batida-do-gorila": {
    "arquivo": "batida-do-gorila.mp3",
@@ -2059,6 +2127,23 @@
    ],
    "bytes": 62740
   },
+  "bola-de-fogo-verde": {
+   "arquivo": "bola-de-fogo-verde.mp3",
+   "descricao": "Luigi: a bola de fogo verde",
+   "versoes": [
+    0.0,
+    1.6541,
+    3.4411,
+    5.0878
+   ],
+   "duracoes": [
+    1.5741,
+    1.707,
+    1.5667,
+    1.5749
+   ],
+   "bytes": 49024
+  },
   "bola-de-neve": {
    "arquivo": "bola-de-neve.mp3",
    "descricao": "básico do Homem de Gelo: a bola de neve espatifando",
@@ -2126,6 +2211,23 @@
     1.1167
    ],
    "bytes": 60312
+  },
+  "bolo-de-cura": {
+   "arquivo": "bolo-de-cura.mp3",
+   "descricao": "Princesa Peach: o bolo de cura",
+   "versoes": [
+    0.0,
+    2.1761,
+    4.4272,
+    6.5335
+   ],
+   "duracoes": [
+    2.0961,
+    2.1711,
+    2.0262,
+    2.1276
+   ],
+   "bytes": 65780
   },
   "bomba-abobora": {
    "arquivo": "bomba-abobora.mp3",
@@ -6496,6 +6598,23 @@
    ],
    "bytes": 50590
   },
+  "escudo-elastico-jake": {
+   "arquivo": "escudo-elastico-jake.mp3",
+   "descricao": "Jake: o escudo elástico",
+   "versoes": [
+    0.0,
+    1.4601,
+    2.9692,
+    4.3854
+   ],
+   "duracoes": [
+    1.3801,
+    1.4291,
+    1.3362,
+    1.4007
+   ],
+   "bytes": 39554
+  },
   "escudo-flexivel": {
    "arquivo": "escudo-flexivel.mp3",
    "descricao": "Mulher-Elástica: o escudo flexível",
@@ -8553,6 +8672,23 @@
    ],
    "bytes": 59264
   },
+  "forma-de-morcego": {
+   "arquivo": "forma-de-morcego.mp3",
+   "descricao": "Marceline: a forma de morcego",
+   "versoes": [
+    0.0,
+    2.0854,
+    4.2426,
+    6.209
+   ],
+   "duracoes": [
+    2.0054,
+    2.0771,
+    1.8864,
+    2.0359
+   ],
+   "bytes": 61702
+  },
   "forma-de-nevoa": {
    "arquivo": "forma-de-nevoa.mp3",
    "descricao": "Alucard: a forma de névoa",
@@ -10406,6 +10542,23 @@
    ],
    "bytes": 85975
   },
+  "heihachi-preparo": {
+   "arquivo": "heihachi-preparo.mp3",
+   "descricao": "Heihachi: as faíscas no punho (Preparo)",
+   "versoes": [
+    0.0,
+    1.4582,
+    2.9385,
+    4.3572
+   ],
+   "duracoes": [
+    1.3782,
+    1.4004,
+    1.3387,
+    1.4118
+   ],
+   "bytes": 59028
+  },
   "hellboy-preparo": {
    "arquivo": "hellboy-preparo.mp3",
    "descricao": "Hellboy: a Mão da Perdição (Preparo)",
@@ -11408,6 +11561,40 @@
     1.3198
    ],
    "bytes": 51133
+  },
+  "jake-gigante": {
+   "arquivo": "jake-gigante.mp3",
+   "descricao": "Jake: Jake gigante",
+   "versoes": [
+    0.0,
+    2.3347,
+    4.5717,
+    6.6656
+   ],
+   "duracoes": [
+    2.2547,
+    2.157,
+    2.0138,
+    2.2039
+   ],
+   "bytes": 69395
+  },
+  "jake-preparo": {
+   "arquivo": "jake-preparo.mp3",
+   "descricao": "Jake: o corpo inchando (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 27546
   },
   "jardim-das-sombras": {
    "arquivo": "jardim-das-sombras.mp3",
@@ -13160,6 +13347,23 @@
    ],
    "bytes": 69636
   },
+  "luigi-preparo": {
+   "arquivo": "luigi-preparo.mp3",
+   "descricao": "Luigi: carregando o míssil (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 26809
+  },
   "luz": {
    "arquivo": "luz.mp3",
    "descricao": "luz sagrada",
@@ -13550,6 +13754,23 @@
     1.3049
    ],
    "bytes": 56168
+  },
+  "marceline-preparo": {
+   "arquivo": "marceline-preparo.mp3",
+   "descricao": "Marceline: as asas se formando (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 52250
   },
   "mare-puxante": {
    "arquivo": "mare-puxante.mp3",
@@ -14112,6 +14333,23 @@
    ],
    "bytes": 63934
   },
+  "missil-luigi": {
+   "arquivo": "missil-luigi.mp3",
+   "descricao": "Luigi: o Míssil Luigi",
+   "versoes": [
+    0.0,
+    1.9824,
+    3.9746,
+    5.8502
+   ],
+   "duracoes": [
+    1.9024,
+    1.9121,
+    1.7956,
+    1.8879
+   ],
+   "bytes": 66765
+  },
   "mjolnir-impacto": {
    "arquivo": "mjolnir-impacto.mp3",
    "descricao": "Mjolnir: a pancada e o trovão",
@@ -14281,6 +14519,23 @@
     1.3198
    ],
    "bytes": 53124
+  },
+  "mordida-de-marceline": {
+   "arquivo": "mordida-de-marceline.mp3",
+   "descricao": "Marceline: a mordida",
+   "versoes": [
+    0.0,
+    1.6865,
+    3.43,
+    5.0614
+   ],
+   "duracoes": [
+    1.6065,
+    1.6635,
+    1.5514,
+    1.5505
+   ],
+   "bytes": 55012
   },
   "mordida-de-pennywise": {
    "arquivo": "mordida-de-pennywise.mp3",
@@ -22085,6 +22340,23 @@
    ],
    "bytes": 49843
   },
+  "peach-preparo": {
+   "arquivo": "peach-preparo.mp3",
+   "descricao": "Princesa Peach: a coroa brilhando (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 58429
+  },
   "pedra-da-toph": {
    "arquivo": "pedra-da-toph.mp3",
    "descricao": "básico da Toph: a pisada, o bloco voando e a pedra se partindo",
@@ -22748,6 +23020,23 @@
    ],
    "bytes": 54255
   },
+  "poltergust": {
+   "arquivo": "poltergust.mp3",
+   "descricao": "Luigi: o Poltergust",
+   "versoes": [
+    0.0,
+    1.3356,
+    2.705,
+    3.9894
+   ],
+   "duracoes": [
+    1.2556,
+    1.2894,
+    1.2045,
+    1.2922
+   ],
+   "bytes": 45098
+  },
   "pontos-de-chakra": {
    "arquivo": "pontos-de-chakra.mp3",
    "descricao": "Hinata: o Byakugan, os pontos e as palmas",
@@ -22832,6 +23121,23 @@
     1.5228
    ],
    "bytes": 65969
+  },
+  "postura-demoniaca": {
+   "arquivo": "postura-demoniaca.mp3",
+   "descricao": "Heihachi: a postura demoníaca",
+   "versoes": [
+    0.0,
+    1.486,
+    3.0104,
+    4.4794
+   ],
+   "duracoes": [
+    1.406,
+    1.4444,
+    1.389,
+    1.3903
+   ],
+   "bytes": 51683
   },
   "postura-do-rato": {
    "arquivo": "postura-do-rato.mp3",
@@ -23360,6 +23666,23 @@
    ],
    "bytes": 58256
   },
+  "punho-do-deus-do-trovao": {
+   "arquivo": "punho-do-deus-do-trovao.mp3",
+   "descricao": "Heihachi: o punho do deus do trovão",
+   "versoes": [
+    0.0,
+    1.4528,
+    2.9507,
+    4.2419
+   ],
+   "duracoes": [
+    1.3728,
+    1.4179,
+    1.2112,
+    1.3103
+   ],
+   "bytes": 44502
+  },
   "punho-do-dragao": {
    "arquivo": "punho-do-dragao.mp3",
    "descricao": "básico de Shiryu: gancho subindo e o rugido de vento do dragão",
@@ -23478,6 +23801,23 @@
     1.2183
    ],
    "bytes": 47588
+  },
+  "punho-gigante-jake": {
+   "arquivo": "punho-gigante-jake.mp3",
+   "descricao": "Jake: o punho gigante",
+   "versoes": [
+    0.0,
+    1.3879,
+    2.676,
+    4.0206
+   ],
+   "duracoes": [
+    1.3079,
+    1.208,
+    1.2646,
+    1.3271
+   ],
+   "bytes": 33714
   },
   "punho-heroico": {
    "arquivo": "punho-heroico.mp3",
@@ -24022,6 +24362,23 @@
     1.4185
    ],
    "bytes": 48565
+  },
+  "raio-do-mishima": {
+   "arquivo": "raio-do-mishima.mp3",
+   "descricao": "Heihachi: o raio do Mishima",
+   "versoes": [
+    0.0,
+    2.38,
+    4.8288,
+    7.131
+   ],
+   "duracoes": [
+    2.3,
+    2.3688,
+    2.2222,
+    2.335
+   ],
+   "bytes": 75830
   },
   "raio-fantasma": {
    "arquivo": "raio-fantasma.mp3",
@@ -25195,6 +25552,23 @@
     1.7398
    ],
    "bytes": 59493
+  },
+  "robin-preparo": {
+   "arquivo": "robin-preparo.mp3",
+   "descricao": "Robin: os bumerangues prontos (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4346
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3439,
+    1.4213
+   ],
+   "bytes": 55102
   },
   "robo-gigante-mojo": {
    "arquivo": "robo-gigante-mojo.mp3",
@@ -26827,6 +27201,23 @@
     1.0152
    ],
    "bytes": 33472
+  },
+  "sombrinha": {
+   "arquivo": "sombrinha.mp3",
+   "descricao": "Princesa Peach: a sombrinha",
+   "versoes": [
+    0.0,
+    1.6359,
+    3.2515,
+    4.8292
+   ],
+   "duracoes": [
+    1.5559,
+    1.5356,
+    1.4977,
+    1.5638
+   ],
+   "bytes": 49781
   },
   "sonic-preparo": {
    "arquivo": "sonic-preparo.mp3",
@@ -29037,6 +29428,23 @@
     0.6091
    ],
    "bytes": 27540
+  },
+  "vibe-da-princesa": {
+   "arquivo": "vibe-da-princesa.mp3",
+   "descricao": "Princesa Peach: a vibe da princesa",
+   "versoes": [
+    0.0,
+    1.8212,
+    3.797,
+    5.5753
+   ],
+   "duracoes": [
+    1.7412,
+    1.8958,
+    1.6983,
+    1.7561
+   ],
+   "bytes": 90049
   },
   "vibranio-preparo": {
    "arquivo": "vibranio-preparo.mp3",

@@ -110,6 +110,12 @@ const T: Record<string, string> = {
   sailormercury: 'nevoa_de_bolhas spray_de_bolhas rapsodia_aquatica',
   kurama: 'chicote_de_rosas planta_comedora arvore_da_ilusao',
   ken: 'hadouken_ken tatsumaki_ken shinryuken',
+  heihachi: 'punho_do_deus_do_trovao postura_demoniaca raio_do_mishima',
+  jake: 'punho_gigante_jake escudo_elastico_jake jake_gigante',
+  marceline: 'mordida_de_marceline baixo_machado forma_de_morcego',
+  robin: 'bastao_retratil batarangue_robin ataque_em_dupla',
+  luigi: 'bola_de_fogo_verde poltergust missil_luigi',
+  peach: 'sombrinha bolo_de_cura vibe_da_princesa',
 };
 
 export const FAMILIA_DA_HABILIDADE: Record<string, VfxFamily> = Object.fromEntries(

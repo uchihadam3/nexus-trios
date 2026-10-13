@@ -741,6 +741,20 @@
   "laco": false,
   "bytes": 33350
  },
+ "ataque_em_dupla": {
+  "descricao": "Robin · o X com o Morcego",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 30006
+ },
  "atropelo": {
   "descricao": "Bebop · as pisadas atravessando todos",
   "quadros": 12,
@@ -992,6 +1006,20 @@
   ],
   "laco": true,
   "bytes": 34096
+ },
+ "baixo_machado": {
+  "descricao": "Marceline · o baixo-machado e as notas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 26112
  },
  "bala_de_canhao": {
   "descricao": "bala de canhão em viagem (+x)",
@@ -1245,6 +1273,20 @@
   "laco": false,
   "bytes": 23348
  },
+ "bastao_retratil": {
+  "descricao": "Robin · o bastão estendendo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 17140
+ },
  "bastoes_eletricos": {
   "descricao": "Básico do Asa Noturna: os dois bastões elétricos",
   "quadros": 12,
@@ -1314,6 +1356,20 @@
   ],
   "laco": true,
   "bytes": 15738
+ },
+ "batarangue_robin": {
+  "descricao": "Robin · o bumerangue de pássaro",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 15190
  },
  "batarangue_voando": {
   "descricao": "o batarangue girando em voo (+x)",
@@ -1735,6 +1791,20 @@
   "laco": false,
   "bytes": 19888
  },
+ "bola_de_fogo_verde": {
+  "descricao": "Luigi · a bola de fogo verde quicando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 16676
+ },
  "bola_de_neve": {
   "descricao": "Básico do Homem de Gelo: a bola de neve espatifando",
   "quadros": 12,
@@ -1818,6 +1888,20 @@
   ],
   "laco": false,
   "bytes": 26486
+ },
+ "bolo_de_cura": {
+  "descricao": "Princesa Peach · o bolo e o coração",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 34660
  },
  "bomba_abobora": {
   "descricao": "Duende Verde · a abóbora rindo e a explosão",
@@ -5599,6 +5683,20 @@
   "laco": false,
   "bytes": 124582
  },
+ "escudo_elastico_jake": {
+  "descricao": "Jake · a cúpula amarela no aliado",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 33104
+ },
  "escudo_flexivel": {
   "descricao": "Mulher-Elástica · o paraquedas de borracha",
   "quadros": 12,
@@ -7447,6 +7545,20 @@
   "laco": false,
   "bytes": 19920
  },
+ "forma_de_morcego": {
+  "descricao": "Marceline · as asas de morcego varrendo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 49600
+ },
  "forma_de_nevoa": {
   "descricao": "Alucard · a névoa e os morcegos",
   "quadros": 12,
@@ -8973,6 +9085,20 @@
   "laco": false,
   "bytes": 39498
  },
+ "heihachi_preparo": {
+  "descricao": "Heihachi · as faíscas no punho (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 11802
+ },
  "hellboy_preparo": {
   "descricao": "Hellboy · a Mão da Perdição erguida (Preparo, laço)",
   "quadros": 12,
@@ -9756,6 +9882,34 @@
   ],
   "laco": false,
   "bytes": 44308
+ },
+ "jake_gigante": {
+  "descricao": "Jake · a pata gigante pisando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 43982
+ },
+ "jake_preparo": {
+  "descricao": "Jake · o corpo inchando (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 19914
  },
  "jardim_das_sombras": {
   "descricao": "Megumi · a poça de sombra e as mãos que fecham",
@@ -11185,6 +11339,20 @@
   "laco": true,
   "bytes": 46028
  },
+ "luigi_preparo": {
+  "descricao": "Luigi · a cabeça baixa tremendo (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 15872
+ },
  "luz": {
   "descricao": "pilar de luz",
   "quadros": 12,
@@ -11520,6 +11688,20 @@
   ],
   "laco": false,
   "bytes": 16492
+ },
+ "marceline_preparo": {
+  "descricao": "Marceline · as asas e os olhos vermelhos (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 14906
  },
  "mare_puxante": {
   "descricao": "Aquaman · a onda que puxa e as bolhas no trio",
@@ -12011,6 +12193,20 @@
   "laco": false,
   "bytes": 35398
  },
+ "missil_luigi": {
+  "descricao": "Luigi · o voo de cabeça e o impacto",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 37794
+ },
  "mjolnir_impacto": {
   "descricao": "Thor · o martelo batendo e o trovão",
   "quadros": 12,
@@ -12150,6 +12346,20 @@
   ],
   "laco": false,
   "bytes": 21044
+ },
+ "mordida_de_marceline": {
+  "descricao": "Marceline · as presas e a vida voltando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 18882
  },
  "mordida_de_pennywise": {
   "descricao": "Básico do Pennywise: a boca de dentes e o balão",
@@ -18577,6 +18787,20 @@
   "laco": false,
   "bytes": 20066
  },
+ "peach_preparo": {
+  "descricao": "Princesa Peach · a coroa e os corações (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 9998
+ },
  "pedra_bloco": {
   "descricao": "Toph · o bloco de pedra voando (laço, básico)",
   "quadros": 12,
@@ -19151,6 +19375,20 @@
   "laco": false,
   "bytes": 32396
  },
+ "poltergust": {
+  "descricao": "Luigi · o aspirador sugando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 41824
+ },
  "pontos_de_chakra": {
   "descricao": "Hinata · os oito trigramas e os pontos de chakra",
   "quadros": 12,
@@ -19234,6 +19472,20 @@
   ],
   "laco": false,
   "bytes": 29794
+ },
+ "postura_demoniaca": {
+  "descricao": "Heihachi · a aura escura e os chifres",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 41952
  },
  "postura_do_rato": {
   "descricao": "Mestre Splinter · o rabo em círculo e a meditação",
@@ -19641,6 +19893,20 @@
   "laco": false,
   "bytes": 58912
  },
+ "punho_do_deus_do_trovao": {
+  "descricao": "Heihachi · o soco com os raios",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 27122
+ },
  "punho_do_dragao": {
   "descricao": "Shiryu: gancho que sobe com o dragão em espiral",
   "quadros": 12,
@@ -19738,6 +20004,20 @@
   ],
   "laco": false,
   "bytes": 102118
+ },
+ "punho_gigante_jake": {
+  "descricao": "Jake · o punho que incha",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 22138
  },
  "punho_heroico": {
   "descricao": "Finn · o punho e as estrelinhas",
@@ -20214,6 +20494,20 @@
   ],
   "laco": false,
   "bytes": 25162
+ },
+ "raio_do_mishima": {
+  "descricao": "Heihachi · o raio enorme",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 60122
  },
  "raio_faixa": {
   "descricao": "raio entre dois pontos (faixa)",
@@ -21124,6 +21418,20 @@
   ],
   "laco": false,
   "bytes": 55598
+ },
+ "robin_preparo": {
+  "descricao": "Robin · os dois bumerangues e a capa (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 11562
  },
  "robo_gigante_mojo": {
   "descricao": "Macaco Louco · o punho do robô gigante",
@@ -22566,6 +22874,20 @@
   ],
   "laco": false,
   "bytes": 97720
+ },
+ "sombrinha": {
+  "descricao": "Princesa Peach · a sombrinha abrindo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 39054
  },
  "sonic_preparo": {
   "descricao": "Sonic · as Esmeraldas girando (Preparo, laço)",
@@ -24344,6 +24666,20 @@
   ],
   "laco": false,
   "bytes": 68576
+ },
+ "vibe_da_princesa": {
+  "descricao": "Princesa Peach · as ondas rosa e os corações",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 61938
  },
  "vibranio_preparo": {
   "descricao": "Pantera Negra · a energia indo para o peito (Preparo, laço)",
