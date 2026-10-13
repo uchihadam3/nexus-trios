@@ -8,8 +8,9 @@ import { PRESENTATION as P } from '../presentation/config';
 import { folha } from '../presentation/vfxProfiles';
 import { byId } from '../data/characters';
 import { unicaDe } from '../engine/unicas';
-import { JEITO_DA_UNICA } from '../data/unicas-jeito';
-import { EFEITO_DA_UNICA,MEDIDOR_DA_UNICA } from '../presentation/unicas-efeitos';
+import { EFEITO_DA_UNICA } from '../presentation/unicas-efeitos';
+import { bolinhaNaTela } from '../presentation/bolinha-da-unica';
+import { bolinhaDe,corDaBolinha } from '../presentation/bolinhas';
 import { statuses } from '../data/statuses';
 import { Portrait } from './Portrait';
 import { AuxIcon,SkillIcon } from './Icon';
@@ -106,10 +107,12 @@ export function ArenaUnit({fighter:f,battle,beat,onInspect,numbers,threatened,li
    * sempre ativa fica acesa; a de relógio ("a cada 10 s") enche com o tempo que falta; ao ativar, enche no Preparo
    * dela e acende.
    */
-  const unica=unicaDe(c.id),jeito=JEITO_DA_UNICA[c.id];
-  const medidor=MEDIDOR_DA_UNICA[c.id];
-  const cargaDaUnica=ativando?(at&&preparandoUnica?Math.min(100,100*at.t/Math.max(.01,at.fases.soltaEm)):100)
-    :medidor?Math.min(100,Math.round(100*medidor.carga(f))):jeito==='sempre'?100:Math.round(100*(cargaDoRelogio(f)??0));
+  /*
+   * A bolinha conta a mecânica de cada um (src/presentation/bolinhas.ts): o ícone dela, os segundos, as pilhas, o
+   * quanto falta; ao ativar, enche no Preparo e acende.
+   */
+  const unica=unicaDe(c.id),specDaBolinha=bolinhaDe(c.id),bolinha=bolinhaNaTela(specDaBolinha,f,battle),IconeDaUnica=specDaBolinha.ic,corDaUnica=corDaBolinha(c.id);
+  const cargaDaUnica=ativando?(at&&preparandoUnica?Math.min(100,100*at.t/Math.max(.01,at.fases.soltaEm)):100):Math.round(100*bolinha.carga);
   /*
    * O selo do traço e da Mecânica única fica um tempo na cabeça, com efeito no retrato (pedido do jogador: "aparece
    * muito rápido… poderia ficar um pouquinho mais de tempo na cabeça deles… e tivesse efeito"). Não segura a luta: o
@@ -199,9 +202,15 @@ export function ArenaUnit({fighter:f,battle,beat,onInspect,numbers,threatened,li
         </svg>
         {preparing&&<svg className="prep-ring" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="41" pathLength="100" strokeDasharray={`${preparandoUnica?anelDaUnica:f.cast?Math.max(0,100*f.cast.elapsed/f.cast.duration):0} 100`}/></svg>}
         {/* a bolinha da Mecânica única, como uma quarta habilidade: enche com o relógio dela e acende ao ativar */}
-        {unica&&!out&&<span className={`unica-bolinha${jeito==='sempre'?' sempre':''}${ativando?' ativando':''}${cargaDaUnica>=100&&!ativando?' cheia':''}`} aria-hidden="true">
-          <svg className="ub-anel" viewBox="0 0 36 36"><circle cx="18" cy="18" r="15.5" className="ub-trilho"/><circle cx="18" cy="18" r="15.5" pathLength="100" className="ub-carga" strokeDasharray={`${cargaDaUnica} 100`}/></svg>
-          {medidor?.numero&&!ativando?<b className="ub-numero">{cargaDaUnica}</b>:<Sparkles size={14} strokeWidth={2.4}/>}
+        {unica&&!out&&<span className={`unica-bolinha ub-${ativando?'ativando':bolinha.luz}${ativando?' ativando':''}`} style={corDaUnica?{'--ub-cor':corDaUnica} as React.CSSProperties:undefined} aria-hidden="true">
+          <svg className="ub-anel" viewBox="0 0 36 36">{bolinha.pontos&&!ativando
+            /* as pilhas: o anel vira gomos, um por pilha, e cada pilha acende o seu */
+            ?Array.from({length:bolinha.pontos.max},(_,i)=>{const n=bolinha.pontos!.max;return <circle key={i} cx="18" cy="18" r="15.5" pathLength="100" className={`ub-gomo${i<bolinha.pontos!.tem?' cheio':''}`} strokeDasharray={`${100/n-(n>1?7:0)} 100`} strokeDashoffset={-(i*100/n+(n>1?3.5:0))}/>;})
+            :<><circle cx="18" cy="18" r="15.5" className="ub-trilho"/>{cargaDaUnica>0&&<circle cx="18" cy="18" r="15.5" pathLength="100" className="ub-carga" strokeDasharray={`${cargaDaUnica} 100`}/>}</>}</svg>
+          {bolinha.texto&&!ativando?<b className="ub-numero" data-len={bolinha.texto.length}>{/[s%]$/.test(bolinha.texto)?<>{bolinha.texto.slice(0,-1)}<small>{bolinha.texto.slice(-1)}</small></>:bolinha.texto}</b>:<IconeDaUnica size={14} strokeWidth={2.4}/>}
+          {bolinha.luz==='usada'&&!ativando&&<i className="ub-ok">✓</i>}
+          {/* o estouro de luz quando ela fica pronta (ou está quase) */}
+          {(bolinha.luz==='pronta'||bolinha.luz==='quase')&&!ativando&&<i key={bolinha.luz} className={`ub-estouro ${bolinha.luz}`}/>}
         </span>}
         {threatened&&<span className="unit-brackets" aria-hidden="true"/>}
         {broken&&<span className="unit-break" aria-hidden="true">×</span>}
@@ -288,12 +297,6 @@ function Selo({selo}:{selo:{rotulo:string;tipo:'unica'|'traco'|'mecanica';inicio
 
 /** O nome da ativação: o aviso dela quando a mecânica tem efeito próprio (o "Vai explodir!" do Cell, o "Black Flash" do Yuji), senão o nome da mecânica. */
 /** Quanto do relógio da mecânica já passou (0 a 1), ou null se ela não anda por tempo. */
-function cargaDoRelogio(f:Fighter){
-  const s=f.u;if(!s)return null;let carga:number|null=null;
-  for(const k in s){if(!k.startsWith('relogio_')||k.endsWith('_volta'))continue;const volta=s[`${k}_volta`];if(!volta)continue;
-    const p=Math.min(1,Math.max(0,1-s[k]!/volta));carga=carga===null?p:Math.max(carga,p);}
-  return carga;
-}
 function nomeDaAtivacao(beat:Beat|null|undefined,passo:{eventos:number[];rotulo?:string},personagem:string){
   const aviso=beat?.events.find(e=>e.kind==='unica'&&passo.eventos.includes(e.id))?.label;
   // o escudo de imunidade (a Capitã Marvel absorvendo o raio) mostra o nome da mecânica, não "Imune"

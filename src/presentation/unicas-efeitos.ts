@@ -1,4 +1,3 @@
-import type { Fighter } from '../engine/types';
 import type { VfxFamily } from './vfxProfiles';
 
 /*
@@ -636,13 +635,3 @@ export function efeitoDaUnica(personagem: string, aviso: string): { familia: Vfx
   return dela?.[aviso] ?? dela?.['*'] ?? { familia: 'unica_ativa', som: 'unica-ativa' };
 }
 
-/**
- * Mecânicas que enchem uma barra própria (pedido do jogador: "ver… carregando até chegar a 100% pra usar a mecânica
- * única"): a bolinha enche com ela, e as que contam em % mostram o número.
- */
-export const MEDIDOR_DA_UNICA: Record<string, { carga: (f: Fighter) => number; numero?: boolean }> = {
-  // a barra ???% do Mob enche com a Vida que o trio dele perde
-  mob: { carga: (f) => (f.u?.emocao ?? 0) / 100, numero: true },
-  // a cada 12 ataques básicos, o Spinning Bird Kick
-  chunli: { carga: (f) => ((f.u?.chutes ?? 0) % 12) / 12 },
-};

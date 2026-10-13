@@ -430,7 +430,49 @@
 .unica-bolinha.ativando{transform:scale(1.22);color:#fff;background:radial-gradient(circle at 35% 30%,#9a5cff 0%,#5a2a9e 55%,#2a1050 100%);
   box-shadow:inset 0 1px 0 #fff5,0 0 0 1.5px #0d0816,0 0 16px #c58bffee,0 0 30px #9a5cff77}
 .unica-bolinha.ativando>.lucide{opacity:1}
-@keyframes ub-pulsa{50%{box-shadow:inset 0 1px 0 #ffffff26,inset 0 -2px 4px #0008,0 0 0 1.5px #0d0816,0 0 14px #c58bffaa,0 3px 8px #000b}}
+@keyframes ub-pulsa{50%{box-shadow:inset 0 1px 0 #ffffff26,inset 0 -2px 4px #0008,0 0 0 1.5px #0d0816,0 0 15px var(--ub-cor),0 3px 8px #000b}}
 @media (prefers-reduced-motion:reduce){.unica-bolinha{transition:none}.unica-bolinha.ativando{transform:none}.unica-bolinha.cheia{animation:none}}
 /* o número da barra própria (o ???% do Mob) dentro da bolinha */
 .unica-bolinha .ub-numero{position:relative;font-size:10px;font-weight:900;line-height:1;color:#f6ecff;text-shadow:0 0 4px #b77cff,0 1px 2px #000}
+
+/*
+ * A bolinha que conta a mecânica (src/presentation/bolinha-da-unica.ts): carregando (o ícone meio apagado e o anel
+ * enchendo), quase (prestes a ativar: pulsa rápido e brilha), pronta (acesa, com o estouro de luz ao chegar lá),
+ * apagada (a condição dela não vale agora) e usada (1 vez por luta: cinza com o ✓).
+ */
+.unica-bolinha{--ub-cor:#cf9bff}
+.unica-bolinha .ub-carga{stroke:var(--ub-cor);filter:drop-shadow(0 0 2px var(--ub-cor))}
+.unica-bolinha.ub-carregando>.lucide{opacity:.6}
+.unica-bolinha.ub-carregando .ub-numero{color:#e8d6ff}
+.unica-bolinha.ub-quase{animation:ub-quase .75s ease-in-out infinite}
+.unica-bolinha.ub-quase>.lucide,.unica-bolinha.ub-pronta>.lucide{opacity:1;color:#fff}
+.unica-bolinha.ub-quase .ub-numero{color:#fff;text-shadow:0 0 6px var(--ub-cor),0 1px 2px #000}
+.unica-bolinha.ub-pronta{animation:ub-pulsa 1.4s ease-in-out infinite;box-shadow:inset 0 1px 0 #ffffff33,inset 0 -2px 4px #0008,0 0 0 1.5px #0d0816,0 0 10px #b77cff99,0 3px 8px #000b}
+.unica-bolinha.ub-apagada>.lucide{opacity:.35}
+.unica-bolinha.ub-apagada .ub-carga{opacity:0}
+.unica-bolinha.ub-apagada{background:radial-gradient(circle at 35% 30%,#33224a 0%,#1c1030 55%,#100818 100%)}
+.unica-bolinha.ub-usada>.lucide,.unica-bolinha.ub-usada .ub-anel{filter:grayscale(.9) brightness(.65)}
+.unica-bolinha.ub-usada{background:radial-gradient(circle at 35% 30%,#3a3442 0%,#211c28 55%,#121016 100%)}
+.unica-bolinha .ub-numero[data-len="3"]{font-size:8.5px;letter-spacing:-.3px}
+.unica-bolinha .ub-numero[data-len="1"]{font-size:11.5px}
+.unica-bolinha .ub-ok{position:absolute;right:-4px;bottom:-4px;width:13px;height:13px;border-radius:50%;display:grid;place-items:center;font-style:normal;font-size:8.5px;font-weight:900;line-height:1;color:#fff;
+  background:radial-gradient(circle at 35% 30%,#5fe39a,#1f9c58);box-shadow:0 0 0 1.5px #0d0816,0 1px 3px #000a}
+.unica-bolinha .ub-gomo{fill:none;stroke:#c58bff38;stroke-width:3.4;transition:stroke .25s,filter .25s}
+.unica-bolinha .ub-gomo.cheio{stroke:var(--ub-cor);filter:drop-shadow(0 0 2.5px var(--ub-cor))}
+.unica-bolinha .ub-numero small{font-size:.62em;font-weight:800;margin-left:.5px;opacity:.85}
+.unica-bolinha .ub-estouro{position:absolute;inset:-2px;border-radius:50%;border:2px solid var(--ub-cor);pointer-events:none;animation:ub-estouro .7s cubic-bezier(.2,.7,.3,1) both}
+.unica-bolinha .ub-estouro.quase{border-width:1.5px;animation-duration:.55s}
+@keyframes ub-estouro{0%{transform:scale(.85);opacity:1}100%{transform:scale(2);opacity:0}}
+@keyframes ub-quase{50%{transform:scale(1.12);box-shadow:inset 0 1px 0 #ffffff33,inset 0 -2px 4px #0008,0 0 0 1.5px #0d0816,0 0 14px var(--ub-cor),0 3px 8px #000b}}
+@media (prefers-reduced-motion:reduce){.unica-bolinha.ub-quase,.unica-bolinha.ub-pronta{animation:none}.unica-bolinha .ub-estouro{display:none}}
+.unica-bolinha.ub-acesa>.lucide{opacity:.92;color:#f3e6ff}
+.unica-bolinha.ub-acesa .ub-numero{color:#f3e6ff}
+.unica-bolinha.ub-acesa{box-shadow:inset 0 1px 0 #ffffff26,inset 0 -2px 4px #0008,0 0 0 1.5px #0d0816,0 0 8px #b77cff66,0 3px 8px #000b}
+/* a cor da mecânica (src/presentation/bolinhas.ts: corDaBolinha) tinge o fundo, o trilho, o número e o brilho */
+.unica-bolinha:not(.ub-usada):not(.ub-apagada):not(.ativando){background:radial-gradient(circle at 35% 30%,color-mix(in srgb,var(--ub-cor) 42%,#2a1748) 0%,color-mix(in srgb,var(--ub-cor) 18%,#1a0e2c) 58%,#0f0819 100%)}
+.unica-bolinha .ub-trilho{stroke:color-mix(in srgb,var(--ub-cor) 22%,transparent)}
+.unica-bolinha .ub-gomo{stroke:color-mix(in srgb,var(--ub-cor) 24%,transparent)}
+.unica-bolinha .ub-numero{text-shadow:0 0 4px var(--ub-cor),0 1px 2px #000}
+.unica-bolinha>.lucide{filter:drop-shadow(0 0 3px var(--ub-cor))}
+.unica-bolinha.ub-acesa,.unica-bolinha.ub-pronta{box-shadow:inset 0 1px 0 #ffffff26,inset 0 -2px 4px #0008,0 0 0 1.5px #0d0816,0 0 9px color-mix(in srgb,var(--ub-cor) 60%,transparent),0 3px 8px #000b}
+.unica-bolinha.ub-pronta>.lucide,.unica-bolinha.ub-quase>.lucide{color:#fff;filter:drop-shadow(0 0 4px var(--ub-cor)) drop-shadow(0 0 1px #fff)}
