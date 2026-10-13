@@ -96,7 +96,7 @@ describe('compact reusable audiovisual library',()=>{
     expect(profileFor('gojo',0)?.family).toBe('azul_gojo');expect(profileFor('gojo',1)?.family).toBe('vermelho_gojo');expect(profileFor('gojo',2)?.family).toBe('vazio_infinito');
     expect(profileFor('beerus',0)?.family).toBe('toque_da_destruicao');expect(profileFor('sasuke',0)?.family).toBe('chidori_sasuke');
     expect(profileFor('saitama',2)?.family).toBe('soco_serio');expect(profileFor('itachi',2)?.family).toBe('susanoo');
-    expect(profileFor('ichigo',0)?.family).toBe('corte_de_energia');
+    expect(profileFor('ichigo',0)?.family).toBe('getsuga_tensho_ichigo');
     expect(profileFor('charizard',0)?.family).toBe('lanca_chamas');
     // a mesma família muda de cor com o personagem
     expect(profileFor('vegeta',0)?.family).toBe('galick_gun');expect(profileFor('vegeta',0)?.color).not.toBe(profileFor('goku',0)?.color);

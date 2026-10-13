@@ -12565,6 +12565,23 @@
    ],
    "bytes": 20524
   },
+  "gancho-de-garra-mabel": {
+   "arquivo": "gancho-de-garra-mabel.mp3",
+   "descricao": "Mabel: gancho de garra",
+   "versoes": [
+    0.0,
+    1.6963,
+    3.4304,
+    5.0564
+   ],
+   "duracoes": [
+    1.6163,
+    1.6541,
+    1.546,
+    1.6414
+   ],
+   "bytes": 59139
+  },
   "gancho-de-mabel": {
    "arquivo": "gancho-de-mabel.mp3",
    "descricao": "básico da Mabel: o gancho e o glitter",
@@ -13278,6 +13295,23 @@
     1.5539
    ],
    "bytes": 58149
+  },
+  "getsuga-tensho-ichigo": {
+   "arquivo": "getsuga-tensho-ichigo.mp3",
+   "descricao": "Ichigo: Getsuga Tensho",
+   "versoes": [
+    0.0,
+    2.48,
+    5.047,
+    7.4459
+   ],
+   "duracoes": [
+    2.4,
+    2.487,
+    2.3188,
+    2.4365
+   ],
+   "bytes": 81612
   },
   "ghostface-preparo": {
    "arquivo": "ghostface-preparo.mp3",

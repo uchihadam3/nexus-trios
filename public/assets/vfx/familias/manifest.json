@@ -10751,6 +10751,20 @@
   "laco": false,
   "bytes": 49868
  },
+ "gancho_de_garra_mabel": {
+  "descricao": "Mabel · a pistola de gancho e a corda",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 25166
+ },
  "gancho_de_mabel": {
   "descricao": "Básico da Mabel: o gancho e o glitter",
   "quadros": 12,
@@ -11338,6 +11352,20 @@
   ],
   "laco": false,
   "bytes": 21828
+ },
+ "getsuga_tensho_ichigo": {
+  "descricao": "Ichigo · a Zangetsu e a lua crescente",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 50392
  },
  "ghostface_preparo": {
   "descricao": "Ghostface · a máscara e o manto (Preparo, laço)",

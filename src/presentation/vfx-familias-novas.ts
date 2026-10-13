@@ -1369,6 +1369,8 @@ export const FAMILIAS_NOVAS = {
   engolir_yoshi: n({ nome: 'Engolir', grupo: 'especial', impacto: 'engolir_yoshi', escala: 2.3, tempo: 1.0, cor: '#7ae87a', tinta: 'fixa' }),
   ovo_yoshi: n({ nome: 'Ovo', grupo: 'projétil', impacto: 'ovo_yoshi', escala: 2.3, tempo: 1.0, cor: '#8af08a', tinta: 'fixa' }),
   pisao_de_yoshi: n({ nome: 'Pisão de Yoshi', grupo: 'físico', preparo: 'yoshi_preparo', impacto: 'pisao_de_yoshi', escala: 2.5, tempo: 1.0, cor: '#6ad86a', tinta: 'fixa' }),
+  getsuga_tensho_ichigo: n({ nome: 'Getsuga Tensho', grupo: 'energia', impacto: 'getsuga_tensho_ichigo', escala: 2.3, tempo: 1.0, cor: '#e8e0ff', tinta: 'fixa' }),
+  gancho_de_garra_mabel: n({ nome: 'Gancho de garra', grupo: 'especial', impacto: 'gancho_de_garra_mabel', escala: 2.3, tempo: 1.0, cor: '#ff8ad8', tinta: 'fixa' }),
   mu_genki_dama: n({ nome: 'Genki Dama', grupo: 'especial', impacto: 'mu_genki_dama', escala: 3.0, tempo: 1.0, cor: '#6ac8ff', tinta: 'fixa' }),
   mu_zenkai: n({ nome: 'Zenkai', grupo: 'especial', impacto: 'mu_zenkai', escala: 2.6, tempo: 1.0, cor: '#ffd84a', tinta: 'fixa' }),
   mu_kage_bunshin: n({ nome: 'Kage Bunshin', grupo: 'especial', impacto: 'mu_kage_bunshin', escala: 2.8, tempo: 1.0, cor: '#ffa64a', tinta: 'fixa' }),
