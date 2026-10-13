@@ -12,7 +12,7 @@
  */
 import type { Battle } from '../engine/types';
 import { PRESENTATION as P } from './config';
-import type { Beat } from './director';
+import { etapaDoEvento, revelado, type Beat } from './director';
 import { DESVIA_NA_UNICA, ativacaoNaTela, entregaDoEvento, golpeParado, type AtivacaoNaTela } from './ativacao-da-unica';
 import { combatLinks } from './combat-links';
 import { distanciaDoGolpe } from './distancia';
@@ -35,6 +35,8 @@ export interface UnitActing {
   parity: 'a' | 'b';
   /** O golpe parou no meio do caminho: quem foi atacado está respondendo com a Mecânica única. */
   pausado?: boolean;
+  /** Alterna a cada passo da cadeia em que o lutador reage de novo (o dano da Mecânica única depois do golpe). */
+  reacaoPar?: 'a' | 'b';
 }
 
 export interface Medida { anchors: Record<string, { x: number; y: number }>; w: number; h: number; medal: number }
@@ -79,12 +81,23 @@ function estiloDaAtivacao(at: AtivacaoNaTela, beat: Beat, battle: Battle): ActSt
 function segundosDaAtivacao(at: AtivacaoNaTela, act: ActStyle): number {
   if (act === 'esquiva') return 0.45;
   if (act === 'cast') return Math.max(0.9, at.fases.nomeEm * 4);
-  return Math.max(0.5, (at.fases.impactoEm - at.fases.soltaEm) / P.impactAt);
+  return Math.max(0.5, (at.fases.efeitoEm - at.fases.soltaEm) / P.impactAt);
 }
 
-function reacaoDoAlvo(beat: Beat, battle: Battle, uid: string): ReactStyle | undefined {
+/*
+ * A reação acompanha o passo da cadeia que chegou por último no lutador (pedido do jogador: "o Deidara explode…
+ * não tem impacto nenhum nos personagens"): o dano da Mecânica única que vem depois do golpe faz o alvo reagir de
+ * novo, na hora em que chega, e não junto do golpe.
+ */
+function reacaoDoAlvo(beat: Beat, battle: Battle, uid: string): { react: ReactStyle; etapa: number } | undefined {
   if (!beat.impacted) return undefined;
-  const sobre = beat.events.filter((e) => e.target === uid);
+  const todos = beat.events.filter((e) => e.target === uid && revelado(beat, e));
+  if (!todos.length) return undefined;
+  const etapa = Math.max(...todos.map((e) => etapaDoEvento(beat, e)));
+  const react = estiloDaReacao(beat, battle, uid, todos.filter((e) => etapaDoEvento(beat, e) === etapa));
+  return react ? { react, etapa } : undefined;
+}
+function estiloDaReacao(beat: Beat, battle: Battle, uid: string, sobre: Beat['events']): ReactStyle | undefined {
   if (!sobre.length) return undefined;
   if (sobre.some((e) => e.kind === 'revive')) return 'heal';
   if (sobre.some((e) => e.kind === 'cleanse')) return 'buff';
@@ -145,13 +158,15 @@ export function atuacao(beat: Beat | null, battle: Battle, medida: Medida, area:
   }
 
   for (const f of battle.fighters) {
-    if (f.uid === beat.event.source) continue;
-    const react = reacaoDoAlvo(beat, battle, f.uid);
-    if (!react) continue;
+    const r = reacaoDoAlvo(beat, battle, f.uid);
+    // quem golpeou só reage ao que chega depois, na cadeia (o Deidara que explode em quem o derrubou)
+    if (!r || (f.uid === beat.event.source && r.etapa <= 1)) continue;
     const p = px(f.uid);
     let ux = 0, uy = 0;
     if (p && fonte) { const vx = p.x - fonte.x, vy = p.y - fonte.y, d = Math.hypot(vx, vy) || 1; ux = vx / d; uy = vy / d; }
-    out[f.uid] = { react, dx: 0, dy: 0, ux, uy, seconds: beat.duration, parity };
+    // depois do golpe, a reação dura o seu passo (curta e seca), não o beat inteiro
+    const seconds = r.etapa > 1 ? Math.min(beat.duration, 1.1) : beat.duration;
+    out[f.uid] = { react: r.react, dx: 0, dy: 0, ux, uy, seconds, parity, reacaoPar: (beat.event.id + r.etapa) % 2 ? 'b' : 'a' };
   }
   /*
    * Quem está ativando a Mecânica única agora (sozinha, na pausa do golpe ou no meio da cadeia) se move como numa

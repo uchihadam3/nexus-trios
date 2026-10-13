@@ -337,7 +337,8 @@ export function BattleEffects({battle,beat,anchors,enabled,reduced,medal=80}:{ba
       }
       if(espera)continue;
       if(at.t>=at.fases.vooEm)entregaAteOAlvo(e,`${beat.event.id}-${e.id}`,0);
-      if(at.t>=at.fases.impactoEm)efeitoNoAlvo(e,0);
+      // a folha começa quando a entrega chega; o número espera o estouro dela (fases.impactoEm)
+      if(at.t>=at.fases.efeitoEm)efeitoNoAlvo(e,0);
     }
     (beat.passos??[]).forEach((passo,k)=>{
       if(passo.classe!=='unica'||!beat.impacted||(beat.etapa??0)<=k)return;

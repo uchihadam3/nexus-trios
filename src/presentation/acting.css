@@ -44,6 +44,18 @@
 /* Clarão no golpe: o retrato fica branco por um instante. */
 .arena-v2 .react-hit .medal-frame:before,.arena-v2 .react-hit-heavy .medal-frame:before{content:'';position:absolute;inset:0;z-index:2;border-radius:50%;background:#fff;mix-blend-mode:soft-light;animation:hit-flash calc(var(--beat-s) * .2 * var(--motion-scale,1)) ease-out both;pointer-events:none}
 @keyframes hit-flash{0%{opacity:.95}100%{opacity:0}}
+/* a segunda reação no mesmo beat (o dano da Mecânica única depois do golpe): outro nome, a animação recomeça */
+@keyframes hit-flash-b{0%{opacity:.95}100%{opacity:0}}
+.arena-v2 .rp-b.react-hit .unit-medal,.arena-v2 .rp-b.react-block .unit-medal{animation-name:react-hit-b}
+.arena-v2 .rp-b.react-hit-heavy .unit-medal{animation-name:react-hit-heavy-b}
+.arena-v2 .rp-b.react-heal .unit-medal{animation-name:react-heal-b}
+.arena-v2 .rp-b.react-buff .unit-medal{animation-name:react-buff-b}
+.arena-v2 .rp-b.react-shield .unit-medal{animation-name:react-shield-b}
+.arena-v2 .rp-b.react-curse .unit-medal{animation-name:react-curse-b}
+.arena-v2 .rp-b.react-broken .unit-medal{animation-name:react-broken-b}
+.arena-v2 .rp-b.react-fall .unit-medal{animation-name:react-fall-b}
+.arena-v2 .rp-b:is(.react-hit,.react-hit-heavy) .medal-frame:before{animation-name:hit-flash-b}
+.arena-v2 .reactor.rp-b .unit-fx{animation-name:fx12-bg-b}
 
 /* ---- os efeitos desenhados em Python ----
  * Cada folha tem 12 quadros (3 × 4). A imagem, a duração e o atraso vêm de

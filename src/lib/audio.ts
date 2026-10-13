@@ -5,6 +5,10 @@ import { FAMILIAS_DE_APOIO,PRIORIDADE,SOM_DA_FAMILIA,SONS,type Manifesto,type So
 import type { Cue } from '../presentation/director';
 import type { Battle } from '../engine/types';
 import { profileFor } from '../presentation/vfxProfiles';
+import { EFEITO_DA_UNICA } from '../presentation/unicas-efeitos';
+import { preparoDaUnica } from '../presentation/preparo-da-unica';
+import { FAMILIA_DA_INVOCACAO } from '../presentation/vfx-atribuicao';
+import { SOM_DA_ESPERA,SOM_DA_VOLTA } from '../presentation/renascer-proprio';
 
 /*
  * O som da batalha (adendo, parte 6).
@@ -232,7 +236,15 @@ class BattleAudio {
       const p=profileFor(id,i);const s=p?SOM_DA_FAMILIA[p.family]:undefined;
       if(s){sons.add(s.impacto);if(s.saida)sons.add(s.saida);if(s.preparo)sons.add(s.preparo);if(s.antes)sons.add(s.antes);}
     }
-    await Promise.all([...sons].map(s=>this.loadCue(s)));
+    // a Mecânica única (o carregar e o efeito de cada aviso), a invocação e o renascer: muitos tocam 1 vez por luta, e
+    // um som que só começa a carregar na hora em que toca sai mudo (pedido do jogador: "o Deidara explode e não tem som")
+    for(const id of personagens){
+      for(const e of Object.values(EFEITO_DA_UNICA[id]??{}))sons.add(e.som as Sound);
+      sons.add(preparoDaUnica(id).som as Sound);
+      const inv=FAMILIA_DA_INVOCACAO[id];if(inv)sons.add(inv.replace(/_/g,'-') as Sound);
+      sons.add(SOM_DA_ESPERA(id) as Sound);sons.add(SOM_DA_VOLTA(id) as Sound);
+    }
+    await Promise.all([...sons].filter(x=>this.manifest?.sons[x]).map(x=>this.loadCue(x)));
   }
   private async preloadCues(){
     // os mais comuns primeiro; o resto em seguida. No impacto, só se lê do cache.
@@ -248,8 +260,13 @@ class BattleAudio {
   sound(som:Sound,prioridade:number=PRIORIDADE.basico,pan=0,chave=0,atraso=0){
     const ctx=this.ctx;if(!ctx||ctx.state!=='running'||!this.effects||this.settings.volume===0||this.settings.effectsVolume===0)return;
     const buffer=this.buffers.get(som),info=this.manifest?.sons[som];
-    // som que ainda não chegou: pede agora, para a próxima vez
-    if(!buffer){if(info)void this.loadCue(som);return;}
+    // som que ainda não chegou: pede agora e toca assim que chegar, se ainda der tempo de soar junto do que acontece
+    if(!buffer){
+      if(!info)return;
+      const ritmo=Math.max(.25,this.settings.speed??1),alvo=ctx.currentTime+Math.max(0,atraso)/ritmo;
+      void this.loadCue(som).then(b=>{if(b&&ctx.currentTime-alvo<.3)this.sound(som,prioridade,pan,chave,Math.max(0,alvo-ctx.currentTime)*ritmo);});
+      return;
+    }
     if(!info)return;
     const quando=ctx.currentTime+.006+Math.max(0,atraso)/Math.max(.25,this.settings.speed??1);
     // o mesmo som duas vezes em 70 ms vira um só

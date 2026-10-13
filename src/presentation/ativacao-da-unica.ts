@@ -19,7 +19,8 @@
 import type { Battle, BattleEvent } from '../engine/types';
 import type { Beat, Passo } from './director';
 import { PRESENTATION as P } from './config';
-import { ENTREGA_DA_UNICA, VOO_DA_UNICA, entregaDaUnica, type ModoDaEntrega } from './unicas-efeitos';
+import { ENTREGA_DA_UNICA, VOO_DA_UNICA, efeitoDaUnica, entregaDaUnica, type ModoDaEntrega } from './unicas-efeitos';
+import { PICO_DA_FOLHA } from './pico-das-folhas';
 
 /** O Preparo de cada um, na mesma escala do Preparo das habilidades (0 = instantâneo). */
 export const PREPARO_PROPRIO: Record<string, number> = {
@@ -55,18 +56,32 @@ export interface FasesDaUnica {
   soltaEm: number;
   /** a entrega sai (o projétil, o feixe, quem vai de perto) */
   vooEm: number;
-  /** o efeito cai no alvo */
+  /** a folha do efeito começa no alvo (a chegada desenhada nela: os pássaros do Katsu voando) */
+  efeitoEm: number;
+  /** o efeito bate de verdade no alvo (o estouro da folha): o número, o tremor e o resultado saem aqui */
   impactoEm: number;
   /** quanto a entrega viaja */
   voo: number;
 }
-export function fasesDaUnica(personagem: string, voo: number): FasesDaUnica {
-  const preparo = preparoProprio(personagem);
-  if (preparo <= 0) return { preparo, nomeEm: 0, soltaEm: 0, vooEm: 0, impactoEm: voo > 0 ? voo : 0.12, voo };
+/** A folha do efeito no alvo dura 1,5 s a 1× (BattleEffects: efeitoNoAlvo). */
+const FOLHA_NO_ALVO = 1.5;
+/**
+ * Quanto o estouro da folha vem depois do começo dela (src/presentation/pico-das-folhas.ts, medido em cada folha):
+ * o número espera o estouro (pedido do jogador: "só aparece o dano… cadê o impacto?"). O reflexo (preparo 0: a
+ * esquiva do Hiei, a armadura do Seiya) espera pouco, para a resposta continuar rápida.
+ */
+export function esperaDoEstouro(familia: string | undefined, preparo: number): number {
+  const pico = (familia && PICO_DA_FOLHA[familia]) || 0;
+  return Math.min(preparo <= 0 ? 0.25 : 0.75, pico * FOLHA_NO_ALVO);
+}
+export function fasesDaUnica(personagem: string, voo: number, familia?: string): FasesDaUnica {
+  const preparo = preparoProprio(personagem), espera = esperaDoEstouro(familia, preparo);
+  if (preparo <= 0) { const efeitoEm = voo > 0 ? voo : 0.12; return { preparo, nomeEm: 0, soltaEm: 0, vooEm: 0, efeitoEm, impactoEm: efeitoEm + espera, voo }; }
   const nomeEm = 0.25 + preparo * 0.6;
   const soltaEm = nomeEm + 0.15 + preparo;
   const vooEm = soltaEm + 0.12;
-  return { preparo, nomeEm, soltaEm, vooEm, impactoEm: voo > 0 ? vooEm + voo : soltaEm + 0.12, voo };
+  const efeitoEm = voo > 0 ? vooEm + voo : soltaEm + 0.12;
+  return { preparo, nomeEm, soltaEm, vooEm, efeitoEm, impactoEm: efeitoEm + espera, voo };
 }
 
 /** De quem a Mecânica única atinge, visto por quem ativou: o rival, um aliado ou ela mesma (pelo alvo do aviso). */
@@ -124,8 +139,8 @@ export function vooDaUnica(e: BattleEvent, b: Battle, beat?: BeatDaUnica) {
   return ent.modo !== 'si' && (ent.area || ent.destino.alvos.some((a) => a !== e.source)) ? VOO_DA_UNICA[ent.modo] : 0;
 }
 export function fasesDoEvento(e: BattleEvent, b: Battle, beat?: BeatDaUnica): FasesDaUnica {
-  const f = b.fighters.find((x) => x.uid === e.source);
-  return fasesDaUnica(f?.characterId ?? '', vooDaUnica(e, b, beat));
+  const f = b.fighters.find((x) => x.uid === e.source), id = f?.characterId ?? '';
+  return fasesDaUnica(id, vooDaUnica(e, b, beat), id ? efeitoDaUnica(id, e.label).familia : undefined);
 }
 
 /**

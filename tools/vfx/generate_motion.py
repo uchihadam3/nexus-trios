@@ -189,14 +189,15 @@ def main() -> None:
         blocos.append(keyframes(f"act-support-{par}", support()))
         blocos.append(keyframes(f"act-curse-{par}", curse()))
         blocos.append(keyframes(f"act-cast-{par}", cast()))
-    blocos.append(keyframes("react-hit", hit()))
-    blocos.append(keyframes("react-hit-heavy", hit(pesado=True)))
-    blocos.append(keyframes("react-heal", lift(6, 0.035)))
-    blocos.append(keyframes("react-buff", lift(5, 0.05, k=320)))
-    blocos.append(keyframes("react-shield", shield()))
-    blocos.append(keyframes("react-curse", curse_react()))
-    blocos.append(keyframes("react-broken", broken()))
-    blocos.append(keyframes("react-fall", fall()))
+    reacoes = [("react-hit", hit()), ("react-hit-heavy", hit(pesado=True)), ("react-heal", lift(6, 0.035)),
+               ("react-buff", lift(5, 0.05, k=320)), ("react-shield", shield()), ("react-curse", curse_react()),
+               ("react-broken", broken()), ("react-fall", fall())]
+    for nome, frames in reacoes:
+        blocos.append(keyframes(nome, frames))
+    # a segunda cópia de cada reação (-b): quem leva o golpe e, no mesmo beat, o dano da Mecânica única reage de novo
+    # (trocar de nome reinicia a animação; acting.css: .rp-b)
+    for nome, frames in reacoes:
+        blocos.append(keyframes(f"{nome}-b", frames))
     # Folhas de 12 quadros (3 × 4): a posição salta de quadro em quadro.
     for prop in ("background-position", "mask-position"):
         nome = "fx12-bg" if prop == "background-position" else "fx12-mask"
@@ -206,6 +207,8 @@ def main() -> None:
             q.append(f"{fmt(i / 12 * 100)}%{{{prop}:{fmt(col / 2 * 100)}% {fmt(lin / 3 * 100)}%;-webkit-{prop}:{fmt(col / 2 * 100)}% {fmt(lin / 3 * 100)}%}}" if prop == "mask-position" else f"{fmt(i / 12 * 100)}%{{{prop}:{fmt(col / 2 * 100)}% {fmt(lin / 3 * 100)}%}}")
         q.append(f"100%{{{prop}:100% 100%{(';-webkit-' + prop + ':100% 100%') if prop == 'mask-position' else ''}}}")
         blocos.append(f"@keyframes {nome}{{{''.join(q)}}}")
+        if prop == "background-position":
+            blocos.append(f"@keyframes {nome}-b{{{''.join(q)}}}")
     OUT.write_text("\n".join(blocos) + "\n")
     print(f"{OUT.relative_to(ROOT)}: {OUT.stat().st_size / 1024:.1f} KB")
 
