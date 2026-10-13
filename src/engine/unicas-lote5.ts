@@ -11,13 +11,15 @@ const PROVOCACOES: StatusId[] = ['provoked', 'weakened', 'slow', 'exposed', 'mar
 export const LOTE5: Record<string, Unica> = {
   seiya: {
     nome: 'Armadura de Pégaso',
-    texto: 'Cada habilidade que acerta Seiya dá a Seiya 100 de Escudo por 10 s.',
+    texto: 'Quando uma habilidade vai acertar Seiya, a armadura se adapta antes do golpe: Seiya ganha 60 de Escudo por 10 s.',
     ganchos: {
-      apanhou(m, b, f, fonte, _dano, g) {
-        if (!g.habilidade || !vivo(f)) return;
-        // pedido do jogador: "aumenta a quantidade de escudo que o Seiya ganha, acho que é muito pouco" (era 40; com 100 ele vence ~65% das lutas aleatórias, contra 58% antes)
-        f.shields.push({ amount: 100, remaining: 10, source: f.uid });
+      // antes do golpe cair (pedido do jogador: "ganhar a armadura antes do golpe acertar… 60 de armadura"): o
+      // Escudo já segura essa habilidade. Era 40 depois do golpe, depois 100 depois do golpe.
+      recebe(m, b, f, fonte, g) {
+        if (!g.habilidade || !vivo(f)) return 1;
+        f.shields.push({ amount: 60, remaining: 10, source: f.uid });
         m.aviso(b, f, 'A armadura se adaptou', fonte);
+        return 1;
       },
     },
   },
