@@ -242,6 +242,11 @@ const T: Record<string, string> = {
   arthurmorgan: 'dead_eye_arthur laco_arthur revolver_arthur',
   ellie: 'canivete_ellie furtividade_ellie arco_silencioso',
   sans: 'ossos_sans desviar_sans gaster_blaster',
+  cuphead: 'disparo_de_dedo dash_cuphead super_art_cuphead',
+  dovahkiin: 'machado_de_aco fus_ro_dah_grito fogo_do_dragao_dovahkiin',
+  hollowknight: 'ferrao_cavaleiro concentrar_cavaleiro grito_do_abismo',
+  goro: 'quatro_socos agarrao_goro pisao_de_goro',
+  yoshi: 'engolir_yoshi ovo_yoshi pisao_de_yoshi',
 };
 
 export const FAMILIA_DA_HABILIDADE: Record<string, VfxFamily> = Object.fromEntries(

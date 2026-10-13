@@ -237,6 +237,20 @@
   "laco": true,
   "bytes": 16470
  },
+ "agarrao_goro": {
+  "descricao": "Goro · os quatro braços agarrando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 24854
+ },
  "agent47_preparo": {
   "descricao": "Agente 47 · a luneta (Preparo, laço)",
   "quadros": 12,
@@ -3709,6 +3723,20 @@
   "laco": false,
   "bytes": 26144
  },
+ "cavaleiro_preparo": {
+  "descricao": "O Cavaleiro · a máscara e a sombra (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 14164
+ },
  "cegueira": {
   "descricao": "clarão que ofusca, com véu",
   "quadros": 12,
@@ -4899,6 +4927,20 @@
   "laco": false,
   "bytes": 28272
  },
+ "concentrar_cavaleiro": {
+  "descricao": "O Cavaleiro · a alma se juntando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 30058
+ },
  "confusao_total": {
   "descricao": "Pica-Pau · as penas e as estrelinhas",
   "quadros": 12,
@@ -5725,6 +5767,20 @@
   "laco": false,
   "bytes": 22046
  },
+ "cuphead_preparo": {
+  "descricao": "Cuphead · as cartas de super enchendo (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 3684
+ },
  "cura": {
   "descricao": "cura",
   "quadros": 12,
@@ -5976,6 +6032,20 @@
   ],
   "laco": true,
   "bytes": 17206
+ },
+ "dash_cuphead": {
+  "descricao": "Cuphead · o dash e a poeira de desenho",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 25716
  },
  "dead_eye": {
   "descricao": "Básico do Arthur Morgan: os X do Dead Eye",
@@ -6677,6 +6747,20 @@
   "laco": false,
   "bytes": 91240
  },
+ "disparo_de_dedo": {
+  "descricao": "Cuphead · as balas de ervilha em rajada",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 29336
+ },
  "dispositivo_tatico": {
   "descricao": "Donatello · o aparelho piscando",
   "quadros": 12,
@@ -6872,6 +6956,20 @@
   ],
   "laco": false,
   "bytes": 35980
+ },
+ "dovahkiin_preparo": {
+  "descricao": "Dovahkiin · as runas acendendo (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 8584
  },
  "dracula_preparo": {
   "descricao": "Drácula · a capa e o fogo girando (Preparo, laço)",
@@ -7278,6 +7376,20 @@
   ],
   "laco": false,
   "bytes": 16672
+ },
+ "engolir_yoshi": {
+  "descricao": "Yoshi · a língua e o ovo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 14930
  },
  "enxame": {
   "descricao": "enxame zumbindo",
@@ -9407,6 +9519,20 @@
   "laco": false,
   "bytes": 52146
  },
+ "ferrao_cavaleiro": {
+  "descricao": "O Cavaleiro · as estocadas do ferrão",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 18912
+ },
  "festa_surpresa": {
   "descricao": "Michelangelo · os balões, o confete e a pizza",
   "quadros": 12,
@@ -9756,6 +9882,20 @@
   ],
   "laco": false,
   "bytes": 8672
+ },
+ "fogo_do_dragao_dovahkiin": {
+  "descricao": "Dovahkiin · o grito de fogo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 44900
  },
  "fogo_do_inferno": {
   "descricao": "Spawn · a rajada de fogo verde",
@@ -10442,6 +10582,20 @@
   ],
   "laco": false,
   "bytes": 20754
+ },
+ "fus_ro_dah_grito": {
+  "descricao": "Dovahkiin · as três ondas do grito",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 32616
  },
  "fusao_perfeita": {
   "descricao": "Garnet · as manoplas gigantes e os raios",
@@ -11787,6 +11941,20 @@
   "laco": false,
   "bytes": 33242
  },
+ "goro_preparo": {
+  "descricao": "Goro · o pé levantado (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 7656
+ },
  "gou_hadouken": {
   "descricao": "Akuma · o Hadouken sombrio",
   "quadros": 12,
@@ -11954,6 +12122,20 @@
   ],
   "laco": false,
   "bytes": 24932
+ },
+ "grito_do_abismo": {
+  "descricao": "O Cavaleiro · os braços de sombra",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 56794
  },
  "grito_final": {
   "descricao": "Ghostface · o grito e as facadas",
@@ -15244,6 +15426,20 @@
   ],
   "laco": false,
   "bytes": 17834
+ },
+ "machado_de_aco": {
+  "descricao": "Dovahkiin · o machado nórdico",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 26388
  },
  "machado_de_energon": {
   "descricao": "Machado de energon: o machado de energia desce num arco pesado e crava no alvo",
@@ -23141,6 +23337,20 @@
   "laco": false,
   "bytes": 22762
  },
+ "ovo_yoshi": {
+  "descricao": "Yoshi · o ovo quicando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 17066
+ },
  "pacman_preparo": {
   "descricao": "Pac-Man · o labirinto e as bolinhas (Preparo, laço)",
   "quadros": 12,
@@ -23882,6 +24092,34 @@
   ],
   "laco": false,
   "bytes": 32462
+ },
+ "pisao_de_goro": {
+  "descricao": "Goro · o pisão rachando o chão",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 47690
+ },
+ "pisao_de_yoshi": {
+  "descricao": "Yoshi · o pisão e as estrelinhas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 41316
  },
  "pisao_demoniaco": {
   "descricao": "Kazuya · o pisão e os raios roxos",
@@ -25254,6 +25492,20 @@
   ],
   "laco": false,
   "bytes": 16918
+ },
+ "quatro_socos": {
+  "descricao": "Goro · os quatro socos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 22632
  },
  "que_que_ha_velhinho": {
   "descricao": "Pernalonga · a cenoura e a bigorna",
@@ -29287,6 +29539,20 @@
   "laco": false,
   "bytes": 29860
  },
+ "super_art_cuphead": {
+  "descricao": "Cuphead · o raio do Super Art",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 41584
+ },
  "super_inalacao": {
   "descricao": "Kirby · o redemoinho e a estrela",
   "quadros": 12,
@@ -31932,6 +32198,20 @@
   ],
   "laco": true,
   "bytes": 15812
+ },
+ "yoshi_preparo": {
+  "descricao": "Yoshi · pulando alto (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 8826
  },
  "z_saber": {
   "descricao": "Zero: meia-lua do sabre de energia",

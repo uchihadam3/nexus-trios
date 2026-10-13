@@ -291,6 +291,23 @@
    ],
    "bytes": 50157
   },
+  "agarrao-goro": {
+   "arquivo": "agarrao-goro.mp3",
+   "descricao": "Goro: agarrão",
+   "versoes": [
+    0.0,
+    1.8668,
+    3.797,
+    5.6041
+   ],
+   "duracoes": [
+    1.7868,
+    1.8502,
+    1.7271,
+    1.8137
+   ],
+   "bytes": 50870
+  },
   "agent47-preparo": {
    "arquivo": "agent47-preparo.mp3",
    "descricao": "Agente 47: a luneta (Preparo)",
@@ -4320,6 +4337,23 @@
    ],
    "bytes": 42680
   },
+  "cavaleiro-preparo": {
+   "arquivo": "cavaleiro-preparo.mp3",
+   "descricao": "O Cavaleiro: a sombra do abismo (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 47630
+  },
   "cegueira": {
    "arquivo": "cegueira.mp3",
    "descricao": "família cegueira",
@@ -5731,6 +5765,23 @@
    ],
    "bytes": 45068
   },
+  "concentrar-cavaleiro": {
+   "arquivo": "concentrar-cavaleiro.mp3",
+   "descricao": "O Cavaleiro: concentrar",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 54267
+  },
   "confusao-total": {
    "arquivo": "confusao-total.mp3",
    "descricao": "Pica-Pau: a confusão total",
@@ -6649,6 +6700,23 @@
    ],
    "bytes": 66652
   },
+  "cuphead-preparo": {
+   "arquivo": "cuphead-preparo.mp3",
+   "descricao": "Cuphead: as cartas de super (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 53256
+  },
   "cura": {
    "arquivo": "cura.mp3",
    "descricao": "cura",
@@ -6937,6 +7005,23 @@
     1.5228
    ],
    "bytes": 58586
+  },
+  "dash-cuphead": {
+   "arquivo": "dash-cuphead.mp3",
+   "descricao": "Cuphead: dash",
+   "versoes": [
+    0.0,
+    1.1346,
+    2.3504,
+    3.4471
+   ],
+   "duracoes": [
+    1.0546,
+    1.1357,
+    1.0168,
+    1.0873
+   ],
+   "bytes": 36245
   },
   "dead-eye": {
    "arquivo": "dead-eye.mp3",
@@ -7788,6 +7873,23 @@
    ],
    "bytes": 62555
   },
+  "disparo-de-dedo": {
+   "arquivo": "disparo-de-dedo.mp3",
+   "descricao": "Cuphead: disparo de dedo",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 62886
+  },
   "dispositivo-tatico": {
    "arquivo": "dispositivo-tatico.mp3",
    "descricao": "Donatello: o dispositivo tático",
@@ -8025,6 +8127,23 @@
     2.2335
    ],
    "bytes": 80913
+  },
+  "dovahkiin-preparo": {
+   "arquivo": "dovahkiin-preparo.mp3",
+   "descricao": "Dovahkiin: as runas (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 40348
   },
   "dracula-preparo": {
    "arquivo": "dracula-preparo.mp3",
@@ -8518,6 +8637,23 @@
     1.6089
    ],
    "bytes": 64423
+  },
+  "engolir-yoshi": {
+   "arquivo": "engolir-yoshi.mp3",
+   "descricao": "Yoshi: engolir",
+   "versoes": [
+    0.0,
+    1.608,
+    3.2704,
+    4.8278
+   ],
+   "duracoes": [
+    1.528,
+    1.5824,
+    1.4774,
+    1.5509
+   ],
+   "bytes": 39098
   },
   "enxame": {
    "arquivo": "enxame.mp3",
@@ -10933,6 +11069,23 @@
    ],
    "bytes": 92009
   },
+  "ferrao-cavaleiro": {
+   "arquivo": "ferrao-cavaleiro.mp3",
+   "descricao": "O Cavaleiro: ferrão",
+   "versoes": [
+    0.0,
+    1.98,
+    4.0289,
+    5.9446
+   ],
+   "duracoes": [
+    1.9,
+    1.9689,
+    1.8357,
+    1.9289
+   ],
+   "bytes": 66893
+  },
   "festa-surpresa": {
    "arquivo": "festa-surpresa.mp3",
    "descricao": "Michelangelo: a festa surpresa",
@@ -11357,6 +11510,23 @@
     1.3198
    ],
    "bytes": 66462
+  },
+  "fogo-do-dragao-dovahkiin": {
+   "arquivo": "fogo-do-dragao-dovahkiin.mp3",
+   "descricao": "Dovahkiin: fogo do dragão",
+   "versoes": [
+    0.0,
+    2.88,
+    5.8615,
+    8.6468
+   ],
+   "duracoes": [
+    2.8,
+    2.9015,
+    2.7053,
+    2.8426
+   ],
+   "bytes": 101625
   },
   "fogo-do-inferno": {
    "arquivo": "fogo-do-inferno.mp3",
@@ -12207,6 +12377,23 @@
     1.6244
    ],
    "bytes": 50186
+  },
+  "fus-ro-dah-grito": {
+   "arquivo": "fus-ro-dah-grito.mp3",
+   "descricao": "Dovahkiin: Fus Ro Dah",
+   "versoes": [
+    0.0,
+    2.78,
+    5.6579,
+    8.3466
+   ],
+   "duracoes": [
+    2.7,
+    2.7979,
+    2.6087,
+    2.7411
+   ],
+   "bytes": 104687
   },
   "fusao-perfeita": {
    "arquivo": "fusao-perfeita.mp3",
@@ -13823,6 +14010,23 @@
    ],
    "bytes": 80901
   },
+  "goro-preparo": {
+   "arquivo": "goro-preparo.mp3",
+   "descricao": "Goro: o pé levantando (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 57599
+  },
   "gou-hadouken": {
    "arquivo": "gou-hadouken.mp3",
    "descricao": "Akuma: Gou Hadouken",
@@ -14060,6 +14264,23 @@
     1.9924
    ],
    "bytes": 64777
+  },
+  "grito-do-abismo": {
+   "arquivo": "grito-do-abismo.mp3",
+   "descricao": "O Cavaleiro: grito do abismo",
+   "versoes": [
+    0.0,
+    2.68,
+    5.4543,
+    8.0463
+   ],
+   "duracoes": [
+    2.6,
+    2.6943,
+    2.5121,
+    2.6396
+   ],
+   "bytes": 85123
   },
   "grito-final": {
    "arquivo": "grito-final.mp3",
@@ -18089,6 +18310,23 @@
     1.3561
    ],
    "bytes": 47359
+  },
+  "machado-de-aco": {
+   "arquivo": "machado-de-aco.mp3",
+   "descricao": "Dovahkiin: machado de aço",
+   "versoes": [
+    0.0,
+    1.9096,
+    3.8083,
+    5.6399
+   ],
+   "duracoes": [
+    1.8296,
+    1.8187,
+    1.7515,
+    1.8396
+   ],
+   "bytes": 53170
   },
   "machado-de-energon": {
    "arquivo": "machado-de-energon.mp3",
@@ -27661,6 +27899,23 @@
    ],
    "bytes": 77701
   },
+  "ovo-yoshi": {
+   "arquivo": "ovo-yoshi.mp3",
+   "descricao": "Yoshi: ovo",
+   "versoes": [
+    0.0,
+    1.5035,
+    3.0576,
+    4.5076
+   ],
+   "duracoes": [
+    1.4235,
+    1.4741,
+    1.37,
+    1.4448
+   ],
+   "bytes": 43420
+  },
   "pacman-preparo": {
    "arquivo": "pacman-preparo.mp3",
    "descricao": "Pac-Man: o labirinto (Preparo)",
@@ -28476,6 +28731,40 @@
     2.4365
    ],
    "bytes": 76264
+  },
+  "pisao-de-goro": {
+   "arquivo": "pisao-de-goro.mp3",
+   "descricao": "Goro: pisão",
+   "versoes": [
+    0.0,
+    2.78,
+    5.6579,
+    8.3466
+   ],
+   "duracoes": [
+    2.7,
+    2.7979,
+    2.6087,
+    2.7411
+   ],
+   "bytes": 90067
+  },
+  "pisao-de-yoshi": {
+   "arquivo": "pisao-de-yoshi.mp3",
+   "descricao": "Yoshi: pisão",
+   "versoes": [
+    0.0,
+    2.48,
+    5.047,
+    7.3499
+   ],
+   "duracoes": [
+    2.4,
+    2.487,
+    2.2229,
+    2.4365
+   ],
+   "bytes": 70065
   },
   "pisao-demoniaco": {
    "arquivo": "pisao-demoniaco.mp3",
@@ -30193,6 +30482,23 @@
     1.3198
    ],
    "bytes": 40154
+  },
+  "quatro-socos": {
+   "arquivo": "quatro-socos.mp3",
+   "descricao": "Goro: quatro socos",
+   "versoes": [
+    0.0,
+    2.08,
+    4.2325,
+    6.2449
+   ],
+   "duracoes": [
+    2.0,
+    2.0725,
+    1.9324,
+    2.0305
+   ],
+   "bytes": 58583
   },
   "que-que-ha-velhinho": {
    "arquivo": "que-que-ha-velhinho.mp3",
@@ -34988,6 +35294,23 @@
    ],
    "bytes": 63730
   },
+  "super-art-cuphead": {
+   "arquivo": "super-art-cuphead.mp3",
+   "descricao": "Cuphead: Super Art",
+   "versoes": [
+    0.0,
+    2.68,
+    5.4543,
+    8.0463
+   ],
+   "duracoes": [
+    2.6,
+    2.6943,
+    2.5121,
+    2.6396
+   ],
+   "bytes": 87856
+  },
   "super-inalacao": {
    "arquivo": "super-inalacao.mp3",
    "descricao": "Kirby: a super inalação",
@@ -38302,6 +38625,23 @@
     1.4213
    ],
    "bytes": 44093
+  },
+  "yoshi-preparo": {
+   "arquivo": "yoshi-preparo.mp3",
+   "descricao": "Yoshi: os pulinhos (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 36780
   },
   "z-saber": {
    "arquivo": "z-saber.mp3",
