@@ -29,7 +29,7 @@ import { addSynergies,summarizeBattle } from './engine/run-summary';
 import { acumularRaioX,raioXVazio } from './engine/raio-x';
 import {emptyTally,tallyEvents} from './engine/progression';
 import { pontosDaJornada } from './engine/pontos';
-import {ENGINE_VERSION,rosterFingerprint,runDigest} from './engine/ranked';
+import {runDigest} from './engine/ranked';
 import {PULOS_DO_DESAFIO,liberar} from './lib/conquistas';
 import {ConquistasScreen} from './screens/ConquistasScreen';
 import {carregarCliente,googleConfigured,haSessaoOuRetorno,onlineCall,onlineConfigured} from './lib/online';
@@ -128,10 +128,13 @@ export default function App(){
    * falha aqui deixava a jornada fora do ranking em silêncio: o servidor frio
    * que passava de 8 s, a conta sem nome público, o jogo numa versão velha
    * guardada no celular (o servidor refaz as lutas com a versão dele, e elas
-   * não batem). Agora o servidor tem 20 s e uma segunda tentativa, a versão é
-   * conferida já no começo, e o motivo aparece com o que fazer.
+   * não batem). Agora o servidor tem 20 s e uma segunda tentativa, e o motivo
+   * aparece com o que fazer.
+   *
+   * O jogo numa versão velha não barra mais a jornada (pedido do dono do jogo:
+   * "quero que ela entre direto, sem autorização"): o servidor refaz as lutas
+   * com a versão dele e é esse resultado que entra no ranking.
    */
-  const VERSAO_DIFERENTE='O jogo neste aparelho está numa versão diferente da do ranking.';
   const abrirNoRanking=async(team:string[])=>{
     const pede=()=>Promise.race([onlineCall<{run:{id:string;seed:number;engine_version?:string;roster_fingerprint?:string}}>('start',{mode:'free',team}),new Promise<never>((_,falha)=>setTimeout(()=>falha(new Error('O servidor demorou para responder.')),20000))]);
     let result;
@@ -141,14 +144,11 @@ export default function App(){
       if(!/demorou|fetch|network|rede|indispon/i.test(msg))throw error;
       await new Promise(r=>setTimeout(r,1500));result=await pede();
     }
-    const r=result.run;
-    if(r.engine_version&&r.engine_version!==ENGINE_VERSION||r.roster_fingerprint&&r.roster_fingerprint!==rosterFingerprint())throw new Error(VERSAO_DIFERENTE);
-    return r;
+    return result.run;
   };
   const avisaForaDoRanking=(error:unknown)=>{
     const msg=error instanceof Error?error.message:'';
-    if(msg===VERSAO_DIFERENTE){setAcaoDoAviso('atualizar');setOnlineNotice('Saiu uma versão nova do jogo. Atualize para esta jornada valer no ranking (senão ela fica só neste aparelho).');}
-    else if(/nome p[uú]blico/i.test(msg)){setAcaoDoAviso('nome');setOnlineNotice('Falta escolher o seu nome público: sem ele, as jornadas não entram no ranking.');}
+    if(/nome p[uú]blico/i.test(msg)){setAcaoDoAviso('nome');setOnlineNotice('Falta escolher o seu nome público: sem ele, as jornadas não entram no ranking.');}
     else{setAcaoDoAviso('tentar');setOnlineNotice(`Não deu para registrar esta jornada no ranking agora${msg?` (${msg})`:''}. Se começar assim, ela fica fora do ranking.`);}
   };
   const preparando=useRef<Run['draft']|null>(null);
