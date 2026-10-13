@@ -1464,6 +1464,23 @@
    ],
    "bytes": 53573
   },
+  "baloes-vermelhos": {
+   "arquivo": "baloes-vermelhos.mp3",
+   "descricao": "Pennywise: os balões vermelhos",
+   "versoes": [
+    0.0,
+    2.2114,
+    4.499,
+    6.5501
+   ],
+   "duracoes": [
+    2.1314,
+    2.2077,
+    1.971,
+    2.2335
+   ],
+   "bytes": 61695
+  },
   "bankai-ichigo": {
    "arquivo": "bankai-ichigo.mp3",
    "descricao": "Ichigo: o Getsuga do Bankai",
@@ -3045,6 +3062,23 @@
    ],
    "bytes": 47285
   },
+  "caixa-de-lemarchand": {
+   "arquivo": "caixa-de-lemarchand.mp3",
+   "descricao": "Pinhead: a caixa de Lemarchand",
+   "versoes": [
+    0.0,
+    2.58,
+    5.2507,
+    7.7461
+   ],
+   "duracoes": [
+    2.5,
+    2.5907,
+    2.4154,
+    2.538
+   ],
+   "bytes": 106396
+  },
   "cajado-branco": {
    "arquivo": "cajado-branco.mp3",
    "descricao": "básico do Gandalf: o cajado no chão e a luz",
@@ -4354,6 +4388,23 @@
    ],
    "bytes": 79032
   },
+  "chucky-preparo": {
+   "arquivo": "chucky-preparo.mp3",
+   "descricao": "Chucky: o feitiço de vodu (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 60883
+  },
   "chute-alado": {
    "arquivo": "chute-alado.mp3",
    "descricao": "básico de Hermes: as asinhas e o chute",
@@ -5289,6 +5340,23 @@
    ],
    "bytes": 70534
   },
+  "correntes-com-ganchos": {
+   "arquivo": "correntes-com-ganchos.mp3",
+   "descricao": "Pinhead: as correntes com ganchos",
+   "versoes": [
+    0.0,
+    2.38,
+    4.8434,
+    7.1456
+   ],
+   "duracoes": [
+    2.3,
+    2.3834,
+    2.2222,
+    2.335
+   ],
+   "bytes": 93360
+  },
   "correntes-necroplasmicas": {
    "arquivo": "correntes-necroplasmicas.mp3",
    "descricao": "Spawn: as correntes",
@@ -5917,6 +5985,23 @@
     1.5228
    ],
    "bytes": 58578
+  },
+  "danca-da-serra": {
+   "arquivo": "danca-da-serra.mp3",
+   "descricao": "Leatherface: a dança da serra",
+   "versoes": [
+    0.0,
+    1.6579,
+    3.4005,
+    5.0108
+   ],
+   "duracoes": [
+    1.5779,
+    1.6627,
+    1.5303,
+    1.5814
+   ],
+   "bytes": 66772
   },
   "danca-de-distracao": {
    "arquivo": "danca-de-distracao.mp3",
@@ -6903,6 +6988,23 @@
     1.5228
    ],
    "bytes": 80894
+  },
+  "dor-e-prazer": {
+   "arquivo": "dor-e-prazer.mp3",
+   "descricao": "Pinhead: dor e prazer",
+   "versoes": [
+    0.0,
+    2.2472,
+    4.607,
+    6.8126
+   ],
+   "duracoes": [
+    2.1672,
+    2.2798,
+    2.1256,
+    2.2335
+   ],
+   "bytes": 80913
   },
   "dragao-das-trevas": {
    "arquivo": "dragao-das-trevas.mp3",
@@ -8502,6 +8604,23 @@
    ],
    "bytes": 84302
   },
+  "estatica-de-samara": {
+   "arquivo": "estatica-de-samara.mp3",
+   "descricao": "Samara: a estática",
+   "versoes": [
+    0.0,
+    1.5087,
+    3.0689,
+    4.4727
+   ],
+   "duracoes": [
+    1.4287,
+    1.4802,
+    1.3237,
+    1.4084
+   ],
+   "bytes": 52319
+  },
   "esticar": {
    "arquivo": "esticar.mp3",
    "descricao": "família esticar",
@@ -9028,6 +9147,40 @@
     1.2683
    ],
    "bytes": 43684
+  },
+  "facada-do-chucky": {
+   "arquivo": "facada-do-chucky.mp3",
+   "descricao": "Chucky: a facada",
+   "versoes": [
+    0.0,
+    1.5247,
+    3.47,
+    4.9668
+   ],
+   "duracoes": [
+    1.4447,
+    1.8653,
+    1.4168,
+    1.3911
+   ],
+   "bytes": 45783
+  },
+  "facada-do-ghostface": {
+   "arquivo": "facada-do-ghostface.mp3",
+   "descricao": "Ghostface: a facada",
+   "versoes": [
+    0.0,
+    1.4502,
+    2.9481,
+    4.3715
+   ],
+   "duracoes": [
+    1.3702,
+    1.4179,
+    1.3434,
+    1.3908
+   ],
+   "bytes": 49283
   },
   "facadinha-do-chucky": {
    "arquivo": "facadinha-do-chucky.mp3",
@@ -11171,6 +11324,23 @@
    ],
    "bytes": 52112
   },
+  "ghostface-preparo": {
+   "arquivo": "ghostface-preparo.mp3",
+   "descricao": "Ghostface: a respiração (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 52739
+  },
   "giga-impacto": {
    "arquivo": "giga-impacto.mp3",
    "descricao": "Snorlax: Giga Impacto",
@@ -12003,6 +12173,23 @@
     1.9924
    ],
    "bytes": 64777
+  },
+  "grito-final": {
+   "arquivo": "grito-final.mp3",
+   "descricao": "Ghostface: o grito final",
+   "versoes": [
+    0.0,
+    2.38,
+    4.8434,
+    7.1456
+   ],
+   "duracoes": [
+    2.3,
+    2.3834,
+    2.2222,
+    2.335
+   ],
+   "bytes": 75318
   },
   "grito-indignado": {
    "arquivo": "grito-indignado.mp3",
@@ -14911,6 +15098,23 @@
    ],
    "bytes": 50805
   },
+  "leatherface-preparo": {
+   "arquivo": "leatherface-preparo.mp3",
+   "descricao": "Leatherface: a serra acelerando (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 88716
+  },
   "leitura-de-abertura": {
    "arquivo": "leitura-de-abertura.mp3",
    "descricao": "Levi: os pontos achados e o corte certeiro",
@@ -15217,6 +15421,23 @@
    ],
    "bytes": 41006
   },
+  "ligacao-do-ghostface": {
+   "arquivo": "ligacao-do-ghostface.mp3",
+   "descricao": "Ghostface: a ligação",
+   "versoes": [
+    0.0,
+    2.28,
+    4.6245,
+    6.8301
+   ],
+   "duracoes": [
+    2.2,
+    2.2645,
+    2.1256,
+    2.2335
+   ],
+   "bytes": 88692
+  },
   "limitador-preparo": {
    "arquivo": "limitador-preparo.mp3",
    "descricao": "Kenpachi: a pressão subindo (antes do golpe)",
@@ -15438,6 +15659,23 @@
    ],
    "bytes": 52104
   },
+  "luzes-da-morte": {
+   "arquivo": "luzes-da-morte.mp3",
+   "descricao": "Pennywise: as luzes da morte",
+   "versoes": [
+    0.0,
+    2.48,
+    5.047,
+    7.4459
+   ],
+   "duracoes": [
+    2.4,
+    2.487,
+    2.3188,
+    2.4365
+   ],
+   "bytes": 68178
+  },
   "mabel-mania": {
    "arquivo": "mabel-mania.mp3",
    "descricao": "Mabel: Mabel mania",
@@ -15607,6 +15845,23 @@
     1.0152
    ],
    "bytes": 38984
+  },
+  "maldicao-de-sete-dias": {
+   "arquivo": "maldicao-de-sete-dias.mp3",
+   "descricao": "Samara: a maldição de sete dias",
+   "versoes": [
+    0.0,
+    2.38,
+    4.8434,
+    7.1456
+   ],
+   "duracoes": [
+    2.3,
+    2.3834,
+    2.2222,
+    2.335
+   ],
+   "bytes": 80531
   },
   "maldicao-do-esqueleto": {
    "arquivo": "maldicao-do-esqueleto.mp3",
@@ -16050,6 +16305,23 @@
    ],
    "bytes": 34476
   },
+  "massacre-da-serra": {
+   "arquivo": "massacre-da-serra.mp3",
+   "descricao": "Leatherface: o massacre",
+   "versoes": [
+    0.0,
+    1.7781,
+    3.7181,
+    5.5537
+   ],
+   "duracoes": [
+    1.6981,
+    1.86,
+    1.7556,
+    1.718
+   ],
+   "bytes": 70821
+  },
   "massacre-de-ares": {
    "arquivo": "massacre-de-ares.mp3",
    "descricao": "Ares: o massacre",
@@ -16134,6 +16406,23 @@
     1.7811
    ],
    "bytes": 62789
+  },
+  "medo-puro": {
+   "arquivo": "medo-puro.mp3",
+   "descricao": "Pennywise: o medo puro",
+   "versoes": [
+    0.0,
+    2.38,
+    4.8224,
+    7.1246
+   ],
+   "duracoes": [
+    2.3,
+    2.3624,
+    2.2222,
+    2.335
+   ],
+   "bytes": 79557
   },
   "medusa-preparo": {
    "arquivo": "medusa-preparo.mp3",
@@ -16933,6 +17222,23 @@
     0.9137
    ],
    "bytes": 47432
+  },
+  "motosserra-de-leatherface": {
+   "arquivo": "motosserra-de-leatherface.mp3",
+   "descricao": "Leatherface: a motosserra",
+   "versoes": [
+    0.0,
+    1.5022,
+    3.0441,
+    4.5539
+   ],
+   "duracoes": [
+    1.4222,
+    1.4619,
+    1.4298,
+    1.4166
+   ],
+   "bytes": 62188
   },
   "mu-aaaah": {
    "arquivo": "mu-aaaah.mp3",
@@ -24975,6 +25281,23 @@
    ],
    "bytes": 54355
   },
+  "pennywise-preparo": {
+   "arquivo": "pennywise-preparo.mp3",
+   "descricao": "Pennywise: a melodia de circo (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 42881
+  },
   "percepcao-espacial": {
    "arquivo": "percepcao-espacial.mp3",
    "descricao": "Inosuke: o tremor e o X",
@@ -25161,6 +25484,23 @@
     1.3198
    ],
    "bytes": 46109
+  },
+  "pinhead-preparo": {
+   "arquivo": "pinhead-preparo.mp3",
+   "descricao": "Pinhead: a caixa girando (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 56998
   },
   "pirueta": {
    "arquivo": "pirueta.mp3",
@@ -28392,6 +28732,23 @@
    ],
    "bytes": 51345
   },
+  "risada-do-chucky": {
+   "arquivo": "risada-do-chucky.mp3",
+   "descricao": "Chucky: a risada",
+   "versoes": [
+    0.0,
+    2.28,
+    4.6398,
+    6.7925
+   ],
+   "duracoes": [
+    2.2,
+    2.2798,
+    2.0727,
+    2.2208
+   ],
+   "bytes": 74336
+  },
   "risada-irritante": {
    "arquivo": "risada-irritante.mp3",
    "descricao": "Pica-Pau: a risada",
@@ -28766,6 +29123,23 @@
    ],
    "bytes": 60317
   },
+  "sai-da-tv": {
+   "arquivo": "sai-da-tv.mp3",
+   "descricao": "Samara: sai da TV",
+   "versoes": [
+    0.0,
+    2.4601,
+    5.0041,
+    7.4029
+   ],
+   "duracoes": [
+    2.3801,
+    2.4641,
+    2.3188,
+    2.4317
+   ],
+   "bytes": 82457
+  },
   "sais": {
    "arquivo": "sais.mp3",
    "descricao": "básico do Raphael: duas estocadas metálicas dos sais",
@@ -28833,6 +29207,23 @@
     1.7259
    ],
    "bytes": 63673
+  },
+  "samara-preparo": {
+   "arquivo": "samara-preparo.mp3",
+   "descricao": "Samara: a água no poço (Preparo)",
+   "versoes": [
+    0.0,
+    1.48,
+    3.0108,
+    4.4434
+   ],
+   "duracoes": [
+    1.4,
+    1.4508,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 45614
   },
   "samus-preparo": {
    "arquivo": "samus-preparo.mp3",
@@ -33032,6 +33423,23 @@
     1.4213
    ],
    "bytes": 66199
+  },
+  "vodu": {
+   "arquivo": "vodu.mp3",
+   "descricao": "Chucky: o vodu",
+   "versoes": [
+    0.0,
+    2.2743,
+    4.627,
+    6.8283
+   ],
+   "duracoes": [
+    2.1943,
+    2.2727,
+    2.1212,
+    2.1824
+   ],
+   "bytes": 65317
   },
   "volta-alucardcv": {
    "arquivo": "volta-alucardcv.mp3",

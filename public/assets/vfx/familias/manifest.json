@@ -1203,6 +1203,20 @@
   "laco": true,
   "bytes": 6982
  },
+ "baloes_vermelhos": {
+  "descricao": "Pennywise · os balões flutuando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 23128
+ },
  "bankai_ichigo": {
   "descricao": "Ichigo · o Getsuga preto de borda vermelha",
   "quadros": 12,
@@ -2617,6 +2631,20 @@
   "laco": false,
   "bytes": 25944
  },
+ "caixa_de_lemarchand": {
+  "descricao": "Pinhead · a caixa abrindo e as correntes",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 34420
+ },
  "cajado_branco": {
   "descricao": "Básico do Gandalf: o cajado no chão e a luz",
   "quadros": 12,
@@ -3751,6 +3779,20 @@
   "laco": false,
   "bytes": 51098
  },
+ "chucky_preparo": {
+  "descricao": "Chucky · o boneco de vodu e a vela (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 6094
+ },
  "chute_alado": {
   "descricao": "Básico de Hermes: a sandália alada",
   "quadros": 12,
@@ -4549,6 +4591,20 @@
   "laco": false,
   "bytes": 35706
  },
+ "correntes_com_ganchos": {
+  "descricao": "Pinhead · as correntes e os ganchos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 40176
+ },
  "correntes_necroplasmicas": {
   "descricao": "Spawn · as correntes verdes",
   "quadros": 12,
@@ -5122,6 +5178,20 @@
   ],
   "laco": false,
   "bytes": 13942
+ },
+ "danca_da_serra": {
+  "descricao": "Leatherface · o giro com a serra",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 47810
  },
  "danca_de_distracao": {
   "descricao": "Senhor das Estrelas · a pista de dança e os tontos",
@@ -5948,6 +6018,20 @@
   ],
   "laco": true,
   "bytes": 16976
+ },
+ "dor_e_prazer": {
+  "descricao": "Pinhead · o rosto de pregos e a corrente",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 35980
  },
  "dragao_das_trevas": {
   "descricao": "Hiei · o dragão das chamas negras",
@@ -7279,6 +7363,20 @@
   "laco": false,
   "bytes": 29786
  },
+ "estatica_de_samara": {
+  "descricao": "Samara · a estática varrendo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 24406
+ },
  "esticar": {
   "descricao": "braço elástico",
   "quadros": 12,
@@ -7768,6 +7866,34 @@
   ],
   "laco": false,
   "bytes": 15072
+ },
+ "facada_do_chucky": {
+  "descricao": "Chucky · o boneco pulando com a faca",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 20214
+ },
+ "facada_do_ghostface": {
+  "descricao": "Ghostface · a máscara atrás e a facada",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 25120
  },
  "facadinha_do_chucky": {
   "descricao": "Básico do Chucky: as facadinhas frenéticas",
@@ -9603,6 +9729,20 @@
   "laco": true,
   "bytes": 37570
  },
+ "ghostface_preparo": {
+  "descricao": "Ghostface · a máscara e o manto (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 9276
+ },
  "giga_impacto": {
   "descricao": "Snorlax · o corpanzil caindo",
   "quadros": 12,
@@ -10260,6 +10400,20 @@
   ],
   "laco": false,
   "bytes": 24932
+ },
+ "grito_final": {
+  "descricao": "Ghostface · o grito e as facadas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 33780
  },
  "grito_hulk": {
   "descricao": "Hulk · o rugido saindo dele em arcos",
@@ -12627,6 +12781,20 @@
   "laco": true,
   "bytes": 36142
  },
+ "leatherface_preparo": {
+  "descricao": "Leatherface · a serra acelerando (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 20276
+ },
  "leitura_de_abertura": {
   "descricao": "Levi · os pontos fracos piscam e o corte certeiro",
   "quadros": 12,
@@ -12879,6 +13047,20 @@
   "laco": false,
   "bytes": 19582
  },
+ "ligacao_do_ghostface": {
+  "descricao": "Ghostface · o telefone e a mira",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 10472
+ },
  "limitador_preparo": {
   "descricao": "Kenpachi · a pressão em labaredas (Preparo, laço)",
   "quadros": 12,
@@ -13061,6 +13243,20 @@
   "laco": false,
   "bytes": 50912
  },
+ "luzes_da_morte": {
+  "descricao": "Pennywise · as luzes na boca",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 21584
+ },
  "mabel_mania": {
   "descricao": "Mabel · o arco-íris e os corações",
   "quadros": 12,
@@ -13214,6 +13410,20 @@
   ],
   "laco": false,
   "bytes": 83844
+ },
+ "maldicao_de_sete_dias": {
+  "descricao": "Samara · o anel e o sete",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 25990
  },
  "maldicao_do_esqueleto": {
   "descricao": "Esqueleto · a caveira verde e as correntes",
@@ -13593,6 +13803,20 @@
   "laco": false,
   "bytes": 11512
  },
+ "massacre_da_serra": {
+  "descricao": "Leatherface · a serra descendo em cheio",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 52716
+ },
  "massacre_de_ares": {
   "descricao": "Ares · o chão rachando em vermelho",
   "quadros": 12,
@@ -13662,6 +13886,20 @@
   ],
   "laco": false,
   "bytes": 50644
+ },
+ "medo_puro": {
+  "descricao": "Pennywise · a boca cheia de dentes",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 39662
  },
  "medusa_preparo": {
   "descricao": "Medusa · as serpentes agitadas (Preparo, laço)",
@@ -14334,6 +14572,20 @@
   ],
   "laco": false,
   "bytes": 92264
+ },
+ "motosserra_de_leatherface": {
+  "descricao": "Leatherface · a motosserra e as faíscas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 37368
  },
  "mu_aaaah": {
   "descricao": "Coragem · o grito",
@@ -20985,6 +21237,20 @@
   "laco": true,
   "bytes": 16320
  },
+ "pennywise_preparo": {
+  "descricao": "Pennywise · o balão e os olhos amarelos (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 10476
+ },
  "percepcao_espacial": {
   "descricao": "Inosuke · as vibrações do chão e o X",
   "quadros": 12,
@@ -21138,6 +21404,20 @@
   ],
   "laco": false,
   "bytes": 44548
+ },
+ "pinhead_preparo": {
+  "descricao": "Pinhead · a caixa girando (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 15156
  },
  "pirueta": {
   "descricao": "Arlequina · a pirueta com as fitas",
@@ -23757,6 +24037,20 @@
   "laco": false,
   "bytes": 86222
  },
+ "risada_do_chucky": {
+  "descricao": "Chucky · o HA HA HA e as espirais",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 23176
+ },
  "risada_irritante": {
   "descricao": "Pica-Pau · as notas da risada",
   "quadros": 12,
@@ -24079,6 +24373,20 @@
   "laco": false,
   "bytes": 21178
  },
+ "sai_da_tv": {
+  "descricao": "Samara · a mão saindo da TV",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 37620
+ },
  "sais": {
   "descricao": "Sais do Raphael: dois sais estocam em sequência, cada um com clarão de três pontas",
   "quadros": 12,
@@ -24134,6 +24442,20 @@
   ],
   "laco": false,
   "bytes": 58888
+ },
+ "samara_preparo": {
+  "descricao": "Samara · o poço e o anel de luz (Preparo, laço)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   160,
+   160
+  ],
+  "laco": true,
+  "bytes": 9736
  },
  "samus_preparo": {
   "descricao": "Samus · o canhão carregando (Preparo, laço)",
@@ -27592,6 +27914,20 @@
   ],
   "laco": true,
   "bytes": 18660
+ },
+ "vodu": {
+  "descricao": "Chucky · o alfinete no boneco",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 31456
  },
  "volta_alucardcv": {
   "descricao": "Alucard se refaz: a névoa fecha, os morcegos mergulham, a capa abre",

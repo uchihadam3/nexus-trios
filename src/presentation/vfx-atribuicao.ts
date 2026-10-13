@@ -170,6 +170,12 @@ const T: Record<string, string> = {
   jason: 'facao_de_jason volta_do_lago sexta_feira_13',
   freddy: 'cancao_de_ninar garra_de_laminas pesadelo_de_freddy',
   michaelmyers: 'faca_de_cozinha respiracao_na_mascara noite_de_halloween',
+  chucky: 'facada_do_chucky risada_do_chucky vodu',
+  pennywise: 'baloes_vermelhos luzes_da_morte medo_puro',
+  ghostface: 'ligacao_do_ghostface facada_do_ghostface grito_final',
+  leatherface: 'motosserra_de_leatherface danca_da_serra massacre_da_serra',
+  pinhead: 'correntes_com_ganchos dor_e_prazer caixa_de_lemarchand',
+  samara: 'maldicao_de_sete_dias estatica_de_samara sai_da_tv',
 };
 
 export const FAMILIA_DA_HABILIDADE: Record<string, VfxFamily> = Object.fromEntries(
