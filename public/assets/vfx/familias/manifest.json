@@ -28713,6 +28713,20 @@
   "laco": false,
   "bytes": 86792
  },
+ "soco_da_manopla": {
+  "descricao": "básico do Thanos: a Manopla do Infinito com as Joias e o chão rachando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 54228
+ },
  "soco_da_vida": {
   "descricao": "Soco da vida de Giorno: galhos, folhas e a joaninha dourada",
   "quadros": 12,
@@ -28740,6 +28754,20 @@
   ],
   "laco": false,
   "bytes": 75304
+ },
+ "soco_de_armadura": {
+  "descricao": "básico do Homem de Ferro: manopla com propulsores, clang e faíscas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 23922
  },
  "soco_de_cem_toneladas": {
   "descricao": "Tsunade · o soco e o chão rachando",
@@ -28937,6 +28965,20 @@
   "laco": false,
   "bytes": 100482
  },
+ "soco_do_gohan": {
+  "descricao": "básico do Gohan: soco calmo, aura branca no braço e dois anéis de ar",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 32458
+ },
  "soco_do_hulk": {
   "descricao": "Hulk · o soco enorme e a onda de choque para os lados",
   "quadros": 12,
@@ -28951,6 +28993,20 @@
   "laco": false,
   "bytes": 53850
  },
+ "soco_do_naruto": {
+  "descricao": "básico do Naruto: a manga larga, a espiral do Uzumaki e o puf de fumaça",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 41198
+ },
  "soco_do_nemesis": {
   "descricao": "Básico do Nêmesis: o punho com tentáculos",
   "quadros": 12,
@@ -28964,6 +29020,20 @@
   ],
   "laco": false,
   "bytes": 22594
+ },
+ "soco_do_principe": {
+  "descricao": "básico do Vegeta: a luva branca, o ki azul estalando e a estrela afiada",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 38282
  },
  "soco_do_stand": {
   "descricao": "Soco do Stand de Jotaro: punho fantasma com vultos e eco",
@@ -29063,6 +29133,20 @@
   "laco": false,
   "bytes": 55662
  },
+ "soco_infinito": {
+  "descricao": "básico do Gojo: o punho para no Infinito e entra de uma vez",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 42490
+ },
  "soco_planetario": {
   "descricao": "Vilgax · o soco e a cratera",
   "quadros": 12,
@@ -29090,6 +29174,20 @@
   ],
   "laco": false,
   "bytes": 24032
+ },
+ "soco_saiyajin": {
+  "descricao": "básico do Goku: munhequeira azul, ki dourado no punho e a onda de ar com poeira",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 47216
  },
  "soco_serio": {
   "descricao": "sopro gigante para a frente",
@@ -29160,6 +29258,20 @@
   ],
   "laco": false,
   "bytes": 17484
+ },
+ "soco_veloz_flash": {
+  "descricao": "básico do Flash: três punhos-fantasma e os raios",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 34180
  },
  "soco_viltrumita": {
   "descricao": "Omni-Man · o soco com as ondas de choque",

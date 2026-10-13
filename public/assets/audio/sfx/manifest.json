@@ -34274,6 +34274,23 @@
    ],
    "bytes": 61752
   },
+  "soco-da-manopla": {
+   "arquivo": "soco-da-manopla.mp3",
+   "descricao": "básico de Thanos: soco grave, o chão rachando e o brilho das Joias",
+   "versoes": [
+    0.0,
+    1.1953,
+    2.4986,
+    3.738
+   ],
+   "duracoes": [
+    1.1153,
+    1.2233,
+    1.1594,
+    1.2048
+   ],
+   "bytes": 35027
+  },
   "soco-da-vida": {
    "arquivo": "soco-da-vida.mp3",
    "descricao": "básico de Giorno: soco, galhos brotando e arpejo dourado",
@@ -34307,6 +34324,23 @@
     1.2183
    ],
    "bytes": 40869
+  },
+  "soco-de-armadura": {
+   "arquivo": "soco-de-armadura.mp3",
+   "descricao": "básico de Homem de Ferro: servo, propulsor e o clang da manopla",
+   "versoes": [
+    0.0,
+    1.08,
+    2.1963,
+    3.2405
+   ],
+   "duracoes": [
+    1.0,
+    1.0363,
+    0.9643,
+    1.0152
+   ],
+   "bytes": 45524
   },
   "soco-de-cem-toneladas": {
    "arquivo": "soco-de-cem-toneladas.mp3",
@@ -34546,6 +34580,23 @@
    ],
    "bytes": 48420
   },
+  "soco-do-gohan": {
+   "arquivo": "soco-do-gohan.mp3",
+   "descricao": "básico de Gohan: o soco calmo e o ar ecoando em dois tempos",
+   "versoes": [
+    0.0,
+    0.9788,
+    2.0432,
+    3.0411
+   ],
+   "duracoes": [
+    0.8988,
+    0.9844,
+    0.9179,
+    0.9644
+   ],
+   "bytes": 31346
+  },
   "soco-do-hulk": {
    "arquivo": "soco-do-hulk.mp3",
    "descricao": "o soco do Hulk: vento pesado e impacto grave",
@@ -34563,6 +34614,23 @@
    ],
    "bytes": 35612
   },
+  "soco-do-naruto": {
+   "arquivo": "soco-do-naruto.mp3",
+   "descricao": "básico de Naruto: o soco, a espiral girando e o puf de fumaça",
+   "versoes": [
+    0.0,
+    1.08,
+    2.1963,
+    3.2424
+   ],
+   "duracoes": [
+    1.0,
+    1.0363,
+    0.9662,
+    1.0152
+   ],
+   "bytes": 35797
+  },
   "soco-do-nemesis": {
    "arquivo": "soco-do-nemesis.mp3",
    "descricao": "básico do Nêmesis: o grunhido e o soco",
@@ -34579,6 +34647,23 @@
     1.2183
    ],
    "bytes": 34410
+  },
+  "soco-do-principe": {
+   "arquivo": "soco-do-principe.mp3",
+   "descricao": "básico de Vegeta: estalos azuis de ki e o soco seco",
+   "versoes": [
+    0.0,
+    0.8121,
+    1.7729,
+    2.6741
+   ],
+   "duracoes": [
+    0.7321,
+    0.8808,
+    0.8212,
+    0.8629
+   ],
+   "bytes": 30371
   },
   "soco-do-stand": {
    "arquivo": "soco-do-stand.mp3",
@@ -34699,6 +34784,23 @@
    ],
    "bytes": 39807
   },
+  "soco-infinito": {
+   "arquivo": "soco-infinito.mp3",
+   "descricao": "básico de Gojo: o ar travando no Infinito e o soco entrando de uma vez",
+   "versoes": [
+    0.0,
+    1.041,
+    2.0443,
+    3.1385
+   ],
+   "duracoes": [
+    0.961,
+    0.9233,
+    1.0141,
+    1.0711
+   ],
+   "bytes": 37075
+  },
   "soco-leve": {
    "arquivo": "soco-leve.mp3",
    "descricao": "soco leve",
@@ -34766,6 +34868,23 @@
     0.9307
    ],
    "bytes": 34385
+  },
+  "soco-saiyajin": {
+   "arquivo": "soco-saiyajin.mp3",
+   "descricao": "básico de Goku: o ki chiando no punho, o soco e a onda de ar",
+   "versoes": [
+    0.0,
+    1.03,
+    2.0944,
+    3.0923
+   ],
+   "duracoes": [
+    0.95,
+    0.9844,
+    0.9179,
+    0.9644
+   ],
+   "bytes": 34242
   },
   "soco-serio": {
    "arquivo": "soco-serio.mp3",
@@ -34851,6 +34970,23 @@
     1.5717
    ],
    "bytes": 44358
+  },
+  "soco-veloz-flash": {
+   "arquivo": "soco-veloz-flash.mp3",
+   "descricao": "básico de Flash: três tapas grudados e o estalo do raio",
+   "versoes": [
+    0.0,
+    0.98,
+    1.9926,
+    2.9422
+   ],
+   "duracoes": [
+    0.9,
+    0.9326,
+    0.8695,
+    0.9137
+   ],
+   "bytes": 37197
   },
   "socos-supersonicos": {
    "arquivo": "socos-supersonicos.mp3",
