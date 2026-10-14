@@ -180,3 +180,22 @@ describe('Steve de armadura de diamante', () => {
     expect(vestiu).toBeGreaterThan(0);
   });
 });
+
+/* Macaco Louco (pedido do jogador: "Macaco Louco robô"): começa no robô e volta ao retrato de sempre quando ele quebra. */
+describe('Macaco Louco no robô', () => {
+  it('começa com o retrato do robô e troca quando o robô quebra', () => {
+    let quebrou = 0;
+    for (let semente = 1; semente <= 20; semente++) {
+      const b = createBattle(['mojojojo', 'hinata', 'naruto'], ['goku', 'vegeta', 'hulk'], semente);
+      const mj = b.fighters.find((f) => f.characterId === 'mojojojo')!;
+      expect(naFormaDeAgora(byId.mojojojo, mj, b).portrait).toBe('/assets/portraits/formas/mojo-robo.webp');
+      for (let t = 0; t < 6000 && !b.finished; t++) {
+        stepBattle(b);
+        const noRobo = mj.u?.robo === 1;
+        if (!noRobo) quebrou++;
+        expect(naFormaDeAgora(byId.mojojojo, mj, b).portrait).toBe(noRobo ? '/assets/portraits/formas/mojo-robo.webp' : byId.mojojojo.portrait);
+      }
+    }
+    expect(quebrou).toBeGreaterThan(0);
+  });
+});

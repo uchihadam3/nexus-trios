@@ -11,7 +11,8 @@ import type { Battle, Character, Fighter } from '../engine/types';
  * - Griffith vira Femto no Eclipse;
  * - Kenpachi tira o tapa-olho;
  * - Sephiroth abre a asa negra;
- * - Steve veste a armadura de diamante.
+ * - Steve veste a armadura de diamante;
+ * - Macaco Louco começa no robô e sai dele quando o robô quebra.
  */
 interface Forma { retrato: string; nome: string; cor: string }
 const DIR = '/assets/portraits/formas/';
@@ -29,6 +30,7 @@ const GRIFFITH_FEMTO: Forma = { retrato: `${DIR}griffith-femto.webp`, nome: 'Fem
 const KENPACHI_SEM_TAPA_OLHO: Forma = { retrato: `${DIR}kenpachi-sem-tapa-olho.webp`, nome: 'Kenpachi sem o tapa-olho', cor: '#ff5a6a' };
 const SEPHIROTH_UMA_ASA: Forma = { retrato: `${DIR}sephiroth-uma-asa.webp`, nome: 'Sephiroth, uma asa', cor: '#7dffcf' };
 const STEVE_DIAMANTE: Forma = { retrato: `${DIR}steve-diamante.webp`, nome: 'Steve de diamante', cor: '#5ff0ff' };
+const MOJO_ROBO: Forma = { retrato: `${DIR}mojo-robo.webp`, nome: 'Macaco Louco no robô', cor: '#ffd23a' };
 const FORMAS: Record<string, { de: (f: Fighter, agora: number) => Forma | null; todas: Forma[] }> = {
   gandalf: {
     de: (f) => (f.voltou && (f.u?.branco ?? 0) >= 1 ? FORMAS.gandalf!.todas[0]! : null),
@@ -49,6 +51,8 @@ const FORMAS: Record<string, { de: (f: Fighter, agora: number) => Forma | null; 
   sephiroth: { de: (f) => (f.u?.asa ? SEPHIROTH_UMA_ASA : null), todas: [SEPHIROTH_UMA_ASA] },
   /* Steve fabrica a armadura de diamante na primeira peça e fica com ela até o fim da luta (src/engine/unicas-lote4.ts) */
   steve: { de: (f) => ((f.u?.pecas ?? 0) >= 1 ? STEVE_DIAMANTE : null), todas: [STEVE_DIAMANTE] },
+  /* Macaco Louco começa dentro do robô e sai quando o Escudo do robô quebra (src/engine/unicas-lote7.ts) */
+  mojojojo: { de: (f) => (f.u?.robo === 1 ? MOJO_ROBO : null), todas: [MOJO_ROBO] },
 };
 
 /** A forma de agora do lutador, se ele trocou de forma. */
