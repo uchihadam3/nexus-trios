@@ -139,6 +139,20 @@
   "laco": false,
   "bytes": 21416
  },
+ "adaga_das_ilusoes": {
+  "descricao": "básico do Loki: as cópias de ilusão e a adaga de verdade",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 20144
+ },
  "adaga_de_areia_principe": {
   "descricao": "básico do Príncipe da Pérsia: a adaga e a areia do tempo",
   "quadros": 12,
@@ -1791,6 +1805,20 @@
   "laco": false,
   "bytes": 44516
  },
+ "bastao_de_ricochete": {
+  "descricao": "básico do Demolidor: o bastão que quica e os ecos do radar",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 30354
+ },
  "bastao_do_robin": {
   "descricao": "Básico do Robin: o bastão gira e estica",
   "quadros": 12,
@@ -2126,6 +2154,20 @@
   ],
   "laco": false,
   "bytes": 10814
+ },
+ "bengala_do_mestre": {
+  "descricao": "básico do Mestre Splinter: três batidinhas da bengala e o rabo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 15996
  },
  "bicada": {
   "descricao": "Bicada-britadeira: o bico bate e volta, o buraco racha e as lascas voam",
@@ -8077,6 +8119,20 @@
   "laco": false,
   "bytes": 28938
  },
+ "espada_da_protecao_shera": {
+  "descricao": "básico da She-Ra: a Espada da Proteção e a joia",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 27348
+ },
  "espada_de_alucard": {
   "descricao": "Alucard: corte elegante que vira morcegos",
   "quadros": 12,
@@ -8188,6 +8244,20 @@
   ],
   "laco": false,
   "bytes": 88292
+ },
+ "espada_do_heroi_finn": {
+  "descricao": "básico do Finn: a espada dourada e as estrelinhas de desenho",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 24732
  },
  "espada_do_poder": {
   "descricao": "He-Man · a espada e os raios",
@@ -11213,6 +11283,20 @@
   "laco": false,
   "bytes": 30434
  },
+ "garras_de_adamantium": {
+  "descricao": "básico do Wolverine: as três garras e os riscos fundos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 24128
+ },
  "garras_de_ferro": {
   "descricao": "Básico do Inuyasha: as cinco garras",
   "quadros": 12,
@@ -12711,6 +12795,20 @@
   "laco": false,
   "bytes": 48748
  },
+ "haste_negra_pain": {
+  "descricao": "básico do Pain: a haste negra e os anéis do Rinnegan",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 30794
+ },
  "heartless_angel": {
   "descricao": "Sephiroth · a asa enorme e a luz drenada",
   "quadros": 12,
@@ -14194,6 +14292,20 @@
   ],
   "laco": false,
   "bytes": 9840
+ },
+ "katanas_e_piadas": {
+  "descricao": "básico do Deadpool: as katanas em tesoura e o balão de piada",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 24802
  },
  "katanas_gemeas": {
   "descricao": "Leonardo · as katanas em X",

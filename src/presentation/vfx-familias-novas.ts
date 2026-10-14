@@ -2036,6 +2036,14 @@ export const FAMILIAS_NOVAS = {
   espada_de_prata_geralt: n({ nome: 'Espada de prata e Sinal', grupo: 'corte', aponta: true, impacto: 'espada_de_prata_geralt', escala: 2.0, tempo: 1.0, cor: '#c8d8e8', tinta: 'fixa' }),
   corte_dos_morcegos: n({ nome: 'Corte dos morcegos', grupo: 'corte', aponta: true, impacto: 'corte_dos_morcegos', escala: 2.0, tempo: 1.0, cor: '#b05aff', tinta: 'fixa' }),
   grade_de_cortes_trunks: n({ nome: 'Rede de cortes', grupo: 'corte', aponta: true, impacto: 'grade_de_cortes_trunks', escala: 2.0, tempo: 1.0, cor: '#9ab8ff', tinta: 'fixa' }),
+  espada_do_heroi_finn: n({ nome: 'Espada do herói', grupo: 'corte', aponta: true, impacto: 'espada_do_heroi_finn', escala: 2.0, tempo: 1.0, cor: '#ffd04a', tinta: 'fixa' }),
+  bengala_do_mestre: n({ nome: 'Bengala do mestre', grupo: 'físico', aponta: true, impacto: 'bengala_do_mestre', escala: 2.0, tempo: 1.0, cor: '#c8a070', tinta: 'fixa' }),
+  espada_da_protecao_shera: n({ nome: 'Espada da Proteção', grupo: 'corte', aponta: true, impacto: 'espada_da_protecao_shera', escala: 2.0, tempo: 1.0, cor: '#ffe08a', tinta: 'fixa' }),
+  garras_de_adamantium: n({ nome: 'Garras de adamantium', grupo: 'corte', aponta: true, impacto: 'garras_de_adamantium', escala: 2.0, tempo: 1.0, cor: '#d8e4f0', tinta: 'fixa' }),
+  katanas_e_piadas: n({ nome: 'Katanas e piadas', grupo: 'corte', aponta: true, impacto: 'katanas_e_piadas', escala: 2.0, tempo: 1.0, cor: '#ff4a4a', tinta: 'fixa' }),
+  bastao_de_ricochete: n({ nome: 'Bastão de ricochete', grupo: 'físico', aponta: true, impacto: 'bastao_de_ricochete', escala: 2.0, tempo: 1.0, cor: '#ff5a5a', tinta: 'fixa' }),
+  adaga_das_ilusoes: n({ nome: 'Adaga das ilusões', grupo: 'corte', aponta: true, impacto: 'adaga_das_ilusoes', escala: 2.0, tempo: 1.0, cor: '#5ae07a', tinta: 'fixa' }),
+  haste_negra_pain: n({ nome: 'Haste negra', grupo: 'corte', aponta: true, impacto: 'haste_negra_pain', escala: 2.0, tempo: 1.0, cor: '#b08aff', tinta: 'fixa' }),
 } as const satisfies Record<string, Familia>;
 
 export type FamiliaNova = keyof typeof FAMILIAS_NOVAS;
@@ -2064,7 +2072,8 @@ export const NOVAS_NO_ALVO = new Set<FamiliaNova>(['ressurreicao', 'renascer', '
   'soco_da_garra_thundera', 'tapinha_do_stewie', 'soco_do_robo_mojo', 'soco_fantasma_danny', 'soco_do_satsui', 'pancada_furiosa_donald', 'martelinho_do_jerry', 'soco_de_borracha_buu',
   'corte_da_agua_tanjiro', 'corte_da_zangetsu', 'espelho_partido_aizen', 'laminas_giratorias_levi', 'corte_de_prata_blade', 'masamune_sephiroth', 'corte_da_yamato', 'lamina_hf_raiden',
   'lamina_do_credo_ezio', 'lanca_corrente_scorpion', 'keyblade_sora', 'katana_da_2b', 'flor_escarlate_malenia', 'corte_izuna_hayabusa', 'adaga_de_areia_principe', 'corte_negro_hiei',
-  'katanas_gemeas_leonardo', 'golpe_unico_jack', 'corte_brutal_kenpachi', 'giro_da_espada_link', 'rebellion_dante', 'espada_de_prata_geralt', 'corte_dos_morcegos', 'grade_de_cortes_trunks']);
+  'katanas_gemeas_leonardo', 'golpe_unico_jack', 'corte_brutal_kenpachi', 'giro_da_espada_link', 'rebellion_dante', 'espada_de_prata_geralt', 'corte_dos_morcegos', 'grade_de_cortes_trunks',
+  'espada_do_heroi_finn', 'bengala_do_mestre', 'espada_da_protecao_shera', 'garras_de_adamantium', 'katanas_e_piadas', 'bastao_de_ricochete', 'adaga_das_ilusoes', 'haste_negra_pain']);
 
 /** Bons para o ataque básico do personagem (quando ele já usa a família numa habilidade). */
 export const NOVAS_DE_BASICO = new Set<FamiliaNova>(['garras', 'chicote', 'bastao', 'mordida', 'tentaculos', 'florete',

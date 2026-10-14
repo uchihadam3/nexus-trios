@@ -172,6 +172,23 @@
    ],
    "bytes": 65075
   },
+  "adaga-das-ilusoes": {
+   "arquivo": "adaga-das-ilusoes.mp3",
+   "descricao": "básico de Loki: as ilusões sumindo e a adaga",
+   "versoes": [
+    0.0,
+    1.2382,
+    2.5495,
+    3.6522
+   ],
+   "duracoes": [
+    1.1582,
+    1.2314,
+    1.0227,
+    1.0424
+   ],
+   "bytes": 38316
+  },
   "adaga-de-areia-principe": {
    "arquivo": "adaga-de-areia-principe.mp3",
    "descricao": "básico do Príncipe da Pérsia: a areia do tempo voltando",
@@ -2195,6 +2212,23 @@
    ],
    "bytes": 68207
   },
+  "bastao-de-ricochete": {
+   "arquivo": "bastao-de-ricochete.mp3",
+   "descricao": "básico de Demolidor: o bastão quicando e o eco do radar",
+   "versoes": [
+    0.0,
+    1.28,
+    2.511,
+    3.7111
+   ],
+   "duracoes": [
+    1.2,
+    1.151,
+    1.1201,
+    1.1581
+   ],
+   "bytes": 41993
+  },
   "bastao-do-robin": {
    "arquivo": "bastao-do-robin.mp3",
    "descricao": "básico do Robin: o giro, os gomos e a estocada",
@@ -2585,6 +2619,23 @@
     1.2183
    ],
    "bytes": 45476
+  },
+  "bengala-do-mestre": {
+   "arquivo": "bengala-do-mestre.mp3",
+   "descricao": "básico de Mestre Splinter: três batidinhas de madeira e o rabo",
+   "versoes": [
+    0.0,
+    0.8821,
+    1.8372,
+    2.689
+   ],
+   "duracoes": [
+    0.8021,
+    0.8751,
+    0.7718,
+    0.8641
+   ],
+   "bytes": 32815
   },
   "bicada": {
    "arquivo": "bicada.mp3",
@@ -9522,6 +9573,23 @@
    ],
    "bytes": 50731
   },
+  "espada-da-protecao-shera": {
+   "arquivo": "espada-da-protecao-shera.mp3",
+   "descricao": "básico de She-Ra: o corte e o acorde da joia",
+   "versoes": [
+    0.0,
+    1.137,
+    2.3106,
+    3.3861
+   ],
+   "duracoes": [
+    1.057,
+    1.0937,
+    0.9955,
+    1.0437
+   ],
+   "bytes": 44057
+  },
   "espada-de-alucard": {
    "arquivo": "espada-de-alucard.mp3",
    "descricao": "básico de Alucard: espada elegante e asas de morcegos",
@@ -9657,6 +9725,23 @@
     1.3873
    ],
    "bytes": 55106
+  },
+  "espada-do-heroi-finn": {
+   "arquivo": "espada-do-heroi-finn.mp3",
+   "descricao": "básico de Finn: o golpe e o plim de desenho",
+   "versoes": [
+    0.0,
+    0.9982,
+    2.018,
+    3.0104
+   ],
+   "duracoes": [
+    0.9182,
+    0.9398,
+    0.9124,
+    1.0259
+   ],
+   "bytes": 32626
   },
   "espada-do-poder": {
    "arquivo": "espada-do-poder.mp3",
@@ -13143,6 +13228,23 @@
    ],
    "bytes": 50563
   },
+  "garras-de-adamantium": {
+   "arquivo": "garras-de-adamantium.mp3",
+   "descricao": "básico de Wolverine: o snikt e o rasgo das garras",
+   "versoes": [
+    0.0,
+    0.8347,
+    1.6835,
+    2.4814
+   ],
+   "duracoes": [
+    0.7547,
+    0.7688,
+    0.7179,
+    0.7656
+   ],
+   "bytes": 35090
+  },
   "garras-de-ferro": {
    "arquivo": "garras-de-ferro.mp3",
    "descricao": "básico do Inuyasha: as cinco garras",
@@ -14927,6 +15029,23 @@
     2.538
    ],
    "bytes": 81664
+  },
+  "haste-negra-pain": {
+   "arquivo": "haste-negra-pain.mp3",
+   "descricao": "básico de Pain: a haste negra e o zumbido do Rinnegan",
+   "versoes": [
+    0.0,
+    1.3659,
+    2.6675,
+    3.9312
+   ],
+   "duracoes": [
+    1.2859,
+    1.2215,
+    1.1838,
+    1.2423
+   ],
+   "bytes": 39928
   },
   "heartless-angel": {
    "arquivo": "heartless-angel.mp3",
@@ -16831,6 +16950,23 @@
     1.1533
    ],
    "bytes": 47682
+  },
+  "katanas-e-piadas": {
+   "arquivo": "katanas-e-piadas.mp3",
+   "descricao": "básico de Deadpool: as katanas e a risadinha",
+   "versoes": [
+    0.0,
+    0.9124,
+    1.8517,
+    2.7479
+   ],
+   "duracoes": [
+    0.8324,
+    0.8593,
+    0.8162,
+    0.8447
+   ],
+   "bytes": 34822
   },
   "katanas-gemeas": {
    "arquivo": "katanas-gemeas.mp3",
