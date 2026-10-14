@@ -2,7 +2,7 @@ import type { CSSProperties, ReactNode } from 'react';
 import type { Battle } from '../engine/types';
 import { PRESENTATION as P } from '../presentation/config';
 import { duracaoBase, type Beat } from '../presentation/director';
-import { entregasDeApoio, type TipoDeApoio } from '../presentation/entrega-de-apoio';
+import { aurasDePoder, entregasDeApoio, type TipoDeApoio } from '../presentation/entrega-de-apoio';
 import { profileFor } from '../presentation/vfxProfiles';
 import { fallbackPoint, type Anchors } from './BattleEffects';
 
@@ -14,7 +14,7 @@ import { fallbackPoint, type Anchors } from './BattleEffects';
  * Tudo é calculado a cada quadro a partir do tempo do beat: pausar, acelerar ou voltar mantém a cena certa.
  */
 const clamp = (x: number) => Math.max(0, Math.min(1, x));
-const MIOLO: Record<TipoDeApoio, string> = { cura: '#7dffb0', escudo: '#8edeff', reforco: '#ffd36b', reviver: '#fff1a8', purificar: '#bff5ff' };
+const MIOLO: Record<TipoDeApoio, string> = { cura: '#7dffb0', escudo: '#8edeff', reforco: '#ffd36b', reviver: '#fff1a8', purificar: '#bff5ff', carga: '#ffe76a', ritmo: '#d2f66b' };
 
 /** O símbolo do que a esfera leva. */
 function Simbolo({ tipo }: { tipo: TipoDeApoio }): ReactNode {
@@ -24,14 +24,16 @@ function Simbolo({ tipo }: { tipo: TipoDeApoio }): ReactNode {
     case 'reforco': return <svg viewBox="0 0 24 24"><path d="M12 3 21 12h-5.5v9h-7v-9H3z" fill="#fff" /></svg>;
     case 'reviver': return <svg viewBox="0 0 24 24"><path d="M12 2l2.6 6.6L21.5 9l-5.3 4.5L18 20.5 12 16.8 6 20.5l1.8-7L2.5 9l6.9-.4z" fill="#fff" /></svg>;
     case 'purificar': return <svg viewBox="0 0 24 24"><path d="M12 2c3.5 5 6.5 8.4 6.5 12.2A6.5 6.5 0 0 1 5.5 14.2C5.5 10.4 8.5 7 12 2z" fill="#fff" /></svg>;
+    case 'carga': return <svg viewBox="0 0 24 24"><path d="M14 2 4 14h6l-2 8 10-12h-6z" fill="#fff" /></svg>;
+    case 'ritmo': return <svg viewBox="0 0 24 24"><path d="M3 5l8 7-8 7zM12 5l8 7-8 7z" fill="#fff" /></svg>;
   }
 }
 
 type Props = { battle: Battle; beat: Beat | null; anchors: Anchors; box: { w: number; h: number; medal: number }; reduced: boolean };
 export function EntregaDeApoio({ battle, beat, anchors, box, reduced }: Props) {
   if (!beat || !box.w || reduced) return null;
-  const entregas = entregasDeApoio(beat);
-  if (!entregas.length) return null;
+  const entregas = entregasDeApoio(beat), auras = aurasDePoder(beat);
+  if (!entregas.length && !auras.length) return null;
   const dono = battle.fighters.find((f) => f.uid === beat.event.source);
   if (!dono) return null;
   const cor = profileFor(dono.characterId, beat.event.skill)?.color ?? '#9fe0ff';
@@ -67,6 +69,23 @@ export function EntregaDeApoio({ battle, beat, anchors, box, reduced }: Props) {
     nos.push(<i key={`estouro-${i}`} className="ap-anel ap-estouro" style={estilo(para.x, para.y, M * (0.6 + 1.1 * t), { opacity: 1 - t })} />);
     nos.push(<i key={`sobe-${i}`} className="ap-bola ap-sobe" style={estilo(para.x, para.y - M * (0.2 + 0.5 * t), D * (1 - 0.3 * t), { opacity: 1 - t })}><Simbolo tipo={x.tipo} /></i>);
   });
+  /*
+   * A aura de poder (o reforço em si mesmo): o chão acende num anel, uma coluna de luz sobe de quem usou, as faíscas
+   * sobem em espiral e o símbolo do que ganhou sobe no meio. Começa um pouco antes do número.
+   */
+  for (const a of auras) {
+    const t = depois - (a.em - 0.12);
+    if (t < 0 || t > 1.05) continue;
+    const q = clamp(t / 1.05), entra = clamp(t / 0.15), sai = 1 - clamp((t - 0.7) / 0.35), op = entra * sai;
+    const est = (l: number, tp: number, w: number, h: number, extra: CSSProperties = {}) => ({ left: l, top: tp, width: w, height: h, '--ap': cor, '--ap-miolo': MIOLO[a.tipo], ...extra } as CSSProperties);
+    nos.push(<i key="pd-chao" className="pd-chao" style={est(de.x, de.y + M * 0.42, M * (1.1 + 0.5 * q), M * (0.32 + 0.12 * q), { opacity: op })} />);
+    nos.push(<i key="pd-coluna" className="pd-coluna" style={est(de.x, de.y - M * 0.25, M * (0.9 - 0.3 * q), M * (1.4 + 0.9 * clamp(t / 0.3)), { opacity: op * 0.85 })} />);
+    for (let k = 0; k < 10; k++) {
+      const fase = ((q * 1.6 + k / 10) % 1), ang = k * 2.4 + q * 9, r = M * (0.5 - 0.25 * fase);
+      nos.push(<i key={`pd-f${k}`} className="ap-faisca" style={est(de.x + Math.cos(ang) * r, de.y + M * 0.35 - fase * M * 1.5, M * (0.06 + 0.03 * (k % 3)), M * (0.06 + 0.03 * (k % 3)), { opacity: op * (1 - fase) })} />);
+    }
+    nos.push(<i key="pd-simbolo" className="ap-bola ap-sobe" style={est(de.x, de.y - M * (0.1 + 0.55 * q), M * 0.42, M * 0.42, { opacity: op })}><Simbolo tipo={a.tipo} /></i>);
+  }
   if (!nos.length) return null;
   return <div className="entrega-de-apoio" aria-hidden="true">{nos}</div>;
 }

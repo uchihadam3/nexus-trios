@@ -595,3 +595,6 @@
 @keyframes ssm-corre{from{translate:-6px 0;opacity:0}40%{opacity:1}to{translate:6px 0;opacity:0}}
 @keyframes ssm-brilha{from{opacity:.55}to{opacity:1}}
 @media (prefers-reduced-motion:reduce){.arena-v2 .ss-motivo g{animation:none!important}}
+/* a aura de poder (o reforço em si mesmo): o anel no chão e a coluna de luz subindo */
+.arena-v2 .pd-chao{border-radius:50%;border:2px solid var(--ap-miolo);background:radial-gradient(ellipse,color-mix(in srgb,var(--ap) 55%,transparent),transparent 70%);box-shadow:0 0 14px 3px var(--ap)}
+.arena-v2 .pd-coluna{border-radius:45% 45% 20% 20%/60% 60% 20% 20%;background:linear-gradient(to top,color-mix(in srgb,var(--ap-miolo) 80%,#fff) 0,color-mix(in srgb,var(--ap) 60%,transparent) 45%,transparent 100%);filter:blur(3px);mix-blend-mode:screen;translate:-50% -75%!important}
