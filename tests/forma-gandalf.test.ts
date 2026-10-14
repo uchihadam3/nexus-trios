@@ -327,3 +327,23 @@ describe('Zenitsu dormindo', () => {
     expect(dormiu).toBeGreaterThan(0);
   });
 });
+
+describe('Gohan desperto', () => {
+  it('Gohan desperta quando um aliado cai e fica desperto até o fim', () => {
+    let despertou = 0;
+    for (let semente = 1; semente <= 20; semente++) {
+      const b = createBattle(['gohan', 'piccolo', 'hinata'], ['goku', 'vegeta', 'hulk'], semente);
+      const g = b.fighters.find((f) => f.characterId === 'gohan')!;
+      let ja = false;
+      for (let t = 0; t < 6000 && !b.finished; t++) {
+        stepBattle(b);
+        const desperto = !!g.u?.despertou;
+        if (ja) expect(desperto).toBe(true);
+        ja = desperto;
+        expect(naFormaDeAgora(byId.gohan, g, b).portrait).toBe(desperto ? '/assets/portraits/formas/gohan-desperto.webp' : byId.gohan.portrait);
+      }
+      if (ja) despertou++;
+    }
+    expect(despertou).toBeGreaterThan(0);
+  });
+});
