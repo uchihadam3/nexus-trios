@@ -82,7 +82,11 @@ function LinhaDeStatus({tipo,lista,fighter,onInspect}:{tipo:'buffs'|'debuffs';li
 
 export function ArenaUnit({fighter:f,battle,beat,onInspect,numbers,threatened,linkedSource=false,linkedTarget=false,atuacao}:{fighter:Fighter;battle:Battle;beat:Beat|null;onInspect:(target:InspectTarget)=>void;numbers:boolean;threatened:boolean;linkedSource?:boolean;linkedTarget?:boolean;atuacao?:UnitActing}){
   const c=byId[f.characterId],shield=f.shields.reduce((n,s)=>n+s.amount,0);
-  const forma=formaDe(f);
+  const forma=formaDe(f,battle),retrato=forma?.retrato??'base';
+  // cada troca de retrato no meio da luta (virar a forma ou voltar ao normal, como o Mario crescendo) nasce de um clarão
+  const [trocaDoRetrato,setTrocaDoRetrato]=useState({retrato,vezes:0});
+  if(trocaDoRetrato.retrato!==retrato)setTrocaDoRetrato({retrato,vezes:trocaDoRetrato.vezes+1});
+  const trocouDeRetrato=trocaDoRetrato.vezes>0;
   useEffect(()=>preCarregaFormas([f.characterId]),[f.characterId]);
   const source=beat?.event.source===f.uid,impacted=beat?.impacted??false;
   const hit=impacted?beat?.events.find(e=>revelado(beat,e)&&e.target===f.uid&&e.kind==='damage'):undefined;
@@ -202,8 +206,8 @@ export function ArenaUnit({fighter:f,battle,beat,onInspect,numbers,threatened,li
       <span className="unit-pedestal" aria-hidden="true"/>
       <button className="fighter-portrait" data-portrait={f.uid} onClick={()=>onInspect({kind:'fighter',fighter:f})} aria-label={`Inspecionar ${c.name}, ${Math.ceil(f.hp)} de Vida`}>
         <span className="medal-aura" aria-hidden="true"/>
-        {/* quem trocou de forma (Gandalf volta como o Branco, Ben 10 vira um alien) troca o retrato, com um clarão na cor da forma */}
-        <span key={forma?forma.retrato:'base'} className={`medal-frame${forma?' forma-nova':''}`} style={forma?{'--forma-cor':forma.cor} as React.CSSProperties:undefined}><Portrait character={naFormaDeAgora(c,f)}/>{forma&&<i className="forma-clarao" aria-hidden="true"/>}</span>
+        {/* quem troca de forma (Gandalf volta como o Branco, Ben 10 vira um alien, o Mario cresce) troca o retrato, com um clarão na cor da forma */}
+        <span key={retrato} className={`medal-frame${trocouDeRetrato?' forma-nova':''}`} style={trocouDeRetrato?{'--forma-cor':forma?.cor??c.color} as React.CSSProperties:undefined}><Portrait character={naFormaDeAgora(c,f,battle)}/>{trocouDeRetrato&&<i className="forma-clarao" aria-hidden="true"/>}</span>
         <svg className="attack-ring" viewBox="0 0 100 100" aria-hidden="true">
           <circle cx="50" cy="50" r="47" className="attack-ring-track"/>
           <circle cx="50" cy="50" r="47" className="attack-ring-ticks" pathLength="100" strokeDasharray=".4 9.6"/>

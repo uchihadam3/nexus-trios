@@ -56,7 +56,7 @@ export function BattleInspector({target,battle,onClose,onSelect}:{target:Inspect
 }
 
 function FichaDoLutador({battle,f,onSelect}:{battle:Battle;f:Fighter;onSelect:(t:InspectTarget)=>void}){
-  const c=naFormaDeAgora(byId[f.characterId],f),vida=Math.max(0,Math.min(Math.round(f.hp),Math.round(f.maxHp))),fracao=Math.max(0,f.hp)/f.maxHp,escudo=Math.round(f.shields.reduce((t,s)=>t+s.amount,0));
+  const c=naFormaDeAgora(byId[f.characterId],f,battle),vida=Math.max(0,Math.min(Math.round(f.hp),Math.round(f.maxHp))),fracao=Math.max(0,f.hp)/f.maxHp,escudo=Math.round(f.shields.reduce((t,s)=>t+s.amount,0));
   const traco=presentTrait(c.trait),unica=unicaDe(c.id);
   const extras=[c.renascer&&(f.voltou?'Já renasceu nesta luta. ':'')+textoDoRenascer(c.renascer),c.ultimaResistencia&&(f.resistiu?'Já usou nesta luta. ':'')+textoDaResistencia(c.ultimaResistencia),c.despercebido&&textoDoDespercebido(),c.isca&&textoDaIsca(c.isca)].filter((x):x is string=>!!x);
   const basico=c.basic.effects.map(effect=>presentEffect(effect,c.basic.target)).join(' · ');

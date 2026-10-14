@@ -50,3 +50,25 @@ describe('Ben 10 e o Omnitrix', () => {
     expect([...vistos].sort()).toEqual(['chama', 'diamante', 'quatro-bracos', 'xlr8'].map((n) => `/assets/portraits/formas/ben10-${n}.webp`));
   });
 });
+
+/*
+ * Mario (pedido do jogador: "Mario pequeno… o Mario grande usa a que tem lá"): pequeno, o retrato é o do Mario
+ * pequeno; depois do Super Cogumelo, volta o retrato de sempre (e encolhendo, o pequeno de novo).
+ */
+describe('Mario e o Super Cogumelo', () => {
+  it('mostra o Mario pequeno até o cogumelo e o retrato de sempre quando cresce', () => {
+    let cresceu = 0;
+    for (let semente = 1; semente <= 20; semente++) {
+      const b = createBattle(['mario', 'hinata', 'naruto'], ['goku', 'vegeta', 'hulk'], semente);
+      const mario = b.fighters.find((f) => f.characterId === 'mario')!;
+      expect(naFormaDeAgora(byId.mario, mario).portrait).toBe('/assets/portraits/formas/mario-pequeno.webp');
+      for (let t = 0; t < 6000 && !b.finished; t++) {
+        stepBattle(b);
+        const grande = !!mario.u?.grande;
+        if (grande) cresceu++;
+        expect(naFormaDeAgora(byId.mario, mario).portrait).toBe(grande ? byId.mario.portrait : '/assets/portraits/formas/mario-pequeno.webp');
+      }
+    }
+    expect(cresceu).toBeGreaterThan(0);
+  });
+});
