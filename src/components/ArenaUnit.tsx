@@ -2,7 +2,7 @@ import { useEffect,useRef,useState } from 'react';
 import { Flame,Hourglass,Shield,HeartPulse,Skull,Sparkles,Zap } from 'lucide-react';
 import { condicaoAtendida } from '../engine/battle';
 import type { Battle,Fighter,Status } from '../engine/types';
-import { passoAtual,revelado,type Beat } from '../presentation/director';
+import { etapaDoEvento,passoAtual,revelado,type Beat } from '../presentation/director';
 import { ativacaoNaTela } from '../presentation/ativacao-da-unica';
 import { PRESENTATION as P } from '../presentation/config';
 import { folha } from '../presentation/vfxProfiles';
@@ -15,6 +15,7 @@ import { statuses } from '../data/statuses';
 import { Portrait } from './Portrait';
 import { AuxIcon,SkillIcon } from './Icon';
 import { StatusBadge } from './StatusBadge';
+import { SeloDoStatus } from './SeloDoStatus';
 import { EmblemaDoRenascer } from './EmblemaDoRenascer';
 import { RENASCER_PROPRIO } from '../presentation/renascer-proprio';
 import type { InspectTarget } from './BattleInspector';
@@ -86,6 +87,8 @@ export function ArenaUnit({fighter:f,battle,beat,onInspect,numbers,threatened,li
   const blocked=impacted?beat?.events.find(e=>revelado(beat,e)&&e.target===f.uid&&e.kind==='block'&&(e.value??0)>=40):undefined;
   // o Status mais recente já revelado (cada passo da cadeia mostra o seu)
   const applied=impacted&&beat?[...beat.events].reverse().find(e=>revelado(beat,e)&&e.target===f.uid&&e.kind==='status'):undefined;
+  // os Status que entraram no mesmo passo do mais recente: o selo de cada um cai junto (src/components/SeloDoStatus.tsx)
+  const aplicados=applied&&beat?beat.events.filter(e=>e.kind==='status'&&e.target===f.uid&&revelado(beat,e)&&etapaDoEvento(beat,e)===etapaDoEvento(beat,applied)):[];
   // este lutador está reagindo agora (o traço dele disparou no meio da ação de outro)
   const passo=passoAtual(beat),reagindo=passo?.classe==='reacao'&&passo.quem===f.uid?passo:undefined;
   /*
@@ -240,9 +243,9 @@ export function ArenaUnit({fighter:f,battle,beat,onInspect,numbers,threatened,li
         {ativando&&!preparandoUnica&&<span key={`ua${beat?.event.id??0}-${ativando.eventos[0]??0}`} className="aura-ativa aura-unica aura-longa" aria-hidden="true"><i/><i/><i/><i/><i/><i/><i/><i/></span>}
         {/* a mini preparação: a energia roxa junta no retrato antes de a mecânica disparar */}
         {ativando&&(!at||preparandoUnica)&&<span key={`uc${beat?.event.id??0}-${ativando.eventos[0]??0}`} className="unica-carga" aria-hidden="true"><i/><i/><i/><i/><i/><i/></span>}
-        {applied&&<span key={applied.id} className="status-pop">{applied.status&&<img src={`/assets/statuses/${applied.status}.png`} alt=""/>}{applied.label}</span>}
         {discovered&&<span key={discovered.id} className="discovery-pop">{discovered.label}</span>}
       </button>
+      {aplicados.length>0&&<SeloDoStatus key={`ss${aplicados[0]!.id}`} eventos={aplicados}/>}
       {(out||advantageActive||critical||shield>0)&&<span className={`unit-flag ${out?'flag-out':advantageActive?'flag-advantage':critical?'flag-critical':'flag-shield'}`} aria-hidden="true">{renascendo?<EmblemaDoRenascer id={c.id} size={12}/>:out?<Skull size={12}/>:advantageActive?<AuxIcon id="domain" size={13}/>:critical?<HeartPulse size={12}/>:<Shield size={12}/>}</span>}
       {ativando&&fase==='carga'&&<div key={`up${beat?.event.id??0}-${ativando.eventos[0]??0}`} className="unit-cast"><AuxIcon id="preparing" size={13}/><span>{nomeDaAtivacao(beat,ativando,c.id)}</span></div>}
       {ativando&&!preparandoUnica&&<div key={`un${beat?.event.id??0}-${ativando.eventos[0]??0}`} className="unit-cast unit-skill-name unit-unica-name"><Sparkles size={14} strokeWidth={2.6}/><span>{nomeDaAtivacao(beat,ativando,c.id)}</span></div>}
