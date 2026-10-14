@@ -202,8 +202,8 @@ export function ArenaUnit({fighter:f,battle,beat,onInspect,numbers,threatened,li
       <span className="unit-pedestal" aria-hidden="true"/>
       <button className="fighter-portrait" data-portrait={f.uid} onClick={()=>onInspect({kind:'fighter',fighter:f})} aria-label={`Inspecionar ${c.name}, ${Math.ceil(f.hp)} de Vida`}>
         <span className="medal-aura" aria-hidden="true"/>
-        {/* quem trocou de forma (Gandalf volta como o Branco) troca o retrato, com um clarão na hora da troca */}
-        <span key={forma?forma.retrato:'base'} className={`medal-frame${forma?' forma-nova':''}`}><Portrait character={naFormaDeAgora(c,f)}/>{forma&&<i className="forma-clarao" aria-hidden="true"/>}</span>
+        {/* quem trocou de forma (Gandalf volta como o Branco, Ben 10 vira um alien) troca o retrato, com um clarão na cor da forma */}
+        <span key={forma?forma.retrato:'base'} className={`medal-frame${forma?' forma-nova':''}`} style={forma?{'--forma-cor':forma.cor} as React.CSSProperties:undefined}><Portrait character={naFormaDeAgora(c,f)}/>{forma&&<i className="forma-clarao" aria-hidden="true"/>}</span>
         <svg className="attack-ring" viewBox="0 0 100 100" aria-hidden="true">
           <circle cx="50" cy="50" r="47" className="attack-ring-track"/>
           <circle cx="50" cy="50" r="47" className="attack-ring-ticks" pathLength="100" strokeDasharray=".4 9.6"/>
