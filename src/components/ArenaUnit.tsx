@@ -18,6 +18,7 @@ import { StatusBadge } from './StatusBadge';
 import { SeloDoStatus } from './SeloDoStatus';
 import { EmblemaDoRenascer } from './EmblemaDoRenascer';
 import { RENASCER_PROPRIO } from '../presentation/renascer-proprio';
+import { formaDe,naFormaDeAgora,preCarregaFormas } from '../presentation/formas';
 import type { InspectTarget } from './BattleInspector';
 import type { UnitActing } from '../presentation/acting';
 
@@ -81,6 +82,8 @@ function LinhaDeStatus({tipo,lista,fighter,onInspect}:{tipo:'buffs'|'debuffs';li
 
 export function ArenaUnit({fighter:f,battle,beat,onInspect,numbers,threatened,linkedSource=false,linkedTarget=false,atuacao}:{fighter:Fighter;battle:Battle;beat:Beat|null;onInspect:(target:InspectTarget)=>void;numbers:boolean;threatened:boolean;linkedSource?:boolean;linkedTarget?:boolean;atuacao?:UnitActing}){
   const c=byId[f.characterId],shield=f.shields.reduce((n,s)=>n+s.amount,0);
+  const forma=formaDe(f);
+  useEffect(()=>preCarregaFormas([f.characterId]),[f.characterId]);
   const source=beat?.event.source===f.uid,impacted=beat?.impacted??false;
   const hit=impacted?beat?.events.find(e=>revelado(beat,e)&&e.target===f.uid&&e.kind==='damage'):undefined;
   const shielded=impacted?beat?.events.find(e=>revelado(beat,e)&&e.target===f.uid&&e.kind==='shield'&&e.label==='Escudo'):undefined;
@@ -199,7 +202,8 @@ export function ArenaUnit({fighter:f,battle,beat,onInspect,numbers,threatened,li
       <span className="unit-pedestal" aria-hidden="true"/>
       <button className="fighter-portrait" data-portrait={f.uid} onClick={()=>onInspect({kind:'fighter',fighter:f})} aria-label={`Inspecionar ${c.name}, ${Math.ceil(f.hp)} de Vida`}>
         <span className="medal-aura" aria-hidden="true"/>
-        <span className="medal-frame"><Portrait character={c}/></span>
+        {/* quem trocou de forma (Gandalf volta como o Branco) troca o retrato, com um clarão na hora da troca */}
+        <span key={forma?forma.retrato:'base'} className={`medal-frame${forma?' forma-nova':''}`}><Portrait character={naFormaDeAgora(c,f)}/>{forma&&<i className="forma-clarao" aria-hidden="true"/>}</span>
         <svg className="attack-ring" viewBox="0 0 100 100" aria-hidden="true">
           <circle cx="50" cy="50" r="47" className="attack-ring-track"/>
           <circle cx="50" cy="50" r="47" className="attack-ring-ticks" pathLength="100" strokeDasharray=".4 9.6"/>

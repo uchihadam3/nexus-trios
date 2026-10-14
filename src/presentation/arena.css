@@ -598,3 +598,9 @@
 /* a aura de poder (o reforço em si mesmo): o anel no chão e a coluna de luz subindo */
 .arena-v2 .pd-chao{border-radius:50%;border:2px solid var(--ap-miolo);background:radial-gradient(ellipse,color-mix(in srgb,var(--ap) 55%,transparent),transparent 70%);box-shadow:0 0 14px 3px var(--ap)}
 .arena-v2 .pd-coluna{border-radius:45% 45% 20% 20%/60% 60% 20% 20%;background:linear-gradient(to top,color-mix(in srgb,var(--ap-miolo) 80%,#fff) 0,color-mix(in srgb,var(--ap) 60%,transparent) 45%,transparent 100%);filter:blur(3px);mix-blend-mode:screen;translate:-50% -75%!important}
+/* troca de forma (Gandalf volta como o Branco): o retrato novo nasce de um clarão branco */
+.arena-v2 .medal-frame.forma-nova .portrait img{animation:forma-nova-retrato 1.2s cubic-bezier(.2,.8,.2,1) both}
+.arena-v2 .medal-frame .forma-clarao{position:absolute;inset:0;border-radius:inherit;background:radial-gradient(circle,#fff 0,#fffbe8cc 45%,transparent 75%);pointer-events:none;z-index:3;animation:forma-nova-clarao 1.2s ease-out both}
+@keyframes forma-nova-clarao{0%{opacity:1}35%{opacity:.85}100%{opacity:0}}
+@keyframes forma-nova-retrato{0%{transform:scale(1.25);filter:brightness(2.4) saturate(0)}100%{transform:scale(1);filter:none}}
+@media (prefers-reduced-motion:reduce){.arena-v2 .medal-frame.forma-nova .portrait img,.arena-v2 .medal-frame .forma-clarao{display:none}}
