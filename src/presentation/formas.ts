@@ -13,7 +13,8 @@ import type { Battle, Character, Fighter } from '../engine/types';
  * - Sephiroth abre a asa negra;
  * - Steve veste a armadura de diamante;
  * - Macaco Louco começa no robô e sai dele quando o robô quebra;
- * - Ikki renasce das cinzas com a Fênix.
+ * - Ikki renasce das cinzas com a Fênix;
+ * - Fenrir começa acorrentado e se solta aos 12 s.
  */
 interface Forma { retrato: string; nome: string; cor: string }
 const DIR = '/assets/portraits/formas/';
@@ -33,6 +34,7 @@ const SEPHIROTH_UMA_ASA: Forma = { retrato: `${DIR}sephiroth-uma-asa.webp`, nome
 const STEVE_DIAMANTE: Forma = { retrato: `${DIR}steve-diamante.webp`, nome: 'Steve de diamante', cor: '#5ff0ff' };
 const MOJO_ROBO: Forma = { retrato: `${DIR}mojo-robo.webp`, nome: 'Macaco Louco no robô', cor: '#ffd23a' };
 const IKKI_RENASCIDO: Forma = { retrato: `${DIR}ikki-renascido.webp`, nome: 'Ikki, a Fênix renascida', cor: '#ff8a2a' };
+const FENRIR_PRESO: Forma = { retrato: `${DIR}fenrir-preso.webp`, nome: 'Fenrir acorrentado', cor: '#ff6a3a' };
 const FORMAS: Record<string, { de: (f: Fighter, agora: number) => Forma | null; todas: Forma[] }> = {
   gandalf: {
     de: (f) => (f.voltou && (f.u?.branco ?? 0) >= 1 ? FORMAS.gandalf!.todas[0]! : null),
@@ -57,6 +59,8 @@ const FORMAS: Record<string, { de: (f: Fighter, agora: number) => Forma | null; 
   mojojojo: { de: (f) => (f.u?.robo === 1 ? MOJO_ROBO : null), todas: [MOJO_ROBO] },
   /* Ikki renasce das cinzas e fica com a Fênix em chamas até o fim da luta (src/engine/unicas-lote6.ts) */
   ikki: { de: (f) => (f.u?.fenix ? IKKI_RENASCIDO : null), todas: [IKKI_RENASCIDO] },
+  /* Fenrir começa acorrentado na Gleipnir e, solto aos 12 s, volta ao retrato de sempre (src/engine/unicas-lote3.ts) */
+  fenrir: { de: (f) => (f.u?.solto ? null : FENRIR_PRESO), todas: [FENRIR_PRESO] },
 };
 
 /** A forma de agora do lutador, se ele trocou de forma. */

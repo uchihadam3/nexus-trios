@@ -217,3 +217,23 @@ describe('Ikki renascido', () => {
     expect(renasceu).toBeGreaterThan(0);
   });
 });
+
+/*
+ * Fenrir (pedido do jogador: "essa imagem como o Fenrir preso… a imagem que tá lá hoje como o Fenrir solto"): começa
+ * acorrentado e, quando quebra as correntes, fica com o retrato de sempre.
+ */
+describe('Fenrir acorrentado', () => {
+  it('começa preso e troca para o retrato de sempre quando se solta', () => {
+    const b = createBattle(['fenrir', 'hinata', 'naruto'], ['goku', 'vegeta', 'hulk'], 3);
+    const fe = b.fighters.find((f) => f.characterId === 'fenrir')!;
+    expect(naFormaDeAgora(byId.fenrir, fe, b).portrait).toBe('/assets/portraits/formas/fenrir-preso.webp');
+    let soltou = false;
+    for (let t = 0; t < 6000 && !b.finished; t++) {
+      stepBattle(b);
+      const solto = !!fe.u?.solto;
+      if (solto) soltou = true;
+      expect(naFormaDeAgora(byId.fenrir, fe, b).portrait).toBe(solto ? byId.fenrir.portrait : '/assets/portraits/formas/fenrir-preso.webp');
+    }
+    expect(soltou).toBe(true);
+  });
+});
