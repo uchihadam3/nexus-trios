@@ -2060,6 +2060,14 @@ export const FAMILIAS_NOVAS = {
   chute_ghoul_kaneki: n({ nome: 'Chute ghoul', grupo: 'físico', aponta: true, impacto: 'chute_ghoul_kaneki', escala: 2.0, tempo: 1.0, cor: '#ff3a4a', tinta: 'fixa' }),
   chute_do_caos_shadow: n({ nome: 'Chute do caos', grupo: 'físico', aponta: true, impacto: 'chute_do_caos_shadow', escala: 2.0, tempo: 1.0, cor: '#ff4a4a', tinta: 'fixa' }),
   chute_relampago_chunli: n({ nome: 'Chute Relâmpago', grupo: 'físico', aponta: true, impacto: 'chute_relampago_chunli', escala: 2.0, tempo: 1.0, cor: '#5aa8ff', tinta: 'fixa' }),
+  chute_lunar: n({ nome: 'Chute lunar', grupo: 'físico', aponta: true, impacto: 'chute_lunar', escala: 2.0, tempo: 1.0, cor: '#ffd86a', tinta: 'fixa' }),
+  chute_e_bo_donatello: n({ nome: 'Chute e bastão bo', grupo: 'físico', aponta: true, impacto: 'chute_e_bo_donatello', escala: 2.0, tempo: 1.0, cor: '#b07aff', tinta: 'fixa' }),
+  chute_cowabunga: n({ nome: 'Chute cowabunga', grupo: 'físico', aponta: true, impacto: 'chute_cowabunga', escala: 2.0, tempo: 1.0, cor: '#ff9a3a', tinta: 'fixa' }),
+  chute_de_fogo_zuko: n({ nome: 'Chute de fogo', grupo: 'físico', aponta: true, impacto: 'chute_de_fogo_zuko', escala: 2.0, tempo: 1.0, cor: '#ff7a2e', tinta: 'fixa' }),
+  chute_de_fogo_azul: n({ nome: 'Fogo azul', grupo: 'físico', aponta: true, impacto: 'chute_de_fogo_azul', escala: 2.0, tempo: 1.0, cor: '#4aa0ff', tinta: 'fixa' }),
+  chicotes_de_carne_muzan: n({ nome: 'Chicotes de carne', grupo: 'corte', aponta: true, impacto: 'chicotes_de_carne_muzan', escala: 2.0, tempo: 1.0, cor: '#ff3a5a', tinta: 'fixa' }),
+  garras_de_vibranio: n({ nome: 'Garras de vibranium', grupo: 'corte', aponta: true, impacto: 'garras_de_vibranio', escala: 2.0, tempo: 1.0, cor: '#b07aff', tinta: 'fixa' }),
+  laminas_simbiontes: n({ nome: 'Lâminas de simbionte', grupo: 'corte', aponta: true, impacto: 'laminas_simbiontes', escala: 2.0, tempo: 1.0, cor: '#ff2a3a', tinta: 'fixa' }),
 } as const satisfies Record<string, Familia>;
 
 export type FamiliaNova = keyof typeof FAMILIAS_NOVAS;
@@ -2091,7 +2099,8 @@ export const NOVAS_NO_ALVO = new Set<FamiliaNova>(['ressurreicao', 'renascer', '
   'katanas_gemeas_leonardo', 'golpe_unico_jack', 'corte_brutal_kenpachi', 'giro_da_espada_link', 'rebellion_dante', 'espada_de_prata_geralt', 'corte_dos_morcegos', 'grade_de_cortes_trunks',
   'espada_do_heroi_finn', 'bengala_do_mestre', 'espada_da_protecao_shera', 'garras_de_adamantium', 'katanas_e_piadas', 'bastao_de_ricochete', 'adaga_das_ilusoes', 'haste_negra_pain',
   'tiro_do_coronel', 'rajada_do_justiceiro', 'blasters_do_quill', 'canhao_do_rocket', 'rajada_do_spartan', 'tiro_e_faca_leon', 'mira_da_beretta', 'mega_buster',
-  'z_buster_carregado', 'tiro_silencioso_47', 'tiro_lambda_gordon', 'samaritano_hellboy', 'chute_espinho_yor', 'chute_ghoul_kaneki', 'chute_do_caos_shadow', 'chute_relampago_chunli']);
+  'z_buster_carregado', 'tiro_silencioso_47', 'tiro_lambda_gordon', 'samaritano_hellboy', 'chute_espinho_yor', 'chute_ghoul_kaneki', 'chute_do_caos_shadow', 'chute_relampago_chunli',
+  'chute_lunar', 'chute_e_bo_donatello', 'chute_cowabunga', 'chute_de_fogo_zuko', 'chute_de_fogo_azul', 'chicotes_de_carne_muzan', 'garras_de_vibranio', 'laminas_simbiontes']);
 
 /** Bons para o ataque básico do personagem (quando ele já usa a família numa habilidade). */
 export const NOVAS_DE_BASICO = new Set<FamiliaNova>(['garras', 'chicote', 'bastao', 'mordida', 'tentaculos', 'florete',

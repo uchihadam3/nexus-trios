@@ -5085,6 +5085,23 @@
    ],
    "bytes": 33624
   },
+  "chicotes-de-carne-muzan": {
+   "arquivo": "chicotes-de-carne-muzan.mp3",
+   "descricao": "básico de Muzan: os chicotes de carne estalando",
+   "versoes": [
+    0.0,
+    0.9347,
+    1.9593,
+    2.9148
+   ],
+   "duracoes": [
+    0.8547,
+    0.9447,
+    0.8754,
+    0.8924
+   ],
+   "bytes": 36154
+  },
   "chidori-sasuke": {
    "arquivo": "chidori-sasuke.mp3",
    "descricao": "Chidori: a lança de raio atravessando",
@@ -5289,6 +5306,23 @@
    ],
    "bytes": 30584
   },
+  "chute-cowabunga": {
+   "arquivo": "chute-cowabunga.mp3",
+   "descricao": "básico de Michelangelo: o chute e a pizza voando",
+   "versoes": [
+    0.0,
+    1.28,
+    2.6035,
+    3.8429
+   ],
+   "duracoes": [
+    1.2,
+    1.2435,
+    1.1594,
+    1.2183
+   ],
+   "bytes": 39969
+  },
   "chute-da-viuva": {
    "arquivo": "chute-da-viuva.mp3",
    "descricao": "básico da Viúva Negra: o chute e o choque",
@@ -5305,6 +5339,40 @@
     0.9804
    ],
    "bytes": 38007
+  },
+  "chute-de-fogo-azul": {
+   "arquivo": "chute-de-fogo-azul.mp3",
+   "descricao": "básico de Azula: o fogo azul e o estalo de raio",
+   "versoes": [
+    0.0,
+    1.1178,
+    2.2235,
+    3.2476
+   ],
+   "duracoes": [
+    1.0378,
+    1.0256,
+    0.9441,
+    0.8841
+   ],
+   "bytes": 36621
+  },
+  "chute-de-fogo-zuko": {
+   "arquivo": "chute-de-fogo-zuko.mp3",
+   "descricao": "básico de Zuko: o chute com o rugido de fogo",
+   "versoes": [
+    0.0,
+    1.1321,
+    2.2504,
+    3.2375
+   ],
+   "duracoes": [
+    1.0521,
+    1.0383,
+    0.9071,
+    0.9809
+   ],
+   "bytes": 36070
   },
   "chute-de-sanji": {
    "arquivo": "chute-de-sanji.mp3",
@@ -5391,6 +5459,23 @@
    ],
    "bytes": 57547
   },
+  "chute-e-bo-donatello": {
+   "arquivo": "chute-e-bo-donatello.mp3",
+   "descricao": "básico de Donatello: o bastão girando e o chute",
+   "versoes": [
+    0.0,
+    1.0174,
+    2.048,
+    3.0427
+   ],
+   "duracoes": [
+    0.9374,
+    0.9506,
+    0.9146,
+    0.9629
+   ],
+   "bytes": 36907
+  },
   "chute-espinho-yor": {
    "arquivo": "chute-espinho-yor.mp3",
    "descricao": "básico de Yor: o chute e o estalo do salto",
@@ -5424,6 +5509,23 @@
     1.1337
    ],
    "bytes": 32613
+  },
+  "chute-lunar": {
+   "arquivo": "chute-lunar.mp3",
+   "descricao": "básico de Sailor Moon: o chute e os sininhos da lua",
+   "versoes": [
+    0.0,
+    1.28,
+    2.5273,
+    3.7523
+   ],
+   "duracoes": [
+    1.2,
+    1.1673,
+    1.1449,
+    1.1168
+   ],
+   "bytes": 43578
   },
   "chute-relampago": {
    "arquivo": "chute-relampago.mp3",
@@ -13398,6 +13500,23 @@
    ],
    "bytes": 50095
   },
+  "garras-de-vibranio": {
+   "arquivo": "garras-de-vibranio.mp3",
+   "descricao": "básico de Pantera Negra: as garras e o pulso cinético",
+   "versoes": [
+    0.0,
+    1.0225,
+    2.0797,
+    3.0713
+   ],
+   "duracoes": [
+    0.9425,
+    0.9772,
+    0.9116,
+    0.9564
+   ],
+   "bytes": 39323
+  },
   "garras-do-falcao": {
    "arquivo": "garras-do-falcao.mp3",
    "descricao": "Hórus: as garras do falcão",
@@ -17987,6 +18106,23 @@
     0.808
    ],
    "bytes": 37489
+  },
+  "laminas-simbiontes": {
+   "arquivo": "laminas-simbiontes.mp3",
+   "descricao": "básico de Carnificina: o simbionte molhado e afiado",
+   "versoes": [
+    0.0,
+    1.0725,
+    2.1305,
+    3.0624
+   ],
+   "duracoes": [
+    0.9925,
+    0.978,
+    0.8519,
+    0.9482
+   ],
+   "bytes": 40224
   },
   "lanca-chamas": {
    "arquivo": "lanca-chamas.mp3",

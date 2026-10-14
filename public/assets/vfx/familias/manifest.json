@@ -4353,6 +4353,20 @@
   "laco": false,
   "bytes": 41418
  },
+ "chicotes_de_carne_muzan": {
+  "descricao": "básico do Muzan: os chicotes de carne com espinhos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 23760
+ },
  "chidori_sasuke": {
   "descricao": "Sasuke · a lança de raio atravessando o rival",
   "quadros": 12,
@@ -4507,6 +4521,20 @@
   "laco": false,
   "bytes": 15460
  },
+ "chute_cowabunga": {
+  "descricao": "básico do Michelangelo: o chute e a fatia de pizza voando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 19806
+ },
  "chute_da_viuva": {
   "descricao": "Básico da Viúva Negra: o chute e o choque",
   "quadros": 12,
@@ -4520,6 +4548,34 @@
   ],
   "laco": false,
   "bytes": 23612
+ },
+ "chute_de_fogo_azul": {
+  "descricao": "básico da Azula: o chute com o fogo azul e o relâmpago",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 27740
+ },
+ "chute_de_fogo_zuko": {
+  "descricao": "básico do Zuko: o chute com o arco de fogo laranja",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 29968
  },
  "chute_de_sanji": {
   "descricao": "Básico do Sanji: o chute em arco e a fumaça",
@@ -4591,6 +4647,20 @@
   "laco": false,
   "bytes": 59904
  },
+ "chute_e_bo_donatello": {
+  "descricao": "básico do Donatello: o chute e o bastão bo girando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 22854
+ },
  "chute_espinho_yor": {
   "descricao": "básico da Yor: o salto agulha e as pétalas de rosa",
   "quadros": 12,
@@ -4618,6 +4688,20 @@
   ],
   "laco": false,
   "bytes": 17984
+ },
+ "chute_lunar": {
+  "descricao": "básico da Sailor Moon: o chute e a meia-lua com estrelinhas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 13752
  },
  "chute_relampago": {
   "descricao": "Chun-Li: leque de chutes rápidos em borrão",
@@ -11423,6 +11507,20 @@
   "laco": false,
   "bytes": 34222
  },
+ "garras_de_vibranio": {
+  "descricao": "básico do Pantera Negra: as garras e o pulso cinético",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 37512
+ },
  "garras_do_falcao": {
   "descricao": "Hórus · o mergulho e as garras",
   "quadros": 12,
@@ -15174,6 +15272,20 @@
   ],
   "laco": false,
   "bytes": 73798
+ },
+ "laminas_simbiontes": {
+  "descricao": "básico da Carnificina: as lâminas de simbionte e os respingos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 36802
  },
  "lanca_chamas_impacto": {
   "descricao": "Charizard · o fogo batendo e as chamas subindo no rival",
