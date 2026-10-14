@@ -9,7 +9,8 @@ import type { Battle, Character, Fighter } from '../engine/types';
  * - Korra entra no Estado Avatar;
  * - Hércules vira Semideus;
  * - Griffith vira Femto no Eclipse;
- * - Kenpachi tira o tapa-olho.
+ * - Kenpachi tira o tapa-olho;
+ * - Sephiroth abre a asa negra.
  */
 interface Forma { retrato: string; nome: string; cor: string }
 const DIR = '/assets/portraits/formas/';
@@ -25,6 +26,7 @@ const KORRA_AVATAR: Forma = { retrato: `${DIR}korra-avatar.webp`, nome: 'Korra, 
 const HERCULES_SEMIDEUS: Forma = { retrato: `${DIR}hercules-semideus.webp`, nome: 'Hércules, Semideus', cor: '#ffd36b' };
 const GRIFFITH_FEMTO: Forma = { retrato: `${DIR}griffith-femto.webp`, nome: 'Femto', cor: '#b56cff' };
 const KENPACHI_SEM_TAPA_OLHO: Forma = { retrato: `${DIR}kenpachi-sem-tapa-olho.webp`, nome: 'Kenpachi sem o tapa-olho', cor: '#ff5a6a' };
+const SEPHIROTH_UMA_ASA: Forma = { retrato: `${DIR}sephiroth-uma-asa.webp`, nome: 'Sephiroth, uma asa', cor: '#7dffcf' };
 const FORMAS: Record<string, { de: (f: Fighter, agora: number) => Forma | null; todas: Forma[] }> = {
   gandalf: {
     de: (f) => (f.voltou && (f.u?.branco ?? 0) >= 1 ? FORMAS.gandalf!.todas[0]! : null),
@@ -41,6 +43,8 @@ const FORMAS: Record<string, { de: (f: Fighter, agora: number) => Forma | null; 
   griffith: { de: (f) => (f.u?.femto ? GRIFFITH_FEMTO : null), todas: [GRIFFITH_FEMTO] },
   /* Kenpachi tira o tapa-olho com menos de 50% da Vida, até o fim da luta (src/engine/unicas-lote6.ts) */
   kenpachi: { de: (f) => (f.u?.olho ? KENPACHI_SEM_TAPA_OLHO : null), todas: [KENPACHI_SEM_TAPA_OLHO] },
+  /* Sephiroth abre a asa negra com menos de 50% da Vida, até o fim da luta (src/engine/unicas-lote7.ts) */
+  sephiroth: { de: (f) => (f.u?.asa ? SEPHIROTH_UMA_ASA : null), todas: [SEPHIROTH_UMA_ASA] },
 };
 
 /** A forma de agora do lutador, se ele trocou de forma. */

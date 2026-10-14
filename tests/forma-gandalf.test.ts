@@ -144,3 +144,21 @@ describe('Kenpachi sem o tapa-olho', () => {
     expect(tirou).toBeGreaterThan(0);
   });
 });
+
+/* Sephiroth (pedido do jogador: "Sephiroth com uma asa"): abriu a asa negra, troca o retrato até o fim da luta. */
+describe('Sephiroth com uma asa', () => {
+  it('troca o retrato quando abre a asa', () => {
+    let abriu = 0;
+    for (let semente = 1; semente <= 30; semente++) {
+      const b = createBattle(['sephiroth', 'hinata', 'naruto'], ['goku', 'vegeta', 'hulk'], semente);
+      const s = b.fighters.find((f) => f.characterId === 'sephiroth')!;
+      for (let t = 0; t < 6000 && !b.finished; t++) {
+        stepBattle(b);
+        const asa = !!s.u?.asa;
+        if (asa) abriu++;
+        expect(naFormaDeAgora(byId.sephiroth, s, b).portrait).toBe(asa ? '/assets/portraits/formas/sephiroth-uma-asa.webp' : byId.sephiroth.portrait);
+      }
+    }
+    expect(abriu).toBeGreaterThan(0);
+  });
+});
