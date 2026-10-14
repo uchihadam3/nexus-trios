@@ -72,3 +72,21 @@ describe('Mario e o Super Cogumelo', () => {
     expect(cresceu).toBeGreaterThan(0);
   });
 });
+
+/* Korra (pedido do jogador: "Korra estado de avatar"): o retrato do Estado Avatar só nos 6 s em que ele dura. */
+describe('Korra no Estado Avatar', () => {
+  it('troca o retrato só enquanto o Estado Avatar dura', () => {
+    let viu = 0;
+    for (let semente = 1; semente <= 30; semente++) {
+      const b = createBattle(['korra', 'hinata', 'naruto'], ['goku', 'vegeta', 'hulk'], semente);
+      const korra = b.fighters.find((f) => f.characterId === 'korra')!;
+      for (let t = 0; t < 6000 && !b.finished; t++) {
+        stepBattle(b);
+        const ativo = (korra.u?.avatar ?? 0) > b.time;
+        if (ativo) viu++;
+        expect(naFormaDeAgora(byId.korra, korra, b).portrait).toBe(ativo ? '/assets/portraits/formas/korra-avatar.webp' : byId.korra.portrait);
+      }
+    }
+    expect(viu).toBeGreaterThan(0);
+  });
+});

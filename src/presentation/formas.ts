@@ -2,8 +2,8 @@ import type { Battle, Character, Fighter } from '../engine/types';
 
 /**
  * Formas que trocam o retrato no meio da luta: Gandalf volta pela mecânica "O Branco" como Gandalf, o Branco, o
- * Ben 10 vira o alien que o Omnitrix sorteou (se o Omnitrix falha, segue o Ben) e o Mario fica pequeno até o cogumelo. O medalhão e a ficha mostram a forma
- * de agora, e cada troca nasce de um clarão na cor da forma.
+ * Ben 10 vira o alien que o Omnitrix sorteou (se o Omnitrix falha, segue o Ben) o Mario fica pequeno até o cogumelo e a Korra entra no Estado Avatar. O medalhão e a
+ * ficha mostram a forma de agora, e cada troca nasce de um clarão na cor da forma.
  */
 interface Forma { retrato: string; nome: string; cor: string }
 const DIR = '/assets/portraits/formas/';
@@ -15,6 +15,7 @@ const ALIENS: Forma[] = [
   { retrato: `${DIR}ben10-diamante.webp`, nome: 'Diamante', cor: '#8dffb8' },
 ];
 const MARIO_PEQUENO: Forma = { retrato: `${DIR}mario-pequeno.webp`, nome: 'Mario pequeno', cor: '#ff4a3a' };
+const KORRA_AVATAR: Forma = { retrato: `${DIR}korra-avatar.webp`, nome: 'Korra, Estado Avatar', cor: '#bfeaff' };
 const FORMAS: Record<string, { de: (f: Fighter, agora: number) => Forma | null; todas: Forma[] }> = {
   gandalf: {
     de: (f) => (f.voltou && (f.u?.branco ?? 0) >= 1 ? FORMAS.gandalf!.todas[0]! : null),
@@ -23,6 +24,8 @@ const FORMAS: Record<string, { de: (f: Fighter, agora: number) => Forma | null; 
   ben10: { de: (f) => ALIENS[f.u?.alien ?? -1] ?? null, todas: ALIENS },
   /* Mario começa pequeno e só vira o Mario de sempre (o retrato normal) depois do Super Cogumelo (src/engine/unicas-lote9.ts) */
   mario: { de: (f) => (f.u?.grande ? null : MARIO_PEQUENO), todas: [MARIO_PEQUENO] },
+  /* Korra no Estado Avatar: os 6 s de olhos brilhando (src/engine/unicas-lote7.ts) */
+  korra: { de: (f, agora) => ((f.u?.avatar ?? 0) > agora ? KORRA_AVATAR : null), todas: [KORRA_AVATAR] },
 };
 
 /** A forma de agora do lutador, se ele trocou de forma. */
