@@ -9,6 +9,7 @@
  * toca no impacto.
  */
 import type { VfxFamily } from '../presentation/vfxProfiles';
+import { ESFERA_QUE_CRESCE } from '../presentation/esfera-que-cresce';
 import { FAMILIAS_NOVAS, SOM_DA_NOVA, type FamiliaNova } from '../presentation/vfx-familias-novas';
 
 export const SONS = [
@@ -370,7 +371,9 @@ const ANTES_DA_NOVA: Partial<Record<FamiliaNova, { antes: Sound; saida?: Sound }
 };
 const SONS_DE_ANTES = [...new Set(Object.values(ANTES_DA_NOVA).flatMap((x) => [x!.antes, ...(x!.saida ? [x!.saida] : [])]))];
 
-export const TODOS_OS_SONS: Sound[] = [...SONS, ...SONS_DAS_NOVAS, ...SONS_DE_ANTES, 'cravar', 'ricochete'];
+// os estágios e o arremesso da esfera que cresce (a Genki Dama: src/presentation/esfera-que-cresce.ts)
+const SONS_DA_ESFERA = Object.values(ESFERA_QUE_CRESCE).flatMap((e) => [...e.sons, e.lanca]);
+export const TODOS_OS_SONS: Sound[] = [...SONS, ...SONS_DAS_NOVAS, ...SONS_DE_ANTES, ...SONS_DA_ESFERA, 'cravar', 'ricochete'];
 
 /*
  * Prioridade da mixagem, do adendo: grand > impacto importante > interrupção >

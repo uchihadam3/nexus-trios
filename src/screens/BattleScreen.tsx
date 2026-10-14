@@ -7,6 +7,7 @@ import { AberturaDeCombos,DescobertaNoLivro,FichaDoCombo,ListaDeCombos,type Novo
 import { OrbesDeCombo } from '../components/OrbesDeCombo';
 import { Invocacoes } from '../components/Invocacoes';
 import { RajadaDaUnica } from '../components/RajadaDaUnica';
+import { EsferaQueCresce } from '../components/EsferaQueCresce';
 import { AuxIcon } from '../components/Icon';
 import type { Battle, ComboAtivo, Side } from '../engine/types';
 import type { Settings } from '../lib/storage';
@@ -123,6 +124,7 @@ export function BattleScreen({battle,beat,index,name,settings,paused,onPause,onA
       {/* as criaturas invocadas: a bolinha ao lado de quem invocou */}
       <Invocacoes battle={battle} beat={beat} anchors={anchors} box={box} velocidade={settings.speed}/>
       <RajadaDaUnica battle={battle} beat={beat} anchors={anchors} box={box} reduced={settings.reducedMotion}/>
+      {settings.effects&&<EsferaQueCresce battle={battle} beat={beat} anchors={anchors} box={box} reduced={settings.reducedMotion}/>}
       <FloatingNumbers battle={battle} beat={beat} anchors={anchors} medal={box.medal} enabled={settings.numbers}/>
       {/* a abertura: os combos do trio entrando no começo da luta */}
       {battle.combos&&<AberturaDeCombos combos={battle.combos.player} chaveDaLuta={`${index}-${battle.seed}`} comecando={battle.time<1.5}/>}

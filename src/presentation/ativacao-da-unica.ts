@@ -21,7 +21,8 @@ import type { Beat, Passo } from './director';
 import { PRESENTATION as P } from './config';
 import { ENTREGA_DA_UNICA, VOO_DA_UNICA, efeitoDaUnica, entregaDaUnica, type ModoDaEntrega } from './unicas-efeitos';
 import { PICO_DA_FOLHA } from './pico-das-folhas';
-import { RAJADA_DA_UNICA } from './rajada-da-unica';
+import { ABRE_O_LEQUE, RAJADA_DA_UNICA } from './rajada-da-unica';
+import { ESFERA_QUE_CRESCE } from './esfera-que-cresce';
 
 /** O Preparo de cada um, na mesma escala do Preparo das habilidades (0 = instantâneo). */
 export const PREPARO_PROPRIO: Record<string, number> = {
@@ -35,7 +36,8 @@ export const PREPARO_PROPRIO: Record<string, number> = {
   levi: 0.1, daredevil: 0.1, morty: 0.1, harrypotter: 0.1, xenomorph: 0.1, catwoman: 0.1, blackwidow: 0.1,
   lelouch: 0.2, aizen: 0.2, kakashi: 0.2, coringa: 0.2, yor: 0.2, mikasa: 0.2,
   // o que precisa juntar energia de verdade
-  goku: 0.5, megatron: 0.5, madara: 0.5, dovahkiin: 0.5, galactus: 0.2, light: 0.5, kaiba: 0.5, darkseid: 0.4,
+  // a Genki Dama cresce em quatro estágios antes de ser lançada (src/presentation/esfera-que-cresce.ts)
+  goku: 1.1, megatron: 0.5, madara: 0.5, dovahkiin: 0.5, galactus: 0.2, light: 0.5, kaiba: 0.5, darkseid: 0.4,
   inuyasha: 0.4, cuphead: 0.4, zeus: 0.4, storm: 0.4, ironman: 0.4, mewtwo: 0.4, odin: 0.4, hadescz: 0.4, ursula: 0.4,
 };
 const PREPARO_DO_MODO: Record<ModoDaEntrega, number> = { si: 0.2, corpo: 0.2, alvo: 0.3, voa: 0.3, aliado: 0.3, raio: 0.4, cai: 0.5 };
@@ -142,7 +144,23 @@ export function vooDaUnica(e: BattleEvent, b: Battle, beat?: BeatDaUnica) {
 export function fasesDoEvento(e: BattleEvent, b: Battle, beat?: BeatDaUnica): FasesDaUnica {
   const f = b.fighters.find((x) => x.uid === e.source), id = f?.characterId ?? '';
   // a rajada não usa a folha no alvo (cada projétil tem o seu impacto): nada de esperar o estouro dela
-  return fasesDaUnica(id, vooDaUnica(e, b, beat), id && !RAJADA_DA_UNICA[id] ? efeitoDaUnica(id, e.label).familia : undefined);
+  const r = id ? RAJADA_DA_UNICA[id] : undefined, fases = fasesDaUnica(id, vooDaUnica(e, b, beat), id && !r ? efeitoDaUnica(id, e.label).familia : undefined);
+  if (r) return fasesDaRajada(fases, r.voo, r.leque);
+  // a esfera que cresce chega já no estouro da folha (a folha começa no meio, BattleEffects): o número sai na chegada
+  return id && ESFERA_QUE_CRESCE[id] ? { ...fases, impactoEm: fases.efeitoEm } : fases;
+}
+/** O nome fica à vista este tanto antes de a rajada começar a aparecer. */
+const LER_O_NOME = 0.3;
+/**
+ * A rajada sempre depois do nome (pedido do jogador: "ele carrega, aparece o nome, aparece as pétalas e usa…
+ * hora nenhuma vai aparecer o nome depois"): os projéteis aparecem (o leque abre) só depois de o nome estar à vista,
+ * e o primeiro chega no alvo depois de voar. Antes, o leque das pétalas abria antes do nome.
+ */
+export function fasesDaRajada(f: FasesDaUnica, voo: number, leque: boolean): FasesDaUnica {
+  const abre = leque ? ABRE_O_LEQUE : 0.25;
+  const efeitoEm = Math.max(f.efeitoEm, f.nomeEm + LER_O_NOME + abre + voo);
+  const vooEm = Math.max(f.vooEm, efeitoEm - voo), soltaEm = Math.max(f.soltaEm, vooEm - 0.12);
+  return { ...f, soltaEm, vooEm, efeitoEm, impactoEm: efeitoEm };
 }
 
 /**

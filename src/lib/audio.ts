@@ -5,6 +5,7 @@ import { FAMILIAS_DE_APOIO,PRIORIDADE,SOM_DA_FAMILIA,SONS,type Manifesto,type So
 import type { Cue } from '../presentation/director';
 import type { Battle } from '../engine/types';
 import { profileFor } from '../presentation/vfxProfiles';
+import { ESFERA_QUE_CRESCE } from '../presentation/esfera-que-cresce';
 import { EFEITO_DA_UNICA } from '../presentation/unicas-efeitos';
 import { preparoDaUnica } from '../presentation/preparo-da-unica';
 import { FAMILIA_DA_INVOCACAO } from '../presentation/vfx-atribuicao';
@@ -243,6 +244,7 @@ class BattleAudio {
       sons.add(preparoDaUnica(id).som as Sound);
       const inv=FAMILIA_DA_INVOCACAO[id];if(inv)sons.add(inv.replace(/_/g,'-') as Sound);
       sons.add(SOM_DA_ESPERA(id) as Sound);sons.add(SOM_DA_VOLTA(id) as Sound);
+      const esfera=ESFERA_QUE_CRESCE[id];if(esfera)for(const x of [...esfera.sons,esfera.lanca])sons.add(x as Sound);
     }
     await Promise.all([...sons].filter(x=>this.manifest?.sons[x]).map(x=>this.loadCue(x)));
   }

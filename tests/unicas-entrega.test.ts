@@ -32,7 +32,7 @@ describe('fases da ativação da Mecânica única', () => {
   it('concentra, mostra o nome, carrega e solta, nessa ordem; o reflexo é instantâneo', async () => {
     const { fasesDaUnica, preparoProprio } = await import('../src/presentation/ativacao-da-unica');
     const genki = fasesDaUnica('goku', 0.55);
-    expect(preparoProprio('goku')).toBe(0.5);
+    expect(preparoProprio('goku')).toBe(1.1);
     expect(genki.nomeEm).toBeGreaterThan(0);
     expect(genki.soltaEm).toBeGreaterThan(genki.nomeEm);
     expect(genki.impactoEm).toBeCloseTo(genki.vooEm + 0.55);

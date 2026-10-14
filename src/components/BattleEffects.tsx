@@ -1,5 +1,7 @@
 import { useLayoutEffect,useRef,useState,type CSSProperties,type ReactElement } from 'react';
 import { RAJADA_DA_UNICA } from '../presentation/rajada-da-unica';
+import { ESFERA_QUE_CRESCE } from '../presentation/esfera-que-cresce';
+import { PICO_DA_FOLHA } from '../presentation/pico-das-folhas';
 import type { Battle } from '../engine/types';
 import { ROTULO_DA_MECANICA,revelado,type Beat } from '../presentation/director';
 import { PRESENTATION as P } from '../presentation/config';
@@ -318,6 +320,8 @@ export function BattleEffects({battle,beat,anchors,enabled,reduced,medal=80}:{ba
       // a rajada tem o impacto de cada projétil (src/components/RajadaDaUnica.tsx), sem a folha grande em cada alvo
       if(RAJADA_DA_UNICA[dono.characterId])return;
       const f=familia(efeitoDaUnica(dono.characterId,e.label).familia),t=Math.min(medal*f.escala,Math.min(size.w,size.h)*.95);
+      // a esfera que cresce já chegou desenhada (src/components/EsferaQueCresce.tsx): a folha entra direto no estouro
+      if(ESFERA_QUE_CRESCE[dono.characterId])atraso-=Math.max(0,(PICO_DA_FOLHA[efeitoDaUnica(dono.characterId,e.label).familia]??0)*1.5-.05);
       for(const alvo of alvosDaUnica(e)){
         const p=point(alvo);
         nodes.push(camada(f.impacto,{left:`${p.x}%`,top:`${p.y}%`,width:t,height:t,'--fx-cor':f.cor,'--ang':'0deg','--flip':1,'--dur':s(1.5),'--delay':s(atraso)},'fxl-impacto fxl-sobre fx-da-unica',`unica-${beat.event.id}-${e.id}-${alvo}`));
@@ -334,12 +338,14 @@ export function BattleEffects({battle,beat,anchors,enabled,reduced,medal=80}:{ba
       const e=at.evento??beat.event,ent=entregaDoEvento(e,battle,beat);
       const deSi=ent.modo==='si'||ent.destino.lado==='si',espera=at.pausa&&!deSi&&!beat.pausas?.find(x=>x.evento.id===e.id)?.propria;
       emAndamento.add(e.id);
-      if(at.t<at.fases.soltaEm){
+      // a esfera que cresce desenha o próprio preparo e a viagem (src/components/EsferaQueCresce.tsx)
+      const esfera=!!ESFERA_QUE_CRESCE[dono.characterId];
+      if(at.t<at.fases.soltaEm&&!esfera){
         const p=point(dono.uid),t=medal*1.9;
         nodes.push(camada(ent.preparo??preparoDaUnica(dono.characterId).folha,{left:`${p.x}%`,top:`${p.y}%`,width:t,height:t},'fxl-laco fx-da-unica',`unica-prep-${beat.event.id}-${e.id}`));
       }
       if(espera)continue;
-      if(at.t>=at.fases.vooEm&&!RAJADA_DA_UNICA[dono.characterId])entregaAteOAlvo(e,`${beat.event.id}-${e.id}`,0);
+      if(at.t>=at.fases.vooEm&&!RAJADA_DA_UNICA[dono.characterId]&&!esfera)entregaAteOAlvo(e,`${beat.event.id}-${e.id}`,0);
       // a folha começa quando a entrega chega; o número espera o estouro dela (fases.impactoEm)
       if(at.t>=at.fases.efeitoEm)efeitoNoAlvo(e,0);
     }

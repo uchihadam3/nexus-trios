@@ -193,8 +193,39 @@ def cada_vez_maior(rng, v):
     return reverb(x, 0.5, 0.25)
 
 
+def _genki_cresce(k):
+    """Um estágio da Genki Dama crescendo (pedido do jogador: "ela cresce, cresce, cresce"): o sopro da energia
+    entrando, o baque grave da esfera inchando e o coro, cada estágio mais grave e mais cheio que o anterior."""
+    def fn(rng, v):
+        x = _z(1.1)
+        base = 196 * (0.84 ** k)
+        n = n_de(0.32)
+        poe(x, passa(rosa(rng, n), 400, 4000, 2) * sobe_e_some(n, 0.85, 1.2) * (0.16 + 0.05 * k), 0.0)
+        poe(x, satura(baque(n_de(0.45), 90 - 12 * k, 38 - 4 * k, 0.12, 0.7), 1.8) * (0.32 + 0.12 * k), 0.26)
+        m = n_de(0.7)
+        poe(x, (seno(base * 2, m) + seno(base * 2.52, m) * 0.7 + seno(base * 3, m) * 0.5) * env(m, 0.02, 0.55) * (0.035 + 0.01 * k), 0.26)
+        poe(x, _brilho(rng, 0.35, 1100 + 180 * k, 0.03, CRISTAL), 0.28)
+        return reverb(x, 0.6 + 0.05 * k, 0.3)
+    return fn
+
+
+def genki_lanca(rng, v):
+    """Goku arremessa a Genki Dama: o grito de energia que sai (o tom que sobe) e o ronco pesado da esfera voando."""
+    x = _z(1.2)
+    n = n_de(0.7)
+    poe(x, seno(varre(140, 420, n, 1.0), n) * sobe_e_some(n, 0.3, 1.2) * 0.1, 0.0)
+    poe(x, passa(rosa(rng, n), 120, 1800, 2) * sobe_e_some(n, 0.5, 1.0) * 0.4, 0.0)
+    poe(x, satura(baque(n_de(0.3), 80, 40, 0.06, 0.5), 2.0) * 0.4, 0.0)
+    return reverb(x, 0.6, 0.3)
+
+
 SONS: dict = {
     "mu-genki-dama": (genki_dama, "Goku: a Genki Dama"),
+    "mu-genki-cresce-1": (_genki_cresce(1), "Goku: a Genki Dama crescendo (1º estágio)"),
+    "mu-genki-cresce-2": (_genki_cresce(2), "Goku: a Genki Dama crescendo (2º estágio)"),
+    "mu-genki-cresce-3": (_genki_cresce(3), "Goku: a Genki Dama crescendo (3º estágio)"),
+    "mu-genki-cresce-4": (_genki_cresce(4), "Goku: a Genki Dama crescendo (4º estágio)"),
+    "mu-genki-lanca": (genki_lanca, "Goku: a Genki Dama arremessada"),
     "mu-zenkai": (zenkai, "Vegeta: o Zenkai"),
     "mu-kage-bunshin": (kage_bunshin, "Naruto: os clones das sombras"),
     "mu-sharingan": (sharingan, "Sasuke: o Sharingan"),

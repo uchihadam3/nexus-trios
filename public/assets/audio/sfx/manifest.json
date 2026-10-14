@@ -23173,6 +23173,74 @@
    ],
    "bytes": 80804
   },
+  "mu-genki-cresce-1": {
+   "arquivo": "mu-genki-cresce-1.mp3",
+   "descricao": "Goku: a Genki Dama crescendo (1º estágio)",
+   "versoes": [
+    0.0,
+    1.18,
+    2.3999,
+    3.5427
+   ],
+   "duracoes": [
+    1.1,
+    1.1399,
+    1.0628,
+    1.1167
+   ],
+   "bytes": 38980
+  },
+  "mu-genki-cresce-2": {
+   "arquivo": "mu-genki-cresce-2.mp3",
+   "descricao": "Goku: a Genki Dama crescendo (2º estágio)",
+   "versoes": [
+    0.0,
+    1.18,
+    2.3999,
+    3.5427
+   ],
+   "duracoes": [
+    1.1,
+    1.1399,
+    1.0628,
+    1.1167
+   ],
+   "bytes": 40344
+  },
+  "mu-genki-cresce-3": {
+   "arquivo": "mu-genki-cresce-3.mp3",
+   "descricao": "Goku: a Genki Dama crescendo (3º estágio)",
+   "versoes": [
+    0.0,
+    1.18,
+    2.3999,
+    3.5427
+   ],
+   "duracoes": [
+    1.1,
+    1.1399,
+    1.0628,
+    1.1167
+   ],
+   "bytes": 41105
+  },
+  "mu-genki-cresce-4": {
+   "arquivo": "mu-genki-cresce-4.mp3",
+   "descricao": "Goku: a Genki Dama crescendo (4º estágio)",
+   "versoes": [
+    0.0,
+    1.18,
+    2.3999,
+    3.5427
+   ],
+   "duracoes": [
+    1.1,
+    1.1399,
+    1.0628,
+    1.1167
+   ],
+   "bytes": 41311
+  },
   "mu-genki-dama": {
    "arquivo": "mu-genki-dama.mp3",
    "descricao": "Goku: a Genki Dama",
@@ -23189,6 +23257,23 @@
     2.4365
    ],
    "bytes": 91897
+  },
+  "mu-genki-lanca": {
+   "arquivo": "mu-genki-lanca.mp3",
+   "descricao": "Goku: a Genki Dama arremessada",
+   "versoes": [
+    0.0,
+    1.28,
+    2.6035,
+    3.8429
+   ],
+   "duracoes": [
+    1.2,
+    1.2435,
+    1.1594,
+    1.2183
+   ],
+   "bytes": 42641
   },
   "mu-gleipnir": {
    "arquivo": "mu-gleipnir.mp3",

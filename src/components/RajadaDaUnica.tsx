@@ -61,7 +61,10 @@ function UmaRajada({ battle, beat, anchors, box, reduced, chave }: Props & { bea
   const px = (uid: string) => { const a = anchors[uid] ?? fallbackPoint(uid); return { x: (a.x / 100) * box.w, y: (a.y / 100) * box.h }; };
   const de = px(dono.uid), frente = dono.side === 'player' ? -1 : 1, M = box.medal, perto = r.forma === 'golpe';
   const primeiro = golpes[0]!.em - r.voo, ultimo = golpes.at(-1)!.em;
-  const abre = primeiro - (r.leque ? ABRE_O_LEQUE : 0.25);
+  // nunca antes do nome (pedido do jogador: "carrega, aparece o nome, aparece as pétalas e usa"): o nome da
+  // habilidade aparece no começo do beat, e o leque só abre depois dele (se o golpe é rápido, o leque abre mais rápido)
+  const comeco = -duracaoBase(beat) * P.impactAt + 0.25;
+  const abre = Math.min(primeiro - 0.12, Math.max(comeco, primeiro - (r.leque ? ABRE_O_LEQUE : 0.25))), abrindo = primeiro - abre;
   if (depois < abre - 0.3 || depois > ultimo + 0.6) return null;
   const nos: ReactNode[] = [];
   // o tempo parado (a Mecânica única): um véu na cor da rajada, que entra antes do leque e sai depois do último golpe
@@ -92,7 +95,7 @@ function UmaRajada({ battle, beat, anchors, box, reduced, chave }: Props & { bea
         if (r.forma === 'bala' && r.para && depois > abre) nos.push(<i key={`mira-${i}`} className="rj-mira" style={{ left: alvo.x, top: alvo.y, width: M * 0.7, height: M * 0.7, '--rj': r.cor } as CSSProperties} />);
         return;
       }
-      const surge = abre + (i * ABRE_O_LEQUE * 0.7) / n;
+      const surge = abre + (i * abrindo * 0.7) / n;
       if (depois < surge) return;
       const s = suave(clamp((depois - surge) / 0.18));
       x = de.x + (slot.x - de.x) * s; y = de.y + (slot.y - de.y) * s; ang = a; op = s; escala = 0.4 + 0.6 * s;

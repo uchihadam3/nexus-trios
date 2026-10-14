@@ -22,6 +22,7 @@ import { PRIORIDADE,type Sound } from './audio/cues';
 import { battleAudio,faixaDaLuta } from './lib/audio';
 import { efeitoDaUnica } from './presentation/unicas-efeitos';
 import { rajadaDaChave } from './presentation/rajada-da-unica';
+import { ESFERA_QUE_CRESCE,estagiosDaEsfera } from './presentation/esfera-que-cresce';
 import { createDirection,restoreDirection,checkpointDirection,advanceDirection,type Direction,type Beat,type BeatTrace } from './presentation/director';
 import { fasesDoEvento } from './presentation/ativacao-da-unica';
 import { preparoDaUnica } from './presentation/preparo-da-unica';
@@ -309,8 +310,12 @@ export default function App(){
         unicaTocada.current=ativo.event.id;
         const dono=ativo.after.fighters.find(f=>f.uid===ativo.event.source);
         // o preparo soa como o de uma habilidade (o som de carregar do personagem) e o efeito dela sai no fim dele
-        if(dono)battleAudio.sound(preparoDaUnica(dono.characterId).som,PRIORIDADE.habilidade,0,ativo.event.id*10+6);
-        if(dono)battleAudio.sound(efeitoDaUnica(dono.characterId,ativo.event.label).som as Sound,PRIORIDADE.habilidade,0,ativo.event.id*10+7,fasesDoEvento(ativo.event,ativo.after,ativo).soltaEm);
+        const fases=fasesDoEvento(ativo.event,ativo.after,ativo),esfera=dono?ESFERA_QUE_CRESCE[dono.characterId]:undefined;
+        // a esfera que cresce (a Genki Dama): um som por estágio e o do arremesso, no lugar do som de carregar
+        if(esfera){estagiosDaEsfera(esfera,fases).forEach((t,k)=>battleAudio.sound(esfera.sons[k] as Sound,PRIORIDADE.habilidade,0,ativo.event.id*10+6+k*1000,t));battleAudio.sound(esfera.lanca as Sound,PRIORIDADE.habilidade,0,ativo.event.id*10+5,fases.soltaEm);}
+        else if(dono)battleAudio.sound(preparoDaUnica(dono.characterId).som,PRIORIDADE.habilidade,0,ativo.event.id*10+6);
+        // a explosão da Genki Dama tem 0,85 s de ronco antes do estrondo: o estrondo cai na chegada da esfera
+        if(dono)battleAudio.sound(efeitoDaUnica(dono.characterId,ativo.event.label).som as Sound,PRIORIDADE.habilidade,0,ativo.event.id*10+7,esfera?Math.max(0,fases.efeitoEm-.85):fases.soltaEm);
       }
       // cada pausa do golpe (alguém ativando antes de ele cair): o som de carregar quando ela começa e o efeito dela quando solta
       for(const pausa of ativo?.pausas??[]){
