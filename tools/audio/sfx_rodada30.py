@@ -115,16 +115,6 @@ def que_que_ha_velhinho(rng, v):
 
 # ------------------------------------------------------------------ Ben 10
 
-def chama_ben10(rng, v):
-    """Ben 10: o Chama soltando as bolas de fogo em sequência."""
-    x = _z(2.0)
-    for k in range(3):
-        poe(x, _fogo(rng, 0.4, 0.25, 0.2), 0.08 * k)
-        poe(x, _baque(140, 70, 0.2, 0.4), 0.43 + 0.08 * k)
-        poe(x, _fogo(rng, 0.4, 0.2, 0.1), 0.45 + 0.08 * k)
-    return reverb(x, 0.5, 0.25)
-
-
 def ben10_preparo(rng, v):
     """Ben 10 (Preparo): o Omnitrix girando (os cliques e o zumbido verde)."""
     x = _z(1.4)
@@ -133,15 +123,6 @@ def ben10_preparo(rng, v):
     n = n_de(1.0)
     poe(x, seno(varre(300, 600, n), n) * sobe_e_some(n, 0.7, 1.2) * 0.03, 0.0)
     return reverb(x, 0.5, 0.25)
-
-
-def xlr8(rng, v):
-    """Ben 10: o XLR8 em alta velocidade (os "vups" em zigue-zague) e o impacto."""
-    x = _z(1.8)
-    for k in range(4):
-        poe(x, _whoosh(rng, 0.1, 1500, 9000, 0.6, 1.4, 0.35), 0.03 + 0.1 * k)
-    poe(x, _baque(140, 60, 0.3, 0.6), 0.42)
-    return reverb(x, 0.4, 0.2)
 
 
 # ------------------------------------------------------------------ Samurai Jack
@@ -246,9 +227,7 @@ SONS: dict = {
     "buraco-de-coelho": (buraco_de_coelho, "Pernalonga: o buraco de coelho"),
     "disfarce-pernalonga": (disfarce_pernalonga, "Pernalonga: o disfarce"),
     "que-que-ha-velhinho": (que_que_ha_velhinho, "Pernalonga: O que é que há, velhinho?"),
-    "chama-ben10": (chama_ben10, "Ben 10: o Chama"),
     "ben10-preparo": (ben10_preparo, "Ben 10: o Omnitrix (Preparo)"),
-    "xlr8": (xlr8, "Ben 10: o XLR8"),
     "katana-magica": (katana_magica, "Samurai Jack: a katana mágica"),
     "postura-serena": (postura_serena, "Samurai Jack: a postura serena"),
     "jack-preparo": (jack_preparo, "Samurai Jack: o silêncio (Preparo)"),

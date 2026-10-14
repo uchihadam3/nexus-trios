@@ -4087,20 +4087,6 @@
   "laco": false,
   "bytes": 48522
  },
- "chama_ben10": {
-  "descricao": "Ben 10 · as bolas de fogo do Chama",
-  "quadros": 12,
-  "grade": [
-   3,
-   4
-  ],
-  "tamanho": [
-   192,
-   192
-  ],
-  "laco": false,
-  "bytes": 38558
- },
  "chama_do_triangulo": {
   "descricao": "Bill Cipher: triângulo de olho que derrama chama azul",
   "quadros": 12,
@@ -12207,20 +12193,6 @@
   "laco": false,
   "bytes": 22444
  },
- "golpe_alienigena": {
-  "descricao": "Golpe alienígena: a ampulheta do Omnitrix estoura em verde e o punho do alien acerta",
-  "quadros": 12,
-  "grade": [
-   3,
-   4
-  ],
-  "tamanho": [
-   192,
-   192
-  ],
-  "laco": false,
-  "bytes": 74682
- },
  "golpe_antimagia": {
   "descricao": "Asta · o corte e os selos quebrando",
   "quadros": 12,
@@ -13382,6 +13354,20 @@
   ],
   "laco": false,
   "bytes": 28092
+ },
+ "hora_do_heroi": {
+  "descricao": "Ben 10 · É hora do herói: a ampulheta, o rastro verde e o impacto",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 41742
  },
  "horus_preparo": {
   "descricao": "Hórus · o falcão e o olho (Preparo, laço)",
@@ -26263,6 +26249,20 @@
   "laco": false,
   "bytes": 97726
  },
+ "pulso_do_omnitrix": {
+  "descricao": "Ben 10 · o pulso verde do Omnitrix e as algemas de energia",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 53522
+ },
  "punho_amaldicoado": {
   "descricao": "básico do Yuji: Black Flash, faíscas negras e o espaço rachando",
   "quadros": 12,
@@ -29874,6 +29874,20 @@
   ],
   "laco": false,
   "bytes": 44054
+ },
+ "sobrecarga_do_omnitrix": {
+  "descricao": "Ben 10 · o Omnitrix superaquece e explode em fogo verde",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 47370
  },
  "sobrecarga_genos": {
   "descricao": "Genos · o feixe incandescente",
@@ -34424,20 +34438,6 @@
   ],
   "laco": false,
   "bytes": 38094
- },
- "xlr8": {
-  "descricao": "Ben 10 · o borrão do XLR8",
-  "quadros": 12,
-  "grade": [
-   3,
-   4
-  ],
-  "tamanho": [
-   192,
-   192
-  ],
-  "laco": false,
-  "bytes": 25208
  },
  "yamato": {
   "descricao": "Vergil · o saque, os cortes e as espadas espectrais",

@@ -12,7 +12,7 @@
  * PASSO_DAS_DUPLAS. Vale só para o elenco medido (DUPLAS_MEDIDAS_COM); tests/duplas-ajuste.test.ts confere.
  * Não editar à mão: medir de novo depois de mudar o elenco.
  */
-export const DUPLAS_MEDIDAS_COM = "fnv1a-df4c7e0f";
+export const DUPLAS_MEDIDAS_COM = "fnv1a-8c745797";
 export const ALFABETO_DAS_DUPLAS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_";
 export const PASSO_DAS_DUPLAS = 0.06;
 export const AJUSTE_DAS_DUPLAS =

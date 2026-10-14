@@ -15,9 +15,8 @@ Pernalonga
 - que_que_ha_velhinho: a cenoura mordida e a bigorna caindo no rival (Exposto).
 
 Ben 10
-- chama_ben10: o alien de fogo soltando as bolas de fogo em todos (Queimando).
-- ben10_preparo: o Preparo do XLR8 — o Omnitrix girando com a luz verde (laço).
-- xlr8: o borrão azul do alien veloz em zigue-zague e o impacto (Fortalecido).
+- ben10_preparo: o Preparo do "É hora do herói" — o Omnitrix girando com a luz verde (laço). As outras habilidades do
+  Ben 10 estão em ben10_heroi.py.
 
 Samurai Jack
 - katana_magica: o corte limpo com o brilho dourado da espada mágica (Marcado e Exposto).
@@ -219,25 +218,6 @@ def que_que_ha_velhinho(T, t, rng):
 
 # ------------------------------------------------------------------ Ben 10
 
-def chama_ben10(T, t, rng):
-    G, H = vazio(T)
-    env = apaga(t, 0.92, 1)
-    for j, (x, y) in enumerate(((-0.5, 0.1), (0.05, -0.15), (0.55, 0.1))):
-        u = rel(t, 0.08 * j, 0.45 + 0.08 * j)
-        if 0 < u < 1:
-            px = -0.8 + (x + 0.8) * u
-            py = 0.0 + (y - 0.0) * u - 0.2 * math.sin(math.pi * u)
-            g, h = icone(T, poe(CHAMA, px, py, 0.2, math.pi / 2), 1.3, 0.6)
-            G, H = G + g, H + h * 1.5
-        g2, h2 = clarao(T, t, 0.43 + 0.08 * j, 0.6 + 0.08 * j, x, y, 0.6)
-        G, H = G + g2, H + h2
-        for m in range(4):
-            kk = pulso(t, 0.45 + 0.08 * j, 0.95)
-            g3, h3 = icone(T, poe(CHAMA, x - 0.15 + 0.1 * m, y + 0.05, 0.09 * kk), kk, 0.6)
-            G, H = G + g3, H + h3
-    return G * env, H * env
-
-
 def ben10_preparo(T, t, rng):
     G, H = vazio(T)
     G += T.ring(0.25, 0.04, 0, 0) * 1.2
@@ -245,26 +225,6 @@ def ben10_preparo(T, t, rng):
     G, H = G + g, H + h * (1.5 + 0.5 * math.sin(t * 10))
     G += T.gauss(0, 0, 0.3) * (0.3 + 0.2 * math.sin(t * 10))
     return G, H
-
-
-def xlr8(T, t, rng):
-    G, H = vazio(T)
-    env = apaga(t, 0.92, 1)
-    pontos = [(-0.75, 0.15), (-0.35, -0.2), (0.0, 0.2), (0.3, -0.15), (0.6, 0.05)]
-    u = rel(t, 0.0, 0.45)
-    if u > 0:
-        total = ease_out(u, 2) * (len(pontos) - 1)
-        for i in range(len(pontos) - 1):
-            if i > total:
-                break
-            f = min(1.0, total - i)
-            (x0, y0), (x1, y1) = pontos[i], pontos[i + 1]
-            G += T.tapered([(x0, y0, x0 + (x1 - x0) * f, y0 + (y1 - y0) * f, 1.0)], 0.06) * (1 - rel(t, 0.6, 0.85)) * 1.2
-            H += T.lines([(x0, y0, x0 + (x1 - x0) * f, y0 + (y1 - y0) * f, 1.0)], 0.01) * (1 - rel(t, 0.6, 0.85))
-    g, h = clarao(T, t, 0.42, 0.62, 0.6, 0.05, 1.1)
-    G, H = G + g, H + h
-    G += estouro(T, t, 0.42, 0.8, 14, 4, 0.6, 0.05, 0.5, 0.014)
-    return G * env, H * env
 
 
 # ------------------------------------------------------------------ Samurai Jack
@@ -429,9 +389,7 @@ REGISTRO = [
     ("buraco_de_coelho", buraco_de_coelho, GRANDE, "Pernalonga · o buraco e a terra", False),
     ("disfarce_pernalonga", disfarce_pernalonga, GRANDE, "Pernalonga · a fumaça e a peruca", False),
     ("que_que_ha_velhinho", que_que_ha_velhinho, GRANDE, "Pernalonga · a cenoura e a bigorna", False),
-    ("chama_ben10", chama_ben10, GRANDE, "Ben 10 · as bolas de fogo do Chama", False),
     ("ben10_preparo", ben10_preparo, MEDIA, "Ben 10 · o Omnitrix girando (Preparo, laço)", True),
-    ("xlr8", xlr8, GRANDE, "Ben 10 · o borrão do XLR8", False),
     ("katana_magica", katana_magica, GRANDE, "Samurai Jack · o corte dourado", False),
     ("postura_serena", postura_serena, GRANDE, "Samurai Jack · a meditação e as folhas", False),
     ("jack_preparo", jack_preparo, MEDIA, "Samurai Jack · a mão na empunhadura (Preparo, laço)", True),

@@ -110,26 +110,6 @@ def bicada(rng, v):
 
 
 # ------------------------------------------------------------------ Ben 10: Golpe alienígena
-def golpe_alienigena(rng, v):
-    """O "zwip" do Omnitrix (tom que sobe girando com brilho), o clarão e o golpe pesado do alien."""
-    x = _z(1.0)
-    n = n_de(0.3)
-    t = _t(n)
-    f = varre(260, 2200, n, 0.9)
-    zwip = seno(f * (1 + 0.08 * np.sin(2 * math.pi * 38 * t)), n) + 0.5 * seno(f * 1.5, n) + 0.3 * seno(f * 2.01, n)
-    zwip = satura(zwip * 0.6, 1.6) * sobe_e_some(n, 0.75, 1.3) * 0.32
-    poe(x, zwip, 0.0)
-    poe(x, assobio(rng, n, 500, 6000, 0.9, 0.45) * sobe_e_some(n, 0.85, 1.4) * 0.35, 0.0)
-    m = n_de(0.5)
-    clarao = passa(rosa(rng, m), 800, 9000, 2) * env(m, 0.002, 0.12) * 0.5
-    clarao += modal(m, rng.uniform(1400, 1600), rng=rng, **CRISTAL) * env(m, 0.001, 0.2) * 0.12
-    clarao += satura(seno(varre(90, 55, m, 1.2), m), 2.5) * env(m, 0.002, 0.15) * 0.3
-    poe(x, clarao, 0.24)
-    poe(x, assobio(rng, n_de(0.12), 400, 3000, 1.6, 0.4) * sobe_e_some(n_de(0.12), 0.9, 1.2) * 0.6, 0.27)
-    poe(x, B.soco_pesado(rng, v) * 1.05, 0.36)
-    return reverb(x, 0.4, 0.18)
-
-
 # ------------------------------------------------------------------ Popeye: Soco de marinheiro
 def soco_de_marinheiro(rng, v):
     """Manivela cômica: catraca acelerando e o apito subindo, o soco sai com um "pow" e as estrelinhas."""
@@ -314,7 +294,6 @@ SONS: dict = {
     "sais": (sais, "básico do Raphael: duas estocadas metálicas dos sais"),
     "nunchakus": (nunchakus, "básico do Michelangelo: giro \"vuvuvu\" e dois golpes de madeira"),
     "bicada": (bicada, "básico do Pica-Pau e do Patolino: bicadas rapidíssimas em madeira"),
-    "golpe-alienigena": (golpe_alienigena, "básico do Ben 10: \"zwip\" do Omnitrix e o golpe do alien"),
     "soco-de-marinheiro": (soco_de_marinheiro, "básico do Popeye: manivela cômica e o soco com estrelinhas"),
     "machado-de-energon": (machado_de_energon, "básico do Optimus: zumbido de energia e corte pesado"),
     "karate": (karate, "básico do Bob Esponja: \"tchop\" e bolhas estourando"),

@@ -77,7 +77,7 @@ const T: Record<string, string> = {
   invencivel: 'soco_supersonico investida_orbital levantar_de_novo', omniman: 'golpe_viltrumita voo_de_impacto sem_piedade', leonardo: 'katanas_gemeas formacao investida_do_lider',
   raphael: 'sais investida_furiosa sem_recuo', donatello: 'bastao_bo dispositivo_tatico campo_de_contencao', michelangelo: 'nunchakus giro_maluco festa_surpresa',
   constantine: 'pacto exorcismo blefe_infernal', hellboy: 'mao_da_perdicao teimosia pancada_final', picapau: 'risada_irritante bicada confusao_total',
-  pernalonga: 'buraco_de_coelho disfarce_pernalonga que_que_ha_velhinho', ben10: 'golpe_alienigena chama_ben10 xlr8', aang: 'rajada_do_aang dobra_de_agua estado_avatar_aang',
+  pernalonga: 'buraco_de_coelho disfarce_pernalonga que_que_ha_velhinho', ben10: 'pulso_do_omnitrix sobrecarga_do_omnitrix hora_do_heroi', aang: 'rajada_do_aang dobra_de_agua estado_avatar_aang',
   samuraijack: 'katana_magica postura_serena corte_decisivo', heman: 'espada_do_poder tenho_a_forca golpe_de_grayskull', popeye: 'soco_de_marinheiro lata_de_espinafre furacao_de_socos',
   optimus: 'escudo_de_energon rifle_ion autobots_avante', salsicha: 'fuga_desesperada sanduiche_gigante correria', bobesponja: 'bolhas espremer karate',
   scooby: 'tropeco biscoito_scooby sorte_de_cachorro', rick: 'pistola_de_portal invencao_improvisada plano_b', finn: 'espada_de_sangue punho_heroico matematico',

@@ -4796,23 +4796,6 @@
    ],
    "bytes": 74551
   },
-  "chama-ben10": {
-   "arquivo": "chama-ben10.mp3",
-   "descricao": "Ben 10: o Chama",
-   "versoes": [
-    0.0,
-    2.08,
-    4.2325,
-    6.2449
-   ],
-   "duracoes": [
-    2.0,
-    2.0725,
-    1.9324,
-    1.7868
-   ],
-   "bytes": 63647
-  },
   "chama-do-triangulo": {
    "arquivo": "chama-do-triangulo.mp3",
    "descricao": "básico de Bill Cipher: tilintar distorcido e chama azul estranha",
@@ -14316,23 +14299,6 @@
    ],
    "bytes": 40988
   },
-  "golpe-alienigena": {
-   "arquivo": "golpe-alienigena.mp3",
-   "descricao": "básico do Ben 10: \"zwip\" do Omnitrix e o golpe do alien",
-   "versoes": [
-    0.0,
-    1.08,
-    2.1963,
-    3.2424
-   ],
-   "duracoes": [
-    1.0,
-    1.0363,
-    0.9662,
-    1.0152
-   ],
-   "bytes": 36594
-  },
   "golpe-antimagia": {
    "arquivo": "golpe-antimagia.mp3",
    "descricao": "Asta: golpe antimagia",
@@ -15743,6 +15709,23 @@
     1.2718
    ],
    "bytes": 46605
+  },
+  "hora-do-heroi": {
+   "arquivo": "hora-do-heroi.mp3",
+   "descricao": "Ben 10: É hora do herói! — o clique, o rastro e o golpe",
+   "versoes": [
+    0.0,
+    1.4495,
+    2.8419,
+    4.1793
+   ],
+   "duracoes": [
+    1.3695,
+    1.3124,
+    1.2573,
+    1.3511
+   ],
+   "bytes": 47552
   },
   "horus-preparo": {
    "arquivo": "horus-preparo.mp3",
@@ -31469,6 +31452,23 @@
    ],
    "bytes": 38307
   },
+  "pulso-do-omnitrix": {
+   "arquivo": "pulso-do-omnitrix.mp3",
+   "descricao": "Ben 10: o zwip do Omnitrix e o pulso verde que prende",
+   "versoes": [
+    0.0,
+    1.5478,
+    3.0519,
+    4.5169
+   ],
+   "duracoes": [
+    1.4678,
+    1.4241,
+    1.3851,
+    1.4999
+   ],
+   "bytes": 49789
+  },
   "punho-amaldicoado": {
    "arquivo": "punho-amaldicoado.mp3",
    "descricao": "básico de Yuji: impacto com estalo distorcido do Black Flash",
@@ -35769,6 +35769,23 @@
     1.8274
    ],
    "bytes": 68897
+  },
+  "sobrecarga-do-omnitrix": {
+   "arquivo": "sobrecarga-do-omnitrix.mp3",
+   "descricao": "Ben 10: o relógio superaquecendo e explodindo em fogo",
+   "versoes": [
+    0.0,
+    1.8189,
+    3.6299,
+    5.2684
+   ],
+   "duracoes": [
+    1.7389,
+    1.731,
+    1.5585,
+    1.7127
+   ],
+   "bytes": 58729
   },
   "sobrecarga-genos": {
    "arquivo": "sobrecarga-genos.mp3",
@@ -41396,23 +41413,6 @@
     2.4365
    ],
    "bytes": 74846
-  },
-  "xlr8": {
-   "arquivo": "xlr8.mp3",
-   "descricao": "Ben 10: o XLR8",
-   "versoes": [
-    0.0,
-    1.3039,
-    2.6512,
-    3.9885
-   ],
-   "duracoes": [
-    1.2239,
-    1.2672,
-    1.2573,
-    1.2897
-   ],
-   "bytes": 49270
   },
   "yamato": {
    "arquivo": "yamato.mp3",

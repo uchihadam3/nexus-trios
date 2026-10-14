@@ -184,7 +184,7 @@ const ANTES_DA_NOVA: Partial<Record<FamiliaNova, { antes: Sound; saida?: Sound }
   levantar_de_novo: { antes: 'invencivel-preparo' },
   investida_do_lider: { antes: 'leonardo-preparo' },
   pancada_final: { antes: 'hellboy-preparo' },
-  xlr8: { antes: 'ben10-preparo' },
+  hora_do_heroi: { antes: 'ben10-preparo' },
   corte_decisivo: { antes: 'jack-preparo' },
   golpe_de_grayskull: { antes: 'heman-preparo' },
   autobots_avante: { antes: 'optimus-preparo' },

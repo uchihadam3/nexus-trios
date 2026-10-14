@@ -15914,10 +15914,10 @@
       "artMethod": "AI sheet"
     },
     {
-      "id": "quatro-bracos",
+      "id": "pulso-do-omnitrix",
       "character": "ben10",
-      "name": "Quatro Bra\u00e7os",
-      "path": "/assets/skills/ben10/quatro-bracos.png",
+      "name": "Pulso do Omnitrix",
+      "path": "/assets/skills/ben10/pulso-do-omnitrix.png",
       "sheet": "/assets/sheets/skills/pages/ben10.png",
       "row": 0,
       "column": 0,
@@ -15942,10 +15942,10 @@
       "artMethod": "AI sheet"
     },
     {
-      "id": "chama",
+      "id": "sobrecarga-do-omnitrix",
       "character": "ben10",
-      "name": "Chama",
-      "path": "/assets/skills/ben10/chama.png",
+      "name": "Sobrecarga do Omnitrix",
+      "path": "/assets/skills/ben10/sobrecarga-do-omnitrix.png",
       "sheet": "/assets/sheets/skills/pages/ben10.png",
       "row": 0,
       "column": 1,
@@ -15970,10 +15970,10 @@
       "artMethod": "AI sheet"
     },
     {
-      "id": "xlr8",
+      "id": "hora-do-heroi",
       "character": "ben10",
-      "name": "XLR8",
-      "path": "/assets/skills/ben10/xlr8.png",
+      "name": "Hora do her\u00f3i",
+      "path": "/assets/skills/ben10/hora-do-heroi.png",
       "sheet": "/assets/sheets/skills/pages/ben10.png",
       "row": 0,
       "column": 2,

@@ -273,58 +273,6 @@ def _punho(fx, fy, ang=0.0, esc=1.0):
     return _gira([(x * esc, y * esc) for x, y in p], ang, fx, fy)
 
 
-def golpe_alienigena(T, t, rng):
-    """Golpe alienígena: a ampulheta do Omnitrix aparece no mostrador, carrega com raios
-    girando, estoura no clarão verde da transformação e o punho do alien entra com tudo
-    (estrela de impacto com a ampulheta estampada no meio)."""
-    G, H = vazio(T)
-    env = apaga(t, 0.84, 1)
-    pop = back(rel(t, 0.0, 0.16), 2.0)
-    vis = janela(t, 0.0, 0.03) * (1 - rel(t, 0.36, 0.46))
-    if vis > 0 and pop > 0.02:
-        r = 0.42 * pop
-        mostrador = T.ring(r, 0.032) + T.ring(r * 0.8, 0.012) * 0.6
-        amp = T.polys([(_ampulheta(0, 0, r * 0.78), 1.0)], 0.005)
-        carga = janela(t, 0.12, 0.34)
-        segs = []
-        for j in range(10):
-            a = j / 10 * TAU + t * 9
-            segs.append((math.cos(a) * r * 1.05, math.sin(a) * r * 1.05, math.cos(a) * r * (1.25 + 0.4 * carga), math.sin(a) * r * (1.25 + 0.4 * carga), 1.0))
-        raios = T.lines(segs, 0.024, 0.006)
-        G += (mostrador * 1.2 + amp * (1.0 + 0.6 * carga) + T.blur(amp, 0.04) * 0.8 + raios * carga * 0.9) * vis * env
-        H += (mostrador * 0.6 + amp * (0.35 + 0.9 * carga) + raios * carga * 0.5) * vis * env
-    # o clarão da transformação
-    k = pulso(t, 0.3, 0.5)
-    if k > 0:
-        g, h = _clarao(T, k, 0, 0, 0.36, 1.0, 0.0)
-        onda = T.ring(0.15 + 0.7 * ease_out(rel(t, 0.32, 0.52), 2), 0.05) * k
-        G += (g * 1.3 + onda) * env
-        H += (h + T.gauss(0, 0, 0.2, 0.2) * k * 1.4 + onda * 0.5) * env
-    # o punho do alien
-    if 0.38 <= t < 0.64:
-        u = ease_in(rel(t, 0.38, 0.47), 1.6)
-        fx = -1.1 + 1.08 * u
-        pv = 1 - rel(t, 0.52, 0.64)
-        P = T.polys([(_punho(fx, 0.0, 0.0, 1.25), 1.0), (_barra(fx - 0.38, 0.0, fx - 1.2, 0.0, 0.26, 0.22), 0.8)], 0.005)
-        dedos = T.lines([(fx - 0.06, -0.18 + 0.09 * j, fx - 0.06 - 0.12, -0.18 + 0.09 * j, 1.0) for j in (1, 2, 3)], 0.016)
-        banda = T.polys([(_barra(fx - 0.43, -0.16, fx - 0.43, 0.16, 0.08), 1.0)], 0.004)
-        sinal = T.polys([(_ampulheta(fx - 0.43, 0.0, 0.07), 1.0)], 0.003)
-        R = rastro_de_velocidade(T, rng, 8, 0.0, 0.7, 0.3, 0.45, fx, 0.0, 0.016, seed=5) * (1 - rel(t, 0.47, 0.56))
-        G += (P * 1.2 + T.blur(P, 0.03) * 0.6 + banda * 0.6 + R) * pv * env
-        H += (P * 0.4 + dedos * 0.7 + sinal * 1.2 + R * 0.4) * pv * env
-    k = pulso(t, 0.45, 0.8)
-    if k > 0:
-        g, h = _clarao(T, k, 0.04, 0, 0.26, 0.85, 0.35)
-        est = T.polys([(estrela(0.04, 0, 0.42 * k + 0.01, 0.2, 8, 0.4), 1.0)], 0.006) * k
-        marca = T.polys([(_ampulheta(0.04, 0, 0.17 * k + 0.01), 1.0)], 0.004) * k
-        anel = T.ring(0.15 + 0.6 * ease_out(rel(t, 0.46, 0.8), 2.2), 0.04) * k
-        sub = np.random.default_rng(42)
-        F = faiscas(T, sub, t, 12, 0.75, 0.024, cone=(-math.pi, math.pi), gravidade=0.2, cx=0.04, inicio=0.46)
-        G += (g + est * 1.2 + anel + F * 1.3) * env
-        H += (h + est * 0.5 + marca * 1.5 + anel * 0.4 + F * 0.9) * env
-    return G, H
-
-
 # ------------------------------------------------------------------ Popeye: Soco de marinheiro
 def _ancora(cx, cy, s):
     """Âncora em traços: haste, cepo, braços em U, as unhas e a argola (cx, cy, raio)."""
@@ -936,7 +884,6 @@ REGISTRO = [
     ("sais", sais, GRANDE, "Sais do Raphael: dois sais estocam em sequência, cada um com clarão de três pontas", False),
     ("nunchakus", nunchakus, GRANDE, "Nunchakus do Michelangelo: giram na corrente e batem duas vezes", False),
     ("bicada", bicada, GRANDE, "Bicada-britadeira: o bico bate e volta, o buraco racha e as lascas voam", False),
-    ("golpe_alienigena", golpe_alienigena, GRANDE, "Golpe alienígena: a ampulheta do Omnitrix estoura em verde e o punho do alien acerta", False),
     ("soco_de_marinheiro", soco_de_marinheiro, GRANDE, "Soco de marinheiro: o braço gira como manivela, soco com estrelas e âncora estampada", False),
     ("machado_de_energon", machado_de_energon, GRANDE, "Machado de energon: o machado de energia desce num arco pesado e crava no alvo", False),
     ("karate", karate, GRANDE, "Karatê: mão em faca desce num tchop e as bolhas estouram", False),
