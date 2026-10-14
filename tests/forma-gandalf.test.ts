@@ -237,3 +237,21 @@ describe('Fenrir acorrentado', () => {
     expect(soltou).toBe(true);
   });
 });
+
+/* Saitama (pedido do jogador: "Saitama modo sério"): depois de levar 4 golpes, o retrato sério até o fim da luta. */
+describe('Saitama no modo sério', () => {
+  it('troca o retrato no 4º golpe que leva', () => {
+    let serio = 0;
+    for (let semente = 1; semente <= 20; semente++) {
+      const b = createBattle(['saitama', 'hinata', 'naruto'], ['goku', 'vegeta', 'hulk'], semente);
+      const sa = b.fighters.find((f) => f.characterId === 'saitama')!;
+      for (let t = 0; t < 6000 && !b.finished; t++) {
+        stepBattle(b);
+        const ficou = (sa.u?.serio ?? 0) >= 4;
+        if (ficou) serio++;
+        expect(naFormaDeAgora(byId.saitama, sa, b).portrait).toBe(ficou ? '/assets/portraits/formas/saitama-serio.webp' : byId.saitama.portrait);
+      }
+    }
+    expect(serio).toBeGreaterThan(0);
+  });
+});

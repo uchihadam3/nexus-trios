@@ -14,7 +14,8 @@ import type { Battle, Character, Fighter } from '../engine/types';
  * - Steve veste a armadura de diamante;
  * - Macaco Louco começa no robô e sai dele quando o robô quebra;
  * - Ikki renasce das cinzas com a Fênix;
- * - Fenrir começa acorrentado e se solta aos 12 s.
+ * - Fenrir começa acorrentado e se solta aos 12 s;
+ * - Saitama fica sério depois de 4 golpes.
  */
 interface Forma { retrato: string; nome: string; cor: string }
 const DIR = '/assets/portraits/formas/';
@@ -35,6 +36,7 @@ const STEVE_DIAMANTE: Forma = { retrato: `${DIR}steve-diamante.webp`, nome: 'Ste
 const MOJO_ROBO: Forma = { retrato: `${DIR}mojo-robo.webp`, nome: 'Macaco Louco no robô', cor: '#ffd23a' };
 const IKKI_RENASCIDO: Forma = { retrato: `${DIR}ikki-renascido.webp`, nome: 'Ikki, a Fênix renascida', cor: '#ff8a2a' };
 const FENRIR_PRESO: Forma = { retrato: `${DIR}fenrir-preso.webp`, nome: 'Fenrir acorrentado', cor: '#ff6a3a' };
+const SAITAMA_SERIO: Forma = { retrato: `${DIR}saitama-serio.webp`, nome: 'Saitama, modo sério', cor: '#ffd23a' };
 const FORMAS: Record<string, { de: (f: Fighter, agora: number) => Forma | null; todas: Forma[] }> = {
   gandalf: {
     de: (f) => (f.voltou && (f.u?.branco ?? 0) >= 1 ? FORMAS.gandalf!.todas[0]! : null),
@@ -61,6 +63,8 @@ const FORMAS: Record<string, { de: (f: Fighter, agora: number) => Forma | null; 
   ikki: { de: (f) => (f.u?.fenix ? IKKI_RENASCIDO : null), todas: [IKKI_RENASCIDO] },
   /* Fenrir começa acorrentado na Gleipnir e, solto aos 12 s, volta ao retrato de sempre (src/engine/unicas-lote3.ts) */
   fenrir: { de: (f) => (f.u?.solto ? null : FENRIR_PRESO), todas: [FENRIR_PRESO] },
+  /* Saitama fica sério depois de levar 4 golpes, até o fim da luta (src/engine/unicas-lote8.ts) */
+  saitama: { de: (f) => ((f.u?.serio ?? 0) >= 4 ? SAITAMA_SERIO : null), todas: [SAITAMA_SERIO] },
 };
 
 /** A forma de agora do lutador, se ele trocou de forma. */
