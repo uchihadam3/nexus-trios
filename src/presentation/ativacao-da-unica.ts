@@ -21,6 +21,7 @@ import type { Beat, Passo } from './director';
 import { PRESENTATION as P } from './config';
 import { ENTREGA_DA_UNICA, VOO_DA_UNICA, efeitoDaUnica, entregaDaUnica, type ModoDaEntrega } from './unicas-efeitos';
 import { PICO_DA_FOLHA } from './pico-das-folhas';
+import { RAJADA_DA_UNICA } from './rajada-da-unica';
 
 /** O Preparo de cada um, na mesma escala do Preparo das habilidades (0 = instantâneo). */
 export const PREPARO_PROPRIO: Record<string, number> = {
@@ -140,7 +141,8 @@ export function vooDaUnica(e: BattleEvent, b: Battle, beat?: BeatDaUnica) {
 }
 export function fasesDoEvento(e: BattleEvent, b: Battle, beat?: BeatDaUnica): FasesDaUnica {
   const f = b.fighters.find((x) => x.uid === e.source), id = f?.characterId ?? '';
-  return fasesDaUnica(id, vooDaUnica(e, b, beat), id ? efeitoDaUnica(id, e.label).familia : undefined);
+  // a rajada não usa a folha no alvo (cada projétil tem o seu impacto): nada de esperar o estouro dela
+  return fasesDaUnica(id, vooDaUnica(e, b, beat), id && !RAJADA_DA_UNICA[id] ? efeitoDaUnica(id, e.label).familia : undefined);
 }
 
 /**

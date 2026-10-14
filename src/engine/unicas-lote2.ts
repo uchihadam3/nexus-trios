@@ -450,17 +450,17 @@ export const LOTE2: Record<string, Unica> = {
   },
   byakuya: {
     nome: 'Mil lâminas',
-    texto: 'Depois de cada habilidade, Byakuya Kuchiki solta 10 pétalas-lâmina ao longo de 3 s: cada uma causa 12 de dano em um rival aleatório.',
+    // pedido do jogador: as pétalas saem todas quando ele ativa, com o tempo parado, e vão uma por uma nos rivais
+    // (src/presentation/rajada-da-unica.ts mostra o leque e o voo de cada uma)
+    texto: 'Depois de cada habilidade, Byakuya Kuchiki solta 10 pétalas-lâmina: cada uma causa 12 de dano em um rival aleatório.',
     ganchos: {
-      usou(m, b, f) { u(f).petalas = (u(f).petalas ?? 0) + 10; m.aviso(b, f, 'Mil lâminas', f); },
-      passo(m, b, f, dt) {
-        const s = u(f);
-        if (!s.petalas) return;
-        s.tic = (s.tic ?? 0) + dt;
-        if (s.tic < 0.3) return;
-        s.tic = 0; s.petalas -= 1;
-        const rs = m.rivais(b, f);
-        if (rs.length) m.dano(b, f, rs[Math.floor(m.sorte(b) * rs.length)]!, 12, false, 'Pétalas');
+      usou(m, b, f) {
+        m.aviso(b, f, 'Mil lâminas', f);
+        for (let i = 0; i < 10; i++) {
+          const rs = m.rivais(b, f);
+          if (!rs.length) break;
+          m.dano(b, f, rs[Math.floor(m.sorte(b) * rs.length)]!, 12, false, 'Pétalas');
+        }
       },
     },
   },

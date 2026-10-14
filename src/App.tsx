@@ -21,6 +21,7 @@ import type { NovosNoLivro } from './components/CombosDoTrio';
 import { PRIORIDADE,type Sound } from './audio/cues';
 import { battleAudio,faixaDaLuta } from './lib/audio';
 import { efeitoDaUnica } from './presentation/unicas-efeitos';
+import { RAJADA_DA_UNICA } from './presentation/rajada-da-unica';
 import { createDirection,restoreDirection,checkpointDirection,advanceDirection,type Direction,type Beat,type BeatTrace } from './presentation/director';
 import { fasesDoEvento } from './presentation/ativacao-da-unica';
 import { preparoDaUnica } from './presentation/preparo-da-unica';
@@ -337,6 +338,8 @@ export default function App(){
             }
             continue;
           }
+          // cada golpe da rajada soa quando chega (src/presentation/rajada-da-unica.ts)
+          if(passo.rajada){const quem=ativo.after.fighters.find(f=>f.uid===passo.quem),r=quem?RAJADA_DA_UNICA[quem.characterId]:undefined;if(r)battleAudio.sound(r.som as Sound,PRIORIDADE.habilidade,0,ativo.event.id*10+k);continue;}
           // o resultado da Mecânica única já soou com ela
           if(passo.resultado)continue;
           const eventos=ativo.events.filter(e=>passo.eventos.includes(e.id));

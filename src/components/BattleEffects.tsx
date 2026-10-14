@@ -1,4 +1,5 @@
 import { useLayoutEffect,useRef,useState,type CSSProperties,type ReactElement } from 'react';
+import { RAJADA_DA_UNICA } from '../presentation/rajada-da-unica';
 import type { Battle } from '../engine/types';
 import { ROTULO_DA_MECANICA,revelado,type Beat } from '../presentation/director';
 import { PRESENTATION as P } from '../presentation/config';
@@ -314,6 +315,8 @@ export function BattleEffects({battle,beat,anchors,enabled,reduced,medal=80}:{ba
      */
     const efeitoNoAlvo=(e:typeof beat.event,atraso:number)=>{
       const dono=battle.fighters.find(f=>f.uid===e.source);if(!dono)return;
+      // a rajada tem o impacto de cada projétil (src/components/RajadaDaUnica.tsx), sem a folha grande em cada alvo
+      if(RAJADA_DA_UNICA[dono.characterId])return;
       const f=familia(efeitoDaUnica(dono.characterId,e.label).familia),t=Math.min(medal*f.escala,Math.min(size.w,size.h)*.95);
       for(const alvo of alvosDaUnica(e)){
         const p=point(alvo);
@@ -336,7 +339,7 @@ export function BattleEffects({battle,beat,anchors,enabled,reduced,medal=80}:{ba
         nodes.push(camada(ent.preparo??preparoDaUnica(dono.characterId).folha,{left:`${p.x}%`,top:`${p.y}%`,width:t,height:t},'fxl-laco fx-da-unica',`unica-prep-${beat.event.id}-${e.id}`));
       }
       if(espera)continue;
-      if(at.t>=at.fases.vooEm)entregaAteOAlvo(e,`${beat.event.id}-${e.id}`,0);
+      if(at.t>=at.fases.vooEm&&!RAJADA_DA_UNICA[dono.characterId])entregaAteOAlvo(e,`${beat.event.id}-${e.id}`,0);
       // a folha começa quando a entrega chega; o número espera o estouro dela (fases.impactoEm)
       if(at.t>=at.fases.efeitoEm)efeitoNoAlvo(e,0);
     }
