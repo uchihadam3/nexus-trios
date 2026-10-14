@@ -30,7 +30,7 @@ import { preparoDaUnica } from './presentation/preparo-da-unica';
 import { PRESENTATION as P } from './presentation/config';
 import type { Battle, BattleEvent } from './engine/types';
 import { addSynergies,summarizeBattle } from './engine/run-summary';
-import { acumularRaioX,raioXVazio } from './engine/raio-x';
+import { acumularRaioX,ajudasDaLuta,raioXVazio } from './engine/raio-x';
 import {emptyTally,tallyEvents} from './engine/progression';
 import { pontosDaJornada } from './engine/pontos';
 import {runDigest} from './engine/ranked';
@@ -386,7 +386,7 @@ export default function App(){
       const telemetry=d.signals.length?tallyEvents(current.telemetry??emptyTally(),d.signals):current.telemetry??emptyTally();
       let next={...current,battle:d.battle,presentation:checkpointDirection(d),battleSynergies,raioX,telemetry};
       if(d.complete){
-        const summary={...summarizeBattle(current.index,d.battle,battleSynergies,current.dicas===true),recordeAntes:current.recorded?undefined:loadProfile().recordePontos??0};
+        const summary={...summarizeBattle(current.index,d.battle,battleSynergies,current.dicas===true),recordeAntes:current.recorded?undefined:loadProfile().recordePontos??0,ajudas:ajudasDaLuta(raioX,d.battle)};
         next={...next,stage:'result',recorded:true,summaries:current.recorded?current.summaries:[...(current.summaries??[]).filter(s=>s.index!==current.index),summary]};
         if(!current.recorded){
           const won=d.battle.winner==='player',champion=won&&current.index===9;

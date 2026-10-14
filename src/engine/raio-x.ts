@@ -293,6 +293,19 @@ export function lerRaioX(estado: EstadoRaioX, battle: Battle): Par[] {
   return pares.sort((x, y) => y.total - x.total);
 }
 
+/** O "Quem ajudou quem" de uma luta, pronto para a tela: guardado no resumo de cada luta para ser revisto depois. */
+export interface AjudasDaLuta {
+  /** uid do lutador → personagem (o resumo não guarda a batalha inteira). */
+  quem: Record<string, string>;
+  direcoes: Direcao[];
+  pressao: { uid: string; dano: number; parte: number } | null;
+}
+export function ajudasDaLuta(estado: EstadoRaioX, battle: Battle): AjudasDaLuta {
+  const quem = Object.fromEntries(battle.fighters.filter((f) => f.side === 'player').map((f) => [f.uid, f.characterId]));
+  const direcoes = lerRaioX(estado, battle).flatMap((par) => [par.aParaB, par.bParaA]).filter((d) => d.destaque && d.tipo !== 'conflito').slice(0, 4);
+  return { quem, direcoes, pressao: quemAbsorveu(estado, battle) };
+}
+
 /** Quem segurou a pressão: o lutador do trio que mais apanhou. */
 export function quemAbsorveu(estado: EstadoRaioX, battle: Battle): { uid: string; dano: number; parte: number } | null {
   const total = Object.values(estado.absorvido).reduce((a, b) => a + b, 0);

@@ -6,7 +6,7 @@ import { byId } from '../data/characters';
 import { Portrait } from '../components/Portrait';
 import { summarizeBattle } from '../engine/run-summary';
 import { formatarPontos,pontosDaJornada,pontosDaLuta } from '../engine/pontos';
-import { lerRaioX,quemAbsorveu,type Direcao } from '../engine/raio-x';
+import { ajudasDaLuta,type AjudasDaLuta } from '../engine/raio-x';
 import { avaliarAjuda,avaliarDirecao,NOMES_DAS_NOTAS,type AvaliacaoDaAjuda } from '../engine/nota-da-ajuda';
 import { mensagemDoTop3,type ResultadoTop3 } from '../lib/top3';
 import { battleAudio } from '../lib/audio';
@@ -95,9 +95,17 @@ export function ResultScreen({run,onNext,onRestart,onAbandon,onHome,onRanking,on
   const pesoDoMvp=(f:typeof trio[number])=>f.stats.damage+f.stats.healing+f.stats.protection+f.stats.interrupts*100+f.stats.kills*150;
   const mvp=[...trio].sort((a,z)=>pesoDoMvp(z)-pesoDoMvp(a))[0];
 
-  const ajudas:Direcao[]=run.raioX?lerRaioX(run.raioX,b).flatMap(par=>[par.aParaB,par.bParaA]).filter(d=>d.destaque&&d.tipo!=='conflito').slice(0,4):[];
-  const pressao=run.raioX?quemAbsorveu(run.raioX,b):null;
-  const lutador=(uid:string)=>byId[b.fighters.find(f=>f.uid===uid)?.characterId??''];
+  /*
+   * Quem ajudou quem, luta por luta (pedido do jogador: "clicar na bolinha… na terceira, na segunda, na primeira e ver
+   * como é que foi, quem ajudou quem"): cada bolinha jogada da trilha abre o dela. A luta de agora sai do Raio-X ao
+   * vivo; as outras, do que ficou guardado no resumo de cada uma.
+   */
+  const [vista,setVista]=useState(run.index);
+  useEffect(()=>setVista(run.index),[run.index]);
+  const resumoVisto=resumos.find(s=>s.index===vista);
+  const dados:AjudasDaLuta|null=vista===run.index?(run.raioX?ajudasDaLuta(run.raioX,b):resumoVisto?.ajudas??null):resumoVisto?.ajudas??null;
+  const ajudas=dados?.direcoes??[],pressao=dados?.pressao??null;
+  const lutador=(uid:string)=>byId[dados?.quem[uid]??''];
 
   const cor=won?(champion?'#ffd36b':'#b8f07a'):'#ff8a7a';
   const proximo=won&&!champion?run.encounters[run.index+1]:null;
@@ -140,10 +148,15 @@ export function ResultScreen({run,onNext,onRestart,onAbandon,onHome,onRanking,on
     {champion&&run.conquistasNovas?.length?<ConquistasLiberadas ids={run.conquistasNovas}/>:null}
 
     <ol className="rs-trilha" aria-label="As 10 lutas da jornada">{Array.from({length:10},(_,i)=>{const r=resumos.find(s=>s.index===i);const marca=r?(r.won?'ganhou':'perdeu'):i===run.index+1&&won?'proxima':'';
-      return <li key={i} className={`${marca} ${i===run.index?'agora':''}`} title={r?`Luta ${i+1}: ${r.won?'+'+formatarPontos(r.score):'derrota'}`:`Luta ${i+1}`}>{i===9?<Crown size={12}/>:i+1}</li>;})}</ol>
+      const rotulo=r?`Luta ${i+1}: ${r.won?'+'+formatarPontos(r.score):'derrota'}`:`Luta ${i+1}`,conteudo=i===9?<Crown size={12}/>:i+1;
+      return <li key={i} className={`${marca} ${i===run.index?'agora':''} ${r&&i===vista?'vendo':''}`} title={rotulo}>
+        {r?<button type="button" onClick={()=>{if(i!==vista){setVista(i);battleAudio.sound('toque',PRIORIDADE.interface);}}} aria-pressed={i===vista} aria-label={`${rotulo}. Ver quem ajudou quem nesta luta`}>{conteudo}</button>:conteudo}</li>;})}</ol>
+    {resumos.length>1&&<p className="rs-trilha-dica">Toque numa luta para ver quem ajudou quem nela</p>}
 
-    {(ajudas.length>0||pressao)&&<section className="rs-ajudas" aria-label="Quem ajudou quem">
-      <h2>Quem ajudou quem</h2>
+    {(ajudas.length>0||pressao||vista!==run.index)&&<section key={vista} className="rs-ajudas" aria-label="Quem ajudou quem">
+      <h2>Quem ajudou quem{vista!==run.index&&<span className={`rs-ajudas-luta ${resumoVisto?.won?'ganhou':'perdeu'}`}>Luta {vista+1} · {resumoVisto?.won?`+${formatarPontos(resumoVisto.score)}`:'derrota'}</span>}</h2>
+      {vista!==run.index&&!dados&&<p className="rs-ajudas-vazio">Esta luta foi jogada antes desta novidade, então o quem ajudou quem dela não ficou guardado. As próximas ficam.</p>}
+      {dados&&ajudas.length===0&&!pressao&&<p className="rs-ajudas-vazio">Nesta luta ninguém do trio ativou a mecânica de outro.</p>}
       <div>{ajudas.map((d,i)=>{const de=lutador(d.de),para=lutador(d.para);if(!de||!para)return null;const av=avaliarDirecao(d);return <article key={`${d.de}-${d.para}`} className={`rs-ajuda tipo-${d.tipo} ${av?`com-nota nota-${av.nota}`:''}`}>
         <div className="rs-dupla"><span style={{'--character':de.color} as CSSProperties}><Portrait character={de} className="tiny"/></span><ArrowRight size={14}/><span style={{'--character':para.color} as CSSProperties}><Portrait character={para} className="tiny"/></span></div>
         <div className="rs-ajuda-numero"><b>{d.destaque!.numero}</b><small>{d.destaque!.rotulo}</small></div>

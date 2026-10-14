@@ -1,5 +1,6 @@
 import type { Battle, BattleEvent, Fighter } from './types';
 import { pontosDaJornada, pontosDaLuta, type PontosDaLuta } from './pontos';
+import type { AjudasDaLuta } from './raio-x';
 
 export interface RunSynergyEvent {source:string;target:string;count:number;charge:number}
 export interface RunBattleSummary {
@@ -11,6 +12,8 @@ export interface RunBattleSummary {
   survivors:number;turns:number;
   enemies:string[];fighters:{characterId:string;damage:number;healing:number;protection:number;interrupts:number;kills:number;hp:number}[];
   synergies:RunSynergyEvent[];
+  /** Quem ajudou quem nesta luta, para rever tocando na bolinha dela na trilha da jornada. */
+  ajudas?:AjudasDaLuta;
 }
 export interface RunSummary {battles:RunBattleSummary[];won:number;score:number;rank:'S'|'A'|'B'|'C';survivors:number;damage:number;healing:number;protection:number;interrupts:number;kills:number;topSynergy:RunSynergyEvent|null;lessons:string[]}
 

@@ -108,7 +108,20 @@
 .rs-auto{justify-content:center;font-size:12px}
 .result-v2.derrota .rs-icone{color:#2a0f0c}
 @media (min-width:760px){.result-v2{gap:18px;padding-top:22px}.rs-topo{grid-template-columns:auto 1fr auto;grid-template-areas:'medalha titulo trio'}}
-@media (prefers-reduced-motion:reduce){.rs-icone,.rs-titulo h1,.rs-trio>span,.rs-ajuda,.rs-recorde.novo,.rs-trilha li.proxima{animation:none}.rs-parcelas li{opacity:1}}
+/* trilha tocável: cada luta jogada abre o "Quem ajudou quem" dela */
+.rs-trilha li>button{all:unset;box-sizing:border-box;display:grid;place-items:center;width:100%;height:100%;border-radius:50%;cursor:pointer;color:inherit;font:inherit;-webkit-tap-highlight-color:transparent;transition:transform .15s}
+.rs-trilha li>button:active{transform:scale(.88)}
+.rs-trilha li>button:focus-visible{outline:2px solid #fff;outline-offset:3px}
+.rs-trilha li.vendo:not(.agora){scale:1.16;box-shadow:0 0 0 2.5px #0c140f,0 0 0 4.5px #fff,0 0 14px #ffffffaa}
+.rs-trilha li.vendo::after{content:'';position:absolute;left:50%;bottom:-11px;translate:-50% 0;border:5px solid transparent;border-top-color:#fff;rotate:180deg;animation:rs-seta .3s ease-out both}
+@keyframes rs-seta{from{opacity:0;translate:-50% 5px}to{opacity:1;translate:-50% 0}}
+.rs-trilha-dica{margin:-2px 0 0;text-align:center;font-size:11px;color:#8fa38c;letter-spacing:.3px}
+.rs-ajudas h2{display:flex;align-items:center;flex-wrap:wrap;gap:8px}
+.rs-ajudas-luta{padding:3px 9px;border-radius:999px;font-size:11px;letter-spacing:.5px;text-transform:none;font-weight:800;background:color-mix(in srgb,var(--res-cor),#101813 70%);color:#eaf5e6;box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--res-cor),transparent 40%)}
+.rs-ajudas-luta.ganhou{background:#24401f;color:#d3f7b8;box-shadow:inset 0 0 0 1px #8fd46a}
+.rs-ajudas-luta.perdeu{background:#4a1f1b;color:#ffc9c2;box-shadow:inset 0 0 0 1px #ff8a7a}
+.rs-ajudas-vazio{margin:0 0 6px;padding:12px 14px;border-radius:14px;background:#ffffff08;box-shadow:inset 0 0 0 1px #ffffff14;font-size:13px;line-height:1.45;color:#b9c8b6}
+@media (prefers-reduced-motion:reduce){.rs-icone,.rs-titulo h1,.rs-trio>span,.rs-ajuda,.rs-recorde.novo,.rs-trilha li.proxima,.rs-trilha li.vendo::after{animation:none}.rs-parcelas li{opacity:1}}
 
 .rs-proximo{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 12px;border-radius:16px;background:#160f10;box-shadow:inset 0 0 0 1px #ff8a7a33}
 .rs-proximo>span{display:grid;font-size:10px;font-weight:850;letter-spacing:1.8px;color:#ff9a8a}
