@@ -162,3 +162,21 @@ describe('Sephiroth com uma asa', () => {
     expect(abriu).toBeGreaterThan(0);
   });
 });
+
+/* Steve (pedido do jogador: "Steve armadura de diamante"): fabricou a armadura, troca o retrato até o fim da luta. */
+describe('Steve de armadura de diamante', () => {
+  it('troca o retrato quando fabrica a armadura', () => {
+    let vestiu = 0;
+    for (let semente = 1; semente <= 30; semente++) {
+      const b = createBattle(['steve', 'hinata', 'naruto'], ['jerry', 'patolino', 'coragem'], semente);
+      const s = b.fighters.find((f) => f.characterId === 'steve')!;
+      for (let t = 0; t < 6000 && !b.finished; t++) {
+        stepBattle(b);
+        const armadura = (s.u?.pecas ?? 0) >= 1;
+        if (armadura) vestiu++;
+        expect(naFormaDeAgora(byId.steve, s, b).portrait).toBe(armadura ? '/assets/portraits/formas/steve-diamante.webp' : byId.steve.portrait);
+      }
+    }
+    expect(vestiu).toBeGreaterThan(0);
+  });
+});
