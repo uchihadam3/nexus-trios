@@ -368,3 +368,23 @@ describe('Devil Jin', () => {
     expect(virou).toBeGreaterThan(0);
   });
 });
+
+describe('Malévola dragão', () => {
+  it('Malévola vira dragão abaixo de 40% da Vida e fica assim até o fim', () => {
+    let virou = 0;
+    for (let semente = 1; semente <= 20; semente++) {
+      const b = createBattle(['maleficent', 'piccolo', 'hinata'], ['goku', 'vegeta', 'hulk'], semente);
+      const m = b.fighters.find((f) => f.characterId === 'maleficent')!;
+      let ja = false;
+      for (let t = 0; t < 6000 && !b.finished; t++) {
+        stepBattle(b);
+        const dragao = !!m.u?.dragao;
+        if (ja) expect(dragao).toBe(true);
+        ja = dragao;
+        expect(naFormaDeAgora(byId.maleficent, m, b).portrait).toBe(dragao ? '/assets/portraits/formas/malevola-dragao.webp' : byId.maleficent.portrait);
+      }
+      if (ja) virou++;
+    }
+    expect(virou).toBeGreaterThan(0);
+  });
+});

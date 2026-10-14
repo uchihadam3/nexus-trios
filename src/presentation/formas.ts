@@ -21,7 +21,8 @@ import type { Battle, Character, Fighter } from '../engine/types';
  * - Guts veste a Armadura do Berserker nos 6 s finais;
  * - Zenitsu luta dormindo;
  * - Gohan desperta quando um aliado cai;
- * - Jin vira Devil Jin com metade da Vida.
+ * - Jin vira Devil Jin com metade da Vida;
+ * - Malévola vira dragão com menos de 40% da Vida.
  */
 interface Forma { retrato: string; nome: string; cor: string }
 const DIR = '/assets/portraits/formas/';
@@ -49,6 +50,7 @@ const GUTS_BERSERKER: Forma = { retrato: `${DIR}guts-berserker.webp`, nome: 'Gut
 const ZENITSU_DORMINDO: Forma = { retrato: `${DIR}zenitsu-dormindo.webp`, nome: 'Zenitsu dormindo', cor: '#ffd23a' };
 const GOHAN_DESPERTO: Forma = { retrato: `${DIR}gohan-desperto.webp`, nome: 'Gohan desperto', cor: '#b46aff' };
 const DEVIL_JIN: Forma = { retrato: `${DIR}jin-devil.webp`, nome: 'Devil Jin', cor: '#ff2a3a' };
+const MALEVOLA_DRAGAO: Forma = { retrato: `${DIR}malevola-dragao.webp`, nome: 'Malévola dragão', cor: '#7dff3a' };
 const FORMAS: Record<string, { de: (f: Fighter, agora: number) => Forma | null; todas: Forma[] }> = {
   gandalf: {
     de: (f) => (f.voltou && (f.u?.branco ?? 0) >= 1 ? FORMAS.gandalf!.todas[0]! : null),
@@ -87,6 +89,7 @@ const FORMAS: Record<string, { de: (f: Fighter, agora: number) => Forma | null; 
   zenitsu: { de: (f) => (f.u?.desmaio ? ZENITSU_DORMINDO : null), todas: [ZENITSU_DORMINDO] },
   gohan: { de: (f) => (f.u?.despertou ? GOHAN_DESPERTO : null), todas: [GOHAN_DESPERTO] },
   jin: { de: (f) => (f.u?.diabo ? DEVIL_JIN : null), todas: [DEVIL_JIN] },
+  maleficent: { de: (f) => (f.u?.dragao ? MALEVOLA_DRAGAO : null), todas: [MALEVOLA_DRAGAO] },
 };
 
 /** A forma de agora do lutador, se ele trocou de forma. */
