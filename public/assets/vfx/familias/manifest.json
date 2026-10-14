@@ -139,6 +139,20 @@
   "laco": false,
   "bytes": 21416
  },
+ "adaga_de_areia_principe": {
+  "descricao": "básico do Príncipe da Pérsia: a adaga e a areia do tempo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 26814
+ },
  "adaga_de_kamish": {
   "descricao": "Jinwoo: dois cortes de adaga em X e fumaça de sombra subindo",
   "quadros": 12,
@@ -5529,6 +5543,34 @@
   "laco": false,
   "bytes": 40488
  },
+ "corte_izuna_hayabusa": {
+  "descricao": "básico do Hayabusa: os vultos e o corte em zigue-zague",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 32156
+ },
+ "corte_negro_hiei": {
+  "descricao": "básico do Hiei: o Jagan e os cortes invisíveis com chama negra",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 23680
+ },
  "corte_santoryu": {
   "descricao": "Básico do Zoro: os três cortes juntos",
   "quadros": 12,
@@ -9883,6 +9925,20 @@
   "laco": false,
   "bytes": 58600
  },
+ "flor_escarlate_malenia": {
+  "descricao": "básico da Malenia: três cortes e a flor escarlate",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 29902
+ },
  "florete": {
   "descricao": "estocadas finas em sequência",
   "quadros": 12,
@@ -14027,6 +14083,20 @@
   "laco": false,
   "bytes": 44332
  },
+ "katana_da_2b": {
+  "descricao": "básico da 2B: a katana branca e os quadradinhos se desfazendo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 21482
+ },
  "katana_magica": {
   "descricao": "Samurai Jack · o corte dourado",
   "quadros": 12,
@@ -14124,6 +14194,20 @@
   ],
   "laco": false,
   "bytes": 68404
+ },
+ "keyblade_sora": {
+  "descricao": "básico do Sora: a Keyblade e a coroa de brilho",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 24666
  },
  "khan_escudo": {
   "descricao": "Shaka · a esfera dourada do Khan no aliado",
@@ -14587,6 +14671,20 @@
   "laco": false,
   "bytes": 25008
  },
+ "lamina_do_credo_ezio": {
+  "descricao": "básico do Ezio: a lâmina oculta saltando do pulso",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 8698
+ },
  "lamina_do_dragao": {
   "descricao": "Hayabusa · o corte e o dragão",
   "quadros": 12,
@@ -14796,6 +14894,20 @@
   ],
   "laco": false,
   "bytes": 59722
+ },
+ "lanca_corrente_scorpion": {
+  "descricao": "básico do Scorpion: a lança de corrente que crava e puxa",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 14732
  },
  "lanca_da_sabedoria": {
   "descricao": "Atena · a lança e as folhas de oliveira",

@@ -2020,6 +2020,14 @@ export const FAMILIAS_NOVAS = {
   masamune_sephiroth: n({ nome: 'Masamune', grupo: 'corte', aponta: true, impacto: 'masamune_sephiroth', escala: 2.0, tempo: 1.0, cor: '#b8c8ff', tinta: 'fixa' }),
   corte_da_yamato: n({ nome: 'Saque da Yamato', grupo: 'corte', aponta: true, impacto: 'corte_da_yamato', escala: 2.0, tempo: 1.0, cor: '#6a9aff', tinta: 'fixa' }),
   lamina_hf_raiden: n({ nome: 'Lâmina de alta frequência', grupo: 'corte', aponta: true, impacto: 'lamina_hf_raiden', escala: 2.0, tempo: 1.0, cor: '#ff5a4a', tinta: 'fixa' }),
+  lamina_do_credo_ezio: n({ nome: 'Lâmina oculta', grupo: 'corte', aponta: true, impacto: 'lamina_do_credo_ezio', escala: 2.0, tempo: 1.0, cor: '#e8e0d0', tinta: 'fixa' }),
+  lanca_corrente_scorpion: n({ nome: 'Lança de corrente', grupo: 'corte', aponta: true, impacto: 'lanca_corrente_scorpion', escala: 2.0, tempo: 1.0, cor: '#ffb43a', tinta: 'fixa' }),
+  keyblade_sora: n({ nome: 'Keyblade', grupo: 'corte', aponta: true, impacto: 'keyblade_sora', escala: 2.0, tempo: 1.0, cor: '#ffd86a', tinta: 'fixa' }),
+  katana_da_2b: n({ nome: 'Katana da 2B', grupo: 'corte', aponta: true, impacto: 'katana_da_2b', escala: 2.0, tempo: 1.0, cor: '#e8ecf4', tinta: 'fixa' }),
+  flor_escarlate_malenia: n({ nome: 'Flor escarlate', grupo: 'corte', aponta: true, impacto: 'flor_escarlate_malenia', escala: 2.0, tempo: 1.0, cor: '#ff4a5a', tinta: 'fixa' }),
+  corte_izuna_hayabusa: n({ nome: 'Corte Izuna', grupo: 'corte', aponta: true, impacto: 'corte_izuna_hayabusa', escala: 2.0, tempo: 1.0, cor: '#a06aff', tinta: 'fixa' }),
+  adaga_de_areia_principe: n({ nome: 'Adaga de areia', grupo: 'corte', aponta: true, impacto: 'adaga_de_areia_principe', escala: 2.0, tempo: 1.0, cor: '#f0c46a', tinta: 'fixa' }),
+  corte_negro_hiei: n({ nome: 'Corte negro', grupo: 'corte', aponta: true, impacto: 'corte_negro_hiei', escala: 2.0, tempo: 1.0, cor: '#9a5aff', tinta: 'fixa' }),
 } as const satisfies Record<string, Familia>;
 
 export type FamiliaNova = keyof typeof FAMILIAS_NOVAS;
@@ -2046,7 +2054,8 @@ export const NOVAS_NO_ALVO = new Set<FamiliaNova>(['ressurreicao', 'renascer', '
   'soco_do_invencivel', 'soco_de_sai_raphael', 'tapa_do_picapau', 'soco_do_omnitrix', 'soco_de_eternia', 'soco_da_ancora_popeye', 'soquinho_de_esponja', 'soco_decepticon',
   'soco_superpoderosa', 'soco_musical_mickey', 'golpe_de_carate_buzz', 'soco_do_xerife', 'soco_de_rampa_de_gelo', 'palma_de_fogo_iroh', 'soco_de_laminas_destruidor', 'soco_de_hoquei',
   'soco_da_garra_thundera', 'tapinha_do_stewie', 'soco_do_robo_mojo', 'soco_fantasma_danny', 'soco_do_satsui', 'pancada_furiosa_donald', 'martelinho_do_jerry', 'soco_de_borracha_buu',
-  'corte_da_agua_tanjiro', 'corte_da_zangetsu', 'espelho_partido_aizen', 'laminas_giratorias_levi', 'corte_de_prata_blade', 'masamune_sephiroth', 'corte_da_yamato', 'lamina_hf_raiden']);
+  'corte_da_agua_tanjiro', 'corte_da_zangetsu', 'espelho_partido_aizen', 'laminas_giratorias_levi', 'corte_de_prata_blade', 'masamune_sephiroth', 'corte_da_yamato', 'lamina_hf_raiden',
+  'lamina_do_credo_ezio', 'lanca_corrente_scorpion', 'keyblade_sora', 'katana_da_2b', 'flor_escarlate_malenia', 'corte_izuna_hayabusa', 'adaga_de_areia_principe', 'corte_negro_hiei']);
 
 /** Bons para o ataque básico do personagem (quando ele já usa a família numa habilidade). */
 export const NOVAS_DE_BASICO = new Set<FamiliaNova>(['garras', 'chicote', 'bastao', 'mordida', 'tentaculos', 'florete',
