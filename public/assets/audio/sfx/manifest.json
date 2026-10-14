@@ -2229,6 +2229,40 @@
    ],
    "bytes": 68207
   },
+  "bastao-cinetico-gambit": {
+   "arquivo": "bastao-cinetico-gambit.mp3",
+   "descricao": "básico de Gambit: o bastão e o estouro cinético",
+   "versoes": [
+    0.0,
+    1.28,
+    2.6035,
+    3.8429
+   ],
+   "duracoes": [
+    1.2,
+    1.2435,
+    1.1594,
+    1.2183
+   ],
+   "bytes": 44194
+  },
+  "bastao-de-ar-aang": {
+   "arquivo": "bastao-de-ar-aang.mp3",
+   "descricao": "básico de Aang: o bastão e o vento em espiral",
+   "versoes": [
+    0.0,
+    1.2448,
+    2.517,
+    3.7553
+   ],
+   "duracoes": [
+    1.1648,
+    1.1923,
+    1.1583,
+    1.1955
+   ],
+   "bytes": 44522
+  },
   "bastao-de-ricochete": {
    "arquivo": "bastao-de-ricochete.mp3",
    "descricao": "básico de Demolidor: o bastão quicando e o eco do radar",
@@ -4320,6 +4354,40 @@
    ],
    "bytes": 55169
   },
+  "carta-do-dragao-branco": {
+   "arquivo": "carta-do-dragao-branco.mp3",
+   "descricao": "básico de Kaiba: a carta e o rugido de luz do Dragão Branco",
+   "versoes": [
+    0.0,
+    1.38,
+    2.8071,
+    4.1432
+   ],
+   "duracoes": [
+    1.3,
+    1.3471,
+    1.256,
+    1.3198
+   ],
+   "bytes": 48967
+  },
+  "carta-do-rei-dos-jogos": {
+   "arquivo": "carta-do-rei-dos-jogos.mp3",
+   "descricao": "básico de Yugi: a carta e o brilho do Enigma",
+   "versoes": [
+    0.0,
+    1.1352,
+    2.4276,
+    3.6353
+   ],
+   "duracoes": [
+    1.0552,
+    1.2125,
+    1.1276,
+    1.2183
+   ],
+   "bytes": 41368
+  },
   "carta-dragao": {
    "arquivo": "carta-dragao.mp3",
    "descricao": "básico de Kaiba: carta, carga e o rugido de energia do raio do dragão",
@@ -4591,6 +4659,23 @@
     2.9441
    ],
    "bytes": 98420
+  },
+  "cenoura-do-pernalonga": {
+   "arquivo": "cenoura-do-pernalonga.mp3",
+   "descricao": "básico de Pernalonga: o bonk e o nhac da cenoura",
+   "versoes": [
+    0.0,
+    0.9016,
+    1.8419,
+    2.751
+   ],
+   "duracoes": [
+    0.8216,
+    0.8603,
+    0.8292,
+    0.8523
+   ],
+   "bytes": 32208
   },
   "centopeia": {
    "arquivo": "centopeia.mp3",
@@ -38133,6 +38218,23 @@
    ],
    "bytes": 39693
   },
+  "tapas-desesperados": {
+   "arquivo": "tapas-desesperados.mp3",
+   "descricao": "básico de Salsicha: os tapinhas desesperados",
+   "versoes": [
+    0.0,
+    0.7369,
+    1.5169,
+    2.2481
+   ],
+   "duracoes": [
+    0.6569,
+    0.7,
+    0.6512,
+    0.6983
+   ],
+   "bytes": 30711
+  },
   "tapinha-do-stewie": {
    "arquivo": "tapinha-do-stewie.mp3",
    "descricao": "básico de Stewie: o tapinha e o estalo desproporcional",
@@ -39560,6 +39662,23 @@
     2.1221
    ],
    "bytes": 77681
+  },
+  "trombada-do-pateta": {
+   "arquivo": "trombada-do-pateta.mp3",
+   "descricao": "básico de Pateta: a trombada e as estrelinhas",
+   "versoes": [
+    0.0,
+    1.38,
+    2.8071,
+    4.1432
+   ],
+   "duracoes": [
+    1.3,
+    1.3471,
+    1.256,
+    1.3198
+   ],
+   "bytes": 46434
   },
   "tropecao-do-pateta": {
    "arquivo": "tropecao-do-pateta.mp3",
@@ -41413,6 +41532,23 @@
     1.4213
    ],
    "bytes": 48174
+  },
+  "zoltraak-frieren": {
+   "arquivo": "zoltraak-frieren.mp3",
+   "descricao": "básico de Frieren: o círculo mágico e a Zoltraak",
+   "versoes": [
+    0.0,
+    1.2558,
+    2.4597,
+    3.6846
+   ],
+   "duracoes": [
+    1.1758,
+    1.1239,
+    1.1449,
+    1.0949
+   ],
+   "bytes": 38655
   },
   "zoro-preparo": {
    "arquivo": "zoro-preparo.mp3",

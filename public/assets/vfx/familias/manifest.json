@@ -1819,6 +1819,34 @@
   "laco": false,
   "bytes": 44516
  },
+ "bastao_cinetico_gambit": {
+  "descricao": "básico do Gambit: o bastão com energia cinética",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 28478
+ },
+ "bastao_de_ar_aang": {
+  "descricao": "básico do Aang: o bastão e o redemoinho de ar",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 13578
+ },
  "bastao_de_ricochete": {
   "descricao": "básico do Demolidor: o bastão que quica e os ecos do radar",
   "quadros": 12,
@@ -3681,6 +3709,34 @@
   "laco": false,
   "bytes": 14128
  },
+ "carta_do_dragao_branco": {
+  "descricao": "básico do Kaiba: a carta e as asas do Dragão Branco",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 17110
+ },
+ "carta_do_rei_dos_jogos": {
+  "descricao": "básico do Yugi: a carta e o Olho de Hórus",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 11788
+ },
  "carta_dragao": {
   "descricao": "Kaiba: carta vira e solta o raio branco do dragão",
   "quadros": 12,
@@ -3918,6 +3974,20 @@
   ],
   "laco": false,
   "bytes": 66676
+ },
+ "cenoura_do_pernalonga": {
+  "descricao": "básico do Pernalonga: a cenoura e a mordida",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 10168
  },
  "centopeia": {
   "descricao": "Kaneki · o kagune centopeia crava e suga",
@@ -31821,6 +31891,20 @@
   "laco": false,
   "bytes": 20704
  },
+ "tapas_desesperados": {
+  "descricao": "básico do Salsicha: os tapas em pânico e o suor",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 11132
+ },
  "tapinha_do_stewie": {
   "descricao": "básico do Stewie: a mãozinha e o estalo desproporcional",
   "quadros": 12,
@@ -33024,6 +33108,20 @@
   ],
   "laco": false,
   "bytes": 29920
+ },
+ "trombada_do_pateta": {
+  "descricao": "básico do Pateta: a trombada e as estrelinhas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 13218
  },
  "tropecao_do_pateta": {
   "descricao": "Pateta · o escorregão e o chapéu voando",
@@ -34438,6 +34536,20 @@
   ],
   "laco": true,
   "bytes": 23724
+ },
+ "zoltraak_frieren": {
+  "descricao": "básico da Frieren: o círculo mágico e o raio da Zoltraak",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 17702
  },
  "zoro_preparo": {
   "descricao": "Zoro · as três espadas e a sombra (Preparo, laço)",

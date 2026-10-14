@@ -2076,6 +2076,14 @@ export const FAMILIAS_NOVAS = {
   raio_da_dimensao_x: n({ nome: 'Raio da Dimensão X', grupo: 'energia', aponta: true, impacto: 'raio_da_dimensao_x', escala: 2.0, tempo: 1.0, cor: '#ff6ad8', tinta: 'fixa' }),
   laser_minusculo: n({ nome: 'Laser minúsculo', grupo: 'energia', aponta: true, impacto: 'laser_minusculo', escala: 2.0, tempo: 1.0, cor: '#7aff8a', tinta: 'fixa' }),
   punho_de_armadura_al: n({ nome: 'Punho de armadura', grupo: 'físico', aponta: true, impacto: 'punho_de_armadura_al', escala: 2.0, tempo: 1.0, cor: '#b8c8e0', tinta: 'fixa' }),
+  zoltraak_frieren: n({ nome: 'Zoltraak', grupo: 'magia', aponta: true, impacto: 'zoltraak_frieren', escala: 2.0, tempo: 1.0, cor: '#e0ecff', tinta: 'fixa' }),
+  bastao_cinetico_gambit: n({ nome: 'Bastão cinético', grupo: 'físico', aponta: true, impacto: 'bastao_cinetico_gambit', escala: 2.0, tempo: 1.0, cor: '#ff5ac8', tinta: 'fixa' }),
+  bastao_de_ar_aang: n({ nome: 'Bastão de ar', grupo: 'físico', aponta: true, impacto: 'bastao_de_ar_aang', escala: 2.0, tempo: 1.0, cor: '#9ad8ff', tinta: 'fixa' }),
+  cenoura_do_pernalonga: n({ nome: 'Cenoura', grupo: 'físico', aponta: true, impacto: 'cenoura_do_pernalonga', escala: 2.0, tempo: 1.0, cor: '#ff9a3a', tinta: 'fixa' }),
+  tapas_desesperados: n({ nome: 'Tapas desesperados', grupo: 'físico', aponta: true, impacto: 'tapas_desesperados', escala: 2.0, tempo: 1.0, cor: '#9ae06a', tinta: 'fixa' }),
+  trombada_do_pateta: n({ nome: 'Trombada', grupo: 'físico', aponta: true, impacto: 'trombada_do_pateta', escala: 2.0, tempo: 1.0, cor: '#ff8a4a', tinta: 'fixa' }),
+  carta_do_rei_dos_jogos: n({ nome: 'Carta do Rei dos Jogos', grupo: 'projétil', aponta: true, impacto: 'carta_do_rei_dos_jogos', escala: 2.0, tempo: 1.0, cor: '#ffd84a', tinta: 'fixa' }),
+  carta_do_dragao_branco: n({ nome: 'Carta do Dragão Branco', grupo: 'projétil', aponta: true, impacto: 'carta_do_dragao_branco', escala: 2.0, tempo: 1.0, cor: '#7ac8ff', tinta: 'fixa' }),
 } as const satisfies Record<string, Familia>;
 
 export type FamiliaNova = keyof typeof FAMILIAS_NOVAS;
@@ -2109,7 +2117,8 @@ export const NOVAS_NO_ALVO = new Set<FamiliaNova>(['ressurreicao', 'renascer', '
   'tiro_do_coronel', 'rajada_do_justiceiro', 'blasters_do_quill', 'canhao_do_rocket', 'rajada_do_spartan', 'tiro_e_faca_leon', 'mira_da_beretta', 'mega_buster',
   'z_buster_carregado', 'tiro_silencioso_47', 'tiro_lambda_gordon', 'samaritano_hellboy', 'chute_espinho_yor', 'chute_ghoul_kaneki', 'chute_do_caos_shadow', 'chute_relampago_chunli',
   'chute_lunar', 'chute_e_bo_donatello', 'chute_cowabunga', 'chute_de_fogo_zuko', 'chute_de_fogo_azul', 'chicotes_de_carne_muzan', 'garras_de_vibranio', 'laminas_simbiontes',
-  'garra_do_rei_bowser', 'garra_flamejante', 'raio_da_joia_mente', 'arma_de_raio_rick', 'desintegrador_marvin', 'raio_da_dimensao_x', 'laser_minusculo', 'punho_de_armadura_al']);
+  'garra_do_rei_bowser', 'garra_flamejante', 'raio_da_joia_mente', 'arma_de_raio_rick', 'desintegrador_marvin', 'raio_da_dimensao_x', 'laser_minusculo', 'punho_de_armadura_al',
+  'zoltraak_frieren', 'bastao_cinetico_gambit', 'bastao_de_ar_aang', 'cenoura_do_pernalonga', 'tapas_desesperados', 'trombada_do_pateta', 'carta_do_rei_dos_jogos', 'carta_do_dragao_branco']);
 
 /** Bons para o ataque básico do personagem (quando ele já usa a família numa habilidade). */
 export const NOVAS_DE_BASICO = new Set<FamiliaNova>(['garras', 'chicote', 'bastao', 'mordida', 'tentaculos', 'florete',
