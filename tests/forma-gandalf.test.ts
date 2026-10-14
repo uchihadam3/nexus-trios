@@ -199,3 +199,21 @@ describe('Macaco Louco no robô', () => {
     expect(quebrou).toBeGreaterThan(0);
   });
 });
+
+/* Ikki (pedido do jogador: "Ikki renascido"): depois de Renascer, a Fênix em chamas até o fim da luta. */
+describe('Ikki renascido', () => {
+  it('troca o retrato depois de renascer', () => {
+    let renasceu = 0;
+    for (let semente = 1; semente <= 30; semente++) {
+      const b = createBattle(['ikki', 'hinata', 'naruto'], ['goku', 'vegeta', 'hulk'], semente);
+      const ik = b.fighters.find((f) => f.characterId === 'ikki')!;
+      for (let t = 0; t < 6000 && !b.finished; t++) {
+        stepBattle(b);
+        const fenix = !!ik.u?.fenix;
+        if (fenix) renasceu++;
+        expect(naFormaDeAgora(byId.ikki, ik, b).portrait).toBe(fenix ? '/assets/portraits/formas/ikki-renascido.webp' : byId.ikki.portrait);
+      }
+    }
+    expect(renasceu).toBeGreaterThan(0);
+  });
+});
