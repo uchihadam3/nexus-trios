@@ -1022,6 +1022,23 @@
    ],
    "bytes": 27265
   },
+  "arma-de-raio-rick": {
+   "arquivo": "arma-de-raio-rick.mp3",
+   "descricao": "básico de Rick: o raio borbulhante e o portal",
+   "versoes": [
+    0.0,
+    1.2575,
+    2.5356,
+    3.7333
+   ],
+   "duracoes": [
+    1.1775,
+    1.1981,
+    1.1177,
+    1.1835
+   ],
+   "bytes": 40869
+  },
   "arma-grande": {
    "arquivo": "arma-grande.mp3",
    "descricao": "básico de Rocket: carga, tranco de canhão pesado e explosão",
@@ -7839,6 +7856,23 @@
    ],
    "bytes": 63494
   },
+  "desintegrador-marvin": {
+   "arquivo": "desintegrador-marvin.mp3",
+   "descricao": "básico de Marvin: o pew do desintegrador",
+   "versoes": [
+    0.0,
+    1.1515,
+    2.3345,
+    3.4124
+   ],
+   "duracoes": [
+    1.0715,
+    1.103,
+    0.998,
+    1.0303
+   ],
+   "bytes": 52614
+  },
   "desintegrar": {
    "arquivo": "desintegrar.mp3",
    "descricao": "família desintegrar",
@@ -13296,6 +13330,40 @@
    ],
    "bytes": 44695
   },
+  "garra-do-rei-bowser": {
+   "arquivo": "garra-do-rei-bowser.mp3",
+   "descricao": "básico de Bowser: a garra pesada e a baforada",
+   "versoes": [
+    0.0,
+    1.2826,
+    2.5313,
+    3.8673
+   ],
+   "duracoes": [
+    1.2026,
+    1.1687,
+    1.256,
+    1.2852
+   ],
+   "bytes": 45707
+  },
+  "garra-flamejante": {
+   "arquivo": "garra-flamejante.mp3",
+   "descricao": "básico de Charizard: as garras e o crepitar de fogo",
+   "versoes": [
+    0.0,
+    1.1045,
+    2.2566,
+    3.3162
+   ],
+   "duracoes": [
+    1.0245,
+    1.0721,
+    0.9796,
+    1.0579
+   ],
+   "bytes": 42761
+  },
   "garra-xenomorfa": {
    "arquivo": "garra-xenomorfa.mp3",
    "descricao": "básico do Xenomorfo: o chiado e o ácido",
@@ -18446,6 +18514,23 @@
     1.2439
    ],
    "bytes": 47979
+  },
+  "laser-minusculo": {
+   "arquivo": "laser-minusculo.mp3",
+   "descricao": "básico de Plankton: o pff ridículo do laser",
+   "versoes": [
+    0.0,
+    0.7976,
+    1.6374,
+    2.3946
+   ],
+   "duracoes": [
+    0.7176,
+    0.7598,
+    0.6772,
+    0.6849
+   ],
+   "bytes": 26115
   },
   "lata-de-espinafre": {
    "arquivo": "lata-de-espinafre.mp3",
@@ -31265,6 +31350,23 @@
    ],
    "bytes": 51104
   },
+  "punho-de-armadura-al": {
+   "arquivo": "punho-de-armadura-al.mp3",
+   "descricao": "básico de Alphonse: o soco de metal oco da armadura",
+   "versoes": [
+    0.0,
+    1.0097,
+    2.1886,
+    3.3634
+   ],
+   "duracoes": [
+    0.9297,
+    1.0989,
+    1.0948,
+    0.977
+   ],
+   "bytes": 33708
+  },
   "punho-de-sangue-power": {
    "arquivo": "punho-de-sangue-power.mp3",
    "descricao": "básico de Power: o sangue endurecendo e o soco",
@@ -31945,6 +32047,23 @@
    ],
    "bytes": 57614
   },
+  "raio-da-dimensao-x": {
+   "arquivo": "raio-da-dimensao-x.mp3",
+   "descricao": "básico de Krang: o raio ondulante da Dimensão X",
+   "versoes": [
+    0.0,
+    1.38,
+    2.8071,
+    4.1432
+   ],
+   "duracoes": [
+    1.3,
+    1.3471,
+    1.256,
+    1.3198
+   ],
+   "bytes": 42551
+  },
   "raio-da-forca": {
    "arquivo": "raio-da-forca.mp3",
    "descricao": "básico do Palpatine: o raio e a risada",
@@ -31978,6 +32097,23 @@
     1.5967
    ],
    "bytes": 84906
+  },
+  "raio-da-joia-mente": {
+   "arquivo": "raio-da-joia-mente.mp3",
+   "descricao": "básico de Visão: o zumbido dourado da Joia da Mente",
+   "versoes": [
+    0.0,
+    1.07,
+    2.1726,
+    3.1959
+   ],
+   "duracoes": [
+    0.99,
+    1.0226,
+    0.9432,
+    1.0134
+   ],
+   "bytes": 35280
   },
   "raio-de-aku": {
    "arquivo": "raio-de-aku.mp3",

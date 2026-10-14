@@ -797,6 +797,20 @@
   "laco": false,
   "bytes": 19450
  },
+ "arma_de_raio_rick": {
+  "descricao": "básico do Rick: o raio verde e o portal no acerto",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 13488
+ },
  "arma_grande": {
   "descricao": "Rocket: carga, tranco e bola de plasma que explode",
   "quadros": 12,
@@ -6691,6 +6705,20 @@
   "laco": false,
   "bytes": 32622
  },
+ "desintegrador_marvin": {
+  "descricao": "básico do Marvin: o desintegrador e o contorno de pó",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 14466
+ },
  "desintegrar": {
   "descricao": "desintegração em grãos",
   "quadros": 12,
@@ -11339,6 +11367,34 @@
   "laco": false,
   "bytes": 16742
  },
+ "garra_do_rei_bowser": {
+  "descricao": "básico do Bowser: a garra pesada e a baforada de fogo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 33116
+ },
+ "garra_flamejante": {
+  "descricao": "básico do Charizard: as três garras em brasa",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 35700
+ },
  "garra_xenomorfa": {
   "descricao": "Básico do Xenomorfo: a boca interna e o ácido",
   "quadros": 12,
@@ -15538,6 +15594,20 @@
   ],
   "laco": false,
   "bytes": 31234
+ },
+ "laser_minusculo": {
+  "descricao": "básico do Plankton: o laser minúsculo e a explosãozinha",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 5520
  },
  "lata_de_espinafre": {
   "descricao": "Popeye · a lata e o músculo",
@@ -26095,6 +26165,20 @@
   "laco": false,
   "bytes": 95276
  },
+ "punho_de_armadura_al": {
+  "descricao": "básico do Alphonse: o punho de armadura e o círculo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 32270
+ },
  "punho_de_sangue_power": {
   "descricao": "básico da Power: espinhos de sangue nos nós dos dedos",
   "quadros": 12,
@@ -26683,6 +26767,20 @@
   "laco": false,
   "bytes": 69060
  },
+ "raio_da_dimensao_x": {
+  "descricao": "básico do Krang: o raio rosa e a fenda dimensional",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 28360
+ },
  "raio_da_forca": {
   "descricao": "Básico do Palpatine: o raio da Força",
   "quadros": 12,
@@ -26710,6 +26808,20 @@
   ],
   "laco": false,
   "bytes": 50400
+ },
+ "raio_da_joia_mente": {
+  "descricao": "básico do Visão: o raio dourado da Joia da Mente",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 10802
  },
  "raio_de_aku": {
   "descricao": "Básico do Aku: os olhos de laser",

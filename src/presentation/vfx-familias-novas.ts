@@ -2068,6 +2068,14 @@ export const FAMILIAS_NOVAS = {
   chicotes_de_carne_muzan: n({ nome: 'Chicotes de carne', grupo: 'corte', aponta: true, impacto: 'chicotes_de_carne_muzan', escala: 2.0, tempo: 1.0, cor: '#ff3a5a', tinta: 'fixa' }),
   garras_de_vibranio: n({ nome: 'Garras de vibranium', grupo: 'corte', aponta: true, impacto: 'garras_de_vibranio', escala: 2.0, tempo: 1.0, cor: '#b07aff', tinta: 'fixa' }),
   laminas_simbiontes: n({ nome: 'Lâminas de simbionte', grupo: 'corte', aponta: true, impacto: 'laminas_simbiontes', escala: 2.0, tempo: 1.0, cor: '#ff2a3a', tinta: 'fixa' }),
+  garra_do_rei_bowser: n({ nome: 'Garra do Rei', grupo: 'corte', aponta: true, impacto: 'garra_do_rei_bowser', escala: 2.0, tempo: 1.0, cor: '#ff8a3a', tinta: 'fixa' }),
+  garra_flamejante: n({ nome: 'Garra flamejante', grupo: 'corte', aponta: true, impacto: 'garra_flamejante', escala: 2.0, tempo: 1.0, cor: '#ff6a2a', tinta: 'fixa' }),
+  raio_da_joia_mente: n({ nome: 'Raio da Joia da Mente', grupo: 'energia', aponta: true, impacto: 'raio_da_joia_mente', escala: 2.0, tempo: 1.0, cor: '#ffd84a', tinta: 'fixa' }),
+  arma_de_raio_rick: n({ nome: 'Arma de raio', grupo: 'energia', aponta: true, impacto: 'arma_de_raio_rick', escala: 2.0, tempo: 1.0, cor: '#7aff6a', tinta: 'fixa' }),
+  desintegrador_marvin: n({ nome: 'Desintegrador', grupo: 'energia', aponta: true, impacto: 'desintegrador_marvin', escala: 2.0, tempo: 1.0, cor: '#7ae0ff', tinta: 'fixa' }),
+  raio_da_dimensao_x: n({ nome: 'Raio da Dimensão X', grupo: 'energia', aponta: true, impacto: 'raio_da_dimensao_x', escala: 2.0, tempo: 1.0, cor: '#ff6ad8', tinta: 'fixa' }),
+  laser_minusculo: n({ nome: 'Laser minúsculo', grupo: 'energia', aponta: true, impacto: 'laser_minusculo', escala: 2.0, tempo: 1.0, cor: '#7aff8a', tinta: 'fixa' }),
+  punho_de_armadura_al: n({ nome: 'Punho de armadura', grupo: 'físico', aponta: true, impacto: 'punho_de_armadura_al', escala: 2.0, tempo: 1.0, cor: '#b8c8e0', tinta: 'fixa' }),
 } as const satisfies Record<string, Familia>;
 
 export type FamiliaNova = keyof typeof FAMILIAS_NOVAS;
@@ -2100,7 +2108,8 @@ export const NOVAS_NO_ALVO = new Set<FamiliaNova>(['ressurreicao', 'renascer', '
   'espada_do_heroi_finn', 'bengala_do_mestre', 'espada_da_protecao_shera', 'garras_de_adamantium', 'katanas_e_piadas', 'bastao_de_ricochete', 'adaga_das_ilusoes', 'haste_negra_pain',
   'tiro_do_coronel', 'rajada_do_justiceiro', 'blasters_do_quill', 'canhao_do_rocket', 'rajada_do_spartan', 'tiro_e_faca_leon', 'mira_da_beretta', 'mega_buster',
   'z_buster_carregado', 'tiro_silencioso_47', 'tiro_lambda_gordon', 'samaritano_hellboy', 'chute_espinho_yor', 'chute_ghoul_kaneki', 'chute_do_caos_shadow', 'chute_relampago_chunli',
-  'chute_lunar', 'chute_e_bo_donatello', 'chute_cowabunga', 'chute_de_fogo_zuko', 'chute_de_fogo_azul', 'chicotes_de_carne_muzan', 'garras_de_vibranio', 'laminas_simbiontes']);
+  'chute_lunar', 'chute_e_bo_donatello', 'chute_cowabunga', 'chute_de_fogo_zuko', 'chute_de_fogo_azul', 'chicotes_de_carne_muzan', 'garras_de_vibranio', 'laminas_simbiontes',
+  'garra_do_rei_bowser', 'garra_flamejante', 'raio_da_joia_mente', 'arma_de_raio_rick', 'desintegrador_marvin', 'raio_da_dimensao_x', 'laser_minusculo', 'punho_de_armadura_al']);
 
 /** Bons para o ataque básico do personagem (quando ele já usa a família numa habilidade). */
 export const NOVAS_DE_BASICO = new Set<FamiliaNova>(['garras', 'chicote', 'bastao', 'mordida', 'tentaculos', 'florete',
