@@ -16001,6 +16001,20 @@
   "laco": false,
   "bytes": 35168
  },
+ "martelinho_do_jerry": {
+  "descricao": "básico do Jerry: o martelinho e o galo crescendo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 16222
+ },
  "martelo": {
   "descricao": "martelada no chão",
   "quadros": 12,
@@ -23645,6 +23659,20 @@
   "laco": false,
   "bytes": 29634
  },
+ "pancada_furiosa_donald": {
+  "descricao": "básico do Pato Donald: os punhos de moinho e as nuvens de raiva",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 33256
+ },
  "pancada_psiquica_mewtwo": {
   "descricao": "básico do Mewtwo: a palma empurrando com ondas psíquicas",
   "quadros": 12,
@@ -28881,20 +28909,6 @@
   "laco": false,
   "bytes": 54368
  },
- "soco_basico": {
-  "descricao": "Soco simples: o punho entra, acerta com estrela e anel de choque e recua",
-  "quadros": 12,
-  "grade": [
-   3,
-   4
-  ],
-  "tamanho": [
-   192,
-   192
-  ],
-  "laco": false,
-  "bytes": 37678
- },
  "soco_bioeletrico": {
   "descricao": "Básico da Mulher-Aranha: o soco elétrico",
   "quadros": 12,
@@ -29006,6 +29020,20 @@
   ],
   "laco": false,
   "bytes": 33198
+ },
+ "soco_da_garra_thundera": {
+  "descricao": "básico do Lion-O: a Garra de Thundera e os três riscos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 18630
  },
  "soco_da_manopla": {
   "descricao": "básico do Thanos: a Manopla do Infinito com as Joias e o chão rachando",
@@ -29146,6 +29174,20 @@
   ],
   "laco": false,
   "bytes": 30474
+ },
+ "soco_de_borracha_buu": {
+  "descricao": "básico do Majin Boo: o braço de borracha esticando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 28832
  },
  "soco_de_cem_toneladas": {
   "descricao": "Tsunade · o soco e o chão rachando",
@@ -29749,6 +29791,34 @@
   "laco": false,
   "bytes": 38282
  },
+ "soco_do_robo_mojo": {
+  "descricao": "básico do Macaco Louco: a garra mecânica do robô e o vapor",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 23014
+ },
+ "soco_do_satsui": {
+  "descricao": "básico do Akuma: a aura do Satsui no Hado e o kanji do céu",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 26994
+ },
  "soco_do_stand": {
   "descricao": "Soco do Stand de Jotaro: punho fantasma com vultos e eco",
   "quadros": 12,
@@ -29860,6 +29930,20 @@
   ],
   "laco": false,
   "bytes": 81114
+ },
+ "soco_fantasma_danny": {
+  "descricao": "básico do Danny Phantom: o punho intangível que fica sólido",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 25430
  },
  "soco_flamejante_natsu": {
   "descricao": "Básico do Natsu: o punho de fogo",
@@ -30910,6 +30994,20 @@
   ],
   "laco": false,
   "bytes": 20704
+ },
+ "tapinha_do_stewie": {
+  "descricao": "básico do Stewie: a mãozinha e o estalo desproporcional",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 19604
  },
  "tatsumaki_ken": {
   "descricao": "Ken · o chute giratório de fogo",

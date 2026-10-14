@@ -18974,6 +18974,23 @@
    ],
    "bytes": 48291
   },
+  "martelinho-do-jerry": {
+   "arquivo": "martelinho-do-jerry.mp3",
+   "descricao": "básico de Jerry: o tóin do martelinho",
+   "versoes": [
+    0.0,
+    1.0742,
+    2.1957,
+    3.2321
+   ],
+   "duracoes": [
+    0.9942,
+    1.0415,
+    0.9564,
+    1.0035
+   ],
+   "bytes": 34689
+  },
   "martelo": {
    "arquivo": "martelo.mp3",
    "descricao": "família martelo",
@@ -28324,6 +28341,23 @@
    ],
    "bytes": 70855
   },
+  "pancada-furiosa-donald": {
+   "arquivo": "pancada-furiosa-donald.mp3",
+   "descricao": "básico de Pato Donald: o moinho de socos furiosos",
+   "versoes": [
+    0.0,
+    1.1602,
+    2.4837,
+    3.7231
+   ],
+   "duracoes": [
+    1.0802,
+    1.2435,
+    1.1594,
+    1.2183
+   ],
+   "bytes": 39163
+  },
   "pancada-psiquica-mewtwo": {
    "arquivo": "pancada-psiquica-mewtwo.mp3",
    "descricao": "básico de Mewtwo: o zumbido psíquico e a pancada",
@@ -34546,23 +34580,6 @@
    ],
    "bytes": 71104
   },
-  "soco-basico": {
-   "arquivo": "soco-basico.mp3",
-   "descricao": "básico de quem só dá um soco: o ar cortado e a pancada seca",
-   "versoes": [
-    0.0,
-    0.83,
-    1.6872,
-    2.4918
-   ],
-   "duracoes": [
-    0.75,
-    0.7772,
-    0.7246,
-    0.7614
-   ],
-   "bytes": 26479
-  },
   "soco-bioeletrico": {
    "arquivo": "soco-bioeletrico.mp3",
    "descricao": "básico da Mulher-Aranha: o soco elétrico",
@@ -34698,6 +34715,23 @@
     1.1167
    ],
    "bytes": 48203
+  },
+  "soco-da-garra-thundera": {
+   "arquivo": "soco-da-garra-thundera.mp3",
+   "descricao": "básico de Lion-O: a Garra de Thundera riscando três vezes",
+   "versoes": [
+    0.0,
+    1.18,
+    2.1372,
+    3.1577
+   ],
+   "duracoes": [
+    1.1,
+    0.8772,
+    0.9405,
+    0.8011
+   ],
+   "bytes": 34409
   },
   "soco-da-manopla": {
    "arquivo": "soco-da-manopla.mp3",
@@ -34868,6 +34902,23 @@
     1.0152
    ],
    "bytes": 32306
+  },
+  "soco-de-borracha-buu": {
+   "arquivo": "soco-de-borracha-buu.mp3",
+   "descricao": "básico de Majin Boo: o braço de borracha esticando e voltando",
+   "versoes": [
+    0.0,
+    0.9614,
+    1.9542,
+    2.8273
+   ],
+   "duracoes": [
+    0.8814,
+    0.9127,
+    0.7931,
+    0.8321
+   ],
+   "bytes": 24824
   },
   "soco-de-cem-toneladas": {
    "arquivo": "soco-de-cem-toneladas.mp3",
@@ -35600,6 +35651,40 @@
    ],
    "bytes": 30371
   },
+  "soco-do-robo-mojo": {
+   "arquivo": "soco-do-robo-mojo.mp3",
+   "descricao": "básico de Macaco Louco: o servo, o vapor e a garra apertando",
+   "versoes": [
+    0.0,
+    0.866,
+    2.1377,
+    3.219
+   ],
+   "duracoes": [
+    0.786,
+    1.1917,
+    1.0013,
+    0.7334
+   ],
+   "bytes": 35715
+  },
+  "soco-do-satsui": {
+   "arquivo": "soco-do-satsui.mp3",
+   "descricao": "básico de Akuma: o ronco escuro e o soco pesado",
+   "versoes": [
+    0.0,
+    0.9208,
+    1.8143,
+    2.893
+   ],
+   "duracoes": [
+    0.8408,
+    0.8135,
+    0.9987,
+    0.8989
+   ],
+   "bytes": 28919
+  },
   "soco-do-stand": {
    "arquivo": "soco-do-stand.mp3",
    "descricao": "básico de Jotaro: soco pesado com eco fantasmagórico",
@@ -35735,6 +35820,23 @@
     1.4213
    ],
    "bytes": 46717
+  },
+  "soco-fantasma-danny": {
+   "arquivo": "soco-fantasma-danny.mp3",
+   "descricao": "básico de Danny Phantom: o zunido fantasma que fica sólido",
+   "versoes": [
+    0.0,
+    1.0293,
+    2.2476,
+    3.2595
+   ],
+   "duracoes": [
+    0.9493,
+    1.1384,
+    0.9318,
+    1.0488
+   ],
+   "bytes": 34813
   },
   "soco-flamejante-natsu": {
    "arquivo": "soco-flamejante-natsu.mp3",
@@ -37027,6 +37129,23 @@
     1.0913
    ],
    "bytes": 39693
+  },
+  "tapinha-do-stewie": {
+   "arquivo": "tapinha-do-stewie.mp3",
+   "descricao": "básico de Stewie: o tapinha e o estalo desproporcional",
+   "versoes": [
+    0.0,
+    0.8054,
+    1.565,
+    2.376
+   ],
+   "duracoes": [
+    0.7254,
+    0.6796,
+    0.731,
+    0.6665
+   ],
+   "bytes": 25926
   },
   "tatsumaki-ken": {
    "arquivo": "tatsumaki-ken.mp3",

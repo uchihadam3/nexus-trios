@@ -34,7 +34,6 @@ def chute_basico(rng, v):
     return reverb(x, 0.22, 0.1, 6000)
 
 SONS: dict = {
-    "soco-basico": (soco_basico, "básico de quem só dá um soco: o ar cortado e a pancada seca"),
     "chute-basico": (chute_basico, "básico de quem só dá um chute: o giro da perna e o estalo do pé"),}
 
 

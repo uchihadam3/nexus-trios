@@ -277,7 +277,7 @@ export const FAMILIA_DA_INVOCACAO: Record<string, VfxFamily> = {
  */
 export const FAMILIA_DO_BASICO: Record<string, VfxFamily> = {
   toph: 'pedra_da_toph',
-  akuma: 'soco',
+  akuma: 'soco_do_satsui',
   agent47: 'tiro',
   arthas: 'frostmourne',
   geralt: 'corte_diagonal',
@@ -295,7 +295,7 @@ export const FAMILIA_DO_BASICO: Record<string, VfxFamily> = {
   skeletor: 'bastao',
   shera: 'corte_diagonal',
   billcipher: 'chama_do_triangulo',
-  dannyphantom: 'soco_basico',
+  dannyphantom: 'soco_fantasma_danny',
   naruto: 'soco_do_naruto',
   batman: 'batarangue',
   spiderman: 'teia_e_soco',
@@ -396,10 +396,10 @@ export const FAMILIA_DO_BASICO: Record<string, VfxFamily> = {
   bebop: 'investida',
   mummra: 'sombra',
   bart: 'chute_basico',
-  stewie: 'soco_basico',
+  stewie: 'tapinha_do_stewie',
   cartman: 'pow_cartoon',
   plankton: 'laser',
-  mojojojo: 'soco_basico',
+  mojojojo: 'soco_do_robo_mojo',
   capitaoplaneta: 'raio_de_gaia',
   coragem: 'mordida_cartoon',
   vegeta: 'soco_do_principe',
@@ -478,7 +478,7 @@ export const FAMILIA_DO_BASICO: Record<string, VfxFamily> = {
   bobesponja: 'soquinho_de_esponja',
   woody: 'soco_do_xerife',
   coiote: 'bigorna',
-  liono: 'soco_basico',
+  liono: 'soco_da_garra_thundera',
   homer: 'barrigada',
   bugiganga: 'gadget_surpresa',
   dio: 'toque_vampirico_dio',
@@ -667,4 +667,7 @@ export const FAMILIA_DO_BASICO: Record<string, VfxFamily> = {
 
 
 
+  donald: 'pancada_furiosa_donald',
+  jerry: 'martelinho_do_jerry',
+  majinbuu: 'soco_de_borracha_buu',
 };

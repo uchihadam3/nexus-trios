@@ -725,7 +725,6 @@ def chute_basico(T, t, rng):
     return G, H
 
 REGISTRO = [
-    ("soco_basico", soco_basico, GRANDE, "Soco simples: o punho entra, acerta com estrela e anel de choque e recua", False),
     ("chute_basico", chute_basico, GRANDE, "Chute simples: o pé sobe em arco, acerta com estrela e anel de choque e volta", False),
     ("golpe_do_potencial", golpe_do_potencial, GRANDE, "básico do Gohan: soco com aura branca e raios do SSJ2", False),
     ("braco_namekiano", braco_namekiano, GRANDE, "básico do Piccolo: o braço verde estica e acerta", False),
