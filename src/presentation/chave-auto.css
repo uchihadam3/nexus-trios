@@ -1,0 +1,50 @@
+/* Lutas seguidas: src/components/ChaveDoAuto.tsx */
+
+/* ---------- Chave grande, no rodapé fixo do resultado ---------- */
+.seq-chave{--seq:#86e3a8;all:unset;box-sizing:border-box;position:relative;overflow:hidden;width:100%;display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:12px;min-height:58px;padding:8px 12px 8px 8px;border-radius:16px;cursor:pointer;-webkit-tap-highlight-color:transparent;background:linear-gradient(180deg,#18221d,#101712);box-shadow:inset 0 0 0 1.5px #ffffff1f,0 6px 18px #0006;transition:box-shadow .25s,background .25s,transform .12s}
+.seq-chave:active{transform:scale(.98)}
+.seq-chave:focus-visible{outline:2px solid #fff;outline-offset:3px}
+.seq-chave.ligado{background:linear-gradient(180deg,#1b3a2a,#11241a);box-shadow:inset 0 0 0 1.5px var(--seq),0 0 22px color-mix(in srgb,var(--seq),transparent 55%),0 6px 18px #0006}
+/* o brilho que passa pela chave ligada */
+.seq-chave.ligado::before{content:'';position:absolute;inset:0;background:linear-gradient(100deg,transparent 30%,#ffffff1c 48%,transparent 66%);translate:-100% 0;animation:seq-varre 2.4s ease-in-out infinite;pointer-events:none}
+@keyframes seq-varre{to{translate:100% 0}}
+
+.seq-icone{display:grid;place-items:center;width:42px;height:42px;border-radius:13px;color:#9fb3a3;background:#ffffff0d;box-shadow:inset 0 0 0 1px #ffffff1a;transition:color .25s,background .25s}
+.seq-chave.ligado .seq-icone{color:#0c140f;background:radial-gradient(circle at 35% 30%,#d9ffe6,var(--seq));box-shadow:0 0 14px color-mix(in srgb,var(--seq),transparent 40%)}
+.seq-chave.ligado .seq-icone svg{animation:seq-gira 1.8s linear infinite}
+@keyframes seq-gira{to{rotate:360deg}}
+
+.seq-texto{display:grid;gap:2px;min-width:0;text-align:left}
+.seq-texto b{font-size:13px;font-weight:950;letter-spacing:1.6px;color:#eaf5e6}
+.seq-texto small{font-size:11.5px;line-height:1.25;color:#9fb3a3}
+.seq-chave.ligado .seq-texto b{color:#d9ffe6;text-shadow:0 0 10px color-mix(in srgb,var(--seq),transparent 40%)}
+.seq-chave.ligado .seq-texto small{color:#b9e8c8}
+
+/* o interruptor */
+.seq-trilho{position:relative;flex:none;width:64px;height:32px;border-radius:999px;background:#05080a;box-shadow:inset 0 2px 6px #000b,inset 0 0 0 1.5px #ffffff22;transition:background .25s,box-shadow .25s}
+.seq-trilho i{position:absolute;top:50%;translate:0 -50%;right:9px;font-style:normal;font-size:10px;font-weight:950;letter-spacing:.8px;color:#6f8273;transition:right .25s,left .25s,color .25s}
+.seq-bolinha{position:absolute;top:3px;left:3px;width:26px;height:26px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,#b9c4bc);box-shadow:0 2px 6px #000a;transition:left .28s cubic-bezier(.3,1.5,.5,1),background .25s}
+.seq-chave.ligado .seq-trilho{background:linear-gradient(90deg,#2a8a5a,var(--seq));box-shadow:inset 0 2px 6px #0006,0 0 12px color-mix(in srgb,var(--seq),transparent 45%)}
+.seq-chave.ligado .seq-trilho i{right:auto;left:10px;color:#05200f}
+.seq-chave.ligado .seq-bolinha{left:35px;background:radial-gradient(circle at 35% 30%,#fff,#e2ffe9)}
+
+/* ---------- "Próxima luta" contando quando a chave está ligada ---------- */
+.rs-cta .rs-contagem{position:absolute;inset:0;z-index:0;transform-origin:left;background:#ffffff59;animation:rs-contagem var(--espera,4.5s) linear both;pointer-events:none}
+@keyframes rs-contagem{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.rs-cta .rs-segundos{display:grid;place-items:center;min-width:28px;height:28px;padding:0 6px;border-radius:999px;font-size:15px;background:#0c140f;color:#d9ffe6}
+
+/* ---------- Botão pequeno, nos controles da batalha ---------- */
+.arena-v2 .arena-controls .seq-controle{flex-direction:column;gap:1px;padding:0 4px}
+.arena-v2 .arena-controls .seq-controle b{font-size:10px;letter-spacing:1px}
+.arena-v2 .arena-controls .seq-controle.ligado{background:linear-gradient(180deg,#2a8a5a,#1b5e3d);border-color:#86e3a8;color:#eafff0;box-shadow:inset 0 1px #ffffff2a,0 0 14px #86e3a866}
+.arena-v2 .arena-controls .seq-controle.ligado svg{animation:seq-gira 1.8s linear infinite}
+
+@media (prefers-reduced-motion:reduce){
+  .seq-chave.ligado::before,.seq-chave.ligado .seq-icone svg,.arena-v2 .arena-controls .seq-controle.ligado svg{animation:none}
+  .rs-cta .rs-contagem{animation:none;transform:scaleX(1);opacity:.4}
+}
+.reduce-motion .seq-chave.ligado::before,.reduce-motion .seq-chave.ligado .seq-icone svg,.reduce-motion .arena-v2 .arena-controls .seq-controle.ligado svg{animation:none}
+
+/* no resultado, a chave ocupa a linha de cima do rodapé fixo */
+.rs-acoes:has(.seq-chave){flex-wrap:wrap}
+.rs-acoes .seq-chave{flex:1 1 100%}

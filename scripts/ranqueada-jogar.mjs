@@ -53,8 +53,8 @@ const AVANCAR = /Próximo confronto|Continuar|Seguir|Próxima luta|Ver resultado
 while (!validado && Date.now() - inicio < 15 * 60 * 1000) {
   await p.waitForTimeout(2500);
   /* Automático e 2x, sempre que a batalha os oferecer desligados. */
-  const auto = p.locator('.auto-label input[type=checkbox]');
-  if (await auto.count() && !(await auto.first().isChecked())) await auto.first().check().catch(() => {});
+  const auto = p.locator('[role=switch].seq-controle[aria-checked=false], [role=switch].seq-chave[aria-checked=false]');
+  if (await auto.count()) await auto.first().click().catch(() => {});
   const x2 = p.getByRole('button', { name: /^2x$|^2×$/ });
   if (await x2.count()) await x2.first().click().catch(() => {});
   const avancar = p.getByRole('button', { name: AVANCAR });

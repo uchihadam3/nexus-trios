@@ -11,6 +11,7 @@ import { avaliarAjuda,avaliarDirecao,NOMES_DAS_NOTAS,type AvaliacaoDaAjuda } fro
 import { mensagemDoTop3,type ResultadoTop3 } from '../lib/top3';
 import { battleAudio } from '../lib/audio';
 import { PRIORIDADE } from '../audio/cues';
+import { ChaveDoAuto,ESPERA_DA_PROXIMA_MS } from '../components/ChaveDoAuto';
 
 /*
  * A tela depois de cada luta (remake).
@@ -76,6 +77,16 @@ export function ResultScreen({run,onNext,onRestart,onAbandon,onHome,onRanking,on
   const antes=jornada(run.index-1),total=jornada(run.index);
   const recordeAntes=atual.recordeAntes??0,novoRecorde=total>0&&total>recordeAntes;
   const vitorias=resumos.filter(s=>s.won).length;
+
+  /* Lutas seguidas ligada: "Próxima luta" conta os segundos até a próxima começar sozinha (o tempo é o do App). */
+  const vaiSozinha=auto&&won&&!champion;
+  const [contando,setContando]=useState<{desde:number;faltam:number}|null>(null);
+  useEffect(()=>{
+    if(!vaiSozinha){setContando(null);return;}
+    const desde=performance.now(),conta=()=>setContando({desde,faltam:Math.max(1,Math.ceil((ESPERA_DA_PROXIMA_MS-(performance.now()-desde))/1000))});
+    conta();const id=window.setInterval(conta,250);
+    return()=>clearInterval(id);
+  },[vaiSozinha]);
 
   // cada parcela da luta com o seu ícone (a conta vem de src/engine/pontos.ts, a mesma do ranking)
   const ICONE:Record<string,ReactNode>={dano:<Swords size={15}/>,nocautes:<Skull size={15}/>,apoio:<Shield size={15}/>,jogadas:<Zap size={15}/>,viradas:<TrendingUp size={15}/>,vitoria:<Trophy size={15}/>,efeitos:<Sparkles size={15}/>,vida:<HeartPulse size={15}/>,ajuda:<Lightbulb size={15}/>};
@@ -179,11 +190,11 @@ export function ResultScreen({run,onNext,onRestart,onAbandon,onHome,onRanking,on
       {onRanking&&<button className="text-button" onClick={onRanking}>Ver ranking →</button>}</div>}
 
     {proximo&&<div className="rs-proximo"><span>PRÓXIMA LUTA<b>{proximo.name}</b></span><div>{proximo.team.map(id=><Portrait key={id} character={byId[id]} className="tiny"/>)}</div></div>}
-    {won&&!champion&&<label className="auto-label rs-auto"><input type="checkbox" checked={auto} onChange={e=>onAuto(e.target.checked)}/>{auto?'Próxima luta em instantes':'Avançar sozinho entre as lutas'}</label>}
     {fimDaJornada&&!run.ranked&&<div className="rs-ranqueada fora" role="status"><strong>FORA DO RANKING</strong><span>Esta jornada foi jogada sem a conta conectada (ou sem internet ao começar), então não foi para o ranking. Entre na sua conta antes de jogar para as próximas valerem.</span>{onRanking&&<button className="text-button" onClick={onRanking}>Ver o ranking →</button>}</div>}
 
     <footer className="rs-acoes">
-      {won&&!champion?<button className="rs-cta" onClick={onNext}><Fx nome="brilho" cor="#ffffff" ms={2600} laco className="rs-brilho"/><span>Próxima luta</span><ArrowRight size={20}/></button>
+      {won&&!champion&&<ChaveDoAuto ligado={auto} onChange={onAuto}/>}
+      {won&&!champion?<button className="rs-cta" onClick={onNext}><Fx nome="brilho" cor="#ffffff" ms={2600} laco className="rs-brilho"/>{contando&&<i key={contando.desde} className="rs-contagem" style={{'--espera':`${ESPERA_DA_PROXIMA_MS}ms`} as CSSProperties}/>}<span>{contando?'Próxima luta em':'Próxima luta'}</span>{contando?<b className="rs-segundos">{contando.faltam}</b>:<ArrowRight size={20}/>}</button>
         :<button className="rs-cta" onClick={onRestart}><Fx nome="brilho" cor="#ffffff" ms={2600} laco className="rs-brilho"/><span>Jogar de novo</span><RotateCcw size={19}/></button>}
       <button className="secondary rs-icone-botao" onClick={onHome} aria-label="Início" title="Início"><Home size={19}/></button>
       {won&&!champion&&<button className="secondary rs-icone-botao rs-desistir" onClick={onAbandon} aria-label="Desistir da jornada" title="Desistir da jornada"><LogOut size={18}/></button>}

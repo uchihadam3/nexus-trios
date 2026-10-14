@@ -10,6 +10,7 @@ import { RajadaDaUnica } from '../components/RajadaDaUnica';
 import { EsferaQueCresce } from '../components/EsferaQueCresce';
 import { EntregaDeApoio } from '../components/EntregaDeApoio';
 import { AuxIcon } from '../components/Icon';
+import { BotaoAutoDaBatalha } from '../components/ChaveDoAuto';
 import type { Battle, ComboAtivo, Side } from '../engine/types';
 import type { Settings } from '../lib/storage';
 import type { Beat } from '../presentation/director';
@@ -137,12 +138,13 @@ export function BattleScreen({battle,beat,index,name,settings,paused,onPause,onA
     <footer className="arena-controls">
       <button className={`control-main ${paused?'is-paused':''}`} onClick={onPause}>{paused?<Play size={18}/>:<Pause size={18}/>}<span>{paused?'Continuar':'Pausar'}</span></button>
       <button className={`control ${settings.speed===2?'selected':''}`} aria-label={`Velocidade ${settings.speed} vezes`} onClick={()=>onSettings({...settings,speed:settings.speed===1?2:1})}><FastForward size={18}/><b>{settings.speed}×</b></button>
+      <BotaoAutoDaBatalha ligado={settings.auto} onChange={auto=>onSettings({...settings,auto})}/>
       <button className="control sound-button" aria-label={settings.volume?'Silenciar':'Ativar som'} onClick={()=>onSettings({...settings,volume:settings.volume?0:P.audio.master})}>{settings.volume?<Volume2 size={19}/>:<VolumeX size={19}/>}</button>
       <button className={`control mixer-button ${mixer?'selected':''}`} aria-label="Ajustes da batalha" aria-expanded={mixer} onClick={()=>setMixer(!mixer)}><SlidersHorizontal size={18}/></button>
       <button className="control control-danger abandon-battle" onClick={onAbandon} aria-label="Desistir da jornada"><LogOut size={17}/><span>Desistir</span></button>
     </footer>
     {historyOpen&&<aside className="battle-history"><div><strong><AuxIcon id="history" size={18}/> Momentos importantes</strong><button aria-label="Fechar histórico" onClick={()=>setHistoryOpen(false)}>×</button></div>{recent.length?recent.map(e=><p key={e.id}><ComTermos texto={historyText(e)}/></p>):<p>A luta ainda não teve momentos decisivos.</p>}</aside>}
-    {mixer&&<div className="battle-mixer">{(['musicVolume','effectsVolume'] as const).map(key=><label key={key}>{key==='musicVolume'?'Música':'Efeitos'}<input type="range" min="0" max="100" value={settings[key]} onChange={e=>onSettings({...settings,[key]:Number(e.target.value)})}/></label>)}<label className="auto-label"><input type="checkbox" checked={settings.auto} onChange={e=>onSettings({...settings,auto:e.target.checked})}/>Próximo confronto automático</label></div>}
+    {mixer&&<div className="battle-mixer">{(['musicVolume','effectsVolume'] as const).map(key=><label key={key}>{key==='musicVolume'?'Música':'Efeitos'}<input type="range" min="0" max="100" value={settings[key]} onChange={e=>onSettings({...settings,[key]:Number(e.target.value)})}/></label>)}</div>}
     {combosAbertos&&battle.combos&&<aside className="battle-history battle-combos" aria-label="Combos da luta">
       <div><strong><Link2 size={18}/> {fichaDoCombo?fichaDoCombo.nome:'Combos da luta'}</strong><button aria-label="Fechar combos" onClick={()=>{setCombosAbertos(false);setFichaDoCombo(null);}}>×</button></div>
       {fichaDoCombo?<><button type="button" className="cb-voltar" onClick={()=>setFichaDoCombo(null)}>‹ Voltar para os combos</button><FichaDoCombo combo={fichaDoCombo}/></>:<>

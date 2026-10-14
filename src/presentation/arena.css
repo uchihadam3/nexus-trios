@@ -253,7 +253,7 @@
 .arena-v2 .unit .status-pop,.arena-v2 .unit .discovery-pop{z-index:8;top:auto;bottom:-6px;max-width:calc(var(--medal) + 40px)}
 
 /* ---------- Controles ---------- */
-.arena-v2 .arena-controls{position:relative;z-index:8;display:grid;grid-template-columns:minmax(0,1.55fr) repeat(3,minmax(0,1fr)) minmax(0,1.3fr);gap:6px;padding:6px 10px 8px;background:linear-gradient(0deg,#05080cee,#05080c00)}
+.arena-v2 .arena-controls{position:relative;z-index:8;display:grid;grid-template-columns:minmax(0,1.55fr) repeat(4,minmax(0,1fr)) minmax(0,1.3fr);gap:6px;padding:6px 10px 8px;background:linear-gradient(0deg,#05080cee,#05080c00)}
 .arena-v2 .arena-controls button{width:100%;height:46px;min-width:0;margin:0;display:flex;align-items:center;justify-content:center;gap:6px;padding:0 6px;border-radius:13px;border:1px solid #ffffff1c;background:#ffffff0b;color:#e3ece6;font-size:12.5px;font-weight:800;box-shadow:inset 0 1px #ffffff14}
 .arena-v2 .arena-controls button.selected{background:#f4d47e22;border-color:#f4d47e88;color:#ffe9b0}
 .arena-v2 .arena-controls .control-main{background:linear-gradient(180deg,#2a7f6e,#1a5a4e);border-color:#5fd8bd88;color:#f0fff9}
@@ -272,7 +272,7 @@
   .arena-v2 .hud-advantage-labels{font-size:6.5px;letter-spacing:.8px;gap:4px}
   .arena-v2 .hud-advantage-labels strong{font-size:8.5px}
   .arena-v2 .arena-controls .control-danger span{display:none}
-  .arena-v2 .arena-controls{grid-template-columns:minmax(0,1.7fr) repeat(4,minmax(0,1fr))}
+  .arena-v2 .arena-controls{grid-template-columns:minmax(0,1.7fr) repeat(5,minmax(0,1fr))}
   .arena-v2 .status-line{padding-left:11px}
 }
 
@@ -310,7 +310,7 @@
   .arena-v2 .combat-caption{min-width:0;max-width:min(19vw,300px);padding:6px 9px}
   .arena-v2 .combat-caption strong{font-size:clamp(10px,1.3vw,14px)}
   .arena-v2 .unit .fighter-name{-webkit-line-clamp:1;white-space:nowrap;display:block;text-overflow:ellipsis}
-  .arena-v2 .arena-controls{grid-template-columns:minmax(0,1.6fr) repeat(3,minmax(0,1fr)) minmax(0,1.3fr);max-width:620px;width:100%;margin:0 auto;padding:4px 12px 6px}
+  .arena-v2 .arena-controls{grid-template-columns:minmax(0,1.6fr) repeat(4,minmax(0,1fr)) minmax(0,1.3fr);max-width:680px;width:100%;margin:0 auto;padding:4px 12px 6px}
   .arena-v2 .arena-controls button{height:44px}
 }
 
@@ -475,7 +475,8 @@
    ela desliza pelo contorno para mais perto do alto (rivais) ou do pé (seu trio) — encostada no anel, sem cobrir o rosto */
 @media (orientation:portrait){
   .unit[data-slot="0"] .unica-bolinha{left:calc(50% - var(--raio) * .7 - var(--ub) / 2)}
-  .side-enemy[data-slot="0"] .unica-bolinha{top:calc(50% - var(--raio) * .71 - var(--ub) / 2)}
+  /* a do rival fica abaixo da barra de Vida, encostada no anel e sem sair da beirada da tela */
+  .side-enemy[data-slot="0"] .unica-bolinha{left:calc(50% - var(--raio) * .66 - var(--ub) / 2);top:calc(50% - var(--raio) * .58 - var(--ub) / 2)}
   .side-player[data-slot="0"] .unica-bolinha{top:calc(50% + var(--raio) * .71 - var(--ub) / 2)}
 }
 .unica-bolinha .ub-anel{position:absolute;inset:-1px;width:calc(100% + 2px);height:calc(100% + 2px);transform:rotate(-90deg)}
