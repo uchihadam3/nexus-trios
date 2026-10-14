@@ -114,12 +114,13 @@ export const LOTE8: Record<string, Unica> = {
   },
   superman: {
     nome: 'Sopro congelante',
-    texto: 'A cada 12 s, Superman usa o Sopro congelante: todos os rivais perdem 30% da barra do Próximo ataque, e todo o trio de Superman deixa de estar Queimando.',
+    texto: 'A cada 12 s, Superman usa o Sopro congelante no rival que está mais perto de atacar: esse rival fica Congelado (não age, e o próximo golpe quebra o gelo com +10% de dano) por 1 s. O sopro também apaga o fogo do trio de Superman: quem estava Queimando para de queimar.',
     ganchos: {
       passo(m, b, f, dt) {
         if (!relogio(f, 'sopro', dt, 12, 6)) return;
-        m.aviso(b, f, 'Sopro congelante', f);
-        for (const r of m.rivais(b, f)) r.action *= 0.7;
+        const alvo = [...m.rivais(b, f)].sort((x, y) => y.action - x.action)[0];
+        m.aviso(b, f, 'Sopro congelante', alvo ?? f);
+        if (alvo) m.efeitos(b, f, [alvo], [st('frozen', 0.1, 1)]);
         for (const a of m.aliados(b, f)) a.statuses = a.statuses.filter((s) => s.id !== 'burning');
       },
     },
