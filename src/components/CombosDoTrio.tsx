@@ -114,6 +114,14 @@ export const ARTES_DO_COMBO: Record<string, { fundo: string; selo: string }> = {
   'trio-turbo': { fundo: '/assets/combos/trio-turbo-bg.webp', selo: '/assets/combos/trio-turbo-selo.webp' },
   'trio-ataque-total': { fundo: '/assets/combos/trio-ataque-total-bg.webp', selo: '/assets/combos/trio-ataque-total-selo.webp' },
   'trio-muralha': { fundo: '/assets/combos/trio-muralha-bg.webp', selo: '/assets/combos/trio-muralha-selo.webp' },
+  'trio-imortais': { fundo: '/assets/combos/trio-imortais-bg.webp', selo: '/assets/combos/trio-imortais-selo.webp' },
+  'trio-banquete': { fundo: '/assets/combos/trio-banquete-bg.webp', selo: '/assets/combos/trio-banquete-selo.webp' },
+  'trio-era-do-gelo': { fundo: '/assets/combos/trio-era-do-gelo-bg.webp', selo: '/assets/combos/trio-era-do-gelo-selo.webp' },
+  'trio-templo': { fundo: '/assets/combos/trio-templo-bg.webp', selo: '/assets/combos/trio-templo-selo.webp' },
+  'trio-explosao': { fundo: '/assets/combos/trio-explosao-bg.webp', selo: '/assets/combos/trio-explosao-selo.webp' },
+  'trio-relogio': { fundo: '/assets/combos/trio-relogio-bg.webp', selo: '/assets/combos/trio-relogio-selo.webp' },
+  'universo-2': { fundo: '/assets/combos/universo-2-bg.webp', selo: '/assets/combos/universo-2-selo.webp' },
+  'universo-3': { fundo: '/assets/combos/universo-3-bg.webp', selo: '/assets/combos/universo-3-selo.webp' },
 };
 const ehTrio = (id: string) => id.startsWith('trio-');
 const visual = (id: string) => VISUAL_DO_COMBO[id] ?? (id.startsWith('lenda-') ? { icone: Crown, cor: '#ffd36b' } : { icone: Link2, cor: '#c8f560' });
