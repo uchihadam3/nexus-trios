@@ -5375,6 +5375,48 @@
   "laco": false,
   "bytes": 36548
  },
+ "corte_da_agua_tanjiro": {
+  "descricao": "básico do Tanjiro: o corte da Respiração da Água com a onda",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 42412
+ },
+ "corte_da_yamato": {
+  "descricao": "básico do Vergil: o saque da Yamato e os cortes no ar",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 42826
+ },
+ "corte_da_zangetsu": {
+  "descricao": "básico do Ichigo: a Zangetsu larga e a meia-lua escura",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 44584
+ },
  "corte_de_agua": {
   "descricao": "Rimuru · a lâmina de água e os respingos",
   "quadros": 12,
@@ -5402,6 +5444,20 @@
   ],
   "laco": false,
   "bytes": 40710
+ },
+ "corte_de_prata_blade": {
+  "descricao": "básico do Blade: a espada de prata em X e o sangue",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 28340
  },
  "corte_decisivo": {
   "descricao": "Samurai Jack · o corte num instante",
@@ -8174,6 +8230,20 @@
   ],
   "laco": true,
   "bytes": 21420
+ },
+ "espelho_partido_aizen": {
+  "descricao": "básico do Aizen: o espelho que trinca e o corte por trás da ilusão",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 54916
  },
  "espera_alucardcv": {
   "descricao": "Alucard caído: a névoa vermelha e os morcegos em roda (laço)",
@@ -14545,6 +14615,20 @@
   "laco": false,
   "bytes": 42734
  },
+ "lamina_hf_raiden": {
+  "descricao": "básico do Raiden: a lâmina de alta frequência e os raios",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 28522
+ },
  "lamina_oculta": {
   "descricao": "Ezio: a lâmina salta do pulso e perfura, ondas da visão de águia",
   "quadros": 12,
@@ -14642,6 +14726,20 @@
   ],
   "laco": false,
   "bytes": 27444
+ },
+ "laminas_giratorias_levi": {
+  "descricao": "básico do Levi: o cabo de manobra e as duas lâminas girando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 27408
  },
  "laminas_kratos": {
   "descricao": "Kratos · as Lâminas do Caos nas correntes",
@@ -16084,6 +16182,20 @@
   ],
   "laco": false,
   "bytes": 57224
+ },
+ "masamune_sephiroth": {
+  "descricao": "básico do Sephiroth: a Masamune comprida e as penas negras",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 25464
  },
  "mascara_hollow": {
   "descricao": "Ichigo · a máscara Hollow e a pressão espiritual",

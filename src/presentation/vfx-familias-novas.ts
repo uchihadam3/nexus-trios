@@ -2012,6 +2012,14 @@ export const FAMILIAS_NOVAS = {
   pancada_furiosa_donald: n({ nome: 'Moinho furioso', grupo: 'físico', aponta: true, impacto: 'pancada_furiosa_donald', escala: 2.0, tempo: 1.0, cor: '#5aa8ff', tinta: 'fixa' }),
   martelinho_do_jerry: n({ nome: 'Martelinho', grupo: 'físico', aponta: true, impacto: 'martelinho_do_jerry', escala: 2.0, tempo: 1.0, cor: '#e8b07a', tinta: 'fixa' }),
   soco_de_borracha_buu: n({ nome: 'Braço de borracha', grupo: 'físico', aponta: true, impacto: 'soco_de_borracha_buu', escala: 2.0, tempo: 1.0, cor: '#ff9ac8', tinta: 'fixa' }),
+  corte_da_agua_tanjiro: n({ nome: 'Corte da Respiração da Água', grupo: 'corte', aponta: true, impacto: 'corte_da_agua_tanjiro', escala: 2.0, tempo: 1.0, cor: '#5ab4ff', tinta: 'fixa' }),
+  corte_da_zangetsu: n({ nome: 'Zangetsu', grupo: 'corte', aponta: true, impacto: 'corte_da_zangetsu', escala: 2.0, tempo: 1.0, cor: '#ff4a5a', tinta: 'fixa' }),
+  espelho_partido_aizen: n({ nome: 'Espelho partido', grupo: 'corte', aponta: true, impacto: 'espelho_partido_aizen', escala: 2.0, tempo: 1.0, cor: '#c8a0ff', tinta: 'fixa' }),
+  laminas_giratorias_levi: n({ nome: 'Lâminas giratórias', grupo: 'corte', aponta: true, impacto: 'laminas_giratorias_levi', escala: 2.0, tempo: 1.0, cor: '#cfe0ee', tinta: 'fixa' }),
+  corte_de_prata_blade: n({ nome: 'Espada de prata', grupo: 'corte', aponta: true, impacto: 'corte_de_prata_blade', escala: 2.0, tempo: 1.0, cor: '#e04048', tinta: 'fixa' }),
+  masamune_sephiroth: n({ nome: 'Masamune', grupo: 'corte', aponta: true, impacto: 'masamune_sephiroth', escala: 2.0, tempo: 1.0, cor: '#b8c8ff', tinta: 'fixa' }),
+  corte_da_yamato: n({ nome: 'Saque da Yamato', grupo: 'corte', aponta: true, impacto: 'corte_da_yamato', escala: 2.0, tempo: 1.0, cor: '#6a9aff', tinta: 'fixa' }),
+  lamina_hf_raiden: n({ nome: 'Lâmina de alta frequência', grupo: 'corte', aponta: true, impacto: 'lamina_hf_raiden', escala: 2.0, tempo: 1.0, cor: '#ff5a4a', tinta: 'fixa' }),
 } as const satisfies Record<string, Familia>;
 
 export type FamiliaNova = keyof typeof FAMILIAS_NOVAS;
@@ -2037,7 +2045,8 @@ export const NOVAS_NO_ALVO = new Set<FamiliaNova>(['ressurreicao', 'renascer', '
   'soquinho_estrelado_kirby', 'peteleco_divino', 'pancada_psiquica_mewtwo', 'punho_da_correnteza', 'soco_de_aco_genos', 'soco_de_rua_yusuke', 'soco_omega', 'soco_de_necroplasma',
   'soco_do_invencivel', 'soco_de_sai_raphael', 'tapa_do_picapau', 'soco_do_omnitrix', 'soco_de_eternia', 'soco_da_ancora_popeye', 'soquinho_de_esponja', 'soco_decepticon',
   'soco_superpoderosa', 'soco_musical_mickey', 'golpe_de_carate_buzz', 'soco_do_xerife', 'soco_de_rampa_de_gelo', 'palma_de_fogo_iroh', 'soco_de_laminas_destruidor', 'soco_de_hoquei',
-  'soco_da_garra_thundera', 'tapinha_do_stewie', 'soco_do_robo_mojo', 'soco_fantasma_danny', 'soco_do_satsui', 'pancada_furiosa_donald', 'martelinho_do_jerry', 'soco_de_borracha_buu']);
+  'soco_da_garra_thundera', 'tapinha_do_stewie', 'soco_do_robo_mojo', 'soco_fantasma_danny', 'soco_do_satsui', 'pancada_furiosa_donald', 'martelinho_do_jerry', 'soco_de_borracha_buu',
+  'corte_da_agua_tanjiro', 'corte_da_zangetsu', 'espelho_partido_aizen', 'laminas_giratorias_levi', 'corte_de_prata_blade', 'masamune_sephiroth', 'corte_da_yamato', 'lamina_hf_raiden']);
 
 /** Bons para o ataque básico do personagem (quando ele já usa a família numa habilidade). */
 export const NOVAS_DE_BASICO = new Set<FamiliaNova>(['garras', 'chicote', 'bastao', 'mordida', 'tentaculos', 'florete',
