@@ -10,6 +10,8 @@ import { HelpScreen } from './screens/ComoJogar';
 import { SettingsScreen } from './screens/Ajustes';
 import { LivroDeCombos } from './screens/LivroDeCombos';
 import { CharacterModal } from './components/CharacterModal';
+import { CompartilharJogo } from './components/CompartilharJogo';
+import { BoasVindasDoConvite } from './components/BoasVindasDoConvite';
 import { Cabecalho,ToqueGlobal } from './components/Casca';
 import { byId,characters } from './data/characters';
 import { createBattle } from './engine/battle';
@@ -62,7 +64,7 @@ const RECUPERACAO_POR_QUADRO=90;
 export default function App(){
   const [screen,setScreen]=useState<Screen>(import.meta.env.DEV&&location.hash==='#debug'?'debug':'home');
   const [settings,setSettings]=useState(loadSettings),[profile,setProfile]=useState(loadProfile),[run,setRun]=useState<Run|null>(loadRun);
-  const [paused,setPaused]=useState(false),[details,setDetails]=useState<string|null>(null),[menu,setMenu]=useState(false),[installHelp,setInstallHelp]=useState(false),[confirmNew,setConfirmNew]=useState(false),[confirmAbandon,setConfirmAbandon]=useState(false);
+  const [paused,setPaused]=useState(false),[details,setDetails]=useState<string|null>(null),[menu,setMenu]=useState(false),[installHelp,setInstallHelp]=useState(false),[compartilhar,setCompartilhar]=useState(false),[convite,setConvite]=useState(()=>typeof location!=='undefined'&&new URLSearchParams(location.search).has('convite')&&!matchMedia('(display-mode: standalone)').matches),[confirmNew,setConfirmNew]=useState(false),[confirmAbandon,setConfirmAbandon]=useState(false);
   const [onlineNotice,setOnlineNotice]=useState(''),[acaoDoAviso,setAcaoDoAviso]=useState<'nome'|'atualizar'|'tentar'|null>(null),[nameDialog,setNameDialog]=useState(false),[draftHandle,setDraftHandle]=useState(''),[pendingStart,setPendingStart]=useState(false),[onlineBusy,setOnlineBusy]=useState(false);
   const submission=useRef(false);
   const [installEvent,setInstallEvent]=useState<InstallEvent|null>(null),[installed,setInstalled]=useState(()=>matchMedia('(display-mode: standalone)').matches);
@@ -436,6 +438,9 @@ export default function App(){
   useEffect(()=>{const ouve=()=>{const r=runRef.current,emJornada=telaAtual.current==='game'&&!!r&&r.stage!=='draft'&&!(r.stage==='result'&&(r.battle?.winner!=='player'||r.index>=9));if(emJornada)setVersaoNova(true);else location.reload();};window.addEventListener('nexus:versao-nova',ouve);return()=>window.removeEventListener('nexus:versao-nova',ouve);},[]);
   useEffect(()=>{battleAudio.setBattle(screen==='game'&&run?.stage==='battle'&&!paused&&!details&&!confirmNew&&!confirmAbandon,run?`${run.seed}-${run.index}`:undefined,faixaDaLuta(run?.index??0),run&&run.index<9?faixaDaLuta(run.index+1):undefined);return()=>battleAudio.setBattle(false);},[screen,run?.stage,run?.seed,run?.index,paused,details,confirmNew,confirmAbandon]);
   const install=async()=>{if(installEvent){await installEvent.prompt();const choice=await installEvent.userChoice;setInstallEvent(null);if(choice.outcome!=='accepted')setInstallHelp(true);}else setInstallHelp(true);};
+  /* o convite (src/components/BoasVindasDoConvite.tsx): instala pelo pedido do próprio celular e diz se deu certo */
+  const instalarDoConvite=async()=>{if(!installEvent)return false;await installEvent.prompt();const choice=await installEvent.userChoice;setInstallEvent(null);return choice.outcome==='accepted';};
+  const fecharConvite=()=>{setConvite(false);const url=new URL(location.href);url.searchParams.delete('convite');history.replaceState(history.state,'',url);};
   /*
    * A conta vive fora do React: o Supabase mantém a sessão no armazenamento
    * dele e avisa por evento. Aqui só se espelha o que ele diz, incluindo a
@@ -492,13 +497,14 @@ export default function App(){
 
   /* A porta de entrada: sem conta e sem nome público, o jogo não abre (pedido do jogador). */
   const etapaDoPortao:EtapaDoPortao|null=!onlineConfigured?null:!contaPronta?'carregando':!logado?'entrar':nomeDaConta?.id!==conta!.id?(erroDaConta?'erro':'carregando'):!nomeDaConta.handle?'nome':null;
-  if(etapaDoPortao)return <PortaoDaConta etapa={etapaDoPortao} autenticacao={autenticacao} conta={conta} profile={profile} conectado={onlineConfigured} google={googleConfigured} aoMudarPerfil={p=>{save('profile',p);setProfile(p);}} erro={erroDaConta} onTentar={()=>{if(conta)void buscaNome(conta);}} onNome={escolheNome}/>;
+  // quem chega pelo convite vê as boas-vindas por cima da entrada da conta (instalar ou jogar no navegador)
+  if(etapaDoPortao)return <><PortaoDaConta etapa={etapaDoPortao} autenticacao={autenticacao} conta={conta} profile={profile} conectado={onlineConfigured} google={googleConfigured} aoMudarPerfil={p=>{save('profile',p);setProfile(p);}} erro={erroDaConta} onTentar={()=>{if(conta)void buscaNome(conta);}} onNome={escolheNome}/>{convite&&<BoasVindasDoConvite podeInstalar={!!installEvent} onInstalar={instalarDoConvite} onClose={fecharConvite}/>}</>;
   const reset=()=>{resetStorage();setSettings(defaults);setProfile({journeys:0,victories:0,best:0,wins:0,recordePontos:0,escalaDosPontos:ESCALA_DOS_PONTOS});setRun(null);runRef.current=null;navigate('home');};
   return <div onPointerDownCapture={()=>void battleAudio.unlock()} onPointerUpCapture={()=>void battleAudio.unlock()} onTouchEndCapture={()=>void battleAudio.unlock()} onClickCapture={()=>void battleAudio.unlock()} onKeyDownCapture={e=>{if(e.key==='Enter'||e.key===' ')void battleAudio.unlock();}} className={`app ${settings.reducedMotion?'reduce-motion':''} ${screen==='game'&&run?.stage==='battle'?'in-battle':''}`}>
     <ToqueGlobal/>
     <Cabecalho tela={screen} menu={menu} onMenu={setMenu} onNavigate={navigate} recorde={profile.recordePontos??0} apelido={profile.publicHandle} online={onlineConfigured} total={characters.length}/>
     <main key={`${screen}-${screen==='game'?run?.stage??'idle':'page'}`} className={screen==='game'&&run?.stage==='battle'?'main battle-main screen-enter':'main screen-enter'}>
-      {screen==='home'&&<Home profile={profile} run={run} conta={conta!==null&&conta.origem!=='convidado'} onPlay={requestNew} onContinue={()=>{if(run?.stage==='battle'&&run.battle){direction.current=directionFor(run);setPresentation({battle:direction.current.visible,beat:direction.current.active});}navigate('game');setPaused(run?.stage==='battle');}} onAbandon={()=>setConfirmAbandon(true)} onNavigate={navigate} onInstall={()=>void install()}/>}
+      {screen==='home'&&<Home profile={profile} run={run} conta={conta!==null&&conta.origem!=='convidado'} onPlay={requestNew} onContinue={()=>{if(run?.stage==='battle'&&run.battle){direction.current=directionFor(run);setPresentation({battle:direction.current.visible,beat:direction.current.active});}navigate('game');setPaused(run?.stage==='battle');}} onAbandon={()=>setConfirmAbandon(true)} onNavigate={navigate} onInstall={()=>void install()} onShare={()=>setCompartilhar(true)}/>}
       {screen==='characters'&&<CharactersScreen onDetails={setDetails}/>}
       {screen==='conquistas'&&<ConquistasScreen profile={profile} conta={conta!==null&&conta.origem!=='convidado'} onProfile={muda=>setProfile(p=>{const n=muda(p);if(n!==p)save('profile',n);return n;})} onRanking={()=>{setRankingInicial('conquistas');navigate('ranking');}} onDesafio={jogarDesafio}/>}
       {screen==='ranking'&&<RankingScreen dono={dono} inicial={rankingInicial} handle={profile.publicHandle} conta={conta!==null&&conta.origem!=='convidado'} onConta={()=>navigate('conta')} recorde={profile.recordePontos??0}/>}
@@ -523,6 +529,8 @@ export default function App(){
       {acaoDoAviso==='tentar'&&run?.stage==='draft'&&!run.ranked&&<button className="primary" onClick={()=>{setOnlineNotice('');setAcaoDoAviso(null);tentarDeNovo();}}><RotateCcw size={16}/>Tentar de novo</button>}
       <button className={acaoDoAviso?'secondary':'primary'} onClick={()=>{setOnlineNotice('');setAcaoDoAviso(null);}}>{acaoDoAviso?'Jogar assim mesmo':'Entendi'}</button></InfoDialog>}
     {confirmAbandon&&<InfoDialog title="Desistir desta jornada?" icone={<Flag/>} cor="#ff7a6b" onClose={()=>setConfirmAbandon(false)}><p>A jornada de agora some e você monta um trio novo. <b>Seu recorde fica salvo.</b></p><div className="result-actions"><button className="danger" onClick={startNew}>Desistir e começar outra <ArrowUpRight size={18}/></button><button className="secondary" onClick={()=>setConfirmAbandon(false)}>Continuar jornada</button></div></InfoDialog>}
+    {compartilhar&&<CompartilharJogo trio={profile.champion?.length?profile.champion:['goku','naruto','luffy']} onClose={()=>setCompartilhar(false)}/>}
+    {convite&&<BoasVindasDoConvite podeInstalar={!!installEvent} onInstalar={instalarDoConvite} onClose={fecharConvite}/>}
     {installHelp&&<InfoDialog title={installed?'O NEXUS já está instalado':'Leve seu trio no bolso'} icone={<Download/>} cor="#8fd3ff" onClose={()=>setInstallHelp(false)}><p>{installed?'Abra o jogo pelo ícone na tela inicial do aparelho.':<><b>Android:</b> menu do navegador → “Instalar aplicativo”.<br/><b>iPhone:</b> Compartilhar → “Adicionar à Tela de Início”.</>}</p><p>O progresso fica neste aparelho e o jogo abre mesmo sem internet.</p><button className="primary" onClick={()=>setInstallHelp(false)}>Entendi</button></InfoDialog>}
   </div>;
 }

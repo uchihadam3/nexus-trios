@@ -1,5 +1,6 @@
 import type { CSSProperties } from 'react';
-import { ArrowRight,Award,BookOpen,ChevronRight,Zap,Trophy,CircleHelp,Settings2,Download,Users,Crown,ShieldCheck,Play,LogOut } from 'lucide-react';
+import { ArrowRight,Award,BookOpen,ChevronRight,Zap,Trophy,CircleHelp,Settings2,Download,Users,Crown,ShieldCheck,Play,LogOut,Share2,MessageCircle,Instagram,Facebook } from 'lucide-react';
+import '../presentation/compartilhar.css';
 import { byId,characters } from '../data/characters';
 import { Portrait } from '../components/Portrait';
 import type { Profile, Run } from '../lib/storage';
@@ -17,12 +18,12 @@ import { TODOS_OS_COMBOS } from '../components/CombosDoTrio';
  * e mostra a luta e os pontos de agora. O resto do jogo fica num painel de
  * botões-ícone, como o menu de um jogo.
  */
-interface Props {profile:Profile;run:Run|null;conta:boolean;onPlay:()=>void;onContinue:()=>void;onAbandon:()=>void;onNavigate:(s:'characters'|'conquistas'|'combos'|'ranking'|'conta'|'help'|'settings')=>void;onInstall:()=>void}
+interface Props {profile:Profile;run:Run|null;conta:boolean;onPlay:()=>void;onContinue:()=>void;onAbandon:()=>void;onNavigate:(s:'characters'|'conquistas'|'combos'|'ranking'|'conta'|'help'|'settings')=>void;onInstall:()=>void;onShare:()=>void}
 
 const Fx=({nome,cor,ms,className}:{nome:string;cor:string;ms:number;className:string})=>
   <span aria-hidden className={`uifx uifx-laco ${className}`} style={{'--uifx-img':`url(/assets/ui/fx/${nome}.webp)`,'--uifx-cor':cor,'--uifx-dur':`${ms}ms`} as CSSProperties}/>;
 
-export function Home({profile,run,conta,onPlay,onContinue,onAbandon,onNavigate,onInstall}:Props){
+export function Home({profile,run,conta,onPlay,onContinue,onAbandon,onNavigate,onInstall,onShare}:Props){
   const terminal=run?.stage==='result'&&(run.battle?.winner!=='player'||run.index===9);
   const wonCurrent=run?.stage==='result'&&run.battle?.winner==='player';
   const completed=run?run.index+(wonCurrent?1:0):0;
@@ -80,6 +81,13 @@ export function Home({profile,run,conta,onPlay,onContinue,onAbandon,onNavigate,o
         <span className="hv-cq-icone"><BookOpen size={22}/>{novos>0&&<em>{novos}</em>}</span>
         <span className="hv-cq-texto"><b>LIVRO DE COMBOS</b><small><strong>{achados.length}</strong>/{TODOS_OS_COMBOS.length} descobertos</small><span className="hv-cq-barra"><i style={{width:`${100*achados.length/TODOS_OS_COMBOS.length}%`}}/></span></span>
       </button>;})()}
+    {/* Chamar amigos (src/components/CompartilharJogo.tsx): manda o convite pelo WhatsApp, Instagram, Facebook… */}
+    <button className="hv-conquistas-faixa hv-convite-faixa" onClick={onShare} aria-label="Chamar amigos para jogar">
+      <span className="hv-cq-icone"><Share2 size={22}/></span>
+      <span className="hv-cq-texto"><b>CHAMAR AMIGOS</b><small>Mande o jogo pelo WhatsApp, Instagram, Facebook…</small></span>
+      <span className="hv-cq-ultimos" aria-hidden="true"><span style={{'--cor':'#25d366'} as CSSProperties}><MessageCircle size={15}/></span><span className="ig"><Instagram size={15}/></span><span style={{'--cor':'#1877f2'} as CSSProperties}><Facebook size={15}/></span></span>
+      <ChevronRight size={20}/>
+    </button>
     </div>
 
     <nav className="hv-menu" aria-label="Menu do jogo">

@@ -1,0 +1,52 @@
+/* Chamar amigos e as boas-vindas do convite (src/components/CompartilharJogo.tsx e BoasVindasDoConvite.tsx) */
+.cvt-sheet{max-height:calc(100dvh - 24px);overflow-y:auto}
+.cvt-cartao{position:relative;display:grid;justify-items:center;gap:2px;margin:-6px auto 12px;padding:14px 12px 12px;width:min(300px,100%);border-radius:20px;overflow:hidden;background:radial-gradient(ellipse at 50% 30%,#2b3d1f,#0d150f 70%);box-shadow:inset 0 0 0 1px #c8f56055,0 10px 30px #0008;animation:cvt-entra .5s cubic-bezier(.2,.9,.3,1.2) both}
+.cvt-raios{position:absolute;inset:-40%;background:repeating-conic-gradient(from 0deg,#c8f56014 0 8deg,transparent 8deg 22deg);animation:cvt-gira 18s linear infinite;pointer-events:none}
+.cvt-trio{position:relative;display:flex;justify-content:center;margin-bottom:6px}
+.cvt-trio>span{width:64px;height:64px;margin:0 -6px;border-radius:50%;overflow:hidden;box-shadow:0 0 0 3px #0d150f,0 0 0 5px var(--character),0 6px 14px #000a;animation:cvt-pula .55s cubic-bezier(.2,.9,.3,1.4) both;animation-delay:calc(.12s + var(--i) * .09s)}
+.cvt-trio>span:nth-child(2){width:76px;height:76px;z-index:1;margin-top:-6px}
+.cvt-trio .portrait,.cvt-trio .portrait img{width:100%;height:100%;object-fit:cover}
+.cvt-logo{position:relative;display:flex;align-items:center;gap:6px;font-size:22px;font-weight:950;letter-spacing:3px;color:#c8f560;text-shadow:0 0 18px #c8f56088}
+.cvt-cartao small{position:relative;font-size:10px;letter-spacing:4px;color:#9fb397;font-weight:800}
+.cvt-grade{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0 10px}
+.cvt-destino{display:grid;justify-items:center;gap:6px;padding:12px 4px 10px;border:0;border-radius:16px;cursor:pointer;font:inherit;color:#eef5e8;background:#101a16;box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--cor),transparent 60%),0 4px 0 #050907;animation:cvt-pula .45s cubic-bezier(.2,.9,.3,1.3) both;animation-delay:calc(.2s + var(--i) * .05s);transition:transform .12s,box-shadow .12s}
+.cvt-destino:active{transform:translateY(3px);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--cor),transparent 40%),0 1px 0 #050907}
+.cvt-destino b{font-size:12.5px;font-weight:800}
+.cvt-icone{display:grid;place-items:center;width:52px;height:52px;border-radius:50%;color:#fff;background:radial-gradient(circle at 35% 30%,color-mix(in srgb,var(--cor),#fff 25%),var(--cor) 60%,color-mix(in srgb,var(--cor),#000 30%));box-shadow:0 0 18px color-mix(in srgb,var(--cor),transparent 50%)}
+.cvt-instagram .cvt-icone{background:radial-gradient(circle at 30% 110%,#fdf497 0,#fd5949 45%,#d6249f 60%,#285aeb 90%)}
+.cvt-copiar .cvt-icone{color:#0d150f}
+.cvt-mais{width:100%;display:flex;justify-content:center;align-items:center;gap:8px;margin-top:2px}
+.cvt-link{display:flex;align-items:center;gap:8px;width:100%;margin-top:10px;padding:10px 12px;border:0;border-radius:12px;cursor:pointer;font:inherit;font-size:12px;color:#c9d8c3;background:#ffffff0a;box-shadow:inset 0 0 0 1px #ffffff1a}
+.cvt-link span{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:left}
+.cvt-aviso{display:flex;align-items:center;justify-content:center;gap:6px;color:#c8f560!important;font-weight:800;animation:cvt-entra .3s ease-out both}
+.cvt-selo{display:inline-block;margin:0 0 6px;padding:4px 10px;border-radius:999px;font-size:10.5px;font-weight:900;letter-spacing:2px;color:#0d150f;background:#c8f560;box-shadow:0 0 16px #c8f56066}
+.cvt-pontos{list-style:none;margin:10px 0 14px;padding:0;display:grid;gap:8px;text-align:left}
+.cvt-pontos li{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:12px;font-size:13.5px;color:#c9d8c3;background:#ffffff08;box-shadow:inset 0 0 0 1px #ffffff12;animation:cvt-entra .4s ease-out both}
+.cvt-pontos li:nth-child(2){animation-delay:.08s}.cvt-pontos li:nth-child(3){animation-delay:.16s}
+.cvt-pontos li svg{flex:none;color:#c8f560}
+.cvt-pontos b{color:#fff}
+.cvt-instalar{width:100%;display:flex;align-items:center;justify-content:center;gap:12px;padding:14px 16px;font-size:16px}
+.cvt-instalar span{display:grid;text-align:left;line-height:1.2}
+.cvt-instalar small{font-size:11.5px;font-weight:600;opacity:.75}
+.cvt-navegador{width:100%;display:flex;align-items:center;justify-content:center;gap:8px;margin-top:10px}
+.cvt-passos{padding:12px 14px;border-radius:14px;text-align:left;background:#c8f56012;box-shadow:inset 0 0 0 1px #c8f56044;animation:cvt-entra .35s ease-out both}
+.cvt-passos>b{display:flex;align-items:center;gap:6px;color:#c8f560}
+.cvt-passos p{margin:6px 0 0!important}
+.cvt-passos svg{vertical-align:-2px}
+/* a faixa da tela inicial */
+.hv-convite-faixa{--titulo:#5cf08f;background:radial-gradient(ellipse at 10% 50%,#25d36633,transparent 60%),linear-gradient(165deg,#0e2116,#07120b)}
+.hv-convite-faixa .hv-cq-icone{color:#06210f}
+.hv-convite-faixa .hv-cq-texto small{color:#a9cdb4}
+.hv-convite-faixa .hv-cq-ultimos>span{display:grid;place-items:center;color:#fff;background:var(--cor);box-shadow:0 0 0 2px #07120b,0 0 0 3.5px color-mix(in srgb,var(--cor),#fff 20%)}
+.hv-convite-faixa .hv-cq-ultimos>span.ig{background:radial-gradient(circle at 30% 110%,#fdf497 0,#fd5949 45%,#d6249f 60%,#285aeb 90%)}
+@keyframes cvt-entra{from{opacity:0;transform:translateY(10px) scale(.96)}to{opacity:1;transform:none}}
+@keyframes cvt-pula{from{opacity:0;transform:scale(.4)}to{opacity:1;transform:none}}
+@keyframes cvt-gira{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.cvt-cartao,.cvt-raios,.cvt-trio>span,.cvt-destino,.cvt-aviso,.cvt-pontos li,.cvt-passos{animation:none}}
+/* a faixa ocupa a largura toda embaixo de Conquistas e do Livro, com os ícones dos apps à direita */
+.hv-faixas .hv-conquistas-faixa.hv-convite-faixa{grid-column:1/-1;grid-template-columns:auto minmax(0,1fr) auto auto;padding:10px 12px}
+.hv-faixas .hv-conquistas-faixa.hv-convite-faixa .hv-cq-ultimos{display:flex}
+.hv-faixas .hv-conquistas-faixa.hv-convite-faixa>svg{display:block;color:var(--titulo)}
+.hv-convite-faixa .hv-cq-icone{animation:cvt-chama 2.4s ease-in-out infinite}
+@keyframes cvt-chama{0%,100%{transform:none}8%{transform:rotate(-12deg) scale(1.08)}16%{transform:rotate(10deg) scale(1.08)}24%{transform:none}}
+@media (prefers-reduced-motion:reduce){.hv-convite-faixa .hv-cq-icone{animation:none}}
