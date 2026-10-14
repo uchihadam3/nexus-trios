@@ -18,7 +18,8 @@ import type { Battle, Character, Fighter } from '../engine/types';
  * - Saitama fica sério depois de 4 golpes;
  * - Shadow tira os inibidores;
  * - Drácula vira névoa por 4 s;
- * - Guts veste a Armadura do Berserker nos 6 s finais.
+ * - Guts veste a Armadura do Berserker nos 6 s finais;
+ * - Zenitsu luta dormindo.
  */
 interface Forma { retrato: string; nome: string; cor: string }
 const DIR = '/assets/portraits/formas/';
@@ -43,6 +44,7 @@ const SAITAMA_SERIO: Forma = { retrato: `${DIR}saitama-serio.webp`, nome: 'Saita
 const SHADOW_SEM_INIBIDORES: Forma = { retrato: `${DIR}shadow-sem-inibidores.webp`, nome: 'Shadow sem inibidores', cor: '#ff3a4a' };
 const DRACULA_NEVOA: Forma = { retrato: `${DIR}dracula-nevoa.webp`, nome: 'Drácula em névoa', cor: '#c84a6a' };
 const GUTS_BERSERKER: Forma = { retrato: `${DIR}guts-berserker.webp`, nome: 'Guts, Armadura do Berserker', cor: '#ff2a2a' };
+const ZENITSU_DORMINDO: Forma = { retrato: `${DIR}zenitsu-dormindo.webp`, nome: 'Zenitsu dormindo', cor: '#ffd23a' };
 const FORMAS: Record<string, { de: (f: Fighter, agora: number) => Forma | null; todas: Forma[] }> = {
   gandalf: {
     de: (f) => (f.voltou && (f.u?.branco ?? 0) >= 1 ? FORMAS.gandalf!.todas[0]! : null),
@@ -77,6 +79,8 @@ const FORMAS: Record<string, { de: (f: Fighter, agora: number) => Forma | null; 
   dracula: { de: (f, agora) => ((f.u?.nevoa ?? 0) > agora ? DRACULA_NEVOA : null), todas: [DRACULA_NEVOA] },
   /* Guts veste a Armadura do Berserker nos 6 s em que fica de pé com 1 de Vida (src/engine/unicas.ts) */
   guts: { de: (f, agora) => ((f.u?.berserk ?? 0) > agora ? GUTS_BERSERKER : null), todas: [GUTS_BERSERKER] },
+  /* Zenitsu desmaia com menos de 65% da Vida e luta dormindo até o fim da luta (src/engine/unicas-lote7.ts) */
+  zenitsu: { de: (f) => (f.u?.desmaio ? ZENITSU_DORMINDO : null), todas: [ZENITSU_DORMINDO] },
 };
 
 /** A forma de agora do lutador, se ele trocou de forma. */

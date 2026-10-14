@@ -309,3 +309,21 @@ describe('Guts na Armadura do Berserker', () => {
     expect(viu).toBeGreaterThan(0);
   });
 });
+
+/* Zenitsu (pedido do jogador: "Zenitsu dormindo"): desmaiou, luta dormindo com o retrato novo até o fim da luta. */
+describe('Zenitsu dormindo', () => {
+  it('troca o retrato quando desmaia', () => {
+    let dormiu = 0;
+    for (let semente = 1; semente <= 20; semente++) {
+      const b = createBattle(['zenitsu', 'hinata', 'naruto'], ['goku', 'vegeta', 'hulk'], semente);
+      const z = b.fighters.find((f) => f.characterId === 'zenitsu')!;
+      for (let t = 0; t < 6000 && !b.finished; t++) {
+        stepBattle(b);
+        const dormindo = !!z.u?.desmaio;
+        if (dormindo) dormiu++;
+        expect(naFormaDeAgora(byId.zenitsu, z, b).portrait).toBe(dormindo ? '/assets/portraits/formas/zenitsu-dormindo.webp' : byId.zenitsu.portrait);
+      }
+    }
+    expect(dormiu).toBeGreaterThan(0);
+  });
+});
