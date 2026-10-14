@@ -5357,6 +5357,23 @@
    ],
    "bytes": 69040
   },
+  "chute-do-caos-shadow": {
+   "arquivo": "chute-do-caos-shadow.mp3",
+   "descricao": "básico de Shadow: o giro e o estalo do caos",
+   "versoes": [
+    0.0,
+    1.0861,
+    2.1537,
+    3.2965
+   ],
+   "duracoes": [
+    1.0061,
+    0.9876,
+    1.0628,
+    1.0412
+   ],
+   "bytes": 41658
+  },
   "chute-do-dragao": {
    "arquivo": "chute-do-dragao.mp3",
    "descricao": "básico de Liu Kang: chute voador e rugido de chamas",
@@ -5374,6 +5391,40 @@
    ],
    "bytes": 57547
   },
+  "chute-espinho-yor": {
+   "arquivo": "chute-espinho-yor.mp3",
+   "descricao": "básico de Yor: o chute e o estalo do salto",
+   "versoes": [
+    0.0,
+    1.1403,
+    2.2548,
+    3.3432
+   ],
+   "duracoes": [
+    1.0603,
+    1.0344,
+    1.0084,
+    0.9025
+   ],
+   "bytes": 38559
+  },
+  "chute-ghoul-kaneki": {
+   "arquivo": "chute-ghoul-kaneki.mp3",
+   "descricao": "básico de Kaneki: o chute pesado e a kagune",
+   "versoes": [
+    0.0,
+    1.1231,
+    2.2352,
+    3.2144
+   ],
+   "duracoes": [
+    1.0431,
+    1.0321,
+    0.8992,
+    1.1337
+   ],
+   "bytes": 32613
+  },
   "chute-relampago": {
    "arquivo": "chute-relampago.mp3",
    "descricao": "básico de Chun-Li: rajada de chutes muito rápidos e o último mais forte",
@@ -5390,6 +5441,23 @@
     1.066
    ],
    "bytes": 51397
+  },
+  "chute-relampago-chunli": {
+   "arquivo": "chute-relampago-chunli.mp3",
+   "descricao": "básico de Chun-Li: a metralhadora de chutes",
+   "versoes": [
+    0.0,
+    1.1637,
+    2.3836,
+    3.5263
+   ],
+   "duracoes": [
+    1.0837,
+    1.1399,
+    1.0628,
+    1.1167
+   ],
+   "bytes": 44491
   },
   "chuva-de-flechas": {
    "arquivo": "chuva-de-flechas.mp3",
@@ -34121,6 +34189,23 @@
    ],
    "bytes": 45614
   },
+  "samaritano-hellboy": {
+   "arquivo": "samaritano-hellboy.mp3",
+   "descricao": "básico de Hellboy: o estrondo do revólver Samaritano",
+   "versoes": [
+    0.0,
+    1.38,
+    2.8071,
+    4.1432
+   ],
+   "duracoes": [
+    1.3,
+    1.3471,
+    1.256,
+    1.3198
+   ],
+   "bytes": 44074
+  },
   "samus-preparo": {
    "arquivo": "samus-preparo.mp3",
    "descricao": "Samus: o canhão carregando (antes do golpe)",
@@ -38575,6 +38660,23 @@
    ],
    "bytes": 89041
   },
+  "tiro-lambda-gordon": {
+   "arquivo": "tiro-lambda-gordon.mp3",
+   "descricao": "básico de Gordon Freeman: o tiro e o zumbido da roupa HEV",
+   "versoes": [
+    0.0,
+    0.8145,
+    1.6609,
+    2.427
+   ],
+   "duracoes": [
+    0.7345,
+    0.7664,
+    0.6861,
+    0.7514
+   ],
+   "bytes": 28652
+  },
   "tiro-na-cabeca": {
    "arquivo": "tiro-na-cabeca.mp3",
    "descricao": "Leon: o tiro e o impacto",
@@ -38676,6 +38778,23 @@
     1.4659
    ],
    "bytes": 51221
+  },
+  "tiro-silencioso-47": {
+   "arquivo": "tiro-silencioso-47.mp3",
+   "descricao": "básico de Agente 47: o tiro abafado do silenciador",
+   "versoes": [
+    0.0,
+    0.7524,
+    1.6839,
+    2.6335
+   ],
+   "duracoes": [
+    0.6724,
+    0.8515,
+    0.8695,
+    0.835
+   ],
+   "bytes": 27470
   },
   "toasty": {
    "arquivo": "toasty.mp3",
@@ -40818,6 +40937,23 @@
     1.4213
    ],
    "bytes": 36780
+  },
+  "z-buster-carregado": {
+   "arquivo": "z-buster-carregado.mp3",
+   "descricao": "básico de Zero: a carga e o disparo do Z-Buster",
+   "versoes": [
+    0.0,
+    1.0886,
+    2.274,
+    3.4168
+   ],
+   "duracoes": [
+    1.0086,
+    1.1054,
+    1.0628,
+    1.0683
+   ],
+   "bytes": 34338
   },
   "z-saber": {
    "arquivo": "z-saber.mp3",

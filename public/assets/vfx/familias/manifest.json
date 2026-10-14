@@ -4563,6 +4563,20 @@
   "laco": false,
   "bytes": 47088
  },
+ "chute_do_caos_shadow": {
+  "descricao": "básico do Shadow: girando e o chute com raios do caos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 11510
+ },
  "chute_do_dragao": {
   "descricao": "Liu Kang: chute voador com dragão de fogo",
   "quadros": 12,
@@ -4577,6 +4591,34 @@
   "laco": false,
   "bytes": 59904
  },
+ "chute_espinho_yor": {
+  "descricao": "básico da Yor: o salto agulha e as pétalas de rosa",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 18290
+ },
+ "chute_ghoul_kaneki": {
+  "descricao": "básico do Kaneki: o olho de ghoul e a kagune",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 17984
+ },
  "chute_relampago": {
   "descricao": "Chun-Li: leque de chutes rápidos em borrão",
   "quadros": 12,
@@ -4590,6 +4632,20 @@
   ],
   "laco": false,
   "bytes": 61934
+ },
+ "chute_relampago_chunli": {
+  "descricao": "básico da Chun-Li: o Chute Relâmpago com as pernas em leque",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 16738
  },
  "chuva_de_flechas": {
   "descricao": "Gavião Arqueiro · a chuva de flechas",
@@ -28433,6 +28489,20 @@
   "laco": true,
   "bytes": 9736
  },
+ "samaritano_hellboy": {
+  "descricao": "básico do Hellboy: o revólver Samaritano e a fumaça",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 23038
+ },
  "samus_preparo": {
   "descricao": "Samus · o canhão carregando (Preparo, laço)",
   "quadros": 12,
@@ -32255,6 +32325,20 @@
   "laco": false,
   "bytes": 30488
  },
+ "tiro_lambda_gordon": {
+  "descricao": "básico do Gordon Freeman: o tiro e o lambda",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 15920
+ },
  "tiro_na_cabeca": {
   "descricao": "Leon · o tiro na cabeça e o rival zonzo",
   "quadros": 12,
@@ -32338,6 +32422,20 @@
   ],
   "laco": false,
   "bytes": 19716
+ },
+ "tiro_silencioso_47": {
+  "descricao": "básico do Agente 47: o tiro silencioso e o código de barras",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 4330
  },
  "toasty": {
   "descricao": "Scorpion · o fogo do inferno da caveira",
@@ -33948,6 +34046,20 @@
   ],
   "laco": true,
   "bytes": 8826
+ },
+ "z_buster_carregado": {
+  "descricao": "básico do Zero: o Z-Buster carregado em meia-lua",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 20042
  },
  "z_saber": {
   "descricao": "Zero: meia-lua do sabre de energia",

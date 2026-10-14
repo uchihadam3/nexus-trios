@@ -2052,6 +2052,14 @@ export const FAMILIAS_NOVAS = {
   tiro_e_faca_leon: n({ nome: 'Tiro e faca', grupo: 'projétil', aponta: true, impacto: 'tiro_e_faca_leon', escala: 2.0, tempo: 1.0, cor: '#e0d0a0', tinta: 'fixa' }),
   mira_da_beretta: n({ nome: 'Mira laser', grupo: 'projétil', aponta: true, impacto: 'mira_da_beretta', escala: 2.0, tempo: 1.0, cor: '#ff4a5a', tinta: 'fixa' }),
   mega_buster: n({ nome: 'Mega Buster', grupo: 'projétil', aponta: true, impacto: 'mega_buster', escala: 2.0, tempo: 1.0, cor: '#5ac8ff', tinta: 'fixa' }),
+  z_buster_carregado: n({ nome: 'Z-Buster', grupo: 'projétil', aponta: true, impacto: 'z_buster_carregado', escala: 2.0, tempo: 1.0, cor: '#7ae08a', tinta: 'fixa' }),
+  tiro_silencioso_47: n({ nome: 'Tiro silencioso', grupo: 'projétil', aponta: true, impacto: 'tiro_silencioso_47', escala: 2.0, tempo: 1.0, cor: '#e04a4a', tinta: 'fixa' }),
+  tiro_lambda_gordon: n({ nome: 'Tiro do lambda', grupo: 'projétil', aponta: true, impacto: 'tiro_lambda_gordon', escala: 2.0, tempo: 1.0, cor: '#ff9a3a', tinta: 'fixa' }),
+  samaritano_hellboy: n({ nome: 'Samaritano', grupo: 'projétil', aponta: true, impacto: 'samaritano_hellboy', escala: 2.0, tempo: 1.0, cor: '#ff5a3a', tinta: 'fixa' }),
+  chute_espinho_yor: n({ nome: 'Chute espinho', grupo: 'físico', aponta: true, impacto: 'chute_espinho_yor', escala: 2.0, tempo: 1.0, cor: '#e0405a', tinta: 'fixa' }),
+  chute_ghoul_kaneki: n({ nome: 'Chute ghoul', grupo: 'físico', aponta: true, impacto: 'chute_ghoul_kaneki', escala: 2.0, tempo: 1.0, cor: '#ff3a4a', tinta: 'fixa' }),
+  chute_do_caos_shadow: n({ nome: 'Chute do caos', grupo: 'físico', aponta: true, impacto: 'chute_do_caos_shadow', escala: 2.0, tempo: 1.0, cor: '#ff4a4a', tinta: 'fixa' }),
+  chute_relampago_chunli: n({ nome: 'Chute Relâmpago', grupo: 'físico', aponta: true, impacto: 'chute_relampago_chunli', escala: 2.0, tempo: 1.0, cor: '#5aa8ff', tinta: 'fixa' }),
 } as const satisfies Record<string, Familia>;
 
 export type FamiliaNova = keyof typeof FAMILIAS_NOVAS;
@@ -2082,7 +2090,8 @@ export const NOVAS_NO_ALVO = new Set<FamiliaNova>(['ressurreicao', 'renascer', '
   'lamina_do_credo_ezio', 'lanca_corrente_scorpion', 'keyblade_sora', 'katana_da_2b', 'flor_escarlate_malenia', 'corte_izuna_hayabusa', 'adaga_de_areia_principe', 'corte_negro_hiei',
   'katanas_gemeas_leonardo', 'golpe_unico_jack', 'corte_brutal_kenpachi', 'giro_da_espada_link', 'rebellion_dante', 'espada_de_prata_geralt', 'corte_dos_morcegos', 'grade_de_cortes_trunks',
   'espada_do_heroi_finn', 'bengala_do_mestre', 'espada_da_protecao_shera', 'garras_de_adamantium', 'katanas_e_piadas', 'bastao_de_ricochete', 'adaga_das_ilusoes', 'haste_negra_pain',
-  'tiro_do_coronel', 'rajada_do_justiceiro', 'blasters_do_quill', 'canhao_do_rocket', 'rajada_do_spartan', 'tiro_e_faca_leon', 'mira_da_beretta', 'mega_buster']);
+  'tiro_do_coronel', 'rajada_do_justiceiro', 'blasters_do_quill', 'canhao_do_rocket', 'rajada_do_spartan', 'tiro_e_faca_leon', 'mira_da_beretta', 'mega_buster',
+  'z_buster_carregado', 'tiro_silencioso_47', 'tiro_lambda_gordon', 'samaritano_hellboy', 'chute_espinho_yor', 'chute_ghoul_kaneki', 'chute_do_caos_shadow', 'chute_relampago_chunli']);
 
 /** Bons para o ataque básico do personagem (quando ele já usa a família numa habilidade). */
 export const NOVAS_DE_BASICO = new Set<FamiliaNova>(['garras', 'chicote', 'bastao', 'mordida', 'tentaculos', 'florete',
