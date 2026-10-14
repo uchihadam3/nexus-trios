@@ -273,3 +273,21 @@ describe('Shadow sem inibidores', () => {
     expect(tirou).toBeGreaterThan(0);
   });
 });
+
+/* Drácula (pedido do jogador: "Drácula névoa"): o retrato da névoa só nos 4 s em que ele vira névoa. */
+describe('Drácula em névoa', () => {
+  it('troca o retrato só enquanto é névoa', () => {
+    let viu = 0;
+    for (let semente = 1; semente <= 30; semente++) {
+      const b = createBattle(['dracula', 'hinata', 'naruto'], ['goku', 'vegeta', 'hulk'], semente);
+      const d = b.fighters.find((f) => f.characterId === 'dracula')!;
+      for (let t = 0; t < 6000 && !b.finished; t++) {
+        stepBattle(b);
+        const nevoa = (d.u?.nevoa ?? 0) > b.time;
+        if (nevoa) viu++;
+        expect(naFormaDeAgora(byId.dracula, d, b).portrait).toBe(nevoa ? '/assets/portraits/formas/dracula-nevoa.webp' : byId.dracula.portrait);
+      }
+    }
+    expect(viu).toBeGreaterThan(0);
+  });
+});

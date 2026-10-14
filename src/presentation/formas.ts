@@ -16,7 +16,8 @@ import type { Battle, Character, Fighter } from '../engine/types';
  * - Ikki renasce das cinzas com a Fênix;
  * - Fenrir começa acorrentado e se solta aos 12 s;
  * - Saitama fica sério depois de 4 golpes;
- * - Shadow tira os inibidores.
+ * - Shadow tira os inibidores;
+ * - Drácula vira névoa por 4 s.
  */
 interface Forma { retrato: string; nome: string; cor: string }
 const DIR = '/assets/portraits/formas/';
@@ -39,6 +40,7 @@ const IKKI_RENASCIDO: Forma = { retrato: `${DIR}ikki-renascido.webp`, nome: 'Ikk
 const FENRIR_PRESO: Forma = { retrato: `${DIR}fenrir-preso.webp`, nome: 'Fenrir acorrentado', cor: '#ff6a3a' };
 const SAITAMA_SERIO: Forma = { retrato: `${DIR}saitama-serio.webp`, nome: 'Saitama, modo sério', cor: '#ffd23a' };
 const SHADOW_SEM_INIBIDORES: Forma = { retrato: `${DIR}shadow-sem-inibidores.webp`, nome: 'Shadow sem inibidores', cor: '#ff3a4a' };
+const DRACULA_NEVOA: Forma = { retrato: `${DIR}dracula-nevoa.webp`, nome: 'Drácula em névoa', cor: '#c84a6a' };
 const FORMAS: Record<string, { de: (f: Fighter, agora: number) => Forma | null; todas: Forma[] }> = {
   gandalf: {
     de: (f) => (f.voltou && (f.u?.branco ?? 0) >= 1 ? FORMAS.gandalf!.todas[0]! : null),
@@ -69,6 +71,8 @@ const FORMAS: Record<string, { de: (f: Fighter, agora: number) => Forma | null; 
   saitama: { de: (f) => ((f.u?.serio ?? 0) >= 4 ? SAITAMA_SERIO : null), todas: [SAITAMA_SERIO] },
   /* Shadow tira os inibidores com menos de 40% da Vida, até o fim da luta (src/engine/unicas-lote6.ts) */
   shadowhh: { de: (f) => (f.u?.aneis ? SHADOW_SEM_INIBIDORES : null), todas: [SHADOW_SEM_INIBIDORES] },
+  /* Drácula vira névoa por 4 s com menos de 30% da Vida, e depois volta (src/engine/unicas-lote3.ts) */
+  dracula: { de: (f, agora) => ((f.u?.nevoa ?? 0) > agora ? DRACULA_NEVOA : null), todas: [DRACULA_NEVOA] },
 };
 
 /** A forma de agora do lutador, se ele trocou de forma. */
