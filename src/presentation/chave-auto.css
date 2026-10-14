@@ -45,6 +45,3 @@
 }
 .reduce-motion .seq-chave.ligado::before,.reduce-motion .seq-chave.ligado .seq-icone svg,.reduce-motion .arena-v2 .arena-controls .seq-controle.ligado svg{animation:none}
 
-/* no resultado, a chave ocupa a linha de cima do rodapé fixo */
-.rs-acoes:has(.seq-chave){flex-wrap:wrap}
-.rs-acoes .seq-chave{flex:1 1 100%}
