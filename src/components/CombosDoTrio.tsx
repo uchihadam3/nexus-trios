@@ -84,6 +84,11 @@ export const ARTES_DO_COMBO: Record<string, { fundo: string; selo: string }> = {
   'silencio-preparo': { fundo: '/assets/combos/silencio-preparo-bg.webp', selo: '/assets/combos/silencio-preparo-selo.webp' },
   'pressa-acumula': { fundo: '/assets/combos/pressa-acumula-bg.webp', selo: '/assets/combos/pressa-acumula-selo.webp' },
   'status-gatilho': { fundo: '/assets/combos/status-gatilho-bg.webp', selo: '/assets/combos/status-gatilho-selo.webp' },
+  'cego-esquiva': { fundo: '/assets/combos/cego-esquiva-bg.webp', selo: '/assets/combos/cego-esquiva-selo.webp' },
+  'escudo-espinhos': { fundo: '/assets/combos/escudo-espinhos-bg.webp', selo: '/assets/combos/escudo-espinhos-selo.webp' },
+  'provoca-espinhos': { fundo: '/assets/combos/provoca-espinhos-bg.webp', selo: '/assets/combos/provoca-espinhos-selo.webp' },
+  'provoca-golpe': { fundo: '/assets/combos/provoca-golpe-bg.webp', selo: '/assets/combos/provoca-golpe-selo.webp' },
+  'cura-tanque': { fundo: '/assets/combos/cura-tanque-bg.webp', selo: '/assets/combos/cura-tanque-selo.webp' },
 };
 const ehTrio = (id: string) => id.startsWith('trio-');
 const visual = (id: string) => VISUAL_DO_COMBO[id] ?? (id.startsWith('lenda-') ? { icone: Crown, cor: '#ffd36b' } : { icone: Link2, cor: '#c8f560' });
