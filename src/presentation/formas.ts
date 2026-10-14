@@ -24,7 +24,8 @@ import type { Battle, Character, Fighter } from '../engine/types';
  * - Jin vira Devil Jin com metade da Vida;
  * - Malévola vira dragão com menos de 40% da Vida;
  * - Erza troca entre a Armadura do Purgatório (Vida alta) e a de Adamantina (Vida baixa);
- * - Chopper vira Heavy Point, Guard Point ou Kung Fu Point por 6 s a cada Rumble Ball.
+ * - Chopper vira Heavy Point, Guard Point ou Kung Fu Point por 6 s a cada Rumble Ball;
+ * - Homem-Formiga alterna entre pequeno (na formiga) e gigante a cada 6 s.
  */
 interface Forma { retrato: string; nome: string; cor: string }
 const DIR = '/assets/portraits/formas/';
@@ -61,6 +62,11 @@ const CHOPPER: Forma[] = [
   { retrato: `${DIR}chopper-heavy-point.webp`, nome: 'Chopper, Heavy Point', cor: '#ff8a5a' },
   { retrato: `${DIR}chopper-guard-point.webp`, nome: 'Chopper, Guard Point', cor: '#e7b98a' },
   { retrato: `${DIR}chopper-kung-fu-point.webp`, nome: 'Chopper, Kung Fu Point', cor: '#ffd75a' },
+];
+/** O Homem-Formiga troca de tamanho a cada 6 s (src/engine/unicas-lote8.ts); antes da primeira troca, o retrato de sempre. */
+const PYM: Forma[] = [
+  { retrato: `${DIR}antman-formiga.webp`, nome: 'Homem-Formiga, pequeno', cor: '#ff6a5a' },
+  { retrato: `${DIR}antman-gigante.webp`, nome: 'Homem-Formiga, gigante', cor: '#ff3a3a' },
 ];
 const FORMAS: Record<string, { de: (f: Fighter, agora: number) => Forma | null; todas: Forma[] }> = {
   gandalf: {
@@ -103,6 +109,7 @@ const FORMAS: Record<string, { de: (f: Fighter, agora: number) => Forma | null; 
   maleficent: { de: (f) => (f.u?.dragao ? MALEVOLA_DRAGAO : null), todas: [MALEVOLA_DRAGAO] },
   erza: { de: (f) => (f.u?.armadura === 1 ? ERZA_ADAMANTINA : f.u?.armadura === 2 ? ERZA_PURGATORIO : null), todas: [ERZA_ADAMANTINA, ERZA_PURGATORIO] },
   chopper: { de: (f, agora) => ((f.u?.ate ?? 0) > agora ? CHOPPER[f.u?.atual ?? -1] ?? null : null), todas: CHOPPER },
+  antman: { de: (f) => (f.u?.gigante === undefined ? null : PYM[f.u.gigante ? 1 : 0]!), todas: PYM },
 };
 
 /** A forma de agora do lutador, se ele trocou de forma. */

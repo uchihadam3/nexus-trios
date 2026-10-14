@@ -424,3 +424,19 @@ describe('Chopper e as Rumble Balls', () => {
     expect(vistas.size).toBe(3);
   });
 });
+
+describe('Homem-Formiga', () => {
+  it('Homem-Formiga mostra o tamanho de agora: pequeno na formiga ou gigante', () => {
+    const vistas = new Set<string>();
+    const b = createBattle(['antman', 'piccolo', 'hinata'], ['naruto', 'luffy', 'pikachu'], 4);
+    const a = b.fighters.find((f) => f.characterId === 'antman')!;
+    for (let t = 0; t < 6000 && !b.finished; t++) {
+      stepBattle(b);
+      const g = a.u?.gigante;
+      const esperado = g === undefined ? byId.antman.portrait : g ? '/assets/portraits/formas/antman-gigante.webp' : '/assets/portraits/formas/antman-formiga.webp';
+      expect(naFormaDeAgora(byId.antman, a, b).portrait).toBe(esperado);
+      if (g !== undefined) vistas.add(esperado);
+    }
+    expect(vistas.size).toBe(2);
+  });
+});
