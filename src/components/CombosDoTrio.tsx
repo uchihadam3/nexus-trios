@@ -94,6 +94,12 @@ export const ARTES_DO_COMBO: Record<string, { fundo: string; selo: string }> = {
   'revive-virada': { fundo: '/assets/combos/revive-virada-bg.webp', selo: '/assets/combos/revive-virada-selo.webp' },
   'duas-invocacoes': { fundo: '/assets/combos/duas-invocacoes-bg.webp', selo: '/assets/combos/duas-invocacoes-selo.webp' },
   'veneno-maldicao': { fundo: '/assets/combos/veneno-maldicao-bg.webp', selo: '/assets/combos/veneno-maldicao-selo.webp' },
+  'gelo-sono': { fundo: '/assets/combos/gelo-sono-bg.webp', selo: '/assets/combos/gelo-sono-selo.webp' },
+  'barreira-purifica': { fundo: '/assets/combos/barreira-purifica-bg.webp', selo: '/assets/combos/barreira-purifica-selo.webp' },
+  'regen-cura': { fundo: '/assets/combos/regen-cura-bg.webp', selo: '/assets/combos/regen-cura-selo.webp' },
+  'invoca-carga': { fundo: '/assets/combos/invoca-carga-bg.webp', selo: '/assets/combos/invoca-carga-selo.webp' },
+  'bomba-fogo': { fundo: '/assets/combos/bomba-fogo-bg.webp', selo: '/assets/combos/bomba-fogo-selo.webp' },
+  'eletrico-golpe': { fundo: '/assets/combos/eletrico-golpe-bg.webp', selo: '/assets/combos/eletrico-golpe-selo.webp' },
 };
 const ehTrio = (id: string) => id.startsWith('trio-');
 const visual = (id: string) => VISUAL_DO_COMBO[id] ?? (id.startsWith('lenda-') ? { icone: Crown, cor: '#ffd36b' } : { icone: Link2, cor: '#c8f560' });
