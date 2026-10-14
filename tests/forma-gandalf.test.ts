@@ -388,3 +388,21 @@ describe('Malévola dragão', () => {
     expect(virou).toBeGreaterThan(0);
   });
 });
+
+describe('Erza e as armaduras', () => {
+  it('Erza mostra a armadura que está usando: Purgatório com Vida alta, Adamantina com Vida baixa', () => {
+    const vistas = new Set<string>();
+    for (let semente = 1; semente <= 20; semente++) {
+      const b = createBattle(['erza', 'piccolo', 'hinata'], ['goku', 'vegeta', 'hulk'], semente);
+      const e = b.fighters.find((f) => f.characterId === 'erza')!;
+      for (let t = 0; t < 6000 && !b.finished; t++) {
+        stepBattle(b);
+        const a = e.u?.armadura;
+        const esperado = a === 1 ? '/assets/portraits/formas/erza-adamantina.webp' : a === 2 ? '/assets/portraits/formas/erza-purgatorio.webp' : byId.erza.portrait;
+        expect(naFormaDeAgora(byId.erza, e, b).portrait).toBe(esperado);
+        if (a) vistas.add(esperado);
+      }
+    }
+    expect(vistas.size).toBe(2);
+  });
+});

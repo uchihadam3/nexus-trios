@@ -22,7 +22,8 @@ import type { Battle, Character, Fighter } from '../engine/types';
  * - Zenitsu luta dormindo;
  * - Gohan desperta quando um aliado cai;
  * - Jin vira Devil Jin com metade da Vida;
- * - Malévola vira dragão com menos de 40% da Vida.
+ * - Malévola vira dragão com menos de 40% da Vida;
+ * - Erza troca entre a Armadura do Purgatório (Vida alta) e a de Adamantina (Vida baixa).
  */
 interface Forma { retrato: string; nome: string; cor: string }
 const DIR = '/assets/portraits/formas/';
@@ -51,6 +52,9 @@ const ZENITSU_DORMINDO: Forma = { retrato: `${DIR}zenitsu-dormindo.webp`, nome: 
 const GOHAN_DESPERTO: Forma = { retrato: `${DIR}gohan-desperto.webp`, nome: 'Gohan desperto', cor: '#b46aff' };
 const DEVIL_JIN: Forma = { retrato: `${DIR}jin-devil.webp`, nome: 'Devil Jin', cor: '#ff2a3a' };
 const MALEVOLA_DRAGAO: Forma = { retrato: `${DIR}malevola-dragao.webp`, nome: 'Malévola dragão', cor: '#7dff3a' };
+/** As armaduras na ordem de u.armadura (src/engine/unicas-lote4.ts: 1 Adamantina, 2 Purgatório). */
+const ERZA_ADAMANTINA: Forma = { retrato: `${DIR}erza-adamantina.webp`, nome: 'Erza, Armadura de Adamantina', cor: '#7fb8ff' };
+const ERZA_PURGATORIO: Forma = { retrato: `${DIR}erza-purgatorio.webp`, nome: 'Erza, Armadura do Purgatório', cor: '#ff2a4a' };
 const FORMAS: Record<string, { de: (f: Fighter, agora: number) => Forma | null; todas: Forma[] }> = {
   gandalf: {
     de: (f) => (f.voltou && (f.u?.branco ?? 0) >= 1 ? FORMAS.gandalf!.todas[0]! : null),
@@ -90,6 +94,7 @@ const FORMAS: Record<string, { de: (f: Fighter, agora: number) => Forma | null; 
   gohan: { de: (f) => (f.u?.despertou ? GOHAN_DESPERTO : null), todas: [GOHAN_DESPERTO] },
   jin: { de: (f) => (f.u?.diabo ? DEVIL_JIN : null), todas: [DEVIL_JIN] },
   maleficent: { de: (f) => (f.u?.dragao ? MALEVOLA_DRAGAO : null), todas: [MALEVOLA_DRAGAO] },
+  erza: { de: (f) => (f.u?.armadura === 1 ? ERZA_ADAMANTINA : f.u?.armadura === 2 ? ERZA_PURGATORIO : null), todas: [ERZA_ADAMANTINA, ERZA_PURGATORIO] },
 };
 
 /** A forma de agora do lutador, se ele trocou de forma. */
