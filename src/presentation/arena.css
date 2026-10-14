@@ -471,7 +471,13 @@
    encostada no retrato sem ficar em cima (0,84² + 0,55² ≈ 1: o centro dela cai no círculo de --raio) */
 @media (orientation:portrait){.unica-bolinha{left:calc(50% - var(--raio) * .84 - var(--ub) / 2)}
   .side-enemy .unica-bolinha{top:calc(50% - var(--raio) * .55 - var(--ub) / 2)}.side-player .unica-bolinha{top:calc(50% + var(--raio) * .55 - var(--ub) / 2)}}
-@media (orientation:portrait){.unit[data-slot="0"] .unica-bolinha{margin-left:12px}}
+/* o da esquerda fica perto da beirada da tela: em vez de empurrar a bolinha para dentro (ela ficava em cima do retrato),
+   ela desliza pelo contorno para mais perto do alto (rivais) ou do pé (seu trio) — encostada no anel, sem cobrir o rosto */
+@media (orientation:portrait){
+  .unit[data-slot="0"] .unica-bolinha{left:calc(50% - var(--raio) * .7 - var(--ub) / 2)}
+  .side-enemy[data-slot="0"] .unica-bolinha{top:calc(50% - var(--raio) * .71 - var(--ub) / 2)}
+  .side-player[data-slot="0"] .unica-bolinha{top:calc(50% + var(--raio) * .71 - var(--ub) / 2)}
+}
 .unica-bolinha .ub-anel{position:absolute;inset:-1px;width:calc(100% + 2px);height:calc(100% + 2px);transform:rotate(-90deg)}
 .unica-bolinha .ub-trilho{fill:none;stroke:#c58bff2e;stroke-width:3.2}
 .unica-bolinha .ub-carga{fill:none;stroke:#cf9bff;stroke-width:3.2;stroke-linecap:round;filter:drop-shadow(0 0 2px #c58bff);transition:stroke-dasharray .25s linear}
