@@ -6309,6 +6309,23 @@
    ],
    "bytes": 20195
   },
+  "corte-brutal-kenpachi": {
+   "arquivo": "corte-brutal-kenpachi.mp3",
+   "descricao": "básico de Kenpachi: a pancada bruta e a pressão espiritual",
+   "versoes": [
+    0.0,
+    1.38,
+    2.8071,
+    4.1432
+   ],
+   "duracoes": [
+    1.3,
+    1.3471,
+    1.256,
+    1.3198
+   ],
+   "bytes": 43957
+  },
   "corte-da-agua-tanjiro": {
    "arquivo": "corte-da-agua-tanjiro.mp3",
    "descricao": "básico de Tanjiro: o corte e a onda da Respiração da Água",
@@ -6427,6 +6444,23 @@
     1.3198
    ],
    "bytes": 79848
+  },
+  "corte-dos-morcegos": {
+   "arquivo": "corte-dos-morcegos.mp3",
+   "descricao": "básico de Alucard: o corte e as asas dos morcegos",
+   "versoes": [
+    0.0,
+    1.3096,
+    2.7185,
+    4.0545
+   ],
+   "duracoes": [
+    1.2296,
+    1.3288,
+    1.256,
+    1.3046
+   ],
+   "bytes": 55045
   },
   "corte-em-sequencia": {
    "arquivo": "corte-em-sequencia.mp3",
@@ -9572,6 +9606,23 @@
     1.3379
    ],
    "bytes": 47082
+  },
+  "espada-de-prata-geralt": {
+   "arquivo": "espada-de-prata-geralt.mp3",
+   "descricao": "básico de Geralt: o corte e o Sinal",
+   "versoes": [
+    0.0,
+    1.3089,
+    2.6695,
+    3.9106
+   ],
+   "duracoes": [
+    1.2289,
+    1.2807,
+    1.161,
+    1.2381
+   ],
+   "bytes": 46134
   },
   "espada-de-sangue": {
    "arquivo": "espada-de-sangue.mp3",
@@ -13568,6 +13619,23 @@
    ],
    "bytes": 59848
   },
+  "giro-da-espada-link": {
+   "arquivo": "giro-da-espada-link.mp3",
+   "descricao": "básico de Link: o giro da espada e o tlim",
+   "versoes": [
+    0.0,
+    1.0457,
+    2.1442,
+    3.1993
+   ],
+   "duracoes": [
+    0.9657,
+    1.0185,
+    0.9751,
+    1.0205
+   ],
+   "bytes": 41492
+  },
   "giro-de-cauda": {
    "arquivo": "giro-de-cauda.mp3",
    "descricao": "Tails: o giro de cauda",
@@ -14214,6 +14282,23 @@
    ],
    "bytes": 35348
   },
+  "golpe-unico-jack": {
+   "arquivo": "golpe-unico-jack.mp3",
+   "descricao": "básico de Samurai Jack: o silêncio, o corte único e o vento",
+   "versoes": [
+    0.0,
+    1.68,
+    3.418,
+    5.0439
+   ],
+   "duracoes": [
+    1.6,
+    1.658,
+    1.5459,
+    1.6244
+   ],
+   "bytes": 62674
+  },
   "golpe-viltrumita": {
    "arquivo": "golpe-viltrumita.mp3",
    "descricao": "Golpe viltrumita: o soco e o estrondo",
@@ -14298,6 +14383,23 @@
     1.8611
    ],
    "bytes": 64953
+  },
+  "grade-de-cortes-trunks": {
+   "arquivo": "grade-de-cortes-trunks.mp3",
+   "descricao": "básico de Trunks: quatro cortes e o ki dourado",
+   "versoes": [
+    0.0,
+    1.1156,
+    2.3114,
+    3.4248
+   ],
+   "duracoes": [
+    1.0356,
+    1.1157,
+    1.0334,
+    1.2183
+   ],
+   "bytes": 47318
   },
   "grampo-de-cabelo": {
    "arquivo": "grampo-de-cabelo.mp3",
@@ -16746,6 +16848,23 @@
     1.0035
    ],
    "bytes": 43244
+  },
+  "katanas-gemeas-leonardo": {
+   "arquivo": "katanas-gemeas-leonardo.mp3",
+   "descricao": "básico de Leonardo: as duas katanas juntas",
+   "versoes": [
+    0.0,
+    0.788,
+    1.6223,
+    2.3862
+   ],
+   "duracoes": [
+    0.708,
+    0.7542,
+    0.6839,
+    0.7118
+   ],
+   "bytes": 31967
   },
   "katara-preparo": {
    "arquivo": "katara-preparo.mp3",
@@ -32216,6 +32335,23 @@
     1.542
    ],
    "bytes": 54731
+  },
+  "rebellion-dante": {
+   "arquivo": "rebellion-dante.mp3",
+   "descricao": "básico de Dante: a estocada e os dois tiros",
+   "versoes": [
+    0.0,
+    1.28,
+    2.6035,
+    3.8429
+   ],
+   "duracoes": [
+    1.2,
+    1.2435,
+    1.1594,
+    1.2183
+   ],
+   "bytes": 43645
   },
   "rebellion-e-ebony": {
    "arquivo": "rebellion-e-ebony.mp3",

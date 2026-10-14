@@ -2028,6 +2028,14 @@ export const FAMILIAS_NOVAS = {
   corte_izuna_hayabusa: n({ nome: 'Corte Izuna', grupo: 'corte', aponta: true, impacto: 'corte_izuna_hayabusa', escala: 2.0, tempo: 1.0, cor: '#a06aff', tinta: 'fixa' }),
   adaga_de_areia_principe: n({ nome: 'Adaga de areia', grupo: 'corte', aponta: true, impacto: 'adaga_de_areia_principe', escala: 2.0, tempo: 1.0, cor: '#f0c46a', tinta: 'fixa' }),
   corte_negro_hiei: n({ nome: 'Corte negro', grupo: 'corte', aponta: true, impacto: 'corte_negro_hiei', escala: 2.0, tempo: 1.0, cor: '#9a5aff', tinta: 'fixa' }),
+  katanas_gemeas_leonardo: n({ nome: 'Katanas gêmeas', grupo: 'corte', aponta: true, impacto: 'katanas_gemeas_leonardo', escala: 2.0, tempo: 1.0, cor: '#4a8aff', tinta: 'fixa' }),
+  golpe_unico_jack: n({ nome: 'Golpe único', grupo: 'corte', aponta: true, impacto: 'golpe_unico_jack', escala: 2.0, tempo: 1.0, cor: '#e8f0f8', tinta: 'fixa' }),
+  corte_brutal_kenpachi: n({ nome: 'Corte brutal', grupo: 'corte', aponta: true, impacto: 'corte_brutal_kenpachi', escala: 2.0, tempo: 1.0, cor: '#ffd23a', tinta: 'fixa' }),
+  giro_da_espada_link: n({ nome: 'Giro da espada', grupo: 'corte', aponta: true, impacto: 'giro_da_espada_link', escala: 2.0, tempo: 1.0, cor: '#6ae08a', tinta: 'fixa' }),
+  rebellion_dante: n({ nome: 'Rebellion', grupo: 'corte', aponta: true, impacto: 'rebellion_dante', escala: 2.0, tempo: 1.0, cor: '#ff4a4a', tinta: 'fixa' }),
+  espada_de_prata_geralt: n({ nome: 'Espada de prata e Sinal', grupo: 'corte', aponta: true, impacto: 'espada_de_prata_geralt', escala: 2.0, tempo: 1.0, cor: '#c8d8e8', tinta: 'fixa' }),
+  corte_dos_morcegos: n({ nome: 'Corte dos morcegos', grupo: 'corte', aponta: true, impacto: 'corte_dos_morcegos', escala: 2.0, tempo: 1.0, cor: '#b05aff', tinta: 'fixa' }),
+  grade_de_cortes_trunks: n({ nome: 'Rede de cortes', grupo: 'corte', aponta: true, impacto: 'grade_de_cortes_trunks', escala: 2.0, tempo: 1.0, cor: '#9ab8ff', tinta: 'fixa' }),
 } as const satisfies Record<string, Familia>;
 
 export type FamiliaNova = keyof typeof FAMILIAS_NOVAS;
@@ -2055,7 +2063,8 @@ export const NOVAS_NO_ALVO = new Set<FamiliaNova>(['ressurreicao', 'renascer', '
   'soco_superpoderosa', 'soco_musical_mickey', 'golpe_de_carate_buzz', 'soco_do_xerife', 'soco_de_rampa_de_gelo', 'palma_de_fogo_iroh', 'soco_de_laminas_destruidor', 'soco_de_hoquei',
   'soco_da_garra_thundera', 'tapinha_do_stewie', 'soco_do_robo_mojo', 'soco_fantasma_danny', 'soco_do_satsui', 'pancada_furiosa_donald', 'martelinho_do_jerry', 'soco_de_borracha_buu',
   'corte_da_agua_tanjiro', 'corte_da_zangetsu', 'espelho_partido_aizen', 'laminas_giratorias_levi', 'corte_de_prata_blade', 'masamune_sephiroth', 'corte_da_yamato', 'lamina_hf_raiden',
-  'lamina_do_credo_ezio', 'lanca_corrente_scorpion', 'keyblade_sora', 'katana_da_2b', 'flor_escarlate_malenia', 'corte_izuna_hayabusa', 'adaga_de_areia_principe', 'corte_negro_hiei']);
+  'lamina_do_credo_ezio', 'lanca_corrente_scorpion', 'keyblade_sora', 'katana_da_2b', 'flor_escarlate_malenia', 'corte_izuna_hayabusa', 'adaga_de_areia_principe', 'corte_negro_hiei',
+  'katanas_gemeas_leonardo', 'golpe_unico_jack', 'corte_brutal_kenpachi', 'giro_da_espada_link', 'rebellion_dante', 'espada_de_prata_geralt', 'corte_dos_morcegos', 'grade_de_cortes_trunks']);
 
 /** Bons para o ataque básico do personagem (quando ele já usa a família numa habilidade). */
 export const NOVAS_DE_BASICO = new Set<FamiliaNova>(['garras', 'chicote', 'bastao', 'mordida', 'tentaculos', 'florete',

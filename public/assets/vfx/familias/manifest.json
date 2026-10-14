@@ -5375,6 +5375,20 @@
   "laco": false,
   "bytes": 15370
  },
+ "corte_brutal_kenpachi": {
+  "descricao": "básico do Kenpachi: a espada dentada e a aura amarela",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 53132
+ },
  "corte_cruzado": {
   "descricao": "corte duplo em X",
   "quadros": 12,
@@ -5500,6 +5514,20 @@
   ],
   "laco": false,
   "bytes": 108900
+ },
+ "corte_dos_morcegos": {
+  "descricao": "básico do Alucard: o corte que vira morcegos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 19404
  },
  "corte_em_sequencia": {
   "descricao": "Raiden · os cortes em sequência",
@@ -8118,6 +8146,20 @@
   ],
   "laco": false,
   "bytes": 12934
+ },
+ "espada_de_prata_geralt": {
+  "descricao": "básico do Geralt: a espada de prata e o Sinal",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 29376
  },
  "espada_de_sangue": {
   "descricao": "Finn · o corte vermelho e as gotas",
@@ -11591,6 +11633,20 @@
   "laco": false,
   "bytes": 38534
  },
+ "giro_da_espada_link": {
+  "descricao": "básico do Link: o ataque giratório e o brilho",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 32886
+ },
  "giro_de_cauda": {
   "descricao": "Tails · as duas caudas girando",
   "quadros": 12,
@@ -12137,6 +12193,20 @@
   "laco": false,
   "bytes": 75914
  },
+ "golpe_unico_jack": {
+  "descricao": "básico do Samurai Jack: o golpe único e as folhas caindo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 15044
+ },
  "gomu_gatling": {
   "descricao": "Luffy · Gomu Gomu no Gatling: a chuva de punhos",
   "quadros": 12,
@@ -12192,6 +12262,20 @@
   ],
   "laco": false,
   "bytes": 16692
+ },
+ "grade_de_cortes_trunks": {
+  "descricao": "básico do Trunks: a rede de cortes e o ki dourado",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 34106
  },
  "grampo_de_cabelo": {
   "descricao": "Nobara · os pregos explodem em sequência",
@@ -14124,6 +14208,20 @@
   ],
   "laco": false,
   "bytes": 19734
+ },
+ "katanas_gemeas_leonardo": {
+  "descricao": "básico do Leonardo: as duas katanas em X e o casco",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 27874
  },
  "katara_preparo": {
   "descricao": "Katara · a água subindo em espiral (Preparo, laço)",
@@ -26906,6 +27004,20 @@
   ],
   "laco": false,
   "bytes": 29564
+ },
+ "rebellion_dante": {
+  "descricao": "básico do Dante: a estocada da Rebellion e os dois tiros",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 12150
  },
  "rebellion_e_ebony": {
   "descricao": "Dante: corte largo de espadão e dois tiros de pistola",
