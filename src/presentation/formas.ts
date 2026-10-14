@@ -23,7 +23,8 @@ import type { Battle, Character, Fighter } from '../engine/types';
  * - Gohan desperta quando um aliado cai;
  * - Jin vira Devil Jin com metade da Vida;
  * - Malévola vira dragão com menos de 40% da Vida;
- * - Erza troca entre a Armadura do Purgatório (Vida alta) e a de Adamantina (Vida baixa).
+ * - Erza troca entre a Armadura do Purgatório (Vida alta) e a de Adamantina (Vida baixa);
+ * - Chopper vira Heavy Point, Guard Point ou Kung Fu Point por 6 s a cada Rumble Ball.
  */
 interface Forma { retrato: string; nome: string; cor: string }
 const DIR = '/assets/portraits/formas/';
@@ -55,6 +56,12 @@ const MALEVOLA_DRAGAO: Forma = { retrato: `${DIR}malevola-dragao.webp`, nome: 'M
 /** As armaduras na ordem de u.armadura (src/engine/unicas-lote4.ts: 1 Adamantina, 2 Purgatório). */
 const ERZA_ADAMANTINA: Forma = { retrato: `${DIR}erza-adamantina.webp`, nome: 'Erza, Armadura de Adamantina', cor: '#7fb8ff' };
 const ERZA_PURGATORIO: Forma = { retrato: `${DIR}erza-purgatorio.webp`, nome: 'Erza, Armadura do Purgatório', cor: '#ff2a4a' };
+/** As formas do Chopper na ordem das Rumble Balls (src/engine/unicas-lote2.ts: 0 Heavy, 1 Guard, 2 Kung Fu), por 6 s cada. */
+const CHOPPER: Forma[] = [
+  { retrato: `${DIR}chopper-heavy-point.webp`, nome: 'Chopper, Heavy Point', cor: '#ff8a5a' },
+  { retrato: `${DIR}chopper-guard-point.webp`, nome: 'Chopper, Guard Point', cor: '#e7b98a' },
+  { retrato: `${DIR}chopper-kung-fu-point.webp`, nome: 'Chopper, Kung Fu Point', cor: '#ffd75a' },
+];
 const FORMAS: Record<string, { de: (f: Fighter, agora: number) => Forma | null; todas: Forma[] }> = {
   gandalf: {
     de: (f) => (f.voltou && (f.u?.branco ?? 0) >= 1 ? FORMAS.gandalf!.todas[0]! : null),
@@ -95,6 +102,7 @@ const FORMAS: Record<string, { de: (f: Fighter, agora: number) => Forma | null; 
   jin: { de: (f) => (f.u?.diabo ? DEVIL_JIN : null), todas: [DEVIL_JIN] },
   maleficent: { de: (f) => (f.u?.dragao ? MALEVOLA_DRAGAO : null), todas: [MALEVOLA_DRAGAO] },
   erza: { de: (f) => (f.u?.armadura === 1 ? ERZA_ADAMANTINA : f.u?.armadura === 2 ? ERZA_PURGATORIO : null), todas: [ERZA_ADAMANTINA, ERZA_PURGATORIO] },
+  chopper: { de: (f, agora) => ((f.u?.ate ?? 0) > agora ? CHOPPER[f.u?.atual ?? -1] ?? null : null), todas: CHOPPER },
 };
 
 /** A forma de agora do lutador, se ele trocou de forma. */

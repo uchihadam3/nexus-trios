@@ -406,3 +406,21 @@ describe('Erza e as armaduras', () => {
     expect(vistas.size).toBe(2);
   });
 });
+
+describe('Chopper e as Rumble Balls', () => {
+  it('Chopper mostra a forma da Rumble Ball enquanto ela dura e volta ao normal depois', () => {
+    const vistas = new Set<string>();
+    for (let semente = 1; semente <= 10; semente++) {
+      const b = createBattle(['chopper', 'piccolo', 'hinata'], ['naruto', 'luffy', 'pikachu'], semente);
+      const c = b.fighters.find((f) => f.characterId === 'chopper')!;
+      for (let t = 0; t < 6000 && !b.finished; t++) {
+        stepBattle(b);
+        const ativa = (c.u?.ate ?? 0) > b.time;
+        const esperado = ativa ? ['/assets/portraits/formas/chopper-heavy-point.webp', '/assets/portraits/formas/chopper-guard-point.webp', '/assets/portraits/formas/chopper-kung-fu-point.webp'][c.u!.atual!]! : byId.chopper.portrait;
+        expect(naFormaDeAgora(byId.chopper, c, b).portrait).toBe(esperado);
+        if (ativa) vistas.add(esperado);
+      }
+    }
+    expect(vistas.size).toBe(3);
+  });
+});
