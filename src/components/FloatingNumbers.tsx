@@ -2,6 +2,7 @@ import { useEffect,useRef,useState } from 'react';
 import { HeartPulse,Shield } from 'lucide-react';
 import type { Battle } from '../engine/types';
 import { etapaDoEvento,type Beat } from '../presentation/director';
+import { bolinhaDe,corDaBolinha } from '../presentation/bolinhas';
 import { fallbackPoint,type Anchors } from './BattleEffects';
 
 /*
@@ -18,7 +19,13 @@ import { fallbackPoint,type Anchors } from './BattleEffects';
  * aparecer (ou o que houver, quando o efeito acaba). "+12 Vida/s" aparece
  * +12; menos só quando falta menos que isso para a Vida cheia.
  */
-interface Numero {id:string;uid:string;tipo:'dano'|'cura'|'escudo'|'bloqueio';valor:number;forte:boolean}
+/*
+ * O selo da Mecânica única no número (pedido do jogador: "toda mecânica tem que aparecer quando age"): quando uma
+ * mecânica aumentou ou diminuiu o golpe (o Freeza em quem tem Status ruim, a borracha do Luffy, a aura do Senhor das
+ * Estrelas), o número sai com o ícone e a cor dela e o quanto ela mexeu: "+30%", "−25%".
+ */
+interface Selo {personagem:string;mult:number}
+interface Numero {id:string;uid:string;tipo:'dano'|'cura'|'escudo'|'bloqueio';valor:number;forte:boolean;selos?:Selo[]}
 
 export function FloatingNumbers({battle,beat,anchors,medal,enabled}:{battle:Battle;beat:Beat|null;anchors:Anchors;medal:number;enabled:boolean}){
   const [numeros,setNumeros]=useState<Numero[]>([]);
@@ -51,7 +58,11 @@ export function FloatingNumbers({battle,beat,anchors,medal,enabled}:{battle:Batt
         cura=porSegundo('heal');dano=porSegundo('damage');
       }
       const escudo=desta.find(e=>e.target===f.uid&&e.kind==='shield'&&e.label==='Escudo');
-      if(dano>0)novos.push({id:`${chave}-${f.uid}-d`,uid:f.uid,tipo:'dano',valor:dano,forte:dano>=f.maxHp*.16});
+      // as mecânicas que mexeram nos golpes deste número (o multiplicador de cada uma, juntando partes do mesmo golpe)
+      const mexeram=new Map<string,number>();
+      for(const e of desta)if(e.kind==='damage'&&e.target===f.uid&&(e.parte??0)===0)for(const m of e.mexeu??[])if(!mexeram.has(m.quem))mexeram.set(m.quem,m.mult);
+      const selos=[...mexeram].map(([quem,mult])=>({personagem:battle.fighters.find(x=>x.uid===quem)?.characterId??'',mult})).filter(x=>x.personagem).sort((a,z)=>Math.abs(z.mult-1)-Math.abs(a.mult-1)).slice(0,2);
+      if(dano>0)novos.push({id:`${chave}-${f.uid}-d`,uid:f.uid,tipo:'dano',valor:dano,forte:dano>=f.maxHp*.16,...(selos.length?{selos}:{})});
       if(cura>0)novos.push({id:`${chave}-${f.uid}-c`,uid:f.uid,tipo:'cura',valor:cura,forte:cura>=f.maxHp*.16});
       if(escudo)novos.push({id:`${chave}-${f.uid}-e`,uid:f.uid,tipo:'escudo',valor:escudo.value??0,forte:false});
       if(bloqueio>0)novos.push({id:`${chave}-${f.uid}-b`,uid:f.uid,tipo:'bloqueio',valor:bloqueio,forte:false});
@@ -66,6 +77,7 @@ export function FloatingNumbers({battle,beat,anchors,medal,enabled}:{battle:Batt
         {lista.map(n=><span key={n.id} className={`float-number float-${n.tipo} ${n.forte?'float-strong':''}`} onAnimationEnd={()=>setNumeros(l=>l.filter(x=>x.id!==n.id))}>
           {n.tipo==='cura'&&<HeartPulse size={14}/>}{(n.tipo==='escudo'||n.tipo==='bloqueio')&&<Shield size={13}/>}
           {n.tipo==='dano'?'−':n.tipo==='bloqueio'?'':'+'}{Math.round(n.valor)}{n.tipo==='bloqueio'?' bloqueado':''}
+          {n.selos?.map(x=>{const Ic=bolinhaDe(x.personagem).ic,pct=Math.round((x.mult-1)*100);return <i key={x.personagem} className={`float-selo ${pct>0?'mais':'menos'}`} style={{'--selo':corDaBolinha(x.personagem)??'#c58bff'} as React.CSSProperties}><Ic size={11} strokeWidth={2.6}/>{pct>0?`+${pct}`:`−${-pct}`}%</i>;})}
         </span>)}
       </span>;})}
   </div>;

@@ -112,6 +112,8 @@ export function ArenaUnit({fighter:f,battle,beat,onInspect,numbers,threatened,li
    * quanto falta; ao ativar, enche no Preparo e acende.
    */
   const unica=unicaDe(c.id),specDaBolinha=bolinhaDe(c.id),bolinha=bolinhaNaTela(specDaBolinha,f,battle),IconeDaUnica=specDaBolinha.ic,corDaUnica=corDaBolinha(c.id);
+  // a mecânica acabou de mexer num golpe (somou ou tirou dano): a bolinha pisca com o selo no número (FloatingNumbers)
+  const agiu=beat?.impacted?beat.events.find(e=>e.kind==='damage'&&revelado(beat,e)&&e.mexeu?.some(m=>m.quem===f.uid)):undefined;
   const cargaDaUnica=ativando?(at&&preparandoUnica?Math.min(100,100*at.t/Math.max(.01,at.fases.soltaEm)):100):Math.round(100*bolinha.carga);
   /*
    * O selo do traço e da Mecânica única fica um tempo na cabeça, com efeito no retrato (pedido do jogador: "aparece
@@ -210,6 +212,7 @@ export function ArenaUnit({fighter:f,battle,beat,onInspect,numbers,threatened,li
             :<><circle cx="18" cy="18" r="15.5" className="ub-trilho"/>{cargaDaUnica>0&&<circle cx="18" cy="18" r="15.5" pathLength="100" className="ub-carga" strokeDasharray={`${cargaDaUnica} 100`}/>}</>}</svg>
           {bolinha.texto&&!ativando?<b className="ub-numero" data-len={bolinha.texto.length}>{/[s%]$/.test(bolinha.texto)?<>{bolinha.texto.slice(0,-1)}<small>{bolinha.texto.slice(-1)}</small></>:bolinha.texto}</b>:<IconeDaUnica size={14} strokeWidth={2.4}/>}
           {bolinha.luz==='usada'&&!ativando&&<i className="ub-ok">✓</i>}
+          {agiu&&!ativando&&<i key={`age-${agiu.id}`} className="ub-age"/>}
           {/* o estouro de luz quando ela fica pronta (ou está quase) */}
           {(bolinha.luz==='pronta'||bolinha.luz==='quase')&&!ativando&&<i key={bolinha.luz} className={`ub-estouro ${bolinha.luz}`}/>}
         </span>}

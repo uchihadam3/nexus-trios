@@ -22,7 +22,66 @@ const sign=(f:Fighter)=>f.side==='player'?1:-1;
 const pressure=(b:Battle,side:Side,points:number)=>{b.momentum=clamp(b.momentum+(side==='player'?1:-1)*points,-D.maxScore,D.maxScore);};
 export function emit(b:Battle,e:Omit<BattleEvent,'id'|'time'>){b.events.push({...e,id:b.nextEvent++,time:b.time});if(b.events.length>180)b.events.shift();}
 /* Mecânicas únicas (src/engine/unicas.ts): os ganchos de quem tem uma. */
-const unica=(f:Fighter)=>UNICAS[f.characterId]?.ganchos;
+/*
+ * O aviso automático da Mecânica única (pedido do jogador: "toda mecânica tem que aparecer quando age"). Muitas
+ * mecânicas agem caladas — o Eletrificado do Thor, a queimadura da Nezuko, a dobra de sangue da Katara: o efeito
+ * entra, mas ninguém vê que foi a mecânica. Os ganchos de ação ficam embrulhados: se um deles causou alguma coisa
+ * (Status, dano, cura, Escudo, Carga, tempo) e não avisou, o aviso com o nome da mecânica entra logo antes do efeito.
+ * O que dispara a cada golpe (ao bater, ao apanhar, ao ver um golpe) só mostra o nome; o resto ativa por inteiro. A
+ * cura contínua (a regeneração do Deadpool) não avisa: o número verde já conta.
+ */
+const GANCHOS_DE_ACAO=['bateu','apanhou','viu','passo','usou','morreu','caiu','desviou','pegouStatus','curaFeita'] as const;
+/** O aviso automático sai no máximo a cada 4 s por lutador (a queimadura que tiquetaqueia não vira uma chuva de nomes). */
+const ESPACO_DO_AVISO=4;
+const LEVES=new Set<string>(['bateu','apanhou','viu','curaFeita']);
+const QUE_CONTAM=new Set<BattleEvent['kind']>(['status','damage','heal','shield','charge','tempo','cleanse','dispel','block','interrupt']);
+/** Um número que muda quando uma mecânica mexe no estado da luta sem evento (barra, Vida máxima, Carga, Status). */
+function estadoDaLuta(b:Battle):number{
+  let n=0;
+  // cada lutador com o seu peso: o que um perde e outro ganha (a Vida máxima que o Arthas rouba) não se anula
+  b.fighters.forEach((x,i)=>{const w=1+i*.61;n+=w*(x.action*7.3+x.maxHp*.013);for(const s of x.skills)n+=w*s.charge*.11;for(const s of x.statuses)n+=w*(s.remaining*.37+s.intensity*3.1);});
+  return n;
+}
+const embrulhadas=new Map<string,Ganchos|undefined>();
+type Ganchos=NonNullable<(typeof UNICAS)[string]>['ganchos'];
+function embrulha(id:string):Ganchos|undefined{
+  if(embrulhadas.has(id))return embrulhadas.get(id);
+  const u=UNICAS[id],g=u?.ganchos;
+  if(!u||!g){embrulhadas.set(id,g);return g;}
+  const novo={...g} as Record<string,unknown>;
+  for(const nome of GANCHOS_DE_ACAO){
+    const fn=(g as Record<string,unknown>)[nome];
+    if(typeof fn!=='function')continue;
+    novo[nome]=(...args:unknown[])=>{
+      const b=args[1] as Battle,f=args[2] as Fighter,antes=b.nextEvent,marca=estadoDaLuta(b);
+      const volta=(fn as (...a:unknown[])=>unknown)(...args);
+      const novos=b.events.filter(e=>e.id>=antes);
+      if(novos.some(e=>e.kind==='unica'&&e.source===f.uid))return volta;
+      const causou=novos.filter(e=>QUE_CONTAM.has(e.kind)&&(e.source===f.uid||e.attacker===f.uid));
+      // mexeu na luta sem evento (adiantou a barra de alguém, cresceu a Vida máxima, deu Carga, encurtou um Status):
+      // só o nome, rápido
+      if(!causou.length){
+        if(Math.abs(estadoDaLuta(b)-marca)<1e-6)return volta;
+        const ultimo=f.u?.__avisoAuto;
+        if(ultimo!==undefined&&b.time-ultimo<ESPACO_DO_AVISO)return volta;
+        (f.u??={}).__avisoAuto=b.time;
+        emit(b,{kind:'unica',source:f.uid,target:f.uid,label:u.nome,leve:true});
+        return volta;
+      }
+      // a cura contínua (regeneração) não anuncia a cada tique
+      if(nome==='passo'&&causou.every(e=>e.kind==='heal')&&causou.reduce((t,e)=>t+(e.value??0),0)<f.maxHp*.02)return volta;
+      const ultimo=f.u?.__avisoAuto;
+      if(ultimo!==undefined&&b.time-ultimo<ESPACO_DO_AVISO)return volta;
+      (f.u??={}).__avisoAuto=b.time;
+      const primeiro=b.events.indexOf(causou[0]!);
+      const aviso:BattleEvent={id:causou[0]!.id-.5,time:b.time,kind:'unica',source:f.uid,target:causou[0]!.target??f.uid,label:u.nome,...(LEVES.has(nome)?{leve:true}:{})};
+      if(primeiro>=0)b.events.splice(primeiro,0,aviso);
+      return volta;
+    };
+  }
+  const pronto=novo as Ganchos;embrulhadas.set(id,pronto);return pronto;
+}
+const unica=(f:Fighter)=>embrulha(f.characterId);
 /** Quem está usando uma habilidade agora (o golpe de uma habilidade conta como `habilidade` para as mecânicas). */
 let agindo:string|null=null,agindoIndice=-1;
 /** Quantos golpes a habilidade que está saindo agora dá (src/engine/golpes.ts); só o efeito dela mesma lê. */
@@ -307,9 +366,12 @@ function damage(b:Battle,source:Fighter,target:Fighter,raw:number,direto=true,la
   const interno=label==='Veneno'||label==='Sangramento'||label==='Perfuração';
   // Mecânicas únicas: quem bate (e a aura dos aliados dele) e quem apanha (e a aura dos aliados dele)
   const g:Golpe={direto,label,habilidade:agindo===source.uid,...(agindo===source.uid?{indice:agindoIndice}:{})};
-  let mCausa=1,mRecebe=unica(target)?.recebe?.(M,b,target,source,g)??1;
-  if(!devolvido&&!interno){mCausa*=unica(source)?.causa?.(M,b,source,target,g)??1;for(const a of b.fighters)if(a.side===source.side&&alive(a))mCausa*=unica(a)?.causaAliado?.(M,b,a,source,target,g)??1;}
-  for(const a of b.fighters)if(a.side===target.side&&a!==target&&alive(a))mRecebe*=unica(a)?.recebeAliado?.(M,b,a,target,source,g)??1;
+  // quem mexeu no golpe (a Mecânica única de quem bate, de quem apanha ou da aura de um aliado): vai no evento, para a
+  // tela mostrar o selo da mecânica no número (pedido do jogador: "toda mecânica tem que aparecer quando age")
+  const mexeu:{quem:string;mult:number}[]=[],anota=(quem:string,mult:number)=>{if(Math.abs(mult-1)>.04)mexeu.push({quem,mult});return mult;};
+  let mCausa=1,mRecebe=anota(target.uid,unica(target)?.recebe?.(M,b,target,source,g)??1);
+  if(!devolvido&&!interno){mCausa*=anota(source.uid,unica(source)?.causa?.(M,b,source,target,g)??1);for(const a of b.fighters)if(a.side===source.side&&alive(a))mCausa*=anota(a.uid,unica(a)?.causaAliado?.(M,b,a,source,target,g)??1);}
+  for(const a of b.fighters)if(a.side===target.side&&a!==target&&alive(a))mRecebe*=anota(a.uid,unica(a)?.recebeAliado?.(M,b,a,target,source,g)??1);
   const outgoing=(devolvido||interno?raw:raw*(1+intensity(source,'strengthened'))*(1-intensity(source,'weakened'))*(1+(source.bonus?.dano??0)))*mCausa;
   // Congelado: o golpe direto quebra o gelo e entra mais forte
   const gelo=direto?intensity(target,'frozen'):0;
@@ -318,7 +380,7 @@ function damage(b:Battle,source:Fighter,target:Fighter,raw:number,direto=true,la
   const protection=interno?0:intensity(target,'protected');
   let amount=beforeProtection*(1-protection)*(interno?1:1-(target.bonus?.defesa??0)),blocked=beforeProtection-amount;
   // Mecânicas únicas que põem teto no golpe (o Coração da Peach)
-  for(const a of b.fighters)if(a.side===target.side&&alive(a)){const h=unica(a)?.limita;if(h){const antes=amount;amount=h(M,b,a,target,amount);blocked+=antes-amount;}}
+  for(const a of b.fighters)if(a.side===target.side&&alive(a)){const h=unica(a)?.limita;if(h){const antes=amount;amount=h(M,b,a,target,amount);blocked+=antes-amount;if(antes>0)anota(a.uid,amount/antes);}}
   // só o que é por dentro (Veneno, Sangramento) passa pelo Escudo; Marcado não atravessa mais (pedido do jogador)
   const atravessaEscudo=interno||(direto&&!!unica(source)?.atravessaEscudo);
   if(!atravessaEscudo)for(const s of target.shields){const used=Math.min(s.amount,amount);s.amount-=used;amount-=used;blocked+=used;const owner=b.fighters.find(f=>f.uid===s.source);if(owner&&used>0){owner.stats.protection+=used;pressure(b,owner.side,D.event.usefulProtectionPerFullCondition*clamp(used/target.maxHp));sai({kind:'block',source:owner.uid,target:target.uid,attacker:source.uid,label:'Bloqueio',value:used,visual:'shield'});trigger(b,owner,'protected',owner,used/100);}}
@@ -343,7 +405,7 @@ function damage(b:Battle,source:Fighter,target:Fighter,raw:number,direto=true,la
   if(dealt>.01){
     // Dormindo: o golpe direto acorda
     if(direto&&target.hp>0&&intensity(target,'sleep')>0&&!unica(source)?.naoAcorda){target.statuses=target.statuses.filter(s=>s.id!=='sleep');if(label==='Impacto')label='Acordou';}
-    sai({kind:'damage',source:source.uid,target:target.uid,label,value:dealt});
+    sai({kind:'damage',source:source.uid,target:target.uid,label,value:dealt,...(mexeu.length?{mexeu}:{})});
     // Isca (o Light): quem bate no aliado que ele marcou se entrega — ele ganha Investigação sobre esse rival
     if(direto&&source.side!==target.side)for(const m of target.statuses)if(m.id==='marked'){const quem=b.fighters.find(f=>f.uid===m.source);const isca=quem&&quem.side===target.side&&alive(quem)?byId[quem.characterId].isca:undefined;if(quem&&isca)applyEffects(b,quem,[source],[{kind:'investigate',value:isca.investiga}]);}
     const choque=intensity(target,'electric');if(choque>0&&target.hp>0)target.action=Math.max(0,target.action-choque*CHOQUE_DO_ELETRIFICADO);

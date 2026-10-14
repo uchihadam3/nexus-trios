@@ -349,6 +349,11 @@
   -webkit-text-stroke:5px #12060a;paint-order:stroke fill;text-shadow:0 3px 6px #000c;
   animation:float-number calc(1.8s * var(--motion-scale,1)) cubic-bezier(.2,.7,.3,1) both}
 .arena-v2 .float-number svg{stroke-width:3;filter:drop-shadow(0 1px 1px #000)}
+/* o selo da Mecânica única que mexeu no golpe: o ícone e a cor dela, e quanto ela somou ou tirou */
+.arena-v2 .float-number .float-selo{display:inline-flex;align-items:center;gap:2px;margin-left:4px;padding:2px 6px 2px 4px;border-radius:99px;font-style:normal;font-size:12px;font-weight:900;letter-spacing:0;color:#fff;background:color-mix(in srgb,var(--selo) 45%,#120a1e);box-shadow:0 0 0 1.5px var(--selo),0 0 10px color-mix(in srgb,var(--selo),transparent 40%);-webkit-text-stroke:0;text-shadow:0 1px 1px #000;animation:float-selo .5s cubic-bezier(.2,1.8,.4,1) both}
+.arena-v2 .float-number .float-selo svg{stroke-width:2.6;color:#fff;filter:drop-shadow(0 0 3px var(--selo))}
+.arena-v2 .float-number .float-selo.menos{background:color-mix(in srgb,var(--selo) 25%,#0a1420)}
+@keyframes float-selo{0%{transform:scale(0) rotate(-20deg)}100%{transform:scale(1) rotate(0)}}
 .arena-v2 .float-dano{color:#ff4f5e}
 .arena-v2 .float-dano.float-strong{font-size:clamp(28px,8.4vw,42px);color:#ff3346}
 .arena-v2 .float-cura{color:#52f08e;-webkit-text-stroke-color:#04210f}
@@ -509,6 +514,8 @@
 .unica-bolinha .ub-numero small{font-size:.62em;font-weight:800;margin-left:.5px;opacity:.85}
 .unica-bolinha .ub-estouro{position:absolute;inset:-2px;border-radius:50%;border:2px solid var(--ub-cor);pointer-events:none;animation:ub-estouro .7s cubic-bezier(.2,.7,.3,1) both}
 .unica-bolinha .ub-estouro.quase{border-width:1.5px;animation-duration:.55s}
+.unica-bolinha .ub-age{position:absolute;inset:-3px;border-radius:50%;pointer-events:none;background:radial-gradient(circle,color-mix(in srgb,var(--ub-cor),#fff 40%) 0%,transparent 70%);box-shadow:0 0 0 2px var(--ub-cor),0 0 16px var(--ub-cor);animation:ub-age .6s cubic-bezier(.2,1.5,.4,1) both}
+@keyframes ub-age{0%{transform:scale(.6);opacity:1}45%{transform:scale(1.35);opacity:.9}100%{transform:scale(1.7);opacity:0}}
 @keyframes ub-estouro{0%{transform:scale(.85);opacity:1}100%{transform:scale(2);opacity:0}}
 @keyframes ub-quase{50%{transform:scale(1.12);box-shadow:inset 0 1px 0 #ffffff33,inset 0 -2px 4px #0008,0 0 0 1.5px #0d0816,0 0 14px var(--ub-cor),0 3px 8px #000b}}
 @media (prefers-reduced-motion:reduce){.unica-bolinha.ub-quase,.unica-bolinha.ub-pronta{animation:none}.unica-bolinha .ub-estouro{display:none}}

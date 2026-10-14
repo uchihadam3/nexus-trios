@@ -395,7 +395,7 @@ function ativacoesCheias(d:Direction,events:BattleEvent[],after:Battle):Set<stri
   const cheias=new Set<string>();
   for(const e of events){
     if(e.kind!=='unica'||cheias.has(e.source))continue;
-    const f=after.fighters.find(x=>x.uid===e.source);if(!f||soONome(f.characterId,e.label))continue;
+    const f=after.fighters.find(x=>x.uid===e.source);if(!f||e.leve||soONome(f.characterId,e.label))continue;
     const vista=(d.unicaCheia??={})[e.source];
     if(vista!==undefined&&after.time-vista<INTERVALO_DA_UNICA)continue;
     d.unicaCheia[e.source]=after.time;cheias.add(e.source);
