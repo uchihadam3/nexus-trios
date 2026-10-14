@@ -255,3 +255,21 @@ describe('Saitama no modo sério', () => {
     expect(serio).toBeGreaterThan(0);
   });
 });
+
+/* Shadow (pedido do jogador: "Shadow sem inibidores"): tirou os inibidores, troca o retrato até o fim da luta. */
+describe('Shadow sem inibidores', () => {
+  it('troca o retrato quando tira os inibidores', () => {
+    let tirou = 0;
+    for (let semente = 1; semente <= 20; semente++) {
+      const b = createBattle(['shadowhh', 'hinata', 'naruto'], ['goku', 'vegeta', 'hulk'], semente);
+      const sh = b.fighters.find((f) => f.characterId === 'shadowhh')!;
+      for (let t = 0; t < 6000 && !b.finished; t++) {
+        stepBattle(b);
+        const sem = !!sh.u?.aneis;
+        if (sem) tirou++;
+        expect(naFormaDeAgora(byId.shadowhh, sh, b).portrait).toBe(sem ? '/assets/portraits/formas/shadow-sem-inibidores.webp' : byId.shadowhh.portrait);
+      }
+    }
+    expect(tirou).toBeGreaterThan(0);
+  });
+});
