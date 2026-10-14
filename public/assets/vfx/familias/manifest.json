@@ -2295,6 +2295,20 @@
   "laco": false,
   "bytes": 46326
  },
+ "blasters_do_quill": {
+  "descricao": "básico do Senhor das Estrelas: os dois blasters girando",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 13324
+ },
  "blasters_elementais": {
   "descricao": "Senhor das Estrelas: dois blasters alternando tiros de plasma",
   "quadros": 12,
@@ -3400,6 +3414,20 @@
   ],
   "laco": false,
   "bytes": 25290
+ },
+ "canhao_do_rocket": {
+  "descricao": "básico do Rocket: o canhão grande demais e o recuo",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 34106
  },
  "canhao_incinerador": {
   "descricao": "Genos · o fogo largo dos canhões",
@@ -16701,6 +16729,20 @@
   "laco": true,
   "bytes": 14334
  },
+ "mega_buster": {
+  "descricao": "básico do Mega Man: as três balinhas do Mega Buster",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 7596
+ },
  "megamente_preparo": {
   "descricao": "Megamente · a cabeçona e as engrenagens (Preparo, laço)",
   "quadros": 12,
@@ -16924,6 +16966,20 @@
   ],
   "laco": true,
   "bytes": 58114
+ },
+ "mira_da_beretta": {
+  "descricao": "básico da Jill: a mira laser e os dois tiros",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 8862
  },
  "mira_firme": {
   "descricao": "Leon · o laser e a mira travando",
@@ -26963,6 +27019,20 @@
   "laco": false,
   "bytes": 15712
  },
+ "rajada_do_justiceiro": {
+  "descricao": "básico do Justiceiro: três tiros e a caveira",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 13284
+ },
  "rajada_do_poder_cosmico": {
   "descricao": "Galactus · o elmo e as colunas cósmicas",
   "quadros": 12,
@@ -26976,6 +27046,20 @@
   ],
   "laco": false,
   "bytes": 12954
+ },
+ "rajada_do_spartan": {
+  "descricao": "básico do Master Chief: a rajada e o escudo em hexágonos",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 15746
  },
  "rajada_venenosa": {
   "descricao": "Mulher-Aranha · a rajada bioelétrica",
@@ -32115,6 +32199,20 @@
   "laco": false,
   "bytes": 21896
  },
+ "tiro_do_coronel": {
+  "descricao": "básico do Roy Mustang: o tiro e o círculo de transmutação",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 16942
+ },
  "tiro_do_exterminador": {
   "descricao": "Básico do T-800: a mira vermelha e a espingarda",
   "quadros": 12,
@@ -32128,6 +32226,20 @@
   ],
   "laco": false,
   "bytes": 21264
+ },
+ "tiro_e_faca_leon": {
+  "descricao": "básico do Leon: o tiro na cabeça e a faca",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 13824
  },
  "tiro_final": {
   "descricao": "Spike · o tiro único e a fumaça",

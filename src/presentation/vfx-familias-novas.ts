@@ -2044,6 +2044,14 @@ export const FAMILIAS_NOVAS = {
   bastao_de_ricochete: n({ nome: 'Bastão de ricochete', grupo: 'físico', aponta: true, impacto: 'bastao_de_ricochete', escala: 2.0, tempo: 1.0, cor: '#ff5a5a', tinta: 'fixa' }),
   adaga_das_ilusoes: n({ nome: 'Adaga das ilusões', grupo: 'corte', aponta: true, impacto: 'adaga_das_ilusoes', escala: 2.0, tempo: 1.0, cor: '#5ae07a', tinta: 'fixa' }),
   haste_negra_pain: n({ nome: 'Haste negra', grupo: 'corte', aponta: true, impacto: 'haste_negra_pain', escala: 2.0, tempo: 1.0, cor: '#b08aff', tinta: 'fixa' }),
+  tiro_do_coronel: n({ nome: 'Tiro do coronel', grupo: 'projétil', aponta: true, impacto: 'tiro_do_coronel', escala: 2.0, tempo: 1.0, cor: '#ff8a3a', tinta: 'fixa' }),
+  rajada_do_justiceiro: n({ nome: 'Rajada do Justiceiro', grupo: 'projétil', aponta: true, impacto: 'rajada_do_justiceiro', escala: 2.0, tempo: 1.0, cor: '#e8e8f0', tinta: 'fixa' }),
+  blasters_do_quill: n({ nome: 'Blasters', grupo: 'projétil', aponta: true, impacto: 'blasters_do_quill', escala: 2.0, tempo: 1.0, cor: '#ff9a3a', tinta: 'fixa' }),
+  canhao_do_rocket: n({ nome: 'Canhão do Rocket', grupo: 'projétil', aponta: true, impacto: 'canhao_do_rocket', escala: 2.0, tempo: 1.0, cor: '#6ac8ff', tinta: 'fixa' }),
+  rajada_do_spartan: n({ nome: 'Rajada Spartan', grupo: 'projétil', aponta: true, impacto: 'rajada_do_spartan', escala: 2.0, tempo: 1.0, cor: '#7ae07a', tinta: 'fixa' }),
+  tiro_e_faca_leon: n({ nome: 'Tiro e faca', grupo: 'projétil', aponta: true, impacto: 'tiro_e_faca_leon', escala: 2.0, tempo: 1.0, cor: '#e0d0a0', tinta: 'fixa' }),
+  mira_da_beretta: n({ nome: 'Mira laser', grupo: 'projétil', aponta: true, impacto: 'mira_da_beretta', escala: 2.0, tempo: 1.0, cor: '#ff4a5a', tinta: 'fixa' }),
+  mega_buster: n({ nome: 'Mega Buster', grupo: 'projétil', aponta: true, impacto: 'mega_buster', escala: 2.0, tempo: 1.0, cor: '#5ac8ff', tinta: 'fixa' }),
 } as const satisfies Record<string, Familia>;
 
 export type FamiliaNova = keyof typeof FAMILIAS_NOVAS;
@@ -2073,7 +2081,8 @@ export const NOVAS_NO_ALVO = new Set<FamiliaNova>(['ressurreicao', 'renascer', '
   'corte_da_agua_tanjiro', 'corte_da_zangetsu', 'espelho_partido_aizen', 'laminas_giratorias_levi', 'corte_de_prata_blade', 'masamune_sephiroth', 'corte_da_yamato', 'lamina_hf_raiden',
   'lamina_do_credo_ezio', 'lanca_corrente_scorpion', 'keyblade_sora', 'katana_da_2b', 'flor_escarlate_malenia', 'corte_izuna_hayabusa', 'adaga_de_areia_principe', 'corte_negro_hiei',
   'katanas_gemeas_leonardo', 'golpe_unico_jack', 'corte_brutal_kenpachi', 'giro_da_espada_link', 'rebellion_dante', 'espada_de_prata_geralt', 'corte_dos_morcegos', 'grade_de_cortes_trunks',
-  'espada_do_heroi_finn', 'bengala_do_mestre', 'espada_da_protecao_shera', 'garras_de_adamantium', 'katanas_e_piadas', 'bastao_de_ricochete', 'adaga_das_ilusoes', 'haste_negra_pain']);
+  'espada_do_heroi_finn', 'bengala_do_mestre', 'espada_da_protecao_shera', 'garras_de_adamantium', 'katanas_e_piadas', 'bastao_de_ricochete', 'adaga_das_ilusoes', 'haste_negra_pain',
+  'tiro_do_coronel', 'rajada_do_justiceiro', 'blasters_do_quill', 'canhao_do_rocket', 'rajada_do_spartan', 'tiro_e_faca_leon', 'mira_da_beretta', 'mega_buster']);
 
 /** Bons para o ataque básico do personagem (quando ele já usa a família numa habilidade). */
 export const NOVAS_DE_BASICO = new Set<FamiliaNova>(['garras', 'chicote', 'bastao', 'mordida', 'tentaculos', 'florete',

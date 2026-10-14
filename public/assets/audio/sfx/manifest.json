@@ -2790,6 +2790,23 @@
    ],
    "bytes": 98752
   },
+  "blasters-do-quill": {
+   "arquivo": "blasters-do-quill.mp3",
+   "descricao": "básico de Senhor das Estrelas: os dois blasters zunindo",
+   "versoes": [
+    0.0,
+    1.0717,
+    2.068,
+    3.0462
+   ],
+   "duracoes": [
+    0.9917,
+    0.9164,
+    0.8982,
+    0.9452
+   ],
+   "bytes": 31893
+  },
   "blasters-elementais": {
    "arquivo": "blasters-elementais.mp3",
    "descricao": "básico de Senhor das Estrelas: pew pew retrô alternado e estouros",
@@ -3996,6 +4013,23 @@
     2.1007
    ],
    "bytes": 66679
+  },
+  "canhao-do-rocket": {
+   "arquivo": "canhao-do-rocket.mp3",
+   "descricao": "básico de Rocket: o canhão pesado e o recuo",
+   "versoes": [
+    0.0,
+    1.38,
+    2.8071,
+    4.1432
+   ],
+   "duracoes": [
+    1.3,
+    1.3471,
+    1.256,
+    1.3198
+   ],
+   "bytes": 47192
   },
   "canhao-incinerador": {
    "arquivo": "canhao-incinerador.mp3",
@@ -19807,6 +19841,23 @@
    ],
    "bytes": 78713
   },
+  "mega-buster": {
+   "arquivo": "mega-buster.mp3",
+   "descricao": "básico de Mega Man: as três balinhas do Mega Buster",
+   "versoes": [
+    0.0,
+    0.8919,
+    1.784,
+    2.6103
+   ],
+   "duracoes": [
+    0.8119,
+    0.8121,
+    0.7463,
+    0.8122
+   ],
+   "bytes": 34042
+  },
   "megamente-preparo": {
    "arquivo": "megamente-preparo.mp3",
    "descricao": "Megamente: as engrenagens (Preparo)",
@@ -20061,6 +20112,23 @@
     1.5228
    ],
    "bytes": 50180
+  },
+  "mira-da-beretta": {
+   "arquivo": "mira-da-beretta.mp3",
+   "descricao": "básico de Jill: o bipe da mira e os dois tiros",
+   "versoes": [
+    0.0,
+    1.031,
+    2.0988,
+    3.1612
+   ],
+   "duracoes": [
+    0.951,
+    0.9878,
+    0.9824,
+    0.9973
+   ],
+   "bytes": 34869
   },
   "mira-firme": {
    "arquivo": "mira-firme.mp3",
@@ -32268,6 +32336,23 @@
    ],
    "bytes": 52927
   },
+  "rajada-do-justiceiro": {
+   "arquivo": "rajada-do-justiceiro.mp3",
+   "descricao": "básico de Justiceiro: três tiros e as cápsulas",
+   "versoes": [
+    0.0,
+    1.28,
+    2.6035,
+    3.8429
+   ],
+   "duracoes": [
+    1.2,
+    1.2435,
+    1.1594,
+    1.2183
+   ],
+   "bytes": 41860
+  },
   "rajada-do-poder-cosmico": {
    "arquivo": "rajada-do-poder-cosmico.mp3",
    "descricao": "Galactus: a voz e as colunas",
@@ -32284,6 +32369,23 @@
     2.0305
    ],
    "bytes": 65662
+  },
+  "rajada-do-spartan": {
+   "arquivo": "rajada-do-spartan.mp3",
+   "descricao": "básico de Master Chief: a rajada e o escudo estalando",
+   "versoes": [
+    0.0,
+    1.18,
+    2.3999,
+    3.5427
+   ],
+   "duracoes": [
+    1.1,
+    1.1399,
+    1.0628,
+    1.1167
+   ],
+   "bytes": 49033
   },
   "rajada-venenosa": {
    "arquivo": "rajada-venenosa.mp3",
@@ -38405,6 +38507,23 @@
    ],
    "bytes": 45820
   },
+  "tiro-do-coronel": {
+   "arquivo": "tiro-do-coronel.mp3",
+   "descricao": "básico de Roy Mustang: o tiro e o estalo da transmutação",
+   "versoes": [
+    0.0,
+    0.9577,
+    2.0083,
+    2.9878
+   ],
+   "duracoes": [
+    0.8777,
+    0.9705,
+    0.8996,
+    0.9294
+   ],
+   "bytes": 33310
+  },
   "tiro-do-exterminador": {
    "arquivo": "tiro-do-exterminador.mp3",
    "descricao": "básico do T-800: o HUD e a espingarda",
@@ -38421,6 +38540,23 @@
     1.3198
    ],
    "bytes": 47760
+  },
+  "tiro-e-faca-leon": {
+   "arquivo": "tiro-e-faca-leon.mp3",
+   "descricao": "básico de Leon: o tiro e a faca",
+   "versoes": [
+    0.0,
+    1.2435,
+    2.3523,
+    3.5062
+   ],
+   "duracoes": [
+    1.1635,
+    1.0288,
+    1.0739,
+    1.0159
+   ],
+   "bytes": 38036
   },
   "tiro-final": {
    "arquivo": "tiro-final.mp3",
