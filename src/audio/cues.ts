@@ -373,7 +373,7 @@ const SONS_DE_ANTES = [...new Set(Object.values(ANTES_DA_NOVA).flatMap((x) => [x
 
 // os estágios e o arremesso da esfera que cresce (a Genki Dama: src/presentation/esfera-que-cresce.ts)
 const SONS_DA_ESFERA = Object.values(ESFERA_QUE_CRESCE).flatMap((e) => [...e.sons, e.lanca]);
-export const TODOS_OS_SONS: Sound[] = [...SONS, ...SONS_DAS_NOVAS, ...SONS_DE_ANTES, ...SONS_DA_ESFERA, 'cravar', 'ricochete'];
+export const TODOS_OS_SONS: Sound[] = [...SONS, ...SONS_DAS_NOVAS, ...SONS_DE_ANTES, ...SONS_DA_ESFERA, 'apoio-sai', 'cravar', 'ricochete'];
 
 /*
  * Prioridade da mixagem, do adendo: grand > impacto importante > interrupção >

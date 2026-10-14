@@ -17,6 +17,7 @@ import { DESVIA_NA_UNICA, ativacaoNaTela, entregaDoEvento, golpeParado, type Ati
 import { combatLinks } from './combat-links';
 import { distanciaDoGolpe } from './distancia';
 import { profileFor } from './vfxProfiles';
+import { GUARDA_DE_CORPO } from './entrega-de-apoio';
 
 export type ActStyle = 'melee' | 'ranged' | 'area' | 'support' | 'curse' | 'cast' | 'interrupt' | 'esquiva';
 export type ReactStyle = 'hit' | 'hit-heavy' | 'block' | 'heal' | 'shield' | 'buff' | 'curse' | 'broken' | 'fall';
@@ -53,7 +54,11 @@ function estiloDeQuemAge(beat: Beat, battle: Battle, area: boolean): ActStyle | 
   if (event.kind !== 'basic' && event.kind !== 'skill') return undefined;
   const links = combatLinks(beat, battle).filter((l) => l.source === event.source);
   const ataca = links.some((l) => l.kind === 'attack' || l.kind === 'interrupt');
-  if (!ataca && links.length && links.every((l) => ['heal', 'shield', 'buff', 'support'].includes(l.kind))) return 'support';
+  if (!ataca && links.length && links.every((l) => ['heal', 'shield', 'buff', 'support'].includes(l.kind))) {
+    // quem protege com o próprio corpo vai até o aliado (o Wolverine na frente dele, o Superman segurando)
+    const quem = battle.fighters.find((f) => f.uid === event.source);
+    return quem && event.kind === 'skill' && GUARDA_DE_CORPO.has(`${quem.characterId}:${event.skill}`) && event.target && event.target !== event.source ? 'melee' : 'support';
+  }
   if (!ataca && links.some((l) => l.kind === 'debuff')) return 'curse';
   if (area) return 'area';
   const source = battle.fighters.find((f) => f.uid === event.source);

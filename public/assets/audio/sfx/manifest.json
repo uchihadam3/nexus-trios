@@ -767,6 +767,23 @@
    ],
    "bytes": 62667
   },
+  "apoio-sai": {
+   "arquivo": "apoio-sai.mp3",
+   "descricao": "A esfera do apoio saindo para o aliado",
+   "versoes": [
+    0.0,
+    1.18,
+    2.3999,
+    3.5427
+   ],
+   "duracoes": [
+    1.1,
+    1.1399,
+    1.0628,
+    1.1167
+   ],
+   "bytes": 51234
+  },
   "apolo-preparo": {
    "arquivo": "apolo-preparo.mp3",
    "descricao": "Apolo: o sol nascendo (Preparo)",

@@ -246,6 +246,7 @@ class BattleAudio {
       sons.add(SOM_DA_ESPERA(id) as Sound);sons.add(SOM_DA_VOLTA(id) as Sound);
       const esfera=ESFERA_QUE_CRESCE[id];if(esfera)for(const x of [...esfera.sons,esfera.lanca])sons.add(x as Sound);
     }
+    sons.add('apoio-sai' as Sound);
     await Promise.all([...sons].filter(x=>this.manifest?.sons[x]).map(x=>this.loadCue(x)));
   }
   private async preloadCues(){

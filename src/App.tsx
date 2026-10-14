@@ -23,7 +23,8 @@ import { battleAudio,faixaDaLuta } from './lib/audio';
 import { efeitoDaUnica } from './presentation/unicas-efeitos';
 import { rajadaDaChave } from './presentation/rajada-da-unica';
 import { ESFERA_QUE_CRESCE,estagiosDaEsfera } from './presentation/esfera-que-cresce';
-import { createDirection,restoreDirection,checkpointDirection,advanceDirection,type Direction,type Beat,type BeatTrace } from './presentation/director';
+import { entregasDeApoio } from './presentation/entrega-de-apoio';
+import { createDirection,duracaoBase,restoreDirection,checkpointDirection,advanceDirection,type Direction,type Beat,type BeatTrace } from './presentation/director';
 import { fasesDoEvento } from './presentation/ativacao-da-unica';
 import { preparoDaUnica } from './presentation/preparo-da-unica';
 import { PRESENTATION as P } from './presentation/config';
@@ -68,7 +69,7 @@ export default function App(){
   const runRef=useRef(run),lastSave=useRef(0);runRef.current=run;
   const direction=useRef<Direction|null>(null);
   const [presentation,setPresentation]=useState<{battle:Battle;beat:Beat|null}|null>(null);
-  const lastAudio=useRef(0),lastDominionSound=useRef(0),passoTocado=useRef({beat:-1,passo:1}),unicaTocada=useRef<number|null>(null),pausasTocadas=useRef(new Set<string>()),divida=useRef(0);
+  const lastAudio=useRef(0),lastDominionSound=useRef(0),passoTocado=useRef({beat:-1,passo:1}),unicaTocada=useRef<number|null>(null),apoioTocado=useRef<number|null>(null),pausasTocadas=useRef(new Set<string>()),divida=useRef(0);
   const changeRun=(next:Run|null)=>{runRef.current=next;setRun(next);save('run',next);};
   const directionFor=(current:Run)=>{
     const battle=current.battle!;
@@ -316,6 +317,15 @@ export default function App(){
         else if(dono)battleAudio.sound(preparoDaUnica(dono.characterId).som,PRIORIDADE.habilidade,0,ativo.event.id*10+6);
         // a explosão da Genki Dama tem 0,85 s de ronco antes do estrondo: o estrondo cai na chegada da esfera
         if(dono)battleAudio.sound(efeitoDaUnica(dono.characterId,ativo.event.label).som as Sound,PRIORIDADE.habilidade,0,ativo.event.id*10+7,esfera?Math.max(0,fases.efeitoEm-.85):fases.soltaEm);
+      }
+      // a esfera do apoio saindo para o aliado (src/presentation/entrega-de-apoio.ts): o som sai junto com ela
+      if(ativo&&apoioTocado.current!==ativo.event.id&&!mudo){
+        const entregas=entregasDeApoio(ativo);
+        if(entregas.length){
+          apoioTocado.current=ativo.event.id;
+          const agora=ativo.elapsed-duracaoBase(ativo)*P.impactAt;
+          entregas.forEach((x,k)=>battleAudio.sound('apoio-sai',PRIORIDADE.apoio,0,ativo.event.id*10+3+k*1000,Math.max(0,x.sai-agora)));
+        }
       }
       // cada pausa do golpe (alguém ativando antes de ele cair): o som de carregar quando ela começa e o efeito dela quando solta
       for(const pausa of ativo?.pausas??[]){
