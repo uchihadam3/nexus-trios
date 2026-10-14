@@ -70,6 +70,11 @@ export const VISUAL_DO_COMBO: Record<string, { icone: LucideIcon; cor: string }>
 /** Artes individuais do Livro de Combos. As próximas podem entrar neste mapa sem mexer na lógica do livro. */
 export const ARTES_DO_COMBO: Record<string, { fundo: string; selo: string }> = {
   'gelo-fogo': { fundo: '/assets/combos/choque-termico-bg.webp', selo: '/assets/combos/choque-termico-selo.webp' },
+  'gelo-quebra': { fundo: '/assets/combos/gelo-quebra-bg.webp', selo: '/assets/combos/gelo-quebra-selo.webp' },
+  'veneno-sangue': { fundo: '/assets/combos/veneno-sangue-bg.webp', selo: '/assets/combos/veneno-sangue-selo.webp' },
+  'sangue-vampiro': { fundo: '/assets/combos/sangue-vampiro-bg.webp', selo: '/assets/combos/sangue-vampiro-selo.webp' },
+  'maldicao-vampiro': { fundo: '/assets/combos/maldicao-vampiro-bg.webp', selo: '/assets/combos/maldicao-vampiro-selo.webp' },
+  'sono-golpe': { fundo: '/assets/combos/sono-golpe-bg.webp', selo: '/assets/combos/sono-golpe-selo.webp' },
 };
 const ehTrio = (id: string) => id.startsWith('trio-');
 const visual = (id: string) => VISUAL_DO_COMBO[id] ?? (id.startsWith('lenda-') ? { icone: Crown, cor: '#ffd36b' } : { icone: Link2, cor: '#c8f560' });
