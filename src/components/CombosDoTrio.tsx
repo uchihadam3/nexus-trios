@@ -100,6 +100,12 @@ export const ARTES_DO_COMBO: Record<string, { fundo: string; selo: string }> = {
   'invoca-carga': { fundo: '/assets/combos/invoca-carga-bg.webp', selo: '/assets/combos/invoca-carga-selo.webp' },
   'bomba-fogo': { fundo: '/assets/combos/bomba-fogo-bg.webp', selo: '/assets/combos/bomba-fogo-selo.webp' },
   'eletrico-golpe': { fundo: '/assets/combos/eletrico-golpe-bg.webp', selo: '/assets/combos/eletrico-golpe-selo.webp' },
+  'cego-golpe': { fundo: '/assets/combos/cego-golpe-bg.webp', selo: '/assets/combos/cego-golpe-selo.webp' },
+  'dissipa-maldicao': { fundo: '/assets/combos/dissipa-maldicao-bg.webp', selo: '/assets/combos/dissipa-maldicao-selo.webp' },
+  'copia-golpe': { fundo: '/assets/combos/copia-golpe-bg.webp', selo: '/assets/combos/copia-golpe-selo.webp' },
+  'acumula-barreira': { fundo: '/assets/combos/acumula-barreira-bg.webp', selo: '/assets/combos/acumula-barreira-selo.webp' },
+  'paralisa-golpe': { fundo: '/assets/combos/paralisa-golpe-bg.webp', selo: '/assets/combos/paralisa-golpe-selo.webp' },
+  'provoca-regen': { fundo: '/assets/combos/provoca-regen-bg.webp', selo: '/assets/combos/provoca-regen-selo.webp' },
 };
 const ehTrio = (id: string) => id.startsWith('trio-');
 const visual = (id: string) => VISUAL_DO_COMBO[id] ?? (id.startsWith('lenda-') ? { icone: Crown, cor: '#ffd36b' } : { icone: Link2, cor: '#c8f560' });
