@@ -60,9 +60,9 @@ function FichaDoLutador({battle,f,onSelect}:{battle:Battle;f:Fighter;onSelect:(t
   const traco=presentTrait(c.trait),unica=unicaDe(c.id);
   const extras=[c.renascer&&(f.voltou?'Já renasceu nesta luta. ':'')+textoDoRenascer(c.renascer),c.ultimaResistencia&&(f.resistiu?'Já usou nesta luta. ':'')+textoDaResistencia(c.ultimaResistencia),c.despercebido&&textoDoDespercebido(),c.isca&&textoDaIsca(c.isca)].filter((x):x is string=>!!x);
   const basico=c.basic.effects.map(effect=>presentEffect(effect,c.basic.target)).join(' · ');
-  // de quantos em quantos segundos ele bate: o normal dele e, se mudou na luta, o de agora
+  // de quantos em quantos segundos ele bate agora (verde mais rápido, vermelho mais lento), ao lado do Próximo ataque
   const ritmo=intervaloDoBasico(battle,f),seg=(n:number)=>n.toLocaleString('pt-BR',{minimumFractionDigits:1,maximumFractionDigits:1});
-  const ritmoAgora=ritmo.agora===null?'parado agora':ritmo.agora<ritmo.base*.97?`agora ${seg(ritmo.agora)} s, mais rápido`:ritmo.agora>ritmo.base*1.03?`agora ${seg(ritmo.agora)} s, mais lento`:'';
+  const ritmoTom=ritmo.agora===null?'parado':ritmo.agora<ritmo.base*.97?'rapido':ritmo.agora>ritmo.base*1.03?'lento':'';
   return <>
     <header className="bi2-topo">
       <div className={`bi2-retrato ${fracao<.3?'perigo':''}`} style={{'--p':fracao*100} as CSSProperties}><Portrait character={c}/></div>
@@ -70,7 +70,7 @@ function FichaDoLutador({battle,f,onSelect}:{battle:Battle;f:Fighter;onSelect:(t
         <small>{universoDaFicha(c)}</small>
         <h3>{c.name}</h3>
         <div className="bi2-barra vida" style={{'--p':fracao*100} as CSSProperties}><i/><span><HeartPulse size={13}/><b>{vida}</b>/{Math.round(f.maxHp)}{escudo>0&&<em><ShieldHalf size={12}/><TermoBotao termo={termoPorId.escudo!}>{escudo}</TermoBotao></em>}</span></div>
-        <div className="bi2-barra ritmo" style={{'--p':Math.min(1,Math.max(0,f.action))*100} as CSSProperties}><i/><span><Clock3 size={13}/><TermoBotao termo={termoPorId['ataque-basico']!}>Próximo ataque</TermoBotao></span></div>
+        <div className="bi2-barra ritmo" style={{'--p':Math.min(1,Math.max(0,f.action))*100} as CSSProperties}><i/><span><Clock3 size={13}/><TermoBotao termo={termoPorId['ataque-basico']!}>Próximo ataque</TermoBotao>{ritmoTom==='parado'?<em className="bi2-seg parado">parado</em>:<em className={`bi2-seg ${ritmoTom}`}>a cada <b>{seg(ritmo.agora??ritmo.base)}s</b>{ritmoTom==='rapido'&&' ▲'}{ritmoTom==='lento'&&' ▼'}</em>}</span></div>
       </div>
     </header>
     <div className="bi2-habs">{c.skills.map((s,i)=>{const e=estadoDa(battle,f,i);return <button key={s.id} className={`bi2-hab ${e.classe}`} style={{'--i':i} as CSSProperties} onClick={()=>onSelect({kind:'skill',fighter:f,index:i})}>
@@ -91,7 +91,6 @@ function FichaDoLutador({battle,f,onSelect}:{battle:Battle;f:Fighter;onSelect:(t
       <section className="bi2-cartao basico" style={{'--i':5} as CSSProperties}>
         <span className="bi2-selo"><Swords size={12}/><TermoBotao termo={termoPorId['ataque-basico']!}>Ataque básico</TermoBotao></span>
         <b>{c.basic.name}</b><p><ComTermos texto={basico+'.'}/>{c.basic.jeito&&<> <ComTermos texto={textoDoJeito(c.basic.jeito)+'.'}/></>}</p>
-        <p className="bi2-ritmo"><Clock3 size={12}/>Bate a cada <b>{seg(ritmo.base)} s</b>{ritmoAgora&&<em className={ritmo.agora===null?'parado':ritmo.agora<ritmo.base?'rapido':'lento'}> · {ritmoAgora}</em>}</p>
       </section>
     </div>
     {/* Os Status do lutador, com o valor de agora e o tempo que falta; cada um abre o detalhe. */}

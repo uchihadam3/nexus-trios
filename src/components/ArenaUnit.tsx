@@ -1,6 +1,6 @@
 import { useEffect,useRef,useState } from 'react';
-import { Flame,Hourglass,Shield,HeartPulse,Skull,Sparkles,Swords,Zap } from 'lucide-react';
-import { condicaoAtendida,intervaloDoBasico } from '../engine/battle';
+import { Flame,Hourglass,Shield,HeartPulse,Skull,Sparkles,Zap } from 'lucide-react';
+import { condicaoAtendida } from '../engine/battle';
 import type { Battle,Fighter,Status } from '../engine/types';
 import { etapaDoEvento,passoAtual,revelado,type Beat } from '../presentation/director';
 import { ativacaoNaTela } from '../presentation/ativacao-da-unica';
@@ -179,10 +179,6 @@ export function ArenaUnit({fighter:f,battle,beat,onInspect,numbers,threatened,li
   const limpo=impacted?[...(beat?.events??[])].reverse().find(e=>revelado(beat!,e)&&e.target===f.uid&&(e.kind==='cleanse'||e.kind==='dispel')):undefined;
   const levantou=impacted?beat?.events.find(e=>revelado(beat,e)&&e.target===f.uid&&e.kind==='revive'):undefined;
   const ring=acting&&!impacted?1:f.action;
-  // a velocidade do ataque básico: de quantos em quantos segundos ele bate agora (verde mais rápido, vermelho mais lento)
-  const ritmo=out||renascendo?null:intervaloDoBasico(battle,f);
-  const ritmoTom=!ritmo?'':ritmo.agora===null?'parado':ritmo.agora<ritmo.base*.97?'rapido':ritmo.agora>ritmo.base*1.03?'lento':'';
-  const ritmoTexto=ritmo?.agora==null?'':ritmo.agora.toLocaleString('pt-BR',{minimumFractionDigits:1,maximumFractionDigits:1});
   const light=battle.fighters.find(actor=>actor.side!==f.side&&actor.characterId==='light');
   const knowledge=light?.discovered?.[f.uid];
   const advantageSide=battle.dominion>3?'player':battle.dominion< -3?'enemy':null;
@@ -217,10 +213,6 @@ export function ArenaUnit({fighter:f,battle,beat,onInspect,numbers,threatened,li
           <circle cx="50" cy="50" r="47" className="attack-ring-ticks" pathLength="100" strokeDasharray=".4 9.6"/>
           <circle cx="50" cy="50" r="47" className="attack-ring-fill" pathLength="100" strokeDasharray={`${Math.min(100,ring*100)} 100`}/>
         </svg>
-        {ritmo&&<span className={`unit-ritmo ${ritmoTom}`} aria-hidden="true" title={ritmo.agora===null?'Ataque básico parado':`Ataque básico a cada ${ritmoTexto} s`}>
-          <Swords size={9} strokeWidth={2.6}/>{ritmo.agora===null?<b>PARADO</b>:<b>{ritmoTexto}<small>s</small></b>}
-          {ritmoTom==='rapido'&&<i>▲</i>}{ritmoTom==='lento'&&<i>▼</i>}
-        </span>}
         {preparing&&<svg className="prep-ring" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="41" pathLength="100" strokeDasharray={`${preparandoUnica?anelDaUnica:f.cast?Math.max(0,100*f.cast.elapsed/f.cast.duration):0} 100`}/></svg>}
         {/* a bolinha da Mecânica única, como uma quarta habilidade: enche com o relógio dela e acende ao ativar */}
         {unica&&!out&&<span className={`unica-bolinha ub-${ativando?'ativando':bolinha.luz}${ativando?' ativando':''}`} style={corDaUnica?{'--ub-cor':corDaUnica} as React.CSSProperties:undefined} role="button" tabIndex={0} aria-label={`Mecânica única de ${c.name}: ${unica.nome}`}

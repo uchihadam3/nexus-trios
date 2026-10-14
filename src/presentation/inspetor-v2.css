@@ -169,8 +169,9 @@
 .bi2-abre-unica{display:inline-flex;align-items:center;margin-top:8px;padding:5px 12px;border-radius:99px;font-size:12px;font-weight:900;color:#f1e3ff;background:#b77cff26;box-shadow:inset 0 0 0 1px #b77cff66}
 .bi2-abre-unica:active{transform:scale(.95)}
 .bi2-aba.unica .bi2-anel{color:#fff;background:radial-gradient(closest-side,color-mix(in srgb,var(--ring) 22%,#120c1e) calc(100% - var(--grossura)),transparent calc(100% - var(--grossura) + 1px)),conic-gradient(var(--ring) calc(var(--p)*1%),#ffffff18 0)}
-/* de quantos em quantos segundos o ataque básico sai */
-.bi2-cartao .bi2-ritmo{display:flex;align-items:center;flex-wrap:wrap;gap:5px;margin-top:6px;font-size:12px;color:#c9d6cf}
-.bi2-cartao .bi2-ritmo b{color:#fff;font-variant-numeric:tabular-nums}
-.bi2-cartao .bi2-ritmo em{font-style:normal;font-weight:800}
-.bi2-cartao .bi2-ritmo em.rapido{color:#8ff0b0}.bi2-cartao .bi2-ritmo em.lento{color:#ffb0a2}.bi2-cartao .bi2-ritmo em.parado{color:#a9ccff}
+/* de quantos em quantos segundos o ataque básico sai, na ponta da barra do Próximo ataque */
+.bi2-barra>span em.bi2-seg{gap:2px;font-size:11px;font-weight:700;color:#ffe9b0}
+.bi2-barra>span em.bi2-seg b{font-size:12px;font-weight:900;font-variant-numeric:tabular-nums;color:#fff}
+.bi2-barra>span em.bi2-seg.rapido,.bi2-barra>span em.bi2-seg.rapido b{color:#9dffbf}
+.bi2-barra>span em.bi2-seg.lento,.bi2-barra>span em.bi2-seg.lento b{color:#ffb4a6}
+.bi2-barra>span em.bi2-seg.parado{color:#a9ccff;font-weight:800;text-transform:uppercase;letter-spacing:.8px;font-size:10px}

@@ -109,18 +109,6 @@
 .arena-v2 .attack-ring-fill{stroke:var(--team);stroke-width:4.2;stroke-linecap:round;filter:drop-shadow(0 0 3px color-mix(in srgb,var(--team) 70%,transparent));transition:stroke-dasharray .1s linear}
 .arena-v2 .is-near .attack-ring-fill{stroke:#fff6d6;stroke-width:5;filter:drop-shadow(0 0 5px var(--team)) drop-shadow(0 0 2px #fff)}
 .arena-v2 .is-near .medal-aura{opacity:.42}
-/* a velocidade do ataque básico: selo na base do anel de "próximo ataque", como uma medalha; acende quando o golpe está perto */
-.arena-v2 .unit-ritmo{position:absolute;left:50%;bottom:calc(var(--medal) * -.02);z-index:4;translate:-50% 0;display:inline-flex;align-items:center;gap:3px;height:17px;padding:0 7px 0 6px;border-radius:99px;pointer-events:none;
-  background:linear-gradient(180deg,#1d262c,#0b1014);color:#e9f1ec;box-shadow:0 0 0 1.5px color-mix(in srgb,var(--team,#9fb3a3),transparent 35%),0 3px 8px #000c;font-size:10px;line-height:1;white-space:nowrap;transition:box-shadow .2s,color .2s}
-.arena-v2 .unit-ritmo svg{flex:none;opacity:.85}
-.arena-v2 .unit-ritmo b{font-weight:900;font-variant-numeric:tabular-nums;letter-spacing:.2px}
-.arena-v2 .unit-ritmo small{font-size:8px;font-weight:800;margin-left:1px;opacity:.75}
-.arena-v2 .unit-ritmo i{font-style:normal;font-size:7px;margin-left:1px}
-.arena-v2 .unit-ritmo.rapido{color:#b8ffcf;box-shadow:0 0 0 1.5px #5fe38f,0 0 8px #5fe38f88,0 3px 8px #000c}
-.arena-v2 .unit-ritmo.lento{color:#ffc2b8;box-shadow:0 0 0 1.5px #ff7a66,0 0 8px #ff7a6688,0 3px 8px #000c}
-.arena-v2 .unit-ritmo.parado{color:#b9d8ff;box-shadow:0 0 0 1.5px #7fb3ff,0 3px 8px #000c}
-.arena-v2 .unit-ritmo.parado b{font-size:8px;letter-spacing:1px}
-.arena-v2 .is-near .unit-ritmo:not(.parado){color:#fff;box-shadow:0 0 0 1.5px #fff6d6,0 0 10px var(--team,#fff6d6),0 3px 8px #000c}
 .arena-v2 .renasce-ring{position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg);fill:none;stroke:var(--rn-cor,#ff8a3a);stroke-width:4;stroke-linecap:round;filter:drop-shadow(0 0 5px var(--rn-cor,#ff7a2a));pointer-events:none;z-index:3}
 .arena-v2 .renasce-ring .renasce-ring-trilho{stroke:color-mix(in srgb,var(--rn-cor,#ff8a3a) 22%,transparent);stroke-width:3}
 .arena-v2 .unit-renasce .renasce-segundos{font-style:normal;font-size:.62rem;font-weight:800;opacity:.9}
