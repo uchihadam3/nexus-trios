@@ -126,3 +126,21 @@ describe('Griffith vira Femto', () => {
     expect(virou).toBeGreaterThan(0);
   });
 });
+
+/* Kenpachi (pedido do jogador: "Kenpachi sem o tapa-olho"): tirou o tapa-olho, troca o retrato até o fim da luta. */
+describe('Kenpachi sem o tapa-olho', () => {
+  it('troca o retrato quando tira o tapa-olho', () => {
+    let tirou = 0;
+    for (let semente = 1; semente <= 30; semente++) {
+      const b = createBattle(['kenpachi', 'hinata', 'naruto'], ['goku', 'vegeta', 'hulk'], semente);
+      const k = b.fighters.find((f) => f.characterId === 'kenpachi')!;
+      for (let t = 0; t < 6000 && !b.finished; t++) {
+        stepBattle(b);
+        const sem = !!k.u?.olho;
+        if (sem) tirou++;
+        expect(naFormaDeAgora(byId.kenpachi, k, b).portrait).toBe(sem ? '/assets/portraits/formas/kenpachi-sem-tapa-olho.webp' : byId.kenpachi.portrait);
+      }
+    }
+    expect(tirou).toBeGreaterThan(0);
+  });
+});

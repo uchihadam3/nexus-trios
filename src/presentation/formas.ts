@@ -8,7 +8,8 @@ import type { Battle, Character, Fighter } from '../engine/types';
  * - Mario fica pequeno até o Super Cogumelo;
  * - Korra entra no Estado Avatar;
  * - Hércules vira Semideus;
- * - Griffith vira Femto no Eclipse.
+ * - Griffith vira Femto no Eclipse;
+ * - Kenpachi tira o tapa-olho.
  */
 interface Forma { retrato: string; nome: string; cor: string }
 const DIR = '/assets/portraits/formas/';
@@ -23,6 +24,7 @@ const MARIO_PEQUENO: Forma = { retrato: `${DIR}mario-pequeno.webp`, nome: 'Mario
 const KORRA_AVATAR: Forma = { retrato: `${DIR}korra-avatar.webp`, nome: 'Korra, Estado Avatar', cor: '#bfeaff' };
 const HERCULES_SEMIDEUS: Forma = { retrato: `${DIR}hercules-semideus.webp`, nome: 'Hércules, Semideus', cor: '#ffd36b' };
 const GRIFFITH_FEMTO: Forma = { retrato: `${DIR}griffith-femto.webp`, nome: 'Femto', cor: '#b56cff' };
+const KENPACHI_SEM_TAPA_OLHO: Forma = { retrato: `${DIR}kenpachi-sem-tapa-olho.webp`, nome: 'Kenpachi sem o tapa-olho', cor: '#ff5a6a' };
 const FORMAS: Record<string, { de: (f: Fighter, agora: number) => Forma | null; todas: Forma[] }> = {
   gandalf: {
     de: (f) => (f.voltou && (f.u?.branco ?? 0) >= 1 ? FORMAS.gandalf!.todas[0]! : null),
@@ -37,6 +39,8 @@ const FORMAS: Record<string, { de: (f: Fighter, agora: number) => Forma | null; 
   hercules: { de: (f) => (f.u?.deus ? HERCULES_SEMIDEUS : null), todas: [HERCULES_SEMIDEUS] },
   /* Griffith vira Femto no Eclipse (menos de 25% da Vida), até o fim da luta (src/engine/unicas-lote8.ts) */
   griffith: { de: (f) => (f.u?.femto ? GRIFFITH_FEMTO : null), todas: [GRIFFITH_FEMTO] },
+  /* Kenpachi tira o tapa-olho com menos de 50% da Vida, até o fim da luta (src/engine/unicas-lote6.ts) */
+  kenpachi: { de: (f) => (f.u?.olho ? KENPACHI_SEM_TAPA_OLHO : null), todas: [KENPACHI_SEM_TAPA_OLHO] },
 };
 
 /** A forma de agora do lutador, se ele trocou de forma. */
