@@ -39,3 +39,19 @@ describe('Jornada normal no ranking da Temporada',()=>{
     expect(livre.summaries.length).toBeGreaterThan(0);
   });
 });
+
+/*
+ * Desistir conta como perder (pedido do dono: "se ela fez 700 pontos e desistiu com 700, conta que ela fez 700"):
+ * o servidor refaz só as lutas que o jogador terminou antes de desistir.
+ */
+describe('jornada desistida', () => {
+  it('conta só as lutas terminadas antes de desistir', () => {
+    const team = ['goku', 'naruto', 'luffy'], seed = 4242;
+    const inteira = replayRanked(team, seed, true);
+    const ate = Math.min(2, inteira.summaries.length);
+    const desistida = replayRanked(team, seed, true, false, ate);
+    expect(desistida.summaries.length).toBe(ate);
+    expect(desistida.score).toBe(inteira.summaries.slice(0, ate).reduce((n, s) => n + s.score, 0));
+    expect(replayRanked(team, seed, true, false, 0).score).toBe(0);
+  });
+});

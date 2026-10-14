@@ -112,7 +112,19 @@ export default function App(){
   };
   /* O Desafio do Dia escolhido (src/lib/conquistas.ts): a próxima Jornada começa com ele no trio e mais trocas. */
   const desafioPendente=useRef<string|null>(null);
+  /*
+   * Desistir no meio conta como perder (pedido do dono: "se ela fez 700 pontos e desistiu com 700, conta que ela fez
+   * 700"): a jornada de agora fecha com as lutas já terminadas e vai para o ranking.
+   */
+  const fechaDesistindo=(atual:Run|null)=>{
+    if(!atual?.ranked?.id||!['playing','validating'].includes(atual.ranked.status))return;
+    const terminou=atual.stage==='result'&&(atual.battle?.winner!=='player'||atual.index===9);if(terminou)return;
+    const lista=atual.summaries??[],id=atual.ranked.id,envio={dicas:atual.dicas===true,vencidas:lista.filter(x=>x.won).length,desistiu:true,lutas:lista.length};
+    void runDigest(id,atual.team,atual.seed,lista.map(x=>x.won)).then(digest=>onlineCall('submit',{runId:id,digest,...envio}).catch(e=>{
+      if(!recusaDefinitiva(e instanceof Error?e.message:''))guardarEnvio({runId:id,digest,em:new Date().toISOString(),...envio});}));
+  };
   const abreJornada=()=>{
+    fechaDesistindo(runRef.current);
     const seed=crypto.getRandomValues(new Uint32Array(1))[0];
     const escolhido=desafioPendente.current;desafioPendente.current=null;
     let draft=newDraft(seed);
@@ -391,6 +403,9 @@ export default function App(){
         const summary={...summarizeBattle(current.index,d.battle,battleSynergies,current.dicas===true),recordeAntes:current.recorded?undefined:loadProfile().recordePontos??0,ajudas:ajudasDaLuta(raioX,d.battle)};
         next={...next,stage:'result',recorded:true,summaries:current.recorded?current.summaries:[...(current.summaries??[]).filter(s=>s.index!==current.index),summary]};
         if(!current.recorded){
+          /* conta ao servidor como a jornada está: se o envio do fim não chegar, o servidor a coloca no ranking sozinho */
+          if(current.ranked?.id&&current.ranked.status==='playing'){const lista=next.summaries??[],perdeu=d.battle.winner!=='player';
+            void onlineCall('progresso',{runId:current.ranked.id,lutas:lista.length,vencidas:lista.filter(x=>x.won).length,fim:perdeu||current.index===9,dicas:current.dicas===true}).catch(()=>{});}
           const won=d.battle.winner==='player',champion=won&&current.index===9;
           /* o objetivo do jogo: pontos. O recorde é o maior total de uma jornada. */
           const total=pontosDaJornada((next.summaries??[]).map(x=>({pontos:x.score,won:x.won})));
@@ -418,11 +433,11 @@ export default function App(){
     submission.current=true;const id=run.ranked.id;
     if(run.ranked.status!=='validating')changeRun({...run,ranked:{...run.ranked,status:'validating'}});
     void (async()=>{
-      try{const digest=await runDigest(id,run.team,run.seed,(run.summaries??[]).map(s=>s.won));const result=await onlineCall<{score:number;daily:number|null;weekly:number|null;season:number|null;top3?:{periodo?:ResultadoTop3;temporada?:ResultadoTop3}}>('submit',{runId:id,digest,dicas:run.dicas===true});
+      try{const digest=await runDigest(id,run.team,run.seed,(run.summaries??[]).map(s=>s.won));const result=await onlineCall<{score:number;daily:number|null;weekly:number|null;season:number|null;top3?:{periodo?:ResultadoTop3;temporada?:ResultadoTop3}}>('submit',{runId:id,digest,dicas:run.dicas===true,vencidas:(run.summaries??[]).filter(s=>s.won).length});
         const latest=runRef.current;if(latest?.ranked?.id===id)changeRun({...latest,ranked:{...latest.ranked,status:'verified',score:result.score,daily:result.daily,weekly:result.weekly,season:result.season,top3:result.top3,error:undefined}});
       }catch(error){const msg=error instanceof Error?error.message:'Falha na validação.';
         // falhou por rede ou servidor: fica guardada e é reenviada sozinha ao abrir o jogo (src/lib/envios-pendentes.ts)
-        if(!recusaDefinitiva(msg))void runDigest(id,run.team,run.seed,(run.summaries??[]).map(s=>s.won)).then(digest=>guardarEnvio({runId:id,digest,dicas:run.dicas===true,em:new Date().toISOString()}));
+        if(!recusaDefinitiva(msg))void runDigest(id,run.team,run.seed,(run.summaries??[]).map(s=>s.won)).then(digest=>guardarEnvio({runId:id,digest,dicas:run.dicas===true,em:new Date().toISOString(),vencidas:(run.summaries??[]).filter(s=>s.won).length}));
         const latest=runRef.current;if(latest?.ranked?.id===id)changeRun({...latest,ranked:{...latest.ranked,status:'failed',error:msg}});}
       finally{submission.current=false;}
     })();
@@ -482,7 +497,7 @@ export default function App(){
   };
   useEffect(()=>{if(onlineConfigured&&logado&&conta&&nomeDaConta?.id!==conta.id)void buscaNome(conta);},[logado,conta?.id]);
   /* jornadas terminadas que não chegaram ao servidor: reenviadas ao abrir o jogo com a conta (src/lib/envios-pendentes.ts) */
-  useEffect(()=>{if(onlineConfigured&&logado&&conta)void reenviarPendentes(e=>onlineCall('submit',{runId:e.runId,digest:e.digest,dicas:e.dicas}));},[logado,conta?.id]);
+  useEffect(()=>{if(onlineConfigured&&logado&&conta)void reenviarPendentes(e=>onlineCall('submit',{runId:e.runId,digest:e.digest,dicas:e.dicas,vencidas:e.vencidas,desistiu:e.desistiu,lutas:e.lutas}));},[logado,conta?.id]);
   const escolheNome=async(handle:string):Promise<string|null>=>{
     if(!conta)return 'Entre na conta primeiro.';
     try{const r=await onlineCall<{profile:{handle:string}}>('profile',{handle});setProfile(p=>{const n={...p,publicHandle:r.profile.handle};save('profile',n);return n;});setNomeDaConta({id:conta.id,handle:r.profile.handle});return null;}
@@ -528,7 +543,7 @@ export default function App(){
       {acaoDoAviso==='nome'&&<button className="primary" onClick={()=>{setOnlineNotice('');setAcaoDoAviso(null);setNameDialog(true);}}><UserPen size={16}/>Escolher nome</button>}
       {acaoDoAviso==='tentar'&&run?.stage==='draft'&&!run.ranked&&<button className="primary" onClick={()=>{setOnlineNotice('');setAcaoDoAviso(null);tentarDeNovo();}}><RotateCcw size={16}/>Tentar de novo</button>}
       <button className={acaoDoAviso?'secondary':'primary'} onClick={()=>{setOnlineNotice('');setAcaoDoAviso(null);}}>{acaoDoAviso?'Jogar assim mesmo':'Entendi'}</button></InfoDialog>}
-    {confirmAbandon&&<InfoDialog title="Desistir desta jornada?" icone={<Flag/>} cor="#ff7a6b" onClose={()=>setConfirmAbandon(false)}><p>A jornada de agora some e você monta um trio novo. <b>Seu recorde fica salvo.</b></p><div className="result-actions"><button className="danger" onClick={startNew}>Desistir e começar outra <ArrowUpRight size={18}/></button><button className="secondary" onClick={()=>setConfirmAbandon(false)}>Continuar jornada</button></div></InfoDialog>}
+    {confirmAbandon&&<InfoDialog title="Desistir desta jornada?" icone={<Flag/>} cor="#ff7a6b" onClose={()=>setConfirmAbandon(false)}><p>A jornada de agora termina aqui, como uma derrota: <b>os pontos que você já fez vão para o ranking</b>. Depois você monta um trio novo.</p><div className="result-actions"><button className="danger" onClick={startNew}>Desistir e começar outra <ArrowUpRight size={18}/></button><button className="secondary" onClick={()=>setConfirmAbandon(false)}>Continuar jornada</button></div></InfoDialog>}
     {compartilhar&&<CompartilharJogo trio={profile.champion?.length?profile.champion:['goku','naruto','luffy']} onClose={()=>setCompartilhar(false)}/>}
     {convite&&<BoasVindasDoConvite podeInstalar={!!installEvent} onInstalar={instalarDoConvite} onClose={fecharConvite}/>}
     {installHelp&&<InfoDialog title={installed?'O NEXUS já está instalado':'Leve seu trio no bolso'} icone={<Download/>} cor="#8fd3ff" onClose={()=>setInstallHelp(false)}><p>{installed?'Abra o jogo pelo ícone na tela inicial do aparelho.':<><b>Android:</b> menu do navegador → “Instalar aplicativo”.<br/><b>iPhone:</b> Compartilhar → “Adicionar à Tela de Início”.</>}</p><p>O progresso fica neste aparelho e o jogo abre mesmo sem internet.</p><button className="primary" onClick={()=>setInstallHelp(false)}>Entendi</button></InfoDialog>}

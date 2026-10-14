@@ -10,7 +10,8 @@ import { read, save } from './storage';
  * conectada. Recusas definitivas (já validada, inexistente, expirada) saem da
  * fila: reenviar não mudaria a resposta.
  */
-export interface EnvioPendente { runId: string; digest: string; dicas: boolean; em: string }
+/** `desistiu`/`lutas`: a jornada fechou pelo botão Desistir depois de `lutas` lutas (conta como perdida). */
+export interface EnvioPendente { runId: string; digest: string; dicas: boolean; em: string; vencidas?: number; desistiu?: boolean; lutas?: number }
 const CHAVE = 'envios-pendentes';
 const DEFINITIVO = /já validada|já enviada|inexistente|expirada|inválid/i;
 

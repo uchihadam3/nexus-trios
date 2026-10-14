@@ -38,13 +38,18 @@ export async function runDigest(id:string,team:string[],seed:number,outcomes:boo
  * mesmos para todo mundo e o trio não pode usar nenhum deles.
  */
 /** `dicas`: o jogador montou o trio com as Dicas de trio ligadas (−10 mil por luta, src/engine/pontos.ts). */
-export function replayRanked(team:string[],seed:number,livre=false,dicas=false){
+/**
+ * `ate`: quantas lutas o jogador chegou a terminar antes de desistir (desistir conta como perder: valem os pontos
+ * feitos até ali). Sem `ate`, a jornada vai até a primeira derrota ou até as 10.
+ */
+export function replayRanked(team:string[],seed:number,livre=false,dicas=false,ate?:number){
   if(team.length!==3||new Set(team).size!==3||team.some(id=>!characters.some(c=>c.id===id)))throw new Error('Trio inválido.');
   const encounters=livre?generateCampaign(seed,team):generateCampaign(seed);
   const foes=new Set(encounters.flatMap(e=>e.team));if(team.some(id=>foes.has(id)))throw new Error('Trio inclui rival da campanha compartilhada.');
   let score=0;
   const summaries:RunBattleSummary[]=[];
   for(const [index,encounter] of encounters.entries()){
+    if(ate!==undefined&&index>=ate)break;
     const battle=createBattle(team,encounter.team,seed+index*7919,encounter.scale);
     for(let tick=0;tick<9000&&!battle.finished;tick++)stepBattle(battle);
     if(!battle.finished)throw new Error(`Replay sem conclusão no confronto ${index+1}.`);

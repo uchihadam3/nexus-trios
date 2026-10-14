@@ -119,13 +119,15 @@ export function Placar({mode,onMode,estado,handle,onConta,onMais,maisCarregando=
  * jogando e quem não foi validado e validar essa pessoa"). Só aparece na
  * conta do dono, e o servidor confere de novo (ação `pendentes`). Cada
  * jornada é refeita pelo servidor, uma por vez, e entra com o resultado dele.
- * Uma jornada abandonada no meio também aparece aqui: validada, ela conta o
- * que o trio faria nas 10 lutas.
+ *
+ * Quase nunca precisa: o servidor coloca sozinho no ranking toda jornada
+ * terminada (perdeu, venceu as 10 ou desistiu) cujo envio não chegou. Quem
+ * está jogando agora não aparece na lista, só no contador.
  */
 type Pendente={id:string;handle:string;team:string[];date:string;meu:boolean};
 function PainelDoDono({onValidou}:{onValidou:()=>void}){
-  const [aberto,setAberto]=useState(false),[lista,setLista]=useState<Pendente[]|null>(null),[dias,setDias]=useState(7),[ocupado,setOcupado]=useState(''),[aviso,setAviso]=useState('');
-  const carregar=()=>{setAviso('');void onlineCall<{dias:number;runs:Pendente[]}>('pendentes').then(r=>{setLista(r.runs);setDias(r.dias);}).catch(e=>setAviso(e instanceof Error?e.message:'Não deu para carregar.'));};
+  const [aberto,setAberto]=useState(false),[lista,setLista]=useState<Pendente[]|null>(null),[jogando,setJogando]=useState(0),[dias,setDias]=useState(7),[ocupado,setOcupado]=useState(''),[aviso,setAviso]=useState('');
+  const carregar=()=>{setAviso('');void onlineCall<{dias:number;jogando?:number;runs:Pendente[]}>('pendentes').then(r=>{setLista(r.runs);setDias(r.dias);setJogando(r.jogando??0);}).catch(e=>setAviso(e instanceof Error?e.message:'Não deu para carregar.'));};
   useEffect(()=>{if(aberto&&!lista)carregar();},[aberto]);
   const validar=async(ids:string[])=>{
     let feitas=0;
@@ -138,7 +140,7 @@ function PainelDoDono({onValidou}:{onValidou:()=>void}){
   return <div className="rk-dono">
     <button className="secondary rk-dono-abre" onClick={()=>setAberto(a=>!a)}><ShieldCheck size={16}/>Jornadas sem validar{lista?` · ${lista.length}`:''}</button>
     {aberto&&<div className="rk-dono-corpo">
-      <small>Últimos {dias} dias · só a sua conta vê isto. Cada jornada é refeita pelo servidor e entra com o resultado dele.</small>
+      <small>Últimos {dias} dias · só a sua conta vê isto. Jornada terminada entra sozinha no ranking em poucos minutos; aqui ficam só as que ficaram paradas.{jogando>0&&` ${jogando} ${jogando===1?'pessoa está':'pessoas estão'} jogando agora.`}</small>
       {aviso&&<p className="rk-dono-aviso">{aviso}</p>}
       {!lista?<p className="rk-dono-aviso">Carregando…</p>:!lista.length?<p className="rk-dono-aviso"><CheckCircle2 size={14}/>Nenhuma jornada esperando.</p>:<>
         <p className="rk-dono-aviso">{pessoas.length} pessoa{pessoas.length>1?'s':''}: {pessoas.join(', ')}</p>

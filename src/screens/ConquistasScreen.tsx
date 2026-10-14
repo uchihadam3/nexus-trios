@@ -29,8 +29,9 @@ export function ConquistasScreen({profile,conta,onProfile,onRanking,onDesafio}:{
   const [noRanking,setNoRanking]=useState<{total:number;posicao:number|null}|null>(null);
   /* As do servidor entram no aparelho; e a posição no ranking de conquistas. */
   useEffect(()=>{if(!onlineConfigured||!conta)return;let ativo=true;
-    void onlineCall<{conquistas:{id:string;data:string}[]}>('conquistas').then(r=>{if(!ativo)return;onProfile(p=>{const juntas=juntar(p.conquistas??{},r.conquistas);return Object.keys(juntas).length!==Object.keys(p.conquistas??{}).length||Object.entries(juntas).some(([k,v])=>p.conquistas?.[k]!==v)?{...p,conquistas:juntas}:p;});setNoRanking(n=>({total:r.conquistas.length,posicao:n?.posicao??null}));}).catch(()=>{});
-    void onlineCall<RankingDeConquistas>('leaderboard',{mode:'conquistas'}).then(r=>{if(ativo&&r.mine)setNoRanking(n=>({total:r.mine!.total,posicao:r.mine!.position??n?.posicao??null}));}).catch(()=>{});
+    /* manda as do aparelho junto: as que o servidor ainda não tinha entram no ranking na hora; só depois pede a posição */
+    void onlineCall<{conquistas:{id:string;data:string}[]}>('conquistas-sync',{ids:Object.keys(profile.conquistas??{})}).then(r=>{if(!ativo)return;onProfile(p=>{const juntas=juntar(p.conquistas??{},r.conquistas);return Object.keys(juntas).length!==Object.keys(p.conquistas??{}).length||Object.entries(juntas).some(([k,v])=>p.conquistas?.[k]!==v)?{...p,conquistas:juntas}:p;});setNoRanking(n=>({total:r.conquistas.length,posicao:n?.posicao??null}));}).catch(()=>{})
+      .finally(()=>{if(ativo)void onlineCall<RankingDeConquistas>('leaderboard',{mode:'conquistas'}).then(r=>{if(ativo&&r.mine)setNoRanking(n=>({total:r.mine!.total,posicao:r.mine!.position??n?.posicao??null}));}).catch(()=>{});});
     return()=>{ativo=false};
   },[conta]);
   /* O que estava NOVO fica visto depois de a tela ficar aberta um pouco (o selo aparece na primeira vez). */

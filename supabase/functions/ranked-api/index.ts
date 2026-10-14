@@ -5,6 +5,7 @@ import {BALANCE_VERSION,ENGINE_VERSION,EPOCA_DO_RANKING,replayRanked,rosterFinge
 import {META_DAS_DICAS,ehDono} from '../../../src/lib/dicas-liberadas.ts';
 
 declare const Deno:{env:{get:(name:string)=>string|undefined};serve:(handler:(request:Request)=>Response|Promise<Response>)=>unknown};
+declare const EdgeRuntime:{waitUntil:(p:Promise<unknown>)=>void}|undefined;
 type Mode='daily'|'weekly';
 /*
  * Um ranking só (pedido do jogador): toda Jornada é ranqueada — o botão Jogar,
@@ -165,9 +166,24 @@ async function rankingDeConquistas(userId:string,pagina=0){
  * resultado do servidor, e a diferença fica anotada (`divergente`).
  */
 const DIAS_PENDENTES=7;
+/*
+ * Ninguém valida nada à mão (pedido do dono do jogo: "qualquer pessoa que jogar tem que ir direto pro ranking… não
+ * pode ficar esperando validar"). Depois de cada luta o aparelho conta ao servidor quantas lutas já foram e se a
+ * jornada acabou (`progresso`). Se ela acabou — perdeu uma luta ou venceu as 10 — e o envio do fim não chegou (sem
+ * internet, aparelho fechado, versão antiga), o próprio servidor a coloca no ranking depois desta espera. Jornada
+ * desistida conta como perdida (pedido do dono: "se ela fez 700 e desistiu com 700, conta que ela fez 700"): valem os
+ * pontos das lutas terminadas. Jornada parada há um dia sem desistir também conta assim.
+ */
+const ESPERA_DO_ENVIO_MS=2*60000,PARADA_MS=24*3600000;
 type Jornada={id:string;player_id:string;team_ids:string[];seed:number;mode:Mode;period_key:string;engine_version:string;roster_fingerprint:string;balance_version:string};
-async function validar(run:Jornada,dicas:boolean,digestDoCliente?:string){
-  const livre=run.seed!==await seedFor(run.mode,String(run.period_key)),verified=replayRanked(run.team_ids,run.seed,livre,dicas),digest=await runDigest(run.id,run.team_ids,run.seed,verified.summaries.map(s=>s.won));
+async function validar(run:Jornada,dicas:boolean,digestDoCliente?:string,vencidasDoCliente?:number,ate?:number){
+  // desistiu antes de terminar a primeira luta: não há pontos; a jornada fecha sem entrar nos Top 3
+  if(ate===0){
+    const {data:saved,error}=await admin.from('ranked_runs').update({verified:true,finished_at:new Date().toISOString(),encounters_cleared:0,score:0,summary:{desistiu:true,lutas:0}}).eq('id',run.id).eq('verified',false).select('id').maybeSingle();
+    if(error)throw error;if(!saved)throw new JaValidada();
+    return {verified:true,score:0,progress:0,daily:null,weekly:null,season:null};
+  }
+  const livre=run.seed!==await seedFor(run.mode,String(run.period_key)),verified=replayRanked(run.team_ids,run.seed,livre,dicas,ate),digest=await runDigest(run.id,run.team_ids,run.seed,verified.summaries.map(s=>s.won));
   const divergente=digestDoCliente!==undefined&&digestDoCliente!==digest,outraVersao=run.engine_version!==ENGINE_VERSION||run.roster_fingerprint!==rosterFingerprint()||run.balance_version!==BALANCE_VERSION;
   /*
    * O Top 3 é registrado *antes* de a partida ser marcada como validada.
@@ -182,8 +198,9 @@ async function validar(run:Jornada,dicas:boolean,digestDoCliente?:string){
   // um ranking só: a mesma jornada entra em Hoje, Semana e Geral (no dia e na semana em que foi validada)
   const top3={periodo:await registrar('daily',chaveDo('daily')),semana:await registrar('weekly',chaveDo('weekly')),temporada:await registrar('season',chaveDo('season'))};
   // as 10 lutas terminadas liberam as Conquistas do trio (antes de validar, pelo mesmo motivo: reenviar é seguro)
-  const conquistas=verified.encountersCleared===10?await registrarConquistas(run.player_id,run.team_ids):null;
-  const {data:saved,error:saveError}=await admin.from('ranked_runs').update({verified:true,finished_at:new Date().toISOString(),encounters_cleared:verified.encountersCleared,score:verified.score,summary:{highlights:verified.highlights,outcomes:verified.summaries.map(s=>s.won),livre,dicas,...(divergente?{divergente}:{}),...(outraVersao?{versaoDoInicio:run.engine_version}:{})},digest}).eq('id',run.id).eq('verified',false).select('id').maybeSingle();
+  // as Conquistas seguem o que o jogador viu na tela: 10 vitórias no aparelho liberam, mesmo que o replay discorde
+  const conquistas=verified.encountersCleared===10||vencidasDoCliente===10?await registrarConquistas(run.player_id,run.team_ids):null;
+  const {data:saved,error:saveError}=await admin.from('ranked_runs').update({verified:true,finished_at:new Date().toISOString(),encounters_cleared:verified.encountersCleared,score:verified.score,summary:{highlights:verified.highlights,outcomes:verified.summaries.map(s=>s.won),livre,dicas,...(ate!==undefined?{desistiu:true,lutas:ate}:{}),...(divergente?{divergente}:{}),...(outraVersao?{versaoDoInicio:run.engine_version}:{})},digest}).eq('id',run.id).eq('verified',false).select('id').maybeSingle();
   if(saveError)throw saveError;if(!saved)throw new JaValidada();
   const player=await profile(run.player_id),xp=(player?.xp??0)+30+verified.encountersCleared*30+(verified.encountersCleared===10?250:0);
   await admin.from('players').update({xp,nexus_level:Math.floor(Math.sqrt(xp/100))+1,updated_at:new Date().toISOString()}).eq('id',run.player_id);
@@ -191,6 +208,30 @@ async function validar(run:Jornada,dicas:boolean,digestDoCliente?:string){
   return {verified:true,score:verified.score,progress:verified.encountersCleared,daily:daily.mine?.position??null,weekly:weekly.mine?.position??null,season:season.mine?.position??null,top3,conquistas};
 }
 class JaValidada extends Error{constructor(){super('Jornada já enviada.');}}
+/** O resultado de uma jornada que já entrou no ranking: reenviar dá a mesma resposta, sem erro. */
+async function jaNoRanking(run:{player_id:string;score:number|null;encounters_cleared:number|null}){
+  const daily=await board(run.player_id,'daily'),weekly=await board(run.player_id,'weekly'),season=await board(run.player_id,'season');
+  return {verified:true,score:run.score??0,progress:run.encounters_cleared??0,daily:daily.mine?.position??null,weekly:weekly.mine?.position??null,season:season.mine?.position??null};
+}
+const vencidasDe=(x:unknown)=>typeof x==='number'&&Number.isInteger(x)&&x>=0&&x<=10?x:undefined;
+/*
+ * Coloca no ranking a jornada terminada mais antiga cujo envio não chegou (uma por pedido: o replay das 10 lutas é
+ * pesado). Roda em segundo plano nos pedidos de todo mundo — abrir o ranking, começar uma jornada —, então a fila
+ * anda sozinha sem ninguém precisar validar.
+ */
+async function validarTerminadas(){
+  const desde=new Date(Date.now()-DIAS_PENDENTES*86400000).toISOString();
+  const {data,error}=await admin.from('ranked_runs').select('*').eq('verified',false).not('summary->>progresso','is',null).gte('started_at',desde).order('started_at',{ascending:true}).limit(20);
+  if(error)throw error;
+  const agora=Date.now(),quando=(r:{summary?:{em?:string}|null;started_at:string})=>new Date(r.summary?.em??r.started_at).getTime();
+  // terminou (perdeu, venceu as 10 ou desistiu) e o envio não chegou; ou parou no meio há um dia
+  const run=(data??[]).find(r=>r.summary?.fim===true?quando(r)<agora-ESPERA_DO_ENVIO_MS:quando(r)<agora-PARADA_MS);
+  if(!run)return;
+  const ate=run.summary?.desistiu===true||run.summary?.fim!==true?vencidasDe(run.summary?.progresso):undefined;
+  try{await validar(run,run.summary?.dicas===true,undefined,vencidasDe(run.summary?.vencidas),ate);}catch(e){if(!(e instanceof JaValidada))throw e;}
+}
+/** Trabalho que não precisa atrasar a resposta: depois de responder, quando o servidor deixa. */
+const emSegundoPlano=(tarefa:()=>Promise<unknown>)=>{const p=tarefa().catch(e=>console.error('ranked-api fundo',e instanceof Error?e.message:String(e)));if(typeof EdgeRuntime!=='undefined'&&EdgeRuntime?.waitUntil)EdgeRuntime.waitUntil(p);};
 
 Deno.serve(async (request:Request)=>{
   const origin=request.headers.get('origin')??'';
@@ -205,6 +246,7 @@ Deno.serve(async (request:Request)=>{
   const raw=await request.text();if(raw.length>8192)return fail('Pedido muito grande.',413,origin);
   let input:Record<string,unknown>;try{input=JSON.parse(raw) as Record<string,unknown>;}catch{return fail('JSON inválido.',400,origin)}
   try{
+    if(['leaderboard','challenge','start','historico','conquistas'].includes(String(input.action)))emSegundoPlano(validarTerminadas);
     if(input.action==='profile'){
       if(input.handle===undefined){const existing=await profile(user.id);return json({profile:existing&&{handle:existing.handle,xp:existing.xp,level:existing.nexus_level}},200,origin);}
       const handle=validHandle(input.handle);if(!handle)return fail('Use 3–16 letras, números, espaços ou _. Sem contato pessoal ou ofensa.',422,origin);
@@ -238,10 +280,35 @@ Deno.serve(async (request:Request)=>{
       if(typeof input.runId!=='string'||!/^[0-9a-f-]{36}$/i.test(input.runId)||typeof input.digest!=='string'||!/^[0-9a-f]{64}$/i.test(input.digest))return fail('Envio inválido.',422,origin);
       if('score' in input)return fail('O servidor calcula a pontuação.',422,origin);
       const {data:run,error}=await admin.from('ranked_runs').select('*').eq('id',input.runId).eq('player_id',user.id).maybeSingle();if(error)throw error;
-      if(!run)return fail('Jornada inexistente.',404,origin);if(run.verified)return fail('Jornada já validada.',409,origin);
+      if(!run)return fail('Jornada inexistente.',404,origin);
+      // já entrou (o servidor colocou sozinho, ou é um reenvio): devolve o resultado em vez de erro
+      if(run.verified)return json(await jaNoRanking(run),200,origin);
       // o aparelho reenvia sozinho o que não chegou (src/lib/envios-pendentes.ts): vale até 7 dias depois de começar
       if(new Date(run.started_at).getTime()<Date.now()-DIAS_PENDENTES*86400000)return fail('Jornada expirada.',410,origin);
-      return json(await validar(run,input.dicas===true,input.digest),200,origin);
+      try{return json(await validar(run,input.dicas===true,input.digest,vencidasDe(input.vencidas),input.desistiu===true?vencidasDe(input.lutas)??0:undefined),200,origin);}
+      catch(e){if(!(e instanceof JaValidada))throw e;const {data:agora}=await admin.from('ranked_runs').select('*').eq('id',run.id).single();return json(await jaNoRanking(agora),200,origin);}
+    }
+    /* Depois de cada luta: quantas lutas já foram e se a jornada acabou (veja validarTerminadas). */
+    if(input.action==='progresso'){
+      const lutas=vencidasDe(input.lutas),vencidas=vencidasDe(input.vencidas);
+      if(typeof input.runId!=='string'||!/^[0-9a-f-]{36}$/i.test(input.runId)||lutas===undefined)return fail('Envio inválido.',422,origin);
+      const {error}=await admin.from('ranked_runs').update({summary:{progresso:lutas,vencidas:vencidas??null,fim:input.fim===true||input.desistiu===true,desistiu:input.desistiu===true,dicas:input.dicas===true,em:new Date().toISOString()}}).eq('id',input.runId).eq('player_id',user.id).eq('verified',false);
+      if(error)throw error;
+      return json({ok:true},200,origin);
+    }
+    /*
+     * As Conquistas do aparelho (pedido do dono: "tenho 31 liberados e no ranking só mostra 29… tem que aparecer
+     * imediatamente"). Entram as que são de personagens que a conta levou numa jornada; o resto fica só no aparelho.
+     */
+    if(input.action==='conquistas-sync'){
+      const ids=Array.isArray(input.ids)?[...new Set(input.ids.filter((x):x is string=>typeof x==='string'&&x.length<=80))].slice(0,1000):[];
+      if(ids.length){
+        const {data:runs,error}=await admin.from('ranked_runs').select('team_ids').eq('player_id',user.id).limit(5000);if(error)throw error;
+        const jogou=new Set((runs??[]).flatMap(r=>r.team_ids as string[]));
+        const validas=ids.filter(id=>jogou.has(id)&&characters.some(c=>c.id===id));
+        if(validas.length)await registrarConquistas(user.id,validas);
+      }
+      return json({conquistas:await minhasConquistas(user.id),de:characters.length},200,origin);
     }
     /*
      * Jornadas que ficaram sem validar (pedido do dono do jogo: "você consegue
@@ -253,18 +320,21 @@ Deno.serve(async (request:Request)=>{
       if(!await ehDono(user.email))return fail('Só a conta do dono do jogo.',403,origin);
       if(input.action==='pendentes'){
         const desde=new Date(Date.now()-DIAS_PENDENTES*86400000).toISOString();
-        const {data,error}=await admin.from('ranked_runs').select('id,player_id,team_ids,started_at').eq('verified',false).gte('started_at',desde).order('started_at',{ascending:false}).limit(200);
+        const {data:todas,error}=await admin.from('ranked_runs').select('id,player_id,team_ids,started_at,summary').eq('verified',false).gte('started_at',desde).order('started_at',{ascending:false}).limit(400);
         if(error)throw error;
+        // quem está jogando agora não aparece: só as terminadas que ainda não entraram e as paradas há mais de 1 hora
+        const umaHora=Date.now()-3600000,parada=(r:{summary?:{fim?:boolean;em?:string}|null;started_at:string})=>r.summary?.fim===true||new Date(r.summary?.em??r.started_at).getTime()<umaHora;
+        const data=(todas??[]).filter(parada),jogando=(todas??[]).length-data.length;
         const ids=[...new Set((data??[]).map(r=>r.player_id))],nomes=ids.length?(await admin.from('players').select('id,handle').in('id',ids)).data??[]:[];
         const nomeDe=new Map(nomes.map(x=>[x.id,x.handle]));
-        return json({dias:DIAS_PENDENTES,runs:(data??[]).map(r=>({id:r.id,handle:nomeDe.get(r.player_id)??'Jogador',team:r.team_ids,date:r.started_at,meu:r.player_id===user.id}))},200,origin);
+        return json({dias:DIAS_PENDENTES,jogando,runs:(data??[]).map(r=>({id:r.id,handle:nomeDe.get(r.player_id)??'Jogador',team:r.team_ids,date:r.started_at,meu:r.player_id===user.id}))},200,origin);
       }
       if(typeof input.runId!=='string'||!/^[0-9a-f-]{36}$/i.test(input.runId))return fail('Envio inválido.',422,origin);
       const {data:run,error}=await admin.from('ranked_runs').select('*').eq('id',input.runId).maybeSingle();if(error)throw error;
       if(!run)return fail('Jornada inexistente.',404,origin);if(run.verified)return fail('Jornada já validada.',409,origin);
       // o jogador não mandou se usou as Dicas: quem já liberou o botão conta como se tivesse usado (o desconto, nunca o bônus)
       const {data:recorde}=await admin.from('ranked_runs').select('score').eq('player_id',run.player_id).eq('verified',true).order('score',{ascending:false}).limit(1).maybeSingle();
-      return json(await validar(run,(recorde?.score??0)>=META_DAS_DICAS),200,origin);
+      return json(await validar(run,(recorde?.score??0)>=META_DAS_DICAS,undefined,vencidasDe(run.summary?.vencidas),run.summary?.desistiu===true?vencidasDe(run.summary?.progresso):undefined),200,origin);
     }
     /* "MEUS RECORDES: histórico completo." Todas as partidas validadas da conta. */
     if(input.action==='historico'){
