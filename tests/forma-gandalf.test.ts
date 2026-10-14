@@ -108,3 +108,21 @@ describe('Hércules Semideus', () => {
     expect(virou).toBeGreaterThan(0);
   });
 });
+
+/* Griffith (pedido do jogador: "Femto eclipse"): no Eclipse vira Femto e fica com o retrato novo até o fim. */
+describe('Griffith vira Femto', () => {
+  it('troca o retrato no Eclipse e não volta mais', () => {
+    let virou = 0;
+    for (let semente = 1; semente <= 30; semente++) {
+      const b = createBattle(['griffith', 'hinata', 'naruto'], ['goku', 'vegeta', 'hulk'], semente);
+      const g = b.fighters.find((f) => f.characterId === 'griffith')!;
+      for (let t = 0; t < 6000 && !b.finished; t++) {
+        stepBattle(b);
+        const femto = !!g.u?.femto;
+        if (femto) virou++;
+        expect(naFormaDeAgora(byId.griffith, g, b).portrait).toBe(femto ? '/assets/portraits/formas/griffith-femto.webp' : byId.griffith.portrait);
+      }
+    }
+    expect(virou).toBeGreaterThan(0);
+  });
+});
