@@ -743,6 +743,15 @@ export function updateDominion(b:Battle){
  * conclusão"). Passado o limite, vence quem tem mais Vida (proporcional).
  * Só muda lutas que antes não terminavam.
  */
+/** De quantos em quantos segundos o ataque básico sai agora, pela mesma conta do passo da luta (stepBattle):
+ *  o intervalo do personagem dividido por Acelerado/Lento/Enraizado, bônus de ritmo e Mecânica única.
+ *  `agora` é null quando ele está parado (Paralisado, Congelado, Sono ou parado pela própria mecânica). */
+export function intervaloDoBasico(b:Battle,f:Fighter):{agora:number|null;base:number}{
+  const c=byId[f.characterId],base=c.interval;
+  if(intensity(f,'paralyzed')||intensity(f,'frozen')||intensity(f,'sleep')||unica(f)?.parado?.(f,b))return {agora:null,base};
+  const rate=(1+intensity(f,'haste'))*(1-intensity(f,'slow'))*(1-intensity(f,'rooted'))*(1+(f.bonus?.ritmo??0))*(unica(f)?.ritmo?.(M,b,f)??1);
+  return {agora:rate>0?base/rate:null,base};
+}
 export const TEMPO_MAXIMO=300;
 export function resolve(b:Battle){
   // quem está em brasas não segura o trio na luta (pedido do jogador): se cair o último de pé antes de ele

@@ -1,6 +1,6 @@
 import type { CSSProperties } from 'react';
 import { X,HeartPulse,Clock3,Sparkles,Swords,Flame,Hourglass,Snowflake,Zap,ChevronLeft,ShieldHalf,Info } from 'lucide-react';
-import { condicaoAtendida } from '../engine/battle';
+import { condicaoAtendida,intervaloDoBasico } from '../engine/battle';
 import { unicaDe } from '../engine/unicas';
 import type { Battle,Fighter,Status } from '../engine/types';
 import { byId } from '../data/characters';
@@ -60,6 +60,9 @@ function FichaDoLutador({battle,f,onSelect}:{battle:Battle;f:Fighter;onSelect:(t
   const traco=presentTrait(c.trait),unica=unicaDe(c.id);
   const extras=[c.renascer&&(f.voltou?'Já renasceu nesta luta. ':'')+textoDoRenascer(c.renascer),c.ultimaResistencia&&(f.resistiu?'Já usou nesta luta. ':'')+textoDaResistencia(c.ultimaResistencia),c.despercebido&&textoDoDespercebido(),c.isca&&textoDaIsca(c.isca)].filter((x):x is string=>!!x);
   const basico=c.basic.effects.map(effect=>presentEffect(effect,c.basic.target)).join(' · ');
+  // de quantos em quantos segundos ele bate: o normal dele e, se mudou na luta, o de agora
+  const ritmo=intervaloDoBasico(battle,f),seg=(n:number)=>n.toLocaleString('pt-BR',{minimumFractionDigits:1,maximumFractionDigits:1});
+  const ritmoAgora=ritmo.agora===null?'parado agora':ritmo.agora<ritmo.base*.97?`agora ${seg(ritmo.agora)} s, mais rápido`:ritmo.agora>ritmo.base*1.03?`agora ${seg(ritmo.agora)} s, mais lento`:'';
   return <>
     <header className="bi2-topo">
       <div className={`bi2-retrato ${fracao<.3?'perigo':''}`} style={{'--p':fracao*100} as CSSProperties}><Portrait character={c}/></div>
@@ -88,6 +91,7 @@ function FichaDoLutador({battle,f,onSelect}:{battle:Battle;f:Fighter;onSelect:(t
       <section className="bi2-cartao basico" style={{'--i':5} as CSSProperties}>
         <span className="bi2-selo"><Swords size={12}/><TermoBotao termo={termoPorId['ataque-basico']!}>Ataque básico</TermoBotao></span>
         <b>{c.basic.name}</b><p><ComTermos texto={basico+'.'}/>{c.basic.jeito&&<> <ComTermos texto={textoDoJeito(c.basic.jeito)+'.'}/></>}</p>
+        <p className="bi2-ritmo"><Clock3 size={12}/>Bate a cada <b>{seg(ritmo.base)} s</b>{ritmoAgora&&<em className={ritmo.agora===null?'parado':ritmo.agora<ritmo.base?'rapido':'lento'}> · {ritmoAgora}</em>}</p>
       </section>
     </div>
     {/* Os Status do lutador, com o valor de agora e o tempo que falta; cada um abre o detalhe. */}
