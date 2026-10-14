@@ -7414,6 +7414,23 @@
    ],
    "bytes": 58578
   },
+  "danca-da-lua-branca": {
+   "arquivo": "danca-da-lua-branca.mp3",
+   "descricao": "básico de Rukia: o gelo branco subindo",
+   "versoes": [
+    0.0,
+    1.4604,
+    2.9705,
+    4.4031
+   ],
+   "duracoes": [
+    1.3804,
+    1.4301,
+    1.3527,
+    1.4213
+   ],
+   "bytes": 54702
+  },
   "danca-da-serra": {
    "arquivo": "danca-da-serra.mp3",
    "descricao": "Leatherface: a dança da serra",
@@ -17716,6 +17733,23 @@
    ],
    "bytes": 69069
   },
+  "kunai-do-sharingan": {
+   "arquivo": "kunai-do-sharingan.mp3",
+   "descricao": "básico de Kakashi: o Sharingan e a kunai",
+   "versoes": [
+    0.0,
+    0.9512,
+    1.9693,
+    2.8807
+   ],
+   "duracoes": [
+    0.8712,
+    0.938,
+    0.8314,
+    0.895
+   ],
+   "bytes": 32186
+  },
   "kung-fu": {
    "arquivo": "kung-fu.mp3",
    "descricao": "Neo: kung fu",
@@ -20860,6 +20894,23 @@
     0.842
    ],
    "bytes": 37205
+  },
+  "mordida-corajosa": {
+   "arquivo": "mordida-corajosa.mp3",
+   "descricao": "básico de Coragem: o choramingo e a mordida",
+   "versoes": [
+    0.0,
+    0.8853,
+    1.829,
+    2.667
+   ],
+   "duracoes": [
+    0.8053,
+    0.8637,
+    0.758,
+    0.8079
+   ],
+   "bytes": 25143
   },
   "mordida-da-viuva": {
    "arquivo": "mordida-da-viuva.mp3",
@@ -29361,6 +29412,23 @@
    ],
    "bytes": 45368
   },
+  "pancada-viltrumita": {
+   "arquivo": "pancada-viltrumita.mp3",
+   "descricao": "básico de Omni-Man: o estrondo supersônico",
+   "versoes": [
+    0.0,
+    1.2438,
+    2.4107,
+    3.5923
+   ],
+   "duracoes": [
+    1.1638,
+    1.0869,
+    1.1015,
+    1.2183
+   ],
+   "bytes": 36167
+  },
   "paralisia-mental": {
    "arquivo": "paralisia-mental.mp3",
    "descricao": "Professor Xavier: a onda e o silêncio",
@@ -30550,6 +30618,23 @@
     1.6244
    ],
    "bytes": 75451
+  },
+  "poeira-do-papaleguas": {
+   "arquivo": "poeira-do-papaleguas.mp3",
+   "descricao": "básico de Papa-Léguas: o bip-bip e a poeira",
+   "versoes": [
+    0.0,
+    1.0571,
+    2.1349,
+    3.181
+   ],
+   "duracoes": [
+    0.9771,
+    0.9978,
+    0.9661,
+    0.9922
+   ],
+   "bytes": 36237
   },
   "poeira-na-pista": {
    "arquivo": "poeira-na-pista.mp3",
@@ -32200,6 +32285,23 @@
    ],
    "bytes": 35280
   },
+  "raio-da-prancha": {
+   "arquivo": "raio-da-prancha.mp3",
+   "descricao": "básico de Surfista Prateado: o raio cósmico",
+   "versoes": [
+    0.0,
+    1.2693,
+    2.5702,
+    3.8004
+   ],
+   "duracoes": [
+    1.1893,
+    1.2209,
+    1.1502,
+    1.1924
+   ],
+   "bytes": 48859
+  },
   "raio-de-aku": {
    "arquivo": "raio-de-aku.mp3",
    "descricao": "básico do Aku: a risada e os lasers",
@@ -32335,6 +32437,23 @@
     1.0788
    ],
    "bytes": 44168
+  },
+  "raio-do-ankh": {
+   "arquivo": "raio-do-ankh.mp3",
+   "descricao": "básico de Mumm-Ra: o raio das trevas do ankh",
+   "versoes": [
+    0.0,
+    1.38,
+    2.8071,
+    4.1432
+   ],
+   "duracoes": [
+    1.3,
+    1.3471,
+    1.256,
+    1.3198
+   ],
+   "bytes": 46203
   },
   "raio-do-diabo": {
    "arquivo": "raio-do-diabo.mp3",
@@ -38150,6 +38269,23 @@
    ],
    "bytes": 76071
   },
+  "tapa-de-gorila-dk": {
+   "arquivo": "tapa-de-gorila-dk.mp3",
+   "descricao": "básico de Donkey Kong: o tapão de gorila e o chão tremendo",
+   "versoes": [
+    0.0,
+    1.28,
+    2.6035,
+    3.8429
+   ],
+   "duracoes": [
+    1.2,
+    1.2435,
+    1.1594,
+    1.2183
+   ],
+   "bytes": 35490
+  },
   "tapa-de-ogro": {
    "arquivo": "tapa-de-ogro.mp3",
    "descricao": "básico do Shrek: o tapa e o arroto",
@@ -38183,6 +38319,23 @@
     0.7025
    ],
    "bytes": 26292
+  },
+  "tapa-elastico": {
+   "arquivo": "tapa-elastico.mp3",
+   "descricao": "básico de Mulher-Elástica: o braço esticando e o boing",
+   "versoes": [
+    0.0,
+    1.0486,
+    2.1592,
+    3.2025
+   ],
+   "duracoes": [
+    0.9686,
+    1.0306,
+    0.9633,
+    0.9828
+   ],
+   "bytes": 27968
   },
   "tapa-real": {
    "arquivo": "tapa-real.mp3",

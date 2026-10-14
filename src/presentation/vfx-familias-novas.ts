@@ -2084,6 +2084,15 @@ export const FAMILIAS_NOVAS = {
   trombada_do_pateta: n({ nome: 'Trombada', grupo: 'físico', aponta: true, impacto: 'trombada_do_pateta', escala: 2.0, tempo: 1.0, cor: '#ff8a4a', tinta: 'fixa' }),
   carta_do_rei_dos_jogos: n({ nome: 'Carta do Rei dos Jogos', grupo: 'projétil', aponta: true, impacto: 'carta_do_rei_dos_jogos', escala: 2.0, tempo: 1.0, cor: '#ffd84a', tinta: 'fixa' }),
   carta_do_dragao_branco: n({ nome: 'Carta do Dragão Branco', grupo: 'projétil', aponta: true, impacto: 'carta_do_dragao_branco', escala: 2.0, tempo: 1.0, cor: '#7ac8ff', tinta: 'fixa' }),
+  tapa_de_gorila_dk: n({ nome: 'Tapão de gorila', grupo: 'físico', aponta: true, impacto: 'tapa_de_gorila_dk', escala: 2.0, tempo: 1.0, cor: '#c8905a', tinta: 'fixa' }),
+  pancada_viltrumita: n({ nome: 'Pancada viltrumita', grupo: 'físico', aponta: true, impacto: 'pancada_viltrumita', escala: 2.0, tempo: 1.0, cor: '#ff4a4a', tinta: 'fixa' }),
+  tapa_elastico: n({ nome: 'Tapa elástico', grupo: 'físico', aponta: true, impacto: 'tapa_elastico', escala: 2.0, tempo: 1.0, cor: '#ff6a3a', tinta: 'fixa' }),
+  raio_do_ankh: n({ nome: 'Raio do ankh', grupo: 'magia', aponta: true, impacto: 'raio_do_ankh', escala: 2.0, tempo: 1.0, cor: '#ff3a4a', tinta: 'fixa' }),
+  kunai_do_sharingan: n({ nome: 'Kunai do Sharingan', grupo: 'projétil', aponta: true, impacto: 'kunai_do_sharingan', escala: 2.0, tempo: 1.0, cor: '#ff4a5a', tinta: 'fixa' }),
+  danca_da_lua_branca: n({ nome: 'Dança da Lua Branca', grupo: 'elemento', aponta: true, impacto: 'danca_da_lua_branca', escala: 2.0, tempo: 1.0, cor: '#d8f0ff', tinta: 'fixa' }),
+  raio_da_prancha: n({ nome: 'Raio da prancha', grupo: 'energia', aponta: true, impacto: 'raio_da_prancha', escala: 2.0, tempo: 1.0, cor: '#e0e8ff', tinta: 'fixa' }),
+  mordida_corajosa: n({ nome: 'Mordida corajosa', grupo: 'físico', aponta: true, impacto: 'mordida_corajosa', escala: 2.0, tempo: 1.0, cor: '#ff9ac8', tinta: 'fixa' }),
+  poeira_do_papaleguas: n({ nome: 'Poeira do bip-bip', grupo: 'físico', aponta: true, impacto: 'poeira_do_papaleguas', escala: 2.0, tempo: 1.0, cor: '#c8a070', tinta: 'fixa' }),
 } as const satisfies Record<string, Familia>;
 
 export type FamiliaNova = keyof typeof FAMILIAS_NOVAS;
@@ -2118,7 +2127,8 @@ export const NOVAS_NO_ALVO = new Set<FamiliaNova>(['ressurreicao', 'renascer', '
   'z_buster_carregado', 'tiro_silencioso_47', 'tiro_lambda_gordon', 'samaritano_hellboy', 'chute_espinho_yor', 'chute_ghoul_kaneki', 'chute_do_caos_shadow', 'chute_relampago_chunli',
   'chute_lunar', 'chute_e_bo_donatello', 'chute_cowabunga', 'chute_de_fogo_zuko', 'chute_de_fogo_azul', 'chicotes_de_carne_muzan', 'garras_de_vibranio', 'laminas_simbiontes',
   'garra_do_rei_bowser', 'garra_flamejante', 'raio_da_joia_mente', 'arma_de_raio_rick', 'desintegrador_marvin', 'raio_da_dimensao_x', 'laser_minusculo', 'punho_de_armadura_al',
-  'zoltraak_frieren', 'bastao_cinetico_gambit', 'bastao_de_ar_aang', 'cenoura_do_pernalonga', 'tapas_desesperados', 'trombada_do_pateta', 'carta_do_rei_dos_jogos', 'carta_do_dragao_branco']);
+  'zoltraak_frieren', 'bastao_cinetico_gambit', 'bastao_de_ar_aang', 'cenoura_do_pernalonga', 'tapas_desesperados', 'trombada_do_pateta', 'carta_do_rei_dos_jogos', 'carta_do_dragao_branco',
+  'tapa_de_gorila_dk', 'pancada_viltrumita', 'tapa_elastico', 'raio_do_ankh', 'kunai_do_sharingan', 'danca_da_lua_branca', 'raio_da_prancha', 'mordida_corajosa', 'poeira_do_papaleguas']);
 
 /** Bons para o ataque básico do personagem (quando ele já usa a família numa habilidade). */
 export const NOVAS_DE_BASICO = new Set<FamiliaNova>(['garras', 'chicote', 'bastao', 'mordida', 'tentaculos', 'florete',

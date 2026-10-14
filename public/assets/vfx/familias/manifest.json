@@ -6341,6 +6341,20 @@
   "laco": false,
   "bytes": 13942
  },
+ "danca_da_lua_branca": {
+  "descricao": "básico da Rukia: o círculo e a coluna de gelo branco",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 19838
+ },
  "danca_da_serra": {
   "descricao": "Leatherface · o giro com a serra",
   "quadros": 12,
@@ -14965,6 +14979,20 @@
   "laco": false,
   "bytes": 40760
  },
+ "kunai_do_sharingan": {
+  "descricao": "básico do Kakashi: o Sharingan girando e a kunai",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 12124
+ },
  "kung_fu": {
   "descricao": "Neo · o código e os golpes",
   "quadros": 12,
@@ -17582,6 +17610,20 @@
   ],
   "laco": false,
   "bytes": 80544
+ },
+ "mordida_corajosa": {
+  "descricao": "básico do Coragem: tremendo de medo e mordendo mesmo assim",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 11730
  },
  "mordida_da_viuva": {
   "descricao": "Viúva Negra · os discos elétricos",
@@ -24499,6 +24541,20 @@
   "laco": false,
   "bytes": 31726
  },
+ "pancada_viltrumita": {
+  "descricao": "básico do Omni-Man: o soco que racha o ar",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 40758
+ },
  "papel_bola": {
   "descricao": "Gon · a bola de aura do Papel voando (laço)",
   "quadros": 12,
@@ -25520,6 +25576,20 @@
   ],
   "laco": false,
   "bytes": 52264
+ },
+ "poeira_do_papaleguas": {
+  "descricao": "básico do Papa-Léguas: o borrão, a bicada e a poeira",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 25664
  },
  "poeira_na_pista": {
   "descricao": "Papa-Léguas · a cortina de poeira",
@@ -26893,6 +26963,20 @@
   "laco": false,
   "bytes": 10802
  },
+ "raio_da_prancha": {
+  "descricao": "básico do Surfista Prateado: a prancha e o raio cósmico",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 10256
+ },
  "raio_de_aku": {
   "descricao": "Básico do Aku: os olhos de laser",
   "quadros": 12,
@@ -27004,6 +27088,20 @@
   ],
   "laco": false,
   "bytes": 20888
+ },
+ "raio_do_ankh": {
+  "descricao": "básico do Mumm-Ra: o ankh e o raio das trevas",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 21482
  },
  "raio_do_diabo": {
   "descricao": "Kazuya · o laser da testa",
@@ -31835,6 +31933,20 @@
   "laco": false,
   "bytes": 62286
  },
+ "tapa_de_gorila_dk": {
+  "descricao": "básico do Donkey Kong: o tapão de gorila e a banana",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 20992
+ },
  "tapa_de_ogro": {
   "descricao": "Básico do Shrek: o tapa, a lama e o arroto",
   "quadros": 12,
@@ -31862,6 +31974,20 @@
   ],
   "laco": false,
   "bytes": 20264
+ },
+ "tapa_elastico": {
+  "descricao": "básico da Mulher-Elástica: o braço em mola e o boing",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 10582
  },
  "tapa_real": {
   "descricao": "Básico da Peach: a luva, o tapa e os brilhinhos",
