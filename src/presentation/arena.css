@@ -431,8 +431,8 @@
 
 /* as invocações como bolinha (src/components/Invocacoes.tsx) */
 .arena-v2 .invocacoes{position:absolute;inset:0;pointer-events:none;z-index:7}
-.arena-v2 .invocacao{position:absolute;transform:translate(-50%,-50%);border-radius:50%;filter:drop-shadow(0 0 6px color-mix(in srgb,var(--cor) 60%,transparent));animation:inv-chega .45s cubic-bezier(.2,1.6,.4,1) both}
-.arena-v2 .invocacao img{position:absolute;inset:3px;width:calc(100% - 6px);height:calc(100% - 6px);border-radius:50%;box-shadow:0 0 0 2px #0b131b}
+.arena-v2 .invocacao{position:absolute;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle at 45% 32%,color-mix(in srgb,var(--cor) 35%,#111c2d),#080d17 78%);filter:drop-shadow(0 0 6px color-mix(in srgb,var(--cor) 60%,transparent));animation:inv-chega .45s cubic-bezier(.2,1.6,.4,1) both}
+.arena-v2 .invocacao img{position:absolute;inset:3px;width:calc(100% - 6px);height:calc(100% - 6px);object-fit:contain;border-radius:50%;box-shadow:0 0 0 2px #0b131b}
 .arena-v2 .invocacao svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
 .arena-v2 .invocacao .inv-trilho{fill:none;stroke:#0b131bcc;stroke-width:3}
 .arena-v2 .invocacao .inv-carga{fill:none;stroke:var(--cor);stroke-width:3;stroke-linecap:round;filter:drop-shadow(0 0 3px var(--cor));transition:stroke-dasharray .1s linear}

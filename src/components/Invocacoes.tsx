@@ -4,7 +4,6 @@ import { RITMO_DA_INVOCACAO } from '../data/statuses';
 import type { Battle } from '../engine/types';
 import type { Beat } from '../presentation/director';
 import { fallbackPoint, type Anchors } from './BattleEffects';
-import { Portrait } from './Portrait';
 
 /*
  * A invocação como bolinha (pedido do jogador: "quando eles invocar aparecer uma bolinha… menorzinha…
@@ -17,12 +16,14 @@ import { Portrait } from './Portrait';
  * longe dá o tranco e o efeito da criatura sai dela (BattleEffects). Um arco fino por fora mostra o
  * tempo que falta.
  */
-export const DE_PERTO = new Set(['megumi', 'jinwoo', 'bayonetta', 'jotaro', 'pain', 'mickey', 'plankton', 'agentsmith', 'xenomorph', 'steve', 'makima']);
+export const DE_PERTO = new Set(['megumi', 'jinwoo', 'bayonetta', 'jotaro', 'pain', 'mickey', 'plankton', 'agentsmith', 'xenomorph', 'steve', 'makima', 'hel', 'dracula', 'ainz', 'jiraiya']);
 export const COR_DA_INVOCACAO: Record<string, string> = {
   megumi: '#e8eef8', jinwoo: '#9a6cff', yugi: '#9a6cff', kaiba: '#7fc8ff', bayonetta: '#ff4a6e',
   jotaro: '#8aa2ff', pain: '#d8b080', mickey: '#e8c070', plankton: '#7fe07f', krang: '#ff8ac8',
   naruto: '#ffb04c', agentsmith: '#5ae08a', xenomorph: '#8ab8c0', steve: '#d8d4c8', makima: '#ff9060',
+  odin: '#75b7ff', hel: '#55e8c5', pennywise: '#ef4b40', dracula: '#e35a67', ainz: '#db515a', jiraiya: '#ef9a54',
 };
+const imagemDaInvocacao = (id: string) => `${import.meta.env.BASE_URL}assets/invocacoes/${id}.webp`;
 /** Onde a bolinha fica, em px a partir do centro do medalhão de quem invocou. */
 // sempre na diagonal da frente, virada para o meio do campo (pedido do jogador): no seu trio, em cima à
 // direita; nos rivais (que ficam no alto), embaixo à esquerda
@@ -35,12 +36,11 @@ export const posicaoDaInvocacao = (lado: 'player' | 'enemy', medal: number) => (
  * cada uma dá o bote para o lado dos rivais e volta.
  */
 // relogio: o bote sai quando esse relógio da mecânica dá a volta; sem relógio, o bote acompanha o ataque básico de quem
-// invocou. menos: quantas já aparecem na invocação grande (as cópias do Smith). retrato: a miniatura é o próprio
-// personagem (os clones do Naruto).
-export const MINIATURAS: Record<string, { k: string; max: number; relogio?: string; menos?: number; retrato?: boolean }> = {
+// invocou. menos: quantas já aparecem na invocação grande (as cópias do Smith).
+export const MINIATURAS: Record<string, { k: string; max: number; relogio?: string; menos?: number }> = {
   mickey: { k: 'vassouras', max: 4, relogio: 'relogio_vassoura' },
   agentsmith: { k: 'copias', max: 3, menos: 1 },
-  naruto: { k: 'clones', max: 2, retrato: true },
+  naruto: { k: 'clones', max: 2 },
 };
 /** O arco das miniaturas, em graus da tela (0 = direita, −90 = em cima): por cima no seu trio, por baixo nos rivais. */
 const ARCO_DAS_MINIATURAS = [-150, -122, -94, -66];
@@ -63,13 +63,12 @@ export function Invocacoes({ battle, beat, anchors, box, velocidade }: { battle:
       const bote = mini.relogio
         ? (f.u?.[`${mini.relogio}_volta`] ?? 3) - (f.u?.[mini.relogio] ?? 99) < 0.5
         : !!beat && beat.event.source === f.uid && (beat.event.kind === 'basic' || beat.event.kind === 'summon');
-      const ch = byId[f.characterId];
       const cor = COR_DA_INVOCACAO[f.characterId] ?? '#c9a2ff';
       return Array.from({ length: n }, (_, i) => {
         const { dx, dy } = posicaoDaMiniatura(f.side, i, box.medal);
-        return <div key={`${f.uid}-mini-${i}`} className={`invocacao miniatura ${f.side}${bote ? ' bote' : ''}${mini.retrato ? ' retrato' : ''}`}
+        return <div key={`${f.uid}-mini-${i}`} className={`invocacao miniatura ${f.side}${bote ? ' bote' : ''}`}
           style={{ left: `calc(${p.x}% + ${dx}px)`, top: `calc(${p.y}% + ${dy}px)`, width: rm * 2, height: rm * 2, '--cor': cor, '--atraso': `${i * 0.07}s` } as CSSProperties}>
-          {mini.retrato && ch ? <Portrait character={ch} /> : <img src={`/assets/invocacoes/${f.characterId}.webp`} alt="" />}
+          <img src={imagemDaInvocacao(f.characterId)} alt="" />
         </div>;
       });
     })}
@@ -90,7 +89,7 @@ export function Invocacoes({ battle, beat, anchors, box, velocidade }: { battle:
         style={{ left: `calc(${p.x}% + ${dx}px)`, top: `calc(${p.y}% + ${dy}px)`, width: r * 2, height: r * 2, '--cor': cor, '--vx': `${vai.x * 0.82}px`, '--vy': `${vai.y * 0.82}px`, '--dur': `${0.62 / Math.max(velocidade, 0.25)}s` } as CSSProperties}
         title={byId[f.characterId]?.invocacao}>
         {ataque && !perto && alvo && <i className="inv-disparo" style={{ width: Math.hypot(vai.x, vai.y), transform: `rotate(${Math.atan2(vai.y, vai.x)}rad)` }} />}
-        <img src={`/assets/invocacoes/${f.characterId}.webp`} alt="" />
+        <img src={imagemDaInvocacao(f.characterId)} alt="" />
         <svg viewBox={`0 0 ${r * 2} ${r * 2}`}>
           <circle className="inv-trilho" cx={r} cy={r} r={r - 3} />
           <circle className="inv-carga" cx={r} cy={r} r={r - 3} strokeDasharray={`${C * enche} ${C}`} transform={`rotate(-90 ${r} ${r})`} />
