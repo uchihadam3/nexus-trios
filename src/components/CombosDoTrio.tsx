@@ -80,6 +80,10 @@ export const ARTES_DO_COMBO: Record<string, { fundo: string; selo: string }> = {
   'reforca-forte': { fundo: '/assets/combos/reforca-forte-bg.webp', selo: '/assets/combos/reforca-forte-selo.webp' },
   'carga-golpe': { fundo: '/assets/combos/carga-golpe-bg.webp', selo: '/assets/combos/carga-golpe-selo.webp' },
   'bomba-area': { fundo: '/assets/combos/bomba-area-bg.webp', selo: '/assets/combos/bomba-area-selo.webp' },
+  'expostos-ferido': { fundo: '/assets/combos/expostos-ferido-bg.webp', selo: '/assets/combos/expostos-ferido-selo.webp' },
+  'silencio-preparo': { fundo: '/assets/combos/silencio-preparo-bg.webp', selo: '/assets/combos/silencio-preparo-selo.webp' },
+  'pressa-acumula': { fundo: '/assets/combos/pressa-acumula-bg.webp', selo: '/assets/combos/pressa-acumula-selo.webp' },
+  'status-gatilho': { fundo: '/assets/combos/status-gatilho-bg.webp', selo: '/assets/combos/status-gatilho-selo.webp' },
 };
 const ehTrio = (id: string) => id.startsWith('trio-');
 const visual = (id: string) => VISUAL_DO_COMBO[id] ?? (id.startsWith('lenda-') ? { icone: Crown, cor: '#ffd36b' } : { icone: Link2, cor: '#c8f560' });
