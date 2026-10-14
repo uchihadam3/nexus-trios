@@ -122,6 +122,14 @@ export const ARTES_DO_COMBO: Record<string, { fundo: string; selo: string }> = {
   'trio-relogio': { fundo: '/assets/combos/trio-relogio-bg.webp', selo: '/assets/combos/trio-relogio-selo.webp' },
   'universo-2': { fundo: '/assets/combos/universo-2-bg.webp', selo: '/assets/combos/universo-2-selo.webp' },
   'universo-3': { fundo: '/assets/combos/universo-3-bg.webp', selo: '/assets/combos/universo-3-selo.webp' },
+  'lenda-tom-jerry': { fundo: '/assets/combos/lenda-tom-jerry-bg.webp', selo: '/assets/combos/lenda-tom-jerry-selo.webp' },
+  'lenda-dante-vergil': { fundo: '/assets/combos/lenda-dante-vergil-bg.webp', selo: '/assets/combos/lenda-dante-vergil-selo.webp' },
+  'lenda-jin-kazuya': { fundo: '/assets/combos/lenda-jin-kazuya-bg.webp', selo: '/assets/combos/lenda-jin-kazuya-selo.webp' },
+  'lenda-power-denji': { fundo: '/assets/combos/lenda-power-denji-bg.webp', selo: '/assets/combos/lenda-power-denji-selo.webp' },
+  'lenda-nezuko-tanjiro': { fundo: '/assets/combos/lenda-nezuko-tanjiro-bg.webp', selo: '/assets/combos/lenda-nezuko-tanjiro-selo.webp' },
+  'lenda-inosuke-zenitsu': { fundo: '/assets/combos/lenda-inosuke-zenitsu-bg.webp', selo: '/assets/combos/lenda-inosuke-zenitsu-selo.webp' },
+  'lenda-ryu-ken': { fundo: '/assets/combos/lenda-ryu-ken-bg.webp', selo: '/assets/combos/lenda-ryu-ken-selo.webp' },
+  'lenda-finn-jake': { fundo: '/assets/combos/lenda-finn-jake-bg.webp', selo: '/assets/combos/lenda-finn-jake-selo.webp' },
 };
 const ehTrio = (id: string) => id.startsWith('trio-');
 const visual = (id: string) => VISUAL_DO_COMBO[id] ?? (id.startsWith('lenda-') ? { icone: Crown, cor: '#ffd36b' } : { icone: Link2, cor: '#c8f560' });
