@@ -347,3 +347,24 @@ describe('Gohan desperto', () => {
     expect(despertou).toBeGreaterThan(0);
   });
 });
+
+describe('Devil Jin', () => {
+  it('Jin vira Devil Jin com metade da Vida e fica assim até o fim', () => {
+    let virou = 0;
+    for (let semente = 1; semente <= 20; semente++) {
+      const b = createBattle(['jin', 'piccolo', 'hinata'], ['goku', 'vegeta', 'hulk'], semente);
+      const j = b.fighters.find((f) => f.characterId === 'jin')!;
+      let ja = false;
+      for (let t = 0; t < 6000 && !b.finished; t++) {
+        stepBattle(b);
+        const diabo = !!j.u?.diabo;
+        if (ja) expect(diabo).toBe(true);
+        if (diabo && !ja) expect(j.hp / j.maxHp).toBeLessThanOrEqual(0.5);
+        ja = diabo;
+        expect(naFormaDeAgora(byId.jin, j, b).portrait).toBe(diabo ? '/assets/portraits/formas/jin-devil.webp' : byId.jin.portrait);
+      }
+      if (ja) virou++;
+    }
+    expect(virou).toBeGreaterThan(0);
+  });
+});
