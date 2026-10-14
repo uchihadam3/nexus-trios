@@ -130,6 +130,14 @@ export const ARTES_DO_COMBO: Record<string, { fundo: string; selo: string }> = {
   'lenda-inosuke-zenitsu': { fundo: '/assets/combos/lenda-inosuke-zenitsu-bg.webp', selo: '/assets/combos/lenda-inosuke-zenitsu-selo.webp' },
   'lenda-ryu-ken': { fundo: '/assets/combos/lenda-ryu-ken-bg.webp', selo: '/assets/combos/lenda-ryu-ken-selo.webp' },
   'lenda-finn-jake': { fundo: '/assets/combos/lenda-finn-jake-bg.webp', selo: '/assets/combos/lenda-finn-jake-selo.webp' },
+  'lenda-robin-batman': { fundo: '/assets/combos/lenda-robin-batman-bg.webp', selo: '/assets/combos/lenda-robin-batman-selo.webp' },
+  'lenda-luigi-mario': { fundo: '/assets/combos/lenda-luigi-mario-bg.webp', selo: '/assets/combos/lenda-luigi-mario-selo.webp' },
+  'lenda-zoro-luffy': { fundo: '/assets/combos/lenda-zoro-luffy-bg.webp', selo: '/assets/combos/lenda-zoro-luffy-selo.webp' },
+  'lenda-lawliet-light': { fundo: '/assets/combos/lenda-lawliet-light-bg.webp', selo: '/assets/combos/lenda-lawliet-light-selo.webp' },
+  'lenda-morty-rick': { fundo: '/assets/combos/lenda-morty-rick-bg.webp', selo: '/assets/combos/lenda-morty-rick-selo.webp' },
+  'lenda-peter-stewie': { fundo: '/assets/combos/lenda-peter-stewie-bg.webp', selo: '/assets/combos/lenda-peter-stewie-selo.webp' },
+  'lenda-azula-zuko': { fundo: '/assets/combos/lenda-azula-zuko-bg.webp', selo: '/assets/combos/lenda-azula-zuko-selo.webp' },
+  'lenda-raidenmgr-snake': { fundo: '/assets/combos/lenda-raidenmgr-snake-bg.webp', selo: '/assets/combos/lenda-raidenmgr-snake-selo.webp' },
 };
 const ehTrio = (id: string) => id.startsWith('trio-');
 const visual = (id: string) => VISUAL_DO_COMBO[id] ?? (id.startsWith('lenda-') ? { icone: Crown, cor: '#ffd36b' } : { icone: Link2, cor: '#c8f560' });
