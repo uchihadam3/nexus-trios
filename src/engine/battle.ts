@@ -1,4 +1,5 @@
 import { byId } from '../data/characters';
+import { golpesDe } from './golpes';
 import { COMBOS_DOS_RIVAIS, ESCUDO_DO_COMBO, FORCA_DOS_COMBOS, SEM_BONUS, combosDoTrio, type Bonus } from './combos';
 import { CHOQUE_DO_ELETRIFICADO, DEIXAM_VULNERAVEL, RITMO_DA_INVOCACAO, statuses } from '../data/statuses';
 import { random,shuffle } from './random';
@@ -24,6 +25,8 @@ export function emit(b:Battle,e:Omit<BattleEvent,'id'|'time'>){b.events.push({..
 const unica=(f:Fighter)=>UNICAS[f.characterId]?.ganchos;
 /** Quem está usando uma habilidade agora (o golpe de uma habilidade conta como `habilidade` para as mecânicas). */
 let agindo:string|null=null,agindoIndice=-1;
+/** Quantos golpes a habilidade que está saindo agora dá (src/engine/golpes.ts); só o efeito dela mesma lê. */
+let golpesDaVez=1;
 const M:Motor={
   dano:(b,fonte,alvo,valor,direto=true,label='Impacto')=>damage(b,fonte,alvo,valor,direto,label),
   cura:(b,fonte,alvo,valor,label)=>healing(b,fonte,alvo,valor,label),
@@ -294,8 +297,10 @@ function devolve(b:Battle,dono:Fighter,agressor:Fighter,valor:number,label:'Refl
   if(valor<=.01||!alive(agressor))return;
   damage(b,dono,agressor,valor,false,label);
 }
-function damage(b:Battle,source:Fighter,target:Fighter,raw:number,direto=true,label='Impacto'){
+function damage(b:Battle,source:Fighter,target:Fighter,raw:number,direto=true,label='Impacto',partes=1){
   if(!alive(target))return;
+  // vários golpes: o mesmo dano, calculado uma vez, sai em partes iguais (cada uma com o seu número na tela)
+  const sai=(e:Omit<BattleEvent,'id'|'time'>)=>{if(partes<=1){emit(b,e);return;}for(let k=0;k<partes;k++)emit(b,{...e,value:(e.value??0)/partes,parte:k,partes});};
   // o golpe devolvido é o próprio golpe (ou o espinho fixo): Fortalecido e Enfraquecido de quem devolve não mexem nele
   const devolvido=label==='Refletido'||label==='Espinhos';
   // Veneno e Sangramento são por dentro: passam por Exposto, Protegido e Escudo
@@ -316,9 +321,9 @@ function damage(b:Battle,source:Fighter,target:Fighter,raw:number,direto=true,la
   for(const a of b.fighters)if(a.side===target.side&&alive(a)){const h=unica(a)?.limita;if(h){const antes=amount;amount=h(M,b,a,target,amount);blocked+=antes-amount;}}
   // só o que é por dentro (Veneno, Sangramento) passa pelo Escudo; Marcado não atravessa mais (pedido do jogador)
   const atravessaEscudo=interno||(direto&&!!unica(source)?.atravessaEscudo);
-  if(!atravessaEscudo)for(const s of target.shields){const used=Math.min(s.amount,amount);s.amount-=used;amount-=used;blocked+=used;const owner=b.fighters.find(f=>f.uid===s.source);if(owner&&used>0){owner.stats.protection+=used;pressure(b,owner.side,D.event.usefulProtectionPerFullCondition*clamp(used/target.maxHp));emit(b,{kind:'block',source:owner.uid,target:target.uid,attacker:source.uid,label:'Bloqueio',value:used,visual:'shield'});trigger(b,owner,'protected',owner,used/100);}}
+  if(!atravessaEscudo)for(const s of target.shields){const used=Math.min(s.amount,amount);s.amount-=used;amount-=used;blocked+=used;const owner=b.fighters.find(f=>f.uid===s.source);if(owner&&used>0){owner.stats.protection+=used;pressure(b,owner.side,D.event.usefulProtectionPerFullCondition*clamp(used/target.maxHp));sai({kind:'block',source:owner.uid,target:target.uid,attacker:source.uid,label:'Bloqueio',value:used,visual:'shield'});trigger(b,owner,'protected',owner,used/100);}}
   target.shields=target.shields.filter(s=>s.amount>.01);
-  if(protection>0){const owner=b.fighters.find(f=>f.uid===target.statuses.find(s=>s.id==='protected')?.source);if(owner){owner.stats.protection+=beforeProtection*protection;pressure(b,owner.side,D.event.usefulProtectionPerFullCondition*clamp(beforeProtection*protection/target.maxHp));emit(b,{kind:'block',source:owner.uid,target:target.uid,attacker:source.uid,label:'Proteção',value:beforeProtection*protection,visual:'shield'});trigger(b,owner,'protected',owner,beforeProtection*protection/100);}}
+  if(protection>0){const owner=b.fighters.find(f=>f.uid===target.statuses.find(s=>s.id==='protected')?.source);if(owner){owner.stats.protection+=beforeProtection*protection;pressure(b,owner.side,D.event.usefulProtectionPerFullCondition*clamp(beforeProtection*protection/target.maxHp));sai({kind:'block',source:owner.uid,target:target.uid,attacker:source.uid,label:'Proteção',value:beforeProtection*protection,visual:'shield'});trigger(b,owner,'protected',owner,beforeProtection*protection/100);}}
   let hpBefore=target.hp;
   // Última resistência: o golpe que derrubaria deixa com 1 de Vida, uma vez por luta
   // o combo "segura" dá a Última resistência a quem não tem (fica com 1 de Vida e Protegido 30% por 3 s)
@@ -338,7 +343,7 @@ function damage(b:Battle,source:Fighter,target:Fighter,raw:number,direto=true,la
   if(dealt>.01){
     // Dormindo: o golpe direto acorda
     if(direto&&target.hp>0&&intensity(target,'sleep')>0&&!unica(source)?.naoAcorda){target.statuses=target.statuses.filter(s=>s.id!=='sleep');if(label==='Impacto')label='Acordou';}
-    emit(b,{kind:'damage',source:source.uid,target:target.uid,label,value:dealt});
+    sai({kind:'damage',source:source.uid,target:target.uid,label,value:dealt});
     // Isca (o Light): quem bate no aliado que ele marcou se entrega — ele ganha Investigação sobre esse rival
     if(direto&&source.side!==target.side)for(const m of target.statuses)if(m.id==='marked'){const quem=b.fighters.find(f=>f.uid===m.source);const isca=quem&&quem.side===target.side&&alive(quem)?byId[quem.characterId].isca:undefined;if(quem&&isca)applyEffects(b,quem,[source],[{kind:'investigate',value:isca.investiga}]);}
     const choque=intensity(target,'electric');if(choque>0&&target.hp>0)target.action=Math.max(0,target.action-choque*CHOQUE_DO_ELETRIFICADO);
@@ -437,6 +442,8 @@ export function jeitoDeBater(b:Battle,f:Fighter,alvo:Fighter,j:JeitoDeBater,dano
 }
 export function applyEffects(b:Battle,source:Fighter,selected:Fighter[],effects:Effect[],scale=1){
   const danoAntes=source.stats.damage;
+  // os golpes da habilidade valem só para os efeitos dela (um traço que dispara no meio sai inteiro)
+  const golpes=golpesDaVez;golpesDaVez=1;
   /*
    * Esquiva: o rival com Esquiva rola uma vez por golpe; se escapou, nada do
    * que é contra ele entra (dano, debuff, interrupção) — o golpe passou longe.
@@ -481,7 +488,7 @@ export function applyEffects(b:Battle,source:Fighter,selected:Fighter[],effects:
       if(!alive(target))continue;
       if(['damage','status','interrupt','dispel','shift','release'].includes(effect.kind)&&target.side!==source.side&&escapou(target))continue;
       switch(effect.kind){
-        case 'damage':damage(b,source,target,effect.value*fracao);break;
+        case 'damage':damage(b,source,target,effect.value*fracao,true,'Impacto',golpes>1?Math.max(1,Math.round(golpes/Math.max(1,vivosNoAlvo))):1);break;
         case 'cleanse':if(target.side===source.side)tiraStatus(b,source,target,'cleanse',effect.value);break;
         case 'dispel':if(target.side!==source.side)tiraStatus(b,source,target,'dispel',effect.value);break;
         case 'heal':healing(b,source,target,effect.value);break;
@@ -643,6 +650,7 @@ function execute(b:Battle,f:Fighter,index:number,selected:Fighter[]){
   emit(b,{kind:'skill',source:f.uid,target:selected[0]?.uid,skill:index,label:s.name,visual:s.icon});
   unica(f)?.antes?.(M,b,f,index);
   const quemAgia=agindo,indiceAntes=agindoIndice;agindo=f.uid;agindoIndice=index;
+  golpesDaVez=golpesDe(f.characterId,index);
   applyEffects(b,f,selected,s.effects);
   agindo=quemAgia;agindoIndice=indiceAntes;
   sangra(b,f);

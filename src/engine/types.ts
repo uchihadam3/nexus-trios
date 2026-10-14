@@ -89,7 +89,7 @@ export interface Fighter {
     /** Aliados levantados (Reviver). */
     revives?:number};
 }
-export interface BattleEvent {id:number;time:number;kind:'basic'|'skill'|'cast'|'damage'|'heal'|'shield'|'status'|'interrupt'|'ko'|'synergy'|'charge'|'tempo'|'turn'|'ready'|'block'|'discovery'|'revive'|'cleanse'|'dispel'|'miss'|'resist'|'copy'|'summon'|'unica'|'pulso';source:string;target?:string;skill?:number;label:string;value?:number;visual?:Visual;status?:StatusId;attacker?:string;
+export interface BattleEvent {id:number;time:number;kind:'basic'|'skill'|'cast'|'damage'|'heal'|'shield'|'status'|'interrupt'|'ko'|'synergy'|'charge'|'tempo'|'turn'|'ready'|'block'|'discovery'|'revive'|'cleanse'|'dispel'|'miss'|'resist'|'copy'|'summon'|'unica'|'pulso';source:string;target?:string;skill?:number;label:string;value?:number;visual?:Visual;status?:StatusId;attacker?:string;/** um golpe de uma habilidade de vários golpes (src/engine/golpes.ts): a parte k de `partes` */parte?:number;partes?:number;
   /** Purificar/Dissipar: os Status que saíram, na ordem. */
   removidos?:StatusId[]}
 export interface TargetDecision {time:number;actor:string;intent:TargetIntent;target:string;score:number;reasons:string[]}

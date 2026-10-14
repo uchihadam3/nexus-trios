@@ -415,6 +415,11 @@
 .arena-v2 .rj-acerto-petala::before{background:radial-gradient(circle,#fff 0%,#ffc2da 25%,var(--rj) 40%,transparent 64%)}
 .arena-v2 .rj-acerto-bala::after{height:3%}
 .arena-v2 .rj-acerto-garra::after{top:30%;height:40%;background:repeating-linear-gradient(0deg,transparent 0 20%,var(--rj) 20% 30%,transparent 30% 45%);box-shadow:none}
+.arena-v2 .rj-acerto-soco::before{background:radial-gradient(circle,#fff 0%,var(--rj) 32%,transparent 64%);clip-path:polygon(50% 0,60% 35%,98% 25%,68% 52%,95% 82%,58% 66%,50% 100%,42% 66%,5% 82%,32% 52%,2% 25%,40% 35%)}
+.arena-v2 .rj-acerto-soco::after{display:none}
+.arena-v2 .rj-acerto-corte::before{background:radial-gradient(circle,#fff 0%,var(--rj) 22%,transparent 50%)}
+.arena-v2 .rj-acerto-corte::after{height:8%;left:-25%;width:150%}
+.arena-v2 .rj-acerto-bolha::before{background:radial-gradient(circle,transparent 40%,var(--rj) 52%,transparent 66%)}
 .arena-v2 .rj-acerto-punho::before{background:radial-gradient(circle,#fff 0%,var(--rj) 35%,transparent 66%);clip-path:polygon(50% 0,60% 35%,98% 25%,68% 52%,95% 82%,58% 66%,50% 100%,42% 66%,5% 82%,32% 52%,2% 25%,40% 35%)}
 @keyframes rj-acerto{0%{transform:scale(.3);opacity:1}55%{opacity:1}100%{transform:scale(1.25);opacity:0}}
 @media (prefers-reduced-motion:reduce){.arena-v2 .rj-acerto,.arena-v2 .rj-mira{animation:none;opacity:.8}}

@@ -7,7 +7,7 @@ import { QUADRO_DO_GOLPE } from './golpe-das-folhas';
 import { familia, profileFor } from './vfxProfiles';
 import { INTERVALO_DA_UNICA, JEITO_DA_UNICA } from './unicas-efeitos';
 import { fasesDoEvento, golpeParado, pausasDoGolpe, soONome, type PausaDaUnica } from './ativacao-da-unica';
-import { RAJADA_DA_UNICA, ehDaRajada } from './rajada-da-unica';
+import { ehDaRajada, rajadaDaChave } from './rajada-da-unica';
 export { ladoDaUnica, vooDaUnica } from './ativacao-da-unica';
 
 export type Family='physical'|'energy'|'electric'|'fire'|'magic'|'dark'|'psychic'|'slash'|'prison'|'shield'|'heal'|'regen'|'buff'|'debuff'|'interrupt'|'ko'|'turn'|'grand';
@@ -91,7 +91,7 @@ function duration(event:BattleEvent,grand:boolean){
  * só a ordem e o tempo em que a tela revela o que já aconteceu.
  */
 export type ClasseDoPasso='golpe'|'reacao'|'rival'|'aliado'|'unica';
-export interface Passo {classe:ClasseDoPasso;/** quem age neste passo */quem:string;/** nome do traço, numa reação */rotulo?:string;eventos:number[];/** segundos depois do impacto */em:number;/** a Mecânica única já ativou na pausa do golpe: aqui só cai o resultado, sem o nome de novo */antecipada?:boolean;/** o efeito da Mecânica única do passo anterior (o dano, a cura, o Status que ela causou), sem selo de traço */resultado?:boolean;/** um golpe da rajada da Mecânica única (src/presentation/rajada-da-unica.ts): o i-ésimo de n */rajada?:{i:number;n:number}}
+export interface Passo {classe:ClasseDoPasso;/** quem age neste passo */quem:string;/** nome do traço, numa reação */rotulo?:string;eventos:number[];/** segundos depois do impacto */em:number;/** a Mecânica única já ativou na pausa do golpe: aqui só cai o resultado, sem o nome de novo */antecipada?:boolean;/** o efeito da Mecânica única do passo anterior (o dano, a cura, o Status que ela causou), sem selo de traço */resultado?:boolean;/** um golpe de uma rajada (src/presentation/rajada-da-unica.ts): o i-ésimo de n, e de qual rajada (rajadaDaChave) */rajada?:{i:number;n:number;chave:string}}
 /** Quanto cada passo fica na tela antes do próximo (o tempo de ler o que aconteceu). */
 export const TEMPO_DO_PASSO:Record<ClasseDoPasso,number>={golpe:.42,reacao:.58,rival:.4,aliado:.4,unica:1.85};
 /**
@@ -122,7 +122,7 @@ export function montaPassos(beat:Pick<Beat,'event'|'events'|'after'|'traco'|'bas
     const so:Passo[]=[{classe:beat.event.kind==='unica'&&cheias?.has(ator)?'unica':'reacao',quem:ator,rotulo:f?(beat.event.kind==='unica'?UNICAS[f.characterId]?.nome:beat.event.kind==='pulso'?'':byId[f.characterId].trait.name):undefined,eventos:beat.events.map(e=>e.id),em:0}];
     // sozinha, o impacto do beat é a chegada do efeito: os golpes da rajada saem dali, um a cada intervalo
     separaRajadas(so,beat);
-    for(const x of so)if(x.rajada)x.em=x.rajada.i*(RAJADA_DA_UNICA[f?.characterId??'']?.intervalo??.3);
+    for(const x of so)if(x.rajada)x.em=x.rajada.i*(rajadaDaChave(x.rajada.chave)?.intervalo??.3);
     return so;
   }
   if(!['basic','skill'].includes(beat.event.kind)||!lado)return [{classe:'golpe',quem:ator,eventos:beat.events.map(e=>e.id),em:0}];
@@ -201,6 +201,7 @@ export function montaPassos(beat:Pick<Beat,'event'|'events'|'after'|'traco'|'bas
   if(!passos.length)passos.push({classe:'golpe',quem:ator,eventos:[],em:0});
   passos[0]!.eventos.unshift(...soltos);
   separaRajadas(passos,beat);
+  separaGolpes(passos,beat);
   tempoDosPassos(passos,beat);
   return passos;
 }
@@ -228,11 +229,41 @@ function separaRajadas(passos:Passo[],beat:Pick<Beat,'events'|'after'>):void{
     // logo depois da ativação dela (o passo com o aviso da Mecânica única de quem soltou)
     let k=passos.findIndex(x=>x.quem===dono&&x.eventos.some(id=>beat.events.find(e=>e.id===id)?.kind==='unica'));
     if(k<0)k=passos.length-1;
-    const novos:Passo[]=golpes.map((eventos,i)=>({classe:'reacao',quem:dono,rotulo:'',eventos,em:0,resultado:true,rajada:{i,n:golpes.length}}));
+    const novos:Passo[]=golpes.map((eventos,i)=>({classe:'reacao',quem:dono,rotulo:'',eventos,em:0,resultado:true,rajada:{i,n:golpes.length,chave:`u:${personagem(dono)}`}}));
     passos.splice(k+1,0,...novos);
   }
   // um passo que ficou vazio (o golpe da habilidade era só a rajada) sai da cadeia, menos o primeiro
   for(let i=passos.length-1;i>0;i--)if(!passos[i]!.eventos.length&&!passos[i]!.rajada)passos.splice(i,1);
+}
+/*
+ * Os golpes da habilidade de vários golpes (src/engine/golpes.ts): o motor já dividiu o dano em partes; a primeira
+ * parte de cada alvo cai no impacto, e as outras vêm em sequência, um golpe por passo (alvo por alvo), cada uma com o
+ * seu número. O nocaute fica com a última parte do alvo que caiu.
+ */
+function separaGolpes(passos:Passo[],beat:Pick<Beat,'event'|'events'|'after'>):void{
+  const e0=beat.event;
+  if(e0.kind!=='skill'||e0.skill===undefined)return;
+  const personagem=beat.after.fighters.find(f=>f.uid===e0.source)?.characterId;
+  const chave=`h:${personagem}:${e0.skill}`;
+  if(!rajadaDaChave(chave))return;
+  const donoDe=(e:BattleEvent)=>e.kind==='block'?(e.attacker??e.source):e.source;
+  // as partes por (golpe, alvo): bloqueio e dano da mesma parte andam juntos
+  const porParte=new Map<string,number[]>(),ordem:string[]=[];
+  for(const e of beat.events){
+    if((e.parte??0)<1||!e.partes||donoDe(e)!==e0.source||!e.target)continue;
+    const k=`${e.parte}|${e.target}`;
+    if(!porParte.has(k)){porParte.set(k,[]);ordem.push(k);}
+    porParte.get(k)!.push(e.id);
+  }
+  if(!ordem.length)return;
+  ordem.sort((a,b)=>Number(a.split('|')[0])-Number(b.split('|')[0]));
+  const ids=new Set([...porParte.values()].flat());
+  // o nocaute vai com a última parte do alvo
+  for(const e of beat.events)if(e.kind==='ko'&&e.target){const ult=[...ordem].reverse().find(k=>k.endsWith(`|${e.target}`));if(ult){porParte.get(ult)!.push(e.id);ids.add(e.id);}}
+  for(const x of passos)x.eventos=x.eventos.filter(id=>!ids.has(id));
+  const k=Math.max(0,passos.findIndex(x=>x.classe==='golpe'));
+  const novos:Passo[]=ordem.map((key,i)=>({classe:'reacao',quem:e0.source,rotulo:'',eventos:porParte.get(key)!,em:0,resultado:true,rajada:{i,n:ordem.length,chave}}));
+  passos.splice(k+1,0,...novos);
 }
 /** Depois de o efeito da Mecânica única chegar (no meio da cadeia), quanto ele fica à vista. */
 const DEPOIS_NA_CADEIA=1.0;
@@ -249,7 +280,9 @@ export function tempoDosPassos(passos:Passo[],beat:Pick<Beat,'event'|'events'|'a
   const intervalo=(k:number)=>{
     const x=passos[k]!;
     // a rajada: um golpe a cada intervalo dela; depois do último, o tempo de ver o resultado
-    if(x.rajada){const r=RAJADA_DA_UNICA[beat.after.fighters.find(f=>f.uid===x.quem)?.characterId??''];return passos[k+1]?.rajada?(r?.intervalo??.3):DEPOIS_NA_CADEIA;}
+    if(x.rajada){const r=rajadaDaChave(x.rajada.chave);return passos[k+1]?.rajada?(r?.intervalo??.3):x.rajada.chave.startsWith('h:')?TEMPO_DO_PASSO.golpe:DEPOIS_NA_CADEIA;}
+    // o golpe de uma habilidade de vários golpes: o segundo golpe vem logo, no ritmo da rajada
+    if(x.classe==='golpe'&&passos[k+1]?.rajada?.chave.startsWith('h:'))return rajadaDaChave(passos[k+1]!.rajada!.chave)?.intervalo??.2;
     if(x.classe==='unica'){if(x.antecipada)return .05;const f=fasesDe(x);return (f?.impactoEm??PREPARO_DA_UNICA)+(passos[k+1]?.resultado?0:DEPOIS_NA_CADEIA);}
     if(x.resultado&&daUnica(k))return DEPOIS_NA_CADEIA;
     return TEMPO_DO_PASSO[x.resultado?'reacao':x.classe];

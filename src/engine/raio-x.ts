@@ -157,11 +157,13 @@ export function acumularRaioX(estado: EstadoRaioX, eventos: readonly BattleEvent
         if (doTrio(alvo) && lado(ev.source) !== 'player') {
           absorvido[alvo] = (absorvido[alvo] ?? 0) + (ev.value ?? 0);
           /* o rival provocado bateu em quem provocou: foi um golpe a menos nos aliados */
-          if (provocados.some((p) => p.alvo === ev.source && p.de === alvo)) {
+          if ((ev.parte ?? 0) === 0 && provocados.some((p) => p.alvo === ev.source && p.de === alvo)) {
             for (const f of battle.fighters) if (f.side === 'player' && f.uid !== alvo && f.hp > 0) ligar(alvo, f.uid, 'provocou', (ev.value ?? 0) / 2);
           }
         }
         if (!doTrio(ev.source) || doTrio(alvo)) break;
+        /* um golpe de várias partes (src/engine/golpes.ts) conta uma vez: os elos são por golpe, não por parte */
+        if ((ev.parte ?? 0) > 0) break;
         /* Quem abriu este inimigo antes deste golpe leva o crédito do elo. */
         for (const m of marcas) {
           if (m.alvo !== alvo || !VULNERABILIZA.has(m.status)) continue;
