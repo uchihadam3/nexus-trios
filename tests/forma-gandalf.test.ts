@@ -90,3 +90,21 @@ describe('Korra no Estado Avatar', () => {
     expect(viu).toBeGreaterThan(0);
   });
 });
+
+/* Hércules (pedido do jogador: "Hércules semideus"): com 12 Trabalhos vira Semideus e fica com o retrato novo. */
+describe('Hércules Semideus', () => {
+  it('troca o retrato quando vira Semideus e não volta mais', () => {
+    let virou = 0;
+    for (let semente = 1; semente <= 30; semente++) {
+      const b = createBattle(['hercules', 'hinata', 'naruto'], ['jerry', 'patolino', 'coragem'], semente);
+      const h = b.fighters.find((f) => f.characterId === 'hercules')!;
+      for (let t = 0; t < 6000 && !b.finished; t++) {
+        stepBattle(b);
+        const deus = !!h.u?.deus;
+        if (deus) virou++;
+        expect(naFormaDeAgora(byId.hercules, h, b).portrait).toBe(deus ? '/assets/portraits/formas/hercules-semideus.webp' : byId.hercules.portrait);
+      }
+    }
+    expect(virou).toBeGreaterThan(0);
+  });
+});
