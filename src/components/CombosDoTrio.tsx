@@ -75,6 +75,11 @@ export const ARTES_DO_COMBO: Record<string, { fundo: string; selo: string }> = {
   'sangue-vampiro': { fundo: '/assets/combos/sangue-vampiro-bg.webp', selo: '/assets/combos/sangue-vampiro-selo.webp' },
   'maldicao-vampiro': { fundo: '/assets/combos/maldicao-vampiro-bg.webp', selo: '/assets/combos/maldicao-vampiro-selo.webp' },
   'sono-golpe': { fundo: '/assets/combos/sono-golpe-bg.webp', selo: '/assets/combos/sono-golpe-selo.webp' },
+  'controla-dano': { fundo: '/assets/combos/controla-dano-bg.webp', selo: '/assets/combos/controla-dano-selo.webp' },
+  'dissipa-golpe': { fundo: '/assets/combos/dissipa-golpe-bg.webp', selo: '/assets/combos/dissipa-golpe-selo.webp' },
+  'reforca-forte': { fundo: '/assets/combos/reforca-forte-bg.webp', selo: '/assets/combos/reforca-forte-selo.webp' },
+  'carga-golpe': { fundo: '/assets/combos/carga-golpe-bg.webp', selo: '/assets/combos/carga-golpe-selo.webp' },
+  'bomba-area': { fundo: '/assets/combos/bomba-area-bg.webp', selo: '/assets/combos/bomba-area-selo.webp' },
 };
 const ehTrio = (id: string) => id.startsWith('trio-');
 const visual = (id: string) => VISUAL_DO_COMBO[id] ?? (id.startsWith('lenda-') ? { icone: Crown, cor: '#ffd36b' } : { icone: Link2, cor: '#c8f560' });
