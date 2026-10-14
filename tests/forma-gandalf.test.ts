@@ -291,3 +291,21 @@ describe('Drácula em névoa', () => {
     expect(viu).toBeGreaterThan(0);
   });
 });
+
+/* Guts (pedido do jogador: "Guts armadura Berserker"): o retrato da armadura nos 6 s do Berserker. */
+describe('Guts na Armadura do Berserker', () => {
+  it('troca o retrato só enquanto o Berserker dura', () => {
+    let viu = 0;
+    for (let semente = 1; semente <= 30; semente++) {
+      const b = createBattle(['guts', 'hinata', 'naruto'], ['goku', 'vegeta', 'hulk'], semente);
+      const g = b.fighters.find((f) => f.characterId === 'guts')!;
+      for (let t = 0; t < 6000 && !b.finished; t++) {
+        stepBattle(b);
+        const berserk = (g.u?.berserk ?? 0) > b.time;
+        if (berserk) viu++;
+        expect(naFormaDeAgora(byId.guts, g, b).portrait).toBe(berserk ? '/assets/portraits/formas/guts-berserker.webp' : byId.guts.portrait);
+      }
+    }
+    expect(viu).toBeGreaterThan(0);
+  });
+});
