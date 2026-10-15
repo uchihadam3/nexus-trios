@@ -1,5 +1,5 @@
 import type { CSSProperties } from 'react';
-import { ArrowRight,Award,BookOpen,ChevronRight,Zap,Trophy,CircleHelp,Settings2,Download,Users,Crown,ShieldCheck,Play,LogOut,Share2,MessageCircle,Instagram,Facebook } from 'lucide-react';
+import { ArrowRight,MessagesSquare,Award,BookOpen,ChevronRight,Zap,Trophy,CircleHelp,Settings2,Download,Users,Crown,ShieldCheck,Play,LogOut,Share2,MessageCircle,Instagram,Facebook } from 'lucide-react';
 import '../presentation/compartilhar.css';
 import { byId,characters } from '../data/characters';
 import { Portrait } from '../components/Portrait';
@@ -8,6 +8,8 @@ import {onlineConfigured} from '../lib/online';
 import { formatarPontos,pontosDaJornada } from '../engine/pontos';
 import { TOTAL_DE_CONQUISTAS,desafioDoDia,tituloDe } from '../lib/conquistas';
 import { TODOS_OS_COMBOS } from '../components/CombosDoTrio';
+import { Avatar } from '../components/AvatarDaComunidade';
+import type { Jogador } from '../lib/comunidade';
 
 /*
  * A tela inicial (remake).
@@ -18,12 +20,12 @@ import { TODOS_OS_COMBOS } from '../components/CombosDoTrio';
  * e mostra a luta e os pontos de agora. O resto do jogo fica num painel de
  * botões-ícone, como o menu de um jogo.
  */
-interface Props {profile:Profile;run:Run|null;conta:boolean;onPlay:()=>void;onContinue:()=>void;onAbandon:()=>void;onNavigate:(s:'characters'|'conquistas'|'combos'|'ranking'|'conta'|'help'|'settings')=>void;onInstall:()=>void;onShare:()=>void}
+interface Props {comunidade:{online:Jogador[]|null;naoLidas:number}|null;profile:Profile;run:Run|null;conta:boolean;onPlay:()=>void;onContinue:()=>void;onAbandon:()=>void;onNavigate:(s:'characters'|'conquistas'|'combos'|'ranking'|'conta'|'help'|'settings'|'comunidade')=>void;onInstall:()=>void;onShare:()=>void}
 
 const Fx=({nome,cor,ms,className}:{nome:string;cor:string;ms:number;className:string})=>
   <span aria-hidden className={`uifx uifx-laco ${className}`} style={{'--uifx-img':`url(/assets/ui/fx/${nome}.webp)`,'--uifx-cor':cor,'--uifx-dur':`${ms}ms`} as CSSProperties}/>;
 
-export function Home({profile,run,conta,onPlay,onContinue,onAbandon,onNavigate,onInstall,onShare}:Props){
+export function Home({comunidade,profile,run,conta,onPlay,onContinue,onAbandon,onNavigate,onInstall,onShare}:Props){
   const terminal=run?.stage==='result'&&(run.battle?.winner!=='player'||run.index===9);
   const wonCurrent=run?.stage==='result'&&run.battle?.winner==='player';
   const completed=run?run.index+(wonCurrent?1:0):0;
@@ -67,6 +69,13 @@ export function Home({profile,run,conta,onPlay,onContinue,onAbandon,onNavigate,o
     </div>
 
     <div className="hv-faixas">
+    {/* A Comunidade (src/screens/ComunidadeScreen.tsx): quem está online agora, e as privadas não lidas. */}
+    {comunidade&&<button className="hv-conquistas-faixa hv-comunidade-faixa" onClick={()=>onNavigate('comunidade')} aria-label={`Comunidade: ${comunidade.online?.length??0} online${comunidade.naoLidas?`, ${comunidade.naoLidas} mensagens novas`:''}`}>
+      <span className="hv-cq-icone"><MessagesSquare size={22}/>{comunidade.naoLidas>0&&<em>{comunidade.naoLidas}</em>}</span>
+      <span className="hv-cq-texto"><b>COMUNIDADE</b><small>{comunidade.naoLidas>0?<strong>{comunidade.naoLidas} {comunidade.naoLidas===1?'mensagem nova':'mensagens novas'}</strong>:<span className="hv-cm-online"><span className="cm-ponto vivo"/>{comunidade.online===null?'chat e jogadores':`${comunidade.online.length+1} online agora`}</span>}</small></span>
+      <span className="hv-cq-ultimos" aria-hidden="true">{(comunidade.online??[]).slice(0,3).map(j=><Avatar key={j.id} jogador={j} id={j.id} nome={j.nome} tamanho={30}/>)}</span>
+      <ChevronRight size={20}/>
+    </button>}
     {/* As Conquistas: quantos já foram liberados, o título e os últimos liberados. */}
     {(()=>{const lista=Object.entries(profile.conquistas??{}).sort((a,b)=>b[1].localeCompare(a[1])),n=lista.length,t=tituloDe(n),novas=lista.filter(([id])=>!(profile.conquistasVistas??[]).includes(id)).length,desafios=desafioDoDia(profile.desafio,profile.conquistas??{}).ids.filter(id=>!profile.conquistas?.[id]).length;
       return <button className="hv-conquistas-faixa" onClick={()=>onNavigate('conquistas')} style={{'--titulo':t.atual.cor} as CSSProperties} aria-label={`Conquistas: ${n} de ${TOTAL_DE_CONQUISTAS}`}>

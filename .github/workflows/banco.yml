@@ -41,6 +41,6 @@ jobs:
       # projeto não a enxerga. Sem isto, ela só seria conferida ao publicar.
       - run: npx -y deno@2 check supabase/functions/ranked-api/index.ts
       # um arquivo de cada vez: os dois criam os papéis do Supabase (anon, authenticated) no mesmo servidor
-      - run: npx vitest run --no-file-parallelism tests/top3.sql.test.ts tests/conquistas.sql.test.ts
+      - run: npx vitest run --no-file-parallelism tests/top3.sql.test.ts tests/conquistas.sql.test.ts tests/comunidade.sql.test.ts
         env:
           NEXUS_PG_URL: postgres://postgres@localhost:5432/postgres

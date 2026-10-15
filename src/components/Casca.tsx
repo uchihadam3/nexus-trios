@@ -1,5 +1,5 @@
 import { useEffect,type CSSProperties,type ReactNode } from 'react';
-import { ArrowLeft,Award,CircleHelp,Crown,Home as HomeIcon,Menu,Settings2,ShieldCheck,Trophy,Users,X } from 'lucide-react';
+import { ArrowLeft,MessagesSquare,Award,CircleHelp,Crown,Home as HomeIcon,Menu,Settings2,ShieldCheck,Trophy,Users,X } from 'lucide-react';
 import { battleAudio } from '../lib/audio';
 import { PRIORIDADE,type Sound } from '../audio/cues';
 import { formatarPontos } from '../engine/pontos';
@@ -16,13 +16,14 @@ import { formatarPontos } from '../engine/pontos';
  * nos que abrem um cartão, o de fechar nos que fecham.
  */
 
-export type Destino='home'|'characters'|'conquistas'|'combos'|'ranking'|'help'|'settings'|'conta';
+export type Destino='home'|'characters'|'conquistas'|'combos'|'ranking'|'help'|'settings'|'conta'|'comunidade';
 
 const Fx=({nome,cor,ms,className,laco=true}:{nome:string;cor:string;ms:number;className:string;laco?:boolean})=>
   <span aria-hidden className={`uifx ${laco?'uifx-laco':''} ${className}`} style={{'--uifx-img':`url(/assets/ui/fx/${nome}.webp)`,'--uifx-cor':cor,'--uifx-dur':`${ms}ms`} as CSSProperties}/>;
 
 const ITENS:{id:Destino;nome:string;icone:typeof HomeIcon;cor:string;online?:boolean}[]=[
   {id:'home',nome:'Início',icone:HomeIcon,cor:'#c8f560'},
+  {id:'comunidade',nome:'Comunidade',icone:MessagesSquare,cor:'#c8f560',online:true},
   {id:'characters',nome:'Personagens',icone:Users,cor:'#ffb86b'},
   {id:'conquistas',nome:'Conquistas',icone:Award,cor:'#ffc65a'},
   {id:'ranking',nome:'Ranking',icone:Trophy,cor:'#ffd36b'},
@@ -31,7 +32,7 @@ const ITENS:{id:Destino;nome:string;icone:typeof HomeIcon;cor:string;online?:boo
   {id:'conta',nome:'Conta',icone:ShieldCheck,cor:'#86e3a8'},
 ];
 
-export function Cabecalho({tela,menu,onMenu,onNavigate,recorde,apelido,online,total}:{tela:string;menu:boolean;onMenu:(aberto:boolean)=>void;onNavigate:(d:Destino)=>void;recorde:number;apelido?:string;online:boolean;total:number}){
+export function Cabecalho({tela,menu,onMenu,onNavigate,recorde,apelido,online,total,naoLidas=0}:{tela:string;menu:boolean;onMenu:(aberto:boolean)=>void;onNavigate:(d:Destino)=>void;recorde:number;apelido?:string;online:boolean;total:number;naoLidas?:number}){
   const itens=ITENS.filter(i=>!i.online||online);
   useEffect(()=>{if(!menu)return;const fecha=(e:KeyboardEvent)=>{if(e.key==='Escape')onMenu(false);};addEventListener('keydown',fecha);return()=>removeEventListener('keydown',fecha);},[menu,onMenu]);
   return <header className="gs-barra">
@@ -39,11 +40,11 @@ export function Cabecalho({tela,menu,onMenu,onNavigate,recorde,apelido,online,to
     <button className="gs-marca" onClick={()=>onNavigate('home')} aria-label="Nexus início"><b>N</b><span>NEXUS<small>DUELO DE TRIOS</small></span></button>
     <nav aria-label="Navegação principal" className={`gs-nav ${menu?'aberto':''}`}>
       <div className="gs-nav-grade">{itens.map((i,k)=><button key={i.id} className={tela===i.id?'ativo':''} onClick={()=>onNavigate(i.id)} aria-label={i.nome} style={{'--tile':i.cor,'--k':k} as CSSProperties}>
-        <i.icone size={22}/><b>{i.nome}</b>{i.id==='characters'&&<small>{total}</small>}
+        <i.icone size={22}/><b>{i.nome}</b>{i.id==='characters'&&<small>{total}</small>}{i.id==='comunidade'&&naoLidas>0&&<em className="gs-selo-novas">{naoLidas}</em>}
       </button>)}</div>
     </nav>
     <span className="gs-recorde" title="Seu recorde de pontos"><Crown size={14}/><b>{formatarPontos(recorde)}</b>{apelido&&<small>{apelido}</small>}</span>
-    <button className="gs-menu menu-toggle" aria-label="Abrir menu" aria-expanded={menu} onClick={()=>onMenu(!menu)}>{menu?<X size={22}/>:<Menu size={22}/>}</button>
+    <button className="gs-menu menu-toggle" aria-label="Abrir menu" aria-expanded={menu} onClick={()=>onMenu(!menu)}>{menu?<X size={22}/>:<Menu size={22}/>}{!menu&&naoLidas>0&&<em className="gs-selo-novas">{naoLidas}</em>}</button>
     {menu&&<button className="gs-veu" aria-label="Fechar menu" tabIndex={-1} onClick={()=>onMenu(false)}/>}
   </header>;
 }

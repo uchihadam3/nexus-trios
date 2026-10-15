@@ -18,7 +18,9 @@ on:
       - 'src/engine/**'
       - 'src/data/**'
       - 'supabase/functions/**'
+      - 'supabase/migrations/**'
       - 'scripts/publicar-funcao.sh'
+      - 'scripts/aplicar-migracoes.sh'
   workflow_dispatch:
 permissions:
   contents: read
@@ -46,6 +48,9 @@ jobs:
         if: env.SUPABASE_ACCESS_TOKEN != ''
       # a função tem de passar no typecheck do Deno antes de subir
       - run: npx -y deno@2 check supabase/functions/ranked-api/index.ts
+        if: env.SUPABASE_ACCESS_TOKEN != ''
+      # o banco antes da função: as migrações novas (a Comunidade e as próximas), já testadas no banco.yml
+      - run: bash scripts/aplicar-migracoes.sh
         if: env.SUPABASE_ACCESS_TOKEN != ''
       - run: bash scripts/publicar-funcao.sh
         if: env.SUPABASE_ACCESS_TOKEN != ''

@@ -48,9 +48,15 @@ import {PortaoDaConta,type EtapaDoPortao} from './screens/PortaoDaConta';
 import {FAMILIA_DA_INVOCACAO} from './presentation/vfx-atribuicao';
 import {efeitosDoJeito,somDoJeito} from './presentation/jeito-efeito';
 import {SOM_DA_ESPERA,SOM_DA_VOLTA,SOM_DO_REVIVER} from './presentation/renascer-proprio';
+import {criarComunidade,type ServicoDaComunidade} from './lib/comunidade';
+import {useComunidade} from './lib/useComunidade';
+import {Avatar} from './components/AvatarDaComunidade';
+const ComunidadeScreen=lazy(()=>import('./screens/ComunidadeScreen').then(m=>({default:m.ComunidadeScreen})));
+/* A prévia da Comunidade sem servidor (VITE_COMUNIDADE_DEMO=true): só para testar a tela; nunca no jogo publicado. */
+const COMUNIDADE_DEMO=import.meta.env.VITE_COMUNIDADE_DEMO==='true';
 const DebugScreen=lazy(()=>import('./screens/DebugScreen').then(m=>({default:m.DebugScreen})));
 const VfxLabScreen=lazy(()=>import('./screens/VfxLabScreen').then(m=>({default:m.VfxLabScreen})));
-type Screen='home'|'game'|'characters'|'conquistas'|'combos'|'ranking'|'conta'|'help'|'settings'|'debug'|'vfx';
+type Screen='home'|'game'|'characters'|'conquistas'|'combos'|'ranking'|'conta'|'help'|'settings'|'debug'|'vfx'|'comunidade';
 interface InstallEvent extends Event {prompt:()=>Promise<void>;userChoice:Promise<{outcome:string}>}
 /* Os avisos do jogo (remake): medalhão com o anel de runas na cor do assunto, título grande, botões grandes. */
 function InfoDialog({title,children,onClose,icone,cor='#c8f560'}:{title:string;children:React.ReactNode;onClose:()=>void;icone?:React.ReactNode;cor?:string}){
@@ -508,6 +514,16 @@ export default function App(){
   const [dono,setDono]=useState(false);
   useEffect(()=>{let vivo=true;void ehDono(conta?.email).then(d=>{if(vivo)setDono(d);});return ()=>{vivo=false;};},[conta?.email]);
   const podeDicas=dicasLiberadas(dono,profile.recordePontos??0);
+  /* A Comunidade (src/screens/ComunidadeScreen.tsx): só com conta e nome público; a presença e os avisos valem em qualquer tela. */
+  const contaRef=useRef(conta);contaRef.current=conta;
+  const [comunidadeDemo,setComunidadeDemo]=useState<{servico:ServicoDaComunidade;eu:string}|null>(null);
+  useEffect(()=>{if(COMUNIDADE_DEMO)void import('./lib/comunidade-demo').then(m=>setComunidadeDemo({servico:m.criarComunidadeDemo(),eu:m.EU_DEMO}));},[]);
+  const servicoReal=useMemo(()=>onlineConfigured?criarComunidade(carregarCliente,()=>contaRef.current?.id??null):null,[]);
+  const comunidadeLigada=COMUNIDADE_DEMO?!!comunidadeDemo:onlineConfigured&&logado&&!!conta&&nomeDaConta?.id===conta.id&&!!nomeDaConta.handle;
+  const servicoDaComunidade=COMUNIDADE_DEMO?comunidadeDemo?.servico??null:servicoReal;
+  const euNaComunidade=COMUNIDADE_DEMO?comunidadeDemo?.eu??null:conta?.id??null;
+  const [abrirConversa,setAbrirConversa]=useState<string|null>(null);
+  const comunidade=useComunidade({servico:servicoDaComunidade,ligado:comunidadeLigada,euId:euNaComunidade,naComunidade:screen==='comunidade',noInicio:screen==='home'});
   /* Dicas ligadas enquanto o trio é escolhido: a jornada inteira paga o custo, mesmo desligando depois (src/engine/pontos.ts) */
   useEffect(()=>{if(settings.dicasDoTrio&&podeDicas&&run?.stage==='draft'&&run.draft.team.length<3&&!run.dicas)changeRun({...run,dicas:true});},[settings.dicasDoTrio,podeDicas,run?.stage,run?.draft.team.length,run?.dicas]);
 
@@ -518,10 +534,13 @@ export default function App(){
   const reset=()=>{resetStorage();setSettings(defaults);setProfile({journeys:0,victories:0,best:0,wins:0,recordePontos:0,escalaDosPontos:ESCALA_DOS_PONTOS});setRun(null);runRef.current=null;navigate('home');};
   return <div onPointerDownCapture={()=>void battleAudio.unlock()} onPointerUpCapture={()=>void battleAudio.unlock()} onTouchEndCapture={()=>void battleAudio.unlock()} onClickCapture={()=>void battleAudio.unlock()} onKeyDownCapture={e=>{if(e.key==='Enter'||e.key===' ')void battleAudio.unlock();}} className={`app ${settings.reducedMotion?'reduce-motion':''} ${screen==='game'&&run?.stage==='battle'?'in-battle':''}`}>
     <ToqueGlobal/>
-    <Cabecalho tela={screen} menu={menu} onMenu={setMenu} onNavigate={navigate} recorde={profile.recordePontos??0} apelido={profile.publicHandle} online={onlineConfigured} total={characters.length}/>
+    <Cabecalho tela={screen} menu={menu} onMenu={setMenu} onNavigate={d=>{if(d==='comunidade')setAbrirConversa(null);navigate(d);}} recorde={profile.recordePontos??0} apelido={profile.publicHandle} online={onlineConfigured||COMUNIDADE_DEMO} total={characters.length} naoLidas={comunidade.naoLidas}/>
     <main key={`${screen}-${screen==='game'?run?.stage??'idle':'page'}`} className={screen==='game'&&run?.stage==='battle'?'main battle-main screen-enter':'main screen-enter'}>
-      {screen==='home'&&<Home profile={profile} run={run} conta={conta!==null&&conta.origem!=='convidado'} onPlay={requestNew} onContinue={()=>{if(run?.stage==='battle'&&run.battle){direction.current=directionFor(run);setPresentation({battle:direction.current.visible,beat:direction.current.active});}navigate('game');setPaused(run?.stage==='battle');}} onAbandon={()=>setConfirmAbandon(true)} onNavigate={navigate} onInstall={()=>void install()} onShare={()=>setCompartilhar(true)}/>}
+      {screen==='home'&&<Home comunidade={comunidadeLigada?{online:comunidade.online,naoLidas:comunidade.naoLidas}:null} profile={profile} run={run} conta={conta!==null&&conta.origem!=='convidado'} onPlay={requestNew} onContinue={()=>{if(run?.stage==='battle'&&run.battle){direction.current=directionFor(run);setPresentation({battle:direction.current.visible,beat:direction.current.active});}navigate('game');setPaused(run?.stage==='battle');}} onAbandon={()=>setConfirmAbandon(true)} onNavigate={navigate} onInstall={()=>void install()} onShare={()=>setCompartilhar(true)}/>}
       {screen==='characters'&&<CharactersScreen onDetails={setDetails}/>}
+      {screen==='comunidade'&&(comunidadeLigada&&servicoDaComunidade&&euNaComunidade
+        ?<Suspense fallback={<p className="cm-carregando-tela">Abrindo a Comunidade…</p>}><ComunidadeScreen servico={servicoDaComunidade} euId={euNaComunidade} euNome={profile.publicHandle??'Você'} naoLidas={comunidade.naoLidas} onLidas={()=>void comunidade.recontar()} abrirCom={abrirConversa} onDetails={setDetails}/></Suspense>
+        :<div className="cm-sem-conta"><p>Entre na sua conta e escolha seu nome para conversar com a comunidade.</p><button className="primary" onClick={()=>navigate('conta')}>Ir para a Conta</button></div>)}
       {screen==='conquistas'&&<ConquistasScreen profile={profile} conta={conta!==null&&conta.origem!=='convidado'} onProfile={muda=>setProfile(p=>{const n=muda(p);if(n!==p)save('profile',n);return n;})} onRanking={()=>{setRankingInicial('conquistas');navigate('ranking');}} onDesafio={jogarDesafio}/>}
       {screen==='ranking'&&<RankingScreen dono={dono} inicial={rankingInicial} handle={profile.publicHandle} conta={conta!==null&&conta.origem!=='convidado'} onConta={()=>navigate('conta')} recorde={profile.recordePontos??0}/>}
       {screen==='conta'&&<AccountScreen autenticacao={autenticacao} conta={conta} profile={profile} conectado={onlineConfigured} google={googleConfigured} aoMudarPerfil={p=>{save('profile',p);setProfile(p);}}/>}
@@ -545,6 +564,8 @@ export default function App(){
       {acaoDoAviso==='tentar'&&run?.stage==='draft'&&!run.ranked&&<button className="primary" onClick={()=>{setOnlineNotice('');setAcaoDoAviso(null);tentarDeNovo();}}><RotateCcw size={16}/>Tentar de novo</button>}
       <button className={acaoDoAviso?'secondary':'primary'} onClick={()=>{setOnlineNotice('');setAcaoDoAviso(null);}}>{acaoDoAviso?'Jogar assim mesmo':'Entendi'}</button></InfoDialog>}
     {confirmAbandon&&<InfoDialog title="Desistir desta jornada?" icone={<Flag/>} cor="#ff7a6b" onClose={()=>setConfirmAbandon(false)}><p>A jornada de agora termina aqui, como uma derrota: <b>os pontos que você já fez vão para o ranking</b>. Depois você monta um trio novo.</p><div className="result-actions"><button className="danger" onClick={startNew}>Desistir e começar outra <ArrowUpRight size={18}/></button><button className="secondary" onClick={()=>setConfirmAbandon(false)}>Continuar jornada</button></div></InfoDialog>}
+    {comunidade.aviso&&<button className="cm-aviso" onClick={()=>{setAbrirConversa(comunidade.aviso!.de);comunidade.fecharAviso();navigate('comunidade');}} aria-label={`Mensagem nova de ${comunidade.aviso.nome}`}>
+      <Avatar id={comunidade.aviso.de} nome={comunidade.aviso.nome} tamanho={40}/><span><b>{comunidade.aviso.nome}</b><small>{comunidade.aviso.texto}</small></span><em>RESPONDER</em></button>}
     {compartilhar&&<CompartilharJogo trio={profile.champion?.length?profile.champion:['goku','naruto','luffy']} onClose={()=>setCompartilhar(false)}/>}
     {convite&&<BoasVindasDoConvite podeInstalar={!!installEvent} onInstalar={instalarDoConvite} onClose={fecharConvite}/>}
     {installHelp&&<InfoDialog title={installed?'O NEXUS já está instalado':'Leve seu trio no bolso'} icone={<Download/>} cor="#8fd3ff" onClose={()=>setInstallHelp(false)}><p>{installed?'Abra o jogo pelo ícone na tela inicial do aparelho.':<><b>Android:</b> menu do navegador → “Instalar aplicativo”.<br/><b>iPhone:</b> Compartilhar → “Adicionar à Tela de Início”.</>}</p><p>O progresso fica neste aparelho e o jogo abre mesmo sem internet.</p><button className="primary" onClick={()=>setInstallHelp(false)}>Entendi</button></InfoDialog>}
