@@ -16,7 +16,8 @@
  *              aleatórios, com o trio que um jogador bom montaria e com o melhor
  *              trio achado entre os mais fortes (as metas de equilíbrio)
  *
- *   pontos     trio sorteado jogando a jornada inteira, com os pontos da jornada (a conta do jogo, sem dicas);
+ *   pontos     trio sorteado jogando a jornada inteira, com os pontos da jornada (a conta do jogo, sem dicas e sem
+ *              o bônus das estrelas: os pontos naturais do trio);
  *              com FORTES, o trio é sorteado só entre esses ids (para medir uma lista de candidatos)
  * Cada linha (lutas): a1 a2 a3 b1 b2 b3 v (índices do elenco; v = 1 se o trio a venceu).
  * Cada linha (pontos): a1 a2 a3 v pontos (v = lutas vencidas, 0 a 10).
@@ -122,7 +123,9 @@ function pontos() {
     for (const [i, e] of generateCampaign(seed, team).entries()) {
       const b = createBattle(team, e.team, seed + i * 7919, e.scale);
       for (let t = 0; t < 9000 && !b.finished; t++) stepBattle(b);
-      soma += Math.max(0, pontosDaLuta(b, i, false).total);
+      // os pontos naturais do trio: sem o bônus das estrelas (src/data/estrelas-de-pontos.ts), que é o que se mede
+      const luta = pontosDaLuta(b, i, false);
+      soma += Math.max(0, luta.total - (luta.parcelas.find((p) => p.id === 'estrela')?.valor ?? 0));
       if (b.winner !== 'player') break;
       v++;
     }
