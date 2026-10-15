@@ -142,19 +142,19 @@ function Lobby({ colecao, guardado, onTreino, onJogar, online }: { colecao: stri
 
 
 /**
- * "Montar sozinho": 3 times variados, cada um com uma força sorteada de 2 a 5 estrelas (a cada toque sai outro jeito),
- * para experimentar combinações diferentes em vez de sempre os mesmos times fortes.
+ * "Montar ao acaso": 3 times sorteados, só de 1 ou 2 estrelas (pedido do jogador: "nunca monte um time mais que nível
+ * 2… você que tem que aprender que times são bons"). A cada toque sai outro jeito.
  */
 function timesAoAcaso(colecao: string[]): string[][] | null {
   if (colecao.length < MINIMO_DA_COLECAO) return null;
   const livres = [...colecao], times: string[][] = [];
   for (let k = 0; k < 3; k++) {
-    const alvo = 2 + Math.floor(Math.random() * 4);
+    const alvo = 1 + Math.floor(Math.random() * 2);
     let melhor: string[] | null = null, perto = Infinity;
     for (let i = 0; i < 300 && perto > 0; i++) {
       const p = [...livres], t: string[] = [];
       while (t.length < 3) t.push(p.splice(Math.floor(Math.random() * p.length), 1)[0]!);
-      const d = Math.abs(estrelasDaForca(forcaDoTime(t)) - alvo);
+      const e = estrelasDaForca(forcaDoTime(t)), d = Math.abs(e - alvo) + (e > 2 ? 100 : 0);
       if (d < perto) { melhor = t; perto = d; }
     }
     times.push(melhor!);
@@ -292,6 +292,11 @@ function Montar({ rival, colecao, inicial, onPronto, onVoltar, onDetails, prazo 
         </button>;
       })}
     </div>
+    {/* o PRONTO logo abaixo dos times, em cima do álbum (pedido do jogador) */}
+    <div className="pv-pronto-topo">
+      {problema && <small className="pv-problema">{problema}</small>}
+      <button className="primary pv-pronto" disabled={!cheios || !!problema} onClick={() => { som('pronto'); onPronto(times as Times); }}><Check size={20} />{cheios ? 'PRONTO' : `Faltam ${9 - times.flat().length}`}</button>
+    </div>
     <div className="pv-ferramentas">
       <label className="pv-busca"><Search size={16} /><input value={busca} onChange={(e) => setBusca(e.target.value)} placeholder={`Procurar entre ${colecao.length} personagens`} aria-label="Procurar personagem" />{busca && <button className="pv-limpar-busca" onClick={() => setBusca('')} aria-label="Limpar a busca"><X size={14} /></button>}</label>
       <button className={`secondary pv-filtros-botao ${ativos ? 'ativo' : ''}`} onClick={() => { setPainel(true); som('toque'); }}><SlidersHorizontal size={16} />Filtros{ativos > 0 && <i>{ativos}</i>}</button>
@@ -315,10 +320,6 @@ function Montar({ rival, colecao, inicial, onPronto, onVoltar, onDetails, prazo 
     </div>)}
     {!lista.length && <div className="pv-nada"><Search size={28} /><b>Ninguém com esses filtros</b><button className="secondary" onClick={() => { setFiltro(FILTRO_VAZIO); setBusca(''); }}>Limpar filtros</button></div>}
     {painel && <PainelDeFiltros colecao={colecao} filtro={filtro} total={lista.length} onFiltro={setFiltro} onFechar={() => setPainel(false)} />}
-    <footer className="pv-rodape">
-      {problema && <small className="pv-problema">{problema}</small>}
-      <button className="primary pv-pronto" disabled={!cheios || !!problema} onClick={() => { som('pronto'); onPronto(times as Times); }}><Check size={20} />{cheios ? 'PRONTO' : `Faltam ${9 - times.flat().length}`}</button>
-    </footer>
   </section>;
 }
 
