@@ -1,0 +1,59 @@
+{
+ "bpm": 174,
+ "compassos": 72,
+ "segundos": 99.31,
+ "secoes": [
+  {
+   "nome": "Entrada",
+   "inicio": 0.0
+  },
+  {
+   "nome": "Duelo",
+   "inicio": 11.034
+  },
+  {
+   "nome": "Choque",
+   "inicio": 33.103
+  },
+  {
+   "nome": "Estratégia",
+   "inicio": 55.172
+  },
+  {
+   "nome": "Golpe final",
+   "inicio": 66.207
+  },
+  {
+   "nome": "Retorno",
+   "inicio": 88.276
+  }
+ ],
+ "estilo": "anime arcade · arena do PvP (v6)",
+ "laco": {
+  "inicio": 11.034,
+  "fim": 99.31
+ },
+ "camadas": {
+  "musica-arena-base": {
+   "arquivo": "musica-arena-base.ogg",
+   "mp3": "musica-arena-base.mp3",
+   "segundos": 99.31,
+   "bytes": 961346,
+   "rmsDb": -21.9
+  },
+  "musica-arena-pulso": {
+   "arquivo": "musica-arena-pulso.ogg",
+   "mp3": "musica-arena-pulso.mp3",
+   "segundos": 99.31,
+   "bytes": 701574,
+   "rmsDb": -25.4
+  },
+  "musica-arena-tema": {
+   "arquivo": "musica-arena-tema.ogg",
+   "mp3": "musica-arena-tema.mp3",
+   "segundos": 99.31,
+   "bytes": 1181209,
+   "rmsDb": -23.9
+  }
+ }
+}

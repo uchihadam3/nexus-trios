@@ -54,5 +54,33 @@
   ],
   "laco": false,
   "bytes": 31032
+ },
+ "choque": {
+  "descricao": "o VS do PvP: cortes em X e onda de choque",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   256,
+   256
+  ],
+  "laco": false,
+  "bytes": 153436
+ },
+ "holofote": {
+  "descricao": "holofotes da Arena PvP",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   256,
+   256
+  ],
+  "laco": true,
+  "bytes": 202500
  }
 }

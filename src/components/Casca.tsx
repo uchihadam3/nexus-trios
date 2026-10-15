@@ -1,5 +1,5 @@
 import { useEffect,type CSSProperties,type ReactNode } from 'react';
-import { ArrowLeft,MessagesSquare,Award,CircleHelp,Crown,Home as HomeIcon,Menu,Settings2,ShieldCheck,Trophy,Users,X } from 'lucide-react';
+import { ArrowLeft,MessagesSquare,Swords,Award,CircleHelp,Crown,Home as HomeIcon,Menu,Settings2,ShieldCheck,Trophy,Users,X } from 'lucide-react';
 import { battleAudio } from '../lib/audio';
 import { PRIORIDADE,type Sound } from '../audio/cues';
 import { formatarPontos } from '../engine/pontos';
@@ -16,13 +16,14 @@ import { formatarPontos } from '../engine/pontos';
  * nos que abrem um cartão, o de fechar nos que fecham.
  */
 
-export type Destino='home'|'characters'|'conquistas'|'combos'|'ranking'|'help'|'settings'|'conta'|'comunidade';
+export type Destino='home'|'characters'|'conquistas'|'combos'|'ranking'|'help'|'settings'|'conta'|'comunidade'|'pvp';
 
 const Fx=({nome,cor,ms,className,laco=true}:{nome:string;cor:string;ms:number;className:string;laco?:boolean})=>
   <span aria-hidden className={`uifx ${laco?'uifx-laco':''} ${className}`} style={{'--uifx-img':`url(/assets/ui/fx/${nome}.webp)`,'--uifx-cor':cor,'--uifx-dur':`${ms}ms`} as CSSProperties}/>;
 
 const ITENS:{id:Destino;nome:string;icone:typeof HomeIcon;cor:string;online?:boolean}[]=[
   {id:'home',nome:'Início',icone:HomeIcon,cor:'#c8f560'},
+  {id:'pvp',nome:'Arena PvP',icone:Swords,cor:'#ffd36b'},
   {id:'comunidade',nome:'Comunidade',icone:MessagesSquare,cor:'#c8f560',online:true},
   {id:'characters',nome:'Personagens',icone:Users,cor:'#ffb86b'},
   {id:'conquistas',nome:'Conquistas',icone:Award,cor:'#ffc65a'},

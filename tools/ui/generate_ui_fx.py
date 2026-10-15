@@ -14,6 +14,8 @@ Folhas:
   anel       — anel de runas girando com três nós orbitando (laço), o medalhão das telas
   pulso      — ondas suaves saindo do centro (laço), o que está selecionado ou ligado
   toque      — estouro curto no ponto do toque (uma vez), todo botão do jogo
+  choque     — o VS do PvP: dois cortes de luz se cruzando em X, onda de choque, raios e faíscas (uma vez)
+  holofote   — os holofotes da Arena PvP: dois feixes que varrem o palco de lados opostos (laço)
 
 Uso: python3 tools/ui/generate_ui_fx.py [nomes...]
      (gera public/assets/ui/fx/*.webp e manifest.json)
@@ -164,6 +166,61 @@ def toque(T: Tela, t: float, rng):
     return G, clarao * 0.9 + lascas * 0.6
 
 
+def choque(T: Tela, t: float, rng):
+    """O VS do PvP: dois cortes de luz entram dos cantos e se cruzam em X; no encontro, clarão, onda de choque,
+    raios curtos e faíscas voando."""
+    entra = ease_out(min(1.0, t / 0.3), 2.0)
+    G = T.zero()
+    for sinal in (1, -1):
+        # o corte desliza da ponta até cruzar o centro
+        x1, y1 = -0.95 * sinal, -0.95
+        x2, y2 = x1 + (1.9 * sinal) * entra, y1 + 1.9 * entra
+        corte = T.lines([(x1, y1, x2, y2, 1.0)], 0.022, 0.01)
+        G += T.glow(corte, 1.0, 0.8, 0.05) * apaga(t, 0.25, 0.85)
+    encontro = janela(t, 0.22, 1.0)
+    tt = max(0.0, (t - 0.22) / 0.78)
+    clarao = T.gauss(0, 0, 0.12 + 0.2 * tt) * apaga(tt, 0.0, 0.55) * 1.6
+    onda = T.ring(0.08 + 0.85 * ease_out(tt, 2.4), 0.05 + 0.05 * tt) * apaga(tt, 0.05, 1.0)
+    estrela = T.flare(0, 0, 0.9 * (1 - tt) + 0.2, 0.785, 0.012) * apaga(tt, 0.0, 0.7)
+    raios_ = T.zero()
+    for k in range(7):
+        a = rng.uniform(0, 2 * math.pi)
+        pts = [(0.0, 0.0)]
+        r = 0.0
+        while r < 0.75:
+            r += rng.uniform(0.08, 0.16)
+            a += rng.uniform(-0.45, 0.45)
+            pts.append((math.cos(a) * r, math.sin(a) * r))
+        raios_ += T.polyline(pts, 0.012, 1.0, 0.004) * apaga(tt, 0.0, 0.5) * (0.6 + 0.4 * (k % 2))
+    fa = _faiscas_radiais(T, rng, tt, 50, 0.95, 0.02) if tt > 0 else T.zero()
+    G += (clarao + onda + estrela + raios_ * 1.2 + fa) * encontro
+    H = (clarao * 0.9 + estrela * 0.7 + raios_ * 0.5 + fa * 0.5) * encontro + G * 0.25
+    return G, H
+
+
+def holofote(T: Tela, t: float, rng):
+    """Dois feixes de luz que nascem embaixo, nos cantos, e varrem o palco em sentidos opostos (o laço fecha em t=1)."""
+    G = T.zero()
+    for k, (bx, fase) in enumerate(((-0.9, 0.0), (0.9, 0.5))):
+        ang = 0.38 * math.sin(2 * math.pi * (t + fase)) + (0.32 if bx < 0 else -0.32)
+        # direção do feixe (para cima), a partir da base
+        dx, dy = math.sin(ang), -math.cos(ang)
+        u, v = T.U - bx, T.V - 0.95
+        ao_longo = u * dx + v * dy
+        lado = u * dy - v * dx
+        largura = 0.05 + 0.22 * np.clip(ao_longo, 0, None)
+        feixe = np.exp(-(lado / largura) ** 2) * smooth(ao_longo, 0.0, 0.15) * smooth(-ao_longo, -2.2, -0.6)
+        G += feixe * (0.55 + 0.1 * k)
+        G += T.gauss(bx, 0.95, 0.08) * 0.8
+    poeira = T.zero()
+    for _ in range(30):
+        x0, fase = rng.uniform(-0.9, 0.9), rng.uniform(0, 1)
+        tt = (t + fase) % 1.0
+        poeira += T.gauss(x0 + 0.04 * math.sin(6.28 * tt), 0.9 - 1.8 * tt, 0.012) * math.sin(math.pi * tt) * 0.6
+    G += poeira * smooth(G, 0.05, 0.4)
+    return G, G * 0.55
+
+
 FOLHAS = {
     "raios": (raios, GRANDE, True, "raios de vitória girando"),
     "pontos": (pontos, GRANDE, False, "estouro de pontos"),
@@ -173,6 +230,8 @@ FOLHAS = {
     "anel": (anel, GRANDE, True, "anel de runas do medalhão das telas"),
     "pulso": (pulso, GRANDE, True, "ondas do que está selecionado"),
     "toque": (toque, Tela(128), False, "estouro do toque nos botões"),
+    "choque": (choque, GRANDE, False, "o VS do PvP: cortes em X e onda de choque"),
+    "holofote": (holofote, GRANDE, True, "holofotes da Arena PvP"),
 }
 
 

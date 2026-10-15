@@ -1,5 +1,5 @@
 import type { CSSProperties } from 'react';
-import { ArrowRight,MessagesSquare,Award,BookOpen,ChevronRight,Zap,Trophy,CircleHelp,Settings2,Download,Users,Crown,ShieldCheck,Play,LogOut,Share2,MessageCircle,Instagram,Facebook } from 'lucide-react';
+import { ArrowRight,MessagesSquare,Swords,Award,BookOpen,ChevronRight,Zap,Trophy,CircleHelp,Settings2,Download,Users,Crown,ShieldCheck,Play,LogOut,Share2,MessageCircle,Instagram,Facebook } from 'lucide-react';
 import '../presentation/compartilhar.css';
 import { byId,characters } from '../data/characters';
 import { Portrait } from '../components/Portrait';
@@ -10,6 +10,8 @@ import { TOTAL_DE_CONQUISTAS,desafioDoDia,tituloDe } from '../lib/conquistas';
 import { TODOS_OS_COMBOS } from '../components/CombosDoTrio';
 import { Avatar } from '../components/AvatarDaComunidade';
 import type { Jogador } from '../lib/comunidade';
+import { NPCS } from '../engine/pvp';
+import '../presentation/pvp.css';
 
 /*
  * A tela inicial (remake).
@@ -20,7 +22,7 @@ import type { Jogador } from '../lib/comunidade';
  * e mostra a luta e os pontos de agora. O resto do jogo fica num painel de
  * botões-ícone, como o menu de um jogo.
  */
-interface Props {comunidade:{online:Jogador[]|null;naoLidas:number}|null;profile:Profile;run:Run|null;conta:boolean;onPlay:()=>void;onContinue:()=>void;onAbandon:()=>void;onNavigate:(s:'characters'|'conquistas'|'combos'|'ranking'|'conta'|'help'|'settings'|'comunidade')=>void;onInstall:()=>void;onShare:()=>void}
+interface Props {comunidade:{online:Jogador[]|null;naoLidas:number}|null;profile:Profile;run:Run|null;conta:boolean;onPlay:()=>void;onContinue:()=>void;onAbandon:()=>void;onNavigate:(s:'characters'|'conquistas'|'combos'|'ranking'|'conta'|'help'|'settings'|'comunidade'|'pvp')=>void;onInstall:()=>void;onShare:()=>void}
 
 const Fx=({nome,cor,ms,className}:{nome:string;cor:string;ms:number;className:string})=>
   <span aria-hidden className={`uifx uifx-laco ${className}`} style={{'--uifx-img':`url(/assets/ui/fx/${nome}.webp)`,'--uifx-cor':cor,'--uifx-dur':`${ms}ms`} as CSSProperties}/>;
@@ -69,6 +71,13 @@ export function Home({comunidade,profile,run,conta,onPlay,onContinue,onAbandon,o
     </div>
 
     <div className="hv-faixas">
+    {/* A Arena PvP (src/screens/PvpScreen.tsx): treino contra os 5 NPCs; o desafio online vem depois */}
+    <button className="hv-conquistas-faixa hv-pvp-faixa" onClick={()=>onNavigate('pvp')} aria-label="Arena PvP: treine contra 5 NPCs">
+      <span className="hv-cq-icone"><Swords size={22}/></span>
+      <span className="hv-cq-texto"><b>ARENA PvP</b><small>3 times de 3 · treine contra 5 NPCs, do Novato ao Mestre</small></span>
+      <span className="hv-cq-ultimos" aria-hidden="true">{NPCS.slice(2).map(n=><span key={n.id} className="pv-npc-avatar" style={{'--npc':n.cor,'--t':'30px'} as CSSProperties}><Portrait character={byId[n.avatar]}/><i/></span>)}</span>
+      <ChevronRight size={20}/>
+    </button>
     {/* A Comunidade (src/screens/ComunidadeScreen.tsx): quem está online agora, e as privadas não lidas. */}
     {comunidade&&<button className="hv-conquistas-faixa hv-comunidade-faixa" onClick={()=>onNavigate('comunidade')} aria-label={`Comunidade: ${comunidade.online?.length??0} online${comunidade.naoLidas?`, ${comunidade.naoLidas} mensagens novas`:''}`}>
       <span className="hv-cq-icone"><MessagesSquare size={22}/>{comunidade.naoLidas>0&&<em>{comunidade.naoLidas}</em>}</span>

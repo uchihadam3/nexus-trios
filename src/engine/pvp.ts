@@ -1,0 +1,178 @@
+/*
+ * PvP: as regras da partida, o rating e a IA dos NPCs de treino.
+ *
+ * Pedido do jogador: cada um monta 3 times de 3 com a sua coleção (9 personagens diferentes); a cada rodada os dois
+ * escolhem em segredo um dos seus times e eles lutam. O time que vence fica marcado e não pode ser escolhido de novo;
+ * quem perdeu pode escolher qualquer um dos seus times. Vence a partida quem ganhar uma rodada com cada um dos 3 times
+ * (no máximo 5 rodadas). O rating é o do xadrez (Elo): todo mundo começa igual e ganha ou perde mais ou menos conforme
+ * a diferença para o adversário.
+ *
+ * Treino (pedido do jogador): 5 NPCs, do iniciante ao mestre. Quanto melhor o NPC, mais personagens ele tem
+ * (75 → 400, dos mais fracos para os mais fortes, pela força medida em src/data/forca-dos-rivais.ts) e melhor ele
+ * escolhe: o iniciante monta trios de qualquer jeito; o mestre procura os melhores trios entre os 400 (força, combos e
+ * as duplas que rendem juntas: notaDoTrio) e escolhe cada rodada pensando nos times que você ainda tem. Treino não
+ * mexe no rating nem no ranking.
+ */
+import { byId, characters } from '../data/characters';
+import { FORCA } from '../data/forca-dos-rivais';
+import { notaDoTrio } from '../presentation/dicas-do-trio';
+import { TRIOS_DO_PVP } from '../data/trios-do-pvp';
+
+export type Times = [string[], string[], string[]];
+export type Lado = 'eu' | 'rival';
+export interface RodadaPvp { meu: number; dele: number; seed: number; vencedor: Lado }
+export interface PartidaPvp { meus: Times; deles: Times; rodadas: RodadaPvp[]; seed: number }
+
+/** Quantos personagens na coleção para entrar no PvP (3 times de 3, sem repetir). */
+export const MINIMO_DA_COLECAO = 9;
+/** Toda luta de PvP corre em 2× (pedido do jogador: "sempre em duas vezes"). */
+export const VELOCIDADE_DO_PVP = 2;
+export const RATING_INICIAL = 1000;
+const K_DO_ELO = 32;
+
+/* ---------------------------------------------------------------------------
+ * Regras
+ * ------------------------------------------------------------------------- */
+
+/** Os 3 times estão certos? 3 trios de 3, 9 personagens diferentes, todos da coleção. */
+export function problemaDosTimes(times: readonly (readonly string[])[], colecao?: ReadonlySet<string>): string | null {
+  if (times.length !== 3 || times.some((t) => t.length !== 3)) return 'Monte 3 times de 3 personagens.';
+  const todos = times.flat();
+  if (todos.some((id) => !byId[id])) return 'Personagem inválido.';
+  if (new Set(todos).size !== 9) return 'Cada personagem só pode estar em um time.';
+  if (colecao && todos.some((id) => !colecao.has(id))) return 'Só vale personagem da sua coleção.';
+  return null;
+}
+
+/** Quais times de cada lado já venceram uma rodada (e por isso não podem ser escolhidos de novo). */
+export function vitoriasDosTimes(p: Pick<PartidaPvp, 'rodadas'>): Record<Lado, [boolean, boolean, boolean]> {
+  const v: Record<Lado, [boolean, boolean, boolean]> = { eu: [false, false, false], rival: [false, false, false] };
+  for (const r of p.rodadas) v[r.vencedor][r.vencedor === 'eu' ? r.meu : r.dele] = true;
+  return v;
+}
+/** Os times que ainda podem ser escolhidos. */
+export function timesLivres(p: Pick<PartidaPvp, 'rodadas'>, lado: Lado): number[] {
+  const v = vitoriasDosTimes(p)[lado];
+  return [0, 1, 2].filter((i) => !v[i]);
+}
+/** Quem já venceu com os 3 times (ou null). */
+export function vencedorDaPartida(p: Pick<PartidaPvp, 'rodadas'>): Lado | null {
+  const v = vitoriasDosTimes(p);
+  return v.eu.every(Boolean) ? 'eu' : v.rival.every(Boolean) ? 'rival' : null;
+}
+/** A semente de cada rodada: a mesma para os dois jogadores, a partir da semente da partida. */
+export const sementeDaRodada = (seedDaPartida: number, rodada: number) => ((seedDaPartida >>> 0) + Math.imul(rodada + 1, 0x9e3779b1)) >>> 0;
+
+/* ---------------------------------------------------------------------------
+ * Rating (Elo)
+ * ------------------------------------------------------------------------- */
+
+/** A chance esperada de A vencer B pelo rating. */
+export const esperado = (a: number, b: number) => 1 / (1 + 10 ** ((b - a) / 400));
+/** Quanto o rating de A muda: venceu (1) ou perdeu (0) contra B. */
+export const variacaoDoElo = (a: number, b: number, venceu: boolean, k = K_DO_ELO) => Math.round(k * ((venceu ? 1 : 0) - esperado(a, b)));
+
+/* ---------------------------------------------------------------------------
+ * Os NPCs de treino
+ * ------------------------------------------------------------------------- */
+
+export type NivelNpc = 1 | 2 | 3 | 4 | 5;
+export interface Npc {
+  nivel: NivelNpc; id: string; nome: string; titulo: string; rating: number; cor: string;
+  /** O personagem que é a "cara" dele. */
+  avatar: string;
+  /** Quantos personagens ele tem (dos mais fracos para os mais fortes). */
+  colecao: number;
+  fala: string;
+}
+export const NPCS: readonly Npc[] = [
+  { nivel: 1, id: 'novato', nome: 'Bento Novato', titulo: 'Iniciante', rating: 800, cor: '#9aa7b8', avatar: 'patrick', colecao: 75, fala: 'Peguei os que achei bonitos. Bora?' },
+  { nivel: 2, id: 'mediano', nome: 'Lia Mediana', titulo: 'Mais ou menos', rating: 1000, cor: '#86e3a8', avatar: 'scooby', colecao: 130, fala: 'Já sei uns truques… alguns.' },
+  { nivel: 3, id: 'estrategista', nome: 'Caio Estrategista', titulo: 'Intermediário', rating: 1250, cor: '#6fd0ff', avatar: 'naruto', colecao: 200, fala: 'Cada time meu tem um plano.' },
+  { nivel: 4, id: 'profissional', nome: 'Vera Profissional', titulo: 'Profissional', rating: 1550, cor: '#c38aff', avatar: 'itachi', colecao: 300, fala: 'Combo, encaixe e força. Sem erro.' },
+  { nivel: 5, id: 'mestre', nome: 'O Mestre do Nexus', titulo: 'Mestre', rating: 1900, cor: '#ffd36b', avatar: 'vegeta', colecao: 400, fala: 'Os 400 são meus. Mostre o que aprendeu.' },
+];
+
+/** Os personagens do NPC: os N mais fracos pela força medida (o mestre tem todos). */
+export function colecaoDoNpc(npc: Pick<Npc, 'colecao'>): string[] {
+  return characters.map((c) => c.id).sort((a, b) => (FORCA[a] ?? 0) - (FORCA[b] ?? 0) || a.localeCompare(b)).slice(0, npc.colecao);
+}
+
+/* um sorteio com semente, para cada partida ser diferente e ainda assim repetível nos testes */
+function sorteio(seed: number) {
+  let s = seed >>> 0 || 1;
+  return () => { s ^= s << 13; s >>>= 0; s ^= s >>> 17; s ^= s << 5; s >>>= 0; return s / 4294967296; };
+}
+const gauss = (r: () => number) => Math.sqrt(-2 * Math.log(r() || 1e-9)) * Math.cos(2 * Math.PI * r());
+
+/* Como cada nível monta e escolhe: quantos trios ele compara, quanto ele "erra" a conta, quanto ele melhora o trio. */
+const JEITO: Record<NivelNpc, { amostras: number; erro: number; melhora: number; escolheAoAcaso: number }> = {
+  1: { amostras: 1, erro: 0, melhora: 0, escolheAoAcaso: 1 },
+  2: { amostras: 6, erro: 0.5, melhora: 3, escolheAoAcaso: 0.5 },
+  3: { amostras: 25, erro: 0.3, melhora: 60, escolheAoAcaso: 0.25 },
+  4: { amostras: 200, erro: 0.05, melhora: 1500, escolheAoAcaso: 0.08 },
+  5: { amostras: 300, erro: 0.02, melhora: 2500, escolheAoAcaso: 0.03 },
+};
+
+/*
+ * Profissional e Mestre montam a partir dos trios que mais vencem em luta de verdade (src/data/trios-do-pvp.ts):
+ * dos que cabem na coleção dele, entre os `melhores` primeiros, com um pouco de sorte na ordem (`variacao`, em pontos
+ * de taxa de vitória), sem repetir personagem.
+ */
+const DA_LISTA: Partial<Record<NivelNpc, { melhores: number; variacao: number }>> = { 4: { melhores: 60, variacao: 10 }, 5: { melhores: 18, variacao: 4 } };
+
+/** O NPC monta os 3 times dele. */
+export function timesDoNpc(nivel: NivelNpc, seed: number, objetivo: (t: readonly string[]) => number = notaDoTrio): Times {
+  return montarTimes(colecaoDoNpc(NPCS[nivel - 1]!), JEITO[nivel], objetivo === notaDoTrio ? DA_LISTA[nivel] : undefined, seed, objetivo);
+}
+/** "Montar sozinho" (o botão da montagem): os melhores 3 times que cabem na sua coleção, do jeito da Profissional. */
+export function sugerirTimes(colecao: readonly string[], seed: number): Times | null {
+  if (colecao.length < MINIMO_DA_COLECAO) return null;
+  return montarTimes([...colecao], JEITO[4], { melhores: 400, variacao: 3 }, seed, notaDoTrio);
+}
+
+function montarTimes(colecao: string[], jeito: (typeof JEITO)[NivelNpc], lista: { melhores: number; variacao: number } | undefined, seed: number, objetivo: (t: readonly string[]) => number): Times {
+  const r = sorteio(seed ^ 0x5bd1e995);
+  let livres = [...colecao];
+  const times: string[][] = [];
+  if (lista) {
+    const dele = new Set(livres);
+    const opcoes = TRIOS_DO_PVP.filter((t) => t.slice(0, 3).every((id) => dele.has(id as string))).slice(0, lista.melhores)
+      .map((t) => ({ trio: t.slice(0, 3) as string[], valor: t[3] + gauss(r) * lista.variacao })).sort((a, b) => b.valor - a.valor);
+    for (const o of opcoes) if (times.length < 3 && !o.trio.some((id) => times.flat().includes(id))) times.push(o.trio);
+    livres = livres.filter((id) => !times.flat().includes(id));
+  }
+  const nota = (t: string[]) => objetivo(t) + (jeito.erro ? gauss(r) * jeito.erro : 0);
+  const trioAoAcaso = () => { const p = [...livres]; const t: string[] = []; while (t.length < 3) t.push(p.splice(Math.floor(r() * p.length), 1)[0]!); return t; };
+  for (let k = times.length; k < 3; k++) {
+    let melhor = trioAoAcaso(), nm = nota(melhor);
+    for (let i = 1; i < jeito.amostras; i++) { const t = trioAoAcaso(), n = nota(t); if (n > nm) { melhor = t; nm = n; } }
+    // melhora o trio trocando um de cada vez pelo melhor que achar (o mestre faz isso muitas vezes)
+    for (let i = 0; i < jeito.melhora; i++) {
+      const pos = Math.floor(r() * 3), c = livres[Math.floor(r() * livres.length)]!;
+      if (melhor.includes(c)) continue;
+      const t = melhor.map((x, j) => (j === pos ? c : x)), n = nota(t);
+      if (n > nm) { melhor = t; nm = n; }
+    }
+    times.push(melhor);
+    livres = livres.filter((id) => !melhor.includes(id));
+  }
+  // o mais forte primeiro, como um jogador mostraria
+  return times.sort((a, b) => notaDoTrio(b) - notaDoTrio(a)) as Times;
+}
+
+/** A chance de um trio vencer o outro pela nota (força, combos e duplas, medidas em lutas simuladas). */
+export const chanceDoTrio = (a: readonly string[], b: readonly string[]) => 1 / (1 + Math.exp(-(notaDoTrio(a) - notaDoTrio(b))));
+
+/** O NPC escolhe o time da rodada (sem saber qual você escolheu, só os que você ainda tem). */
+export function escolhaDoNpc(nivel: NivelNpc, p: PartidaPvp, seed: number): number {
+  const jeito = JEITO[nivel], r = sorteio(seed ^ 0x27d4eb2f);
+  const meus = timesLivres(p, 'rival'), seus = timesLivres(p, 'eu');
+  if (meus.length === 1 || r() < jeito.escolheAoAcaso) return meus[Math.floor(r() * meus.length)]!;
+  if (nivel === 2) return meus.reduce((a, b) => (notaDoTrio(p.deles[b]!) > notaDoTrio(p.deles[a]!) ? b : a));
+  // do intermediário para cima: o time com mais chance contra os times que você ainda pode escolher; o mestre pesa
+  // mais os seus times fortes (é com eles que um bom jogador vem) e guarda o time mais forte quando já está na frente
+  const peso = (j: number) => (nivel === 5 ? 1 + notaDoTrio(p.meus[j]!) - Math.min(...seus.map((x) => notaDoTrio(p.meus[x]!))) : 1);
+  const valor = (i: number) => seus.reduce((s, j) => s + peso(j) * chanceDoTrio(p.deles[i]!, p.meus[j]!), 0) / seus.reduce((s, j) => s + peso(j), 0);
+  return meus.reduce((a, b) => (valor(b) > valor(a) ? b : a));
+}

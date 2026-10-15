@@ -47,7 +47,7 @@ export function posicaoNoLaco(inicio:number,t:number,duracao:number,laco=LACO_DA
   const p=inicio+t;if(p<duracao)return p;
   const volta=duracao-laco;return laco+((p-laco)%volta);
 }
-export type Faixa='principal'|'ascensao'|'tensao'|'chefe';
+export type Faixa='principal'|'ascensao'|'tensao'|'chefe'|'arena';
 const camadas=(nome:string)=>(['base','pulso','tema'] as const).map(c=>`/assets/audio/${nome}-${c}.ogg`);
 /*
  * As quatro músicas de batalha. `laco`: onde a música volta depois do fim (o
@@ -56,12 +56,15 @@ const camadas=(nome:string)=>(['base','pulso','tema'] as const).map(c=>`/assets/
  *   ascensao  (lutas 4–6): lá menor heroico, 162 BPM, baixo em oitavas e metais (v5)
  *   tensao    (lutas 7–9): ré menor harmônica, 150 BPM, mais séria (v5)
  *   chefe     (luta 10):   dó menor frígio, 168 BPM, coro, sinos e metais (v5)
+ *   arena     (PvP):       fá sustenido menor, 174 BPM, taikos e palmas da torcida (v6)
  */
 export const FAIXAS:Record<Faixa,{camadas:readonly string[];laco:number}>={
   principal:{camadas:AUDIO_ASSETS.battleStems,laco:LACO_DA_MUSICA},
   ascensao:{camadas:camadas('musica-ascensao'),laco:11.852},
   tensao:{camadas:camadas('musica-tensao'),laco:12.8},
   chefe:{camadas:camadas('musica-chefe'),laco:11.429},
+  /* o PvP (v6): fá sustenido menor, 174 BPM, taikos e palmas da torcida, o tema da arena */
+  arena:{camadas:camadas('musica-arena'),laco:11.034},
 };
 /** Qual música toca em cada luta (índice 0–9). */
 export const faixaDaLuta=(indice:number):Faixa=>indice>=9?'chefe':indice>=6?'tensao':indice>=3?'ascensao':'principal';

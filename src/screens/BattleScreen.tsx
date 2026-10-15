@@ -2,7 +2,7 @@ import { useCallback,useEffect,useLayoutEffect,useRef,useState } from 'react';
 import { ComTermos } from '../components/Termos';
 import { UNICAS } from '../engine/unicas';
 import { battleAudio } from '../lib/audio';
-import { Pause,Play,FastForward,VolumeX,Volume2,SlidersHorizontal,Check,LogOut,ChevronLeft,ScrollText,Link2 } from 'lucide-react';
+import { Swords,Pause,Play,FastForward,VolumeX,Volume2,SlidersHorizontal,Check,LogOut,ChevronLeft,ScrollText,Link2 } from 'lucide-react';
 import { AberturaDeCombos,DescobertaNoLivro,FichaDoCombo,ListaDeCombos,type NovosNoLivro } from '../components/CombosDoTrio';
 import { OrbesDeCombo } from '../components/OrbesDeCombo';
 import { Invocacoes } from '../components/Invocacoes';
@@ -26,7 +26,9 @@ import { BattleInspector,type InspectTarget } from '../components/BattleInspecto
 import { byId } from '../data/characters';
 import { statuses } from '../data/statuses';
 
-export function BattleScreen({battle,beat,index,name,settings,paused,onPause,onAbandon,onSettings,onExit,novosNoLivro}:{battle:Battle;beat:Beat|null;index:number;name:string;settings:Settings;paused:boolean;onPause:()=>void;onAbandon:()=>void;onSettings:(s:Settings)=>void;onExit?:()=>void;novosNoLivro?:NovosNoLivro|null}){
+export function BattleScreen({battle,beat,index,name,settings,paused,onPause,onAbandon,onSettings,onExit,novosNoLivro,pvp}:{battle:Battle;beat:Beat|null;index:number;name:string;settings:Settings;paused:boolean;onPause:()=>void;onAbandon:()=>void;onSettings:(s:Settings)=>void;onExit?:()=>void;novosNoLivro?:NovosNoLivro|null;
+  /** Luta de PvP (src/screens/PvpScreen.tsx): rodada, nomes dos dois lados, sempre em 2× e sem AUTO; pausa só no treino. */
+  pvp?:{rodada:number;voce:string;rival:string;podePausar:boolean}}){
   const arena=useRef<HTMLDivElement>(null),[anchors,setAnchors]=useState<Anchors>({}),[box,setBox]=useState({w:0,h:0,medal:80}),[mixer,setMixer]=useState(false),[historyOpen,setHistoryOpen]=useState(false),[combosAbertos,setCombosAbertos]=useState<false|Side>(false),[fichaDoCombo,setFichaDoCombo]=useState<ComboAtivo|null>(null),[inspect,setInspect]=useState<InspectTarget|null>(null),[tutorial,setTutorial]=useState(()=>{try{return index===0&&!localStorage.getItem('nexus-battle-guide-v1')?0:-1}catch{return -1}});
   /* Os sons dos seis lutadores chegam antes do primeiro golpe. */
   const elenco=battle.fighters.map(f=>f.characterId).join(',');
@@ -58,7 +60,7 @@ export function BattleScreen({battle,beat,index,name,settings,paused,onPause,onA
   },[battle.seed,measure]);
   useLayoutEffect(()=>{measure();},[beat?.event.id,beat?.impacted,measure]);
   const lead=battle.dominion>3?'player':battle.dominion< -3?'enemy':'neutral';
-  const label=lead==='player'?'Seu trio está à frente':lead==='enemy'?'Rivais estão à frente':'Disputa equilibrada';
+  const label=lead==='player'?(pvp?'Você está à frente':'Seu trio está à frente'):lead==='enemy'?(pvp?`${pvp.rival} está à frente`:'Rivais estão à frente'):'Disputa equilibrada';
   // a barra do topo: o seu trio (verde) à esquerda, como na arena; os rivais (vermelho) à direita
   const position=50+Math.min(48,Math.max(-48,battle.dominion*.48));
   const turn=beat?.impacted&&beat.events.some(e=>e.kind==='turn');
@@ -101,9 +103,10 @@ export function BattleScreen({battle,beat,index,name,settings,paused,onPause,onA
   return <section className={`battle-screen arena-v2 lead-${lead} ${turn?'dominion-turn':''} ${paused?'presentation-paused':''}`} data-beat-id={beat?.event.id} data-beat-kind={beat?.event.kind} data-beat-duration={beat?duracaoBase(beat):undefined} data-beat-etapas={beat?.etapas?.length} style={{'--motion-scale':1/settings.speed,'--lead-strength':Math.min(.45,Math.abs(battle.dominion)/160),'--front':`${position}%`} as React.CSSProperties}>
     <header className="arena-hud">
       {onExit&&<button className="hud-button hud-exit" onClick={onExit} aria-label="Voltar ao início (a batalha fica pausada)"><ChevronLeft size={22}/></button>}
-      <div className="hud-round" title={name}><small>CONFRONTO</small><b>{String(index+1).padStart(2,'0')}<i>/10</i></b></div>
+      {pvp?<div className="hud-round hud-pvp" title={name}><small>RODADA</small><b>{pvp.rodada}<i>PvP</i></b></div>
+        :<div className="hud-round" title={name}><small>CONFRONTO</small><b>{String(index+1).padStart(2,'0')}<i>/10</i></b></div>}
       <div className="hud-advantage">
-        <div className="hud-advantage-labels"><span>SEU TRIO</span><strong>{turn?'VIRADA!':label}</strong><span>RIVAIS</span></div>
+        <div className="hud-advantage-labels"><span>{pvp?'VOCÊ':'SEU TRIO'}</span><strong>{turn?'VIRADA!':label}</strong><span>{pvp?pvp.rival:'RIVAIS'}</span></div>
         <div className="hud-advantage-track" role="meter" aria-label="Vantagem: seu trio à esquerda, rivais à direita" aria-valuenow={Math.round(battle.dominion)} aria-valuemin={-100} aria-valuemax={100}>
           <span className="hud-advantage-allies" style={{width:`${position}%`}}/><span className="hud-advantage-rivals" style={{width:`${100-position}%`}}/>
           <span className="hud-advantage-mid" aria-hidden="true"/><span className="hud-advantage-front" aria-hidden="true"/>
@@ -136,12 +139,14 @@ export function BattleScreen({battle,beat,index,name,settings,paused,onPause,onA
       {paused&&<div className="paused-banner"><Pause size={16}/> BATALHA PAUSADA</div>}
     </div>
     <footer className="arena-controls">
-      <button className={`control-main ${paused?'is-paused':''}`} onClick={onPause}>{paused?<Play size={18}/>:<Pause size={18}/>}<span>{paused?'Continuar':'Pausar'}</span></button>
+      {pvp&&!pvp.podePausar&&<span className="control-main pvp-ao-vivo"><i/>AO VIVO</span>}
+      {(!pvp||pvp.podePausar)&&<button className={`control-main ${paused?'is-paused':''}`} onClick={onPause}>{paused?<Play size={18}/>:<Pause size={18}/>}<span>{paused?'Continuar':'Pausar'}</span></button>}
+      {pvp?<><span className="control selected pvp-2x" aria-label="PvP sempre em 2 vezes"><FastForward size={18}/><b>2×</b></span><span className="control pvp-selo" aria-hidden="true"><Swords size={17}/><b>PvP</b></span></>:<>
       <button className={`control ${settings.speed===2?'selected':''}`} aria-label={`Velocidade ${settings.speed} vezes`} onClick={()=>onSettings({...settings,speed:settings.speed===1?2:1})}><FastForward size={18}/><b>{settings.speed}×</b></button>
-      <BotaoAutoDaBatalha ligado={settings.auto} onChange={auto=>onSettings({...settings,auto})}/>
+      <BotaoAutoDaBatalha ligado={settings.auto} onChange={auto=>onSettings({...settings,auto})}/></>}
       <button className="control sound-button" aria-label={settings.volume?'Silenciar':'Ativar som'} onClick={()=>onSettings({...settings,volume:settings.volume?0:P.audio.master})}>{settings.volume?<Volume2 size={19}/>:<VolumeX size={19}/>}</button>
       <button className={`control mixer-button ${mixer?'selected':''}`} aria-label="Ajustes da batalha" aria-expanded={mixer} onClick={()=>setMixer(!mixer)}><SlidersHorizontal size={18}/></button>
-      <button className="control control-danger abandon-battle" onClick={onAbandon} aria-label="Desistir da jornada"><LogOut size={17}/><span>Desistir</span></button>
+      <button className="control control-danger abandon-battle" onClick={onAbandon} aria-label={pvp?'Desistir da partida':'Desistir da jornada'}><LogOut size={17}/><span>Desistir</span></button>
     </footer>
     {historyOpen&&<aside className="battle-history"><div><strong><AuxIcon id="history" size={18}/> Momentos importantes</strong><button aria-label="Fechar histórico" onClick={()=>setHistoryOpen(false)}>×</button></div>{recent.length?recent.map(e=><p key={e.id}><ComTermos texto={historyText(e)}/></p>):<p>A luta ainda não teve momentos decisivos.</p>}</aside>}
     {mixer&&<div className="battle-mixer">{(['musicVolume','effectsVolume'] as const).map(key=><label key={key}>{key==='musicVolume'?'Música':'Efeitos'}<input type="range" min="0" max="100" value={settings[key]} onChange={e=>onSettings({...settings,[key]:Number(e.target.value)})}/></label>)}</div>}
