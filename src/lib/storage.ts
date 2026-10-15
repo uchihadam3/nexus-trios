@@ -8,6 +8,12 @@ import type { PresentationCheckpoint } from '../presentation/director';
 import type { RunBattleSummary,RunSynergyEvent } from '../engine/run-summary';
 import {emptyTally} from '../engine/progression';
 import {limpar,type Conquistas,type Desafio} from './conquistas';
+/**
+ * A velocidade mais alta da jornada (pedido do dono: o 3× fica desligado, mas fácil de religar). Para ligar o 3×,
+ * troque para 3: o botão da luta e os Ajustes passam a oferecer 1×, 2× e 3× (o diretor da cena já anda em 3×).
+ */
+export const VELOCIDADE_MAXIMA: 2 | 3 = 2;
+export const VELOCIDADES = ([1, 2, 3] as const).filter((v) => v <= VELOCIDADE_MAXIMA);
 export interface Settings {volume:number;musicVolume:number;effectsVolume:number;effects:boolean;speed:1|2|3;numbers:boolean;visualFeedbackVersion:2;reducedMotion:boolean;auto:boolean;explanations:'normal'|'detailed'|'off';dicasDoTrio:boolean}
 export interface RankedRun {top3?:{periodo?:ResultadoTop3;temporada?:ResultadoTop3};/** `free`: a Jornada normal, que vale só o ranking da Temporada */mode:'daily'|'weekly'|'free';id?:string;status:'draft'|'playing'|'validating'|'verified'|'failed';score?:number;daily?:number|null;weekly?:number|null;season?:number|null;error?:string}
 export interface Run {seed:number;team:string[];encounters:Encounter[];index:number;stage:'draft'|'battle'|'result';draft:Draft;battle:Battle|null;recorded:boolean;presentation?:PresentationCheckpoint;summaries?:RunBattleSummary[];battleSynergies?:RunSynergyEvent[];raioX?:EstadoRaioX;telemetry?:ReturnType<typeof emptyTally>;ranked?:RankedRun;
@@ -31,7 +37,7 @@ const prefix='nexus-v1-';
 export let storageAvailable=true;
 export function read(key:string):unknown{try{return JSON.parse(localStorage.getItem(prefix+key)??'null');}catch{return null;}}
 export function save(key:string,value:unknown){try{localStorage.setItem(prefix+key,JSON.stringify(value));storageAvailable=true;}catch{storageAvailable=false;}}
-export function loadSettings():Settings{const raw=read('settings');if(!raw||typeof raw!=='object')return defaults;const x=raw as Partial<Settings>;return {volume:typeof x.volume==='number'?Math.max(0,Math.min(100,x.volume)):P.audio.master,musicVolume:typeof x.musicVolume==='number'?Math.max(0,Math.min(100,x.musicVolume)):P.audio.music,effectsVolume:typeof x.effectsVolume==='number'?Math.max(0,Math.min(100,x.effectsVolume)):P.audio.effects,effects:typeof x.effects==='boolean'?x.effects:true,speed:x.speed===3?3:x.speed===2?2:1,numbers:x.visualFeedbackVersion===2?x.numbers!==false:true,visualFeedbackVersion:2,reducedMotion:typeof x.reducedMotion==='boolean'?x.reducedMotion:defaults.reducedMotion,auto:x.auto===true,explanations:x.explanations==='detailed'||x.explanations==='off'?x.explanations:'normal',dicasDoTrio:x.dicasDoTrio===true};}
+export function loadSettings():Settings{const raw=read('settings');if(!raw||typeof raw!=='object')return defaults;const x=raw as Partial<Settings>;return {volume:typeof x.volume==='number'?Math.max(0,Math.min(100,x.volume)):P.audio.master,musicVolume:typeof x.musicVolume==='number'?Math.max(0,Math.min(100,x.musicVolume)):P.audio.music,effectsVolume:typeof x.effectsVolume==='number'?Math.max(0,Math.min(100,x.effectsVolume)):P.audio.effects,effects:typeof x.effects==='boolean'?x.effects:true,speed:x.speed===3&&VELOCIDADE_MAXIMA>=3?3:x.speed===2||x.speed===3?2:1,numbers:x.visualFeedbackVersion===2?x.numbers!==false:true,visualFeedbackVersion:2,reducedMotion:typeof x.reducedMotion==='boolean'?x.reducedMotion:defaults.reducedMotion,auto:x.auto===true,explanations:x.explanations==='detailed'||x.explanations==='off'?x.explanations:'normal',dicasDoTrio:x.dicasDoTrio===true};}
 /**
  * A escala atual dos pontos (src/engine/pontos.ts). Mudou a conta, muda o número.
  * 6: personagens equilibrados e dificuldade nova (motor 250.7) — o recorde

@@ -12,6 +12,12 @@
  */
 export type JeitoDaUnica = 'rara' | 'sempre' | 'condicional';
 export const INTERVALO_DA_UNICA = 10;
+/**
+ * Avisos que sempre ganham a ativação completa (a luta para, o nome na cabeça, o efeito inteiro), mesmo logo depois de
+ * outra ativação do mesmo personagem. A Autodestruição do Cell vem 3 s depois do "Vai explodir!" (pedido do jogador:
+ * "quando ele explode tem que tá tudo parado, ele explodir, causar o dano, de uma forma bem certa").
+ */
+export const SEMPRE_COMPLETA: Readonly<Record<string, readonly string[]>> = { cell: ['Autodestruição'] };
 /*
  * Hiei, Kurama, Natsu, Sung Jinwoo, Itadori, Capitã Marvel, Doutor Destino, Feiticeira Escarlate, Galactus, Surfista
  * Prateado, Chun-Li, Doom Slayer, Ryu Hayabusa, Solid Snake, Bart, Splinter, Pateta, Pernalonga, Zuko e Samara deixaram

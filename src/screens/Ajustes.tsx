@@ -1,6 +1,6 @@
 import { useState,type CSSProperties,type ReactNode } from 'react';
 import { Volume2,Volume1,Music2,Zap,Sparkles,Hash,Wind,Gauge,Repeat,CircleHelp,Eye,Clapperboard,RotateCcw,Settings2,Check } from 'lucide-react';
-import type { Settings } from '../lib/storage';
+import { VELOCIDADES, type Settings } from '../lib/storage';
 import { TelaTopo } from '../components/Casca';
 import { battleAudio } from '../lib/audio';
 
@@ -78,7 +78,7 @@ export function SettingsScreen({settings:s,onChange,onReset,onGaleria}:{settings
 
     <div className="aj-painel">
       <h2><Gauge size={16}/>JOGO</h2>
-      <Escolha nome="Velocidade padrão" icone={<Gauge size={16}/>} opcoes={[[1,'1×'],[2,'2×'],[3,'3×']] as const} valor={s.speed} onChange={v=>muda('speed',v)} cor="#c8f560"/>
+      <Escolha nome="Velocidade padrão" icone={<Gauge size={16}/>} opcoes={VELOCIDADES.map((v)=>[v,`${v}×`] as const)} valor={s.speed} onChange={v=>muda('speed',v)} cor="#c8f560"/>
       <Escolha nome="Ajuda na batalha" icone={<CircleHelp size={16}/>} opcoes={[['normal','Normal'],['detailed','Detalhada'],['off','Desligada']] as const} valor={s.explanations} onChange={v=>muda('explanations',v)} cor="#8fd3ff"/>
       <div className="aj-chaves um"><Chave icone={<Repeat size={22}/>} nome="Sequência automática" dica="a próxima luta começa sozinha após vencer" ligado={s.auto} onChange={v=>muda('auto',v)} cor="#86e3a8"/></div>
     </div>

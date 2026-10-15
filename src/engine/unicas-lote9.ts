@@ -396,7 +396,7 @@ export const LOTE9: Record<string, Unica> = {
   },
   cell: {
     nome: 'Autodestruição',
-    texto: 'Com Vida entre 1 e 20%, ainda de pé (1 vez por luta): 3 s depois, Cell explode. Cada rival leva dano igual a 18% da Vida máxima de Cell, e Cell fica com 1 de Vida. Depois que a contagem começa, a explosão sai de qualquer jeito: mesmo se curarem Cell, e se ele cair antes, explode na hora em que cai.',
+    texto: 'Com Vida entre 1 e 20%, ainda de pé (1 vez por luta): 3 s depois, Cell explode. Cada rival leva dano igual a 18% da Vida máxima de Cell, e Cell fica com 1 de Vida. Depois que a contagem começa, a explosão sai de qualquer jeito: mesmo se curarem Cell; se Cell cair antes, explode na hora em que cai.',
     ganchos: {
       // arma com o Cell de pé, entre 1 de Vida e 20% (o golpe que derruba não arma: aí é o Renascer)
       apanhou(m, b, f) { arma(m, b, f); },

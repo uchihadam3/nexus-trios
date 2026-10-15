@@ -37,6 +37,8 @@ export const PREPARO_PROPRIO: Record<string, number> = {
   lelouch: 0.2, aizen: 0.2, kakashi: 0.2, coringa: 0.2, yor: 0.2, mikasa: 0.2,
   // o que precisa juntar energia de verdade
   // a Genki Dama cresce em quatro estágios antes de ser lançada (src/presentation/esfera-que-cresce.ts)
+  // a Autodestruição do Cell: a luta para, ele incha de energia, o nome aparece e só então explode (pedido do jogador)
+  cell: 0.9,
   goku: 1.1, megatron: 0.5, madara: 0.5, dovahkiin: 0.5, galactus: 0.2, light: 0.5, kaiba: 0.5, darkseid: 0.4,
   inuyasha: 0.4, cuphead: 0.4, zeus: 0.4, storm: 0.4, ironman: 0.4, mewtwo: 0.4, odin: 0.4, hadescz: 0.4, ursula: 0.4,
 };

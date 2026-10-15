@@ -6,6 +6,7 @@ import { PRESENTATION as P } from './config';
 import { QUADRO_DO_GOLPE } from './golpe-das-folhas';
 import { familia, profileFor } from './vfxProfiles';
 import { INTERVALO_DA_UNICA, JEITO_DA_UNICA } from './unicas-efeitos';
+import { SEMPRE_COMPLETA } from '../data/unicas-jeito';
 import { fasesDoEvento, golpeParado, pausasDoGolpe, soONome, type PausaDaUnica } from './ativacao-da-unica';
 import { ehDaRajada, rajadaDaChave } from './rajada-da-unica';
 export { ladoDaUnica, vooDaUnica } from './ativacao-da-unica';
@@ -397,7 +398,7 @@ function ativacoesCheias(d:Direction,events:BattleEvent[],after:Battle):Set<stri
     if(e.kind!=='unica'||cheias.has(e.source))continue;
     const f=after.fighters.find(x=>x.uid===e.source);if(!f||e.leve||soONome(f.characterId,e.label))continue;
     const vista=(d.unicaCheia??={})[e.source];
-    if(vista!==undefined&&after.time-vista<INTERVALO_DA_UNICA)continue;
+    if(vista!==undefined&&after.time-vista<INTERVALO_DA_UNICA&&!SEMPRE_COMPLETA[f.characterId]?.includes(e.label??''))continue;
     d.unicaCheia[e.source]=after.time;cheias.add(e.source);
   }
   return cheias;
