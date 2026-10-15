@@ -8,7 +8,7 @@ describe('Estrelas dos pontos', () => {
   it('são 40 de cada nível, todas do elenco, com o bônus em degraus de 5%', () => {
     const lista = Object.entries(ESTRELAS_DE_PONTOS);
     for (const n of [1, 2, 3]) expect(lista.filter(([, e]) => e.estrelas === n).length, `${n} estrelas`).toBe(40);
-    for (const [id, e] of lista) { expect(byId[id], id).toBeDefined(); expect(e.bonus % 5).toBe(0); expect(e.bonus).toBeGreaterThan(0); }
+    for (const [id, e] of lista) { expect(byId[id], id).toBeDefined(); expect(e.bonus % 5).toBe(0); expect(e.bonus).toBeGreaterThanOrEqual(0); }
   });
   it('no trio vale o maior bônus, e só os pontos mudam: a luta é a mesma', () => {
     expect(bonusDoTrio(['goku', 'vegeta', 'hinata']).de).toBe(ESTRELAS_DE_PONTOS.goku!.bonus >= ESTRELAS_DE_PONTOS.vegeta!.bonus ? 'goku' : 'vegeta');

@@ -61,10 +61,10 @@ function FichaDoLutador({c,onSelect}:{c:Character;onSelect:(i:number)=>void}){
       <div className="bi2-nome">
         <small>{universoDaFicha(c)}</small>
         <h2>{c.name}</h2>
+        <SeloDeEstrela id={c.id} naFicha/>
         <p className="fv3-ideia">{c.idea}</p>
       </div>
     </header>
-    <SeloDeEstrela id={c.id} grande/>
     <IdentityChips ids={identidadesDe(c)}/>
     <div className="fv3-barras">
       <div className="bi2-barra vida" style={{'--p':pct(c.hp/VIDA_MAX)} as CSSProperties}><i/><span><HeartPulse size={13}/>Vida<b>{c.hp.toLocaleString('pt-BR')}</b></span></div>

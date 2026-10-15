@@ -69,7 +69,7 @@ function FichaDoLutador({battle,f,onSelect}:{battle:Battle;f:Fighter;onSelect:(t
     <header className="bi2-topo">
       <div className={`bi2-retrato ${fracao<.3?'perigo':''}`} style={{'--p':fracao*100} as CSSProperties}><Portrait character={c}/></div>
       <div className="bi2-nome">
-        <small>{universoDaFicha(c)}{ESTRELAS_DE_PONTOS[f.characterId]&&<span className="epts-inline"> · {'★'.repeat(ESTRELAS_DE_PONTOS[f.characterId]!.estrelas)} +{ESTRELAS_DE_PONTOS[f.characterId]!.bonus}% pontos</span>}</small>
+        <small>{universoDaFicha(c)}{ESTRELAS_DE_PONTOS[f.characterId]&&<span className="epts-inline"> · {'★'.repeat(ESTRELAS_DE_PONTOS[f.characterId]!.estrelas)}{ESTRELAS_DE_PONTOS[f.characterId]!.bonus>0&&` +${ESTRELAS_DE_PONTOS[f.characterId]!.bonus}%`}</span>}</small>
         <h3>{c.name}</h3>
         <div className="bi2-barra vida" style={{'--p':fracao*100} as CSSProperties}><i/><span><HeartPulse size={13}/><b>{vida}</b>/{Math.round(f.maxHp)}{escudo>0&&<em><ShieldHalf size={12}/><TermoBotao termo={termoPorId.escudo!}>{escudo}</TermoBotao></em>}</span></div>
         <div className="bi2-barra ritmo" style={{'--p':Math.min(1,Math.max(0,f.action))*100} as CSSProperties}><i/><span><Clock3 size={13}/><TermoBotao termo={termoPorId['ataque-basico']!}>Próximo ataque</TermoBotao>{ritmoTom==='parado'?<em className="bi2-seg parado">parado</em>:<em className={`bi2-seg ${ritmoTom}`}>a cada <b>{seg(ritmo.agora??ritmo.base)}s</b>{ritmoTom==='rapido'&&' ▲'}{ritmoTom==='lento'&&' ▼'}</em>}</span></div>
