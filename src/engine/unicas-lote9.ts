@@ -2,7 +2,7 @@
  * Mecânicas únicas — lote 9: os últimos 54 (Kirby, Link, Dante, Sekiro,
  * Coringa, Optimus, Mario…). Com este lote, todo personagem tem a dele.
  */
-import { avisoACada, BUFFS, fracao, maisForte, relogio, st, u, vivo, type Ganchos, type Unica } from './unicas-base';
+import { avisoACada, BUFFS, fracao, maisForte, relogio, st, u, vivo, type Ganchos, type Motor, type Unica } from './unicas-base';
 import type { Battle, Fighter, StatusId } from './types';
 
 const idx = (b: Battle, f: Fighter) => b.fighters.indexOf(f);
@@ -15,6 +15,18 @@ export const conheceTodas = (t: Record<string, Unica>) => { TODAS = t; };
 const copiada = (b: Battle, f: Fighter): Ganchos | undefined => {
   const c = b.fighters[u(f).copia ?? -1];
   return c && c.characterId !== 'kirby' ? TODAS[c.characterId]?.ganchos : undefined;
+};
+
+/* A Autodestruição do Cell: arma com a Vida entre 1 e 20% (1 vez por luta) e, armada, sempre explode. */
+const arma = (m: Motor, b: Battle, f: Fighter) => {
+  if (u(f).bomba || !vivo(f) || fracao(f) >= 0.2) return;
+  u(f).bomba = b.time + 3; m.aviso(b, f, 'Vai explodir!', f);
+};
+const explode = (m: Motor, b: Battle, f: Fighter, dePe: boolean) => {
+  u(f).bomba = -1;
+  m.aviso(b, f, 'Autodestruição', f);
+  for (const r of m.rivais(b, f)) m.dano(b, f, r, f.maxHp * 0.18, false, 'Explosão');
+  if (dePe) f.hp = 1;
 };
 
 export const LOTE9: Record<string, Unica> = {
@@ -384,18 +396,17 @@ export const LOTE9: Record<string, Unica> = {
   },
   cell: {
     nome: 'Autodestruição',
-    texto: 'Com menos de 20% da Vida, ainda de pé (1 vez por luta): 3 s depois, Cell explode. Cada rival leva dano igual a 18% da Vida máxima de Cell, e Cell fica com 1 de Vida. Se Cell cair antes, não explode e pode tentar de novo depois de renascer.',
+    texto: 'Com Vida entre 1 e 20%, ainda de pé (1 vez por luta): 3 s depois, Cell explode. Cada rival leva dano igual a 18% da Vida máxima de Cell, e Cell fica com 1 de Vida. Depois que a contagem começa, a explosão sai de qualquer jeito: mesmo se curarem Cell, e se ele cair antes, explode na hora em que cai.',
     ganchos: {
-      // só arma com o Cell de pé, entre 1 de Vida e 20% (o golpe que derruba não arma: aí é o Renascer)
-      apanhou(m, b, f) { if (!u(f).bomba && vivo(f) && fracao(f) < 0.2) { u(f).bomba = b.time + 3; m.aviso(b, f, 'Vai explodir!', f); } },
-      // caiu durante a contagem: a explosão não sai e não conta como usada (depois de renascer, pode armar de novo)
-      morreu(_m, _b, f) { if ((u(f).bomba ?? 0) > 0) u(f).bomba = 0; },
+      // arma com o Cell de pé, entre 1 de Vida e 20% (o golpe que derruba não arma: aí é o Renascer)
+      apanhou(m, b, f) { arma(m, b, f); },
+      // pedido do jogador: armada, não para mais. Caiu na contagem: explode na hora em que cai.
+      morreu(m, b, f) { if ((u(f).bomba ?? 0) > 0) explode(m, b, f, false); },
       passo(m, b, f) {
-        if (!u(f).bomba || u(f).bomba! < 0 || b.time < u(f).bomba! || !vivo(f)) return;
-        u(f).bomba = -1;
-        m.aviso(b, f, 'Autodestruição', f);
-        for (const r of m.rivais(b, f)) m.dano(b, f, r, f.maxHp * 0.18, false, 'Explosão');
-        f.hp = 1;
+        // também arma quando a Vida cai por Veneno, Queimando ou Sangramento (sem golpe)
+        arma(m, b, f);
+        // curado na contagem continua: a explosão sai no tempo marcado
+        if ((u(f).bomba ?? 0) > 0 && b.time >= u(f).bomba!) explode(m, b, f, true);
       },
     },
   },
