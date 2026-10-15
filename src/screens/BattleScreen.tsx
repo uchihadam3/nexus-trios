@@ -142,7 +142,7 @@ export function BattleScreen({battle,beat,index,name,settings,paused,onPause,onA
       {pvp&&!pvp.podePausar&&<span className="control-main pvp-ao-vivo"><i/>AO VIVO</span>}
       {(!pvp||pvp.podePausar)&&<button className={`control-main ${paused?'is-paused':''}`} onClick={onPause}>{paused?<Play size={18}/>:<Pause size={18}/>}<span>{paused?'Continuar':'Pausar'}</span></button>}
       {pvp?<><span className="control selected pvp-2x" aria-label="PvP sempre em 2 vezes"><FastForward size={18}/><b>2×</b></span><span className="control pvp-selo" aria-hidden="true"><Swords size={17}/><b>PvP</b></span></>:<>
-      <button className={`control ${settings.speed===2?'selected':''}`} aria-label={`Velocidade ${settings.speed} vezes`} onClick={()=>onSettings({...settings,speed:settings.speed===1?2:1})}><FastForward size={18}/><b>{settings.speed}×</b></button>
+      <button className={`control ${settings.speed>1?'selected':''}`} aria-label={`Velocidade ${settings.speed} vezes`} onClick={()=>onSettings({...settings,speed:settings.speed===1?2:settings.speed===2?3:1})}><FastForward size={18}/><b>{settings.speed}×</b></button>
       <BotaoAutoDaBatalha ligado={settings.auto} onChange={auto=>onSettings({...settings,auto})}/></>}
       <button className="control sound-button" aria-label={settings.volume?'Silenciar':'Ativar som'} onClick={()=>onSettings({...settings,volume:settings.volume?0:P.audio.master})}>{settings.volume?<Volume2 size={19}/>:<VolumeX size={19}/>}</button>
       <button className={`control mixer-button ${mixer?'selected':''}`} aria-label="Ajustes da batalha" aria-expanded={mixer} onClick={()=>setMixer(!mixer)}><SlidersHorizontal size={18}/></button>

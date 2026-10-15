@@ -542,7 +542,7 @@ export function restoreDirection(initial:Battle,saved:Battle,checkpoint:Presenta
 /** Consume combat only between beats. One render advances at most one visual boundary. */
 export function advanceDirection(d:Direction,seconds:number,onCue?:(cue:Cue)=>void,visualSpeed=1,onTrace?:(trace:BeatTrace)=>void):void {
   // A delayed frame may not accumulate time to rush through unseen actions.
-  const speed=visualSpeed===2?2:1;
+  const speed=visualSpeed===3?3:visualSpeed===2?2:1;
   const elapsed=Math.min(P.renderIntervalMs/1000,Math.max(0,seconds))*speed;d.signals=[];
   if(d.complete||elapsed===0)return;
   if(d.active){

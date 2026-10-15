@@ -78,7 +78,7 @@ export function SettingsScreen({settings:s,onChange,onReset,onGaleria}:{settings
 
     <div className="aj-painel">
       <h2><Gauge size={16}/>JOGO</h2>
-      <Escolha nome="Velocidade padrão" icone={<Gauge size={16}/>} opcoes={[[1,'1×'],[2,'2×']] as const} valor={s.speed} onChange={v=>muda('speed',v)} cor="#c8f560"/>
+      <Escolha nome="Velocidade padrão" icone={<Gauge size={16}/>} opcoes={[[1,'1×'],[2,'2×'],[3,'3×']] as const} valor={s.speed} onChange={v=>muda('speed',v)} cor="#c8f560"/>
       <Escolha nome="Ajuda na batalha" icone={<CircleHelp size={16}/>} opcoes={[['normal','Normal'],['detailed','Detalhada'],['off','Desligada']] as const} valor={s.explanations} onChange={v=>muda('explanations',v)} cor="#8fd3ff"/>
       <div className="aj-chaves um"><Chave icone={<Repeat size={22}/>} nome="Sequência automática" dica="a próxima luta começa sozinha após vencer" ligado={s.auto} onChange={v=>muda('auto',v)} cor="#86e3a8"/></div>
     </div>
