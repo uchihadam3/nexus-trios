@@ -247,7 +247,7 @@ export function ArenaUnit({fighter:f,battle,beat,onInspect,numbers,threatened,li
         {/* rótulo vazio = combo de tempo em tempo: só o efeito aparece, sem selo com nome */}
         {seloVisivel&&!comNome&&<Selo key={`r${seloVisivel.chave}`} selo={seloVisivel}/>}
         {seloVisivel&&seloVisivel.tipo!=='mecanica'&&<span key={`fx${seloVisivel.chave}`} className={`aura-ativa aura-${seloVisivel.tipo}${seloVisivel.sumindo?' sumindo':''}`} aria-hidden="true"><i/><i/><i/><i/><i/><i/><i/><i/></span>}
-        {reagindo&&<span key={`a${reagindo.eventos[0]??0}`} className="reacao-anel" aria-hidden="true"/>}
+        {reagindo&&<span key={`r${reagindo.eventos[0]??0}`} className="reacao-anel" aria-hidden="true"/>}
         {ativando&&!preparandoUnica&&<span key={`ua${beat?.event.id??0}-${ativando.eventos[0]??0}`} className="aura-ativa aura-unica aura-longa" aria-hidden="true"><i/><i/><i/><i/><i/><i/><i/><i/></span>}
         {/* a mini preparação: a energia roxa junta no retrato antes de a mecânica disparar */}
         {ativando&&(!at||preparandoUnica)&&<span key={`uc${beat?.event.id??0}-${ativando.eventos[0]??0}`} className="unica-carga" aria-hidden="true"><i/><i/><i/><i/><i/><i/></span>}

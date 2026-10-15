@@ -9,9 +9,9 @@ const comEstrelas = (n: number) => lista.filter(([, e]) => e.estrelas === n).sor
 const semEstrela = characters.map((c) => c.id).filter((id) => !ESTRELAS_DE_PONTOS[id]);
 
 describe('Estrelas dos pontos', () => {
-  it('são 40 de cada nível, todas do elenco, com o bônus em degraus de 5%', () => {
+  it('são 40 de cada nível, todas do elenco, com o bônus em % inteiro (a metade do medido)', () => {
     for (const n of [1, 2, 3]) expect(comEstrelas(n).length, `${n} estrelas`).toBe(40);
-    for (const [id, e] of lista) { expect(byId[id], id).toBeDefined(); expect(e.bonus % 5).toBe(0); expect(e.bonus).toBeGreaterThanOrEqual(0); }
+    for (const [id, e] of lista) { expect(byId[id], id).toBeDefined(); expect(Number.isInteger(e.bonus)).toBe(true); expect(e.bonus).toBeGreaterThan(0); expect(e.bonus).toBeLessThanOrEqual(43); }
   });
   it('no trio conta primeiro quem tem mais estrelas, depois a maior porcentagem', () => {
     const [tres] = comEstrelas(3).slice(-1), [doisAlto] = comEstrelas(2);

@@ -10,24 +10,24 @@ import { exemplosDe,explicacaoDaIdentidade,familiaDaIdentidade,guiaDaIdentidade,
  * abre um cartão curto que explica o que ela faz, em linguagem de jogo. Serve
  * para quem está montando o trio e não sabe o que "Especialista" quer dizer.
  */
-const ICONE:Record<Identidade,LucideIcon>={
+export const ICONE_DA_IDENTIDADE:Record<Identidade,LucideIcon>={
   'Pressão':Gauge,'Explosão':Bomb,'Finalização':Skull,'Área':Radar,'Dano contínuo':Droplets,
   'Tanque':Castle,'Sobrevivência':HeartPulse,'Proteção':ShieldPlus,'Cura':Heart,'Regeneração':Sprout,
   'Controle':Lock,'Interrupção':Scissors,'Ritmo':Timer,'Suporte':HandHelping,'Carga':BatteryCharging,
   'Buff':CircleArrowUp,'Debuff':CircleArrowDown,'Virada':RotateCcw,'Preparação':Hourglass,'Transformação':Sparkles,
   'Contra-ataque':Swords,'Especialista':Crosshair,'Reviver':HandHeart,'Renascer':Flame,'Purificar':Sparkle,'Dissipar':Eraser,'Copiar':Copy,'Invocação':PawPrint,'Aflições':Skull,'Dreno de vida':HeartPulse,
 };
-const FAMILIA={
+export const FAMILIA_DA_IDENTIDADE={
   ataque:{nome:'ATAQUE',cor:'#ff9a76'},atrapalha:{nome:'ATRAPALHA O RIVAL',cor:'#c3a2ff'},ajuda:{nome:'AJUDA O TRIO',cor:'#86e3a8'},
   aguenta:{nome:'AGUENTA PANCADA',cor:'#8cc4ff'},jeito:{nome:'JEITO DE LUTAR',cor:'#ffd66e'},
 } as const;
-export const corDaIdentidade=(x:Identidade)=>FAMILIA[familiaDaIdentidade[x]].cor;
+export const corDaIdentidade=(x:Identidade)=>FAMILIA_DA_IDENTIDADE[familiaDaIdentidade[x]].cor;
 
 function CartaoDaIdentidade({inicial,trio,onClose}:{inicial:Identidade;trio?:readonly Identidade[];onClose:()=>void}){
   const ref=useRef<HTMLDialogElement>(null);
   const [x,setX]=useState(inicial);
   useEffect(()=>{const d=ref.current;d?.showModal();return()=>d?.close();},[]);
-  const guia=guiaDaIdentidade[x],familia=FAMILIA[familiaDaIdentidade[x]],Icone=ICONE[x];
+  const guia=guiaDaIdentidade[x],familia=FAMILIA_DA_IDENTIDADE[familiaDaIdentidade[x]],Icone=ICONE_DA_IDENTIDADE[x];
   const total=quantosTem(x),exemplos=exemplosDe(x).map(id=>byId[id]).filter(Boolean);
   const temNoTrio=trio?.includes(x);
   return <dialog ref={ref} className="id-card-dialog" aria-label={`O que é ${x}`} onCancel={e=>{e.preventDefault();e.stopPropagation();onClose();}} onClick={e=>{e.stopPropagation();if(e.target===e.currentTarget)onClose();}}>
@@ -42,7 +42,7 @@ function CartaoDaIdentidade({inicial,trio,onClose}:{inicial:Identidade;trio?:rea
       <h3>Na luta</h3>
       <ol className="id-card-steps">{guia.naLuta.map((t,i)=><li key={i}><span>{i+1}</span>{t}</li>)}</ol>
       <h3>Combina com</h3>
-      <div className="id-card-combos">{guia.combina.map(c=>{const I=ICONE[c];return <button key={c} style={{'--id-cor':corDaIdentidade(c)} as CSSProperties} onClick={()=>setX(c)}><I size={14}/>{c}</button>;})}</div>
+      <div className="id-card-combos">{guia.combina.map(c=>{const I=ICONE_DA_IDENTIDADE[c];return <button key={c} style={{'--id-cor':corDaIdentidade(c)} as CSSProperties} onClick={()=>setX(c)}><I size={14}/>{c}</button>;})}</div>
       <p className="id-card-warn"><TriangleAlert size={16}/><span><b>Cuidado com</b>{guia.cuidado}</span></p>
       <div className="id-card-who"><small>{total} {total===1?'lutador tem':'lutadores têm'}</small><div>{exemplos.map(c=><span key={c.id} style={{'--character':c.color} as CSSProperties}><Portrait character={c} className="tiny"/><em>{c.name}</em></span>)}</div></div>
       <button className="primary id-card-ok" onClick={onClose}>Entendi</button>

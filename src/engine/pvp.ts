@@ -4,7 +4,7 @@
  * Pedido do jogador: cada um monta 3 times de 3 com a sua coleção (9 personagens diferentes); a cada rodada os dois
  * escolhem em segredo um dos seus times e eles lutam. O time que vence fica marcado e não pode ser escolhido de novo;
  * quem perdeu pode escolher qualquer um dos seus times. Vence a partida quem ganhar uma rodada com cada um dos 3 times
- * (no máximo 5 rodadas). O rating é o do xadrez (Elo): todo mundo começa igual e ganha ou perde mais ou menos conforme
+ * (no máximo 5 rodadas). O rating é o Elo: todo mundo começa igual e ganha ou perde mais ou menos conforme
  * a diferença para o adversário.
  *
  * Treino (pedido do jogador): 5 NPCs, do iniciante ao mestre. Quanto melhor o NPC, mais personagens ele tem
@@ -27,6 +27,10 @@ export interface PartidaPvp { meus: Times; deles: Times; rodadas: RodadaPvp[]; s
 export const MINIMO_DA_COLECAO = 9;
 /** Toda luta de PvP corre em 2× (pedido do jogador: "sempre em duas vezes"). */
 export const VELOCIDADE_DO_PVP = 2;
+/** Segundos de tela por segundo de luta do motor, em 2× e com a encenação (nomes, efeitos, pausas). Medido ~5,5; com folga. */
+export const TELA_POR_SEGUNDO = 7;
+/** Quanto a luta de uma rodada pode durar na tela (segundos): o prazo de segurança do online. */
+export const duracaoNaTela = (duracaoDoMotor: number) => Math.min(TELA_POR_SEGUNDO * duracaoDoMotor + 15, 540);
 export const RATING_INICIAL = 1000;
 const K_DO_ELO = 32;
 

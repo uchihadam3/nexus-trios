@@ -42,6 +42,8 @@ import {AccountScreen} from './screens/AccountScreen';
 import {PortaoDaConta,type EtapaDoPortao} from './screens/PortaoDaConta';
 import {criarComunidade,type ServicoDaComunidade} from './lib/comunidade';
 import {useComunidade} from './lib/useComunidade';
+import {criarPvpOnline,textoDoErroPvp} from './lib/pvp-online';
+import {ConviteDoPvp} from './components/ConviteDoPvp';
 import {Avatar} from './components/AvatarDaComunidade';
 const PvpScreen=lazy(()=>import('./screens/PvpScreen').then(m=>({default:m.PvpScreen})));
 const ComunidadeScreen=lazy(()=>import('./screens/ComunidadeScreen').then(m=>({default:m.ComunidadeScreen})));
@@ -121,7 +123,7 @@ export default function App(){
   const fechaDesistindo=(atual:Run|null)=>{
     if(!atual?.ranked?.id||!['playing','validating'].includes(atual.ranked.status))return;
     const terminou=atual.stage==='result'&&(atual.battle?.winner!=='player'||atual.index===9);if(terminou)return;
-    const lista=atual.summaries??[],id=atual.ranked.id,envio={dicas:atual.dicas===true,vencidas:lista.filter(x=>x.won).length,desistiu:true,lutas:lista.length};
+    const lista=atual.summaries??[],id=atual.ranked.id,envio={dicas:atual.dicas===true,vencidas:lista.filter(x=>x.won).length,desistiu:true,lutas:lista.length,pontos:lista.reduce((n,x)=>n+x.score,0)};
     void runDigest(id,atual.team,atual.seed,lista.map(x=>x.won)).then(digest=>onlineCall('submit',{runId:id,digest,...envio}).catch(e=>{
       if(!recusaDefinitiva(e instanceof Error?e.message:''))guardarEnvio({runId:id,digest,em:new Date().toISOString(),...envio});}));
   };
@@ -298,7 +300,7 @@ export default function App(){
         if(!current.recorded){
           /* conta ao servidor como a jornada está: se o envio do fim não chegar, o servidor a coloca no ranking sozinho */
           if(current.ranked?.id&&current.ranked.status==='playing'){const lista=next.summaries??[],perdeu=d.battle.winner!=='player';
-            void onlineCall('progresso',{runId:current.ranked.id,lutas:lista.length,vencidas:lista.filter(x=>x.won).length,fim:perdeu||current.index===9,dicas:current.dicas===true}).catch(()=>{});}
+            void onlineCall('progresso',{runId:current.ranked.id,lutas:lista.length,vencidas:lista.filter(x=>x.won).length,pontos:lista.reduce((n,x)=>n+x.score,0),fim:perdeu||current.index===9,dicas:current.dicas===true}).catch(()=>{});}
           const won=d.battle.winner==='player',champion=won&&current.index===9;
           /* o objetivo do jogo: pontos. O recorde é o maior total de uma jornada. */
           const total=pontosDaJornada((next.summaries??[]).map(x=>({pontos:x.score,won:x.won})));
@@ -326,11 +328,11 @@ export default function App(){
     submission.current=true;const id=run.ranked.id;
     if(run.ranked.status!=='validating')changeRun({...run,ranked:{...run.ranked,status:'validating'}});
     void (async()=>{
-      try{const digest=await runDigest(id,run.team,run.seed,(run.summaries??[]).map(s=>s.won));const result=await onlineCall<{score:number;daily:number|null;weekly:number|null;season:number|null;top3?:{periodo?:ResultadoTop3;temporada?:ResultadoTop3}}>('submit',{runId:id,digest,dicas:run.dicas===true,vencidas:(run.summaries??[]).filter(s=>s.won).length});
+      try{const digest=await runDigest(id,run.team,run.seed,(run.summaries??[]).map(s=>s.won));const result=await onlineCall<{score:number;daily:number|null;weekly:number|null;season:number|null;top3?:{periodo?:ResultadoTop3;temporada?:ResultadoTop3}}>('submit',{runId:id,digest,dicas:run.dicas===true,vencidas:(run.summaries??[]).filter(s=>s.won).length,pontos:(run.summaries??[]).reduce((n,s)=>n+s.score,0)});
         const latest=runRef.current;if(latest?.ranked?.id===id)changeRun({...latest,ranked:{...latest.ranked,status:'verified',score:result.score,daily:result.daily,weekly:result.weekly,season:result.season,top3:result.top3,error:undefined}});
       }catch(error){const msg=error instanceof Error?error.message:'Falha na validação.';
         // falhou por rede ou servidor: fica guardada e é reenviada sozinha ao abrir o jogo (src/lib/envios-pendentes.ts)
-        if(!recusaDefinitiva(msg))void runDigest(id,run.team,run.seed,(run.summaries??[]).map(s=>s.won)).then(digest=>guardarEnvio({runId:id,digest,dicas:run.dicas===true,em:new Date().toISOString(),vencidas:(run.summaries??[]).filter(s=>s.won).length}));
+        if(!recusaDefinitiva(msg))void runDigest(id,run.team,run.seed,(run.summaries??[]).map(s=>s.won)).then(digest=>guardarEnvio({runId:id,digest,dicas:run.dicas===true,em:new Date().toISOString(),vencidas:(run.summaries??[]).filter(s=>s.won).length,pontos:(run.summaries??[]).reduce((n,s)=>n+s.score,0)}));
         const latest=runRef.current;if(latest?.ranked?.id===id)changeRun({...latest,ranked:{...latest.ranked,status:'failed',error:msg}});}
       finally{submission.current=false;}
     })();
@@ -390,7 +392,7 @@ export default function App(){
   };
   useEffect(()=>{if(onlineConfigured&&logado&&conta&&nomeDaConta?.id!==conta.id)void buscaNome(conta);},[logado,conta?.id]);
   /* jornadas terminadas que não chegaram ao servidor: reenviadas ao abrir o jogo com a conta (src/lib/envios-pendentes.ts) */
-  useEffect(()=>{if(onlineConfigured&&logado&&conta)void reenviarPendentes(e=>onlineCall('submit',{runId:e.runId,digest:e.digest,dicas:e.dicas,vencidas:e.vencidas,desistiu:e.desistiu,lutas:e.lutas}));},[logado,conta?.id]);
+  useEffect(()=>{if(onlineConfigured&&logado&&conta)void reenviarPendentes(e=>onlineCall('submit',{runId:e.runId,digest:e.digest,dicas:e.dicas,vencidas:e.vencidas,desistiu:e.desistiu,lutas:e.lutas,pontos:e.pontos}));},[logado,conta?.id]);
   const escolheNome=async(handle:string):Promise<string|null>=>{
     if(!conta)return 'Entre na conta primeiro.';
     try{const r=await onlineCall<{profile:{handle:string}}>('profile',{handle});setProfile(p=>{const n={...p,publicHandle:r.profile.handle};save('profile',n);return n;});setNomeDaConta({id:conta.id,handle:r.profile.handle});return null;}
@@ -411,6 +413,11 @@ export default function App(){
   const [abrirConversa,setAbrirConversa]=useState<string|null>(null);
   /* a luta do PvP ocupa a tela inteira, como a da jornada */
   const [pvpLutando,setPvpLutando]=useState(false);
+  /* o PvP online (src/lib/pvp-online.ts): a partida aberta, o desafio pela Comunidade e o aviso de convite em qualquer tela */
+  const servicoPvp=useMemo(()=>onlineConfigured?criarPvpOnline(onlineCall,carregarCliente):null,[]);
+  const [partidaPvp,setPartidaPvp]=useState<string|null>(null);
+  const pvpOnline=useMemo(()=>comunidadeLigada&&servicoPvp&&!COMUNIDADE_DEMO?{servico:servicoPvp,partida:partidaPvp,onPartida:setPartidaPvp,onComunidade:()=>{setAbrirConversa(null);navigate('comunidade');}}:null,[comunidadeLigada,servicoPvp,partidaPvp]);
+  const desafiar=async(id:string)=>{if(!servicoPvp)return 'O PvP online precisa de conexão.';try{const r=await servicoPvp.desafiar(id);if(r.partida){setPartidaPvp(r.partida.id);navigate('pvp');}return null;}catch(e){return textoDoErroPvp(e);}};
   const comunidade=useComunidade({servico:servicoDaComunidade,ligado:comunidadeLigada,euId:euNaComunidade,naComunidade:screen==='comunidade',noInicio:screen==='home'});
   /* Dicas ligadas enquanto o trio é escolhido: a jornada inteira paga o custo, mesmo desligando depois (src/engine/pontos.ts) */
   useEffect(()=>{if(settings.dicasDoTrio&&podeDicas&&run?.stage==='draft'&&run.draft.team.length<3&&!run.dicas)changeRun({...run,dicas:true});},[settings.dicasDoTrio,podeDicas,run?.stage,run?.draft.team.length,run?.dicas]);
@@ -422,14 +429,15 @@ export default function App(){
   const reset=()=>{resetStorage();setSettings(defaults);setProfile({journeys:0,victories:0,best:0,wins:0,recordePontos:0,escalaDosPontos:ESCALA_DOS_PONTOS});setRun(null);runRef.current=null;navigate('home');};
   return <div onPointerDownCapture={()=>void battleAudio.unlock()} onPointerUpCapture={()=>void battleAudio.unlock()} onTouchEndCapture={()=>void battleAudio.unlock()} onClickCapture={()=>void battleAudio.unlock()} onKeyDownCapture={e=>{if(e.key==='Enter'||e.key===' ')void battleAudio.unlock();}} className={`app ${settings.reducedMotion?'reduce-motion':''} ${screen==='game'&&run?.stage==='battle'||screen==='pvp'&&pvpLutando?'in-battle':''}`}>
     <ToqueGlobal/>
+    {pvpOnline&&conta&&<ConviteDoPvp servico={pvpOnline.servico} euId={conta.id} naPartida={screen==='pvp'?partidaPvp:null} onAbrir={id=>{setPartidaPvp(id);navigate('pvp');}}/>}
     <Cabecalho tela={screen} menu={menu} onMenu={setMenu} onNavigate={d=>{if(d==='comunidade')setAbrirConversa(null);navigate(d);}} recorde={profile.recordePontos??0} apelido={profile.publicHandle} online={onlineConfigured||COMUNIDADE_DEMO} total={characters.length} naoLidas={comunidade.naoLidas}/>
     <main key={`${screen}-${screen==='game'?run?.stage??'idle':'page'}`} className={screen==='game'&&run?.stage==='battle'||screen==='pvp'&&pvpLutando?'main battle-main screen-enter':'main screen-enter'}>
       {screen==='home'&&<Home comunidade={comunidadeLigada?{online:comunidade.online,naoLidas:comunidade.naoLidas}:null} profile={profile} run={run} conta={conta!==null&&conta.origem!=='convidado'} onPlay={requestNew} onContinue={()=>{if(run?.stage==='battle'&&run.battle){direction.current=directionFor(run);setPresentation({battle:direction.current.visible,beat:direction.current.active});}navigate('game');setPaused(run?.stage==='battle');}} onAbandon={()=>setConfirmAbandon(true)} onNavigate={navigate} onInstall={()=>void install()} onShare={()=>setCompartilhar(true)}/>}
       {screen==='characters'&&<CharactersScreen onDetails={setDetails}/>}
       {/* a Arena PvP (src/screens/PvpScreen.tsx): a coleção são os personagens liberados nas Conquistas (a conta do dono tem os 400, para testar) */}
-      {screen==='pvp'&&<Suspense fallback={<p className="cm-carregando-tela">Abrindo a Arena…</p>}><PvpScreen colecao={dono?characters.map(c=>c.id):Object.keys(profile.conquistas??{}).filter(id=>!!byId[id])} settings={settings} onSettings={changeSettings} onDetails={setDetails} onJogar={requestNew} onLutando={setPvpLutando}/></Suspense>}
+      {screen==='pvp'&&<Suspense fallback={<p className="cm-carregando-tela">Abrindo a Arena…</p>}><PvpScreen colecao={dono?characters.map(c=>c.id):Object.keys(profile.conquistas??{}).filter(id=>!!byId[id])} settings={settings} onSettings={changeSettings} onDetails={setDetails} onJogar={requestNew} onLutando={setPvpLutando} online={pvpOnline}/></Suspense>}
       {screen==='comunidade'&&(comunidadeLigada&&servicoDaComunidade&&euNaComunidade
-        ?<Suspense fallback={<p className="cm-carregando-tela">Abrindo a Comunidade…</p>}><ComunidadeScreen servico={servicoDaComunidade} euId={euNaComunidade} euNome={profile.publicHandle??'Você'} naoLidas={comunidade.naoLidas} onLidas={()=>void comunidade.recontar()} abrirCom={abrirConversa} onDetails={setDetails}/></Suspense>
+        ?<Suspense fallback={<p className="cm-carregando-tela">Abrindo a Comunidade…</p>}><ComunidadeScreen servico={servicoDaComunidade} euId={euNaComunidade} euNome={profile.publicHandle??'Você'} naoLidas={comunidade.naoLidas} onLidas={()=>void comunidade.recontar()} abrirCom={abrirConversa} onDetails={setDetails} onDesafiar={pvpOnline?desafiar:undefined}/></Suspense>
         :<div className="cm-sem-conta"><p>Entre na sua conta e escolha seu nome para conversar com a comunidade.</p><button className="primary" onClick={()=>navigate('conta')}>Ir para a Conta</button></div>)}
       {screen==='conquistas'&&<ConquistasScreen profile={profile} conta={conta!==null&&conta.origem!=='convidado'} onProfile={muda=>setProfile(p=>{const n=muda(p);if(n!==p)save('profile',n);return n;})} onRanking={()=>{setRankingInicial('conquistas');navigate('ranking');}} onDesafio={jogarDesafio}/>}
       {screen==='ranking'&&<RankingScreen dono={dono} inicial={rankingInicial} handle={profile.publicHandle} conta={conta!==null&&conta.origem!=='convidado'} onConta={()=>navigate('conta')} recorde={profile.recordePontos??0}/>}

@@ -31,6 +31,8 @@ interface Props {
   /** Abrir já numa conversa (vindo do aviso de mensagem nova). */
   abrirCom?: string | null;
   onDetails: (id: string) => void;
+  /** Desafiar no PvP (devolve o erro em texto, ou null quando a partida abriu). */
+  onDesafiar?: (id: string) => Promise<string | null>;
 }
 
 const som = (nome: 'toque' | 'pronto') => battleAudio.sound(nome, PRIORIDADE.interface);
@@ -61,7 +63,9 @@ function Titulo({ conquistas }: { conquistas: number }) {
  * O cartão do jogador
  * ------------------------------------------------------------------------- */
 
-function CartaoDoJogador({ jogador, lugar, agora, onMensagem, onDetails, onClose }: { jogador: Jogador; lugar?: number; agora: number; onMensagem: () => void; onDetails: (id: string) => void; onClose: () => void }) {
+function CartaoDoJogador({ jogador, lugar, agora, onMensagem, onDetails, onClose, onDesafiar }: { jogador: Jogador; lugar?: number; agora: number; onMensagem: () => void; onDetails: (id: string) => void; onClose: () => void; onDesafiar?: (id: string) => Promise<string | null> }) {
+  const [desafiando, setDesafiando] = useState(false);
+  const [erroDoDesafio, setErroDoDesafio] = useState('');
   const ref = useRef<HTMLDialogElement>(null);
   useEffect(() => { const d = ref.current; d?.showModal(); return () => d?.close(); }, []);
   const st = statusDe(jogador, agora), t = tituloDe(jogador.conquistas).atual;
@@ -86,8 +90,11 @@ function CartaoDoJogador({ jogador, lugar, agora, onMensagem, onDetails, onClose
       </div>}
       <div className="cm-cartao-acoes">
         <button className="primary" onClick={onMensagem}><MessageCircle size={18} />Mandar mensagem</button>
-        <button className="secondary cm-em-breve" disabled><Swords size={18} />Desafiar<em><Lock size={11} />PvP em breve</em></button>
+        {onDesafiar
+          ? <button className="secondary cm-desafiar" disabled={desafiando} onClick={() => { setDesafiando(true); setErroDoDesafio(''); void onDesafiar(jogador.id).then((e) => { if (e) { setErroDoDesafio(e); setDesafiando(false); } }); }}><Swords size={18} />{desafiando ? 'Desafiando…' : 'Desafiar no PvP'}</button>
+          : <button className="secondary cm-em-breve" disabled><Swords size={18} />Desafiar<em><Lock size={11} />PvP com conta</em></button>}
       </div>
+      {erroDoDesafio && <p className="cm-erro-desafio">{erroDoDesafio}</p>}
     </div>
   </dialog>;
 }
@@ -312,7 +319,7 @@ function Chat({ servico, euId, com, porId, lugarDe, agora, onPerfil, onLidas }: 
  * A tela
  * ------------------------------------------------------------------------- */
 
-export function ComunidadeScreen({ servico, euId, euNome, naoLidas, onLidas, abrirCom, onDetails }: Props) {
+export function ComunidadeScreen({ servico, euId, euNome, naoLidas, onLidas, abrirCom, onDetails, onDesafiar }: Props) {
   const [aba, setAba] = useState<Aba>(abrirCom ? 'privadas' : 'global');
   const [conversa, setConversa] = useState<string | null>(abrirCom ?? null);
   const [jogadores, setJogadores] = useState<Jogador[]>([]);
@@ -412,6 +419,6 @@ export function ComunidadeScreen({ servico, euId, euNome, naoLidas, onLidas, abr
       })}
     </div>}
 
-    {jogadorDoPerfil && <CartaoDoJogador jogador={jogadorDoPerfil} lugar={lugarDe.get(jogadorDoPerfil.id)} agora={agora} onDetails={onDetails} onClose={() => setPerfil(null)} onMensagem={() => abrirConversa(jogadorDoPerfil.id)} />}
+    {jogadorDoPerfil && <CartaoDoJogador jogador={jogadorDoPerfil} lugar={lugarDe.get(jogadorDoPerfil.id)} agora={agora} onDetails={onDetails} onClose={() => setPerfil(null)} onMensagem={() => abrirConversa(jogadorDoPerfil.id)} onDesafiar={jogadorDoPerfil.id === euId ? undefined : onDesafiar} />}
   </section>;
 }

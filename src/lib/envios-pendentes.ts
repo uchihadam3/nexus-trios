@@ -11,7 +11,8 @@ import { read, save } from './storage';
  * fila: reenviar não mudaria a resposta.
  */
 /** `desistiu`/`lutas`: a jornada fechou pelo botão Desistir depois de `lutas` lutas (conta como perdida). */
-export interface EnvioPendente { runId: string; digest: string; dicas: boolean; em: string; vencidas?: number; desistiu?: boolean; lutas?: number }
+/** `pontos`: os pontos que a tela mostrou (o ranking nunca registra mais que isso). */
+export interface EnvioPendente { runId: string; digest: string; dicas: boolean; em: string; vencidas?: number; desistiu?: boolean; lutas?: number; pontos?: number }
 const CHAVE = 'envios-pendentes';
 const DEFINITIVO = /já validada|já enviada|inexistente|expirada|inválid/i;
 

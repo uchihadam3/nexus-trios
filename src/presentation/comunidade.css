@@ -211,6 +211,8 @@
 .cm-cartao-acoes{display:grid;gap:8px;margin-top:18px}
 .cm-cartao-acoes button{justify-content:center;min-height:50px;gap:8px}
 .cm-em-breve{position:relative;opacity:.75}
+.cm-desafiar{color:#2a1a00 !important;background:linear-gradient(180deg,#ffe39a,#ffb84d) !important;box-shadow:0 0 18px #ffb84d55 !important;font-weight:900}
+.cm-erro-desafio{margin:8px 0 0;font-size:12.5px;font-weight:800;color:#ffb0a4;text-align:center}
 .cm-em-breve em{display:inline-flex;align-items:center;gap:3px;margin-left:6px;padding:2px 7px;border-radius:99px;font-style:normal;font-size:10.5px;font-weight:900;color:#ffd36b;background:#ffd36b1f}
 
 @media (min-width:700px){.cm-tela{padding-top:10px}}

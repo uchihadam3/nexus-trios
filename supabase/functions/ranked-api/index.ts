@@ -3,6 +3,7 @@ import {characters} from '../../../src/data/characters.ts';
 import {generateCampaign} from '../../../src/engine/campaign.ts';
 import {BALANCE_VERSION,ENGINE_VERSION,EPOCA_DO_RANKING,replayRanked,rosterFingerprint,runDigest} from '../../../src/engine/ranked.ts';
 import {META_DAS_DICAS,ehDono} from '../../../src/lib/dicas-liberadas.ts';
+import {acaoPvp} from './pvp.ts';
 
 declare const Deno:{env:{get:(name:string)=>string|undefined};serve:(handler:(request:Request)=>Response|Promise<Response>)=>unknown};
 declare const EdgeRuntime:{waitUntil:(p:Promise<unknown>)=>void}|undefined;
@@ -176,7 +177,7 @@ const DIAS_PENDENTES=7;
  */
 const ESPERA_DO_ENVIO_MS=2*60000,PARADA_MS=24*3600000;
 type Jornada={id:string;player_id:string;team_ids:string[];seed:number;mode:Mode;period_key:string;engine_version:string;roster_fingerprint:string;balance_version:string};
-async function validar(run:Jornada,dicas:boolean,digestDoCliente?:string,vencidasDoCliente?:number,ate?:number){
+async function validar(run:Jornada,dicas:boolean,digestDoCliente?:string,vencidasDoCliente?:number,ate?:number,pontosDoCliente?:number){
   // desistiu antes de terminar a primeira luta: não há pontos; a jornada fecha sem entrar nos Top 3
   if(ate===0){
     const {data:saved,error}=await admin.from('ranked_runs').update({verified:true,finished_at:new Date().toISOString(),encounters_cleared:0,score:0,summary:{desistiu:true,lutas:0}}).eq('id',run.id).eq('verified',false).select('id').maybeSingle();
@@ -184,6 +185,13 @@ async function validar(run:Jornada,dicas:boolean,digestDoCliente?:string,vencida
     return {verified:true,score:0,progress:0,daily:null,weekly:null,season:null};
   }
   const livre=run.seed!==await seedFor(run.mode,String(run.period_key)),verified=replayRanked(run.team_ids,run.seed,livre,dicas,ate),digest=await runDigest(run.id,run.team_ids,run.seed,verified.summaries.map(s=>s.won));
+  /*
+   * Nunca mais pontos do que o jogador viu na tela (pedido do jogador: "tá me colocando ponto a mais do que eu tô
+   * fazendo"). O servidor refaz as lutas com a versão dele; se o aparelho estava numa versão anterior (o app guarda a
+   * versão velha até atualizar), as regras dos pontos podem ser outras. Entra o menor dos dois: o do servidor impede
+   * inventar pontos, o do aparelho impede somar o que a pessoa não fez.
+   */
+  const score=pontosDoCliente!==undefined?Math.min(verified.score,pontosDoCliente):verified.score;
   const divergente=digestDoCliente!==undefined&&digestDoCliente!==digest,outraVersao=run.engine_version!==ENGINE_VERSION||run.roster_fingerprint!==rosterFingerprint()||run.balance_version!==BALANCE_VERSION;
   /*
    * O Top 3 é registrado *antes* de a partida ser marcada como validada.
@@ -194,18 +202,18 @@ async function validar(run:Jornada,dicas:boolean,digestDoCliente?:string,vencida
    * partida aberta e o jogador pode reenviar; e reenviar é seguro, porque
    * o mesmo trio com a mesma pontuação só "mantém" a entrada.
    */
-  const registrar=async(escopo:Escopo,chave:string)=>{const {data,error}=await admin.rpc('registrar_no_top3',{p_player:run.player_id,p_scope:escopo,p_period:chave,p_team:run.team_ids,p_run:run.id,p_score:verified.score,p_cleared:verified.encountersCleared});if(error)throw error;return data;};
+  const registrar=async(escopo:Escopo,chave:string)=>{const {data,error}=await admin.rpc('registrar_no_top3',{p_player:run.player_id,p_scope:escopo,p_period:chave,p_team:run.team_ids,p_run:run.id,p_score:score,p_cleared:verified.encountersCleared});if(error)throw error;return data;};
   // um ranking só: a mesma jornada entra em Hoje, Semana e Geral (no dia e na semana em que foi validada)
   const top3={periodo:await registrar('daily',chaveDo('daily')),semana:await registrar('weekly',chaveDo('weekly')),temporada:await registrar('season',chaveDo('season'))};
   // as 10 lutas terminadas liberam as Conquistas do trio (antes de validar, pelo mesmo motivo: reenviar é seguro)
   // as Conquistas seguem o que o jogador viu na tela: 10 vitórias no aparelho liberam, mesmo que o replay discorde
   const conquistas=verified.encountersCleared===10||vencidasDoCliente===10?await registrarConquistas(run.player_id,run.team_ids):null;
-  const {data:saved,error:saveError}=await admin.from('ranked_runs').update({verified:true,finished_at:new Date().toISOString(),encounters_cleared:verified.encountersCleared,score:verified.score,summary:{highlights:verified.highlights,outcomes:verified.summaries.map(s=>s.won),livre,dicas,...(ate!==undefined?{desistiu:true,lutas:ate}:{}),...(divergente?{divergente}:{}),...(outraVersao?{versaoDoInicio:run.engine_version}:{})},digest}).eq('id',run.id).eq('verified',false).select('id').maybeSingle();
+  const {data:saved,error:saveError}=await admin.from('ranked_runs').update({verified:true,finished_at:new Date().toISOString(),encounters_cleared:verified.encountersCleared,score,summary:{highlights:verified.highlights,...(score!==verified.score?{pontosDoServidor:verified.score}:{}),outcomes:verified.summaries.map(s=>s.won),livre,dicas,...(ate!==undefined?{desistiu:true,lutas:ate}:{}),...(divergente?{divergente}:{}),...(outraVersao?{versaoDoInicio:run.engine_version}:{})},digest}).eq('id',run.id).eq('verified',false).select('id').maybeSingle();
   if(saveError)throw saveError;if(!saved)throw new JaValidada();
   const player=await profile(run.player_id),xp=(player?.xp??0)+30+verified.encountersCleared*30+(verified.encountersCleared===10?250:0);
   await admin.from('players').update({xp,nexus_level:Math.floor(Math.sqrt(xp/100))+1,updated_at:new Date().toISOString()}).eq('id',run.player_id);
   const daily=await board(run.player_id,'daily'),weekly=await board(run.player_id,'weekly'),season=await board(run.player_id,'season');
-  return {verified:true,score:verified.score,progress:verified.encountersCleared,daily:daily.mine?.position??null,weekly:weekly.mine?.position??null,season:season.mine?.position??null,top3,conquistas};
+  return {verified:true,score,progress:verified.encountersCleared,daily:daily.mine?.position??null,weekly:weekly.mine?.position??null,season:season.mine?.position??null,top3,conquistas};
 }
 class JaValidada extends Error{constructor(){super('Jornada já enviada.');}}
 /** O resultado de uma jornada que já entrou no ranking: reenviar dá a mesma resposta, sem erro. */
@@ -214,6 +222,8 @@ async function jaNoRanking(run:{player_id:string;score:number|null;encounters_cl
   return {verified:true,score:run.score??0,progress:run.encounters_cleared??0,daily:daily.mine?.position??null,weekly:weekly.mine?.position??null,season:season.mine?.position??null};
 }
 const vencidasDe=(x:unknown)=>typeof x==='number'&&Number.isInteger(x)&&x>=0&&x<=10?x:undefined;
+/** Os pontos que o aparelho mostrou (o teto do que entra no ranking). */
+const pontosDe=(x:unknown)=>typeof x==='number'&&Number.isFinite(x)&&x>=0&&x<1e9?Math.round(x):undefined;
 /*
  * Coloca no ranking a jornada terminada mais antiga cujo envio não chegou (uma por pedido: o replay das 10 lutas é
  * pesado). Roda em segundo plano nos pedidos de todo mundo — abrir o ranking, começar uma jornada —, então a fila
@@ -228,7 +238,7 @@ async function validarTerminadas(){
   const run=(data??[]).find(r=>r.summary?.fim===true?quando(r)<agora-ESPERA_DO_ENVIO_MS:quando(r)<agora-PARADA_MS);
   if(!run)return;
   const ate=run.summary?.desistiu===true||run.summary?.fim!==true?vencidasDe(run.summary?.progresso):undefined;
-  try{await validar(run,run.summary?.dicas===true,undefined,vencidasDe(run.summary?.vencidas),ate);}catch(e){if(!(e instanceof JaValidada))throw e;}
+  try{await validar(run,run.summary?.dicas===true,undefined,vencidasDe(run.summary?.vencidas),ate,pontosDe(run.summary?.pontos));}catch(e){if(!(e instanceof JaValidada))throw e;}
 }
 /** Trabalho que não precisa atrasar a resposta: depois de responder, quando o servidor deixa. */
 const emSegundoPlano=(tarefa:()=>Promise<unknown>)=>{const p=tarefa().catch(e=>console.error('ranked-api fundo',e instanceof Error?e.message:String(e)));if(typeof EdgeRuntime!=='undefined'&&EdgeRuntime?.waitUntil)EdgeRuntime.waitUntil(p);};
@@ -285,14 +295,14 @@ Deno.serve(async (request:Request)=>{
       if(run.verified)return json(await jaNoRanking(run),200,origin);
       // o aparelho reenvia sozinho o que não chegou (src/lib/envios-pendentes.ts): vale até 7 dias depois de começar
       if(new Date(run.started_at).getTime()<Date.now()-DIAS_PENDENTES*86400000)return fail('Jornada expirada.',410,origin);
-      try{return json(await validar(run,input.dicas===true,input.digest,vencidasDe(input.vencidas),input.desistiu===true?vencidasDe(input.lutas)??0:undefined),200,origin);}
+      try{return json(await validar(run,input.dicas===true,input.digest,vencidasDe(input.vencidas),input.desistiu===true?vencidasDe(input.lutas)??0:undefined,pontosDe(input.pontos)),200,origin);}
       catch(e){if(!(e instanceof JaValidada))throw e;const {data:agora}=await admin.from('ranked_runs').select('*').eq('id',run.id).single();return json(await jaNoRanking(agora),200,origin);}
     }
     /* Depois de cada luta: quantas lutas já foram e se a jornada acabou (veja validarTerminadas). */
     if(input.action==='progresso'){
       const lutas=vencidasDe(input.lutas),vencidas=vencidasDe(input.vencidas);
       if(typeof input.runId!=='string'||!/^[0-9a-f-]{36}$/i.test(input.runId)||lutas===undefined)return fail('Envio inválido.',422,origin);
-      const {error}=await admin.from('ranked_runs').update({summary:{progresso:lutas,vencidas:vencidas??null,fim:input.fim===true||input.desistiu===true,desistiu:input.desistiu===true,dicas:input.dicas===true,em:new Date().toISOString()}}).eq('id',input.runId).eq('player_id',user.id).eq('verified',false);
+      const {error}=await admin.from('ranked_runs').update({summary:{progresso:lutas,vencidas:vencidas??null,...(pontosDe(input.pontos)!==undefined?{pontos:pontosDe(input.pontos)}:{}),fim:input.fim===true||input.desistiu===true,desistiu:input.desistiu===true,dicas:input.dicas===true,em:new Date().toISOString()}}).eq('id',input.runId).eq('player_id',user.id).eq('verified',false);
       if(error)throw error;
       return json({ok:true},200,origin);
     }
@@ -334,7 +344,7 @@ Deno.serve(async (request:Request)=>{
       if(!run)return fail('Jornada inexistente.',404,origin);if(run.verified)return fail('Jornada já validada.',409,origin);
       // o jogador não mandou se usou as Dicas: quem já liberou o botão conta como se tivesse usado (o desconto, nunca o bônus)
       const {data:recorde}=await admin.from('ranked_runs').select('score').eq('player_id',run.player_id).eq('verified',true).order('score',{ascending:false}).limit(1).maybeSingle();
-      return json(await validar(run,(recorde?.score??0)>=META_DAS_DICAS,undefined,vencidasDe(run.summary?.vencidas),run.summary?.desistiu===true?vencidasDe(run.summary?.progresso):undefined),200,origin);
+      return json(await validar(run,(recorde?.score??0)>=META_DAS_DICAS,undefined,vencidasDe(run.summary?.vencidas),run.summary?.desistiu===true?vencidasDe(run.summary?.progresso):undefined,pontosDe(run.summary?.pontos)),200,origin);
     }
     /* "MEUS RECORDES: histórico completo." Todas as partidas validadas da conta. */
     if(input.action==='historico'){
@@ -342,6 +352,8 @@ Deno.serve(async (request:Request)=>{
       if(error)throw error;
       return json({runs:(data??[]).map(r=>({id:r.id,mode:r.summary?.livre?'free':r.mode,period:r.period_key,score:r.score,progress:r.encounters_cleared,team:r.team_ids,date:r.finished_at,dicas:r.summary?.dicas===true}))},200,origin);
     }
+    /* PvP online (./pvp.ts): desafio, times, escolha secreta, luta e rating */
+    if(input.action==='pvp'){const r=await acaoPvp(admin,user.id,input);return json(r.body,r.status,origin);}
     if(input.action==='conquistas')return json({conquistas:await minhasConquistas(user.id),de:characters.length},200,origin);
     if(input.action==='leaderboard'&&input.mode==='conquistas'){
       const pagina=typeof input.pagina==='number'&&Number.isInteger(input.pagina)&&input.pagina>=0&&input.pagina<10000?input.pagina:0;

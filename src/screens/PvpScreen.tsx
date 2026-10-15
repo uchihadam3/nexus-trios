@@ -1,15 +1,20 @@
-import { useEffect, useMemo, useRef, useState, type CSSProperties } from 'react';
-import { ArrowLeft, Check, Crown, Lock, RotateCcw, Search, Shield, Swords, Trophy, Users, Wand2, X, Zap } from 'lucide-react';
+import { useEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode } from 'react';
+import { ArrowDownAZ, ArrowLeft, Check, Clock, Globe2, Layers, SlidersHorizontal, Sparkles, Crown, Hourglass, Lock, LogOut, RotateCcw, Search, Shield, Swords, Trophy, Users, Wand2, X, Zap } from 'lucide-react';
 import { byId, characters } from '../data/characters';
 import { Portrait } from '../components/Portrait';
 import { ArenaDoPvp } from '../components/ArenaDoPvp';
 import { combosDoTrio } from '../engine/combos';
-import { MINIMO_DA_COLECAO, NPCS, escolhaDoNpc, problemaDosTimes, sementeDaRodada, sugerirTimes, timesDoNpc, timesLivres, vencedorDaPartida, vitoriasDosTimes,
+import { MINIMO_DA_COLECAO, NPCS, duracaoNaTela, escolhaDoNpc, problemaDosTimes, sementeDaRodada, timesDoNpc, timesLivres, vencedorDaPartida, vitoriasDosTimes,
   type Lado, type NivelNpc, type Npc, type PartidaPvp, type Times } from '../engine/pvp';
 import { notaDoTrio } from '../presentation/dicas-do-trio';
 import { battleAudio } from '../lib/audio';
 import { PRIORIDADE } from '../audio/cues';
 import { read, save, type Settings } from '../lib/storage';
+import { diferencaDoRelogio, textoDoErroPvp, type JogadorPvp, type RankingPvp, type RespostaPvp, type ServicoPvp, type VistaPvp } from '../lib/pvp-online';
+import { corDoNome } from '../lib/comunidade';
+import { Avatar } from '../components/AvatarDaComunidade';
+import { FAMILIA_DA_IDENTIDADE, ICONE_DA_IDENTIDADE } from '../components/IdentityChips';
+import { familiaDaIdentidade, identidadesDe, ordemDasIdentidades, type Identidade } from '../presentation/identities';
 import '../presentation/pvp.css';
 import '../presentation/ui-fx.css';
 
@@ -21,7 +26,7 @@ import '../presentation/ui-fx.css';
  *  4. a cada rodada, escolher em segredo um time seu (o NPC escolhe o dele), o VS, e a luta em 2×;
  *  5. o time que vence fica marcado; vence a partida quem ganhar com os 3 times.
  * Treino não conta para o ranking nem para o rating: só o placar contra cada NPC, guardado no aparelho.
- * O Desafio online (outra pessoa) usa estas mesmas telas.
+ * O Desafio online (outra pessoa, PartidaOnline) usa estas mesmas telas; quem manda é o servidor (src/lib/pvp-online.ts).
  */
 
 interface Guardado { treino: Record<string, { v: number; d: number }>; times?: string[][] }
@@ -75,24 +80,27 @@ function CartaoDoTime({ time, i, lado, venceu, escolhido, bloqueado, onClick, co
   </Tag>;
 }
 
-function Placar({ partida, npc }: { partida: PartidaPvp; npc: Npc }) {
+function Placar({ partida, rival }: { partida: Pick<PartidaPvp, 'rodadas'>; rival: Oponente }) {
   const v = vitoriasDosTimes(partida);
   return <div className="pv-placar">
     <span className="pv-placar-lado eu"><b>VOCÊ</b><span>{v.eu.map((x, i) => <i key={i} className={x ? 'on' : ''}><Trophy size={14} /></i>)}</span></span>
     <span className="pv-placar-meio"><small>RODADA</small><b>{partida.rodadas.length + 1}</b></span>
-    <span className="pv-placar-lado rival" style={{ '--npc': npc.cor } as CSSProperties}><b>{npc.nome.split(' ')[0]!.toUpperCase()}</b><span>{v.rival.map((x, i) => <i key={i} className={x ? 'on' : ''}><Trophy size={14} /></i>)}</span></span>
+    <span className="pv-placar-lado rival" style={{ '--npc': rival.cor } as CSSProperties}><b>{rival.nome.split(' ')[0]!.toUpperCase()}</b><span>{v.rival.map((x, i) => <i key={i} className={x ? 'on' : ''}><Trophy size={14} /></i>)}</span></span>
   </div>;
 }
 
 function AvatarDoNpc({ npc, tamanho = 64 }: { npc: Npc; tamanho?: number }) {
   return <span className="pv-npc-avatar" style={{ '--npc': npc.cor, '--t': `${tamanho}px` } as CSSProperties}><Portrait character={byId[npc.avatar]!} /><i>{npc.nivel}</i></span>;
 }
+/** Quem está do outro lado: um NPC do treino ou uma pessoa (online). As telas da partida são as mesmas. */
+export interface Oponente { nome: string; cor: string; avatar: (tamanho: number) => ReactNode; fala?: string }
+const oponenteDoNpc = (n: Npc): Oponente => ({ nome: n.nome, cor: n.cor, avatar: (t) => <AvatarDoNpc npc={n} tamanho={t} />, fala: n.fala });
 
 /* ---------------------------------------------------------------------------
  * 1. O lobby
  * ------------------------------------------------------------------------- */
 
-function Lobby({ colecao, guardado, onTreino, onJogar }: { colecao: string[]; guardado: Guardado; onTreino: (n: Npc) => void; onJogar: () => void }) {
+function Lobby({ colecao, guardado, onTreino, onJogar, online }: { colecao: string[]; guardado: Guardado; onTreino: (n: Npc) => void; onJogar: () => void; online?: Online | null }) {
   const falta = Math.max(0, MINIMO_DA_COLECAO - colecao.length);
   return <section className="pv-lobby">
     <header className="pv-topo">
@@ -108,11 +116,11 @@ function Lobby({ colecao, guardado, onTreino, onJogar }: { colecao: string[]; gu
       <button className="primary" onClick={onJogar}>Jogar</button>
     </div>}
 
-    <div className="pv-modo online">
+    {online ? <CartaoOnline online={online} /> : <div className="pv-modo online">
       <span className="pv-modo-icone"><Users size={24} /></span>
-      <div><b>DESAFIO ONLINE</b><small>Desafie alguém pela Comunidade. Rating de xadrez e ranking com vitórias e derrotas.</small></div>
-      <em className="pv-em-breve"><Lock size={11} />em breve</em>
-    </div>
+      <div><b>DESAFIO ONLINE</b><small>Entre na sua conta para desafiar alguém pela Comunidade e subir no ranking.</small></div>
+      <em className="pv-em-breve"><Lock size={11} />com conta</em>
+    </div>}
 
     <h2 className="pv-secao"><Shield size={16} />TREINO <small>não conta para o ranking nem para o rating</small></h2>
     <div className="pv-npcs">
@@ -132,19 +140,129 @@ function Lobby({ colecao, guardado, onTreino, onJogar }: { colecao: string[]; gu
   </section>;
 }
 
+
+/**
+ * "Montar sozinho": 3 times variados, cada um com uma força sorteada de 2 a 5 estrelas (a cada toque sai outro jeito),
+ * para experimentar combinações diferentes em vez de sempre os mesmos times fortes.
+ */
+function timesAoAcaso(colecao: string[]): string[][] | null {
+  if (colecao.length < MINIMO_DA_COLECAO) return null;
+  const livres = [...colecao], times: string[][] = [];
+  for (let k = 0; k < 3; k++) {
+    const alvo = 2 + Math.floor(Math.random() * 4);
+    let melhor: string[] | null = null, perto = Infinity;
+    for (let i = 0; i < 300 && perto > 0; i++) {
+      const p = [...livres], t: string[] = [];
+      while (t.length < 3) t.push(p.splice(Math.floor(Math.random() * p.length), 1)[0]!);
+      const d = Math.abs(estrelasDaForca(forcaDoTime(t)) - alvo);
+      if (d < perto) { melhor = t; perto = d; }
+    }
+    times.push(melhor!);
+    for (const id of melhor!) livres.splice(livres.indexOf(id), 1);
+  }
+  return times;
+}
+
+/* ---------------------------------------------------------------------------
+ * Os filtros do álbum: universo, função (as etiquetas do Draft) e a ordem
+ * ------------------------------------------------------------------------- */
+
+type Ordem = 'nome' | 'universo' | 'funcao';
+interface Filtro { ordem: Ordem; universos: string[]; funcoes: Identidade[]; esconderUsados: boolean }
+const FILTRO_VAZIO: Filtro = { ordem: 'nome', universos: [], funcoes: [], esconderUsados: false };
+const semAcento = (t: string) => t.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+
+function filtrar(colecao: string[], busca: string, f: Filtro) {
+  const q = semAcento(busca.trim());
+  return colecao.map((id) => byId[id]!).filter((c) =>
+    (!q || semAcento(c.name).includes(q) || semAcento(c.universe).includes(q))
+    && (!f.universos.length || f.universos.includes(c.universe))
+    && (!f.funcoes.length || f.funcoes.every((x) => identidadesDe(c).includes(x))));
+}
+type Personagem = (typeof characters)[number];
+function agrupar(lista: Personagem[], ordem: Ordem): { titulo: string; lista: Personagem[] }[] {
+  const porNome = [...lista].sort((a, b) => a.name.localeCompare(b.name));
+  if (ordem === 'nome') return [{ titulo: '', lista: porNome }];
+  const mapa = new Map<string, Personagem[]>();
+  for (const c of porNome) {
+    const chave = ordem === 'universo' ? c.universe : (ordemDasIdentidades.find((x) => identidadesDe(c).includes(x)) ?? 'Outros');
+    mapa.set(chave, [...(mapa.get(chave) ?? []), c]);
+  }
+  const chaves = [...mapa.keys()].sort((a, b) => ordem === 'universo' ? a.localeCompare(b) : ordemDasIdentidades.indexOf(a as Identidade) - ordemDasIdentidades.indexOf(b as Identidade));
+  return chaves.map((k) => ({ titulo: k, lista: mapa.get(k)! }));
+}
+
+function PainelDeFiltros({ colecao, filtro, total, onFiltro, onFechar }: { colecao: string[]; filtro: Filtro; total: number; onFiltro: (f: Filtro) => void; onFechar: () => void }) {
+  const [buscaUni, setBuscaUni] = useState('');
+  const [todosUni, setTodosUni] = useState(false);
+  const universos = useMemo(() => {
+    const n = new Map<string, number>();
+    for (const id of colecao) { const u = byId[id]!.universe; n.set(u, (n.get(u) ?? 0) + 1); }
+    return [...n.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
+  }, [colecao]);
+  const funcoes = useMemo(() => {
+    const n = new Map<Identidade, number>();
+    for (const id of colecao) for (const x of identidadesDe(id)) n.set(x, (n.get(x) ?? 0) + 1);
+    return n;
+  }, [colecao]);
+  const q = semAcento(buscaUni.trim());
+  const unisVisiveis = universos.filter(([u]) => !q || semAcento(u).includes(q));
+  const mostrados = todosUni || q ? unisVisiveis : unisVisiveis.slice(0, 18);
+  const alterna = <T,>(lista: T[], x: T) => (lista.includes(x) ? lista.filter((y) => y !== x) : [...lista, x]);
+  const ativos = filtro.universos.length + filtro.funcoes.length + (filtro.esconderUsados ? 1 : 0);
+  const familias = Object.keys(FAMILIA_DA_IDENTIDADE) as (keyof typeof FAMILIA_DA_IDENTIDADE)[];
+  return <div className="pv-painel-fundo" onClick={(e) => { if (e.target === e.currentTarget) onFechar(); }}>
+    <section className="pv-painel" role="dialog" aria-label="Filtros">
+      <span className="pv-painel-alca" aria-hidden="true" />
+      <header><SlidersHorizontal size={20} /><b>Filtros</b>{ativos > 0 && <button className="pv-painel-limpar" onClick={() => onFiltro(FILTRO_VAZIO)}>Limpar tudo</button>}<button className="icon-button" onClick={onFechar} aria-label="Fechar"><X size={18} /></button></header>
+
+      <h4><ArrowDownAZ size={14} />ORGANIZAR POR</h4>
+      <div className="pv-ordem">
+        {([['nome', 'Nome', ArrowDownAZ], ['universo', 'Universo', Globe2], ['funcao', 'Função', Layers]] as const).map(([v, nome, Icone]) =>
+          <button key={v} className={filtro.ordem === v ? 'on' : ''} onClick={() => { onFiltro({ ...filtro, ordem: v }); som('toque'); }}><Icone size={18} />{nome}</button>)}
+      </div>
+      <label className="pv-livres"><input type="checkbox" checked={filtro.esconderUsados} onChange={(e) => onFiltro({ ...filtro, esconderUsados: e.target.checked })} /><span className="pv-chave" aria-hidden="true" />Esconder quem já está num time</label>
+
+      <h4><Sparkles size={14} />FUNÇÃO <small>o que ele faz na luta</small></h4>
+      {familias.map((fam) => {
+        const lista = ordemDasIdentidades.filter((x) => familiaDaIdentidade[x] === fam && funcoes.has(x));
+        if (!lista.length) return null;
+        const { nome, cor } = FAMILIA_DA_IDENTIDADE[fam];
+        return <div key={fam} className="pv-familia" style={{ '--cor': cor } as CSSProperties}>
+          <small>{nome}</small>
+          <div className="pv-chips">{lista.map((x) => { const Icone = ICONE_DA_IDENTIDADE[x]; const on = filtro.funcoes.includes(x);
+            return <button key={x} className={on ? 'on' : ''} onClick={() => { onFiltro({ ...filtro, funcoes: alterna(filtro.funcoes, x) }); som('toque'); }}><Icone size={14} />{x}<i>{funcoes.get(x)}</i></button>; })}</div>
+        </div>;
+      })}
+
+      <h4><Globe2 size={14} />UNIVERSO <small>{universos.length} na sua coleção</small></h4>
+      {universos.length > 10 && <label className="pv-busca pv-busca-uni"><Search size={14} /><input value={buscaUni} onChange={(e) => setBuscaUni(e.target.value)} placeholder="Procurar universo" aria-label="Procurar universo" /></label>}
+      <div className="pv-chips pv-chips-uni">{mostrados.map(([u, n]) => { const on = filtro.universos.includes(u);
+        return <button key={u} className={on ? 'on' : ''} onClick={() => { onFiltro({ ...filtro, universos: alterna(filtro.universos, u) }); som('toque'); }}>{u}<i>{n}</i></button>; })}</div>
+      {!todosUni && !q && unisVisiveis.length > 18 && <button className="pv-ver-todos" onClick={() => setTodosUni(true)}>Ver os {unisVisiveis.length} universos</button>}
+
+      <footer><button className="primary pv-grande" onClick={onFechar}><Check size={20} />Ver {total} personage{total === 1 ? 'm' : 'ns'}</button></footer>
+    </section>
+  </div>;
+}
+
 /* ---------------------------------------------------------------------------
  * 2. Montar os 3 times
  * ------------------------------------------------------------------------- */
 
-function Montar({ npc, colecao, inicial, onPronto, onVoltar, onDetails }: { npc: Npc; colecao: string[]; inicial?: string[][]; onPronto: (t: Times) => void; onVoltar: () => void; onDetails: (id: string) => void }) {
+function Montar({ rival, colecao, inicial, onPronto, onVoltar, onDetails, prazo }: { rival: Oponente; colecao: string[]; inicial?: string[][]; onPronto: (t: Times) => void; onVoltar: () => void; onDetails: (id: string) => void; prazo?: ReactNode }) {
   const valido = (t?: string[][]) => !!t && t.length === 3 && t.every((x) => x.every((id) => colecao.includes(id)));
   const [times, setTimes] = useState<string[][]>(() => (valido(inicial) ? inicial!.map((t) => [...t]) : [[], [], []]));
   const [ativo, setAtivo] = useState(() => Math.max(0, times.findIndex((t) => t.length < 3)));
   const [busca, setBusca] = useState('');
+  const [filtro, setFiltro] = useState<Filtro>(FILTRO_VAZIO);
+  const [painel, setPainel] = useState(false);
   const usados = new Map(times.flatMap((t, i) => t.map((id) => [id, i] as const)));
   const cheios = times.every((t) => t.length === 3);
   const problema = cheios ? problemaDosTimes(times, new Set(colecao)) : null;
-  const lista = useMemo(() => colecao.map((id) => byId[id]!).filter((c) => !busca.trim() || c.name.toLowerCase().includes(busca.trim().toLowerCase())).sort((a, b) => a.name.localeCompare(b.name)), [colecao, busca]);
+  const lista = useMemo(() => filtrar(colecao, busca, filtro), [colecao, busca, filtro]);
+  const grupos = useMemo(() => agrupar(lista, filtro.ordem), [lista, filtro.ordem]);
+  const ativos = filtro.universos.length + filtro.funcoes.length + (filtro.esconderUsados ? 1 : 0);
 
   const tocar = (id: string) => {
     const onde = usados.get(id);
@@ -156,14 +274,15 @@ function Montar({ npc, colecao, inicial, onPronto, onVoltar, onDetails }: { npc:
     if (novo[alvo]!.length === 3) { const prox = novo.findIndex((t) => t.length < 3); if (prox >= 0) alvo = prox; }
     setAtivo(alvo);
   };
-  const sozinho = () => { const s = sugerirTimes(colecao, (Date.now() >>> 0) ^ 0x9e37); if (s) { setTimes(s.map((t) => [...t])); som('pronto'); } };
+  const sozinho = () => { const s = timesAoAcaso(colecao); if (s) { setTimes(s); setAtivo(0); som('pronto'); } };
 
   return <section className="pv-montar">
     <header className="pv-subtopo">
       <button className="icon-button" onClick={onVoltar} aria-label="Voltar"><ArrowLeft size={20} /></button>
-      <div><small>CONTRA {npc.nome.toUpperCase()}</small><h1>Monte seus 3 times</h1></div>
-      <AvatarDoNpc npc={npc} tamanho={44} />
+      <div><small>CONTRA {rival.nome.toUpperCase()}</small><h1>Monte seus 3 times</h1></div>
+      {rival.avatar(44)}
     </header>
+    {prazo}
     <div className="pv-slots">
       {times.map((t, i) => {
         const forca = t.length === 3 ? forcaDoTime(t) : 0;
@@ -174,17 +293,28 @@ function Montar({ npc, colecao, inicial, onPronto, onVoltar, onDetails }: { npc:
       })}
     </div>
     <div className="pv-ferramentas">
-      <label className="pv-busca"><Search size={16} /><input value={busca} onChange={(e) => setBusca(e.target.value)} placeholder={`Procurar na coleção (${colecao.length})`} aria-label="Procurar personagem" /></label>
-      <button className="secondary pv-sozinho" onClick={sozinho}><Wand2 size={16} />Montar sozinho</button>
+      <label className="pv-busca"><Search size={16} /><input value={busca} onChange={(e) => setBusca(e.target.value)} placeholder={`Procurar entre ${colecao.length} personagens`} aria-label="Procurar personagem" />{busca && <button className="pv-limpar-busca" onClick={() => setBusca('')} aria-label="Limpar a busca"><X size={14} /></button>}</label>
+      <button className={`secondary pv-filtros-botao ${ativos ? 'ativo' : ''}`} onClick={() => { setPainel(true); som('toque'); }}><SlidersHorizontal size={16} />Filtros{ativos > 0 && <i>{ativos}</i>}</button>
+      <button className="secondary pv-sozinho" onClick={sozinho}><Wand2 size={16} />Montar ao acaso</button>
     </div>
-    <div className="pv-album">
-      {lista.map((c, k) => {
-        const onde = usados.get(c.id);
-        return <button key={c.id} className={`pv-carta ${onde !== undefined ? 'usada' : ''}`} onClick={() => tocar(c.id)} onContextMenu={(e) => { e.preventDefault(); onDetails(c.id); }} style={{ '--character': c.color, '--k': Math.min(k, 30) } as CSSProperties} aria-label={`${c.name}${onde !== undefined ? `, no time ${onde + 1}` : ''}`}>
-          <Portrait character={c} /><b>{c.name}</b>{onde !== undefined && <em>T{onde + 1}</em>}
-        </button>;
-      })}
-    </div>
+    {ativos > 0 && <div className="pv-filtros-ativos">
+      {filtro.funcoes.map((f) => { const Icone = ICONE_DA_IDENTIDADE[f]; return <button key={f} style={{ '--cor': FAMILIA_DA_IDENTIDADE[familiaDaIdentidade[f]].cor } as CSSProperties} onClick={() => setFiltro({ ...filtro, funcoes: filtro.funcoes.filter((x) => x !== f) })}><Icone size={12} />{f}<X size={12} /></button>; })}
+      {filtro.universos.map((u) => <button key={u} style={{ '--cor': '#8fd3ff' } as CSSProperties} onClick={() => setFiltro({ ...filtro, universos: filtro.universos.filter((x) => x !== u) })}><Globe2 size={12} />{u}<X size={12} /></button>)}
+      {filtro.esconderUsados && <button style={{ '--cor': '#c8f560' } as CSSProperties} onClick={() => setFiltro({ ...filtro, esconderUsados: false })}>Só os livres<X size={12} /></button>}
+    </div>}
+    {grupos.map((g) => <div key={g.titulo || 'todos'} className="pv-grupo">
+      {g.titulo && <h3 className="pv-grupo-titulo"><span>{g.titulo}</span><small>{g.lista.length}</small></h3>}
+      <div className="pv-album">
+        {g.lista.filter((c) => !filtro.esconderUsados || !usados.has(c.id)).map((c, k) => {
+          const onde = usados.get(c.id);
+          return <button key={c.id} className={`pv-carta ${onde !== undefined ? 'usada' : ''}`} onClick={() => tocar(c.id)} onContextMenu={(e) => { e.preventDefault(); onDetails(c.id); }} style={{ '--character': c.color, '--k': Math.min(k, 30) } as CSSProperties} aria-label={`${c.name}${onde !== undefined ? `, no time ${onde + 1}` : ''}`}>
+            <Portrait character={c} /><b>{c.name}</b>{onde !== undefined && <em>T{onde + 1}</em>}
+          </button>;
+        })}
+      </div>
+    </div>)}
+    {!lista.length && <div className="pv-nada"><Search size={28} /><b>Ninguém com esses filtros</b><button className="secondary" onClick={() => { setFiltro(FILTRO_VAZIO); setBusca(''); }}>Limpar filtros</button></div>}
+    {painel && <PainelDeFiltros colecao={colecao} filtro={filtro} total={lista.length} onFiltro={setFiltro} onFechar={() => setPainel(false)} />}
     <footer className="pv-rodape">
       {problema && <small className="pv-problema">{problema}</small>}
       <button className="primary pv-pronto" disabled={!cheios || !!problema} onClick={() => { som('pronto'); onPronto(times as Times); }}><Check size={20} />{cheios ? 'PRONTO' : `Faltam ${9 - times.flat().length}`}</button>
@@ -196,62 +326,64 @@ function Montar({ npc, colecao, inicial, onPronto, onVoltar, onDetails }: { npc:
  * 3–8. A partida
  * ------------------------------------------------------------------------- */
 
-function Apresentar({ npc, partida, onComecar }: { npc: Npc; partida: PartidaPvp; onComecar: () => void }) {
+function Apresentar({ rival, partida, onComecar }: { rival: Oponente; partida: Pick<PartidaPvp, 'meus' | 'deles'>; onComecar: () => void }) {
   return <section className="pv-apresentar">
     <div className="pv-frente">
       <div className="pv-lado eu"><span className="pv-nome-lado">VOCÊ</span>{partida.meus.map((t, i) => <CartaoDoTime key={i} time={t} i={i} lado="eu" compacto />)}</div>
       <span className="pv-vs-pequeno">VS</span>
-      <div className="pv-lado rival" style={{ '--npc': npc.cor } as CSSProperties}><span className="pv-nome-lado"><AvatarDoNpc npc={npc} tamanho={34} />{npc.nome}</span>{partida.deles.map((t, i) => <CartaoDoTime key={i} time={t} i={i} lado="rival" compacto />)}</div>
+      <div className="pv-lado rival" style={{ '--npc': rival.cor } as CSSProperties}><span className="pv-nome-lado">{rival.avatar(34)}{rival.nome}</span>{partida.deles.map((t, i) => <CartaoDoTime key={i} time={t} i={i} lado="rival" compacto />)}</div>
     </div>
-    <p className="pv-fala" style={{ '--npc': npc.cor } as CSSProperties}><b>{npc.nome}:</b> “{npc.fala}”</p>
+    {rival.fala && <p className="pv-fala" style={{ '--npc': rival.cor } as CSSProperties}><b>{rival.nome}:</b> “{rival.fala}”</p>}
     <button className="primary pv-grande" onClick={onComecar}><Swords size={22} />COMEÇAR PARTIDA</button>
   </section>;
 }
 
-function Escolher({ npc, partida, onEscolher }: { npc: Npc; partida: PartidaPvp; onEscolher: (i: number) => void }) {
+function Escolher({ rival, partida, onEscolher, jaEscolhido, prazo }: { rival: Oponente; partida: PartidaPvp; onEscolher: (i: number) => void; jaEscolhido?: number | null; prazo?: ReactNode }) {
   const livres = timesLivres(partida, 'eu'), v = vitoriasDosTimes(partida);
-  const [sel, setSel] = useState<number | null>(livres.length === 1 ? livres[0]! : null);
-  const [pensando, setPensando] = useState(false);
+  const [sel, setSel] = useState<number | null>(jaEscolhido ?? (livres.length === 1 ? livres[0]! : null));
+  const [pensando, setPensando] = useState(jaEscolhido !== undefined && jaEscolhido !== null);
   return <section className="pv-escolher">
-    <Placar partida={partida} npc={npc} />
-    <h2 className="pv-titulo-rodada">Escolha seu time <small>em segredo: {npc.nome} escolhe ao mesmo tempo</small></h2>
-    <div className="pv-escolhas">{partida.meus.map((t, i) => <CartaoDoTime key={i} time={t} i={i} lado="eu" venceu={v.eu[i]} bloqueado={!livres.includes(i)} escolhido={sel === i} onClick={() => { setSel(i); som('toque'); }} />)}</div>
-    <div className="pv-rival-pensa" style={{ '--npc': npc.cor } as CSSProperties}>
-      <AvatarDoNpc npc={npc} tamanho={38} />
-      <span>{pensando ? `${npc.nome} está escolhendo…` : `${npc.nome} tem ${timesLivres(partida, 'rival').length} ${timesLivres(partida, 'rival').length === 1 ? 'time' : 'times'} para escolher`}</span>
+    <Placar partida={partida} rival={rival} />
+    {prazo}
+    <h2 className="pv-titulo-rodada">Escolha seu time <small>em segredo: {rival.nome} escolhe ao mesmo tempo</small></h2>
+    <div className="pv-escolhas">{partida.meus.map((t, i) => <CartaoDoTime key={i} time={t} i={i} lado="eu" venceu={v.eu[i]} bloqueado={!livres.includes(i)} escolhido={sel === i} onClick={pensando ? undefined : () => { setSel(i); som('toque'); }} />)}</div>
+    <div className="pv-rival-pensa" style={{ '--npc': rival.cor } as CSSProperties}>
+      {rival.avatar(38)}
+      <span>{pensando ? `${rival.nome} está escolhendo…` : `${rival.nome} tem ${timesLivres(partida, 'rival').length} ${timesLivres(partida, 'rival').length === 1 ? 'time' : 'times'} para escolher`}</span>
       <span className="pv-mini-times">{partida.deles.map((t, i) => <span key={i} className={v.rival[i] ? 'venceu' : ''}>{t.map((id) => <Rosto key={id} id={id} tamanho={22} apagado={v.rival[i]} />)}</span>)}</span>
     </div>
-    <button className="primary pv-grande" disabled={sel === null || pensando} onClick={() => { setPensando(true); som('ui-confirma'); window.setTimeout(() => onEscolher(sel!), 900); }}>
+    <button className="primary pv-grande" disabled={sel === null || pensando} onClick={() => { setPensando(true); som('ui-confirma'); onEscolher(sel!); }}>
       <Check size={20} />{pensando ? 'Confirmado…' : 'CONFIRMAR TIME'}
     </button>
   </section>;
 }
 
-function Vs({ npc, partida, meu, dele, onLutar }: { npc: Npc; partida: PartidaPvp; meu: number; dele: number; onLutar: () => void }) {
+function Vs({ rival, partida, meu, dele, onLutar, controle }: { rival: Oponente; partida: Pick<PartidaPvp, 'meus' | 'deles'>; meu: number; dele: number; onLutar: () => void; controle?: ReactNode }) {
   const [conta, setConta] = useState(3);
   useEffect(() => { som('ui-arena'); }, []);
-  useEffect(() => { if (conta <= 0) { onLutar(); return; } const t = window.setTimeout(() => { setConta(conta - 1); som('toque'); }, 1000); return () => clearTimeout(t); }, [conta, onLutar]);
-  return <section className="pv-vs" style={{ '--npc': npc.cor } as CSSProperties}>
+  useEffect(() => { if (controle) return; if (conta <= 0) { onLutar(); return; } const t = window.setTimeout(() => { setConta(conta - 1); som('toque'); }, 1000); return () => clearTimeout(t); }, [conta, onLutar, controle]);
+  return <section className="pv-vs" style={{ '--npc': rival.cor } as CSSProperties}>
     <span className="pv-vs-raios" aria-hidden="true" />
     <Fx nome="holofote" cor="#ffe2a0" ms={4800} className="pv-fx-holofote-vs" />
-    <div className="pv-vs-lado eu"><small>VOCÊ · TIME {meu + 1}</small>{partida.meus[meu]!.map((id, k) => <span key={id} className="pv-vs-rosto" style={{ '--k': k } as CSSProperties}><Rosto id={id} tamanho={84} /><b>{byId[id]!.name}</b></span>)}</div>
+    {/* o rival em cima e você embaixo, como na luta (pedido do jogador) */}
+    <div className="pv-vs-lado rival"><small>{rival.nome.toUpperCase()} · TIME {dele + 1}</small>{partida.deles[dele]!.map((id, k) => <span key={id} className="pv-vs-rosto" style={{ '--k': k } as CSSProperties}><Rosto id={id} tamanho={84} /><b>{byId[id]!.name}</b></span>)}</div>
     <span className="pv-vs-centro"><Fx nome="choque" cor="#ffb84d" ms={950} laco={false} className="pv-fx-choque" /><span className="pv-vs-letras" aria-label="Versus">VS</span></span>
-    <div className="pv-vs-lado rival"><small>{npc.nome.toUpperCase()} · TIME {dele + 1}</small>{partida.deles[dele]!.map((id, k) => <span key={id} className="pv-vs-rosto" style={{ '--k': k } as CSSProperties}><Rosto id={id} tamanho={84} /><b>{byId[id]!.name}</b></span>)}</div>
-    <button className="pv-vs-contagem" onClick={onLutar} aria-label="Começar o duelo agora"><b key={conta}>{conta > 0 ? conta : 'LUTA!'}</b><small>toque para começar</small></button>
+    <div className="pv-vs-lado eu"><small>VOCÊ · TIME {meu + 1}</small>{partida.meus[meu]!.map((id, k) => <span key={id} className="pv-vs-rosto" style={{ '--k': k } as CSSProperties}><Rosto id={id} tamanho={84} /><b>{byId[id]!.name}</b></span>)}</div>
+    {controle ?? <button className="pv-vs-contagem" onClick={onLutar} aria-label="Começar o duelo agora"><b key={conta}>{conta > 0 ? conta : 'LUTA!'}</b><small>toque para começar</small></button>}
   </section>;
 }
 
-function ResultadoDaRodada({ npc, partida, onSeguir }: { npc: Npc; partida: PartidaPvp; onSeguir: () => void }) {
+function ResultadoDaRodada({ rival, partida, onSeguir, final = false }: { rival: Oponente; partida: PartidaPvp; onSeguir: () => void; final?: boolean }) {
   const r = partida.rodadas.at(-1)!, ganhei = r.vencedor === 'eu', time = ganhei ? partida.meus[r.meu]! : partida.deles[r.dele]!;
   useEffect(() => { som(ganhei ? 'vitoria' : 'derrota'); }, [ganhei]);
-  return <section className={`pv-resultado ${ganhei ? 'ganhou' : 'perdeu'}`} style={{ '--npc': npc.cor } as CSSProperties}>
+  return <section className={`pv-resultado ${ganhei ? 'ganhou' : 'perdeu'}`} style={{ '--npc': rival.cor } as CSSProperties}>
     <span className="pv-brilho" aria-hidden="true" />
     <small>RODADA {partida.rodadas.length}</small>
-    <h1>{ganhei ? 'VOCÊ VENCEU!' : `${npc.nome} venceu`}</h1>
+    <h1>{ganhei ? 'VOCÊ VENCEU!' : `${rival.nome} venceu`}</h1>
     <p>{ganhei ? `O time ${r.meu + 1} ganhou a medalha e fica marcado.` : `O time ${r.dele + 1} dele fica marcado. Você pode usar qualquer time de novo.`}</p>
     <div className="pv-resultado-time">{time.map((id) => <Rosto key={id} id={id} tamanho={64} />)}</div>
-    <Placar partida={{ ...partida, rodadas: partida.rodadas }} npc={npc} />
-    <button className="primary pv-grande" onClick={onSeguir}><Swords size={20} />PRÓXIMA RODADA</button>
+    <Placar partida={partida} rival={rival} />
+    <button className="primary pv-grande" onClick={onSeguir}>{final ? <><Trophy size={20} />VER RESULTADO</> : <><Swords size={20} />PRÓXIMA RODADA</>}</button>
   </section>;
 }
 
@@ -272,15 +404,265 @@ function Fim({ npc, partida, placar, onDeNovo, onSair }: { npc: Npc; partida: Pa
   </section>;
 }
 
+
+/* ---------------------------------------------------------------------------
+ * O Desafio online
+ * ------------------------------------------------------------------------- */
+
+export interface Online { servico: ServicoPvp; partida: string | null; onPartida: (id: string | null) => void; onComunidade: () => void }
+
+const oponenteDaPessoa = (j: JogadorPvp): Oponente => ({ nome: j.nome, cor: corDoNome(j.id), avatar: (t) => <Avatar id={j.id} nome={j.nome} tamanho={t} online /> });
+const mmss = (s: number) => `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`;
+
+/** Um relógio que bate enquanto a tela precisa (contagens do prazo e da luta). */
+function useAgora(ligado = true, ms = 250) {
+  const [agora, setAgora] = useState(() => Date.now());
+  useEffect(() => { if (!ligado) return; const t = window.setInterval(() => setAgora(Date.now()), ms); return () => clearInterval(t); }, [ligado, ms]);
+  return agora;
+}
+
+/** O tempo que falta, no relógio do servidor. */
+function Prazo({ ate, offset, texto }: { ate: string; offset: number; texto: string }) {
+  const agora = useAgora(true, 500), s = Math.max(0, Math.ceil((Date.parse(ate) - (agora + offset)) / 1000));
+  return <p className={`pv-prazo ${s <= 15 ? 'urgente' : ''}`}><Clock size={14} /><b>{mmss(s)}</b>{texto}</p>;
+}
+
+/** O cartão do Desafio online no lobby: meu rating, a partida aberta e o ranking. */
+function CartaoOnline({ online }: { online: Online }) {
+  const [rank, setRank] = useState<RankingPvp | null>(null);
+  const [aberta, setAberta] = useState<VistaPvp | null>(null);
+  const [erro, setErro] = useState('');
+  const [todos, setTodos] = useState(false);
+  useEffect(() => {
+    let vivo = true;
+    void online.servico.ranking().then((r) => { if (vivo) setRank(r); }).catch((e) => { if (vivo) setErro(textoDoErroPvp(e)); });
+    void online.servico.consultar().then((r) => { if (vivo) setAberta(r.partida); }).catch(() => undefined);
+    return () => { vivo = false; };
+  }, [online.servico]);
+  const eu = rank?.eu, lista = rank ? (todos ? rank.ranking : rank.ranking.slice(0, 5)) : [];
+  return <div className="pv-online">
+    <div className="pv-modo online">
+      <span className="pv-modo-icone"><Users size={24} /></span>
+      <div><b>DESAFIO ONLINE</b><small>Toque no nome de alguém na Comunidade e desafie. Vale rating e ranking.</small></div>
+      <span className="pv-meu-rating"><Crown size={13} /><b>{eu?.rating ?? '—'}</b><small>{eu ? `${eu.vitorias}V ${eu.derrotas}D` : 'rating'}</small></span>
+    </div>
+    {aberta && ['convite', 'montando', 'jogando'].includes(aberta.fase) && <button className="pv-voltar-partida" onClick={() => online.onPartida(aberta.id)}>
+      <Avatar id={aberta.rival.id} nome={aberta.rival.nome} tamanho={34} online />
+      <span><b>Partida contra {aberta.rival.nome}</b><small>{aberta.fase === 'convite' ? (aberta.desafiante ? 'esperando aceitar' : 'te desafiou!') : aberta.fase === 'montando' ? 'montando os times' : `rodada ${aberta.rodada + 1}`}</small></span>
+      <em>VOLTAR</em>
+    </button>}
+    <button className="primary pv-desafiar" onClick={online.onComunidade}><Swords size={18} />Desafiar alguém na Comunidade</button>
+    <div className="pv-ranking">
+      <h3><Trophy size={15} />RANKING PvP</h3>
+      {erro && <small className="pv-problema">{erro}</small>}
+      {rank && !rank.ranking.length && <small className="pv-vazio">Ninguém jogou ainda. Seja o primeiro!</small>}
+      <ol>{lista.map((r) => <li key={r.id} className={r.posicao <= 3 ? `top${r.posicao}` : ''}>
+        <i>{r.posicao}</i><Avatar id={r.id} nome={r.nome} tamanho={26} online={false} /><b>{r.nome}</b><small>{r.vitorias}V {r.derrotas}D</small><em><Crown size={11} />{r.rating}</em>
+      </li>)}</ol>
+      {rank && rank.ranking.length > 5 && <button className="pv-ver-todos" onClick={() => setTodos(!todos)}>{todos ? 'Ver menos' : `Ver os ${rank.ranking.length}`}</button>}
+    </div>
+  </div>;
+}
+
+/** Uma confirmação simples por cima da tela (sair da partida). */
+function Confirmar({ titulo, texto, sim, onSim, onNao }: { titulo: string; texto: string; sim: string; onSim: () => void; onNao: () => void }) {
+  return <div className="pv-confirmar" role="alertdialog" aria-label={titulo}>
+    <div><b>{titulo}</b><p>{texto}</p><span><button className="secondary" onClick={onNao}>Continuar</button><button className="primary pv-perigo" onClick={onSim}><LogOut size={16} />{sim}</button></span></div>
+  </div>;
+}
+
+/** A espera (convite enviado, times prontos, rival escolhendo): o rival, o recado e o prazo. */
+function Espera({ rival, titulo, texto, prazo, children, onSair, sair }: { rival: Oponente; titulo: string; texto: string; prazo?: ReactNode; children?: ReactNode; onSair?: () => void; sair?: string }) {
+  return <section className="pv-espera" style={{ '--npc': rival.cor } as CSSProperties}>
+    <span className="pv-espera-avatar">{rival.avatar(96)}<i aria-hidden="true" /></span>
+    <small>{rival.nome.toUpperCase()}</small>
+    <h1>{titulo}</h1>
+    <p className="pv-espera-texto"><Hourglass size={15} />{texto}</p>
+    {prazo}
+    {children}
+    {onSair && <button className="secondary" onClick={onSair}><X size={16} />{sair ?? 'Cancelar'}</button>}
+  </section>;
+}
+
+function FimOnline({ v, rival, onSair }: { v: VistaPvp; rival: Oponente; onSair: () => void }) {
+  const ganhei = v.vencedor === 'eu', delta = v.delta ?? 0;
+  useEffect(() => { som(ganhei ? 'vitoria' : 'derrota'); }, [ganhei]);
+  const porDesistencia = v.motivo === 'desistiu';
+  return <section className={`pv-fim ${ganhei ? 'ganhou' : 'perdeu'}`} style={{ '--npc': rival.cor } as CSSProperties}>
+    {ganhei && <span className="pv-confete" aria-hidden="true">{Array.from({ length: 24 }, (_, i) => <i key={i} style={{ '--i': i } as CSSProperties} />)}</span>}
+    {ganhei && <><Fx nome="raios" cor="#ffd36b" ms={5200} className="pv-fx-raios" /><Fx nome="faiscas" cor="#fff3b0" ms={4200} className="pv-fx-faiscas" /></>}
+    <span className="pv-fim-trofeu">{ganhei ? <Trophy size={58} /> : <Shield size={58} />}</span>
+    <small>DESAFIO ONLINE · VALENDO RATING</small>
+    <h1>{ganhei ? 'VITÓRIA!' : 'DERROTA'}</h1>
+    <p>{porDesistencia ? (ganhei ? `${rival.nome} desistiu da partida.` : 'Você saiu da partida.') : ganhei ? `Você venceu ${rival.nome} com os 3 times.` : `${rival.nome} venceu com os 3 times.`}</p>
+    {v.rodadas.length > 0 && <div className="pv-fim-rodadas">{v.rodadas.map((r) => <span key={r.n} className={r.vencedor}><b>{r.n + 1}</b>{r.vencedor === 'eu' ? 'V' : 'D'}</span>)}</div>}
+    <div className="pv-fim-rating">
+      <Crown size={22} /><span><small>SEU RATING</small><b>{v.voce.rating}</b></span>
+      <em className={delta >= 0 ? 'sobe' : 'desce'}>{delta >= 0 ? '+' : ''}{delta}</em>
+      <span className="pv-fim-vd"><b className="v">{v.voce.vitorias}V</b><b className="d">{v.voce.derrotas}D</b></span>
+    </div>
+    <div className="pv-fim-botoes"><button className="primary" onClick={onSair}><Trophy size={18} />Ver o ranking</button></div>
+  </section>;
+}
+
+/** O que este aparelho já mostrou da partida: a apresentação e as lutas assistidas (para não repetir ao voltar). */
+interface Assistido { id: string; apresentado: boolean; vistas: number[] }
+const lerAssistido = (id: string): Assistido => {
+  const a = read('pvp-online') as Assistido | null;
+  return a && a.id === id && Array.isArray(a.vistas) ? a : { id, apresentado: false, vistas: [] };
+};
+
+type Cena = { tipo: 'luta'; n: number; meu: string[]; dele: string[]; seed: number; atraso: number } | { tipo: 'resultado'; n: number } | null;
+
+function PartidaOnline({ online, colecaoLocal, settings, onSettings, onDetails, onLutando }: {
+  online: Online; colecaoLocal: string[]; settings: Settings; onSettings: (s: Settings) => void; onDetails: (id: string) => void; onLutando: (sim: boolean) => void;
+}) {
+  const id = online.partida!, { servico } = online;
+  const [v, setV] = useState<VistaPvp | null>(null);
+  const [colecao, setColecao] = useState<string[]>(colecaoLocal);
+  const [offset, setOffset] = useState(0);
+  const [erro, setErro] = useState('');
+  const [sumiu, setSumiu] = useState(false);
+  const [falhas, setFalhas] = useState(0);
+  const [assistido, setAssistido] = useState(() => lerAssistido(id));
+  const [cena, setCena] = useState<Cena>(null);
+  const [sair, setSair] = useState(false);
+  const [guardado] = useState(carregar);
+  const marca = (a: Assistido) => { setAssistido(a); save('pvp-online', a); };
+
+  const aplica = (r: RespostaPvp) => {
+    if (!r.partida) { setSumiu(true); return; }
+    setV(r.partida); setOffset(diferencaDoRelogio(r.partida.agora));
+    if (r.colecao.length) setColecao(r.colecao);
+  };
+  const atualizar = useRef(async () => {});
+  atualizar.current = async () => { try { aplica(await servico.consultar(id)); setErro(''); } catch (e) { setErro(textoDoErroPvp(e)); } };
+  const agir = async (pedido: Promise<RespostaPvp>) => {
+    try { aplica(await pedido); setErro(''); return true; } catch (e) { setErro(textoDoErroPvp(e)); setFalhas((f) => f + 1); void atualizar.current(); return false; }
+  };
+
+  // o estado vem do servidor: a cada 3 s e na hora em que a partida muda (Realtime)
+  const aberta = !v || ['convite', 'montando', 'jogando'].includes(v.fase) || (v.fase === 'terminada' && v.resolvida >= 0 && !v.inicioEm && v.motivo !== 'desistiu');
+  useEffect(() => {
+    void atualizar.current();
+    const para = servico.ouvir((l) => { if (l.id === id) void atualizar.current(); });
+    return para;
+  }, [servico, id]);
+  useEffect(() => {
+    if (!aberta) return;
+    const t = window.setInterval(() => { if (!document.hidden) void atualizar.current(); }, 3000);
+    return () => clearInterval(t);
+  }, [aberta]);
+
+  useEffect(() => { onLutando(cena?.tipo === 'luta'); }, [cena?.tipo, onLutando]);
+  useEffect(() => () => onLutando(false), [onLutando]);
+  useEffect(() => { window.scrollTo(0, 0); }, [v?.fase, v?.rodada, cena?.tipo]);
+
+  const rivalId = v?.rival.id, rivalNome = v?.rival.nome;
+  const rival = useMemo(() => (rivalId && rivalNome ? oponenteDaPessoa({ id: rivalId, nome: rivalNome, rating: 0, vitorias: 0, derrotas: 0 }) : null), [rivalId, rivalNome]);
+  const emLuta = cena?.tipo === 'luta';
+  const agora = useAgora(!emLuta);
+
+  // a luta da rodada que acabou de ser resolvida (as anteriores já foram vistas ou ficaram para trás)
+  const pendente = v && v.resolvida >= 0 ? v.rodadas.find((r) => r.n === v.resolvida && !assistido.vistas.includes(r.n)) ?? null : null;
+  const inicio = v?.inicioEm ? Date.parse(v.inicioEm) - offset : null;
+  const fimDaLuta = pendente && inicio !== null ? inicio + duracaoNaTela(pendente.duracao) * 1000 : null;
+  useEffect(() => {
+    if (!v || !pendente || inicio === null || cena) return;
+    if (agora < inicio) return;
+    // chegou tarde demais: a luta já acabou, mostra o resultado
+    if (fimDaLuta !== null && agora > fimDaLuta) { setCena({ tipo: 'resultado', n: pendente.n }); return; }
+    setCena({ tipo: 'luta', n: pendente.n, meu: v.meusTimes![pendente.meu]!, dele: v.timesDele![pendente.dele]!, seed: pendente.seed, atraso: (agora - inicio) / 1000 });
+  }, [v, pendente, inicio, fimDaLuta, agora, cena]);
+
+  // terminei de assistir a luta: avisa o servidor (o tempo de escolher a próxima começa quando os dois terminam)
+  const assistiu = cena?.tipo === 'resultado' ? cena.n : null;
+  useEffect(() => { if (assistiu !== null) void servico.assisti(id, assistiu).catch(() => undefined); }, [assistiu, servico, id]);
+  const semRodada = assistiu !== null && !!v && !v.rodadas.some((r) => r.n === assistiu);
+  useEffect(() => { if (semRodada) setCena(null); }, [semRodada]);
+
+  // alguém desistiu no meio da luta: a partida acabou, sai da luta
+  const desistiram = v?.fase === 'terminada' && v.motivo === 'desistiu';
+  useEffect(() => { if (desistiram) setCena(null); }, [desistiram]);
+
+  const voltar = () => { online.onPartida(null); };
+  if (sumiu) return <Espera rival={{ nome: 'Partida', cor: '#8fd3ff', avatar: () => <Swords size={60} /> }} titulo="Partida não encontrada" texto="Ela pode ter acabado." onSair={voltar} sair="Voltar" />;
+  if (!v || !rival) return <section className="pv-espera"><p className="cm-carregando-tela">{erro || 'Abrindo a partida…'}</p>{erro && <button className="secondary" onClick={voltar}>Voltar</button>}</section>;
+  const aviso = erro ? <p className="pv-problema pv-erro-online">{erro}</p> : null;
+  const confirmaSair = sair && <Confirmar titulo={v.fase === 'jogando' ? 'Desistir da partida?' : 'Sair da partida?'}
+    texto={v.fase === 'jogando' ? `Desistir conta como derrota e ${v.rival.nome} ganha o rating.` : 'A partida é cancelada e ninguém perde rating.'}
+    sim={v.fase === 'jogando' ? 'Desistir' : 'Sair'} onNao={() => setSair(false)} onSim={() => { setSair(false); void agir(servico.desistir(id)); }} />;
+
+  // fora de jogo: convite recusado, cancelado ou expirado
+  if (v.fase === 'recusada' || v.fase === 'cancelada' || v.fase === 'expirada')
+    return <Espera rival={rival} titulo={v.fase === 'recusada' ? 'Desafio recusado' : v.fase === 'expirada' ? 'O convite expirou' : 'Partida cancelada'} texto={v.motivo ?? 'Ninguém perdeu rating.'} onSair={voltar} sair="Voltar" />;
+
+  if (v.fase === 'convite') {
+    if (v.desafiante) return <><Espera rival={rival} titulo="Desafio enviado!" texto={`Esperando ${v.rival.nome} aceitar…`} prazo={<Prazo ate={v.prazo} offset={offset} texto=" para aceitar" />} onSair={() => void agir(servico.desistir(id))} sair="Cancelar desafio">
+      <span className="pv-rating-rival"><Crown size={13} />{v.rival.rating} · {v.rival.vitorias}V {v.rival.derrotas}D</span>{aviso}</Espera></>;
+    return <Espera rival={rival} titulo={`${v.rival.nome} te desafiou!`} texto="3 times de 3, escolha secreta, vale rating." prazo={<Prazo ate={v.prazo} offset={offset} texto=" para responder" />}>
+      <span className="pv-rating-rival"><Crown size={13} />{v.rival.rating} · {v.rival.vitorias}V {v.rival.derrotas}D</span>{aviso}
+      <span className="pv-convite-botoes"><button className="secondary" onClick={() => void agir(servico.responder(id, false))}><X size={18} />Recusar</button><button className="primary" onClick={() => { som('ui-arena'); void agir(servico.responder(id, true)); }}><Swords size={18} />Aceitar</button></span>
+    </Espera>;
+  }
+
+  if (v.fase === 'montando') {
+    if (!v.pronto.eu) return <>{<Montar key={falhas} rival={rival} colecao={colecao} inicial={guardado.times} onDetails={onDetails} onVoltar={() => setSair(true)}
+      prazo={<>{<Prazo ate={v.prazo} offset={offset} texto={v.pronto.rival ? ` · ${v.rival.nome} já está pronto!` : ' para montar'} />}{aviso}</>}
+      onPronto={(t) => { save('pvp', { ...carregar(), times: t }); void agir(servico.times(id, t)); }} />}{confirmaSair}</>;
+    return <><Espera rival={rival} titulo="Seus times estão prontos" texto={`Esperando ${v.rival.nome} montar os times…`} prazo={<Prazo ate={v.prazo} offset={offset} texto=" para montar" />} onSair={() => setSair(true)} sair="Sair">
+      {v.meusTimes && <div className="pv-espera-times">{v.meusTimes.map((t, i) => <CartaoDoTime key={i} time={t} i={i} lado="eu" compacto />)}</div>}{aviso}
+    </Espera>{confirmaSair}</>;
+  }
+
+  // jogando ou terminada
+  const meus = v.meusTimes ?? [[], [], []], deles = v.timesDele ?? [[], [], []];
+  const naTela = (r: typeof v.rodadas[number]) => ({ meu: r.meu, dele: r.dele, seed: r.seed, vencedor: r.vencedor });
+  const vistas = v.rodadas.filter((r) => r.n !== pendente?.n).map(naTela);
+  const partida: PartidaPvp = { meus: meus as unknown as Times, deles: deles as unknown as Times, seed: v.seed, rodadas: vistas };
+
+  if (cena?.tipo === 'luta') return <>{<ArenaDoPvp key={cena.n} meu={cena.meu} dele={cena.dele} seed={cena.seed} rodada={cena.n + 1} rival={v.rival.nome} settings={settings} onSettings={onSettings}
+    podePausar={false} espelhado={!v.desafiante} atrasoInicial={cena.atraso} onFim={() => setCena({ tipo: 'resultado', n: cena.n })} onDesistir={() => setSair(true)} />}{confirmaSair}</>;
+  // o resultado da luta que acabou de passar na tela (mesmo que a partida já tenha andado enquanto ela passava)
+  const daCena = cena?.tipo === 'resultado' ? v.rodadas.find((r) => r.n === cena.n) : undefined;
+  if (cena?.tipo === 'resultado' && daCena)
+    return <ResultadoDaRodada rival={rival} partida={{ ...partida, rodadas: v.rodadas.filter((r) => r.n <= daCena.n).map(naTela) }} final={v.fase === 'terminada' && daCena.n === v.resolvida}
+      onSeguir={() => { marca({ ...assistido, apresentado: true, vistas: [...new Set([...assistido.vistas, ...v.rodadas.filter((r) => r.n <= daCena.n).map((r) => r.n)])] }); setCena(null); }} />;
+
+  if (v.fase === 'terminada' && (!pendente || v.motivo === 'desistiu')) return <FimOnline v={v} rival={rival} onSair={() => { marca({ ...assistido, vistas: v.rodadas.map((r) => r.n) }); voltar(); }} />;
+
+  if (!assistido.apresentado && v.rodadas.length === 0) return <Apresentar rival={rival} partida={partida} onComecar={() => marca({ ...assistido, apresentado: true })} />;
+
+  if (pendente) {
+    // os dois já escolheram: o VS e o botão de começar (o duelo começa sozinho quando o tempo acaba)
+    const conta = inicio !== null ? Math.max(0, Math.ceil((inicio - agora) / 1000)) : null;
+    const controle = conta !== null
+      ? <div className="pv-vs-contagem"><b key={conta}>{conta > 0 ? conta : 'LUTA!'}</b><small>a luta começa nos dois aparelhos</small></div>
+      : v.lutar.eu
+        ? <div className="pv-vs-contagem esperando"><Hourglass size={26} /><small>Esperando {v.rival.nome} ficar pronto…</small><Prazo ate={v.prazo} offset={offset} texto=" e começa sozinho" /></div>
+        : <div className="pv-vs-comecar"><button className="primary pv-grande" onClick={() => { som('ui-confirma'); void agir(servico.lutar(id)); }}><Swords size={22} />COMEÇAR DUELO</button>
+          {v.lutar.rival && <small className="pv-pronto-rival"><Check size={13} />{v.rival.nome} já está pronto!</small>}<Prazo ate={v.prazo} offset={offset} texto=" e começa sozinho" /></div>;
+    return <><Vs rival={rival} partida={partida} meu={pendente.meu} dele={pendente.dele} onLutar={() => undefined} controle={<>{controle}{aviso}</>} />{confirmaSair}</>;
+  }
+
+  return <>{<Escolher key={`${v.rodada}-${falhas}`} rival={rival} partida={partida} jaEscolhido={v.minhaEscolha}
+    prazo={<>{<Prazo ate={v.prazo} offset={offset} texto={v.escolheu.rival ? ` · ${v.rival.nome} já escolheu!` : v.assistiu && !v.assistiu.rival && v.rodadas.length ? ` · ${v.rival.nome} ainda vê a luta` : ' para escolher'} />}{aviso}</>}
+    onEscolher={(i) => void agir(servico.escolher(id, v.rodada, i))} />}
+    <button className="pv-sair-online" onClick={() => setSair(true)}><LogOut size={14} />Desistir</button>{confirmaSair}</>;
+}
+
 /* ---------------------------------------------------------------------------
  * A tela
  * ------------------------------------------------------------------------- */
 
-export function PvpScreen({ colecao, settings, onSettings, onDetails, onJogar, onLutando }: {
+export function PvpScreen({ colecao, settings, onSettings, onDetails, onJogar, onLutando, online }: {
   colecao: string[]; settings: Settings; onSettings: (s: Settings) => void; onDetails: (id: string) => void; onJogar: () => void; onLutando: (sim: boolean) => void;
+  /** O Desafio online (com conta); a partida aberta vem do App (convite aceito, desafio pela Comunidade). */
+  online?: Online | null;
 }) {
   const [etapa, setEtapa] = useState<Etapa>({ tipo: 'lobby' });
-  useEffect(() => { onLutando(etapa.tipo === 'luta'); window.scrollTo(0, 0); }, [etapa.tipo, onLutando]);
+  const naOnline = !!online?.partida;
+  useEffect(() => { if (naOnline) return; onLutando(etapa.tipo === 'luta'); window.scrollTo(0, 0); }, [etapa.tipo, onLutando, naOnline]);
   useEffect(() => () => onLutando(false), [onLutando]);
   const [guardado, setGuardado] = useState(carregar);
   const desistir = useRef(false);
@@ -311,18 +693,20 @@ export function PvpScreen({ colecao, settings, onSettings, onDetails, onJogar, o
     window.setTimeout(() => { desistir.current = false; }, 500);
   };
 
-  if (etapa.tipo === 'lobby') return <Lobby colecao={colecao} guardado={guardado} onTreino={(npc) => { som('ui-arena'); setEtapa({ tipo: 'montar', npc }); }} onJogar={onJogar} />;
-  if (etapa.tipo === 'montar') return <Montar npc={etapa.npc} colecao={colecao} inicial={guardado.times} onVoltar={() => setEtapa({ tipo: 'lobby' })} onDetails={onDetails} onPronto={(t) => comecar(etapa.npc, t)} />;
-  if (etapa.tipo === 'apresentar') return <Apresentar npc={etapa.npc} partida={etapa.partida} onComecar={() => setEtapa({ tipo: 'escolher', npc: etapa.npc, partida: etapa.partida })} />;
-  if (etapa.tipo === 'escolher') return <Escolher npc={etapa.npc} partida={etapa.partida} onEscolher={(meu) => {
+  if (online?.partida) return <PartidaOnline key={online.partida} online={online} colecaoLocal={colecao} settings={settings} onSettings={onSettings} onDetails={onDetails} onLutando={onLutando} />;
+  if (etapa.tipo === 'lobby') return <Lobby colecao={colecao} guardado={guardado} online={online} onTreino={(npc) => { som('ui-arena'); setEtapa({ tipo: 'montar', npc }); }} onJogar={onJogar} />;
+  if (etapa.tipo === 'montar') return <Montar rival={oponenteDoNpc(etapa.npc)} colecao={colecao} inicial={guardado.times} onVoltar={() => setEtapa({ tipo: 'lobby' })} onDetails={onDetails} onPronto={(t) => comecar(etapa.npc, t)} />;
+  if (etapa.tipo === 'apresentar') return <Apresentar rival={oponenteDoNpc(etapa.npc)} partida={etapa.partida} onComecar={() => setEtapa({ tipo: 'escolher', npc: etapa.npc, partida: etapa.partida })} />;
+  if (etapa.tipo === 'escolher') return <Escolher rival={oponenteDoNpc(etapa.npc)} partida={etapa.partida} onEscolher={(meu) => {
+    // o NPC "pensa" um pouco antes do VS
     const dele = escolhaDoNpc(etapa.npc.nivel as NivelNpc, etapa.partida, etapa.partida.seed + etapa.partida.rodadas.length * 7919);
-    setEtapa({ tipo: 'vs', npc: etapa.npc, partida: etapa.partida, meu, dele });
+    window.setTimeout(() => setEtapa({ tipo: 'vs', npc: etapa.npc, partida: etapa.partida, meu, dele }), 900);
   }} />;
-  if (etapa.tipo === 'vs') return <Vs npc={etapa.npc} partida={etapa.partida} meu={etapa.meu} dele={etapa.dele} onLutar={() => setEtapa({ ...etapa, tipo: 'luta' })} />;
+  if (etapa.tipo === 'vs') return <Vs rival={oponenteDoNpc(etapa.npc)} partida={etapa.partida} meu={etapa.meu} dele={etapa.dele} onLutar={() => setEtapa({ ...etapa, tipo: 'luta' })} />;
   if (etapa.tipo === 'luta') return <ArenaDoPvp meu={etapa.partida.meus[etapa.meu]!} dele={etapa.partida.deles[etapa.dele]!} seed={sementeDaRodada(etapa.partida.seed, etapa.partida.rodadas.length)}
     rodada={etapa.partida.rodadas.length + 1} rival={etapa.npc.nome} settings={settings} onSettings={onSettings} podePausar
     onFim={(v) => terminouRodada(etapa.npc, etapa.partida, etapa.meu, etapa.dele, v)} onDesistir={() => desistirDaPartida(etapa.npc, etapa.partida)} />;
-  if (etapa.tipo === 'rodada') return <ResultadoDaRodada npc={etapa.npc} partida={etapa.partida} onSeguir={() => setEtapa({ tipo: 'escolher', npc: etapa.npc, partida: etapa.partida })} />;
+  if (etapa.tipo === 'rodada') return <ResultadoDaRodada rival={oponenteDoNpc(etapa.npc)} partida={etapa.partida} onSeguir={() => setEtapa({ tipo: 'escolher', npc: etapa.npc, partida: etapa.partida })} />;
   return <Fim npc={etapa.npc} partida={etapa.partida} placar={guardado.treino[etapa.npc.id] ?? { v: 0, d: 0 }} onDeNovo={() => setEtapa({ tipo: 'montar', npc: etapa.npc })} onSair={() => setEtapa({ tipo: 'lobby' })} />;
 }
 
