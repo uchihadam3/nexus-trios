@@ -12,11 +12,11 @@
  *   jornada (a soma dos
  *   pontos das lutas com um trio) chega a META_DAS_DICAS.
  *
- * Era 1,4 milhão. Com as estrelas dos pontos (src/data/estrelas-de-pontos.ts) o jogador pediu "um valor redondo
- * que fica entre 1% e 2% a chance da pessoa conseguir": 1,2 milhão sai em ~1,8% das jornadas de trios sorteados
- * (640 mil jornadas; 1,25 mi: 1,2%; 1,3 mi: 0,75%; 1,4 mi: 0,28%).
+ * Com as estrelas dos pontos (src/data/estrelas-de-pontos.ts) o jogador pediu a meta com "1% de chance… sem as
+ * lutas secretas": 1,4 milhão sai em ~1,1% das jornadas de trios sorteados (2,64 milhões de jornadas; 1,35 mi: 1,45%;
+ * 1,5 mi: 0,57%).
  */
-export const META_DAS_DICAS = 1_200_000;
+export const META_DAS_DICAS = 1_400_000;
 
 /** SHA-256 do e-mail (em minúsculas, sem espaços) da conta do dono. */
 const DONO = '7574fe4a489f32b6150dbf75d8997670a256e67760194bb0d079c9af4b4b6fe1';
