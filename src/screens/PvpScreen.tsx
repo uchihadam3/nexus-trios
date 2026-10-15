@@ -168,25 +168,14 @@ function Lobby({ colecao, guardado, onTreino, onJogar, online }: { colecao: stri
 
 
 /**
- * "Montar ao acaso": 3 times sorteados, só de 1 ou 2 estrelas (pedido do jogador: "nunca monte um time mais que nível
- * 2… você que tem que aprender que times são bons"). A cada toque sai outro jeito.
+ * "Montar ao acaso": 9 personagens sorteados da coleção, 100% ao acaso (pedido do jogador: "não vê se é bom, se é
+ * ruim, é só aleatório"). A cada toque sai outro jeito.
  */
 function timesAoAcaso(colecao: string[]): string[][] | null {
   if (colecao.length < MINIMO_DA_COLECAO) return null;
-  const livres = [...colecao], times: string[][] = [];
-  for (let k = 0; k < 3; k++) {
-    const alvo = 1 + Math.floor(Math.random() * 2);
-    let melhor: string[] | null = null, perto = Infinity;
-    for (let i = 0; i < 300 && perto > 0; i++) {
-      const p = [...livres], t: string[] = [];
-      while (t.length < 3) t.push(p.splice(Math.floor(Math.random() * p.length), 1)[0]!);
-      const e = estrelasDaForca(forcaDoTime(t)), d = Math.abs(e - alvo) + (e > 2 ? 100 : 0);
-      if (d < perto) { melhor = t; perto = d; }
-    }
-    times.push(melhor!);
-    for (const id of melhor!) livres.splice(livres.indexOf(id), 1);
-  }
-  return times;
+  const p = [...colecao], todos: string[] = [];
+  while (todos.length < 9) todos.push(p.splice(Math.floor(Math.random() * p.length), 1)[0]!);
+  return [todos.slice(0, 3), todos.slice(3, 6), todos.slice(6, 9)];
 }
 
 /**
