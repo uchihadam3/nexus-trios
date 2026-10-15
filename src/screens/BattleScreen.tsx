@@ -146,7 +146,7 @@ export function BattleScreen({battle,beat,index,name,settings,paused,onPause,onA
       <BotaoAutoDaBatalha ligado={settings.auto} onChange={auto=>onSettings({...settings,auto})}/></>}
       <button className="control sound-button" aria-label={settings.volume?'Silenciar':'Ativar som'} onClick={()=>onSettings({...settings,volume:settings.volume?0:P.audio.master})}>{settings.volume?<Volume2 size={19}/>:<VolumeX size={19}/>}</button>
       <button className={`control mixer-button ${mixer?'selected':''}`} aria-label="Ajustes da batalha" aria-expanded={mixer} onClick={()=>setMixer(!mixer)}><SlidersHorizontal size={18}/></button>
-      <button className="control control-danger abandon-battle" onClick={onAbandon} aria-label={pvp?'Desistir da partida':'Desistir da jornada'}><LogOut size={17}/><span>Desistir</span></button>
+      <button className="control control-danger abandon-battle" onClick={onAbandon} aria-label={pvp?'Desistir desta luta':'Desistir da jornada'}><LogOut size={17}/><span>Desistir</span></button>
     </footer>
     {historyOpen&&<aside className="battle-history"><div><strong><AuxIcon id="history" size={18}/> Momentos importantes</strong><button aria-label="Fechar histórico" onClick={()=>setHistoryOpen(false)}>×</button></div>{recent.length?recent.map(e=><p key={e.id}><ComTermos texto={historyText(e)}/></p>):<p>A luta ainda não teve momentos decisivos.</p>}</aside>}
     {mixer&&<div className="battle-mixer">{(['musicVolume','effectsVolume'] as const).map(key=><label key={key}>{key==='musicVolume'?'Música':'Efeitos'}<input type="range" min="0" max="100" value={settings[key]} onChange={e=>onSettings({...settings,[key]:Number(e.target.value)})}/></label>)}</div>}

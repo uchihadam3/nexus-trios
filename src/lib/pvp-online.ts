@@ -7,7 +7,7 @@ import type { RealtimeChannel, SupabaseClient } from '@supabase/supabase-js';
  * prontos, a escolha dele só depois dos dois escolherem.
  */
 export interface JogadorPvp { id: string; nome: string; rating: number; vitorias: number; derrotas: number }
-export interface RodadaVista { n: number; meu: number; dele: number; seed: number; vencedor: 'eu' | 'rival'; duracao: number }
+export interface RodadaVista { n: number; meu: number; dele: number; seed: number; vencedor: 'eu' | 'rival'; duracao: number; rendida?: boolean }
 export interface VistaPvp {
   id: string; fase: 'convite' | 'montando' | 'jogando' | 'terminada' | 'recusada' | 'cancelada' | 'expirada';
   eu: 'a' | 'b'; desafiante: boolean; seed: number; versao: string; agora: string; prazo: string; criada: string;
@@ -17,6 +17,8 @@ export interface VistaPvp {
   meusTimes: string[][] | null; timesDele: string[][] | null; minhaEscolha: number | null;
   rodadas: RodadaVista[];
   vencedor: 'eu' | 'rival' | null; motivo: string | null; delta: number | null;
+  /** Há quantos segundos o rival não dá notícia (null: está na partida) e o máximo antes de perder. */
+  ausencia: number | null; ausenciaMaxima: number;
 }
 export interface RespostaPvp { partida: VistaPvp | null; colecao: string[] }
 export interface RankingPvp { ranking: { posicao: number; id: string; nome: string; rating: number; vitorias: number; derrotas: number }[]; eu: { rating: number; vitorias: number; derrotas: number }; colecao: number }
@@ -31,7 +33,10 @@ export interface ServicoPvp {
   lutar: (partida: string) => Promise<RespostaPvp>;
   /** Terminei de assistir a luta da rodada n (o tempo de escolher a próxima começa quando os dois terminam). */
   assisti: (partida: string, n: number) => Promise<RespostaPvp>;
+  /** Desiste da partida inteira. */
   desistir: (partida: string) => Promise<RespostaPvp>;
+  /** Desiste só da luta da rodada n (perde a rodada; a partida segue). */
+  render: (partida: string, n: number) => Promise<RespostaPvp>;
   ranking: () => Promise<RankingPvp>;
   /** Avisa quando uma partida minha muda (ou nasce: um convite). */
   ouvir: (aviso: (linha: { id: string; desafiante: string; desafiado: string; fase: string }) => void) => () => void;
@@ -48,6 +53,7 @@ export function criarPvpOnline(chamar: <T>(acao: string, corpo: Record<string, u
     lutar: (partida) => pvp('lutar', { partida }),
     assisti: (partida, n) => pvp('assisti', { partida, n }),
     desistir: (partida) => pvp('desistir', { partida }),
+    render: (partida, n) => pvp('render', { partida, n }),
     ranking: () => pvp('ranking'),
     ouvir: (aviso) => {
       let canal: RealtimeChannel | null = null, parado = false;

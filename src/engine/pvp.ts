@@ -20,7 +20,8 @@ import { TRIOS_DO_PVP } from '../data/trios-do-pvp';
 
 export type Times = [string[], string[], string[]];
 export type Lado = 'eu' | 'rival';
-export interface RodadaPvp { meu: number; dele: number; seed: number; vencedor: Lado }
+/** `rendida`: quem perdeu desistiu da luta no meio (só daquela rodada; a partida segue). */
+export interface RodadaPvp { meu: number; dele: number; seed: number; vencedor: Lado; rendida?: boolean }
 export interface PartidaPvp { meus: Times; deles: Times; rodadas: RodadaPvp[]; seed: number }
 
 /** Quantos personagens na coleção para entrar no PvP (3 times de 3, sem repetir). */

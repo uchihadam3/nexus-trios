@@ -108,8 +108,8 @@ describe.skipIf(!ADMIN)('PvP online: o juiz no servidor, partida inteira', () =>
     for (const c of colecao) await db.query(`insert into public.player_achievements(player_id, achievement_id) values ($1, $2)`, [id, `personagem:${c}`]);
     return id;
   };
-  type Vista = { id: string; fase: string; prazo: string; rodada: number; resolvida: number; inicioEm: string | null; timesDele: string[][] | null; meusTimes: string[][] | null; minhaEscolha: number | null;
-    rodadas: { n: number; meu: number; dele: number; vencedor: 'eu' | 'rival' }[]; vencedor: 'eu' | 'rival' | null; delta: number | null; escolheu: { eu: boolean; rival: boolean } };
+  type Vista = { id: string; fase: string; prazo: string; ausencia: number | null; motivo: string | null; rodada: number; resolvida: number; inicioEm: string | null; timesDele: string[][] | null; meusTimes: string[][] | null; minhaEscolha: number | null;
+    rodadas: { n: number; meu: number; dele: number; vencedor: 'eu' | 'rival'; rendida?: boolean }[]; vencedor: 'eu' | 'rival' | null; delta: number | null; escolheu: { eu: boolean; rival: boolean } };
   const pede = async (quem: string, input: Record<string, unknown>) => {
     const r = await acaoPvp(servidor as never, quem, input);
     return r as { status: number; body: { partida?: Vista; error?: string; colecao?: string[] } };
@@ -191,6 +191,49 @@ describe.skipIf(!ADMIN)('PvP online: o juiz no servidor, partida inteira', () =>
     expect(v.rodadas[0]!.meu).toBe(1);
     const auto = await db.query(`select automatica from public.pvp_escolhas where partida_id = $1 and jogador = $2`, [id, b]);
     expect(auto.rows[0].automatica).toBe(true);
+  });
+
+  it('desistir dentro da luta perde só aquela rodada; a partida segue', async () => {
+    const a = await conta(COLECAO_A), b = await conta(COLECAO_B);
+    const id = (await pede(a, { op: 'desafiar', alvo: b })).body.partida!.id;
+    await pede(b, { op: 'responder', partida: id, aceitar: true });
+    await pede(a, { op: 'times', partida: id, times: [['goku', 'vegeta', 'gohan'], ['naruto', 'sasuke', 'kakashi'], ['luffy', 'zoro', 'sanji']] });
+    await pede(b, { op: 'times', partida: id, times: [['itachi', 'light', 'pikachu'], ['shaka', 'batman', 'superman'], ['wonderwoman', 'thor', 'magneto']] });
+    await pede(a, { op: 'escolher', partida: id, n: 0, time: 0 });
+    await pede(b, { op: 'escolher', partida: id, n: 0, time: 0 });
+    // antes da luta começar não dá para desistir dela
+    await pede(a, { op: 'render', partida: id, n: 0 });
+    expect((await pede(a, { op: 'estado', partida: id })).body.partida!.rodadas[0]!.rendida).toBe(false);
+    await pede(a, { op: 'lutar', partida: id }); await pede(b, { op: 'lutar', partida: id });
+    const rendeu = (await pede(a, { op: 'render', partida: id, n: 0 })).body.partida!;
+    expect(rendeu.fase).toBe('jogando');
+    expect(rendeu.rodadas[0]).toMatchObject({ vencedor: 'rival', rendida: true });
+    expect((await pede(b, { op: 'estado', partida: id })).body.partida!.rodadas[0]).toMatchObject({ vencedor: 'eu', rendida: true });
+    // a próxima rodada segue normal
+    expect((await pede(a, { op: 'escolher', partida: id, n: 1, time: 0 })).status).toBe(200);
+  });
+
+  it('quem some da partida: o rival vê há quanto tempo; passou de 45 s, perde', async () => {
+    const a = await conta(COLECAO_A), b = await conta(COLECAO_B);
+    const id = (await pede(a, { op: 'desafiar', alvo: b })).body.partida!.id;
+    await pede(b, { op: 'responder', partida: id, aceitar: true });
+    await pede(a, { op: 'times', partida: id, times: [['goku', 'vegeta', 'gohan'], ['naruto', 'sasuke', 'kakashi'], ['luffy', 'zoro', 'sanji']] });
+    await pede(b, { op: 'times', partida: id, times: [['itachi', 'light', 'pikachu'], ['shaka', 'batman', 'superman'], ['wonderwoman', 'thor', 'magneto']] });
+    // presente há pouco: não aparece como desconectado
+    expect((await pede(a, { op: 'estado', partida: id })).body.partida!.ausencia).toBeNull();
+    // b caiu há 20 s: a vê a contagem, a partida segue
+    await db.query(`update public.pvp_presenca set visto_em = now() - interval '20 seconds' where partida_id = $1 and jogador = $2`, [id, b]);
+    const caiu = (await pede(a, { op: 'estado', partida: id })).body.partida!;
+    expect(caiu.fase).toBe('jogando');
+    expect(caiu.ausencia).toBeGreaterThanOrEqual(19);
+    // voltou: zera
+    await pede(b, { op: 'estado', partida: id });
+    expect((await pede(a, { op: 'estado', partida: id })).body.partida!.ausencia).toBeNull();
+    // sumiu de novo por mais de 45 s: a vence, b perde no rating
+    await db.query(`update public.pvp_presenca set visto_em = now() - interval '50 seconds' where partida_id = $1 and jogador = $2`, [id, b]);
+    const fim = (await pede(a, { op: 'estado', partida: id })).body.partida!;
+    expect(fim).toMatchObject({ fase: 'terminada', vencedor: 'eu', motivo: 'desconectou' });
+    expect((await pede(b, { op: 'estado', partida: id })).body.partida!.vencedor).toBe('rival');
   });
 
   it('convite que ninguém responde expira; desistir no meio dá a vitória ao outro', async () => {

@@ -104,14 +104,14 @@
 .pv-filtros-ativos button{all:unset;flex:none;cursor:pointer;display:inline-flex;align-items:center;gap:5px;padding:6px 10px;border-radius:99px;font-size:12.5px;font-weight:800;
   color:var(--cor);background:color-mix(in srgb,var(--cor),transparent 86%);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--cor),transparent 55%)}
 .pv-grupo{display:grid;gap:8px}
-.pv-grupo-titulo{position:sticky;top:0;z-index:2;display:flex;align-items:center;gap:8px;margin:6px 0 0;padding:6px 2px;font-size:13px;font-weight:950;letter-spacing:1px;color:#ffd36b;background:linear-gradient(180deg,#0d1411 70%,#0d141100)}
+.pv-grupo-titulo{position:relative;display:flex;align-items:center;gap:8px;margin:6px 0 0;padding:6px 2px;font-size:13px;font-weight:950;letter-spacing:1px;color:#ffd36b;background:linear-gradient(180deg,#0d1411 70%,#0d141100)}
 .pv-grupo-titulo span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .pv-grupo-titulo small{padding:1px 8px;border-radius:99px;font-size:11px;color:#cfdccb;background:#ffffff12}
 .pv-grupo-titulo::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,#ffd36b55,transparent)}
 .pv-nada{display:grid;justify-items:center;gap:8px;padding:30px 10px;color:#93a493;text-align:center}
 .pv-nada b{color:#eef5e8}
 
-.pv-painel-fundo{position:fixed;inset:0;z-index:8000;display:flex;align-items:flex-end;justify-content:center;background:#000a;backdrop-filter:blur(3px);animation:pv-aparece .2s ease-out}
+.pv-painel-fundo{--pv-ouro:#ffd36b;--pv-eu:#86e3a8;--pv-rival:#ff7a6b;--pv-painel:#141b18;--pv-linha:#ffffff14;position:fixed;inset:0;z-index:8000;display:flex;align-items:flex-end;justify-content:center;background:#000a;backdrop-filter:blur(3px);animation:pv-aparece .2s ease-out}
 .pv-painel{--pv-ouro:#ffd36b;box-sizing:border-box;width:min(560px,100%);max-height:88vh;overflow-y:auto;overscroll-behavior:contain;padding:8px 16px 0;border-radius:24px 24px 0 0;color:#eef5e8;
   background:linear-gradient(180deg,#1a2420,#101613 30%);box-shadow:0 -10px 40px #000a,inset 0 1px 0 #ffffff1f;animation:pv-sobe .32s cubic-bezier(.2,1.2,.4,1)}
 @keyframes pv-sobe{from{transform:translateY(100%)}}
@@ -382,3 +382,19 @@ button.pv-time:active:not(:disabled){transform:scale(.98)}
 .pv-aviso .pv-convite-botoes{position:relative;width:100%}
 .pv-aviso .pv-rating-rival{position:relative}
 .pv-ranking .cm-avatar>i,.pv-voltar-partida .cm-avatar>i{display:none}
+
+/* o rival caiu (src/screens/PvpScreen.tsx · RivalCaiu): por cima de tudo, até da luta */
+.pv-caiu{position:fixed;left:50%;top:max(10px,env(safe-area-inset-top));z-index:9500;translate:-50% 0;display:flex;align-items:center;gap:10px;width:min(420px,calc(100% - 24px));box-sizing:border-box;
+  padding:10px 14px;border-radius:16px;color:#fff;background:linear-gradient(100deg,#5a1d16ee,#2a1210ee);box-shadow:0 0 0 1.5px #ff8a7a99,0 10px 30px #000a;animation:pv-caiu-entra .35s cubic-bezier(.2,1.4,.4,1)}
+@keyframes pv-caiu-entra{from{opacity:0;translate:-50% -30px}}
+.pv-caiu svg{flex:none;color:#ff9a8a;animation:pv-pisca-prazo 1s steps(2) infinite}
+.pv-caiu span{flex:1;min-width:0;display:grid}
+.pv-caiu b{font-size:14px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pv-caiu small{font-size:12px;color:#ffd2ca}
+.pv-caiu em{flex:none;display:grid;place-items:center;width:38px;height:38px;border-radius:50%;font-style:normal;font-size:16px;font-weight:950;font-variant-numeric:tabular-nums;color:#2a1210;background:#ffb0a4}
+.pv-retornar{position:relative;width:100%;min-height:56px;justify-content:center;gap:8px;font-size:18px;font-weight:950;letter-spacing:1.5px;animation:pv-pulsa-botao 1.2s ease-in-out infinite}
+
+/* montar: os times e o PRONTO presos logo abaixo da barra do jogo (62 px) enquanto o álbum rola */
+.pv-fixos{position:sticky;top:62px;z-index:15;display:grid;gap:8px;margin:0 -12px;padding:8px 12px 10px;
+  background:linear-gradient(180deg,#0d1411 88%,#0d141100);box-shadow:0 10px 18px -12px #000c}
+.pv-fixos .pv-pronto{min-height:46px}

@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode } from 'react';
-import { ArrowDownAZ, ArrowLeft, Check, Clock, Globe2, Layers, SlidersHorizontal, Sparkles, Crown, Hourglass, Lock, LogOut, RotateCcw, Search, Shield, Swords, Trophy, Users, Wand2, X, Zap } from 'lucide-react';
+import { createPortal } from 'react-dom';
+import { ArrowDownAZ, ArrowLeft, Check, Clock, WifiOff, Globe2, Layers, SlidersHorizontal, Sparkles, Crown, Hourglass, Lock, LogOut, RotateCcw, Search, Shield, Swords, Trophy, Users, Wand2, X, Zap } from 'lucide-react';
 import { byId, characters } from '../data/characters';
 import { Portrait } from '../components/Portrait';
 import { ArenaDoPvp } from '../components/ArenaDoPvp';
@@ -49,9 +50,34 @@ type Etapa =
   | { tipo: 'apresentar'; npc: Npc; partida: PartidaPvp }
   | { tipo: 'escolher'; npc: Npc; partida: PartidaPvp }
   | { tipo: 'vs'; npc: Npc; partida: PartidaPvp; meu: number; dele: number }
-  | { tipo: 'luta'; npc: Npc; partida: PartidaPvp; meu: number; dele: number }
+  | { tipo: 'luta'; npc: Npc; partida: PartidaPvp; meu: number; dele: number; retomar?: number }
   | { tipo: 'rodada'; npc: Npc; partida: PartidaPvp }
   | { tipo: 'fim'; npc: Npc; partida: PartidaPvp };
+
+/*
+ * O treino guardado no aparelho a cada passo (pedido do jogador: saiu, o jogo atualizou ou fechou no meio, "você
+ * clica lá no PvP e continua do mesmo lugar"). A luta volta no mesmo ponto, pausada.
+ */
+const CHAVE_DO_TREINO = 'pvp-treino-atual';
+type Salvo = { tipo: Etapa['tipo']; npc: string; partida?: PartidaPvp; meu?: number; dele?: number; segundos?: number };
+const etapaSalva = (): Etapa => {
+  const x = read(CHAVE_DO_TREINO) as Salvo | null, npc = x && NPCS.find((n) => n.id === x.npc);
+  if (!x || !npc || x.tipo === 'lobby') return { tipo: 'lobby' };
+  if (x.tipo === 'montar') return { tipo: 'montar', npc };
+  const p = x.partida;
+  if (!p || !Array.isArray(p.meus) || !Array.isArray(p.deles) || !Array.isArray(p.rodadas)) return { tipo: 'lobby' };
+  if (x.tipo === 'vs' || x.tipo === 'luta') {
+    if (typeof x.meu !== 'number' || typeof x.dele !== 'number') return { tipo: 'escolher', npc, partida: p };
+    return x.tipo === 'luta' ? { tipo: 'luta', npc, partida: p, meu: x.meu, dele: x.dele, retomar: Math.max(0, x.segundos ?? 0) } : { tipo: 'vs', npc, partida: p, meu: x.meu, dele: x.dele };
+  }
+  return { tipo: x.tipo, npc, partida: p } as Etapa;
+};
+const guardaEtapa = (e: Etapa, segundos?: number) => {
+  if (e.tipo === 'lobby') { save(CHAVE_DO_TREINO, null); return; }
+  const { npc, ...resto } = e as Exclude<Etapa, { tipo: 'lobby' }>;
+  const seg = segundos ?? (e.tipo === 'luta' ? e.retomar : undefined);
+  save(CHAVE_DO_TREINO, { ...resto, npc: npc.id, ...(seg !== undefined ? { segundos: seg } : {}) });
+};
 
 /* ---------------------------------------------------------------------------
  * Peças
@@ -211,7 +237,8 @@ function PainelDeFiltros({ colecao, filtro, total, onFiltro, onFechar }: { colec
   const alterna = <T,>(lista: T[], x: T) => (lista.includes(x) ? lista.filter((y) => y !== x) : [...lista, x]);
   const ativos = filtro.universos.length + filtro.funcoes.length + (filtro.esconderUsados ? 1 : 0);
   const familias = Object.keys(FAMILIA_DA_IDENTIDADE) as (keyof typeof FAMILIA_DA_IDENTIDADE)[];
-  return <div className="pv-painel-fundo" onClick={(e) => { if (e.target === e.currentTarget) onFechar(); }}>
+  // por cima da tela onde o jogador está (a tela anima com transform, e um fixed dentro dela ia parar no fim da página)
+  return createPortal(<div className="pv-painel-fundo" onClick={(e) => { if (e.target === e.currentTarget) onFechar(); }}>
     <section className="pv-painel" role="dialog" aria-label="Filtros">
       <span className="pv-painel-alca" aria-hidden="true" />
       <header><SlidersHorizontal size={20} /><b>Filtros</b>{ativos > 0 && <button className="pv-painel-limpar" onClick={() => onFiltro(FILTRO_VAZIO)}>Limpar tudo</button>}<button className="icon-button" onClick={onFechar} aria-label="Fechar"><X size={18} /></button></header>
@@ -243,7 +270,7 @@ function PainelDeFiltros({ colecao, filtro, total, onFiltro, onFechar }: { colec
 
       <footer><button className="primary pv-grande" onClick={onFechar}><Check size={20} />Ver {total} personage{total === 1 ? 'm' : 'ns'}</button></footer>
     </section>
-  </div>;
+  </div>, document.body);
 }
 
 /* ---------------------------------------------------------------------------
@@ -283,6 +310,8 @@ function Montar({ rival, colecao, inicial, onPronto, onVoltar, onDetails, prazo 
       {rival.avatar(44)}
     </header>
     {prazo}
+    {/* os 3 times e o PRONTO ficam presos no topo enquanto o álbum rola (pedido do jogador: ver o time enquanto troca) */}
+    <div className="pv-fixos">
     <div className="pv-slots">
       {times.map((t, i) => {
         const forca = t.length === 3 ? forcaDoTime(t) : 0;
@@ -292,10 +321,10 @@ function Montar({ rival, colecao, inicial, onPronto, onVoltar, onDetails, prazo 
         </button>;
       })}
     </div>
-    {/* o PRONTO logo abaixo dos times, em cima do álbum (pedido do jogador) */}
     <div className="pv-pronto-topo">
       {problema && <small className="pv-problema">{problema}</small>}
       <button className="primary pv-pronto" disabled={!cheios || !!problema} onClick={() => { som('pronto'); onPronto(times as Times); }}><Check size={20} />{cheios ? 'PRONTO' : `Faltam ${9 - times.flat().length}`}</button>
+    </div>
     </div>
     <div className="pv-ferramentas">
       <label className="pv-busca"><Search size={16} /><input value={busca} onChange={(e) => setBusca(e.target.value)} placeholder={`Procurar entre ${colecao.length} personagens`} aria-label="Procurar personagem" />{busca && <button className="pv-limpar-busca" onClick={() => setBusca('')} aria-label="Limpar a busca"><X size={14} /></button>}</label>
@@ -381,7 +410,7 @@ function ResultadoDaRodada({ rival, partida, onSeguir, final = false }: { rival:
     <span className="pv-brilho" aria-hidden="true" />
     <small>RODADA {partida.rodadas.length}</small>
     <h1>{ganhei ? 'VOCÊ VENCEU!' : `${rival.nome} venceu`}</h1>
-    <p>{ganhei ? `O time ${r.meu + 1} ganhou a medalha e fica marcado.` : `O time ${r.dele + 1} dele fica marcado. Você pode usar qualquer time de novo.`}</p>
+    <p>{r.rendida ? (ganhei ? `${rival.nome} desistiu desta luta. ` : 'Você desistiu desta luta. ') : ''}{ganhei ? `O time ${r.meu + 1} ganhou a medalha e fica marcado.` : `O time ${r.dele + 1} dele fica marcado. Você pode usar qualquer time de novo.`}</p>
     <div className="pv-resultado-time">{time.map((id) => <Rosto key={id} id={id} tamanho={64} />)}</div>
     <Placar partida={partida} rival={rival} />
     <button className="primary pv-grande" onClick={onSeguir}>{final ? <><Trophy size={20} />VER RESULTADO</> : <><Swords size={20} />PRÓXIMA RODADA</>}</button>
@@ -467,9 +496,9 @@ function CartaoOnline({ online }: { online: Online }) {
 
 /** Uma confirmação simples por cima da tela (sair da partida). */
 function Confirmar({ titulo, texto, sim, onSim, onNao }: { titulo: string; texto: string; sim: string; onSim: () => void; onNao: () => void }) {
-  return <div className="pv-confirmar" role="alertdialog" aria-label={titulo}>
+  return createPortal(<div className="pv-confirmar" role="alertdialog" aria-label={titulo}>
     <div><b>{titulo}</b><p>{texto}</p><span><button className="secondary" onClick={onNao}>Continuar</button><button className="primary pv-perigo" onClick={onSim}><LogOut size={16} />{sim}</button></span></div>
-  </div>;
+  </div>, document.body);
 }
 
 /** A espera (convite enviado, times prontos, rival escolhendo): o rival, o recado e o prazo. */
@@ -485,17 +514,23 @@ function Espera({ rival, titulo, texto, prazo, children, onSair, sair }: { rival
   </section>;
 }
 
+/** O rival caiu: a partida segue, e ele tem um tempo para voltar (pedido do jogador: 45 s; senão a vitória é sua). */
+function RivalCaiu({ nome, falta, desde }: { nome: string; falta: number; desde: number }) {
+  const agora = useAgora(true, 500), s = Math.max(0, Math.ceil(falta - (agora - desde) / 1000));
+  return createPortal(<div className="pv-caiu" role="status"><WifiOff size={18} /><span><b>{nome} desconectou</b><small>{s > 0 ? `tem ${mmss(s)} para voltar, senão a vitória é sua` : 'a vitória é sua…'}</small></span><em>{s}</em></div>, document.body);
+}
+
 function FimOnline({ v, rival, onSair }: { v: VistaPvp; rival: Oponente; onSair: () => void }) {
   const ganhei = v.vencedor === 'eu', delta = v.delta ?? 0;
   useEffect(() => { som(ganhei ? 'vitoria' : 'derrota'); }, [ganhei]);
-  const porDesistencia = v.motivo === 'desistiu';
+  const porDesistencia = v.motivo === 'desistiu', porQueda = v.motivo === 'desconectou';
   return <section className={`pv-fim ${ganhei ? 'ganhou' : 'perdeu'}`} style={{ '--npc': rival.cor } as CSSProperties}>
     {ganhei && <span className="pv-confete" aria-hidden="true">{Array.from({ length: 24 }, (_, i) => <i key={i} style={{ '--i': i } as CSSProperties} />)}</span>}
     {ganhei && <><Fx nome="raios" cor="#ffd36b" ms={5200} className="pv-fx-raios" /><Fx nome="faiscas" cor="#fff3b0" ms={4200} className="pv-fx-faiscas" /></>}
     <span className="pv-fim-trofeu">{ganhei ? <Trophy size={58} /> : <Shield size={58} />}</span>
     <small>DESAFIO ONLINE · VALENDO RATING</small>
     <h1>{ganhei ? 'VITÓRIA!' : 'DERROTA'}</h1>
-    <p>{porDesistencia ? (ganhei ? `${rival.nome} desistiu da partida.` : 'Você saiu da partida.') : ganhei ? `Você venceu ${rival.nome} com os 3 times.` : `${rival.nome} venceu com os 3 times.`}</p>
+    <p>{porQueda ? (ganhei ? `${rival.nome} desconectou e não voltou em ${v.ausenciaMaxima} s.` : `Você ficou desconectado mais de ${v.ausenciaMaxima} s.`) : porDesistencia ? (ganhei ? `${rival.nome} abandonou a partida.` : 'Você abandonou a partida.') : ganhei ? `Você venceu ${rival.nome} com os 3 times.` : `${rival.nome} venceu com os 3 times.`}</p>
     {v.rodadas.length > 0 && <div className="pv-fim-rodadas">{v.rodadas.map((r) => <span key={r.n} className={r.vencedor}><b>{r.n + 1}</b>{r.vencedor === 'eu' ? 'V' : 'D'}</span>)}</div>}
     <div className="pv-fim-rating">
       <Crown size={22} /><span><small>SEU RATING</small><b>{v.voce.rating}</b></span>
@@ -522,18 +557,20 @@ function PartidaOnline({ online, colecaoLocal, settings, onSettings, onDetails, 
   const [v, setV] = useState<VistaPvp | null>(null);
   const [colecao, setColecao] = useState<string[]>(colecaoLocal);
   const [offset, setOffset] = useState(0);
+  const [recebido, setRecebido] = useState(0);
   const [erro, setErro] = useState('');
   const [sumiu, setSumiu] = useState(false);
   const [falhas, setFalhas] = useState(0);
   const [assistido, setAssistido] = useState(() => lerAssistido(id));
   const [cena, setCena] = useState<Cena>(null);
   const [sair, setSair] = useState(false);
+  const [renderLuta, setRenderLuta] = useState(false);
   const [guardado] = useState(carregar);
   const marca = (a: Assistido) => { setAssistido(a); save('pvp-online', a); };
 
   const aplica = (r: RespostaPvp) => {
     if (!r.partida) { setSumiu(true); return; }
-    setV(r.partida); setOffset(diferencaDoRelogio(r.partida.agora));
+    setV(r.partida); setOffset(diferencaDoRelogio(r.partida.agora)); setRecebido(Date.now());
     if (r.colecao.length) setColecao(r.colecao);
   };
   const atualizar = useRef(async () => {});
@@ -582,6 +619,11 @@ function PartidaOnline({ online, colecaoLocal, settings, onSettings, onDetails, 
   const semRodada = assistiu !== null && !!v && !v.rodadas.some((r) => r.n === assistiu);
   useEffect(() => { if (semRodada) setCena(null); }, [semRodada]);
 
+  // o rival desistiu da luta que está passando: ela acaba aqui também
+  const rendidaAgora = cena?.tipo === 'luta' && !!v?.rodadas.find((r) => r.n === cena.n)?.rendida;
+  const nDaCena = cena?.n;
+  useEffect(() => { if (rendidaAgora && nDaCena !== undefined) setCena({ tipo: 'resultado', n: nDaCena }); }, [rendidaAgora, nDaCena]);
+
   // alguém desistiu no meio da luta: a partida acabou, sai da luta
   const desistiram = v?.fase === 'terminada' && v.motivo === 'desistiu';
   useEffect(() => { if (desistiram) setCena(null); }, [desistiram]);
@@ -590,9 +632,10 @@ function PartidaOnline({ online, colecaoLocal, settings, onSettings, onDetails, 
   if (sumiu) return <Espera rival={{ nome: 'Partida', cor: '#8fd3ff', avatar: () => <Swords size={60} /> }} titulo="Partida não encontrada" texto="Ela pode ter acabado." onSair={voltar} sair="Voltar" />;
   if (!v || !rival) return <section className="pv-espera"><p className="cm-carregando-tela">{erro || 'Abrindo a partida…'}</p>{erro && <button className="secondary" onClick={voltar}>Voltar</button>}</section>;
   const aviso = erro ? <p className="pv-problema pv-erro-online">{erro}</p> : null;
-  const confirmaSair = sair && <Confirmar titulo={v.fase === 'jogando' ? 'Desistir da partida?' : 'Sair da partida?'}
-    texto={v.fase === 'jogando' ? `Desistir conta como derrota e ${v.rival.nome} ganha o rating.` : 'A partida é cancelada e ninguém perde rating.'}
-    sim={v.fase === 'jogando' ? 'Desistir' : 'Sair'} onNao={() => setSair(false)} onSim={() => { setSair(false); void agir(servico.desistir(id)); }} />;
+  const caiu = v.ausencia !== null && (v.fase === 'jogando' || v.fase === 'montando') ? <RivalCaiu nome={v.rival.nome} falta={v.ausenciaMaxima - v.ausencia} desde={recebido} /> : null;
+  const confirmaSair = <>{caiu}{sair && <Confirmar titulo={v.fase === 'jogando' ? 'Abandonar a partida?' : 'Sair da partida?'}
+    texto={v.fase === 'jogando' ? `Abandonar conta como derrota e ${v.rival.nome} ganha o rating.` : 'A partida é cancelada e ninguém perde rating.'}
+    sim={v.fase === 'jogando' ? 'Abandonar' : 'Sair'} onNao={() => setSair(false)} onSim={() => { setSair(false); void agir(servico.desistir(id)); }} />}</>;
 
   // fora de jogo: convite recusado, cancelado ou expirado
   if (v.fase === 'recusada' || v.fase === 'cancelada' || v.fase === 'expirada')
@@ -623,16 +666,18 @@ function PartidaOnline({ online, colecaoLocal, settings, onSettings, onDetails, 
   const partida: PartidaPvp = { meus: meus as unknown as Times, deles: deles as unknown as Times, seed: v.seed, rodadas: vistas };
 
   if (cena?.tipo === 'luta') return <>{<ArenaDoPvp key={cena.n} meu={cena.meu} dele={cena.dele} seed={cena.seed} rodada={cena.n + 1} rival={v.rival.nome} settings={settings} onSettings={onSettings}
-    podePausar={false} espelhado={!v.desafiante} atrasoInicial={cena.atraso} onFim={() => setCena({ tipo: 'resultado', n: cena.n })} onDesistir={() => setSair(true)} />}{confirmaSair}</>;
+    podePausar={false} espelhado={!v.desafiante} atrasoInicial={cena.atraso} onFim={() => setCena({ tipo: 'resultado', n: cena.n })} onDesistir={() => setRenderLuta(true)} />}{confirmaSair}
+    {renderLuta && <Confirmar titulo="Desistir desta luta?" texto="Você perde esta rodada. A partida continua com os outros times." sim="Desistir da luta" onNao={() => setRenderLuta(false)}
+      onSim={() => { setRenderLuta(false); const n = cena.n; void agir(servico.render(id, n)).then(() => setCena({ tipo: 'resultado', n })); }} />}</>;
   // o resultado da luta que acabou de passar na tela (mesmo que a partida já tenha andado enquanto ela passava)
   const daCena = cena?.tipo === 'resultado' ? v.rodadas.find((r) => r.n === cena.n) : undefined;
   if (cena?.tipo === 'resultado' && daCena)
-    return <ResultadoDaRodada rival={rival} partida={{ ...partida, rodadas: v.rodadas.filter((r) => r.n <= daCena.n).map(naTela) }} final={v.fase === 'terminada' && daCena.n === v.resolvida}
-      onSeguir={() => { marca({ ...assistido, apresentado: true, vistas: [...new Set([...assistido.vistas, ...v.rodadas.filter((r) => r.n <= daCena.n).map((r) => r.n)])] }); setCena(null); }} />;
+    return <>{caiu}<ResultadoDaRodada rival={rival} partida={{ ...partida, rodadas: v.rodadas.filter((r) => r.n <= daCena.n).map(naTela) }} final={v.fase === 'terminada' && daCena.n === v.resolvida}
+      onSeguir={() => { marca({ ...assistido, apresentado: true, vistas: [...new Set([...assistido.vistas, ...v.rodadas.filter((r) => r.n <= daCena.n).map((r) => r.n)])] }); setCena(null); }} /></>;
 
   if (v.fase === 'terminada' && (!pendente || v.motivo === 'desistiu')) return <FimOnline v={v} rival={rival} onSair={() => { marca({ ...assistido, vistas: v.rodadas.map((r) => r.n) }); voltar(); }} />;
 
-  if (!assistido.apresentado && v.rodadas.length === 0) return <Apresentar rival={rival} partida={partida} onComecar={() => marca({ ...assistido, apresentado: true })} />;
+  if (!assistido.apresentado && v.rodadas.length === 0) return <>{caiu}<Apresentar rival={rival} partida={partida} onComecar={() => marca({ ...assistido, apresentado: true })} /></>;
 
   if (pendente) {
     // os dois já escolheram: o VS e o botão de começar (o duelo começa sozinho quando o tempo acaba)
@@ -649,7 +694,7 @@ function PartidaOnline({ online, colecaoLocal, settings, onSettings, onDetails, 
   return <>{<Escolher key={`${v.rodada}-${falhas}`} rival={rival} partida={partida} jaEscolhido={v.minhaEscolha}
     prazo={<>{<Prazo ate={v.prazo} offset={offset} texto={v.escolheu.rival ? ` · ${v.rival.nome} já escolheu!` : v.assistiu && !v.assistiu.rival && v.rodadas.length ? ` · ${v.rival.nome} ainda vê a luta` : ' para escolher'} />}{aviso}</>}
     onEscolher={(i) => void agir(servico.escolher(id, v.rodada, i))} />}
-    <button className="pv-sair-online" onClick={() => setSair(true)}><LogOut size={14} />Desistir</button>{confirmaSair}</>;
+    <button className="pv-sair-online" onClick={() => setSair(true)}><LogOut size={14} />Abandonar partida</button>{confirmaSair}</>;
 }
 
 /* ---------------------------------------------------------------------------
@@ -661,12 +706,14 @@ export function PvpScreen({ colecao, settings, onSettings, onDetails, onJogar, o
   /** O Desafio online (com conta); a partida aberta vem do App (convite aceito, desafio pela Comunidade). */
   online?: Online | null;
 }) {
-  const [etapa, setEtapa] = useState<Etapa>({ tipo: 'lobby' });
+  const [etapa, setEtapa] = useState<Etapa>(etapaSalva);
+  useEffect(() => { guardaEtapa(etapa); }, [etapa]);
   const naOnline = !!online?.partida;
   useEffect(() => { if (naOnline) return; onLutando(etapa.tipo === 'luta'); window.scrollTo(0, 0); }, [etapa.tipo, onLutando, naOnline]);
   useEffect(() => () => onLutando(false), [onLutando]);
   const [guardado, setGuardado] = useState(carregar);
   const desistir = useRef(false);
+  const [confirmar, setConfirmar] = useState<'luta' | 'partida' | null>(null);
   const guardar = (g: Guardado) => { setGuardado(g); save('pvp', g); };
 
   const comecar = (npc: Npc, meus: Times) => {
@@ -674,8 +721,8 @@ export function PvpScreen({ colecao, settings, onSettings, onDetails, onJogar, o
     const seed = crypto.getRandomValues(new Uint32Array(1))[0]!;
     setEtapa({ tipo: 'apresentar', npc, partida: { meus, deles: timesDoNpc(npc.nivel as NivelNpc, seed), rodadas: [], seed } });
   };
-  const terminouRodada = (npc: Npc, partida: PartidaPvp, meu: number, dele: number, vencedor: 'player' | 'enemy') => {
-    const p: PartidaPvp = { ...partida, rodadas: [...partida.rodadas, { meu, dele, seed: sementeDaRodada(partida.seed, partida.rodadas.length), vencedor: vencedor === 'player' ? 'eu' : 'rival' }] };
+  const terminouRodada = (npc: Npc, partida: PartidaPvp, meu: number, dele: number, vencedor: 'player' | 'enemy', rendida = false) => {
+    const p: PartidaPvp = { ...partida, rodadas: [...partida.rodadas, { meu, dele, seed: sementeDaRodada(partida.seed, partida.rodadas.length), vencedor: vencedor === 'player' ? 'eu' : 'rival', ...(rendida ? { rendida } : {}) }] };
     const fim = vencedorDaPartida(p);
     if (fim) {
       const atual = guardado.treino[npc.id] ?? { v: 0, d: 0 };
@@ -694,19 +741,27 @@ export function PvpScreen({ colecao, settings, onSettings, onDetails, onJogar, o
     window.setTimeout(() => { desistir.current = false; }, 500);
   };
 
+  // as duas desistências do treino (pedido do jogador): na luta, só daquela rodada; na escolha do time, da partida toda
+  const confirmaTreino = confirmar && (etapa.tipo === 'luta' || etapa.tipo === 'escolher') && (confirmar === 'luta'
+    ? <Confirmar titulo="Desistir desta luta?" texto={`Você perde esta rodada. A partida continua com os outros times.`} sim="Desistir da luta" onNao={() => setConfirmar(null)}
+      onSim={() => { setConfirmar(null); if (etapa.tipo === 'luta') terminouRodada(etapa.npc, etapa.partida, etapa.meu, etapa.dele, 'enemy', true); }} />
+    : <Confirmar titulo="Abandonar a partida?" texto={`Abandonar conta como derrota contra ${etapa.npc.nome}.`} sim="Abandonar" onNao={() => setConfirmar(null)}
+      onSim={() => { setConfirmar(null); desistirDaPartida(etapa.npc, etapa.partida); }} />);
+
   if (online?.partida) return <PartidaOnline key={online.partida} online={online} colecaoLocal={colecao} settings={settings} onSettings={onSettings} onDetails={onDetails} onLutando={onLutando} />;
   if (etapa.tipo === 'lobby') return <Lobby colecao={colecao} guardado={guardado} online={online} onTreino={(npc) => { som('ui-arena'); setEtapa({ tipo: 'montar', npc }); }} onJogar={onJogar} />;
   if (etapa.tipo === 'montar') return <Montar rival={oponenteDoNpc(etapa.npc)} colecao={colecao} inicial={guardado.times} onVoltar={() => setEtapa({ tipo: 'lobby' })} onDetails={onDetails} onPronto={(t) => comecar(etapa.npc, t)} />;
   if (etapa.tipo === 'apresentar') return <Apresentar rival={oponenteDoNpc(etapa.npc)} partida={etapa.partida} onComecar={() => setEtapa({ tipo: 'escolher', npc: etapa.npc, partida: etapa.partida })} />;
-  if (etapa.tipo === 'escolher') return <Escolher rival={oponenteDoNpc(etapa.npc)} partida={etapa.partida} onEscolher={(meu) => {
+  if (etapa.tipo === 'escolher') return <><Escolher rival={oponenteDoNpc(etapa.npc)} partida={etapa.partida} onEscolher={(meu) => {
     // o NPC "pensa" um pouco antes do VS
     const dele = escolhaDoNpc(etapa.npc.nivel as NivelNpc, etapa.partida, etapa.partida.seed + etapa.partida.rodadas.length * 7919);
     window.setTimeout(() => setEtapa({ tipo: 'vs', npc: etapa.npc, partida: etapa.partida, meu, dele }), 900);
-  }} />;
+  }} /><button className="pv-sair-online" onClick={() => setConfirmar('partida')}><LogOut size={14} />Abandonar partida</button>{confirmaTreino}</>;
   if (etapa.tipo === 'vs') return <Vs rival={oponenteDoNpc(etapa.npc)} partida={etapa.partida} meu={etapa.meu} dele={etapa.dele} onLutar={() => setEtapa({ ...etapa, tipo: 'luta' })} />;
-  if (etapa.tipo === 'luta') return <ArenaDoPvp meu={etapa.partida.meus[etapa.meu]!} dele={etapa.partida.deles[etapa.dele]!} seed={sementeDaRodada(etapa.partida.seed, etapa.partida.rodadas.length)}
+  if (etapa.tipo === 'luta') return <><ArenaDoPvp meu={etapa.partida.meus[etapa.meu]!} dele={etapa.partida.deles[etapa.dele]!} seed={sementeDaRodada(etapa.partida.seed, etapa.partida.rodadas.length)}
     rodada={etapa.partida.rodadas.length + 1} rival={etapa.npc.nome} settings={settings} onSettings={onSettings} podePausar
-    onFim={(v) => terminouRodada(etapa.npc, etapa.partida, etapa.meu, etapa.dele, v)} onDesistir={() => desistirDaPartida(etapa.npc, etapa.partida)} />;
+    atrasoInicial={etapa.retomar ?? 0} comecaPausado={(etapa.retomar ?? 0) > 0} onTempo={(seg) => guardaEtapa(etapa, seg)}
+    onFim={(v) => terminouRodada(etapa.npc, etapa.partida, etapa.meu, etapa.dele, v)} onDesistir={() => setConfirmar('luta')} />{confirmaTreino}</>;
   if (etapa.tipo === 'rodada') return <ResultadoDaRodada rival={oponenteDoNpc(etapa.npc)} partida={etapa.partida} onSeguir={() => setEtapa({ tipo: 'escolher', npc: etapa.npc, partida: etapa.partida })} />;
   return <Fim npc={etapa.npc} partida={etapa.partida} placar={guardado.treino[etapa.npc.id] ?? { v: 0, d: 0 }} onDeNovo={() => setEtapa({ tipo: 'montar', npc: etapa.npc })} onSair={() => setEtapa({ tipo: 'lobby' })} />;
 }

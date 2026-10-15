@@ -21,6 +21,10 @@ const erro = (mensagem: string, status = 422): Resposta => ({ status, body: { er
 
 /** Quanto cada etapa espera (segundos). */
 export const PRAZO = { convite: 120, montar: 300, escolher: 75, lutar: 25 } as const;
+/** Quem some da partida (app fechado, sem internet) por mais que isso perde (pedido do jogador: 45 s para voltar). */
+export const AUSENCIA_MAXIMA = 45;
+/** A partir de quanto tempo sem notícia o rival aparece como desconectado (o aparelho pergunta a cada 3 s). */
+const SINAL_DE_QUEDA = 9;
 const ABERTAS = ['convite', 'montando', 'jogando'];
 const ID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 const PREFIXO = 'personagem:';
@@ -32,7 +36,7 @@ interface Partida {
   lutar_a: boolean; lutar_b: boolean; assistiu_a: boolean; assistiu_b: boolean; inicio_em: string | null; prazo: string; vencedor: string | null; motivo: string | null;
   rating_a: number | null; rating_b: number | null; delta_a: number | null; delta_b: number | null; criada_em: string;
 }
-interface Rodada { n: number; time_a: number; time_b: number; seed: number; vencedor: 'a' | 'b'; duracao: number }
+interface Rodada { n: number; time_a: number; time_b: number; seed: number; vencedor: 'a' | 'b'; duracao: number; rendida?: boolean }
 
 /** A coleção de quem joga, no servidor: os personagens liberados nas Conquistas. */
 async function colecaoDe(db: Db, quem: string): Promise<string[]> {
@@ -47,7 +51,7 @@ async function partidaDe(db: Db, id: string): Promise<Partida | null> {
   return data as Partida | null;
 }
 async function rodadasDe(db: Db, id: string): Promise<Rodada[]> {
-  const { data, error } = await db.from('pvp_rodadas').select('n,time_a,time_b,seed,vencedor,duracao').eq('partida_id', id).order('n');
+  const { data, error } = await db.from('pvp_rodadas').select('n,time_a,time_b,seed,vencedor,duracao,rendida').eq('partida_id', id).order('n');
   if (error) throw error;
   return (data ?? []) as Rodada[];
 }
@@ -123,8 +127,30 @@ async function avancar(db: Db, p: Partida): Promise<Partida> {
   return (await partidaDe(db, p.id))!;
 }
 
+const tempoDe = (x: unknown) => new Date(x as string).getTime();
+/**
+ * Marca que quem pergunta está na partida. No meio do jogo, se o outro sumiu há mais de AUSENCIA_MAXIMA, quem ficou
+ * vence (a luta na tela segue até lá; a vitória vale como as 3 rodadas). Devolve a partida e há quanto tempo o rival
+ * não dá notícia (para a tela mostrar "desconectou, X s para voltar").
+ */
+async function presenca(db: Db, p: Partida, quem: string): Promise<{ p: Partida; ausencia: number | null }> {
+  if (!['montando', 'jogando'].includes(p.estado)) return { p, ausencia: null };
+  const { error } = await db.from('pvp_presenca').upsert({ partida_id: p.id, jogador: quem, visto_em: new Date().toISOString() }, { onConflict: 'partida_id,jogador' });
+  if (error) throw error;
+  const outro = p.desafiante === quem ? p.desafiado : p.desafiante;
+  const { data } = await db.from('pvp_presenca').select('visto_em').eq('partida_id', p.id).eq('jogador', outro).maybeSingle();
+  if (!data) return { p, ausencia: null };
+  const ha = Math.max(0, (Date.now() - tempoDe(data.visto_em)) / 1000);
+  if (p.estado === 'jogando' && ha > AUSENCIA_MAXIMA) {
+    const { error: e } = await db.rpc('pvp_aplicar_resultado', { p_partida: p.id, p_vencedor: quem, p_motivo: 'desconectou' });
+    if (e) throw e;
+    return { p: (await partidaDe(db, p.id))!, ausencia: null };
+  }
+  return { p, ausencia: ha >= SINAL_DE_QUEDA ? Math.floor(ha) : null };
+}
+
 /** O que cada um pode ver da partida (do ponto de vista de quem pergunta). */
-async function vista(db: Db, p: Partida, quem: string) {
+async function vista(db: Db, p: Partida, quem: string, ausencia: number | null = null) {
   const eu = ladoDe(p, quem), outro = eu === 'a' ? p.desafiado : p.desafiante;
   const [{ data: nomes }, { data: ratings }, rodadas, times, { data: minha }] = await Promise.all([
     db.from('players').select('id,handle').in('id', [p.desafiante, p.desafiado]),
@@ -147,9 +173,11 @@ async function vista(db: Db, p: Partida, quem: string) {
     rodada: p.rodada, resolvida: p.resolvida, inicioEm: p.inicio_em,
     meusTimes: times[quem] ?? null, timesDele: prontos ? times[outro] ?? null : null,
     minhaEscolha: minha?.time ?? null,
-    rodadas: rodadas.map((r) => ({ n: r.n, meu: meu(r), dele: dele(r), seed: Number(r.seed), vencedor: r.vencedor === eu ? 'eu' : 'rival', duracao: r.duracao })),
+    rodadas: rodadas.map((r) => ({ n: r.n, meu: meu(r), dele: dele(r), seed: Number(r.seed), vencedor: r.vencedor === eu ? 'eu' : 'rival', duracao: r.duracao, rendida: r.rendida === true })),
     vencedor: p.vencedor ? (p.vencedor === quem ? 'eu' : 'rival') : null, motivo: p.motivo,
     delta: p.delta_a === null ? null : eu === 'a' ? p.delta_a : p.delta_b,
+    // há quantos segundos o rival não dá notícia (null: está aqui) e quanto ele tem para voltar
+    ausencia, ausenciaMaxima: AUSENCIA_MAXIMA,
   };
 }
 
@@ -177,8 +205,8 @@ export async function acaoPvp(db: Db, quem: string, input: Record<string, unknow
       p = (data?.[0] as Partida | undefined) ?? null;
     }
     if (!p) return ok({ partida: null, colecao: await colecaoDe(db, quem) });
-    p = await avancar(db, p);
-    return ok({ partida: await vista(db, p, quem), colecao: await colecaoDe(db, quem) });
+    const aqui = await presenca(db, await avancar(db, p), quem);
+    return ok({ partida: await vista(db, aqui.p, quem, aqui.ausencia), colecao: await colecaoDe(db, quem) });
   }
 
   if (op === 'desafiar') {
@@ -203,8 +231,8 @@ export async function acaoPvp(db: Db, quem: string, input: Record<string, unknow
 
   const p0 = await minha();
   if (!p0) return erro('Partida não encontrada.', 404);
-  const p = await avancar(db, p0), eu = ladoDe(p, quem);
-  const devolve = async () => ok({ partida: await vista(db, (await partidaDe(db, p.id))!, quem), colecao: await colecaoDe(db, quem) });
+  const aqui = await presenca(db, await avancar(db, p0), quem), p = aqui.p, eu = ladoDe(p, quem);
+  const devolve = async () => ok({ partida: await vista(db, (await partidaDe(db, p.id))!, quem, aqui.ausencia), colecao: await colecaoDe(db, quem) });
 
   if (op === 'responder') {
     if (eu !== 'b' || p.estado !== 'convite') return erro('Este convite não está mais aberto.', 409);
@@ -258,6 +286,27 @@ export async function acaoPvp(db: Db, quem: string, input: Record<string, unknow
     const agora = (await partidaDe(db, p.id))!;
     if (agora.assistiu_a && agora.assistiu_b && Date.parse(agora.prazo) > Date.now() + PRAZO.escolher * 1000)
       await atualiza(db, p.id, { prazo: daqui(PRAZO.escolher) }, (q) => q.eq('resolvida', n));
+    return devolve();
+  }
+
+  /*
+   * Desistir da luta que está passando (pedido do jogador: "o desistir dentro da luta é só daquela luta"): a rodada
+   * vai para o outro e a partida segue. Se com isso o outro completou os 3 times, a partida acaba para ele.
+   * (Se a rodada já era do outro, nada muda; se ela tinha encerrado a partida, já não há o que render.)
+   */
+  if (op === 'render') {
+    const n = Number(input.n);
+    if (p.estado !== 'jogando' || n !== p.resolvida || !p.inicio_em) return devolve();
+    const rodadas = await rodadasDe(db, p.id), r = rodadas.find((x) => x.n === n);
+    if (!r || r.rendida) return devolve();
+    const outro: 'a' | 'b' = eu === 'a' ? 'b' : 'a';
+    const { error } = await db.from('pvp_rodadas').update({ vencedor: outro, rendida: true }).eq('partida_id', p.id).eq('n', n);
+    if (error) throw error;
+    const fim = vencedorDaPartida({ rodadas: comoA(await rodadasDe(db, p.id)) });
+    if (fim) {
+      const { error: e } = await db.rpc('pvp_aplicar_resultado', { p_partida: p.id, p_vencedor: fim === 'eu' ? p.desafiante : p.desafiado, p_motivo: 'venceu com os 3 times' });
+      if (e) throw e;
+    }
     return devolve();
   }
 
