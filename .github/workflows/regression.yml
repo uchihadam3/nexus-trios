@@ -71,7 +71,8 @@ jobs:
       - run: npm run assets:expanded
       - run: npm run assets:portraits
       - run: npx playwright install --with-deps chromium
-      - run: npm run build
+      # sem o online: com ele, o jogo abre na porta de entrada (entrar na conta) e a varredura não chega a nenhuma tela
+      - run: VITE_RANKED_ENABLED=false npm run build
       - run: |
           npx vite preview --port 5173 --strictPort &
           for i in $(seq 1 30); do curl -sf http://localhost:5173/nexus-trios/ > /dev/null && break; sleep 1; done
