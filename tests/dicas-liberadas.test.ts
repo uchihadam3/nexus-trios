@@ -3,7 +3,7 @@ import { META_DAS_DICAS, dicasLiberadas, ehDono, sha256 } from '../src/lib/dicas
 
 describe('botão das Dicas de trio', () => {
   it('fica escondido até a meta, e aparece depois dela', () => {
-    expect(META_DAS_DICAS).toBe(1_500_000);
+    expect(META_DAS_DICAS).toBe(1_400_000);
     expect(dicasLiberadas(false, 0)).toBe(false);
     expect(dicasLiberadas(false, META_DAS_DICAS - 1)).toBe(false);
     expect(dicasLiberadas(false, META_DAS_DICAS)).toBe(true);
