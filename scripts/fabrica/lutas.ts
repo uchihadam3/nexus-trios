@@ -16,7 +16,10 @@
  *              aleatórios, com o trio que um jogador bom montaria e com o melhor
  *              trio achado entre os mais fortes (as metas de equilíbrio)
  *
+ *   pontos     trio sorteado jogando a jornada inteira, com os pontos da jornada (a conta do jogo, sem dicas);
+ *              com FORTES, o trio é sorteado só entre esses ids (para medir uma lista de candidatos)
  * Cada linha (lutas): a1 a2 a3 b1 b2 b3 v (índices do elenco; v = 1 se o trio a venceu).
+ * Cada linha (pontos): a1 a2 a3 v pontos (v = lutas vencidas, 0 a 10).
  * Cada linha (jornada): a1 a2 a3 v (v = lutas vencidas, 0 a 10).
  *   trios        TODOS os trios do elenco, um lote de 1 milhão por rodada (semente = número do lote, 0 a 10):
  *              cada trio faz <lutas> lutas contra trios sorteados (pedido do jogador: "pega 1 milhão de
@@ -31,13 +34,14 @@ import { createBattle, stepBattle } from '../../src/engine/battle';
 import { ENGINE_VERSION, rosterFingerprint } from '../../src/engine/ranked';
 import { forcaDoTrio, generateCampaign, newDraft, pickDraft, skipDraft } from '../../src/engine/campaign';
 import { combosDoTrio } from '../../src/engine/combos';
+import { pontosDaLuta } from '../../src/engine/pontos';
 import { FORCA } from '../../src/data/forca-dos-rivais';
 import CANDIDATOS from './candidatos-do-melhor.json';
 
 const [plano, parteTxt, partesTxt, lutasTxt, saida, sementeTxt = '0'] = process.argv.slice(2);
 const parte = Number(parteTxt), partes = Number(partesTxt), lutas = Number(lutasTxt), semente = Number(sementeTxt), semente0 = semente;
 if (!plano || !saida || !(partes > 0) || !(parte >= 0 && parte < partes) || !(lutas > 0)) {
-  console.error('uso: lutas <aleatorio|pares|jornada|dificuldade|trios> <parte> <partes> <lutas> <saida.txt> [semente]');
+  console.error('uso: lutas <aleatorio|pares|jornada|dificuldade|trios|pontos> <parte> <partes> <lutas> <saida.txt> [semente]');
   process.exit(1);
 }
 const N = characters.length;
@@ -49,10 +53,10 @@ const sorteia = (fora: Set<number>) => { let i: number; do i = Math.floor(rnd() 
 /* As duplas desta parte (pares): a k-ésima dupla da lista vai para a parte k % partes. */
 const duplas: [number, number][] = [];
 if (plano === 'pares') { let k = 0; for (let i = 0; i < N; i++) for (let j = i + 1; j < N; j++, k++) if (k % partes === parte) duplas.push([i, j]); }
-else if (!['aleatorio', 'jornada', 'dificuldade', 'trios'].includes(plano)) { console.error(`plano desconhecido: ${plano}`); process.exit(1); }
+else if (!['aleatorio', 'jornada', 'dificuldade', 'trios', 'pontos'].includes(plano)) { console.error(`plano desconhecido: ${plano}`); process.exit(1); }
 
 writeFileSync(saida, `# motor ${ENGINE_VERSION} elenco ${rosterFingerprint()} plano ${plano} parte ${parte}/${partes} semente ${semente}\n`);
-if (plano === 'jornada' || plano === 'dificuldade' || plano === 'trios') { ({ jornada: jornadas, dificuldade, trios })[plano](); process.exit(0); }
+if (plano === 'jornada' || plano === 'dificuldade' || plano === 'trios' || plano === 'pontos') { ({ jornada: jornadas, dificuldade, trios, pontos })[plano](); process.exit(0); }
 let buffer = '', feitas = 0;
 const inicio = Date.now();
 for (let n = 0; n < lutas; n++) {
@@ -104,6 +108,28 @@ function jornada(team: string[], seed: number) {
     if (b.winner !== 'player') return i;
   }
   return 10;
+}
+/* A jornada com os pontos dela: soma os pontos de cada luta jogada (também a da derrota), como o jogo. */
+function pontos() {
+  const ids = characters.map((c) => c.id);
+  const pool = process.env.FORTES ? process.env.FORTES.split(',').filter((x) => ids.includes(x)) : ids;
+  let buf = '';
+  for (let n = 0; n < lutas; n++) {
+    const team: string[] = [];
+    while (team.length < 3) { const id = pool[Math.floor(rnd() * pool.length)]!; if (!team.includes(id)) team.push(id); }
+    const seed = Math.floor(rnd() * 2 ** 31);
+    let soma = 0, v = 0;
+    for (const [i, e] of generateCampaign(seed, team).entries()) {
+      const b = createBattle(team, e.team, seed + i * 7919, e.scale);
+      for (let t = 0; t < 9000 && !b.finished; t++) stepBattle(b);
+      soma += Math.max(0, pontosDaLuta(b, i, false).total);
+      if (b.winner !== 'player') break;
+      v++;
+    }
+    buf += `${team.map((id) => ids.indexOf(id)).join(' ')} ${v} ${Math.round(soma)}\n`;
+    if (n % 200 === 199) { appendFileSync(saida, buf); buf = ''; console.log(`parte ${parte}: ${n + 1}/${lutas} jornadas`); }
+  }
+  appendFileSync(saida, buf);
 }
 function jornadas() {
   let buf = '';
