@@ -189,6 +189,35 @@ function timesAoAcaso(colecao: string[]): string[][] | null {
   return times;
 }
 
+/**
+ * "Montar os melhores" (só na conta do dono): os 3 times mais fortes que a coleção permite, pela mesma nota das
+ * estrelas. Cada time é buscado à mão de mestre: vários começos sorteados e, em cada um, troca um por um enquanto
+ * a nota sobe; fica o melhor. O sorteio dos começos faz sair um jeito diferente a cada toque, sempre entre os fortes.
+ */
+function timesMaisFortes(colecao: string[]): string[][] | null {
+  if (colecao.length < MINIMO_DA_COLECAO) return null;
+  const livres = [...colecao], times: string[][] = [];
+  const ao = () => { const p = [...livres], t: string[] = []; while (t.length < 3) t.push(p.splice(Math.floor(Math.random() * p.length), 1)[0]!); return t; };
+  for (let k = 0; k < 3; k++) {
+    let melhor: string[] = ao(), nm = notaDoTrio(melhor);
+    for (let r = 0; r < 6; r++) {
+      let t = ao(), n = notaDoTrio(t);
+      for (let mudou = true, voltas = 0; mudou && voltas < 6; voltas++) {
+        mudou = false;
+        for (let pos = 0; pos < 3; pos++) for (const c of livres) {
+          if (t.includes(c)) continue;
+          const novo = t.map((x, j) => (j === pos ? c : x)), nn = notaDoTrio(novo);
+          if (nn > n + 1e-9) { t = novo; n = nn; mudou = true; }
+        }
+      }
+      if (n > nm) { melhor = t; nm = n; }
+    }
+    times.push(melhor);
+    for (const id of melhor) livres.splice(livres.indexOf(id), 1);
+  }
+  return times.sort((a, b) => notaDoTrio(b) - notaDoTrio(a));
+}
+
 /* ---------------------------------------------------------------------------
  * Os filtros do álbum: universo, função (as etiquetas do Draft) e a ordem
  * ------------------------------------------------------------------------- */
@@ -277,7 +306,9 @@ function PainelDeFiltros({ colecao, filtro, total, onFiltro, onFechar }: { colec
  * 2. Montar os 3 times
  * ------------------------------------------------------------------------- */
 
-function Montar({ rival, colecao, inicial, onPronto, onVoltar, onDetails, prazo }: { rival: Oponente; colecao: string[]; inicial?: string[][]; onPronto: (t: Times) => void; onVoltar: () => void; onDetails: (id: string) => void; prazo?: ReactNode }) {
+function Montar({ rival, colecao, inicial, onPronto, onVoltar, onDetails, prazo, melhores = false }: { rival: Oponente; colecao: string[]; inicial?: string[][]; onPronto: (t: Times) => void; onVoltar: () => void; onDetails: (id: string) => void; prazo?: ReactNode;
+  /** Só na conta do dono (pedido dele): um botão que monta os times mais fortes possíveis com a coleção. */
+  melhores?: boolean }) {
   const valido = (t?: string[][]) => !!t && t.length === 3 && t.every((x) => x.every((id) => colecao.includes(id)));
   const [times, setTimes] = useState<string[][]>(() => (valido(inicial) ? inicial!.map((t) => [...t]) : [[], [], []]));
   const [ativo, setAtivo] = useState(() => Math.max(0, times.findIndex((t) => t.length < 3)));
@@ -302,6 +333,7 @@ function Montar({ rival, colecao, inicial, onPronto, onVoltar, onDetails, prazo 
     setAtivo(alvo);
   };
   const sozinho = () => { const s = timesAoAcaso(colecao); if (s) { setTimes(s); setAtivo(0); som('pronto'); } };
+  const osMelhores = () => { const s = timesMaisFortes(colecao); if (s) { setTimes(s); setAtivo(0); som('pronto'); } };
 
   return <section className="pv-montar">
     <header className="pv-subtopo">
@@ -330,6 +362,7 @@ function Montar({ rival, colecao, inicial, onPronto, onVoltar, onDetails, prazo 
       <label className="pv-busca"><Search size={16} /><input value={busca} onChange={(e) => setBusca(e.target.value)} placeholder={`Procurar entre ${colecao.length} personagens`} aria-label="Procurar personagem" />{busca && <button className="pv-limpar-busca" onClick={() => setBusca('')} aria-label="Limpar a busca"><X size={14} /></button>}</label>
       <button className={`secondary pv-filtros-botao ${ativos ? 'ativo' : ''}`} onClick={() => { setPainel(true); som('toque'); }}><SlidersHorizontal size={16} />Filtros{ativos > 0 && <i>{ativos}</i>}</button>
       <button className="secondary pv-sozinho" onClick={sozinho}><Wand2 size={16} />Montar ao acaso</button>
+      {melhores && <button className="secondary pv-melhores" onClick={osMelhores}><Crown size={16} />Montar os melhores</button>}
     </div>
     {ativos > 0 && <div className="pv-filtros-ativos">
       {filtro.funcoes.map((f) => { const Icone = ICONE_DA_IDENTIDADE[f]; return <button key={f} style={{ '--cor': FAMILIA_DA_IDENTIDADE[familiaDaIdentidade[f]].cor } as CSSProperties} onClick={() => setFiltro({ ...filtro, funcoes: filtro.funcoes.filter((x) => x !== f) })}><Icone size={12} />{f}<X size={12} /></button>; })}
@@ -550,8 +583,9 @@ const lerAssistido = (id: string): Assistido => {
 
 type Cena = { tipo: 'luta'; n: number; meu: string[]; dele: string[]; seed: number; atraso: number } | { tipo: 'resultado'; n: number } | null;
 
-function PartidaOnline({ online, colecaoLocal, settings, onSettings, onDetails, onLutando }: {
+function PartidaOnline({ online, colecaoLocal, settings, onSettings, onDetails, onLutando, dono = false }: {
   online: Online; colecaoLocal: string[]; settings: Settings; onSettings: (s: Settings) => void; onDetails: (id: string) => void; onLutando: (sim: boolean) => void;
+  dono?: boolean;
 }) {
   const id = online.partida!, { servico } = online;
   const [v, setV] = useState<VistaPvp | null>(null);
@@ -651,7 +685,7 @@ function PartidaOnline({ online, colecaoLocal, settings, onSettings, onDetails, 
   }
 
   if (v.fase === 'montando') {
-    if (!v.pronto.eu) return <>{<Montar key={falhas} rival={rival} colecao={colecao} inicial={guardado.times} onDetails={onDetails} onVoltar={() => setSair(true)}
+    if (!v.pronto.eu) return <>{<Montar key={falhas} rival={rival} colecao={colecao} inicial={guardado.times} onDetails={onDetails} melhores={dono} onVoltar={() => setSair(true)}
       prazo={<>{<Prazo ate={v.prazo} offset={offset} texto={v.pronto.rival ? ` · ${v.rival.nome} já está pronto!` : ' para montar'} />}{aviso}</>}
       onPronto={(t) => { save('pvp', { ...carregar(), times: t }); void agir(servico.times(id, t)); }} />}{confirmaSair}</>;
     return <><Espera rival={rival} titulo="Seus times estão prontos" texto={`Esperando ${v.rival.nome} montar os times…`} prazo={<Prazo ate={v.prazo} offset={offset} texto=" para montar" />} onSair={() => setSair(true)} sair="Sair">
@@ -701,10 +735,12 @@ function PartidaOnline({ online, colecaoLocal, settings, onSettings, onDetails, 
  * A tela
  * ------------------------------------------------------------------------- */
 
-export function PvpScreen({ colecao, settings, onSettings, onDetails, onJogar, onLutando, online }: {
+export function PvpScreen({ colecao, settings, onSettings, onDetails, onJogar, onLutando, online, dono = false }: {
   colecao: string[]; settings: Settings; onSettings: (s: Settings) => void; onDetails: (id: string) => void; onJogar: () => void; onLutando: (sim: boolean) => void;
   /** O Desafio online (com conta); a partida aberta vem do App (convite aceito, desafio pela Comunidade). */
   online?: Online | null;
+  /** A conta do dono: ganha o botão "Montar os melhores". */
+  dono?: boolean;
 }) {
   const [etapa, setEtapa] = useState<Etapa>(etapaSalva);
   useEffect(() => { guardaEtapa(etapa); }, [etapa]);
@@ -748,9 +784,9 @@ export function PvpScreen({ colecao, settings, onSettings, onDetails, onJogar, o
     : <Confirmar titulo="Abandonar a partida?" texto={`Abandonar conta como derrota contra ${etapa.npc.nome}.`} sim="Abandonar" onNao={() => setConfirmar(null)}
       onSim={() => { setConfirmar(null); desistirDaPartida(etapa.npc, etapa.partida); }} />);
 
-  if (online?.partida) return <PartidaOnline key={online.partida} online={online} colecaoLocal={colecao} settings={settings} onSettings={onSettings} onDetails={onDetails} onLutando={onLutando} />;
+  if (online?.partida) return <PartidaOnline key={online.partida} online={online} colecaoLocal={colecao} settings={settings} onSettings={onSettings} onDetails={onDetails} onLutando={onLutando} dono={dono} />;
   if (etapa.tipo === 'lobby') return <Lobby colecao={colecao} guardado={guardado} online={online} onTreino={(npc) => { som('ui-arena'); setEtapa({ tipo: 'montar', npc }); }} onJogar={onJogar} />;
-  if (etapa.tipo === 'montar') return <Montar rival={oponenteDoNpc(etapa.npc)} colecao={colecao} inicial={guardado.times} onVoltar={() => setEtapa({ tipo: 'lobby' })} onDetails={onDetails} onPronto={(t) => comecar(etapa.npc, t)} />;
+  if (etapa.tipo === 'montar') return <Montar melhores={dono} rival={oponenteDoNpc(etapa.npc)} colecao={colecao} inicial={guardado.times} onVoltar={() => setEtapa({ tipo: 'lobby' })} onDetails={onDetails} onPronto={(t) => comecar(etapa.npc, t)} />;
   if (etapa.tipo === 'apresentar') return <Apresentar rival={oponenteDoNpc(etapa.npc)} partida={etapa.partida} onComecar={() => setEtapa({ tipo: 'escolher', npc: etapa.npc, partida: etapa.partida })} />;
   if (etapa.tipo === 'escolher') return <><Escolher rival={oponenteDoNpc(etapa.npc)} partida={etapa.partida} onEscolher={(meu) => {
     // o NPC "pensa" um pouco antes do VS

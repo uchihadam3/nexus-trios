@@ -398,3 +398,4 @@ button.pv-time:active:not(:disabled){transform:scale(.98)}
 .pv-fixos{position:sticky;top:62px;z-index:15;display:grid;gap:8px;margin:0 -12px;padding:8px 12px 10px;
   background:linear-gradient(180deg,#0d1411 88%,#0d141100);box-shadow:0 10px 18px -12px #000c}
 .pv-fixos .pv-pronto{min-height:46px}
+.pv-ferramentas .pv-melhores{grid-column:1/-1;gap:6px;min-height:44px;color:#2a1a00 !important;background:linear-gradient(180deg,#ffe39a,#ffb84d) !important;box-shadow:0 0 16px #ffb84d44 !important;font-weight:900}
