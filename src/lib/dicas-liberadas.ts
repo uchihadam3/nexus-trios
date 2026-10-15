@@ -12,11 +12,11 @@
  *   jornada (a soma dos
  *   pontos das lutas com um trio) chega a META_DAS_DICAS.
  *
- * O jogador escolheu 1,4 milhão. Medido em 6.000 jornadas simuladas de quem
- * escolhe bem o trio: sai em 1 de cada ~120 jornadas, ou 1 em ~16 das que
- * vencem as 10 lutas (1,5 mi: 1 em ~350; 1,3 mi: 1 em ~47).
+ * Era 1,4 milhão. Com as estrelas dos pontos (src/data/estrelas-de-pontos.ts) o jogador pediu "um valor redondo
+ * que fica entre 1% e 2% a chance da pessoa conseguir": 1,8 milhão sai em ~1,6% das jornadas de trios sorteados
+ * (640 mil jornadas; 1,7 mi: 2,3%; 1,9 mi: 1,0%; 2 mi: 0,6%).
  */
-export const META_DAS_DICAS = 1_400_000;
+export const META_DAS_DICAS = 1_800_000;
 
 /** SHA-256 do e-mail (em minúsculas, sem espaços) da conta do dono. */
 const DONO = '7574fe4a489f32b6150dbf75d8997670a256e67760194bb0d079c9af4b4b6fe1';

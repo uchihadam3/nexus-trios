@@ -1,4 +1,5 @@
 import { useEffect,useRef,useState,type CSSProperties } from 'react';
+import { SeloDeEstrela } from './SeloDeEstrela';
 import { X, HeartPulse, Gauge, Brain, Info, Sparkles, Swords, TriangleAlert, Zap, Hourglass, Snowflake, Target, Scissors, Bomb, TrendingDown, Turtle, Sword, Skull, Clock, Shuffle, Heart, Shield, Lock, Timer, BatteryCharging, ShieldPlus, HandHeart, Mountain, Rocket, Award, CircleCheck, Flame, ChevronLeft, type LucideIcon } from 'lucide-react';
 import type { Character } from '../engine/types';
 import { characters } from '../data/characters';
@@ -63,6 +64,7 @@ function FichaDoLutador({c,onSelect}:{c:Character;onSelect:(i:number)=>void}){
         <p className="fv3-ideia">{c.idea}</p>
       </div>
     </header>
+    <SeloDeEstrela id={c.id} grande/>
     <IdentityChips ids={identidadesDe(c)}/>
     <div className="fv3-barras">
       <div className="bi2-barra vida" style={{'--p':pct(c.hp/VIDA_MAX)} as CSSProperties}><i/><span><HeartPulse size={13}/>Vida<b>{c.hp.toLocaleString('pt-BR')}</b></span></div>

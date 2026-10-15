@@ -38,6 +38,9 @@
  * virar o Domínio. Os feitos crescem com a altura da jornada (luta 10 ×1,45).
  * A jornada é a soma das lutas; a derrota encerra, mas os pontos dela ficam.
  *
+ * As estrelas dos pontos (src/data/estrelas-de-pontos.ts): 120 personagens que, no trio, somam o bônus deles aos
+ * pontos de cada luta (o maior do trio). Só os pontos: a luta não muda.
+ *
  * Quem liga as Dicas de trio na escolha (src/presentation/dicas-do-trio.ts)
  * paga CUSTO_DAS_DICAS em cada luta da jornada: as dicas ensinam, mas o
  * ranking premia quem monta o trio sozinho.
@@ -47,8 +50,10 @@
 import type { Battle, Fighter } from './types';
 import { FATOR_DE_PONTOS } from '../data/pontos-por-personagem';
 import { PESO_DA_CURA } from '../data/peso-da-cura';
+import { ESTRELAS_DE_PONTOS, bonusDoTrio } from '../data/estrelas-de-pontos';
+import { byId } from '../data/characters';
 
-export type ParcelaId = 'dano' | 'nocautes' | 'apoio' | 'jogadas' | 'efeitos' | 'viradas' | 'vida' | 'vitoria' | 'ajuda';
+export type ParcelaId = 'dano' | 'nocautes' | 'apoio' | 'jogadas' | 'efeitos' | 'viradas' | 'vida' | 'vitoria' | 'estrela' | 'ajuda';
 export interface Parcela { id: ParcelaId; rotulo: string; valor: number }
 
 export interface PontosDaLuta {
@@ -145,6 +150,13 @@ export function pontosDaLuta(battle: Battle, indice = 0, dicas = false): PontosD
     ['vitoria', 'Vitória', venceu ? PONTOS.vitoria : 0],
   ];
   const parcelas = brutas.map(([id, rotulo, v]) => ({ id, rotulo, valor: Math.round(v) })).filter((p) => p.valor > 0);
+  // a estrela do trio (src/data/estrelas-de-pontos.ts): soma o bônus dela aos pontos da luta, antes do custo das Dicas
+  const estrela = bonusDoTrio(trio.map((f) => f.characterId));
+  if (estrela.de) {
+    const base = parcelas.reduce((n, p) => n + p.valor, 0), e = ESTRELAS_DE_PONTOS[estrela.de]!;
+    const valor = Math.round(base * estrela.bonus);
+    if (valor > 0) parcelas.push({ id: 'estrela', rotulo: `${'★'.repeat(e.estrelas)} ${byId[estrela.de]?.name ?? estrela.de} +${e.bonus}%`, valor });
+  }
   if (dicas) parcelas.push({ id: 'ajuda', rotulo: 'Dicas de trio', valor: -CUSTO_DAS_DICAS });
   // a luta nunca vale menos que zero
   return { total: Math.max(0, parcelas.reduce((n, p) => n + p.valor, 0)), parcelas, multiplicador: m, de_pe, vidaMedia };
