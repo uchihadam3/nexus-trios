@@ -2,6 +2,7 @@ import {characters} from '../data/characters';
 import {createBattle,stepBattle} from './battle';
 import {generateCampaign} from './campaign';
 import {summarizeBattle,type RunBattleSummary} from './run-summary';
+import {normaisVencidas,proximaLuta,rivalDaLuta,seedDaLuta,segredosCumpridos} from './segredos';
 
 /* 250.4: Preparo mínimo de 0,5 s (leve), efeitos repetidos somados, condições alcançáveis.
  * 250.5: pontos por desempenho (src/engine/pontos.ts), e a luta perdida também pontua.
@@ -9,7 +10,8 @@ import {summarizeBattle,type RunBattleSummary} from './run-summary';
  * 250.7: dificuldade calibrada para quem escolhe bem; luta com tempo máximo (decidida pela Vida).
  *        Cada época tem o seu ranking: a 250.7 começou com Hoje, Semana e Geral vazios.
  * 250.8: Marcado (alvo + atravessa escudo) e Eletrificado (choque que atrasa) deixam de só dar dano extra.
- * 256.0: combos do trio e bônus de universo (src/engine/combos.ts). */
+ * 256.0: combos do trio e bônus de universo (src/engine/combos.ts).
+ * Os seis segredos (src/engine/segredos.ts) não mudam a luta, só a ordem da jornada: a versão do motor fica. */
 export const ENGINE_VERSION='nexus-256.0';
 /*
  * A época do ranking: Hoje, Semana e Geral guardam as jornadas de uma época.
@@ -40,7 +42,8 @@ export async function runDigest(id:string,team:string[],seed:number,outcomes:boo
 /** `dicas`: o jogador montou o trio com as Dicas de trio ligadas (−10 mil por luta, src/engine/pontos.ts). */
 /**
  * `ate`: quantas lutas o jogador chegou a terminar antes de desistir (desistir conta como perder: valem os pontos
- * feitos até ali). Sem `ate`, a jornada vai até a primeira derrota ou até as 10.
+ * feitos até ali), contando as lutas extras dos segredos na ordem em que vieram. Sem `ate`, a jornada vai até a
+ * primeira derrota ou até o fim (10 lutas, até 12 com os segredos).
  */
 export function replayRanked(team:string[],seed:number,livre=false,dicas=false,ate?:number){
   if(team.length!==3||new Set(team).size!==3||team.some(id=>!characters.some(c=>c.id===id)))throw new Error('Trio inválido.');
@@ -48,18 +51,19 @@ export function replayRanked(team:string[],seed:number,livre=false,dicas=false,a
   const foes=new Set(encounters.flatMap(e=>e.team));if(team.some(id=>foes.has(id)))throw new Error('Trio inclui rival da campanha compartilhada.');
   let score=0;
   const summaries:RunBattleSummary[]=[];
-  for(const [index,encounter] of encounters.entries()){
-    if(ate!==undefined&&index>=ate)break;
-    const battle=createBattle(team,encounter.team,seed+index*7919,encounter.scale);
+  // a ordem das lutas: 1…5, a luta ★ (se um segredo liberou), 6…10, a luta 11 (se um segredo liberou): src/engine/segredos.ts
+  for(let index=proximaLuta(team,summaries);index!==null;index=proximaLuta(team,summaries)){
+    if(ate!==undefined&&summaries.length>=ate)break;
+    const encounter=rivalDaLuta(seed,team,encounters,index,summaries);
+    const battle=createBattle(team,encounter.team,seedDaLuta(seed,index),encounter.scale);
     for(let tick=0;tick<9000&&!battle.finished;tick++)stepBattle(battle);
     if(!battle.finished)throw new Error(`Replay sem conclusão no confronto ${index+1}.`);
     const summary=summarizeBattle(index,battle,[],dicas);summaries.push(summary);
-    // a conta da tela (src/engine/pontos.ts): a luta perdida também soma o que o trio fez nela
+    // a conta da tela (src/engine/pontos.ts): a luta perdida também soma o que o trio fez nela (a extra, só vencida)
     score+=summary.score;
-    if(!summary.won)break;
   }
-  const cleared=summaries.filter(s=>s.won).length;
+  const cleared=normaisVencidas(summaries),segredos=segredosCumpridos(team,summaries);
   return {seed,team,encountersCleared:cleared,score,summaries,highlights:{survivors:summaries.at(-1)?.survivors??0,turns:summaries.reduce((n,s)=>n+s.turns,0),
     // lutas vencidas sem perder ninguém do trio (o "de pé no fim" da luta perdida era quase sempre 0)
-    semBaixas:summaries.filter(s=>s.won&&s.survivors===3).length,...(dicas?{dicas:true}:{})}};
+    semBaixas:summaries.filter(s=>s.won&&s.survivors===3).length,...(dicas?{dicas:true}:{}),...(segredos.length?{segredos}:{})}};
 }

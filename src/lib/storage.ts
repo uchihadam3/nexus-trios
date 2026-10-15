@@ -8,11 +8,12 @@ import type { PresentationCheckpoint } from '../presentation/director';
 import type { RunBattleSummary,RunSynergyEvent } from '../engine/run-summary';
 import {emptyTally} from '../engine/progression';
 import {limpar,type Conquistas,type Desafio} from './conquistas';
+import {proximaLuta,rivalDaLuta} from '../engine/segredos';
 /**
  * A velocidade mais alta da jornada (pedido do dono: o 3× fica desligado, mas fácil de religar). Para ligar o 3×,
  * troque para 3: o botão da luta e os Ajustes passam a oferecer 1×, 2× e 3× (o diretor da cena já anda em 3×).
  */
-export const VELOCIDADE_MAXIMA: 2 | 3 = 2;
+export const VELOCIDADE_MAXIMA: 2 | 3 = 3;
 export const VELOCIDADES = ([1, 2, 3] as const).filter((v) => v <= VELOCIDADE_MAXIMA);
 export interface Settings {volume:number;musicVolume:number;effectsVolume:number;effects:boolean;speed:1|2|3;numbers:boolean;visualFeedbackVersion:2;reducedMotion:boolean;auto:boolean;explanations:'normal'|'detailed'|'off';dicasDoTrio:boolean}
 export interface RankedRun {top3?:{periodo?:ResultadoTop3;temporada?:ResultadoTop3};/** `free`: a Jornada normal, que vale só o ranking da Temporada */mode:'daily'|'weekly'|'free';id?:string;status:'draft'|'playing'|'validating'|'verified'|'failed';score?:number;daily?:number|null;weekly?:number|null;season?:number|null;error?:string}
@@ -21,6 +22,8 @@ export interface Run {seed:number;team:string[];encounters:Encounter[];index:num
   dicas?:boolean;
   /** Quem esta jornada liberou nas Conquistas (terminou as 10 lutas): a tela de resultado comemora. */
   conquistasNovas?:string[];
+  /** Os segredos que esta jornada abriu pela primeira vez no Livro de Segredos: o aviso mostra NOVO NO LIVRO. */
+  livroNovo?:string[];
   /** A jornada começou pelo Desafio do Dia, com este personagem já escolhido (e PULOS_DO_DESAFIO trocas). */
   desafio?:string;
   /** Os rivais já foram sorteados com o trio pronto (e a seed do servidor, se houver): a prévia mostra exatamente quem vem. */
@@ -31,7 +34,9 @@ export interface Profile {journeys:number;victories:number;best:number;wins:numb
   /** As já vistas na tela de Conquistas: as outras aparecem com o selo NOVO. */conquistasVistas?:string[];
   /** Os três do Desafio do Dia, guardados para não mudarem durante o dia. */desafio?:Desafio;
   /** Os combos que o jogador já descobriu (formou no trio ou viu o rival usar): acendem no Livro de Combos. */combosDescobertos?:string[];
-  /** Os descobertos que ele já abriu no Livro (os outros mostram NOVO). */combosVistos?:string[]}
+  /** Os descobertos que ele já abriu no Livro (os outros mostram NOVO). */combosVistos?:string[];
+  /** Os segredos que o jogador já cumpriu (src/engine/segredos.ts): abrem no Livro de Segredos. */segredosDescobertos?:string[];
+  /** Os descobertos que ele já viu no Livro de Segredos (os outros mostram NOVO). */segredosVistos?:string[]}
 export const defaults:Settings={volume:P.audio.master,musicVolume:P.audio.music,effectsVolume:P.audio.effects,effects:true,speed:1,numbers:true,visualFeedbackVersion:2,reducedMotion:typeof matchMedia!=='undefined'&&matchMedia('(prefers-reduced-motion: reduce)').matches,auto:false,explanations:'normal',dicasDoTrio:false};
 const prefix='nexus-v1-';
 export let storageAvailable=true;
@@ -44,6 +49,12 @@ export function loadSettings():Settings{const raw=read('settings');if(!raw||type
  * feito quando era bem mais fácil volta a zero, como o ranking (pedido do jogador).
  */
 export const ESCALA_DOS_PONTOS=6;
-export function loadProfile():Profile{const p=read('profile') as (Profile&{progress?:unknown})|null;const valid=p&&['journeys','victories','best','wins'].every(k=>typeof p[k as keyof Profile]==='number');if(!valid)return {journeys:0,victories:0,best:0,wins:0,recordePontos:0,escalaDosPontos:ESCALA_DOS_PONTOS};/* Perfis antigos guardavam conquistas, Maestria e XP; o jogo agora é só pontos e ranking, então isso fica para trás. */const limpo:Partial<typeof p>={...p};delete limpo.progress;/* O recorde da escala antiga (1 milhão por vitória) seria impossível de bater na conta nova (milhares por luta): recomeça do zero. */const escalaNova=p.escalaDosPontos===ESCALA_DOS_PONTOS;return {...(limpo as Profile),conquistas:limpar(p.conquistas),conquistasVistas:Array.isArray(p.conquistasVistas)?p.conquistasVistas.filter((x):x is string=>typeof x==='string'):[],combosDescobertos:Array.isArray(p.combosDescobertos)?p.combosDescobertos.filter((x):x is string=>typeof x==='string'):[],desafio:p.desafio&&typeof p.desafio.dia==='string'&&Array.isArray(p.desafio.ids)?{dia:p.desafio.dia,ids:p.desafio.ids.filter((x):x is string=>typeof x==='string'&&!!byId[x]).slice(0,3)}:undefined,recordePontos:escalaNova&&typeof p.recordePontos==='number'?p.recordePontos:0,escalaDosPontos:ESCALA_DOS_PONTOS};}
-export function loadRun():Run|null{const r=read('run') as Run|null;if(!r||!['draft','battle','result'].includes(r.stage)||!Array.isArray(r.team)||r.team.some(id=>!byId[id])||!Array.isArray(r.encounters)||r.encounters.length!==10||!r.draft||!Number.isInteger(r.index)||r.index<0||r.index>9)return null;if(r.stage!=='draft'&&(!r.battle||r.battle.version!==1||r.battle.fighters.length!==6))return null;r.telemetry??=emptyTally();if(r.battle){for(const f of r.battle.fighters){if(f.characterId!=='light')continue;f.discovered??={};for(const [uid,value] of Object.entries(f.investigation)){const target=r.battle.fighters.find(x=>x.uid===uid);if(value>=100&&target&&!f.discovered[uid])f.discovered[uid]=byId[target.characterId].deathNoteCompatible?'vulnerable':'immune';}}}return r;}
+export function loadProfile():Profile{const p=read('profile') as (Profile&{progress?:unknown})|null;const valid=p&&['journeys','victories','best','wins'].every(k=>typeof p[k as keyof Profile]==='number');if(!valid)return {journeys:0,victories:0,best:0,wins:0,recordePontos:0,escalaDosPontos:ESCALA_DOS_PONTOS};/* Perfis antigos guardavam conquistas, Maestria e XP; o jogo agora é só pontos e ranking, então isso fica para trás. */const limpo:Partial<typeof p>={...p};delete limpo.progress;/* O recorde da escala antiga (1 milhão por vitória) seria impossível de bater na conta nova (milhares por luta): recomeça do zero. */const escalaNova=p.escalaDosPontos===ESCALA_DOS_PONTOS;return {...(limpo as Profile),conquistas:limpar(p.conquistas),conquistasVistas:Array.isArray(p.conquistasVistas)?p.conquistasVistas.filter((x):x is string=>typeof x==='string'):[],combosDescobertos:Array.isArray(p.combosDescobertos)?p.combosDescobertos.filter((x):x is string=>typeof x==='string'):[],segredosDescobertos:Array.isArray(p.segredosDescobertos)?p.segredosDescobertos.filter((x):x is string=>typeof x==='string'):[],segredosVistos:Array.isArray(p.segredosVistos)?p.segredosVistos.filter((x):x is string=>typeof x==='string'):[],desafio:p.desafio&&typeof p.desafio.dia==='string'&&Array.isArray(p.desafio.ids)?{dia:p.desafio.dia,ids:p.desafio.ids.filter((x):x is string=>typeof x==='string'&&!!byId[x]).slice(0,3)}:undefined,recordePontos:escalaNova&&typeof p.recordePontos==='number'?p.recordePontos:0,escalaDosPontos:ESCALA_DOS_PONTOS};}
+/** O rival de uma luta da jornada (as normais e as extras dos segredos, src/engine/segredos.ts). */
+export const rivalAtual=(r:Run,i=r.index)=>rivalDaLuta(r.seed,r.team,r.encounters,i,r.summaries??[]);
+/** A próxima luta depois da que acabou de terminar (0–9, a ★ ou a 11), ou null se a jornada acabou. */
+export const proximaDaJornada=(r:Run)=>proximaLuta(r.team,r.summaries??[]);
+/** A jornada acabou: perdeu uma luta normal ou terminou a última (a 10, ou a 11 liberada por um segredo). */
+export const jornadaAcabou=(r:Run)=>r.stage==='result'&&proximaDaJornada(r)===null;
+export function loadRun():Run|null{const r=read('run') as Run|null;if(!r||!['draft','battle','result'].includes(r.stage)||!Array.isArray(r.team)||r.team.some(id=>!byId[id])||!Array.isArray(r.encounters)||r.encounters.length!==10||!r.draft||!Number.isInteger(r.index)||r.index<0||r.index>11)return null;if(r.stage!=='draft'&&(!r.battle||r.battle.version!==1||r.battle.fighters.length!==6))return null;r.telemetry??=emptyTally();if(r.battle){for(const f of r.battle.fighters){if(f.characterId!=='light')continue;f.discovered??={};for(const [uid,value] of Object.entries(f.investigation)){const target=r.battle.fighters.find(x=>x.uid===uid);if(value>=100&&target&&!f.discovered[uid])f.discovered[uid]=byId[target.characterId].deathNoteCompatible?'vulnerable':'immune';}}}return r;}
 export function resetStorage(){try{['settings','profile','run'].forEach(key=>localStorage.removeItem(prefix+key));localStorage.removeItem('nexus-battle-guide-v1');}catch{storageAvailable=false;}}

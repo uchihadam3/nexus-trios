@@ -69,7 +69,7 @@ export const ESCALAS=[.8,.82,.84,.84,.87,.9,.935,.945,.965,.965];
 const names=['Primeiro encontro','Novos rivais','O ritmo aumenta','Entre universos','Ponto de ruptura','Pressão crescente','Sem recuar','A última barreira','À altura das lendas','O confronto final'];
 const chave=(t:readonly string[])=>[...t].sort().join('|');
 /* `count` trios diferentes sorteados de `ids` (três índices ao acaso; rápido mesmo para milhares de trios). */
-function sampledTeams(ids:string[],rng:{rng:number},count:number):string[][]{
+export function sampledTeams(ids:string[],rng:{rng:number},count:number):string[][]{
   const found=new Map<string,string[]>(),n=ids.length;
   if(n<3)return [];
   for(let i=0;i<count*5&&found.size<count;i++){

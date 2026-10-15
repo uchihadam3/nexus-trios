@@ -101,6 +101,8 @@ export interface Battle {
   combos?:{player:ComboAtivo[];enemy:ComboAtivo[]};
   /** Viradas a favor do trio do jogador (as que contam pontos, como no ranking). */
   viradasDoTrio?:number;
+  /** O trio do jogador ficou com um só de pé contra os três rivais em algum momento (o segredo A Virada, src/engine/segredos.ts). */
+  umContraTres?:boolean;
   /** Optional for backward compatibility with battles saved by earlier builds. */
   targetMemory?:Record<string,{target:string;time:number}>;
   targetLog?:TargetDecision[];

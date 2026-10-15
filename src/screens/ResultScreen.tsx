@@ -1,7 +1,10 @@
 import { useEffect,useState,type CSSProperties,type ReactNode } from 'react';
 import { ConquistasLiberadas } from './ConquistasScreen';
-import { ArrowRight,RotateCcw,Home,Trophy,HeartPulse,TrendingUp,Shield,Crown,Sparkles,Medal,LogOut,Swords,Skull,Zap,Lightbulb,ThumbsDown,ThumbsUp,ArrowDown,Minus,Flame,Star,type LucideIcon } from 'lucide-react';
-import type { Run } from '../lib/storage';
+import { ArrowRight,RotateCcw,Home,Trophy,HeartPulse,TrendingUp,Shield,Crown,Sparkles,Medal,LogOut,Swords,Skull,Zap,Lightbulb,ThumbsDown,ThumbsUp,ArrowDown,Minus,Flame,Star,Lock,type LucideIcon } from 'lucide-react';
+import { proximaDaJornada,rivalAtual,type Run } from '../lib/storage';
+import { LUTA_ESTRELA,LUTA_ONZE,SEGREDO,ehLutaExtra,segredosCumpridos,segredosDaLuta,type SegredoId } from '../engine/segredos';
+import { ICONE_DO_SEGREDO } from '../components/SeloDoSegredo';
+import '../presentation/segredos.css';
 import { byId } from '../data/characters';
 import { Portrait } from '../components/Portrait';
 import { summarizeBattle } from '../engine/run-summary';
@@ -68,18 +71,26 @@ function NotaDaAjuda({av,i}:{av:AvaliacaoDaAjuda;i:number}){
 }
 
 export function ResultScreen({run,onNext,onRestart,onAbandon,onHome,onRanking,onRetry,auto,onAuto}:{run:Run;onNext:()=>void;onRestart:()=>void;onAbandon:()=>void;onHome:()=>void;onRanking?:()=>void;onRetry?:()=>void;auto:boolean;onAuto:(v:boolean)=>void}){
-  const b=run.battle!,won=b.winner==='player',champion=won&&run.index===9,fimDaJornada=champion||!won;
+  const b=run.battle!,won=b.winner==='player',champion=won&&run.index===9,extra=ehLutaExtra(run.index);
   const resumos=run.summaries?.length?run.summaries:[summarizeBattle(run.index,b,[],run.dicas===true)];
   const atual=resumos.find(s=>s.index===run.index)??summarizeBattle(run.index,b,[],run.dicas===true);
+  /* a próxima luta (a normal, ou uma luta extra liberada por um segredo: src/engine/segredos.ts) */
+  const proxima=proximaDaJornada(run),fimDaJornada=proxima===null,segue=!fimDaJornada;
   // resumos salvos antes da conta nova não têm as parcelas: refaz pela luta
   const p=atual.pontos?.parcelas?atual.pontos:pontosDaLuta(b,run.index,run.dicas===true);
-  const jornada=(ate:number)=>pontosDaJornada(resumos.filter(s=>s.index<=ate).map(s=>({pontos:s.score,won:s.won})));
-  const antes=jornada(run.index-1),total=jornada(run.index);
+  /* os pontos somam na ordem em que as lutas foram jogadas (a ★ entre a 5 e a 6) */
+  const posicao=Math.max(0,resumos.findIndex(s=>s.index===run.index));
+  const jornada=(n:number)=>pontosDaJornada(resumos.slice(0,n).map(s=>({pontos:s.score,won:s.won})));
+  const antes=jornada(posicao),total=jornada(posicao+1);
+  /* os segredos cumpridos nesta luta: o aviso grande de SEGREDO DESCOBERTO */
+  const segredosAgora=segredosCumpridos(run.team,resumos.slice(0,posicao+1)),segredosAntes=segredosCumpridos(run.team,resumos.slice(0,posicao));
+  const descobertos=segredosAgora.filter(x=>!segredosAntes.includes(x));
+  const estrelaLiberada=segredosDaLuta(run.team,resumos.slice(0,posicao+1),'estrela').length>0,onzeLiberada=segredosDaLuta(run.team,resumos.slice(0,posicao+1),'onze').length>0;
   const recordeAntes=atual.recordeAntes??0,novoRecorde=total>0&&total>recordeAntes;
   const vitorias=resumos.filter(s=>s.won).length;
 
   /* Lutas seguidas ligada: "Próxima luta" conta os segundos até a próxima começar sozinha (o tempo é o do App). */
-  const vaiSozinha=auto&&won&&!champion;
+  const vaiSozinha=auto&&segue;
   const [contando,setContando]=useState<{desde:number;faltam:number}|null>(null);
   useEffect(()=>{
     if(!vaiSozinha){setContando(null);return;}
@@ -98,6 +109,8 @@ export function ResultScreen({run,onNext,onRestart,onAbandon,onHome,onRanking,on
     if(reduzido())return;
     const tempos=[350,350+parcelas.length*260+400,350+parcelas.length*260+400+1300];
     const ids=tempos.map((t,i)=>window.setTimeout(()=>{setFase(i+1);battleAudio.sound(i===2&&novoRecorde?'pronto':'toque',PRIORIDADE.interface);},t));
+    // segredo descoberto: o som de conquista junto com o aviso
+    if(descobertos.length)ids.push(window.setTimeout(()=>battleAudio.sound('pronto',PRIORIDADE.grand),tempos[2]!+500));
     return()=>ids.forEach(clearTimeout);
     // a sequência roda uma vez por luta
   },[run.index]);
@@ -118,19 +131,20 @@ export function ResultScreen({run,onNext,onRestart,onAbandon,onHome,onRanking,on
   const ajudas=dados?.direcoes??[],pressao=dados?.pressao??null;
   const lutador=(uid:string)=>byId[dados?.quem[uid]??''];
 
-  const cor=won?(champion?'#ffd36b':'#b8f07a'):'#ff8a7a';
-  const proximo=won&&!champion?run.encounters[run.index+1]:null;
+  const cor=won?(champion||extra?'#ffd36b':'#b8f07a'):extra?'#b7a6d9':'#ff8a7a';
+  const proximo=proxima!==null?rivalAtual(run,proxima):null;
+  const rotuloDaLuta=(i:number)=>i===LUTA_ESTRELA?'Luta ★':i===LUTA_ONZE?'Luta 11':`Luta ${i+1}`;
 
-  return <section className={`result-v2 ${won?'vitoria':'derrota'} ${champion?'campeao':''}`} style={{'--res-cor':cor} as CSSProperties}>
+  return <section className={`result-v2 ${won?'vitoria':'derrota'} ${champion||extra&&won?'campeao':''} ${extra?'luta-secreta':''}`} style={{'--res-cor':cor} as CSSProperties}>
     <header className="rs-topo">
       <div className="rs-medalha">
         {won&&<Fx nome="raios" cor={cor} ms={2400} laco className="rs-raios"/>}
         <Fx nome="faiscas" cor={cor} ms={3600} laco className="rs-faiscas"/>
-        <span className="rs-icone">{champion?<Crown size={40}/>:won?<Trophy size={38}/>:<Shield size={36}/>}</span>
+        <span className="rs-icone">{extra?<Star size={38} fill={won?'currentColor':'none'}/>:champion?<Crown size={40}/>:won?<Trophy size={38}/>:<Shield size={36}/>}</span>
       </div>
       <div className="rs-titulo">
-        <span className="rs-confronto">{champion?'DEZ DE DEZ':`LUTA ${run.index+1} DE 10`}</span>
-        <h1>{champion?'TRIO CAMPEÃO':won?'VITÓRIA':'DERROTA'}</h1>
+        <span className="rs-confronto">{run.index===LUTA_ESTRELA?'LUTA SECRETA ★':run.index===LUTA_ONZE?'LUTA 11 · SECRETA':champion?'DEZ DE DEZ':`LUTA ${run.index+1} DE 10`}</span>
+        <h1>{extra?(won?(run.index===LUTA_ONZE?'LENDA SECRETA':'VITÓRIA SECRETA'):'QUASE!'):champion?'TRIO CAMPEÃO':won?'VITÓRIA':'DERROTA'}</h1>
       </div>
       <div className="rs-trio">{run.team.map((id,i)=>{const f=trio[i];const caiu=!!f&&f.hp<=0;return <span key={id} className={`${caiu?'caiu':''} ${f?.uid===mvp?.uid?'mvp':''}`} style={{'--character':byId[id].color,'--i':i} as CSSProperties}>
         <Portrait character={byId[id]} className="tiny"/>{f?.uid===mvp?.uid&&<b className="rs-mvp"><Medal size={11}/>MVP</b>}</span>;})}</div>
@@ -138,7 +152,7 @@ export function ResultScreen({run,onNext,onRestart,onAbandon,onHome,onRanking,on
 
     <div className="rs-placar">
       {/* na derrota também: os pontos do que o trio fez nesta luta ficam */}
-      {p.total>0?<>
+      {extra&&!won?<p className="rs-sem">A luta secreta só vale pontos com vitória. {segue?'A jornada segue para a luta 6, com tudo o que você já fez.':'A jornada termina aqui, com tudo o que você já fez.'}</p>:p.total>0?<>
         <span className="rs-rotulo">PONTOS DESTA LUTA{p.multiplicador>1?` · ×${p.multiplicador.toFixed(2).replace('.',',')}`:''}</span>
         <strong className="rs-desta">+{fase>=1?<Contador de={0} para={p.total} ms={900}/>:'0'}</strong>
         <ul className="rs-parcelas">{parcelas.map((x,i)=><li key={x.rotulo} className={`${fase>=1?'entra':''} ${x.valor<0?'custo':''}`} style={{'--i':i} as CSSProperties}>{x.icone}<span>{x.rotulo}</span><b>{x.valor<0?'−':'+'}{formatarPontos(Math.abs(x.valor))}</b></li>)}</ul>
@@ -156,16 +170,22 @@ export function ResultScreen({run,onNext,onRestart,onAbandon,onHome,onRanking,on
       </div>
     </div>
 
+    {descobertos.map((id,k)=><AvisoDeSegredo key={id} id={id} k={k} proxima={proxima} index={run.index} noLivro={run.livroNovo?.includes(id)===true}/>)}
+
     {champion&&run.conquistasNovas?.length?<ConquistasLiberadas ids={run.conquistasNovas}/>:null}
 
-    <ol className="rs-trilha" aria-label="As 10 lutas da jornada">{Array.from({length:10},(_,i)=>{const r=resumos.find(s=>s.index===i);const marca=r?(r.won?'ganhou':'perdeu'):i===run.index+1&&won?'proxima':'';
-      const rotulo=r?`Luta ${i+1}: ${r.won?'+'+formatarPontos(r.score):'derrota'}`:`Luta ${i+1}`,conteudo=i===9?<Crown size={12}/>:i+1;
-      return <li key={i} className={`${marca} ${i===run.index?'agora':''} ${r&&i===vista?'vendo':''}`} title={rotulo}>
+    {/* as 10 lutas e, no lugar delas, a ★ (entre a 5 e a 6) e a 11: trancadas até um segredo abrir */}
+    <ol className="rs-trilha com-extras" aria-label="As lutas da jornada">{[0,1,2,3,4,LUTA_ESTRELA,5,6,7,8,9,LUTA_ONZE].map(i=>{const r=resumos.find(s=>s.index===i),ex=ehLutaExtra(i);
+      const liberada=i===LUTA_ESTRELA?estrelaLiberada:i===LUTA_ONZE?onzeLiberada:true;
+      const marca=r?(r.won?'ganhou':'perdeu'):i===proxima?'proxima':'';
+      const rotulo=r?`${rotuloDaLuta(i)}: ${r.won?'+'+formatarPontos(r.score):ex?'sem pontos':'derrota'}`:ex&&!liberada?`${rotuloDaLuta(i)}: trancada, abre com um segredo`:rotuloDaLuta(i);
+      const conteudo=i===LUTA_ESTRELA?(liberada||r?<Star size={11} fill="currentColor"/>:<Lock size={9}/>):i===LUTA_ONZE?(liberada||r?11:<Lock size={9}/>):i===9?<Crown size={12}/>:i+1;
+      return <li key={i} className={`${marca} ${ex?`secreta ${liberada||r?'':'trancada'}`:''} ${i===run.index?'agora':''} ${r&&i===vista?'vendo':''}`} title={rotulo}>
         {r?<button type="button" onClick={()=>{if(i!==vista){setVista(i);battleAudio.sound('toque',PRIORIDADE.interface);}}} aria-pressed={i===vista} aria-label={`${rotulo}. Ver quem ajudou quem nesta luta`}>{conteudo}</button>:conteudo}</li>;})}</ol>
     {resumos.length>1&&<p className="rs-trilha-dica">Toque numa luta para ver quem ajudou quem nela</p>}
 
     {(ajudas.length>0||pressao||vista!==run.index)&&<section key={vista} className="rs-ajudas" aria-label="Quem ajudou quem">
-      <h2>Quem ajudou quem{vista!==run.index&&<span className={`rs-ajudas-luta ${resumoVisto?.won?'ganhou':'perdeu'}`}>Luta {vista+1} · {resumoVisto?.won?`+${formatarPontos(resumoVisto.score)}`:'derrota'}</span>}</h2>
+      <h2>Quem ajudou quem{vista!==run.index&&<span className={`rs-ajudas-luta ${resumoVisto?.won?'ganhou':'perdeu'}`}>{rotuloDaLuta(vista)} · {resumoVisto?.won?`+${formatarPontos(resumoVisto.score)}`:'derrota'}</span>}</h2>
       {vista!==run.index&&!dados&&<p className="rs-ajudas-vazio">Esta luta foi jogada antes desta novidade, então o quem ajudou quem dela não ficou guardado. As próximas ficam.</p>}
       {dados&&ajudas.length===0&&!pressao&&<p className="rs-ajudas-vazio">Nesta luta ninguém do trio ativou a mecânica de outro.</p>}
       <div>{ajudas.map((d,i)=>{const de=lutador(d.de),para=lutador(d.para);if(!de||!para)return null;const av=avaliarDirecao(d);return <article key={`${d.de}-${d.para}`} className={`rs-ajuda tipo-${d.tipo} ${av?`com-nota nota-${av.nota}`:''}`}>
@@ -189,16 +209,16 @@ export function ResultScreen({run,onNext,onRestart,onAbandon,onHome,onRanking,on
         :<span>Validando no servidor…</span>}
       {onRanking&&<button className="text-button" onClick={onRanking}>Ver ranking →</button>}</div>}
 
-    {proximo&&<div className="rs-proximo"><span>PRÓXIMA LUTA<b>{proximo.name}</b></span><div>{proximo.team.map(id=><Portrait key={id} character={byId[id]} className="tiny"/>)}</div></div>}
+    {proximo&&<div className={`rs-proximo ${proxima!==null&&ehLutaExtra(proxima)?'secreta':''}`}><span>{proxima===LUTA_ESTRELA?'PRÓXIMA: SECRETA ★':proxima===LUTA_ONZE?'PRÓXIMA: SECRETA 11':'PRÓXIMA LUTA'}<b>{proximo.name}</b></span><div>{proximo.team.map(id=><Portrait key={id} character={byId[id]} className="tiny"/>)}</div></div>}
     {fimDaJornada&&!run.ranked&&<div className="rs-ranqueada fora" role="status"><strong>FORA DO RANKING</strong><span>Esta jornada foi jogada sem a conta conectada (ou sem internet ao começar), então não foi para o ranking. Entre na sua conta antes de jogar para as próximas valerem.</span>{onRanking&&<button className="text-button" onClick={onRanking}>Ver o ranking →</button>}</div>}
 
     {/* a chave fica no fim da tela, sem acompanhar a rolagem: a batalha também tem o botão AUTO à vista */}
-    {won&&!champion&&<ChaveDoAuto ligado={auto} onChange={onAuto}/>}
+    {segue&&<ChaveDoAuto ligado={auto} onChange={onAuto}/>}
     <footer className="rs-acoes">
-      {won&&!champion?<button className="rs-cta" onClick={onNext}><Fx nome="brilho" cor="#ffffff" ms={2600} laco className="rs-brilho"/>{contando&&<i key={contando.desde} className="rs-contagem" style={{'--espera':`${ESPERA_DA_PROXIMA_MS}ms`} as CSSProperties}/>}<span>Próxima luta</span>{contando?<b className="rs-segundos">{contando.faltam}</b>:<ArrowRight size={20}/>}</button>
+      {segue?<button className={`rs-cta ${proxima!==null&&ehLutaExtra(proxima)?'rs-cta-secreta':''}`} onClick={onNext}><Fx nome="brilho" cor="#ffffff" ms={2600} laco className="rs-brilho"/>{contando&&<i key={contando.desde} className="rs-contagem" style={{'--espera':`${ESPERA_DA_PROXIMA_MS}ms`} as CSSProperties}/>}<span>{proxima===LUTA_ESTRELA?'Luta secreta ★':proxima===LUTA_ONZE?'Luta 11 secreta':'Próxima luta'}</span>{contando?<b className="rs-segundos">{contando.faltam}</b>:<ArrowRight size={20}/>}</button>
         :<button className="rs-cta" onClick={onRestart}><Fx nome="brilho" cor="#ffffff" ms={2600} laco className="rs-brilho"/><span>Jogar de novo</span><RotateCcw size={19}/></button>}
       <button className="secondary rs-icone-botao" onClick={onHome} aria-label="Início" title="Início"><Home size={19}/></button>
-      {won&&!champion&&<button className="secondary rs-icone-botao rs-desistir" onClick={onAbandon} aria-label="Desistir da jornada" title="Desistir da jornada"><LogOut size={18}/></button>}
+      {segue&&<button className="secondary rs-icone-botao rs-desistir" onClick={onAbandon} aria-label="Desistir da jornada" title="Desistir da jornada"><LogOut size={18}/></button>}
     </footer>
   </section>;
 }
@@ -211,4 +231,24 @@ export function ResultScreen({run,onNext,onRestart,onAbandon,onHome,onRanking,on
 function AvisoTop3({resultado}:{resultado:ResultadoTop3}){
   const m=mensagemDoTop3(resultado);
   return <div className={`top3-aviso${m.destaque?' destaque':''}`}><b>{m.titulo}</b>{m.linhas.map(l=><span key={l}>{l}</span>)}</div>;
+}
+
+/*
+ * O aviso de segredo descoberto (src/engine/segredos.ts): o selo do segredo girando para dentro, o nome, e o que ele
+ * libera — "a luta secreta ★ é a próxima!" ou "vença até a luta 5 e ela aparece".
+ */
+function AvisoDeSegredo({id,k,proxima,index,noLivro}:{id:SegredoId;k:number;proxima:number|null;index:number;noLivro:boolean}){
+  const s=SEGREDO[id],Ic=ICONE_DO_SEGREDO[id];
+  const frases=s.libera.map(q=>q==='estrela'
+    ?(proxima===LUTA_ESTRELA?<>A <b>luta secreta ★</b> é a próxima!</>:index<4?<>Vença até a luta 5 e a <b>luta secreta ★</b> aparece.</>:null)
+    :(proxima===LUTA_ONZE?<>A <b>luta 11</b> é a próxima!</>:index<9||index===LUTA_ESTRELA?<>Vença as 10 lutas e a <b>luta 11</b> te espera.</>:null)).filter(Boolean);
+  return <div className="rs-segredo" role="status" style={{'--cor':s.cor,animationDelay:`${.6+k*.35}s`} as CSSProperties}>
+    <span className="rs-segredo-selo" style={{animationDelay:`${.9+k*.35}s`}}><Ic size={28}/></span>
+    <div className="rs-segredo-texto">
+      <small>SEGREDO DESCOBERTO</small>
+      <strong>{s.nome}!</strong>
+      {frases.map((f,i)=><span key={i}>{f}</span>)}
+      {noLivro&&<em className="rs-segredo-livro">NOVO NO LIVRO DE SEGREDOS</em>}
+    </div>
+  </div>;
 }

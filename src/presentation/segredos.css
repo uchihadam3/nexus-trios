@@ -1,0 +1,115 @@
+/*
+ * Os segredos (src/engine/segredos.ts): o Livro de Segredos (src/screens/LivroDeSegredos.tsx), o aviso de segredo
+ * descoberto na tela de resultado, a bolinha ★ e a 11 na trilha, e a abertura da luta secreta na batalha.
+ */
+.sg{display:grid;gap:10px;max-width:760px;margin:0 auto;padding:10px 2px 18px}
+.sg-topo{--titulo:#d59cff;position:relative;display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;gap:14px;padding:12px 14px;border-radius:20px;overflow:hidden;
+  background:radial-gradient(ellipse at 14% 50%,color-mix(in srgb,var(--titulo),transparent 78%),transparent 60%),linear-gradient(165deg,#181428,#0b0a14);
+  box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--titulo),transparent 55%),0 12px 26px #0007;animation:gs-tile .4s both}
+.sg-topo::after{content:'';position:absolute;inset:-40% -10%;background:linear-gradient(105deg,transparent 40%,#ffffff12 50%,transparent 60%);animation:cq-brilho 5s ease-in-out infinite;pointer-events:none}
+.sg-anel{position:relative;width:86px;height:86px}
+.sg-anel svg{width:100%;height:100%;transform:rotate(-90deg)}
+.sg-anel circle{fill:none;stroke-width:9}
+.sg-anel-fundo{stroke:#231d33}
+.sg-anel-cheio{stroke:var(--titulo);stroke-linecap:round;filter:drop-shadow(0 0 5px var(--titulo));animation:cq-enche 1.2s cubic-bezier(.2,.8,.2,1) both}
+.sg-anel>span{position:absolute;inset:0;display:grid;place-content:center;justify-items:center;line-height:1;color:var(--titulo)}
+.sg-anel b{margin-top:2px;font-size:26px;font-weight:900;color:#fff;text-shadow:0 0 14px color-mix(in srgb,var(--titulo),transparent 40%)}
+.sg-anel small{margin-top:2px;font-size:10px;font-weight:800;color:#a9a0bf}
+.sg-titulo{display:grid;gap:5px;min-width:0}
+.sg-nivel{justify-self:start;padding:3px 8px;border-radius:8px;font-size:9.5px;font-weight:900;letter-spacing:1.4px;color:var(--titulo);background:color-mix(in srgb,var(--titulo),transparent 86%);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--titulo),transparent 60%)}
+.sg-titulo strong{font-size:20px;font-weight:900;line-height:1.05;color:#fff}
+.sg-titulo small{font-size:11.5px;line-height:1.35;color:#b2a9c6}
+.sg-titulo small b{color:#fff}
+
+/* a jornada em miniatura: as 10 lutas e onde entram as duas extras */
+.sg-lutas{display:flex;justify-content:center;align-items:center;gap:4px;padding:8px;border-radius:14px;background:#0b0a12;box-shadow:inset 0 0 0 1px #ffffff12;animation:gs-tile .4s .05s both}
+.sg-lutas i{display:grid;place-items:center;width:22px;height:22px;border-radius:50%;font-size:10px;font-style:normal;font-weight:900;color:#8d86a0;background:#17151f;box-shadow:inset 0 0 0 1px #ffffff1a}
+.sg-lutas i.extra{width:26px;height:26px;color:#ffd36b;background:radial-gradient(circle,#ffd36b33,#1a1520);box-shadow:inset 0 0 0 1.5px #ffd36b,0 0 10px #ffd36b88;animation:sg-pulsa 1.8s ease-in-out infinite}
+@media (max-width:380px){.sg-lutas{gap:2px}.sg-lutas i{width:19px;height:19px}.sg-lutas i.extra{width:23px;height:23px}}
+
+.sg-grade{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:0;padding:0;list-style:none}
+@media (min-width:700px){.sg-grade{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.sg-carta{position:relative;display:grid;align-content:start;justify-items:center;gap:6px;min-height:150px;padding:14px 10px 10px;border-radius:16px;text-align:center;overflow:hidden;
+  animation:sg-entra .5s calc(var(--i)*70ms + .1s) cubic-bezier(.2,.9,.3,1.2) both}
+.sg-carta.trancada{background:repeating-linear-gradient(135deg,#ffffff05 0 6px,transparent 6px 12px),linear-gradient(170deg,#16141c,#0c0b10);box-shadow:inset 0 0 0 1px #ffffff14}
+.sg-carta.aberta{background:radial-gradient(ellipse at 50% 0%,color-mix(in srgb,var(--cor),transparent 70%),transparent 65%),linear-gradient(170deg,#1b1826,#0d0c13);
+  box-shadow:inset 0 0 0 1.5px color-mix(in srgb,var(--cor),transparent 35%),0 0 18px color-mix(in srgb,var(--cor),transparent 75%)}
+.sg-carta.aberta::after{content:'';position:absolute;inset:-60% -30%;background:linear-gradient(105deg,transparent 42%,#ffffff1c 50%,transparent 58%);animation:cq-brilho 4.5s calc(var(--i)*.4s) ease-in-out infinite;pointer-events:none}
+.sg-selo{display:grid;place-items:center;width:46px;height:46px;border-radius:50%}
+.trancada .sg-selo{color:#6f6886;background:#100f15;box-shadow:inset 0 0 0 1.5px #ffffff1c}
+.aberta .sg-selo{color:#fff;background:radial-gradient(circle at 35% 30%,color-mix(in srgb,var(--cor),#fff 30%),var(--cor) 55%,color-mix(in srgb,var(--cor),#000 45%));box-shadow:0 0 0 3px #0d0c13,0 0 0 4.5px var(--cor),0 0 18px var(--cor)}
+.sg-nome{font-size:13.5px;font-weight:900;line-height:1.1;color:#fff}
+.trancada .sg-nome{color:#9a93ad;letter-spacing:.3px}
+.sg-texto{margin:0;font-size:11.5px;line-height:1.35;color:#c6bfd6}
+.trancada .sg-texto{color:#8f88a3}
+.sg-libera{display:flex;flex-wrap:wrap;justify-content:center;gap:4px;margin-top:auto}
+.sg-libera span{display:inline-flex;align-items:center;gap:3px;padding:2px 7px;border-radius:999px;font-size:10px;font-weight:900;color:#ffd36b;background:#ffd36b17;box-shadow:inset 0 0 0 1px #ffd36b55}
+.sg-novo{position:absolute;top:7px;right:7px;padding:1px 6px;border-radius:7px;font-size:9px;font-style:normal;font-weight:900;color:#fff;background:#ff4a5a;box-shadow:0 0 10px #ff4a5a;animation:cq-pulsa-selo 1.2s ease-in-out infinite}
+@keyframes sg-entra{from{opacity:0;transform:translateY(14px) scale(.92)}}
+@keyframes sg-pulsa{50%{box-shadow:inset 0 0 0 1.5px #ffd36b,0 0 16px #ffd36bcc}}
+
+/* a faixa do Livro na tela inicial: os seis selos */
+.hv-segredos-faixa{--titulo:#d59cff}
+.hv-sg-selos{display:flex;gap:3px}
+.hv-sg-selos i{display:grid;place-items:center;width:18px;height:18px;border-radius:50%;color:#6f6886;background:#100f15;box-shadow:inset 0 0 0 1px #ffffff1f}
+.hv-sg-selos i.ok{color:#fff;background:var(--cor);box-shadow:0 0 8px var(--cor)}
+@media (max-width:380px){.hv-sg-selos{display:none}}
+
+/* o aviso de segredo descoberto (tela de resultado) */
+.rs-segredo{--cor:#d59cff;position:relative;display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;gap:12px;margin:2px 0;padding:14px;border-radius:18px;overflow:hidden;
+  background:radial-gradient(ellipse at 12% 50%,color-mix(in srgb,var(--cor),transparent 60%),transparent 65%),linear-gradient(160deg,#1d1830,#0d0b16);
+  box-shadow:inset 0 0 0 2px var(--cor),0 0 28px color-mix(in srgb,var(--cor),transparent 55%);animation:sg-revela .9s cubic-bezier(.2,.9,.3,1.25) both}
+.rs-segredo::before{content:'';position:absolute;inset:-80% -20%;background:conic-gradient(from 0deg,transparent,color-mix(in srgb,var(--cor),transparent 70%),transparent 30%);animation:sg-gira 6s linear infinite;pointer-events:none}
+.rs-segredo::after{content:'';position:absolute;inset:-60% -30%;background:linear-gradient(105deg,transparent 42%,#ffffff26 50%,transparent 58%);animation:cq-brilho 3s ease-in-out infinite;pointer-events:none}
+.rs-segredo>*{position:relative;z-index:1}
+.rs-segredo-selo{display:grid;place-items:center;width:58px;height:58px;border-radius:50%;color:#fff;
+  background:radial-gradient(circle at 35% 30%,color-mix(in srgb,var(--cor),#fff 35%),var(--cor) 55%,color-mix(in srgb,var(--cor),#000 45%));box-shadow:0 0 0 3px #0d0b16,0 0 0 5px var(--cor),0 0 26px var(--cor);animation:sg-selo 1.4s .3s ease-out both}
+.rs-segredo-texto{display:grid;gap:3px;min-width:0}
+.rs-segredo-texto small{font-size:10px;font-weight:900;letter-spacing:1.6px;color:var(--cor)}
+.rs-segredo-texto strong{font-size:19px;font-weight:900;line-height:1.05;color:#fff;text-shadow:0 0 14px color-mix(in srgb,var(--cor),transparent 30%)}
+.rs-segredo-texto span{font-size:12px;line-height:1.35;color:#d7d0e6}
+.rs-segredo-texto span b{color:#ffd36b}
+.rs-segredo-livro{justify-self:start;margin-top:2px;padding:2px 7px;border-radius:7px;font-size:9.5px;font-weight:900;color:#fff;background:#ff4a5a;box-shadow:0 0 10px #ff4a5a}
+@keyframes sg-revela{0%{opacity:0;transform:scale(.6) rotate(-4deg);filter:brightness(3)}60%{opacity:1;transform:scale(1.04) rotate(.6deg);filter:brightness(1.4)}100%{transform:none;filter:none}}
+@keyframes sg-selo{0%{transform:scale(0) rotate(-180deg)}70%{transform:scale(1.2) rotate(10deg)}100%{transform:none}}
+@keyframes sg-gira{to{transform:rotate(360deg)}}
+
+/* a trilha da jornada: a bolinha ★ e a 11 */
+.rs-trilha li.secreta{color:#ffd36b;background:radial-gradient(circle,#ffd36b2e,#15121c);box-shadow:inset 0 0 0 1.5px #ffd36b,0 0 12px #ffd36b99}
+.rs-trilha li.secreta.trancada{color:#5f5874;background:#0f0e14;box-shadow:inset 0 0 0 1px #ffffff22;border-style:dashed}
+.rs-trilha li.secreta.trancada::before{display:none}
+.rs-trilha li.secreta.perdeu{color:#9a93ad;box-shadow:inset 0 0 0 1.5px #6f6886}
+
+/* a luta extra no resultado: o título dourado */
+.result-v2.luta-secreta .rs-confronto{color:#ffd36b;text-shadow:0 0 10px #ffd36b88}
+
+/* a abertura da luta secreta, na batalha */
+.bt-secreta{position:absolute;inset:0;z-index:40;display:grid;align-content:start;justify-content:center;justify-items:center;gap:6px;padding-top:max(70px,16%);pointer-events:none;
+  background:radial-gradient(ellipse 80% 38% at 50% 24%,#2a1c4aee,#05030b99 70%,transparent);animation:bt-secreta 3.2s ease-in-out forwards}
+.bt-secreta small{font-size:11px;font-weight:900;letter-spacing:3px;color:#d59cff}
+.bt-secreta strong{font-size:clamp(26px,7vw,44px);font-weight:900;letter-spacing:1px;color:#ffd36b;text-shadow:0 0 18px #ffd36b,0 0 40px #d59cff;animation:sg-revela 1s cubic-bezier(.2,.9,.3,1.25) both}
+.bt-secreta span{font-size:13px;font-weight:800;color:#e9e3f5}
+.bt-secreta i{display:flex;gap:6px}
+.bt-secreta i svg{color:#ffd36b;filter:drop-shadow(0 0 8px #ffd36b);animation:sg-selo 1s calc(var(--k)*.12s + .2s) both}
+@keyframes bt-secreta{0%{opacity:0}10%{opacity:1}78%{opacity:1}100%{opacity:0;visibility:hidden}}
+@media (prefers-reduced-motion:reduce){.sg-carta,.rs-segredo,.rs-segredo-selo,.bt-secreta strong,.bt-secreta i svg{animation:none}.rs-segredo::before,.rs-segredo::after,.sg-carta.aberta::after{animation:none;display:none}}
+
+/* o placar da luta secreta, na batalha */
+.hud-round.hud-secreta{color:#ffd36b;box-shadow:inset 0 0 0 1.5px #ffd36b,0 0 14px #ffd36b66}
+.hud-round.hud-secreta small{color:#d59cff}
+.hud-round.hud-secreta b svg{filter:drop-shadow(0 0 6px #ffd36b)}
+
+/* a trilha com as 12 lutas: menores para caber no celular */
+.rs-trilha.com-extras{gap:2px}
+.rs-trilha.com-extras li{width:24px;height:24px;font-size:10px}
+.rs-trilha.com-extras li.secreta.trancada{width:18px;height:18px;align-self:center;outline:1.5px dashed #ffffff30;outline-offset:-1.5px;box-shadow:none}
+
+/* o botão e a prévia da próxima luta quando ela é secreta */
+.rs-cta.rs-cta-secreta{background:linear-gradient(135deg,#ffd36b,#d59cff);color:#140d22;box-shadow:0 0 24px #d59cff88}
+.rs-proximo.secreta{box-shadow:inset 0 0 0 1.5px #ffd36b,0 0 16px #d59cff55}
+.rs-proximo.secreta span{color:#ffd36b}
+.hv-segredos-faixa{background:radial-gradient(ellipse at 10% 50%,#d59cff33,transparent 60%),linear-gradient(165deg,#1b1328,#0c0912)}
+.hv-segredos-faixa .hv-cq-icone{color:#1b0f2a;background:radial-gradient(circle at 35% 30%,#f0dcff,#d59cff 60%,#8d55c4)}
+.hv-segredos-faixa .hv-cq-texto small{color:#c3b4d8}
+.hv-faixas .hv-conquistas-faixa.hv-segredos-faixa{grid-column:1/-1;grid-template-columns:auto minmax(0,1fr) auto auto;padding:10px 12px}
+.hv-faixas .hv-conquistas-faixa.hv-segredos-faixa>svg{display:block;color:var(--titulo)}

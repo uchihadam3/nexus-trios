@@ -2,6 +2,8 @@ import { describe, expect, it } from 'vitest';
 import { replayRanked } from '../src/engine/ranked';
 import { generateCampaign } from '../src/engine/campaign';
 import { createBattle, stepBattle } from '../src/engine/battle';
+import { summarizeBattle } from '../src/engine/run-summary';
+import { ehLutaExtra, indiceDosPontos, proximaLuta, rivalDaLuta, seedDaLuta } from '../src/engine/segredos';
 import { LUTA, PESO_DA_CURA_ALVO, feitosDaLuta, pontosDaJornada, pontosDaLuta } from '../src/engine/pontos';
 import { PESO_DA_CURA } from '../src/data/peso-da-cura';
 import { characters } from '../src/data/characters';
@@ -15,17 +17,20 @@ describe('pontos', () => {
       const rivais = new Set(generateCampaign(seed).flatMap((e) => e.team));
       const trio = characters.map((c) => c.id).filter((id) => !rivais.has(id)).slice(seed % 40, seed % 40 + 3);
       const oficial = replayRanked(trio, seed);
-      const lutas: { pontos: number; won: boolean }[] = [];
-      for (const [index, encontro] of generateCampaign(seed).entries()) {
-        const b = createBattle(trio, encontro.team, seed + index * 7919, encontro.scale);
+      // a jornada como a tela joga: as 10 e as lutas extras dos segredos (src/engine/segredos.ts), na ordem
+      const lutas: { pontos: number; won: boolean }[] = [], resumos: ReturnType<typeof summarizeBattle>[] = [], campanha = generateCampaign(seed);
+      for (let index = proximaLuta(trio, resumos); index !== null; index = proximaLuta(trio, resumos)) {
+        const encontro = rivalDaLuta(seed, trio, campanha, index, resumos);
+        const b = createBattle(trio, encontro.team, seedDaLuta(seed, index), encontro.scale);
         for (let t = 0; t < 9000 && !b.finished; t++) stepBattle(b);
-        const p = pontosDaLuta(b, index);
-        lutas.push({ pontos: p.total, won: b.winner === 'player' });
-        if (b.winner !== 'player') break;
+        const r = summarizeBattle(index, b);
+        resumos.push(r);
+        // a luta normal soma o que o trio fez (vencida ou não); a extra, só vencida
+        lutas.push({ pontos: ehLutaExtra(index) && !r.won ? 0 : pontosDaLuta(b, indiceDosPontos(index)).total, won: r.won });
       }
       expect(pontosDaJornada(lutas)).toBe(oficial.score);
       // a luta perdida também pontua (o que o trio fez nela), e cada luta cabe na escala de dezenas de milhares
-      for (const l of lutas) { expect(l.pontos).toBeGreaterThan(0); expect(l.pontos).toBeLessThan(400_000); }
+      for (const [i, l] of lutas.entries()) { if (!ehLutaExtra(resumos[i]!.index)) expect(l.pontos).toBeGreaterThan(0); expect(l.pontos).toBeLessThan(400_000); }
       conferidas += lutas.length;
     }
     expect(conferidas).toBeGreaterThan(10);

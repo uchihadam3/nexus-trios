@@ -143,3 +143,21 @@ button.dv-espaco:focus-visible{outline:2px solid #c8f560;outline-offset:4px;bord
 .dv-porque-grupo h3{margin:4px 2px 0;font-size:10.5px;font-weight:900;letter-spacing:1.4px;text-transform:uppercase;color:#9fb3a3}
 .dv-porque-grupo.dele{padding:10px;border-radius:16px;background:#ffffff06;box-shadow:inset 0 0 0 1px #ffffff12}
 .dv-porque-grupo.dele h3{margin-top:0;color:color-mix(in srgb,var(--character),#fff 35%)}
+
+/* as estrelas do trio completo (DraftScreen, EstrelasDoTrio): acendem uma a uma, na cor do nível */
+.dv-estrelas{--nivel:#ffd36b;position:relative;display:grid;justify-items:center;gap:3px;margin:2px auto 0;padding:9px 18px 10px;border-radius:18px;overflow:hidden;
+  background:radial-gradient(ellipse at 50% 0%,color-mix(in srgb,var(--nivel),transparent 72%),transparent 70%),linear-gradient(170deg,#141a24,#0a0e14);
+  box-shadow:inset 0 0 0 1.5px color-mix(in srgb,var(--nivel),transparent 45%),0 0 22px color-mix(in srgb,var(--nivel),transparent 75%);animation:dv-estrelas-entra .55s cubic-bezier(.2,.9,.3,1.25) both}
+.dv-estrelas::after{content:'';position:absolute;inset:-60% -30%;background:linear-gradient(105deg,transparent 42%,#ffffff1f 50%,transparent 58%);animation:cq-brilho 4s 1.4s ease-in-out infinite;pointer-events:none}
+.dv-estrelas-rotulo{font-size:9.5px;font-weight:900;letter-spacing:2px;color:color-mix(in srgb,var(--nivel),#fff 25%)}
+.dv-estrelas-fila{display:flex;gap:4px}
+.dv-estrelas-fila i{display:grid;color:#2a323e;filter:drop-shadow(0 1px 0 #0008)}
+.dv-estrelas-fila i.acesa{color:var(--nivel);filter:drop-shadow(0 0 7px var(--nivel));animation:dv-estrela-acende .55s calc(var(--k)*.16s + .25s) cubic-bezier(.2,.9,.3,1.6) both}
+.dv-estrelas.n5 .dv-estrelas-fila i.acesa{animation:dv-estrela-acende .55s calc(var(--k)*.16s + .25s) cubic-bezier(.2,.9,.3,1.6) both,dv-estrela-brilha 1.6s calc(var(--k)*.16s + 1.4s) ease-in-out infinite}
+.dv-estrelas-nome{font-size:15px;font-weight:900;color:#fff;text-shadow:0 0 12px var(--nivel);animation:dv-estrelas-entra .5s 1s both}
+.dv-estrelas-misterio{display:inline-flex;align-items:center;gap:5px;max-width:290px;font-size:11px;font-style:italic;line-height:1.3;color:#d9c7ff;text-align:center;animation:dv-estrelas-entra .5s 1.3s both}
+.dv-estrelas-misterio svg{flex:none;color:#d59cff}
+@keyframes dv-estrelas-entra{from{opacity:0;transform:translateY(8px) scale(.94)}}
+@keyframes dv-estrela-acende{0%{color:#2a323e;transform:scale(.4) rotate(-40deg);filter:none}60%{transform:scale(1.35) rotate(8deg);filter:drop-shadow(0 0 14px var(--nivel)) brightness(1.6)}100%{transform:none}}
+@keyframes dv-estrela-brilha{50%{filter:drop-shadow(0 0 14px var(--nivel)) brightness(1.25)}}
+@media (prefers-reduced-motion:reduce){.dv-estrelas,.dv-estrelas-fila i.acesa,.dv-estrelas-nome,.dv-estrelas-misterio{animation:none}.dv-estrelas::after{display:none}}

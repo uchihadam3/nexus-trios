@@ -770,6 +770,8 @@ export function resolve(b:Battle){
 }
 export function stepBattle(b:Battle,observe?:(snapshot:Battle)=>void):Battle {
   if(b.finished)return b;
+  // o segredo A Virada: um do trio de pé contra os três rivais (só olha, não muda a luta)
+  if(!b.umContraTres){let meus=0,deles=0;for(const f of b.fighters)if(alive(f)){if(f.side==='player')meus++;else deles++;}if(meus===1&&deles===3)b.umContraTres=true;}
   b.time+=STEP;b.momentum*=Math.exp(-Math.LN2*STEP/D.memoryHalfLifeSeconds);
   for(const f of b.fighters){
     if(!alive(f)){

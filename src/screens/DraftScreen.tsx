@@ -1,7 +1,7 @@
 import { useMemo,useState,type CSSProperties } from 'react';
 import { SeloDeEstrela } from '../components/SeloDeEstrela';
 import { createPortal } from 'react-dom';
-import { ArrowRight,CircleCheck,Crown,Dices,Info,LogOut,Sparkles,Swords,TriangleAlert,X,Zap } from 'lucide-react';
+import { ArrowRight,CircleCheck,Crown,Dices,Info,LogOut,Sparkles,Star,Swords,TriangleAlert,X,Zap } from 'lucide-react';
 import type { Draft,Encounter } from '../engine/campaign';
 import { byId } from '../data/characters';
 import { Portrait } from '../components/Portrait';
@@ -12,7 +12,8 @@ import { IdentityChips } from '../components/IdentityChips';
 import { ComTermos } from '../components/Termos';
 import { draftConnection } from '../presentation/draft-connections';
 import { BotaoDicas } from '../components/BotaoDicas';
-import { dicasDoDraft,type DicaDoCandidato } from '../presentation/dicas-do-trio';
+import { dicasDoDraft,estrelasDoTime,type DicaDoCandidato } from '../presentation/dicas-do-trio';
+import { universoDoTrio } from '../engine/segredos';
 import { universoDaFicha } from '../data/equipes';
 
 /*
@@ -54,6 +55,7 @@ export function DraftScreen({draft,desafio,primeiroRival,dicas,podeDicas,usouDic
           <Portrait character={c}/><b>{c.name}</b><small className="dv-espaco-ficha"><Info size={10}/>ficha</small>
         </button>
         :<div key={`vazio-${i}`} className={`dv-espaco ${i===vez&&!full?'vez':''}`}><span>?</span><b>{i===vez?'escolha agora':`espaço ${i+1}`}</b></div>;})}</div>
+      {full&&<EstrelasDoTrio team={draft.team}/>}
       {team.length>0&&<div className="dv-trio-faz"><IdentityChips ids={doTrio} trio={doTrio}/>{ligadas&&lacunas.length>0&&<small><TriangleAlert size={13}/>{lacunas.join(' · ')}</small>}</div>}
       {(!full||usouDicas)&&<BotaoDicas ligado={dicas} liberado={podeDicas} usado={usouDicas} desativado={full} onMudar={onDicas}/>}
     </header>
@@ -104,4 +106,28 @@ export function DraftScreen({draft,desafio,primeiroRival,dicas,podeDicas,usouDic
       <button className="secondary dv-sair" onClick={onAbandon} aria-label="Desistir da jornada" title="Desistir da jornada"><LogOut size={18}/></button>
     </footer>
   </section>;
+}
+
+/*
+ * As estrelas do trio (pedido do jogador: "depois que escolher os três, aparece quantas estrelas o time tem, de uma a
+ * cinco… bem bonito"): a mesma força do PvP (src/presentation/dicas-do-trio.ts, estrelasDoTime). As estrelas acendem
+ * uma a uma, com o nome do nível. Um trio de 1 estrela ou de um universo só ganha uma frase de mistério: os dois
+ * escondem segredos (src/engine/segredos.ts).
+ */
+const NIVEIS_DO_TRIO=[
+  {nome:'Azarão',cor:'#9fb3c2'},
+  {nome:'Promissor',cor:'#86e3a8'},
+  {nome:'Forte',cor:'#8fd3ff'},
+  {nome:'Muito forte',cor:'#c58cff'},
+  {nome:'Lendário',cor:'#ffd36b'},
+];
+function EstrelasDoTrio({team}:{team:string[]}){
+  const n=estrelasDoTime(team),nivel=NIVEIS_DO_TRIO[n-1]!,universo=universoDoTrio(team);
+  const misterio=n===1?'Ninguém aposta nos pequenos… e é aí que mora um segredo.':universo?`Três de ${universo}… dizem que isso desperta um segredo.`:null;
+  return <div className={`dv-estrelas n${n}`} style={{'--nivel':nivel.cor} as CSSProperties} role="status" aria-label={`Força do trio: ${n} de 5 estrelas, ${nivel.nome}`}>
+    <span className="dv-estrelas-rotulo">FORÇA DO TRIO</span>
+    <span className="dv-estrelas-fila" aria-hidden="true">{[0,1,2,3,4].map(k=><i key={k} className={k<n?'acesa':''} style={{'--k':k} as CSSProperties}><Star size={26} fill="currentColor" strokeWidth={1.5}/></i>)}</span>
+    <b className="dv-estrelas-nome">{nivel.nome}</b>
+    {misterio&&<small className="dv-estrelas-misterio"><Sparkles size={12}/>{misterio}</small>}
+  </div>;
 }

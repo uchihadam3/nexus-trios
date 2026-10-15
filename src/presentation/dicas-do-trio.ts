@@ -84,6 +84,11 @@ export function notaDoTrio(team: readonly string[]): number {
   for (let a = 0; a < team.length; a++) for (let b = a + 1; b < team.length; b++) n += ajusteDaDupla(team[a]!, team[b]!);
   return n;
 }
+/** A força de um time de 0 a 100 (a nota das Dicas, que vai de ~-2 a ~8): a mesma no PvP, na escolha do trio e no segredo Davi contra Golias. */
+export const forcaDoTime = (t: readonly string[]) => Math.max(4, Math.min(100, Math.round(((notaDoTrio(t) + 2) / 10) * 100)));
+/** As estrelas do time (1 a 5): cada 20 de força é uma estrela. */
+export const estrelasDaForca = (f: number) => Math.max(1, Math.min(5, Math.ceil(f / 20)));
+export const estrelasDoTime = (t: readonly string[]) => estrelasDaForca(forcaDoTime(t));
 /* de logit para pontos de vitória, perto de 50% (para a explicação) */
 const pontos = (z: number) => Math.round(25 * Math.abs(z));
 

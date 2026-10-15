@@ -2,7 +2,10 @@ import { useCallback,useEffect,useLayoutEffect,useRef,useState } from 'react';
 import { ComTermos } from '../components/Termos';
 import { UNICAS } from '../engine/unicas';
 import { battleAudio } from '../lib/audio';
-import { Swords,Pause,Play,FastForward,VolumeX,Volume2,SlidersHorizontal,Check,LogOut,ChevronLeft,ScrollText,Link2 } from 'lucide-react';
+import { PRIORIDADE } from '../audio/cues';
+import { Swords,Pause,Play,FastForward,VolumeX,Volume2,SlidersHorizontal,Check,LogOut,ChevronLeft,ScrollText,Link2,Star } from 'lucide-react';
+import { LUTA_ESTRELA,ehLutaExtra } from '../engine/segredos';
+import '../presentation/segredos.css';
 import { AberturaDeCombos,DescobertaNoLivro,FichaDoCombo,ListaDeCombos,type NovosNoLivro } from '../components/CombosDoTrio';
 import { OrbesDeCombo } from '../components/OrbesDeCombo';
 import { Invocacoes } from '../components/Invocacoes';
@@ -104,6 +107,7 @@ export function BattleScreen({battle,beat,index,name,settings,paused,onPause,onA
     <header className="arena-hud">
       {onExit&&<button className="hud-button hud-exit" onClick={onExit} aria-label="Voltar ao início (a batalha fica pausada)"><ChevronLeft size={22}/></button>}
       {pvp?<div className="hud-round hud-pvp" title={name}><small>RODADA</small><b>{pvp.rodada}<i>PvP</i></b></div>
+        :ehLutaExtra(index)?<div className="hud-round hud-secreta" title={name}><small>SECRETA</small><b>{index===LUTA_ESTRELA?<Star size={17} fill="currentColor"/>:11}</b></div>
         :<div className="hud-round" title={name}><small>CONFRONTO</small><b>{String(index+1).padStart(2,'0')}<i>/10</i></b></div>}
       <div className="hud-advantage">
         <div className="hud-advantage-labels"><span>{pvp?'VOCÊ':'SEU TRIO'}</span><strong>{turn?'VIRADA!':label}</strong><span>{pvp?pvp.rival:'RIVAIS'}</span></div>
@@ -136,6 +140,8 @@ export function BattleScreen({battle,beat,index,name,settings,paused,onPause,onA
       {battle.combos&&<AberturaDeCombos combos={battle.combos.player} chaveDaLuta={`${index}-${battle.seed}`} comecando={battle.time<1.5}/>}
       {/* e o que a luta acabou de pôr no Livro de Combos (do trio ou visto no rival) */}
       {novosNoLivro&&novosNoLivro.chave===`${index}-${battle.seed}`&&<DescobertaNoLivro novos={novosNoLivro} comecando={battle.time<1.5}/>}
+      {/* a luta extra liberada por um segredo (src/engine/segredos.ts) abre com o nome dela */}
+      {!pvp&&ehLutaExtra(index)&&<AberturaSecreta key={`${index}-${battle.seed}`} index={index} nome={name} comecando={battle.time<1.5}/>}
       {paused&&<div className="paused-banner"><Pause size={16}/> BATALHA PAUSADA</div>}
     </div>
     <footer className="arena-controls">
@@ -161,4 +167,19 @@ export function BattleScreen({battle,beat,index,name,settings,paused,onPause,onA
     {inspect&&<BattleInspector target={inspect} battle={battle} onClose={()=>setInspect(null)} onSelect={setInspect}/>}
     {tutorial>=0&&<div className="battle-tutorial"><div><span><AuxIcon id="help" size={20}/> GUIA {tutorial+1}/5</span><button onClick={closeTutorial} aria-label="Pular guia"><Check size={17}/></button></div><p><b>{tutorialSteps[tutorial][0]}</b></p><p><ComTermos texto={tutorialSteps[tutorial][1]}/></p><button className="secondary" onClick={()=>tutorial===4?closeTutorial():setTutorial(tutorial+1)}>{tutorial===4?'Pronto. Assistir meu trio':'Entendi'}</button><button className="text-button" onClick={closeTutorial}>Pular guia</button></div>}
   </section>;
+}
+
+/* A abertura da luta secreta: "LUTA SECRETA ★" com o nome do rival, por três segundos (só quando a luta começa agora). */
+function AberturaSecreta({index,nome,comecando}:{index:number;nome:string;comecando:boolean}){
+  const [ver,setVer]=useState(comecando);
+  useEffect(()=>{if(!ver)return;battleAudio.sound('pronto',PRIORIDADE.grand);const id=window.setTimeout(()=>setVer(false),3300);return()=>clearTimeout(id);
+    // uma vez por luta
+  },[]);
+  if(!ver)return null;
+  return <div className="bt-secreta" role="status">
+    <small>SEGREDO LIBERADO</small>
+    <strong>{index===LUTA_ESTRELA?'LUTA SECRETA ★':'LUTA 11'}</strong>
+    <span>{nome==='Luta Secreta'?'Só vale pontos se vencer':`${nome} · só vale pontos se vencer`}</span>
+    <i aria-hidden="true">{[0,1,2].map(k=><Star key={k} size={18} fill="currentColor" style={{'--k':k} as React.CSSProperties}/>)}</i>
+  </div>;
 }

@@ -10,6 +10,7 @@ import { CharactersScreen } from './screens/Auxiliary';
 import { HelpScreen } from './screens/ComoJogar';
 import { SettingsScreen } from './screens/Ajustes';
 import { LivroDeCombos } from './screens/LivroDeCombos';
+import { LivroDeSegredos } from './screens/LivroDeSegredos';
 import { CharacterModal } from './components/CharacterModal';
 import { CompartilharJogo } from './components/CompartilharJogo';
 import { BoasVindasDoConvite } from './components/BoasVindasDoConvite';
@@ -18,7 +19,8 @@ import { byId,characters } from './data/characters';
 import { createBattle } from './engine/battle';
 import { candidates,generateCampaign,newDraft,pickDraft,skipDraft } from './engine/campaign';
 import type { ResultadoTop3 } from './lib/top3';
-import { defaults,ESCALA_DOS_PONTOS,loadProfile,loadRun,loadSettings,resetStorage,save,storageAvailable } from './lib/storage';
+import { defaults,ESCALA_DOS_PONTOS,jornadaAcabou,loadProfile,loadRun,loadSettings,proximaDaJornada,resetStorage,rivalAtual,save,storageAvailable } from './lib/storage';
+import { normaisVencidas,proximaLuta,rivalDaLuta,seedDaLuta,segredosCumpridos } from './engine/segredos';
 import type { Run,Settings } from './lib/storage';
 import type { NovosNoLivro } from './components/CombosDoTrio';
 import { PRIORIDADE } from './audio/cues';
@@ -51,7 +53,7 @@ const ComunidadeScreen=lazy(()=>import('./screens/ComunidadeScreen').then(m=>({d
 const COMUNIDADE_DEMO=import.meta.env.VITE_COMUNIDADE_DEMO==='true';
 const DebugScreen=lazy(()=>import('./screens/DebugScreen').then(m=>({default:m.DebugScreen})));
 const VfxLabScreen=lazy(()=>import('./screens/VfxLabScreen').then(m=>({default:m.VfxLabScreen})));
-type Screen='home'|'game'|'characters'|'conquistas'|'combos'|'ranking'|'conta'|'help'|'settings'|'debug'|'vfx'|'comunidade'|'pvp';
+type Screen='home'|'game'|'characters'|'conquistas'|'combos'|'segredos'|'ranking'|'conta'|'help'|'settings'|'debug'|'vfx'|'comunidade'|'pvp';
 interface InstallEvent extends Event {prompt:()=>Promise<void>;userChoice:Promise<{outcome:string}>}
 /* Os avisos do jogo (remake): medalhão com o anel de runas na cor do assunto, título grande, botões grandes. */
 function InfoDialog({title,children,onClose,icone,cor='#c8f560'}:{title:string;children:React.ReactNode;onClose:()=>void;icone?:React.ReactNode;cor?:string}){
@@ -80,7 +82,7 @@ export default function App(){
   const directionFor=(current:Run)=>{
     const battle=current.battle!;
     if(current.presentation&&current.team.length===3){
-      const initial=createBattle(current.team,current.encounters[current.index].team,current.seed+current.index*7919,current.encounters[current.index].scale);
+      const rival=rivalAtual(current),initial=createBattle(current.team,rival.team,seedDaLuta(current.seed,current.index),rival.scale);
       const restored=restoreDirection(initial,battle,current.presentation);
       if(restored)return restored;
     }
@@ -122,8 +124,8 @@ export default function App(){
    */
   const fechaDesistindo=(atual:Run|null)=>{
     if(!atual?.ranked?.id||!['playing','validating'].includes(atual.ranked.status))return;
-    const terminou=atual.stage==='result'&&(atual.battle?.winner!=='player'||atual.index===9);if(terminou)return;
-    const lista=atual.summaries??[],id=atual.ranked.id,envio={dicas:atual.dicas===true,vencidas:lista.filter(x=>x.won).length,desistiu:true,lutas:lista.length,pontos:lista.reduce((n,x)=>n+x.score,0)};
+    if(jornadaAcabou(atual))return;
+    const lista=atual.summaries??[],id=atual.ranked.id,envio={dicas:atual.dicas===true,vencidas:normaisVencidas(lista),desistiu:true,lutas:lista.length,pontos:lista.reduce((n,x)=>n+x.score,0)};
     void runDigest(id,atual.team,atual.seed,lista.map(x=>x.won)).then(digest=>onlineCall('submit',{runId:id,digest,...envio}).catch(e=>{
       if(!recusaDefinitiva(e instanceof Error?e.message:''))guardarEnvio({runId:id,digest,em:new Date().toISOString(),...envio});}));
   };
@@ -135,8 +137,8 @@ export default function App(){
     if(escolhido){draft={...draft,team:[escolhido],skips:PULOS_DO_DESAFIO};draft={...draft,candidates:candidates(draft)};}
     changeRun({seed,team:[],encounters:generateCampaign(seed),index:0,stage:'draft',draft,battle:null,recorded:false,summaries:[],...(escolhido?{desafio:escolhido}:{})});setPaused(false);setConfirmNew(false);setConfirmAbandon(false);navigate('game');
   };
-  const jogarDesafio=(id:string)=>{desafioPendente.current=id;if(run&&(run.stage!=='result'||run.battle?.winner==='player'&&run.index<9))setConfirmNew(true);else void startNew();};
-  const requestNew=()=>{desafioPendente.current=null;if(run&&(run.stage!=='result'||run.battle?.winner==='player'&&run.index<9))setConfirmNew(true);else void startNew();};
+  const jogarDesafio=(id:string)=>{desafioPendente.current=id;if(run&&!jornadaAcabou(run))setConfirmNew(true);else void startNew();};
+  const requestNew=()=>{desafioPendente.current=null;if(run&&!jornadaAcabou(run))setConfirmNew(true);else void startNew();};
   /*
    * Os rivais da jornada saem assim que o trio fica pronto, não ao entrar na
    * arena: assim a "Primeira luta" mostrada na escolha é exatamente a luta que
@@ -216,9 +218,9 @@ export default function App(){
       finally{setOnlineBusy(false);}
       if(runRef.current!==current)return;
     }
-    const encounter=encounters[index];
+    const encounter=rivalDaLuta(seed,team,encounters,index,current.summaries??[]);
     if(index===0&&ranked&&ranked.mode!=='free'){setOnlineBusy(true);try{const result=await onlineCall<{run:{id:string;seed:number}}> ('start',{mode:ranked.mode,team});if(result.run.seed!==current.seed)throw new Error('O desafio mudou; inicie outra Jornada Ranqueada.');ranked={...ranked,id:result.run.id,status:'playing'};}catch(error){setOnlineNotice(error instanceof Error?error.message:'Jornada Ranqueada indisponível.');return;}finally{setOnlineBusy(false);}}
-    const next={...current,seed,team,encounters,index,stage:'battle' as const,recorded:false,presentation:undefined,battleSynergies:[],raioX:raioXVazio(),telemetry:emptyTally(),ranked,battle:createBattle(team,encounter.team,seed+index*7919,encounter.scale)};
+    const next={...current,seed,team,encounters,index,stage:'battle' as const,recorded:false,presentation:undefined,battleSynergies:[],raioX:raioXVazio(),telemetry:emptyTally(),ranked,battle:createBattle(team,encounter.team,seedDaLuta(seed,index),encounter.scale)};
     direction.current=null;setPresentation(null);changeRun(next);setPaused(false);navigate('game');
     if(index===0)setProfile(p=>{const n={...p,journeys:p.journeys+1};save('profile',n);return n;});
     /* Livro de Combos: um combo é descoberto quando o trio do jogador forma ele, ou quando ele vê o rival usar (pedido do jogador) */
@@ -299,15 +301,19 @@ export default function App(){
         next={...next,stage:'result',recorded:true,summaries:current.recorded?current.summaries:[...(current.summaries??[]).filter(s=>s.index!==current.index),summary]};
         if(!current.recorded){
           /* conta ao servidor como a jornada está: se o envio do fim não chegar, o servidor a coloca no ranking sozinho */
-          if(current.ranked?.id&&current.ranked.status==='playing'){const lista=next.summaries??[],perdeu=d.battle.winner!=='player';
-            void onlineCall('progresso',{runId:current.ranked.id,lutas:lista.length,vencidas:lista.filter(x=>x.won).length,pontos:lista.reduce((n,x)=>n+x.score,0),fim:perdeu||current.index===9,dicas:current.dicas===true}).catch(()=>{});}
+          if(current.ranked?.id&&current.ranked.status==='playing'){const lista=next.summaries??[];
+            void onlineCall('progresso',{runId:current.ranked.id,lutas:lista.length,vencidas:normaisVencidas(lista),pontos:lista.reduce((n,x)=>n+x.score,0),fim:proximaLuta(current.team,lista)===null,dicas:current.dicas===true}).catch(()=>{});}
           const won=d.battle.winner==='player',champion=won&&current.index===9;
           /* o objetivo do jogo: pontos. O recorde é o maior total de uma jornada. */
           const total=pontosDaJornada((next.summaries??[]).map(x=>({pontos:x.score,won:x.won})));
           /* Terminou as 10 lutas: o trio libera as Conquistas de quem ainda não tinha (só a primeira vez conta). */
           if(champion){const novas=liberar(loadProfile().conquistas??{},current.team).novas;if(novas.length)next={...next,conquistasNovas:novas};}
+          /* os segredos cumpridos nesta jornada abrem no Livro de Segredos (src/engine/segredos.ts) */
+          const segredos=segredosCumpridos(current.team,next.summaries??[]);
+          {const ja=loadProfile().segredosDescobertos??[],novos=segredos.filter(x=>!ja.includes(x));if(novos.length)next={...next,livroNovo:[...(next.livroNovo??[]),...novos]};}
           setProfile(p=>{
-            const n={...p,...(champion?{conquistas:liberar(p.conquistas??{},current.team).conquistas}:{}),best:Math.max(p.best,current.index+(won?1:0)),wins:p.wins+(won?1:0),victories:p.victories+Number(champion),champion:champion?[...current.team]:p.champion,recordePontos:Math.max(p.recordePontos??0,total)};
+            const ja=p.segredosDescobertos??[],novosSegredos=segredos.filter(x=>!ja.includes(x));
+            const n={...p,...(champion?{conquistas:liberar(p.conquistas??{},current.team).conquistas}:{}),...(novosSegredos.length?{segredosDescobertos:[...ja,...novosSegredos]}:{}),best:Math.max(p.best,normaisVencidas(next.summaries??[])),wins:p.wins+(won?1:0),victories:p.victories+Number(champion),champion:champion?[...current.team]:p.champion,recordePontos:Math.max(p.recordePontos??0,total)};
             save('profile',n);return n;
           });
           battleAudio.sound(won?'vitoria':'derrota',PRIORIDADE.grand);}
@@ -319,24 +325,24 @@ export default function App(){
     return()=>clearInterval(timer);
   },[screen,paused,details,confirmNew,confirmAbandon,settings.speed,settings.volume]);
   useEffect(()=>{
-    if(screen!=='game'||!settings.auto||run?.stage!=='result'||run.index>=9||run.battle?.winner!=='player')return;
-    const id=window.setTimeout(()=>{const current=runRef.current;if(!current)return;const index=current.index+1,encounter=current.encounters[index];const next={...current,index,stage:'battle' as const,recorded:false,presentation:undefined,battleSynergies:[],raioX:raioXVazio(),telemetry:emptyTally(),battle:createBattle(current.team,encounter.team,current.seed+index*7919,encounter.scale)};runRef.current=next;setRun(next);save('run',next);setPaused(false);},ESPERA_DA_PROXIMA_MS);
+    if(screen!=='game'||!settings.auto||run?.stage!=='result'||jornadaAcabou(run))return;
+    const id=window.setTimeout(()=>{const current=runRef.current;if(!current||current.stage!=='result')return;const index=proximaDaJornada(current);if(index===null)return;const encounter=rivalAtual(current,index);const next={...current,index,stage:'battle' as const,recorded:false,presentation:undefined,battleSynergies:[],raioX:raioXVazio(),telemetry:emptyTally(),battle:createBattle(current.team,encounter.team,seedDaLuta(current.seed,index),encounter.scale)};runRef.current=next;setRun(next);save('run',next);setPaused(false);},ESPERA_DA_PROXIMA_MS);
     return()=>clearTimeout(id);
   },[screen,settings.auto,run?.stage,run?.index,run?.battle?.winner]);
   useEffect(()=>{
-    if(!run?.ranked?.id||run.stage!=='result'||run.battle?.winner==='player'&&run.index<9||!['playing','validating'].includes(run.ranked.status)||submission.current)return;
+    if(!run?.ranked?.id||!jornadaAcabou(run)||!['playing','validating'].includes(run.ranked.status)||submission.current)return;
     submission.current=true;const id=run.ranked.id;
     if(run.ranked.status!=='validating')changeRun({...run,ranked:{...run.ranked,status:'validating'}});
     void (async()=>{
-      try{const digest=await runDigest(id,run.team,run.seed,(run.summaries??[]).map(s=>s.won));const result=await onlineCall<{score:number;daily:number|null;weekly:number|null;season:number|null;top3?:{periodo?:ResultadoTop3;temporada?:ResultadoTop3}}>('submit',{runId:id,digest,dicas:run.dicas===true,vencidas:(run.summaries??[]).filter(s=>s.won).length,pontos:(run.summaries??[]).reduce((n,s)=>n+s.score,0)});
+      try{const digest=await runDigest(id,run.team,run.seed,(run.summaries??[]).map(s=>s.won));const result=await onlineCall<{score:number;daily:number|null;weekly:number|null;season:number|null;top3?:{periodo?:ResultadoTop3;temporada?:ResultadoTop3}}>('submit',{runId:id,digest,dicas:run.dicas===true,vencidas:normaisVencidas(run.summaries??[]),pontos:(run.summaries??[]).reduce((n,s)=>n+s.score,0)});
         const latest=runRef.current;if(latest?.ranked?.id===id)changeRun({...latest,ranked:{...latest.ranked,status:'verified',score:result.score,daily:result.daily,weekly:result.weekly,season:result.season,top3:result.top3,error:undefined}});
       }catch(error){const msg=error instanceof Error?error.message:'Falha na validação.';
         // falhou por rede ou servidor: fica guardada e é reenviada sozinha ao abrir o jogo (src/lib/envios-pendentes.ts)
-        if(!recusaDefinitiva(msg))void runDigest(id,run.team,run.seed,(run.summaries??[]).map(s=>s.won)).then(digest=>guardarEnvio({runId:id,digest,dicas:run.dicas===true,em:new Date().toISOString(),vencidas:(run.summaries??[]).filter(s=>s.won).length,pontos:(run.summaries??[]).reduce((n,s)=>n+s.score,0)}));
+        if(!recusaDefinitiva(msg))void runDigest(id,run.team,run.seed,(run.summaries??[]).map(s=>s.won)).then(digest=>guardarEnvio({runId:id,digest,dicas:run.dicas===true,em:new Date().toISOString(),vencidas:normaisVencidas(run.summaries??[]),pontos:(run.summaries??[]).reduce((n,s)=>n+s.score,0)}));
         const latest=runRef.current;if(latest?.ranked?.id===id)changeRun({...latest,ranked:{...latest.ranked,status:'failed',error:msg}});}
       finally{submission.current=false;}
     })();
-  },[run?.stage,run?.index,run?.battle?.winner,run?.ranked?.status,run?.ranked?.id]);
+  },[run?.stage,run?.index,run?.battle?.winner,run?.summaries?.length,run?.ranked?.status,run?.ranked?.id]);
   useEffect(()=>{battleAudio.configure(settings);},[settings]);
   /* versão nova publicada enquanto a aba estava aberta (src/main.tsx): oferece recarregar */
   const [versaoNova,setVersaoNova]=useState(false);
@@ -345,7 +351,7 @@ export default function App(){
    * jogo aberto em segundo plano não fica jogando a versão velha, que o ranking recusa.
    */
   const telaAtual=useRef(screen);telaAtual.current=screen;
-  useEffect(()=>{const ouve=()=>{const r=runRef.current,emJornada=telaAtual.current==='game'&&!!r&&r.stage!=='draft'&&!(r.stage==='result'&&(r.battle?.winner!=='player'||r.index>=9));if(emJornada)setVersaoNova(true);else location.reload();};window.addEventListener('nexus:versao-nova',ouve);return()=>window.removeEventListener('nexus:versao-nova',ouve);},[]);
+  useEffect(()=>{const ouve=()=>{const r=runRef.current,emJornada=telaAtual.current==='game'&&!!r&&r.stage!=='draft'&&!jornadaAcabou(r);if(emJornada)setVersaoNova(true);else location.reload();};window.addEventListener('nexus:versao-nova',ouve);return()=>window.removeEventListener('nexus:versao-nova',ouve);},[]);
   useEffect(()=>{battleAudio.setBattle(screen==='game'&&run?.stage==='battle'&&!paused&&!details&&!confirmNew&&!confirmAbandon,run?`${run.seed}-${run.index}`:undefined,faixaDaLuta(run?.index??0),run&&run.index<9?faixaDaLuta(run.index+1):undefined);return()=>battleAudio.setBattle(false);},[screen,run?.stage,run?.seed,run?.index,paused,details,confirmNew,confirmAbandon]);
   const install=async()=>{if(installEvent){await installEvent.prompt();const choice=await installEvent.userChoice;setInstallEvent(null);if(choice.outcome!=='accepted')setInstallHelp(true);}else setInstallHelp(true);};
   /* o convite (src/components/BoasVindasDoConvite.tsx): instala pelo pedido do próprio celular e diz se deu certo */
@@ -443,11 +449,12 @@ export default function App(){
       {screen==='ranking'&&<RankingScreen dono={dono} inicial={rankingInicial} handle={profile.publicHandle} conta={conta!==null&&conta.origem!=='convidado'} onConta={()=>navigate('conta')} recorde={profile.recordePontos??0}/>}
       {screen==='conta'&&<AccountScreen autenticacao={autenticacao} conta={conta} profile={profile} conectado={onlineConfigured} google={googleConfigured} aoMudarPerfil={p=>{save('profile',p);setProfile(p);}}/>}
       {screen==='help'&&<HelpScreen onPlay={requestNew}/>}
+      {screen==='segredos'&&<LivroDeSegredos descobertos={profile.segredosDescobertos??[]} vistos={profile.segredosVistos??[]} onVer={ids=>setProfile(p=>{const ja=p.segredosVistos??[],n={...p,segredosVistos:[...ja,...ids.filter(x=>!ja.includes(x))]};save('profile',n);return n;})}/>}
       {screen==='combos'&&<LivroDeCombos descobertos={profile.combosDescobertos??[]} vistos={profile.combosVistos??[]} onVer={id=>setProfile(p=>{const ja=p.combosVistos??[];if(ja.includes(id))return p;const n={...p,combosVistos:[...ja,id]};save('profile',n);return n;})}/>}
       {screen==='settings'&&<SettingsScreen settings={settings} onChange={changeSettings} onReset={reset} onGaleria={()=>navigate('vfx')}/>}
       {screen==='game'&&run?.stage==='draft'&&<DraftScreen draft={run.draft} desafio={run.desafio} primeiroRival={run.preparado||run.ranked&&run.ranked.mode!=='free'?run.encounters[0]:undefined} dicas={settings.dicasDoTrio&&podeDicas} podeDicas={podeDicas} usouDicas={run.dicas===true} onDicas={ligar=>changeSettings({...settings,dicasDoTrio:ligar})} onPick={id=>changeRun({...run,draft:pickDraft(run.draft,id)})} onSkip={()=>changeRun({...run,draft:skipDraft(run.draft)})} onDetails={setDetails} onStart={()=>void startBattle(0)} onAbandon={()=>setConfirmAbandon(true)}/>}
-      {screen==='game'&&run?.stage==='battle'&&run.battle&&<BattleScreen battle={presentation&&direction.current?.battle===run.battle?presentation.battle:run.battle} beat={presentation&&direction.current?.battle===run.battle?presentation.beat:null} index={run.index} name={run.encounters[run.index].name} settings={settings} paused={paused||!!details}  onPause={()=>setPaused(!paused)} onAbandon={()=>setConfirmAbandon(true)} onSettings={changeSettings} onExit={()=>{setPaused(true);navigate('home');}} novosNoLivro={novosNoLivro}/>}
-      {screen==='game'&&run?.stage==='result'&&<ResultScreen run={run} onNext={()=>void startBattle(run.index+1)} onRestart={requestNew} onAbandon={()=>setConfirmAbandon(true)} onHome={()=>navigate('home')} onRanking={()=>navigate('ranking')} onRetry={()=>{if(run.ranked)changeRun({...run,ranked:{...run.ranked,status:'validating'}});}} auto={settings.auto} onAuto={auto=>changeSettings({...settings,auto})}/>}
+      {screen==='game'&&run?.stage==='battle'&&run.battle&&<BattleScreen battle={presentation&&direction.current?.battle===run.battle?presentation.battle:run.battle} beat={presentation&&direction.current?.battle===run.battle?presentation.beat:null} index={run.index} name={rivalAtual(run).name} settings={settings} paused={paused||!!details}  onPause={()=>setPaused(!paused)} onAbandon={()=>setConfirmAbandon(true)} onSettings={changeSettings} onExit={()=>{setPaused(true);navigate('home');}} novosNoLivro={novosNoLivro}/>}
+      {screen==='game'&&run?.stage==='result'&&<ResultScreen run={run} onNext={()=>{const i=proximaDaJornada(run);if(i!==null)void startBattle(i);}} onRestart={requestNew} onAbandon={()=>setConfirmAbandon(true)} onHome={()=>navigate('home')} onRanking={()=>navigate('ranking')} onRetry={()=>{if(run.ranked)changeRun({...run,ranked:{...run.ranked,status:'validating'}});}} auto={settings.auto} onAuto={auto=>changeSettings({...settings,auto})}/>}
       {screen==='debug'&&import.meta.env.DEV&&<Suspense fallback={<p>Carregando laboratório…</p>}><DebugScreen/></Suspense>}
       {screen==='vfx'&&<Suspense fallback={<p>Carregando galeria audiovisual…</p>}><VfxLabScreen/></Suspense>}
       {!storageAvailable&&<p role="alert" className="storage-warning">Não foi possível salvar neste navegador. Sua sessão continua, mas pode não ser recuperada ao fechar.</p>}

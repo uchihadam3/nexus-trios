@@ -1,9 +1,11 @@
 import type { CSSProperties } from 'react';
-import { ArrowRight,MessagesSquare,Swords,Award,BookOpen,ChevronRight,Zap,Trophy,CircleHelp,Settings2,Download,Users,Crown,ShieldCheck,Play,LogOut,Share2,MessageCircle,Instagram,Facebook } from 'lucide-react';
+import { ArrowRight,MessagesSquare,Swords,Award,BookOpen,ChevronRight,Zap,Trophy,CircleHelp,Settings2,Download,Users,Crown,ShieldCheck,Play,LogOut,Share2,MessageCircle,Instagram,Facebook,KeyRound,Lock,Sparkles } from 'lucide-react';
 import '../presentation/compartilhar.css';
+import '../presentation/segredos.css';
 import { byId,characters } from '../data/characters';
 import { Portrait } from '../components/Portrait';
-import type { Profile, Run } from '../lib/storage';
+import { jornadaAcabou,type Profile,type Run } from '../lib/storage';
+import { LUTA_ESTRELA,SEGREDOS,ehLutaExtra,normaisVencidas } from '../engine/segredos';
 import {onlineConfigured} from '../lib/online';
 import { formatarPontos,pontosDaJornada } from '../engine/pontos';
 import { TOTAL_DE_CONQUISTAS,desafioDoDia,tituloDe } from '../lib/conquistas';
@@ -22,15 +24,16 @@ import '../presentation/pvp.css';
  * e mostra a luta e os pontos de agora. O resto do jogo fica num painel de
  * botões-ícone, como o menu de um jogo.
  */
-interface Props {comunidade:{online:Jogador[]|null;naoLidas:number}|null;profile:Profile;run:Run|null;conta:boolean;onPlay:()=>void;onContinue:()=>void;onAbandon:()=>void;onNavigate:(s:'characters'|'conquistas'|'combos'|'ranking'|'conta'|'help'|'settings'|'comunidade'|'pvp')=>void;onInstall:()=>void;onShare:()=>void}
+interface Props {comunidade:{online:Jogador[]|null;naoLidas:number}|null;profile:Profile;run:Run|null;conta:boolean;onPlay:()=>void;onContinue:()=>void;onAbandon:()=>void;onNavigate:(s:'characters'|'conquistas'|'combos'|'segredos'|'ranking'|'conta'|'help'|'settings'|'comunidade'|'pvp')=>void;onInstall:()=>void;onShare:()=>void}
 
 const Fx=({nome,cor,ms,className}:{nome:string;cor:string;ms:number;className:string})=>
   <span aria-hidden className={`uifx uifx-laco ${className}`} style={{'--uifx-img':`url(/assets/ui/fx/${nome}.webp)`,'--uifx-cor':cor,'--uifx-dur':`${ms}ms`} as CSSProperties}/>;
 
 export function Home({comunidade,profile,run,conta,onPlay,onContinue,onAbandon,onNavigate,onInstall,onShare}:Props){
-  const terminal=run?.stage==='result'&&(run.battle?.winner!=='player'||run.index===9);
+  const terminal=!!run&&jornadaAcabou(run);
   const wonCurrent=run?.stage==='result'&&run.battle?.winner==='player';
-  const completed=run?run.index+(wonCurrent?1:0):0;
+  const completed=run?normaisVencidas(run.summaries??[]):0,naExtra=!!run&&ehLutaExtra(run.index)&&run.stage==='battle';
+  void wonCurrent;
   const emAndamento=!!run&&!terminal;
   const trio=run?.team.length?run.team:profile.champion?.length?profile.champion:['goku','pikachu','gojo'];
   const pontosAgora=run?pontosDaJornada((run.summaries??[]).map(s=>({pontos:s.score,won:s.won}))):0;
@@ -57,7 +60,7 @@ export function Home({comunidade,profile,run,conta,onPlay,onContinue,onAbandon,o
     <div className="hv-jogar">
       {emAndamento?<button className="hv-cta" onClick={onContinue} aria-label="Continuar jornada">
           <Fx nome="brilho" cor="#ffffff" ms={2600} className="hv-brilho"/>
-          <Play size={26} fill="currentColor"/><span><b>CONTINUAR</b><small>{run!.stage==='draft'?'Escolha seu trio':`Luta ${Math.min(10,completed+1)} de 10 · ${formatarPontos(pontosAgora)} pontos`}</small></span><ArrowRight size={22}/>
+          <Play size={26} fill="currentColor"/><span><b>CONTINUAR</b><small>{run!.stage==='draft'?'Escolha seu trio':`${naExtra?(run!.index===LUTA_ESTRELA?'Luta secreta ★':'Luta 11 · secreta'):`Luta ${Math.min(10,completed+1)} de 10`} · ${formatarPontos(pontosAgora)} pontos`}</small></span><ArrowRight size={22}/>
         </button>
         :<button className="hv-cta" onClick={run?onContinue:onPlay} aria-label={run?'Ver resultado':'Montar meu trio'}>
           <Fx nome="brilho" cor="#ffffff" ms={2600} className="hv-brilho"/>
@@ -98,6 +101,14 @@ export function Home({comunidade,profile,run,conta,onPlay,onContinue,onAbandon,o
       return <button className="hv-conquistas-faixa hv-livro-faixa" onClick={()=>onNavigate('combos')} aria-label={`Livro de Combos: ${achados.length} de ${TODOS_OS_COMBOS.length}`}>
         <span className="hv-cq-icone"><BookOpen size={22}/>{novos>0&&<em>{novos}</em>}</span>
         <span className="hv-cq-texto"><b>LIVRO DE COMBOS</b><small><strong>{achados.length}</strong>/{TODOS_OS_COMBOS.length} descobertos</small><span className="hv-cq-barra"><i style={{width:`${100*achados.length/TODOS_OS_COMBOS.length}%`}}/></span></span>
+      </button>;})()}
+    {/* O Livro de Segredos (src/screens/LivroDeSegredos.tsx): os seis segredos, trancados até cumprir. */}
+    {(()=>{const achados=SEGREDOS.filter(x=>(profile.segredosDescobertos??[]).includes(x.id)),novos=achados.filter(x=>!(profile.segredosVistos??[]).includes(x.id)).length;
+      return <button className="hv-conquistas-faixa hv-segredos-faixa" onClick={()=>onNavigate('segredos')} aria-label={`Livro de Segredos: ${achados.length} de ${SEGREDOS.length}`}>
+        <span className="hv-cq-icone"><KeyRound size={22}/>{novos>0&&<em>{novos}</em>}</span>
+        <span className="hv-cq-texto"><b>LIVRO DE SEGREDOS</b><small><strong>{achados.length}</strong>/{SEGREDOS.length} descobertos</small></span>
+        <span className="hv-sg-selos" aria-hidden="true">{SEGREDOS.map(x=>{const ok=achados.includes(x);return <i key={x.id} className={ok?'ok':''} style={{'--cor':x.cor} as CSSProperties}>{ok?<Sparkles size={10}/>:<Lock size={9}/>}</i>;})}</span>
+        <ChevronRight size={20}/>
       </button>;})()}
     {/* Chamar amigos (src/components/CompartilharJogo.tsx): manda o convite pelo WhatsApp, Instagram, Facebook… */}
     <button className="hv-conquistas-faixa hv-convite-faixa" onClick={onShare} aria-label="Chamar amigos para jogar">

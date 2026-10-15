@@ -7,7 +7,7 @@ import { ArenaDoPvp } from '../components/ArenaDoPvp';
 import { combosDoTrio } from '../engine/combos';
 import { MINIMO_DA_COLECAO, NPCS, duracaoNaTela, escolhaDoNpc, problemaDosTimes, sementeDaRodada, timesDoNpc, timesLivres, vencedorDaPartida, vitoriasDosTimes,
   type Lado, type NivelNpc, type Npc, type PartidaPvp, type Times } from '../engine/pvp';
-import { notaDoTrio } from '../presentation/dicas-do-trio';
+import { notaDoTrio, forcaDoTime, estrelasDaForca } from '../presentation/dicas-do-trio';
 import { battleAudio } from '../lib/audio';
 import { PRIORIDADE } from '../audio/cues';
 import { read, save, type Settings } from '../lib/storage';
@@ -40,9 +40,6 @@ const Fx = ({ nome, cor, ms, className, laco = true }: { nome: string; cor: stri
   <span aria-hidden className={`uifx ${laco ? 'uifx-laco' : ''} ${className}`} style={{ '--uifx-img': `url(/assets/ui/fx/${nome}.webp)`, '--uifx-cor': cor, '--uifx-dur': `${ms}ms` } as CSSProperties} />;
 const som = (nome: 'toque' | 'pronto' | 'ui-confirma' | 'ui-arena' | 'vitoria' | 'derrota') => battleAudio.sound(nome, PRIORIDADE.interface);
 
-/** A força de um time de 0 a 100 (a nota das Dicas, que vai de ~-2 a ~8). */
-const forcaDoTime = (t: readonly string[]) => Math.max(4, Math.min(100, Math.round(((notaDoTrio(t) + 2) / 10) * 100)));
-const estrelasDaForca = (f: number) => Math.max(1, Math.min(5, Math.ceil(f / 20)));
 
 type Etapa =
   | { tipo: 'lobby' }

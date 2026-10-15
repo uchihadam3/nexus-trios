@@ -222,6 +222,8 @@ async function jaNoRanking(run:{player_id:string;score:number|null;encounters_cl
   return {verified:true,score:run.score??0,progress:run.encounters_cleared??0,daily:daily.mine?.position??null,weekly:weekly.mine?.position??null,season:season.mine?.position??null};
 }
 const vencidasDe=(x:unknown)=>typeof x==='number'&&Number.isInteger(x)&&x>=0&&x<=10?x:undefined;
+/** Quantas lutas a jornada já jogou: as 10 e as extras dos segredos (até 12, src/engine/segredos.ts). */
+const lutasDe=(x:unknown)=>typeof x==='number'&&Number.isInteger(x)&&x>=0&&x<=12?x:undefined;
 /** Os pontos que o aparelho mostrou (o teto do que entra no ranking). */
 const pontosDe=(x:unknown)=>typeof x==='number'&&Number.isFinite(x)&&x>=0&&x<1e9?Math.round(x):undefined;
 /*
@@ -237,7 +239,7 @@ async function validarTerminadas(){
   // terminou (perdeu, venceu as 10 ou desistiu) e o envio não chegou; ou parou no meio há um dia
   const run=(data??[]).find(r=>r.summary?.fim===true?quando(r)<agora-ESPERA_DO_ENVIO_MS:quando(r)<agora-PARADA_MS);
   if(!run)return;
-  const ate=run.summary?.desistiu===true||run.summary?.fim!==true?vencidasDe(run.summary?.progresso):undefined;
+  const ate=run.summary?.desistiu===true||run.summary?.fim!==true?lutasDe(run.summary?.progresso):undefined;
   try{await validar(run,run.summary?.dicas===true,undefined,vencidasDe(run.summary?.vencidas),ate,pontosDe(run.summary?.pontos));}catch(e){if(!(e instanceof JaValidada))throw e;}
 }
 /** Trabalho que não precisa atrasar a resposta: depois de responder, quando o servidor deixa. */
@@ -295,12 +297,12 @@ Deno.serve(async (request:Request)=>{
       if(run.verified)return json(await jaNoRanking(run),200,origin);
       // o aparelho reenvia sozinho o que não chegou (src/lib/envios-pendentes.ts): vale até 7 dias depois de começar
       if(new Date(run.started_at).getTime()<Date.now()-DIAS_PENDENTES*86400000)return fail('Jornada expirada.',410,origin);
-      try{return json(await validar(run,input.dicas===true,input.digest,vencidasDe(input.vencidas),input.desistiu===true?vencidasDe(input.lutas)??0:undefined,pontosDe(input.pontos)),200,origin);}
+      try{return json(await validar(run,input.dicas===true,input.digest,vencidasDe(input.vencidas),input.desistiu===true?lutasDe(input.lutas)??0:undefined,pontosDe(input.pontos)),200,origin);}
       catch(e){if(!(e instanceof JaValidada))throw e;const {data:agora}=await admin.from('ranked_runs').select('*').eq('id',run.id).single();return json(await jaNoRanking(agora),200,origin);}
     }
     /* Depois de cada luta: quantas lutas já foram e se a jornada acabou (veja validarTerminadas). */
     if(input.action==='progresso'){
-      const lutas=vencidasDe(input.lutas),vencidas=vencidasDe(input.vencidas);
+      const lutas=lutasDe(input.lutas),vencidas=vencidasDe(input.vencidas);
       if(typeof input.runId!=='string'||!/^[0-9a-f-]{36}$/i.test(input.runId)||lutas===undefined)return fail('Envio inválido.',422,origin);
       const {error}=await admin.from('ranked_runs').update({summary:{progresso:lutas,vencidas:vencidas??null,...(pontosDe(input.pontos)!==undefined?{pontos:pontosDe(input.pontos)}:{}),fim:input.fim===true||input.desistiu===true,desistiu:input.desistiu===true,dicas:input.dicas===true,em:new Date().toISOString()}}).eq('id',input.runId).eq('player_id',user.id).eq('verified',false);
       if(error)throw error;
@@ -344,7 +346,7 @@ Deno.serve(async (request:Request)=>{
       if(!run)return fail('Jornada inexistente.',404,origin);if(run.verified)return fail('Jornada já validada.',409,origin);
       // o jogador não mandou se usou as Dicas: quem já liberou o botão conta como se tivesse usado (o desconto, nunca o bônus)
       const {data:recorde}=await admin.from('ranked_runs').select('score').eq('player_id',run.player_id).eq('verified',true).order('score',{ascending:false}).limit(1).maybeSingle();
-      return json(await validar(run,(recorde?.score??0)>=META_DAS_DICAS,undefined,vencidasDe(run.summary?.vencidas),run.summary?.desistiu===true?vencidasDe(run.summary?.progresso):undefined,pontosDe(run.summary?.pontos)),200,origin);
+      return json(await validar(run,(recorde?.score??0)>=META_DAS_DICAS,undefined,vencidasDe(run.summary?.vencidas),run.summary?.desistiu===true?lutasDe(run.summary?.progresso):undefined,pontosDe(run.summary?.pontos)),200,origin);
     }
     /* "MEUS RECORDES: histórico completo." Todas as partidas validadas da conta. */
     if(input.action==='historico'){
