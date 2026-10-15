@@ -62,9 +62,10 @@ export function DraftScreen({draft,desafio,primeiroRival,dicas,podeDicas,usouDic
       const c=byId[id],trait=presentTrait(c.trait),novas=oQueAdiciona(c,team),conexao=ligadas?draftConnection(c,team):null,dica=conselhos.find(x=>x.id===id),nivel=dica&&NIVEL(dica.encaixe);
       return <article key={id} className={`dv-carta candidate-card ${dica?.melhor?'melhor':''}`} style={{'--character':c.color,'--i':i} as CSSProperties}>
         <button className="dv-retrato" onClick={()=>onDetails(id)} aria-label={`Ficha de ${c.name}`}>
-          <Portrait character={c}/><SeloDeEstrela id={c.id}/><span className="dv-universo">{universoDaFicha(c)}</span><span className="dv-info"><Info size={16}/></span>
+          <Portrait character={c}/><span className="dv-universo">{universoDaFicha(c)}</span><span className="dv-info"><Info size={16}/></span>
           <h2>{c.name}</h2>
         </button>
+        <SeloDeEstrela id={c.id}/>
         <div className="dv-corpo">
           {dica&&nivel&&<button className="dv-dica" style={{'--nivel':nivel.cor,'--encaixe':`${dica.encaixe}%`} as CSSProperties} onClick={()=>setPorque(dica)} aria-label={`Por que ${c.name}? ${dica.encaixe}% de encaixe`}>
             {dica.melhor&&<span className="dv-melhor"><Crown size={13}/>MELHOR ESCOLHA</span>}

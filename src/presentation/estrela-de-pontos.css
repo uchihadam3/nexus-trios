@@ -1,16 +1,44 @@
 /* O selo das estrelas dos pontos: src/components/SeloDeEstrela.tsx */
-.epts-selo{position:absolute;z-index:3;top:6px;left:6px;display:inline-flex;align-items:center;gap:4px;padding:3px 7px 3px 6px;border-radius:99px;font-size:11px;line-height:1;white-space:nowrap;pointer-events:none;
-  background:linear-gradient(180deg,#1d1608f2,#0b0904f2);color:var(--epts);box-shadow:0 0 0 1.5px color-mix(in srgb,var(--epts),transparent 30%),0 3px 8px #000b}
+.epts-selo{all:unset;box-sizing:border-box;position:absolute;z-index:3;top:6px;left:6px;display:inline-flex;align-items:center;gap:4px;padding:3px 6px 3px 6px;border-radius:99px;font-size:11px;line-height:1;white-space:nowrap;cursor:pointer;-webkit-tap-highlight-color:transparent;
+  background:linear-gradient(180deg,#1d1608f2,#0b0904f2);color:var(--epts);box-shadow:0 0 0 1.5px color-mix(in srgb,var(--epts),transparent 30%),0 3px 8px #000b;transition:transform .12s}
+.epts-selo:active{transform:scale(.94)}
+.epts-selo:focus-visible{outline:2px solid #fff;outline-offset:2px}
 .epts-selo i{font-style:normal;letter-spacing:-1px;text-shadow:0 0 6px color-mix(in srgb,var(--epts),transparent 30%)}
 .epts-selo b{font-weight:900;color:#fff;font-variant-numeric:tabular-nums}
+/* "PTS": deixa claro, já no selo, que a porcentagem é de pontos */
+.epts-selo em{font-style:normal;font-size:.72em;font-weight:950;letter-spacing:.6px;padding:2px 4px;border-radius:5px;color:#0b0904;background:var(--epts)}
 .epts-selo.n3{box-shadow:0 0 0 1.5px var(--epts),0 0 12px color-mix(in srgb,var(--epts),transparent 45%),0 3px 8px #000b;animation:epts-brilho 2.4s ease-in-out infinite}
 @keyframes epts-brilho{50%{box-shadow:0 0 0 1.5px var(--epts),0 0 18px color-mix(in srgb,var(--epts),transparent 25%),0 3px 8px #000b}}
 
+/* na carta da escolha o selo fica sobre o retrato, fora do botão da ficha */
+.dv-carta{position:relative}
+.dv-carta:has(> .epts-selo) .dv-universo{top:36px}
+/* o (i) sairia por baixo do selo; a ficha continua no retrato inteiro e no botão "Ficha" */
+.dv-carta:has(> .epts-selo) .dv-info{display:none}
 /* na ficha, logo abaixo do nome, no fluxo do texto */
-.epts-selo.na-ficha{position:static;margin-top:6px;font-size:13px;padding:4px 10px 4px 8px}
-@media (prefers-reduced-motion:reduce){.epts-selo.n3{animation:none}}
-.reduce-motion .epts-selo.n3{animation:none}
+.epts-selo.na-ficha{position:static;margin-top:6px;font-size:13px;padding:4px 8px 4px 8px}
 /* na ficha da batalha, ao lado do universo */
-.epts-inline{color:#ffd34d;font-weight:800;white-space:nowrap}
-/* na carta da escolha, o universo desce para baixo do selo */
-.dv-retrato:has(.epts-selo) .dv-universo{top:36px}
+.epts-selo.inline{position:static;vertical-align:middle;margin-left:6px;font-size:10.5px;padding:2px 5px}
+
+/* ---------- O cartão que explica ---------- */
+.epts-card{text-align:center;overflow:hidden}
+.epts-card::before{content:'';position:absolute;inset:-40% -20% auto;height:260px;background:radial-gradient(closest-side,color-mix(in srgb,var(--epts),transparent 70%),transparent);pointer-events:none;animation:epts-pulso 2.6s ease-in-out infinite}
+@keyframes epts-pulso{50%{opacity:.55;scale:1.08}}
+.epts-topo{position:relative;display:grid;justify-items:center;gap:6px;padding-top:6px}
+.epts-estrelas{display:flex;gap:4px;font-size:40px;line-height:1;color:var(--epts)}
+.epts-estrelas i{font-style:normal;text-shadow:0 0 16px color-mix(in srgb,var(--epts),transparent 25%),0 3px 0 #0008;animation:epts-entra .6s calc(var(--i)*.12s) cubic-bezier(.2,1.6,.4,1) both}
+@keyframes epts-entra{from{opacity:0;transform:scale(.2) rotate(-90deg)}}
+.epts-numero{display:flex;align-items:baseline;gap:8px;font-size:44px;font-weight:950;line-height:1;color:#fff;font-variant-numeric:tabular-nums;text-shadow:0 0 18px color-mix(in srgb,var(--epts),transparent 40%);animation:epts-entra .6s .3s cubic-bezier(.2,1.4,.4,1) both}
+.epts-numero small{font-size:15px;font-weight:950;letter-spacing:1.4px;color:var(--epts)}
+.epts-regras{position:relative;list-style:none;margin:18px 0 0;padding:0;display:grid;gap:10px;text-align:left}
+.epts-regras li{display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px;align-items:center;padding:12px 14px;border-radius:14px;font-size:14.5px;line-height:1.4;color:#e6eee0;animation:epts-linha .5s cubic-bezier(.2,1.25,.4,1) both}
+.epts-regras li.sim{background:#2a8a5a26;box-shadow:inset 0 0 0 1.5px #86e3a866;animation-delay:.4s}
+.epts-regras li.sim svg{color:#86e3a8}
+.epts-regras li.nao{background:#d9464626;box-shadow:inset 0 0 0 1.5px #ff7a7a55;animation-delay:.52s}
+.epts-regras li.nao svg{color:#ff8a8a}
+.epts-regras b{color:#fff}
+@keyframes epts-linha{from{opacity:0;transform:translateY(10px)}}
+.epts-nota{position:relative;margin:12px 0 0;font-size:12.5px;line-height:1.4;color:#a9b8a6}
+
+@media (prefers-reduced-motion:reduce){.epts-selo.n3,.epts-card::before,.epts-estrelas i,.epts-numero,.epts-regras li{animation:none}}
+.reduce-motion .epts-selo.n3,.reduce-motion .epts-card::before,.reduce-motion .epts-estrelas i,.reduce-motion .epts-numero,.reduce-motion .epts-regras li{animation:none}
