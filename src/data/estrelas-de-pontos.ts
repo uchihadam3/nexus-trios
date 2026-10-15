@@ -4,7 +4,7 @@
  * estrelas e a porcentagem.
  *
  * Só os pontos: a luta e a força de todo mundo ficam iguais. Ter um deles no trio soma `bonus`% aos pontos de cada
- * luta (src/engine/pontos.ts); com mais de um no trio, vale só o maior bônus.
+ * luta (src/engine/pontos.ts); com mais de um no trio, conta um só (bonusDoTrio, abaixo).
  *
  * Medido em 2,64 milhões de jornadas de trios sorteados, sem bônus (plano pontos da fábrica, scripts/fabrica/lutas.ts):
  * o que cada personagem faz numa jornada muito boa (as 1% melhores das que vencem as 10 lutas). Cada nível tem uma
@@ -143,9 +143,17 @@ export const ESTRELAS_DE_PONTOS: Record<string, EstrelaDePontos> = {
   wonderwoman: { estrelas: 1, bonus: 0 }, // Mulher-Maravilha
 };
 
-/** O bônus de pontos do trio (fração: 0,85 = +85%) e de quem ele vem: o maior entre os três. */
+/**
+ * O bônus de pontos do trio (fração: 0,85 = +85%) e de quem ele vem. Conta um só: primeiro quem tem mais estrelas e,
+ * entre os de mesmo número de estrelas, a maior porcentagem (pedido do jogador: "primeiro olha a estrela… depois a
+ * porcentagem": quem tem mais estrelas já faz mais pontos naturalmente).
+ */
 export function bonusDoTrio(trio: readonly string[]): { bonus: number; de?: string } {
-  let melhor: { bonus: number; de?: string } = { bonus: 0 };
-  for (const id of trio) { const e = ESTRELAS_DE_PONTOS[id]; if (e && e.bonus / 100 > melhor.bonus) melhor = { bonus: e.bonus / 100, de: id }; }
-  return melhor;
+  let escolhido: string | undefined;
+  for (const id of trio) {
+    const e = ESTRELAS_DE_PONTOS[id], atual = escolhido ? ESTRELAS_DE_PONTOS[escolhido]! : undefined;
+    if (e && (!atual || e.estrelas > atual.estrelas || (e.estrelas === atual.estrelas && e.bonus > atual.bonus))) escolhido = id;
+  }
+  const bonus = escolhido ? ESTRELAS_DE_PONTOS[escolhido]!.bonus / 100 : 0;
+  return bonus > 0 ? { bonus, de: escolhido } : { bonus: 0 };
 }

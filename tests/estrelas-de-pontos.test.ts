@@ -10,8 +10,11 @@ describe('Estrelas dos pontos', () => {
     for (const n of [1, 2, 3]) expect(lista.filter(([, e]) => e.estrelas === n).length, `${n} estrelas`).toBe(40);
     for (const [id, e] of lista) { expect(byId[id], id).toBeDefined(); expect(e.bonus % 5).toBe(0); expect(e.bonus).toBeGreaterThanOrEqual(0); }
   });
-  it('no trio vale o maior bônus, e só os pontos mudam: a luta é a mesma', () => {
-    expect(bonusDoTrio(['goku', 'vegeta', 'hinata']).de).toBe(ESTRELAS_DE_PONTOS.goku!.bonus >= ESTRELAS_DE_PONTOS.vegeta!.bonus ? 'goku' : 'vegeta');
+  it('no trio conta primeiro quem tem mais estrelas, depois a maior porcentagem; e só os pontos mudam', () => {
+    expect(bonusDoTrio(['goku', 'vegeta', 'hinata']).de).toBe(ESTRELAS_DE_PONTOS.goku!.bonus > ESTRELAS_DE_PONTOS.vegeta!.bonus ? 'goku' : 'vegeta');
+    // ★★★ com porcentagem menor ganha de ★★ com porcentagem maior
+    expect(ESTRELAS_DE_PONTOS.mario!.bonus).toBeGreaterThan(ESTRELAS_DE_PONTOS.sailormoon!.bonus);
+    expect(bonusDoTrio(['mario', 'sailormoon', 'hinata']).de).toBe('sailormoon');
     expect(bonusDoTrio(['hinata', 'jiraiya', 'gaara'])).toEqual({ bonus: 0 });
     const b = createBattle(['vegeta', 'hinata', 'jiraiya'], ['naruto', 'luffy', 'pikachu'], 9);
     for (let t = 0; t < 9000 && !b.finished; t++) stepBattle(b);
