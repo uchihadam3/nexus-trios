@@ -13,8 +13,8 @@
  *   pontos das lutas com um trio) chega a META_DAS_DICAS.
  *
  * Com as estrelas dos pontos (src/data/estrelas-de-pontos.ts) o jogador pediu a meta com "1% de chance… sem as
- * lutas secretas": 1,5 milhão sai em ~1,1% das jornadas de trios sorteados (2,64 milhões de jornadas; 1,45 mi: 1,4%;
- * 1,4 mi: 1,7%).
+ * lutas secretas": 1,5 milhão sai em ~1,2% das jornadas de trios sorteados (2,64 milhões de jornadas; 1,55 mi: 0,93%;
+ * 1,6 mi: 0,69%).
  */
 export const META_DAS_DICAS = 1_500_000;
 
