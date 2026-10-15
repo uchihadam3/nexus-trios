@@ -710,7 +710,3 @@ export function PvpScreen({ colecao, settings, onSettings, onDetails, onJogar, o
   if (etapa.tipo === 'rodada') return <ResultadoDaRodada rival={oponenteDoNpc(etapa.npc)} partida={etapa.partida} onSeguir={() => setEtapa({ tipo: 'escolher', npc: etapa.npc, partida: etapa.partida })} />;
   return <Fim npc={etapa.npc} partida={etapa.partida} placar={guardado.treino[etapa.npc.id] ?? { v: 0, d: 0 }} onDeNovo={() => setEtapa({ tipo: 'montar', npc: etapa.npc })} onSair={() => setEtapa({ tipo: 'lobby' })} />;
 }
-
-/** A coleção do jogador para o PvP: os personagens liberados nas Conquistas (todos os 400 na conta do dono, para testar). */
-export const colecaoDoPvp = (conquistas: Record<string, string> | undefined, dono: boolean) =>
-  dono ? characters.map((c) => c.id) : Object.keys(conquistas ?? {}).filter((id) => !!byId[id]);
