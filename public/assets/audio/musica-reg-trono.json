@@ -1,0 +1,55 @@
+{
+ "bpm": 166,
+ "compassos": 64,
+ "segundos": 92.53,
+ "secoes": [
+  {
+   "nome": "Chegada",
+   "inicio": 0.0
+  },
+  {
+   "nome": "Tema",
+   "inicio": 11.566
+  },
+  {
+   "nome": "Ponte",
+   "inicio": 34.699
+  },
+  {
+   "nome": "Respiro",
+   "inicio": 57.831
+  },
+  {
+   "nome": "Refrão",
+   "inicio": 69.398
+  }
+ ],
+ "estilo": "caminho do nexus · reg-trono (v8)",
+ "laco": {
+  "inicio": 11.566,
+  "fim": 92.53
+ },
+ "camadas": {
+  "musica-reg-trono-base": {
+   "arquivo": "musica-reg-trono-base.ogg",
+   "mp3": "musica-reg-trono-base.mp3",
+   "segundos": 92.53,
+   "bytes": 889028,
+   "rmsDb": -21.1
+  },
+  "musica-reg-trono-pulso": {
+   "arquivo": "musica-reg-trono-pulso.ogg",
+   "mp3": "musica-reg-trono-pulso.mp3",
+   "segundos": 92.53,
+   "bytes": 598055,
+   "rmsDb": -24.6
+  },
+  "musica-reg-trono-tema": {
+   "arquivo": "musica-reg-trono-tema.ogg",
+   "mp3": "musica-reg-trono-tema.mp3",
+   "segundos": 92.53,
+   "bytes": 986543,
+   "rmsDb": -23.1
+  }
+ }
+}

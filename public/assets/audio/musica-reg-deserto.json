@@ -1,0 +1,55 @@
+{
+ "bpm": 112,
+ "compassos": 64,
+ "segundos": 137.143,
+ "secoes": [
+  {
+   "nome": "Chegada",
+   "inicio": 0.0
+  },
+  {
+   "nome": "Tema",
+   "inicio": 17.143
+  },
+  {
+   "nome": "Ponte",
+   "inicio": 51.429
+  },
+  {
+   "nome": "Respiro",
+   "inicio": 85.714
+  },
+  {
+   "nome": "Refrão",
+   "inicio": 102.857
+  }
+ ],
+ "estilo": "caminho do nexus · reg-deserto (v8)",
+ "laco": {
+  "inicio": 17.143,
+  "fim": 137.143
+ },
+ "camadas": {
+  "musica-reg-deserto-base": {
+   "arquivo": "musica-reg-deserto-base.ogg",
+   "mp3": "musica-reg-deserto-base.mp3",
+   "segundos": 137.143,
+   "bytes": 1339034,
+   "rmsDb": -21.9
+  },
+  "musica-reg-deserto-pulso": {
+   "arquivo": "musica-reg-deserto-pulso.ogg",
+   "mp3": "musica-reg-deserto-pulso.mp3",
+   "segundos": 137.143,
+   "bytes": 890289,
+   "rmsDb": -25.4
+  },
+  "musica-reg-deserto-tema": {
+   "arquivo": "musica-reg-deserto-tema.ogg",
+   "mp3": "musica-reg-deserto-tema.mp3",
+   "segundos": 137.143,
+   "bytes": 1178914,
+   "rmsDb": -23.9
+  }
+ }
+}

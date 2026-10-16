@@ -8,6 +8,7 @@ import { DESCANSO, MINIMO_DA_CAMPANHA, REGIOES, RIVAIS, TITULOS, TOTAL_DE_ESTREL
 import { variacaoContraNpc, type PartidaPvp, type Times } from '../engine/pvp';
 import { ENGINE_VERSION } from '../engine/ranked';
 import { read, save, type Settings } from '../lib/storage';
+import type { Faixa, RegiaoDaMusica } from '../lib/audio';
 import { textoDoErroPvp, type PartidaDaCampanha, type RespostaDaCampanha, type ServicoDaCampanha } from '../lib/pvp-online';
 import { Apresentar, Confirmar, Escolher, Fx, Montar, ResultadoDaRodada, Rosto, Vs, som, type Oponente } from './PvpScreen';
 import { AvatarDoRival, CHAVE_DO_RESUMO, type ResumoDaCampanha } from '../components/CartaoDaCampanha';
@@ -37,7 +38,8 @@ type Tela =
 interface Antes { partida: string; estrelas: Record<string, number>; rating: number }
 
 const regiaoDe = (r: Rival) => REGIOES[r.regiao - 1]!;
-const faixaDe = (r: Rival) => (r.n === RIVAIS.length ? 'lenda' : r.chefe ? 'chefe' : 'arena') as 'lenda' | 'chefe' | 'arena';
+/* a música de cada região e a do chefe dela (src/lib/audio.ts, v8) */
+const faixaDe = (r: Rival): Faixa => `${r.chefe ? 'chefe' : 'regiao'}-${regiaoDe(r).id as RegiaoDaMusica}`;
 const comoPvp = (p: PartidaDaCampanha, ate = p.rodadas.length): PartidaPvp => ({ meus: p.meus as Times, deles: p.deles as Times, rodadas: p.rodadas.slice(0, ate), seed: 0 });
 
 const oponenteDoRival = (r: Rival): Oponente => ({ nome: r.nome, cor: r.cor, avatar: (t) => <AvatarDoRival rival={r} tamanho={t} />, fala: r.fala });

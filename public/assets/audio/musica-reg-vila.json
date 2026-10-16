@@ -1,0 +1,55 @@
+{
+ "bpm": 138,
+ "compassos": 64,
+ "segundos": 111.304,
+ "secoes": [
+  {
+   "nome": "Chegada",
+   "inicio": 0.0
+  },
+  {
+   "nome": "Tema",
+   "inicio": 13.913
+  },
+  {
+   "nome": "Ponte",
+   "inicio": 41.739
+  },
+  {
+   "nome": "Respiro",
+   "inicio": 69.565
+  },
+  {
+   "nome": "Refrão",
+   "inicio": 83.478
+  }
+ ],
+ "estilo": "caminho do nexus · reg-vila (v8)",
+ "laco": {
+  "inicio": 13.913,
+  "fim": 111.304
+ },
+ "camadas": {
+  "musica-reg-vila-base": {
+   "arquivo": "musica-reg-vila-base.ogg",
+   "mp3": "musica-reg-vila-base.mp3",
+   "segundos": 111.304,
+   "bytes": 1068699,
+   "rmsDb": -22.2
+  },
+  "musica-reg-vila-pulso": {
+   "arquivo": "musica-reg-vila-pulso.ogg",
+   "mp3": "musica-reg-vila-pulso.mp3",
+   "segundos": 111.304,
+   "bytes": 802580,
+   "rmsDb": -25.7
+  },
+  "musica-reg-vila-tema": {
+   "arquivo": "musica-reg-vila-tema.ogg",
+   "mp3": "musica-reg-vila-tema.mp3",
+   "segundos": 111.304,
+   "bytes": 1110981,
+   "rmsDb": -24.2
+  }
+ }
+}

@@ -48,7 +48,10 @@ export function posicaoNoLaco(inicio:number,t:number,duracao:number,laco=LACO_DA
   const p=inicio+t;if(p<duracao)return p;
   const volta=duracao-laco;return laco+((p-laco)%volta);
 }
-export type Faixa='principal'|'ascensao'|'tensao'|'chefe'|'arena'|'segredo'|'lenda';
+/** As regiões do Caminho do Nexus (src/engine/campanha.ts): cada uma tem a sua música e a do chefe. */
+export const REGIOES_DA_MUSICA=['vila','floresta','neon','deserto','templo','vulcao','ceu','trono'] as const;
+export type RegiaoDaMusica=(typeof REGIOES_DA_MUSICA)[number];
+export type Faixa='principal'|'ascensao'|'tensao'|'chefe'|'arena'|'segredo'|'lenda'|`regiao-${RegiaoDaMusica}`|`chefe-${RegiaoDaMusica}`;
 const camadas=(nome:string)=>(['base','pulso','tema'] as const).map(c=>`/assets/audio/${nome}-${c}.ogg`);
 /*
  * As quatro músicas de batalha. `laco`: onde a música volta depois do fim (o
@@ -61,6 +64,7 @@ const camadas=(nome:string)=>(['base','pulso','tema'] as const).map(c=>`/assets/
  *   segredo   (luta ★):    si menor com cor dórica e frígia, 160 BPM, caixinha de música e tique-taque (v7)
  *   lenda     (luta 11):   sol menor dominante frígio, 176 BPM, o chefe secreto: sinos graves e coro dobrado (v7)
  */
+const BPM_DA_REGIAO:Record<RegiaoDaMusica,number>={vila:138,floresta:120,neon:128,deserto:112,templo:108,vulcao:172,ceu:150,trono:166};
 export const FAIXAS:Record<Faixa,{camadas:readonly string[];laco:number}>={
   principal:{camadas:AUDIO_ASSETS.battleStems,laco:LACO_DA_MUSICA},
   ascensao:{camadas:camadas('musica-ascensao'),laco:11.852},
@@ -71,6 +75,22 @@ export const FAIXAS:Record<Faixa,{camadas:readonly string[];laco:number}>={
   /* as lutas secretas (v7, src/engine/segredos.ts): a ★ entre a 5 e a 6, e a 11, o chefe secreto */
   segredo:{camadas:camadas('musica-segredo'),laco:12},
   lenda:{camadas:camadas('musica-lenda'),laco:10.909},
+  /*
+   * O Caminho do Nexus (v8): a música de cada região (os 4 rivais dela) e a do chefe (a mesma terra, mais rápida,
+   * escura, com sinos, tímpanos, coro e o último refrão meio tom acima). O laço volta para o Tema: 8 compassos.
+   *   vila     dó maior, 138 BPM, marcha e sininhos          · chefe 156 BPM, dó menor
+   *   floresta ré dórico, 120 BPM, tambores tribais e coro    · chefe 138 BPM
+   *   neon     lá menor, 128 BPM, synthwave                   · chefe 146 BPM
+   *   deserto  mi frígio dominante, 112 BPM, maqsum e metais  · chefe 130 BPM
+   *   templo   ré hirajoshi, 108 BPM, sinos e taikos          · chefe 126 BPM
+   *   vulcao   mi frígio, 172 BPM, metal                      · chefe 184 BPM
+   *   ceu      fá lídio, 150 BPM, épico com coro              · chefe 168 BPM, fá menor
+   *   trono    si menor harmônica, 166 BPM, orquestral        · chefe 184 BPM (o Imperador)
+   */
+  ...Object.fromEntries(REGIOES_DA_MUSICA.flatMap((r)=>[
+    [`regiao-${r}`,{camadas:camadas(`musica-reg-${r}`),laco:1920/BPM_DA_REGIAO[r]}],
+    [`chefe-${r}`,{camadas:camadas(`musica-chefe-${r}`),laco:1920/Math.min(184,BPM_DA_REGIAO[r]+18)}],
+  ])) as unknown as Record<`regiao-${RegiaoDaMusica}`|`chefe-${RegiaoDaMusica}`,{camadas:readonly string[];laco:number}>,
 };
 /** Qual música toca em cada luta (0–9, e as lutas secretas: a ★ e a 11). */
 export const faixaDaLuta=(indice:number):Faixa=>indice===LUTA_ESTRELA?'segredo':indice===LUTA_ONZE?'lenda':indice>=9?'chefe':indice>=6?'tensao':indice>=3?'ascensao':'principal';

@@ -1,0 +1,55 @@
+{
+ "bpm": 108,
+ "compassos": 64,
+ "segundos": 142.222,
+ "secoes": [
+  {
+   "nome": "Chegada",
+   "inicio": 0.0
+  },
+  {
+   "nome": "Tema",
+   "inicio": 17.778
+  },
+  {
+   "nome": "Ponte",
+   "inicio": 53.333
+  },
+  {
+   "nome": "Respiro",
+   "inicio": 88.889
+  },
+  {
+   "nome": "Refrão",
+   "inicio": 106.667
+  }
+ ],
+ "estilo": "caminho do nexus · reg-templo (v8)",
+ "laco": {
+  "inicio": 17.778,
+  "fim": 142.222
+ },
+ "camadas": {
+  "musica-reg-templo-base": {
+   "arquivo": "musica-reg-templo-base.ogg",
+   "mp3": "musica-reg-templo-base.mp3",
+   "segundos": 142.222,
+   "bytes": 1443594,
+   "rmsDb": -23.7
+  },
+  "musica-reg-templo-pulso": {
+   "arquivo": "musica-reg-templo-pulso.ogg",
+   "mp3": "musica-reg-templo-pulso.mp3",
+   "segundos": 142.222,
+   "bytes": 971475,
+   "rmsDb": -27.2
+  },
+  "musica-reg-templo-tema": {
+   "arquivo": "musica-reg-templo-tema.ogg",
+   "mp3": "musica-reg-templo-tema.mp3",
+   "segundos": 142.222,
+   "bytes": 1506266,
+   "rmsDb": -25.7
+  }
+ }
+}
