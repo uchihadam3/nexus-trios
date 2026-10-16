@@ -89,6 +89,30 @@ export const forcaDoTime = (t: readonly string[]) => Math.max(4, Math.min(100, M
 /** As estrelas do time (1 a 5): cada 20 de força é uma estrela. */
 export const estrelasDaForca = (f: number) => Math.max(1, Math.min(5, Math.ceil(f / 20)));
 export const estrelasDoTime = (t: readonly string[]) => estrelasDaForca(forcaDoTime(t));
+/*
+ * Quanto o trio é melhor que os outros (pedido do dono, só na conta dele: "esse trio é melhor que 99%, 98%… dos outros
+ * trios"): a posição da nota dele entre 8 mil trios sorteados do elenco todo, sempre os mesmos (semente fixa). A amostra
+ * é montada uma vez, na primeira vez que a porcentagem aparece.
+ */
+let NOTAS_DA_AMOSTRA: Float64Array | null = null;
+function notasDaAmostra(): Float64Array {
+  if (NOTAS_DA_AMOSTRA) return NOTAS_DA_AMOSTRA;
+  const ids = characters.map((c) => c.id), notas = new Float64Array(8000);
+  let semente = 20261016, n = 0;
+  const sorteia = () => ids[Math.floor(((semente = (Math.imul(semente, 1664525) + 1013904223) >>> 0) / 4294967296) * ids.length)]!;
+  while (n < notas.length) {
+    const a = sorteia(), b = sorteia(), c = sorteia();
+    if (a !== b && a !== c && b !== c) notas[n++] = notaDoTrio([a, b, c]);
+  }
+  return (NOTAS_DA_AMOSTRA = notas.sort());
+}
+/** De 0 a 100: o trio é melhor que esta porcentagem dos trios possíveis (arredondada para baixo). */
+export function melhorQueOsTrios(team: readonly string[]): number {
+  const notas = notasDaAmostra(), nota = notaDoTrio(team);
+  let de = 0, ate = notas.length;
+  while (de < ate) { const m = (de + ate) >> 1; if (notas[m]! < nota) de = m + 1; else ate = m; }
+  return Math.floor((100 * de) / notas.length);
+}
 /* de logit para pontos de vitória, perto de 50% (para a explicação) */
 const pontos = (z: number) => Math.round(25 * Math.abs(z));
 

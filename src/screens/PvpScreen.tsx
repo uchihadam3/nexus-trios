@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode } from 'react';
+import { createContext, useContext, useEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 import { ArrowDownAZ, ArrowLeft, Check, Clock, WifiOff, Globe2, Layers, SlidersHorizontal, Sparkles, Crown, Hourglass, Lock, LogOut, RotateCcw, Search, Shield, Swords, Trophy, Users, Wand2, X, Zap } from 'lucide-react';
 import { byId, characters } from '../data/characters';
@@ -7,7 +7,7 @@ import { ArenaDoPvp } from '../components/ArenaDoPvp';
 import { combosDoTrio } from '../engine/combos';
 import { MINIMO_DA_COLECAO, NPCS, duracaoNaTela, escolhaDoNpc, problemaDosTimes, sementeDaRodada, timesDoNpc, timesLivres, vencedorDaPartida, vitoriasDosTimes,
   type Lado, type NivelNpc, type Npc, type PartidaPvp, type Times } from '../engine/pvp';
-import { notaDoTrio, forcaDoTime, estrelasDaForca } from '../presentation/dicas-do-trio';
+import { notaDoTrio, forcaDoTime, estrelasDaForca, melhorQueOsTrios } from '../presentation/dicas-do-trio';
 import { battleAudio } from '../lib/audio';
 import { PRIORIDADE } from '../audio/cues';
 import { read, save, type Settings } from '../lib/storage';
@@ -85,10 +85,13 @@ function Rosto({ id, tamanho = 54, apagado = false }: { id: string; tamanho?: nu
   return <span className={`pv-rosto ${apagado ? 'apagado' : ''}`} style={{ '--character': c.color, '--t': `${tamanho}px` } as CSSProperties} title={c.name}><Portrait character={c} /></span>;
 }
 
+/* A conta do dono (pedido dele): a porcentagem de "melhor que X% dos trios" aparece junto das estrelas. */
+const DonoDoPvp = createContext(false);
+
 function CartaoDoTime({ time, i, lado, venceu, escolhido, bloqueado, onClick, compacto = false }: {
   time: readonly string[]; i: number; lado: Lado; venceu?: boolean; escolhido?: boolean; bloqueado?: boolean; onClick?: () => void; compacto?: boolean;
 }) {
-  const forca = forcaDoTime(time), combos = combosDoTrio(time).combos.length;
+  const forca = forcaDoTime(time), combos = combosDoTrio(time).combos.length, dono = useContext(DonoDoPvp);
   const Tag = onClick ? 'button' : 'div';
   return <Tag className={`pv-time ${lado} ${venceu ? 'venceu' : ''} ${escolhido ? 'escolhido' : ''} ${bloqueado ? 'bloqueado' : ''} ${compacto ? 'compacto' : ''}`}
     onClick={onClick} disabled={onClick ? bloqueado : undefined} style={{ '--i': i } as CSSProperties}>
@@ -97,6 +100,7 @@ function CartaoDoTime({ time, i, lado, venceu, escolhido, bloqueado, onClick, co
     {!compacto && <span className="pv-time-nomes">{time.map((id) => byId[id]!.name).join(' · ')}</span>}
     <span className="pv-time-info">
       <span className="pv-estrelas" aria-label={`Força ${estrelasDaForca(forca)} de 5`}>{[1, 2, 3, 4, 5].map((k) => <i key={k} className={k <= estrelasDaForca(forca) ? 'on' : ''}>★</i>)}</span>
+      {dono && <span className="pv-pct" title="Melhor que esta porcentagem dos trios">melhor que <b>{melhorQueOsTrios(time)}%</b></span>}
       {combos > 0 && <span className="pv-combos"><Zap size={11} />{combos} combo{combos > 1 ? 's' : ''}</span>}
     </span>
     {venceu && <span className="pv-carimbo" aria-hidden="true"><Check size={34} /></span>}
@@ -334,7 +338,7 @@ function Montar({ rival, colecao, inicial, onPronto, onVoltar, onDetails, prazo,
       {times.map((t, i) => {
         const forca = t.length === 3 ? forcaDoTime(t) : 0;
         return <button key={i} className={`pv-slot ${ativo === i ? 'ativo' : ''} ${t.length === 3 ? 'cheio' : ''}`} onClick={() => setAtivo(i)} style={{ '--i': i } as CSSProperties}>
-          <span className="pv-slot-topo"><b>TIME {i + 1}</b>{t.length === 3 ? <span className="pv-estrelas">{[1, 2, 3, 4, 5].map((k) => <i key={k} className={k <= estrelasDaForca(forca) ? 'on' : ''}>★</i>)}</span> : <small>{t.length}/3</small>}</span>
+          <span className="pv-slot-topo"><b>TIME {i + 1}</b>{t.length === 3 ? <span className="pv-estrelas">{[1, 2, 3, 4, 5].map((k) => <i key={k} className={k <= estrelasDaForca(forca) ? 'on' : ''}>★</i>)}{melhores && <em className="pv-pct">{melhorQueOsTrios(t)}%</em>}</span> : <small>{t.length}/3</small>}</span>
           <span className="pv-slot-rostos">{[0, 1, 2].map((k) => t[k] ? <span key={k} className="pv-slot-cheio" role="button" tabIndex={0} aria-label={`Tirar ${byId[t[k]!]!.name}`} onClick={(e) => { e.stopPropagation(); tocar(t[k]!); }}><Rosto id={t[k]!} tamanho={46} /><X size={12} className="pv-tirar" /></span> : <span key={k} className="pv-slot-vazio">+</span>)}</span>
         </button>;
       })}
@@ -721,7 +725,11 @@ function PartidaOnline({ online, colecaoLocal, settings, onSettings, onDetails, 
  * A tela
  * ------------------------------------------------------------------------- */
 
-export function PvpScreen({ colecao, settings, onSettings, onDetails, onJogar, onLutando, online, dono = false }: {
+export function PvpScreen(props: Parameters<typeof TelaDoPvp>[0]) {
+  return <DonoDoPvp.Provider value={props.dono === true}><TelaDoPvp {...props} /></DonoDoPvp.Provider>;
+}
+
+function TelaDoPvp({ colecao, settings, onSettings, onDetails, onJogar, onLutando, online, dono = false }: {
   colecao: string[]; settings: Settings; onSettings: (s: Settings) => void; onDetails: (id: string) => void; onJogar: () => void; onLutando: (sim: boolean) => void;
   /** O Desafio online (com conta); a partida aberta vem do App (convite aceito, desafio pela Comunidade). */
   online?: Online | null;

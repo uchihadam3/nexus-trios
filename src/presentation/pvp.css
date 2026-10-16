@@ -399,3 +399,7 @@ button.pv-time:active:not(:disabled){transform:scale(.98)}
   background:linear-gradient(180deg,#0d1411 88%,#0d141100);box-shadow:0 10px 18px -12px #000c}
 .pv-fixos .pv-pronto{min-height:46px}
 .pv-ferramentas .pv-melhores{grid-column:1/-1;gap:6px;min-height:44px;color:#2a1a00 !important;background:linear-gradient(180deg,#ffe39a,#ffb84d) !important;box-shadow:0 0 16px #ffb84d44 !important;font-weight:900}
+/* a porcentagem "melhor que X% dos trios" (só na conta do dono), junto das estrelas */
+.pv-pct{font-size:10.5px;font-style:normal;font-weight:700;color:#9fb0bf;white-space:nowrap}
+.pv-pct b{color:var(--pv-ouro);font-weight:900}
+.pv-estrelas .pv-pct{margin-left:4px;font-size:9.5px;letter-spacing:0;color:var(--pv-ouro);font-weight:900}
