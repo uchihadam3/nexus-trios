@@ -125,7 +125,7 @@ function Mapa({ r, onRival, onVoltar }: { r: RespostaDaCampanha; onRival: (x: Ri
       <Play size={22} />
     </button>}
 
-    <Descansando descanso={r.progresso.descanso} titulo="SEUS PERSONAGENS DESCANSANDO" vazio={`Rodízio: os que mais lutarem nas últimas ${DESCANSO.janela} partidas descansam. Por ${DESCANSO.partidas} partidas: 3 na região 1, um a mais a cada região, até 9. Só conta partida contra rival que você ainda não gabaritou (★★★).`} />
+    <Descansando descanso={r.progresso.descanso} titulo="SEUS PERSONAGENS DESCANSANDO" vazio={`Rodízio: os que mais lutarem nas últimas ${DESCANSO.janela} partidas descansam. Por ${DESCANSO.partidas} partidas: 3 na região 1 e 4 da região 2 em diante. Só conta partida contra rival que você ainda não gabaritou (★★★).`} />
 
     <div className="cn-regioes">
       {REGIOES.map((g) => <Regiao key={g.id} regiao={g} estrelas={r.progresso.estrelas} atual={proximo?.id ?? null} onRival={onRival} />)}
@@ -335,7 +335,7 @@ function Caminho({ servico, settings, onSettings, onDetails, onLutando, onVoltar
     if (tela.tipo === 'escolher') return <>{avisoDeErro}{aura}<Escolher key={`${vistas}-${tentativa}`} rival={op} partida={pvp} onEscolher={(i) => void escolher(i)} />{sair}{confirmacao}</>;
     if (tela.tipo === 'vs' && rodada) return <Vs rival={op} partida={comoPvp(partida)} meu={rodada.meu} dele={rodada.dele} onLutar={() => setTela({ tipo: 'luta' })} />;
     if (tela.tipo === 'luta' && rodada) return <>{avisoDeErro}<ArenaDoPvp meu={partida.meus[rodada.meu]!} dele={partida.deles[rodada.dele]!} seed={rodada.seed} rodada={vistas + 1} rival={rival.nome} settings={settings} onSettings={onSettings}
-      podePausar escala={escalaDoRival(rival)} faixa={faixaDe(rival)} onFim={assistiu} onDesistir={() => setConfirmar('luta')} />{confirmacao}</>;
+      podePausar velocidadeLivre escala={escalaDoRival(rival)} faixa={faixaDe(rival)} onFim={assistiu} onDesistir={() => setConfirmar('luta')} />{confirmacao}</>;
     if (tela.tipo === 'rodada' && vistas > 0) return <ResultadoDaRodada rival={op} partida={comoPvp(partida, vistas)} final={acabou && vistas >= partida.rodadas.length}
       onSeguir={() => setTela(acabou && vistas >= partida.rodadas.length ? { tipo: 'fim' } : { tipo: 'escolher' })} />;
     if (tela.tipo === 'fim' && acabou) return <Fim rival={rival} partida={partida} antes={antes} r={r} onMapa={() => { setR({ ...r, partida: null }); setTela({ tipo: 'mapa' }); }}

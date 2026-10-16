@@ -899,7 +899,7 @@ function TelaDoPvp({ colecao, settings, onSettings, onDetails, onJogar, onLutand
   }} /><button className="pv-sair-online" onClick={() => setConfirmar('partida')}><LogOut size={14} />Abandonar partida</button>{confirmaTreino}</>;
   if (etapa.tipo === 'vs') return <Vs rival={oponenteDoNpc(etapa.npc)} partida={etapa.partida} meu={etapa.meu} dele={etapa.dele} onLutar={() => setEtapa({ ...etapa, tipo: 'luta' })} />;
   if (etapa.tipo === 'luta') return <><ArenaDoPvp meu={etapa.partida.meus[etapa.meu]!} dele={etapa.partida.deles[etapa.dele]!} seed={sementeDaRodada(etapa.partida.seed, etapa.partida.rodadas.length)}
-    rodada={etapa.partida.rodadas.length + 1} rival={etapa.npc.nome} settings={settings} onSettings={onSettings} podePausar
+    rodada={etapa.partida.rodadas.length + 1} rival={etapa.npc.nome} settings={settings} onSettings={onSettings} podePausar velocidadeLivre
     atrasoInicial={etapa.retomar ?? 0} comecaPausado={(etapa.retomar ?? 0) > 0} onTempo={(seg) => guardaEtapa(etapa, seg)}
     onFim={(v) => terminouRodada(etapa.npc, etapa.partida, etapa.meu, etapa.dele, v)} onDesistir={() => setConfirmar('luta')} />{confirmaTreino}</>;
   if (etapa.tipo === 'rodada') return <ResultadoDaRodada rival={oponenteDoNpc(etapa.npc)} partida={etapa.partida} onSeguir={() => setEtapa({ tipo: 'escolher', npc: etapa.npc, partida: etapa.partida })} />;

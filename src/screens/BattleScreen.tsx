@@ -31,7 +31,7 @@ import { statuses } from '../data/statuses';
 
 export function BattleScreen({battle,beat,index,name,settings,paused,onPause,onAbandon,onSettings,onExit,novosNoLivro,pvp}:{battle:Battle;beat:Beat|null;index:number;name:string;settings:Settings;paused:boolean;onPause:()=>void;onAbandon:()=>void;onSettings:(s:Settings)=>void;onExit?:()=>void;novosNoLivro?:NovosNoLivro|null;
   /** Luta de PvP (src/screens/PvpScreen.tsx): rodada, nomes dos dois lados, sempre em 2× e sem AUTO; pausa só no treino. */
-  pvp?:{rodada:number;voce:string;rival:string;podePausar:boolean}}){
+  pvp?:{rodada:number;voce:string;rival:string;podePausar:boolean;velocidadeLivre?:boolean}}){
   const arena=useRef<HTMLDivElement>(null),[anchors,setAnchors]=useState<Anchors>({}),[box,setBox]=useState({w:0,h:0,medal:80}),[mixer,setMixer]=useState(false),[historyOpen,setHistoryOpen]=useState(false),[combosAbertos,setCombosAbertos]=useState<false|Side>(false),[fichaDoCombo,setFichaDoCombo]=useState<ComboAtivo|null>(null),[inspect,setInspect]=useState<InspectTarget|null>(null),[tutorial,setTutorial]=useState(()=>{try{return index===0&&!localStorage.getItem('nexus-battle-guide-v1')?0:-1}catch{return -1}});
   /* Os sons dos seis lutadores chegam antes do primeiro golpe. */
   const elenco=battle.fighters.map(f=>f.characterId).join(',');
@@ -147,9 +147,9 @@ export function BattleScreen({battle,beat,index,name,settings,paused,onPause,onA
     <footer className="arena-controls">
       {pvp&&!pvp.podePausar&&<span className="control-main pvp-ao-vivo"><i/>AO VIVO</span>}
       {(!pvp||pvp.podePausar)&&<button className={`control-main ${paused?'is-paused':''}`} onClick={onPause}>{paused?<Play size={18}/>:<Pause size={18}/>}<span>{paused?'Continuar':'Pausar'}</span></button>}
-      {pvp?<><span className="control selected pvp-2x" aria-label="PvP sempre em 2 vezes"><FastForward size={18}/><b>2×</b></span><span className="control pvp-selo" aria-hidden="true"><Swords size={17}/><b>PvP</b></span></>:<>
+      {pvp&&!pvp.velocidadeLivre?<><span className="control selected pvp-2x" aria-label="PvP sempre em 2 vezes"><FastForward size={18}/><b>2×</b></span><span className="control pvp-selo" aria-hidden="true"><Swords size={17}/><b>PvP</b></span></>:<>
       <button className={`control ${settings.speed>1?'selected':''}`} aria-label={`Velocidade ${settings.speed} vezes`} onClick={()=>onSettings({...settings,speed:settings.speed>=VELOCIDADE_MAXIMA?1:(settings.speed+1) as Settings['speed']})}><FastForward size={18}/><b>{settings.speed}×</b></button>
-      <BotaoAutoDaBatalha ligado={settings.auto} onChange={auto=>onSettings({...settings,auto})}/></>}
+      {pvp?<span className="control pvp-selo" aria-hidden="true"><Swords size={17}/><b>PvP</b></span>:<BotaoAutoDaBatalha ligado={settings.auto} onChange={auto=>onSettings({...settings,auto})}/>}</>}
       <button className="control sound-button" aria-label={settings.volume?'Silenciar':'Ativar som'} onClick={()=>onSettings({...settings,volume:settings.volume?0:P.audio.master})}>{settings.volume?<Volume2 size={19}/>:<VolumeX size={19}/>}</button>
       <button className={`control mixer-button ${mixer?'selected':''}`} aria-label="Ajustes da batalha" aria-expanded={mixer} onClick={()=>setMixer(!mixer)}><SlidersHorizontal size={18}/></button>
       <button className="control control-danger abandon-battle" onClick={onAbandon} aria-label={pvp?'Desistir desta luta':'Desistir da jornada'}><LogOut size={17}/><span>Desistir</span></button>

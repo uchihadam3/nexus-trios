@@ -87,22 +87,22 @@ describe('Caminho do Nexus', () => {
     expect(livresParaJogar(['a1', 'b1', 'c1'], d)).toEqual(['a1', 'c1']);
   });
 
-  it('rodízio pesa com a região: sempre 3 partidas, 3 dormindo na região 1 e um a mais por região até 9', () => {
-    expect(REGIOES.map((r) => descansoDaRegiao(r.n).quantos)).toEqual([3, 4, 5, 6, 7, 8, 9, 9]);
+  it('rodízio: sempre 3 partidas, 3 dormindo na região 1 e 4 da região 2 em diante', () => {
+    expect(REGIOES.map((r) => descansoDaRegiao(r.n).quantos)).toEqual([3, 4, 4, 4, 4, 4, 4, 4]);
     expect(REGIOES.every((r) => descansoDaRegiao(r.n).partidas === 3)).toBe(true);
-    // nunca menos de 9 livres: com 12 personagens dormem só 3, com 15 dormem 6, com 20 dormem os 9
+    // nunca menos de 9 livres: com 12 personagens dormem só 3, com 13 ou mais dormem 4
     expect(seuDescanso(8, 12).quantos).toBe(3);
-    expect(seuDescanso(8, 15).quantos).toBe(6);
-    expect(seuDescanso(8, 20).quantos).toBe(9);
-    // na região 8 dormem os 9 que mais lutaram
+    expect(seuDescanso(8, 13).quantos).toBe(4);
+    expect(seuDescanso(8, 20).quantos).toBe(4);
+    // na região 8 dormem os 4 que mais lutaram
     const times = [['a1', 'a2', 'a3'], ['b1', 'b2', 'b3'], ['c1', 'c2', 'c3']];
     const uso = quemLutou(times, [{ time: 0 }, { time: 1 }, { time: 2 }, { time: 0 }]);
     const d = depoisDaPartida({}, [uso], seuDescanso(8, 30));
-    expect(Object.keys(d)).toHaveLength(9);
+    expect(Object.keys(d)).toHaveLength(4);
     expect(Object.values(d).every((n) => n === 3)).toBe(true);
   });
 
-  it('região 8, 3 partidas de descanso: ficam 9 dormindo o tempo todo e sempre sobram 9 para os times', () => {
+  it('região 8, 3 partidas de descanso: ficam 4 dormindo o tempo todo e sempre sobram 9 para os times', () => {
     // 60 partidas com 20 personagens, montando os times só com quem está acordado e jogando 3 a 5 rodadas
     const colecao = Array.from({ length: 20 }, (_, i) => `p${i}`), regra = seuDescanso(8, colecao.length);
     let d: Record<string, number> = {}, semente = 7;
@@ -117,8 +117,8 @@ describe('Caminho do Nexus', () => {
       d = depoisDaPartida(d, feitas.slice(-DESCANSO.janela), regra);
       dormindo.push(Object.keys(d).length);
     }
-    // depois da 1ª partida, sempre 9 dormindo (quem acorda é trocado na mesma hora pelos 9 que mais lutaram)
-    expect(dormindo.every((n) => n === 9)).toBe(true);
+    // depois da 1ª partida, sempre 4 dormindo (quem acorda é trocado na mesma hora pelos 4 que mais lutaram)
+    expect(dormindo.every((n) => n === 4)).toBe(true);
   });
 
   it('rival já gabaritado (★★★) não acorda ninguém; com 1 ou 2 estrelas ainda conta', () => {

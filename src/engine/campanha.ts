@@ -382,11 +382,10 @@ export const MINIMO_DA_CAMPANHA = 12;
 export const DESCANSO = { quantos: 3, partidas: 3, janela: 5 } as const;
 export type RegraDoDescanso = { quantos: number; partidas: number };
 /*
- * O seu rodízio pesa mais a cada região (pedido do dono): descansam sempre 3 partidas, mas cada região põe mais um para
- * dormir — 3 na região 1, 4 na 2 … 9 nas regiões 7 e 8 (dormir pouco tempo e muita gente: não dá para pôr só os fracos
- * para dormir e seguir com os fortes). A região é a do rival da partida que acabou.
+ * O seu rodízio (pedido do dono): descansam sempre 3 partidas; dormem 3 na região 1 e 4 da região 2 em diante (no
+ * máximo 4). A região é a do rival da partida que acabou.
  */
-export const DORMEM_NO_MAXIMO = 9;
+export const DORMEM_NO_MAXIMO = 4;
 export const descansoDaRegiao = (regiao: number): RegraDoDescanso =>
   ({ quantos: Math.min(DORMEM_NO_MAXIMO, DESCANSO.quantos + Math.max(1, regiao) - 1), partidas: DESCANSO.partidas });
 /** O seu rodízio nesta região, sem nunca deixar menos de 9 livres (os 3 times): com 12 personagens, descansam 3. */

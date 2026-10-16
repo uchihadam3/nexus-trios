@@ -21,7 +21,7 @@ import { espelhar } from '../presentation/espelho';
  */
 const RECUPERA_POR_QUADRO = 60, MAXIMO_DE_ATRASO = 20 * 60;
 
-export function ArenaDoPvp({ meu, dele, seed, rodada, rival, settings, onSettings, podePausar, onFim, onDesistir, espelhado = false, atrasoInicial = 0, comecaPausado = false, onTempo, escala = 1, faixa = 'arena' }: {
+export function ArenaDoPvp({ meu, dele, seed, rodada, rival, settings, onSettings, podePausar, onFim, onDesistir, espelhado = false, atrasoInicial = 0, comecaPausado = false, onTempo, escala = 1, faixa = 'arena', velocidadeLivre = false }: {
   meu: string[]; dele: string[]; seed: number; rodada: number; rival: string; settings: Settings; onSettings: (s: Settings) => void;
   podePausar: boolean; onFim: (vencedor: Side) => void; onDesistir: () => void;
   /** Online, para quem foi desafiado: a luta é a do desafiante (ele embaixo), desenhada do outro lado. */
@@ -32,6 +32,8 @@ export function ArenaDoPvp({ meu, dele, seed, rodada, rival, settings, onSetting
   comecaPausado?: boolean;
   /** Os segundos de luta já mostrados, mais ou menos a cada segundo (para retomar no mesmo ponto). */
   onTempo?: (segundos: number) => void;
+  /** Contra a IA (treino e Caminho do Nexus) a velocidade é do jogador (1×, 2×, 3×); contra pessoas fica travada em 2×. */
+  velocidadeLivre?: boolean;
   /** A Vida a mais no lado do rival (a Aura do Chefe da campanha). */
   escala?: number;
   /** A música da luta (a campanha usa outras nos chefes). */
@@ -47,7 +49,8 @@ export function ArenaDoPvp({ meu, dele, seed, rodada, rival, settings, onSetting
   const tempo = useRef(onTempo); tempo.current = onTempo;
   const atraso = useRef(Math.min(MAXIMO_DE_ATRASO, Math.max(0, atrasoInicial)));
   const decorrido = useRef(0), avisado = useRef(-1);
-  const config = useMemo(() => ({ ...settings, speed: VELOCIDADE_DO_PVP as 1 | 2 }), [settings]);
+  const vel = velocidadeLivre ? settings.speed : VELOCIDADE_DO_PVP;
+  const config = useMemo(() => ({ ...settings, speed: vel as Settings['speed'] }), [settings, vel]);
 
   // a música da Arena enquanto a luta corre
   useEffect(() => {
@@ -61,7 +64,8 @@ export function ArenaDoPvp({ meu, dele, seed, rodada, rival, settings, onSetting
     if (direcao.current) return direcao.current;
     const d = createDirection(inicial); sons.lastAudio.current = inicial.nextEvent - 1; sons.lastDominionSound.current = inicial.dominion;
     let resta = atraso.current; atraso.current = 0; decorrido.current = resta;
-    while (resta > 1e-6 && !d.complete) { const p = Math.min(P.renderIntervalMs / 1000, resta); advanceDirection(d, p, undefined, VELOCIDADE_DO_PVP); resta -= p; }
+    // com a velocidade livre o tempo guardado está em segundos de luta a 1× (trocar a velocidade não muda o ponto)
+    while (resta > 1e-6 && !d.complete) { const p = Math.min(P.renderIntervalMs / 1000, resta); advanceDirection(d, p, undefined, velocidadeLivre ? 1 : vel); resta -= p; }
     if (decorrido.current > 0) sonsDoQuadro(d, sons, true);
     direcao.current = d;
     return d;
@@ -78,10 +82,10 @@ export function ArenaDoPvp({ meu, dele, seed, rodada, rival, settings, onSetting
       const d = garante();
       // o tempo que o celular não deixou rodar (app em segundo plano): a luta alcança o relógio sem som
       divida = Math.min(20 * 60, divida + Math.max(0, bruto - passo));
-      let resta = Math.min(divida, RECUPERA_POR_QUADRO); divida -= resta; decorrido.current += resta + passo;
-      while (resta > 1e-6 && !d.complete) { const p = Math.min(P.renderIntervalMs / 1000, resta); advanceDirection(d, p, undefined, VELOCIDADE_DO_PVP); resta -= p; }
+      let resta = Math.min(divida, RECUPERA_POR_QUADRO); divida -= resta; decorrido.current += (resta + passo) * (velocidadeLivre ? vel : 1);
+      while (resta > 1e-6 && !d.complete) { const p = Math.min(P.renderIntervalMs / 1000, resta); advanceDirection(d, p, undefined, vel); resta -= p; }
       const mudo = document.hidden;
-      advanceDirection(d, passo, (cue) => { if (!mudo) somDoCue(d, cue); }, VELOCIDADE_DO_PVP);
+      advanceDirection(d, passo, (cue) => { if (!mudo) somDoCue(d, cue); }, vel);
       sonsDoQuadro(d, sons, mudo);
       mostra(d);
       const s = Math.floor(decorrido.current);
@@ -94,9 +98,9 @@ export function ArenaDoPvp({ meu, dele, seed, rodada, rival, settings, onSetting
       }
     }, P.renderIntervalMs);
     return () => clearInterval(t);
-  }, [pausado, inicial, sons, espelhado]);
+  }, [pausado, inicial, sons, espelhado, vel]);
 
   return <BattleScreen battle={tela.battle} beat={tela.beat} index={rodada - 1} name={`Rodada ${rodada}`} settings={config} paused={pausado}
-    onPause={() => { if (podePausar) setPausado(!pausado); }} onAbandon={onDesistir} onSettings={(s) => onSettings({ ...s, speed: settings.speed })}
-    pvp={{ rodada, voce: 'VOCÊ', rival, podePausar }} />;
+    onPause={() => { if (podePausar) setPausado(!pausado); }} onAbandon={onDesistir} onSettings={(s) => onSettings(velocidadeLivre ? s : { ...s, speed: settings.speed })}
+    pvp={{ rodada, voce: 'VOCÊ', rival, podePausar, velocidadeLivre }} />;
 }
