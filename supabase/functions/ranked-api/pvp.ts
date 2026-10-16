@@ -91,8 +91,11 @@ async function resolver(db: Db, p: Partida, n: number) {
   if (error) throw error;
   const ta = escolhas?.find((e) => e.jogador === p.desafiante)?.time, tb = escolhas?.find((e) => e.jogador === p.desafiado)?.time;
   if (ta === undefined || tb === undefined) return;
-  // só um calcula: quem conseguir marcar a rodada como resolvida
-  const marcou = await atualiza(db, p.id, { resolvida: n }, (q) => q.lt('resolvida', n).eq('estado', 'jogando'));
+  // só um calcula: quem conseguir marcar a rodada como resolvida. No mesmo passo some o começo da luta anterior: se
+  // um aparelho perguntar no meio do cálculo, ele não pode ver a rodada nova com o horário da luta velha (pegava a
+  // luta 2 "começada" lá atrás, já no fim, e a partida travava).
+  const marcou = await atualiza(db, p.id, { resolvida: n, inicio_em: null, lutar_a: false, lutar_b: false, assistiu_a: false, assistiu_b: false },
+    (q) => q.lt('resolvida', n).eq('estado', 'jogando'));
   if (!marcou.length) return;
   const seed = sementeDaRodada(Number(p.seed), n);
   const luta = createBattle(times[p.desafiante]![ta]!, times[p.desafiado]![tb]!, seed);
@@ -184,7 +187,8 @@ async function vista(db: Db, p: Partida, quem: string, ausencia: number | null =
     escolheu: { eu: eu === 'a' ? p.escolheu_a : p.escolheu_b, rival: eu === 'a' ? p.escolheu_b : p.escolheu_a },
     lutar: { eu: eu === 'a' ? p.lutar_a : p.lutar_b, rival: eu === 'a' ? p.lutar_b : p.lutar_a },
     assistiu: { eu: eu === 'a' ? p.assistiu_a : p.assistiu_b, rival: eu === 'a' ? p.assistiu_b : p.assistiu_a },
-    rodada: p.rodada, resolvida: p.resolvida, inicioEm: p.inicio_em,
+    // o começo da luta só vale para a rodada que acabou de ser resolvida (a próxima a passar na tela)
+    rodada: p.rodada, resolvida: p.resolvida, inicioEm: p.resolvida >= 0 && p.resolvida === p.rodada - 1 ? p.inicio_em : null,
     meusTimes: times[quem] ?? null, timesDele: prontos ? times[outro] ?? null : null,
     minhaEscolha: minha?.time ?? null,
     rodadas: rodadas.map((r) => ({ n: r.n, meu: meu(r), dele: dele(r), seed: Number(r.seed), vencedor: r.vencedor === eu ? 'eu' : 'rival', duracao: r.duracao, rendida: r.rendida === true })),

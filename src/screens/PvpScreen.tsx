@@ -623,6 +623,14 @@ const lerAssistido = (id: string): Assistido => {
   return a && a.id === id && Array.isArray(a.vistas) ? a : { id, apresentado: false, vistas: [] };
 };
 
+/** Até onde a partida já andou (fase, rodada, rodada resolvida, luta marcada): para não voltar com uma resposta velha. */
+const FASES: Record<string, number> = { convite: 0, montando: 1, jogando: 2, terminada: 3, recusada: 3, cancelada: 3, expirada: 3 };
+const progressoDaVista = (p: VistaPvp) => [FASES[p.fase] ?? 0, p.rodada, p.resolvida, p.inicioEm ? 1 : 0];
+function atras(a: number[], b: number[]) {
+  for (let i = 0; i < a.length; i++) if (a[i] !== b[i]) return a[i]! < b[i]!;
+  return false;
+}
+
 type Cena = { tipo: 'luta'; n: number; meu: string[]; dele: string[]; seed: number; atraso: number } | { tipo: 'resultado'; n: number } | null;
 
 function PartidaOnline({ online, colecaoLocal, emprestados, settings, onSettings, onDetails, onLutando, dono = false }: {
@@ -644,8 +652,14 @@ function PartidaOnline({ online, colecaoLocal, emprestados, settings, onSettings
   const [guardado] = useState(carregar);
   const marca = (a: Assistido) => { setAssistido(a); save('pvp-online', a); };
 
+  // as respostas podem chegar fora de ordem (a de 3 em 3 s e a do aviso do Realtime): uma resposta mais atrasada que a
+  // última aplicada não volta a partida para trás
+  const ultima = useRef<{ id: string; progresso: number[] } | null>(null);
   const aplica = (r: RespostaPvp) => {
     if (!r.partida) { setSumiu(true); return; }
+    const progresso = progressoDaVista(r.partida), u = ultima.current;
+    if (u && u.id === r.partida.id && atras(progresso, u.progresso)) return;
+    ultima.current = { id: r.partida.id, progresso };
     setV(r.partida); setOffset(diferencaDoRelogio(r.partida.agora)); setRecebido(Date.now());
     if (r.colecao.length) setColecao(r.colecao);
   };
@@ -679,7 +693,13 @@ function PartidaOnline({ online, colecaoLocal, emprestados, settings, onSettings
 
   // a luta da rodada que acabou de ser resolvida (as anteriores já foram vistas ou ficaram para trás)
   const pendente = v && v.resolvida >= 0 ? v.rodadas.find((r) => r.n === v.resolvida && !assistido.vistas.includes(r.n)) ?? null : null;
-  const inicio = v?.inicioEm ? Date.parse(v.inicioEm) - offset : null;
+  // o começo de cada luta é dela só: um horário que já foi de uma luta anterior nunca vale para a próxima (senão a luta
+  // nova "começava" lá atrás e aparecia já no fim, com todo mundo morto)
+  const comecos = useRef(new Map<string, number>());
+  const doComeco = v?.inicioEm ? comecos.current.get(v.inicioEm) : undefined;
+  const inicioDaPendente = v?.inicioEm && pendente && (doComeco === undefined || doComeco === pendente.n) ? v.inicioEm : null;
+  if (inicioDaPendente && pendente && doComeco === undefined) comecos.current.set(inicioDaPendente, pendente.n);
+  const inicio = inicioDaPendente ? Date.parse(inicioDaPendente) - offset : null;
   const fimDaLuta = pendente && inicio !== null ? inicio + duracaoNaTela(pendente.duracao) * 1000 : null;
   useEffect(() => {
     if (!v || !pendente || inicio === null || cena) return;
