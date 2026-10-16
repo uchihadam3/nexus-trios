@@ -17,7 +17,7 @@ import { random, shuffle } from './random';
  * Tudo sai das lutas normais (vitória, tempo, quem ficou de pé, a virada de 1 contra 3) e do trio, então o servidor
  * refaz a mesma conta no replay (src/engine/ranked.ts): ninguém inventa um segredo.
  *
- * Chances medidas com o motor atual (900 jornadas de trios sorteados): Sem Baixas 6%, Relâmpago 11%, Virada 3%,
+ * Chances medidas com o motor atual (jornadas de trios sorteados): Sem Baixas 7%, Relâmpago 6%, Virada 3%,
  * Trio Intacto 1,3%; Clássico do Universo 54% de quem monta um trio de um universo só; Davi contra Golias 19% dos
  * trios de 1 estrela.
  */
@@ -39,7 +39,7 @@ export const SEGREDOS: readonly Segredo[] = [
   { id: 'classico', nome: 'Clássico do Universo', charada: 'Quem vem do mesmo mundo luta melhor junto… e atrai velhos conhecidos.', regra: 'Monte o trio com três personagens do mesmo universo e vença as 5 primeiras lutas. A luta extra é contra outros do mesmo universo.', libera: ['estrela'], cor: '#8fb4ff' },
   { id: 'intacto', nome: 'Trio Intacto', charada: 'Chegar ao fim é bom. Chegar inteiro é lenda.', regra: 'Vença a luta 10 com os três do trio de pé.', libera: ['onze'], cor: '#ffd36b' },
   { id: 'virada', nome: 'A Virada', charada: 'Sozinho contra três. Quem não desiste…', regra: 'Em qualquer luta, fique com só um do trio de pé contra os três rivais e vença assim mesmo. Depois, vença as 10.', libera: ['onze'], cor: '#ff8a5c' },
-  { id: 'relampago', nome: 'Relâmpago', charada: 'Rápido demais para o rival entender o que aconteceu.', regra: 'Vença 3 das 5 primeiras lutas em menos de 25 segundos cada.', libera: ['estrela', 'onze'], cor: '#7fe8ff' },
+  { id: 'relampago', nome: 'Relâmpago', charada: 'Rápido demais para o rival entender o que aconteceu.', regra: 'Vença 4 das 5 primeiras lutas em menos de 25 segundos cada.', libera: ['estrela', 'onze'], cor: '#7fe8ff' },
   { id: 'davi', nome: 'Davi contra Golias', charada: 'Ninguém aposta nos pequenos. Prove que estão errados.', regra: 'Com um trio de 1 estrela, vença as 5 primeiras lutas.', libera: ['estrela', 'onze'], cor: '#d59cff' },
 ];
 export const SEGREDO = Object.fromEntries(SEGREDOS.map((s) => [s.id, s])) as Record<SegredoId, Segredo>;
@@ -52,8 +52,10 @@ export const ehLutaExtra = (indice: number) => indice === LUTA_ESTRELA || indice
 export const seedDaLuta = (seed: number, indice: number) => seed + indice * 7919;
 /** O multiplicador de pontos da luta extra: a ★ vale como a luta 6, a 11 como uma luta depois da 10. */
 export const indiceDosPontos = (indice: number) => (indice === LUTA_ESTRELA ? 5 : indice);
-/** Menos de RELAMPAGO segundos de luta (tempo de jogo, não de tela). */
+/** Menos de RELAMPAGO segundos de luta (tempo de jogo, não de tela)… */
 export const RELAMPAGO = 25;
+/** …em LUTAS_DO_RELAMPAGO das 5 primeiras (era 3: 12% das jornadas fazia; com 4, 6%, como os outros segredos). */
+export const LUTAS_DO_RELAMPAGO = 4;
 
 /** O que cada luta normal precisa guardar para os segredos (o RunBattleSummary tem tudo). */
 export interface LutaDoSegredo { index: number; won: boolean; time: number; survivors: number; virada?: boolean }
@@ -72,7 +74,7 @@ export function segredosCumpridos(team: readonly string[], lutas: readonly LutaD
   const venceuAte = (n: number) => Array.from({ length: n }, (_, i) => da(i)).every((l) => l?.won);
   const out: SegredoId[] = [];
   if (venceuAte(3) && [0, 1, 2].every((i) => da(i)!.survivors === 3)) out.push('sem-baixas');
-  if (normais.filter((l) => l.index < 5 && l.won && l.time < RELAMPAGO).length >= 3) out.push('relampago');
+  if (normais.filter((l) => l.index < 5 && l.won && l.time < RELAMPAGO).length >= LUTAS_DO_RELAMPAGO) out.push('relampago');
   if (venceuAte(5) && universoDoTrio(team)) out.push('classico');
   if (venceuAte(5) && estrelasDoTime(team) === 1) out.push('davi');
   if (normais.some((l) => l.won && l.virada)) out.push('virada');

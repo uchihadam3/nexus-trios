@@ -34,7 +34,9 @@ describe('segredos', () => {
   });
 
   it('Relâmpago abre as duas; a 11 só depois de vencer as 10', () => {
-    const rapido = [luta(0, true, { time: 20 }), luta(1, true, { time: 22 }), luta(2, true, { time: 24 }), luta(3), luta(4)];
+    // 3 rápidas não bastam mais: são 4 das 5 primeiras
+    expect(segredosCumpridos(trioComum, [luta(0, true, { time: 20 }), luta(1, true, { time: 22 }), luta(2, true, { time: 24 }), luta(3), luta(4)])).not.toContain('relampago');
+    const rapido = [luta(0, true, { time: 20 }), luta(1, true, { time: 22 }), luta(2, true, { time: 24 }), luta(3), luta(4, true, { time: 21 })];
     expect(proximaLuta(trioComum, rapido)).toBe(LUTA_ESTRELA);
     const resto = [5, 6, 7, 8, 9].map((i) => luta(i));
     expect(proximaLuta(trioComum, [...rapido, luta(LUTA_ESTRELA, false), ...resto])).toBe(LUTA_ONZE);
@@ -78,14 +80,14 @@ describe('segredos', () => {
   });
 
   it('o servidor refaz a jornada com as lutas extras, na ordem, e soma a extra só se vencer', () => {
-    const r = replayRanked(['vilgax', 'constantine', 'leatherface'], 371649581, true);
+    const r = replayRanked(['sekhmet', 'poisonivy', 'jake'], 441500124, true);
     expect(r.summaries.map((s) => s.index)).toEqual([0, 1, 2, 3, 4, LUTA_ESTRELA, 5, 6, 7, 8, 9, LUTA_ONZE]);
     expect(r.encountersCleared).toBe(10);
     expect(r.score).toBe(r.summaries.reduce((n, s) => n + s.score, 0));
     for (const s of r.summaries.filter((x) => x.index >= LUTA_ESTRELA && !x.won)) expect(s.score).toBe(0);
-    expect(r.highlights.segredos).toContain('relampago');
+    expect(r.highlights.segredos).toEqual(['sem-baixas', 'intacto']);
     // desistiu depois de 7 lutas: as 5, a ★ e a 6
-    expect(replayRanked(['vilgax', 'constantine', 'leatherface'], 371649581, true, false, 7).summaries.map((s) => s.index)).toEqual([0, 1, 2, 3, 4, LUTA_ESTRELA, 5]);
+    expect(replayRanked(['sekhmet', 'poisonivy', 'jake'], 441500124, true, false, 7).summaries.map((s) => s.index)).toEqual([0, 1, 2, 3, 4, LUTA_ESTRELA, 5]);
   });
 
   it('Clássico com versões sombrias: a luta acontece até o fim', () => {
