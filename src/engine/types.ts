@@ -33,7 +33,7 @@ export interface Character {
   id:string; name:string; universe:string; portrait:string; color:string; symbol:string; idea:string; vulnerability:string; intelligence?:number;
   hp:number; interval:number; basic:{name:string;effects:Effect[];visual:Visual;target:Target;jeito?:JeitoDeBater};
   trait:Trait; skills:[Skill,Skill,Skill]; tags:string[]; power:number; deathNoteCompatible:boolean;
-  /** Renascer: ao cair, volta sozinho com `vida` (fração) da Vida depois de `atraso` segundos — uma vez por luta. A Death Note impede. */
+  /** Renascer: ao cair, volta sozinho com `vida` (fração) da Vida depois de `atraso` segundos — uma vez por luta (também depois da Death Note). */
   renascer?:{vida:number;atraso:number};
   /** Última resistência: uma vez por luta, o golpe fatal o deixa com 1 de Vida e Protegido. */
   ultimaResistencia?:{protegido:number;duracao:number};

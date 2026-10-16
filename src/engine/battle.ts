@@ -214,8 +214,8 @@ const interrompivel=(x:Fighter)=>!!x.cast&&x.cast.duration>PREPARO_LEVE+1e-6;
  * Reviver é um efeito de habilidade: levanta o aliado caído mais forte com
  * uma fração da Vida. Quem levanta faz isso uma vez por luta, e cada lutador
  * só volta uma vez (`voltou`). Renascer é de quem tem `renascer` na ficha: ao
- * cair, fica em brasas por `atraso` segundos e volta sozinho. A Death Note
- * impede (execução não tem volta). Ele só volta se algum aliado continuar de
+ * cair, fica em brasas por `atraso` segundos e volta sozinho, mesmo depois
+ * da Death Note (pedido do dono). Ele só volta se algum aliado continuar de
  * pé até o fim das brasas: se o último cair antes, a luta acaba e ele fica no chão.
  */
 /*
@@ -601,7 +601,9 @@ export function applyEffects(b:Battle,source:Fighter,selected:Fighter[],effects:
         case 'investigate':{const before=source.investigation[target.uid]??0,after=Math.min(100,before+effect.value);source.investigation[target.uid]=after;const quarters=Math.floor(after/25)-Math.floor(before/25);if(quarters>0)pressure(b,source.side,quarters*D.event.investigationQuarter+(after===100?D.event.investigationComplete:0));if(after===100&&!source.discovered?.[target.uid]){source.discovered??={};source.discovered[target.uid]=byId[target.characterId].deathNoteCompatible?'vulnerable':'immune';emit(b,{kind:'discovery',source:source.uid,target:target.uid,label:source.discovered[target.uid]==='vulnerable'?'Vulnerável à Death Note':'Imune à execução'});}break;}
         case 'deathnote':{
           if((source.investigation[target.uid]??0)<100)break;
-          if(byId[target.characterId].deathNoteCompatible){const value=target.hp;target.hp=0;target.cast=null;target.shields=[];target.statuses=[];target.voltou=true;target.renascendo=0;source.stats.damage+=value;source.stats.kills++;pressure(b,source.side,D.event.deathNote);emit(b,{kind:'ko',source:source.uid,target:target.uid,label:'Sentença concluída',value});}
+          if(byId[target.characterId].deathNoteCompatible){const value=target.hp;target.hp=0;target.cast=null;target.shields=[];target.statuses=[];
+            // quem cai pela Death Note pode ser revivido e renasce, como numa queda comum (pedido do dono)
+            const renascer=byId[target.characterId].renascer;if(renascer&&!target.voltou)target.renascendo=renascer.atraso;source.stats.damage+=value;source.stats.kills++;pressure(b,source.side,D.event.deathNote);emit(b,{kind:'ko',source:source.uid,target:target.uid,label:'Sentença concluída',value});}
           else applyEffects(b,source,[target],[{kind:'status',status:'exposed',value:.55,duration:14},{kind:'damage',value:110}]);
           break;
         }

@@ -181,7 +181,7 @@ export const guiaDaIdentidade: Record<Identidade, GuiaDaIdentidade> = {
   'Purificar': { naLuta: ['Tira os debuffs do trio, os que mais atrapalham primeiro: Paralisado, Silenciado, Preso…', 'Quem estava travado volta a agir na hora.'], combina: ['Tanque'], cuidado: 'Só tira o que já está lá: contra rivais que não põem debuff, vale pouco.' },
   'Dissipar': { naLuta: ['Tira os buffs dos rivais, os que mais ajudam primeiro: Protegido, Refletir, Vampirismo, Fortalecido…', 'Desmonta a defesa antes do golpe grande do trio.'], combina: ['Explosão', 'Finalização'], cuidado: 'Não quebra Escudo: contra quem só se protege com Escudo, vale pouco.' },
   'Reviver': { naLuta: ['Quando um aliado cai, a habilidade dele o levanta com parte da Vida.', 'Uma vez por luta — e cada lutador só volta uma vez.'], combina: ['Explosão', 'Pressão'], cuidado: 'Leva um tempo de Preparo: se for interrompido ou cair antes, o aliado fica no chão.' },
-  'Renascer': { naLuta: ['Quando cai, fica em brasas por um instante e volta sozinho.', 'Volta com parte da Vida, uma vez por luta.'], combina: ['Tanque', 'Virada'], cuidado: 'A Death Note impede: quem é executado não renasce.' },
+  'Renascer': { naLuta: ['Quando cai, fica em brasas por um instante e volta sozinho.', 'Volta com parte da Vida, uma vez por luta.'], combina: ['Tanque', 'Virada'], cuidado: 'Só volta se alguém do trio continuar de pé até o fim das brasas.' },
 };
 
 /** Quantos lutadores têm cada identidade. */
