@@ -96,12 +96,14 @@ export function melhorQueOsTrios(team: readonly string[]): number {
   return p;
 }
 /*
- * As estrelas do time, de 1 a 7 (pedido do dono, a "opção 2": parecidas em tamanho, com o topo mais raro). Pela
- * porcentagem de trios que ele supera; medido com os 10,6 milhões de trios (quanto vencem de trios sorteados):
- *   1★ até 15% (28%) · 2★ 15–35% (39%) · 3★ 35–55% (47%) · 4★ 55–72% (54%) · 5★ 72–86% (62%) · 6★ 86–95% (72%) · 7★ 95%+ (84%)
+ * As estrelas do time, de 1 a 7, pela porcentagem de trios que ele supera. Os cortes ficam onde a chance de vencer a
+ * jornada mais sobe (pedido do dono: "aqui deu um salto, aqui faz sentido mudar de estrela"), com mais trios embaixo e o
+ * 7★ só no topo 2%. Medido em 42.000 jornadas (rivais a 90% da Vida, Vida acima do topo 0,25):
+ *   1★ até 24% (vence 1,5%) · 2★ 24–38% (5%) · 3★ 38–56% (8%) · 4★ 56–75% (14,5%) · 5★ 75–89% (25,5%) · 6★ 89–98% (43%)
+ *   · 7★ 98%+ (59%)
  */
 export const ESTRELAS_MAXIMAS = 7;
-export const CORTES_DAS_ESTRELAS: readonly number[] = [15, 35, 55, 72, 86, 95];
+export const CORTES_DAS_ESTRELAS: readonly number[] = [24, 38, 56, 75, 89, 98];
 export const estrelasDaPorcentagem = (p: number) => 1 + CORTES_DAS_ESTRELAS.filter((c) => p >= c).length;
 export const estrelasDoTime = (t: readonly string[]) => estrelasDaPorcentagem(melhorQueOsTrios(t));
 /* de logit para pontos de vitória, perto de 50% (para a explicação) */

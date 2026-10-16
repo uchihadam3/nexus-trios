@@ -62,7 +62,11 @@ export const VIDA_PELO_TRIO=0;
  * Um trio cheio de combos pode ficar acima de todos os rivais possíveis: aí as faixas já estão no topo e não
  * sobem mais. Para ele, a Vida dos rivais cresce com o quanto ele passa do topo (força acima do percentil 97).
  */
-export const VIDA_ACIMA_DO_TOPO=0.55;
+/*
+ * 0,25 (era 0,55): com 0,55 o trio mais forte de todos vencia menos que um trio do top 5% (o 1% de cima caía para
+ * 18–27%). Com 0,25 a chance sobe até o topo e para perto de 60% (medido em 2.800 trios do top 7%).
+ */
+export const VIDA_ACIMA_DO_TOPO=0.25;
 /** Quantos trios rivais possíveis são sorteados para formar as faixas. */
 const AMOSTRA=900;
 /*
