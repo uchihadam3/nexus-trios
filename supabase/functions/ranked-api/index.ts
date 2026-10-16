@@ -4,6 +4,7 @@ import {generateCampaign} from '../../../src/engine/campaign.ts';
 import {BALANCE_VERSION,ENGINE_VERSION,EPOCA_DO_RANKING,replayRanked,rosterFingerprint,runDigest} from '../../../src/engine/ranked.ts';
 import {META_DAS_DICAS,ehDono} from '../../../src/lib/dicas-liberadas.ts';
 import {acaoPvp} from './pvp.ts';
+import {acaoCampanha} from './campanha.ts';
 
 declare const Deno:{env:{get:(name:string)=>string|undefined};serve:(handler:(request:Request)=>Response|Promise<Response>)=>unknown};
 declare const EdgeRuntime:{waitUntil:(p:Promise<unknown>)=>void}|undefined;
@@ -356,6 +357,7 @@ Deno.serve(async (request:Request)=>{
     }
     /* PvP online (./pvp.ts): desafio, times, escolha secreta, luta e rating */
     if(input.action==='pvp'){const r=await acaoPvp(admin,user.id,input);return json(r.body,r.status,origin);}
+    if(input.action==='campanha'){const r=await acaoCampanha(admin,user.id,input);return json(r.body,r.status,origin);}
     if(input.action==='conquistas')return json({conquistas:await minhasConquistas(user.id),de:characters.length},200,origin);
     if(input.action==='leaderboard'&&input.mode==='conquistas'){
       const pagina=typeof input.pagina==='number'&&Number.isInteger(input.pagina)&&input.pagina>=0&&input.pagina<10000?input.pagina:0;

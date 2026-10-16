@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode } from 'react';
+import { createContext, lazy, Suspense, useContext, useEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 import { ArrowDownAZ, ArrowLeft, Check, Clock, WifiOff, Globe2, Layers, SlidersHorizontal, Sparkles, Crown, Hourglass, Lock, LogOut, RotateCcw, Search, Shield, Swords, Trophy, Users, Wand2, X, Zap } from 'lucide-react';
 import { byId, characters } from '../data/characters';
@@ -17,6 +17,9 @@ import { corDoNome } from '../lib/comunidade';
 import { Avatar } from '../components/AvatarDaComunidade';
 import { FAMILIA_DA_IDENTIDADE, ICONE_DA_IDENTIDADE } from '../components/IdentityChips';
 import { familiaDaIdentidade, identidadesDe, ordemDasIdentidades, type Identidade } from '../presentation/identities';
+import { CartaoDaCampanha } from '../components/CartaoDaCampanha';
+import { MINIMO_DA_CAMPANHA } from '../engine/campanha';
+import { criarCampanhaDemo } from '../lib/campanha-demo';
 import '../presentation/pvp.css';
 import '../presentation/ui-fx.css';
 
@@ -37,13 +40,14 @@ const carregar = (): Guardado => {
   return { treino: g && typeof g.treino === 'object' && g.treino ? g.treino : {}, times: Array.isArray(g?.times) ? g!.times : undefined };
 };
 /** Os efeitos de interface desenhados em Python (tools/ui/generate_ui_fx.py): choque, holofote, raios, faíscas. */
-const Fx = ({ nome, cor, ms, className, laco = true }: { nome: string; cor: string; ms: number; className: string; laco?: boolean }) =>
+export const Fx = ({ nome, cor, ms, className, laco = true }: { nome: string; cor: string; ms: number; className: string; laco?: boolean }) =>
   <span aria-hidden className={`uifx ${laco ? 'uifx-laco' : ''} ${className}`} style={{ '--uifx-img': `url(/assets/ui/fx/${nome}.webp)`, '--uifx-cor': cor, '--uifx-dur': `${ms}ms` } as CSSProperties} />;
-const som = (nome: 'toque' | 'pronto' | 'ui-confirma' | 'ui-arena' | 'vitoria' | 'derrota') => battleAudio.sound(nome, PRIORIDADE.interface);
+export const som = (nome: 'toque' | 'pronto' | 'ui-confirma' | 'ui-arena' | 'vitoria' | 'derrota') => battleAudio.sound(nome, PRIORIDADE.interface);
 
 
 type Etapa =
   | { tipo: 'lobby' }
+  | { tipo: 'campanha' }
   | { tipo: 'montar'; npc: Npc }
   | { tipo: 'apresentar'; npc: Npc; partida: PartidaPvp }
   | { tipo: 'escolher'; npc: Npc; partida: PartidaPvp }
@@ -58,7 +62,9 @@ type Etapa =
  */
 const CHAVE_DO_TREINO = 'pvp-treino-atual';
 type Salvo = { tipo: Etapa['tipo']; npc: string; partida?: PartidaPvp; meu?: number; dele?: number; segundos?: number };
+const CHAVE_DA_CAMPANHA = 'pvp-na-campanha';
 const etapaSalva = (): Etapa => {
+  if (read(CHAVE_DA_CAMPANHA) === true) return { tipo: 'campanha' };
   const x = read(CHAVE_DO_TREINO) as Salvo | null, npc = x && NPCS.find((n) => n.id === x.npc);
   if (!x || !npc || x.tipo === 'lobby') return { tipo: 'lobby' };
   if (x.tipo === 'montar') return { tipo: 'montar', npc };
@@ -71,8 +77,9 @@ const etapaSalva = (): Etapa => {
   return { tipo: x.tipo, npc, partida: p } as Etapa;
 };
 const guardaEtapa = (e: Etapa, segundos?: number) => {
-  if (e.tipo === 'lobby') { save(CHAVE_DO_TREINO, null); return; }
-  const { npc, ...resto } = e as Exclude<Etapa, { tipo: 'lobby' }>;
+  save(CHAVE_DA_CAMPANHA, e.tipo === 'campanha' ? true : null);
+  if (e.tipo === 'lobby' || e.tipo === 'campanha') { save(CHAVE_DO_TREINO, null); return; }
+  const { npc, ...resto } = e as Exclude<Etapa, { tipo: 'lobby' } | { tipo: 'campanha' }>;
   const seg = segundos ?? (e.tipo === 'luta' ? e.retomar : undefined);
   save(CHAVE_DO_TREINO, { ...resto, npc: npc.id, ...(seg !== undefined ? { segundos: seg } : {}) });
 };
@@ -81,7 +88,7 @@ const guardaEtapa = (e: Etapa, segundos?: number) => {
  * Peças
  * ------------------------------------------------------------------------- */
 
-function Rosto({ id, tamanho = 54, apagado = false }: { id: string; tamanho?: number; apagado?: boolean }) {
+export function Rosto({ id, tamanho = 54, apagado = false }: { id: string; tamanho?: number; apagado?: boolean }) {
   const c = byId[id]!;
   return <span className={`pv-rosto ${apagado ? 'apagado' : ''}`} style={{ '--character': c.color, '--t': `${tamanho}px` } as CSSProperties} title={c.name}><Portrait character={c} /></span>;
 }
@@ -128,7 +135,7 @@ const oponenteDoNpc = (n: Npc): Oponente => ({ nome: n.nome, cor: n.cor, avatar:
  * 1. O lobby
  * ------------------------------------------------------------------------- */
 
-function Lobby({ colecao, guardado, onTreino, onJogar, online }: { colecao: string[]; guardado: Guardado; onTreino: (n: Npc) => void; onJogar: () => void; online?: Online | null }) {
+function Lobby({ colecao, guardado, onTreino, onJogar, online, onCampanha, temCampanha }: { colecao: string[]; guardado: Guardado; onTreino: (n: Npc) => void; onJogar: () => void; online?: Online | null; onCampanha: () => void; temCampanha: boolean }) {
   const falta = Math.max(0, MINIMO_DA_COLECAO - colecao.length);
   return <section className="pv-lobby">
     <header className="pv-topo">
@@ -143,6 +150,10 @@ function Lobby({ colecao, guardado, onTreino, onJogar, online }: { colecao: stri
         <span className="pv-trava-barra"><i style={{ width: `${(100 * colecao.length) / MINIMO_DA_COLECAO}%` }} /></span><em>{colecao.length}/{MINIMO_DA_COLECAO}</em></div>
       <button className="primary" onClick={onJogar}>Jogar</button>
     </div>}
+
+    {/* a campanha contra os 40 rivais (src/screens/CaminhoDoNexus.tsx): mexe no rating, então pede a conta */}
+    <CartaoDaCampanha podeJogar={temCampanha && colecao.length >= MINIMO_DA_CAMPANHA} onAbrir={onCampanha}
+      motivo={!temCampanha ? 'Entre na sua conta: a campanha mexe no seu rating.' : `A campanha pede ${MINIMO_DA_CAMPANHA} personagens na coleção (você tem ${colecao.length}).`} />
 
     {online ? <CartaoOnline online={online} /> : <div className="pv-modo online">
       <span className="pv-modo-icone"><Users size={24} /></span>
@@ -297,7 +308,11 @@ function PainelDeFiltros({ colecao, filtro, total, onFiltro, onFechar }: { colec
  * 2. Montar os 3 times
  * ------------------------------------------------------------------------- */
 
-function Montar({ rival, colecao, inicial, onPronto, onVoltar, onDetails, prazo, melhores = false }: { rival: Oponente; colecao: string[]; inicial?: string[][]; onPronto: (t: Times) => void; onVoltar: () => void; onDetails: (id: string) => void; prazo?: ReactNode;
+export function Montar({ rival, colecao, inicial, onPronto, onVoltar, onDetails, prazo, melhores = false, aviso, ocupado = false }: { rival: Oponente; colecao: string[]; inicial?: string[][]; onPronto: (t: Times) => void; onVoltar: () => void; onDetails: (id: string) => void; prazo?: ReactNode;
+  /** Um aviso abaixo do título (a campanha mostra quem está descansando). */
+  aviso?: ReactNode;
+  /** Esperando o servidor depois do PRONTO. */
+  ocupado?: boolean;
   /** Só na conta do dono (pedido dele): um botão que monta os times mais fortes possíveis com a coleção. */
   melhores?: boolean }) {
   const valido = (t?: string[][]) => !!t && t.length === 3 && t.every((x) => x.every((id) => colecao.includes(id)));
@@ -333,6 +348,7 @@ function Montar({ rival, colecao, inicial, onPronto, onVoltar, onDetails, prazo,
       {rival.avatar(44)}
     </header>
     {prazo}
+    {aviso}
     {/* os 3 times e o PRONTO ficam presos no topo enquanto o álbum rola (pedido do jogador: ver o time enquanto troca) */}
     <div className="pv-fixos">
     <div className="pv-slots">
@@ -346,7 +362,7 @@ function Montar({ rival, colecao, inicial, onPronto, onVoltar, onDetails, prazo,
     </div>
     <div className="pv-pronto-topo">
       {problema && <small className="pv-problema">{problema}</small>}
-      <button className="primary pv-pronto" disabled={!cheios || !!problema} onClick={() => { som('pronto'); onPronto(times as Times); }}><Check size={20} />{cheios ? 'PRONTO' : `Faltam ${9 - times.flat().length}`}</button>
+      <button className="primary pv-pronto" disabled={!cheios || !!problema || ocupado} onClick={() => { som('pronto'); onPronto(times as Times); }}><Check size={20} />{ocupado ? 'Entrando…' : cheios ? 'PRONTO' : `Faltam ${9 - times.flat().length}`}</button>
     </div>
     </div>
     <div className="pv-ferramentas">
@@ -380,7 +396,7 @@ function Montar({ rival, colecao, inicial, onPronto, onVoltar, onDetails, prazo,
  * 3–8. A partida
  * ------------------------------------------------------------------------- */
 
-function Apresentar({ rival, partida, onComecar }: { rival: Oponente; partida: Pick<PartidaPvp, 'meus' | 'deles'>; onComecar: () => void }) {
+export function Apresentar({ rival, partida, onComecar }: { rival: Oponente; partida: Pick<PartidaPvp, 'meus' | 'deles'>; onComecar: () => void }) {
   return <section className="pv-apresentar">
     <div className="pv-frente">
       <div className="pv-lado eu"><span className="pv-nome-lado">VOCÊ</span>{partida.meus.map((t, i) => <CartaoDoTime key={i} time={t} i={i} lado="eu" compacto />)}</div>
@@ -392,7 +408,7 @@ function Apresentar({ rival, partida, onComecar }: { rival: Oponente; partida: P
   </section>;
 }
 
-function Escolher({ rival, partida, onEscolher, jaEscolhido, prazo }: { rival: Oponente; partida: PartidaPvp; onEscolher: (i: number) => void; jaEscolhido?: number | null; prazo?: ReactNode }) {
+export function Escolher({ rival, partida, onEscolher, jaEscolhido, prazo }: { rival: Oponente; partida: PartidaPvp; onEscolher: (i: number) => void; jaEscolhido?: number | null; prazo?: ReactNode }) {
   const livres = timesLivres(partida, 'eu'), v = vitoriasDosTimes(partida);
   const [sel, setSel] = useState<number | null>(jaEscolhido ?? (livres.length === 1 ? livres[0]! : null));
   const [pensando, setPensando] = useState(jaEscolhido !== undefined && jaEscolhido !== null);
@@ -412,7 +428,7 @@ function Escolher({ rival, partida, onEscolher, jaEscolhido, prazo }: { rival: O
   </section>;
 }
 
-function Vs({ rival, partida, meu, dele, onLutar, controle }: { rival: Oponente; partida: Pick<PartidaPvp, 'meus' | 'deles'>; meu: number; dele: number; onLutar: () => void; controle?: ReactNode }) {
+export function Vs({ rival, partida, meu, dele, onLutar, controle }: { rival: Oponente; partida: Pick<PartidaPvp, 'meus' | 'deles'>; meu: number; dele: number; onLutar: () => void; controle?: ReactNode }) {
   const [conta, setConta] = useState(3);
   useEffect(() => { som('ui-arena'); }, []);
   useEffect(() => { if (controle) return; if (conta <= 0) { onLutar(); return; } const t = window.setTimeout(() => { setConta(conta - 1); som('toque'); }, 1000); return () => clearTimeout(t); }, [conta, onLutar, controle]);
@@ -427,7 +443,7 @@ function Vs({ rival, partida, meu, dele, onLutar, controle }: { rival: Oponente;
   </section>;
 }
 
-function ResultadoDaRodada({ rival, partida, onSeguir, final = false }: { rival: Oponente; partida: PartidaPvp; onSeguir: () => void; final?: boolean }) {
+export function ResultadoDaRodada({ rival, partida, onSeguir, final = false }: { rival: Oponente; partida: PartidaPvp; onSeguir: () => void; final?: boolean }) {
   const r = partida.rodadas.at(-1)!, ganhei = r.vencedor === 'eu', time = ganhei ? partida.meus[r.meu]! : partida.deles[r.dele]!;
   useEffect(() => { som(ganhei ? 'vitoria' : 'derrota'); }, [ganhei]);
   return <section className={`pv-resultado ${ganhei ? 'ganhou' : 'perdeu'}`} style={{ '--npc': rival.cor } as CSSProperties}>
@@ -519,7 +535,7 @@ function CartaoOnline({ online }: { online: Online }) {
 }
 
 /** Uma confirmação simples por cima da tela (sair da partida). */
-function Confirmar({ titulo, texto, sim, onSim, onNao }: { titulo: string; texto: string; sim: string; onSim: () => void; onNao: () => void }) {
+export function Confirmar({ titulo, texto, sim, onSim, onNao }: { titulo: string; texto: string; sim: string; onSim: () => void; onNao: () => void }) {
   return createPortal(<div className="pv-confirmar" role="alertdialog" aria-label={titulo}>
     <div><b>{titulo}</b><p>{texto}</p><span><button className="secondary" onClick={onNao}>Continuar</button><button className="primary pv-perigo" onClick={onSim}><LogOut size={16} />{sim}</button></span></div>
   </div>, document.body);
@@ -726,6 +742,10 @@ function PartidaOnline({ online, colecaoLocal, settings, onSettings, onDetails, 
  * A tela
  * ------------------------------------------------------------------------- */
 
+const CaminhoDoNexus = lazy(() => import('./CaminhoDoNexus'));
+/* A campanha sem servidor (VITE_CAMPANHA_DEMO=true): só para testar as telas; nunca no jogo publicado. */
+const CAMPANHA_DEMO = import.meta.env.VITE_CAMPANHA_DEMO === 'true';
+
 export function PvpScreen(props: Parameters<typeof TelaDoPvp>[0]) {
   return <DonoDoPvp.Provider value={props.dono === true}><TelaDoPvp {...props} /></DonoDoPvp.Provider>;
 }
@@ -744,6 +764,8 @@ function TelaDoPvp({ colecao, settings, onSettings, onDetails, onJogar, onLutand
   useEffect(() => () => onLutando(false), [onLutando]);
   const [guardado, setGuardado] = useState(carregar);
   const desistir = useRef(false);
+  const colecaoAtual = useRef(colecao); colecaoAtual.current = colecao;
+  const servicoDaCampanha = useMemo(() => online?.servico.campanha ?? (CAMPANHA_DEMO ? criarCampanhaDemo(() => colecaoAtual.current) : null), [online?.servico]);
   const [confirmar, setConfirmar] = useState<'luta' | 'partida' | null>(null);
   const guardar = (g: Guardado) => { setGuardado(g); save('pvp', g); };
 
@@ -780,7 +802,10 @@ function TelaDoPvp({ colecao, settings, onSettings, onDetails, onJogar, onLutand
       onSim={() => { setConfirmar(null); desistirDaPartida(etapa.npc, etapa.partida); }} />);
 
   if (online?.partida) return <PartidaOnline key={online.partida} online={online} colecaoLocal={colecao} settings={settings} onSettings={onSettings} onDetails={onDetails} onLutando={onLutando} dono={dono} />;
-  if (etapa.tipo === 'lobby') return <Lobby colecao={colecao} guardado={guardado} online={online} onTreino={(npc) => { som('ui-arena'); setEtapa({ tipo: 'montar', npc }); }} onJogar={onJogar} />;
+  if (etapa.tipo === 'campanha' && servicoDaCampanha) return <Suspense fallback={<p className="cm-carregando-tela">Abrindo o Caminho do Nexus…</p>}>
+    <CaminhoDoNexus servico={servicoDaCampanha} settings={settings} onSettings={onSettings} onDetails={onDetails} onLutando={onLutando} dono={dono} onVoltar={() => setEtapa({ tipo: 'lobby' })} /></Suspense>;
+  if (etapa.tipo === 'lobby' || etapa.tipo === 'campanha') return <Lobby colecao={colecao} guardado={guardado} online={online} onTreino={(npc) => { som('ui-arena'); setEtapa({ tipo: 'montar', npc }); }} onJogar={onJogar}
+    temCampanha={!!servicoDaCampanha} onCampanha={() => { som('ui-arena'); setEtapa({ tipo: 'campanha' }); }} />;
   if (etapa.tipo === 'montar') return <Montar melhores={dono} rival={oponenteDoNpc(etapa.npc)} colecao={colecao} inicial={guardado.times} onVoltar={() => setEtapa({ tipo: 'lobby' })} onDetails={onDetails} onPronto={(t) => comecar(etapa.npc, t)} />;
   if (etapa.tipo === 'apresentar') return <Apresentar rival={oponenteDoNpc(etapa.npc)} partida={etapa.partida} onComecar={() => setEtapa({ tipo: 'escolher', npc: etapa.npc, partida: etapa.partida })} />;
   if (etapa.tipo === 'escolher') return <><Escolher rival={oponenteDoNpc(etapa.npc)} partida={etapa.partida} onEscolher={(meu) => {

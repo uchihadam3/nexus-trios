@@ -74,8 +74,21 @@ export const sementeDaRodada = (seedDaPartida: number, rodada: number) => ((seed
 
 /** A chance esperada de A vencer B pelo rating. */
 export const esperado = (a: number, b: number) => 1 / (1 + 10 ** ((b - a) / 400));
+/**
+ * Quem está 400 ou mais acima do rival não ganha nada vencendo (pedido do jogador: "você nem ganha mais pontos se
+ * vencer uma pessoa mais baixa"). Vale contra pessoas e contra os rivais da campanha; quem perde perde o de sempre.
+ */
+export const DIFERENCA_SEM_GANHO = 400;
 /** Quanto o rating de A muda: venceu (1) ou perdeu (0) contra B. */
-export const variacaoDoElo = (a: number, b: number, venceu: boolean, k = K_DO_ELO) => Math.round(k * ((venceu ? 1 : 0) - esperado(a, b)));
+export const variacaoDoElo = (a: number, b: number, venceu: boolean, k = K_DO_ELO) =>
+  (venceu && a - b >= DIFERENCA_SEM_GANHO ? 0 : Math.round(k * ((venceu ? 1 : 0) - esperado(a, b))));
+/*
+ * Contra os rivais da campanha (pedido do jogador): sobe um pouco menos e cai um pouco mais que contra uma pessoa,
+ * 80% do ganho e 120% da perda do Elo.
+ */
+export const GANHO_CONTRA_NPC = 0.8, PERDA_CONTRA_NPC = 1.2;
+export const variacaoContraNpc = (a: number, b: number, venceu: boolean) =>
+  (venceu && a - b >= DIFERENCA_SEM_GANHO ? 0 : Math.round(K_DO_ELO * ((venceu ? 1 : 0) - esperado(a, b)) * (venceu ? GANHO_CONTRA_NPC : PERDA_CONTRA_NPC)));
 
 /* ---------------------------------------------------------------------------
  * Os NPCs de treino
@@ -104,11 +117,11 @@ export function colecaoDoNpc(npc: Pick<Npc, 'colecao'>): string[] {
 }
 
 /* um sorteio com semente, para cada partida ser diferente e ainda assim repetível nos testes */
-function sorteio(seed: number) {
+export function sorteio(seed: number) {
   let s = seed >>> 0 || 1;
   return () => { s ^= s << 13; s >>>= 0; s ^= s >>> 17; s ^= s << 5; s >>>= 0; return s / 4294967296; };
 }
-const gauss = (r: () => number) => Math.sqrt(-2 * Math.log(r() || 1e-9)) * Math.cos(2 * Math.PI * r());
+export const gauss = (r: () => number) => Math.sqrt(-2 * Math.log(r() || 1e-9)) * Math.cos(2 * Math.PI * r());
 
 /* Como cada nível monta e escolhe: quantos trios ele compara, quanto ele "erra" a conta, quanto ele melhora o trio. */
 const JEITO: Record<NivelNpc, { amostras: number; erro: number; melhora: number; escolheAoAcaso: number }> = {
@@ -136,7 +149,8 @@ export function sugerirTimes(colecao: readonly string[], seed: number): Times | 
   return montarTimes([...colecao], JEITO[4], { melhores: 400, variacao: 3 }, seed, notaDoTrio);
 }
 
-function montarTimes(colecao: string[], jeito: (typeof JEITO)[NivelNpc], lista: { melhores: number; variacao: number } | undefined, seed: number, objetivo: (t: readonly string[]) => number): Times {
+export interface JeitoDeMontar { amostras: number; erro: number; melhora: number }
+export function montarTimes(colecao: string[], jeito: JeitoDeMontar, lista: { melhores: number; variacao: number } | undefined, seed: number, objetivo: (t: readonly string[]) => number): Times {
   const r = sorteio(seed ^ 0x5bd1e995);
   let livres = [...colecao];
   const times: string[][] = [];

@@ -23,7 +23,28 @@ export interface VistaPvp {
 export interface RespostaPvp { partida: VistaPvp | null; colecao: string[] }
 export interface RankingPvp { ranking: { posicao: number; id: string; nome: string; rating: number; vitorias: number; derrotas: number }[]; eu: { rating: number; vitorias: number; derrotas: number }; colecao: number }
 
+/* O Caminho do Nexus (a campanha contra os 40 rivais, src/engine/campanha.ts): o juiz é o servidor (ação "campanha"). */
+export interface ProgressoDaCampanha {
+  estrelas: Record<string, number>; placar: Record<string, { v: number; d: number }>;
+  /** Quem descansa (id → partidas que faltam): os seus e os de cada rival. */
+  descanso: Record<string, number>; descanso_rivais: Record<string, Record<string, number>>; partidas: number;
+}
+export interface PartidaDaCampanha {
+  id: string; rival: string; estado: 'jogando' | 'terminada'; versao: string; meus: string[][]; deles: string[][];
+  rodadas: { meu: number; dele: number; seed: number; vencedor: 'eu' | 'rival'; rendida?: boolean }[];
+  vencedor: 'eu' | 'rival' | null; motivo: string | null; estrelas: number | null; ratingAntes: number | null; delta: number | null; rating?: number;
+}
+export interface RespostaDaCampanha { progresso: ProgressoDaCampanha; rating: { rating: number; vitorias: number; derrotas: number }; colecao: string[]; partida: PartidaDaCampanha | null }
+export interface ServicoDaCampanha {
+  estado: () => Promise<RespostaDaCampanha>;
+  comecar: (rival: string, times: string[][], versao: string) => Promise<RespostaDaCampanha>;
+  escolher: (partida: string, n: number, time: number) => Promise<RespostaDaCampanha>;
+  render: (partida: string, n: number) => Promise<RespostaDaCampanha>;
+  abandonar: (partida: string) => Promise<RespostaDaCampanha>;
+}
+
 export interface ServicoPvp {
+  campanha: ServicoDaCampanha;
   /** A partida (a pedida, ou a aberta de agora). */
   consultar: (partida?: string | null) => Promise<RespostaPvp>;
   desafiar: (alvo: string) => Promise<RespostaPvp>;
@@ -44,7 +65,15 @@ export interface ServicoPvp {
 
 export function criarPvpOnline(chamar: <T>(acao: string, corpo: Record<string, unknown>) => Promise<T>, carregar: () => Promise<SupabaseClient | null>): ServicoPvp {
   const pvp = <T,>(op: string, corpo: Record<string, unknown> = {}) => chamar<T>('pvp', { op, ...corpo });
+  const campanha = (op: string, corpo: Record<string, unknown> = {}) => chamar<RespostaDaCampanha>('campanha', { op, ...corpo });
   return {
+    campanha: {
+      estado: () => campanha('estado'),
+      comecar: (rival, times, versao) => campanha('comecar', { rival, times, versao }),
+      escolher: (partida, n, time) => campanha('escolher', { partida, n, time }),
+      render: (partida, n) => campanha('render', { partida, n }),
+      abandonar: (partida) => campanha('abandonar', { partida }),
+    },
     consultar: (partida) => pvp('estado', partida ? { partida } : {}),
     desafiar: (alvo) => pvp('desafiar', { alvo }),
     responder: (partida, aceitar) => pvp('responder', { partida, aceitar }),

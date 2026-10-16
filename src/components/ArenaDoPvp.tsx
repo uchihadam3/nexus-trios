@@ -5,7 +5,7 @@ import { VELOCIDADE_DO_PVP } from '../engine/pvp';
 import { advanceDirection, createDirection, type Beat, type Direction } from '../presentation/director';
 import { PRESENTATION as P } from '../presentation/config';
 import { estadoDosSons, somDoCue, sonsDoQuadro } from '../presentation/sons-da-luta';
-import { battleAudio } from '../lib/audio';
+import { battleAudio, type Faixa } from '../lib/audio';
 import { PRIORIDADE } from '../audio/cues';
 import type { Settings } from '../lib/storage';
 import { BattleScreen } from '../screens/BattleScreen';
@@ -21,7 +21,7 @@ import { espelhar } from '../presentation/espelho';
  */
 const RECUPERA_POR_QUADRO = 60, MAXIMO_DE_ATRASO = 20 * 60;
 
-export function ArenaDoPvp({ meu, dele, seed, rodada, rival, settings, onSettings, podePausar, onFim, onDesistir, espelhado = false, atrasoInicial = 0, comecaPausado = false, onTempo }: {
+export function ArenaDoPvp({ meu, dele, seed, rodada, rival, settings, onSettings, podePausar, onFim, onDesistir, espelhado = false, atrasoInicial = 0, comecaPausado = false, onTempo, escala = 1, faixa = 'arena' }: {
   meu: string[]; dele: string[]; seed: number; rodada: number; rival: string; settings: Settings; onSettings: (s: Settings) => void;
   podePausar: boolean; onFim: (vencedor: Side) => void; onDesistir: () => void;
   /** Online, para quem foi desafiado: a luta é a do desafiante (ele embaixo), desenhada do outro lado. */
@@ -32,8 +32,12 @@ export function ArenaDoPvp({ meu, dele, seed, rodada, rival, settings, onSetting
   comecaPausado?: boolean;
   /** Os segundos de luta já mostrados, mais ou menos a cada segundo (para retomar no mesmo ponto). */
   onTempo?: (segundos: number) => void;
+  /** A Vida a mais no lado do rival (a Aura do Chefe da campanha). */
+  escala?: number;
+  /** A música da luta (a campanha usa outras nos chefes). */
+  faixa?: Faixa;
 }) {
-  const inicial = useMemo(() => (espelhado ? createBattle(dele, meu, seed) : createBattle(meu, dele, seed)), [meu, dele, seed, espelhado]);
+  const inicial = useMemo(() => (espelhado ? createBattle(dele, meu, seed) : createBattle(meu, dele, seed, escala)), [meu, dele, seed, espelhado, escala]);
   const direcao = useRef<Direction | null>(null);
   const sons = useMemo(() => estadoDosSons(), []);
   const [tela, setTela] = useState<{ battle: Battle; beat: Beat | null }>({ battle: inicial, beat: null });
@@ -47,9 +51,9 @@ export function ArenaDoPvp({ meu, dele, seed, rodada, rival, settings, onSetting
 
   // a música da Arena enquanto a luta corre
   useEffect(() => {
-    battleAudio.setBattle(!pausado, `pvp-${seed}`, 'arena');
+    battleAudio.setBattle(!pausado, `pvp-${seed}`, faixa);
     return () => battleAudio.setBattle(false);
-  }, [pausado, seed]);
+  }, [pausado, seed, faixa]);
 
   const mostra = (d: Direction) => setTela(espelhado ? { battle: espelhar(d.visible), beat: d.active ? espelhar({ ...d.active }) : null } : { battle: d.visible, beat: d.active ? { ...d.active } : null });
   /** A direção da luta; quem chega atrasado (ou volta ao treino) alcança o ponto de uma vez, sem som. */
