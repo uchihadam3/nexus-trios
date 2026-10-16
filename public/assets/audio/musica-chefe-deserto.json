@@ -1,0 +1,55 @@
+{
+ "bpm": 130,
+ "compassos": 64,
+ "segundos": 118.154,
+ "secoes": [
+  {
+   "nome": "Chegada",
+   "inicio": 0.0
+  },
+  {
+   "nome": "Tema",
+   "inicio": 14.769
+  },
+  {
+   "nome": "Ponte",
+   "inicio": 44.308
+  },
+  {
+   "nome": "Respiro",
+   "inicio": 73.846
+  },
+  {
+   "nome": "Refrão",
+   "inicio": 88.615
+  }
+ ],
+ "estilo": "caminho do nexus · chefe-deserto (v8)",
+ "laco": {
+  "inicio": 14.769,
+  "fim": 118.154
+ },
+ "camadas": {
+  "musica-chefe-deserto-base": {
+   "arquivo": "musica-chefe-deserto-base.ogg",
+   "mp3": "musica-chefe-deserto-base.mp3",
+   "segundos": 118.154,
+   "bytes": 1189795,
+   "rmsDb": -21.3
+  },
+  "musica-chefe-deserto-pulso": {
+   "arquivo": "musica-chefe-deserto-pulso.ogg",
+   "mp3": "musica-chefe-deserto-pulso.mp3",
+   "segundos": 118.154,
+   "bytes": 818392,
+   "rmsDb": -24.8
+  },
+  "musica-chefe-deserto-tema": {
+   "arquivo": "musica-chefe-deserto-tema.ogg",
+   "mp3": "musica-chefe-deserto-tema.mp3",
+   "segundos": 118.154,
+   "bytes": 1306047,
+   "rmsDb": -23.3
+  }
+ }
+}

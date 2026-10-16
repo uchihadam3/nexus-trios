@@ -1,0 +1,55 @@
+{
+ "bpm": 138,
+ "compassos": 64,
+ "segundos": 111.304,
+ "secoes": [
+  {
+   "nome": "Chegada",
+   "inicio": 0.0
+  },
+  {
+   "nome": "Tema",
+   "inicio": 13.913
+  },
+  {
+   "nome": "Ponte",
+   "inicio": 41.739
+  },
+  {
+   "nome": "Respiro",
+   "inicio": 69.565
+  },
+  {
+   "nome": "Refrão",
+   "inicio": 83.478
+  }
+ ],
+ "estilo": "caminho do nexus · chefe-floresta (v8)",
+ "laco": {
+  "inicio": 13.913,
+  "fim": 111.304
+ },
+ "camadas": {
+  "musica-chefe-floresta-base": {
+   "arquivo": "musica-chefe-floresta-base.ogg",
+   "mp3": "musica-chefe-floresta-base.mp3",
+   "segundos": 111.304,
+   "bytes": 1086878,
+   "rmsDb": -21.8
+  },
+  "musica-chefe-floresta-pulso": {
+   "arquivo": "musica-chefe-floresta-pulso.ogg",
+   "mp3": "musica-chefe-floresta-pulso.mp3",
+   "segundos": 111.304,
+   "bytes": 724289,
+   "rmsDb": -25.3
+  },
+  "musica-chefe-floresta-tema": {
+   "arquivo": "musica-chefe-floresta-tema.ogg",
+   "mp3": "musica-chefe-floresta-tema.mp3",
+   "segundos": 111.304,
+   "bytes": 1221812,
+   "rmsDb": -23.8
+  }
+ }
+}

@@ -1,0 +1,55 @@
+{
+ "bpm": 168,
+ "compassos": 64,
+ "segundos": 91.429,
+ "secoes": [
+  {
+   "nome": "Chegada",
+   "inicio": 0.0
+  },
+  {
+   "nome": "Tema",
+   "inicio": 11.429
+  },
+  {
+   "nome": "Ponte",
+   "inicio": 34.286
+  },
+  {
+   "nome": "Respiro",
+   "inicio": 57.143
+  },
+  {
+   "nome": "Refrão",
+   "inicio": 68.571
+  }
+ ],
+ "estilo": "caminho do nexus · chefe-ceu (v8)",
+ "laco": {
+  "inicio": 11.429,
+  "fim": 91.429
+ },
+ "camadas": {
+  "musica-chefe-ceu-base": {
+   "arquivo": "musica-chefe-ceu-base.ogg",
+   "mp3": "musica-chefe-ceu-base.mp3",
+   "segundos": 91.429,
+   "bytes": 912969,
+   "rmsDb": -21.6
+  },
+  "musica-chefe-ceu-pulso": {
+   "arquivo": "musica-chefe-ceu-pulso.ogg",
+   "mp3": "musica-chefe-ceu-pulso.mp3",
+   "segundos": 91.429,
+   "bytes": 612836,
+   "rmsDb": -25.1
+  },
+  "musica-chefe-ceu-tema": {
+   "arquivo": "musica-chefe-ceu-tema.ogg",
+   "mp3": "musica-chefe-ceu-tema.mp3",
+   "segundos": 91.429,
+   "bytes": 979562,
+   "rmsDb": -23.6
+  }
+ }
+}

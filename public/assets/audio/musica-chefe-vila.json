@@ -1,0 +1,55 @@
+{
+ "bpm": 156,
+ "compassos": 64,
+ "segundos": 98.462,
+ "secoes": [
+  {
+   "nome": "Chegada",
+   "inicio": 0.0
+  },
+  {
+   "nome": "Tema",
+   "inicio": 12.308
+  },
+  {
+   "nome": "Ponte",
+   "inicio": 36.923
+  },
+  {
+   "nome": "Respiro",
+   "inicio": 61.538
+  },
+  {
+   "nome": "Refrão",
+   "inicio": 73.846
+  }
+ ],
+ "estilo": "caminho do nexus · chefe-vila (v8)",
+ "laco": {
+  "inicio": 12.308,
+  "fim": 98.462
+ },
+ "camadas": {
+  "musica-chefe-vila-base": {
+   "arquivo": "musica-chefe-vila-base.ogg",
+   "mp3": "musica-chefe-vila-base.mp3",
+   "segundos": 98.462,
+   "bytes": 983713,
+   "rmsDb": -20.6
+  },
+  "musica-chefe-vila-pulso": {
+   "arquivo": "musica-chefe-vila-pulso.ogg",
+   "mp3": "musica-chefe-vila-pulso.mp3",
+   "segundos": 98.462,
+   "bytes": 672827,
+   "rmsDb": -24.1
+  },
+  "musica-chefe-vila-tema": {
+   "arquivo": "musica-chefe-vila-tema.ogg",
+   "mp3": "musica-chefe-vila-tema.mp3",
+   "segundos": 98.462,
+   "bytes": 1110212,
+   "rmsDb": -22.6
+  }
+ }
+}

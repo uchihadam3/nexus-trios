@@ -1,0 +1,55 @@
+{
+ "bpm": 184,
+ "compassos": 64,
+ "segundos": 83.478,
+ "secoes": [
+  {
+   "nome": "Chegada",
+   "inicio": 0.0
+  },
+  {
+   "nome": "Tema",
+   "inicio": 10.435
+  },
+  {
+   "nome": "Ponte",
+   "inicio": 31.304
+  },
+  {
+   "nome": "Respiro",
+   "inicio": 52.174
+  },
+  {
+   "nome": "Refrão",
+   "inicio": 62.609
+  }
+ ],
+ "estilo": "caminho do nexus · chefe-vulcao (v8)",
+ "laco": {
+  "inicio": 10.435,
+  "fim": 83.478
+ },
+ "camadas": {
+  "musica-chefe-vulcao-base": {
+   "arquivo": "musica-chefe-vulcao-base.ogg",
+   "mp3": "musica-chefe-vulcao-base.mp3",
+   "segundos": 83.478,
+   "bytes": 805867,
+   "rmsDb": -21.1
+  },
+  "musica-chefe-vulcao-pulso": {
+   "arquivo": "musica-chefe-vulcao-pulso.ogg",
+   "mp3": "musica-chefe-vulcao-pulso.mp3",
+   "segundos": 83.478,
+   "bytes": 567266,
+   "rmsDb": -24.6
+  },
+  "musica-chefe-vulcao-tema": {
+   "arquivo": "musica-chefe-vulcao-tema.ogg",
+   "mp3": "musica-chefe-vulcao-tema.mp3",
+   "segundos": 83.478,
+   "bytes": 907286,
+   "rmsDb": -23.1
+  }
+ }
+}

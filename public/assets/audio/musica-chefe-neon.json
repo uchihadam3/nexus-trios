@@ -1,0 +1,55 @@
+{
+ "bpm": 146,
+ "compassos": 64,
+ "segundos": 105.205,
+ "secoes": [
+  {
+   "nome": "Chegada",
+   "inicio": 0.0
+  },
+  {
+   "nome": "Tema",
+   "inicio": 13.151
+  },
+  {
+   "nome": "Ponte",
+   "inicio": 39.452
+  },
+  {
+   "nome": "Respiro",
+   "inicio": 65.753
+  },
+  {
+   "nome": "Refrão",
+   "inicio": 78.904
+  }
+ ],
+ "estilo": "caminho do nexus · chefe-neon (v8)",
+ "laco": {
+  "inicio": 13.151,
+  "fim": 105.205
+ },
+ "camadas": {
+  "musica-chefe-neon-base": {
+   "arquivo": "musica-chefe-neon-base.ogg",
+   "mp3": "musica-chefe-neon-base.mp3",
+   "segundos": 105.205,
+   "bytes": 1043857,
+   "rmsDb": -20.9
+  },
+  "musica-chefe-neon-pulso": {
+   "arquivo": "musica-chefe-neon-pulso.ogg",
+   "mp3": "musica-chefe-neon-pulso.mp3",
+   "segundos": 105.205,
+   "bytes": 695408,
+   "rmsDb": -24.4
+  },
+  "musica-chefe-neon-tema": {
+   "arquivo": "musica-chefe-neon-tema.ogg",
+   "mp3": "musica-chefe-neon-tema.mp3",
+   "segundos": 105.205,
+   "bytes": 1177972,
+   "rmsDb": -22.9
+  }
+ }
+}

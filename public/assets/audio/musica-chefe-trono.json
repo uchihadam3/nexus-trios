@@ -1,0 +1,55 @@
+{
+ "bpm": 184,
+ "compassos": 64,
+ "segundos": 83.478,
+ "secoes": [
+  {
+   "nome": "Chegada",
+   "inicio": 0.0
+  },
+  {
+   "nome": "Tema",
+   "inicio": 10.435
+  },
+  {
+   "nome": "Ponte",
+   "inicio": 31.304
+  },
+  {
+   "nome": "Respiro",
+   "inicio": 52.174
+  },
+  {
+   "nome": "Refrão",
+   "inicio": 62.609
+  }
+ ],
+ "estilo": "caminho do nexus · chefe-trono (v8)",
+ "laco": {
+  "inicio": 10.435,
+  "fim": 83.478
+ },
+ "camadas": {
+  "musica-chefe-trono-base": {
+   "arquivo": "musica-chefe-trono-base.ogg",
+   "mp3": "musica-chefe-trono-base.mp3",
+   "segundos": 83.478,
+   "bytes": 805985,
+   "rmsDb": -20.9
+  },
+  "musica-chefe-trono-pulso": {
+   "arquivo": "musica-chefe-trono-pulso.ogg",
+   "mp3": "musica-chefe-trono-pulso.mp3",
+   "segundos": 83.478,
+   "bytes": 560225,
+   "rmsDb": -24.4
+  },
+  "musica-chefe-trono-tema": {
+   "arquivo": "musica-chefe-trono-tema.ogg",
+   "mp3": "musica-chefe-trono-tema.mp3",
+   "segundos": 83.478,
+   "bytes": 910784,
+   "rmsDb": -22.9
+  }
+ }
+}

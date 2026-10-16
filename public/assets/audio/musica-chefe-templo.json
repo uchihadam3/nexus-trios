@@ -1,0 +1,55 @@
+{
+ "bpm": 126,
+ "compassos": 64,
+ "segundos": 121.905,
+ "secoes": [
+  {
+   "nome": "Chegada",
+   "inicio": 0.0
+  },
+  {
+   "nome": "Tema",
+   "inicio": 15.238
+  },
+  {
+   "nome": "Ponte",
+   "inicio": 45.714
+  },
+  {
+   "nome": "Respiro",
+   "inicio": 76.19
+  },
+  {
+   "nome": "Refrão",
+   "inicio": 91.429
+  }
+ ],
+ "estilo": "caminho do nexus · chefe-templo (v8)",
+ "laco": {
+  "inicio": 15.238,
+  "fim": 121.905
+ },
+ "camadas": {
+  "musica-chefe-templo-base": {
+   "arquivo": "musica-chefe-templo-base.ogg",
+   "mp3": "musica-chefe-templo-base.mp3",
+   "segundos": 121.905,
+   "bytes": 1213516,
+   "rmsDb": -21.4
+  },
+  "musica-chefe-templo-pulso": {
+   "arquivo": "musica-chefe-templo-pulso.ogg",
+   "mp3": "musica-chefe-templo-pulso.mp3",
+   "segundos": 121.905,
+   "bytes": 793294,
+   "rmsDb": -24.9
+  },
+  "musica-chefe-templo-tema": {
+   "arquivo": "musica-chefe-templo-tema.ogg",
+   "mp3": "musica-chefe-templo-tema.mp3",
+   "segundos": 121.905,
+   "bytes": 1356706,
+   "rmsDb": -23.4
+  }
+ }
+}
