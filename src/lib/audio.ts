@@ -8,6 +8,7 @@ import { profileFor } from '../presentation/vfxProfiles';
 import { ESFERA_QUE_CRESCE } from '../presentation/esfera-que-cresce';
 import { EFEITO_DA_UNICA } from '../presentation/unicas-efeitos';
 import { preparoDaUnica } from '../presentation/preparo-da-unica';
+import { LUTA_ESTRELA,LUTA_ONZE } from '../engine/segredos';
 import { FAMILIA_DA_INVOCACAO } from '../presentation/vfx-atribuicao';
 import { SOM_DA_ESPERA,SOM_DA_VOLTA } from '../presentation/renascer-proprio';
 
@@ -47,7 +48,7 @@ export function posicaoNoLaco(inicio:number,t:number,duracao:number,laco=LACO_DA
   const p=inicio+t;if(p<duracao)return p;
   const volta=duracao-laco;return laco+((p-laco)%volta);
 }
-export type Faixa='principal'|'ascensao'|'tensao'|'chefe'|'arena';
+export type Faixa='principal'|'ascensao'|'tensao'|'chefe'|'arena'|'segredo'|'lenda';
 const camadas=(nome:string)=>(['base','pulso','tema'] as const).map(c=>`/assets/audio/${nome}-${c}.ogg`);
 /*
  * As quatro músicas de batalha. `laco`: onde a música volta depois do fim (o
@@ -57,6 +58,8 @@ const camadas=(nome:string)=>(['base','pulso','tema'] as const).map(c=>`/assets/
  *   tensao    (lutas 7–9): ré menor harmônica, 150 BPM, mais séria (v5)
  *   chefe     (luta 10):   dó menor frígio, 168 BPM, coro, sinos e metais (v5)
  *   arena     (PvP):       fá sustenido menor, 174 BPM, taikos e palmas da torcida (v6)
+ *   segredo   (luta ★):    si menor com cor dórica e frígia, 160 BPM, caixinha de música e tique-taque (v7)
+ *   lenda     (luta 11):   sol menor dominante frígio, 176 BPM, o chefe secreto: sinos graves e coro dobrado (v7)
  */
 export const FAIXAS:Record<Faixa,{camadas:readonly string[];laco:number}>={
   principal:{camadas:AUDIO_ASSETS.battleStems,laco:LACO_DA_MUSICA},
@@ -65,9 +68,12 @@ export const FAIXAS:Record<Faixa,{camadas:readonly string[];laco:number}>={
   chefe:{camadas:camadas('musica-chefe'),laco:11.429},
   /* o PvP (v6): fá sustenido menor, 174 BPM, taikos e palmas da torcida, o tema da arena */
   arena:{camadas:camadas('musica-arena'),laco:11.034},
+  /* as lutas secretas (v7, src/engine/segredos.ts): a ★ entre a 5 e a 6, e a 11, o chefe secreto */
+  segredo:{camadas:camadas('musica-segredo'),laco:12},
+  lenda:{camadas:camadas('musica-lenda'),laco:10.909},
 };
-/** Qual música toca em cada luta (índice 0–9). */
-export const faixaDaLuta=(indice:number):Faixa=>indice>=9?'chefe':indice>=6?'tensao':indice>=3?'ascensao':'principal';
+/** Qual música toca em cada luta (0–9, e as lutas secretas: a ★ e a 11). */
+export const faixaDaLuta=(indice:number):Faixa=>indice===LUTA_ESTRELA?'segredo':indice===LUTA_ONZE?'lenda':indice>=9?'chefe':indice>=6?'tensao':indice>=3?'ascensao':'principal';
 const MAX_VOZES=5;
 export interface MusicMood {heat:number;pressure:number;time:number}
 class BattleAudio {

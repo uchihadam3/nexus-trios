@@ -148,7 +148,10 @@ describe('compact reusable audiovisual library',()=>{
   it('troca de música com a jornada: principal (1–3), ascensão (4–6), tensão (7–9), chefe (10)',()=>{
     expect(Array.from({length:10},(_,i)=>faixaDaLuta(i))).toEqual(['principal','principal','principal','ascensao','ascensao','ascensao','tensao','tensao','tensao','chefe']);
   });
-  for(const [faixa,secoes] of [['ascensao',['Faíscas','Avanço','Choque','Foco','Clímax','Retorno']],['tensao',['Intro','Perigo','Pressão','Ruptura','Confronto','Retorno']],['chefe',['Aparição','Duelo','Fúria','Desespero','Último golpe','Virada']]] as const){
+  it('as lutas secretas têm músicas próprias: a ★ toca o Segredo e a 11, a Lenda',()=>{
+    expect(faixaDaLuta(10)).toBe('segredo');expect(faixaDaLuta(11)).toBe('lenda');
+  });
+  for(const [faixa,secoes] of [['ascensao',['Faíscas','Avanço','Choque','Foco','Clímax','Retorno']],['tensao',['Intro','Perigo','Pressão','Ruptura','Confronto','Retorno']],['chefe',['Aparição','Duelo','Fúria','Desespero','Último golpe','Virada']],['segredo',['Segredo','Porta','Labirinto','Revelação','Tesouro','Volta']],['lenda',['Despertar','Lenda','Fúria antiga','Abismo','Último fôlego','Renascer']]] as const){
     it(`a música ${faixa} vem nas mesmas três camadas, em OGG e MP3, com o laço na segunda seção`,()=>{
       const m=JSON.parse(readFileSync(resolve(root,`public/assets/audio/musica-${faixa}.json`),'utf8')) as typeof musica;
       expect(Object.keys(m.camadas).sort()).toEqual(['base','pulso','tema'].map(c=>`musica-${faixa}-${c}`));

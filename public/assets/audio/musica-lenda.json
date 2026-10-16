@@ -1,0 +1,59 @@
+{
+ "bpm": 176,
+ "compassos": 80,
+ "segundos": 109.091,
+ "secoes": [
+  {
+   "nome": "Despertar",
+   "inicio": 0.0
+  },
+  {
+   "nome": "Lenda",
+   "inicio": 10.909
+  },
+  {
+   "nome": "Fúria antiga",
+   "inicio": 32.727
+  },
+  {
+   "nome": "Abismo",
+   "inicio": 54.545
+  },
+  {
+   "nome": "Último fôlego",
+   "inicio": 65.455
+  },
+  {
+   "nome": "Renascer",
+   "inicio": 98.182
+  }
+ ],
+ "estilo": "anime arcade · luta 11, o chefe secreto (v7)",
+ "laco": {
+  "inicio": 10.909,
+  "fim": 109.091
+ },
+ "camadas": {
+  "musica-lenda-base": {
+   "arquivo": "musica-lenda-base.ogg",
+   "mp3": "musica-lenda-base.mp3",
+   "segundos": 109.091,
+   "bytes": 1039222,
+   "rmsDb": -21.2
+  },
+  "musica-lenda-pulso": {
+   "arquivo": "musica-lenda-pulso.ogg",
+   "mp3": "musica-lenda-pulso.mp3",
+   "segundos": 109.091,
+   "bytes": 782989,
+   "rmsDb": -24.7
+  },
+  "musica-lenda-tema": {
+   "arquivo": "musica-lenda-tema.ogg",
+   "mp3": "musica-lenda-tema.mp3",
+   "segundos": 109.091,
+   "bytes": 1312825,
+   "rmsDb": -23.2
+  }
+ }
+}
