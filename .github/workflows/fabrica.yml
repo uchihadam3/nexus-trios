@@ -8,9 +8,9 @@ on:
   workflow_dispatch:
     inputs:
       plano:
-        description: 'aleatorio (trio x trio), pares (toda dupla com um terceiro), jornada (trio sorteado, jornada inteira), dificuldade (metas por personagem), trios (todos os trios, 1 milhão por lote) ou pontos (jornada inteira com os pontos)'
+        description: 'aleatorio (trio x trio), pares (toda dupla com um terceiro), jornada (trio sorteado, jornada inteira), dificuldade (metas por personagem), trios (todos os trios, 1 milhão por lote), pontos (jornada inteira com os pontos), estrelas (PvP entre times de 1 a 5 estrelas) ou estrelas-jornada (jornada por estrela, com a regra da Vida em várias forças)'
         type: choice
-        options: [aleatorio, pares, jornada, dificuldade, trios, pontos]
+        options: [aleatorio, pares, jornada, dificuldade, trios, pontos, estrelas, estrelas-jornada]
         default: pares
       lutas:
         description: 'lutas por processo (são 80 processos; 25000 = 2 milhões); no plano trios, lutas por trio'

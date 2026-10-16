@@ -2,7 +2,8 @@ import { describe, expect, it } from 'vitest';
 import { byId } from '../src/data/characters';
 import { generateCampaign } from '../src/engine/campaign';
 import { replayRanked } from '../src/engine/ranked';
-import { LUTA_ESTRELA, LUTA_ONZE, SEGREDOS, proximaLuta, rivalSecreto, segredosCumpridos, type LutaDoSegredo } from '../src/engine/segredos';
+import { multiplicadorDaLuta } from '../src/engine/pontos';
+import { LUTA_ESTRELA, LUTA_ONZE, SEGREDOS, indiceDosPontos, proximaLuta, rivalSecreto, segredosCumpridos, type LutaDoSegredo } from '../src/engine/segredos';
 
 /* Os seis segredos e as lutas extras (src/engine/segredos.ts). */
 const luta = (index: number, won = true, x: Partial<LutaDoSegredo> = {}): LutaDoSegredo => ({ index, won, time: 40, survivors: 2, ...x });
@@ -11,6 +12,11 @@ const ate = (n: number, x: Partial<LutaDoSegredo> = {}) => Array.from({ length: 
 const trioComum = ['gojo', 'light', 'saitama'];
 
 describe('segredos', () => {
+  it('a luta 11 tem o maior multiplicador da jornada (×1,8); a ★ vale como a 6', () => {
+    expect(multiplicadorDaLuta(indiceDosPontos(LUTA_ONZE))).toBeCloseTo(1.8);
+    expect(multiplicadorDaLuta(indiceDosPontos(LUTA_ESTRELA))).toBeCloseTo(1.25);
+  });
+
   it('são seis: dois abrem a luta ★, dois a luta 11 e dois as duas', () => {
     expect(SEGREDOS).toHaveLength(6);
     const so = (q: string[]) => SEGREDOS.filter((s) => s.libera.join() === q.join()).length;

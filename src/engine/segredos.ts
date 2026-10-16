@@ -50,8 +50,11 @@ export const LUTA_ONZE = 11;
 export const ehLutaExtra = (indice: number) => indice === LUTA_ESTRELA || indice === LUTA_ONZE;
 /** A seed de cada luta da jornada (a mesma conta das lutas normais: seed + índice × 7919). */
 export const seedDaLuta = (seed: number, indice: number) => seed + indice * 7919;
-/** O multiplicador de pontos da luta extra: a ★ vale como a luta 6, a 11 como uma luta depois da 10. */
-export const indiceDosPontos = (indice: number) => (indice === LUTA_ESTRELA ? 5 : indice);
+/**
+ * O multiplicador de pontos da luta extra: a ★ vale como a luta 6 (×1,25); a 11 é o maior da jornada, ×1,8 (pedido do
+ * dono: "é difícil de liberar, tem que ser o maior de todos"), o mesmo que o índice 16 em multiplicadorDaLuta.
+ */
+export const indiceDosPontos = (indice: number) => (indice === LUTA_ESTRELA ? 5 : indice === LUTA_ONZE ? 16 : indice);
 /** Menos de RELAMPAGO segundos de luta (tempo de jogo, não de tela)… */
 export const RELAMPAGO = 25;
 /** …em LUTAS_DO_RELAMPAGO das 5 primeiras (era 3: 12% das jornadas fazia; com 4, 6%, como os outros segredos). */
