@@ -1,6 +1,6 @@
 import { createContext, lazy, Suspense, useContext, useEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode } from 'react';
 import { createPortal } from 'react-dom';
-import { ArrowDownAZ, ArrowLeft, Check, Clock, Handshake, WifiOff, Globe2, Layers, SlidersHorizontal, Sparkles, Crown, Hourglass, Lock, LogOut, RotateCcw, Search, Shield, Swords, Trophy, Users, Wand2, X, Zap } from 'lucide-react';
+import { ArrowDownAZ, ArrowLeft, Check, Clock, Handshake, Info, WifiOff, Globe2, Layers, SlidersHorizontal, Sparkles, Crown, Hourglass, Lock, LogOut, RotateCcw, Search, Shield, Swords, Trophy, Users, Wand2, X, Zap } from 'lucide-react';
 import { byId, characters } from '../data/characters';
 import { Portrait } from '../components/Portrait';
 import { ArenaDoPvp } from '../components/ArenaDoPvp';
@@ -89,13 +89,20 @@ const guardaEtapa = (e: Etapa, segundos?: number) => {
  * Peças
  * ------------------------------------------------------------------------- */
 
-export function Rosto({ id, tamanho = 54, apagado = false }: { id: string; tamanho?: number; apagado?: boolean }) {
-  const c = byId[id]!;
-  return <span className={`pv-rosto ${apagado ? 'apagado' : ''}`} style={{ '--character': c.color, '--t': `${tamanho}px` } as CSSProperties} title={c.name}><Portrait character={c} /></span>;
+/*
+ * A ficha do personagem em todo o PvP (pedido do jogador: "tem que ter alguma forma de ver a ficha dos personagens"):
+ * tocar num rosto abre a ficha por cima da tela. Onde o toque já faz outra coisa (escolher o time, tirar do time), o
+ * rosto não abre (`ficha={false}`); no álbum de montar há o botão ⓘ.
+ */
+export const FichaDoPvp = createContext<((id: string) => void) | null>(null);
+export function Rosto({ id, tamanho = 54, apagado = false, ficha = true }: { id: string; tamanho?: number; apagado?: boolean; ficha?: boolean }) {
+  const c = byId[id]!, abrir = useContext(FichaDoPvp), abre = ficha && abrir;
+  return <span className={`pv-rosto ${apagado ? 'apagado' : ''} ${abre ? 'com-ficha' : ''}`} style={{ '--character': c.color, '--t': `${tamanho}px` } as CSSProperties} title={abre ? `${c.name}: toque para ver a ficha` : c.name}
+    {...(abre ? { role: 'button', tabIndex: 0, 'aria-label': `Ficha de ${c.name}`, onClick: (e: { stopPropagation: () => void }) => { e.stopPropagation(); abrir(id); }, onKeyDown: (e: { key: string }) => { if (e.key === 'Enter') abrir(id); } } : {})}><Portrait character={c} /></span>;
 }
 
-/* A conta do dono (pedido dele): a porcentagem de "melhor que X% dos trios" aparece junto das estrelas. */
-const DonoDoPvp = createContext(false);
+/* A conta do dono (pedido dele): só ela vê as estrelas de força dos times e o "melhor que X% dos trios" (para os outros, em nenhum lugar do PvP). */
+export const DonoDoPvp = createContext(false);
 
 function CartaoDoTime({ time, i, lado, venceu, escolhido, bloqueado, onClick, compacto = false }: {
   time: readonly string[]; i: number; lado: Lado; venceu?: boolean; escolhido?: boolean; bloqueado?: boolean; onClick?: () => void; compacto?: boolean;
@@ -105,10 +112,10 @@ function CartaoDoTime({ time, i, lado, venceu, escolhido, bloqueado, onClick, co
   return <Tag className={`pv-time ${lado} ${venceu ? 'venceu' : ''} ${escolhido ? 'escolhido' : ''} ${bloqueado ? 'bloqueado' : ''} ${compacto ? 'compacto' : ''}`}
     onClick={onClick} disabled={onClick ? bloqueado : undefined} style={{ '--i': i } as CSSProperties}>
     <span className="pv-time-topo"><b>TIME {i + 1}</b>{venceu && <em className="pv-selo-venceu"><Trophy size={12} />VENCEU</em>}</span>
-    <span className="pv-time-rostos">{time.map((id) => <Rosto key={id} id={id} tamanho={compacto ? 40 : 52} />)}</span>
+    <span className="pv-time-rostos">{time.map((id) => <Rosto key={id} id={id} tamanho={compacto ? 40 : 52} ficha={!onClick} />)}</span>
     {!compacto && <span className="pv-time-nomes">{time.map((id) => byId[id]!.name).join(' · ')}</span>}
     <span className="pv-time-info">
-      <span className="pv-estrelas" aria-label={`Força ${estrelas} de ${ESTRELAS_MAXIMAS}`}>{ESTRELAS.map((k) => <i key={k} className={k <= estrelas ? 'on' : ''}>★</i>)}</span>
+      {dono && <span className="pv-estrelas" aria-label={`Força ${estrelas} de ${ESTRELAS_MAXIMAS}`}>{ESTRELAS.map((k) => <i key={k} className={k <= estrelas ? 'on' : ''}>★</i>)}</span>}
       {dono && <span className="pv-pct" title="Melhor que esta porcentagem dos trios">melhor que <b>{melhorQueOsTrios(time)}%</b></span>}
       {combos > 0 && <span className="pv-combos"><Zap size={11} />{combos} combo{combos > 1 ? 's' : ''}</span>}
     </span>
@@ -346,6 +353,7 @@ export function Montar({ rival, colecao, inicial, onPronto, onVoltar, onDetails,
   emprestados?: ReadonlySet<string>;
   /** Só na conta do dono (pedido dele): um botão que monta os times mais fortes possíveis com a coleção. */
   melhores?: boolean }) {
+  const dono = useContext(DonoDoPvp);
   const valido = (t?: string[][]) => !!t && t.length === 3 && t.every((x) => x.every((id) => colecao.includes(id)));
   const [times, setTimes] = useState<string[][]>(() => (valido(inicial) ? inicial!.map((t) => [...t]) : [[], [], []]));
   const [ativo, setAtivo] = useState(() => Math.max(0, times.findIndex((t) => t.length < 3)));
@@ -388,8 +396,8 @@ export function Montar({ rival, colecao, inicial, onPronto, onVoltar, onDetails,
       {times.map((t, i) => {
         const estrelas = t.length === 3 ? estrelasDoTime(t) : 0;
         return <button key={i} className={`pv-slot ${ativo === i ? 'ativo' : ''} ${t.length === 3 ? 'cheio' : ''}`} onClick={() => setAtivo(i)} style={{ '--i': i } as CSSProperties}>
-          <span className="pv-slot-topo"><b>TIME {i + 1}</b>{t.length === 3 ? <span className="pv-estrelas" aria-label={`Força ${estrelas} de ${ESTRELAS_MAXIMAS}`}>{ESTRELAS.map((k) => <i key={k} className={k <= estrelas ? 'on' : ''}>★</i>)}{melhores && <em className="pv-pct">{melhorQueOsTrios(t)}%</em>}</span> : <small>{t.length}/3</small>}</span>
-          <span className="pv-slot-rostos">{[0, 1, 2].map((k) => t[k] ? <span key={k} className="pv-slot-cheio" role="button" tabIndex={0} aria-label={`Tirar ${byId[t[k]!]!.name}`} onClick={(e) => { e.stopPropagation(); tocar(t[k]!); }}><Rosto id={t[k]!} tamanho={46} /><X size={12} className="pv-tirar" /></span> : <span key={k} className="pv-slot-vazio">+</span>)}</span>
+          <span className="pv-slot-topo"><b>TIME {i + 1}</b>{t.length === 3 && !dono ? null : t.length === 3 ? <span className="pv-estrelas" aria-label={`Força ${estrelas} de ${ESTRELAS_MAXIMAS}`}>{ESTRELAS.map((k) => <i key={k} className={k <= estrelas ? 'on' : ''}>★</i>)}{melhores && <em className="pv-pct">{melhorQueOsTrios(t)}%</em>}</span> : <small>{t.length}/3</small>}</span>
+          <span className="pv-slot-rostos">{[0, 1, 2].map((k) => t[k] ? <span key={k} className="pv-slot-cheio" role="button" tabIndex={0} aria-label={`Tirar ${byId[t[k]!]!.name}`} onClick={(e) => { e.stopPropagation(); tocar(t[k]!); }}><Rosto id={t[k]!} tamanho={46} ficha={false} /><X size={12} className="pv-tirar" /></span> : <span key={k} className="pv-slot-vazio">+</span>)}</span>
         </button>;
       })}
     </div>
@@ -418,6 +426,7 @@ export function Montar({ rival, colecao, inicial, onPronto, onVoltar, onDetails,
           const emprestado = !!emprestados?.has(c.id);
           return <button key={c.id} className={`pv-carta ${onde !== undefined ? 'usada' : ''} ${emprestado ? 'emprestada' : ''}`} onClick={() => tocar(c.id)} onContextMenu={(e) => { e.preventDefault(); onDetails(c.id); }} style={{ '--character': c.color, '--k': Math.min(k, 30) } as CSSProperties} aria-label={`${c.name}${onde !== undefined ? `, no time ${onde + 1}` : ''}`}>
             <Portrait character={c} /><b>{c.name}</b>{onde !== undefined && <em>T{onde + 1}</em>}{emprestado && <span className="pv-fita"><Handshake size={10} />EMPRESTADO</span>}
+            <span className="pv-carta-ficha" role="button" tabIndex={0} aria-label={`Ficha de ${c.name}`} onClick={(e) => { e.stopPropagation(); onDetails(c.id); }}><Info size={13} /></span>
           </button>;
         })}
       </div>
@@ -817,7 +826,7 @@ const CaminhoDoNexus = lazy(() => import('./CaminhoDoNexus'));
 const CAMPANHA_DEMO = import.meta.env.VITE_CAMPANHA_DEMO === 'true';
 
 export function PvpScreen(props: Parameters<typeof TelaDoPvp>[0]) {
-  return <DonoDoPvp.Provider value={props.dono === true}><TelaDoPvp {...props} /></DonoDoPvp.Provider>;
+  return <DonoDoPvp.Provider value={props.dono === true}><FichaDoPvp.Provider value={props.onDetails}><TelaDoPvp {...props} /></FichaDoPvp.Provider></DonoDoPvp.Provider>;
 }
 
 function TelaDoPvp({ colecao, settings, onSettings, onDetails, onJogar, onLutando, online, dono = false }: {

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState, type CSSProperties } from 'react';
+import { useCallback, useContext, useEffect, useState, type CSSProperties } from 'react';
 import { createPortal } from 'react-dom';
 import { ArrowLeft, Brain, Crown, Eye, Flame, Lock, LogOut, Map as MapaIcone, Medal, Moon, Play, RotateCcw, Shield, Sparkles, Star, Swords, Trophy, X } from 'lucide-react';
 import { byId } from '../data/characters';
@@ -10,7 +10,7 @@ import { ENGINE_VERSION } from '../engine/ranked';
 import { read, save, type Settings } from '../lib/storage';
 import type { Faixa, RegiaoDaMusica } from '../lib/audio';
 import { textoDoErroPvp, type PartidaDaCampanha, type RespostaDaCampanha, type ServicoDaCampanha } from '../lib/pvp-online';
-import { Apresentar, Confirmar, Escolher, Fx, Montar, ResultadoDaRodada, Rosto, Vs, som, type Oponente } from './PvpScreen';
+import { Apresentar, Confirmar, DonoDoPvp, Escolher, Fx, Montar, ResultadoDaRodada, Rosto, Vs, som, type Oponente } from './PvpScreen';
 import { AvatarDoRival, CHAVE_DO_RESUMO, type ResumoDaCampanha } from '../components/CartaoDaCampanha';
 import '../presentation/campanha.css';
 
@@ -145,7 +145,7 @@ function Ficha({ rival, r, onFechar, onDesafiar }: { rival: Rival; r: RespostaDa
   const livre = liberado(r.progresso.estrelas, rival), regiao = regiaoDe(rival), e = r.progresso.estrelas[rival.id] ?? 0, placar = r.progresso.placar[rival.id] ?? { v: 0, d: 0 };
   const livres = livresParaJogar(r.colecao, r.progresso.descanso).length, falta = Math.max(0, MINIMO_DA_CAMPANHA - r.colecao.length);
   const ganha = variacaoContraNpc(r.rating.rating, rival.rating, true), perde = variacaoContraNpc(r.rating.rating, rival.rating, false);
-  const anterior = RIVAIS[rival.n - 2];
+  const anterior = RIVAIS[rival.n - 2], dono = useContext(DonoDoPvp);
   return createPortal(<div className="pv-painel-fundo cn-ficha-fundo" onClick={(ev) => { if (ev.target === ev.currentTarget) onFechar(); }}>
     <section className="cn-ficha" role="dialog" aria-label={rival.nome} style={{ '--cor': rival.cor, '--c1': regiao.cor, '--c2': regiao.cor2 } as CSSProperties}>
       <button className="icon-button cn-ficha-x" onClick={onFechar} aria-label="Fechar"><X size={18} /></button>
@@ -160,7 +160,7 @@ function Ficha({ rival, r, onFechar, onDesafiar }: { rival: Rival; r: RespostaDa
         <div className="cn-chips">
           <span className="cn-chip estilo"><Sparkles size={12} />{rival.estilo}</span>
           <span className="cn-chip"><Crown size={12} />{rival.rating}</span>
-          <span className="cn-chip" title="A força máxima dos times dele"><Star size={12} />times até {rival.estrelas}★</span>
+          {dono && <span className="cn-chip" title="A força máxima dos times dele"><Star size={12} />times até {rival.estrelas}★</span>}
           <span className="cn-chip"><Shield size={12} />{rival.espelho ? 'copia os seus' : `${colecaoDoRival(rival).length} personagens`}</span>
           <span className="cn-chip cerebro" title="Dificuldade"><Brain size={12} />{Array.from({ length: 8 }, (_, k) => <i key={k} className={k < rival.regiao ? 'on' : ''} />)}</span>
           {rival.cerebro.escolha === 'vidente' && <span className="cn-chip vidente"><Eye size={12} />vê o futuro</span>}
@@ -231,7 +231,12 @@ function Fim({ rival, partida, antes, r, onMapa, onDeNovo, onProximo }: { rival:
  * A tela
  * ------------------------------------------------------------------------- */
 
-export default function CaminhoDoNexus({ servico, settings, onSettings, onDetails, onLutando, onVoltar, dono = false }: {
+/* No Caminho do Nexus nem a conta do dono vê as estrelas de força dos times (pedido dele); o resto do PvP continua. */
+export default function CaminhoDoNexus(props: Parameters<typeof Caminho>[0]) {
+  return <DonoDoPvp.Provider value={false}><Caminho {...props} /></DonoDoPvp.Provider>;
+}
+
+function Caminho({ servico, settings, onSettings, onDetails, onLutando, onVoltar, dono = false }: {
   servico: ServicoDaCampanha; settings: Settings; onSettings: (s: Settings) => void; onDetails: (id: string) => void; onLutando: (sim: boolean) => void; onVoltar: () => void; dono?: boolean;
 }) {
   const [r, setR] = useState<RespostaDaCampanha | null>(null);
