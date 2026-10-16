@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { createBattle, stepBattle } from '../src/engine/battle';
+import { byId } from '../src/data/characters';
 import type { Battle } from '../src/engine/types';
 
 /* O Light usa a Death Note em quem chegou a 100, mesmo imune (pedido do dono): o imune toma o dano e fica Exposto, uma vez só. */
@@ -17,5 +18,9 @@ describe('Death Note em imune', () => {
     expect(goku.hp).toBeLessThan(vida);
     expect(goku.hp).toBeGreaterThan(0);
     expect(goku.statuses.some((s) => s.id === 'exposed')).toBe(true);
+    // e a Death Note recarrega na metade do tempo
+    const nota = byId.light!.skills[2]!;
+    expect(light.skills[2]!.cooldown).toBeGreaterThan(nota.cooldown * 0.5 - 0.5);
+    expect(light.skills[2]!.cooldown).toBeLessThanOrEqual(nota.cooldown * 0.5);
   });
 });

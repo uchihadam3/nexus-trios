@@ -341,7 +341,7 @@ export function presentEffect(effect:Effect,defaultTarget:Target,modo:ModoDeAlvo
     case 'cleanse':return `Purifica ${effect.value>1?`até ${n(effect.value)} debuffs`:'1 debuff'}${target}`;
     case 'copy':return `Copia a última habilidade · ${pct(effect.value)} da força`;
     case 'dispel':return `Dissipa ${effect.value>1?`até ${n(effect.value)} buffs`:'1 buff'}${target}`;
-    case 'deathnote':return 'Com 100 Investigação: elimina o alvo; contra imune, 260 de dano e Exposto +55% por 14 s';
+    case 'deathnote':return 'Com 100 Investigação: elimina o alvo; contra imune, 230 de dano, Exposto +55% por 14 s e recarga pela metade';
     case 'charge':return `+${n(effect.value)}% de Carga para habilidades${target}`;
     case 'store':return `Guarda ${n(effect.value)} de energia (até ${n(effect.cap)})`;
     /*

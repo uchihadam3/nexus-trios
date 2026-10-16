@@ -69,7 +69,9 @@ export interface Fighter {
   cast:null|{skill:number;elapsed:number;duration:number;targets:string[]};
   investigation:Record<string,number>;discovered?:Record<string,'vulnerable'|'immune'>;
   /** Os imunes em quem o Light já usou a Death Note (dano e Exposto uma vez só em cada um). */
-  sentencados?:Record<string,true>;traitTimer:number;
+  sentencados?:Record<string,true>;
+  /** A Death Note acabou de acertar um imune: a recarga dela cai pela metade. */
+  recargaPelaMetade?:boolean;traitTimer:number;
   storedEnergy:number;
   /** Estado da Mecânica única (src/engine/unicas.ts). */
   u?:Record<string,number>;

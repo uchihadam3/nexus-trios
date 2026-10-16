@@ -608,7 +608,8 @@ export function applyEffects(b:Battle,source:Fighter,selected:Fighter[],effects:
           if(byId[target.characterId].deathNoteCompatible){const value=target.hp;target.hp=0;target.cast=null;target.shields=[];target.statuses=[];
             // quem cai pela Death Note pode ser revivido e renasce, como numa queda comum (pedido do dono)
             const renascer=byId[target.characterId].renascer;if(renascer&&!target.voltou)target.renascendo=renascer.atraso;source.stats.damage+=value;source.stats.kills++;pressure(b,source.side,D.event.deathNote);emit(b,{kind:'ko',source:source.uid,target:target.uid,label:'Sentença concluída',value});}
-          else{source.sentencados??={};source.sentencados[target.uid]=true;applyEffects(b,source,[target],[{kind:'status',status:'exposed',value:.55,duration:14},{kind:'damage',value:260}]);}
+          // no imune: dano e Exposto, e a Death Note recarrega na metade do tempo (pedido do dono: "em vez de 10 segundos, 5")
+          else{source.sentencados??={};source.sentencados[target.uid]=true;if(agindo===source.uid)source.recargaPelaMetade=true;applyEffects(b,source,[target],[{kind:'status',status:'exposed',value:.55,duration:14},{kind:'damage',value:230}]);}
           break;
         }
         case 'charge':target.skills.forEach((s,i)=>{if(s.cooldown<=0&&target.cast?.skill!==i){const before=s.charge;s.charge=Math.min(100,s.charge+effect.value);if(before<100&&s.charge>=100)emit(b,{kind:'ready',source:target.uid,skill:i,label:byId[target.characterId].skills[i].name,visual:byId[target.characterId].skills[i].icon});if(s.charge>before){emit(b,{kind:'charge',source:source.uid,target:target.uid,skill:i,label:source.uid===target.uid?'trait':'synergy',value:s.charge-before});if(source.uid!==target.uid){pressure(b,source.side,D.event.synergyCharge*clamp((s.charge-before)/25));emit(b,{kind:'synergy',source:source.uid,target:target.uid,skill:i,label:'Carga recebida',value:s.charge-before});source.stats.carga=(source.stats.carga??0)+(s.charge-before);}}}});break;
@@ -726,7 +727,8 @@ function execute(b:Battle,f:Fighter,index:number,selected:Fighter[]){
   if(effective)pressure(b,f.side,s.preparation>=2.5?D.event.grandSkill:D.event.successfulSkill);
   f.stats.skills++;
   f.skills[index].uses=(f.skills[index].uses??0)+1;
-  f.skills[index].charge=0;f.skills[index].cooldown=s.cooldown;f.skills[index].executing=.7;
+  const metade=f.recargaPelaMetade===true;f.recargaPelaMetade=undefined;
+  f.skills[index].charge=0;f.skills[index].cooldown=s.cooldown*(metade?.5:1);f.skills[index].executing=.7;
   if(alive(f))unica(f)?.usou?.(M,b,f,index);
 }
 export function updateDominion(b:Battle){
