@@ -1,7 +1,7 @@
 {
- "bpm": 108,
+ "bpm": 132,
  "compassos": 72,
- "segundos": 160.0,
+ "segundos": 130.909,
  "secoes": [
   {
    "nome": "Abertura",
@@ -9,55 +9,55 @@
   },
   {
    "nome": "Tema",
-   "inicio": 17.778
+   "inicio": 14.545
   },
   {
    "nome": "Ação",
-   "inicio": 53.333
+   "inicio": 43.636
   },
   {
    "nome": "Respiro",
-   "inicio": 88.889
+   "inicio": 72.727
   },
   {
    "nome": "Hino",
-   "inicio": 106.667
+   "inicio": 87.273
   },
   {
    "nome": "Refrão",
-   "inicio": 124.444
+   "inicio": 101.818
   },
   {
    "nome": "Volta",
-   "inicio": 142.222
+   "inicio": 116.364
   }
  ],
  "estilo": "caminho do nexus · reg-templo (v9)",
  "laco": {
-  "inicio": 17.778,
-  "fim": 160.0
+  "inicio": 14.545,
+  "fim": 130.909
  },
  "camadas": {
   "musica-reg-templo-base": {
    "arquivo": "musica-reg-templo-base.ogg",
    "mp3": "musica-reg-templo-base.mp3",
-   "segundos": 160.0,
-   "bytes": 1571252,
-   "rmsDb": -22.7
+   "segundos": 130.909,
+   "bytes": 1242715,
+   "rmsDb": -22.8
   },
   "musica-reg-templo-pulso": {
    "arquivo": "musica-reg-templo-pulso.ogg",
    "mp3": "musica-reg-templo-pulso.mp3",
-   "segundos": 160.0,
-   "bytes": 1111083,
-   "rmsDb": -26.2
+   "segundos": 130.909,
+   "bytes": 956085,
+   "rmsDb": -26.3
   },
   "musica-reg-templo-tema": {
    "arquivo": "musica-reg-templo-tema.ogg",
    "mp3": "musica-reg-templo-tema.mp3",
-   "segundos": 160.0,
-   "bytes": 1674969,
-   "rmsDb": -24.7
+   "segundos": 130.909,
+   "bytes": 1419035,
+   "rmsDb": -24.8
   }
  }
 }

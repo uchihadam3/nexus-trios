@@ -1,7 +1,7 @@
 {
- "bpm": 120,
+ "bpm": 144,
  "compassos": 72,
- "segundos": 144.0,
+ "segundos": 120.0,
  "secoes": [
   {
    "nome": "Abertura",
@@ -9,55 +9,55 @@
   },
   {
    "nome": "Tema",
-   "inicio": 16.0
+   "inicio": 13.333
   },
   {
    "nome": "Ação",
-   "inicio": 48.0
+   "inicio": 40.0
   },
   {
    "nome": "Respiro",
-   "inicio": 80.0
+   "inicio": 66.667
   },
   {
    "nome": "Hino",
-   "inicio": 96.0
+   "inicio": 80.0
   },
   {
    "nome": "Refrão",
-   "inicio": 112.0
+   "inicio": 93.333
   },
   {
    "nome": "Volta",
-   "inicio": 128.0
+   "inicio": 106.667
   }
  ],
  "estilo": "caminho do nexus · chefe-templo (v9)",
  "laco": {
-  "inicio": 16.0,
-  "fim": 144.0
+  "inicio": 13.333,
+  "fim": 120.0
  },
  "camadas": {
   "musica-chefe-templo-base": {
    "arquivo": "musica-chefe-templo-base.ogg",
    "mp3": "musica-chefe-templo-base.mp3",
-   "segundos": 144.0,
-   "bytes": 1459039,
-   "rmsDb": -21.3
+   "segundos": 120.0,
+   "bytes": 1142686,
+   "rmsDb": -21.2
   },
   "musica-chefe-templo-pulso": {
    "arquivo": "musica-chefe-templo-pulso.ogg",
    "mp3": "musica-chefe-templo-pulso.mp3",
-   "segundos": 144.0,
-   "bytes": 988034,
-   "rmsDb": -24.8
+   "segundos": 120.0,
+   "bytes": 845322,
+   "rmsDb": -24.7
   },
   "musica-chefe-templo-tema": {
    "arquivo": "musica-chefe-templo-tema.ogg",
    "mp3": "musica-chefe-templo-tema.mp3",
-   "segundos": 144.0,
-   "bytes": 1665227,
-   "rmsDb": -23.3
+   "segundos": 120.0,
+   "bytes": 1284479,
+   "rmsDb": -23.2
   }
  }
 }

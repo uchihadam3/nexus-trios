@@ -1,7 +1,7 @@
 {
- "bpm": 116,
+ "bpm": 144,
  "compassos": 72,
- "segundos": 148.966,
+ "segundos": 120.0,
  "secoes": [
   {
    "nome": "Abertura",
@@ -9,55 +9,55 @@
   },
   {
    "nome": "Tema",
-   "inicio": 16.552
+   "inicio": 13.333
   },
   {
    "nome": "Ação",
-   "inicio": 49.655
+   "inicio": 40.0
   },
   {
    "nome": "Respiro",
-   "inicio": 82.759
+   "inicio": 66.667
   },
   {
    "nome": "Hino",
-   "inicio": 99.31
+   "inicio": 80.0
   },
   {
    "nome": "Refrão",
-   "inicio": 115.862
+   "inicio": 93.333
   },
   {
    "nome": "Volta",
-   "inicio": 132.414
+   "inicio": 106.667
   }
  ],
  "estilo": "caminho do nexus · reg-floresta (v9)",
  "laco": {
-  "inicio": 16.552,
-  "fim": 148.966
+  "inicio": 13.333,
+  "fim": 120.0
  },
  "camadas": {
   "musica-reg-floresta-base": {
    "arquivo": "musica-reg-floresta-base.ogg",
    "mp3": "musica-reg-floresta-base.mp3",
-   "segundos": 148.966,
-   "bytes": 1476165,
-   "rmsDb": -21.0
+   "segundos": 120.0,
+   "bytes": 1134654,
+   "rmsDb": -21.3
   },
   "musica-reg-floresta-pulso": {
    "arquivo": "musica-reg-floresta-pulso.ogg",
    "mp3": "musica-reg-floresta-pulso.mp3",
-   "segundos": 148.966,
-   "bytes": 1097354,
-   "rmsDb": -24.5
+   "segundos": 120.0,
+   "bytes": 880787,
+   "rmsDb": -24.8
   },
   "musica-reg-floresta-tema": {
    "arquivo": "musica-reg-floresta-tema.ogg",
    "mp3": "musica-reg-floresta-tema.mp3",
-   "segundos": 148.966,
-   "bytes": 1698310,
-   "rmsDb": -23.0
+   "segundos": 120.0,
+   "bytes": 1331434,
+   "rmsDb": -23.3
   }
  }
 }

@@ -14,11 +14,11 @@ tom acima). Os temas são escritos em graus da escala ("grau/duração", "|" sep
 tocar: toda nota forte (tempo 1 e 3, ou longa) é nota do acorde.
 
   REGIÕES                                                  CHEFES (cada um com o seu tema)
-  vila      fá maior, 144, marcha de aventura e sininhos    Bento        fá menor, 160, fanfarra heroica
-  floresta  ré dórico, 116, tambores tribais, flauta e coro Rainha       ré menor harmônica, 148, serpente cromática
-  neon      dó sustenido menor, 126, synthwave              Capitão Aço  dó menor, 160, marcha de bigorna
-  deserto   mi hijaz, 112, maqsum, alaúde e metais          Sultão       fá sustenido hijaz, 132, gênio das escalas
-  templo    lá in-sen, 108, koto, sinos e taikos            Assombração  sol sustenido menor, 120, caixinha macabra
+  vila      fá maior, 158, power metal heroico              Guardião     fá menor, 160, fanfarra heroica
+  floresta  ré dórico, 144, taikos, coro e guitarras        Rainha       ré menor harmônica, 148, serpente cromática
+  neon      dó sustenido menor, 150, synthwave de batalha   General Aço  dó menor, 160, marcha de bigorna
+  deserto   mi hijaz, 138, maqsum, alaúde e guitarras       Sultão       fá sustenido hijaz, 132, gênio das escalas
+  templo    lá in-sen, 132, koto, taikos e guitarras        Assombração  sol sustenido menor, 144, terror pesado
   vulcao    mi frígio, 176, metal                           Titã         dó sustenido frígio, 184, metal mais pesado
   ceu       lá bemol lídio, 152, harpa, coro e metais       Panteão      mi bemol maior, 158, fanfarra do Olimpo
   trono     si menor harmônica, 168, órgão e coro           Imperador    lá menor harmônica, 176, o fim do caminho
@@ -145,7 +145,7 @@ def checa(f):
 def faixas():
     F = {}
     # ------------------------------------------------ REGIÕES
-    F["reg-vila"] = Faixa("reg-vila", 144, 65, "maior", 65, {
+    F["reg-vila"] = Faixa("reg-vila", 158, 65, "maior", 65, {
         "Abertura": "I I IV IV vi vi V V",
         "Tema": "I V vi IV I V IV V vi IV I V IV V I I",
         "Ação": "vi IV I V vi IV I V ii V iii vi IV V V V",
@@ -157,8 +157,8 @@ def faixas():
         " 9/1 7/1 12/1.5 11/.5 | 10/1 9/1 7/2 | 9/1 8/1 7/1 9/1 | 8/2 6/1 4/1 |"
         " 5/1 7/.5 8/.5 10/2 | 8/1 9/1 11/2 | 7/4 | r/4",
         "5/2 7/1 8/1 | 8/3 6/1 | 6/2 9/1 11/1 | 9/3 7/1 | 10/1 9/1 7/2 | 8/1 9/1 11/2 | 9/3 8/1 | 7/4",
-        "marcha", "sino", "caixinha", semente=901, brilho=4800)
-    F["reg-floresta"] = Faixa("reg-floresta", 116, 62, "dorico", 62, {
+        "metal", "ambos", "heroica", acao="metal", semente=901, brilho=5600)
+    F["reg-floresta"] = Faixa("reg-floresta", 144, 62, "dorico", 62, {
         "Abertura": "i i IV IV i i bVII bVII",
         "Tema": "i IV i bVII i IV bVII bVII bIII bVII IV IV i IV v i",
         "Ação": "i bVII IV i i bVII IV i bIII IV v v bIII IV i i",
@@ -171,7 +171,7 @@ def faixas():
         " 11/1 9/1 7/1 9/1 | 10/2 12/2 | 11/2 8/1 6/1 | 7/4",
         "13/2 11/1 9/1 | 10/3 12/1 | 14/2 12/2 | 11/4 | 9/1 11/1 13/2 | 13/1 12/1 10/2 | 12/1 14/1 12/1 10/1 | 10/4",
         "tribal", "coro", "floresta", semente=902, brilho=3400)
-    F["reg-neon"] = Faixa("reg-neon", 126, 61, "menor", 61, {
+    F["reg-neon"] = Faixa("reg-neon", 150, 61, "menor", 61, {
         "Abertura": "i i VI VI III III VII VII",
         "Tema": "i VI III VII i VI III VII iv VI III VII iv VI V V",
         "Ação": "VI VII i i VI VII i i iv v VI VII iv VI V V",
@@ -184,7 +184,7 @@ def faixas():
         " 12/1 10/1 7/1 10/1 | 12/2 14/2 | 11/1 13#/1 11/1 8/1 | 11/4",
         "12/2 14/1 12/1 | 13/3 10/1 | 11/2 13/1 11/1 | 9/1 11/1 14/2 | 14/2 12/1 14/1 | 13/1.5 12/.5 13/1 10/1 | 11/2 13#/1 11/1 | 11/4",
         "quatro", "saw", "neon", acao="arpejo", semente=903, brilho=7000)
-    F["reg-deserto"] = Faixa("reg-deserto", 112, 64, "hijaz", 64, {
+    F["reg-deserto"] = Faixa("reg-deserto", 138, 64, "hijaz", 64, {
         "Abertura": "I I bII bII I I bvii I",
         "Tema": "I bII I I iv bII I I iv iv bvii bvii bII bII I I",
         "Ação": "I bII I bII I bII iv I iv bvii bII I iv bvii bII bII",
@@ -197,7 +197,7 @@ def faixas():
         " 8/1 9/.5 10/.5 12/2 | 12/1 10/1 8/1 9/1 | 11/2 9/1 8/1 | 7/4",
         "10/2 12/1 14/1 | 13/3 12/1 | 11/2 9/1 11/1 | 14/4 | 12/2 10/1 12/1 | 10/3 8/1 | 9/1 8/.5 9/.5 11/2 | 7/4",
         "maqsum", "metal", "deserto", semente=904, brilho=4200)
-    F["reg-templo"] = Faixa("reg-templo", 108, 57, "insen", 57, {
+    F["reg-templo"] = Faixa("reg-templo", 132, 57, "insen", 57, {
         "Abertura": "i i bII bII i i bII bII",
         "Tema": "i bII iv i bVI bII i i iv bVI i bII iv bII i i",
         "Ação": "i bII i bII iv bII i i bVI bII iv i bVI bII bII bII",
@@ -302,7 +302,7 @@ def faixas():
         " 17/1.5 15/.5 13/2 | 15/1 17/1 15/1 12/1 | 16/1 15/.5 16/.5 18/2 | 14/4",
         "17/2 14/1 12/1 | 15/3 17/1 | 16/2 18/2 | 18/4 | 17/2 15/1 13/1 | 19/2 17/2 | 16/1 15/.5 16/.5 14/2 | 14/4",
         "maqsum", "metal", "genio", semente=914, brilho=4800)
-    F["chefe-templo"] = Faixa("chefe-templo", 120, 56, "harmonica", 56, {
+    F["chefe-templo"] = Faixa("chefe-templo", 144, 56, "harmonica", 56, {
         "Abertura": "i i i i VI VI V V",
         "Tema": "i iv i V VI iv V V i bII i V VI iv V i",
         "Ação": "i bII i bII VI iv V V i bII VI V iv bII V V",
@@ -314,7 +314,7 @@ def faixas():
         " 14/1 16/1 14/1 11/1 | 15b/2 12/2 | 11/1 14/1 16/2 | 15/1 13/1 11/2 |"
         " 16/2 14/2 | 12/1 14/1 17/2 | 15/2 13/2 | 14/4",
         "16/2 14/2 | 17/3 14/1 | 16/2 14/1 11/1 | 14/4 | 12/1 14/1 16/2 | 15b/2 17/2 | 15/2 13/1 15/1 | 11/4",
-        "meio", "caixinha", "assombro", acao="metal", semente=915, brilho=4400)
+        "meio", "metal", "assombro", acao="metal", semente=915, brilho=4400)
     F["chefe-vulcao"] = Faixa("chefe-vulcao", 184, 49, "frigio", 49, {
         "Abertura": "i i bII bII i i bvii bII",
         "Tema": "i bII i bvii i bII bVI bvii iv bVI bvii i iv bII i i",
@@ -499,6 +499,20 @@ def faz(f):
                     m.poe(m.tema, metais([n + 12 for n in notas], BEAT * 1.6, 1.3), t0)
                     m.poe(m.tema, metais([n + 12 for n in notas], BEAT * 0.4, 1.1), t0 + BEAT * 2.5)
                     m.poe(m.tema, metais([n + 12 for n in notas], BEAT * 1.2, 1.2), t0 + BEAT * 3)
+            elif a == "heroica":
+                if local in (0, 4):
+                    m.poe(m.base, timpano(raiz, 1.0), t0)
+                    m.poe(m.base, m.IMPACTO, t0, 0.9)
+                m.bat([0, 8] if local < 2 else [0, 3, 6, 8, 11, 14] if local < 6 else range(16), m.BUMBO_F, m.base, t0, 0.7 + 0.04 * local)
+                if local >= 2:
+                    m.bat([4, 12], m.CAIXA_F, m.base_sala, t0, 0.8)
+                    for k in range(16):
+                        aberto = k in (0, 6, 10)
+                        m.poe(m.pulso, guitarra(pc, S16 * (2.6 if aberto else 0.7), (0.8 if aberto else 0.6) + 0.04 * local, abafada=not aberto), t0 + k * S16)
+                if local % 2 == 1:
+                    m.poe(m.tema, metais([n + 12 for n in notas], BEAT * 0.4, 1.1), t0)
+                    m.poe(m.tema, metais([n + 12 for n in notas], BEAT * 0.4, 1.05), t0 + BEAT * 0.75)
+                    m.poe(m.tema, metais([n + 12 for n in notas], BEAT * 2, 1.2), t0 + BEAT)
             elif a == "fanfarra":
                 if local % 2 == 1:
                     m.poe(m.tema, metais([n + 12 for n in notas], BEAT * 0.4, 1.15), t0)
@@ -607,6 +621,9 @@ def faz(f):
             seq = [notas[0] + 12, notas[2] + 12, notas[1] + 24, notas[2] + 12]
             for k in range(8):
                 m.poe(m.pulso, pan(cordas(seq[k % 4], S16 * 1.2, 0.9 + 0.15 * (k % 2 == 0)), 0.25 * (1 if k % 2 else -1)), t0 + k * BEAT / 2)
+            for k in range(16):
+                aberto = k in (0, 3, 6, 8, 11, 14)
+                m.poe(m.pulso, guitarra(pc, S16 * (2.6 if aberto else 0.7), 0.95 if aberto else 0.72, abafada=not aberto), t0 + k * S16)
         elif f.groove == "quatro":
             seq = [notas[0] + 12, notas[1] + 12, notas[2] + 12, notas[1] + 24, notas[2] + 12, notas[0] + 24, notas[2] + 24, notas[1] + 24]
             for k in range(16):
@@ -617,9 +634,9 @@ def faz(f):
             alaude = [notas[0] + 12, notas[2] + 12, notas[1] + 12, notas[0] + 24]
             for k, p in enumerate((0, 3, 6, 8, 11, 14)):
                 m.poe(m.pulso, pan(faisca(alaude[k % 4], 0.7), -0.25), t0 + p * S16)
-            if f.chefe:
-                for pos, dur in ((0, 6), (6, 4), (10, 6)):
-                    m.poe(m.pulso, guitarra(pc, dur * S16 * 0.9, 0.7), t0 + pos * S16)
+            for k in range(16):                                                   # as guitarras de batalha por baixo do sabor
+                aberto = k in (0, 6, 10)
+                m.poe(m.pulso, guitarra(pc, S16 * (2.6 if aberto else 0.7), (0.95 if aberto else 0.7) * (1.1 if f.chefe else 1), abafada=not aberto), t0 + k * S16)
         elif f.groove in ("metal", "bigorna"):
             for k in range(16):
                 aberto = k in (0, 3, 6, 8, 11, 14)
@@ -700,20 +717,20 @@ def faz(f):
             elif g == "tribal":
                 for p, fz in ((0, 1.0), (3, 0.7), (6, 0.8), (8, 1.0), (10, 0.6), (11, 0.7), (14, 0.8)):
                     m.poe(m.base, taiko(0.75 * fz), t0 + p * S16)
-                m.bat([0, 8], m.BUMBO_F, m.base, t0)
-                m.bat([4, 12], m.CAIXA, m.base_sala, t0, 0.85)
-                for k in range(16):
-                    m.poe(m.pulso, m.CHIMBAL, t0 + k * S16, 0.55 if k % 2 == 0 else 0.3)
+                m.bat([0, 3, 6, 8, 11, 14], m.BUMBO_F, m.base, t0)
+                m.bat([4, 12], m.CAIXA_F, m.base_sala, t0)
+                for k in range(0, 16, 2):
+                    m.poe(m.pulso, m.CONDUCAO, t0 + k * S16)
             elif g == "maqsum":
                 for p, fz, grave in ((0, 1.0, True), (3, 0.6, False), (6, 0.7, False), (8, 0.9, True), (12, 0.7, False)):
                     m.poe(m.base, taiko(fz) if grave else tom(64, 0.6 * fz), t0 + p * S16)
-                m.bat([0, 8], m.BUMBO_F, m.base, t0)
+                m.bat([0, 3, 8, 11], m.BUMBO_F, m.base, t0)
                 m.bat([4, 12], m.CAIXA_F, m.base_sala, t0)
                 for k in range(0, 16, 2):
-                    m.poe(m.pulso, m.CHIMBAL, t0 + k * S16, 0.6)
+                    m.poe(m.pulso, m.CHIMBAL_F, t0 + k * S16, 0.8)
             elif g == "meio":
-                m.bat([0, 7, 10], m.BUMBO_F, m.base, t0)
-                m.bat([8], m.CAIXA_F, m.base_sala, t0)
+                m.bat([0, 3, 7, 10], m.BUMBO_F, m.base, t0)
+                m.bat([4, 12], m.CAIXA_F, m.base_sala, t0)
                 m.poe(m.base, taiko(1.0), t0)
                 m.poe(m.base, taiko(0.65), t0 + 10 * S16)
                 m.bat(range(0, 16, 2), m.CHIMBAL, m.pulso, t0)

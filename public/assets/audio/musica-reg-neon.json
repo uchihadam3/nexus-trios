@@ -1,7 +1,7 @@
 {
- "bpm": 126,
+ "bpm": 150,
  "compassos": 72,
- "segundos": 137.143,
+ "segundos": 115.2,
  "secoes": [
   {
    "nome": "Abertura",
@@ -9,55 +9,55 @@
   },
   {
    "nome": "Tema",
-   "inicio": 15.238
+   "inicio": 12.8
   },
   {
    "nome": "Ação",
-   "inicio": 45.714
+   "inicio": 38.4
   },
   {
    "nome": "Respiro",
-   "inicio": 76.19
+   "inicio": 64.0
   },
   {
    "nome": "Hino",
-   "inicio": 91.429
+   "inicio": 76.8
   },
   {
    "nome": "Refrão",
-   "inicio": 106.667
+   "inicio": 89.6
   },
   {
    "nome": "Volta",
-   "inicio": 121.905
+   "inicio": 102.4
   }
  ],
  "estilo": "caminho do nexus · reg-neon (v9)",
  "laco": {
-  "inicio": 15.238,
-  "fim": 137.143
+  "inicio": 12.8,
+  "fim": 115.2
  },
  "camadas": {
   "musica-reg-neon-base": {
    "arquivo": "musica-reg-neon-base.ogg",
    "mp3": "musica-reg-neon-base.mp3",
-   "segundos": 137.143,
-   "bytes": 1300851,
-   "rmsDb": -23.1
+   "segundos": 115.2,
+   "bytes": 1125199,
+   "rmsDb": -22.3
   },
   "musica-reg-neon-pulso": {
    "arquivo": "musica-reg-neon-pulso.ogg",
    "mp3": "musica-reg-neon-pulso.mp3",
-   "segundos": 137.143,
-   "bytes": 1081862,
-   "rmsDb": -26.6
+   "segundos": 115.2,
+   "bytes": 932101,
+   "rmsDb": -25.8
   },
   "musica-reg-neon-tema": {
    "arquivo": "musica-reg-neon-tema.ogg",
    "mp3": "musica-reg-neon-tema.mp3",
-   "segundos": 137.143,
-   "bytes": 1437410,
-   "rmsDb": -25.1
+   "segundos": 115.2,
+   "bytes": 1342944,
+   "rmsDb": -24.3
   }
  }
 }

@@ -1,7 +1,7 @@
 {
- "bpm": 112,
+ "bpm": 138,
  "compassos": 72,
- "segundos": 154.286,
+ "segundos": 125.217,
  "secoes": [
   {
    "nome": "Abertura",
@@ -9,55 +9,55 @@
   },
   {
    "nome": "Tema",
-   "inicio": 17.143
+   "inicio": 13.913
   },
   {
    "nome": "Ação",
-   "inicio": 51.429
+   "inicio": 41.739
   },
   {
    "nome": "Respiro",
-   "inicio": 85.714
+   "inicio": 69.565
   },
   {
    "nome": "Hino",
-   "inicio": 102.857
+   "inicio": 83.478
   },
   {
    "nome": "Refrão",
-   "inicio": 120.0
+   "inicio": 97.391
   },
   {
    "nome": "Volta",
-   "inicio": 137.143
+   "inicio": 111.304
   }
  ],
  "estilo": "caminho do nexus · reg-deserto (v9)",
  "laco": {
-  "inicio": 17.143,
-  "fim": 154.286
+  "inicio": 13.913,
+  "fim": 125.217
  },
  "camadas": {
   "musica-reg-deserto-base": {
    "arquivo": "musica-reg-deserto-base.ogg",
    "mp3": "musica-reg-deserto-base.mp3",
-   "segundos": 154.286,
-   "bytes": 1526105,
-   "rmsDb": -22.6
+   "segundos": 125.217,
+   "bytes": 1203494,
+   "rmsDb": -22.0
   },
   "musica-reg-deserto-pulso": {
    "arquivo": "musica-reg-deserto-pulso.ogg",
    "mp3": "musica-reg-deserto-pulso.mp3",
-   "segundos": 154.286,
-   "bytes": 1114115,
-   "rmsDb": -26.1
+   "segundos": 125.217,
+   "bytes": 921350,
+   "rmsDb": -25.5
   },
   "musica-reg-deserto-tema": {
    "arquivo": "musica-reg-deserto-tema.ogg",
    "mp3": "musica-reg-deserto-tema.mp3",
-   "segundos": 154.286,
-   "bytes": 1593800,
-   "rmsDb": -24.6
+   "segundos": 125.217,
+   "bytes": 1316874,
+   "rmsDb": -24.0
   }
  }
 }

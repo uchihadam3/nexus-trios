@@ -64,8 +64,8 @@ const camadas=(nome:string)=>(['base','pulso','tema'] as const).map(c=>`/assets/
  *   segredo   (luta ★):    si menor com cor dórica e frígia, 160 BPM, caixinha de música e tique-taque (v7)
  *   lenda     (luta 11):   sol menor dominante frígio, 176 BPM, o chefe secreto: sinos graves e coro dobrado (v7)
  */
-const BPM_DA_REGIAO:Record<RegiaoDaMusica,number>={vila:144,floresta:116,neon:126,deserto:112,templo:108,vulcao:176,ceu:152,trono:168};
-const BPM_DO_CHEFE:Record<RegiaoDaMusica,number>={vila:160,floresta:148,neon:160,deserto:132,templo:120,vulcao:184,ceu:158,trono:176};
+const BPM_DA_REGIAO:Record<RegiaoDaMusica,number>={vila:158,floresta:144,neon:150,deserto:138,templo:132,vulcao:176,ceu:152,trono:168};
+const BPM_DO_CHEFE:Record<RegiaoDaMusica,number>={vila:160,floresta:148,neon:160,deserto:132,templo:144,vulcao:184,ceu:158,trono:176};
 export const FAIXAS:Record<Faixa,{camadas:readonly string[];laco:number}>={
   principal:{camadas:AUDIO_ASSETS.battleStems,laco:LACO_DA_MUSICA},
   ascensao:{camadas:camadas('musica-ascensao'),laco:11.852},
@@ -79,11 +79,11 @@ export const FAIXAS:Record<Faixa,{camadas:readonly string[];laco:number}>={
   /*
    * O Caminho do Nexus (v9, tools/audio/generate_music_v9.py): cada região tem a sua música (os 4 rivais dela) e cada
    * chefe tem a dele, com tema e hino compostos nota a nota. O laço volta para o Tema: 8 compassos.
-   *   vila     fá maior, 144, marcha de aventura e sininhos      · Guardião     fá menor, 160, fanfarra heroica
-   *   floresta ré dórico, 116, tambores tribais, flauta e coro   · Rainha       ré menor harmônica, 148, serpente
-   *   neon     dó sustenido menor, 126, synthwave               · General Aço  dó menor, 160, marcha de bigorna
-   *   deserto  mi hijaz, 112, maqsum, alaúde e metais            · Sultão       fá sustenido hijaz, 132, gênio
-   *   templo   lá in-sen, 108, koto, sinos e taikos             · Assombração  sol sustenido menor, 120, caixinha macabra
+   *   vila     fá maior, 158, power metal heroico               · Guardião     fá menor, 160, fanfarra heroica
+   *   floresta ré dórico, 144, taikos, coro e guitarras         · Rainha       ré menor harmônica, 148, serpente
+   *   neon     dó sustenido menor, 150, synthwave de batalha    · General Aço  dó menor, 160, marcha de bigorna
+   *   deserto  mi hijaz, 138, maqsum, alaúde e guitarras        · Sultão       fá sustenido hijaz, 132, gênio
+   *   templo   lá in-sen, 132, koto, taikos e guitarras         · Assombração  sol sustenido menor, 144, terror pesado
    *   vulcao   mi frígio, 176, metal                            · Titã         dó sustenido frígio, 184, metal pesado
    *   ceu      lá bemol lídio, 152, harpa, coro e metais        · Panteão      mi bemol maior, 158, fanfarra do Olimpo
    *   trono    si menor harmônica, 168, órgão e coro            · Imperador    lá menor harmônica, 176, o fim do caminho
