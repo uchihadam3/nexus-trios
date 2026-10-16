@@ -315,6 +315,7 @@ export default function CaminhoDoNexus({ servico, settings, onSettings, onDetail
 
   if (partida && rival && tela.tipo !== 'mapa') {
     const op = oponenteDoRival(rival), pvp = comoPvp(partida, vistas), rodada = partida.rodadas[vistas];
+    const acabou = partida.estado === 'terminada';
     const aura = rival.aura > 0 && <div className="cn-aura-banner"><Flame size={16} /><b>AURA DO CHEFE</b>+{Math.round(rival.aura * 100)}% de Vida em todos os personagens de {rival.nome}</div>;
     const sair = <button className="pv-sair-online" onClick={() => setConfirmar('partida')} disabled={ocupado}><LogOut size={14} />Abandonar partida</button>;
     const confirmacao = confirmar && (confirmar === 'luta'
@@ -325,9 +326,9 @@ export default function CaminhoDoNexus({ servico, settings, onSettings, onDetail
     if (tela.tipo === 'vs' && rodada) return <Vs rival={op} partida={comoPvp(partida)} meu={rodada.meu} dele={rodada.dele} onLutar={() => setTela({ tipo: 'luta' })} />;
     if (tela.tipo === 'luta' && rodada) return <>{avisoDeErro}<ArenaDoPvp meu={partida.meus[rodada.meu]!} dele={partida.deles[rodada.dele]!} seed={rodada.seed} rodada={vistas + 1} rival={rival.nome} settings={settings} onSettings={onSettings}
       podePausar escala={escalaDoRival(rival)} faixa={faixaDe(rival)} onFim={assistiu} onDesistir={() => setConfirmar('luta')} />{confirmacao}</>;
-    if (tela.tipo === 'rodada' && vistas > 0) return <ResultadoDaRodada rival={op} partida={comoPvp(partida, vistas)} final={partida.estado === 'terminada' && vistas >= partida.rodadas.length}
-      onSeguir={() => setTela(partida.estado === 'terminada' && vistas >= partida.rodadas.length ? { tipo: 'fim' } : { tipo: 'escolher' })} />;
-    if (tela.tipo === 'fim' && partida.estado === 'terminada') return <Fim rival={rival} partida={partida} antes={antes} r={r} onMapa={() => { setR({ ...r, partida: null }); setTela({ tipo: 'mapa' }); }}
+    if (tela.tipo === 'rodada' && vistas > 0) return <ResultadoDaRodada rival={op} partida={comoPvp(partida, vistas)} final={acabou && vistas >= partida.rodadas.length}
+      onSeguir={() => setTela(acabou && vistas >= partida.rodadas.length ? { tipo: 'fim' } : { tipo: 'escolher' })} />;
+    if (tela.tipo === 'fim' && acabou) return <Fim rival={rival} partida={partida} antes={antes} r={r} onMapa={() => { setR({ ...r, partida: null }); setTela({ tipo: 'mapa' }); }}
       onDeNovo={() => { setR({ ...r, partida: null }); setTela({ tipo: 'montar', rival }); }} onProximo={irPara} />;
   }
 
