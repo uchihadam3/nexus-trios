@@ -13,7 +13,6 @@ import { ComTermos } from '../components/Termos';
 import { draftConnection } from '../presentation/draft-connections';
 import { BotaoDicas } from '../components/BotaoDicas';
 import { dicasDoDraft,estrelasDoTime,type DicaDoCandidato } from '../presentation/dicas-do-trio';
-import { universoDoTrio } from '../engine/segredos';
 import { universoDaFicha } from '../data/equipes';
 
 /*
@@ -109,25 +108,13 @@ export function DraftScreen({draft,desafio,primeiroRival,dicas,podeDicas,usouDic
 }
 
 /*
- * As estrelas do trio (pedido do jogador: "depois que escolher os três, aparece quantas estrelas o time tem, de uma a
- * cinco… bem bonito"): a mesma força do PvP (src/presentation/dicas-do-trio.ts, estrelasDoTime). As estrelas acendem
- * uma a uma, com o nome do nível. Um trio de 1 estrela ou de um universo só ganha uma frase de mistério: os dois
- * escondem segredos (src/engine/segredos.ts).
+ * As estrelas do trio (pedido do jogador: "depois que escolher os três, aparece quantas estrelas o time tem… mais
+ * sutil, pequenininhas, não tão destacado"): só as cinco estrelinhas embaixo do trio, acendendo uma a uma. A força é
+ * a mesma do PvP (src/presentation/dicas-do-trio.ts, estrelasDoTime).
  */
-const NIVEIS_DO_TRIO=[
-  {nome:'Azarão',cor:'#9fb3c2'},
-  {nome:'Promissor',cor:'#86e3a8'},
-  {nome:'Forte',cor:'#8fd3ff'},
-  {nome:'Muito forte',cor:'#c58cff'},
-  {nome:'Lendário',cor:'#ffd36b'},
-];
 function EstrelasDoTrio({team}:{team:string[]}){
-  const n=estrelasDoTime(team),nivel=NIVEIS_DO_TRIO[n-1]!,universo=universoDoTrio(team);
-  const misterio=n===1?'Ninguém aposta nos pequenos… e é aí que mora um segredo.':universo?`Três de ${universo}… dizem que isso desperta um segredo.`:null;
-  return <div className={`dv-estrelas n${n}`} style={{'--nivel':nivel.cor} as CSSProperties} role="status" aria-label={`Força do trio: ${n} de 5 estrelas, ${nivel.nome}`}>
-    <span className="dv-estrelas-rotulo">FORÇA DO TRIO</span>
-    <span className="dv-estrelas-fila" aria-hidden="true">{[0,1,2,3,4].map(k=><i key={k} className={k<n?'acesa':''} style={{'--k':k} as CSSProperties}><Star size={26} fill="currentColor" strokeWidth={1.5}/></i>)}</span>
-    <b className="dv-estrelas-nome">{nivel.nome}</b>
-    {misterio&&<small className="dv-estrelas-misterio"><Sparkles size={12}/>{misterio}</small>}
+  const n=estrelasDoTime(team);
+  return <div className="dv-estrelas" role="img" aria-label={`Trio de ${n} ${n===1?'estrela':'estrelas'}`}>
+    {[0,1,2,3,4].map(k=><i key={k} className={k<n?'acesa':''} style={{'--k':k} as CSSProperties}><Star size={13} fill="currentColor" strokeWidth={1.5}/></i>)}
   </div>;
 }
