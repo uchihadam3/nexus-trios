@@ -117,26 +117,35 @@ export const normaisVencidas = (lutas: readonly LutaDoSegredo[]) => lutas.filter
  * O rival da luta extra. Sai da seed e do trio, então o servidor sorteia o mesmo.
  *  - Clássico do Universo (só na ★): outros personagens do mesmo universo; se o universo tiver menos de seis, o rival
  *    se completa com versões sombrias do seu próprio trio.
- *  - Luta ★: um trio forte (entre os 25% mais fortes), novo na jornada.
- *  - Luta 11: um dos trios mais fortes de todos (5% do topo), novo na jornada, com um pouco mais de Vida que a luta 10.
+ *  - Luta ★ (pedido do dono: "entre a força da 5 e da 6"): um trio novo na jornada com a força entre o rival da luta 5
+ *    e o da 6, e a Vida no meio das duas.
+ *  - Luta 11 (pedido do dono: "os trios mais fortes nunca entram na jornada… sorteia um deles"): a luta 10 vai até
+ *    ~87% dos trios possíveis (FAIXAS em campaign.ts), então a 11 sorteia entre os 13% mais fortes, que nunca aparecem
+ *    nas 10, novo na jornada e com um pouco mais de Vida que a luta 10.
  */
+export const TOPO_DA_LUTA_11 = 0.87;
 export function rivalSecreto(seed: number, team: readonly string[], encounters: readonly Encounter[], qual: QualLuta, classico: boolean): Encounter {
   const rng = { rng: (seed ^ (qual === 'estrela' ? 0x5e57e1a : 0x0b5e11e)) >>> 0 };
   const u = qual === 'estrela' && classico ? universoDoTrio(team) : null;
+  const vidaDaEstrela = Math.round(((encounters[4]!.scale + encounters[5]!.scale) / 2) * 1000) / 1000;
   if (u) {
     const doMundo = shuffle(characters.filter((c) => c.universe === u && !team.includes(c.id)).map((c) => c.id), rng);
     const rival = [...doMundo.slice(0, 3), ...shuffle([...team], rng)].slice(0, 3);
-    return { team: rival, name: `Clássico · ${u}`, power: Math.round(forcaDoTrio(rival) * 100) / 100, scale: encounters[5]!.scale };
+    return { team: rival, name: `Clássico · ${u}`, power: Math.round(forcaDoTrio(rival) * 100) / 100, scale: vidaDaEstrela };
   }
   const usados = new Set([...team, ...encounters.flatMap((e) => e.team)]);
   const livres = characters.map((c) => c.id).filter((id) => !usados.has(id));
-  const amostra = sampledTeams(livres, rng, 400).map((t) => ({ t, f: forcaDoTrio(t) })).sort((a, b) => a.f - b.f);
-  const [de, ate] = qual === 'estrela' ? [0.75, 0.92] : [0.95, 1];
-  const faixa = amostra.slice(Math.floor(de * amostra.length), Math.max(Math.floor(de * amostra.length) + 1, Math.ceil(ate * amostra.length)));
-  const x = faixa[Math.floor(random(rng) * faixa.length)]!;
-  return qual === 'estrela'
-    ? { team: [...x.t], name: 'Luta Secreta', power: Math.round(x.f * 100) / 100, scale: encounters[5]!.scale }
-    : { team: [...x.t], name: 'O Desafio Secreto', power: Math.round(x.f * 100) / 100, scale: Math.round(encounters[9]!.scale * 1.05 * 1000) / 1000 };
+  const amostra = sampledTeams(livres, rng, 600).map((t) => ({ t, f: forcaDoTrio(t) })).sort((a, b) => a.f - b.f);
+  if (qual === 'estrela') {
+    const de = Math.min(encounters[4]!.power, encounters[5]!.power), ate = Math.max(encounters[4]!.power, encounters[5]!.power);
+    const entre = amostra.filter((x) => x.f >= de - 0.005 && x.f <= ate + 0.005);
+    // sem nenhum exatamente entre as duas, o mais perto do meio
+    const meio = (de + ate) / 2, x = entre.length ? entre[Math.floor(random(rng) * entre.length)]! : amostra.reduce((m, y) => (Math.abs(y.f - meio) < Math.abs(m.f - meio) ? y : m));
+    return { team: [...x.t], name: 'Luta Secreta', power: Math.round(x.f * 100) / 100, scale: vidaDaEstrela };
+  }
+  const topo = amostra.slice(Math.min(amostra.length - 1, Math.floor(TOPO_DA_LUTA_11 * amostra.length)));
+  const x = topo[Math.floor(random(rng) * topo.length)]!;
+  return { team: [...x.t], name: 'O Desafio Secreto', power: Math.round(x.f * 100) / 100, scale: Math.round(encounters[9]!.scale * 1.05 * 1000) / 1000 };
 }
 
 /** O rival de qualquer luta da jornada: as normais vêm da campanha, as extras do rivalSecreto. */
