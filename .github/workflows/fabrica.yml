@@ -1,7 +1,7 @@
 name: Fábrica de simulação
 # Milhões de lutas para medir força solo, de dupla e de trio
 # (scripts/fabrica/lutas.ts). Só roda quando alguém dispara à mão:
-# 20 máquinas × 4 processos, e no fim junta tudo, compactado, no ramo
+# 16 máquinas × 5 processos (deixa 4 das 20 vagas do GitHub livres para publicar o site enquanto a fábrica roda), e no fim junta tudo, compactado, no ramo
 # `fabrica-resultados` (rodadas/<run>-<plano>/lutas.txt.gz). Não mexe na main
 # nem publica nada.
 on:
@@ -36,11 +36,11 @@ concurrency:
 jobs:
   simular:
     runs-on: ubuntu-latest
-    timeout-minutes: 120
+    timeout-minutes: 180
     strategy:
       fail-fast: false
       matrix:
-        maquina: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
+        maquina: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -49,7 +49,7 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npx esbuild scripts/fabrica/lutas.ts --bundle --platform=node --format=esm --target=node22 --outfile=${{ runner.temp }}/lutas.mjs --log-level=warning
-      - name: Lutas (4 processos)
+      - name: Lutas (5 processos)
         env:
           PLANO: ${{ inputs.plano }}
           LUTAS: ${{ inputs.lutas }}
@@ -59,8 +59,8 @@ jobs:
           SAL: ${{ inputs.sal }}
         run: |
           mkdir -p saida
-          for i in 0 1 2 3; do
-            node ${{ runner.temp }}/lutas.mjs "$PLANO" $((MAQUINA*4+i)) 80 "$LUTAS" "saida/parte-$((MAQUINA*4+i)).txt" "$SEMENTE" "${SAL:-0}" &
+          for i in 0 1 2 3 4; do
+            node ${{ runner.temp }}/lutas.mjs "$PLANO" $((MAQUINA*5+i)) 80 "$LUTAS" "saida/parte-$((MAQUINA*5+i)).txt" "$SEMENTE" "${SAL:-0}" &
           done
           wait
           wc -l saida/*.txt

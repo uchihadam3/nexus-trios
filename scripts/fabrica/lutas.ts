@@ -1,7 +1,7 @@
 /*
  * Fábrica de simulação: lutas em lote, para medir força solo, de dupla e de
- * trio com milhões de lutas (.github/workflows/fabrica.yml roda 20 máquinas
- * × 4 processos em paralelo).
+ * trio com milhões de lutas (.github/workflows/fabrica.yml roda 16 máquinas
+ * × 5 processos em paralelo).
  *
  * É o motor do jogo, sem tirar nada: a CI empacota este arquivo com esbuild
  * (sem o ajudante __name do tsx, ~1,4× mais rápido) e o resultado de cada
