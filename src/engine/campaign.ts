@@ -46,8 +46,8 @@ export function forcaDoTrio(team:readonly string[]):number{return team.reduce((n
  *
  * As faixas são as mesmas para todo trio (PUXA_DO_TRIO = 0): com a força medida em 2 milhões de lutas,
  * puxar as faixas com o trio apagava a vantagem de escolher bem. Só o trio que passa de todos os rivais
- * possíveis (cheio de combos) enfrenta rivais com mais Vida (VIDA_ACIMA_DO_TOPO). Medido em 40 personagens:
- * o trio sorteado vence ~5% das jornadas, o de quem escolhe bem ~12% e o melhor ~38%. Sem trio (a Diária e a Semanal, os
+ * possíveis (cheio de combos) enfrenta rivais com mais Vida (VIDA_ACIMA_DO_TOPO). As chances de vencer a jornada
+ * estão junto de ESCALAS. Sem trio (a Diária e a Semanal, os
  * mesmos rivais para todos), as faixas ficam no meio. ESCALAS é a Vida dos rivais (×) em cada luta.
  */
 /** O centro de cada faixa, em percentil da força dos rivais possíveis: muito fracos … muito fortes. */
@@ -65,7 +65,12 @@ export const VIDA_PELO_TRIO=0;
 export const VIDA_ACIMA_DO_TOPO=0.55;
 /** Quantos trios rivais possíveis são sorteados para formar as faixas. */
 const AMOSTRA=900;
-export const ESCALAS=[.8,.82,.84,.84,.87,.9,.935,.945,.965,.965];
+/*
+ * Os rivais com 90% da Vida de antes (pedido do dono: "a parte de vencer as 10 lutas está um pouquinho difícil").
+ * Medido em 8.700 jornadas: trio sorteado de 6% para 15%, quem escolhe bem de 12,5% para 25%, o melhor trio de cada
+ * personagem de 42% para 51%; por estrela, 4★ 16,5%, 5★ 18,5%, 6★ 39% e 7★ 56%.
+ */
+export const ESCALAS=[.72,.738,.756,.756,.783,.81,.842,.851,.869,.869];
 const names=['Primeiro encontro','Novos rivais','O ritmo aumenta','Entre universos','Ponto de ruptura','Pressão crescente','Sem recuar','A última barreira','À altura das lendas','O confronto final'];
 const chave=(t:readonly string[])=>[...t].sort().join('|');
 /* `count` trios diferentes sorteados de `ids` (três índices ao acaso; rápido mesmo para milhares de trios). */
