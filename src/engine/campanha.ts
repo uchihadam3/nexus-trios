@@ -361,7 +361,28 @@ export const zerou = (e: Estrelas) => (e.imperador ?? 0) > 0;
 
 /** Quantos personagens você precisa para a campanha: 9 nos times e 3 descansando. */
 export const MINIMO_DA_CAMPANHA = 12;
+/** O rodízio de base (o dos rivais e o seu nas regiões 1–2). */
 export const DESCANSO = { quantos: 3, partidas: 3, janela: 5 } as const;
+export type RegraDoDescanso = { quantos: number; partidas: number };
+/*
+ * O seu rodízio pesa mais a cada região (pedido do dono): descansam sempre 3 partidas, mas cada região põe mais um para
+ * dormir — 3 na região 1, 4 na 2 … 9 nas regiões 7 e 8 (dormir pouco tempo e muita gente: não dá para pôr só os fracos
+ * para dormir e seguir com os fortes). A região é a do rival da partida que acabou.
+ */
+export const DORMEM_NO_MAXIMO = 9;
+export const descansoDaRegiao = (regiao: number): RegraDoDescanso =>
+  ({ quantos: Math.min(DORMEM_NO_MAXIMO, DESCANSO.quantos + Math.max(1, regiao) - 1), partidas: DESCANSO.partidas });
+/** O seu rodízio nesta região, sem nunca deixar menos de 9 livres (os 3 times): com 12 personagens, descansam 3. */
+export const seuDescanso = (regiao: number, tamanhoDaColecao: number): RegraDoDescanso => {
+  const r = descansoDaRegiao(regiao);
+  return { quantos: Math.max(0, Math.min(r.quantos, tamanhoDaColecao - 9)), partidas: r.partidas };
+};
+/*
+ * Só a partida contra um rival que ainda não tinha 3 estrelas mexe no seu descanso (pedido do dono): bater de novo num
+ * rival já gabaritado não acorda ninguém (senão bastava farmar o mais fraco). Com 1 ou 2 estrelas ainda conta.
+ */
+export const contaParaODescanso = (estrelasAntes: Estrelas, rival: Pick<Rival, 'id'>) =>
+  (estrelasAntes[rival.id] ?? 0) < 3 || totalDeEstrelas(estrelasAntes) >= TOTAL_DE_ESTRELAS; // com tudo gabaritado, qualquer uma conta
 /** Quem descansa e por quantas partidas ainda (id → partidas). */
 export type Descanso = Record<string, number>;
 
@@ -371,18 +392,18 @@ export function quemLutou(times: readonly (readonly string[])[], rodadas: readon
 }
 
 /**
- * Depois de cada partida: quem descansava descansa uma partida a menos; se ninguém mais descansa, os 3 que mais
- * lutaram nas últimas 5 partidas (`ultimas`, da mais antiga para a mais nova, esta incluída) descansam as 3
- * seguintes. Empate: quem lutou mais recentemente, depois o mais forte.
+ * Depois de cada partida: quem descansava descansa uma partida a menos; se ninguém mais descansa, os `regra.quantos` que
+ * mais lutaram nas últimas 5 partidas (`ultimas`, da mais antiga para a mais nova, esta incluída) descansam as
+ * `regra.partidas` seguintes. Empate: quem lutou mais recentemente, depois o mais forte.
  */
-export function depoisDaPartida(descanso: Descanso, ultimas: readonly (readonly string[])[]): Descanso {
+export function depoisDaPartida(descanso: Descanso, ultimas: readonly (readonly string[])[], regra: RegraDoDescanso = DESCANSO): Descanso {
   const agora: Descanso = {};
   for (const [id, n] of Object.entries(descanso)) if (n > 1) agora[id] = n - 1;
   if (Object.keys(agora).length) return agora;
   const janela = ultimas.slice(-DESCANSO.janela), conta = new Map<string, number>(), quando = new Map<string, number>();
   janela.forEach((uso, k) => { for (const id of uso) { conta.set(id, (conta.get(id) ?? 0) + 1); quando.set(id, k); } });
   const ordem = [...conta.keys()].sort((a, b) => conta.get(b)! - conta.get(a)! || quando.get(b)! - quando.get(a)! || SOLO(b) - SOLO(a) || a.localeCompare(b));
-  for (const id of ordem.slice(0, DESCANSO.quantos)) agora[id] = DESCANSO.partidas;
+  for (const id of ordem.slice(0, regra.quantos)) agora[id] = regra.partidas;
   return agora;
 }
 

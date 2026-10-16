@@ -3,7 +3,7 @@ import { createPortal } from 'react-dom';
 import { ArrowLeft, Brain, Crown, Eye, Flame, Lock, LogOut, Map as MapaIcone, Medal, Moon, Play, RotateCcw, Shield, Sparkles, Star, Swords, Trophy, X } from 'lucide-react';
 import { byId } from '../data/characters';
 import { ArenaDoPvp } from '../components/ArenaDoPvp';
-import { DESCANSO, MINIMO_DA_CAMPANHA, REGIOES, RIVAIS, TITULOS, TOTAL_DE_ESTRELAS, colecaoDoRival, escalaDoRival, liberado, livresParaJogar, proximoRival, proximoTitulo,
+import { DESCANSO, MINIMO_DA_CAMPANHA, descansoDaRegiao, REGIOES, RIVAIS, TITULOS, TOTAL_DE_ESTRELAS, colecaoDoRival, escalaDoRival, liberado, livresParaJogar, proximoRival, proximoTitulo,
   rivalPorId, tituloDas, totalDeEstrelas, zerou, type Rival } from '../engine/campanha';
 import { variacaoContraNpc, type PartidaPvp, type Times } from '../engine/pvp';
 import { ENGINE_VERSION } from '../engine/ranked';
@@ -125,7 +125,7 @@ function Mapa({ r, onRival, onVoltar }: { r: RespostaDaCampanha; onRival: (x: Ri
       <Play size={22} />
     </button>}
 
-    <Descansando descanso={r.progresso.descanso} titulo="SEUS PERSONAGENS DESCANSANDO" vazio={`Rodízio: os ${DESCANSO.quantos} que mais lutarem nas últimas ${DESCANSO.janela} partidas descansam ${DESCANSO.partidas}. Vale para os rivais também.`} />
+    <Descansando descanso={r.progresso.descanso} titulo="SEUS PERSONAGENS DESCANSANDO" vazio={`Rodízio: os que mais lutarem nas últimas ${DESCANSO.janela} partidas descansam. Por ${DESCANSO.partidas} partidas: 3 na região 1, um a mais a cada região, até 9. Só conta partida contra rival que você ainda não gabaritou (★★★).`} />
 
     <div className="cn-regioes">
       {REGIOES.map((g) => <Regiao key={g.id} regiao={g} estrelas={r.progresso.estrelas} atual={proximo?.id ?? null} onRival={onRival} />)}
@@ -174,6 +174,8 @@ function Ficha({ rival, r, onFechar, onDesafiar }: { rival: Rival; r: RespostaDa
         </div>
         {ganha === 0 && <small className="cn-nota">Você está 400 ou mais acima dele: vencer não dá rating (as estrelas valem).</small>}
         <div className="cn-premio"><Star size={14} />3–0 dá ★★★ · 3–1 dá ★★ · 3–2 dá ★</div>
+        {e >= 3 && Object.keys(r.progresso.descanso).length > 0 && <small className="cn-nota"><Moon size={12} /> Você já gabaritou este rival (★★★): esta partida não acorda seus personagens.</small>}
+        {e < 3 && <small className="cn-nota"><Moon size={12} /> Aqui o rodízio põe {descansoDaRegiao(rival.regiao).quantos} personagens para dormir por {descansoDaRegiao(rival.regiao).partidas} partidas.</small>}
         <Descansando descanso={r.progresso.descanso_rivais[rival.id] ?? {}} titulo="DESCANSANDO DO LADO DELE" />
         {falta > 0 ? <p className="cn-aviso"><Lock size={14} />A campanha pede {MINIMO_DA_CAMPANHA} personagens na coleção: faltam {falta}.</p>
           : livres < 9 ? <p className="cn-aviso"><Moon size={14} />Gente demais descansando: espere o rodízio.</p>

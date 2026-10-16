@@ -2,7 +2,7 @@
  * A campanha sem servidor (VITE_CAMPANHA_DEMO=true): só para testar as telas do Caminho do Nexus no navegador; nunca
  * no jogo publicado. Faz o mesmo que o juiz (supabase/functions/ranked-api/campanha.ts), guardando tudo no aparelho.
  */
-import { depoisDaPartida, escalaDoRival, escolhaDoRival, estrelasDaPartida, liberado, livresParaJogar, lutaDaRodada, quemLutou, rivalPorId, timesDoRival, DESCANSO } from '../engine/campanha';
+import { contaParaODescanso, depoisDaPartida, seuDescanso, escalaDoRival, escolhaDoRival, estrelasDaPartida, liberado, livresParaJogar, lutaDaRodada, quemLutou, rivalPorId, timesDoRival, DESCANSO } from '../engine/campanha';
 import { RATING_INICIAL, problemaDosTimes, timesLivres, variacaoContraNpc, vencedorDaPartida, type RodadaPvp, type Times } from '../engine/pvp';
 import type { PartidaDaCampanha, ProgressoDaCampanha, RespostaDaCampanha, ServicoDaCampanha } from './pvp-online';
 
@@ -25,7 +25,7 @@ export function criarCampanhaDemo(colecao: () => string[]): ServicoDaCampanha {
     const rival = rivalPorId(p.rival)!, prog = b.progresso;
     const feitas = b.partidas.filter((x) => x.estado === 'terminada' && x.id !== p.id);
     const meu = (x: Guardada) => quemLutou(x.meus, x.rodadas.map((r) => ({ time: r.meu }))), dele = (x: Guardada) => quemLutou(x.deles, x.rodadas.map((r) => ({ time: r.dele })));
-    prog.descanso = depoisDaPartida(prog.descanso, [...feitas.slice(-(DESCANSO.janela - 1)), p].map(meu));
+    if (contaParaODescanso(prog.estrelas, rival)) prog.descanso = depoisDaPartida(prog.descanso, [...feitas.slice(-(DESCANSO.janela - 1)), p].map(meu), seuDescanso(rival.regiao, colecao().length));
     prog.descanso_rivais[rival.id] = depoisDaPartida(prog.descanso_rivais[rival.id] ?? {}, [...feitas.filter((x) => x.rival === rival.id).slice(-(DESCANSO.janela - 1)), p].map(dele));
     const estrelas = vencedor === 'eu' ? estrelasDaPartida(p) : 0, delta = variacaoContraNpc(b.rating, rival.rating, vencedor === 'eu');
     Object.assign(p, { estado: 'terminada', vencedor, motivo, estrelas, ratingAntes: b.rating, delta });

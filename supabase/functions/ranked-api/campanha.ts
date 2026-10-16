@@ -10,7 +10,7 @@
  * 400 acima) e o progresso mudam juntos, numa transação (pvp_campanha_terminar).
  */
 import type { SupabaseClient } from 'npm:@supabase/supabase-js@2.117.2';
-import { DESCANSO, MINIMO_DA_CAMPANHA, depoisDaPartida, escalaDoRival, escolhaDoRival, estrelasDaPartida, liberado, livresParaJogar, lutaDaRodada, quemLutou,
+import { DESCANSO, MINIMO_DA_CAMPANHA, contaParaODescanso, depoisDaPartida, seuDescanso, escalaDoRival, escolhaDoRival, estrelasDaPartida, liberado, livresParaJogar, lutaDaRodada, quemLutou,
   rivalPorId, timesDoRival, type Descanso, type Estrelas, type Rival } from '../../../src/engine/campanha.ts';
 import { RATING_INICIAL, problemaDosTimes, timesLivres, variacaoContraNpc, vencedorDaPartida, type PartidaPvp, type RodadaPvp, type Times } from '../../../src/engine/pvp.ts';
 import { ENGINE_VERSION } from '../../../src/engine/ranked.ts';
@@ -88,10 +88,12 @@ async function resposta(db: Db, quem: string, partida: Partida | null) {
 
 /** O fim da partida: estrelas, rating e o rodízio dos dois lados, numa transação. */
 async function terminar(db: Db, p: Partida, rival: Rival, vencedor: 'eu' | 'rival', motivo: string) {
-  const [progresso, rating, minhas, contraEle] = await Promise.all([progressoDe(db, p.player_id), ratingDe(db, p.player_id), ultimas(db, p.player_id), ultimas(db, p.player_id, rival.id)]);
+  const [progresso, rating, minhas, contraEle, colecao] = await Promise.all([progressoDe(db, p.player_id), ratingDe(db, p.player_id), ultimas(db, p.player_id), ultimas(db, p.player_id, rival.id), colecaoDe(db, p.player_id)]);
   const usoMeu = (x: Partida) => quemLutou(x.meus, x.rodadas.map((r) => ({ time: r.meu })));
   const usoDele = (x: Partida) => quemLutou(x.deles, x.rodadas.map((r) => ({ time: r.dele })));
-  const descanso = depoisDaPartida(progresso.descanso, [...minhas, p].map(usoMeu));
+  // o seu rodízio pesa mais a cada duas regiões; contra rival que você já tinha gabaritado (3★), nada muda
+  const descanso = contaParaODescanso(progresso.estrelas, rival)
+    ? depoisDaPartida(progresso.descanso, [...minhas, p].map(usoMeu), seuDescanso(rival.regiao, colecao.length)) : progresso.descanso;
   const descansoDele = depoisDaPartida(progresso.descanso_rivais[rival.id] ?? {}, [...contraEle, p].map(usoDele));
   const estrelas = vencedor === 'eu' ? estrelasDaPartida(p) : 0;
   const delta = variacaoContraNpc(Number(rating.rating), rival.rating, vencedor === 'eu');
