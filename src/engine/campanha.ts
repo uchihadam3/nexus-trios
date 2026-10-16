@@ -2,7 +2,7 @@
  * O Caminho do Nexus: a campanha do PvP contra 40 rivais (pedido do jogador: "uma campanha mesmo… você começa só
  * com um desbloqueado… cada um focado num tipo de coisa diferente… difícil… capriche").
  *
- *  - 8 regiões, da Vila do Começo ao Trono do Nexus; cada uma com 4 rivais e um chefe. Vencer um rival libera o
+ *  - 8 regiões, do Vale do Despertar ao Trono do Nexus; cada uma com 4 rivais e um chefe. Vencer um rival libera o
  *    próximo; vencer o chefe abre a região seguinte.
  *  - Cada rival tem um jeito próprio: a coleção dele (só tanques, só veneno, só deuses, só Dragon Ball…), o quanto ele
  *    pensa para montar os times (do "de olho fechado" ao mestre) e como escolhe o time de cada rodada (ao acaso, o
@@ -21,7 +21,7 @@
  */
 import { byId, characters } from '../data/characters';
 import { DUPLAS } from '../data/duplas-medidas';
-import { notaDoTrio } from '../presentation/dicas-do-trio';
+import { estrelasDaNota, notaDoTrio } from '../presentation/dicas-do-trio';
 import { identidadesDe, type Identidade } from '../presentation/identities';
 import { createBattle, stepBattle } from './battle';
 import { chanceDoTrio, montarTimes, sorteio, timesLivres, type JeitoDeMontar, type PartidaPvp, type Times } from './pvp';
@@ -32,13 +32,13 @@ import { chanceDoTrio, montarTimes, sorteio, timesLivres, type JeitoDeMontar, ty
 
 export interface Regiao { n: number; id: string; nome: string; lema: string; cor: string; cor2: string; icone: string; aura: number }
 export const REGIOES: readonly Regiao[] = [
-  { n: 1, id: 'vila', nome: 'Vila do Começo', lema: 'Todo herói começa em algum lugar.', cor: '#8fe08a', cor2: '#2f7a4a', icone: '🏡', aura: 0 },
-  { n: 2, id: 'floresta', nome: 'Floresta Sussurrante', lema: 'As árvores têm olhos. E dentes.', cor: '#4fd39a', cor2: '#145c46', icone: '🌲', aura: 0 },
-  { n: 3, id: 'neon', nome: 'Cidade Neon', lema: 'Luzes, máquinas e gente rápida demais.', cor: '#53d6ff', cor2: '#2a3f9e', icone: '🌃', aura: 0 },
-  { n: 4, id: 'deserto', nome: 'Deserto Escaldante', lema: 'O sol cansa. Os rivais, mais ainda.', cor: '#ffc061', cor2: '#9c4a1c', icone: '🏜️', aura: 0 },
-  { n: 5, id: 'templo', nome: 'Templo das Sombras', lema: 'Aqui ninguém luta limpo.', cor: '#b99bff', cor2: '#3c2373', icone: '🏯', aura: 0 },
-  { n: 6, id: 'vulcao', nome: 'Vulcão Furioso', lema: 'Força bruta e fogo. Muito fogo.', cor: '#ff7a45', cor2: '#7a1c12', icone: '🌋', aura: 0.1 },
-  { n: 7, id: 'ceu', nome: 'Céu dos Deuses', lema: 'Os imortais não perdem fácil.', cor: '#ffe27a', cor2: '#8a6a12', icone: '☁️', aura: 0.15 },
+  { n: 1, id: 'vila', nome: 'Vale do Despertar', lema: 'Todo duelista desperta em algum lugar.', cor: '#8fe08a', cor2: '#2f7a4a', icone: '🏡', aura: 0 },
+  { n: 2, id: 'floresta', nome: 'Floresta Sombria', lema: 'As árvores têm olhos. E dentes.', cor: '#4fd39a', cor2: '#145c46', icone: '🌲', aura: 0 },
+  { n: 3, id: 'neon', nome: 'Metrópole Neon', lema: 'Luzes, máquinas e gente rápida demais.', cor: '#53d6ff', cor2: '#2a3f9e', icone: '🌃', aura: 0 },
+  { n: 4, id: 'deserto', nome: 'Dunas Escarlates', lema: 'O sol cansa. Os rivais, mais ainda.', cor: '#ffc061', cor2: '#9c4a1c', icone: '🏜️', aura: 0 },
+  { n: 5, id: 'templo', nome: 'Santuário Proibido', lema: 'Aqui ninguém luta limpo.', cor: '#b99bff', cor2: '#3c2373', icone: '🏯', aura: 0 },
+  { n: 6, id: 'vulcao', nome: 'Coração do Vulcão', lema: 'Força bruta e fogo. Muito fogo.', cor: '#ff7a45', cor2: '#7a1c12', icone: '🌋', aura: 0.1 },
+  { n: 7, id: 'ceu', nome: 'Cidadela Celeste', lema: 'Os imortais não perdem fácil.', cor: '#ffe27a', cor2: '#8a6a12', icone: '☁️', aura: 0.15 },
   { n: 8, id: 'trono', nome: 'Trono do Nexus', lema: 'O fim do caminho. O Imperador espera.', cor: '#ff5fd8', cor2: '#4a0f6e', icone: '👑', aura: 0.2 },
 ];
 
@@ -128,26 +128,42 @@ export interface Rival {
   espelho?: boolean;
   /** Aura do Chefe: Vida a mais nos personagens dele. */
   aura: number;
+  /** A nota máxima de cada time dele (Infinity: sem teto) e as estrelas que isso dá (o caminho sobe aos poucos). */
+  teto: number; estrelas: number;
 }
 
-type SemN = Omit<Rival, 'n' | 'regiao' | 'chefe' | 'aura' | 'rating'>;
+type SemN = Omit<Rival, 'n' | 'regiao' | 'chefe' | 'aura' | 'rating' | 'teto' | 'estrelas'>;
+/*
+ * O teto de força de cada rival, na ordem do caminho (pedido do dono: o 2º rival montava times 7★). É a nota máxima de
+ * cada time dele (a mesma das estrelas): sem teto, quase todos juntavam combos até o 7★ e o caminho não subia. Medido
+ * contra um jogador bom (60 personagens, times de 6★ e 7★): a Região 1 vai de 1★ a 5★ e ele vence quase sempre; os
+ * 7★ chegam na Região 3 e a força cresce até a Região 6, onde acaba o teto (os chefes finais montam com tudo).
+ */
+const SEM_TETO = Infinity;
+const TETO_DOS_RIVAIS = [
+  0, 0.15, 0.4, 0.6, 0.9, // Região 1: 1★ → 5★
+  1, 1.2, 1.4, 1.6, 2, // Região 2: 5★ → 6★
+  2.1, 2.3, 2.5, 2.7, 3, // Região 3: os primeiros 7★
+  3, 3.2, 3.4, 3.6, 4, // Região 4
+  4, 4.3, 4.6, 5, SEM_TETO, // Região 5
+];
 const POR_REGIAO: SemN[][] = [
   [
-    { id: 'zepipoca', nome: 'Zé Pipoca', titulo: 'O Sorteado', avatar: 'patrick', cor: '#ffb3c7', estilo: 'Ao acaso', jeito: 'Monta os times de olho fechado e escolhe no par ou ímpar.',
-      fala: 'Peguei uns aí. Vai que dá!', venceu: 'Hã? Eu ganhei? EU GANHEI!', perdeu: 'Tudo bem, eu nem sabia jogar mesmo.', colecao: { teto: 0.3 }, cerebro: cerebro(1) },
-    { id: 'vovococa', nome: 'Vovó Cocota', titulo: 'A Amiga dos Bichos', avatar: 'scooby', cor: '#ffd27f', estilo: 'Só bichos', jeito: 'Só joga com bichos, monstrinhos e criaturas. Escolhe sempre o time que parece mais bravo.',
-      fala: 'Meus bichinhos mordem, viu?', venceu: 'Quem é o bom menino? Quem é?', perdeu: 'Vou dar um biscoito pra eles se animarem.', colecao: { filtro: etiqueta('animal', 'monster', 'beast-instinct'), teto: 0.5 }, cerebro: cerebro(3) },
-    { id: 'ticodesenho', nome: 'Tico Desenho', titulo: 'Fã de Desenho', avatar: 'pernalonga', cor: '#7fd3ff', estilo: 'Desenhos animados', jeito: 'Cresceu vendo desenho e só joga com eles. Não subestime um coelho com uma bigorna.',
-      fala: 'O que é que há, velhinho?', venceu: 'Isso é tudo, pessoal!', perdeu: 'Volta o episódio! Volta!', colecao: { filtro: universo(...DESENHOS), teto: 0.6 }, cerebro: cerebro(3) },
-    { id: 'cacadora', nome: 'Caçadora Lupa', titulo: 'A Que Não Erra', avatar: 'artemis', cor: '#c6e37a', estilo: 'Caça aos fracos', jeito: 'Escolhe quem termina os feridos: finalização e precisão. Seu personagem com pouca Vida é o alvo.',
+    { id: 'zepipoca', nome: 'O Apostador', titulo: 'Joga com a Sorte', avatar: 'patrick', cor: '#ffb3c7', estilo: 'Ao acaso', jeito: 'Monta os times de olho fechado e escolhe no par ou ímpar.',
+      fala: 'Os dados já rolaram. Vamos ver de que lado caem.', venceu: 'A sorte escolheu o meu lado.', perdeu: 'Hoje os dados eram seus.', colecao: { teto: 0.3 }, cerebro: cerebro(1) },
+    { id: 'vovococa', nome: 'Rei da Matilha', titulo: 'Senhor das Feras', avatar: 'scooby', cor: '#ffd27f', estilo: 'Só bichos', jeito: 'Só joga com bichos, monstrinhos e criaturas. Escolhe sempre o time que parece mais bravo.',
+      fala: 'A matilha já sentiu o seu cheiro.', venceu: 'A matilha come primeiro.', perdeu: 'A matilha recua… por enquanto.', colecao: { filtro: etiqueta('animal', 'monster', 'beast-instinct'), teto: 0.5 }, cerebro: cerebro(3) },
+    { id: 'ticodesenho', nome: 'O Animador', titulo: 'Senhor dos Desenhos', avatar: 'pernalonga', cor: '#7fd3ff', estilo: 'Desenhos animados', jeito: 'Cresceu vendo desenho e só joga com eles. Não subestime um coelho com uma bigorna.',
+      fala: 'No meu mundo, a física é só uma sugestão.', venceu: 'Isso é tudo, pessoal!', perdeu: 'Fim do episódio… mas tem continuação.', colecao: { filtro: universo(...DESENHOS), teto: 0.6 }, cerebro: cerebro(3) },
+    { id: 'cacadora', nome: 'Caçadora Sombria', titulo: 'Nunca Erra o Alvo', avatar: 'artemis', cor: '#c6e37a', estilo: 'Caça aos fracos', jeito: 'Escolhe quem termina os feridos: finalização e precisão. Seu personagem com pouca Vida é o alvo.',
       fala: 'Já sei quem cai primeiro.', venceu: 'Presa abatida.', perdeu: 'Hoje a caça escapou.', colecao: { filtro: ou(tem('Finalização'), etiqueta('hunter', 'precision', 'predator')), teto: 0.72 }, cerebro: cerebro(4) },
-    { id: 'guardiaodavila', nome: 'Bento, o Guardião', titulo: 'Chefe da Vila', avatar: 'shrek', cor: '#9be36b', estilo: 'O melhor da vila', jeito: 'Junta o que a vila tem de melhor e já sabe escolher contra os seus times.',
-      fala: 'Pra sair da vila, tem que passar por mim.', venceu: 'Volta pra casa e treina mais.', perdeu: 'A estrada é sua. Cuidado na floresta.', colecao: { teto: 0.65 }, cerebro: cerebro(4) },
+    { id: 'guardiaodavila', nome: 'Guardião do Vale', titulo: 'Chefe do Vale', avatar: 'shrek', cor: '#9be36b', estilo: 'O melhor do vale', jeito: 'Junta o que o vale tem de melhor e já sabe escolher contra os seus times.',
+      fala: 'Ninguém sai do vale sem passar por mim.', venceu: 'Volte quando estiver pronto.', perdeu: 'O caminho é seu. Cuidado na floresta.', colecao: { teto: 0.65 }, cerebro: cerebro(4) },
   ],
   [
-    { id: 'hackerbyte', nome: 'Hacker Byte', titulo: 'Mente Digital', avatar: 'cyborg', cor: '#4fe3ff', estilo: 'Tecnologia', jeito: 'Robôs, máquinas e gênios da tecnologia. Calcula tudo antes de montar.',
+    { id: 'hackerbyte', nome: 'Código Zero', titulo: 'Mente Digital', avatar: 'cyborg', cor: '#4fe3ff', estilo: 'Tecnologia', jeito: 'Robôs, máquinas e gênios da tecnologia. Calcula tudo antes de montar.',
       fala: 'Já rodei 1 milhão de simulações. Você perde em todas.', venceu: 'Erro 404: sua vitória não foi encontrada.', perdeu: 'Bug no sistema. Isso não é possível.', colecao: { filtro: etiqueta('tech', 'artificial', 'cyborg', 'android', 'inventor', 'gadget'), teto: 0.86 }, cerebro: cerebro(5) },
-    { id: 'druida', nome: 'Druida Raiz', titulo: 'Guardiã do Verde', avatar: 'groot', cor: '#7be08f', estilo: 'Regeneração', jeito: 'Cura e regenera sem parar. Se você não derrubar rápido, ela não cai nunca.',
+    { id: 'druida', nome: 'Druida Ancestral', titulo: 'Guardiã do Verde', avatar: 'groot', cor: '#7be08f', estilo: 'Regeneração', jeito: 'Cura e regenera sem parar. Se você não derrubar rápido, ela não cai nunca.',
       fala: 'Toda folha volta a crescer.', venceu: 'A floresta sempre vence.', perdeu: 'Até o carvalho mais velho cai.', colecao: { filtro: tem('Regeneração', 'Cura', 'Sobrevivência'), teto: 0.72 }, cerebro: cerebro(4) },
     { id: 'detetive', nome: 'Detetive Sombra', titulo: 'Lê Cada Jogada', avatar: 'lawliet', cor: '#c5c9d6', estilo: 'Interrupção', jeito: 'Corta os seus preparos e responde na hora: Interrupção e Contra-ataque. Esperto na escolha.',
       fala: 'Eu já sei qual time você vai escolher.', venceu: 'Elementar.', perdeu: 'Interessante… muito interessante.', colecao: { filtro: tem('Interrupção', 'Contra-ataque'), teto: 0.9 }, cerebro: cerebro(5) },
@@ -157,25 +173,25 @@ const POR_REGIAO: SemN[][] = [
       fala: 'Respire fundo. É o último ar limpo que você vai ter.', venceu: 'O veneno sempre chega.', perdeu: 'Você… resistiu ao meu veneno?', colecao: { filtro: tem('Dano contínuo', 'Aflições', 'Debuff'), teto: 0.72 }, cerebro: cerebro(4) },
   ],
   [
-    { id: 'fadatrapaca', nome: 'Fada Trapaça', titulo: 'Rainha das Peças', avatar: 'cosmowanda', cor: '#f39bff', estilo: 'Truques e fraquezas', jeito: 'Enfraquece, engana e bagunça os seus planos. Os times dela são cheios de Debuff.',
-      fala: 'Pisque e você já caiu na peça.', venceu: 'Hihihi! Caiu direitinho.', perdeu: 'Ei! Isso não tava no plano!', colecao: { filtro: ou(tem('Debuff', 'Copiar'), etiqueta('trickster', 'illusion', 'deception')), teto: 0.9 }, cerebro: cerebro(5) },
-    { id: 'ermitao', nome: 'Ermitão Musgo', titulo: 'A Muralha da Floresta', avatar: 'snorlax', cor: '#9fc98f', estilo: 'Tanques', jeito: 'Só tanques e protetores. Luta devagar, apanha muito e não cai. Leve dano de sobra.',
+    { id: 'fadatrapaca', nome: 'A Trapaceira', titulo: 'Rainha dos Truques', avatar: 'cosmowanda', cor: '#f39bff', estilo: 'Truques e fraquezas', jeito: 'Enfraquece, engana e bagunça os seus planos. Os times dela são cheios de Debuff.',
+      fala: 'Pisque e você já caiu na peça.', venceu: 'Caiu direitinho na armadilha.', perdeu: 'Isso não estava no meu plano…', colecao: { filtro: ou(tem('Debuff', 'Copiar'), etiqueta('trickster', 'illusion', 'deception')), teto: 0.9 }, cerebro: cerebro(5) },
+    { id: 'ermitao', nome: 'Colosso de Pedra', titulo: 'A Muralha Viva', avatar: 'snorlax', cor: '#9fc98f', estilo: 'Tanques', jeito: 'Só tanques e protetores. Luta devagar, apanha muito e não cai. Leve dano de sobra.',
       fala: 'Pode bater. Eu espero.', venceu: 'Cansou? Eu nem comecei.', perdeu: 'Hm. Você é mais forte do que parece.', colecao: { filtro: tem('Tanque', 'Proteção'), teto: 0.95 }, cerebro: cerebro(5) },
-    { id: 'valquiria', nome: 'Valquíria', titulo: 'Fã da DC', avatar: 'wonderwoman', cor: '#ffd36b', estilo: 'Só DC', jeito: 'A Liga inteira e seus vilões. Monta como uma estrategista de guerra.',
+    { id: 'valquiria', nome: 'Valquíria', titulo: 'Guardiã da Liga', avatar: 'wonderwoman', cor: '#ffd36b', estilo: 'Só DC', jeito: 'A Liga inteira e seus vilões. Monta como uma estrategista de guerra.',
       fala: 'Pela Liga!', venceu: 'Justiça feita.', perdeu: 'Hoje a Liga perdeu. Amanhã não.', colecao: { filtro: universo('DC', 'Image', 'Dark Horse'), teto: 1 }, cerebro: cerebro(8, { lista: { melhores: 8, variacao: 2 } }) },
-    { id: 'faisca', nome: 'Faísca', titulo: 'O Mais Rápido da Cidade', avatar: 'flash', cor: '#ffd54a', estilo: 'Velocidade', jeito: 'Velocistas e Ritmo: age duas vezes antes de você agir uma.',
+    { id: 'faisca', nome: 'Relâmpago', titulo: 'O Mais Rápido da Metrópole', avatar: 'flash', cor: '#ffd54a', estilo: 'Velocidade', jeito: 'Velocistas e Ritmo: age duas vezes antes de você agir uma.',
       fala: 'Já terminei. Você ainda vai começar?', venceu: 'Rápido demais pra você!', perdeu: 'Corri… e tropecei.', colecao: { filtro: ou(tem('Ritmo'), etiqueta('speedster', 'lightning')), teto: 0.9 }, cerebro: cerebro(5) },
-    { id: 'capitaoaco', nome: 'Capitão Aço', titulo: 'Chefe da Cidade', avatar: 'optimus', cor: '#7fb2ff', estilo: 'A Muralha', jeito: 'Tanques fortes, escudos e sobrevivência. A muralha de verdade: só cai com muito dano ou Exposto.',
-      fala: 'Esta cidade tem um protetor.', venceu: 'Nenhum golpe passa por mim.', perdeu: 'Você derrubou a muralha. Respeito.', colecao: { filtro: tem('Tanque', 'Proteção', 'Sobrevivência'), teto: 0.9 }, cerebro: cerebro(5) },
+    { id: 'capitaoaco', nome: 'General de Aço', titulo: 'Chefe da Metrópole', avatar: 'optimus', cor: '#7fb2ff', estilo: 'A Muralha', jeito: 'Tanques fortes, escudos e sobrevivência. A muralha de verdade: só cai com muito dano ou Exposto.',
+      fala: 'Esta metrópole tem um protetor.', venceu: 'Nenhum golpe passa por mim.', perdeu: 'Você derrubou a muralha. Respeito.', colecao: { filtro: tem('Tanque', 'Proteção', 'Sobrevivência'), teto: 0.9 }, cerebro: cerebro(5) },
   ],
   [
-    { id: 'doutoravida', nome: 'Doutora Vida', titulo: 'Ninguém Morre no Turno Dela', avatar: 'tsunade', cor: '#ff8fb1', estilo: 'Cura e Reviver', jeito: 'Cura, reviver e renascer: quem cai do lado dela volta. Derrube todos de uma vez.',
-      fala: 'Nos meus plantões, ninguém morre.', venceu: 'Alta médica pra mim. Você fica.', perdeu: 'Preciso de mais leitos…', colecao: { filtro: tem('Cura', 'Reviver', 'Renascer', 'Purificar'), teto: 0.86 }, cerebro: cerebro(5) },
+    { id: 'doutoravida', nome: 'A Sacerdotisa', titulo: 'Ninguém Cai no Turno Dela', avatar: 'tsunade', cor: '#ff8fb1', estilo: 'Cura e Reviver', jeito: 'Cura, reviver e renascer: quem cai do lado dela volta. Derrube todos de uma vez.',
+      fala: 'Enquanto eu estiver de pé, ninguém do meu lado cai.', venceu: 'Eu disse: ninguém cai.', perdeu: 'Nem a minha luz foi o bastante…', colecao: { filtro: tem('Cura', 'Reviver', 'Renascer', 'Purificar'), teto: 0.86 }, cerebro: cerebro(5) },
     { id: 'farao', nome: 'Faraó Eterno', titulo: 'O Que Não Morre', avatar: 'mummra', cor: '#e8c36a', estilo: 'Mortos-vivos', jeito: 'Deuses do Egito, múmias e mortos-vivos. Muitos voltam depois de cair.',
       fala: 'Eu já morri antes. Não funcionou.', venceu: 'Mais um para a minha pirâmide.', perdeu: 'Voltarei… daqui a mil anos.', colecao: { filtro: ou(universo('Mitologia Egípcia'), etiqueta('undead', 'vampire'), tem('Renascer')), teto: 1 }, cerebro: cerebro(6, { lista: { melhores: 200, variacao: 10 } }) },
-    { id: 'escorpiao', nome: 'Escorpião', titulo: 'O Assassino das Dunas', avatar: 'scorpion', cor: '#ffb03a', estilo: 'Assassinos', jeito: 'Assassinos e golpes fatais: explosão rápida no seu mais frágil.',
+    { id: 'escorpiao', nome: 'Lâmina das Dunas', titulo: 'O Assassino do Deserto', avatar: 'scorpion', cor: '#ffb03a', estilo: 'Assassinos', jeito: 'Assassinos e golpes fatais: explosão rápida no seu mais frágil.',
       fala: 'Venha cá!', venceu: 'Fatality.', perdeu: 'A areia engoliu meu golpe.', colecao: { filtro: ou(etiqueta('assassin', 'execution', 'finisher'), tem('Explosão')), teto: 0.8 }, cerebro: cerebro(5) },
-    { id: 'mercenario', nome: 'Mercenário', titulo: 'Fã da Marvel', avatar: 'deadpool', cor: '#ff5a5a', estilo: 'Só Marvel', jeito: 'Só heróis e vilões da Marvel, e são muitos. Monta bem os combos do universo.',
+    { id: 'mercenario', nome: 'Mercenário', titulo: 'Senhor da Marvel', avatar: 'deadpool', cor: '#ff5a5a', estilo: 'Só Marvel', jeito: 'Só heróis e vilões da Marvel, e são muitos. Monta bem os combos do universo.',
       fala: 'Oi, leitor! Ops, jogador.', venceu: 'Máximo esforço!', perdeu: 'Isso vai pro filme? Corta essa parte.', colecao: { filtro: universo('Marvel'), teto: 1 }, cerebro: cerebro(5) },
     { id: 'sultao', nome: 'Sultão das Areias', titulo: 'Chefe do Deserto', avatar: 'genie', cor: '#ffcf5a', estilo: 'O Invocador', jeito: 'Invoca criaturas que lutam do lado dele: o time dele parece maior que o seu.',
       fala: 'Três desejos: vencer, vencer e vencer.', venceu: 'Desejo concedido.', perdeu: 'Volte para a lâmpada… eu.', colecao: { filtro: ou(tem('Invocação', 'Buff'), etiqueta('summoner')), teto: 1 }, cerebro: cerebro(7, { lista: { melhores: 40, variacao: 6 } }) },
@@ -183,19 +199,19 @@ const POR_REGIAO: SemN[][] = [
   [
     { id: 'miragem', nome: 'Miragem', titulo: 'Ilusões e Cópias', avatar: 'loki', cor: '#9be0c9', estilo: 'Ilusões', jeito: 'Ilusionistas, copiadores e mentirosos. Nada do lado dele é o que parece.',
       fala: 'Qual de mim é o verdadeiro?', venceu: 'Você lutou contra uma sombra.', perdeu: 'A miragem se desfez…', colecao: { filtro: ou(tem('Copiar', 'Controle'), etiqueta('illusion', 'deception', 'trickster', 'copy', 'hypnosis')), teto: 0.9 }, cerebro: cerebro(5) },
-    { id: 'brunabrava', nome: 'Bruna Brava', titulo: 'A Esquentada', avatar: 'arlequina', cor: '#ff7a8a', estilo: 'Só ataque', jeito: 'Defesa é pra quem tem medo. Monta tudo com explosão, pressão e golpe final.',
-      fala: 'Vou bater primeiro e perguntar nunca.', venceu: 'BUM! Viu? Simples.', perdeu: 'Faltou bater MAIS forte.', colecao: { filtro: tem('Explosão', 'Pressão', 'Finalização'), teto: 0.9 }, cerebro: cerebro(5) },
-    { id: 'kage', nome: 'Kage da Folha', titulo: 'Fã de Naruto', avatar: 'kakashi', cor: '#ff9f43', estilo: 'Só ninjas', jeito: 'Shinobis de Naruto e ninjas de outros mundos. Conhece cada combo da Folha.',
+    { id: 'brunabrava', nome: 'A Destruidora', titulo: 'Só Sabe Atacar', avatar: 'arlequina', cor: '#ff7a8a', estilo: 'Só ataque', jeito: 'Defesa é pra quem tem medo. Monta tudo com explosão, pressão e golpe final.',
+      fala: 'Defesa é para quem tem medo.', venceu: 'Nada sobra de pé.', perdeu: 'Faltou bater mais forte.', colecao: { filtro: tem('Explosão', 'Pressão', 'Finalização'), teto: 0.9 }, cerebro: cerebro(5) },
+    { id: 'kage', nome: 'Kage da Folha', titulo: 'Mestre Shinobi', avatar: 'kakashi', cor: '#ff9f43', estilo: 'Só ninjas', jeito: 'Shinobis de Naruto e ninjas de outros mundos. Conhece cada combo da Folha.',
       fala: 'Esse é o meu jeito ninja!', venceu: 'Missão cumprida, ttebayo!', perdeu: 'Preciso treinar mais um pouco…', colecao: { filtro: ou(universo('Naruto'), etiqueta('assassin', 'spy')), teto: 1, minimo: 16 }, cerebro: cerebro(7, { lista: { melhores: 40, variacao: 6 } }) },
-    { id: 'bruxa', nome: 'Bruxa Nébula', titulo: 'Maldições Antigas', avatar: 'maleficent', cor: '#c07bff', estilo: 'Magia e maldição', jeito: 'Magos, bruxas e maldições. Debuff em você, poder do lado dela.',
-      fala: 'Meu caldeirão já sabe o seu nome.', venceu: 'Abracadabra. Sumiu.', perdeu: 'Meu feitiço virou contra mim!', colecao: { filtro: ou(etiqueta('magic', 'witch', 'curse', 'cursed', 'mage', 'mystic'), tem('Debuff')), teto: 1 }, cerebro: cerebro(5) },
+    { id: 'bruxa', nome: 'Bruxa das Trevas', titulo: 'Maldições Antigas', avatar: 'maleficent', cor: '#c07bff', estilo: 'Magia e maldição', jeito: 'Magos, bruxas e maldições. Debuff em você, poder do lado dela.',
+      fala: 'Meu caldeirão já sabe o seu nome.', venceu: 'A maldição está feita.', perdeu: 'O feitiço virou contra mim…', colecao: { filtro: ou(etiqueta('magic', 'witch', 'curse', 'cursed', 'mage', 'mystic'), tem('Debuff')), teto: 1 }, cerebro: cerebro(5) },
     { id: 'terror', nome: 'A Assombração', titulo: 'Chefe do Templo', avatar: 'samara', cor: '#8f9bb3', estilo: 'Filmes de terror', jeito: 'A rainha do terror e os monstros dos filmes. Eles não correm, mas sempre alcançam.',
       fala: 'Sete dias.', venceu: 'Agora você vai ter pesadelos.', perdeu: 'Eu volto. Sempre volto.', colecao: { filtro: ou(universo(...TERROR), etiqueta('undead', 'monster', 'demon')), teto: 1 }, cerebro: cerebro(6, { lista: { melhores: 120, variacao: 8 } }) },
   ],
   [
     { id: 'monge', nome: 'Monge do Silêncio', titulo: 'Controle Total', avatar: 'shaka', cor: '#e6d38a', estilo: 'Controle', jeito: 'Atordoa, congela e prende. Se você não agir, não vence.',
       fala: 'Fique parado. Ouça o silêncio.', venceu: 'A paz venceu.', perdeu: 'O silêncio foi quebrado.', colecao: { filtro: tem('Controle', 'Interrupção'), teto: 0.9 }, cerebro: cerebro(5) },
-    { id: 'saiyajin', nome: 'Príncipe Saiyajin', titulo: 'Fã de Dragon Ball', avatar: 'broly', cor: '#ffd23f', estilo: 'Só Dragon Ball', jeito: 'Os guerreiros de Dragon Ball e quem treina como eles: transformação e poder que cresce. E testa as lutas antes de escolher o time.',
+    { id: 'saiyajin', nome: 'Príncipe Saiyajin', titulo: 'Orgulho da Raça Guerreira', avatar: 'broly', cor: '#ffd23f', estilo: 'Só Dragon Ball', jeito: 'Os guerreiros de Dragon Ball e quem treina como eles: transformação e poder que cresce. E testa as lutas antes de escolher o time.',
       fala: 'Meu poder passa de 8 mil!', venceu: 'Você nunca vai superar um Saiyajin!', perdeu: 'Impossível… um terráqueo?', colecao: { filtro: ou(universo('Dragon Ball'), tem('Transformação')), teto: 1, minimo: 16 }, cerebro: cerebro(8, { escolha: 'vidente', visoes: 1, acaso: 0, lista: { melhores: 8, variacao: 2 } }) },
     { id: 'forja', nome: 'Mestre da Forja', titulo: 'Buff e Carga', avatar: 'ironman', cor: '#ffa94d', estilo: 'Fortalecer', jeito: 'Fortalece o próprio time e carrega as habilidades rápido: cada luta dele começa fraca e termina enorme.',
       fala: 'Cada golpe meu é forjado no fogo.', venceu: 'Obra-prima.', perdeu: 'Volta pra bigorna.', colecao: { filtro: tem('Buff', 'Carga', 'Suporte'), teto: 1 }, cerebro: cerebro(8, { lista: { melhores: 8, variacao: 2 } }) },
@@ -235,7 +251,8 @@ const ratingDo = (n: number) => (n === 40 ? 2500 : 600 + Math.round((48 * (n - 1
 
 export const RIVAIS: readonly Rival[] = POR_REGIAO.flatMap((lista, r) => lista.map((x, k): Rival => {
   const n = r * 5 + k + 1, chefe = k === 4;
-  return { ...x, n, regiao: r + 1, chefe, aura: chefe ? REGIOES[r]!.aura : 0, rating: ratingDo(n) };
+  const teto = TETO_DOS_RIVAIS[n - 1] ?? SEM_TETO;
+  return { ...x, n, regiao: r + 1, chefe, aura: chefe ? REGIOES[r]!.aura : 0, rating: ratingDo(n), teto, estrelas: teto === SEM_TETO ? 7 : estrelasDaNota(teto) };
 }));
 export const rivalPorId = (id: string) => RIVAIS.find((r) => r.id === id) ?? null;
 export const TOTAL_DE_ESTRELAS = RIVAIS.length * 3;
@@ -286,7 +303,7 @@ export function timesDoRival(r: Rival, seed: number, descansando: readonly strin
   const base = r.espelho && seus.length ? colecaoDoEspelho(seus) : colecaoDoRival(r);
   let livres = base.filter((id) => !descansando.includes(id));
   if (livres.length < 9) livres = base;
-  return montarTimes(livres, r.cerebro, r.cerebro.lista, seed, notaDoTrio);
+  return montarTimes(livres, r.cerebro, r.cerebro.lista, seed, notaDoTrio, r.teto < SEM_TETO ? (t) => notaDoTrio(t) <= r.teto : undefined);
 }
 
 /** A Vida a mais nos personagens do rival (a Aura do Chefe): a escala do lado dele na luta. */

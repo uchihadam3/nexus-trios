@@ -160,6 +160,7 @@ function Ficha({ rival, r, onFechar, onDesafiar }: { rival: Rival; r: RespostaDa
         <div className="cn-chips">
           <span className="cn-chip estilo"><Sparkles size={12} />{rival.estilo}</span>
           <span className="cn-chip"><Crown size={12} />{rival.rating}</span>
+          <span className="cn-chip" title="A força máxima dos times dele"><Star size={12} />times até {rival.estrelas}★</span>
           <span className="cn-chip"><Shield size={12} />{rival.espelho ? 'copia os seus' : `${colecaoDoRival(rival).length} personagens`}</span>
           <span className="cn-chip cerebro" title="Dificuldade"><Brain size={12} />{Array.from({ length: 8 }, (_, k) => <i key={k} className={k < rival.regiao ? 'on' : ''} />)}</span>
           {rival.cerebro.escolha === 'vidente' && <span className="cn-chip vidente"><Eye size={12} />vê o futuro</span>}

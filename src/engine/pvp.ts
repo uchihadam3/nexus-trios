@@ -150,21 +150,25 @@ export function sugerirTimes(colecao: readonly string[], seed: number): Times | 
 }
 
 export interface JeitoDeMontar { amostras: number; erro: number; melhora: number }
-export function montarTimes(colecao: string[], jeito: JeitoDeMontar, lista: { melhores: number; variacao: number } | undefined, seed: number, objetivo: (t: readonly string[]) => number): Times {
+/** `aceita`: um limite para os trios (a campanha: o teto de estrelas de cada rival); só se nenhum passar, sai um que não passa. */
+export function montarTimes(colecao: string[], jeito: JeitoDeMontar, lista: { melhores: number; variacao: number } | undefined, seed: number, objetivo: (t: readonly string[]) => number,
+  aceita?: (t: readonly string[]) => boolean): Times {
   const r = sorteio(seed ^ 0x5bd1e995);
   let livres = [...colecao];
   const times: string[][] = [];
   if (lista) {
     const dele = new Set(livres);
-    const opcoes = TRIOS_DO_PVP.filter((t) => t.slice(0, 3).every((id) => dele.has(id as string))).slice(0, lista.melhores)
+    const opcoes = TRIOS_DO_PVP.filter((t) => t.slice(0, 3).every((id) => dele.has(id as string)) && (!aceita || aceita(t.slice(0, 3) as string[]))).slice(0, lista.melhores)
       .map((t) => ({ trio: t.slice(0, 3) as string[], valor: t[3] + gauss(r) * lista.variacao })).sort((a, b) => b.valor - a.valor);
     for (const o of opcoes) if (times.length < 3 && !o.trio.some((id) => times.flat().includes(id))) times.push(o.trio);
     livres = livres.filter((id) => !times.flat().includes(id));
   }
-  const nota = (t: string[]) => objetivo(t) + (jeito.erro ? gauss(r) * jeito.erro : 0);
+  const nota = (t: string[]) => objetivo(t) + (jeito.erro ? gauss(r) * jeito.erro : 0) - (aceita && !aceita(t) ? 1000 : 0);
   const trioAoAcaso = () => { const p = [...livres]; const t: string[] = []; while (t.length < 3) t.push(p.splice(Math.floor(r() * p.length), 1)[0]!); return t; };
   for (let k = times.length; k < 3; k++) {
-    let melhor = trioAoAcaso(), nm = nota(melhor);
+    let melhor = trioAoAcaso();
+    for (let i = 0; aceita && i < 60 && !aceita(melhor); i++) melhor = trioAoAcaso();
+    let nm = nota(melhor);
     for (let i = 1; i < jeito.amostras; i++) { const t = trioAoAcaso(), n = nota(t); if (n > nm) { melhor = t; nm = n; } }
     // melhora o trio trocando um de cada vez pelo melhor que achar (o mestre faz isso muitas vezes)
     for (let i = 0; i < jeito.melhora; i++) {

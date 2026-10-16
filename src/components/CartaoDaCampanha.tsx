@@ -30,7 +30,7 @@ export function CartaoDaCampanha({ podeJogar, motivo, onAbrir }: { podeJogar: bo
     <span className="cn-cartao-texto">
       <small>MODO CAMPANHA · 40 RIVAIS · 8 REGIÕES</small>
       <b>CAMINHO DO NEXUS</b>
-      {podeJogar ? <em>{resumo ? <><Star size={12} />{resumo.estrelas}/{TOTAL_DE_ESTRELAS} · {resumo.titulo}{resumo.zerou ? ' · Zerou!' : proximo ? ` · próximo: ${proximo.nome}` : ''}</> : 'Comece na Vila do Começo. Só o primeiro rival está liberado.'}</em> : <em className="cn-cartao-motivo"><Lock size={12} />{motivo}</em>}
+      {podeJogar ? <em>{resumo ? <><Star size={12} />{resumo.estrelas}/{TOTAL_DE_ESTRELAS} · {resumo.titulo}{resumo.zerou ? ' · Zerou!' : proximo ? ` · próximo: ${proximo.nome}` : ''}</> : 'Comece no Vale do Despertar. Só o primeiro rival está liberado.'}</em> : <em className="cn-cartao-motivo"><Lock size={12} />{motivo}</em>}
     </span>
     {podeJogar && <Play size={24} className="cn-cartao-play" />}
   </button>;

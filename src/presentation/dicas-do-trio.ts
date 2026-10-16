@@ -90,7 +90,10 @@ export function notaDoTrio(team: readonly string[]): number {
  * da nota dele na régua de todos os trios possíveis (src/data/percentis-dos-trios.ts), de 0 a 100.
  */
 export function melhorQueOsTrios(team: readonly string[]): number {
-  const nota = notaDoTrio(team);
+  return percentilDaNota(notaDoTrio(team));
+}
+/** Em que posição (0 a 100) uma nota de trio fica na régua de todos os trios. */
+export function percentilDaNota(nota: number): number {
   let p = 0;
   while (p < 100 && PERCENTIS[p + 1]! <= nota) p++;
   return p;
@@ -106,6 +109,8 @@ export const ESTRELAS_MAXIMAS = 7;
 export const CORTES_DAS_ESTRELAS: readonly number[] = [24, 38, 56, 75, 89, 98];
 export const estrelasDaPorcentagem = (p: number) => 1 + CORTES_DAS_ESTRELAS.filter((c) => p >= c).length;
 export const estrelasDoTime = (t: readonly string[]) => estrelasDaPorcentagem(melhorQueOsTrios(t));
+/** As estrelas de um trio com esta nota. */
+export const estrelasDaNota = (nota: number) => estrelasDaPorcentagem(percentilDaNota(nota));
 /* de logit para pontos de vitória, perto de 50% (para a explicação) */
 const pontos = (z: number) => Math.round(25 * Math.abs(z));
 

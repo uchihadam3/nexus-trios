@@ -79,9 +79,9 @@ export const FAIXAS:Record<Faixa,{camadas:readonly string[];laco:number}>={
   /*
    * O Caminho do Nexus (v9, tools/audio/generate_music_v9.py): cada região tem a sua música (os 4 rivais dela) e cada
    * chefe tem a dele, com tema e hino compostos nota a nota. O laço volta para o Tema: 8 compassos.
-   *   vila     fá maior, 144, marcha de aventura e sininhos      · Bento        fá menor, 160, fanfarra heroica
+   *   vila     fá maior, 144, marcha de aventura e sininhos      · Guardião     fá menor, 160, fanfarra heroica
    *   floresta ré dórico, 116, tambores tribais, flauta e coro   · Rainha       ré menor harmônica, 148, serpente
-   *   neon     dó sustenido menor, 126, synthwave               · Capitão Aço  dó menor, 160, marcha de bigorna
+   *   neon     dó sustenido menor, 126, synthwave               · General Aço  dó menor, 160, marcha de bigorna
    *   deserto  mi hijaz, 112, maqsum, alaúde e metais            · Sultão       fá sustenido hijaz, 132, gênio
    *   templo   lá in-sen, 108, koto, sinos e taikos             · Assombração  sol sustenido menor, 120, caixinha macabra
    *   vulcao   mi frígio, 176, metal                            · Titã         dó sustenido frígio, 184, metal pesado
