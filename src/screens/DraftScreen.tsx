@@ -1,7 +1,7 @@
 import { useMemo,useState,type CSSProperties } from 'react';
 import { SeloDeEstrela } from '../components/SeloDeEstrela';
 import { createPortal } from 'react-dom';
-import { ArrowRight,CircleCheck,Crown,Dices,Info,LogOut,Sparkles,Star,Swords,TriangleAlert,X,Zap } from 'lucide-react';
+import { ArrowRight,CircleCheck,Crown,Dices,Info,LogOut,Sparkles,Swords,TriangleAlert,X,Zap } from 'lucide-react';
 import type { Draft,Encounter } from '../engine/campaign';
 import { byId } from '../data/characters';
 import { Portrait } from '../components/Portrait';
@@ -12,7 +12,7 @@ import { IdentityChips } from '../components/IdentityChips';
 import { ComTermos } from '../components/Termos';
 import { draftConnection } from '../presentation/draft-connections';
 import { BotaoDicas } from '../components/BotaoDicas';
-import { dicasDoDraft,estrelasDoTime,type DicaDoCandidato } from '../presentation/dicas-do-trio';
+import { dicasDoDraft,type DicaDoCandidato } from '../presentation/dicas-do-trio';
 import { universoDaFicha } from '../data/equipes';
 
 /*
@@ -54,7 +54,6 @@ export function DraftScreen({draft,desafio,primeiroRival,dicas,podeDicas,usouDic
           <Portrait character={c}/><b>{c.name}</b><small className="dv-espaco-ficha"><Info size={10}/>ficha</small>
         </button>
         :<div key={`vazio-${i}`} className={`dv-espaco ${i===vez&&!full?'vez':''}`}><span>?</span><b>{i===vez?'escolha agora':`espaço ${i+1}`}</b></div>;})}</div>
-      {full&&<EstrelasDoTrio team={draft.team}/>}
       {team.length>0&&<div className="dv-trio-faz"><IdentityChips ids={doTrio} trio={doTrio}/>{ligadas&&lacunas.length>0&&<small><TriangleAlert size={13}/>{lacunas.join(' · ')}</small>}</div>}
       {(!full||usouDicas)&&<BotaoDicas ligado={dicas} liberado={podeDicas} usado={usouDicas} desativado={full} onMudar={onDicas}/>}
     </header>
@@ -105,16 +104,4 @@ export function DraftScreen({draft,desafio,primeiroRival,dicas,podeDicas,usouDic
       <button className="secondary dv-sair" onClick={onAbandon} aria-label="Desistir da jornada" title="Desistir da jornada"><LogOut size={18}/></button>
     </footer>
   </section>;
-}
-
-/*
- * As estrelas do trio (pedido do jogador: "depois que escolher os três, aparece quantas estrelas o time tem… mais
- * sutil, pequenininhas, não tão destacado"): só as cinco estrelinhas embaixo do trio, acendendo uma a uma. A força é
- * a mesma do PvP (src/presentation/dicas-do-trio.ts, estrelasDoTime).
- */
-function EstrelasDoTrio({team}:{team:string[]}){
-  const n=estrelasDoTime(team);
-  return <div className="dv-estrelas" role="img" aria-label={`Trio de ${n} ${n===1?'estrela':'estrelas'}`}>
-    {[0,1,2,3,4].map(k=><i key={k} className={k<n?'acesa':''} style={{'--k':k} as CSSProperties}><Star size={13} fill="currentColor" strokeWidth={1.5}/></i>)}
-  </div>;
 }
