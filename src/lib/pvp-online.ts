@@ -51,7 +51,8 @@ export interface ServicoPvp {
   responder: (partida: string, aceitar: boolean) => Promise<RespostaPvp>;
   times: (partida: string, times: string[][]) => Promise<RespostaPvp>;
   escolher: (partida: string, n: number, time: number) => Promise<RespostaPvp>;
-  lutar: (partida: string) => Promise<RespostaPvp>;
+  /** Estou vendo a tela do VS (ou saí dela: pronto = false). A luta começa quando os dois estão vendo. */
+  lutar: (partida: string, pronto?: boolean) => Promise<RespostaPvp>;
   /** Terminei de assistir a luta da rodada n (o tempo de escolher a próxima começa quando os dois terminam). */
   assisti: (partida: string, n: number) => Promise<RespostaPvp>;
   /** Desiste da partida inteira. */
@@ -79,7 +80,7 @@ export function criarPvpOnline(chamar: <T>(acao: string, corpo: Record<string, u
     responder: (partida, aceitar) => pvp('responder', { partida, aceitar }),
     times: (partida, times) => pvp('times', { partida, times }),
     escolher: (partida, n, time) => pvp('escolher', { partida, n, time }),
-    lutar: (partida) => pvp('lutar', { partida }),
+    lutar: (partida, pronto = true) => pvp('lutar', { partida, pronto }),
     assisti: (partida, n) => pvp('assisti', { partida, n }),
     desistir: (partida) => pvp('desistir', { partida }),
     render: (partida, n) => pvp('render', { partida, n }),

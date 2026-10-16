@@ -689,6 +689,22 @@ function PartidaOnline({ online, colecaoLocal, emprestados, settings, onSettings
     setCena({ tipo: 'luta', n: pendente.n, meu: v.meusTimes![pendente.meu]!, dele: v.timesDele![pendente.dele]!, seed: pendente.seed, atraso: (agora - inicio) / 1000 });
   }, [v, pendente, inicio, fimDaLuta, agora, cena]);
 
+  /*
+   * A luta só começa com os dois vendo a tela (pedido do jogador: "a luta não pode começar até os dois estarem vendo a
+   * tela"): com o VS aberto e o app na frente, este aparelho avisa que está pronto; se o app vai para segundo plano
+   * antes da luta começar, avisa que saiu. Quando os dois estão prontos, o servidor marca o começo nos dois aparelhos.
+   */
+  const noVs = !!pendente && inicio === null && (v?.fase === 'jogando' || v?.fase === 'terminada');
+  const prontoNoServidor = !!v?.lutar.eu;
+  const [visivel, setVisivel] = useState(() => !document.hidden);
+  useEffect(() => { const muda = () => setVisivel(!document.hidden); document.addEventListener('visibilitychange', muda); return () => document.removeEventListener('visibilitychange', muda); }, []);
+  const avisando = useRef(false);
+  useEffect(() => {
+    if (!noVs || avisando.current || visivel === prontoNoServidor) return;
+    avisando.current = true;
+    void servico.lutar(id, visivel).then(aplica).catch(() => undefined).finally(() => { avisando.current = false; });
+  }, [noVs, visivel, prontoNoServidor, servico, id]);
+
   // terminei de assistir a luta: avisa o servidor (o tempo de escolher a próxima começa quando os dois terminam)
   const assistiu = cena?.tipo === 'resultado' ? cena.n : null;
   useEffect(() => { if (assistiu !== null) void servico.assisti(id, assistiu).catch(() => undefined); }, [assistiu, servico, id]);
@@ -760,10 +776,9 @@ function PartidaOnline({ online, colecaoLocal, emprestados, settings, onSettings
     const conta = inicio !== null ? Math.max(0, Math.ceil((inicio - agora) / 1000)) : null;
     const controle = conta !== null
       ? <div className="pv-vs-contagem"><b key={conta}>{conta > 0 ? conta : 'LUTA!'}</b><small>a luta começa nos dois aparelhos</small></div>
-      : v.lutar.eu
-        ? <div className="pv-vs-contagem esperando"><Hourglass size={26} /><small>Esperando {v.rival.nome} ficar pronto…</small><Prazo ate={v.prazo} offset={offset} texto=" e começa sozinho" /></div>
-        : <div className="pv-vs-comecar"><button className="primary pv-grande" onClick={() => { som('ui-confirma'); void agir(servico.lutar(id)); }}><Swords size={22} />COMEÇAR DUELO</button>
-          {v.lutar.rival && <small className="pv-pronto-rival"><Check size={13} />{v.rival.nome} já está pronto!</small>}<Prazo ate={v.prazo} offset={offset} texto=" e começa sozinho" /></div>;
+      : <div className="pv-vs-contagem esperando"><Hourglass size={26} />
+        <small>{v.lutar.rival ? `${v.rival.nome} já está vendo a tela. Começando…` : `Esperando ${v.rival.nome} abrir a tela da luta…`}</small>
+        <small className="pv-pronto-rival"><Check size={13} />A luta só começa com os dois vendo a tela</small></div>;
     return <><Vs rival={rival} partida={partida} meu={pendente.meu} dele={pendente.dele} onLutar={() => undefined} controle={<>{controle}{aviso}</>} />{confirmaSair}</>;
   }
 

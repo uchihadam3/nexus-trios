@@ -21,7 +21,14 @@ const ok = (body: unknown): Resposta => ({ status: 200, body });
 const erro = (mensagem: string, status = 422): Resposta => ({ status, body: { error: mensagem } });
 
 /** Quanto cada etapa espera (segundos). */
-export const PRAZO = { convite: 120, montar: 300, escolher: 75, lutar: 25 } as const;
+/*
+ * `lutar`: a luta da rodada só começa com os dois vendo a tela do VS (pedido do jogador: "a luta não pode começar até
+ * os dois estarem vendo a tela"); o aparelho avisa sozinho quando a tela está aberta. Este prazo é só a rede de
+ * segurança para um aparelho antigo que não avisa (quem some de verdade perde pela ausência, AUSENCIA_MAXIMA).
+ */
+export const PRAZO = { convite: 120, montar: 300, escolher: 75, lutar: 90 } as const;
+/** A contagem nos dois aparelhos entre os dois ficarem prontos e a luta começar (ms). */
+const CONTAGEM_DA_LUTA = 5000;
 /** Quem some da partida (app fechado, sem internet) por mais que isso perde (pedido do jogador: 45 s para voltar). */
 export const AUSENCIA_MAXIMA = 45;
 /** A partir de quanto tempo sem notícia o rival aparece como desconectado (o aparelho pergunta a cada 3 s). */
@@ -102,14 +109,14 @@ async function resolver(db: Db, p: Partida, n: number) {
   await atualiza(db, p.id, { rodada: n + 1, escolheu_a: false, escolheu_b: false, lutar_a: false, lutar_b: false, assistiu_a: false, assistiu_b: false, inicio_em: null, prazo: daqui(PRAZO.lutar) });
 }
 
-/** Faz a luta da rodada resolvida começar nos dois aparelhos daqui a 4 s. */
+/** Faz a luta da rodada resolvida começar nos dois aparelhos ao mesmo tempo, depois da contagem. */
 async function comecarLuta(db: Db, p: Partida) {
   const n = p.resolvida, rodadas = await rodadasDe(db, p.id), r = rodadas.find((x) => x.n === n);
   if (!r) return;
   // a próxima escolha espera a luta acabar na tela e mais um tempo para escolher. A encenação (nomes, efeitos, pausas)
   // leva bem mais que o relógio do motor: este prazo é só a rede de segurança para quem sumiu; quando os dois avisam
   // que terminaram de assistir (op "assisti"), o tempo de escolher começa a contar dali.
-  const inicio = Date.now() + 4000, fimDaLuta = inicio + duracaoNaTela(r.duracao) * 1000;
+  const inicio = Date.now() + CONTAGEM_DA_LUTA, fimDaLuta = inicio + duracaoNaTela(r.duracao) * 1000;
   await atualiza(db, p.id, { inicio_em: new Date(inicio).toISOString(), prazo: new Date(fimDaLuta + PRAZO.escolher * 1000).toISOString() }, (q) => q.is('inicio_em', null).eq('resolvida', n));
 }
 
@@ -278,9 +285,15 @@ export async function acaoPvp(db: Db, quem: string, input: Record<string, unknow
     return devolve();
   }
 
+  /*
+   * Estou vendo a tela do VS (pronto) ou saí dela (pronto: false, o app foi para segundo plano antes da luta começar).
+   * Quando os dois estão vendo, a luta começa nos dois aparelhos depois da contagem.
+   */
   if (op === 'lutar') {
     if (!['jogando', 'terminada'].includes(p.estado) || p.resolvida < 0 || p.resolvida !== p.rodada - 1 || p.inicio_em) return devolve();
-    await atualiza(db, p.id, eu === 'a' ? { lutar_a: true } : { lutar_b: true });
+    const pronto = input.pronto !== false;
+    await atualiza(db, p.id, eu === 'a' ? { lutar_a: pronto } : { lutar_b: pronto });
+    if (!pronto) return devolve();
     const agora = (await partidaDe(db, p.id))!;
     if (agora.lutar_a && agora.lutar_b) await comecarLuta(db, agora);
     return devolve();

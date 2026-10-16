@@ -207,7 +207,12 @@ describe.skipIf(!ADMIN)('PvP online: o juiz no servidor, partida inteira', () =>
     // antes da luta começar não dá para desistir dela
     await pede(a, { op: 'render', partida: id, n: 0 });
     expect((await pede(a, { op: 'estado', partida: id })).body.partida!.rodadas[0]!.rendida).toBe(false);
-    await pede(a, { op: 'lutar', partida: id }); await pede(b, { op: 'lutar', partida: id });
+    // a luta só começa com os dois vendo a tela: quem sai antes de começar deixa de contar como pronto
+    await pede(a, { op: 'lutar', partida: id });
+    await pede(a, { op: 'lutar', partida: id, pronto: false });
+    expect((await pede(b, { op: 'lutar', partida: id })).body.partida!.inicioEm).toBeNull();
+    const comecou = (await pede(a, { op: 'lutar', partida: id })).body.partida!;
+    expect(Date.parse(comecou.inicioEm!) - Date.now()).toBeGreaterThan(3000);
     const rendeu = (await pede(a, { op: 'render', partida: id, n: 0 })).body.partida!;
     expect(rendeu.fase).toBe('jogando');
     expect(rendeu.rodadas[0]).toMatchObject({ vencedor: 'rival', rendida: true });
