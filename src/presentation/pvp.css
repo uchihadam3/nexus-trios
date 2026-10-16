@@ -403,3 +403,28 @@ button.pv-time:active:not(:disabled){transform:scale(.98)}
 .pv-pct{font-size:10.5px;font-style:normal;font-weight:700;color:#9fb0bf;white-space:nowrap}
 .pv-pct b{color:var(--pv-ouro);font-weight:900}
 .pv-estrelas .pv-pct{margin-left:4px;font-size:9.5px;letter-spacing:0;color:var(--pv-ouro);font-weight:900}
+
+/* ---------- o Empréstimo do dia (CartaoDoEmprestimo, src/engine/emprestimo.ts) ---------- */
+.pv-emprestimo{position:relative;display:flex;flex-direction:column;gap:10px;padding:14px;border-radius:22px;overflow:hidden;
+  background:radial-gradient(circle at 100% 0%,#4fd0ff33,transparent 55%),radial-gradient(circle at 0% 100%,#86e3a826,transparent 50%),linear-gradient(160deg,#10202c,#0b1218);
+  box-shadow:inset 0 0 0 1.5px #8fe0ff55,0 8px 24px #4fd0ff1a}
+.pv-fx-emprestimo{position:absolute;inset:-20% -10% auto auto;width:60%;height:140%;opacity:.25;pointer-events:none}
+.pv-emprestimo header{position:relative;display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:10px}
+.pv-emprestimo-icone{display:grid;place-items:center;width:46px;height:46px;border-radius:15px;color:#06202e;background:radial-gradient(circle at 35% 30%,#e3f6ff,#8fe0ff);box-shadow:0 0 18px #8fe0ff66;animation:pv-gira 3.2s ease-in-out infinite}
+.pv-emprestimo header small{display:block;font-size:10px;font-weight:900;letter-spacing:1.4px;color:#8fe0ff}
+.pv-emprestimo header b{display:block;font-size:17px;font-weight:950}
+.pv-emprestimo-relogio{display:inline-flex;align-items:center;gap:4px;padding:5px 9px;border-radius:99px;font-size:12.5px;font-weight:900;font-variant-numeric:tabular-nums;color:#d8f4ff;background:#0008;box-shadow:inset 0 0 0 1px #8fe0ff44}
+.pv-emprestimo-grade{position:relative;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.pv-emprestado{display:flex;flex-direction:column;align-items:center;gap:3px;padding:8px 4px;border-radius:16px;text-align:center;background:#ffffff08;animation:pv-emprestado-entra .45s both;animation-delay:calc(var(--k) * 60ms)}
+@keyframes pv-emprestado-entra{from{opacity:0;transform:translateY(8px) scale(.9)}}
+.pv-emprestado.novo{background:linear-gradient(180deg,color-mix(in srgb,var(--character),transparent 82%),#ffffff06);box-shadow:inset 0 0 0 1.5px color-mix(in srgb,var(--character),transparent 45%)}
+.pv-emprestado b{max-width:100%;font-size:11.5px;font-weight:850;line-height:1.15;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pv-emprestado em{font-style:normal;font-size:9.5px;font-weight:900;letter-spacing:.8px;text-transform:uppercase}
+.pv-emprestado.novo em{color:#86e3a8}
+.pv-emprestado.ja em{color:#ffffff70}
+.pv-emprestimo p{position:relative;margin:0;font-size:12px;line-height:1.4;color:#b8cad6}
+.pv-carta.emprestada{box-shadow:inset 0 0 0 2px #8fe0ff,0 0 14px #8fe0ff44}
+.pv-fita{position:absolute;left:50%;top:6px;translate:-50% 0;display:inline-flex;align-items:center;gap:3px;padding:2px 6px;border-radius:99px;font-size:8.5px;font-weight:950;letter-spacing:.8px;color:#06202e;background:#8fe0ff;box-shadow:0 2px 6px #0008;white-space:nowrap}
+.pv-so-emprestados i{margin-left:4px;padding:1px 6px;border-radius:99px;font-style:normal;font-size:11px;font-weight:900;color:#06202e;background:#8fe0ff}
+.pv-so-emprestados.ativo{box-shadow:inset 0 0 0 2px #8fe0ff;color:#d8f4ff}
+@media (prefers-reduced-motion:reduce){.pv-emprestado,.pv-emprestimo-icone{animation:none}}

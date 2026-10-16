@@ -12,6 +12,7 @@ import type { SupabaseClient } from 'npm:@supabase/supabase-js@2.117.2';
 import { createBattle, stepBattle } from '../../../src/engine/battle.ts';
 import { MINIMO_DA_COLECAO, duracaoNaTela, problemaDosTimes, sementeDaRodada, timesLivres, vencedorDaPartida, type Lado, type RodadaPvp } from '../../../src/engine/pvp.ts';
 import { ENGINE_VERSION } from '../../../src/engine/ranked.ts';
+import { comEmprestados, diaDoEmprestimo } from '../../../src/engine/emprestimo.ts';
 import { characters } from '../../../src/data/characters.ts';
 
 type Db = SupabaseClient;
@@ -38,12 +39,18 @@ interface Partida {
 }
 interface Rodada { n: number; time_a: number; time_b: number; seed: number; vencedor: 'a' | 'b'; duracao: number; rendida?: boolean }
 
-/** A coleção de quem joga, no servidor: os personagens liberados nas Conquistas. */
-async function colecaoDe(db: Db, quem: string): Promise<string[]> {
+/**
+ * A coleção de quem joga, no servidor: os personagens liberados nas Conquistas e os 9 emprestados do dia
+ * (src/engine/emprestimo.ts, os mesmos para todo mundo). `desde`: o dia em que a partida nasceu também vale (quem
+ * montou os times antes da meia-noite não perde os emprestados dela).
+ */
+async function colecaoDe(db: Db, quem: string, desde?: string): Promise<string[]> {
   const { data, error } = await db.from('player_achievements').select('achievement_id').eq('player_id', quem).like('achievement_id', `${PREFIXO}%`);
   if (error) throw error;
   const ids = new Set(characters.map((c) => c.id));
-  return (data ?? []).map((x) => String(x.achievement_id).slice(PREFIXO.length)).filter((id) => ids.has(id));
+  const minha = (data ?? []).map((x) => String(x.achievement_id).slice(PREFIXO.length)).filter((id) => ids.has(id));
+  const hoje = comEmprestados(minha);
+  return desde && desde !== diaDoEmprestimo() ? comEmprestados(hoje, desde) : hoje;
 }
 async function partidaDe(db: Db, id: string): Promise<Partida | null> {
   const { data, error } = await db.from('pvp_partidas').select('*').eq('id', id).maybeSingle();
@@ -246,7 +253,7 @@ export async function acaoPvp(db: Db, quem: string, input: Record<string, unknow
     if ((eu === 'a' ? p.pronto_a : p.pronto_b)) return devolve();
     const times = input.times;
     if (!Array.isArray(times) || times.length !== 3 || times.some((t) => !Array.isArray(t) || t.length !== 3 || t.some((x) => typeof x !== 'string'))) return erro('Monte 3 times de 3.');
-    const problema = problemaDosTimes(times as string[][], new Set(await colecaoDe(db, quem)));
+    const problema = problemaDosTimes(times as string[][], new Set(await colecaoDe(db, quem, diaDoEmprestimo(Date.parse(p.criada_em)))));
     if (problema) return erro(problema);
     const { error } = await db.from('pvp_times').upsert({ partida_id: p.id, jogador: quem, times }, { onConflict: 'partida_id,jogador' });
     if (error) throw error;

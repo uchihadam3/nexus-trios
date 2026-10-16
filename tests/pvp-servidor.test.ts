@@ -13,6 +13,8 @@ import { randomUUID } from 'node:crypto';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import pg from 'pg';
 import { acaoPvp } from '../supabase/functions/ranked-api/pvp';
+import { characters } from '../src/data/characters';
+import { emprestadosDoDia } from '../src/engine/emprestimo';
 
 const ADMIN = process.env.NEXUS_PG_URL;
 const BANCO = `nexus_pvpsrv_${Date.now()}`;
@@ -129,7 +131,8 @@ describe.skipIf(!ADMIN)('PvP online: o juiz no servidor, partida inteira', () =>
     expect((await pede(a, { op: 'responder', partida: id, aceitar: true })).status).toBe(409);
     expect((await pede(b, { op: 'responder', partida: id, aceitar: true })).body.partida!.fase).toBe('montando');
     // time com personagem fora da coleção é recusado
-    expect((await pede(a, { op: 'times', partida: id, times: [['goku', 'vegeta', 'gohan'], ['naruto', 'sasuke', 'kakashi'], ['luffy', 'zoro', 'itachi']] })).body.error).toMatch(/coleção/);
+    const fora = characters.find((c) => !COLECAO_A.includes(c.id) && !emprestadosDoDia().includes(c.id))!.id;
+    expect((await pede(a, { op: 'times', partida: id, times: [['goku', 'vegeta', 'gohan'], ['naruto', 'sasuke', 'kakashi'], ['luffy', 'zoro', fora]] })).body.error).toMatch(/coleção/);
     const ta = await pede(a, { op: 'times', partida: id, times: [['goku', 'vegeta', 'gohan'], ['naruto', 'sasuke', 'kakashi'], ['luffy', 'zoro', 'sanji']] });
     // pronto sozinho: os times do outro ainda são segredo
     expect(ta.body.partida!.fase).toBe('montando');
@@ -250,8 +253,16 @@ describe.skipIf(!ADMIN)('PvP online: o juiz no servidor, partida inteira', () =>
     expect((await pede(a, { op: 'estado', partida: id2 })).body.partida!.vencedor).toBe('eu');
   });
 
-  it('não desafia sem 9 personagens na coleção', async () => {
+  it('os 9 emprestados do dia valem para todo mundo: quem tem só 5 já desafia e monta times com eles', async () => {
     const a = await conta(COLECAO_A.slice(0, 5)), b = await conta(COLECAO_B);
-    expect((await pede(a, { op: 'desafiar', alvo: b })).body.error).toMatch(/9 personagens/);
+    const d = await pede(a, { op: 'desafiar', alvo: b });
+    expect(d.status).toBe(200);
+    expect(d.body.colecao).toEqual(expect.arrayContaining(emprestadosDoDia()));
+    const id = d.body.partida!.id;
+    await pede(b, { op: 'responder', partida: id, aceitar: true });
+    const minha = [...new Set([...COLECAO_A.slice(0, 5), ...emprestadosDoDia()])].slice(0, 9);
+    const t = await pede(a, { op: 'times', partida: id, times: [minha.slice(0, 3), minha.slice(3, 6), minha.slice(6, 9)] });
+    expect(t.status).toBe(200);
+    expect(t.body.partida!.meusTimes).toHaveLength(3);
   });
 });
