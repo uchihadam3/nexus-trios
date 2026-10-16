@@ -54,6 +54,8 @@ const COMUNIDADE_DEMO=import.meta.env.VITE_COMUNIDADE_DEMO==='true';
 const DebugScreen=lazy(()=>import('./screens/DebugScreen').then(m=>({default:m.DebugScreen})));
 const VfxLabScreen=lazy(()=>import('./screens/VfxLabScreen').then(m=>({default:m.VfxLabScreen})));
 type Screen='home'|'game'|'characters'|'conquistas'|'combos'|'segredos'|'ranking'|'conta'|'help'|'settings'|'debug'|'vfx'|'comunidade'|'pvp';
+const TELA_AO_ATUALIZAR='nexus-tela-ao-atualizar';
+const TELAS_QUE_VOLTAM:Screen[]=['home','game','characters','conquistas','combos','segredos','ranking','conta','help','settings','comunidade','pvp'];
 interface InstallEvent extends Event {prompt:()=>Promise<void>;userChoice:Promise<{outcome:string}>}
 /* Os avisos do jogo (remake): medalhão com o anel de runas na cor do assunto, título grande, botões grandes. */
 function InfoDialog({title,children,onClose,icone,cor='#c8f560'}:{title:string;children:React.ReactNode;onClose:()=>void;icone?:React.ReactNode;cor?:string}){
@@ -66,7 +68,8 @@ const RECUPERACAO_MAXIMA=20*60;
 const RECUPERACAO_POR_QUADRO=90;
 
 export default function App(){
-  const [screen,setScreen]=useState<Screen>(import.meta.env.DEV&&location.hash==='#debug'?'debug':'home');
+  /* depois de tocar em Atualizar, o jogo volta para a mesma tela em que a pessoa estava (atualizarOJogo) */
+  const [screen,setScreen]=useState<Screen>(()=>{if(import.meta.env.DEV&&location.hash==='#debug')return 'debug';let t:string|null=null;try{t=sessionStorage.getItem(TELA_AO_ATUALIZAR);sessionStorage.removeItem(TELA_AO_ATUALIZAR);}catch{/* sem sessionStorage: começa no início */}return t&&TELAS_QUE_VOLTAM.includes(t as Screen)?t as Screen:'home';});
   const [settings,setSettings]=useState(loadSettings),[profile,setProfile]=useState(loadProfile),[run,setRun]=useState<Run|null>(loadRun);
   const [paused,setPaused]=useState(false),[details,setDetails]=useState<string|null>(null),[menu,setMenu]=useState(false),[installHelp,setInstallHelp]=useState(false),[compartilhar,setCompartilhar]=useState(false),[convite,setConvite]=useState(()=>typeof location!=='undefined'&&new URLSearchParams(location.search).has('convite')&&!matchMedia('(display-mode: standalone)').matches),[confirmNew,setConfirmNew]=useState(false),[confirmAbandon,setConfirmAbandon]=useState(false);
   const [onlineNotice,setOnlineNotice]=useState(''),[acaoDoAviso,setAcaoDoAviso]=useState<'nome'|'atualizar'|'tentar'|null>(null),[nameDialog,setNameDialog]=useState(false),[draftHandle,setDraftHandle]=useState(''),[pendingStart,setPendingStart]=useState(false),[onlineBusy,setOnlineBusy]=useState(false);
@@ -347,11 +350,13 @@ export default function App(){
   /* versão nova publicada enquanto a aba estava aberta (src/main.tsx): oferece recarregar */
   const [versaoNova,setVersaoNova]=useState(false);
   /*
-   * Fora de uma jornada em andamento, a versão nova entra sozinha (recarrega): o celular que deixou o
-   * jogo aberto em segundo plano não fica jogando a versão velha, que o ranking recusa.
+   * A versão nova nunca recarrega sozinha (pedido do jogador: "a pessoa está olhando alguma coisa e o jogo atualiza e
+   * volta para o início, isso não pode acontecer"). Só aparece o aviso "Nova versão · Atualizar"; quem toca volta para
+   * a mesma tela depois de recarregar. Quem fecha o jogo abre direto na versão nova.
    */
   const telaAtual=useRef(screen);telaAtual.current=screen;
-  useEffect(()=>{const ouve=()=>{const r=runRef.current,emJornada=telaAtual.current==='game'&&!!r&&r.stage!=='draft'&&!jornadaAcabou(r);if(emJornada)setVersaoNova(true);else location.reload();};window.addEventListener('nexus:versao-nova',ouve);return()=>window.removeEventListener('nexus:versao-nova',ouve);},[]);
+  const atualizarOJogo=()=>{try{sessionStorage.setItem(TELA_AO_ATUALIZAR,telaAtual.current);}catch{/* sem sessionStorage: volta para o início */}location.reload();};
+  useEffect(()=>{const ouve=()=>setVersaoNova(true);window.addEventListener('nexus:versao-nova',ouve);return()=>window.removeEventListener('nexus:versao-nova',ouve);},[]);
   useEffect(()=>{battleAudio.setBattle(screen==='game'&&run?.stage==='battle'&&!paused&&!details&&!confirmNew&&!confirmAbandon,run?`${run.seed}-${run.index}`:undefined,faixaDaLuta(run?.index??0),run&&run.index<9?faixaDaLuta(run.index+1):undefined);return()=>battleAudio.setBattle(false);},[screen,run?.stage,run?.seed,run?.index,paused,details,confirmNew,confirmAbandon]);
   const install=async()=>{if(installEvent){await installEvent.prompt();const choice=await installEvent.userChoice;setInstallEvent(null);if(choice.outcome!=='accepted')setInstallHelp(true);}else setInstallHelp(true);};
   /* o convite (src/components/BoasVindasDoConvite.tsx): instala pelo pedido do próprio celular e diz se deu certo */
@@ -462,9 +467,9 @@ export default function App(){
     {details&&<CharacterModal character={byId[details]} onClose={()=>setDetails(null)}/>}
     {confirmNew&&<InfoDialog title="Começar uma nova jornada?" icone={<RotateCcw/>} cor="#ffb86b" onClose={()=>setConfirmNew(false)}><p>A jornada de agora some. <b>Seu recorde fica salvo.</b></p><div className="result-actions"><button className="danger" onClick={()=>void startNew()}>Descartar e começar outra <ArrowUpRight size={18}/></button><button className="secondary" onClick={()=>setConfirmNew(false)}>Continuar jornada</button></div></InfoDialog>}
     {nameDialog&&<InfoDialog title="Seu nome no ranking" icone={<UserPen/>} cor="#86e3a8" onClose={()=>{setNameDialog(false);/* sem nome, a jornada começa do mesmo jeito, só fora do ranking */if(pendingStart){setPendingStart(false);abreJornada();}}}><p>De 3 a 16 letras. Aparece junto do seu trio e dos seus pontos.</p><input className="handle-input" aria-label="Nome público" maxLength={16} value={draftHandle} onChange={e=>setDraftHandle(e.target.value)} placeholder="Seu nome no Nexus"/><p>Prévia: <strong>{draftHandle.trim()||'Seu nome'}</strong></p><button className="primary" disabled={onlineBusy} onClick={()=>void saveHandle()}>Confirmar nome</button></InfoDialog>}
-    {versaoNova&&<div className="versao-nova" role="status"><span><b>Nova versão do jogo</b><small>Atualize para suas jornadas valerem no ranking.</small></span><button className="primary" onClick={()=>location.reload()}><RotateCcw size={16}/>Atualizar</button></div>}
+    {versaoNova&&<div className="versao-nova" role="status"><span><b>Nova versão do jogo</b><small>Atualize para suas jornadas valerem no ranking.</small></span><button className="primary" onClick={atualizarOJogo}><RotateCcw size={16}/>Atualizar</button><button className="icon-button" onClick={()=>setVersaoNova(false)} aria-label="Depois"><X size={16}/></button></div>}
     {onlineNotice&&<InfoDialog title="Conexão do ranking" icone={<WifiOff/>} cor="#ff9a8a" onClose={()=>{setOnlineNotice('');setAcaoDoAviso(null);}}><p role="alert">{onlineNotice}</p>
-      {acaoDoAviso==='atualizar'&&<button className="primary" onClick={()=>location.reload()}><RotateCcw size={16}/>Atualizar o jogo</button>}
+      {acaoDoAviso==='atualizar'&&<button className="primary" onClick={atualizarOJogo}><RotateCcw size={16}/>Atualizar o jogo</button>}
       {acaoDoAviso==='nome'&&<button className="primary" onClick={()=>{setOnlineNotice('');setAcaoDoAviso(null);setNameDialog(true);}}><UserPen size={16}/>Escolher nome</button>}
       {acaoDoAviso==='tentar'&&run?.stage==='draft'&&!run.ranked&&<button className="primary" onClick={()=>{setOnlineNotice('');setAcaoDoAviso(null);tentarDeNovo();}}><RotateCcw size={16}/>Tentar de novo</button>}
       <button className={acaoDoAviso?'secondary':'primary'} onClick={()=>{setOnlineNotice('');setAcaoDoAviso(null);}}>{acaoDoAviso?'Jogar assim mesmo':'Entendi'}</button></InfoDialog>}
