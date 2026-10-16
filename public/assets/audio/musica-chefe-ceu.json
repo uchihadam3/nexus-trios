@@ -1,54 +1,62 @@
 {
- "bpm": 168,
- "compassos": 64,
- "segundos": 91.429,
+ "bpm": 158,
+ "compassos": 72,
+ "segundos": 109.367,
  "secoes": [
   {
-   "nome": "Chegada",
+   "nome": "Abertura",
    "inicio": 0.0
   },
   {
    "nome": "Tema",
-   "inicio": 11.429
+   "inicio": 12.152
   },
   {
-   "nome": "Ponte",
-   "inicio": 34.286
+   "nome": "Ação",
+   "inicio": 36.456
   },
   {
    "nome": "Respiro",
-   "inicio": 57.143
+   "inicio": 60.759
+  },
+  {
+   "nome": "Hino",
+   "inicio": 72.911
   },
   {
    "nome": "Refrão",
-   "inicio": 68.571
+   "inicio": 85.063
+  },
+  {
+   "nome": "Volta",
+   "inicio": 97.215
   }
  ],
- "estilo": "caminho do nexus · chefe-ceu (v8)",
+ "estilo": "caminho do nexus · chefe-ceu (v9)",
  "laco": {
-  "inicio": 11.429,
-  "fim": 91.429
+  "inicio": 12.152,
+  "fim": 109.367
  },
  "camadas": {
   "musica-chefe-ceu-base": {
    "arquivo": "musica-chefe-ceu-base.ogg",
    "mp3": "musica-chefe-ceu-base.mp3",
-   "segundos": 91.429,
-   "bytes": 912969,
+   "segundos": 109.367,
+   "bytes": 1035982,
    "rmsDb": -21.6
   },
   "musica-chefe-ceu-pulso": {
    "arquivo": "musica-chefe-ceu-pulso.ogg",
    "mp3": "musica-chefe-ceu-pulso.mp3",
-   "segundos": 91.429,
-   "bytes": 612836,
+   "segundos": 109.367,
+   "bytes": 801605,
    "rmsDb": -25.1
   },
   "musica-chefe-ceu-tema": {
    "arquivo": "musica-chefe-ceu-tema.ogg",
    "mp3": "musica-chefe-ceu-tema.mp3",
-   "segundos": 91.429,
-   "bytes": 979562,
+   "segundos": 109.367,
+   "bytes": 1269221,
    "rmsDb": -23.6
   }
  }

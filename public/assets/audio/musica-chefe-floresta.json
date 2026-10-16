@@ -1,55 +1,63 @@
 {
- "bpm": 138,
- "compassos": 64,
- "segundos": 111.304,
+ "bpm": 148,
+ "compassos": 72,
+ "segundos": 116.757,
  "secoes": [
   {
-   "nome": "Chegada",
+   "nome": "Abertura",
    "inicio": 0.0
   },
   {
    "nome": "Tema",
-   "inicio": 13.913
+   "inicio": 12.973
   },
   {
-   "nome": "Ponte",
-   "inicio": 41.739
+   "nome": "Ação",
+   "inicio": 38.919
   },
   {
    "nome": "Respiro",
-   "inicio": 69.565
+   "inicio": 64.865
+  },
+  {
+   "nome": "Hino",
+   "inicio": 77.838
   },
   {
    "nome": "Refrão",
-   "inicio": 83.478
+   "inicio": 90.811
+  },
+  {
+   "nome": "Volta",
+   "inicio": 103.784
   }
  ],
- "estilo": "caminho do nexus · chefe-floresta (v8)",
+ "estilo": "caminho do nexus · chefe-floresta (v9)",
  "laco": {
-  "inicio": 13.913,
-  "fim": 111.304
+  "inicio": 12.973,
+  "fim": 116.757
  },
  "camadas": {
   "musica-chefe-floresta-base": {
    "arquivo": "musica-chefe-floresta-base.ogg",
    "mp3": "musica-chefe-floresta-base.mp3",
-   "segundos": 111.304,
-   "bytes": 1086878,
-   "rmsDb": -21.8
+   "segundos": 116.757,
+   "bytes": 1101803,
+   "rmsDb": -21.3
   },
   "musica-chefe-floresta-pulso": {
    "arquivo": "musica-chefe-floresta-pulso.ogg",
    "mp3": "musica-chefe-floresta-pulso.mp3",
-   "segundos": 111.304,
-   "bytes": 724289,
-   "rmsDb": -25.3
+   "segundos": 116.757,
+   "bytes": 860026,
+   "rmsDb": -24.8
   },
   "musica-chefe-floresta-tema": {
    "arquivo": "musica-chefe-floresta-tema.ogg",
    "mp3": "musica-chefe-floresta-tema.mp3",
-   "segundos": 111.304,
-   "bytes": 1221812,
-   "rmsDb": -23.8
+   "segundos": 116.757,
+   "bytes": 1379351,
+   "rmsDb": -23.3
   }
  }
 }

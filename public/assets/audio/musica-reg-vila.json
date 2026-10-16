@@ -1,55 +1,63 @@
 {
- "bpm": 138,
- "compassos": 64,
- "segundos": 111.304,
+ "bpm": 144,
+ "compassos": 72,
+ "segundos": 120.0,
  "secoes": [
   {
-   "nome": "Chegada",
+   "nome": "Abertura",
    "inicio": 0.0
   },
   {
    "nome": "Tema",
-   "inicio": 13.913
+   "inicio": 13.333
   },
   {
-   "nome": "Ponte",
-   "inicio": 41.739
+   "nome": "Ação",
+   "inicio": 40.0
   },
   {
    "nome": "Respiro",
-   "inicio": 69.565
+   "inicio": 66.667
+  },
+  {
+   "nome": "Hino",
+   "inicio": 80.0
   },
   {
    "nome": "Refrão",
-   "inicio": 83.478
+   "inicio": 93.333
+  },
+  {
+   "nome": "Volta",
+   "inicio": 106.667
   }
  ],
- "estilo": "caminho do nexus · reg-vila (v8)",
+ "estilo": "caminho do nexus · reg-vila (v9)",
  "laco": {
-  "inicio": 13.913,
-  "fim": 111.304
+  "inicio": 13.333,
+  "fim": 120.0
  },
  "camadas": {
   "musica-reg-vila-base": {
    "arquivo": "musica-reg-vila-base.ogg",
    "mp3": "musica-reg-vila-base.mp3",
-   "segundos": 111.304,
-   "bytes": 1068699,
-   "rmsDb": -22.2
+   "segundos": 120.0,
+   "bytes": 1111918,
+   "rmsDb": -21.4
   },
   "musica-reg-vila-pulso": {
    "arquivo": "musica-reg-vila-pulso.ogg",
    "mp3": "musica-reg-vila-pulso.mp3",
-   "segundos": 111.304,
-   "bytes": 802580,
-   "rmsDb": -25.7
+   "segundos": 120.0,
+   "bytes": 957585,
+   "rmsDb": -24.9
   },
   "musica-reg-vila-tema": {
    "arquivo": "musica-reg-vila-tema.ogg",
    "mp3": "musica-reg-vila-tema.mp3",
-   "segundos": 111.304,
-   "bytes": 1110981,
-   "rmsDb": -24.2
+   "segundos": 120.0,
+   "bytes": 1269191,
+   "rmsDb": -23.4
   }
  }
 }

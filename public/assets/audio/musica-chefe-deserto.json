@@ -1,55 +1,63 @@
 {
- "bpm": 130,
- "compassos": 64,
- "segundos": 118.154,
+ "bpm": 132,
+ "compassos": 72,
+ "segundos": 130.909,
  "secoes": [
   {
-   "nome": "Chegada",
+   "nome": "Abertura",
    "inicio": 0.0
   },
   {
    "nome": "Tema",
-   "inicio": 14.769
+   "inicio": 14.545
   },
   {
-   "nome": "Ponte",
-   "inicio": 44.308
+   "nome": "Ação",
+   "inicio": 43.636
   },
   {
    "nome": "Respiro",
-   "inicio": 73.846
+   "inicio": 72.727
+  },
+  {
+   "nome": "Hino",
+   "inicio": 87.273
   },
   {
    "nome": "Refrão",
-   "inicio": 88.615
+   "inicio": 101.818
+  },
+  {
+   "nome": "Volta",
+   "inicio": 116.364
   }
  ],
- "estilo": "caminho do nexus · chefe-deserto (v8)",
+ "estilo": "caminho do nexus · chefe-deserto (v9)",
  "laco": {
-  "inicio": 14.769,
-  "fim": 118.154
+  "inicio": 14.545,
+  "fim": 130.909
  },
  "camadas": {
   "musica-chefe-deserto-base": {
    "arquivo": "musica-chefe-deserto-base.ogg",
    "mp3": "musica-chefe-deserto-base.mp3",
-   "segundos": 118.154,
-   "bytes": 1189795,
-   "rmsDb": -21.3
+   "segundos": 130.909,
+   "bytes": 1302553,
+   "rmsDb": -21.9
   },
   "musica-chefe-deserto-pulso": {
    "arquivo": "musica-chefe-deserto-pulso.ogg",
    "mp3": "musica-chefe-deserto-pulso.mp3",
-   "segundos": 118.154,
-   "bytes": 818392,
-   "rmsDb": -24.8
+   "segundos": 130.909,
+   "bytes": 951431,
+   "rmsDb": -25.4
   },
   "musica-chefe-deserto-tema": {
    "arquivo": "musica-chefe-deserto-tema.ogg",
    "mp3": "musica-chefe-deserto-tema.mp3",
-   "segundos": 118.154,
-   "bytes": 1306047,
-   "rmsDb": -23.3
+   "segundos": 130.909,
+   "bytes": 1441292,
+   "rmsDb": -23.9
   }
  }
 }

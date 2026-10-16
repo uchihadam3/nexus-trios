@@ -1,55 +1,63 @@
 {
- "bpm": 172,
- "compassos": 64,
- "segundos": 89.302,
+ "bpm": 176,
+ "compassos": 72,
+ "segundos": 98.182,
  "secoes": [
   {
-   "nome": "Chegada",
+   "nome": "Abertura",
    "inicio": 0.0
   },
   {
    "nome": "Tema",
-   "inicio": 11.163
+   "inicio": 10.909
   },
   {
-   "nome": "Ponte",
-   "inicio": 33.488
+   "nome": "Ação",
+   "inicio": 32.727
   },
   {
    "nome": "Respiro",
-   "inicio": 55.814
+   "inicio": 54.545
+  },
+  {
+   "nome": "Hino",
+   "inicio": 65.455
   },
   {
    "nome": "Refrão",
-   "inicio": 66.977
+   "inicio": 76.364
+  },
+  {
+   "nome": "Volta",
+   "inicio": 87.273
   }
  ],
- "estilo": "caminho do nexus · reg-vulcao (v8)",
+ "estilo": "caminho do nexus · reg-vulcao (v9)",
  "laco": {
-  "inicio": 11.163,
-  "fim": 89.302
+  "inicio": 10.909,
+  "fim": 98.182
  },
  "camadas": {
   "musica-reg-vulcao-base": {
    "arquivo": "musica-reg-vulcao-base.ogg",
    "mp3": "musica-reg-vulcao-base.mp3",
-   "segundos": 89.302,
-   "bytes": 885100,
-   "rmsDb": -20.6
+   "segundos": 98.182,
+   "bytes": 945751,
+   "rmsDb": -20.1
   },
   "musica-reg-vulcao-pulso": {
    "arquivo": "musica-reg-vulcao-pulso.ogg",
    "mp3": "musica-reg-vulcao-pulso.mp3",
-   "segundos": 89.302,
-   "bytes": 592749,
-   "rmsDb": -24.1
+   "segundos": 98.182,
+   "bytes": 723215,
+   "rmsDb": -23.6
   },
   "musica-reg-vulcao-tema": {
    "arquivo": "musica-reg-vulcao-tema.ogg",
    "mp3": "musica-reg-vulcao-tema.mp3",
-   "segundos": 89.302,
-   "bytes": 991745,
-   "rmsDb": -22.6
+   "segundos": 98.182,
+   "bytes": 1072059,
+   "rmsDb": -22.1
   }
  }
 }

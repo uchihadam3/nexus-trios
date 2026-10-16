@@ -1,55 +1,63 @@
 {
- "bpm": 150,
- "compassos": 64,
- "segundos": 102.4,
+ "bpm": 152,
+ "compassos": 72,
+ "segundos": 113.684,
  "secoes": [
   {
-   "nome": "Chegada",
+   "nome": "Abertura",
    "inicio": 0.0
   },
   {
    "nome": "Tema",
-   "inicio": 12.8
+   "inicio": 12.632
   },
   {
-   "nome": "Ponte",
-   "inicio": 38.4
+   "nome": "Ação",
+   "inicio": 37.895
   },
   {
    "nome": "Respiro",
-   "inicio": 64.0
+   "inicio": 63.158
+  },
+  {
+   "nome": "Hino",
+   "inicio": 75.789
   },
   {
    "nome": "Refrão",
-   "inicio": 76.8
+   "inicio": 88.421
+  },
+  {
+   "nome": "Volta",
+   "inicio": 101.053
   }
  ],
- "estilo": "caminho do nexus · reg-ceu (v8)",
+ "estilo": "caminho do nexus · reg-ceu (v9)",
  "laco": {
-  "inicio": 12.8,
-  "fim": 102.4
+  "inicio": 12.632,
+  "fim": 113.684
  },
  "camadas": {
   "musica-reg-ceu-base": {
    "arquivo": "musica-reg-ceu-base.ogg",
    "mp3": "musica-reg-ceu-base.mp3",
-   "segundos": 102.4,
-   "bytes": 1033786,
-   "rmsDb": -21.4
+   "segundos": 113.684,
+   "bytes": 1081569,
+   "rmsDb": -20.4
   },
   "musica-reg-ceu-pulso": {
    "arquivo": "musica-reg-ceu-pulso.ogg",
    "mp3": "musica-reg-ceu-pulso.mp3",
-   "segundos": 102.4,
-   "bytes": 653803,
-   "rmsDb": -24.9
+   "segundos": 113.684,
+   "bytes": 843763,
+   "rmsDb": -23.9
   },
   "musica-reg-ceu-tema": {
    "arquivo": "musica-reg-ceu-tema.ogg",
    "mp3": "musica-reg-ceu-tema.mp3",
-   "segundos": 102.4,
-   "bytes": 1192970,
-   "rmsDb": -23.4
+   "segundos": 113.684,
+   "bytes": 1331158,
+   "rmsDb": -22.4
   }
  }
 }

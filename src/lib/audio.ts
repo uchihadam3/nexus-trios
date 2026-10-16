@@ -64,7 +64,8 @@ const camadas=(nome:string)=>(['base','pulso','tema'] as const).map(c=>`/assets/
  *   segredo   (luta ★):    si menor com cor dórica e frígia, 160 BPM, caixinha de música e tique-taque (v7)
  *   lenda     (luta 11):   sol menor dominante frígio, 176 BPM, o chefe secreto: sinos graves e coro dobrado (v7)
  */
-const BPM_DA_REGIAO:Record<RegiaoDaMusica,number>={vila:138,floresta:120,neon:128,deserto:112,templo:108,vulcao:172,ceu:150,trono:166};
+const BPM_DA_REGIAO:Record<RegiaoDaMusica,number>={vila:144,floresta:116,neon:126,deserto:112,templo:108,vulcao:176,ceu:152,trono:168};
+const BPM_DO_CHEFE:Record<RegiaoDaMusica,number>={vila:160,floresta:148,neon:160,deserto:132,templo:120,vulcao:184,ceu:158,trono:176};
 export const FAIXAS:Record<Faixa,{camadas:readonly string[];laco:number}>={
   principal:{camadas:AUDIO_ASSETS.battleStems,laco:LACO_DA_MUSICA},
   ascensao:{camadas:camadas('musica-ascensao'),laco:11.852},
@@ -76,20 +77,20 @@ export const FAIXAS:Record<Faixa,{camadas:readonly string[];laco:number}>={
   segredo:{camadas:camadas('musica-segredo'),laco:12},
   lenda:{camadas:camadas('musica-lenda'),laco:10.909},
   /*
-   * O Caminho do Nexus (v8): a música de cada região (os 4 rivais dela) e a do chefe (a mesma terra, mais rápida,
-   * escura, com sinos, tímpanos, coro e o último refrão meio tom acima). O laço volta para o Tema: 8 compassos.
-   *   vila     dó maior, 138 BPM, marcha e sininhos          · chefe 156 BPM, dó menor
-   *   floresta ré dórico, 120 BPM, tambores tribais e coro    · chefe 138 BPM
-   *   neon     lá menor, 128 BPM, synthwave                   · chefe 146 BPM
-   *   deserto  mi frígio dominante, 112 BPM, maqsum e metais  · chefe 130 BPM
-   *   templo   ré hirajoshi, 108 BPM, sinos e taikos          · chefe 126 BPM
-   *   vulcao   mi frígio, 172 BPM, metal                      · chefe 184 BPM
-   *   ceu      fá lídio, 150 BPM, épico com coro              · chefe 168 BPM, fá menor
-   *   trono    si menor harmônica, 166 BPM, orquestral        · chefe 184 BPM (o Imperador)
+   * O Caminho do Nexus (v9, tools/audio/generate_music_v9.py): cada região tem a sua música (os 4 rivais dela) e cada
+   * chefe tem a dele, com tema e hino compostos nota a nota. O laço volta para o Tema: 8 compassos.
+   *   vila     fá maior, 144, marcha de aventura e sininhos      · Bento        fá menor, 160, fanfarra heroica
+   *   floresta ré dórico, 116, tambores tribais, flauta e coro   · Rainha       ré menor harmônica, 148, serpente
+   *   neon     dó sustenido menor, 126, synthwave               · Capitão Aço  dó menor, 160, marcha de bigorna
+   *   deserto  mi hijaz, 112, maqsum, alaúde e metais            · Sultão       fá sustenido hijaz, 132, gênio
+   *   templo   lá in-sen, 108, koto, sinos e taikos             · Assombração  sol sustenido menor, 120, caixinha macabra
+   *   vulcao   mi frígio, 176, metal                            · Titã         dó sustenido frígio, 184, metal pesado
+   *   ceu      lá bemol lídio, 152, harpa, coro e metais        · Panteão      mi bemol maior, 158, fanfarra do Olimpo
+   *   trono    si menor harmônica, 168, órgão e coro            · Imperador    lá menor harmônica, 176, o fim do caminho
    */
   ...Object.fromEntries(REGIOES_DA_MUSICA.flatMap((r)=>[
     [`regiao-${r}`,{camadas:camadas(`musica-reg-${r}`),laco:1920/BPM_DA_REGIAO[r]}],
-    [`chefe-${r}`,{camadas:camadas(`musica-chefe-${r}`),laco:1920/Math.min(184,BPM_DA_REGIAO[r]+18)}],
+    [`chefe-${r}`,{camadas:camadas(`musica-chefe-${r}`),laco:1920/BPM_DO_CHEFE[r]}],
   ])) as unknown as Record<`regiao-${RegiaoDaMusica}`|`chefe-${RegiaoDaMusica}`,{camadas:readonly string[];laco:number}>,
 };
 /** Qual música toca em cada luta (0–9, e as lutas secretas: a ★ e a 11). */
