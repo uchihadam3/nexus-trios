@@ -22,6 +22,7 @@
 import { byId, characters } from '../data/characters';
 import { AJUSTE_DAS_DUPLAS, ALFABETO_DAS_DUPLAS, PASSO_DAS_DUPLAS } from '../data/duplas-ajuste';
 import { DUPLAS } from '../data/duplas-medidas';
+import { PERCENTIS } from '../data/percentis-dos-trios';
 import { FORCA, PESO_DA_LIGACAO } from '../data/forca-dos-rivais';
 import { pontoFraco, type TipoDeFraqueza } from '../data/ponto-fraco';
 import { pontoForte } from '../data/ponto-forte';
@@ -84,35 +85,25 @@ export function notaDoTrio(team: readonly string[]): number {
   for (let a = 0; a < team.length; a++) for (let b = a + 1; b < team.length; b++) n += ajusteDaDupla(team[a]!, team[b]!);
   return n;
 }
-/** A força de um time de 0 a 100 (a nota das Dicas, que vai de ~-2 a ~8): a mesma no PvP, na escolha do trio e no segredo Davi contra Golias. */
-export const forcaDoTime = (t: readonly string[]) => Math.max(4, Math.min(100, Math.round(((notaDoTrio(t) + 2) / 10) * 100)));
-/** As estrelas do time (1 a 5): cada 20 de força é uma estrela. */
-export const estrelasDaForca = (f: number) => Math.max(1, Math.min(5, Math.ceil(f / 20)));
-export const estrelasDoTime = (t: readonly string[]) => estrelasDaForca(forcaDoTime(t));
 /*
- * Quanto o trio é melhor que os outros (pedido do dono, só na conta dele: "esse trio é melhor que 99%, 98%… dos outros
- * trios"): a posição da nota dele entre 8 mil trios sorteados do elenco todo, sempre os mesmos (semente fixa). A amostra
- * é montada uma vez, na primeira vez que a porcentagem aparece.
+ * Quanto o trio é melhor que os outros (pedido do dono: "esse trio é melhor que 99%, 98%… dos outros trios"): a posição
+ * da nota dele na régua de todos os trios possíveis (src/data/percentis-dos-trios.ts), de 0 a 100.
  */
-let NOTAS_DA_AMOSTRA: Float64Array | null = null;
-function notasDaAmostra(): Float64Array {
-  if (NOTAS_DA_AMOSTRA) return NOTAS_DA_AMOSTRA;
-  const ids = characters.map((c) => c.id), notas = new Float64Array(8000);
-  let semente = 20261016, n = 0;
-  const sorteia = () => ids[Math.floor(((semente = (Math.imul(semente, 1664525) + 1013904223) >>> 0) / 4294967296) * ids.length)]!;
-  while (n < notas.length) {
-    const a = sorteia(), b = sorteia(), c = sorteia();
-    if (a !== b && a !== c && b !== c) notas[n++] = notaDoTrio([a, b, c]);
-  }
-  return (NOTAS_DA_AMOSTRA = notas.sort());
-}
-/** De 0 a 100: o trio é melhor que esta porcentagem dos trios possíveis (arredondada para baixo). */
 export function melhorQueOsTrios(team: readonly string[]): number {
-  const notas = notasDaAmostra(), nota = notaDoTrio(team);
-  let de = 0, ate = notas.length;
-  while (de < ate) { const m = (de + ate) >> 1; if (notas[m]! < nota) de = m + 1; else ate = m; }
-  return Math.floor((100 * de) / notas.length);
+  const nota = notaDoTrio(team);
+  let p = 0;
+  while (p < 100 && PERCENTIS[p + 1]! <= nota) p++;
+  return p;
 }
+/*
+ * As estrelas do time, de 1 a 7 (pedido do dono, a "opção 2": parecidas em tamanho, com o topo mais raro). Pela
+ * porcentagem de trios que ele supera; medido com os 10,6 milhões de trios (quanto vencem de trios sorteados):
+ *   1★ até 15% (28%) · 2★ 15–35% (39%) · 3★ 35–55% (47%) · 4★ 55–72% (54%) · 5★ 72–86% (62%) · 6★ 86–95% (72%) · 7★ 95%+ (84%)
+ */
+export const ESTRELAS_MAXIMAS = 7;
+export const CORTES_DAS_ESTRELAS: readonly number[] = [15, 35, 55, 72, 86, 95];
+export const estrelasDaPorcentagem = (p: number) => 1 + CORTES_DAS_ESTRELAS.filter((c) => p >= c).length;
+export const estrelasDoTime = (t: readonly string[]) => estrelasDaPorcentagem(melhorQueOsTrios(t));
 /* de logit para pontos de vitória, perto de 50% (para a explicação) */
 const pontos = (z: number) => Math.round(25 * Math.abs(z));
 

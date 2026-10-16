@@ -18,8 +18,8 @@ import { random, shuffle } from './random';
  * refaz a mesma conta no replay (src/engine/ranked.ts): ninguém inventa um segredo.
  *
  * Chances medidas com o motor atual (jornadas de trios sorteados): Sem Baixas 7%, Relâmpago 6%, Virada 3%,
- * Trio Intacto 1,3%; Clássico do Universo 54% de quem monta um trio de um universo só; Davi contra Golias 19% dos
- * trios de 1 estrela.
+ * Trio Intacto 1,3%; Clássico do Universo 54% de quem monta um trio de um universo só; Davi contra Golias perto de
+ * 19% dos trios de 1 ou 2 estrelas (7% das jornadas).
  */
 export type SegredoId = 'sem-baixas' | 'classico' | 'intacto' | 'virada' | 'relampago' | 'davi';
 export type QualLuta = 'estrela' | 'onze';
@@ -40,7 +40,7 @@ export const SEGREDOS: readonly Segredo[] = [
   { id: 'intacto', nome: 'Trio Intacto', charada: 'Chegar ao fim é bom. Chegar inteiro é lenda.', regra: 'Vença a luta 10 com os três do trio de pé.', libera: ['onze'], cor: '#ffd36b' },
   { id: 'virada', nome: 'A Virada', charada: 'Sozinho contra três. Quem não desiste…', regra: 'Em qualquer luta, fique com só um do trio de pé contra os três rivais e vença assim mesmo. Depois, vença as 10.', libera: ['onze'], cor: '#ff8a5c' },
   { id: 'relampago', nome: 'Relâmpago', charada: 'Rápido demais para o rival entender o que aconteceu.', regra: 'Vença 4 das 5 primeiras lutas em menos de 25 segundos cada.', libera: ['estrela', 'onze'], cor: '#7fe8ff' },
-  { id: 'davi', nome: 'Davi contra Golias', charada: 'Ninguém aposta nos pequenos. Prove que estão errados.', regra: 'Com um trio de 1 estrela, vença as 5 primeiras lutas.', libera: ['estrela', 'onze'], cor: '#d59cff' },
+  { id: 'davi', nome: 'Davi contra Golias', charada: 'Ninguém aposta nos pequenos. Prove que estão errados.', regra: 'Com um trio de 1 ou 2 estrelas, vença as 5 primeiras lutas.', libera: ['estrela', 'onze'], cor: '#d59cff' },
 ];
 export const SEGREDO = Object.fromEntries(SEGREDOS.map((s) => [s.id, s])) as Record<SegredoId, Segredo>;
 
@@ -57,6 +57,8 @@ export const seedDaLuta = (seed: number, indice: number) => seed + indice * 7919
 export const indiceDosPontos = (indice: number) => (indice === LUTA_ESTRELA ? 5 : indice === LUTA_ONZE ? 16 : indice);
 /** Menos de RELAMPAGO segundos de luta (tempo de jogo, não de tela)… */
 export const RELAMPAGO = 25;
+/** Davi contra Golias: trios de até ESTRELAS_DO_DAVI estrelas (na escala de 7, os 35% mais fracos). */
+export const ESTRELAS_DO_DAVI = 2;
 /** …em LUTAS_DO_RELAMPAGO das 5 primeiras (era 3: 12% das jornadas fazia; com 4, 6%, como os outros segredos). */
 export const LUTAS_DO_RELAMPAGO = 4;
 
@@ -79,7 +81,7 @@ export function segredosCumpridos(team: readonly string[], lutas: readonly LutaD
   if (venceuAte(3) && [0, 1, 2].every((i) => da(i)!.survivors === 3)) out.push('sem-baixas');
   if (normais.filter((l) => l.index < 5 && l.won && l.time < RELAMPAGO).length >= LUTAS_DO_RELAMPAGO) out.push('relampago');
   if (venceuAte(5) && universoDoTrio(team)) out.push('classico');
-  if (venceuAte(5) && estrelasDoTime(team) === 1) out.push('davi');
+  if (venceuAte(5) && estrelasDoTime(team) <= ESTRELAS_DO_DAVI) out.push('davi');
   if (normais.some((l) => l.won && l.virada)) out.push('virada');
   if (da(9)?.won && da(9)!.survivors === 3) out.push('intacto');
   return out;

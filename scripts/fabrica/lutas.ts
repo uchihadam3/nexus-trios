@@ -28,7 +28,7 @@
  * Cada linha (dificuldade): JSON {id, aleatorio, bom, melhor, dupla}.
  * Cada linha (trios): i j k v (índices do trio; v = lutas vencidas de <lutas>).
  *   estrelas   PvP por estrela (pedido do dono: "um time 5 estrelas não pode perder para um 3 estrelas"): cada parte monta
- *              trios de 1 a 5 estrelas (a força do PvP, estrelasDoTime) e os põe para lutar em todas as combinações
+ *              trios de 1 a 7 estrelas (a força do PvP, estrelasDoTime) e os põe para lutar em todas as combinações
  *              de estrelas, trocando o lado a cada luta
  * Cada linha (estrelas): ea eb a1 a2 a3 b1 b2 b3 v (estrelas dos dois trios; v = 1 se o trio a venceu).
  *   estrelas-jornada  um trio de cada estrela jogando a jornada inteira, com a regra "Vida acima do topo" em
@@ -41,20 +41,22 @@ import { characters } from '../../src/data/characters';
 import { createBattle, stepBattle } from '../../src/engine/battle';
 import { ENGINE_VERSION, rosterFingerprint } from '../../src/engine/ranked';
 import { ESCALAS, VIDA_ACIMA_DO_TOPO, forcaDoTrio, generateCampaign, newDraft, pickDraft, skipDraft } from '../../src/engine/campaign';
-import { estrelasDoTime, notaDoTrio } from '../../src/presentation/dicas-do-trio';
+import { ESTRELAS_MAXIMAS, estrelasDoTime, notaDoTrio } from '../../src/presentation/dicas-do-trio';
 import { combosDoTrio } from '../../src/engine/combos';
 import { pontosDaLuta } from '../../src/engine/pontos';
 import { FORCA } from '../../src/data/forca-dos-rivais';
 import CANDIDATOS from './candidatos-do-melhor.json';
 
-const [plano, parteTxt, partesTxt, lutasTxt, saida, sementeTxt = '0'] = process.argv.slice(2);
+const [plano, parteTxt, partesTxt, lutasTxt, saida, sementeTxt = '0', salTxt = '0'] = process.argv.slice(2);
+/* `sal`: muda os rivais sorteados sem mudar o lote (plano trios: a 2ª rodada dos 10,6 milhões de trios não repete as lutas da 1ª) */
+const sal = Number(salTxt) || 0;
 const parte = Number(parteTxt), partes = Number(partesTxt), lutas = Number(lutasTxt), semente = Number(sementeTxt), semente0 = semente;
 if (!plano || !saida || !(partes > 0) || !(parte >= 0 && parte < partes) || !(lutas > 0)) {
   console.error('uso: lutas <aleatorio|pares|jornada|dificuldade|trios|pontos> <parte> <partes> <lutas> <saida.txt> [semente]');
   process.exit(1);
 }
 const N = characters.length;
-let r = (Math.imul(parte + 1, 2654435761) ^ Math.imul(semente + 7, 40503) ^ (plano === 'pares' ? 0x9e3779b9 : 0)) >>> 0;
+let r = (Math.imul(parte + 1, 2654435761) ^ Math.imul(semente + 7, 40503) ^ (plano === 'pares' ? 0x9e3779b9 : 0) ^ (sal ? Math.imul(sal, 0x2545f491) : 0)) >>> 0;
 const rnd = () => { r = (Math.imul(r, 1664525) + 1013904223) >>> 0; return r / 4294967296; };
 const LOTE_DE_TRIOS = 1_000_000;
 /* As forças da regra "Vida acima do topo" testadas juntas (a de agora é VIDA_ACIMA_DO_TOPO). */
@@ -66,7 +68,7 @@ const duplas: [number, number][] = [];
 if (plano === 'pares') { let k = 0; for (let i = 0; i < N; i++) for (let j = i + 1; j < N; j++, k++) if (k % partes === parte) duplas.push([i, j]); }
 else if (!['aleatorio', 'jornada', 'dificuldade', 'trios', 'pontos', 'estrelas', 'estrelas-jornada'].includes(plano)) { console.error(`plano desconhecido: ${plano}`); process.exit(1); }
 
-writeFileSync(saida, `# motor ${ENGINE_VERSION} elenco ${rosterFingerprint()} plano ${plano} parte ${parte}/${partes} semente ${semente}\n`);
+writeFileSync(saida, `# motor ${ENGINE_VERSION} elenco ${rosterFingerprint()} plano ${plano} parte ${parte}/${partes} semente ${semente}${sal ? ` sal ${sal}` : ''}\n`);
 if (plano === 'jornada' || plano === 'dificuldade' || plano === 'trios' || plano === 'pontos' || plano === 'estrelas' || plano === 'estrelas-jornada') { ({ jornada: jornadas, dificuldade, trios, pontos, estrelas, 'estrelas-jornada': estrelasJornada })[plano](); process.exit(0); }
 let buffer = '', feitas = 0;
 const inicio = Date.now();
@@ -220,9 +222,9 @@ function dificuldade() {
  * cada vez (só aceita a troca que não piora a nota) até cair na estrela pedida. Cada parte tem os seus.
  */
 function triosPorEstrela(quantos: number): number[][][] {
-  const pools: number[][][] = [[], [], [], [], [], []];
+  const pools: number[][][] = Array.from({ length: ESTRELAS_MAXIMAS + 1 }, () => []);
   const ids = (t: number[]) => t.map((i) => characters[i]!.id);
-  for (let alvo = 1; alvo <= 5; alvo++) {
+  for (let alvo = 1; alvo <= ESTRELAS_MAXIMAS; alvo++) {
     let tentativas = 0;
     while (pools[alvo]!.length < quantos && tentativas++ < quantos * 60) {
       const u = new Set<number>(); let t = [sorteia(u), sorteia(u), sorteia(u)], nota = notaDoTrio(ids(t));
@@ -244,8 +246,8 @@ function estrelas() {
   console.log(`parte ${parte}: trios por estrela ${pools.slice(1).map((p) => p.length).join('/')} em ${((Date.now() - inicio) / 1000).toFixed(0)} s`);
   let buffer = '', feitas = 0;
   for (let n = 0; n < lutas; n++) {
-    // todas as combinações de estrelas, por igual (5 × 5)
-    const ea = 1 + (n % 5), eb = 1 + (Math.floor(n / 5) % 5);
+    // todas as combinações de estrelas, por igual (7 × 7)
+    const ea = 1 + (n % ESTRELAS_MAXIMAS), eb = 1 + (Math.floor(n / ESTRELAS_MAXIMAS) % ESTRELAS_MAXIMAS);
     const pa = pools[ea]!, pb = pools[eb]!;
     if (!pa.length || !pb.length) continue;
     const a = pa[Math.floor(rnd() * pa.length)]!, b = pb[Math.floor(rnd() * pb.length)]!;
@@ -267,7 +269,7 @@ function estrelasJornada() {
   const inicio = Date.now(), pools = triosPorEstrela(60);
   let buffer = '';
   for (let n = 0; n < lutas; n++) {
-    const e = 1 + (n % 5), p = pools[e]!;
+    const e = 1 + (n % ESTRELAS_MAXIMAS), p = pools[e]!;
     if (!p.length) continue;
     const t = p[Math.floor(rnd() * p.length)]!, team = t.map((i) => characters[i]!.id), seed = Math.floor(rnd() * 2 ** 31);
     const enc = generateCampaign(seed, team);

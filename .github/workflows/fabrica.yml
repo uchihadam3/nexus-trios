@@ -21,6 +21,9 @@ on:
       ate:
         description: 'trios: o último lote (a semente é o lote atual; ao terminar, a rodada dispara o próximo até este)'
         default: ''
+      sal:
+        description: 'trios: muda os rivais sorteados sem mudar o lote (0 = a rodada original; 1 = a 2ª rodada, que não repete as lutas da 1ª)'
+        default: '0'
       fortes:
         description: 'dificuldade: os ids mais fortes (vírgula), medidos com o plano jornada; vazio = tabela de força. pontos: os ids entre os quais o trio é sorteado (vazio = elenco todo)'
         default: ''
@@ -53,10 +56,11 @@ jobs:
           SEMENTE: ${{ inputs.semente }}
           MAQUINA: ${{ matrix.maquina }}
           FORTES: ${{ inputs.fortes }}
+          SAL: ${{ inputs.sal }}
         run: |
           mkdir -p saida
           for i in 0 1 2 3; do
-            node ${{ runner.temp }}/lutas.mjs "$PLANO" $((MAQUINA*4+i)) 80 "$LUTAS" "saida/parte-$((MAQUINA*4+i)).txt" "$SEMENTE" &
+            node ${{ runner.temp }}/lutas.mjs "$PLANO" $((MAQUINA*4+i)) 80 "$LUTAS" "saida/parte-$((MAQUINA*4+i)).txt" "$SEMENTE" "${SAL:-0}" &
           done
           wait
           wc -l saida/*.txt
@@ -88,10 +92,10 @@ jobs:
           grep -hv '^#' ${{ runner.temp }}/partes/*.txt | wc -l > "$DESTINO/total.txt"
           echo "lutas: $(cat "$DESTINO/total.txt") · $(du -h "$DESTINO/lutas.txt.gz" | cut -f1)"
           git add rodadas
-          git commit -q -m "Fábrica: $(cat "$DESTINO/total.txt") lutas (${{ inputs.plano }}, semente ${{ inputs.semente }})"
+          git commit -q -m "Fábrica: $(cat "$DESTINO/total.txt") lutas (${{ inputs.plano }}, semente ${{ inputs.semente }}, sal ${{ inputs.sal }})"
           git push -q origin fabrica-resultados
       - name: Próximo lote de trios
         if: inputs.plano == 'trios' && inputs.ate != '' && fromJSON(inputs.semente) < fromJSON(inputs.ate)
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh workflow run fabrica.yml --ref "${{ github.ref_name }}" -f plano=trios -f lutas="${{ inputs.lutas }}" -f semente="$(( ${{ inputs.semente }} + 1 ))" -f ate="${{ inputs.ate }}"
+        run: gh workflow run fabrica.yml --ref "${{ github.ref_name }}" -f plano=trios -f lutas="${{ inputs.lutas }}" -f semente="$(( ${{ inputs.semente }} + 1 ))" -f ate="${{ inputs.ate }}" -f sal="${{ inputs.sal }}"

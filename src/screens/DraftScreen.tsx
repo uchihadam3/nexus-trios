@@ -12,7 +12,7 @@ import { IdentityChips } from '../components/IdentityChips';
 import { ComTermos } from '../components/Termos';
 import { draftConnection } from '../presentation/draft-connections';
 import { BotaoDicas } from '../components/BotaoDicas';
-import { dicasDoDraft,estrelasDoTime,melhorQueOsTrios,type DicaDoCandidato } from '../presentation/dicas-do-trio';
+import { dicasDoDraft,estrelasDaPorcentagem,melhorQueOsTrios,ESTRELAS_MAXIMAS,type DicaDoCandidato } from '../presentation/dicas-do-trio';
 import { universoDaFicha } from '../data/equipes';
 
 /*
@@ -109,14 +109,14 @@ export function DraftScreen({draft,desafio,primeiroRival,estrelas=false,dicas,po
 
 /*
  * As estrelas do trio (pedido do dono: "depois que escolher os três, aparece quantas estrelas o time tem… mais
- * sutil, pequenininhas, não tão destacado"; e depois: "deixa as estrelinhas só na minha conta"): só as cinco estrelinhas embaixo do trio, acendendo uma a uma. A força é
+ * sutil, pequenininhas, não tão destacado"; e depois: "deixa as estrelinhas só na minha conta"): só as estrelinhas (1 a 7) embaixo do trio, acendendo uma a uma. A força é
  * a mesma do PvP (src/presentation/dicas-do-trio.ts, estrelasDoTime).
  */
 function EstrelasDoTrio({team}:{team:string[]}){
-  const n=estrelasDoTime(team),pct=melhorQueOsTrios(team);
+  const pct=melhorQueOsTrios(team),n=estrelasDaPorcentagem(pct);
   // e a porcentagem (pedido do dono: "esse trio é melhor que 99%, 98%… dos outros trios")
   return <div className="dv-estrelas" role="img" aria-label={`Trio de ${n} ${n===1?'estrela':'estrelas'}, melhor que ${pct}% dos trios`}>
-    {[0,1,2,3,4].map(k=><i key={k} className={k<n?'acesa':''} style={{'--k':k} as CSSProperties}><Star size={13} fill="currentColor" strokeWidth={1.5}/></i>)}
+    {Array.from({length:ESTRELAS_MAXIMAS},(_,k)=><i key={k} className={k<n?'acesa':''} style={{'--k':k} as CSSProperties}><Star size={13} fill="currentColor" strokeWidth={1.5}/></i>)}
     <small>melhor que <b>{pct}%</b> dos trios</small>
   </div>;
 }
