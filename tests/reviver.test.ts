@@ -74,7 +74,7 @@ describe('Renascer', () => {
     });
   }
 
-  it('a Death Note impede o renascer', () => {
+  it('quem cai pela Death Note renasce também (pedido do dono)', () => {
     const c = renascem[0]!;
     const b = createBattle(['light', 'goku', 'naruto'], [c.id, 'thanos', 'hulk'], 3);
     const light = quem(b, 'light'), alvo = quem(b, c.id);
@@ -83,9 +83,9 @@ describe('Renascer', () => {
     light.skills[2]!.charge = 100;
     anda(b, 12, () => alvo.hp <= 0);
     expect(alvo.hp).toBe(0);
-    anda(b, 6);
-    expect(alvo.hp).toBe(0);
-    expect(alvo.renascendo ?? 0).toBe(0);
+    expect(alvo.renascendo ?? 0).toBeGreaterThan(0);
+    anda(b, 12, () => alvo.hp > 0);
+    expect(alvo.hp).toBeGreaterThan(0);
   });
 
   it('quem cai por último não renasce: sem ninguém de pé, a luta acaba (pedido do jogador)', () => {

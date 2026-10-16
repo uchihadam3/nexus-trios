@@ -140,6 +140,10 @@ export function targets(b:Battle,actor:Fighter,rule:Target,effects:Effect[]=[],r
     if(isDeathNote){
       const vulnerable=enemies.filter(x=>actor.discovered?.[x.uid]==='vulnerable'&&(actor.investigation[x.uid]??0)>=100);
       if(vulnerable.length)return chooseTarget(b,actor,vulnerable,rule,'finisher',effects,record);
+      // chegou a 100 num imune: usa a Death Note nele mesmo (dano e Exposto, uma vez em cada) e depois investiga outro
+      // (pedido do dono: "chegou a 100%, usa o Death Note… se for imune, toma o dano e fica exposto")
+      const imunes=enemies.filter(x=>actor.discovered?.[x.uid]==='immune'&&(actor.investigation[x.uid]??0)>=100&&!actor.sentencados?.[x.uid]);
+      if(imunes.length)return chooseTarget(b,actor,imunes,rule,'finisher',effects,record);
       if(enemies.every(x=>actor.discovered?.[x.uid]==='immune'))return chooseTarget(b,actor,enemies.filter(x=>(actor.investigation[x.uid]??0)>=100),rule,'finisher',effects,record);
       return [];
     }
@@ -604,7 +608,7 @@ export function applyEffects(b:Battle,source:Fighter,selected:Fighter[],effects:
           if(byId[target.characterId].deathNoteCompatible){const value=target.hp;target.hp=0;target.cast=null;target.shields=[];target.statuses=[];
             // quem cai pela Death Note pode ser revivido e renasce, como numa queda comum (pedido do dono)
             const renascer=byId[target.characterId].renascer;if(renascer&&!target.voltou)target.renascendo=renascer.atraso;source.stats.damage+=value;source.stats.kills++;pressure(b,source.side,D.event.deathNote);emit(b,{kind:'ko',source:source.uid,target:target.uid,label:'Sentença concluída',value});}
-          else applyEffects(b,source,[target],[{kind:'status',status:'exposed',value:.55,duration:14},{kind:'damage',value:110}]);
+          else{source.sentencados??={};source.sentencados[target.uid]=true;applyEffects(b,source,[target],[{kind:'status',status:'exposed',value:.55,duration:14},{kind:'damage',value:260}]);}
           break;
         }
         case 'charge':target.skills.forEach((s,i)=>{if(s.cooldown<=0&&target.cast?.skill!==i){const before=s.charge;s.charge=Math.min(100,s.charge+effect.value);if(before<100&&s.charge>=100)emit(b,{kind:'ready',source:target.uid,skill:i,label:byId[target.characterId].skills[i].name,visual:byId[target.characterId].skills[i].icon});if(s.charge>before){emit(b,{kind:'charge',source:source.uid,target:target.uid,skill:i,label:source.uid===target.uid?'trait':'synergy',value:s.charge-before});if(source.uid!==target.uid){pressure(b,source.side,D.event.synergyCharge*clamp((s.charge-before)/25));emit(b,{kind:'synergy',source:source.uid,target:target.uid,skill:i,label:'Carga recebida',value:s.charge-before});source.stats.carga=(source.stats.carga??0)+(s.charge-before);}}}});break;

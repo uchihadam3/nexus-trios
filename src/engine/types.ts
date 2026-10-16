@@ -67,7 +67,9 @@ export interface Fighter {
   golpes?:number;
   skills:SkillState[];statuses:Status[];shields:Shield[];
   cast:null|{skill:number;elapsed:number;duration:number;targets:string[]};
-  investigation:Record<string,number>;discovered?:Record<string,'vulnerable'|'immune'>;traitTimer:number;
+  investigation:Record<string,number>;discovered?:Record<string,'vulnerable'|'immune'>;
+  /** Os imunes em quem o Light já usou a Death Note (dano e Exposto uma vez só em cada um). */
+  sentencados?:Record<string,true>;traitTimer:number;
   storedEnergy:number;
   /** Estado da Mecânica única (src/engine/unicas.ts). */
   u?:Record<string,number>;
