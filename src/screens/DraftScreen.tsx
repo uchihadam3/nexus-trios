@@ -1,7 +1,7 @@
 import { useMemo,useState,type CSSProperties } from 'react';
 import { SeloDeEstrela } from '../components/SeloDeEstrela';
 import { createPortal } from 'react-dom';
-import { ArrowRight,CircleCheck,Crown,Dices,Info,LogOut,Sparkles,Swords,TriangleAlert,X,Zap } from 'lucide-react';
+import { ArrowRight,CircleCheck,Crown,Dices,Info,LogOut,Sparkles,Star,Swords,TriangleAlert,X,Zap } from 'lucide-react';
 import type { Draft,Encounter } from '../engine/campaign';
 import { byId } from '../data/characters';
 import { Portrait } from '../components/Portrait';
@@ -12,7 +12,7 @@ import { IdentityChips } from '../components/IdentityChips';
 import { ComTermos } from '../components/Termos';
 import { draftConnection } from '../presentation/draft-connections';
 import { BotaoDicas } from '../components/BotaoDicas';
-import { dicasDoDraft,type DicaDoCandidato } from '../presentation/dicas-do-trio';
+import { dicasDoDraft,estrelasDoTime,type DicaDoCandidato } from '../presentation/dicas-do-trio';
 import { universoDaFicha } from '../data/equipes';
 
 /*
@@ -34,7 +34,7 @@ import { universoDaFicha } from '../data/equipes';
  */
 const NIVEL=(n:number)=>n>=80?{rotulo:'ÓTIMO',cor:'#7dff9b'}:n>=55?{rotulo:'BOM',cor:'#c8f560'}:n>=35?{rotulo:'OK',cor:'#ffd166'}:{rotulo:'FRACO',cor:'#ff7a85'};
 const primeiroNome=(id:string)=>byId[id].name.split(/[ ,]/)[0];
-export function DraftScreen({draft,desafio,primeiroRival,dicas,podeDicas,usouDicas,onDicas,onPick,onSkip,onDetails,onStart,onAbandon}:{draft:Draft;/** a Jornada veio do Desafio do Dia, com este personagem já escolhido */desafio?:string;primeiroRival?:Encounter;dicas:boolean;/** o botão só liga para quem liberou as Dicas (src/lib/dicas-liberadas.ts) */podeDicas:boolean;usouDicas:boolean;onDicas:(ligar:boolean)=>void;onPick:(id:string)=>void;onSkip:()=>void;onDetails:(id:string)=>void;onStart:()=>void;onAbandon:()=>void}){
+export function DraftScreen({draft,desafio,primeiroRival,estrelas=false,dicas,podeDicas,usouDicas,onDicas,onPick,onSkip,onDetails,onStart,onAbandon}:{draft:Draft;/** a Jornada veio do Desafio do Dia, com este personagem já escolhido */desafio?:string;primeiroRival?:Encounter;/** mostra as estrelas do trio completo: só na conta do dono (pedido dele) */estrelas?:boolean;dicas:boolean;/** o botão só liga para quem liberou as Dicas (src/lib/dicas-liberadas.ts) */podeDicas:boolean;usouDicas:boolean;onDicas:(ligar:boolean)=>void;onPick:(id:string)=>void;onSkip:()=>void;onDetails:(id:string)=>void;onStart:()=>void;onAbandon:()=>void}){
   const full=draft.team.length===3,team=draft.team.map(id=>byId[id]);
   const doTrio=identidadesDoTrio(team),lacunas=lacunasDoTrio(team);
   const vez=draft.team.length;
@@ -54,6 +54,7 @@ export function DraftScreen({draft,desafio,primeiroRival,dicas,podeDicas,usouDic
           <Portrait character={c}/><b>{c.name}</b><small className="dv-espaco-ficha"><Info size={10}/>ficha</small>
         </button>
         :<div key={`vazio-${i}`} className={`dv-espaco ${i===vez&&!full?'vez':''}`}><span>?</span><b>{i===vez?'escolha agora':`espaço ${i+1}`}</b></div>;})}</div>
+      {full&&estrelas&&<EstrelasDoTrio team={draft.team}/>}
       {team.length>0&&<div className="dv-trio-faz"><IdentityChips ids={doTrio} trio={doTrio}/>{ligadas&&lacunas.length>0&&<small><TriangleAlert size={13}/>{lacunas.join(' · ')}</small>}</div>}
       {(!full||usouDicas)&&<BotaoDicas ligado={dicas} liberado={podeDicas} usado={usouDicas} desativado={full} onMudar={onDicas}/>}
     </header>
@@ -104,4 +105,16 @@ export function DraftScreen({draft,desafio,primeiroRival,dicas,podeDicas,usouDic
       <button className="secondary dv-sair" onClick={onAbandon} aria-label="Desistir da jornada" title="Desistir da jornada"><LogOut size={18}/></button>
     </footer>
   </section>;
+}
+
+/*
+ * As estrelas do trio (pedido do dono: "depois que escolher os três, aparece quantas estrelas o time tem… mais
+ * sutil, pequenininhas, não tão destacado"; e depois: "deixa as estrelinhas só na minha conta"): só as cinco estrelinhas embaixo do trio, acendendo uma a uma. A força é
+ * a mesma do PvP (src/presentation/dicas-do-trio.ts, estrelasDoTime).
+ */
+function EstrelasDoTrio({team}:{team:string[]}){
+  const n=estrelasDoTime(team);
+  return <div className="dv-estrelas" role="img" aria-label={`Trio de ${n} ${n===1?'estrela':'estrelas'}`}>
+    {[0,1,2,3,4].map(k=><i key={k} className={k<n?'acesa':''} style={{'--k':k} as CSSProperties}><Star size={13} fill="currentColor" strokeWidth={1.5}/></i>)}
+  </div>;
 }
