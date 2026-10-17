@@ -3,7 +3,7 @@ import { byId } from '../src/data/characters';
 import { generateCampaign } from '../src/engine/campaign';
 import { replayRanked } from '../src/engine/ranked';
 import { multiplicadorDaLuta } from '../src/engine/pontos';
-import { LUTA_ESTRELA, LUTA_ONZE, SEGREDOS, indiceDosPontos, proximaLuta, rivalSecreto, segredosCumpridos, type LutaDoSegredo } from '../src/engine/segredos';
+import { LUTA_ESTRELA, LUTA_ONZE, SEGREDOS, indiceDosPontos, pulosDaJornada, proximaLuta, rivalSecreto, segredosCumpridos, type LutaDoSegredo } from '../src/engine/segredos';
 
 /* Os seis segredos e as lutas extras (src/engine/segredos.ts). */
 const luta = (index: number, won = true, x: Partial<LutaDoSegredo> = {}): LutaDoSegredo => ({ index, won, time: 40, survivors: 2, ...x });
@@ -100,5 +100,13 @@ describe('segredos', () => {
     const r = replayRanked(['saitama', 'garou', 'genos'], 135848164, true);
     expect(r.summaries.map((s) => s.index).slice(0, 6)).toEqual([0, 1, 2, 3, 4, LUTA_ESTRELA]);
     expect(r.highlights.segredos).toContain('classico');
+  });
+
+  it('o prêmio do Livro: com os 6 segredos, 4 pulos na escolha do trio (sem eles, 3)', () => {
+    const todos = SEGREDOS.map((x) => x.id);
+    expect(pulosDaJornada([])).toBe(3);
+    expect(pulosDaJornada(todos.slice(0, 5))).toBe(3);
+    expect(pulosDaJornada(todos)).toBe(4);
+    expect(pulosDaJornada([...todos, 'outro'])).toBe(4);
   });
 });

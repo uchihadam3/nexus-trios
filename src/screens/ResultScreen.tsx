@@ -1,8 +1,8 @@
 import { useEffect,useState,type CSSProperties,type ReactNode } from 'react';
 import { ConquistasLiberadas } from './ConquistasScreen';
 import { ArrowRight,RotateCcw,Home,Trophy,HeartPulse,TrendingUp,Shield,Crown,Sparkles,Medal,LogOut,Swords,Skull,Zap,Lightbulb,ThumbsDown,ThumbsUp,ArrowDown,Minus,Flame,Star,Lock,type LucideIcon } from 'lucide-react';
-import { proximaDaJornada,rivalAtual,type Run } from '../lib/storage';
-import { LUTA_ESTRELA,LUTA_ONZE,SEGREDO,ehLutaExtra,segredosCumpridos,segredosDaLuta,type SegredoId } from '../engine/segredos';
+import { loadProfile,proximaDaJornada,rivalAtual,type Run } from '../lib/storage';
+import { LUTA_ESTRELA,LUTA_ONZE,PULOS_COM_O_LIVRO_COMPLETO,PULOS_DA_JORNADA,SEGREDO,ehLutaExtra,livroCompleto,segredosCumpridos,segredosDaLuta,type SegredoId } from '../engine/segredos';
 import { ICONE_DO_SEGREDO } from '../components/SeloDoSegredo';
 import '../presentation/segredos.css';
 import { byId } from '../data/characters';
@@ -171,6 +171,11 @@ export function ResultScreen({run,onNext,onRestart,onAbandon,onHome,onRanking,on
     </div>
 
     {descobertos.map((id,k)=><AvisoDeSegredo key={id} id={id} k={k} proxima={proxima} index={run.index} noLivro={run.livroNovo?.includes(id)===true}/>)}
+    {/* o sexto segredo saiu nesta jornada: o prêmio do Livro (um pulo a mais, para sempre) */}
+    {descobertos.some(id=>run.livroNovo?.includes(id))&&livroCompleto([...(loadProfile().segredosDescobertos??[]),...(run.livroNovo??[])])&&<div className="rs-segredo rs-premio-livro" role="status" style={{'--cor':'#ffd36b',animationDelay:`${.6+descobertos.length*.35}s`} as CSSProperties}>
+      <span className="rs-segredo-selo"><Sparkles size={28}/></span>
+      <div className="rs-segredo-texto"><small>LIVRO DE SEGREDOS COMPLETO</small><strong>+1 pulo para sempre!</strong><span>Prêmio dos 6 segredos: a escolha do trio agora tem <b>{PULOS_COM_O_LIVRO_COMPLETO} pulos</b> em vez de {PULOS_DA_JORNADA}.</span></div>
+    </div>}
 
     {champion&&run.conquistasNovas?.length?<ConquistasLiberadas ids={run.conquistasNovas}/>:null}
 

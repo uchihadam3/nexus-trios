@@ -154,3 +154,12 @@ export function rivalDaLuta(seed: number, team: readonly string[], encounters: r
   if (indice === LUTA_ONZE) return rivalSecreto(seed, team, encounters, 'onze', false);
   return encounters[indice]!;
 }
+
+/*
+ * O prêmio do Livro de Segredos (pedido do dono): quem descobre os seis ganha um pulo a mais na escolha do trio, para
+ * sempre — 4 em vez de 3. Vale na jornada normal; o desafio do dia segue com os pulos dele.
+ */
+export const PULOS_DA_JORNADA = 3;
+export const PULOS_COM_O_LIVRO_COMPLETO = PULOS_DA_JORNADA + 1;
+export const livroCompleto = (descobertos: readonly string[]) => SEGREDOS.every((s) => descobertos.includes(s.id));
+export const pulosDaJornada = (descobertos: readonly string[]) => (livroCompleto(descobertos) ? PULOS_COM_O_LIVRO_COMPLETO : PULOS_DA_JORNADA);

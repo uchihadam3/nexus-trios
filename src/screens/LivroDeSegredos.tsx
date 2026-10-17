@@ -1,6 +1,6 @@
 import { useEffect, useState, type CSSProperties } from 'react';
-import { KeyRound, Lock, Sparkles, Star, Crown } from 'lucide-react';
-import { SEGREDOS } from '../engine/segredos';
+import { KeyRound, Lock, Sparkles, Star, Crown, Gift, SkipForward } from 'lucide-react';
+import { PULOS_COM_O_LIVRO_COMPLETO, PULOS_DA_JORNADA, SEGREDOS } from '../engine/segredos';
 import { ICONE_DO_SEGREDO, NOME_DA_LUTA, ONDE_FICA } from '../components/SeloDoSegredo';
 import '../presentation/segredos.css';
 
@@ -33,6 +33,14 @@ export function LivroDeSegredos({ descobertos, vistos, onVer }: { descobertos: r
         <small>Cada segredo cumprido abre uma <b>luta extra</b> na jornada. Ela só vale pontos se você vencer.</small>
       </div>
     </header>
+    <div className={`sg-premio ${n === 6 ? 'ganho' : ''}`} role="note">
+      <span className="sg-premio-icone">{n === 6 ? <SkipForward size={22} /> : <Gift size={22} />}</span>
+      <div>
+        <small>{n === 6 ? 'PRÊMIO GANHO!' : 'PRÊMIO DOS 6 SEGREDOS'}</small>
+        <b>+1 pulo para sempre</b>
+        <span>{n === 6 ? `Agora você tem ${PULOS_COM_O_LIVRO_COMPLETO} pulos para trocar as opções na escolha do trio, em vez de ${PULOS_DA_JORNADA}.` : `Descubra os 6 e a escolha do trio passa a ter ${PULOS_COM_O_LIVRO_COMPLETO} pulos em vez de ${PULOS_DA_JORNADA}. Faltam ${6 - n}.`}</span>
+      </div>
+    </div>
     <div className="sg-lutas" aria-hidden="true">
       {[1, 2, 3, 4, 5].map((i) => <i key={i}>{i}</i>)}<i className="extra"><Star size={11} fill="currentColor" /></i>
       {[6, 7, 8, 9, 10].map((i) => <i key={i}>{i === 10 ? <Crown size={11} /> : i}</i>)}<i className="extra">11</i>

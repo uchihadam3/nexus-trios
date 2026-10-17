@@ -20,7 +20,7 @@ import { createBattle } from './engine/battle';
 import { candidates,generateCampaign,newDraft,pickDraft,skipDraft } from './engine/campaign';
 import type { ResultadoTop3 } from './lib/top3';
 import { defaults,ESCALA_DOS_PONTOS,jornadaAcabou,loadProfile,loadRun,loadSettings,proximaDaJornada,resetStorage,rivalAtual,save,storageAvailable } from './lib/storage';
-import { normaisVencidas,proximaLuta,rivalDaLuta,seedDaLuta,segredosCumpridos } from './engine/segredos';
+import { normaisVencidas,proximaLuta,pulosDaJornada,rivalDaLuta,seedDaLuta,segredosCumpridos } from './engine/segredos';
 import type { Run,Settings } from './lib/storage';
 import type { NovosNoLivro } from './components/CombosDoTrio';
 import { PRIORIDADE } from './audio/cues';
@@ -136,7 +136,8 @@ export default function App(){
     fechaDesistindo(runRef.current);
     const seed=crypto.getRandomValues(new Uint32Array(1))[0];
     const escolhido=desafioPendente.current;desafioPendente.current=null;
-    let draft=newDraft(seed);
+    // os 6 segredos descobertos dão um pulo a mais, para sempre (o prêmio do Livro de Segredos)
+    let draft={...newDraft(seed),skips:pulosDaJornada(loadProfile().segredosDescobertos??[])};
     if(escolhido){draft={...draft,team:[escolhido],skips:PULOS_DO_DESAFIO};draft={...draft,candidates:candidates(draft)};}
     changeRun({seed,team:[],encounters:generateCampaign(seed),index:0,stage:'draft',draft,battle:null,recorded:false,summaries:[],...(escolhido?{desafio:escolhido}:{})});setPaused(false);setConfirmNew(false);setConfirmAbandon(false);navigate('game');
   };

@@ -113,3 +113,14 @@
 .hv-segredos-faixa .hv-cq-texto small{color:#c3b4d8}
 .hv-faixas .hv-conquistas-faixa.hv-segredos-faixa{grid-column:1/-1;grid-template-columns:auto minmax(0,1fr) auto auto;padding:10px 12px}
 .hv-faixas .hv-conquistas-faixa.hv-segredos-faixa>svg{display:block;color:var(--titulo)}
+
+/* o prêmio dos 6 segredos (pedido do dono): +1 pulo para sempre na escolha do trio */
+.sg-premio{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;gap:10px;padding:10px 12px;border-radius:16px;background:linear-gradient(120deg,#2a2210,#14110a);box-shadow:inset 0 0 0 1px #ffd36b44;animation:gs-tile .4s .03s both}
+.sg-premio-icone{display:grid;place-items:center;width:42px;height:42px;border-radius:13px;color:#ffd36b;background:#0007;box-shadow:inset 0 0 0 1px #ffd36b55}
+.sg-premio small{display:block;font-size:10px;font-weight:950;letter-spacing:1.4px;color:#ffd36b}
+.sg-premio b{display:block;font-size:16px;font-weight:950;color:#fff3c4}
+.sg-premio span{display:block;font-size:12px;line-height:1.35;color:#d8ccaa}
+.sg-premio.ganho{background:linear-gradient(120deg,#5a4512,#2a2008);box-shadow:inset 0 0 0 1.5px #ffd36b,0 0 22px #ffd36b44}
+.sg-premio.ganho .sg-premio-icone{color:#2a1a00;background:radial-gradient(circle at 35% 30%,#fff3b0,#ffd36b);box-shadow:0 0 16px #ffd36b88;animation:sg-premio-pulsa 2.2s ease-in-out infinite}
+@keyframes sg-premio-pulsa{50%{transform:scale(1.08)}}
+@media (prefers-reduced-motion:reduce){.sg-premio,.sg-premio.ganho .sg-premio-icone{animation:none}}
