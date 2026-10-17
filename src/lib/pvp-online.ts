@@ -21,7 +21,7 @@ export interface VistaPvp {
   ausencia: number | null; ausenciaMaxima: number;
 }
 export interface RespostaPvp { partida: VistaPvp | null; colecao: string[] }
-export interface RankingPvp { ranking: { posicao: number; id: string; nome: string; rating: number; vitorias: number; derrotas: number }[]; eu: { rating: number; vitorias: number; derrotas: number }; colecao: number }
+export interface RankingPvp { ranking: { posicao: number; id: string; nome: string; rating: number; vitorias: number; derrotas: number }[]; eu: { rating: number; vitorias: number; derrotas: number; id?: string; posicao?: number | null }; colecao: number }
 
 /* O Caminho do Nexus (a campanha contra os 40 rivais, src/engine/campanha.ts): o juiz é o servidor (ação "campanha"). */
 export interface ProgressoDaCampanha {

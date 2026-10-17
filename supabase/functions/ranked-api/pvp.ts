@@ -212,7 +212,9 @@ export async function acaoPvp(db: Db, quem: string, input: Record<string, unknow
     const { data, error } = await db.rpc('pvp_ranking', { p_limite: 50 });
     if (error) throw error;
     const { data: eu } = await db.from('pvp_ratings').select('rating,vitorias,derrotas').eq('player_id', quem).maybeSingle();
-    return ok({ ranking: data ?? [], eu: eu ?? { rating: 1000, vitorias: 0, derrotas: 0 }, colecao: (await colecaoDe(db, quem)).length });
+    // a sua linha (o id e a posição, se estiver entre os 50) para a tela marcar você
+    const posicao = ((data ?? []) as { id: string; posicao: number }[]).find((r) => r.id === quem)?.posicao ?? null;
+    return ok({ ranking: data ?? [], eu: { ...(eu ?? { rating: 1000, vitorias: 0, derrotas: 0 }), id: quem, posicao: posicao === null ? null : Number(posicao) }, colecao: (await colecaoDe(db, quem)).length });
   }
 
   if (op === 'estado') {

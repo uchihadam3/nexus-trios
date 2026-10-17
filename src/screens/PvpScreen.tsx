@@ -1,6 +1,6 @@
 import { createContext, lazy, Suspense, useContext, useEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode } from 'react';
 import { createPortal } from 'react-dom';
-import { ArrowDownAZ, ArrowLeft, ArrowRight, Check, Clock, Compass, Star, Handshake, Info, WifiOff, Globe2, Layers, SlidersHorizontal, Sparkles, Crown, Hourglass, Lock, LogOut, RotateCcw, Search, Shield, Swords, Trophy, Users, Wand2, X, Zap } from 'lucide-react';
+import { ArrowDownAZ, ArrowLeft, ArrowRight, Award, Check, Clock, Compass, Medal, Star, Handshake, Info, WifiOff, Globe2, Layers, SlidersHorizontal, Sparkles, Crown, Hourglass, Lock, LogOut, RotateCcw, Search, Shield, Swords, Trophy, Users, Wand2, X, Zap } from 'lucide-react';
 import { byId, characters } from '../data/characters';
 import { Portrait } from '../components/Portrait';
 import { ArenaDoPvp } from '../components/ArenaDoPvp';
@@ -253,15 +253,15 @@ function Lobby({ colecao, propria, guardado, onTreino, onJogar, online, onCampan
         </div>
         {qualRanking === 'nexus'
           ? <RankingCompleto erro={erroNexus} carregando={!!servicoDaCampanha && !nexus && !erroNexus} semConta={!servicoDaCampanha}
-              vazio="Ninguém jogou o Caminho do Nexus ainda. Seja o primeiro!"
-              linhas={(nexus?.ranking ?? []).map((l) => ({ posicao: l.posicao, id: l.id, nome: l.nome, valor: <><Star size={12} />{l.estrelas}</>, sub: l.titulo, minha: l.id === nexus?.eu?.id }))}
-              eu={nexus?.eu && nexus.eu.posicao > 50 ? { posicao: nexus.eu.posicao, id: nexus.eu.id, nome: nexus.eu.nome, valor: <><Star size={12} />{nexus.eu.estrelas}</>, sub: nexus.eu.titulo, minha: true } : null}
-              rodape={nexus ? `${nexus.total} no Caminho do Nexus · mais estrelas na frente; empate, menos partidas` : ''} />
+              vazio="Ninguém jogou o Caminho do Nexus ainda. O primeiro lugar está livre!"
+              contexto={<><Star size={13} /> Caminho do Nexus · mais estrelas na frente; empate, quem usou menos partidas{nexus ? ` · ${nexus.total} jogadores` : ''}</>}
+              linhas={(nexus?.ranking ?? []).map((l) => ({ posicao: l.posicao, id: l.id, nome: l.nome, valor: l.estrelas, de: `de ${TOTAL_DE_ESTRELAS}★`, sub: `${l.titulo} · ${l.partidas} partidas`, barra: (100 * l.estrelas) / TOTAL_DE_ESTRELAS, minha: l.id === nexus?.eu?.id }))}
+              eu={nexus?.eu ? { posicao: nexus.eu.posicao, id: nexus.eu.id, nome: nexus.eu.nome, valor: nexus.eu.estrelas, de: `de ${TOTAL_DE_ESTRELAS}★`, sub: `${nexus.eu.titulo} · ${nexus.eu.partidas} partidas`, barra: (100 * nexus.eu.estrelas) / TOTAL_DE_ESTRELAS, minha: true } : null} />
           : <RankingCompleto erro={erroRank} carregando={!!online && !rank && !erroRank} semConta={!online}
-              vazio="Ninguém jogou contra outra pessoa ainda. Seja o primeiro!"
-              linhas={(rank?.ranking ?? []).map((l) => ({ posicao: l.posicao, id: l.id, nome: l.nome, valor: <><Crown size={12} />{l.rating}</>, sub: `${l.vitorias}V ${l.derrotas}D`, minha: false }))}
-              eu={null}
-              rodape={rank ? `Seu rating: ${rank.eu.rating} · ${rank.eu.vitorias}V ${rank.eu.derrotas}D · só partidas contra pessoas` : ''} />}
+              vazio="Ninguém jogou contra outra pessoa ainda. O primeiro lugar está livre!"
+              contexto={<><Crown size={13} /> PvP contra pessoas · maior rating na frente{rank ? ` · seu rating: ${rank.eu.rating} (${rank.eu.vitorias}V ${rank.eu.derrotas}D)` : ''}</>}
+              linhas={(rank?.ranking ?? []).map((l) => ({ posicao: l.posicao, id: l.id, nome: l.nome, valor: l.rating, de: 'rating', sub: `${l.vitorias}V ${l.derrotas}D`, minha: l.id === rank?.eu.id }))}
+              eu={rank?.eu.posicao ? (({ id, posicao }) => { const l = rank.ranking.find((x) => x.id === id); return l ? { posicao, id, nome: l.nome, valor: l.rating, de: 'rating', sub: `${l.vitorias}V ${l.derrotas}D`, minha: true } : null; })({ id: rank.eu.id!, posicao: rank.eu.posicao }) : null} />}
       </>}
     </div>
   </section>;
@@ -290,20 +290,34 @@ function PodioCurto({ titulo, icone, linhas, erro, carregando, eu, onVer }: { ti
   </div>;
 }
 
-type LinhaDoRanking = LinhaCurta & { posicao: number; minha: boolean };
-/** Um ranking inteiro (Nexus ou PvP): pódio dos 3 e a lista, com a sua linha no fim se estiver longe. */
-function RankingCompleto({ linhas, eu, erro, carregando, semConta, vazio, rodape }: { linhas: LinhaDoRanking[]; eu: LinhaDoRanking | null; erro: string; carregando: boolean; semConta: boolean; vazio: string; rodape: string }) {
+type LinhaDoRanking = { posicao: number; id: string; nome: string; valor: ReactNode; de: string; sub: string; barra?: number; minha: boolean };
+/*
+ * Um ranking inteiro (Nexus ou PvP), com o mesmo visual do Ranking de fora (pedido do dono: "igualzinho, com pódio"):
+ * a sua posição em cima, o pódio dos 3 com coroa e degraus, e a lista.
+ */
+function RankingCompleto({ linhas, eu, erro, carregando, semConta, vazio, contexto }: { linhas: LinhaDoRanking[]; eu: LinhaDoRanking | null; erro: string; carregando: boolean; semConta: boolean; vazio: string; contexto: ReactNode }) {
   if (semConta) return <p className="pv-vazio pv-ranking-aviso"><Lock size={14} />Entre na sua conta para ver o ranking.</p>;
   if (erro) return <p className="pv-problema">{erro}</p>;
-  if (carregando) return <p className="pv-vazio">Carregando…</p>;
-  if (!linhas.length) return <p className="pv-vazio pv-ranking-aviso">{vazio}</p>;
-  const linha = (l: LinhaDoRanking) => <li key={l.id} className={`${l.posicao <= 3 ? `top${l.posicao}` : ''} ${l.minha ? 'minha' : ''}`}>
-    <i>{l.posicao}</i><Avatar id={l.id} nome={l.nome} tamanho={28} online={false} /><span><b>{l.nome}</b><small>{l.sub}</small></span><em>{l.valor}</em>
-  </li>;
-  return <div className="pv-ranking pv-ranking2">
-    <ol>{linhas.map(linha)}</ol>
-    {eu && <><span className="pv-ranking-pulo">⋯</span><ol>{linha(eu)}</ol></>}
-    {rodape && <small className="pv-ranking-rodape">{rodape}</small>}
+  if (carregando) return <div className="rk-carregando" aria-label="Carregando o ranking">{[0, 1, 2, 3].map((i) => <i key={i} style={{ '--i': i } as CSSProperties} />)}</div>;
+  if (!linhas.length) return <p className="rk-vazio">{vazio}</p>;
+  const podio = linhas.slice(0, 3), resto = linhas.slice(3);
+  const total = (l: LinhaDoRanking) => <span className="rk-cq-total"><b>{l.valor}</b><small>{l.de}</small></span>;
+  const linha = (l: LinhaDoRanking, i: number) => <button key={l.id} type="button" className={`rk-cq-linha pv-rk-linha ${l.minha ? 'mine' : ''}`} style={{ '--i': Math.min(i, 12) } as CSSProperties}>
+    <span className="rk-pos">{l.posicao}</span>
+    <span className="rk-quem"><b>{l.nome}</b><small>{l.sub}</small>{l.barra !== undefined && <span className="rk-cq-barra"><i style={{ width: `${l.barra}%` }} /></span>}</span>
+    {total(l)}
+  </button>;
+  return <div className="pv-rk">
+    <p className="rk-contexto">{contexto}</p>
+    {eu && <div className="rk-meus"><span className="rk-meus-rotulo"><Award size={14} />MINHA POSIÇÃO</span><div className="rk-lista" style={{ marginTop: 8 }}>{linha(eu, 0)}</div></div>}
+    <div className="rk-podio">{[podio[1], podio[0], podio[2]].map((l, i) => l && <div key={l.id} className={`rk-degrau p${l.posicao} ${l.minha ? 'mine' : ''}`} style={{ '--i': i } as CSSProperties}>
+      <span className="rk-coroa">{l.posicao === 1 ? <Crown size={22} /> : <Medal size={18} />}</span>
+      <Avatar id={l.id} nome={l.nome} tamanho={l.posicao === 1 ? 50 : 40} online={false} />
+      <b className="rk-nome">{l.nome}</b>
+      {total(l)}
+      <span className="rk-base">{l.posicao}</span>
+    </div>)}</div>
+    {resto.length > 0 && <div className="rk-lista">{resto.map(linha)}</div>}
   </div>;
 }
 
