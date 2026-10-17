@@ -169,8 +169,8 @@ describe.skipIf(!ADMIN)('Caminho do Nexus: o juiz no servidor', () => {
     expect(final.rating.rating).toBe(1000 + fim.delta!);
     expect(final.progresso.estrelas.zepipoca ?? 0).toBe(fim.estrelas);
     expect(final.progresso.placar.zepipoca).toEqual(ganhou ? { v: 1, d: 0 } : { v: 0, d: 1 });
-    // o rodízio: 3 seus e 3 do rival descansam 3 partidas
-    expect(Object.values(final.progresso.descanso)).toEqual([3, 3, 3]);
+    // o rodízio: 2 seus (dormem 2 por partida) e 3 do rival descansam 3 partidas
+    expect(Object.values(final.progresso.descanso)).toEqual([3, 3]);
     expect(Object.values(final.progresso.descanso_rivais.zepipoca!)).toEqual([3, 3, 3]);
     // quem descansa não entra no time
     const cansado = Object.keys(final.progresso.descanso)[0]!;

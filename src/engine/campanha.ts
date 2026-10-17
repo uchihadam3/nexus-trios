@@ -388,6 +388,7 @@ export type RegraDoDescanso = { quantos: number; partidas: number; porVez?: numb
  */
 export const DORMEM_NO_MAXIMO = 6;
 export const DORMEM_POR_PARTIDA = 2;
+// eslint-disable-next-line @typescript-eslint/no-unused-vars -- a região fica na assinatura: a regra já mudou por região e pode mudar de novo
 export const descansoDaRegiao = (_regiao: number): RegraDoDescanso =>
   ({ quantos: DORMEM_NO_MAXIMO, partidas: DESCANSO.partidas, porVez: DORMEM_POR_PARTIDA });
 /** O seu rodízio nesta região, sem nunca deixar menos de 9 livres (os 3 times): com 12 personagens, dormem no máximo 3. */
