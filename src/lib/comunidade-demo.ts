@@ -31,9 +31,9 @@ export function criarComunidadeDemo(): ServicoDaComunidade {
   const jogadores: Jogador[] = PESSOAS.map(([nome, online, ha, recorde, trio, conquistas], i) => ({
     id: `00000000-0000-4000-8000-${String(i + 1).padStart(12, '0')}`, nome, online,
     onlineDesde: online ? iso(ha) : null, vistoEm: ha === 0 && !online ? null : online ? iso(10_000) : iso(ha),
-    recorde, trio, conquistas, desde: iso(30 * 24 * H),
+    recorde, trio, conquistas, desde: iso(30 * 24 * H), jornadas: Math.round(conquistas * 1.7),
   }));
-  jogadores.push({ id: EU_DEMO, nome: 'Você', online: true, onlineDesde: iso(2 * MIN), vistoEm: iso(5_000), recorde: 1_410_000, trio: ['sekiro', 'alphonse', 'azula'], conquistas: 63, desde: iso(60 * 24 * H) });
+  jogadores.push({ id: EU_DEMO, nome: 'Você', online: true, onlineDesde: iso(2 * MIN), vistoEm: iso(5_000), recorde: 1_410_000, trio: ['sekiro', 'alphonse', 'azula'], conquistas: 63, desde: iso(60 * 24 * H), jornadas: 112 });
   const id = (n: number) => jogadores[n]!.id;
   let proximo = 1;
   const mensagens: Mensagem[] = [];
@@ -81,7 +81,7 @@ export function criarComunidadeDemo(): ServicoDaComunidade {
 
   const espera = <T,>(v: T, ms = 250) => new Promise<T>((r) => setTimeout(() => r(v), ms));
   return {
-    jogadores: () => espera(jogadores.filter((j) => j.id !== EU_DEMO).map((j) => ({ ...j }))),
+    jogadores: () => espera(jogadores.map((j) => ({ ...j }))),
     historico: (com) => {
       const lista = mensagens.filter((m) => com === null ? m.paraId === null : (m.autorId === EU_DEMO && m.paraId === com) || (m.autorId === com && m.paraId === EU_DEMO));
       const ids = new Set(lista.map((m) => m.id));

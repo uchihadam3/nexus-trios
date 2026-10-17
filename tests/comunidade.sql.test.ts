@@ -177,7 +177,7 @@ describe.skipIf(!ADMIN)('Comunidade, no Postgres', () => {
     expect(Date.now() - (j.online_desde as Date).getTime()).toBeLessThan(60_000);
   });
 
-  it('lista da comunidade traz o recorde, o trio e as conquistas de cada um', async () => {
+  it('lista da comunidade traz o recorde, o trio, as conquistas e as jornadas de cada um', async () => {
     const ana = await conta(), beto = await conta();
     const desafio = (await db.query(`insert into public.ranked_challenges(mode, period_key, seed, engine_version, balance_version, roster_fingerprint)
       values ('daily', '2026-10-15', 7, 'teste-com', 'season-1', 'x') returning id`)).rows[0].id;
@@ -187,6 +187,10 @@ describe.skipIf(!ADMIN)('Comunidade, no Postgres', () => {
     await db.query(`select public.registrar_no_top3($1, 'season', 'geral@t', array['goku','gojo','pikachu'], $2, 1500000, 10::smallint, now())`, [ana, run]);
     await db.query(`insert into public.player_achievements(player_id, achievement_id) values ($1, 'personagem:goku'), ($1, 'personagem:gojo')`, [ana]);
     const j = (await como(beto, 'select * from public.comunidade_jogadores() where id = $1', [ana])).rows[0];
-    expect(j).toMatchObject({ recorde: 1500000, trio: ['goku', 'gojo', 'pikachu'], conquistas: 2 });
+    expect(j).toMatchObject({ recorde: 1500000, trio: ['goku', 'gojo', 'pikachu'], conquistas: 2, jornadas: 1 });
+    // a jornada aberta (sem fim) não conta
+    await db.query(`insert into public.ranked_runs(player_id, challenge_id, mode, period_key, seed, engine_version, balance_version, roster_fingerprint, team_ids)
+      values ($1, $2, 'daily', '2026-10-15', 8, 'teste-com', 'season-1', 'x', array['goku','gojo','pikachu'])`, [ana, desafio]);
+    expect((await como(beto, 'select jornadas from public.comunidade_jogadores() where id = $1', [ana])).rows[0].jornadas).toBe(1);
   });
 });

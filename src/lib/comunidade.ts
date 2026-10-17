@@ -21,6 +21,8 @@ export interface Jogador {
   recorde: number | null; trio: string[] | null; conquistas: number;
   /** Quando a conta nasceu. */
   desde: string;
+  /** Quantas jornadas terminou (contadas no servidor). */
+  jornadas: number;
 }
 export interface Mensagem { id: number; autorId: string; paraId: string | null; texto: string; respostaA: number | null; criadaEm: string; vistaEm: string | null }
 export interface Reacao { mensagemId: number; playerId: string; emoji: string | null }
@@ -92,8 +94,8 @@ export function criarComunidade(carregar: () => Promise<SupabaseClient | null>, 
     .subscribe()).catch((e: unknown) => { digitar = null; throw e; });
 
   return {
-    jogadores: async () => (await rpc<{ id: string; nome: string; online: boolean; online_desde: string | null; visto_em: string | null; recorde: number | null; trio: string[] | null; conquistas: number; desde: string }[]>('comunidade_jogadores'))
-      .map((j) => ({ id: j.id, nome: j.nome, online: j.online, onlineDesde: j.online_desde, vistoEm: j.visto_em, recorde: j.recorde, trio: j.trio, conquistas: j.conquistas, desde: j.desde })),
+    jogadores: async () => (await rpc<{ id: string; nome: string; online: boolean; online_desde: string | null; visto_em: string | null; recorde: number | null; trio: string[] | null; conquistas: number; desde: string; jornadas?: number }[]>('comunidade_jogadores'))
+      .map((j) => ({ id: j.id, nome: j.nome, online: j.online, onlineDesde: j.online_desde, vistoEm: j.visto_em, recorde: j.recorde, trio: j.trio, conquistas: j.conquistas, desde: j.desde, jornadas: j.jornadas ?? 0 })),
 
     historico: async (com, antesDe) => {
       const c = await cliente(), meu = eu();
