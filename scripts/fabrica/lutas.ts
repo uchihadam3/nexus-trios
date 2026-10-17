@@ -34,6 +34,12 @@
  *   estrelas-jornada  um trio de cada estrela jogando a jornada inteira, com a regra "Vida acima do topo" em
  *              várias forças ao mesmo tempo (VIDAS), para escolher a que deixa mais estrelas = mais vitórias
  * Cada linha (estrelas-jornada): e acima v0 v1 v2 … a1 a2 a3 (v = lutas vencidas com cada força de VIDAS).
+ *   confrontos quem ganha de quem (pedido do dono: chegar perto dos 80% de acerto): trio sorteado contra trio sorteado,
+ *              guardando os dois lados. Para não lotar o ramo, a parte já soma as lutas numa tabela personagem ×
+ *              personagem e guarda só uma amostra das lutas inteiras (para medir o acerto depois);
+ *              scripts/fabrica/somar-confrontos.mjs junta as 80 partes
+ * Linhas (confrontos): L a1 a2 a3 b1 b2 b3 v (a amostra; v = 1 se o trio a venceu) · M i j n w (i < j: as n lutas em que
+ *              i e j estavam em lados opostos, e w delas o lado de i venceu) · T lutas (o total da parte).
  * A primeira linha (# ...) diz o motor e o elenco, para não misturar medidas.
  */
 import { writeFileSync, appendFileSync } from 'node:fs';
@@ -56,9 +62,11 @@ if (!plano || !saida || !(partes > 0) || !(parte >= 0 && parte < partes) || !(lu
   process.exit(1);
 }
 const N = characters.length;
-let r = (Math.imul(parte + 1, 2654435761) ^ Math.imul(semente + 7, 40503) ^ (plano === 'pares' ? 0x9e3779b9 : 0) ^ (sal ? Math.imul(sal, 0x2545f491) : 0)) >>> 0;
+let r = (Math.imul(parte + 1, 2654435761) ^ Math.imul(semente + 7, 40503) ^ (plano === 'pares' ? 0x9e3779b9 : plano === 'confrontos' ? 0x6c8e9cf5 : 0) ^ (sal ? Math.imul(sal, 0x2545f491) : 0)) >>> 0;
 const rnd = () => { r = (Math.imul(r, 1664525) + 1013904223) >>> 0; return r / 4294967296; };
 const LOTE_DE_TRIOS = 1_000_000;
+/* Quantas lutas inteiras cada parte guarda (confrontos): 80 partes × 2.000 = 160 mil por lote, para medir o acerto. */
+const AMOSTRA_DE_CONFRONTOS = 2000;
 /* As forças da regra "Vida acima do topo" testadas juntas (a de agora é VIDA_ACIMA_DO_TOPO). */
 const VIDAS = [0, 0.1, 0.2, 0.3, 0.4, VIDA_ACIMA_DO_TOPO];
 const sorteia = (fora: Set<number>) => { let i: number; do i = Math.floor(rnd() * N); while (fora.has(i)); fora.add(i); return i; };
@@ -66,10 +74,10 @@ const sorteia = (fora: Set<number>) => { let i: number; do i = Math.floor(rnd() 
 /* As duplas desta parte (pares): a k-ésima dupla da lista vai para a parte k % partes. */
 const duplas: [number, number][] = [];
 if (plano === 'pares') { let k = 0; for (let i = 0; i < N; i++) for (let j = i + 1; j < N; j++, k++) if (k % partes === parte) duplas.push([i, j]); }
-else if (!['aleatorio', 'jornada', 'dificuldade', 'trios', 'pontos', 'estrelas', 'estrelas-jornada'].includes(plano)) { console.error(`plano desconhecido: ${plano}`); process.exit(1); }
+else if (!['aleatorio', 'jornada', 'dificuldade', 'trios', 'pontos', 'estrelas', 'estrelas-jornada', 'confrontos'].includes(plano)) { console.error(`plano desconhecido: ${plano}`); process.exit(1); }
 
 writeFileSync(saida, `# motor ${ENGINE_VERSION} elenco ${rosterFingerprint()} plano ${plano} parte ${parte}/${partes} semente ${semente}${sal ? ` sal ${sal}` : ''}\n`);
-if (plano === 'jornada' || plano === 'dificuldade' || plano === 'trios' || plano === 'pontos' || plano === 'estrelas' || plano === 'estrelas-jornada') { ({ jornada: jornadas, dificuldade, trios, pontos, estrelas, 'estrelas-jornada': estrelasJornada })[plano](); process.exit(0); }
+if (plano === 'jornada' || plano === 'dificuldade' || plano === 'trios' || plano === 'pontos' || plano === 'estrelas' || plano === 'estrelas-jornada' || plano === 'confrontos') { ({ jornada: jornadas, dificuldade, trios, pontos, estrelas, 'estrelas-jornada': estrelasJornada, confrontos })[plano](); process.exit(0); }
 let buffer = '', feitas = 0;
 const inicio = Date.now();
 for (let n = 0; n < lutas; n++) {
@@ -289,4 +297,25 @@ function estrelasJornada() {
   }
   appendFileSync(saida, buffer);
   console.log(`parte ${parte}: pronto em ${((Date.now() - inicio) / 1000).toFixed(0)} s`);
+}
+
+/* Trio sorteado contra trio sorteado, somando a tabela personagem × personagem (ver o topo). */
+function confrontos() {
+  const n = new Uint32Array(N * N), w = new Uint32Array(N * N);
+  let buf = '', feitas = 0;
+  const inicio = Date.now();
+  for (let k = 0; k < lutas; k++) {
+    const fora = new Set<number>(), a = [sorteia(fora), sorteia(fora), sorteia(fora)], b = [sorteia(fora), sorteia(fora), sorteia(fora)];
+    const luta = createBattle(a.map((x) => characters[x]!.id), b.map((x) => characters[x]!.id), Math.floor(rnd() * 2 ** 31), 1);
+    for (let t = 0; t < 9000 && !luta.finished; t++) stepBattle(luta);
+    if (!luta.finished) continue;
+    const v = luta.winner === 'player' ? 1 : 0;
+    for (const i of a) for (const j of b) { if (i < j) { n[i * N + j]++; w[i * N + j] += v; } else { n[j * N + i]++; w[j * N + i] += 1 - v; } }
+    if (feitas < AMOSTRA_DE_CONFRONTOS) { buf += `L ${a.join(' ')} ${b.join(' ')} ${v}\n`; if (buf.length > 64000) { appendFileSync(saida, buf); buf = ''; } }
+    feitas++;
+    if (k % 5000 === 4999) console.log(`parte ${parte}: ${k + 1}/${lutas} lutas · ${((k + 1) / ((Date.now() - inicio) / 1000)).toFixed(0)}/s`);
+  }
+  for (let i = 0; i < N; i++) for (let j = i + 1; j < N; j++) if (n[i * N + j]) { buf += `M ${i} ${j} ${n[i * N + j]} ${w[i * N + j]}\n`; if (buf.length > 64000) { appendFileSync(saida, buf); buf = ''; } }
+  appendFileSync(saida, `${buf}T ${feitas}\n`);
+  console.log(`parte ${parte}: pronto, ${feitas} lutas em ${((Date.now() - inicio) / 1000).toFixed(0)} s`);
 }
