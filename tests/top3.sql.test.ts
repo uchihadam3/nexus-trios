@@ -226,6 +226,19 @@ describe.skipIf(!ADMIN)('Top 3 por conta, no Postgres', () => {
       expect(r.at(-1)!.player_id).toBe(contas[6]);
     });
 
+    it('cada conta aparece uma vez só, com o seu melhor trio', async () => {
+      const Q = '2026-11-02', j = await conta(), outra = await conta();
+      await registrar(j, ['a1', 'a2', 'a3'], 700, 'daily', Q);
+      await registrar(j, ['b1', 'b2', 'b3'], 900, 'daily', Q);
+      await registrar(j, ['c1', 'c2', 'c3'], 800, 'daily', Q);
+      await registrar(outra, ['d1', 'd2', 'd3'], 850, 'daily', Q);
+      const r = (await db.query('select * from public.ranking_pagina($1, $2, $3, 0, 10)', ['daily', Q, j])).rows as Linha[];
+      expect(r.map((x) => [x.player_id, x.score, Number(x.posicao)])).toEqual([[j, 900, 1], [outra, 850, 2]]);
+      expect(Number(r[0].total)).toBe(2);
+      // os 3 trios continuam guardados (a regra do Top 3 da conta)
+      expect(Number((await db.query('select count(*) from public.leaderboard_entries where player_id = $1 and period_key = $2', [j, Q])).rows[0].count)).toBe(3);
+    });
+
     it('não devolve mais que 100 por página, peça o que pedir', async () => {
       const j = await conta();
       for (let i = 0; i < 3; i++) await registrar(j, [`p${i}`, `q${i}`, `r${i}`], 5, 'season', 'grande');

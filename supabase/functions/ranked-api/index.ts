@@ -57,12 +57,13 @@ function validHandle(value:unknown){if(typeof value!=='string')return null;const
 const livreSeed=(doDesafio:number,sorteada:number)=>sorteada===doDesafio?(sorteada+1)&0x7fffffff:sorteada;
 async function profile(userId:string){const {data,error}=await admin.from('players').select('id,handle,nexus_level,xp,renamed_at').eq('id',userId).maybeSingle();if(error)throw error;return data;}
 /*
- * O ranking vem de `leaderboard_entries`, onde cada conta tem até 3 trios
- * diferentes por ranking — a regra da FASE K, garantida pelo banco. Antes, o
- * ranking pegava só a melhor partida de cada conta.
+ * O ranking vem de `leaderboard_entries`, onde cada conta guarda até 3 trios
+ * diferentes por ranking — a regra da FASE K, garantida pelo banco. A lista
+ * mostra só o melhor de cada conta (pedido do dono: um lugar por pessoa;
+ * `ranking_pagina`, migração 20261019000000).
  *
- * `meus` é a caixa "Meus 3 melhores trios": as entradas da própria conta,
- * quantas vagas sobram e o que a próxima entrada precisa superar.
+ * `meus`: a linha da própria conta (a melhor), quantas vagas do Top 3 sobram e
+ * o que a próxima entrada precisa superar.
  */
 type Escopo='daily'|'weekly'|'season';
 const chaveDo=(escopo:Escopo)=>escopo==='season'?CHAVE_GERAL:`${period(escopo)}@${EPOCA}`;
