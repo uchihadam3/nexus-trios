@@ -453,5 +453,19 @@
       0.5
     ],
     "zoom": 1
+  },
+  "donald": {
+    "centering": [
+      0.7,
+      0.0
+    ],
+    "zoom": 1.08
+  },
+  "pernalonga": {
+    "centering": [
+      0.665,
+      0.0
+    ],
+    "zoom": 1.12
   }
 }
