@@ -39,7 +39,8 @@
  *              personagem e guarda só uma amostra das lutas inteiras (para medir o acerto depois);
  *              scripts/fabrica/somar-confrontos.mjs junta as 80 partes
  * Linhas (confrontos): L a1 a2 a3 b1 b2 b3 v (a amostra; v = 1 se o trio a venceu) · M i j n w (i < j: as n lutas em que
- *              i e j estavam em lados opostos, e w delas o lado de i venceu) · T lutas (o total da parte).
+ *              i e j estavam em lados opostos, e w delas o lado de i venceu) · P i j n w (i < j no mesmo trio: n lutas,
+ *              w vitórias — a força das duplas com o motor de agora) · T lutas (o total da parte).
  * A primeira linha (# ...) diz o motor e o elenco, para não misturar medidas.
  */
 import { writeFileSync, appendFileSync } from 'node:fs';
@@ -301,7 +302,7 @@ function estrelasJornada() {
 
 /* Trio sorteado contra trio sorteado, somando a tabela personagem × personagem (ver o topo). */
 function confrontos() {
-  const n = new Uint32Array(N * N), w = new Uint32Array(N * N);
+  const n = new Uint32Array(N * N), w = new Uint32Array(N * N), pn = new Uint32Array(N * N), pw = new Uint32Array(N * N);
   let buf = '', feitas = 0;
   const inicio = Date.now();
   for (let k = 0; k < lutas; k++) {
@@ -311,11 +312,13 @@ function confrontos() {
     if (!luta.finished) continue;
     const v = luta.winner === 'player' ? 1 : 0;
     for (const i of a) for (const j of b) { if (i < j) { n[i * N + j]++; w[i * N + j] += v; } else { n[j * N + i]++; w[j * N + i] += 1 - v; } }
+    for (const [t, vt] of [[a, v], [b, 1 - v]] as const) for (const [p, q] of [[0, 1], [0, 2], [1, 2]]) { const i = Math.min(t[p]!, t[q]!), j = Math.max(t[p]!, t[q]!); pn[i * N + j]++; pw[i * N + j] += vt; }
     if (feitas < AMOSTRA_DE_CONFRONTOS) { buf += `L ${a.join(' ')} ${b.join(' ')} ${v}\n`; if (buf.length > 64000) { appendFileSync(saida, buf); buf = ''; } }
     feitas++;
     if (k % 5000 === 4999) console.log(`parte ${parte}: ${k + 1}/${lutas} lutas · ${((k + 1) / ((Date.now() - inicio) / 1000)).toFixed(0)}/s`);
   }
   for (let i = 0; i < N; i++) for (let j = i + 1; j < N; j++) if (n[i * N + j]) { buf += `M ${i} ${j} ${n[i * N + j]} ${w[i * N + j]}\n`; if (buf.length > 64000) { appendFileSync(saida, buf); buf = ''; } }
+  for (let i = 0; i < N; i++) for (let j = i + 1; j < N; j++) if (pn[i * N + j]) { buf += `P ${i} ${j} ${pn[i * N + j]} ${pw[i * N + j]}\n`; if (buf.length > 64000) { appendFileSync(saida, buf); buf = ''; } }
   appendFileSync(saida, `${buf}T ${feitas}\n`);
   console.log(`parte ${parte}: pronto, ${feitas} lutas em ${((Date.now() - inicio) / 1000).toFixed(0)} s`);
 }
