@@ -231,13 +231,13 @@ function Fim({ rival, partida, antes, r, onMapa, onDeNovo, onProximo }: { rival:
  * A tela
  * ------------------------------------------------------------------------- */
 
-/* No Caminho do Nexus nem a conta do dono vê as estrelas de força dos times (pedido dele); o resto do PvP continua. */
+/* No Caminho do Nexus nem a conta do dono vê as estrelas de força dos times nem tem o "Montar os melhores" (pedido dele): isso é só do treino. */
 export default function CaminhoDoNexus(props: Parameters<typeof Caminho>[0]) {
   return <DonoDoPvp.Provider value={false}><Caminho {...props} /></DonoDoPvp.Provider>;
 }
 
-function Caminho({ servico, settings, onSettings, onDetails, onLutando, onVoltar, dono = false }: {
-  servico: ServicoDaCampanha; settings: Settings; onSettings: (s: Settings) => void; onDetails: (id: string) => void; onLutando: (sim: boolean) => void; onVoltar: () => void; dono?: boolean;
+function Caminho({ servico, settings, onSettings, onDetails, onLutando, onVoltar }: {
+  servico: ServicoDaCampanha; settings: Settings; onSettings: (s: Settings) => void; onDetails: (id: string) => void; onLutando: (sim: boolean) => void; onVoltar: () => void;
 }) {
   const [r, setR] = useState<RespostaDaCampanha | null>(null);
   const [erro, setErro] = useState('');
@@ -318,7 +318,7 @@ function Caminho({ servico, settings, onSettings, onDetails, onLutando, onVoltar
 
   if (tela.tipo === 'montar') {
     const alvo = tela.rival, livres = livresParaJogar(r.colecao, r.progresso.descanso);
-    return <>{avisoDeErro}<Montar melhores={dono} rival={oponenteDoRival(alvo)} colecao={livres} inicial={meusTimes} ocupado={ocupado} onDetails={onDetails}
+    return <>{avisoDeErro}<Montar rival={oponenteDoRival(alvo)} colecao={livres} inicial={meusTimes} ocupado={ocupado} onDetails={onDetails}
       onVoltar={() => setTela({ tipo: 'mapa' })} onPronto={(t) => void comecar(alvo, t)}
       aviso={<Descansando descanso={r.progresso.descanso} titulo="DESCANSANDO (NÃO PODEM JOGAR)" />} /></>;
   }

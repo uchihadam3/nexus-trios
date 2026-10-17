@@ -656,9 +656,8 @@ function atras(a: number[], b: number[]) {
 
 type Cena = { tipo: 'luta'; n: number; meu: string[]; dele: string[]; seed: number; atraso: number } | { tipo: 'resultado'; n: number } | null;
 
-function PartidaOnline({ online, colecaoLocal, emprestados, settings, onSettings, onDetails, onLutando, dono = false }: {
+function PartidaOnline({ online, colecaoLocal, emprestados, settings, onSettings, onDetails, onLutando }: {
   online: Online; colecaoLocal: string[]; emprestados?: ReadonlySet<string>; settings: Settings; onSettings: (s: Settings) => void; onDetails: (id: string) => void; onLutando: (sim: boolean) => void;
-  dono?: boolean;
 }) {
   const id = online.partida!, { servico } = online;
   const [v, setV] = useState<VistaPvp | null>(null);
@@ -786,7 +785,8 @@ function PartidaOnline({ online, colecaoLocal, emprestados, settings, onSettings
   }
 
   if (v.fase === 'montando') {
-    if (!v.pronto.eu) return <>{<Montar key={falhas} rival={rival} colecao={colecao} emprestados={emprestados} inicial={guardado.times} onDetails={onDetails} melhores={dono} onVoltar={() => setSair(true)}
+    // "Montar os melhores" só no treino (pedido do dono): contra outras pessoas, nem ele
+    if (!v.pronto.eu) return <>{<Montar key={falhas} rival={rival} colecao={colecao} emprestados={emprestados} inicial={guardado.times} onDetails={onDetails} onVoltar={() => setSair(true)}
       prazo={<>{<Prazo ate={v.prazo} offset={offset} texto={v.pronto.rival ? ` · ${v.rival.nome} já está pronto!` : ' para montar'} />}{aviso}</>}
       onPronto={(t) => { save('pvp', { ...carregar(), times: t }); void agir(servico.times(id, t)); }} />}{confirmaSair}</>;
     return <><Espera rival={rival} titulo="Seus times estão prontos" texto={`Esperando ${v.rival.nome} montar os times…`} prazo={<Prazo ate={v.prazo} offset={offset} texto=" para montar" />} onSair={() => setSair(true)} sair="Sair">
@@ -847,7 +847,7 @@ function TelaDoPvp({ colecao, settings, onSettings, onDetails, onJogar, onLutand
   colecao: string[]; settings: Settings; onSettings: (s: Settings) => void; onDetails: (id: string) => void; onJogar: () => void; onLutando: (sim: boolean) => void;
   /** O Desafio online (com conta); a partida aberta vem do App (convite aceito, desafio pela Comunidade). */
   online?: Online | null;
-  /** A conta do dono: ganha o botão "Montar os melhores". */
+  /** A conta do dono: ganha o botão "Montar os melhores" (só no treino contra os NPCs). */
   dono?: boolean;
 }) {
   const [etapa, setEtapa] = useState<Etapa>(etapaSalva);
@@ -900,9 +900,9 @@ function TelaDoPvp({ colecao, settings, onSettings, onDetails, onJogar, onLutand
       onSim={() => { setConfirmar(null); desistirDaPartida(etapa.npc, etapa.partida); }} />);
 
   // no PvP com outras pessoas, nem o dono vê as estrelas e a porcentagem (pedido dele: só no treino)
-  if (online?.partida) return <DonoDoPvp.Provider value={false}><PartidaOnline key={online.partida} online={online} colecaoLocal={colecaoPvp} emprestados={emprestados} settings={settings} onSettings={onSettings} onDetails={onDetails} onLutando={onLutando} dono={dono} /></DonoDoPvp.Provider>;
+  if (online?.partida) return <DonoDoPvp.Provider value={false}><PartidaOnline key={online.partida} online={online} colecaoLocal={colecaoPvp} emprestados={emprestados} settings={settings} onSettings={onSettings} onDetails={onDetails} onLutando={onLutando} /></DonoDoPvp.Provider>;
   if (etapa.tipo === 'campanha' && servicoDaCampanha) return <Suspense fallback={<p className="cm-carregando-tela">Abrindo o Caminho do Nexus…</p>}>
-    <CaminhoDoNexus servico={servicoDaCampanha} settings={settings} onSettings={onSettings} onDetails={onDetails} onLutando={onLutando} dono={dono} onVoltar={() => setEtapa({ tipo: 'lobby' })} /></Suspense>;
+    <CaminhoDoNexus servico={servicoDaCampanha} settings={settings} onSettings={onSettings} onDetails={onDetails} onLutando={onLutando} onVoltar={() => setEtapa({ tipo: 'lobby' })} /></Suspense>;
   if (etapa.tipo === 'lobby' || etapa.tipo === 'campanha') return <Lobby colecao={colecaoPvp} propria={propria} guardado={guardado} online={online} onTreino={(npc) => { som('ui-arena'); setEtapa({ tipo: 'montar', npc }); }} onJogar={onJogar}
     temCampanha={!!servicoDaCampanha} onCampanha={() => { som('ui-arena'); setEtapa({ tipo: 'campanha' }); }} />;
   if (etapa.tipo === 'montar') return <Montar melhores={dono} rival={oponenteDoNpc(etapa.npc)} colecao={colecaoPvp} emprestados={emprestados} inicial={guardado.times} onVoltar={() => setEtapa({ tipo: 'lobby' })} onDetails={onDetails} onPronto={(t) => comecar(etapa.npc, t)} />;
