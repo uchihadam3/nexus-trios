@@ -1,6 +1,6 @@
 import { createContext, lazy, Suspense, useContext, useEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode } from 'react';
 import { createPortal } from 'react-dom';
-import { ArrowDownAZ, ArrowLeft, Check, Clock, Handshake, Info, WifiOff, Globe2, Layers, SlidersHorizontal, Sparkles, Crown, Hourglass, Lock, LogOut, RotateCcw, Search, Shield, Swords, Trophy, Users, Wand2, X, Zap } from 'lucide-react';
+import { ArrowDownAZ, ArrowLeft, ArrowRight, Check, Clock, Compass, Star, Handshake, Info, WifiOff, Globe2, Layers, SlidersHorizontal, Sparkles, Crown, Hourglass, Lock, LogOut, RotateCcw, Search, Shield, Swords, Trophy, Users, Wand2, X, Zap } from 'lucide-react';
 import { byId, characters } from '../data/characters';
 import { Portrait } from '../components/Portrait';
 import { ArenaDoPvp } from '../components/ArenaDoPvp';
@@ -12,13 +12,13 @@ const ESTRELAS = Array.from({ length: ESTRELAS_MAXIMAS }, (_, k) => k + 1);
 import { battleAudio } from '../lib/audio';
 import { PRIORIDADE } from '../audio/cues';
 import { read, save, type Settings } from '../lib/storage';
-import { diferencaDoRelogio, textoDoErroPvp, type JogadorPvp, type RankingPvp, type RespostaPvp, type ServicoPvp, type VistaPvp } from '../lib/pvp-online';
+import { diferencaDoRelogio, textoDoErroPvp, type JogadorPvp, type RankingDoNexus, type RankingPvp, type RespostaPvp, type ServicoDaCampanha, type ServicoPvp, type VistaPvp } from '../lib/pvp-online';
 import { corDoNome } from '../lib/comunidade';
 import { Avatar } from '../components/AvatarDaComunidade';
 import { FAMILIA_DA_IDENTIDADE, ICONE_DA_IDENTIDADE } from '../components/IdentityChips';
 import { familiaDaIdentidade, identidadesDe, ordemDasIdentidades, type Identidade } from '../presentation/identities';
-import { CartaoDaCampanha } from '../components/CartaoDaCampanha';
-import { MINIMO_DA_CAMPANHA } from '../engine/campanha';
+import { AvatarDoRival, CartaoDaCampanha, CHAVE_DO_RESUMO, type ResumoDaCampanha } from '../components/CartaoDaCampanha';
+import { MINIMO_DA_CAMPANHA, RIVAIS, TOTAL_DE_ESTRELAS, rivalPorId } from '../engine/campanha';
 import { EMPRESTADOS_POR_DIA, comEmprestados, diaDoEmprestimo, emprestadosDoDia, faltaParaTrocar } from '../engine/emprestimo';
 import { criarCampanhaDemo } from '../lib/campanha-demo';
 import '../presentation/pvp.css';
@@ -157,13 +157,44 @@ const oponenteDoNpc = (n: Npc): Oponente => ({ nome: n.nome, cor: n.cor, avatar:
  * 1. O lobby
  * ------------------------------------------------------------------------- */
 
-function Lobby({ colecao, propria, guardado, onTreino, onJogar, online, onCampanha, temCampanha }: { colecao: string[]; propria: string[]; guardado: Guardado; onTreino: (n: Npc) => void; onJogar: () => void; online?: Online | null; onCampanha: () => void; temCampanha: boolean }) {
+/*
+ * O lobby do PvP em abas (pedido do dono: "tá tudo muito vertical, muito scroll… separar o rank do Nexus do PvP, bem
+ * gamificado"): Nexus, Online, Treino e Ranking, cada uma cabendo numa tela. A aba fica lembrada.
+ */
+type AbaDoLobby = 'nexus' | 'online' | 'treino' | 'ranking';
+const CHAVE_DA_ABA = 'pvp-aba';
+const ABAS: readonly { id: AbaDoLobby; nome: string; icone: ReactNode }[] = [
+  { id: 'nexus', nome: 'Nexus', icone: <Compass size={19} /> },
+  { id: 'online', nome: 'Online', icone: <Globe2 size={19} /> },
+  { id: 'treino', nome: 'Treino', icone: <Shield size={19} /> },
+  { id: 'ranking', nome: 'Ranking', icone: <Trophy size={19} /> },
+];
+
+function Lobby({ colecao, propria, guardado, onTreino, onJogar, online, onCampanha, temCampanha, servicoDaCampanha }: { colecao: string[]; propria: string[]; guardado: Guardado; onTreino: (n: Npc) => void; onJogar: () => void; online?: Online | null; onCampanha: () => void; temCampanha: boolean; servicoDaCampanha: ServicoDaCampanha | null }) {
   const falta = Math.max(0, MINIMO_DA_COLECAO - colecao.length);
-  return <section className="pv-lobby">
-    <header className="pv-topo">
+  const [aba, setAba] = useState<AbaDoLobby>(() => { const a = read(CHAVE_DA_ABA); return ABAS.some((x) => x.id === a) ? a as AbaDoLobby : 'nexus'; });
+  const [qualRanking, setQualRanking] = useState<'nexus' | 'pvp'>('nexus');
+  const trocar = (a: AbaDoLobby) => { if (a === aba) return; som('toque'); setAba(a); save(CHAVE_DA_ABA, a); };
+  // o ranking do PvP (rating) e o do Nexus (estrelas), pedidos uma vez
+  const [rank, setRank] = useState<RankingPvp | null>(null), [erroRank, setErroRank] = useState('');
+  const [nexus, setNexus] = useState<RankingDoNexus | null>(null), [erroNexus, setErroNexus] = useState('');
+  useEffect(() => {
+    let vivo = true;
+    if (online) void online.servico.ranking().then((r) => { if (vivo) setRank(r); }).catch((e) => { if (vivo) setErroRank(textoDoErroPvp(e)); });
+    if (servicoDaCampanha) void servicoDaCampanha.ranking().then((r) => { if (vivo) setNexus(r); }).catch((e) => { if (vivo) setErroNexus(textoDoErroPvp(e)); });
+    return () => { vivo = false; };
+  }, [online?.servico, servicoDaCampanha]);
+  const resumo = read(CHAVE_DO_RESUMO) as ResumoDaCampanha | null;
+  const verRanking = (qual: 'nexus' | 'pvp') => { setQualRanking(qual); trocar('ranking'); };
+  return <section className="pv-lobby pv-lobby2">
+    <header className="pv-topo pv-topo-curto">
       <Fx nome="holofote" cor="#ffd36b" ms={5200} className="pv-fx-holofote" />
-      <span className="pv-logo"><Swords size={30} /></span>
-      <div><h1>ARENA PvP</h1><p>3 times de 3 · escolha secreta · vence quem ganhar com os 3</p></div>
+      <span className="pv-logo"><Swords size={24} /></span>
+      <div><h1>ARENA PvP</h1><p>3 times de 3 · escolha secreta</p></div>
+      <span className="pv-topo-chips">
+        <button className="pv-chip-placar nexus" title="Suas estrelas no Caminho do Nexus" onClick={() => verRanking('nexus')}><Star size={13} /><b>{resumo?.estrelas ?? 0}</b><small>/{TOTAL_DE_ESTRELAS}</small></button>
+        {online && <button className="pv-chip-placar pvp" title="Seu rating do PvP" onClick={() => verRanking('pvp')}><Crown size={13} /><b>{rank?.eu.rating ?? '—'}</b></button>}
+      </span>
     </header>
 
     {falta > 0 && <div className="pv-trava">
@@ -173,34 +204,107 @@ function Lobby({ colecao, propria, guardado, onTreino, onJogar, online, onCampan
       <button className="primary" onClick={onJogar}>Jogar</button>
     </div>}
 
-    <CartaoDoEmprestimo propria={propria} />
+    <nav className="pv-abas" role="tablist" aria-label="Modos do PvP">
+      {ABAS.map((a) => <button key={a.id} role="tab" aria-selected={aba === a.id} className={aba === a.id ? 'ativa' : ''} onClick={() => trocar(a.id)}>{a.icone}<b>{a.nome}</b></button>)}
+    </nav>
 
-    {/* a campanha contra os 40 rivais (src/screens/CaminhoDoNexus.tsx): mexe no rating, então pede a conta (e só vale a coleção, sem empréstimo) */}
-    <CartaoDaCampanha podeJogar={temCampanha && propria.length >= MINIMO_DA_CAMPANHA} onAbrir={onCampanha}
-      motivo={!temCampanha ? 'Entre na sua conta: a campanha mexe no seu rating.' : `A campanha pede ${MINIMO_DA_CAMPANHA} personagens na coleção (você tem ${propria.length}).`} />
-
-    {online ? <CartaoOnline online={online} /> : <div className="pv-modo online">
-      <span className="pv-modo-icone"><Users size={24} /></span>
-      <div><b>DESAFIO ONLINE</b><small>Entre na sua conta para desafiar alguém pela Comunidade e subir no ranking.</small></div>
-      <em className="pv-em-breve"><Lock size={11} />com conta</em>
-    </div>}
-
-    <h2 className="pv-secao"><Shield size={16} />TREINO <small>não conta para o ranking nem para o rating</small></h2>
-    <div className="pv-npcs">
-      {NPCS.map((n, i) => {
-        const p = guardado.treino[n.id] ?? { v: 0, d: 0 };
-        return <button key={n.id} className="pv-npc" disabled={falta > 0} onClick={() => onTreino(n)} style={{ '--npc': n.cor, '--i': i } as CSSProperties}>
-          <AvatarDoNpc npc={n} />
-          <span className="pv-npc-texto">
-            <small>{n.titulo.toUpperCase()}</small><b>{n.nome}</b>
-            <span className="pv-npc-linha"><span className="pv-rating"><Crown size={12} />{n.rating}</span><span className="pv-colecao">{n.colecao} personagens</span></span>
-            <span className="pv-npc-fala">“{n.fala}”</span>
-          </span>
-          <span className="pv-npc-placar"><b className="v">{p.v}V</b><b className="d">{p.d}D</b><span className="pv-caveiras" aria-label={`Dificuldade ${n.nivel} de 5`}>{[1, 2, 3, 4, 5].map((k) => <i key={k} className={k <= n.nivel ? 'on' : ''} />)}</span></span>
-        </button>;
-      })}
+    <div className="pv-aba" key={aba} role="tabpanel">
+      {aba === 'nexus' && <>
+        {/* a campanha contra os 40 rivais (src/screens/CaminhoDoNexus.tsx): pede a conta e só vale a coleção, sem empréstimo */}
+        <CartaoDaCampanha podeJogar={temCampanha && propria.length >= MINIMO_DA_CAMPANHA} onAbrir={onCampanha}
+          motivo={!temCampanha ? 'Entre na sua conta para jogar a campanha.' : `A campanha pede ${MINIMO_DA_CAMPANHA} personagens na coleção (você tem ${propria.length}).`} />
+        <ResumoDoNexus resumo={resumo} />
+        <PodioCurto titulo="RANKING DO NEXUS" icone={<Star size={14} />} erro={erroNexus} carregando={!!servicoDaCampanha && !nexus && !erroNexus}
+          linhas={(nexus?.ranking ?? []).slice(0, 3).map((l) => ({ id: l.id, nome: l.nome, valor: <><Star size={11} />{l.estrelas}</>, sub: l.titulo }))}
+          eu={nexus?.eu ? `Você: ${nexus.eu.posicao}º · ${nexus.eu.estrelas}★` : null} onVer={() => verRanking('nexus')} />
+      </>}
+      {aba === 'online' && <>
+        {online ? <CartaoOnline online={online} rank={rank} /> : <div className="pv-modo online">
+          <span className="pv-modo-icone"><Users size={24} /></span>
+          <div><b>DESAFIO ONLINE</b><small>Entre na sua conta para desafiar alguém pela Comunidade e subir no ranking.</small></div>
+          <em className="pv-em-breve"><Lock size={11} />com conta</em>
+        </div>}
+        {online && <PodioCurto titulo="RANKING PvP" icone={<Crown size={14} />} erro={erroRank} carregando={!rank && !erroRank}
+          linhas={(rank?.ranking ?? []).slice(0, 3).map((l) => ({ id: l.id, nome: l.nome, valor: <><Crown size={11} />{l.rating}</>, sub: `${l.vitorias}V ${l.derrotas}D` }))}
+          eu={null} onVer={() => verRanking('pvp')} />}
+        <CartaoDoEmprestimo propria={propria} />
+      </>}
+      {aba === 'treino' && <>
+        <p className="pv-aba-dica"><Shield size={13} />Contra os 5 NPCs, do Iniciante ao Mestre. Não conta para nenhum ranking.</p>
+        <div className="pv-npcs curtos">
+          {NPCS.map((n, i) => {
+            const p = guardado.treino[n.id] ?? { v: 0, d: 0 };
+            return <button key={n.id} className="pv-npc" disabled={falta > 0} onClick={() => onTreino(n)} style={{ '--npc': n.cor, '--i': i } as CSSProperties} title={`“${n.fala}”`}>
+              <AvatarDoNpc npc={n} tamanho={50} />
+              <span className="pv-npc-texto">
+                <small>{n.titulo.toUpperCase()}</small><b>{n.nome}</b>
+                <span className="pv-npc-linha"><span className="pv-rating"><Crown size={12} />{n.rating}</span><span className="pv-colecao">{n.colecao} personagens</span></span>
+              </span>
+              <span className="pv-npc-placar"><span><b className="v">{p.v}V</b> <b className="d">{p.d}D</b></span><span className="pv-caveiras" aria-label={`Dificuldade ${n.nivel} de 5`}>{[1, 2, 3, 4, 5].map((k) => <i key={k} className={k <= n.nivel ? 'on' : ''} />)}</span></span>
+            </button>;
+          })}
+        </div>
+        <CartaoDoEmprestimo propria={propria} />
+      </>}
+      {aba === 'ranking' && <>
+        <div className="pv-subabas" role="tablist" aria-label="Qual ranking">
+          <button role="tab" aria-selected={qualRanking === 'nexus'} className={qualRanking === 'nexus' ? 'ativa nexus' : 'nexus'} onClick={() => { som('toque'); setQualRanking('nexus'); }}><Star size={15} />NEXUS<small>estrelas</small></button>
+          <button role="tab" aria-selected={qualRanking === 'pvp'} className={qualRanking === 'pvp' ? 'ativa pvp' : 'pvp'} onClick={() => { som('toque'); setQualRanking('pvp'); }}><Crown size={15} />PvP<small>rating</small></button>
+        </div>
+        {qualRanking === 'nexus'
+          ? <RankingCompleto erro={erroNexus} carregando={!!servicoDaCampanha && !nexus && !erroNexus} semConta={!servicoDaCampanha}
+              vazio="Ninguém jogou o Caminho do Nexus ainda. Seja o primeiro!"
+              linhas={(nexus?.ranking ?? []).map((l) => ({ posicao: l.posicao, id: l.id, nome: l.nome, valor: <><Star size={12} />{l.estrelas}</>, sub: l.titulo, minha: l.id === nexus?.eu?.id }))}
+              eu={nexus?.eu && nexus.eu.posicao > 50 ? { posicao: nexus.eu.posicao, id: nexus.eu.id, nome: nexus.eu.nome, valor: <><Star size={12} />{nexus.eu.estrelas}</>, sub: nexus.eu.titulo, minha: true } : null}
+              rodape={nexus ? `${nexus.total} no Caminho do Nexus · mais estrelas na frente; empate, menos partidas` : ''} />
+          : <RankingCompleto erro={erroRank} carregando={!!online && !rank && !erroRank} semConta={!online}
+              vazio="Ninguém jogou contra outra pessoa ainda. Seja o primeiro!"
+              linhas={(rank?.ranking ?? []).map((l) => ({ posicao: l.posicao, id: l.id, nome: l.nome, valor: <><Crown size={12} />{l.rating}</>, sub: `${l.vitorias}V ${l.derrotas}D`, minha: false }))}
+              eu={null}
+              rodape={rank ? `Seu rating: ${rank.eu.rating} · ${rank.eu.vitorias}V ${rank.eu.derrotas}D · só partidas contra pessoas` : ''} />}
+      </>}
     </div>
   </section>;
+}
+
+/** O resumo do Caminho do Nexus (guardado pela tela da campanha): estrelas, título e o próximo rival. */
+function ResumoDoNexus({ resumo }: { resumo: ResumoDaCampanha | null }) {
+  const proximo = resumo?.proximo ? rivalPorId(resumo.proximo) : RIVAIS[0]!, estrelas = resumo?.estrelas ?? 0;
+  return <div className="pv-resumo-nexus">
+    <span><small>ESTRELAS</small><b><Star size={14} />{estrelas}<i>/{TOTAL_DE_ESTRELAS}</i></b><span className="pv-barrinha"><i style={{ width: `${(100 * estrelas) / TOTAL_DE_ESTRELAS}%` }} /></span></span>
+    <span><small>TÍTULO</small><b>{resumo?.titulo ?? 'Aprendiz'}</b></span>
+    <span><small>{resumo?.zerou ? 'CAMINHO' : 'PRÓXIMO'}</small>{resumo?.zerou ? <b>Zerado!</b> : proximo ? <b className="pv-resumo-rival"><AvatarDoRival rival={proximo} tamanho={22} />{proximo.nome}</b> : <b>—</b>}</span>
+  </div>;
+}
+
+type LinhaCurta = { id: string; nome: string; valor: ReactNode; sub: string };
+/** Os 3 primeiros de um ranking, num pódio pequeno, e o botão para ver o ranking inteiro (na aba Ranking). */
+function PodioCurto({ titulo, icone, linhas, erro, carregando, eu, onVer }: { titulo: string; icone: ReactNode; linhas: LinhaCurta[]; erro: string; carregando: boolean; eu: string | null; onVer: () => void }) {
+  return <div className="pv-podio-curto">
+    <header><b>{icone}{titulo}</b><button onClick={onVer}>ver tudo <ArrowRight size={13} /></button></header>
+    {erro ? <small className="pv-problema">{erro}</small> : carregando ? <small className="pv-vazio">Carregando…</small> : !linhas.length ? <small className="pv-vazio">Ninguém ainda. Seja o primeiro!</small>
+      : <ol>{[linhas[1], linhas[0], linhas[2]].map((l, k) => l && <li key={l.id} className={`p${k === 1 ? 1 : k === 0 ? 2 : 3}`}>
+        <Avatar id={l.id} nome={l.nome} tamanho={k === 1 ? 40 : 32} online={false} /><b>{l.nome}</b><em>{l.valor}</em><i>{k === 1 ? 1 : k === 0 ? 2 : 3}</i>
+      </li>)}</ol>}
+    {eu && <small className="pv-podio-eu">{eu}</small>}
+  </div>;
+}
+
+type LinhaDoRanking = LinhaCurta & { posicao: number; minha: boolean };
+/** Um ranking inteiro (Nexus ou PvP): pódio dos 3 e a lista, com a sua linha no fim se estiver longe. */
+function RankingCompleto({ linhas, eu, erro, carregando, semConta, vazio, rodape }: { linhas: LinhaDoRanking[]; eu: LinhaDoRanking | null; erro: string; carregando: boolean; semConta: boolean; vazio: string; rodape: string }) {
+  if (semConta) return <p className="pv-vazio pv-ranking-aviso"><Lock size={14} />Entre na sua conta para ver o ranking.</p>;
+  if (erro) return <p className="pv-problema">{erro}</p>;
+  if (carregando) return <p className="pv-vazio">Carregando…</p>;
+  if (!linhas.length) return <p className="pv-vazio pv-ranking-aviso">{vazio}</p>;
+  const linha = (l: LinhaDoRanking) => <li key={l.id} className={`${l.posicao <= 3 ? `top${l.posicao}` : ''} ${l.minha ? 'minha' : ''}`}>
+    <i>{l.posicao}</i><Avatar id={l.id} nome={l.nome} tamanho={28} online={false} /><span><b>{l.nome}</b><small>{l.sub}</small></span><em>{l.valor}</em>
+  </li>;
+  return <div className="pv-ranking pv-ranking2">
+    <ol>{linhas.map(linha)}</ol>
+    {eu && <><span className="pv-ranking-pulo">⋯</span><ol>{linha(eu)}</ol></>}
+    {rodape && <small className="pv-ranking-rodape">{rodape}</small>}
+  </div>;
 }
 
 
@@ -213,20 +317,18 @@ function CartaoDoEmprestimo({ propria }: { propria: string[] }) {
   const agora = useAgora(true, 1000), dia = diaDoEmprestimo(agora), ids = useMemo(() => emprestadosDoDia(dia), [dia]);
   const minha = useMemo(() => new Set(propria), [propria]), novos = ids.filter((id) => !minha.has(id)).length;
   const falta = Math.floor(faltaParaTrocar(agora) / 1000);
-  return <section className="pv-emprestimo" aria-label="Empréstimo do dia">
-    <Fx nome="faiscas" cor="#8fe0ff" ms={4200} className="pv-fx-emprestimo" />
+  return <section className="pv-emprestimo curto" aria-label="Empréstimo do dia" title={`${EMPRESTADOS_POR_DIA} personagens sorteados todo dia, os mesmos para todo mundo, para combinar com a sua coleção no Treino e no Desafio online. Amanhã vêm outros.`}>
     <header>
-      <span className="pv-emprestimo-icone"><Handshake size={24} /></span>
+      <span className="pv-emprestimo-icone"><Handshake size={18} /></span>
       <div><small>EMPRÉSTIMO DO DIA</small><b>{novos > 0 ? `+${novos} personagens hoje` : 'Você já tem os 9 de hoje!'}</b></div>
-      <span className="pv-emprestimo-relogio" title="Troca à meia-noite (Brasília)"><Clock size={13} />{doisDigitos(Math.floor(falta / 3600))}:{doisDigitos(Math.floor((falta % 3600) / 60))}:{doisDigitos(falta % 60)}</span>
+      <span className="pv-emprestimo-relogio" title="Troca à meia-noite (Brasília)"><Clock size={12} />{doisDigitos(Math.floor(falta / 3600))}:{doisDigitos(Math.floor((falta % 3600) / 60))}:{doisDigitos(falta % 60)}</span>
     </header>
-    <div className="pv-emprestimo-grade">
+    <div className="pv-emprestimo-faixa">
       {ids.map((id, k) => { const c = byId[id]!, ja = minha.has(id);
-        return <span key={id} className={`pv-emprestado ${ja ? 'ja' : 'novo'}`} style={{ '--character': c.color, '--k': k } as CSSProperties}>
-          <Rosto id={id} tamanho={58} apagado={ja} /><b>{c.name}</b><em>{ja ? 'já é seu' : 'novo pra você'}</em>
+        return <span key={id} className={`pv-emprestado ${ja ? 'ja' : 'novo'}`} style={{ '--character': c.color, '--k': k } as CSSProperties} title={`${c.name} · ${ja ? 'já é seu' : 'novo pra você'}`}>
+          <Rosto id={id} tamanho={40} apagado={ja} />{!ja && <em>NOVO</em>}
         </span>; })}
     </div>
-    <p>{EMPRESTADOS_POR_DIA} personagens sorteados todo dia, os mesmos para todo mundo, para combinar com a sua coleção no Treino e no Desafio online. Amanhã vêm outros.</p>
   </section>;
 }
 
@@ -556,22 +658,18 @@ function Prazo({ ate, offset, texto }: { ate: string; offset: number; texto: str
 }
 
 /** O cartão do Desafio online no lobby: meu rating, a partida aberta e o ranking. */
-function CartaoOnline({ online }: { online: Online }) {
-  const [rank, setRank] = useState<RankingPvp | null>(null);
+function CartaoOnline({ online, rank }: { online: Online; rank: RankingPvp | null }) {
   const [aberta, setAberta] = useState<VistaPvp | null>(null);
-  const [erro, setErro] = useState('');
-  const [todos, setTodos] = useState(false);
   useEffect(() => {
     let vivo = true;
-    void online.servico.ranking().then((r) => { if (vivo) setRank(r); }).catch((e) => { if (vivo) setErro(textoDoErroPvp(e)); });
     void online.servico.consultar().then((r) => { if (vivo) setAberta(r.partida); }).catch(() => undefined);
     return () => { vivo = false; };
   }, [online.servico]);
-  const eu = rank?.eu, lista = rank ? (todos ? rank.ranking : rank.ranking.slice(0, 5)) : [];
+  const eu = rank?.eu;
   return <div className="pv-online">
     <div className="pv-modo online">
       <span className="pv-modo-icone"><Users size={24} /></span>
-      <div><b>DESAFIO ONLINE</b><small>Toque no nome de alguém na Comunidade e desafie. Vale rating e ranking.</small></div>
+      <div><b>DESAFIO ONLINE</b><small>Toque no nome de alguém na Comunidade e desafie. Vale rating e ranking do PvP.</small></div>
       <span className="pv-meu-rating"><Crown size={13} /><b>{eu?.rating ?? '—'}</b><small>{eu ? `${eu.vitorias}V ${eu.derrotas}D` : 'rating'}</small></span>
     </div>
     {aberta && ['convite', 'montando', 'jogando'].includes(aberta.fase) && <button className="pv-voltar-partida" onClick={() => online.onPartida(aberta.id)}>
@@ -580,15 +678,6 @@ function CartaoOnline({ online }: { online: Online }) {
       <em>VOLTAR</em>
     </button>}
     <button className="primary pv-desafiar" onClick={online.onComunidade}><Swords size={18} />Desafiar alguém na Comunidade</button>
-    <div className="pv-ranking">
-      <h3><Trophy size={15} />RANKING PvP</h3>
-      {erro && <small className="pv-problema">{erro}</small>}
-      {rank && !rank.ranking.length && <small className="pv-vazio">Ninguém jogou ainda. Seja o primeiro!</small>}
-      <ol>{lista.map((r) => <li key={r.id} className={r.posicao <= 3 ? `top${r.posicao}` : ''}>
-        <i>{r.posicao}</i><Avatar id={r.id} nome={r.nome} tamanho={26} online={false} /><b>{r.nome}</b><small>{r.vitorias}V {r.derrotas}D</small><em><Crown size={11} />{r.rating}</em>
-      </li>)}</ol>
-      {rank && rank.ranking.length > 5 && <button className="pv-ver-todos" onClick={() => setTodos(!todos)}>{todos ? 'Ver menos' : `Ver os ${rank.ranking.length}`}</button>}
-    </div>
   </div>;
 }
 
@@ -904,7 +993,7 @@ function TelaDoPvp({ colecao, settings, onSettings, onDetails, onJogar, onLutand
   if (etapa.tipo === 'campanha' && servicoDaCampanha) return <Suspense fallback={<p className="cm-carregando-tela">Abrindo o Caminho do Nexus…</p>}>
     <CaminhoDoNexus servico={servicoDaCampanha} settings={settings} onSettings={onSettings} onDetails={onDetails} onLutando={onLutando} onVoltar={() => setEtapa({ tipo: 'lobby' })} /></Suspense>;
   if (etapa.tipo === 'lobby' || etapa.tipo === 'campanha') return <Lobby colecao={colecaoPvp} propria={propria} guardado={guardado} online={online} onTreino={(npc) => { som('ui-arena'); setEtapa({ tipo: 'montar', npc }); }} onJogar={onJogar}
-    temCampanha={!!servicoDaCampanha} onCampanha={() => { som('ui-arena'); setEtapa({ tipo: 'campanha' }); }} />;
+    temCampanha={!!servicoDaCampanha} servicoDaCampanha={servicoDaCampanha} onCampanha={() => { som('ui-arena'); setEtapa({ tipo: 'campanha' }); }} />;
   if (etapa.tipo === 'montar') return <Montar melhores={dono} rival={oponenteDoNpc(etapa.npc)} colecao={colecaoPvp} emprestados={emprestados} inicial={guardado.times} onVoltar={() => setEtapa({ tipo: 'lobby' })} onDetails={onDetails} onPronto={(t) => comecar(etapa.npc, t)} />;
   if (etapa.tipo === 'apresentar') return <Apresentar rival={oponenteDoNpc(etapa.npc)} partida={etapa.partida} onComecar={() => setEtapa({ tipo: 'escolher', npc: etapa.npc, partida: etapa.partida })} />;
   if (etapa.tipo === 'escolher') return <><Escolher rival={oponenteDoNpc(etapa.npc)} partida={etapa.partida} onEscolher={(meu) => {

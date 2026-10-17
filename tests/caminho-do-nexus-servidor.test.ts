@@ -1,7 +1,7 @@
 /*
  * O juiz do Caminho do Nexus (supabase/functions/ranked-api/campanha.ts) contra um Postgres de verdade: o rival
  * bloqueado, a partida inteira com as sementes escondidas até a rodada acontecer, a mesma luta que o aparelho desenha,
- * as estrelas, o rating (80%/120%, nada 400 acima), o rodízio dos dois lados, o abandono e a versão do jogo.
+ * as estrelas, o rodízio dos dois lados, o abandono, a versão do jogo e o ranking do Nexus (separado do rating do PvP).
  *
  * Precisa de um Postgres: NEXUS_PG_URL=postgres://usuario@host:porta/postgres.
  */
@@ -11,7 +11,6 @@ import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import pg from 'pg';
 import { acaoCampanha } from '../supabase/functions/ranked-api/campanha';
 import { RIVAIS, escalaDoRival, estrelasDaPartida, lutaDaRodada } from '../src/engine/campanha';
-import { variacaoContraNpc } from '../src/engine/pvp';
 import { ENGINE_VERSION } from '../src/engine/ranked';
 
 const ADMIN = process.env.NEXUS_PG_URL;
@@ -143,7 +142,7 @@ describe.skipIf(!ADMIN)('Caminho do Nexus: o juiz no servidor', () => {
     expect((await pede(eu, { op: 'comecar', rival: RIVAIS[0]!.id, times: [['goku', 'vegeta', 'superman'], TIMES[1], TIMES[2]], versao: ENGINE_VERSION })).status).toBe(422);
   });
 
-  it('uma partida inteira: a mesma luta do aparelho, estrelas, rating e o rodízio dos dois lados', async () => {
+  it('uma partida inteira: a mesma luta do aparelho, estrelas e o rodízio dos dois lados (o rating do PvP não muda)', async () => {
     const eu = await conta();
     const c = await pede(eu, { op: 'comecar', rival: 'zepipoca', times: TIMES, versao: ENGINE_VERSION });
     expect(c.status).toBe(200);
@@ -165,8 +164,9 @@ describe.skipIf(!ADMIN)('Caminho do Nexus: o juiz no servidor', () => {
     expect(final.partida).toBeNull();
     const ganhou = fim.vencedor === 'eu';
     expect(fim.estrelas).toBe(ganhou ? estrelasDaPartida(fim) : 0);
-    expect(fim.delta).toBe(variacaoContraNpc(1000, rival.rating, ganhou));
-    expect(final.rating.rating).toBe(1000 + fim.delta!);
+    // o Nexus não mexe no rating do PvP (os rankings são separados)
+    expect(fim.delta).toBeNull();
+    expect(final.rating.rating).toBe(1000);
     expect(final.progresso.estrelas.zepipoca ?? 0).toBe(fim.estrelas);
     expect(final.progresso.placar.zepipoca).toEqual(ganhou ? { v: 1, d: 0 } : { v: 0, d: 1 });
     // o rodízio: 2 seus (dormem 2 por partida) e 3 do rival descansam 3 partidas
@@ -180,18 +180,48 @@ describe.skipIf(!ADMIN)('Caminho do Nexus: o juiz no servidor', () => {
     expect(r.error).toMatch(/descansando/);
   });
 
-  it('abandonar conta como derrota e mexe no rating; vencer libera o próximo', async () => {
+  it('abandonar conta como derrota (sem mexer no rating); vencer libera o próximo', async () => {
     const eu = await conta();
     const c = await pede(eu, { op: 'comecar', rival: 'zepipoca', times: TIMES, versao: ENGINE_VERSION });
     const a = await pede(eu, { op: 'abandonar', partida: c.partida!.id });
     expect(a.partida!.vencedor).toBe('rival');
-    expect(a.partida!.delta).toBe(variacaoContraNpc(1000, 600, false));
+    expect(a.partida!.delta).toBeNull();
+    expect(a.rating.rating).toBe(1000);
     expect(a.progresso.placar.zepipoca).toEqual({ v: 0, d: 1 });
     // com a estrela do primeiro, o segundo abre
     await db.query(`update public.pvp_campanha set estrelas = '{"zepipoca": 2}'::jsonb, descanso = '{}'::jsonb where player_id = $1`, [eu]);
     const s = await pede(eu, { op: 'comecar', rival: RIVAIS[1]!.id, times: TIMES, versao: ENGINE_VERSION });
     expect(s.status).toBe(200);
     expect(s.partida!.rival).toBe(RIVAIS[1]!.id);
+  });
+
+  it('o ranking do Nexus: mais estrelas na frente; empate, menos partidas; e a sua linha', async () => {
+    const [a, b, c] = [await conta(), await conta(), await conta()];
+    await db.query(`insert into public.pvp_campanha (player_id, estrelas, partidas) values ($1, jsonb_build_object('zepipoca', 3, $4::text, 2), 9), ($2, jsonb_build_object('zepipoca', 3, $4::text, 2), 5), ($3, '{"zepipoca": 1}'::jsonb, 2)`, [a, b, c, RIVAIS[1]!.id]);
+    type Rk = { ranking: { posicao: number; id: string; estrelas: number; partidas: number; titulo: string }[]; eu: { posicao: number; id: string } | null; total: number };
+    const r = (await acaoCampanha(servidor as never, c, { op: 'ranking' })).body as Rk;
+    const meus = r.ranking.filter((x) => ([a, b, c] as string[]).includes(x.id));
+    expect(meus.map((x) => [x.id, x.estrelas])).toEqual([[b, 5], [a, 5], [c, 1]]);
+    expect(meus.every((x) => typeof x.titulo === 'string' && x.titulo.length > 0)).toBe(true);
+    expect(r.eu?.id).toBe(c);
+    expect(r.total).toBeGreaterThanOrEqual(3);
+  });
+
+  it('a limpeza do rating: o que veio da campanha sai do rating do PvP (vitórias, derrotas e pontos)', async () => {
+    const eu = await conta(), so = await conta();
+    // 2 partidas online (+20, -10) e 3 da campanha (+12, +8, -15): o rating ficou 1015, 3V 2D
+    await db.query(`insert into public.pvp_ratings (player_id, rating, vitorias, derrotas) values ($1, 1025, 3, 2), ($2, 1012, 1, 0)`, [eu, so]);
+    const partida = (quem: string, vencedor: string, delta: number) => db.query(`insert into public.pvp_campanha_partidas (player_id, rival, rival_rating, estado, versao_do_motor, sementes, sorteios, meus, deles, vencedor, delta)
+      values ($1, 'zepipoca', 600, 'terminada', 'x', '[]', '[]', '[]', '[]', $2, $3)`, [quem, vencedor, delta]);
+    await partida(eu, 'eu', 12); await partida(eu, 'eu', 8); await partida(eu, 'rival', -15); await partida(so, 'eu', 12);
+    // o primeiro passo da migração (só a limpeza), de novo, sobre estas contas
+    const migracao = sql('supabase/migrations/20261020000000_nexus_separado.sql');
+    const limpeza = migracao.slice(migracao.indexOf('with da_campanha'), migracao.indexOf('-- 2.'));
+    await db.query(limpeza.replace('where r.player_id = c.player_id;', 'where r.player_id = c.player_id and r.player_id = any($1::uuid[]);'), [[eu, so]]);
+    const r = (await db.query(`select player_id, rating, vitorias, derrotas from public.pvp_ratings where player_id = any($1::uuid[])`, [[eu, so]])).rows;
+    expect(r.find((x) => x.player_id === eu)).toMatchObject({ rating: 1020, vitorias: 1, derrotas: 1 });
+    // quem só jogou a campanha volta a 1000 com 0V 0D (e some do ranking do PvP)
+    expect(r.find((x) => x.player_id === so)).toMatchObject({ rating: 1000, vitorias: 0, derrotas: 0 });
   });
 
   it('a melhor estrela fica: uma vitória pior não apaga o recorde', async () => {

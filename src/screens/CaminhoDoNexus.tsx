@@ -5,7 +5,7 @@ import { byId } from '../data/characters';
 import { ArenaDoPvp } from '../components/ArenaDoPvp';
 import { DESCANSO, DORMEM_NO_MAXIMO, DORMEM_POR_PARTIDA, MINIMO_DA_CAMPANHA, REGIOES, RIVAIS, TITULOS, TOTAL_DE_ESTRELAS, colecaoDoRival, escalaDoRival, liberado, livresParaJogar, proximoRival, proximoTitulo,
   rivalPorId, tituloDas, totalDeEstrelas, zerou, type Rival } from '../engine/campanha';
-import { variacaoContraNpc, type PartidaPvp, type Times } from '../engine/pvp';
+import type { PartidaPvp, Times } from '../engine/pvp';
 import { ENGINE_VERSION } from '../engine/ranked';
 import { read, save, type Settings } from '../lib/storage';
 import type { Faixa, RegiaoDaMusica } from '../lib/audio';
@@ -17,8 +17,8 @@ import '../presentation/campanha.css';
 /*
  * O Caminho do Nexus (pedido do jogador: "uma campanha mesmo… começa só um desbloqueado… muito bem gamificado"): o
  * mapa das 8 regiões com os 40 rivais (src/engine/campanha.ts), a ficha de cada um, a partida (as mesmas telas do
- * Treino, com o servidor de juiz: supabase/functions/ranked-api/campanha.ts) e o fim com as estrelas, o rating, o
- * rival liberado, a região conquistada e o título novo.
+ * Treino, com o servidor de juiz: supabase/functions/ranked-api/campanha.ts) e o fim com as estrelas, o rival
+ * liberado, a região conquistada e o título novo. O Nexus não mexe no rating do PvP: o ranking dele é o das estrelas.
  */
 
 const CHAVE_DAS_VISTAS = 'campanha-vistas';
@@ -35,7 +35,7 @@ type Tela =
   | { tipo: 'fim' };
 
 /** O antes da partida, para o fim mostrar o que mudou (estrelas, título, rival liberado, região). */
-interface Antes { partida: string; estrelas: Record<string, number>; rating: number }
+interface Antes { partida: string; estrelas: Record<string, number> }
 
 const regiaoDe = (r: Rival) => REGIOES[r.regiao - 1]!;
 /* a música de cada região e a do chefe dela (src/lib/audio.ts, v8) */
@@ -105,7 +105,7 @@ function Mapa({ r, onRival, onVoltar }: { r: RespostaDaCampanha; onRival: (x: Ri
     <header className="cn-topo">
       <button className="icon-button" onClick={onVoltar} aria-label="Voltar"><ArrowLeft size={20} /></button>
       <div><small>MODO CAMPANHA</small><h1>CAMINHO DO NEXUS</h1></div>
-      <span className="cn-rating" title="Seu rating do PvP"><Crown size={14} />{r.rating.rating}</span>
+      <span className="cn-rating" title="Suas estrelas no Caminho do Nexus (o ranking do Nexus)"><Star size={14} />{total}/{TOTAL_DE_ESTRELAS}</span>
     </header>
 
     <div className="cn-heroi" style={{ '--tc': titulo.cor } as CSSProperties}>
@@ -144,7 +144,6 @@ function Mapa({ r, onRival, onVoltar }: { r: RespostaDaCampanha; onRival: (x: Ri
 function Ficha({ rival, r, onFechar, onDesafiar }: { rival: Rival; r: RespostaDaCampanha; onFechar: () => void; onDesafiar: () => void }) {
   const livre = liberado(r.progresso.estrelas, rival), regiao = regiaoDe(rival), e = r.progresso.estrelas[rival.id] ?? 0, placar = r.progresso.placar[rival.id] ?? { v: 0, d: 0 };
   const livres = livresParaJogar(r.colecao, r.progresso.descanso).length, falta = Math.max(0, MINIMO_DA_CAMPANHA - r.colecao.length);
-  const ganha = variacaoContraNpc(r.rating.rating, rival.rating, true), perde = variacaoContraNpc(r.rating.rating, rival.rating, false);
   const anterior = RIVAIS[rival.n - 2], dono = useContext(DonoDoPvp);
   return createPortal(<div className="pv-painel-fundo cn-ficha-fundo" onClick={(ev) => { if (ev.target === ev.currentTarget) onFechar(); }}>
     <section className="cn-ficha" role="dialog" aria-label={rival.nome} style={{ '--cor': rival.cor, '--c1': regiao.cor, '--c2': regiao.cor2 } as CSSProperties}>
@@ -159,7 +158,6 @@ function Ficha({ rival, r, onFechar, onDesafiar }: { rival: Rival; r: RespostaDa
       {livre ? <>
         <div className="cn-chips">
           <span className="cn-chip estilo"><Sparkles size={12} />{rival.estilo}</span>
-          <span className="cn-chip"><Crown size={12} />{rival.rating}</span>
           {dono && <span className="cn-chip" title="A força máxima dos times dele"><Star size={12} />times até {rival.estrelas}★</span>}
           <span className="cn-chip"><Shield size={12} />{rival.espelho ? 'copia os seus' : `${colecaoDoRival(rival).length} personagens`}</span>
           <span className="cn-chip cerebro" title="Dificuldade"><Brain size={12} />{Array.from({ length: 8 }, (_, k) => <i key={k} className={k < rival.regiao ? 'on' : ''} />)}</span>
@@ -171,9 +169,7 @@ function Ficha({ rival, r, onFechar, onDesafiar }: { rival: Rival; r: RespostaDa
         <div className="cn-ficha-linhas">
           <span><small>SEU RECORDE</small><Estrelinhas n={e} tamanho={16} /></span>
           <span><small>PLACAR</small><b className="v">{placar.v}V</b> <b className="d">{placar.d}D</b></span>
-          <span><small>RATING</small><b className="v">{ganha > 0 ? `+${ganha}` : '+0'}</b> <b className="d">{perde}</b></span>
         </div>
-        {ganha === 0 && <small className="cn-nota">Você está 400 ou mais acima dele: vencer não dá rating (as estrelas valem).</small>}
         <div className="cn-premio"><Star size={14} />3–0 dá ★★★ · 3–1 dá ★★ · 3–2 dá ★</div>
         {e >= 3 && Object.keys(r.progresso.descanso).length > 0 && <small className="cn-nota"><Moon size={12} /> Você já gabaritou este rival (★★★): esta partida não acorda seus personagens.</small>}
         {e < 3 && <small className="cn-nota"><Moon size={12} /> Aqui o rodízio põe {DORMEM_POR_PARTIDA} personagens para dormir a cada partida, por {DESCANSO.partidas} partidas (até {DORMEM_NO_MAXIMO} dormindo).</small>}
@@ -198,7 +194,6 @@ function Fim({ rival, partida, antes, r, onMapa, onDeNovo, onProximo }: { rival:
   const liberouAgora = ganhei && !(eAntes[rival.id] ?? 0) ? RIVAIS[rival.n] ?? null : null;
   const regiaoNova = ganhei && rival.chefe && !(eAntes[rival.id] ?? 0);
   const zerouAgora = regiaoNova && rival.n === RIVAIS.length;
-  const delta = partida.delta ?? 0;
   const [mostradas, setMostradas] = useState(0);
   useEffect(() => { som(ganhei ? 'vitoria' : 'derrota'); }, [ganhei]);
   useEffect(() => { if (mostradas >= estrelas) return; const t = window.setTimeout(() => { setMostradas((m) => m + 1); som('pronto'); }, 520); return () => clearTimeout(t); }, [mostradas, estrelas]);
@@ -212,8 +207,6 @@ function Fim({ rival, partida, antes, r, onMapa, onDeNovo, onProximo }: { rival:
     {ganhei && <div className="cn-fim-estrelas" aria-label={`${estrelas} estrelas`}>{[1, 2, 3].map((k) => <Star key={k} size={44} className={k <= mostradas ? 'on' : ''} />)}</div>}
     {ganhei && recorde && mostradas >= estrelas && <span className="cn-recorde"><Sparkles size={14} />NOVO RECORDE</span>}
     <div className="pv-fim-rodadas">{partida.rodadas.map((x, i) => <span key={i} className={x.vencedor}><b>{i + 1}</b>{x.vencedor === 'eu' ? 'V' : 'D'}</span>)}</div>
-    <div className={`cn-delta ${delta > 0 ? 'sobe' : delta < 0 ? 'cai' : ''}`}><Crown size={16} />Rating {antes?.rating ?? r.rating.rating - delta} → <b>{r.rating.rating}</b><em>{delta > 0 ? `+${delta}` : delta}</em></div>
-    {ganhei && delta === 0 && <small className="cn-nota">400 ou mais acima do rival: a vitória não dá rating.</small>}
     {partida.motivo === 'abandonou' && <small className="cn-nota">Abandonar conta como derrota.</small>}
 
     {zerouAgora && <div className="cn-conquista lenda"><Trophy size={26} /><div><b>CONQUISTADOR DO NEXUS</b><small>Você derrotou o Imperador e zerou a campanha!</small></div></div>}
@@ -284,7 +277,7 @@ function Caminho({ servico, settings, onSettings, onDetails, onLutando, onVoltar
   const comecar = async (alvo: Rival, times: Times) => {
     if (!r) return;
     save(CHAVE_DOS_TIMES, times);
-    const a = { estrelas: { ...r.progresso.estrelas }, rating: r.rating.rating };
+    const a = { estrelas: { ...r.progresso.estrelas } };
     const x = await pede(() => servico.comecar(alvo.id, times, ENGINE_VERSION));
     if (!x?.partida) return;
     const novo = { ...a, partida: x.partida.id };
@@ -330,7 +323,7 @@ function Caminho({ servico, settings, onSettings, onDetails, onLutando, onVoltar
     const sair = <button className="pv-sair-online" onClick={() => setConfirmar('partida')} disabled={ocupado}><LogOut size={14} />Abandonar partida</button>;
     const confirmacao = confirmar && (confirmar === 'luta'
       ? <Confirmar titulo="Desistir desta luta?" texto="Você perde esta rodada. A partida continua com os outros times." sim="Desistir da luta" onNao={() => setConfirmar(null)} onSim={() => { setConfirmar(null); void render(); }} />
-      : <Confirmar titulo="Abandonar a partida?" texto={`Abandonar conta como derrota contra ${rival.nome} (e mexe no rating).`} sim="Abandonar" onNao={() => setConfirmar(null)} onSim={() => { setConfirmar(null); void abandonar(); }} />);
+      : <Confirmar titulo="Abandonar a partida?" texto={`Abandonar conta como derrota contra ${rival.nome}.`} sim="Abandonar" onNao={() => setConfirmar(null)} onSim={() => { setConfirmar(null); void abandonar(); }} />);
     if (tela.tipo === 'apresentar') return <>{avisoDeErro}{aura}<Apresentar rival={op} partida={comoPvp(partida)} onComecar={() => setTela({ tipo: 'escolher' })} /></>;
     if (tela.tipo === 'escolher') return <>{avisoDeErro}{aura}<Escolher key={`${vistas}-${tentativa}`} rival={op} partida={pvp} onEscolher={(i) => void escolher(i)} />{sair}{confirmacao}</>;
     if (tela.tipo === 'vs' && rodada) return <Vs rival={op} partida={comoPvp(partida)} meu={rodada.meu} dele={rodada.dele} onLutar={() => setTela({ tipo: 'luta' })} />;

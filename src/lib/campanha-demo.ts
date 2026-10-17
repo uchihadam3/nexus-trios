@@ -2,8 +2,8 @@
  * A campanha sem servidor (VITE_CAMPANHA_DEMO=true): só para testar as telas do Caminho do Nexus no navegador; nunca
  * no jogo publicado. Faz o mesmo que o juiz (supabase/functions/ranked-api/campanha.ts), guardando tudo no aparelho.
  */
-import { contaParaODescanso, depoisDaPartida, seuDescanso, escalaDoRival, escolhaDoRival, estrelasDaPartida, liberado, livresParaJogar, lutaDaRodada, quemLutou, rivalPorId, timesDoRival, DESCANSO } from '../engine/campanha';
-import { RATING_INICIAL, problemaDosTimes, timesLivres, variacaoContraNpc, vencedorDaPartida, type RodadaPvp, type Times } from '../engine/pvp';
+import { contaParaODescanso, depoisDaPartida, tituloDas, totalDeEstrelas, seuDescanso, escalaDoRival, escolhaDoRival, estrelasDaPartida, liberado, livresParaJogar, lutaDaRodada, quemLutou, rivalPorId, timesDoRival, DESCANSO } from '../engine/campanha';
+import { RATING_INICIAL, problemaDosTimes, timesLivres, vencedorDaPartida, type RodadaPvp, type Times } from '../engine/pvp';
 import type { PartidaDaCampanha, ProgressoDaCampanha, RespostaDaCampanha, ServicoDaCampanha } from './pvp-online';
 
 interface Guardada extends PartidaDaCampanha { sementes: number[]; sorteios: number[] }
@@ -27,18 +27,24 @@ export function criarCampanhaDemo(colecao: () => string[]): ServicoDaCampanha {
     const meu = (x: Guardada) => quemLutou(x.meus, x.rodadas.map((r) => ({ time: r.meu }))), dele = (x: Guardada) => quemLutou(x.deles, x.rodadas.map((r) => ({ time: r.dele })));
     if (contaParaODescanso(prog.estrelas, rival)) prog.descanso = depoisDaPartida(prog.descanso, [...feitas.slice(-(DESCANSO.janela - 1)), p].map(meu), seuDescanso(rival.regiao, colecao().length));
     prog.descanso_rivais[rival.id] = depoisDaPartida(prog.descanso_rivais[rival.id] ?? {}, [...feitas.filter((x) => x.rival === rival.id).slice(-(DESCANSO.janela - 1)), p].map(dele));
-    const estrelas = vencedor === 'eu' ? estrelasDaPartida(p) : 0, delta = variacaoContraNpc(b.rating, rival.rating, vencedor === 'eu');
-    Object.assign(p, { estado: 'terminada', vencedor, motivo, estrelas, ratingAntes: b.rating, delta });
+    // o Nexus não mexe no rating do PvP (como no servidor)
+    const estrelas = vencedor === 'eu' ? estrelasDaPartida(p) : 0;
+    Object.assign(p, { estado: 'terminada', vencedor, motivo, estrelas, ratingAntes: null, delta: null });
     if (estrelas > (prog.estrelas[rival.id] ?? 0)) prog.estrelas[rival.id] = estrelas;
     const placar = prog.placar[rival.id] ?? { v: 0, d: 0 };
     prog.placar[rival.id] = vencedor === 'eu' ? { ...placar, v: placar.v + 1 } : { ...placar, d: placar.d + 1 };
     prog.partidas++;
-    b.rating = Math.max(0, b.rating + delta); if (vencedor === 'eu') b.v++; else b.d++;
   };
   const aberta = (b: Banco) => b.partidas.find((x) => x.estado === 'jogando') ?? null;
   const achar = (b: Banco, id: string) => { const p = b.partidas.find((x) => x.id === id); if (!p) throw new Error('Partida não encontrada.'); return p; };
   return {
     estado: async () => { await espera(); const b = ler(); return resposta(b, aberta(b)); },
+    // só você no ranking (a demonstração não tem servidor)
+    ranking: async () => {
+      const b = ler(), estrelas = totalDeEstrelas(b.progresso.estrelas);
+      const eu = { posicao: 1, id: 'demo', nome: 'Você', estrelas, partidas: b.progresso.partidas, titulo: tituloDas(estrelas).nome };
+      return b.progresso.partidas ? { ranking: [eu], eu, total: 1 } : { ranking: [], eu: null, total: 0 };
+    },
     comecar: async (id, times) => {
       await espera();
       const b = ler(), rival = rivalPorId(id);

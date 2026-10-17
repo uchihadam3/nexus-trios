@@ -35,8 +35,12 @@ export interface PartidaDaCampanha {
   vencedor: 'eu' | 'rival' | null; motivo: string | null; estrelas: number | null; ratingAntes: number | null; delta: number | null; rating?: number;
 }
 export interface RespostaDaCampanha { progresso: ProgressoDaCampanha; rating: { rating: number; vitorias: number; derrotas: number }; colecao: string[]; partida: PartidaDaCampanha | null }
+/* O ranking do Nexus (separado do PvP): mais estrelas; empate, menos partidas. */
+export interface LinhaDoRankingDoNexus { posicao: number; id: string; nome: string; estrelas: number; partidas: number; titulo: string }
+export interface RankingDoNexus { ranking: LinhaDoRankingDoNexus[]; eu: LinhaDoRankingDoNexus | null; total: number }
 export interface ServicoDaCampanha {
   estado: () => Promise<RespostaDaCampanha>;
+  ranking: () => Promise<RankingDoNexus>;
   comecar: (rival: string, times: string[][], versao: string) => Promise<RespostaDaCampanha>;
   escolher: (partida: string, n: number, time: number) => Promise<RespostaDaCampanha>;
   render: (partida: string, n: number) => Promise<RespostaDaCampanha>;
@@ -70,6 +74,7 @@ export function criarPvpOnline(chamar: <T>(acao: string, corpo: Record<string, u
   return {
     campanha: {
       estado: () => campanha('estado'),
+      ranking: () => chamar<RankingDoNexus>('campanha', { op: 'ranking' }),
       comecar: (rival, times, versao) => campanha('comecar', { rival, times, versao }),
       escolher: (partida, n, time) => campanha('escolher', { partida, n, time }),
       render: (partida, n) => campanha('render', { partida, n }),

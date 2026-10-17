@@ -6,13 +6,13 @@
  * cada rival) e o rodízio (quem descansa, de você e de cada rival); aqui o rival monta os times dele (depois de ver os
  * seus, como o Espelho precisa), escolhe o time da rodada e a luta é calculada com o mesmo motor do jogo. As sementes
  * das lutas e da escolha do rival são sorteadas no começo e só saem daqui depois que a rodada acontece: quem soubesse
- * a semente saberia o resultado antes de escolher. No fim, o rating (80% do ganho, 120% da perda; nada para quem está
- * 400 acima) e o progresso mudam juntos, numa transação (pvp_campanha_terminar).
+ * a semente saberia o resultado antes de escolher. No fim, o progresso muda numa transação (pvp_campanha_terminar).
+ * O Nexus não mexe no rating do PvP (pedido do dono: os rankings separados); o dele é o das estrelas (op "ranking").
  */
 import type { SupabaseClient } from 'npm:@supabase/supabase-js@2.117.2';
 import { DESCANSO, MINIMO_DA_CAMPANHA, contaParaODescanso, depoisDaPartida, seuDescanso, escalaDoRival, escolhaDoRival, estrelasDaPartida, liberado, livresParaJogar, lutaDaRodada, quemLutou,
-  rivalPorId, timesDoRival, type Descanso, type Estrelas, type Rival } from '../../../src/engine/campanha.ts';
-import { RATING_INICIAL, problemaDosTimes, timesLivres, variacaoContraNpc, vencedorDaPartida, type PartidaPvp, type RodadaPvp, type Times } from '../../../src/engine/pvp.ts';
+  rivalPorId, timesDoRival, tituloDas, type Descanso, type Estrelas, type Rival } from '../../../src/engine/campanha.ts';
+import { RATING_INICIAL, problemaDosTimes, timesLivres, vencedorDaPartida, type PartidaPvp, type RodadaPvp, type Times } from '../../../src/engine/pvp.ts';
 import { ENGINE_VERSION } from '../../../src/engine/ranked.ts';
 import { characters } from '../../../src/data/characters.ts';
 
@@ -86,9 +86,9 @@ async function resposta(db: Db, quem: string, partida: Partida | null) {
   return ok({ progresso, rating, colecao, partida: partida ? vista(partida, rating.rating) : null });
 }
 
-/** O fim da partida: estrelas, rating e o rodízio dos dois lados, numa transação. */
+/** O fim da partida: estrelas e o rodízio dos dois lados, numa transação (o Nexus não mexe mais no rating do PvP). */
 async function terminar(db: Db, p: Partida, rival: Rival, vencedor: 'eu' | 'rival', motivo: string) {
-  const [progresso, rating, minhas, contraEle, colecao] = await Promise.all([progressoDe(db, p.player_id), ratingDe(db, p.player_id), ultimas(db, p.player_id), ultimas(db, p.player_id, rival.id), colecaoDe(db, p.player_id)]);
+  const [progresso, minhas, contraEle, colecao] = await Promise.all([progressoDe(db, p.player_id), ultimas(db, p.player_id), ultimas(db, p.player_id, rival.id), colecaoDe(db, p.player_id)]);
   const usoMeu = (x: Partida) => quemLutou(x.meus, x.rodadas.map((r) => ({ time: r.meu })));
   const usoDele = (x: Partida) => quemLutou(x.deles, x.rodadas.map((r) => ({ time: r.dele })));
   // o seu rodízio pesa mais a cada duas regiões; contra rival que você já tinha gabaritado (3★), nada muda
@@ -96,8 +96,7 @@ async function terminar(db: Db, p: Partida, rival: Rival, vencedor: 'eu' | 'riva
     ? depoisDaPartida(progresso.descanso, [...minhas, p].map(usoMeu), seuDescanso(rival.regiao, colecao.length)) : progresso.descanso;
   const descansoDele = depoisDaPartida(progresso.descanso_rivais[rival.id] ?? {}, [...contraEle, p].map(usoDele));
   const estrelas = vencedor === 'eu' ? estrelasDaPartida(p) : 0;
-  const delta = variacaoContraNpc(Number(rating.rating), rival.rating, vencedor === 'eu');
-  const { error } = await db.rpc('pvp_campanha_terminar', { p_partida: p.id, p_vencedor: vencedor, p_motivo: motivo, p_estrelas: estrelas, p_delta: delta, p_descanso: descanso, p_descanso_rival: descansoDele });
+  const { error } = await db.rpc('pvp_campanha_terminar', { p_partida: p.id, p_vencedor: vencedor, p_motivo: motivo, p_estrelas: estrelas, p_delta: 0, p_descanso: descanso, p_descanso_rival: descansoDele });
   if (error) throw error;
 }
 
@@ -106,6 +105,15 @@ export async function acaoCampanha(db: Db, quem: string, input: Record<string, u
   const id = typeof input.partida === 'string' && ID.test(input.partida) ? input.partida : null;
 
   if (op === 'estado') return resposta(db, quem, await aberta(db, quem));
+
+  // o ranking do Nexus (separado do PvP): mais estrelas; empate, menos partidas
+  if (op === 'ranking') {
+    const { data, error } = await db.rpc('pvp_campanha_ranking', { p_player: quem, p_limite: 50 });
+    if (error) throw error;
+    type Linha = { posicao: number; total: number; id: string; nome: string; estrelas: number; partidas: number };
+    const linhas = ((data ?? []) as Linha[]).map((l) => ({ posicao: Number(l.posicao), id: l.id, nome: l.nome, estrelas: l.estrelas, partidas: l.partidas, titulo: tituloDas(l.estrelas).nome }));
+    return ok({ ranking: linhas.filter((l) => l.posicao <= 50), eu: linhas.find((l) => l.id === quem) ?? null, total: Number(((data ?? []) as Linha[])[0]?.total ?? 0) });
+  }
 
   if (op === 'comecar') {
     const rival = typeof input.rival === 'string' ? rivalPorId(input.rival) : null;
