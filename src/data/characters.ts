@@ -270,5 +270,18 @@ function soComPreparo(c:Character):Character{
   if(!c.skills.some(s=>s.target==='enemyCast'&&s.condition==='always'))return c;
   return {...c,skills:c.skills.map(s=>s.target==='enemyCast'&&s.condition==='always'?{...s,condition:'enemyCast' as const}:s) as Character['skills']};
 }
-export const characters:Character[]=deBase.map(c=>ajustaForca(c,TANQUES.has(c.id),VIDA_DE_TANQUE)).map(ajustaRegeneracao).map(aplicaPedidos).map(aplicaAjusteDeKit).map(aplicaRitmo).map(soComPreparo);
+/*
+ * Carga é para si (revisão das fichas pedida pelo dono): o soco e a Flor de fogo do Mario, e os traços do Yuji, do
+ * Tanjiro, da Frieren e do Mega Man tinham "+X% de Carga para habilidades" sem alvo próprio. O efeito herdava o alvo do
+ * golpe e a Carga ia para o RIVAL atingido. Carga que cairia num rival vai para quem usa.
+ */
+const PARA_RIVAL=new Set<Target>(['enemyWeak','enemyStrong','enemyCast','investigated','leastInvestigated','allEnemies','randomEnemy']);
+const cargaParaSi=(alvo:Target,effects:Effect[]):Effect[]=>effects.map(e=>e.kind==='charge'&&PARA_RIVAL.has(e.target??alvo)?{...e,target:'self' as const}:e);
+function cargaEhParaSi(c:Character):Character{
+  return {...c,
+    skills:c.skills.map(s=>({...s,effects:cargaParaSi(s.target,s.effects)})) as Character['skills'],
+    trait:{...c.trait,effects:cargaParaSi(c.trait.target,c.trait.effects)},
+    basic:{...c.basic,effects:cargaParaSi(c.basic.target,c.basic.effects)}};
+}
+export const characters:Character[]=deBase.map(c=>ajustaForca(c,TANQUES.has(c.id),VIDA_DE_TANQUE)).map(ajustaRegeneracao).map(aplicaPedidos).map(aplicaAjusteDeKit).map(aplicaRitmo).map(soComPreparo).map(cargaEhParaSi);
 export const byId:Record<string,Character> = Object.fromEntries(characters.map(c=>[c.id,c]));
