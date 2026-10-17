@@ -81,7 +81,7 @@ export function criarComunidadeDemo(): ServicoDaComunidade {
 
   const espera = <T,>(v: T, ms = 250) => new Promise<T>((r) => setTimeout(() => r(v), ms));
   return {
-    jogadores: () => espera(jogadores.filter((j) => j.id !== EU_DEMO).map((j) => ({ ...j }))),
+    jogadores: () => espera(jogadores.map((j) => ({ ...j }))),
     historico: (com) => {
       const lista = mensagens.filter((m) => com === null ? m.paraId === null : (m.autorId === EU_DEMO && m.paraId === com) || (m.autorId === com && m.paraId === EU_DEMO));
       const ids = new Set(lista.map((m) => m.id));

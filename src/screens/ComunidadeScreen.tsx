@@ -63,7 +63,7 @@ function Titulo({ conquistas }: { conquistas: number }) {
  * O cartão do jogador
  * ------------------------------------------------------------------------- */
 
-function CartaoDoJogador({ jogador, lugar, agora, onMensagem, onDetails, onClose, onDesafiar }: { jogador: Jogador; lugar?: number; agora: number; onMensagem: () => void; onDetails: (id: string) => void; onClose: () => void; onDesafiar?: (id: string) => Promise<string | null> }) {
+function CartaoDoJogador({ jogador, lugar, agora, proprio, onMensagem, onDetails, onClose, onDesafiar }: { jogador: Jogador; lugar?: number; agora: number; proprio?: boolean; onMensagem: () => void; onDetails: (id: string) => void; onClose: () => void; onDesafiar?: (id: string) => Promise<string | null> }) {
   const [desafiando, setDesafiando] = useState(false);
   const [erroDoDesafio, setErroDoDesafio] = useState('');
   const ref = useRef<HTMLDialogElement>(null);
@@ -74,7 +74,7 @@ function CartaoDoJogador({ jogador, lugar, agora, onMensagem, onDetails, onClose
       <button className="icon-button cm-fechar" aria-label="Fechar" onClick={onClose}><X size={18} /></button>
       <div className="cm-cartao-topo">
         <Avatar jogador={jogador} id={jogador.id} nome={jogador.nome} tamanho={92} />
-        <h2>{jogador.nome}<Coroa lugar={lugar} /></h2>
+        <h2>{jogador.nome}<Coroa lugar={lugar} />{proprio && <span className="cm-voce">Você</span>}</h2>
         <Titulo conquistas={jogador.conquistas} />
         <p className={`cm-cartao-status ${jogador.online ? 'online' : ''}`}><span className="cm-ponto" />{st.longo}{jogador.online && jogador.onlineDesde ? ` · ${haQuanto(jogador.onlineDesde, agora)}` : jogador.vistoEm ? ` · ${haQuanto(jogador.vistoEm, agora)}` : ''}</p>
       </div>
@@ -89,12 +89,12 @@ function CartaoDoJogador({ jogador, lugar, agora, onMensagem, onDetails, onClose
         <div>{jogador.trio.map((id) => byId[id] && <button key={id} onClick={() => onDetails(id)} style={{ '--character': byId[id].color } as CSSProperties} aria-label={`Ficha de ${byId[id].name}`}>
           <Portrait character={byId[id]} /><b>{byId[id].name}</b></button>)}</div>
       </div>}
-      <div className="cm-cartao-acoes">
+      {!proprio && <div className="cm-cartao-acoes">
         <button className="primary" onClick={onMensagem}><MessageCircle size={18} />Mandar mensagem</button>
         {onDesafiar
           ? <button className="secondary cm-desafiar" disabled={desafiando} onClick={() => { setDesafiando(true); setErroDoDesafio(''); void onDesafiar(jogador.id).then((e) => { if (e) { setErroDoDesafio(e); setDesafiando(false); } }); }}><Swords size={18} />{desafiando ? 'Desafiando…' : 'Desafiar no PvP'}</button>
           : <button className="secondary cm-em-breve" disabled><Swords size={18} />Desafiar<em><Lock size={11} />PvP com conta</em></button>}
-      </div>
+      </div>}
       {erroDoDesafio && <p className="cm-erro-desafio">{erroDoDesafio}</p>}
     </div>
   </dialog>;
@@ -340,7 +340,8 @@ export function ComunidadeScreen({ servico, euId, euNome, naoLidas, onLidas, abr
 
   const porId = useMemo(() => {
     const m = new Map(jogadores.map((j) => [j.id, j]));
-    if (!m.has(euId)) m.set(euId, { id: euId, nome: euNome, online: true, onlineDesde: null, vistoEm: null, recorde: null, trio: null, conquistas: 0, desde: new Date().toISOString(), jornadas: 0 });
+    // enquanto a lista não chega, você aparece online desde agora
+    if (!m.has(euId)) { const agora = new Date().toISOString(); m.set(euId, { id: euId, nome: euNome, online: true, onlineDesde: agora, vistoEm: agora, recorde: null, trio: null, conquistas: 0, desde: agora, jornadas: 0 }); }
     return m;
   }, [jogadores, euId, euNome]);
   const lugarDe = useMemo(() => new Map([...jogadores].filter((j) => j.recorde).sort((a, b) => b.recorde! - a.recorde!).slice(0, 3).map((j, i) => [j.id, i + 1])), [jogadores]);
@@ -355,6 +356,7 @@ export function ComunidadeScreen({ servico, euId, euNome, naoLidas, onLidas, abr
   const comQuem = conversa ? porId.get(conversa) : undefined;
   const nomeDaConversa = comQuem?.nome ?? conversas.find((c) => c.comId === conversa)?.comNome ?? 'Jogador';
   const jogadorDoPerfil = perfil ? porId.get(perfil) : undefined;
+  const eu = porId.get(euId);
 
   return <section className="cm-tela">
     <header className="cm-topo">
@@ -370,7 +372,7 @@ export function ComunidadeScreen({ servico, euId, euNome, naoLidas, onLidas, abr
     </nav>}
     {erro && <p className="cm-erro-geral" role="alert">{erro}</p>}
 
-    {aba === 'global' && !conversa && <Chat key="global" servico={servico} euId={euId} com={null} porId={porId} lugarDe={lugarDe} agora={agora} onPerfil={(id) => { if (id !== euId) setPerfil(id); }} onLidas={onLidas} />}
+    {aba === 'global' && !conversa && <Chat key="global" servico={servico} euId={euId} com={null} porId={porId} lugarDe={lugarDe} agora={agora} onPerfil={setPerfil} onLidas={onLidas} />}
 
     {aba === 'privadas' && conversa && <>
       <div className="cm-conversa-topo">
@@ -380,7 +382,7 @@ export function ComunidadeScreen({ servico, euId, euNome, naoLidas, onLidas, abr
           <span><b>{nomeDaConversa}<Coroa lugar={lugarDe.get(conversa)} /></b><small className={comQuem?.online ? 'online' : ''}>{comQuem ? (comQuem.online ? 'online agora' : comQuem.vistoEm ? `visto por último ${quando(comQuem.vistoEm, agora)}` : 'ainda não apareceu') : ''}</small></span>
         </button>
       </div>
-      <Chat key={conversa} servico={servico} euId={euId} com={conversa} porId={porId} lugarDe={lugarDe} agora={agora} onPerfil={(id) => { if (id !== euId) setPerfil(id); }} onLidas={() => { onLidas(); carregarConversas(); }} />
+      <Chat key={conversa} servico={servico} euId={euId} com={conversa} porId={porId} lugarDe={lugarDe} agora={agora} onPerfil={setPerfil} onLidas={() => { onLidas(); carregarConversas(); }} />
     </>}
 
     {aba === 'privadas' && !conversa && <div className="cm-conversas">
@@ -403,6 +405,16 @@ export function ComunidadeScreen({ servico, euId, euNome, naoLidas, onLidas, abr
           <button key={id} className={`cm-filtro ${id} ${filtro === id ? 'ativo' : ''}`} onClick={() => setFiltro(id)} aria-pressed={filtro === id}>{id === 'online' && <span className="cm-ponto vivo" />}{id === 'offline' && <span className="cm-ponto" />}{nome}<b>{n}</b></button>)}
       </div>
       <label className="cm-busca"><Search size={16} /><input value={busca} onChange={(e) => setBusca(e.target.value)} placeholder="Procurar jogador" aria-label="Procurar jogador" /></label>
+      {eu && filtro !== 'offline' && (!busca.trim() || eu.nome.toLowerCase().includes(busca.trim().toLowerCase())) && <div className="cm-jogador online cm-eu">
+        <button className="cm-jogador-quem" onClick={() => setPerfil(euId)}>
+          <Avatar jogador={eu} id={euId} nome={eu.nome} tamanho={48} />
+          <span className="cm-jogador-info">
+            <b>{eu.nome}<Coroa lugar={lugarDe.get(euId)} /><span className="cm-voce">Você</span></b>
+            <span className="cm-jogador-linha"><Titulo conquistas={eu.conquistas} />{eu.recorde ? <span className="cm-jogador-recorde"><Trophy size={12} />{formatarPontos(eu.recorde)}</span> : <small className="cm-sem-recorde">sem recorde</small>}</span>
+            <small className="cm-status"><span className="cm-ponto vivo" />Você está aqui</small>
+          </span>
+        </button>
+      </div>}
       {!visiveis.length && <div className="cm-vazio"><Users size={34} /><b>{filtro === 'online' ? 'Ninguém online agora' : 'Ninguém encontrado'}</b><small>{filtro === 'online' ? 'Mande uma privada: a pessoa vê quando entrar.' : 'Tente outro nome.'}</small></div>}
       {visiveis.map((j, i) => {
         const st = statusDe(j, agora);
@@ -420,6 +432,6 @@ export function ComunidadeScreen({ servico, euId, euNome, naoLidas, onLidas, abr
       })}
     </div>}
 
-    {jogadorDoPerfil && <CartaoDoJogador jogador={jogadorDoPerfil} lugar={lugarDe.get(jogadorDoPerfil.id)} agora={agora} onDetails={onDetails} onClose={() => setPerfil(null)} onMensagem={() => abrirConversa(jogadorDoPerfil.id)} onDesafiar={jogadorDoPerfil.id === euId ? undefined : onDesafiar} />}
+    {jogadorDoPerfil && <CartaoDoJogador jogador={jogadorDoPerfil} lugar={lugarDe.get(jogadorDoPerfil.id)} agora={agora} proprio={jogadorDoPerfil.id === euId} onDetails={onDetails} onClose={() => setPerfil(null)} onMensagem={() => abrirConversa(jogadorDoPerfil.id)} onDesafiar={jogadorDoPerfil.id === euId ? undefined : onDesafiar} />}
   </section>;
 }
