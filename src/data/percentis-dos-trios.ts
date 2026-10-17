@@ -1,8 +1,8 @@
 /*
- * A régua da força dos trios (gerado com os 10.586.800 trios do elenco medidos na fábrica de simulação, 10 lutas cada;
- * scripts/fabrica/lutas.ts, plano trios). PERCENTIS[p] é a nota das Dicas (notaDoTrio) que fica acima de p% de todos os
- * trios possíveis. Daqui saem o "melhor que X% dos trios" e as estrelas do time (src/presentation/dicas-do-trio.ts).
- * Refazer quando os personagens ou as Dicas mudarem bastante.
+ * A régua da força dos trios (gerado com os 10.586.800 trios do elenco por scripts/regua-dos-trios.ts).
+ * PERCENTIS[p] é a nota das Dicas (notaDoTrio) que fica acima de p% de todos os trios possíveis. Daqui saem o "melhor que
+ * X% dos trios" e as estrelas do time (src/presentation/dicas-do-trio.ts). Refazer quando os personagens ou as Dicas
+ * mudarem bastante (junto com src/data/percentis-finos.ts).
  */
 export const PERCENTIS: readonly number[] = [
   -3.621, -1.188, -1.001, -0.887, -0.803, -0.736, -0.68, -0.631, -0.588, -0.549,

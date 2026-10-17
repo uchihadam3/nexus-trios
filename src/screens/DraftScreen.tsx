@@ -12,7 +12,7 @@ import { IdentityChips } from '../components/IdentityChips';
 import { ComTermos } from '../components/Termos';
 import { draftConnection } from '../presentation/draft-connections';
 import { BotaoDicas } from '../components/BotaoDicas';
-import { dicasDoDraft,estrelasDaPorcentagem,melhorQueOsTrios,ESTRELAS_MAXIMAS,type DicaDoCandidato } from '../presentation/dicas-do-trio';
+import { dicasDoDraft,estrelasDaPorcentagem,posicaoDoTrio,ESTRELAS_MAXIMAS,type DicaDoCandidato } from '../presentation/dicas-do-trio';
 import { universoDaFicha } from '../data/equipes';
 
 /*
@@ -113,10 +113,10 @@ export function DraftScreen({draft,desafio,primeiroRival,estrelas=false,dicas,po
  * a mesma do PvP (src/presentation/dicas-do-trio.ts, estrelasDoTime).
  */
 function EstrelasDoTrio({team}:{team:string[]}){
-  const pct=melhorQueOsTrios(team),n=estrelasDaPorcentagem(pct);
-  // e a porcentagem (pedido do dono: "esse trio é melhor que 99%, 98%… dos outros trios")
+  const {pct,dentro}=posicaoDoTrio(team),n=estrelasDaPorcentagem(pct);
+  // e a porcentagem (pedido do dono: "esse trio é melhor que 99%, 98%… dos outros trios"), com onde ele está dentro desse X% entre parênteses
   return <div className="dv-estrelas" role="img" aria-label={`Trio de ${n} ${n===1?'estrela':'estrelas'}, melhor que ${pct}% dos trios`}>
     {Array.from({length:ESTRELAS_MAXIMAS},(_,k)=><i key={k} className={k<n?'acesa':''} style={{'--k':k} as CSSProperties}><Star size={13} fill="currentColor" strokeWidth={1.5}/></i>)}
-    <small>melhor que <b>{pct}%</b> dos trios</small>
+    <small title={`Entre os trios que também são melhores que ${pct}%, este é melhor que ${dentro}% deles`}>melhor que <b>{pct}%</b> <span className="dv-dentro">({dentro}%)</span> dos trios</small>
   </div>;
 }

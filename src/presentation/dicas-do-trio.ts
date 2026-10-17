@@ -23,6 +23,7 @@ import { byId, characters } from '../data/characters';
 import { AJUSTE_DAS_DUPLAS, ALFABETO_DAS_DUPLAS, PASSO_DAS_DUPLAS } from '../data/duplas-ajuste';
 import { DUPLAS } from '../data/duplas-medidas';
 import { PERCENTIS } from '../data/percentis-dos-trios';
+import { PERCENTIS_FINOS } from '../data/percentis-finos';
 import { FORCA, PESO_DA_LIGACAO } from '../data/forca-dos-rivais';
 import { pontoFraco, type TipoDeFraqueza } from '../data/ponto-fraco';
 import { pontoForte } from '../data/ponto-forte';
@@ -97,6 +98,26 @@ export function percentilDaNota(nota: number): number {
   let p = 0;
   while (p < 100 && PERCENTIS[p + 1]! <= nota) p++;
   return p;
+}
+/*
+ * Dentro do X% do trio, onde ele está (pedido do dono: "melhor que 99%… só que dentro desses 99 existem muitos times, ele
+ * é melhor que quantos?"): de 0 a 99, a posição da nota entre os trios da mesma faixa de 1% (a régua fina tem 20 pontos em
+ * cada faixa; entre eles, em linha reta). 37 = melhor que 37% dos trios que também são "melhor que X%". O melhor trio de
+ * todos (100%) fica com 100.
+ */
+export function dentroDaFaixa(nota: number): number {
+  const p = percentilDaNota(nota);
+  if (p >= 100) return 100;
+  let lo = 0, hi = PERCENTIS_FINOS.length - 1;
+  while (hi - lo > 1) { const m = (lo + hi) >> 1; if (PERCENTIS_FINOS[m]! <= nota) lo = m; else hi = m; }
+  const a = PERCENTIS_FINOS[lo]!, b = PERCENTIS_FINOS[hi]!;
+  const f = lo + (b > a ? Math.min(1, Math.max(0, (nota - a) / (b - a))) : 0);
+  return Math.min(99, Math.max(0, Math.floor((f / 20 - p) * 100)));
+}
+/** O "melhor que X% dos trios" e, dentro desse X%, onde ele está (0 a 99). */
+export function posicaoDoTrio(team: readonly string[]): { pct: number; dentro: number } {
+  const nota = notaDoTrio(team);
+  return { pct: percentilDaNota(nota), dentro: dentroDaFaixa(nota) };
 }
 /*
  * As estrelas do time, de 1 a 7, pela porcentagem de trios que ele supera. Os cortes ficam onde a chance de vencer a

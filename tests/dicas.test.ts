@@ -5,7 +5,9 @@ import { CUSTO_DAS_DICAS, pontosDaLuta } from '../src/engine/pontos';
 import { replayRanked } from '../src/engine/ranked';
 import { createBattle, stepBattle } from '../src/engine/battle';
 import { pontoFraco } from '../src/data/ponto-fraco';
-import { dicasDoDraft, notaDoTrio } from '../src/presentation/dicas-do-trio';
+import { dentroDaFaixa, dicasDoDraft, notaDoTrio, percentilDaNota } from '../src/presentation/dicas-do-trio';
+import { PERCENTIS } from '../src/data/percentis-dos-trios';
+import { PERCENTIS_FINOS } from '../src/data/percentis-finos';
 
 const ids = characters.map((c) => c.id);
 
@@ -94,5 +96,24 @@ describe('Dicas de trio', () => {
     expect(com.summaries.map((s) => s.won)).toEqual(sem.summaries.map((s) => s.won));
     expect(com.score).toBe(sem.summaries.reduce((n, s) => n + Math.max(0, (s.pontos!.total) - CUSTO_DAS_DICAS), 0));
     expect(com.highlights.dicas).toBe(true);
+  });
+
+  it('dentro do X%: de 0 a 99, sobe com a nota e a régua fina bate com a de 1%', () => {
+    expect(PERCENTIS_FINOS).toHaveLength(2001);
+    for (let p = 0; p <= 100; p++) expect(PERCENTIS_FINOS[p * 20]).toBe(PERCENTIS[p]);
+    // no começo da faixa é 0, no meio ~50, logo antes da próxima ~99
+    expect(dentroDaFaixa(PERCENTIS[50]!)).toBe(0);
+    expect(dentroDaFaixa(PERCENTIS_FINOS[50 * 20 + 10]!)).toBe(50);
+    expect(dentroDaFaixa(PERCENTIS[51]! - 1e-9)).toBeGreaterThanOrEqual(95);
+    expect(dentroDaFaixa(PERCENTIS[100]!)).toBe(100);
+    let antes = -1;
+    const faixa = percentilDaNota(PERCENTIS[90]!);
+    for (let n = PERCENTIS[90]!; n < PERCENTIS[91]!; n += (PERCENTIS[91]! - PERCENTIS[90]!) / 200) {
+      expect(percentilDaNota(n)).toBe(faixa);
+      const d = dentroDaFaixa(n);
+      expect(d).toBeGreaterThanOrEqual(antes); expect(d).toBeLessThanOrEqual(99);
+      antes = d;
+    }
+    for (const t of [ids.slice(0, 3), ids.slice(-3)]) { const d = dentroDaFaixa(notaDoTrio(t)); expect(d).toBeGreaterThanOrEqual(0); expect(d).toBeLessThanOrEqual(100); }
   });
 });

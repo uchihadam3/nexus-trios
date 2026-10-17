@@ -7,7 +7,7 @@ import { ArenaDoPvp } from '../components/ArenaDoPvp';
 import { combosDoTrio } from '../engine/combos';
 import { MINIMO_DA_COLECAO, NPCS, duracaoNaTela, escolhaDoNpc, problemaDosTimes, sementeDaRodada, timesDoNpc, timesLivres, vencedorDaPartida, vitoriasDosTimes,
   type Lado, type NivelNpc, type Npc, type PartidaPvp, type Times } from '../engine/pvp';
-import { notaDoTrio, estrelasDoTime, melhorQueOsTrios, ESTRELAS_MAXIMAS } from '../presentation/dicas-do-trio';
+import { notaDoTrio, estrelasDoTime, posicaoDoTrio, ESTRELAS_MAXIMAS } from '../presentation/dicas-do-trio';
 const ESTRELAS = Array.from({ length: ESTRELAS_MAXIMAS }, (_, k) => k + 1);
 import { battleAudio } from '../lib/audio';
 import { PRIORIDADE } from '../audio/cues';
@@ -101,8 +101,22 @@ export function Rosto({ id, tamanho = 54, apagado = false, ficha = true }: { id:
     {...(abre ? { role: 'button', tabIndex: 0, 'aria-label': `Ficha de ${c.name}`, onClick: (e: { stopPropagation: () => void }) => { e.stopPropagation(); abrir(id); }, onKeyDown: (e: { key: string }) => { if (e.key === 'Enter') abrir(id); } } : {})}><Portrait character={c} /></span>;
 }
 
-/* A conta do dono (pedido dele): só ela vê as estrelas de força dos times e o "melhor que X% dos trios" (para os outros, em nenhum lugar do PvP). */
+/*
+ * A conta do dono (pedido dele): só ela vê as estrelas de força dos times e o "melhor que X% dos trios", e só no treino
+ * contra os NPCs (no PvP com outras pessoas e no Caminho do Nexus, nem ela). Para os outros, em nenhum lugar do PvP.
+ */
 export const DonoDoPvp = createContext(false);
+/*
+ * O "melhor que X%" e, entre parênteses e em outra cor, onde o time está dentro desse X% (pedido do dono: "melhor que
+ * 90%… mas dentro desses 90%, tá onde?").
+ */
+function PorcentagemDoTime({ time, curta = false }: { time: readonly string[]; curta?: boolean }) {
+  const { pct, dentro } = posicaoDoTrio(time);
+  const titulo = `Melhor que ${pct}% dos trios; entre os trios que também são melhores que ${pct}%, melhor que ${dentro}% deles`;
+  return curta
+    ? <em className="pv-pct" title={titulo}>{pct}%<span className="pv-dentro">({dentro}%)</span></em>
+    : <span className="pv-pct" title={titulo}>melhor que <b>{pct}%</b> <span className="pv-dentro">({dentro}%)</span></span>;
+}
 
 function CartaoDoTime({ time, i, lado, venceu, escolhido, bloqueado, onClick, compacto = false }: {
   time: readonly string[]; i: number; lado: Lado; venceu?: boolean; escolhido?: boolean; bloqueado?: boolean; onClick?: () => void; compacto?: boolean;
@@ -116,7 +130,7 @@ function CartaoDoTime({ time, i, lado, venceu, escolhido, bloqueado, onClick, co
     {!compacto && <span className="pv-time-nomes">{time.map((id) => byId[id]!.name).join(' · ')}</span>}
     <span className="pv-time-info">
       {dono && <span className="pv-estrelas" aria-label={`Força ${estrelas} de ${ESTRELAS_MAXIMAS}`}>{ESTRELAS.map((k) => <i key={k} className={k <= estrelas ? 'on' : ''}>★</i>)}</span>}
-      {dono && <span className="pv-pct" title="Melhor que esta porcentagem dos trios">melhor que <b>{melhorQueOsTrios(time)}%</b></span>}
+      {dono && <PorcentagemDoTime time={time} />}
       {combos > 0 && <span className="pv-combos"><Zap size={11} />{combos} combo{combos > 1 ? 's' : ''}</span>}
     </span>
     {venceu && <span className="pv-carimbo" aria-hidden="true"><Check size={34} /></span>}
@@ -396,7 +410,7 @@ export function Montar({ rival, colecao, inicial, onPronto, onVoltar, onDetails,
       {times.map((t, i) => {
         const estrelas = t.length === 3 ? estrelasDoTime(t) : 0;
         return <button key={i} className={`pv-slot ${ativo === i ? 'ativo' : ''} ${t.length === 3 ? 'cheio' : ''}`} onClick={() => setAtivo(i)} style={{ '--i': i } as CSSProperties}>
-          <span className="pv-slot-topo"><b>TIME {i + 1}</b>{t.length === 3 && !dono ? null : t.length === 3 ? <span className="pv-estrelas" aria-label={`Força ${estrelas} de ${ESTRELAS_MAXIMAS}`}>{ESTRELAS.map((k) => <i key={k} className={k <= estrelas ? 'on' : ''}>★</i>)}{melhores && <em className="pv-pct">{melhorQueOsTrios(t)}%</em>}</span> : <small>{t.length}/3</small>}</span>
+          <span className="pv-slot-topo"><b>TIME {i + 1}</b>{t.length === 3 && !dono ? null : t.length === 3 ? <span className="pv-estrelas" aria-label={`Força ${estrelas} de ${ESTRELAS_MAXIMAS}`}>{ESTRELAS.map((k) => <i key={k} className={k <= estrelas ? 'on' : ''}>★</i>)}{melhores && <PorcentagemDoTime time={t} curta />}</span> : <small>{t.length}/3</small>}</span>
           <span className="pv-slot-rostos">{[0, 1, 2].map((k) => t[k] ? <span key={k} className="pv-slot-cheio" role="button" tabIndex={0} aria-label={`Tirar ${byId[t[k]!]!.name}`} onClick={(e) => { e.stopPropagation(); tocar(t[k]!); }}><Rosto id={t[k]!} tamanho={46} ficha={false} /><X size={12} className="pv-tirar" /></span> : <span key={k} className="pv-slot-vazio">+</span>)}</span>
         </button>;
       })}
@@ -885,7 +899,8 @@ function TelaDoPvp({ colecao, settings, onSettings, onDetails, onJogar, onLutand
     : <Confirmar titulo="Abandonar a partida?" texto={`Abandonar conta como derrota contra ${etapa.npc.nome}.`} sim="Abandonar" onNao={() => setConfirmar(null)}
       onSim={() => { setConfirmar(null); desistirDaPartida(etapa.npc, etapa.partida); }} />);
 
-  if (online?.partida) return <PartidaOnline key={online.partida} online={online} colecaoLocal={colecaoPvp} emprestados={emprestados} settings={settings} onSettings={onSettings} onDetails={onDetails} onLutando={onLutando} dono={dono} />;
+  // no PvP com outras pessoas, nem o dono vê as estrelas e a porcentagem (pedido dele: só no treino)
+  if (online?.partida) return <DonoDoPvp.Provider value={false}><PartidaOnline key={online.partida} online={online} colecaoLocal={colecaoPvp} emprestados={emprestados} settings={settings} onSettings={onSettings} onDetails={onDetails} onLutando={onLutando} dono={dono} /></DonoDoPvp.Provider>;
   if (etapa.tipo === 'campanha' && servicoDaCampanha) return <Suspense fallback={<p className="cm-carregando-tela">Abrindo o Caminho do Nexus…</p>}>
     <CaminhoDoNexus servico={servicoDaCampanha} settings={settings} onSettings={onSettings} onDetails={onDetails} onLutando={onLutando} dono={dono} onVoltar={() => setEtapa({ tipo: 'lobby' })} /></Suspense>;
   if (etapa.tipo === 'lobby' || etapa.tipo === 'campanha') return <Lobby colecao={colecaoPvp} propria={propria} guardado={guardado} online={online} onTreino={(npc) => { som('ui-arena'); setEtapa({ tipo: 'montar', npc }); }} onJogar={onJogar}

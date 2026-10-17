@@ -403,6 +403,10 @@ button.pv-time:active:not(:disabled){transform:scale(.98)}
 .pv-pct{font-size:10.5px;font-style:normal;font-weight:700;color:#9fb0bf;white-space:nowrap}
 .pv-pct b{color:var(--pv-ouro);font-weight:900}
 .pv-estrelas .pv-pct{margin-left:4px;font-size:9.5px;letter-spacing:0;color:var(--pv-ouro);font-weight:900}
+.pv-dentro{margin-left:2px;color:#7fd8ff;font-weight:900}
+/* no espaço do time, a porcentagem desce para a linha de baixo das estrelas (com o "dentro" não cabe ao lado) */
+.pv-slot .pv-estrelas{flex-wrap:wrap;justify-content:center}
+.pv-slot .pv-estrelas .pv-pct{flex-basis:100%;margin:2px 0 0;text-align:center}
 
 /* ---------- o Empréstimo do dia (CartaoDoEmprestimo, src/engine/emprestimo.ts) ---------- */
 .pv-emprestimo{position:relative;display:flex;flex-direction:column;gap:10px;padding:14px;border-radius:22px;overflow:hidden;
