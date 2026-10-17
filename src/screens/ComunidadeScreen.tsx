@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode } from 'react';
-import { ArrowLeft, Award, CalendarDays, Check, CheckCheck, ChevronDown, Clock3, Crown, Globe, Lock, MessageCircle, MessagesSquare, Reply, Search, SendHorizontal, Smile, Swords, Trophy, Users, X } from 'lucide-react';
+import { ArrowLeft, Award, CalendarDays, Check, CheckCheck, ChevronDown, Clock3, Crown, Flag, Globe, Lock, MessageCircle, MessagesSquare, Reply, Search, SendHorizontal, Smile, Swords, Trophy, Users, X } from 'lucide-react';
 import { byId } from '../data/characters';
 import { Portrait } from '../components/Portrait';
 import { formatarPontos } from '../engine/pontos';
@@ -80,6 +80,7 @@ function CartaoDoJogador({ jogador, lugar, agora, onMensagem, onDetails, onClose
       </div>
       <div className="cm-numeros">
         <span><Trophy size={16} /><b>{jogador.recorde ? formatarPontos(jogador.recorde) : '—'}</b><small>recorde</small></span>
+        <span><Flag size={16} /><b>{jogador.jornadas.toLocaleString('pt-BR')}</b><small>{jogador.jornadas === 1 ? 'jornada' : 'jornadas'}</small></span>
         <span><Award size={16} /><b>{jogador.conquistas}</b><small>personagens</small></span>
         <span><CalendarDays size={16} /><b>{haQuanto(jogador.desde, agora).replace('há ', '')}</b><small>de conta</small></span>
       </div>
@@ -339,7 +340,7 @@ export function ComunidadeScreen({ servico, euId, euNome, naoLidas, onLidas, abr
 
   const porId = useMemo(() => {
     const m = new Map(jogadores.map((j) => [j.id, j]));
-    if (!m.has(euId)) m.set(euId, { id: euId, nome: euNome, online: true, onlineDesde: null, vistoEm: null, recorde: null, trio: null, conquistas: 0, desde: new Date().toISOString() });
+    if (!m.has(euId)) m.set(euId, { id: euId, nome: euNome, online: true, onlineDesde: null, vistoEm: null, recorde: null, trio: null, conquistas: 0, desde: new Date().toISOString(), jornadas: 0 });
     return m;
   }, [jogadores, euId, euNome]);
   const lugarDe = useMemo(() => new Map([...jogadores].filter((j) => j.recorde).sort((a, b) => b.recorde! - a.recorde!).slice(0, 3).map((j, i) => [j.id, i + 1])), [jogadores]);
