@@ -8,6 +8,7 @@ import { aplicaGolpesQueAtacam } from './golpes-que-atacam';
 import { aplicaBasico } from './basicos';
 import { aplicaTraco } from './tracos';
 import { aplicaAjusteDeKit } from './ajuste-de-kit';
+import { aplicaRitmo } from './ritmo-das-habilidades';
 import { aplicaStatusDoNome } from './status-do-nome';
 import { aplicaCondicao } from './condicao';
 import { FATOR_DA_REGENERACAO,valorDaRegeneracao } from './regeneracao';
@@ -259,5 +260,5 @@ function aplicaPedidos(c:Character):Character{
   }) as Character['skills'];
   return {...c,skills};
 }
-export const characters:Character[]=deBase.map(c=>ajustaForca(c,TANQUES.has(c.id),VIDA_DE_TANQUE)).map(ajustaRegeneracao).map(aplicaPedidos).map(aplicaAjusteDeKit);
+export const characters:Character[]=deBase.map(c=>ajustaForca(c,TANQUES.has(c.id),VIDA_DE_TANQUE)).map(ajustaRegeneracao).map(aplicaPedidos).map(aplicaAjusteDeKit).map(aplicaRitmo);
 export const byId:Record<string,Character> = Object.fromEntries(characters.map(c=>[c.id,c]));

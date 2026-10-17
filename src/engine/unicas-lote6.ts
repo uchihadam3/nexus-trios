@@ -42,11 +42,11 @@ export const LOTE6: Record<string, Unica> = {
   },
   dio: {
     nome: 'Road Roller',
-    texto: '1 vez por luta: quando algum rival fica Paralisado, Dio Brando joga o Road Roller nele: 250 de dano.',
+    texto: '1 vez por luta: quando algum rival fica Paralisado, Congelado ou Dormindo, Dio Brando joga o Road Roller nele: 250 de dano.',
     ganchos: {
       passo(m, b, f) {
         if (u(f).rolo) return;
-        const a = m.rivais(b, f).find((r) => m.intensidade(r, 'paralyzed') > 0);
+        const a = m.rivais(b, f).find((r) => m.intensidade(r, 'paralyzed') > 0 || m.intensidade(r, 'frozen') > 0 || m.intensidade(r, 'sleep') > 0);
         if (!a) return;
         u(f).rolo = 1;
         m.aviso(b, f, 'ROAD ROLLER DA!', a);
@@ -500,10 +500,10 @@ export const LOTE6: Record<string, Unica> = {
   },
   subzero: {
     nome: 'Fatality congelante',
-    texto: 'Quando Sub-Zero acerta um rival Congelado com menos de 25% da Vida, esse rival cai na hora.',
+    texto: 'Quando Sub-Zero acerta um rival Congelado com menos de 35% da Vida, esse rival cai na hora.',
     ganchos: {
       bateu(m, b, f, alvo, _dano, g) {
-        if (!g.direto || !vivo(alvo) || fracao(alvo) >= 0.25 || m.intensidade(alvo, 'frozen') <= 0 && !u(f)[`gelo${idx(b, alvo)}`]) return;
+        if (!g.direto || !vivo(alvo) || fracao(alvo) >= 0.35 || m.intensidade(alvo, 'frozen') <= 0 && !u(f)[`gelo${idx(b, alvo)}`]) return;
         m.aviso(b, f, 'Fatality', alvo);
         m.dano(b, f, alvo, alvo.hp + 1, false, 'Fatality');
       },

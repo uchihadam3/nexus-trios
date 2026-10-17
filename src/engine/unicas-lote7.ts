@@ -511,10 +511,11 @@ export const LOTE7: Record<string, Unica> = {
   },
   trunks: {
     nome: 'Viagem no tempo',
-    texto: 'Aos 40 s de luta (1 vez por luta): se o trio de Trunks tiver menos Vida (em %) que os rivais, todo o trio cura 20% da Vida máxima.',
+    texto: 'Aos 25 s de luta (1 vez por luta): se o trio de Trunks tiver menos Vida (em %) que os rivais, todo o trio cura 20% da Vida máxima.',
     ganchos: {
       passo(m, b, f) {
-        if (u(f).futuro || b.time < 40) return;
+        // aos 25 s (era 40: a luta média dura 35 s e quase nunca chegava lá)
+        if (u(f).futuro || b.time < 25) return;
         u(f).futuro = 1;
         if (vidaDoTrio(m.aliados(b, f)) >= vidaDoTrio(m.rivais(b, f))) return;
         for (const a of m.aliados(b, f)) m.cura(b, f, a, a.maxHp * 0.2, 'Do futuro');
@@ -541,10 +542,10 @@ export const LOTE7: Record<string, Unica> = {
   },
   goku: {
     nome: 'Genki Dama',
-    texto: 'Aos 30 s de luta (1 vez por luta), Goku lança a Genki Dama no rival com mais Vida: 60 de dano para cada lutador de pé (dos dois trios).',
+    texto: 'Aos 25 s de luta (1 vez por luta), Goku lança a Genki Dama no rival com mais Vida: 60 de dano para cada lutador de pé (dos dois trios).',
     ganchos: {
       passo(m, b, f) {
-        if (u(f).genki || b.time < 30) return;
+        if (u(f).genki || b.time < 25) return;
         u(f).genki = 1;
         const a = maisForte(m, b, f);
         if (!a) return;

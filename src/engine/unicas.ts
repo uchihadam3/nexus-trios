@@ -428,10 +428,10 @@ const LOTE1: Record<string, Unica> = {
   /* ───────── Mentes e apoio ───────── */
   katara: {
     nome: 'Dobra de sangue',
-    texto: 'Aos 40 s de luta (1 vez por luta): por 4 s, o rival com mais Vida usa o ataque básico nos próprios aliados.',
+    texto: 'Aos 25 s de luta (1 vez por luta): por 4 s, o rival com mais Vida usa o ataque básico nos próprios aliados.',
     ganchos: {
       passo(m, b, f) {
-        if (u(f).lua || b.time < 40) return;
+        if (u(f).lua || b.time < 25) return;
         const alvo = maisForte(m, b, f);
         if (!alvo || m.aliados(b, alvo).length < 2) return;
         u(f).lua = 1;
