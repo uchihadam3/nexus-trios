@@ -637,12 +637,15 @@ export const LOTE7: Record<string, Unica> = {
   },
 };
 
-/* Selo da Zelda: a primeira habilidade de cada rival no trio dela perde 40% da força. */
+/*
+ * Selo da Zelda: a primeira habilidade de cada rival no trio dela perde 40% da força. Guarda o instante dessa
+ * habilidade: os outros alvos dela no mesmo instante (habilidade em área) também levam −40%, não só o primeiro.
+ */
 function selo(m: Motor, b: Battle, zelda: Fighter, alvo: Fighter, fonte: Fighter, habilidade: boolean): number {
   if (!habilidade || fonte.side === zelda.side) return 1;
-  const k = `selo${idx(b, fonte)}`;
-  if (u(zelda)[k]) return 1;
-  u(zelda)[k] = 1;
+  const k = `selo${idx(b, fonte)}`, quando = u(zelda)[k];
+  if (quando !== undefined) return quando === b.time ? 0.6 : 1;
+  u(zelda)[k] = b.time;
   m.aviso(b, zelda, 'Selo da Luz', alvo);
   return 0.6;
 }

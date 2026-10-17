@@ -196,6 +196,8 @@ export const LOTE8: Record<string, Unica> = {
     ganchos: {
       passo(m, b, f, dt) { if (relogio(f, 'polo', dt, 10)) { u(f).polo = u(f).polo ? 0 : 1; m.aviso(b, f, u(f).polo ? 'Repulsão' : 'Atração', f); } },
       causa: (_m, _b, f) => (u(f).polo ? 1.25 : 1),
+      // o trio inteiro, o próprio Magneto também (o recebeAliado só vale para os outros dois)
+      recebe: (_m, _b, f) => (u(f).polo ? 1 : 0.85),
       recebeAliado: (_m, _b, f) => (u(f).polo ? 1 : 0.85),
     },
   },
@@ -560,6 +562,8 @@ export const LOTE8: Record<string, Unica> = {
         m.aviso(b, f, 'Toque', alvo);
       },
       causa: (_m, _b, f) => 1 + 0.04 * (u(f).roubos ?? 0),
+      // o trio inteiro, a própria Vampira também (o recebeAliado só vale para os outros dois)
+      recebe: (_m, b, f, fonte) => (u(f)[`toque${idx(b, fonte)}`] ? 0.96 : 1),
       recebeAliado: (_m, b, f, _aliado, fonte) => (u(f)[`toque${idx(b, fonte)}`] ? 0.96 : 1),
     },
   },
