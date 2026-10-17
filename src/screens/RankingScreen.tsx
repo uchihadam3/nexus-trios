@@ -1,4 +1,5 @@
 import {useEffect,useState,type CSSProperties,type ReactNode} from 'react';
+import {createPortal} from 'react-dom';
 import {Award,CheckCircle2,Crown,Lightbulb,LogIn,Lock,Medal,ShieldCheck,Trophy,WifiOff,X} from 'lucide-react';
 import {byId} from '../data/characters';
 import {Portrait} from '../components/Portrait';
@@ -98,7 +99,8 @@ export function Placar({mode,onMode,estado,handle,onConta,onMais,maisCarregando=
       {mode!=='mine'&&board?.temMais&&<button className="secondary rk-mais" disabled={maisCarregando} onClick={onMais}>{maisCarregando?'Carregando…':`Ver mais · ${rows.length} de ${pontos(board.total??rows.length)}`}</button>}
     </>}
 
-    {selected&&<div className="rk-detalhe" role="dialog" aria-label={`Jornada de ${selected.handle}`} onClick={e=>{if(e.target===e.currentTarget)setSelected(null);}}>
+    {/* No body (portal): dentro da tela, que anima com transform, o fixed ficava preso no fim da lista e era preciso rolar até ele. */}
+    {selected&&createPortal(<div className="rk-detalhe" role="dialog" aria-label={`Jornada de ${selected.handle}`} onClick={e=>{if(e.target===e.currentTarget)setSelected(null);}}>
       <div className="rk-cartao">
         <button className="rk-fechar" onClick={()=>setSelected(null)} aria-label="Fechar detalhes"><X size={18}/></button>
         <span className="rk-cartao-pos">#{selected.position}</span>
@@ -109,7 +111,7 @@ export function Placar({mode,onMode,estado,handle,onConta,onMais,maisCarregando=
         <div className="rk-cartao-numeros"><span><b>{selected.progress}/10</b><small>lutas</small></span><span><b>{selected.highlights.semBaixas??'—'}</b><small>lutas sem baixas</small></span><span><b>{selected.highlights.turns??0}</b><small>viradas</small></span></div>
         <small className="rk-cartao-rodape">Desafio {selected.seed} · {new Date(selected.date).toLocaleDateString('pt-BR')} · {selected.engineVersion}</small>
       </div>
-    </div>}
+    </div>,document.body)}
     {extra}
   </section>;
 }
