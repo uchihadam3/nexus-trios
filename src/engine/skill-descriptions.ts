@@ -398,11 +398,13 @@ export function presentSkill(skill:Skill):SkillPresentation {
    */
   const temCabecalho=grupos.some(g=>g.titulo!=='');
   // "alvo ferido" diz de quem é a Vida: o aliado que recebe a cura, ele mesmo ou o inimigo (engine/ferido.ts)
-  const quando=skill.condition==='injured'?textoDoFerido(skill):use[skill.condition];
+  // só levantar caídos (o Guia das almas do Anúbis): o motor espera alguém cair, então a ficha diz
+  const soLevanta=skill.condition==='always'&&skill.effects.length>0&&skill.effects.every(e=>e.kind==='revive');
+  const quando=soLevanta?'um aliado tiver caído':skill.condition==='injured'?textoDoFerido(skill):use[skill.condition];
   return {summary:effects[0]??'Sem efeito',target:targetNames[skill.target],effects,grupos,
     mostrarAlvo:!temCabecalho&&(skill.effects.length===0||!skill.effects.every(seApresenta)),
     charge:cargasLegiveis(skill.charge),useWhen:quando,
-    ...(skill.condition!=='always'?{requisito:`Só usa quando ${quando}`}:{}),
+    ...(skill.condition!=='always'||soLevanta?{requisito:`Só usa quando ${quando}`}:{}),
     preparation:skill.preparation>0?secs(skill.preparation):'instantâneo',cooldown:secs(skill.cooldown)};
 }
 /*

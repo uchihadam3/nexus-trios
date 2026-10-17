@@ -260,5 +260,15 @@ function aplicaPedidos(c:Character):Character{
   }) as Character['skills'];
   return {...c,skills};
 }
-export const characters:Character[]=deBase.map(c=>ajustaForca(c,TANQUES.has(c.id),VIDA_DE_TANQUE)).map(ajustaRegeneracao).map(aplicaPedidos).map(aplicaAjusteDeKit).map(aplicaRitmo);
+/*
+ * Quem mira o rival em Preparo só usa com um rival preparando (pedido do dono: "tem que ter uma condição, porque não tem
+ * isso escrito na habilidade"). O Lançar teia, o Laço da verdade e outros vinham com "sempre": disparavam sem ninguém
+ * preparando, e a ficha não dizia quando usava. Com a condição, o motor espera o Preparo e a ficha mostra "Só usa quando
+ * um rival estiver preparando uma habilidade".
+ */
+function soComPreparo(c:Character):Character{
+  if(!c.skills.some(s=>s.target==='enemyCast'&&s.condition==='always'))return c;
+  return {...c,skills:c.skills.map(s=>s.target==='enemyCast'&&s.condition==='always'?{...s,condition:'enemyCast' as const}:s) as Character['skills']};
+}
+export const characters:Character[]=deBase.map(c=>ajustaForca(c,TANQUES.has(c.id),VIDA_DE_TANQUE)).map(ajustaRegeneracao).map(aplicaPedidos).map(aplicaAjusteDeKit).map(aplicaRitmo).map(soComPreparo);
 export const byId:Record<string,Character> = Object.fromEntries(characters.map(c=>[c.id,c]));

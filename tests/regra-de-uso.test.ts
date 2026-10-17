@@ -13,7 +13,9 @@ describe('a regra de uso fica à vista', () => {
   it('toda habilidade com regra mostra "Só usa quando…"; as sem regra, não', () => {
     for (const c of Object.values(byId)) for (const s of c.skills) {
       const p = presentSkill(s);
-      if (s.condition === 'always') expect(p.requisito, `${c.name} · ${s.name}`).toBeUndefined();
+      // só levantar caídos espera alguém cair, e a ficha diz (o Guia das almas do Anúbis)
+      const soLevanta = s.effects.length > 0 && s.effects.every((e) => e.kind === 'revive');
+      if (s.condition === 'always' && !soLevanta) expect(p.requisito, `${c.name} · ${s.name}`).toBeUndefined();
       else expect(p.requisito, `${c.name} · ${s.name}`).toMatch(/^Só usa quando /);
     }
     expect(presentSkill(byId.majinbuu!.skills[2]!).requisito).toBe('Só usa quando um rival estiver vulnerável');

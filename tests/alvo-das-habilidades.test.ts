@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import { byId } from '../src/data/characters';
+import { byId, characters } from '../src/data/characters';
+import { presentSkill } from '../src/engine/skill-descriptions';
 import { createBattle, stepBattle } from '../src/engine/battle';
 
 /*
@@ -30,5 +31,10 @@ describe('alvo das habilidades', () => {
       }
     }
     expect(usos).toBeGreaterThan(20);
+  });
+
+  it('a ficha diz quando elas são usadas', () => {
+    for (const c of characters) for (const s of c.skills) if (s.target === 'enemyCast') expect(presentSkill(s).useWhen, `${c.name}: ${s.name}`).toBe('um rival estiver preparando uma habilidade');
+    expect(presentSkill(byId.anubis!.skills[1]!).useWhen).toBe('um aliado tiver caído');
   });
 });
