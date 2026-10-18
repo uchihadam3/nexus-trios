@@ -13,7 +13,7 @@ import { espelhar } from '../presentation/espelho';
 
 /*
  * A luta de uma rodada do PvP: o mesmo motor, o mesmo diretor de cena e os mesmos sons da jornada
- * (src/presentation/sons-da-luta.ts), a música da Arena e sempre em 2× (pedido do jogador). A luta é sorteada pela
+ * (src/presentation/sons-da-luta.ts), a música da Arena e, contra pessoas, sempre em VELOCIDADE_DO_PVP (3×, pedido do dono). A luta é sorteada pela
  * semente da rodada: o mesmo time contra o mesmo time com a mesma semente dá sempre a mesma luta, nos dois aparelhos.
  * No online a luta é calculada com o desafiante embaixo; quem foi desafiado vê a mesma luta espelhada
  * (src/presentation/espelho.ts), com o time dele embaixo. Quem entra atrasado alcança a luta sem som, de uma vez, antes
@@ -32,7 +32,7 @@ export function ArenaDoPvp({ meu, dele, seed, rodada, rival, settings, onSetting
   comecaPausado?: boolean;
   /** Os segundos de luta já mostrados, mais ou menos a cada segundo (para retomar no mesmo ponto). */
   onTempo?: (segundos: number) => void;
-  /** Contra a IA (treino e Caminho do Nexus) a velocidade é do jogador (1×, 2×, 3×); contra pessoas fica travada em 2×. */
+  /** Contra a IA (treino e Caminho do Nexus) a velocidade é do jogador (1×, 2×, 3×); contra pessoas fica travada em VELOCIDADE_DO_PVP (3×). */
   velocidadeLivre?: boolean;
   /** A Vida a mais no lado do rival (a Aura do Chefe da campanha). */
   escala?: number;

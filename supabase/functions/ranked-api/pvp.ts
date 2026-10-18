@@ -179,6 +179,10 @@ async function vista(db: Db, p: Partida, quem: string, ausencia: number | null =
   const rating = (id: string) => ratings?.find((x) => x.player_id === id) ?? { rating: 1000, vitorias: 0, derrotas: 0 };
   const prontos = p.pronto_a && p.pronto_b;
   const meu = (r: Rodada) => (eu === 'a' ? r.time_a : r.time_b), dele = (r: Rodada) => (eu === 'a' ? r.time_b : r.time_a);
+  // a linha da partida é lida antes das rodadas: se a rodada nova entrou no meio, a resolvida acompanha (a rodada só existe
+  // depois de marcada como resolvida) e o começo velho não vale para ela; senão o aparelho via o resultado como se a luta
+  // já tivesse passado na tela (pedido do dono: "o jogador não pode saber se ganhou ou perdeu antes da luta")
+  const resolvida = Math.max(p.resolvida, ...rodadas.map((r) => r.n));
   return {
     id: p.id, fase: p.estado, eu, seed: Number(p.seed), versao: p.versao_do_motor, agora: new Date().toISOString(), prazo: p.prazo, criada: p.criada_em,
     voce: { id: quem, nome: nome(quem), ...rating(quem) }, rival: { id: outro, nome: nome(outro), ...rating(outro) },
@@ -188,7 +192,8 @@ async function vista(db: Db, p: Partida, quem: string, ausencia: number | null =
     lutar: { eu: eu === 'a' ? p.lutar_a : p.lutar_b, rival: eu === 'a' ? p.lutar_b : p.lutar_a },
     assistiu: { eu: eu === 'a' ? p.assistiu_a : p.assistiu_b, rival: eu === 'a' ? p.assistiu_b : p.assistiu_a },
     // o começo da luta só vale para a rodada que acabou de ser resolvida (a próxima a passar na tela)
-    rodada: p.rodada, resolvida: p.resolvida, inicioEm: p.resolvida >= 0 && p.resolvida === p.rodada - 1 ? p.inicio_em : null,
+    rodada: p.rodada, resolvida,
+    inicioEm: resolvida === p.resolvida && p.resolvida >= 0 && p.resolvida === p.rodada - 1 ? p.inicio_em : null,
     meusTimes: times[quem] ?? null, timesDele: prontos ? times[outro] ?? null : null,
     minhaEscolha: minha?.time ?? null,
     rodadas: rodadas.map((r) => ({ n: r.n, meu: meu(r), dele: dele(r), seed: Number(r.seed), vencedor: r.vencedor === eu ? 'eu' : 'rival', duracao: r.duracao, rendida: r.rendida === true })),

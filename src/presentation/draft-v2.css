@@ -153,3 +153,15 @@ button.dv-espaco:focus-visible{outline:2px solid #c8f560;outline-offset:4px;bord
 .dv-estrelas i.acesa{color:#ffd36b;filter:drop-shadow(0 0 3px #ffd36b88);animation:dv-estrela-acende .45s calc(var(--k)*.12s + .2s) cubic-bezier(.2,.9,.3,1.5) both}
 @keyframes dv-estrela-acende{from{color:#ffffff24;transform:scale(.3);filter:none}}
 @media (prefers-reduced-motion:reduce){.dv-estrelas i.acesa{animation:none}}
+
+/* O selo de coleção (pedido do jogador: "um selo bonito nos personagens que você já tem na coleção"): uma medalha
+   verde com o visto no canto de cima, à direita da carta; as etiquetas abrem espaço para ela. */
+.dv-colecao{position:absolute;z-index:3;top:6px;right:6px;display:grid;place-items:center;width:26px;height:26px;border-radius:50%;color:#0c1a07;
+  background:radial-gradient(circle at 32% 28%,#f4ffd0,#c8f560 45%,#6fbf2a 100%);
+  box-shadow:0 0 0 2px #0b120e,0 0 0 3.5px #c8f560cc,0 0 14px #c8f56088,0 3px 8px #000a;overflow:hidden;animation:dv-colecao-entra .5s calc(var(--i)*.09s + .35s) cubic-bezier(.2,1.6,.4,1) both}
+.dv-colecao::after{content:'';position:absolute;inset:-40%;background:linear-gradient(115deg,transparent 40%,#ffffffb0 50%,transparent 60%);transform:translateX(-120%);animation:dv-colecao-brilho 3.2s calc(var(--i)*.4s + 1s) ease-in-out infinite}
+.dv-colecao svg{position:relative;z-index:1}
+.dv-carta:has(> .dv-colecao) .dv-corpo > :first-child{padding-right:26px}
+@keyframes dv-colecao-entra{from{transform:scale(0) rotate(-90deg);opacity:0}}
+@keyframes dv-colecao-brilho{0%,60%{transform:translateX(-120%)}85%,100%{transform:translateX(120%)}}
+@media (prefers-reduced-motion:reduce){.dv-colecao,.dv-colecao::after{animation:none}}

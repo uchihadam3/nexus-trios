@@ -26,9 +26,9 @@ export interface PartidaPvp { meus: Times; deles: Times; rodadas: RodadaPvp[]; s
 
 /** Quantos personagens na coleção para entrar no PvP (3 times de 3, sem repetir). */
 export const MINIMO_DA_COLECAO = 9;
-/** Toda luta de PvP corre em 2× (pedido do jogador: "sempre em duas vezes"). */
-export const VELOCIDADE_DO_PVP = 2;
-/** Segundos de tela por segundo de luta do motor, em 2× e com a encenação (nomes, efeitos, pausas). Medido ~5,5; com folga. */
+/** Toda luta de PvP contra pessoas corre em 3× (pedido do dono: "deixa o pvp contra jogadores fixo na velocidade 3x"; antes 2×). */
+export const VELOCIDADE_DO_PVP = 3;
+/** Segundos de tela por segundo de luta do motor, com a encenação (nomes, efeitos, pausas). Medido ~5,5 em 2× (em 3× sobra mais folga). */
 export const TELA_POR_SEGUNDO = 7;
 /** Quanto a luta de uma rodada pode durar na tela (segundos): o prazo de segurança do online. */
 export const duracaoNaTela = (duracaoDoMotor: number) => Math.min(TELA_POR_SEGUNDO * duracaoDoMotor + 15, 540);

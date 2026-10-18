@@ -29,7 +29,7 @@ import '../presentation/ui-fx.css';
  *  1. escolher o NPC (cada um com rating, coleção e o seu placar contra ele);
  *  2. montar 3 times de 3 com a sua coleção (os personagens liberados nas Conquistas), num álbum de cartas;
  *  3. ver os 3 times dos dois lados;
- *  4. a cada rodada, escolher em segredo um time seu (o NPC escolhe o dele), o VS, e a luta em 2×;
+ *  4. a cada rodada, escolher em segredo um time seu (o NPC escolhe o dele), o VS, e a luta (contra pessoas sempre em 3×; no treino, na velocidade do jogador);
  *  5. o time que vence fica marcado; vence a partida quem ganhar com os 3 times.
  * Treino não conta para o ranking nem para o rating: só o placar contra cada NPC, guardado no aparelho.
  * O Desafio online (outra pessoa, PartidaOnline) usa estas mesmas telas; quem manda é o servidor (src/lib/pvp-online.ts).
@@ -916,7 +916,14 @@ function PartidaOnline({ online, colecaoLocal, emprestados, settings, onSettings
   // jogando ou terminada
   const meus = v.meusTimes ?? [[], [], []], deles = v.timesDele ?? [[], [], []];
   const naTela = (r: typeof v.rodadas[number]) => ({ meu: r.meu, dele: r.dele, seed: r.seed, vencedor: r.vencedor });
-  const vistas = v.rodadas.filter((r) => r.n !== pendente?.n).map(naTela);
+  /*
+   * Rodada que ainda não passou na tela não entra no placar nem nos times (pedido do dono: "o jogador não pode saber se
+   * ganhou ou perdeu antes da luta"). Além da pendente, esconde toda rodada não vista a partir da última resolvida: uma
+   * resposta do servidor lida no meio do cálculo trazia a rodada nova com a marca antiga, e o time aparecia com o selo
+   * VENCEU por um segundo antes do VS.
+   */
+  const naoPassou = (r: typeof v.rodadas[number]) => r.n === pendente?.n || (!assistido.vistas.includes(r.n) && r.n >= v.resolvida);
+  const vistas = v.rodadas.filter((r) => !naoPassou(r)).map(naTela);
   const partida: PartidaPvp = { meus: meus as unknown as Times, deles: deles as unknown as Times, seed: v.seed, rodadas: vistas };
 
   if (cena?.tipo === 'luta') return <>{<ArenaDoPvp key={cena.n} meu={cena.meu} dele={cena.dele} seed={cena.seed} rodada={cena.n + 1} rival={v.rival.nome} settings={settings} onSettings={onSettings}

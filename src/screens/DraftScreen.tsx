@@ -1,7 +1,7 @@
 import { useMemo,useState,type CSSProperties } from 'react';
 import { SeloDeEstrela } from '../components/SeloDeEstrela';
 import { createPortal } from 'react-dom';
-import { ArrowRight,CircleCheck,Crown,Dices,Info,LogOut,Sparkles,Star,Swords,TriangleAlert,X,Zap } from 'lucide-react';
+import { ArrowRight,Check,CircleCheck,Crown,Dices,Info,LogOut,Sparkles,Star,Swords,TriangleAlert,X,Zap } from 'lucide-react';
 import type { Draft,Encounter } from '../engine/campaign';
 import { byId } from '../data/characters';
 import { Portrait } from '../components/Portrait';
@@ -34,7 +34,7 @@ import { universoDaFicha } from '../data/equipes';
  */
 const NIVEL=(n:number)=>n>=80?{rotulo:'ÓTIMO',cor:'#7dff9b'}:n>=55?{rotulo:'BOM',cor:'#c8f560'}:n>=35?{rotulo:'OK',cor:'#ffd166'}:{rotulo:'FRACO',cor:'#ff7a85'};
 const primeiroNome=(id:string)=>byId[id].name.split(/[ ,]/)[0];
-export function DraftScreen({draft,desafio,primeiroRival,estrelas=false,dicas,podeDicas,usouDicas,onDicas,onPick,onSkip,onDetails,onStart,onAbandon}:{draft:Draft;/** a Jornada veio do Desafio do Dia, com este personagem já escolhido */desafio?:string;primeiroRival?:Encounter;/** mostra as estrelas do trio completo: só na conta do dono (pedido dele) */estrelas?:boolean;dicas:boolean;/** o botão só liga para quem liberou as Dicas (src/lib/dicas-liberadas.ts) */podeDicas:boolean;usouDicas:boolean;onDicas:(ligar:boolean)=>void;onPick:(id:string)=>void;onSkip:()=>void;onDetails:(id:string)=>void;onStart:()=>void;onAbandon:()=>void}){
+export function DraftScreen({draft,desafio,primeiroRival,estrelas=false,naColecao,dicas,podeDicas,usouDicas,onDicas,onPick,onSkip,onDetails,onStart,onAbandon}:{draft:Draft;/** a Jornada veio do Desafio do Dia, com este personagem já escolhido */desafio?:string;primeiroRival?:Encounter;/** mostra as estrelas do trio completo: só na conta do dono (pedido dele) */estrelas?:boolean;/** os personagens que o jogador já tem na coleção (ganham o selo na carta) */naColecao?:ReadonlySet<string>;dicas:boolean;/** o botão só liga para quem liberou as Dicas (src/lib/dicas-liberadas.ts) */podeDicas:boolean;usouDicas:boolean;onDicas:(ligar:boolean)=>void;onPick:(id:string)=>void;onSkip:()=>void;onDetails:(id:string)=>void;onStart:()=>void;onAbandon:()=>void}){
   const full=draft.team.length===3,team=draft.team.map(id=>byId[id]);
   const doTrio=identidadesDoTrio(team),lacunas=lacunasDoTrio(team);
   const vez=draft.team.length;
@@ -67,6 +67,8 @@ export function DraftScreen({draft,desafio,primeiroRival,estrelas=false,dicas,po
           <h2>{c.name}</h2>
         </button>
         <SeloDeEstrela id={c.id}/>
+        {/* pedido do jogador: "um selo bonito nos personagens que você já tem na coleção", no canto de cima da carta */}
+        {naColecao?.has(id)&&<span className="dv-colecao" title="Já está na sua coleção" aria-label="Já está na sua coleção"><Check size={14} strokeWidth={3.6}/></span>}
         <div className="dv-corpo">
           {dica&&nivel&&<button className="dv-dica" style={{'--nivel':nivel.cor,'--encaixe':`${dica.encaixe}%`} as CSSProperties} onClick={()=>setPorque(dica)} aria-label={`Por que ${c.name}? ${dica.encaixe}% de encaixe`}>
             {dica.melhor&&<span className="dv-melhor"><Crown size={13}/>MELHOR ESCOLHA</span>}
