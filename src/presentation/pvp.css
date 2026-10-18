@@ -525,3 +525,11 @@ button.pv-time:active:not(:disabled){transform:scale(.98)}
 .pv-rk .rk-podio{margin-top:4px}
 .pv-rk .rk-degrau .cm-avatar{box-shadow:0 0 0 2px #0c120e,0 0 0 3.5px var(--med)}
 .pv-rk .rk-contexto{margin:2px 2px 0}
+
+/* A Lenda (o 6º NPC do treino) luta com a Aura: +10% de Vida em todo o time dele */
+.pv-aura{display:inline-flex;align-items:center;gap:3px;padding:1px 6px;border-radius:99px;font-size:10.5px;font-weight:900;color:#fff;background:linear-gradient(90deg,#9b1c2e,#ff5d7a);box-shadow:0 0 8px #ff5d7a66}
+.pv-aura-banner{width:min(760px,calc(100% - 24px));margin:6px auto -4px;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:6px;padding:8px 12px;border-radius:14px;
+  font-size:12.5px;font-weight:800;color:#fff;text-align:center;background:linear-gradient(90deg,#6e1022,#e0344f,#6e1022);box-shadow:0 0 18px #ff5d7a66;animation:pv-chama-aura 2s ease-in-out infinite}
+.pv-aura-banner b{letter-spacing:1.5px}
+@keyframes pv-chama-aura{50%{box-shadow:0 0 30px #ff5d7a}}
+@media (prefers-reduced-motion:reduce){.pv-aura-banner{animation:none}}

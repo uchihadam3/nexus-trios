@@ -1,6 +1,6 @@
 import { createContext, lazy, Suspense, useContext, useEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode } from 'react';
 import { createPortal } from 'react-dom';
-import { ArrowDownAZ, ArrowLeft, ArrowRight, Award, Check, Clock, Compass, Medal, Star, Handshake, Info, WifiOff, Globe2, Layers, SlidersHorizontal, Sparkles, Crown, Hourglass, Lock, LogOut, RotateCcw, Search, Shield, Swords, Trophy, Users, Wand2, X, Zap } from 'lucide-react';
+import { ArrowDownAZ, ArrowLeft, ArrowRight, Award, Check, Clock, Compass, Medal, Star, Handshake, Info, WifiOff, Globe2, Layers, SlidersHorizontal, Sparkles, Crown, Flame, Hourglass, Lock, LogOut, RotateCcw, Search, Shield, Swords, Trophy, Users, Wand2, X, Zap } from 'lucide-react';
 import { byId, characters } from '../data/characters';
 import { Portrait } from '../components/Portrait';
 import { ArenaDoPvp } from '../components/ArenaDoPvp';
@@ -25,7 +25,7 @@ import '../presentation/pvp.css';
 import '../presentation/ui-fx.css';
 
 /*
- * O PvP (pedido do jogador). Esta tela tem o Treino contra os 5 NPCs, do Iniciante ao Mestre (src/engine/pvp.ts):
+ * O PvP (pedido do jogador). Esta tela tem o Treino contra os 6 NPCs, do Iniciante à Lenda (src/engine/pvp.ts):
  *  1. escolher o NPC (cada um com rating, coleção e o seu placar contra ele);
  *  2. montar 3 times de 3 com a sua coleção (os personagens liberados nas Conquistas), num álbum de cartas;
  *  3. ver os 3 times dos dois lados;
@@ -230,7 +230,7 @@ function Lobby({ colecao, propria, guardado, onTreino, onJogar, online, onCampan
         <CartaoDoEmprestimo propria={propria} />
       </>}
       {aba === 'treino' && <>
-        <p className="pv-aba-dica"><Shield size={13} />Contra os 5 NPCs, do Iniciante ao Mestre. Não conta para nenhum ranking.</p>
+        <p className="pv-aba-dica"><Shield size={13} />Contra os {NPCS.length} NPCs, do Iniciante à Lenda. Não conta para nenhum ranking.</p>
         <div className="pv-npcs curtos">
           {NPCS.map((n, i) => {
             const p = guardado.treino[n.id] ?? { v: 0, d: 0 };
@@ -238,9 +238,9 @@ function Lobby({ colecao, propria, guardado, onTreino, onJogar, online, onCampan
               <AvatarDoNpc npc={n} tamanho={50} />
               <span className="pv-npc-texto">
                 <small>{n.titulo.toUpperCase()}</small><b>{n.nome}</b>
-                <span className="pv-npc-linha"><span className="pv-rating"><Crown size={12} />{n.rating}</span><span className="pv-colecao">{n.colecao} personagens</span></span>
+                <span className="pv-npc-linha"><span className="pv-rating"><Crown size={12} />{n.rating}</span><span className="pv-colecao">{n.colecao} personagens</span>{n.aura ? <span className="pv-aura"><Flame size={11} />+{Math.round(n.aura * 100)}% Vida</span> : null}</span>
               </span>
-              <span className="pv-npc-placar"><span><b className="v">{p.v}V</b> <b className="d">{p.d}D</b></span><span className="pv-caveiras" aria-label={`Dificuldade ${n.nivel} de 5`}>{[1, 2, 3, 4, 5].map((k) => <i key={k} className={k <= n.nivel ? 'on' : ''} />)}</span></span>
+              <span className="pv-npc-placar"><span><b className="v">{p.v}V</b> <b className="d">{p.d}D</b></span><span className="pv-caveiras" aria-label={`Dificuldade ${n.nivel} de ${NPCS.length}`}>{NPCS.map((_, k0) => k0 + 1).map((k) => <i key={k} className={k <= n.nivel ? 'on' : ''} />)}</span></span>
             </button>;
           })}
         </div>
@@ -1032,15 +1032,17 @@ function TelaDoPvp({ colecao, settings, onSettings, onDetails, onJogar, onLutand
   if (etapa.tipo === 'lobby' || etapa.tipo === 'campanha') return <Lobby colecao={colecaoPvp} propria={propria} guardado={guardado} online={online} onTreino={(npc) => { som('ui-arena'); setEtapa({ tipo: 'montar', npc }); }} onJogar={onJogar}
     temCampanha={!!servicoDaCampanha} servicoDaCampanha={servicoDaCampanha} onCampanha={() => { som('ui-arena'); setEtapa({ tipo: 'campanha' }); }} />;
   if (etapa.tipo === 'montar') return <Montar melhores={dono} rival={oponenteDoNpc(etapa.npc)} colecao={colecaoPvp} emprestados={emprestados} inicial={guardado.times} onVoltar={() => setEtapa({ tipo: 'lobby' })} onDetails={onDetails} onPronto={(t) => comecar(etapa.npc, t)} />;
-  if (etapa.tipo === 'apresentar') return <Apresentar rival={oponenteDoNpc(etapa.npc)} partida={etapa.partida} onComecar={() => setEtapa({ tipo: 'escolher', npc: etapa.npc, partida: etapa.partida })} />;
-  if (etapa.tipo === 'escolher') return <><Escolher rival={oponenteDoNpc(etapa.npc)} partida={etapa.partida} onEscolher={(meu) => {
+  // a Lenda luta com a Aura: o aviso fica em cima, do começo ao fim da partida
+  const aura = 'npc' in etapa && etapa.npc.aura ? <div className="pv-aura-banner"><Flame size={16} /><b>AURA DA LENDA</b>+{Math.round(etapa.npc.aura * 100)}% de Vida em todos os personagens de {etapa.npc.nome}</div> : null;
+  if (etapa.tipo === 'apresentar') return <>{aura}<Apresentar rival={oponenteDoNpc(etapa.npc)} partida={etapa.partida} onComecar={() => setEtapa({ tipo: 'escolher', npc: etapa.npc, partida: etapa.partida })} /></>;
+  if (etapa.tipo === 'escolher') return <>{aura}<Escolher rival={oponenteDoNpc(etapa.npc)} partida={etapa.partida} onEscolher={(meu) => {
     // o NPC "pensa" um pouco antes do VS
     const dele = escolhaDoNpc(etapa.npc.nivel as NivelNpc, etapa.partida, etapa.partida.seed + etapa.partida.rodadas.length * 7919);
     window.setTimeout(() => setEtapa({ tipo: 'vs', npc: etapa.npc, partida: etapa.partida, meu, dele }), 900);
   }} /><button className="pv-sair-online" onClick={() => setConfirmar('partida')}><LogOut size={14} />Abandonar partida</button>{confirmaTreino}</>;
-  if (etapa.tipo === 'vs') return <Vs rival={oponenteDoNpc(etapa.npc)} partida={etapa.partida} meu={etapa.meu} dele={etapa.dele} onLutar={() => setEtapa({ ...etapa, tipo: 'luta' })} />;
+  if (etapa.tipo === 'vs') return <>{aura}<Vs rival={oponenteDoNpc(etapa.npc)} partida={etapa.partida} meu={etapa.meu} dele={etapa.dele} onLutar={() => setEtapa({ ...etapa, tipo: 'luta' })} /></>;
   if (etapa.tipo === 'luta') return <><ArenaDoPvp meu={etapa.partida.meus[etapa.meu]!} dele={etapa.partida.deles[etapa.dele]!} seed={sementeDaRodada(etapa.partida.seed, etapa.partida.rodadas.length)}
-    rodada={etapa.partida.rodadas.length + 1} rival={etapa.npc.nome} settings={settings} onSettings={onSettings} podePausar velocidadeLivre
+    rodada={etapa.partida.rodadas.length + 1} rival={etapa.npc.nome} settings={settings} onSettings={onSettings} podePausar velocidadeLivre escala={1 + (etapa.npc.aura ?? 0)}
     atrasoInicial={etapa.retomar ?? 0} comecaPausado={(etapa.retomar ?? 0) > 0} onTempo={(seg) => guardaEtapa(etapa, seg)}
     onFim={(v) => terminouRodada(etapa.npc, etapa.partida, etapa.meu, etapa.dele, v)} onDesistir={() => setConfirmar('luta')} />{confirmaTreino}</>;
   if (etapa.tipo === 'rodada') return <ResultadoDaRodada rival={oponenteDoNpc(etapa.npc)} partida={etapa.partida} onSeguir={() => setEtapa({ tipo: 'escolher', npc: etapa.npc, partida: etapa.partida })} />;

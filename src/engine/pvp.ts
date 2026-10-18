@@ -7,7 +7,7 @@
  * (no máximo 5 rodadas). O rating é o Elo: todo mundo começa igual e ganha ou perde mais ou menos conforme
  * a diferença para o adversário.
  *
- * Treino (pedido do jogador): 5 NPCs, do iniciante ao mestre. Quanto melhor o NPC, mais personagens ele tem
+ * Treino (pedido do jogador): 6 NPCs, do iniciante à lenda (o 6º com Aura). Quanto melhor o NPC, mais personagens ele tem
  * (75 → 400, dos mais fracos para os mais fortes, pela força medida em src/data/forca-dos-rivais.ts) e melhor ele
  * escolhe: o iniciante monta trios de qualquer jeito; o mestre procura os melhores trios entre os 400 (força, combos e
  * as duplas que rendem juntas: notaDoTrio) e escolhe cada rodada pensando nos times que você ainda tem. Treino não
@@ -94,7 +94,7 @@ export const variacaoContraNpc = (a: number, b: number, venceu: boolean) =>
  * Os NPCs de treino
  * ------------------------------------------------------------------------- */
 
-export type NivelNpc = 1 | 2 | 3 | 4 | 5;
+export type NivelNpc = 1 | 2 | 3 | 4 | 5 | 6;
 export interface Npc {
   nivel: NivelNpc; id: string; nome: string; titulo: string; rating: number; cor: string;
   /** O personagem que é a "cara" dele. */
@@ -102,6 +102,8 @@ export interface Npc {
   /** Quantos personagens ele tem (dos mais fracos para os mais fortes). */
   colecao: number;
   fala: string;
+  /** Vida a mais em todo o time dele (a Lenda luta com a Aura, como os chefes do Caminho do Nexus). */
+  aura?: number;
 }
 export const NPCS: readonly Npc[] = [
   { nivel: 1, id: 'novato', nome: 'Bento Novato', titulo: 'Iniciante', rating: 800, cor: '#9aa7b8', avatar: 'patrick', colecao: 75, fala: 'Peguei os que achei bonitos. Bora?' },
@@ -109,6 +111,8 @@ export const NPCS: readonly Npc[] = [
   { nivel: 3, id: 'estrategista', nome: 'Caio Estrategista', titulo: 'Intermediário', rating: 1250, cor: '#6fd0ff', avatar: 'naruto', colecao: 200, fala: 'Cada time meu tem um plano.' },
   { nivel: 4, id: 'profissional', nome: 'Vera Profissional', titulo: 'Profissional', rating: 1550, cor: '#c38aff', avatar: 'itachi', colecao: 300, fala: 'Combo, encaixe e força. Sem erro.' },
   { nivel: 5, id: 'mestre', nome: 'O Mestre do Nexus', titulo: 'Mestre', rating: 1900, cor: '#ffd36b', avatar: 'vegeta', colecao: 400, fala: 'Os 400 são meus. Mostre o que aprendeu.' },
+  // pedido do dono: "um sexto oponente no treino ainda mais forte que o mestre"
+  { nivel: 6, id: 'lenda', nome: 'A Lenda do Nexus', titulo: 'Lenda', rating: 2300, cor: '#ff5d7a', avatar: 'beerus', colecao: 400, aura: 0.15, fala: 'Só jogo com os melhores trios e não erro a escolha. E cada um dos meus luta com +15% de Vida.' },
 ];
 
 /** Os personagens do NPC: os N mais fracos pela força medida (o mestre tem todos). */
@@ -130,6 +134,7 @@ const JEITO: Record<NivelNpc, { amostras: number; erro: number; melhora: number;
   3: { amostras: 25, erro: 0.3, melhora: 60, escolheAoAcaso: 0.25 },
   4: { amostras: 200, erro: 0.05, melhora: 1500, escolheAoAcaso: 0.08 },
   5: { amostras: 300, erro: 0.02, melhora: 2500, escolheAoAcaso: 0.03 },
+  6: { amostras: 400, erro: 0, melhora: 4000, escolheAoAcaso: 0 },
 };
 
 /*
@@ -137,7 +142,7 @@ const JEITO: Record<NivelNpc, { amostras: number; erro: number; melhora: number;
  * dos que cabem na coleção dele, entre os `melhores` primeiros, com um pouco de sorte na ordem (`variacao`, em pontos
  * de taxa de vitória), sem repetir personagem.
  */
-const DA_LISTA: Partial<Record<NivelNpc, { melhores: number; variacao: number }>> = { 4: { melhores: 60, variacao: 10 }, 5: { melhores: 18, variacao: 4 } };
+const DA_LISTA: Partial<Record<NivelNpc, { melhores: number; variacao: number }>> = { 4: { melhores: 60, variacao: 10 }, 5: { melhores: 18, variacao: 4 }, 6: { melhores: 12, variacao: 2 } };
 
 /** O NPC monta os 3 times dele. */
 export function timesDoNpc(nivel: NivelNpc, seed: number, objetivo: (t: readonly string[]) => number = notaDoTrio): Times {
@@ -193,9 +198,9 @@ export function escolhaDoNpc(nivel: NivelNpc, p: PartidaPvp, seed: number): numb
   const meus = timesLivres(p, 'rival'), seus = timesLivres(p, 'eu');
   if (meus.length === 1 || r() < jeito.escolheAoAcaso) return meus[Math.floor(r() * meus.length)]!;
   if (nivel === 2) return meus.reduce((a, b) => (notaDoTrio(p.deles[b]!) > notaDoTrio(p.deles[a]!) ? b : a));
-  // do intermediário para cima: o time com mais chance contra os times que você ainda pode escolher; o mestre pesa
+  // do intermediário para cima: o time com mais chance contra os times que você ainda pode escolher; o mestre (e a lenda) pesa
   // mais os seus times fortes (é com eles que um bom jogador vem) e guarda o time mais forte quando já está na frente
-  const peso = (j: number) => (nivel === 5 ? 1 + notaDoTrio(p.meus[j]!) - Math.min(...seus.map((x) => notaDoTrio(p.meus[x]!))) : 1);
+  const peso = (j: number) => (nivel >= 5 ? 1 + notaDoTrio(p.meus[j]!) - Math.min(...seus.map((x) => notaDoTrio(p.meus[x]!))) : 1);
   const valor = (i: number) => seus.reduce((s, j) => s + peso(j) * chanceDoTrio(p.deles[i]!, p.meus[j]!), 0) / seus.reduce((s, j) => s + peso(j), 0);
   return meus.reduce((a, b) => (valor(b) > valor(a) ? b : a));
 }

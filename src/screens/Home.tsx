@@ -74,11 +74,11 @@ export function Home({comunidade,profile,run,conta,onPlay,onContinue,onAbandon,o
     </div>
 
     <div className="hv-faixas">
-    {/* A Arena PvP (src/screens/PvpScreen.tsx): treino contra os 5 NPCs; o desafio online vem depois */}
-    <button className="hv-conquistas-faixa hv-pvp-faixa" onClick={()=>onNavigate('pvp')} aria-label="Arena PvP: treine contra 5 NPCs">
+    {/* A Arena PvP (src/screens/PvpScreen.tsx): treino contra os 6 NPCs; o desafio online vem depois */}
+    <button className="hv-conquistas-faixa hv-pvp-faixa" onClick={()=>onNavigate('pvp')} aria-label={`Arena PvP: treine contra ${NPCS.length} NPCs`}>
       <span className="hv-cq-icone"><Swords size={22}/></span>
-      <span className="hv-cq-texto"><b>ARENA PvP</b><small>3 times de 3 · treine contra 5 NPCs, do Novato ao Mestre</small></span>
-      <span className="hv-cq-ultimos" aria-hidden="true">{NPCS.slice(2).map(n=><span key={n.id} className="pv-npc-avatar" style={{'--npc':n.cor,'--t':'30px'} as CSSProperties}><Portrait character={byId[n.avatar]}/><i/></span>)}</span>
+      <span className="hv-cq-texto"><b>ARENA PvP</b><small>3 times de 3 · treine contra {NPCS.length} NPCs, do Novato à Lenda</small></span>
+      <span className="hv-cq-ultimos" aria-hidden="true">{NPCS.slice(3).map(n=><span key={n.id} className="pv-npc-avatar" style={{'--npc':n.cor,'--t':'30px'} as CSSProperties}><Portrait character={byId[n.avatar]}/><i/></span>)}</span>
       <ChevronRight size={20}/>
     </button>
     {/* A Comunidade (src/screens/ComunidadeScreen.tsx): quem está online agora, e as privadas não lidas. */}
