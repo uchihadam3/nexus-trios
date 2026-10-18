@@ -52,8 +52,13 @@ if (modo === 'simular') {
   const F = new Float64Array(ids.length), W = new Float64Array(K);
   let lado = 0;
   const p = new Float64Array(ids.length + K + 1), m1 = new Float64Array(p.length), m2 = new Float64Array(p.length);
-  const L2 = 0.002, taxa = 0.03;
-  for (let it = 1; it <= 600; it++) {
+  /*
+   * Sem puxar para zero (L2 = 0) e com 1500 passos: é o ajuste que fez a tabela de 11/10 (refeito sobre as mesmas lutas:
+   * correlação 0,997 e a mesma escala). Com L2 = 0,002 e 600 passos a força saía achatada (metade da escala) e a jornada,
+   * que escolhe os rivais por ela, ficava fácil demais.
+   */
+  const L2 = 0, taxa = 0.03;
+  for (let it = 1; it <= 1500; it++) {
     const g = new Float64Array(p.length);
     for (const l of linhas) {
       let z = lado;

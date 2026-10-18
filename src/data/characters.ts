@@ -277,11 +277,17 @@ function soComPreparo(c:Character):Character{
  */
 const PARA_RIVAL=new Set<Target>(['enemyWeak','enemyStrong','enemyCast','investigated','leastInvestigated','allEnemies','randomEnemy']);
 const cargaParaSi=(alvo:Target,effects:Effect[]):Effect[]=>effects.map(e=>e.kind==='charge'&&PARA_RIVAL.has(e.target??alvo)?{...e,target:'self' as const}:e);
+/*
+ * Com a Carga do básico indo para eles mesmos, Mario e Aang passaram de todo mundo (o 69º e o 269º viraram o 1º e o 2º
+ * mais fortes): o kit deles foi equilibrado com o defeito. A Carga de cada golpe cai de +3% para +1,5% (aprovado pelo dono).
+ */
+const CARGA_DO_BASICO:Record<string,number>={mario:1.5,aang:1.5};
 function cargaEhParaSi(c:Character):Character{
+  const basico=cargaParaSi(c.basic.target,c.basic.effects).map(e=>e.kind==='charge'&&CARGA_DO_BASICO[c.id]!==undefined?{...e,value:CARGA_DO_BASICO[c.id]!}:e);
   return {...c,
     skills:c.skills.map(s=>({...s,effects:cargaParaSi(s.target,s.effects)})) as Character['skills'],
     trait:{...c.trait,effects:cargaParaSi(c.trait.target,c.trait.effects)},
-    basic:{...c.basic,effects:cargaParaSi(c.basic.target,c.basic.effects)}};
+    basic:{...c.basic,effects:basico}};
 }
 export const characters:Character[]=deBase.map(c=>ajustaForca(c,TANQUES.has(c.id),VIDA_DE_TANQUE)).map(ajustaRegeneracao).map(aplicaPedidos).map(aplicaAjusteDeKit).map(aplicaRitmo).map(soComPreparo).map(cargaEhParaSi);
 export const byId:Record<string,Character> = Object.fromEntries(characters.map(c=>[c.id,c]));
