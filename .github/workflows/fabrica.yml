@@ -86,11 +86,13 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          # o ramo de resultados não tem os scripts: guarda o somador antes de trocar de ramo
+          cp scripts/fabrica/somar-confrontos.mjs "${{ runner.temp }}/"
           if git fetch -q --depth 1 origin fabrica-resultados; then git switch -q -c fabrica-resultados FETCH_HEAD; else git switch -q --orphan fabrica-resultados; fi
           mkdir -p "$DESTINO"
           if [ "${{ inputs.plano }}" = confrontos ]; then
             # a tabela personagem × personagem somada das 80 partes (as partes são grandes demais para guardar inteiras)
-            node scripts/fabrica/somar-confrontos.mjs $(ls ${{ runner.temp }}/partes/*.txt | sort -V) 2> "$DESTINO/total.txt" | gzip -9 > "$DESTINO/lutas.txt.gz"
+            node "${{ runner.temp }}/somar-confrontos.mjs" $(ls ${{ runner.temp }}/partes/*.txt | sort -V) 2> "$DESTINO/total.txt" | gzip -9 > "$DESTINO/lutas.txt.gz"
           else
             ls ${{ runner.temp }}/partes/*.txt | sort -V | xargs cat | gzip -9 > "$DESTINO/lutas.txt.gz"
             grep -hv '^#' ${{ runner.temp }}/partes/*.txt | wc -l > "$DESTINO/total.txt"
