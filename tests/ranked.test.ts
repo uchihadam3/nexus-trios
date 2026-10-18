@@ -12,7 +12,8 @@ describe('replay compartilhado da ranqueada',()=>{
     // escala por feitos (src/engine/pontos.ts): dezenas de milhares por luta, e a luta perdida também conta
     expect(first.score).toBeGreaterThan(0);
     expect(first.score).toBeLessThan(first.summaries.length*400_000);
-    expect(first.summaries.length).toBe(first.encountersCleared+(first.encountersCleared===10?0:1));
+    // as 10 lutas de sempre (as extras dos segredos, src/engine/segredos.ts, vêm com índice 10 e 11)
+    expect(first.summaries.filter(s=>s.index<10).length).toBe(first.encountersCleared+(first.encountersCleared===10?0:1));
     expect(rosterFingerprint()).toMatch(/^fnv1a-[0-9a-f]{8}$/);
   });
   it('liga o digest ao run_id, trio, seed e sequência de resultados',async()=>{

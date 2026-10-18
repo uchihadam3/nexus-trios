@@ -103,7 +103,8 @@ describe('Dicas de trio', () => {
     for (let p = 0; p <= 100; p++) expect(PERCENTIS_FINOS[p * 20]).toBe(PERCENTIS[p]);
     // no começo da faixa é 0, no meio ~50, logo antes da próxima ~99
     expect(dentroDaFaixa(PERCENTIS[50]!)).toBe(0);
-    expect(dentroDaFaixa(PERCENTIS_FINOS[50 * 20 + 10]!)).toBe(50);
+    // (as notas são múltiplos de 0,001: um ponto da régua fina pode se repetir, e aí vale o meio do empate)
+    expect(Math.abs(dentroDaFaixa(PERCENTIS_FINOS[50 * 20 + 10]!) - 50)).toBeLessThanOrEqual(3);
     expect(dentroDaFaixa(PERCENTIS[51]! - 1e-9)).toBeGreaterThanOrEqual(95);
     expect(dentroDaFaixa(PERCENTIS[100]!)).toBe(100);
     let antes = -1;
