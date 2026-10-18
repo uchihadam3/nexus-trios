@@ -17,6 +17,7 @@ import { byId, characters } from '../data/characters';
 import { FORCA } from '../data/forca-dos-rivais';
 import { notaDoTrio } from '../presentation/dicas-do-trio';
 import { TRIOS_DO_PVP } from '../data/trios-do-pvp';
+import { META_DA_LENDA } from '../data/meta-da-lenda';
 
 export type Times = [string[], string[], string[]];
 export type Lado = 'eu' | 'rival';
@@ -102,8 +103,6 @@ export interface Npc {
   /** Quantos personagens ele tem (dos mais fracos para os mais fortes). */
   colecao: number;
   fala: string;
-  /** Vida a mais em todo o time dele (a Lenda luta com a Aura, como os chefes do Caminho do Nexus). */
-  aura?: number;
 }
 export const NPCS: readonly Npc[] = [
   { nivel: 1, id: 'novato', nome: 'Bento Novato', titulo: 'Iniciante', rating: 800, cor: '#9aa7b8', avatar: 'patrick', colecao: 75, fala: 'Peguei os que achei bonitos. Bora?' },
@@ -111,8 +110,9 @@ export const NPCS: readonly Npc[] = [
   { nivel: 3, id: 'estrategista', nome: 'Caio Estrategista', titulo: 'Intermediário', rating: 1250, cor: '#6fd0ff', avatar: 'naruto', colecao: 200, fala: 'Cada time meu tem um plano.' },
   { nivel: 4, id: 'profissional', nome: 'Vera Profissional', titulo: 'Profissional', rating: 1550, cor: '#c38aff', avatar: 'itachi', colecao: 300, fala: 'Combo, encaixe e força. Sem erro.' },
   { nivel: 5, id: 'mestre', nome: 'O Mestre do Nexus', titulo: 'Mestre', rating: 1900, cor: '#ffd36b', avatar: 'vegeta', colecao: 400, fala: 'Os 400 são meus. Mostre o que aprendeu.' },
-  // pedido do dono: "um sexto oponente no treino ainda mais forte que o mestre"
-  { nivel: 6, id: 'lenda', nome: 'A Lenda do Nexus', titulo: 'Lenda', rating: 2300, cor: '#ff5d7a', avatar: 'beerus', colecao: 400, aura: 0.15, fala: 'Só jogo com os melhores trios e não erro a escolha. E cada um dos meus luta com +15% de Vida.' },
+  // pedido do dono: "um sexto oponente no treino ainda mais forte que o mestre" — sem Vida a mais ("é uma simulação de
+  // PvP"): ele é mais forte por jogar melhor, com os melhores trios e a escolha pensada na partida inteira
+  { nivel: 6, id: 'lenda', nome: 'A Lenda do Nexus', titulo: 'Lenda', rating: 2300, cor: '#ff5d7a', avatar: 'beerus', colecao: 400, fala: 'Só jogo com os melhores trios e penso a partida inteira antes de escolher.' },
 ];
 
 /** Os personagens do NPC: os N mais fracos pela força medida (o mestre tem todos). */
@@ -142,7 +142,11 @@ const JEITO: Record<NivelNpc, { amostras: number; erro: number; melhora: number;
  * dos que cabem na coleção dele, entre os `melhores` primeiros, com um pouco de sorte na ordem (`variacao`, em pontos
  * de taxa de vitória), sem repetir personagem.
  */
-const DA_LISTA: Partial<Record<NivelNpc, { melhores: number; variacao: number }>> = { 4: { melhores: 60, variacao: 10 }, 5: { melhores: 18, variacao: 4 }, 6: { melhores: 12, variacao: 2 } };
+const DA_LISTA: Partial<Record<NivelNpc, ListaDeTrios>> = { 4: { melhores: 60, variacao: 10 }, 5: { melhores: 18, variacao: 4 },
+  // a Lenda monta pelo meta: os trios que mais vencem dos trios fortes (src/data/meta-da-lenda.ts), não de trios sorteados.
+  // Medido: vence ~63% das partidas inteiras contra o Mestre, sem Vida a mais
+  6: { melhores: 6, variacao: 3, fonte: META_DA_LENDA } };
+interface ListaDeTrios { melhores: number; variacao: number; fonte?: readonly (readonly [string, string, string, number, ...number[]])[] }
 
 /** O NPC monta os 3 times dele. */
 export function timesDoNpc(nivel: NivelNpc, seed: number, objetivo: (t: readonly string[]) => number = notaDoTrio): Times {
@@ -156,14 +160,14 @@ export function sugerirTimes(colecao: readonly string[], seed: number): Times | 
 
 export interface JeitoDeMontar { amostras: number; erro: number; melhora: number }
 /** `aceita`: um limite para os trios (a campanha: o teto de estrelas de cada rival); só se nenhum passar, sai um que não passa. */
-export function montarTimes(colecao: string[], jeito: JeitoDeMontar, lista: { melhores: number; variacao: number } | undefined, seed: number, objetivo: (t: readonly string[]) => number,
+export function montarTimes(colecao: string[], jeito: JeitoDeMontar, lista: ListaDeTrios | undefined, seed: number, objetivo: (t: readonly string[]) => number,
   aceita?: (t: readonly string[]) => boolean): Times {
   const r = sorteio(seed ^ 0x5bd1e995);
   let livres = [...colecao];
   const times: string[][] = [];
   if (lista) {
     const dele = new Set(livres);
-    const opcoes = TRIOS_DO_PVP.filter((t) => t.slice(0, 3).every((id) => dele.has(id as string)) && (!aceita || aceita(t.slice(0, 3) as string[]))).slice(0, lista.melhores)
+    const opcoes = (lista.fonte ?? TRIOS_DO_PVP).filter((t) => t.slice(0, 3).every((id) => dele.has(id as string)) && (!aceita || aceita(t.slice(0, 3) as string[]))).slice(0, lista.melhores)
       .map((t) => ({ trio: t.slice(0, 3) as string[], valor: t[3] + gauss(r) * lista.variacao })).sort((a, b) => b.valor - a.valor);
     for (const o of opcoes) if (times.length < 3 && !o.trio.some((id) => times.flat().includes(id))) times.push(o.trio);
     livres = livres.filter((id) => !times.flat().includes(id));
@@ -189,6 +193,43 @@ export function montarTimes(colecao: string[], jeito: JeitoDeMontar, lista: { me
   return times.sort((a, b) => notaDoTrio(b) - notaDoTrio(a)) as Times;
 }
 
+/*
+ * A Lenda escolhe como um jogador de alto nível: pensa na partida inteira, não só na rodada. Em cada placar possível
+ * (quais times de cada lado já venceram), a chance dela vencer a partida sai das chances de cada time contra cada time e
+ * do placar que cada resultado deixa; a escolha da rodada é a melhor mistura (o jeito de escolher que mais garante,
+ * contra qualquer resposta sua). Ela sorteia dentro dessa mistura: não fica previsível e não vê o time que você escolheu.
+ */
+function escolhaDaLenda(p: PartidaPvp, r: () => number): number {
+  const chance = [0, 1, 2].map((i) => [0, 1, 2].map((j) => chanceDoTrio(p.deles[i]!, p.meus[j]!)));
+  const v = vitoriasDosTimes(p), mascara = (x: boolean[]) => x.reduce((m, b, i) => m | (b ? 1 << i : 0), 0);
+  const memo = new Map<number, { valor: number; mista: number[] }>();
+  const resolve = (minhas: number, suas: number): { valor: number; mista: number[] } => {
+    if (minhas === 7) return { valor: 1, mista: [] };
+    if (suas === 7) return { valor: 0, mista: [] };
+    const chave = minhas * 8 + suas, pronto = memo.get(chave);
+    if (pronto) return pronto;
+    const linhas = [0, 1, 2].filter((i) => !(minhas & (1 << i))), colunas = [0, 1, 2].filter((j) => !(suas & (1 << j)));
+    const a = linhas.map((i) => colunas.map((j) => chance[i]![j]! * resolve(minhas | (1 << i), suas).valor + (1 - chance[i]![j]!) * resolve(minhas, suas | (1 << j)).valor));
+    // a melhor mistura das linhas (passos de 2%): a que deixa a pior resposta sua com a maior chance para ela
+    let melhor = { valor: -1, mista: linhas.map(() => 0) };
+    const passo = 50;
+    for (let x = 0; x <= passo; x++) for (let y = 0; y <= (linhas.length > 1 ? passo - x : 0); y++) {
+      const pesos = linhas.length === 1 ? [1] : linhas.length === 2 ? [x / passo, 1 - x / passo] : [x / passo, y / passo, (passo - x - y) / passo];
+      if (linhas.length === 2 && y > 0) break;
+      const pior = Math.min(...colunas.map((_, c) => pesos.reduce((s, w, l) => s + w * a[l]![c]!, 0)));
+      if (pior > melhor.valor + 1e-12) melhor = { valor: pior, mista: pesos };
+    }
+    const mista = [0, 0, 0]; linhas.forEach((i, l) => { mista[i] = melhor.mista[l]!; });
+    const res = { valor: melhor.valor, mista };
+    memo.set(chave, res);
+    return res;
+  };
+  const { mista } = resolve(mascara(v.rival), mascara(v.eu));
+  let sorte = r();
+  for (const i of [0, 1, 2]) { sorte -= mista[i]!; if (sorte <= 0 && mista[i]! > 0) return i; }
+  return timesLivres(p, 'rival').at(-1)!;
+}
+
 /** A chance de um trio vencer o outro pela nota (força, combos e duplas, medidas em lutas simuladas). */
 export const chanceDoTrio = (a: readonly string[], b: readonly string[]) => 1 / (1 + Math.exp(-(notaDoTrio(a) - notaDoTrio(b))));
 
@@ -197,6 +238,7 @@ export function escolhaDoNpc(nivel: NivelNpc, p: PartidaPvp, seed: number): numb
   const jeito = JEITO[nivel], r = sorteio(seed ^ 0x27d4eb2f);
   const meus = timesLivres(p, 'rival'), seus = timesLivres(p, 'eu');
   if (meus.length === 1 || r() < jeito.escolheAoAcaso) return meus[Math.floor(r() * meus.length)]!;
+  if (nivel === 6) return escolhaDaLenda(p, r);
   if (nivel === 2) return meus.reduce((a, b) => (notaDoTrio(p.deles[b]!) > notaDoTrio(p.deles[a]!) ? b : a));
   // do intermediário para cima: o time com mais chance contra os times que você ainda pode escolher; o mestre (e a lenda) pesa
   // mais os seus times fortes (é com eles que um bom jogador vem) e guarda o time mais forte quando já está na frente
