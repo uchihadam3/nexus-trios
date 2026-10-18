@@ -279,9 +279,10 @@ const PARA_RIVAL=new Set<Target>(['enemyWeak','enemyStrong','enemyCast','investi
 const cargaParaSi=(alvo:Target,effects:Effect[]):Effect[]=>effects.map(e=>e.kind==='charge'&&PARA_RIVAL.has(e.target??alvo)?{...e,target:'self' as const}:e);
 /*
  * Com a Carga do básico indo para eles mesmos, Mario e Aang passaram de todo mundo (o 69º e o 269º viraram o 1º e o 2º
- * mais fortes): o kit deles foi equilibrado com o defeito. A Carga de cada golpe cai de +3% para +1,5% (aprovado pelo dono).
+ * mais fortes): o kit deles foi equilibrado com o defeito. A Carga de cada golpe cai de +3% para +1,5% (aprovado pelo dono);
+ * o Mario, com +1,5%, ainda ficava no topo (0,61): fica com +1%.
  */
-const CARGA_DO_BASICO:Record<string,number>={mario:1.5,aang:1.5};
+const CARGA_DO_BASICO:Record<string,number>={mario:1,aang:1.5};
 function cargaEhParaSi(c:Character):Character{
   const basico=cargaParaSi(c.basic.target,c.basic.effects).map(e=>e.kind==='charge'&&CARGA_DO_BASICO[c.id]!==undefined?{...e,value:CARGA_DO_BASICO[c.id]!}:e);
   return {...c,
