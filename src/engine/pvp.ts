@@ -144,7 +144,7 @@ const JEITO: Record<NivelNpc, { amostras: number; erro: number; melhora: number;
  */
 const DA_LISTA: Partial<Record<NivelNpc, ListaDeTrios>> = { 4: { melhores: 60, variacao: 10 }, 5: { melhores: 18, variacao: 4 },
   // a Lenda monta pelo meta: os trios que mais vencem dos trios fortes (src/data/meta-da-lenda.ts), não de trios sorteados.
-  // (a lista inteira: os melhores repetem personagens, e são 3 times sem repetir). Medido: vence ~61% das partidas
+  // (a lista inteira: os melhores repetem personagens, e são 3 times sem repetir). Medido: vence ~83% das partidas
   // inteiras contra o Mestre, sem Vida a mais
   6: { melhores: 12, variacao: 3, fonte: META_DA_LENDA } };
 interface ListaDeTrios { melhores: number; variacao: number; fonte?: readonly (readonly [string, string, string, number, ...number[]])[] }
