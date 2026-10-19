@@ -83,7 +83,7 @@ export async function onlineCall<T>(action:string,body:Record<string,unknown>={}
   return dados as T;
 }
 
-export interface PublicRun {position:number;id:string;handle:string;score:number;progress:number;team:string[];date:string;seed:number;engineVersion:string;balanceVersion:string;highlights:{survivors?:number;turns?:number;/** lutas vencidas sem perder ninguém (jornadas antigas não têm) */semBaixas?:number;/** montou o trio com as Dicas de trio (cada luta paga CUSTO_DAS_DICAS) */dicas?:boolean}}
+export interface PublicRun {position:number;id:string;handle:string;score:number;progress:number;team:string[];date:string;seed:number;engineVersion:string;balanceVersion:string;highlights:{survivors?:number;turns?:number;/** lutas vencidas sem perder ninguém (jornadas antigas não têm) */semBaixas?:number;/** montou o trio com as Dicas de trio (cada luta paga CUSTO_DAS_DICAS) */dicas?:boolean;/** a Jornada com os seus (sem bônus de estrela, cada luta paga CUSTO_DA_COLECAO) */colecao?:boolean}}
 /*
  * `meus` só vem da função publicada com a FASE K. A versão anterior não manda,
  * e a tela precisa funcionar com as duas: o jogo vai ao ar antes da função.
@@ -91,7 +91,7 @@ export interface PublicRun {position:number;id:string;handle:string;score:number
 export interface MeusTop3 {entries:PublicRun[];vagas:number;precisaSuperar:number|null}
 /* `pagina`, `total` e `temMais` vêm do ranking paginado (FASE L); a função anterior não manda. */
 export interface Leaderboard {mode:'daily'|'weekly'|'season';period:string;entries:PublicRun[];mine:PublicRun|null;details:PublicRun|null;meus?:MeusTop3;pagina?:number;total?:number;temMais?:boolean}
-export interface PartidaDoHistorico {id:string;mode:'daily'|'weekly'|'free';period:string;score:number;progress:number;team:string[];date:string;dicas?:boolean}
+export interface PartidaDoHistorico {id:string;mode:'daily'|'weekly'|'free';period:string;score:number;progress:number;team:string[];date:string;dicas?:boolean;colecao?:boolean}
 /* O ranking de conquistas: quantos personagens cada conta liberou (os últimos liberados só no pódio e na própria conta). */
 export interface EntradaDeConquista {position:number;id:string;handle:string;total:number;date:string;ultimos:string[];mine:boolean}
 export interface RankingDeConquistas {mode:'conquistas';de:number;entries:EntradaDeConquista[];mine:EntradaDeConquista|null;pagina:number;total:number;temMais:boolean}

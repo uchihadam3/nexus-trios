@@ -123,6 +123,8 @@ export default function App(){
   };
   /* O Desafio do Dia escolhido (src/lib/conquistas.ts): a próxima Jornada começa com ele no trio e mais trocas. */
   const desafioPendente=useRef<string|null>(null);
+  /* A Jornada com os seus (nas Conquistas): o trio já escolhido entre os liberados; a próxima Jornada começa com ele. */
+  const colecaoPendente=useRef<string[]|null>(null);
   /*
    * Desistir no meio conta como perder (pedido do dono: "se ela fez 700 pontos e desistiu com 700, conta que ela fez
    * 700"): a jornada de agora fecha com as lutas já terminadas e vai para o ranking.
@@ -138,13 +140,19 @@ export default function App(){
     fechaDesistindo(runRef.current);
     const seed=crypto.getRandomValues(new Uint32Array(1))[0];
     const escolhido=desafioPendente.current;desafioPendente.current=null;
+    // só quem ainda está liberado no aparelho (a escolha foi feita na tela das Conquistas)
+    const dosMeus=colecaoPendente.current?.filter(id=>!!loadProfile().conquistas?.[id]);colecaoPendente.current=null;
+    const colecao=dosMeus?.length===3;
     // os 6 segredos descobertos dão um pulo a mais, para sempre (o prêmio do Livro de Segredos)
     let draft={...newDraft(seed),skips:pulosDaJornada(loadProfile().segredosDescobertos??[])};
     if(escolhido){draft={...draft,team:[escolhido],skips:PULOS_DO_DESAFIO};draft={...draft,candidates:candidates(draft)};}
-    changeRun({seed,team:[],encounters:generateCampaign(seed),index:0,stage:'draft',draft,battle:null,recorded:false,summaries:[],...(escolhido?{desafio:escolhido}:{})});setPaused(false);setConfirmNew(false);setConfirmAbandon(false);navigate('game');
+    // a Jornada com os seus já chega com o trio completo: a escolha mostra o trio e a primeira luta, sem trocas
+    if(colecao&&dosMeus)draft={...draft,team:dosMeus,candidates:[],skips:0};
+    changeRun({seed,team:[],encounters:generateCampaign(seed),index:0,stage:'draft',draft,battle:null,recorded:false,summaries:[],...(escolhido&&!colecao?{desafio:escolhido}:{}),...(colecao?{colecao:true}:{})});setPaused(false);setConfirmNew(false);setConfirmAbandon(false);navigate('game');
   };
-  const jogarDesafio=(id:string)=>{desafioPendente.current=id;if(run&&!jornadaAcabou(run))setConfirmNew(true);else void startNew();};
-  const requestNew=()=>{desafioPendente.current=null;if(run&&!jornadaAcabou(run))setConfirmNew(true);else void startNew();};
+  const jogarDesafio=(id:string)=>{desafioPendente.current=id;colecaoPendente.current=null;if(run&&!jornadaAcabou(run))setConfirmNew(true);else void startNew();};
+  const jogarComOsMeus=(trio:string[])=>{colecaoPendente.current=trio;desafioPendente.current=null;if(run&&!jornadaAcabou(run))setConfirmNew(true);else void startNew();};
+  const requestNew=()=>{desafioPendente.current=null;colecaoPendente.current=null;if(run&&!jornadaAcabou(run))setConfirmNew(true);else void startNew();};
   /*
    * Os rivais da jornada saem assim que o trio fica pronto, não ao entrar na
    * arena: assim a "Primeira luta" mostrada na escolha é exatamente a luta que
@@ -166,8 +174,8 @@ export default function App(){
    * "quero que ela entre direto, sem autorização"): o servidor refaz as lutas
    * com a versão dele e é esse resultado que entra no ranking.
    */
-  const abrirNoRanking=async(team:string[])=>{
-    const pede=()=>Promise.race([onlineCall<{run:{id:string;seed:number;engine_version?:string;roster_fingerprint?:string}}>('start',{mode:'free',team}),new Promise<never>((_,falha)=>setTimeout(()=>falha(new Error('O servidor demorou para responder.')),20000))]);
+  const abrirNoRanking=async(team:string[],colecao=false)=>{
+    const pede=()=>Promise.race([onlineCall<{run:{id:string;seed:number;engine_version?:string;roster_fingerprint?:string}}>('start',{mode:'free',team,...(colecao?{colecao:true}:{})}),new Promise<never>((_,falha)=>setTimeout(()=>falha(new Error('O servidor demorou para responder.')),20000))]);
     let result;
     try{result=await pede();}
     catch(error){
@@ -189,7 +197,7 @@ export default function App(){
     if(!ranked&&contaConectada()){
       setOnlineBusy(true);
       try{
-        const aberta=await abrirNoRanking(team);
+        const aberta=await abrirNoRanking(team,r.colecao===true);
         seed=aberta.seed;ranked={mode:'free',id:aberta.id,status:'playing'};
       }catch(error){console.warn('Jornada fora do ranking:',error instanceof Error?error.message:error);avisaForaDoRanking(error);}
       finally{setOnlineBusy(false);}
@@ -218,7 +226,7 @@ export default function App(){
     if(index===0&&!ranked&&!current.preparado&&current.stage==='draft'&&contaConectada()){
       setOnlineBusy(true);
       try{
-        const aberta=await abrirNoRanking(team);
+        const aberta=await abrirNoRanking(team,current.colecao===true);
         seed=aberta.seed;encounters=generateCampaign(seed,team);ranked={mode:'free',id:aberta.id,status:'playing'};
       }catch(error){console.warn('Jornada fora do ranking:',error instanceof Error?error.message:error);avisaForaDoRanking(error);}
       finally{setOnlineBusy(false);}
@@ -303,23 +311,24 @@ export default function App(){
       const telemetry=d.signals.length?tallyEvents(current.telemetry??emptyTally(),d.signals):current.telemetry??emptyTally();
       let next={...current,battle:d.battle,presentation:checkpointDirection(d),battleSynergies,raioX,telemetry};
       if(d.complete){
-        const summary={...summarizeBattle(current.index,d.battle,battleSynergies,current.dicas===true),recordeAntes:current.recorded?undefined:loadProfile().recordePontos??0,ajudas:ajudasDaLuta(raioX,d.battle)};
+        const summary={...summarizeBattle(current.index,d.battle,battleSynergies,current.dicas===true,current.colecao===true),recordeAntes:current.recorded?undefined:loadProfile().recordePontos??0,ajudas:ajudasDaLuta(raioX,d.battle)};
         next={...next,stage:'result',recorded:true,summaries:current.recorded?current.summaries:[...(current.summaries??[]).filter(s=>s.index!==current.index),summary]};
         if(!current.recorded){
           /* conta ao servidor como a jornada está: se o envio do fim não chegar, o servidor a coloca no ranking sozinho */
           if(current.ranked?.id&&current.ranked.status==='playing'){const lista=next.summaries??[];
             void onlineCall('progresso',{runId:current.ranked.id,lutas:lista.length,vencidas:normaisVencidas(lista),pontos:lista.reduce((n,x)=>n+x.score,0),fim:proximaLuta(current.team,lista)===null,dicas:current.dicas===true}).catch(()=>{});}
-          const won=d.battle.winner==='player',champion=won&&current.index===9;
+          // (a Jornada com os seus não libera Conquistas: o trio já é todo seu)
+          const won=d.battle.winner==='player',champion=won&&current.index===9,libera=champion&&current.colecao!==true;
           /* o objetivo do jogo: pontos. O recorde é o maior total de uma jornada. */
           const total=pontosDaJornada((next.summaries??[]).map(x=>({pontos:x.score,won:x.won})));
           /* Terminou as 10 lutas: o trio libera as Conquistas de quem ainda não tinha (só a primeira vez conta). */
-          if(champion){const novas=liberar(loadProfile().conquistas??{},current.team).novas;if(novas.length)next={...next,conquistasNovas:novas};}
+          if(libera){const novas=liberar(loadProfile().conquistas??{},current.team).novas;if(novas.length)next={...next,conquistasNovas:novas};}
           /* os segredos cumpridos nesta jornada abrem no Livro de Segredos (src/engine/segredos.ts) */
           const segredos=segredosCumpridos(current.team,next.summaries??[]);
           {const ja=loadProfile().segredosDescobertos??[],novos=segredos.filter(x=>!ja.includes(x));if(novos.length)next={...next,livroNovo:[...(next.livroNovo??[]),...novos]};}
           setProfile(p=>{
             const ja=p.segredosDescobertos??[],novosSegredos=segredos.filter(x=>!ja.includes(x));
-            const n={...p,...(champion?{conquistas:liberar(p.conquistas??{},current.team).conquistas}:{}),...(novosSegredos.length?{segredosDescobertos:[...ja,...novosSegredos]}:{}),best:Math.max(p.best,normaisVencidas(next.summaries??[])),wins:p.wins+(won?1:0),victories:p.victories+Number(champion),champion:champion?[...current.team]:p.champion,recordePontos:Math.max(p.recordePontos??0,total)};
+            const n={...p,...(libera?{conquistas:liberar(p.conquistas??{},current.team).conquistas}:{}),...(novosSegredos.length?{segredosDescobertos:[...ja,...novosSegredos]}:{}),best:Math.max(p.best,normaisVencidas(next.summaries??[])),wins:p.wins+(won?1:0),victories:p.victories+Number(champion),champion:champion?[...current.team]:p.champion,recordePontos:Math.max(p.recordePontos??0,total)};
             save('profile',n);return n;
           });
           battleAudio.sound(won?'vitoria':'derrota',PRIORIDADE.grand);}
@@ -453,14 +462,14 @@ export default function App(){
       {screen==='comunidade'&&(comunidadeLigada&&servicoDaComunidade&&euNaComunidade
         ?<Suspense fallback={<p className="cm-carregando-tela">Abrindo a Comunidade…</p>}><ComunidadeScreen servico={servicoDaComunidade} euId={euNaComunidade} euNome={profile.publicHandle??'Você'} naoLidas={comunidade.naoLidas} onLidas={()=>void comunidade.recontar()} abrirCom={abrirConversa} onDetails={setDetails} onDesafiar={pvpOnline?desafiar:undefined}/></Suspense>
         :<div className="cm-sem-conta"><p>Entre na sua conta e escolha seu nome para conversar com a comunidade.</p><button className="primary" onClick={()=>navigate('conta')}>Ir para a Conta</button></div>)}
-      {screen==='conquistas'&&<ConquistasScreen profile={profile} conta={conta!==null&&conta.origem!=='convidado'} onProfile={muda=>setProfile(p=>{const n=muda(p);if(n!==p)save('profile',n);return n;})} onRanking={()=>{setRankingInicial('conquistas');navigate('ranking');}} onDesafio={jogarDesafio}/>}
+      {screen==='conquistas'&&<ConquistasScreen profile={profile} conta={conta!==null&&conta.origem!=='convidado'} onProfile={muda=>setProfile(p=>{const n=muda(p);if(n!==p)save('profile',n);return n;})} onRanking={()=>{setRankingInicial('conquistas');navigate('ranking');}} onDesafio={jogarDesafio} onComOsMeus={jogarComOsMeus}/>}
       {screen==='ranking'&&<RankingScreen dono={dono} inicial={rankingInicial} handle={profile.publicHandle} conta={conta!==null&&conta.origem!=='convidado'} onConta={()=>navigate('conta')} recorde={profile.recordePontos??0}/>}
       {screen==='conta'&&<AccountScreen autenticacao={autenticacao} conta={conta} profile={profile} conectado={onlineConfigured} google={googleConfigured} aoMudarPerfil={p=>{save('profile',p);setProfile(p);}}/>}
       {screen==='help'&&<HelpScreen onPlay={requestNew}/>}
       {screen==='segredos'&&<LivroDeSegredos descobertos={profile.segredosDescobertos??[]} vistos={profile.segredosVistos??[]} onVer={ids=>setProfile(p=>{const ja=p.segredosVistos??[],n={...p,segredosVistos:[...ja,...ids.filter(x=>!ja.includes(x))]};save('profile',n);return n;})}/>}
       {screen==='combos'&&<LivroDeCombos descobertos={profile.combosDescobertos??[]} vistos={profile.combosVistos??[]} onVer={id=>setProfile(p=>{const ja=p.combosVistos??[];if(ja.includes(id))return p;const n={...p,combosVistos:[...ja,id]};save('profile',n);return n;})}/>}
       {screen==='settings'&&<SettingsScreen settings={settings} onChange={changeSettings} onReset={reset} onGaleria={()=>navigate('vfx')}/>}
-      {screen==='game'&&run?.stage==='draft'&&<DraftScreen draft={run.draft} desafio={run.desafio} estrelas={dono} naColecao={colecaoDoJogador} primeiroRival={run.preparado||run.ranked&&run.ranked.mode!=='free'?run.encounters[0]:undefined} dicas={settings.dicasDoTrio&&podeDicas} podeDicas={podeDicas} usouDicas={run.dicas===true} onDicas={ligar=>changeSettings({...settings,dicasDoTrio:ligar})} onPick={id=>changeRun({...run,draft:pickDraft(run.draft,id)})} onSkip={()=>changeRun({...run,draft:skipDraft(run.draft)})} onDetails={setDetails} onStart={()=>void startBattle(0)} onAbandon={()=>setConfirmAbandon(true)}/>}
+      {screen==='game'&&run?.stage==='draft'&&<DraftScreen draft={run.draft} desafio={run.desafio} colecao={run.colecao===true} estrelas={dono} naColecao={colecaoDoJogador} primeiroRival={run.preparado||run.ranked&&run.ranked.mode!=='free'?run.encounters[0]:undefined} dicas={settings.dicasDoTrio&&podeDicas} podeDicas={podeDicas} usouDicas={run.dicas===true} onDicas={ligar=>changeSettings({...settings,dicasDoTrio:ligar})} onPick={id=>changeRun({...run,draft:pickDraft(run.draft,id)})} onSkip={()=>changeRun({...run,draft:skipDraft(run.draft)})} onDetails={setDetails} onStart={()=>void startBattle(0)} onAbandon={()=>setConfirmAbandon(true)}/>}
       {screen==='game'&&run?.stage==='battle'&&run.battle&&<BattleScreen battle={presentation&&direction.current?.battle===run.battle?presentation.battle:run.battle} beat={presentation&&direction.current?.battle===run.battle?presentation.beat:null} index={run.index} name={rivalAtual(run).name} settings={settings} paused={paused||!!details}  onPause={()=>setPaused(!paused)} onAbandon={()=>setConfirmAbandon(true)} onSettings={changeSettings} onExit={()=>{setPaused(true);navigate('home');}} novosNoLivro={novosNoLivro}/>}
       {screen==='game'&&run?.stage==='result'&&<ResultScreen run={run} onNext={()=>{const i=proximaDaJornada(run);if(i!==null)void startBattle(i);}} onRestart={requestNew} onAbandon={()=>setConfirmAbandon(true)} onHome={()=>navigate('home')} onRanking={()=>navigate('ranking')} onRetry={()=>{if(run.ranked)changeRun({...run,ranked:{...run.ranked,status:'validating'}});}} auto={settings.auto} onAuto={auto=>changeSettings({...settings,auto})}/>}
       {screen==='debug'&&import.meta.env.DEV&&<Suspense fallback={<p>Carregando laboratório…</p>}><DebugScreen/></Suspense>}

@@ -1,6 +1,6 @@
 import { useEffect,useState,type CSSProperties,type ReactNode } from 'react';
 import { ConquistasLiberadas } from './ConquistasScreen';
-import { ArrowRight,RotateCcw,Home,Trophy,HeartPulse,TrendingUp,Shield,Crown,Sparkles,Medal,LogOut,Swords,Skull,Zap,Lightbulb,ThumbsDown,ThumbsUp,ArrowDown,Minus,Flame,Star,Lock,type LucideIcon } from 'lucide-react';
+import { ArrowRight,RotateCcw,Home,Trophy,HeartPulse,TrendingUp,Shield,Crown,Sparkles,Medal,LogOut,Swords,Skull,Zap,Lightbulb,ThumbsDown,ThumbsUp,ArrowDown,Minus,Flame,Star,Lock,Award,type LucideIcon } from 'lucide-react';
 import { loadProfile,proximaDaJornada,rivalAtual,type Run } from '../lib/storage';
 import { LUTA_ESTRELA,LUTA_ONZE,PULOS_COM_O_LIVRO_COMPLETO,PULOS_DA_JORNADA,SEGREDO,ehLutaExtra,livroCompleto,segredosCumpridos,segredosDaLuta,type SegredoId } from '../engine/segredos';
 import { ICONE_DO_SEGREDO } from '../components/SeloDoSegredo';
@@ -72,12 +72,12 @@ function NotaDaAjuda({av,i}:{av:AvaliacaoDaAjuda;i:number}){
 
 export function ResultScreen({run,onNext,onRestart,onAbandon,onHome,onRanking,onRetry,auto,onAuto}:{run:Run;onNext:()=>void;onRestart:()=>void;onAbandon:()=>void;onHome:()=>void;onRanking?:()=>void;onRetry?:()=>void;auto:boolean;onAuto:(v:boolean)=>void}){
   const b=run.battle!,won=b.winner==='player',champion=won&&run.index===9,extra=ehLutaExtra(run.index);
-  const resumos=run.summaries?.length?run.summaries:[summarizeBattle(run.index,b,[],run.dicas===true)];
-  const atual=resumos.find(s=>s.index===run.index)??summarizeBattle(run.index,b,[],run.dicas===true);
+  const resumos=run.summaries?.length?run.summaries:[summarizeBattle(run.index,b,[],run.dicas===true,run.colecao===true)];
+  const atual=resumos.find(s=>s.index===run.index)??summarizeBattle(run.index,b,[],run.dicas===true,run.colecao===true);
   /* a próxima luta (a normal, ou uma luta extra liberada por um segredo: src/engine/segredos.ts) */
   const proxima=proximaDaJornada(run),fimDaJornada=proxima===null,segue=!fimDaJornada;
   // resumos salvos antes da conta nova não têm as parcelas: refaz pela luta
-  const p=atual.pontos?.parcelas?atual.pontos:pontosDaLuta(b,run.index,run.dicas===true);
+  const p=atual.pontos?.parcelas?atual.pontos:pontosDaLuta(b,run.index,run.dicas===true,run.colecao===true);
   /* os pontos somam na ordem em que as lutas foram jogadas (a ★ entre a 5 e a 6) */
   const posicao=Math.max(0,resumos.findIndex(s=>s.index===run.index));
   const jornada=(n:number)=>pontosDaJornada(resumos.slice(0,n).map(s=>({pontos:s.score,won:s.won})));
@@ -100,7 +100,7 @@ export function ResultScreen({run,onNext,onRestart,onAbandon,onHome,onRanking,on
   },[vaiSozinha]);
 
   // cada parcela da luta com o seu ícone (a conta vem de src/engine/pontos.ts, a mesma do ranking)
-  const ICONE:Record<string,ReactNode>={dano:<Swords size={15}/>,nocautes:<Skull size={15}/>,apoio:<Shield size={15}/>,jogadas:<Zap size={15}/>,viradas:<TrendingUp size={15}/>,vitoria:<Trophy size={15}/>,efeitos:<Sparkles size={15}/>,vida:<HeartPulse size={15}/>,estrela:<Star size={15}/>,ajuda:<Lightbulb size={15}/>};
+  const ICONE:Record<string,ReactNode>={dano:<Swords size={15}/>,nocautes:<Skull size={15}/>,apoio:<Shield size={15}/>,jogadas:<Zap size={15}/>,viradas:<TrendingUp size={15}/>,vitoria:<Trophy size={15}/>,efeitos:<Sparkles size={15}/>,vida:<HeartPulse size={15}/>,estrela:<Star size={15}/>,ajuda:<Lightbulb size={15}/>,colecao:<Award size={15}/>};
   const parcelas:Parcela[]=p.parcelas.map(x=>({rotulo:x.rotulo,valor:x.valor,icone:ICONE[x.id]}));
 
   /* A sequência do placar: parcelas uma a uma, depois o total sobe, depois o recorde. */

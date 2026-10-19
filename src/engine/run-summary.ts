@@ -30,12 +30,12 @@ export function addSynergies(existing:RunSynergyEvent[],events:BattleEvent[]):Ru
   }
   return next;
 }
-/** `dicas`: o trio foi montado com as Dicas de trio ligadas (cada luta custa CUSTO_DAS_DICAS). */
-export function summarizeBattle(index:number,battle:Battle,synergies:RunSynergyEvent[]=[],dicas=false):RunBattleSummary {
+/** `dicas`: o trio foi montado com as Dicas de trio ligadas (cada luta custa CUSTO_DAS_DICAS). `colecao`: a Jornada com os seus. */
+export function summarizeBattle(index:number,battle:Battle,synergies:RunSynergyEvent[]=[],dicas=false,colecao=false):RunBattleSummary {
   const players=battle.fighters.filter(f=>f.side==='player'),enemies=battle.fighters.filter(f=>f.side==='enemy');
   const survivors=players.filter(f=>f.hp>0).length;
   // a luta extra dos segredos (src/engine/segredos.ts) só vale pontos se o trio vencer
-  const pontos=pontosDaLuta(battle,indiceDosPontos(index),dicas),score=ehLutaExtra(index)&&battle.winner!=='player'?0:pontos.total;
+  const pontos=pontosDaLuta(battle,indiceDosPontos(index),dicas,colecao),score=ehLutaExtra(index)&&battle.winner!=='player'?0:pontos.total;
   const fighters=players.map((f:Fighter)=>({characterId:f.characterId,...f.stats,hp:Math.round(f.hp)}));
   const won=battle.winner==='player';
   return {index,won,time:battle.time,reason:battle.reason,score,pontos,survivors,turns:battle.turns,enemies:enemies.map(f=>f.characterId),fighters,synergies:synergies.map(x=>({...x})),...(won&&battle.umContraTres?{virada:true}:{})};

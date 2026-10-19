@@ -53,7 +53,7 @@ import { PESO_DA_CURA } from '../data/peso-da-cura';
 import { ESTRELAS_DE_PONTOS, bonusDoTrio } from '../data/estrelas-de-pontos';
 import { byId } from '../data/characters';
 
-export type ParcelaId = 'dano' | 'nocautes' | 'apoio' | 'jogadas' | 'efeitos' | 'viradas' | 'vida' | 'vitoria' | 'estrela' | 'ajuda';
+export type ParcelaId = 'dano' | 'nocautes' | 'apoio' | 'jogadas' | 'efeitos' | 'viradas' | 'vida' | 'vitoria' | 'estrela' | 'ajuda' | 'colecao';
 export interface Parcela { id: ParcelaId; rotulo: string; valor: number }
 
 export interface PontosDaLuta {
@@ -107,6 +107,12 @@ export const feitosDaLuta = (bruto: number) => (bruto <= LUTA.cheio ? bruto : LU
 
 /** O que cada luta custa a quem montou o trio com as Dicas de trio ligadas. */
 export const CUSTO_DAS_DICAS = 10_000;
+/*
+ * A Jornada com os seus (pedido do jogador: "fazer uma jornada com os personagens que você tem… cada luta vale 30 mil
+ * pontos a menos"): o trio escolhido entre os personagens já liberados nas Conquistas, sem o bônus das estrelas de
+ * pontos, e cada luta custa isto.
+ */
+export const CUSTO_DA_COLECAO = 30_000;
 
 export const multiplicadorDaLuta = (indice: number) => 1 + PONTOS.porLuta * Math.max(0, indice);
 
@@ -124,7 +130,8 @@ export function feitosDoLutador(f: Fighter): Record<'dano' | 'nocautes' | 'apoio
   };
 }
 
-export function pontosDaLuta(battle: Battle, indice = 0, dicas = false): PontosDaLuta {
+/** `colecao`: a Jornada com os seus (sem o bônus das estrelas de pontos; cada luta custa CUSTO_DA_COLECAO). */
+export function pontosDaLuta(battle: Battle, indice = 0, dicas = false, colecao = false): PontosDaLuta {
   const trio = battle.fighters.filter((f) => f.side === 'player');
   const de_pe = trio.filter((f) => f.hp > 0).length;
   const vidaMedia = Math.max(0, Math.min(1, trio.reduce((n, f) => n + f.hp / f.maxHp, 0) / 3));
@@ -151,13 +158,15 @@ export function pontosDaLuta(battle: Battle, indice = 0, dicas = false): PontosD
   ];
   const parcelas = brutas.map(([id, rotulo, v]) => ({ id, rotulo, valor: Math.round(v) })).filter((p) => p.valor > 0);
   // a estrela do trio (src/data/estrelas-de-pontos.ts): soma o bônus dela aos pontos da luta, antes do custo das Dicas
-  const estrela = bonusDoTrio(trio.map((f) => f.characterId));
+  // (na Jornada com os seus o bônus não vale: pedido do jogador)
+  const estrela: { bonus: number; de?: string } = colecao ? { bonus: 0 } : bonusDoTrio(trio.map((f) => f.characterId));
   if (estrela.de) {
     const base = parcelas.reduce((n, p) => n + p.valor, 0), e = ESTRELAS_DE_PONTOS[estrela.de]!;
     const valor = Math.round(base * estrela.bonus);
     if (valor > 0) parcelas.push({ id: 'estrela', rotulo: `${'★'.repeat(e.estrelas)} ${byId[estrela.de]?.name ?? estrela.de} +${e.bonus}%`, valor });
   }
   if (dicas) parcelas.push({ id: 'ajuda', rotulo: 'Dicas de trio', valor: -CUSTO_DAS_DICAS });
+  if (colecao) parcelas.push({ id: 'colecao', rotulo: 'Jornada com os seus', valor: -CUSTO_DA_COLECAO });
   // a luta nunca vale menos que zero
   return { total: Math.max(0, parcelas.reduce((n, p) => n + p.valor, 0)), parcelas, multiplicador: m, de_pe, vidaMedia };
 }

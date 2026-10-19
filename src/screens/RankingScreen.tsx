@@ -86,13 +86,13 @@ export function Placar({mode,onMode,estado,handle,onConta,onMais,maisCarregando=
         <span className="rk-coroa">{row.position===1?<Crown size={22}/>:<Medal size={18}/>}</span>
         <Trio team={row.team}/>
         <b className="rk-nome">{row.handle}</b>
-        {row.highlights.dicas&&<ComDicas/>}
+        {row.highlights.dicas&&<ComDicas/>}{row.highlights.colecao&&<ComOsSeus/>}
         <strong>{pontos(row.score)}</strong>
         <span className="rk-base">{row.position}</span>
       </button>)}</div>}
       <div className="ranking-list rk-lista">{resto.map((row,i)=><button key={row.id} onClick={()=>setSelected(row)} className={minhas.has(row.id)?'mine':''} style={{'--i':Math.min(i,12)} as CSSProperties}>
         <span className="rk-pos">{row.position}</span>
-        <span className="rk-quem"><b>{row.handle}</b><small>{row.progress}/10{row.highlights.semBaixas!==undefined&&<> · {row.highlights.semBaixas} sem baixas</>}</small>{row.highlights.dicas&&<ComDicas/>}</span>
+        <span className="rk-quem"><b>{row.handle}</b><small>{row.progress}/10{row.highlights.semBaixas!==undefined&&<> · {row.highlights.semBaixas} sem baixas</>}</small>{row.highlights.dicas&&<ComDicas/>}{row.highlights.colecao&&<ComOsSeus/>}</span>
         <Trio team={row.team} tamanho="mini"/>
         <strong>{pontos(row.score)}</strong>
       </button>)}{!rows.length&&<p className="rk-vazio">Ainda não há resultado validado nesta aba. O primeiro lugar está livre!</p>}</div>
@@ -106,6 +106,7 @@ export function Placar({mode,onMode,estado,handle,onConta,onMais,maisCarregando=
         <span className="rk-cartao-pos">#{selected.position}</span>
         <h2>{selected.handle}</h2>
         {selected.highlights.dicas&&<p className="rk-cartao-dicas"><Lightbulb size={15}/>Montou o trio com as Dicas de trio ligadas · cada luta perdeu pontos</p>}
+        {selected.highlights.colecao&&<p className="rk-cartao-dicas"><Award size={15}/>Jornada com os seus: trio da coleção, sem bônus de estrela · cada luta perdeu pontos</p>}
         <div className="rk-cartao-trio">{selected.team.map(id=>byId[id]&&<div key={id} style={{'--character':byId[id].color} as CSSProperties}><Portrait character={byId[id]}/><span>{byId[id].name}</span></div>)}</div>
         <strong className="rk-cartao-pontos">{pontos(selected.score)}<small>pontos</small></strong>
         <div className="rk-cartao-numeros"><span><b>{selected.progress}/10</b><small>lutas</small></span><span><b>{selected.highlights.semBaixas??'—'}</b><small>lutas sem baixas</small></span><span><b>{selected.highlights.turns??0}</b><small>viradas</small></span></div>
@@ -155,11 +156,13 @@ function PainelDoDono({onValidou}:{onValidou:()=>void}){
 
 function Historico({partidas}:{partidas:PartidaDoHistorico[]}){
   if(!partidas.length)return <p className="rk-vazio">Você ainda não tem Jornada validada no ranking. Jogue com a conta conectada: no fim, ela entra sozinha.</p>;
-  return <><p className="rk-contexto">Todas as suas jornadas validadas · {partidas.length}</p><div className="ranking-list rk-lista historico">{partidas.map(p=><div key={p.id} className="historico-linha"><span className="rk-quem"><b>{new Date(p.date).toLocaleDateString('pt-BR')}</b><small>{p.progress}/10 lutas</small>{p.dicas&&<ComDicas/>}</span><Trio team={p.team} tamanho="mini"/><strong>{pontos(p.score)}</strong></div>)}</div></>;
+  return <><p className="rk-contexto">Todas as suas jornadas validadas · {partidas.length}</p><div className="ranking-list rk-lista historico">{partidas.map(p=><div key={p.id} className="historico-linha"><span className="rk-quem"><b>{new Date(p.date).toLocaleDateString('pt-BR')}</b><small>{p.progress}/10 lutas</small>{p.dicas&&<ComDicas/>}{p.colecao&&<ComOsSeus/>}</span><Trio team={p.team} tamanho="mini"/><strong>{pontos(p.score)}</strong></div>)}</div></>;
 }
 
 /* Quem montou o trio com as Dicas de trio aparece marcado no ranking (pedido do jogador). */
 function ComDicas(){return <span className="rk-dicas" title="Usou as Dicas de trio: cada luta perdeu pontos"><Lightbulb size={11}/>com dicas</span>;}
+/* A Jornada com os seus (components/JornadaComOsSeus.tsx): trio da coleção, sem bônus de estrela, cada luta perdeu pontos. */
+function ComOsSeus(){return <span className="rk-dicas" title="Jornada com os seus: trio da coleção, sem bônus de estrela; cada luta perdeu pontos"><Award size={11}/>com os seus</span>;}
 
 /*
  * O ranking de conquistas (pedido do jogador): quem liberou mais personagens.

@@ -6,6 +6,7 @@ import {Portrait} from '../components/Portrait';
 import {TelaTopo} from '../components/Casca';
 import {PERSONAGENS_DA_ABA,PULOS_DO_DESAFIO,TOTAL_DE_CONQUISTAS,ateMeiaNoite,desafioDoDia,juntar,tituloDe} from '../lib/conquistas';
 import {Album} from '../components/Album';
+import {JornadaComOsSeus} from '../components/JornadaComOsSeus';
 import {onlineCall,onlineConfigured,type RankingDeConquistas} from '../lib/online';
 import type {Profile} from '../lib/storage';
 import { universoDaFicha } from '../data/equipes';
@@ -20,11 +21,11 @@ import { universoDaFicha } from '../data/equipes';
  *
  * No topo, o anel com quantos já foram liberados, o título do colecionador e
  * quanto falta para o próximo; com conta, a posição no ranking de conquistas.
- * Embaixo, três sugestões do dia de quem ainda falta.
+ * Embaixo, a Jornada com os seus (o trio dos já liberados) e três sugestões do dia de quem ainda falta.
  */
 const data=(iso:string)=>new Date(iso).toLocaleDateString('pt-BR');
 
-export function ConquistasScreen({profile,conta,onProfile,onRanking,onDesafio}:{profile:Profile;conta:boolean;/** recebe uma atualização (do perfil mais novo), para duas mudanças seguidas não se apagarem */onProfile:(muda:(p:Profile)=>Profile)=>void;onRanking:()=>void;onDesafio:(id:string)=>void}){
+export function ConquistasScreen({profile,conta,onProfile,onRanking,onDesafio,onComOsMeus}:{profile:Profile;conta:boolean;/** recebe uma atualização (do perfil mais novo), para duas mudanças seguidas não se apagarem */onProfile:(muda:(p:Profile)=>Profile)=>void;onRanking:()=>void;onDesafio:(id:string)=>void;/** a Jornada com os seus: o trio escolhido entre os liberados */onComOsMeus:(trio:string[])=>void}){
   const conquistas=profile.conquistas??{};
   const [noRanking,setNoRanking]=useState<{total:number;posicao:number|null}|null>(null);
   /* As do servidor entram no aparelho; e a posição no ranking de conquistas. */
@@ -66,6 +67,8 @@ export function ConquistasScreen({profile,conta,onProfile,onRanking,onDesafio}:{
         {conta&&onlineConfigured&&<button className="cq-no-ranking" onClick={onRanking}><Trophy size={14}/>{noRanking?.posicao?<><b>#{noRanking.posicao}</b> no ranking · {noRanking.total} valendo</>:<>Ranking de conquistas</>}<ChevronRight size={14}/></button>}
       </div>
     </div>
+
+    <JornadaComOsSeus conquistas={conquistas} onJogar={onComOsMeus}/>
 
     <div className={`cq-desafio ${faltam.length?'':'completo'}`}>
       <div className="cq-desafio-topo">
