@@ -1,5 +1,5 @@
 import type { BattleEvent } from '../engine/types';
-import { PRIORIDADE, type Sound } from '../audio/cues';
+import { PRIORIDADE, SOM_DA_FAMILIA, type Sound } from '../audio/cues';
 import { battleAudio } from '../lib/audio';
 import { efeitoDaUnica } from './unicas-efeitos';
 import { rajadaDaChave } from './rajada-da-unica';
@@ -12,6 +12,7 @@ import { PRESENTATION as P } from './config';
 import { FAMILIA_DA_INVOCACAO } from './vfx-atribuicao';
 import { efeitosDoJeito, somDoJeito } from './jeito-efeito';
 import { SOM_DA_ESPERA, SOM_DA_VOLTA, SOM_DO_REVIVER } from './renascer-proprio';
+import { copiaNaTela } from './copia';
 
 /*
  * Os sons de uma luta, quadro a quadro (tirado de dentro do laço da batalha em src/App.tsx para a arena do PvP tocar
@@ -47,7 +48,12 @@ export function somDoCue(d: Direction, cue: Cue): void {
     const criatura=d.active.event.kind==='summon'?d.active.event:undefined;
     if(criatura){const quem=d.active.after.fighters.find(f=>f.uid===criatura.source),fam=quem?FAMILIA_DA_INVOCACAO[quem.characterId]:undefined;battleAudio.sound(fam?fam.replace(/_/g,'-'):'invocacao',PRIORIDADE.importante,0,criatura.id,0);}
     const copiou=d.active.events.find(e=>e.kind==='copy');
-    if(copiou)battleAudio.sound('copia',PRIORIDADE.importante,0,copiou.id,0);
+    if(copiou){
+      battleAudio.sound('copia',PRIORIDADE.importante,0,copiou.id,0);
+      // e o som da habilidade copiada, de quem ela é (presentation/copia.ts), quando o efeito dela aparece
+      const copiada=copiaNaTela(d.active,copiou);
+      if(copiada)battleAudio.sound(SOM_DA_FAMILIA[copiada.familia].impacto,PRIORIDADE.importante,0,copiou.id*10+3,.22);
+    }
     const bum=d.active.events.find(e=>e.kind==='damage'&&e.label==='Explosão');
     if(bum)battleAudio.sound('explosao',PRIORIDADE.importante,0,bum.id,0);
     const anulou=d.active.events.find(e=>e.kind==='resist');

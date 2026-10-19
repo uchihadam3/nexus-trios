@@ -16,6 +16,7 @@ import { preparoDaUnica } from '../presentation/preparo-da-unica';
 import { FAMILIA_DO_REVIVER, RENASCER_PROPRIO } from '../presentation/renascer-proprio';
 import { efeitosDoJeito,VOO_DO_QUIQUE } from '../presentation/jeito-efeito';
 import { FAMILIA_DA_INVOCACAO } from '../presentation/vfx-atribuicao';
+import { copiaNaTela } from '../presentation/copia';
 
 export interface Anchor {x:number;y:number}
 export type Anchors=Record<string,Anchor>;
@@ -261,7 +262,12 @@ export function BattleEffects({battle,beat,anchors,enabled,reduced,medal=80}:{ba
         const DO_STATUS:Partial<Record<string,VfxFamily>>={poison:'acido',bleed:'sangue',cursed:'maldicao',frozen:'bloco_de_gelo',sleep:'sono',blind:'cegueira',barrier:'barreira_magica'};
         if(e.kind==='status'&&e.status&&DO_STATUS[e.status]&&e.target)sobre(e.target,DO_STATUS[e.status]!,`st-${id}-${e.id}`,.06);
         if(e.kind==='resist'&&e.target)sobre(e.target,e.label==='Última resistência'?'ultima_resistencia':'barreira_magica',`res-${id}-${e.id}`,0);
-        if(e.kind==='copy')sobre(e.source,'copia',`cop-${id}-${e.id}`,0);
+        if(e.kind==='copy'){
+          sobre(e.source,'copia',`cop-${id}-${e.id}`,0);
+          // a habilidade copiada com o efeito de quem ela é, em quem a cópia acertou (presentation/copia.ts)
+          const copiada=copiaNaTela(beat,e);
+          if(copiada)for(const alvo of copiada.alvos)sobre(alvo,copiada.familia,`copiada-${id}-${e.id}-${alvo}`,.22);
+        }
         if(e.kind==='damage'&&e.label==='Explosão'&&e.target)sobre(e.target,'explosao',`bum-${id}-${e.id}`,0);
         if(e.kind==='miss'&&e.label==='Esquivou'&&e.target)sobre(e.target,'esquiva',`esq-${id}-${e.id}`,0);
         if(e.kind==='status'&&e.status==='provoked'&&e.target)sobre(e.target,'provocar',`prov-${id}-${e.target}`,.08);

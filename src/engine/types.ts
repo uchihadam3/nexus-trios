@@ -94,6 +94,8 @@ export interface Fighter {
     revives?:number};
 }
 export interface BattleEvent {id:number;time:number;kind:'basic'|'skill'|'cast'|'damage'|'heal'|'shield'|'status'|'interrupt'|'ko'|'synergy'|'charge'|'tempo'|'turn'|'ready'|'block'|'discovery'|'revive'|'cleanse'|'dispel'|'miss'|'resist'|'copy'|'summon'|'unica'|'pulso';source:string;target?:string;skill?:number;label:string;value?:number;visual?:Visual;status?:StatusId;attacker?:string;/** um golpe de uma habilidade de vários golpes (src/engine/golpes.ts): a parte k de `partes` */parte?:number;partes?:number;/** as Mecânicas únicas que mexeram neste dano (quem e o multiplicador): o selo no número */mexeu?:{quem:string;mult:number}[];/** aviso da Mecânica única que só mostra o nome (o que dispara a cada golpe), sem parar a luta */leve?:boolean;
+  /** Copiar habilidade: o índice da habilidade copiada (na ficha de `target`, quem foi copiado). */
+  copiada?:number;
   /** Purificar/Dissipar: os Status que saíram, na ordem. */
   removidos?:StatusId[]}
 export interface TargetDecision {time:number;actor:string;intent:TargetIntent;target:string;score:number;reasons:string[]}

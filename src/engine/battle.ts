@@ -320,14 +320,14 @@ function tiraStatus(b:Battle,source:Fighter,alvo:Fighter,kind:'cleanse'|'dispel'
  * cópia não se copiam.
  */
 const NAO_SE_COPIA=new Set<Effect['kind']>(['deathnote','investigate','revive','copy','store','release','lifesteal']);
-export function ultimaHabilidadeRival(b:Battle,f:Fighter):{quem:Fighter;skill:Skill}|undefined{
+export function ultimaHabilidadeRival(b:Battle,f:Fighter):{quem:Fighter;skill:Skill;indice:number}|undefined{
   for(let i=b.events.length-1;i>=0;i--){
     const e=b.events[i]!;
     if(e.kind!=='skill'||e.skill===undefined)continue;
     const quem=b.fighters.find(x=>x.uid===e.source);
     if(!quem||quem.side===f.side)continue;
     const skill=byId[quem.characterId].skills[e.skill];
-    if(skill&&!skill.effects.some(x=>x.kind==='copy'))return {quem,skill};
+    if(skill&&!skill.effects.some(x=>x.kind==='copy'))return {quem,skill,indice:e.skill};
   }
   return undefined;
 }
@@ -335,7 +335,8 @@ function copia(b:Battle,f:Fighter,fracao:number){
   const achou=ultimaHabilidadeRival(b,f);if(!achou)return;
   const effs=achou.skill.effects.filter(e=>!NAO_SE_COPIA.has(e.kind)).map(e=>(e.kind==='damage'||e.kind==='heal'||e.kind==='shield')?{...e,value:e.value*fracao}:e) as Effect[];
   if(!effs.length)return;
-  emit(b,{kind:'copy',source:f.uid,target:achou.quem.uid,label:`Copiou ${achou.skill.name}`,visual:achou.skill.icon});
+  // `copiada`: qual habilidade de quem foi copiado, para a tela mostrar o efeito e o som dela (presentation/copia.ts)
+  emit(b,{kind:'copy',source:f.uid,target:achou.quem.uid,label:`Copiou ${achou.skill.name}`,visual:achou.skill.icon,copiada:achou.indice});
   applyEffects(b,f,targets(b,f,achou.skill.target,effs),effs);
 }
 /*
