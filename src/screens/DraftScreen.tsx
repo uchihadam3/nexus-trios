@@ -49,7 +49,7 @@ export function DraftScreen({draft,desafio,colecao=false,primeiroRival,estrelas=
       <span className="dv-rotulo">{full?'TRIO COMPLETO':`ESCOLHA ${vez+1} DE 3`}</span>
       <h1>{full?'Pronto para a arena':'Monte seu trio'}</h1>
       {desafio&&byId[desafio]&&<div className="dv-desafio" style={{'--character':byId[desafio].color} as CSSProperties}><Zap size={14}/><span><b>DESAFIO DO DIA</b> · {byId[desafio].name} já está no trio{!full&&<> · <b>{draft.skips}</b> {draft.skips===1?'troca':'trocas'} de opções</>}</span></div>}
-      {colecao&&<div className="dv-desafio dv-com-os-seus"><Award size={14}/><span><b>JORNADA COM OS SEUS</b> · sem bônus de estrela · <b>−{formatarPontos(CUSTO_DA_COLECAO)}</b> por luta</span></div>}
+      {colecao&&<div className="dv-desafio dv-com-os-seus"><Award size={14}/><span><b>JORNADA COM OS SEUS</b> · sem bônus de estrela nem segredos · <b>−{formatarPontos(CUSTO_DA_COLECAO)}</b> por luta</span></div>}
       {/* quem já está no trio abre a ficha (pedido do jogador: "clicar ali em cima e ver o que ele faz, pra ver se combina") */}
       <div className="dv-espacos">{[0,1,2].map(i=>{const c=team[i];return c
         ?<button key={c.id} type="button" className="dv-espaco cheio" style={{'--character':c.color} as CSSProperties} onClick={()=>onDetails(c.id)} aria-label={`Ver a ficha de ${c.name}`}>

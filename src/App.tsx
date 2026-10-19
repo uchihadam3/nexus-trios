@@ -316,7 +316,7 @@ export default function App(){
         if(!current.recorded){
           /* conta ao servidor como a jornada está: se o envio do fim não chegar, o servidor a coloca no ranking sozinho */
           if(current.ranked?.id&&current.ranked.status==='playing'){const lista=next.summaries??[];
-            void onlineCall('progresso',{runId:current.ranked.id,lutas:lista.length,vencidas:normaisVencidas(lista),pontos:lista.reduce((n,x)=>n+x.score,0),fim:proximaLuta(current.team,lista)===null,dicas:current.dicas===true}).catch(()=>{});}
+            void onlineCall('progresso',{runId:current.ranked.id,lutas:lista.length,vencidas:normaisVencidas(lista),pontos:lista.reduce((n,x)=>n+x.score,0),fim:proximaLuta(current.team,lista,current.colecao===true)===null,dicas:current.dicas===true}).catch(()=>{});}
           // (a Jornada com os seus não libera Conquistas: o trio já é todo seu)
           const won=d.battle.winner==='player',champion=won&&current.index===9,libera=champion&&current.colecao!==true;
           /* o objetivo do jogo: pontos. O recorde é o maior total de uma jornada. */
@@ -324,7 +324,8 @@ export default function App(){
           /* Terminou as 10 lutas: o trio libera as Conquistas de quem ainda não tinha (só a primeira vez conta). */
           if(libera){const novas=liberar(loadProfile().conquistas??{},current.team).novas;if(novas.length)next={...next,conquistasNovas:novas};}
           /* os segredos cumpridos nesta jornada abrem no Livro de Segredos (src/engine/segredos.ts) */
-          const segredos=segredosCumpridos(current.team,next.summaries??[]);
+          // (na Jornada com os seus os segredos não valem: nada abre no Livro)
+          const segredos=current.colecao?[]:segredosCumpridos(current.team,next.summaries??[]);
           {const ja=loadProfile().segredosDescobertos??[],novos=segredos.filter(x=>!ja.includes(x));if(novos.length)next={...next,livroNovo:[...(next.livroNovo??[]),...novos]};}
           setProfile(p=>{
             const ja=p.segredosDescobertos??[],novosSegredos=segredos.filter(x=>!ja.includes(x));

@@ -83,9 +83,11 @@ export function ResultScreen({run,onNext,onRestart,onAbandon,onHome,onRanking,on
   const jornada=(n:number)=>pontosDaJornada(resumos.slice(0,n).map(s=>({pontos:s.score,won:s.won})));
   const antes=jornada(posicao),total=jornada(posicao+1);
   /* os segredos cumpridos nesta luta: o aviso grande de SEGREDO DESCOBERTO */
-  const segredosAgora=segredosCumpridos(run.team,resumos.slice(0,posicao+1)),segredosAntes=segredosCumpridos(run.team,resumos.slice(0,posicao));
+  // (na Jornada com os seus os segredos não valem: nem o aviso, nem as lutas extras na trilha)
+  const comSegredos=run.colecao!==true;
+  const segredosAgora=comSegredos?segredosCumpridos(run.team,resumos.slice(0,posicao+1)):[],segredosAntes=comSegredos?segredosCumpridos(run.team,resumos.slice(0,posicao)):[];
   const descobertos=segredosAgora.filter(x=>!segredosAntes.includes(x));
-  const estrelaLiberada=segredosDaLuta(run.team,resumos.slice(0,posicao+1),'estrela').length>0,onzeLiberada=segredosDaLuta(run.team,resumos.slice(0,posicao+1),'onze').length>0;
+  const estrelaLiberada=comSegredos&&segredosDaLuta(run.team,resumos.slice(0,posicao+1),'estrela').length>0,onzeLiberada=comSegredos&&segredosDaLuta(run.team,resumos.slice(0,posicao+1),'onze').length>0;
   const recordeAntes=atual.recordeAntes??0,novoRecorde=total>0&&total>recordeAntes;
   const vitorias=resumos.filter(s=>s.won).length;
 
@@ -180,7 +182,7 @@ export function ResultScreen({run,onNext,onRestart,onAbandon,onHome,onRanking,on
     {champion&&run.conquistasNovas?.length?<ConquistasLiberadas ids={run.conquistasNovas}/>:null}
 
     {/* as 10 lutas e, no lugar delas, a ★ (entre a 5 e a 6) e a 11: trancadas até um segredo abrir */}
-    <ol className="rs-trilha com-extras" aria-label="As lutas da jornada">{[0,1,2,3,4,LUTA_ESTRELA,5,6,7,8,9,LUTA_ONZE].map(i=>{const r=resumos.find(s=>s.index===i),ex=ehLutaExtra(i);
+    <ol className={`rs-trilha ${comSegredos?'com-extras':''}`} aria-label="As lutas da jornada">{(comSegredos?[0,1,2,3,4,LUTA_ESTRELA,5,6,7,8,9,LUTA_ONZE]:[0,1,2,3,4,5,6,7,8,9]).map(i=>{const r=resumos.find(s=>s.index===i),ex=ehLutaExtra(i);
       const liberada=i===LUTA_ESTRELA?estrelaLiberada:i===LUTA_ONZE?onzeLiberada:true;
       const marca=r?(r.won?'ganhou':'perdeu'):i===proxima?'proxima':'';
       const rotulo=r?`${rotuloDaLuta(i)}: ${r.won?'+'+formatarPontos(r.score):ex?'sem pontos':'derrota'}`:ex&&!liberada?`${rotuloDaLuta(i)}: trancada, abre com um segredo`:rotuloDaLuta(i);

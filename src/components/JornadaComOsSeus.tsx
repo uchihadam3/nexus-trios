@@ -10,7 +10,8 @@ import type {Conquistas} from '../lib/conquistas';
 /*
  * A Jornada com os seus (pedido do jogador: "um botão lá nos seus personagens… fazer uma jornada com os personagens que
  * você tem"): o trio sai só dos personagens já liberados nas Conquistas (emprestado não vale), joga a Jornada normal e
- * cada luta custa CUSTO_DA_COLECAO (30 mil); o bônus das estrelas de pontos não vale e nada é liberado.
+ * cada luta custa CUSTO_DA_COLECAO (30 mil); o bônus das estrelas de pontos não vale e nada é liberado (nem Conquistas,
+ * nem segredos: as lutas extras dos segredos não aparecem e nada abre no Livro).
  *
  * Na tela das Conquistas fica a faixa dourada; tocando nela, abre a escolha: só os seus, com busca, e o trio embaixo.
  */
@@ -34,7 +35,7 @@ export function JornadaComOsSeus({conquistas,onJogar}:{conquistas:Conquistas;onJ
       <div className="cq-meus-regras">
         <span><Minus size={12}/>{custo} por luta</span>
         <span><StarOff size={12}/>sem bônus de estrela</span>
-        <span><Lock size={12}/>não libera conquistas</span>
+        <span><Lock size={12}/>não libera conquistas nem segredos</span>
       </div>
       <button className="primary cq-meus-botao" disabled={!!faltam} onClick={()=>setAberta(true)}>
         {faltam?<><Lock size={16}/>Libere mais {faltam} para usar</>:<><Play size={17} fill="currentColor"/>ESCOLHER MEU TRIO</>}
@@ -70,7 +71,7 @@ function Escolha({meus,custo,onFechar,onJogar}:{meus:Character[];custo:string;on
         <div className="cq-meus-trio">{[0,1,2].map(i=>{const c=trio[i]?byId[trio[i]!]:undefined;return c
           ?<button key={c.id} className="cheio" style={{'--character':c.color} as CSSProperties} onClick={()=>troca(c.id)} aria-label={`Tirar ${c.name} do trio`}><Portrait character={c}/><b>{c.name}</b></button>
           :<span key={`v${i}`} className={i===trio.length?'vez':''}><i>?</i><b>{i===trio.length?'escolha':`espaço ${i+1}`}</b></span>;})}</div>
-        <p className="cq-meus-lembrete"><b>−{custo}</b> por luta · sem bônus de estrela · não libera conquistas</p>
+        <p className="cq-meus-lembrete"><b>−{custo}</b> por luta · sem bônus de estrela · não libera conquistas nem segredos</p>
         <button className="primary cq-meus-jogar" disabled={!pronto} onClick={()=>onJogar(trio)}>
           {pronto?<><Play size={18} fill="currentColor"/>JOGAR COM OS MEUS</>:<>Escolha {3-trio.length} {3-trio.length===1?'personagem':'personagens'}</>}
         </button>

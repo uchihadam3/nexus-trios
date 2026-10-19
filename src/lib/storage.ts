@@ -20,7 +20,7 @@ export interface RankedRun {top3?:{periodo?:ResultadoTop3;temporada?:ResultadoTo
 export interface Run {seed:number;team:string[];encounters:Encounter[];index:number;stage:'draft'|'battle'|'result';draft:Draft;battle:Battle|null;recorded:boolean;presentation?:PresentationCheckpoint;summaries?:RunBattleSummary[];battleSynergies?:RunSynergyEvent[];raioX?:EstadoRaioX;telemetry?:ReturnType<typeof emptyTally>;ranked?:RankedRun;
   /** As Dicas de trio ficaram ligadas em algum momento da escolha: cada luta desta jornada custa CUSTO_DAS_DICAS (10 mil). */
   dicas?:boolean;
-  /** A Jornada com os seus: o trio veio das Conquistas (sem bônus de estrela, cada luta custa CUSTO_DA_COLECAO, 30 mil). */
+  /** A Jornada com os seus: o trio veio das Conquistas (sem bônus de estrela, sem segredos, cada luta custa CUSTO_DA_COLECAO, 30 mil). */
   colecao?:boolean;
   /** Quem esta jornada liberou nas Conquistas (terminou as 10 lutas): a tela de resultado comemora. */
   conquistasNovas?:string[];
@@ -55,7 +55,7 @@ export function loadProfile():Profile{const p=read('profile') as (Profile&{progr
 /** O rival de uma luta da jornada (as normais e as extras dos segredos, src/engine/segredos.ts). */
 export const rivalAtual=(r:Run,i=r.index)=>rivalDaLuta(r.seed,r.team,r.encounters,i,r.summaries??[]);
 /** A próxima luta depois da que acabou de terminar (0–9, a ★ ou a 11), ou null se a jornada acabou. */
-export const proximaDaJornada=(r:Run)=>proximaLuta(r.team,r.summaries??[]);
+export const proximaDaJornada=(r:Run)=>proximaLuta(r.team,r.summaries??[],r.colecao===true);
 /** A jornada acabou: perdeu uma luta normal ou terminou a última (a 10, ou a 11 liberada por um segredo). */
 export const jornadaAcabou=(r:Run)=>r.stage==='result'&&proximaDaJornada(r)===null;
 export function loadRun():Run|null{const r=read('run') as Run|null;if(!r||!['draft','battle','result'].includes(r.stage)||!Array.isArray(r.team)||r.team.some(id=>!byId[id])||!Array.isArray(r.encounters)||r.encounters.length!==10||!r.draft||!Number.isInteger(r.index)||r.index<0||r.index>11)return null;if(r.stage!=='draft'&&(!r.battle||r.battle.version!==1||r.battle.fighters.length!==6))return null;r.telemetry??=emptyTally();if(r.battle){for(const f of r.battle.fighters){if(f.characterId!=='light')continue;f.discovered??={};for(const [uid,value] of Object.entries(f.investigation)){const target=r.battle.fighters.find(x=>x.uid===uid);if(value>=100&&target&&!f.discovered[uid])f.discovered[uid]=byId[target.characterId].deathNoteCompatible?'vulnerable':'immune';}}}return r;}

@@ -40,7 +40,7 @@ export async function runDigest(id:string,team:string[],seed:number,outcomes:boo
  * mesmos para todo mundo e o trio não pode usar nenhum deles.
  */
 /** `dicas`: o jogador montou o trio com as Dicas de trio ligadas (−10 mil por luta, src/engine/pontos.ts). */
-/** `colecao`: a Jornada com os seus (o trio dos personagens liberados; sem bônus de estrela, −30 mil por luta). */
+/** `colecao`: a Jornada com os seus (o trio dos personagens liberados; sem bônus de estrela, −30 mil por luta, sem segredos). */
 /**
  * `ate`: quantas lutas o jogador chegou a terminar antes de desistir (desistir conta como perder: valem os pontos
  * feitos até ali), contando as lutas extras dos segredos na ordem em que vieram. Sem `ate`, a jornada vai até a
@@ -53,7 +53,7 @@ export function replayRanked(team:string[],seed:number,livre=false,dicas=false,a
   let score=0;
   const summaries:RunBattleSummary[]=[];
   // a ordem das lutas: 1…5, a luta ★ (se um segredo liberou), 6…10, a luta 11 (se um segredo liberou): src/engine/segredos.ts
-  for(let index=proximaLuta(team,summaries);index!==null;index=proximaLuta(team,summaries)){
+  for(let index=proximaLuta(team,summaries,colecao);index!==null;index=proximaLuta(team,summaries,colecao)){
     if(ate!==undefined&&summaries.length>=ate)break;
     const encounter=rivalDaLuta(seed,team,encounters,index,summaries);
     const battle=createBattle(team,encounter.team,seedDaLuta(seed,index),encounter.scale);
@@ -63,7 +63,8 @@ export function replayRanked(team:string[],seed:number,livre=false,dicas=false,a
     // a conta da tela (src/engine/pontos.ts): a luta perdida também soma o que o trio fez nela (a extra, só vencida)
     score+=summary.score;
   }
-  const cleared=normaisVencidas(summaries),segredos=segredosCumpridos(team,summaries);
+  // na Jornada com os seus os segredos não valem (nem as lutas extras, nem o Livro)
+  const cleared=normaisVencidas(summaries),segredos=colecao?[]:segredosCumpridos(team,summaries);
   return {seed,team,encountersCleared:cleared,score,summaries,highlights:{survivors:summaries.at(-1)?.survivors??0,turns:summaries.reduce((n,s)=>n+s.turns,0),
     // lutas vencidas sem perder ninguém do trio (o "de pé no fim" da luta perdida era quase sempre 0)
     semBaixas:summaries.filter(s=>s.won&&s.survivors===3).length,...(dicas?{dicas:true}:{}),...(colecao?{colecao:true}:{}),...(segredos.length?{segredos}:{})}};

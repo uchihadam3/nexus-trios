@@ -6,8 +6,9 @@ import { replayRanked } from '../src/engine/ranked';
 import { ESTRELAS_DE_PONTOS } from '../src/data/estrelas-de-pontos';
 import { byId, characters } from '../src/data/characters';
 import { recusaDaColecao } from '../supabase/functions/ranked-api/colecao';
+import { LUTA_ESTRELA, proximaLuta } from '../src/engine/segredos';
 
-/* A Jornada com os seus (components/JornadaComOsSeus.tsx): o trio da coleção, sem bônus de estrela, −30 mil por luta. */
+/* A Jornada com os seus (components/JornadaComOsSeus.tsx): o trio da coleção, sem bônus de estrela nem segredos, −30 mil por luta. */
 describe('Jornada com os seus', () => {
   const estrela = Object.keys(ESTRELAS_DE_PONTOS)[0]!;
   const trio = [estrela, ...characters.map((c) => c.id).filter((id) => id !== estrela && !ESTRELAS_DE_PONTOS[id]).slice(0, 2)];
@@ -31,6 +32,18 @@ describe('Jornada com os seus', () => {
     // as mesmas lutas (a regra só mexe nos pontos), cada uma valendo menos
     expect(comOsSeus.summaries.map((s) => s.won)).toEqual(normal.summaries.map((s) => s.won));
     for (const [i, s] of comOsSeus.summaries.entries()) expect(s.score).toBeLessThanOrEqual(Math.max(0, normal.summaries[i]!.score - CUSTO_DA_COLECAO));
+  }, 60000);
+
+  it('os segredos não valem: sem as lutas extras e sem nada no Livro', () => {
+    // a jornada do teste dos segredos (tests/segredos.test.ts): vence as 10 e abre a ★ e a 11
+    const trioDosSegredos = ['sekhmet', 'poisonivy', 'jake'], seed = 1936013064;
+    const normal = replayRanked(trioDosSegredos, seed, true), comOsSeus = replayRanked(trioDosSegredos, seed, true, false, undefined, true);
+    expect(normal.summaries.map((s) => s.index)).toContain(LUTA_ESTRELA);
+    expect(normal.highlights.segredos?.length).toBeGreaterThan(0);
+    expect(comOsSeus.summaries.map((s) => s.index)).toEqual([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+    expect(comOsSeus.encountersCleared).toBe(10);
+    expect(comOsSeus.highlights).not.toHaveProperty('segredos');
+    expect(proximaLuta(trioDosSegredos, comOsSeus.summaries, true)).toBeNull();
   }, 60000);
 
   it('só com os liberados da conta e só na Jornada normal', () => {
