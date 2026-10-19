@@ -97,12 +97,14 @@ export function segredosDaLuta(team: readonly string[], lutas: readonly LutaDoSe
  * A próxima luta da jornada (0–9, LUTA_ESTRELA ou LUTA_ONZE), ou null se a jornada acabou. `lutas` na ordem em que
  * foram jogadas: 1…5, ★ (se liberada), 6…10, 11 (se liberada).
  */
-export function proximaLuta(team: readonly string[], lutas: readonly LutaDoSegredo[]): number | null {
+/** `semSegredos`: a Jornada com os seus (pedido do jogador: lá os segredos não valem), só as 10 lutas de sempre. */
+export function proximaLuta(team: readonly string[], lutas: readonly LutaDoSegredo[], semSegredos = false): number | null {
   if (!lutas.length) return 0;
   const ultima = lutas[lutas.length - 1]!;
   if (ultima.index === LUTA_ONZE) return null;
   if (ultima.index === LUTA_ESTRELA) return 5;
   if (!ultima.won) return null;
+  if (semSegredos) return ultima.index === 9 ? null : ultima.index + 1;
   if (ultima.index === 4 && !lutas.some((l) => l.index === LUTA_ESTRELA) && segredosDaLuta(team, lutas, 'estrela').length) return LUTA_ESTRELA;
   if (ultima.index === 9) return segredosDaLuta(team, lutas, 'onze').length ? LUTA_ONZE : null;
   return ultima.index + 1;

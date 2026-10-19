@@ -17,18 +17,21 @@
  * vencem as 10 lutas), arredondado para cima em 5%: ★★★ +35% a +85%, ★★ +15% a +60%, ★ +5% a +40%.
  * Depois o jogador pediu metade (o bônus já ensina o caminho; "deixa 50% só"): cada um caiu pela metade, arredondado
  * para o inteiro mais perto (,5 para cima): ★★★ +18% a +43%, ★★ +8% a +30%, ★ +3% a +20%. Os outros ficam iguais.
+ * Conferido de novo em 60.000 jornadas com as habilidades corrigidas (pedido do dono, a média por grupo ficou parecida:
+ * ★★★ 651 mil, ★★ 617, ★ 598, sem estrela 607): os quatro que faziam menos que qualquer um com estrela ganharam estrelas
+ * (Light Yagami 431 mil → ★★★ +43%; Chucky 490 e Vash 491 → ★★ +28%; King Kong 496 → ★★ +25%, perto de 560–575 mil),
+ * e os dois que tinham passado muito da média caíram um pouco (Geralt 888 mil, +35% → +25%; Ben 10 848 mil, +38% → +28%).
  */
 export interface EstrelaDePontos { estrelas: 1 | 2 | 3; bonus: number }
 
 export const ESTRELAS_DE_PONTOS: Record<string, EstrelaDePontos> = {
   // ★★★
   jacksparrow: { estrelas: 3, bonus: 43 }, // Jack Sparrow
-  ben10: { estrelas: 3, bonus: 38 }, // Ben 10
+  light: { estrelas: 3, bonus: 43 }, // Light Yagami
   coringa: { estrelas: 3, bonus: 38 }, // Coringa
   dash: { estrelas: 3, bonus: 38 }, // Flecha Pêra
   rambo: { estrelas: 3, bonus: 38 }, // Rambo
   aku: { estrelas: 3, bonus: 35 }, // Aku
-  geralt: { estrelas: 3, bonus: 35 }, // Geralt de Rívia
   kratos: { estrelas: 3, bonus: 35 }, // Kratos
   megumi: { estrelas: 3, bonus: 35 }, // Megumi Fushiguro
   yor: { estrelas: 3, bonus: 35 }, // Yor Forger
@@ -43,6 +46,7 @@ export const ESTRELAS_DE_PONTOS: Record<string, EstrelaDePontos> = {
   cloud: { estrelas: 3, bonus: 30 }, // Cloud Strife
   valak: { estrelas: 3, bonus: 30 }, // Valak
   anubis: { estrelas: 3, bonus: 28 }, // Anúbis
+  ben10: { estrelas: 3, bonus: 28 }, // Ben 10
   cheetara: { estrelas: 3, bonus: 28 }, // Cheetara
   finn: { estrelas: 3, bonus: 28 }, // Finn
   hiei: { estrelas: 3, bonus: 28 }, // Hiei
@@ -54,6 +58,7 @@ export const ESTRELAS_DE_PONTOS: Record<string, EstrelaDePontos> = {
   xenomorph: { estrelas: 3, bonus: 28 }, // Xenomorfo
   agentsmith: { estrelas: 3, bonus: 25 }, // Agente Smith
   buzz: { estrelas: 3, bonus: 25 }, // Buzz Lightyear
+  geralt: { estrelas: 3, bonus: 25 }, // Geralt de Rívia
   lelouch: { estrelas: 3, bonus: 25 }, // Lelouch
   doomslayer: { estrelas: 3, bonus: 23 }, // Doom Slayer
   erza: { estrelas: 3, bonus: 23 }, // Erza Scarlet
@@ -64,10 +69,13 @@ export const ESTRELAS_DE_PONTOS: Record<string, EstrelaDePontos> = {
   scooby: { estrelas: 3, bonus: 18 }, // Scooby-Doo
   // ★★
   stitch: { estrelas: 2, bonus: 30 }, // Stitch
+  chucky: { estrelas: 2, bonus: 28 }, // Chucky
+  vash: { estrelas: 2, bonus: 28 }, // Vash
   dannyphantom: { estrelas: 2, bonus: 25 }, // Danny Phantom
   gengar: { estrelas: 2, bonus: 25 }, // Gengar
   ghostrider: { estrelas: 2, bonus: 25 }, // Motoqueiro Fantasma
   jin: { estrelas: 2, bonus: 25 }, // Jin Kazama
+  kingkong: { estrelas: 2, bonus: 25 }, // King Kong
   michelangelo: { estrelas: 2, bonus: 25 }, // Michelangelo
   moonknight: { estrelas: 2, bonus: 25 }, // Cavaleiro da Lua
   papaleguas: { estrelas: 2, bonus: 25 }, // Papa-Léguas
