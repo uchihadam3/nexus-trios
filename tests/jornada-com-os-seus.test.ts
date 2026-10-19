@@ -29,14 +29,15 @@ describe('Jornada com os seus', () => {
     const seed = 4242, normal = replayRanked(trio, seed, true), comOsSeus = replayRanked(trio, seed, true, false, undefined, true);
     expect(comOsSeus.highlights.colecao).toBe(true);
     expect(normal.highlights).not.toHaveProperty('colecao');
-    // as mesmas lutas (a regra só mexe nos pontos), cada uma valendo menos
-    expect(comOsSeus.summaries.map((s) => s.won)).toEqual(normal.summaries.map((s) => s.won));
-    for (const [i, s] of comOsSeus.summaries.entries()) expect(s.score).toBeLessThanOrEqual(Math.max(0, normal.summaries[i]!.score - CUSTO_DA_COLECAO));
+    // as mesmas 10 lutas de sempre (a regra só mexe nos pontos; sem as extras dos segredos), cada uma valendo menos
+    const dasDez = (j: typeof normal) => j.summaries.filter((s) => s.index < 10);
+    expect(dasDez(comOsSeus).map((s) => s.won)).toEqual(dasDez(normal).map((s) => s.won));
+    for (const s of dasDez(comOsSeus)) expect(s.score).toBeLessThanOrEqual(Math.max(0, dasDez(normal).find((x) => x.index === s.index)!.score - CUSTO_DA_COLECAO));
   }, 60000);
 
   it('os segredos não valem: sem as lutas extras e sem nada no Livro', () => {
     // a jornada do teste dos segredos (tests/segredos.test.ts): vence as 10 e abre a ★ e a 11
-    const trioDosSegredos = ['sekhmet', 'poisonivy', 'jake'], seed = 1936013064;
+    const trioDosSegredos = ['sekhmet', 'poisonivy', 'jake'], seed = 1904210971;
     const normal = replayRanked(trioDosSegredos, seed, true), comOsSeus = replayRanked(trioDosSegredos, seed, true, false, undefined, true);
     expect(normal.summaries.map((s) => s.index)).toContain(LUTA_ESTRELA);
     expect(normal.highlights.segredos?.length).toBeGreaterThan(0);
