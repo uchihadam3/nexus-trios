@@ -79,14 +79,12 @@ describe('catálogo competitivo de personagens',()=>{
     expect(get('kaiba').trait.on).toBe('dealt');
     expect(get('kaiba').skills[2].preparation).toBeGreaterThan(2);
   });
-  it('gates invocações finais atrás da construção e descarrega energia realmente armazenada',()=>{
+  it('as habilidades de abertura saem com qualquer rival vulnerável e descarrega energia realmente armazenada',()=>{
     const get=(id:string)=>expandedCharacters.find(c=>c.id===id)!;
-    for(const id of ['yugi','doctordoom']){
-      expect(get(id).skills[1].requiresSkills).toContain(0);
-      expect(get(id).skills[2].requiresSkills).toEqual([0,1]);
-    }
-    expect(get('kaiba').skills[1].requiresSkills).toContain(0);
-    expect(get('kaiba').skills[2].requiresSkills).toContain(1);
+    // sem ordem escondida (pedido do dono: o Doutor Destino só usava depois da própria Armadura, que já marcava o rival):
+    // basta um rival vulnerável, não importa quem deixou
+    for(const [id,habilidades] of [['yugi',[1,2]],['doctordoom',[1,2]],['kaiba',[1,2]],['frieza',[1]],['vision',[1]]] as const)
+      for(const i of habilidades){expect(get(id).skills[i].requiresSkills??[],`${id} ${i}`).toEqual([]);expect(get(id).skills[i].condition,`${id} ${i}`).toBe('vulnerable');}
     for(const id of ['blackpanther','captainmarvel']){
       expect(get(id).trait.effects.some(e=>e.kind==='store'&&e.cap>0)).toBe(true);
       expect(get(id).skills[2].condition).toBe('storedEnergy');
