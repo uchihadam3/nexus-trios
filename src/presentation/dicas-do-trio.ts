@@ -126,8 +126,8 @@ export function posicaoDoTrio(team: readonly string[]): { pct: number; dentro: n
  * As estrelas do time, de 1 a 7, pela porcentagem de trios que ele supera. Os cortes ficam onde a chance de vencer a
  * jornada mais sobe (pedido do dono: "aqui deu um salto, aqui faz sentido mudar de estrela"), com mais trios embaixo e o
  * 7★ só no topo 2%. Medido em 60.000 jornadas de trios sorteados (motor das habilidades que só miram quem acertam):
- *   1★ até 24% (vence 1,7%) · 2★ 24–38% (4,8%) · 3★ 38–56% (8,5%) · 4★ 56–75% (14,8%) · 5★ 75–89% (26,1%)
- *   · 6★ 89–98% (44%) · 7★ 98%+ (56%)
+ *   1★ até 24% (vence 1,6%) · 2★ 24–38% (4,6%) · 3★ 38–56% (8,1%) · 4★ 56–75% (14,1%) · 5★ 75–89% (25,7%)
+ *   · 6★ 89–98% (44%) · 7★ 98%+ (55%) — medido de novo com o Freeza e o Doutor Destino sem a ordem escondida
  */
 export const ESTRELAS_MAXIMAS = 7;
 export const CORTES_DAS_ESTRELAS: readonly number[] = [24, 38, 56, 75, 89, 98];
