@@ -3,16 +3,16 @@
  * lutas de verdade (scripts/meta-da-lenda.ts). [trio, % de vitórias contra os fortes, lutas]. Não editar à mão.
  */
 export const META_DA_LENDA: readonly (readonly [string, string, string, number, number])[] = [
-  ["chopper", "link", "harrypotter", 71.1, 204],
-  ["akuma", "shaka", "agent47", 68.6, 156],
-  ["galactus", "groot", "eren", 65.7, 204],
-  ["orihime", "sailormoon", "capitaoplaneta", 64.2, 204],
-  ["johnwick", "shaka", "akuma", 59.7, 144],
-  ["muzan", "chucky", "inosuke", 58.3, 168],
-  ["shaka", "seiya", "frieren", 57.7, 156],
-  ["galactus", "drax", "groot", 56.9, 204],
-  ["ikki", "harrypotter", "link", 55.9, 204],
-  ["orihime", "coragem", "sailormoon", 55.4, 204],
-  ["shaka", "arthurmorgan", "billcipher", 54.2, 144],
-  ["hadescz", "shaka", "pennywise", 53.5, 144],
+  ["hadescz", "shaka", "pennywise", 79.8, 84],
+  ["camus", "pennywise", "hadescz", 74.1, 108],
+  ["giorno", "hadescz", "aang", 74.0, 96],
+  ["shaka", "arthurmorgan", "billcipher", 70.8, 144],
+  ["yugi", "shaka", "hadescz", 66.7, 84],
+  ["starlord", "megatron", "aang", 66.7, 180],
+  ["camus", "seiya", "hadescz", 64.8, 108],
+  ["camus", "hadescz", "johnwick", 63.0, 108],
+  ["akuma", "shaka", "agent47", 62.9, 132],
+  ["senku", "hadescz", "giorno", 62.0, 108],
+  ["hadescz", "johnwick", "shaka", 60.7, 84],
+  ["hyoga", "billcipher", "predator", 59.4, 180],
 ];

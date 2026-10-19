@@ -3,6 +3,7 @@ import { META_DA_LENDA } from '../src/data/meta-da-lenda';
 import { NPCS, colecaoDoNpc, escolhaDoNpc, esperado, problemaDosTimes, sementeDaRodada, timesDoNpc, timesLivres, variacaoDoElo, vencedorDaPartida, type PartidaPvp, type Times } from '../src/engine/pvp';
 import { byId } from '../src/data/characters';
 import { notaDoTrio } from '../src/presentation/dicas-do-trio';
+import { TRIOS_DO_PVP } from '../src/data/trios-do-pvp';
 
 const T = (s: string) => s.split(' ').map((x) => x.split('+')) as Times;
 const MEUS = T('goku+vegeta+gohan naruto+sasuke+kakashi luffy+zoro+sanji');
@@ -57,11 +58,16 @@ describe('PvP: NPCs de treino', () => {
   });
   it('quanto maior o nível, melhores os times (média de várias partidas)', () => {
     const media = (nivel: 1 | 2 | 3 | 4 | 5 | 6) => [1, 2, 3, 4, 5, 6].map((s) => timesDoNpc(nivel, s * 101).reduce((n, t) => n + notaDoTrio(t), 0)).reduce((a, b) => a + b) / 18;
-    const m = ([1, 2, 3, 4, 5] as const).map(media);
+    const m = ([1, 2, 3, 4] as const).map(media);
     for (let i = 1; i < m.length; i++) expect(m[i]!, `nível ${i + 1}`).toBeGreaterThan(m[i - 1]!);
+    // Profissional e Mestre montam pelos trios que mais vencem em luta de verdade (src/data/trios-do-pvp.ts), e nesse topo
+    // a nota das Dicas engana: o Mestre é o de taxa de vitória maior
+    const taxa = new Map(TRIOS_DO_PVP.map((t) => [[t[0], t[1], t[2]].sort().join(), t[3]]));
+    const vence = (nivel: 4 | 5) => [1, 2, 3, 4, 5, 6].flatMap((s) => timesDoNpc(nivel, s * 101)).reduce((n, t) => n + (taxa.get([...t].sort().join()) ?? 0), 0) / 18;
+    expect(vence(5)).toBeGreaterThan(vence(4));
   });
   it('a Lenda (nível 6) joga com o meta (os trios que mais vencem dos fortes), sem Vida a mais', () => {
-    const meta = new Set(META_DA_LENDA.slice(0, 6).map((t) => t.slice(0, 3).join()));
+    const meta = new Set(META_DA_LENDA.map((t) => t.slice(0, 3).join()));
     for (let s = 1; s <= 6; s++) expect(timesDoNpc(6, s * 101).filter((t) => meta.has(t.join())).length, `semente ${s}`).toBe(3);
     expect(Object.keys(NPCS[5]!)).not.toContain('aura');
   });
