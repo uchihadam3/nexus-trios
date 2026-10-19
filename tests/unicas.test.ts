@@ -96,6 +96,22 @@ describe('Mecânicas únicas', () => {
     expect(guts.hp).toBe(0);
   });
 
+  it('o que vale para "o trio" vale também para quem tem a mecânica (Magneto, Vampira) e a habilidade em área inteira (Zelda)', () => {
+    const motor = { aviso: () => undefined } as never, golpe = { direto: true, label: 'Impacto', habilidade: true, indice: 0 };
+    const b = createBattle(['magneto', 'rogue', 'zelda'], ['saitama', 'thanos', 'hulk'], 5);
+    const magneto = lutador(b, 'magneto'), vampira = lutador(b, 'rogue'), zelda = lutador(b, 'zelda'), thanos = lutador(b, 'thanos');
+    // Atração (o começo): os rivais causam −15% no trio de Magneto, nele também
+    expect(UNICAS.magneto!.ganchos.recebe!(motor, b, magneto, thanos, golpe)).toBeCloseTo(0.85);
+    // o rival que a Vampira tocou causa −4% no trio dela, nela também
+    (vampira.u ??= {})[`toque${b.fighters.indexOf(thanos)}`] = 1;
+    expect(UNICAS.rogue!.ganchos.recebe!(motor, b, vampira, thanos, golpe)).toBeCloseTo(0.96);
+    // a primeira habilidade de Thanos em área: todos os alvos no mesmo instante levam −40%; a seguinte, não
+    expect(UNICAS.zelda!.ganchos.recebe!(motor, b, zelda, thanos, golpe)).toBeCloseTo(0.6);
+    expect(UNICAS.zelda!.ganchos.recebeAliado!(motor, b, zelda, magneto, thanos, golpe)).toBeCloseTo(0.6);
+    roda(b, 1);
+    expect(UNICAS.zelda!.ganchos.recebe!(motor, b, zelda, thanos, golpe)).toBe(1);
+  });
+
   it('o aviso da mecânica aparece na luta', () => {
     const b = createBattle(['predator', 'naruto', 'goku'], ['saitama', 'thanos', 'hulk'], 9);
     expect(b.events.some((e) => e.kind === 'unica' && e.label === 'Camuflado')).toBe(true);

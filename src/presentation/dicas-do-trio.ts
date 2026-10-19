@@ -111,7 +111,10 @@ export function dentroDaFaixa(nota: number): number {
   let lo = 0, hi = PERCENTIS_FINOS.length - 1;
   while (hi - lo > 1) { const m = (lo + hi) >> 1; if (PERCENTIS_FINOS[m]! <= nota) lo = m; else hi = m; }
   const a = PERCENTIS_FINOS[lo]!, b = PERCENTIS_FINOS[hi]!;
-  const f = lo + (b > a ? Math.min(1, Math.max(0, (nota - a) / (b - a))) : 0);
+  // as notas são múltiplos de 0,001 e muitos trios empatam: na nota de um ponto repetido da régua, vale o meio do empate
+  let inicio = lo;
+  while (a === nota && inicio > 0 && PERCENTIS_FINOS[inicio - 1] === a) inicio--;
+  const f = a === nota ? (inicio + lo) / 2 : lo + (b > a ? Math.min(1, Math.max(0, (nota - a) / (b - a))) : 0);
   return Math.min(99, Math.max(0, Math.floor((f / 20 - p) * 100)));
 }
 /** O "melhor que X% dos trios" e, dentro desse X%, onde ele está (0 a 99). */
@@ -122,9 +125,9 @@ export function posicaoDoTrio(team: readonly string[]): { pct: number; dentro: n
 /*
  * As estrelas do time, de 1 a 7, pela porcentagem de trios que ele supera. Os cortes ficam onde a chance de vencer a
  * jornada mais sobe (pedido do dono: "aqui deu um salto, aqui faz sentido mudar de estrela"), com mais trios embaixo e o
- * 7★ só no topo 2%. Medido em 42.000 jornadas (rivais a 90% da Vida, Vida acima do topo 0,25):
- *   1★ até 24% (vence 1,5%) · 2★ 24–38% (5%) · 3★ 38–56% (8%) · 4★ 56–75% (14,5%) · 5★ 75–89% (25,5%) · 6★ 89–98% (43%)
- *   · 7★ 98%+ (59%)
+ * 7★ só no topo 2%. Medido em 60.000 jornadas de trios sorteados (motor das habilidades que só miram quem acertam):
+ *   1★ até 24% (vence 1,7%) · 2★ 24–38% (4,8%) · 3★ 38–56% (8,5%) · 4★ 56–75% (14,8%) · 5★ 75–89% (26,1%)
+ *   · 6★ 89–98% (44%) · 7★ 98%+ (56%)
  */
 export const ESTRELAS_MAXIMAS = 7;
 export const CORTES_DAS_ESTRELAS: readonly number[] = [24, 38, 56, 75, 89, 98];

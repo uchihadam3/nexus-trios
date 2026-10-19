@@ -701,11 +701,25 @@ function skillValue(b:Battle,f:Fighter,s:Skill,selected:Fighter[],intelligence:n
   if(cost>0)reasons.push(`custo tático -${cost.toFixed(1)}`);
   return {score:value,reasons};
 }
+/*
+ * Habilidade sem ninguém para acertar não sai (pedido do dono: "o Lançar teia
+ * fala que vai no inimigo, mas o efeito mostra nele mesmo"). Quem mira o
+ * "rival em Preparo" sem condição de Preparo disparava com a lista vazia
+ * quando ninguém estava preparando: nada acontecia e a tela desenhava o
+ * golpe em quem usou. O Guia das almas (Anúbis) fazia o mesmo sem ninguém
+ * caído. Agora a habilidade guarda a Carga e espera um alvo de verdade.
+ */
+function acertaAlguem(b:Battle,f:Fighter,s:Skill,selected:Fighter[]){
+  if(selected.some(alive))return true;
+  return s.effects.some(e=>e.kind==='copy'||(e.kind==='revive'?podeReviver(b,f):!!e.target&&targets(b,f,e.target,[e],false).some(alive)));
+}
 function decideSkill(b:Battle,f:Fighter):number|null {
   const c=byId[f.characterId],intelligence=c.intelligence??50;
   const candidates=c.skills.map((s,i)=>({s,i,state:f.skills[i]}))
     .filter(({s,state})=>state.charge>=100&&state.cooldown<=0&&appropriate(b,f,s))
-    .map(({s,i,state})=>{const selected=targets(b,f,s.target,s.effects,false);const result=skillValue(b,f,s,selected,intelligence);return {s,i,state,selected,...result};})
+    .map(({s,i,state})=>({s,i,state,selected:targets(b,f,s.target,s.effects,false)}))
+    .filter(({s,selected})=>acertaAlguem(b,f,s,selected))
+    .map(({s,i,state,selected})=>{const result=skillValue(b,f,s,selected,intelligence);return {s,i,state,selected,...result};})
     .sort((a,z)=>z.score-a.score||a.i-z.i);
   if(!candidates.length)return null;
   const best=candidates[0];
@@ -716,7 +730,9 @@ function decideSkill(b:Battle,f:Fighter):number|null {
 }
 function execute(b:Battle,f:Fighter,index:number,selected:Fighter[]){
   const s=byId[f.characterId].skills[index],eventStart=b.nextEvent;
-  emit(b,{kind:'skill',source:f.uid,target:selected[0]?.uid,skill:index,label:s.name,visual:s.icon});
+  // sem alvo principal (o Patolino provoca todos, o Constantine levanta um caído), a tela mira quem o efeito pega
+  const mira=selected[0]??s.effects.map(e=>e.kind==='revive'?(podeReviver(b,f)?caidos(b,f)[0]:undefined):e.target?targets(b,f,e.target,[e],false).find(alive):undefined).find(x=>!!x);
+  emit(b,{kind:'skill',source:f.uid,target:mira?.uid,skill:index,label:s.name,visual:s.icon});
   unica(f)?.antes?.(M,b,f,index);
   const quemAgia=agindo,indiceAntes=agindoIndice;agindo=f.uid;agindoIndice=index;
   golpesDaVez=golpesDe(f.characterId,index);
@@ -819,7 +835,10 @@ export function stepBattle(b:Battle,observe?:(snapshot:Battle)=>void):Battle {
     if(unica(f)?.parado?.(f,b))continue;
     if(f.cast){
       f.cast.elapsed+=STEP*rate;
-      if(f.cast.elapsed>=f.cast.duration){const cast=f.cast;f.cast=null;let list=cast.targets.map(id=>b.fighters.find(x=>x.uid===id)).filter((x):x is Fighter=>!!x&&alive(x));if(!list.length&&c.skills[cast.skill].condition!=='investigated')list=targets(b,f,c.skills[cast.skill].target,c.skills[cast.skill].effects);execute(b,f,cast.skill,list);resolve(b);observe?.(b);if(b.finished)break;}
+      if(f.cast.elapsed>=f.cast.duration){const cast=f.cast;f.cast=null;let list=cast.targets.map(id=>b.fighters.find(x=>x.uid===id)).filter((x):x is Fighter=>!!x&&alive(x));if(!list.length&&c.skills[cast.skill].condition!=='investigated')list=targets(b,f,c.skills[cast.skill].target,c.skills[cast.skill].effects);
+        // o alvo sumiu no meio do Preparo (caiu ou parou de preparar) e não sobrou ninguém: a habilidade não sai e a Carga fica
+        if(!acertaAlguem(b,f,c.skills[cast.skill],list))continue;
+        execute(b,f,cast.skill,list);resolve(b);observe?.(b);if(b.finished)break;}
       continue;
     }
     if(!intensity(f,'silenced')){

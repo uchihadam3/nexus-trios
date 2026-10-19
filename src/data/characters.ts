@@ -8,6 +8,7 @@ import { aplicaGolpesQueAtacam } from './golpes-que-atacam';
 import { aplicaBasico } from './basicos';
 import { aplicaTraco } from './tracos';
 import { aplicaAjusteDeKit } from './ajuste-de-kit';
+import { aplicaRitmo } from './ritmo-das-habilidades';
 import { aplicaStatusDoNome } from './status-do-nome';
 import { aplicaCondicao } from './condicao';
 import { FATOR_DA_REGENERACAO,valorDaRegeneracao } from './regeneracao';
@@ -259,5 +260,35 @@ function aplicaPedidos(c:Character):Character{
   }) as Character['skills'];
   return {...c,skills};
 }
-export const characters:Character[]=deBase.map(c=>ajustaForca(c,TANQUES.has(c.id),VIDA_DE_TANQUE)).map(ajustaRegeneracao).map(aplicaPedidos).map(aplicaAjusteDeKit);
+/*
+ * Quem mira o rival em Preparo só usa com um rival preparando (pedido do dono: "tem que ter uma condição, porque não tem
+ * isso escrito na habilidade"). O Lançar teia, o Laço da verdade e outros vinham com "sempre": disparavam sem ninguém
+ * preparando, e a ficha não dizia quando usava. Com a condição, o motor espera o Preparo e a ficha mostra "Só usa quando
+ * um rival estiver preparando uma habilidade".
+ */
+function soComPreparo(c:Character):Character{
+  if(!c.skills.some(s=>s.target==='enemyCast'&&s.condition==='always'))return c;
+  return {...c,skills:c.skills.map(s=>s.target==='enemyCast'&&s.condition==='always'?{...s,condition:'enemyCast' as const}:s) as Character['skills']};
+}
+/*
+ * Carga é para si (revisão das fichas pedida pelo dono): o soco e a Flor de fogo do Mario, e os traços do Yuji, do
+ * Tanjiro, da Frieren e do Mega Man tinham "+X% de Carga para habilidades" sem alvo próprio. O efeito herdava o alvo do
+ * golpe e a Carga ia para o RIVAL atingido. Carga que cairia num rival vai para quem usa.
+ */
+const PARA_RIVAL=new Set<Target>(['enemyWeak','enemyStrong','enemyCast','investigated','leastInvestigated','allEnemies','randomEnemy']);
+const cargaParaSi=(alvo:Target,effects:Effect[]):Effect[]=>effects.map(e=>e.kind==='charge'&&PARA_RIVAL.has(e.target??alvo)?{...e,target:'self' as const}:e);
+/*
+ * Com a Carga do básico indo para eles mesmos, Mario e Aang passaram de todo mundo (o 69º e o 269º viraram o 1º e o 2º
+ * mais fortes): o kit deles foi equilibrado com o defeito. A Carga de cada golpe cai de +3% para +1,5% (aprovado pelo dono);
+ * o Mario, com +1,5%, ainda ficava no topo (0,61): fica com +1%.
+ */
+const CARGA_DO_BASICO:Record<string,number>={mario:1,aang:1.5};
+function cargaEhParaSi(c:Character):Character{
+  const basico=cargaParaSi(c.basic.target,c.basic.effects).map(e=>e.kind==='charge'&&CARGA_DO_BASICO[c.id]!==undefined?{...e,value:CARGA_DO_BASICO[c.id]!}:e);
+  return {...c,
+    skills:c.skills.map(s=>({...s,effects:cargaParaSi(s.target,s.effects)})) as Character['skills'],
+    trait:{...c.trait,effects:cargaParaSi(c.trait.target,c.trait.effects)},
+    basic:{...c.basic,effects:basico}};
+}
+export const characters:Character[]=deBase.map(c=>ajustaForca(c,TANQUES.has(c.id),VIDA_DE_TANQUE)).map(ajustaRegeneracao).map(aplicaPedidos).map(aplicaAjusteDeKit).map(aplicaRitmo).map(soComPreparo).map(cargaEhParaSi);
 export const byId:Record<string,Character> = Object.fromEntries(characters.map(c=>[c.id,c]));
