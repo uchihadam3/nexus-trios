@@ -290,5 +290,16 @@ function cargaEhParaSi(c:Character):Character{
     trait:{...c.trait,effects:cargaParaSi(c.trait.target,c.trait.effects)},
     basic:{...c.basic,effects:basico}};
 }
-export const characters:Character[]=deBase.map(c=>ajustaForca(c,TANQUES.has(c.id),VIDA_DE_TANQUE)).map(ajustaRegeneracao).map(aplicaPedidos).map(aplicaAjusteDeKit).map(aplicaRitmo).map(soComPreparo).map(cargaEhParaSi);
+/*
+ * Sem a ordem escondida (pedido do dono: o Doutor Destino só usava o Ritual depois da própria Armadura, que já marcava o
+ * rival), as habilidades com "vulnerável" do Freeza e do Doutor Destino passaram a sair muito mais vezes e os dois foram
+ * ao topo da força (Freeza 1,05 e Doutor Destino 0,71; o topo era 0,59). O dono pediu para equilibrar: o dano dessas
+ * habilidades cai para os dois ficarem entre os fortes, perto de 0,55. A fração do dano que fica, por habilidade.
+ */
+const DANO_SEM_A_TRAVA:Record<string,Record<number,number>>={frieza:{1:.58,2:.72},doctordoom:{1:.85,2:.85}};
+function semATrava(c:Character):Character{
+  const m=DANO_SEM_A_TRAVA[c.id];if(!m)return c;
+  return {...c,skills:c.skills.map((s,i)=>m[i]===undefined?s:{...s,effects:s.effects.map(e=>e.kind==='damage'?{...e,value:Math.round(e.value*m[i]!)}:e)}) as Character['skills']};
+}
+export const characters:Character[]=deBase.map(c=>ajustaForca(c,TANQUES.has(c.id),VIDA_DE_TANQUE)).map(ajustaRegeneracao).map(aplicaPedidos).map(aplicaAjusteDeKit).map(aplicaRitmo).map(soComPreparo).map(cargaEhParaSi).map(semATrava);
 export const byId:Record<string,Character> = Object.fromEntries(characters.map(c=>[c.id,c]));
