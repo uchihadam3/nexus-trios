@@ -425,7 +425,8 @@ export default function App(){
   /* O botão das Dicas de trio: a conta do dono sempre; os outros depois de META_DAS_DICAS numa jornada (src/lib/dicas-liberadas.ts) */
   const [dono,setDono]=useState(false);
   useEffect(()=>{let vivo=true;void ehDono(conta?.email).then(d=>{if(vivo)setDono(d);});return ()=>{vivo=false;};},[conta?.email]);
-  const podeDicas=dicasLiberadas(dono,profile.recordePontos??0);
+  // o nome público só vale da conta que está entrada agora (ao sair, o nome guardado não libera nada)
+  const podeDicas=dicasLiberadas(dono,profile.recordePontos??0,logado&&conta&&nomeDaConta?.id===conta.id?nomeDaConta.handle:null);
   /* A Comunidade (src/screens/ComunidadeScreen.tsx): só com conta e nome público; a presença e os avisos valem em qualquer tela. */
   const contaRef=useRef(conta);contaRef.current=conta;
   const [comunidadeDemo,setComunidadeDemo]=useState<{servico:ServicoDaComunidade;eu:string}|null>(null);

@@ -8,6 +8,7 @@
  * - A conta do dono do jogo vê o botão sempre. O e-mail não fica escrito no
  *   código (o site é público): guardamos só o SHA-256 dele e comparamos com o
  *   SHA-256 do e-mail da conta logada.
+ * - As contas que o dono liberou (LIBERADAS_PELO_DONO, abaixo) também veem sempre.
  * - Os outros veem o botão trancado e só o ligam depois que o recorde de uma
  *   jornada (a soma dos
  *   pontos das lutas com um trio) chega a META_DAS_DICAS.
@@ -32,5 +33,12 @@ export async function ehDono(email: string | null | undefined): Promise<boolean>
   try { return (await sha256(email.trim().toLowerCase())) === DONO; } catch { return false; }
 }
 
-/** O botão aparece? (o dono sempre; os outros depois da meta) */
-export const dicasLiberadas = (dono: boolean, recorde: number) => dono || recorde >= META_DAS_DICAS;
+/*
+ * As contas que o dono liberou (pedido do dono: "libera as dicas pra conta do LuizAlencar"), pelo nome público: ele é
+ * único e não muda depois de escolhido. Em minúsculas.
+ */
+const LIBERADAS_PELO_DONO = new Set(['luizalencar']);
+export const liberadaPeloDono = (nome: string | null | undefined) => !!nome && LIBERADAS_PELO_DONO.has(nome.trim().toLowerCase());
+
+/** O botão aparece? (o dono e as contas que ele liberou, sempre; os outros depois da meta) */
+export const dicasLiberadas = (dono: boolean, recorde: number, nome?: string | null) => dono || liberadaPeloDono(nome) || recorde >= META_DAS_DICAS;

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { META_DAS_DICAS, dicasLiberadas, ehDono, sha256 } from '../src/lib/dicas-liberadas';
+import { META_DAS_DICAS, dicasLiberadas, ehDono, liberadaPeloDono, sha256 } from '../src/lib/dicas-liberadas';
 
 describe('botão das Dicas de trio', () => {
   it('fica escondido até a meta, e aparece depois dela', () => {
@@ -14,5 +14,11 @@ describe('botão das Dicas de trio', () => {
     expect(await sha256('abc')).toBe('ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad');
     expect(await ehDono('outra.pessoa@gmail.com')).toBe(false);
     expect(await ehDono(null)).toBe(false);
+  });
+  it('as contas que o dono liberou veem sempre, pelo nome público', () => {
+    expect(dicasLiberadas(false, 0, 'LuizAlencar')).toBe(true);
+    expect(liberadaPeloDono(' luizalencar ')).toBe(true);
+    expect(dicasLiberadas(false, 0, 'OutroJogador')).toBe(false);
+    expect(dicasLiberadas(false, 0, null)).toBe(false);
   });
 });
