@@ -18,7 +18,7 @@ import type { Battle, Character, Fighter } from '../engine/types';
  * - Saitama fica sério depois de 4 golpes;
  * - Shadow tira os inibidores;
  * - Drácula vira névoa por 4 s;
- * - Guts veste a Armadura do Berserker nos 6 s finais;
+ * - Guts veste a Armadura do Berserker nos 10 s finais;
  * - Zenitsu luta dormindo;
  * - Gohan desperta quando um aliado cai;
  * - Jin vira Devil Jin com metade da Vida;

@@ -14,6 +14,9 @@ import { LOTE8 } from './unicas-lote8';
 import { LOTE9, conheceTodas } from './unicas-lote9';
 export type { Ganchos, Golpe, Motor, Unica } from './unicas-base';
 
+/* Quanto tempo o Guts luta de pé com a Armadura do Berserker. */
+export const SEGUNDOS_DO_BERSERKER = 10;
+
 const LOTE1: Record<string, Unica> = {
   /* ───────── Força bruta, cada um do seu jeito ───────── */
   drax: {
@@ -375,11 +378,11 @@ const LOTE1: Record<string, Unica> = {
   },
   guts: {
     nome: 'Armadura do Berserker',
-    texto: '1 vez por luta: quando ia cair, Guts fica de pé com 1 de Vida e luta mais 6 s sem receber dano e com +50% de dano. Quando esses 6 s acabam, Guts cai.',
+    texto: `1 vez por luta: quando ia cair, Guts fica de pé com 1 de Vida e luta mais ${SEGUNDOS_DO_BERSERKER} s sem receber dano e com +50% de dano. Quando esses ${SEGUNDOS_DO_BERSERKER} s acabam, Guts cai.`,
     ganchos: {
       salva(m, b, f, alvo) {
         if (alvo !== f || u(f).berserk) return null;
-        u(f).berserk = b.time + 6;
+        u(f).berserk = b.time + SEGUNDOS_DO_BERSERKER;
         m.aviso(b, f, 'Berserker', f);
         return 1;
       },

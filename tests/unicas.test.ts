@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { byId } from '../src/data/characters';
 import { createBattle, stepBattle } from '../src/engine/battle';
-import { UNICAS } from '../src/engine/unicas';
+import { SEGUNDOS_DO_BERSERKER, UNICAS } from '../src/engine/unicas';
 import type { Battle, Fighter } from '../src/engine/types';
 
 const roda = (b: Battle, segundos: number, ate?: () => boolean) => {
@@ -84,13 +84,14 @@ describe('Mecânicas únicas', () => {
     expect(ultron.hp).toBe(0);
   });
 
-  it('Guts segue de pé 6 s com a Armadura do Berserker e depois desaba', () => {
+  it('Guts segue de pé com a Armadura do Berserker (10 s, pedido do dono) e depois desaba', () => {
+    expect(SEGUNDOS_DO_BERSERKER).toBe(10);
     const b = createBattle(['guts', 'naruto', 'goku'], ['saitama', 'thanos', 'hulk'], 9);
     const guts = lutador(b, 'guts'), saitama = lutador(b, 'saitama');
     applyDamage(b, saitama, guts, golpeFatal(guts));
     expect(guts.hp).toBe(1);
-    const fim = b.time + 6;
-    roda(b, 5);
+    const fim = b.time + SEGUNDOS_DO_BERSERKER;
+    roda(b, SEGUNDOS_DO_BERSERKER - 1);
     if (b.time < fim - 0.2) expect(guts.hp).toBeGreaterThan(0);
     roda(b, 3, () => guts.hp <= 0);
     expect(guts.hp).toBe(0);
