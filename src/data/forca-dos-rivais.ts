@@ -4,6 +4,8 @@
  * scripts/fabrica (plano aleatorio). O modelo acerta o vencedor em 64% das lutas.
  * Escala: diferença de 1 entre dois trios ≈ 73% de chance para o mais forte.
  * Não editar à mão: rode o script de novo depois de mudar o elenco.
+ * Exceção: o Guts (Armadura do Berserker de 6 s para 10 s, pedido do dono) foi medido sozinho, com os outros fixos,
+ * em 10.000 lutas: −0,009 → 0,353 (±0,02). A próxima medição completa já o inclui.
  */
 
 /*
@@ -144,7 +146,7 @@ export const FORCA: Record<string, number> = {
   "greenlantern": 0.226,
   "griffith": 0.091,
   "groot": -0.118,
-  "guts": -0.009,
+  "guts": 0.353,
   "gwen": -0.233,
   "hadescz": 0.009,
   "harrypotter": -0.355,
