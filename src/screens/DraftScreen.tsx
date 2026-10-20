@@ -35,7 +35,7 @@ import { CUSTO_DA_COLECAO,formatarPontos } from '../engine/pontos';
  */
 const NIVEL=(n:number)=>n>=80?{rotulo:'ÓTIMO',cor:'#7dff9b'}:n>=55?{rotulo:'BOM',cor:'#c8f560'}:n>=35?{rotulo:'OK',cor:'#ffd166'}:{rotulo:'FRACO',cor:'#ff7a85'};
 const primeiroNome=(id:string)=>byId[id].name.split(/[ ,]/)[0];
-export function DraftScreen({draft,desafio,colecao=false,primeiroRival,estrelas=false,naColecao,dicas,podeDicas,usouDicas,onDicas,onPick,onSkip,onDetails,onStart,onAbandon}:{draft:Draft;/** a Jornada veio do Desafio do Dia, com este personagem já escolhido */desafio?:string;/** a Jornada com os seus: o trio veio das Conquistas */colecao?:boolean;primeiroRival?:Encounter;/** mostra as estrelas do trio completo: só na conta do dono (pedido dele) */estrelas?:boolean;/** os personagens que o jogador já tem na coleção (ganham o selo na carta) */naColecao?:ReadonlySet<string>;dicas:boolean;/** o botão só liga para quem liberou as Dicas (src/lib/dicas-liberadas.ts) */podeDicas:boolean;usouDicas:boolean;onDicas:(ligar:boolean)=>void;onPick:(id:string)=>void;onSkip:()=>void;onDetails:(id:string)=>void;onStart:()=>void;onAbandon:()=>void}){
+export function DraftScreen({draft,desafio,colecao=false,primeiroRival,naColecao,dicas,podeDicas,usouDicas,onDicas,onPick,onSkip,onDetails,onStart,onAbandon}:{draft:Draft;/** a Jornada veio do Desafio do Dia, com este personagem já escolhido */desafio?:string;/** a Jornada com os seus: o trio veio das Conquistas */colecao?:boolean;primeiroRival?:Encounter;/** os personagens que o jogador já tem na coleção (ganham o selo na carta) */naColecao?:ReadonlySet<string>;dicas:boolean;/** o botão só liga para quem liberou as Dicas (src/lib/dicas-liberadas.ts) */podeDicas:boolean;usouDicas:boolean;onDicas:(ligar:boolean)=>void;onPick:(id:string)=>void;onSkip:()=>void;onDetails:(id:string)=>void;onStart:()=>void;onAbandon:()=>void}){
   const full=draft.team.length===3,team=draft.team.map(id=>byId[id]);
   const doTrio=identidadesDoTrio(team),lacunas=lacunasDoTrio(team);
   const vez=draft.team.length;
@@ -56,7 +56,7 @@ export function DraftScreen({draft,desafio,colecao=false,primeiroRival,estrelas=
           <Portrait character={c}/><b>{c.name}</b><small className="dv-espaco-ficha"><Info size={10}/>ficha</small>
         </button>
         :<div key={`vazio-${i}`} className={`dv-espaco ${i===vez&&!full?'vez':''}`}><span>?</span><b>{i===vez?'escolha agora':`espaço ${i+1}`}</b></div>;})}</div>
-      {full&&estrelas&&<EstrelasDoTrio team={draft.team}/>}
+      {full&&<EstrelasDoTrio team={draft.team}/>}
       {team.length>0&&<div className="dv-trio-faz"><IdentityChips ids={doTrio} trio={doTrio}/>{ligadas&&lacunas.length>0&&<small><TriangleAlert size={13}/>{lacunas.join(' · ')}</small>}</div>}
       {(!full||usouDicas)&&<BotaoDicas ligado={dicas} liberado={podeDicas} usado={usouDicas} desativado={full} onMudar={onDicas}/>}
     </header>
@@ -113,7 +113,7 @@ export function DraftScreen({draft,desafio,colecao=false,primeiroRival,estrelas=
 
 /*
  * As estrelas do trio (pedido do dono: "depois que escolher os três, aparece quantas estrelas o time tem… mais
- * sutil, pequenininhas, não tão destacado"; e depois: "deixa as estrelinhas só na minha conta"): só as estrelinhas (1 a 7) embaixo do trio, acendendo uma a uma. A força é
+ * sutil, pequenininhas, não tão destacado"; e depois: "deixa as estrelinhas só na minha conta"; depois liberou para todas as contas): só as estrelinhas (1 a 7) embaixo do trio, acendendo uma a uma. A força é
  * a mesma do PvP (src/presentation/dicas-do-trio.ts, estrelasDoTime).
  */
 function EstrelasDoTrio({team}:{team:string[]}){
