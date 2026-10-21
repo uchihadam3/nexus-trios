@@ -117,7 +117,7 @@ function PorcentagemDoTime({ time, curta = false }: { time: readonly string[]; c
   const titulo = `Melhor que ${pct}% dos trios; entre os trios que também são melhores que ${pct}%, melhor que ${dentro}% deles${lugar ? `; ${lugar.posicao.toLocaleString('pt-BR')}º de ${lugar.total.toLocaleString('pt-BR')} trios` : ''}`;
   return curta
     ? <em className="pv-pct" title={titulo}>{pct}%<span className="pv-dentro">({dentro}%)</span>{lugar && <span className="pv-lugar">#{lugar.posicao.toLocaleString('pt-BR')}</span>}</em>
-    : <span className="pv-pct" title={titulo}>melhor que <b>{pct}%</b> <span className="pv-dentro">({dentro}%)</span>{lugar && <span className="pv-lugar"> · {textoDaPosicao(lugar.posicao)}</span>}</span>;
+    : <span className="pv-pct" title={titulo}><span className="pv-pct-texto">melhor que <b>{pct}%</b> <span className="pv-dentro">({dentro}%)</span></span>{lugar && <span className="pv-lugar">{textoDaPosicao(lugar.posicao)}</span>}</span>;
 }
 
 function CartaoDoTime({ time, i, lado, venceu, escolhido, bloqueado, onClick, compacto = false }: {
