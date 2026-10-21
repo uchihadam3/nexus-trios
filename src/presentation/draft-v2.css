@@ -149,6 +149,7 @@ button.dv-espaco:focus-visible{outline:2px solid #c8f560;outline-offset:4px;bord
 .dv-estrelas small{margin-left:6px;font-size:11px;color:#9fb0bf}
 .dv-estrelas small b{color:#ffd36b;font-weight:900}
 .dv-estrelas .dv-dentro{color:#7fd8ff;font-weight:900}
+.dv-estrelas .dv-lugar{color:#ffb4f0;font-weight:900;white-space:nowrap}
 .dv-estrelas i{display:grid;color:#ffffff24}
 .dv-estrelas i.acesa{color:#ffd36b;filter:drop-shadow(0 0 3px #ffd36b88);animation:dv-estrela-acende .45s calc(var(--k)*.12s + .2s) cubic-bezier(.2,.9,.3,1.5) both}
 @keyframes dv-estrela-acende{from{color:#ffffff24;transform:scale(.3);filter:none}}

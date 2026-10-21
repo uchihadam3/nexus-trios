@@ -5,6 +5,8 @@
  *   (pedido do dono: "melhor que 99%… mas dentro desses 99%, tá onde?").
  * Refazer (as duas juntas) quando os personagens ou as Dicas mudarem: npx tsx scripts/regua-dos-trios.ts
  * Com --conferir, só confere se a régua de 1% gravada ainda bate com as notas de agora.
+ * Também grava src/data/posicoes-dos-trios.ts: quantos trios há em cada nota (de 0,001 em 0,001), de onde sai a posição
+ * exata do time entre todos (pedido do dono: "aparece a posição dele na frente depois das porcentagens").
  */
 import { writeFileSync } from 'node:fs';
 import { characters } from '../src/data/characters';
@@ -46,5 +48,18 @@ writeFileSync('src/data/percentis-finos.ts', `/*
 export const PERCENTIS_FINOS: readonly number[] = [
 ${linhas(finos, 20)}
 ];
+`);
+const bins = Array.from(notas, (v) => Math.round(v * 1000)), de = bins[0]!, ate = bins[g - 1]!;
+const contas = new Array<number>(ate - de + 1).fill(0);
+for (const b of bins) contas[b - de]!++;
+writeFileSync('src/data/posicoes-dos-trios.ts', `/*
+ * Quantos trios há em cada nota das Dicas (gerado por scripts/regua-dos-trios.ts, com a régua): a nota arredondada em
+ * milésimos, de DE (${de / 1000}) para cima, uma contagem por milésimo em base 36, separadas por vírgula. Soma
+ * ${g.toLocaleString('pt-BR')} trios. Daqui sai a posição exata do time entre todos (src/presentation/posicao-do-trio.ts);
+ * é carregado só quando a tela das estrelas abre.
+ */
+export const TOTAL_DE_TRIOS = ${g};
+export const DE = ${de};
+export const CONTAS = '${contas.map((c) => c.toString(36)).join(',')}';
 `);
 console.log('gravado');

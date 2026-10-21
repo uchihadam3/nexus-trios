@@ -8,6 +8,7 @@ import { combosDoTrio } from '../engine/combos';
 import { MINIMO_DA_COLECAO, NPCS, duracaoNaTela, escolhaDoNpc, problemaDosTimes, sementeDaRodada, timesDoNpc, timesLivres, vencedorDaPartida, vitoriasDosTimes,
   type Lado, type NivelNpc, type Npc, type PartidaPvp, type Times } from '../engine/pvp';
 import { notaDoTrio, estrelasDoTime, posicaoDoTrio, ESTRELAS_MAXIMAS } from '../presentation/dicas-do-trio';
+import { textoDaPosicao, usePosicaoDoTrio } from '../presentation/posicao-do-trio';
 const ESTRELAS = Array.from({ length: ESTRELAS_MAXIMAS }, (_, k) => k + 1);
 import { battleAudio } from '../lib/audio';
 import { PRIORIDADE } from '../audio/cues';
@@ -111,11 +112,12 @@ export const DonoDoPvp = createContext(false);
  * 90%… mas dentro desses 90%, tá onde?").
  */
 function PorcentagemDoTime({ time, curta = false }: { time: readonly string[]; curta?: boolean }) {
-  const { pct, dentro } = posicaoDoTrio(time);
-  const titulo = `Melhor que ${pct}% dos trios; entre os trios que também são melhores que ${pct}%, melhor que ${dentro}% deles`;
+  const { pct, dentro } = posicaoDoTrio(time), lugar = usePosicaoDoTrio(time);
+  // e a posição exata entre todos os trios (src/presentation/posicao-do-trio.ts)
+  const titulo = `Melhor que ${pct}% dos trios; entre os trios que também são melhores que ${pct}%, melhor que ${dentro}% deles${lugar ? `; ${lugar.posicao.toLocaleString('pt-BR')}º de ${lugar.total.toLocaleString('pt-BR')} trios` : ''}`;
   return curta
-    ? <em className="pv-pct" title={titulo}>{pct}%<span className="pv-dentro">({dentro}%)</span></em>
-    : <span className="pv-pct" title={titulo}>melhor que <b>{pct}%</b> <span className="pv-dentro">({dentro}%)</span></span>;
+    ? <em className="pv-pct" title={titulo}>{pct}%<span className="pv-dentro">({dentro}%)</span>{lugar && <span className="pv-lugar">#{lugar.posicao.toLocaleString('pt-BR')}</span>}</em>
+    : <span className="pv-pct" title={titulo}>melhor que <b>{pct}%</b> <span className="pv-dentro">({dentro}%)</span>{lugar && <span className="pv-lugar"> · {textoDaPosicao(lugar.posicao)}</span>}</span>;
 }
 
 function CartaoDoTime({ time, i, lado, venceu, escolhido, bloqueado, onClick, compacto = false }: {
