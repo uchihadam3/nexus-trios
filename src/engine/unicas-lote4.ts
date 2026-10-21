@@ -153,15 +153,18 @@ export const LOTE4: Record<string, Unica> = {
   },
   lelouch: {
     nome: 'Ordem absoluta',
-    texto: 'A cada 15 s, Lelouch rouba todos os Status bons de um rival (o primeiro que tiver algum) e os passa para o aliado mais ferido.',
+    texto: 'A cada 10 s, Lelouch rouba todos os Status bons de um rival (o primeiro que tiver algum) e os passa para o aliado mais ferido. Se nenhum rival tiver Status bom, o rival mais forte fica Paralisado por 2 s.',
     ganchos: {
       passo(m, b, f, dt) {
-        if (!relogio(f, 'geass', dt, 15, 10)) return;
+        // pedido do dono: a cada 10 s (era 15; ele estava fraco). Só o tempo quase não mudava nada (quase nunca há o que
+        // roubar): sem Status bom nos rivais, o Geass paralisa o mais forte por 2 s (com as habilidades mais fortes,
+        // src/data/expanded-roster.ts, a força foi de −0,49 para 0,151)
+        if (!relogio(f, 'geass', dt, 10)) return;
         const alvo = m.rivais(b, f).find((r) => r.statuses.some((s) => BONS.includes(s.id) && s.id !== 'summon')) ?? maisForte(m, b, f);
         const quem = maisFerido(m, b, f);
         if (!alvo || !quem) return;
         const buffs = alvo.statuses.filter((s) => BONS.includes(s.id) && s.id !== 'summon');
-        if (!buffs.length) return;
+        if (!buffs.length) { m.efeitos(b, f, [alvo], [st('paralyzed', 1, 2)]); m.aviso(b, f, 'Obedeça!', alvo); return; }
         alvo.statuses = alvo.statuses.filter((s) => !buffs.includes(s));
         m.efeitos(b, f, [quem], buffs.map((s) => st(s.id, s.intensity, Math.max(2, s.remaining))));
         m.aviso(b, f, 'Obedeça!', alvo);

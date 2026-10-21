@@ -86,14 +86,14 @@ describe('segredos', () => {
   });
 
   it('o servidor refaz a jornada com as lutas extras, na ordem, e soma a extra só se vencer', () => {
-    const r = replayRanked(['sekhmet', 'poisonivy', 'jake'], 326561938, true);
+    const r = replayRanked(['sekhmet', 'poisonivy', 'jake'], 714287453, true);
     expect(r.summaries.map((s) => s.index)).toEqual([0, 1, 2, 3, 4, LUTA_ESTRELA, 5, 6, 7, 8, 9, LUTA_ONZE]);
     expect(r.encountersCleared).toBe(10);
     expect(r.score).toBe(r.summaries.reduce((n, s) => n + s.score, 0));
     for (const s of r.summaries.filter((x) => x.index >= LUTA_ESTRELA && !x.won)) expect(s.score).toBe(0);
     expect(r.highlights.segredos).toEqual(['davi']);
     // desistiu depois de 7 lutas: as 5, a ★ e a 6
-    expect(replayRanked(['sekhmet', 'poisonivy', 'jake'], 326561938, true, false, 7).summaries.map((s) => s.index)).toEqual([0, 1, 2, 3, 4, LUTA_ESTRELA, 5]);
+    expect(replayRanked(['sekhmet', 'poisonivy', 'jake'], 714287453, true, false, 7).summaries.map((s) => s.index)).toEqual([0, 1, 2, 3, 4, LUTA_ESTRELA, 5]);
   });
 
   it('Clássico com versões sombrias: a luta acontece até o fim', () => {

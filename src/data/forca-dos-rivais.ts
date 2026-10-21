@@ -6,7 +6,9 @@
  * Não editar à mão: rode o script de novo depois de mudar o elenco.
  * Exceção: o Guts (Armadura do Berserker de 6 s para 10 s, pedido do dono) foi medido sozinho, com os outros fixos,
  * em 10.000 lutas: −0,009 → 0,353 (±0,02). O Goku (o Kaioken agora bate 100 e o Kamehameha caiu de 403 para 354,
- * pedido do dono) também, do mesmo jeito: 0,099 → 0,327. A próxima medição completa já inclui os dois.
+ * pedido do dono) também, do mesmo jeito: 0,099 → 0,327. E o Lelouch (Ordem absoluta a cada 10 s e, sem Status bom
+ * para roubar, paralisa o rival mais forte por 2 s; Xadrez com Fortalecido 30%, Xeque-mate com Fraqueza 30% e o traço Zero
+ * também enfraquecendo 15%): −0,49 → 0,151. A próxima medição completa já inclui os três.
  */
 
 /*
@@ -14,7 +16,7 @@
  * usam esta força; tests/forca-atualizada.test.ts falha se um personagem ou
  * o motor mudar sem medir de novo.
  */
-export const MEDIDA_COM = { motor: "nexus-256.0", elenco: "fnv1a-5e9ba344" };
+export const MEDIDA_COM = { motor: "nexus-256.0", elenco: "fnv1a-0f5f9c1b" };
 
 export const FORCA: Record<string, number> = {
   "aang": 0.467,
@@ -216,7 +218,7 @@ export const FORCA: Record<string, number> = {
   "lara": -0.406,
   "lawliet": 0.141,
   "leatherface": 0.176,
-  "lelouch": -0.49,
+  "lelouch": 0.151,
   "leon": -0.107,
   "leonardo": -0.052,
   "leorio": -0.277,

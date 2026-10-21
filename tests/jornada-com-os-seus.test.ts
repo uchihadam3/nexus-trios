@@ -37,7 +37,7 @@ describe('Jornada com os seus', () => {
 
   it('os segredos não valem: sem as lutas extras e sem nada no Livro', () => {
     // a jornada do teste dos segredos (tests/segredos.test.ts): vence as 10 e abre a ★ e a 11
-    const trioDosSegredos = ['sekhmet', 'poisonivy', 'jake'], seed = 326561938;
+    const trioDosSegredos = ['sekhmet', 'poisonivy', 'jake'], seed = 714287453;
     const normal = replayRanked(trioDosSegredos, seed, true), comOsSeus = replayRanked(trioDosSegredos, seed, true, false, undefined, true);
     expect(normal.summaries.map((s) => s.index)).toContain(LUTA_ESTRELA);
     expect(normal.highlights.segredos?.length).toBeGreaterThan(0);

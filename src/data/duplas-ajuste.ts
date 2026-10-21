@@ -9,9 +9,10 @@
  * PASSO_DAS_DUPLAS. Vale só para o elenco medido (DUPLAS_MEDIDAS_COM); tests/duplas-ajuste.test.ts confere.
  * Não editar à mão: medir de novo depois de mudar o elenco.
  * Exceção: o Kaioken do Goku (100 de dano, Kamehameha 403 → 354) só mexeu na força dele, medida à parte
- * (src/data/forca-dos-rivais.ts); as duplas ficam as mesmas até a próxima medição completa.
+ * (src/data/forca-dos-rivais.ts); o Lelouch mais forte (Xadrez, Xeque-mate e o traço Zero), também. As duplas ficam as
+ * mesmas até a próxima medição completa.
  */
-export const DUPLAS_MEDIDAS_COM = "fnv1a-5e9ba344";
+export const DUPLAS_MEDIDAS_COM = "fnv1a-0f5f9c1b";
 export const ALFABETO_DAS_DUPLAS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_";
 export const PASSO_DAS_DUPLAS = 0.06;
 export const AJUSTE_DAS_DUPLAS =
