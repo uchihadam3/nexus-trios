@@ -50,7 +50,7 @@ const caidos = (f: F, b: B) => b.fighters.filter((x) => x.side !== f.side && x.h
 
 export const BOLINHAS: Record<string, Bolinha> = {
   // ——— Anime
-  goku: tempo(Sun, 30, 'genki'),
+  goku: tempo(Sun, 25, 'genki'),
   vegeta: vida(Flame, [0.5, 0.25]),
   naruto: rel(Users, { modo: 'pilhas', k: 'clones', max: 2 }),
   sasuke: ace(Eye),
@@ -149,7 +149,7 @@ export const BOLINHAS: Record<string, Bolinha> = {
   cell: vida(Bomb, [0.2], 'bomba'),
   majinbuu: ace(Candy),
   broly: pilhas(TrendingUp, 'cresceu', 20),
-  trunks: tempo(Hourglass, 40, 'futuro'),
+  trunks: tempo(Hourglass, 25, 'futuro'),
   kuririn: ace(Users),
   tenshinhan: ace(Target),
   beerus: tempo(Atom, 20, 'hakai'),
@@ -337,7 +337,7 @@ export const BOLINHAS: Record<string, Bolinha> = {
   steven: ace(ShieldPlus),
   garnet: liga(Eye, (f, b) => rivais(f, b).some((x) => !!x.cast && x.cast.duration >= 2.5)),
   aang: ace(Wind),
-  katara: tempo(Droplets, 40, 'lua'),
+  katara: tempo(Droplets, 25, 'lua'),
   toph: rel(Mountain),
   zuko: liga(Flame, algumRival('electric')),
   iroh: rel(Flame),

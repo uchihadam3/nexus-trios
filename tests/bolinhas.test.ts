@@ -3,12 +3,24 @@ import { characters } from '../src/data/characters';
 import { createBattle, stepBattle } from '../src/engine/battle';
 import { bolinhaNaTela } from '../src/presentation/bolinha-da-unica';
 import { BOLINHAS, bolinhaDe } from '../src/presentation/bolinhas';
+import { unicaDe } from '../src/engine/unicas';
 
 describe('a bolinha da Mecânica única', () => {
   it('todo personagem tem a sua (e só personagens que existem)', () => {
     const ids = new Set(characters.map((c) => c.id));
     expect(Object.keys(BOLINHAS).filter((k) => !ids.has(k))).toEqual([]);
     expect(characters.filter((c) => !BOLINHAS[c.id]).map((c) => c.id)).toEqual([]);
+  });
+
+  // pedido do dono: "na bolinha… ainda tá mostrando 30" (a Genki Dama sai aos 25 s): o número da bolinha é o do texto
+  it('conta o mesmo tempo, a mesma Vida e a mesma chance que o texto da Mecânica única', () => {
+    const pct = (x: number) => `${String(Math.round(x * 1000) / 10).replace('.', ',')}%`;
+    for (const [id, b] of Object.entries(BOLINHAS)) {
+      const texto = unicaDe(id)?.texto ?? '';
+      if (b.modo === 'tempo' && b.em !== undefined) expect(texto, id).toMatch(new RegExp(`\\b${b.em} s`));
+      if (b.modo === 'vida') for (const l of b.lim ?? []) expect(texto, id).toContain(pct(l));
+      if (b.modo === 'chance' && b.p !== undefined) expect([pct(b.p), `${Math.round(b.p * 100)}%`].some((x) => texto.includes(x)), `${id}: ${texto}`).toBe(true);
+    }
   });
 
   it('nunca quebra nem mostra texto grande demais numa luta de verdade', () => {
