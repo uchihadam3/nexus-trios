@@ -58,6 +58,10 @@ export interface Familia {
   encadeia?: boolean;
   /** Folha em quem age antes do objeto sair, num golpe sem Preparo (o Kuririn erguendo a mão e formando o Kienzan). */
   ergue?: string;
+  /** Folha em volta de quem age, parado, antes de ele sair para o golpe (a aura do Kaioken explodindo no Goku). */
+  aura?: string;
+  /** A faixa é o rastro de quem avança até o alvo (o Kaioken): cresce junto com o avanço e some logo depois do golpe. */
+  rastro?: boolean;
   /** Folha nos aliados quando o golpe ataca o rival e protege o trio (a muralha de espinhos da Toph na frente de cada aliado). */
   noAliado?: string;
   /** Quando o objeto já voou até o alvo: a fração do começo do impacto que mostrava ele chegando e é pulada. */
@@ -141,7 +145,7 @@ export const FOLHAS_DA_LINHA = ['cometa', 'mira', 'chegada'] as const;
 /** Todas as folhas que o jogo usa. */
 export const folhasUsadas = (): string[] => [...new Set([...FAMILIAS.flatMap((k) => {
   const x = familia(k);
-  return [x.impacto, x.viagem, x.faixa, x.preparo, x.acento, x.noAtor, x.atravessa, x.ergue, x.noAliado].filter((s): s is string => !!s);
+  return [x.impacto, x.viagem, x.faixa, x.preparo, x.acento, x.noAtor, x.atravessa, x.ergue, x.aura, x.noAliado].filter((s): s is string => !!s);
 }), ...FOLHAS_DA_LINHA,
 // a entrega das Mecânicas únicas (a Genki Dama se formando e voando, o feixe do Megatron)
 ...Object.values(ENTREGA_DA_UNICA).flatMap((e) => [e.viagem, e.faixa, e.preparo].filter((s): s is string => !!s))])].sort();

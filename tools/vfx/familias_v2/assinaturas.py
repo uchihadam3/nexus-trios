@@ -17,7 +17,7 @@ import math
 
 import numpy as np
 
-from .base import GRANDE, TAU, apaga, back, ease_in, ease_out, estrela, jagged, janela, lamina, pulso, rel, some, vazio
+from .base import FAIXA, GRANDE, TAU, apaga, back, ease_in, ease_out, estrela, jagged, janela, lamina, pulso, rastro_de_velocidade, rel, some, vazio
 
 
 def _gira(pts, ang, cx=0.0, cy=0.0):
@@ -222,6 +222,85 @@ def kaioken(T, t, rng):
         brasas.append((x + 0.04 * math.sin(u * 9), 0.55 - 1.2 * u, (1 - u) * 0.5 * acende))
     G += (anel + aura * 1.1 + nucleo + T.splats(brasas, 0.01) * 1.6) * env
     H += (anel * 0.6 + T.blur(aura, 0.01) * 0.35 + T.splats(brasas, 0.006)) * env
+    return G, H
+
+
+def rastro_kaioken(T, t, rng):
+    """O rastro do Kaioken (faixa, de quem age em −x até o rival em +x): o Goku passa como um risco carmesim
+    super rápido. O núcleo branco-quente engrossa até a ponta (onde ele chega), três vultos do corpo ficam para
+    trás, línguas de fogo vermelho tremulam ao longo do caminho e linhas de velocidade correm para a frente."""
+    G, H = vazio(T)
+    alto = T.H / T.W
+    sub = np.random.default_rng(31 + int(t * 997) % 9973)
+    # o risco: fino na saída, grosso na chegada
+    # um traço só, em cunha: some atrás de quem age e engrossa até a ponta arredondada
+    xs = np.linspace(-0.97, 0.9, 24)
+    meia = alto * 0.17 * (0.06 + 0.94 * ((xs + 0.97) / 1.87) ** 1.5)
+    cima = [(float(x), float(m)) for x, m in zip(xs, meia)]
+    bico = [(0.9 + 0.05 * float(np.cos(a)), alto * 0.17 * float(np.sin(a))) for a in np.linspace(np.pi / 2, -np.pi / 2, 7)]
+    baixo = [(float(x), -float(m)) for x, m in zip(xs[::-1], meia[::-1])]
+    nucleo = T.polys([(cima + bico + baixo, 1.0)], 0.012)
+    halo = T.blur(nucleo, 0.03)
+    # três vultos do corpo, mais fracos para trás, tremendo
+    vultos = T.zero()
+    for k, x in enumerate((-0.55, -0.2, 0.18)):
+        vultos += T.gauss(x + sub.normal(0, 0.01), sub.normal(0, alto * 0.04), 0.07, alto * 0.55) * (0.3 + 0.22 * k)
+    # línguas de fogo subindo e descendo do risco
+    chamas = []
+    for _ in range(14):
+        x = sub.uniform(-0.9, 0.92)
+        lado = 1 if sub.random() < 0.5 else -1
+        alt = alto * sub.uniform(0.35, 0.95) * (0.4 + 0.6 * (x + 1) / 2)
+        chamas.append(([(x - 0.025, 0.0), (x + sub.normal(0, 0.012), lado * alt), (x + 0.025, 0.0)], sub.uniform(0.5, 1)))
+    fogo = T.polys(chamas, 0.006)
+    # linhas de velocidade correndo para +x
+    linhas = []
+    for k in range(10):
+        y = sub.uniform(-alto * 0.9, alto * 0.9)
+        x1 = -1.0 + ((t * 2.4 + k * 0.137) % 1.0) * 2.2
+        comp = sub.uniform(0.12, 0.35)
+        linhas.append((x1 - comp, y, x1, y, sub.uniform(0.3, 0.8)))
+    vel = T.tapered(linhas, alto * 0.03)
+    brasas = [(sub.uniform(-0.9, 0.95), sub.normal(0, alto * 0.5), sub.uniform(0.3, 0.9)) for _ in range(14)]
+    br = T.splats(brasas, 0.008)
+    ponta = T.gauss(0.9, 0.0, 0.05, alto * 0.3)
+    G += nucleo * 1.4 + halo * 1.3 + vultos * 0.9 + fogo * 1.1 + T.blur(fogo, 0.01) * 0.8 + vel * 0.7 + br * 1.2 + ponta * 1.2
+    H += nucleo * 1.2 + halo * 0.3 + fogo * 0.35 + vel * 0.25 + ponta * 0.9
+    return G, H
+
+
+def golpe_kaioken(T, t, rng):
+    """O golpe do Kaioken chegando (de −x): as linhas de velocidade convergem, o punho estoura num clarão
+    branco com a estrela do impacto, dois anéis de choque carmesim e uma explosão de chamas vermelhas que
+    se abre para os lados, com brasas voando e o fogo se apagando."""
+    G, H = vazio(T)
+    env = apaga(t, 0.75, 1)
+    chega = 1 - rel(t, 0.0, 0.16)
+    vel = rastro_de_velocidade(T, rng, 22, 0.0, 0.9, 0.5, -0.15 + 0.3 * rel(t, 0.0, 0.16), largura=0.014, seed=13) * chega
+    k = pulso(t, 0.1, 0.42)
+    g, h = _clarao(T, k, 0.0, 0.0, 0.32, 1.0)
+    est = T.polys([(estrela(0.0, 0.0, 0.3 + 0.25 * ease_out(rel(t, 0.1, 0.3), 2), 0.25, 8, 0.38), 1.0)], 0.006) * pulso(t, 0.1, 0.36)
+    anel1 = T.ring(0.12 + 0.75 * ease_out(rel(t, 0.12, 0.5), 2), 0.05) * pulso(t, 0.12, 0.55)
+    anel2 = T.ring(0.1 + 0.55 * ease_out(rel(t, 0.22, 0.65), 2), 0.035, squash=0.55) * pulso(t, 0.22, 0.7)
+    sub = np.random.default_rng(17)
+    chamas = []
+    abre = ease_out(rel(t, 0.14, 0.55), 2)
+    for _ in range(14):
+        ang = sub.normal(0, 0.9)
+        comp = sub.uniform(0.35, 0.75) * abre
+        larg = sub.uniform(0.05, 0.1)
+        c, s_ = math.cos(ang), math.sin(ang)
+        chamas.append(([(-s_ * larg, c * larg), (c * comp + sub.normal(0, 0.03), s_ * comp), (s_ * larg, -c * larg)], sub.uniform(0.6, 1)))
+    fogo = T.polys(chamas, 0.01) * janela(t, 0.14, 0.8)
+    brasas = []
+    for _ in range(36):
+        ang = sub.uniform(-math.pi, math.pi)
+        v = sub.uniform(0.4, 1.0)
+        u = rel(t, 0.15, 0.9)
+        brasas.append((math.cos(ang) * v * u * 0.95, math.sin(ang) * v * u * 0.95 - 0.1 * u * u, (1 - u) * 0.8))
+    br = T.splats(brasas, 0.012) * (t > 0.15)
+    G += (vel * 0.8 + g + est * 1.3 + anel1 * 1.2 + anel2 * 0.9 + fogo * 1.2 + T.blur(fogo, 0.03) * 0.9 + br * 1.4) * env
+    H += (vel * 0.4 + h + est * 1.1 + anel1 * 0.6 + fogo * 0.4 + br * 0.6) * env
     return G, H
 
 
@@ -504,6 +583,8 @@ REGISTRO = [
     ("punho_divergente", punho_divergente, GRANDE, "Punho divergente: o soco e o impacto atrasado", False),
     ("agua_benta", agua_benta, GRANDE, "Água benta: o frasco quebra em chamas sagradas", False),
     ("kaioken", kaioken, GRANDE, "Kaioken: aura de fogo carmesim", False),
+    ("rastro_kaioken", rastro_kaioken, FAIXA, "Kaioken: o rastro carmesim do Goku avançando (faixa)", True),
+    ("golpe_kaioken", golpe_kaioken, GRANDE, "Kaioken: o soco que estoura em chamas carmesim no rival", False),
     ("instinto", instinto, GRANDE, "Instinto Superior: aura prateada e vultos", False),
     ("corvos", corvos, GRANDE, "Ilusão de corvos: revoada que sai do corpo", False),
     ("shun_goku_satsu", shun_goku_satsu, GRANDE, "Shun Goku Satsu: golpes no escuro e o 天", False),

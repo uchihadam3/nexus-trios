@@ -737,6 +737,7 @@ export const QUADRO_DO_GOLPE: Record<string, number> = {
   golpe_do_potencial: 3,
   golpe_fantasma: 6,
   golpe_giratorio: 2,
+  golpe_kaioken: 3,
   golpe_largo: 2,
   golpe_mortal: 2,
   golpe_na_nuca: 4,

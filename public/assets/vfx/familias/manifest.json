@@ -12459,6 +12459,20 @@
   "laco": false,
   "bytes": 28334
  },
+ "golpe_kaioken": {
+  "descricao": "Kaioken: o soco que estoura em chamas carmesim no rival",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   192,
+   192
+  ],
+  "laco": false,
+  "bytes": 85482
+ },
  "golpe_largo": {
   "descricao": "Golpe largo: varrida que pega dois",
   "quadros": 12,
@@ -27620,6 +27634,20 @@
   ],
   "laco": false,
   "bytes": 21176
+ },
+ "rastro_kaioken": {
+  "descricao": "Kaioken: o rastro carmesim do Goku avançando (faixa)",
+  "quadros": 12,
+  "grade": [
+   3,
+   4
+  ],
+  "tamanho": [
+   512,
+   96
+  ],
+  "laco": true,
+  "bytes": 176038
  },
  "ratoeira_invertida": {
   "descricao": "Jerry · a ratoeira fechando",

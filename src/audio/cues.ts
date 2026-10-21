@@ -34,7 +34,9 @@ export type Sound = typeof SONS[number] | (string & { readonly __somNovo?: never
  * subindo. Ele começa com o golpe e termina quando o golpe sai (se voa) ou
  * chega (se é corpo a corpo); o impacto fica só com o estouro.
  */
-const ANTES_DA_NOVA: Partial<Record<FamiliaNova, { antes: Sound; saida?: Sound }>> = {
+const ANTES_DA_NOVA: Partial<Record<FamiliaNova, { antes: Sound; saida?: Sound; impacto?: Sound }>> = {
+  // o Kaioken: o rugido da aura com o Goku parado, o vento do avanço e o soco pesado no rival
+  kaioken: { antes: 'kaioken', saida: 'vento', impacto: 'soco-pesado' },
   esfera_espiral: { antes: 'esfera-espiral-carga' },
   kamehameha: { antes: 'kamehameha-carga', saida: 'kamehameha-feixe' },
   susanoo_perfeito: { antes: 'susanoo-manto' },
@@ -416,7 +418,7 @@ export const SOM_DA_FAMILIA: Record<VfxFamily, SomDaFamilia> = {
     const saida: Sound | undefined = x.faixa === 'laser' ? 'feixe' : x.faixa ? 'feixe' : x.viagem === 'flecha' ? SOM_DA_NOVA('flecha') : x.viagem === 'bola_ki' ? 'disparo' : x.viagem ? 'disparo' : undefined;
     const extra = ANTES_DA_NOVA[k];
     const preparo: Sound | undefined = extra?.antes ?? (x.preparo ? 'carga-grande' : undefined);
-    const impacto = k === 'flecha' ? 'cravar' : SOM_DA_NOVA(k);
+    const impacto = extra?.impacto ?? (k === 'flecha' ? 'cravar' : SOM_DA_NOVA(k));
     return [k, { saida: extra?.saida ?? saida, preparo, impacto, antes: extra?.antes }];
   })) as Record<FamiliaNova, SomDaFamilia>,
 };

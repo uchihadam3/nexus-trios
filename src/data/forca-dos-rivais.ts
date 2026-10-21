@@ -5,7 +5,8 @@
  * Escala: diferença de 1 entre dois trios ≈ 73% de chance para o mais forte.
  * Não editar à mão: rode o script de novo depois de mudar o elenco.
  * Exceção: o Guts (Armadura do Berserker de 6 s para 10 s, pedido do dono) foi medido sozinho, com os outros fixos,
- * em 10.000 lutas: −0,009 → 0,353 (±0,02). A próxima medição completa já o inclui.
+ * em 10.000 lutas: −0,009 → 0,353 (±0,02). O Goku (o Kaioken agora bate 100 e o Kamehameha caiu de 403 para 354,
+ * pedido do dono) também, do mesmo jeito: 0,099 → 0,327. A próxima medição completa já inclui os dois.
  */
 
 /*
@@ -13,7 +14,7 @@
  * usam esta força; tests/forca-atualizada.test.ts falha se um personagem ou
  * o motor mudar sem medir de novo.
  */
-export const MEDIDA_COM = { motor: "nexus-256.0", elenco: "fnv1a-3f7e1e73" };
+export const MEDIDA_COM = { motor: "nexus-256.0", elenco: "fnv1a-5e9ba344" };
 
 export const FORCA: Record<string, number> = {
   "aang": 0.467,
@@ -138,7 +139,7 @@ export const FORCA: Record<string, number> = {
   "godzilla": 0.175,
   "gohan": 0.392,
   "gojo": 0.117,
-  "goku": 0.099,
+  "goku": 0.327,
   "gon": 0.019,
   "gordon": 0.148,
   "goro": -0.13,

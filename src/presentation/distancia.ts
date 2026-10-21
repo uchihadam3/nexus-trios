@@ -37,6 +37,7 @@ const DO_GOLPE: Record<string, Distancia> = {
   thor: 'longe',              // a Martelada trovejante é o Mjolnir arremessado
   'greenlantern:1': 'longe', // o punho de construto do anel
   'coiote:1': 'longe',        // a armadilha já estava montada
+  'goku:1': 'perto',          // o Kaioken: o Goku avança no rival com o rastro carmesim
   'sukuna:0': 'longe', 'sukuna:2': 'longe', // Desmantelar e o Santuário cortam à distância
   taz: 'perto',               // o redemoinho vai até o alvo e morde
   'cloud:1': 'perto',         // a guarda e o contra-ataque com a Buster Sword

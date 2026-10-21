@@ -8,8 +8,10 @@
  * Um caractere por dupla, na ordem do elenco (0-1, 0-2, …, 1-2, …): a posição no alfabeto menos 32, vezes
  * PASSO_DAS_DUPLAS. Vale só para o elenco medido (DUPLAS_MEDIDAS_COM); tests/duplas-ajuste.test.ts confere.
  * Não editar à mão: medir de novo depois de mudar o elenco.
+ * Exceção: o Kaioken do Goku (100 de dano, Kamehameha 403 → 354) só mexeu na força dele, medida à parte
+ * (src/data/forca-dos-rivais.ts); as duplas ficam as mesmas até a próxima medição completa.
  */
-export const DUPLAS_MEDIDAS_COM = "fnv1a-3f7e1e73";
+export const DUPLAS_MEDIDAS_COM = "fnv1a-5e9ba344";
 export const ALFABETO_DAS_DUPLAS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_";
 export const PASSO_DAS_DUPLAS = 0.06;
 export const AJUSTE_DAS_DUPLAS =

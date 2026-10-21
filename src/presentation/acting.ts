@@ -16,7 +16,7 @@ import { etapaDoEvento, revelado, type Beat } from './director';
 import { DESVIA_NA_UNICA, ativacaoNaTela, entregaDoEvento, golpeParado, type AtivacaoNaTela } from './ativacao-da-unica';
 import { combatLinks } from './combat-links';
 import { distanciaDoGolpe } from './distancia';
-import { profileFor } from './vfxProfiles';
+import { familia, profileFor } from './vfxProfiles';
 import { GUARDA_DE_CORPO } from './entrega-de-apoio';
 
 export type ActStyle = 'melee' | 'ranged' | 'area' | 'support' | 'curse' | 'cast' | 'interrupt' | 'esquiva';
@@ -36,6 +36,8 @@ export interface UnitActing {
   parity: 'a' | 'b';
   /** O golpe parou no meio do caminho: quem foi atacado está respondendo com a Mecânica única. */
   pausado?: boolean;
+  /** Fica parado (na aura) e dispara de uma vez até o alvo: o golpe cuja faixa é o rastro de quem avança (o Kaioken). */
+  relampago?: boolean;
   /** Alterna a cada passo da cadeia em que o lutador reage de novo (o dano da Mecânica única depois do golpe). */
   reacaoPar?: 'a' | 'b';
 }
@@ -159,7 +161,9 @@ export function atuacao(beat: Beat | null, battle: Battle, medida: Medida, area:
     // o movimento de quem age dura o golpe, não a cadeia toda: ele volta ao lugar antes da cura no aliado
     // (parado: o golpe espera alguém ativar a Mecânica única no meio do caminho)
     const parada = golpeParado(beat);
-    out[beat.event.source] = { act, dx, dy, ux, uy, seconds: beat.base ?? beat.duration, parity, pausado: !!parada && !parada.propria };
+    const perfil = act === 'melee' ? profileFor(battle.fighters.find((f) => f.uid === beat.event.source)?.characterId ?? '', beat.event.skill) : undefined;
+    const relampago = !!perfil && !!familia(perfil.family).rastro;
+    out[beat.event.source] = { act, dx, dy, ux, uy, seconds: beat.base ?? beat.duration, parity, pausado: !!parada && !parada.propria, ...(relampago ? { relampago } : {}) };
   }
 
   for (const f of battle.fighters) {

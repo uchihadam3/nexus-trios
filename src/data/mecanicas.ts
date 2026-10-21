@@ -210,6 +210,10 @@ export const PEDIDOS_DO_JOGADOR: Record<string, Ajuste[]> = {
   goku: [
     // Kaioken: além do Acelerado 35% por 9 s, Fortalecido 20% por 9 s
     { habilidade: 1, soma: [{ kind: 'status', status: 'strengthened', value: 0.2, duration: 9, target: 'self' }] },
+    // e o golpe do Kaioken (pedido do dono: "ele faz até o movimento de ataque… faz ele atacar de verdade… uns 100 de
+    // dano"): 77 aqui vira 100 na luta. Para compensar, o Kamehameha perde ~50 (403 → 354, src/data/characters.ts).
+    // Medido com os outros fixos: força 0,10 → 0,33
+    { habilidade: 1, soma: [{ kind: 'damage', value: 77 }] },
   ],
   professorx: [
     { habilidade: 0, muda: valor('charge', undefined, (e) => ({ ...e, value: 10 } as Effect)) }, // Coordenação mental: Carga 5 → 10

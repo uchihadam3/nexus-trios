@@ -138,8 +138,8 @@ function ajustaForca(c:Character,tanque:boolean,vidaDeTanque:number):Character{
 }
 const deBase:Character[] = [
  character({id:'goku',name:'Goku',universe:'Dragon Ball',color:'#f7a25e',symbol:'G',idea:'Quanto mais luta, mais forte fica.',vulnerability:'Grandes preparações expostas a interrupções.',hp:1188,interval:3.8,attack:72,visual:'beam',power:87,tags:['growth','burst'],trait:trait('Além do limite','Cada ação aumenta seu poder em 3%, até 80%.','action',[status('strengthened',.03,120)],'self',0),skills:[
-  skill('Kamehameha','beam','Prepara uma onda de 310 de dano.','Tempo + ações', [charge('time',3),charge('action',10)],[damage(310)],{preparation:3,cooldown:5}),
-  skill('Kaioken','impact','Acelera suas ações em 35% por 9 s.','Dano recebido', [charge('received',14),charge('time',2)],[status('haste',.35,9,'self')]),
+  skill('Kamehameha','beam','Prepara a onda de energia mais famosa da Terra.','Tempo + ações', [charge('time',3),charge('action',10)],[damage(272)],{preparation:3,cooldown:5}),
+  skill('Kaioken','impact','Explode em Kaioken e avança num golpe carmesim; acelera suas ações em 35% por 9 s.','Dano recebido', [charge('received',14),charge('time',2)],[status('haste',.35,9,'self')]),
   skill('Instinto','shield','Proteção de 45% e escudo de 180.','Equipe em desvantagem', [charge('losing',7),charge('time',1.5)],[status('protected',.45,7,'self'),shield(180,'self')],{condition:'threatened',target:'self'})]}),
  character({id:'vegeta',name:'Vegeta',universe:'Dragon Ball',color:'#789afa',symbol:'V',idea:'Desvantagem vira poder de fogo.',vulnerability:'Pressiona muito, mas recupera pouco.',hp:1040,interval:3.5,attack:74,visual:'beam',power:85,tags:['burst','revenge'],trait:trait('Orgulho Saiyajin','Receber dano fortalece Vegeta em 5%.','received',[status('strengthened',.05,18)]),skills:[
   skill('Galick Gun','beam','Dispara uma rajada de 240 de dano.','Tempo + dano causado',[charge('time',3),charge('dealt',8)],[damage(240)],{preparation:1.7}),

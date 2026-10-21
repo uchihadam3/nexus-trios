@@ -37,7 +37,7 @@ const GIRO_DA_VARIANTE=[0,16,-12,8];
 /* Altura da faixa em relação ao medalhão. */
 /* Os objetos arremessados (o escudo do Capitão, o batarangue…) voam grandes, para dar para ver o que é. */
 const TAMANHO_DO_VOO:Record<string,number>={genki_dama_voo:2.2,vermelho_bola:1.6,onda_choque_voo:1.9,laser_curto:1.7,portal_bala:1.9,teia_voando:2.0,teia_impacto_bola:2.1,burning_bola:2.3,kienzan_disco:2.4,saraivada:1.25,escudo_voando:2.6,batarangue_voando:2.5,batarangue_eletrico_voo:2.4,mjolnir_voando:2.4,laco_dourado_voo:2.4,bola_da_morte_voo:2.8,corvos_itachi_voo:2.4,repulsor_stark_voo:2.0,escudo_ricochete_voo:2.2,shuriken_voando:2.3,tiara_voando:2.5,dardo_voando:2.4,corvo_voando:2.6,reigun_bala:2.2,shotgun_rajada:2.2,barril_voando:2.4,fenix_voando:2.6,pedra_bloco:2.0,papel_bola:2.2,bola_do_charizard:2.4,buster_bala:2.2,raio_copiado:2.2,carga_maxima_bala:2.6,leao_dourado:2.6,bola_de_ar:2.4};
-const ALTURA_DA_FAIXA:Record<string,number>={feixe:.36,feixe_pesado:.62,raio_faixa:.7,dreno:.42,dragao_faixa:.85,palma_faixa:.55,makanko_faixa:.5,chamas_faixa:.75,calor_faixa:.42,diamante_faixa:.6,aurora_faixa:.78,plasma_faixa:.7,feixe_ciclope:.6,unibeam_faixa:.8,raio_mortal_faixa:.25,kame_faixa_kuririn:.75,plano_b_faixa:.8,galick_faixa:.7,final_flash_faixa:1.0,trovao_faixa:.55};
+const ALTURA_DA_FAIXA:Record<string,number>={rastro_kaioken:.8,feixe:.36,feixe_pesado:.62,raio_faixa:.7,dreno:.42,dragao_faixa:.85,palma_faixa:.55,makanko_faixa:.5,chamas_faixa:.75,calor_faixa:.42,diamante_faixa:.6,aurora_faixa:.78,plasma_faixa:.7,feixe_ciclope:.6,unibeam_faixa:.8,raio_mortal_faixa:.25,kame_faixa_kuririn:.75,plano_b_faixa:.8,galick_faixa:.7,final_flash_faixa:1.0,trovao_faixa:.55};
 
 const s=(x:number)=>`${x.toFixed(3)}s`;
 
@@ -66,7 +66,8 @@ export function BattleEffects({battle,beat,anchors,enabled,reduced,medal=80}:{ba
   // a folha do golpe começa um pouco antes do impacto, para o golpe desenhado cair junto do número (director: antecipaDoGolpe)
   const golpeando=landed||(!reduced&&!!beat?.golpeou);
   const area=isAreaBeat(beat,battle);
-  const D=beat?.duration??2,I=P.impactAt;
+  // B: o tempo do movimento de quem age (src/presentation/acting.ts), que a aura e o rastro acompanham
+  const D=beat?.duration??2,I=P.impactAt,B=beat?.base??D;
   const p1=beat?point(beat.event.source):{x:50,y:50};
   // o golpe vai até quem ele acerta: numa habilidade que bate no rival e cura o aliado (o Cólera do
   // Dragão), o dragão vai até o rival, mesmo que o alvo da habilidade seja o aliado
@@ -145,6 +146,11 @@ export function BattleEffects({battle,beat,anchors,enabled,reduced,medal=80}:{ba
       const t=medal*1.9*intensidade;
       nodes.push(camada(fam.ergue,{left:`${p1.x}%`,top:`calc(${p1.y}% - ${Math.round(medal*.45)}px)`,width:t,height:t,'--fx-cor':cor,'--ang':'0deg','--flip':1,'--dur':s(D*I*.4),'--delay':'0s'},'fxl-impacto fxl-sobre',`ergue-${id}`));
     }
+    // aura: explode em volta de quem age, parado, e acaba quando ele sai para o golpe (o Kaioken do Goku)
+    if(vai&&!landed&&fam.aura){
+      const t=medal*2.1*intensidade;
+      nodes.push(camada(fam.aura,{left:`${p1.x}%`,top:`${p1.y}%`,width:t,height:t,'--fx-cor':cor,'--ang':'0deg','--flip':1,'--dur':s(B*.4),'--delay':'0s'},'fxl-impacto fxl-sobre',`aura-${id}`));
+    }
     if(vai&&fam.viagem&&cadeia){
       const t=medal*(TAMANHO_DO_VOO[fam.viagem]??1.05)*Math.min(1.25,intensidade);
       for(const v of cadeia.trechos)nodes.push(camada(fam.viagem,{left:`${v.de.x}%`,top:`${v.de.y}%`,width:t,height:t,'--dx':`${v.vx}px`,'--dy':`${v.vy}px`,'--ang':`${v.ang}deg`,'--voo':s(v.dura),'--voo-delay':s(v.atraso)},'fxl-laco fxl-voo fxl-quica',`voo-${id}-${v.uid}`));
@@ -171,7 +177,9 @@ export function BattleEffects({battle,beat,anchors,enabled,reduced,medal=80}:{ba
       nodes.push(camada(fam.faixa,{left:`${p1.x}%`,top:`${p1.y}%`,width:varredura.largura,height:h,'--ang0':`${varredura.de}deg`,'--ang1':`${varredura.ate}deg`,'--faixa':s(D*.78),'--faixa-delay':s(D*I*.55)},'fxl-laco fxl-faixa fxl-varre',`faixa-${id}`));
     }else if(vai&&fam.faixa){
       const h=medal*(ALTURA_DA_FAIXA[fam.faixa]??.4)*Math.min(1.3,intensidade);
-      nodes.push(camada(fam.faixa,{left:`${p1.x}%`,top:`${p1.y}%`,width:dist,height:h,'--ang':`${ang}deg`,'--faixa':s(D*.78),'--faixa-delay':s(D*I*.55)},'fxl-laco fxl-faixa',`faixa-${id}`));
+      // o rastro (o Kaioken) cresce junto com quem dispara (de ~38% a ~47% do golpe: act-relampago, src/presentation/acting.css) e some logo depois
+      const rastro=!!fam.rastro;
+      nodes.push(camada(fam.faixa,{left:`${p1.x}%`,top:`${p1.y}%`,width:dist,height:h,'--ang':`${ang}deg`,'--faixa':s(rastro?B*.24:D*.78),'--faixa-delay':s(rastro?B*.36:D*I*.55)},`fxl-laco fxl-faixa${rastro?' fxl-rastro':''}`,`faixa-${id}`));
     }
     // impacto: em cada alvo, depois do contato
     if(golpeando){

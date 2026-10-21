@@ -195,7 +195,7 @@ export function ArenaUnit({fighter:f,battle,beat,onInspect,numbers,threatened,li
     broken&&'is-broken',threatened&&'is-threatened',ring>=P.nearAction&&'is-near',tempo&&'is-tempo',reagindo&&'is-reacting',
   ].filter(Boolean).join(' ');
   /* A atuação deste beat: estilo de quem age, reação de quem recebe, e para onde. */
-  const atua=atuacao?[atuacao.act&&`actor act-${atuacao.act} act-${atuacao.parity}`,atuacao.react&&`reactor react-${atuacao.react} rp-${atuacao.reacaoPar??'a'}`,atuacao.pausado&&'act-pausado'].filter(Boolean).join(' '):'';
+  const atua=atuacao?[atuacao.act&&`actor act-${atuacao.act} act-${atuacao.parity}`,atuacao.react&&`reactor react-${atuacao.react} rp-${atuacao.reacaoPar??'a'}`,atuacao.pausado&&'act-pausado',atuacao.relampago&&'act-relampago'].filter(Boolean).join(' '):'';
   const atuaStyle:Record<string,string>=atuacao?{'--act-dx':`${atuacao.dx.toFixed(1)}px`,'--act-dy':`${atuacao.dy.toFixed(1)}px`,'--act-ux':atuacao.ux.toFixed(3),'--act-uy':atuacao.uy.toFixed(3),'--beat-s':`${atuacao.seconds}s`,'--act-angle':`${(Math.atan2(atuacao.uy,atuacao.ux)*180/Math.PI).toFixed(1)}deg`}:{};
   // o nome da habilidade (ou do Preparo) está à vista: o selo do traço e da mecânica espera ele sair (um nome por vez)
   const comNome=!ativando&&(preparing||(!!source&&beat?.event.kind==='skill'&&beat.event.skill!==undefined&&!!c.skills[beat.event.skill]));
