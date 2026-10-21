@@ -37,7 +37,7 @@
  *   confrontos quem ganha de quem (pedido do dono: chegar perto dos 80% de acerto): trio sorteado contra trio sorteado,
  *              guardando os dois lados. Para não lotar o ramo, a parte já soma as lutas numa tabela personagem ×
  *              personagem e guarda só uma amostra das lutas inteiras (para medir o acerto depois);
- *              scripts/fabrica/somar-confrontos.mjs junta as 80 partes
+ *              scripts/fabrica/somar-confrontos.mjs junta as 100 partes
  * Linhas (confrontos): L a1 a2 a3 b1 b2 b3 v (a amostra; v = 1 se o trio a venceu) · M i j n w (i < j: as n lutas em que
  *              i e j estavam em lados opostos, e w delas o lado de i venceu) · P i j n w (i < j no mesmo trio: n lutas,
  *              w vitórias — a força das duplas com o motor de agora) · T lutas (o total da parte).
@@ -74,7 +74,7 @@ const rnd = () => { r = (Math.imul(r, 1664525) + 1013904223) >>> 0; return r / 4
 const LOTE_DE_TRIOS = 1_000_000;
 /* Quantos trios por lote (topo) e o tamanho do painel de rivais fortes. */
 const TOPO_POR_LOTE = 2000, PAINEL = 3000;
-/* Quantas lutas inteiras cada parte guarda (confrontos): 80 partes × 2.000 = 160 mil por lote, para medir o acerto. */
+/* Quantas lutas inteiras cada parte guarda (confrontos): 100 partes × 2.000 = 200 mil por lote, para medir o acerto. */
 const AMOSTRA_DE_CONFRONTOS = 2000;
 /* As forças da regra "Vida acima do topo" testadas juntas (a de agora é VIDA_ACIMA_DO_TOPO). */
 const VIDAS = [0, 0.1, 0.2, 0.3, 0.4, VIDA_ACIMA_DO_TOPO];

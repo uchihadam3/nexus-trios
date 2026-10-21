@@ -1,7 +1,8 @@
 name: Fábrica de simulação
 # Milhões de lutas para medir força solo, de dupla e de trio
 # (scripts/fabrica/lutas.ts). Só roda quando alguém dispara à mão:
-# 16 máquinas × 5 processos (deixa 4 das 20 vagas do GitHub livres para publicar o site enquanto a fábrica roda), e no fim junta tudo, compactado, no ramo
+# 20 máquinas × 5 processos (todas as 20 vagas do GitHub, pedido do dono: "usa todas pra agilizar"; enquanto a fábrica
+# roda, a publicação do site espera na fila), e no fim junta tudo, compactado, no ramo
 # `fabrica-resultados` (rodadas/<run>-<plano>/lutas.txt.gz). Não mexe na main
 # nem publica nada.
 on:
@@ -13,7 +14,7 @@ on:
         options: [aleatorio, pares, jornada, dificuldade, trios, pontos, estrelas, estrelas-jornada, confrontos, topo]
         default: pares
       lutas:
-        description: 'lutas por processo (são 80 processos; 25000 = 2 milhões); no plano trios, lutas por trio'
+        description: 'lutas por processo (são 100 processos; 25000 = 2,5 milhões); no plano trios, lutas por trio'
         default: '25000'
       semente:
         description: 'semente (mude para ter lutas novas)'
@@ -40,7 +41,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        maquina: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+        maquina: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -60,7 +61,7 @@ jobs:
         run: |
           mkdir -p saida
           for i in 0 1 2 3 4; do
-            node ${{ runner.temp }}/lutas.mjs "$PLANO" $((MAQUINA*5+i)) 80 "$LUTAS" "saida/parte-$((MAQUINA*5+i)).txt" "$SEMENTE" "${SAL:-0}" &
+            node ${{ runner.temp }}/lutas.mjs "$PLANO" $((MAQUINA*5+i)) 100 "$LUTAS" "saida/parte-$((MAQUINA*5+i)).txt" "$SEMENTE" "${SAL:-0}" &
           done
           wait
           wc -l saida/*.txt
@@ -91,7 +92,7 @@ jobs:
           if git fetch -q --depth 1 origin fabrica-resultados; then git switch -q -c fabrica-resultados FETCH_HEAD; else git switch -q --orphan fabrica-resultados; fi
           mkdir -p "$DESTINO"
           if [ "${{ inputs.plano }}" = confrontos ]; then
-            # a tabela personagem × personagem somada das 80 partes (as partes são grandes demais para guardar inteiras)
+            # a tabela personagem × personagem somada das 100 partes (as partes são grandes demais para guardar inteiras)
             node "${{ runner.temp }}/somar-confrontos.mjs" $(ls ${{ runner.temp }}/partes/*.txt | sort -V) 2> "$DESTINO/total.txt" | gzip -9 > "$DESTINO/lutas.txt.gz"
           else
             ls ${{ runner.temp }}/partes/*.txt | sort -V | xargs cat | gzip -9 > "$DESTINO/lutas.txt.gz"
