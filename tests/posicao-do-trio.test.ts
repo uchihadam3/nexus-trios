@@ -32,3 +32,20 @@ describe('posição do trio', () => {
     expect(textoDaPosicao(1234)).toBe('1.234º');
   });
 });
+
+/* Os trios do topo que já lutaram de verdade (src/data/topo-medido.ts). */
+describe('posição medida do topo', () => {
+  it('quem lutou fica com a posição da luta; quem não lutou nunca passa à frente deles', async () => {
+    const { IDS, TRIOS } = await import('../src/data/topo-medido');
+    const { CONTAS, DE, TOTAL_DE_TRIOS } = await import('../src/data/posicoes-dos-trios');
+    const { montarTopoMedido, posicaoDoTime } = await import('../src/presentation/posicao-do-trio');
+    const ranking = montarRanking(DE, CONTAS, TOTAL_DE_TRIOS), topo = montarTopoMedido(IDS, TRIOS);
+    expect(topo.medidos).toBe(TRIOS.length / 6);
+    const ids = IDS.split(',');
+    for (const id of ids) expect(characters.some((c) => c.id === id), id).toBe(true);
+    const primeiro = [0, 2, 4].map((o) => ids[parseInt(TRIOS.slice(o, o + 2), 36)]!);
+    expect(posicaoDoTime(primeiro, ranking, topo)).toBe(1);
+    expect(posicaoDoTime([...primeiro].reverse(), ranking, topo)).toBe(1);
+    expect(posicaoDoTime(['patrick', 'pateta', 'scooby'], ranking, topo)).toBeGreaterThan(topo.medidos);
+  });
+});

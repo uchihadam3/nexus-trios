@@ -23,14 +23,38 @@ export function montarRanking(de: number, contas: string, total: number): Rankin
   };
 }
 
-let carregando: Promise<Ranking> | undefined;
-export const carregarRanking = () => (carregando ??= import('../data/posicoes-dos-trios').then((m) => montarRanking(m.DE, m.CONTAS, m.TOTAL_DE_TRIOS)));
+/*
+ * Os trios do topo que já lutaram de verdade (src/data/topo-medido.ts, plano topo da fábrica): a posição deles é a da luta,
+ * não a da nota (pedido do dono: "ver se eles estão lá mesmo"). Eles são os M primeiros pela nota; quem não lutou ainda
+ * fica com a posição da nota, nunca acima deles.
+ */
+export interface TopoMedido { lugar: Map<string, number>; medidos: number }
+const chave = (team: readonly string[]) => [...team].sort().join('+');
+export function montarTopoMedido(ids: string, trios: string): TopoMedido {
+  const lista = ids.split(','), lugar = new Map<string, number>();
+  for (let n = 0; n * 6 < trios.length; n++) {
+    const t = [0, 2, 4].map((o) => lista[parseInt(trios.slice(n * 6 + o, n * 6 + o + 2), 36)]!);
+    lugar.set(chave(t), n + 1);
+  }
+  return { lugar, medidos: lugar.size };
+}
+/** A posição do time: a medida em luta de verdade (se ele é do topo que já lutou) ou a da nota. */
+export function posicaoDoTime(team: readonly string[], ranking: Ranking, topo?: TopoMedido): number {
+  const medida = topo?.lugar.get(chave(team));
+  if (medida) return medida;
+  const pelaNota = ranking.posicaoDaNota(notaDoTrio(team));
+  return topo ? Math.max(pelaNota, topo.medidos + 1) : pelaNota;
+}
+
+let carregando: Promise<{ ranking: Ranking; topo: TopoMedido }> | undefined;
+export const carregarRanking = () => (carregando ??= Promise.all([import('../data/posicoes-dos-trios'), import('../data/topo-medido')])
+  .then(([m, t]) => ({ ranking: montarRanking(m.DE, m.CONTAS, m.TOTAL_DE_TRIOS), topo: montarTopoMedido(t.IDS, t.TRIOS) })));
 
 /** A posição do time (1 = o melhor trio de todos) e quantos trios existem; null enquanto carrega. */
 export function usePosicaoDoTrio(team: readonly string[]): { posicao: number; total: number } | null {
-  const [ranking, setRanking] = useState<Ranking | null>(null);
-  useEffect(() => { let vivo = true; void carregarRanking().then((r) => { if (vivo) setRanking(r); }).catch(() => {}); return () => { vivo = false; }; }, []);
-  return ranking && team.length === 3 ? { posicao: ranking.posicaoDaNota(notaDoTrio(team)), total: ranking.total } : null;
+  const [dados, setDados] = useState<{ ranking: Ranking; topo: TopoMedido } | null>(null);
+  useEffect(() => { let vivo = true; void carregarRanking().then((r) => { if (vivo) setDados(r); }).catch(() => {}); return () => { vivo = false; }; }, []);
+  return dados && team.length === 3 ? { posicao: posicaoDoTime(team, dados.ranking, dados.topo), total: dados.ranking.total } : null;
 }
 
 /** "1.234º" (pedido do dono: "não precisa colocar de 10 milhões, só a posição") */
