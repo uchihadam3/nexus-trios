@@ -8,9 +8,9 @@ on:
   workflow_dispatch:
     inputs:
       plano:
-        description: 'aleatorio (trio x trio), pares (toda dupla com um terceiro), jornada (trio sorteado, jornada inteira), dificuldade (metas por personagem), trios (todos os trios, 1 milhão por lote), pontos (jornada inteira com os pontos), estrelas (PvP entre times de 1 a 5 estrelas), estrelas-jornada (jornada por estrela, com a regra da Vida em várias forças) ou confrontos (quem ganha de quem: tabela personagem × personagem e uma amostra das lutas)'
+        description: 'aleatorio (trio x trio), pares (toda dupla com um terceiro), jornada (trio sorteado, jornada inteira), dificuldade (metas por personagem), trios (todos os trios, 1 milhão por lote), pontos (jornada inteira com os pontos), estrelas (PvP entre times de 1 a 5 estrelas), estrelas-jornada (jornada por estrela, com a regra da Vida em várias forças) ou confrontos (quem ganha de quem: tabela personagem × personagem e uma amostra das lutas) ou topo (os trios do topo pela nota, 2.000 por lote, de cima para baixo, contra um painel de trios fortes)'
         type: choice
-        options: [aleatorio, pares, jornada, dificuldade, trios, pontos, estrelas, estrelas-jornada, confrontos]
+        options: [aleatorio, pares, jornada, dificuldade, trios, pontos, estrelas, estrelas-jornada, confrontos, topo]
         default: pares
       lutas:
         description: 'lutas por processo (são 80 processos; 25000 = 2 milhões); no plano trios, lutas por trio'
@@ -19,7 +19,7 @@ on:
         description: 'semente (mude para ter lutas novas)'
         default: '1'
       ate:
-        description: 'trios, confrontos e aleatorio: o último lote (a semente é o lote atual; ao terminar, a rodada dispara o próximo até este)'
+        description: 'trios, confrontos, aleatorio e topo: o último lote (a semente é o lote atual; ao terminar, a rodada dispara o próximo até este)'
         default: ''
       sal:
         description: 'trios: muda os rivais sorteados sem mudar o lote (0 = a rodada original; 1 = a 2ª rodada, que não repete as lutas da 1ª)'
@@ -101,8 +101,8 @@ jobs:
           git add rodadas
           git commit -q -m "Fábrica: $(cat "$DESTINO/total.txt") lutas (${{ inputs.plano }}, semente ${{ inputs.semente }}, sal ${{ inputs.sal }})"
           git push -q origin fabrica-resultados
-      - name: Próximo lote (trios, confrontos e aleatorio)
-        if: (inputs.plano == 'trios' || inputs.plano == 'confrontos' || inputs.plano == 'aleatorio') && inputs.ate != '' && fromJSON(inputs.semente) < fromJSON(inputs.ate)
+      - name: Próximo lote (trios, confrontos, aleatorio e topo)
+        if: (inputs.plano == 'trios' || inputs.plano == 'confrontos' || inputs.plano == 'aleatorio' || inputs.plano == 'topo') && inputs.ate != '' && fromJSON(inputs.semente) < fromJSON(inputs.ate)
         env:
           GH_TOKEN: ${{ github.token }}
         run: gh workflow run fabrica.yml --ref "${{ github.ref_name }}" -f plano="${{ inputs.plano }}" -f lutas="${{ inputs.lutas }}" -f semente="$(( ${{ inputs.semente }} + 1 ))" -f ate="${{ inputs.ate }}" -f sal="${{ inputs.sal }}"

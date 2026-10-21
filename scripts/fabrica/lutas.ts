@@ -41,6 +41,12 @@
  * Linhas (confrontos): L a1 a2 a3 b1 b2 b3 v (a amostra; v = 1 se o trio a venceu) · M i j n w (i < j: as n lutas em que
  *              i e j estavam em lados opostos, e w delas o lado de i venceu) · P i j n w (i < j no mesmo trio: n lutas,
  *              w vitórias — a força das duplas com o motor de agora) · T lutas (o total da parte).
+ *   topo       os trios do topo, de cima para baixo (pedido do dono: "começar com os times que estão sempre no topo… ver se
+ *              eles estão lá mesmo… depois a gente vai abaixando"): o lote `semente` são os trios da posição semente × 2.000
+ *              até (semente + 1) × 2.000 pela nota das Dicas; cada um faz <lutas> lutas contra um painel fixo de trios fortes
+ *              (os 3.000 de nota mais alta, sem personagem em comum), trocando o lado a cada luta. Contra trios sorteados
+ *              quase todos os do topo passam de 90% e não dá para separar; contra o painel, dá.
+ * Cada linha (topo): posicao i j k v n (a posição pela nota, de 1 em diante; v vitórias em n lutas contra o painel).
  * A primeira linha (# ...) diz o motor e o elenco, para não misturar medidas.
  */
 import { writeFileSync, appendFileSync } from 'node:fs';
@@ -66,6 +72,8 @@ const N = characters.length;
 let r = (Math.imul(parte + 1, 2654435761) ^ Math.imul(semente + 7, 40503) ^ (plano === 'pares' ? 0x9e3779b9 : plano === 'confrontos' ? 0x6c8e9cf5 : 0) ^ (sal ? Math.imul(sal, 0x2545f491) : 0)) >>> 0;
 const rnd = () => { r = (Math.imul(r, 1664525) + 1013904223) >>> 0; return r / 4294967296; };
 const LOTE_DE_TRIOS = 1_000_000;
+/* Quantos trios por lote (topo) e o tamanho do painel de rivais fortes. */
+const TOPO_POR_LOTE = 2000, PAINEL = 3000;
 /* Quantas lutas inteiras cada parte guarda (confrontos): 80 partes × 2.000 = 160 mil por lote, para medir o acerto. */
 const AMOSTRA_DE_CONFRONTOS = 2000;
 /* As forças da regra "Vida acima do topo" testadas juntas (a de agora é VIDA_ACIMA_DO_TOPO). */
@@ -75,9 +83,10 @@ const sorteia = (fora: Set<number>) => { let i: number; do i = Math.floor(rnd() 
 /* As duplas desta parte (pares): a k-ésima dupla da lista vai para a parte k % partes. */
 const duplas: [number, number][] = [];
 if (plano === 'pares') { let k = 0; for (let i = 0; i < N; i++) for (let j = i + 1; j < N; j++, k++) if (k % partes === parte) duplas.push([i, j]); }
-else if (!['aleatorio', 'jornada', 'dificuldade', 'trios', 'pontos', 'estrelas', 'estrelas-jornada', 'confrontos'].includes(plano)) { console.error(`plano desconhecido: ${plano}`); process.exit(1); }
+else if (!['aleatorio', 'jornada', 'dificuldade', 'trios', 'pontos', 'estrelas', 'estrelas-jornada', 'confrontos', 'topo'].includes(plano)) { console.error(`plano desconhecido: ${plano}`); process.exit(1); }
 
 writeFileSync(saida, `# motor ${ENGINE_VERSION} elenco ${rosterFingerprint()} plano ${plano} parte ${parte}/${partes} semente ${semente}${sal ? ` sal ${sal}` : ''}\n`);
+if (plano === 'topo') { topo(); process.exit(0); }
 if (plano === 'jornada' || plano === 'dificuldade' || plano === 'trios' || plano === 'pontos' || plano === 'estrelas' || plano === 'estrelas-jornada' || plano === 'confrontos') { ({ jornada: jornadas, dificuldade, trios, pontos, estrelas, 'estrelas-jornada': estrelasJornada, confrontos })[plano](); process.exit(0); }
 let buffer = '', feitas = 0;
 const inicio = Date.now();
@@ -121,6 +130,40 @@ function trios() {
   }
   appendFileSync(saida, buf);
   console.log(`parte ${parte}: pronto, ${feitos} trios do lote ${semente}`);
+}
+/* Os trios do elenco em ordem de nota (do melhor para o pior), até a posição `quantos`: [i, j, k] em índices do elenco. */
+function triosPelaNota(quantos: number): number[][] {
+  const total = (N * (N - 1) * (N - 2)) / 6, notas = new Float32Array(total);
+  let g = 0;
+  for (let i = 0; i < N; i++) for (let j = i + 1; j < N; j++) for (let k = j + 1; k < N; k++) notas[g++] = notaDoTrio([characters[i]!.id, characters[j]!.id, characters[k]!.id]);
+  // o corte: a nota do `quantos`-ésimo trio; depois só os que passam dele entram na ordem
+  const corte = Float32Array.from(notas).sort()[Math.max(0, total - quantos)]!;
+  const escolhidos: { g: number; nota: number; t: number[] }[] = [];
+  g = 0;
+  for (let i = 0; i < N; i++) for (let j = i + 1; j < N; j++) for (let k = j + 1; k < N; k++, g++) if (notas[g]! >= corte) escolhidos.push({ g, nota: notas[g]!, t: [i, j, k] });
+  return escolhidos.sort((a, b) => b.nota - a.nota || a.g - b.g).slice(0, quantos).map((x) => x.t);
+}
+function topo() {
+  const de = semente * TOPO_POR_LOTE, ate = de + TOPO_POR_LOTE, ordem = triosPelaNota(Math.max(ate, PAINEL)), painel = ordem.slice(0, PAINEL);
+  let buf = '', feitos = 0;
+  const inicio = Date.now();
+  for (let p = de; p < ate; p++) {
+    if (p % partes !== parte) continue;
+    const t = ordem[p]!, rivais = painel.filter((o) => !o.some((x) => t.includes(x)));
+    let v = 0, n = 0;
+    for (let q = 0; q < lutas; q++) {
+      const o = rivais[Math.floor(rnd() * rivais.length)]!, embaixo = q % 2 === 0;
+      const ids = (x: number[]) => x.map((c) => characters[c]!.id);
+      const luta = embaixo ? createBattle(ids(t), ids(o), Math.floor(rnd() * 2 ** 31), 1) : createBattle(ids(o), ids(t), Math.floor(rnd() * 2 ** 31), 1);
+      for (let s = 0; s < 9000 && !luta.finished; s++) stepBattle(luta);
+      if (!luta.finished) continue;
+      n++; if ((luta.winner === 'player') === embaixo) v++;
+    }
+    buf += `${p + 1} ${t.join(' ')} ${v} ${n}\n`;
+    if (++feitos % 25 === 0) { appendFileSync(saida, buf); buf = ''; console.log(`parte ${parte}: ${feitos} trios · ${((Date.now() - inicio) / 1000).toFixed(0)} s`); }
+  }
+  appendFileSync(saida, buf);
+  console.log(`parte ${parte}: pronto, ${feitos} trios do topo (posições ${de + 1} a ${ate})`);
 }
 /* A jornada inteira, como o jogador joga: quantas das 10 lutas o trio vence. */
 function jornada(team: string[], seed: number) {
