@@ -208,7 +208,7 @@
 .cq-meus-folha header small{font-size:11.5px;font-weight:800;color:#b9a774}
 .cq-meus-busca{display:flex;align-items:center;gap:8px;padding:0 12px;min-height:42px;border-radius:13px;color:#b9a774;background:#ffffff0d;box-shadow:inset 0 0 0 1px #ffd36b33}
 .cq-meus-busca input{flex:1;min-width:0;border:0;outline:0;font:inherit;font-size:15px;color:#fff;background:none}
-.cq-meus-grade{flex:1;overflow-y:auto;overscroll-behavior:contain;display:grid;grid-template-columns:repeat(auto-fill,minmax(60px,1fr));align-content:start;gap:12px 6px;padding:6px 14px 14px}
+.cq-meus-grade{flex:1;min-height:min(56dvh,470px);overflow-y:auto;overscroll-behavior:contain;padding:4px 12px 12px}
 .cq-meus-grade .cq-retrato{max-width:60px}
 .cq-carta.no-trio .cq-retrato{box-shadow:0 0 0 2px #0b0902,0 0 0 4.5px #fff1b0,0 0 18px #ffc94a;animation:cq-meus-pega .3s both}
 @keyframes cq-meus-pega{40%{transform:scale(1.14)}}

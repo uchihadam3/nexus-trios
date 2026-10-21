@@ -1,11 +1,12 @@
-import {useMemo,useState,type CSSProperties} from 'react';
+import {useEffect,useMemo,useState,type CSSProperties} from 'react';
 import {createPortal} from 'react-dom';
 import {Award,Lock,Minus,Play,Search,StarOff,X} from 'lucide-react';
 import {byId} from '../data/characters';
 import type {Character} from '../engine/types';
 import {CUSTO_DA_COLECAO,formatarPontos} from '../engine/pontos';
 import {Portrait} from './Portrait';
-import type {Conquistas} from '../lib/conquistas';
+import {ABAS,PERSONAGENS_DA_ABA,abaDo,type Aba,type Conquistas} from '../lib/conquistas';
+import {Album} from './Album';
 
 /*
  * A Jornada com os seus (pedido do jogador: "um botão lá nos seus personagens… fazer uma jornada com os personagens que
@@ -13,7 +14,8 @@ import type {Conquistas} from '../lib/conquistas';
  * cada luta custa CUSTO_DA_COLECAO (30 mil); o bônus das estrelas de pontos não vale e nada é liberado (nem Conquistas,
  * nem segredos: as lutas extras dos segredos não aparecem e nada abre no Livro).
  *
- * Na tela das Conquistas fica a faixa dourada; tocando nela, abre a escolha: só os seus, com busca, e o trio embaixo.
+ * Na tela das Conquistas fica a faixa dourada; tocando nela, abre a escolha: só os seus, nas abas do álbum (Anime, Heróis…),
+ * com busca, e o trio embaixo.
  */
 const sem=(s:string)=>s.normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase();
 
@@ -48,7 +50,14 @@ export function JornadaComOsSeus({conquistas,onJogar}:{conquistas:Conquistas;onJ
 function Escolha({meus,custo,onFechar,onJogar}:{meus:Character[];custo:string;onFechar:()=>void;onJogar:(trio:string[])=>void}){
   const [trio,setTrio]=useState<string[]>([]);
   const [busca,setBusca]=useState('');
-  const lista=useMemo(()=>{const q=sem(busca.trim());return [...meus].sort((a,b)=>a.name.localeCompare(b.name,'pt-BR')).filter(c=>!q||sem(c.name).includes(q));},[meus,busca]);
+  const [aba,setAba]=useState<Aba>(()=>ABAS.find(x=>meus.some(c=>abaDo(c)===x.id))?.id??'anime');
+  // separados pelas abas das Conquistas (pedido do dono: "ficar separadinho igual"), na mesma ordem do álbum
+  const listas=useMemo(()=>{
+    const q=sem(busca.trim()),seus=new Set(meus.map(c=>c.id));
+    return Object.fromEntries(ABAS.map(x=>[x.id,PERSONAGENS_DA_ABA[x.id].filter(c=>seus.has(c.id)&&(!q||sem(c.name).includes(q)))])) as Record<Aba,Character[]>;
+  },[meus,busca]);
+  // buscando, vai para a aba que tem o nome
+  useEffect(()=>{if(busca.trim()&&!listas[aba].length){const outra=ABAS.find(x=>listas[x.id].length);if(outra)setAba(outra.id);}},[busca,listas,aba]);
   const troca=(id:string)=>setTrio(t=>t.includes(id)?t.filter(x=>x!==id):t.length<3?[...t,id]:t);
   const pronto=trio.length===3;
   return createPortal(<div className="cq-meus-veu" role="dialog" aria-label="Jornada com os seus: escolha o trio" onClick={e=>{if(e.target===e.currentTarget)onFechar();}}>
@@ -60,12 +69,13 @@ function Escolha({meus,custo,onFechar,onJogar}:{meus:Character[];custo:string;on
         {meus.length>12&&<label className="cq-meus-busca"><Search size={15}/><input value={busca} onChange={e=>setBusca(e.target.value)} placeholder="Buscar nos seus" aria-label="Buscar nos seus personagens"/></label>}
       </header>
       <div className="cq-meus-grade">
-        {lista.map((c,i)=>{const n=trio.indexOf(c.id),cheio=n<0&&trio.length===3;
-          return <button key={c.id} className={`cq-carta liberada ${n>=0?'no-trio':''} ${cheio?'apagada':''}`} style={{'--character':c.color,'--i':Math.min(i,40)} as CSSProperties} onClick={()=>troca(c.id)} aria-pressed={n>=0} aria-label={n>=0?`${c.name}: no trio (toque para tirar)`:`Pôr ${c.name} no trio`}>
-            <span className="cq-retrato"><Portrait character={c}/>{n>=0&&<em className="cq-meus-numero">{n+1}</em>}</span>
-            <small>{c.name}</small>
-          </button>;})}
-        {!lista.length&&<p className="cq-meus-nada">Nenhum dos seus com esse nome.</p>}
+        <Album listas={listas} aba={aba} onAba={setAba} rotulo={x=>`${listas[x].length}`}
+          vazio={<p className="cq-meus-nada">{busca.trim()?'Nenhum dos seus com esse nome.':'Nenhum liberado aqui ainda.'}</p>}
+          carta={(c,i)=>{const n=trio.indexOf(c.id),cheio=n<0&&trio.length===3;
+            return <button key={c.id} className={`cq-carta liberada ${n>=0?'no-trio':''} ${cheio?'apagada':''}`} style={{'--character':c.color,'--i':Math.min(i,40)} as CSSProperties} onClick={()=>troca(c.id)} aria-pressed={n>=0} aria-label={n>=0?`${c.name}: no trio (toque para tirar)`:`Pôr ${c.name} no trio`}>
+              <span className="cq-retrato"><Portrait character={c}/>{n>=0&&<em className="cq-meus-numero">{n+1}</em>}</span>
+              <small>{c.name}</small>
+            </button>;}}/>
       </div>
       <footer>
         <div className="cq-meus-trio">{[0,1,2].map(i=>{const c=trio[i]?byId[trio[i]!]:undefined;return c
