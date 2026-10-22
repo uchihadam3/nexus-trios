@@ -1,7 +1,7 @@
 import { chromium } from 'playwright';
 const SAIDA = './prints';
 const b = await chromium.launch();
-const p = await b.newPage({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true });
+const p = await b.newPage({ locale: 'pt-BR', viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true });
 const erros = [];
 p.on('pageerror', e => erros.push(String(e)));
 

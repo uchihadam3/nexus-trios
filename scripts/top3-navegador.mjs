@@ -33,7 +33,7 @@ const sessao = { access_token: `${b64({ alg: 'HS256', typ: 'JWT' })}.${b64({ sub
 const antigo = { leaderboard: { ...simulado.leaderboard, meus: undefined, entries: simulado.leaderboard.entries.filter((e, i, a) => a.findIndex((x) => x.handle === e.handle) === i) } };
 
 for (const modo of ['antigo', 'novo']) {
-  const p = await b.newPage({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, isMobile: true });
+  const p = await b.newPage({ locale: 'pt-BR', viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, isMobile: true });
   const erros = []; p.on('pageerror', (e) => erros.push(String(e)));
   const cors = { 'access-control-allow-origin': '*', 'access-control-allow-headers': '*' };
   await p.route('**/auth/v1/token**', (r) => r.fulfill({ status: 200, contentType: 'application/json', headers: cors, body: JSON.stringify(sessao) }));

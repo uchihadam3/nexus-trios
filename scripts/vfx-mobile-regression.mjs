@@ -11,7 +11,7 @@ const browser=await chromium.launch({headless:true,args:['--no-sandbox']});
 const report={seconds,runs:[],lab:null};mkdirSync('test-results/vfx',{recursive:true});
 try{
  for(const width of widths){
-  const page=await browser.newPage({viewport:{width,height:844}}),errors=[];page.on('pageerror',e=>errors.push(e.message));
+  const page=await browser.newPage({ locale: 'pt-BR', viewport:{width,height:844}}),errors=[];page.on('pageerror',e=>errors.push(e.message));
   await page.addInitScript(()=>{for(const key of ['run','settings']){const fixture=sessionStorage.getItem(`nexus-test-${key}`);if(fixture){localStorage.setItem(`nexus-v1-${key}`,fixture);sessionStorage.removeItem(`nexus-test-${key}`);}}});
   await page.goto('http://127.0.0.1:5173',{waitUntil:'networkidle'});
   await page.evaluate(async effects=>{
@@ -48,7 +48,7 @@ try{
   report.runs.push({width,...metrics,...state,errors});console.log(`${width}px: ${metrics.fps.toFixed(1)}fps p95=${metrics.p95Ms.toFixed(1)}ms, ${metrics.families.join(', ')}, time=${state.battleTime}`);
   await page.close();
  }
- const lab=await browser.newPage({viewport:{width:390,height:844}}),errors=[];lab.on('pageerror',e=>errors.push(e.message));
+ const lab=await browser.newPage({ locale: 'pt-BR', viewport:{width:390,height:844}}),errors=[];lab.on('pageerror',e=>errors.push(e.message));
  await lab.goto('http://127.0.0.1:5173',{waitUntil:'networkidle'});
  await lab.getByRole('button',{name:'Galeria de efeitos'}).click();
  await lab.locator('.vfx-family-card').first().waitFor();

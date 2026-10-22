@@ -5,7 +5,7 @@ const phase=process.argv[2]??'after';
 const root=`test-results/visual-${phase}`;
 mkdirSync(root,{recursive:true});
 const browser=await chromium.launch({headless:true,args:['--no-sandbox']});
-const page=await browser.newPage({viewport:{width:390,height:844},deviceScaleFactor:1});
+const page=await browser.newPage({ locale: 'pt-BR', viewport:{width:390,height:844},deviceScaleFactor:1});
 const errors=[];
 page.on('pageerror',e=>errors.push(e.message));
 const base='http://127.0.0.1:5173/';

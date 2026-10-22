@@ -7,7 +7,7 @@ mkdirSync('test-results/ux',{recursive:true});
 const results=[];
 try{
   for(const width of [360,390,430]){
-    const context=await browser.newContext({viewport:{width,height:844}});
+    const context=await browser.newContext({ locale: 'pt-BR', viewport:{width,height:844}});
     const page=await context.newPage(),errors=[];
     page.on('pageerror',error=>errors.push(error.message));
     const check=async screen=>{

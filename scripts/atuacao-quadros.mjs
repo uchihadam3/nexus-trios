@@ -10,7 +10,7 @@ const CENARIOS = (process.env.CENARIOS ?? 'basic,energy,heal,buff,debuff,interru
 const QUADROS = Number(process.env.QUADROS ?? 8);
 const b = await chromium.launch();
 for (const c of CENARIOS) {
-  const p = await b.newPage({ viewport: { width: Number(W), height: Number(H) }, deviceScaleFactor: 1, isMobile: Number(W) < 1000, hasTouch: Number(W) < 1000 });
+  const p = await b.newPage({ locale: 'pt-BR', viewport: { width: Number(W), height: Number(H) }, deviceScaleFactor: 1, isMobile: Number(W) < 1000, hasTouch: Number(W) < 1000 });
   const erros = []; p.on('pageerror', (e) => erros.push(String(e)));
   await p.goto(`http://localhost:${porta}/visual-probe.html?scenario=${c}&play=1`, { waitUntil: 'networkidle' });
   /* espera o laço recomeçar, para pegar a ação desde o início */

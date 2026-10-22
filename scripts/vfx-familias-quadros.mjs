@@ -13,7 +13,7 @@ const HABS = (process.env.HABS ?? 'goku:0').split(',');
 const QUADROS = Number(process.env.QUADROS ?? 6);
 const b = await chromium.launch();
 for (const h of HABS) {
-  const p = await b.newPage({ viewport: { width: Number(W), height: Number(H) }, deviceScaleFactor: Number(process.env.DPR ?? 1), isMobile: Number(W) < 1000, hasTouch: Number(W) < 1000 });
+  const p = await b.newPage({ locale: 'pt-BR', viewport: { width: Number(W), height: Number(H) }, deviceScaleFactor: Number(process.env.DPR ?? 1), isMobile: Number(W) < 1000, hasTouch: Number(W) < 1000 });
   const erros = []; p.on('pageerror', (e) => erros.push(String(e)));
   await p.goto(`http://localhost:${porta}/visual-probe.html?hab=${h}&play=1`, { waitUntil: 'networkidle' });
   await p.waitForFunction(() => document.querySelector('.battle-screen')?.getAttribute('data-beat-id') === '1001', null, { timeout: 15000 });

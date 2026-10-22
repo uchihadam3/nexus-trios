@@ -10,7 +10,7 @@ import { chromium } from 'playwright';
 const [porta = '4331', prefixo = 'depois'] = process.argv.slice(2);
 const SAIDA = process.env.SAIDA ?? './prints';
 const b = await chromium.launch();
-const p = await b.newPage({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true });
+const p = await b.newPage({ locale: 'pt-BR', viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true });
 const erros = []; p.on('pageerror', (e) => erros.push(String(e)));
 await p.goto(`http://localhost:${porta}/nexus-trios/`, { waitUntil: 'networkidle' });
 for (const nome of ['Naruto', 'Mulher-Maravilha', 'Ciclope', 'Shazam']) {

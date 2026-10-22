@@ -10,7 +10,7 @@ const url = process.argv[2] ?? 'http://localhost:5173/nexus-trios/';
 const b = await chromium.launch();
 const medidas = [];
 for (let i = 0; i < 3; i++) {
-  const ctx = await b.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, isMobile: true });
+  const ctx = await b.newContext({ locale: 'pt-BR', viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, isMobile: true });
   const p = await ctx.newPage();
   const cdp = await ctx.newCDPSession(p);
   await cdp.send('Network.enable');

@@ -19,7 +19,7 @@ import { execSync } from 'node:child_process';
 const proxy = (process.env.HTTPS_PROXY ?? '').replace(/^http:\/\//, '').replace(/\/$/, '');
 const spki = proxy && execSync("openssl x509 -in /root/.ccr/agent-proxy-ca.crt -pubkey -noout | openssl pkey -pubin -outform der | openssl dgst -sha256 -binary | base64").toString().trim();
 const b = await chromium.launch(proxy ? { args: [`--proxy-server=https=${proxy}`, `--ignore-certificate-errors-spki-list=${spki}`] } : {});
-const p = await b.newPage({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true });
+const p = await b.newPage({ locale: 'pt-BR', viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true });
 const erros = []; p.on('pageerror', (e) => erros.push(String(e)));
 const falhas = []; p.on('response', (r) => { if (r.url().includes('supabase') && r.status() >= 400) falhas.push(`${r.status()} ${r.url().split('/').slice(-2).join('/')}`); });
 const passo = (t) => console.log(`▶ ${t}`);
@@ -40,7 +40,7 @@ console.log('   entrou:', logado, '· nome na tela:', logado ? await p.locator('
 await p.screenshot({ path: `${SAIDA}/online-conta.png`, fullPage: true });
 
 passo('senha errada mostra erro em português');
-const p2 = await b.newPage({ viewport: { width: 390, height: 844 }, isMobile: true });
+const p2 = await b.newPage({ locale: 'pt-BR', viewport: { width: 390, height: 844 }, isMobile: true });
 await p2.goto('http://localhost:5173/nexus-trios/', { waitUntil: 'networkidle' });
 await p2.getByRole('button', { name: /conta/i }).first().click(); await p2.waitForTimeout(600);
 await p2.getByPlaceholder('voce@exemplo.com').fill(email);

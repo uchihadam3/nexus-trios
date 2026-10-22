@@ -19,7 +19,7 @@ const browser=await chromium.launch({headless:true,args:['--no-sandbox']});
 const report={mode,seconds,browser:'Chromium headless',mobileCpuThrottling,fixture:{team:['goku','pikachu','sakura'],enemy:['thor','scarletwitch','captain'],seed:451,chargedSkills:true},assets:{vfxBytes,vfxDecodedBytes:vfxDecoded,sfxBytes,atlasCount:Object.keys(vfx.families).length},runs:[]};
 try{
  for(const width of widths)for(const effects of [false,true]){
-  const page=await browser.newPage({viewport:{width,height:844},deviceScaleFactor:1});
+  const page=await browser.newPage({ locale: 'pt-BR', viewport:{width,height:844},deviceScaleFactor:1});
   const errors=[];page.on('pageerror',e=>errors.push(e.message));
   if(width<600&&mobileCpuThrottling>1){const client=await page.context().newCDPSession(page);await client.send('Emulation.setCPUThrottlingRate',{rate:mobileCpuThrottling});}
   await page.addInitScript(()=>{for(const key of ['run','settings']){const fixture=sessionStorage.getItem(`nexus-test-${key}`);if(fixture){localStorage.setItem(`nexus-v1-${key}`,fixture);sessionStorage.removeItem(`nexus-test-${key}`);}}});

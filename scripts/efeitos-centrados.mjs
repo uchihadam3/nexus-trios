@@ -18,7 +18,7 @@ const confiarNoProxy = () => {
   return chaves.length ? [`--ignore-certificate-errors-spki-list=${chaves.join(',')}`] : [];
 };
 const b = await chromium.launch(remoto && process.env.HTTPS_PROXY ? { channel: 'chromium', proxy: { server: process.env.HTTPS_PROXY }, args: confiarNoProxy() } : {});
-const p = await b.newPage({ viewport: { width: Number(W), height: Number(H) }, isMobile: Number(W) < 1000, hasTouch: Number(W) < 1000 });
+const p = await b.newPage({ locale: 'pt-BR', viewport: { width: Number(W), height: Number(H) }, isMobile: Number(W) < 1000, hasTouch: Number(W) < 1000 });
 await p.goto(URL_JOGO, { waitUntil: 'networkidle' });
 await p.evaluate(() => { try { localStorage.clear(); localStorage.setItem('nexus-battle-guide-v1', '1'); } catch { /* */ } });
 await p.reload({ waitUntil: 'networkidle' });

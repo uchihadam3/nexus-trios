@@ -3,7 +3,7 @@ import { chromium } from 'playwright';
 const SAIDA = process.env.SAIDA ?? './prints';
 const b = await chromium.launch();
 for (const [nome, w, h] of [['deitado', 844, 390], ['em-pe', 390, 844]]) {
-  const p = await b.newPage({ viewport: { width: w, height: h }, deviceScaleFactor: 2, isMobile: true, hasTouch: true });
+  const p = await b.newPage({ locale: 'pt-BR', viewport: { width: w, height: h }, deviceScaleFactor: 2, isMobile: true, hasTouch: true });
   const erros = []; p.on('pageerror', (e) => erros.push(String(e)));
   await p.goto('http://localhost:4334/visual-probe.html?scenario=basic', { waitUntil: 'networkidle' });
   await p.waitForTimeout(1200);

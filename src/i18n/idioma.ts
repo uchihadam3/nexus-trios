@@ -8,8 +8,8 @@
  */
 export type Idioma = 'pt' | 'en';
 const CHAVE = 'nexus-v1-idioma';
-/* Enquanto o fluxo principal não está todo traduzido, o inglês fica escondido (só aparece com ?idioma=en, para conferir). */
-export const INGLES_LIBERADO = false;
+/* O inglês está liberado: o botão aparece nas Configurações e no login, e quem abre o jogo num navegador em outra língua já entra em inglês. */
+export const INGLES_LIBERADO = true;
 
 function inicial(): Idioma {
   if (typeof window === 'undefined') return 'pt';

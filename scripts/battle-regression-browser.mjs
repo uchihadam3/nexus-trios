@@ -10,7 +10,7 @@ mkdirSync('test-results/battle-regression',{recursive:true});
 const report={checks:[],runs:[],errors:[]};
 try{
  async function run(width,speed,full,scenario='baseline'){
-  const page=await browser.newPage({viewport:{width,height:844}});
+  const page=await browser.newPage({ locale: 'pt-BR', viewport:{width,height:844}});
   page.on('pageerror',error=>report.errors.push(`${width}/${speed}x: ${error.message}`));
   await page.addInitScript(()=>{
    for(const key of ['run','settings']){

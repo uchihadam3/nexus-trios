@@ -228,3 +228,6 @@
 .cq-meus-lembrete b{color:#ffb84a}
 .cq-meus-jogar{display:flex;align-items:center;justify-content:center;gap:8px;min-height:54px;border-radius:16px;font-size:16px;font-weight:900;letter-spacing:.6px;color:#2a1d02;background:linear-gradient(180deg,#fff1b0,#ffc94a 55%,#f0a52a);box-shadow:0 0 20px #ffc94a77,inset 0 -3px 0 #c97f12}
 .cq-meus-jogar:disabled{color:#a8976a;background:#2a2410;box-shadow:inset 0 0 0 1px #ffd36b33}
+/* Em inglês as palavras do cartão são mais longas ("ACHIEVEMENTS", "3 challenges today"): letras mais juntas para caber. */
+html[lang='en'] .hv-faixas .hv-cq-texto b{letter-spacing:0;font-size:10.5px}
+html[lang='en'] .hv-cq-desafio{letter-spacing:0;padding:1px 4px;margin-left:0;max-width:100%;box-sizing:border-box}

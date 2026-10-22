@@ -3,7 +3,7 @@ import { chromium } from 'playwright';
 const SAIDA = process.env.SAIDA ?? './prints';
 const URL = process.env.URL ?? 'http://localhost:4334';
 const b = await chromium.launch();
-const p = await b.newPage({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true });
+const p = await b.newPage({ locale: 'pt-BR', viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true });
 const erros = []; p.on('pageerror', (e) => erros.push(String(e)));
 await p.goto(`${URL}/visual-probe.html?scenario=acumulo&phase=impact`, { waitUntil: 'networkidle' });
 await p.waitForTimeout(1200);
@@ -23,7 +23,7 @@ console.log('erros:', erros.length ? erros : 'nenhum');
 await b.close();
 /* E direto no ícone de um personagem seu: Sakura com Acelerado. */
 const b2 = await chromium.launch();
-const p2 = await b2.newPage({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true });
+const p2 = await b2.newPage({ locale: 'pt-BR', viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true });
 await p2.goto(`${URL}/visual-probe.html?scenario=acumulo&phase=impact`, { waitUntil: 'networkidle' });
 await p2.waitForTimeout(1200);
 const icone = p2.locator('.status-badge[aria-label^="Acelerado"]').first();

@@ -1,6 +1,6 @@
 import { chromium } from 'playwright';
 const b = await chromium.launch();
-const p = await b.newPage({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, isMobile: true });
+const p = await b.newPage({ locale: 'pt-BR', viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, isMobile: true });
 const erros = []; p.on('pageerror', e => erros.push(String(e)));
 await p.goto('http://localhost:4320/conta-probe.html', { waitUntil: 'networkidle' });
 await p.waitForTimeout(1200);

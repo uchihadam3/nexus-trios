@@ -6,7 +6,7 @@ await server.listen();
 process.env.PLAYWRIGHT_BROWSERS_PATH??='/tmp/nexus-browsers';
 const {chromium}=createRequire(import.meta.url)('@playwright/test');
 const browser=await chromium.launch({headless:true,args:['--no-sandbox']});
-const page=await browser.newPage({viewport:{width:390,height:844}});
+const page=await browser.newPage({ locale: 'pt-BR', viewport:{width:390,height:844}});
 await page.addInitScript(()=>{
  for(const key of ['run','settings']){const fixture=sessionStorage.getItem(`nexus-test-${key}`);if(fixture){localStorage.setItem(`nexus-v1-${key}`,fixture);sessionStorage.removeItem(`nexus-test-${key}`);}}
 });

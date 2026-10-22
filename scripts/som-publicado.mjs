@@ -19,7 +19,7 @@ const confiarNoProxy = () => {
   return chaves.length ? [`--ignore-certificate-errors-spki-list=${chaves.join(',')}`] : [];
 };
 const b = await chromium.launch(remoto && process.env.HTTPS_PROXY ? { channel: 'chromium', proxy: { server: process.env.HTTPS_PROXY }, args: [...confiarNoProxy(), '--autoplay-policy=no-user-gesture-required'] } : { args: ['--autoplay-policy=no-user-gesture-required'] });
-const p = await b.newPage({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true });
+const p = await b.newPage({ locale: 'pt-BR', viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true });
 const erros = [], audio = new Map();
 p.on('pageerror', (e) => erros.push(String(e).slice(0, 160)));
 p.on('response', (r) => { const u = new URL(r.url()); if (u.pathname.includes('/assets/audio/')) audio.set(u.pathname.replace(/.*\/assets\/audio\//, ''), r.status()); });

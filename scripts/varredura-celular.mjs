@@ -50,7 +50,7 @@ let problemas = 0;
 const resumo = [];
 for (const largura of LARGURAS) {
   for (const [tela, ir] of TELAS) {
-    const p = await b.newPage({ viewport: { width: largura, height: 800 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true });
+    const p = await b.newPage({ locale: 'pt-BR', viewport: { width: largura, height: 800 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true });
     const erros = []; p.on('pageerror', (e) => erros.push(String(e).slice(0, 120)));
     await p.goto(URL_JOGO, { waitUntil: 'networkidle' });
     await p.evaluate(() => { try { localStorage.setItem('nexus-battle-guide-v1', '1'); } catch { /* */ } });

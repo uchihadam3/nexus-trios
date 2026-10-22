@@ -9,7 +9,7 @@ const TELAS = [['360', 360, 780, true], ['390', 390, 844, true], ['430', 430, 93
 const CENARIOS = (process.env.CENARIOS ?? 'acumulo,basic').split(',');
 const b = await chromium.launch();
 for (const cenario of CENARIOS) for (const [nome, w, h, mobile] of TELAS) {
-  const p = await b.newPage({ viewport: { width: w, height: h }, deviceScaleFactor: 2, isMobile: mobile, hasTouch: mobile });
+  const p = await b.newPage({ locale: 'pt-BR', viewport: { width: w, height: h }, deviceScaleFactor: 2, isMobile: mobile, hasTouch: mobile });
   const erros = []; p.on('pageerror', (e) => erros.push(String(e)));
   await p.goto(`http://localhost:${porta}/visual-probe.html?scenario=${cenario}&phase=impact`, { waitUntil: 'networkidle' });
   await p.waitForTimeout(1200);

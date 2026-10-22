@@ -6,7 +6,7 @@ const require=createRequire(import.meta.url);
 process.env.PLAYWRIGHT_BROWSERS_PATH??='/tmp/nexus-browsers';
 const {chromium}=require('@playwright/test');
 const browser=await chromium.launch({headless:true,args:['--no-sandbox']});
-const page=await browser.newPage({viewport:{width:1440,height:1080},deviceScaleFactor:1});
+const page=await browser.newPage({ locale: 'pt-BR', viewport:{width:1440,height:1080},deviceScaleFactor:1});
 await page.clock.install();
 const issues=[];page.on('pageerror',e=>issues.push(e.message));page.on('console',e=>{if(e.type()==='error')issues.push(e.text());});
 mkdirSync('test-results',{recursive:true});

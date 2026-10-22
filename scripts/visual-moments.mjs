@@ -6,7 +6,7 @@ const {chromium}=createRequire(import.meta.url)('@playwright/test');
 const server=await createServer({server:{host:'127.0.0.1',port:5174,strictPort:true}});await server.listen();
 const browser=await chromium.launch({headless:true,args:['--no-sandbox']});
 try{
- const page=await browser.newPage({viewport:{width:390,height:844}});await page.clock.install();
+ const page=await browser.newPage({ locale: 'pt-BR', viewport:{width:390,height:844}});await page.clock.install();
  await page.addInitScript(()=>{const fixture=sessionStorage.getItem('moment-fixture');if(fixture){localStorage.setItem('nexus-v1-run',fixture);sessionStorage.removeItem('moment-fixture');}});
  await page.goto('http://127.0.0.1:5174');
  await page.evaluate(async()=>{const {createBattle}=await import('/src/engine/battle.ts');const {generateCampaign,newDraft}=await import('/src/engine/campaign.ts');const team=['light','pikachu','wolverine'],seed=42,encounters=generateCampaign(seed);encounters[0].team=['gojo','goku','raven'];sessionStorage.setItem('moment-fixture',JSON.stringify({seed,team,encounters,index:0,stage:'battle',draft:{...newDraft(seed),team},battle:createBattle(team,encounters[0].team,seed),recorded:false}));localStorage.setItem('nexus-v1-settings',JSON.stringify({volume:0,speed:1,effects:true,numbers:false,reducedMotion:false,auto:false}));});

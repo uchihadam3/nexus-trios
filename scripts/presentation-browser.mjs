@@ -7,7 +7,7 @@ const browser=await chromium.launch({headless:true,args:['--no-sandbox']});
 mkdirSync('test-results',{recursive:true});
 const errors=[],report={checks:[],errors};
 try{
- const page=await browser.newPage({viewport:{width:390,height:844}});page.on('pageerror',e=>errors.push(e.message));
+ const page=await browser.newPage({ locale: 'pt-BR', viewport:{width:390,height:844}});page.on('pageerror',e=>errors.push(e.message));
  await page.addInitScript(()=>{for(const key of ['run','settings']){const fixture=sessionStorage.getItem(`nexus-test-${key}`);if(fixture){localStorage.setItem(`nexus-v1-${key}`,fixture);sessionStorage.removeItem(`nexus-test-${key}`);}}});
  await page.goto('http://127.0.0.1:5173',{waitUntil:'networkidle'});
  const locked=await page.evaluate(async()=>(await import('/src/lib/audio.ts')).battleAudio.status);

@@ -6,7 +6,7 @@ const server=await createServer({server:{host:'127.0.0.1',port:5173,strictPort:t
 await server.listen();
 const browser=await chromium.launch({headless:true,args:['--no-sandbox']});
 try{
- const page=await browser.newPage({viewport:{width:390,height:844}});
+ const page=await browser.newPage({ locale: 'pt-BR', viewport:{width:390,height:844}});
  const errors=[];page.on('pageerror',e=>errors.push(e.message));
  await page.addInitScript(()=>{
   for(const key of ['run','settings']){

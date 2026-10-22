@@ -7,7 +7,7 @@ const scenarios={basic:{source:'player-0',target:'enemy-0',kind:'attack',number:
 const report=[];
 try{
   for(const [name,expected] of Object.entries(scenarios)){
-    const page=await browser.newPage({viewport:{width:390,height:844}}),errors=[];
+    const page=await browser.newPage({ locale: 'pt-BR', viewport:{width:390,height:844}}),errors=[];
     page.on('pageerror',e=>errors.push(e.message));
     const load=async phase=>{
       await page.goto(`http://127.0.0.1:5173/visual-probe.html?scenario=${name}&phase=${phase}`,{waitUntil:'networkidle'});
@@ -33,7 +33,7 @@ try{
     report.push({name,source:expected.source,target:expected.target,kind:expected.kind,ok:true});
     await page.close();
   }
-  const page=await browser.newPage({viewport:{width:390,height:844}});
+  const page=await browser.newPage({ locale: 'pt-BR', viewport:{width:390,height:844}});
   await page.goto('http://127.0.0.1:5173/visual-probe.html?scenario=basic&phase=windup',{waitUntil:'networkidle'});
   for(const [step,delay] of [['01-source',10],['02-target',80],['03-travel',350]]){await page.waitForTimeout(delay);await page.screenshot({path:`${root}/${step}.png`,fullPage:true});}
   await page.goto('http://127.0.0.1:5173/visual-probe.html?scenario=basic&phase=impact',{waitUntil:'networkidle'});

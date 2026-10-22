@@ -11,7 +11,7 @@ const SAIDA = process.env.SAIDA ?? './prints';
 const proxy = (process.env.HTTPS_PROXY ?? '').replace(/^http:\/\//, '').replace(/\/$/, '');
 const spki = proxy && execSync("openssl x509 -in /root/.ccr/agent-proxy-ca.crt -pubkey -noout | openssl pkey -pubin -outform der | openssl dgst -sha256 -binary | base64").toString().trim();
 const b = await chromium.launch(proxy ? { args: [`--proxy-server=https=${proxy}`, `--ignore-certificate-errors-spki-list=${spki}`] } : {});
-const p = await b.newPage({ viewport: { width: 844, height: 390 }, deviceScaleFactor: 1, isMobile: true, hasTouch: true });
+const p = await b.newPage({ locale: 'pt-BR', viewport: { width: 844, height: 390 }, deviceScaleFactor: 1, isMobile: true, hasTouch: true });
 const erros = []; p.on('pageerror', (e) => erros.push(String(e)));
 p.on('response', async (r) => {
   if (!r.url().includes('/functions/v1/ranked-api') || r.request().method() !== 'POST') return;

@@ -8,7 +8,7 @@ await server.listen();
 const browser=await chromium.launch({headless:true,args:['--no-sandbox']});
 mkdirSync('test-results/journey',{recursive:true});
 try{
- const page=await browser.newPage({viewport:{width:390,height:844}});
+ const page=await browser.newPage({ locale: 'pt-BR', viewport:{width:390,height:844}});
  const errors=[];page.on('pageerror',e=>errors.push(e.message));
  await page.addInitScript(()=>{
   const fixture=sessionStorage.getItem('nexus-test-run');
