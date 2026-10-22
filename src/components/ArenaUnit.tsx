@@ -283,7 +283,7 @@ export function ArenaUnit({fighter:f,battle,beat,onInspect,numbers,threatened,li
       const espera=mode==='ready'&&!focused&&s.condition!=='always'&&!condicaoAtendida(battle,f,s);
       const label=espera?t('pronta, esperando a regra de uso'):t({empty:'vazia',charging:'carregando',ready:'pronta',preparing:'preparando',executing:'executando',cooldown:'em recarga'}[mode]);
       return <div className={`ability-wrap ${assisted?'ability-assisted':''} ${ready?'just-ready':''}`} key={s.id}>
-        <button data-ability={`${f.uid}-${i}`} className={`ability ${mode} ${espera?'is-waiting':''}`} onClick={()=>onInspect({kind:'skill',fighter:f,index:i})} aria-label={t('{habilidade}: {estado}. Toque para explicar',{habilidade:t(s.name),estado:label})} title={`${t(s.name)} · ${label}`}>
+        <button data-ability={`${f.uid}-${i}`} className={`ability ${mode} ${espera?'is-waiting':''}`} onClick={()=>onInspect({kind:'skill',fighter:f,index:i})} aria-label={t('{habilidade}: {situacao}. Toque para explicar',{habilidade:t(s.name),situacao:label})} title={`${t(s.name)} · ${label}`}>
           <span className="ability-fill" style={{height:`${Math.max(0,Math.min(100,fill))}%`}}/>
           <SkillIcon type={s.icon} size={20} characterId={c.id} skillId={s.id}/>
           <svg className="ability-meter" viewBox="0 0 40 40" aria-hidden="true"><rect x="2" y="2" width="36" height="36" rx="10" pathLength="100" strokeDasharray={`${Math.max(0,Math.min(100,fill))} 100`}/></svg>

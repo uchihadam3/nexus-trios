@@ -350,7 +350,7 @@ export const EN: Readonly<Record<string, string>> = {
   "preparando": "preparing",
   "executando": "executing",
   "em recarga": "on cooldown",
-  "{habilidade}: {estado}. Toque para explicar": "{habilidade}: {estado}. Tap to explain",
+  "{habilidade}: {situacao}. Toque para explicar": "{habilidade}: {situacao}. Tap to explain",
   "Traço": "Trait",
   "Mecânica": "Mechanic",
 };
