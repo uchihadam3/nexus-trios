@@ -147,7 +147,7 @@ async function avancar(db: Db, p: Partida): Promise<Partida> {
 const tempoDe = (x: unknown) => new Date(x as string).getTime();
 /**
  * Marca que quem pergunta está na partida. No meio do jogo, se o outro sumiu há mais de AUSENCIA_MAXIMA, quem ficou
- * vence (a luta na tela segue até lá; a vitória vale como as 3 rodadas). Devolve a partida e há quanto tempo o rival
+ * vence (a vitória vale como as 3 rodadas). O tempo da luta na tela não conta: a ausência começa quando ela acaba. Devolve a partida e há quanto tempo o rival
  * não dá notícia (para a tela mostrar "desconectou, X s para voltar").
  */
 async function presenca(db: Db, p: Partida, quem: string): Promise<{ p: Partida; ausencia: number | null }> {
@@ -157,7 +157,14 @@ async function presenca(db: Db, p: Partida, quem: string): Promise<{ p: Partida;
   const outro = p.desafiante === quem ? p.desafiado : p.desafiante;
   const { data } = await db.from('pvp_presenca').select('visto_em').eq('partida_id', p.id).eq('jogador', outro).maybeSingle();
   if (!data) return { p, ausencia: null };
-  const ha = Math.max(0, (Date.now() - tempoDe(data.visto_em)) / 1000);
+  // a luta passando na tela conta como presença (pedido do dono: "enquanto a luta tá rolando, não tem tempo"): quem
+  // sai no meio dela só começa a perder os 45 s quando ela acaba e falta avançar para a próxima
+  let desde = tempoDe(data.visto_em);
+  if (p.estado === 'jogando' && p.inicio_em && p.resolvida >= 0 && p.resolvida === p.rodada - 1) {
+    const { data: r } = await db.from('pvp_rodadas').select('duracao').eq('partida_id', p.id).eq('n', p.resolvida).maybeSingle();
+    if (r) desde = Math.max(desde, tempoDe(p.inicio_em) + duracaoNaTela(Number(r.duracao)) * 1000);
+  }
+  const ha = Math.max(0, (Date.now() - desde) / 1000);
   if (p.estado === 'jogando' && ha > AUSENCIA_MAXIMA) {
     const { error: e } = await db.rpc('pvp_aplicar_resultado', { p_partida: p.id, p_vencedor: quem, p_motivo: 'desconectou' });
     if (e) throw e;

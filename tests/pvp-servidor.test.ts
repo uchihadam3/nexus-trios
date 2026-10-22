@@ -15,6 +15,7 @@ import pg from 'pg';
 import { acaoPvp } from '../supabase/functions/ranked-api/pvp';
 import { characters } from '../src/data/characters';
 import { emprestadosDoDia } from '../src/engine/emprestimo';
+import { duracaoNaTela } from '../src/engine/pvp';
 
 const ADMIN = process.env.NEXUS_PG_URL;
 const BANCO = `nexus_pvpsrv_${Date.now()}`;
@@ -242,6 +243,31 @@ describe.skipIf(!ADMIN)('PvP online: o juiz no servidor, partida inteira', () =>
     const fim = (await pede(a, { op: 'estado', partida: id })).body.partida!;
     expect(fim).toMatchObject({ fase: 'terminada', vencedor: 'eu', motivo: 'desconectou' });
     expect((await pede(b, { op: 'estado', partida: id })).body.partida!.vencedor).toBe('rival');
+  });
+
+  it('sair durante a luta não conta: os 45 s só correm depois que a luta acaba na tela', async () => {
+    const a = await conta(COLECAO_A), b = await conta(COLECAO_B);
+    const id = (await pede(a, { op: 'desafiar', alvo: b })).body.partida!.id;
+    await pede(b, { op: 'responder', partida: id, aceitar: true });
+    await pede(a, { op: 'times', partida: id, times: [['goku', 'vegeta', 'gohan'], ['naruto', 'sasuke', 'kakashi'], ['luffy', 'zoro', 'sanji']] });
+    await pede(b, { op: 'times', partida: id, times: [['itachi', 'light', 'pikachu'], ['shaka', 'batman', 'superman'], ['wonderwoman', 'thor', 'magneto']] });
+    await pede(a, { op: 'escolher', partida: id, n: 0, time: 0 });
+    await pede(b, { op: 'escolher', partida: id, n: 0, time: 0 });
+    await pede(a, { op: 'lutar', partida: id });
+    const luta = (await pede(b, { op: 'lutar', partida: id })).body.partida!;
+    expect(luta.inicioEm).toBeTruthy();
+    // b sumiu há 50 s, mas a luta ainda está passando: nada de contagem, a partida segue
+    await db.query(`update public.pvp_presenca set visto_em = now() - interval '50 seconds' where partida_id = $1 and jogador = $2`, [id, b]);
+    const durante = (await pede(a, { op: 'estado', partida: id })).body.partida!;
+    expect(durante).toMatchObject({ fase: 'jogando', ausencia: null });
+    // a luta acabou na tela há 20 s e b não voltou: agora a contagem aparece
+    const { rows: [rodada] } = await db.query(`select duracao from public.pvp_rodadas where partida_id = $1 and n = 0`, [id]);
+    const tela = duracaoNaTela(Number(rodada.duracao));
+    await db.query(`update public.pvp_partidas set inicio_em = now() - make_interval(secs => $2) where id = $1`, [id, tela + 20]);
+    const depois = (await pede(a, { op: 'estado', partida: id })).body.partida!;
+    expect(depois.fase).toBe('jogando');
+    expect(depois.ausencia).toBeGreaterThanOrEqual(19);
+    expect(depois.ausencia).toBeLessThan(30);
   });
 
   it('convite que ninguém responde expira; desistir no meio dá a vitória ao outro', async () => {

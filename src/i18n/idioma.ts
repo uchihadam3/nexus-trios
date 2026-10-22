@@ -29,7 +29,9 @@ export const LOCALE = IDIOMA === 'en' ? 'en-US' : 'pt-BR';
 let dicionario: Readonly<Record<string, string>> = {};
 /** Carrega o dicionário do idioma (só em inglês); o jogo só abre depois disso (src/main.tsx). */
 export async function carregarIdioma(): Promise<void> {
-  if (typeof document !== 'undefined') document.documentElement.lang = IDIOMA === 'en' ? 'en' : 'pt-BR';
+  // (o servidor também importa este arquivo, pelo motor: lá não há página)
+  const pagina = (globalThis as { document?: { documentElement: { lang: string } } }).document;
+  if (pagina) pagina.documentElement.lang = IDIOMA === 'en' ? 'en' : 'pt-BR';
   if (IDIOMA === 'en') dicionario = (await import('./en')).EN;
 }
 /** Para os testes: usa este dicionário. */
