@@ -1,6 +1,7 @@
 import type { CSSProperties, ReactNode } from 'react';
 import type { BattleEvent, StatusId } from '../engine/types';
 import { statuses } from '../data/statuses';
+import { t } from '../i18n/idioma';
 
 /*
  * O selo do Status (pedido do jogador: "tem que verificar todo tipo de habilidade… defensiva, ofensiva, suporte…
@@ -50,7 +51,7 @@ export function SeloDoStatus({ eventos }: { eventos: BattleEvent[] }) {
       <svg className="ss-motivo" viewBox="0 0 100 100" style={{ fill: st.color, stroke: st.color }}><Motivo status={e.status!} /></svg>
       <i className="ss-anel" />
       <img className="ss-icone" src={`/assets/statuses/${e.status}.png`} alt="" />
-      <b className="ss-nome">{st.name}</b>
+      <b className="ss-nome">{t(st.name)}</b>
     </span>;
   })}</span>;
 }

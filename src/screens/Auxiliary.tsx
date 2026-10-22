@@ -36,8 +36,8 @@ export function CharactersScreen({onDetails}:{onDetails:(id:string)=>void}){
       vazio={<p className="empty-state">{t('Nenhum lutador com esse nome, universo ou função.')}</p>}
       carta={(c,i)=><button key={c.id} className="cq-carta liberada rv-album-carta" style={{'--character':c.color,'--i':i} as React.CSSProperties} onClick={()=>onDetails(c.id)} aria-label={`${nomeDe(c)}, ${t(universoDaFicha(c))}`}>
         <span className="cq-retrato"><Portrait character={c}/></span>
-        <small>{c.name}</small>
-        <span className="rv-album-funcoes">{identidadesDe(c).map(x=><i key={x} title={x} style={{'--id-cor':corDaIdentidade(x)} as React.CSSProperties}/>)}</span>
+        <small>{nomeDe(c)}</small>
+        <span className="rv-album-funcoes">{identidadesDe(c).map(x=><i key={x} title={t(x)} style={{'--id-cor':corDaIdentidade(x)} as React.CSSProperties}/>)}</span>
       </button>}/>
   </section>;
 }
