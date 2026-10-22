@@ -48,6 +48,12 @@ describe('o jogo em inglês', () => {
     expect(i.nomeDe({ id: 'spiderman', name: 'Homem-Aranha' })).toBe('Spider-Man');
   });
 
+  it('acha os termos do glossário no texto em inglês', async () => {
+    const { acharTermos } = await import('../src/presentation/glossario');
+    const termos = acharTermos('Applies Exposed · +12% damage taken · and the Wind-up of the Charge').flatMap((p) => (typeof p === 'string' ? [] : [p.termo.id]));
+    expect(termos).toEqual(['exposed', 'preparo', 'carga']);
+  });
+
   it('traduz os avisos da luta montados com número', () => {
     expect(i.t('Joia 3/6')).toBe('Stone 3/6');
     expect(i.t('Nível 4')).toBe('Level 4');

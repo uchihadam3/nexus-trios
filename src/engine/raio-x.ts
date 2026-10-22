@@ -19,6 +19,7 @@
 import { byId } from '../data/characters';
 import { statuses } from '../data/statuses';
 import type { Battle, BattleEvent, StatusId } from './types';
+import { LOCALE, nomeDe as nomeDoIdioma, t } from '../i18n/idioma';
 
 /* ---------------------------------------------------------------------------
  * Os tipos de elo, e o que prova cada um
@@ -207,26 +208,26 @@ export interface Par { a: string; b: string; classificacao: Classificacao; aPara
  * Cada ajuda tem agora um número em destaque e uma frase curta.
  */
 export interface Destaque { numero: string; rotulo: string }
-const n0 = (x: number) => Math.round(x).toLocaleString('pt-BR');
+const n0 = (x: number) => Math.round(x).toLocaleString(LOCALE);
 const habilidades = (pct: number) => {
   const h = pct / 100;
   const arred = Math.round(h * 2) / 2;
-  return `${arred.toLocaleString('pt-BR')} ${arred === 1 ? 'habilidade' : 'habilidades'} a mais`;
+  return arred === 1 ? t('{n} habilidade a mais', { n: arred }) : t('{n} habilidades a mais', { n: arred });
 };
 const FRASES: Record<TipoDeElo, (n: number, v: number, o: string) => { frase: string; destaque: Destaque }> = {
-  'carga': (_n, v, o) => ({ frase: v < 95 ? `encheu ${Math.round(v)}% de uma habilidade de ${o}` : `fez ${o} usar ${habilidades(v)}`, destaque: { numero: `+${n0(v)}%`, rotulo: 'de Carga' } }),
-  'cura': (_n, v, o) => ({ frase: `curou ${o}`, destaque: { numero: `+${n0(v)}`, rotulo: 'de Vida' } }),
-  'escudo': (_n, v, o) => ({ frase: `protegeu ${o} com Escudo`, destaque: { numero: n0(v), rotulo: 'de Escudo' } }),
-  'aceleracao': (n, _v, o) => ({ frase: `deixou ${o} mais rápido`, destaque: { numero: `${n}×`, rotulo: 'Acelerado' } }),
-  'reforco': (n, _v, o) => ({ frase: `deixou ${o} mais forte`, destaque: { numero: `${n}×`, rotulo: 'reforçado' } }),
-  'preparo-protegido': (n, _v, o) => ({ frase: `segurou o rival enquanto ${o} preparava`, destaque: { numero: `${n}`, rotulo: n === 1 ? 'Preparo salvo' : 'Preparos salvos' } }),
-  'alvo-preparado': (n, _v, o) => ({ frase: `deixou o alvo vulnerável para ${o}`, destaque: { numero: `${n}`, rotulo: n === 1 ? 'golpe a mais forte' : 'golpes mais fortes' } }),
-  'finalizacao': (n, _v, o) => ({ frase: `deixou o alvo vulnerável e ${o} derrubou`, destaque: { numero: `${n}`, rotulo: n === 1 ? 'rival derrubado' : 'rivais derrubados' } }),
-  'controle': (n, _v, o) => ({ frase: `travou golpes rivais e deu tempo a ${o}`, destaque: { numero: `${n}`, rotulo: n === 1 ? 'golpe travado' : 'golpes travados' } }),
-  'levantou': (_n, _v, o) => ({ frase: `levantou ${o} depois que caiu`, destaque: { numero: '1', rotulo: 'aliado de volta' } }),
-  'purificou': (_n, v, o) => ({ frase: `tirou Status ruins de ${o}`, destaque: { numero: `${n0(v)}`, rotulo: v === 1 ? 'Status tirado' : 'Status tirados' } }),
-  'provocou': (n, _v, o) => ({ frase: `provocou os rivais e apanhou no lugar de ${o}`, destaque: { numero: `${n}`, rotulo: n === 1 ? 'golpe puxado' : 'golpes puxados' } }),
-  'conflito': (n, _v, o) => ({ frase: `atrapalhou ${o}`, destaque: { numero: `${n}×`, rotulo: 'atrapalhou' } }),
+  'carga': (_n, v, o) => ({ frase: v < 95 ? t('encheu {p}% de uma habilidade de {o}', { p: Math.round(v), o }) : t('fez {o} usar {h}', { o, h: habilidades(v) }), destaque: { numero: `+${n0(v)}%`, rotulo: t('de Carga') } }),
+  'cura': (_n, v, o) => ({ frase: t('curou {o}', { o }), destaque: { numero: `+${n0(v)}`, rotulo: t('de Vida') } }),
+  'escudo': (_n, v, o) => ({ frase: t('protegeu {o} com Escudo', { o }), destaque: { numero: n0(v), rotulo: t('de Escudo') } }),
+  'aceleracao': (n, _v, o) => ({ frase: t('deixou {o} mais rápido', { o }), destaque: { numero: `${n}×`, rotulo: t('Acelerado') } }),
+  'reforco': (n, _v, o) => ({ frase: t('deixou {o} mais forte', { o }), destaque: { numero: `${n}×`, rotulo: t('reforçado') } }),
+  'preparo-protegido': (n, _v, o) => ({ frase: t('segurou o rival enquanto {o} preparava', { o }), destaque: { numero: `${n}`, rotulo: n === 1 ? t('Preparo salvo') : t('Preparos salvos') } }),
+  'alvo-preparado': (n, _v, o) => ({ frase: t('deixou o alvo vulnerável para {o}', { o }), destaque: { numero: `${n}`, rotulo: n === 1 ? t('golpe a mais forte') : t('golpes mais fortes') } }),
+  'finalizacao': (n, _v, o) => ({ frase: t('deixou o alvo vulnerável e {o} derrubou', { o }), destaque: { numero: `${n}`, rotulo: n === 1 ? t('rival derrubado') : t('rivais derrubados') } }),
+  'controle': (n, _v, o) => ({ frase: t('travou golpes rivais e deu tempo a {o}', { o }), destaque: { numero: `${n}`, rotulo: n === 1 ? t('golpe travado') : t('golpes travados') } }),
+  'levantou': (_n, _v, o) => ({ frase: t('levantou {o} depois que caiu', { o }), destaque: { numero: '1', rotulo: t('aliado de volta') } }),
+  'purificou': (_n, v, o) => ({ frase: t('tirou Status ruins de {o}', { o }), destaque: { numero: `${n0(v)}`, rotulo: v === 1 ? t('Status tirado') : t('Status tirados') } }),
+  'provocou': (n, _v, o) => ({ frase: t('provocou os rivais e apanhou no lugar de {o}', { o }), destaque: { numero: `${n}`, rotulo: n === 1 ? t('golpe puxado') : t('golpes puxados') } }),
+  'conflito': (n, _v, o) => ({ frase: t('atrapalhou {o}', { o }), destaque: { numero: `${n}×`, rotulo: t('atrapalhou') } }),
 };
 
 /* Quanto cada elo pesa na classificação: ajudar a derrubar vale mais que um empurrão. */
@@ -253,7 +254,8 @@ const BOA = 16;
 
 const nomeDe = (uid: string, battle: Battle) => {
   const f = battle.fighters.find((x) => x.uid === uid);
-  return f ? byId[f.characterId]?.name ?? f.characterId : uid;
+  const c = f && byId[f.characterId];
+  return c ? nomeDoIdioma(c) : f?.characterId ?? uid;
 };
 
 const direcao = (elos: Elo[], de: string, para: string, battle: Battle): Direcao => {

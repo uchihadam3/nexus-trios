@@ -262,7 +262,7 @@ export function ArenaUnit({fighter:f,battle,beat,onInspect,numbers,threatened,li
       {/* a habilidade saindo, com ou sem Preparo: o nome aparece enquanto o golpe acontece */}
       {!ativando&&!preparing&&source&&beat?.event.kind==='skill'&&beat.event.skill!==undefined&&c.skills[beat.event.skill]&&<div key={beat.event.id} className="unit-cast unit-skill-name" style={{"--character":c.color} as React.CSSProperties}><SkillIcon type={c.skills[beat.event.skill].icon} size={15} characterId={c.id} skillId={c.skills[beat.event.skill].id}/><span>{t(c.skills[beat.event.skill].name)}</span></div>}
       {broken&&<div className="unit-interrupt"><AuxIcon id="interrupt" size={13}/>{broken.label.includes('atrasada')?t('ATRASADO'):t('INTERROMPIDO')}</div>}
-      {tempo&&<span className="unit-tempo-reason">{tempo.label}</span>}
+      {tempo&&<span className="unit-tempo-reason">{t(tempo.label)}</span>}
     </div>
     <div className="unit-name"><button className="fighter-name" onClick={()=>onInspect({kind:'fighter',fighter:f})}>{nomeDe(c)}</button></div>
     <div className="unit-vitals">

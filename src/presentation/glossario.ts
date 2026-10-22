@@ -9,6 +9,7 @@
  */
 import type { StatusId } from '../engine/types';
 import { DEIXAM_VULNERAVEL, statuses } from '../data/statuses';
+import { t as tr } from '../i18n/idioma';
 
 export interface Termo {
   id: string;
@@ -106,14 +107,20 @@ export const GLOSSARIO: Termo[] = [...(Object.keys(statuses) as StatusId[]).map(
 export const termoPorId = Object.fromEntries(GLOSSARIO.map((t) => [t.id, t])) as Record<string, Termo>;
 
 /* Com maiúscula, como na ficha: "lento" numa frase comum não é o Status Lento. Todas as formas, as mais longas primeiro, para "Energia guardada" ganhar de "energia". */
-const FORMAS = GLOSSARIO.flatMap((t) => [t.nome, ...(t.formas ?? [])].map((f) => ({ f, t })))
-  .sort((a, b) => b.f.length - a.f.length);
+/* No idioma do jogo (em inglês, "Exposed" e "Wind-up"): montadas no primeiro uso, depois do dicionário carregar. */
 const escapa = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-const PADRAO = new RegExp(`(?<![\\p{L}])(${FORMAS.map((x) => escapa(x.f)).join('|')})(?![\\p{L}])`, 'gu');
+let busca: { FORMAS: { f: string; t: Termo }[]; PADRAO: RegExp } | undefined;
+const preparar = () => {
+  if (busca) return busca;
+  const FORMAS = GLOSSARIO.flatMap((tm) => [...new Set([tm.nome, ...(tm.formas ?? [])].map((f) => tr(f)))].map((f) => ({ f, t: tm })))
+    .sort((a, b) => b.f.length - a.f.length);
+  return (busca = { FORMAS, PADRAO: new RegExp(`(?<![\\p{L}])(${FORMAS.map((x) => escapa(x.f)).join('|')})(?![\\p{L}])`, 'gu') });
+};
 
 /** Divide um texto em pedaços, marcando os que são termos do glossário. */
 export function acharTermos(texto: string): (string | { texto: string; termo: Termo })[] {
   const saida: (string | { texto: string; termo: Termo })[] = [];
+  const { FORMAS, PADRAO } = preparar();
   let i = 0;
   for (const m of texto.matchAll(PADRAO)) {
     const achado = FORMAS.find((x) => x.f === m[0]);
