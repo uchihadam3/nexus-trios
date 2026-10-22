@@ -2,6 +2,7 @@ import { useEffect, useRef, useState, type CSSProperties } from 'react';
 import { Link2 } from 'lucide-react';
 import type { Battle, Side } from '../engine/types';
 import { fallbackPoint, type Anchors } from './BattleEffects';
+import { t } from '../i18n/idioma';
 
 /*
  * As duas bolinhas de combos da luta (pedido do jogador): uma de cada lado,
@@ -55,10 +56,10 @@ export function OrbesDeCombo({ battle, anchors, onAbrir, reduzido }: { battle: B
       const n = combos?.[lado].length ?? 0;
       const pulso = performance.now() - pulsando[lado] < 1300;
       return <button key={lado} type="button" className={`cb-orbe ${lado} ${n ? 'acesa' : 'apagada'} ${pulso ? 'pulsando' : ''}`}
-        onClick={() => onAbrir(lado)} aria-label={`${lado === 'player' ? 'Seus combos' : 'Combos do rival'}: ${n}`}>
+        onClick={() => onAbrir(lado)} aria-label={`${lado === 'player' ? t('Seus combos') : t('Combos do rival')}: ${n}`}>
         <span className="cb-orbe-bola" ref={(el) => { bolas.current[lado] = el; }}>
           <Link2 size={12} className="cb-orbe-icone" />
-          <span className="cb-orbe-nome">{lado === 'player' ? 'VOCÊ' : 'RIVAL'}</span>
+          <span className="cb-orbe-nome">{lado === 'player' ? t('VOCÊ') : t('RIVAL')}</span>
           <b key={`${n}-${pulsando[lado]}`}>{n}</b>
         </span>
       </button>;

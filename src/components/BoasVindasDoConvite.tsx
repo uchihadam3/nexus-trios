@@ -3,6 +3,7 @@ import { Download, Globe, MoreVertical, Share, Smartphone, Swords, Trophy, Users
 import { byId, characters } from '../data/characters';
 import { Portrait } from './Portrait';
 import '../presentation/compartilhar.css';
+import { t } from '../i18n/idioma';
 
 /*
  * Quem chega pelo convite (src/components/CompartilharJogo.tsx) vê esta tela primeiro: o convite de um amigo, o que é
@@ -24,32 +25,32 @@ export function BoasVindasDoConvite({ podeInstalar, onInstalar, onClose }: { pod
   const trio = ['goku', 'naruto', 'luffy'];
 
   return <dialog className="info-dialog gs-aviso cvt-sheet cvt-boas-vindas" ref={ref} onCancel={onClose} style={{ '--tela': '#c8f560' } as CSSProperties}>
-    <button className="icon-button modal-close" onClick={onClose} aria-label="Fechar"><X size={20} /></button>
+    <button className="icon-button modal-close" onClick={onClose} aria-label={t('Fechar')}><X size={20} /></button>
     <div className="cvt-cartao" aria-hidden="true">
       <span className="cvt-raios" />
       <div className="cvt-trio">{trio.map((id, i) => byId[id] && <span key={id} style={{ '--character': byId[id].color, '--i': i } as CSSProperties}><Portrait character={byId[id]} /></span>)}</div>
       <b className="cvt-logo"><Swords size={16} />NEXUS</b>
-      <small>DUELO DE TRIOS</small>
+      <small>{t('DUELO DE TRIOS')}</small>
     </div>
-    <span className="cvt-selo">CONVITE DE UM AMIGO</span>
-    <h2>Seu amigo te chamou para a luta!</h2>
+    <span className="cvt-selo">{t('CONVITE DE UM AMIGO')}</span>
+    <h2>{t('Seu amigo te chamou para a luta!')}</h2>
     <ul className="cvt-pontos">
-      <li><Users size={16} /><span><b>{characters.length} personagens</b> de animes, filmes, games e desenhos</span></li>
-      <li><Swords size={16} /><span>Monte seu <b>trio</b> e encare <b>10 lutas</b> seguidas</span></li>
-      <li><Trophy size={16} /><span>Faça pontos e suba no <b>ranking</b></span></li>
+      <li><Users size={16} /><span>{t('{n} personagens de animes, filmes, games e desenhos', { n: characters.length })}</span></li>
+      <li><Swords size={16} /><span>{t('Monte seu trio e encare 10 lutas seguidas')}</span></li>
+      <li><Trophy size={16} /><span>{t('Faça pontos e suba no ranking')}</span></li>
     </ul>
     {!passos ? <>
-      <button className="primary cvt-instalar" onClick={() => void instalar()}><Download size={20} /><span><b>Instalar no celular</b><small>abre como app, até sem internet</small></span></button>
-      <button className="secondary cvt-navegador" onClick={onClose}><Globe size={18} />Jogar no navegador</button>
+      <button className="primary cvt-instalar" onClick={() => void instalar()}><Download size={20} /><span><b>{t('Instalar no celular')}</b><small>{t('abre como app, até sem internet')}</small></span></button>
+      <button className="secondary cvt-navegador" onClick={onClose}><Globe size={18} />{t('Jogar no navegador')}</button>
     </> : <>
       <div className="cvt-passos">
-        <b><Smartphone size={16} />Para instalar:</b>
+        <b><Smartphone size={16} />{t('Para instalar:')}</b>
         {ehIphone()
-          ? <p>Toque em <Share size={14} /> <b>Compartilhar</b> embaixo da tela e depois em <b>“Adicionar à Tela de Início”</b>.</p>
-          : <p>Toque no menu <MoreVertical size={14} /> do navegador e depois em <b>“Instalar app”</b> (ou “Adicionar à tela inicial”).</p>}
-        <p>O NEXUS aparece na tela do celular como um app.</p>
+          ? <p><Share size={14} /> {t('Toque em Compartilhar embaixo da tela e depois em “Adicionar à Tela de Início”.')}</p>
+          : <p><MoreVertical size={14} /> {t('Toque no menu do navegador e depois em “Instalar app” (ou “Adicionar à tela inicial”).')}</p>}
+        <p>{t('O NEXUS aparece na tela do celular como um app.')}</p>
       </div>
-      <button className="primary cvt-navegador" onClick={onClose}><Globe size={18} />Jogar agora no navegador</button>
+      <button className="primary cvt-navegador" onClick={onClose}><Globe size={18} />{t('Jogar agora no navegador')}</button>
     </>}
   </dialog>;
 }

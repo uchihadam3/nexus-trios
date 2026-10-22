@@ -10,6 +10,7 @@ import { PRIORIDADE } from '../audio/cues';
 import type { Settings } from '../lib/storage';
 import { BattleScreen } from '../screens/BattleScreen';
 import { espelhar } from '../presentation/espelho';
+import { t } from '../i18n/idioma';
 
 /*
  * A luta de uma rodada do PvP: o mesmo motor, o mesmo diretor de cena e os mesmos sons da jornada
@@ -100,7 +101,7 @@ export function ArenaDoPvp({ meu, dele, seed, rodada, rival, settings, onSetting
     return () => clearInterval(t);
   }, [pausado, inicial, sons, espelhado, vel]);
 
-  return <BattleScreen battle={tela.battle} beat={tela.beat} index={rodada - 1} name={`Rodada ${rodada}`} settings={config} paused={pausado}
+  return <BattleScreen battle={tela.battle} beat={tela.beat} index={rodada - 1} name={t('Rodada {n}', { n: rodada })} settings={config} paused={pausado}
     onPause={() => { if (podePausar) setPausado(!pausado); }} onAbandon={onDesistir} onSettings={(s) => onSettings(velocidadeLivre ? s : { ...s, speed: settings.speed })}
-    pvp={{ rodada, voce: 'VOCÊ', rival, podePausar, velocidadeLivre }} />;
+    pvp={{ rodada, voce: t('VOCÊ'), rival, podePausar, velocidadeLivre }} />;
 }

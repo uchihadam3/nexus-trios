@@ -3,14 +3,14 @@ import { KeyRound, Lock, Sparkles, Star, Crown, Gift, SkipForward } from 'lucide
 import { PULOS_COM_O_LIVRO_COMPLETO, PULOS_DA_JORNADA, SEGREDOS } from '../engine/segredos';
 import { ICONE_DO_SEGREDO, NOME_DA_LUTA, ONDE_FICA } from '../components/SeloDoSegredo';
 import '../presentation/segredos.css';
-import { t } from '../i18n/idioma';
+import { t, tx } from '../i18n/idioma';
 
 /*
  * O Livro de Segredos (pedido do jogador: "seis segredos… bem gamificado"). As seis cartas começam trancadas, só com
  * a charada e a luta extra que liberam; cumprido o segredo numa jornada (src/App.tsx), a carta acende com o nome e a
  * regra. Cabe na tela do celular: duas colunas de três.
  */
-const TITULOS = ['Curioso', 'Farejador', 'Detetive', 'Caçador de segredos', 'Guardião dos segredos', 'Mestre dos segredos', 'Lenda oculta'];
+const TITULOS = [tx('Curioso'), tx('Farejador'), tx('Detetive'), tx('Caçador de segredos'), tx('Guardião dos segredos'), tx('Mestre dos segredos'), tx('Lenda oculta')];
 
 export function LivroDeSegredos({ descobertos, vistos, onVer }: { descobertos: readonly string[]; vistos: readonly string[]; onVer: (ids: string[]) => void }) {
   /* o que já estava visto ao abrir: o selo NOVO fica na tela enquanto ela estiver aberta */

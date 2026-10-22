@@ -5,6 +5,7 @@ import { Portrait } from './Portrait';
 import { RIVAIS, TOTAL_DE_ESTRELAS, rivalPorId, type Rival } from '../engine/campanha';
 import { read } from '../lib/storage';
 import '../presentation/campanha.css';
+import { t } from '../i18n/idioma';
 
 /*
  * O cartão do Caminho do Nexus no lobby do PvP e o rosto de cada rival (src/screens/CaminhoDoNexus.tsx). Fica fora da
@@ -28,9 +29,9 @@ export function CartaoDaCampanha({ podeJogar, motivo, onAbrir }: { podeJogar: bo
   return <button className={`cn-cartao ${podeJogar ? '' : 'travado'}`} onClick={podeJogar ? onAbrir : undefined} aria-disabled={!podeJogar}>
     <span className="cn-cartao-chefes" aria-hidden="true">{chefes.map((c, i) => <AvatarDoRival key={c.id} rival={c} tamanho={i === 2 ? 58 : 44} />)}</span>
     <span className="cn-cartao-texto">
-      <small>MODO CAMPANHA · 40 RIVAIS · 8 REGIÕES</small>
-      <b>CAMINHO DO NEXUS</b>
-      {podeJogar ? <em>{resumo ? <><Star size={12} />{resumo.estrelas}/{TOTAL_DE_ESTRELAS} · {resumo.titulo}{resumo.zerou ? ' · Zerou!' : proximo ? ` · próximo: ${proximo.nome}` : ''}</> : 'Comece no Vale do Despertar. Só o primeiro rival está liberado.'}</em> : <em className="cn-cartao-motivo"><Lock size={12} />{motivo}</em>}
+      <small>{t('MODO CAMPANHA · 40 RIVAIS · 8 REGIÕES')}</small>
+      <b>{t('CAMINHO DO NEXUS')}</b>
+      {podeJogar ? <em>{resumo ? <><Star size={12} />{resumo.estrelas}/{TOTAL_DE_ESTRELAS} · {t(resumo.titulo)}{resumo.zerou ? ` · ${t('Zerou!')}` : proximo ? ` · ${t('próximo: {nome}', { nome: t(proximo.nome) })}` : ''}</> : t('Comece no Vale do Despertar. Só o primeiro rival está liberado.')}</em> : <em className="cn-cartao-motivo"><Lock size={12} />{motivo}</em>}
     </span>
     {podeJogar && <Play size={24} className="cn-cartao-play" />}
   </button>;

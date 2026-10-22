@@ -1,10 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
 import { Check, Crown, RotateCcw, Swords, X } from 'lucide-react';
 import { Avatar } from './AvatarDaComunidade';
+import { duracaoNaTela } from '../engine/pvp';
 import { diferencaDoRelogio, textoDoErroPvp, type ServicoPvp, type VistaPvp } from '../lib/pvp-online';
 import { battleAudio } from '../lib/audio';
 import { PRIORIDADE } from '../audio/cues';
 import '../presentation/pvp.css';
+import { t } from '../i18n/idioma';
 
 /*
  * O aviso do PvP em qualquer tela: "Fulano te desafiou!" (aceitar abre a partida) e, para quem desafiou, "Fulano
@@ -54,7 +56,12 @@ export function ConviteDoPvp({ servico, euId, naPartida, onAbrir }: { servico: S
 
   useEffect(() => { if (!aviso) return; const t = window.setInterval(() => setAgora(Date.now()), 500); return () => clearInterval(t); }, [aviso]);
   useEffect(() => { if (aviso && aviso.v.id === naPartida) setAviso(null); }, [aviso, naPartida]);
-  const falta = !aviso ? 0 : aviso.tipo === 'voltar' ? Math.max(0, Math.ceil(aviso.v.ausenciaMaxima - (agora - aviso.desde) / 1000)) : Math.max(0, Math.ceil((Date.parse(aviso.v.prazo) - (agora + aviso.offset)) / 1000));
+  // a luta da rodada passando na tela: enquanto ela roda não há tempo para voltar (o servidor só conta a ausência depois
+  // que ela acaba; pedido do dono: "enquanto a luta tá rolando, não tem tempo")
+  const rodada = aviso?.v.inicioEm ? aviso.v.rodadas.find((x) => x.n === aviso.v.resolvida) : undefined;
+  const fimDaLuta = aviso?.v.inicioEm && rodada ? Date.parse(aviso.v.inicioEm) - aviso.offset + duracaoNaTela(rodada.duracao) * 1000 : 0;
+  const lutando = aviso?.tipo === 'voltar' && agora < fimDaLuta;
+  const falta = !aviso ? 0 : aviso.tipo === 'voltar' ? Math.max(0, Math.ceil(aviso.v.ausenciaMaxima - (agora - Math.max(aviso.desde, fimDaLuta)) / 1000)) : Math.max(0, Math.ceil((Date.parse(aviso.v.prazo) - (agora + aviso.offset)) / 1000));
   useEffect(() => { if (aviso && falta <= 0) setAviso(null); }, [aviso, falta]);
   if (!aviso) return null;
   const { v } = aviso;
@@ -68,20 +75,21 @@ export function ConviteDoPvp({ servico, euId, naPartida, onAbrir }: { servico: S
     } catch (e) { setErro(textoDoErroPvp(e)); } finally { setOcupado(false); }
   };
 
-  return <div className="pv-aviso" role="alertdialog" aria-label={aviso.tipo === 'convite' ? `${v.rival.nome} te desafiou` : `${v.rival.nome} aceitou`}>
+  return <div className="pv-aviso" role="alertdialog" aria-label={aviso.tipo === 'convite' ? t('{nome} te desafiou', { nome: v.rival.nome }) : t('{nome} aceitou', { nome: v.rival.nome })}>
     <div className="pv-aviso-cartao">
       <span className="pv-aviso-raio" aria-hidden="true" />
       <span className="pv-aviso-avatar"><Avatar id={v.rival.id} nome={v.rival.nome} tamanho={70} online /><i><Swords size={16} /></i></span>
-      <small>{aviso.tipo === 'voltar' ? 'PARTIDA EM ANDAMENTO' : 'DESAFIO PvP'}</small>
-      <h2>{aviso.tipo === 'convite' ? <>{v.rival.nome} te desafiou!</> : aviso.tipo === 'voltar' ? <>Volte para a partida!</> : <>{v.rival.nome} aceitou!</>}</h2>
-      <span className="pv-rating-rival"><Crown size={13} />{v.rival.rating} · {v.rival.vitorias}V {v.rival.derrotas}D</span>
-      <p>{aviso.tipo === 'voltar' ? `Contra ${v.rival.nome}. Se não voltar a tempo, a vitória vai para ${v.rival.nome}:` : aviso.tipo === 'convite' ? '3 times de 3, escolha secreta. Vale rating.' : 'Monte seus 3 times antes do tempo acabar.'} <b>{Math.floor(falta / 60)}:{String(falta % 60).padStart(2, '0')}</b></p>
+      <small>{aviso.tipo === 'voltar' ? t('PARTIDA EM ANDAMENTO') : t('DESAFIO PvP')}</small>
+      <h2>{aviso.tipo === 'convite' ? t('{nome} te desafiou!', { nome: v.rival.nome }) : aviso.tipo === 'voltar' ? t('Volte para a partida!') : t('{nome} aceitou!', { nome: v.rival.nome })}</h2>
+      <span className="pv-rating-rival"><Crown size={13} />{v.rival.rating} · {t('{v}V {d}D', { v: v.rival.vitorias, d: v.rival.derrotas })}</span>
+      {lutando ? <p>{t('Contra {nome}. A luta está rolando agora: volte para assistir.', { nome: v.rival.nome })}</p>
+        : <p>{aviso.tipo === 'voltar' ? t('Contra {nome}. Se não voltar a tempo, a vitória vai para {nome}:', { nome: v.rival.nome }) : aviso.tipo === 'convite' ? t('3 times de 3, escolha secreta. Vale rating.') : t('Monte seus 3 times antes do tempo acabar.')} <b>{Math.floor(falta / 60)}:{String(falta % 60).padStart(2, '0')}</b></p>}
       {erro && <small className="pv-problema">{erro}</small>}
       {aviso.tipo === 'convite'
-        ? <span className="pv-convite-botoes"><button className="secondary" disabled={ocupado} onClick={() => void responder(false)}><X size={18} />Recusar</button><button className="primary" disabled={ocupado} onClick={() => void responder(true)}><Swords size={18} />Aceitar</button></span>
+        ? <span className="pv-convite-botoes"><button className="secondary" disabled={ocupado} onClick={() => void responder(false)}><X size={18} />{t('Recusar')}</button><button className="primary" disabled={ocupado} onClick={() => void responder(true)}><Swords size={18} />{t('Aceitar')}</button></span>
         : aviso.tipo === 'voltar'
-          ? <button className="primary pv-retornar" onClick={() => { setAviso(null); onAbrir(v.id); }}><RotateCcw size={20} />RETORNAR</button>
-          : <span className="pv-convite-botoes"><button className="secondary" onClick={() => setAviso(null)}>Depois</button><button className="primary" onClick={() => { setAviso(null); onAbrir(v.id); }}><Check size={18} />Ir para a partida</button></span>}
+          ? <button className="primary pv-retornar" onClick={() => { setAviso(null); onAbrir(v.id); }}><RotateCcw size={20} />{t('RETORNAR')}</button>
+          : <span className="pv-convite-botoes"><button className="secondary" onClick={() => setAviso(null)}>{t('Depois')}</button><button className="primary" onClick={() => { setAviso(null); onAbrir(v.id); }}><Check size={18} />{t('Ir para a partida')}</button></span>}
     </div>
   </div>;
 }

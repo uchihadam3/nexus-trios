@@ -1,7 +1,7 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState, type CSSProperties } from 'react';
 import { BookOpen, Castle, ChevronLeft, ChevronRight, Crown, Globe, Link2, Lock, Sparkles, X, type LucideIcon } from 'lucide-react';
 import { ARTES_DO_COMBO, CartaDoCombo, TODOS_OS_COMBOS, visualDoCombo, type TipoDeCombo } from '../components/CombosDoTrio';
-import { t } from '../i18n/idioma';
+import { t, tx } from '../i18n/idioma';
 
 /*
  * O Livro de Combos (pedido do jogador: sair do "Como jogar" e ficar na tela
@@ -26,12 +26,12 @@ const ABAS: { id: TipoDeCombo; nome: string; icone: LucideIcon; cor: string }[] 
 ];
 /** O título do colecionador, pela fração do livro descoberta. */
 const TITULOS = [
-  { fracao: 0, nome: 'Curioso', cor: '#9fb3c2' },
-  { fracao: 0.1, nome: 'Aprendiz de combos', cor: '#86e3a8' },
-  { fracao: 0.25, nome: 'Estrategista', cor: '#8fd3ff' },
-  { fracao: 0.45, nome: 'Mestre dos combos', cor: '#c58cff' },
-  { fracao: 0.7, nome: 'Lenda dos combos', cor: '#ffd36b' },
-  { fracao: 1, nome: 'Enciclopédia viva', cor: '#ff9f5a' },
+  { fracao: 0, nome: tx('Curioso'), cor: '#9fb3c2' },
+  { fracao: 0.1, nome: tx('Aprendiz de combos'), cor: '#86e3a8' },
+  { fracao: 0.25, nome: tx('Estrategista'), cor: '#8fd3ff' },
+  { fracao: 0.45, nome: tx('Mestre dos combos'), cor: '#c58cff' },
+  { fracao: 0.7, nome: tx('Lenda dos combos'), cor: '#ffd36b' },
+  { fracao: 1, nome: tx('Enciclopédia viva'), cor: '#ff9f5a' },
 ];
 /** O tamanho mínimo de cada peça da grade (px); a grade divide o espaço que sobra entre elas. */
 const PECA = { largura: 104, altura: 84, vao: 8 };
