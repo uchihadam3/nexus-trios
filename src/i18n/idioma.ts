@@ -41,8 +41,19 @@ export async function carregarIdioma(): Promise<void> {
 }
 /** Para os testes: usa este dicionário. */
 export function usarDicionario(d: Readonly<Record<string, string>>, p: readonly (readonly [string, string])[] = []): void { dicionario = d; padroes = p.map(([re, en]) => [new RegExp(re), en] as const); }
+/*
+ * Um pedaço capturado por um padrão: número no formato português vira número do idioma ("8,71" → "8.71"); texto passa
+ * pelo dicionário (primeiro a forma própria dos padrões, "§cura" → "heals"; depois a comum) e, se for uma lista
+ * ("Exposto e Confuso"), cada item passa.
+ */
+const pedaco = (g: string): string => {
+  if (/^\d{1,3}(\.\d{3})*(,\d+)?$|^\d+(,\d+)?$/.test(g)) return numero(Number(g.replace(/\./g, '').replace(',', '.')));
+  const um = (x: string) => dicionario[`§${x}`] ?? dicionario[x] ?? x;
+  if (dicionario[`§${g}`] ?? dicionario[g]) return um(g);
+  return g.split(' e ').map((x) => x.split(', ').map(um).join(', ')).join(t(' e '));
+};
 const porPadrao = (pt: string): string | undefined => {
-  for (const [re, en] of padroes) { const m = re.exec(pt); if (m) return en.replace(/\$(\d)/g, (_, i: string) => dicionario[m[Number(i)] ?? ''] ?? m[Number(i)] ?? ''); }
+  for (const [re, en] of padroes) { const m = re.exec(pt); if (m) return en.replace(/\$(\d)/g, (_, i: string) => pedaco(m[Number(i)] ?? '')); }
   return undefined;
 };
 

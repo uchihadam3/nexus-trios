@@ -11,6 +11,9 @@ let i: Idioma;
 let fichas: typeof import('../src/engine/skill-descriptions');
 let elenco: typeof import('../src/data/characters');
 let unicas: typeof import('../src/engine/unicas');
+let fraco: typeof import('../src/data/ponto-fraco');
+let forte: typeof import('../src/data/ponto-forte');
+let dicas: typeof import('../src/presentation/dicas-do-trio');
 
 beforeAll(async () => {
   vi.resetModules();
@@ -24,6 +27,9 @@ beforeAll(async () => {
   fichas = await import('../src/engine/skill-descriptions');
   elenco = await import('../src/data/characters');
   unicas = await import('../src/engine/unicas');
+  fraco = await import('../src/data/ponto-fraco');
+  forte = await import('../src/data/ponto-forte');
+  dicas = await import('../src/presentation/dicas-do-trio');
   delete g.window; delete g.location; delete g.localStorage;
 });
 
@@ -63,7 +69,22 @@ describe('o jogo em inglês', () => {
       }
       const u = unicas.unicaDe(c.id);
       if (u) confere(nome, 'única', `${i.t(u.nome)} · ${i.t(u.texto)}`);
+      for (const x of [...fraco.pontoFraco(c), ...forte.pontoForte(c)]) confere(nome, 'ponto forte/fraco', `${i.t(x.rotulo)} · ${i.t(x.motivo)}`);
     }
     expect(sobras.slice(0, 20)).toEqual([]);
+  });
+
+  it('as dicas da escolha do trio também saem em inglês', () => {
+    const ids = elenco.characters.map((c) => c.id), sobras: string[] = [];
+    let semente = 7;
+    const sorteia = () => { semente = (semente * 1103515245 + 12345) % 2147483648; return ids[semente % ids.length]!; };
+    for (let k = 0; k < 120; k++) {
+      const time = Array.from({ length: k % 3 }, sorteia), candidatos = [sorteia(), sorteia(), sorteia()].filter((id) => !time.includes(id));
+      for (const d of dicas.dicasDoDraft([...new Set(candidatos)], [...new Set(time)])) for (const m of d.detalhe) {
+        const texto = `${m.texto} ${m.porque ?? ''}`;
+        if (PORTUGUES.test(texto)) sobras.push(texto);
+      }
+    }
+    expect([...new Set(sobras)].slice(0, 20)).toEqual([]);
   });
 });

@@ -38,12 +38,12 @@ function CartaoDaIdentidade({inicial,trio,onClose}:{inicial:Identidade;trio?:rea
         <span className="id-card-medal" aria-hidden><Icone size={30} strokeWidth={2.2}/></span>
         <div><span className="id-card-family">{t(familia.nome)}</span><h2>{t(x)}</h2></div>
       </div>
-      <p className="id-card-lead">{explicacaoDaIdentidade[x]}</p>
+      <p className="id-card-lead">{t(explicacaoDaIdentidade[x])}</p>
       {trio&&<p className={`id-card-trio ${temNoTrio?'tem':''}`}>{temNoTrio?t('✓ Seu trio já tem'):t('Seu trio ainda não tem')}</p>}
       <h3>{t('Na luta')}</h3>
-      <ol className="id-card-steps">{guia.naLuta.map((t,i)=><li key={i}><span>{i+1}</span>{t}</li>)}</ol>
+      <ol className="id-card-steps">{guia.naLuta.map((frase,i)=><li key={i}><span>{i+1}</span>{t(frase)}</li>)}</ol>
       <h3>{t('Combina com')}</h3>
-      <div className="id-card-combos">{guia.combina.map(c=>{const I=ICONE_DA_IDENTIDADE[c];return <button key={c} style={{'--id-cor':corDaIdentidade(c)} as CSSProperties} onClick={()=>setX(c)}><I size={14}/>{c}</button>;})}</div>
+      <div className="id-card-combos">{guia.combina.map(c=>{const I=ICONE_DA_IDENTIDADE[c];return <button key={c} style={{'--id-cor':corDaIdentidade(c)} as CSSProperties} onClick={()=>setX(c)}><I size={14}/>{t(c)}</button>;})}</div>
       <p className="id-card-warn"><TriangleAlert size={16}/><span><b>{t('Cuidado com')}</b>{t(guia.cuidado)}</span></p>
       <div className="id-card-who"><small>{t(total===1?'{n} lutador tem':'{n} lutadores têm',{n:total})}</small><div>{exemplos.map(c=><span key={c.id} style={{'--character':c.color} as CSSProperties}><Portrait character={c} className="tiny"/><em>{nomeDe(c)}</em></span>)}</div></div>
       <button className="primary id-card-ok" onClick={onClose}>{t('Entendi')}</button>
@@ -57,7 +57,7 @@ export function IdentityChips({ids,trio,marca,novas}:{ids:readonly Identidade[];
   const [aberta,setAberta]=useState<Identidade|null>(null);
   return <div className="role-chips id-chips">
     {ids.map(x=><button type="button" key={x} className={`id-chip ${novas?.includes(x)?'novo':''}`} style={{'--id-cor':corDaIdentidade(x)} as CSSProperties} aria-label={t('{x}: o que é?',{x:t(x)})}
-      onClick={e=>{e.stopPropagation();setAberta(x);}}>{marca}{x}<i aria-hidden>?</i></button>)}
+      onClick={e=>{e.stopPropagation();setAberta(x);}}>{marca}{t(x)}<i aria-hidden>?</i></button>)}
     {aberta&&createPortal(<CartaoDaIdentidade inicial={aberta} trio={trio} onClose={()=>setAberta(null)}/>,document.body)}
   </div>;
 }
