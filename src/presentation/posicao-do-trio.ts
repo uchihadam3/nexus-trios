@@ -59,3 +59,24 @@ export function usePosicaoDoTrio(team: readonly string[]): { posicao: number; to
 
 /** "1.234º" (pedido do dono: "não precisa colocar de 10 milhões, só a posição") */
 export const textoDaPosicao = (posicao: number) => `${posicao.toLocaleString('pt-BR')}º`;
+
+/*
+ * As estrelas douradas (pedido do dono): as 7 estrelas de prata medem a força do trio entre todos; quem está no 1% do topo
+ * ("melhor que 99%", ~105.900 trios) enche as 7 de prata e ganha de 1 a 7 douradas (7 também, "pra ficar simétrico"),
+ * pela posição dentro desse 1%. Os cortes saem das lutas de verdade do topo (plano topo da fábrica, contra o painel dos
+ * 3.000 mais fortes) e ficam mais apertados lá em cima — 7 douradas são só o 1% melhor do 1%:
+ *   7 · até 1% do 1% (~1.060 trios) — vencem 68% ou mais dos fortes
+ *   6 · até 3% (~3.200) — 58% ou mais
+ *   5 · até 6% (~6.400) — 49% ou mais (empatam com os fortes)
+ *   4 · até 12% (~12.700) — 41% ou mais
+ *   3 · até 22% (~23.300) — 31% ou mais
+ *   2 · até 40% (~42.300) — 18% ou mais
+ *   1 · o resto do 1%
+ */
+export const ESTRELAS_DOURADAS = 7;
+export const CORTES_DOURADOS: readonly number[] = [0.01, 0.03, 0.06, 0.12, 0.22, 0.4, 1];
+export function douradasDaPosicao(posicao: number, total: number): number {
+  const fracao = posicao / (total * 0.01);
+  const faixa = CORTES_DOURADOS.findIndex((c) => fracao <= c);
+  return faixa < 0 ? 0 : ESTRELAS_DOURADAS - faixa;
+}

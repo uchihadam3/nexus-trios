@@ -49,3 +49,18 @@ describe('posição medida do topo', () => {
     expect(posicaoDoTime(['patrick', 'pateta', 'scooby'], ranking, topo)).toBeGreaterThan(topo.medidos);
   });
 });
+
+/* As estrelas douradas: só no 1% do topo, de 1 a 7, mais apertadas lá em cima. */
+describe('estrelas douradas', () => {
+  it('cortes pela posição dentro do 1%', async () => {
+    const { douradasDaPosicao } = await import('../src/presentation/posicao-do-trio');
+    const T = 10_586_800, umPorCento = T * 0.01;
+    expect(douradasDaPosicao(1, T)).toBe(7);
+    expect(douradasDaPosicao(Math.floor(umPorCento * 0.01), T)).toBe(7);
+    expect(douradasDaPosicao(Math.ceil(umPorCento * 0.01) + 1, T)).toBe(6);
+    expect(douradasDaPosicao(Math.floor(umPorCento * 0.06), T)).toBe(5);
+    expect(douradasDaPosicao(Math.floor(umPorCento * 0.4), T)).toBe(2);
+    expect(douradasDaPosicao(Math.floor(umPorCento), T)).toBe(1);
+    expect(douradasDaPosicao(Math.ceil(umPorCento) + 1, T)).toBe(0);
+  });
+});

@@ -15,7 +15,13 @@
 .pv-npc-avatar i{position:absolute;right:-4px;bottom:-4px;display:grid;place-items:center;width:calc(var(--t) * .36);height:calc(var(--t) * .36);min-width:18px;min-height:18px;border-radius:50%;font-style:normal;font-size:calc(var(--t) * .2);font-weight:950;color:#0c140f;background:var(--npc);box-shadow:0 0 0 2.5px #0d1411}
 .pv-estrelas{display:inline-flex;gap:1px;font-size:13px;line-height:1;letter-spacing:-1px}
 .pv-estrelas i{font-style:normal;color:#ffffff26}
-.pv-estrelas i.on{color:var(--pv-ouro);text-shadow:0 0 6px #ffd36b88}
+.pv-estrelas i.on{color:#dfe7f1;text-shadow:0 0 6px #c9d6e688}
+/* as 7 são de prata; no 1% do topo, as douradas (de 1 a 7) vêm depois */
+.pv-ouro{display:inline-flex;gap:1px;margin-left:4px;padding-left:4px;border-left:1px solid #ffd36b44}
+/* nos cartões dos times não cabem as 14 numa linha: as douradas descem para a linha de baixo */
+.pv-time .pv-estrelas{flex-wrap:wrap;row-gap:3px}
+.pv-time .pv-ouro{margin-left:0;padding-left:0;border-left:0}
+.pv-estrelas .pv-ouro i.on{color:var(--pv-ouro);text-shadow:0 0 7px #ffd36bcc}
 .primary.pv-grande{min-height:58px;font-size:17px;font-weight:950;letter-spacing:1.5px;gap:10px;justify-content:center;border-radius:18px;box-shadow:0 8px 24px #c8f56044}
 .primary.pv-grande:not(:disabled){animation:pv-chama 2.4s ease-in-out infinite}
 @keyframes pv-chama{50%{box-shadow:0 8px 30px #c8f56088}}

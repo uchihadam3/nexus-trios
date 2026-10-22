@@ -8,7 +8,7 @@ import { combosDoTrio } from '../engine/combos';
 import { MINIMO_DA_COLECAO, NPCS, duracaoNaTela, escolhaDoNpc, problemaDosTimes, sementeDaRodada, timesDoNpc, timesLivres, vencedorDaPartida, vitoriasDosTimes,
   type Lado, type NivelNpc, type Npc, type PartidaPvp, type Times } from '../engine/pvp';
 import { notaDoTrio, estrelasDoTime, posicaoDoTrio, ESTRELAS_MAXIMAS } from '../presentation/dicas-do-trio';
-import { textoDaPosicao, usePosicaoDoTrio } from '../presentation/posicao-do-trio';
+import { ESTRELAS_DOURADAS, douradasDaPosicao, textoDaPosicao, usePosicaoDoTrio } from '../presentation/posicao-do-trio';
 const ESTRELAS = Array.from({ length: ESTRELAS_MAXIMAS }, (_, k) => k + 1);
 import { battleAudio } from '../lib/audio';
 import { PRIORIDADE } from '../audio/cues';
@@ -120,6 +120,12 @@ function PorcentagemDoTime({ time, curta = false }: { time: readonly string[]; c
     : <span className="pv-pct" title={titulo}><span className="pv-pct-texto">melhor que <b>{pct}%</b> <span className="pv-dentro">({dentro}%)</span></span>{lugar && <span className="pv-lugar">{textoDaPosicao(lugar.posicao)}</span>}</span>;
 }
 
+/* No 1% do topo, de 1 a 7 estrelas douradas depois das 7 de prata (src/presentation/posicao-do-trio.ts). */
+function Douradas({ time }: { time: readonly string[] }) {
+  const lugar = usePosicaoDoTrio(time), ouro = lugar ? douradasDaPosicao(lugar.posicao, lugar.total) : 0;
+  return ouro > 0 ? <span className="pv-ouro" aria-label={`${ouro} ${ouro === 1 ? 'estrela dourada' : 'estrelas douradas'}`}>{Array.from({ length: ESTRELAS_DOURADAS }, (_, k) => <i key={k} className={k < ouro ? 'on' : ''}>★</i>)}</span> : null;
+}
+
 function CartaoDoTime({ time, i, lado, venceu, escolhido, bloqueado, onClick, compacto = false }: {
   time: readonly string[]; i: number; lado: Lado; venceu?: boolean; escolhido?: boolean; bloqueado?: boolean; onClick?: () => void; compacto?: boolean;
 }) {
@@ -131,7 +137,7 @@ function CartaoDoTime({ time, i, lado, venceu, escolhido, bloqueado, onClick, co
     <span className="pv-time-rostos">{time.map((id) => <Rosto key={id} id={id} tamanho={compacto ? 40 : 52} ficha={!onClick} />)}</span>
     {!compacto && <span className="pv-time-nomes">{time.map((id) => byId[id]!.name).join(' · ')}</span>}
     <span className="pv-time-info">
-      {dono && <span className="pv-estrelas" aria-label={`Força ${estrelas} de ${ESTRELAS_MAXIMAS}`}>{ESTRELAS.map((k) => <i key={k} className={k <= estrelas ? 'on' : ''}>★</i>)}</span>}
+      {dono && <span className="pv-estrelas" aria-label={`Força ${estrelas} de ${ESTRELAS_MAXIMAS}`}>{ESTRELAS.map((k) => <i key={k} className={k <= estrelas ? 'on' : ''}>★</i>)}<Douradas time={time} /></span>}
       {dono && <PorcentagemDoTime time={time} />}
       {combos > 0 && <span className="pv-combos"><Zap size={11} />{combos} combo{combos > 1 ? 's' : ''}</span>}
     </span>
@@ -544,7 +550,7 @@ export function Montar({ rival, colecao, inicial, onPronto, onVoltar, onDetails,
       {times.map((t, i) => {
         const estrelas = t.length === 3 ? estrelasDoTime(t) : 0;
         return <button key={i} className={`pv-slot ${ativo === i ? 'ativo' : ''} ${t.length === 3 ? 'cheio' : ''}`} onClick={() => setAtivo(i)} style={{ '--i': i } as CSSProperties}>
-          <span className="pv-slot-topo"><b>TIME {i + 1}</b>{t.length === 3 && !dono ? null : t.length === 3 ? <span className="pv-estrelas" aria-label={`Força ${estrelas} de ${ESTRELAS_MAXIMAS}`}>{ESTRELAS.map((k) => <i key={k} className={k <= estrelas ? 'on' : ''}>★</i>)}{melhores && <PorcentagemDoTime time={t} curta />}</span> : <small>{t.length}/3</small>}</span>
+          <span className="pv-slot-topo"><b>TIME {i + 1}</b>{t.length === 3 && !dono ? null : t.length === 3 ? <span className="pv-estrelas" aria-label={`Força ${estrelas} de ${ESTRELAS_MAXIMAS}`}>{ESTRELAS.map((k) => <i key={k} className={k <= estrelas ? 'on' : ''}>★</i>)}<Douradas time={t} />{melhores && <PorcentagemDoTime time={t} curta />}</span> : <small>{t.length}/3</small>}</span>
           <span className="pv-slot-rostos">{[0, 1, 2].map((k) => t[k] ? <span key={k} className="pv-slot-cheio" role="button" tabIndex={0} aria-label={`Tirar ${byId[t[k]!]!.name}`} onClick={(e) => { e.stopPropagation(); tocar(t[k]!); }}><Rosto id={t[k]!} tamanho={46} ficha={false} /><X size={12} className="pv-tirar" /></span> : <span key={k} className="pv-slot-vazio">+</span>)}</span>
         </button>;
       })}

@@ -145,14 +145,17 @@ button.dv-espaco:focus-visible{outline:2px solid #c8f560;outline-offset:4px;bord
 .dv-porque-grupo.dele h3{margin-top:0;color:color-mix(in srgb,var(--character),#fff 35%)}
 
 /* as estrelas do trio completo (DraftScreen, EstrelasDoTrio): pequenas e discretas, acendem uma a uma */
-.dv-estrelas{display:flex;justify-content:center;align-items:center;gap:3px;margin-top:-2px}
+.dv-estrelas{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:3px;margin-top:-2px}
 .dv-estrelas small{margin-left:6px;font-size:11px;color:#9fb0bf}
 .dv-estrelas small b{color:#ffd36b;font-weight:900}
 .dv-estrelas .dv-dentro{color:#7fd8ff;font-weight:900}
 .dv-estrelas .dv-lugar{color:#ffb4f0;font-weight:900;white-space:nowrap}
 .dv-estrelas i{display:grid;color:#ffffff24}
-.dv-estrelas i.acesa{color:#ffd36b;filter:drop-shadow(0 0 3px #ffd36b88);animation:dv-estrela-acende .45s calc(var(--k)*.12s + .2s) cubic-bezier(.2,.9,.3,1.5) both}
+.dv-estrelas i.acesa{color:#dfe7f1;filter:drop-shadow(0 0 3px #c9d6e688);animation:dv-estrela-acende .45s calc(var(--k)*.12s + .2s) cubic-bezier(.2,.9,.3,1.5) both}
 @keyframes dv-estrela-acende{from{color:#ffffff24;transform:scale(.3);filter:none}}
+/* as 7 são de prata; no 1% do topo, as douradas (de 1 a 7) vêm depois, brilhando */
+.dv-estrelas .dv-ouro{display:inline-flex;gap:2px;margin-left:5px;padding-left:6px;border-left:1px solid #ffd36b44}
+.dv-estrelas .dv-ouro i.acesa{color:#ffd36b;filter:drop-shadow(0 0 4px #ffd36bcc)}
 @media (prefers-reduced-motion:reduce){.dv-estrelas i.acesa{animation:none}}
 
 /* O selo de coleção (pedido do jogador: "um selo bonito nos personagens que você já tem na coleção"): uma medalha
