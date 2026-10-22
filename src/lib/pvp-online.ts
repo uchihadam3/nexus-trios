@@ -1,4 +1,5 @@
 import type { RealtimeChannel, SupabaseClient } from '@supabase/supabase-js';
+import { t } from '../i18n/idioma';
 
 /*
  * O PvP online no aparelho: os pedidos ao juiz (ranked-api, ação "pvp": supabase/functions/ranked-api/pvp.ts) e o
@@ -112,5 +113,5 @@ export const diferencaDoRelogio = (agoraNoServidor: string) => Date.parse(agoraN
 /** Os erros do juiz já vêm em frase de gente; só a falta de rede ganha uma. */
 export const textoDoErroPvp = (e: unknown) => {
   const m = e instanceof Error ? e.message : '';
-  return /fetch|network|Failed|conexão/i.test(m) ? 'Sem conexão com o servidor. Confira a internet.' : m || 'Não deu certo agora. Tente de novo.';
+  return /fetch|network|Failed|conexão/i.test(m) ? t('Sem conexão com o servidor. Confira a internet.') : m ? t(m) : t('Não deu certo agora. Tente de novo.');
 };

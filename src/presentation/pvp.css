@@ -409,12 +409,10 @@ button.pv-time:active:not(:disabled){transform:scale(.98)}
 .pv-pct{font-size:10.5px;font-style:normal;font-weight:700;color:#9fb0bf;white-space:nowrap}
 .pv-pct b{color:var(--pv-ouro);font-weight:900}
 .pv-estrelas .pv-pct{margin-left:4px;font-size:9.5px;letter-spacing:0;color:var(--pv-ouro);font-weight:900}
-.pv-dentro{margin-left:2px;color:#7fd8ff;font-weight:900}
 /* a posição do time entre todos os trios: uma etiqueta que desce para a linha de baixo quando não cabe (no celular, nos
  * cartões dos times, ela ficava cortada) */
 .pv-lugar{display:inline-block;margin-left:4px;padding:0 5px;border-radius:7px;color:#ffb4f0;background:#ffb4f01f;box-shadow:inset 0 0 0 1px #ffb4f055;font-weight:900;white-space:nowrap;line-height:1.5}
 .pv-time .pv-pct{white-space:normal;line-height:1.6}
-.pv-pct-texto{white-space:nowrap}
 /* no espaço do time, a porcentagem desce para a linha de baixo das estrelas (com o "dentro" não cabe ao lado) */
 .pv-slot .pv-estrelas{flex-wrap:wrap;justify-content:center}
 .pv-slot .pv-estrelas .pv-pct{flex-basis:100%;margin:2px 0 0;text-align:center}

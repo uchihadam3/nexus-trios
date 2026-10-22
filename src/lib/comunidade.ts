@@ -1,4 +1,5 @@
 import type { RealtimeChannel, SupabaseClient } from '@supabase/supabase-js';
+import { plural, t, tx } from '../i18n/idioma';
 
 /*
  * A Comunidade: quem está online, o chat global e as mensagens privadas com "visto".
@@ -57,14 +58,14 @@ const ID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 /** As mensagens de erro do banco ("chat: devagar…") viram frase de gente. */
 export function textoDoErro(e: unknown): string {
   const m = e instanceof Error ? e.message : typeof e === 'object' && e && 'message' in e ? String((e as { message: unknown }).message) : '';
-  if (/devagar/.test(m)) return 'Calma! Espere uns segundos antes de mandar outra.';
-  if (/repetida/.test(m)) return 'Você acabou de mandar essa mesma mensagem.';
-  if (/escolha seu nome/.test(m)) return 'Escolha seu nome público para entrar na Comunidade.';
-  if (/500/.test(m)) return `A mensagem pode ter até ${LIMITE_DA_MENSAGEM} letras.`;
-  if (/vazia/.test(m)) return 'Escreva alguma coisa antes de mandar.';
-  if (/destinat|resposta|não encontrada/.test(m)) return 'Essa conversa não está mais disponível.';
-  if (/fetch|network|Failed/i.test(m)) return 'Sem conexão. Confira a internet e tente de novo.';
-  return 'Não deu certo agora. Tente de novo em instantes.';
+  if (/devagar/.test(m)) return t('Calma! Espere uns segundos antes de mandar outra.');
+  if (/repetida/.test(m)) return t('Você acabou de mandar essa mesma mensagem.');
+  if (/escolha seu nome/.test(m)) return t('Escolha seu nome público para entrar na Comunidade.');
+  if (/500/.test(m)) return t('A mensagem pode ter até {n} letras.', { n: LIMITE_DA_MENSAGEM });
+  if (/vazia/.test(m)) return t('Escreva alguma coisa antes de mandar.');
+  if (/destinat|resposta|não encontrada/.test(m)) return t('Essa conversa não está mais disponível.');
+  if (/fetch|network|Failed/i.test(m)) return t('Sem conexão. Confira a internet e tente de novo.');
+  return t('Não deu certo agora. Tente de novo em instantes.');
 }
 
 type LinhaMensagem = { id: number | string; autor_id: string; para_id: string | null; texto: string; resposta_a: number | string | null; criada_em: string; vista_em: string | null };
@@ -156,40 +157,46 @@ const mesmoDia = (a: Date, b: Date) => a.getFullYear() === b.getFullYear() && a.
 /** "agora", "há 5 min", "há 2 h", "há 3 dias"… */
 export function haQuanto(iso: string, agora = Date.now()): string {
   const s = Math.max(0, (agora - new Date(iso).getTime()) / 1000);
-  if (s < 45) return 'agora';
-  if (s < 3600) return `há ${Math.max(1, Math.round(s / 60))} min`;
-  if (s < 86400) return `há ${Math.floor(s / 3600)} h`;
+  return s < 45 ? t('agora') : t('há {tempo}', { tempo: quantoTempo(iso, agora) });
+}
+
+/** Só o tamanho do tempo, sem o "há": "5 min", "2 h", "3 dias"… (a idade da conta no cartão). */
+export function quantoTempo(iso: string, agora = Date.now()): string {
+  const s = Math.max(0, (agora - new Date(iso).getTime()) / 1000);
+  if (s < 45) return t('agora');
+  if (s < 3600) return t('{n} min', { n: Math.max(1, Math.round(s / 60)) });
+  if (s < 86400) return t('{n} h', { n: Math.floor(s / 3600) });
   const d = Math.floor(s / 86400);
-  if (d < 30) return `há ${d} ${d === 1 ? 'dia' : 'dias'}`;
+  if (d < 30) return plural(d, '{n} dia', '{n} dias');
   const m = Math.floor(d / 30);
-  return m < 12 ? `há ${m} ${m === 1 ? 'mês' : 'meses'}` : `há ${Math.floor(m / 12)} ${Math.floor(m / 12) === 1 ? 'ano' : 'anos'}`;
+  return m < 12 ? plural(m, '{n} mês', '{n} meses') : plural(Math.floor(m / 12), '{n} ano', '{n} anos');
 }
 
 /** "hoje às 14:05", "ontem às 09:30", "12/10 às 18:00". */
 export function quando(iso: string, agora = Date.now()): string {
   const d = new Date(iso), hoje = new Date(agora), ontem = new Date(agora - 86400000);
-  if (mesmoDia(d, hoje)) return `hoje às ${hora(iso)}`;
-  if (mesmoDia(d, ontem)) return `ontem às ${hora(iso)}`;
-  return `${doisDigitos(d.getDate())}/${doisDigitos(d.getMonth() + 1)} às ${hora(iso)}`;
+  if (mesmoDia(d, hoje)) return t('hoje às {hora}', { hora: hora(iso) });
+  if (mesmoDia(d, ontem)) return t('ontem às {hora}', { hora: hora(iso) });
+  return t('{dia}/{mes} às {hora}', { dia: doisDigitos(d.getDate()), mes: doisDigitos(d.getMonth() + 1), hora: hora(iso) });
 }
 
 /** O separador de dia no meio da conversa: "Hoje", "Ontem", "Segunda, 12/10". */
 export function rotuloDoDia(iso: string, agora = Date.now()): string {
   const d = new Date(iso), hoje = new Date(agora), ontem = new Date(agora - 86400000);
-  if (mesmoDia(d, hoje)) return 'Hoje';
-  if (mesmoDia(d, ontem)) return 'Ontem';
-  const dia = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'][d.getDay()];
-  return `${dia}, ${doisDigitos(d.getDate())}/${doisDigitos(d.getMonth() + 1)}`;
+  if (mesmoDia(d, hoje)) return t('Hoje');
+  if (mesmoDia(d, ontem)) return t('Ontem');
+  const semana = [tx('Domingo'), tx('Segunda'), tx('Terça'), tx('Quarta'), tx('Quinta'), tx('Sexta'), tx('Sábado')][d.getDay()]!;
+  return t('{semana}, {dia}/{mes}', { semana: t(semana), dia: doisDigitos(d.getDate()), mes: doisDigitos(d.getMonth() + 1) });
 }
 
 /** A linha de status de um jogador: "Online há 12 min", "Saiu há 3 h", "Ainda não apareceu". */
 export function statusDe(j: Pick<Jogador, 'online' | 'onlineDesde' | 'vistoEm'>, agora = Date.now()): { curto: string; longo: string } {
   if (j.online && j.onlineDesde) {
     const ha = haQuanto(j.onlineDesde, agora);
-    return { curto: ha === 'agora' ? 'Online agora' : `Online ${ha}`, longo: `Online desde ${quando(j.onlineDesde, agora)}` };
+    return { curto: ha === t('agora') ? t('Online agora') : t('Online {ha}', { ha }), longo: t('Online desde {quando}', { quando: quando(j.onlineDesde, agora) }) };
   }
-  if (j.vistoEm) return { curto: `Saiu ${haQuanto(j.vistoEm, agora)}`, longo: `Visto por último ${quando(j.vistoEm, agora)}` };
-  return { curto: 'Ainda não apareceu', longo: 'Ainda não abriu o jogo desde que a Comunidade chegou' };
+  if (j.vistoEm) return { curto: t('Saiu {ha}', { ha: haQuanto(j.vistoEm, agora) }), longo: t('Visto por último {quando}', { quando: quando(j.vistoEm, agora) }) };
+  return { curto: t('Ainda não apareceu'), longo: t('Ainda não abriu o jogo desde que a Comunidade chegou') };
 }
 
 /** A cor de cada nome no chat: sempre a mesma para a mesma conta. */

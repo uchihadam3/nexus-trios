@@ -13,6 +13,7 @@ import { textoDoErroPvp, type PartidaDaCampanha, type RespostaDaCampanha, type S
 import { Apresentar, Confirmar, DonoDoPvp, Escolher, Fx, Montar, ResultadoDaRodada, Rosto, Vs, som, type Oponente } from './PvpScreen';
 import { AvatarDoRival, CHAVE_DO_RESUMO, type ResumoDaCampanha } from '../components/CartaoDaCampanha';
 import '../presentation/campanha.css';
+import { nomeDe, plural, t, tx } from '../i18n/idioma';
 
 /*
  * O Caminho do Nexus (pedido do jogador: "uma campanha mesmo… começa só um desbloqueado… muito bem gamificado"): o
@@ -42,19 +43,19 @@ const regiaoDe = (r: Rival) => REGIOES[r.regiao - 1]!;
 const faixaDe = (r: Rival): Faixa => `${r.chefe ? 'chefe' : 'regiao'}-${regiaoDe(r).id as RegiaoDaMusica}`;
 const comoPvp = (p: PartidaDaCampanha, ate = p.rodadas.length): PartidaPvp => ({ meus: p.meus as Times, deles: p.deles as Times, rodadas: p.rodadas.slice(0, ate), seed: 0 });
 
-const oponenteDoRival = (r: Rival): Oponente => ({ nome: r.nome, cor: r.cor, avatar: (t) => <AvatarDoRival rival={r} tamanho={t} />, fala: r.fala });
+const oponenteDoRival = (r: Rival): Oponente => ({ nome: t(r.nome), cor: r.cor, avatar: (tam) => <AvatarDoRival rival={r} tamanho={tam} />, fala: t(r.fala) });
 
 function Estrelinhas({ n, tamanho = 12 }: { n: number; tamanho?: number }) {
-  return <span className="cn-estrelinhas" aria-label={`${n} de 3 estrelas`}>{[1, 2, 3].map((k) => <Star key={k} size={tamanho} className={k <= n ? 'on' : ''} />)}</span>;
+  return <span className="cn-estrelinhas" aria-label={t('{n} de 3 estrelas', { n })}>{[1, 2, 3].map((k) => <Star key={k} size={tamanho} className={k <= n ? 'on' : ''} />)}</span>;
 }
 
-function Descansando({ descanso, titulo = 'DESCANSANDO', vazio }: { descanso: Record<string, number>; titulo?: string; vazio?: string }) {
+function Descansando({ descanso, titulo = tx('DESCANSANDO'), vazio }: { descanso: Record<string, number>; titulo?: string; vazio?: string }) {
   const ids = Object.keys(descanso).filter((id) => byId[id] && descanso[id]! > 0);
   if (!ids.length && !vazio) return null;
   return <div className="cn-descanso">
-    <span className="cn-descanso-titulo"><Moon size={14} />{titulo}</span>
-    {ids.length ? <span className="cn-descanso-rostos">{ids.map((id) => <span key={id} className="cn-zz" title={`${byId[id]!.name}: volta em ${descanso[id]} partida${descanso[id] === 1 ? '' : 's'}`}>
-      <Rosto id={id} tamanho={38} apagado /><i>💤{descanso[id]}</i></span>)}</span> : <small>{vazio}</small>}
+    <span className="cn-descanso-titulo"><Moon size={14} />{t(titulo)}</span>
+    {ids.length ? <span className="cn-descanso-rostos">{ids.map((id) => <span key={id} className="cn-zz" title={`${nomeDe(byId[id]!)}: ${plural(descanso[id]!, 'volta em {n} partida', 'volta em {n} partidas')}`}>
+      <Rosto id={id} tamanho={38} apagado /><i>💤{descanso[id]}</i></span>)}</span> : <small>{t(vazio ?? '')}</small>}
   </div>;
 }
 
@@ -74,7 +75,7 @@ function Regiao({ regiao, estrelas, atual, onRival }: { regiao: (typeof REGIOES)
   return <section className={`cn-regiao ${aberta ? '' : 'bloqueada'} ${conquistada ? 'conquistada' : ''}`} style={{ '--c1': regiao.cor, '--c2': regiao.cor2 } as CSSProperties}>
     <header className="cn-regiao-topo">
       <span className="cn-regiao-icone" aria-hidden="true">{regiao.icone}</span>
-      <div><small>REGIÃO {regiao.n}{regiao.aura > 0 ? ` · AURA DO CHEFE +${Math.round(regiao.aura * 100)}%` : ''}</small><b>{regiao.nome}</b><span>{regiao.lema}</span></div>
+      <div><small>{t('REGIÃO {n}', { n: regiao.n })}{regiao.aura > 0 ? ` · ${t('AURA DO CHEFE +{n}%', { n: Math.round(regiao.aura * 100) })}` : ''}</small><b>{t(regiao.nome)}</b><span>{t(regiao.lema)}</span></div>
       <span className="cn-regiao-estrelas"><Star size={14} />{feitas}/15</span>
     </header>
     <div className="cn-trilha" style={{ height: alto }}>
@@ -83,17 +84,17 @@ function Regiao({ regiao, estrelas, atual, onRival }: { regiao: (typeof REGIOES)
         const e = estrelas[r.id] ?? 0, livre = liberado(estrelas, r), agora = r.id === atual;
         return <button key={r.id} className={`cn-no ${r.chefe ? 'chefe' : ''} ${e ? 'vencido' : ''} ${agora ? 'atual' : ''} ${livre ? '' : 'bloqueado'}`}
           style={{ left: `${POSICOES[k]}%`, top: k * ALTURA, '--cor': r.cor, '--k': k } as CSSProperties} onClick={() => { som('toque'); onRival(r); }}
-          aria-label={`${r.nome}${livre ? '' : ', bloqueado'}`}>
-          {agora && <span className="cn-lute">LUTE!</span>}
+          aria-label={`${t(r.nome)}${livre ? '' : t(', bloqueado')}`}>
+          {agora && <span className="cn-lute">{t('LUTE!')}</span>}
           <AvatarDoRival rival={r} tamanho={r.chefe ? 78 : 60} apagado={!livre} />
           {!livre && <Lock className="cn-cadeado" size={18} />}
           {r.aura > 0 && <span className="cn-aura-chip"><Flame size={10} />+{Math.round(r.aura * 100)}%</span>}
-          <span className="cn-no-nome"><small>{r.chefe ? 'CHEFE' : `#${r.n}`}</small>{livre ? r.nome : '???'}</span>
+          <span className="cn-no-nome"><small>{r.chefe ? t('CHEFE') : `#${r.n}`}</small>{livre ? t(r.nome) : '???'}</span>
           {livre && <Estrelinhas n={e} />}
         </button>;
       })}
     </div>
-    {!aberta && <div className="cn-regiao-trava"><Lock size={16} />Vença o chefe da região {regiao.n - 1} para abrir</div>}
+    {!aberta && <div className="cn-regiao-trava"><Lock size={16} />{t('Vença o chefe da região {n} para abrir', { n: regiao.n - 1 })}</div>}
   </section>;
 }
 
@@ -103,36 +104,36 @@ function Mapa({ r, onRival, onVoltar }: { r: RespostaDaCampanha; onRival: (x: Ri
   const fim = zerou(r.progresso.estrelas);
   return <section className="cn">
     <header className="cn-topo">
-      <button className="icon-button" onClick={onVoltar} aria-label="Voltar"><ArrowLeft size={20} /></button>
-      <div><small>MODO CAMPANHA</small><h1>CAMINHO DO NEXUS</h1></div>
-      <span className="cn-rating" title="Suas estrelas no Caminho do Nexus (o ranking do Nexus)"><Star size={14} />{total}/{TOTAL_DE_ESTRELAS}</span>
+      <button className="icon-button" onClick={onVoltar} aria-label={t('Voltar')}><ArrowLeft size={20} /></button>
+      <div><small>{t('MODO CAMPANHA')}</small><h1>{t('CAMINHO DO NEXUS')}</h1></div>
+      <span className="cn-rating" title={t('Suas estrelas no Caminho do Nexus (o ranking do Nexus)')}><Star size={14} />{total}/{TOTAL_DE_ESTRELAS}</span>
     </header>
 
     <div className="cn-heroi" style={{ '--tc': titulo.cor } as CSSProperties}>
       <Fx nome="holofote" cor={titulo.cor} ms={5200} className="cn-fx-holofote" />
       <span className="cn-emblema"><Medal size={34} /></span>
       <div className="cn-heroi-texto">
-        <small>SEU TÍTULO</small><b>{titulo.nome}</b>
+        <small>{t('SEU TÍTULO')}</small><b>{t(titulo.nome)}</b>
         <span className="cn-barra"><i style={{ width: `${Math.round(100 * deTitulo)}%` }} /></span>
-        <span className="cn-heroi-linha"><span><Star size={13} />{total}/{TOTAL_DE_ESTRELAS}</span>{prox ? <em>faltam {prox.estrelas - total}★ para {prox.nome}</em> : <em>título máximo!</em>}</span>
+        <span className="cn-heroi-linha"><span><Star size={13} />{total}/{TOTAL_DE_ESTRELAS}</span>{prox ? <em>{t('faltam {n}★ para {titulo}', { n: prox.estrelas - total, titulo: t(prox.nome) })}</em> : <em>{t('título máximo!')}</em>}</span>
       </div>
     </div>
-    {fim && <div className="cn-zerou"><Trophy size={22} /><div><b>CONQUISTADOR DO NEXUS</b><small>Você derrotou o Imperador. Agora junte as 120 estrelas!</small></div></div>}
+    {fim && <div className="cn-zerou"><Trophy size={22} /><div><b>{t('CONQUISTADOR DO NEXUS')}</b><small>{t('Você derrotou o Imperador. Agora junte as 120 estrelas!')}</small></div></div>}
 
     {proximo && <button className="cn-continuar" style={{ '--cor': proximo.cor } as CSSProperties} onClick={() => { som('ui-arena'); onRival(proximo); }}>
       <AvatarDoRival rival={proximo} tamanho={52} />
-      <span><small>PRÓXIMO RIVAL · REGIÃO {proximo.regiao}</small><b>{proximo.nome}</b><em>{proximo.estilo}</em></span>
+      <span><small>{t('PRÓXIMO RIVAL · REGIÃO {n}', { n: proximo.regiao })}</small><b>{t(proximo.nome)}</b><em>{t(proximo.estilo)}</em></span>
       <Play size={22} />
     </button>}
 
-    <Descansando descanso={r.progresso.descanso} titulo="SEUS PERSONAGENS DESCANSANDO" vazio={`Rodízio: os que mais lutarem nas últimas ${DESCANSO.janela} partidas descansam. Depois de cada partida dormem ${DORMEM_POR_PARTIDA}, por ${DESCANSO.partidas} partidas, até ${DORMEM_NO_MAXIMO} dormindo. Só conta partida contra rival que você ainda não gabaritou (★★★).`} />
+    <Descansando descanso={r.progresso.descanso} titulo={tx('SEUS PERSONAGENS DESCANSANDO')} vazio={t('Rodízio: os que mais lutarem nas últimas {janela} partidas descansam. Depois de cada partida dormem {dormem}, por {partidas} partidas, até {maximo} dormindo. Só conta partida contra rival que você ainda não gabaritou (★★★).', { janela: DESCANSO.janela, dormem: DORMEM_POR_PARTIDA, partidas: DESCANSO.partidas, maximo: DORMEM_NO_MAXIMO })} />
 
     <div className="cn-regioes">
       {REGIOES.map((g) => <Regiao key={g.id} regiao={g} estrelas={r.progresso.estrelas} atual={proximo?.id ?? null} onRival={onRival} />)}
     </div>
     <div className="cn-titulos">
-      <h3><Medal size={15} />TÍTULOS</h3>
-      <div>{TITULOS.map((t) => <span key={t.nome} className={total >= t.estrelas ? 'on' : ''} style={{ '--tc': t.cor } as CSSProperties}><b>{t.nome}</b><small>{t.estrelas}★</small></span>)}</div>
+      <h3><Medal size={15} />{t('TÍTULOS')}</h3>
+      <div>{TITULOS.map((tit) => <span key={tit.nome} className={total >= tit.estrelas ? 'on' : ''} style={{ '--tc': tit.cor } as CSSProperties}><b>{t(tit.nome)}</b><small>{tit.estrelas}★</small></span>)}</div>
     </div>
   </section>;
 }
@@ -146,38 +147,38 @@ function Ficha({ rival, r, onFechar, onDesafiar }: { rival: Rival; r: RespostaDa
   const livres = livresParaJogar(r.colecao, r.progresso.descanso).length, falta = Math.max(0, MINIMO_DA_CAMPANHA - r.colecao.length);
   const anterior = RIVAIS[rival.n - 2], dono = useContext(DonoDoPvp);
   return createPortal(<div className="pv-painel-fundo cn-ficha-fundo" onClick={(ev) => { if (ev.target === ev.currentTarget) onFechar(); }}>
-    <section className="cn-ficha" role="dialog" aria-label={rival.nome} style={{ '--cor': rival.cor, '--c1': regiao.cor, '--c2': regiao.cor2 } as CSSProperties}>
-      <button className="icon-button cn-ficha-x" onClick={onFechar} aria-label="Fechar"><X size={18} /></button>
+    <section className="cn-ficha" role="dialog" aria-label={t(rival.nome)} style={{ '--cor': rival.cor, '--c1': regiao.cor, '--c2': regiao.cor2 } as CSSProperties}>
+      <button className="icon-button cn-ficha-x" onClick={onFechar} aria-label={t('Fechar')}><X size={18} /></button>
       <div className="cn-ficha-capa">
-        <span className="cn-ficha-regiao">{regiao.icone} REGIÃO {regiao.n} · {regiao.nome.toUpperCase()}</span>
+        <span className="cn-ficha-regiao">{regiao.icone} {t('REGIÃO {n}', { n: regiao.n })} · {t(regiao.nome).toUpperCase()}</span>
         <AvatarDoRival rival={rival} tamanho={104} apagado={!livre} />
-        {rival.chefe && <span className="cn-selo-chefe"><Crown size={13} />{rival.n === RIVAIS.length ? 'CHEFE FINAL' : 'CHEFE DA REGIÃO'}</span>}
+        {rival.chefe && <span className="cn-selo-chefe"><Crown size={13} />{rival.n === RIVAIS.length ? t('CHEFE FINAL') : t('CHEFE DA REGIÃO')}</span>}
       </div>
-      <small className="cn-ficha-titulo">{rival.titulo.toUpperCase()}</small>
-      <h2>{livre ? rival.nome : '???'}</h2>
+      <small className="cn-ficha-titulo">{t(rival.titulo).toUpperCase()}</small>
+      <h2>{livre ? t(rival.nome) : '???'}</h2>
       {livre ? <>
         <div className="cn-chips">
-          <span className="cn-chip estilo"><Sparkles size={12} />{rival.estilo}</span>
-          {dono && <span className="cn-chip" title="A força máxima dos times dele"><Star size={12} />times até {rival.estrelas}★</span>}
-          <span className="cn-chip"><Shield size={12} />{rival.espelho ? 'copia os seus' : `${colecaoDoRival(rival).length} personagens`}</span>
-          <span className="cn-chip cerebro" title="Dificuldade"><Brain size={12} />{Array.from({ length: 8 }, (_, k) => <i key={k} className={k < rival.regiao ? 'on' : ''} />)}</span>
-          {rival.cerebro.escolha === 'vidente' && <span className="cn-chip vidente"><Eye size={12} />vê o futuro</span>}
-          {rival.aura > 0 && <span className="cn-chip aura"><Flame size={12} />Aura +{Math.round(rival.aura * 100)}% Vida</span>}
+          <span className="cn-chip estilo"><Sparkles size={12} />{t(rival.estilo)}</span>
+          {dono && <span className="cn-chip" title={t('A força máxima dos times dele')}><Star size={12} />{t('times até {n}★', { n: rival.estrelas })}</span>}
+          <span className="cn-chip"><Shield size={12} />{rival.espelho ? t('copia os seus') : t('{n} personagens', { n: colecaoDoRival(rival).length })}</span>
+          <span className="cn-chip cerebro" title={t('Dificuldade')}><Brain size={12} />{Array.from({ length: 8 }, (_, k) => <i key={k} className={k < rival.regiao ? 'on' : ''} />)}</span>
+          {rival.cerebro.escolha === 'vidente' && <span className="cn-chip vidente"><Eye size={12} />{t('vê o futuro')}</span>}
+          {rival.aura > 0 && <span className="cn-chip aura"><Flame size={12} />{t('Aura +{n}% Vida', { n: Math.round(rival.aura * 100) })}</span>}
         </div>
-        <p className="cn-jeito">{rival.jeito}</p>
-        <p className="cn-fala">“{rival.fala}”</p>
+        <p className="cn-jeito">{t(rival.jeito)}</p>
+        <p className="cn-fala">“{t(rival.fala)}”</p>
         <div className="cn-ficha-linhas">
-          <span><small>SEU RECORDE</small><Estrelinhas n={e} tamanho={16} /></span>
-          <span><small>PLACAR</small><b className="v">{placar.v}V</b> <b className="d">{placar.d}D</b></span>
+          <span><small>{t('SEU RECORDE')}</small><Estrelinhas n={e} tamanho={16} /></span>
+          <span><small>{t('PLACAR')}</small><b className="v">{t('{n}V', { n: placar.v })}</b> <b className="d">{t('{n}D', { n: placar.d })}</b></span>
         </div>
-        <div className="cn-premio"><Star size={14} />3–0 dá ★★★ · 3–1 dá ★★ · 3–2 dá ★</div>
-        {e >= 3 && Object.keys(r.progresso.descanso).length > 0 && <small className="cn-nota"><Moon size={12} /> Você já gabaritou este rival (★★★): esta partida não acorda seus personagens.</small>}
-        {e < 3 && <small className="cn-nota"><Moon size={12} /> Aqui o rodízio põe {DORMEM_POR_PARTIDA} personagens para dormir a cada partida, por {DESCANSO.partidas} partidas (até {DORMEM_NO_MAXIMO} dormindo).</small>}
-        <Descansando descanso={r.progresso.descanso_rivais[rival.id] ?? {}} titulo="DESCANSANDO DO LADO DELE" />
-        {falta > 0 ? <p className="cn-aviso"><Lock size={14} />A campanha pede {MINIMO_DA_CAMPANHA} personagens na coleção: faltam {falta}.</p>
-          : livres < 9 ? <p className="cn-aviso"><Moon size={14} />Gente demais descansando: espere o rodízio.</p>
-          : <button className="primary pv-grande cn-desafiar" onClick={onDesafiar}><Swords size={22} />DESAFIAR</button>}
-      </> : <p className="cn-aviso"><Lock size={14} />Vença {anterior ? anterior.nome : 'o rival anterior'} para liberar.</p>}
+        <div className="cn-premio"><Star size={14} />{t('3–0 dá ★★★ · 3–1 dá ★★ · 3–2 dá ★')}</div>
+        {e >= 3 && Object.keys(r.progresso.descanso).length > 0 && <small className="cn-nota"><Moon size={12} /> {t('Você já gabaritou este rival (★★★): esta partida não acorda seus personagens.')}</small>}
+        {e < 3 && <small className="cn-nota"><Moon size={12} /> {t('Aqui o rodízio põe {dormem} personagens para dormir a cada partida, por {partidas} partidas (até {maximo} dormindo).', { dormem: DORMEM_POR_PARTIDA, partidas: DESCANSO.partidas, maximo: DORMEM_NO_MAXIMO })}</small>}
+        <Descansando descanso={r.progresso.descanso_rivais[rival.id] ?? {}} titulo={tx('DESCANSANDO DO LADO DELE')} />
+        {falta > 0 ? <p className="cn-aviso"><Lock size={14} />{t('A campanha pede {n} personagens na coleção: faltam {falta}.', { n: MINIMO_DA_CAMPANHA, falta })}</p>
+          : livres < 9 ? <p className="cn-aviso"><Moon size={14} />{t('Gente demais descansando: espere o rodízio.')}</p>
+          : <button className="primary pv-grande cn-desafiar" onClick={onDesafiar}><Swords size={22} />{t('DESAFIAR')}</button>}
+      </> : <p className="cn-aviso"><Lock size={14} />{t('Vença {nome} para liberar.', { nome: anterior ? t(anterior.nome) : t('o rival anterior') })}</p>}
     </section>
   </div>, document.body);
 }
@@ -200,23 +201,23 @@ function Fim({ rival, partida, antes, r, onMapa, onDeNovo, onProximo }: { rival:
   return <section className={`pv-fim cn-fim ${ganhei ? 'ganhou' : 'perdeu'}`} style={{ '--npc': rival.cor } as CSSProperties}>
     {ganhei && <span className="pv-confete" aria-hidden="true">{Array.from({ length: 24 }, (_, i) => <i key={i} style={{ '--i': i } as CSSProperties} />)}</span>}
     {ganhei && <><Fx nome="raios" cor="#ffd36b" ms={5200} className="pv-fx-raios" /><Fx nome="faiscas" cor="#fff3b0" ms={4200} className="pv-fx-faiscas" /></>}
-    <small>CAMINHO DO NEXUS · {rival.titulo.toUpperCase()}</small>
-    <h1>{zerouAgora ? 'O NEXUS É SEU!' : ganhei ? 'VITÓRIA!' : 'DERROTA'}</h1>
+    <small>{t('CAMINHO DO NEXUS')} · {t(rival.titulo).toUpperCase()}</small>
+    <h1>{zerouAgora ? t('O NEXUS É SEU!') : ganhei ? t('VITÓRIA!') : t('DERROTA')}</h1>
     <AvatarDoRival rival={rival} tamanho={72} apagado={ganhei} />
-    <p className="cn-fala">“{ganhei ? rival.perdeu : rival.venceu}” <small>— {rival.nome}</small></p>
-    {ganhei && <div className="cn-fim-estrelas" aria-label={`${estrelas} estrelas`}>{[1, 2, 3].map((k) => <Star key={k} size={44} className={k <= mostradas ? 'on' : ''} />)}</div>}
-    {ganhei && recorde && mostradas >= estrelas && <span className="cn-recorde"><Sparkles size={14} />NOVO RECORDE</span>}
-    <div className="pv-fim-rodadas">{partida.rodadas.map((x, i) => <span key={i} className={x.vencedor}><b>{i + 1}</b>{x.vencedor === 'eu' ? 'V' : 'D'}</span>)}</div>
-    {partida.motivo === 'abandonou' && <small className="cn-nota">Abandonar conta como derrota.</small>}
+    <p className="cn-fala">“{t(ganhei ? rival.perdeu : rival.venceu)}” <small>— {t(rival.nome)}</small></p>
+    {ganhei && <div className="cn-fim-estrelas" aria-label={plural(estrelas, '{n} estrela', '{n} estrelas')}>{[1, 2, 3].map((k) => <Star key={k} size={44} className={k <= mostradas ? 'on' : ''} />)}</div>}
+    {ganhei && recorde && mostradas >= estrelas && <span className="cn-recorde"><Sparkles size={14} />{t('NOVO RECORDE')}</span>}
+    <div className="pv-fim-rodadas">{partida.rodadas.map((x, i) => <span key={i} className={x.vencedor}><b>{i + 1}</b>{x.vencedor === 'eu' ? t('V') : t('D')}</span>)}</div>
+    {partida.motivo === 'abandonou' && <small className="cn-nota">{t('Abandonar conta como derrota.')}</small>}
 
-    {zerouAgora && <div className="cn-conquista lenda"><Trophy size={26} /><div><b>CONQUISTADOR DO NEXUS</b><small>Você derrotou o Imperador e zerou a campanha!</small></div></div>}
-    {regiaoNova && !zerouAgora && <div className="cn-conquista"><MapaIcone size={22} /><div><b>REGIÃO CONQUISTADA!</b><small>{regiaoDe(rival).nome} é sua. {REGIOES[rival.regiao] ? `Abriu: ${REGIOES[rival.regiao]!.icone} ${REGIOES[rival.regiao]!.nome}` : ''}</small></div></div>}
-    {tituloNovo && <div className="cn-conquista titulo" style={{ '--tc': tituloNovo.cor } as CSSProperties}><Medal size={22} /><div><b>NOVO TÍTULO: {tituloNovo.nome.toUpperCase()}</b><small>{totalAgora} estrelas no caminho</small></div></div>}
+    {zerouAgora && <div className="cn-conquista lenda"><Trophy size={26} /><div><b>{t('CONQUISTADOR DO NEXUS')}</b><small>{t('Você derrotou o Imperador e zerou a campanha!')}</small></div></div>}
+    {regiaoNova && !zerouAgora && <div className="cn-conquista"><MapaIcone size={22} /><div><b>{t('REGIÃO CONQUISTADA!')}</b><small>{t('{regiao} é sua.', { regiao: t(regiaoDe(rival).nome) })} {REGIOES[rival.regiao] ? t('Abriu: {regiao}', { regiao: `${REGIOES[rival.regiao]!.icone} ${t(REGIOES[rival.regiao]!.nome)}` }) : ''}</small></div></div>}
+    {tituloNovo && <div className="cn-conquista titulo" style={{ '--tc': tituloNovo.cor } as CSSProperties}><Medal size={22} /><div><b>{t('NOVO TÍTULO: {titulo}', { titulo: t(tituloNovo.nome).toUpperCase() })}</b><small>{t('{n} estrelas no caminho', { n: totalAgora })}</small></div></div>}
     {liberouAgora && <button className="cn-liberou" style={{ '--cor': liberouAgora.cor } as CSSProperties} onClick={() => onProximo(liberouAgora)}>
-      <AvatarDoRival rival={liberouAgora} tamanho={50} /><span><small>NOVO RIVAL LIBERADO</small><b>{liberouAgora.nome}</b><em>{liberouAgora.estilo}</em></span><Play size={20} />
+      <AvatarDoRival rival={liberouAgora} tamanho={50} /><span><small>{t('NOVO RIVAL LIBERADO')}</small><b>{t(liberouAgora.nome)}</b><em>{t(liberouAgora.estilo)}</em></span><Play size={20} />
     </button>}
-    <Descansando descanso={r.progresso.descanso} titulo="AGORA DESCANSAM" />
-    <div className="pv-fim-botoes"><button className="primary" onClick={onDeNovo}><RotateCcw size={18} />{ganhei && estrelas < 3 ? 'Buscar 3★' : 'Jogar de novo'}</button><button className="secondary" onClick={onMapa}><MapaIcone size={18} />Mapa</button></div>
+    <Descansando descanso={r.progresso.descanso} titulo={tx('AGORA DESCANSAM')} />
+    <div className="pv-fim-botoes"><button className="primary" onClick={onDeNovo}><RotateCcw size={18} />{ganhei && estrelas < 3 ? t('Buscar 3★') : t('Jogar de novo')}</button><button className="secondary" onClick={onMapa}><MapaIcone size={18} />{t('Mapa')}</button></div>
   </section>;
 }
 
@@ -305,29 +306,29 @@ function Caminho({ servico, settings, onSettings, onDetails, onLutando, onVoltar
   const irPara = (alvo: Rival) => { setFicha(null); setR((x) => (x ? { ...x, partida: null } : x)); setTela({ tipo: 'mapa' }); window.setTimeout(() => setFicha(alvo), 60); };
 
   const meusTimes = read(CHAVE_DOS_TIMES) as string[][] | undefined;
-  const avisoDeErro = erro && <div className="cn-erro" role="alert"><span>{erro}</span><button className="icon-button" onClick={() => setErro('')} aria-label="Fechar"><X size={14} /></button></div>;
+  const avisoDeErro = erro && <div className="cn-erro" role="alert"><span>{erro}</span><button className="icon-button" onClick={() => setErro('')} aria-label={t('Fechar')}><X size={14} /></button></div>;
 
-  if (!r) return <section className="cn cn-carregando">{erro ? <><p>{erro}</p><button className="secondary" onClick={() => void abrir()}>Tentar de novo</button><button className="secondary" onClick={onVoltar}>Voltar</button></> : <p className="cm-carregando-tela">Abrindo o Caminho do Nexus…</p>}</section>;
+  if (!r) return <section className="cn cn-carregando">{erro ? <><p>{erro}</p><button className="secondary" onClick={() => void abrir()}>{t('Tentar de novo')}</button><button className="secondary" onClick={onVoltar}>{t('Voltar')}</button></> : <p className="cm-carregando-tela">{t('Abrindo o Caminho do Nexus…')}</p>}</section>;
 
   if (tela.tipo === 'montar') {
     const alvo = tela.rival, livres = livresParaJogar(r.colecao, r.progresso.descanso);
     return <>{avisoDeErro}<Montar rival={oponenteDoRival(alvo)} colecao={livres} inicial={meusTimes} ocupado={ocupado} onDetails={onDetails}
       onVoltar={() => setTela({ tipo: 'mapa' })} onPronto={(t) => void comecar(alvo, t)}
-      aviso={<Descansando descanso={r.progresso.descanso} titulo="DESCANSANDO (NÃO PODEM JOGAR)" />} /></>;
+      aviso={<Descansando descanso={r.progresso.descanso} titulo={tx('DESCANSANDO (NÃO PODEM JOGAR)')} />} /></>;
   }
 
   if (partida && rival && tela.tipo !== 'mapa') {
     const op = oponenteDoRival(rival), pvp = comoPvp(partida, vistas), rodada = partida.rodadas[vistas];
     const acabou = partida.estado === 'terminada';
-    const aura = rival.aura > 0 && <div className="cn-aura-banner"><Flame size={16} /><b>AURA DO CHEFE</b>+{Math.round(rival.aura * 100)}% de Vida em todos os personagens de {rival.nome}</div>;
-    const sair = <button className="pv-sair-online" onClick={() => setConfirmar('partida')} disabled={ocupado}><LogOut size={14} />Abandonar partida</button>;
+    const aura = rival.aura > 0 && <div className="cn-aura-banner"><Flame size={16} /><b>{t('AURA DO CHEFE')}</b>{t('+{n}% de Vida em todos os personagens de {nome}', { n: Math.round(rival.aura * 100), nome: t(rival.nome) })}</div>;
+    const sair = <button className="pv-sair-online" onClick={() => setConfirmar('partida')} disabled={ocupado}><LogOut size={14} />{t('Abandonar partida')}</button>;
     const confirmacao = confirmar && (confirmar === 'luta'
-      ? <Confirmar titulo="Desistir desta luta?" texto="Você perde esta rodada. A partida continua com os outros times." sim="Desistir da luta" onNao={() => setConfirmar(null)} onSim={() => { setConfirmar(null); void render(); }} />
-      : <Confirmar titulo="Abandonar a partida?" texto={`Abandonar conta como derrota contra ${rival.nome}.`} sim="Abandonar" onNao={() => setConfirmar(null)} onSim={() => { setConfirmar(null); void abandonar(); }} />);
+      ? <Confirmar titulo={t('Desistir desta luta?')} texto={t('Você perde esta rodada. A partida continua com os outros times.')} sim={t('Desistir da luta')} onNao={() => setConfirmar(null)} onSim={() => { setConfirmar(null); void render(); }} />
+      : <Confirmar titulo={t('Abandonar a partida?')} texto={t('Abandonar conta como derrota contra {nome}.', { nome: t(rival.nome) })} sim={t('Abandonar')} onNao={() => setConfirmar(null)} onSim={() => { setConfirmar(null); void abandonar(); }} />);
     if (tela.tipo === 'apresentar') return <>{avisoDeErro}{aura}<Apresentar rival={op} partida={comoPvp(partida)} onComecar={() => setTela({ tipo: 'escolher' })} /></>;
     if (tela.tipo === 'escolher') return <>{avisoDeErro}{aura}<Escolher key={`${vistas}-${tentativa}`} rival={op} partida={pvp} onEscolher={(i) => void escolher(i)} />{sair}{confirmacao}</>;
     if (tela.tipo === 'vs' && rodada) return <Vs rival={op} partida={comoPvp(partida)} meu={rodada.meu} dele={rodada.dele} onLutar={() => setTela({ tipo: 'luta' })} />;
-    if (tela.tipo === 'luta' && rodada) return <>{avisoDeErro}<ArenaDoPvp meu={partida.meus[rodada.meu]!} dele={partida.deles[rodada.dele]!} seed={rodada.seed} rodada={vistas + 1} rival={rival.nome} settings={settings} onSettings={onSettings}
+    if (tela.tipo === 'luta' && rodada) return <>{avisoDeErro}<ArenaDoPvp meu={partida.meus[rodada.meu]!} dele={partida.deles[rodada.dele]!} seed={rodada.seed} rodada={vistas + 1} rival={t(rival.nome)} settings={settings} onSettings={onSettings}
       podePausar velocidadeLivre escala={escalaDoRival(rival)} faixa={faixaDe(rival)} onFim={assistiu} onDesistir={() => setConfirmar('luta')} />{confirmacao}</>;
     if (tela.tipo === 'rodada' && vistas > 0) return <ResultadoDaRodada rival={op} partida={comoPvp(partida, vistas)} final={acabou && vistas >= partida.rodadas.length}
       onSeguir={() => setTela(acabou && vistas >= partida.rodadas.length ? { tipo: 'fim' } : { tipo: 'escolher' })} />;

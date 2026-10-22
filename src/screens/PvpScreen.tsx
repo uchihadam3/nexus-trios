@@ -7,7 +7,7 @@ import { ArenaDoPvp } from '../components/ArenaDoPvp';
 import { combosDoTrio } from '../engine/combos';
 import { MINIMO_DA_COLECAO, NPCS, duracaoNaTela, escolhaDoNpc, problemaDosTimes, sementeDaRodada, timesDoNpc, timesLivres, vencedorDaPartida, vitoriasDosTimes,
   type Lado, type NivelNpc, type Npc, type PartidaPvp, type Times } from '../engine/pvp';
-import { notaDoTrio, estrelasDoTime, posicaoDoTrio, ESTRELAS_MAXIMAS } from '../presentation/dicas-do-trio';
+import { notaDoTrio, estrelasDoTime, ESTRELAS_MAXIMAS } from '../presentation/dicas-do-trio';
 import { ESTRELAS_DOURADAS, douradasDaPosicao, textoDaPosicao, usePosicaoDoTrio } from '../presentation/posicao-do-trio';
 const ESTRELAS = Array.from({ length: ESTRELAS_MAXIMAS }, (_, k) => k + 1);
 import { battleAudio } from '../lib/audio';
@@ -24,6 +24,7 @@ import { EMPRESTADOS_POR_DIA, comEmprestados, diaDoEmprestimo, emprestadosDoDia,
 import { criarCampanhaDemo } from '../lib/campanha-demo';
 import '../presentation/pvp.css';
 import '../presentation/ui-fx.css';
+import { nomeDe, numero, ordinal, plural, t, tx } from '../i18n/idioma';
 
 /*
  * O PvP (pedido do jogador). Esta tela tem o Treino contra os 6 NPCs, do Iniciante à Lenda (src/engine/pvp.ts):
@@ -98,32 +99,32 @@ const guardaEtapa = (e: Etapa, segundos?: number) => {
 export const FichaDoPvp = createContext<((id: string) => void) | null>(null);
 export function Rosto({ id, tamanho = 54, apagado = false, ficha = true }: { id: string; tamanho?: number; apagado?: boolean; ficha?: boolean }) {
   const c = byId[id]!, abrir = useContext(FichaDoPvp), abre = ficha && abrir;
-  return <span className={`pv-rosto ${apagado ? 'apagado' : ''} ${abre ? 'com-ficha' : ''}`} style={{ '--character': c.color, '--t': `${tamanho}px` } as CSSProperties} title={abre ? `${c.name}: toque para ver a ficha` : c.name}
-    {...(abre ? { role: 'button', tabIndex: 0, 'aria-label': `Ficha de ${c.name}`, onClick: (e: { stopPropagation: () => void }) => { e.stopPropagation(); abrir(id); }, onKeyDown: (e: { key: string }) => { if (e.key === 'Enter') abrir(id); } } : {})}><Portrait character={c} /></span>;
+  return <span className={`pv-rosto ${apagado ? 'apagado' : ''} ${abre ? 'com-ficha' : ''}`} style={{ '--character': c.color, '--t': `${tamanho}px` } as CSSProperties} title={abre ? t('{nome}: toque para ver a ficha', { nome: nomeDe(c) }) : nomeDe(c)}
+    {...(abre ? { role: 'button', tabIndex: 0, 'aria-label': t('Ficha de {nome}', { nome: nomeDe(c) }), onClick: (e: { stopPropagation: () => void }) => { e.stopPropagation(); abrir(id); }, onKeyDown: (e: { key: string }) => { if (e.key === 'Enter') abrir(id); } } : {})}><Portrait character={c} /></span>;
 }
 
 /*
- * A conta do dono (pedido dele): só ela vê as estrelas de força dos times e o "melhor que X% dos trios", e só no treino
+ * A conta do dono (pedido dele): só ela vê as estrelas de força dos times e a posição do trio, e só no treino
  * contra os NPCs (no PvP com outras pessoas e no Caminho do Nexus, nem ela). Para os outros, em nenhum lugar do PvP.
  */
 export const DonoDoPvp = createContext(false);
 /*
- * O "melhor que X%" e, entre parênteses e em outra cor, onde o time está dentro desse X% (pedido do dono: "melhor que
- * 90%… mas dentro desses 90%, tá onde?").
+ * A posição exata do time entre todos os trios (src/presentation/posicao-do-trio.ts). A porcentagem "melhor que X%"
+ * saiu (pedido do dono: "deixar só as estrelas e a posição").
  */
-function PorcentagemDoTime({ time, curta = false }: { time: readonly string[]; curta?: boolean }) {
-  const { pct, dentro } = posicaoDoTrio(time), lugar = usePosicaoDoTrio(time);
-  // e a posição exata entre todos os trios (src/presentation/posicao-do-trio.ts)
-  const titulo = `Melhor que ${pct}% dos trios; entre os trios que também são melhores que ${pct}%, melhor que ${dentro}% deles${lugar ? `; ${lugar.posicao.toLocaleString('pt-BR')}º de ${lugar.total.toLocaleString('pt-BR')} trios` : ''}`;
+function PosicaoDoTime({ time, curta = false }: { time: readonly string[]; curta?: boolean }) {
+  const lugar = usePosicaoDoTrio(time);
+  if (!lugar) return null;
+  const titulo = t('{lugar} de {total} trios', { lugar: ordinal(lugar.posicao), total: lugar.total });
   return curta
-    ? <em className="pv-pct" title={titulo}>{pct}%<span className="pv-dentro">({dentro}%)</span>{lugar && <span className="pv-lugar">#{lugar.posicao.toLocaleString('pt-BR')}</span>}</em>
-    : <span className="pv-pct" title={titulo}><span className="pv-pct-texto">melhor que <b>{pct}%</b> <span className="pv-dentro">({dentro}%)</span></span>{lugar && <span className="pv-lugar">{textoDaPosicao(lugar.posicao)}</span>}</span>;
+    ? <em className="pv-pct" title={titulo}><span className="pv-lugar">#{numero(lugar.posicao)}</span></em>
+    : <span className="pv-pct" title={titulo}><span className="pv-lugar">{textoDaPosicao(lugar.posicao)}</span></span>;
 }
 
 /* No 1% do topo, de 1 a 7 estrelas douradas depois das 7 de prata (src/presentation/posicao-do-trio.ts). */
 function Douradas({ time }: { time: readonly string[] }) {
   const lugar = usePosicaoDoTrio(time), ouro = lugar ? douradasDaPosicao(lugar.posicao, lugar.total) : 0;
-  return ouro > 0 ? <span className="pv-ouro" aria-label={`${ouro} ${ouro === 1 ? 'estrela dourada' : 'estrelas douradas'}`}>{Array.from({ length: ESTRELAS_DOURADAS }, (_, k) => <i key={k} className={k < ouro ? 'on' : ''}>★</i>)}</span> : null;
+  return ouro > 0 ? <span className="pv-ouro" aria-label={plural(ouro, '{n} estrela dourada', '{n} estrelas douradas')}>{Array.from({ length: ESTRELAS_DOURADAS }, (_, k) => <i key={k} className={k < ouro ? 'on' : ''}>★</i>)}</span> : null;
 }
 
 function CartaoDoTime({ time, i, lado, venceu, escolhido, bloqueado, onClick, compacto = false }: {
@@ -133,13 +134,13 @@ function CartaoDoTime({ time, i, lado, venceu, escolhido, bloqueado, onClick, co
   const Tag = onClick ? 'button' : 'div';
   return <Tag className={`pv-time ${lado} ${venceu ? 'venceu' : ''} ${escolhido ? 'escolhido' : ''} ${bloqueado ? 'bloqueado' : ''} ${compacto ? 'compacto' : ''}`}
     onClick={onClick} disabled={onClick ? bloqueado : undefined} style={{ '--i': i } as CSSProperties}>
-    <span className="pv-time-topo"><b>TIME {i + 1}</b>{venceu && <em className="pv-selo-venceu"><Trophy size={12} />VENCEU</em>}</span>
+    <span className="pv-time-topo"><b>{t('TIME {n}', { n: i + 1 })}</b>{venceu && <em className="pv-selo-venceu"><Trophy size={12} />{t('VENCEU')}</em>}</span>
     <span className="pv-time-rostos">{time.map((id) => <Rosto key={id} id={id} tamanho={compacto ? 40 : 52} ficha={!onClick} />)}</span>
-    {!compacto && <span className="pv-time-nomes">{time.map((id) => byId[id]!.name).join(' · ')}</span>}
+    {!compacto && <span className="pv-time-nomes">{time.map((id) => nomeDe(byId[id]!)).join(' · ')}</span>}
     <span className="pv-time-info">
-      {dono && <span className="pv-estrelas" aria-label={`Força ${estrelas} de ${ESTRELAS_MAXIMAS}`}>{ESTRELAS.map((k) => <i key={k} className={k <= estrelas ? 'on' : ''}>★</i>)}<Douradas time={time} /></span>}
-      {dono && <PorcentagemDoTime time={time} />}
-      {combos > 0 && <span className="pv-combos"><Zap size={11} />{combos} combo{combos > 1 ? 's' : ''}</span>}
+      {dono && <span className="pv-estrelas" aria-label={t('Força {n} de {max}', { n: estrelas, max: ESTRELAS_MAXIMAS })}>{ESTRELAS.map((k) => <i key={k} className={k <= estrelas ? 'on' : ''}>★</i>)}<Douradas time={time} /></span>}
+      {dono && <PosicaoDoTime time={time} />}
+      {combos > 0 && <span className="pv-combos"><Zap size={11} />{plural(combos, '{n} combo', '{n} combos')}</span>}
     </span>
     {venceu && <span className="pv-carimbo" aria-hidden="true"><Check size={34} /></span>}
   </Tag>;
@@ -148,8 +149,8 @@ function CartaoDoTime({ time, i, lado, venceu, escolhido, bloqueado, onClick, co
 function Placar({ partida, rival }: { partida: Pick<PartidaPvp, 'rodadas'>; rival: Oponente }) {
   const v = vitoriasDosTimes(partida);
   return <div className="pv-placar">
-    <span className="pv-placar-lado eu"><b>VOCÊ</b><span>{v.eu.map((x, i) => <i key={i} className={x ? 'on' : ''}><Trophy size={14} /></i>)}</span></span>
-    <span className="pv-placar-meio"><small>RODADA</small><b>{partida.rodadas.length + 1}</b></span>
+    <span className="pv-placar-lado eu"><b>{t('VOCÊ')}</b><span>{v.eu.map((x, i) => <i key={i} className={x ? 'on' : ''}><Trophy size={14} /></i>)}</span></span>
+    <span className="pv-placar-meio"><small>{t('RODADA')}</small><b>{partida.rodadas.length + 1}</b></span>
     <span className="pv-placar-lado rival" style={{ '--npc': rival.cor } as CSSProperties}><b>{rival.nome.split(' ')[0]!.toUpperCase()}</b><span>{v.rival.map((x, i) => <i key={i} className={x ? 'on' : ''}><Trophy size={14} /></i>)}</span></span>
   </div>;
 }
@@ -159,7 +160,7 @@ function AvatarDoNpc({ npc, tamanho = 64 }: { npc: Npc; tamanho?: number }) {
 }
 /** Quem está do outro lado: um NPC do treino ou uma pessoa (online). As telas da partida são as mesmas. */
 export interface Oponente { nome: string; cor: string; avatar: (tamanho: number) => ReactNode; fala?: string }
-const oponenteDoNpc = (n: Npc): Oponente => ({ nome: n.nome, cor: n.cor, avatar: (t) => <AvatarDoNpc npc={n} tamanho={t} />, fala: n.fala });
+const oponenteDoNpc = (n: Npc): Oponente => ({ nome: t(n.nome), cor: n.cor, avatar: (tam) => <AvatarDoNpc npc={n} tamanho={tam} />, fala: t(n.fala) });
 
 /* ---------------------------------------------------------------------------
  * 1. O lobby
@@ -172,10 +173,10 @@ const oponenteDoNpc = (n: Npc): Oponente => ({ nome: n.nome, cor: n.cor, avatar:
 type AbaDoLobby = 'nexus' | 'online' | 'treino' | 'ranking';
 const CHAVE_DA_ABA = 'pvp-aba';
 const ABAS: readonly { id: AbaDoLobby; nome: string; icone: ReactNode }[] = [
-  { id: 'nexus', nome: 'Nexus', icone: <Compass size={19} /> },
-  { id: 'online', nome: 'Online', icone: <Globe2 size={19} /> },
-  { id: 'treino', nome: 'Treino', icone: <Shield size={19} /> },
-  { id: 'ranking', nome: 'Ranking', icone: <Trophy size={19} /> },
+  { id: 'nexus', nome: tx('Nexus'), icone: <Compass size={19} /> },
+  { id: 'online', nome: tx('Online'), icone: <Globe2 size={19} /> },
+  { id: 'treino', nome: tx('Treino'), icone: <Shield size={19} /> },
+  { id: 'ranking', nome: tx('Ranking'), icone: <Trophy size={19} /> },
 ];
 
 function Lobby({ colecao, propria, guardado, onTreino, onJogar, online, onCampanha, temCampanha, servicoDaCampanha }: { colecao: string[]; propria: string[]; guardado: Guardado; onTreino: (n: Npc) => void; onJogar: () => void; online?: Online | null; onCampanha: () => void; temCampanha: boolean; servicoDaCampanha: ServicoDaCampanha | null }) {
@@ -198,78 +199,78 @@ function Lobby({ colecao, propria, guardado, onTreino, onJogar, online, onCampan
     <header className="pv-topo pv-topo-curto">
       <Fx nome="holofote" cor="#ffd36b" ms={5200} className="pv-fx-holofote" />
       <span className="pv-logo"><Swords size={24} /></span>
-      <div><h1>ARENA PvP</h1><p>3 times de 3 · escolha secreta</p></div>
+      <div><h1>{t('ARENA PvP')}</h1><p>{t('3 times de 3 · escolha secreta')}</p></div>
       <span className="pv-topo-chips">
-        <button className="pv-chip-placar nexus" title="Suas estrelas no Caminho do Nexus" onClick={() => verRanking('nexus')}><Star size={13} /><b>{resumo?.estrelas ?? 0}</b><small>/{TOTAL_DE_ESTRELAS}</small></button>
-        {online && <button className="pv-chip-placar pvp" title="Seu rating do PvP" onClick={() => verRanking('pvp')}><Crown size={13} /><b>{rank?.eu.rating ?? '—'}</b></button>}
+        <button className="pv-chip-placar nexus" title={t('Suas estrelas no Caminho do Nexus')} onClick={() => verRanking('nexus')}><Star size={13} /><b>{resumo?.estrelas ?? 0}</b><small>/{TOTAL_DE_ESTRELAS}</small></button>
+        {online && <button className="pv-chip-placar pvp" title={t('Seu rating do PvP')} onClick={() => verRanking('pvp')}><Crown size={13} /><b>{rank?.eu.rating ?? '—'}</b></button>}
       </span>
     </header>
 
     {falta > 0 && <div className="pv-trava">
       <Lock size={26} />
-      <div><b>Faltam {falta} personagens na sua coleção</b><small>O PvP pede {MINIMO_DA_COLECAO} personagens (3 times de 3). Termine as 10 lutas de uma jornada para liberar o seu trio nas Conquistas.</small>
+      <div><b>{t('Faltam {n} personagens na sua coleção', { n: falta })}</b><small>{t('O PvP pede {n} personagens (3 times de 3). Termine as 10 lutas de uma jornada para liberar o seu trio nas Conquistas.', { n: MINIMO_DA_COLECAO })}</small>
         <span className="pv-trava-barra"><i style={{ width: `${(100 * colecao.length) / MINIMO_DA_COLECAO}%` }} /></span><em>{colecao.length}/{MINIMO_DA_COLECAO}</em></div>
-      <button className="primary" onClick={onJogar}>Jogar</button>
+      <button className="primary" onClick={onJogar}>{t('Jogar')}</button>
     </div>}
 
-    <nav className="pv-abas" role="tablist" aria-label="Modos do PvP">
-      {ABAS.map((a) => <button key={a.id} role="tab" aria-selected={aba === a.id} className={aba === a.id ? 'ativa' : ''} onClick={() => trocar(a.id)}>{a.icone}<b>{a.nome}</b></button>)}
+    <nav className="pv-abas" role="tablist" aria-label={t('Modos do PvP')}>
+      {ABAS.map((a) => <button key={a.id} role="tab" aria-selected={aba === a.id} className={aba === a.id ? 'ativa' : ''} onClick={() => trocar(a.id)}>{a.icone}<b>{t(a.nome)}</b></button>)}
     </nav>
 
     <div className="pv-aba" key={aba} role="tabpanel">
       {aba === 'nexus' && <>
         {/* a campanha contra os 40 rivais (src/screens/CaminhoDoNexus.tsx): pede a conta e só vale a coleção, sem empréstimo */}
         <CartaoDaCampanha podeJogar={temCampanha && propria.length >= MINIMO_DA_CAMPANHA} onAbrir={onCampanha}
-          motivo={!temCampanha ? 'Entre na sua conta para jogar a campanha.' : `A campanha pede ${MINIMO_DA_CAMPANHA} personagens na coleção (você tem ${propria.length}).`} />
+          motivo={!temCampanha ? t('Entre na sua conta para jogar a campanha.') : t('A campanha pede {n} personagens na coleção (você tem {tem}).', { n: MINIMO_DA_CAMPANHA, tem: propria.length })} />
         <ResumoDoNexus resumo={resumo} />
-        <PodioCurto titulo="RANKING DO NEXUS" icone={<Star size={14} />} erro={erroNexus} carregando={!!servicoDaCampanha && !nexus && !erroNexus}
-          linhas={(nexus?.ranking ?? []).slice(0, 3).map((l) => ({ id: l.id, nome: l.nome, valor: <><Star size={11} />{l.estrelas}</>, sub: l.titulo }))}
-          eu={nexus?.eu ? `Você: ${nexus.eu.posicao}º · ${nexus.eu.estrelas}★` : null} onVer={() => verRanking('nexus')} />
+        <PodioCurto titulo={t('RANKING DO NEXUS')} icone={<Star size={14} />} erro={erroNexus} carregando={!!servicoDaCampanha && !nexus && !erroNexus}
+          linhas={(nexus?.ranking ?? []).slice(0, 3).map((l) => ({ id: l.id, nome: l.nome, valor: <><Star size={11} />{l.estrelas}</>, sub: t(l.titulo) }))}
+          eu={nexus?.eu ? t('Você: {pos} · {n}★', { pos: ordinal(nexus.eu.posicao), n: nexus.eu.estrelas }) : null} onVer={() => verRanking('nexus')} />
       </>}
       {aba === 'online' && <>
         {online ? <CartaoOnline online={online} rank={rank} /> : <div className="pv-modo online">
           <span className="pv-modo-icone"><Users size={24} /></span>
-          <div><b>DESAFIO ONLINE</b><small>Entre na sua conta para desafiar alguém pela Comunidade e subir no ranking.</small></div>
-          <em className="pv-em-breve"><Lock size={11} />com conta</em>
+          <div><b>{t('DESAFIO ONLINE')}</b><small>{t('Entre na sua conta para desafiar alguém pela Comunidade e subir no ranking.')}</small></div>
+          <em className="pv-em-breve"><Lock size={11} />{t('com conta')}</em>
         </div>}
-        {online && <PodioCurto titulo="RANKING PvP" icone={<Crown size={14} />} erro={erroRank} carregando={!rank && !erroRank}
-          linhas={(rank?.ranking ?? []).slice(0, 3).map((l) => ({ id: l.id, nome: l.nome, valor: <><Crown size={11} />{l.rating}</>, sub: `${l.vitorias}V ${l.derrotas}D` }))}
+        {online && <PodioCurto titulo={t('RANKING PvP')} icone={<Crown size={14} />} erro={erroRank} carregando={!rank && !erroRank}
+          linhas={(rank?.ranking ?? []).slice(0, 3).map((l) => ({ id: l.id, nome: l.nome, valor: <><Crown size={11} />{l.rating}</>, sub: t('{v}V {d}D', { v: l.vitorias, d: l.derrotas }) }))}
           eu={null} onVer={() => verRanking('pvp')} />}
         <CartaoDoEmprestimo propria={propria} />
       </>}
       {aba === 'treino' && <>
-        <p className="pv-aba-dica"><Shield size={13} />Contra os {NPCS.length} NPCs, do Iniciante à Lenda. Não conta para nenhum ranking.</p>
+        <p className="pv-aba-dica"><Shield size={13} />{t('Contra os {n} NPCs, do Iniciante à Lenda. Não conta para nenhum ranking.', { n: NPCS.length })}</p>
         <div className="pv-npcs curtos">
           {NPCS.map((n, i) => {
             const p = guardado.treino[n.id] ?? { v: 0, d: 0 };
-            return <button key={n.id} className="pv-npc" disabled={falta > 0} onClick={() => onTreino(n)} style={{ '--npc': n.cor, '--i': i } as CSSProperties} title={`“${n.fala}”`}>
+            return <button key={n.id} className="pv-npc" disabled={falta > 0} onClick={() => onTreino(n)} style={{ '--npc': n.cor, '--i': i } as CSSProperties} title={`“${t(n.fala)}”`}>
               <AvatarDoNpc npc={n} tamanho={50} />
               <span className="pv-npc-texto">
-                <small>{n.titulo.toUpperCase()}</small><b>{n.nome}</b>
-                <span className="pv-npc-linha"><span className="pv-rating"><Crown size={12} />{n.rating}</span><span className="pv-colecao">{n.colecao} personagens</span></span>
+                <small>{t(n.titulo).toUpperCase()}</small><b>{t(n.nome)}</b>
+                <span className="pv-npc-linha"><span className="pv-rating"><Crown size={12} />{n.rating}</span><span className="pv-colecao">{t('{n} personagens', { n: n.colecao })}</span></span>
               </span>
-              <span className="pv-npc-placar"><span><b className="v">{p.v}V</b> <b className="d">{p.d}D</b></span><span className="pv-caveiras" aria-label={`Dificuldade ${n.nivel} de ${NPCS.length}`}>{NPCS.map((_, k0) => k0 + 1).map((k) => <i key={k} className={k <= n.nivel ? 'on' : ''} />)}</span></span>
+              <span className="pv-npc-placar"><span><b className="v">{t('{n}V', { n: p.v })}</b> <b className="d">{t('{n}D', { n: p.d })}</b></span><span className="pv-caveiras" aria-label={t('Dificuldade {n} de {max}', { n: n.nivel, max: NPCS.length })}>{NPCS.map((_, k0) => k0 + 1).map((k) => <i key={k} className={k <= n.nivel ? 'on' : ''} />)}</span></span>
             </button>;
           })}
         </div>
         <CartaoDoEmprestimo propria={propria} />
       </>}
       {aba === 'ranking' && <>
-        <div className="pv-subabas" role="tablist" aria-label="Qual ranking">
-          <button role="tab" aria-selected={qualRanking === 'nexus'} className={qualRanking === 'nexus' ? 'ativa nexus' : 'nexus'} onClick={() => { som('toque'); setQualRanking('nexus'); }}><Star size={15} />NEXUS<small>estrelas</small></button>
-          <button role="tab" aria-selected={qualRanking === 'pvp'} className={qualRanking === 'pvp' ? 'ativa pvp' : 'pvp'} onClick={() => { som('toque'); setQualRanking('pvp'); }}><Crown size={15} />PvP<small>rating</small></button>
+        <div className="pv-subabas" role="tablist" aria-label={t('Qual ranking')}>
+          <button role="tab" aria-selected={qualRanking === 'nexus'} className={qualRanking === 'nexus' ? 'ativa nexus' : 'nexus'} onClick={() => { som('toque'); setQualRanking('nexus'); }}><Star size={15} />NEXUS<small>{t('estrelas')}</small></button>
+          <button role="tab" aria-selected={qualRanking === 'pvp'} className={qualRanking === 'pvp' ? 'ativa pvp' : 'pvp'} onClick={() => { som('toque'); setQualRanking('pvp'); }}><Crown size={15} />PvP<small>{t('rating')}</small></button>
         </div>
         {qualRanking === 'nexus'
           ? <RankingCompleto erro={erroNexus} carregando={!!servicoDaCampanha && !nexus && !erroNexus} semConta={!servicoDaCampanha}
-              vazio="Ninguém jogou o Caminho do Nexus ainda. O primeiro lugar está livre!"
-              contexto={<><Star size={13} /> Caminho do Nexus · mais estrelas na frente; empate, quem usou menos partidas{nexus ? ` · ${nexus.total} jogadores` : ''}</>}
-              linhas={(nexus?.ranking ?? []).map((l) => ({ posicao: l.posicao, id: l.id, nome: l.nome, valor: l.estrelas, de: `de ${TOTAL_DE_ESTRELAS}★`, sub: `${l.titulo} · ${l.partidas} partidas`, barra: (100 * l.estrelas) / TOTAL_DE_ESTRELAS, minha: l.id === nexus?.eu?.id }))}
-              eu={nexus?.eu ? { posicao: nexus.eu.posicao, id: nexus.eu.id, nome: nexus.eu.nome, valor: nexus.eu.estrelas, de: `de ${TOTAL_DE_ESTRELAS}★`, sub: `${nexus.eu.titulo} · ${nexus.eu.partidas} partidas`, barra: (100 * nexus.eu.estrelas) / TOTAL_DE_ESTRELAS, minha: true } : null} />
+              vazio={t('Ninguém jogou o Caminho do Nexus ainda. O primeiro lugar está livre!')}
+              contexto={<><Star size={13} /> {t('Caminho do Nexus · mais estrelas na frente; empate, quem usou menos partidas')}{nexus ? ` · ${t('{n} jogadores', { n: nexus.total })}` : ''}</>}
+              linhas={(nexus?.ranking ?? []).map((l) => ({ posicao: l.posicao, id: l.id, nome: l.nome, valor: l.estrelas, de: t('de {n}★', { n: TOTAL_DE_ESTRELAS }), sub: `${t(l.titulo)} · ${t('{n} partidas', { n: l.partidas })}`, barra: (100 * l.estrelas) / TOTAL_DE_ESTRELAS, minha: l.id === nexus?.eu?.id }))}
+              eu={nexus?.eu ? { posicao: nexus.eu.posicao, id: nexus.eu.id, nome: nexus.eu.nome, valor: nexus.eu.estrelas, de: t('de {n}★', { n: TOTAL_DE_ESTRELAS }), sub: `${t(nexus.eu.titulo)} · ${t('{n} partidas', { n: nexus.eu.partidas })}`, barra: (100 * nexus.eu.estrelas) / TOTAL_DE_ESTRELAS, minha: true } : null} />
           : <RankingCompleto erro={erroRank} carregando={!!online && !rank && !erroRank} semConta={!online}
-              vazio="Ninguém jogou contra outra pessoa ainda. O primeiro lugar está livre!"
-              contexto={<><Crown size={13} /> PvP contra pessoas · maior rating na frente{rank ? ` · seu rating: ${rank.eu.rating} (${rank.eu.vitorias}V ${rank.eu.derrotas}D)` : ''}</>}
-              linhas={(rank?.ranking ?? []).map((l) => ({ posicao: l.posicao, id: l.id, nome: l.nome, valor: l.rating, de: 'rating', sub: `${l.vitorias}V ${l.derrotas}D`, minha: l.id === rank?.eu.id }))}
-              eu={rank?.eu.posicao ? (({ id, posicao }) => { const l = rank.ranking.find((x) => x.id === id); return l ? { posicao, id, nome: l.nome, valor: l.rating, de: 'rating', sub: `${l.vitorias}V ${l.derrotas}D`, minha: true } : null; })({ id: rank.eu.id!, posicao: rank.eu.posicao }) : null} />}
+              vazio={t('Ninguém jogou contra outra pessoa ainda. O primeiro lugar está livre!')}
+              contexto={<><Crown size={13} /> {t('PvP contra pessoas · maior rating na frente')}{rank ? ` · ${t('seu rating: {r} ({v}V {d}D)', { r: rank.eu.rating, v: rank.eu.vitorias, d: rank.eu.derrotas })}` : ''}</>}
+              linhas={(rank?.ranking ?? []).map((l) => ({ posicao: l.posicao, id: l.id, nome: l.nome, valor: l.rating, de: t('rating'), sub: t('{v}V {d}D', { v: l.vitorias, d: l.derrotas }), minha: l.id === rank?.eu.id }))}
+              eu={rank?.eu.posicao ? (({ id, posicao }) => { const l = rank.ranking.find((x) => x.id === id); return l ? { posicao, id, nome: l.nome, valor: l.rating, de: t('rating'), sub: t('{v}V {d}D', { v: l.vitorias, d: l.derrotas }), minha: true } : null; })({ id: rank.eu.id!, posicao: rank.eu.posicao }) : null} />}
       </>}
     </div>
   </section>;
@@ -279,9 +280,9 @@ function Lobby({ colecao, propria, guardado, onTreino, onJogar, online, onCampan
 function ResumoDoNexus({ resumo }: { resumo: ResumoDaCampanha | null }) {
   const proximo = resumo?.proximo ? rivalPorId(resumo.proximo) : RIVAIS[0]!, estrelas = resumo?.estrelas ?? 0;
   return <div className="pv-resumo-nexus">
-    <span><small>ESTRELAS</small><b><Star size={14} />{estrelas}<i>/{TOTAL_DE_ESTRELAS}</i></b><span className="pv-barrinha"><i style={{ width: `${(100 * estrelas) / TOTAL_DE_ESTRELAS}%` }} /></span></span>
-    <span><small>TÍTULO</small><b>{resumo?.titulo ?? 'Aprendiz'}</b></span>
-    <span><small>{resumo?.zerou ? 'CAMINHO' : 'PRÓXIMO'}</small>{resumo?.zerou ? <b>Zerado!</b> : proximo ? <b className="pv-resumo-rival"><AvatarDoRival rival={proximo} tamanho={22} />{proximo.nome}</b> : <b>—</b>}</span>
+    <span><small>{t('ESTRELAS')}</small><b><Star size={14} />{estrelas}<i>/{TOTAL_DE_ESTRELAS}</i></b><span className="pv-barrinha"><i style={{ width: `${(100 * estrelas) / TOTAL_DE_ESTRELAS}%` }} /></span></span>
+    <span><small>{t('TÍTULO')}</small><b>{resumo?.titulo ? t(resumo.titulo) : t('Aprendiz')}</b></span>
+    <span><small>{resumo?.zerou ? t('CAMINHO') : t('PRÓXIMO')}</small>{resumo?.zerou ? <b>{t('Zerado!')}</b> : proximo ? <b className="pv-resumo-rival"><AvatarDoRival rival={proximo} tamanho={22} />{t(proximo.nome)}</b> : <b>—</b>}</span>
   </div>;
 }
 
@@ -289,8 +290,8 @@ type LinhaCurta = { id: string; nome: string; valor: ReactNode; sub: string };
 /** Os 3 primeiros de um ranking, num pódio pequeno, e o botão para ver o ranking inteiro (na aba Ranking). */
 function PodioCurto({ titulo, icone, linhas, erro, carregando, eu, onVer }: { titulo: string; icone: ReactNode; linhas: LinhaCurta[]; erro: string; carregando: boolean; eu: string | null; onVer: () => void }) {
   return <div className="pv-podio-curto">
-    <header><b>{icone}{titulo}</b><button onClick={onVer}>ver tudo <ArrowRight size={13} /></button></header>
-    {erro ? <small className="pv-problema">{erro}</small> : carregando ? <small className="pv-vazio">Carregando…</small> : !linhas.length ? <small className="pv-vazio">Ninguém ainda. Seja o primeiro!</small>
+    <header><b>{icone}{titulo}</b><button onClick={onVer}>{t('ver tudo')} <ArrowRight size={13} /></button></header>
+    {erro ? <small className="pv-problema">{erro}</small> : carregando ? <small className="pv-vazio">{t('Carregando…')}</small> : !linhas.length ? <small className="pv-vazio">{t('Ninguém ainda. Seja o primeiro!')}</small>
       : <ol>{[linhas[1], linhas[0], linhas[2]].map((l, k) => l && <li key={l.id} className={`p${k === 1 ? 1 : k === 0 ? 2 : 3}`}>
         <Avatar id={l.id} nome={l.nome} tamanho={k === 1 ? 40 : 32} online={false} /><b>{l.nome}</b><em>{l.valor}</em><i>{k === 1 ? 1 : k === 0 ? 2 : 3}</i>
       </li>)}</ol>}
@@ -304,9 +305,9 @@ type LinhaDoRanking = { posicao: number; id: string; nome: string; valor: ReactN
  * a sua posição em cima, o pódio dos 3 com coroa e degraus, e a lista.
  */
 function RankingCompleto({ linhas, eu, erro, carregando, semConta, vazio, contexto }: { linhas: LinhaDoRanking[]; eu: LinhaDoRanking | null; erro: string; carregando: boolean; semConta: boolean; vazio: string; contexto: ReactNode }) {
-  if (semConta) return <p className="pv-vazio pv-ranking-aviso"><Lock size={14} />Entre na sua conta para ver o ranking.</p>;
+  if (semConta) return <p className="pv-vazio pv-ranking-aviso"><Lock size={14} />{t('Entre na sua conta para ver o ranking.')}</p>;
   if (erro) return <p className="pv-problema">{erro}</p>;
-  if (carregando) return <div className="rk-carregando" aria-label="Carregando o ranking">{[0, 1, 2, 3].map((i) => <i key={i} style={{ '--i': i } as CSSProperties} />)}</div>;
+  if (carregando) return <div className="rk-carregando" aria-label={t('Carregando o ranking')}>{[0, 1, 2, 3].map((i) => <i key={i} style={{ '--i': i } as CSSProperties} />)}</div>;
   if (!linhas.length) return <p className="rk-vazio">{vazio}</p>;
   const podio = linhas.slice(0, 3), resto = linhas.slice(3);
   const total = (l: LinhaDoRanking) => <span className="rk-cq-total"><b>{l.valor}</b><small>{l.de}</small></span>;
@@ -317,7 +318,7 @@ function RankingCompleto({ linhas, eu, erro, carregando, semConta, vazio, contex
   </button>;
   return <div className="pv-rk">
     <p className="rk-contexto">{contexto}</p>
-    {eu && <div className="rk-meus"><span className="rk-meus-rotulo"><Award size={14} />MINHA POSIÇÃO</span><div className="rk-lista" style={{ marginTop: 8 }}>{linha(eu, 0)}</div></div>}
+    {eu && <div className="rk-meus"><span className="rk-meus-rotulo"><Award size={14} />{t('MINHA POSIÇÃO')}</span><div className="rk-lista" style={{ marginTop: 8 }}>{linha(eu, 0)}</div></div>}
     <div className="rk-podio">{[podio[1], podio[0], podio[2]].map((l, i) => l && <div key={l.id} className={`rk-degrau p${l.posicao} ${l.minha ? 'mine' : ''}`} style={{ '--i': i } as CSSProperties}>
       <span className="rk-coroa">{l.posicao === 1 ? <Crown size={22} /> : <Medal size={18} />}</span>
       <Avatar id={l.id} nome={l.nome} tamanho={l.posicao === 1 ? 50 : 40} online={false} />
@@ -339,16 +340,16 @@ function CartaoDoEmprestimo({ propria }: { propria: string[] }) {
   const agora = useAgora(true, 1000), dia = diaDoEmprestimo(agora), ids = useMemo(() => emprestadosDoDia(dia), [dia]);
   const minha = useMemo(() => new Set(propria), [propria]), novos = ids.filter((id) => !minha.has(id)).length;
   const falta = Math.floor(faltaParaTrocar(agora) / 1000);
-  return <section className="pv-emprestimo curto" aria-label="Empréstimo do dia" title={`${EMPRESTADOS_POR_DIA} personagens sorteados todo dia, os mesmos para todo mundo, para combinar com a sua coleção no Treino e no Desafio online. Amanhã vêm outros.`}>
+  return <section className="pv-emprestimo curto" aria-label={t('Empréstimo do dia')} title={t('{n} personagens sorteados todo dia, os mesmos para todo mundo, para combinar com a sua coleção no Treino e no Desafio online. Amanhã vêm outros.', { n: EMPRESTADOS_POR_DIA })}>
     <header>
       <span className="pv-emprestimo-icone"><Handshake size={18} /></span>
-      <div><small>EMPRÉSTIMO DO DIA</small><b>{novos > 0 ? `+${novos} personagens hoje` : 'Você já tem os 9 de hoje!'}</b></div>
-      <span className="pv-emprestimo-relogio" title="Troca à meia-noite (Brasília)"><Clock size={12} />{doisDigitos(Math.floor(falta / 3600))}:{doisDigitos(Math.floor((falta % 3600) / 60))}:{doisDigitos(falta % 60)}</span>
+      <div><small>{t('EMPRÉSTIMO DO DIA')}</small><b>{novos > 0 ? t('+{n} personagens hoje', { n: novos }) : t('Você já tem os 9 de hoje!')}</b></div>
+      <span className="pv-emprestimo-relogio" title={t('Troca à meia-noite (Brasília)')}><Clock size={12} />{doisDigitos(Math.floor(falta / 3600))}:{doisDigitos(Math.floor((falta % 3600) / 60))}:{doisDigitos(falta % 60)}</span>
     </header>
     <div className="pv-emprestimo-faixa">
       {ids.map((id, k) => { const c = byId[id]!, ja = minha.has(id);
-        return <span key={id} className={`pv-emprestado ${ja ? 'ja' : 'novo'}`} style={{ '--character': c.color, '--k': k } as CSSProperties} title={`${c.name} · ${ja ? 'já é seu' : 'novo pra você'}`}>
-          <Rosto id={id} tamanho={40} apagado={ja} />{!ja && <em>NOVO</em>}
+        return <span key={id} className={`pv-emprestado ${ja ? 'ja' : 'novo'}`} style={{ '--character': c.color, '--k': k } as CSSProperties} title={`${nomeDe(c)} · ${ja ? t('já é seu') : t('novo pra você')}`}>
+          <Rosto id={id} tamanho={40} apagado={ja} />{!ja && <em>{t('NOVO')}</em>}
         </span>; })}
     </div>
   </section>;
@@ -414,17 +415,17 @@ const semAcento = (t: string) => t.normalize('NFD').replace(/[̀-ͯ]/g, '').toLo
 function filtrar(colecao: string[], busca: string, f: Filtro) {
   const q = semAcento(busca.trim());
   return colecao.map((id) => byId[id]!).filter((c) =>
-    (!q || semAcento(c.name).includes(q) || semAcento(c.universe).includes(q))
+    (!q || semAcento(c.name).includes(q) || semAcento(nomeDe(c)).includes(q) || semAcento(c.universe).includes(q) || semAcento(t(c.universe)).includes(q))
     && (!f.universos.length || f.universos.includes(c.universe))
     && (!f.funcoes.length || f.funcoes.every((x) => identidadesDe(c).includes(x))));
 }
 type Personagem = (typeof characters)[number];
 function agrupar(lista: Personagem[], ordem: Ordem): { titulo: string; lista: Personagem[] }[] {
-  const porNome = [...lista].sort((a, b) => a.name.localeCompare(b.name));
+  const porNome = [...lista].sort((a, b) => nomeDe(a).localeCompare(nomeDe(b)));
   if (ordem === 'nome') return [{ titulo: '', lista: porNome }];
   const mapa = new Map<string, Personagem[]>();
   for (const c of porNome) {
-    const chave = ordem === 'universo' ? c.universe : (ordemDasIdentidades.find((x) => identidadesDe(c).includes(x)) ?? 'Outros');
+    const chave = ordem === 'universo' ? c.universe : (ordemDasIdentidades.find((x) => identidadesDe(c).includes(x)) ?? tx('Outros'));
     mapa.set(chave, [...(mapa.get(chave) ?? []), c]);
   }
   const chaves = [...mapa.keys()].sort((a, b) => ordem === 'universo' ? a.localeCompare(b) : ordemDasIdentidades.indexOf(a as Identidade) - ordemDasIdentidades.indexOf(b as Identidade));
@@ -445,43 +446,43 @@ function PainelDeFiltros({ colecao, filtro, total, onFiltro, onFechar }: { colec
     return n;
   }, [colecao]);
   const q = semAcento(buscaUni.trim());
-  const unisVisiveis = universos.filter(([u]) => !q || semAcento(u).includes(q));
+  const unisVisiveis = universos.filter(([u]) => !q || semAcento(u).includes(q) || semAcento(t(u)).includes(q));
   const mostrados = todosUni || q ? unisVisiveis : unisVisiveis.slice(0, 18);
   const alterna = <T,>(lista: T[], x: T) => (lista.includes(x) ? lista.filter((y) => y !== x) : [...lista, x]);
   const ativos = filtro.universos.length + filtro.funcoes.length + (filtro.esconderUsados ? 1 : 0);
   const familias = Object.keys(FAMILIA_DA_IDENTIDADE) as (keyof typeof FAMILIA_DA_IDENTIDADE)[];
   // por cima da tela onde o jogador está (a tela anima com transform, e um fixed dentro dela ia parar no fim da página)
   return createPortal(<div className="pv-painel-fundo" onClick={(e) => { if (e.target === e.currentTarget) onFechar(); }}>
-    <section className="pv-painel" role="dialog" aria-label="Filtros">
+    <section className="pv-painel" role="dialog" aria-label={t('Filtros')}>
       <span className="pv-painel-alca" aria-hidden="true" />
-      <header><SlidersHorizontal size={20} /><b>Filtros</b>{ativos > 0 && <button className="pv-painel-limpar" onClick={() => onFiltro(FILTRO_VAZIO)}>Limpar tudo</button>}<button className="icon-button" onClick={onFechar} aria-label="Fechar"><X size={18} /></button></header>
+      <header><SlidersHorizontal size={20} /><b>{t('Filtros')}</b>{ativos > 0 && <button className="pv-painel-limpar" onClick={() => onFiltro(FILTRO_VAZIO)}>{t('Limpar tudo')}</button>}<button className="icon-button" onClick={onFechar} aria-label={t('Fechar')}><X size={18} /></button></header>
 
-      <h4><ArrowDownAZ size={14} />ORGANIZAR POR</h4>
+      <h4><ArrowDownAZ size={14} />{t('ORGANIZAR POR')}</h4>
       <div className="pv-ordem">
-        {([['nome', 'Nome', ArrowDownAZ], ['universo', 'Universo', Globe2], ['funcao', 'Função', Layers]] as const).map(([v, nome, Icone]) =>
-          <button key={v} className={filtro.ordem === v ? 'on' : ''} onClick={() => { onFiltro({ ...filtro, ordem: v }); som('toque'); }}><Icone size={18} />{nome}</button>)}
+        {([['nome', tx('Nome'), ArrowDownAZ], ['universo', tx('Universo'), Globe2], ['funcao', tx('Função'), Layers]] as const).map(([v, nome, Icone]) =>
+          <button key={v} className={filtro.ordem === v ? 'on' : ''} onClick={() => { onFiltro({ ...filtro, ordem: v }); som('toque'); }}><Icone size={18} />{t(nome)}</button>)}
       </div>
-      <label className="pv-livres"><input type="checkbox" checked={filtro.esconderUsados} onChange={(e) => onFiltro({ ...filtro, esconderUsados: e.target.checked })} /><span className="pv-chave" aria-hidden="true" />Esconder quem já está num time</label>
+      <label className="pv-livres"><input type="checkbox" checked={filtro.esconderUsados} onChange={(e) => onFiltro({ ...filtro, esconderUsados: e.target.checked })} /><span className="pv-chave" aria-hidden="true" />{t('Esconder quem já está num time')}</label>
 
-      <h4><Sparkles size={14} />FUNÇÃO <small>o que ele faz na luta</small></h4>
+      <h4><Sparkles size={14} />{t('FUNÇÃO')} <small>{t('o que ele faz na luta')}</small></h4>
       {familias.map((fam) => {
         const lista = ordemDasIdentidades.filter((x) => familiaDaIdentidade[x] === fam && funcoes.has(x));
         if (!lista.length) return null;
         const { nome, cor } = FAMILIA_DA_IDENTIDADE[fam];
         return <div key={fam} className="pv-familia" style={{ '--cor': cor } as CSSProperties}>
-          <small>{nome}</small>
+          <small>{t(nome)}</small>
           <div className="pv-chips">{lista.map((x) => { const Icone = ICONE_DA_IDENTIDADE[x]; const on = filtro.funcoes.includes(x);
-            return <button key={x} className={on ? 'on' : ''} onClick={() => { onFiltro({ ...filtro, funcoes: alterna(filtro.funcoes, x) }); som('toque'); }}><Icone size={14} />{x}<i>{funcoes.get(x)}</i></button>; })}</div>
+            return <button key={x} className={on ? 'on' : ''} onClick={() => { onFiltro({ ...filtro, funcoes: alterna(filtro.funcoes, x) }); som('toque'); }}><Icone size={14} />{t(x)}<i>{funcoes.get(x)}</i></button>; })}</div>
         </div>;
       })}
 
-      <h4><Globe2 size={14} />UNIVERSO <small>{universos.length} na sua coleção</small></h4>
-      {universos.length > 10 && <label className="pv-busca pv-busca-uni"><Search size={14} /><input value={buscaUni} onChange={(e) => setBuscaUni(e.target.value)} placeholder="Procurar universo" aria-label="Procurar universo" /></label>}
+      <h4><Globe2 size={14} />{t('UNIVERSO')} <small>{t('{n} na sua coleção', { n: universos.length })}</small></h4>
+      {universos.length > 10 && <label className="pv-busca pv-busca-uni"><Search size={14} /><input value={buscaUni} onChange={(e) => setBuscaUni(e.target.value)} placeholder={t('Procurar universo')} aria-label={t('Procurar universo')} /></label>}
       <div className="pv-chips pv-chips-uni">{mostrados.map(([u, n]) => { const on = filtro.universos.includes(u);
-        return <button key={u} className={on ? 'on' : ''} onClick={() => { onFiltro({ ...filtro, universos: alterna(filtro.universos, u) }); som('toque'); }}>{u}<i>{n}</i></button>; })}</div>
-      {!todosUni && !q && unisVisiveis.length > 18 && <button className="pv-ver-todos" onClick={() => setTodosUni(true)}>Ver os {unisVisiveis.length} universos</button>}
+        return <button key={u} className={on ? 'on' : ''} onClick={() => { onFiltro({ ...filtro, universos: alterna(filtro.universos, u) }); som('toque'); }}>{t(u)}<i>{n}</i></button>; })}</div>
+      {!todosUni && !q && unisVisiveis.length > 18 && <button className="pv-ver-todos" onClick={() => setTodosUni(true)}>{t('Ver os {n} universos', { n: unisVisiveis.length })}</button>}
 
-      <footer><button className="primary pv-grande" onClick={onFechar}><Check size={20} />Ver {total} personage{total === 1 ? 'm' : 'ns'}</button></footer>
+      <footer><button className="primary pv-grande" onClick={onFechar}><Check size={20} />{plural(total, 'Ver {n} personagem', 'Ver {n} personagens')}</button></footer>
     </section>
   </div>, document.body);
 }
@@ -538,8 +539,8 @@ export function Montar({ rival, colecao, inicial, onPronto, onVoltar, onDetails,
 
   return <section className="pv-montar">
     <header className="pv-subtopo">
-      <button className="icon-button" onClick={onVoltar} aria-label="Voltar"><ArrowLeft size={20} /></button>
-      <div><small>CONTRA {rival.nome.toUpperCase()}</small><h1>Monte seus 3 times</h1></div>
+      <button className="icon-button" onClick={onVoltar} aria-label={t('Voltar')}><ArrowLeft size={20} /></button>
+      <div><small>{t('CONTRA {nome}', { nome: rival.nome.toUpperCase() })}</small><h1>{t('Monte seus 3 times')}</h1></div>
       {rival.avatar(44)}
     </header>
     {prazo}
@@ -547,45 +548,45 @@ export function Montar({ rival, colecao, inicial, onPronto, onVoltar, onDetails,
     {/* os 3 times e o PRONTO ficam presos no topo enquanto o álbum rola (pedido do jogador: ver o time enquanto troca) */}
     <div className="pv-fixos">
     <div className="pv-slots">
-      {times.map((t, i) => {
-        const estrelas = t.length === 3 ? estrelasDoTime(t) : 0;
-        return <button key={i} className={`pv-slot ${ativo === i ? 'ativo' : ''} ${t.length === 3 ? 'cheio' : ''}`} onClick={() => setAtivo(i)} style={{ '--i': i } as CSSProperties}>
-          <span className="pv-slot-topo"><b>TIME {i + 1}</b>{t.length === 3 && !dono ? null : t.length === 3 ? <span className="pv-estrelas" aria-label={`Força ${estrelas} de ${ESTRELAS_MAXIMAS}`}>{ESTRELAS.map((k) => <i key={k} className={k <= estrelas ? 'on' : ''}>★</i>)}<Douradas time={t} />{melhores && <PorcentagemDoTime time={t} curta />}</span> : <small>{t.length}/3</small>}</span>
-          <span className="pv-slot-rostos">{[0, 1, 2].map((k) => t[k] ? <span key={k} className="pv-slot-cheio" role="button" tabIndex={0} aria-label={`Tirar ${byId[t[k]!]!.name}`} onClick={(e) => { e.stopPropagation(); tocar(t[k]!); }}><Rosto id={t[k]!} tamanho={46} ficha={false} /><X size={12} className="pv-tirar" /></span> : <span key={k} className="pv-slot-vazio">+</span>)}</span>
+      {times.map((tm, i) => {
+        const estrelas = tm.length === 3 ? estrelasDoTime(tm) : 0;
+        return <button key={i} className={`pv-slot ${ativo === i ? 'ativo' : ''} ${tm.length === 3 ? 'cheio' : ''}`} onClick={() => setAtivo(i)} style={{ '--i': i } as CSSProperties}>
+          <span className="pv-slot-topo"><b>{t('TIME {n}', { n: i + 1 })}</b>{tm.length === 3 && !dono ? null : tm.length === 3 ? <span className="pv-estrelas" aria-label={t('Força {n} de {max}', { n: estrelas, max: ESTRELAS_MAXIMAS })}>{ESTRELAS.map((k) => <i key={k} className={k <= estrelas ? 'on' : ''}>★</i>)}<Douradas time={tm} />{melhores && <PosicaoDoTime time={tm} curta />}</span> : <small>{tm.length}/3</small>}</span>
+          <span className="pv-slot-rostos">{[0, 1, 2].map((k) => tm[k] ? <span key={k} className="pv-slot-cheio" role="button" tabIndex={0} aria-label={t('Tirar {nome}', { nome: nomeDe(byId[tm[k]!]!) })} onClick={(e) => { e.stopPropagation(); tocar(tm[k]!); }}><Rosto id={tm[k]!} tamanho={46} ficha={false} /><X size={12} className="pv-tirar" /></span> : <span key={k} className="pv-slot-vazio">+</span>)}</span>
         </button>;
       })}
     </div>
     <div className="pv-pronto-topo">
-      {problema && <small className="pv-problema">{problema}</small>}
-      <button className="primary pv-pronto" disabled={!cheios || !!problema || ocupado} onClick={() => { som('pronto'); onPronto(times as Times); }}><Check size={20} />{ocupado ? 'Entrando…' : cheios ? 'PRONTO' : `Faltam ${9 - times.flat().length}`}</button>
+      {problema && <small className="pv-problema">{t(problema)}</small>}
+      <button className="primary pv-pronto" disabled={!cheios || !!problema || ocupado} onClick={() => { som('pronto'); onPronto(times as Times); }}><Check size={20} />{ocupado ? t('Entrando…') : cheios ? t('PRONTO') : t('Faltam {n}', { n: 9 - times.flat().length })}</button>
     </div>
     </div>
     <div className="pv-ferramentas">
-      <label className="pv-busca"><Search size={16} /><input value={busca} onChange={(e) => setBusca(e.target.value)} placeholder={`Procurar entre ${colecao.length} personagens`} aria-label="Procurar personagem" />{busca && <button className="pv-limpar-busca" onClick={() => setBusca('')} aria-label="Limpar a busca"><X size={14} /></button>}</label>
-      <button className={`secondary pv-filtros-botao ${ativos ? 'ativo' : ''}`} onClick={() => { setPainel(true); som('toque'); }}><SlidersHorizontal size={16} />Filtros{ativos > 0 && <i>{ativos}</i>}</button>
-      <button className="secondary pv-sozinho" onClick={sozinho}><Wand2 size={16} />Montar ao acaso</button>
-      {melhores && <button className="secondary pv-melhores" onClick={oMelhorAqui} title={times[ativo]!.length === 1 || times[ativo]!.length === 2 ? `Completa o Time ${ativo + 1} com quem mais combina com quem já está nele` : `Monta o melhor time possível no Time ${ativo + 1}`}><Crown size={16} />{times[ativo]!.length === 1 || times[ativo]!.length === 2 ? `Completar o Time ${ativo + 1}` : `Melhor no Time ${ativo + 1}`}</button>}
-      {quantosEmprestados > 0 && <button className={`secondary pv-so-emprestados ${soEmprestados ? 'ativo' : ''}`} onClick={() => { setSoEmprestados(!soEmprestados); som('toque'); }}><Handshake size={16} />Emprestados<i>{quantosEmprestados}</i></button>}
+      <label className="pv-busca"><Search size={16} /><input value={busca} onChange={(e) => setBusca(e.target.value)} placeholder={t('Procurar entre {n} personagens', { n: colecao.length })} aria-label={t('Procurar personagem')} />{busca && <button className="pv-limpar-busca" onClick={() => setBusca('')} aria-label={t('Limpar a busca')}><X size={14} /></button>}</label>
+      <button className={`secondary pv-filtros-botao ${ativos ? 'ativo' : ''}`} onClick={() => { setPainel(true); som('toque'); }}><SlidersHorizontal size={16} />{t('Filtros')}{ativos > 0 && <i>{ativos}</i>}</button>
+      <button className="secondary pv-sozinho" onClick={sozinho}><Wand2 size={16} />{t('Montar ao acaso')}</button>
+      {melhores && <button className="secondary pv-melhores" onClick={oMelhorAqui} title={times[ativo]!.length === 1 || times[ativo]!.length === 2 ? t('Completa o Time {n} com quem mais combina com quem já está nele', { n: ativo + 1 }) : t('Monta o melhor time possível no Time {n}', { n: ativo + 1 })}><Crown size={16} />{times[ativo]!.length === 1 || times[ativo]!.length === 2 ? t('Completar o Time {n}', { n: ativo + 1 }) : t('Melhor no Time {n}', { n: ativo + 1 })}</button>}
+      {quantosEmprestados > 0 && <button className={`secondary pv-so-emprestados ${soEmprestados ? 'ativo' : ''}`} onClick={() => { setSoEmprestados(!soEmprestados); som('toque'); }}><Handshake size={16} />{t('Emprestados')}<i>{quantosEmprestados}</i></button>}
     </div>
     {ativos > 0 && <div className="pv-filtros-ativos">
-      {filtro.funcoes.map((f) => { const Icone = ICONE_DA_IDENTIDADE[f]; return <button key={f} style={{ '--cor': FAMILIA_DA_IDENTIDADE[familiaDaIdentidade[f]].cor } as CSSProperties} onClick={() => setFiltro({ ...filtro, funcoes: filtro.funcoes.filter((x) => x !== f) })}><Icone size={12} />{f}<X size={12} /></button>; })}
-      {filtro.universos.map((u) => <button key={u} style={{ '--cor': '#8fd3ff' } as CSSProperties} onClick={() => setFiltro({ ...filtro, universos: filtro.universos.filter((x) => x !== u) })}><Globe2 size={12} />{u}<X size={12} /></button>)}
-      {filtro.esconderUsados && <button style={{ '--cor': '#c8f560' } as CSSProperties} onClick={() => setFiltro({ ...filtro, esconderUsados: false })}>Só os livres<X size={12} /></button>}
+      {filtro.funcoes.map((f) => { const Icone = ICONE_DA_IDENTIDADE[f]; return <button key={f} style={{ '--cor': FAMILIA_DA_IDENTIDADE[familiaDaIdentidade[f]].cor } as CSSProperties} onClick={() => setFiltro({ ...filtro, funcoes: filtro.funcoes.filter((x) => x !== f) })}><Icone size={12} />{t(f)}<X size={12} /></button>; })}
+      {filtro.universos.map((u) => <button key={u} style={{ '--cor': '#8fd3ff' } as CSSProperties} onClick={() => setFiltro({ ...filtro, universos: filtro.universos.filter((x) => x !== u) })}><Globe2 size={12} />{t(u)}<X size={12} /></button>)}
+      {filtro.esconderUsados && <button style={{ '--cor': '#c8f560' } as CSSProperties} onClick={() => setFiltro({ ...filtro, esconderUsados: false })}>{t('Só os livres')}<X size={12} /></button>}
     </div>}
     {grupos.map((g) => <div key={g.titulo || 'todos'} className="pv-grupo">
-      {g.titulo && <h3 className="pv-grupo-titulo"><span>{g.titulo}</span><small>{g.lista.length}</small></h3>}
+      {g.titulo && <h3 className="pv-grupo-titulo"><span>{t(g.titulo)}</span><small>{g.lista.length}</small></h3>}
       <div className="pv-album">
         {g.lista.filter((c) => !filtro.esconderUsados || !usados.has(c.id)).map((c, k) => {
           const onde = usados.get(c.id);
           const emprestado = !!emprestados?.has(c.id);
-          return <button key={c.id} className={`pv-carta ${onde !== undefined ? 'usada' : ''} ${emprestado ? 'emprestada' : ''}`} onClick={() => tocar(c.id)} onContextMenu={(e) => { e.preventDefault(); onDetails(c.id); }} style={{ '--character': c.color, '--k': Math.min(k, 30) } as CSSProperties} aria-label={`${c.name}${onde !== undefined ? `, no time ${onde + 1}` : ''}`}>
-            <Portrait character={c} /><b>{c.name}</b>{onde !== undefined && <em>T{onde + 1}</em>}{emprestado && <span className="pv-fita"><Handshake size={10} />EMPRESTADO</span>}
-            <span className="pv-carta-ficha" role="button" tabIndex={0} aria-label={`Ficha de ${c.name}`} onClick={(e) => { e.stopPropagation(); onDetails(c.id); }}><Info size={13} /></span>
+          return <button key={c.id} className={`pv-carta ${onde !== undefined ? 'usada' : ''} ${emprestado ? 'emprestada' : ''}`} onClick={() => tocar(c.id)} onContextMenu={(e) => { e.preventDefault(); onDetails(c.id); }} style={{ '--character': c.color, '--k': Math.min(k, 30) } as CSSProperties} aria-label={`${nomeDe(c)}${onde !== undefined ? t(', no time {n}', { n: onde + 1 }) : ''}`}>
+            <Portrait character={c} /><b>{nomeDe(c)}</b>{onde !== undefined && <em>T{onde + 1}</em>}{emprestado && <span className="pv-fita"><Handshake size={10} />{t('EMPRESTADO')}</span>}
+            <span className="pv-carta-ficha" role="button" tabIndex={0} aria-label={t('Ficha de {nome}', { nome: nomeDe(c) })} onClick={(e) => { e.stopPropagation(); onDetails(c.id); }}><Info size={13} /></span>
           </button>;
         })}
       </div>
     </div>)}
-    {!lista.length && <div className="pv-nada"><Search size={28} /><b>Ninguém com esses filtros</b><button className="secondary" onClick={() => { setFiltro(FILTRO_VAZIO); setBusca(''); }}>Limpar filtros</button></div>}
+    {!lista.length && <div className="pv-nada"><Search size={28} /><b>{t('Ninguém com esses filtros')}</b><button className="secondary" onClick={() => { setFiltro(FILTRO_VAZIO); setBusca(''); }}>{t('Limpar filtros')}</button></div>}
     {painel && <PainelDeFiltros colecao={colecao} filtro={filtro} total={lista.length} onFiltro={setFiltro} onFechar={() => setPainel(false)} />}
   </section>;
 }
@@ -597,12 +598,12 @@ export function Montar({ rival, colecao, inicial, onPronto, onVoltar, onDetails,
 export function Apresentar({ rival, partida, onComecar }: { rival: Oponente; partida: Pick<PartidaPvp, 'meus' | 'deles'>; onComecar: () => void }) {
   return <section className="pv-apresentar">
     <div className="pv-frente">
-      <div className="pv-lado eu"><span className="pv-nome-lado">VOCÊ</span>{partida.meus.map((t, i) => <CartaoDoTime key={i} time={t} i={i} lado="eu" compacto />)}</div>
+      <div className="pv-lado eu"><span className="pv-nome-lado">{t('VOCÊ')}</span>{partida.meus.map((t, i) => <CartaoDoTime key={i} time={t} i={i} lado="eu" compacto />)}</div>
       <span className="pv-vs-pequeno">VS</span>
       <div className="pv-lado rival" style={{ '--npc': rival.cor } as CSSProperties}><span className="pv-nome-lado">{rival.avatar(34)}{rival.nome}</span>{partida.deles.map((t, i) => <CartaoDoTime key={i} time={t} i={i} lado="rival" compacto />)}</div>
     </div>
     {rival.fala && <p className="pv-fala" style={{ '--npc': rival.cor } as CSSProperties}><b>{rival.nome}:</b> “{rival.fala}”</p>}
-    <button className="primary pv-grande" onClick={onComecar}><Swords size={22} />COMEÇAR PARTIDA</button>
+    <button className="primary pv-grande" onClick={onComecar}><Swords size={22} />{t('COMEÇAR PARTIDA')}</button>
   </section>;
 }
 
@@ -613,15 +614,15 @@ export function Escolher({ rival, partida, onEscolher, jaEscolhido, prazo }: { r
   return <section className="pv-escolher">
     <Placar partida={partida} rival={rival} />
     {prazo}
-    <h2 className="pv-titulo-rodada">Escolha seu time <small>em segredo: {rival.nome} escolhe ao mesmo tempo</small></h2>
+    <h2 className="pv-titulo-rodada">{t('Escolha seu time')} <small>{t('em segredo: {nome} escolhe ao mesmo tempo', { nome: rival.nome })}</small></h2>
     <div className="pv-escolhas">{partida.meus.map((t, i) => <CartaoDoTime key={i} time={t} i={i} lado="eu" venceu={v.eu[i]} bloqueado={!livres.includes(i)} escolhido={sel === i} onClick={pensando ? undefined : () => { setSel(i); som('toque'); }} />)}</div>
     <div className="pv-rival-pensa" style={{ '--npc': rival.cor } as CSSProperties}>
       {rival.avatar(38)}
-      <span>{pensando ? `${rival.nome} está escolhendo…` : `${rival.nome} tem ${timesLivres(partida, 'rival').length} ${timesLivres(partida, 'rival').length === 1 ? 'time' : 'times'} para escolher`}</span>
+      <span>{pensando ? t('{nome} está escolhendo…', { nome: rival.nome }) : timesLivres(partida, 'rival').length === 1 ? t('{nome} tem {n} time para escolher', { nome: rival.nome, n: 1 }) : t('{nome} tem {n} times para escolher', { nome: rival.nome, n: timesLivres(partida, 'rival').length })}</span>
       <span className="pv-mini-times">{partida.deles.map((t, i) => <span key={i} className={v.rival[i] ? 'venceu' : ''}>{t.map((id) => <Rosto key={id} id={id} tamanho={22} apagado={v.rival[i]} />)}</span>)}</span>
     </div>
     <button className="primary pv-grande" disabled={sel === null || pensando} onClick={() => { setPensando(true); som('ui-confirma'); onEscolher(sel!); }}>
-      <Check size={20} />{pensando ? 'Confirmado…' : 'CONFIRMAR TIME'}
+      <Check size={20} />{pensando ? t('Confirmado…') : t('CONFIRMAR TIME')}
     </button>
   </section>;
 }
@@ -634,10 +635,10 @@ export function Vs({ rival, partida, meu, dele, onLutar, controle }: { rival: Op
     <span className="pv-vs-raios" aria-hidden="true" />
     <Fx nome="holofote" cor="#ffe2a0" ms={4800} className="pv-fx-holofote-vs" />
     {/* o rival em cima e você embaixo, como na luta (pedido do jogador) */}
-    <div className="pv-vs-lado rival"><small>{rival.nome.toUpperCase()} · TIME {dele + 1}</small>{partida.deles[dele]!.map((id, k) => <span key={id} className="pv-vs-rosto" style={{ '--k': k } as CSSProperties}><Rosto id={id} tamanho={84} /><b>{byId[id]!.name}</b></span>)}</div>
+    <div className="pv-vs-lado rival"><small>{rival.nome.toUpperCase()} · {t('TIME {n}', { n: dele + 1 })}</small>{partida.deles[dele]!.map((id, k) => <span key={id} className="pv-vs-rosto" style={{ '--k': k } as CSSProperties}><Rosto id={id} tamanho={84} /><b>{nomeDe(byId[id]!)}</b></span>)}</div>
     <span className="pv-vs-centro"><Fx nome="choque" cor="#ffb84d" ms={950} laco={false} className="pv-fx-choque" /><span className="pv-vs-letras" aria-label="Versus">VS</span></span>
-    <div className="pv-vs-lado eu"><small>VOCÊ · TIME {meu + 1}</small>{partida.meus[meu]!.map((id, k) => <span key={id} className="pv-vs-rosto" style={{ '--k': k } as CSSProperties}><Rosto id={id} tamanho={84} /><b>{byId[id]!.name}</b></span>)}</div>
-    {controle ?? <button className="pv-vs-contagem" onClick={onLutar} aria-label="Começar o duelo agora"><b key={conta}>{conta > 0 ? conta : 'LUTA!'}</b><small>toque para começar</small></button>}
+    <div className="pv-vs-lado eu"><small>{t('VOCÊ')} · {t('TIME {n}', { n: meu + 1 })}</small>{partida.meus[meu]!.map((id, k) => <span key={id} className="pv-vs-rosto" style={{ '--k': k } as CSSProperties}><Rosto id={id} tamanho={84} /><b>{nomeDe(byId[id]!)}</b></span>)}</div>
+    {controle ?? <button className="pv-vs-contagem" onClick={onLutar} aria-label={t('Começar o duelo agora')}><b key={conta}>{conta > 0 ? conta : t('LUTA!')}</b><small>{t('toque para começar')}</small></button>}
   </section>;
 }
 
@@ -646,12 +647,12 @@ export function ResultadoDaRodada({ rival, partida, onSeguir, final = false }: {
   useEffect(() => { som(ganhei ? 'vitoria' : 'derrota'); }, [ganhei]);
   return <section className={`pv-resultado ${ganhei ? 'ganhou' : 'perdeu'}`} style={{ '--npc': rival.cor } as CSSProperties}>
     <span className="pv-brilho" aria-hidden="true" />
-    <small>RODADA {partida.rodadas.length}</small>
-    <h1>{ganhei ? 'VOCÊ VENCEU!' : `${rival.nome} venceu`}</h1>
-    <p>{r.rendida ? (ganhei ? `${rival.nome} desistiu desta luta. ` : 'Você desistiu desta luta. ') : ''}{ganhei ? `O time ${r.meu + 1} ganhou a medalha e fica marcado.` : `O time ${r.dele + 1} dele fica marcado. Você pode usar qualquer time de novo.`}</p>
+    <small>{t('RODADA {n}', { n: partida.rodadas.length })}</small>
+    <h1>{ganhei ? t('VOCÊ VENCEU!') : t('{nome} venceu', { nome: rival.nome })}</h1>
+    <p>{r.rendida ? `${ganhei ? t('{nome} desistiu desta luta.', { nome: rival.nome }) : t('Você desistiu desta luta.')} ` : ''}{ganhei ? t('O time {n} ganhou a medalha e fica marcado.', { n: r.meu + 1 }) : t('O time {n} dele fica marcado. Você pode usar qualquer time de novo.', { n: r.dele + 1 })}</p>
     <div className="pv-resultado-time">{time.map((id) => <Rosto key={id} id={id} tamanho={64} />)}</div>
     <Placar partida={partida} rival={rival} />
-    <button className="primary pv-grande" onClick={onSeguir}>{final ? <><Trophy size={20} />VER RESULTADO</> : <><Swords size={20} />PRÓXIMA RODADA</>}</button>
+    <button className="primary pv-grande" onClick={onSeguir}>{final ? <><Trophy size={20} />{t('VER RESULTADO')}</> : <><Swords size={20} />{t('PRÓXIMA RODADA')}</>}</button>
   </section>;
 }
 
@@ -662,13 +663,13 @@ function Fim({ npc, partida, placar, onDeNovo, onSair }: { npc: Npc; partida: Pa
     {ganhei && <span className="pv-confete" aria-hidden="true">{Array.from({ length: 24 }, (_, i) => <i key={i} style={{ '--i': i } as CSSProperties} />)}</span>}
     {ganhei && <><Fx nome="raios" cor="#ffd36b" ms={5200} className="pv-fx-raios" /><Fx nome="faiscas" cor="#fff3b0" ms={4200} className="pv-fx-faiscas" /></>}
     <span className="pv-fim-trofeu">{ganhei ? <Trophy size={58} /> : <Shield size={58} />}</span>
-    <small>TREINO · {npc.titulo.toUpperCase()}</small>
-    <h1>{ganhei ? 'VITÓRIA!' : 'DERROTA'}</h1>
-    <p>{ganhei ? `Você venceu ${npc.nome} com os 3 times.` : `${npc.nome} venceu com os 3 times dele. Treine mais um pouco!`}</p>
-    <div className="pv-fim-rodadas">{partida.rodadas.map((r, i) => <span key={i} className={r.vencedor}><b>{i + 1}</b>{r.vencedor === 'eu' ? 'V' : 'D'}</span>)}</div>
-    <div className="pv-fim-placar"><AvatarDoNpc npc={npc} tamanho={40} /><span>Seu placar contra {npc.nome}</span><b className="v">{placar.v}V</b><b className="d">{placar.d}D</b></div>
-    <small className="pv-nota">Treino não muda o rating nem o ranking.</small>
-    <div className="pv-fim-botoes"><button className="primary" onClick={onDeNovo}><RotateCcw size={18} />Jogar de novo</button><button className="secondary" onClick={onSair}>Voltar</button></div>
+    <small>{t('TREINO')} · {t(npc.titulo).toUpperCase()}</small>
+    <h1>{ganhei ? t('VITÓRIA!') : t('DERROTA')}</h1>
+    <p>{ganhei ? t('Você venceu {nome} com os 3 times.', { nome: t(npc.nome) }) : t('{nome} venceu com os 3 times dele. Treine mais um pouco!', { nome: t(npc.nome) })}</p>
+    <div className="pv-fim-rodadas">{partida.rodadas.map((r, i) => <span key={i} className={r.vencedor}><b>{i + 1}</b>{r.vencedor === 'eu' ? t('V') : t('D')}</span>)}</div>
+    <div className="pv-fim-placar"><AvatarDoNpc npc={npc} tamanho={40} /><span>{t('Seu placar contra {nome}', { nome: t(npc.nome) })}</span><b className="v">{t('{n}V', { n: placar.v })}</b><b className="d">{t('{n}D', { n: placar.d })}</b></div>
+    <small className="pv-nota">{t('Treino não muda o rating nem o ranking.')}</small>
+    <div className="pv-fim-botoes"><button className="primary" onClick={onDeNovo}><RotateCcw size={18} />{t('Jogar de novo')}</button><button className="secondary" onClick={onSair}>{t('Voltar')}</button></div>
   </section>;
 }
 
@@ -707,22 +708,22 @@ function CartaoOnline({ online, rank }: { online: Online; rank: RankingPvp | nul
   return <div className="pv-online">
     <div className="pv-modo online">
       <span className="pv-modo-icone"><Users size={24} /></span>
-      <div><b>DESAFIO ONLINE</b><small>Toque no nome de alguém na Comunidade e desafie. Vale rating e ranking do PvP.</small></div>
-      <span className="pv-meu-rating"><Crown size={13} /><b>{eu?.rating ?? '—'}</b><small>{eu ? `${eu.vitorias}V ${eu.derrotas}D` : 'rating'}</small></span>
+      <div><b>{t('DESAFIO ONLINE')}</b><small>{t('Toque no nome de alguém na Comunidade e desafie. Vale rating e ranking do PvP.')}</small></div>
+      <span className="pv-meu-rating"><Crown size={13} /><b>{eu?.rating ?? '—'}</b><small>{eu ? t('{v}V {d}D', { v: eu.vitorias, d: eu.derrotas }) : t('rating')}</small></span>
     </div>
     {aberta && ['convite', 'montando', 'jogando'].includes(aberta.fase) && <button className="pv-voltar-partida" onClick={() => online.onPartida(aberta.id)}>
       <Avatar id={aberta.rival.id} nome={aberta.rival.nome} tamanho={34} online />
-      <span><b>Partida contra {aberta.rival.nome}</b><small>{aberta.fase === 'convite' ? (aberta.desafiante ? 'esperando aceitar' : 'te desafiou!') : aberta.fase === 'montando' ? 'montando os times' : `rodada ${aberta.rodada + 1}`}</small></span>
-      <em>VOLTAR</em>
+      <span><b>{t('Partida contra {nome}', { nome: aberta.rival.nome })}</b><small>{aberta.fase === 'convite' ? (aberta.desafiante ? t('esperando aceitar') : t('te desafiou!')) : aberta.fase === 'montando' ? t('montando os times') : t('rodada {n}', { n: aberta.rodada + 1 })}</small></span>
+      <em>{t('VOLTAR')}</em>
     </button>}
-    <button className="primary pv-desafiar" onClick={online.onComunidade}><Swords size={18} />Desafiar alguém na Comunidade</button>
+    <button className="primary pv-desafiar" onClick={online.onComunidade}><Swords size={18} />{t('Desafiar alguém na Comunidade')}</button>
   </div>;
 }
 
 /** Uma confirmação simples por cima da tela (sair da partida). */
 export function Confirmar({ titulo, texto, sim, onSim, onNao }: { titulo: string; texto: string; sim: string; onSim: () => void; onNao: () => void }) {
   return createPortal(<div className="pv-confirmar" role="alertdialog" aria-label={titulo}>
-    <div><b>{titulo}</b><p>{texto}</p><span><button className="secondary" onClick={onNao}>Continuar</button><button className="primary pv-perigo" onClick={onSim}><LogOut size={16} />{sim}</button></span></div>
+    <div><b>{titulo}</b><p>{texto}</p><span><button className="secondary" onClick={onNao}>{t('Continuar')}</button><button className="primary pv-perigo" onClick={onSim}><LogOut size={16} />{sim}</button></span></div>
   </div>, document.body);
 }
 
@@ -735,14 +736,14 @@ function Espera({ rival, titulo, texto, prazo, children, onSair, sair }: { rival
     <p className="pv-espera-texto"><Hourglass size={15} />{texto}</p>
     {prazo}
     {children}
-    {onSair && <button className="secondary" onClick={onSair}><X size={16} />{sair ?? 'Cancelar'}</button>}
+    {onSair && <button className="secondary" onClick={onSair}><X size={16} />{sair ?? t('Cancelar')}</button>}
   </section>;
 }
 
 /** O rival caiu: a partida segue, e ele tem um tempo para voltar (pedido do jogador: 45 s; senão a vitória é sua). */
 function RivalCaiu({ nome, falta, desde }: { nome: string; falta: number; desde: number }) {
   const agora = useAgora(true, 500), s = Math.max(0, Math.ceil(falta - (agora - desde) / 1000));
-  return createPortal(<div className="pv-caiu" role="status"><WifiOff size={18} /><span><b>{nome} desconectou</b><small>{s > 0 ? `tem ${mmss(s)} para voltar, senão a vitória é sua` : 'a vitória é sua…'}</small></span><em>{s}</em></div>, document.body);
+  return createPortal(<div className="pv-caiu" role="status"><WifiOff size={18} /><span><b>{t('{nome} desconectou', { nome })}</b><small>{s > 0 ? t('tem {tempo} para voltar, senão a vitória é sua', { tempo: mmss(s) }) : t('a vitória é sua…')}</small></span><em>{s}</em></div>, document.body);
 }
 
 function FimOnline({ v, rival, onSair }: { v: VistaPvp; rival: Oponente; onSair: () => void }) {
@@ -753,16 +754,16 @@ function FimOnline({ v, rival, onSair }: { v: VistaPvp; rival: Oponente; onSair:
     {ganhei && <span className="pv-confete" aria-hidden="true">{Array.from({ length: 24 }, (_, i) => <i key={i} style={{ '--i': i } as CSSProperties} />)}</span>}
     {ganhei && <><Fx nome="raios" cor="#ffd36b" ms={5200} className="pv-fx-raios" /><Fx nome="faiscas" cor="#fff3b0" ms={4200} className="pv-fx-faiscas" /></>}
     <span className="pv-fim-trofeu">{ganhei ? <Trophy size={58} /> : <Shield size={58} />}</span>
-    <small>DESAFIO ONLINE · VALENDO RATING</small>
-    <h1>{ganhei ? 'VITÓRIA!' : 'DERROTA'}</h1>
-    <p>{porQueda ? (ganhei ? `${rival.nome} desconectou e não voltou em ${v.ausenciaMaxima} s.` : `Você ficou desconectado mais de ${v.ausenciaMaxima} s.`) : porDesistencia ? (ganhei ? `${rival.nome} abandonou a partida.` : 'Você abandonou a partida.') : ganhei ? `Você venceu ${rival.nome} com os 3 times.` : `${rival.nome} venceu com os 3 times.`}</p>
-    {v.rodadas.length > 0 && <div className="pv-fim-rodadas">{v.rodadas.map((r) => <span key={r.n} className={r.vencedor}><b>{r.n + 1}</b>{r.vencedor === 'eu' ? 'V' : 'D'}</span>)}</div>}
+    <small>{t('DESAFIO ONLINE · VALENDO RATING')}</small>
+    <h1>{ganhei ? t('VITÓRIA!') : t('DERROTA')}</h1>
+    <p>{porQueda ? (ganhei ? t('{nome} desconectou e não voltou em {s} s.', { nome: rival.nome, s: v.ausenciaMaxima }) : t('Você ficou desconectado mais de {s} s.', { s: v.ausenciaMaxima })) : porDesistencia ? (ganhei ? t('{nome} abandonou a partida.', { nome: rival.nome }) : t('Você abandonou a partida.')) : ganhei ? t('Você venceu {nome} com os 3 times.', { nome: rival.nome }) : t('{nome} venceu com os 3 times.', { nome: rival.nome })}</p>
+    {v.rodadas.length > 0 && <div className="pv-fim-rodadas">{v.rodadas.map((r) => <span key={r.n} className={r.vencedor}><b>{r.n + 1}</b>{r.vencedor === 'eu' ? t('V') : t('D')}</span>)}</div>}
     <div className="pv-fim-rating">
-      <Crown size={22} /><span><small>SEU RATING</small><b>{v.voce.rating}</b></span>
+      <Crown size={22} /><span><small>{t('SEU RATING')}</small><b>{v.voce.rating}</b></span>
       <em className={delta >= 0 ? 'sobe' : 'desce'}>{delta >= 0 ? '+' : ''}{delta}</em>
-      <span className="pv-fim-vd"><b className="v">{v.voce.vitorias}V</b><b className="d">{v.voce.derrotas}D</b></span>
+      <span className="pv-fim-vd"><b className="v">{t('{n}V', { n: v.voce.vitorias })}</b><b className="d">{t('{n}D', { n: v.voce.derrotas })}</b></span>
     </div>
-    <div className="pv-fim-botoes"><button className="primary" onClick={onSair}><Trophy size={18} />Ver o ranking</button></div>
+    <div className="pv-fim-botoes"><button className="primary" onClick={onSair}><Trophy size={18} />{t('Ver o ranking')}</button></div>
   </section>;
 }
 
@@ -890,33 +891,33 @@ function PartidaOnline({ online, colecaoLocal, emprestados, settings, onSettings
   useEffect(() => { if (desistiram) setCena(null); }, [desistiram]);
 
   const voltar = () => { online.onPartida(null); };
-  if (sumiu) return <Espera rival={{ nome: 'Partida', cor: '#8fd3ff', avatar: () => <Swords size={60} /> }} titulo="Partida não encontrada" texto="Ela pode ter acabado." onSair={voltar} sair="Voltar" />;
-  if (!v || !rival) return <section className="pv-espera"><p className="cm-carregando-tela">{erro || 'Abrindo a partida…'}</p>{erro && <button className="secondary" onClick={voltar}>Voltar</button>}</section>;
+  if (sumiu) return <Espera rival={{ nome: t('Partida'), cor: '#8fd3ff', avatar: () => <Swords size={60} /> }} titulo={t('Partida não encontrada')} texto={t('Ela pode ter acabado.')} onSair={voltar} sair={t('Voltar')} />;
+  if (!v || !rival) return <section className="pv-espera"><p className="cm-carregando-tela">{erro || t('Abrindo a partida…')}</p>{erro && <button className="secondary" onClick={voltar}>{t('Voltar')}</button>}</section>;
   const aviso = erro ? <p className="pv-problema pv-erro-online">{erro}</p> : null;
   const caiu = v.ausencia !== null && (v.fase === 'jogando' || v.fase === 'montando') ? <RivalCaiu nome={v.rival.nome} falta={v.ausenciaMaxima - v.ausencia} desde={recebido} /> : null;
-  const confirmaSair = <>{caiu}{sair && <Confirmar titulo={v.fase === 'jogando' ? 'Abandonar a partida?' : 'Sair da partida?'}
-    texto={v.fase === 'jogando' ? `Abandonar conta como derrota e ${v.rival.nome} ganha o rating.` : 'A partida é cancelada e ninguém perde rating.'}
-    sim={v.fase === 'jogando' ? 'Abandonar' : 'Sair'} onNao={() => setSair(false)} onSim={() => { setSair(false); void agir(servico.desistir(id)); }} />}</>;
+  const confirmaSair = <>{caiu}{sair && <Confirmar titulo={v.fase === 'jogando' ? t('Abandonar a partida?') : t('Sair da partida?')}
+    texto={v.fase === 'jogando' ? t('Abandonar conta como derrota e {nome} ganha o rating.', { nome: v.rival.nome }) : t('A partida é cancelada e ninguém perde rating.')}
+    sim={v.fase === 'jogando' ? t('Abandonar') : t('Sair')} onNao={() => setSair(false)} onSim={() => { setSair(false); void agir(servico.desistir(id)); }} />}</>;
 
   // fora de jogo: convite recusado, cancelado ou expirado
   if (v.fase === 'recusada' || v.fase === 'cancelada' || v.fase === 'expirada')
-    return <Espera rival={rival} titulo={v.fase === 'recusada' ? 'Desafio recusado' : v.fase === 'expirada' ? 'O convite expirou' : 'Partida cancelada'} texto={v.motivo ?? 'Ninguém perdeu rating.'} onSair={voltar} sair="Voltar" />;
+    return <Espera rival={rival} titulo={v.fase === 'recusada' ? t('Desafio recusado') : v.fase === 'expirada' ? t('O convite expirou') : t('Partida cancelada')} texto={v.motivo ? t(v.motivo) : t('Ninguém perdeu rating.')} onSair={voltar} sair={t('Voltar')} />;
 
   if (v.fase === 'convite') {
-    if (v.desafiante) return <><Espera rival={rival} titulo="Desafio enviado!" texto={`Esperando ${v.rival.nome} aceitar…`} prazo={<Prazo ate={v.prazo} offset={offset} texto=" para aceitar" />} onSair={() => void agir(servico.desistir(id))} sair="Cancelar desafio">
-      <span className="pv-rating-rival"><Crown size={13} />{v.rival.rating} · {v.rival.vitorias}V {v.rival.derrotas}D</span>{aviso}</Espera></>;
-    return <Espera rival={rival} titulo={`${v.rival.nome} te desafiou!`} texto="3 times de 3, escolha secreta, vale rating." prazo={<Prazo ate={v.prazo} offset={offset} texto=" para responder" />}>
-      <span className="pv-rating-rival"><Crown size={13} />{v.rival.rating} · {v.rival.vitorias}V {v.rival.derrotas}D</span>{aviso}
-      <span className="pv-convite-botoes"><button className="secondary" onClick={() => void agir(servico.responder(id, false))}><X size={18} />Recusar</button><button className="primary" onClick={() => { som('ui-arena'); void agir(servico.responder(id, true)); }}><Swords size={18} />Aceitar</button></span>
+    if (v.desafiante) return <><Espera rival={rival} titulo={t('Desafio enviado!')} texto={t('Esperando {nome} aceitar…', { nome: v.rival.nome })} prazo={<Prazo ate={v.prazo} offset={offset} texto={` ${t('para aceitar')}`} />} onSair={() => void agir(servico.desistir(id))} sair={t('Cancelar desafio')}>
+      <span className="pv-rating-rival"><Crown size={13} />{v.rival.rating} · {t('{v}V {d}D', { v: v.rival.vitorias, d: v.rival.derrotas })}</span>{aviso}</Espera></>;
+    return <Espera rival={rival} titulo={t('{nome} te desafiou!', { nome: v.rival.nome })} texto={t('3 times de 3, escolha secreta, vale rating.')} prazo={<Prazo ate={v.prazo} offset={offset} texto={` ${t('para responder')}`} />}>
+      <span className="pv-rating-rival"><Crown size={13} />{v.rival.rating} · {t('{v}V {d}D', { v: v.rival.vitorias, d: v.rival.derrotas })}</span>{aviso}
+      <span className="pv-convite-botoes"><button className="secondary" onClick={() => void agir(servico.responder(id, false))}><X size={18} />{t('Recusar')}</button><button className="primary" onClick={() => { som('ui-arena'); void agir(servico.responder(id, true)); }}><Swords size={18} />{t('Aceitar')}</button></span>
     </Espera>;
   }
 
   if (v.fase === 'montando') {
     // "Montar os melhores" só no treino (pedido do dono): contra outras pessoas, nem ele
     if (!v.pronto.eu) return <>{<Montar key={falhas} rival={rival} colecao={colecao} emprestados={emprestados} inicial={guardado.times} onDetails={onDetails} onVoltar={() => setSair(true)}
-      prazo={<>{<Prazo ate={v.prazo} offset={offset} texto={v.pronto.rival ? ` · ${v.rival.nome} já está pronto!` : ' para montar'} />}{aviso}</>}
+      prazo={<>{<Prazo ate={v.prazo} offset={offset} texto={v.pronto.rival ? ` · ${t('{nome} já está pronto!', { nome: v.rival.nome })}` : ` ${t('para montar')}`} />}{aviso}</>}
       onPronto={(t) => { save('pvp', { ...carregar(), times: t }); void agir(servico.times(id, t)); }} />}{confirmaSair}</>;
-    return <><Espera rival={rival} titulo="Seus times estão prontos" texto={`Esperando ${v.rival.nome} montar os times…`} prazo={<Prazo ate={v.prazo} offset={offset} texto=" para montar" />} onSair={() => setSair(true)} sair="Sair">
+    return <><Espera rival={rival} titulo={t('Seus times estão prontos')} texto={t('Esperando {nome} montar os times…', { nome: v.rival.nome })} prazo={<Prazo ate={v.prazo} offset={offset} texto={` ${t('para montar')}`} />} onSair={() => setSair(true)} sair={t('Sair')}>
       {v.meusTimes && <div className="pv-espera-times">{v.meusTimes.map((t, i) => <CartaoDoTime key={i} time={t} i={i} lado="eu" compacto />)}</div>}{aviso}
     </Espera>{confirmaSair}</>;
   }
@@ -936,7 +937,7 @@ function PartidaOnline({ online, colecaoLocal, emprestados, settings, onSettings
 
   if (cena?.tipo === 'luta') return <>{<ArenaDoPvp key={cena.n} meu={cena.meu} dele={cena.dele} seed={cena.seed} rodada={cena.n + 1} rival={v.rival.nome} settings={settings} onSettings={onSettings}
     podePausar={false} espelhado={!v.desafiante} atrasoInicial={cena.atraso} onFim={() => setCena({ tipo: 'resultado', n: cena.n })} onDesistir={() => setRenderLuta(true)} />}{confirmaSair}
-    {renderLuta && <Confirmar titulo="Desistir desta luta?" texto="Você perde esta rodada. A partida continua com os outros times." sim="Desistir da luta" onNao={() => setRenderLuta(false)}
+    {renderLuta && <Confirmar titulo={t('Desistir desta luta?')} texto={t('Você perde esta rodada. A partida continua com os outros times.')} sim={t('Desistir da luta')} onNao={() => setRenderLuta(false)}
       onSim={() => { setRenderLuta(false); const n = cena.n; void agir(servico.render(id, n)).then(() => setCena({ tipo: 'resultado', n })); }} />}</>;
   // o resultado da luta que acabou de passar na tela (mesmo que a partida já tenha andado enquanto ela passava)
   const daCena = cena?.tipo === 'resultado' ? v.rodadas.find((r) => r.n === cena.n) : undefined;
@@ -952,17 +953,17 @@ function PartidaOnline({ online, colecaoLocal, emprestados, settings, onSettings
     // os dois já escolheram: o VS e o botão de começar (o duelo começa sozinho quando o tempo acaba)
     const conta = inicio !== null ? Math.max(0, Math.ceil((inicio - agora) / 1000)) : null;
     const controle = conta !== null
-      ? <div className="pv-vs-contagem"><b key={conta}>{conta > 0 ? conta : 'LUTA!'}</b><small>a luta começa nos dois aparelhos</small></div>
+      ? <div className="pv-vs-contagem"><b key={conta}>{conta > 0 ? conta : t('LUTA!')}</b><small>{t('a luta começa nos dois aparelhos')}</small></div>
       : <div className="pv-vs-contagem esperando"><Hourglass size={26} />
-        <small>{v.lutar.rival ? `${v.rival.nome} já está vendo a tela. Começando…` : `Esperando ${v.rival.nome} abrir a tela da luta…`}</small>
-        <small className="pv-pronto-rival"><Check size={13} />A luta só começa com os dois vendo a tela</small></div>;
+        <small>{v.lutar.rival ? t('{nome} já está vendo a tela. Começando…', { nome: v.rival.nome }) : t('Esperando {nome} abrir a tela da luta…', { nome: v.rival.nome })}</small>
+        <small className="pv-pronto-rival"><Check size={13} />{t('A luta só começa com os dois vendo a tela')}</small></div>;
     return <><Vs rival={rival} partida={partida} meu={pendente.meu} dele={pendente.dele} onLutar={() => undefined} controle={<>{controle}{aviso}</>} />{confirmaSair}</>;
   }
 
   return <>{<Escolher key={`${v.rodada}-${falhas}`} rival={rival} partida={partida} jaEscolhido={v.minhaEscolha}
-    prazo={<>{<Prazo ate={v.prazo} offset={offset} texto={v.escolheu.rival ? ` · ${v.rival.nome} já escolheu!` : v.assistiu && !v.assistiu.rival && v.rodadas.length ? ` · ${v.rival.nome} ainda vê a luta` : ' para escolher'} />}{aviso}</>}
+    prazo={<>{<Prazo ate={v.prazo} offset={offset} texto={v.escolheu.rival ? ` · ${t('{nome} já escolheu!', { nome: v.rival.nome })}` : v.assistiu && !v.assistiu.rival && v.rodadas.length ? ` · ${t('{nome} ainda vê a luta', { nome: v.rival.nome })}` : ` ${t('para escolher')}`} />}{aviso}</>}
     onEscolher={(i) => void agir(servico.escolher(id, v.rodada, i))} />}
-    <button className="pv-sair-online" onClick={() => setSair(true)}><LogOut size={14} />Abandonar partida</button>{confirmaSair}</>;
+    <button className="pv-sair-online" onClick={() => setSair(true)}><LogOut size={14} />{t('Abandonar partida')}</button>{confirmaSair}</>;
 }
 
 /* ---------------------------------------------------------------------------
@@ -1028,14 +1029,14 @@ function TelaDoPvp({ colecao, settings, onSettings, onDetails, onJogar, onLutand
 
   // as duas desistências do treino (pedido do jogador): na luta, só daquela rodada; na escolha do time, da partida toda
   const confirmaTreino = confirmar && (etapa.tipo === 'luta' || etapa.tipo === 'escolher') && (confirmar === 'luta'
-    ? <Confirmar titulo="Desistir desta luta?" texto={`Você perde esta rodada. A partida continua com os outros times.`} sim="Desistir da luta" onNao={() => setConfirmar(null)}
+    ? <Confirmar titulo={t('Desistir desta luta?')} texto={t('Você perde esta rodada. A partida continua com os outros times.')} sim={t('Desistir da luta')} onNao={() => setConfirmar(null)}
       onSim={() => { setConfirmar(null); if (etapa.tipo === 'luta') terminouRodada(etapa.npc, etapa.partida, etapa.meu, etapa.dele, 'enemy', true); }} />
-    : <Confirmar titulo="Abandonar a partida?" texto={`Abandonar conta como derrota contra ${etapa.npc.nome}.`} sim="Abandonar" onNao={() => setConfirmar(null)}
+    : <Confirmar titulo={t('Abandonar a partida?')} texto={t('Abandonar conta como derrota contra {nome}.', { nome: t(etapa.npc.nome) })} sim={t('Abandonar')} onNao={() => setConfirmar(null)}
       onSim={() => { setConfirmar(null); desistirDaPartida(etapa.npc, etapa.partida); }} />);
 
   // no PvP com outras pessoas, nem o dono vê as estrelas e a porcentagem (pedido dele: só no treino)
   if (online?.partida) return <DonoDoPvp.Provider value={false}><PartidaOnline key={online.partida} online={online} colecaoLocal={colecaoPvp} emprestados={emprestados} settings={settings} onSettings={onSettings} onDetails={onDetails} onLutando={onLutando} /></DonoDoPvp.Provider>;
-  if (etapa.tipo === 'campanha' && servicoDaCampanha) return <Suspense fallback={<p className="cm-carregando-tela">Abrindo o Caminho do Nexus…</p>}>
+  if (etapa.tipo === 'campanha' && servicoDaCampanha) return <Suspense fallback={<p className="cm-carregando-tela">{t('Abrindo o Caminho do Nexus…')}</p>}>
     <CaminhoDoNexus servico={servicoDaCampanha} settings={settings} onSettings={onSettings} onDetails={onDetails} onLutando={onLutando} onVoltar={() => setEtapa({ tipo: 'lobby' })} /></Suspense>;
   if (etapa.tipo === 'lobby' || etapa.tipo === 'campanha') return <Lobby colecao={colecaoPvp} propria={propria} guardado={guardado} online={online} onTreino={(npc) => { som('ui-arena'); setEtapa({ tipo: 'montar', npc }); }} onJogar={onJogar}
     temCampanha={!!servicoDaCampanha} servicoDaCampanha={servicoDaCampanha} onCampanha={() => { som('ui-arena'); setEtapa({ tipo: 'campanha' }); }} />;
@@ -1045,10 +1046,10 @@ function TelaDoPvp({ colecao, settings, onSettings, onDetails, onJogar, onLutand
     // o NPC "pensa" um pouco antes do VS
     const dele = escolhaDoNpc(etapa.npc.nivel as NivelNpc, etapa.partida, etapa.partida.seed + etapa.partida.rodadas.length * 7919);
     window.setTimeout(() => setEtapa({ tipo: 'vs', npc: etapa.npc, partida: etapa.partida, meu, dele }), 900);
-  }} /><button className="pv-sair-online" onClick={() => setConfirmar('partida')}><LogOut size={14} />Abandonar partida</button>{confirmaTreino}</>;
+  }} /><button className="pv-sair-online" onClick={() => setConfirmar('partida')}><LogOut size={14} />{t('Abandonar partida')}</button>{confirmaTreino}</>;
   if (etapa.tipo === 'vs') return <Vs rival={oponenteDoNpc(etapa.npc)} partida={etapa.partida} meu={etapa.meu} dele={etapa.dele} onLutar={() => setEtapa({ ...etapa, tipo: 'luta' })} />;
   if (etapa.tipo === 'luta') return <><ArenaDoPvp meu={etapa.partida.meus[etapa.meu]!} dele={etapa.partida.deles[etapa.dele]!} seed={sementeDaRodada(etapa.partida.seed, etapa.partida.rodadas.length)}
-    rodada={etapa.partida.rodadas.length + 1} rival={etapa.npc.nome} settings={settings} onSettings={onSettings} podePausar velocidadeLivre
+    rodada={etapa.partida.rodadas.length + 1} rival={t(etapa.npc.nome)} settings={settings} onSettings={onSettings} podePausar velocidadeLivre
     atrasoInicial={etapa.retomar ?? 0} comecaPausado={(etapa.retomar ?? 0) > 0} onTempo={(seg) => guardaEtapa(etapa, seg)}
     onFim={(v) => terminouRodada(etapa.npc, etapa.partida, etapa.meu, etapa.dele, v)} onDesistir={() => setConfirmar('luta')} />{confirmaTreino}</>;
   if (etapa.tipo === 'rodada') return <ResultadoDaRodada rival={oponenteDoNpc(etapa.npc)} partida={etapa.partida} onSeguir={() => setEtapa({ tipo: 'escolher', npc: etapa.npc, partida: etapa.partida })} />;

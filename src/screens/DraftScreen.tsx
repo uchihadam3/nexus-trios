@@ -119,13 +119,13 @@ export function DraftScreen({draft,desafio,colecao=false,primeiroRival,naColecao
  * a mesma do PvP (src/presentation/dicas-do-trio.ts, estrelasDoTime).
  */
 function EstrelasDoTrio({team}:{team:string[]}){
-  const {pct,dentro}=posicaoDoTrio(team),n=estrelasDaPorcentagem(pct),lugar=usePosicaoDoTrio(team);
+  const {pct}=posicaoDoTrio(team),n=estrelasDaPorcentagem(pct),lugar=usePosicaoDoTrio(team);
   // as 7 de prata e, no 1% do topo, de 1 a 7 douradas (src/presentation/posicao-do-trio.ts)
   const ouro=lugar?douradasDaPosicao(lugar.posicao,lugar.total):0;
-  // e a porcentagem (pedido do dono: "esse trio é melhor que 99%, 98%… dos outros trios"), com onde ele está dentro desse X% entre parênteses
-  return <div className="dv-estrelas" role="img" aria-label={`${plural(n,'Trio de {n} estrela','Trio de {n} estrelas')}${ouro?` ${plural(ouro,'e {n} dourada','e {n} douradas')}`:''}, ${t('melhor que {n}% dos trios',{n:pct})}${lugar?`, ${t('{posicao} de {total}',{posicao:ordinal(lugar.posicao),total:numero(lugar.total)})}`:''}`}>
+  // e a posição entre todos os trios; a porcentagem saiu (pedido do dono: "deixar só as estrelas e a posição")
+  return <div className="dv-estrelas" role="img" aria-label={`${plural(n,'Trio de {n} estrela','Trio de {n} estrelas')}${ouro?` ${plural(ouro,'e {n} dourada','e {n} douradas')}`:''}, ${lugar?`, ${t('{posicao} de {total}',{posicao:ordinal(lugar.posicao),total:numero(lugar.total)})}`:''}`}>
     {Array.from({length:ESTRELAS_MAXIMAS},(_,k)=><i key={k} className={k<n?'acesa':''} style={{'--k':k} as CSSProperties}><Star size={13} fill="currentColor" strokeWidth={1.5}/></i>)}
     {ouro>0&&<span className="dv-ouro">{Array.from({length:ESTRELAS_DOURADAS},(_,k)=><i key={k} className={k<ouro?'acesa':''} style={{'--k':ESTRELAS_MAXIMAS+k} as CSSProperties}><Star size={13} fill="currentColor" strokeWidth={1.5}/></i>)}</span>}
-    <small title={t('Entre os trios que também são melhores que {pct}%, este é melhor que {dentro}% deles',{pct,dentro})}>{t('melhor que')} <b>{pct}%</b> <span className="dv-dentro">({dentro}%)</span> {t('dos trios')}{lugar&&<span className="dv-lugar" title={t('{posicao} lugar entre {total} trios possíveis',{posicao:ordinal(lugar.posicao),total:numero(lugar.total)})}> · {textoDaPosicao(lugar.posicao)}</span>}</small>
+    {lugar&&<small><span className="dv-lugar" title={t('{posicao} lugar entre {total} trios possíveis',{posicao:ordinal(lugar.posicao),total:numero(lugar.total)})}>{textoDaPosicao(lugar.posicao)}</span></small>}
   </div>;
 }
