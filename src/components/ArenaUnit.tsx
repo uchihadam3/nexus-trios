@@ -21,6 +21,7 @@ import { RENASCER_PROPRIO } from '../presentation/renascer-proprio';
 import { formaDe,naFormaDeAgora,preCarregaFormas } from '../presentation/formas';
 import type { InspectTarget } from './BattleInspector';
 import type { UnitActing } from '../presentation/acting';
+import { nomeDe, t } from '../i18n/idioma';
 
 /*
  * Um lutador na arena.
@@ -69,14 +70,14 @@ function LinhaDeStatus({tipo,lista,fighter,onInspect}:{tipo:'buffs'|'debuffs';li
     return undefined;
   },[lista,vivo]);
   const temAlgo=lista.length>0||saindo.length>0;
-  return <div className={`status-line ${tipo} ${temAlgo?'':'is-empty'}`} aria-label={tipo==='buffs'?'Efeitos que ajudam':'Efeitos que atrapalham'}>
+  return <div className={`status-line ${tipo} ${temAlgo?'':'is-empty'}`} aria-label={tipo==='buffs'?t('Efeitos que ajudam'):t('Efeitos que atrapalham')}>
     {visiveis.map(s=>{const pulso=pulsos.current.get(s.id)?.n??0;return <span key={s.id} className="status-vida">
       <StatusBadge status={s} onClick={()=>onInspect({kind:'status',fighter,status:s})}/>
       {pulso>0&&<span key={pulso} className="status-renovado" aria-hidden/>}
     </span>;})}
     {/* quem está saindo só usa vaga livre: a linha nunca passa de POR_LINHA ícones (antes ela alargava e os ícones vazavam para fora) */}
     {saindo.filter(x=>!lista.some(s=>s.id===x.s.id)).slice(0,Math.max(0,POR_LINHA-visiveis.length)).map(x=><span key={x.chave} className={`status-vida status-saindo ${x.modo}`} aria-hidden><StatusBadge status={x.s}/></span>)}
-    {resto>0&&<button className="status-more" onClick={()=>onInspect({kind:'fighter',fighter})} aria-label={`Mais ${resto} efeitos`}>+{resto}</button>}
+    {resto>0&&<button className="status-more" onClick={()=>onInspect({kind:'fighter',fighter})} aria-label={t('Mais {n} efeitos',{n:resto})}>+{resto}</button>}
   </div>;
 }
 
@@ -204,7 +205,7 @@ export function ArenaUnit({fighter:f,battle,beat,onInspect,numbers,threatened,li
       <span className="unit-fx" aria-hidden="true"/>
       {shield>0&&!out&&<span className="unit-escudo" aria-hidden="true"/>}
       <span className="unit-pedestal" aria-hidden="true"/>
-      <button className="fighter-portrait" data-portrait={f.uid} onClick={()=>onInspect({kind:'fighter',fighter:f})} aria-label={`Inspecionar ${c.name}, ${Math.ceil(f.hp)} de Vida`}>
+      <button className="fighter-portrait" data-portrait={f.uid} onClick={()=>onInspect({kind:'fighter',fighter:f})} aria-label={t('Inspecionar {nome}, {v} de Vida',{nome:nomeDe(c),v:Math.ceil(f.hp)})}>
         <span className="medal-aura" aria-hidden="true"/>
         {/* quem troca de forma (Gandalf volta como o Branco, Ben 10 vira um alien, o Mario cresce) troca o retrato, com um clarão na cor da forma */}
         <span key={retrato} className={`medal-frame${trocouDeRetrato?' forma-nova':''}`} style={trocouDeRetrato?{'--forma-cor':forma?.cor??c.color} as React.CSSProperties:undefined}><Portrait character={naFormaDeAgora(c,f,battle)}/>{trocouDeRetrato&&<i className="forma-clarao" aria-hidden="true"/>}</span>
@@ -215,7 +216,7 @@ export function ArenaUnit({fighter:f,battle,beat,onInspect,numbers,threatened,li
         </svg>
         {preparing&&<svg className="prep-ring" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="41" pathLength="100" strokeDasharray={`${preparandoUnica?anelDaUnica:f.cast?Math.max(0,100*f.cast.elapsed/f.cast.duration):0} 100`}/></svg>}
         {/* a bolinha da Mecânica única, como uma quarta habilidade: enche com o relógio dela e acende ao ativar */}
-        {unica&&!out&&<span className={`unica-bolinha ub-${ativando?'ativando':bolinha.luz}${ativando?' ativando':''}`} style={corDaUnica?{'--ub-cor':corDaUnica} as React.CSSProperties:undefined} role="button" tabIndex={0} aria-label={`Mecânica única de ${c.name}: ${unica.nome}`}
+        {unica&&!out&&<span className={`unica-bolinha ub-${ativando?'ativando':bolinha.luz}${ativando?' ativando':''}`} style={corDaUnica?{'--ub-cor':corDaUnica} as React.CSSProperties:undefined} role="button" tabIndex={0} aria-label={t('Mecânica única de {nome}: {mecanica}',{nome:nomeDe(c),mecanica:t(unica.nome)})}
           onClick={e=>{e.stopPropagation();onInspect({kind:'unica',fighter:f});}} onKeyDown={e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();e.stopPropagation();onInspect({kind:'unica',fighter:f});}}}>
           <svg className="ub-anel" viewBox="0 0 36 36">{bolinha.pontos&&!ativando
             /* as pilhas: o anel vira gomos, um por pilha, e cada pilha acende o seu */
@@ -229,21 +230,21 @@ export function ArenaUnit({fighter:f,battle,beat,onInspect,numbers,threatened,li
         </span>}
         {threatened&&<span className="unit-brackets" aria-hidden="true"/>}
         {broken&&<span className="unit-break" aria-hidden="true">×</span>}
-        {tempo&&<span className={`unit-tempo ${tempo.value!>0?'advanced':'delayed'}`} aria-label={tempo.label}><AuxIcon id={tempo.value!>0?'tempo-up':'tempo-down'} size={18}/></span>}
+        {tempo&&<span className={`unit-tempo ${tempo.value!>0?'advanced':'delayed'}`} aria-label={t(tempo.label)}><AuxIcon id={tempo.value!>0?'tempo-up':'tempo-down'} size={18}/></span>}
         {renascendo&&<span className="unit-brasas" aria-hidden="true" style={{'--fx-img':`url(${folha(proprio?.espera??'brasas_renascendo')})`} as React.CSSProperties}/>}
         {/* o tempo até renascer: a barrinha enche em volta do medalhão */}
         {renascendo&&<svg className="renasce-ring" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="47" className="renasce-ring-trilho"/><circle cx="50" cy="50" r="47" pathLength="100" strokeDasharray={`${Math.min(100,Math.max(0,100*(1-(f.renascendo??0)/(c.renascer?.atraso||1))))} 100`}/></svg>}
         {out&&(renascendo
-          ?<span className="unit-ko unit-renasce" aria-label={`Renascendo em ${Math.ceil(f.renascendo??0)} segundos`}><EmblemaDoRenascer id={c.id} size={24}/><b>{proprio?.rotulo??'RENASCE'}</b><i className="renasce-segundos">{Math.ceil(f.renascendo??0)}s</i></span>
-          :<span className="unit-ko" aria-label="Fora da luta"><Skull size={26}/><b>FORA</b></span>)}
-        {levantou&&<span key={levantou.id} className="discovery-pop revive-pop">{levantou.label}</span>}
+          ?<span className="unit-ko unit-renasce" aria-label={t('Renascendo em {n} segundos',{n:Math.ceil(f.renascendo??0)})}><EmblemaDoRenascer id={c.id} size={24}/><b>{t(proprio?.rotulo??'RENASCE')}</b><i className="renasce-segundos">{Math.ceil(f.renascendo??0)}s</i></span>
+          :<span className="unit-ko" aria-label={t('Fora da luta')}><Skull size={26}/><b>{t('FORA')}</b></span>)}
+        {levantou&&<span key={levantou.id} className="discovery-pop revive-pop">{t(levantou.label)}</span>}
         {/* a invocação virou bolinha própria ao lado (src/components/Invocacoes.tsx) */}
-        {copiou&&<span key={`c${copiou.id}`} className="discovery-pop copiou-pop">{copiou.label}</span>}
-        {explodiu&&<span key={`x${explodiu.id}`} className="discovery-pop explodiu-pop">Bum! A marca explodiu</span>}
+        {copiou&&<span key={`c${copiou.id}`} className="discovery-pop copiou-pop">{t(copiou.label)}</span>}
+        {explodiu&&<span key={`x${explodiu.id}`} className="discovery-pop explodiu-pop">{t('Bum! A marca explodiu')}</span>}
         {dormindo&&<span className="unit-zz" aria-hidden="true">z<b>z</b><i>z</i></span>}
-        {errou&&<span key={`e${errou.id}`} className={`discovery-pop ${errou.label==='Esquivou'?'esquivou-pop':'errou-pop'}`}>{errou.label==='Esquivou'?'Esquivou!':'Errou!'}</span>}
-        {anulou&&<span key={`a${anulou.id}`} className={`discovery-pop ${anulou.label==='Última resistência'?'resistiu-pop':'anulou-pop'}`}>{anulou.label==='Última resistência'?'Última resistência!':<>Barreira · anulou {anulou.status?statuses[anulou.status].name:'o debuff'}</>}</span>}
-        {limpo&&!levantou&&<span key={`l${limpo.id}`} className={`discovery-pop ${limpo.kind==='cleanse'?'purifica-pop':'dissipa-pop'}`}>{limpo.label}{(limpo.removidos?.length??0)>0&&<> · {limpo.removidos!.map(id=>statuses[id].name).join(', ')}</>}</span>}
+        {errou&&<span key={`e${errou.id}`} className={`discovery-pop ${errou.label==='Esquivou'?'esquivou-pop':'errou-pop'}`}>{errou.label==='Esquivou'?t('Esquivou!'):t('Errou!')}</span>}
+        {anulou&&<span key={`a${anulou.id}`} className={`discovery-pop ${anulou.label==='Última resistência'?'resistiu-pop':'anulou-pop'}`}>{anulou.label==='Última resistência'?t('Última resistência!'):<>{t('Barreira · anulou {status}',{status:anulou.status?t(statuses[anulou.status].name):t('o debuff')})}</>}</span>}
+        {limpo&&!levantou&&<span key={`l${limpo.id}`} className={`discovery-pop ${limpo.kind==='cleanse'?'purifica-pop':'dissipa-pop'}`}>{t(limpo.label)}{(limpo.removidos?.length??0)>0&&<> · {limpo.removidos!.map(id=>t(statuses[id].name)).join(', ')}</>}</span>}
         {/* rótulo vazio = combo de tempo em tempo: só o efeito aparece, sem selo com nome */}
         {seloVisivel&&!comNome&&<Selo key={`r${seloVisivel.chave}`} selo={seloVisivel}/>}
         {seloVisivel&&seloVisivel.tipo!=='mecanica'&&<span key={`fx${seloVisivel.chave}`} className={`aura-ativa aura-${seloVisivel.tipo}${seloVisivel.sumindo?' sumindo':''}`} aria-hidden="true"><i/><i/><i/><i/><i/><i/><i/><i/></span>}
@@ -255,24 +256,24 @@ export function ArenaUnit({fighter:f,battle,beat,onInspect,numbers,threatened,li
       </button>
       {aplicados.length>0&&<SeloDoStatus key={`ss${aplicados[0]!.id}`} eventos={aplicados}/>}
       {(out||advantageActive||critical||shield>0)&&<span className={`unit-flag ${out?'flag-out':advantageActive?'flag-advantage':critical?'flag-critical':'flag-shield'}`} aria-hidden="true">{renascendo?<EmblemaDoRenascer id={c.id} size={12}/>:out?<Skull size={12}/>:advantageActive?<AuxIcon id="domain" size={13}/>:critical?<HeartPulse size={12}/>:<Shield size={12}/>}</span>}
-      {ativando&&fase==='carga'&&<div key={`up${beat?.event.id??0}-${ativando.eventos[0]??0}`} className="unit-cast"><AuxIcon id="preparing" size={13}/><span>{nomeDaAtivacao(beat,ativando,c.id)}</span></div>}
-      {ativando&&!preparandoUnica&&<div key={`un${beat?.event.id??0}-${ativando.eventos[0]??0}`} className="unit-cast unit-skill-name unit-unica-name"><Sparkles size={14} strokeWidth={2.6}/><span>{nomeDaAtivacao(beat,ativando,c.id)}</span></div>}
+      {ativando&&fase==='carga'&&<div key={`up${beat?.event.id??0}-${ativando.eventos[0]??0}`} className="unit-cast"><AuxIcon id="preparing" size={13}/><span>{t(nomeDaAtivacao(beat,ativando,c.id)??'')}</span></div>}
+      {ativando&&!preparandoUnica&&<div key={`un${beat?.event.id??0}-${ativando.eventos[0]??0}`} className="unit-cast unit-skill-name unit-unica-name"><Sparkles size={14} strokeWidth={2.6}/><span>{t(nomeDaAtivacao(beat,ativando,c.id)??'')}</span></div>}
       {!ativando&&preparing&&<div className="unit-cast"><AuxIcon id="preparing" size={13}/><span>{f.cast?c.skills[f.cast.skill].name:beat?.event.label}</span></div>}
       {/* a habilidade saindo, com ou sem Preparo: o nome aparece enquanto o golpe acontece */}
-      {!ativando&&!preparing&&source&&beat?.event.kind==='skill'&&beat.event.skill!==undefined&&c.skills[beat.event.skill]&&<div key={beat.event.id} className="unit-cast unit-skill-name" style={{"--character":c.color} as React.CSSProperties}><SkillIcon type={c.skills[beat.event.skill].icon} size={15} characterId={c.id} skillId={c.skills[beat.event.skill].id}/><span>{c.skills[beat.event.skill].name}</span></div>}
-      {broken&&<div className="unit-interrupt"><AuxIcon id="interrupt" size={13}/>{broken.label.includes('atrasada')?'ATRASADO':'INTERROMPIDO'}</div>}
+      {!ativando&&!preparing&&source&&beat?.event.kind==='skill'&&beat.event.skill!==undefined&&c.skills[beat.event.skill]&&<div key={beat.event.id} className="unit-cast unit-skill-name" style={{"--character":c.color} as React.CSSProperties}><SkillIcon type={c.skills[beat.event.skill].icon} size={15} characterId={c.id} skillId={c.skills[beat.event.skill].id}/><span>{t(c.skills[beat.event.skill].name)}</span></div>}
+      {broken&&<div className="unit-interrupt"><AuxIcon id="interrupt" size={13}/>{broken.label.includes('atrasada')?t('ATRASADO'):t('INTERROMPIDO')}</div>}
       {tempo&&<span className="unit-tempo-reason">{tempo.label}</span>}
     </div>
-    <div className="unit-name"><button className="fighter-name" onClick={()=>onInspect({kind:'fighter',fighter:f})}>{c.name}</button></div>
+    <div className="unit-name"><button className="fighter-name" onClick={()=>onInspect({kind:'fighter',fighter:f})}>{nomeDe(c)}</button></div>
     <div className="unit-vitals">
-      <div className="unit-bar" role="progressbar" aria-label={`Vida de ${c.name}`} aria-valuenow={Math.round(f.hp)} aria-valuemax={Math.round(f.maxHp)} aria-valuemin={0}>
+      <div className="unit-bar" role="progressbar" aria-label={t('Vida de {nome}',{nome:nomeDe(c)})} aria-valuenow={Math.round(f.hp)} aria-valuemax={Math.round(f.maxHp)} aria-valuemin={0}>
         <span className="unit-bar-hp" style={{width:`${hpPct}%`}}/>
         {shieldPct>0&&<span className={`unit-bar-shield${shieldPorCima?' por-cima':''}`} style={{left:`${shieldLeft}%`,width:`${shieldPct}%`}}/>}
       </div>
-      <div className="unit-meta"><span>{renascendo?'RENASCENDO':out?'FORA DA LUTA':critical?'VIDA BAIXA':shield>0?<><Shield size={9}/>{Math.ceil(shield)}</>:'VIDA'}</span>{numbers&&!out&&<b>{Math.ceil(f.hp)}</b>}</div>
-      {knowledge&&<span className={`light-knowledge ${knowledge}`}>{knowledge==='vulnerable'?'Vulnerável à Death Note':'Imune à execução'}</span>}
+      <div className="unit-meta"><span>{renascendo?t('RENASCENDO'):out?t('FORA DA LUTA'):critical?t('VIDA BAIXA'):shield>0?<><Shield size={9}/>{Math.ceil(shield)}</>:t('VIDA')}</span>{numbers&&!out&&<b>{Math.ceil(f.hp)}</b>}</div>
+      {knowledge&&<span className={`light-knowledge ${knowledge}`}>{knowledge==='vulnerable'?t('Vulnerável à Death Note'):t('Imune à execução')}</span>}
     </div>
-    <div className="unit-skills" aria-label={`Habilidades de ${c.name}`}>{c.skills.map((s,i)=>{
+    <div className="unit-skills" aria-label={t('Habilidades de {nome}',{nome:nomeDe(c)})}>{c.skills.map((s,i)=>{
       const st=f.skills[i],casting=f.cast?.skill===i,focused=source&&beat?.event.skill===i;
       const ready=impacted&&beat?.events.some(e=>e.source===f.uid&&e.kind==='ready'&&e.skill===i);
       const assisted=impacted&&beat?.events.some(e=>revelado(beat,e)&&e.target===f.uid&&e.source!==f.uid&&e.kind==='charge'&&e.skill===i);
@@ -280,9 +281,9 @@ export function ArenaUnit({fighter:f,battle,beat,onInspect,numbers,threatened,li
       const fill=casting?100*(f.cast!.elapsed/f.cast!.duration):st.cooldown>0?100*(1-st.cooldown/Math.max(1,s.cooldown)):st.charge;
       // carregada, mas a regra de uso ainda não está cumprida: espera (ampulheta)
       const espera=mode==='ready'&&!focused&&s.condition!=='always'&&!condicaoAtendida(battle,f,s);
-      const label=espera?'pronta, esperando a regra de uso':{empty:'vazia',charging:'carregando',ready:'pronta',preparing:'preparando',executing:'executando',cooldown:'em recarga'}[mode];
+      const label=espera?t('pronta, esperando a regra de uso'):t({empty:'vazia',charging:'carregando',ready:'pronta',preparing:'preparando',executing:'executando',cooldown:'em recarga'}[mode]);
       return <div className={`ability-wrap ${assisted?'ability-assisted':''} ${ready?'just-ready':''}`} key={s.id}>
-        <button data-ability={`${f.uid}-${i}`} className={`ability ${mode} ${espera?'is-waiting':''}`} onClick={()=>onInspect({kind:'skill',fighter:f,index:i})} aria-label={`${s.name}: ${label}. Toque para explicar`} title={`${s.name} · ${label}`}>
+        <button data-ability={`${f.uid}-${i}`} className={`ability ${mode} ${espera?'is-waiting':''}`} onClick={()=>onInspect({kind:'skill',fighter:f,index:i})} aria-label={t('{habilidade}: {estado}. Toque para explicar',{habilidade:t(s.name),estado:label})} title={`${t(s.name)} · ${label}`}>
           <span className="ability-fill" style={{height:`${Math.max(0,Math.min(100,fill))}%`}}/>
           <SkillIcon type={s.icon} size={20} characterId={c.id} skillId={s.id}/>
           <svg className="ability-meter" viewBox="0 0 40 40" aria-hidden="true"><rect x="2" y="2" width="36" height="36" rx="10" pathLength="100" strokeDasharray={`${Math.max(0,Math.min(100,fill))} 100`}/></svg>
@@ -305,8 +306,8 @@ export function ArenaUnit({fighter:f,battle,beat,onInspect,numbers,threatened,li
  */
 function Selo({selo}:{selo:{rotulo:string;tipo:'unica'|'traco'|'mecanica';inicio:number;sumindo?:boolean}}){
   const [atraso]=useState(()=>Math.min(2.4,Math.max(0,(performance.now()-selo.inicio)/1000)));
-  return <span className={`reacao-pop selo-${selo.tipo}${selo.sumindo?' sumindo':''}`} style={atraso>.05?{animationDelay:`-${atraso.toFixed(2)}s`}:undefined} aria-label={`${selo.tipo==='unica'?'Mecânica única':selo.tipo==='traco'?'Traço':'Mecânica'}: ${selo.rotulo}`}>
-    <b>{selo.tipo==='unica'?<Sparkles size={11} strokeWidth={3}/>:selo.tipo==='traco'?<Flame size={11} strokeWidth={3}/>:<Zap size={11} strokeWidth={3}/>}{selo.rotulo}</b>
+  return <span className={`reacao-pop selo-${selo.tipo}${selo.sumindo?' sumindo':''}`} style={atraso>.05?{animationDelay:`-${atraso.toFixed(2)}s`}:undefined} aria-label={`${selo.tipo==='unica'?t('Mecânica única'):selo.tipo==='traco'?t('Traço'):t('Mecânica')}: ${t(selo.rotulo)}`}>
+    <b>{selo.tipo==='unica'?<Sparkles size={11} strokeWidth={3}/>:selo.tipo==='traco'?<Flame size={11} strokeWidth={3}/>:<Zap size={11} strokeWidth={3}/>}{t(selo.rotulo)}</b>
   </span>;
 }
 

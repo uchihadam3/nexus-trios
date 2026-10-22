@@ -1,5 +1,5 @@
 /*
- * Os textos do jogo sem tradução para o inglês: procura t('…'), t("…") e plural(n, '…', '…') no código e confere o
+ * Os textos do jogo sem tradução para o inglês: procura t('…'), tx('…') e plural(n, '…', '…') no código e confere o
  * dicionário (src/i18n/en.ts). Uso: npx tsx scripts/i18n-faltando.ts [--todos]   (com --todos, lista as chaves)
  * Também avisa traduções com {variáveis} diferentes das do português.
  */
@@ -11,7 +11,7 @@ const arquivos: string[] = [];
 const anda = (d: string) => { for (const n of readdirSync(d)) { const p = join(d, n); if (statSync(p).isDirectory()) anda(p); else if (/\.tsx?$/.test(n) && !p.includes('/i18n/')) arquivos.push(p); } };
 anda('src');
 const literal = String.raw`'((?:[^'\\]|\\.)*)'|"((?:[^"\\]|\\.)*)"|` + '`((?:[^`\\\\$]|\\\\.)*)`';
-const reT = new RegExp(String.raw`\bt\(\s*(?:${literal})`, 'g');
+const reT = new RegExp(String.raw`\btx?\(\s*(?:${literal})`, 'g');
 const rePlural = new RegExp(String.raw`\bplural\([^,]+,\s*(?:${literal})\s*,\s*(?:${literal})`, 'g');
 const desfaz = (s: string) => s.replace(/\\(['"`\\])/g, '$1').replace(/\\n/g, '\n');
 const chaves = new Map<string, string>();

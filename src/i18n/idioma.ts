@@ -51,7 +51,20 @@ export function t(pt: string, vars?: Readonly<Record<string, string | number>>):
   if (vars) s = s.replace(/\{(\w+)\}/g, (m, k: string) => (k in vars ? (typeof vars[k] === 'number' ? numero(vars[k] as number) : String(vars[k])) : m));
   return s;
 }
+/**
+ * Marca um texto que é traduzido depois, onde ele aparece (uma mensagem de erro que viaja numa variável até a tela,
+ * que faz t(mensagem)): devolve o próprio texto, e o scripts/i18n-faltando.ts o encontra para conferir a tradução.
+ */
+export const tx = (pt: string): string => pt;
+/** O nome do personagem no idioma do jogo (em inglês, o nome oficial: "nome:<id>" no dicionário). */
+export const nomeDe = (c: { id: string; name: string }): string => (IDIOMA === 'en' ? dicionario[`nome:${c.id}`] ?? c.name : c.name);
 /** Um número no formato do idioma (1.234 em português, 1,234 em inglês). */
 export const numero = (n: number, opcoes?: Intl.NumberFormatOptions) => n.toLocaleString(LOCALE, opcoes);
+/** A posição: 5º em português, 5th em inglês. */
+export const ordinal = (n: number): string => {
+  if (IDIOMA !== 'en') return `${numero(n)}º`;
+  const d = n % 100, u = n % 10;
+  return `${numero(n)}${d >= 11 && d <= 13 ? 'th' : u === 1 ? 'st' : u === 2 ? 'nd' : u === 3 ? 'rd' : 'th'}`;
+};
 /** Escolhe o texto pela quantidade: plural(n, 'combo', 'combos'). Os dois textos passam por t(). */
 export const plural = (n: number, um: string, varios: string) => t(n === 1 ? um : varios, { n });

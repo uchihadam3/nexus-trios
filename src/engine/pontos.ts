@@ -52,6 +52,7 @@ import { FATOR_DE_PONTOS } from '../data/pontos-por-personagem';
 import { PESO_DA_CURA } from '../data/peso-da-cura';
 import { ESTRELAS_DE_PONTOS, bonusDoTrio } from '../data/estrelas-de-pontos';
 import { byId } from '../data/characters';
+import { LOCALE } from '../i18n/idioma';
 
 export type ParcelaId = 'dano' | 'nocautes' | 'apoio' | 'jogadas' | 'efeitos' | 'viradas' | 'vida' | 'vitoria' | 'estrela' | 'ajuda' | 'colecao';
 export interface Parcela { id: ParcelaId; rotulo: string; valor: number }
@@ -176,4 +177,4 @@ export function pontosDaJornada(lutas: readonly { pontos?: number; won: boolean 
   return lutas.reduce((n, l) => n + Math.max(0, l.pontos ?? 0), 0);
 }
 
-export const formatarPontos = (n: number) => Math.round(n).toLocaleString('pt-BR');
+export const formatarPontos = (n: number) => Math.round(n).toLocaleString(LOCALE);

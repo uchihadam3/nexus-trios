@@ -4,6 +4,7 @@ import { VELOCIDADES, type Settings } from '../lib/storage';
 import { TelaTopo } from '../components/Casca';
 import { battleAudio } from '../lib/audio';
 import { TrocaDeIdioma } from '../components/TrocaDeIdioma';
+import { t } from '../i18n/idioma';
 
 /*
  * Ajustes (remake): um painel de jogo, sem parágrafo.
@@ -43,56 +44,56 @@ function Escolha<T extends string|number>({nome,icone,opcoes,valor,onChange,cor}
 function TestarSom({settings:s}:{settings:Settings}){
   const [aviso,setAviso]=useState('');
   const testar=async()=>{
-    setAviso('Tocando…');
+    setAviso(t('Tocando…'));
     await battleAudio.preview(['soco-pesado','bloqueio']);
     const estado=battleAudio.status.state;
-    setAviso(s.volume===0?'O Volume está no zero: arraste a barra para a direita.'
-      :estado!=='running'?'O navegador ainda não liberou o som. Toque no botão de novo.'
-      :s.effectsVolume===0?'Os Efeitos sonoros estão no zero.'
-      :'Som liberado. Se não ouviu nada, aumente o volume de mídia do celular (botão lateral) e tire o modo silencioso.');
+    setAviso(s.volume===0?t('O Volume está no zero: arraste a barra para a direita.')
+      :estado!=='running'?t('O navegador ainda não liberou o som. Toque no botão de novo.')
+      :s.effectsVolume===0?t('Os Efeitos sonoros estão no zero.')
+      :t('Som liberado. Se não ouviu nada, aumente o volume de mídia do celular (botão lateral) e tire o modo silencioso.'));
   };
-  return <div className="aj-testar"><button type="button" onClick={()=>void testar()}><Volume1 size={18}/>Testar som</button>{aviso&&<p role="status">{aviso}</p>}</div>;
+  return <div className="aj-testar"><button type="button" onClick={()=>void testar()}><Volume1 size={18}/>{t('Testar som')}</button>{aviso&&<p role="status">{aviso}</p>}</div>;
 }
 
 export function SettingsScreen({settings:s,onChange,onReset,onGaleria}:{settings:Settings;onChange:(s:Settings)=>void;onReset:()=>void;onGaleria:()=>void}){
   const [confirm,setConfirm]=useState(false),[revisto,setRevisto]=useState(false);
   const muda=<K extends keyof Settings>(k:K,v:Settings[K])=>onChange({...s,[k]:v});
   return <section className="ajustes-v2">
-    <TelaTopo icone={<Settings2/>} cor="#c3a2ff" rotulo="AJUSTES" titulo="Do seu jeito"><p>Fica salvo neste aparelho.</p></TelaTopo>
+    <TelaTopo icone={<Settings2/>} cor="#c3a2ff" rotulo={t('AJUSTES')} titulo={t('Do seu jeito')}><p>{t('Fica salvo neste aparelho.')}</p></TelaTopo>
     <TrocaDeIdioma/>
 
     <div className="aj-painel">
-      <h2><Volume2 size={16}/>SOM</h2>
-      <Barra icone={<Volume2 size={18}/>} nome="Volume" valor={s.volume} onChange={v=>muda('volume',v)} cor="#c8f560"/>
-      <Barra icone={<Music2 size={18}/>} nome="Música de batalha" valor={s.musicVolume} onChange={v=>muda('musicVolume',v)} cor="#8fd3ff"/>
-      <Barra icone={<Zap size={18}/>} nome="Efeitos sonoros" valor={s.effectsVolume} onChange={v=>muda('effectsVolume',v)} cor="#ffb86b"/>
+      <h2><Volume2 size={16}/>{t('SOM')}</h2>
+      <Barra icone={<Volume2 size={18}/>} nome={t('Volume')} valor={s.volume} onChange={v=>muda('volume',v)} cor="#c8f560"/>
+      <Barra icone={<Music2 size={18}/>} nome={t('Música de batalha')} valor={s.musicVolume} onChange={v=>muda('musicVolume',v)} cor="#8fd3ff"/>
+      <Barra icone={<Zap size={18}/>} nome={t('Efeitos sonoros')} valor={s.effectsVolume} onChange={v=>muda('effectsVolume',v)} cor="#ffb86b"/>
       <TestarSom settings={s}/>
     </div>
 
     <div className="aj-painel">
-      <h2><Sparkles size={16}/>VISUAL</h2>
+      <h2><Sparkles size={16}/>{t('VISUAL')}</h2>
       <div className="aj-chaves">
-        <Chave icone={<Sparkles size={22}/>} nome="Efeitos visuais" dica="raios e explosões" ligado={s.effects} onChange={v=>muda('effects',v)} cor="#ffd36b"/>
-        <Chave icone={<Hash size={22}/>} nome="Números de combate" dica="dano e cura na tela" ligado={s.numbers} onChange={v=>muda('numbers',v)} cor="#ff8a7a"/>
-        <Chave icone={<Wind size={22}/>} nome="Reduzir movimento" dica="menos tremor" ligado={s.reducedMotion} onChange={v=>muda('reducedMotion',v)} cor="#8fd3ff"/>
+        <Chave icone={<Sparkles size={22}/>} nome={t('Efeitos visuais')} dica={t('raios e explosões')} ligado={s.effects} onChange={v=>muda('effects',v)} cor="#ffd36b"/>
+        <Chave icone={<Hash size={22}/>} nome={t('Números de combate')} dica={t('dano e cura na tela')} ligado={s.numbers} onChange={v=>muda('numbers',v)} cor="#ff8a7a"/>
+        <Chave icone={<Wind size={22}/>} nome={t('Reduzir movimento')} dica={t('menos tremor')} ligado={s.reducedMotion} onChange={v=>muda('reducedMotion',v)} cor="#8fd3ff"/>
       </div>
     </div>
 
     <div className="aj-painel">
-      <h2><Gauge size={16}/>JOGO</h2>
-      <Escolha nome="Velocidade padrão" icone={<Gauge size={16}/>} opcoes={VELOCIDADES.map((v)=>[v,`${v}×`] as const)} valor={s.speed} onChange={v=>muda('speed',v)} cor="#c8f560"/>
-      <Escolha nome="Ajuda na batalha" icone={<CircleHelp size={16}/>} opcoes={[['normal','Normal'],['detailed','Detalhada'],['off','Desligada']] as const} valor={s.explanations} onChange={v=>muda('explanations',v)} cor="#8fd3ff"/>
-      <div className="aj-chaves um"><Chave icone={<Repeat size={22}/>} nome="Sequência automática" dica="a próxima luta começa sozinha após vencer" ligado={s.auto} onChange={v=>muda('auto',v)} cor="#86e3a8"/></div>
+      <h2><Gauge size={16}/>{t('JOGO')}</h2>
+      <Escolha nome={t('Velocidade padrão')} icone={<Gauge size={16}/>} opcoes={VELOCIDADES.map((v)=>[v,`${v}×`] as const)} valor={s.speed} onChange={v=>muda('speed',v)} cor="#c8f560"/>
+      <Escolha nome={t('Ajuda na batalha')} icone={<CircleHelp size={16}/>} opcoes={[['normal',t('Normal')],['detailed',t('Detalhada')],['off',t('Desligada')]] as const} valor={s.explanations} onChange={v=>muda('explanations',v)} cor="#8fd3ff"/>
+      <div className="aj-chaves um"><Chave icone={<Repeat size={22}/>} nome={t('Sequência automática')} dica={t('a próxima luta começa sozinha após vencer')} ligado={s.auto} onChange={v=>muda('auto',v)} cor="#86e3a8"/></div>
     </div>
 
     <div className="aj-atalhos">
-      <button onClick={()=>{try{localStorage.removeItem('nexus-battle-guide-v1');setRevisto(true);}catch{return}}} style={{'--tile':'#8fd3ff'} as CSSProperties}>{revisto?<Check size={22}/>:<Eye size={22}/>}<b>{revisto?'Guia volta na próxima luta':'Rever tutorial'}</b></button>
-      <button onClick={onGaleria} style={{'--tile':'#ffd36b'} as CSSProperties}><Clapperboard size={22}/><b>Galeria de efeitos</b></button>
-      <button className="aj-perigo" onClick={()=>setConfirm(true)} style={{'--tile':'#ff7a6b'} as CSSProperties}><RotateCcw size={22}/><b>Resetar dados</b></button>
+      <button onClick={()=>{try{localStorage.removeItem('nexus-battle-guide-v1');setRevisto(true);}catch{return}}} style={{'--tile':'#8fd3ff'} as CSSProperties}>{revisto?<Check size={22}/>:<Eye size={22}/>}<b>{revisto?t('Guia volta na próxima luta'):t('Rever tutorial')}</b></button>
+      <button onClick={onGaleria} style={{'--tile':'#ffd36b'} as CSSProperties}><Clapperboard size={22}/><b>{t('Galeria de efeitos')}</b></button>
+      <button className="aj-perigo" onClick={()=>setConfirm(true)} style={{'--tile':'#ff7a6b'} as CSSProperties}><RotateCcw size={22}/><b>{t('Resetar dados')}</b></button>
     </div>
-    {confirm&&<div className="aj-confirma" role="alertdialog" aria-label="Apagar dados locais?">
-      <p><b>Apagar tudo deste aparelho?</b> Jornada, recorde e ajustes somem.</p>
-      <div><button className="danger" onClick={onReset}>Apagar dados locais</button><button className="secondary" onClick={()=>setConfirm(false)}>Cancelar</button></div>
+    {confirm&&<div className="aj-confirma" role="alertdialog" aria-label={t('Apagar dados locais?')}>
+      <p><b>{t('Apagar tudo deste aparelho?')}</b> {t('Jornada, recorde e ajustes somem.')}</p>
+      <div><button className="danger" onClick={onReset}>{t('Apagar dados locais')}</button><button className="secondary" onClick={()=>setConfirm(false)}>{t('Cancelar')}</button></div>
     </div>}
   </section>;
 }

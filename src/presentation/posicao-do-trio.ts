@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { notaDoTrio } from './dicas-do-trio';
+import { ordinal } from '../i18n/idioma';
 
 /*
  * A posição exata do time entre todos os trios possíveis (pedido do dono: "se o time está na posição 99,999… ou mesmo
@@ -57,8 +58,8 @@ export function usePosicaoDoTrio(team: readonly string[]): { posicao: number; to
   return dados && team.length === 3 ? { posicao: posicaoDoTime(team, dados.ranking, dados.topo), total: dados.ranking.total } : null;
 }
 
-/** "1.234º" (pedido do dono: "não precisa colocar de 10 milhões, só a posição") */
-export const textoDaPosicao = (posicao: number) => `${posicao.toLocaleString('pt-BR')}º`;
+/** "1.234º" (pedido do dono: "não precisa colocar de 10 milhões, só a posição"); em inglês, "1,234th" */
+export const textoDaPosicao = (posicao: number) => ordinal(posicao);
 
 /*
  * As estrelas douradas (pedido do dono): as 7 estrelas de prata medem a força do trio entre todos; quem está no 1% do topo

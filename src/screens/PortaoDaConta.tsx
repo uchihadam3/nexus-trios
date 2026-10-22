@@ -18,6 +18,7 @@ import { validarHandle } from '../lib/auth';
 import type { Profile } from '../lib/storage';
 import { AccountScreen } from './AccountScreen';
 import { TrocaDeIdioma } from '../components/TrocaDeIdioma';
+import { t } from '../i18n/idioma';
 
 export type EtapaDoPortao = 'carregando' | 'entrar' | 'nome' | 'erro';
 
@@ -38,23 +39,23 @@ export function PortaoDaConta({ etapa, autenticacao, conta, profile, conectado, 
   return <main className="portao">
     <header className="portao-marca"><b>NEXUS</b><span>TRIOS</span></header>
     <TrocaDeIdioma compacta/>
-    {etapa === 'carregando' && <section className="portao-cartao" aria-busy="true"><span className="portao-giro" aria-hidden /><p>Conectando à sua conta…</p></section>}
+    {etapa === 'carregando' && <section className="portao-cartao" aria-busy="true"><span className="portao-giro" aria-hidden /><p>{t('Conectando à sua conta…')}</p></section>}
     {etapa === 'erro' && <section className="portao-cartao" role="alert">
-      <WifiOff size={28} /><h2>Sem conexão com o servidor</h2>
-      <p>{erro || 'Não deu para confirmar a sua conta.'} O jogo precisa da conta para cada jornada valer no ranking.</p>
-      <button className="primary" onClick={onTentar}><RotateCcw size={16} /> Tentar de novo</button>
-      <button className="secondary" onClick={() => void autenticacao.sair()}><LogOut size={16} /> Sair da conta</button>
+      <WifiOff size={28} /><h2>{t('Sem conexão com o servidor')}</h2>
+      <p>{erro ? t(erro) : t('Não deu para confirmar a sua conta.')} {t('O jogo precisa da conta para cada jornada valer no ranking.')}</p>
+      <button className="primary" onClick={onTentar}><RotateCcw size={16} /> {t('Tentar de novo')}</button>
+      <button className="secondary" onClick={() => void autenticacao.sair()}><LogOut size={16} /> {t('Sair da conta')}</button>
     </section>}
     {etapa === 'entrar' && <AccountScreen autenticacao={autenticacao} conta={conta} profile={profile} conectado={conectado} google={google} aoMudarPerfil={aoMudarPerfil} obrigatorio />}
     {etapa === 'nome' && <section className="portao-cartao">
-      <BadgeCheck size={30} /><h2>Seu nome no ranking</h2>
-      <p>Falta só o nome público: é ele que aparece no ranking, junto do seu trio e dos seus pontos. O e-mail nunca aparece.</p>
-      <label className="portao-campo"><span>Nome público</span>
-        <input value={handle} maxLength={16} disabled={ocupado} autoFocus onChange={(e) => setHandle(e.target.value)} placeholder="De 3 a 16 letras" />
-        {problema && <small className="campo-erro">{problema}</small>}</label>
-      <button className="primary" disabled={ocupado || !handle || problema !== null} onClick={() => void confirmar()}>Confirmar e jogar</button>
-      {aviso && <p className="account-aviso erro" role="alert">{aviso}</p>}
-      <button className="text-button" onClick={() => void autenticacao.sair()}><LogOut size={14} /> Entrar com outra conta</button>
+      <BadgeCheck size={30} /><h2>{t('Seu nome no ranking')}</h2>
+      <p>{t('Falta só o nome público: é ele que aparece no ranking, junto do seu trio e dos seus pontos. O e-mail nunca aparece.')}</p>
+      <label className="portao-campo"><span>{t('Nome público')}</span>
+        <input value={handle} maxLength={16} disabled={ocupado} autoFocus onChange={(e) => setHandle(e.target.value)} placeholder={t('De 3 a 16 letras')} />
+        {problema && <small className="campo-erro">{t(problema)}</small>}</label>
+      <button className="primary" disabled={ocupado || !handle || problema !== null} onClick={() => void confirmar()}>{t('Confirmar e jogar')}</button>
+      {aviso && <p className="account-aviso erro" role="alert">{t(aviso)}</p>}
+      <button className="text-button" onClick={() => void autenticacao.sair()}><LogOut size={14} /> {t('Entrar com outra conta')}</button>
     </section>}
   </main>;
 }

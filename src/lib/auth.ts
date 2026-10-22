@@ -19,6 +19,7 @@
  * um Supabase de verdade.
  */
 import type { AuthChangeEvent, Session, SupabaseClient } from '@supabase/supabase-js';
+import { tx } from '../i18n/idioma';
 
 /** O que as telas podem saber sobre quem está logado. */
 export interface Conta {
@@ -44,15 +45,15 @@ export interface ResultadoDaConta { ok: boolean; erro?: string; precisaConfirmar
 export const HANDLE_VALIDO = /^[A-Za-z0-9_ ]{3,16}$/;
 export const validarHandle = (handle: string): string | null => {
   const limpo = handle.trim();
-  if (limpo !== handle) return 'O nome não pode começar nem terminar com espaço.';
-  if (limpo.length < 3) return 'O nome precisa de pelo menos 3 caracteres.';
-  if (limpo.length > 16) return 'O nome pode ter no máximo 16 caracteres.';
-  if (!HANDLE_VALIDO.test(limpo)) return 'Use apenas letras, números, espaço e _ no nome.';
+  if (limpo !== handle) return tx('O nome não pode começar nem terminar com espaço.');
+  if (limpo.length < 3) return tx('O nome precisa de pelo menos 3 caracteres.');
+  if (limpo.length > 16) return tx('O nome pode ter no máximo 16 caracteres.');
+  if (!HANDLE_VALIDO.test(limpo)) return tx('Use apenas letras, números, espaço e _ no nome.');
   return null;
 };
 
 export const validarEmail = (email: string): string | null =>
-  /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email.trim()) ? null : 'E-mail inválido.';
+  /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email.trim()) ? null : tx('E-mail inválido.');
 
 /*
  * Oito caracteres é o mínimo do Supabase. Pedir mais aqui só empurraria o
@@ -60,7 +61,7 @@ export const validarEmail = (email: string): string | null =>
  * recusa senhas vazadas quando essa checagem está ligada no painel.
  */
 export const validarSenha = (senha: string): string | null =>
-  senha.length >= 8 ? null : 'A senha precisa de pelo menos 8 caracteres.';
+  senha.length >= 8 ? null : tx('A senha precisa de pelo menos 8 caracteres.');
 
 /* ---------------------------------------------------------------------------
  * Para onde o Google devolve o jogador
@@ -101,13 +102,13 @@ const contaDaSessao = (sessao: Session | null): Conta | null => {
 /** Mensagens do Supabase vêm em inglês; as que o jogador vê, não. */
 const traduzir = (mensagem: string): string => {
   const m = mensagem.toLowerCase();
-  if (m.includes('invalid login credentials')) return 'E-mail ou senha incorretos.';
-  if (m.includes('email not confirmed')) return 'Confirme o e-mail antes de entrar.';
-  if (m.includes('user already registered')) return 'Já existe uma conta com esse e-mail.';
-  if (m.includes('password should be')) return 'A senha precisa de pelo menos 8 caracteres.';
-  if (m.includes('rate limit') || m.includes('too many')) return 'Muitas tentativas. Espere um minuto e tente de novo.';
-  if (m.includes('provider is not enabled')) return 'O login com Google ainda não foi ligado neste projeto.';
-  if (m.includes('network') || m.includes('fetch')) return 'Sem conexão com o servidor.';
+  if (m.includes('invalid login credentials')) return tx('E-mail ou senha incorretos.');
+  if (m.includes('email not confirmed')) return tx('Confirme o e-mail antes de entrar.');
+  if (m.includes('user already registered')) return tx('Já existe uma conta com esse e-mail.');
+  if (m.includes('password should be')) return tx('A senha precisa de pelo menos 8 caracteres.');
+  if (m.includes('rate limit') || m.includes('too many')) return tx('Muitas tentativas. Espere um minuto e tente de novo.');
+  if (m.includes('provider is not enabled')) return tx('O login com Google ainda não foi ligado neste projeto.');
+  if (m.includes('network') || m.includes('fetch')) return tx('Sem conexão com o servidor.');
   return mensagem;
 };
 
@@ -128,7 +129,7 @@ export interface Autenticacao {
 
 export function criarAutenticacao(client: SupabaseClient | null): Autenticacao {
   const semServidor = async (): Promise<ResultadoDaConta> =>
-    ({ ok: false, erro: 'A conta online ainda não foi conectada neste build.' });
+    ({ ok: false, erro: tx('A conta online ainda não foi conectada neste build.') });
 
   if (!client) {
     return {
@@ -144,7 +145,7 @@ export function criarAutenticacao(client: SupabaseClient | null): Autenticacao {
       const { error } = await acao();
       return error ? { ok: false, erro: traduzir(error.message) } : { ok: true };
     } catch (e) {
-      return { ok: false, erro: traduzir(e instanceof Error ? e.message : 'Falha inesperada.') };
+      return { ok: false, erro: traduzir(e instanceof Error ? e.message : tx('Falha inesperada.')) };
     }
   };
 
@@ -172,7 +173,7 @@ export function criarAutenticacao(client: SupabaseClient | null): Autenticacao {
         /* Sem sessão depois do cadastro quer dizer que o projeto exige confirmação. */
         return { ok: true, precisaConfirmarEmail: !data.session };
       } catch (e) {
-        return { ok: false, erro: traduzir(e instanceof Error ? e.message : 'Falha inesperada.') };
+        return { ok: false, erro: traduzir(e instanceof Error ? e.message : tx('Falha inesperada.')) };
       }
     },
 
