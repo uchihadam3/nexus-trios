@@ -4,6 +4,7 @@ import { BatteryCharging,Bomb,Castle,Sparkle,Eraser,Copy,PawPrint,Flame,CircleAr
 import { byId } from '../data/characters';
 import { Portrait } from './Portrait';
 import { exemplosDe,explicacaoDaIdentidade,familiaDaIdentidade,guiaDaIdentidade,quantosTem,type Identidade } from '../presentation/identities';
+import { nomeDe, t } from '../i18n/idioma';
 
 /*
  * As etiquetas de identidade (Pressão, Área, Controle…) são botões: tocar numa
@@ -30,22 +31,22 @@ function CartaoDaIdentidade({inicial,trio,onClose}:{inicial:Identidade;trio?:rea
   const guia=guiaDaIdentidade[x],familia=FAMILIA_DA_IDENTIDADE[familiaDaIdentidade[x]],Icone=ICONE_DA_IDENTIDADE[x];
   const total=quantosTem(x),exemplos=exemplosDe(x).map(id=>byId[id]).filter(Boolean);
   const temNoTrio=trio?.includes(x);
-  return <dialog ref={ref} className="id-card-dialog" aria-label={`O que é ${x}`} onCancel={e=>{e.preventDefault();e.stopPropagation();onClose();}} onClick={e=>{e.stopPropagation();if(e.target===e.currentTarget)onClose();}}>
+  return <dialog ref={ref} className="id-card-dialog" aria-label={t('O que é {x}',{x:t(x)})} onCancel={e=>{e.preventDefault();e.stopPropagation();onClose();}} onClick={e=>{e.stopPropagation();if(e.target===e.currentTarget)onClose();}}>
     <div key={x} className="id-card" style={{'--id-cor':familia.cor} as CSSProperties}>
-      <button className="icon-button id-card-close" aria-label="Fechar" onClick={onClose}><X size={18}/></button>
+      <button className="icon-button id-card-close" aria-label={t('Fechar')} onClick={onClose}><X size={18}/></button>
       <div className="id-card-top">
         <span className="id-card-medal" aria-hidden><Icone size={30} strokeWidth={2.2}/></span>
-        <div><span className="id-card-family">{familia.nome}</span><h2>{x}</h2></div>
+        <div><span className="id-card-family">{t(familia.nome)}</span><h2>{t(x)}</h2></div>
       </div>
       <p className="id-card-lead">{explicacaoDaIdentidade[x]}</p>
-      {trio&&<p className={`id-card-trio ${temNoTrio?'tem':''}`}>{temNoTrio?'✓ Seu trio já tem':'Seu trio ainda não tem'}</p>}
-      <h3>Na luta</h3>
+      {trio&&<p className={`id-card-trio ${temNoTrio?'tem':''}`}>{temNoTrio?t('✓ Seu trio já tem'):t('Seu trio ainda não tem')}</p>}
+      <h3>{t('Na luta')}</h3>
       <ol className="id-card-steps">{guia.naLuta.map((t,i)=><li key={i}><span>{i+1}</span>{t}</li>)}</ol>
-      <h3>Combina com</h3>
+      <h3>{t('Combina com')}</h3>
       <div className="id-card-combos">{guia.combina.map(c=>{const I=ICONE_DA_IDENTIDADE[c];return <button key={c} style={{'--id-cor':corDaIdentidade(c)} as CSSProperties} onClick={()=>setX(c)}><I size={14}/>{c}</button>;})}</div>
-      <p className="id-card-warn"><TriangleAlert size={16}/><span><b>Cuidado com</b>{guia.cuidado}</span></p>
-      <div className="id-card-who"><small>{total} {total===1?'lutador tem':'lutadores têm'}</small><div>{exemplos.map(c=><span key={c.id} style={{'--character':c.color} as CSSProperties}><Portrait character={c} className="tiny"/><em>{c.name}</em></span>)}</div></div>
-      <button className="primary id-card-ok" onClick={onClose}>Entendi</button>
+      <p className="id-card-warn"><TriangleAlert size={16}/><span><b>{t('Cuidado com')}</b>{t(guia.cuidado)}</span></p>
+      <div className="id-card-who"><small>{t(total===1?'{n} lutador tem':'{n} lutadores têm',{n:total})}</small><div>{exemplos.map(c=><span key={c.id} style={{'--character':c.color} as CSSProperties}><Portrait character={c} className="tiny"/><em>{nomeDe(c)}</em></span>)}</div></div>
+      <button className="primary id-card-ok" onClick={onClose}>{t('Entendi')}</button>
     </div>
   </dialog>;
 }
@@ -55,7 +56,7 @@ function CartaoDaIdentidade({inicial,trio,onClose}:{inicial:Identidade;trio?:rea
 export function IdentityChips({ids,trio,marca,novas}:{ids:readonly Identidade[];trio?:readonly Identidade[];marca?:string;novas?:readonly Identidade[]}){
   const [aberta,setAberta]=useState<Identidade|null>(null);
   return <div className="role-chips id-chips">
-    {ids.map(x=><button type="button" key={x} className={`id-chip ${novas?.includes(x)?'novo':''}`} style={{'--id-cor':corDaIdentidade(x)} as CSSProperties} aria-label={`${x}: o que é?`}
+    {ids.map(x=><button type="button" key={x} className={`id-chip ${novas?.includes(x)?'novo':''}`} style={{'--id-cor':corDaIdentidade(x)} as CSSProperties} aria-label={t('{x}: o que é?',{x:t(x)})}
       onClick={e=>{e.stopPropagation();setAberta(x);}}>{marca}{x}<i aria-hidden>?</i></button>)}
     {aberta&&createPortal(<CartaoDaIdentidade inicial={aberta} trio={trio} onClose={()=>setAberta(null)}/>,document.body)}
   </div>;

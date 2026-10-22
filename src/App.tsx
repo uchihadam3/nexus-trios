@@ -47,6 +47,7 @@ import {useComunidade} from './lib/useComunidade';
 import {criarPvpOnline,textoDoErroPvp} from './lib/pvp-online';
 import {ConviteDoPvp} from './components/ConviteDoPvp';
 import {Avatar} from './components/AvatarDaComunidade';
+import { t, tx } from './i18n/idioma';
 const PvpScreen=lazy(()=>import('./screens/PvpScreen').then(m=>({default:m.PvpScreen})));
 const ComunidadeScreen=lazy(()=>import('./screens/ComunidadeScreen').then(m=>({default:m.ComunidadeScreen})));
 /* A prévia da Comunidade sem servidor (VITE_COMUNIDADE_DEMO=true): só para testar a tela; nunca no jogo publicado. */
@@ -106,7 +107,7 @@ export default function App(){
   const saveHandle=async()=>{
     setOnlineBusy(true);
     try{const response=await onlineCall<{profile:{handle:string}}> ('profile',{handle:draftHandle});setProfile(p=>{const n={...p,publicHandle:response.profile.handle};save('profile',n);return n;});setNameDialog(false);if(pendingStart){setPendingStart(false);abreJornada();}else tentarDeNovo();}
-    catch(error){setOnlineNotice(error instanceof Error?error.message:'Não foi possível salvar o nome.');}
+    catch(error){setOnlineNotice(error instanceof Error?error.message:tx('Não foi possível salvar o nome.'));}
     finally{setOnlineBusy(false);}
   };
   const startNew=async()=>{
@@ -175,7 +176,7 @@ export default function App(){
    * com a versão dele e é esse resultado que entra no ranking.
    */
   const abrirNoRanking=async(team:string[],colecao=false)=>{
-    const pede=()=>Promise.race([onlineCall<{run:{id:string;seed:number;engine_version?:string;roster_fingerprint?:string}}>('start',{mode:'free',team,...(colecao?{colecao:true}:{})}),new Promise<never>((_,falha)=>setTimeout(()=>falha(new Error('O servidor demorou para responder.')),20000))]);
+    const pede=()=>Promise.race([onlineCall<{run:{id:string;seed:number;engine_version?:string;roster_fingerprint?:string}}>('start',{mode:'free',team,...(colecao?{colecao:true}:{})}),new Promise<never>((_,falha)=>setTimeout(()=>falha(new Error(tx('O servidor demorou para responder.'))),20000))]);
     let result;
     try{result=await pede();}
     catch(error){
@@ -187,8 +188,8 @@ export default function App(){
   };
   const avisaForaDoRanking=(error:unknown)=>{
     const msg=error instanceof Error?error.message:'';
-    if(/nome p[uú]blico/i.test(msg)){setAcaoDoAviso('nome');setOnlineNotice('Falta escolher o seu nome público: sem ele, as jornadas não entram no ranking.');}
-    else{setAcaoDoAviso('tentar');setOnlineNotice(`Não deu para registrar esta jornada no ranking agora${msg?` (${msg})`:''}. Se começar assim, ela fica fora do ranking.`);}
+    if(/nome p[uú]blico/i.test(msg)){setAcaoDoAviso('nome');setOnlineNotice(tx('Falta escolher o seu nome público: sem ele, as jornadas não entram no ranking.'));}
+    else{setAcaoDoAviso('tentar');setOnlineNotice(`${t('Não deu para registrar esta jornada no ranking agora')}${msg?` (${t(msg)})`:''}. ${t('Se começar assim, ela fica fora do ranking.')}`);}
   };
   const preparando=useRef<Run['draft']|null>(null);
   const preparaRivais=async(r:Run)=>{
@@ -233,7 +234,7 @@ export default function App(){
       if(runRef.current!==current)return;
     }
     const encounter=rivalDaLuta(seed,team,encounters,index,current.summaries??[]);
-    if(index===0&&ranked&&ranked.mode!=='free'){setOnlineBusy(true);try{const result=await onlineCall<{run:{id:string;seed:number}}> ('start',{mode:ranked.mode,team});if(result.run.seed!==current.seed)throw new Error('O desafio mudou; inicie outra Jornada Ranqueada.');ranked={...ranked,id:result.run.id,status:'playing'};}catch(error){setOnlineNotice(error instanceof Error?error.message:'Jornada Ranqueada indisponível.');return;}finally{setOnlineBusy(false);}}
+    if(index===0&&ranked&&ranked.mode!=='free'){setOnlineBusy(true);try{const result=await onlineCall<{run:{id:string;seed:number}}> ('start',{mode:ranked.mode,team});if(result.run.seed!==current.seed)throw new Error(tx('O desafio mudou; inicie outra Jornada Ranqueada.'));ranked={...ranked,id:result.run.id,status:'playing'};}catch(error){setOnlineNotice(error instanceof Error?error.message:tx('Jornada Ranqueada indisponível.'));return;}finally{setOnlineBusy(false);}}
     const next={...current,seed,team,encounters,index,stage:'battle' as const,recorded:false,presentation:undefined,battleSynergies:[],raioX:raioXVazio(),telemetry:emptyTally(),ranked,battle:createBattle(team,encounter.team,seedDaLuta(seed,index),encounter.scale)};
     direction.current=null;setPresentation(null);changeRun(next);setPaused(false);navigate('game');
     if(index===0)setProfile(p=>{const n={...p,journeys:p.journeys+1};save('profile',n);return n;});
@@ -352,7 +353,7 @@ export default function App(){
     void (async()=>{
       try{const digest=await runDigest(id,run.team,run.seed,(run.summaries??[]).map(s=>s.won));const result=await onlineCall<{score:number;daily:number|null;weekly:number|null;season:number|null;top3?:{periodo?:ResultadoTop3;temporada?:ResultadoTop3}}>('submit',{runId:id,digest,dicas:run.dicas===true,vencidas:normaisVencidas(run.summaries??[]),pontos:(run.summaries??[]).reduce((n,s)=>n+s.score,0)});
         const latest=runRef.current;if(latest?.ranked?.id===id)changeRun({...latest,ranked:{...latest.ranked,status:'verified',score:result.score,daily:result.daily,weekly:result.weekly,season:result.season,top3:result.top3,error:undefined}});
-      }catch(error){const msg=error instanceof Error?error.message:'Falha na validação.';
+      }catch(error){const msg=error instanceof Error?error.message:tx('Falha na validação.');
         // falhou por rede ou servidor: fica guardada e é reenviada sozinha ao abrir o jogo (src/lib/envios-pendentes.ts)
         if(!recusaDefinitiva(msg))void runDigest(id,run.team,run.seed,(run.summaries??[]).map(s=>s.won)).then(digest=>guardarEnvio({runId:id,digest,dicas:run.dicas===true,em:new Date().toISOString(),vencidas:normaisVencidas(run.summaries??[]),pontos:(run.summaries??[]).reduce((n,s)=>n+s.score,0)}));
         const latest=runRef.current;if(latest?.ranked?.id===id)changeRun({...latest,ranked:{...latest.ranked,status:'failed',error:msg}});}
@@ -412,15 +413,15 @@ export default function App(){
       if(!handle&&c.handle&&!validarHandle(c.handle)){try{handle=(await onlineCall<{profile:{handle:string}}>('profile',{handle:c.handle})).profile.handle;}catch{/* o nome já tem dono: escolhe outro na porta */}}
       if(handle){const h=handle;setProfile(p=>{const n={...p,publicHandle:h};save('profile',n);return n;});}
       setNomeDaConta({id:c.id,handle});
-    }catch(error){setErroDaConta(error instanceof Error?error.message:'Sem conexão com o servidor.');}
+    }catch(error){setErroDaConta(error instanceof Error?error.message:tx('Sem conexão com o servidor.'));}
   };
   useEffect(()=>{if(onlineConfigured&&logado&&conta&&nomeDaConta?.id!==conta.id)void buscaNome(conta);},[logado,conta?.id]);
   /* jornadas terminadas que não chegaram ao servidor: reenviadas ao abrir o jogo com a conta (src/lib/envios-pendentes.ts) */
   useEffect(()=>{if(onlineConfigured&&logado&&conta)void reenviarPendentes(e=>onlineCall('submit',{runId:e.runId,digest:e.digest,dicas:e.dicas,vencidas:e.vencidas,desistiu:e.desistiu,lutas:e.lutas,pontos:e.pontos}));},[logado,conta?.id]);
   const escolheNome=async(handle:string):Promise<string|null>=>{
-    if(!conta)return 'Entre na conta primeiro.';
+    if(!conta)return tx('Entre na conta primeiro.');
     try{const r=await onlineCall<{profile:{handle:string}}>('profile',{handle});setProfile(p=>{const n={...p,publicHandle:r.profile.handle};save('profile',n);return n;});setNomeDaConta({id:conta.id,handle:r.profile.handle});return null;}
-    catch(error){return error instanceof Error?error.message:'Não foi possível salvar o nome.';}
+    catch(error){return error instanceof Error?error.message:tx('Não foi possível salvar o nome.');}
   };
   /* O botão das Dicas de trio: a conta do dono sempre; os outros depois de META_DAS_DICAS numa jornada (src/lib/dicas-liberadas.ts) */
   const [dono,setDono]=useState(false);
@@ -442,7 +443,7 @@ export default function App(){
   const servicoPvp=useMemo(()=>onlineConfigured?criarPvpOnline(onlineCall,carregarCliente):null,[]);
   const [partidaPvp,setPartidaPvp]=useState<string|null>(null);
   const pvpOnline=useMemo(()=>comunidadeLigada&&servicoPvp&&!COMUNIDADE_DEMO?{servico:servicoPvp,partida:partidaPvp,onPartida:setPartidaPvp,onComunidade:()=>{setAbrirConversa(null);navigate('comunidade');}}:null,[comunidadeLigada,servicoPvp,partidaPvp]);
-  const desafiar=async(id:string)=>{if(!servicoPvp)return 'O PvP online precisa de conexão.';try{const r=await servicoPvp.desafiar(id);if(r.partida){setPartidaPvp(r.partida.id);navigate('pvp');}return null;}catch(e){return textoDoErroPvp(e);}};
+  const desafiar=async(id:string)=>{if(!servicoPvp)return tx('O PvP online precisa de conexão.');try{const r=await servicoPvp.desafiar(id);if(r.partida){setPartidaPvp(r.partida.id);navigate('pvp');}return null;}catch(e){return textoDoErroPvp(e);}};
   const comunidade=useComunidade({servico:servicoDaComunidade,ligado:comunidadeLigada,euId:euNaComunidade,naComunidade:screen==='comunidade',noInicio:screen==='home'});
   /* Dicas ligadas enquanto o trio é escolhido: a jornada inteira paga o custo, mesmo desligando depois (src/engine/pontos.ts) */
   useEffect(()=>{if(settings.dicasDoTrio&&podeDicas&&run?.stage==='draft'&&run.draft.team.length<3&&!run.dicas)changeRun({...run,dicas:true});},[settings.dicasDoTrio,podeDicas,run?.stage,run?.draft.team.length,run?.dicas]);
@@ -460,10 +461,10 @@ export default function App(){
       {screen==='home'&&<Home comunidade={comunidadeLigada?{online:comunidade.online,naoLidas:comunidade.naoLidas}:null} profile={profile} run={run} conta={conta!==null&&conta.origem!=='convidado'} onPlay={requestNew} onContinue={()=>{if(run?.stage==='battle'&&run.battle){direction.current=directionFor(run);setPresentation({battle:direction.current.visible,beat:direction.current.active});}navigate('game');setPaused(run?.stage==='battle');}} onAbandon={()=>setConfirmAbandon(true)} onNavigate={navigate} onInstall={()=>void install()} onShare={()=>setCompartilhar(true)}/>}
       {screen==='characters'&&<CharactersScreen onDetails={setDetails}/>}
       {/* a Arena PvP (src/screens/PvpScreen.tsx): a coleção são só os personagens liberados nas Conquistas, para todo mundo (o dono também) */}
-      {screen==='pvp'&&<Suspense fallback={<p className="cm-carregando-tela">Abrindo a Arena…</p>}><PvpScreen colecao={Object.keys(profile.conquistas??{}).filter(id=>!!byId[id])} settings={settings} onSettings={changeSettings} onDetails={setDetails} onJogar={requestNew} onLutando={setPvpLutando} online={pvpOnline} dono={dono}/></Suspense>}
+      {screen==='pvp'&&<Suspense fallback={<p className="cm-carregando-tela">{t('Abrindo a Arena…')}</p>}><PvpScreen colecao={Object.keys(profile.conquistas??{}).filter(id=>!!byId[id])} settings={settings} onSettings={changeSettings} onDetails={setDetails} onJogar={requestNew} onLutando={setPvpLutando} online={pvpOnline} dono={dono}/></Suspense>}
       {screen==='comunidade'&&(comunidadeLigada&&servicoDaComunidade&&euNaComunidade
-        ?<Suspense fallback={<p className="cm-carregando-tela">Abrindo a Comunidade…</p>}><ComunidadeScreen servico={servicoDaComunidade} euId={euNaComunidade} euNome={profile.publicHandle??'Você'} naoLidas={comunidade.naoLidas} onLidas={()=>void comunidade.recontar()} abrirCom={abrirConversa} onDetails={setDetails} onDesafiar={pvpOnline?desafiar:undefined}/></Suspense>
-        :<div className="cm-sem-conta"><p>Entre na sua conta e escolha seu nome para conversar com a comunidade.</p><button className="primary" onClick={()=>navigate('conta')}>Ir para a Conta</button></div>)}
+        ?<Suspense fallback={<p className="cm-carregando-tela">{t('Abrindo a Comunidade…')}</p>}><ComunidadeScreen servico={servicoDaComunidade} euId={euNaComunidade} euNome={profile.publicHandle??t('Você')} naoLidas={comunidade.naoLidas} onLidas={()=>void comunidade.recontar()} abrirCom={abrirConversa} onDetails={setDetails} onDesafiar={pvpOnline?desafiar:undefined}/></Suspense>
+        :<div className="cm-sem-conta"><p>{t('Entre na sua conta e escolha seu nome para conversar com a comunidade.')}</p><button className="primary" onClick={()=>navigate('conta')}>{t('Ir para a Conta')}</button></div>)}
       {screen==='conquistas'&&<ConquistasScreen profile={profile} conta={conta!==null&&conta.origem!=='convidado'} onProfile={muda=>setProfile(p=>{const n=muda(p);if(n!==p)save('profile',n);return n;})} onRanking={()=>{setRankingInicial('conquistas');navigate('ranking');}} onDesafio={jogarDesafio} onComOsMeus={jogarComOsMeus}/>}
       {screen==='ranking'&&<RankingScreen dono={dono} inicial={rankingInicial} handle={profile.publicHandle} conta={conta!==null&&conta.origem!=='convidado'} onConta={()=>navigate('conta')} recorde={profile.recordePontos??0}/>}
       {screen==='conta'&&<AccountScreen autenticacao={autenticacao} conta={conta} profile={profile} conectado={onlineConfigured} google={googleConfigured} aoMudarPerfil={p=>{save('profile',p);setProfile(p);}}/>}
@@ -476,22 +477,22 @@ export default function App(){
       {screen==='game'&&run?.stage==='result'&&<ResultScreen run={run} onNext={()=>{const i=proximaDaJornada(run);if(i!==null)void startBattle(i);}} onRestart={requestNew} onAbandon={()=>setConfirmAbandon(true)} onHome={()=>navigate('home')} onRanking={()=>navigate('ranking')} onRetry={()=>{if(run.ranked)changeRun({...run,ranked:{...run.ranked,status:'validating'}});}} auto={settings.auto} onAuto={auto=>changeSettings({...settings,auto})}/>}
       {screen==='debug'&&import.meta.env.DEV&&<Suspense fallback={<p>Carregando laboratório…</p>}><DebugScreen/></Suspense>}
       {screen==='vfx'&&<Suspense fallback={<p>Carregando galeria audiovisual…</p>}><VfxLabScreen/></Suspense>}
-      {!storageAvailable&&<p role="alert" className="storage-warning">Não foi possível salvar neste navegador. Sua sessão continua, mas pode não ser recuperada ao fechar.</p>}
+      {!storageAvailable&&<p role="alert" className="storage-warning">{t('Não foi possível salvar neste navegador. Sua sessão continua, mas pode não ser recuperada ao fechar.')}</p>}
     </main>
     {details&&<CharacterModal character={byId[details]} onClose={()=>setDetails(null)}/>}
-    {confirmNew&&<InfoDialog title="Começar uma nova jornada?" icone={<RotateCcw/>} cor="#ffb86b" onClose={()=>setConfirmNew(false)}><p>A jornada de agora some. <b>Seu recorde fica salvo.</b></p><div className="result-actions"><button className="danger" onClick={()=>void startNew()}>Descartar e começar outra <ArrowUpRight size={18}/></button><button className="secondary" onClick={()=>setConfirmNew(false)}>Continuar jornada</button></div></InfoDialog>}
-    {nameDialog&&<InfoDialog title="Seu nome no ranking" icone={<UserPen/>} cor="#86e3a8" onClose={()=>{setNameDialog(false);/* sem nome, a jornada começa do mesmo jeito, só fora do ranking */if(pendingStart){setPendingStart(false);abreJornada();}}}><p>De 3 a 16 letras. Aparece junto do seu trio e dos seus pontos.</p><input className="handle-input" aria-label="Nome público" maxLength={16} value={draftHandle} onChange={e=>setDraftHandle(e.target.value)} placeholder="Seu nome no Nexus"/><p>Prévia: <strong>{draftHandle.trim()||'Seu nome'}</strong></p><button className="primary" disabled={onlineBusy} onClick={()=>void saveHandle()}>Confirmar nome</button></InfoDialog>}
-    {versaoNova&&<div className="versao-nova" role="status"><span><b>Nova versão do jogo</b><small>Atualize para suas jornadas valerem no ranking.</small></span><button className="primary" onClick={atualizarOJogo}><RotateCcw size={16}/>Atualizar</button><button className="icon-button" onClick={()=>setVersaoNova(false)} aria-label="Depois"><X size={16}/></button></div>}
-    {onlineNotice&&<InfoDialog title="Conexão do ranking" icone={<WifiOff/>} cor="#ff9a8a" onClose={()=>{setOnlineNotice('');setAcaoDoAviso(null);}}><p role="alert">{onlineNotice}</p>
-      {acaoDoAviso==='atualizar'&&<button className="primary" onClick={atualizarOJogo}><RotateCcw size={16}/>Atualizar o jogo</button>}
-      {acaoDoAviso==='nome'&&<button className="primary" onClick={()=>{setOnlineNotice('');setAcaoDoAviso(null);setNameDialog(true);}}><UserPen size={16}/>Escolher nome</button>}
-      {acaoDoAviso==='tentar'&&run?.stage==='draft'&&!run.ranked&&<button className="primary" onClick={()=>{setOnlineNotice('');setAcaoDoAviso(null);tentarDeNovo();}}><RotateCcw size={16}/>Tentar de novo</button>}
-      <button className={acaoDoAviso?'secondary':'primary'} onClick={()=>{setOnlineNotice('');setAcaoDoAviso(null);}}>{acaoDoAviso?'Jogar assim mesmo':'Entendi'}</button></InfoDialog>}
-    {confirmAbandon&&<InfoDialog title="Desistir desta jornada?" icone={<Flag/>} cor="#ff7a6b" onClose={()=>setConfirmAbandon(false)}><p>A jornada de agora termina aqui, como uma derrota: <b>os pontos que você já fez vão para o ranking</b>. Depois você monta um trio novo.</p><div className="result-actions"><button className="danger" onClick={startNew}>Desistir e começar outra <ArrowUpRight size={18}/></button><button className="secondary" onClick={()=>setConfirmAbandon(false)}>Continuar jornada</button></div></InfoDialog>}
-    {comunidade.aviso&&<button className="cm-aviso" onClick={()=>{setAbrirConversa(comunidade.aviso!.de);comunidade.fecharAviso();navigate('comunidade');}} aria-label={`Mensagem nova de ${comunidade.aviso.nome}`}>
-      <Avatar id={comunidade.aviso.de} nome={comunidade.aviso.nome} tamanho={40}/><span><b>{comunidade.aviso.nome}</b><small>{comunidade.aviso.texto}</small></span><em>RESPONDER</em></button>}
+    {confirmNew&&<InfoDialog title={t('Começar uma nova jornada?')} icone={<RotateCcw/>} cor="#ffb86b" onClose={()=>setConfirmNew(false)}><p>{t('A jornada de agora some.')} <b>{t('Seu recorde fica salvo.')}</b></p><div className="result-actions"><button className="danger" onClick={()=>void startNew()}>{t('Descartar e começar outra')} <ArrowUpRight size={18}/></button><button className="secondary" onClick={()=>setConfirmNew(false)}>{t('Continuar jornada')}</button></div></InfoDialog>}
+    {nameDialog&&<InfoDialog title={t('Seu nome no ranking')} icone={<UserPen/>} cor="#86e3a8" onClose={()=>{setNameDialog(false);/* sem nome, a jornada começa do mesmo jeito, só fora do ranking */if(pendingStart){setPendingStart(false);abreJornada();}}}><p>{t('De 3 a 16 letras. Aparece junto do seu trio e dos seus pontos.')}</p><input className="handle-input" aria-label={t('Nome público')} maxLength={16} value={draftHandle} onChange={e=>setDraftHandle(e.target.value)} placeholder={t('Seu nome no Nexus')}/><p>{t('Prévia:')} <strong>{draftHandle.trim()||t('Seu nome')}</strong></p><button className="primary" disabled={onlineBusy} onClick={()=>void saveHandle()}>{t('Confirmar nome')}</button></InfoDialog>}
+    {versaoNova&&<div className="versao-nova" role="status"><span><b>{t('Nova versão do jogo')}</b><small>{t('Atualize para suas jornadas valerem no ranking.')}</small></span><button className="primary" onClick={atualizarOJogo}><RotateCcw size={16}/>{t('Atualizar')}</button><button className="icon-button" onClick={()=>setVersaoNova(false)} aria-label={t('Depois')}><X size={16}/></button></div>}
+    {onlineNotice&&<InfoDialog title={t('Conexão do ranking')} icone={<WifiOff/>} cor="#ff9a8a" onClose={()=>{setOnlineNotice('');setAcaoDoAviso(null);}}><p role="alert">{t(onlineNotice)}</p>
+      {acaoDoAviso==='atualizar'&&<button className="primary" onClick={atualizarOJogo}><RotateCcw size={16}/>{t('Atualizar o jogo')}</button>}
+      {acaoDoAviso==='nome'&&<button className="primary" onClick={()=>{setOnlineNotice('');setAcaoDoAviso(null);setNameDialog(true);}}><UserPen size={16}/>{t('Escolher nome')}</button>}
+      {acaoDoAviso==='tentar'&&run?.stage==='draft'&&!run.ranked&&<button className="primary" onClick={()=>{setOnlineNotice('');setAcaoDoAviso(null);tentarDeNovo();}}><RotateCcw size={16}/>{t('Tentar de novo')}</button>}
+      <button className={acaoDoAviso?'secondary':'primary'} onClick={()=>{setOnlineNotice('');setAcaoDoAviso(null);}}>{acaoDoAviso?t('Jogar assim mesmo'):t('Entendi')}</button></InfoDialog>}
+    {confirmAbandon&&<InfoDialog title={t('Desistir desta jornada?')} icone={<Flag/>} cor="#ff7a6b" onClose={()=>setConfirmAbandon(false)}><p>{t('A jornada de agora termina aqui, como uma derrota:')} <b>{t('os pontos que você já fez vão para o ranking')}</b>. {t('Depois você monta um trio novo.')}</p><div className="result-actions"><button className="danger" onClick={startNew}>{t('Desistir e começar outra')} <ArrowUpRight size={18}/></button><button className="secondary" onClick={()=>setConfirmAbandon(false)}>{t('Continuar jornada')}</button></div></InfoDialog>}
+    {comunidade.aviso&&<button className="cm-aviso" onClick={()=>{setAbrirConversa(comunidade.aviso!.de);comunidade.fecharAviso();navigate('comunidade');}} aria-label={t('Mensagem nova de {nome}',{nome:comunidade.aviso.nome})}>
+      <Avatar id={comunidade.aviso.de} nome={comunidade.aviso.nome} tamanho={40}/><span><b>{comunidade.aviso.nome}</b><small>{comunidade.aviso.texto}</small></span><em>{t('RESPONDER')}</em></button>}
     {compartilhar&&<CompartilharJogo trio={profile.champion?.length?profile.champion:['goku','naruto','luffy']} onClose={()=>setCompartilhar(false)}/>}
     {convite&&<BoasVindasDoConvite podeInstalar={!!installEvent} onInstalar={instalarDoConvite} onClose={fecharConvite}/>}
-    {installHelp&&<InfoDialog title={installed?'O NEXUS já está instalado':'Leve seu trio no bolso'} icone={<Download/>} cor="#8fd3ff" onClose={()=>setInstallHelp(false)}><p>{installed?'Abra o jogo pelo ícone na tela inicial do aparelho.':<><b>Android:</b> menu do navegador → “Instalar aplicativo”.<br/><b>iPhone:</b> Compartilhar → “Adicionar à Tela de Início”.</>}</p><p>O progresso fica neste aparelho e o jogo abre mesmo sem internet.</p><button className="primary" onClick={()=>setInstallHelp(false)}>Entendi</button></InfoDialog>}
+    {installHelp&&<InfoDialog title={installed?t('O NEXUS já está instalado'):t('Leve seu trio no bolso')} icone={<Download/>} cor="#8fd3ff" onClose={()=>setInstallHelp(false)}><p>{installed?t('Abra o jogo pelo ícone na tela inicial do aparelho.'):<><b>Android:</b> {t('menu do navegador → “Instalar aplicativo”.')}<br/><b>iPhone:</b> {t('Compartilhar → “Adicionar à Tela de Início”.')}</>}</p><p>{t('O progresso fica neste aparelho e o jogo abre mesmo sem internet.')}</p><button className="primary" onClick={()=>setInstallHelp(false)}>{t('Entendi')}</button></InfoDialog>}
   </div>;
 }

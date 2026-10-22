@@ -15,6 +15,7 @@ import { mensagemDoTop3,type ResultadoTop3 } from '../lib/top3';
 import { battleAudio } from '../lib/audio';
 import { PRIORIDADE } from '../audio/cues';
 import { ChaveDoAuto,ESPERA_DA_PROXIMA_MS } from '../components/ChaveDoAuto';
+import { nomeDe, numero, plural, t } from '../i18n/idioma';
 
 /*
  * A tela depois de cada luta (remake).
@@ -65,8 +66,8 @@ function NotaDaAjuda({av,i}:{av:AvaliacaoDaAjuda;i:number}){
   const Ic=ICONE_DA_NOTA[av.nota]!;
   return <div className={`rs-nota nota-${av.nota}`} style={{'--i':i} as CSSProperties}>
     <span className="rs-nota-regua" aria-hidden="true">{NOMES_DAS_NOTAS.map((_,k)=><i key={k} className={k<=av.nota?'acesa':''} style={{'--k':k} as CSSProperties}/>)}</span>
-    <span className="rs-nota-selo"><Ic size={13} strokeWidth={2.6}/>{NOMES_DAS_NOTAS[av.nota]}</span>
-    <small className="rs-nota-compara">{av.melhorQue>=50?`Melhor que ${av.melhorQue}% das ajudas desse tipo`:av.melhorQue>0?`Só melhor que ${av.melhorQue}% das ajudas desse tipo`:'Das menores ajudas desse tipo'}</small>
+    <span className="rs-nota-selo"><Ic size={13} strokeWidth={2.6}/>{t(NOMES_DAS_NOTAS[av.nota]!)}</span>
+    <small className="rs-nota-compara">{av.melhorQue>=50?t('Melhor que {n}% das ajudas desse tipo',{n:av.melhorQue}):av.melhorQue>0?t('Só melhor que {n}% das ajudas desse tipo',{n:av.melhorQue}):t('Das menores ajudas desse tipo')}</small>
   </div>;
 }
 
@@ -103,7 +104,7 @@ export function ResultScreen({run,onNext,onRestart,onAbandon,onHome,onRanking,on
 
   // cada parcela da luta com o seu ícone (a conta vem de src/engine/pontos.ts, a mesma do ranking)
   const ICONE:Record<string,ReactNode>={dano:<Swords size={15}/>,nocautes:<Skull size={15}/>,apoio:<Shield size={15}/>,jogadas:<Zap size={15}/>,viradas:<TrendingUp size={15}/>,vitoria:<Trophy size={15}/>,efeitos:<Sparkles size={15}/>,vida:<HeartPulse size={15}/>,estrela:<Star size={15}/>,ajuda:<Lightbulb size={15}/>,colecao:<Award size={15}/>};
-  const parcelas:Parcela[]=p.parcelas.map(x=>({rotulo:x.rotulo,valor:x.valor,icone:ICONE[x.id]}));
+  const parcelas:Parcela[]=p.parcelas.map(x=>({rotulo:t(x.rotulo),valor:x.valor,icone:ICONE[x.id]}));
 
   /* A sequência do placar: parcelas uma a uma, depois o total sobe, depois o recorde. */
   const [fase,setFase]=useState(reduzido()?3:0);
@@ -135,7 +136,7 @@ export function ResultScreen({run,onNext,onRestart,onAbandon,onHome,onRanking,on
 
   const cor=won?(champion||extra?'#ffd36b':'#b8f07a'):extra?'#b7a6d9':'#ff8a7a';
   const proximo=proxima!==null?rivalAtual(run,proxima):null;
-  const rotuloDaLuta=(i:number)=>i===LUTA_ESTRELA?'Luta ★':i===LUTA_ONZE?'Luta 11':`Luta ${i+1}`;
+  const rotuloDaLuta=(i:number)=>i===LUTA_ESTRELA?t('Luta ★'):i===LUTA_ONZE?t('Luta 11'):t('Luta {n}',{n:i+1});
 
   return <section className={`result-v2 ${won?'vitoria':'derrota'} ${champion||extra&&won?'campeao':''} ${extra?'luta-secreta':''}`} style={{'--res-cor':cor} as CSSProperties}>
     <header className="rs-topo">
@@ -145,30 +146,30 @@ export function ResultScreen({run,onNext,onRestart,onAbandon,onHome,onRanking,on
         <span className="rs-icone">{extra?<Star size={38} fill={won?'currentColor':'none'}/>:champion?<Crown size={40}/>:won?<Trophy size={38}/>:<Shield size={36}/>}</span>
       </div>
       <div className="rs-titulo">
-        <span className="rs-confronto">{run.index===LUTA_ESTRELA?'LUTA SECRETA ★':run.index===LUTA_ONZE?'LUTA 11 · SECRETA':champion?'DEZ DE DEZ':`LUTA ${run.index+1} DE 10`}</span>
-        <h1>{extra?(won?(run.index===LUTA_ONZE?'LENDA SECRETA':'VITÓRIA SECRETA'):'QUASE!'):champion?'TRIO CAMPEÃO':won?'VITÓRIA':'DERROTA'}</h1>
+        <span className="rs-confronto">{run.index===LUTA_ESTRELA?t('LUTA SECRETA ★'):run.index===LUTA_ONZE?t('LUTA 11 · SECRETA'):champion?t('DEZ DE DEZ'):t('LUTA {n} DE 10',{n:run.index+1})}</span>
+        <h1>{extra?(won?(run.index===LUTA_ONZE?t('LENDA SECRETA'):t('VITÓRIA SECRETA')):t('QUASE!')):champion?t('TRIO CAMPEÃO'):won?t('VITÓRIA'):t('DERROTA')}</h1>
       </div>
       <div className="rs-trio">{run.team.map((id,i)=>{const f=trio[i];const caiu=!!f&&f.hp<=0;return <span key={id} className={`${caiu?'caiu':''} ${f?.uid===mvp?.uid?'mvp':''}`} style={{'--character':byId[id].color,'--i':i} as CSSProperties}>
-        <Portrait character={byId[id]} className="tiny"/>{f?.uid===mvp?.uid&&<b className="rs-mvp"><Medal size={11}/>MVP</b>}</span>;})}</div>
+        <Portrait character={byId[id]} className="tiny"/>{f?.uid===mvp?.uid&&<b className="rs-mvp"><Medal size={11}/>{t('MVP')}</b>}</span>;})}</div>
     </header>
 
     <div className="rs-placar">
       {/* na derrota também: os pontos do que o trio fez nesta luta ficam */}
-      {extra&&!won?<p className="rs-sem">A luta secreta só vale pontos com vitória. {segue?'A jornada segue para a luta 6, com tudo o que você já fez.':'A jornada termina aqui, com tudo o que você já fez.'}</p>:p.total>0?<>
-        <span className="rs-rotulo">PONTOS DESTA LUTA{p.multiplicador>1?` · ×${p.multiplicador.toFixed(2).replace('.',',')}`:''}</span>
+      {extra&&!won?<p className="rs-sem">{t('A luta secreta só vale pontos com vitória.')} {segue?t('A jornada segue para a luta 6, com tudo o que você já fez.'):t('A jornada termina aqui, com tudo o que você já fez.')}</p>:p.total>0?<>
+        <span className="rs-rotulo">{t('PONTOS DESTA LUTA')}{p.multiplicador>1?` · ×${numero(p.multiplicador,{minimumFractionDigits:2,maximumFractionDigits:2})}`:''}</span>
         <strong className="rs-desta">+{fase>=1?<Contador de={0} para={p.total} ms={900}/>:'0'}</strong>
         <ul className="rs-parcelas">{parcelas.map((x,i)=><li key={x.rotulo} className={`${fase>=1?'entra':''} ${x.valor<0?'custo':''}`} style={{'--i':i} as CSSProperties}>{x.icone}<span>{x.rotulo}</span><b>{x.valor<0?'−':'+'}{formatarPontos(Math.abs(x.valor))}</b></li>)}</ul>
-      </>:<p className="rs-sem">Nenhum ponto nesta luta: a jornada termina aqui com o que você já fez.</p>}
+      </>:<p className="rs-sem">{t('Nenhum ponto nesta luta: a jornada termina aqui com o que você já fez.')}</p>}
       <div className={`rs-total ${fase>=2?'subiu':''}`}>
         {fase>=2&&p.total>0&&<Fx nome="pontos" cor={cor} ms={900} className="rs-estouro"/>}
         <span className="rs-rotulo">{fimDaJornada?'PONTUAÇÃO FINAL':'TOTAL DA JORNADA'}</span>
         <strong>{fase>=2?<Contador de={antes} para={total} ms={1200}/>:formatarPontos(antes)}</strong>
-        <small>{vitorias} {vitorias===1?'vitória':'vitórias'} · {formatarPontos(total)} pontos para o ranking</small>
+        <small>{plural(vitorias,'{n} vitória','{n} vitórias')} · {t('{pontos} pontos para o ranking',{pontos:formatarPontos(total)})}</small>
       </div>
       <div className={`rs-recorde ${fase>=3&&novoRecorde?'novo':''}`}>
         {fase>=3&&novoRecorde&&<Fx nome="recorde" cor="#ffd36b" ms={1100} className="rs-estouro-recorde"/>}
-        {fase>=3&&novoRecorde?<><Sparkles size={16}/><b>NOVO RECORDE!</b>{recordeAntes>0&&<span>antes: {formatarPontos(recordeAntes)}</span>}</>
-          :<><span>Seu recorde</span><b>{formatarPontos(Math.max(recordeAntes,total))}</b>{recordeAntes>total&&<span>faltam {formatarPontos(recordeAntes-total)}</span>}</>}
+        {fase>=3&&novoRecorde?<><Sparkles size={16}/><b>{t('NOVO RECORDE!')}</b>{recordeAntes>0&&<span>{t('antes: {pontos}',{pontos:formatarPontos(recordeAntes)})}</span>}</>
+          :<><span>{t('Seu recorde')}</span><b>{formatarPontos(Math.max(recordeAntes,total))}</b>{recordeAntes>total&&<span>{t('faltam {pontos}',{pontos:formatarPontos(recordeAntes-total)})}</span>}</>}
       </div>
     </div>
 
@@ -176,56 +177,56 @@ export function ResultScreen({run,onNext,onRestart,onAbandon,onHome,onRanking,on
     {/* o sexto segredo saiu nesta jornada: o prêmio do Livro (um pulo a mais, para sempre) */}
     {descobertos.some(id=>run.livroNovo?.includes(id))&&livroCompleto([...(loadProfile().segredosDescobertos??[]),...(run.livroNovo??[])])&&<div className="rs-segredo rs-premio-livro" role="status" style={{'--cor':'#ffd36b',animationDelay:`${.6+descobertos.length*.35}s`} as CSSProperties}>
       <span className="rs-segredo-selo"><Sparkles size={28}/></span>
-      <div className="rs-segredo-texto"><small>LIVRO DE SEGREDOS COMPLETO</small><strong>+1 pulo para sempre!</strong><span>Prêmio dos 6 segredos: a escolha do trio agora tem <b>{PULOS_COM_O_LIVRO_COMPLETO} pulos</b> em vez de {PULOS_DA_JORNADA}.</span></div>
+      <div className="rs-segredo-texto"><small>{t('LIVRO DE SEGREDOS COMPLETO')}</small><strong>{t('+1 pulo para sempre!')}</strong><span>{t('Prêmio dos 6 segredos: a escolha do trio agora tem {n} pulos em vez de {antes}.',{n:PULOS_COM_O_LIVRO_COMPLETO,antes:PULOS_DA_JORNADA})}</span></div>
     </div>}
 
     {champion&&run.conquistasNovas?.length?<ConquistasLiberadas ids={run.conquistasNovas}/>:null}
 
     {/* as 10 lutas e, no lugar delas, a ★ (entre a 5 e a 6) e a 11: trancadas até um segredo abrir */}
-    <ol className={`rs-trilha ${comSegredos?'com-extras':''}`} aria-label="As lutas da jornada">{(comSegredos?[0,1,2,3,4,LUTA_ESTRELA,5,6,7,8,9,LUTA_ONZE]:[0,1,2,3,4,5,6,7,8,9]).map(i=>{const r=resumos.find(s=>s.index===i),ex=ehLutaExtra(i);
+    <ol className={`rs-trilha ${comSegredos?'com-extras':''}`} aria-label={t('As lutas da jornada')}>{(comSegredos?[0,1,2,3,4,LUTA_ESTRELA,5,6,7,8,9,LUTA_ONZE]:[0,1,2,3,4,5,6,7,8,9]).map(i=>{const r=resumos.find(s=>s.index===i),ex=ehLutaExtra(i);
       const liberada=i===LUTA_ESTRELA?estrelaLiberada:i===LUTA_ONZE?onzeLiberada:true;
       const marca=r?(r.won?'ganhou':'perdeu'):i===proxima?'proxima':'';
-      const rotulo=r?`${rotuloDaLuta(i)}: ${r.won?'+'+formatarPontos(r.score):ex?'sem pontos':'derrota'}`:ex&&!liberada?`${rotuloDaLuta(i)}: trancada, abre com um segredo`:rotuloDaLuta(i);
+      const rotulo=r?`${rotuloDaLuta(i)}: ${r.won?'+'+formatarPontos(r.score):ex?t('sem pontos'):t('derrota')}`:ex&&!liberada?`${rotuloDaLuta(i)}: ${t('trancada, abre com um segredo')}`:rotuloDaLuta(i);
       const conteudo=i===LUTA_ESTRELA?(liberada||r?<Star size={11} fill="currentColor"/>:<Lock size={9}/>):i===LUTA_ONZE?(liberada||r?11:<Lock size={9}/>):i===9?<Crown size={12}/>:i+1;
       return <li key={i} className={`${marca} ${ex?`secreta ${liberada||r?'':'trancada'}`:''} ${i===run.index?'agora':''} ${r&&i===vista?'vendo':''}`} title={rotulo}>
-        {r?<button type="button" onClick={()=>{if(i!==vista){setVista(i);battleAudio.sound('toque',PRIORIDADE.interface);}}} aria-pressed={i===vista} aria-label={`${rotulo}. Ver quem ajudou quem nesta luta`}>{conteudo}</button>:conteudo}</li>;})}</ol>
-    {resumos.length>1&&<p className="rs-trilha-dica">Toque numa luta para ver quem ajudou quem nela</p>}
+        {r?<button type="button" onClick={()=>{if(i!==vista){setVista(i);battleAudio.sound('toque',PRIORIDADE.interface);}}} aria-pressed={i===vista} aria-label={`${rotulo}. ${t('Ver quem ajudou quem nesta luta')}`}>{conteudo}</button>:conteudo}</li>;})}</ol>
+    {resumos.length>1&&<p className="rs-trilha-dica">{t('Toque numa luta para ver quem ajudou quem nela')}</p>}
 
-    {(ajudas.length>0||pressao||vista!==run.index)&&<section key={vista} className="rs-ajudas" aria-label="Quem ajudou quem">
-      <h2>Quem ajudou quem{vista!==run.index&&<span className={`rs-ajudas-luta ${resumoVisto?.won?'ganhou':'perdeu'}`}>{rotuloDaLuta(vista)} · {resumoVisto?.won?`+${formatarPontos(resumoVisto.score)}`:'derrota'}</span>}</h2>
-      {vista!==run.index&&!dados&&<p className="rs-ajudas-vazio">Esta luta foi jogada antes desta novidade, então o quem ajudou quem dela não ficou guardado. As próximas ficam.</p>}
-      {dados&&ajudas.length===0&&!pressao&&<p className="rs-ajudas-vazio">Nesta luta ninguém do trio ativou a mecânica de outro.</p>}
+    {(ajudas.length>0||pressao||vista!==run.index)&&<section key={vista} className="rs-ajudas" aria-label={t('Quem ajudou quem')}>
+      <h2>{t('Quem ajudou quem')}{vista!==run.index&&<span className={`rs-ajudas-luta ${resumoVisto?.won?'ganhou':'perdeu'}`}>{rotuloDaLuta(vista)} · {resumoVisto?.won?`+${formatarPontos(resumoVisto.score)}`:t('derrota')}</span>}</h2>
+      {vista!==run.index&&!dados&&<p className="rs-ajudas-vazio">{t('Esta luta foi jogada antes desta novidade, então o quem ajudou quem dela não ficou guardado. As próximas ficam.')}</p>}
+      {dados&&ajudas.length===0&&!pressao&&<p className="rs-ajudas-vazio">{t('Nesta luta ninguém do trio ativou a mecânica de outro.')}</p>}
       <div>{ajudas.map((d,i)=>{const de=lutador(d.de),para=lutador(d.para);if(!de||!para)return null;const av=avaliarDirecao(d);return <article key={`${d.de}-${d.para}`} className={`rs-ajuda tipo-${d.tipo} ${av?`com-nota nota-${av.nota}`:''}`}>
         <div className="rs-dupla"><span style={{'--character':de.color} as CSSProperties}><Portrait character={de} className="tiny"/></span><ArrowRight size={14}/><span style={{'--character':para.color} as CSSProperties}><Portrait character={para} className="tiny"/></span></div>
-        <div className="rs-ajuda-numero"><b>{d.destaque!.numero}</b><small>{d.destaque!.rotulo}</small></div>
-        <p><b>{de.name.split(/[ ,]/)[0]}</b> {d.frase}</p>
+        <div className="rs-ajuda-numero"><b>{d.destaque!.numero}</b><small>{t(d.destaque!.rotulo)}</small></div>
+        <p><b>{nomeDe(de).split(/[ ,]/)[0]}</b> {d.frase&&t(d.frase)}</p>
         {av&&<NotaDaAjuda av={av} i={i}/>}
       </article>;})}
       {pressao&&(()=>{const quem=lutador(pressao.uid),av=avaliarAjuda('pressao',pressao.dano);return quem?<article className={`rs-ajuda tipo-pressao ${av?`com-nota nota-${av.nota}`:''}`}>
         <div className="rs-dupla"><span style={{'--character':quem.color} as CSSProperties}><Portrait character={quem} className="tiny"/></span><Shield size={16}/></div>
-        <div className="rs-ajuda-numero"><b>{Math.round(pressao.parte*100)}%</b><small>do dano levado</small></div>
-        <p><b>{quem.name.split(/[ ,]/)[0]}</b> segurou a pressão pelo trio · {pressao.dano.toLocaleString('pt-BR')} de dano</p>
+        <div className="rs-ajuda-numero"><b>{Math.round(pressao.parte*100)}%</b><small>{t('do dano levado')}</small></div>
+        <p><b>{nomeDe(quem).split(/[ ,]/)[0]}</b> {t('segurou a pressão pelo trio · {v} de dano',{v:pressao.dano})}</p>
         {av&&<NotaDaAjuda av={av} i={ajudas.length}/>}
       </article>:null;})()}
       </div>
     </section>}
 
-    {run.ranked&&fimDaJornada&&<div className="rs-ranqueada" role="status"><strong>RANKING</strong>
-      {run.ranked.status==='verified'?<><span>Pontuação validada: <b>{formatarPontos(run.ranked.score??0)}</b></span><span>Posição: hoje #{run.ranked.daily??'—'} · semana #{run.ranked.weekly??'—'} · geral #{run.ranked.season??'—'}</span>{(run.ranked.top3?.temporada??run.ranked.top3?.periodo)&&<AvisoTop3 resultado={(run.ranked.top3?.temporada??run.ranked.top3?.periodo)!}/>}</>
-        :run.ranked.status==='failed'?<><span>{/vers[aã]o/i.test(run.ranked.error??'')?'Esta jornada começou numa versão antiga do jogo e não pode entrar no ranking. Atualize o jogo e jogue de novo.':`Validação pendente: ${run.ranked.error}`}</span>{onRetry&&<button className="secondary" onClick={onRetry}>Tentar validar de novo</button>}</>
-        :<span>Validando no servidor…</span>}
-      {onRanking&&<button className="text-button" onClick={onRanking}>Ver ranking →</button>}</div>}
+    {run.ranked&&fimDaJornada&&<div className="rs-ranqueada" role="status"><strong>{t('RANKING')}</strong>
+      {run.ranked.status==='verified'?<><span>{t('Pontuação validada:')} <b>{formatarPontos(run.ranked.score??0)}</b></span><span>{t('Posição: hoje #{hoje} · semana #{semana} · geral #{geral}',{hoje:run.ranked.daily??'—',semana:run.ranked.weekly??'—',geral:run.ranked.season??'—'})}</span>{(run.ranked.top3?.temporada??run.ranked.top3?.periodo)&&<AvisoTop3 resultado={(run.ranked.top3?.temporada??run.ranked.top3?.periodo)!}/>}</>
+        :run.ranked.status==='failed'?<><span>{/vers[aã]o/i.test(run.ranked.error??'')?t('Esta jornada começou numa versão antiga do jogo e não pode entrar no ranking. Atualize o jogo e jogue de novo.'):`${t('Validação pendente:')} ${t(run.ranked.error??'')}`}</span>{onRetry&&<button className="secondary" onClick={onRetry}>{t('Tentar validar de novo')}</button>}</>
+        :<span>{t('Validando no servidor…')}</span>}
+      {onRanking&&<button className="text-button" onClick={onRanking}>{t('Ver ranking →')}</button>}</div>}
 
-    {proximo&&<div className={`rs-proximo ${proxima!==null&&ehLutaExtra(proxima)?'secreta':''}`}><span>{proxima===LUTA_ESTRELA?'PRÓXIMA: SECRETA ★':proxima===LUTA_ONZE?'PRÓXIMA: SECRETA 11':'PRÓXIMA LUTA'}<b>{proximo.name}</b></span><div>{proximo.team.map(id=><Portrait key={id} character={byId[id]} className="tiny"/>)}</div></div>}
-    {fimDaJornada&&!run.ranked&&<div className="rs-ranqueada fora" role="status"><strong>FORA DO RANKING</strong><span>Esta jornada foi jogada sem a conta conectada (ou sem internet ao começar), então não foi para o ranking. Entre na sua conta antes de jogar para as próximas valerem.</span>{onRanking&&<button className="text-button" onClick={onRanking}>Ver o ranking →</button>}</div>}
+    {proximo&&<div className={`rs-proximo ${proxima!==null&&ehLutaExtra(proxima)?'secreta':''}`}><span>{proxima===LUTA_ESTRELA?t('PRÓXIMA: SECRETA ★'):proxima===LUTA_ONZE?t('PRÓXIMA: SECRETA 11'):t('PRÓXIMA LUTA')}<b>{t(proximo.name)}</b></span><div>{proximo.team.map(id=><Portrait key={id} character={byId[id]} className="tiny"/>)}</div></div>}
+    {fimDaJornada&&!run.ranked&&<div className="rs-ranqueada fora" role="status"><strong>{t('FORA DO RANKING')}</strong><span>{t('Esta jornada foi jogada sem a conta conectada (ou sem internet ao começar), então não foi para o ranking. Entre na sua conta antes de jogar para as próximas valerem.')}</span>{onRanking&&<button className="text-button" onClick={onRanking}>{t('Ver o ranking →')}</button>}</div>}
 
     {/* a chave fica no fim da tela, sem acompanhar a rolagem: a batalha também tem o botão AUTO à vista */}
     {segue&&<ChaveDoAuto ligado={auto} onChange={onAuto}/>}
     <footer className="rs-acoes">
-      {segue?<button className={`rs-cta ${proxima!==null&&ehLutaExtra(proxima)?'rs-cta-secreta':''}`} onClick={onNext}><Fx nome="brilho" cor="#ffffff" ms={2600} laco className="rs-brilho"/>{contando&&<i key={contando.desde} className="rs-contagem" style={{'--espera':`${ESPERA_DA_PROXIMA_MS}ms`} as CSSProperties}/>}<span>{proxima===LUTA_ESTRELA?'Luta secreta ★':proxima===LUTA_ONZE?'Luta 11 secreta':'Próxima luta'}</span>{contando?<b className="rs-segundos">{contando.faltam}</b>:<ArrowRight size={20}/>}</button>
-        :<button className="rs-cta" onClick={onRestart}><Fx nome="brilho" cor="#ffffff" ms={2600} laco className="rs-brilho"/><span>Jogar de novo</span><RotateCcw size={19}/></button>}
-      <button className="secondary rs-icone-botao" onClick={onHome} aria-label="Início" title="Início"><Home size={19}/></button>
-      {segue&&<button className="secondary rs-icone-botao rs-desistir" onClick={onAbandon} aria-label="Desistir da jornada" title="Desistir da jornada"><LogOut size={18}/></button>}
+      {segue?<button className={`rs-cta ${proxima!==null&&ehLutaExtra(proxima)?'rs-cta-secreta':''}`} onClick={onNext}><Fx nome="brilho" cor="#ffffff" ms={2600} laco className="rs-brilho"/>{contando&&<i key={contando.desde} className="rs-contagem" style={{'--espera':`${ESPERA_DA_PROXIMA_MS}ms`} as CSSProperties}/>}<span>{proxima===LUTA_ESTRELA?t('Luta secreta ★'):proxima===LUTA_ONZE?t('Luta 11 secreta'):t('Próxima luta')}</span>{contando?<b className="rs-segundos">{contando.faltam}</b>:<ArrowRight size={20}/>}</button>
+        :<button className="rs-cta" onClick={onRestart}><Fx nome="brilho" cor="#ffffff" ms={2600} laco className="rs-brilho"/><span>{t('Jogar de novo')}</span><RotateCcw size={19}/></button>}
+      <button className="secondary rs-icone-botao" onClick={onHome} aria-label={t('Início')} title={t('Início')}><Home size={19}/></button>
+      {segue&&<button className="secondary rs-icone-botao rs-desistir" onClick={onAbandon} aria-label={t('Desistir da jornada')} title={t('Desistir da jornada')}><LogOut size={18}/></button>}
     </footer>
   </section>;
 }
@@ -237,7 +238,7 @@ export function ResultScreen({run,onNext,onRestart,onAbandon,onHome,onRanking,on
  */
 function AvisoTop3({resultado}:{resultado:ResultadoTop3}){
   const m=mensagemDoTop3(resultado);
-  return <div className={`top3-aviso${m.destaque?' destaque':''}`}><b>{m.titulo}</b>{m.linhas.map(l=><span key={l}>{l}</span>)}</div>;
+  return <div className={`top3-aviso${m.destaque?' destaque':''}`}><b>{t(m.titulo)}</b>{m.linhas.map(l=><span key={l}>{t(l)}</span>)}</div>;
 }
 
 /*
@@ -247,15 +248,15 @@ function AvisoTop3({resultado}:{resultado:ResultadoTop3}){
 function AvisoDeSegredo({id,k,proxima,index,noLivro}:{id:SegredoId;k:number;proxima:number|null;index:number;noLivro:boolean}){
   const s=SEGREDO[id],Ic=ICONE_DO_SEGREDO[id];
   const frases=s.libera.map(q=>q==='estrela'
-    ?(proxima===LUTA_ESTRELA?<>A <b>luta secreta ★</b> é a próxima!</>:index<4?<>Vença até a luta 5 e a <b>luta secreta ★</b> aparece.</>:null)
-    :(proxima===LUTA_ONZE?<>A <b>luta 11</b> é a próxima!</>:index<9||index===LUTA_ESTRELA?<>Vença as 10 lutas e a <b>luta 11</b> te espera.</>:null)).filter(Boolean);
+    ?(proxima===LUTA_ESTRELA?t('A luta secreta ★ é a próxima!'):index<4?t('Vença até a luta 5 e a luta secreta ★ aparece.'):null)
+    :(proxima===LUTA_ONZE?t('A luta 11 é a próxima!'):index<9||index===LUTA_ESTRELA?t('Vença as 10 lutas e a luta 11 te espera.'):null)).filter(Boolean);
   return <div className="rs-segredo" role="status" style={{'--cor':s.cor,animationDelay:`${.6+k*.35}s`} as CSSProperties}>
     <span className="rs-segredo-selo" style={{animationDelay:`${.9+k*.35}s`}}><Ic size={28}/></span>
     <div className="rs-segredo-texto">
-      <small>SEGREDO DESCOBERTO</small>
-      <strong>{s.nome}!</strong>
+      <small>{t('SEGREDO DESCOBERTO')}</small>
+      <strong>{t(s.nome)}!</strong>
       {frases.map((f,i)=><span key={i}>{f}</span>)}
-      {noLivro&&<em className="rs-segredo-livro">NOVO NO LIVRO DE SEGREDOS</em>}
+      {noLivro&&<em className="rs-segredo-livro">{t('NOVO NO LIVRO DE SEGREDOS')}</em>}
     </div>
   </div>;
 }

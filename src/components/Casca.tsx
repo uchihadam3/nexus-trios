@@ -3,6 +3,7 @@ import { ArrowLeft,MessagesSquare,Swords,Award,CircleHelp,Crown,Home as HomeIcon
 import { battleAudio } from '../lib/audio';
 import { PRIORIDADE,type Sound } from '../audio/cues';
 import { formatarPontos } from '../engine/pontos';
+import { t } from '../i18n/idioma';
 
 /*
  * A casca do jogo (remake): a barra de cima, o menu e o que vale para todo
@@ -37,16 +38,16 @@ export function Cabecalho({tela,menu,onMenu,onNavigate,recorde,apelido,online,to
   const itens=ITENS.filter(i=>!i.online||online);
   useEffect(()=>{if(!menu)return;const fecha=(e:KeyboardEvent)=>{if(e.key==='Escape')onMenu(false);};addEventListener('keydown',fecha);return()=>removeEventListener('keydown',fecha);},[menu,onMenu]);
   return <header className="gs-barra">
-    {tela!=='home'&&<button className="gs-voltar" onClick={()=>onNavigate('home')} aria-label="Voltar ao início" title="Voltar ao início"><ArrowLeft size={20}/></button>}
-    <button className="gs-marca" onClick={()=>onNavigate('home')} aria-label="Nexus início"><b>N</b><span>NEXUS<small>DUELO DE TRIOS</small></span></button>
-    <nav aria-label="Navegação principal" className={`gs-nav ${menu?'aberto':''}`}>
-      <div className="gs-nav-grade">{itens.map((i,k)=><button key={i.id} className={tela===i.id?'ativo':''} onClick={()=>onNavigate(i.id)} aria-label={i.nome} style={{'--tile':i.cor,'--k':k} as CSSProperties}>
-        <i.icone size={22}/><b>{i.nome}</b>{i.id==='characters'&&<small>{total}</small>}{i.id==='comunidade'&&naoLidas>0&&<em className="gs-selo-novas">{naoLidas}</em>}
+    {tela!=='home'&&<button className="gs-voltar" onClick={()=>onNavigate('home')} aria-label={t('Voltar ao início')} title={t('Voltar ao início')}><ArrowLeft size={20}/></button>}
+    <button className="gs-marca" onClick={()=>onNavigate('home')} aria-label={t('Nexus início')}><b>N</b><span>NEXUS<small>{t('DUELO DE TRIOS')}</small></span></button>
+    <nav aria-label={t('Navegação principal')} className={`gs-nav ${menu?'aberto':''}`}>
+      <div className="gs-nav-grade">{itens.map((i,k)=><button key={i.id} className={tela===i.id?'ativo':''} onClick={()=>onNavigate(i.id)} aria-label={t(i.nome)} style={{'--tile':i.cor,'--k':k} as CSSProperties}>
+        <i.icone size={22}/><b>{t(i.nome)}</b>{i.id==='characters'&&<small>{total}</small>}{i.id==='comunidade'&&naoLidas>0&&<em className="gs-selo-novas">{naoLidas}</em>}
       </button>)}</div>
     </nav>
-    <span className="gs-recorde" title="Seu recorde de pontos"><Crown size={14}/><b>{formatarPontos(recorde)}</b>{apelido&&<small>{apelido}</small>}</span>
-    <button className="gs-menu menu-toggle" aria-label="Abrir menu" aria-expanded={menu} onClick={()=>onMenu(!menu)}>{menu?<X size={22}/>:<Menu size={22}/>}{!menu&&naoLidas>0&&<em className="gs-selo-novas">{naoLidas}</em>}</button>
-    {menu&&<button className="gs-veu" aria-label="Fechar menu" tabIndex={-1} onClick={()=>onMenu(false)}/>}
+    <span className="gs-recorde" title={t('Seu recorde de pontos')}><Crown size={14}/><b>{formatarPontos(recorde)}</b>{apelido&&<small>{apelido}</small>}</span>
+    <button className="gs-menu menu-toggle" aria-label={t('Abrir menu')} aria-expanded={menu} onClick={()=>onMenu(!menu)}>{menu?<X size={22}/>:<Menu size={22}/>}{!menu&&naoLidas>0&&<em className="gs-selo-novas">{naoLidas}</em>}</button>
+    {menu&&<button className="gs-veu" aria-label={t('Fechar menu')} tabIndex={-1} onClick={()=>onMenu(false)}/>}
   </header>;
 }
 
@@ -63,7 +64,7 @@ function somDoBotao(el:HTMLElement):Sound|null{
   if(el.closest('.battle-main .arena, [data-sem-som]'))return null;
   if(el instanceof HTMLInputElement)return el.type==='checkbox'?'ui-alternar':null;
   const nome=el.getAttribute('aria-label')??'';
-  if(/^Fechar/.test(nome)||el.matches('.modal-close,.id-card-close,.id-card-ok,.gs-veu'))return 'ui-fechar';
+  if(/^(Fechar|Close)/.test(nome)||el.matches('.modal-close,.id-card-close,.id-card-ok,.gs-veu'))return 'ui-fechar';
   // os dois momentos que mais importam na escolha do trio têm som próprio
   if(el.matches('.dv-arena'))return 'ui-arena';
   if(el.matches('.dv-escolher'))return 'ui-escolher';

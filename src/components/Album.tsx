@@ -2,6 +2,7 @@ import {useMemo,useRef,useState,type CSSProperties,type ReactNode} from 'react';
 import {ChevronLeft,ChevronRight} from 'lucide-react';
 import type {Character} from '../engine/types';
 import {ABAS,type Aba} from '../lib/conquistas';
+import {t} from '../i18n/idioma';
 
 /*
  * O álbum de personagens (pedido do jogador: "ver bastante personagem sem
@@ -31,15 +32,15 @@ export function Album({listas,rotulo,barra,carta,vazio,aba:abaControlada,onAba}:
   const trocarAba=(a:Aba)=>{setAbaLocal(a);onAba?.(a);setPagina(0);trilho.current?.scrollTo({left:0});};
   return <>
     <div className="cq-abas" role="tablist">{ABAS.map(a=>{const b=barra?.(a.id);return <button key={a.id} role="tab" aria-selected={aba===a.id} className={aba===a.id?'ativo':''} style={{'--aba':a.cor} as CSSProperties} onClick={()=>trocarAba(a.id)}>
-      <b>{a.nome}</b><small>{rotulo(a.id)}</small>{b!==undefined&&<i style={{width:`${b*100}%`}}/>}</button>;})}</div>
+      <b>{t(a.nome)}</b><small>{rotulo(a.id)}</small>{b!==undefined&&<i style={{width:`${b*100}%`}}/>}</button>;})}</div>
     <div className="cq-album" style={{'--aba':ABAS.find(a=>a.id===aba)!.cor} as CSSProperties}>
       {lista.length?<div className="cq-trilho" ref={trilho} onScroll={e=>{const t=e.currentTarget;const p=Math.round(t.scrollLeft/Math.max(1,t.clientWidth));if(p!==pagina)setPagina(p);}}>
         {folhas.map((folha,fi)=><div key={`${aba}-${fi}`} className="cq-pagina">{folha.map((c,i)=>carta(c,i))}</div>)}
       </div>:<div className="cq-album-vazio">{vazio}</div>}
       {folhas.length>1&&<div className="cq-paginas">
-        <button aria-label="Página anterior" disabled={pagina===0} onClick={()=>irPara(pagina-1)}><ChevronLeft size={18}/></button>
+        <button aria-label={t('Página anterior')} disabled={pagina===0} onClick={()=>irPara(pagina-1)}><ChevronLeft size={18}/></button>
         <span>{folhas.map((_,i)=><i key={i} className={i===pagina?'ativo':''} onClick={()=>irPara(i)}/>)}</span>
-        <button aria-label="Próxima página" disabled={pagina>=folhas.length-1} onClick={()=>irPara(pagina+1)}><ChevronRight size={18}/></button>
+        <button aria-label={t('Próxima página')} disabled={pagina>=folhas.length-1} onClick={()=>irPara(pagina+1)}><ChevronRight size={18}/></button>
       </div>}
     </div>
   </>;

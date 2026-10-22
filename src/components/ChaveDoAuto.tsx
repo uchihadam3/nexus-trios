@@ -2,6 +2,7 @@ import { Repeat } from 'lucide-react';
 import { battleAudio } from '../lib/audio';
 import { PRIORIDADE } from '../audio/cues';
 import '../presentation/chave-auto.css';
+import { t } from '../i18n/idioma';
 
 /*
  * Lutas seguidas (pedido do jogador: o botão de deixar as lutas correndo uma atrás da outra estava "muito escondidinho
@@ -20,8 +21,8 @@ export function ChaveDoAuto({ ligado, onChange }: { ligado: boolean; onChange: (
     onClick={() => { onChange(!ligado); toque(!ligado); }}>
     <span className="seq-icone" aria-hidden="true"><Repeat size={20} /></span>
     <span className="seq-texto">
-      <b>LUTAS SEGUIDAS</b>
-      <small>{ligado ? 'Ligado: a próxima luta começa sozinha' : 'Ligue para as lutas seguirem sozinhas'}</small>
+      <b>{t('LUTAS SEGUIDAS')}</b>
+      <small>{ligado ? t('Ligado: a próxima luta começa sozinha') : t('Ligue para as lutas seguirem sozinhas')}</small>
     </span>
     <span className="seq-trilho" aria-hidden="true"><i>{ligado ? 'ON' : 'OFF'}</i><span className="seq-bolinha" /></span>
   </button>;
@@ -30,8 +31,8 @@ export function ChaveDoAuto({ ligado, onChange }: { ligado: boolean; onChange: (
 /** O mesmo interruptor, pequeno, na barra de controles da batalha. */
 export function BotaoAutoDaBatalha({ ligado, onChange }: { ligado: boolean; onChange: (v: boolean) => void }) {
   return <button type="button" role="switch" aria-checked={ligado} className={`control seq-controle ${ligado ? 'ligado' : ''}`}
-    aria-label={ligado ? 'Lutas seguidas ligado: a próxima luta começa sozinha. Toque para desligar' : 'Lutas seguidas desligado. Toque para ligar'}
-    title="Lutas seguidas" onClick={() => { onChange(!ligado); toque(!ligado); }}>
+    aria-label={ligado ? t('Lutas seguidas ligado: a próxima luta começa sozinha. Toque para desligar') : t('Lutas seguidas desligado. Toque para ligar')}
+    title={t('Lutas seguidas')} onClick={() => { onChange(!ligado); toque(!ligado); }}>
     <Repeat size={17} /><b>AUTO</b>
   </button>;
 }
