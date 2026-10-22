@@ -3,6 +3,7 @@ import { Volume2,Volume1,Music2,Zap,Sparkles,Hash,Wind,Gauge,Repeat,CircleHelp,E
 import { VELOCIDADES, type Settings } from '../lib/storage';
 import { TelaTopo } from '../components/Casca';
 import { battleAudio } from '../lib/audio';
+import { TrocaDeIdioma } from '../components/TrocaDeIdioma';
 
 /*
  * Ajustes (remake): um painel de jogo, sem parágrafo.
@@ -58,6 +59,7 @@ export function SettingsScreen({settings:s,onChange,onReset,onGaleria}:{settings
   const muda=<K extends keyof Settings>(k:K,v:Settings[K])=>onChange({...s,[k]:v});
   return <section className="ajustes-v2">
     <TelaTopo icone={<Settings2/>} cor="#c3a2ff" rotulo="AJUSTES" titulo="Do seu jeito"><p>Fica salvo neste aparelho.</p></TelaTopo>
+    <TrocaDeIdioma/>
 
     <div className="aj-painel">
       <h2><Volume2 size={16}/>SOM</h2>

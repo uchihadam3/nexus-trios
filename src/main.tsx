@@ -1,5 +1,6 @@
 import { createRoot } from 'react-dom/client';
 import App from './App';
+import { carregarIdioma } from './i18n/idioma';
 import './styles.css';
 import './presentation/battle.css';
 import './presentation/visual-game.css';
@@ -22,7 +23,8 @@ import './presentation/portao.css';
 import './presentation/combos.css';
 import './presentation/inspetor-v2.css';
 import './presentation/livro.css';
-createRoot(document.getElementById('root')!).render(<App/>);
+// o jogo abre depois de carregar o idioma (o dicionário do inglês só vem para quem joga em inglês)
+void carregarIdioma().finally(()=>createRoot(document.getElementById('root')!).render(<App/>));
 /*
  * Versão nova do jogo. O service worker novo assume na hora (skipWaiting), mas
  * a aba aberta continua rodando o código velho até recarregar — e uma jornada

@@ -17,6 +17,7 @@ import type { Autenticacao, Conta } from '../lib/auth';
 import { validarHandle } from '../lib/auth';
 import type { Profile } from '../lib/storage';
 import { AccountScreen } from './AccountScreen';
+import { TrocaDeIdioma } from '../components/TrocaDeIdioma';
 
 export type EtapaDoPortao = 'carregando' | 'entrar' | 'nome' | 'erro';
 
@@ -36,6 +37,7 @@ export function PortaoDaConta({ etapa, autenticacao, conta, profile, conectado, 
   };
   return <main className="portao">
     <header className="portao-marca"><b>NEXUS</b><span>TRIOS</span></header>
+    <TrocaDeIdioma compacta/>
     {etapa === 'carregando' && <section className="portao-cartao" aria-busy="true"><span className="portao-giro" aria-hidden /><p>Conectando à sua conta…</p></section>}
     {etapa === 'erro' && <section className="portao-cartao" role="alert">
       <WifiOff size={28} /><h2>Sem conexão com o servidor</h2>

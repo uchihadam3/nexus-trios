@@ -229,3 +229,11 @@
 .rk-dono-corpo .rk-lista li>span b{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .rk-dono-corpo .rk-lista li>span small{opacity:.7}
 .rk-dono-corpo .rk-lista li>button{padding:6px 12px;min-height:0}
+
+/* Português / English (components/TrocaDeIdioma.tsx) */
+.troca-idioma{display:flex;align-items:center;justify-content:center;gap:6px;margin:10px auto;padding:5px;border-radius:14px;width:max-content;max-width:100%;background:#0a0f0c;box-shadow:inset 0 0 0 1px #ffffff1a;color:#9fb0bf}
+.troca-idioma>svg{margin:0 4px}
+.troca-idioma button{display:flex;align-items:center;gap:6px;min-height:36px;padding:0 12px;border:0;border-radius:10px;cursor:pointer;font:inherit;font-size:13px;font-weight:800;color:#c4d0c0;background:transparent}
+.troca-idioma button b{font-size:11px;letter-spacing:1px;opacity:.75}
+.troca-idioma button.ativo{color:#10150f;background:linear-gradient(180deg,#d8f77a,#a8dd3f);box-shadow:0 0 12px #c8f56044}
+.troca-idioma.compacta button{min-height:32px;padding:0 10px}
