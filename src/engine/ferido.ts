@@ -1,4 +1,5 @@
 import type { Skill, Target } from './types';
+import { t } from '../i18n/idioma';
 
 /*
  * "Alvo ferido" (condição `injured`): de quem é a Vida que importa.
@@ -21,7 +22,7 @@ export function alvosDoFerido(s: Skill): Target[] {
 /** Como a ficha diz de quem é a Vida que precisa estar abaixo de 78%. */
 export function textoDoFerido(s: Skill): string {
   const alvos = alvosDoFerido(s);
-  if (alvos.every((t) => t === 'self')) return 'estiver com menos de 78% de Vida';
-  if (alvos.some((t) => DO_TRIO.includes(t))) return 'alguém do trio estiver com menos de 78% de Vida';
-  return 'o rival estiver com menos de 78% de Vida';
+  if (alvos.every((x) => x === 'self')) return t('estiver com menos de 78% de Vida');
+  if (alvos.some((x) => DO_TRIO.includes(x))) return t('alguém do trio estiver com menos de 78% de Vida');
+  return t('o rival estiver com menos de 78% de Vida');
 }

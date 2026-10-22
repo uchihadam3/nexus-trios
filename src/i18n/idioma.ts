@@ -27,15 +27,24 @@ export const IDIOMA: Idioma = inicial();
 export const LOCALE = IDIOMA === 'en' ? 'en-US' : 'pt-BR';
 
 let dicionario: Readonly<Record<string, string>> = {};
+/*
+ * Os textos montados com um número no meio (os avisos da luta: "Joia 3/6", "Nível 4"): sem uma chave fixa, entram por
+ * padrão. Cada pedaço capturado também passa pelo dicionário ("Copiou: Vingança" → "Copied: Vengeance").
+ */
+let padroes: readonly (readonly [RegExp, string])[] = [];
 /** Carrega o dicionário do idioma (só em inglês); o jogo só abre depois disso (src/main.tsx). */
 export async function carregarIdioma(): Promise<void> {
   // (o servidor também importa este arquivo, pelo motor: lá não há página)
   const pagina = (globalThis as { document?: { documentElement: { lang: string } } }).document;
   if (pagina) pagina.documentElement.lang = IDIOMA === 'en' ? 'en' : 'pt-BR';
-  if (IDIOMA === 'en') dicionario = (await import('./en')).EN;
+  if (IDIOMA === 'en') { const en = await import('./en'); dicionario = en.EN; padroes = en.PADROES.map(([re, en2]) => [new RegExp(re), en2] as const); }
 }
 /** Para os testes: usa este dicionário. */
-export function usarDicionario(d: Readonly<Record<string, string>>): void { dicionario = d; }
+export function usarDicionario(d: Readonly<Record<string, string>>, p: readonly (readonly [string, string])[] = []): void { dicionario = d; padroes = p.map(([re, en]) => [new RegExp(re), en] as const); }
+const porPadrao = (pt: string): string | undefined => {
+  for (const [re, en] of padroes) { const m = re.exec(pt); if (m) return en.replace(/\$(\d)/g, (_, i: string) => dicionario[m[Number(i)] ?? ''] ?? m[Number(i)] ?? ''); }
+  return undefined;
+};
 
 /** Troca o idioma e recarrega o jogo. */
 export function trocarIdioma(novo: Idioma): void {
@@ -49,7 +58,7 @@ export function trocarIdioma(novo: Idioma): void {
  * `{nome}` no texto é trocado por vars.nome (números no formato do idioma).
  */
 export function t(pt: string, vars?: Readonly<Record<string, string | number>>): string {
-  let s = IDIOMA === 'en' ? (dicionario[pt] ?? pt) : pt;
+  let s = IDIOMA === 'en' ? (dicionario[pt] ?? porPadrao(pt) ?? pt) : pt;
   if (vars) s = s.replace(/\{(\w+)\}/g, (m, k: string) => (k in vars ? (typeof vars[k] === 'number' ? numero(vars[k] as number) : String(vars[k])) : m));
   return s;
 }
