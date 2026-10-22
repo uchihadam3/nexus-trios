@@ -10,6 +10,7 @@ import {JornadaComOsSeus} from '../components/JornadaComOsSeus';
 import {onlineCall,onlineConfigured,type RankingDeConquistas} from '../lib/online';
 import type {Profile} from '../lib/storage';
 import { universoDaFicha } from '../data/equipes';
+import {LOCALE,nomeDe,t} from '../i18n/idioma';
 
 /*
  * As Conquistas (pedido do jogador): todos os personagens, um por conquista.
@@ -23,7 +24,7 @@ import { universoDaFicha } from '../data/equipes';
  * quanto falta para o próximo; com conta, a posição no ranking de conquistas.
  * Embaixo, a Jornada com os seus (o trio dos já liberados) e três sugestões do dia de quem ainda falta.
  */
-const data=(iso:string)=>new Date(iso).toLocaleDateString('pt-BR');
+const data=(iso:string)=>new Date(iso).toLocaleDateString(LOCALE);
 
 export function ConquistasScreen({profile,conta,onProfile,onRanking,onDesafio,onComOsMeus}:{profile:Profile;conta:boolean;/** recebe uma atualização (do perfil mais novo), para duas mudanças seguidas não se apagarem */onProfile:(muda:(p:Profile)=>Profile)=>void;onRanking:()=>void;onDesafio:(id:string)=>void;/** a Jornada com os seus: o trio escolhido entre os liberados */onComOsMeus:(trio:string[])=>void}){
   const conquistas=profile.conquistas??{};
@@ -51,20 +52,20 @@ export function ConquistasScreen({profile,conta,onProfile,onRanking,onDesafio,on
   const R=44,C=2*Math.PI*R,fracao=liberadas/TOTAL_DE_CONQUISTAS;
 
   return <section className="conquistas-tela">
-    <TelaTopo icone={<Award/>} cor="#ffd36b" rotulo="CONQUISTAS" titulo={`Libere os ${TOTAL_DE_CONQUISTAS}`}><p>Termine as 10 lutas com um personagem no trio para liberar a conquista dele.</p></TelaTopo>
+    <TelaTopo icone={<Award/>} cor="#ffd36b" rotulo={t('CONQUISTAS')} titulo={t('Libere os {n}',{n:TOTAL_DE_CONQUISTAS})}><p>{t('Termine as 10 lutas com um personagem no trio para liberar a conquista dele.')}</p></TelaTopo>
 
     <div className="cq-heroi" style={{'--titulo':titulo.atual.cor} as CSSProperties}>
-      <div className="cq-anel" aria-label={`${liberadas} de ${TOTAL_DE_CONQUISTAS} liberados`}>
+      <div className="cq-anel" aria-label={t('{n} de {total} liberados',{n:liberadas,total:TOTAL_DE_CONQUISTAS})}>
         <svg viewBox="0 0 100 100"><circle className="cq-anel-fundo" cx="50" cy="50" r={R}/><circle className="cq-anel-cheio" cx="50" cy="50" r={R} style={{strokeDasharray:`${C*fracao} ${C}`}}/></svg>
-        <span><b>{liberadas}</b><small>de {TOTAL_DE_CONQUISTAS}</small><em>{Math.floor(fracao*100)}%</em></span>
+        <span><b>{liberadas}</b><small>{t('de')} {TOTAL_DE_CONQUISTAS}</small><em>{Math.floor(fracao*100)}%</em></span>
       </div>
       <div className="cq-titulo">
-        <span className="cq-nivel">NÍVEL {titulo.nivel}</span>
-        <strong>{titulo.atual.nome}</strong>
+        <span className="cq-nivel">{t('NÍVEL {n}',{n:titulo.nivel})}</span>
+        <strong>{t(titulo.atual.nome)}</strong>
         {titulo.proximo?<><div className="cq-barra"><i style={{width:`${Math.round(titulo.progresso*100)}%`}}/></div>
-          <small>Faltam <b>{titulo.proximo.minimo-liberadas}</b> para <b style={{color:titulo.proximo.cor}}>{titulo.proximo.nome}</b></small></>
-          :<small>Você liberou todos os personagens!</small>}
-        {conta&&onlineConfigured&&<button className="cq-no-ranking" onClick={onRanking}><Trophy size={14}/>{noRanking?.posicao?<><b>#{noRanking.posicao}</b> no ranking · {noRanking.total} valendo</>:<>Ranking de conquistas</>}<ChevronRight size={14}/></button>}
+          <small>{t('Faltam {n} para',{n:titulo.proximo.minimo-liberadas})} <b style={{color:titulo.proximo.cor}}>{t(titulo.proximo.nome)}</b></small></>
+          :<small>{t('Você liberou todos os personagens!')}</small>}
+        {conta&&onlineConfigured&&<button className="cq-no-ranking" onClick={onRanking}><Trophy size={14}/>{noRanking?.posicao?<><b>#{noRanking.posicao}</b> {t('no ranking · {n} valendo',{n:noRanking.total})}</>:<>{t('Ranking de conquistas')}</>}<ChevronRight size={14}/></button>}
       </div>
     </div>
 
@@ -72,36 +73,36 @@ export function ConquistasScreen({profile,conta,onProfile,onRanking,onDesafio,on
 
     <div className={`cq-desafio ${faltam.length?'':'completo'}`}>
       <div className="cq-desafio-topo">
-        <span className="cq-desafio-rotulo"><Zap size={15}/>DESAFIO DO DIA</span>
-        <span className="cq-desafio-pips" aria-label={`${desafio.ids.length-faltam.length} de ${desafio.ids.length} feitos hoje`}>{desafio.ids.map(id=><i key={id} className={conquistas[id]?'feito':''}/>)}</span>
+        <span className="cq-desafio-rotulo"><Zap size={15}/>{t('DESAFIO DO DIA')}</span>
+        <span className="cq-desafio-pips" aria-label={t('{n} de {total} feitos hoje',{n:desafio.ids.length-faltam.length,total:desafio.ids.length})}>{desafio.ids.map(id=><i key={id} className={conquistas[id]?'feito':''}/>)}</span>
       </div>
       {faltam.length?<>
-        <div className="cq-desafio-trio">{faltam.map((c,i)=><button key={c.id} onClick={()=>setAberto(c)} style={{'--character':c.color,'--i':i} as CSSProperties} aria-label={`Desafio: jogar com ${c.name}`}>
-          <span className="cq-desafio-retrato"><Portrait character={c}/></span><b>{c.name}</b><em><Play size={10} fill="currentColor"/>JOGAR</em></button>)}</div>
-        <p>Toque num deles: a Jornada já começa com ele no trio e <b>{PULOS_DO_DESAFIO} trocas</b> de opções (em vez de 3). Termine as 10 lutas para liberar.</p>
-        <small className="cq-desafio-relogio"><Clock3 size={12}/>Novos desafios em {ateMeiaNoite()}</small>
-      </>:<div className="cq-desafio-fim"><Trophy size={30}/><b>Desafio de hoje completo!</b><small><Clock3 size={12}/>Novos desafios em {ateMeiaNoite()}</small></div>}
+        <div className="cq-desafio-trio">{faltam.map((c,i)=><button key={c.id} onClick={()=>setAberto(c)} style={{'--character':c.color,'--i':i} as CSSProperties} aria-label={t('Desafio: jogar com {nome}',{nome:nomeDe(c)})}>
+          <span className="cq-desafio-retrato"><Portrait character={c}/></span><b>{nomeDe(c)}</b><em><Play size={10} fill="currentColor"/>{t('JOGAR')}</em></button>)}</div>
+        <p>{t('Toque num deles: a Jornada já começa com ele no trio e {n} trocas de opções (em vez de 3). Termine as 10 lutas para liberar.',{n:PULOS_DO_DESAFIO})}</p>
+        <small className="cq-desafio-relogio"><Clock3 size={12}/>{t('Novos desafios em {tempo}',{tempo:ateMeiaNoite()})}</small>
+      </>:<div className="cq-desafio-fim"><Trophy size={30}/><b>{t('Desafio de hoje completo!')}</b><small><Clock3 size={12}/>{t('Novos desafios em {tempo}',{tempo:ateMeiaNoite()})}</small></div>}
     </div>
 
     <Album listas={PERSONAGENS_DA_ABA} rotulo={a=>`${PERSONAGENS_DA_ABA[a].filter(c=>conquistas[c.id]).length}/${PERSONAGENS_DA_ABA[a].length}`}
       barra={a=>PERSONAGENS_DA_ABA[a].filter(c=>conquistas[c.id]).length/PERSONAGENS_DA_ABA[a].length}
       carta={(c,i)=>{const quando=conquistas[c.id],novo=!!quando&&!vistasAoAbrir.has(c.id);
-        return <button key={c.id} className={`cq-carta ${quando?'liberada':'bloqueada'} ${novo?'novo':''}`} style={{'--character':c.color,'--i':i} as CSSProperties} onClick={()=>setAberto(c)} aria-label={`${c.name}: ${quando?`liberado em ${data(quando)}`:'bloqueado'}`}>
+        return <button key={c.id} className={`cq-carta ${quando?'liberada':'bloqueada'} ${novo?'novo':''}`} style={{'--character':c.color,'--i':i} as CSSProperties} onClick={()=>setAberto(c)} aria-label={`${nomeDe(c)}: ${quando?t('liberado em {data}',{data:data(quando)}):t('bloqueado')}`}>
           <span className="cq-retrato"><Portrait character={c}/>{!quando&&<Lock className="cq-cadeado" size={14}/>}</span>
-          <small>{c.name}</small>
-          {novo&&<em className="cq-novo">NOVO</em>}
+          <small>{nomeDe(c)}</small>
+          {novo&&<em className="cq-novo">{t('NOVO')}</em>}
         </button>;}}/>
 
-    {aberto&&<div className="cq-veu" role="dialog" aria-label={aberto.name} onClick={e=>{if(e.target===e.currentTarget)setAberto(null);}}>
+    {aberto&&<div className="cq-veu" role="dialog" aria-label={nomeDe(aberto)} onClick={e=>{if(e.target===e.currentTarget)setAberto(null);}}>
       <div className={`cq-ficha ${conquistas[aberto.id]?'liberada':'bloqueada'}`} style={{'--character':aberto.color} as CSSProperties}>
-        <button className="cq-fechar" onClick={()=>setAberto(null)} aria-label="Fechar"><X size={18}/></button>
+        <button className="cq-fechar" onClick={()=>setAberto(null)} aria-label={t('Fechar')}><X size={18}/></button>
         <span className="cq-ficha-retrato"><Portrait character={aberto}/>{!conquistas[aberto.id]&&<Lock size={26}/>}</span>
-        <small className="cq-ficha-universo">{universoDaFicha(aberto)}</small>
-        <h2>{aberto.name}</h2>
+        <small className="cq-ficha-universo">{t(universoDaFicha(aberto))}</small>
+        <h2>{nomeDe(aberto)}</h2>
         {conquistas[aberto.id]
-          ?<p className="cq-ficha-ok"><Award size={16}/>Conquista liberada em <b>{data(conquistas[aberto.id]!)}</b></p>
-          :<p className="cq-ficha-falta">Termine as <b>10 lutas</b> de uma Jornada com {aberto.name} no trio para liberar.</p>}
-        {noDesafio(aberto.id)&&<button className="primary cq-ficha-jogar" onClick={()=>{setAberto(null);onDesafio(aberto.id);}}><Play size={18} fill="currentColor"/>Jogar com {aberto.name}<small>já no trio · {PULOS_DO_DESAFIO} trocas</small></button>}
+          ?<p className="cq-ficha-ok"><Award size={16}/>{t('Conquista liberada em {data}',{data:data(conquistas[aberto.id]!)})}</p>
+          :<p className="cq-ficha-falta">{t('Termine as 10 lutas de uma Jornada com {nome} no trio para liberar.',{nome:nomeDe(aberto)})}</p>}
+        {noDesafio(aberto.id)&&<button className="primary cq-ficha-jogar" onClick={()=>{setAberto(null);onDesafio(aberto.id);}}><Play size={18} fill="currentColor"/>{t('Jogar com {nome}',{nome:nomeDe(aberto)})}<small>{t('já no trio · {n} trocas',{n:PULOS_DO_DESAFIO})}</small></button>}
       </div>
     </div>}
   </section>;
@@ -112,8 +113,8 @@ export function ConquistasLiberadas({ids}:{ids:string[]}){
   const lista=ids.map(id=>byId[id]).filter((c):c is Character=>!!c);
   if(!lista.length)return null;
   return <div className="cq-liberadas" role="status">
-    <span className="cq-liberadas-rotulo"><Award size={15}/>{lista.length===1?'CONQUISTA LIBERADA':`${lista.length} CONQUISTAS LIBERADAS`}</span>
-    <div>{lista.map((c,i)=><span key={c.id} className="cq-liberada" style={{'--character':c.color,'--i':i} as CSSProperties}><Portrait character={c}/><small>{c.name}</small></span>)}</div>
+    <span className="cq-liberadas-rotulo"><Award size={15}/>{lista.length===1?t('CONQUISTA LIBERADA'):t('{n} CONQUISTAS LIBERADAS',{n:lista.length})}</span>
+    <div>{lista.map((c,i)=><span key={c.id} className="cq-liberada" style={{'--character':c.color,'--i':i} as CSSProperties}><Portrait character={c}/><small>{nomeDe(c)}</small></span>)}</div>
   </div>;
 }
 

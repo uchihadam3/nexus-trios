@@ -1,6 +1,7 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState, type CSSProperties } from 'react';
 import { BookOpen, Castle, ChevronLeft, ChevronRight, Crown, Globe, Link2, Lock, Sparkles, X, type LucideIcon } from 'lucide-react';
 import { ARTES_DO_COMBO, CartaDoCombo, TODOS_OS_COMBOS, visualDoCombo, type TipoDeCombo } from '../components/CombosDoTrio';
+import { t } from '../i18n/idioma';
 
 /*
  * O Livro de Combos (pedido do jogador: sair do "Como jogar" e ficar na tela
@@ -85,17 +86,17 @@ export function LivroDeCombos({ descobertos, vistos, onVer }: { descobertos: rea
   const abre = (id: string) => { if (aceso(id)) { setAberto(id); onVer(id); } else setTrancado(id); };
   const R = 44, C = 2 * Math.PI * R;
 
-  return <section className="lc" aria-label="Livro de Combos">
+  return <section className="lc" aria-label={t('Livro de Combos')}>
     <header className="lc-topo" style={{ '--titulo': titulo.cor } as CSSProperties}>
-      <div className="lc-anel" aria-label={`${achados} de ${total} descobertos`}>
+      <div className="lc-anel" aria-label={t('{n} de {total} descobertos',{n:achados,total})}>
         <svg viewBox="0 0 100 100"><circle className="lc-anel-fundo" cx="50" cy="50" r={R} /><circle className="lc-anel-cheio" cx="50" cy="50" r={R} style={{ strokeDasharray: `${C * fracao} ${C}` }} /></svg>
-        <span><BookOpen size={13} /><b>{achados}</b><small>de {total}</small></span>
+        <span><BookOpen size={13} /><b>{achados}</b><small>{t('de')} {total}</small></span>
       </div>
       <div className="lc-titulo">
-        <span className="lc-nivel">LIVRO DE COMBOS · NÍVEL {nivel + 1}</span>
-        <strong>{titulo.nome}</strong>
+        <span className="lc-nivel">{t('LIVRO DE COMBOS · NÍVEL {n}', { n: nivel + 1 })}</span>
+        <strong>{t(titulo.nome)}</strong>
         <div className="lc-barra"><i style={{ width: `${Math.round(progressoNivel * 100)}%` }} /></div>
-        <small>{proximo ? <>Faltam <b>{faltamProximo}</b> para <b style={{ color: proximo.cor }}>{proximo.nome}</b><span> · monte trios ou veja os rivais</span></> : <>Você descobriu todos os combos!</>}</small>
+        <small>{proximo ? <>{t('Faltam {n} para', { n: faltamProximo })} <b style={{ color: proximo.cor }}>{t(proximo.nome)}</b><span> · {t('monte trios ou veja os rivais')}</span></> : <>{t('Você descobriu todos os combos!')}</>}</small>
       </div>
     </header>
 
@@ -103,7 +104,7 @@ export function LivroDeCombos({ descobertos, vistos, onVer }: { descobertos: rea
       const Ic = a.icone, dela = TODOS_OS_COMBOS.filter((c) => c.tipo === a.id), n = dela.filter((c) => aceso(c.id)).length;
       const novos = dela.filter((c) => aceso(c.id) && !vistos.includes(c.id)).length;
       return <button key={a.id} role="tab" aria-selected={aba === a.id} className={aba === a.id ? 'ativa' : ''} style={{ '--aba': a.cor } as CSSProperties} onClick={() => trocaAba(a.id)}>
-        <Ic size={16} /><b>{a.nome}</b><small>{n}/{dela.length}</small><i style={{ width: `${(100 * n) / Math.max(1, dela.length)}%` }} />{novos > 0 && <em>{novos}</em>}
+        <Ic size={16} /><b>{t(a.nome)}</b><small>{n}/{dela.length}</small><i style={{ width: `${(100 * n) / Math.max(1, dela.length)}%` }} />{novos > 0 && <em>{novos}</em>}
       </button>;
     })}</nav>
 
@@ -115,30 +116,30 @@ export function LivroDeCombos({ descobertos, vistos, onVer }: { descobertos: rea
               const v = visualDoCombo(c.id), Icone = v.icone, arte = ARTES_DO_COMBO[c.id], on = aceso(c.id), novo = on && !vistosAoAbrir.has(c.id);
               return <button key={c.id} type="button" data-combo={c.id} className={`lc-peca ${arte ? 'com-arte' : ''} ${on ? `acesa ${v.raridade}` : 'apagada'} ${novo ? 'nova' : ''} ${trancado === c.id ? 'treme' : ''}`}
                 style={{ '--cb': c.tipo === 'lendarias' ? '#ffd36b' : v.cor, '--i': i, '--combo-fundo': arte ? `url("${arte.fundo}")` : undefined } as CSSProperties} onClick={() => abre(c.id)}
-                aria-label={on ? `${c.nome}: ver a ficha` : `${c.nome}: ainda não descoberto`}>
+                aria-label={on ? t('{nome}: ver a ficha', { nome: t(c.nome) }) : t('{nome}: ainda não descoberto', { nome: t(c.nome) })}>
                 <span className="lc-selo">{arte ? <><img className="lc-selo-arte" src={arte.selo} alt="" />{!on && <Lock className="lc-selo-cadeado" size={12} />}</> : on ? <Icone size={20} /> : <Lock size={16} />}</span>
-                <b>{c.nome}</b>
-                {novo && <em>NOVO</em>}
+                <b>{t(c.nome)}</b>
+                {novo && <em>{t('NOVO')}</em>}
               </button>;
             })}
           </div>)}
         </div>
       </div>
       <footer className="lc-rodape">
-        {trancado ? <p className="lc-dica" role="status"><Lock size={14} />Ainda escondido. Forme este combo no seu trio, ou veja um rival usar.</p>
+        {trancado ? <p className="lc-dica" role="status"><Lock size={14} />{t('Ainda escondido. Forme este combo no seu trio, ou veja um rival usar.')}</p>
           : folhas.length > 1 && <div className="lc-paginas">
-            <button className="lc-seta" onClick={() => irPara(pagina - 1)} disabled={pagina === 0} aria-label="Página anterior"><ChevronLeft size={18} /></button>
-            <span className="lc-pontos">{folhas.map((_, i) => <button key={i} className={i === pagina ? 'ativo' : ''} aria-label={`Página ${i + 1}`} onClick={() => irPara(i)} />)}</span>
-            <button className="lc-seta" onClick={() => irPara(pagina + 1)} disabled={pagina >= folhas.length - 1} aria-label="Próxima página"><ChevronRight size={18} /></button>
+            <button className="lc-seta" onClick={() => irPara(pagina - 1)} disabled={pagina === 0} aria-label={t('Página anterior')}><ChevronLeft size={18} /></button>
+            <span className="lc-pontos">{folhas.map((_, i) => <button key={i} className={i === pagina ? 'ativo' : ''} aria-label={t('Página {n}', { n: i + 1 })} onClick={() => irPara(i)} />)}</span>
+            <button className="lc-seta" onClick={() => irPara(pagina + 1)} disabled={pagina >= folhas.length - 1} aria-label={t('Próxima página')}><ChevronRight size={18} /></button>
           </div>}
       </footer>
     </div>
 
-    {aberto && <div className="lc-veu" role="dialog" aria-modal="true" aria-label="Ficha do combo" onClick={() => setAberto(null)}>
+    {aberto && <div className="lc-veu" role="dialog" aria-modal="true" aria-label={t('Ficha do combo')} onClick={() => setAberto(null)}>
       <div className="lc-ficha" onClick={(e) => e.stopPropagation()}>
         <span className="lc-ficha-brilho" aria-hidden><Sparkles size={16} /></span>
         <CartaDoCombo id={aberto} />
-        <button className="lc-fechar" onClick={() => setAberto(null)} aria-label="Fechar a ficha"><X size={18} /></button>
+        <button className="lc-fechar" onClick={() => setAberto(null)} aria-label={t('Fechar a ficha')}><X size={18} /></button>
       </div>
     </div>}
   </section>;

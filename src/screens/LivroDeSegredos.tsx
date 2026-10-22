@@ -3,6 +3,7 @@ import { KeyRound, Lock, Sparkles, Star, Crown, Gift, SkipForward } from 'lucide
 import { PULOS_COM_O_LIVRO_COMPLETO, PULOS_DA_JORNADA, SEGREDOS } from '../engine/segredos';
 import { ICONE_DO_SEGREDO, NOME_DA_LUTA, ONDE_FICA } from '../components/SeloDoSegredo';
 import '../presentation/segredos.css';
+import { t } from '../i18n/idioma';
 
 /*
  * O Livro de Segredos (pedido do jogador: "seis segredos… bem gamificado"). As seis cartas começam trancadas, só com
@@ -21,24 +22,24 @@ export function LivroDeSegredos({ descobertos, vistos, onVer }: { descobertos: r
     // marca uma vez, ao abrir
   }, []);
   const anel = 2 * Math.PI * 38;
-  return <section className="sg" aria-label="Livro de Segredos">
+  return <section className="sg" aria-label={t('Livro de Segredos')}>
     <header className="sg-topo">
       <div className="sg-anel">
         <svg viewBox="0 0 86 86" aria-hidden="true"><circle className="sg-anel-fundo" cx="43" cy="43" r="38" /><circle className="sg-anel-cheio" cx="43" cy="43" r="38" strokeDasharray={`${(anel * n) / 6} ${anel}`} /></svg>
-        <span><KeyRound size={16} /><b>{n}</b><small>de 6</small></span>
+        <span><KeyRound size={16} /><b>{n}</b><small>{t('de')} 6</small></span>
       </div>
       <div className="sg-titulo">
-        <span className="sg-nivel">LIVRO DE SEGREDOS</span>
-        <strong>{TITULOS[n]}</strong>
-        <small>Cada segredo cumprido abre uma <b>luta extra</b> na jornada. Ela só vale pontos se você vencer.</small>
+        <span className="sg-nivel">{t('LIVRO DE SEGREDOS')}</span>
+        <strong>{t(TITULOS[n]!)}</strong>
+        <small>{t('Cada segredo cumprido abre uma luta extra na jornada. Ela só vale pontos se você vencer.')}</small>
       </div>
     </header>
     <div className={`sg-premio ${n === 6 ? 'ganho' : ''}`} role="note">
       <span className="sg-premio-icone">{n === 6 ? <SkipForward size={22} /> : <Gift size={22} />}</span>
       <div>
-        <small>{n === 6 ? 'PRÊMIO GANHO!' : 'PRÊMIO DOS 6 SEGREDOS'}</small>
-        <b>+1 pulo para sempre</b>
-        <span>{n === 6 ? `Agora você tem ${PULOS_COM_O_LIVRO_COMPLETO} pulos para trocar as opções na escolha do trio, em vez de ${PULOS_DA_JORNADA}.` : `Descubra os 6 e a escolha do trio passa a ter ${PULOS_COM_O_LIVRO_COMPLETO} pulos em vez de ${PULOS_DA_JORNADA}. Faltam ${6 - n}.`}</span>
+        <small>{n === 6 ? t('PRÊMIO GANHO!') : t('PRÊMIO DOS 6 SEGREDOS')}</small>
+        <b>{t('+1 pulo para sempre')}</b>
+        <span>{n === 6 ? t('Agora você tem {n} pulos para trocar as opções na escolha do trio, em vez de {antes}.', { n: PULOS_COM_O_LIVRO_COMPLETO, antes: PULOS_DA_JORNADA }) : t('Descubra os 6 e a escolha do trio passa a ter {n} pulos em vez de {antes}. Faltam {faltam}.', { n: PULOS_COM_O_LIVRO_COMPLETO, antes: PULOS_DA_JORNADA, faltam: 6 - n })}</span>
       </div>
     </div>
     <div className="sg-lutas" aria-hidden="true">
@@ -49,11 +50,11 @@ export function LivroDeSegredos({ descobertos, vistos, onVer }: { descobertos: r
       {SEGREDOS.map((s, i) => {
         const ok = descobertos.includes(s.id), novo = ok && !vistosAoAbrir.has(s.id), Ic = ICONE_DO_SEGREDO[s.id];
         return <li key={s.id} className={`sg-carta ${ok ? 'aberta' : 'trancada'}`} style={{ '--cor': s.cor, '--i': i } as CSSProperties}>
-          {novo && <em className="sg-novo">NOVO</em>}
+          {novo && <em className="sg-novo">{t('NOVO')}</em>}
           <span className="sg-selo">{ok ? <Ic size={22} /> : <Lock size={18} />}</span>
-          <b className="sg-nome">{ok ? s.nome : 'Segredo trancado'}</b>
-          <p className="sg-texto">{ok ? s.regra : <i>“{s.charada}”</i>}</p>
-          <span className="sg-libera">{s.libera.map((q) => <span key={q} title={`${NOME_DA_LUTA[q]}, ${ONDE_FICA[q]}`}>{q === 'onze' && <Sparkles size={10} />}{NOME_DA_LUTA[q]}</span>)}</span>
+          <b className="sg-nome">{ok ? t(s.nome) : t('Segredo trancado')}</b>
+          <p className="sg-texto">{ok ? t(s.regra) : <i>“{t(s.charada)}”</i>}</p>
+          <span className="sg-libera">{s.libera.map((q) => <span key={q} title={`${t(NOME_DA_LUTA[q])}, ${t(ONDE_FICA[q])}`}>{q === 'onze' && <Sparkles size={10} />}{t(NOME_DA_LUTA[q])}</span>)}</span>
         </li>;
       })}
     </ul>

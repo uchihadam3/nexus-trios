@@ -7,6 +7,7 @@ import {CUSTO_DA_COLECAO,formatarPontos} from '../engine/pontos';
 import {Portrait} from './Portrait';
 import {ABAS,PERSONAGENS_DA_ABA,abaDo,type Aba,type Conquistas} from '../lib/conquistas';
 import {Album} from './Album';
+import {nomeDe,t} from '../i18n/idioma';
 
 /*
  * A Jornada com os seus (pedido do jogador: "um botão lá nos seus personagens… fazer uma jornada com os personagens que
@@ -27,20 +28,20 @@ export function JornadaComOsSeus({conquistas,onJogar}:{conquistas:Conquistas;onJ
   return <>
     <div className={`cq-meus ${faltam?'trancada':''}`}>
       <div className="cq-meus-topo">
-        <span className="cq-meus-rotulo"><Award size={15}/>JORNADA COM OS SEUS</span>
-        <span className="cq-meus-conta">{meus.length} {meus.length===1?'seu':'seus'}</span>
+        <span className="cq-meus-rotulo"><Award size={15}/>{t('JORNADA COM OS SEUS')}</span>
+        <span className="cq-meus-conta">{t(meus.length===1?'{n} seu':'{n} seus',{n:meus.length})}</span>
       </div>
       <div className="cq-meus-corpo">
         <span className="cq-meus-leque" aria-hidden="true">{[0,1,2].map(i=>{const c=meus[i];return <span key={i} style={{'--character':c?.color??'#3a3320','--i':i} as CSSProperties}>{c?<Portrait character={c}/>:<Lock size={16}/>}</span>;})}</span>
-        <p>Monte o trio só com <b>os personagens que você já liberou</b> e jogue a Jornada inteira com eles.</p>
+        <p>{t('Monte o trio só com os personagens que você já liberou e jogue a Jornada inteira com eles.')}</p>
       </div>
       <div className="cq-meus-regras">
-        <span><Minus size={12}/>{custo} por luta</span>
-        <span><StarOff size={12}/>sem bônus de estrela</span>
-        <span><Lock size={12}/>não libera conquistas nem segredos</span>
+        <span><Minus size={12}/>{custo} {t('por luta')}</span>
+        <span><StarOff size={12}/>{t('sem bônus de estrela')}</span>
+        <span><Lock size={12}/>{t('não libera conquistas nem segredos')}</span>
       </div>
       <button className="primary cq-meus-botao" disabled={!!faltam} onClick={()=>setAberta(true)}>
-        {faltam?<><Lock size={16}/>Libere mais {faltam} para usar</>:<><Play size={17} fill="currentColor"/>ESCOLHER MEU TRIO</>}
+        {faltam?<><Lock size={16}/>{t('Libere mais {n} para usar',{n:faltam})}</>:<><Play size={17} fill="currentColor"/>{t('ESCOLHER MEU TRIO')}</>}
       </button>
     </div>
     {aberta&&<Escolha meus={meus} custo={custo} onFechar={()=>setAberta(false)} onJogar={trio=>{setAberta(false);onJogar(trio);}}/>}
@@ -54,36 +55,36 @@ function Escolha({meus,custo,onFechar,onJogar}:{meus:Character[];custo:string;on
   // separados pelas abas das Conquistas (pedido do dono: "ficar separadinho igual"), na mesma ordem do álbum
   const listas=useMemo(()=>{
     const q=sem(busca.trim()),seus=new Set(meus.map(c=>c.id));
-    return Object.fromEntries(ABAS.map(x=>[x.id,PERSONAGENS_DA_ABA[x.id].filter(c=>seus.has(c.id)&&(!q||sem(c.name).includes(q)))])) as Record<Aba,Character[]>;
+    return Object.fromEntries(ABAS.map(x=>[x.id,PERSONAGENS_DA_ABA[x.id].filter(c=>seus.has(c.id)&&(!q||sem(`${c.name} ${nomeDe(c)}`).includes(q)))])) as Record<Aba,Character[]>;
   },[meus,busca]);
   // buscando, vai para a aba que tem o nome
   useEffect(()=>{if(busca.trim()&&!listas[aba].length){const outra=ABAS.find(x=>listas[x.id].length);if(outra)setAba(outra.id);}},[busca,listas,aba]);
   const troca=(id:string)=>setTrio(t=>t.includes(id)?t.filter(x=>x!==id):t.length<3?[...t,id]:t);
   const pronto=trio.length===3;
-  return createPortal(<div className="cq-meus-veu" role="dialog" aria-label="Jornada com os seus: escolha o trio" onClick={e=>{if(e.target===e.currentTarget)onFechar();}}>
+  return createPortal(<div className="cq-meus-veu" role="dialog" aria-label={t('Jornada com os seus: escolha o trio')} onClick={e=>{if(e.target===e.currentTarget)onFechar();}}>
     <div className="cq-meus-folha">
       <header>
-        <span className="cq-meus-rotulo"><Award size={15}/>MONTE SEU TRIO</span>
-        <button className="cq-fechar" onClick={onFechar} aria-label="Fechar"><X size={18}/></button>
-        <small>Só os seus liberados · {meus.length} na coleção</small>
-        {meus.length>12&&<label className="cq-meus-busca"><Search size={15}/><input value={busca} onChange={e=>setBusca(e.target.value)} placeholder="Buscar nos seus" aria-label="Buscar nos seus personagens"/></label>}
+        <span className="cq-meus-rotulo"><Award size={15}/>{t('MONTE SEU TRIO')}</span>
+        <button className="cq-fechar" onClick={onFechar} aria-label={t('Fechar')}><X size={18}/></button>
+        <small>{t('Só os seus liberados · {n} na coleção',{n:meus.length})}</small>
+        {meus.length>12&&<label className="cq-meus-busca"><Search size={15}/><input value={busca} onChange={e=>setBusca(e.target.value)} placeholder={t('Buscar nos seus')} aria-label={t('Buscar nos seus personagens')}/></label>}
       </header>
       <div className="cq-meus-grade">
         <Album listas={listas} aba={aba} onAba={setAba} rotulo={x=>`${listas[x].length}`}
-          vazio={<p className="cq-meus-nada">{busca.trim()?'Nenhum dos seus com esse nome.':'Nenhum liberado aqui ainda.'}</p>}
+          vazio={<p className="cq-meus-nada">{busca.trim()?t('Nenhum dos seus com esse nome.'):t('Nenhum liberado aqui ainda.')}</p>}
           carta={(c,i)=>{const n=trio.indexOf(c.id),cheio=n<0&&trio.length===3;
-            return <button key={c.id} className={`cq-carta liberada ${n>=0?'no-trio':''} ${cheio?'apagada':''}`} style={{'--character':c.color,'--i':Math.min(i,40)} as CSSProperties} onClick={()=>troca(c.id)} aria-pressed={n>=0} aria-label={n>=0?`${c.name}: no trio (toque para tirar)`:`Pôr ${c.name} no trio`}>
+            return <button key={c.id} className={`cq-carta liberada ${n>=0?'no-trio':''} ${cheio?'apagada':''}`} style={{'--character':c.color,'--i':Math.min(i,40)} as CSSProperties} onClick={()=>troca(c.id)} aria-pressed={n>=0} aria-label={n>=0?t('{nome}: no trio (toque para tirar)',{nome:nomeDe(c)}):t('Pôr {nome} no trio',{nome:nomeDe(c)})}>
               <span className="cq-retrato"><Portrait character={c}/>{n>=0&&<em className="cq-meus-numero">{n+1}</em>}</span>
-              <small>{c.name}</small>
+              <small>{nomeDe(c)}</small>
             </button>;}}/>
       </div>
       <footer>
         <div className="cq-meus-trio">{[0,1,2].map(i=>{const c=trio[i]?byId[trio[i]!]:undefined;return c
-          ?<button key={c.id} className="cheio" style={{'--character':c.color} as CSSProperties} onClick={()=>troca(c.id)} aria-label={`Tirar ${c.name} do trio`}><Portrait character={c}/><b>{c.name}</b></button>
-          :<span key={`v${i}`} className={i===trio.length?'vez':''}><i>?</i><b>{i===trio.length?'escolha':`espaço ${i+1}`}</b></span>;})}</div>
-        <p className="cq-meus-lembrete"><b>−{custo}</b> por luta · sem bônus de estrela · não libera conquistas nem segredos</p>
+          ?<button key={c.id} className="cheio" style={{'--character':c.color} as CSSProperties} onClick={()=>troca(c.id)} aria-label={t('Tirar {nome} do trio',{nome:nomeDe(c)})}><Portrait character={c}/><b>{nomeDe(c)}</b></button>
+          :<span key={`v${i}`} className={i===trio.length?'vez':''}><i>?</i><b>{i===trio.length?t('escolha'):t('espaço {n}',{n:i+1})}</b></span>;})}</div>
+        <p className="cq-meus-lembrete"><b>−{custo}</b> {t('por luta')} · {t('sem bônus de estrela')} · {t('não libera conquistas nem segredos')}</p>
         <button className="primary cq-meus-jogar" disabled={!pronto} onClick={()=>onJogar(trio)}>
-          {pronto?<><Play size={18} fill="currentColor"/>JOGAR COM OS MEUS</>:<>Escolha {3-trio.length} {3-trio.length===1?'personagem':'personagens'}</>}
+          {pronto?<><Play size={18} fill="currentColor"/>{t('JOGAR COM OS MEUS')}</>:<>{t(3-trio.length===1?'Escolha {n} personagem':'Escolha {n} personagens',{n:3-trio.length})}</>}
         </button>
       </footer>
     </div>

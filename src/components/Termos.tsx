@@ -22,8 +22,8 @@ function CartaoDoTermo({termo,onClose}:{termo:Termo;onClose:()=>void}){
         <span className="id-card-medal termo-medal" aria-hidden>{ehStatus?<img src={`/assets/statuses/${termo.id}.png`} width={30} height={30} alt=""/>:<b>{t(termo.nome).slice(0,1).toUpperCase()}</b>}</span>
         <div><span className="id-card-family">{t(termo.rotulo)}</span><h2>{t(termo.nome)}</h2></div>
       </div>
-      <p className="id-card-lead">{termo.texto}</p>
-      {termo.extra&&<p className="termo-extra">{termo.extra}</p>}
+      <p className="id-card-lead">{t(termo.texto)}</p>
+      {termo.extra&&<p className="termo-extra">{t(termo.extra)}</p>}
       <button className="primary id-card-ok" onClick={onClose}>{t('Entendi')}</button>
     </div>
   </dialog>;
