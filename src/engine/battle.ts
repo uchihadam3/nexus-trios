@@ -377,7 +377,7 @@ function damage(b:Battle,source:Fighter,target:Fighter,raw:number,direto=true,la
   let mCausa=1,mRecebe=anota(target.uid,unica(target)?.recebe?.(M,b,target,source,g)??1);
   if(!devolvido&&!interno){mCausa*=anota(source.uid,unica(source)?.causa?.(M,b,source,target,g)??1);for(const a of b.fighters)if(a.side===source.side&&alive(a))mCausa*=anota(a.uid,unica(a)?.causaAliado?.(M,b,a,source,target,g)??1);}
   for(const a of b.fighters)if(a.side===target.side&&a!==target&&alive(a))mRecebe*=anota(a.uid,unica(a)?.recebeAliado?.(M,b,a,target,source,g)??1);
-  const outgoing=(devolvido||interno?raw:raw*(1+intensity(source,'strengthened'))*(1-intensity(source,'weakened'))*(1+(source.bonus?.dano??0)))*mCausa;
+  const outgoing=(devolvido||interno?raw:raw*(1+intensity(source,'strengthened'))*(1-intensity(source,'weakened'))*(1+(source.bonus?.dano??0)))*mCausa*furiaDoTempo(b.time);
   // Congelado: o golpe direto quebra o gelo e entra mais forte
   const gelo=direto?intensity(target,'frozen'):0;
   if(gelo>0){target.statuses=target.statuses.filter(s=>s.id!=='frozen');label='Quebrou o gelo';}
@@ -778,6 +778,14 @@ export function intervaloDoBasico(b:Battle,f:Fighter):{agora:number|null;base:nu
   return {agora:rate>0?base/rate:null,base};
 }
 export const TEMPO_MAXIMO=300;
+/*
+ * A fúria do tempo (pedido do dono: "se depois de um minuto de luta ainda tiver luta, todos passam a dar 25% de dano a
+ * mais… um minuto e meio, 50%… dois minutos, 100%"): a partir de `de` segundos, todo dano sai `mais` maior. Depois dos
+ * 2 minutos dobra a cada 30 s, para nenhuma luta passar de uns 3 minutos e meio. Medido: a luta normal quase não muda (só
+ * 9% passam de 1 minuto); suporte contra suporte, que levava 2 minutos em média e 11% iam até os 300 s, cai para 1:34.
+ */
+export const FURIA_DO_TEMPO:{de:number;mais:number}[]=[{de:60,mais:.25},{de:90,mais:.5},{de:120,mais:1},{de:150,mais:2},{de:180,mais:4},{de:210,mais:8}];
+export const furiaDoTempo=(t:number)=>{let m=0;for(const d of FURIA_DO_TEMPO)if(t>=d.de)m=Math.max(m,d.mais);return 1+m;};
 export function resolve(b:Battle){
   // quem está em brasas não segura o trio na luta (pedido do jogador): se cair o último de pé antes de ele
   // renascer, a luta acaba e ele não volta

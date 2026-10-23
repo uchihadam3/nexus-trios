@@ -11,8 +11,10 @@ import {normaisVencidas,proximaLuta,rivalDaLuta,seedDaLuta,segredosCumpridos} fr
  *        Cada época tem o seu ranking: a 250.7 começou com Hoje, Semana e Geral vazios.
  * 250.8: Marcado (alvo + atravessa escudo) e Eletrificado (choque que atrasa) deixam de só dar dano extra.
  * 256.0: combos do trio e bônus de universo (src/engine/combos.ts).
- * Os seis segredos (src/engine/segredos.ts) não mudam a luta, só a ordem da jornada: a versão do motor fica. */
-export const ENGINE_VERSION='nexus-256.0';
+ * Os seis segredos (src/engine/segredos.ts) não mudam a luta, só a ordem da jornada: a versão do motor fica.
+ * 257.0: a fúria do tempo (todo dano cresce depois de 1 minuto de luta) e os buffs e debuffs que fazem diferença
+ *        (src/data/reequilibrio.ts). */
+export const ENGINE_VERSION='nexus-257.0';
 /*
  * A época do ranking: Hoje, Semana e Geral guardam as jornadas de uma época.
  * Muda só quando o jogador quer zerar o ranking (não a cada versão do motor):

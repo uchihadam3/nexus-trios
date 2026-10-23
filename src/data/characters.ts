@@ -6,6 +6,7 @@ import { alinharEfeitos } from './alinhar-efeitos';
 import { aplicaMecanicas } from './mecanicas';
 import { aplicaGolpesQueAtacam } from './golpes-que-atacam';
 import { aplicaBasico } from './basicos';
+import { reequilibra } from './reequilibrio';
 import { aplicaTraco } from './tracos';
 import { aplicaAjusteDeKit } from './ajuste-de-kit';
 import { aplicaRitmo } from './ritmo-das-habilidades';
@@ -301,5 +302,7 @@ function semATrava(c:Character):Character{
   const m=DANO_SEM_A_TRAVA[c.id];if(!m)return c;
   return {...c,skills:c.skills.map((s,i)=>m[i]===undefined?s:{...s,effects:s.effects.map(e=>e.kind==='damage'?{...e,value:Math.round(e.value*m[i]!)}:e)}) as Character['skills']};
 }
-export const characters:Character[]=deBase.map(c=>ajustaForca(c,TANQUES.has(c.id),VIDA_DE_TANQUE)).map(ajustaRegeneracao).map(aplicaPedidos).map(aplicaAjusteDeKit).map(aplicaRitmo).map(soComPreparo).map(cargaEhParaSi).map(semATrava);
+/** O elenco antes do reequilíbrio dos buffs e debuffs (src/data/reequilibrio.ts): scripts/reequilibrar.ts mede a partir dele. */
+export const antesDoReequilibrio:Character[]=deBase.map(c=>ajustaForca(c,TANQUES.has(c.id),VIDA_DE_TANQUE)).map(ajustaRegeneracao).map(aplicaPedidos).map(aplicaAjusteDeKit).map(aplicaRitmo).map(soComPreparo).map(cargaEhParaSi).map(semATrava);
+export const characters:Character[]=antesDoReequilibrio.map(c=>reequilibra(c));
 export const byId:Record<string,Character> = Object.fromEntries(characters.map(c=>[c.id,c]));

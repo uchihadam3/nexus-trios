@@ -124,3 +124,9 @@
 .sg-premio.ganho .sg-premio-icone{color:#2a1a00;background:radial-gradient(circle at 35% 30%,#fff3b0,#ffd36b);box-shadow:0 0 16px #ffd36b88;animation:sg-premio-pulsa 2.2s ease-in-out infinite}
 @keyframes sg-premio-pulsa{50%{transform:scale(1.08)}}
 @media (prefers-reduced-motion:reduce){.sg-premio,.sg-premio.ganho .sg-premio-icone{animation:none}}
+
+/* a fúria do tempo: o selo no canto da arena e o aviso de cada degrau */
+.bt-furia-selo{position:absolute;top:8px;right:8px;z-index:35;padding:3px 9px;border-radius:999px;background:#3a0d0dcc;border:1px solid #ff6b3d;color:#ffd0b8;font-size:11px;font-weight:900;letter-spacing:1px;pointer-events:none;box-shadow:0 0 12px #ff6b3d88}
+.bt-furia{position:absolute;inset:0;z-index:40;display:grid;align-content:center;justify-items:center;gap:4px;pointer-events:none;text-align:center;padding:0 16px}
+.bt-furia strong{font-size:clamp(28px,8vw,46px);font-weight:900;letter-spacing:2px;color:#ff8a4d;text-shadow:0 0 18px #ff6b3d,0 0 40px #ff2d2d;animation:sg-revela 1s cubic-bezier(.2,.9,.3,1.25) both}
+.bt-furia span{font-size:13px;font-weight:800;color:#ffe3d6;text-shadow:0 1px 4px #000}

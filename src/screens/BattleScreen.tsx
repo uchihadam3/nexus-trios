@@ -5,6 +5,7 @@ import { battleAudio } from '../lib/audio';
 import { PRIORIDADE } from '../audio/cues';
 import { Swords,Pause,Play,FastForward,VolumeX,Volume2,SlidersHorizontal,Check,LogOut,ChevronLeft,ScrollText,Link2,Star } from 'lucide-react';
 import { LUTA_ESTRELA,ehLutaExtra } from '../engine/segredos';
+import { furiaDoTempo } from '../engine/battle';
 import '../presentation/segredos.css';
 import { AberturaDeCombos,DescobertaNoLivro,FichaDoCombo,ListaDeCombos,type NovosNoLivro } from '../components/CombosDoTrio';
 import { OrbesDeCombo } from '../components/OrbesDeCombo';
@@ -145,6 +146,7 @@ export function BattleScreen({battle,beat,index,name,settings,paused,onPause,onA
       {novosNoLivro&&novosNoLivro.chave===`${index}-${battle.seed}`&&<DescobertaNoLivro novos={novosNoLivro} comecando={battle.time<1.5}/>}
       {/* a luta extra liberada por um segredo (src/engine/segredos.ts) abre com o nome dela */}
       {!pvp&&ehLutaExtra(index)&&<AberturaSecreta key={`${index}-${battle.seed}`} index={index} nome={name} comecando={battle.time<1.5}/>}
+      <FuriaDoTempo tempo={battle.time}/>
       {paused&&<div className="paused-banner"><Pause size={16}/> {t('BATALHA PAUSADA')}</div>}
     </div>
     <footer className="arena-controls">
@@ -173,6 +175,16 @@ export function BattleScreen({battle,beat,index,name,settings,paused,onPause,onA
 }
 
 /* A abertura da luta secreta: "LUTA SECRETA ★" com o nome do rival, por três segundos (só quando a luta começa agora). */
+/* A fúria do tempo (src/engine/battle.ts): o selo fica no canto enquanto vale e, a cada degrau, o aviso passa pela arena. */
+function FuriaDoTempo({tempo}:{tempo:number}){
+  const mais=Math.round((furiaDoTempo(tempo)-1)*100),[aviso,setAviso]=useState(0);
+  useEffect(()=>{if(mais<=0)return;setAviso(mais);battleAudio.sound('pronto',PRIORIDADE.grand);const id=window.setTimeout(()=>setAviso(0),2600);return()=>clearTimeout(id);},[mais]);
+  if(mais<=0)return null;
+  return <>
+    <div className="bt-furia-selo" aria-label={t('Todos causam +{n}% de dano',{n:mais})}>🔥 {t('FÚRIA')} +{mais}%</div>
+    {aviso>0&&<div className="bt-furia" role="status"><strong>{t('FÚRIA')}</strong><span>{t('A luta está longa: todos causam +{n}% de dano',{n:aviso})}</span></div>}
+  </>;
+}
 function AberturaSecreta({index,nome,comecando}:{index:number;nome:string;comecando:boolean}){
   const [ver,setVer]=useState(comecando);
   useEffect(()=>{if(!ver)return;battleAudio.sound('pronto',PRIORIDADE.grand);const id=window.setTimeout(()=>setVer(false),3300);return()=>clearTimeout(id);
