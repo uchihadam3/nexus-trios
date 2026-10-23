@@ -1,6 +1,6 @@
 import { characters, byId } from '../data/characters';
 import { random, shuffle } from './random';
-import { FORCA, PESO_DA_LIGACAO } from '../data/forca-dos-rivais';
+import { FORCA, PESO_DA_LIGACAO, PESO_DA_SEGUNDA } from '../data/forca-dos-rivais';
 import { LIGACOES_DOS_COMBOS, idsDosCombos } from './combos';
 export interface Encounter {team:string[];name:string;power:number;scale:number}
 export interface Draft {team:string[];candidates:string[];skips:number;rng:number;banned?:string[]}
@@ -30,10 +30,11 @@ export function pickDraft(d:Draft,id:string):Draft{if(d.team.length>=3||!d.candi
  */
 /* A sinergia do trio: os combos acesos (src/engine/combos.ts), cada um com o peso medido nas lutas. */
 export function sinergiaDoTrio(team:readonly string[]):number{
-  // o mesmo que somar ligacoesDosCombos × PESO_DA_LIGACAO, na mesma ordem (o resultado sai idêntico, bit a bit), sem montar o objeto de 56 chaves: a campanha avalia milhares de trios
+  // o mesmo que somar ligacoesDosCombos × PESO_DA_LIGACAO, na mesma ordem, sem montar o objeto de 56 chaves (a campanha avalia milhares de
+  // trios); o mesmo combo duas vezes no trio vale PESO_DA_SEGUNDA na segunda (medido: ~74% da primeira, não 100%)
   const conta=new Map<number,number>();
   for(const id of idsDosCombos(team)){const i=ORDEM_DA_LIGACAO.get(id.startsWith('lenda-')?'lenda':id)!;conta.set(i,Math.min(2,(conta.get(i)??0)+1));}
-  let n=0;for(const i of [...conta.keys()].sort((a,b)=>a-b))n+=conta.get(i)!*(PESO_DA_LIGACAO[LIGACOES_DOS_COMBOS[i]!]??0);
+  let n=0;for(const i of [...conta.keys()].sort((a,b)=>a-b)){const l=LIGACOES_DOS_COMBOS[i]!,p=PESO_DA_LIGACAO[l]??0;n+=conta.get(i)===2?p+(PESO_DA_SEGUNDA[l]??p):p;}
   return n;
 }
 const ORDEM_DA_LIGACAO=new Map(LIGACOES_DOS_COMBOS.map((l,i)=>[l,i]));

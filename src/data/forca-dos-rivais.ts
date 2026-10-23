@@ -482,3 +482,6 @@ export const PESO_DA_LIGACAO: Record<string, number> = {
   "trio-relogio": 0.794,
   "lenda": 0.966,
 };
+
+/** Quanto a segunda vez do mesmo combo no trio soma (sem ele, vale o mesmo que a primeira). */
+export const PESO_DA_SEGUNDA: Record<string, number> = {};
