@@ -10,9 +10,9 @@
  * Não editar à mão: medir de novo depois de mudar o elenco.
  * Exceção: o Kaioken do Goku (100 de dano, Kamehameha 403 → 354) só mexeu na força dele, medida à parte
  * (src/data/forca-dos-rivais.ts); o Lelouch mais forte (Xadrez, Xeque-mate e o traço Zero), também. As duplas ficam as
- * mesmas até a próxima medição completa.
+ * mesmas até a próxima medição completa. Cloud, T-800, Mob e Gambit (energia por golpe recebido e no ataque básico), também.
  */
-export const DUPLAS_MEDIDAS_COM = "fnv1a-0f5f9c1b";
+export const DUPLAS_MEDIDAS_COM = "fnv1a-eca855d8";
 export const ALFABETO_DAS_DUPLAS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_";
 export const PASSO_DAS_DUPLAS = 0.06;
 export const AJUSTE_DAS_DUPLAS =

@@ -28,7 +28,9 @@ export type JeitoDeBater =
   | { tipo: 'serie'; cada: number; nome: string; mult?: number; status?: { status: StatusId; value: number; duration: number } }
   | { tipo: 'ricochete' | 'largo' | 'cura' | 'escudo' | 'dreno'; fracao: number }
   | { tipo: 'rouba' | 'acelera'; valor: number };
-export interface Trait {name:string;description:string; on:Topic; cooldown:number; effects:Effect[]; target:Target}
+export interface Trait {name:string;description:string; on:Topic; cooldown:number; effects:Effect[]; target:Target;
+  /** A energia guardada conta por golpe (o mesmo em todo golpe), não pelo tamanho do dano (a cada 100). */
+  porGolpe?:boolean}
 export interface Character {
   id:string; name:string; universe:string; portrait:string; color:string; symbol:string; idea:string; vulnerability:string; intelligence?:number;
   hp:number; interval:number; basic:{name:string;effects:Effect[];visual:Visual;target:Target;jeito?:JeitoDeBater};

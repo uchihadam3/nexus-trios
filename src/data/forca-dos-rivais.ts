@@ -9,6 +9,10 @@
  * pedido do dono) também, do mesmo jeito: 0,099 → 0,327. E o Lelouch (Ordem absoluta a cada 10 s e, sem Status bom
  * para roubar, paralisa o rival mais forte por 2 s; Xadrez com Fortalecido 30%, Xeque-mate com Fraqueza 30% e o traço Zero
  * também enfraquecendo 15%): −0,49 → 0,151. A próxima medição completa já inclui os três.
+ * Cloud, T-800, Mob e Gambit (pedido do dono: "o Omnislash tá sendo inútil, ele não tá guardando nada"): a energia do
+ * traço passou a contar por golpe recebido e o ataque básico também guarda; medidos do mesmo jeito, cada um em 6.000 a
+ * 10.000 lutas com as mesmas sementes de antes: Cloud −0,052 → 0,205, T-800 −0,018 → 0,146, Mob 0,118 → 0,286,
+ * Gambit −0,373 → −0,292.
  */
 
 /*
@@ -16,7 +20,7 @@
  * usam esta força; tests/forca-atualizada.test.ts falha se um personagem ou
  * o motor mudar sem medir de novo.
  */
-export const MEDIDA_COM = { motor: "nexus-256.0", elenco: "fnv1a-0f5f9c1b" };
+export const MEDIDA_COM = { motor: "nexus-256.0", elenco: "fnv1a-eca855d8" };
 
 export const FORCA: Record<string, number> = {
   "aang": 0.467,
@@ -76,7 +80,7 @@ export const FORCA: Record<string, number> = {
   "chopper": -0.38,
   "chucky": 0.283,
   "chunli": 0.235,
-  "cloud": -0.052,
+  "cloud": 0.205,
   "coiote": -0.266,
   "constantine": 0.003,
   "coragem": -0.214,
@@ -125,7 +129,7 @@ export const FORCA: Record<string, number> = {
   "frozone": -0.159,
   "gaara": -0.015,
   "galactus": -0.084,
-  "gambit": -0.373,
+  "gambit": -0.292,
   "gamora": -0.014,
   "gandalf": -0.197,
   "ganondorf": 0.07,
@@ -255,7 +259,7 @@ export const FORCA: Record<string, number> = {
   "mickey": -0.064,
   "mikasa": 0.194,
   "minato": 0.317,
-  "mob": 0.118,
+  "mob": 0.286,
   "mojojojo": -0.009,
   "moonknight": -0.03,
   "morty": -0.371,
@@ -375,7 +379,7 @@ export const FORCA: Record<string, number> = {
   "subzero": -0.085,
   "sukuna": -0.115,
   "superman": -0.098,
-  "t800": -0.018,
+  "t800": 0.146,
   "tails": 0.116,
   "tanjiro": 0.085,
   "taz": 0.036,

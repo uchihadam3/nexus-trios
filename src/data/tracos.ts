@@ -19,7 +19,7 @@ const esc = (value: number, target: Target = 'self'): Effect => ({ kind: 'shield
 const dano = (value: number, target: Target): Effect => ({ kind: 'damage', value, target });
 const st = (status: StatusId, value: number, duration: number, target?: Target): Effect => ({ kind: 'status', status, value, duration, ...(target ? { target } : {}) });
 
-type T = [nome: string, on: Topic, cooldown: number, target: Target, effects: Effect[]];
+type T = [nome: string, on: Topic, cooldown: number, target: Target, effects: Effect[], extra?: { porGolpe?: true }];
 export const TRACOS: Record<string, T> = {
   // equilíbrio dos combos (pedido do jogador: ninguém acima de 7% no trio aleatório): o mesmo traço, mais espaçado e um pouco mais fraco
   billcipher: ['Triângulo dos sonhos', 'status', 3.1, 'enemyStrong', [st('exposed', 0.1, 7), st('confused', 0.09, 6)]],
@@ -49,7 +49,8 @@ export const TRACOS: Record<string, T> = {
   professorx: ['Rede de coordenação', 'action', 1.5, 'allAllies', [ch(3), st('strengthened', 0.1, 2, 'allAllies')]], // o Cérebro liga as mentes: o trio age junto e acerta melhor
   anya: ['Telepatia de alerta', 'enemyCast', 3, 'allyWeak', [st('evasion', 0.38, 3, 'allAllies'), st('exposed', 0.15, 3, 'enemyCast')]], // (Esquiva 30% → 38%, Exposto 12% → 15%: equilíbrio) lê a mente de quem prepara: avisa o trio inteiro e mostra onde bater
   yor: ['Golpe na veia', 'dealt', 3, 'enemyWeak', [st('bleed', 8, 5)]],
-  cloud: ['Barra de Limite', 'received', 1.4, 'self', [{ kind: 'store', value: 27, cap: 433, target: 'self' }]],
+  // por golpe recebido, não a cada 100 de dano (pedido do dono: "guardar energia a cada golpe que ele receber")
+  cloud: ['Barra de Limite', 'received', 0.8, 'self', [{ kind: 'store', value: 30, cap: 433, target: 'self' }], { porGolpe: true }],
   tifa: ['Combo crescente', 'dealt', 1.2, 'self', [sh(0.06, 'self')]],
   yusuke: ['Reiki acumulado', 'received', 1.4, 'self', [{ kind: 'store', value: 27, cap: 441, target: 'self' }]],
   trunks: ['Esperança do futuro', 'allyHurt', 2, 'self', [ch(6)]],
@@ -154,8 +155,8 @@ export const TRACOS: Record<string, T> = {
 export const aplicaTraco = (c: Character): Character => {
   const t = TRACOS[c.id];
   if (!t) return c;
-  const [name, on, cooldown, target, effects] = t;
+  const [name, on, cooldown, target, effects, extra] = t;
   // quando todo efeito diz o próprio alvo, o traço fica em "si" e a ficha escreve o alvo de cada um ("em todo o trio")
   const alvo: Target = effects.every((e) => e.target) ? 'self' : target;
-  return { ...c, trait: { name, description: name, on, cooldown, target: alvo, effects } };
+  return { ...c, trait: { name, description: name, on, cooldown, target: alvo, effects, ...extra } };
 };

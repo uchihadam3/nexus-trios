@@ -269,7 +269,7 @@ function trigger(b:Battle,f:Fighter,topic:Topic,source?:Fighter,amount=1){
   const t=byId[f.characterId].trait;
   if(t.on===topic&&f.traitTimer<=0){
     f.traitTimer=Math.max(t.cooldown*(1-(f.bonus?.traco??0)),STEP);
-    applyEffects(b,f,targets(b,f,t.target,t.effects),t.effects,amount);
+    applyEffects(b,f,targets(b,f,t.target,t.effects),t.effects,t.porGolpe?1:amount);
   }
 }
 /*

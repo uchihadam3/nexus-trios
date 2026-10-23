@@ -502,7 +502,7 @@ export function presentTrait(trait:Trait):TraitPresentation {
   const effects=trait.effects.map(effect=>{
     const texto=presentEffect(effect,trait.target);
     // só a energia armazenada cresce com o tamanho do golpe; e diz de qual dano ("a cada 100 de dano recebido")
-    return effect.kind==='store'&&DANO_PROPORCIONAL.has(trait.on)?`${texto}, ${t(topicNames[trait.on])}`:texto;
+    return effect.kind==='store'&&DANO_PROPORCIONAL.has(trait.on)&&!trait.porGolpe?`${texto}, ${t(topicNames[trait.on])}`:texto;
   });
   const {quando,limite}=quandoAtiva(trait);
   return {summary:effects[0]??t('Sem efeito'),quando,trigger:quando.charAt(0).toLowerCase()+quando.slice(1),frequency:limite,effects};
