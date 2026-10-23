@@ -298,10 +298,16 @@ function resumoDe(c: string, motivos: MotivoOrdenado[], tom: 'bom' | 'alerta' = 
 }
 
 /** As dicas para os candidatos da vez. `fora`: quem não pode entrar (o trio e os banidos). */
-export function dicasDoDraft(candidatos: string[], time: string[], fora: string[] = []): DicaDoCandidato[] {
+/**
+ * `posicao`: a posição que a tela mostra para um trio completo (src/presentation/posicao-do-trio.ts, 1 = o melhor). Com dois já
+ * escolhidos, o terceiro é escolhido por ela (pedido do dono: "garantir que as posições lá nas dicas sejam tudo correto"): a
+ * melhor escolha das Dicas é a que dá a melhor posição na tela, e o encaixe é a posição dele entre todos que poderiam entrar.
+ */
+export function dicasDoDraft(candidatos: string[], time: string[], fora: string[] = [], posicao?: (trio: string[]) => number): DicaDoCandidato[] {
   // sem trio ainda: quanto o trio com ele vence com dois parceiros quaisquer (medido, com os combos) — a mesma
   // medida do "Forte em qualquer trio" e do "Sozinho rende pouco", para a porcentagem e o texto não se contradizerem
-  const nota = (id: string) => (time.length ? notaDoTrio([...time, id]) : DUPLAS[id]?.solo ?? 0.5 + (FORCA[id] ?? 0) / 10);
+  const pelaTela = time.length === 2 && posicao !== undefined;
+  const nota = (id: string) => (pelaTela ? -posicao([...time, id]) : time.length ? notaDoTrio([...time, id]) : DUPLAS[id]?.solo ?? 0.5 + (FORCA[id] ?? 0) / 10);
   const pool = characters.map((c) => c.id).filter((id) => !time.includes(id) && !fora.includes(id)).map(nota).sort((a, b) => a - b);
   const notas = new Map(candidatos.map((id) => [id, nota(id)]));
   const melhor = candidatos.reduce((a, b) => (notas.get(b)! > notas.get(a)! ? b : a), candidatos[0]!);

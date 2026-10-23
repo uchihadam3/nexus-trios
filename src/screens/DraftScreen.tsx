@@ -13,7 +13,7 @@ import { ComTermos } from '../components/Termos';
 import { draftConnection } from '../presentation/draft-connections';
 import { BotaoDicas } from '../components/BotaoDicas';
 import { dicasDoDraft,estrelasDaPorcentagem,posicaoDoTrio,ESTRELAS_MAXIMAS,type DicaDoCandidato } from '../presentation/dicas-do-trio';
-import { ESTRELAS_DOURADAS,douradasDaPosicao,textoDaPosicao,usePosicaoDoTrio } from '../presentation/posicao-do-trio';
+import { ESTRELAS_DOURADAS,douradasDaPosicao,posicaoDoTime,textoDaPosicao,usePosicaoDoTrio,useRanking } from '../presentation/posicao-do-trio';
 import { universoDaFicha } from '../data/equipes';
 import { CUSTO_DA_COLECAO,formatarPontos } from '../engine/pontos';
 import { nomeDe, numero, ordinal, plural, t } from '../i18n/idioma';
@@ -42,7 +42,8 @@ export function DraftScreen({draft,desafio,colecao=false,primeiroRival,naColecao
   const doTrio=identidadesDoTrio(team),lacunas=lacunasDoTrio(team);
   const vez=draft.team.length;
   const ligadas=dicas&&!full;
-  const conselhos=useMemo(()=>ligadas?dicasDoDraft(draft.candidates,draft.team):[],[ligadas,draft.candidates,draft.team]);
+  const rk=useRanking();
+  const conselhos=useMemo(()=>ligadas?dicasDoDraft(draft.candidates,draft.team,[],rk?(t=>posicaoDoTime(t,rk.ranking,rk.topo)):undefined):[],[ligadas,draft.candidates,draft.team,rk]);
   const [porque,setPorque]=useState<DicaDoCandidato|null>(null);
   const comQuem=draft.team.map(primeiroNome).join(' + ');
 

@@ -51,10 +51,15 @@ let carregando: Promise<{ ranking: Ranking; topo: TopoMedido }> | undefined;
 export const carregarRanking = () => (carregando ??= Promise.all([import('../data/posicoes-dos-trios'), import('../data/topo-medido')])
   .then(([m, t]) => ({ ranking: montarRanking(m.DE, m.CONTAS, m.TOTAL_DE_TRIOS), topo: montarTopoMedido(t.IDS, t.TRIOS) })));
 
-/** A posição do time (1 = o melhor trio de todos) e quantos trios existem; null enquanto carrega. */
-export function usePosicaoDoTrio(team: readonly string[]): { posicao: number; total: number } | null {
+/** O ranking e o topo medido, carregados quando a tela abre; null enquanto carrega. */
+export function useRanking(): { ranking: Ranking; topo: TopoMedido } | null {
   const [dados, setDados] = useState<{ ranking: Ranking; topo: TopoMedido } | null>(null);
   useEffect(() => { let vivo = true; void carregarRanking().then((r) => { if (vivo) setDados(r); }).catch(() => {}); return () => { vivo = false; }; }, []);
+  return dados;
+}
+/** A posição do time (1 = o melhor trio de todos) e quantos trios existem; null enquanto carrega. */
+export function usePosicaoDoTrio(team: readonly string[]): { posicao: number; total: number } | null {
+  const dados = useRanking();
   return dados && team.length === 3 ? { posicao: posicaoDoTime(team, dados.ranking, dados.topo), total: dados.ranking.total } : null;
 }
 
