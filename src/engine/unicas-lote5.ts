@@ -127,17 +127,17 @@ export const LOTE5: Record<string, Unica> = {
   },
   samus: {
     nome: 'Raio de gelo e míssil',
-    texto: 'A cada 4 ataques básicos, Samus Aran congela o alvo: Congelado (+20% de dano no golpe que quebra o gelo) por 1 s, e o golpe seguinte de Samus nesse rival causa +60% de dano.',
+    texto: 'A cada 4 ataques básicos, Samus Aran congela o alvo: Congelado (+20% de dano no golpe que quebra o gelo) por 1,5 s, e o golpe seguinte de Samus nesse rival causa +80% de dano.',
     ganchos: {
       bateu(m, b, f, alvo, _dano, g) {
         if (!g.direto || g.habilidade || !vivo(alvo)) return;
         u(f).tiros = (u(f).tiros ?? 0) + 1;
-        if (u(f).tiros! % 4 === 0) { m.efeitos(b, f, [alvo], [st('frozen', 0.2, 1)]); u(f).missil = idx(b, alvo); m.aviso(b, f, 'Raio de gelo', alvo); }
+        if (u(f).tiros! % 4 === 0) { m.efeitos(b, f, [alvo], [st('frozen', 0.2, 1.5)]); u(f).missil = idx(b, alvo); m.aviso(b, f, 'Raio de gelo', alvo); }
       },
       causa(_m, b, f, alvo, g) {
         if (!g.direto || u(f).missil !== idx(b, alvo) || (u(f).tiros ?? 0) % 4 === 0) return 1;
         u(f).missil = -1;
-        return 1.6;
+        return 1.8;
       },
     },
   },
@@ -175,14 +175,14 @@ export const LOTE5: Record<string, Unica> = {
   },
   megatron: {
     nome: 'Tiro devastador',
-    texto: 'A cada 3 habilidades que Megatron usa, sai o Tiro devastador: 150 de dano em cada rival, e Megatron fica 2 s parado esfriando.',
+    texto: 'A cada 3 habilidades que Megatron usa, sai o Tiro devastador: 170 de dano em cada rival, e Megatron fica 1 s parado esfriando.',
     ganchos: {
       usou(m, b, f) {
         u(f).calor = (u(f).calor ?? 0) + 1;
         if (u(f).calor! < 3) return;
-        u(f).calor = 0; u(f).esfria = b.time + 2;
+        u(f).calor = 0; u(f).esfria = b.time + 1;
         m.aviso(b, f, 'Tiro devastador', f);
-        for (const r of m.rivais(b, f)) m.dano(b, f, r, 150, false, 'Tiro devastador');
+        for (const r of m.rivais(b, f)) m.dano(b, f, r, 170, false, 'Tiro devastador');
       },
       parado: (f, b) => (u(f).esfria ?? 0) > b.time,
     },
@@ -194,7 +194,7 @@ export const LOTE5: Record<string, Unica> = {
   },
   constantine: {
     nome: 'Expulsar demônios',
-    texto: 'A cada 10 s, Constantine expulsa dos rivais a Invocação e a Regeneração. Cada uma tirada causa 60 de dano no rival que a tinha.',
+    texto: 'A cada 10 s, Constantine expulsa dos rivais a Invocação e a Regeneração. Cada uma tirada causa 120 de dano no rival que a tinha.',
     ganchos: {
       passo(m, b, f, dt) {
         if (!relogio(f, 'exorcismo', dt, 10, 6)) return;
@@ -203,7 +203,7 @@ export const LOTE5: Record<string, Unica> = {
           if (!fora.length) continue;
           r.statuses = r.statuses.filter((s) => !fora.includes(s));
           m.aviso(b, f, 'Exorcizado', r);
-          m.dano(b, f, r, 60 * fora.length, false, 'Exorcismo');
+          m.dano(b, f, r, 120 * fora.length, false, 'Exorcismo');
         }
       },
     },
@@ -219,7 +219,7 @@ export const LOTE5: Record<string, Unica> = {
   },
   nemesis: {
     nome: 'Caçada implacável',
-    texto: 'O ataque básico de Nemesis persegue o rival com mais Vida até esse rival cair. Cada golpe seguido nele causa +6% de dano a mais que o anterior (até +60%).',
+    texto: 'O ataque básico de Nemesis persegue o rival com mais Vida até esse rival cair. Cada golpe seguido nele causa +9% de dano a mais que o anterior (até +90%).',
     ganchos: {
       alvoDoBasico(m, b, f) {
         let v = b.fighters[u(f).caca ?? -1];
@@ -229,7 +229,7 @@ export const LOTE5: Record<string, Unica> = {
       causa(_m, b, f, alvo, g) {
         if (!g.direto || u(f).caca !== idx(b, alvo)) return 1;
         u(f).golpes = (u(f).golpes ?? 0) + 1;
-        return 1 + 0.06 * Math.min(10, u(f).golpes!);
+        return 1 + 0.09 * Math.min(10, u(f).golpes!);
       },
     },
   },

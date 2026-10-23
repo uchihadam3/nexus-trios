@@ -294,15 +294,15 @@ export const LOTE3: Record<string, Unica> = {
   },
   samara: {
     nome: 'Sete dias',
-    texto: 'No começo da luta, Samara amaldiçoa o rival com mais Vida. Se Samara ainda estiver de pé aos 35 s de luta, esse rival cai na hora. Derrubar Samara antes disso desfaz a maldição.',
+    texto: 'No começo da luta, Samara amaldiçoa o rival com mais Vida. Se Samara ainda estiver de pé aos 28 s de luta, esse rival cai na hora. Derrubar Samara antes disso desfaz a maldição.',
     ganchos: {
       inicio(m, b, f) { const a = maisForte(m, b, f); if (a) { u(f).fita = idx(b, a); m.aviso(b, f, 'Sete dias…', a); } },
       passo(m, b, f) {
         const s = u(f), alvo = b.fighters[s.fita ?? -1];
         if (!alvo || !vivo(alvo) || s.fim) return;
-        const dia = Math.min(7, Math.floor(b.time / 5) + 1);
+        const dia = Math.min(7, Math.floor(b.time / 4) + 1);
         if (dia !== s.dia) { s.dia = dia; if (dia < 7) m.aviso(b, f, `Dia ${dia}`, alvo, dia); }
-        if (b.time >= 35) { s.fim = 1; m.aviso(b, f, 'Saiu da TV', alvo); m.dano(b, f, alvo, alvo.hp + 1, false, 'Sete dias'); }
+        if (b.time >= 28) { s.fim = 1; m.aviso(b, f, 'Saiu da TV', alvo); m.dano(b, f, alvo, alvo.hp + 1, false, 'Sete dias'); }
       },
     },
   },
@@ -393,10 +393,10 @@ export const LOTE3: Record<string, Unica> = {
   },
   robocop: {
     nome: 'Corpo de metal',
-    texto: 'RoboCop nunca fica Sangrando, Envenenado nem Queimando, mas age 10% mais devagar.',
+    texto: 'RoboCop nunca fica Sangrando, Envenenado nem Queimando, mas age 5% mais devagar.',
     ganchos: {
       imune: (_f, s) => s === 'bleed' || s === 'poison' || s === 'burning',
-      ritmo: () => 0.9,
+      ritmo: () => 0.95,
     },
   },
   rambo: {

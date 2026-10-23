@@ -16,6 +16,7 @@ import type { Character } from '../src/engine/types';
 
 const [parte, partes, LUTAS] = [Number(process.argv[2]), Number(process.argv[3]), Number(process.argv[4])];
 const saida = process.argv[5]!, todas = process.argv.slice(5);
+const ANTES: Record<string, number> = process.env.ANTES ? Object.fromEntries(readFileSync(process.env.ANTES, 'utf8').split('\n').filter(Boolean).map((l) => { const d = JSON.parse(l) as { id: string; antes: number }; return [d.id, d.antes]; })) : {};
 const feitos = new Set(todas.filter(existsSync).flatMap((f) => readFileSync(f, 'utf8').split('\n').filter(Boolean).map((l) => (JSON.parse(l) as { id: string }).id)));
 
 /* Quanto cada efeito contínuo tem que render por luta (os bons do mesmo tipo rendem isso ou mais). */
@@ -62,15 +63,20 @@ for (let i = parte; i < ids.length; i += partes) {
   const id = ids[i]!; if (feitos.has(id) || (process.env.SO && !process.env.SO.split(',').includes(id))) continue;
   const c = antesDoReequilibrio[i]!, tem = usa(c);
   const base = medir(id, c, LUTAS);
+  // SO_BASE: só guarda quanto ele vence agora (antes de mudar a Mecânica única dele); ANTES: usa essa vitória como a meta
+  if (process.env.SO_BASE) { appendFileSync(saida, JSON.stringify({ id, antes: base.taxa }) + '\n'); continue; }
+  if (ANTES[id] !== undefined) base.taxa = ANTES[id]!;
   const mult: Record<string, number> = {};
   for (const [tipo, meta] of Object.entries(META)) if (tem.has(tipo as never) && base.rende[tipo]! < meta) mult[tipo] = Math.round(Math.min(6, meta / Math.max(1, base.rende[tipo]!)) * 100) / 100;
   const ficha = (a: Reequilibrio) => reequilibra(c, a);
   const sem = JSON.stringify(c) === JSON.stringify(ficha({ mult }));
-  if (sem) { appendFileSync(saida, JSON.stringify({ id, antes: base.taxa, depois: base.taxa, mult: {}, rende: {} }) + '\n'); continue; }
+  if (sem && ANTES[id] === undefined) { appendFileSync(saida, JSON.stringify({ id, antes: base.taxa, depois: base.taxa, mult: {}, rende: {} }) + '\n'); continue; }
   // o que ele ganhou: ataque (corta o dano direto) ou proteção e cura (corta a Vida)
   const melhorado = ficha({ mult }), ganhos = new Set<string>(Object.keys(mult));
   [c.basic, c.trait, ...c.skills].forEach((x, k) => x.effects.forEach((e, j) => { const d = [melhorado.basic, melhorado.trait, ...melhorado.skills][k]!.effects[j]!; if (JSON.stringify(d) !== JSON.stringify(e)) ganhos.add(e.kind === 'status' ? e.status : e.kind); }));
-  const alavanca: 'dano' | 'vida' = [...ganhos].some((g) => ATACA.has(g)) ? 'dano' : 'vida';
+  // quem só ganhou na Mecânica única: corta o dano, menos os de proteção (VIDA_PARA=ids)
+  const soUnica = ANTES[id] !== undefined && !ganhos.size;
+  const alavanca: 'dano' | 'vida' = soUnica ? ((process.env.VIDA_PARA ?? '').split(',').includes(id) ? 'vida' : 'dano') : [...ganhos].some((g) => ATACA.has(g)) ? 'dano' : 'vida';
   const com = (v: number) => ficha({ mult, [alavanca]: v });
   let x0 = 1, y0 = medir(id, com(1), LUTAS).taxa - base.taxa, x = x0, y = y0;
   if (Math.abs(y0) > 0.008) {

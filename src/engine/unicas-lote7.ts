@@ -44,10 +44,10 @@ export const LOTE7: Record<string, Unica> = {
   },
   camus: {
     nome: 'Esquife de gelo',
-    texto: 'Aos 25 s de luta (1 vez por luta), Camus de Aquário prende o rival com mais Vida no esquife de gelo: por 6 s, esse rival fica Paralisado, e o trio de Camus não causa dano nele.',
+    texto: 'Aos 18 s de luta (1 vez por luta), Camus de Aquário prende o rival com mais Vida no esquife de gelo: por 6 s, esse rival fica Paralisado, e o trio de Camus não causa dano nele.',
     ganchos: {
       passo(m, b, f) {
-        if (u(f).esquife || b.time < 25) return;
+        if (u(f).esquife || b.time < 18) return;
         const a = maisForte(m, b, f);
         if (!a) return;
         u(f).esquife = 1; u(f).preso = idx(b, a); u(f).ate = b.time + 6;
@@ -76,7 +76,7 @@ export const LOTE7: Record<string, Unica> = {
   },
   marvin: {
     nome: 'Cadê o kaboom?',
-    texto: 'A cada 15 s, Marvin, o Marciano tenta o Modulador: 50% de chance de causar 160 de dano no rival com mais Vida; se não, nada de kaboom.',
+    texto: 'A cada 15 s, Marvin, o Marciano tenta o Modulador: 50% de chance de causar 220 de dano no rival com mais Vida; se não, nada de kaboom.',
     ganchos: {
       passo(m, b, f, dt) {
         if (!relogio(f, 'modulador', dt, 15, 8)) return;
@@ -84,7 +84,7 @@ export const LOTE7: Record<string, Unica> = {
         if (!a) return;
         if (m.sorte(b) < 0.5) { m.aviso(b, f, 'Cadê o kaboom?', f); return; }
         m.aviso(b, f, 'KABOOM', a);
-        m.dano(b, f, a, 160, false, 'Modulador');
+        m.dano(b, f, a, 220, false, 'Modulador');
       },
     },
   },
@@ -271,15 +271,15 @@ export const LOTE7: Record<string, Unica> = {
   },
   peter: {
     nome: 'Briga sem fim',
-    texto: 'A cada 20 s, Peter Griffin briga com o galo: o rival com mais Vida perde 10% da Vida máxima, e Peter perde 5% da Vida máxima (sem cair por isso).',
+    texto: 'A cada 20 s, Peter Griffin briga com o galo: o rival com mais Vida perde 15% da Vida máxima, e Peter perde 3% da Vida máxima (sem cair por isso).',
     ganchos: {
       passo(m, b, f, dt) {
         if (!relogio(f, 'galo', dt, 20, 10)) return;
         const a = maisForte(m, b, f);
         if (!a) return;
         m.aviso(b, f, 'Briga com o galo!', a);
-        m.dano(b, f, a, a.maxHp * 0.1, false, 'Briga');
-        f.hp = Math.max(1, f.hp - f.maxHp * 0.05);
+        m.dano(b, f, a, a.maxHp * 0.15, false, 'Briga');
+        f.hp = Math.max(1, f.hp - f.maxHp * 0.03);
       },
     },
   },
@@ -375,9 +375,9 @@ export const LOTE7: Record<string, Unica> = {
   },
   patolino: {
     nome: 'Temporada de pato!',
-    texto: 'A cada 12 s, Patolino deixa o rival com mais Vida Confuso por 2 s.',
+    texto: 'A cada 12 s, Patolino deixa o rival com mais Vida Confuso por 3 s.',
     ganchos: {
-      passo(m, b, f, dt) { if (relogio(f, 'temporada', dt, 12, 7)) { const a = maisForte(m, b, f); if (a) { m.efeitos(b, f, [a], [st('confused', 1, 2)]); m.aviso(b, f, 'Temporada de coelho!', a); } } },
+      passo(m, b, f, dt) { if (relogio(f, 'temporada', dt, 12, 7)) { const a = maisForte(m, b, f); if (a) { m.efeitos(b, f, [a], [st('confused', 1, 3)]); m.aviso(b, f, 'Temporada de coelho!', a); } } },
     },
   },
   skeletor: {
@@ -600,18 +600,18 @@ export const LOTE7: Record<string, Unica> = {
   },
   ironman: {
     nome: 'Reator do Unibeam',
-    texto: 'Cada habilidade que alguém do trio do Homem de Ferro usa carrega o reator em 15%. Com o reator em 100%: Unibeam de 200 de dano no rival com mais Vida, e o reator zera.',
+    texto: 'Cada habilidade que alguém do trio do Homem de Ferro usa carrega o reator em 20%. Com o reator em 100%: Unibeam de 240 de dano no rival com mais Vida, e o reator zera.',
     ganchos: {
       passo(m, b, f) {
         const usos = m.aliados(b, f).reduce((n, a) => n + a.stats.skills, 0) + b.fighters.filter((x) => x.side === f.side && !vivo(x)).reduce((n, a) => n + a.stats.skills, 0);
         const novos = usos - (u(f).usos ?? 0);
         u(f).usos = usos;
         if (novos <= 0) return;
-        u(f).reator = (u(f).reator ?? 0) + 15 * novos;
+        u(f).reator = (u(f).reator ?? 0) + 20 * novos;
         if (u(f).reator! < 100) return;
         u(f).reator = 0;
         const a = maisForte(m, b, f);
-        if (a) { m.aviso(b, f, 'Unibeam', a); m.dano(b, f, a, 200, false, 'Unibeam'); }
+        if (a) { m.aviso(b, f, 'Unibeam', a); m.dano(b, f, a, 240, false, 'Unibeam'); }
       },
     },
   },

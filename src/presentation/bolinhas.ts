@@ -141,7 +141,7 @@ export const BOLINHAS: Record<string, Bolinha> = {
   shaka: rel(Eye),
   aiolia: ace(Zap),
   saga: rel(Moon),
-  camus: tempo(Snowflake, 25, 'esquife'),
+  camus: tempo(Snowflake, 18, 'esquife'),
   hadescz: ace(Skull),
   gohan: liga(Flame, (f) => !!f.u?.despertou),
   piccolo: ace(Users),
@@ -432,7 +432,7 @@ export const BOLINHAS: Record<string, Bolinha> = {
   ghostface: ciclo(Ghost, 'facadas', 3),
   leatherface: ace(Axe),
   pinhead: ace(Lock),
-  samara: tempo(Radio, 35, 'fim'),
+  samara: tempo(Radio, 28, 'fim'),
   valak: rel(Ghost),
   dracula: vida(Cloud, [0.3], 'nevoa'),
   // ——— os que faltavam

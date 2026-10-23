@@ -44,17 +44,21 @@ export const REEQUILIBRIO: Record<string, Reequilibrio> = {
   arlequina: { mult: { bomb: 1.04 } }, // vence 52.1% → 52.2%
   athena: { vida: 0.794 }, // vence 48.5% → 48.1%
   bakugo: { mult: { burning: 3.89, bomb: 1.67 }, dano: 0.951 }, // vence 51.8% → 51.5%
+  blackwidow: { dano: 0.97 }, // vence 53.7% → 53.0%
   bowser: { dano: 0.9 }, // vence 45.6% → 45.0%
   broly: { dano: 0.947 }, // vence 52.2% → 52.9%
-  capitaoplaneta: { piso: 0.5 }, // vence 53.1% → 53.1%
+  camus: { dano: 0.9 }, // vence 54.0% → 53.5%
+  capitaoplaneta: { dano: 0.7, piso: 0.5 }, // vence 53.1% → 52.7%
   carnage: { mult: { regen: 2 }, vida: 0.963 }, // vence 51.9% → 51.5%
-  catwoman: { mult: { bleed: 6 }, dano: 0.976 }, // vence 48.9% → 49.2%
+  catwoman: { mult: { bleed: 6 }, dano: 0.969 }, // vence 48.9% → 49.1%
   charizard: { dano: 0.9 }, // vence 46.2% → 46.4%
   coiote: { mult: { bomb: 1.45 } }, // vence 46.5% → 47.0%
-  coringa: { mult: { poison: 2.12 }, dano: 0.972 }, // vence 45.6% → 45.8%
+  coragem: { dano: 0.9 }, // vence 49.2% → 49.9%
+  coringa: { mult: { poison: 2.12 }, dano: 0.961 }, // vence 45.5% → 45.1%
   cosmowanda: { mult: { regen: 2.37 }, vida: 0.962 }, // vence 45.0% → 45.1%
   crash: { mult: { bomb: 1.74 }, dano: 0.973 }, // vence 48.2% → 48.1%
   darkseid: { dano: 0.944 }, // vence 52.5% → 52.5%
+  deku: { dano: 0.9 }, // vence 46.0% → 46.4%
   denji: { mult: { bleed: 5.26 }, dano: 0.9 }, // vence 53.7% → 52.9%
   dio: { vida: 0.945 }, // vence 47.6% → 47.2%
   donatello: { mult: { bomb: 1.43 } }, // vence 54.9% → 55.6%
@@ -68,6 +72,7 @@ export const REEQUILIBRIO: Record<string, Reequilibrio> = {
   gaara: { mult: { thorns: 1.19 }, dano: 0.735 }, // vence 47.8% → 47.7%
   gambit: { mult: { bomb: 2.58 }, dano: 0.971 }, // vence 48.2% → 48.7%
   gamora: { mult: { bleed: 1.67 } }, // vence 47.8% → 48.4%
+  genos: { dano: 0.7 }, // vence 50.1% → 49.8%
   ghostrider: { mult: { regen: 1.32 }, vida: 0.976 }, // vence 48.4% → 48.2%
   gohan: { dano: 0.929 }, // vence 53.5% → 53.9%
   gon: { dano: 0.941 }, // vence 51.0% → 50.7%
@@ -84,8 +89,9 @@ export const REEQUILIBRIO: Record<string, Reequilibrio> = {
   inosuke: { mult: { bleed: 6 }, dano: 0.968 }, // vence 50.8% → 51.1%
   invencivel: { vida: 0.959 }, // vence 47.6% → 47.2%
   iroh: { vida: 0.921 }, // vence 48.0% → 47.9%
+  ironman: { dano: 0.936 }, // vence 49.6% → 50.2%
   jackskellington: { mult: { burning: 3.89 }, dano: 0.97 }, // vence 50.3% → 51.1%
-  jeangrey: { vida: 0.965 }, // vence 49.3% → 49.8%
+  jeangrey: { vida: 0.9 }, // vence 49.4% → 49.2%
   jill: { vida: 0.9 }, // vence 50.6% → 50.5%
   jotaro: { mult: { summon: 1.56 }, dano: 0.978 }, // vence 47.5% → 47.9%
   kaiba: { mult: { burning: 2.06 }, dano: 0.962 }, // vence 59.9% → 59.9%
@@ -100,15 +106,19 @@ export const REEQUILIBRIO: Record<string, Reequilibrio> = {
   kurapika: { dano: 0.9 }, // vence 48.2% → 47.5%
   leatherface: { mult: { bleed: 3.33 }, dano: 0.978 }, // vence 57.7% → 57.6%
   leorio: { mult: { regen: 1.64 } }, // vence 50.2% → 50.9%
+  liono: { dano: 0.925 }, // vence 53.7% → 53.4%
   luigi: { mult: { burning: 3.89 }, dano: 0.964 }, // vence 54.9% → 55.0%
   madara: { dano: 0.758 }, // vence 51.9% → 52.4%
   malenia: { vida: 0.934 }, // vence 51.2% → 51.0%
   michaelmyers: { vida: 0.978 }, // vence 50.6% → 50.4%
   moonknight: { vida: 0.983 }, // vence 47.2% → 47.6%
+  mrfreeze: { vida: 0.9 }, // vence 45.4% → 45.8%
   mulherelastica: { vida: 0.841 }, // vence 49.7% → 49.1%
-  nemesis: { mult: { bomb: 2.16 }, dano: 0.971 }, // vence 48.6% → 48.2%
+  muzan: { dano: 0.873 }, // vence 48.8% → 49.5%
+  nemesis: { mult: { bomb: 2.35 }, dano: 0.924 }, // vence 48.5% → 49.1%
   nezuko: { vida: 0.947 }, // vence 48.0% → 48.1%
   pain: { mult: { summon: 1.59 } }, // vence 59.8% → 60.5%
+  peter: { dano: 0.944 }, // vence 45.3% → 45.6%
   pinhead: { dano: 0.843 }, // vence 45.9% → 45.4%
   poseidon: { dano: 0.944 }, // vence 45.2% → 45.2%
   power: { mult: { bleed: 1.49 } }, // vence 49.0% → 49.1%
@@ -121,6 +131,7 @@ export const REEQUILIBRIO: Record<string, Reequilibrio> = {
   rogue: { vida: 0.957 }, // vence 58.0% → 58.5%
   roy: { vida: 0.9 }, // vence 52.9% → 52.5%
   ryu: { mult: { burning: 3.04 }, dano: 0.99 }, // vence 49.8% → 50.0%
+  samara: { dano: 0.955 }, // vence 47.1% → 47.6%
   scarecrow: { mult: { poison: 2.92 }, dano: 0.982 }, // vence 49.1% → 49.4%
   scooby: { vida: 0.952 }, // vence 42.2% → 42.2%
   seiya: { dano: 0.919 }, // vence 58.5% → 58.1%
@@ -131,7 +142,7 @@ export const REEQUILIBRIO: Record<string, Reequilibrio> = {
   sora: { mult: { regen: 1.84 }, vida: 0.974 }, // vence 51.9% → 51.7%
   spawn: { mult: { bleed: 6 }, dano: 0.927 }, // vence 47.9% → 47.7%
   spiderwoman: { mult: { poison: 4.12 }, dano: 0.969 }, // vence 48.7% → 48.2%
-  srincrivel: { vida: 0.915 }, // vence 49.6% → 49.9%
+  srincrivel: { vida: 0.869 }, // vence 50.3% → 49.8%
   starlord: { dano: 0.969 }, // vence 46.2% → 46.3%
   steven: { vida: 0.725 }, // vence 44.8% → 44.4%
   stitch: { vida: 0.954 }, // vence 46.7% → 46.5%
@@ -142,6 +153,7 @@ export const REEQUILIBRIO: Record<string, Reequilibrio> = {
   tom: { mult: { bomb: 4.44 }, dano: 0.966 }, // vence 49.3% → 48.8%
   toph: { mult: { thorns: 1.47 }, dano: 0.949 }, // vence 50.1% → 49.9%
   trunks: { mult: { burning: 3.18 }, dano: 0.866 }, // vence 53.8% → 54.0%
+  tuob: { dano: 0.982 }, // vence 52.0% → 52.0%
   wesker: { mult: { bleed: 3.33 }, dano: 0.9 }, // vence 55.6% → 56.2%
   wolverine: { vida: 0.8 }, // vence 48.2% → 48.2%
   zelda: { dano: 0.963 }, // vence 52.0% → 52.1%

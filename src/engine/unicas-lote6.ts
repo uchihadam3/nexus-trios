@@ -237,11 +237,11 @@ export const LOTE6: Record<string, Unica> = {
   },
   coragem: {
     nome: 'Medo contagiante',
-    texto: 'Cada vez que Coragem leva de uma vez 15% da Vida máxima ou mais, Coragem grita: todos os rivais ficam Lento (20% mais lento) por 2 s.',
+    texto: 'Cada vez que Coragem leva de uma vez 15% da Vida máxima ou mais, Coragem grita: todos os rivais ficam Lento (25% mais lento) por 4 s.',
     ganchos: {
       apanhou(m, b, f, _fonte, dano) {
         if (dano < f.maxHp * 0.15) return;
-        m.efeitos(b, f, m.rivais(b, f), [st('slow', 0.2, 2)]);
+        m.efeitos(b, f, m.rivais(b, f), [st('slow', 0.25, 4)]);
         m.aviso(b, f, 'AAAAAH!', f);
       },
     },
@@ -311,12 +311,12 @@ export const LOTE6: Record<string, Unica> = {
   },
   tuob: {
     nome: 'Pod 042',
-    texto: 'A cada 5 s, o Pod 042 causa 22 de dano no rival com mais Vida, mesmo com a 2B parada.',
+    texto: 'A cada 5 s, o Pod 042 causa 45 de dano no rival com mais Vida, mesmo com a 2B parada.',
     ganchos: {
       passo(m, b, f, dt) {
         if (!relogio(f, 'pod', dt, 5, 3)) return;
         const a = maisForte(m, b, f);
-        if (a) { m.aviso(b, f, 'Pod 042', a); m.dano(b, f, a, 22, false, 'Pod'); }
+        if (a) { m.aviso(b, f, 'Pod 042', a); m.dano(b, f, a, 45, false, 'Pod'); }
       },
     },
   },

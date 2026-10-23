@@ -15,12 +15,12 @@ export const LOTE2: Record<string, Unica> = {
   /* ───────── Gotham ───────── */
   mrfreeze: {
     nome: 'Coração de gelo',
-    texto: 'Se nenhum rival estiver Lento ou Congelado, o Senhor Frio perde 1% da Vida máxima por segundo (sem cair por isso). Se algum rival estiver Lento ou Congelado, o Senhor Frio recebe −25% de dano.',
+    texto: 'Se nenhum rival estiver Lento ou Congelado, o Senhor Frio perde 0,5% da Vida máxima por segundo (sem cair por isso). Se algum rival estiver Lento ou Congelado, o Senhor Frio recebe −35% de dano.',
     ganchos: {
       passo(m, b, f, dt) {
-        if (!m.rivais(b, f).some((r) => m.intensidade(r, 'slow') > 0 || m.intensidade(r, 'frozen') > 0)) f.hp = Math.max(1, f.hp - f.maxHp * 0.01 * dt);
+        if (!m.rivais(b, f).some((r) => m.intensidade(r, 'slow') > 0 || m.intensidade(r, 'frozen') > 0)) f.hp = Math.max(1, f.hp - f.maxHp * 0.005 * dt);
       },
-      recebe: (m, b, f) => (m.rivais(b, f).some((r) => m.intensidade(r, 'slow') > 0 || m.intensidade(r, 'frozen') > 0) ? 0.75 : 1),
+      recebe: (m, b, f) => (m.rivais(b, f).some((r) => m.intensidade(r, 'slow') > 0 || m.intensidade(r, 'frozen') > 0) ? 0.65 : 1),
     },
   },
   poisonivy: {
@@ -42,11 +42,11 @@ export const LOTE2: Record<string, Unica> = {
   },
   catwoman: {
     nome: 'Ladra de joias',
-    texto: 'Cada golpe da Mulher-Gato rouba até 40 de Escudo do alvo, e a Mulher-Gato fica com esse Escudo por 10 s.',
+    texto: 'Cada golpe da Mulher-Gato rouba até 70 de Escudo do alvo, e a Mulher-Gato fica com esse Escudo por 10 s.',
     ganchos: {
       bateu(m, b, f, alvo, _dano, g) {
         if (!g.direto || !alvo.shields.length) return;
-        let falta = 40, roubado = 0;
+        let falta = 70, roubado = 0;
         for (const s of alvo.shields) { const t = Math.min(s.amount, falta); s.amount -= t; falta -= t; roubado += t; }
         alvo.shields = alvo.shields.filter((s) => s.amount > 0.01);
         if (roubado < 1) return;
@@ -88,7 +88,7 @@ export const LOTE2: Record<string, Unica> = {
   },
   blackwidow: {
     nome: 'Infiltrada',
-    texto: 'A Viúva Negra não recebe dano de ataques nem de habilidades até dar o primeiro golpe, e esse primeiro golpe causa o dobro de dano.',
+    texto: 'A Viúva Negra não recebe dano de ataques nem de habilidades até dar o primeiro golpe, e esse primeiro golpe causa o triplo de dano.',
     ganchos: {
       inicio(m, b, f) { m.aviso(b, f, 'Disfarçada', f); },
       recebe: (_m, _b, f, _fonte, g) => (g.direto && !u(f).revelada ? 0 : 1),
@@ -96,7 +96,7 @@ export const LOTE2: Record<string, Unica> = {
         if (!g.direto || u(f).revelada) return 1;
         u(f).revelada = 1;
         m.aviso(b, f, 'Disfarce caiu', alvo);
-        return 2;
+        return 3;
       },
     },
   },
@@ -327,10 +327,10 @@ export const LOTE2: Record<string, Unica> = {
   },
   patrick: {
     nome: 'Esconderijo',
-    texto: 'Patrick Estrela nunca fica Confuso nem Silenciado. A cada 15 s, Patrick se esconde debaixo da pedra por 2 s: não age e não recebe dano.',
+    texto: 'Patrick Estrela nunca fica Confuso nem Silenciado. A cada 12 s, Patrick se esconde debaixo da pedra por 2,5 s: não age e não recebe dano.',
     ganchos: {
       imune: (_f, s) => s === 'confused' || s === 'silenced',
-      passo(m, b, f, dt) { if (relogio(f, 'pedra', dt, 15, 10)) { u(f).pedra = b.time + 2; m.aviso(b, f, 'Debaixo da pedra', f); } },
+      passo(m, b, f, dt) { if (relogio(f, 'pedra', dt, 12, 8)) { u(f).pedra = b.time + 2.5; m.aviso(b, f, 'Debaixo da pedra', f); } },
       parado: (f, b) => (u(f).pedra ?? 0) > b.time,
       recebe: (_m, b, f) => ((u(f).pedra ?? 0) > b.time ? 0 : 1),
     },

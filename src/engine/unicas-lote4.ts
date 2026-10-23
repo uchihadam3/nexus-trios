@@ -115,10 +115,10 @@ export const LOTE4: Record<string, Unica> = {
   /* ───────── Anime ───────── */
   deku: {
     nome: 'Controle do One For All',
-    texto: 'Izuku Midoriya começa com −10% de dano e ganha +10% a cada habilidade que usa, até +50% (depois de 6 habilidades).',
+    texto: 'Izuku Midoriya ganha +10% de dano a cada habilidade que usa, até +60% (depois de 6 habilidades).',
     ganchos: {
-      usou(m, b, f) { if ((u(f).porcento ?? 0) < 6) { u(f).porcento = (u(f).porcento ?? 0) + 1; m.aviso(b, f, `${5 + 8 * u(f).porcento!}%`, f); } },
-      causa: (_m, _b, f) => 0.9 + 0.1 * (u(f).porcento ?? 0),
+      usou(m, b, f) { if ((u(f).porcento ?? 0) < 6) { u(f).porcento = (u(f).porcento ?? 0) + 1; m.aviso(b, f, `+${10 * u(f).porcento!}%`, f); } },
+      causa: (_m, _b, f) => 1 + 0.1 * (u(f).porcento ?? 0),
     },
   },
   bakugo: {

@@ -221,7 +221,7 @@ export const LOTE8: Record<string, Unica> = {
   },
   thanos: {
     nome: 'Manopla do Infinito',
-    texto: 'Cada habilidade de Thanos dá uma Joia do Infinito (até 6): +4% de dano por Joia. Ao juntar a 6ª Joia (1 vez por luta), Thanos estala os dedos: cada rival perde 20% da Vida que tem.',
+    texto: 'Cada habilidade de Thanos dá uma Joia do Infinito (até 6): +6% de dano por Joia. Ao juntar a 6ª Joia (1 vez por luta), Thanos estala os dedos: cada rival perde 25% da Vida que tem.',
     ganchos: {
       usou(m, b, f) {
         if ((u(f).joias ?? 0) >= 6) return;
@@ -229,9 +229,9 @@ export const LOTE8: Record<string, Unica> = {
         m.aviso(b, f, `Joia ${u(f).joias}/6`, f, u(f).joias);
         if (u(f).joias !== 6) return;
         m.aviso(b, f, 'Estalo', f);
-        for (const r of m.rivais(b, f)) m.dano(b, f, r, r.hp * 0.2, false, 'Estalo');
+        for (const r of m.rivais(b, f)) m.dano(b, f, r, r.hp * 0.25, false, 'Estalo');
       },
-      causa: (_m, _b, f) => 1 + 0.04 * (u(f).joias ?? 0),
+      causa: (_m, _b, f) => 1 + 0.06 * (u(f).joias ?? 0),
     },
   },
   kakashi: {
@@ -279,9 +279,9 @@ export const LOTE8: Record<string, Unica> = {
   },
   muzan: {
     nome: 'Braços por toda parte',
-    texto: 'O ataque básico de Muzan Kibutsuji acerta os 3 rivais, com 45% do dano em cada.',
+    texto: 'O ataque básico de Muzan Kibutsuji acerta os 3 rivais, com 60% do dano em cada.',
     ganchos: {
-      causa: (_m, _b, _f, _alvo, g) => (g.direto && !g.habilidade ? 0.45 : 1),
+      causa: (_m, _b, _f, _alvo, g) => (g.direto && !g.habilidade ? 0.6 : 1),
       bateu(m, b, f, alvo, dano, g) { if (g.direto && !g.habilidade) for (const r of m.rivais(b, f)) if (r !== alvo) m.dano(b, f, r, dano, false, 'Chicote'); },
     },
   },
@@ -539,13 +539,13 @@ export const LOTE8: Record<string, Unica> = {
   },
   jeangrey: {
     nome: 'Elo mental',
-    texto: 'Quando um golpe tiraria mais de 15% da Vida máxima de um aliado de Jean Grey, Jean segura metade desse dano: o aliado leva só a outra metade, e Jean perde 80% da parte que segurou (sem cair por isso).',
+    texto: 'Quando um golpe tiraria mais de 15% da Vida máxima de um aliado de Jean Grey, Jean segura metade desse dano: o aliado leva só a outra metade, e Jean perde 50% da parte que segurou (sem cair por isso).',
     ganchos: {
       limita(m, b, f, alvo, valor) {
         if (alvo === f || !vivo(f) || valor <= alvo.maxHp * 0.15) return valor;
         const parte = valor / 2;
         m.aviso(b, f, 'Elo mental', alvo);
-        f.hp = Math.max(1, f.hp - parte * 0.8);
+        f.hp = Math.max(1, f.hp - parte * 0.5);
         return valor - parte;
       },
     },

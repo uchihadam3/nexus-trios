@@ -341,13 +341,13 @@ export const LOTE9: Record<string, Unica> = {
   },
   kuririn: {
     nome: 'Kuririn não!',
-    texto: 'Quando Kuririn cai, os aliados de pé ficam Fortalecido (+25% de dano) por 10 s.',
+    texto: 'Quando Kuririn cai, os aliados de pé ficam Fortalecido (+25% de dano) por 15 s.',
     ganchos: {
       morreu(m, b, f) {
         const as = b.fighters.filter((x) => x.side === f.side && vivo(x));
         if (!as.length) return;
         m.aviso(b, f, 'Kuririn não!', as[0]);
-        m.efeitos(b, f, as, [st('strengthened', 0.25, 10)]);
+        m.efeitos(b, f, as, [st('strengthened', 0.25, 15)]);
       },
     },
   },
@@ -438,27 +438,27 @@ export const LOTE9: Record<string, Unica> = {
   },
   genos: {
     nome: 'Sacrifício do ciborgue',
-    texto: '1 vez por luta: quando um golpe ia derrubar um aliado, Genos sacrifica o núcleo: o aliado fica com 1 de Vida, Genos perde metade da Vida que tem e cada rival leva 80 de dano.',
+    texto: '1 vez por luta: quando um golpe ia derrubar um aliado, Genos sacrifica o núcleo: o aliado fica com 1 de Vida, Genos perde 30% da Vida que tem e cada rival leva 130 de dano.',
     ganchos: {
       salva(m, b, f, alvo) {
         if (alvo === f || u(f).sacrificio || !vivo(f)) return null;
         u(f).sacrificio = 1;
         m.aviso(b, f, 'Sacrifício', alvo);
-        f.hp = Math.max(1, f.hp / 2);
-        for (const r of m.rivais(b, f)) m.dano(b, f, r, 80, false, 'Núcleo');
+        f.hp = Math.max(1, f.hp * 0.7);
+        for (const r of m.rivais(b, f)) m.dano(b, f, r, 130, false, 'Núcleo');
         return 1;
       },
     },
   },
   coringa: {
     nome: 'Última risada',
-    texto: 'Quando o Coringa cai, todos que estão de pé (dos dois trios) ficam Confuso por 2 s.',
+    texto: 'Quando o Coringa cai, todos que estão de pé (dos dois trios) ficam Confuso por 4 s.',
     ganchos: {
       morreu(m, b, f) {
         const todos = b.fighters.filter(vivo);
         if (!todos.length) return;
         m.aviso(b, f, 'HAHAHA', todos[0]);
-        m.efeitos(b, f, todos, [st('confused', 1, 2)]);
+        m.efeitos(b, f, todos, [st('confused', 1, 4)]);
       },
     },
   },
@@ -554,14 +554,14 @@ export const LOTE9: Record<string, Unica> = {
   },
   srincrivel: {
     nome: 'Arremesso de carro',
-    texto: 'A cada 12 s, o Sr. Incrível arremessa um carro no rival com mais Vida: 70 de dano, e esse rival perde 20% da barra do Próximo ataque.',
+    texto: 'A cada 12 s, o Sr. Incrível arremessa um carro no rival com mais Vida: 110 de dano, e esse rival perde 20% da barra do Próximo ataque.',
     ganchos: {
       passo(m, b, f, dt) {
         if (!relogio(f, 'carro', dt, 12, 6)) return;
         const r = maisForte(m, b, f);
         if (!r) return;
         m.aviso(b, f, 'Arremesso!', r);
-        m.dano(b, f, r, 70, false, 'Arremesso');
+        m.dano(b, f, r, 110, false, 'Arremesso');
         r.action = Math.max(0, r.action - 0.2);
       },
     },
@@ -625,7 +625,7 @@ export const LOTE9: Record<string, Unica> = {
   },
   shredder: {
     nome: 'Corte que sangra',
-    texto: 'A cada 4 golpes do Shredder no mesmo rival, esse rival fica Sangrando (−25 de Vida por ação) por 3 s.',
+    texto: 'A cada 4 golpes do Shredder no mesmo rival, esse rival fica Sangrando (−25 de Vida por ação) por 8 s.',
     ganchos: {
       bateu(m, b, f, alvo, _dano, g) {
         if (!g.direto || !vivo(alvo)) return;
@@ -634,7 +634,7 @@ export const LOTE9: Record<string, Unica> = {
         if (u(f)[k]! < 4) return;
         u(f)[k] = 0;
         m.aviso(b, f, 'Garras de aço', alvo);
-        m.efeitos(b, f, [alvo], [st('bleed', 25, 3)]);
+        m.efeitos(b, f, [alvo], [st('bleed', 25, 8)]);
       },
     },
   },
@@ -648,25 +648,25 @@ export const LOTE9: Record<string, Unica> = {
   },
   liono: {
     nome: 'Instinto de caçador',
-    texto: 'O ataque básico de Lion-O vai no rival mais perto de agir, com +25% de dano.',
+    texto: 'O ataque básico de Lion-O vai no rival mais perto de agir, com +45% de dano.',
     ganchos: {
       alvoDoBasico: (m, b, f) => m.rivais(b, f).sort((x, y) => y.action - x.action)[0],
-      causa: (m, b, f, alvo, g) => (g.direto && !g.habilidade && m.rivais(b, f).sort((x, y) => y.action - x.action)[0] === alvo ? 1.25 : 1),
+      causa: (m, b, f, alvo, g) => (g.direto && !g.habilidade && m.rivais(b, f).sort((x, y) => y.action - x.action)[0] === alvo ? 1.45 : 1),
     },
   },
   capitaoplaneta: {
     nome: 'Pelos cinco anéis',
-    texto: 'Cada habilidade do Capitão Planeta chama um anel, nesta ordem. Terra: Escudo de 2% da Vida máxima em todo o trio por 8 s. Fogo: todos os rivais ficam Queimando (−3 de Vida por segundo) por 2 s. Vento: todos os rivais perdem 8% da barra do Próximo ataque. Água: todo o trio cura 1,5% da Vida máxima. Coração: todo o trio fica Fortalecido (+4% de dano) por 4 s.',
+    texto: 'Cada habilidade do Capitão Planeta chama um anel, nesta ordem. Terra: Escudo de 5% da Vida máxima em todo o trio por 8 s. Fogo: todos os rivais ficam Queimando (−6 de Vida por segundo) por 4 s. Vento: todos os rivais perdem 15% da barra do Próximo ataque. Água: todo o trio cura 3% da Vida máxima. Coração: todo o trio fica Fortalecido (+8% de dano) por 6 s.',
     ganchos: {
       usou(m, b, f) {
         const anel = (u(f).anel ?? 0) % 5; u(f).anel = anel + 1;
         const as = m.aliados(b, f), rs = m.rivais(b, f);
         m.aviso(b, f, ['Terra!', 'Fogo!', 'Vento!', 'Água!', 'Coração!'][anel]!, f);
-        if (anel === 0) for (const a of as) a.shields.push({ amount: a.maxHp * 0.02, remaining: 8, source: f.uid });
-        if (anel === 1) m.efeitos(b, f, rs, [st('burning', 3, 2)]);
-        if (anel === 2) for (const r of rs) r.action = Math.max(0, r.action - 0.08);
-        if (anel === 3) for (const a of as) m.cura(b, f, a, a.maxHp * 0.015, 'Água');
-        if (anel === 4) m.efeitos(b, f, as, [st('strengthened', 0.04, 4)]);
+        if (anel === 0) for (const a of as) a.shields.push({ amount: a.maxHp * 0.05, remaining: 8, source: f.uid });
+        if (anel === 1) m.efeitos(b, f, rs, [st('burning', 6, 4)]);
+        if (anel === 2) for (const r of rs) r.action = Math.max(0, r.action - 0.15);
+        if (anel === 3) for (const a of as) m.cura(b, f, a, a.maxHp * 0.03, 'Água');
+        if (anel === 4) m.efeitos(b, f, as, [st('strengthened', 0.08, 6)]);
       },
     },
   },
