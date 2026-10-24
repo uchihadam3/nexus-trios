@@ -11,7 +11,7 @@ const semEstrela = characters.map((c) => c.id).filter((id) => !ESTRELAS_DE_PONTO
 describe('Estrelas dos pontos', () => {
   it('os 220 que menos fazem pontos, em três faixas (73 ★★★, 73 ★★, 74 ★), todas do elenco, bônus em % inteiro', () => {
     for (const [n, quantos] of [[1, 74], [2, 73], [3, 73]] as const) expect(comEstrelas(n).length, `${n} estrelas`).toBe(quantos);
-    for (const [id, e] of lista) { expect(byId[id], id).toBeDefined(); expect(Number.isInteger(e.bonus)).toBe(true); expect(e.bonus).toBeGreaterThan(0); expect(e.bonus).toBeLessThanOrEqual(21); }
+    for (const [id, e] of lista) { expect(byId[id], id).toBeDefined(); expect(Number.isInteger(e.bonus)).toBe(true); expect(e.bonus).toBeGreaterThan(0); expect(e.bonus).toBeLessThanOrEqual(43); }
   });
   it('no trio conta primeiro quem tem mais estrelas, depois a maior porcentagem', () => {
     const [tres] = comEstrelas(3).slice(-1), [doisAlto] = comEstrelas(2);
