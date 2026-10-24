@@ -16,7 +16,7 @@ describe('campanha', () => {
   it('as faixas são as mesmas para todo trio; só o trio acima do topo enfrenta rivais com mais Vida', () => {
     const normal = generateCampaign(5, ['goku', 'naruto', 'batman']), fraco = generateCampaign(5, ['creeper', 'katara', 'lelouch']);
     // trio do mesmo universo com vários combos: passa de todos os rivais possíveis
-    const cheio = generateCampaign(5, ['thanos', 'groot', 'drax']);
+    const cheio = generateCampaign(5, ['hulk', 'thanos', 'groot']);
     for (let i = 0; i < 10; i++) {
       expect(normal[i]!.scale).toBeCloseTo(ESCALAS[i]!, 3);
       expect(fraco[i]!.scale).toBeCloseTo(ESCALAS[i]!, 3);

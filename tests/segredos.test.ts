@@ -60,7 +60,7 @@ describe('segredos', () => {
   });
 
   it('Davi contra Golias: um trio de 1 estrela que vence as 5 primeiras abre as duas', () => {
-    const pequeno = ['goku', 'pikachu', 'batman'];
+    const pequeno = ['goku', 'pikachu', 'scooby'];
     expect(proximaLuta(pequeno, ate(5))).toBe(LUTA_ESTRELA);
     expect(segredosCumpridos(pequeno, ate(4))).not.toContain('davi');
     expect(proximaLuta(pequeno, [...ate(5), luta(LUTA_ESTRELA, false), ...[5, 6, 7, 8, 9].map((i) => luta(i))])).toBe(LUTA_ONZE);
@@ -86,14 +86,14 @@ describe('segredos', () => {
   });
 
   it('o servidor refaz a jornada com as lutas extras, na ordem, e soma a extra só se vencer', () => {
-    const r = replayRanked(['sekhmet', 'poisonivy', 'jake'], 615974429, true);
+    const r = replayRanked(['sekhmet', 'poisonivy', 'jake'], 631295195, true);
     expect(r.summaries.map((s) => s.index)).toEqual([0, 1, 2, 3, 4, LUTA_ESTRELA, 5, 6, 7, 8, 9, LUTA_ONZE]);
     expect(r.encountersCleared).toBe(10);
     expect(r.score).toBe(r.summaries.reduce((n, s) => n + s.score, 0));
     for (const s of r.summaries.filter((x) => x.index >= LUTA_ESTRELA && !x.won)) expect(s.score).toBe(0);
     expect(r.highlights.segredos).toEqual(['davi']);
     // desistiu depois de 7 lutas: as 5, a ★ e a 6
-    expect(replayRanked(['sekhmet', 'poisonivy', 'jake'], 615974429, true, false, 7).summaries.map((s) => s.index)).toEqual([0, 1, 2, 3, 4, LUTA_ESTRELA, 5]);
+    expect(replayRanked(['sekhmet', 'poisonivy', 'jake'], 631295195, true, false, 7).summaries.map((s) => s.index)).toEqual([0, 1, 2, 3, 4, LUTA_ESTRELA, 5]);
   });
 
   it('Clássico com versões sombrias: a luta acontece até o fim', () => {
