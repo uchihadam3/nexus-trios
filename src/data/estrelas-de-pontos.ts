@@ -5,153 +5,243 @@
  * Só os pontos: a luta e a força de todo mundo ficam iguais. Ter um deles no trio soma `bonus`% aos pontos de cada
  * luta (src/engine/pontos.ts); com mais de um no trio, conta um só (bonusDoTrio, abaixo).
  *
- * As estrelas vão para quem MENOS chega ao fim (pedido do jogador: "seria legal se esses bônus… fossem justamente pros
+ * As estrelas vão para quem MENOS pontos faz (pedido do jogador: "seria legal se esses bônus… fossem justamente pros
  * personagens que não conseguem chegar tão fácil… senão todo mundo vai jogar com os que já são os mais fortes").
- * Medido em 2,64 milhões de jornadas de trios sorteados, sem bônus (plano pontos da fábrica, scripts/fabrica/lutas.ts):
- * em média 5,4% delas vencem as 10 lutas; com o personagem mais forte, 11%. Os 120 que menos vencem as 10 ganham
- * estrelas — quanto mais difícil, mais estrelas:
- *   ★★★  os 40 que menos terminam (2,7% a 3,9%), meta de 2 milhões;
- *   ★★   os 40 seguintes (3,9% a 4,4%), meta de 1,75 milhão;
- *   ★    os 40 seguintes (4,4% a 4,6%), meta de 1,5 milhão.
- * O bônus é o que falta para a meta a partir do que o personagem faz numa jornada muito boa (as 1% melhores das que
- * vencem as 10 lutas), arredondado para cima em 5%: ★★★ +35% a +85%, ★★ +15% a +60%, ★ +5% a +40%.
- * Depois o jogador pediu metade (o bônus já ensina o caminho; "deixa 50% só"): cada um caiu pela metade, arredondado
- * para o inteiro mais perto (,5 para cima): ★★★ +18% a +43%, ★★ +8% a +30%, ★ +3% a +20%. Os outros ficam iguais.
- * Conferido de novo em 60.000 jornadas com as habilidades corrigidas (pedido do dono, a média por grupo ficou parecida:
- * ★★★ 651 mil, ★★ 617, ★ 598, sem estrela 607): os quatro que faziam menos que qualquer um com estrela ganharam estrelas
- * (Light Yagami 431 mil → ★★★ +43%; Chucky 490 e Vash 491 → ★★ +28%; King Kong 496 → ★★ +25%, perto de 560–575 mil),
- * e os dois que tinham passado muito da média caíram um pouco (Geralt 888 mil, +35% → +25%; Ben 10 848 mil, +38% → +28%).
+ * Medido de novo no elenco reequilibrado (buffs e debuffs, Mecânicas únicas mais fortes e a fúria do tempo), em 300.000
+ * jornadas de trios sorteados, sem bônus nenhum: a média de pontos da jornada com cada personagem (~2.250 jornadas
+ * cada, erro típico ±7 mil). O dono pediu mais personagens com estrela ("mais uns 100"): os 220 que menos fazem ganham
+ * estrelas, em três faixas iguais (os 73 que menos fazem ★★★, os 73 seguintes ★★, os 74 seguintes ★).
+ * O bônus é metade do que falta para a média dos outros 180 (579 mil), arredondado para o inteiro (pelo menos 1%):
+ * ★★★ +9% a +21%, ★★ +6% a +9%, ★ +4% a +6% (o dono escolheu a metade: chegam perto da média sem passar dela).
+ * Antes eram 124 com estrela, com o bônus pela meta de uma jornada muito boa (até +43%); 121 ganharam estrela, 25
+ * perderam (os que ficaram mais fortes, como o Cloud Strife, ★★★ +30% → ★ +5%).
  */
 export interface EstrelaDePontos { estrelas: 1 | 2 | 3; bonus: number }
 
 export const ESTRELAS_DE_PONTOS: Record<string, EstrelaDePontos> = {
   // ★★★
-  jacksparrow: { estrelas: 3, bonus: 43 }, // Jack Sparrow
-  light: { estrelas: 3, bonus: 43 }, // Light Yagami
-  coringa: { estrelas: 3, bonus: 38 }, // Coringa
-  dash: { estrelas: 3, bonus: 38 }, // Flecha Pêra
-  rambo: { estrelas: 3, bonus: 38 }, // Rambo
-  aku: { estrelas: 3, bonus: 35 }, // Aku
-  kratos: { estrelas: 3, bonus: 35 }, // Kratos
-  megumi: { estrelas: 3, bonus: 35 }, // Megumi Fushiguro
-  yor: { estrelas: 3, bonus: 35 }, // Yor Forger
-  yoshi: { estrelas: 3, bonus: 35 }, // Yoshi
-  dovahkiin: { estrelas: 3, bonus: 33 }, // Dovahkiin
-  fred: { estrelas: 3, bonus: 33 }, // Fred Jones
-  gambit: { estrelas: 3, bonus: 33 }, // Gambit
-  inuyasha: { estrelas: 3, bonus: 33 }, // Inuyasha
-  jerry: { estrelas: 3, bonus: 33 }, // Jerry
-  morty: { estrelas: 3, bonus: 33 }, // Morty Smith
-  bobesponja: { estrelas: 3, bonus: 30 }, // Bob Esponja
-  cloud: { estrelas: 3, bonus: 30 }, // Cloud Strife
-  valak: { estrelas: 3, bonus: 30 }, // Valak
-  anubis: { estrelas: 3, bonus: 28 }, // Anúbis
-  ben10: { estrelas: 3, bonus: 28 }, // Ben 10
-  cheetara: { estrelas: 3, bonus: 28 }, // Cheetara
-  finn: { estrelas: 3, bonus: 28 }, // Finn
-  hiei: { estrelas: 3, bonus: 28 }, // Hiei
-  loid: { estrelas: 3, bonus: 28 }, // Loid Forger
-  natsu: { estrelas: 3, bonus: 28 }, // Natsu Dragneel
-  professorx: { estrelas: 3, bonus: 28 }, // Professor Xavier
-  ryu: { estrelas: 3, bonus: 28 }, // Ryu
-  ursula: { estrelas: 3, bonus: 28 }, // Úrsula
-  xenomorph: { estrelas: 3, bonus: 28 }, // Xenomorfo
-  agentsmith: { estrelas: 3, bonus: 25 }, // Agente Smith
-  buzz: { estrelas: 3, bonus: 25 }, // Buzz Lightyear
-  geralt: { estrelas: 3, bonus: 25 }, // Geralt de Rívia
-  lelouch: { estrelas: 3, bonus: 25 }, // Lelouch
-  doomslayer: { estrelas: 3, bonus: 23 }, // Doom Slayer
-  erza: { estrelas: 3, bonus: 23 }, // Erza Scarlet
-  lawliet: { estrelas: 3, bonus: 23 }, // L
-  poisonivy: { estrelas: 3, bonus: 23 }, // Hera Venenosa
-  magneto: { estrelas: 3, bonus: 18 }, // Magneto
-  odin: { estrelas: 3, bonus: 18 }, // Odin
-  scooby: { estrelas: 3, bonus: 18 }, // Scooby-Doo
+  light: { estrelas: 3, bonus: 21 }, // Light Yagami
+  kratos: { estrelas: 3, bonus: 20 }, // Kratos
+  leon: { estrelas: 3, bonus: 19 }, // Leon S. Kennedy
+  power: { estrelas: 3, bonus: 18 }, // Power
+  ryu: { estrelas: 3, bonus: 18 }, // Ryu
+  billcipher: { estrelas: 3, bonus: 17 }, // Bill Cipher
+  homer: { estrelas: 3, bonus: 17 }, // Homer Simpson
+  jacksparrow: { estrelas: 3, bonus: 17 }, // Jack Sparrow
+  vash: { estrelas: 3, bonus: 17 }, // Vash
+  bebop: { estrelas: 3, bonus: 16 }, // Bebop
+  natsu: { estrelas: 3, bonus: 16 }, // Natsu Dragneel
+  patrick: { estrelas: 3, bonus: 16 }, // Patrick Estrela
+  peter: { estrelas: 3, bonus: 16 }, // Peter Griffin
+  coringa: { estrelas: 3, bonus: 15 }, // Coringa
+  invencivel: { estrelas: 3, bonus: 15 }, // Invencível
+  stitch: { estrelas: 3, bonus: 15 }, // Stitch
+  gon: { estrelas: 3, bonus: 14 }, // Gon Freecss
+  kaneki: { estrelas: 3, bonus: 14 }, // Ken Kaneki
+  rambo: { estrelas: 3, bonus: 14 }, // Rambo
+  snorlax: { estrelas: 3, bonus: 14 }, // Snorlax
+  tifa: { estrelas: 3, bonus: 14 }, // Tifa Lockhart
+  chucky: { estrelas: 3, bonus: 13 }, // Chucky
+  donald: { estrelas: 3, bonus: 13 }, // Pato Donald
+  inosuke: { estrelas: 3, bonus: 13 }, // Inosuke Hashibira
+  jerry: { estrelas: 3, bonus: 13 }, // Jerry
+  moonknight: { estrelas: 3, bonus: 13 }, // Cavaleiro da Lua
+  taz: { estrelas: 3, bonus: 13 }, // Taz
+  alucardcv: { estrelas: 3, bonus: 12 }, // Alucard
+  arlequina: { estrelas: 3, bonus: 12 }, // Arlequina
+  bobesponja: { estrelas: 3, bonus: 12 }, // Bob Esponja
+  cuphead: { estrelas: 3, bonus: 12 }, // Cuphead
+  deku: { estrelas: 3, bonus: 12 }, // Izuku Midoriya
+  dipper: { estrelas: 3, bonus: 12 }, // Dipper Pines
+  doomslayer: { estrelas: 3, bonus: 12 }, // Doom Slayer
+  finn: { estrelas: 3, bonus: 12 }, // Finn
+  gambit: { estrelas: 3, bonus: 12 }, // Gambit
+  morty: { estrelas: 3, bonus: 12 }, // Morty Smith
+  ares: { estrelas: 3, bonus: 11 }, // Ares
+  blackpanther: { estrelas: 3, bonus: 11 }, // Pantera Negra
+  daredevil: { estrelas: 3, bonus: 11 }, // Demolidor
+  drax: { estrelas: 3, bonus: 11 }, // Drax
+  erza: { estrelas: 3, bonus: 11 }, // Erza Scarlet
+  fred: { estrelas: 3, bonus: 11 }, // Fred Jones
+  ghostface: { estrelas: 3, bonus: 11 }, // Ghostface
+  hawkeye: { estrelas: 3, bonus: 11 }, // Gavião Arqueiro
+  heihachi: { estrelas: 3, bonus: 11 }, // Heihachi Mishima
+  hellboy: { estrelas: 3, bonus: 11 }, // Hellboy
+  kingkong: { estrelas: 3, bonus: 11 }, // King Kong
+  marceline: { estrelas: 3, bonus: 11 }, // Marceline
+  pernalonga: { estrelas: 3, bonus: 11 }, // Pernalonga
+  sailormercury: { estrelas: 3, bonus: 11 }, // Sailor Mercury
+  vilgax: { estrelas: 3, bonus: 11 }, // Vilgax
+  crash: { estrelas: 3, bonus: 10 }, // Crash Bandicoot
+  docinho: { estrelas: 3, bonus: 10 }, // Docinho
+  godzilla: { estrelas: 3, bonus: 10 }, // Godzilla
+  hollowknight: { estrelas: 3, bonus: 10 }, // O Cavaleiro
+  jason: { estrelas: 3, bonus: 10 }, // Jason Voorhees
+  lara: { estrelas: 3, bonus: 10 }, // Lara Croft
+  link: { estrelas: 3, bonus: 10 }, // Link
+  nightwing: { estrelas: 3, bonus: 10 }, // Asa Noturna
+  odin: { estrelas: 3, bonus: 10 }, // Odin
+  raphael: { estrelas: 3, bonus: 10 }, // Raphael
+  sanji: { estrelas: 3, bonus: 10 }, // Sanji
+  spike: { estrelas: 3, bonus: 10 }, // Spike Spiegel
+  venom: { estrelas: 3, bonus: 10 }, // Venom
+  caseyjones: { estrelas: 3, bonus: 9 }, // Casey Jones
+  dovahkiin: { estrelas: 3, bonus: 9 }, // Dovahkiin
+  eren: { estrelas: 3, bonus: 9 }, // Eren Yeager
+  garnet: { estrelas: 3, bonus: 9 }, // Garnet
+  poisonivy: { estrelas: 3, bonus: 9 }, // Hera Venenosa
+  splinter: { estrelas: 3, bonus: 9 }, // Mestre Splinter
+  tom: { estrelas: 3, bonus: 9 }, // Tom
+  trunks: { estrelas: 3, bonus: 9 }, // Trunks
   // ★★
-  stitch: { estrelas: 2, bonus: 30 }, // Stitch
-  chucky: { estrelas: 2, bonus: 28 }, // Chucky
-  vash: { estrelas: 2, bonus: 28 }, // Vash
-  dannyphantom: { estrelas: 2, bonus: 25 }, // Danny Phantom
-  gengar: { estrelas: 2, bonus: 25 }, // Gengar
-  ghostrider: { estrelas: 2, bonus: 25 }, // Motoqueiro Fantasma
-  jin: { estrelas: 2, bonus: 25 }, // Jin Kazama
-  kingkong: { estrelas: 2, bonus: 25 }, // King Kong
-  michelangelo: { estrelas: 2, bonus: 25 }, // Michelangelo
-  moonknight: { estrelas: 2, bonus: 25 }, // Cavaleiro da Lua
-  papaleguas: { estrelas: 2, bonus: 25 }, // Papa-Léguas
-  patrick: { estrelas: 2, bonus: 25 }, // Patrick Estrela
-  sans: { estrelas: 2, bonus: 25 }, // Sans
-  spawn: { estrelas: 2, bonus: 25 }, // Spawn
-  tifa: { estrelas: 2, bonus: 25 }, // Tifa Lockhart
-  blackpanther: { estrelas: 2, bonus: 23 }, // Pantera Negra
-  captainmarvel: { estrelas: 2, bonus: 23 }, // Capitã Marvel
-  hawkeye: { estrelas: 2, bonus: 23 }, // Gavião Arqueiro
-  kronos: { estrelas: 2, bonus: 23 }, // Cronos
-  nami: { estrelas: 2, bonus: 23 }, // Nami
-  pantera: { estrelas: 2, bonus: 23 }, // Pantera Cor-de-Rosa
-  power: { estrelas: 2, bonus: 23 }, // Power
-  sailormercury: { estrelas: 2, bonus: 23 }, // Sailor Mercury
-  gaara: { estrelas: 2, bonus: 20 }, // Gaara
-  goku: { estrelas: 2, bonus: 20 }, // Goku
-  hisoka: { estrelas: 2, bonus: 20 }, // Hisoka Morow
-  mojojojo: { estrelas: 2, bonus: 20 }, // Macaco Louco
-  sanji: { estrelas: 2, bonus: 20 }, // Sanji
-  yusuke: { estrelas: 2, bonus: 20 }, // Yusuke Urameshi
-  chunli: { estrelas: 2, bonus: 18 }, // Chun-Li
-  kenshin: { estrelas: 2, bonus: 18 }, // Kenshin Himura
-  luke: { estrelas: 2, bonus: 18 }, // Luke Skywalker
-  mabel: { estrelas: 2, bonus: 18 }, // Mabel Pines
-  masterchief: { estrelas: 2, bonus: 18 }, // Master Chief
-  mickey: { estrelas: 2, bonus: 18 }, // Mickey Mouse
-  samara: { estrelas: 2, bonus: 18 }, // Samara
-  freddy: { estrelas: 2, bonus: 15 }, // Freddy Krueger
-  iroh: { estrelas: 2, bonus: 15 }, // Iroh
-  jotaro: { estrelas: 2, bonus: 15 }, // Jotaro Kujo
-  saitama: { estrelas: 2, bonus: 13 }, // Saitama
-  voldemort: { estrelas: 2, bonus: 13 }, // Voldemort
-  jake: { estrelas: 2, bonus: 10 }, // Jake
-  steven: { estrelas: 2, bonus: 8 }, // Steven Universo
+  charizard: { estrelas: 2, bonus: 9 }, // Charizard
+  deadpool: { estrelas: 2, bonus: 9 }, // Deadpool
+  goro: { estrelas: 2, bonus: 9 }, // Goro
+  hisoka: { estrelas: 2, bonus: 9 }, // Hisoka Morow
+  jin: { estrelas: 2, bonus: 9 }, // Jin Kazama
+  kurapika: { estrelas: 2, bonus: 9 }, // Kurapika
+  michaelmyers: { estrelas: 2, bonus: 9 }, // Michael Myers
+  muzan: { estrelas: 2, bonus: 9 }, // Muzan Kibutsuji
+  popeye: { estrelas: 2, bonus: 9 }, // Popeye
+  samara: { estrelas: 2, bonus: 9 }, // Samara
+  sans: { estrelas: 2, bonus: 9 }, // Sans
+  scooby: { estrelas: 2, bonus: 9 }, // Scooby-Doo
+  tenshinhan: { estrelas: 2, bonus: 9 }, // Tenshinhan
+  ursula: { estrelas: 2, bonus: 9 }, // Úrsula
+  yoshi: { estrelas: 2, bonus: 9 }, // Yoshi
+  chunli: { estrelas: 2, bonus: 8 }, // Chun-Li
+  freddy: { estrelas: 2, bonus: 8 }, // Freddy Krueger
+  gordon: { estrelas: 2, bonus: 8 }, // Gordon Freeman
+  hiei: { estrelas: 2, bonus: 8 }, // Hiei
+  ironman: { estrelas: 2, bonus: 8 }, // Homem de Ferro
+  isaac: { estrelas: 2, bonus: 8 }, // Isaac Clarke
+  johnnybravo: { estrelas: 2, bonus: 8 }, // Johnny Bravo
+  nemesis: { estrelas: 2, bonus: 8 }, // Nemesis
+  rocket: { estrelas: 2, bonus: 8 }, // Rocket Raccoon
+  ultron: { estrelas: 2, bonus: 8 }, // Ultron
+  xenomorph: { estrelas: 2, bonus: 8 }, // Xenomorfo
+  yor: { estrelas: 2, bonus: 8 }, // Yor Forger
+  antman: { estrelas: 2, bonus: 7 }, // Homem-Formiga
+  bakugo: { estrelas: 2, bonus: 7 }, // Katsuki Bakugo
+  bowser: { estrelas: 2, bonus: 7 }, // Bowser
+  cartman: { estrelas: 2, bonus: 7 }, // Eric Cartman
+  cheetara: { estrelas: 2, bonus: 7 }, // Cheetara
+  chopper: { estrelas: 2, bonus: 7 }, // Tony Tony Chopper
+  coiote: { estrelas: 2, bonus: 7 }, // Coiote
+  creeper: { estrelas: 2, bonus: 7 }, // Creeper
+  dash: { estrelas: 2, bonus: 7 }, // Flecha Pêra
+  ezio: { estrelas: 2, bonus: 7 }, // Ezio Auditore
+  gengar: { estrelas: 2, bonus: 7 }, // Gengar
+  indianajones: { estrelas: 2, bonus: 7 }, // Indiana Jones
+  kazuya: { estrelas: 2, bonus: 7 }, // Kazuya Mishima
+  ken: { estrelas: 2, bonus: 7 }, // Ken Masters
+  kenshin: { estrelas: 2, bonus: 7 }, // Kenshin Himura
+  knuckles: { estrelas: 2, bonus: 7 }, // Knuckles
+  kronos: { estrelas: 2, bonus: 7 }, // Cronos
+  luffy: { estrelas: 2, bonus: 7 }, // Luffy
+  mojojojo: { estrelas: 2, bonus: 7 }, // Macaco Louco
+  mummra: { estrelas: 2, bonus: 7 }, // Mumm-Ra
+  nezuko: { estrelas: 2, bonus: 7 }, // Nezuko Kamado
+  pantera: { estrelas: 2, bonus: 7 }, // Pantera Cor-de-Rosa
+  professorx: { estrelas: 2, bonus: 7 }, // Professor Xavier
+  saitama: { estrelas: 2, bonus: 7 }, // Saitama
+  shrek: { estrelas: 2, bonus: 7 }, // Shrek
+  steven: { estrelas: 2, bonus: 7 }, // Steven Universo
+  tanjiro: { estrelas: 2, bonus: 7 }, // Tanjiro Kamado
+  woody: { estrelas: 2, bonus: 7 }, // Woody
+  yusuke: { estrelas: 2, bonus: 7 }, // Yusuke Urameshi
+  buzz: { estrelas: 2, bonus: 6 }, // Buzz Lightyear
+  captainmarvel: { estrelas: 2, bonus: 6 }, // Capitã Marvel
+  catwoman: { estrelas: 2, bonus: 6 }, // Mulher-Gato
+  dracula: { estrelas: 2, bonus: 6 }, // Drácula
+  ghostrider: { estrelas: 2, bonus: 6 }, // Motoqueiro Fantasma
+  guts: { estrelas: 2, bonus: 6 }, // Guts
+  hercules: { estrelas: 2, bonus: 6 }, // Hércules
+  hulk: { estrelas: 2, bonus: 6 }, // Hulk
+  jiraiya: { estrelas: 2, bonus: 6 }, // Jiraiya
+  kirito: { estrelas: 2, bonus: 6 }, // Kirito
+  liono: { estrelas: 2, bonus: 6 }, // Lion-O
+  majinbuu: { estrelas: 2, bonus: 6 }, // Majin Boo
+  mickey: { estrelas: 2, bonus: 6 }, // Mickey Mouse
+  patolino: { estrelas: 2, bonus: 6 }, // Patolino
+  spawn: { estrelas: 2, bonus: 6 }, // Spawn
+  subzero: { estrelas: 2, bonus: 6 }, // Sub-Zero
+  wolverine: { estrelas: 2, bonus: 6 }, // Wolverine
   // ★
-  donald: { estrelas: 1, bonus: 20 }, // Pato Donald
-  invencivel: { estrelas: 1, bonus: 18 }, // Invencível
-  mario: { estrelas: 1, bonus: 18 }, // Mario
-  rocket: { estrelas: 1, bonus: 18 }, // Rocket Raccoon
-  t800: { estrelas: 1, bonus: 18 }, // Exterminador T-800
-  creeper: { estrelas: 1, bonus: 15 }, // Creeper
-  deku: { estrelas: 1, bonus: 15 }, // Izuku Midoriya
-  garnet: { estrelas: 1, bonus: 15 }, // Garnet
-  gordon: { estrelas: 1, bonus: 15 }, // Gordon Freeman
-  hellboy: { estrelas: 1, bonus: 15 }, // Hellboy
-  hollowknight: { estrelas: 1, bonus: 15 }, // O Cavaleiro
-  jiraiya: { estrelas: 1, bonus: 15 }, // Jiraiya
-  ares: { estrelas: 1, bonus: 13 }, // Ares
-  doctordoom: { estrelas: 1, bonus: 13 }, // Doutor Destino
-  leon: { estrelas: 1, bonus: 13 }, // Leon S. Kennedy
-  luffy: { estrelas: 1, bonus: 13 }, // Luffy
-  raphael: { estrelas: 1, bonus: 13 }, // Raphael
-  set: { estrelas: 1, bonus: 13 }, // Set
-  zeromm: { estrelas: 1, bonus: 13 }, // Zero
-  bayonetta: { estrelas: 1, bonus: 10 }, // Bayonetta
-  griffith: { estrelas: 1, bonus: 10 }, // Griffith
-  kenpachi: { estrelas: 1, bonus: 10 }, // Kenpachi Zaraki
-  megamind: { estrelas: 1, bonus: 10 }, // Megamente
-  pikachu: { estrelas: 1, bonus: 10 }, // Pikachu
-  billcipher: { estrelas: 1, bonus: 8 }, // Bill Cipher
-  deadpool: { estrelas: 1, bonus: 8 }, // Deadpool
-  ichigo: { estrelas: 1, bonus: 8 }, // Ichigo Kurosaki
-  johnnybravo: { estrelas: 1, bonus: 8 }, // Johnny Bravo
-  kurama: { estrelas: 1, bonus: 8 }, // Kurama
-  sailormars: { estrelas: 1, bonus: 8 }, // Sailor Mars
-  zenitsu: { estrelas: 1, bonus: 8 }, // Zenitsu Agatsuma
-  frieza: { estrelas: 1, bonus: 5 }, // Freeza
-  mob: { estrelas: 1, bonus: 5 }, // Mob
-  robocop: { estrelas: 1, bonus: 5 }, // RoboCop
-  shaokahn: { estrelas: 1, bonus: 5 }, // Shao Kahn
-  shera: { estrelas: 1, bonus: 5 }, // She-Ra
-  sukuna: { estrelas: 1, bonus: 5 }, // Ryomen Sukuna
-  ultron: { estrelas: 1, bonus: 5 }, // Ultron
-  zoro: { estrelas: 1, bonus: 5 }, // Roronoa Zoro
-  senku: { estrelas: 1, bonus: 3 }, // Senku
+  bart: { estrelas: 1, bonus: 6 }, // Bart Simpson
+  cyborg: { estrelas: 1, bonus: 6 }, // Ciborgue
+  gaara: { estrelas: 1, bonus: 6 }, // Gaara
+  iroh: { estrelas: 1, bonus: 6 }, // Iroh
+  luke: { estrelas: 1, bonus: 6 }, // Luke Skywalker
+  michelangelo: { estrelas: 1, bonus: 6 }, // Michelangelo
+  mrfreeze: { estrelas: 1, bonus: 6 }, // Senhor Frio
+  neo: { estrelas: 1, bonus: 6 }, // Neo
+  pateta: { estrelas: 1, bonus: 6 }, // Pateta
+  punisher: { estrelas: 1, bonus: 6 }, // Justiceiro
+  sailormars: { estrelas: 1, bonus: 6 }, // Sailor Mars
+  shun: { estrelas: 1, bonus: 6 }, // Shun
+  agentsmith: { estrelas: 1, bonus: 5 }, // Agente Smith
+  aku: { estrelas: 1, bonus: 5 }, // Aku
+  artemis: { estrelas: 1, bonus: 5 }, // Ártemis
+  bayonetta: { estrelas: 1, bonus: 5 }, // Bayonetta
+  cloud: { estrelas: 1, bonus: 5 }, // Cloud Strife
+  constantine: { estrelas: 1, bonus: 5 }, // Constantine
+  dante: { estrelas: 1, bonus: 5 }, // Dante
+  darthvader: { estrelas: 1, bonus: 5 }, // Darth Vader
+  denji: { estrelas: 1, bonus: 5 }, // Denji
+  donkeykong: { estrelas: 1, bonus: 5 }, // Donkey Kong
+  genos: { estrelas: 1, bonus: 5 }, // Genos
+  ichigo: { estrelas: 1, bonus: 5 }, // Ichigo Kurosaki
+  ikki: { estrelas: 1, bonus: 5 }, // Ikki
+  johnwick: { estrelas: 1, bonus: 5 }, // John Wick
+  jotaro: { estrelas: 1, bonus: 5 }, // Jotaro Kujo
+  kakashi: { estrelas: 1, bonus: 5 }, // Kakashi Hatake
+  korra: { estrelas: 1, bonus: 5 }, // Korra
+  loid: { estrelas: 1, bonus: 5 }, // Loid Forger
+  magneto: { estrelas: 1, bonus: 5 }, // Magneto
+  marvin: { estrelas: 1, bonus: 5 }, // Marvin, o Marciano
+  piccolo: { estrelas: 1, bonus: 5 }, // Piccolo
+  plankton: { estrelas: 1, bonus: 5 }, // Plankton
+  princeofpersia: { estrelas: 1, bonus: 5 }, // Príncipe da Pérsia
+  rukia: { estrelas: 1, bonus: 5 }, // Rukia Kuchiki
+  salsicha: { estrelas: 1, bonus: 5 }, // Salsicha
+  sasuke: { estrelas: 1, bonus: 5 }, // Sasuke
+  seiya: { estrelas: 1, bonus: 5 }, // Seiya
+  sekiro: { estrelas: 1, bonus: 5 }, // Sekiro
+  valak: { estrelas: 1, bonus: 5 }, // Valak
+  vergil: { estrelas: 1, bonus: 5 }, // Vergil
+  vision: { estrelas: 1, bonus: 5 }, // Visão
+  aerith: { estrelas: 1, bonus: 4 }, // Aerith
+  agent47: { estrelas: 1, bonus: 4 }, // Agente 47
+  blade: { estrelas: 1, bonus: 4 }, // Blade
+  byakuya: { estrelas: 1, bonus: 4 }, // Byakuya Kuchiki
+  dannyphantom: { estrelas: 1, bonus: 4 }, // Danny Phantom
+  dio: { estrelas: 1, bonus: 4 }, // Dio Brando
+  frieren: { estrelas: 1, bonus: 4 }, // Frieren
+  gamora: { estrelas: 1, bonus: 4 }, // Gamora
+  genie: { estrelas: 1, bonus: 4 }, // Gênio
+  griffith: { estrelas: 1, bonus: 4 }, // Griffith
+  harrypotter: { estrelas: 1, bonus: 4 }, // Harry Potter
+  heman: { estrelas: 1, bonus: 4 }, // He-Man
+  hinata: { estrelas: 1, bonus: 4 }, // Hinata Hyuga
+  jake: { estrelas: 1, bonus: 4 }, // Jake
+  jinwoo: { estrelas: 1, bonus: 4 }, // Sung Jinwoo
+  kirby: { estrelas: 1, bonus: 4 }, // Kirby
+  lawliet: { estrelas: 1, bonus: 4 }, // L
+  levi: { estrelas: 1, bonus: 4 }, // Levi Ackerman
+  luigi: { estrelas: 1, bonus: 4 }, // Luigi
+  maleficent: { estrelas: 1, bonus: 4 }, // Malévola
+  masterchief: { estrelas: 1, bonus: 4 }, // Master Chief
+  medusa: { estrelas: 1, bonus: 4 }, // Medusa
+  megumi: { estrelas: 1, bonus: 4 }, // Megumi Fushiguro
+  mewtwo: { estrelas: 1, bonus: 4 }, // Mewtwo
+  mulherelastica: { estrelas: 1, bonus: 4 }, // Mulher-Elástica
+  nami: { estrelas: 1, bonus: 4 }, // Nami
+  shredder: { estrelas: 1, bonus: 4 }, // Shredder
+  steve: { estrelas: 1, bonus: 4 }, // Steve
+  t800: { estrelas: 1, bonus: 4 }, // Exterminador T-800
+  voldemort: { estrelas: 1, bonus: 4 }, // Voldemort
+  yennefer: { estrelas: 1, bonus: 4 }, // Yennefer
 };
 
 /**
