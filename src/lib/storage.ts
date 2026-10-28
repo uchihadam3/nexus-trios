@@ -20,7 +20,7 @@ export interface RankedRun {top3?:{periodo?:ResultadoTop3;temporada?:ResultadoTo
 export interface Run {seed:number;team:string[];encounters:Encounter[];index:number;stage:'draft'|'battle'|'result';draft:Draft;battle:Battle|null;recorded:boolean;presentation?:PresentationCheckpoint;summaries?:RunBattleSummary[];battleSynergies?:RunSynergyEvent[];raioX?:EstadoRaioX;telemetry?:ReturnType<typeof emptyTally>;ranked?:RankedRun;
   /** As Dicas de trio ficaram ligadas em algum momento da escolha: cada luta desta jornada custa CUSTO_DAS_DICAS (10 mil). */
   dicas?:boolean;
-  /** A Jornada com os seus: o trio veio das Conquistas (sem bônus de estrela, sem segredos, cada luta custa CUSTO_DA_COLECAO, 30 mil). */
+  /** A Jornada com os seus: o trio veio das Conquistas (sem bônus de estrela, sem segredos, cada luta custa CUSTO_DA_COLECAO, 20 mil). */
   colecao?:boolean;
   /** Quem esta jornada liberou nas Conquistas (terminou as 10 lutas): a tela de resultado comemora. */
   conquistasNovas?:string[];

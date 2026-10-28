@@ -111,9 +111,9 @@ export const CUSTO_DAS_DICAS = 10_000;
 /*
  * A Jornada com os seus (pedido do jogador: "fazer uma jornada com os personagens que você tem… cada luta vale 30 mil
  * pontos a menos"): o trio escolhido entre os personagens já liberados nas Conquistas, sem o bônus das estrelas de
- * pontos, e cada luta custa isto.
+ * pontos, e cada luta custa isto (eram 30 mil; o dono baixou para 20 mil).
  */
-export const CUSTO_DA_COLECAO = 30_000;
+export const CUSTO_DA_COLECAO = 20_000;
 
 export const multiplicadorDaLuta = (indice: number) => 1 + PONTOS.porLuta * Math.max(0, indice);
 

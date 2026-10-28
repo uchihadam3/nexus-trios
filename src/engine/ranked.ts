@@ -42,7 +42,7 @@ export async function runDigest(id:string,team:string[],seed:number,outcomes:boo
  * mesmos para todo mundo e o trio não pode usar nenhum deles.
  */
 /** `dicas`: o jogador montou o trio com as Dicas de trio ligadas (−10 mil por luta, src/engine/pontos.ts). */
-/** `colecao`: a Jornada com os seus (o trio dos personagens liberados; sem bônus de estrela, −30 mil por luta, sem segredos). */
+/** `colecao`: a Jornada com os seus (o trio dos personagens liberados; sem bônus de estrela, −20 mil por luta, sem segredos). */
 /**
  * `ate`: quantas lutas o jogador chegou a terminar antes de desistir (desistir conta como perder: valem os pontos
  * feitos até ali), contando as lutas extras dos segredos na ordem em que vieram. Sem `ate`, a jornada vai até a

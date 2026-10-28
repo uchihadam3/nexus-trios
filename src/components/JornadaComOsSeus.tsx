@@ -12,7 +12,7 @@ import {nomeDe,t} from '../i18n/idioma';
 /*
  * A Jornada com os seus (pedido do jogador: "um botão lá nos seus personagens… fazer uma jornada com os personagens que
  * você tem"): o trio sai só dos personagens já liberados nas Conquistas (emprestado não vale), joga a Jornada normal e
- * cada luta custa CUSTO_DA_COLECAO (30 mil); o bônus das estrelas de pontos não vale e nada é liberado (nem Conquistas,
+ * cada luta custa CUSTO_DA_COLECAO (20 mil); o bônus das estrelas de pontos não vale e nada é liberado (nem Conquistas,
  * nem segredos: as lutas extras dos segredos não aparecem e nada abre no Livro).
  *
  * Na tela das Conquistas fica a faixa dourada; tocando nela, abre a escolha: só os seus, nas abas do álbum (Anime, Heróis…),

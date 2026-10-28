@@ -8,12 +8,12 @@ import { byId, characters } from '../src/data/characters';
 import { recusaDaColecao } from '../supabase/functions/ranked-api/colecao';
 import { LUTA_ESTRELA, proximaLuta } from '../src/engine/segredos';
 
-/* A Jornada com os seus (components/JornadaComOsSeus.tsx): o trio da coleção, sem bônus de estrela nem segredos, −30 mil por luta. */
+/* A Jornada com os seus (components/JornadaComOsSeus.tsx): o trio da coleção, sem bônus de estrela nem segredos, −20 mil por luta. */
 describe('Jornada com os seus', () => {
   const estrela = Object.keys(ESTRELAS_DE_PONTOS)[0]!;
   const trio = [estrela, ...characters.map((c) => c.id).filter((id) => id !== estrela && !ESTRELAS_DE_PONTOS[id]).slice(0, 2)];
 
-  it('a luta não ganha o bônus da estrela e custa 30 mil', () => {
+  it('a luta não ganha o bônus da estrela e custa 20 mil', () => {
     const b = createBattle(trio, generateCampaign(77)[0]!.team, 77);
     for (let t = 0; t < 9000 && !b.finished; t++) stepBattle(b);
     const normal = pontosDaLuta(b, 0), comOsSeus = pontosDaLuta(b, 0, false, true);
