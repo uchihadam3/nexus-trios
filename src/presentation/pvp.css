@@ -535,3 +535,12 @@ button.pv-time:active:not(:disabled){transform:scale(.98)}
 .pv-rk .rk-degrau .cm-avatar{box-shadow:0 0 0 2px #0c120e,0 0 0 3.5px var(--med)}
 .pv-rk .rk-contexto{margin:2px 2px 0}
 
+/* O álbum do Montar, com as abas das Conquistas (src/components/Album.tsx): o time em que cada um está, o selo de
+   emprestado e o botão da ficha no retrato. */
+.pv-album-carta .pv-time-num{width:auto;min-width:20px;padding:0 4px;font-size:10px}
+.pv-album-carta .pv-emprestado-selo{position:absolute;left:-3px;top:-3px;display:grid;place-items:center;width:17px;height:17px;border-radius:50%;color:#1a2a10;background:#c8f560;box-shadow:0 0 0 2px #0c120e}
+.pv-album-carta .pv-album-ficha{position:absolute;right:-3px;bottom:-2px;display:grid;place-items:center;width:17px;height:17px;border-radius:50%;color:#dfe9da;background:#1c2620;box-shadow:0 0 0 1.5px #0c120e,inset 0 0 0 1px #ffffff2a;cursor:pointer}
+.pv-montar .cq-abas{margin-top:10px}
+/* o brilho de quem já está num time não é cortado pela borda da página do álbum */
+.pv-montar .cq-pagina{padding:10px 8px 4px}
+.cq-carta.pv-album-carta.no-trio .cq-retrato{box-shadow:0 0 0 2px #0b0902,0 0 0 4px #fff1b0,0 0 9px #ffc94a}

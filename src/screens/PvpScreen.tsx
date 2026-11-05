@@ -3,6 +3,8 @@ import { createPortal } from 'react-dom';
 import { ArrowDownAZ, ArrowLeft, ArrowRight, Award, Check, Clock, Compass, Medal, Star, Handshake, Info, WifiOff, Globe2, Layers, SlidersHorizontal, Sparkles, Crown, Hourglass, Lock, LogOut, RotateCcw, Search, Shield, Swords, Trophy, Users, Wand2, X, Zap } from 'lucide-react';
 import { byId, characters } from '../data/characters';
 import { Portrait } from '../components/Portrait';
+import { Album } from '../components/Album';
+import { ABAS as ABAS_DO_ALBUM, PERSONAGENS_DA_ABA, abaDo, type Aba } from '../lib/conquistas';
 import { ArenaDoPvp } from '../components/ArenaDoPvp';
 import { combosDoTrio } from '../engine/combos';
 import { MINIMO_DA_COLECAO, NPCS, duracaoNaTela, escolhaDoNpc, problemaDosTimes, sementeDaRodada, timesDoNpc, timesLivres, vencedorDaPartida, vitoriasDosTimes,
@@ -374,7 +376,7 @@ function timesAoAcaso(colecao: string[]): string[][] | null {
 
 type Ordem = 'nome' | 'universo' | 'funcao';
 interface Filtro { ordem: Ordem; universos: string[]; funcoes: Identidade[]; esconderUsados: boolean }
-const FILTRO_VAZIO: Filtro = { ordem: 'nome', universos: [], funcoes: [], esconderUsados: false };
+const FILTRO_VAZIO: Filtro = { ordem: 'universo', universos: [], funcoes: [], esconderUsados: false };
 const semAcento = (t: string) => t.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
 
 function filtrar(colecao: string[], busca: string, f: Filtro) {
@@ -385,16 +387,12 @@ function filtrar(colecao: string[], busca: string, f: Filtro) {
     && (!f.funcoes.length || f.funcoes.every((x) => identidadesDe(c).includes(x))));
 }
 type Personagem = (typeof characters)[number];
-function agrupar(lista: Personagem[], ordem: Ordem): { titulo: string; lista: Personagem[] }[] {
-  const porNome = [...lista].sort((a, b) => nomeDe(a).localeCompare(nomeDe(b)));
-  if (ordem === 'nome') return [{ titulo: '', lista: porNome }];
-  const mapa = new Map<string, Personagem[]>();
-  for (const c of porNome) {
-    const chave = ordem === 'universo' ? c.universe : (ordemDasIdentidades.find((x) => identidadesDe(c).includes(x)) ?? tx('Outros'));
-    mapa.set(chave, [...(mapa.get(chave) ?? []), c]);
-  }
-  const chaves = [...mapa.keys()].sort((a, b) => ordem === 'universo' ? a.localeCompare(b) : ordemDasIdentidades.indexOf(a as Identidade) - ordemDasIdentidades.indexOf(b as Identidade));
-  return chaves.map((k) => ({ titulo: k, lista: mapa.get(k)! }));
+/* A ordem dentro de cada aba: por universo é a mesma do álbum das Conquistas (os universos maiores primeiro). */
+const LUGAR_NO_ALBUM = new Map(Object.values(PERSONAGENS_DA_ABA).flatMap((lista) => lista.map((c, i) => [c.id, i] as const)));
+function ordenar(lista: Personagem[], ordem: Ordem): Personagem[] {
+  const porNome = (a: Personagem, b: Personagem) => nomeDe(a).localeCompare(nomeDe(b));
+  const funcao = (c: Personagem) => { const i = ordemDasIdentidades.findIndex((x) => identidadesDe(c).includes(x)); return i < 0 ? ordemDasIdentidades.length : i; };
+  return [...lista].sort(ordem === 'universo' ? (a, b) => LUGAR_NO_ALBUM.get(a.id)! - LUGAR_NO_ALBUM.get(b.id)! : ordem === 'funcao' ? (a, b) => funcao(a) - funcao(b) || porNome(a, b) : porNome);
 }
 
 function PainelDeFiltros({ colecao, filtro, total, onFiltro, onFechar }: { colecao: string[]; filtro: Filtro; total: number; onFiltro: (f: Filtro) => void; onFechar: () => void }) {
@@ -478,7 +476,16 @@ export function Montar({ rival, colecao, inicial, onPronto, onVoltar, onDetails,
   const [soEmprestados, setSoEmprestados] = useState(false);
   const quantosEmprestados = emprestados ? colecao.filter((id) => emprestados.has(id)).length : 0;
   const lista = useMemo(() => filtrar(soEmprestados && emprestados ? colecao.filter((id) => emprestados.has(id)) : colecao, busca, filtro), [colecao, busca, filtro, soEmprestados, emprestados]);
-  const grupos = useMemo(() => agrupar(lista, filtro.ordem), [lista, filtro.ordem]);
+  /* separados pelas abas das Conquistas (pedido do dono: "na hora de montar os times… separado por categoria assim") */
+  const listas = useMemo(() => {
+    const r = Object.fromEntries(ABAS_DO_ALBUM.map((a) => [a.id, [] as Personagem[]])) as Record<Aba, Personagem[]>;
+    const noTime = new Set(times.flat());
+    for (const c of ordenar(lista, filtro.ordem)) if (!filtro.esconderUsados || !noTime.has(c.id)) r[abaDo(c)].push(c);
+    return r;
+  }, [lista, filtro.ordem, filtro.esconderUsados, times]);
+  const [aba, setAba] = useState<Aba>(() => ABAS_DO_ALBUM.find((a) => listas[a.id].length)?.id ?? 'anime');
+  // buscando ou filtrando, vai para a aba que tem alguém
+  useEffect(() => { if (!listas[aba].length) { const outra = ABAS_DO_ALBUM.find((a) => listas[a.id].length); if (outra) setAba(outra.id); } }, [listas, aba]);
   const ativos = filtro.universos.length + filtro.funcoes.length + (filtro.esconderUsados ? 1 : 0);
 
   const tocar = (id: string) => {
@@ -539,20 +546,16 @@ export function Montar({ rival, colecao, inicial, onPronto, onVoltar, onDetails,
       {filtro.universos.map((u) => <button key={u} style={{ '--cor': '#8fd3ff' } as CSSProperties} onClick={() => setFiltro({ ...filtro, universos: filtro.universos.filter((x) => x !== u) })}><Globe2 size={12} />{t(u)}<X size={12} /></button>)}
       {filtro.esconderUsados && <button style={{ '--cor': '#c8f560' } as CSSProperties} onClick={() => setFiltro({ ...filtro, esconderUsados: false })}>{t('Só os livres')}<X size={12} /></button>}
     </div>}
-    {grupos.map((g) => <div key={g.titulo || 'todos'} className="pv-grupo">
-      {g.titulo && <h3 className="pv-grupo-titulo"><span>{t(g.titulo)}</span><small>{g.lista.length}</small></h3>}
-      <div className="pv-album">
-        {g.lista.filter((c) => !filtro.esconderUsados || !usados.has(c.id)).map((c, k) => {
-          const onde = usados.get(c.id);
-          const emprestado = !!emprestados?.has(c.id);
-          return <button key={c.id} className={`pv-carta ${onde !== undefined ? 'usada' : ''} ${emprestado ? 'emprestada' : ''}`} onClick={() => tocar(c.id)} onContextMenu={(e) => { e.preventDefault(); onDetails(c.id); }} style={{ '--character': c.color, '--k': Math.min(k, 30) } as CSSProperties} aria-label={`${nomeDe(c)}${onde !== undefined ? t(', no time {n}', { n: onde + 1 }) : ''}`}>
-            <Portrait character={c} /><b>{nomeDe(c)}</b>{onde !== undefined && <em>T{onde + 1}</em>}{emprestado && <span className="pv-fita"><Handshake size={10} />{t('EMPRESTADO')}</span>}
-            <span className="pv-carta-ficha" role="button" tabIndex={0} aria-label={t('Ficha de {nome}', { nome: nomeDe(c) })} onClick={(e) => { e.stopPropagation(); onDetails(c.id); }}><Info size={13} /></span>
-          </button>;
-        })}
-      </div>
-    </div>)}
-    {!lista.length && <div className="pv-nada"><Search size={28} /><b>{t('Ninguém com esses filtros')}</b><button className="secondary" onClick={() => { setFiltro(FILTRO_VAZIO); setBusca(''); }}>{t('Limpar filtros')}</button></div>}
+    <Album listas={listas} aba={aba} onAba={setAba} rotulo={(a) => `${listas[a].length}`}
+      vazio={<div className="pv-nada"><Search size={28} /><b>{t('Ninguém com esses filtros')}</b><button className="secondary" onClick={() => { setFiltro(FILTRO_VAZIO); setBusca(''); setSoEmprestados(false); }}>{t('Limpar filtros')}</button></div>}
+      carta={(c, k) => {
+        const onde = usados.get(c.id), emprestado = !!emprestados?.has(c.id);
+        return <button key={c.id} className={`cq-carta liberada pv-album-carta ${onde !== undefined ? 'no-trio' : ''}`} onClick={() => tocar(c.id)} onContextMenu={(e) => { e.preventDefault(); onDetails(c.id); }} style={{ '--character': c.color, '--i': Math.min(k, 40) } as CSSProperties} aria-pressed={onde !== undefined} aria-label={`${nomeDe(c)}${onde !== undefined ? t(', no time {n}', { n: onde + 1 }) : ''}`}>
+          <span className="cq-retrato"><Portrait character={c} />{onde !== undefined && <em className="cq-meus-numero pv-time-num">T{onde + 1}</em>}{emprestado && <span className="pv-emprestado-selo" title={t('EMPRESTADO')}><Handshake size={10} /></span>}
+            <span className="pv-album-ficha" role="button" tabIndex={0} aria-label={t('Ficha de {nome}', { nome: nomeDe(c) })} onClick={(e) => { e.stopPropagation(); onDetails(c.id); }}><Info size={11} /></span></span>
+          <small>{nomeDe(c)}</small>
+        </button>;
+      }} />
     {painel && <PainelDeFiltros colecao={colecao} filtro={filtro} total={lista.length} onFiltro={setFiltro} onFechar={() => setPainel(false)} />}
   </section>;
 }
